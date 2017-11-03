@@ -1,6 +1,5 @@
 package net.osmand.plus.mapmarkers;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -21,7 +20,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,6 +46,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.ColoredStatusBarFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.PlanRouteOptionsBottomSheetDialogFragment.PlanRouteOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
@@ -67,7 +66,7 @@ import java.util.List;
 import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
 
-public class PlanRouteFragment extends Fragment implements OsmAndLocationListener {
+public class PlanRouteFragment extends ColoredStatusBarFragment implements OsmAndLocationListener {
 
 	public static final String TAG = "PlanRouteFragment";
 	private static final int MIN_DISTANCE_FOR_RECALCULATE = 50; // in meters
@@ -86,6 +85,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 
 	private boolean nightMode;
 	private boolean portrait;
+	private boolean fullScreen;
 	private boolean wasCollapseButtonVisible;
 	private boolean cancelSnapToRoad = true;
 
@@ -93,8 +93,6 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 
 	private View mainView;
 	private RecyclerView markersRv;
-
-	private int statusBarColor = -1;
 
 	@Nullable
 	@Override
@@ -167,20 +165,13 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		final int backgroundColor = ContextCompat.getColor(mapActivity,
 				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		boolean fullScreen = portrait && planRouteContext.isMarkersListOpened();
+		fullScreen = portrait && planRouteContext.isMarkersListOpened();
 		int layoutRes = fullScreen ? R.layout.fragment_plan_route_full_screen : R.layout.fragment_plan_route_half_screen;
 
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutRes, null);
 
 		if (fullScreen || !portrait) {
 			AndroidUtils.addStatusBarPadding21v(getActivity(), view);
-		}
-		if (fullScreen) {
-			if (Build.VERSION.SDK_INT >= 21) {
-				Window window = getActivity().getWindow();
-				statusBarColor = window.getStatusBarColor();
-				window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.status_bar_route_light));
-			}
 		}
 
 		mainView = fullScreen ? view : view.findViewById(R.id.main_view);
@@ -394,12 +385,14 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitPlanRouteMode();
-		if (Build.VERSION.SDK_INT >= 21 && statusBarColor != -1) {
-			Activity activity = getActivity();
-			if (activity != null) {
-				activity.getWindow().setStatusBarColor(statusBarColor);
-			}
+	}
+
+	@Override
+	protected int getStatusBarColor() {
+		if (fullScreen) {
+			return nightMode ? R.color.status_bar_dark : R.color.status_bar_route_light;
 		}
+		return -1;
 	}
 
 	@Override

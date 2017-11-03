@@ -1,10 +1,7 @@
 package net.osmand.plus.mapcontextmenu.builders.cards.dialogs;
 
-import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
@@ -12,7 +9,6 @@ import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,18 +17,17 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.ColoredStatusBarFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.util.Algorithms;
 
-public class ContextMenuCardDialogFragment extends Fragment {
+public class ContextMenuCardDialogFragment extends ColoredStatusBarFragment {
 	public static final String TAG = "ContextMenuCardDialogFragment";
 
 	private ContextMenuCardDialog dialog;
 	private LinearLayout contentLayout;
 	private View contentView;
-
-	private int statusBarColor = -1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,11 +45,6 @@ public class ContextMenuCardDialogFragment extends Fragment {
 		if (dialog.getType() == ContextMenuCardDialog.CardDialogType.MAPILLARY) {
 			view.findViewById(R.id.dialog_layout)
 					.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.mapillary_action_bar));
-			if (Build.VERSION.SDK_INT >= 21) {
-				Window window = getActivity().getWindow();
-				statusBarColor = window.getStatusBarColor();
-				window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.status_bar_mapillary));
-			}
 		}
 		contentLayout = (LinearLayout) view.findViewById(R.id.content);
 		contentView = dialog.getContentView();
@@ -116,17 +106,19 @@ public class ContextMenuCardDialogFragment extends Fragment {
 				((WebView) contentView).loadUrl("about:blank");
 			}
 		}
-		if (Build.VERSION.SDK_INT >= 21 && statusBarColor != -1) {
-			Activity activity = getActivity();
-			if (activity != null) {
-				activity.getWindow().setStatusBarColor(statusBarColor);
-			}
-		}
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		dialog.saveMenu(outState);
+	}
+
+	@Override
+	protected int getStatusBarColor() {
+		if (dialog != null && dialog.getType() == ContextMenuCardDialog.CardDialogType.MAPILLARY) {
+			return R.color.status_bar_mapillary;
+		}
+		return -1;
 	}
 
 	public static void showInstance(ContextMenuCardDialog menu) {

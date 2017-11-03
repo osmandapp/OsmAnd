@@ -640,7 +640,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		changeKeyguardFlags();
 
-
 		applicationModeListener = new StateChangedListener<ApplicationMode>() {
 			@Override
 			public void stateChanged(ApplicationMode change) {
