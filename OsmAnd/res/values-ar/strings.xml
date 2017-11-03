@@ -1049,7 +1049,7 @@
 	<string name="shared_string_edit">تحرير</string>
 	<string name="shared_string_places">أماكن</string>
 	<string name="shared_string_search">بحث</string>
-	<string name="shared_string_show_description">عرض الوصف</string>
+	<string name="shared_string_show_description">عرض الوصف.</string>
 	<string name="shared_string_message">رسالة</string>
 	<string name="welmode_download_maps">تحميل الخرائط</string>
 	<string name="welcome_select_region">لعرض إشارات وقواعد المرور بشكل صحيح، من فضلك اختر منطقة القيادة:</string>
@@ -1076,7 +1076,7 @@
     <string name="simulate_your_location">محاكاة الموقع الخاص بك</string>
     <string name="short_location_on_map">خط العرض %1$s
 خط الطول %2$s</string>
-    <string name="tips_and_tricks_descr">الأسئلة الشائعة، التغييرات الحديثة، وأخرى</string>
+    <string name="tips_and_tricks_descr">الأسئلة الشائعة، التغييرات الحديثة، وأخرى.</string>
     <string name="routing_settings_2">إعدادات الملاحة</string>
     <string name="general_settings_2">الإعدادات العامة</string>
 	<string name="shared_string_ellipsis">…</string>
@@ -1136,8 +1136,8 @@
 	<string name="shared_string_audio">صوت</string>
 	<string name="shared_string_currently_recording_track">المسار الجاري تسجيله</string>
 	<string name="record_plugin_name">تسجيل الرحلة</string>
-	<string name="save_global_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار العام (مفعل عن طريق أداة تسجيل GPX على الخريطة)</string>
-	<string name="save_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار أثناء الملاحة</string>
+	<string name="save_global_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار العام (مفعل عن طريق أداة تسجيل GPX على الخريطة).</string>
+	<string name="save_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار أثناء الملاحة.</string>
 	<string name="voice">صوت مسج</string>
 	<string name="get_directions">الاتجاهات</string>
 	<string name="show_point_options">إستخدام الموقع …</string>
@@ -1180,7 +1180,7 @@
     <string name="gps_status">حالة GPS</string>
     <string name="rendering_attr_streetLighting_name">إنارة الشوارع</string>
     <string name="proxy_pref_title">بروكسي</string>
-    <string name="proxy_pref_descr">إعداد اتصال إنترنت بالبروكسي</string>
+    <string name="proxy_pref_descr">تحديد بروكسي إنترنت.</string>
     <string name="settings_privacy">الخصوصية</string>
     <string name="points">نقاط</string>
 	<string name="navigation_over_track">بدء الملاحة على طول المسار؟</string>
@@ -1193,7 +1193,7 @@
     <string name="rendering_value_highContrastRoads_name">طرق بتباين عالي</string>
 	<string name="traffic_warning_railways">عبور خط السكة الحديدية</string>
 	<string name="rendering_value_americanRoadAtlas_name">أطلس الطرق الأمريكية</string>
-    <string name="routing_attr_no_new_routing_description">لا تستخدم قواعد توجيه الإصدار v1.9</string>
+    <string name="routing_attr_no_new_routing_description">لا تستخدم قواعد توجيه الإصدار 1.9.</string>
     <string name="dash_download_msg_none">هل تريد تنزيل الخرائط غير المتصلة بالنت؟</string>
     <string name="dash_download_msg">قمت بتنزيل %1$s من الخرائط</string>
     <string name="dash_download_new_one">نزل خريطة جديدة</string>
@@ -1207,7 +1207,7 @@
 	<string name="no_internet_connection">عملية التنزيل غير ممكنة، رجاءا تحقق من اتصالك بالإنترنت.</string>
     <string name="everything_up_to_date">جميع الملفات محدّثة</string>
     <string name="use_opengl_render">استخدام OpenGL للتقديم</string>
-    <string name="use_opengl_render_descr">"استخدام أداء OpenGL  مسرع (قد لا تعمل على بعض الأجهزة)"</string>
+    <string name="use_opengl_render_descr">"استخدام أداء OpenGL  مسرع (قد لا تعمل على بعض الأجهزة)."</string>
     
     
 	<string name="map_update">التحديثات متوفرة لـ %1$s من الخرائط</string>
@@ -1215,7 +1215,7 @@
 	<string name="coordinates">إحداثيات</string>
 	<string name="lock_screen_request_explanation">"%1$s  يحتاج هذا الإذن لإطفاء الشاشة لتوفير الطاقة."</string>
     <string name="wake_on_voice">تشغيل الشاشة</string>
-    <string name="wake_on_voice_descr">تشغيل شاشة الجهاز (إذا كانت مغلقة) عندما الاقتراب من منعطف</string>
+    <string name="wake_on_voice_descr">تشغيل شاشة الجهاز (إذا كانت مغلقة) عندما الاقتراب من منعطف.</string>
     <string name="impassable_road">تجنب طرقات…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">طرق السكك الحديدية</string>
     <string name="rendering_attr_tramRoutes_name">خطوط الترام</string>
@@ -1243,12 +1243,12 @@
 	<string name="background_service_int">الفاصل الزمني لإيقاظ GPS</string>
 	<string name="enable_sleep_mode">تفعيل وضع GPS في الخلفية</string>
 	<string name="save_track_to_gpx_globally">تسجيل المسار في ملف GPX</string>
-	<string name="save_current_track_descr">حفظ المسار الحالي إلى الذاكرة الآن</string>
+	<string name="save_current_track_descr">حفظ المسار الحالي إلى الذاكرة الآن.</string>
 	<string name="save_track_to_gpx">سجل المسار تلقائيا أثناء الملاحة</string>
-	<string name="save_track_to_gpx_descrp">سيتم حفظ مسار GPX إلى مجلد المسارات أثناء الملاحة</string>
+	<string name="save_track_to_gpx_descrp">سيتم حفظ مسار GPX إلى مجلد المسارات أثناء الملاحة.</string>
 	<string name="save_track_interval_globally">الفاصل الزمني للتسجيل</string>
 	<string name="save_track_interval">"الفاصل الزمني للتسجيل  أثناء الملاحة"</string>
-	<string name="voice_provider_descr">تحديد التوجيه الصوتي للتنقل</string>
+	<string name="voice_provider_descr">تحديد التوجيه الصوتي للتنقل.</string>
 	<string name="voice_provider">التوجيه الصوتي</string>
 	
 	<string name="enable_proxy_title">تمكين بروكسي HTTP</string>
@@ -1302,7 +1302,7 @@
     <string name="confirm_usage_speed_cameras">غير مسموح استخدام تحذيرات كاميرا السرعة بالقانون في العديد من البلدان (ألمانيا وفرنسا، وإيطاليا، وغيرها). أوسماند لا تتحمل أي مسؤولية إذا كنت تنتهك القانون. الرجاء انقر نعم فقط إذا كنت مؤهلاً استخدام هذه الميزة.</string>
 	<string name="osm_changes_added_to_local_edits">تم إضافة تعديلات OSM إلى التغييرات المحلية</string>
    	<string name="local_osm_changes_upload_all_confirm">ستقوم برفع %1$d تغيير إلى الموقع. هل أنت متأكد؟</string>
-    <string name="delay_to_start_navigation_descr">تحديد وقت الانتظار للبقاء في شاشة تخطيط الطريق</string>
+    <string name="delay_to_start_navigation_descr">تحديد وقت الانتظار للبقاء في شاشة تخطيط الطريق.</string>
     <string name="delay_to_start_navigation">ابدأ الملاحة دوران بدوران بعد…</string>
     <string name="action_create">إنشاء إجراء</string>
 	<string name="action_modify">تعديل إجراء</string>
@@ -1314,7 +1314,7 @@
     <string name="osm_settings">تعديل OSM</string>
 	<string name="free">مجاني %1$s</string>
 	<string name="parking_place">مكان للركن</string>
-    <string name="version_settings_descr">نزل الإصدارات الليلية</string>
+    <string name="version_settings_descr">نزل الإصدارات الليلية.</string>
     <string name="version_settings">إصدرات</string>
     <string name="speak_pedestrian">ممرات الراجلين</string>
     <string name="traffic_warning_pedestrian">ممرات الراجلين</string>
@@ -1554,7 +1554,7 @@
 	<string name="max_level_download_tile_descr">اختر مستوى التقريب الأقصى لتحميل تجانبيات/مربعات الخريطة من الإنترنت</string>
 	<string name="map_tile_source_descr">اختر مصدر تجانبيات/مربعات الخريطة على الإنترنت أو المخزنة مؤقتاً</string>
 	<string name="user_hates_app_get_feedback_long">فضلًا أخبرنا ما الذي تريد تغييره في هذا التّطبيق.</string>
-<string name="storage_directory_readonly_desc">مجلّد تخزين البيانات المحدّد حاليًّا للقراءة فقط. نُقل مجلّد التّخزين مؤقّتًا إلى الذّاكرة الدّاخليّة. فضلًا اختر دليل تخزين صحيح.</string>
+<string name="storage_directory_readonly_desc">مجلّد تخزين البيانات المحدّد حاليًّا للقراءة فقط. نُقل مجلّد التّخزين مؤقّتًا إلى الذّاكرة الدّاخليّة. رجاءا اختر وجهة تخزين صحيحة.</string>
     <string name="storage_directory_shared">الذّاكرة المشتركة</string>
     <string name="donations">التبرعات</string>
     <string name="osm_live_user_public_name">الاسم العموميّ</string>
@@ -1571,7 +1571,7 @@
     <string name="map_widget_search">بحث</string>
 	<string name="shared_string_is_open_24_7">مفتوح 7/24</string>
     <string name="storage_directory_card">بطاقة الذاكرة</string>
-    <string name="coords_format_descr">نمط للإحداثيات الجغرافية</string>
+    <string name="coords_format_descr">نمط للإحداثيات الجغرافية.</string>
   	<string name="app_mode_bus">حافلة</string>
  	<string name="app_mode_train">قطار</string>
     <string name="current_track">المسار الحالي</string>
@@ -1581,12 +1581,12 @@
     <string name="access_direction_audio_feedback">اتجاه صدى الصوت</string>
     <string name="use_osm_live_routing">ملاحة OsmAnd مباشرة</string>
     <string name="access_no_destination">لم يتم تعيين الوجهة</string>
-    <string name="access_disable_wrong_direction_recalc_descr">يمنع إعادة الحساب التلقائي للطريق أثناء الانتقال للاتجاه المعاكس</string>
+    <string name="access_disable_wrong_direction_recalc_descr">يمنع إعادة الحساب التلقائي للطريق أثناء الانتقال للاتجاه المعاكس.</string>
     <string name="access_default_color">اللون الافتراضي</string>
     <string name="access_category_choice">اختر فئة</string>
     <string name="access_hint_enter_name">أدخل الاسم</string>
     <string name="access_hint_enter_category">أدخل فئة</string>
-    <string name="access_hint_enter_description">أدخل وصف</string>
+    <string name="access_hint_enter_description">أدخل وصف.</string>
     <string name="access_collapsed_list">قائمة مطوية</string>
     <string name="access_expanded_list">قائمة موسعة</string>
     <string name="access_empty_list">قائمة فارغة</string>
@@ -1614,8 +1614,8 @@
     <string name="osm_live_subscribe_btn">إشترك الآن</string>
     <string name="osm_live_support_region">دعم المنطقة</string>
     <string name="osm_live_month_cost">تكلفة الشهر</string>
-    <string name="osm_live_month_cost_desc">الدفع الشهري</string>
-    <string name="osm_live_region_desc">سيتم إرسال جزء من التبرع إلى مستخدمي OSM الذين يقومون بإرسال التغييرات إلى الخريطة في تلك المنطقة</string>
+    <string name="osm_live_month_cost_desc">الدفع الشهري.</string>
+    <string name="osm_live_region_desc">سيتم إرسال جزء من التبرع إلى مستخدمي OSM الذين يقومون بإرسال التغييرات إلى الخريطة في تلك المنطقة.</string>
     <string name="osm_live_ask_for_purchase">يرجى شراء اشتراك OsmAnd Live أولا</string>
 
     <string name="osm_live_header">يُتيحُ لك هذا الاشتراك الحصول على التحديثات كُلَّ ساعةٍ لجميع الخرائط حَوْلَ العالم. 
@@ -1628,7 +1628,7 @@
     <string name="shared_string_toolbar">شريط الأدوات</string>
     <string name="select_map_markers">حدد العلامات على الخريطة</string>
     <string name="shared_string_reverse_order">ترتيب عكسي</string>
-    <string name="show_map_markers_description">تفعيل ميزة العلامات على الخريطة</string>
+    <string name="show_map_markers_description">تفعيل ميزة علامات الخريطة.</string>
     <string name="lang_ast">الأسترية</string>
     <string name="lang_be_by">البيلاروسية (لاتينية)</string>
     <string name="lang_en_gb">الإنجليزية ( المملكة المتحدة )</string>
@@ -1641,7 +1641,7 @@
     <string name="si_nm">ميلا بحري</string>
     <string name="dark_theme">داكن</string>
     <string name="routing_attr_height_name">تحديد الإرتفاع</string>
-    <string name="default_speed_system_descr">تحديد وحدة السرعة</string>
+    <string name="default_speed_system_descr">تحديد وحدة السرعة.</string>
     <string name="default_speed_system">وحدة السرعة</string>
     <string name="plugin_settings">ملحقات</string>
     <string name="plugins_menu_group">ملحقات</string>
@@ -1664,16 +1664,16 @@
     <string name="world_maps">خرائط العالم</string>
     <string name="move_marker_bottom_sheet_title">حرك الخريطة لتغيير مكان العلامة</string>
     <!-- string name="lat_lon_pattern">خط العرض: %1$.5f خط الطول: %2$.5f</string -->
-    <string name="access_direction_audio_feedback_descr">اشر صوتيا عن اتجاه نقطة الوصول</string>
-    <string name="access_direction_haptic_feedback_descr">اشر عن اتجاه نقطة الهدف بالاهتزاز</string>
-    <string name="use_osm_live_routing_description">تفعيل الملاحة بتحديثات OsmAnd Live</string>
+    <string name="access_direction_audio_feedback_descr">اشر صوتيا عن اتجاه نقطة الوصول.</string>
+    <string name="access_direction_haptic_feedback_descr">اشر عن اتجاه نقطة الهدف بالاهتزاز.</string>
+    <string name="use_osm_live_routing_description">تفعيل الملاحة بتحديثات OsmAnd Live.</string>
 	<string name="access_disable_offroute_recalc">عدم اعادة حساب الطريق بعد مغادرته</string>
-    <string name="access_disable_offroute_recalc_descr">يمنع إعادة الحساب التلقائي للطريق بعدما تكون قد غادرته</string>
+    <string name="access_disable_offroute_recalc_descr">يمنع إعادة الحساب التلقائي للطريق بعدما تكون قد غادرته.</string>
     <string name="access_disable_wrong_direction_recalc">عدم إعادة حساب الطريق للاتجاه المعاكس</string>
     <string name="access_smart_autoannounce">الإخطار الآلي الذكي</string>
-    <string name="access_smart_autoannounce_descr">الإشعار فقط عند تغير الوجهة نحو نقطة الهدف</string>
+    <string name="access_smart_autoannounce_descr">الإشعار فقط عند تغير الوجهة نحو نقطة الهدف.</string>
     <string name="access_autoannounce_period">مهلة الإخطار الآلي</string>
-    <string name="access_autoannounce_period_descr">اقل مهلة بين الاخطارات</string>
+    <string name="access_autoannounce_period_descr">اقل مهلة بين الاعلانات</string>
     <string name="access_map_linked_to_location">الخريطة مرتبطة بالموقع</string>
     <string name="rendering_value_bold_name">عريض</string>
     <string name="osmo_group_information_desc">-إنشاء فريق الرجاء إعطائها اسماً والتعبئة في الوصف
@@ -1689,12 +1689,12 @@
 - إنشاء مجموعة;
 - مزامنة المجموعات والأجهزة مع السيرفر;
 - إدارة المجموعات والأجهزة من خلال لوحة تحكم خاصة على الموقع.</string>
-    <string name="osmo_auto_send_locations_descr">ابدأ الرحلة و قم بإرسال المواقع تلقائيا بعد تشغيل التطبيق</string>
+    <string name="osmo_auto_send_locations_descr">ابدأ الرحلة و قم بإرسال المواقع تلقائيا بعد تشغيل التطبيق.</string>
     <string name="osmo_auto_send_locations">ابدا الرحلة تلقائيا</string>
     <string name="osmo_connect_to_device_tracker_id">معرف المتعقب</string>
     <string name="osmo_connect_to_group_id">معرف المجموعة</string>
     <string name="osmo_tracker_id">هوية المتعقب</string>
-    <string name="osmo_tracker_id_descr">انقر لعرض معرف المتعقب</string>
+    <string name="osmo_tracker_id_descr">انقر لعرض معرف المقتفي.</string>
     <string name="osmo_share_my_location">إرسال الموقع</string>
     <string name="hello">تطبيق الملاحة أوسماند OSMAnd</string>
     <string name="update_poi_error_loading">حدث خطأ أثناء تحميل البيانات من السيرفر</string>
@@ -1816,7 +1816,7 @@
     <string name="shared_string_move_up">حرك للاعلى</string>
     <string name="shared_string_move_down">تحرك للأسفل</string>
     <string name="open_street_map_login_and_pass">اسم المستخدم وكلمة المرور ل اوبن ستريت ماب</string>
-    <string name="osm_live_email_desc">نحن بحاجة اليه لكي نوفر لك معلومات حول المساهمات</string>
+    <string name="osm_live_email_desc">متطلبة لكي نوفر لك معلومات حول المساهمات</string>
     <string name="select_map_marker">اختر علامة موضعية</string>
     <string name="show_transparency_seekbar">اظهر شفافية شريط البحث</string>
     <string name="download_files_error_not_enough_space">المساحة غير كافية!
@@ -1841,7 +1841,7 @@
     <string name="map_markers">العلامات على الخريطة</string>
     <string name="osmo_start_service">خدمة أوسمو OsMo</string>
     <string name="routing_attr_avoid_borders_name">منع تخطي الحدود</string>
-    <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل</string>
+    <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل.</string>
     <string name="search_categories">فئات</string>
     <string name="shared_string_near">بالقرب من</string>
     <string name="route_tslr">در قليلا إلى اليمين ثم واصل</string>
@@ -1849,7 +1849,7 @@
     <string name="no_address_found">لم يتم تحديد أي عنوان</string>
     <string name="shared_string_location">الموقع</string>
     <string name="share_menu_location">شارك الموقع</string>
-    <string name="av_locations_descr">ملف GPX مرفوق بملاحظات عن المواقع و الأماكن</string>
+    <string name="av_locations_descr">ملف GPX مرفوق بملاحظات عن المواقع.</string>
     <string name="av_locations">المواقع</string>
     <string name="gps_network_not_enabled">إن خدمة تحديد المواقع ليست مفعلة. هل تريد تشغيلها ؟</string>
     <string name="osmo_track_interval_descr">اختر الفاصل الزمني بين كل ارسال حول الموقع</string>
@@ -1881,9 +1881,9 @@
     <string name="rec_split_title">إستعمل مقسم التسجيلات</string>
     <string name="rec_split_clip_length">طول المقطع</string>
     <string name="rec_split_storage_size">حجم التخزين</string>
-    <string name="rec_split_storage_size_desc">مقدار المساحة التي يمكن أن تحتلها كافة القصاصات المسجلة</string>
+    <string name="rec_split_storage_size_desc">مقدار المساحة التي يمكن أن تحتلها كافة القصاصات المسجلة.</string>
     <string name="select_voice_provider">إختر التوجيه الصوتي</string>
-    <string name="select_voice_provider_descr">إختر أو قم بتنزيل التوجيه الصوتي الخاص بلغتك</string>
+    <string name="select_voice_provider_descr">إختر أو قم بتنزيل التوجيه الصوتي الخاص بلغتك.</string>
     <string name="no_location_permission">لا يسمح للتطبيق الوصول إلى طريق البيانات.</string>
     <string name="rendering_attr_horseRoutes_name">طرق خاصة للأحصنة</string>
     <string name="shared_string_hide">إخفاء</string>
@@ -1959,7 +1959,7 @@
     <string name="osmo_not_signed_in">فشل تسجيل الدخول إلى خدمة OsMo</string>
     <string name="osmo_auto_connect_descr">الربط بالخدمة تلقائياً بعد بدء تشغيل التطبيق</string>
     <string name="osmo_regenerate_login_ids">إعادة إنشاء معرف ID المستخدم</string>
-    <string name="av_video_quality_descr">تحديد نوعية مخرج الفيديو</string>
+    <string name="av_video_quality_descr">حدد جودة الفيديو.</string>
     <string name="favorite_category_add_new">أضفة جديدة</string>
     <string name="shared_string_undo_all">إلغاء كلي</string>
     <string name="av_video_quality">جودة مخرج الفيديو</string>
@@ -1994,12 +1994,12 @@
     <string name="add_time_span">اضافة مجال زمني</string>
     <string name="item_removed">تمت ازالة العنصر</string>
     <string name="n_items_removed">تمت ازالة العناصر</string>
-    <string name="rec_split_desc">اعد كتابة اللقطات عند تجاوز المساحة المتستخدمة لمساحة التخزين</string>
-    <string name="rec_split_clip_length_desc">طول اللقطات المسجلة لن يتجاوز المجال الزمني المحدد</string>
+    <string name="rec_split_desc">اعد كتابة اللقطات عند تجاوز المساحة المتستخدمة لمساحة التخزين.</string>
+    <string name="rec_split_clip_length_desc">الحد الزمني الأعلى للمقاطع المسجلة.</string>
     <string name="no_camera_permission">لايسمح للتطبيق الوصول إلى الكاميرا.</string>
     <string name="no_microphone_permission">ليس للتطبيق إذن للوصول إلى الميكروفون.</string>
     <string name="av_audio_format">صيغة اخراج الصوت</string>
-    <string name="av_audio_format_descr">حدد صيغة الصوت المنتج</string>
+    <string name="av_audio_format_descr">حدد صيغة الصوت المنتج.</string>
     <string name="opening_changeset">فتح مجموعة التغييرات …</string>
     <string name="loading_poi_obj">تحميل ال POI …</string>
     <string name="auth_failed">فشل الترخيص</string>
@@ -2030,13 +2030,13 @@
     <string name="use_dashboard_btn">إستعمل لوحة التحكم</string>
     <string name="use_drawer_btn">إستعمل القائمة</string>
     <string name="av_audio_bitrate">معدل تدفق الصوت</string>
-    <string name="av_audio_bitrate_descr">حدد معدل تدفق الصوت</string>
+    <string name="av_audio_bitrate_descr">حدد معدل تدفق الصوت.</string>
     <string name="osm_save_offline">إحفظ محليا (دون حاجة لربط بالأنترنت)</string>
     <string name="world_map_download_descr">خريطة العالم الأساسية (التي تغطي العالم بأسره) مفقودة أو قديمة. يرجى القيام بتنزيلها للحصول على نظرة شاملة.</string>
     <string name="map_downloaded_descr">لقد تم تنزيل خريطة %1$s. يمكنك الآن إستخدامها.</string>
     <string name="favorite_category_dublicate_message">اسم الفئة المحددة موجود من قبل. الرجاء استخدام إسم آخر.</string>
     <string name="shared_string_trip_recording">تسجيل الرحلة</string>
-    <string name="simulate_your_location_stop_descr">وقف المحاكات الإفتراضية لمكان تواجدي</string>
+    <string name="simulate_your_location_stop_descr">وقف المحاكات الإفتراضية لمكان تواجدي.</string>
     <string name="restart_is_required">لكي يتم تفعيل التعديلات، يرجى إعادة تشغيل التطبيق يدوياً.</string>
     <string name="lang_hsb">الصربية (العليا)</string>
     <string name="update_all">تحديث الكل ( %1$s ميغابايت )</string>
@@ -2077,11 +2077,11 @@
     <string name="route_general_information">المسافة الإجمالية %1$s، مدة السفر %2$d سا و %3$d د.</string>
     <string name="back_to_search">العودة إلى البحث</string>
     <string name="consider_turning_polygons_off">من المستحسن إيقاف عرض المضلعات.</string>
-    <string name="access_from_map_description">زر القائمة يشغل لوحة التحكم و ليس القائمة بحد ذاتها</string>
+    <string name="access_from_map_description">زر القائمة يشغل لوحة التحكم و ليس القائمة بحد ذاتها.</string>
     <string name="confirmation_to_delete_history_items">هل تريد حذف العناصر المحددة من السجل الزمني؟</string>
     <string name="access_direction_haptic_feedback">توجيه رد فعل الهزاز</string>
-    <string name="please_specify_poi_type_only_from_list">يرجى تحديد نوع POI الصحيح أو تخطيه</string>
-    <string name="show_on_start_description">\'إيقاف\' تطلق مباشرة واجهة الخريطة</string>
+    <string name="please_specify_poi_type_only_from_list">يرجى تحديد نوع POI الصحيح أو تخطيه.</string>
+    <string name="show_on_start_description">\'إيقاف\' تطلق مباشرة واجهة الخريطة.</string>
     <string name="release_2_2">/022 واجهة مستخدم جديدة حساسة للضغط على المواقع في الخريطة والواجهات الأخرى
 \n
 \n • واجهة الخريطة تقلع الآن مباشرة إلا إذا كانت \'اظهار لوحة التحكم عند بدء التطبيق\' مفعلة
@@ -2120,13 +2120,13 @@
 
     <string name="coords_search">بحث عن إحداثيات</string>
     <string name="advanced_coords_search">بحث متقدم عن الإحداثيات</string>
-    <string name="simulate_initial_startup_descr">وضع علامة تشير إلى بدء تشغيل التطبيق الأولي، ابقي جميع الإعدادات الأخرى دون تغيير</string>
+    <string name="simulate_initial_startup_descr">وضع علامة تشير إلى بدء تشغيل التطبيق الأولي، ابقي جميع الإعدادات الأخرى دون تغيير.</string>
     <string name="region_maps">خرائط واسعة النطاق</string>
     <string name="hillshade_layer_disabled">طبقة التضاريس غير مفعلة</string>
     <string name="srtm_plugin_disabled">الخطوط الكفافية معطلة</string>
     <string name="nm">بحاجة إلى معلومات أكثر</string>
     <string name="nm_h">ميل بحري/ساعة</string>
-    <string name="simulate_your_location_descr">محاكاة موقعك باستخدام طريق مقاس أو مسار GPX مسجل</string>
+    <string name="simulate_your_location_descr">محاكاة موقعك باستخدام طريق مقاس أو مسار GPX مسجل.</string>
     <string name="routing_attr_avoid_shuttle_train_name">تجنب قطار المدينة</string>
     <string name="routing_attr_avoid_shuttle_train_description">تجنب قطار المدينة</string>
     <string name="traffic_warning_hazard">خطر</string>
@@ -2147,7 +2147,7 @@
     <string name="shared_string_logoff">خروج</string>
     <string name="local_recordings_delete_all_confirm">ستقوم بحذف %1$d ملاحظات. هل أنت واثق؟</string>
     <string name="nautical_maps_missing">لعرض الخرائط البحرية، يجب تنزيل خريطة خاصة محليا</string>
-    <string name="save_track_to_gpx_globally_descr">تسجيل الموقع العام إلى ملف GPX يمكن تشغيله أو إيقافه باستخدام نافذة تسجيل GPX على الشاشة خريطة</string>
+    <string name="save_track_to_gpx_globally_descr">تسجيل الموقع العام إلى ملف GPX يمكن تشغيله أو إيقافه باستخدام نافذة تسجيل GPX على الشاشة خريطة.</string>
     <string name="proxy_host_descr">ضبط اسم مضيف البروكسي (مثال 127.0.0.1)</string>
     <string name="map_preferred_locale_descr">اللغة المفضلة للمسميات على الخريطة (إذا لم تكن متوفرة ستتحول إلى اللغة الإنجليزية أو الأسماء المحلية)</string>
     <string name="rendering_attr_hideWoodScrubs_name">خشب وشجيرات</string>
@@ -2307,11 +2307,11 @@
     <string name="shared_string_change">تغيير</string>
     <string name="get_started">باشر</string>
     <string name="routing_attr_short_way_name">طريق أقل استهلاكا للوقود</string>
-    <string name="routing_attr_short_way_description">استخدم طريق أقل استهلاكا للوقود (عادة أقصر)</string>
+    <string name="routing_attr_short_way_description">استخدم طريق أقل استهلاكا للوقود (عادة أقصر).</string>
     <string name="replace_favorite_confirmation">هل أنت متأكد من أنك تريد استبدال المفضلة %1$s؟</string>
     <string name="clear_tile_data">مسح كافة البيانات الجزئية</string>
     <string name="update_all_maps_now">هل تريد تحديث كافة الخرائط الآن؟</string>
-    <string name="no_update_info_desc">لا تتحقق من وجود تحديثات الإصدار أو الخصومات المتعلقة بالتطبيق</string>
+    <string name="no_update_info_desc">لا تتحقق من وجود تحديثات الإصدار أو الخصومات المتعلقة بالتطبيق.</string>
     <string name="no_update_info">لا تظهر التحديثات</string>
     <string name="skip_map_downloading">تخطي تنزيل الخرائط</string>
     <string name="skip_map_downloading_desc">ليس لديك أي خريطة محلية مثبتة. يمكنك اختيار خريطة من اللائحة أو تنزيل خرائط لاحقاً عبر القائمة - %1$s.</string>
@@ -2363,11 +2363,11 @@
     <string name="christmas_poi">POI عيد الميلاد</string>
     <string name="rendering_attr_contourColorScheme_description">نظام ألوان المعالم المحيطية</string>
     <string name="save_track_min_speed">تسجيل السرعة الأدنى</string>
-    <string name="save_track_min_speed_descr">عامل التصفية: حدد السرعة الأدنى ليتم تسجيل النقطة</string>
+    <string name="save_track_min_speed_descr">عامل التصفية: حدد السرعة الأدنى ليتم تسجيل النقطة.</string>
     <string name="save_track_min_distance">تسجيل الحد الأدنى للإزاحة</string>
-    <string name="save_track_min_distance_descr">عامل التصفية: حدد المسافة الأدنى من آخر موقع لنقطة ليتم تسجيلها</string>
+    <string name="save_track_min_distance_descr">عامل التصفية: حدد المسافة الأدنى من آخر موقع لنقطة ليتم تسجيلها.</string>
     <string name="save_track_precision">تسجيل حد الدقة الأدنى</string>
-    <string name="save_track_precision_descr">اختر حد الأدنى للدقة لنقطة تريد تسجيلها</string>
+    <string name="save_track_precision_descr">اختر حد الأدنى للدقة لنقطة تريد تسجيلها.</string>
     <string name="shared_string_continue">واصل</string>
     <string name="shared_string_pause">إيقاف</string>
     <string name="shared_string_trip">رحلة</string>
@@ -2377,7 +2377,7 @@
     <string name="osmo_pause_location">إيقاف مؤقت</string>
     <string name="osmo_service_running">خدمة OsMo مشغلة</string>
     <string name="trip_rec_notification_settings">تفعيل تسجيل بداية سريعة</string>
-    <string name="trip_rec_notification_settings_desc">عرض اشعار نظامي للسماح ببدء تسجيل الرحلة</string>
+    <string name="trip_rec_notification_settings_desc">عرض اشعار نظامي للسماح ببدء تسجيل الرحلة.</string>
     <string name="shared_string_notifications">الإشعارات</string>
     <string name="gpx_no_tracks_title_folder">يمكنك أيضا إضافة مسارات إلى المجلد</string>
     <string name="gpx_add_track">إضافة مسار</string>
@@ -2410,9 +2410,9 @@
           3. كل السلاسل أو السترينجز المنشأة/المعدلة  التي تم إنشاؤها متواجدة في الجزء العلوي من الملف (لتسهيل ايجاد ما هو مترجم).
      من فضلك: إلقاء نظرة على http://code.google.com/p/osmand/wiki/UIConsistency، قد تحسن من عملك وعملنا :-) شكرا - هاردي"</string>
     <string name="show_legacy_search">إظهار طريقة البحث القديمة</string>
-    <string name="show_legacy_search_desc">إضافة البحث المتعمق في قائمة الدرج</string>
+    <string name="show_legacy_search_desc">إضافة البحث المتعمق في قائمة الدرج.</string>
     <string name="routing_attr_allow_motorway_name">الطريق السريع مسموح</string>
-    <string name="routing_attr_allow_motorway_description">الطريق السريع مسموح</string>
+    <string name="routing_attr_allow_motorway_description">الطريق السريع مسموح.</string>
     <string name="legacy_search">بحث موروث</string>
     <string name="lang_sr_latn">الصربية (اللاتينية)</string>
     <string name="lang_zh_hk">الصينية (هونج كونج)</string>
@@ -2643,22 +2643,22 @@
     <string name="no_overlay">لا طبقة فوقية</string>
     <string name="no_underlay">لا طبقة تحتية</string>
     <string name="subscribe_email_desc">اشترك في قائمة البريد الإلكتروني لدينا فيما يخص الخصومات والحصول على 3 تنزيلات خرائط إضافية!</string>
-    <string name="depth_contour_descr">"مجموعة من الخرائط التي تتضمن  نقاط وخطوط عمق البحر الكنتورية."</string>
+    <string name="depth_contour_descr">مجموعة من الخرائط التي تتضمن خطوط عمق البحر الكنتورية والنقاط البحرية.</string>
     <string name="sea_depth_thanks">شكرا لك على شراء اضافة معالم العمق البحري !</string>
     <string name="index_item_depth_contours_osmand_ext">معالم العمق البحري</string>
     <string name="index_item_depth_points_southern_hemisphere">نقاط العمق البحري في نصف الكرة الجنوبي</string>
     <string name="index_item_depth_points_northern_hemisphere">نقاط العمق البحري في نصف الكرة الشمالي</string>
     <string name="download_depth_countours">معالم العمق البحري</string>
     <string name="do_not_send_anonymous_app_usage_desc">التطبيق يقوم بجمع معلومات حول أجزاء من التطبيقات التي تفتحها. الموقع الخاص بك لا يرسل ابدأ، ولا أي شيء تقوم بادخاله في التطبيق أو أي تفاصيل لمناطق رأيتها ، بحثت عنها أو نزلتها.</string>
-    <string name="do_not_show_startup_messages_desc">يمنع عرض الخصومات على التطبيق واعلانات الأحداث المحلية المميزة</string>
+    <string name="do_not_show_startup_messages_desc">يمنع عرض الخصومات على التطبيق واعلانات الأحداث المحلية المميزة.</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">أقل تضاريس</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">مسطحة</string>
     <string name="routing_attr_driving_style_balance_name">متوازنة</string>
-    <string name="relief_smoothness_factor_descr">التضاريس المفضلة: مسطحة أو تلال</string>
+    <string name="relief_smoothness_factor_descr">التضاريس المفضلة: مسطحة أو تلال.</string>
     <string name="shared_string_slope">منحدر</string>
     <string name="shared_string_move">انتقل</string>
-    <string name="routing_attr_height_obstacles_description">استخدام بيانات ارتفاع التضاريس المتاحة من طرف ASTER ،SRTM وEU-DEM</string>
-    <string name="rendering_attr_depthContours_description">اظهار نقاط ومعالم العمق</string>
+    <string name="routing_attr_height_obstacles_description">استخدام بيانات ارتفاع التضاريس المتاحة من طرف ASTER ،SRTM، وEU-DEM.</string>
+    <string name="rendering_attr_depthContours_description">اظهار نقاط ومعالم العمق.</string>
     
     <string name="auto_split_recording_descr">بدء جزء جديد بعد فجوة 6 دقائق، مسار جديد بعد فجوة 2سا، أو ملف جديد بعد الانقطاع لفجوة أطول إذا تغير التاريخ.</string>
     <string name="shared_string_paused">متوقف مؤقتاً</string>
@@ -2759,7 +2759,7 @@
     <string name="move_point">تحريك نقطة</string>
     <string name="add_segment_to_the_track">إضافة إلى مسار GPX</string>
 <string name="map_orientation_change_in_accordance_with_speed">عتبة توجيه الخريطة</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">حدد أدناه على أي سرعة يتغير توجيه الخريطة من \'اتجاه الحركة\' إلى \'البوصلة\'</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">حدد أدناه على أي سرعة يتغير توجيه الخريطة من \'اتجاه الحركة\' إلى \'البوصلة\'.</string>
     <string name="all_markers_moved_to_history">كافة علامات الخريطة انتقلت إلى السجل الزمني</string>
     <string name="marker_moved_to_history">علامة الخريطة نقلت إلى السجل الزمني</string>
     <string name="marker_moved_to_active">علامة الخريطة انتقلت إلى نشطة</string>
@@ -2809,7 +2809,7 @@
     <string name="fast_coordinates_input_descr">اختر نسق إدخال الأحداثيات. يمكنك دائماً تغييره بالنقر على خيارات.</string>
     <string name="fast_coordinates_input">إدخال إحداثيات سريع</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">تجنب الطرق الجليدية، المعابر</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">تجنب الطرق الجليدية والمعابر</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">تجنب الطرق الجليدية والمعابر.</string>
     <string name="make_round_trip_descr">إضافة نسخة نقطة البداية كوجهة.</string>
     <string name="make_round_trip">القيام برحلة ذهاب وإياب</string>
     <string name="shared_string_navigate">تنقل</string>
