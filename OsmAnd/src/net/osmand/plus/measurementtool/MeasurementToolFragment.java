@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
@@ -1041,11 +1042,14 @@ public class MeasurementToolFragment extends Fragment {
 	private void showPointsListFragment() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			int screenHeight = AndroidUtils.getScreenHeight(mapActivity) - AndroidUtils.getStatusBarHeight(mapActivity);
+			boolean transparentStatusBar = Build.VERSION.SDK_INT >= 21;
+			int statusBarHeight = transparentStatusBar ? 0 : AndroidUtils.getStatusBarHeight(mapActivity);
+			int screenHeight = AndroidUtils.getScreenHeight(mapActivity) - statusBarHeight;
 			RecyclerViewFragment fragment = new RecyclerViewFragment();
 			fragment.setRecyclerView(pointsRv);
 			fragment.setWidth(upDownRow.getWidth());
 			fragment.setHeight(screenHeight - upDownRow.getHeight());
+			fragment.setTransparentStatusBar(transparentStatusBar);
 			mapActivity.getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, fragment, RecyclerViewFragment.TAG)
 					.commitAllowingStateLoss();
