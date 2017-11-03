@@ -2,6 +2,7 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -69,8 +69,34 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 
 		((TextView) mainView.findViewById(R.id.coordinate_input_accuracy_descr)).setText(getString(R.string.coordinate_input_accuracy_description, accuracy));
 
+		((CompoundButton) mainView.findViewById(R.id.use_system_keyboard_switch)).setChecked(!useOsmandKeyboard);
+		((ImageView) mainView.findViewById(R.id.use_system_keyboard_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_keyboard));
+		mainView.findViewById(R.id.use_system_keyboard_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				useOsmandKeyboard = !useOsmandKeyboard;
+				((CompoundButton) mainView.findViewById(R.id.use_system_keyboard_switch)).setChecked(!useOsmandKeyboard);
+				if (listener != null) {
+					listener.onKeyboardChanged(useOsmandKeyboard);
+				}
+			}
+		});
+
+		View handRow = mainView.findViewById(R.id.hand_row);
 		if (portrait) {
-			mainView.findViewById(R.id.hand_row).setVisibility(View.GONE);
+			handRow.setVisibility(View.GONE);
+		} else {
+			handRow.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					rightHand = !rightHand;
+					populateChangeHandRow();
+					if (listener != null) {
+						listener.onHandChanged(rightHand);
+					}
+				}
+			});
+			populateChangeHandRow();
 		}
 
 		((CompoundButton) mainView.findViewById(R.id.go_to_next_field_switch)).setChecked(goToNextField);
@@ -104,18 +130,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		((TextView) mainView.findViewById(R.id.two_digits_title)).setText(getString(R.string.coordinate_input_accuracy, 2));
 		((TextView) mainView.findViewById(R.id.two_digits_description)).setText("00:00." + "55");
 
-		((CompoundButton) mainView.findViewById(R.id.use_system_keyboard_switch)).setChecked(!useOsmandKeyboard);
-		((ImageView) mainView.findViewById(R.id.use_system_keyboard_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_keyboard));
-		mainView.findViewById(R.id.use_system_keyboard_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				useOsmandKeyboard = !useOsmandKeyboard;
-				((CompoundButton) mainView.findViewById(R.id.use_system_keyboard_switch)).setChecked(!useOsmandKeyboard);
-				if (listener != null) {
-					listener.onKeyboardChanged(useOsmandKeyboard);
-				}
-			}
-		});
 		highlightSelectedItem(true);
 
 		View.OnClickListener accuracyChangedListener = new View.OnClickListener() {
@@ -156,6 +170,12 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		setupHeightAndBackground(mainView, R.id.marker_coordinate_input_scroll_view);
 
 		return mainView;
+	}
+
+	private void populateChangeHandRow() {
+		((ImageView) mainView.findViewById(R.id.hand_icon)).setImageDrawable(getContentIcon(rightHand ? R.drawable.ic_action_show_keypad_right : R.drawable.ic_action_show_keypad_left));
+		((TextView) mainView.findViewById(R.id.hand_text_view)).setText(getString(rightHand ? R.string.shared_string_right : R.string.shared_string_left));
+		((TextView) mainView.findViewById(R.id.hand_text_view)).setTextColor(ContextCompat.getColor(getContext(), nightMode ? R.color.color_dialog_buttons_dark : R.color.map_widget_blue_pressed));
 	}
 
 	@Override
