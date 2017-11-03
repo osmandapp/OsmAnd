@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -77,6 +78,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private static final int CLEAR_BUTTON_POSITION = 3;
 	private static final int MINUS_BUTTON_POSITION = 7;
 	private static final int BACKSPACE_BUTTON_POSITION = 11;
+	private static final int POINT_BUTTON_POSITION = 12;
+	private static final int COLON_BUTTON_POSITION = 14;
 	private static final int SWITCH_TO_NEXT_INPUT_BUTTON_POSITION = 15;
 	private static final String LATITUDE_LABEL = "latitude";
 	private static final String LONGITUDE_LABEL = "longitude";
@@ -775,6 +778,27 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	private class KeyboardAdapter extends ArrayAdapter<Object> {
 
+		private ColorStateList dividerControlColorStateList = new ColorStateList(
+				new int[][]{
+						new int[]{android.R.attr.state_pressed},
+						new int[]{}
+				},
+				new int[] {
+						getResources().getColor(R.color.keyboard_item_divider_control_text_color_light_pressed),
+						getResources().getColor(R.color.keyboard_item_divider_control_text_color_light)
+				}
+		);
+		private ColorStateList numberColorStateList = new ColorStateList(
+				new int[][]{
+						new int[]{android.R.attr.state_pressed},
+						new int[]{}
+				},
+				new int[] {
+						getResources().getColor(R.color.keyboard_item_text_color_light_pressed),
+						getResources().getColor(R.color.keyboard_item_text_color_light)
+				}
+		);
+
 		KeyboardAdapter(@NonNull Context context, @NonNull Object[] objects) {
 			super(context, 0, objects);
 		}
@@ -811,6 +835,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					keyboardItemText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.default_list_text_size));
 				} else {
 					TextViewCompat.setAutoSizeTextTypeWithDefaults(keyboardItemText, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+				}
+				boolean dividerControlButton = position == CLEAR_BUTTON_POSITION
+						|| position == MINUS_BUTTON_POSITION
+						|| position == POINT_BUTTON_POSITION
+						|| position == COLON_BUTTON_POSITION;
+				if (lightTheme) {
+					keyboardItemText.setTextColor(dividerControlButton ? dividerControlColorStateList : numberColorStateList);
+				} else {
+					keyboardItemText.setTextColor(ContextCompat.getColor(getContext(), dividerControlButton ? R.color.keyboard_item_divider_control_text_color_dark : R.color.keyboard_item_text_color_dark));
 				}
 				keyboardItemImage.setVisibility(View.GONE);
 				keyboardItemTopSpacing.setVisibility(View.VISIBLE);

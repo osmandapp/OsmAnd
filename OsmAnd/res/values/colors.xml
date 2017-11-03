@@ -264,7 +264,10 @@
 
 	<color name="marker_circle_button_color_dark">#525e66</color>
 
-	<color name="keyboard_item_text_color_light">#545454</color>
+	<color name="keyboard_item_divider_control_text_color_light">#727272</color>
+	<color name="keyboard_item_divider_control_text_color_light_pressed">#ffffff</color>
+	<color name="keyboard_item_divider_control_text_color_dark">#ffffff</color>
+	<color name="keyboard_item_text_color_light">#333333</color>
 	<color name="keyboard_item_text_color_light_pressed">#ffffff</color>
 	<color name="keyboard_item_text_color_dark">#ffffff</color>
 	<color name="keyboard_item_control_light_bg">#f2f2f2</color>
