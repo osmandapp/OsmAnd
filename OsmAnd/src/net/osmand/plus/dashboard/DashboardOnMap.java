@@ -866,6 +866,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			updateLocation(true, true, false);
 //			addOrUpdateDashboardFragments();
 			mapActivity.getRoutingHelper().addListener(this);
+			if (Build.VERSION.SDK_INT >= 21) {
+				mapActivity.getWindow().setStatusBarColor(ContextCompat.getColor(mapActivity, R.color.status_bar_transparent_gradient));
+			}
 		} else {
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(dashboardView.findViewById(R.id.animateContent), animation);
@@ -889,6 +892,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				MapillaryFirstDialogFragment fragment = new MapillaryFirstDialogFragment();
 				fragment.show(mapActivity.getSupportFragmentManager(), MapillaryFirstDialogFragment.TAG);
 				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
+			}
+			if (Build.VERSION.SDK_INT >= 21) {
+				mapActivity.updateStatusBarColor();
 			}
 		}
 	}

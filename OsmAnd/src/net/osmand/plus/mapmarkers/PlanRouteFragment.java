@@ -392,7 +392,7 @@ public class PlanRouteFragment extends ColoredStatusBarFragment implements OsmAn
 		if (fullScreen) {
 			return nightMode ? R.color.status_bar_dark : R.color.status_bar_route_light;
 		}
-		return -1;
+		return R.color.status_bar_transparent_gradient;
 	}
 
 	@Override
