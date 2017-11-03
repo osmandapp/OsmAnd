@@ -44,6 +44,7 @@
 					android:focusableInTouchMode="true"/>
 
 				<net.osmand.plus.widgets.OsmandTextFieldBoxes
+					android:theme="@style/OsmandTextFieldBoxes"
 					android:id="@+id/latitude_box"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
@@ -53,6 +54,8 @@
 					android:layout_marginRight="12dp">
 
 					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+						android:textColor="@color/color_white"
+						android:textColorHint="@color/white_50_transparent"
 						android:inputType="numberSigned|numberDecimal"
 						android:imeOptions="actionNext"
 						android:id="@+id/latitude_edit_text"
@@ -62,6 +65,7 @@
 				</net.osmand.plus.widgets.OsmandTextFieldBoxes>
 
 				<net.osmand.plus.widgets.OsmandTextFieldBoxes
+					android:theme="@style/OsmandTextFieldBoxes"
 					android:id="@+id/longitude_box"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
@@ -71,6 +75,8 @@
 					android:layout_marginRight="12dp">
 
 					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+						android:textColor="@color/color_white"
+						android:textColorHint="@color/white_50_transparent"
 						android:inputType="numberSigned|numberDecimal"
 						android:imeOptions="actionNext"
 						android:id="@+id/longitude_edit_text"
@@ -80,6 +86,7 @@
 				</net.osmand.plus.widgets.OsmandTextFieldBoxes>
 
 				<net.osmand.plus.widgets.OsmandTextFieldBoxes
+					android:theme="@style/OsmandTextFieldBoxes"
 					android:id="@+id/name_box"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
@@ -89,6 +96,8 @@
 					android:layout_marginRight="10dp">
 
 					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+						android:textColor="@color/color_white"
+						android:textColorHint="@color/white_50_transparent"
 						android:inputType="text"
 						android:imeOptions="actionDone"
 						android:id="@+id/name_edit_text"

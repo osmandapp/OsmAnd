@@ -86,6 +86,10 @@
         <item name="android:windowBackground">@drawable/first_splash_screen_free_dev</item>
     </style>
 
+    <style name="OsmandTextFieldBoxes" parent="OsmandDarkTheme">
+        <item name="primaryColor">@color/white_50_transparent</item>
+    </style>
+
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
         <item name="mapBackground">@color/map_background_color_light</item>

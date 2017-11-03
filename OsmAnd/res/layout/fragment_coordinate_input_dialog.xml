@@ -86,6 +86,7 @@
                 android:layout_height="wrap_content">
 
                 <net.osmand.plus.widgets.OsmandTextFieldBoxes
+                    android:theme="@style/OsmandTextFieldBoxes"
                     android:id="@+id/latitude_box"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -95,6 +96,8 @@
                     android:layout_marginEnd="16dp">
 
                     <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:textColor="@color/color_white"
+                        android:textColorHint="@color/white_50_transparent"
                         android:inputType="numberSigned|numberDecimal"
                         android:imeOptions="actionNext"
                         android:id="@+id/latitude_edit_text"
@@ -104,6 +107,7 @@
                 </net.osmand.plus.widgets.OsmandTextFieldBoxes>
 
                 <net.osmand.plus.widgets.OsmandTextFieldBoxes
+                    android:theme="@style/OsmandTextFieldBoxes"
                     android:id="@+id/longitude_box"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -111,6 +115,8 @@
                     osmand:labelText="@string/navigate_point_longitude">
 
                     <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:textColor="@color/color_white"
+                        android:textColorHint="@color/white_50_transparent"
                         android:inputType="numberSigned|numberDecimal"
                         android:imeOptions="actionNext"
                         android:id="@+id/longitude_edit_text"
@@ -128,6 +134,7 @@
                 android:layout_height="wrap_content">
 
                 <net.osmand.plus.widgets.OsmandTextFieldBoxes
+                    android:theme="@style/OsmandTextFieldBoxes"
                     android:id="@+id/name_box"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -137,6 +144,8 @@
                     android:layout_marginRight="16dp">
 
                     <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:textColor="@color/color_white"
+                        android:textColorHint="@color/white_50_transparent"
                         android:inputType="text"
                         android:imeOptions="actionDone"
                         android:hint="@string/access_hint_enter_name"
