@@ -281,6 +281,7 @@
 	<color name="keyboard_divider_light">#e6e6e6</color>
 	<color name="keyboard_divider_dark">#2a2f33</color>
 
+	<color name="coordinate_input_keyboard_icon_color">#9fadfc</color>
 	<color name="coordinate_input_status_bar_color">#4257c9</color>
 
 </resources>
