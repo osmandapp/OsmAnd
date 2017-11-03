@@ -605,7 +605,7 @@
 	<string name="poi_marina">Puerto deportivo</string>
 	<string name="poi_miniature_golf">Minigolf</string>
 	<string name="poi_playground">Juegos infantiles</string>
-	<string name="poi_bench">Banco (asiento)</string>
+	<string name="poi_bench">Bancos (asientos)</string>
 	<string name="poi_swimming_pool">Piscina</string>
 	<string name="poi_water_park">Parque acuático</string>
 	<string name="poi_park">Parque/Plaza</string>
@@ -1376,16 +1376,16 @@
 
 	<string name="poi_capacity">Capacidad</string>
 	<string name="poi_capacity_disabled_yes">Sí</string>
-	<string name="poi_capacity_disabled_no">Lugares reservados para discapacitados: No</string>
+	<string name="poi_capacity_disabled_no">Lugares para discapacitados: No</string>
 	<string name="poi_capacity_disabled">Lugares para discapacitados</string>
-	<string name="poi_capacity_women_yes">Lugar reservado para mujeres</string>
-	<string name="poi_capacity_women_no">Lugares reservados para mujeres: No</string>
-	<string name="poi_capacity_women">Lugares reservados para mujeres</string>
-	<string name="poi_capacity_pupils">Lugar reservado para estudiantes</string>
-	<string name="poi_capacity_teachers">Lugar reservado para profesores</string>
-	<string name="poi_capacity_parent_yes">Lugar reservado para padres</string>
-	<string name="poi_capacity_parent_no">Lugares reservados para padres: No</string>
-	<string name="poi_capacity_parent">Lugares reservados para padres</string>
+	<string name="poi_capacity_women_yes">Lugares para mujeres: Sí</string>
+	<string name="poi_capacity_women_no">Lugares para mujeres: No</string>
+	<string name="poi_capacity_women">Lugares para mujeres</string>
+	<string name="poi_capacity_pupils">Lugares para estudiantes</string>
+	<string name="poi_capacity_teachers">Lugares para profesores</string>
+	<string name="poi_capacity_parent_yes">Lugares para padres: Sí</string>
+	<string name="poi_capacity_parent_no">Lugares para padres: No</string>
+	<string name="poi_capacity_parent">Lugares para padres</string>
 
 	<string name="poi_aerialway_occupancy">Capacidad de cabina/silla/coche</string>
 	<string name="poi_aerialway_capacity">Capacidad por hora</string>
@@ -1604,13 +1604,13 @@
 	<string name="poi_microbrewery_yes">Sí</string>
 	<string name="poi_microbrewery_no">Cerveza artesanal: No</string>
 
-	<string name="poi_takeaway_yes">Comida para llevar</string>
+	<string name="poi_takeaway_yes">Comida para llevar: Sí</string>
 	<string name="poi_takeaway_no">Comida para llevar: No</string>
-	<string name="poi_takeaway_only">Comida para llevar: Solamente</string>
+	<string name="poi_takeaway_only">Comida para llevar: Únicamente</string>
 
 	<string name="poi_delivery_no">Servicio a domicilio: No</string>
-	<string name="poi_delivery_yes">Servicio a domicilio</string>
-	<string name="poi_delivery_only">Sólo servicio a domicilio</string>
+	<string name="poi_delivery_yes">Servicio a domicilio: Sí</string>
+	<string name="poi_delivery_only">Servicio a domicilio: Únicamente</string>
 
 	<string name="poi_outdoor_seating_yes">Asientos exteriores: Si</string>
 	<string name="poi_outdoor_seating_no">Asientos exteriores: No</string>
@@ -1622,9 +1622,9 @@
 
 	<string name="poi_cocktails_yes">Sí</string>
 
-	<string name="poi_second_hand_yes">Artículos usados</string>
+	<string name="poi_second_hand_yes">Artículos usados: Sí</string>
 	<string name="poi_second_hand_no">Artículos usados: No</string>
-	<string name="poi_second_hand_only">Sólo artículos usados</string>
+	<string name="poi_second_hand_only">Artículos usados: Únicamente</string>
 
 	<string name="poi_service_parts">Autopartes</string>
 	<string name="poi_service_dealer">Concesionaria</string>
@@ -1655,7 +1655,7 @@
 	<string name="poi_toilets_access_community">Acceso a los baños: Comunidad</string>
 	<string name="poi_toilets_access_public">Acceso a los baños: Público</string>
 
-	<string name="poi_diaper_yes">Cambiador de pañales</string>
+	<string name="poi_diaper_yes">Cambiador de pañales: Sí</string>
 	<string name="poi_diaper_no">Cambiador de pañales: No</string>
 	<string name="poi_diaper_room">Habitación para cambio de pañales</string>
 
@@ -1791,8 +1791,8 @@
 	<string name="poi_flagpole">Mástil de bandera</string>
 
 	<string name="poi_bench_yes">Sí</string>
-	<string name="poi_bench_no">Asientos: No</string>
-	<string name="poi_bin_yes">Con cesto de basura</string>
+	<string name="poi_bench_no">Bancos (asientos): No</string>
+	<string name="poi_bin_yes">Cesto de basura: Sí</string>
 	<string name="poi_bin_no">Cesto de basura: No</string>
 
 	<string name="poi_shelter_type_public_transport">Transporte público</string>
@@ -1933,7 +1933,7 @@
 <string name="poi_bridge_structure_simple_wooden">Estructura del puente: Madera simple</string>
 	<string name="poi_historic_yes">Objeto histórico</string>
 	<string name="poi_surveillance_yes">Vigilancia: Sí</string>
-	<string name="poi_shop_additional_yes">Con tienda</string>
+	<string name="poi_shop_additional_yes">Con tienda: Sí</string>
 
 	<string name="poi_service_bicycle_retail_yes">Venta</string>
 	<string name="poi_service_bicycle_retail_no">Venden bicicletas: No</string>
@@ -2001,7 +2001,7 @@
 
 	<string name="poi_honey">Miel</string>
 
-	<string name="poi_elevator_yes">Con ascensor</string>
+	<string name="poi_elevator_yes">Ascensor: Sí</string>
 	<string name="poi_elevator_no">Ascensor: No</string>
 
 	<string name="poi_technical_monument">Monumento técnico</string>
@@ -2847,7 +2847,7 @@
 
 	<string name="poi_treat_inpatient_yes">Servicios para pacientes: Sí</string>
 	<string name="poi_treat_inpatient_no">Servicios para pacientes: No</string>
-	<string name="poi_treat_inpatient_only">Servicios para pacientes: Solamente</string>
+	<string name="poi_treat_inpatient_only">Servicios para pacientes: Únicamente</string>
 	<string name="poi_counselling_yes">Asesoría: Sí</string>
 	<string name="poi_counselling_no">Asesoría: No</string>
 	<string name="poi_emergency_yes">Emergencias: Sí</string>
@@ -3032,7 +3032,7 @@
 
 	<string name="poi_organic_yes">Sí</string>
 	<string name="poi_organic_no">No</string>
-	<string name="poi_organic_only">Solamente</string>
+	<string name="poi_organic_only">Únicamente</string>
 
 	<string name="poi_traffic_mirror">Espejo de tráfico</string>
 
@@ -3093,7 +3093,7 @@
 	<string name="poi_ferry_terminal_cargo">Cargamento</string>
 	<string name="poi_bicycle_parking_type">Tipo de bicicletero</string>
 	<string name="poi_aerialway_bicycle">Transporte para bicicletas</string>
-	<string name="poi_aerialway_heating">Calefaccionado</string>
+	<string name="poi_aerialway_heating">Calefacción</string>
 	<string name="poi_pump">Bomba</string>
 	<string name="poi_observatory_designation">Designación</string>
 	<string name="poi_telescope_type">Tipo de telescopio</string>
@@ -3127,7 +3127,7 @@
 	<string name="poi_drive_through">Servicio en el automóvil</string>
 	<string name="poi_takeaway">Comida para llevar</string>
 	<string name="poi_cocktails">Cócteles</string>
-	<string name="poi_microbrewery">Cervecería artesanal</string>
+	<string name="poi_microbrewery">Cerveza artesanal</string>
 	<string name="poi_beauty_salon_service">Servicio de belleza</string>
 	<string name="poi_recycling_type">Tipo de reciclaje</string>
 	<string name="poi_recycling_accepted_waste">Residuo admitido</string>
