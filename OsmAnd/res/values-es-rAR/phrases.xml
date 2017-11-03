@@ -3132,7 +3132,7 @@
 	<string name="poi_recycling_type">Tipo de reciclaje</string>
 	<string name="poi_recycling_accepted_waste">Residuo admitido</string>
 	<string name="poi_shelter_type">Tipo de refugio</string>
-	<string name="poi_fireplace">Chimenea</string>
+	<string name="poi_fireplace">Hoguera (fuego)</string>
 	<string name="poi_seasonal">Estacional</string>
 	<string name="poi_water_characteristic">Característica del agua</string>
 	<string name="poi_beach_surface_type">Superficie</string>
