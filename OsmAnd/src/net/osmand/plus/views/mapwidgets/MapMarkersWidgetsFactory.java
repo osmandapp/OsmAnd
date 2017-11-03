@@ -153,11 +153,12 @@ public class MapMarkersWidgetsFactory {
 	}
 
 	public boolean updateVisibility(boolean visible) {
+		boolean res = updateVisibility(topBar, visible);
 		if (visible != cachedTopBarVisibility) {
 			cachedTopBarVisibility = visible;
 			map.updateStatusBarColor();
 		}
-		return updateVisibility(topBar, visible);
+		return res;
 	}
 
 	public boolean updateVisibility(View v, boolean visible) {

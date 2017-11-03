@@ -67,7 +67,6 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.MapMarkersMode;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -229,7 +228,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		if (Build.VERSION.SDK_INT >= 21) {
 			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-			updateStatusBarColor();
 			// Navigation Drawer:
 			AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
 		}
@@ -284,6 +282,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getResourceManager().getMapTileDownloader().addDownloaderCallback(downloaderCallback);
 		createProgressBarForRouting();
 		mapLayers.createLayers(mapView);
+		updateStatusBarColor();
 		// This situtation could be when navigation suddenly crashed and after restarting
 		// it tries to continue the last route
 		if (settings.FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()
@@ -804,8 +803,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void updateStatusBarColor() {
 		if (Build.VERSION.SDK_INT >= 21) {
 			boolean night = app.getDaynightHelper().isNightModeForMapControls();
-			boolean markerTopBar = !app.getMapMarkersHelper().getMapMarkers().isEmpty()
-					&& settings.MAP_MARKERS_MODE.get() == MapMarkersMode.TOOLBAR;
+			boolean markerTopBar = mapLayers.getMapMarkersLayer().getWidgetsFactory().isTopBarVisible();
 			int colorId;
 			if (markerTopBar) {
 				colorId = R.color.status_bar_dark;
