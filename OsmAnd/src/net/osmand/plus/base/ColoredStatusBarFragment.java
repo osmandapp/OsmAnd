@@ -4,7 +4,6 @@ import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.view.Window;
 
 public class ColoredStatusBarFragment extends Fragment {
 
@@ -13,11 +12,10 @@ public class ColoredStatusBarFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (Build.VERSION.SDK_INT >= 21 && getStatusBarColor() != -1) {
-			Window window = getActivity().getWindow();
-			statusBarColor = window.getStatusBarColor();
-			window.setStatusBarColor(ContextCompat.getColor(getActivity(), getStatusBarColor()));
+		if (Build.VERSION.SDK_INT >= 21) {
+			statusBarColor = getActivity().getWindow().getStatusBarColor();
 		}
+		setupStatusBarColor();
 	}
 
 	@Override
@@ -25,6 +23,12 @@ public class ColoredStatusBarFragment extends Fragment {
 		super.onPause();
 		if (Build.VERSION.SDK_INT >= 21 && statusBarColor != -1) {
 			getActivity().getWindow().setStatusBarColor(statusBarColor);
+		}
+	}
+
+	protected void setupStatusBarColor() {
+		if (Build.VERSION.SDK_INT >= 21 && getStatusBarColor() != -1) {
+			getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(getActivity(), getStatusBarColor()));
 		}
 	}
 

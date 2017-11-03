@@ -7,7 +7,6 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.TypedValue;
@@ -39,6 +38,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.ColoredStatusBarFragment;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -55,7 +55,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
-public class MapContextMenuFragment extends Fragment implements DownloadEvents {
+public class MapContextMenuFragment extends ColoredStatusBarFragment implements DownloadEvents {
 	public static final String TAG = "MapContextMenuFragment";
 
 	public static final float FAB_PADDING_TOP_DP = 4f;
@@ -521,6 +521,14 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 		created = true;
 		return view;
+	}
+
+	@Override
+	protected int getStatusBarColor() {
+		if (menu.getCurrentMenuState() == MenuState.FULL_SCREEN || menu.isLandscapeLayout()) {
+			return nightMode ? R.color.status_bar_dark : R.color.status_bar_route_light;
+		}
+		return nightMode ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
 	}
 
 	private void updateImageButton(ImageButton button, int iconLightId, int iconDarkId, int bgLightId, int bgDarkId, boolean night) {
@@ -1224,11 +1232,23 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				break;
 			case MenuState.FULL_SCREEN:
 				posY = -menuTopShadowHeight - dpToPx(SHADOW_HEIGHT_TOP_DP);
+				posY = addStatusBarHeightIfNeeded(posY);
 				break;
 			default:
 				break;
 		}
+		if (!menu.isLandscapeLayout()) {
+			setupStatusBarColor();
+		}
 		return posY;
+	}
+
+	private int addStatusBarHeightIfNeeded(int res) {
+		if (Build.VERSION.SDK_INT >= 21) {
+			// One pixel is needed to fill a thin gap between the status bar and the fragment.
+			return res + AndroidUtils.getStatusBarHeight(getActivity()) - 1;
+		}
+		return res;
 	}
 
 	private void updateMainViewLayout(int posY) {
@@ -1356,6 +1376,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		int fabY = y + fabPaddingTopPx;
 		if (fabY < fabPaddingTopPx) {
 			fabY = fabPaddingTopPx;
+			fabY = addStatusBarHeightIfNeeded(fabY);
 		}
 		return fabY;
 	}
