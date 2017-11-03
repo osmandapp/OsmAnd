@@ -789,6 +789,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
 				int spaceForKeys = keyboardViewHeight - 3 * dividerHeight;
 				convertView.setMinimumHeight(spaceForKeys / 4);
+			} else {
+				convertView.setMinimumHeight(AndroidUtils.dpToPx(getContext(), 56));
 			}
 			boolean controlButton = position == CLEAR_BUTTON_POSITION
 					|| position == MINUS_BUTTON_POSITION
@@ -799,6 +801,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			} else {
 				convertView.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg);
 			}
+			View keyboardItemTopSpacing = convertView.findViewById(R.id.keyboard_item_top_spacing);
+			View keyboardItemBottomSpacing = convertView.findViewById(R.id.keyboard_item_bottom_spacing);
 			TextView keyboardItemText = (TextView) convertView.findViewById(R.id.keyboard_item_text);
 			ImageView keyboardItemImage = (ImageView) convertView.findViewById(R.id.keyboard_item_image);
 			Object item = getItem(position);
@@ -810,9 +814,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					TextViewCompat.setAutoSizeTextTypeWithDefaults(keyboardItemText, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
 				}
 				keyboardItemImage.setVisibility(View.GONE);
+				keyboardItemTopSpacing.setVisibility(View.VISIBLE);
+				keyboardItemBottomSpacing.setVisibility(View.VISIBLE);
 				keyboardItemText.setVisibility(View.VISIBLE);
 				keyboardItemText.setText((String) getItem(position));
 			} else if (item instanceof Integer) {
+				keyboardItemTopSpacing.setVisibility(View.GONE);
+				keyboardItemBottomSpacing.setVisibility(View.GONE);
 				keyboardItemText.setVisibility(View.GONE);
 				keyboardItemImage.setVisibility(View.VISIBLE);
 				keyboardItemImage.setImageResource((Integer) item);

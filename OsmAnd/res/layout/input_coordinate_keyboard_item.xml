@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			 xmlns:tools="http://schemas.android.com/tools"
-			 android:layout_width="match_parent"
-			 android:layout_height="56dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
-	<android.support.v7.widget.AppCompatTextView
-		android:id="@+id/keyboard_item_text"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:gravity="center"
-		android:paddingBottom="6dp"
-		android:paddingTop="6dp"
-		android:textAllCaps="true"
-		android:textColor="?attr/keyboard_item_text_color"
-		tools:text="3"/>
+    <View
+        android:id="@+id/keyboard_item_top_spacing"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"/>
 
-	<ImageView
-		android:tint="?attr/keyboard_item_text_color"
-		android:id="@+id/keyboard_item_image"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:scaleType="center"
-		android:layout_gravity="center"
-		tools:src="@drawable/ic_action_backspace_fill"/>
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/keyboard_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:textColor="?attr/keyboard_item_text_color"
+        tools:text="3"/>
 
-</FrameLayout>
+    <View
+        android:id="@+id/keyboard_item_bottom_spacing"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"/>
+
+    <ImageView
+        android:id="@+id/keyboard_item_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:scaleType="center"
+        android:tint="?attr/keyboard_item_text_color"
+        tools:src="@drawable/ic_action_backspace_fill"/>
+
+</LinearLayout>
