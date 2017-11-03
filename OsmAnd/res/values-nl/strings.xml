@@ -1369,10 +1369,10 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     
     <string name="osmo_connected_devices">Verbonden toestellen</string>
     <string name="osmo_groups">OsMo Groepen</string>
-    <string name="osmo_auto_send_locations_descr">Start tracker en stuur locaties automatisch na het starten van de applicatie</string>
+    <string name="osmo_auto_send_locations_descr">Start tracker en stuur locaties automatisch na het starten van de applicatie.</string>
     <string name="osmo_auto_send_locations">Tracker-sessies automatisch starten</string>
     <string name="osmo_tracker_id">Tracker-ID</string>
-    <string name="osmo_tracker_id_descr">Tik om tracker-ID te bekijken</string>
+    <string name="osmo_tracker_id_descr">Tik om tracker-ID te bekijken.</string>
     <string name="osmo_session_token">Sessie-token: %1$s</string>
     <string name="osmo_auth_pending">Wacht op autorisatie…</string>
     <string name="osmo_locations_sent">%1$d verzonden locaties (in buffer %2$d) </string>
@@ -1982,7 +1982,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="srtm_plugin_disabled">Hoogtelijnen uitgeschakeld</string>
     <string name="favorite_category_add_new">Categorie toevoegen</string>
     <string name="favorite_category_select">Kies categorie</string>
-    <string name="default_speed_system_descr">Eenheid voor de snelheid instellen</string>
+    <string name="default_speed_system_descr">Eenheid voor de snelheid instellen.</string>
     <string name="default_speed_system">Eenheid van snelheid</string>
     <string name="nm">nmi</string>
     <string name="si_nm">Zeemijlen</string>
@@ -2074,7 +2074,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="free_downloads_used_description">Bekijk hoeveel gratis downloads er al gebruikt zijn</string>
 
     <string name="application_dir_description">"Kies waar kaarten en andere gegevens  opgeslagen worden."</string>
-    <string name="show_on_start_description">\'Uit\' toont direct de kaart</string>
+    <string name="show_on_start_description">\'Uit\' toont direct de kaart.</string>
     <string name="enter_country_name">Kies het land</string>
     <string name="new_version">Nieuwe versie</string>
     <string name="begin_with_osmand_menu_group">Eerste stappen met OsmAnd</string>
@@ -2157,8 +2157,8 @@ Lengtegraad:\t\t%2$s</string>
     <string name="poi_context_menu_modify_osm_change">Verander OSM-wijziging</string>
     
     <string name="dashboard_or_drawer_title">Kies tussen Dashboard of Menu</string>
-    <string name="please_specify_poi_type_only_from_list">Geef het juiste type POI of sla dit over</string>
-    <string name="access_from_map_description">Menu-knop opent dashboard in plaats van menu</string>
+    <string name="please_specify_poi_type_only_from_list">Geef het juiste type POI of sla dit over.</string>
+    <string name="access_from_map_description">Menu-knop opent dashboard in plaats van menu.</string>
     <string name="access_from_map">Openen vanaf de kaart</string>
     <string name="use_dashboard_btn">Dashboard gebruiken</string>
     <string name="use_drawer_btn">Gebruik menu</string>
@@ -2171,11 +2171,11 @@ Lengtegraad:\t\t%2$s</string>
     <string name="av_video_quality_low">Laagste kwaliteit</string>
     <string name="av_video_quality_high">Hoogste kwaliteit</string>
     <string name="av_video_quality">Video-kwaliteit</string>
-    <string name="av_video_quality_descr">Kies video-kwaliteit</string>
+    <string name="av_video_quality_descr">Kies video-kwaliteit.</string>
     <string name="av_audio_format">Audio uitvoer-formaat</string>
-    <string name="av_audio_format_descr">Kies audio uitvoer-formaat</string>
+    <string name="av_audio_format_descr">Kies audio uitvoer-formaat.</string>
     <string name="av_audio_bitrate">Audio bitrate</string>
-    <string name="av_audio_bitrate_descr">Kies audio bitrate</string>
+    <string name="av_audio_bitrate_descr">Kies audio bitrate.</string>
     <string name="looking_up_address">Adres wordt gezocht</string>
     <string name="rendering_attr_horseRoutes_name">Ruiterroutes</string>
     <string name="update">Controle op Update</string>
@@ -2189,8 +2189,8 @@ Lengtegraad:\t\t%2$s</string>
     <string name="no_camera_permission">"OsmAnd heeft geen toestemming de camera  te gebruiken."</string>
     <string name="no_microphone_permission">OsmAnd heeft geen toestemming de microfoon te gebruiken.</string>
     <string name="select_voice_provider">Kies stembegeleiding</string>
-    <string name="select_voice_provider_descr">Stembegeleiding voor je taal kiezen of downloaden</string>
-    <string name="impassable_road_desc">Kies wegen die niet gebruikt mogen worden</string>
+    <string name="select_voice_provider_descr">Stembegeleiding voor je taal kiezen of downloaden.</string>
+    <string name="impassable_road_desc">Kies wegen die vermeden moeten worden.</string>
     <string name="shared_string_sound">Stembegeleiding</string>
     <string name="live_updates">Live updates</string>
     <string name="available_maps">Beschikbare kaarten</string>
@@ -2201,11 +2201,11 @@ Lengtegraad:\t\t%2$s</string>
 <string name="last_map_change">Laatste kaart-update: %s</string>
 <string name="rec_split">Splitsen van opnames</string>
     <string name="rec_split_title">Gebruik automatische splitsing</string>
-    <string name="rec_split_desc">Videoclips overschrijven als opslagruimte vol is</string>
+    <string name="rec_split_desc">Videoclips overschrijven als opslagruimte vol is.</string>
     <string name="rec_split_clip_length">Cliplengte</string>
-    <string name="rec_split_clip_length_desc">De lengte van een videoclip is nooit langer dan opgegeven</string>
+    <string name="rec_split_clip_length_desc">Maximale tijdsduur van een videoclip.</string>
     <string name="rec_split_storage_size">Maximale opslag voor video</string>
-    <string name="rec_split_storage_size_desc">Geheugen dat maximaal voor alle videoclips gebruikt wordt</string>
+    <string name="rec_split_storage_size_desc">Geheugen dat maximaal voor alle videoclips gebruikt mag worden.</string>
     <string name="hourly">Elk uur</string>
     <string name="daily">Elke dag</string>
     <string name="weekly">Elke week</string>
@@ -2246,18 +2246,18 @@ Lengtegraad:\t\t%2$s</string>
     <string name="osm_editors_ranking">OSM-Bijdragers Ranglijst</string>
     <string name="osm_live_subscription">OsmAnd Live abonnement</string>
     <string name="osm_live_subscribe_btn">Abonneren</string>
-    <string name="osm_live_email_desc">Dit is nodig om je informatie te geven over bijdragen</string>
+    <string name="osm_live_email_desc">Dit is nodig om je informatie te geven over bijdragen.</string>
     <string name="osm_live_user_public_name">Openbare Naam</string>
     <string name="osm_live_hide_user_name">Mijn naam niet tonen in verslagen</string>
     <string name="osm_live_support_region">Ondersteunde regio</string>
     <string name="osm_live_month_cost">Maandelijkse kosten</string>
-    <string name="osm_live_month_cost_desc">Abonnementskosten per maand</string>
+    <string name="osm_live_month_cost_desc">Abonnementskosten per maand.</string>
     <string name="osm_live_active">Actief</string>
     <string name="osm_live_not_active">Niet actief</string>
     <string name="osm_live_enter_email">Voer een geldig emailadres in</string>
     <string name="osm_live_enter_user_name">Voer je Openbare Naam in</string>
     <string name="osm_live_thanks">Bedankt voor je OSM Live Abonnement!</string>
-    <string name="osm_live_region_desc">Een gedeelte van je betaling gaat naar OSM-Bijdragers in deze regio</string>
+    <string name="osm_live_region_desc">Een gedeelte van je betaling gaat naar OSM-Bijdragers in deze regio.</string>
     <string name="osm_live_subscription_settings">Abonnementsgegevens</string>
     <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een OsmAnd Live Abonnement</string>
 
@@ -2284,7 +2284,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="add_points_to_map_markers_q">Alle punten als markeervlaggetje toevoegen?</string>
     <string name="shared_string_add_to_map_markers">Aan markeervlaggetjes toevoegen</string>
     <string name="select_map_markers">Kies markeervlaggetjes</string>
-    <string name="show_map_markers_description">Activeer Markeervlaggetjes-toepassing</string>
+    <string name="show_map_markers_description">Activeer Markeervlaggetjes-functionaliteit.</string>
     <string name="clear_active_markers_q">Alle actieve markeervlaggetjes verwijderen?</string>
     <string name="clear_markers_history_q">Geschiedenis markeervlaggetjes verwijderen?</string>
     <string name="active_markers">Actieve markeervlaggetjes</string>
@@ -2327,7 +2327,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="access_category_choice">Kies categorie</string>
     <string name="access_hint_enter_name">Voer naam in</string>
     <string name="access_hint_enter_category">Voer categorie in</string>
-    <string name="access_hint_enter_description">Voer omschrijving in</string>
+    <string name="access_hint_enter_description">Voer omschrijving in.</string>
     <string name="access_map_linked_to_location">Kaart is gekoppeld aan locatie</string>
     <string name="access_collapsed_list">Ingevouwen lijst</string>
     <string name="access_expanded_list">Uitgevouwen lijst</string>
@@ -2339,22 +2339,22 @@ Er is nu {2} MB beschikbaar</string>
     <string name="access_sort">Sorteren</string>
     <string name="map_widget_bearing">Relatieve koers</string>
     <string name="access_disable_offroute_recalc">Geen herberekeing als u van de berekende route afwijkt</string>
-    <string name="access_disable_offroute_recalc_descr">Voorkom automatische hercalculatie van de route wanneer u van de route afwijkt</string>
+    <string name="access_disable_offroute_recalc_descr">Voorkom automatische hercalculatie van de route wanneer u van de route afwijkt.</string>
     <string name="access_disable_wrong_direction_recalc">Wijzig de route niet als u de verkeerde kant op gaat</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Voorkom automatische herberekening van de route als u de verkeerde kant op beweegt</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Voorkom automatische herberekening van de route als u in tegenovergestelde richting beweegt.</string>
     <string name="access_smart_autoannounce">Slimme aankondigingen</string>
-    <string name="access_smart_autoannounce_descr">Geef alleen instructie als de richting naar het doel veranderd is</string>
+    <string name="access_smart_autoannounce_descr">Geef alleen instructie als de richting naar het doel veranderd is.</string>
     <string name="access_autoannounce_period">Tijd tussen meldingen</string>
-    <string name="access_autoannounce_period_descr">Minimale tijd tussen aankondigingen</string>
+    <string name="access_autoannounce_period_descr">Minimale tijd tussen aankondigingen.</string>
     <string name="access_no_destination">Bestemming is niet ingesteld</string>
     <string name="map_widget_magnetic_bearing">Magnetische koers</string>
-    <string name="use_osm_live_routing_description">OsmAnd Live Updates gebruiken bij navigatie (Beta)</string>
+    <string name="use_osm_live_routing_description">OsmAnd Live Updates gebruiken bij navigatie.</string>
 	<string name="use_osm_live_routing">OsmAnd Live navigatie</string>
     <string name="follow_us">Volg ons</string>
     <string name="access_direction_audio_feedback">Richting aangeven met geluid</string>
-    <string name="access_direction_audio_feedback_descr">Geef de richting van de bestemming aan met geluid</string>
+    <string name="access_direction_audio_feedback_descr">Geef de richting van de bestemming aan met geluid.</string>
     <string name="access_direction_haptic_feedback">Richting aangeven met trilling</string>
-    <string name="access_direction_haptic_feedback_descr">Geef de richting van de bestemming aan met trillingen</string>
+    <string name="access_direction_haptic_feedback_descr">Geef de richting van de bestemming aan met trillingen.</string>
     <string name="move_marker_bottom_sheet_title">Schuif de kaart om de marker-positie te wijzigen</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="map_widget_battery">Accuniveau</string>
@@ -2371,7 +2371,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="coords_format">Coördinatensysteem</string>
     <string name="shared_string_is_open_24_7">24 x 7 geopend</string>
     <string name="storage_directory_card">Geheugenkaart</string>
-    <string name="coords_format_descr">Formaat voor de geografische coördinaten</string>
+    <string name="coords_format_descr">Formaat voor de geografische coördinaten.</string>
   	<string name="map_widget_search">Zoek</string>
 	<string name="search_categories">Categorie</string>
     <string name="postcode">Postcode</string>
@@ -2405,7 +2405,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="shared_string_change">Wijzig</string>
     <string name="get_started">Aan de slag</string>
     <string name="routing_attr_short_way_name">Economische route</string>
-    <string name="routing_attr_short_way_description">Economische route gebruiken (meestal korter)</string>
+    <string name="routing_attr_short_way_description">Economische route gebruiken (meestal korter).</string>
     <string name="replace_favorite_confirmation">Wil je favoriet %1$s inderdaad vervangen?</string>
     <string name="update_all_maps_now">Wil u alle kaarten nu updaten?</string>
     <string name="si_mi_meters">Mijlen/meters</string>
@@ -2435,7 +2435,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="skip_map_downloading_desc">Er is geen kaart geïnstalleerd. Kies een kaart uit de lijst, of download later kaarten via Menu - %1$s.</string>
     <string name="first_usage_wizard_desc">Kies kaarten om te downloaden aan de hand van uw huidige locatie.</string>
     <string name="storage_place_description">OsmAnd bewaart gegevens (kaarten, tracks, enz.) in: %1$s</string>
-    <string name="no_update_info_desc">Controleer niet op nieuwe versies en aanbiedingen van OsmAnd</string>
+    <string name="no_update_info_desc">Controleer niet op nieuwe versies en aanbiedingen van OsmAnd.</string>
     <string name="driving_region_australia">Australië</string>
     <string name="lang_kab">Kabylisch</string>
     <string name="selected_categories">Gekozen categorieën</string>
@@ -2461,11 +2461,11 @@ Er is nu {2} MB beschikbaar</string>
     <string name="christmas_desc_q">Kerst-POI tonen?</string>
     <string name="rendering_attr_contourColorScheme_description">Kleur van hoogtelijnen</string>
     <string name="save_track_min_speed">Minimum snelheid om te registreren</string>
-    <string name="save_track_min_speed_descr">Filter: Kies minimumsnelheid waarboven GPX-opname actief wordt</string>
+    <string name="save_track_min_speed_descr">Filter: Kies minimumsnelheid waarboven GPX-opname actief wordt.</string>
     <string name="save_track_min_distance">GPX-opname: minimale afstand</string>
-    <string name="save_track_min_distance_descr">Filter: kies de minumumafstand vanaf het vorige punt, waarboven een nieuw GPX-punt wordt opgenomen</string>
+    <string name="save_track_min_distance_descr">Filter: kies de minumumafstand vanaf het vorige punt, waarboven een nieuw GPX-punt wordt opgenomen.</string>
     <string name="save_track_precision">Minimale GPS-nauwkeurigheid</string>
-    <string name="save_track_precision_descr">Filter: kiest de minimaal gewenste nauwkeurigheid voordat een punt wordt geregistreerd</string>
+    <string name="save_track_precision_descr">Filter: kiest de minimaal gewenste nauwkeurigheid voordat een punt wordt geregistreerd.</string>
     <string name="shared_string_continue">Doorgaan</string>
     <string name="shared_string_pause">Pauze</string>
     <string name="shared_string_trip">Reis</string>
@@ -2493,7 +2493,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="osmo_pause_location">Pauzeren</string>
     <string name="osmo_service_running">OsMo is actief</string>
     <string name="trip_rec_notification_settings">Snelle GPX-opname activeren</string>
-    <string name="trip_rec_notification_settings_desc">Toon Android-melding waarmee de GPX-opname gestart kan worden</string>
+    <string name="trip_rec_notification_settings_desc">Toon Android-melding waarmee de GPX-opname gestart kan worden.</string>
     <string name="shared_string_notifications">Meldingen</string>
     <string name="route_calculation">Route berekening</string>
     <string name="rendering_value_fine_name">Fijn</string>
@@ -2503,9 +2503,9 @@ Er is nu {2} MB beschikbaar</string>
     <string name="wiki_around">Wikipedia artikelen in de buurt</string>
     <string name="legacy_search">Zoeken (oude manier 2.4)</string>
     <string name="show_legacy_search">Zoeken (oude manier 2.4) weergeven</string>
-    <string name="show_legacy_search_desc">Oude zoekmethode in het zijmenu weergeven</string>
+    <string name="show_legacy_search_desc">Oude zoekmethode in het zijmenu weergeven.</string>
     <string name="routing_attr_allow_motorway_name">Autosnelwegen toestaan</string>
-    <string name="routing_attr_allow_motorway_description">Autosnelwegen gebruiken bij navigatie</string>
+    <string name="routing_attr_allow_motorway_description">Autosnelwegen gebruiken bij navigatie.</string>
     <string name="lang_sr_latn">Servisch (Latijns schrift)</string>
     <string name="lang_zh_hk">Chinees (Hong Kong)</string>
     <string name="rendering_attr_contourDensity_description">Hoogtelijnen: dichtheid</string>
@@ -2537,7 +2537,7 @@ Er is nu {2} MB beschikbaar</string>
 \n 
 \n en meer …"</string>
 	<string name="auto_split_recording_title">GPX-track automatisch splitsen na een onderbreking</string>
-	<string name="auto_split_recording_descr">Start een nieuw GPX-segment na een onderbreking van 6 minuten; een nieuwe GPX-track na 2 uur.</string>
+	<string name="auto_split_recording_descr">Start een nieuw GPX-segment na een onderbreking van 6 minuten; een nieuwe GPX-track na 2 uur, of een nieuw bestand na een langere pauze na een datum wijziging.</string>
     <string name="navigate_point_olc">Open Location Code (OLC)</string>
     <string name="navigate_point_olc_info_invalid">Ongeldige OLC
 </string>
@@ -2646,7 +2646,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_name">Rijstijl</string>
     
     <string name="routing_attr_height_obstacles_name">Gebruik hoogtegegevens</string>
-    <string name="routing_attr_height_obstacles_description">Gebruik hoogtegegevens van SRTM, ASTER und EU-DEM</string>
+    <string name="routing_attr_height_obstacles_description">Gebruik hoogtegegevens van SRTM, ASTER en EU-DEM.</string>
 
     
     <string name="gpx_track">GPX-track</string>
@@ -2672,7 +2672,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="quick_action_add_destination">Bestemming toevoegen</string>
     <string name="quick_action_replace_destination">Bestemming vervangen</string>
     <string name="quick_action_add_first_intermediate">Eerste Tussenpunt toevoegen</string>
-    <string name="quick_action_add_destination_desc">Een druk op de sneltoest voegt het midden van het scherm toe als bestemming. De vorige bestemming wordt het laatste tussenpunt.</string>
+    <string name="quick_action_add_destination_desc">Een druk op de sneltoets voegt het midden van het scherm toe als bestemming. De vorige bestemming wordt het laatste tussenpunt.</string>
     <string name="quick_action_replace_destination_desc">Een druk op de sneltoets maakt het midden van het scherm de bestemming.</string>
     <string name="quick_action_add_first_intermediate_desc">Een druk op de sneltoets, voegt het midden van het scherm toe als eerste tussenpunt.</string>
     <string name="no_overlay">Geen overlay</string>
@@ -2690,7 +2690,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="shared_string_visible">Zichtbaar</string>
     <string name="restore_purchases">Aankopen herstellen</string>
     <string name="fonts_header">Lettertypes voor de kaart</string>
-    <string name="do_not_show_startup_messages_desc">Onderdruk meldingen van app-aanbiedingen en speciale lokale gebeurtenissen</string>
+    <string name="do_not_show_startup_messages_desc">Onderdruk meldingen van app-aanbiedingen en speciale lokale gebeurtenissen.</string>
     <string name="parking_options">Parkeermogelijkheden</string>
     <string name="full_version_thanks">Dank voor het aanschaffen van de volledige versie van OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Heuvelachtige wegen</string>
@@ -2699,12 +2699,12 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="routing_attr_driving_style_speed_name">Kortere routes</string>
     <string name="routing_attr_driving_style_balance_name">Er tussen in</string>
     <string name="routing_attr_driving_style_safety_name">Bij voorkeur secundaire wegen</string>
-    <string name="relief_smoothness_factor_descr">Voorkeur voor vlakke of heuvelachtige wegen</string>
+    <string name="relief_smoothness_factor_descr">Terrein voorkeur: vlakke of heuvelachtige wegen.</string>
     <string name="favorite_group_name">Groepsnaam</string>
     <string name="change_color">Kleur wijzigen</string>
     <string name="edit_name">Naam wijzigen</string>
     <string name="animate_my_location">Positie vloeiend weergeven</string>
-    <string name="animate_my_location_desc">De kaart vloeiend weergeven tijdens het volgen van je positie</string>
+    <string name="animate_my_location_desc">De kaart vloeiend weergeven tijdens navigatie.</string>
     <string name="shared_string_slope">Helling</string>
     <string name="add_new_folder">Nieuwe map ttoevoegen</string>
     <string name="points_delete_multiple_succesful">Punt(en) met succes verwijderd.</string>
@@ -2723,7 +2723,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="srtm_color_scheme">Kleurschema</string>
     <string name="show_from_zoom_level">Toon vanaf dit zoom-niveau</string>
     <string name="routing_attr_allow_private_name">Privé-wegen toestaan</string>
-    <string name="routing_attr_allow_private_description">Ga ook over privé-terreinen</string>
+    <string name="routing_attr_allow_private_description">Ga ook over privé-terreinen.</string>
     <string name="display_zoom_level">Zoomniveau weergave: %1$s</string>
     <string name="route_is_too_long_v2">Deze route is misschien te lang. Voeg tussenpunten toe als binnen 10 minuten geen route berekend is.</string>
     <string name="osmand_extended_description_part1">" OsmAnd (OSM Automated Navigation Directions) is een kaart- en navigatieprogramma dat de vrije, wereldwijde en gedetailleerde OpenStreetMap (OSM) data gebruikt.
@@ -2783,12 +2783,12 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="restart_search">Opnieuw zoeken</string>
     <string name="increase_search_radius">Zoekgebied vergroten</string>
     <string name="nothing_found">Niets gevonden :(</string>
-    <string name="nothing_found_descr">Probeer een andere zoekterm of vergroot het zoekgebied</string>
+    <string name="nothing_found_descr">Probeer een andere zoekterm of vergroot het zoekgebied.</string>
     <string name="mapillary_widget">Mapillary-widget</string>
     <string name="mapillary">Mapillary</string>
     <string name="online_photos">Online foto\'s</string>
     <string name="shared_string_add_photos">Foto\'s toevoegen</string>
-    <string name="no_photos_descr">Geen foto\'s beschikbaar voor deze locatie</string>
+    <string name="no_photos_descr">Geen foto\'s beschikbaar voor deze locatie.</string>
     <string name="mapillary_image">Foto van Mapillary</string>
     <string name="open_mapillary">Open Mapillary</string>
     <string name="shared_string_install">Installeren</string>
@@ -2796,7 +2796,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="improve_coverage_install_mapillary_desc">Maak zelf een of meer foto\'s en voeg ze toe aan deze plek op de kaart.
 \nHiervoor moet je Mapillary installeren met Google Play.</string>
     <string name="mapillary_action_descr">Voeg zelf foto\'s van deze plek toe via Mapillary.</string>
-    <string name="mapillary_widget_descr">Voeg eenvoudig foto\'s toe aan Mapillary</string>
+    <string name="mapillary_widget_descr">Voeg eenvoudig info toe aan Mapillary.</string>
     <string name="mapillary_descr">Foto\'s van buiten voor iedereen. Ondek plaatsen, werk samen, en leg de wereld vast.</string>
     <string name="plugin_mapillary_descr">Foto\'s van buiten voor iedereen. Ondek plaatsen, werk samen, en leg de wereld vast.</string>
     <string name="shared_string_permissions">Rechten</string>
@@ -2825,7 +2825,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="sort_by">Sorteren op</string>
     <string name="marker_options">Opties voor Markeervlaggetjes</string>
     <string name="do_not_use_animations">Geen animaties gebruiken</string>
-    <string name="do_not_use_animations_descr">Zet alle animaties binnen OsmAnd uit</string>
+    <string name="do_not_use_animations_descr">Zet alle animaties binnen OsmAnd uit.</string>
     <string name="keep_showing_on_map">Verder wel op de kaart blijven tonen</string>
     <string name="exit_without_saving">Afsluiten zonder op te slaan?</string>
     <string name="line">Lijn</string>
@@ -2864,7 +2864,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="fast_coordinates_input_descr">Kies het invoerformaat voor coördinaten. Dit is te wijzigen in de instellingen.</string>
     <string name="fast_coordinates_input">Snelle invoer van coördinaten</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Vermijd ijswegen en wegen onder water</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Vermijd ijswegen en wegen die bij hoogtij onder water staan</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Vermijd ijswegen en wegen die bij hoogtij onder water staan.</string>
     <string name="use_location">Gebruik mijn positie</string>
     <string name="add_location_as_first_point_descr">Voeg uw poistie toe als eerste routepunt.</string>
     <string name="my_location">Mijn positie</string>
@@ -2886,11 +2886,11 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="order_by">Sorteer op:</string>
     <string name="marker_show_distance_descr">Weergave van afstand en richting naar markeingen op het kaartscherm:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kaart naar beweegrichting draaien vanaf</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Kies de snelheid waarboven de kaart gedraaid wordt naar de beweegrichting in plaats van naar de kompasrichting</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Kies de snelheid waarboven de kaart gedraaid wordt van \'In richting van beweging\' naar \'volgens kompasrichting\'.</string>
     <string name="all_markers_moved_to_history">Alle kaartmarkeringen zijn naar de geschiedenis verplaatst</string>
     <string name="marker_moved_to_history">Kaartmerkering naar geschiedenis verplaatst</string>
     <string name="marker_moved_to_active">Kaartmarkering actief gemaakt</string>
-    <string name="passed">Afgelopen: %1$s</string>
+    <string name="passed">Laatst gebruikte: %1$s</string>
     <string name="make_active">Maak actief</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd zal de punten verbinden met een route voor het gekozen profiel.</string>
     <string name="measurement_tool_save_as_new_track_descr">U kunt de punten opstaan als routepunten of als een lijn.</string>
@@ -2956,4 +2956,12 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
 	<string name="view">Bekijk</string>
 	<string name="wrong_format">Verkeerd format</string>
     <string name="shared_string_road">Weg</string>
-    </resources>
+    <string name="tap_on_map_to_hide_interface_descr">Een tik op de kaart verbergt/toont de bedieningsknoppen en widgets.</string>
+    <string name="tap_on_map_to_hide_interface">Volledig scherm modus</string>
+    <string name="show_on_top_bar">Toon op bovenste balk</string>
+    <string name="mark_passed">Markering gepasseerd</string>
+    <string name="import_gpx_file_description">kan geïmporteerd worden als favorieten, of als track bestand.</string>
+    <string name="import_as_gpx">importeer als GPX bestand</string>
+    <string name="import_as_favorites">Importeer als Favorieten</string>
+    <string name="import_file">Importeer bestand</string>
+	</resources>
