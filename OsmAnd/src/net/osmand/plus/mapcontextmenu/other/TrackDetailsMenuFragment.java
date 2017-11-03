@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -16,9 +15,10 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.ColoredStatusBarFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
-public class TrackDetailsMenuFragment extends Fragment {
+public class TrackDetailsMenuFragment extends ColoredStatusBarFragment {
 	public static final String TAG = "TrackDetailsMenuFragment";
 
 	private TrackDetailsMenu menu;
@@ -106,6 +106,11 @@ public class TrackDetailsMenuFragment extends Fragment {
 		if (menu != null) {
 			menu.onDismiss();
 		}
+	}
+
+	@Override
+	protected int getStatusBarColor() {
+		return R.color.status_bar_transparent_gradient;
 	}
 
 	public int getHeight() {

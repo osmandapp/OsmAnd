@@ -47,6 +47,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
+import net.osmand.plus.base.ColoredStatusBarFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.measurementtool.NewGpxData.ActionType;
@@ -78,7 +79,7 @@ import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
 import static net.osmand.plus.helpers.GpxImportHelper.GPX_SUFFIX;
 
-public class MeasurementToolFragment extends Fragment {
+public class MeasurementToolFragment extends ColoredStatusBarFragment {
 
 	public static final String TAG = "MeasurementToolFragment";
 
@@ -479,6 +480,11 @@ public class MeasurementToolFragment extends Fragment {
 			layer.setOnSingleTapListener(null);
 			layer.setOnEnterMovePointModeListener(null);
 		}
+	}
+
+	@Override
+	protected int getStatusBarColor() {
+		return R.color.status_bar_transparent_gradient;
 	}
 
 	private MapActivity getMapActivity() {
