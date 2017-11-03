@@ -196,9 +196,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				public void onClick(View view) {
 					View focusedView = getDialog().getCurrentFocus();
 					if (focusedView != null) {
-						if (isOsmandKeyboardCurrentlyVisible()) {
-							changeOsmandKeyboardVisibility(false);
-						}
+						useOsmandKeyboard = false;
+						changeKeyboard();
 						AndroidUtils.showSoftKeyboard(focusedView);
 					}
 				}
@@ -570,17 +569,21 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		changeEditTextSelections();
 	}
 
+	private void changeKeyboard() {
+		if (orientationPortrait && !useOsmandKeyboard && isOsmandKeyboardCurrentlyVisible()) {
+			changeOsmandKeyboardVisibility(false);
+		}
+		changeKeyboardInBoxes();
+		changeKeyboardInEditTexts();
+		changeEditTextSelections();
+	}
+
 	private CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener createCoordinateInputFormatChangeListener() {
 		return new CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener() {
 			@Override
 			public void onKeyboardChanged(boolean useOsmandKeyboard) {
 				CoordinateInputDialogFragment.this.useOsmandKeyboard = useOsmandKeyboard;
-				if (orientationPortrait && !useOsmandKeyboard && isOsmandKeyboardCurrentlyVisible()) {
-					changeOsmandKeyboardVisibility(false);
-				}
-				changeKeyboardInBoxes();
-				changeKeyboardInEditTexts();
-				changeEditTextSelections();
+				changeKeyboard();
 			}
 
 			@Override
