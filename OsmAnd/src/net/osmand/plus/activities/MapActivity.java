@@ -187,7 +187,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private List<DialogProvider> dialogProviders = new ArrayList<>(2);
 	private StateChangedListener<ApplicationMode> applicationModeListener;
-	private StateChangedListener<MapMarkersMode> markersModeListener;
 	private GpxImportHelper gpxImportHelper;
 	private WakeLockHelper wakeLockHelper;
 	private boolean intentLocation = false;
@@ -641,13 +640,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		changeKeyguardFlags();
 
-		markersModeListener = new StateChangedListener<MapMarkersMode>() {
-			@Override
-			public void stateChanged(MapMarkersMode change) {
-				updateStatusBarColor();
-			}
-		};
-		settings.MAP_MARKERS_MODE.addListener(markersModeListener);
 
 		applicationModeListener = new StateChangedListener<ApplicationMode>() {
 			@Override
@@ -1210,7 +1202,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getLocationProvider().pauseAllUpdates();
 		app.getDaynightHelper().stopSensorIfNeeded();
 		settings.APPLICATION_MODE.removeListener(applicationModeListener);
-		settings.MAP_MARKERS_MODE.removeListener(markersModeListener);
 
 		settings.setLastKnownMapLocation((float) mapView.getLatitude(), (float) mapView.getLongitude());
 		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
