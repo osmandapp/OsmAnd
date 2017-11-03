@@ -1892,10 +1892,10 @@
     <string name="lang_ms">مالزیایی</string>
     <string name="lang_ht">هائیتی</string>
     <string name="lang_et">استونیایی</string>
-    <string name="archive_wikipedia_data">اطلاعات ویکیپدیایی که شما دارید قدیمی و ناکامل است. می‌خواهید بایگانی شود؟</string>
-    <string name="download_wikipedia_files">مایل هستید اطلاعات تکمیلی ویکیپدیا دانلود شود (%1$s مگابایت)؟</string>
+    <string name="archive_wikipedia_data">اطلاعات ویکی‌پدیای موجود قدیمی و ناسازگار است. می‌خواهید بایگانی شود؟</string>
+    <string name="download_wikipedia_files">آیا اطلاعات تکمیلی ویکی‌پدیا را دانلود می‌کنید (%1$s مگابایت)؟</string>
     
-    <string name="local_indexes_cat_wiki">ویکیپدیا</string>
+    <string name="local_indexes_cat_wiki">ویکی‌پدیا</string>
     <string name="shared_string_show_details">نمایش جزئیات</string>
     <string name="lang_tl">تاگالوگ</string>
     <string name="rendering_value_disabled_name">غیرفعال</string>
@@ -2367,7 +2367,7 @@
     <string name="disable_recording_once_app_killed_descrp">هنگامی که برنامه را از طریق برنامه‌های اخیر ببندید ورود اطلاعات جی‌پی‌ایکس موقتاً متوقف می‌شود. (نشانگر اجرای پس‌زمینه از نوار اعلان حذف می‌شود.)</string>
     <string name="shared_string_import2osmand">واردکردن به OsmAnd</string>
     <string name="read_full_article">مقالهٔ کامل را بخوانید (آنلاین)</string>
-    <string name="shared_string_wikipedia">ویکیپدیا</string>
+    <string name="shared_string_wikipedia">ویکی‌پدیا</string>
     <string name="local_recordings_delete_all_confirm">دارید %1$d یادداشت را پاک می‌کنید. آیا مطمئن هستید؟</string>
     <string name="osmand_parking_hour">س</string>
     <string name="osmand_parking_minute">دق‍</string>
