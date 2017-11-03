@@ -438,7 +438,7 @@
 	<string name="local_openstreetmap_upload">آپلود اصلاحات به OSM</string>
 	<string name="local_openstreetmap_delete">حذف اصلاحات</string>
 	<string name="local_openstreetmap_descr_title">ویرایش ناهمزمان OSM:</string>
-	<string name="free_version_message">این نسخهٔ رایگان OsmAnd به %1$s دانلود محدود است و مقالات آفلاین ویکی‌پدیا را نیز ندارد.</string>
+	<string name="free_version_message">با این نسخهٔ رایگانِ OsmAnd می‌توانید %1$s نقشه دانلود کنید (که شامل دانلود به‌روزرسانی‌ها هم هست). همچنین نسخهٔ رایگان از مقالات آفلاین ویکی‌پدیا پشتیبانی نمی‌کند.</string>
 	<string name="free_version_title">نسخهٔ رایگان</string>
 	<string name="poi_context_menu_showdescription">نمایش توضیحات POI.</string>
 	<string name="index_name_north_america">آمریکای شمالی</string>
@@ -1571,7 +1571,7 @@
 	<string name="rendering_attr_publicTransportMode_name">مسیرهای اتوبوس، اتوبوس برقی و مسیرهای خطی</string>
 	<string name="record_plugin_name">ضبط سفر</string>
     <string name="int_hour">س</string>
-    <string name="duration">مدت زمان</string>
+    <string name="duration">مدت‌زمان</string>
     <string name="distance">مسافت</string>
     <string name="index_tours">سفرها</string>
     <string name="shared_string_all">همه</string>
@@ -2139,7 +2139,7 @@
     <string name="points_delete_multiple">دارید %1$d نقطه را حذف می‌کنید؛ مطمئنید؟</string>
     <string name="track_points_category_name">نقاط مهم این مسیر</string>
     <string name="gpx_track">مسیر</string>
-    <string name="shared_string_time_span">مدت زمان</string>
+    <string name="shared_string_time_span">مدت‌زمان</string>
     <string name="select_gpx_folder">پوشهٔ مسیر را انتخاب کنید</string>
     <string name="shared_string_tracks">Tracks</string>
     <string name="route_altitude">ارتفاع مسیر</string>
@@ -2288,7 +2288,7 @@
     <string name="no_camera_permission">برنامه اجازهٔ دسترسی به دوربین را ندارد.</string>
     <string name="no_microphone_permission">برنامه اجازهٔ دسترسی به میکروفون را ندارد.</string>
     <string name="route_distance">مسافت:</string>
-    <string name="route_duration">مدت زمان:</string>
+    <string name="route_duration">مدت‌زمان:</string>
     <string name="rendering_attr_horseRoutes_name">راه اسب‌رو</string>
     <string name="av_audio_bitrate">بیت‌رِیت صدا</string>
     <string name="av_audio_bitrate_descr">نرخ بیتی صدا را انتخاب کنید.</string>
