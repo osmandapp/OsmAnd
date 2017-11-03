@@ -789,8 +789,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
 				int spaceForKeys = keyboardViewHeight - 3 * dividerHeight;
 				convertView.setMinimumHeight(spaceForKeys / 4);
-			} else {
-				convertView.setMinimumHeight(AndroidUtils.dpToPx(getContext(), 56));
 			}
 			boolean controlButton = position == CLEAR_BUTTON_POSITION
 					|| position == MINUS_BUTTON_POSITION
