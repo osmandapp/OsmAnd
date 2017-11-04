@@ -2941,4 +2941,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="tap_on_map_to_hide_interface">Fuldskærmstilstand</string>
     <string name="show_on_top_bar">Vis på topbjælken</string>
     <string name="mark_passed">Marker som passeret</string>
+    <string name="rename_marker">Omdøb markør</string>
     </resources>
