@@ -295,7 +295,7 @@
     <string name="live_monitoring_url">線上即時追蹤網路地址</string>
     <string name="gpx_monitoring_disabled_warn">記錄軌跡使用 GPX 小工具或透過 \'錄製旅程\'的設定。</string>
     <string name="show_current_gpx_title">顯示目前軌跡</string>
-    <string name="free_version_message">此 OsmAnd 免費版，有下載 %1$s 次限制，且不支援離線維基百科的文章資料。</string>
+    <string name="free_version_message">此 OsmAnd 免費版，有下載地圖 %1$s 次限制（包括更新下載），並且不支援離線維基百科的文章資料。</string>
     <string name="free_version_title">免費版</string>
     <string name="poi_context_menu_showdescription">顯示興趣點記述。</string>
     <string name="index_name_north_america">北美洲</string>
@@ -331,7 +331,7 @@
     <string name="user_password">您 OSM 的密碼</string>
     
     <string name="osmand_service">背景模式</string>
-    <string name="osmand_service_descr">當螢幕關閉時，讓 OsmAnd 在背景執行</string>
+    <string name="osmand_service_descr">當螢幕關閉時，讓 OsmAnd 持續在背景運行。</string>
 
 
     <string name="download_files_not_enough_space">空間不足以下載 %1$s MB (空間剩餘：%2$s)。</string>
