@@ -693,18 +693,6 @@ public class MapActivityActions implements DialogProvider {
 					}).createItem());
 		}
 
-		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.configure_map, mapActivity)
-				.setIcon(R.drawable.ic_action_layers_dark)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
-						app.logEvent(mapActivity, "drawer_config_map_open");
-						MapActivity.clearPrevActivityIntent();
-						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP);
-						return false;
-					}
-				}).createItem());
-
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.get_directions, mapActivity)
 				.setIcon(R.drawable.ic_action_gdirections_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -716,6 +704,41 @@ public class MapActivityActions implements DialogProvider {
 							mapControlsLayer.doRoute(false);
 						}
 						return true;
+					}
+				}).createItem());
+
+		/*
+		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.show_point_options, mapActivity)
+				.setIcon(R.drawable.ic_action_marker_dark)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						MapActivity.clearPrevActivityIntent();
+						mapActivity.getMapLayers().getContextMenuLayer().showContextMenu(mapView.getLatitude(), mapView.getLongitude(), true);
+						return true;
+					}
+				}).createItem());
+		*/
+
+		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.measurement_tool, mapActivity)
+				.setIcon(R.drawable.ic_action_ruler)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+						MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager());
+						return true;
+					}
+				}).createItem());
+
+		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.configure_map, mapActivity)
+				.setIcon(R.drawable.ic_action_layers_dark)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						app.logEvent(mapActivity, "drawer_config_map_open");
+						MapActivity.clearPrevActivityIntent();
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP);
+						return false;
 					}
 				}).createItem());
 
@@ -754,29 +777,6 @@ public class MapActivityActions implements DialogProvider {
 						}
 					}).createItem());
 		}
-
-		/*
-		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.show_point_options, mapActivity)
-				.setIcon(R.drawable.ic_action_marker_dark)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
-						MapActivity.clearPrevActivityIntent();
-						mapActivity.getMapLayers().getContextMenuLayer().showContextMenu(mapView.getLatitude(), mapView.getLongitude(), true);
-						return true;
-					}
-				}).createItem());
-		*/
-
-		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.measurement_tool, mapActivity)
-				.setIcon(R.drawable.ic_action_ruler)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
-						MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager());
-						return true;
-					}
-				}).createItem());
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.prefs_plugins, mapActivity)
 				.setIcon(R.drawable.ic_extension_dark)
@@ -847,16 +847,17 @@ public class MapActivityActions implements DialogProvider {
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
 
-		int measureDistanceItemIndex = -1;
+		// Place divider between functionality and configuration related menu items
+		int dividerItemIndex = -1;
 		for (int i = 0; i < optionsMenuHelper.length(); i++) {
-			if (optionsMenuHelper.getItem(i).getTitleId() == R.string.measurement_tool) {
-				measureDistanceItemIndex = i;
+			if (optionsMenuHelper.getItem(i).getTitleId() == R.string.configure_map) {
+				dividerItemIndex = i;
 				break;
 			}
 		}
 
 		ItemBuilder divider = new ItemBuilder().setLayout(R.layout.drawer_divider);
-		divider.setPosition(measureDistanceItemIndex >= 0 ? measureDistanceItemIndex : 8);
+		divider.setPosition(dividerItemIndex >= 0 ? dividerItemIndex : 8);
 		optionsMenuHelper.addItem(divider.createItem());
 
 		getMyApplication().getAppCustomization().prepareOptionsMenu(mapActivity, optionsMenuHelper);
