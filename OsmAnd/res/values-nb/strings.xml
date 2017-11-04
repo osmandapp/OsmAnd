@@ -173,7 +173,7 @@
     <string name="auto_announce_on">Start auto-annonsering</string>
     <string name="auto_announce_off">Stopp auto-annonsering</string>
     <string name="i_am_here">Jeg er her</string>
-    <string name="zoom_by_trackball_descr">Endre kartzooming ved horisontale styrekulebevegelser.</string>
+    <string name="zoom_by_trackball_descr">Endre kartzooming med horisontale styrekulebevegelser.</string>
     <string name="zoom_by_trackball">Bruk styrekule for zoomkontroll</string>
     <string name="accessibility_preferences_descr">Tilgjengelighetsrelaterte innstillinger.</string>
     <string name="shared_string_accessibility">Tilgjengelighet</string>
@@ -470,7 +470,7 @@
     <string name="save_current_track_descr">Lagre gjeldende spor til SD nå.</string>
     <string name="save_current_track">Lagre gjeldende GPX-spor</string>
     <string name="save_track_interval">Loggeintervall under navigering</string>
-    <string name="save_track_interval_descr">Velg loggeintervall for sporregistrering under navigering.</string>
+    <string name="save_track_interval_descr">Velg loggingsintervall for opptak av spor under navigering.</string>
     <string name="save_track_to_gpx_descrp">Et GPX-spor lagres automatisk i spor-mappen under navigering.</string>
     <string name="save_track_to_gpx">Auto-opptak av spor under navigering</string>
     <string name="update_tile">Oppdater kart</string>
