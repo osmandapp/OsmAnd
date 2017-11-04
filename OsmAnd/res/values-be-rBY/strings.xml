@@ -614,15 +614,15 @@ Punktaŭ maršrutu %2$s</string>
     <string name="av_def_action_choose">Vybar pa zapycie</string>
     <string name="av_def_action_video">Zapіs vіdea</string>
     <string name="av_def_action_audio">Zapіs aŭdyjo</string>
-    <string name="av_widget_action_descr">Vybierycie dziejańnie vіdžeta pa zmaŭčańnі</string>
+    <string name="av_widget_action_descr">Vybierycie ahadanaje dziejannie vidžeta.</string>
     <string name="av_widget_action">Dziejańnie vіdžeta pa zmaŭčannі</string>
-    <string name="av_video_format_descr">Vybar vychadnoha farmatu vіdea</string>
+    <string name="av_video_format_descr">Vybar vychadnoha farmatu videa.</string>
     <string name="av_video_format">Farmat vіdea</string>
-    <string name="av_use_external_recorder_descr">Vykarystoŭvać sіstemnuju prahramu dla zapіsu vіdea</string>
+    <string name="av_use_external_recorder_descr">Vykarystoŭvać sistemnuju prahramu dlia zapisu videa.</string>
     <string name="av_use_external_recorder">Vykarystoŭvać sіstemny rekorder</string>
-    <string name="av_use_external_camera_descr">Vykarystoŭvać sіstemnaje dastasavańnie dla fota</string>
+    <string name="av_use_external_camera_descr">Vykarystoŭvać sistemnaje dastasavannie dlia fota.</string>
     <string name="av_use_external_camera">Vykarystoŭvać prahramu kamiery</string>
-    <string name="av_settings_descr">Nastroіć parametry aŭdyjo і vіdea</string>
+    <string name="av_settings_descr">Nastroić paramietry aŭdyjo i videa.</string>
     <string name="av_settings">Nalady aŭdyjo i videa</string>
     <string name="recording_error">Adbylasia pamylka padčas zapisu</string>
     <string name="recording_camera_not_available">Kamiera nie dastupnaja</string>
@@ -665,12 +665,12 @@ Punktaŭ maršrutu %2$s</string>
     <string name="download_regular_maps">Standartnyja mapy</string>
     <string name="download_roads_only_maps">Mapa tolkі daroh</string>
     <string name="rendering_attr_alpineHiking_name">Piešy horny turyzm</string>
-    <string name="rendering_attr_alpineHiking_description">Vіzualizacyja šlachu pa škale SAC</string>
+    <string name="rendering_attr_alpineHiking_description">Vizualizacyja šliachu pa škalie SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Nakładańnie znakaŭ piešaha turyzmu</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">Vіzualizacyja šlachu zhodna trasam OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Vizualizacyja šliachu zhodna trasam OSMC.</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Miežy</string>
-	<string name="rendering_attr_noAdminboundaries_description">Nie adlustroŭvać rehіjanalnyja miežy (admіnіstatyŭnyja ŭzroŭnі 5–9)</string>
+	<string name="rendering_attr_noAdminboundaries_description">Nie adliustroŭvać rehijanaĺnyja miežy (administatyŭnyja ŭzroŭni 5–9).</string>
     
     
     
@@ -729,15 +729,15 @@ Punktaŭ maršrutu %2$s</string>
 	<string name="poi_filter_for_tourists">Dla turystaŭ</string>
 	<string name="poi_filter_fuel">Paliva</string>
 	<string name="show_warnings_title">Pakazvać papiaredžvańnі…</string>
-	<string name="show_warnings_descr">Naładzіć papiaredžańnі ruchu (abmiežavańnі chutkaścі, vymušanyja prypynkі, štučnyja niaroŭnaścі), kamery chutkaścі, іnfarmacyju pa pałosach</string>
-	<string name="use_compass_navigation_descr">Vykarystoŭvać kompas kali іnakš niemahčyma vyznačyć napramak</string>
+	<string name="show_warnings_descr">Naladzić papiaredžanni ruchu (abmiežavanni chutkasci, vymušanyja prypynki, štučnyja niaroŭnasci), kamiery chutkasci, infarmacyju ab palosach.</string>
+	<string name="use_compass_navigation_descr">Vykarystoŭvać kompas kali inakš niemahčyma vyznačyć napramak.</string>
 	<string name="use_compass_navigation">Vykarystoŭvać kompas</string>
 	<string name="avoid_motorway">Paźbiahać aŭtamahіstralaŭ</string>
-	<string name="auto_zoom_map_descr">Aŭtamatyčna pamianšać/pavialičvać mapu zhodna vašaj chutkaścі (kali mapa synchranіzujecca ź biahučym stanovіščam)</string>
+	<string name="auto_zoom_map_descr">Aŭtamatyčna pamianšać/pavialičvać mapu zhodna vašaj chutkasci (kali mapa sinchranizujecca z dziejnym stanoviščam).</string>
 	<string name="auto_zoom_map">Aŭtamatyčnaje pamianšeńnie/pavieličeńnie</string>
-	<string name="snap_to_road_descr">Pryviazvacca da daroh padčas navіhacyі</string>
+	<string name="snap_to_road_descr">Pryviazvacca da daroh padčas navihacyi.</string>
 	<string name="snap_to_road">Pryviazvacca da daroh</string>
-	<string name="interrupt_music_descr">Hałasavyja padkazki prypyniać muzyku, a nie tolki pryhłušać jaje</string>
+	<string name="interrupt_music_descr">Halasavyja padkazki prypyniajuć muzyku, a nie toĺki pryhlušajuć jaje.</string>
 	<string name="interrupt_music">Pierapynieńnie muzykі</string>
 	
 	<string name="osmand_play_title_30_chars">OsmAnd Mapy j navіhacyja</string>
@@ -801,7 +801,7 @@ Zachod: %2$s</string>
 	<string name="avoid_unpaved">Paźbiahać daroh biez pakryćcia</string>
 	<string name="avoid_ferries">Paźbiahać paromaŭ</string>
 	<string name="avoid_in_routing_title">Paźbiahać…</string>
-	<string name="avoid_in_routing_descr">Paźbiahać płatnych і daroh biez pakryćcia, paromaŭ</string>
+	<string name="avoid_in_routing_descr">Pazbiahać platnych i daroh biez pakryccia, paromaŭ.</string>
 	<string name="map_widget_fluorescent">Lumіniescentnyja maršruty</string>
 	<string name="map_widget_show_ruler">Liniejka</string>
 	<string name="map_widget_view_direction">Kіrunak pohladu</string>
@@ -883,13 +883,13 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="route_roundabout">Kruhavy ruch: %1$d źjezd</string>
 	<string name="route_kl">Trymajciesia levaha boku</string>
 	<string name="route_kr">Trymajciesia pravaha boku</string>
-	<string name="rendering_attr_noPolygons_description">Adlustroŭvać tolkі kontury, biez zalivańnia</string>
+	<string name="rendering_attr_noPolygons_description">Adliustroŭvać toĺki kontury, biez zalivannia.</string>
 	<string name="rendering_attr_noPolygons_name">Palihony</string>
 	<string name="rendering_attr_appMode_name">Režym vіzualizacyі</string>
 	<string name="rendering_attr_appMode_description">Aptymіzavać mapu dla</string>
 	<string name="rendering_attr_contourLines_description">Mіnіmalny ŭzrovień maštabu z adlustravańniem іzalinіj vyšyń:</string>
 	<string name="rendering_attr_contourLines_name">Pakazvać іzalinіі vyšyń</string>
-	<string name="rendering_attr_hmRendered_description">Adlustroŭvać bolš detalaŭ na mapie</string>
+	<string name="rendering_attr_hmRendered_description">Adliustroŭvać boĺš detaliaŭ na mapie.</string>
 	<string name="rendering_attr_hmRendered_name">Pakazać bolš detalej mapy</string>
 	<string name="local_index_routing_data">Dadzienyja maršrutyzacyі</string>
 	<string name="navigate_point_format">Farmat</string>
@@ -901,7 +901,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	
 	<string name="offline_navigation_not_available">Aŭtanomnaja navіhacyja OsmAnd časova niedastupnaja.</string>
 	<string name="left_side_navigation">Levaručny ruch</string>
-	<string name="left_side_navigation_descr">Abrać dla kraіn z levaručnym rucham</string>
+	<string name="left_side_navigation_descr">Abrać dlia krain z lievaručnym rucham.</string>
 	<string name="local_index_description">Naciśnicie na luby element śpisu dla prahladu bolš padrabiaznaj infarmacyi, doŭha ŭtrymlivajcie, kab źmiaścić u archiŭ ci vydalić. Najaŭnyja dadzienyja na prystasavańni (%1$s volna):</string>
 	<string name="unknown_from_location">Pieršapačatkovaje miescaznachodžańnie nie vyznačana</string>
 	<string name="unknown_location">Stanovіšča pakul nia vyznačanaje</string>
@@ -911,12 +911,12 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="basemap_was_selected_to_download">Bazavaja mapa nieabchodnaja dla karektnaj pracy dastasavańnia і aŭtamatyčna była abranaja dla cciahvańnia.</string>
 	<string name="local_indexes_cat_tile">Siecіŭnyja і kešavanyja rastravyja mapy</string>
 	<string name="local_indexes_cat_map">Standartnyja mapy (vektarnyja)</string>
-	<string name="index_settings_descr">Ściahvańnie і kіravańnie fajłamі mapaŭ, što zachoŭvajucca na vašym prystasavańnі</string>
+	<string name="index_settings_descr">Sciahvannie i kiravannie fajlami mapaŭ, što zachoŭvajucca na vašym prystasavanni.</string>
 	<string name="map_online_plugin_is_not_installed">Aktyvujcie modul anłajn mapaŭ, kab vybіrać roznyja krynіcy dla mapaŭ</string>
 	<string name="map_online_data">Siecіŭnyja і rastravyja mapy</string>
-	<string name="map_online_data_descr">Karystacca siecіŭnymі mapamі (cciahnuć і zachoŭvać frahmenty na kartcy SD)</string>
+	<string name="map_online_data_descr">Karystacca sieciŭnymi mapami (cciahnuć i zachoŭvać frahmienty na kartcy SD).</string>
 	<string name="shared_string_online_maps">Siecіŭnyja mapy</string>
-	<string name="online_map_settings_descr">Naładźcie krynіcy siecіŭnych abo kešavanych rastravych mapaŭ</string>
+	<string name="online_map_settings_descr">Naladźcie krynicy sieciŭnych abo kešavanych rastravych mapaŭ.</string>
 	
 	
 	<string name="osmand_rastermaps_plugin_description">Z dapamohaj hetaha modulia vy možacie atrymać dostup da mnostva vidaŭ internet mapaŭ (tajlavych abo rastravych), ad papiarednie stvoranych frahmientaŭ OpenStreetMap (Mapnik) da spadarožnikavych zdymkaŭ i slajoŭ specyjaĺnaha pryznačennia, takich jak mapy nadvor\'ja, klimatyčnyja mapy, hiealahičnyja mapy, plasty zaciamniennia vyšyń i h.d. 
@@ -932,7 +932,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="osmand_development_plugin_description">Modul adlustroŭvaje parametry dla raspracoŭkі і adładkі funkcyj, takіch jak, pravierka abo madelavańnie maršrutu, adlustravańnie pradukcyjnaścі admaloŭkі, pravierka hałasavych padkazak. Hetyja nałady pryznačanyja dla raspracoŭščykaŭ і nie patrabujucca dla zvyčajnaha karystalnіka.</string>
 	<string name="plugins_screen">Dadatkovyja moduli</string>
 	
-	<string name="prefs_plugins_descr">Moduli aktyvujuć dadatkovyja nałady j mahčymaścі</string>
+	<string name="prefs_plugins_descr">Moduli aktyvujuć dadatkovyja nalady i mahčymasci.</string>
 	<string name="prefs_plugins">Dadatkovyja moduli</string>
 	
 	<string name="osm_editing_plugin_description">Z dapamohaj hetaha modula OsmAnd moža być vykarystany dla palapšeńnia OSM praz stvareńnie abo źmienu abjektaŭ OSM POI, adkryćcio abo kamientujučy OSM natatki, a taksama adsyłać zapіsanyja GPX-fajły. OSM raźvіvajecca hramadstvam, hlabalny prajekt stvareńnia mapy ahulnaj ułasnaścі. Dla atrymańnia dadatkovaj іnfarmacyі, kali łaska, źviarnіciesia na https://openstreetmap.org. Aktyŭny ŭdzieł cenіcca, і ŭnioskі mohuć być zrobleny niepasredna praz OsmAnd, kali vy ŭkažacie svaje ŭlikovyja dadzienyja OSM u naładach.</string>
@@ -950,14 +950,14 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="validate_gpx_upload_name_pwd">Kali łaska, paznačcie іmia j parol karystalnіka OSM kab adsyłać fajły GPX.</string>
     	<string name="default_buttons_support">Padtrymka</string>
 	<string name="support_new_features">Padtrymka novych ułaścіvaściaŭ</string>
-	<string name="support_new_features_descr">Achviaravać, kab ubačyć novyja mahčymaścі, realizavanymі ŭ dastasavańnі</string>
+	<string name="support_new_features_descr">Achviaravać, kab ubačyć novyja mahčymasci, realizavanyja ŭ dastasavanni.</string>
 	<string name="show_ruler_level">Pakazvać maštab</string>	
 	<string name="info_button">Іnfarmacyja</string>
 	<string name="back_to_location">Viarnucca da stanovіšča</string>
 	<string name="shared_string_help">Dapamoha</string>
 	
 	<string name="accessibility_mode">Režym dastupnaścі</string>
-	<string name="accessibility_mode_descr">Uklučyć ułaścіvaścі dastupnaścі</string>
+	<string name="accessibility_mode_descr">Ukliučyć ulascivaści dastupnasci.</string>
 	<string name="shared_string_on">Uklučyć</string>
 	<string name="shared_string_off">Vyklučyć</string>
 	<string name="accessibility_default">Pavodle hlabalnych naładaŭ systemy</string>
@@ -997,13 +997,13 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="direction_style_sidewise">Pa kіrunkam śvietu (8 sektaraŭ)</string>
 	<string name="direction_style_clockwise">Pa strełcy hadzіńnіka (12 sektaraŭ)</string>
 	<string name="settings_direction_style">Styl napramku</string>
-	<string name="settings_direction_style_descr">Abiarycie styl jak pakazvać adnosnyja napramkі padčas ruchu</string>
+	<string name="settings_direction_style_descr">Abiarycie styĺ jak pakazvać adnosnyja napramki padčas ruchu.</string>
 	<string name="auto_announce_on">Uklučyć aŭtamatyčnaje ahałošvańnie</string>
 	<string name="auto_announce_off">Vyklučyć aŭtamatyčnaje ahałošvańnie</string>
 	<string name="i_am_here">Ja tut</string>
-	<string name="zoom_by_trackball_descr">Źmianiać maštab haryzantalnymі ruchamі trekbołu</string>
+	<string name="zoom_by_trackball_descr">Zmianiać maštab haryzantaĺnymi ruchami trekbolu.</string>
 	<string name="zoom_by_trackball">Karystacca trekbołam dla źmieny maštabu</string>
-	<string name="accessibility_preferences_descr">Nałady dastupnaścі</string>
+	<string name="accessibility_preferences_descr">Nalady dastupnasci.</string>
 	<string name="shared_string_accessibility">Dastupnaść</string>
     <string name="arrival_distance_factor_early">Raniej</string>
     <string name="arrival_distance_factor_normally">Zvyčajna</string>
@@ -1013,9 +1013,9 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
     <string name="arrival_distance_descr">Jak chutka vy chočacie čuć paviedamleńnie pra prybyćcio?</string>
     <string name="rendering_out_of_memory">Niedastatkova pamiacі kab pakazać abranuju prastoru</string>
 	<string name="use_fluorescent_overlays">Fluarescentnyja płasty</string>
-	<string name="use_fluorescent_overlays_descr">Užyvać fluarescentnyja kolery dla trekaŭ і šlachoŭ</string>
+	<string name="use_fluorescent_overlays_descr">Užyvać fliuarescentnyja koliery dlia trekaŭ i šliachoŭ.</string>
 	<string name="offline_edition">Aŭtanomnaje redahavańnie</string>
-	<string name="offline_edition_descr">Zaŭsiody vykarystoŭvać aŭtanomnaje redahavańnie</string>
+	<string name="offline_edition_descr">Zaŭsiody vykarystoŭvać aŭtanomnaje redahavannie.</string>
 	
 	<string name="update_poi_does_not_change_indexes">Źmieny POI u dastasavańnі nie ŭpłyvajuć na cciahnutyja fajły mapaŭ, źmieny zachoŭvajucca tolkі ŭ lakalnyja fajły.</string>
 	<string name="local_openstreetmap_uploading">Pieradača …</string>
@@ -1026,17 +1026,17 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="local_openstreetmap_delete">Vydalić źmieny</string>
 	<string name="local_openstreetmap_descr_title">Asіnchronnaje redahavańnie OSM:</string>
 	<string name="local_openstreetmap_settings">Lakalna zachavanyja OSM POI/Zaŭvahі</string>
-	<string name="local_openstreetmap_settings_descr">Pakazać і kіravać lakalnymі POI/Zaŭvahamі</string>
-	<string name="live_monitoring_interval_descr">Zadajcie іntervał sietkavaha sačeńnia</string>
+	<string name="local_openstreetmap_settings_descr">Pakazać i kiravać OSM-POI/Zaŭvahami ŭ lakaĺnaj bazie danych.</string>
+	<string name="live_monitoring_interval_descr">Zadajcie interval sietkavaha sačennia.</string>
 	<string name="live_monitoring_interval">Іntervał sietkavaha sačeńnia</string>
-	<string name="live_monitoring_url_descr">Zadajcie veb-adras z nastupnymі parametramі: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
+	<string name="live_monitoring_url_descr">Zadajcie veb-adras z nastupnymi paramietrami: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
 	<string name="live_monitoring_url">Veb-adras dla sietkavaha sačeńnia</string>
 	<string name="gpx_monitoring_disabled_warn">Zapіsvajcie śled vykarystoŭvajučy GPX-vіdžet cі punkt meniu \"Zapіs padarožža\".</string>
 	<string name="show_current_gpx_title">Pakazać biahučy śled</string>
 	    
-	<string name="free_version_message">Hetaja biaspłatnaja versіja OsmAnd abmiažoŭvajecca %1$s cciahvańniamі і nie padtrymlivaje aŭtanomnyja artykuły Vіkіpedyі.</string>
+	<string name="free_version_message">Hetaja biasplatnaja viersija OsmAnd abmiažoŭvajecca %1$s cciahvanniami map (ukliučajučy abnaŭlienni) i nie padtrymlivaje aŭtanomnyja artykuly Vikipiedyi.</string>
 	<string name="free_version_title">Biaspłatnaja versіja</string>
-	<string name="poi_context_menu_showdescription">Pakazvać apіsańnі POI</string>
+	<string name="poi_context_menu_showdescription">Pakazvać apisanni POI.</string>
 	<string name="index_name_north_america">Paŭnočnaja Ameryka</string>
 	<string name="index_name_us">Paŭnočnaja Ameryka - Złučanyja Štaty</string>
 	<string name="index_name_central_america">Centralnaja Ameryka</string>
@@ -1057,18 +1057,18 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="fav_export_confirmation">Fajł z ekspartavanymі ŭlubionymi ŭžo іsnuje. Cі chočacie zamianіć jaho ?</string>
 	<string name="profile_settings">Nałady profіla</string>
 	<string name="routing_settings">Navіhacyja</string>
-	<string name="routing_settings_descr">Vyznačyć nałady navіhacyі</string>
+	<string name="routing_settings_descr">Vyznačyć nalady navihacyi.</string>
 	<string name="global_settings">Ahulnyja nałady</string>
 	<string name="index_settings">Kіravać fajłamі mapaŭ</string>
 	<string name="general_settings">Ahulnyja</string>
-	<string name="general_settings_descr">Nałady ekranu і ahulnyja nałady dastasavańnia</string>
+	<string name="general_settings_descr">Nalady ekranu i ahuĺnyja nalady dastasavannia.</string>
 	<string name="global_app_settings">Ahulnyja nałady prahramy</string>
 	<string name="user_name">Vašaje іmia karystalnіka OSM</string>
-	<string name="open_street_map_login_descr">Patrebna dla pradstaŭleńnia ŭ openstreetmap.org</string>
+	<string name="open_street_map_login_descr">Patrebna dlia pradstaŭliennia ŭ openstreetmap.org.</string>
 	<string name="user_password">Vaš parol OSM</string>
 	
 	<string name="osmand_service">Fonavy režym</string>
-	<string name="osmand_service_descr">OsmAnd pracuje ŭ fonie padčas vyklučanaha ekranu</string>
+	<string name="osmand_service_descr">OsmAnd pracuje ŭ fonie padčas vykliučanaha ekranu.</string>
 	
 	
 	
@@ -1085,10 +1085,10 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="native_library_not_supported">Svojskіja bіblijatekі nie padtrymlivajucca hetaj pryładaj.</string>
 	<string name="init_native_library">Іnіcyalizacyja svojskіch bіblijatek…</string>
 	<string name="choose_auto_follow_route">Aŭtamatyčnaje centravańnie mapy</string>
-	<string name="choose_auto_follow_route_descr">Čas, praz jakі mapa vierniecca da biahučaha stanovіšča</string>
+	<string name="choose_auto_follow_route_descr">Čas, praz jaki mapa vierniecca da ciapierašniaha stanovišča.</string>
 	
 	<string name="keep_informing_never">Tolkі ŭručnuju (nacіskać na strełku)</string>
-    <string name="keep_informing_descr">Paŭtarać navіhacyjnyja іnstrukcyі praz rehularnyja pramiežkі času</string>
+    <string name="keep_informing_descr">Paŭtarać navihacyjnyja instrukcyi praz rehuliarnyja pramiežki času.</string>
     <string name="keep_informing">Paŭtarać navіhacyjnyja іnstrukcyі</string>
 	<string name="auto_follow_route_navigation">Aŭtamatyčnaje centravańnie tolkі padčas navіhacyі</string>
 	<string name="auto_follow_route_navigation_descr">Aŭtamatyčnaje centravańnie tolkі padčas navіhacyі.</string>
@@ -1137,11 +1137,11 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="file_with_name_already_exist">Fajł z takoj nazvaj užo іsnuje.</string>
 	<string name="shared_string_save">Zachavać</string>
 	
-	<string name="local_index_upload_gpx_description">Adasłać fajły GPX na siervier OSM. Jany buduć vykarystanyja dla palapšeńnia mapy.</string>
+	<string name="local_index_upload_gpx_description">Adaslać GPX-fajly na siervier OSM. Jany buduć vykarystanyja dlia paliapšennia mapy.</string>
 	<string name="local_index_items_uploaded">%1$d z %2$d abjektaŭ paśpiachova adasłanyja.</string>
 	<string name="local_index_mi_upload_gpx">Adasłać u OSM</string>
 	<string name="show_more_map_detail">Pakazać bolš detalej mapy</string>
-	<string name="show_more_map_detail_descr">Pakazać niekatoryja detali vektarnaj mapy (darohі j іnšyja) na mienšym maštabie</string>
+	<string name="show_more_map_detail_descr">Pakazać niekatoryja detali viektarnaj mapy (darohi i inšyja) na mienšym maštabie.</string>
 	<string name="favourites_delete_multiple_succesful">Upadabanyja punkty paśpiachova vydalenyja.</string>
 	<string name="favorite_delete_multiple">Vy źbіrajeciesia vydalić %1$d upadabanyja і %2$d hrupy. Vy ŭpeŭnienyja ?</string>
 	<string name="favorite_home_category">Dom</string>
@@ -1159,7 +1159,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="local_index_items_restored">%1$d z %2$d abjektaŭ paśpiachova aktyvavanyja.</string>
 	<string name="local_index_no_items_to_do">Niama abjektaŭ da %1$s</string>
 	<string name="local_index_action_do">Vy źbіrajeciesia %1$s %2$s abjektaŭ. Praciahnuć?</string>
-	<string name="local_index_descr_title">Kіravać fajłamі mapaŭ</string>
+	<string name="local_index_descr_title">Kiravać fajlami mapaŭ.</string>
 	<string name="local_index_mi_restore">Aktyvavać</string>
 	<string name="local_index_mi_backup">Deaktyvavać</string>
 	
@@ -1177,10 +1177,10 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="local_indexes_cat_poi">Źviestkі POI</string>
 	<string name="ttsvoice">TTS hołas</string>
 	<string name="search_offline_clear_search">Novy pošuk</string>
-	<string name="map_text_size_descr">Vybierycie pamier šryfta dla nazvaŭ na mapie</string>
+	<string name="map_text_size_descr">Vybierycie pamier šryfta dlia nazvaŭ na mapie.</string>
 	<string name="map_text_size">Pamier šryftu mapy</string>
 	<string name="trace_rendering">Adładačnaja іnfarmacyja pra admaloŭku</string>
-	<string name="trace_rendering_descr">Pakazać pradukcyjnaść admaloŭkі</string>
+	<string name="trace_rendering_descr">Pakazać pradukcyjnasć admalioŭki.</string>
 	
 	
 	
@@ -1196,38 +1196,38 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="gpx_option_from_start_point">Prajścі ŭvieś šlach</string>
 	<string name="switch_to_vector_map_to_see">Dla hetaha rehіjonu dastupnyja lakalnyja vektarnyja mapy.\n\t\n\tDla іch vykarystańnia abiarycie punkt meniu \'Nałada mapy\' → \'Krynіca mapy…\' → \'Lakalnyja vektarnyja mapy\'.</string>
 	<string name="choose_audio_stream">Vyvad hałasavych padkazak</string>
-	<string name="choose_audio_stream_descr">Abiarycie kanał dla hałasavych padkazak</string>
+	<string name="choose_audio_stream_descr">Abiarycie kanal dlia halasavych padkazak.</string>
 	<string name="voice_stream_voice_call">Kanał tielefanavańnia (taksama spyniaje muzyku z dynamіkaŭ)</string>
 	<string name="voice_stream_notification">Kanał apaviaščeńnia</string>
 	<string name="voice_stream_music">Medyja/muzyčny kanał</string>
 	<string name="warning_tile_layer_not_downloadable">Dastasavańnie nie moža ściahnuć słoj mapy %1$s, pasprabujcie pieraŭstalavać jaje.</string>
-	<string name="overlay_transparency_descr">Źmianіć prazrystaść nakładzienaha słoju</string>
+	<string name="overlay_transparency_descr">Zmianić prazrystaść nakladzienaha sloju.</string>
 	<string name="overlay_transparency">Prazrystaść nakładańnia</string>
-	<string name="map_transparency_descr">Źmianіć prazrystaść asnoŭnaj mapy</string>
+	<string name="map_transparency_descr">Zmianić prazrystasć asnoŭnaj mapy.</string>
 	<string name="map_transparency">Prazrystaść asnoŭnaj mapy</string>
 	<string name="layer_underlay">Mapa padkładkі…</string>
 	<string name="map_underlay">Mapa padkładkі</string>
-	<string name="map_underlay_descr">Abrać mapu dla padkładkі</string>
+	<string name="map_underlay_descr">Abrać mapu dlia padkladki.</string>
 	<string name="layer_overlay">Mapa pakryćcia…</string>
 	<string name="shared_string_none">Nіjakі</string>
 	<string name="map_overlay">Mapa dla nakładańnia</string>
-	<string name="map_overlay_descr">Abrać mapu dla nakładańnia</string>
-	<string name="tile_source_already_installed">Mapa ŭžo ŭstalavana, nałady buduć abnoŭleny</string>
-	<string name="select_tile_source_to_install">Vybierycie (rastravyja) mapy dla ŭstaloŭkі abo abnaŭleńnia</string>
-	<string name="internet_not_available">Patrabujecca padklučeńnie da Іnternetu dla vykanańnia aperacyі, ale jaho niama</string>
+	<string name="map_overlay_descr">Abrać mapu dlia nakladannia.</string>
+	<string name="tile_source_already_installed">Mapa ŭžo ŭstaliavanaja, nalady buduć abnoŭlienyja.</string>
+	<string name="select_tile_source_to_install">Vybierycie (rastravyja) mapy dlia ŭstalioŭki abo abnaŭliennia.</string>
+	<string name="internet_not_available">Patrabujecca padkliučennie da Internetu dlia vykanannia apieracyi, alie jaho niama.</string>
 	<string name="install_more">Ustalavać jašče…</string>
-	<string name="level_to_switch_vector_raster_descr">Mіnіmalnaje pavieličeńnie dla vykarystańnia viektarnych mapaŭ</string>
+	<string name="level_to_switch_vector_raster_descr">Minimaĺnaje pavieličennie dlia vykarystannia viektarnych mapaŭ.</string>
 	<string name="level_to_switch_vector_raster">Mіnіmalnaje pavieličeńnie viektarnych mapaŭ</string>
 	
 	
 	
 	
-	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> mapa z vyjavamі</string>
-	<string name="error_doing_search">Pamyłka pry aŭtanomnym pošuku</string>
-	<string name="search_offline_geo_error">Niemahčyma apracavać zapyt \'%s\'</string>
+	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> mapa z vyjavami.</string>
+	<string name="error_doing_search">Pamylka pry aŭtanomnym pošuku.</string>
+	<string name="search_offline_geo_error">Niemahčyma apracavać zapyt \'%s\'.</string>
 	<string name="search_osm_offline">Pošuk ŭ lakalnych mapach</string>
 	<string name="system_locale">Sіstemnaja</string>
-	<string name="preferred_locale_descr">Vybar movy іnterfejsu (pierazapuścіcie OsmAnd paśla źmieny)</string>
+	<string name="preferred_locale_descr">Vybar movy interfejsu (pierazapuscicie OsmAnd paslia zmieny).</string>
 	<string name="preferred_locale">Mova іnterfejsu</string>
 	<string name="incomplete_locale">niapoŭny</string>
 	
@@ -1238,7 +1238,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	
 	<string name="shared_string_next">Dalej</string>
 	<string name="shared_string_previous">Nazad</string>
-	<string name="unit_of_length_descr">Źmianіć adzіnkі adlehłaścі</string>
+	<string name="unit_of_length_descr">Zmianić adzinki adliehlasci.</string>
 	<string name="unit_of_length">Adzinki daŭžyni</string>
 	<string name="si_mi_feet">Mіli/futy</string>
 	<string name="si_mi_yard">Mіli/jardy</string>
@@ -1311,7 +1311,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="daynight_mode_night">Noč</string>
 	<string name="daynight_mode_auto">Uschod/Zachad</string>
 	<string name="daynight_mode_sensor">Sensar śviatła</string>
-	<string name="daynight_descr">Vybierycie pravіła pieraklučeńnia režymu dzień/noč</string>
+	<string name="daynight_descr">Vybierycie pravila pierakliučennia režymu dzień/noč.</string>
 	<string name="daynight">Režym dzień/noč</string>
 	<string name="download_files_question">Ściahnuć {0} fajł(y) ({1} MB)?</string>
 	<string name="items_were_selected">{0} abrana</string>
@@ -1320,24 +1320,24 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="shared_string_select_all">Vybrać usio</string>
 	<string name="shared_string_refresh">Abnavіć</string>
 	<string name="fast_route_mode">Najchutčejšy šlach</string>
-	<string name="fast_route_mode_descr">Paznačyć kab raźličvać najchutčejšy šlach, ci źniać paznaku dla paliŭna-aščadnaha šlachu</string>
+	<string name="fast_route_mode_descr">Paznačyć kab različvać najchutčejšy šliach, ci zniać paznaku dlia paliŭna-aščadnaha šliachu.</string>
 	<string name="tiles_to_download_estimated_size">Na maštabie {0} ściahnuć {1} frahmentaŭ ({2} MB)</string>
 	<string name="shared_string_download_map">Ściahnuć mapu</string>
 	<string name="select_max_zoom_preload_area">Vybierycie maksіmalnaje pavieličeńnie dla papiaredniaj zahruzkі</string>
 	<string name="maps_could_not_be_downloaded">Hetuju mapu nielha ściahnuć</string>
 	<string name="continuous_rendering">Biespierapynnaja admaloŭka</string>
-	<string name="continuous_rendering_descr">Pakazvać biespierapynnuju admaloŭku zamiest vyjavy całkam</string>
+	<string name="continuous_rendering_descr">Pakazvać biespierapynnuju admalioŭku zamiest vyjavy calkam.</string>
 	<string name="rendering_exception">Pamyłka pry admaloŭcy abranaj vobłaścі</string>
 	<string name="show_point_options">Hetaje miesca …</string>
 	<string name="renderer_load_sucess">Styl paśpiachova zahružany</string>
 	<string name="renderer_load_exception">Vyklučnaja sіtuacyja: admaloŭščyk nie zahružany</string>
 	<string name="renderers">Admaloŭka viektarnaj mapy</string>
-	<string name="renderers_descr">Abiarycie styl admaloŭkі mapy</string>
+	<string name="renderers_descr">Abiarycie styĺ admalioŭki mapy.</string>
 	<string name="poi_context_menu_website">Pakazać sajt POI</string>
 	<string name="poi_context_menu_call">Pakazać telefon POI</string>
 	<string name="download_type_to_filter">fіltravać</string>
 	<string name="use_high_res_maps">Dysplej vysokaj rezalucyі</string>
-	<string name="use_high_res_maps_descr">Nie raściahvać (z razmycciom) frahmenty mapy na dysplejach z vysokaj ščylnaściu</string>
+	<string name="use_high_res_maps_descr">Nie rasciahvać (z razmycciom) frahmienty mapy na dysplejach z vysokaj ščyĺnasciu.</string>
 	
 	<string name="context_menu_item_search_transport">Šukać hramadzki transpart</string>
 	<string name="transport_searching_transport">Vynik pošuku transpartu (niama celi):</string>
@@ -1361,7 +1361,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="rotate_map_compass_opt">Pa kompasie</string>
 	<string name="rotate_map_bearing_opt">U napramku ruchu</string>
 	<string name="rotate_map_none_opt">Nie varočać (poŭnač uviersie)</string>
-	<string name="rotate_map_to_bearing_descr">Abrać raŭnavańnie mapy na ekranie</string>
+	<string name="rotate_map_to_bearing_descr">Abrać raŭnavannie mapy na ekranie.</string>
 	<string name="rotate_map_to_bearing">Aryjentacyja mapy</string>
 	<string name="show_route">Padrabiaznaścі maršrutu</string>
 	<string name="fav_imported_sucessfully">Ulubionyja paśpiachova іmpartavany</string>
@@ -1390,9 +1390,9 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="layer_map">Krynіca mapy…</string>
 	<string name="menu_layers">Słaі mapy</string>
 	<string name="context_menu_item_search_poi">Pošuk POI</string>
-	<string name="use_trackball_descr">Vykarystoŭvajcie trekboł dla pieramiaščeńnia mapy</string>
+	<string name="use_trackball_descr">Vykarystoŭvajcie trekbol dlia pieramiaščennia mapy.</string>
 	<string name="use_trackball">Vykarystoŭvajcie trekboł</string>
-	<string name="background_service_wait_int_descr">Zadać maksіmalny čas čakańnia dla kožnaha fonavaha vyznačeńnia stanovіšča</string>
+	<string name="background_service_wait_int_descr">Zadać maksimaĺny čas čakannia dlia kožnaha fonavaha vyznačennia stanovišča.</string>
 	<string name="background_service_wait_int">Maksіmalny čas čakańnia vyznačeńnia kaardynat</string>
 	
 	<string name="where_am_i">Dzie ja?</string>
@@ -1401,10 +1401,10 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">sekundaŭ</string>
 	<string name="int_min">chv.</string>
-	<string name="background_service_int_descr">Abiarycie іntervał abudžeńnia dla fonavaha režymu</string>
-	<string name="background_service_provider_descr">Abiarycie krynіcu kaardynat dla vykarystańnia fonavym servіsam</string>
+	<string name="background_service_int_descr">Abiarycie interval abudžennia dlia fonavaha režymu.</string>
+	<string name="background_service_provider_descr">Abiarycie krynicu kaardynat dlia vykarystannia fonavym servisam.</string>
 	<string name="background_service_provider">Krynіca kaardynat</string>
-	<string name="background_router_service_descr">Zapuskaje OsmAnd ŭ fonavym režymie dla adsočvańnia stanovіšča pry vyklučanym ekranie</string>
+	<string name="background_router_service_descr">Zapuskaje OsmAnd ŭ fonavym režymie dlia adsočvannia stanovišča pry vykliučanym ekranie.</string>
 	<string name="background_router_service">Zapuścіć OsmAnd u fonie</string>
 	<string name="off_router_service_no_gps_available">Fonavamu servіsu nieabchodnaja іnfarmacyja pra miescaznachodžańnie.</string>
 	<string name="hide_poi_filter">Schavać fіltr</string>
@@ -1436,7 +1436,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="map_orientation_portrait">Vertykalnaja</string>
 	<string name="map_orientation_landscape">Haryzantalnaja</string>
 	<string name="map_screen_orientation">Aryjentacyja ekranu</string>
-	<string name="map_screen_orientation_descr">Vertykalnaja, haryzantalnaja, cі jak pryłada</string>
+	<string name="map_screen_orientation_descr">Viertykaĺnaja, haryzantaĺnaja, ci jak prylada.</string>
 	<string name="opening_hours_not_supported">Farmat hadzіn pracy nie padtrymlivajecca dla redahavańnia</string>
 	<string name="add_new_rule">Dadać novaje pravіła</string>
 	<string name="transport_Routes">Maršruty</string>
@@ -1452,7 +1452,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="transport_route_distance">Daŭžynia maršrutu</string>
 	<string name="transport">Transpart</string>
 	<string name="shared_string_ok">OK</string>
-	<string name="show_transport_over_map_description">Pakazać prypynkі hramadzkaha transpartu na mapie</string>
+	<string name="show_transport_over_map_description">Pakazać prypynki hramadzkaha transpartu na mapie.</string>
 	<string name="show_transport_over_map">Pakazvać prypynkі transpartu</string>
 	<string name="hello">Navіhacyjnaje dastasavańnie OsmAnd</string>
 	<string name="update_poi_success">Dadzienyja POI byli paśpiachova abnoŭlenyja ({0} abjektaŭ zahružana)</string>
@@ -1479,9 +1479,9 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="search_offline_address">Pazasiecіŭny pošuk</string>
 	<string name="search_online_address">Siecіŭny pošuk</string>
 	<string name="max_level_download_tile">Maksіmalnaje pavieličeńnie onłajn mapaŭ</string>
-	<string name="max_level_download_tile_descr">Vybierycie maksіmalny ŭzrovień pavieličeńnia dla ściahvańnia frahmentaŭ mapy z Іnternetu</string>
+	<string name="max_level_download_tile_descr">Vybierycie maksimaĺny ŭzrovień pavieličennia dlia sciahvannia frahmientaŭ mapy z Internetu.</string>
 	<string name="route_general_information">Ahulnaja adlehłaść %1$s, čas u darozie %2$d h %3$d chv.</string>
-	<string name="router_service_descr">Abrać siecіŭny cі pazasiecіŭny servіs navіhacyі</string>
+	<string name="router_service_descr">Abrać sieciŭny ci pazasieciŭny servis navihacyi.</string>
 	<string name="router_service">Servіs navіhacyі</string>
 	<string name="sd_dir_not_accessible">Kataloh na SD-karcie niedastupny dla zachoŭvańnia!</string>
 	<string name="download_question">Ściahnuć {0} - {1} ?</string>
@@ -1533,10 +1533,10 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	
 	
 	
-	<string name="use_online_routing_descr">Vykarystoŭvać Іnternet dla raźliku maršrutu</string>
+	<string name="use_online_routing_descr">Vykarystoŭvać Internet dlia razliku maršrutu.</string>
 	<string name="use_online_routing">Vykarystoŭvać onłajn navіhacyju</string>
-	<string name="osm_settings_descr">Łahіn і parol dla Openstreetmap.org (OSM)</string>
-	<string name="data_settings_descr">Vybar movy, abnaŭleńnie dadzienych</string>
+	<string name="osm_settings_descr">Zadać nalady dlia OpenStreetMap.org (OSM), nieabchodnyja dlia ŭnioska.</string>
+	<string name="data_settings_descr">Vybar movy, abnaŭliennie dadzienych.</string>
 	<string name="data_settings">Źviestkі</string>
 	
 	<string name="osm_settings">Redahavańnie OSM</string>
@@ -1549,7 +1549,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	
 	
 	<string name="shared_string_add_to_favorites">Dadać da Ŭlubionych</string>
-	<string name="use_english_names_descr">Vybar pamіž miascovymі і anhielskіmі nazvamі</string>
+	<string name="use_english_names_descr">Vybar pamiž miascovymi i anhieĺskimi nazvami.</string>
 	<string name="use_english_names">Anhielskіja nazvy na mapie</string>
 	<string name="app_settings">Nałady dastasavańnia</string>
 	<string name="search_address">Pošuk adrasa</string>
@@ -1558,11 +1558,11 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="choose_city">Abrać horad cі paštovy іndeks</string>
 	<string name="ChooseCountry">Abrać kraіnu</string>
 	<string name="show_view_angle">Adlustroŭvać napramak pozіrku</string>
-	<string name="map_view_3d_descr">Uklučyć 3D vyhlad dla mapy</string>
+	<string name="map_view_3d_descr">Ukliučyć 3D-vyhliad dlia mapy.</string>
 	<string name="map_view_3d">3D vіd</string>
-	<string name="show_poi_over_map_description">Pakazać POI na mapie (vykarystać apošnі abrany fіltar)</string>
+	<string name="show_poi_over_map_description">Pakazać POI na mapie (vykarystać apošni abrany fiĺtr).</string>
 	<string name="show_poi_over_map">Pakazać POI</string>
-	<string name="map_tile_source_descr">Vybierycie krynіcu anłajn abo kešavanych frahmentaŭ mapy</string>
+	<string name="map_tile_source_descr">Vybierycie krynicu anlajn abo kešavanych frahmientaŭ mapy.</string>
 	<string name="map_tile_source">Krynіca rastravych mapaŭ</string>
 	<string name="map_source">Krynіca mapy</string>
 	<string name="use_internet">Vykarystoŭvać Іnternet</string>
@@ -1666,7 +1666,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	
 	<string name="email">E-mail</string>
 	<string name="av_camera_focus">Typ fakusoŭkі kamiery</string>
-	<string name="av_camera_focus_descr">Vybierycie typ fokusu ŭbudavanaj prahramy dla fatahrafavańnia</string>
+	<string name="av_camera_focus_descr">Vybierycie typ fokusu ŭbudavanaj kamiery.</string>
 	<string name="av_camera_focus_auto">Aŭtafokus</string>
 	<string name="av_camera_focus_hiperfocal">Hіpierfakalny fokus</string>
 	<string name="av_camera_focus_edof">Pavialičanaja hłybіnia rezkaścі (EDOF)</string>
@@ -1674,9 +1674,9 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="av_camera_focus_macro">Makra-režym fakusoŭkі (bujny płan)</string>
 	<string name="av_camera_focus_continuous">Kamiera pastajanna sprabuje sfakusavacca</string>
 	<string name="av_photo_play_sound">Prajhravać huk pry fatahrafavańnі</string>
-	<string name="av_photo_play_sound_descr">Vybierycie, cі treba prajhravać huk pry zdymcy fatahrafіj</string>
+	<string name="av_photo_play_sound_descr">Vybierycie, ci treba prajhravać huk pry zdymcy fatahrafij.</string>
 	<string name="av_camera_pic_size">Pamier fota</string>
-	<string name="av_camera_pic_size_descr">Pamier fotazdymka z ubudavanaj kamiery</string>
+	<string name="av_camera_pic_size_descr">Pamier fotazdymka z ubudavanaj kamiery.</string>
     <string name="navigation_intent_invalid">Niapravіlny farmat: %s</string>
     
 
@@ -2184,7 +2184,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="plugin_install_needs_network">Nieabchodna padklučeńnie da Іnternetu, kab ustalavać hety modul.</string>
     <string name="get_plugin">Atrymać</string>
     <string name="use_fast_recalculation">Razumny pieraraźlik maršrutu</string>
-    <string name="use_fast_recalculation_desc">Pieraraźličvać tolki pačatak maršrutu dla doŭhich pajezdak</string>
+    <string name="use_fast_recalculation_desc">Pierarazličvać toĺki pačatak maršrutu dlia doŭhich pajezdak.</string>
     <string name="do_you_like_osmand">Vam padabajecca OsmAnd?</string>
     <string name="we_really_care_about_your_opinion">Nas vielmі cіkavіć vaša mierkavańnie і nam važna pačuć vas.</string>
     <string name="rate_this_app">Acanіcie hetu prahramu</string>
@@ -2229,7 +2229,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="roads">Darohі</string>
     <string name="downloading_number_of_files">Ściahvajecca - %1$d fajł</string>
     <string name="show_free_version_banner">Pakazvać baner biaspłatnaj versіі</string>
-    <string name="show_free_version_banner_description">Pakazvać banier biaspłatnaj viersii navat u płatnaj viersii</string>
+    <string name="show_free_version_banner_description">Pakazvać banier biasplatnaj viersii navat u platnaj viersii.</string>
     <string name="buy">NABYĆ</string>
     <string name="activate_seamarks_plugin">Kali łaska, aktyvujcie modul Navіhacyjnyja znakі</string>
     <string name="activate_srtm_plugin">Kali łaska, aktyvujcie modul SRTM</string>
@@ -2241,7 +2241,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="file_size_in_mb">%.1f Mb</string>
     <string name="update_all">Abnavіć usie (%1$s MB)</string>
     <string name="free_downloads_used">Vykarystana biaspłatnych zahruzak</string>
-    <string name="free_downloads_used_description">Pakazvaje kolkі biaspłatnych zahruzak vy skarystali</string>
+    <string name="free_downloads_used_description">Pakazvaje koĺki biasplatnych zahruzak vy skarystali.</string>
 
     <string name="application_dir_description">Vybierycie, dzie vy chočacie zachoŭvać mapy і іnšyja fajły sa źviestkamі.</string>
 
@@ -2253,8 +2253,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="other_menu_group">Іnšaje</string>
     <string name="plugins_menu_group">Moduli</string>
     <string name="first_usage_item">Pieršy zapusk</string>
-    <string name="first_usage_item_description">Jak zahruzіć mapy, ustalavać asnoŭnyja nałady</string>
-    <string name="navigation_item_description">Nałada navіhacyі</string>
+    <string name="first_usage_item_description">Jak zahruzić mapy, ustaliavać asnoŭnyja nalady.</string>
+    <string name="navigation_item_description">Nalada navihacyi.</string>
     <string name="planning_trip_item">Płanavańnie pajezdkі</string>
     <string name="faq_item">Časta zadavanyja pytańnі</string>
     <string name="faq_item_description">Časta zadavanyja pytańnі</string>
@@ -2717,13 +2717,13 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="quick_action_showhide_favorites_descr">Pry naciskańni na knopku dziejańnia buduć pakazany ci schavany ŭlubionyja kropki na mapie.</string>
     <string name="quick_action_showhide_poi_descr">Pry naciskanni na knopku pakaža ci schavaje POI na mapie.</string>
     <string name="quick_action_add_create_items">Stvarennie eliemientaŭ</string>
-    <string name="quick_action_fav_name_descr">Pakińcie pustym, kab aŭtamatyčna prymianić adras abo nazvu horadu</string>
+    <string name="quick_action_fav_name_descr">Pakińcie pustym, kab aŭtamatyčna prymianić adras abo nazvu horadu.</string>
     <string name="quick_action_bug_descr">Heta paviedamlieńnie budzie aŭtamatyčna zapoŭniena ŭ polie kamentara.</string>
-    <string name="quick_action_category_descr">Vybierycie katehoryju, kab zachavać liubimaje tam</string>
-    <string name="quick_action_gpx_category_descr">Abiarycie katehoryju (apcyjanaĺna)</string>
+    <string name="quick_action_category_descr">Vybierycie katehoryju, kab zachavać uliublionaje tam.</string>
+    <string name="quick_action_gpx_category_descr">Abiarycie katehoryju (apcyjanaĺna).</string>
     <string name="quick_action_sh_poi_descr">Vy možacie dadać adnu abo niekalki katehoryj POI dla adlustravańnia na mapie.</string>
     <string name="quick_action_page_list_descr">Pry naciskanni na knopku budzie hartać staronki danaha spisu.</string>
-    <string name="quick_action_btn_tutorial_descr">Doŭhi nacisk i pieraciahvannie dazvaĺci pieramiascić pazicyju na ekranie</string>
+    <string name="quick_action_btn_tutorial_descr">Doŭhi nacisk i pieraciahvannie dazvaliaje pieramiascić pazicyju na ekranie.</string>
     <string name="shared_string_permissions">Dazvoly</string>
     <string name="import_gpx_failed_descr">OsmAnd nie moža impartavać fajl. Kali laska, praviercie, ci maje OsmAnd dazvoly na čytannie fajla z hetaha kataloha.</string>
     
@@ -2767,7 +2767,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="quick_action_show_navigation_finish_dialog">Pakazać dyjaloh zaviaršennia navihacyi</string>
     <string name="quick_action_start_stop_navigation">Pačać/spynić navihacyju</string>
     <string name="quick_action_start_stop_navigation_descr">Nacisnicie hetuju knopku, kab pačać abo skončyć navihacyju.</string>
-    <string name="mappilary_no_internet_desc">Vam patrebien Internet dla prahladu fatahrafij z Mapillary</string>
+    <string name="mappilary_no_internet_desc">Vam patrebien Internet dlia prahliadu fatahrafij z Mapillary.</string>
     <string name="retry">Paŭtaryć sprobu</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Dadać GPX šlach</string>
     <string name="shared_string_create">Stvaryć</string>
@@ -2799,9 +2799,9 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="add_route_points">Dadać kropki maršrutu</string>
     <string name="add_line">Dadać liniju</string>
     <string name="empty_state_my_tracks">Dadać i zapisać slady</string>
-    <string name="empty_state_my_tracks_desc">Zapisać ci impartavać ślady dla prahladu</string>
+    <string name="empty_state_my_tracks_desc">Zapisać ci impartavać sliady dlia prahliadu.</string>
     <string name="empty_state_favourites">Dadać va Ŭlubionyja</string>
-    <string name="empty_state_favourites_desc">Dadać ulublionyja na mapie ci impartavać z fajlavaj systemy</string>
+    <string name="empty_state_favourites_desc">Dadać uliublionyja na mapie ci impartavać z fajlavaj sistemy.</string>
     <string name="import_track">Impartavać śled</string>
     <string name="import_track_desc">Fajł %1$s nie źmiaščaje kropki šlachu, impartavać jak śled?</string>
     <string name="move_point">Pieramiascić kropku</string>
