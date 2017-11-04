@@ -847,16 +847,17 @@ public class MapActivityActions implements DialogProvider {
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
 
-		int measureDistanceItemIndex = -1;
+		// Place divider between functionality and configuration related menu items
+		int dividerItemIndex = -1;
 		for (int i = 0; i < optionsMenuHelper.length(); i++) {
-			if (optionsMenuHelper.getItem(i).getTitleId() == R.string.measurement_tool) {
-				measureDistanceItemIndex = i;
+			if (optionsMenuHelper.getItem(i).getTitleId() == R.string.configure_map) {
+				dividerItemIndex = i;
 				break;
 			}
 		}
 
 		ItemBuilder divider = new ItemBuilder().setLayout(R.layout.drawer_divider);
-		divider.setPosition(measureDistanceItemIndex >= 0 ? measureDistanceItemIndex : 8);
+		divider.setPosition(dividerItemIndex >= 0 ? dividerItemIndex : 8);
 		optionsMenuHelper.addItem(divider.createItem());
 
 		getMyApplication().getAppCustomization().prepareOptionsMenu(mapActivity, optionsMenuHelper);
