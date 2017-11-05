@@ -668,7 +668,7 @@ Lon: %2$s</string>
     <string name="voice_provider_descr">Elekti gvidadan voĉon por navigado.</string>
     <string name="voice_provider">Gvidada voĉo</string>
 
-    <string name="enable_proxy_title">Aktivigi HTTP-retperanton.</string>
+    <string name="enable_proxy_title">Aktivigi HTTP-retperanton</string>
     <string name="enable_proxy_descr">Agordi HTTP-retperanton por ĉiuj retpetoj.</string>
     <string name="proxy_host_title">Komputil-nomo de retperanto</string>
     <string name="proxy_host_descr">Agordi komputil-nomon de via retperanta servilo (ekz. 127.0.0.1).</string>
