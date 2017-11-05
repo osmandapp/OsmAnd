@@ -10,7 +10,7 @@
     <string name="map_widget_reset">Reinicia els valors per defecte</string>
     <string name="map_widget_parking">Aparcament</string>
     <string name="map_widget_speed">Velocitat</string>
-    <string name="map_widget_distance">Objectiu</string>
+    <string name="map_widget_distance">Destí</string>
     <string name="map_widget_altitude">Altitud</string>
     <string name="map_widget_time">Temps per arribar-hi</string>
     <string name="show_cameras">Radars</string>
@@ -41,7 +41,7 @@
     <string name="map_widget_lock_screen">Bloqueja la pantalla</string>
     <string name="map_widget_next_turn">Proper gir</string>
     <string name="map_widget_next_turn_small">Proper gir (petit)</string>
-    <string name="map_widget_next_next_turn">Segon proper gir</string>
+    <string name="map_widget_next_next_turn">Segon gir proper</string>
     <string name="bg_service_screen_lock">Bloqueja la pantalla</string>
     <string name="bg_service_screen_unlock">Desbloqueja la pantalla</string>
     <string name="bg_service_screen_lock_toast">La pantalla està bloquejada</string>
