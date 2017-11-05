@@ -2925,4 +2925,5 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="tap_on_map_to_hide_interface">全螢幕模式</string>
     <string name="show_on_top_bar">在頂列上顯示</string>
     <string name="mark_passed">已經過標記</string>
+    <string name="rename_marker">重新命名標記</string>
     </resources>
