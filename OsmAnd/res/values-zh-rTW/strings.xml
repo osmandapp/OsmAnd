@@ -2801,7 +2801,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="quick_action_start_stop_navigation_descr">輕點此按鈕以開始或停止導航。</string>
     <string name="live_monitoring_max_interval_to_send">用於線上追蹤的緩衝時間</string>
     <string name="live_monitoring_max_interval_to_send_desrc">指定一段緩衝時間以保持位置，而無需連接發送</string>
-    <string name="mappilary_no_internet_desc">您需要上網才能從 Mapillary 檢視照片。</string>
+    <string name="mappilary_no_internet_desc">您需要連上網路才能從 Mapillary 檢視照片。</string>
     <string name="retry">重試</string>
 <string name="measurement_tool">測量距離</string>
     <string name="measurement_tool_action_bar">瀏覽地圖並增加標點</string>
