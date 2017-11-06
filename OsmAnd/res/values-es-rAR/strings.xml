@@ -2819,4 +2819,5 @@ Proporciona un código completo</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     <string name="show_on_top_bar">Mostrar en la barra superior</string>
     <string name="mark_passed">Marcador ya utilizado</string>
+    <string name="rename_marker">Renombrar marcador</string>
     </resources>
