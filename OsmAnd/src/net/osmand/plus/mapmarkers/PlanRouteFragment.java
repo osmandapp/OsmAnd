@@ -35,7 +35,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
@@ -46,7 +45,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.ColoredStatusBarFragment;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.PlanRouteOptionsBottomSheetDialogFragment.PlanRouteOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
@@ -66,7 +65,7 @@ import java.util.List;
 import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
 
-public class PlanRouteFragment extends ColoredStatusBarFragment implements OsmAndLocationListener {
+public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocationListener {
 
 	public static final String TAG = "PlanRouteFragment";
 	private static final int MIN_DISTANCE_FOR_RECALCULATE = 50; // in meters
@@ -75,7 +74,6 @@ public class PlanRouteFragment extends ColoredStatusBarFragment implements OsmAn
 	private MarkersPlanRouteContext planRouteContext;
 
 	private MapMarkersListAdapter adapter;
-	private IconsCache iconsCache;
 	private PlanRouteToolbarController toolbarController;
 
 	private int previousMapPosition;
@@ -159,7 +157,6 @@ public class PlanRouteFragment extends ColoredStatusBarFragment implements OsmAn
 
 		toolbarHeight = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 
-		iconsCache = mapActivity.getMyApplication().getIconsCache();
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		final int backgroundColor = ContextCompat.getColor(mapActivity,
@@ -436,12 +433,13 @@ public class PlanRouteFragment extends ColoredStatusBarFragment implements OsmAn
 		return null;
 	}
 
-	private Drawable getContentIcon(@DrawableRes int id) {
-		return iconsCache.getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color);
+	@Override
+	protected Drawable getContentIcon(@DrawableRes int id) {
+		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color);
 	}
 
 	private Drawable getActiveIcon(@DrawableRes int id) {
-		return iconsCache.getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
+		return getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
 	}
 
 	private void moveMapToPosition(double lat, double lon) {

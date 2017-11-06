@@ -17,12 +17,12 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.ColoredStatusBarFragment;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.util.Algorithms;
 
-public class ContextMenuCardDialogFragment extends ColoredStatusBarFragment {
+public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 	public static final String TAG = "ContextMenuCardDialogFragment";
 
 	private ContextMenuCardDialog dialog;

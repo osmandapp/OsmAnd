@@ -33,12 +33,11 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.ColoredStatusBarFragment;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -55,7 +54,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
-public class MapContextMenuFragment extends ColoredStatusBarFragment implements DownloadEvents {
+public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents {
 	public static final String TAG = "MapContextMenuFragment";
 
 	public static final float FAB_PADDING_TOP_DP = 4f;
@@ -149,8 +148,6 @@ public class MapContextMenuFragment extends ColoredStatusBarFragment implements 
 			mapZoom = map.getZoom();
 		}
 
-		IconsCache iconsCache = getMyApplication().getIconsCache();
-
 		// Left title button
 		final Button leftTitleButton = (Button) view.findViewById(R.id.title_button);
 		leftTitleButton.setOnClickListener(new View.OnClickListener() {
@@ -225,7 +222,7 @@ public class MapContextMenuFragment extends ColoredStatusBarFragment implements 
 
 		// Progress bar
 		final ImageView progressButton = (ImageView) view.findViewById(R.id.progressButton);
-		progressButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
+		progressButton.setImageDrawable(getIcon(R.drawable.ic_action_remove_dark,
 				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 		progressButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -386,7 +383,7 @@ public class MapContextMenuFragment extends ColoredStatusBarFragment implements 
 		// FAB
 		fabView = (ImageView) view.findViewById(R.id.context_menu_fab_view);
 		if (menu.fabVisible()) {
-			fabView.setImageDrawable(iconsCache.getIcon(menu.getFabIconId(), 0));
+			fabView.setImageDrawable(getIcon(menu.getFabIconId(), 0));
 			if (menu.isLandscapeLayout()) {
 				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) fabView.getLayoutParams();
 				params.setMargins(0, 0, dpToPx(28f), 0);
@@ -446,7 +443,7 @@ public class MapContextMenuFragment extends ColoredStatusBarFragment implements 
 
 		// Action buttons
 		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
-		buttonFavorite.setImageDrawable(iconsCache.getIcon(menu.getFavActionIconId(),
+		buttonFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(),
 				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonFavorite, nightMode);
 		buttonFavorite.setContentDescription(getString(menu.getFavActionStringId()));
@@ -459,11 +456,11 @@ public class MapContextMenuFragment extends ColoredStatusBarFragment implements 
 
 		final ImageButton buttonWaypoint = (ImageButton) view.findViewById(R.id.context_menu_route_button);
 		if (getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
-			buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_flag_dark,
+			buttonWaypoint.setImageDrawable(getIcon(R.drawable.map_action_flag_dark,
 					!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 			buttonWaypoint.setContentDescription(getString(R.string.shared_string_add_to_map_markers));
 		} else {
-			buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_waypoint,
+			buttonWaypoint.setImageDrawable(getIcon(R.drawable.map_action_waypoint,
 					!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 			buttonWaypoint.setContentDescription(getString(R.string.context_menu_item_destination_point));
 		}
@@ -476,7 +473,7 @@ public class MapContextMenuFragment extends ColoredStatusBarFragment implements 
 		});
 
 		final ImageButton buttonShare = (ImageButton) view.findViewById(R.id.context_menu_share_button);
-		buttonShare.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_gshare_dark,
+		buttonShare.setImageDrawable(getIcon(R.drawable.map_action_gshare_dark,
 				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonShare, nightMode);
 		buttonShare.setOnClickListener(new View.OnClickListener() {
@@ -487,7 +484,7 @@ public class MapContextMenuFragment extends ColoredStatusBarFragment implements 
 		});
 
 		final ImageButton buttonMore = (ImageButton) view.findViewById(R.id.context_menu_more_button);
-		buttonMore.setImageDrawable(iconsCache.getIcon(R.drawable.map_overflow_menu_white,
+		buttonMore.setImageDrawable(getIcon(R.drawable.map_overflow_menu_white,
 				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonMore, nightMode);
 		buttonMore.setOnClickListener(new View.OnClickListener() {
@@ -858,8 +855,6 @@ public class MapContextMenuFragment extends ColoredStatusBarFragment implements 
 	private void buildHeader() {
 		OsmandApplication app = getMyApplication();
 		if (app != null && view != null) {
-			IconsCache iconsCache = app.getIconsCache();
-
 			final View iconLayout = view.findViewById(R.id.context_menu_icon_layout);
 			final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
 			Drawable icon = menu.getLeftIcon();
@@ -868,7 +863,7 @@ public class MapContextMenuFragment extends ColoredStatusBarFragment implements 
 				iconView.setImageDrawable(icon);
 				iconLayout.setVisibility(View.VISIBLE);
 			} else if (iconId != 0) {
-				iconView.setImageDrawable(iconsCache.getIcon(iconId,
+				iconView.setImageDrawable(getIcon(iconId,
 						!nightMode ? R.color.osmand_orange : R.color.osmand_orange_dark));
 				iconLayout.setVisibility(View.VISIBLE);
 			} else {
@@ -955,9 +950,8 @@ public class MapContextMenuFragment extends ColoredStatusBarFragment implements 
 	public void rebuildMenu(boolean centered) {
 		OsmandApplication app = getMyApplication();
 		if (app != null && view != null) {
-			IconsCache iconsCache = app.getIconsCache();
 			final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
-			buttonFavorite.setImageDrawable(iconsCache.getIcon(menu.getFavActionIconId(),
+			buttonFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(),
 					!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 			buttonFavorite.setContentDescription(getString(menu.getFavActionStringId()));
 

@@ -23,15 +23,14 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.ColoredStatusBarFragment;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
 
-public abstract class PointEditorFragment extends ColoredStatusBarFragment {
+public abstract class PointEditorFragment extends BaseOsmAndFragment {
 
 	private View view;
 	private EditText nameEdit;
@@ -182,9 +181,7 @@ public abstract class PointEditorFragment extends ColoredStatusBarFragment {
 	}
 
 	public Drawable getRowIcon(int iconId) {
-		IconsCache iconsCache = getMyApplication().getIconsCache();
-		return iconsCache.getIcon(iconId,
-				getEditor().isLight() ? R.color.icon_color : R.color.icon_color_light);
+		return getIcon(iconId, getEditor().isLight() ? R.color.icon_color : R.color.icon_color_light);
 	}
 
 	@Override
@@ -331,7 +328,6 @@ public abstract class PointEditorFragment extends ColoredStatusBarFragment {
 	}
 
 	protected Drawable getPaintedIcon(int iconId, int color) {
-		IconsCache iconsCache = getMapActivity().getMyApplication().getIconsCache();
-		return iconsCache.getPaintedIcon(iconId, color);
+		return getPaintedContentIcon(iconId, color);
 	}
 }

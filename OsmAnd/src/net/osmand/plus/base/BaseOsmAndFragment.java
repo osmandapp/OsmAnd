@@ -1,11 +1,13 @@
 package net.osmand.plus.base;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -16,6 +18,36 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 
 public class BaseOsmAndFragment extends Fragment {
 	private IconsCache iconsCache;
+
+	private int statusBarColor = -1;
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (Build.VERSION.SDK_INT >= 21) {
+			statusBarColor = getActivity().getWindow().getStatusBarColor();
+		}
+		setupStatusBarColor();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (Build.VERSION.SDK_INT >= 21 && statusBarColor != -1) {
+			getActivity().getWindow().setStatusBarColor(statusBarColor);
+		}
+	}
+
+	protected void setupStatusBarColor() {
+		if (Build.VERSION.SDK_INT >= 21 && getStatusBarColor() != -1) {
+			getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(getActivity(), getStatusBarColor()));
+		}
+	}
+
+	@ColorRes
+	protected int getStatusBarColor() {
+		return -1;
+	}
 
 	protected OsmandApplication getMyApplication() {
 		return (OsmandApplication) getActivity().getApplication();
