@@ -42,7 +42,6 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 							 Bundle savedInstanceState) {
 
 		view = inflater.inflate(R.layout.point_editor_fragment, container, false);
-		AndroidUtils.addStatusBarPadding21v(getContext(), view);
 
 		getEditor().updateLandscapePortrait();
 		getEditor().updateNightMode();
@@ -218,6 +217,11 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	@Override
 	public int getStatusBarColorId() {
 		return R.color.status_bar_light;
+	}
+
+`	@Override
+	protected boolean isFullScreenAllowed() {
+		return false;
 	}
 
 	private void hideKeyboard() {

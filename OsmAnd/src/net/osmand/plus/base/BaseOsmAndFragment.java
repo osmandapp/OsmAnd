@@ -26,13 +26,21 @@ public class BaseOsmAndFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (Build.VERSION.SDK_INT >= 21 && getStatusBarColorId() != -1) {
-			statusBarColor = getActivity().getWindow().getStatusBarColor();
+		if (Build.VERSION.SDK_INT >= 21) {
 			Activity activity = getActivity();
-			if (activity instanceof MapActivity) {
-				((MapActivity) activity).updateStatusBarColor();
-			} else if (getStatusBarColorId() != -1) {
-				getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(getActivity(), getStatusBarColorId()));
+			int colorId = getStatusBarColorId();
+			if (colorId != -1) {
+				statusBarColor = activity.getWindow().getStatusBarColor();
+				if (activity instanceof MapActivity) {
+					((MapActivity) activity).updateStatusBarColor();
+				} else {
+					activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
+				}
+			}
+			if (!isFullScreenAllowed()) {
+				if (activity instanceof MapActivity) {
+					((MapActivity) activity).exitFromFullScreen();
+				}
 			}
 		}
 	}
@@ -40,14 +48,26 @@ public class BaseOsmAndFragment extends Fragment {
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (Build.VERSION.SDK_INT >= 21 && statusBarColor != -1) {
-			getActivity().getWindow().setStatusBarColor(statusBarColor);
+		if (Build.VERSION.SDK_INT >= 21) {
+			Activity activity = getActivity();
+			if (statusBarColor != -1) {
+				activity.getWindow().setStatusBarColor(statusBarColor);
+			}
+			if (!isFullScreenAllowed()) {
+				if (activity instanceof MapActivity) {
+					((MapActivity) activity).enterToFullScreen();
+				}
+			}
 		}
 	}
 
 	@ColorRes
 	public int getStatusBarColorId() {
 		return -1;
+	}
+
+	protected boolean isFullScreenAllowed() {
+		return true;
 	}
 
 	protected OsmandApplication getMyApplication() {

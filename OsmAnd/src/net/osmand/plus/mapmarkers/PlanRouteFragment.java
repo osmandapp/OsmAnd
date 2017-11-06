@@ -167,10 +167,6 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutRes, null);
 
-		if (fullScreen || !portrait) {
-			AndroidUtils.addStatusBarPadding21v(getActivity(), view);
-		}
-
 		mainView = fullScreen ? view : view.findViewById(R.id.main_view);
 
 		enterPlanRouteMode();
@@ -386,10 +382,15 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 
 	@Override
 	public int getStatusBarColorId() {
-		if (fullScreen) {
+		if (fullScreen || !portrait) {
 			return nightMode ? R.color.status_bar_dark : R.color.status_bar_route_light;
 		}
 		return R.color.status_bar_transparent_gradient;
+	}
+
+	@Override
+	protected boolean isFullScreenAllowed() {
+		return !(fullScreen || !portrait);
 	}
 
 	@Override

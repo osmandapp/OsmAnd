@@ -228,7 +228,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		setContentView(R.layout.main);
 
 		if (Build.VERSION.SDK_INT >= 21) {
-			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+			enterToFullScreen();
 			// Navigation Drawer:
 			AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
 		}
@@ -325,6 +325,18 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getAidlApi().onCreateMapActivity(this);
 
 		mIsDestroyed = false;
+	}
+
+	public void exitFromFullScreen() {
+		if (Build.VERSION.SDK_INT >= 21) {
+			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+		}
+	}
+
+	public void enterToFullScreen() {
+		if (Build.VERSION.SDK_INT >= 21) {
+			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+		}
 	}
 
 	@Override
