@@ -680,16 +680,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		mapMarkers.add(mapMarker);
 		adapter.notifyDataSetChanged();
 		clearInputs();
-		((OsmandTextFieldBoxes) mainView.findViewById(R.id.latitude_box)).select();
 	}
 
 	private void clearInputs() {
-		for (EditText inputEditText : inputEditTexts) {
-			inputEditText.setText("");
-		}
 		for (OsmandTextFieldBoxes osmandTextFieldBox : textFieldBoxes) {
+			osmandTextFieldBox.getEditText().setText("");
 			osmandTextFieldBox.deactivate();
 		}
+		((OsmandTextFieldBoxes) mainView.findViewById(R.id.latitude_box)).select();
 	}
 
 	private MapActivity getMapActivity() {

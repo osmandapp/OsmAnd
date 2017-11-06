@@ -2,11 +2,11 @@ package net.osmand.plus.widgets;
 
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
-import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 public class OsmandTextFieldBoxes extends TextFieldBoxes {
@@ -79,5 +79,9 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 		}
 
 		this.activated = false;
+	}
+
+	public ExtendedEditText getEditText() {
+		return editText;
 	}
 }
