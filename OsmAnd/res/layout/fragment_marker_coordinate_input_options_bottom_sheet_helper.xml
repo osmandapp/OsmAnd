@@ -170,7 +170,7 @@
 				tools:text="@string/coordinate_input_accuracy_description"/>
 
 			<LinearLayout
-				android:id="@+id/four_digits_row"
+				android:id="@+id/accuracy_row"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/bottom_sheet_list_item_height"
 				android:background="?attr/selectableItemBackground"
@@ -189,116 +189,36 @@
 					android:orientation="vertical">
 
 					<TextView
-						android:id="@+id/four_digits_title"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:maxLines="1"
+						android:ellipsize="end"
 						android:textAppearance="@style/TextAppearance.ListItemTitle"
-						tools:text="4 digits"/>
+						android:text="@string/digits_quantity"/>
 
 					<TextView
-						android:id="@+id/four_digits_description"
+						android:id="@+id/selected_accuracy_hint"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						tools:text="00:00.0000"/>
+						tools:text="00:00.0"/>
 
 				</LinearLayout>
-
-				<RadioButton
-					android:id="@+id/four_digits_radio_button"
+				
+				<TextView
+					android:layout_marginLeft="8dp"
+					android:layout_marginRight="8dp"
+					android:textAppearance="@style/TextAppearance.ListItemTitle"
+					android:textColor="@color/map_widget_blue"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:background="@null"
-					android:clickable="false"
-					android:focusable="false"/>
-			</LinearLayout>
+					android:id="@+id/selected_accuracy"
+					tools:text="1"/>
 
-			<LinearLayout
-				android:id="@+id/three_digits_row"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/bottom_sheet_list_item_height"
-				android:background="?attr/selectableItemBackground"
-				android:gravity="center_vertical"
-				android:minHeight="@dimen/bottom_sheet_list_item_height"
-				android:paddingEnd="@dimen/content_padding"
-				android:paddingLeft="@dimen/bottom_sheet_divider_margin_start"
-				android:paddingRight="@dimen/content_padding"
-				android:paddingStart="@dimen/bottom_sheet_divider_margin_start">
-
-				<LinearLayout
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:gravity="center_vertical"
-					android:orientation="vertical">
-
-					<TextView
-						android:id="@+id/three_digits_title"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:maxLines="1"
-						android:textAppearance="@style/TextAppearance.ListItemTitle"
-						tools:text="3 digits"/>
-
-					<TextView
-						android:id="@+id/three_digits_description"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						tools:text="00:00.000"/>
-
-				</LinearLayout>
-
-				<RadioButton
-					android:id="@+id/three_digits_radio_button"
+				<ImageView
+					android:id="@+id/accuracy_arrow"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:background="@null"
-					android:clickable="false"
-					android:focusable="false"/>
-			</LinearLayout>
-
-			<LinearLayout
-				android:id="@+id/two_digits_row"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/bottom_sheet_list_item_height"
-				android:background="?attr/selectableItemBackground"
-				android:gravity="center_vertical"
-				android:minHeight="@dimen/bottom_sheet_list_item_height"
-				android:paddingEnd="@dimen/content_padding"
-				android:paddingLeft="@dimen/bottom_sheet_divider_margin_start"
-				android:paddingRight="@dimen/content_padding"
-				android:paddingStart="@dimen/bottom_sheet_divider_margin_start">
-
-				<LinearLayout
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:gravity="center_vertical"
-					android:orientation="vertical">
-
-					<TextView
-						android:id="@+id/two_digits_title"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:maxLines="1"
-						android:textAppearance="@style/TextAppearance.ListItemTitle"
-						tools:text="2 digits"/>
-
-					<TextView
-						android:id="@+id/two_digits_description"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						tools:text="00:00.00"/>
-
-				</LinearLayout>
-
-				<RadioButton
-					android:id="@+id/two_digits_radio_button"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:background="@null"
-					android:clickable="false"
-					android:focusable="false"/>
+					android:src="@drawable/ic_action_arrow_drop_down"/>
 			</LinearLayout>
 
 		</LinearLayout>

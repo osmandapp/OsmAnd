@@ -3,15 +3,19 @@ package net.osmand.plus.mapmarkers;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.ListPopupWindow;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -112,53 +116,32 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 			}
 		});
 
-		if (accuracy == 4) {
-			((RadioButton) mainView.findViewById(R.id.four_digits_radio_button)).setChecked(true);
-		}
-		((TextView) mainView.findViewById(R.id.four_digits_title)).setText(getString(R.string.coordinate_input_accuracy, 4));
-		((TextView) mainView.findViewById(R.id.four_digits_description)).setText("00:00." + "5555");
+		((ImageView) mainView.findViewById(R.id.accuracy_arrow)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_drop_down));
+		populateSelectedAccuracy();
 
-		if (accuracy == 3) {
-			((RadioButton) mainView.findViewById(R.id.three_digits_radio_button)).setChecked(true);
-		}
-		((TextView) mainView.findViewById(R.id.three_digits_title)).setText(getString(R.string.coordinate_input_accuracy, 3));
-		((TextView) mainView.findViewById(R.id.three_digits_description)).setText("00:00." + "555");
-
-		if (accuracy == 2) {
-			((RadioButton) mainView.findViewById(R.id.two_digits_radio_button)).setChecked(true);
-		}
-		((TextView) mainView.findViewById(R.id.two_digits_title)).setText(getString(R.string.coordinate_input_accuracy, 2));
-		((TextView) mainView.findViewById(R.id.two_digits_description)).setText("00:00." + "55");
-
-		highlightSelectedItem(true);
-
-		View.OnClickListener accuracyChangedListener = new View.OnClickListener() {
+		mainView.findViewById(R.id.accuracy_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				highlightSelectedItem(false);
-				switch (view.getId()) {
-					case R.id.four_digits_row:
-						accuracy = 4;
-						break;
-					case R.id.three_digits_row:
-						accuracy = 3;
-						break;
-					case R.id.two_digits_row:
-						accuracy = 2;
-						break;
-					default:
-						throw new IllegalArgumentException("Unsupported accuracy");
-				}
-				highlightSelectedItem(true);
-				if (listener != null) {
-					listener.onAccuracyChanged(accuracy);
-				}
+				final ListPopupWindow listPopupWindow = new ListPopupWindow(getContext());
+				listPopupWindow.setAnchorView(view);
+				listPopupWindow.setContentWidth(AndroidUtils.dpToPx(getMyApplication(), 100));
+				listPopupWindow.setModal(true);
+				listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
+				listPopupWindow.setAdapter(new ArrayAdapter<>(getContext(), R.layout.popup_list_text_item, new Integer[]{0, 1, 2, 3, 4, 5, 6}));
+				listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+						accuracy = i;
+						populateSelectedAccuracy();
+						if (listener != null) {
+							listener.onAccuracyChanged(accuracy);
+						}
+						listPopupWindow.dismiss();
+					}
+				});
+				listPopupWindow.show();
 			}
-		};
-
-		mainView.findViewById(R.id.four_digits_row).setOnClickListener(accuracyChangedListener);
-		mainView.findViewById(R.id.three_digits_row).setOnClickListener(accuracyChangedListener);
-		mainView.findViewById(R.id.two_digits_row).setOnClickListener(accuracyChangedListener);
+		});
 
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -172,12 +155,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		return mainView;
 	}
 
-	private void populateChangeHandRow() {
-		((ImageView) mainView.findViewById(R.id.hand_icon)).setImageDrawable(getContentIcon(rightHand ? R.drawable.ic_action_show_keypad_right : R.drawable.ic_action_show_keypad_left));
-		((TextView) mainView.findViewById(R.id.hand_text_view)).setText(getString(rightHand ? R.string.shared_string_right : R.string.shared_string_left));
-		((TextView) mainView.findViewById(R.id.hand_text_view)).setTextColor(ContextCompat.getColor(getContext(), nightMode ? R.color.color_dialog_buttons_dark : R.color.map_widget_blue_pressed));
-	}
-
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putBoolean(USE_OSMAND_KEYBOARD, useOsmandKeyboard);
@@ -187,18 +164,15 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		super.onSaveInstanceState(outState);
 	}
 
-	private void highlightSelectedItem(boolean check) {
-		switch (accuracy) {
-			case 4:
-				((RadioButton) mainView.findViewById(R.id.four_digits_radio_button)).setChecked(check);
-				break;
-			case 3:
-				((RadioButton) mainView.findViewById(R.id.three_digits_radio_button)).setChecked(check);
-				break;
-			case 2:
-				((RadioButton) mainView.findViewById(R.id.two_digits_radio_button)).setChecked(check);
-				break;
-		}
+	private void populateChangeHandRow() {
+		((ImageView) mainView.findViewById(R.id.hand_icon)).setImageDrawable(getContentIcon(rightHand ? R.drawable.ic_action_show_keypad_right : R.drawable.ic_action_show_keypad_left));
+		((TextView) mainView.findViewById(R.id.hand_text_view)).setText(getString(rightHand ? R.string.shared_string_right : R.string.shared_string_left));
+		((TextView) mainView.findViewById(R.id.hand_text_view)).setTextColor(ContextCompat.getColor(getContext(), nightMode ? R.color.color_dialog_buttons_dark : R.color.map_widget_blue_pressed));
+	}
+
+	private void populateSelectedAccuracy() {
+		((TextView) mainView.findViewById(R.id.selected_accuracy)).setText(String.valueOf(accuracy));
+		((TextView) mainView.findViewById(R.id.selected_accuracy_hint)).setText("00:00." + new String(new char[accuracy]).replace("\0", "0"));
 	}
 
 	interface CoordinateInputFormatChangeListener {
