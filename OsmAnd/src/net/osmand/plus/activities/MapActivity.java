@@ -815,25 +815,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void updateStatusBarColor() {
 		if (Build.VERSION.SDK_INT >= 21) {
+			int colorId = -1;
 			Fragment fragment = getVisibleFragment(getSupportFragmentManager());
 			if (fragment != null && fragment.isResumed() && fragment instanceof BaseOsmAndFragment) {
-				BaseOsmAndFragment f = (BaseOsmAndFragment) fragment;
-				if (f.getStatusBarColorId() != -1) {
-					getWindow().setStatusBarColor(ContextCompat.getColor(this, f.getStatusBarColorId()));
-					return;
-				}
+				colorId = ((BaseOsmAndFragment) fragment).getStatusBarColorId();
+			} else if (dashboardOnMap.isVisible()) {
+				colorId = dashboardOnMap.getStatusBarColor();
+			} else if (mapLayers.getMapQuickActionLayer().isWidgetVisible()) {
+				colorId = R.color.status_bar_transparent_gradient;
 			}
-			if (dashboardOnMap.isVisible()) {
-				getWindow().setStatusBarColor(ContextCompat.getColor(this, dashboardOnMap.getStatusBarColor()));
-				return;
-			}
-			if (mapLayers.getMapQuickActionLayer().isWidgetVisible()) {
-				getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.status_bar_transparent_gradient));
+			if (colorId != -1) {
+				getWindow().setStatusBarColor(ContextCompat.getColor(this, colorId));
 				return;
 			}
 			boolean night = app.getDaynightHelper().isNightModeForMapControls();
 			boolean markerTopBar = mapLayers.getMapMarkersLayer().getWidgetsFactory().isTopBarVisible();
-			int colorId;
 			if (markerTopBar) {
 				colorId = R.color.status_bar_dark;
 			} else {
