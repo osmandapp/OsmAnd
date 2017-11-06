@@ -189,20 +189,19 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		final OsmandTextFieldBoxes longitudeBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.longitude_box);
 		textFieldBoxes.add(longitudeBox);
 		final OsmandTextFieldBoxes nameBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.name_box);
-		if (orientationPortrait) {
-			nameBox.setEndIcon(iconsCache.getIcon(R.drawable.ic_action_keyboard, R.color.coordinate_input_keyboard_icon_color));
-			nameBox.getEndIconImageButton().setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					View focusedView = getDialog().getCurrentFocus();
-					if (focusedView != null) {
-						useOsmandKeyboard = false;
-						changeKeyboard();
-						AndroidUtils.showSoftKeyboard(focusedView);
-					}
+		nameBox.setEndIcon(iconsCache.getIcon(R.drawable.ic_action_keyboard, R.color.coordinate_input_keyboard_icon_color));
+		nameBox.getEndIconImageButton().setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				View focusedView = getDialog().getCurrentFocus();
+				if (focusedView != null) {
+					useOsmandKeyboard = false;
+					changeKeyboard();
+					AndroidUtils.showSoftKeyboard(focusedView);
 				}
-			});
-		}
+			}
+		});
+
 		textFieldBoxes.add(nameBox);
 
 		registerTextFieldBoxes();
@@ -287,27 +286,29 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			keyboardGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-					View focusedView = getDialog().getCurrentFocus();
-					if (focusedView != null && focusedView instanceof EditText) {
-						EditText focusedEditText = (EditText) focusedView;
-						switch (i) {
-							case CLEAR_BUTTON_POSITION:
-								clearInputs();
-								break;
-							case BACKSPACE_BUTTON_POSITION:
-								String str = focusedEditText.getText().toString();
-								if (str.length() > 0) {
-									str = str.substring(0, str.length() - 1);
-									focusedEditText.setText(str);
-									focusedEditText.setSelection(str.length());
-								}
-								break;
-							case SWITCH_TO_NEXT_INPUT_BUTTON_POSITION:
-								switchToNextInput(focusedEditText.getId());
-								break;
-							default:
-								focusedEditText.setText(focusedEditText.getText().toString() + keyboardAdapter.getItem(i));
-								focusedEditText.setSelection(focusedEditText.getText().length());
+					if (useOsmandKeyboard) {
+						View focusedView = getDialog().getCurrentFocus();
+						if (focusedView != null && focusedView instanceof EditText) {
+							EditText focusedEditText = (EditText) focusedView;
+							switch (i) {
+								case CLEAR_BUTTON_POSITION:
+									clearInputs();
+									break;
+								case BACKSPACE_BUTTON_POSITION:
+									String str = focusedEditText.getText().toString();
+									if (str.length() > 0) {
+										str = str.substring(0, str.length() - 1);
+										focusedEditText.setText(str);
+										focusedEditText.setSelection(str.length());
+									}
+									break;
+								case SWITCH_TO_NEXT_INPUT_BUTTON_POSITION:
+									switchToNextInput(focusedEditText.getId());
+									break;
+								default:
+									focusedEditText.setText(focusedEditText.getText().toString() + keyboardAdapter.getItem(i));
+									focusedEditText.setSelection(focusedEditText.getText().length());
+							}
 						}
 					}
 				}
@@ -423,7 +424,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		View.OnTouchListener inputEditTextOnTouchListener = new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View view, MotionEvent motionEvent) {
-				if (useOsmandKeyboard || !orientationPortrait) {
+				if (useOsmandKeyboard) {
 					if (orientationPortrait && !isOsmandKeyboardCurrentlyVisible()) {
 						changeOsmandKeyboardVisibility(true);
 					}
@@ -438,7 +439,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					editText.setInputType(inputType);
 					return true;
 				} else {
-					if (isOsmandKeyboardCurrentlyVisible()) {
+					if (orientationPortrait && isOsmandKeyboardCurrentlyVisible()) {
 						changeOsmandKeyboardVisibility(false);
 					}
 					return false;
@@ -449,7 +450,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		View.OnLongClickListener inputEditTextOnLongClickListener = new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(final View view) {
-				if (useOsmandKeyboard || !orientationPortrait) {
+				if (useOsmandKeyboard) {
 					final EditText inputEditText = (EditText) view;
 					PopupMenu popupMenu = new PopupMenu(getContext(), inputEditText);
 					Menu menu = popupMenu.getMenu();
@@ -495,8 +496,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 											inputEditText.setSelection(inputEditText.getText().length());
 										}
 										return true;
+									default:
+										return false;
 								}
-								return false;
 							}
 						});
 						popupMenu.show();

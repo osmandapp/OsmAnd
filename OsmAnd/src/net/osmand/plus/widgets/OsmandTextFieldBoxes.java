@@ -41,6 +41,7 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 			});
 
 			this.iconImageButton.setOnClickListener(new OnClickListener() {
+				@Override
 				public void onClick(View v) {
 					select();
 				}
