@@ -37,10 +37,8 @@ public class BaseOsmAndFragment extends Fragment {
 					activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
 				}
 			}
-			if (!isFullScreenAllowed()) {
-				if (activity instanceof MapActivity) {
-					((MapActivity) activity).exitFromFullScreen();
-				}
+			if (!isFullScreenAllowed() && activity instanceof MapActivity) {
+				((MapActivity) activity).exitFromFullScreen();
 			}
 		}
 	}
@@ -53,10 +51,8 @@ public class BaseOsmAndFragment extends Fragment {
 			if (statusBarColor != -1) {
 				activity.getWindow().setStatusBarColor(statusBarColor);
 			}
-			if (!isFullScreenAllowed()) {
-				if (activity instanceof MapActivity) {
-					((MapActivity) activity).enterToFullScreen();
-				}
+			if (!isFullScreenAllowed() && activity instanceof MapActivity) {
+				((MapActivity) activity).enterToFullScreen();
 			}
 		}
 	}

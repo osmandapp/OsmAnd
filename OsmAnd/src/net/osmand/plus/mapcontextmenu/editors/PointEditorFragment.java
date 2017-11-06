@@ -219,7 +219,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		return R.color.status_bar_light;
 	}
 
-`	@Override
+	@Override
 	protected boolean isFullScreenAllowed() {
 		return false;
 	}
