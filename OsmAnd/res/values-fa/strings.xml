@@ -2930,4 +2930,5 @@
     <string name="tap_on_map_to_hide_interface">حالت تمام‌صفحه</string>
     <string name="show_on_top_bar">در نوار بالا نشان بده</string>
     <string name="mark_passed">از این عبور کردم</string>
+    <string name="rename_marker">تغییر نام نشانه</string>
     </resources>
