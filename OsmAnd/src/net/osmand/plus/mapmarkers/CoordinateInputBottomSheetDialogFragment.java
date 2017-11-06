@@ -104,7 +104,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		}
 
 		((CompoundButton) mainView.findViewById(R.id.go_to_next_field_switch)).setChecked(goToNextField);
-		((ImageView) mainView.findViewById(R.id.go_to_next_field_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_keyboard));
+		((ImageView) mainView.findViewById(R.id.go_to_next_field_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_next_field_stroke));
 		mainView.findViewById(R.id.go_to_next_field_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
