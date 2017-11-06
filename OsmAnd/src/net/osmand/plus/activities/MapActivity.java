@@ -72,6 +72,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -802,6 +803,18 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void updateStatusBarColor() {
 		if (Build.VERSION.SDK_INT >= 21) {
+			Fragment fragment = getVisibleFragment(getSupportFragmentManager());
+			if (fragment != null && fragment instanceof BaseOsmAndFragment) {
+				BaseOsmAndFragment f = (BaseOsmAndFragment) fragment;
+				if (f.getStatusBarColorId() != -1) {
+					getWindow().setStatusBarColor(ContextCompat.getColor(this, f.getStatusBarColorId()));
+					return;
+				}
+			}
+			if (dashboardOnMap.isVisible()) {
+				getWindow().setStatusBarColor(ContextCompat.getColor(this, dashboardOnMap.getStatusBarColor()));
+				return;
+			}
 			boolean night = app.getDaynightHelper().isNightModeForMapControls();
 			boolean markerTopBar = mapLayers.getMapMarkersLayer().getWidgetsFactory().isTopBarVisible();
 			int colorId;
@@ -812,6 +825,20 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 			getWindow().setStatusBarColor(ContextCompat.getColor(this, colorId));
 		}
+	}
+
+	private Fragment getVisibleFragment(FragmentManager fm) {
+		int[] ids = new int[]{R.id.topFragmentContainer,
+				R.id.routeMenuContainer,
+				R.id.fragmentContainer,
+				R.id.bottomFragmentContainer};
+		for (int id : ids) {
+			Fragment fragment = fm.findFragmentById(id);
+			if (fragment != null) {
+				return fragment;
+			}
+		}
+		return null;
 	}
 
 	private void dismissSecondSplashScreen() {

@@ -109,7 +109,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
-	protected int getStatusBarColor() {
+	public int getStatusBarColorId() {
 		return R.color.status_bar_transparent_gradient;
 	}
 

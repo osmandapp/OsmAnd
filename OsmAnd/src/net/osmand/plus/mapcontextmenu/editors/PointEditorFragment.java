@@ -216,8 +216,8 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
-	protected int getStatusBarColor() {
-		return getEditor().isLight() ? R.color.status_bar_light : R.color.status_bar_dark;
+	public int getStatusBarColorId() {
+		return R.color.status_bar_light;
 	}
 
 	private void hideKeyboard() {

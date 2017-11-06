@@ -114,7 +114,7 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
-	protected int getStatusBarColor() {
+	public int getStatusBarColorId() {
 		if (dialog != null && dialog.getType() == ContextMenuCardDialog.CardDialogType.MAPILLARY) {
 			return R.color.status_bar_mapillary;
 		}

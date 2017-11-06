@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.ColorRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -770,6 +771,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		addOrUpdateDashboardFragments();
 	}
 
+	@ColorRes
+	public int getStatusBarColor() {
+		return R.color.status_bar_transparent_gradient;
+	}
+
 	public void setDashboardVisibility(boolean visible, DashboardType type, DashboardType prevItem, boolean animation) {
 		if (visible == this.visible && type == visibleType) {
 			return;
@@ -796,6 +802,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			swipeDismissListener.discardUndo();
 		}
 		removeMapillaryFiltersFragment();
+
+		mapActivity.updateStatusBarColor();
 
 		if (visible) {
 			mapActivity.dismissCardDialog();
@@ -866,9 +874,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			updateLocation(true, true, false);
 //			addOrUpdateDashboardFragments();
 			mapActivity.getRoutingHelper().addListener(this);
-			if (Build.VERSION.SDK_INT >= 21) {
-				mapActivity.getWindow().setStatusBarColor(ContextCompat.getColor(mapActivity, R.color.status_bar_transparent_gradient));
-			}
 		} else {
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(dashboardView.findViewById(R.id.animateContent), animation);
@@ -892,9 +897,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				MapillaryFirstDialogFragment fragment = new MapillaryFirstDialogFragment();
 				fragment.show(mapActivity.getSupportFragmentManager(), MapillaryFirstDialogFragment.TAG);
 				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
-			}
-			if (Build.VERSION.SDK_INT >= 21) {
-				mapActivity.updateStatusBarColor();
 			}
 		}
 	}

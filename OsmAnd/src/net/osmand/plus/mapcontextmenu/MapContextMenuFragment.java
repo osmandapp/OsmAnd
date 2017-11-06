@@ -521,8 +521,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	@Override
-	protected int getStatusBarColor() {
-		if (menu.getCurrentMenuState() == MenuState.FULL_SCREEN || menu.isLandscapeLayout()) {
+	public int getStatusBarColorId() {
+		if (menu != null && (menu.getCurrentMenuState() == MenuState.FULL_SCREEN || menu.isLandscapeLayout())) {
 			return nightMode ? R.color.status_bar_dark : R.color.status_bar_route_light;
 		}
 		return nightMode ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
@@ -1232,7 +1232,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				break;
 		}
 		if (!menu.isLandscapeLayout()) {
-			setupStatusBarColor();
+			getMapActivity().updateStatusBarColor();
 		}
 		return posY;
 	}
