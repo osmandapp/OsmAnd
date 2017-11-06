@@ -287,7 +287,7 @@
 	<color name="keyboard_item_add_button_divider_light">#4b62e3</color>
 	<color name="keyboard_item_add_button_divider_dark">#121733</color>
 	<color name="keyboard_divider_light">#e6e6e6</color>
-	<color name="keyboard_divider_dark">#1f2326</color>
+	<color name="keyboard_divider_dark">#2a2f33</color>
 
 	<color name="coordinate_input_status_bar_color_light">#4257c9</color>
 	<color name="coordinate_input_status_bar_color_dark">#1b224d</color>

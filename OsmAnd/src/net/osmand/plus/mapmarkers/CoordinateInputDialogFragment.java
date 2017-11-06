@@ -95,7 +95,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean goToNextField;
 	private int accuracy = 4;
 	private List<OsmandTextFieldBoxes> textFieldBoxes;
-	private List<EditText> inputEditTexts;
 	private View mainView;
 	private IconsCache iconsCache;
 	private Location location;
@@ -207,14 +206,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		textFieldBoxes.add(nameBox);
 
 		registerTextFieldBoxes();
-
-		inputEditTexts = new ArrayList<>();
-		final EditText latitudeEditText = (EditText) mainView.findViewById(R.id.latitude_edit_text);
-		inputEditTexts.add(latitudeEditText);
-		final EditText longitudeEditText = (EditText) mainView.findViewById(R.id.longitude_edit_text);
-		inputEditTexts.add(longitudeEditText);
-		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
-		inputEditTexts.add(nameEditText);
 
 		registerInputEditTexts();
 
@@ -527,13 +518,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		};
 
-		for (EditText inputEditText : inputEditTexts) {
-			if (inputEditText.getId() != R.id.name_edit_text) {
-				inputEditText.addTextChangedListener(textWatcher);
+		for (OsmandTextFieldBoxes textFieldBox : textFieldBoxes) {
+			EditText editText = textFieldBox.getEditText();
+			if (editText.getId() != R.id.name_edit_text) {
+				editText.addTextChangedListener(textWatcher);
 			}
-			inputEditText.setOnTouchListener(inputEditTextOnTouchListener);
-			inputEditText.setOnLongClickListener(inputEditTextOnLongClickListener);
-			inputEditText.setOnEditorActionListener(inputTextViewOnEditorActionListener);
+			editText.setOnTouchListener(inputEditTextOnTouchListener);
+			editText.setOnLongClickListener(inputEditTextOnLongClickListener);
+			editText.setOnEditorActionListener(inputTextViewOnEditorActionListener);
 		}
 
 		changeInputEditTextHints();
@@ -586,8 +578,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void changeEditTextSelections() {
-		for (EditText inputEditText : inputEditTexts) {
-			inputEditText.setSelection(inputEditText.getText().length());
+		for (OsmandTextFieldBoxes textFieldBox : textFieldBoxes) {
+			EditText editText = textFieldBox.getEditText();
+			editText.setSelection(editText.getText().length());
 		}
 	}
 
