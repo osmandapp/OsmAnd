@@ -31,6 +31,9 @@ public class MapRouteInfoMenuFragment extends Fragment {
 
 		menu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
 		View view = inflater.inflate(R.layout.plan_route_info, container, false);
+		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
+			AndroidUtils.addStatusBarPadding21v(getActivity(), view);
+		}
 		if (menu == null) {
 			return view;
 		}
