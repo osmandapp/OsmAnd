@@ -264,24 +264,35 @@
 
 	<color name="marker_circle_button_color_dark">#525e66</color>
 
-	<color name="keyboard_item_divider_control_text_color_light">#727272</color>
-	<color name="keyboard_item_divider_control_text_color_light_pressed">#ffffff</color>
-	<color name="keyboard_item_divider_control_text_color_dark">#ffffff</color>
+	<color name="keyboard_item_divider_control_color_light">#727272</color>
+	<color name="keyboard_item_divider_control_color_light_pressed">#ffffff</color>
+	<color name="keyboard_item_divider_control_color_dark">#8899a6</color>
 	<color name="keyboard_item_text_color_light">#333333</color>
 	<color name="keyboard_item_text_color_light_pressed">#ffffff</color>
 	<color name="keyboard_item_text_color_dark">#ffffff</color>
+	<color name="keyboard_item_light_bg">#fff</color>
+	<color name="keyboard_item_light_bg_pressed">#536dfe</color>
+	<color name="keyboard_item_dark_bg">#1f2326</color>
+	<color name="keyboard_item_dark_bg_pressed">#536dfe</color>
 	<color name="keyboard_item_control_light_bg">#f2f2f2</color>
 	<color name="keyboard_item_control_light_bg_pressed">#536dfe</color>
 	<color name="keyboard_item_control_dark_bg">#191c1e</color>
 	<color name="keyboard_item_control_dark_bg_pressed">#536dfe</color>
-	<color name="keyboard_item_add_button_bg">#536dfe</color>
-	<color name="keyboard_item_add_button_bg_pressed">#4b62e3</color>
+	<color name="keyboard_item_add_button_light_bg">#536dfe</color>
+	<color name="keyboard_item_add_button_light_bg_pressed">#4b62e3</color>
+	<color name="keyboard_item_add_button_dark_bg">#2d3980</color>
+	<color name="keyboard_item_add_button_dark_bg_pressed">#4b62e3</color>
 	<color name="keyboard_item_add_button_text_color">#ffffff</color>
 	<color name="keyboard_item_show_hide_color">#222c66</color>
+	<color name="keyboard_item_add_button_divider_light">#4b62e3</color>
+	<color name="keyboard_item_add_button_divider_dark">#121733</color>
 	<color name="keyboard_divider_light">#e6e6e6</color>
-	<color name="keyboard_divider_dark">#2a2f33</color>
+	<color name="keyboard_divider_dark">#1f2326</color>
 
+	<color name="coordinate_input_status_bar_color_light">#4257c9</color>
+	<color name="coordinate_input_status_bar_color_dark">#1b224d</color>
+	<color name="coordinate_input_app_bar_color_light">#536dfe</color>
+	<color name="coordinate_input_app_bar_color_dark">#2d3980</color>
 	<color name="coordinate_input_keyboard_icon_color">#9fadfc</color>
-	<color name="coordinate_input_status_bar_color">#4257c9</color>
 
 </resources>

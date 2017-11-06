@@ -134,7 +134,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 				window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 				window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-				window.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.coordinate_input_status_bar_color));
+				window.setStatusBarColor(ContextCompat.getColor(getContext(), lightTheme ? R.color.coordinate_input_status_bar_color_light : R.color.coordinate_input_status_bar_color_dark));
 			}
 		}
 		return dialog;
@@ -161,6 +161,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				dismiss();
 			}
 		});
+
+		mainView.findViewById(R.id.app_bar).setBackgroundColor(ContextCompat.getColor(getContext(), lightTheme ? R.color.coordinate_input_app_bar_color_light : R.color.coordinate_input_app_bar_color_dark));
 		final View optionsButton = mainView.findViewById(R.id.options_button);
 		optionsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -263,7 +265,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 			});
 
-			mainView.findViewById(R.id.add_marker_button).setOnClickListener(new View.OnClickListener() {
+			TextView addButton = (TextView) mainView.findViewById(R.id.add_marker_button);
+			addButton.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_add_button_light_bg : R.drawable.keyboard_item_add_button_dark_bg);
+			addButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					addMapMarker();
@@ -316,6 +320,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 			if (orientationPortrait) {
 				final ImageView showHideKeyboardIcon = (ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon);
+				showHideKeyboardIcon.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_add_button_light_bg : R.drawable.keyboard_item_add_button_dark_bg);
 				showHideKeyboardIcon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_arrow_down, R.color.keyboard_item_show_hide_color));
 				showHideKeyboardIcon.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -776,8 +781,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 						new int[]{}
 				},
 				new int[] {
-						getResources().getColor(R.color.keyboard_item_divider_control_text_color_light_pressed),
-						getResources().getColor(R.color.keyboard_item_divider_control_text_color_light)
+						getResources().getColor(R.color.keyboard_item_divider_control_color_light_pressed),
+						getResources().getColor(R.color.keyboard_item_divider_control_color_light)
 				}
 		);
 		private ColorStateList numberColorStateList = new ColorStateList(
@@ -835,7 +840,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				if (lightTheme) {
 					keyboardItemText.setTextColor(dividerControlButton ? dividerControlColorStateList : numberColorStateList);
 				} else {
-					keyboardItemText.setTextColor(ContextCompat.getColor(getContext(), dividerControlButton ? R.color.keyboard_item_divider_control_text_color_dark : R.color.keyboard_item_text_color_dark));
+					keyboardItemText.setTextColor(ContextCompat.getColor(getContext(), dividerControlButton ? R.color.keyboard_item_divider_control_color_dark : R.color.keyboard_item_text_color_dark));
 				}
 				keyboardItemImage.setVisibility(View.GONE);
 				keyboardItemTopSpacing.setVisibility(View.VISIBLE);

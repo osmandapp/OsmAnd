@@ -12,8 +12,8 @@
         android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
             android:orientation="vertical"
-            android:background="@color/map_widget_blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -194,7 +194,7 @@
             android:id="@+id/keyboard_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/keyboard_item_add_button_bg_pressed"/>
+            android:background="?attr/keyboard_controls_divider"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -202,7 +202,6 @@
             android:layout_height="56dp">
 
             <android.support.v7.widget.AppCompatTextView
-                android:background="@drawable/keyboard_item_add_button_bg"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:id="@+id/add_marker_button"
@@ -218,11 +217,10 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/keyboard_item_add_button_bg_pressed"/>
+                android:background="?attr/keyboard_controls_divider"/>
 
             <ImageView
                 android:id="@+id/show_hide_keyboard_icon"
-                android:background="@drawable/keyboard_item_add_button_bg"
                 android:layout_gravity="center_vertical"
                 android:layout_width="0dp"
                 android:layout_weight="1"

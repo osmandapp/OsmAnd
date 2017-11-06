@@ -178,6 +178,7 @@
         <item name="popupMenuStyle">@style/PopupMenuLight</item>
 
         <item name="keyboard_item_icon_color">@drawable/keyboard_item_icon_color_light</item>
+        <item name="keyboard_controls_divider">@color/keyboard_item_add_button_divider_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -349,7 +350,8 @@
 
         <item name="popupMenuStyle">@style/PopupMenuDark</item>
 
-        <item name="keyboard_item_icon_color">@color/keyboard_item_divider_control_text_color_dark</item>
+        <item name="keyboard_item_icon_color">@color/keyboard_item_divider_control_color_dark</item>
+        <item name="keyboard_controls_divider">@color/keyboard_item_add_button_divider_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
