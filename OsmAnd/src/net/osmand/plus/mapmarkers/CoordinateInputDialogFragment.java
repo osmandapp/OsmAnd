@@ -688,7 +688,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private void addMapMarker() {
 		String latitude = ((EditText) mainView.findViewById(R.id.latitude_edit_text)).getText().toString();
 		String longitude = ((EditText) mainView.findViewById(R.id.longitude_edit_text)).getText().toString();
-		String locPhrase = latitude + ", " + longitude;
+		String locPhrase = latitude + " " + longitude;
 		LatLon latLon = MapUtils.parseLocation(locPhrase);
 		if (latLon != null) {
 			String name = ((EditText) mainView.findViewById(R.id.name_edit_text)).getText().toString();
