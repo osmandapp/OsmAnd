@@ -33,7 +33,6 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:scaleType="center"
-        android:tint="?attr/keyboard_item_icon_color"
         tools:src="@drawable/ic_action_backspace_fill"/>
 
 </LinearLayout>

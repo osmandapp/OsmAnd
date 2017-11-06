@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
@@ -845,7 +847,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				keyboardItemBottomSpacing.setVisibility(View.GONE);
 				keyboardItemText.setVisibility(View.GONE);
 				keyboardItemImage.setVisibility(View.VISIBLE);
-				keyboardItemImage.setImageResource((Integer) item);
+				Drawable icon;
+				if (lightTheme) {
+					icon = DrawableCompat.wrap(getResources().getDrawable((Integer) item));
+					DrawableCompat.setTintList(icon, numberColorStateList);
+				} else {
+					icon = iconsCache.getIcon((Integer) item, R.color.keyboard_item_divider_control_color_dark);
+				}
+				keyboardItemImage.setImageDrawable(icon);
 			}
 
 			return convertView;
