@@ -835,14 +835,16 @@ public class MapUtils {
 				}
 			} else {
 				if (digit){
-					try {
-						double dl = Double.parseDouble(s.substring(word, i));
-						d.add(dl);
-						all.add(dl);
-						strings.add(s.substring(word, i));
-						digit = false;
-						word = -1;
-					} catch (NumberFormatException e) {
+					if (word != -1) {
+						try {
+							double dl = Double.parseDouble(s.substring(word, i));
+							d.add(dl);
+							all.add(dl);
+							strings.add(s.substring(word, i));
+							digit = false;
+							word = -1;
+						} catch (NumberFormatException e) {
+						}
 					}
 				}
 				if (nonwh) {
