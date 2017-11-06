@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -12,13 +11,16 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
-public class MapRouteInfoMenuFragment extends Fragment {
+public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	public static final String TAG = "MapRouteInfoMenuFragment";
 
 	private MapRouteInfoMenu menu;
 	private View mainView;
+
+	private boolean portrait;
 
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
@@ -31,7 +33,8 @@ public class MapRouteInfoMenuFragment extends Fragment {
 
 		menu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
 		View view = inflater.inflate(R.layout.plan_route_info, container, false);
-		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
+		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		if (!portrait) {
 			AndroidUtils.addStatusBarPadding21v(getActivity(), view);
 		}
 		if (menu == null) {
@@ -66,6 +69,15 @@ public class MapRouteInfoMenuFragment extends Fragment {
 		if (menu != null) {
 			menu.onDismiss();
 		}
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		if (portrait) {
+			return getMapActivity().getMyApplication().getDaynightHelper().isNightModeForMapControls()
+					? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
+		}
+		return R.color.status_bar_transparent_gradient;
 	}
 
 	public int getHeight() {
