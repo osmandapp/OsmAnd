@@ -827,6 +827,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				getWindow().setStatusBarColor(ContextCompat.getColor(this, dashboardOnMap.getStatusBarColor()));
 				return;
 			}
+			if (mapLayers.getMapQuickActionLayer().isWidgetVisible()) {
+				getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.status_bar_transparent_gradient));
+				return;
+			}
 			boolean night = app.getDaynightHelper().isNightModeForMapControls();
 			boolean markerTopBar = mapLayers.getMapMarkersLayer().getWidgetsFactory().isTopBarVisible();
 			int colorId;
