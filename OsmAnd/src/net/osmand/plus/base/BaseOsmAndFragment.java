@@ -48,11 +48,22 @@ public class BaseOsmAndFragment extends Fragment {
 		super.onPause();
 		if (Build.VERSION.SDK_INT >= 21) {
 			Activity activity = getActivity();
-			if (statusBarColor != -1) {
+			if (!(activity instanceof MapActivity) && statusBarColor != -1) {
 				activity.getWindow().setStatusBarColor(statusBarColor);
 			}
 			if (!isFullScreenAllowed() && activity instanceof MapActivity) {
 				((MapActivity) activity).enterToFullScreen();
+			}
+		}
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		if (Build.VERSION.SDK_INT >= 21) {
+			Activity activity = getActivity();
+			if (activity instanceof MapActivity) {
+				((MapActivity) activity).updateStatusBarColor();
 			}
 		}
 	}
