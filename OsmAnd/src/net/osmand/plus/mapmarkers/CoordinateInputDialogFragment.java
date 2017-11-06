@@ -510,39 +510,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		};
 
-		View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View view, boolean b) {
-				int resId;
-				switch (view.getId()) {
-					case R.id.latitude_edit_text:
-						resId = R.id.latitude_box;
-						break;
-					case R.id.longitude_edit_text:
-						resId = R.id.longitude_box;
-						break;
-					case R.id.name_edit_text:
-						resId = R.id.name_box;
-						break;
-					default:
-						resId = 0;
-				}
-				if (resId != 0) {
-					OsmandTextFieldBoxes textFieldBox = mainView.findViewById(resId);
-					if (b) {
-						textFieldBox.setHasFocus(true);
-					} else {
-						if (useOsmandKeyboard) {
-							AndroidUtils.hideSoftKeyboard(getActivity(), view);
-						} else if (orientationPortrait && isOsmandKeyboardCurrentlyVisible()) {
-							changeOsmandKeyboardVisibility(false);
-						}
-						textFieldBox.setHasFocus(false);
-					}
-				}
-			}
-		};
-
 		TextView.OnEditorActionListener inputTextViewOnEditorActionListener = new TextView.OnEditorActionListener() {
 			@Override
 			public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -561,7 +528,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 			inputEditText.setOnTouchListener(inputEditTextOnTouchListener);
 			inputEditText.setOnLongClickListener(inputEditTextOnLongClickListener);
-			inputEditText.setOnFocusChangeListener(focusChangeListener);
 			inputEditText.setOnEditorActionListener(inputTextViewOnEditorActionListener);
 		}
 
