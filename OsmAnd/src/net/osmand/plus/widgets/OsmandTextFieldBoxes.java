@@ -89,7 +89,9 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 	protected Parcelable onSaveInstanceState() {
 		Parcelable superState = super.onSaveInstanceState();
 		SavedState savedState = new SavedState(superState);
-		savedState.hasText = editText.getText().length() > 0;
+		if (editText != null) {
+			savedState.hasText = !editText.getText().toString().isEmpty();
+		}
 		return savedState;
 	}
 
