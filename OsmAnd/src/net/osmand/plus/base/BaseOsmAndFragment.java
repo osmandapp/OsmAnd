@@ -30,10 +30,10 @@ public class BaseOsmAndFragment extends Fragment {
 			Activity activity = getActivity();
 			int colorId = getStatusBarColorId();
 			if (colorId != -1) {
-				statusBarColor = activity.getWindow().getStatusBarColor();
 				if (activity instanceof MapActivity) {
 					((MapActivity) activity).updateStatusBarColor();
 				} else {
+					statusBarColor = activity.getWindow().getStatusBarColor();
 					activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
 				}
 			}
