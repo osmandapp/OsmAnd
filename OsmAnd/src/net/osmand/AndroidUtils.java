@@ -280,6 +280,19 @@ public class AndroidUtils {
 		decorView.setSystemUiVisibility(uiOptions);
 	}
 
+	public static void enterToFullScreen(Activity activity) {
+		if (Build.VERSION.SDK_INT >= 21) {
+			activity.getWindow().getDecorView()
+					.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+		}
+	}
+
+	public static void exitFromFullScreen(Activity activity) {
+		if (Build.VERSION.SDK_INT >= 21) {
+			activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+		}
+	}
+
 	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
 		List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
 		Collections.sort(list, new Comparator<Map.Entry<K, V>>() {

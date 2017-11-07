@@ -328,15 +328,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void exitFromFullScreen() {
-		if (Build.VERSION.SDK_INT >= 21) {
-			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-		}
+		AndroidUtils.exitFromFullScreen(this);
 	}
 
 	public void enterToFullScreen() {
-		if (Build.VERSION.SDK_INT >= 21) {
-			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-		}
+		AndroidUtils.enterToFullScreen(this);
 	}
 
 	@Override
