@@ -296,6 +296,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 										str = str.substring(0, str.length() - 1);
 										focusedEditText.setText(str);
 										focusedEditText.setSelection(str.length());
+									} else {
+										switchToPreviousInput(focusedEditText.getId());
 									}
 									break;
 								case SWITCH_TO_NEXT_INPUT_BUTTON_POSITION:
@@ -654,6 +656,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			((OsmandTextFieldBoxes) mainView.findViewById(R.id.longitude_box)).select();
 		} else if (id == R.id.longitude_edit_text) {
 			((OsmandTextFieldBoxes) mainView.findViewById(R.id.name_box)).select();
+		}
+	}
+
+	private void switchToPreviousInput(int id) {
+		if (id == R.id.name_edit_text) {
+			((OsmandTextFieldBoxes) mainView.findViewById(R.id.longitude_box)).select();
+		} else if (id == R.id.longitude_edit_text) {
+			((OsmandTextFieldBoxes) mainView.findViewById(R.id.latitude_box)).select();
 		}
 	}
 
