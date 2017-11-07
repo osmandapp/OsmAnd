@@ -411,6 +411,16 @@ public abstract class MenuController extends BaseMenuController {
 		return R.string.shared_string_add_to_favorites;
 	}
 
+	public int getWaypointActionIconId() {
+		return getMapActivity().getMyApplication().getSettings().USE_MAP_MARKERS.get()
+				? R.drawable.map_action_flag_dark : R.drawable.map_action_waypoint;
+	}
+
+	public int getWaypointActionStringId() {
+		return getMapActivity().getMyApplication().getSettings().USE_MAP_MARKERS.get()
+				? R.string.shared_string_add_to_map_markers : R.string.context_menu_item_destination_point;
+	}
+
 	public String getTypeStr() {
 		return "";
 	}

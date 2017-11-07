@@ -1056,7 +1056,7 @@
 	<string name="poi_denomination_methodist">Metodistické</string>
 	<string name="poi_denomination_anglican">Anglikánske</string>
 	<string name="poi_denomination_presbyterian">Presbyteriánske</string>
-	<string name="poi_denomination_evangelical">Evanjelické</string>
+	<string name="poi_denomination_evangelical">Evanjelikálne</string>
 	<string name="poi_denomination_russian_orthodox">Ruské ortodoxné</string>
 	<string name="poi_denomination_mormon">Mormónske</string>
 	<string name="poi_denomination_jehovahs_witness">Svedkovia Jehovovi</string>
@@ -3154,4 +3154,39 @@
 	<string name="poi_cuisine_bulgarian">Bulharská</string>
 	<string name="poi_cuisine_tibetan">Tibetská</string>
 
-	</resources>
+	<string name="poi_zoo_type">Typ</string>
+	<string name="poi_motorcycle_services">Služby</string>
+	<string name="poi_motorcycle_type">Typ motocykla</string>
+	<string name="poi_animal_shelter_type">Povolené zvieratá</string>
+	<string name="poi_animal_shelter_purpose">Účel</string>
+	<string name="poi_boat_rental_type">Prenajímané lode</string>
+	<string name="poi_operational_status">Prevádzkový stav</string>
+	<string name="poi_water_supply_type">Typ dodávky vody</string>
+	<string name="poi_water_purification">Čistenie vody</string>
+	<string name="poi_water_place_access">Prístup k zdroju vody</string>
+
+<string name="poi_car_yes">Auto: áno</string>
+	<string name="poi_car_no">Auto: nie</string>
+	<string name="poi_bicycle_yes">Bicykel: áno</string>
+	<string name="poi_bicycle_no">Bicykel: nie</string>
+	<string name="poi_scooter_yes">Skúter: áno</string>
+	<string name="poi_scooter_no">Skúter: nie</string>
+	<string name="poi_truck_yes">Nákladné auto: áno</string>
+	<string name="poi_truck_no">Nákladné auto: nie</string>
+
+	<string name="poi_parking_fee_yes">Poplatok za parkovanie: áno</string>
+	<string name="poi_parking_fee_no">Poplatok za parkovanie: nie</string>
+	<string name="poi_parking_fee">Poplatok za parkovanie</string>
+
+	<string name="poi_amperage">Napätie</string>
+	<string name="poi_charging_station_output">Výstup nabíjacej stanice</string>
+
+	<string name="poi_map_type_topo">Typ mapy: topografická</string>
+	<string name="poi_map_type_street">Typ mapy: ulice</string>
+	<string name="poi_map_type_scheme">Typ mapy: schematická</string>
+	<string name="poi_map_type_toposcope">Typ mapy: smerová ružica</string>
+	<string name="poi_map_size_site">Veľkosť mapy: areál</string>
+	<string name="poi_map_size_city">Veľkosť mapy: mesto</string>
+	<string name="poi_map_size_region">Veľkosť mapy: región</string>
+
+</resources>

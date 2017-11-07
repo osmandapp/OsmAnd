@@ -438,7 +438,7 @@
 	<string name="local_openstreetmap_upload">آپلود اصلاحات به OSM</string>
 	<string name="local_openstreetmap_delete">حذف اصلاحات</string>
 	<string name="local_openstreetmap_descr_title">ویرایش ناهمزمان OSM:</string>
-	<string name="free_version_message">این نسخهٔ رایگان OsmAnd به %1$s دانلود محدود است و مقالات آفلاین ویکی‌پدیا را نیز ندارد.</string>
+	<string name="free_version_message">با این نسخهٔ رایگانِ OsmAnd می‌توانید %1$s نقشه دانلود کنید (که شامل دانلود به‌روزرسانی‌ها هم هست). همچنین نسخهٔ رایگان از مقالات آفلاین ویکی‌پدیا پشتیبانی نمی‌کند.</string>
 	<string name="free_version_title">نسخهٔ رایگان</string>
 	<string name="poi_context_menu_showdescription">نمایش توضیحات POI.</string>
 	<string name="index_name_north_america">آمریکای شمالی</string>
@@ -772,7 +772,7 @@
 	<string name="download_files_question_space">آیا {0} فایل را دانلود می‌کنید؟ حافظهٔ استفاده شده {1} مگابایت است. (حافظهٔ قابل‌استفاده {2} مگابایت است.)</string>
 	
 	<string name="use_transparent_map_theme">پوستهٔ شفاف</string>
-	<string name="native_library_not_supported">کتابخانه بومی بر روی این دستگاه پشتیبانی نمیشود.</string>
+	<string name="native_library_not_supported">کتابخانهٔ بومی بر روی این دستگاه پشتیبانی نمی‌شود.</string>
 	<string name="init_native_library">مقداردهی اولیهٔ کتابخانهٔ بومی…</string>
 	<string name="choose_auto_follow_route">نمای نقشه خودکار-مرکز</string>
 	<string name="choose_auto_follow_route_descr">مدت‌زمانی که طول می‌کشد تا نقشه با موقعیت کنونی همگام شود.</string>
@@ -961,7 +961,7 @@
 	<string name="background_service_provider">ارائه‌دهندهٔ موقعیت</string>
 	<string name="background_router_service_descr">برنامهٔ OsmAnd در پس‌زمینه اجرا می‌ماند تا در زمانی‌که صفحه خاموش است موقعیت شما را ردگیری کند.</string>
 	<string name="background_router_service">اجرای OsmAnd در پس‌زمینه</string>
-	<string name="off_router_service_no_gps_available">برای سرویس راهبری در پس‌زمینه موقعیت مکانی را روشن کنید.</string>
+	<string name="off_router_service_no_gps_available">برای استفاده از سرویس راهبری موقعیت مکانی را روشن کنید.</string>
 	<string name="hide_poi_filter">مخفی‌کردن فیلتر</string>
 	<string name="show_poi_filter">نمایش فیلتر</string>
 	<string name="search_poi_filter">فیلتر</string>
@@ -1118,10 +1118,12 @@
 	
 	
 	
-	<string name="osm_editing_plugin_description">به‌وسیلهٔ این افزونه در تکمیل نقشهٔ OSM مشارکت کنید. مثلاً با ایجاد یا اصلاح مکان‌های پرکاربرد (POI)، ارسال فایل‌های GPXای که ضبط کرده‌اید و نوشتن توضیحات ویرایشی. در مورد توضیحات ویرایشی یا اینجا را ملاحظه کنید:
+	<string name="osm_editing_plugin_description">به‌وسیلهٔ این افزونه در تکمیل نقشهٔ OSM مشارکت کنید. مثلاً با ایجاد یا اصلاح مکان‌های پرکاربرد (POI)، ارسال فایل‌های GPXای که ضبط کرده‌اید و نوشتن توضیحات ویرایشی. در مورد توضیحات ویرایشی اینجا را ملاحظه کنید: 
 \nhttps://wiki.openstreetmap.org/wiki/Fa:Notes 
-\nجامعهٔ OSM در راستای پیشبرد پروژهٔ نقشه‌کشی تلاش می‌کند؛ برای ایجاد نقشه‌ای که آزادانه در اختیار همه باشد. برای اطلاع از جزئیات بیشتر به وبسایت آن مراجعه کنید:
-\nhttps://openstreetmap.org
+\n
+\nجامعهٔ OSM در راستای پیشبرد پروژهٔ نقشه‌کشی تلاش می‌کند؛ برای ایجاد نقشه‌ای که آزادانه در اختیار همه باشد. برای اطلاع از جزئیات بیشتر به وبسایت آن مراجعه کنید: 
+\nhttps://openstreetmap.org 
+\n
 \nشما هم می‌توانید مستقیماً از طریق برنامهٔ OsmAnd در تکمیل نقشه مشارکت کنید. برای این منظور لازم است اطلاعات عضویت در سایت OSM را در برنامه وارد کنید.</string>
 	<string name="play_commands_of_currently_selected_voice">صدایی را انتخاب کنید و با پخش پیام‌ها، آن را امتحان کنید</string>
 	<string name="native_rendering">رندر بومی</string>
@@ -1194,7 +1196,7 @@
 	<string name="renderers">رندرکنندهٔ بُرداری</string>
 	<string name="renderers_descr">شکل‌وشمایل رندر را انتخاب نمایید.</string>
 	<string name="download_type_to_filter">فیلتر</string>
-	<string name="transport_context_menu">جست‌وجوی ایستگاه حمل‌و‌نقل</string>
+	<string name="transport_context_menu">جست‌وجوی وسیلهٔ حمل‌ونقل در ایستگاه</string>
 	<string name="rotate_map_to_bearing_descr">نحوهٔ چرخش نقشه را انتخاب کنید.</string>
 	<string name="layer_poi">POI…</string>
 	<string name="gps_provider">GPS</string>
@@ -1209,7 +1211,7 @@
 	<string name="transport_to_go_after">مسافت قبلی</string>
 	<string name="transport_to_go_before">مسافت بعدی</string>
 	<string name="update_poi_is_not_available_for_zoom">به‌روزرسانی POIها برای سطح زوم کم وجود ندارد</string>
-	<string name="commiting_node">قراردادن نقطه…</string>
+	<string name="commiting_node">ثبت نقطه…</string>
 	<string name="poi">POI</string>
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
@@ -1571,7 +1573,7 @@
 	<string name="rendering_attr_publicTransportMode_name">مسیرهای اتوبوس، اتوبوس برقی و مسیرهای خطی</string>
 	<string name="record_plugin_name">ضبط سفر</string>
     <string name="int_hour">س</string>
-    <string name="duration">مدت زمان</string>
+    <string name="duration">مدت‌زمان</string>
     <string name="distance">مسافت</string>
     <string name="index_tours">سفرها</string>
     <string name="shared_string_all">همه</string>
@@ -1619,8 +1621,8 @@
 	<string name="save_track_to_gpx_globally_descr">می‌توانید ثبت موقعیت در فایل GPX را با استفاده از ابزارک ضبط GPX روی صفحهٔ نقشه، خاموش یا روشن کنید.</string>
 	<string name="save_track_interval_globally">فاصلهٔ زمانی ورود</string>
 	<string name="record_plugin_description">با این افزونه می‌توانید همهٔ مسیرهایتان را ضبط و در قالب فایل GPX ذخیره کنید؛ چه آن مسیرهایی که خودتان می‌روید و چه مسیرهایی که با مسیریابی خواهید پیمود. برای این منظور ابزارک ضبط جی‌پی‌ایکس را بر روی صفحهٔ نقشه لمس کنید. 
-\n
-\nمی‌توانید مسیرهای ضبط‌شده را با دوستان یا برای استفاده در مشارکت‌های OSM به‌اشتراک بگذارید. ورزشکاران می‌توانند برای کنترل تمرین‌هایشان از مسیرهای ضبط‌شده استفاده کنند. برنامهٔ OsmAnd آنالیزهای ساده‌ای مانند مدت مسیر، سرعت متوسط و... را انجام می‌دهد و البته می‌توان این مسیرها را به سایر برنامه‌های تجزیه‌وتحلیل هم داد.</string>
+\n 
+\nمی‌توانید مسیرهای ضبط‌شده را با دوستان یا برای استفاده در مشارکت‌های OSM به‌اشتراک بگذارید. ورزشکاران می‌توانند برای کنترل تمرین‌هایشان از مسیرهای ضبط‌شده استفاده کنند. برنامهٔ OsmAnd آنالیزهای ساده‌ای مانند مدت مسیر، سرعت متوسط و... را انجام می‌دهد و البته می‌توانید این مسیرها را در سایر نرم‌افزارهای تحلیلگر نیز آنالیز کنید.</string>
     <string name="lang_al">آلبانیایی</string>
 	<string name="lang_ar">عربی</string>
 	<string name="lang_fa">فارسی</string>
@@ -1892,10 +1894,10 @@
     <string name="lang_ms">مالزیایی</string>
     <string name="lang_ht">هائیتی</string>
     <string name="lang_et">استونیایی</string>
-    <string name="archive_wikipedia_data">اطلاعات ویکیپدیایی که شما دارید قدیمی و ناکامل است. می‌خواهید بایگانی شود؟</string>
-    <string name="download_wikipedia_files">مایل هستید اطلاعات تکمیلی ویکیپدیا دانلود شود (%1$s مگابایت)؟</string>
+    <string name="archive_wikipedia_data">اطلاعات ویکی‌پدیای موجود قدیمی و ناسازگار است. می‌خواهید بایگانی شود؟</string>
+    <string name="download_wikipedia_files">آیا اطلاعات تکمیلی ویکی‌پدیا را دانلود می‌کنید (%1$s مگابایت)؟</string>
     
-    <string name="local_indexes_cat_wiki">ویکیپدیا</string>
+    <string name="local_indexes_cat_wiki">ویکی‌پدیا</string>
     <string name="shared_string_show_details">نمایش جزئیات</string>
     <string name="lang_tl">تاگالوگ</string>
     <string name="rendering_value_disabled_name">غیرفعال</string>
@@ -1962,7 +1964,7 @@
     <string name="donation_to_osm">کمک مالی به OpenStreetMap</string>
     <string name="donation_to_osm_desc">بخشی از کمک‌های مالی به مشترکین OpenStreetMap که به تغییرات کمک می‌کنند ارسال می‌شود. هزینهٔ اشتراک ثابت می‌ماند.</string>
     <string name="osm_live_subscription_desc">این اشتراک، به‌روزرسانی‌های ساعتی، روزانه و هفتگی و همچنین دانلود نامحدود همهٔ نقشه‌ها در سراسر دنیا را فعال می‌کند.</string>
-    <string name="get_it">انجام بده</string>
+    <string name="get_it">دریافت</string>
     <string name="get_for">پرداخت برای %1$s</string>
     <string name="get_for_month">پرداخت ماهانه %1$s</string>
     <string name="osm_live_banner_desc">دانلود نامحدود نقشه‌ها و به‌روزرسانی آن‌ها بیش از یک بار در ماه: هفتگی، روزانه یا ساعتی.</string>
@@ -2139,7 +2141,7 @@
     <string name="points_delete_multiple">دارید %1$d نقطه را حذف می‌کنید؛ مطمئنید؟</string>
     <string name="track_points_category_name">نقاط مهم این مسیر</string>
     <string name="gpx_track">مسیر</string>
-    <string name="shared_string_time_span">مدت زمان</string>
+    <string name="shared_string_time_span">مدت‌زمان</string>
     <string name="select_gpx_folder">پوشهٔ مسیر را انتخاب کنید</string>
     <string name="shared_string_tracks">Tracks</string>
     <string name="route_altitude">ارتفاع مسیر</string>
@@ -2241,7 +2243,7 @@
     <string name="upload_anonymously">آپلود به‌صورت ناشناس</string>
     <string name="show_transparency_seekbar">نوار تنظیم شفافیت را نشان بده</string>
     <string name="download_files_error_not_enough_space">فضای ذخیره‌سازی ناکافی است! {3} مگابایت برای ذخیره‌سازی موقت و {1} مگابایت برای ذخیره‌سازی دائمی لازم است. فضای موجود فقط {2} مگابایت است.</string>
-    <string name="upload_osm_note">آپلود توضیحات ویرایشی OSM</string>
+    <string name="upload_osm_note">آپلود ویرایش‌های OSM</string>
     <string name="map_marker_1st">اولین نشانهٔ نقشه</string>
     <string name="map_marker_2nd">دومین نشانهٔ نقشه</string>
     <string name="shared_string_toolbar">نوار ابزار</string>
@@ -2288,7 +2290,7 @@
     <string name="no_camera_permission">برنامه اجازهٔ دسترسی به دوربین را ندارد.</string>
     <string name="no_microphone_permission">برنامه اجازهٔ دسترسی به میکروفون را ندارد.</string>
     <string name="route_distance">مسافت:</string>
-    <string name="route_duration">مدت زمان:</string>
+    <string name="route_duration">مدت‌زمان:</string>
     <string name="rendering_attr_horseRoutes_name">راه اسب‌رو</string>
     <string name="av_audio_bitrate">بیت‌رِیت صدا</string>
     <string name="av_audio_bitrate_descr">نرخ بیتی صدا را انتخاب کنید.</string>
@@ -2367,7 +2369,7 @@
     <string name="disable_recording_once_app_killed_descrp">هنگامی که برنامه را از طریق برنامه‌های اخیر ببندید ورود اطلاعات جی‌پی‌ایکس موقتاً متوقف می‌شود. (نشانگر اجرای پس‌زمینه از نوار اعلان حذف می‌شود.)</string>
     <string name="shared_string_import2osmand">واردکردن به OsmAnd</string>
     <string name="read_full_article">مقالهٔ کامل را بخوانید (آنلاین)</string>
-    <string name="shared_string_wikipedia">ویکیپدیا</string>
+    <string name="shared_string_wikipedia">ویکی‌پدیا</string>
     <string name="local_recordings_delete_all_confirm">دارید %1$d یادداشت را پاک می‌کنید. آیا مطمئن هستید؟</string>
     <string name="osmand_parking_hour">س</string>
     <string name="osmand_parking_minute">دق‍</string>
@@ -2689,7 +2691,7 @@
 \n
 \n</string>
     <string name="auto_split_recording_descr">بعد از ۶ دقیقه وقفه، بخش جدید شروع می‌شود. بعد از ۲ ساعت وقفه، مسیر جدید شروع می‌شود. بعد از وقفهٔ طولانی‌تر درصورتی‌که تاریخ تغییر کند فایل جدید ایجاد می‌شود.</string>
-    <string name="upload_osm_note_description">می‌توانید توضیحات ویرایشی OSM خود را به‌صورت ناشناس یا با نام کاربری سایت OpenStreetMap.org آپلود کنید.</string>
+    <string name="upload_osm_note_description">می‌توانید ویرایش‌های OSM خود را به‌صورت ناشناس یا با نام کاربری سایت OpenStreetMap.org آپلود کنید.</string>
     <string name="route_roundabout_short">خروجی %1$d را بگیرید و بروید</string>
     <string name="trip_rec_notification_settings_desc">در نوار اعلان دستگاه یک اعلان نشان می‌دهد که بتوانید ضبط سفر را شروع کنید.</string>
     <string name="save_track_min_speed_descr">فیلتر: حداقل سرعتی که یک نقطه باید داشته باشد تا ثبت شود.</string>

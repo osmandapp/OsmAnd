@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -24,14 +23,14 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
 
-public abstract class PointEditorFragment extends Fragment {
+public abstract class PointEditorFragment extends BaseOsmAndFragment {
 
 	private View view;
 	private EditText nameEdit;
@@ -181,9 +180,7 @@ public abstract class PointEditorFragment extends Fragment {
 	}
 
 	public Drawable getRowIcon(int iconId) {
-		IconsCache iconsCache = getMyApplication().getIconsCache();
-		return iconsCache.getIcon(iconId,
-				getEditor().isLight() ? R.color.icon_color : R.color.icon_color_light);
+		return getIcon(iconId, getEditor().isLight() ? R.color.icon_color : R.color.icon_color_light);
 	}
 
 	@Override
@@ -215,6 +212,16 @@ public abstract class PointEditorFragment extends Fragment {
 			save(false);
 		}
 		super.onDestroyView();
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		return R.color.status_bar_light;
+	}
+
+	@Override
+	protected boolean isFullScreenAllowed() {
+		return false;
 	}
 
 	private void hideKeyboard() {
@@ -325,7 +332,6 @@ public abstract class PointEditorFragment extends Fragment {
 	}
 
 	protected Drawable getPaintedIcon(int iconId, int color) {
-		IconsCache iconsCache = getMapActivity().getMyApplication().getIconsCache();
-		return iconsCache.getPaintedIcon(iconId, color);
+		return getPaintedContentIcon(iconId, color);
 	}
 }

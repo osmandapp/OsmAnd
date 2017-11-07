@@ -44,6 +44,7 @@ import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
+import net.osmand.plus.mapmarkers.RenameMarkerBottomSheetDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
@@ -87,6 +88,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private boolean autoHide;
 
 	private int favActionIconId;
+	private int waypointActionIconId;
 
 	private MenuAction searchDoneAction;
 
@@ -704,12 +706,27 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return R.string.shared_string_add_to_favorites;
 	}
 
+	public int getWaypointActionIconId() {
+		return waypointActionIconId;
+	}
+
+	public int getWaypointActionStringId() {
+		if (menuController != null) {
+			return menuController.getWaypointActionStringId();
+		}
+		return settings.USE_MAP_MARKERS.get()
+				? R.string.shared_string_add_to_map_markers : R.string.context_menu_item_destination_point;
+	}
+
 	protected void acquireIcons() {
 		super.acquireIcons();
 		if (menuController != null) {
 			favActionIconId = menuController.getFavActionIconId();
+			waypointActionIconId = menuController.getWaypointActionIconId();
 		} else {
 			favActionIconId = R.drawable.map_action_fav_dark;
+			waypointActionIconId = settings.USE_MAP_MARKERS.get()
+					? R.drawable.map_action_flag_dark : R.drawable.map_action_waypoint;
 		}
 	}
 
@@ -745,20 +762,25 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public void buttonWaypointPressed() {
-		if (pointDescription.isDestination()) {
-			mapActivity.getMapActions().editWaypoints();
-		} else if (settings.USE_MAP_MARKERS.get()) {
-			if (pointDescription.isMapMarker()) {
-				hide();
-				MapActivity.clearPrevActivityIntent();
-				MapMarkersDialogFragment.showInstance(mapActivity);
-			} else {
-				mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
-						getPointDescriptionForMarker());
-			}
+		if (object != null && object instanceof MapMarker) {
+			RenameMarkerBottomSheetDialogFragment
+					.showInstance(mapActivity.getSupportFragmentManager(), (MapMarker) object);
 		} else {
-			mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
-					getPointDescriptionForTarget());
+			if (pointDescription.isDestination()) {
+				mapActivity.getMapActions().editWaypoints();
+			} else if (settings.USE_MAP_MARKERS.get()) {
+				if (pointDescription.isMapMarker()) {
+					hide();
+					MapActivity.clearPrevActivityIntent();
+					MapMarkersDialogFragment.showInstance(mapActivity);
+				} else {
+					mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
+							getPointDescriptionForMarker());
+				}
+			} else {
+				mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
+						getPointDescriptionForTarget());
+			}
 		}
 		close();
 	}

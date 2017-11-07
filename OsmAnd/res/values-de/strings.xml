@@ -2883,4 +2883,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 	<string name="view">Ansicht</string>
 	<string name="waypoints_added_to_map_markers">Wegpunkte zu Kartenmarkierung hinzugefügt</string>
 	<string name="wrong_format">Falsches Format</string>
-    </resources>
+    <string name="tap_on_map_to_hide_interface">Vollbildmodus</string>
+    <string name="show_on_top_bar">In Titelleiste anzeigen</string>
+    <string name="import_as_gpx">als GPX-Datei importieren</string>
+    <string name="import_as_favorites">als Favoriten importieren</string>
+    <string name="import_file">Datei importieren</string>
+	</resources>

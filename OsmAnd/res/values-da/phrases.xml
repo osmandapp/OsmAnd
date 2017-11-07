@@ -3602,7 +3602,7 @@
 	<string name="poi_location_outdoor">Placering: udendørs</string>
 	<string name="poi_location_indoor">Beliggenhed: indendørs</string>
 	<string name="poi_location_platform">Beliggenhed: platform</string>
-	<string name="poi_location_kiosk">Beliggenhed: kiosk</string>
+	<string name="poi_location_kiosk">Beliggenhed: præfabrikeret kabinet</string>
 	<string name="poi_location_bridge">Beliggenhed: bro</string>
 	<string name="poi_location_wall">Beliggenhed: væg</string>
 	<string name="poi_location_entrance">Beliggenhed: indgang</string>
@@ -3721,7 +3721,7 @@
 	<string name="poi_parking_fee">Parkeringsafgift</string>
 
 	<string name="poi_amperage">Strømstyrke</string>
-	<string name="poi_charging_station_output">Ladestation-udgang</string>
+	<string name="poi_charging_station_output">Ladestation ydelse</string>
 
 <string name="poi_map_type_topo">Korttype: topografisk</string>
 	<string name="poi_map_type_street">Korttype: gadekort</string>

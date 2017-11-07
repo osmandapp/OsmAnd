@@ -186,6 +186,12 @@ public class AndroidUtils {
 		return result;
 	}
 
+	public static void addStatusBarPadding21v(Context ctx, View view) {
+		if (Build.VERSION.SDK_INT >= 21) {
+			view.setPadding(0, getStatusBarHeight(ctx), 0, 0);
+		}
+	}
+
 	public static int getNavBarHeight(Context ctx) {
 		if (!hasNavBar(ctx)) {
 			return 0;
@@ -247,36 +253,48 @@ public class AndroidUtils {
 		return new PointF(centroidX, centroidY);
 	}
 
-	public static void showSystemUI(Activity activity) {
-		if (Build.VERSION.SDK_INT >= 19 && !isSystemUiVisible(activity)) {
-			switchSystemUiVisibility(activity);
+	public static void showNavBar(Activity activity) {
+		if (Build.VERSION.SDK_INT >= 19 && !isNavBarVisible(activity)) {
+			switchNavBarVisibility(activity);
 		}
 	}
 
-	public static void hideSystemUI(Activity activity) {
-		if (Build.VERSION.SDK_INT >= 19 && isSystemUiVisible(activity)) {
-			switchSystemUiVisibility(activity);
+	public static void hideNavBar(Activity activity) {
+		if (Build.VERSION.SDK_INT >= 19 && isNavBarVisible(activity)) {
+			switchNavBarVisibility(activity);
 		}
 	}
 
-	public static boolean isSystemUiVisible(Activity activity) {
+	public static boolean isNavBarVisible(Activity activity) {
 		if (Build.VERSION.SDK_INT >= 19) {
 			int uiOptions = activity.getWindow().getDecorView().getSystemUiVisibility();
-			return !((uiOptions | View.SYSTEM_UI_FLAG_FULLSCREEN) == uiOptions);
+			return !((uiOptions | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == uiOptions);
 		}
 		return true;
 	}
 
-	public static void switchSystemUiVisibility(Activity activity) {
+	public static void switchNavBarVisibility(Activity activity) {
 		if (Build.VERSION.SDK_INT < 19) {
 			return;
 		}
 		View decorView = activity.getWindow().getDecorView();
 		int uiOptions = decorView.getSystemUiVisibility();
 		uiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-		uiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
 		uiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 		decorView.setSystemUiVisibility(uiOptions);
+	}
+
+	public static void enterToFullScreen(Activity activity) {
+		if (Build.VERSION.SDK_INT >= 21) {
+			activity.getWindow().getDecorView()
+					.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+		}
+	}
+
+	public static void exitFromFullScreen(Activity activity) {
+		if (Build.VERSION.SDK_INT >= 21) {
+			activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+		}
 	}
 
 	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {

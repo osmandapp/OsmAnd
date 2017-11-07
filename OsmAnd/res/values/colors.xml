@@ -3,6 +3,7 @@
 
 	<color name="mapillary_color">#3db878</color>
 	<color name="mapillary_color_pressed">#3a9f73</color>
+	<color name="mapillary_action_bar">#14c45d</color>
 	<color name="buy_button_color">#50ae55</color>
     <color name="buy_button_pressed_color">#b5e5b9</color>
 
@@ -61,14 +62,14 @@
 	<color name="dashboard_parking_light_color">#009688</color>
 	<color name="dashboard_parking_dark_color">#54778c</color>
 	<color name="dashboard_parking_dark_selected">#446072</color>
-	
+
 	<color name="plugin_details_install_header_bg_light">#dbdbdb</color>
 	<color name="plugin_details_install_header_bg_dark">#2d3438</color>
-	
+
 	<color name="list_divider_dark">#1f2326</color>
 	<color name="list_divider_light">@color/color_white</color>
 	<color name="list_sub_menu_background_dark">#475259</color>
-	<!-- <color name="list_item_light">@color/color_white</color> 
+	<!-- <color name="list_item_light">@color/color_white</color>
 	<color name="list_item_background_dark">#333b40</color> -->
 	<color name="list_item_light">#fff</color>
 	<color name="list_item_dark">#333b40</color>
@@ -129,6 +130,15 @@
 	<color name="dashboard_general_button_text_dark">#ff8f00</color>
 	<color name="dashboard_general_button_text_light">#536DFE</color>
 
+	<color name="status_bar_light">#e58200</color>
+	<color name="status_bar_dark">#2f3a40</color>
+	<color name="status_bar_transparent_light">#33000000</color>
+	<color name="status_bar_transparent_dark">#99000000</color>
+	<color name="status_bar_transparent_gradient">#CC000000</color>
+	<color name="status_bar_mapillary">#11ab51</color>
+	<color name="status_bar_route_light">#d9d9d9</color>
+	<color name="status_bar_route_dark">#000000</color>
+
 
 	<color name="color_transparent">#0000</color>
 	<color name="widgettext_night">#ffC8C8C8</color>
@@ -142,15 +152,15 @@
 
 	<!-- Distance to object suitable for all themes -->
 	<color name="color_distance">#FD9822</color>
-	
+
 	<color name="color_myloc_distance">#0080FF</color>
 	<color name="wpt_distance_color">#dd6CB336</color>
 	<!-- Old dialogs colors -->
 	<color name="color_white">#FFF</color>
 	<color name="color_black">#000</color>
-	
+
 	<color name="row_selection_color">#CC33BBE0</color>
-	
+
 	<!-- GPX analysis colors -->
 	<color name="gpx_color_point">#cd2c33</color>
 	<color name="gpx_speed">#c79c00</color>
@@ -174,7 +184,7 @@
 	<color name="color_intermediate">#FFDD00</color>
 	<!-- update good state, osm_modify, index_update -->
 	<color name="color_update">#0080FF</color>
-	
+
 	<!-- Map colors, layers, special purpose consistency colors -->
 	<color name="pos_heading">#320000FF</color>
 	<!-- color name="pos_heading_night">#880000FF</color -->
@@ -190,13 +200,13 @@
 	<color name="nav_track">#CCaa0088</color>
 	<color name="nav_track_fluorescent">#CC00ddff</color>
 	<color name="transport_route_line">#CC2f7af5</color>
-	
+
 
 	<color name="nav_arrow_distant">#C0C0C0</color>
 	<color name="nav_arrow">#FADE23</color>
 	<color name="nav_arrow_imminent">#2EFF00</color>
 
-	<color name="nav_point">#FA5050</color> 
+	<color name="nav_point">#FA5050</color>
 	<color name="poi_background">#A0FF8000</color>
 
 	<color name="transport_stop">#960000FF</color>
@@ -207,9 +217,9 @@
 	<color name="osmbug_closed">#C800FF00</color> <!-- standard GREEN -->
 	<color name="osmbug_not_submitted">#C8FFFF00</color> <!-- standard YELLOW -->
 
-	
+
 	<color name="shadow_color">#33888888</color>
-	
+
 	<color name="sherpafy_selection">#ff33b5e5</color>
 	<color name="sherpafy_add_text">#b9b9b9</color>
 

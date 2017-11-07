@@ -2,8 +2,8 @@ package net.osmand.plus.mapcontextmenu.builders.cards.dialogs;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
@@ -16,11 +16,12 @@ import android.widget.TextView;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.util.Algorithms;
 
-public class ContextMenuCardDialogFragment extends Fragment {
+public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 	public static final String TAG = "ContextMenuCardDialogFragment";
 
 	private ContextMenuCardDialog dialog;
@@ -39,6 +40,10 @@ public class ContextMenuCardDialogFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.context_menu_card_dialog, container, false);
+		if (dialog.getType() == ContextMenuCardDialog.CardDialogType.MAPILLARY) {
+			view.findViewById(R.id.dialog_layout)
+					.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.mapillary_action_bar));
+		}
 		contentLayout = (LinearLayout) view.findViewById(R.id.content);
 		contentView = dialog.getContentView();
 		if (contentView != null) {
@@ -104,6 +109,19 @@ public class ContextMenuCardDialogFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		dialog.saveMenu(outState);
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		if (dialog != null && dialog.getType() == ContextMenuCardDialog.CardDialogType.MAPILLARY) {
+			return R.color.status_bar_mapillary;
+		}
+		return -1;
+	}
+
+	@Override
+	protected boolean isFullScreenAllowed() {
+		return false;
 	}
 
 	public static void showInstance(ContextMenuCardDialog menu) {

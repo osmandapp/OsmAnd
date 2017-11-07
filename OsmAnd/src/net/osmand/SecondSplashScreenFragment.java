@@ -2,6 +2,7 @@ package net.osmand;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -116,7 +117,7 @@ public class SecondSplashScreenFragment extends Fragment {
 		textLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		textLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 		int defaultLogoMarginTop = (int) getResources().getDimension(R.dimen.splash_screen_logo_top);
-		int logoMarginTop = defaultLogoMarginTop - getStatusBarHeight();
+		int logoMarginTop = defaultLogoMarginTop - (Build.VERSION.SDK_INT >= 21 ? 0 : getStatusBarHeight());
 		int logoPaddingLeft = 0;
 		int logoPaddingRight = 0;
 		int defaultTextMarginBottom = (int) getResources().getDimension(R.dimen.splash_screen_text_bottom);

@@ -406,14 +406,14 @@
 <string name="poi_chalet">کلبه ییلاقی</string>
 
 <string name="poi_place_of_worship">پرستشگاه</string>
-<string name="poi_religion_christian">پرستشگاه: مسیحیان</string>
-<string name="poi_religion_jewish">پرستشگاه: یهودیان</string>
-<string name="poi_religion_muslim">Place of worship: muslim</string>
-<string name="poi_religion_sikh">پرستشگاه: سیک ها</string>
-<string name="poi_religion_buddhist">پرستشگاه: بودایی</string>
-<string name="poi_religion_hindu">پرستشگاه: هندوها</string>
-<string name="poi_religion_shinto">پرستشگاه: مذهب شینتو</string>
-<string name="poi_religion_taoist">پرستشگاه: تائوئیست</string>
+<string name="poi_religion_christian">مسیحیت</string>
+<string name="poi_religion_jewish">یهودیت</string>
+<string name="poi_religion_muslim">اسلام</string>
+<string name="poi_religion_sikh">سیک</string>
+<string name="poi_religion_buddhist">بودایی</string>
+<string name="poi_religion_hindu">هندو</string>
+<string name="poi_religion_shinto">شینتو</string>
+<string name="poi_religion_taoist">تائوئیسم</string>
 <string name="poi_monastery">صومعه</string>
 <string name="poi_historic_monastery">صومعه تاریخی</string>
 <string name="poi_wayside_cross">ایستگاه بین راهی</string>
@@ -699,4 +699,5 @@
 	<string name="poi_fee">بها</string>
 	<string name="poi_recycling_type">نوع</string>
 	<string name="poi_shelter_type">نوع</string>
+	<string name="poi_religion_voodoo">وودو</string>
 	</resources>

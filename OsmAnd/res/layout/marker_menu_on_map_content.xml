@@ -122,39 +122,4 @@
             android:textAppearance="@style/TextAppearance.ListItemTitle"/>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="@dimen/bottom_sheet_divider_margin_bottom"
-        android:layout_marginLeft="@dimen/bottom_sheet_divider_margin_start"
-        android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
-        android:layout_marginTop="@dimen/bottom_sheet_divider_margin_top"
-        android:background="?attr/dashboard_divider"/>
-
-    <LinearLayout
-        android:id="@+id/delete_row"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_sheet_list_item_height"
-        android:background="?attr/selectableItemBackground"
-        android:gravity="center_vertical">
-
-        <ImageView
-            android:id="@+id/delete_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
-            android:layout_marginLeft="@dimen/content_padding"
-            android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-            android:layout_marginStart="@dimen/content_padding"
-            tools:src="@drawable/ic_action_delete_dark"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@string/shared_string_delete"
-            android:textAppearance="@style/TextAppearance.ListItemTitle"/>
-    </LinearLayout>
-
 </LinearLayout>
