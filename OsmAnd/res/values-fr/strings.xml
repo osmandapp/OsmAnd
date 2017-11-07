@@ -2161,7 +2161,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
 
     <string name="update_time">Heure de mise à jour</string>
 <string name="updates_size">Taille des mises à jour</string>
-<string name="last_map_change">Dernière modification de carte : %s</string>
+<string name="last_map_change">Dernière modification de la carte : %s</string>
 <string name="shared_string_not_selected">Non sélectionné</string>
     <string name="hourly">Horaire</string>
     <string name="daily">Journalière</string>
