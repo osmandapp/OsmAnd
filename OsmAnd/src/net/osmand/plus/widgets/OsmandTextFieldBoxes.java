@@ -61,6 +61,7 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 		if (!useOsmandKeyboard) {
 			OsmandTextFieldBoxes.this.inputMethodManager.showSoftInput(OsmandTextFieldBoxes.this.editText, InputMethodManager.SHOW_IMPLICIT);
 		}
+		performClick();
 	}
 
 	@Override
@@ -84,56 +85,7 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 		this.activated = false;
 	}
 
-	@Nullable
-	@Override
-	protected Parcelable onSaveInstanceState() {
-		Parcelable superState = super.onSaveInstanceState();
-		SavedState savedState = new SavedState(superState);
-		if (editText != null) {
-			savedState.hasText = !editText.getText().toString().isEmpty();
-		}
-		return savedState;
-	}
-
-	@Override
-	protected void onRestoreInstanceState(Parcelable state) {
-		SavedState savedState = (SavedState) state;
-		super.onRestoreInstanceState(savedState.getSuperState());
-		if (savedState.hasText) {
-			activate(true);
-		}
-	}
-
 	public ExtendedEditText getEditText() {
 		return editText;
-	}
-
-	private static class SavedState extends BaseSavedState {
-		private boolean hasText;
-
-		SavedState(Parcel source) {
-			super(source);
-			hasText = source.readByte() == 1;
-		}
-
-		SavedState(Parcelable superState) {
-			super(superState);
-		}
-
-		@Override
-		public void writeToParcel(Parcel out, int flags) {
-			super.writeToParcel(out, flags);
-			out.writeByte((byte) (hasText ? 1 : 0));
-		}
-
-		public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
-			public SavedState createFromParcel(Parcel in) {
-				return new SavedState(in);
-			}
-
-			public SavedState[] newArray(int size) {
-				return new SavedState[size];
-			}
-		};
 	}
 }

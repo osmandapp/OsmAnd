@@ -399,7 +399,7 @@ dependencies {
 		exclude group: 'com.android.support'
 	}
 	compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
-	compile ("com.github.HITGIF:TextFieldBoxes:1.3.4"){
+	compile ("com.github.HITGIF:TextFieldBoxes:1.3.5"){
 		exclude group: 'com.android.support'
 	}
 }
