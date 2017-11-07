@@ -2140,11 +2140,11 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="av_audio_bitrate_descr">Sélectionnez le bitrate audio</string>
     <string name="no_address_found">Impossible de déterminer l\'adresse</string>
 	<string name="looking_up_address">Recherche de l\'adresse</string>
-    <string name="update">Mettre à jour tout les</string>
-    <string name="only_download_over_wifi">Télécharger uniquement en WIFI</string>
+    <string name="update">Fréquence de mise à jour</string>
+    <string name="only_download_over_wifi">Télécharger uniquement en WiFi</string>
     <string name="live_update">Mise à jour en temps réel</string>
 <string name="rendering_attr_horseRoutes_name">Randonnée à cheval</string>
-    <string name="update_now">Effectuer la mise à jour maintenant</string>
+    <string name="update_now">Mettre à jour maintenant</string>
 <string name="route_distance">Distance :</string>
     <string name="route_duration">Durée :</string>
     <string name="missing_write_external_storage_permission">L\'application n\'est pas autorisée à utiliser la carte SD</string>
@@ -2160,11 +2160,11 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="last_update">Dernière mise à jour : %s</string>
 
     <string name="update_time">Heure de mise à jour</string>
-<string name="updates_size">Mises à jour</string>
-<string name="last_map_change">Dernier carte modifiée : %s</string>
+<string name="updates_size">Taille des mises à jour</string>
+<string name="last_map_change">Dernière modification de carte : %s</string>
 <string name="shared_string_not_selected">Non sélectionné</string>
     <string name="hourly">Horaire</string>
-    <string name="daily">Quotidien</string>
+    <string name="daily">Journalière</string>
     <string name="weekly">Hebdomadaire</string>
     <string name="morning">Matin</string>
     <string name="night">Nuit</string>
@@ -2223,7 +2223,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="osm_live_active">Actif</string>
     <string name="osm_live_not_active">Inactif</string>
     <string name="osm_live_enter_email">Merci de saisir un courriel valide</string>
-    <string name="osm_live_thanks">Merci de vous être abonnés aux mises à jour temps réel !</string>
+    <string name="osm_live_thanks">Merci de vous être abonné aux mises à jour temps réel !</string>
     <string name="osm_live_subscription_settings">Paramétrage de l\'abonnement</string>
     <string name="show_transparency_seekbar">Afficher la barre de recherche transparente</string>
     <string name="recalculate_route">Recalculer l\'itinéraire</string>
@@ -2231,7 +2231,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="shared_string_topbar">Barre supérieure</string>
     <string name="osm_live_ask_for_purchase">Au préalable veuillez acheter un abonnement OsmAnd Live</string>
 
-    <string name="osm_live_region_desc">Une partie de vos dons seront distribués aux utilisateurs OSM ayant soumis des mises à jour dans cette région</string>
+    <string name="osm_live_region_desc">Une partie de vos dons seront distribués aux utilisateurs OSM ayant soumis des mises à jour dans cette région.</string>
     <string name="avoid_road">Éviter la route</string>
     <string name="osm_editors_ranking">Classement des éditeurs OSM</string>
     <string name="osm_live_email_desc">Ces informations sont requises pour afficher les contributions</string>
