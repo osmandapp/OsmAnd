@@ -835,8 +835,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 			boolean night = app.getDaynightHelper().isNightModeForMapControls();
 			boolean mapTopBar = findViewById(R.id.map_top_bar).getVisibility() == View.VISIBLE;
-			boolean markerTopBar = mapLayers.getMapMarkersLayer() != null
-					&& mapLayers.getMapMarkersLayer().getWidgetsFactory().isTopBarVisible();
+			boolean markerTopBar = findViewById(R.id.map_markers_top_bar).getVisibility() == View.VISIBLE;
 			if (mapTopBar) {
 				colorId = night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
 			} else if (markerTopBar) {
