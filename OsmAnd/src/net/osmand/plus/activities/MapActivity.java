@@ -328,15 +328,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void exitFromFullScreen() {
-		if (Build.VERSION.SDK_INT >= 21) {
-			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-		}
+		AndroidUtils.exitFromFullScreen(this);
 	}
 
 	public void enterToFullScreen() {
-		if (Build.VERSION.SDK_INT >= 21) {
-			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-		}
+		AndroidUtils.enterToFullScreen(this);
 	}
 
 	@Override
@@ -835,8 +831,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 			boolean night = app.getDaynightHelper().isNightModeForMapControls();
 			boolean mapTopBar = findViewById(R.id.map_top_bar).getVisibility() == View.VISIBLE;
-			boolean markerTopBar = mapLayers.getMapMarkersLayer() != null
-					&& mapLayers.getMapMarkersLayer().getWidgetsFactory().isTopBarVisible();
+			boolean markerTopBar = findViewById(R.id.map_markers_top_bar).getVisibility() == View.VISIBLE;
 			if (mapTopBar) {
 				colorId = night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
 			} else if (markerTopBar) {

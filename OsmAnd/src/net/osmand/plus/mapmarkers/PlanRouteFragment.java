@@ -383,7 +383,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	@Override
 	public int getStatusBarColorId() {
 		if (fullScreen || !portrait) {
-			return nightMode ? R.color.status_bar_dark : R.color.status_bar_route_light;
+			return nightMode ? R.color.actionbar_dark_color : R.color.status_bar_route_light;
 		}
 		return R.color.status_bar_transparent_gradient;
 	}
