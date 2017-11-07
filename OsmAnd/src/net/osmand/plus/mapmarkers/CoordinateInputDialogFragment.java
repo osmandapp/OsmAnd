@@ -383,9 +383,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private void registerInputEditTexts() {
 		TextWatcher textWatcher = new TextWatcher() {
 
+			private int strLength;
+
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+				strLength = charSequence.length();
 			}
 
 			@Override
@@ -400,11 +402,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					if (focusedView != null && focusedView instanceof EditText) {
 						EditText focusedEditText = (EditText) focusedView;
 						String str = focusedEditText.getText().toString();
-						int pointIndex = str.indexOf(".");
-						if (pointIndex != -1) {
-							int currentAccuracy = str.substring(pointIndex + 1).length();
-							if (currentAccuracy >= accuracy) {
-								switchToNextInput(focusedEditText.getId());
+						int currentLength = str.length();
+						if (currentLength > strLength) {
+							int pointIndex = str.indexOf(".");
+							if (pointIndex != -1) {
+								int currentAccuracy = str.substring(pointIndex + 1).length();
+								if (currentAccuracy >= accuracy) {
+									switchToNextInput(focusedEditText.getId());
+								}
 							}
 						}
 					}
