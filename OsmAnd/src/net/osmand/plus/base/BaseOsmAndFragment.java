@@ -58,8 +58,8 @@ public class BaseOsmAndFragment extends Fragment {
 	}
 
 	@Override
-	public void onStop() {
-		super.onStop();
+	public void onDetach() {
+		super.onDetach();
 		if (Build.VERSION.SDK_INT >= 21 && getStatusBarColorId() != -1) {
 			Activity activity = getActivity();
 			if (activity instanceof MapActivity) {

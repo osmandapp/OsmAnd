@@ -817,7 +817,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (Build.VERSION.SDK_INT >= 21) {
 			int colorId = -1;
 			Fragment fragment = getVisibleFragment(getSupportFragmentManager());
-			if (fragment != null && fragment.isResumed() && fragment instanceof BaseOsmAndFragment) {
+			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseOsmAndFragment) {
 				colorId = ((BaseOsmAndFragment) fragment).getStatusBarColorId();
 			} else if (dashboardOnMap.isVisible()) {
 				colorId = dashboardOnMap.getStatusBarColor();
