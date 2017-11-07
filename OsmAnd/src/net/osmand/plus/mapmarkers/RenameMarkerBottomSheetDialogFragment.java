@@ -162,4 +162,16 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 		}
 		super.onDestroyView();
 	}
+
+	public static boolean showInstance(FragmentManager fm, MapMarker marker) {
+		try {
+			RenameMarkerBottomSheetDialogFragment fragment = new RenameMarkerBottomSheetDialogFragment();
+			fragment.setMarker(marker);
+			fragment.setRetainInstance(true);
+			fragment.show(fm, RenameMarkerBottomSheetDialogFragment.TAG);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }

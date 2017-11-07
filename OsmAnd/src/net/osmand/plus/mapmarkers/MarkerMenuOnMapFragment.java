@@ -134,10 +134,7 @@ public class MarkerMenuOnMapFragment extends BaseOsmAndFragment implements OsmAn
 			public void onClick(View view) {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
-					RenameMarkerBottomSheetDialogFragment fragment = new RenameMarkerBottomSheetDialogFragment();
-					fragment.setMarker(marker);
-					fragment.setRetainInstance(true);
-					fragment.show(mapActivity.getSupportFragmentManager(), RenameMarkerBottomSheetDialogFragment.TAG);
+					RenameMarkerBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), marker);
 				}
 			}
 		});
