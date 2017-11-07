@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -58,6 +59,9 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 		}
 
 		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
+		if (nightMode) {
+			nameEditText.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_white));
+		}
 		nameEditText.setText(marker.getName(mapActivity));
 		nameEditText.requestFocus();
 		final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
