@@ -821,8 +821,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				colorId = ((BaseOsmAndFragment) fragment).getStatusBarColorId();
 			} else if (dashboardOnMap.isVisible()) {
 				colorId = dashboardOnMap.getStatusBarColor();
-			} else if (mapLayers.getMapQuickActionLayer() != null &&
-					mapLayers.getMapQuickActionLayer().isWidgetVisible()) {
+			} else if (mapLayers.getMapQuickActionLayer() != null
+					&& mapLayers.getMapQuickActionLayer().isWidgetVisible()) {
 				colorId = R.color.status_bar_transparent_gradient;
 			}
 			if (colorId != -1) {
@@ -831,8 +831,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 			boolean night = app.getDaynightHelper().isNightModeForMapControls();
 			boolean mapTopBar = findViewById(R.id.map_top_bar).getVisibility() == View.VISIBLE;
-			boolean markerTopBar = mapLayers.getMapMarkersLayer() != null &&
-					mapLayers.getMapMarkersLayer().getWidgetsFactory().isTopBarVisible();
+			boolean markerTopBar = mapLayers.getMapMarkersLayer() != null
+					&& mapLayers.getMapMarkersLayer().getWidgetsFactory().isTopBarVisible();
 			if (mapTopBar) {
 				colorId = night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
 			} else if (markerTopBar) {
