@@ -37,6 +37,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -64,7 +65,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class FirstUsageWizardFragment extends Fragment implements OsmAndLocationListener,
+public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmAndLocationListener,
 		AppInitializeListener, DownloadEvents {
 	public static final String TAG = "FirstUsageWizardFrag";
 	public static final int FIRST_USAGE_LOCATION_PERMISSION = 300;
@@ -447,6 +448,11 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 	public void onPause() {
 		super.onPause();
 		((MapActivity)getActivity()).enableDrawer();
+	}
+
+	@Override
+	protected boolean isFullScreenAllowed() {
+		return false;
 	}
 
 	@Override
@@ -906,10 +912,6 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 					.replace(R.id.fragmentContainer, fragment, FirstUsageWizardFragment.TAG)
 					.commitAllowingStateLoss();
 		}
-	}
-
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	private static void logError(String msg, Throwable e) {

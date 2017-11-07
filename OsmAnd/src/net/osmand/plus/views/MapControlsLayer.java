@@ -658,7 +658,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void showMapControls() {
 		mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
-//		AndroidUtils.showSystemUI(mapActivity);
+		AndroidUtils.showNavBar(mapActivity);
 	}
 
 	public void hideMapControls() {
@@ -674,7 +674,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return mapActivity.findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
 	}
 
-	public void switchMapControlsVisibility() {
+	public void switchMapControlsVisibility(boolean switchNavBarVisibility) {
 		if (app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
 				|| mapActivity.getMeasurementToolFragment() != null
 				|| mapActivity.getPlanRouteFragment() != null
@@ -683,9 +683,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 		if (isMapControlsVisible()) {
 			hideMapControls();
-//			if (switchSystemUiVisibility) {
-//				AndroidUtils.hideSystemUI(mapActivity);
-//			}
+			if (switchNavBarVisibility) {
+				AndroidUtils.hideNavBar(mapActivity);
+			}
 		} else {
 			showMapControls();
 		}
