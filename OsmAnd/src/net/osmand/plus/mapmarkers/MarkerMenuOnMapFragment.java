@@ -82,7 +82,6 @@ public class MarkerMenuOnMapFragment extends BaseOsmAndFragment implements OsmAn
 		((ImageView) mainView.findViewById(R.id.marker_icon))
 				.setImageDrawable(getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(marker.colorIndex)));
 		((ImageView) mainView.findViewById(R.id.rename_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_edit_dark));
-		((ImageView) mainView.findViewById(R.id.delete_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_delete_dark));
 
 		((TextView) mainView.findViewById(R.id.marker_title)).setText(marker.getName(getActivity()));
 
@@ -135,30 +134,8 @@ public class MarkerMenuOnMapFragment extends BaseOsmAndFragment implements OsmAn
 			public void onClick(View view) {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
-					RenameMarkerBottomSheetDialogFragment fragment = new RenameMarkerBottomSheetDialogFragment();
-					fragment.setMarker(marker);
-					fragment.setRetainInstance(true);
-					fragment.show(mapActivity.getSupportFragmentManager(), RenameMarkerBottomSheetDialogFragment.TAG);
+					RenameMarkerBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), marker);
 				}
-			}
-		});
-
-		mainView.findViewById(R.id.delete_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				app.getMapMarkersHelper().removeMarker(marker);
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					Snackbar.make(mapActivity.findViewById(R.id.bottomFragmentContainer), R.string.item_removed, Snackbar.LENGTH_LONG)
-							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
-								@Override
-								public void onClick(View view) {
-									app.getMapMarkersHelper().addMarker(marker);
-								}
-							})
-							.show();
-				}
-				dismiss();
 			}
 		});
 
