@@ -192,10 +192,7 @@ public class MarkerMenuOnMapFragment extends BaseOsmAndFragment implements OsmAn
 
 	@Override
 	public int getStatusBarColorId() {
-		if (portrait) {
-			return night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
-		}
-		return R.color.status_bar_transparent_gradient;
+		return portrait ? -1 : R.color.status_bar_transparent_gradient;
 	}
 
 	@Override

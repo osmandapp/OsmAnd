@@ -137,6 +137,7 @@
 	<color name="status_bar_transparent_gradient">#CC000000</color>
 	<color name="status_bar_mapillary">#11ab51</color>
 	<color name="status_bar_route_light">#d9d9d9</color>
+	<color name="status_bar_route_dark">#000000</color>
 
 
 	<color name="color_transparent">#0000</color>

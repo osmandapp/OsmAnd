@@ -525,7 +525,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (menu != null && (menu.getCurrentMenuState() == MenuState.FULL_SCREEN || menu.isLandscapeLayout())) {
 			return nightMode ? R.color.status_bar_dark : R.color.status_bar_route_light;
 		}
-		return nightMode ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
+		return -1;
 	}
 
 	private void updateImageButton(ImageButton button, int iconLightId, int iconDarkId, int bgLightId, int bgDarkId, boolean night) {

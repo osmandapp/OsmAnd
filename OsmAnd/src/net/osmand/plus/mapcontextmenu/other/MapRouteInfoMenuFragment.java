@@ -73,11 +73,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		if (portrait) {
-			return getMapActivity().getMyApplication().getDaynightHelper().isNightModeForMapControls()
-					? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
-		}
-		return R.color.status_bar_transparent_gradient;
+		return portrait ? -1 : R.color.status_bar_transparent_gradient;
 	}
 
 	public int getHeight() {
