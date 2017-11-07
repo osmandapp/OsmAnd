@@ -816,11 +816,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void updateStatusBarColor() {
 		if (Build.VERSION.SDK_INT >= 21) {
 			int colorId = -1;
-			Fragment fragment = getVisibleFragment(getSupportFragmentManager());
-			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseOsmAndFragment) {
-				colorId = ((BaseOsmAndFragment) fragment).getStatusBarColorId();
+			BaseOsmAndFragment fragmentAboveDashboard = getVisibleBaseOsmAndFragment(R.id.fragmentContainer);
+			BaseOsmAndFragment fragmentBelowDashboard = getVisibleBaseOsmAndFragment(R.id.routeMenuContainer,
+					R.id.topFragmentContainer, R.id.bottomFragmentContainer);
+			if (fragmentAboveDashboard != null) {
+				colorId = fragmentAboveDashboard.getStatusBarColorId();
 			} else if (dashboardOnMap.isVisible()) {
 				colorId = dashboardOnMap.getStatusBarColor();
+			} else if (fragmentBelowDashboard != null) {
+				colorId = fragmentBelowDashboard.getStatusBarColorId();
 			} else if (mapLayers.getMapQuickActionLayer() != null
 					&& mapLayers.getMapQuickActionLayer().isWidgetVisible()) {
 				colorId = R.color.status_bar_transparent_gradient;
@@ -844,15 +848,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	private Fragment getVisibleFragment(FragmentManager fm) {
-		int[] ids = new int[]{R.id.topFragmentContainer,
-				R.id.routeMenuContainer,
-				R.id.fragmentContainer,
-				R.id.bottomFragmentContainer};
+	private BaseOsmAndFragment getVisibleBaseOsmAndFragment(int... ids) {
 		for (int id : ids) {
-			Fragment fragment = fm.findFragmentById(id);
-			if (fragment != null) {
-				return fragment;
+			Fragment fragment = getSupportFragmentManager().findFragmentById(id);
+			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseOsmAndFragment) {
+				return (BaseOsmAndFragment) fragment;
 			}
 		}
 		return null;
