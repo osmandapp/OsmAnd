@@ -25,6 +25,7 @@ public class RecyclerViewFragment extends Fragment {
 	private RecyclerView rv;
 	private int height;
 	private int width;
+	private boolean transparentStatusBar;
 	private FrameLayout parent;
 	private FrameLayout mainView;
 
@@ -38,6 +39,10 @@ public class RecyclerViewFragment extends Fragment {
 
 	public void setWidth(int width) {
 		this.width = width;
+	}
+
+	public void setTransparentStatusBar(boolean transparentStatusBar) {
+		this.transparentStatusBar = transparentStatusBar;
 	}
 
 	@Nullable
@@ -67,6 +72,11 @@ public class RecyclerViewFragment extends Fragment {
 		shadow.setLayoutParams(params);
 		shadow.setScaleType(ImageView.ScaleType.FIT_XY);
 		shadow.setImageResource(R.drawable.bg_shadow_onmap);
+
+		if (transparentStatusBar) {
+			AndroidUtils.addStatusBarPadding21v(getActivity(), rv);
+			rv.setClipToPadding(false);
+		}
 
 		mainView.addView(rv);
 		mainView.addView(shadow);

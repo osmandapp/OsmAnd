@@ -181,7 +181,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         return result;
     }
 
-	private boolean isWidgetVisible() {
+	public boolean isWidgetVisible() {
 		return quickActionsWidget.getVisibility() == View.VISIBLE;
 	}
 
@@ -195,6 +195,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
 		updateQuickActionButton(showWidget);
         quickActionsWidget.setVisibility(!showWidget ? View.GONE : View.VISIBLE);
+        mapActivity.updateStatusBarColor();
 
         if (!showWidget) {
             quitMovingMarker();

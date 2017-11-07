@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
@@ -41,11 +42,11 @@ import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.measurementtool.NewGpxData.ActionType;
@@ -77,11 +78,10 @@ import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
 import static net.osmand.plus.helpers.GpxImportHelper.GPX_SUFFIX;
 
-public class MeasurementToolFragment extends Fragment {
+public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = "MeasurementToolFragment";
 
-	private IconsCache iconsCache;
 	private RecyclerView pointsRv;
 	private String previousToolBarTitle = "";
 	private MeasurementToolBarController toolBarController;
@@ -179,7 +179,6 @@ public class MeasurementToolFragment extends Fragment {
 		}
 
 		editingCtx.getCommandManager().resetMeasurementLayer(measurementLayer);
-		iconsCache = mapActivity.getMyApplication().getIconsCache();
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		final int backgroundColor = ContextCompat.getColor(getActivity(),
@@ -480,6 +479,11 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
+	@Override
+	public int getStatusBarColorId() {
+		return R.color.status_bar_transparent_gradient;
+	}
+
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
 	}
@@ -492,12 +496,13 @@ public class MeasurementToolFragment extends Fragment {
 		return null;
 	}
 
-	private Drawable getContentIcon(@DrawableRes int id) {
-		return iconsCache.getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color);
+	@Override
+	protected Drawable getContentIcon(@DrawableRes int id) {
+		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color);
 	}
 
 	private Drawable getActiveIcon(@DrawableRes int id) {
-		return iconsCache.getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
+		return getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
 	}
 
 	private void showProgressBar() {
@@ -1041,11 +1046,14 @@ public class MeasurementToolFragment extends Fragment {
 	private void showPointsListFragment() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			int screenHeight = AndroidUtils.getScreenHeight(mapActivity) - AndroidUtils.getStatusBarHeight(mapActivity);
+			boolean transparentStatusBar = Build.VERSION.SDK_INT >= 21;
+			int statusBarHeight = transparentStatusBar ? 0 : AndroidUtils.getStatusBarHeight(mapActivity);
+			int screenHeight = AndroidUtils.getScreenHeight(mapActivity) - statusBarHeight;
 			RecyclerViewFragment fragment = new RecyclerViewFragment();
 			fragment.setRecyclerView(pointsRv);
 			fragment.setWidth(upDownRow.getWidth());
 			fragment.setHeight(screenHeight - upDownRow.getHeight());
+			fragment.setTransparentStatusBar(transparentStatusBar);
 			mapActivity.getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, fragment, RecyclerViewFragment.TAG)
 					.commitAllowingStateLoss();

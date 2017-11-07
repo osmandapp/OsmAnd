@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.ColorRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -225,6 +226,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		mapMarkerDialogHelper.setHelperCallbacks(this);
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
+		AndroidUtils.addStatusBarPadding21v(mapActivity, dashboardView);
 		final View.OnClickListener listener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -769,6 +771,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		addOrUpdateDashboardFragments();
 	}
 
+	@ColorRes
+	public int getStatusBarColor() {
+		return R.color.status_bar_transparent_gradient;
+	}
+
 	public void setDashboardVisibility(boolean visible, DashboardType type, DashboardType prevItem, boolean animation) {
 		if (visible == this.visible && type == visibleType) {
 			return;
@@ -795,6 +802,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			swipeDismissListener.discardUndo();
 		}
 		removeMapillaryFiltersFragment();
+
+		mapActivity.updateStatusBarColor();
 
 		if (visible) {
 			mapActivity.dismissCardDialog();

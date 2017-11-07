@@ -182,6 +182,12 @@ public class AndroidUtils {
 		return result;
 	}
 
+	public static void addStatusBarPadding21v(Context ctx, View view) {
+		if (Build.VERSION.SDK_INT >= 21) {
+			view.setPadding(0, getStatusBarHeight(ctx), 0, 0);
+		}
+	}
+
 	public static int getNavBarHeight(Context ctx) {
 		if (!hasNavBar(ctx)) {
 			return 0;

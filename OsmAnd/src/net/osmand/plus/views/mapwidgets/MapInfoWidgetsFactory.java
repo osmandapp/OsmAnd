@@ -715,7 +715,11 @@ public class MapInfoWidgetsFactory {
 		}
 
 		public boolean updateVisibility(boolean visible) {
-			return updateVisibility(topBar, visible);
+			boolean res = updateVisibility(topBar, visible);
+			if (res) {
+				map.updateStatusBarColor();
+			}
+			return res;
 		}
 
 		public boolean updateVisibility(View v, boolean visible) {
