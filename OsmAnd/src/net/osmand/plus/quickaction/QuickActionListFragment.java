@@ -138,7 +138,17 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         quickActionRegistry.setUpdatesListener(null);
     }
 
-    private MapActivity getMapActivity() {
+	@Override
+	protected boolean isFullScreenAllowed() {
+		return false;
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		return getSettings().isLightContent() ? R.color.status_bar_light : R.color.status_bar_dark;
+	}
+
+	private MapActivity getMapActivity() {
         return (MapActivity) getActivity();
     }
 

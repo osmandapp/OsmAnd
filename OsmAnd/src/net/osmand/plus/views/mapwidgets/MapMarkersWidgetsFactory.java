@@ -55,6 +55,8 @@ public class MapMarkersWidgetsFactory {
 
 	private LatLon loc;
 
+	private boolean cachedTopBarVisibility;
+
 	public MapMarkersWidgetsFactory(final MapActivity map) {
 		this.map = map;
 		helper = map.getMyApplication().getMapMarkersHelper();
@@ -151,7 +153,12 @@ public class MapMarkersWidgetsFactory {
 	}
 
 	public boolean updateVisibility(boolean visible) {
-		return updateVisibility(topBar, visible);
+		boolean res = updateVisibility(topBar, visible);
+		if (visible != cachedTopBarVisibility) {
+			cachedTopBarVisibility = visible;
+			map.updateStatusBarColor();
+		}
+		return res;
 	}
 
 	public boolean updateVisibility(View v, boolean visible) {

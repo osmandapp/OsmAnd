@@ -25,6 +25,7 @@ import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
@@ -71,6 +72,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -225,6 +227,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
 
+		if (Build.VERSION.SDK_INT >= 21) {
+			enterToFullScreen();
+			// Navigation Drawer:
+			AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
+		}
+
 		int statusBarHeight = 0;
 		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
 		if (resourceId > 0) {
@@ -275,6 +283,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getResourceManager().getMapTileDownloader().addDownloaderCallback(downloaderCallback);
 		createProgressBarForRouting();
 		mapLayers.createLayers(mapView);
+		updateStatusBarColor();
 		// This situtation could be when navigation suddenly crashed and after restarting
 		// it tries to continue the last route
 		if (settings.FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()
@@ -316,6 +325,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getAidlApi().onCreateMapActivity(this);
 
 		mIsDestroyed = false;
+	}
+
+	public void exitFromFullScreen() {
+		AndroidUtils.exitFromFullScreen(this);
+	}
+
+	public void enterToFullScreen() {
+		AndroidUtils.enterToFullScreen(this);
 	}
 
 	@Override
@@ -790,6 +807,51 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
 			}
 		}
+	}
+
+	public void updateStatusBarColor() {
+		if (Build.VERSION.SDK_INT >= 21) {
+			int colorId = -1;
+			BaseOsmAndFragment fragmentAboveDashboard = getVisibleBaseOsmAndFragment(R.id.fragmentContainer);
+			BaseOsmAndFragment fragmentBelowDashboard = getVisibleBaseOsmAndFragment(R.id.routeMenuContainer,
+					R.id.topFragmentContainer, R.id.bottomFragmentContainer);
+			if (fragmentAboveDashboard != null) {
+				colorId = fragmentAboveDashboard.getStatusBarColorId();
+			} else if (dashboardOnMap.isVisible()) {
+				colorId = dashboardOnMap.getStatusBarColor();
+			} else if (fragmentBelowDashboard != null) {
+				colorId = fragmentBelowDashboard.getStatusBarColorId();
+			} else if (mapLayers.getMapQuickActionLayer() != null
+					&& mapLayers.getMapQuickActionLayer().isWidgetVisible()) {
+				colorId = R.color.status_bar_transparent_gradient;
+			}
+			if (colorId != -1) {
+				getWindow().setStatusBarColor(ContextCompat.getColor(this, colorId));
+				return;
+			}
+			boolean night = app.getDaynightHelper().isNightModeForMapControls();
+			boolean mapTopBar = findViewById(R.id.map_top_bar).getVisibility() == View.VISIBLE;
+			boolean markerTopBar = findViewById(R.id.map_markers_top_bar).getVisibility() == View.VISIBLE;
+			if (mapTopBar) {
+				colorId = night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
+			} else if (markerTopBar) {
+				colorId = R.color.status_bar_dark;
+			} else {
+				colorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
+			}
+			getWindow().setStatusBarColor(ContextCompat.getColor(this, colorId));
+		}
+	}
+
+	private BaseOsmAndFragment getVisibleBaseOsmAndFragment(int... ids) {
+		for (int id : ids) {
+			Fragment fragment = getSupportFragmentManager().findFragmentById(id);
+			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseOsmAndFragment
+					&& ((BaseOsmAndFragment) fragment).getStatusBarColorId() != -1) {
+				return (BaseOsmAndFragment) fragment;
+			}
+		}
+		return null;
 	}
 
 	private void dismissSecondSplashScreen() {

@@ -6,7 +6,6 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
@@ -17,15 +16,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -38,11 +38,10 @@ import java.util.Locale;
 import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
 
-public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassListener, OsmAndLocationListener {
+public class MarkerMenuOnMapFragment extends BaseOsmAndFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = "MarkerMenuOnMapFragment";
 
-	private IconsCache iconsCache;
 	private MapMarker marker;
 
 	private boolean night;
@@ -66,11 +65,13 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 		night = app.getDaynightHelper().isNightModeForMapControls();
-		iconsCache = app.getIconsCache();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_menu_on_map, null);
+		if (!portrait) {
+			AndroidUtils.addStatusBarPadding21v(getActivity(), mainView);
+		}
 		mainView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -79,7 +80,7 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 		});
 
 		((ImageView) mainView.findViewById(R.id.marker_icon))
-				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(marker.colorIndex)));
+				.setImageDrawable(getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(marker.colorIndex)));
 		((ImageView) mainView.findViewById(R.id.rename_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_edit_dark));
 		((ImageView) mainView.findViewById(R.id.delete_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_delete_dark));
 
@@ -109,7 +110,7 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 		ImageButton visitedBtn = (ImageButton) mainView.findViewById(R.id.marker_visited_button);
 		visitedBtn.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),
 				night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
-		visitedBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, night ? 0 : R.color.icon_color));
+		visitedBtn.setImageDrawable(getIcon(R.drawable.ic_action_marker_passed, night ? 0 : R.color.icon_color));
 		visitedBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -190,6 +191,11 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 	}
 
 	@Override
+	public int getStatusBarColorId() {
+		return portrait ? -1 : R.color.status_bar_transparent_gradient;
+	}
+
+	@Override
 	public void updateLocation(Location location) {
 		boolean newLocation = this.location == null && location != null;
 		boolean locationChanged = this.location != null && location != null
@@ -214,19 +220,13 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 		}
 	}
 
-	private OsmandApplication getMyApplication() {
-		if (getActivity() != null) {
-			return ((MapActivity) getActivity()).getMyApplication();
-		}
-		return null;
-	}
-
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
 	}
 
-	private Drawable getContentIcon(@DrawableRes int id) {
-		return iconsCache.getIcon(id, night ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
+	@Override
+	protected Drawable getContentIcon(@DrawableRes int id) {
+		return getIcon(id, night ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
 	}
 
 	private void startLocationUpdate() {
