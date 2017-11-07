@@ -288,7 +288,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 							EditText focusedEditText = (EditText) focusedView;
 							switch (i) {
 								case CLEAR_BUTTON_POSITION:
-									clearInputs();
+									focusedEditText.setText("");
 									break;
 								case BACKSPACE_BUTTON_POSITION:
 									String str = focusedEditText.getText().toString();
