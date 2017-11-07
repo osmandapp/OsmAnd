@@ -89,6 +89,7 @@
     <style name="OsmandTextFieldBoxes" parent="OsmandDarkTheme">
         <item name="android:textColorTertiary">@color/white_50_transparent</item>
         <item name="primaryColor">@color/white_50_transparent</item>
+        <item name="errorColor">@color/coordinate_input_error_color</item>
     </style>
 
     <!-- Osmand themes styles -->

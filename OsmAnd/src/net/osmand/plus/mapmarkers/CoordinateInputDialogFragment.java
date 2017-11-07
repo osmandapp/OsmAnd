@@ -40,7 +40,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -659,16 +658,33 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void addMapMarker() {
-		String latitude = ((EditText) mainView.findViewById(R.id.latitude_edit_text)).getText().toString();
-		String longitude = ((EditText) mainView.findViewById(R.id.longitude_edit_text)).getText().toString();
-		String locPhrase = latitude + " " + longitude;
-		LatLon latLon = MapUtils.parseLocation(locPhrase);
-		if (latLon != null) {
-			String name = ((EditText) mainView.findViewById(R.id.name_edit_text)).getText().toString();
-			addMapMarker(latLon, name);
+		final String latitude = ((EditText) mainView.findViewById(R.id.latitude_edit_text)).getText().toString();
+		final String longitude = ((EditText) mainView.findViewById(R.id.longitude_edit_text)).getText().toString();
+		double lat = parseCoordinate(latitude);
+		double lon = parseCoordinate(longitude);
+		if (lat == 0 || lon == 0) {
+			if (lon == 0) {
+				((OsmandTextFieldBoxes) mainView.findViewById(R.id.latitude_box)).setError("", true);
+			}
+			if (lat == 0) {
+				((OsmandTextFieldBoxes) mainView.findViewById(R.id.longitude_box)).setError("", true);
+			}
 		} else {
-			Toast.makeText(getContext(), getString(R.string.wrong_format), Toast.LENGTH_SHORT).show();
+			String name = ((EditText) mainView.findViewById(R.id.name_edit_text)).getText().toString();
+			addMapMarker(new LatLon(lat, lon), name);
 		}
+	}
+
+	private double parseCoordinate(String s) {
+		List<Double> d = new ArrayList<>();
+		List<Object> all = new ArrayList<>();
+		List<String> strings = new ArrayList<>();
+		MapUtils.splitObjects(s, d, all, strings);
+		double coordinate = MapUtils.parse1Coordinate(all, 0, all.size());
+		if (coordinate == 0 && d.size() == 1) {
+			coordinate = d.get(0);
+		}
+		return coordinate;
 	}
 
 	private void addMapMarker(LatLon latLon, String name) {
