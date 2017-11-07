@@ -93,7 +93,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean lightTheme;
 	private boolean useOsmandKeyboard = true;
 	private boolean rightHand = true;
-	private boolean goToNextField;
+	private boolean goToNextField = true;
 	private int accuracy = 4;
 	private List<OsmandTextFieldBoxes> textFieldBoxes;
 	private View mainView;
