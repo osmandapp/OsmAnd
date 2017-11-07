@@ -110,36 +110,39 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 			public void onClick(View view) {
 				goToNextField = !goToNextField;
 				((CompoundButton) mainView.findViewById(R.id.go_to_next_field_switch)).setChecked(goToNextField);
+				switchSelectedAccuracy();
 				if (listener != null) {
 					listener.onGoToNextFieldChanged(goToNextField);
 				}
 			}
 		});
 
-		((ImageView) mainView.findViewById(R.id.accuracy_arrow)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_drop_down));
+		switchSelectedAccuracy();
 		populateSelectedAccuracy();
 
 		mainView.findViewById(R.id.accuracy_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				final ListPopupWindow listPopupWindow = new ListPopupWindow(getContext());
-				listPopupWindow.setAnchorView(view);
-				listPopupWindow.setContentWidth(AndroidUtils.dpToPx(getMyApplication(), 100));
-				listPopupWindow.setModal(true);
-				listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
-				listPopupWindow.setAdapter(new ArrayAdapter<>(getContext(), R.layout.popup_list_text_item, new Integer[]{0, 1, 2, 3, 4, 5, 6}));
-				listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-						accuracy = i;
-						populateSelectedAccuracy();
-						if (listener != null) {
-							listener.onAccuracyChanged(accuracy);
+				if (goToNextField) {
+					final ListPopupWindow listPopupWindow = new ListPopupWindow(getContext());
+					listPopupWindow.setAnchorView(view);
+					listPopupWindow.setContentWidth(AndroidUtils.dpToPx(getMyApplication(), 100));
+					listPopupWindow.setModal(true);
+					listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
+					listPopupWindow.setAdapter(new ArrayAdapter<>(getContext(), R.layout.popup_list_text_item, new Integer[]{0, 1, 2, 3, 4, 5, 6}));
+					listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+						@Override
+						public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+							accuracy = i;
+							populateSelectedAccuracy();
+							if (listener != null) {
+								listener.onAccuracyChanged(accuracy);
+							}
+							listPopupWindow.dismiss();
 						}
-						listPopupWindow.dismiss();
-					}
-				});
-				listPopupWindow.show();
+					});
+					listPopupWindow.show();
+				}
 			}
 		});
 
@@ -173,6 +176,11 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	private void populateSelectedAccuracy() {
 		((TextView) mainView.findViewById(R.id.selected_accuracy)).setText(String.valueOf(accuracy));
 		((TextView) mainView.findViewById(R.id.selected_accuracy_hint)).setText("00:00." + new String(new char[accuracy]).replace("\0", "0"));
+	}
+
+	private void switchSelectedAccuracy() {
+		((TextView) mainView.findViewById(R.id.selected_accuracy)).setTextColor(ContextCompat.getColor(getContext(), goToNextField ? R.color.map_widget_blue : android.R.color.darker_gray));
+		((ImageView) mainView.findViewById(R.id.accuracy_arrow)).setImageDrawable(goToNextField ? getContentIcon(R.drawable.ic_action_arrow_drop_down) : getIcon(R.drawable.ic_action_arrow_drop_down, android.R.color.darker_gray));
 	}
 
 	interface CoordinateInputFormatChangeListener {
