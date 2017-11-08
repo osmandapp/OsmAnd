@@ -2941,4 +2941,11 @@
     <string name="tap_on_map_to_hide_interface">Поўныэкранны рэжым</string>
     <string name="show_on_top_bar">Паказаць на верхняй панэлі</string>
     <string name="mark_passed">Адзначыць прайдзеныя</string>
+    <string name="digits_quantity">Колькасць лічбаў</string>
+    <string name="show_number_pad">Паказаць лічбавую панэль</string>
+    <string name="shared_string_paste">Уставіць</string>
+    <string name="coordinate_input_accuracy_description">Аўтаматычна пераключыцца ў наступнае поле пасля ўводу %1$d лічбаў пасля дзесятковай кропкі</string>
+    <string name="coordinate_input_accuracy">%1$d лічбаў</string>
+    <string name="go_to_next_field">Парайсці ў наступнае поле</string>
+    <string name="rename_marker">Перайменаваць маркер</string>
     </resources>
