@@ -2841,4 +2841,13 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="tap_on_map_to_hide_interface">Modalidade a ischermu intreu</string>
     <string name="show_on_top_bar">Ammustra in sa barra superiore</string>
     <string name="mark_passed">Sinna comente coladu</string>
+    <string name="digits_quantity">Nùmeru de tzifras</string>
+    <string name="shared_string_right">Destra</string>
+    <string name="shared_string_left">Manca</string>
+    <string name="show_number_pad">Ammustra tecladu numèricu</string>
+    <string name="shared_string_paste">Incolla</string>
+    <string name="coordinate_input_accuracy_description">Cola automaticamente a su campu imbeniente a pustis de àere iscritu %1$d tzifras a pustis de sa vìrgula</string>
+    <string name="coordinate_input_accuracy">%1$d tzifras</string>
+    <string name="go_to_next_field">Cola a su campu imbeniente</string>
+    <string name="rename_marker">Torra a numenare su marcadore</string>
     </resources>
