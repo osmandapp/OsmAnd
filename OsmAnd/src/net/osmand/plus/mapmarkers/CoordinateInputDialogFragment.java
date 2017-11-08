@@ -77,12 +77,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	public static final String GO_TO_NEXT_FIELD = "go_to_next_field";
 	public static final String ACCURACY = "accuracy";
 
-	private static final int CLEAR_BUTTON_POSITION = 3;
+	private static final int SWITCH_TO_NEXT_INPUT_BUTTON_POSITION = 3;
 	private static final int MINUS_BUTTON_POSITION = 7;
 	private static final int BACKSPACE_BUTTON_POSITION = 11;
-	private static final int POINT_BUTTON_POSITION = 12;
-	private static final int COLON_BUTTON_POSITION = 14;
-	private static final int SWITCH_TO_NEXT_INPUT_BUTTON_POSITION = 15;
+	private static final int COLON_BUTTON_POSITION = 12;
+	private static final int POINT_BUTTON_POSITION = 14;
+	private static final int CLEAR_BUTTON_POSITION = 15;
 	private static final String LATITUDE_LABEL = "latitude";
 	private static final String LONGITUDE_LABEL = "longitude";
 	private static final String NAME_LABEL = "name";
@@ -268,10 +268,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				AndroidUtils.setBackground(mapActivity, keyboardLayout, !lightTheme, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 			}
 
-			Object[] keyboardItems = new Object[] { "1", "2", "3", getString(R.string.shared_string_clear),
+			Object[] keyboardItems = new Object[] { "1", "2", "3", R.drawable.ic_keyboard_next_field,
 					"4", "5", "6", "-",
 					"7", "8", "9", R.drawable.ic_keyboard_backspace,
-					".", "0", ":", R.drawable.ic_keyboard_next_field};
+					":", "0", ".", getString(R.string.shared_string_clear)};
 			final GridView keyboardGrid = (GridView) mainView.findViewById(R.id.keyboard_grid_view);
 			keyboardGrid.setBackgroundColor(ContextCompat.getColor(getContext(), lightTheme ? R.color.keyboard_divider_light : R.color.keyboard_divider_dark));
 			final KeyboardAdapter keyboardAdapter = new KeyboardAdapter(mapActivity, keyboardItems);
