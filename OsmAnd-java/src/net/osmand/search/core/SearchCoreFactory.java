@@ -31,6 +31,7 @@ import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPointParserUtil;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
+import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -1127,17 +1128,17 @@ public class SearchCoreFactory {
 			List<Double> d = new ArrayList<>();
 			List<Object> all = new ArrayList<>();
 			List<String> strings = new ArrayList<>();
-			MapUtils.splitObjects(s, d, all, strings);
+			LocationParser.splitObjects(s, d, all, strings);
 			if (d.size() == 0) {
 				return null;
 			}
-			double lat = MapUtils.parse1Coordinate(all, 0, all.size());
+			double lat = LocationParser.parse1Coordinate(all, 0, all.size());
 			return new LatLon(lat, 0);
 		}
 
 		private void parseLocation(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
 			String lw = phrase.getUnknownSearchPhrase();
-			LatLon l = MapUtils.parseLocation(lw);
+			LatLon l = LocationParser.parseLocation(lw);
 			if (l != null) {
 				if (phrase.isSearchTypeAllowed(ObjectType.LOCATION)) {
 					SearchResult sp = new SearchResult(phrase);

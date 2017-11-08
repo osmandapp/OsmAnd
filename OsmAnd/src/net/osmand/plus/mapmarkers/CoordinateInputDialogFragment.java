@@ -59,6 +59,7 @@ import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
+import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -634,8 +635,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		List<Double> d = new ArrayList<>();
 		List<Object> all = new ArrayList<>();
 		List<String> strings = new ArrayList<>();
-		MapUtils.splitObjects(s, d, all, strings);
-		double coordinate = MapUtils.parse1Coordinate(all, 0, all.size());
+		LocationParser.splitObjects(s, d, all, strings);
+		double coordinate = LocationParser.parse1Coordinate(all, 0, all.size());
 		if (coordinate == 0 && d.size() == 1) {
 			coordinate = d.get(0);
 		}
