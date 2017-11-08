@@ -265,9 +265,16 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			});
 
 			View keyboardLayout = mainView.findViewById(R.id.keyboard_layout);
+			int lightResId;
+			int darkResId;
 			if (orientationPortrait) {
-				AndroidUtils.setBackground(mapActivity, keyboardLayout, !lightTheme, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+				lightResId = R.drawable.bg_bottom_menu_light;
+				darkResId = R.drawable.bg_bottom_menu_dark;
+			} else {
+				lightResId = rightHand ? R.drawable.bg_contextmenu_shadow_left_light : R.drawable.bg_contextmenu_shadow_right_light;
+				darkResId = lightResId;
 			}
+			AndroidUtils.setBackground(mapActivity, keyboardLayout, !lightTheme, lightResId, darkResId);
 
 			Object[] keyboardItems = new Object[] { "1", "2", "3", R.drawable.ic_keyboard_next_field,
 					"4", "5", "6", "-",
