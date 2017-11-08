@@ -10,9 +10,13 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -22,11 +26,13 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProviderSelection;
@@ -41,6 +47,8 @@ import gnu.trove.list.array.TIntArrayList;
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
 
+	private static final long USE_FINGER_LOCATION_DELAY = 1000;
+	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 6;
 	protected static final int DIST_TO_SHOW = 80;
 	private static final int TEXT_SIZE = 12;
 	private static final int VERTICAL_OFFSET = 10;
@@ -79,6 +87,13 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private TIntArrayList tx = new TIntArrayList();
 	private TIntArrayList ty = new TIntArrayList();
 	private Path linePath = new Path();
+
+	private LatLon fingerLocation;
+	private boolean hasMoved;
+	private boolean moving;
+	private boolean useFingerLocation;
+	private GestureDetector longTapDetector;
+	private Handler handler;
 
 	private ContextMenuLayer contextMenuLayer;
 
@@ -192,7 +207,14 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
+		handler = new Handler();
 		initUI();
+		longTapDetector = new GestureDetector(view.getContext(), new GestureDetector.SimpleOnGestureListener() {
+			@Override
+			public void onLongPress(MotionEvent e) {
+				cancelFingerAction();
+			}
+		});
 	}
 
 	@Override
@@ -217,8 +239,17 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			textAttrs.updatePaints(view, nightMode, tileBox);
 			textAttrs.paint.setStyle(Paint.Style.FILL);
 
-			int locX = (int) tileBox.getPixXFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
-			int locY = (int) tileBox.getPixYFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
+			int locX;
+			int locY;
+			if (map.getMapViewTrackingUtilities().isMapLinkedToLocation()
+					&& !MapViewTrackingUtilities.isSmallSpeedForAnimation(myLoc)
+					&& !map.getMapViewTrackingUtilities().isMovingToMyLocation()) {
+				locX = (int) tileBox.getPixXFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
+				locY = (int) tileBox.getPixYFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
+			} else {
+				locX = (int) tileBox.getPixXFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
+				locY = (int) tileBox.getPixYFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
+			}
 			int[] colors = MapMarker.getColors(map);
 			for (int i = 0; i < activeMapMarkers.size() && i < 2; i++) {
 				MapMarker marker = activeMapMarkers.get(i);
@@ -266,8 +297,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
 		Location myLoc = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
-		widgetsFactory.updateInfo(myLoc == null
-				? tileBox.getCenterLatLon() : new LatLon(myLoc.getLatitude(), myLoc.getLongitude()), tileBox.getZoom());
+		widgetsFactory.updateInfo(useFingerLocation ? fingerLocation : (myLoc == null
+				? tileBox.getCenterLatLon() : new LatLon(myLoc.getLatitude(), myLoc.getLongitude())), tileBox.getZoom());
 		OsmandSettings settings = map.getMyApplication().getSettings();
 
 		if (tileBox.getZoom() < 3 || !settings.USE_MAP_MARKERS.get()) {
@@ -362,6 +393,57 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void destroyLayer() {
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
+		if (!longTapDetector.onTouchEvent(event)) {
+			switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					float x = event.getX();
+					float y = event.getY();
+					fingerLocation = tileBox.getLatLonFromPixel(x, y);
+					hasMoved = false;
+					moving = true;
+					break;
+
+				case MotionEvent.ACTION_MOVE:
+					if (!hasMoved) {
+						if (!handler.hasMessages(MAP_REFRESH_MESSAGE)) {
+							Message msg = Message.obtain(handler, new Runnable() {
+								@Override
+								public void run() {
+									handler.removeMessages(MAP_REFRESH_MESSAGE);
+									if (moving) {
+										if (!useFingerLocation) {
+											useFingerLocation = true;
+											map.refreshMap();
+										}
+									}
+								}
+							});
+							msg.what = MAP_REFRESH_MESSAGE;
+							handler.sendMessageDelayed(msg, USE_FINGER_LOCATION_DELAY);
+						}
+						hasMoved = true;
+					}
+					break;
+
+				case MotionEvent.ACTION_UP:
+				case MotionEvent.ACTION_CANCEL:
+					cancelFingerAction();
+					break;
+			}
+		}
+		return super.onTouchEvent(event, tileBox);
+	}
+
+	private void cancelFingerAction() {
+		handler.removeMessages(MAP_REFRESH_MESSAGE);
+		useFingerLocation = false;
+		moving = false;
+		fingerLocation = null;
+		map.refreshMap();
 	}
 
 	@Override
