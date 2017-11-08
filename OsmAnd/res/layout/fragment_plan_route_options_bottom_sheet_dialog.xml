@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="@string/shared_string_navigate"
+                    android:text="@string/get_directions"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
             </LinearLayout>
 
