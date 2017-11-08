@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<android.support.design.widget.AppBarLayout
+		android:id="@+id/app_bar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<android.support.v7.widget.Toolbar
+			android:id="@+id/coordinate_input_toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingBottom="12dp"
+			android:paddingTop="12dp"
+			osmand:contentInsetLeft="4dp"
+			osmand:contentInsetStart="4dp"
+			osmand:contentInsetRight="16dp"
+			osmand:contentInsetEnd="16dp">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ImageButton
+					android:id="@+id/back_button"
+					style="@style/Widget.AppCompat.ActionButton"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/ic_arrow_back"
+					android:layout_marginRight="16dp"
+					android:layout_marginEnd="16dp"/>
+
+				<View
+					android:layout_width="0dp"
+					android:layout_height="0dp"
+					android:focusable="true"
+					android:focusableInTouchMode="true"/>
+
+				<net.osmand.plus.widgets.OsmandTextFieldBoxes
+					android:theme="@style/OsmandTextFieldBoxes"
+					android:id="@+id/latitude_box"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					osmand:labelText="@string/navigate_point_latitude"
+					android:layout_marginEnd="12dp"
+					android:layout_marginRight="12dp">
+
+					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+						android:textColor="@color/color_white"
+						android:textColorHint="@color/white_50_transparent"
+						android:inputType="numberSigned|numberDecimal"
+						android:imeOptions="actionNext"
+						android:id="@+id/latitude_edit_text"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+				</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+				<net.osmand.plus.widgets.OsmandTextFieldBoxes
+					android:theme="@style/OsmandTextFieldBoxes"
+					android:id="@+id/longitude_box"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					osmand:labelText="@string/navigate_point_longitude"
+					android:layout_marginEnd="12dp"
+					android:layout_marginRight="12dp">
+
+					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+						android:textColor="@color/color_white"
+						android:textColorHint="@color/white_50_transparent"
+						android:inputType="numberSigned|numberDecimal"
+						android:imeOptions="actionNext"
+						android:id="@+id/longitude_edit_text"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+				</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+				<net.osmand.plus.widgets.OsmandTextFieldBoxes
+					android:theme="@style/OsmandTextFieldBoxes"
+					android:id="@+id/name_box"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					osmand:labelText="@string/shared_string_name"
+					android:layout_marginEnd="10dp"
+					android:layout_marginRight="10dp">
+
+					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+						android:textColor="@color/color_white"
+						android:textColorHint="@color/white_50_transparent"
+						android:inputType="text"
+						android:imeOptions="actionDone"
+						android:id="@+id/name_edit_text"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:hint="@string/access_hint_enter_name"/>
+
+				</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+				<ImageButton
+					android:id="@+id/options_button"
+					style="@style/Widget.AppCompat.ActionButton"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/ic_overflow_menu_white"/>
+
+			</LinearLayout>
+
+		</android.support.v7.widget.Toolbar>
+
+	</android.support.design.widget.AppBarLayout>
+
+	<LinearLayout
+		android:id="@+id/hand_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="horizontal">
+
+	</LinearLayout>
+
+</LinearLayout>

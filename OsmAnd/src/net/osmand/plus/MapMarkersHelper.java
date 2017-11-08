@@ -477,6 +477,18 @@ public class MapMarkersHelper {
 		}
 	}
 
+	public void addMarkers(List<MapMarker> markers) {
+		if (markers != null) {
+			markersDbHelper.addMarkers(markers);
+			mapMarkers.addAll(markers);
+			reorderActiveMarkersIfNeeded();
+			for (MapMarker marker : markers) {
+				addMarkerToGroup(marker);
+			}
+			refresh();
+		}
+	}
+
 	public void addMarker(MapMarker marker) {
 		if (marker != null) {
 			markersDbHelper.addMarker(marker);

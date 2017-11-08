@@ -9,6 +9,14 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="digits_quantity">Digits quantity</string>
+    <string name="shared_string_right">Right</string>
+    <string name="shared_string_left">Left</string>
+    <string name="show_number_pad">Show number pad</string>
+    <string name="shared_string_paste">Paste</string>
+    <string name="coordinate_input_accuracy_description">Automatically switch to the next field after entering %1$d digits after the decimal point</string>
+    <string name="coordinate_input_accuracy">%1$d digits</string>
+    <string name="go_to_next_field">Go to next field</string>
     <string name="rename_marker">Rename marker</string>
     <string name="tap_on_map_to_hide_interface_descr">A tap on the map toggles the control buttons and widgets.</string>
     <string name="tap_on_map_to_hide_interface">Full screen mode</string>

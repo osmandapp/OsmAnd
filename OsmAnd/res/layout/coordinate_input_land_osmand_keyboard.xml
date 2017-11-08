@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_weight="0.45"
+    android:id="@+id/keyboard_layout"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <GridView
+        android:id="@+id/keyboard_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="53dp"
+        android:horizontalSpacing="1dp"
+        android:numColumns="4"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1dp"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/keyboard_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/keyboard_controls_divider"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/add_marker_button"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/shared_string_add"
+            android:textAllCaps="true"
+            android:textColor="@color/keyboard_item_button_text_color"
+            android:textSize="@dimen/default_list_text_size"/>
+
+    </LinearLayout>
+
+</FrameLayout>

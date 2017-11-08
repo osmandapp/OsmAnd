@@ -1,11 +1,9 @@
 package net.osmand.util;
 
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadPoint;

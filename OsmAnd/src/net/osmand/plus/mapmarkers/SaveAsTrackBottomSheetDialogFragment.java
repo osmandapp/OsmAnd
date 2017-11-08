@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
-import net.osmand.plus.OsmandTextFieldBoxes;
+import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
