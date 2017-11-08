@@ -1,32 +1,40 @@
 package net.osmand.plus.mapmarkers;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.ListPopupWindow;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
-import net.osmand.data.PointDescription;
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
+
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ACCURACY;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.GO_TO_NEXT_FIELD;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.RIGHT_HAND;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.USE_OSMAND_KEYBOARD;
 
 public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public final static String TAG = "CoordinateInputBottomSheetDialogFragment";
 
 	private View mainView;
-	private int coordinateFormat = -1;
-	private boolean useOsmandKeyboard = true;
+	private boolean useOsmandKeyboard;
+	private boolean rightHand;
+	private boolean goToNextField;
+	private int accuracy;
 	private CoordinateInputFormatChangeListener listener;
-	private boolean shouldClose;
 
 	public void setListener(CoordinateInputFormatChangeListener listener) {
 		this.listener = listener;
@@ -35,115 +43,113 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Bundle args = getArguments();
-		if (args != null) {
-			coordinateFormat = args.getInt(CoordinateInputDialogFragment.COORDINATE_FORMAT);
-			useOsmandKeyboard = args.getBoolean(CoordinateInputDialogFragment.USE_OSMAND_KEYBOARD);
+		if (savedInstanceState == null) {
+			Bundle args = getArguments();
+			if (args != null) {
+				useOsmandKeyboard = args.getBoolean(USE_OSMAND_KEYBOARD);
+				rightHand = args.getBoolean(RIGHT_HAND);
+				goToNextField = args.getBoolean(GO_TO_NEXT_FIELD);
+				accuracy = args.getInt(ACCURACY);
+			}
 		} else {
-			shouldClose = true;
+			useOsmandKeyboard = savedInstanceState.getBoolean(USE_OSMAND_KEYBOARD);
+			rightHand = savedInstanceState.getBoolean(RIGHT_HAND);
+			goToNextField = savedInstanceState.getBoolean(GO_TO_NEXT_FIELD);
+			accuracy = savedInstanceState.getInt(ACCURACY);
 		}
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final MapActivity mapActivity = (MapActivity) getActivity();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 
-		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), coordinateFormat == -1 ?
-				R.layout.fragment_marker_coordinate_input_bottom_sheet_dialog : R.layout.fragment_marker_coordinate_input_options_bottom_sheet_helper, container);
+		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_coordinate_input_options_bottom_sheet_helper, container);
 
 		if (nightMode) {
 			((TextView) mainView.findViewById(R.id.coordinate_input_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
 		}
 
-		ImageView degreesIcon = (ImageView) mainView.findViewById(R.id.degrees_icon);
-		TextView degreesText = (TextView) mainView.findViewById(R.id.degrees_text);
-		if (coordinateFormat == PointDescription.FORMAT_DEGREES) {
-			degreesIcon.setImageDrawable(getIcon(R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue));
-			degreesText.setTextColor(ContextCompat.getColor(mapActivity, R.color.dashboard_blue));
-			((RadioButton) mainView.findViewById(R.id.degrees_radio_button)).setChecked(true);
-		} else {
-			degreesIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_latitude));
-		}
-		degreesText.setText(PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_DEGREES));
+		((TextView) mainView.findViewById(R.id.coordinate_input_accuracy_descr)).setText(getString(R.string.coordinate_input_accuracy_description, accuracy));
 
-		ImageView minutesIcon = (ImageView) mainView.findViewById(R.id.minutes_icon);
-		TextView minutesText = (TextView) mainView.findViewById(R.id.minutes_text);
-		if (coordinateFormat == PointDescription.FORMAT_MINUTES) {
-			minutesIcon.setImageDrawable(getIcon(R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue));
-			minutesText.setTextColor(ContextCompat.getColor(mapActivity, R.color.dashboard_blue));
-			((RadioButton) mainView.findViewById(R.id.minutes_radio_button)).setChecked(true);
-		} else {
-			minutesIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_latitude));
-		}
-		minutesText.setText(PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_MINUTES));
+		((CompoundButton) mainView.findViewById(R.id.use_system_keyboard_switch)).setChecked(!useOsmandKeyboard);
+		((ImageView) mainView.findViewById(R.id.use_system_keyboard_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_keyboard));
+		mainView.findViewById(R.id.use_system_keyboard_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				useOsmandKeyboard = !useOsmandKeyboard;
+				((CompoundButton) mainView.findViewById(R.id.use_system_keyboard_switch)).setChecked(!useOsmandKeyboard);
+				if (listener != null) {
+					listener.onKeyboardChanged(useOsmandKeyboard);
+				}
+			}
+		});
 
-		ImageView secondsIcon = (ImageView) mainView.findViewById(R.id.seconds_icon);
-		TextView secondsText = (TextView) mainView.findViewById(R.id.seconds_text);
-		if (coordinateFormat == PointDescription.FORMAT_SECONDS) {
-			secondsIcon.setImageDrawable(getIcon(R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue));
-			secondsText.setTextColor(ContextCompat.getColor(mapActivity, R.color.dashboard_blue));
-			((RadioButton) mainView.findViewById(R.id.seconds_radio_button)).setChecked(true);
+		View handRow = mainView.findViewById(R.id.hand_row);
+		if (portrait) {
+			handRow.setVisibility(View.GONE);
 		} else {
-			secondsIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_latitude));
-		}
-		secondsText.setText(PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_SECONDS));
-
-		if (coordinateFormat != -1) {
-			((CompoundButton) mainView.findViewById(R.id.use_system_keyboard_switch)).setChecked(!useOsmandKeyboard);
-			((ImageView) mainView.findViewById(R.id.use_system_keyboard_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_keyboard));
-			mainView.findViewById(R.id.use_system_keyboard_row).setOnClickListener(new View.OnClickListener() {
+			handRow.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					useOsmandKeyboard = !useOsmandKeyboard;
-					((CompoundButton) mainView.findViewById(R.id.use_system_keyboard_switch)).setChecked(!useOsmandKeyboard);
+					rightHand = !rightHand;
+					populateChangeHandRow();
 					if (listener != null) {
-						listener.onKeyboardChanged(useOsmandKeyboard);
+						listener.onHandChanged(rightHand);
 					}
 				}
 			});
-			highlightSelectedItem(true);
+			populateChangeHandRow();
 		}
 
-		View.OnClickListener formatChangeListener = new View.OnClickListener() {
+		((CompoundButton) mainView.findViewById(R.id.go_to_next_field_switch)).setChecked(goToNextField);
+		((ImageView) mainView.findViewById(R.id.go_to_next_field_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_next_field_stroke));
+		mainView.findViewById(R.id.go_to_next_field_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				highlightSelectedItem(false);
-				switch (view.getId()) {
-					case R.id.degrees_row:
-						coordinateFormat = PointDescription.FORMAT_DEGREES;
-						break;
-					case R.id.minutes_row:
-						coordinateFormat = PointDescription.FORMAT_MINUTES;
-						break;
-					case R.id.seconds_row:
-						coordinateFormat = PointDescription.FORMAT_SECONDS;
-						break;
-					default:
-						throw new IllegalArgumentException("Unsupported format");
-				}
-				highlightSelectedItem(true);
+				goToNextField = !goToNextField;
+				((CompoundButton) mainView.findViewById(R.id.go_to_next_field_switch)).setChecked(goToNextField);
+				switchSelectedAccuracy();
 				if (listener != null) {
-					listener.onCoordinateFormatChanged(coordinateFormat);
-				}
-				if (shouldClose) {
-					dismiss();
+					listener.onGoToNextFieldChanged(goToNextField);
 				}
 			}
-		};
+		});
 
-		mainView.findViewById(R.id.degrees_row).setOnClickListener(formatChangeListener);
-		mainView.findViewById(R.id.minutes_row).setOnClickListener(formatChangeListener);
-		mainView.findViewById(R.id.seconds_row).setOnClickListener(formatChangeListener);
+		switchSelectedAccuracy();
+		populateSelectedAccuracy();
+
+		mainView.findViewById(R.id.accuracy_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (goToNextField) {
+					final ListPopupWindow listPopupWindow = new ListPopupWindow(getContext());
+					listPopupWindow.setAnchorView(view);
+					listPopupWindow.setContentWidth(AndroidUtils.dpToPx(getMyApplication(), 100));
+					listPopupWindow.setModal(true);
+					listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
+					listPopupWindow.setAdapter(new ArrayAdapter<>(getContext(), R.layout.popup_list_text_item, new Integer[]{0, 1, 2, 3, 4, 5, 6}));
+					listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+						@Override
+						public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+							accuracy = i;
+							populateSelectedAccuracy();
+							if (listener != null) {
+								listener.onAccuracyChanged(accuracy);
+							}
+							listPopupWindow.dismiss();
+						}
+					});
+					listPopupWindow.show();
+				}
+			}
+		});
 
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				dismiss();
-				if (shouldClose && listener != null) {
-					listener.onCancel();
-				}
 			}
 		});
 
@@ -153,41 +159,39 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	}
 
 	@Override
-	public void onCancel(DialogInterface dialog) {
-		super.onCancel(dialog);
-		if (shouldClose && listener != null) {
-			listener.onCancel();
-		}
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putBoolean(USE_OSMAND_KEYBOARD, useOsmandKeyboard);
+		outState.putBoolean(RIGHT_HAND, rightHand);
+		outState.putBoolean(GO_TO_NEXT_FIELD, goToNextField);
+		outState.putInt(ACCURACY, accuracy);
+		super.onSaveInstanceState(outState);
 	}
 
-	private void highlightSelectedItem(boolean check) {
-		int iconColor = check ? R.color.dashboard_blue : nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color;
-		int textColor = ContextCompat.getColor(getContext(), check ? (nightMode ? R.color.color_dialog_buttons_dark : R.color.dashboard_blue) : nightMode ? R.color.color_white : R.color.color_black);
-		switch (coordinateFormat) {
-			case PointDescription.FORMAT_DEGREES:
-				((TextView) mainView.findViewById(R.id.degrees_text)).setTextColor(textColor);
-				((ImageView) mainView.findViewById(R.id.degrees_icon)).setImageDrawable((getIcon(R.drawable.ic_action_coordinates_latitude, iconColor)));
-				((RadioButton) mainView.findViewById(R.id.degrees_radio_button)).setChecked(check);
-				break;
-			case PointDescription.FORMAT_MINUTES:
-				((TextView) mainView.findViewById(R.id.minutes_text)).setTextColor(textColor);
-				((ImageView) mainView.findViewById(R.id.minutes_icon)).setImageDrawable((getIcon(R.drawable.ic_action_coordinates_latitude, iconColor)));
-				((RadioButton) mainView.findViewById(R.id.minutes_radio_button)).setChecked(check);
-				break;
-			case PointDescription.FORMAT_SECONDS:
-				((TextView) mainView.findViewById(R.id.seconds_text)).setTextColor(textColor);
-				((ImageView) mainView.findViewById(R.id.seconds_icon)).setImageDrawable((getIcon(R.drawable.ic_action_coordinates_latitude, iconColor)));
-				((RadioButton) mainView.findViewById(R.id.seconds_radio_button)).setChecked(check);
-				break;
-		}
+	private void populateChangeHandRow() {
+		((ImageView) mainView.findViewById(R.id.hand_icon)).setImageDrawable(getContentIcon(rightHand ? R.drawable.ic_action_show_keypad_right : R.drawable.ic_action_show_keypad_left));
+		((TextView) mainView.findViewById(R.id.hand_text_view)).setText(getString(rightHand ? R.string.shared_string_right : R.string.shared_string_left));
+		((TextView) mainView.findViewById(R.id.hand_text_view)).setTextColor(ContextCompat.getColor(getContext(), nightMode ? R.color.color_dialog_buttons_dark : R.color.map_widget_blue_pressed));
+	}
+
+	private void populateSelectedAccuracy() {
+		((TextView) mainView.findViewById(R.id.selected_accuracy)).setText(String.valueOf(accuracy));
+		((TextView) mainView.findViewById(R.id.selected_accuracy_hint)).setText("00:00." + new String(new char[accuracy]).replace("\0", "0"));
+	}
+
+	private void switchSelectedAccuracy() {
+		((TextView) mainView.findViewById(R.id.selected_accuracy)).setTextColor(ContextCompat.getColor(getContext(), goToNextField ? R.color.map_widget_blue : android.R.color.darker_gray));
+		((ImageView) mainView.findViewById(R.id.accuracy_arrow)).setImageDrawable(goToNextField ? getContentIcon(R.drawable.ic_action_arrow_drop_down) : getIcon(R.drawable.ic_action_arrow_drop_down, android.R.color.darker_gray));
 	}
 
 	interface CoordinateInputFormatChangeListener {
 
-		void onCoordinateFormatChanged(int format);
-
 		void onKeyboardChanged(boolean useOsmandKeyboard);
 
-		void onCancel();
+		void onHandChanged(boolean rightHand);
+
+		void onGoToNextFieldChanged(boolean goToNextField);
+
+		void onAccuracyChanged(int accuracy);
+
 	}
 }
