@@ -455,15 +455,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		});
 
 		final ImageButton buttonWaypoint = (ImageButton) view.findViewById(R.id.context_menu_route_button);
-		if (getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
-			buttonWaypoint.setImageDrawable(getIcon(R.drawable.map_action_flag_dark,
-					!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-			buttonWaypoint.setContentDescription(getString(R.string.shared_string_add_to_map_markers));
-		} else {
-			buttonWaypoint.setImageDrawable(getIcon(R.drawable.map_action_waypoint,
-					!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-			buttonWaypoint.setContentDescription(getString(R.string.context_menu_item_destination_point));
-		}
+		buttonWaypoint.setImageDrawable(getIcon(menu.getWaypointActionIconId(),
+				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+		buttonWaypoint.setContentDescription(getString(menu.getWaypointActionStringId()));
 		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonWaypoint, nightMode);
 		buttonWaypoint.setOnClickListener(new View.OnClickListener() {
 			@Override

@@ -94,4 +94,14 @@ public class MapMarkerMenuController extends MenuController {
 	public boolean needStreetName() {
 		return !needTypeStr();
 	}
+
+	@Override
+	public int getWaypointActionIconId() {
+		return R.drawable.map_action_edit_dark;
+	}
+
+	@Override
+	public int getWaypointActionStringId() {
+		return R.string.rename_marker;
+	}
 }

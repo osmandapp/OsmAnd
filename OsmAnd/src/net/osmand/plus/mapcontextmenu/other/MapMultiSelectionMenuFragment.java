@@ -55,6 +55,10 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 		}
 
 		ListView listView = (ListView) view.findViewById(R.id.list);
+		if (menu.isLandscapeLayout() && Build.VERSION.SDK_INT >= 21) {
+			AndroidUtils.addStatusBarPadding21v(getActivity(), listView);
+			listView.setClipToPadding(false);
+		}
 		listAdapter = createAdapter();
 		listView.setAdapter(listAdapter);
 		listView.setOnItemClickListener(this);
