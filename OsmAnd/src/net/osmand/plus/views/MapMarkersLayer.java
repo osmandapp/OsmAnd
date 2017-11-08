@@ -27,6 +27,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProviderSelection;
@@ -217,8 +218,17 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			textAttrs.updatePaints(view, nightMode, tileBox);
 			textAttrs.paint.setStyle(Paint.Style.FILL);
 
-			int locX = (int) tileBox.getPixXFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
-			int locY = (int) tileBox.getPixYFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
+			int locX;
+			int locY;
+			if (map.getMapViewTrackingUtilities().isMapLinkedToLocation()
+					&& !MapViewTrackingUtilities.isSmallSpeedForAnimation(myLoc)
+					&& !map.getMapViewTrackingUtilities().isMovingToMyLocation()) {
+				locX = (int) tileBox.getPixXFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
+				locY = (int) tileBox.getPixYFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
+			} else {
+				locX = (int) tileBox.getPixXFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
+				locY = (int) tileBox.getPixYFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
+			}
 			int[] colors = MapMarker.getColors(map);
 			for (int i = 0; i < activeMapMarkers.size() && i < 2; i++) {
 				MapMarker marker = activeMapMarkers.get(i);
