@@ -1474,4 +1474,6 @@
     <string name="context_menu_item_modify_note">שינוי הערה ב־OSM</string>
     <string name="make_round_trip">מסלול הלוך וחזור</string>
     <string name="coordinates_format">תבנית נקודות הציון</string>
+    <string name="rename_marker">שינוי שם סמן</string>
+    <string name="tap_on_map_to_hide_interface_descr">נגיעה במפה מחליפה את תצוגת הכפתורים והווידג׳טים.</string>
     </resources>
