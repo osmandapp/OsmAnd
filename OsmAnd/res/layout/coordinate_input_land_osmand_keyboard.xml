@@ -37,7 +37,7 @@
             android:maxLines="1"
             android:text="@string/shared_string_add"
             android:textAllCaps="true"
-            android:textColor="@color/keyboard_item_add_button_text_color"
+            android:textColor="@color/keyboard_item_button_text_color"
             android:textSize="@dimen/default_list_text_size"/>
 
     </LinearLayout>

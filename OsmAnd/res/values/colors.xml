@@ -292,8 +292,7 @@
 	<color name="keyboard_item_add_button_light_bg_pressed">#4b62e3</color>
 	<color name="keyboard_item_add_button_dark_bg">#2d3980</color>
 	<color name="keyboard_item_add_button_dark_bg_pressed">#4b62e3</color>
-	<color name="keyboard_item_add_button_text_color">#ffffff</color>
-	<color name="keyboard_item_show_hide_color">#222c66</color>
+	<color name="keyboard_item_button_text_color">#ffffff</color>
 	<color name="keyboard_item_add_button_divider_light">#4b62e3</color>
 	<color name="keyboard_item_add_button_divider_dark">#121733</color>
 	<color name="keyboard_divider_light">#e6e6e6</color>

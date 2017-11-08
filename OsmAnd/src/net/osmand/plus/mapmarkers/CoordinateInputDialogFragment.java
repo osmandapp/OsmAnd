@@ -313,7 +313,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			if (orientationPortrait) {
 				final ImageView showHideKeyboardIcon = (ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon);
 				showHideKeyboardIcon.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_add_button_light_bg : R.drawable.keyboard_item_add_button_dark_bg);
-				showHideKeyboardIcon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_arrow_down, R.color.keyboard_item_show_hide_color));
+				showHideKeyboardIcon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_arrow_down, R.color.keyboard_item_button_text_color));
 				showHideKeyboardIcon.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
@@ -588,7 +588,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		mainView.findViewById(R.id.keyboard_grid_view).setVisibility(visibility);
 		mainView.findViewById(R.id.keyboard_divider).setVisibility(visibility);
 		((ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon))
-				.setImageDrawable(iconsCache.getIcon(show ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up, R.color.keyboard_item_show_hide_color));
+				.setImageDrawable(iconsCache.getIcon(show ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up, R.color.keyboard_item_button_text_color));
 	}
 
 	private void changeKeyboardInBoxes() {
