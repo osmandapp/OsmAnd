@@ -2525,7 +2525,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="quick_action_add_navigation">導航</string>
     <string name="quick_action_bug_message">訊息</string>
     <string name="quick_action_category_descr">選擇類別以儲存我的收藏。</string>
-    <string name="quick_action_gpx_category_descr">選擇可選的類別。</string>
+    <string name="quick_action_gpx_category_descr">選定可供選擇的類別。</string>
     <string name="quick_action_poi_list">POI 清單</string>
     <string name="quick_action_sh_poi_descr">您可以增加一個或是更多的 POI 類別顯示在地圖上。</string>
     <string name="quick_action_map_style_action">增加一個地圖樣式</string>
