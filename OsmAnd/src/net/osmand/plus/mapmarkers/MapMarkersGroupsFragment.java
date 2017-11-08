@@ -19,6 +19,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.Location;
@@ -34,6 +35,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersGroupsAdapter;
+import net.osmand.plus.widgets.EmptyStateRecyclerView;
 import net.osmand.util.MapUtils;
 
 public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassListener, OsmAndLocationListener {
@@ -55,9 +57,8 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final boolean night = !mapActivity.getMyApplication().getSettings().isLightContent();
-		final RecyclerView recyclerView = new RecyclerView(getContext());
-		recyclerView.setPadding(0, 0, 0, (int) mapActivity.getResources().getDimension(R.dimen.map_markers_recycler_view_padding_bottom));
-		recyclerView.setClipToPadding(false);
+		final View mainView = inflater.inflate(R.layout.fragment_map_markers_groups, container, false);
+		final EmptyStateRecyclerView recyclerView = (EmptyStateRecyclerView) mainView.findViewById(R.id.list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
@@ -222,8 +223,13 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				}
 			}
 		});
+
+		final View emptyView = mainView.findViewById(R.id.empty_view);
+		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
+		emptyImageView.setImageResource(night ? R.drawable.ic_empty_state_marker_group_night : R.drawable.ic_empty_state_marker_group_day);
+		recyclerView.setEmptyView(emptyView);
 		recyclerView.setAdapter(adapter);
-		return recyclerView;
+		return mainView;
 	}
 
 	void updateAdapter() {

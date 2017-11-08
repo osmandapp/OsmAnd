@@ -9,6 +9,12 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="empty_state_markers_active">Markers on map!</string>
+    <string name="empty_state_markers_active_desc">Mark places on map by tap.</string>
+    <string name="empty_state_markers_groups">Import groups</string>
+    <string name="empty_state_markers_groups_desc">You can import favourite groups or track waypoints as markers.</string>
+    <string name="empty_state_markers_history">@string/shared_string_history</string>
+    <string name="empty_state_markers_history_desc">Markers marked as passed will appear on this screen.</string>
     <string name="rename_marker">Rename marker</string>
     <string name="tap_on_map_to_hide_interface_descr">A tap on the map toggles the control buttons and widgets.</string>
     <string name="tap_on_map_to_hide_interface">Full screen mode</string>

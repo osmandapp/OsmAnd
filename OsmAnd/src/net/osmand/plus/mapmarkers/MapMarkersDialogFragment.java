@@ -143,6 +143,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		});
 
 		viewPager = mainView.findViewById(R.id.map_markers_view_pager);
+		viewPager.setOffscreenPageLimit(3);
 		viewPager.setSwipeLocked(true);
 		final MapMarkersViewPagerAdapter adapter = new MapMarkersViewPagerAdapter(getChildFragmentManager());
 		viewPager.setAdapter(adapter);
