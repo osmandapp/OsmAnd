@@ -3090,4 +3090,19 @@
 	<string name="poi_nuclear_explosion_date_utc">Date de l\'explosion (UTC)</string>
 	<string name="poi_nuclear_explosion_time_utc">Heure de l\'explosion (UTC)</string>
 	<string name="poi_medical_system_chinese_yes">Chinois traditionnel</string>
+	<string name="poi_reservation_required">Réservation : nécessaire</string>
+	<string name="poi_reservation_recommended">Réservation : recommandée</string>
+	<string name="poi_beds">Lits</string>
+
+	<string name="poi_operational_status_open">Ouvert</string>
+	<string name="poi_operational_status_closed">Fermé</string>
+	<string name="poi_car_yes">Voiture : oui</string>
+	<string name="poi_car_no">Voiture : non</string>
+	<string name="poi_bicycle_yes">Vélo : oui</string>
+	<string name="poi_bicycle_no">Vélo : non</string>
+	<string name="poi_truck_yes">Camion : oui</string>
+	<string name="poi_truck_no">Camion : non</string>
+
+	<string name="poi_parking_fee">Tarif de stationnement</string>
+
 	</resources>
