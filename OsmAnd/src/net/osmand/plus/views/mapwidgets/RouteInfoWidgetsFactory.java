@@ -915,7 +915,7 @@ public class RouteInfoWidgetsFactory {
 							secondTurnType, thirdTurnType, TurnPathHelper.FIRST_TURN, coef, leftSide);
 					if (b != null) {
 						if (secondTurnType == 0 && thirdTurnType == 0) {
-							int arrowWidth = AndroidUtils.dpToPx(ctx, TurnType.getArrowWidthInDp(turnType));
+							int arrowWidth = AndroidUtils.dpToPx(ctx, getArrowWidthInDp(turnType));
 							int emptyWidth = b.getWidth() - arrowWidth;
 							w += emptyWidth / 2 + arrowWidth;
 						} else {
@@ -1022,10 +1022,45 @@ public class RouteInfoWidgetsFactory {
 		}
 
 		private Bitmap applyCrop(Bitmap bitmap, int turnType) {
-			int arrowWidth = AndroidUtils.dpToPx(ctx, TurnType.getArrowWidthInDp(turnType));
+			int arrowWidth = AndroidUtils.dpToPx(ctx, getArrowWidthInDp(turnType));
 			int emptyWidth = bitmap.getWidth() - arrowWidth;
 			int widthToCrop = emptyWidth / 4;
 			return Bitmap.createBitmap(bitmap, widthToCrop, 0, bitmap.getWidth() - 2 * widthToCrop, bitmap.getHeight());
+		}
+
+		private int getArrowWidthInDp(int tt) {
+			int result;
+
+			switch (tt){
+				case TurnType.C:
+					result = 12;
+					break;
+				case TurnType.TR:
+				case TurnType.TL:
+					result = 20;
+					break;
+				case TurnType.KR:
+				case TurnType.KL:
+					result = 13;
+					break;
+				case TurnType.TSLR:
+				case TurnType.TSLL:
+					result = 13;
+					break;
+				case TurnType.TSHR:
+				case TurnType.TSHL:
+					result = 19;
+					break;
+				case TurnType.TRU:
+				case TurnType.TU:
+					result = 24;
+					break;
+				default:
+					result = 12;
+					break;
+			}
+
+			return result;
 		}
 
 		//@Override
