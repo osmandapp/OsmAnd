@@ -413,41 +413,6 @@ public class TurnType {
 		}
 	}
 
-	public static int getArrowWidthInDp(int tt) {
-		int result;
-
-		switch (tt){
-			case TurnType.C:
-				result = 12;
-				break;
-			case TurnType.TR:
-			case TurnType.TL:
-				result = 20;
-				break;
-			case TurnType.KR:
-			case TurnType.KL:
-				result = 13;
-				break;
-			case TurnType.TSLR:
-			case TurnType.TSLL:
-				result = 13;
-				break;
-			case TurnType.TSHR:
-			case TurnType.TSHL:
-				result = 19;
-				break;
-			case TurnType.TRU:
-			case TurnType.TU:
-				result = 24;
-				break;
-			default:
-				result = 12;
-				break;
-		}
-
-		return result;
-	}
-
 	public static int convertType(String lane) {
 		int turn;
 		if (lane.equals("none") || lane.equals("through")) {
