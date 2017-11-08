@@ -1782,7 +1782,7 @@
     <string name="application_dir_change_warning3">آیا فایل‌های دادهٔ OsmAnd نیز به مکان جدید کپی شود؟</string>
     <string name="specified_directiory_not_writeable">نمی‌توان نقشه‌ها را در پوشهٔ موردنظر ایجاد کرد</string>
 	<string name="copying_osmand_file_failed">کپی‌کردن فایل‌ها ناموفق بود</string>    
-    <string name="storage_directory_external">محل زخیره‌سازی خارجی</string>
+    <string name="storage_directory_external">محل ذخیره‌سازی خارجی</string>
     <string name="storage_directory_multiuser">محل ذخیره‌سازی چندکاربره</string>
     <string name="storage_directory_internal_app">حافظهٔ داخلی برنامه</string>
     <string name="storage_directory_manual">انتخاب دستی</string>
