@@ -245,10 +245,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			@Override
 			public void showDirectionOnClick() {
 				if (mapActivity != null) {
-					ShowDirectionBottomSheetDialogFragment fragment = new ShowDirectionBottomSheetDialogFragment();
-					fragment.setUsedOnMap(false);
-					fragment.setListener(createShowDirectionFragmentListener());
-					fragment.show(mapActivity.getSupportFragmentManager(), ShowDirectionBottomSheetDialogFragment.TAG);
+					DirectionIndicationDialogFragment fragment = new DirectionIndicationDialogFragment();
+					fragment.show(mapActivity.getSupportFragmentManager(), DirectionIndicationDialogFragment.TAG);
 				}
 			}
 

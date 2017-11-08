@@ -1315,6 +1315,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> USE_MAP_MARKERS = new BooleanPreference("use_map_markers", true).makeGlobal().cache();
 
+	public final OsmandPreference<Boolean> MARKERS_DISTANCE_INDICATION_ENABLED = new BooleanPreference("markers_distance_indication_enabled", true).makeGlobal();
+
 	public final CommonPreference<MapMarkersMode> MAP_MARKERS_MODE =
 			new EnumIntPreference<>("map_markers_mode", MapMarkersMode.TOOLBAR, MapMarkersMode.values());
 
