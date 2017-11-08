@@ -988,4 +988,5 @@ Puntos</string>
 	<string name="waypoints_added_to_map_markers">Puntos de ruta añadíos a los marcadores del mapa</string>
 	<string name="plan_route_no_markers_toast">Hai qu\'amestar polo menos un marcador pa usar esta función.</string>
     <string name="osn_modify_dialog_error">Hebo una esceición: nun se camudó la nota</string>
+    <string name="empty_state_av_notes">¡Toma notes!</string>
     </resources>
