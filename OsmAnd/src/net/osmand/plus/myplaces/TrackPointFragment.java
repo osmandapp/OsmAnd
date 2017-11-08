@@ -629,36 +629,39 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 	private void addMapMarkersSyncGroup() {
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-		File gpx = getGpxDataItem().getFile();
-		MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(),
-				AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
-		markersHelper.addMarkersSyncGroup(syncGroup);
-		markersHelper.syncGroup(syncGroup);
-		GPXFile gpxFile = getTrackActivity().getGpx();
-		if (gpxFile != null) {
-			app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-		}
-		hideTransparentOverlay();
-		closeMenu();
-		updateMenuFabVisibility(false);
-		Snackbar snackbar = Snackbar.make(mainView, getResources().getString(R.string.waypoints_added_to_map_markers), Snackbar.LENGTH_LONG)
-				.setAction(getResources().getString(R.string.view), new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						MapActivity.launchMapActivityMoveToTop(getTrackActivity(), MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS);
-					}
-				});
-		snackbar.addCallback(new Snackbar.Callback() {
-			@Override
-			public void onDismissed(Snackbar transientBottomBar, int event) {
-				updateMenuFabVisibility(true);
-				super.onDismissed(transientBottomBar, event);
+		GpxDataItem gpxDataItem = getGpxDataItem();
+		if (gpxDataItem != null) {
+			File gpx = gpxDataItem.getFile();
+			MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(),
+					AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
+			markersHelper.addMarkersSyncGroup(syncGroup);
+			markersHelper.syncGroup(syncGroup);
+			GPXFile gpxFile = getTrackActivity().getGpx();
+			if (gpxFile != null) {
+				app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
 			}
-		});
-		View snackBarView = snackbar.getView();
-		TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
-		tv.setTextColor(ContextCompat.getColor(getContext(), R.color.color_dialog_buttons_dark));
-		snackbar.show();
+			hideTransparentOverlay();
+			closeMenu();
+			updateMenuFabVisibility(false);
+			Snackbar snackbar = Snackbar.make(mainView, getResources().getString(R.string.waypoints_added_to_map_markers), Snackbar.LENGTH_LONG)
+					.setAction(getResources().getString(R.string.view), new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							MapActivity.launchMapActivityMoveToTop(getTrackActivity(), MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS);
+						}
+					});
+			snackbar.addCallback(new Snackbar.Callback() {
+				@Override
+				public void onDismissed(Snackbar transientBottomBar, int event) {
+					updateMenuFabVisibility(true);
+					super.onDismissed(transientBottomBar, event);
+				}
+			});
+			View snackBarView = snackbar.getView();
+			TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
+			tv.setTextColor(ContextCompat.getColor(getContext(), R.color.color_dialog_buttons_dark));
+			snackbar.show();
+		}
 	}
 
 	private void updateMenuFabVisibility(boolean visible) {
