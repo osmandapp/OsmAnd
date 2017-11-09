@@ -240,6 +240,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			textAttrs.updatePaints(view, nightMode, tileBox);
 			textAttrs.paint.setStyle(Paint.Style.FILL);
 
+			boolean drawMarkerName = map.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1;
+
 			int locX;
 			int locY;
 			if (map.getMapViewTrackingUtilities().isMapLinkedToLocation()
@@ -273,7 +275,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 				float dist = (float) MapUtils.getDistance(myLoc.getLatitude(), myLoc.getLongitude(), marker.getLatitude(), marker.getLongitude());
 				String distSt = OsmAndFormatter.getFormattedDistance(dist, view.getApplication());
-				String text = distSt + " • " + marker.getName(map);
+				String text = distSt + (drawMarkerName ? " • " + marker.getName(map) : "");
 				Rect bounds = new Rect();
 				textAttrs.paint.getTextBounds(text, 0, text.length(), bounds);
 				float hOffset = pm.getLength() / 2 - bounds.width() / 2;
