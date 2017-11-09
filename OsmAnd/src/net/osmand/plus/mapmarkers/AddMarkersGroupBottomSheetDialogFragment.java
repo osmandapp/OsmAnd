@@ -65,11 +65,11 @@ public class AddMarkersGroupBottomSheetDialogFragment extends MenuBottomSheetDia
 
 		return mainView;
 	}
-}
 
-interface AddMarkersGroupFragmentListener {
+	interface AddMarkersGroupFragmentListener {
 
-	void favouritesOnClick();
+		void favouritesOnClick();
 
-	void waypointsOnClick();
+		void waypointsOnClick();
+	}
 }
