@@ -2340,7 +2340,7 @@
     <string name="layer_yandex_traffic">Yandex traffic</string>
     <string name="layer_route">Route</string>
     <string name="layer_osm_bugs">OSM Notes (online)</string>
-    <string name="layer_poi">POI Overlay…</string>
+    <string name="layer_poi">POI overlay…</string>
     <string name="layer_map">Map source…</string>
     <string name="menu_layers">Map layers</string>
     <string name="context_menu_item_search_poi">Search POI</string>
