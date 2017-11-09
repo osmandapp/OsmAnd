@@ -2926,4 +2926,12 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="show_on_top_bar">在頂列上顯示</string>
     <string name="mark_passed">已經過標記</string>
     <string name="rename_marker">重新命名標記</string>
+    <string name="digits_quantity">數位量</string>
+    <string name="shared_string_right">右方</string>
+    <string name="shared_string_left">左方</string>
+    <string name="show_number_pad">顯示數字鍵盤</string>
+    <string name="shared_string_paste">貼上</string>
+    <string name="coordinate_input_accuracy_description">在小數點後面輸入 %1$d 個數字以後，自動切換到下一段</string>
+    <string name="coordinate_input_accuracy">%1$d 個數字</string>
+    <string name="go_to_next_field">到下一段</string>
     </resources>
