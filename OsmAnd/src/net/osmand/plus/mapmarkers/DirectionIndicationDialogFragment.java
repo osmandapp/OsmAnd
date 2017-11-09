@@ -177,7 +177,8 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				}
 			}
 		}
-		((ImageView) mainView.findViewById(R.id.action_bar_image)).setImageDrawable(new LayerDrawable(imgList.toArray(new Drawable[imgList.size()])));
+		((ImageView) mainView.findViewById(R.id.action_bar_image))
+				.setImageDrawable(new LayerDrawable(imgList.toArray(new Drawable[imgList.size()])));
 	}
 
 	private Drawable getTopBar2Img() {
