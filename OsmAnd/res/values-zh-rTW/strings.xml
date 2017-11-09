@@ -295,7 +295,7 @@
     <string name="live_monitoring_url">線上即時追蹤網路地址</string>
     <string name="gpx_monitoring_disabled_warn">記錄軌跡使用 GPX 小工具或透過 \'錄製旅程\'的設定。</string>
     <string name="show_current_gpx_title">顯示目前軌跡</string>
-    <string name="free_version_message">此 OsmAnd 免費版，有下載地圖 %1$s 次限制（包括更新下載），並且不支援離線維基百科的文章資料。</string>
+    <string name="free_version_message">此 OsmAnd 免費版，有下載地圖 %1$s 次限制（增加或更新地圖），並且不支援離線維基百科的文章資料。</string>
     <string name="free_version_title">免費版</string>
     <string name="poi_context_menu_showdescription">顯示興趣點記述。</string>
     <string name="index_name_north_america">北美洲</string>
@@ -620,7 +620,7 @@
     <string name="layer_route">導航路線</string>
     <string name="layer_osm_bugs">OSM 註解(連線)</string>
     
-    <string name="layer_poi">興趣點…</string>
+    <string name="layer_poi">POI 覆蓋…</string>
     <string name="layer_map">地圖來源…</string>
     <string name="menu_layers">地圖圖層</string>
     <string name="context_menu_item_search_poi">查尋興趣點</string>
@@ -794,8 +794,8 @@
     <string name="show_view_angle">顯示目視方向</string>
     <string name="map_view_3d_descr">啟用 3D 檢視地圖。</string>
     <string name="map_view_3d">3D 地圖檢視</string>
-    <string name="show_poi_over_map_description">在地圖上顯示興趣點(依最近一次的篩選條件)。</string>
-    <string name="show_poi_over_map">顯示興趣點</string>
+    <string name="show_poi_over_map_description">在地圖上顯示上次選擇的 POI 覆蓋。</string>
+    <string name="show_poi_over_map">顯示 POI 覆蓋</string>
     <string name="map_tile_source_descr">選擇線上或快取地圖圖磚來源。</string>
     <string name="map_tile_source">地圖圖磚來源</string>
     <string name="map_source">地圖來源</string>
@@ -1444,7 +1444,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="gpx_info_waypoints">航點：%1$s</string>
     <string name="save_as_favorites_points">另存群組為我的收藏</string>
     <string name="select_destination_and_intermediate_points">選擇目的地</string>
-    <string name="layer_amenity_label">標點標籤</string>
+    <string name="layer_amenity_label">POI 覆蓋標籤</string>
     <string name="show_zoom_buttons_navigation_descr">在導航期間顯示縮放按鈕。</string>
     <string name="show_zoom_buttons_navigation">顯示縮放按鈕</string>
     <string name="create_poi_link_to_osm_doc"><u>線上 OSM</u> 地圖的分類與影像。</string>
