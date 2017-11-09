@@ -347,7 +347,8 @@ public class MapWidgetRegistry {
 	public void updateMapMarkersMode(MapActivity mapActivity) {
 		for (MapWidgetRegInfo info : rightWidgetSet) {
 			if ("map_marker_1st".equals(info.key) || "map_marker_2nd".equals(info.key)) {
-				setVisibility(info, settings.MAP_MARKERS_MODE.get().isWidgets(), false);
+				setVisibility(info, settings.MAP_MARKERS_MODE.get().isWidgets()
+						&& settings.MARKERS_DISTANCE_INDICATION_ENABLED.get(), false);
 			}
 		}
 		MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();

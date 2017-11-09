@@ -27,10 +27,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.OnMapMarkersSavedListener;
+import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment.DirectionIndicationFragmentListener;
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
 import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
-import net.osmand.plus.mapmarkers.ShowDirectionBottomSheetDialogFragment.ShowDirectionFragmentListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -99,9 +99,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		if (optionsFragment != null) {
 			((OptionsBottomSheetDialogFragment) optionsFragment).setListener(createOptionsFragmentListener());
 		}
-		Fragment showDirectionFragment = fragmentManager.findFragmentByTag(ShowDirectionBottomSheetDialogFragment.TAG);
-		if (showDirectionFragment != null) {
-			((ShowDirectionBottomSheetDialogFragment) showDirectionFragment).setListener(createShowDirectionFragmentListener());
+		Fragment directionIndicationFragment = fragmentManager.findFragmentByTag(DirectionIndicationDialogFragment.TAG);
+		if (directionIndicationFragment != null) {
+			((DirectionIndicationDialogFragment) directionIndicationFragment).setListener(createShowDirectionFragmentListener());
 		}
 		final Fragment orderByFragment = fragmentManager.findFragmentByTag(OrderByBottomSheetDialogFragment.TAG);
 		if (orderByFragment != null) {
@@ -246,6 +246,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			public void showDirectionOnClick() {
 				if (mapActivity != null) {
 					DirectionIndicationDialogFragment fragment = new DirectionIndicationDialogFragment();
+					fragment.setListener(createShowDirectionFragmentListener());
 					fragment.show(mapActivity.getSupportFragmentManager(), DirectionIndicationDialogFragment.TAG);
 				}
 			}
@@ -317,8 +318,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		};
 	}
 
-	private ShowDirectionFragmentListener createShowDirectionFragmentListener() {
-		return new ShowDirectionFragmentListener() {
+	private DirectionIndicationFragmentListener createShowDirectionFragmentListener() {
+		return new DirectionIndicationFragmentListener() {
 
 			final MapActivity mapActivity = getMapActivity();
 

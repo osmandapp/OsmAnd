@@ -201,6 +201,7 @@ public class MapMarkersWidgetsFactory {
 
 		List<MapMarker> markers = helper.getMapMarkers();
 		if (zoom < 3 || markers.size() == 0
+				|| !map.getMyApplication().getSettings().MARKERS_DISTANCE_INDICATION_ENABLED.get()
 				|| !map.getMyApplication().getSettings().MAP_MARKERS_MODE.get().isToolbar()
 				|| map.getMyApplication().getRoutingHelper().isFollowingMode()
 				|| map.getMyApplication().getRoutingHelper().isRoutePlanningMode()

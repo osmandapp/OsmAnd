@@ -26,7 +26,12 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 	public final static String TAG = "DirectionIndicationDialogFragment";
 
+	private DirectionIndicationFragmentListener listener;
 	private View mainView;
+
+	public void setListener(DirectionIndicationFragmentListener listener) {
+		this.listener = listener;
+	}
 
 	@Nullable
 	@Override
@@ -50,11 +55,27 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 			@Override
 			public void onClick(View view) {
 				updateChecked(settings.MARKERS_DISTANCE_INDICATION_ENABLED, distanceIndicationToggle);
-				updateSelection();
+				updateSelection(true);
 			}
 		});
 
-		updateSelection();
+		mainView.findViewById(R.id.top_bar_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				settings.MAP_MARKERS_MODE.set(MapMarkersMode.TOOLBAR);
+				updateSelection(true);
+			}
+		});
+
+		mainView.findViewById(R.id.widget_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				settings.MAP_MARKERS_MODE.set(MapMarkersMode.WIDGETS);
+				updateSelection(true);
+			}
+		});
+
+		updateSelection(false);
 
 		final CompoundButton showArrowsToggle = (CompoundButton) mainView.findViewById(R.id.show_arrows_switch);
 		showArrowsToggle.setChecked(settings.SHOW_ARROWS_TO_FIRST_MARKERS.get());
@@ -99,16 +120,25 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		}
 	}
 
-	private void updateSelection() {
+	private void notifyListener() {
+		if (listener != null) {
+			listener.onMapMarkersModeChanged(getSettings().MARKERS_DISTANCE_INDICATION_ENABLED.get());
+		}
+	}
+
+	private void updateSelection(boolean notifyListener) {
 		OsmandSettings settings = getSettings();
 		MapMarkersMode mode = settings.MAP_MARKERS_MODE.get();
-		boolean distanceIndicationEnabled = settings.MARKERS_DISTANCE_INDICATION_ENABLED.get();
+		boolean distIndEnabled = settings.MARKERS_DISTANCE_INDICATION_ENABLED.get();
 		boolean topBar = mode == MapMarkersMode.TOOLBAR;
 		boolean widget = mode == MapMarkersMode.WIDGETS;
-		updateIcon(R.id.top_bar_icon, R.drawable.ic_action_device_topbar, topBar && distanceIndicationEnabled);
-		updateIcon(R.id.widget_icon, R.drawable.ic_action_device_widget, widget && distanceIndicationEnabled);
-		updateRadioButton(R.id.top_bar_radio_button, topBar, distanceIndicationEnabled);
-		updateRadioButton(R.id.widget_radio_button, widget, distanceIndicationEnabled);
+		updateIcon(R.id.top_bar_icon, R.drawable.ic_action_device_topbar, topBar && distIndEnabled);
+		updateIcon(R.id.widget_icon, R.drawable.ic_action_device_widget, widget && distIndEnabled);
+		updateMarkerModeRow(R.id.top_bar_row, R.id.top_bar_radio_button, topBar, distIndEnabled);
+		updateMarkerModeRow(R.id.widget_row, R.id.widget_radio_button, widget, distIndEnabled);
+		if (notifyListener) {
+			notifyListener();
+		}
 	}
 
 	private void updateIcon(int imageViewId, int drawableId, boolean active) {
@@ -121,12 +151,17 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				: getContentIcon(drawableId));
 	}
 
-	private void updateRadioButton(int radioButtonId, boolean checked, boolean active) {
+	private void updateMarkerModeRow(int rowId, int radioButtonId, boolean checked, boolean active) {
 		boolean night = !getSettings().isLightContent();
 		RadioButton rb = (RadioButton) mainView.findViewById(radioButtonId);
 		rb.setChecked(checked);
 		int colorId = active ? night ? R.color.osmand_orange : R.color.dashboard_blue
 				: night ? R.color.ctx_menu_info_text_dark : R.color.icon_color;
 		CompoundButtonCompat.setButtonTintList(rb, ColorStateList.valueOf(ContextCompat.getColor(getContext(), colorId)));
+		mainView.findViewById(rowId).setEnabled(active);
+	}
+
+	public interface DirectionIndicationFragmentListener {
+		void onMapMarkersModeChanged(boolean showDirectionEnabled);
 	}
 }
