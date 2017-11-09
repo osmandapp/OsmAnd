@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
 <!--  poi additional categories -->
-	<string name="poi_fuel_type">Type</string>
-	<string name="poi_fuel_avia_type">Type</string>
+	<string name="poi_fuel_type">Fuel type</string>
+	<string name="poi_fuel_avia_type">Fuel type (avia)</string>
 	<string name="poi_payment_type">Payment type</string>
 	<string name="poi_payment_fuel_type">Fuel cards</string>
 	<string name="poi_additional_type">Additional</string>

@@ -2825,7 +2825,7 @@ Proporciona un código completo</string>
     <string name="shared_string_left">Izquierda</string>
     <string name="show_number_pad">Mostrar teclado numérico</string>
     <string name="shared_string_paste">Pegar</string>
-    <string name="coordinate_input_accuracy_description">Cambiar automáticamente al campo siguiente al ingresar %1$d dígitos después del punto decimal</string>
+    <string name="coordinate_input_accuracy_description">Cambiar automáticamente al campo siguiente al ingresar %1$d dígitos después del punto decimal.</string>
     <string name="coordinate_input_accuracy">%1$d dígitos</string>
     <string name="go_to_next_field">Ir al campo siguiente</string>
     </resources>

@@ -157,7 +157,7 @@
     <string name="local_openstreetmap_delete">Esborra els canvis</string>
     <string name="local_openstreetmap_uploadall">Penja-ho tot</string>
     <string name="show_current_gpx_title">Mostra la traça actual</string>
-    <string name="free_version_message">Aquesta versió gratuïta de l\'OsmAnd està limitada a %1$s mapes baixats (incloent baixades d\'actualització) i no permet l\'ús fora de línia dels articles de la Viquipèdia.</string>
+    <string name="free_version_message">Aquesta versió gratuïta de l\'OsmAnd està limitada a %1$s baixades de mapes(sigui afegint o actualitzant in mapa) i no permet l\'ús fora de línia dels articles de la Viquipèdia.</string>
     <string name="free_version_title">Versió gratuïta</string>
     <string name="poi_context_menu_showdescription">Mostra la descripció del PDI.</string>
     <string name="index_name_france">Europa - França</string>
@@ -464,7 +464,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="any_poi">Algun</string>
     <string name="layer_osm_bugs">Notes d\'OSM (en línia)</string>
     <string name="layer_map">Origen del mapa…</string>
-    <string name="layer_poi">Punts d\'interès…</string>
+    <string name="layer_poi">Superposició de PDI…</string>
     <string name="context_menu_item_search_poi">Cerca PDI</string>
     <string name="int_min">min.</string>
     <string name="background_router_service">Executa OsmAnd en segon pla</string>
@@ -588,13 +588,13 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="ChooseCountry">Trieu el país</string>
     <string name="choose_street">Trieu el carrer</string>
     <string name="choose_city">Trieu la ciutat o el codi postal</string>
-    <string name="show_poi_over_map">Mostra el PDI</string>
+    <string name="show_poi_over_map">Mostra la superposició de PDI</string>
     <string name="show_location">Mostra la vostra ubicació</string>
     <string name="searchpoi_activity">Escull un PDI</string>
     <string name="choose_available_region">Escull una regió de la llista</string>
     <string name="search_POI_level_btn">Cerca\'n més</string>
     <string name="map_source">Font del mapa</string>
-    <string name="show_poi_over_map_description">Es mostren els PDI sobre el mapa (utilitza el darrer filtre escollit).</string>
+    <string name="show_poi_over_map_description">Mostra la darrera superposició de PDI seleccionada en el mapa.</string>
     <string name="use_internet">Usa Internet</string>
     <string name="search_address_top_text">Selecció de l\'adreça</string>
     <string name="favourites_context_menu_edit">Edita el preferit</string>
@@ -1304,7 +1304,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="gpx_selection_track">%1$s \nTraça %2$s</string>
     <string name="save_as_favorites_points">Guarda com un grup de preferits</string>
     <string name="select_destination_and_intermediate_points">Seleccioneu destinacions</string>
-    <string name="layer_amenity_label">Etiquetes puntuals</string>
+    <string name="layer_amenity_label">Etiquetes superposades de PDIs</string>
     <string name="show_zoom_buttons_navigation_descr">Mostra els botons de zoom durant la navegació.</string>
     <string name="show_zoom_buttons_navigation">Mostra els botons de zoom</string>
     <string name="sort_by_distance">Ordena per distància</string>
@@ -2694,4 +2694,13 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="tap_on_map_to_hide_interface">Mode de pantalla completa</string>
     <string name="show_on_top_bar">Mostra a la barra superior</string>
     <string name="mark_passed">Marca com passat</string>
+    <string name="digits_quantity">Nombre de dígits</string>
+    <string name="shared_string_right">Dreta</string>
+    <string name="shared_string_left">Esquerra</string>
+    <string name="show_number_pad">Mostra el teclat numèric</string>
+    <string name="shared_string_paste">Enganxa</string>
+    <string name="coordinate_input_accuracy_description">Canvia automàticament al següent camp després d\'introduïr %1$d dígits decimals</string>
+    <string name="coordinate_input_accuracy">%1$d dígits</string>
+    <string name="go_to_next_field">Vés al camp següent</string>
+    <string name="rename_marker">Reanomena el marcador</string>
     </resources>
