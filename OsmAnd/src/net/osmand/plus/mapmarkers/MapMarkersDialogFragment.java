@@ -238,7 +238,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 					OrderByBottomSheetDialogFragment fragment = new OrderByBottomSheetDialogFragment();
 					fragment.setUsedOnMap(false);
 					fragment.setListener(createOrderByFragmentListener());
-					fragment.show(mapActivity.getSupportFragmentManager(), OrderByBottomSheetDialogFragment.TAG);
+					fragment.show(getChildFragmentManager(), OrderByBottomSheetDialogFragment.TAG);
 				}
 			}
 
@@ -247,7 +247,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 				if (mapActivity != null) {
 					DirectionIndicationDialogFragment fragment = new DirectionIndicationDialogFragment();
 					fragment.setListener(createShowDirectionFragmentListener());
-					fragment.show(mapActivity.getSupportFragmentManager(), DirectionIndicationDialogFragment.TAG);
+					fragment.show(getChildFragmentManager(), DirectionIndicationDialogFragment.TAG);
 				}
 			}
 
@@ -257,7 +257,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 					CoordinateInputDialogFragment fragment = new CoordinateInputDialogFragment();
 					fragment.setRetainInstance(true);
 					fragment.setListener(createOnMapMarkersSavedListener());
-					fragment.show(mapActivity.getSupportFragmentManager(), CoordinateInputDialogFragment.TAG);
+					fragment.show(getChildFragmentManager(), CoordinateInputDialogFragment.TAG);
 				}
 			}
 
@@ -281,7 +281,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 					} else {
 						SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
 						fragment.setListener(createSaveAsTrackFragmentListener());
-						fragment.show(mapActivity.getSupportFragmentManager(), SaveAsTrackBottomSheetDialogFragment.TAG);
+						fragment.show(getChildFragmentManager(), SaveAsTrackBottomSheetDialogFragment.TAG);
 					}
 				}
 			}
