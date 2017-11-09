@@ -3731,4 +3731,6 @@
 	<string name="poi_map_size_city">Kortdækning: by</string>
 	<string name="poi_map_size_region">Kortdækning: region</string>
 
+<string name="poi_charging_station_filter">Ladestation</string>
+
 </resources>
