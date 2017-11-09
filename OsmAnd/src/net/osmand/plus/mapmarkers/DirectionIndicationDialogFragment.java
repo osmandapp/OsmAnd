@@ -23,6 +23,10 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
+import com.github.ksoichiro.android.observablescrollview.ScrollState;
+
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MapMarkersMode;
@@ -40,6 +44,9 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	private DirectionIndicationFragmentListener listener;
 	private View mainView;
 
+	private int helpImgHeight;
+	private boolean shadowVisible;
+
 	public void setListener(DirectionIndicationFragmentListener listener) {
 		this.listener = listener;
 	}
@@ -48,6 +55,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final OsmandSettings settings = getSettings();
+		helpImgHeight = getResources().getDimensionPixelSize(R.dimen.action_bar_image_height);
 
 		mainView = inflater.inflate(R.layout.fragment_direction_indication_dialog, container);
 
@@ -64,6 +72,31 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		ApplicationMode appMode = settings.APPLICATION_MODE.get();
 		appModeTv.setText(appMode.getStringResource());
 		appModeTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getIconsCache().getIcon(appMode.getSmallIconDark()), null);
+
+		((ObservableScrollView) mainView.findViewById(R.id.scroll_view)).setScrollViewCallbacks(new ObservableScrollViewCallbacks() {
+			@Override
+			public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
+				if (scrollY >= helpImgHeight) {
+					if (!shadowVisible) {
+						mainView.findViewById(R.id.app_bar_shadow).setVisibility(View.VISIBLE);
+						shadowVisible = true;
+					}
+				} else if (shadowVisible) {
+					mainView.findViewById(R.id.app_bar_shadow).setVisibility(View.GONE);
+					shadowVisible = false;
+				}
+			}
+
+			@Override
+			public void onDownMotionEvent() {
+
+			}
+
+			@Override
+			public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+
+			}
+		});
 
 		updateHelpImage();
 
