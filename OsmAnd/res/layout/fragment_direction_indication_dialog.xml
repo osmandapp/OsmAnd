@@ -116,17 +116,15 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/bg_color"
                 android:orientation="vertical"
-                android:paddingBottom="4dp"
-                android:paddingLeft="@dimen/content_padding"
-                android:paddingStart="@dimen/content_padding">
+                android:paddingBottom="4dp">
 
                 <LinearLayout
                     android:id="@+id/distance_indication_row"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/bottom_sheet_list_item_height"
-                    android:layout_marginEnd="@dimen/content_padding"
-                    android:layout_marginRight="@dimen/content_padding"
-                    android:background="?attr/selectableItemBackground">
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingLeft="@dimen/content_padding"
+                    android:paddingRight="@dimen/content_padding">
 
                     <TextView
                         android:layout_width="0dp"
@@ -152,12 +150,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/content_padding"
+                    android:layout_marginStart="@dimen/content_padding"
                     android:background="?attr/dashboard_divider"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/content_padding"
+                    android:layout_marginLeft="@dimen/content_padding"
                     android:layout_marginRight="@dimen/content_padding"
                     android:paddingBottom="@dimen/content_padding"
                     android:paddingTop="@dimen/content_padding"
@@ -169,10 +169,10 @@
                     android:id="@+id/top_bar_row"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/bottom_sheet_list_item_height"
-                    android:layout_marginEnd="@dimen/content_padding"
-                    android:layout_marginRight="@dimen/content_padding"
                     android:background="?attr/selectableItemBackground"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/content_padding"
+                    android:paddingRight="@dimen/content_padding">
 
                     <ImageView
                         android:id="@+id/top_bar_icon"
@@ -207,10 +207,10 @@
                     android:id="@+id/widget_row"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/bottom_sheet_list_item_height"
-                    android:layout_marginEnd="@dimen/content_padding"
-                    android:layout_marginRight="@dimen/content_padding"
                     android:background="?attr/selectableItemBackground"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/content_padding"
+                    android:paddingRight="@dimen/content_padding">
 
                     <ImageView
                         android:id="@+id/widget_icon"
@@ -249,17 +249,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/bg_color"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/content_padding"
-                android:paddingStart="@dimen/content_padding">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/show_arrows_row"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/bottom_sheet_list_item_height"
-                    android:layout_marginEnd="@dimen/content_padding"
-                    android:layout_marginRight="@dimen/content_padding"
-                    android:background="?attr/selectableItemBackground">
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingLeft="@dimen/content_padding"
+                    android:paddingRight="@dimen/content_padding">
 
                     <TextView
                         android:layout_width="0dp"
@@ -285,12 +283,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/content_padding"
+                    android:layout_marginStart="@dimen/content_padding"
                     android:background="?attr/dashboard_divider"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/content_padding"
+                    android:layout_marginLeft="@dimen/content_padding"
                     android:layout_marginRight="@dimen/content_padding"
                     android:paddingBottom="@dimen/content_padding"
                     android:paddingTop="@dimen/content_padding"
@@ -306,17 +306,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/bg_color"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/content_padding"
-                android:paddingStart="@dimen/content_padding">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/show_guide_line_row"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/bottom_sheet_list_item_height"
-                    android:layout_marginEnd="@dimen/content_padding"
-                    android:layout_marginRight="@dimen/content_padding"
-                    android:background="?attr/selectableItemBackground">
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingLeft="@dimen/content_padding"
+                    android:paddingRight="@dimen/content_padding">
 
                     <TextView
                         android:layout_width="0dp"
@@ -342,12 +340,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/content_padding"
+                    android:layout_marginStart="@dimen/content_padding"
                     android:background="?attr/dashboard_divider"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/content_padding"
+                    android:layout_marginLeft="@dimen/content_padding"
                     android:layout_marginRight="@dimen/content_padding"
                     android:paddingBottom="@dimen/content_padding"
                     android:paddingTop="@dimen/content_padding"
