@@ -2047,7 +2047,7 @@
     <string name="live_monitoring_max_interval_to_send_desrc">Specify a time buffer to keep locations to send without connection</string>
     <string name="gpx_monitoring_disabled_warn">Log track using GPX widget or via \'Trip recording\' settings.</string>
     <string name="show_current_gpx_title">Show current track</string>
-    <string name="free_version_message">This free OsmAnd version is limited to %1$s map downloads (including update downloads) and does not support offline Wikipedia articles.</string>
+    <string name="free_version_message">This free OsmAnd version is limited to %1$s map downloads (to add or update maps) and does not support offline Wikipedia articles.</string>
     <string name="free_version_title">Free version</string>
     <string name="poi_context_menu_showdescription">Show POI description.</string>
     <string name="index_name_north_america">North America</string>
