@@ -194,4 +194,6 @@
 
 	<dimen name="shadow_height">5dp</dimen>
 	<dimen name="map_marker_title_height">28dp</dimen>
+
+	<dimen name="fab_recycler_view_padding_bottom">88dp</dimen>
 </resources>

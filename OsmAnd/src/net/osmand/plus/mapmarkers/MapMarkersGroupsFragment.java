@@ -58,6 +58,12 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final boolean night = !mapActivity.getMyApplication().getSettings().isLightContent();
 		final View mainView = inflater.inflate(R.layout.fragment_map_markers_groups, container, false);
+
+		Fragment addMarkersGroupFragment = getChildFragmentManager().findFragmentByTag(AddMarkersGroupBottomSheetDialogFragment.TAG);
+		if (addMarkersGroupFragment != null) {
+			((AddMarkersGroupBottomSheetDialogFragment) addMarkersGroupFragment).setListener(createAddMarkersGroupFragmentListener());
+		}
+
 		final EmptyStateRecyclerView recyclerView = (EmptyStateRecyclerView) mainView.findViewById(R.id.list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -229,7 +235,35 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		emptyImageView.setImageResource(night ? R.drawable.ic_empty_state_marker_group_night : R.drawable.ic_empty_state_marker_group_day);
 		recyclerView.setEmptyView(emptyView);
 		recyclerView.setAdapter(adapter);
+
+		mainView.findViewById(R.id.add_group_fab).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				openAddGroupMenu();
+			}
+		});
 		return mainView;
+	}
+
+	private void openAddGroupMenu() {
+		AddMarkersGroupBottomSheetDialogFragment fragment = new AddMarkersGroupBottomSheetDialogFragment();
+		fragment.setListener(createAddMarkersGroupFragmentListener());
+		fragment.setUsedOnMap(false);
+		fragment.show(getChildFragmentManager(), AddMarkersGroupBottomSheetDialogFragment.TAG);
+	}
+
+	private AddMarkersGroupFragmentListener createAddMarkersGroupFragmentListener() {
+		return new AddMarkersGroupFragmentListener() {
+			@Override
+			public void favouritesOnClick() {
+
+			}
+
+			@Override
+			public void waypointsOnClick() {
+
+			}
+		};
 	}
 
 	void updateAdapter() {
