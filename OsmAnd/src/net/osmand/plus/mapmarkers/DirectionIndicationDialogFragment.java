@@ -3,6 +3,7 @@ package net.osmand.plus.mapmarkers;
 import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -62,10 +63,12 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		menuTv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 				IconPopupMenu popupMenu = new IconPopupMenu(getActivity(), menuTv);
 				Menu menu = popupMenu.getMenu();
 				popupMenu.getMenuInflater().inflate(R.menu.active_markers_menu, menu);
-				setupMenuItems(menu);
+				setupMenuItem(menu.findItem(R.id.action_one), count == 1);
+				setupMenuItem(menu.findItem(R.id.action_two), count == 2);
 				popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
@@ -146,16 +149,34 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		return null;
 	}
 
-	private void setupMenuItems(Menu menu) {
+	private void setupMenuItem(MenuItem item, boolean active) {
 		OsmandSettings settings = getSettings();
-		int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
-		int stringId = count == 1 ? R.string.shared_string_one : R.string.shared_string_two;
-		int itemId = count == 1 ? R.id.action_one : R.id.action_two;
 		boolean night = !settings.isLightContent();
-		SpannableString title = new SpannableString(getString(stringId));
-		title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getActivity(),
-				night ? R.color.osmand_orange : R.color.dashboard_blue)), 0, title.length(), 0);
-		menu.findItem(itemId).setTitle(title);
+		int topId = settings.MAP_MARKERS_MODE.get().isWidgets()
+				? (item.getItemId() == R.id.action_one ? R.drawable.ic_action_device_widget : R.drawable.ic_action_device_widget_two)
+				: (item.getItemId() == R.id.action_one ? R.drawable.ic_action_device_topbar : R.drawable.ic_action_device_topbar_two);
+		if (active) {
+			int stringId = item.getItemId() == R.id.action_one ? R.string.shared_string_one : R.string.shared_string_two;
+			SpannableString title = new SpannableString(getString(stringId));
+			title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getActivity(),
+					night ? R.color.osmand_orange : R.color.dashboard_blue)), 0, title.length(), 0);
+			item.setTitle(title);
+		}
+		item.setIcon(getMenuIcon(topId, active));
+	}
+
+	private LayerDrawable getMenuIcon(int topId, boolean active) {
+		return new LayerDrawable(new Drawable[]{getIconBackground(active), getIconTop(topId, active)});
+	}
+
+	private Drawable getIconBackground(boolean active) {
+		return active ? getIcon(R.drawable.ic_action_device_top, R.color.dashboard_blue)
+				: getContentIcon(R.drawable.ic_action_device_top);
+	}
+
+	private Drawable getIconTop(int id, boolean active) {
+		return active ? getIcon(id, R.color.osmand_orange)
+				: getContentIcon(id);
 	}
 
 	private void updateDisplayedMarkersCount(int count) {
@@ -188,12 +209,10 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		OsmandSettings settings = getSettings();
 		MapMarkersMode mode = settings.MAP_MARKERS_MODE.get();
 		boolean distIndEnabled = settings.MARKERS_DISTANCE_INDICATION_ENABLED.get();
-		boolean topBar = mode == MapMarkersMode.TOOLBAR;
-		boolean widget = mode == MapMarkersMode.WIDGETS;
-		updateIcon(R.id.top_bar_icon, R.drawable.ic_action_device_topbar, topBar && distIndEnabled);
-		updateIcon(R.id.widget_icon, R.drawable.ic_action_device_widget, widget && distIndEnabled);
-		updateMarkerModeRow(R.id.top_bar_row, R.id.top_bar_radio_button, topBar, distIndEnabled);
-		updateMarkerModeRow(R.id.widget_row, R.id.widget_radio_button, widget, distIndEnabled);
+		updateIcon(R.id.top_bar_icon, R.drawable.ic_action_device_topbar, mode.isToolbar() && distIndEnabled);
+		updateIcon(R.id.widget_icon, R.drawable.ic_action_device_widget, mode.isWidgets() && distIndEnabled);
+		updateMarkerModeRow(R.id.top_bar_row, R.id.top_bar_radio_button, mode.isToolbar(), distIndEnabled);
+		updateMarkerModeRow(R.id.widget_row, R.id.widget_radio_button, mode.isWidgets(), distIndEnabled);
 		if (notifyListener) {
 			notifyListener();
 		}
@@ -201,12 +220,8 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 	private void updateIcon(int imageViewId, int drawableId, boolean active) {
 		ImageView iv = (ImageView) mainView.findViewById(imageViewId);
-		iv.setBackgroundDrawable(active
-				? getIcon(R.drawable.ic_action_device_top, R.color.dashboard_blue)
-				: getContentIcon(R.drawable.ic_action_device_top));
-		iv.setImageDrawable(active
-				? getIcon(drawableId, R.color.osmand_orange)
-				: getContentIcon(drawableId));
+		iv.setBackgroundDrawable(getIconBackground(active));
+		iv.setImageDrawable(getIconTop(drawableId, active));
 	}
 
 	private void updateMarkerModeRow(int rowId, int radioButtonId, boolean checked, boolean active) {
