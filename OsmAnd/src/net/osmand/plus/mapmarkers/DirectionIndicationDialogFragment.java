@@ -30,6 +30,8 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.widgets.IconPopupMenu;
 import net.osmand.plus.widgets.IconPopupMenu.OnMenuItemClickListener;
 
+import java.util.LinkedList;
+
 public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment {
 
 	public final static String TAG = "DirectionIndicationDialogFragment";
@@ -56,6 +58,8 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				dismiss();
 			}
 		});
+
+		updateHelpImage();
 
 		final TextView menuTv = (TextView) mainView.findViewById(R.id.active_markers_text_view);
 		menuTv.setText(settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1 ? R.string.shared_string_one : R.string.shared_string_two);
@@ -149,6 +153,68 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		return null;
 	}
 
+	private void updateHelpImage() {
+		OsmandSettings settings = getSettings();
+		LinkedList<Drawable> imgList = new LinkedList<>();
+		imgList.add(getDeviceImg());
+		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get()) {
+			imgList.add(getGuideLinesImg());
+		}
+		if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
+			imgList.add(getArrowsImg());
+		}
+		if (settings.MARKERS_DISTANCE_INDICATION_ENABLED.get()) {
+			int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
+			if (settings.MAP_MARKERS_MODE.get().isWidgets()) {
+				imgList.add(getWidget1Img());
+				if (count == 2) {
+					imgList.add(getWidget2Img());
+				}
+			} else {
+				imgList.add(getTopBar1Img());
+				if (count == 2) {
+					imgList.add(getTopBar2Img());
+				}
+			}
+		}
+		((ImageView) mainView.findViewById(R.id.action_bar_image)).setImageDrawable(new LayerDrawable(imgList.toArray(new Drawable[imgList.size()])));
+	}
+
+	private Drawable getTopBar2Img() {
+		return getIconsCache().getIcon(getSettings().isLightContent()
+				? R.drawable.img_help_markers_direction_topbar_2_day : R.drawable.img_help_markers_direction_topbar_2_night);
+	}
+
+	private Drawable getTopBar1Img() {
+		return getIconsCache().getIcon(getSettings().isLightContent()
+				? R.drawable.img_help_markers_direction_topbar_1_day : R.drawable.img_help_markers_direction_topbar_1_night);
+	}
+
+	private Drawable getWidget2Img() {
+		return getIconsCache().getIcon(getSettings().isLightContent()
+				? R.drawable.img_help_markers_direction_widget_2_day : R.drawable.img_help_markers_direction_widget_2_night);
+	}
+
+	private Drawable getWidget1Img() {
+		return getIconsCache().getIcon(getSettings().isLightContent()
+				? R.drawable.img_help_markers_direction_widget_1_day : R.drawable.img_help_markers_direction_widget_1_night);
+	}
+
+	private Drawable getArrowsImg() {
+		return getIconsCache().getIcon(getSettings().isLightContent()
+				? R.drawable.img_help_markers_direction_arrows_day : R.drawable.img_help_markers_direction_arrows_night);
+	}
+
+	private Drawable getGuideLinesImg() {
+		return getIconsCache().getIcon(getSettings().isLightContent()
+				? R.drawable.img_help_markers_direction_guide_lines_day : R.drawable.img_help_markers_direction_guide_lines_night);
+	}
+
+	private Drawable getDeviceImg() {
+		return getIconsCache().getIcon(getSettings().isLightContent()
+				? R.drawable.img_help_markers_direction_device_day : R.drawable.img_help_markers_direction_device_night);
+	}
+
 	private void setupMenuItem(MenuItem item, boolean active) {
 		OsmandSettings settings = getSettings();
 		boolean night = !settings.isLightContent();
@@ -162,11 +228,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 					night ? R.color.osmand_orange : R.color.dashboard_blue)), 0, title.length(), 0);
 			item.setTitle(title);
 		}
-		item.setIcon(getMenuIcon(topId, active));
-	}
-
-	private LayerDrawable getMenuIcon(int topId, boolean active) {
-		return new LayerDrawable(new Drawable[]{getIconBackground(active), getIconTop(topId, active)});
+		item.setIcon(new LayerDrawable(new Drawable[]{getIconBackground(active), getIconTop(topId, active)}));
 	}
 
 	private Drawable getIconBackground(boolean active) {
@@ -184,6 +246,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				.setText(count == 1 ? R.string.shared_string_one : R.string.shared_string_two);
 		getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.set(count);
 		notifyListener();
+		updateHelpImage();
 	}
 
 	private void updateChecked(OsmandPreference<Boolean> setting, CompoundButton button) {
@@ -191,6 +254,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		setting.set(newState);
 		button.setChecked(newState);
 		refreshMap();
+		updateHelpImage();
 	}
 
 	private void refreshMap() {
@@ -216,6 +280,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		if (notifyListener) {
 			notifyListener();
 		}
+		updateHelpImage();
 	}
 
 	private void updateIcon(int imageViewId, int drawableId, boolean active) {
