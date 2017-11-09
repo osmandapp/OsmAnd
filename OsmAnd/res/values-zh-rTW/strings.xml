@@ -53,7 +53,7 @@
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ 是開放源碼導航應用程式，可以使用各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於裝置的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。 一些主要的功能： - 完整離線功能 (存放下載的向量圖或地圖圖磚於裝置存儲器) - 全球離線向量圖資 - 直接由手機下載各國或區域圖資 - 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的收藏、等高線、大眾運輸停靠站 - 離線查尋地址、場所(POI) - 中程距離的離線路線 - 汽車、自行車、步行模式有下列選項： - 自動日/夜模式切換選項 - 取決於速度的地圖縮放選項 - 地圖正北朝上或行進方向朝上選項 - 車道引導、速限顯示、使用真人語音或 TTS 語音選項</string>
 
 
-    <string name="filterpoi_activity">建立興趣點篩選</string>
+    <string name="filterpoi_activity">建立 POI 篩選</string>
     <string name="recalculate_route_to_your_location">交通模式：</string>
     <string name="select_navigation_mode">選擇交通模式</string>
 
@@ -205,7 +205,7 @@
 
     <string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能。</string>
     <string name="prefs_plugins">外掛元件管理</string>
-    <string name="osm_editing_plugin_description">透過這個外掛元件 OsmAnd 可以用來對 OSM 作貢獻，如建立或修改 OSM POI 物件、開啟或評論 OSM 的註解和提供錄製的 GPX 檔案。OSM 是一個社群推動，相關的詳細資訊，請參閱 https://openstreetmap.org。如果您在應用程式中指定您個人的 OSM 帳號，可直接從 OsmAnd 進行貢獻，積極參與是令人感激的 。</string>
+    <string name="osm_editing_plugin_description">透過這個外掛元件 OsmAnd 可以用來對 OSM 作貢獻，如建立或修改 OSM 的 POI 物件、開啟或評論 OSM 的註解和提供錄製的 GPX 檔案。OSM 是一個社群推動，相關的詳細資訊，請參閱 https://openstreetmap.org。如果您在應用程式中指定您個人的 OSM 帳號，可直接從 OsmAnd 進行貢獻，積極參與是令人感激的 。</string>
     <string name="vector_maps_may_display_faster_on_some_devices">向量地圖一般而言顯示速度更快，但可能在某些裝置上無法使用。</string>
     <string name="play_commands_of_currently_selected_voice">選擇一個語音並以播放提示測試</string>
     <string name="debugging_and_development">OsmAnd 開發</string>
@@ -277,9 +277,9 @@
     <string name="use_fluorescent_overlays_descr">使用螢光色彩來顯示軌跡與導航路線。</string>
     <string name="offline_edition">離線編輯</string>
     <string name="offline_edition_descr">永遠使用離線編輯。</string>
-    <string name="update_poi_does_not_change_indexes">在程式中修改興趣點，不會影響到下載的地圖檔案，修改的資料是另外存在裝置上的內部檔案。</string>
+    <string name="update_poi_does_not_change_indexes">在程式中修改 POI，不會影響到下載的地圖檔案，修改的資料是另外存在裝置上的內部檔案。</string>
     <string name="local_openstreetmap_uploading">上傳中 …</string>
-    <string name="local_openstreetmap_were_uploaded">{0} 興趣點/註解已上傳</string>
+    <string name="local_openstreetmap_were_uploaded">{0} POI/註解已上傳</string>
     <string name="local_openstreetmap_uploadall">全部上傳</string>
 
     <string name="local_openstreetmap_upload">上傳修改部份到 OSM</string>
@@ -297,7 +297,7 @@
     <string name="show_current_gpx_title">顯示目前軌跡</string>
     <string name="free_version_message">此 OsmAnd 免費版，有下載地圖 %1$s 次限制（增加或更新地圖），並且不支援離線維基百科的文章資料。</string>
     <string name="free_version_title">免費版</string>
-    <string name="poi_context_menu_showdescription">顯示興趣點記述。</string>
+    <string name="poi_context_menu_showdescription">顯示 POI 記述。</string>
     <string name="index_name_north_america">北美洲</string>
     <string name="index_name_us">北美 - 美國</string>
     <string name="index_name_central_america">中美洲</string>
@@ -365,11 +365,11 @@
     <string name="file_can_not_be_renamed">檔名不可更改。</string>
     <string name="file_with_name_already_exists">該檔名已存在。</string>
     <string name="gpx_navigation">GPX 路線</string>
-    <string name="poi_query_by_name_matches_categories">在數個興趣點類別裡找到與查詢符合的：</string>
-    <string name="data_to_search_poi_not_available">在裝置端資料查尋的興趣點不存在。</string>
+    <string name="poi_query_by_name_matches_categories">在數個 POI 類別裡找到與查詢符合的：</string>
+    <string name="data_to_search_poi_not_available">在裝置端資料查尋的 POI 不存在。</string>
     <string name="poi_filter_by_name">以名稱查尋</string>
-    <string name="old_poi_file_should_be_deleted">該興趣點資料檔 \'%1$s\' 是多餘的，且可刪除。</string>
-    <string name="update_poi_file_not_found">在裝置端檔案，找不到要維護的興趣點資料，且無法建立該檔。</string>
+    <string name="old_poi_file_should_be_deleted">該 POI 資料檔 \'%1$s\' 是多餘的，且可刪除。</string>
+    <string name="update_poi_file_not_found">在裝置端檔案，找不到要維護的 POI 的變更，且無法建立該檔。</string>
     <string name="button_upgrade_osmandplus">升級為 OsmAnd+</string>
     <string name="map_version_changed_info">伺服器現有的地圖與您目前的程式版本不相容，請先更新成最新的版本再下載使用它們。</string>
     <string name="poi_filter_nominatim">線上 Nominatim</string>
@@ -417,7 +417,7 @@
     <string name="local_index_mi_backup">停用</string>
 
     <string name="local_index_mi_reload">由 SD 卡重新載入</string>
-    <string name="local_index_poi_data">興趣點資料</string>
+    <string name="local_index_poi_data">POI 資料</string>
     <string name="local_index_address_data">地址資料</string>
     <string name="local_index_transport_data">公共交通資料</string>
     <string name="local_index_map_data">地圖資料</string>
@@ -425,7 +425,7 @@
     <string name="local_indexes_cat_tts">提示語音 (TTS)</string>
     <string name="local_indexes_cat_voice">提示語音 (真人)</string>
 
-    <string name="local_indexes_cat_poi">興趣點資料</string>
+    <string name="local_indexes_cat_poi">POI 資料</string>
     <string name="ttsvoice">TTS 語音</string>
     <string name="search_offline_clear_search">新的查尋</string>
     <string name="map_text_size_descr">選擇地圖上名稱的文字大小。</string>
@@ -518,7 +518,7 @@
     <string name="amenity_type_transportation">交通工具</string>
     <string name="indexing_address">地址索引…</string>
     <string name="indexing_map">地圖索引…</string>
-    <string name="indexing_poi">興趣點索引…</string>
+    <string name="indexing_poi">POI 索引…</string>
     <string name="indexing_transport">交通索引…</string>
     <string name="shared_string_io_error">存取發生錯誤</string>
     <string name="km">公里</string>
@@ -573,8 +573,8 @@
     <string name="renderer_load_exception">發生異常：著色演算器未載入</string>
     <string name="renderers">向量著色演算器</string>
     <string name="renderers_descr">選擇著色演算外觀。</string>
-    <string name="poi_context_menu_website">顯示興趣點網站</string>
-    <string name="poi_context_menu_call">顯示興趣點電話</string>
+    <string name="poi_context_menu_website">顯示 POI 網站</string>
+    <string name="poi_context_menu_call">顯示 POI 的電話</string>
     <string name="website">網站</string>
     <string name="phone">電話</string>
     <string name="download_type_to_filter">類別篩選</string>
@@ -597,8 +597,8 @@
     <string name="transport_context_menu">查尋公車站牌</string>
 
     
-    <string name="poi_context_menu_modify">修改興趣點</string>
-    <string name="poi_context_menu_delete">刪除興趣點</string>
+    <string name="poi_context_menu_modify">修改 POI</string>
+    <string name="poi_context_menu_delete">刪除 POI</string>
     <string name="rotate_map_compass_opt">依羅盤旋轉</string>
     <string name="rotate_map_bearing_opt">行進方向朝上</string>
     <string name="rotate_map_none_opt">不旋轉(正北朝上)</string>
@@ -612,7 +612,7 @@
     <string name="error_occurred_loading_gpx">在載入 GPX 時發生錯誤</string>
     <string name="send_report">傳送報告</string>
     <string name="none_region_found">在 SD 卡上沒有該地區離線資料。由網路下載資料。</string>
-    <string name="poi_namefinder_query_empty">輸入查尋條件以查尋興趣點</string>
+    <string name="poi_namefinder_query_empty">輸入查尋條件以查尋 POI</string>
     <string name="any_poi">任何</string>
     
     <string name="thanks_yandex_traffic">感謝 Yandex 提供的交通資訊。</string>
@@ -623,7 +623,7 @@
     <string name="layer_poi">POI 覆蓋…</string>
     <string name="layer_map">地圖來源…</string>
     <string name="menu_layers">地圖圖層</string>
-    <string name="context_menu_item_search_poi">查尋興趣點</string>
+    <string name="context_menu_item_search_poi">查尋 POI</string>
 
     <string name="use_trackball_descr">使用軌跡球移動地圖。</string>
     <string name="use_trackball">使用軌跡球</string>
@@ -694,12 +694,12 @@
     <string name="show_transport_over_map_description">在地圖上顯示公車站牌。</string>
     <string name="show_transport_over_map">顯示公車站牌</string>
     <string name="hello">OsmAnd 導航軟體</string>
-    <string name="update_poi_success">成功更新興趣點 (下載{0}個)</string>
-    <string name="update_poi_error_local">更新裝置端的興趣點列表錯誤</string>
+    <string name="update_poi_success">成功更新 POI (下載{0}個)</string>
+    <string name="update_poi_error_local">更新裝置端的 POI 清單錯誤</string>
     <string name="update_poi_error_loading">由伺服器載入資料時發生錯誤</string>
-    <string name="update_poi_no_offline_poi_index">該地區無可用的離線興趣點資料</string>
+    <string name="update_poi_no_offline_poi_index">該地區無可用的離線 POI 資料</string>
     <string name="update_poi_is_not_available_for_zoom">更新的興趣點無法用於小的縮放級別</string>
-    <string name="context_menu_item_update_poi">更新興趣點</string>
+    <string name="context_menu_item_update_poi">更新 POI</string>
     <string name="context_menu_item_update_map_confirm">透過網路更新裝置端的資料？</string>
     <string name="search_history_city">縣市：{0}</string>
     <string name="search_history_street">道路：{0}, {1}</string>
@@ -739,7 +739,7 @@
     <string name="opening_changeset">正在開啟異動清單…</string>
     <string name="closing_changeset">正在結束異動清單…</string>
     <string name="commiting_node">送交節點…</string>
-    <string name="loading_poi_obj">正在載入興趣點…</string>
+    <string name="loading_poi_obj">正在載入 POI…</string>
     <string name="auth_failed">授權失敗</string>
     <string name="failed_op">失敗</string>
     <string name="converting_names">本地/英文名稱轉換中…</string>
@@ -748,7 +748,7 @@
     <string name="loading_streets">正在載入街道…</string>
     <string name="loading_cities">正在載入縣市…</string>
 
-    <string name="poi">興趣點</string>
+    <string name="poi">POI</string>
     <string name="error_occurred_saving_gpx">儲存 GPX 時錯誤</string>
     <string name="error_calculating_route">計算路線時錯誤</string>
     <string name="error_calculating_route_occured">計算路線時發生錯誤</string>
@@ -808,7 +808,7 @@
     <string name="app_description">導航應用程式</string>
     <string name="search_button">查詢</string>
     <string name="search_activity">查詢</string>
-    <string name="searchpoi_activity">選取興趣點</string>
+    <string name="searchpoi_activity">選取 POI</string>
     <string name="search_POI_level_btn">尋找更多</string>
     <string name="incremental_search_city">漸進式城市查尋</string>
     <string name="incremental_search_street">漸進式查詢街道</string>
@@ -841,7 +841,7 @@
 
     <string name="context_menu_item_update_map">更新地圖</string>
     
-    <string name="context_menu_item_create_poi">建立興趣點</string>
+    <string name="context_menu_item_create_poi">建立 POI</string>
     <string name="shared_string_yes">是</string>
     <string name="shared_string_cancel">取消</string>
     <string name="shared_string_no">否</string>
@@ -867,12 +867,12 @@
     
     
     
-    <string name="poi_edit_title">編輯興趣點</string>
-    <string name="poi_create_title">建立興趣點</string>
+    <string name="poi_edit_title">編輯 POI</string>
+    <string name="poi_create_title">建立 POI</string>
     <string name="poi_error_poi_not_found">找不到節點或便利設施組成的一些節點，哪些尚不支援。</string>
     <string name="poi_remove_confirm_template">刪除 {0} (輸入評論)？</string>
-    <string name="poi_remove_title">刪除興趣點</string>
-    <string name="poi_remove_success">興趣點已刪除成功</string>
+    <string name="poi_remove_title">刪除 POI</string>
+    <string name="poi_remove_success">POI 已刪除成功</string>
     <string name="poi_action_add">新增</string>
     <string name="poi_action_change">更改</string>
     <string name="poi_action_succeded_template">動作 {0} 成功完成。</string>
@@ -881,7 +881,7 @@
     <string name="poi_error_info_not_loaded">節點的資訊未載入</string>
     <string name="poi_dialog_opening_hours">營業</string>
     <string name="poi_dialog_comment">評論</string>
-    <string name="poi_dialog_comment_default">興趣點變更中</string>
+    <string name="poi_dialog_comment_default">正在變更 POI</string>
     <string name="poi_dialog_other_tags_message">所有其它的標誌已保存</string>
     <string name="default_buttons_commit">提交</string>
     <string name="filter_current_poiButton">篩選</string>
@@ -1546,7 +1546,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="targets">目的地</string>
     <string name="way_alarms">交通狀況提醒</string>
     <string name="speak_favorites">附近的收藏</string>
-    <string name="speak_poi">附近的興趣點</string>
+    <string name="speak_poi">附近的 POI</string>
     <string name="shared_string_all">全部</string>
     <string name="index_tours">旅遊</string>
     <string name="record_plugin_description">這個外掛元件在地圖螢幕上，以手動點觸 GPX 記錄小工具，以啟動去錄製和儲存您軌跡的功能，或是自動記錄您所有的導航路線到 GPX 檔案。 
@@ -1942,7 +1942,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_skip">跳過</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">離線地圖\n和導航</string>
-    <string name="commit_poi">提交興趣點</string>
+    <string name="commit_poi">提交 POI</string>
     <string name="routing_attr_avoid_shuttle_train_name">避開穿梭頻繁的鐵路</string>
     <string name="routing_attr_avoid_shuttle_train_description">避開穿梭頻繁的鐵路</string>
     <string name="plugin_settings">外掛元件</string>
@@ -1959,15 +1959,15 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="contact_info">連絡資訊</string>
     <string name="description">記述</string>
     <string name="add_opening_hours">增加營業時間</string>
-    <string name="poi_dialog_poi_type">興趣點類型</string>
+    <string name="poi_dialog_poi_type">POI 類型</string>
     <string name="number_of_rows_in_dash">在長劃 %1$s 的行數</string>
-    <string name="please_specify_poi_type">請指定興趣點類型。</string>
+    <string name="please_specify_poi_type">請指定 POI 類型。</string>
     <string name="poi_action_delete">删除</string>
     <string name="working_days">工作日</string>
     <string name="recent_places">最近的地點</string>
     <string name="favourites">我的收藏</string>
     <string name="saved_at_time">已順利的儲存於：%1$s</string>
-    <string name="poi_deleted_localy">一旦您上傳您的變更，興趣點會被刪除</string>
+    <string name="poi_deleted_localy">一旦您上傳您的變更，POI 會被刪除</string>
     <string name="show_gpx">顯示 GPX</string>
     <string name="count_of_lines">計算行數</string>
     <string name="show_on_start">在起始時顯示</string>
@@ -2061,7 +2061,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="versions_item">版本</string>
     <string name="feedback">投票</string>
     <string name="contact_us">聯絡我們</string>
-    <string name="osm_edit_created_poi">建立 OSM 的興趣點</string>
+    <string name="osm_edit_created_poi">建立 OSM 的 POI</string>
     
     <string name="map_legend">地圖圖例</string>
     <string name="shared_string_upload">上傳</string>
@@ -2078,13 +2078,13 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="lang_fy">菲士蘭</string>
     <string name="lang_als">阿爾巴尼亞 (Tosk)</string>
     <string name="share_osm_edits_subject">透過 OsmAnd 共用以編輯 OSM</string>
-    <string name="save_poi_without_poi_type_message">您真的想要儲存興趣點成為沒有類型的興趣點嗎？</string>
+    <string name="save_poi_without_poi_type_message">您真的想要儲存 POI 成為沒有類型的 POI 嗎？</string>
     <string name="shared_string_location">位置</string>
     <string name="poi_context_menu_modify_osm_change">修改 OSM 的變更</string>
     <string name="context_menu_item_delete_waypoint">要刪除 GPX 的航點嗎？</string>
     <string name="context_menu_item_edit_waypoint">編輯 GPX 的航點</string>
-    <string name="osm_edit_modified_poi">已修改 OSM 的興趣點</string>
-    <string name="osm_edit_deleted_poi">已刪除 OSM 的興趣點</string>
+    <string name="osm_edit_modified_poi">已修改 OSM 的 POI</string>
+    <string name="osm_edit_deleted_poi">已刪除 OSM 的 POI</string>
     <string name="context_menu_item_open_note">開啟 OSM 註解</string>
     <string name="osm_edit_reopened_note">重新開啟 OSM 註解</string>
     <string name="osm_edit_commented_note">已評論 OSM 註解</string>
@@ -2106,7 +2106,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="rendering_attr_roadStyle_description">道路樣式</string>
     <string name="poi_dialog_reopen">重新開啟</string>
 	<string name="osm_save_offline">離線儲存</string>
-    <string name="release_2_2">\\u2022 在地圖上和其它螢幕上，為點擊位置做了新的敏捷內容選單使用者界面
+    <string name="release_2_2">"\\u2022 在地圖上和其它螢幕上，為點擊位置做了新的敏捷內容選單使用者界面 
 \n 
 \n • 地圖螢幕上現在除了直接啟動外，還有\'在應用程式時啟動顯示儀表板\'可選 
 \n 
@@ -2118,13 +2118,13 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 \n 
 \n • 更好的重新計算路線（現在引擎經過反復的嘗試，建議一條不同的路線） 
 \n 
-\n • 興趣點搜尋現在支援更具體的查詢 
+\n •  POI (興趣點)搜尋現在支援更具體的查詢 
 \n 
-\n • 改善過的興趣點和 OSM 編輯功能 
+\n • 改善過的 POI (興趣點)和 OSM 編輯功能 
 \n 
 \n • 地圖資料下載結構和界面重新設計 
 \n 
-\n 還有更多…</string>
+\n 還有更多…"</string>
     <string name="copied_to_clipboard">複製到剪貼簿</string>
     
     
@@ -2134,7 +2134,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="access_from_map">從地圖進入</string>
     <string name="use_dashboard_btn">使用儀表板</string>
     <string name="use_drawer_btn">使用地圖</string>
-    <string name="please_specify_poi_type_only_from_list">請指定正確的興趣點類型或跳過它。</string>
+    <string name="please_specify_poi_type_only_from_list">請指定正確的 POI 類型或跳過它。</string>
     <string name="routing_attr_avoid_stairs_name">避開樓梯</string>
 	<string name="routing_attr_avoid_stairs_description">避開樓梯。</string>
 	<string name="routing_attr_avoid_borders_name">避開跨越邊界</string>
