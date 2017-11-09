@@ -111,8 +111,22 @@ public class PlatformUtil {
 		}
 
 		@Override
+		public boolean isTraceEnabled() {
+			return false;
+		}
+
+		@Override
 		public boolean isWarnEnabled() {
 			return android.util.Log.isLoggable(TAG, android.util.Log.WARN);
+		}
+
+		@Override
+		public void trace(Object message) {
+			// do nothing
+		}
+
+		public void trace(Object message, Throwable t) {
+			// do nothing
 		}
 
 		@Override

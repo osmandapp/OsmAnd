@@ -389,7 +389,15 @@ dependencies {
 	compile 'com.android.support:cardview-v7:26.1.0'
 	compile 'com.android.support:appcompat-v7:26.1.0'
 	compile 'com.android.support:design:26.1.0'
-	compile fileTree(include: ['*.jar'], exclude: ['QtAndroid-bundled.jar', 'QtAndroidAccessibility-bundled.jar', 'OsmAndCore_android.jar', 'OsmAndCore_wrapper.jar', 'android-support-multidex.jar'], dir: 'libs')
+    compile 'commons-logging:commons-logging-api:1.1'
+    compile 'it.unibo.alice.tuprolog:tuprolog:3.2.1'
+    compile 'org.beanshell:bsh-core:2.0b4'
+    compile 'com.ibm.icu:icu4j:50.1'
+    compile 'fr.univ-valenciennes:bzip2:1.0'
+    compile 'com.moparisthebest:junidecode:0.1.1'
+    compile 'net.sf.trove4j:trove4j:3.0.3'
+    compile 'org.immutables:gson:2.5.0'
+    compile 'com.vividsolutions:jts-core:1.14.0'
 	legacyCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"

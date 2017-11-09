@@ -31,6 +31,15 @@ artifacts {
 }
 
 dependencies {
-	compile fileTree(dir: "libs", include: ["*.jar"])
+	compile 'commons-logging:commons-logging:1.1.1'
+	compile 'net.sf.trove4j:trove4j:3.0.3'
+	compile 'org.json:json:20090211'
+	compile 'it.unibo.alice.tuprolog:tuprolog:3.2.1'
+	compile 'net.sf.kxml:kxml2:2.3.0'
+	compile 'org.beanshell:bsh-core:2.0b4'
+	compile 'com.ibm.icu:icu4j:50.1'
+	compile 'fr.univ-valenciennes:bzip2:1.0'
+	compile 'com.moparisthebest:junidecode:0.1.1'
+	compile 'com.vividsolutions:jts-core:1.14.0'
 }
 
