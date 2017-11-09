@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MapMarkersMode;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -50,7 +51,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 		mainView = inflater.inflate(R.layout.fragment_direction_indication_dialog, container);
 
-		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
+		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(getIconsCache().getIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -58,6 +59,11 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				dismiss();
 			}
 		});
+
+		TextView appModeTv = (TextView) mainView.findViewById(R.id.app_mode_text_view);
+		ApplicationMode appMode = settings.APPLICATION_MODE.get();
+		appModeTv.setText(appMode.getStringResource());
+		appModeTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getIconsCache().getIcon(appMode.getSmallIconDark()), null);
 
 		updateHelpImage();
 
