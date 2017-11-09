@@ -883,9 +883,9 @@
   <string name="map_widget_distance">Пункт призначення</string>
   <string name="map_widget_altitude">Висота</string>
   <string name="map_widget_time">Час в дорозі</string>
-  <string name="map_widget_next_turn">Наст. поворот</string>
-  <string name="map_widget_next_turn_small">Наст. поворот (мал.)</string>
-  <string name="map_widget_next_next_turn">Другий наст. поворот</string>
+  <string name="map_widget_next_turn">Наступний поворот</string>
+  <string name="map_widget_next_turn_small">Наступний поворот (невеликий)</string>
+  <string name="map_widget_next_next_turn">Другий наступний поворот</string>
   <string name="map_widget_mini_route">Міні мапа маршрутів</string>
   <string name="bg_service_screen_lock">Блокування екрану</string>
   <string name="bg_service_screen_lock_toast">Екран заблоковано</string>
@@ -2216,7 +2216,7 @@
     <string name="rec_split">Розбиття на кліпи</string>
     <string name="rec_split_title">Використовувати розбиття на кліпи</string>
     <string name="rec_split_desc">Циклічно перезаписувати кліпи, коли недостатньо місця на сховищі.</string>
-    <string name="rec_split_clip_length_desc">Тривалість записаного кліпу не буде перевищувати вказаного значення</string>
+    <string name="rec_split_clip_length_desc">Верхня межа часу записаного кліпу.</string>
     <string name="rec_split_storage_size_desc">Обсяг пам’яті, який може бути зайнятий всіма кліпами.</string>
     <string name="dashboard_or_drawer_title">Стільниця або меню керування</string>
     <string name="live_update">Оновлення</string>

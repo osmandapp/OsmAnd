@@ -271,6 +271,13 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_info_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
+		selected = settings.SHOW_POI_LABEL.get();
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.layer_amenity_label, activity)
+				.setSelected(settings.SHOW_POI_LABEL.get())
+				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setIcon(R.drawable.ic_action_text_dark)
+				.setListener(l).createItem());
 
 		/*
 		ContextMenuItem item = createProperties(customRules, null, R.string.rendering_category_transport, R.drawable.ic_action_bus_dark,
@@ -451,13 +458,6 @@ public class ConfigureMapMenu {
 						b.show();
 					}
 				}).createItem());
-		selected = settings.SHOW_POI_LABEL.get();
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.layer_amenity_label, activity)
-				.setSelected(settings.SHOW_POI_LABEL.get())
-				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setIcon(R.drawable.ic_action_text_dark)
-				.setListener(l).createItem());
 		selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_gpx_layer, activity)

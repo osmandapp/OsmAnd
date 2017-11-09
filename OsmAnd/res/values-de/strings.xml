@@ -631,8 +631,8 @@
 	<string name="shared_string_favorites">Favoriten</string>
 	<string name="layer_osm_bugs">OSM-Notizen (online)</string>
 	
-	<string name="layer_poi">POI…</string>
-	<string name="layer_amenity_label">Punktbezeichnungen</string>
+	<string name="layer_poi">POI Overlay…</string>
+	<string name="layer_amenity_label">POI-Overlay-Bezeichnungen</string>
 	<string name="layer_map">Kartenquelle…</string>
 	<string name="menu_layers">Kartenebenen</string>
 	<string name="context_menu_item_search_poi">Suche POI</string>
@@ -807,8 +807,8 @@
 	<string name="show_view_angle">Blickrichtung einblenden</string>
 	<string name="map_view_3d_descr">3D-Kartenansicht verwenden.</string>
 	<string name="map_view_3d">3D-Kartenansicht</string>
-	<string name="show_poi_over_map_description">Zuletzt gewählte POIs auf der Karte anzeigen.</string>
-	<string name="show_poi_over_map">POIs anzeigen</string>
+	<string name="show_poi_over_map_description">Zuletzt gewähltes POIs Overlax auf der Karte anzeigen.</string>
+	<string name="show_poi_over_map">POI Overlay anzeigen</string>
 	<string name="map_tile_source_descr">Online- oder Offline-Quelle für Karte (Kacheln).</string>
 	<string name="map_tile_source">Kartenquelle (Kacheln)</string>
 	<string name="map_source">Kartenquelle</string>
@@ -2864,10 +2864,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_finish">Beenden</string>
     <string name="use_system_keyboard">Gerätetastatur verwenden</string>
     <string name="marker_moved_to_active">Kartenmarkierung auf Karte verschoben</string>
-    <string name="release_2_8">• Komplett überarbeitete Kartenmarkierungen mit Linien und Routenplanung 
-\n 
-\n• Entfernungsmesser bietet ausrichten auf Straße Funktion und speichern als Track 
-\n 
+    <string name="release_2_8">• Komplett überarbeitete Kartenmarkierungen mit Linien und Routenplanung
+\n
+\n• Entfernungsmesser bietet ausrichten auf Straße Funktion und speichern als Track
+\n
 \n• Bug-Fixes, neue Daten auf dem Server alle 30 Minuten, Updates implementiert in der Navigation
 \n
 \n</string>

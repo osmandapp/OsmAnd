@@ -19,6 +19,14 @@
     <string name="empty_state_markers_groups_desc">You can import favourite groups or track waypoints as markers.</string>
     <string name="empty_state_markers_history">@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Markers marked as passed will appear on this screen.</string>
+    <string name="digits_quantity">Digits quantity</string>
+    <string name="shared_string_right">Right</string>
+    <string name="shared_string_left">Left</string>
+    <string name="show_number_pad">Show number pad</string>
+    <string name="shared_string_paste">Paste</string>
+    <string name="coordinate_input_accuracy_description">Automatically switch to the next field after entering %1$d digits after the decimal point</string>
+    <string name="coordinate_input_accuracy">%1$d digits</string>
+    <string name="go_to_next_field">Go to next field</string>
     <string name="rename_marker">Rename marker</string>
     <string name="tap_on_map_to_hide_interface_descr">A tap on the map toggles the control buttons and widgets.</string>
     <string name="tap_on_map_to_hide_interface">Full screen mode</string>
@@ -1200,7 +1208,7 @@
     <string name="show_zoom_buttons_navigation">Show zoom buttons</string>
     <string name="save_as_favorites_points">Save as group of favorites</string>
     <string name="select_destination_and_intermediate_points">Select destinations</string>
-    <string name="layer_amenity_label">Point labels</string>
+    <string name="layer_amenity_label">POI overlay labels</string>
     <string name="loading_smth">Loading %1$s…</string>
     <string name="map_widget_plain_time">Current time</string>
     <string name="gpx_wpt">Waypoint</string>
@@ -2049,7 +2057,7 @@
     <string name="live_monitoring_max_interval_to_send_desrc">Specify a time buffer to keep locations to send without connection</string>
     <string name="gpx_monitoring_disabled_warn">Log track using GPX widget or via \'Trip recording\' settings.</string>
     <string name="show_current_gpx_title">Show current track</string>
-    <string name="free_version_message">This free OsmAnd version is limited to %1$s map downloads (including update downloads) and does not support offline Wikipedia articles.</string>
+    <string name="free_version_message">This free OsmAnd version is limited to %1$s map downloads (to add or update maps) and does not support offline Wikipedia articles.</string>
     <string name="free_version_title">Free version</string>
     <string name="poi_context_menu_showdescription">Show POI description.</string>
     <string name="index_name_north_america">North America</string>
@@ -2342,7 +2350,7 @@
     <string name="layer_yandex_traffic">Yandex traffic</string>
     <string name="layer_route">Route</string>
     <string name="layer_osm_bugs">OSM Notes (online)</string>
-    <string name="layer_poi">POI…</string>
+    <string name="layer_poi">POI Overlay…</string>
     <string name="layer_map">Map source…</string>
     <string name="menu_layers">Map layers</string>
     <string name="context_menu_item_search_poi">Search POI</string>
@@ -2494,8 +2502,8 @@
     <string name="show_view_angle">Display viewing direction</string>
     <string name="map_view_3d_descr">Enable 3D view of the map.</string>
     <string name="map_view_3d">Map View 3D</string>
-    <string name="show_poi_over_map_description">Show POI over map (use last chosen filter).</string>
-    <string name="show_poi_over_map">Show POI</string>
+    <string name="show_poi_over_map_description">Show the last selected POI overlay on the map.</string>
+    <string name="show_poi_over_map">Show POI overlay</string>
     <string name="map_tile_source_descr">Choose the source of online or cached map tiles.</string>
     <string name="map_tile_source">Tile map source</string>
     <string name="map_source">Map source</string>

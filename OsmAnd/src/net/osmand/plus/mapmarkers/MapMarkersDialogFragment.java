@@ -26,6 +26,7 @@ import net.osmand.plus.OsmandSettings.MapMarkersOrderByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
+import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.OnMapMarkersSavedListener;
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
 import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
@@ -109,6 +110,10 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		Fragment saveAsTrackFragment = fragmentManager.findFragmentByTag(SaveAsTrackBottomSheetDialogFragment.TAG);
 		if (saveAsTrackFragment != null) {
 			((SaveAsTrackBottomSheetDialogFragment) saveAsTrackFragment).setListener(createSaveAsTrackFragmentListener());
+		}
+		Fragment coordinateInputDialog = fragmentManager.findFragmentByTag(CoordinateInputDialogFragment.TAG);
+		if (coordinateInputDialog != null) {
+			((CoordinateInputDialogFragment) coordinateInputDialog).setListener(createOnMapMarkersSavedListener());
 		}
 
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
@@ -204,8 +209,23 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		return mainView;
 	}
 
+	private void updateAdapters() {
+		activeFragment.updateAdapter();
+		groupsFragment.updateAdapter();
+		historyFragment.updateAdapter();
+	}
+
 	private OsmandApplication getMyApplication() {
 		return (OsmandApplication) getActivity().getApplication();
+	}
+
+	private OnMapMarkersSavedListener createOnMapMarkersSavedListener() {
+		return new OnMapMarkersSavedListener() {
+			@Override
+			public void onMapMarkersSaved() {
+				updateAdapters();
+			}
+		};
 	}
 
 	private MarkerOptionsFragmentListener createOptionsFragmentListener() {
@@ -236,7 +256,10 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			@Override
 			public void coordinateInputOnClick() {
 				if (mapActivity != null) {
-					CoordinateInputDialogFragment.showInstance(mapActivity);
+					CoordinateInputDialogFragment fragment = new CoordinateInputDialogFragment();
+					fragment.setRetainInstance(true);
+					fragment.setListener(createOnMapMarkersSavedListener());
+					fragment.show(mapActivity.getSupportFragmentManager(), CoordinateInputDialogFragment.TAG);
 				}
 			}
 
@@ -306,9 +329,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			public void onMapMarkersModeChanged(boolean showDirectionEnabled) {
 				mapActivity.getMapLayers().getMapWidgetRegistry().updateMapMarkersMode(mapActivity);
 				activeFragment.setShowDirectionEnabled(showDirectionEnabled);
-				activeFragment.updateAdapter();
-				groupsFragment.updateAdapter();
-				historyFragment.updateAdapter();
+				updateAdapters();
 			}
 		};
 	}

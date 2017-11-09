@@ -2525,7 +2525,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="quick_action_add_navigation">導航</string>
     <string name="quick_action_bug_message">訊息</string>
     <string name="quick_action_category_descr">選擇類別以儲存我的收藏。</string>
-    <string name="quick_action_gpx_category_descr">選擇可選的類別。</string>
+    <string name="quick_action_gpx_category_descr">選定可供選擇的類別。</string>
     <string name="quick_action_poi_list">POI 清單</string>
     <string name="quick_action_sh_poi_descr">您可以增加一個或是更多的 POI 類別顯示在地圖上。</string>
     <string name="quick_action_map_style_action">增加一個地圖樣式</string>
@@ -2925,4 +2925,13 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="tap_on_map_to_hide_interface">全螢幕模式</string>
     <string name="show_on_top_bar">在頂列上顯示</string>
     <string name="mark_passed">已經過標記</string>
+    <string name="rename_marker">重新命名標記</string>
+    <string name="digits_quantity">數位量</string>
+    <string name="shared_string_right">右方</string>
+    <string name="shared_string_left">左方</string>
+    <string name="show_number_pad">顯示數字鍵盤</string>
+    <string name="shared_string_paste">貼上</string>
+    <string name="coordinate_input_accuracy_description">在小數點後面輸入 %1$d 個數字以後，自動切換到下一段</string>
+    <string name="coordinate_input_accuracy">%1$d 個數字</string>
+    <string name="go_to_next_field">到下一段</string>
     </resources>

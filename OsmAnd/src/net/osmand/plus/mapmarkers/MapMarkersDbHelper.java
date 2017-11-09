@@ -287,6 +287,19 @@ public class MapMarkersDbHelper {
 		}
 	}
 
+	public void addMarkers(List<MapMarker> markers) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				for (MapMarker marker : markers) {
+					insertLast(db, marker, false);
+				}
+			} finally {
+				db.close();
+			}
+		}
+	}
+
 	public void addMarker(MapMarker marker) {
 		addMarker(marker, false);
 	}

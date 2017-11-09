@@ -14,6 +14,7 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 	final View mainLayout;
 	final View topDivider;
 	final ImageView iconDirection;
+	final TextView numberText;
 	final ImageView iconReorder;
 	final ImageView icon;
 	final TextView title;
@@ -35,6 +36,7 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 		mainLayout = view.findViewById(R.id.main_layout);
 		topDivider = view.findViewById(R.id.top_divider);
 		iconDirection = (ImageView) view.findViewById(R.id.map_marker_direction_icon);
+		numberText = (TextView) view.findViewById(R.id.map_marker_number_text_view);
 		iconReorder = (ImageView) view.findViewById(R.id.map_marker_reorder_icon);
 		icon = (ImageView) view.findViewById(R.id.map_marker_icon);
 		title = (TextView) view.findViewById(R.id.map_marker_title);

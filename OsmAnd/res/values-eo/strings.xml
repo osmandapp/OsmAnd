@@ -1501,7 +1501,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
 
     <string name="animate_route_off">Ĉesigi simuladon</string>
     <string name="animate_route">Ekigi simuladon</string>
-    <string name="file_can_not_be_renamed">Ne povas renomi dosieron.</string>
+    <string name="file_can_not_be_renamed">Ne povas alinomi dosieron.</string>
     <string name="file_with_name_already_exists">Dosiero kun sama nomo jam ekzistas.</string>
     <string name="gpx_navigation">GPX-kurso</string>
     <string name="poi_query_by_name_matches_categories">Trovis kelkajn kategoriojn de interesejoj kiuj kongruas kun la serĉmendo:</string>
@@ -2855,4 +2855,13 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="tap_on_map_to_hide_interface">Plenekrana reĝimo</string>
     <string name="show_on_top_bar">Montri en supra breto</string>
     <string name="mark_passed">Marki pasigitajn</string>
+    <string name="rename_marker">Alinomi markon</string>
+    <string name="digits_quantity">Nombro da ciferoj</string>
+    <string name="shared_string_right">Dekstre</string>
+    <string name="shared_string_left">Maldekstre</string>
+    <string name="show_number_pad">Montri nombran klavaron</string>
+    <string name="shared_string_paste">Englui</string>
+    <string name="coordinate_input_accuracy_description">Aŭtomate baskuli al sekva kampo post entajpi %1$d ciferojn post la komo</string>
+    <string name="coordinate_input_accuracy">%1$d ciferoj</string>
+    <string name="go_to_next_field">Iri al la sekva kampo</string>
     </resources>
