@@ -36,6 +36,7 @@ import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersGroupsAdapter;
 import net.osmand.plus.mapmarkers.AddMarkersGroupBottomSheetDialogFragment.AddMarkersGroupFragmentListener;
+import net.osmand.plus.mapmarkers.AddFavouritesGroupBottomSheetDialogFragment.AddFavouriteGroupListener;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;
 import net.osmand.util.MapUtils;
 
@@ -63,6 +64,10 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		Fragment addMarkersGroupFragment = getChildFragmentManager().findFragmentByTag(AddMarkersGroupBottomSheetDialogFragment.TAG);
 		if (addMarkersGroupFragment != null) {
 			((AddMarkersGroupBottomSheetDialogFragment) addMarkersGroupFragment).setListener(createAddMarkersGroupFragmentListener());
+		}
+		Fragment addFavouritesGroupFragment = getChildFragmentManager().findFragmentByTag(AddFavouritesGroupBottomSheetDialogFragment.TAG);
+		if (addFavouritesGroupFragment != null) {
+			((AddFavouritesGroupBottomSheetDialogFragment) addFavouritesGroupFragment).setListener(createAddFavouritesGroupListener());
 		}
 
 		final EmptyStateRecyclerView recyclerView = (EmptyStateRecyclerView) mainView.findViewById(R.id.list);
@@ -254,7 +259,19 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 	}
 
 	private void openAddFavouritesGroupMenu() {
+		AddFavouritesGroupBottomSheetDialogFragment fragment = new AddFavouritesGroupBottomSheetDialogFragment();
+		fragment.setListener(createAddFavouritesGroupListener());
+		fragment.setUsedOnMap(false);
+		fragment.show(getChildFragmentManager(), AddFavouritesGroupBottomSheetDialogFragment.TAG);
+	}
 
+	private AddFavouriteGroupListener createAddFavouritesGroupListener() {
+		return new AddFavouriteGroupListener() {
+			@Override
+			public void onFavouriteGroupAdded() {
+				updateAdapter();
+			}
+		};
 	}
 
 	private AddMarkersGroupFragmentListener createAddMarkersGroupFragmentListener() {
