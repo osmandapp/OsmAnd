@@ -557,7 +557,7 @@
 	<string name="gpx_monitoring_disabled_warn">Запісвайце сьлед выкарыстоўваючы GPX-віджэт ці пункт мэню \"Запіс падарожжа\".</string>
 	<string name="show_current_gpx_title">Паказаць бягучы сьлед</string>
 	    
-	<string name="free_version_message">Гэтая бясплатная версія OsmAnd абмяжоўваецца %1$s cцягваннямі мап (уключаючы абнаўленні) і не падтрымлівае аўтаномныя артыкулы Вікіпедыі.</string>
+	<string name="free_version_message">Гэтая бясплатная версія OsmAnd абмяжоўваецца %1$s cцягваннямі мап (даданне ці абнаўленне) і не падтрымлівае аўтаномныя артыкулы Вікіпедыі.</string>
 	<string name="free_version_title">Бясплатная вэрсія</string>
 	<string name="poi_context_menu_showdescription">Паказваць апісанні POI.</string>
 	<string name="index_name_north_america">Паўночная Амэрыка</string>
@@ -894,7 +894,7 @@
 	<string name="layer_route">Маршрут</string>
 	<string name="layer_osm_bugs">OSM Заўвагі (онлайн)</string>
 	
-	<string name="layer_poi">POI…</string>
+	<string name="layer_poi">POI-накладка…</string>
 	<string name="layer_map">Крыніца мапы…</string>
 	<string name="menu_layers">Слаі мапы</string>
 	<string name="context_menu_item_search_poi">Пошук POI</string>
@@ -1070,8 +1070,8 @@
 	<string name="show_view_angle">Адлюстроўваць напрамак позірку</string>
 	<string name="map_view_3d_descr">Уключыць 3D-выгляд для мапы.</string>
 	<string name="map_view_3d">3D від</string>
-	<string name="show_poi_over_map_description">Паказаць POI на мапе (выкарыстаць апошні абраны фільтр).</string>
-	<string name="show_poi_over_map">Паказаць POI</string>
+	<string name="show_poi_over_map_description">Паказаць апошнюю POI-накладку на мапе.</string>
+	<string name="show_poi_over_map">Паказаць POI-накладку</string>
 	<string name="map_tile_source_descr">Выберыце крыніцу анлайн або кэшаваных фрагментаў мапы.</string>
 	<string name="map_tile_source">Крыніца растравых мапаў</string>
 	<string name="map_source">Крыніца мапы</string>
@@ -1445,7 +1445,7 @@
     <string name="gpx_info_diff_altitude">Перапад вышынь: %1$s</string>
 	<string name="save_as_favorites_points">Захаваць як групу ўлюбёных</string>
     <string name="select_destination_and_intermediate_points">Выберыце прызначэньне</string>
-    <string name="layer_amenity_label">Назвы пунктаў</string>
+    <string name="layer_amenity_label">Назвы POI-накладкі</string>
     <string name="show_zoom_buttons_navigation">Паказваць кнопкі маштабаваньня</string>
     <string name="show_zoom_buttons_navigation_descr">Паказваць кнопкі маштабавання падчас навігацыі.</string>
     
