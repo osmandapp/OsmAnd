@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -28,8 +30,6 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.widgets.IconPopupMenu;
-import net.osmand.plus.widgets.IconPopupMenu.OnMenuItemClickListener;
 
 import java.util.LinkedList;
 
@@ -74,11 +74,10 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 			@Override
 			public void onClick(View view) {
 				int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
-				IconPopupMenu popupMenu = new IconPopupMenu(getActivity(), menuTv);
+				PopupMenu popupMenu = new PopupMenu(getActivity(), menuTv);
 				Menu menu = popupMenu.getMenu();
 				popupMenu.getMenuInflater().inflate(R.menu.active_markers_menu, menu);
-				setupMenuItem(menu.findItem(R.id.action_one), count == 1);
-				setupMenuItem(menu.findItem(R.id.action_two), count == 2);
+				setupActiveMenuItem(menu.findItem(count == 1 ? R.id.action_one : R.id.action_two));
 				popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
@@ -238,20 +237,12 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				? R.drawable.img_help_markers_direction_device_day : R.drawable.img_help_markers_direction_device_night);
 	}
 
-	private void setupMenuItem(MenuItem item, boolean active) {
-		OsmandSettings settings = getSettings();
-		boolean night = !settings.isLightContent();
-		int topId = settings.MAP_MARKERS_MODE.get().isWidgets()
-				? (item.getItemId() == R.id.action_one ? R.drawable.ic_action_device_widget : R.drawable.ic_action_device_widget_two)
-				: (item.getItemId() == R.id.action_one ? R.drawable.ic_action_device_topbar : R.drawable.ic_action_device_topbar_two);
-		if (active) {
-			int stringId = item.getItemId() == R.id.action_one ? R.string.shared_string_one : R.string.shared_string_two;
-			SpannableString title = new SpannableString(getString(stringId));
-			title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getActivity(),
-					night ? R.color.osmand_orange : R.color.dashboard_blue)), 0, title.length(), 0);
-			item.setTitle(title);
-		}
-		item.setIcon(new LayerDrawable(new Drawable[]{getIconBackground(active), getIconTop(topId, active)}));
+	private void setupActiveMenuItem(MenuItem item) {
+		int stringId = item.getItemId() == R.id.action_one ? R.string.shared_string_one : R.string.shared_string_two;
+		SpannableString title = new SpannableString(getString(stringId));
+		title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getActivity(), getSettings().isLightContent()
+				? R.color.dashboard_blue : R.color.osmand_orange)), 0, title.length(), 0);
+		item.setTitle(title);
 	}
 
 	private Drawable getIconBackground(boolean active) {
