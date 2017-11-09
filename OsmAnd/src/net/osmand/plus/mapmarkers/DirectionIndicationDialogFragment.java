@@ -161,16 +161,22 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 	private void updateHelpImage() {
 		OsmandSettings settings = getSettings();
+		int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 		LinkedList<Drawable> imgList = new LinkedList<>();
 		imgList.add(getDeviceImg());
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get()) {
-			imgList.add(getGuideLinesImg());
+			imgList.add(getGuideLineTwoImg());
+			if (count == 2) {
+				imgList.add(getGuideLineOneImg());
+			}
 		}
 		if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
-			imgList.add(getArrowsImg());
+			imgList.add(getArrowTwoImg());
+			if (count == 2) {
+				imgList.add(getArrowOneImg());
+			}
 		}
 		if (settings.MARKERS_DISTANCE_INDICATION_ENABLED.get()) {
-			int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 			if (settings.MAP_MARKERS_MODE.get().isWidgets()) {
 				imgList.add(getWidget1Img());
 				if (count == 2) {
@@ -207,14 +213,24 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				? R.drawable.img_help_markers_direction_widget_1_day : R.drawable.img_help_markers_direction_widget_1_night);
 	}
 
-	private Drawable getArrowsImg() {
+	private Drawable getArrowOneImg() {
 		return getIconsCache().getIcon(getSettings().isLightContent()
-				? R.drawable.img_help_markers_direction_arrows_day : R.drawable.img_help_markers_direction_arrows_night);
+				? R.drawable.img_help_markers_direction_arrow_one_day : R.drawable.img_help_markers_direction_arrow_one_night);
 	}
 
-	private Drawable getGuideLinesImg() {
+	private Drawable getArrowTwoImg() {
 		return getIconsCache().getIcon(getSettings().isLightContent()
-				? R.drawable.img_help_markers_direction_guide_lines_day : R.drawable.img_help_markers_direction_guide_lines_night);
+				? R.drawable.img_help_markers_direction_arrow_two_day : R.drawable.img_help_markers_direction_arrow_two_night);
+	}
+
+	private Drawable getGuideLineOneImg() {
+		return getIconsCache().getIcon(getSettings().isLightContent()
+				? R.drawable.img_help_markers_direction_guideline_one_day : R.drawable.img_help_markers_direction_guideline_one_night);
+	}
+
+	private Drawable getGuideLineTwoImg() {
+		return getIconsCache().getIcon(getSettings().isLightContent()
+				? R.drawable.img_help_markers_direction_guideline_two_day : R.drawable.img_help_markers_direction_guideline_two_night);
 	}
 
 	private Drawable getDeviceImg() {
