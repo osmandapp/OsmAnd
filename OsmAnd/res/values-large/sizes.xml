@@ -100,6 +100,7 @@
 	<dimen name="bottom_sheet_content_margin">24dp</dimen>
 	<dimen name="bottom_sheet_content_margin_small">12dp</dimen>
 	<dimen name="content_padding">24dp</dimen>
+	<dimen name="content_padding_small">18dp</dimen>
 	<dimen name="bottom_sheet_content_padding_small">12dp</dimen>
 	<dimen name="measurement_tool_divider_margin">12dp</dimen>
 	<dimen name="measurement_tool_content_padding_medium">18dp</dimen>
