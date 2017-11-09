@@ -404,7 +404,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="live_monitoring_url">Webadresse for online sporing</string>
     <string name="gpx_monitoring_disabled_warn">Log spor med GPX modul eller via indstillinger \'Tur optagelse\'.</string>
     <string name="show_current_gpx_title">Vis aktuelt spor</string>
-    <string name="free_version_message">Den gratis version af OsmAnd er begrænset til at hente %1$s kort (herunder opdateringer) og understøtter ikke offline Wikipedia artikler.</string>
+    <string name="free_version_message">Den gratis version af OsmAnd er begrænset til at hente %1$s kort (for at tilføje eller opdatere kort) og understøtter ikke offline Wikipedia artikler.</string>
     <string name="free_version_title">Gratisversion</string>
     <string name="poi_context_menu_showdescription">Vis IP beskrivelse.</string>
     <string name="index_name_north_america">Nordamerika</string>
@@ -817,7 +817,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="favourites_context_menu_delete">Slet</string>
     <string name="favourites_context_menu_edit">Rediger</string>
     <string name="amenity_type_emergency">Nødsituation</string>
-    <string name="layer_poi">Interessepunkt…</string>
+    <string name="layer_poi">Interessepunkt overlejring…</string>
     <string name="process_navigation_service">OsmAnd navigationstjeneste</string>
     <string name="gps_provider">GPS</string>
     <string name="int_min">min.</string>
@@ -995,8 +995,8 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="show_view_angle">Vis synsretning</string>
     <string name="map_view_3d_descr">Aktiver 3D-visning af kortet.</string>
     <string name="map_view_3d">3D-kortvisning</string>
-    <string name="show_poi_over_map_description">Vis interessepunkter på kortet (brug det sidst valgte filter).</string>
-    <string name="show_poi_over_map">Vis interessepunkt</string>
+    <string name="show_poi_over_map_description">Vis det sidst valgte IP overlejring på kortet.</string>
+    <string name="show_poi_over_map">Vis IP overlejring</string>
     <string name="map_tile_source_descr">Vælg kilden til onlinekort eller cachelagrede kortbrikker.</string>
     <string name="map_tile_source">Kilde til kortbrikker</string>
     <string name="map_source">Kortkilde</string>
@@ -1430,7 +1430,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="loading_smth">Indlæser %1$s…</string>
     <string name="save_as_favorites_points">Gem som en gruppe af favoritter</string>
     <string name="select_destination_and_intermediate_points">Vælg destinationer</string>
-    <string name="layer_amenity_label">Punktetiketter</string>
+    <string name="layer_amenity_label">IP etiketter overlejring</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kort klassificering med billeder.</string>
     <string name="show_zoom_buttons_navigation_descr">Vis zoom-knapperne under navigation.</string>
     <string name="show_zoom_buttons_navigation">Vis zoom-knapperne</string>
@@ -2706,7 +2706,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="depth_contour_descr">Kortsæt der indeholder havdybdekonturlinjer og -punkter.</string>
     <string name="subscribe_email_error">Fejl</string>
     <string name="subscribe_email_desc">Abonner på e-mail listen om rabatter og hent yderligere 3 kort!</string>
-    <string name="no_overlay">Ingen overleejring</string>
+    <string name="no_overlay">Ingen overlejring</string>
     <string name="no_underlay">Ingen underlejring</string>
     <string name="quick_action_add_destination">Tilføj destination</string>
     <string name="quick_action_replace_destination">Udskift destination</string>
@@ -2947,7 +2947,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_left">Venstre</string>
     <string name="show_number_pad">Vis numerisk tastatur</string>
     <string name="shared_string_paste">Indsæt</string>
-    <string name="coordinate_input_accuracy_description">Skift automatisk til det næste felt efter indtastning %1$ d cifre efter decimaltegnet</string>
+    <string name="coordinate_input_accuracy_description">Skift automatisk til det næste felt efter indtastning af %1$ d cifre efter decimaltegnet</string>
     <string name="coordinate_input_accuracy">%1$d cifre</string>
     <string name="go_to_next_field">Gå til næste felt</string>
     </resources>
