@@ -219,7 +219,7 @@ public class MapMarkersWidgetsFactory {
 		MapMarker marker = markers.get(0);
 		updateUI(loc, heading, marker, arrowImg, distText, okButton, addressText, true, customLocation != null);
 
-		if (markers.size() > 1) {
+		if (markers.size() > 1 && map.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 2) {
 			marker = markers.get(1);
 			if (loc != null && customLocation == null) {
 				for (int i = 1; i < markers.size(); i++) {

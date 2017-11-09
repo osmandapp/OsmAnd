@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_two">Two</string>
+    <string name="shared_string_one">One</string>
     <string name="show_guide_line_descr">A line connecting your location to locations of the active markers will be shown on the map.</string>
     <string name="show_arrows_descr">One or two arrows indicating the direction to the active markers will be shown on the map.</string>
     <string name="distance_indication_descr">Choose how you\'d like to view the distance to the active markers.</string>

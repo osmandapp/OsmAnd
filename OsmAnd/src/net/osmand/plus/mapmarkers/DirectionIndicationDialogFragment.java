@@ -8,12 +8,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MapMarkersMode;
@@ -21,6 +26,8 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.widgets.IconPopupMenu;
+import net.osmand.plus.widgets.IconPopupMenu.OnMenuItemClickListener;
 
 public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment {
 
@@ -46,6 +53,34 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 			@Override
 			public void onClick(View view) {
 				dismiss();
+			}
+		});
+
+		final TextView menuTv = (TextView) mainView.findViewById(R.id.active_markers_text_view);
+		menuTv.setText(settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1 ? R.string.shared_string_one : R.string.shared_string_two);
+		menuTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getContentIcon(R.drawable.ic_action_arrow_drop_down), null);
+		menuTv.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				IconPopupMenu popupMenu = new IconPopupMenu(getActivity(), menuTv);
+				Menu menu = popupMenu.getMenu();
+				popupMenu.getMenuInflater().inflate(R.menu.active_markers_menu, menu);
+				setupMenuItems(menu);
+				popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						switch (item.getItemId()) {
+							case R.id.action_one:
+								updateDisplayedMarkersCount(1);
+								return true;
+							case R.id.action_two:
+								updateDisplayedMarkersCount(2);
+								return true;
+						}
+						return false;
+					}
+				});
+				popupMenu.show();
 			}
 		});
 
@@ -111,10 +146,33 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		return null;
 	}
 
+	private void setupMenuItems(Menu menu) {
+		OsmandSettings settings = getSettings();
+		int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
+		int stringId = count == 1 ? R.string.shared_string_one : R.string.shared_string_two;
+		int itemId = count == 1 ? R.id.action_one : R.id.action_two;
+		boolean night = !settings.isLightContent();
+		SpannableString title = new SpannableString(getString(stringId));
+		title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getActivity(),
+				night ? R.color.osmand_orange : R.color.dashboard_blue)), 0, title.length(), 0);
+		menu.findItem(itemId).setTitle(title);
+	}
+
+	private void updateDisplayedMarkersCount(int count) {
+		((TextView) mainView.findViewById(R.id.active_markers_text_view))
+				.setText(count == 1 ? R.string.shared_string_one : R.string.shared_string_two);
+		getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.set(count);
+		notifyListener();
+	}
+
 	private void updateChecked(OsmandPreference<Boolean> setting, CompoundButton button) {
 		boolean newState = !setting.get();
 		setting.set(newState);
 		button.setChecked(newState);
+		refreshMap();
+	}
+
+	private void refreshMap() {
 		if (getMapActivity() != null) {
 			getMapActivity().refreshMap();
 		}
@@ -154,9 +212,9 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	private void updateMarkerModeRow(int rowId, int radioButtonId, boolean checked, boolean active) {
 		boolean night = !getSettings().isLightContent();
 		RadioButton rb = (RadioButton) mainView.findViewById(radioButtonId);
-		rb.setChecked(checked);
 		int colorId = active ? night ? R.color.osmand_orange : R.color.dashboard_blue
 				: night ? R.color.ctx_menu_info_text_dark : R.color.icon_color;
+		rb.setChecked(checked);
 		CompoundButtonCompat.setButtonTintList(rb, ColorStateList.valueOf(ContextCompat.getColor(getContext(), colorId)));
 		mainView.findViewById(rowId).setEnabled(active);
 	}
