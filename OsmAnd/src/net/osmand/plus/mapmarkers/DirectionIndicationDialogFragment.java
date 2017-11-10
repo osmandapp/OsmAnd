@@ -284,16 +284,14 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	private Drawable getIconTop(int id, boolean active) {
-		return active ? getIcon(id, R.color.osmand_orange)
-				: getContentIcon(id);
+		return active ? getIcon(id, R.color.osmand_orange) : getContentIcon(id);
 	}
 
 	private void updateDisplayedMarkersCount(int count) {
 		((TextView) mainView.findViewById(R.id.active_markers_text_view))
 				.setText(count == 1 ? R.string.shared_string_one : R.string.shared_string_two);
 		getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.set(count);
-		notifyListener();
-		updateHelpImage();
+		updateSelection(true);
 	}
 
 	private void updateChecked(OsmandPreference<Boolean> setting, CompoundButton button) {
@@ -320,8 +318,11 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		OsmandSettings settings = getSettings();
 		MapMarkersMode mode = settings.MAP_MARKERS_MODE.get();
 		boolean distIndEnabled = settings.MARKERS_DISTANCE_INDICATION_ENABLED.get();
-		updateIcon(R.id.top_bar_icon, R.drawable.ic_action_device_topbar, mode.isToolbar() && distIndEnabled);
-		updateIcon(R.id.widget_icon, R.drawable.ic_action_device_widget, mode.isWidgets() && distIndEnabled);
+		int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
+		int topBarIconId = count == 1 ? R.drawable.ic_action_device_topbar : R.drawable.ic_action_device_topbar_two;
+		int widgetIconId = count == 1 ? R.drawable.ic_action_device_widget : R.drawable.ic_action_device_widget_two;
+		updateIcon(R.id.top_bar_icon, topBarIconId, mode.isToolbar() && distIndEnabled);
+		updateIcon(R.id.widget_icon, widgetIconId, mode.isWidgets() && distIndEnabled);
 		updateMarkerModeRow(R.id.top_bar_row, R.id.top_bar_radio_button, mode.isToolbar(), distIndEnabled);
 		updateMarkerModeRow(R.id.widget_row, R.id.widget_radio_button, mode.isWidgets(), distIndEnabled);
 		if (notifyListener) {
