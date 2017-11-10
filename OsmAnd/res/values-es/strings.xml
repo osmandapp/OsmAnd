@@ -32,7 +32,7 @@
     <string name="live_monitoring_url">Dirección web de Seguimiento en directo</string>
     <string name="gpx_monitoring_disabled_warn">Registra trazas utilizando el control GPX o mediante la opción «Grabar viaje».</string>
     <string name="show_current_gpx_title">Mostrar traza actual</string>
-    <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas de mapas (incluyendo sus actualizaciones) y no soporta artículos de Wikipedia sin conexión.</string>
+    <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas de mapas (añadir y actualizar mapas) y no soporta artículos de Wikipedia sin conexión.</string>
     <string name="free_version_title">Versión gratuita</string>
     <string name="poi_context_menu_showdescription">Ver información del PDI.</string>
     <string name="index_name_north_america">Norteamérica</string>
@@ -355,7 +355,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="shared_string_favorites">Favoritos</string>
     <string name="layer_osm_bugs">Notas OSM (en línea)</string>
     
-    <string name="layer_poi">Puntos de interés…</string>
+    <string name="layer_poi">Superposición de PDI…</string>
     <string name="layer_map">Fuente del mapa…</string>
     <string name="menu_layers">Capas de mapas</string>
     <string name="context_menu_item_search_poi">Buscar PDI</string>
@@ -529,8 +529,8 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="show_view_angle">Mostrar dirección de la vista</string>
     <string name="map_view_3d_descr">Activa la vista 3D del mapa.</string>
     <string name="map_view_3d">Visión 3D del mapa</string>
-    <string name="show_poi_over_map_description">Muestra el PDI sobre el mapa (utilizando el último filtro seleccionado).</string>
-    <string name="show_poi_over_map">Mostrar PDI</string>
+    <string name="show_poi_over_map_description">Muestra la última superposición del PDI elegido en el mapa.</string>
+    <string name="show_poi_over_map">Mostrar superposición de PDI</string>
     <string name="map_tile_source_descr">Elige la fuente de las teselas de mapas en línea o almacenadas.</string>
     <string name="map_tile_source">Fuente de teselas del mapa</string>
     <string name="map_source">Fuente de mapa</string>
@@ -1318,7 +1318,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="map_widget_plain_time">Tiempo actual</string>
     <string name="gpx_wpt">Punto de referencia</string>
     <string name="select_destination_and_intermediate_points">Marque los destinos</string>
-    <string name="layer_amenity_label">Etiquetas de los puntos</string>
+    <string name="layer_amenity_label">Etiquetas superpuestas de PDI</string>
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
     <string name="show_zoom_buttons_navigation_descr">Muestra los botones de zoom durante la navegación.</string>
     <string name="show_zoom_buttons_navigation">Mostrar botones de zoom</string>
@@ -2763,4 +2763,5 @@ Por favor proporciona un código completo</string>
     <string name="coordinate_input_accuracy">%1$d dígitos</string>
     <string name="go_to_next_field">Ir al campo siguiente</string>
     <string name="rename_marker">Renombrar marcador</string>
+    <string name="appearance_on_the_map">Apariencia en el mapa</string>
     </resources>
