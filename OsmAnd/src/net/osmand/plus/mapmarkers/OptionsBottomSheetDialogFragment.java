@@ -2,17 +2,14 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 
 public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -40,21 +37,21 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		MapActivity mapActivity = (MapActivity) getActivity();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_options_bottom_sheet_dialog, container);
 
 		((ImageView) mainView.findViewById(R.id.sort_by_icon)).setImageDrawable(getContentIcon(R.drawable.ic_sort_waypoint_dark));
 		OsmandSettings.MapMarkersMode mode = getMyApplication().getSettings().MAP_MARKERS_MODE.get();
+		int displayedCount = getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 		ImageView showDirectionIcon = (ImageView) mainView.findViewById(R.id.show_direction_icon);
 		int imageResId = 0;
 		switch (mode) {
 			case TOOLBAR:
-				imageResId = R.drawable.ic_action_device_topbar;
+				imageResId = displayedCount == 1 ? R.drawable.ic_action_device_topbar : R.drawable.ic_action_device_topbar_two;
 				break;
 			case WIDGETS:
-				imageResId = R.drawable.ic_action_device_widget;
+				imageResId = displayedCount == 1 ? R.drawable.ic_action_device_widget : R.drawable.ic_action_device_widget_two;
 				break;
 		}
 		showDirectionIcon.setBackgroundDrawable(getContentIcon(R.drawable.ic_action_device_top));
@@ -65,9 +62,6 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		((ImageView) mainView.findViewById(R.id.build_route_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_gdirections_dark));
 		((ImageView) mainView.findViewById(R.id.save_as_new_track_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
 		((ImageView) mainView.findViewById(R.id.move_all_to_history_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_history2));
-
-		((TextView) mainView.findViewById(R.id.show_direction_text_view)).setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.color_dialog_buttons_dark : R.color.map_widget_blue_pressed));
-		((TextView) mainView.findViewById(R.id.show_direction_text_view)).setText(getMyApplication().getSettings().MAP_MARKERS_MODE.get().toHumanString(getActivity()));
 
 		View sortByRow = mainView.findViewById(R.id.sort_by_row);
 		if (!showSortBy) {

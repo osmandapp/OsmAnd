@@ -143,6 +143,9 @@
 
 	<dimen name="splash_screen_logo_top">150dp</dimen>
 	<dimen name="splash_screen_text_bottom">128dp</dimen>
+	
+	<dimen name="guide_line_text_size">14sp</dimen>
+	<dimen name="guide_line_vertical_offset">6dp</dimen>
 
 	<dimen name="empty_state_image_margin_top">42dp</dimen>
 	<dimen name="empty_state_image_margin_bottom">30dp</dimen>
@@ -189,7 +192,9 @@
 	<dimen name="bottom_sheet_divider_margin_start">64dp</dimen>
 	<dimen name="bottom_sheet_image_text_margin_start">10dp</dimen>
 	<dimen name="bottom_sheet_selected_item_title_height">56dp</dimen>
-	
+
+	<dimen name="action_bar_image_width_land">236dp</dimen>
+	<dimen name="action_bar_image_top_margin_land">68dp</dimen>
 	<dimen name="action_bar_image_height">220dp</dimen>
 	<dimen name="action_bar_image_side_margin">70dp</dimen>
 
