@@ -519,6 +519,7 @@ public class AppInitializer implements IProgress {
 			indexRegionsBoundaries(warnings);
 			notifyEvent(InitEvents.INDEX_REGION_BOUNDARIES);
 			app.selectedGpxHelper.loadGPXTracks(this);
+			app.mapMarkersHelper.loadMapMarkersFromSelectedGpx();
 			notifyEvent(InitEvents.LOAD_GPX_TRACKS);
 			saveGPXTracks();
 			notifyEvent(InitEvents.SAVE_GPX_TRACKS);

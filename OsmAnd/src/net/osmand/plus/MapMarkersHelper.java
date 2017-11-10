@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -371,6 +372,10 @@ public class MapMarkersHelper {
 	}
 
 	public void syncGroup(MarkersSyncGroup group) {
+		syncGroup(group, true);
+	}
+
+	public void syncGroup(MarkersSyncGroup group, boolean enabled) {
 		if (!isGroupSynced(group.getId())) {
 			return;
 		}
@@ -391,7 +396,7 @@ public class MapMarkersHelper {
 			}
 
 			for (FavouritePoint fp : favGroup.points) {
-				addNewMarkerIfNeeded(group, dbMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName());
+				addNewMarkerIfNeeded(group, dbMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName(), enabled);
 			}
 
 			removeOldMarkersIfNeeded(dbMarkers);
@@ -414,14 +419,14 @@ public class MapMarkersHelper {
 			int defColor = ContextCompat.getColor(ctx, R.color.marker_red);
 			for (WptPt pt : gpxPoints) {
 				group.setColor(pt.getColor(defColor));
-				addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name);
+				addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name, enabled);
 			}
 
 			removeOldMarkersIfNeeded(dbMarkers);
 		}
 	}
 
-	private void addNewMarkerIfNeeded(MarkersSyncGroup group, List<MapMarker> markers, LatLon latLon, String name) {
+	private void addNewMarkerIfNeeded(MarkersSyncGroup group, List<MapMarker> markers, LatLon latLon, String name, boolean enabled) {
 		boolean exists = false;
 
 		for (MapMarker marker : markers) {
@@ -443,7 +448,7 @@ public class MapMarkersHelper {
 
 		if (!exists) {
 			addMarkers(Collections.singletonList(latLon),
-					Collections.singletonList(new PointDescription(POINT_TYPE_MAP_MARKER, name)), group);
+					Collections.singletonList(new PointDescription(POINT_TYPE_MAP_MARKER, name)), group, enabled);
 		}
 	}
 
@@ -485,7 +490,7 @@ public class MapMarkersHelper {
 			mapMarkers.addAll(markers);
 			reorderActiveMarkersIfNeeded();
 			for (MapMarker marker : markers) {
-				addMarkerToGroup(marker);
+				addMarkerToGroup(marker, true);
 			}
 			refresh();
 		}
@@ -501,7 +506,7 @@ public class MapMarkersHelper {
 				mapMarkers.add(marker);
 				reorderActiveMarkersIfNeeded();
 			}
-			addMarkerToGroup(marker);
+			addMarkerToGroup(marker, true);
 			refresh();
 		}
 	}
@@ -748,14 +753,14 @@ public class MapMarkersHelper {
 	}
 
 	public void addMapMarker(LatLon point, PointDescription historyName) {
-		addMarkers(Collections.singletonList(point), Collections.singletonList(historyName), null);
+		addMarkers(Collections.singletonList(point), Collections.singletonList(historyName), null, true);
 	}
 
 	public void addMapMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group) {
-		addMarkers(points, historyNames, group);
+		addMarkers(points, historyNames, group, true);
 	}
 
-	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group) {
+	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group, boolean enabled) {
 		if (points.size() > 0) {
 			int colorIndex = -1;
 			for (int i = 0; i < points.size(); i++) {
@@ -792,8 +797,10 @@ public class MapMarkersHelper {
 				marker.history = false;
 				marker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;
 				markersDbHelper.addMarker(marker);
-				mapMarkers.add(0, marker);
-				addMarkerToGroup(marker);
+				if (enabled) {
+					mapMarkers.add(0, marker);
+				}
+				addMarkerToGroup(marker, enabled);
 				reorderActiveMarkersIfNeeded();
 				lookupAddress(marker);
 			}
@@ -990,7 +997,7 @@ public class MapMarkersHelper {
 		}
 	}
 
-	private void addMarkerToGroup(MapMarker marker) {
+	private void addMarkerToGroup(MapMarker marker, boolean enabled) {
 		if (marker != null) {
 			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupByName(marker.groupName);
 			if (mapMarkersGroup != null) {
@@ -1000,9 +1007,13 @@ public class MapMarkersHelper {
 					sortMarkers(mapMarkersGroup.getMarkers(), false, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 				}
 			} else {
-				MapMarkersGroup group = createMapMarkerGroup(marker);
-				group.getMarkers().add(marker);
-				createHeaderAndHistoryButtonInGroup(group);
+				mapMarkersGroup = createMapMarkerGroup(marker);
+				mapMarkersGroup.getMarkers().add(marker);
+				createHeaderAndHistoryButtonInGroup(mapMarkersGroup);
+			}
+			if (!enabled) {
+				mapMarkersGroup.setDisabled(true);
+				updateGroupDisabled(mapMarkersGroup, true);
 			}
 		}
 	}
@@ -1100,6 +1111,19 @@ public class MapMarkersHelper {
 
 		for (MapMarkersGroup group : mapMarkersGroups) {
 			createHeaderAndHistoryButtonInGroup(group);
+		}
+	}
+
+	public void loadMapMarkersFromSelectedGpx() {
+		List<SelectedGpxFile> selectedGpxFiles = ctx.getSelectedGpxHelper().getSelectedGPXFiles();
+		for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
+			GPXFile gpx = selectedGpxFile.getGpxFile();
+			if (gpx.getPoints().size() > 0) {
+				File gpxFile = new File(gpx.path);
+				final MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpxFile.getAbsolutePath(), AndroidUtils.trimExtension(gpxFile.getName()), MarkersSyncGroup.GPX_TYPE);
+				addMarkersSyncGroup(syncGroup);
+				syncGroup(syncGroup, false);
+			}
 		}
 	}
 
