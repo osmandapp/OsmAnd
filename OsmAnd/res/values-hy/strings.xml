@@ -2446,4 +2446,75 @@
     <string name="show_gpx">Ցույց տալ GPX</string>
     <string name="count_of_lines">Տողերի քանակը</string>
     <string name="are_you_sure">Վստա՞հ եք?</string>
+    <string name="osmo_group_information_desc">- Խմբի ստեղծման ժամանակ խնդրում ենք տալ անուն և լրացնել նկարագրությունը
+\n - Ծրագրային խումբից ստեղծվում են միայն Simple տիպի, կարդալ ավելին https://osmo.mobi/g/new կայքում
+\n - Կայքի միջոցով դուք կարող եք կառավարել խումբը, տեղադրել track-եր և կետեր բոլորի համար
+\n - Մենք չենք ողջունում խմբի օգտագործումը միայն մեկ օգտագործողի կողմից, եթե դա POI խումբ չէ
+\n - Անձնական խմբերն սահմանափակվում են 8 հոգու համար
+\n - Մանրամասն պայմանները միշտ հասանելի են OsMo.mobi կայքում 
+\n - Եթե Ձեզ անհրաժեշտ է հատուկ պայմաններ - խնդրում աջակցության համար դիմել՝ osmo.mobi@gmail.com</string>
+    <string name="show_view_angle">Ցուցադրել դիտարկման ուղղությունը</string>
+    <string name="map_tile_source_descr">Ընտրեք առցանց կամ պահված քարտեզի աղբյուրը:</string>
+    <string name="unsaved_changes_will_be_lost">Ցանկացած չպահպնված փոփոխություն կկորցնեք: Շարունակել?</string>
+    <string name="downloads_left_template">Մնաց %1$s ներբեռնումներ</string>
+    <string name="roads">Ճանապարհներ</string>
+    <string name="downloading_number_of_files">Ֆայլի ներբեռնում - %1$d</string>
+    <string name="show_free_version_banner">Ցույց տալ անվճար տարբերակների պաստառը</string>
+    <string name="show_free_version_banner_description">Ցույց տալ անվճար տարբերակների պաստառը նաև վճարովի տարբերակում։</string>
+    <string name="buy">ԳՆԵԼ</string>
+    <string name="activate_seamarks_plugin">Խնդրում ենք ակտիվացնել Ծովային քարտեզների plugin-ը</string>
+    <string name="activate_srtm_plugin">Խնդրում ենք ակտիվացնել SRTM plugin-ը</string>
+    <string name="later">Ավելի ուշ</string>
+    <string name="get_full_version">Ամբողջական տարբերակը</string>
+    <string name="downloads">Ներբեռնումներ</string>
+    <string name="confirm_download_roadmaps">Վստահ եք, որ ցանկանում եք ներբեռնել ճանապարհային քարտեզը, թեև արդեն ունեք ստանդարտ (ամբողջական) քարտեզ?</string>
+    <string name="value_downloaded_of_max">"%1$.1f   %2$.1f  ՄԲ"</string>
+    <string name="file_size_in_mb">%.1f ՄԲ</string>
+    <string name="update_all">"Թարմացնել բոլորը  (%1$s ՄԲ)"</string>
+    <string name="free_downloads_used">Օգտագործված է անվճար ներբեռնումներ</string>
+    <string name="free_downloads_used_description">Ցույց տալ օգտագործված անվճար ներբեռնումները։</string>
+    <string name="application_dir_description">Ընտրեք որտեղ եք ցանկանում պահել քարտեզների ֆայլերը և այլ տվյալներ:</string>
+    <string name="enter_country_name">Մուտքագրեք երկրի անունը</string>
+    <string name="new_version">Նոր տարբերակ</string>
+    <string name="begin_with_osmand_menu_group">Առաջին քայլերը OsmAnd-ի հետ</string>
+    <string name="features_menu_group">Հնարավորությունները</string>
+    <string name="help_us_to_improve_menu_group">Օգնեք մեզ բարելավել OsmAnd-ը</string>
+    <string name="other_menu_group">Այլ</string>
+    <string name="plugins_menu_group">Պլագիններ (Plugins)</string>
+    <string name="first_usage_item">Առաջին մեկնարկը</string>
+    <string name="first_usage_item_description">Ինչպես ներբեռնել քարտեզները, սահմանել հիմնական պարամետրերը:</string>
+    <string name="planning_trip_item">Ուղեւորության պլանավորում</string>
+    <string name="faq_item">Հաճախակի տրվող հարցեր (FAQ)</string>
+    <string name="faq_item_description">Հաճախակի տրվող հարցեր (FAQ)</string>
+    <string name="instalation_troubleshooting_item">Տեղադրում և խնդիրներ լուծում</string>
+    <string name="techical_articles_item">Տեխնիկական հոդվածներ</string>
+    <string name="versions_item">Տարբերակներ</string>
+    <string name="feedback">Արձագանք</string>
+    <string name="contact_us">Կապ մեզ հետ</string>
+    <string name="map_legend">Քարտեզի նշումներ</string>
+    <string name="save_poi_too_many_uppercase">Անունը պարունակում է չափազանց շատ մեծ տառեր: Դուք իսկապես ուզում եք շարունակել?</string>
+    <string name="save_poi_without_poi_type_message">Վստահ եք, որ ցանկանում եք POI-ին պահպանել առանց տեսակը նշելու?</string>
+    <string name="poi_context_menu_modify_osm_change">Խմբագրել POI</string>
+    <string name="use_dashboard_btn">Օգտագործել Վահանակը</string>
+    <string name="use_drawer_btn">Օգտագործել Մենյու</string>
+    <string name="dashboard_or_drawer_title">Վահանակը կամ Մենյու</string>
+    <string name="dashboard_or_drawer_description">Ստատիկ Մենյուի փոխարեն, դուք կարող եք օգտագործել նոր ինտերֆեյսը որպես Վահանակ էջ: Ձեր ընտրությունը միշտ կարող է փոփոխվել գլխավոր էջի կարգավորումներում:</string>
+    <string name="update">Թարմացնել</string>
+    <string name="only_download_over_wifi">Ներբեռնել միայն WiFi-ի միջոցով</string>
+    <string name="live_update">Ավտո-թարմացում</string>
+    <string name="update_now">Թարմացնել հիմա</string>
+    <string name="missing_write_external_storage_permission">Հավելվածը SD քարտի օգտագործման թույլտվություն չունի</string>
+    <string name="last_update">Վերջին թարմացումը՝ %s</string>
+    <string name="update_time">Թարմացնան ժամը</string>
+    <string name="updates_size">Թարմացման չափը</string>
+    <string name="last_map_change">Քարտեզի վերջին փոփոխությունը՝ %s</string>
+    <string name="hourly">Ամեն ժամ</string>
+    <string name="daily">Օրեկան</string>
+    <string name="weekly">Շաբաթական</string>
+    <string name="morning">Առավոտ</string>
+    <string name="night">Գիշեր</string>
+    <string name="select_month_and_country">Ընտրեք ամիսը և երկիրը</string>
+    <string name="number_of_contributors">Ներդրողների թիվը</string>
+    <string name="number_of_edits">Խմբագրումների քանակը</string>
+    <string name="reports_for">Հաշվետվություն</string>
     </resources>
