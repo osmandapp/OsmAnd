@@ -219,7 +219,14 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
-		Location myLoc = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+		Location myLoc;
+		if (useFingerLocation && fingerLocation != null) {
+			myLoc = new Location("");
+			myLoc.setLatitude(fingerLocation.getLatitude());
+			myLoc.setLongitude(fingerLocation.getLongitude());
+		} else {
+			myLoc = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+		}
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
 		int displayedWidgets = map.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get();
