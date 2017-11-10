@@ -218,15 +218,15 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		LinkedList<Drawable> imgList = new LinkedList<>();
 		imgList.add(getDeviceImg());
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get()) {
-			imgList.add(getGuideLineTwoImg());
+			imgList.add(getGuideLineOneImg());
 			if (count == 2) {
-				imgList.add(getGuideLineOneImg());
+				imgList.add(getGuideLineTwoImg());
 			}
 		}
 		if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
-			imgList.add(getArrowTwoImg());
+			imgList.add(getArrowOneImg());
 			if (count == 2) {
-				imgList.add(getArrowOneImg());
+				imgList.add(getArrowTwoImg());
 			}
 		}
 		if (settings.MARKERS_DISTANCE_INDICATION_ENABLED.get()) {

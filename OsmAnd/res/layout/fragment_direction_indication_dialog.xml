@@ -29,7 +29,7 @@
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:text="@string/shared_string_settings"
+                android:text="@string/appearance_on_the_map"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/dialog_header_text_size"
                 osmand:typeface="@string/font_roboto_medium"/>

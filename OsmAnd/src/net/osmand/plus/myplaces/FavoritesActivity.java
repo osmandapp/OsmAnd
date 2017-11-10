@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
@@ -83,14 +84,14 @@ public class FavoritesActivity extends TabActivity {
 		}
 	}
 
-	@TargetApi(Build.VERSION_CODES.KITKAT)
+	@RequiresApi(Build.VERSION_CODES.KITKAT)
 	public void addTrack() {
 		Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 		intent.setType("*/*");
 		startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
 	}
 
-	@TargetApi(Build.VERSION_CODES.KITKAT)
+	@RequiresApi(Build.VERSION_CODES.KITKAT)
 	public void importFavourites() {
 		Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 		intent.setType("*/*");
