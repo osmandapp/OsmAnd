@@ -81,17 +81,17 @@
 	<dimen name="default_split_segments_data">15sp</dimen>
 	<dimen name="default_split_segments_sub">12sp</dimen>
 
-	<dimen name="my_places_empty_state_image_margin_top">63dp</dimen>
-	<dimen name="my_places_empty_state_image_margin_bottom">45dp</dimen>
-	<dimen name="my_places_empty_state_text_interval">12dp</dimen>
-	<dimen name="my_places_empty_state_button_margin_top">30dp</dimen>
-	<dimen name="my_places_empty_state_text_size">20sp</dimen>
-	<dimen name="my_places_empty_state_text_desc_size">18sp</dimen>
-	<dimen name="my_places_empty_state_text_desc_margin">68dp</dimen>
-	<dimen name="my_places_empty_state_image_margin_left">138dp</dimen>
-	<dimen name="my_places_empty_state_text_button_padding_left">72dp</dimen>
-	<dimen name="my_places_empty_state_text_button_padding_right">90dp</dimen>
-	<dimen name="my_places_empty_state_text_button_padding_top">96dp</dimen>
+	<dimen name="empty_state_image_margin_top">63dp</dimen>
+	<dimen name="empty_state_image_margin_bottom">45dp</dimen>
+	<dimen name="empty_state_text_interval">12dp</dimen>
+	<dimen name="empty_state_button_margin_top">30dp</dimen>
+	<dimen name="empty_state_text_size">20sp</dimen>
+	<dimen name="empty_state_text_desc_size">18sp</dimen>
+	<dimen name="empty_state_text_desc_margin">68dp</dimen>
+	<dimen name="empty_state_image_margin_left">138dp</dimen>
+	<dimen name="empty_state_text_button_padding_left">72dp</dimen>
+	<dimen name="empty_state_text_button_padding_right">90dp</dimen>
+	<dimen name="empty_state_text_button_padding_top">96dp</dimen>
 
 	<dimen name="bottom_sheet_cancel_button_height">72dp</dimen>
 	<dimen name="landscape_bottom_sheet_dialog_fragment_width">540dp</dimen>

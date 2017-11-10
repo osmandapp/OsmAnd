@@ -2948,4 +2948,6 @@
     <string name="coordinate_input_accuracy">%1$d лічбаў</string>
     <string name="go_to_next_field">Парайсці ў наступнае поле</string>
     <string name="rename_marker">Перайменаваць маркер</string>
+    <string name="shared_string_two">Два</string>
+    <string name="shared_string_one">Адзін</string>
     </resources>

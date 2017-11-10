@@ -845,7 +845,9 @@
 	<string name="foot">ft</string>
 	<string name="mile">mi</string>
 	<string name="send_location_way_choose_title">اشتراک‌گذاری مکان با</string>
-	<string name="send_location_sms_pattern">مکان: %1$s\n%2$s</string>
+	<string name="send_location_sms_pattern">موقعیت:
+\n%1$s
+\n%2$s</string>
 	<string name="send_location">ارسال مکان</string>
 	<string name="context_menu_item_share_location">اشتراک‌گذاری مکان</string>
 	<string name="indexing_address">در حال نمایه‌کردن نشانی…</string>
@@ -1650,7 +1652,7 @@
 	
 	<string name="share_note">به‌اشتراک‌گذاری یادداشت</string>
 	
-    <string name="location_on_map">مکان: 
+    <string name="location_on_map">موقعیت: 
 \n عرض %1$s 
 \n طول %2$s</string>
 	<string name="watch">مشاهده</string>
@@ -2939,4 +2941,10 @@
     <string name="coordinate_input_accuracy_description">پس از واردکردن %1$d رقم بعد از ممیز، به‌صورت خودکار خانۀ بعدی فعال شود</string>
     <string name="coordinate_input_accuracy">%1$d رقم</string>
     <string name="go_to_next_field">رفتن به خانهٔ بعدی</string>
+    <string name="shared_string_two">دو</string>
+    <string name="shared_string_one">یک</string>
+    <string name="show_guide_line_descr">خطی بین موقعیت شما و موقعیت نشانه‌ها، روی نقشه نشان داده می‌شود.</string>
+    <string name="show_arrows_descr">با یک یا دو پیکان، محل قرارگیری نشانه‌های فعال روی نقشه نشان داده می‌شود.</string>
+    <string name="distance_indication_descr">مشخص کنید که فاصلهٔ شما تا نشانه‌های فعال چگونه نشان داده شود.</string>
+    <string name="active_markers_descr">مشخص کنید چند پیکان جهت‌نما نشان داده شود.</string>
     </resources>

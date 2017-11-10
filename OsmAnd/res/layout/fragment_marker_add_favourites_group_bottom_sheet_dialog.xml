@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="?attr/bg_color"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/favourites_group_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/bottom_sheet_content_padding_small"
+        android:clipToPadding="false"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/dashboard_divider"/>
+
+    <FrameLayout
+        android:id="@+id/close_row"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_sheet_cancel_button_height"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/shared_string_cancel"
+            android:textAllCaps="true"
+            android:textColor="?attr/color_dialog_buttons"
+            android:textSize="@dimen/default_desc_text_size"
+            android:textStyle="bold"/>
+    </FrameLayout>
+
+</LinearLayout>
