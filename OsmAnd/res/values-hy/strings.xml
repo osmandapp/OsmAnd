@@ -2517,7 +2517,7 @@
     <string name="number_of_contributors">Ներդրողների թիվը</string>
     <string name="number_of_edits">Խմբագրումների քանակը</string>
     <string name="reports_for">Հաշվետվություն</string>
-    <string name="file_name_containes_illegal_char"></string>
+    <string name="file_name_containes_illegal_char"/>
     <string name="configure_screen_quick_action">Արագ գործողություն</string>
     <string name="quick_action_item_action">Գործողություն %d</string>
     <string name="quick_action_item_screen">Էկրան %d</string>
@@ -2595,4 +2595,9 @@
     <string name="shared_string_action_name">Գործողության անունը</string>
     <string name="mappilary_no_internet_desc">Mapillary-ից լուսանկարներ դիտելու համար Ձեզ անհրաժեշտ է ինտերնետ:</string>
     <string name="retry">Կրկնել</string>
+    <string name="track_waypoints">Տրեկի (track) կետերը</string>
+    <string name="add_group">Ավելացնել խումբ</string>
+    <string name="add_group_descr">Դուք կարող եք ավելացնել «Սիրված»-ի խումբ կամ տրեկի կետեր:</string>
+    <string name="empty_state_markers_groups">Ներմուծել խմբերը</string>
+    <string name="empty_state_markers_groups_desc">Դուք կարող եք ներմուծել «Սիրված»-ի խմբերը կամ տրեկի կետերը որպես մարկերներ:</string>
     </resources>
