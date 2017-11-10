@@ -529,7 +529,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	private void addTrack() {
-		((FavoritesActivity) getActivity()).addTrack();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			((FavoritesActivity) getActivity()).addTrack();
+		}
 	}
 
 	public void showProgressBar() {
