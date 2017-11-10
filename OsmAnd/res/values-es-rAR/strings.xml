@@ -2845,4 +2845,5 @@ Proporciona un código completo</string>
     <string name="show_arrows_descr">Se mostrarán en el mapa una o dos flechas que indican la dirección a los marcadores activos.</string>
     <string name="distance_indication_descr">Elige cómo desea ver la distancia a los marcadores activos.</string>
     <string name="active_markers_descr">Elige cuántos indicadores de dirección desea ver.</string>
+    <string name="appearance_on_the_map">Aspecto en el mapa</string>
     </resources>
