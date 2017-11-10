@@ -53,13 +53,14 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 	private Paint textPaint = new Paint();
 	private Snackbar snackbar;
 	private boolean compassUpdateAllowed = true;
+	private View mainView;
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final boolean night = !mapActivity.getMyApplication().getSettings().isLightContent();
-		final View mainView = inflater.inflate(R.layout.fragment_map_markers_groups, container, false);
+		mainView = inflater.inflate(R.layout.fragment_map_markers_groups, container, false);
 
 		Fragment addMarkersGroupFragment = getChildFragmentManager().findFragmentByTag(AddMarkersGroupBottomSheetDialogFragment.TAG);
 		if (addMarkersGroupFragment != null) {
@@ -235,8 +236,30 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				}
 			}
 		});
+		adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+			@Override
+			public void onChanged() {
+				changeFabVisibilityIfNeeded();
+			}
+
+			@Override
+			public void onItemRangeInserted(int positionStart, int itemCount) {
+				changeFabVisibilityIfNeeded();
+			}
+
+			@Override
+			public void onItemRangeRemoved(int positionStart, int itemCount) {
+				changeFabVisibilityIfNeeded();
+			}
+		});
 
 		final View emptyView = mainView.findViewById(R.id.empty_view);
+		mainView.findViewById(R.id.import_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				openAddGroupMenu();
+			}
+		});
 		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 		emptyImageView.setImageResource(night ? R.drawable.ic_empty_state_marker_group_night : R.drawable.ic_empty_state_marker_group_day);
 		recyclerView.setEmptyView(emptyView);
@@ -249,6 +272,10 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 			}
 		});
 		return mainView;
+	}
+
+	private void changeFabVisibilityIfNeeded() {
+		mainView.findViewById(R.id.add_group_fab).setVisibility(adapter.getItemCount() > 0 ? View.VISIBLE : View.GONE);
 	}
 
 	private void openAddGroupMenu() {
