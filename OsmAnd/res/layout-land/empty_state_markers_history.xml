@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:osmand="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
-              android:id="@android:id/empty"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="horizontal">
@@ -16,7 +15,7 @@
         android:id="@+id/empty_state_image_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        tools:src="@drawable/ic_empty_state_trip_night"/>
+        tools:src="@drawable/ic_empty_state_marker_history_night"/>
 
     <LinearLayout
         android:clipToPadding="false"
@@ -34,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/empty_state_text_interval"
             android:background="@null"
-            android:text="@string/empty_state_my_tracks"
+            android:text="@string/empty_state_markers_history"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="@dimen/empty_state_text_size"
             osmand:typeface="@string/font_roboto_medium"/>
@@ -43,15 +42,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:text="@string/empty_state_my_tracks_desc"
+            android:text="@string/empty_state_markers_history_desc"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/empty_state_text_desc_size"/>
-
-        <Button
-            android:id="@+id/import_button"
-            style="@style/DialogActionButton"
-            android:layout_marginTop="@dimen/empty_state_button_margin_top"
-            android:text="@string/shared_string_import"/>
 
     </LinearLayout>
 
