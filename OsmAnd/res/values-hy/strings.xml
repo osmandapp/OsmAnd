@@ -2517,7 +2517,7 @@
     <string name="number_of_contributors">Ներդրողների թիվը</string>
     <string name="number_of_edits">Խմբագրումների քանակը</string>
     <string name="reports_for">Հաշվետվություն</string>
-    <string name="file_name_containes_illegal_char"/>
+    <string name="file_name_containes_illegal_char">Ֆայլի անունը պարունակում է անթույլատրելի խորհրդանիշ</string>
     <string name="configure_screen_quick_action">Արագ գործողություն</string>
     <string name="quick_action_item_action">Գործողություն %d</string>
     <string name="quick_action_item_screen">Էկրան %d</string>
@@ -2600,4 +2600,20 @@
     <string name="add_group_descr">Դուք կարող եք ավելացնել «Սիրված»-ի խումբ կամ տրեկի կետեր:</string>
     <string name="empty_state_markers_groups">Ներմուծել խմբերը</string>
     <string name="empty_state_markers_groups_desc">Դուք կարող եք ներմուծել «Սիրված»-ի խմբերը կամ տրեկի կետերը որպես մարկերներ:</string>
-    </resources>
+    <string name="shared_string_two">Երկու</string>
+    <string name="shared_string_one">Մեկ</string>
+    <string name="add_waypoint">Ավելացնել կետ</string>
+    <string name="add_line">Ավելացնել գիծ</string>
+    <string name="save_gpx_waypoint">Պահպանել GPX կետ</string>
+    <string name="save_route_point">Պահպանել երթուղու կետը</string>
+    <string name="waypoint_one">Կետ 1</string>
+    <string name="route_point_one">Երթուղու կետ 1</string>
+    <string name="empty_state_my_tracks">Ավելացնել և Գրանցել Տրեկները</string>
+    <string name="empty_state_my_tracks_desc">Գրանցել կամ ներմուծել տրեկներ նաելու համար։</string>
+    <string name="empty_state_favourites">Ավելացնել «Սիրված»-եր</string>
+    <string name="empty_state_favourites_desc">Ավելացնել «Սիրված»-եր քարտեզի վրա կամ ներմուծել իրենց ֆայլից։</string>
+    <string name="import_track">Ներմուծել տրեկ</string>
+    <string name="import_track_desc">Ֆայլ %1$s չի պարունակում կետեր, ներմուծել այդ որպես տրեկ?</string>
+    <string name="move_point">Տեղափոխել կետը</string>
+    <string name="add_segment_to_the_track">Ավելացնել սեգմենտը GPX-ին</string>
+</resources>
