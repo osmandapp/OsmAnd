@@ -3093,7 +3093,7 @@
 
 	<string name="poi_spices">Kryddeributik</string>
 
-<string name="poi_fuel_type">Type</string>
+<string name="poi_fuel_type">Brændstoftype</string>
 	<string name="poi_payment_type">Betalingstype</string>
 	<string name="poi_additional_type">Yderligere</string>
 <string name="poi_service_bicycle_charging_yes">Opladning: ja</string>
@@ -3101,7 +3101,7 @@
 
 <string name="poi_shop_craft">Kunst og håndværk tilbehørsbutik</string>
 
-	<string name="poi_fuel_avia_type">Type</string>
+	<string name="poi_fuel_avia_type">Brændstoftype (avia)</string>
 	<string name="poi_payment_fuel_type">Benzinkort</string>
 	<string name="poi_internet_access_type">Internet adgangstype</string>
 	<string name="poi_vending_type">Automattype</string>
@@ -3730,5 +3730,7 @@
 	<string name="poi_map_size_site">Kortdækning: sted</string>
 	<string name="poi_map_size_city">Kortdækning: by</string>
 	<string name="poi_map_size_region">Kortdækning: region</string>
+
+<string name="poi_charging_station_filter">Ladestation</string>
 
 </resources>

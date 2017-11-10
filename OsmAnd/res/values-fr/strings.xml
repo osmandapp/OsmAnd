@@ -23,7 +23,7 @@
     <string name="gpx_monitoring_disabled_warn">Enregistrer la trace avec le composant GPX ou avec l\'option \"Enregistrer l\'itinéraire\".</string>
     <string name="show_current_gpx_title">Afficher la trace courante</string>
 
-    <string name="free_version_message">La version gratuite d\'OsmAnd est limitée à %1$s téléchargements de carte (y compris les mises à jour) et ne gère pas les articles Wikipédia hors-ligne.</string>
+    <string name="free_version_message">La version gratuite d\'OsmAnd est limitée à %1$s téléchargements (incluant l\'installation comme la mise à jour de cartes) et ne gère pas les articles Wikipédia hors-ligne.</string>
     <string name="free_version_title">Version gratuite</string>
     <string name="poi_context_menu_showdescription">Afficher la description du point d\'intérêt.</string>
     <string name="index_name_north_america">Amérique du Nord</string>
