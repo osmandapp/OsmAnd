@@ -132,7 +132,7 @@
 
 	<color name="status_bar_light">#e58200</color>
 	<color name="status_bar_dark">#2f3a40</color>
-	<color name="status_bar_transparent_light">#33000000</color>
+	<color name="status_bar_transparent_light">#66000000</color>
 	<color name="status_bar_transparent_dark">#99000000</color>
 	<color name="status_bar_transparent_gradient">#CC000000</color>
 	<color name="status_bar_mapillary">#11ab51</color>

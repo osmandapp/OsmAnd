@@ -689,6 +689,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		} else {
 			showMapControls();
 		}
+		mapActivity.updateStatusBarColor();
 	}
 
 	public void startNavigation() {
