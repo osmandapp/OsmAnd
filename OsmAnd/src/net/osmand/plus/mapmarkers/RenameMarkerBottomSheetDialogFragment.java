@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
@@ -22,11 +21,11 @@ import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 
 public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -78,11 +77,6 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 				if (name.replaceAll("\\s", "").length() > 0) {
 					marker.setName(name);
 					mapActivity.getMyApplication().getMapMarkersHelper().updateMapMarker(marker, true);
-					FragmentManager fm = mapActivity.getSupportFragmentManager();
-					Fragment fragment = fm.findFragmentByTag(MarkerMenuOnMapFragment.TAG);
-					if (fragment != null) {
-						((MarkerMenuOnMapFragment) fragment).dismiss();
-					}
 					dismiss();
 				} else {
 					nameEditText.setError(getString(R.string.wrong_input));

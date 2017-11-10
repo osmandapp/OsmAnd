@@ -33,10 +33,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.mapmarkers.AddFavouritesGroupBottomSheetDialogFragment.AddFavouriteGroupListener;
+import net.osmand.plus.mapmarkers.AddMarkersGroupBottomSheetDialogFragment.AddMarkersGroupFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersGroupsAdapter;
-import net.osmand.plus.mapmarkers.AddMarkersGroupBottomSheetDialogFragment.AddMarkersGroupFragmentListener;
-import net.osmand.plus.mapmarkers.AddFavouritesGroupBottomSheetDialogFragment.AddFavouriteGroupListener;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;
 import net.osmand.util.MapUtils;
 
@@ -228,10 +228,9 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
 					MapMarker marker = (MapMarker) item;
-					mapActivity.getMyApplication().getSettings()
-							.setMapLocationToShow(marker.getLatitude(), marker.getLongitude(), 15, null, false, null);
+					mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
+							15, marker.getPointDescription(mapActivity), true, marker);
 					MapActivity.launchMapActivityMoveToTop(mapActivity);
-					MarkerMenuOnMapFragment.showInstance(mapActivity, marker);
 					((DialogFragment) getParentFragment()).dismiss();
 				}
 			}
