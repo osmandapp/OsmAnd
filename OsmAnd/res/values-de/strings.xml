@@ -2888,4 +2888,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="import_as_gpx">als GPX-Datei importieren</string>
     <string name="import_as_favorites">als Favoriten importieren</string>
     <string name="import_file">Datei importieren</string>
-	</resources>
+	<string name="shared_string_two">Zwei</string>
+    <string name="shared_string_one">Eins</string>
+    <string name="shared_string_right">Rechts</string>
+    <string name="shared_string_left">Links</string>
+    <string name="shared_string_paste">Einfügen</string>
+    </resources>
