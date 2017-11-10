@@ -87,7 +87,7 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="@string/show_direction"
+                    android:text="@string/appearance_on_the_map"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
             </LinearLayout>
 
