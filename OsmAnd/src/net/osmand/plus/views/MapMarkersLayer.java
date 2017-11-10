@@ -50,7 +50,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private static final long USE_FINGER_LOCATION_DELAY = 1000;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 6;
 	protected static final int DIST_TO_SHOW = 80;
-	private static final int TEXT_SIZE = 12;
+	private static final int TEXT_SIZE = 14;
 	private static final int VERTICAL_OFFSET = 10;
 
 	private final MapActivity map;
