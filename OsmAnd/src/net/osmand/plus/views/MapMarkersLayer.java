@@ -222,6 +222,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		Location myLoc = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
+		int displayedWidgets = map.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 
 		if (route != null && route.points.size() > 0) {
 			planRouteAttrs.updatePaints(view, nightMode, tileBox);
@@ -239,6 +240,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			textAttrs.updatePaints(view, nightMode, tileBox);
 			textAttrs.paint.setStyle(Paint.Style.FILL);
 
+			boolean drawMarkerName = map.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1;
+
 			int locX;
 			int locY;
 			if (map.getMapViewTrackingUtilities().isMapLinkedToLocation()
@@ -251,7 +254,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				locY = (int) tileBox.getPixYFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
 			}
 			int[] colors = MapMarker.getColors(map);
-			for (int i = 0; i < activeMapMarkers.size() && i < 2; i++) {
+			for (int i = 0; i < activeMapMarkers.size() && i < displayedWidgets; i++) {
 				MapMarker marker = activeMapMarkers.get(i);
 				int markerX = (int) tileBox.getPixXFromLatLon(marker.getLatitude(), marker.getLongitude());
 				int markerY = (int) tileBox.getPixYFromLatLon(marker.getLatitude(), marker.getLongitude());
@@ -272,7 +275,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 				float dist = (float) MapUtils.getDistance(myLoc.getLatitude(), myLoc.getLongitude(), marker.getLatitude(), marker.getLongitude());
 				String distSt = OsmAndFormatter.getFormattedDistance(dist, view.getApplication());
-				String text = distSt + " • " + marker.getName(map);
+				String text = distSt + (drawMarkerName ? " • " + marker.getName(map) : "");
 				Rect bounds = new Rect();
 				textAttrs.paint.getTextBounds(text, 0, text.length(), bounds);
 				float hOffset = pm.getLength() / 2 - bounds.width() / 2;
@@ -300,6 +303,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		widgetsFactory.updateInfo(useFingerLocation ? fingerLocation : (myLoc == null
 				? tileBox.getCenterLatLon() : new LatLon(myLoc.getLatitude(), myLoc.getLongitude())), tileBox.getZoom());
 		OsmandSettings settings = map.getMyApplication().getSettings();
+		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 
 		if (tileBox.getZoom() < 3 || !settings.USE_MAP_MARKERS.get()) {
 			return;
@@ -340,7 +344,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					canvas.restore();
 				}
 				i++;
-				if (i > 1) {
+				if (i > displayedWidgets - 1) {
 					break;
 				}
 			}

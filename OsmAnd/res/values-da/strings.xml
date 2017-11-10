@@ -2947,7 +2947,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_left">Venstre</string>
     <string name="show_number_pad">Vis numerisk tastatur</string>
     <string name="shared_string_paste">Indsæt</string>
-    <string name="coordinate_input_accuracy_description">Skift automatisk til det næste felt efter indtastning af %1$ d cifre efter decimaltegnet</string>
+    <string name="coordinate_input_accuracy_description">Skift automatisk til det næste felt efter indtastning af %1$d cifre efter decimaltegnet</string>
     <string name="coordinate_input_accuracy">%1$d cifre</string>
     <string name="go_to_next_field">Gå til næste felt</string>
     </resources>
