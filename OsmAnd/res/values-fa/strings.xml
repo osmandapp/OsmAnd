@@ -2947,4 +2947,16 @@
     <string name="show_arrows_descr">با یک یا دو پیکان، محل قرارگیری نشانه‌های فعال روی نقشه نشان داده می‌شود.</string>
     <string name="distance_indication_descr">مشخص کنید که فاصلهٔ شما تا نشانه‌های فعال چگونه نشان داده شود.</string>
     <string name="active_markers_descr">مشخص کنید چند پیکانِ جهت‌نما نشان داده شود.</string>
+    <string name="appearance_on_the_map">ظاهر بر روی نقشه</string>
+    <string name="add_track_to_markers_descr">نقاط بین‌راهی موردنظرتان را انتخاب کنید تا به نشانه‌ها اضافه شوند</string>
+    <string name="add_favourites_group_to_markers_descr">گروه موردنظرتان از نقاط برگزیده را انتخاب کنید تا به نشانه‌ها اضافه شود</string>
+    <string name="track_waypoints">نقاط بین‌راهی مسیر</string>
+    <string name="favourites_group">گروه نقاط برگزیده</string>
+    <string name="add_group">افزودن گروه</string>
+    <string name="add_group_descr">می‌توانید گروهی از نقاط برگزیده یا نقاط بین‌راهی را اضافه کنید.</string>
+    <string name="empty_state_markers_active">نشانه‌ها روی نقشه‌اند!</string>
+    <string name="empty_state_markers_active_desc">مکان‌ها را با لمس‌کردنِ نقشه نشانه بزنید.</string>
+    <string name="empty_state_markers_groups">واردکردن گروه‌ها</string>
+    <string name="empty_state_markers_groups_desc">می‌توانید گروه‌های نقاط برگزیده یا نقاط بین‌راهی را به‌عنوان نشانه وارد کنید.</string>
+    <string name="empty_state_markers_history_desc">نشانه‌هایی که به‌عنوان عبورکرده مشخص شده‌اند در این صفحه نشان داده می‌شوند.</string>
     </resources>
