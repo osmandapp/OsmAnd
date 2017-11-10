@@ -946,4 +946,11 @@
 	<string name="poi_cuisine_brasserie">בראסרי</string>
 	<string name="poi_cuisine_bubble_tea">באבל טי</string>
 	<string name="poi_cuisine_yakitori">יקיטורי</string>
+	<string name="poi_cuisine_meat">בשר</string>
+	<string name="poi_cuisine_wings">כנפיים</string>
+	<string name="poi_cuisine_waffle">ואפל</string>
+	<string name="poi_cuisine_chocolate">שוקולד</string>
+	<string name="poi_cuisine_wine">יין</string>
+	<string name="poi_cuisine_potato">תפוח אדמה</string>
+	<string name="poi_cuisine_brunch">בראנץ׳</string>
 	</resources>
