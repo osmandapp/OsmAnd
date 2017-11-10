@@ -2,24 +2,25 @@ package net.osmand.plus.mapmarkers;
 
 import android.app.Activity;
 import android.content.res.ColorStateList;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CompoundButtonCompat;
+import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
-import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MapMarkersMode;
@@ -109,26 +111,28 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		menuTv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
-				PopupMenu popupMenu = new PopupMenu(getActivity(), menuTv);
-				Menu menu = popupMenu.getMenu();
-				popupMenu.getMenuInflater().inflate(R.menu.active_markers_menu, menu);
-				setupActiveMenuItem(menu.findItem(count == 1 ? R.id.action_one : R.id.action_two));
-				popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				CharSequence[] titles = getMenuTitles();
+				Paint paint = new Paint();
+				paint.setTextSize(getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
+				float titleTextWidth = Math.max(paint.measureText(titles[0].toString()), paint.measureText(titles[1].toString()));
+				float itemWidth = titleTextWidth + AndroidUtils.dpToPx(getActivity(), 32);
+				float minWidth = AndroidUtils.dpToPx(getActivity(), 100);
+				final ListPopupWindow listPopupWindow = new ListPopupWindow(getActivity());
+				listPopupWindow.setAnchorView(menuTv);
+				listPopupWindow.setContentWidth((int) (Math.max(itemWidth, minWidth)));
+				listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
+				listPopupWindow.setHorizontalOffset(AndroidUtils.dpToPx(getActivity(), 8));
+				listPopupWindow.setVerticalOffset(-menuTv.getHeight());
+				listPopupWindow.setModal(true);
+				listPopupWindow.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.popup_list_text_item, titles));
+				listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					@Override
-					public boolean onMenuItemClick(MenuItem item) {
-						switch (item.getItemId()) {
-							case R.id.action_one:
-								updateDisplayedMarkersCount(1);
-								return true;
-							case R.id.action_two:
-								updateDisplayedMarkersCount(2);
-								return true;
-						}
-						return false;
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						updateDisplayedMarkersCount(position == 0 ? 1 : 2);
+						listPopupWindow.dismiss();
 					}
 				});
-				popupMenu.show();
+				listPopupWindow.show();
 			}
 		});
 
@@ -192,6 +196,20 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 			return (MapActivity) activity;
 		}
 		return null;
+	}
+
+	private CharSequence[] getMenuTitles() {
+		if (getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1) {
+			return new CharSequence[]{getActiveString(R.string.shared_string_one), getString(R.string.shared_string_two)};
+		}
+		return new CharSequence[]{getString(R.string.shared_string_one), getActiveString(R.string.shared_string_two)};
+	}
+
+	private SpannableString getActiveString(int id) {
+		SpannableString res = new SpannableString(getString(id));
+		res.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getActivity(), getSettings().isLightContent()
+				? R.color.dashboard_blue : R.color.osmand_orange)), 0, res.length(), 0);
+		return res;
 	}
 
 	private void updateHelpImage() {
@@ -271,14 +289,6 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	private Drawable getDeviceImg() {
 		return getIconsCache().getIcon(getSettings().isLightContent()
 				? R.drawable.img_help_markers_direction_device_day : R.drawable.img_help_markers_direction_device_night);
-	}
-
-	private void setupActiveMenuItem(MenuItem item) {
-		int stringId = item.getItemId() == R.id.action_one ? R.string.shared_string_one : R.string.shared_string_two;
-		SpannableString title = new SpannableString(getString(stringId));
-		title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getActivity(), getSettings().isLightContent()
-				? R.color.dashboard_blue : R.color.osmand_orange)), 0, title.length(), 0);
-		item.setTitle(title);
 	}
 
 	private Drawable getIconBackground(boolean active) {
