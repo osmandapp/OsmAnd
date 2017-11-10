@@ -2946,5 +2946,5 @@
     <string name="show_guide_line_descr">خطی بین موقعیت شما و موقعیت نشانه‌ها، روی نقشه نشان داده می‌شود.</string>
     <string name="show_arrows_descr">با یک یا دو پیکان، محل قرارگیری نشانه‌های فعال روی نقشه نشان داده می‌شود.</string>
     <string name="distance_indication_descr">مشخص کنید که فاصلهٔ شما تا نشانه‌های فعال چگونه نشان داده شود.</string>
-    <string name="active_markers_descr">مشخص کنید چند پیکان جهت‌نما نشان داده شود.</string>
+    <string name="active_markers_descr">مشخص کنید چند پیکانِ جهت‌نما نشان داده شود.</string>
     </resources>

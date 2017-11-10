@@ -340,6 +340,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (removeFragment(PlanRouteFragment.TAG)) {
 			app.getMapMarkersHelper().getPlanRouteContext().setFragmentVisible(true);
 		}
+		if (TrackDetailsMenu.isVisible()) {
+			mapLayers.getMapControlsLayer().getTrackDetailsMenu().hide();
+		}
 		removeFragment(ImportGpxBottomSheetDialogFragment.TAG);
 		super.onSaveInstanceState(outState);
 	}
