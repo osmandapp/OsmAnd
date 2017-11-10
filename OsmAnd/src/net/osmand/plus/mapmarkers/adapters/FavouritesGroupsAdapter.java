@@ -14,43 +14,13 @@ import net.osmand.plus.R;
 
 import java.util.List;
 
-public class FavouritesGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class FavouritesGroupsAdapter extends GroupsAdapter {
 
-	private static final int TYPE_HEADER = 12;
-	private static final int TYPE_ITEM = 13;
-
-	private FavouritesGroupsAdapterListener listener;
-	private OsmandApplication app;
 	private List<FavoriteGroup> favoriteGroups;
-	private IconsCache iconsCache;
 
 	public FavouritesGroupsAdapter(Context context, List<FavoriteGroup> favoriteGroups) {
-		this.app = (OsmandApplication) context.getApplicationContext();
+		super(context);
 		this.favoriteGroups = favoriteGroups;
-		this.iconsCache = app.getIconsCache();
-	}
-
-	public void setAdapterListener(FavouritesGroupsAdapterListener listener) {
-		this.listener = listener;
-	}
-
-	@Override
-	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		if (viewType == TYPE_HEADER) {
-			View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.add_favourites_group_header, parent, false);
-			return new MapMarkersGroupHeaderViewHolder(view);
-		} else {
-			View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.markers_group_view_holder, parent, false);
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if (listener != null) {
-						listener.onItemClick(view);
-					}
-				}
-			});
-			return new MapMarkersGroupViewHolder(view);
-		}
 	}
 
 	@Override
@@ -70,20 +40,11 @@ public class FavouritesGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	}
 
 	@Override
-	public int getItemViewType(int position) {
-		return position == 0 ? TYPE_HEADER : TYPE_ITEM;
-	}
-
-	@Override
 	public int getItemCount() {
 		return favoriteGroups.size() + 1;
 	}
 
 	private FavoriteGroup getItem(int position) {
 		return favoriteGroups.get(position - 1);
-	}
-
-	public interface FavouritesGroupsAdapterListener {
-		void onItemClick(View view);
 	}
 }

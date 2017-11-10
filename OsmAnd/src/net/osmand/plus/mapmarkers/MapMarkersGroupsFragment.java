@@ -35,8 +35,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersGroupsAdapter;
-import net.osmand.plus.mapmarkers.AddMarkersGroupBottomSheetDialogFragment.AddMarkersGroupFragmentListener;
-import net.osmand.plus.mapmarkers.AddFavouritesGroupBottomSheetDialogFragment.AddFavouriteGroupListener;
+import net.osmand.plus.mapmarkers.SelectionMarkersGroupBottomSheetDialogFragment.AddMarkersGroupFragmentListener;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;
 import net.osmand.util.MapUtils;
 
@@ -62,13 +61,13 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		final boolean night = !mapActivity.getMyApplication().getSettings().isLightContent();
 		mainView = inflater.inflate(R.layout.fragment_map_markers_groups, container, false);
 
-		Fragment addMarkersGroupFragment = getChildFragmentManager().findFragmentByTag(AddMarkersGroupBottomSheetDialogFragment.TAG);
-		if (addMarkersGroupFragment != null) {
-			((AddMarkersGroupBottomSheetDialogFragment) addMarkersGroupFragment).setListener(createAddMarkersGroupFragmentListener());
+		Fragment selectionMarkersGroupFragment = getChildFragmentManager().findFragmentByTag(SelectionMarkersGroupBottomSheetDialogFragment.TAG);
+		if (selectionMarkersGroupFragment != null) {
+			((SelectionMarkersGroupBottomSheetDialogFragment) selectionMarkersGroupFragment).setListener(createAddMarkersGroupFragmentListener());
 		}
-		Fragment addFavouritesGroupFragment = getChildFragmentManager().findFragmentByTag(AddFavouritesGroupBottomSheetDialogFragment.TAG);
-		if (addFavouritesGroupFragment != null) {
-			((AddFavouritesGroupBottomSheetDialogFragment) addFavouritesGroupFragment).setListener(createAddFavouritesGroupListener());
+		Fragment addGroupFragment = getChildFragmentManager().findFragmentByTag(AddMarkersGroupBottomSheetDialogFragment.TAG);
+		if (addGroupFragment != null) {
+			((AddMarkersGroupBottomSheetDialogFragment) addGroupFragment).setListener(createAddGroupListener());
 		}
 
 		final EmptyStateRecyclerView recyclerView = (EmptyStateRecyclerView) mainView.findViewById(R.id.list);
@@ -279,23 +278,22 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 	}
 
 	private void openAddGroupMenu() {
-		AddMarkersGroupBottomSheetDialogFragment fragment = new AddMarkersGroupBottomSheetDialogFragment();
+		SelectionMarkersGroupBottomSheetDialogFragment fragment = new SelectionMarkersGroupBottomSheetDialogFragment();
 		fragment.setListener(createAddMarkersGroupFragmentListener());
+		fragment.setUsedOnMap(false);
+		fragment.show(getChildFragmentManager(), SelectionMarkersGroupBottomSheetDialogFragment.TAG);
+	}
+
+	private void openAddGroupMenu(AddMarkersGroupBottomSheetDialogFragment fragment) {
+		fragment.setListener(createAddGroupListener());
 		fragment.setUsedOnMap(false);
 		fragment.show(getChildFragmentManager(), AddMarkersGroupBottomSheetDialogFragment.TAG);
 	}
 
-	private void openAddFavouritesGroupMenu() {
-		AddFavouritesGroupBottomSheetDialogFragment fragment = new AddFavouritesGroupBottomSheetDialogFragment();
-		fragment.setListener(createAddFavouritesGroupListener());
-		fragment.setUsedOnMap(false);
-		fragment.show(getChildFragmentManager(), AddFavouritesGroupBottomSheetDialogFragment.TAG);
-	}
-
-	private AddFavouriteGroupListener createAddFavouritesGroupListener() {
-		return new AddFavouriteGroupListener() {
+	private AddMarkersGroupBottomSheetDialogFragment.AddGroupListener createAddGroupListener() {
+		return new AddMarkersGroupBottomSheetDialogFragment.AddGroupListener() {
 			@Override
-			public void onFavouriteGroupAdded() {
+			public void onGroupAdded() {
 				updateAdapter();
 			}
 		};
@@ -305,12 +303,14 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		return new AddMarkersGroupFragmentListener() {
 			@Override
 			public void favouritesOnClick() {
-				openAddFavouritesGroupMenu();
+				AddFavouritesGroupBottomSheetDialogFragment fragment = new AddFavouritesGroupBottomSheetDialogFragment();
+				openAddGroupMenu(fragment);
 			}
 
 			@Override
 			public void waypointsOnClick() {
-
+				AddTracksGroupBottomSheetDialogFragment fragment = new AddTracksGroupBottomSheetDialogFragment();
+				openAddGroupMenu(fragment);
 			}
 		};
 	}

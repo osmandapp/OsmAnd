@@ -6,11 +6,19 @@
               android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/favourites_group_recycler_view"
+        android:id="@+id/groups_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/bottom_sheet_content_padding_small"
         android:clipToPadding="false"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_gravity="center"/>
 
     <View
         android:layout_width="match_parent"
