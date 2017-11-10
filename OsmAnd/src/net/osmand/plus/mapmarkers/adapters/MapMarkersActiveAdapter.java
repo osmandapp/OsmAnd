@@ -93,7 +93,8 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		int drawableResToUpdate;
 		int markerColor = MapMarker.getColorId(marker.colorIndex);
 		LatLon markerLatLon = new LatLon(marker.getLatitude(), marker.getLongitude());
-		if (showDirectionEnabled && pos < 2) {
+		int displayedWidgets = mapActivity.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get();
+		if (showDirectionEnabled && pos < displayedWidgets) {
 			holder.iconDirection.setVisibility(View.GONE);
 
 			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_arrow_marker_diretion, markerColor));

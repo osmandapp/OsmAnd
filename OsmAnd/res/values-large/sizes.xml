@@ -100,6 +100,7 @@
 	<dimen name="bottom_sheet_content_margin">24dp</dimen>
 	<dimen name="bottom_sheet_content_margin_small">12dp</dimen>
 	<dimen name="content_padding">24dp</dimen>
+	<dimen name="content_padding_small">18dp</dimen>
 	<dimen name="bottom_sheet_content_padding_small">12dp</dimen>
 	<dimen name="measurement_tool_divider_margin">12dp</dimen>
 	<dimen name="measurement_tool_content_padding_medium">18dp</dimen>
@@ -125,6 +126,9 @@
 	<dimen name="bottom_sheet_divider_margin_start">84dp</dimen>
 	<dimen name="bottom_sheet_image_text_margin_start">15dp</dimen>
 	<dimen name="bottom_sheet_selected_item_title_height">84dp</dimen>
+
+	<dimen name="action_bar_image_height">330dp</dimen>
+	<dimen name="action_bar_image_side_margin">105dp</dimen>
 
 	<dimen name="map_markers_recycler_view_padding_bottom">78dp</dimen>
 	<dimen name="map_markers_recycler_view_padding_top">15dp</dimen>
