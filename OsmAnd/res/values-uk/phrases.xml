@@ -547,7 +547,7 @@
 	<string name="poi_cuisine_fast_food">Швидке харчування</string>
 	<string name="poi_cuisine_bakery">Пекарня</string>
 	<string name="poi_fuel_type">Вид палива</string>
-	<string name="poi_fuel_avia_type">Вид палива</string>
+	<string name="poi_fuel_avia_type">Тип авіаційного палива</string>
 	<string name="poi_payment_type">Тип оплати</string>
 	<string name="poi_payment_fuel_type">Паливні картки</string>
 	<string name="poi_internet_access_type">Тип доступу в Інтернет</string>
@@ -3639,5 +3639,7 @@
 	<string name="poi_map_size_site">Охоплення мапи: місце</string>
 	<string name="poi_map_size_city">Охоплення мапи: місто</string>
 	<string name="poi_map_size_region">Охоплення мапи: регіон</string>
+
+<string name="poi_charging_station_filter">Зарядна станція</string>
 
 </resources>

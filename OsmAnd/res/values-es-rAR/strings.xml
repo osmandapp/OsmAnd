@@ -268,7 +268,7 @@ Lon %2$s</string>
     <string name="show_zoom_buttons_navigation_descr">Mostrar botones de ampliación durante la navegación.</string>
     <string name="show_zoom_buttons_navigation">Mostrar botones de ampliación</string>
     <string name="select_destination_and_intermediate_points">Elige los destinos intermedios</string>
-    <string name="layer_amenity_label">Etiquetas de punto</string>
+    <string name="layer_amenity_label">Etiquetas de PDIs superpuestas</string>
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
     <string name="gpx_wpt">Punto de referencia</string>
@@ -1122,7 +1122,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="live_monitoring_url">Dirección web de registro en vivo</string>
     <string name="gpx_monitoring_disabled_warn">Registra trazas usando el control GPX o mediante la opción «Grabar viaje».</string>
     <string name="show_current_gpx_title">Mostrar traza actual</string>
-    <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas de mapas (incluyendo sus actualizaciones) y no soporta artículos de Wikipedia sin conexión.</string>
+    <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas de mapas (añadir o actualizar mapas) y no soporta artículos de Wikipedia sin conexión.</string>
     <string name="free_version_title">Versión gratuita</string>
     <string name="poi_context_menu_showdescription">Detalles del PDI.</string>
     <string name="index_name_north_america">Norteamérica</string>
@@ -1425,7 +1425,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="layer_route">Ruta</string>
     <string name="layer_osm_bugs">Informes de problemas (en línea)</string>
     
-    <string name="layer_poi">Puntos de interés…</string>
+    <string name="layer_poi">Superposición de PDIs…</string>
     <string name="layer_map">Fuente de mapas…</string>
     <string name="menu_layers">Capas de mapas</string>
     <string name="context_menu_item_search_poi">Buscar PDI</string>
@@ -1578,8 +1578,8 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="show_view_angle">Mostrar dirección de visualización</string>
     <string name="map_view_3d_descr">Activa la vista 3D del mapa.</string>
     <string name="map_view_3d">Visión 3D del mapa</string>
-    <string name="show_poi_over_map_description">Muestra los PDIs sobre el mapa (usando el último filtro elegido).</string>
-    <string name="show_poi_over_map">Mostrar PDI</string>
+    <string name="show_poi_over_map_description">Muestra la última superposición de PDIs elegida en el mapa.</string>
+    <string name="show_poi_over_map">Mostrar superposición de PDIs</string>
     <string name="map_tile_source_descr">Elige la fuente de mapas en línea o teselas guardadas.</string>
     <string name="map_tile_source">Fuente de teselas de mapa</string>
     <string name="map_source">Fuente de mapa</string>
@@ -2825,7 +2825,7 @@ Proporciona un código completo</string>
     <string name="shared_string_left">Izquierda</string>
     <string name="show_number_pad">Mostrar teclado numérico</string>
     <string name="shared_string_paste">Pegar</string>
-    <string name="coordinate_input_accuracy_description">Cambiar automáticamente al campo siguiente al ingresar %1$d dígitos después del punto decimal</string>
+    <string name="coordinate_input_accuracy_description">Cambiar automáticamente al campo siguiente al ingresar %1$d dígitos después del punto decimal.</string>
     <string name="coordinate_input_accuracy">%1$d dígitos</string>
     <string name="go_to_next_field">Ir al campo siguiente</string>
     </resources>

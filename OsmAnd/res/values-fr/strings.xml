@@ -23,7 +23,7 @@
     <string name="gpx_monitoring_disabled_warn">Enregistrer la trace avec le composant GPX ou avec l\'option \"Enregistrer l\'itinéraire\".</string>
     <string name="show_current_gpx_title">Afficher la trace courante</string>
 
-    <string name="free_version_message">La version gratuite d\'OsmAnd est limitée à %1$s téléchargements de carte (y compris les mises à jour) et ne gère pas les articles Wikipédia hors-ligne.</string>
+    <string name="free_version_message">La version gratuite d\'OsmAnd est limitée à %1$s téléchargements (incluant l\'installation comme la mise à jour de cartes) et ne gère pas les articles Wikipédia hors-ligne.</string>
     <string name="free_version_title">Version gratuite</string>
     <string name="poi_context_menu_showdescription">Afficher la description du point d\'intérêt.</string>
     <string name="index_name_north_america">Amérique du Nord</string>
@@ -535,7 +535,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
 
     <string name="use_online_routing_descr">Utiliser Internet pour calculer l\'itinéraire</string>
     <string name="use_online_routing">Utiliser la navigation en ligne</string>
-    <string name="osm_settings_descr">Indiquez les paramètres de connexion à OpenStreetMap</string>
+    <string name="osm_settings_descr">Indiquez les paramètres de connexion à OpenStreetMap.org (OSM) pour vos contributions.</string>
     <string name="data_settings_descr">Indiquez la langue, mettre à jour les données</string>
     <string name="data_settings">Données</string>
 
@@ -569,7 +569,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="map_view_3d">Vue 3D</string>
     <string name="show_poi_over_map_description">Afficher les points d\'intérêt sur la carte (utiliser le dernier filtre)</string>
     <string name="show_poi_over_map">Afficher point d\'intérêt</string>
-    <string name="map_tile_source_descr">Sélectionnez la source des cartes dites tuiles (en ligne ou en cache)</string>
+    <string name="map_tile_source_descr">Sélectionnez la source des cartes dites tuiles (en ligne ou en cache).</string>
     <string name="map_tile_source">Carte en ligne (tuiles)</string>
     <string name="map_source">Source cartographique</string>
     <string name="use_internet">Utiliser internet</string>
@@ -2423,7 +2423,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="christmas_desc_q">Afficher les points d\'intérêt de Noël ?</string>
     <string name="rendering_attr_contourColorScheme_description">Couleurs des courbes de niveau</string>
     <string name="save_track_min_speed">Vitesse minimale pour enregistrer</string>
-    <string name="save_track_min_speed_descr">Filtre : Indiquez une vitesse minimale à partir de laquelle déclencher l\'enregistrement.</string>
+    <string name="save_track_min_speed_descr">Filtre : Indiquez une vitesse minimale à partir de laquelle déclencher l\'enregistrement d\'un point.</string>
     <string name="save_track_min_distance">Déplacement minimal pour enregistrer</string>
     <string name="save_track_min_distance_descr">Filtre : Indiquez une distance minimale à partir de laquelle déclencher l\'enregistrement</string>
     <string name="save_track_precision">Précision minimale pour l\'enregistrement</string>
@@ -2993,4 +2993,12 @@ représentant la zone : %1$s x %2$s</string>
     <string name="show_on_top_bar">Afficher dans la barre supérieure</string>
     <string name="mark_passed">Marquer comme passé</string>
     <string name="rename_marker">Renommer la marque</string>
+    <string name="digits_quantity">Nombre de chiffres</string>
+    <string name="shared_string_right">Droite</string>
+    <string name="shared_string_left">Gauche</string>
+    <string name="show_number_pad">Afficher le pavé numérique</string>
+    <string name="shared_string_paste">Coller</string>
+    <string name="coordinate_input_accuracy_description">Aller automatiquement au champ suivant après avoir saisi %1$d chiffres après la virgule</string>
+    <string name="coordinate_input_accuracy">%1$d chiffres</string>
+    <string name="go_to_next_field">Aller au champ suivant</string>
     </resources>

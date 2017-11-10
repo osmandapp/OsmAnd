@@ -21,6 +21,12 @@
     <string name="empty_state_markers_groups_desc">You can import favourite groups or track waypoints as markers.</string>
     <string name="empty_state_markers_history">@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Markers marked as passed will appear on this screen.</string>
+    <string name="shared_string_two">Two</string>
+    <string name="shared_string_one">One</string>
+    <string name="show_guide_line_descr">A line connecting your location to locations of the active markers will be shown on the map.</string>
+    <string name="show_arrows_descr">One or two arrows indicating the direction to the active markers will be shown on the map.</string>
+    <string name="distance_indication_descr">Choose how you\'d like to view the distance to the active markers.</string>
+    <string name="active_markers_descr">Choose how many direction indicators you\'d like to see.</string>
     <string name="digits_quantity">Digits quantity</string>
     <string name="shared_string_right">Right</string>
     <string name="shared_string_left">Left</string>
@@ -2352,7 +2358,7 @@
     <string name="layer_yandex_traffic">Yandex traffic</string>
     <string name="layer_route">Route</string>
     <string name="layer_osm_bugs">OSM Notes (online)</string>
-    <string name="layer_poi">POI Overlay…</string>
+    <string name="layer_poi">POI overlay…</string>
     <string name="layer_map">Map source…</string>
     <string name="menu_layers">Map layers</string>
     <string name="context_menu_item_search_poi">Search POI</string>

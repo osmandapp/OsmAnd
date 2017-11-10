@@ -438,7 +438,7 @@
 	<string name="local_openstreetmap_upload">آپلود اصلاحات به OSM</string>
 	<string name="local_openstreetmap_delete">حذف اصلاحات</string>
 	<string name="local_openstreetmap_descr_title">ویرایش ناهمزمان OSM:</string>
-	<string name="free_version_message">با این نسخهٔ رایگانِ OsmAnd می‌توانید %1$s نقشه دانلود کنید (که شامل دانلود به‌روزرسانی‌ها هم هست). همچنین نسخهٔ رایگان از مقالات آفلاین ویکی‌پدیا پشتیبانی نمی‌کند.</string>
+	<string name="free_version_message">با این نسخهٔ رایگانِ OsmAnd می‌توانید %1$s نقشه دانلود کنید (افزودن یا به‌روزرسانی نقشه). همچنین نسخهٔ رایگان از مقالات آفلاین ویکی‌پدیا پشتیبانی نمی‌کند.</string>
 	<string name="free_version_title">نسخهٔ رایگان</string>
 	<string name="poi_context_menu_showdescription">نمایش توضیحات POI.</string>
 	<string name="index_name_north_america">آمریکای شمالی</string>
@@ -609,8 +609,8 @@
     <string name="recording_description">در حال ضبط %1$s %3$s %2$s</string>
     <string name="osmand_srtm_short_description_80_chars">افزونهٔ OsmAnd برای منحنی‌های تراز آفلاین</string>
     <string name="use_magnetic_sensor_descr">برای مقدار قطب‌نما به‌جای حسگر جهتی از حسگر مغناطیسی استفاده کن.</string>
-    <string name="show_poi_over_map">نشان‌دادن POI</string>
-	<string name="show_poi_over_map_description">نشان‌دادن POI بر روی نقشه (از آخرین فیلتر انتخاب‌شده استفاده کن).</string>
+    <string name="show_poi_over_map">نشان‌دادن لایهٔ نقاط POI</string>
+	<string name="show_poi_over_map_description">لایهٔ آخرین نقاط POI که انتخاب کرده بودم را روی نقشه نشان بده.</string>
 	
 	<string name="data_settings">داده‌ها</string>
 	<string name="shared_string_settings">تنظیمات</string>
@@ -1198,7 +1198,7 @@
 	<string name="download_type_to_filter">فیلتر</string>
 	<string name="transport_context_menu">جست‌وجوی وسیلهٔ حمل‌ونقل در ایستگاه</string>
 	<string name="rotate_map_to_bearing_descr">نحوهٔ چرخش نقشه را انتخاب کنید.</string>
-	<string name="layer_poi">POI…</string>
+	<string name="layer_poi">لایهٔ نقاط POI…</string>
 	<string name="gps_provider">GPS</string>
 	<string name="route_head">ادامه دهید به</string>
 	<string name="opening_hours_not_supported">قالب ساعات کاری برای ویرایش پشتیبانی نمی‌شود</string>
