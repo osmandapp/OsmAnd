@@ -188,6 +188,8 @@ public class MapMarkersHelper {
 		public static final int FAVORITES_TYPE = 0;
 		public static final int GPX_TYPE = 1;
 
+		public static final String MARKERS_SYNC_GROUP_ID = "markers_sync_group_id";
+
 		private String id;
 		private String name;
 		private int type;

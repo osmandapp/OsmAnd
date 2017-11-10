@@ -147,6 +147,15 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		}
 	}
 
+	public int getGroupHeaderPosition(String groupId) {
+		int pos = -1;
+		MapMarkersGroup group = app.getMapMarkersHelper().getMapMarkerGroupByKey(groupId);
+		if (group != null) {
+			pos = items.indexOf(group.getGroupHeader());
+		}
+		return pos;
+	}
+
 	public void setLocation(LatLon location) {
 		this.location = location;
 	}

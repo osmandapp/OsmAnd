@@ -53,6 +53,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 	private Snackbar snackbar;
 	private boolean compassUpdateAllowed = true;
 	private View mainView;
+	private String groupIdToOpen;
 
 	@Nullable
 	@Override
@@ -270,7 +271,19 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				openAddGroupMenu();
 			}
 		});
+
+		if (groupIdToOpen != null) {
+			int groupHeaderPosition = adapter.getGroupHeaderPosition(groupIdToOpen);
+			if (groupHeaderPosition != -1) {
+				((EmptyStateRecyclerView) mainView.findViewById(R.id.list)).scrollToPosition(groupHeaderPosition);
+			}
+		}
+
 		return mainView;
+	}
+
+	void setGroupIdToOpen(String groupIdToOpen) {
+		this.groupIdToOpen = groupIdToOpen;
 	}
 
 	private void changeFabVisibilityIfNeeded() {
