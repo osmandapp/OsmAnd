@@ -2950,4 +2950,18 @@
     <string name="rename_marker">Перайменаваць маркер</string>
     <string name="shared_string_two">Два</string>
     <string name="shared_string_one">Адзін</string>
+    <string name="add_favourites_group_to_markers_descr">Абярыце, якія ўлюблёныя групы вы хочаце дадаць да маркераў</string>
+    <string name="track_waypoints">Шляхавыя кропкі</string>
+    <string name="favourites_group">Улюблёныя групы</string>
+    <string name="add_group">Дадаць групу</string>
+    <string name="add_group_descr">Вы можаце дадаць групу ўлюблёных ці шляхавых кропак.</string>
+    <string name="empty_state_markers_active">Маркеры на мапе!</string>
+    <string name="empty_state_markers_active_desc">Адзначыць месца на мапе дотыкам.</string>
+    <string name="empty_state_markers_groups">Імпартаваць групы</string>
+    <string name="empty_state_markers_groups_desc">Вы можаце імпартаваць улюблёныя групы ці шляхавыя кропкі як маркеры.</string>
+    <string name="empty_state_markers_history_desc">Маркеры, пазначаныя як пройдзенныя, з\'явяцца на гэтым экране.</string>
+    <string name="show_guide_line_descr">Лінія, якая злучае ваша становішча са становішчам актыўных маркераў, будзе паказаная на мапе.</string>
+    <string name="show_arrows_descr">Адна ці дзве стрэлкі, якія паказваюць кірунак да актыўных маркераў, будуць паказаная на мапе.</string>
+    <string name="distance_indication_descr">Выберыце, як вы хочаце, каб выглядала адлегласць да актыўных маркераў.</string>
+    <string name="active_markers_descr">Выберыце, колькі накірункаў індыкатараў вы хацелі б бачыць.</string>
     </resources>
