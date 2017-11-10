@@ -35,6 +35,9 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 
 		menu = mapActivity.getMapLayers().getMapControlsLayer().getTrackDetailsMenu();
 		View view = inflater.inflate(R.layout.track_details, container, false);
+		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
+			AndroidUtils.addStatusBarPadding21v(getActivity(), view);
+		}
 		if (menu == null || menu.getGpxItem() == null) {
 			return view;
 		}
