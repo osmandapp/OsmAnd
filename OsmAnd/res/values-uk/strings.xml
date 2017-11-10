@@ -3072,4 +3072,11 @@
     <string name="tap_on_map_to_hide_interface">Повноекранний режим</string>
     <string name="show_on_top_bar">Показати на верхній панелі</string>
     <string name="mark_passed">Позначати пройдене</string>
+    <string name="digits_quantity">Кількість цифр</string>
+    <string name="show_number_pad">Показати цифрову панель</string>
+    <string name="shared_string_paste">Вставити</string>
+    <string name="coordinate_input_accuracy_description">Автоматично перемикається в наступне поле після введення %1$d цифр після десяткової точки</string>
+    <string name="coordinate_input_accuracy">%1$d цифр</string>
+    <string name="go_to_next_field">Перейти до наступного поля</string>
+    <string name="rename_marker">Перейменувати маркер</string>
     </resources>
