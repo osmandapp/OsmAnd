@@ -919,4 +919,31 @@
 
 	<string name="poi_charging_station_filter">תחנת טעינה</string>
 
-</resources>
+<string name="poi_cuisine_deli">מעדנייה</string>
+	<string name="poi_cuisine_salad">סלט</string>
+	<string name="poi_cuisine_frozen_yogurt">פרוזן יוגורט</string>
+	<string name="poi_cuisine_fried_food">אוכל מטוגן</string>
+	<string name="poi_cuisine_savory_pancakes">פנקייקים מלוחים</string>
+	<string name="poi_cuisine_bistro">ביסטרו</string>
+	<string name="poi_cuisine_bakery">מאפייה</string>
+	<string name="poi_cuisine_couscous">קוסקוס</string>
+	<string name="poi_cuisine_fried_chicken">עוף מטוגן</string>
+	<string name="poi_cuisine_dessert">קינוח</string>
+	<string name="poi_cuisine_canteen">מזנון</string>
+	<string name="poi_cuisine_tacos">טאקוס</string>
+	<string name="poi_cuisine_piadina">פיאדינה</string>
+	<string name="poi_cuisine_falafel">פלאפל</string>
+	<string name="poi_cuisine_smoothie">פרי שייק</string>
+	<string name="poi_cuisine_souvlaki">סופלקי</string>
+	<string name="poi_cuisine_snack">חטיף</string>
+	<string name="poi_cuisine_yogurt">יוגורט</string>
+	<string name="poi_cuisine_gyros">גירוס</string>
+	<string name="poi_cuisine_empanada">אמפנדה</string>
+	<string name="poi_cuisine_crepes">קרפים</string>
+	<string name="poi_cuisine_yakiniku">יקיניקו</string>
+	<string name="poi_cuisine_suki">סוקי</string>
+	<string name="poi_cuisine_udon">אוּדוֹן</string>
+	<string name="poi_cuisine_brasserie">בראסרי</string>
+	<string name="poi_cuisine_bubble_tea">באבל טי</string>
+	<string name="poi_cuisine_yakitori">יקיטורי</string>
+	</resources>
