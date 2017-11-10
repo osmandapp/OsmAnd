@@ -34,6 +34,7 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.LinkedList;
 
@@ -73,30 +74,32 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		appModeTv.setText(appMode.getStringResource());
 		appModeTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getIconsCache().getIcon(appMode.getSmallIconDark()), null);
 
-		((ObservableScrollView) mainView.findViewById(R.id.scroll_view)).setScrollViewCallbacks(new ObservableScrollViewCallbacks() {
-			@Override
-			public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-				if (scrollY >= helpImgHeight) {
-					if (!shadowVisible) {
-						mainView.findViewById(R.id.app_bar_shadow).setVisibility(View.VISIBLE);
-						shadowVisible = true;
+		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
+			((ObservableScrollView) mainView.findViewById(R.id.scroll_view)).setScrollViewCallbacks(new ObservableScrollViewCallbacks() {
+				@Override
+				public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
+					if (scrollY >= helpImgHeight) {
+						if (!shadowVisible) {
+							mainView.findViewById(R.id.app_bar_shadow).setVisibility(View.VISIBLE);
+							shadowVisible = true;
+						}
+					} else if (shadowVisible) {
+						mainView.findViewById(R.id.app_bar_shadow).setVisibility(View.GONE);
+						shadowVisible = false;
 					}
-				} else if (shadowVisible) {
-					mainView.findViewById(R.id.app_bar_shadow).setVisibility(View.GONE);
-					shadowVisible = false;
 				}
-			}
 
-			@Override
-			public void onDownMotionEvent() {
+				@Override
+				public void onDownMotionEvent() {
 
-			}
+				}
 
-			@Override
-			public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+				@Override
+				public void onUpOrCancelMotionEvent(ScrollState scrollState) {
 
-			}
-		});
+				}
+			});
+		}
 
 		updateHelpImage();
 
