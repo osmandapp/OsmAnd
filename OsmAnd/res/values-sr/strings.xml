@@ -720,7 +720,7 @@
     <string name="no_address_found">Није одређена адреса</string>
     <string name="av_video_quality_low">Најнижа каквоћа</string>
     <string name="av_video_quality_high">Највиша каквоћа</string>
-    <string name="av_video_quality">Каквоћа излаза слике</string>
+    <string name="av_video_quality">Квалитет излаза слике</string>
     <string name="av_video_quality_descr">Изаберите својства излазног приказа</string>
     <string name="osm_edit_created_note">Направи белешку ОСМ-а</string>
     <string name="context_menu_item_delete_waypoint">Да ли избрисати пролазну тачку ГПИкс-а?</string>
@@ -1364,7 +1364,7 @@
     <string name="consider_turning_polygons_off">Препоручиво је да искључите приказ многоуглова.</string>
     <string name="show_polygons">Приказуј многоуглове</string>
     <string name="road_blocked">Пут је препречен</string>
-    <string name="rendering_attr_horseRoutes_name">Коњски путеви</string>
+    <string name="rendering_attr_horseRoutes_name">Коњске стазе</string>
     <string name="share_geo">положај:</string>
     <string name="lang_br">Бретонски</string>
     <string name="hillshade_menu_download_descr">Да бисте видели рељеф, потребно је да преузмете посебну карту овог подручја са сенчењем.</string>
@@ -1491,4 +1491,5 @@
     <string name="daynight_mode_sensor">Сензор светла</string>
     <string name="daynight">Дневни/ноћни режим рада</string>
     <string name="none_point_error">Молим додајте бар једну тачку.</string>
+    <string name="osmand_parking_overdue">закаснео</string>
     </resources>
