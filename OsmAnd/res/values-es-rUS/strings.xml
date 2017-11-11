@@ -2659,10 +2659,10 @@ Proporciona un código completo</string>
     <string name="wrong_user_name">¡Nombre de usuario incorrecto!</string>
     <string name="shared_string_to">Hasta</string>
     <string name="mapillary_menu_date_from">Desde</string>
-    <string name="mapillary_menu_descr_dates">Ver imágenes añadidas en un cierto período.</string>
-    <string name="mapillary_menu_title_dates">Fechas</string>
-    <string name="mapillary_menu_edit_text_hint">Tipo de nombre de usuario</string>
-    <string name="mapillary_menu_descr_username">Ver imágenes añadidas por un determinado usuario.</string>
+    <string name="mapillary_menu_descr_dates">Ver sólo imágenes añadidas</string>
+    <string name="mapillary_menu_title_dates">Fecha</string>
+    <string name="mapillary_menu_edit_text_hint">Escribir nombre de usuario</string>
+    <string name="mapillary_menu_descr_username">Ver sólo imágenes añadidas por</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
     <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por usuario o por fecha. Los filtros sólo aplican para los primeros acercamientos.</string>
     <string name="shared_string_reload">Recargar</string>
