@@ -140,13 +140,13 @@
     <string name="shared_string_reload">Reload</string>
     <string name="mapillary_menu_descr_tile_cache">Reload tiles to see up to date data.</string>
     <string name="mapillary_menu_title_tile_cache">Tile cache</string>
-    <string name="wrong_user_name">Wrong user name!</string>
+    <string name="wrong_user_name">Wrong username!</string>
     <string name="shared_string_to">To</string>
     <string name="mapillary_menu_date_from">From</string>
-    <string name="mapillary_menu_descr_dates">View images added in a certain period.</string>
-    <string name="mapillary_menu_title_dates">Dates</string>
-    <string name="mapillary_menu_edit_text_hint">Type user name</string>
-    <string name="mapillary_menu_descr_username">View images added by a certain user.</string>
+    <string name="mapillary_menu_descr_dates">View only images added</string>
+    <string name="mapillary_menu_title_dates">Date</string>
+    <string name="mapillary_menu_edit_text_hint">Type username</string>
+    <string name="mapillary_menu_descr_username">View only images added by</string>
     <string name="mapillary_menu_title_username">Username</string>
     <string name="mapillary_menu_filter_description">You can filter images by submitter or by date. Filters apply only for closeup zoom.</string>
     <string name="map_widget_ruler_control">Radius ruler</string>
@@ -1985,7 +1985,7 @@
     <string name="gpx_visibility_txt">Visibility</string>
     <string name="gpx_tags_txt">Tags</string>
     <string name="gpx_description_txt">Description</string>
-    <string name="validate_gpx_upload_name_pwd">Please specify OSM user name and password to upload GPX files.</string>
+    <string name="validate_gpx_upload_name_pwd">Please specify OSM username and password to upload GPX files.</string>
     <string name="default_buttons_support">Support</string>
     <string name="support_new_features">Support new features</string>
     <string name="support_new_features_descr">Donate to see new features implemented in the application.</string>
@@ -2096,7 +2096,7 @@
     <string name="general_settings">General</string>
     <string name="general_settings_descr">Configure display and common settings for the application.</string>
     <string name="global_app_settings">Global app settings</string>
-    <string name="user_name">Your OSM user name</string>
+    <string name="user_name">Your OSM username</string>
     <string name="open_street_map_login_descr">Needed for openstreetmap.org submissions.</string>
     <string name="user_password">Your OSM password</string>
     <string name="osmand_service">Background mode</string>

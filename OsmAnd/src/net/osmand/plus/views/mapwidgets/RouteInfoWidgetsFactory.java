@@ -5,28 +5,25 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
-import android.graphics.BlurMaskFilter;
-import android.graphics.BlurMaskFilter.Blur;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.hardware.GeomagneticField;
 import android.os.BatteryManager;
+import android.support.annotation.NonNull;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -54,12 +51,12 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TurnPathHelper;
+import net.osmand.plus.views.TurnPathHelper.TurnResource;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetState;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -726,26 +723,6 @@ public class RouteInfoWidgetsFactory {
 				!showRelativeBearing.get() ? bearingNightResId : relativeBearingNightResId);
 		return bearingControl;
 	}
-	
-	private static Path getPathFromTurnType(List<Path> paths, int laneType, Path defaultType, float coef, boolean mini) {
-		if(laneType == 0) {
-			return defaultType;
-		}
-		while (paths.size() <= laneType) {
-			paths.add(null);
-		}
-		Path p = paths.get(laneType);
-		if (p != null) {
-			return p;
-		}
-		p = new Path();
-		Matrix pathTransform = new Matrix();
-		pathTransform.postScale(coef, coef );
-		TurnType tp = TurnType.valueOf(laneType, false);
-		TurnPathHelper.calcTurnPath(p, null, tp, pathTransform, null, mini);
-		paths.set(laneType, p);
-		return p;
-	}
 
 
 	public static class LanesControl {
@@ -865,11 +842,8 @@ public class RouteInfoWidgetsFactory {
 		int[] lanes = null;
 		boolean imminent = false;
 		private Context ctx;
-		private ArrayList<Path> paths = new ArrayList<Path>();
-		private Map<TurnPathHelper.TurnResource, Bitmap> bitmapCache = new HashMap<TurnPathHelper.TurnResource, Bitmap>();
+		private Map<TurnResource, Path> pathsCache = new HashMap<>();
 		private Paint paintBlack;
-		private Path laneStraight;
-		private final Bitmap laneStraightBitmap;
 		private Paint paintRouteDirection;
 		private Paint paintSecondTurn;
 		private float scaleCoefficient;
@@ -877,59 +851,107 @@ public class RouteInfoWidgetsFactory {
 		private int width;
 		private static final float miniCoeff = 2f;
 		private final boolean leftSide;
+		private int imgMinWidth;
+		private int imgMargin;
 
-		public LanesDrawable(MapActivity ctx, float scaleCoefficent) {
+		LanesDrawable(MapActivity ctx, float scaleCoefficent) {
 			this.ctx = ctx;
 			OsmandSettings settings = ctx.getMyApplication().getSettings();
 			leftSide = settings.DRIVING_REGION.get().leftHandDriving;
+			imgMinWidth = ctx.getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_min_width);
+			imgMargin = ctx.getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_margin);
 
 			this.scaleCoefficient = scaleCoefficent;
-			laneStraight = getPathFromTurnType(paths, TurnType.C, null, scaleCoefficient / miniCoeff, true);
-			laneStraightBitmap = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, TurnType.C, 0, 0, TurnPathHelper.FIRST_TURN, scaleCoefficient / miniCoeff, leftSide);
-			paintBlack = new Paint();
+
+			paintBlack = new Paint(Paint.ANTI_ALIAS_FLAG);
 			paintBlack.setStyle(Style.STROKE);
 			paintBlack.setColor(Color.BLACK);
-			paintBlack.setAntiAlias(true);
-			paintBlack.setStrokeWidth(2.5f);
-			
+			paintBlack.setStrokeWidth(1.5f);
+
 			paintRouteDirection = new Paint(Paint.ANTI_ALIAS_FLAG);
-			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
+			paintRouteDirection.setStyle(Style.FILL);
 			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow));
 
 			paintSecondTurn = new Paint(Paint.ANTI_ALIAS_FLAG);
-			paintSecondTurn.setStyle(Style.FILL_AND_STROKE);
+			paintSecondTurn.setStyle(Style.FILL);
 			paintSecondTurn.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
-
 		}
 
-		public void updateBounds() {
+		void updateBounds() {
 			float w = 0;
-			int h = 0;
+			float h = 0;
 			float coef = scaleCoefficient / miniCoeff;
 			if (lanes != null) {
 				for (int i = 0; i < lanes.length; i++) {
 					int turnType = TurnType.getPrimaryTurn(lanes[i]);
 					int secondTurnType = TurnType.getSecondaryTurn(lanes[i]);
 					int thirdTurnType = TurnType.getTertiaryTurn(lanes[i]);
-					Bitmap b = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType,
-							secondTurnType, thirdTurnType, TurnPathHelper.FIRST_TURN, coef, leftSide);
-					if (b != null) {
-						if (secondTurnType == 0 && thirdTurnType == 0) {
-							int arrowWidth = AndroidUtils.dpToPx(ctx, getArrowWidthInDp(turnType));
-							int emptyWidth = b.getWidth() - arrowWidth;
-							w += emptyWidth / 2 + arrowWidth;
-						} else {
-							w += b.getWidth();
-						}
-						int bitmapHeight = b.getHeight();
-						if (bitmapHeight > h) {
-							h = bitmapHeight;
+
+					RectF imgBounds = new RectF();
+					if (thirdTurnType > 0) {
+						Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), pathsCache, turnType,
+								secondTurnType, thirdTurnType, TurnPathHelper.THIRD_TURN, coef, leftSide, true);
+						if (p != null) {
+							RectF b = new RectF();
+							p.computeBounds(b, true);
+							if (!b.isEmpty()) {
+								if (imgBounds.isEmpty()) {
+									imgBounds.set(b);
+								} else {
+									imgBounds.union(b);
+								}
+							}
 						}
 					}
+					if (secondTurnType > 0) {
+						Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), pathsCache, turnType,
+								secondTurnType, thirdTurnType, TurnPathHelper.SECOND_TURN, coef, leftSide, true);
+						if (p != null) {
+							RectF b = new RectF();
+							p.computeBounds(b, true);
+							if (!b.isEmpty()) {
+								if (imgBounds.isEmpty()) {
+									imgBounds.set(b);
+								} else {
+									imgBounds.union(b);
+								}
+							}
+						}
+					}
+					Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), pathsCache, turnType,
+							secondTurnType, thirdTurnType, TurnPathHelper.FIRST_TURN, coef, leftSide, true);
+					if (p != null) {
+						RectF b = new RectF();
+						p.computeBounds(b, true);
+						if (!b.isEmpty()) {
+							if (imgBounds.isEmpty()) {
+								imgBounds.set(b);
+							} else {
+								imgBounds.union(b);
+							}
+						}
+					}
+					if (imgBounds.right > 0)
+					{
+						if (imgBounds.width() < imgMinWidth) {
+							imgBounds.inset(-(imgMinWidth - imgBounds.width()) / 2.f, 0);
+						}
+						w += imgBounds.width() + (i < lanes.length - 1 ? imgMargin * 2 : 0);
+
+						float imageHeight = imgBounds.bottom;
+						if (imageHeight > h)
+							h = imageHeight;
+					}
+				}
+				if (w > 0) {
+					w += 4;
+				}
+				if (h > 0) {
+					h += 4;
 				}
 			}
 			width = (int) w;
-			height = h;
+			height = (int) h;
 		}
 		
 		@Override
@@ -944,16 +966,13 @@ public class RouteInfoWidgetsFactory {
 
 
 		@Override
-		public void draw(Canvas canvas) {
-			Bitmap src = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
-			// setup canvas for painting
-			Canvas srcCanvas = new Canvas(src);
+		public void draw(@NonNull Canvas canvas) {
 			// setup default color
-			srcCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
+			//canvas.drawColor(0, PorterDuff.Mode.CLEAR);
 
 			//to change color immediately when needed
 			if (lanes != null && lanes.length > 0) {
-				srcCanvas.save();
+				canvas.save();
 				// canvas.translate((int) (16 * scaleCoefficient), 0);
 				for (int i = 0; i < lanes.length; i++) {
 					if ((lanes[i] & 1) == 1) {
@@ -966,127 +985,89 @@ public class RouteInfoWidgetsFactory {
 					int secondTurnType = TurnType.getSecondaryTurn(lanes[i]);
 					int thirdTurnType = TurnType.getTertiaryTurn(lanes[i]);
 
+					RectF imgBounds = new RectF();
+					Path thirdTurnPath = null;
+					Path secondTurnPath = null;
+					Path firstTurnPath = null;
+
 					float coef = scaleCoefficient / miniCoeff;
-					if(thirdTurnType > 0){
-						Bitmap bSecond = null;
-						bSecond = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, 
-								secondTurnType, thirdTurnType, TurnPathHelper.THIRD_TURN, coef, leftSide);
-						if (bSecond != null){
-							paintSecondTurn.setColorFilter(new PorterDuffColorFilter(paintSecondTurn.getColor(), PorterDuff.Mode.SRC_ATOP));
-							srcCanvas.drawBitmap(bSecond, 0f, 0f, paintSecondTurn);
+					if (thirdTurnType > 0) {
+						Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), pathsCache, turnType,
+								secondTurnType, thirdTurnType, TurnPathHelper.THIRD_TURN, coef, leftSide, true);
+						if (p != null) {
+							RectF b = new RectF();
+							p.computeBounds(b, true);
+							if (!b.isEmpty()) {
+								if (imgBounds.isEmpty()) {
+									imgBounds.set(b);
+								} else {
+									imgBounds.union(b);
+								}
+								thirdTurnPath = p;
+							}
 						}
 					}
-					if(secondTurnType > 0){
-						Bitmap bSecond = null;
-						bSecond = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, 
-								secondTurnType, thirdTurnType, TurnPathHelper.SECOND_TURN, coef, leftSide);
-						if (bSecond != null){
-							paintSecondTurn.setColorFilter(new PorterDuffColorFilter(paintSecondTurn.getColor(), PorterDuff.Mode.SRC_ATOP));
-							srcCanvas.drawBitmap(bSecond, 0f, 0f, paintSecondTurn);
+					if (secondTurnType > 0) {
+						Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), pathsCache, turnType,
+								secondTurnType, thirdTurnType, TurnPathHelper.SECOND_TURN, coef, leftSide, true);
+						if (p != null) {
+							RectF b = new RectF();
+							p.computeBounds(b, true);
+							if (!b.isEmpty()) {
+								if (imgBounds.isEmpty()) {
+									imgBounds.set(b);
+								} else {
+									imgBounds.union(b);
+								}
+								secondTurnPath = p;
+							}
 						}
 					}
-					Bitmap b = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, 
-							secondTurnType, thirdTurnType, TurnPathHelper.FIRST_TURN, coef, leftSide);
-					if(b != null) {
-						paintRouteDirection.setColorFilter(new PorterDuffColorFilter(paintRouteDirection.getColor(), PorterDuff.Mode.SRC_ATOP));
-						Bitmap bitmap;
-						if (secondTurnType == 0 && thirdTurnType == 0) {
-							bitmap = applyCrop(b, turnType);
+					Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), pathsCache, turnType,
+							secondTurnType, thirdTurnType, TurnPathHelper.FIRST_TURN, coef, leftSide, true);
+					if (p != null) {
+						RectF b = new RectF();
+						p.computeBounds(b, true);
+						if (!b.isEmpty()) {
+							if (imgBounds.isEmpty()) {
+								imgBounds.set(b);
+							} else {
+								imgBounds.union(b);
+							}
+							firstTurnPath = p;
+						}
+					}
+
+					if (firstTurnPath != null || secondTurnPath != null || thirdTurnPath != null) {
+						if (imgBounds.width() < imgMinWidth) {
+							imgBounds.inset(-(imgMinWidth - imgBounds.width()) / 2.f, 0);
+						}
+						if (i == 0) {
+							imgBounds.set(imgBounds.left - 2, imgBounds.top, imgBounds.right + imgMargin, imgBounds.bottom);
 						} else {
-							bitmap = b;
+							imgBounds.inset(-imgMargin, 0);
 						}
-						srcCanvas.drawBitmap(bitmap, 0f, 0f, paintRouteDirection);
-						srcCanvas.translate(bitmap.getWidth(), 0);
+
+						canvas.translate(-imgBounds.left, 0);
+
+						if (thirdTurnPath != null) {
+							canvas.drawPath(thirdTurnPath, paintSecondTurn);
+							canvas.drawPath(thirdTurnPath, paintBlack);
+						}
+						if (secondTurnPath != null) {
+							canvas.drawPath(secondTurnPath, paintSecondTurn);
+							canvas.drawPath(secondTurnPath, paintBlack);
+						}
+						if (firstTurnPath != null) {
+							canvas.drawPath(firstTurnPath, paintRouteDirection);
+							canvas.drawPath(firstTurnPath, paintBlack);
+						}
+
+						canvas.translate(imgBounds.right, 0);
 					}
-				}
-				srcCanvas.restore();
-			}
-
-			// create a blur paint for capturing alpha
-			Paint ptBlur = new Paint();
-			float density = ctx.getResources().getDisplayMetrics().density;
-			ptBlur.setMaskFilter(new BlurMaskFilter(1.66f * density, Blur.OUTER));
-			int[] offsetXY = new int[2];
-			// capture alpha into a bitmap
-			Bitmap bmAlpha = src.extractAlpha(ptBlur, offsetXY);
-			// create a color paint
-			Paint ptAlphaColor = new Paint();
-			ptAlphaColor.setColor(0xFF000000);
-			// paint color for captured alpha region (bitmap)
-			canvas.drawBitmap(bmAlpha, offsetXY[0], offsetXY[1], ptAlphaColor);
-			// free memory
-			bmAlpha.recycle();
-
-			// paint the image source
-			canvas.drawBitmap(src, 0, 0, null);
-		}
-
-		private Bitmap applyCrop(Bitmap bitmap, int turnType) {
-			int arrowWidth = AndroidUtils.dpToPx(ctx, getArrowWidthInDp(turnType));
-			int emptyWidth = bitmap.getWidth() - arrowWidth;
-			int widthToCrop = emptyWidth / 4;
-			return Bitmap.createBitmap(bitmap, widthToCrop, 0, bitmap.getWidth() - 2 * widthToCrop, bitmap.getHeight());
-		}
-
-		private int getArrowWidthInDp(int tt) {
-			int result;
-
-			switch (tt){
-				case TurnType.C:
-					result = 12;
-					break;
-				case TurnType.TR:
-				case TurnType.TL:
-					result = 20;
-					break;
-				case TurnType.KR:
-				case TurnType.KL:
-					result = 13;
-					break;
-				case TurnType.TSLR:
-				case TurnType.TSLL:
-					result = 13;
-					break;
-				case TurnType.TSHR:
-				case TurnType.TSHL:
-					result = 19;
-					break;
-				case TurnType.TRU:
-				case TurnType.TU:
-					result = 24;
-					break;
-				default:
-					result = 12;
-					break;
-			}
-
-			return result;
-		}
-
-		//@Override
-		public void drawOld(Canvas canvas) {
-			float w = 72 * scaleCoefficient / miniCoeff;
-			//to change color immediately when needed
-			if (lanes != null && lanes.length > 0) {
-				canvas.save();
-				// canvas.translate((int) (16 * scaleCoefficient), 0);
-				for (int i = 0; i < lanes.length; i++) {
-					int turnType;
-					if ((lanes[i] & 1) == 1) {
-						paintRouteDirection.setColor(imminent ? ctx.getResources().getColor(R.color.nav_arrow_imminent) : 
-							ctx.getResources().getColor(R.color.nav_arrow));
-						turnType = TurnType.getPrimaryTurn(lanes[i]);
-					} else {
-						paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
-						turnType = TurnType.getPrimaryTurn(lanes[i]); 
-					}
-					Path p = getPathFromTurnType(paths, turnType, laneStraight, scaleCoefficient / miniCoeff, true);
-					canvas.drawPath(p, paintBlack);
-					canvas.drawPath(p, paintRouteDirection);
-					canvas.translate(w, 0);
 				}
 				canvas.restore();
-			}			
+			}
 		}
 
 		@Override
