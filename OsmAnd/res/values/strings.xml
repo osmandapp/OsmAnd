@@ -143,10 +143,10 @@
     <string name="wrong_user_name">Wrong username!</string>
     <string name="shared_string_to">To</string>
     <string name="mapillary_menu_date_from">From</string>
-    <string name="mapillary_menu_descr_dates">View images added</string>
+    <string name="mapillary_menu_descr_dates">View only images added</string>
     <string name="mapillary_menu_title_dates">Date</string>
     <string name="mapillary_menu_edit_text_hint">Type username</string>
-    <string name="mapillary_menu_descr_username">View images added by</string>
+    <string name="mapillary_menu_descr_username">View only images added by</string>
     <string name="mapillary_menu_title_username">Username</string>
     <string name="mapillary_menu_filter_description">You can filter images by submitter or by date. Filters apply only for closeup zoom.</string>
     <string name="map_widget_ruler_control">Radius ruler</string>
