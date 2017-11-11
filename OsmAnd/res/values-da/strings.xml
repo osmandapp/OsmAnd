@@ -2957,7 +2957,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="distance_indication_descr">Vælg hvordan afstanden til de aktive markører skal vises.</string>
     <string name="active_markers_descr">Vælg hvor mange retningsindikatorer der vises.</string>
     <string name="add_track_to_markers_descr">Vælg spor rutepunkter, som skal tilføjes til markører</string>
-    <string name="add_favourites_group_to_markers_descr">Vælg hvilken favoritgruppe, der skal tilføjes til markører</string>
+    <string name="add_favourites_group_to_markers_descr">Vælg hvilken favoritgruppe, der skal tilføjes markører</string>
     <string name="track_waypoints">Spor rutepunkter</string>
     <string name="favourites_group">Favoritgrupper</string>
     <string name="add_group">Tilføj gruppe</string>
