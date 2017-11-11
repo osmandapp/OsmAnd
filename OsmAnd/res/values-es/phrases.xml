@@ -3057,7 +3057,7 @@
 <string name="poi_length">Longitud</string>
 
 <string name="poi_fuel_type">Tipo de combustible</string>
-	<string name="poi_fuel_avia_type">Tipo</string>
+	<string name="poi_fuel_avia_type">Tipo de combustible (aviones)</string>
 	<string name="poi_payment_type">Forma de pago</string>
 	<string name="poi_payment_fuel_type">Tarjetas de combustible</string>
 	<string name="poi_additional_type">Adicional</string>
@@ -3686,4 +3686,6 @@
 	<string name="poi_map_size_region">Tamaño del mapa: Región</string>
 
 <string name="poi_couloir">Barranco estrecho</string>
-	</resources>
+	<string name="poi_charging_station_filter">Estación de carga</string>
+
+</resources>
