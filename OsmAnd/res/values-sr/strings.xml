@@ -1492,4 +1492,8 @@
     <string name="daynight">Дневни/ноћни режим рада</string>
     <string name="none_point_error">Молим додајте бар једну тачку.</string>
     <string name="osmand_parking_overdue">закаснео</string>
+    <string name="download_hillshade_maps">Сенке брда</string>
+    <string name="offline_edition">Уређивање ван мреже</string>
+    <string name="quick_action_new_action">Додај акцију</string>
+    <string name="quick_action_add_favorite">Додај омиљено</string>
     </resources>
