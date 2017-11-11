@@ -1455,7 +1455,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="current_track">Nuna spuro</string>
     <string name="gpx_monitoring_disabled_warn">Konservu kurson uzante GPX-fenestraĵon aŭ per \'Registrado de kurso\' agordoj.</string>
     <string name="show_current_gpx_title">Montri nunan kurson</string>
-    <string name="free_version_message">Tiu ĉi senpaga versio estas limigita al %1$s elŝutoj de mapoj (inkludante ĝisdatigojn) kaj ne subtenas eksterretajn Vikipediajn artikolojn.</string>
+    <string name="free_version_message">Tiu ĉi senpaga versio estas limigita al %1$s elŝutoj de mapoj (por aldoni aŭ ĝisdatigi) kaj ne subtenas eksterretajn Vikipediajn artikolojn.</string>
     <string name="poi_context_menu_showdescription">Montri priskribon de la interesejo.</string>
     <string name="index_name_wiki">Tutmondaj Vikipediaj interesejoj</string>
     <string name="index_name_voice">Voĉ-avertoj (antaŭregistritaj, limigitaj ebloj)</string>
@@ -1944,7 +1944,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="map_view_3d">3D map-vido</string>
     <string name="map_view_3d_descr">Aktivigi tri-dimensian vidon de la mapo.</string>
     <string name="show_poi_over_map">Montri interesejojn</string>
-    <string name="show_poi_over_map_description">Montri interesejon sur la mapo (uzas la plej laste elektitan filtrilon).</string>
+    <string name="show_poi_over_map_description">Montri surtavolon de laste elektita interesejo sur la mapo.</string>
     <string name="map_tile_source">Fonto de kahelaj mapoj</string>
     <string name="map_tile_source_descr">Elekti fonton de enretaj aŭ kaŝmemorigitaj map-kaheloj.</string>
     <string name="map_source">Map-fonto</string>
@@ -2864,4 +2864,22 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="coordinate_input_accuracy_description">Aŭtomate baskuli al la sekva kampo post entajpi %1$d ciferojn post la komo</string>
     <string name="coordinate_input_accuracy">%1$d ciferoj</string>
     <string name="go_to_next_field">Iri al la sekva kampo</string>
+    <string name="appearance_on_the_map">Aspekto sur la mapo</string>
+    <string name="add_track_to_markers_descr">Elekti navigadpunktojn por aldoni al map-markoj</string>
+    <string name="add_favourites_group_to_markers_descr">Elekti grupon de ŝatataj por aldoni al map-markoj</string>
+    <string name="track_waypoints">Navigadpunktoj de kurso</string>
+    <string name="favourites_group">Ŝatataro</string>
+    <string name="add_group">Aldoni grupon</string>
+    <string name="add_group_descr">Vi povas aldoni grupon da ŝatataj aŭ navigadpunktojn de kurso.</string>
+    <string name="empty_state_markers_active">Map-markiloj!</string>
+    <string name="empty_state_markers_active_desc">Marku ejojn sur la mapo per frapeti.</string>
+    <string name="empty_state_markers_groups">Enporti grupojn</string>
+    <string name="empty_state_markers_groups_desc">Vi povas enporti ŝatatarojn aŭ kurs-navigadpunktojn kiel map-markojn.</string>
+    <string name="empty_state_markers_history_desc">Markoj markitaj kiel pasigitajn montriĝos sur tiu ĉi ekrano.</string>
+    <string name="shared_string_two">Du</string>
+    <string name="shared_string_one">Unu</string>
+    <string name="show_guide_line_descr">Linio kuniganta vian pozicion kun aktivaj map-markoj montriĝos sur la mapo.</string>
+    <string name="show_arrows_descr">Unu aŭ du sagetoj indikantaj direkton al aktivaj map-markoj montriĝos sur la mapo.</string>
+    <string name="distance_indication_descr">Elekti kiel vidigi distancon al aktivaj map-markoj.</string>
+    <string name="active_markers_descr">Elekti nombron da direkt-indikiloj por vidigi.</string>
     </resources>
