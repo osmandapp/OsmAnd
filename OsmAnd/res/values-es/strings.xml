@@ -2695,8 +2695,8 @@ Por favor proporciona un código completo</string>
     <string name="top_bar">Barra superior</string>
     <string name="show_guide_line">Mostrar las directrices</string>
     <string name="show_arrows_on_the_map">Mostrar las flechas en el mapa</string>
-    <string name="show_passed">Mostrar los descartados</string>
-    <string name="hide_passed">Ocultar los descartados</string>
+    <string name="show_passed">Mostrar descartados</string>
+    <string name="hide_passed">Ocultar descartados</string>
     <string name="remove_from_map_markers">Eliminar de Map Markers</string>
     <string name="descendingly">descendente</string>
     <string name="ascendingly">ascendente</string>
