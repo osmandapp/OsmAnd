@@ -2603,10 +2603,10 @@ Por favor proporciona un código completo</string>
     <string name="wrong_user_name">¡Nombre de usuario incorrecto!</string>
     <string name="shared_string_to">Hasta</string>
     <string name="mapillary_menu_date_from">Desde</string>
-    <string name="mapillary_menu_descr_dates">Ver imágenes añadidas en un cierto período.</string>
-    <string name="mapillary_menu_title_dates">Fechas</string>
-    <string name="mapillary_menu_edit_text_hint">Tipo de nombre de usuario</string>
-    <string name="mapillary_menu_descr_username">Ver imágenes añadidas por un determinado usuario.</string>
+    <string name="mapillary_menu_descr_dates">Ver sólo imágenes añadidas</string>
+    <string name="mapillary_menu_title_dates">Fecha</string>
+    <string name="mapillary_menu_edit_text_hint">Escribir nombre de usuario</string>
+    <string name="mapillary_menu_descr_username">Ver sólo imágenes añadidas por</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
     <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por usuario o por fecha. Los filtros aplican para los primeros acercamientos.</string>
     
@@ -2695,8 +2695,8 @@ Por favor proporciona un código completo</string>
     <string name="top_bar">Barra superior</string>
     <string name="show_guide_line">Mostrar las directrices</string>
     <string name="show_arrows_on_the_map">Mostrar las flechas en el mapa</string>
-    <string name="show_passed">Mostrar los usados</string>
-    <string name="hide_passed">Ocultar los usados</string>
+    <string name="show_passed">Mostrar los descartados</string>
+    <string name="hide_passed">Ocultar los descartados</string>
     <string name="remove_from_map_markers">Eliminar de Map Markers</string>
     <string name="descendingly">descendente</string>
     <string name="ascendingly">ascendente</string>
@@ -2749,7 +2749,7 @@ Por favor proporciona un código completo</string>
 	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna la vista de la interfaz y los controles.</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     <string name="show_on_top_bar">Mostrar en la barra superior</string>
-    <string name="mark_passed">Marcador ya utilizado</string>
+    <string name="mark_passed">Descartar marcador</string>
     <string name="import_gpx_file_description">puede importarse como puntos de favoritos, o como un archivo de trazas.</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
     <string name="import_as_favorites">Importar como favoritos</string>
@@ -2764,4 +2764,21 @@ Por favor proporciona un código completo</string>
     <string name="go_to_next_field">Ir al campo siguiente</string>
     <string name="rename_marker">Renombrar marcador</string>
     <string name="appearance_on_the_map">Apariencia en el mapa</string>
+    <string name="add_track_to_markers_descr">Seleccione los puntos de referencia de la traza que se añadirán a los marcadores.</string>
+    <string name="add_favourites_group_to_markers_descr">Seleccione el grupo de favoritos que se añadirán a los marcadores.</string>
+    <string name="track_waypoints">Puntos de referencia de la traza</string>
+    <string name="favourites_group">Grupo de favoritos</string>
+    <string name="add_group">Añadir grupo</string>
+    <string name="add_group_descr">Puedes añadir un grupo de favoritos o puntos de referencia de la traza.</string>
+    <string name="empty_state_markers_active">¡Marcadores del mapa!</string>
+    <string name="empty_state_markers_active_desc">Marca lugares del mapa con una pulsación.</string>
+    <string name="empty_state_markers_groups">Importar grupos</string>
+    <string name="empty_state_markers_groups_desc">Puede importar grupos de favoritos o puntos de referencias de la traza como marcadores.</string>
+    <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
+    <string name="shared_string_two">Dos</string>
+    <string name="shared_string_one">Uno</string>
+    <string name="show_guide_line_descr">Se mostrará en el mapa una línea que conecta su ubicación con la de los marcadores activos.</string>
+    <string name="show_arrows_descr">Se mostrará en el mapa una o dos flechas indicando la dirección a los marcadores activos.</string>
+    <string name="distance_indication_descr">Seleccione cómo desea ver la distancia a los marcadores activos.</string>
+    <string name="active_markers_descr">Seleccione cuántos indicadores de dirección desea ver.</string>
     </resources>
