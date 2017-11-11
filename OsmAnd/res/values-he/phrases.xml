@@ -953,4 +953,55 @@
 	<string name="poi_cuisine_wine">יין</string>
 	<string name="poi_cuisine_potato">תפוח אדמה</string>
 	<string name="poi_cuisine_brunch">בראנץ׳</string>
+	<string name="poi_aquaculture">חקלאות ימית</string>
+	<string name="poi_aquaculture_shrimp">חקלאות ימית: שרימפס</string>
+	<string name="poi_aquaculture_fish">חקלאות ימית: דגים</string>
+	<string name="poi_aquaculture_mussels">חקלאות ימית: מולים</string>
+
+	<string name="poi_min_age">הגבלת גיל</string>
+
+	<string name="poi_organic_yes">יש</string>
+	<string name="poi_organic_no">אין</string>
+	<string name="poi_traffic_mirror">מראת כביש פנורמית</string>
+
+	<string name="poi_diplomatic_consulate">קונסוליה</string>
+	<string name="poi_diplomatic_ambassadors_residence">בית שגריר</string>
+	<string name="poi_diplomatic_high_commission">פיקוד עליון</string>
+
+	<string name="poi_fire_operator">אמצעי כיבוי אש</string>
+
+	<string name="poi_water_tank">מיכל מים</string>
+
+	<string name="poi_toilets_disposal_flush">פינוי שפכים: הדחה</string>
+	<string name="poi_toilets_disposal_pitlatrine">פינוי שפכים: בור</string>
+	<string name="poi_toilets_disposal_chemical">פינוי שפכים: כימי</string>
+	<string name="poi_toilets_disposal_bucket">פינוי שפכים: דלי</string>
+
+	<string name="poi_length">אורך</string>
+
+	<string name="poi_wiki_link">ויקיפדיה</string>
+
+	<string name="poi_xmas">חג המולד</string>
+	<string name="poi_xmas_event">אירוע חג המולד</string>
+	<string name="poi_xmas_market">שוק חג המולד</string>
+	<string name="poi_xmas_pyramid">פירמידת חג המולד</string>
+	<string name="poi_xmas_shop">חנות חג המולד</string>
+	<string name="poi_xmas_shop_christmas_tree">חנות עצים</string>
+	<string name="poi_xmas_tree">עץ חג המולד</string>
+	<string name="poi_xmas_day_date">חג המולד: תקופת האירוע</string>
+	<string name="poi_xmas_note">חג המולד: הערה</string>
+	<string name="poi_xmas_opening_hours">חג המולד: שעות פתיחה</string>
+	<string name="poi_xmas_location">חג המולד: מיקום</string>
+	<string name="poi_xmas_url">חג המולד: אתר</string>
+
+	<string name="poi_public_bookcase">עמדת החלפת ספרים ציבורית</string>
+	<string name="poi_public_bookcase_type_phone_box">סוג: תא טלפון</string>
+	<string name="poi_public_bookcase_type_reading_box">סוג: תא קריאה</string>
+	<string name="poi_public_bookcase_type_wooden_cabinet">סוג: ארונית עץ</string>
+	<string name="poi_public_bookcase_type_metal_cabinet">סוג: ארונית מתכת</string>
+	<string name="poi_public_bookcase_type_shelf">סוג: מדף</string>
+
+	<string name="poi_cuisine_sagardotegia">מבשלת סיידר</string>
+	<string name="poi_cuisine_sub">כריך באגט</string>
+	<string name="poi_cuisine_pita">פיתה</string>
 	</resources>
