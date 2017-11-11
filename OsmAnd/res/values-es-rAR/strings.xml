@@ -2765,8 +2765,8 @@ Proporciona un código completo</string>
     <string name="order_by">Ordenar por:</string>
     <string name="show_guide_line">Mostrar línea guía</string>
     <string name="show_arrows_on_the_map">Mostrar flechas en el mapa</string>
-    <string name="show_passed">Mostrar los descartados</string>
-    <string name="hide_passed">Ocultar los descartados</string>
+    <string name="show_passed">Mostrar descartados</string>
+    <string name="hide_passed">Ocultar descartados</string>
     <string name="use_location">Usar ubicación</string>
     <string name="add_location_as_first_point_descr">Añade la ubicación como primer punto para planificar la ruta perfecta.</string>
     <string name="my_location">Mi ubicación</string>
