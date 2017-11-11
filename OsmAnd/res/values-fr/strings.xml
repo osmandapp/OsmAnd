@@ -536,7 +536,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="use_online_routing_descr">Utiliser Internet pour calculer l\'itinéraire</string>
     <string name="use_online_routing">Utiliser la navigation en ligne</string>
     <string name="osm_settings_descr">Indiquez les paramètres de connexion à OpenStreetMap.org (OSM) pour vos contributions.</string>
-    <string name="data_settings_descr">Indiquez la langue, mettre à jour les données</string>
+    <string name="data_settings_descr">Indiquez la langue, télécharger / mettre à jour les données.</string>
     <string name="data_settings">Données</string>
 
     <string name="osm_settings">Contribuer à OSM</string>
@@ -711,7 +711,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="gpx_visibility_txt">Visibilité</string>
     <string name="gpx_tags_txt">Libellés</string>
     <string name="gpx_description_txt">Description</string>
-    <string name="validate_gpx_upload_name_pwd">Veuillez fournir un compte OSM et son mot de passe pour envoyer des fichiers GPX.</string>
+    <string name="validate_gpx_upload_name_pwd">Veuillez renseigner le compte et le mot de passe OSM pour envoyer les fichiers GPX.</string>
     <string name="default_buttons_support">Soutien</string>
     <string name="support_new_features">Soutenir le développement</string>
 
@@ -1551,7 +1551,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="rendering_attr_alpineHiking_name">Difficulté des chemins de randonnée (échelle CAS)</string>
     <string name="rendering_attr_alpineHiking_description">Afficher la difficulté des chemins selon l\'échelle du CAS</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Afficher les itinéraires pédestres</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">Afficher les itinéraires pédestres</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Afficher les chemins de randonnée d\'après les traces OSMC.</string>
 
     <string name="rendering_attr_coloredBuildings_name">Bâtiments colorés par type</string>
     <string name="arrival_distance_factor_early">Tôt</string>
@@ -2792,14 +2792,14 @@ représentant la zone : %1$s x %2$s</string>
     <string name="wrong_user_name">Erreur dans le nom d\'utilisateur</string>
     <string name="shared_string_to">Vers</string>
     <string name="mapillary_menu_date_from">De</string>
-    <string name="mapillary_menu_title_dates">Dates</string>
+    <string name="mapillary_menu_title_dates">Date</string>
     <string name="mapillary_menu_edit_text_hint">Saisissez le nom d\'utilisateur</string>
     <string name="mapillary_menu_title_username">Nom d\'utilisateur</string>
     <string name="shared_string_reload">Recharger</string>
     <string name="mapillary_menu_descr_tile_cache">Recharger les tuiles afin d\'afficher des données à jour.</string>
     <string name="mapillary_menu_title_tile_cache">Cache des tuiles</string>
-    <string name="mapillary_menu_descr_dates">Afficher les images ajoutées à certaines dates.</string>
-    <string name="mapillary_menu_descr_username">Afficher les images ajoutées par certains utilisateurs.</string>
+    <string name="mapillary_menu_descr_dates">Afficher uniquement les images ajoutées</string>
+    <string name="mapillary_menu_descr_username">Afficher uniquement les images ajoutées par</string>
     <string name="mapillary_menu_filter_description">Vous pouvez filtrer les images par date ou nom d\'utilisateur, le filtre est appliqué après avoir zoomé.</string>
     <string name="shared_string_reset">Réinitialiser</string>
     <string name="average">Moyenne</string>
@@ -2991,7 +2991,7 @@ représentant la zone : %1$s x %2$s</string>
 	<string name="tap_on_map_to_hide_interface_descr">Une pression n\'importe où sur la carte masque l\'interface et bascule en mode plein écran.</string>
     <string name="tap_on_map_to_hide_interface">Mode plein écran</string>
     <string name="show_on_top_bar">Afficher dans la barre supérieure</string>
-    <string name="mark_passed">Marquer comme passé</string>
+    <string name="mark_passed">Marquer comme visité</string>
     <string name="rename_marker">Renommer la marque</string>
     <string name="digits_quantity">Nombre de chiffres</string>
     <string name="shared_string_right">Droite</string>
@@ -3001,4 +3001,23 @@ représentant la zone : %1$s x %2$s</string>
     <string name="coordinate_input_accuracy_description">Aller automatiquement au champ suivant après avoir saisi %1$d chiffres après la virgule</string>
     <string name="coordinate_input_accuracy">%1$d chiffres</string>
     <string name="go_to_next_field">Aller au champ suivant</string>
+    <string name="appearance_on_the_map">Apparence sur la carte</string>
+    <string name="add_track_to_markers_descr">Sélectionnez des points de passage qu\'OsmAnd ajoutera aux marques</string>
+    <string name="add_favourites_group_to_markers_descr">Sélectionnez quel groupe de favoris ajouter aux marques</string>
+    <string name="track_waypoints">Points de passage</string>
+    <string name="favourites_group">Groupe de favoris</string>
+    <string name="add_group">Ajouter un groupe</string>
+    <string name="add_group_descr">Vous pouvez ajouter un groupe de favoris ou de points de passage.</string>
+    <string name="empty_state_markers_active">Marques sur la carte !</string>
+    <string name="empty_state_markers_active_desc">Marquez des emplacements sur la carte par simple appui.</string>
+    <string name="empty_state_markers_groups">Importer des groupes</string>
+    <string name="empty_state_markers_groups_desc">Vous pouvez importer des groupes de favoris ou de points de passage comme marques.</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
+    <string name="empty_state_markers_history_desc">Les marques visitées s\'afficheront sur cet écran.</string>
+    <string name="shared_string_two">Deux</string>
+    <string name="shared_string_one">Une</string>
+    <string name="show_guide_line_descr">"Une ligne reliant  votre position aux marques actives s’affichera sur la carte."</string>
+    <string name="show_arrows_descr">Une ou deux flèches indiquant la direction vers les marques actives sera affichée sur la carte.</string>
+    <string name="distance_indication_descr">Indiquez comment afficher la distance vers les marques actives.</string>
+    <string name="active_markers_descr">Indiquez le nombre d\'indicateurs de direction à afficher.</string>
     </resources>
