@@ -3012,7 +3012,7 @@
 <string name="poi_resource_slate_iron_ore_copper">Ardezo, fer-erco, kupro</string>
 	<string name="poi_spices">Spic-vendejo</string>
 
-<string name="poi_fuel_type">Speco</string>
+<string name="poi_fuel_type">Brulaĵ-tipo (avia)</string>
 	<string name="poi_payment_type">Pagmaniero</string>
 	<string name="poi_additional_type">Aldona</string>
 <string name="poi_shop_craft">Materialoj-por-metio-vendejo</string>
@@ -3020,7 +3020,7 @@
 	<string name="poi_service_bicycle_charging_yes">Ŝargo: jes</string>
 	<string name="poi_service_bicycle_charging_no">Ŝargo: ne</string>
 
-<string name="poi_fuel_avia_type">Speco</string>
+<string name="poi_fuel_avia_type">Brulaĵ-tipo (avia)</string>
 	<string name="poi_payment_fuel_type">Brulaĵ-kartoj</string>
 	<string name="poi_internet_access_type">Interret-aliro</string>
 	<string name="poi_vending_type">Vendado de</string>
@@ -3650,5 +3650,7 @@
 	<string name="poi_map_size_site">Grando de mapo: loka</string>
 	<string name="poi_map_size_city">Grando de mapo: urba</string>
 	<string name="poi_map_size_region">Grando de mapo: regiona</string>
+
+<string name="poi_charging_station_filter">Ŝargostacio</string>
 
 </resources>
