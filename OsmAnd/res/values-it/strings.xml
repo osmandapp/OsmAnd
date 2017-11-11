@@ -1321,10 +1321,10 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="share_fav_subject">Preferiti condivisi tramite OsmAnd</string>
     <string name="use_points_as_intermediates">Calcola il percorso tra i punti</string>
 
-    <string name="osmo_auto_send_locations_descr">Avvia automaticamente il viaggio e invia la localizzazione dopo l\'avvio dell\'applicazione</string>
+    <string name="osmo_auto_send_locations_descr">Avvia automaticamente il viaggio e invia la localizzazione dopo l\'avvio dell\'applicazione.</string>
     <string name="osmo_auto_send_locations">Avvia automaticamente il viaggio</string>
     <string name="osmo_tracker_id">ID del tracciamento</string>
-    <string name="osmo_tracker_id_descr">Clicca per visualizzare l\'ID della tracciabilità</string>
+    <string name="osmo_tracker_id_descr">Clicca per visualizzare l\'ID della tracciabilità.</string>
     <string name="osmo_session_token">Token della sessione: %1$s</string>
     <string name="osmo_auth_pending">In attesa di autorizzazione…</string>
     <string name="osmo_locations_sent">Localizzazioni inviate %1$d (nel buffer %2$d) </string>
@@ -1779,7 +1779,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="simulate_your_location">Simula la tua posizione</string>
     <string name="drawer">Solo lista</string>
     <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
-    <string name="tips_and_tricks_descr">Domande frequenti, ultimi cambiamenti e altro</string>
+    <string name="tips_and_tricks_descr">Domande frequenti, ultimi cambiamenti e altro.</string>
     <string name="routing_settings_2">Impostazioni di navigazione</string>
     <string name="general_settings_2">Impostazioni generali</string>
     <string name="shared_string_clear_all">Cancella tutto</string>
@@ -1800,7 +1800,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="parking_place_limited">Parcheggio a tempo limitato a</string>
     <string name="your_edits">Le tue modifiche</string>
     <string name="osmand_parking_overdue">obsoleto</string>
-    <string name="delay_to_start_navigation_descr">Specifica il tempo di permanenza nella schermata di pianificazione dell\'itinerario</string>
+    <string name="delay_to_start_navigation_descr">Specifica il tempo di permanenza nella schermata di pianificazione dell\'itinerario.</string>
     <string name="delay_to_start_navigation">Avvia la navigazione svolta per svolta dopo…</string>
     <string name="shared_string_go">Vai</string>
 
@@ -1820,7 +1820,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_message">Messaggio</string>
     <string name="shared_string_do_not_use">Non usare</string>
     <string name="shared_string_address">Indirizzi</string>
-    <string name="shared_string_show_description">Mostra la descrizione</string>
+    <string name="shared_string_show_description">Mostra la descrizione.</string>
     <string name="shared_string_places">Luoghi</string>
     <string name="shared_string_search">Cerca</string>
     <string name="shared_string_is_open">Aperto adesso</string>
@@ -1951,7 +1951,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="next_proceed">Avanti</string>
     <string name="opening_at">Apre alle</string>
     <string name="closing_at">Chiude alle</string>
-    <string name="av_locations_descr">File GPX con note locali</string>
+    <string name="av_locations_descr">File GPX con note locali.</string>
     <string name="av_locations">Posizioni</string>
 
 
@@ -1972,8 +1972,8 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="count_of_lines">Conteggio delle linee</string>
     <string name="are_you_sure">Sei sicuro?</string>
     <string name="unsaved_changes_will_be_lost">Tutte le modifiche non salvate andranno perse. Continuare?</string>
-    <string name="simulate_your_location_stop_descr">Arresta la simulazione del percorso</string>
-    <string name="simulate_your_location_descr">Simula la posizione utilizzando un GPX registrato o una percorso calcolato</string>
+    <string name="simulate_your_location_stop_descr">Arresta la simulazione del percorso.</string>
+    <string name="simulate_your_location_descr">Simula la posizione utilizzando un GPX registrato o una percorso calcolato.</string>
     <string name="downloads_left_template">%1$s download rimanenti</string>
     <string name="favourites_edit_dialog_title">Informazioni preferite</string>
     <string name="favourites_context_menu_add">Aggiungi preferito</string>
@@ -1981,7 +1981,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_trip_recording">Registrazione viaggio</string>
     <string name="shared_string_navigation">Navigazione</string>
     <string name="osmand_running_in_background">Esecuzione in backgroung</string>
-    <string name="default_speed_system_descr">Specifica l\'unità di misura della velocità</string>
+    <string name="default_speed_system_descr">Specifica l\'unità di misura della velocità.</string>
     <string name="default_speed_system">Unità di misura della velocità</string>
     <string name="nm">NM</string>
     <string name="si_nm">Miglia nautiche</string>
@@ -2026,7 +2026,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="free_downloads_used_description">Mostra i download gratuiti utilizzati</string>
     <string name="share_geo">geo:</string>
     <string name="shared_string_send">Invia</string>
-    <string name="simulate_initial_startup_descr">Imposta l\'indicatore del primo avvio dell\'app, mantiene tutte le altre impostazioni inalterate</string>
+    <string name="simulate_initial_startup_descr">Imposta la spunta del primo avvio dell\'app, mantiene tutte le altre impostazioni inalterate.</string>
     <string name="simulate_initial_startup">Simula il primo avvio dell\'app</string>
     <string name="share_menu_location">Condividi la posizione</string>
 
@@ -2037,7 +2037,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="map_downloaded">Mappa scaricata</string>
     <string name="map_downloaded_descr">La mappa %1$s è stata scaricata, ora puoi iniziare a utilizzarla.</string>
     <string name="go_to_map">Mostra la mappa</string>
-    <string name="show_on_start_description">\'Spegni\' lancia direttamente la schermata della mappa</string>
+    <string name="show_on_start_description">\'Spegni\' lancia direttamente la schermata della mappa.</string>
     <string name="enter_country_name">Inserisci il nome della nazione</string>
     <string name="new_version">Nuova versione</string>
     <string name="begin_with_osmand_menu_group">Primi passi con OsmAnd</string>
@@ -2080,7 +2080,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="context_menu_item_edit_waypoint">Modifica i waypoint del GPX</string>
     <string name="shared_string_location">Posizione</string>
     <string name="poi_context_menu_modify_osm_change">Modifica i cambiamenti di OSM</string>
-    <string name="access_from_map_description">Il pulsante del menù apre il pannello di controllo, non il menù</string>
+    <string name="access_from_map_description">Il pulsante del menù apre il pannello di controllo, non il menù.</string>
     <string name="access_from_map">Accedi dalla mappa</string>
     <string name="copied_to_clipboard">Copiato negli appunti</string>
     <string name="osm_save_offline">Salva offline</string>
@@ -2109,7 +2109,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
 	<string name="use_dashboard_btn">Usa il pannello di controllo</string>
     <string name="use_drawer_btn">Utilizza menù</string>
     <string name="dashboard_or_drawer_title">Pannello di controllo o menù</string>
-    <string name="please_specify_poi_type_only_from_list">Specifica il corretto tipo di PDI o salta questo passaggio</string>
+    <string name="please_specify_poi_type_only_from_list">Specifica il corretto tipo di PDI o salta questo passaggio.</string>
     <string name="routing_attr_avoid_stairs_name">Evita le scale</string>
 	<string name="routing_attr_avoid_stairs_description">Evita le scale</string>
 	<string name="release_2_2">\\022 Nuova interfaccia utente sensibile al contesto per le località selezionate sulla mappa e negli altri schermi
@@ -2143,11 +2143,11 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="av_video_quality_low">Qualità minima</string>
     <string name="av_video_quality_high">Qualità massima</string>
     <string name="av_video_quality">Qualità dell\'output video</string>
-    <string name="av_video_quality_descr">Scegli la qualità dell\'output video</string>
+    <string name="av_video_quality_descr">Scegli la qualità video.</string>
     <string name="av_audio_format">Formato dell\'output audio</string>
-    <string name="av_audio_format_descr">Scegli il formato dell\'output audio</string>
+    <string name="av_audio_format_descr">Scegli il formato dell\'output audio.</string>
     <string name="av_audio_bitrate">Bitrate audio</string>
-    <string name="av_audio_bitrate_descr">Scegli il bitrate dell\'audio</string>
+    <string name="av_audio_bitrate_descr">Scegli il bitrate dell\'audio.</string>
     <string name="rendering_attr_horseRoutes_name">Percorsi a cavallo</string>
     <string name="no_address_found">Nessun indirizzo trovato</string>
     <string name="looking_up_address">Ricerca dell\'indirizzo in corso</string>
@@ -2164,20 +2164,20 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
 <string name="no_location_permission">L\'app non ha i permessi per accedere ai dati della posizione.</string>
     <string name="no_camera_permission">L\'app non ha i permessi per accedere alla fotocamera.</string>
     <string name="no_microphone_permission">L\'app non ha i permessi per accedere al microfono.</string>
-    <string name="impassable_road_desc">Seleziona le strade che vuoi evitare nella navigazione</string>
+    <string name="impassable_road_desc">Seleziona le strade che vuoi evitare nella navigazione.</string>
     <string name="shared_string_sound">Suono</string>
     <string name="select_voice_provider">Selezionare la guida vocale</string>
-    <string name="select_voice_provider_descr">Seleziona o scarica la guida vocale per la tua lingua</string>
+    <string name="select_voice_provider_descr">Seleziona o scarica la guida vocale per la tua lingua.</string>
     <string name="live_updates">Aggiornamenti Live</string>
     <string name="available_maps">Mappe disponibili</string>
     <string name="last_update">Ultimo aggiornamento: %s</string>
 
     
-<string name="rec_split_desc">Sovrascrivi le note quando lo spazio utilizzato supera la dimensione della memoria</string>
+<string name="rec_split_desc">Sovrascrivi le note quando lo spazio utilizzato supera la dimensione della memoria.</string>
     <string name="rec_split_clip_length">Lunghezza della nota</string>
-    <string name="rec_split_clip_length_desc">Ogni nota registrata non supererà la durata impostata</string>
+    <string name="rec_split_clip_length_desc">Limite massimo durata delle clip registrate.</string>
     <string name="rec_split_storage_size">Dimensione della memoria</string>
-    <string name="rec_split_storage_size_desc">Quantità di spazio che può essere occupata dal totale delle note</string>
+    <string name="rec_split_storage_size_desc">Quantità di spazio che può essere occupata dal totale delle clip.</string>
     <string name="update_time">Ora di aggiornamento</string>
     <string name="updates_size">Dimensione aggiornamenti</string>
     <string name="last_map_change">Ultima modifica alla mappa: %s</string>
@@ -2217,7 +2217,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="select_map_markers">Scegli i marcatori</string>
     <string name="shared_string_reverse_order">Inverti l\'ordine</string>
     
-    <string name="show_map_markers_description">Attiva la funzionalità dei marcatori</string>
+    <string name="show_map_markers_description">Attiva la funzionalità dei marcatori.</string>
     <string name="clear_active_markers_q">Vuoi eliminare tutti i marcatori attivi?</string>
     <string name="clear_markers_history_q">Vuoi eliminare la cronologia dei marcatori?</string>
     <string name="active_markers">Marcatori attivi</string>
@@ -2247,18 +2247,18 @@ Sono disponibili solo {2} MB.</string>
     <string name="osm_editors_ranking">Classifica contributori OSM</string>
     <string name="osm_live_subscription">Sottoscrizione OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Sottoscrivi</string>
-    <string name="osm_live_email_desc">Ne abbiamo bisogno per fornirti informazioni sui contributi</string>
+    <string name="osm_live_email_desc">Necessario per fornirti informazioni sui contributi.</string>
     <string name="osm_live_user_public_name">Nome pubblico</string>
     <string name="osm_live_hide_user_name">Non mostrare il mio nome nei rapporti</string>
     <string name="osm_live_support_region">Sostieni la regione</string>
     <string name="osm_live_month_cost">Costo mensile</string>
-    <string name="osm_live_month_cost_desc">Pagamento mensile</string>
+    <string name="osm_live_month_cost_desc">Pagamento mensile.</string>
     <string name="osm_live_active">Attivo</string>
     <string name="osm_live_not_active">Non attivo</string>
     <string name="osm_live_enter_email">Per favore inserisci un indirizzo email valido</string>
     <string name="osm_live_enter_user_name">Per favore inserisci il nome pubblico</string>
     <string name="osm_live_thanks">Grazie per aver sottoscritto gli aggiornamenti live!</string>
-    <string name="osm_live_region_desc">Parte della tua donazione sarà inviata agli utenti OSM che sottopongono modifiche alla mappa in quella regione</string>
+    <string name="osm_live_region_desc">Parte della tua donazione sarà inviata agli utenti OSM che sottopongono modifiche alla mappa in quella regione.</string>
     <string name="osm_live_subscription_settings">Impostazioni della sottoscrizione</string>
     <string name="osm_live_ask_for_purchase">Per favore acquista prima la sottoscrizione a OsmAnd Live</string>
 
@@ -2310,7 +2310,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="access_category_choice">Scegli la categoria</string>
     <string name="access_hint_enter_name">Inserisci il nome</string>
     <string name="access_hint_enter_category">Inserisci la categoria</string>
-    <string name="access_hint_enter_description">Inserisci la descrizione</string>
+    <string name="access_hint_enter_description">Inserisci la descrizione.</string>
     <string name="access_map_linked_to_location">La mappa è collegata alla località</string>
     <string name="access_collapsed_list">Lista raggruppata</string>
     <string name="access_expanded_list">Lista espansa</string>
@@ -2326,11 +2326,11 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="access_disable_offroute_recalc">Non ricalcolare il percorso quando lo si abbandona</string>
     <string name="access_disable_offroute_recalc_descr">Previene il ricalcolo automatico del percorso quando si esce da esso.</string>
     <string name="access_disable_wrong_direction_recalc">Non ricalcolare il percorso per la direzione opposta</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Previene il ricalcolo automatico del percorso quando ci si muove nella direzione opposta</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Previene il ricalcolo automatico del percorso quando ci si muove nella direzione opposta.</string>
     <string name="access_smart_autoannounce">Annuncio automatico intelligente</string>
-    <string name="access_smart_autoannounce_descr">Notifica solo quando la direzione verso la destinazione è cambiata</string>
+    <string name="access_smart_autoannounce_descr">Notifica solo quando la direzione verso la destinazione è cambiata.</string>
     <string name="access_autoannounce_period">Intervallo di annuncio automatico</string>
-    <string name="access_autoannounce_period_descr">Intervallo di tempo minimo fra annunci</string>
+    <string name="access_autoannounce_period_descr">Intervallo di tempo minimo fra annunci.</string>
     <string name="move_marker_bottom_sheet_title">Muovi la mappa per cambiare la posizione del marcatore</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="follow_us">Seguici</string>
@@ -2669,7 +2669,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="full_version_thanks">Grazie per avere acquistato la versione completa di OsmAnd!</string>
     <string name="fonts_header">Caratteri della mappa</string>
     <string name="right_side_navigation">Guida a destra</string>
-    <string name="depth_contour_descr">Insieme di mappe che contengono le linee isoipse marine e i punti.</string>
+    <string name="depth_contour_descr">Insieme di mappe che contengono le linee isoipse marine e i punti nautici.</string>
     <string name="sea_depth_thanks">Grazie per avere acquistato le isoipse nautiche!</string>
     <string name="index_item_depth_contours_osmand_ext">Isoipse nautiche</string>
     <string name="index_item_depth_points_southern_hemisphere">Punti nautici sotto il livello del mare dell\'emisfero Australe</string>
@@ -2788,10 +2788,10 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="wrong_user_name">Nome utente errato!</string>
     <string name="shared_string_to">A</string>
     <string name="mapillary_menu_date_from">Da</string>
-    <string name="mapillary_menu_descr_dates">Visualizza le immagini aggiunte in un certo periodo.</string>
+    <string name="mapillary_menu_descr_dates">Visualizza solo le immagini aggiunte</string>
     <string name="mapillary_menu_title_dates">Date</string>
     <string name="mapillary_menu_edit_text_hint">Scrivi il nome utente</string>
-    <string name="mapillary_menu_descr_username">Visualizza le immagini aggiunte da un certo utente.</string>
+    <string name="mapillary_menu_descr_username">Visualizza le immagini aggiunte da</string>
     <string name="mapillary_menu_title_username">Nome utente</string>
     <string name="mapillary_menu_filter_description">Puoi filtrare le immagini per nome dell\'utente o per data. I filtri si possono applicare solo per gli zoom più elevati.</string>
     <string name="store_tracks_in_monthly_directories">Salva le tracce registrate in cartelle mensili</string>
@@ -2956,7 +2956,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="empty_state_markers_groups">Importa gruppi</string>
     <string name="empty_state_markers_groups_desc">Puoi importare, come marcatori, gruppi di luoghi preferiti o punti intermedi di tracce.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
-    <string name="empty_state_markers_history_desc">Marcatori indicati come superati appariranno su questa schermata</string>
+    <string name="empty_state_markers_history_desc">Marcatori indicati come superati appariranno su questa schermata.</string>
     <string name="shared_string_two">Due</string>
     <string name="shared_string_one">Uno</string>
     <string name="show_guide_line_descr">Una linea di collegamento fra la tua posizione e le posizioni dei marcatori attivi verrà visualizzata sulla mappa.</string>
@@ -2968,4 +2968,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_left">Sinistra</string>
     <string name="show_number_pad">Mostra la tastiera numerica</string>
     <string name="shared_string_paste">Incolla</string>
+    <string name="coordinate_input_accuracy_description">Spostati automaticamente nel campo successivo dopo l\'immissione di %1$d cifre dopo il punto decimale</string>
+    <string name="coordinate_input_accuracy">%1$d cifre</string>
+    <string name="go_to_next_field">Vai al campo successivo</string>
+    <string name="rename_marker">Rinomina il marcatore</string>
     </resources>
