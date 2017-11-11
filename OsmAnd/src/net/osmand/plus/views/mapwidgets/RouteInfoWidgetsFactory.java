@@ -11,8 +11,6 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.hardware.GeomagneticField;
@@ -57,6 +55,7 @@ import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -849,24 +848,27 @@ public class RouteInfoWidgetsFactory {
 		private float scaleCoefficient;
 		private int height;
 		private int width;
+		private float delta;
+		private float laneHalfSize;
 		private static final float miniCoeff = 2f;
 		private final boolean leftSide;
-		private int imgMinWidth;
+		private int imgMinDelta;
 		private int imgMargin;
 
 		LanesDrawable(MapActivity ctx, float scaleCoefficent) {
 			this.ctx = ctx;
 			OsmandSettings settings = ctx.getMyApplication().getSettings();
 			leftSide = settings.DRIVING_REGION.get().leftHandDriving;
-			imgMinWidth = ctx.getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_min_width);
+			imgMinDelta = ctx.getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_min_delta);
 			imgMargin = ctx.getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_margin);
+			laneHalfSize = ctx.getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_size) / 2;
 
 			this.scaleCoefficient = scaleCoefficent;
 
 			paintBlack = new Paint(Paint.ANTI_ALIAS_FLAG);
 			paintBlack.setStyle(Style.STROKE);
 			paintBlack.setColor(Color.BLACK);
-			paintBlack.setStrokeWidth(1.5f);
+			paintBlack.setStrokeWidth(3.5f);
 
 			paintRouteDirection = new Paint(Paint.ANTI_ALIAS_FLAG);
 			paintRouteDirection.setStyle(Style.FILL);
@@ -880,8 +882,10 @@ public class RouteInfoWidgetsFactory {
 		void updateBounds() {
 			float w = 0;
 			float h = 0;
+			float delta = imgMinDelta;
 			float coef = scaleCoefficient / miniCoeff;
 			if (lanes != null) {
+				List<RectF> boundsList = new ArrayList<>(lanes.length);
 				for (int i = 0; i < lanes.length; i++) {
 					int turnType = TurnType.getPrimaryTurn(lanes[i]);
 					int secondTurnType = TurnType.getSecondaryTurn(lanes[i]);
@@ -933,15 +937,27 @@ public class RouteInfoWidgetsFactory {
 					}
 					if (imgBounds.right > 0)
 					{
-						if (imgBounds.width() < imgMinWidth) {
-							imgBounds.inset(-(imgMinWidth - imgBounds.width()) / 2.f, 0);
-						}
-						w += imgBounds.width() + (i < lanes.length - 1 ? imgMargin * 2 : 0);
+						boundsList.add(imgBounds);
 
 						float imageHeight = imgBounds.bottom;
 						if (imageHeight > h)
 							h = imageHeight;
 					}
+				}
+				if (boundsList.size() > 1) {
+					for (int i = 1; i < boundsList.size(); i++) {
+						RectF b1 = boundsList.get(i - 1);
+						RectF b2 = boundsList.get(i);
+						float d = b1.right + imgMargin * 2 - b2.left;
+						if (delta < d)
+							delta = d;
+					}
+					RectF b1 = boundsList.get(0);
+					RectF b2 = boundsList.get(boundsList.size() - 1);
+					w = -b1.left + (boundsList.size() - 1) * delta + b2.right;
+				} else if (boundsList.size() > 0) {
+					RectF b1 = boundsList.get(0);
+					w = b1.width();
 				}
 				if (w > 0) {
 					w += 4;
@@ -950,8 +966,9 @@ public class RouteInfoWidgetsFactory {
 					h += 4;
 				}
 			}
-			width = (int) w;
-			height = (int) h;
+			this.width = (int) w;
+			this.height = (int) h;
+			this.delta = delta;
 		}
 		
 		@Override
@@ -972,6 +989,7 @@ public class RouteInfoWidgetsFactory {
 
 			//to change color immediately when needed
 			if (lanes != null && lanes.length > 0) {
+				float coef = scaleCoefficient / miniCoeff;
 				canvas.save();
 				// canvas.translate((int) (16 * scaleCoefficient), 0);
 				for (int i = 0; i < lanes.length; i++) {
@@ -990,7 +1008,6 @@ public class RouteInfoWidgetsFactory {
 					Path secondTurnPath = null;
 					Path firstTurnPath = null;
 
-					float coef = scaleCoefficient / miniCoeff;
 					if (thirdTurnType > 0) {
 						Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), pathsCache, turnType,
 								secondTurnType, thirdTurnType, TurnPathHelper.THIRD_TURN, coef, leftSide, true);
@@ -1039,31 +1056,39 @@ public class RouteInfoWidgetsFactory {
 					}
 
 					if (firstTurnPath != null || secondTurnPath != null || thirdTurnPath != null) {
-						if (imgBounds.width() < imgMinWidth) {
-							imgBounds.inset(-(imgMinWidth - imgBounds.width()) / 2.f, 0);
-						}
 						if (i == 0) {
-							imgBounds.set(imgBounds.left - 2, imgBounds.top, imgBounds.right + imgMargin, imgBounds.bottom);
+							imgBounds.set(imgBounds.left - 2, imgBounds.top, imgBounds.right + 2, imgBounds.bottom);
+							canvas.translate(-imgBounds.left, 0);
 						} else {
-							imgBounds.inset(-imgMargin, 0);
+							canvas.translate(-laneHalfSize, 0);
 						}
 
-						canvas.translate(-imgBounds.left, 0);
-
+						// 1st pass
 						if (thirdTurnPath != null) {
-							canvas.drawPath(thirdTurnPath, paintSecondTurn);
+							//canvas.drawPath(thirdTurnPath, paintSecondTurn);
 							canvas.drawPath(thirdTurnPath, paintBlack);
 						}
 						if (secondTurnPath != null) {
-							canvas.drawPath(secondTurnPath, paintSecondTurn);
+							//canvas.drawPath(secondTurnPath, paintSecondTurn);
 							canvas.drawPath(secondTurnPath, paintBlack);
 						}
 						if (firstTurnPath != null) {
-							canvas.drawPath(firstTurnPath, paintRouteDirection);
+							//canvas.drawPath(firstTurnPath, paintRouteDirection);
 							canvas.drawPath(firstTurnPath, paintBlack);
 						}
 
-						canvas.translate(imgBounds.right, 0);
+						// 2nd pass
+						if (thirdTurnPath != null) {
+							canvas.drawPath(thirdTurnPath, paintSecondTurn);
+						}
+						if (secondTurnPath != null) {
+							canvas.drawPath(secondTurnPath, paintSecondTurn);
+						}
+						if (firstTurnPath != null) {
+							canvas.drawPath(firstTurnPath, paintRouteDirection);
+						}
+
+						canvas.translate(laneHalfSize + delta, 0);
 					}
 				}
 				canvas.restore();
