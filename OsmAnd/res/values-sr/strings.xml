@@ -1212,7 +1212,7 @@
     <string name="settings_direction_style_descr">Изаберите начин изражавања односних праваца приликом кретања</string>
     <string name="map_underlay_descr">Изаберите карту подножја</string>
     <string name="map_overlay_descr">Изаберите карту прочеља</string>
-    <string name="daynight_descr">Изаберите правило дневног/ноћног приказа</string>
+    <string name="daynight_descr">Одаберите правило дневног/ноћног приказа.</string>
     <string name="renderers_descr">Изаберите изглед приказа</string>
     <string name="background_service_provider_descr">Изаберите достављача положаја позадинске услуге</string>
     <string name="transport_stop_to_go_out">Изаберите стајалиште за излаз</string>
@@ -1478,4 +1478,16 @@
     <string name="rendering_attr_depthContours_description">Приказуј обрисе и тачке дубине</string>
     <string name="rendering_attr_depthContours_name">Обриси поморске дубине</string>
     <string name="shared_string_paused">Заустављено</string>
+    <string name="appearance_on_the_map">Изглед на мапи</string>
+    <string name="shared_string_right">Десно</string>
+    <string name="shared_string_left">Лево</string>
+    <string name="coordinate_input_accuracy">%1$d цифара</string>
+    <string name="go_to_next_field">Иди на следеће поље</string>
+    <string name="tap_on_map_to_hide_interface">Режим преко целог екрана</string>
+    <string name="traffic_warning_payment">Наплата путарине</string>
+    <string name="daynight_mode_day">Дан</string>
+    <string name="daynight_mode_night">Ноћ</string>
+    <string name="daynight_mode_auto">Излазак/залазак сунца</string>
+    <string name="daynight_mode_sensor">Сензор светла</string>
+    <string name="daynight">Дневни/ноћни режим рада</string>
     </resources>
