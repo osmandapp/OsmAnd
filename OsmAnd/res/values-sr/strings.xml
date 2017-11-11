@@ -1490,4 +1490,5 @@
     <string name="daynight_mode_auto">Излазак/залазак сунца</string>
     <string name="daynight_mode_sensor">Сензор светла</string>
     <string name="daynight">Дневни/ноћни режим рада</string>
+    <string name="none_point_error">Молим додајте бар једну тачку.</string>
     </resources>
