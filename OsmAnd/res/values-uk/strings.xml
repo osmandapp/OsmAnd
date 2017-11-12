@@ -3079,4 +3079,6 @@
     <string name="coordinate_input_accuracy">%1$d цифр</string>
     <string name="go_to_next_field">Перейти до наступного поля</string>
     <string name="rename_marker">Перейменувати маркер</string>
+    <string name="appearance_on_the_map">Поява на мапі</string>
+    <string name="add_track_to_markers_descr">Вибрати трек шляхових точок, з яких OsmAnd буде додавати маркери</string>
     </resources>
