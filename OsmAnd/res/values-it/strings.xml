@@ -379,7 +379,7 @@ La memoria utilizzata è  {1} MB.
     <string name="search_poi_filter">Filtro</string>
     <string name="menu_mute_off">L\'audio è attivato</string>
     <string name="menu_mute_on">Audio disattivato</string>
-    <string name="voice_provider_descr">Scegli la voce da utilizzare per la navigazione</string>
+    <string name="voice_provider_descr">Scegli la voce guida da utilizzare per la navigazione.</string>
     <string name="voice_provider">Guida vocale</string>
     <string name="voice_data_initializing">File voce in preparazione…</string>
     <string name="voice_data_not_supported">Versione di dati vocali non supportata</string>
@@ -511,11 +511,11 @@ La memoria utilizzata è  {1} MB.
     <string name="auto_zoom_map_descr">Zoom mappa automatico in base alla velocità (fintanto che la mappa è sincronizzata con la posizione corrente)</string>
     <string name="auto_zoom_map">Zoom automatico mappa</string>
     <string name="additional_settings">Impostazioni aggiuntive</string>
-    <string name="save_current_track_descr">Salva adesso la traccia corrente nella scheda SD</string>
+    <string name="save_current_track_descr">Salva adesso la traccia corrente nella scheda SD.</string>
     <string name="save_current_track">Salva la traccia corrente</string>
-    <string name="save_track_interval_descr">Scegli l\'intervallo di registrazione per la traccia durante la navigazione</string>
+    <string name="save_track_interval_descr">Scegli l\'intervallo di registrazione per la traccia durante la navigazione.</string>
     <string name="save_track_interval">Intervallo di registrazione durante la navigazione</string>
-    <string name="save_track_to_gpx_descrp">Le tracce saranno salvate automaticamente nella cartella tracce durante la navigazione</string>
+    <string name="save_track_to_gpx_descrp">Durante la navigazione, la traccia GPX, sarà salvata automaticamente nella cartella tracce.</string>
     <string name="save_track_to_gpx">Registrazione automatica della traccia durante la navigazione</string>
     <string name="update_tile">Aggiorna mappa</string>
     <string name="reload_tile">Ricarica tasselli</string>
@@ -1058,7 +1058,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="hno">Numero civico</string>
 
     <string name="monitoring_settings">Registrazione viaggio</string>
-    <string name="monitoring_settings_descr">Configura come registrare i tuoi viaggi</string>
+    <string name="monitoring_settings_descr">Configura come registrare i tuoi viaggi.</string>
 
 
     <string name="choose_osmand_theme_descr">Scegli il tema dell\'applicazione</string>
@@ -1203,7 +1203,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="complex_route_calculation_failed">Calcolo veloce del percorso fallita (%s), rinvio al calcolo lento.</string>
     <string name="disable_complex_routing_descr">Disabilita il calcolo del percorso in due fasi per l\'uso in automobile</string>
     <string name="disable_complex_routing">Disabilita il calcolo complesso del percorso</string>
-    <string name="speech_rate_descr">Imposta la velocità della sintesi vocale (TTS)</string>
+    <string name="speech_rate_descr">Imposta la velocità della sintesi vocale TTS.</string>
     <string name="speech_rate">Velocità di lettura</string>
     <string name="guidance_preferences_descr">Preferenze di navigazione</string>
     <string name="routing_preferences_descr">Preferenze di calcolo del percorso</string>
@@ -1217,19 +1217,19 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="copying_osmand_files">Copia dei file di dati di OsmAnd…</string>
     <string name="calculate_osmand_route_gpx">Calcola percorso OsmAnd offline</string>
     <string name="routing_attr_prefer_motorway_name">Preferisci le autostrade</string>
-    <string name="routing_attr_prefer_motorway_description">Preferisci le autostrade</string>
+    <string name="routing_attr_prefer_motorway_description">Preferisci le autostrade.</string>
     
     
     <string name="routing_attr_avoid_toll_name">Evita strade a pedaggio</string>
-    <string name="routing_attr_avoid_toll_description">Evita strade a pedaggio</string>
+    <string name="routing_attr_avoid_toll_description">Evita strade a pedaggio.</string>
     <string name="routing_attr_avoid_unpaved_name">Evita strade non pavimentate</string>
-    <string name="routing_attr_avoid_unpaved_description">Evita strade non pavimentate</string>
+    <string name="routing_attr_avoid_unpaved_description">Evita strade non pavimentate.</string>
     <string name="routing_attr_avoid_ferries_name">Evita i traghetti</string>
-    <string name="routing_attr_avoid_ferries_description">Evita i traghetti</string>
+    <string name="routing_attr_avoid_ferries_description">Evita i traghetti.</string>
     <string name="routing_attr_avoid_motorway_name">Evita le autostrade</string>
-    <string name="routing_attr_avoid_motorway_description">Evita le autostrade</string>
+    <string name="routing_attr_avoid_motorway_description">Evita le autostrade.</string>
     <string name="routing_attr_weight_name">Limite di peso</string>
-    <string name="routing_attr_weight_description">Specifica il peso del veicolo consentito sulle strade</string>
+    <string name="routing_attr_weight_description">Specifica il peso del veicolo consentito nei percorsi.</string>
     <string name="select_gpx">Scegli GPX…</string>
     <string name="route_descr_select_destination">Scegli la destinazione</string>
     <string name="route_preferences">Preferenze di percorso</string>
@@ -1301,7 +1301,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="share_route_subject">Percorso condiviso tramite OsmAnd</string>
     <string name="navigation_intent_invalid">Formato non valido: %s</string>
     <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
-    <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
+    <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale.</string>
     <string name="osmo_plugin_description">Questo componente aggiuntivo fornisce parzialmente le funzionalità del monitoraggio di OpenStreetMap, vedi http://osmo.mobi.
 \n
 \nPuoi tracciare in tempo reale tutti i dispositivi di un gruppo di partecipanti. Puoi anche visualizzare i punti e le tracce caricate dal gruppo a cui appartieni.
@@ -1351,7 +1351,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="osmo_session_id_share">Url della sessione per tracciare il dispositivo (%1$s)</string>
     <string name="osmo_tracker_id_share">Per collegarsi al dispositivo desiderato %2$s, tappa sul link %3$s o specificarne l\'id di monitoraggio (%1$s)</string>
     <string name="osmo_track_interval">Intervallo di registrazione</string>
-    <string name="osmo_track_interval_descr">Scegli l\'intervallo di tempo per l\'invio della posizione</string>
+    <string name="osmo_track_interval_descr">Scegli l\'intervallo di tempo per l\'invio della posizione.</string>
     <string name="int_days">giorni</string>
     <string name="osmo_connect_menu">Connetti</string>
     <string name="osmo_expire_group">Scade fra</string>
@@ -1399,7 +1399,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="osmo_show_group_notifications">Mostra le notifiche del gruppo</string>
 
 
-    <string name="osmo_show_group_notifications_descr">Mostra un messaggio di notifica quando l\'utente aderisce o lascia il gruppo</string>
+    <string name="osmo_show_group_notifications_descr">Mostra un messaggio di notifica quando l\'utente si unisce o lascia il gruppo.</string>
     <string name="gpx_file_is_empty">La traccia GPX è vuota</string>
     <string name="gpx_info_start_time">Orario di partenza: %1$tF, %1$tT </string>
     <string name="gpx_info_average_speed">Velocità media: %1$s </string>
@@ -1429,9 +1429,9 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="map_widget_plain_time">Orario attuale</string>
     <string name="save_as_favorites_points">Salva come gruppo di preferiti</string>
     <string name="select_destination_and_intermediate_points">Scegli le destinazioni</string>
-    <string name="layer_amenity_label">Etichette dei punti</string>
+    <string name="layer_amenity_label">Sovrapposizione etichette PDI</string>
     <string name="show_zoom_buttons_navigation">Mostra i pulsanti dello zoom</string>
-    <string name="show_zoom_buttons_navigation_descr">Mostra i pulsanti dello zoom durante la navigazione</string>
+    <string name="show_zoom_buttons_navigation_descr">Mostra i pulsanti dello zoom durante la navigazione.</string>
 
     <string name="sort_by_distance">Ordina per distanza</string>
     <string name="sort_by_name">Ordina per nome</string>
@@ -1441,7 +1441,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="route_descr_destination">Destinazione</string>
     <string name="no_index_file_to_download">Non è stato trovato niente da scaricare, per favore controllare la connessione internet.</string>
     <string name="osmo_gpx_points_downloaded">Scaricati %1$s punti OsMo.</string>
-    <string name="osmo_auto_connect_descr">Connettiti al servizio automaticamente dopo l\'accensione</string>
+    <string name="osmo_auto_connect_descr">Connettiti al servizio automaticamente dopo l\'accensione.</string>
     <string name="osmo_auto_connect">Connesione automatica</string>
     <string name="osmo_start_service">Servizio OsMo</string>
     <string name="osmo_gpx_track_downloaded">Scaricate %1$s tracce OsMo.</string>
@@ -1479,7 +1479,7 @@ Vuoi procedere con una nuova registrazione?</string>
     <string name="rendering_attr_showSurfaces_name">Mostra il tipo di superficie delle strade</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostra i percorsi per bicicletta</string>
     <string name="osmo_auth_error_short">Autorizzazione fallita</string>
-    <string name="map_preferred_locale_descr">Lingua preferita per le etichette della mappa (se non disponibile si opterà per l\'inglese o i nomi locali)</string>
+    <string name="map_preferred_locale_descr">Lingua preferita per le etichette della mappa (se non disponibile si opterà per l\'inglese o i nomi locali).</string>
     <string name="map_preferred_locale">Lingua della mappa preferita</string>
     <string name="local_map_names">Nomi locali</string>
     <string name="lang_sw">Swahili</string>
@@ -1547,11 +1547,11 @@ Vuoi procedere con una nuova registrazione?</string>
     <string name="duration">Durata</string>
     <string name="distance">Distanza</string>
     <string name="save_track_to_gpx_globally">Registra la traccia in un file GPX</string>
-    <string name="save_track_to_gpx_globally_descr">La registrazione della posizione in un file GPX può essere accesa o spenta dal widget registrazione GPX sulla schermata della mappa</string>
+    <string name="save_track_to_gpx_globally_descr">La registrazione della posizione in un file GPX può essere accesa o spenta dal widget registrazione GPX sulla schermata della mappa.</string>
     <string name="save_track_interval_globally">Intervallo registrazione</string>
     <string name="rendering_attr_publicTransportMode_name">Percorsi bus, filubus, servizi navetta</string>
     <string name="confirm_every_run">Chiedi sempre</string>
-    <string name="save_global_track_interval_descr">Scegli l\'intervallo di tempo predefinito per la registrazione del percorso (abilitata attraverso il widget registrazione GPX sulla mappa)</string>
+    <string name="save_global_track_interval_descr">Scegli l\'intervallo di tempo per la registrazione del percorso (abilitata attraverso il widget registrazione GPX sulla mappa).</string>
     <string name="save_global_track_interval">Intervallo predefinito di registrazione</string>
     <string name="traffic_warning_speed_limit">Limite di velocità</string>
     <string name="traffic_warning_payment">Casello</string>
@@ -1600,7 +1600,7 @@ Vuoi procedere con una nuova registrazione?</string>
     <string name="impassable_road">Evita strade…</string>
     <string name="rendering_category_hide">Nascondi</string>
     <string name="wake_on_voice">Accendi lo schermo</string>
-    <string name="wake_on_voice_descr">Accendi lo schermo (se spento) all\'approssimarsi di una svolta</string>
+    <string name="wake_on_voice_descr">Accendi lo schermo (se spento) all\'approssimarsi di una svolta.</string>
     <string name="lock_screen_request_explanation">%1$s necessita di questa autorizzazione per spegnere lo schermo per la funzionalità di risparmio energetico.</string>
 
     
@@ -1612,7 +1612,7 @@ Vuoi procedere con una nuova registrazione?</string>
 
     <string name="error_avoid_specific_road">Nessuna alternativa trovata</string>
     <string name="use_opengl_render">Utilizzare il rendering OpenGL</string>
-    <string name="use_opengl_render_descr">Utilizzare il rendering OpenGL accelerato via hardware (potrebbe non funzionare in alcuni dispositivi)</string>
+    <string name="use_opengl_render_descr">Utilizzare il rendering OpenGL accelerato via hardware (potrebbe non funzionare in alcuni dispositivi).</string>
     <string name="everything_up_to_date">Tutti i file sono aggiornati</string>
     <string name="no_internet_connection">Non è possibile scaricare. Prego, verifica la connessione a internet.</string>
     <string name="download_tab_downloads">Tutti i download</string>
@@ -1634,7 +1634,7 @@ Vuoi procedere con una nuova registrazione?</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlante strade tedesche</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlante strade americane</string>
     <string name="routing_attr_no_new_routing_name">Ignora le regole di calcolo del percorso v1.9</string>
-    <string name="routing_attr_no_new_routing_description">Non usare le regole di calcolo del percorso introdotte nella v1.9</string>
+    <string name="routing_attr_no_new_routing_description">Non usare le regole di calcolo del percorso introdotte nella v1.9.</string>
     <string name="traffic_warning_railways">Passaggio a livello</string>
     <string name="traffic_warning_pedestrian">Attraversamento pedonale</string>
     <string name="show_railway_warnings">Passaggi a livello</string>
@@ -1645,17 +1645,17 @@ Vuoi procedere con una nuova registrazione?</string>
     <string name="avoid_roads_msg">Puoi variare il percorso selezionando le strade da evitare</string>
     <string name="save_track_to_gpx_globally_headline">Registrazione della traccia su richiesta</string>
 
-    <string name="enable_proxy_title">Abilita proxy HTTP</string>
-    <string name="enable_proxy_descr">Configura il proxy HTTP per tutte le richieste della rete</string>
+    <string name="enable_proxy_title">Abilita Proxy HTTP</string>
+    <string name="enable_proxy_descr">Configura un proxy HTTP per tutte le richieste della rete.</string>
     <string name="proxy_host_title">Host del proxy</string>
-    <string name="proxy_host_descr">Configura l\'hostname del tuo proxy (es. 127.0.0.1)</string>
+    <string name="proxy_host_descr">Configura l\'hostname del tuo proxy (es. 127.0.0.1).</string>
     <string name="proxy_port_title">Porta proxy</string>
-    <string name="proxy_port_descr">Configura il numero di porta del tuo proxy (es. 8118)</string>
-    <string name="proxy_pref_descr">Imposta una connessione a internet tramite proxy</string>
+    <string name="proxy_port_descr">Configura il numero di porta del tuo proxy (es. 8118).</string>
+    <string name="proxy_pref_descr">Imposta una connessione a Internet proxy.</string>
     <string name="settings_privacy">Privacy</string>
     <string name="rendering_attr_streetLighting_name">Illuminazione stradale</string>
     <string name="proxy_pref_title">Proxy</string>
-    <string name="version_settings_descr">Download versioni di sviluppo</string>
+    <string name="version_settings_descr">Download versioni di sviluppo.</string>
     <string name="version_settings">Versioni</string>
     <string name="points">Punti</string>
 
@@ -1844,9 +1844,9 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="storage_directory_multiuser">Memorizzazione multiutente</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numeri civici</string>
 
-    <string name="routing_attr_avoid_borders_description">Evita l\'attraversamento di una frontiera verso un\'altra nazione</string>
+    <string name="routing_attr_avoid_borders_description">Evita l\'attraversamento di una frontiera verso un\'altra nazione.</string>
     <string name="routing_attr_height_name">Limite di altezza</string>
-    <string name="routing_attr_height_description">Specifica l\'altezza del veicolo che deve essere permessa sui percorsi</string>
+    <string name="routing_attr_height_description">Specifica l\'altezza del veicolo che deve essere permessa nei percorsi.</string>
     <string name="use_fast_recalculation">Ricalcolo percorso intelligente</string>
     <string name="use_fast_recalculation_desc">Ricalcola solo la prima parte del percorso per i viaggi lunghi</string>
     <string name="osmo_share_my_location">Invia la posizione</string>
@@ -2111,7 +2111,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="dashboard_or_drawer_title">Pannello di controllo o menù</string>
     <string name="please_specify_poi_type_only_from_list">Specifica il corretto tipo di PDI o salta questo passaggio.</string>
     <string name="routing_attr_avoid_stairs_name">Evita le scale</string>
-	<string name="routing_attr_avoid_stairs_description">Evita le scale</string>
+	<string name="routing_attr_avoid_stairs_description">Evita le scale.</string>
 	<string name="release_2_2">\\022 Nuova interfaccia utente sensibile al contesto per le località selezionate sulla mappa e negli altri schermi
 \n
 \n
