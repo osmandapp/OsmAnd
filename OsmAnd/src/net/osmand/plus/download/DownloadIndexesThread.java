@@ -525,7 +525,7 @@ public class DownloadIndexesThread {
 							}
 							filesToReindex.clear();
 							// slow down but let update all button work properly
-							indexes.updateFilesToUpdate();;
+							indexes.updateFilesToUpdate();
 						}
 					}
 				} finally {

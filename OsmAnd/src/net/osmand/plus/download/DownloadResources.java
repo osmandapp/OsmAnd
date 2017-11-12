@@ -181,7 +181,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	
 
 	protected void updateFilesToUpdate() {
-		initAlreadyLoadedFiles();;
+		initAlreadyLoadedFiles();
 		recalculateFilesToUpdate();
 	}
 
