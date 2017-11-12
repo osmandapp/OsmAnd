@@ -2951,6 +2951,6 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="distance_indication_descr">選擇您希望如何檢視活動標記的距離。</string>
     <string name="active_markers_descr">選擇您想看到多少的方向指標。</string>
     <string name="empty_state_markers_history_desc">標記為已通過的標點將顯現在此螢幕上。</string>
-    <string name="show_guide_line_descr">把您位置連接到活動標記位置的一條線將會顯示在地圖上。</string>
-    <string name="show_arrows_descr">一個或兩個指示活動標記方向的箭頭將會顯示在地圖上。</string>
+    <string name="show_guide_line_descr">把您位置連接到活動標記位置的一條線，將會顯示在地圖上。</string>
+    <string name="show_arrows_descr">一個或兩個指示活動標記方向的箭頭，將會顯示在地圖上。</string>
     </resources>
