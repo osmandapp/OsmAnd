@@ -761,7 +761,7 @@ public class MapMarkersHelper {
 	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group, boolean enabled) {
 		if (points.size() > 0) {
 			int colorIndex = -1;
-			List<MapMarker> mapMarkers = new ArrayList<>();
+			List<MapMarker> addedMarkers = new ArrayList<>();
 			for (int i = 0; i < points.size(); i++) {
 				LatLon point = points.get(i);
 				PointDescription historyName = historyNames.get(i);
@@ -799,11 +799,11 @@ public class MapMarkersHelper {
 				if (enabled) {
 					mapMarkers.add(0, marker);
 				}
-				mapMarkers.add(marker);
+				addedMarkers.add(marker);
 				reorderActiveMarkersIfNeeded();
 				lookupAddress(marker);
 			}
-			addMarkersToGroups(mapMarkers, enabled);
+			addMarkersToGroups(addedMarkers, enabled);
 		}
 	}
 
