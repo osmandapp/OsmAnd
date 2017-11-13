@@ -15,9 +15,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
 
-public abstract class AddMarkersGroupBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "AddMarkersGroupBottomSheetDialogFragment";
+	public static final String TAG = "AddGroupBottomSheetDialogFragment";
 
 	private AddGroupListener listener;
 	protected View mainView;

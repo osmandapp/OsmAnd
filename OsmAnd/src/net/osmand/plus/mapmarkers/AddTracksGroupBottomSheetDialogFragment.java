@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AddTracksGroupBottomSheetDialogFragment extends AddMarkersGroupBottomSheetDialogFragment {
+public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheetDialogFragment {
 
 	private ProcessGpxTask asyncProcessor;
 	private List<GpxDataItem> gpxList = new ArrayList<>();

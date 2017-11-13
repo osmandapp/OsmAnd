@@ -66,9 +66,9 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		if (selectionMarkersGroupFragment != null) {
 			((SelectionMarkersGroupBottomSheetDialogFragment) selectionMarkersGroupFragment).setListener(createAddMarkersGroupFragmentListener());
 		}
-		Fragment addGroupFragment = getChildFragmentManager().findFragmentByTag(AddMarkersGroupBottomSheetDialogFragment.TAG);
+		Fragment addGroupFragment = getChildFragmentManager().findFragmentByTag(AddGroupBottomSheetDialogFragment.TAG);
 		if (addGroupFragment != null) {
-			((AddMarkersGroupBottomSheetDialogFragment) addGroupFragment).setListener(createAddGroupListener());
+			((AddGroupBottomSheetDialogFragment) addGroupFragment).setListener(createAddGroupListener());
 		}
 
 		final EmptyStateRecyclerView recyclerView = (EmptyStateRecyclerView) mainView.findViewById(R.id.list);
@@ -297,14 +297,14 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		fragment.show(getChildFragmentManager(), SelectionMarkersGroupBottomSheetDialogFragment.TAG);
 	}
 
-	private void openAddGroupMenu(AddMarkersGroupBottomSheetDialogFragment fragment) {
+	private void openAddGroupMenu(AddGroupBottomSheetDialogFragment fragment) {
 		fragment.setListener(createAddGroupListener());
 		fragment.setUsedOnMap(false);
-		fragment.show(getChildFragmentManager(), AddMarkersGroupBottomSheetDialogFragment.TAG);
+		fragment.show(getChildFragmentManager(), AddGroupBottomSheetDialogFragment.TAG);
 	}
 
-	private AddMarkersGroupBottomSheetDialogFragment.AddGroupListener createAddGroupListener() {
-		return new AddMarkersGroupBottomSheetDialogFragment.AddGroupListener() {
+	private AddGroupBottomSheetDialogFragment.AddGroupListener createAddGroupListener() {
+		return new AddGroupBottomSheetDialogFragment.AddGroupListener() {
 			@Override
 			public void onGroupAdded() {
 				updateAdapter();

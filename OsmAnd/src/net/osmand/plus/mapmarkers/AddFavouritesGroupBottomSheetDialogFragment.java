@@ -8,7 +8,7 @@ import net.osmand.plus.mapmarkers.adapters.FavouritesGroupsAdapter;
 
 import java.util.List;
 
-public class AddFavouritesGroupBottomSheetDialogFragment extends AddMarkersGroupBottomSheetDialogFragment {
+public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomSheetDialogFragment {
 
 	private List<FavoriteGroup> favoriteGroups;
 
