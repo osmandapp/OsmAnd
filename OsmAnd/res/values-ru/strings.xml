@@ -2561,4 +2561,29 @@
     <string name="wrong_format">Неправильный формат</string>
     <string name="enter_new_name">Введите новое имя</string>
 	<string name="shared_string_back">Назад</string>
-	</resources>
+	<string name="appearance_on_the_map">Внешний вид на карте</string>
+    <string name="add_favourites_group_to_markers_descr">Выберите какой группы избранных вы хотите добавить маркеры</string>
+    <string name="favourites_group">Группа избранных</string>
+    <string name="add_group">Добавить группу</string>
+    <string name="add_group_descr">Вы можете добавить группу из избранных или путевых точек.</string>
+    <string name="empty_state_markers_active">Маркеры на карте!</string>
+    <string name="empty_state_markers_active_desc">Отмечайте места на карте нажатием.</string>
+    <string name="empty_state_markers_groups">Импорт групп</string>
+    <string name="empty_state_markers_groups_desc">Вы можете импортировать группы избранных или путевых точек как маркеры.</string>
+    <string name="empty_state_markers_history_desc">На этом экране появятся маркеры, отмеченные как пройденные.</string>
+    <string name="shared_string_two">Два</string>
+    <string name="shared_string_one">Один</string>
+    <string name="show_guide_line_descr">На карте будет показана линия, соединяющая ваше местоположение с местоположениями активных маркеров.</string>
+    <string name="show_arrows_descr">На карте будут показаны одна или две стрелки, указывающие направление на активные маркеры.</string>
+    <string name="distance_indication_descr">Выберите способ просмотра расстояния до активных маркеров.</string>
+    <string name="active_markers_descr">Выберите сколько индикаторов направления вы хотели бы видеть.</string>
+    <string name="digits_quantity">Количество цифр</string>
+    <string name="shared_string_paste">Вставить</string>
+    <string name="coordinate_input_accuracy_description">Автоматически переключаться на следующее поле после ввода %1$d цифр после десятичной точки</string>
+    <string name="coordinate_input_accuracy">%1$d цифр</string>
+    <string name="go_to_next_field">Перейти к следующему полю</string>
+    <string name="rename_marker">Переименовать маркер</string>
+    <string name="tap_on_map_to_hide_interface">Полноэкранный режим</string>
+    <string name="mark_passed">Отметить пройденным</string>
+    <string name="import_track_desc">Файл %1$s не содержит путевых точек, импортировать его как трек?</string>
+    </resources>
