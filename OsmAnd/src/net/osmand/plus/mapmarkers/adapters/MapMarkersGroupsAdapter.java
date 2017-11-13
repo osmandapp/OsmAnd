@@ -417,6 +417,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						group.setDisabled(!enabled);
 						app.getMapMarkersHelper().updateGroupDisabled(group, !enabled);
 						populateAdapterWithGroupMarkers(group, headerViewHolder.getAdapterPosition() + 1);
+						updateShowDirectionMarkers();
 						notifyDataSetChanged();
 						if (!enabled) {
 							snackbar = Snackbar.make(holder.itemView, app.getString(R.string.group_will_be_removed_after_restart), Snackbar.LENGTH_LONG)
