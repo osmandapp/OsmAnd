@@ -282,7 +282,7 @@ public class MapMarkersHelper {
 	}
 
 	private void removeFromMapMarkersList(MapMarker marker) {
-		List<MapMarker> copyList = new ArrayList<>();
+		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
 		copyList.remove(marker);
 		mapMarkers = copyList;
 	}
@@ -302,7 +302,7 @@ public class MapMarkersHelper {
 	}
 
 	private void addToMapMarkersList(int position, List<MapMarker> markers) {
-		List<MapMarker> copyList = new ArrayList<>();
+		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
 		copyList.addAll(position, markers);
 		mapMarkers = copyList;
 	}
