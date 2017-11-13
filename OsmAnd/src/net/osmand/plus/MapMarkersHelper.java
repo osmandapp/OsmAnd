@@ -390,6 +390,10 @@ public class MapMarkersHelper {
 		return markersDbHelper.getGroup(id) != null;
 	}
 
+	public boolean isGroupDisabled(String id) {
+		return markersDbHelper.isGroupDisabled(id);
+	}
+
 	public void syncAllGroups() {
 		List<MarkersSyncGroup> groups = markersDbHelper.getAllGroups();
 		for (MarkersSyncGroup gr : groups) {
@@ -721,7 +725,7 @@ public class MapMarkersHelper {
 			if (removeActiveMarkers) {
 				removeActiveMarkersFromSyncGroup(id);
 			}
-			MapMarkersGroup group = getMapMarkerGroupByName(id);
+			MapMarkersGroup group = getMapMarkerGroupByKey(id);
 			if (group != null) {
 				mapMarkersGroups.remove(group);
 			}
@@ -1161,19 +1165,6 @@ public class MapMarkersHelper {
 
 		for (MapMarkersGroup group : mapMarkersGroups) {
 			createHeaderAndHistoryButtonInGroup(group);
-		}
-	}
-
-	public void loadMapMarkersFromSelectedGpx() {
-		List<SelectedGpxFile> selectedGpxFiles = ctx.getSelectedGpxHelper().getSelectedGPXFiles();
-		for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
-			GPXFile gpx = selectedGpxFile.getGpxFile();
-			if (gpx.getPoints().size() > 0) {
-				File gpxFile = new File(gpx.path);
-				final MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpxFile.getAbsolutePath(), AndroidUtils.trimExtension(gpxFile.getName()), MarkersSyncGroup.GPX_TYPE);
-				addMarkersSyncGroup(syncGroup);
-				syncGroup(syncGroup, false);
-			}
 		}
 	}
 

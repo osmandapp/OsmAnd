@@ -482,7 +482,7 @@ public class GpxSelectionHelper {
 				selectedGPXFiles.remove(sf);
 			}
 		}
-		syncGpx(gpx);
+		syncGpx(gpx, true);
 		return sf;
 	}
 
@@ -514,10 +514,25 @@ public class GpxSelectionHelper {
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
+		syncGpx(gpxFile, false);
+	}
+
+	private void syncGpx(GPXFile gpxFile, boolean createOrDeleteGroup) {
 		File gpx = new File(gpxFile.path);
 		if (gpx.exists()) {
-			app.getMapMarkersHelper().syncGroup(new MarkersSyncGroup(gpx.getAbsolutePath(),
-					AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE));
+			MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
+			MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(), AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
+			boolean enabled = true;
+			if (createOrDeleteGroup) {
+				boolean show = getSelectedFileByPath(gpx.getAbsolutePath()) != null;
+				enabled = mapMarkersHelper.isGroupSynced(gpx.getAbsolutePath());
+				if (show && !enabled) {
+					mapMarkersHelper.addMarkersSyncGroup(syncGroup);
+				} else if (!show && mapMarkersHelper.isGroupDisabled(gpx.getAbsolutePath())) {
+					mapMarkersHelper.removeMarkersSyncGroup(gpx.getAbsolutePath(), true);
+				}
+			}
+			mapMarkersHelper.syncGroup(syncGroup, enabled);
 		}
 	}
 
