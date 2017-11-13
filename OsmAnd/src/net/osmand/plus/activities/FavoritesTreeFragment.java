@@ -8,6 +8,7 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -535,7 +536,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	}
 
 	private void importFavourites() {
-		((FavoritesActivity) getActivity()).importFavourites();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			((FavoritesActivity) getActivity()).importFavourites();
+		}
 	}
 
 	public void shareFavorites(final FavoriteGroup group) {

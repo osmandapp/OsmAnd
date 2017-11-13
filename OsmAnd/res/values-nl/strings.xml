@@ -2621,7 +2621,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_btn_tutorial_title">Positie van de Sneltoets wijzigen</string>
     <string name="quick_action_btn_tutorial_descr">De sneltoets lang indrukken en slepen om de positie te wijzigen</string>
 	<string name="shared_string_action_name">Titel voor de Actie (eventueel wijzigen)</string>
-<string name="rendering_attr_depthContours_description">Toon dieptelijnen en -punten</string>
+<string name="rendering_attr_depthContours_description">Toon dieptelijnen en -punten.</string>
     <string name="rendering_attr_depthContours_name">Zeedieptelijnen</string>
 	<string name="select_gpx_folder">Kies map voor GPX-tracks</string>
     <string name="file_can_not_be_moved">Bestand kan niet verplaatst worden.</string>
@@ -2812,10 +2812,10 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
 \n OsmAnd is open-source wordt actief ontwikkeld. iedereen kan bijdragen door bugs te melsen, de vertaling te verbeteren of nieuwe functies te programmeren. Het project wordt druk verbeterd door al deze vormen van interactie met gebruikers. Het project is tevens afhankelijk van financiële bijdragen om programmeer- en testwerk te kunnen bekostigen. "</string>
     <string name="shared_string_reset">Reset</string>
     <string name="shared_string_reload">Opnieuw laden</string>
-    <string name="wrong_user_name">Foute gebruikersnaam!</string>
+    <string name="wrong_user_name">Verkeerde gebruikersnaam!</string>
     <string name="shared_string_to">Tot</string>
     <string name="mapillary_menu_date_from">Van</string>
-    <string name="mapillary_menu_descr_dates">Bekijk foto\'s die in een bepaalde periode gemaakt zijn.</string>
+    <string name="mapillary_menu_descr_dates">Bekijk alleen toegevoegde afbeeldingen</string>
     <string name="mapillary_menu_title_dates">Data</string>
     <string name="mapillary_menu_edit_text_hint">Geef gebruikersnaam</string>
     <string name="mapillary_menu_title_username">Gebruikersnaam</string>
@@ -2903,7 +2903,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="store_tracks_in_monthly_directories_descrp">Bewaar opgenomen sporen in een map voor elke maand (bijvoorbeeld 2017-01).</string>
     <string name="mapillary_menu_descr_tile_cache">Herlaad de tegels om de gegevens te verversen.</string>
     <string name="mapillary_menu_title_tile_cache">Tegel-cache</string>
-    <string name="mapillary_menu_descr_username">Bekijk foto\'s die door een bepaalde gebruiker zijn toegevoegd.</string>
+    <string name="mapillary_menu_descr_username">Alleen afbeeldingen bekijken die zijn toegevoegd door</string>
     <string name="rendering_value_translucent_pink_name">Transparant roze</string>
     <string name="ascent_descent">Stijgen/Dalen</string>
     <string name="moving_time">Tijd in beweging</string>
@@ -2964,4 +2964,20 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="import_as_gpx">importeer als GPX bestand</string>
     <string name="import_as_favorites">Importeer als Favorieten</string>
     <string name="import_file">Importeer bestand</string>
-	</resources>
+	<string name="appearance_on_the_map">Uiterlijk op de kaart</string>
+    <string name="favourites_group">Favorieten groep</string>
+    <string name="add_group">Groep toevoegen</string>
+    <string name="empty_state_markers_active">Markeringen op de kaart!</string>
+    <string name="shared_string_two">Twee</string>
+    <string name="shared_string_one">Een</string>
+    <string name="active_markers_descr">Kies hoeveel richtingaanwijzers u wilt zien.</string>
+    <string name="digits_quantity">Aantal cijfers</string>
+    <string name="shared_string_right">Rechts</string>
+    <string name="shared_string_left">Links</string>
+    <string name="shared_string_paste">Plakken</string>
+    <string name="coordinate_input_accuracy_description">Automatisch overschakelen naar het volgende veld na het invoeren van %1$d cijfers achter het decimaalteken</string>
+    <string name="coordinate_input_accuracy">%1$d cijfers</string>
+    <string name="go_to_next_field">Ga naar het volgende veld</string>
+    <string name="rename_marker">Markering hernoemen</string>
+    <string name="plan_route_no_markers_toast">U moet ten minste één markering toevoegen om deze functie te gebruiken.</string>
+    </resources>

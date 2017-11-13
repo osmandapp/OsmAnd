@@ -210,7 +210,7 @@ Chočacie zarehіstravacca іznoŭ?</string>
     <string name="show_zoom_buttons_navigation">Pakazvać knopkі maštabavańnia</string>
     <string name="save_as_favorites_points">Zachavać jak hrupu ŭlubionych</string>
     <string name="select_destination_and_intermediate_points">Vybierycie pryznačeńnie</string>
-    <string name="layer_amenity_label">Nazvy punktaŭ</string>
+    <string name="layer_amenity_label">Nazvy POI-nakladki</string>
     <string name="loading_smth">Čytańnie %1$s…</string>
     <string name="map_widget_plain_time">Ciapierašni čas</string>
     <string name="gpx_wpt">Punkt šlachu</string>
@@ -1034,7 +1034,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="gpx_monitoring_disabled_warn">Zapіsvajcie śled vykarystoŭvajučy GPX-vіdžet cі punkt meniu \"Zapіs padarožža\".</string>
 	<string name="show_current_gpx_title">Pakazać biahučy śled</string>
 	    
-	<string name="free_version_message">Hetaja biasplatnaja viersija OsmAnd abmiažoŭvajecca %1$s cciahvanniami map (ukliučajučy abnaŭlienni) i nie padtrymlivaje aŭtanomnyja artykuly Vikipiedyi.</string>
+	<string name="free_version_message">Hetaja biasplatnaja viersija OsmAnd abmiažoŭvajecca %1$s cciahvanniami map (dadannie ci abnaŭliennie) i nie padtrymlivaje aŭtanomnyja artykuly Vikipiedyi.</string>
 	<string name="free_version_title">Biaspłatnaja versіja</string>
 	<string name="poi_context_menu_showdescription">Pakazvać apisanni POI.</string>
 	<string name="index_name_north_america">Paŭnočnaja Ameryka</string>
@@ -1386,7 +1386,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="shared_string_favorites">Ulubionyja</string>
 	<string name="layer_osm_bugs">OSM Zaŭvahі (onłajn)</string>
 	
-	<string name="layer_poi">POI…</string>
+	<string name="layer_poi">POI-nakladka…</string>
 	<string name="layer_map">Krynіca mapy…</string>
 	<string name="menu_layers">Słaі mapy</string>
 	<string name="context_menu_item_search_poi">Pošuk POI</string>
@@ -1560,8 +1560,8 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="show_view_angle">Adlustroŭvać napramak pozіrku</string>
 	<string name="map_view_3d_descr">Ukliučyć 3D-vyhliad dlia mapy.</string>
 	<string name="map_view_3d">3D vіd</string>
-	<string name="show_poi_over_map_description">Pakazać POI na mapie (vykarystać apošni abrany fiĺtr).</string>
-	<string name="show_poi_over_map">Pakazać POI</string>
+	<string name="show_poi_over_map_description">Pakazać apošniuju POI-nakladku na mapie.</string>
+	<string name="show_poi_over_map">Pakazać POI-nakladku</string>
 	<string name="map_tile_source_descr">Vybierycie krynicu anlajn abo kešavanych frahmientaŭ mapy.</string>
 	<string name="map_tile_source">Krynіca rastravych mapaŭ</string>
 	<string name="map_source">Krynіca mapy</string>
@@ -2892,4 +2892,27 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="tap_on_map_to_hide_interface">Poŭnyekranny režym</string>
     <string name="show_on_top_bar">Pakazać na vierchniaj paneli</string>
     <string name="mark_passed">Adznačyć prajdzienyja</string>
+    <string name="add_favourites_group_to_markers_descr">Abiarycie, jakija ŭliublionyja hrupy vy chočacie dadać da markieraŭ</string>
+    <string name="track_waypoints">Šliachavyja kropki</string>
+    <string name="favourites_group">Uliublionyja hrupy</string>
+    <string name="add_group">Dadać hrupu</string>
+    <string name="add_group_descr">Vy možacie dadać hrupu ŭliublionych ci šliachavych kropak.</string>
+    <string name="empty_state_markers_active">Markiery na mapie!</string>
+    <string name="empty_state_markers_active_desc">Adznačyć miesca na mapie dotykam.</string>
+    <string name="empty_state_markers_groups">Impartavać hrupy</string>
+    <string name="empty_state_markers_groups_desc">Vy možacie impartavać uliublionyja hrupy ci šliachavyja kropki jak markiery.</string>
+    <string name="empty_state_markers_history_desc">Markiery, paznačanyja jak projdziennyja, z\'javiacca na hetym ekranie.</string>
+    <string name="shared_string_two">Dva</string>
+    <string name="shared_string_one">Adzin</string>
+    <string name="show_guide_line_descr">Linija, jakaja zlučaje vaša stanovišča sa stanoviščam aktyŭnych markieraŭ, budzie pakazanaja na mapie.</string>
+    <string name="show_arrows_descr">Adna ci dzvie strelki, jakija pakazvajuć kirunak da aktyŭnych markieraŭ, buduć pakazanaja na mapie.</string>
+    <string name="distance_indication_descr">Vybierycie, jak vy chočacie, kab vyhliadala adliehlasć da aktyŭnych markieraŭ.</string>
+    <string name="active_markers_descr">Vybierycie, koĺki nakirunkaŭ indykataraŭ vy chacieli b bačyć.</string>
+    <string name="digits_quantity">Koĺkasć ličbaŭ</string>
+    <string name="show_number_pad">Pakazać ličbavuju paneĺ</string>
+    <string name="shared_string_paste">Ustavić</string>
+    <string name="coordinate_input_accuracy_description">Aŭtamatyčna pierakliučycca ŭ nastupnaje polie paslia ŭvodu %1$d ličbaŭ paslia dziesiatkovaj kropki</string>
+    <string name="coordinate_input_accuracy">%1$d ličbaŭ</string>
+    <string name="go_to_next_field">Parajsci ŭ nastupnaje polie</string>
+    <string name="rename_marker">Pierajmienavać markier</string>
     </resources>

@@ -2789,4 +2789,7 @@
 	<string name="poi_pump">Bomba</string>
 	<string name="poi_scout_camp">Acampamento de escoteiros</string>
 	<string name="poi_backcountry">Interior</string>
+	<string name="poi_piste_difficulty">Dificuldade da pista</string>
+	<string name="poi_piste_grooming">Preparação de pista</string>
+	<string name="poi_smoking">Fumantes</string>
 	</resources>

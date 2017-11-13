@@ -2289,8 +2289,8 @@
 
 	<string name="poi_hygrometer_yes">Higròmetre</string>
 	<string name="poi_hygrometer_no">Higròmetre: no</string>
-	<string name="poi_fuel_type">Tipus</string>
-	<string name="poi_fuel_avia_type">Tipus</string>
+	<string name="poi_fuel_type">Tipus de combustible</string>
+	<string name="poi_fuel_avia_type">Tipus de combustible (avia)</string>
 	<string name="poi_payment_type">Tipus de pagament</string>
 	<string name="poi_payment_fuel_type">Targetes per carburants</string>
 	<string name="poi_additional_type">Addicional</string>

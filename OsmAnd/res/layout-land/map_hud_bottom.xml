@@ -265,14 +265,14 @@
 
     <include
         layout="@layout/move_marker_bottom_sheet"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
         tools:visibility="visible"/>
 
     <include
         layout="@layout/add_gpx_point_bottom_sheet"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
         tools:visibility="visible"/>

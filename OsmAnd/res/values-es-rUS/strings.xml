@@ -268,7 +268,7 @@ Lon %2$s</string>
     <string name="show_zoom_buttons_navigation_descr">Mostrar botones de ampliación durante la navegación.</string>
     <string name="show_zoom_buttons_navigation">Mostrar botones de ampliación</string>
     <string name="select_destination_and_intermediate_points">Elige los destinos intermedios</string>
-    <string name="layer_amenity_label">Etiquetas de punto</string>
+    <string name="layer_amenity_label">Etiquetas de PDIs superpuestas</string>
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
     <string name="gpx_wpt">Punto de referencia</string>
@@ -1122,7 +1122,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="live_monitoring_url">Dirección web de registro en vivo</string>
     <string name="gpx_monitoring_disabled_warn">Registra trazas usando el control GPX o mediante la opción «Grabar viaje».</string>
     <string name="show_current_gpx_title">Mostrar traza actual</string>
-    <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas de mapas (incluyendo sus actualizaciones) y no soporta artículos de Wikipedia sin conexión.</string>
+    <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas de mapas (añadir y actualizar mapas) y no soporta artículos de Wikipedia sin conexión.</string>
     <string name="free_version_title">Versión gratuita</string>
     <string name="poi_context_menu_showdescription">Detalles del PDI.</string>
     <string name="index_name_north_america">Norteamérica</string>
@@ -1425,7 +1425,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="layer_route">Ruta</string>
     <string name="layer_osm_bugs">Informes de problemas (en línea)</string>
     
-    <string name="layer_poi">Puntos de interés…</string>
+    <string name="layer_poi">Superposición de PDIs…</string>
     <string name="layer_map">Fuente de mapas…</string>
     <string name="menu_layers">Capas de mapas</string>
     <string name="context_menu_item_search_poi">Buscar PDI</string>
@@ -1578,8 +1578,8 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="show_view_angle">Mostrar dirección de visualización</string>
     <string name="map_view_3d_descr">Activa la vista 3D del mapa.</string>
     <string name="map_view_3d">Visión 3D del mapa</string>
-    <string name="show_poi_over_map_description">Muestra los PDIs sobre el mapa (usando el último filtro elegido).</string>
-    <string name="show_poi_over_map">Mostrar PDI</string>
+    <string name="show_poi_over_map_description">Muestra la última superposición de PDIs elegida en el mapa.</string>
+    <string name="show_poi_over_map">Mostrar superposición de PDI</string>
     <string name="map_tile_source_descr">Elige la fuente de mapas en línea o teselas guardadas.</string>
     <string name="map_tile_source">Fuente de teselas de mapa</string>
     <string name="map_source">Fuente de mapa</string>
@@ -2659,10 +2659,10 @@ Proporciona un código completo</string>
     <string name="wrong_user_name">¡Nombre de usuario incorrecto!</string>
     <string name="shared_string_to">Hasta</string>
     <string name="mapillary_menu_date_from">Desde</string>
-    <string name="mapillary_menu_descr_dates">Ver imágenes añadidas en un cierto período.</string>
-    <string name="mapillary_menu_title_dates">Fechas</string>
-    <string name="mapillary_menu_edit_text_hint">Tipo de nombre de usuario</string>
-    <string name="mapillary_menu_descr_username">Ver imágenes añadidas por un determinado usuario.</string>
+    <string name="mapillary_menu_descr_dates">Ver sólo imágenes añadidas</string>
+    <string name="mapillary_menu_title_dates">Fecha</string>
+    <string name="mapillary_menu_edit_text_hint">Escribir nombre de usuario</string>
+    <string name="mapillary_menu_descr_username">Ver sólo imágenes añadidas por</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
     <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por usuario o por fecha. Los filtros sólo aplican para los primeros acercamientos.</string>
     <string name="shared_string_reload">Recargar</string>
@@ -2766,8 +2766,8 @@ Proporciona un código completo</string>
     <string name="order_by">Ordenar por:</string>
     <string name="show_guide_line">Mostrar línea guía</string>
     <string name="show_arrows_on_the_map">Mostrar flechas en el mapa</string>
-    <string name="show_passed">Mostrar los usados</string>
-    <string name="hide_passed">Ocultar los usados</string>
+    <string name="show_passed">Mostrar descartados</string>
+    <string name="hide_passed">Ocultar descartados</string>
     <string name="use_location">Usar ubicación</string>
     <string name="add_location_as_first_point_descr">Añade la ubicación como primer punto para planificar la ruta perfecta.</string>
     <string name="my_location">Mi ubicación</string>
@@ -2819,7 +2819,7 @@ Proporciona un código completo</string>
 	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna la vista de la interfaz y los controles.</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     <string name="show_on_top_bar">Mostrar en la barra superior</string>
-    <string name="mark_passed">Marcador ya utilizado</string>
+    <string name="mark_passed">Descartar marcador</string>
     <string name="digits_quantity">Cantidad de dígitos</string>
     <string name="shared_string_right">Derecha</string>
     <string name="shared_string_left">Izquierda</string>
@@ -2829,4 +2829,22 @@ Proporciona un código completo</string>
     <string name="coordinate_input_accuracy">%1$d dígitos</string>
     <string name="go_to_next_field">Ir al campo siguiente</string>
     <string name="rename_marker">Renombrar marcador</string>
+    <string name="add_track_to_markers_descr">Elige los puntos de referencia de la traza que se añadirán a los marcadores.</string>
+    <string name="add_favourites_group_to_markers_descr">Elige el grupo de favoritos que se añadirán a los marcadores.</string>
+    <string name="track_waypoints">Puntos de referencia de la traza</string>
+    <string name="favourites_group">Grupo de favoritos</string>
+    <string name="add_group">Añadir grupo</string>
+    <string name="add_group_descr">Puedes añadir un grupo de favoritos o puntos de referencia de la traza.</string>
+    <string name="empty_state_markers_active">¡Marcadores en el mapa!</string>
+    <string name="empty_state_markers_active_desc">Marca lugares del mapa con una pulsación.</string>
+    <string name="empty_state_markers_groups">Importar grupos</string>
+    <string name="empty_state_markers_groups_desc">Puedes importar grupos de favoritos o puntos de referencias de la traza como marcadores.</string>
+    <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
+    <string name="shared_string_two">Dos</string>
+    <string name="shared_string_one">Uno</string>
+    <string name="show_guide_line_descr">Se mostrará en el mapa una línea que conecta su ubicación con la de los marcadores activos.</string>
+    <string name="show_arrows_descr">Se mostrará en el mapa una o dos flechas indicando la dirección a los marcadores activos.</string>
+    <string name="distance_indication_descr">Elige cómo desea ver la distancia a los marcadores activos.</string>
+    <string name="active_markers_descr">Elige cuántos indicadores de dirección desea ver.</string>
+    <string name="appearance_on_the_map">Aspecto en el mapa</string>
     </resources>

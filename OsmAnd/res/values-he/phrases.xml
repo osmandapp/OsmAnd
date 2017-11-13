@@ -135,8 +135,8 @@
 	<string name="poi_trade">חנות מסחר</string>
 	<string name="poi_tyres">חנות צמיגים</string>
 	<string name="poi_vacuum_cleaner">חנות שואבי אבק</string>
-	<string name="poi_fuel_avia_type">סוג</string>
-	<string name="poi_fuel_type">סוג</string>
+	<string name="poi_fuel_avia_type">סוג דלק לתעופה</string>
+	<string name="poi_fuel_type">סוג הדלק</string>
 	<string name="poi_additional_type">נוסף</string>
 	<string name="poi_payment_type">סוג תשלום</string>
 	<string name="poi_bicycle_service">שירות אופניים</string>
@@ -787,4 +787,222 @@
 	<string name="poi_aerialway_chair_lift">מעלית סקי בישיבה</string>
 	<string name="poi_aerialway_drag_lift">מעלית סקי בגרירה</string>
 	<string name="poi_wastewater_plant">מפעל לטיהור שופכין</string>
+	<string name="poi_pharmacy_dispensing">חלוקה</string>
+	<string name="poi_sewing">חנות מזון יבש</string>
+	<string name="poi_fuel_hgv_diesel">דיזל למשאיות</string>
+	<string name="poi_fuel_1_50">דלק 1:50</string>
+	<string name="poi_fuel_e85">E85</string>
+	<string name="poi_railway_buffer_stop">אוטם מסילת רכבת</string>
+	<string name="poi_helipad">מנחת</string>
+	<string name="poi_aeroway_terminal">נמל תעופה</string>
+	<string name="poi_aeroway_gate">שער נמל תעופה</string>
+
+	<string name="poi_aerialway_station">תחנת נמל תעופה</string>
+	<string name="poi_cuisine">מטבח</string>
+	<string name="poi_cuisine_pizza">פיצה</string>
+	<string name="poi_cuisine_burger">המבורגר</string>
+	<string name="poi_cuisine_coffee">קפה</string>
+	<string name="poi_cuisine_sandwich">כריך</string>
+	<string name="poi_cuisine_kebab">קבב</string>
+	<string name="poi_cuisine_doner">דונר (שווארמה)</string>
+	<string name="poi_cuisine_chicken">עוף</string>
+	<string name="poi_cuisine_ice_cream">גלידה</string>
+	<string name="poi_cuisine_sushi">סושי</string>
+	<string name="poi_cuisine_fish_and_chips">פיש אנד צ׳יפס</string>
+	<string name="poi_cuisine_seafood">מאכלי ים</string>
+	<string name="poi_cuisine_barbecue">ברביקיו</string>
+	<string name="poi_cuisine_noodle">אטריות</string>
+	<string name="poi_cuisine_donut">דונאט</string>
+	<string name="poi_cuisine_ramen">ראמן</string>
+	<string name="poi_cuisine_crepe">קרפ</string>
+	<string name="poi_cuisine_breakfast">ארוחת בוקר</string>
+	<string name="poi_cuisine_beef_bowl">גיודון</string>
+	<string name="poi_cuisine_steak">סטייק</string>
+	<string name="poi_cuisine_tapas">טאפאס</string>
+	<string name="poi_cuisine_gastropub">גסטרופאב</string>
+	<string name="poi_cuisine_heuriger">הויריגר</string>
+	<string name="poi_cuisine_curry">קארי</string>
+	<string name="poi_cuisine_grill">על האש</string>
+	<string name="poi_cuisine_bagel">בייגל</string>
+	<string name="poi_cuisine_diner">מזללה</string>
+	<string name="poi_cuisine_sausage">נקניק</string>
+	<string name="poi_cuisine_cake">עוגה</string>
+	<string name="poi_cuisine_pancake">פנקייק</string>
+	<string name="poi_cuisine_pasta">פסטה</string>
+	<string name="poi_cuisine_fast_food">מזון מהיר</string>
+	<string name="poi_cuisine_juice">מיץ</string>
+	<string name="poi_cuisine_soba">סוֹבַּה</string>
+	<string name="poi_cuisine_fine_dining">גורמה</string>
+	<string name="poi_cuisine_tea">תה</string>
+	<string name="poi_cuisine_tea_shop">חנות תה</string>
+	<string name="poi_cuisine_soup">מרק</string>
+	<string name="poi_cuisine_pie">פאי</string>
+	<string name="poi_cuisine_hotdog">נקניקייה</string>
+	<string name="poi_cuisine_fondue">פונדו</string>
+	<string name="poi_cuisine_baguette">באגט</string>
+	<string name="poi_cuisine_pastel">פסטל</string>
+	<string name="poi_cuisine_burrito">בוריטו</string>
+	<string name="poi_cuisine_teriyaki">טריאקי</string>
+	<string name="poi_cuisine_peruvian">פרואני</string>
+	<string name="poi_cuisine_bolivian">בוליבי</string>
+	<string name="poi_cuisine_malagasy">מלזי</string>
+	<string name="poi_cuisine_hawaiian">הוואיי</string>
+	<string name="poi_cuisine_english">אנגלי</string>
+	<string name="poi_cuisine_pakistani">פקיסטני</string>
+	<string name="poi_cuisine_taiwanese">טאיוואני</string>
+	<string name="poi_cuisine_tex_mex">טקס-מקס</string>
+	<string name="poi_cuisine_dutch">הולנדי</string>
+	<string name="poi_cuisine_syrian">סורי</string>
+	<string name="poi_cuisine_australian">אוסטרלי</string>
+	<string name="poi_cuisine_cajun">קייג׳וני</string>
+	<string name="poi_cuisine_egyptian">מצרי</string>
+	<string name="poi_cuisine_senegalese">סנגלי</string>
+	<string name="poi_cuisine_jewish">יהודי</string>
+	<string name="poi_cuisine_tibetan">טיבטי</string>
+
+	<string name="poi_feeding_place">מקום להאכלת חיות</string>
+
+	<string name="poi_energy_supplier">משרד ספק אנרגיה</string>
+
+	<string name="poi_vhf">ערוץ VHF</string>
+
+	<string name="poi_operational_status_open">פתוח</string>
+	<string name="poi_operational_status_closed">סגור</string>
+	<string name="poi_operational_status_restricted">מוגבל</string>
+	<string name="poi_operational_status_broken">מקולקל</string>
+	<string name="poi_operational_status_needs_maintenance">נדרשת תחזוקה</string>
+
+	<string name="poi_water_place_durability_durable">עמידות נקודת המים: עמידה</string>
+	<string name="poi_water_place_durability_emergency">עמידות נקודת המים: בחירום</string>
+
+	<string name="poi_water_purification_none">אין</string>
+	<string name="poi_water_purification_chlorine">עם כלור</string>
+	<string name="poi_water_purification_reverse_osmosis">אוסמוזה הפוכה</string>
+	<string name="poi_water_purification_aquatabs">טבליות טיהור מים</string>
+
+	<string name="poi_water_supply_water_well">באר מים</string>
+	<string name="poi_water_supply_pipeline">צנרת</string>
+	<string name="poi_water_supply_running_water">מים זורמים</string>
+	<string name="poi_water_supply_pump">משאבה</string>
+	<string name="poi_water_supply_borehole">קידוח</string>
+	<string name="poi_water_supply_water_trucking">משאיות מים</string>
+	<string name="poi_water_supply_water_tank">מיכל מים</string>
+	<string name="poi_water_supply_bottled_water">מים בבקבוק</string>
+
+	<string name="poi_water_place_access_community">קהילה</string>
+	<string name="poi_water_place_access_family">משפחה</string>
+	<string name="poi_water_place_access_multifamilies">ריבוי משפחות</string>
+
+	<string name="poi_car_yes">מכונית: יש</string>
+	<string name="poi_car_no">מכונית: אין</string>
+	<string name="poi_bicycle_yes">אופניים: יש</string>
+	<string name="poi_bicycle_no">אופניים: אין</string>
+	<string name="poi_scooter_yes">קטנוע: יש</string>
+	<string name="poi_scooter_no">קטנוע: אין</string>
+	<string name="poi_truck_yes">משאית: יש</string>
+	<string name="poi_truck_no">משאית: אין</string>
+
+	<string name="poi_parking_fee_yes">עמלת חנייה: יש</string>
+	<string name="poi_parking_fee_no">עמלת חנייה: אין</string>
+	<string name="poi_parking_fee">עמלת חנייה</string>
+
+	<string name="poi_amperage">זרם חשמלי</string>
+	<string name="poi_charging_station_output">פלט תחנת הטעינה</string>
+
+	<string name="poi_map_type_topo">סוג המפה: טפוגרפית</string>
+	<string name="poi_map_type_street">סוג המפה: רחוב</string>
+	<string name="poi_map_type_scheme">סוג המפה: סכמה</string>
+	<string name="poi_map_type_toposcope">סוג המפה: כיוונים</string>
+	<string name="poi_map_size_site">גודל המפה: אתר</string>
+	<string name="poi_map_size_city">גודל המפה: עיר</string>
+	<string name="poi_map_size_region">גודל המפה: אזור</string>
+
+	<string name="poi_charging_station_filter">תחנת טעינה</string>
+
+<string name="poi_cuisine_deli">מעדנייה</string>
+	<string name="poi_cuisine_salad">סלט</string>
+	<string name="poi_cuisine_frozen_yogurt">פרוזן יוגורט</string>
+	<string name="poi_cuisine_fried_food">אוכל מטוגן</string>
+	<string name="poi_cuisine_savory_pancakes">פנקייקים מלוחים</string>
+	<string name="poi_cuisine_bistro">ביסטרו</string>
+	<string name="poi_cuisine_bakery">מאפייה</string>
+	<string name="poi_cuisine_couscous">קוסקוס</string>
+	<string name="poi_cuisine_fried_chicken">עוף מטוגן</string>
+	<string name="poi_cuisine_dessert">קינוח</string>
+	<string name="poi_cuisine_canteen">מזנון</string>
+	<string name="poi_cuisine_tacos">טאקוס</string>
+	<string name="poi_cuisine_piadina">פיאדינה</string>
+	<string name="poi_cuisine_falafel">פלאפל</string>
+	<string name="poi_cuisine_smoothie">פרי שייק</string>
+	<string name="poi_cuisine_souvlaki">סופלקי</string>
+	<string name="poi_cuisine_snack">חטיף</string>
+	<string name="poi_cuisine_yogurt">יוגורט</string>
+	<string name="poi_cuisine_gyros">גירוס</string>
+	<string name="poi_cuisine_empanada">אמפנדה</string>
+	<string name="poi_cuisine_crepes">קרפים</string>
+	<string name="poi_cuisine_yakiniku">יקיניקו</string>
+	<string name="poi_cuisine_suki">סוקי</string>
+	<string name="poi_cuisine_udon">אוּדוֹן</string>
+	<string name="poi_cuisine_brasserie">בראסרי</string>
+	<string name="poi_cuisine_bubble_tea">באבל טי</string>
+	<string name="poi_cuisine_yakitori">יקיטורי</string>
+	<string name="poi_cuisine_meat">בשר</string>
+	<string name="poi_cuisine_wings">כנפיים</string>
+	<string name="poi_cuisine_waffle">ואפל</string>
+	<string name="poi_cuisine_chocolate">שוקולד</string>
+	<string name="poi_cuisine_wine">יין</string>
+	<string name="poi_cuisine_potato">תפוח אדמה</string>
+	<string name="poi_cuisine_brunch">בראנץ׳</string>
+	<string name="poi_aquaculture">חקלאות ימית</string>
+	<string name="poi_aquaculture_shrimp">חקלאות ימית: שרימפס</string>
+	<string name="poi_aquaculture_fish">חקלאות ימית: דגים</string>
+	<string name="poi_aquaculture_mussels">חקלאות ימית: מולים</string>
+
+	<string name="poi_min_age">הגבלת גיל</string>
+
+	<string name="poi_organic_yes">יש</string>
+	<string name="poi_organic_no">אין</string>
+	<string name="poi_traffic_mirror">מראת כביש פנורמית</string>
+
+	<string name="poi_diplomatic_consulate">קונסוליה</string>
+	<string name="poi_diplomatic_ambassadors_residence">בית שגריר</string>
+	<string name="poi_diplomatic_high_commission">פיקוד עליון</string>
+
+	<string name="poi_fire_operator">אמצעי כיבוי אש</string>
+
+	<string name="poi_water_tank">מיכל מים</string>
+
+	<string name="poi_toilets_disposal_flush">פינוי שפכים: הדחה</string>
+	<string name="poi_toilets_disposal_pitlatrine">פינוי שפכים: בור</string>
+	<string name="poi_toilets_disposal_chemical">פינוי שפכים: כימי</string>
+	<string name="poi_toilets_disposal_bucket">פינוי שפכים: דלי</string>
+
+	<string name="poi_length">אורך</string>
+
+	<string name="poi_wiki_link">ויקיפדיה</string>
+
+	<string name="poi_xmas">חג המולד</string>
+	<string name="poi_xmas_event">אירוע חג המולד</string>
+	<string name="poi_xmas_market">שוק חג המולד</string>
+	<string name="poi_xmas_pyramid">פירמידת חג המולד</string>
+	<string name="poi_xmas_shop">חנות חג המולד</string>
+	<string name="poi_xmas_shop_christmas_tree">חנות עצים</string>
+	<string name="poi_xmas_tree">עץ חג המולד</string>
+	<string name="poi_xmas_day_date">חג המולד: תקופת האירוע</string>
+	<string name="poi_xmas_note">חג המולד: הערה</string>
+	<string name="poi_xmas_opening_hours">חג המולד: שעות פתיחה</string>
+	<string name="poi_xmas_location">חג המולד: מיקום</string>
+	<string name="poi_xmas_url">חג המולד: אתר</string>
+
+	<string name="poi_public_bookcase">עמדת החלפת ספרים ציבורית</string>
+	<string name="poi_public_bookcase_type_phone_box">סוג: תא טלפון</string>
+	<string name="poi_public_bookcase_type_reading_box">סוג: תא קריאה</string>
+	<string name="poi_public_bookcase_type_wooden_cabinet">סוג: ארונית עץ</string>
+	<string name="poi_public_bookcase_type_metal_cabinet">סוג: ארונית מתכת</string>
+	<string name="poi_public_bookcase_type_shelf">סוג: מדף</string>
+
+	<string name="poi_cuisine_sagardotegia">מבשלת סיידר</string>
+	<string name="poi_cuisine_sub">כריך באגט</string>
+	<string name="poi_cuisine_pita">פיתה</string>
+	<string name="poi_mdf">רכזת</string>
 	</resources>

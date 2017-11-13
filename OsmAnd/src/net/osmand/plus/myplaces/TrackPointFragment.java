@@ -587,7 +587,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 	private void enterMapMarkersMode() {
 		if (getSettings().USE_MAP_MARKERS.get()) {
-			addMapMarkersSyncGroup();
+			if (getGpxDataItem() != null) {
+				addMapMarkersSyncGroup();
+			}
 		} else {
 			actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 

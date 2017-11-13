@@ -35,6 +35,9 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 
 		menu = mapActivity.getMapLayers().getMapControlsLayer().getTrackDetailsMenu();
 		View view = inflater.inflate(R.layout.track_details, container, false);
+		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
+			AndroidUtils.addStatusBarPadding21v(getActivity(), view);
+		}
 		if (menu == null || menu.getGpxItem() == null) {
 			return view;
 		}
@@ -180,7 +183,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 
 	public static boolean showInstance(final MapActivity mapActivity) {
 		try {
-			boolean portrait = mapActivity.findViewById(R.id.bottomFragmentContainer) != null;
+			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			TrackDetailsMenuFragment fragment = new TrackDetailsMenuFragment();
 			mapActivity.getSupportFragmentManager().beginTransaction()
 					.add(portrait ? R.id.bottomFragmentContainer : R.id.routeMenuContainer, fragment, TAG)

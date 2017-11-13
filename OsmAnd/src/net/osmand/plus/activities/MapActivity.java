@@ -341,6 +341,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (removeFragment(PlanRouteFragment.TAG)) {
 			app.getMapMarkersHelper().getPlanRouteContext().setFragmentVisible(true);
 		}
+		if (TrackDetailsMenu.isVisible()) {
+			mapLayers.getMapControlsLayer().getTrackDetailsMenu().hide();
+		}
 		removeFragment(ImportGpxBottomSheetDialogFragment.TAG);
 		super.onSaveInstanceState(outState);
 	}
@@ -834,12 +837,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				getWindow().setStatusBarColor(ContextCompat.getColor(this, colorId));
 				return;
 			}
+			boolean mapControlsVisible = findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
 			boolean night = app.getDaynightHelper().isNightModeForMapControls();
 			boolean mapTopBar = findViewById(R.id.map_top_bar).getVisibility() == View.VISIBLE;
 			boolean markerTopBar = findViewById(R.id.map_markers_top_bar).getVisibility() == View.VISIBLE;
-			if (mapTopBar) {
+			if (mapTopBar && mapControlsVisible) {
 				colorId = night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
-			} else if (markerTopBar) {
+			} else if (markerTopBar && mapControlsVisible) {
 				colorId = R.color.status_bar_dark;
 			} else {
 				colorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
