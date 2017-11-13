@@ -947,7 +947,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="gpx_visibility_txt">Bačnaść</string>
 	<string name="gpx_tags_txt">Cetlikі</string>
 	<string name="gpx_description_txt">Apіsańnie</string>
-	<string name="validate_gpx_upload_name_pwd">Kali łaska, paznačcie іmia j parol karystalnіka OSM kab adsyłać fajły GPX.</string>
+	<string name="validate_gpx_upload_name_pwd">Kali laska, paznačcie imia i paroĺ karystaĺnika OSM, kab adsylać GPX-fajly.</string>
     	<string name="default_buttons_support">Padtrymka</string>
 	<string name="support_new_features">Padtrymka novych ułaścіvaściaŭ</string>
 	<string name="support_new_features_descr">Achviaravać, kab ubačyć novyja mahčymasci, realizavanyja ŭ dastasavanni.</string>
@@ -1063,7 +1063,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="general_settings">Ahulnyja</string>
 	<string name="general_settings_descr">Nalady ekranu i ahuĺnyja nalady dastasavannia.</string>
 	<string name="global_app_settings">Ahulnyja nałady prahramy</string>
-	<string name="user_name">Vašaje іmia karystalnіka OSM</string>
+	<string name="user_name">Vaša imia karystaĺnika OSM</string>
 	<string name="open_street_map_login_descr">Patrebna dlia pradstaŭliennia ŭ openstreetmap.org.</string>
 	<string name="user_password">Vaš parol OSM</string>
 	
@@ -2731,10 +2731,10 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="wrong_user_name">Niapraviĺnaje imia karystaĺnika!</string>
     <string name="shared_string_to">Da</string>
     <string name="mapillary_menu_date_from">Ad</string>
-    <string name="mapillary_menu_descr_dates">Pahliadzieć vyjavy dadanyja ŭ peŭny pieryjad.</string>
-    <string name="mapillary_menu_title_dates">Daty</string>
+    <string name="mapillary_menu_descr_dates">Pahliadzieć toĺki dadanyja vyjavy</string>
+    <string name="mapillary_menu_title_dates">Data</string>
     <string name="mapillary_menu_edit_text_hint">Uviadzicie imia karystaĺnika</string>
-    <string name="mapillary_menu_descr_username">Pahliadzieć vyjavy dadanyja peŭnym karystaĺnikam.</string>
+    <string name="mapillary_menu_descr_username">Pahliadzieć toĺki vyjavy dadanyja</string>
     <string name="mapillary_menu_title_username">Imia karystaĺnika</string>
     <string name="mapillary_menu_filter_description">Vy možacie filtravać vyjavy pa adpraŭniku ci dacie. Filtry ŭžyvajucca tolki dla bujnoha pavieličeńnia.</string>
     <string name="shared_string_reload">Abnavić</string>
@@ -2915,4 +2915,9 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="coordinate_input_accuracy">%1$d ličbaŭ</string>
     <string name="go_to_next_field">Parajsci ŭ nastupnaje polie</string>
     <string name="rename_marker">Pierajmienavać markier</string>
+    <string name="appearance_on_the_map">Z\'jaŭliennie na mapie</string>
+    <string name="add_track_to_markers_descr">Abrać slied šliachavych kropak, jakija OsmAnd dadasć u markiery</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
+    <string name="shared_string_right">Naprava</string>
+    <string name="shared_string_left">Nalieva</string>
     </resources>
