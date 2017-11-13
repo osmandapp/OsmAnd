@@ -14,6 +14,8 @@ import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -30,10 +32,12 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 
 	private ProcessGpxTask asyncProcessor;
 	private List<GpxDataItem> gpxList = new ArrayList<>();
+	private GpxSelectionHelper gpxSelectionHelper;
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		gpxSelectionHelper = getMyApplication().getSelectedGpxHelper();
 		asyncProcessor = new ProcessGpxTask();
 		asyncProcessor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -47,6 +51,11 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 	public MarkersSyncGroup createMapMarkersSyncGroup(int position) {
 		GpxDataItem gpxDataItem = gpxList.get(position - 1);
 		File gpx = gpxDataItem.getFile();
+		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpx.getAbsolutePath());
+		if (selectedGpxFile == null) {
+			GPXFile res = GPXUtilities.loadGPXFile(getContext(), gpx);
+			gpxSelectionHelper.selectGpxFile(res, true, false);
+		}
 		return new MarkersSyncGroup(gpx.getAbsolutePath(), AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
 	}
 

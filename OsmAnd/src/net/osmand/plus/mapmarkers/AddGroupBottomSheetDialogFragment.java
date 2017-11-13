@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
@@ -23,6 +25,7 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 	protected View mainView;
 	protected GroupsAdapter adapter;
 	protected MapMarkersHelper mapMarkersHelper;
+	private CreateGpxGroupTask createGpxGroupTask;
 
 	public void setListener(AddGroupListener listener) {
 		this.listener = listener;
@@ -50,13 +53,8 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 				if (position == RecyclerView.NO_POSITION) {
 					return;
 				}
-				MarkersSyncGroup group = createMapMarkersSyncGroup(position);
-				mapMarkersHelper.addMarkersSyncGroup(group);
-				mapMarkersHelper.syncGroup(group);
-				if (listener != null) {
-					listener.onGroupAdded();
-				}
-				dismiss();
+				createGpxGroupTask = new CreateGpxGroupTask();
+				createGpxGroupTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, position);
 			}
 		});
 		recyclerView.setAdapter(adapter);
@@ -73,11 +71,48 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 		return mainView;
 	}
 
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		if (createGpxGroupTask != null) {
+			createGpxGroupTask.cancel(true);
+			createGpxGroupTask = null;
+		}
+	}
+
 	protected abstract void createAdapter();
 
 	protected abstract MarkersSyncGroup createMapMarkersSyncGroup(int position);
 
 	public interface AddGroupListener {
 		void onGroupAdded();
+	}
+
+	public class CreateGpxGroupTask extends AsyncTask<Integer, Void, MarkersSyncGroup> {
+
+		private ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);;
+		private RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.groups_recycler_view);
+
+		@Override
+		protected void onPreExecute() {
+			recyclerView.setVisibility(View.GONE);
+			progressBar.setVisibility(View.VISIBLE);
+		}
+
+		@Override
+		protected MarkersSyncGroup doInBackground(Integer... integers) {
+			return createMapMarkersSyncGroup(integers[0]);
+		}
+
+		@Override
+		protected void onPostExecute(MarkersSyncGroup group) {
+			createGpxGroupTask = null;
+			mapMarkersHelper.addMarkersSyncGroup(group);
+			mapMarkersHelper.syncGroup(group);
+			if (listener != null) {
+				listener.onGroupAdded();
+			}
+			dismiss();
+		}
 	}
 }
