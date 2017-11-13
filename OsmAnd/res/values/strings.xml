@@ -11,7 +11,7 @@
     -->
     <string name="appearance_on_the_map">Appearance on the map</string>
     <string name="add_track_to_markers_descr">Select track waypoints of which OsmAnd will add to markers</string>
-    <string name="add_favourites_group_to_markers_descr">Select which favourite group you want to add to markers</string>
+    <string name="add_favourites_group_to_markers_descr">Select which favourite group you want to add to markers. We show only tracks with waypoints</string>
     <string name="track_waypoints">Track waypoints</string>
     <string name="favourites_group">Favourites group</string>
     <string name="add_group">Add group</string>
