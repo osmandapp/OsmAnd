@@ -888,16 +888,26 @@ public class MapMarkersHelper {
 		listeners.remove(l);
 	}
 
-	private void refreshMarker(MapMarker marker) {
-		for (MapMarkerChangedListener l : listeners) {
-			l.onMapMarkerChanged(marker);
-		}
+	private void refreshMarker(final MapMarker marker) {
+		ctx.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				for (MapMarkerChangedListener l : listeners) {
+					l.onMapMarkerChanged(marker);
+				}
+			}
+		});
 	}
 
 	private void refreshMarkers() {
-		for (MapMarkerChangedListener l : listeners) {
-			l.onMapMarkersChanged();
-		}
+		ctx.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				for (MapMarkerChangedListener l : listeners) {
+					l.onMapMarkersChanged();
+				}
+			}
+		});
 	}
 
 	public void refresh() {
