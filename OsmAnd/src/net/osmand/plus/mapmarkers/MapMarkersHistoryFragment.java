@@ -265,11 +265,21 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 
 	@Override
 	public void onMapMarkerChanged(MapMarker mapMarker) {
-		updateAdapter();
+		app.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				updateAdapter();
+			}
+		});
 	}
 
 	@Override
 	public void onMapMarkersChanged() {
-		updateAdapter();
+		app.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				updateAdapter();
+			}
+		});
 	}
 }
