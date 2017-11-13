@@ -269,7 +269,7 @@ public class MapMarkersHelper {
 		mapMarkersHistory.clear();
 
 		List<MapMarker> activeMarkers = markersDbHelper.getActiveMarkers();
-		mapMarkers.addAll(activeMarkers);
+		addToMapMarkersList(activeMarkers);
 		reorderActiveMarkersIfNeeded();
 
 		List<MapMarker> markersHistory = markersDbHelper.getMarkersHistory();
@@ -279,6 +279,32 @@ public class MapMarkersHelper {
 		if (!ctx.isApplicationInitializing()) {
 			lookupAddressAll();
 		}
+	}
+
+	private void removeFromMapMarkersList(MapMarker marker) {
+		List<MapMarker> copyList = new ArrayList<>();
+		copyList.remove(marker);
+		mapMarkers = copyList;
+	}
+
+	private void addToMapMarkersList(MapMarker marker) {
+		addToMapMarkersList(mapMarkers.size(), marker);
+	}
+
+	private void addToMapMarkersList(int position, MapMarker marker) {
+		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
+		copyList.add(position, marker);
+		mapMarkers = copyList;
+	}
+
+	private void addToMapMarkersList(List<MapMarker> markers) {
+		addToMapMarkersList(mapMarkers.size(), markers);
+	}
+
+	private void addToMapMarkersList(int position, List<MapMarker> markers) {
+		List<MapMarker> copyList = new ArrayList<>();
+		copyList.addAll(position, markers);
+		mapMarkers = copyList;
 	}
 
 	public void reorderActiveMarkersIfNeeded() {
@@ -458,7 +484,7 @@ public class MapMarkersHelper {
 			for (MapMarker marker : markers) {
 				if (!marker.history) {
 					markersDbHelper.removeMarker(marker, false);
-					mapMarkers.remove(marker);
+					removeFromMapMarkersList(marker);
 					removeMarkerFromGroup(marker);
 					needRefresh = true;
 				}
@@ -474,7 +500,7 @@ public class MapMarkersHelper {
 		if (marker != null) {
 			cancelPointAddressRequests(marker.point);
 			markersDbHelper.moveMarkerToHistory(marker);
-			mapMarkers.remove(marker);
+			removeFromMapMarkersList(marker);
 			marker.history = true;
 			marker.nextKey = MapMarkersDbHelper.HISTORY_NEXT_VALUE;
 			mapMarkersHistory.add(marker);
@@ -487,7 +513,7 @@ public class MapMarkersHelper {
 	public void addMarkers(List<MapMarker> markers) {
 		if (markers != null) {
 			markersDbHelper.addMarkers(markers);
-			mapMarkers.addAll(markers);
+			addToMapMarkersList(markers);
 			reorderActiveMarkersIfNeeded();
 			addMarkersToGroups(markers, true);
 			refresh();
@@ -501,7 +527,7 @@ public class MapMarkersHelper {
 				mapMarkersHistory.add(marker);
 				sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 			} else {
-				mapMarkers.add(marker);
+				addToMapMarkersList(marker);
 				reorderActiveMarkersIfNeeded();
 			}
 			addMarkerToGroup(marker);
@@ -514,7 +540,7 @@ public class MapMarkersHelper {
 			markersDbHelper.restoreMapMarkerFromHistory(marker);
 			mapMarkersHistory.remove(marker);
 			marker.history = false;
-			mapMarkers.add(position, marker);
+			addToMapMarkersList(position, marker);
 			reorderActiveMarkersIfNeeded();
 			sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 			refresh();
@@ -527,7 +553,7 @@ public class MapMarkersHelper {
 				markersDbHelper.restoreMapMarkerFromHistory(marker);
 				mapMarkersHistory.remove(marker);
 				marker.history = false;
-				mapMarkers.add(marker);
+				addToMapMarkersList(marker);
 			}
 			reorderActiveMarkersIfNeeded();
 			sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
@@ -543,7 +569,7 @@ public class MapMarkersHelper {
 			if (history) {
 				mapMarkersHistory.remove(marker);
 			} else {
-				mapMarkers.remove(marker);
+				removeFromMapMarkersList(marker);
 			}
 			removeMarkerFromGroup(marker);
 			refresh();
@@ -619,7 +645,7 @@ public class MapMarkersHelper {
 		}
 
 		mapMarkers.removeAll(markersToRemove);
-		mapMarkers.addAll(0, markers);
+		addToMapMarkersList(0, markers);
 		reorderActiveMarkersIfNeeded();
 		ctx.getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
 	}
@@ -725,9 +751,9 @@ public class MapMarkersHelper {
 				}
 			} else {
 				if (disabled) {
-					mapMarkers.remove(marker);
+					removeFromMapMarkersList(marker);
 				} else {
-					mapMarkers.add(marker);
+					addToMapMarkersList(marker);
 				}
 			}
 		}
@@ -797,7 +823,7 @@ public class MapMarkersHelper {
 				marker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;
 				markersDbHelper.addMarker(marker);
 				if (enabled) {
-					mapMarkers.add(0, marker);
+					addToMapMarkersList(0, marker);
 				}
 				addedMarkers.add(marker);
 				reorderActiveMarkersIfNeeded();
@@ -819,8 +845,8 @@ public class MapMarkersHelper {
 	public void moveMarkerToTop(MapMarker marker) {
 		int i = mapMarkers.indexOf(marker);
 		if (i != -1 && mapMarkers.size() > 1) {
-			mapMarkers.remove(i);
-			mapMarkers.add(0, marker);
+			removeFromMapMarkersList(marker);
+			addToMapMarkersList(0, marker);
 			reorderActiveMarkersIfNeeded();
 			refresh();
 		}
