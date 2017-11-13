@@ -318,10 +318,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return;
 		}
 
-		if (map.getMyApplication().isApplicationInitializing()) {
-			return;
-		}
-
 		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
