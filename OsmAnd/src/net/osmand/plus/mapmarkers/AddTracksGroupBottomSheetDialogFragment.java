@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -75,6 +76,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		private GPXDatabase db = app.getGpxDatabase();
 		private ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);;
 		private RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.groups_recycler_view);
+		private TextView lookingForTracksText = (TextView) mainView.findViewById(R.id.looking_for_tracks_text);
 
 		ProcessGpxTask() {
 			List<GpxDataItem> dataItems = db.getItems();
@@ -87,6 +89,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		protected void onPreExecute() {
 			recyclerView.setVisibility(View.GONE);
 			progressBar.setVisibility(View.VISIBLE);
+			lookingForTracksText.setVisibility(View.VISIBLE);
 		}
 
 		@Override
@@ -141,6 +144,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 			asyncProcessor = null;
 			adapter.notifyDataSetChanged();
 			progressBar.setVisibility(View.GONE);
+			lookingForTracksText.setVisibility(View.GONE);
 			recyclerView.setVisibility(View.VISIBLE);
 		}
 	}
