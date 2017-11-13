@@ -410,8 +410,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				headerViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), R.color.divider_color));
 				boolean groupIsDisabled = group.isDisabled();
 				headerViewHolder.disableGroupSwitch.setVisibility(View.VISIBLE);
-				headerViewHolder.disableGroupSwitch.setChecked(!groupIsDisabled);
-				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
 						group.setDisabled(!enabled);
@@ -433,7 +432,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							snackbar.show();
 						}
 					}
-				});
+				};
+				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(null);
+				headerViewHolder.disableGroupSwitch.setChecked(!groupIsDisabled);
+				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(checkedChangeListener);
 			} else {
 				throw new IllegalArgumentException("Unsupported header");
 			}
