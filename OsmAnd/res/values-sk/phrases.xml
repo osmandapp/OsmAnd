@@ -1989,7 +1989,7 @@
 	<string name="poi_memorial_plaque">Pamätná doska</string>
 	<string name="poi_memorial_stone">Pamätný kameň</string>
 	<string name="poi_memorial_stele">Stéla</string>
-	<string name="poi_fuel_type">Typ</string>
+	<string name="poi_fuel_type">Typ paliva</string>
 	<string name="poi_payment_type">Spôsob platby</string>
 	<string name="poi_additional_type">Doplňujúce</string>
 <string name="poi_denomination_pentecostal">Letničné</string>
@@ -2100,7 +2100,7 @@
 	<string name="poi_home_visit_no">Návštevy doma: nie</string>
 
 	<string name="poi_ford_stepping_stones">Rad kameňov pre chodcov</string>
-	<string name="poi_fuel_avia_type">Typ</string>
+	<string name="poi_fuel_avia_type">Typ paliva (letecké)</string>
 	<string name="poi_payment_fuel_type">Palivové karty</string>
 	<string name="poi_internet_access_type">Spôsob prístupu na Internet</string>
 	<string name="poi_bicycle_service">Oprava bicyklov</string>
