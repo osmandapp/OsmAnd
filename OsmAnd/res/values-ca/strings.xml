@@ -99,7 +99,7 @@
     <string name="gpx_visibility_txt">Visibilitat</string>
     <string name="gpx_tags_txt">Etiquetes</string>
     <string name="gpx_description_txt">Descripció</string>
-    <string name="validate_gpx_upload_name_pwd">Especifiqueu el nom d\'usuari a OSM i la contrasenya per penjar els fitxers GPX.</string>
+    <string name="validate_gpx_upload_name_pwd">Especifiqueu el nom d\'usuari i la contrasenya d\'OSM per pujar fitxers GPX.</string>
     <string name="default_buttons_support">Suport</string>
     <string name="show_ruler_level">Mostra el regle</string>
     <string name="info_button">Informació</string>
@@ -174,7 +174,7 @@
     <string name="index_settings">Gestió de fitxers de mapes</string>
     <string name="general_settings">Paràmetres generals</string>
     <string name="general_settings_descr">Configureu els paràmetres generals i de visualització de l\'aplicació.</string>
-    <string name="user_name">El vostre nom d\'usuari a OSM</string>
+    <string name="user_name">El vostre nom d\'usuari d\'OSM</string>
     <string name="user_password">La vostra contrasenya a OSM</string>
     <string name="download_files_not_enough_space">No hi ha prou espai lliure per baixar %1$s MB (lliure: %2$s).</string>
     <string name="download_files_question_space">"Voleu baixar {0} fitxer(s)?  
@@ -2536,10 +2536,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="wrong_user_name">Nom d\'usuari incorrecte!</string>
     <string name="shared_string_to">Fins</string>
     <string name="mapillary_menu_date_from">Des de</string>
-    <string name="mapillary_menu_descr_dates">Mostra les imatges afegides en un període determinat.</string>
-    <string name="mapillary_menu_title_dates">Dates</string>
+    <string name="mapillary_menu_descr_dates">Mostra només les imatges afegides</string>
+    <string name="mapillary_menu_title_dates">Data</string>
     <string name="mapillary_menu_edit_text_hint">Indiqueu el nom d\'usuari</string>
-    <string name="mapillary_menu_descr_username">Mostra les imatges afegides per un usuari determinat.</string>
+    <string name="mapillary_menu_descr_username">Mostra només les imatges afegides per</string>
     <string name="mapillary_menu_title_username">Nom d\'usuari</string>
     <string name="mapillary_menu_filter_description">Podeu filtrar per remitent o per data. El filtres només s\'apliquen en apropar-se.</string>
     <string name="shared_string_reset">Restableix</string>
