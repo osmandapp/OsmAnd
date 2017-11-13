@@ -489,9 +489,7 @@ public class MapMarkersHelper {
 			markersDbHelper.addMarkers(markers);
 			mapMarkers.addAll(markers);
 			reorderActiveMarkersIfNeeded();
-			for (MapMarker marker : markers) {
-				addMarkerToGroup(marker, true);
-			}
+			addMarkersToGroups(markers, true);
 			refresh();
 		}
 	}
@@ -506,7 +504,7 @@ public class MapMarkersHelper {
 				mapMarkers.add(marker);
 				reorderActiveMarkersIfNeeded();
 			}
-			addMarkerToGroup(marker, true);
+			addMarkerToGroup(marker);
 			refresh();
 		}
 	}
@@ -763,6 +761,7 @@ public class MapMarkersHelper {
 	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group, boolean enabled) {
 		if (points.size() > 0) {
 			int colorIndex = -1;
+			List<MapMarker> mapMarkers = new ArrayList<>();
 			for (int i = 0; i < points.size(); i++) {
 				LatLon point = points.get(i);
 				PointDescription historyName = historyNames.get(i);
@@ -800,10 +799,11 @@ public class MapMarkersHelper {
 				if (enabled) {
 					mapMarkers.add(0, marker);
 				}
-				addMarkerToGroup(marker, enabled);
+				mapMarkers.add(marker);
 				reorderActiveMarkersIfNeeded();
 				lookupAddress(marker);
 			}
+			addMarkersToGroups(mapMarkers, enabled);
 		}
 	}
 
@@ -997,7 +997,23 @@ public class MapMarkersHelper {
 		}
 	}
 
-	private void addMarkerToGroup(MapMarker marker, boolean enabled) {
+	private void addMarkersToGroups(List<MapMarker> markers, boolean enabled) {
+		List<MapMarkersGroup> groups = new ArrayList<>();
+		for (int i = 0; i < markers.size(); i++) {
+			MapMarkersGroup group = addMarkerToGroup(markers.get(i));
+			if (group != null && !groups.contains(group)) {
+				groups.add(group);
+			}
+		}
+		if (!enabled) {
+			for (MapMarkersGroup mapMarkersGroup : groups) {
+				mapMarkersGroup.setDisabled(true);
+				updateGroupDisabled(mapMarkersGroup, true);
+			}
+		}
+	}
+
+	private MapMarkersGroup addMarkerToGroup(MapMarker marker) {
 		if (marker != null) {
 			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupByName(marker.groupName);
 			if (mapMarkersGroup != null) {
@@ -1011,11 +1027,9 @@ public class MapMarkersHelper {
 				mapMarkersGroup.getMarkers().add(marker);
 				createHeaderAndHistoryButtonInGroup(mapMarkersGroup);
 			}
-			if (!enabled) {
-				mapMarkersGroup.setDisabled(true);
-				updateGroupDisabled(mapMarkersGroup, true);
-			}
+			return mapMarkersGroup;
 		}
+		return null;
 	}
 
 	private MapMarkersGroup createMapMarkerGroup(MapMarker marker) {
