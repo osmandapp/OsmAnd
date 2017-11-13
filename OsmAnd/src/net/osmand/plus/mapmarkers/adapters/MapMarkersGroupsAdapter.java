@@ -134,14 +134,29 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			} else {
 				GroupHeader header = group.getGroupHeader();
 				items.add(header);
-				ShowHideHistoryButton showHideHistoryButton = group.getShowHideHistoryButton();
+				populateAdapterWithGroupMarkers(group, getItemCount());
+			}
+		}
+	}
+
+	private void populateAdapterWithGroupMarkers(MapMarkersGroup group, int position) {
+		if (position != RecyclerView.NO_POSITION) {
+			ShowHideHistoryButton showHideHistoryButton = group.getShowHideHistoryButton();
+			if (!group.isDisabled()) {
+				List<Object> objectsToAdd = new ArrayList<>();
 				if (showHideHistoryButton != null && showHideHistoryButton.isShowHistory()) {
-					items.addAll(group.getMarkers());
+					objectsToAdd.addAll(group.getMarkers());
 				} else {
-					items.addAll(group.getActiveMarkers());
+					objectsToAdd.addAll(group.getActiveMarkers());
 				}
 				if (showHideHistoryButton != null) {
-					items.add(showHideHistoryButton);
+					objectsToAdd.add(showHideHistoryButton);
+				}
+				items.addAll(position, objectsToAdd);
+			} else {
+				items.removeAll(group.getActiveMarkers());
+				if (showHideHistoryButton != null) {
+					items.remove(showHideHistoryButton);
 				}
 			}
 		}
@@ -401,13 +416,13 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
 						group.setDisabled(!enabled);
 						app.getMapMarkersHelper().updateGroupDisabled(group, !enabled);
+						populateAdapterWithGroupMarkers(group, headerViewHolder.getAdapterPosition() + 1);
+						notifyDataSetChanged();
 						if (!enabled) {
 							snackbar = Snackbar.make(holder.itemView, app.getString(R.string.group_will_be_removed_after_restart), Snackbar.LENGTH_LONG)
 									.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 										@Override
 										public void onClick(View view) {
-											group.setDisabled(false);
-											app.getMapMarkersHelper().updateGroupDisabled(group, false);
 											headerViewHolder.disableGroupSwitch.setChecked(true);
 										}
 									});
@@ -422,6 +437,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				throw new IllegalArgumentException("Unsupported header");
 			}
 			headerViewHolder.title.setText(headerString);
+			headerViewHolder.bottomShadow.setVisibility(position == getItemCount() - 1 ? View.VISIBLE : View.GONE);
 		} else if (holder instanceof MapMarkersShowHideHistoryViewHolder) {
 			final MapMarkersShowHideHistoryViewHolder showHideHistoryViewHolder = (MapMarkersShowHideHistoryViewHolder) holder;
 			final ShowHideHistoryButton showHideHistoryButton = (ShowHideHistoryButton) getItem(position);
