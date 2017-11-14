@@ -295,6 +295,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 	private void openAddGroupMenu(AddGroupBottomSheetDialogFragment fragment) {
 		fragment.setListener(createAddGroupListener());
 		fragment.setUsedOnMap(false);
+		fragment.setRetainInstance(true);
 		fragment.show(getChildFragmentManager(), AddGroupBottomSheetDialogFragment.TAG);
 	}
 

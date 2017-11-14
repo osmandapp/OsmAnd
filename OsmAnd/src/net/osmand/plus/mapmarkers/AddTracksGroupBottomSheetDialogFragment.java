@@ -32,11 +32,12 @@ import java.util.Map;
 public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheetDialogFragment {
 
 	private ProcessGpxTask asyncProcessor;
-	private List<GpxDataItem> gpxList = new ArrayList<>();
+	private List<GpxDataItem> gpxList;
 	private GpxSelectionHelper gpxSelectionHelper;
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+		gpxList = new ArrayList<>();
 		super.onViewCreated(view, savedInstanceState);
 		gpxSelectionHelper = getMyApplication().getSelectedGpxHelper();
 		asyncProcessor = new ProcessGpxTask();
@@ -55,7 +56,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpx.getAbsolutePath());
 		if (selectedGpxFile == null) {
 			GPXFile res = GPXUtilities.loadGPXFile(getContext(), gpx);
-			gpxSelectionHelper.selectGpxFile(res, true, false);
+			gpxSelectionHelper.selectGpxFile(res, true, false, false);
 		}
 		return new MarkersSyncGroup(gpx.getAbsolutePath(), AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
 	}

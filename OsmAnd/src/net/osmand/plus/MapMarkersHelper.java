@@ -54,6 +54,10 @@ public class MapMarkersHelper {
 		void onMapMarkersChanged();
 	}
 
+	public interface OnGroupSyncedListener {
+		void onSyncDone();
+	}
+
 	public static class MapMarker implements LocationPoint {
 		private static int[] colors;
 
@@ -452,14 +456,19 @@ public class MapMarkersHelper {
 	}
 
 	public void syncGroup(MarkersSyncGroup group) {
-		syncGroup(group, true);
+		syncGroup(group, true, null);
 	}
 
 	public void syncGroup(MarkersSyncGroup group, boolean enabled) {
-		if (!isGroupSynced(group.getId())) {
-			return;
-		}
-		SyncGroupTask syncGroupTask = new SyncGroupTask(group, enabled);
+		syncGroup(group, enabled, null);
+	}
+
+	public void syncGroup(MarkersSyncGroup group, OnGroupSyncedListener groupSyncedListener) {
+		syncGroup(group, true, groupSyncedListener);
+	}
+
+	private void syncGroup(MarkersSyncGroup group, boolean enabled, OnGroupSyncedListener groupSyncedListener) {
+		SyncGroupTask syncGroupTask = new SyncGroupTask(group, enabled, groupSyncedListener);
 		syncGroupTask.executeOnExecutor(executorService);
 	}
 
@@ -467,25 +476,37 @@ public class MapMarkersHelper {
 
 		private MarkersSyncGroup group;
 		private boolean enabled;
+		private OnGroupSyncedListener listener;
 
-		SyncGroupTask(MarkersSyncGroup group, boolean enabled) {
+		SyncGroupTask(MarkersSyncGroup group, boolean enabled, OnGroupSyncedListener listener) {
 			this.group = group;
 			this.enabled = enabled;
+			this.listener = listener;
 		}
 
 		@Override
 		protected Void doInBackground(Void... voids) {
+			runGroupSynchronization();
+			onGroupSynced();
+			return null;
+		}
+
+		private void runGroupSynchronization() {
+			if (!isGroupSynced(group.getId())) {
+				return;
+			}
+
 			List<MapMarker> dbMarkers = markersDbHelper.getMarkersFromGroup(group);
 
 			if (group.getType() == MarkersSyncGroup.FAVORITES_TYPE) {
 				FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.getName());
 				if (favGroup == null) {
-					return null;
+					return;
 				}
 				if (!favGroup.visible) {
 					removeActiveMarkersFromSyncGroup(group.getId());
 					removeActiveMarkersFromGroup(group.getId());
-					return null;
+					return;
 				}
 				if (group.getColor() == -1) {
 					group.setColor(favGroup.color);
@@ -500,7 +521,7 @@ public class MapMarkersHelper {
 				GpxSelectionHelper gpxHelper = ctx.getSelectedGpxHelper();
 				File file = new File(group.getId());
 				if (!file.exists()) {
-					return null;
+					return;
 				}
 
 				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(group.getId());
@@ -508,7 +529,7 @@ public class MapMarkersHelper {
 				if (gpx == null) {
 					removeActiveMarkersFromSyncGroup(group.getId());
 					removeActiveMarkersFromGroup(group.getId());
-					return null;
+					return;
 				}
 
 				List<WptPt> gpxPoints = new LinkedList<>(gpx.getPoints());
@@ -520,7 +541,17 @@ public class MapMarkersHelper {
 
 				removeOldMarkersIfNeeded(dbMarkers);
 			}
-			return null;
+		}
+
+		private void onGroupSynced() {
+			if (listener != null) {
+				ctx.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						listener.onSyncDone();
+					}
+				});
+			}
 		}
 	}
 

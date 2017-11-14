@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,7 +26,6 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 	protected View mainView;
 	protected GroupsAdapter adapter;
 	protected MapMarkersHelper mapMarkersHelper;
-	private CreateGpxGroupTask createGpxGroupTask;
 
 	public void setListener(AddGroupListener listener) {
 		this.listener = listener;
@@ -43,6 +43,14 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_add_group_bottom_sheet_dialog, container);
 
+		setupHeightAndBackground(mainView, R.id.groups_recycler_view);
+
+		return mainView;
+	}
+
+	@Override
+	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 		final RecyclerView recyclerView = mainView.findViewById(R.id.groups_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		createAdapter();
@@ -53,8 +61,18 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 				if (position == RecyclerView.NO_POSITION) {
 					return;
 				}
-				createGpxGroupTask = new CreateGpxGroupTask();
-				createGpxGroupTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, position);
+				mainView.findViewById(R.id.groups_recycler_view).setVisibility(View.GONE);
+				mainView.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+				MarkersSyncGroup group = createMapMarkersSyncGroup(position);
+				mapMarkersHelper.addMarkersSyncGroup(group);
+				mapMarkersHelper.syncGroup(group, new MapMarkersHelper.OnGroupSyncedListener() {
+					@Override
+					public void onSyncDone() {
+						if (listener != null) {
+							listener.onGroupAdded();
+						}
+					}
+				});
 			}
 		});
 		recyclerView.setAdapter(adapter);
@@ -65,19 +83,15 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 				dismiss();
 			}
 		});
-
-		setupHeightAndBackground(mainView, R.id.groups_recycler_view);
-
-		return mainView;
 	}
 
 	@Override
 	public void onDestroyView() {
-		super.onDestroyView();
-		if (createGpxGroupTask != null) {
-			createGpxGroupTask.cancel(true);
-			createGpxGroupTask = null;
+		Dialog dialog = getDialog();
+		if (dialog != null && getRetainInstance()) {
+			dialog.setDismissMessage(null);
 		}
+		super.onDestroyView();
 	}
 
 	protected abstract void createAdapter();
@@ -86,33 +100,5 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 
 	public interface AddGroupListener {
 		void onGroupAdded();
-	}
-
-	public class CreateGpxGroupTask extends AsyncTask<Integer, Void, MarkersSyncGroup> {
-
-		private ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);;
-		private RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.groups_recycler_view);
-
-		@Override
-		protected void onPreExecute() {
-			recyclerView.setVisibility(View.GONE);
-			progressBar.setVisibility(View.VISIBLE);
-		}
-
-		@Override
-		protected MarkersSyncGroup doInBackground(Integer... integers) {
-			return createMapMarkersSyncGroup(integers[0]);
-		}
-
-		@Override
-		protected void onPostExecute(MarkersSyncGroup group) {
-			createGpxGroupTask = null;
-			mapMarkersHelper.addMarkersSyncGroup(group);
-			mapMarkersHelper.syncGroup(group);
-			if (listener != null) {
-				listener.onGroupAdded();
-			}
-			dismiss();
-		}
 	}
 }
