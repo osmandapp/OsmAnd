@@ -43,10 +43,8 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 	}
 
 	public void createHeaders() {
-		items.clear();
-
+		items = new ArrayList<>();
 		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersHistory();
-
 		int previousHeader = -1;
 		int monthsDisplayed = 0;
 
@@ -151,14 +149,12 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 						return;
 					}
 					app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
-					notifyItemRemoved(position);
 
 					snackbar = Snackbar.make(itemViewHolder.itemView, app.getString(R.string.marker_moved_to_active), Snackbar.LENGTH_LONG)
 							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 								@Override
 								public void onClick(View view) {
 									app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
-									notifyDataSetChanged();
 								}
 							});
 					View snackBarView = snackbar.getView();

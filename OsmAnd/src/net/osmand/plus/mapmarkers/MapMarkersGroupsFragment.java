@@ -185,10 +185,6 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 					int snackbarStringRes;
 					if (direction == ItemTouchHelper.RIGHT) {
 						mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory((MapMarker) item);
-						MapMarkersHelper.MapMarkersGroup group = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkerGroupByName(marker.groupName);
-						if (group != null) {
-							mapActivity.getMyApplication().getMapMarkersHelper().updateGroup(group);
-						}
 						snackbarStringRes = R.string.marker_moved_to_history;
 					} else {
 						mapActivity.getMyApplication().getMapMarkersHelper().removeMarker((MapMarker) item);
