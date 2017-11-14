@@ -40,8 +40,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.SHOW_MOVE_ALL_TO_HISTORY_ROW;
-import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.SHOW_SORT_BY_ROW;
+import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.GROUPS_MARKERS_MENU;
+import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.HISTORY_MARKERS_MENU;
 
 public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragment {
 
@@ -269,8 +269,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
 		fragment.setListener(createOptionsFragmentListener());
 		Bundle args = new Bundle();
-		args.putBoolean(SHOW_SORT_BY_ROW, viewPager.getCurrentItem() == ACTIVE_MARKERS_POSITION);
-		args.putBoolean(SHOW_MOVE_ALL_TO_HISTORY_ROW, viewPager.getCurrentItem() != HISTORY_MARKERS_POSITION);
+		args.putBoolean(GROUPS_MARKERS_MENU, viewPager.getCurrentItem() == GROUPS_POSITION);
+		args.putBoolean(HISTORY_MARKERS_MENU, viewPager.getCurrentItem() == HISTORY_MARKERS_POSITION);
 		fragment.setArguments(args);
 		getChildFragmentManager().beginTransaction()
 				.add(R.id.menu_container, fragment, OptionsBottomSheetDialogFragment.TAG)
