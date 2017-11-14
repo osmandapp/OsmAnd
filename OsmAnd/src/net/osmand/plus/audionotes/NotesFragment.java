@@ -174,7 +174,10 @@ public class NotesFragment extends OsmAndListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				Toast.makeText(getContext(), "Sort", Toast.LENGTH_SHORT).show();
+				// todo: handle screen rotation
+				SortBottomSheetDialogFragment fragment = new SortBottomSheetDialogFragment();
+				fragment.setUsedOnMap(false);
+				fragment.show(getChildFragmentManager(), SortBottomSheetDialogFragment.TAG);
 				return true;
 			}
 		});

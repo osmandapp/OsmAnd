@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="by_date">By date</string>
+    <string name="by_type">By type</string>
     <string name="appearance_on_the_map">Appearance on the map</string>
     <string name="add_track_to_markers_descr">Select track waypoints of which OsmAnd will add to markers</string>
     <string name="add_favourites_group_to_markers_descr">Select which favourite group you want to add to markers</string>
