@@ -1449,13 +1449,13 @@
     <string name="edit_tilesource_choose_existing">Choose existing…</string>
     <string name="maps_define_edit">Define/Edit…</string>
     <string name="map_widget_fps_info">FPS debug info</string>
-    <string name="driving_region_descr">Select the driving region: US, Europe, UK, Asia, and others.</string>
+    <string name="driving_region_descr">Select the driving region: US, Europe, UK, Asia and others.</string>
     <string name="driving_region">Driving region</string>
     <string name="driving_region_japan">Japan</string>
     <string name="driving_region_us">United States</string>
     <string name="driving_region_canada">Canada</string>
-    <string name="driving_region_europe_asia">Europe, Asia, Latin America, &amp; similar</string>
-    <string name="driving_region_uk">UK, India, &amp; similar</string>
+    <string name="driving_region_europe_asia">Europe, Asia, Latin America &amp; similar</string>
+    <string name="driving_region_uk">UK, India &amp; similar</string>
     <string name="driving_region_australia">Australia</string>
     <string name="speak_title">Announce…</string>
     <string name="speak_descr">Configure to announce street names, traffic warnings (forced stops, speed bumps), speed camera warnings, speed limits.</string>
