@@ -170,8 +170,17 @@ public class NotesFragment extends OsmAndListFragment {
 		}
 		((ActionBarProgressActivity) getActivity()).updateListViewFooter(footerView);
 
-		MenuItem item = menu.add(R.string.shared_string_share).
-				setIcon(R.drawable.ic_action_export);
+		MenuItem item = menu.add(R.string.shared_string_sort).setIcon(R.drawable.ic_action_list_sort);
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				Toast.makeText(getContext(), "Sort", Toast.LENGTH_SHORT).show();
+				return true;
+			}
+		});
+		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+		item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_gshare_dark);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -179,11 +188,9 @@ public class NotesFragment extends OsmAndListFragment {
 				return true;
 			}
 		});
-		MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
-		item = menu.add(R.string.shared_string_delete_all).
-				setIcon(R.drawable.ic_action_delete_dark);
-		MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -191,7 +198,7 @@ public class NotesFragment extends OsmAndListFragment {
 				return true;
 			}
 		});
-
+		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 	}
 	
 	private void enterSelectionMode(int type){
@@ -332,7 +339,7 @@ public class NotesFragment extends OsmAndListFragment {
 				if(type == MODE_DELETE) {
 					item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
 				} else {
-					item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_export);
+					item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_gshare_dark);
 				}
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
