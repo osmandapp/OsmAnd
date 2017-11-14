@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -27,6 +28,8 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 
@@ -41,6 +44,7 @@ public class MapMarkersHelper {
 	private OsmandApplication ctx;
 	private MapMarkersDbHelper markersDbHelper;
 	private boolean startFromMyLocation;
+	private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
 	private MarkersPlanRouteContext planRouteContext;
 
@@ -455,50 +459,68 @@ public class MapMarkersHelper {
 		if (!isGroupSynced(group.getId())) {
 			return;
 		}
-		List<MapMarker> dbMarkers = markersDbHelper.getMarkersFromGroup(group);
+		SyncGroupTask syncGroupTask = new SyncGroupTask(group, enabled);
+		syncGroupTask.executeOnExecutor(executorService);
+	}
 
-		if (group.getType() == MarkersSyncGroup.FAVORITES_TYPE) {
-			FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.getName());
-			if (favGroup == null) {
-				return;
-			}
-			if (!favGroup.visible) {
-				removeActiveMarkersFromSyncGroup(group.getId());
-				removeActiveMarkersFromGroup(group.getId());
-				return;
-			}
-			if (group.getColor() == -1) {
-				group.setColor(favGroup.color);
-			}
+	private class SyncGroupTask extends AsyncTask<Void, Void, Void> {
 
-			for (FavouritePoint fp : favGroup.points) {
-				addNewMarkerIfNeeded(group, dbMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName(), enabled);
-			}
+		private MarkersSyncGroup group;
+		private boolean enabled;
 
-			removeOldMarkersIfNeeded(dbMarkers);
-		} else if (group.getType() == MarkersSyncGroup.GPX_TYPE) {
-			GpxSelectionHelper gpxHelper = ctx.getSelectedGpxHelper();
-			File file = new File(group.getId());
-			if (!file.exists()) {
-				return;
-			}
+		SyncGroupTask(MarkersSyncGroup group, boolean enabled) {
+			this.group = group;
+			this.enabled = enabled;
+		}
 
-			SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(group.getId());
-			GPXFile gpx = selectedGpxFile == null ? null : selectedGpxFile.getGpxFile();
-			if (gpx == null) {
-				removeActiveMarkersFromSyncGroup(group.getId());
-				removeActiveMarkersFromGroup(group.getId());
-				return;
-			}
+		@Override
+		protected Void doInBackground(Void... voids) {
+			List<MapMarker> dbMarkers = markersDbHelper.getMarkersFromGroup(group);
 
-			List<WptPt> gpxPoints = new LinkedList<>(gpx.getPoints());
-			int defColor = ContextCompat.getColor(ctx, R.color.marker_red);
-			for (WptPt pt : gpxPoints) {
-				group.setColor(pt.getColor(defColor));
-				addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name, enabled);
-			}
+			if (group.getType() == MarkersSyncGroup.FAVORITES_TYPE) {
+				FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.getName());
+				if (favGroup == null) {
+					return null;
+				}
+				if (!favGroup.visible) {
+					removeActiveMarkersFromSyncGroup(group.getId());
+					removeActiveMarkersFromGroup(group.getId());
+					return null;
+				}
+				if (group.getColor() == -1) {
+					group.setColor(favGroup.color);
+				}
 
-			removeOldMarkersIfNeeded(dbMarkers);
+				for (FavouritePoint fp : favGroup.points) {
+					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName(), enabled);
+				}
+
+				removeOldMarkersIfNeeded(dbMarkers);
+			} else if (group.getType() == MarkersSyncGroup.GPX_TYPE) {
+				GpxSelectionHelper gpxHelper = ctx.getSelectedGpxHelper();
+				File file = new File(group.getId());
+				if (!file.exists()) {
+					return null;
+				}
+
+				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(group.getId());
+				GPXFile gpx = selectedGpxFile == null ? null : selectedGpxFile.getGpxFile();
+				if (gpx == null) {
+					removeActiveMarkersFromSyncGroup(group.getId());
+					removeActiveMarkersFromGroup(group.getId());
+					return null;
+				}
+
+				List<WptPt> gpxPoints = new LinkedList<>(gpx.getPoints());
+				int defColor = ContextCompat.getColor(ctx, R.color.marker_red);
+				for (WptPt pt : gpxPoints) {
+					group.setColor(pt.getColor(defColor));
+					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name, enabled);
+				}
+
+				removeOldMarkersIfNeeded(dbMarkers);
+			}
+			return null;
 		}
 	}
 
