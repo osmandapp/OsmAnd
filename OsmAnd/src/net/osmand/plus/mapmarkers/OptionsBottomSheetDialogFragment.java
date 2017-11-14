@@ -180,7 +180,8 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		int scrH = AndroidUtils.getScreenHeight(activity);
 		int stBarH = AndroidUtils.getStatusBarHeight(activity);
 		int nBarH = AndroidUtils.getNavBarHeight(activity);
-		return scrH - stBarH - nBarH - getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar) - AndroidUtils.dpToPx(activity, 56);
+		// 56dp below is height of the bottom navigation view
+		return scrH - stBarH - nBarH - AndroidUtils.dpToPx(activity, 56);
 	}
 
 	interface MarkerOptionsFragmentListener {
