@@ -719,7 +719,7 @@
 	<string name="poi_fuel_lh2">Vloeibare waterstof</string>
 	<string name="poi_fuel_electricity">Elektriciteit</string>
 	<string name="poi_junction">Kruising</string>
-	<string name="poi_rest_area">Snelweg-parkeerplaats</string>
+	<string name="poi_rest_area">Verzorgingsplaats</string>
 
 	<string name="poi_observation_tower">Uitkijktoren</string>
 	<string name="poi_bell_tower">Kerktoren</string>
@@ -1487,7 +1487,7 @@
 	<string name="poi_payment_others_no">Andere betalingsvormen NIET mogelijk</string>
 	<string name="poi_length">Lengte</string>
 
-<string name="poi_fuel_type">Type</string>
+<string name="poi_fuel_type">Brandstoftype</string>
 	<string name="poi_payment_type">Betaaltype</string>
 	<string name="poi_additional_type">Bijkomstig</string>
 <string name="poi_solarium_yes">Solarium</string>
@@ -1498,7 +1498,7 @@
 	<string name="poi_dish">Keuken/soort gerechten</string>
 	<string name="poi_vending_ice_cream">IJs</string>
 	<string name="poi_cuisine_ice_cream">IJs</string>
-	<string name="poi_fuel_avia_type">Type</string>
+	<string name="poi_fuel_avia_type">Brandstoftype (avia)</string>
 	<string name="poi_internet_access_type">Internet</string>
 	<string name="poi_vending_type">Verkoop</string>
 	<string name="poi_bicycle_service">Fietsreparatie</string>
@@ -1559,7 +1559,7 @@
 	<string name="poi_shelter_type">Type</string>
 	<string name="poi_fireplace">Open haard</string>
 	<string name="poi_seasonal">Seizoensgebonden</string>
-	<string name="poi_water_characteristic">Soort water</string>
+	<string name="poi_water_characteristic">Waterpartij</string>
 	<string name="poi_beach_surface_type">Oppervlak</string>
 	<string name="poi_nudism">Nudisme</string>
 	<string name="poi_diet">Dieet</string>
@@ -2285,4 +2285,207 @@
 	<string name="poi_maxwidth">Maximale breedte</string>
 	<string name="poi_iata">IATA-code</string>
 	<string name="poi_icao">ICAO-code</string>
+	<string name="poi_operational_status">Bedrijfsstatus</string>
+	<string name="poi_wiki_lang_bpy"></string>
+	<string name="poi_historic_farm">Historische boerderij</string>
+	<string name="poi_historic_railway_station">Historisch treinstation</string>
+
+	<string name="poi_historic_threshing_floor">Historische dorsvloer</string>
+	<string name="poi_historic_gallows">Historische galg</string>
+	<string name="poi_historic_railway">Historische spoorlijn</string>
+
+	<string name="poi_square">Plein</string>
+	<string name="poi_artist_name">Kunstenaar</string>
+	<string name="poi_sculptor">Beeldhouwer</string>
+
+	<string name="poi_building_type_church">Type gebouw: kerk</string>
+	<string name="poi_building_type_chapel">Type gebouw: Kapel</string>
+	<string name="poi_building_type_mosque">Type gebouw: moskee</string>
+	<string name="poi_building_type_temple">Type gebouw: tempel</string>
+	<string name="poi_building_type_cathedral">Type gebouw: kathedraal</string>
+	<string name="poi_building_type_monastery">Type gebouw: klooster</string>
+	<string name="poi_building_type_basilica">Type gebouw: Basiliek</string>
+	<string name="poi_building_type_synagogue">Type gebouw: synagoge</string>
+	<string name="poi_building_type_shrine">Type gebouw: schrijn</string>
+
+	<string name="poi_cross">Kruis</string>
+	<string name="poi_summit_cross">Kruis op de top: ja</string>
+
+	<string name="poi_prison_camp">Voormalig gevangeniskamp</string>
+	<string name="poi_concentration_camp">Type: concentratiekamp</string>
+	<string name="poi_pow_camp">Type: krijgsgevangenenkamp</string>
+	<string name="poi_labor_camp">Type: werkkamp</string>
+	<string name="poi_concentration_camp_nazism">Type: nazi</string>
+	<string name="poi_temperature">Temperatuur</string>
+	<string name="poi_bathing_yes">Zwemmen: ja</string>
+	<string name="poi_bathing_no">Zwemmen: nee</string>
+
+	<string name="poi_boat_storage">Boot-opslag</string>
+
+	<string name="poi_bridge_ref">Brug Nr.</string>
+	<string name="poi_tunnel_ref">Tunnel Nr.</string>
+
+	<string name="poi_ref">Nr.</string>
+
+	<string name="poi_cargo_passengers">Passagiers</string>
+	<string name="poi_cargo_vehicle">Voertuigen</string>
+	<string name="poi_cargo_bicycle">Fietsen</string>
+	<string name="poi_cargo_container">Containers</string>
+	<string name="poi_cargo_hgv">Vrachtwagen</string>
+
+	<string name="poi_craft_electronics_repair">Elektronica-reparatie</string>
+	<string name="poi_fireworks">Vuurwerk winkel</string>
+
+	<string name="poi_aerialway_length">Lengte</string>
+
+	<string name="poi_health_specialty_general_yes">Huisarts</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Oogheelkunde</string>
+	<string name="poi_health_specialty_gynaecology_yes">Gynaecologie</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Orthopedie</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Keel-, neus- en oorheelkunde</string>
+	<string name="poi_health_specialty_paediatrics_yes">Kindergeneeskunde</string>
+	<string name="poi_health_specialty_paediatrics_no">Gezondheidsspecialiteit: kindergeneeskunde: nee</string>
+	<string name="poi_health_specialty_dermatology_yes">Dermatologie</string>
+	<string name="poi_health_specialty_urology_yes">Urologie</string>
+	<string name="poi_health_specialty_surgery_yes">Algemene chirurgie</string>
+	<string name="poi_health_specialty_radiology_yes">Radiologie</string>
+	<string name="poi_health_specialty_psychiatry_yes">Psychiatrie</string>
+	<string name="poi_health_specialty_neurology_yes">Neurologie</string>
+	<string name="poi_health_specialty_cardiology_yes">Cardiologie</string>
+	<string name="poi_health_specialty_trauma_yes">Traumatologie</string>
+	<string name="poi_health_specialty_biology_yes">Klinische biologie</string>
+	<string name="poi_health_specialty_osteopathy_yes">Osteopathie</string>
+	<string name="poi_health_specialty_pulmonology_yes">Ademhalingsgeneeskunde</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Tandheelkundige, orale en maxillofaciale chirurgie</string>
+	<string name="poi_health_specialty_maternity_yes">Moederschap</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Spoedeisende hulp</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Specialiteit gezondheid: Spoedeisende hulp: nee</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Plastische chirurgie</string>
+	<string name="poi_health_specialty_orthodontics_yes">Orthodontie</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Fysiotherapie</string>
+	<string name="poi_health_specialty_biochemistry_yes">Biochemie</string>
+	<string name="poi_health_specialty_occupational_yes">Ergotherapie</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Kinderpsychiatrie</string>
+	<string name="poi_health_specialty_physiatry_yes">Fysische geneeskunde en revalidatie</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Maxillo-faciale chirurgie</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Diagnostische Radiologie</string>
+	<string name="poi_health_specialty_dentistry_yes">Tandheelkunde</string>
+	<string name="poi_health_specialty_nephrology_yes">Nefrologie (nierziekten)</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Neurochirurgie</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropsychiatrie</string>
+	<string name="poi_health_specialty_endocrinology_yes">Endocrinologie</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Nucleaire geneeskunde</string>
+	<string name="poi_health_specialty_naturopathy_yes">Natuurgeneeskunde</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Dieptepsychologie</string>
+	<string name="poi_health_specialty_behavior_yes">Gedragstherapie</string>
+	<string name="poi_disc_golf">Diskgolf</string>
+	<string name="poi_rc_car">Radiogestuurde autorace</string>
+	<string name="poi_boxing">Boksen</string>
+
+	<string name="poi_official_name">Officiële naam</string>
+
+	<string name="poi_dolphin">Dolfijn</string>
+
+	<string name="poi_forestry_compartment">Wegwijzer: bosbouwdivisie</string>
+	<string name="poi_forestry_allotment">Wegwijzer: bos-perceel</string>
+	<string name="poi_inscription_n">Opschrift: N</string>
+	<string name="poi_inscription_nw">Opschrift: NW</string>
+	<string name="poi_inscription_w">Opschrift: W</string>
+	<string name="poi_inscription_sw">Opschrift: SW</string>
+	<string name="poi_inscription_s">Opschrift: S</string>
+	<string name="poi_inscription_se">Opschrift: SE</string>
+	<string name="poi_inscription_e">Opschrift: E</string>
+	<string name="poi_inscription_ne">Opschrift: NE</string>
+
+	<string name="poi_construction_yes">In aanbouw</string>
+	<string name="poi_additional_atm_yes">Geldautomaat: ja</string>
+	<string name="poi_atm_no">Geldautomaat: nee</string>
+
+	<string name="poi_firepit">Vuurplaats</string>
+	<string name="poi_street_cabinet">Verdeelkast</string>
+
+	<string name="poi_fair_trade_yes">Fair trade: ja</string>
+	<string name="poi_fair_trade_no">Fair trade: nee</string>
+	<string name="poi_fair_trade_only">Alleen fair trade-producten</string>
+
+
+	<string name="poi_protected_area">Beschermd gebied</string>
+	<string name="poi_protection_title">Beschermings-title</string>
+	<string name="poi_nuclear_explosion_warhead">Explosie: kernkop</string>
+	<string name="poi_nuclear_explosion_device">Explosie: apparaat</string>
+
+	<string name="poi_addr_housename">Huis naam</string>
+
+
+	<string name="poi_plant_nursery">Plantenkwekerij</string>
+
+	<string name="poi_compressed_air_yes">Ja</string>
+	<string name="poi_compressed_air_no">Perslucht: nee</string>
+
+	<string name="poi_car_wash_yes">Ja</string>
+
+	<string name="poi_vacuum_cleaner_yes">Ja</string>
+	<string name="poi_vacuum_cleaner_no">Stofzuiger: nee</string>
+	<string name="poi_amenity_vacuum_cleaner">Stofzuiger</string>
+
+	<string name="poi_sport_free_flying">Vrij vliegen (sport)</string>
+
+	<string name="poi_water_tap">Waterkraan</string>
+	<string name="poi_button_operated_yes">Knop bediend: Ja</string>
+	<string name="poi_button_operated_no">Knop bediend: nee</string>
+
+	<string name="poi_free_flying_site_takeoff">Lanceerplaats</string>
+	<string name="poi_free_flying_site_landing">Landingsbaan</string>
+	<string name="poi_free_flying_site_towing">Slepen</string>
+	<string name="poi_free_flying_site_training">Opleiding</string>
+	<string name="poi_free_flying_official_yes">Officieel: ja</string>
+	<string name="poi_free_flying_official_no">Officieel: nee</string>
+	<string name="poi_free_flying_paragliding_no">Paragliding: nee</string>
+	<string name="poi_free_flying_hanggliding_yes">Delta vliegen</string>
+	<string name="poi_free_flying_hanggliding_no">Delta vliegen: nee</string>
+	<string name="poi_health_service_counselling_no">Gezondheid service: begeleiding: nee</string>
+	<string name="poi_health_service_examination_yes">Gezondheidszorg: onderzoek: ja</string>
+	<string name="poi_health_service_examination_no">Gezondheidszorg: onderzoek: nee</string>
+	<string name="poi_health_service_child_care_yes">Gezondheidszorg: kinderopvang: ja</string>
+	<string name="poi_health_service_child_care_no">Gezondheidszorg: kinderopvang: nee</string>
+	<string name="poi_health_service_prevention_yes">Gezondheidszorg: preventie: ja</string>
+	<string name="poi_health_service_prevention_no">Gezondheidszorg: preventie: nee</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Gezondheidszorg: vaccinatie: ja</string>
+	<string name="poi_health_service_prevention_vaccination_no">Gezondheidszorg: vaccinatie: nee</string>
+	<string name="poi_health_service_support_yes">Gezondheidszorg: ondersteuning: ja</string>
+	<string name="poi_health_service_support_no">Gezondheidszorg: ondersteuning: nee</string>
+	<string name="poi_health_service_test_yes">Gezondheidszorg: test: ja</string>
+	<string name="poi_health_service_test_no">Gezondheidszorg: test: nee</string>
+
+	<string name="poi_health_facility_type_office">Medische kantoor</string>
+	<string name="poi_health_facility_type_field_hospital">Type medische faciliteit: veldhospitaal</string>
+	<string name="poi_health_facility_type_counselling_centre">Type medische faciliteit: adviescentrum</string>
+	<string name="poi_health_facility_type_laboratory">Type medische faciliteit: laboratorium</string>
+	<string name="poi_health_facility_type_therapy">Type medische faciliteit: therapie</string>
+	<string name="poi_health_facility_type_department">Type medische faciliteit: afdeling</string>
+	<string name="poi_health_facility_type_dispensary">Type medische faciliteit: apotheek</string>
+	<string name="poi_health_facility_type_first_aid">Type medische faciliteit: EHBO</string>
+	<string name="poi_health_facility_type_nursing_home">Type medische faciliteit: verpleeghuis</string>
+	<string name="poi_health_facility_type_support_group_home">Type medische faciliteit: steungroep</string>
+
+	<string name="poi_suction_point">Zuigpunt</string>
+
+	<string name="poi_fire_hydrant_type_underground">Ondergrond</string>
+	<string name="poi_fire_hydrant_type_pillar">Pilaar</string>
+	<string name="poi_fire_hydrant_type_pond">Vijver</string>
+	<string name="poi_fire_hydrant_type_wall">Muur</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">EHBO doos</string>
+	<string name="poi_health_amenity_type_scales">Openbare Weegschaal</string>
+
+	<string name="poi_emergency_yes">Noodgeval: ja</string>
+	<string name="poi_emergency_no">Noodgeval: nee</string>
+	<string name="poi_home_visit_yes">Ja</string>
+	<string name="poi_home_visit_no">Huisbezoek: nee</string>
+
+	<string name="poi_disease_malaria_yes">Malaria: ja</string>
+	<string name="poi_disease_malaria_no">Malaria: nee</string>
+	<string name="poi_disease_autism_yes">Autisme: ja</string>
+	<string name="poi_disease_autism_no">Autisme: nee</string>
+	<string name="poi_office_physician">Arts kantoor</string>
 	</resources>
