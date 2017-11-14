@@ -71,6 +71,7 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 						if (listener != null) {
 							listener.onGroupAdded();
 						}
+						dismiss();
 					}
 				});
 			}
