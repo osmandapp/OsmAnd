@@ -62,8 +62,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 	private boolean lightTheme;
 
-	private boolean optionsMenuVisible;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -79,10 +77,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		return new Dialog(getActivity(), getTheme()) {
 			@Override
 			public void onBackPressed() {
-				if (optionsMenuVisible) {
-					restoreSelectedNavItem();
-					dismissOptionsMenuFragment();
-				} else {
+				if (!dismissOptionsMenuFragment()) {
 					super.onBackPressed();
 				}
 			}
@@ -122,7 +117,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		FragmentManager fragmentManager = getChildFragmentManager();
 		Fragment optionsFragment = fragmentManager.findFragmentByTag(OptionsBottomSheetDialogFragment.TAG);
 		if (optionsFragment != null) {
-			optionsMenuVisible = true;
 			((OptionsBottomSheetDialogFragment) optionsFragment).setListener(createOptionsFragmentListener());
 		}
 		Fragment directionIndicationFragment = fragmentManager.findFragmentByTag(DirectionIndicationDialogFragment.TAG);
@@ -194,15 +188,18 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 						setupActiveFragment(HISTORY_MARKERS_POSITION);
 						return true;
 					case R.id.action_more:
-						if (optionsMenuVisible) {
-							restoreSelectedNavItem();
-							dismissOptionsMenuFragment();
-						} else {
-							showOptionsMenuFragment();
-						}
+						showOptionsMenuFragment();
 						return true;
 				}
 				return false;
+			}
+		});
+		bottomNav.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+			@Override
+			public void onNavigationItemReselected(@NonNull MenuItem menuItem) {
+				if (menuItem.getItemId() == R.id.action_more) {
+					dismissOptionsMenuFragment();
+				}
 			}
 		});
 
@@ -223,9 +220,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	}
 
 	private void setupActiveFragment(int position) {
-		if (optionsMenuVisible) {
-			dismissOptionsMenuFragment();
-		}
+		dismissOptionsMenuFragment();
 		if (viewPager.getCurrentItem() != position) {
 			hideSnackbar();
 			switch (position) {
@@ -278,15 +273,15 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		getChildFragmentManager().beginTransaction()
 				.add(R.id.menu_container, fragment, OptionsBottomSheetDialogFragment.TAG)
 				.commitAllowingStateLoss();
-		optionsMenuVisible = true;
 	}
 
-	private void dismissOptionsMenuFragment() {
+	private boolean dismissOptionsMenuFragment() {
 		Fragment optionsMenu = getChildFragmentManager().findFragmentByTag(OptionsBottomSheetDialogFragment.TAG);
 		if (optionsMenu != null) {
 			((DialogFragment) optionsMenu).dismiss();
+			return true;
 		}
-		optionsMenuVisible = false;
+		return false;
 	}
 
 	private void restoreSelectedNavItem() {
@@ -304,7 +299,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 					break;
 			}
 			if (id != -1) {
-				bottomNav.setSelectedItemId(id);
+				bottomNav.getMenu().findItem(id).setChecked(true);
 			}
 		}
 	}
@@ -400,7 +395,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 			@Override
 			public void dismiss() {
-				optionsMenuVisible = false;
 				restoreSelectedNavItem();
 			}
 		};
