@@ -34,6 +34,7 @@ import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment.DirectionInd
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
 import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
+import net.osmand.plus.widgets.tools.BottomNavigationViewHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -161,6 +162,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		}
 
 		bottomNav = mainView.findViewById(R.id.map_markers_bottom_navigation);
+		BottomNavigationViewHelper.disableShiftMode(bottomNav);
 		if (!lightTheme) {
 			bottomNav.setItemIconTintList(ContextCompat.getColorStateList(getContext(), R.color.bottom_navigation_color_selector_dark));
 			bottomNav.setItemTextColor(ContextCompat.getColorStateList(getContext(), R.color.bottom_navigation_color_selector_dark));
