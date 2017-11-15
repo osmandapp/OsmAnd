@@ -184,7 +184,9 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		for (FavouritePoint n : getPoints()) {
-			getFavFromPoint(tb, res, r, ex, ey, n);
+			if (!getSyncedPoints().contains(n)) {
+				getFavFromPoint(tb, res, r, ex, ey, n);
+			}
 		}
 	}
 
