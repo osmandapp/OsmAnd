@@ -75,6 +75,8 @@ public class MapMarkersHelper {
 		public String nextKey;
 		public String groupKey;
 		public String groupName;
+		public WptPt wptPt;
+		public FavouritePoint favouritePoint;
 
 		public MapMarker(LatLon point, PointDescription name, int colorIndex,
 						 boolean selected, int index) {
@@ -516,7 +518,7 @@ public class MapMarkersHelper {
 				}
 
 				for (FavouritePoint fp : favGroup.points) {
-					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName(), enabled);
+					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName(), enabled, fp, null);
 				}
 				favouritesDbHelper.removeSyncedGroup(favGroup);
 				favouritesDbHelper.addSyncedGroup(favGroup);
@@ -541,7 +543,7 @@ public class MapMarkersHelper {
 				int defColor = ContextCompat.getColor(ctx, R.color.marker_red);
 				for (WptPt pt : gpxPoints) {
 					group.setColor(pt.getColor(defColor));
-					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name, enabled);
+					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name, enabled, null, pt);
 				}
 				gpx.setSynced(true);
 
@@ -561,7 +563,7 @@ public class MapMarkersHelper {
 		}
 	}
 
-	private void addNewMarkerIfNeeded(MarkersSyncGroup group, List<MapMarker> markers, LatLon latLon, String name, boolean enabled) {
+	private void addNewMarkerIfNeeded(MarkersSyncGroup group, List<MapMarker> markers, LatLon latLon, String name, boolean enabled, FavouritePoint favouritePoint, WptPt wptPt) {
 		boolean exists = false;
 
 		for (MapMarker marker : markers) {
@@ -583,7 +585,8 @@ public class MapMarkersHelper {
 
 		if (!exists) {
 			addMarkers(Collections.singletonList(latLon),
-					Collections.singletonList(new PointDescription(POINT_TYPE_MAP_MARKER, name)), group, enabled);
+					Collections.singletonList(new PointDescription(POINT_TYPE_MAP_MARKER, name)),
+					group, enabled, Collections.singletonList(favouritePoint), Collections.singletonList(wptPt));
 		}
 	}
 
@@ -896,12 +899,19 @@ public class MapMarkersHelper {
 	}
 
 	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group, boolean enabled) {
+		addMarkers(points, historyNames, group, enabled, new ArrayList<FavouritePoint>(), new ArrayList<WptPt>());
+	}
+
+	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group,
+							boolean enabled, List<FavouritePoint> favouritePoints, List<WptPt> wptPts) {
 		if (points.size() > 0) {
 			int colorIndex = -1;
 			List<MapMarker> addedMarkers = new ArrayList<>();
 			for (int i = 0; i < points.size(); i++) {
 				LatLon point = points.get(i);
 				PointDescription historyName = historyNames.get(i);
+				FavouritePoint favouritePoint = favouritePoints.get(i);
+				WptPt wptPt = wptPts.get(i);
 				final PointDescription pointDescription;
 				if (historyName == null) {
 					pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
@@ -932,6 +942,8 @@ public class MapMarkersHelper {
 				}
 				marker.history = false;
 				marker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;
+				marker.favouritePoint = favouritePoint;
+				marker.wptPt = wptPt;
 				markersDbHelper.addMarker(marker);
 				if (enabled) {
 					addToMapMarkersList(0, marker);
