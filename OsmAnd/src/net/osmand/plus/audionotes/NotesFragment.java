@@ -3,16 +3,14 @@ package net.osmand.plus.audionotes;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.FileProvider;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
-import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,7 +31,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -41,9 +38,9 @@ import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.audionotes.ItemMenuBottomSheetDialogFragment.ItemMenuFragmentListener;
 import net.osmand.plus.audionotes.SortByMenuBottomSheetDialogFragment.SortFragmentListener;
 import net.osmand.plus.base.OsmAndListFragment;
-import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.util.Algorithms;
@@ -70,7 +67,7 @@ public class NotesFragment extends OsmAndListFragment {
 
 	private final static int MODE_DELETE = 100;
 	private final static int MODE_SHARE = 101;
-	
+
 	private ActionMode actionMode;
 
 	private ArrayList<AudioVideoNotesPlugin.Recording> selected = new ArrayList<>();
@@ -79,9 +76,14 @@ public class NotesFragment extends OsmAndListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		// Handle screen rotation:
-		Fragment sortByMenu = getChildFragmentManager().findFragmentByTag(SortByMenuBottomSheetDialogFragment.TAG);
+		FragmentManager fm = getChildFragmentManager();
+		Fragment sortByMenu = fm.findFragmentByTag(SortByMenuBottomSheetDialogFragment.TAG);
 		if (sortByMenu != null) {
 			((SortByMenuBottomSheetDialogFragment) sortByMenu).setListener(createSortFragmentListener());
+		}
+		Fragment itemMenu = fm.findFragmentByTag(ItemMenuBottomSheetDialogFragment.TAG);
+		if (itemMenu != null) {
+			((ItemMenuBottomSheetDialogFragment) itemMenu).setListener(createItemMenuFragmentListener());
 		}
 
 		setHasOptionsMenu(true);
@@ -104,12 +106,12 @@ public class NotesFragment extends OsmAndListFragment {
 		});
 		return view;
 	}
-	
+
 	@Override
 	public ArrayAdapter<?> getAdapter() {
 		return listAdapter;
 	}
-	
+
 	private void selectAll() {
 		for (int i = 0; i < listAdapter.getCount(); i++) {
 			Recording point = listAdapter.getItem(i);
@@ -220,18 +222,18 @@ public class NotesFragment extends OsmAndListFragment {
 			}
 		};
 	}
-	
+
 	private void enterSelectionMode(int type){
 		enterDeleteMode(type);
 	}
-	
+
 	public OsmandActionBarActivity getActionBarActivity() {
 		if (getActivity() instanceof OsmandActionBarActivity) {
 			return (OsmandActionBarActivity) getActivity();
 		}
 		return null;
 	}
-	
+
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
 		View view = getView();
@@ -242,7 +244,7 @@ public class NotesFragment extends OsmAndListFragment {
 			((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 		}
 	}
-	
+
 	private void updateSelectionTitle(ActionMode m){
 		if(selected.size() > 0) {
 			m.setTitle(selected.size() + " " + getMyApplication().getString(R.string.shared_string_selected_lowercase));
@@ -250,12 +252,12 @@ public class NotesFragment extends OsmAndListFragment {
 			m.setTitle("");
 		}
 	}
-	
+
 	private void updateSelectionMode(ActionMode m) {
 		updateSelectionTitle(m);
 		refreshSelectAll();
 	}
-	
+
 	private void refreshSelectAll() {
 		View view = getView();
 		if (view == null) {
@@ -271,7 +273,7 @@ public class NotesFragment extends OsmAndListFragment {
 		}
 		selectAll.setChecked(true);
 	}
-	
+
 	private void deleteItems(final ArrayList<Recording> selected) {
 		AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
 		b.setMessage(getString(R.string.local_recordings_delete_all_confirm, selected.size()));
@@ -290,9 +292,9 @@ public class NotesFragment extends OsmAndListFragment {
 			}
 		});
 		b.setNegativeButton(R.string.shared_string_cancel, null);
-		b.show();		
+		b.show();
 	}
-	
+
 	private void shareItems(ArrayList<Recording> selected) {
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_SEND_MULTIPLE);
@@ -319,7 +321,7 @@ public class NotesFragment extends OsmAndListFragment {
 		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		startActivity(Intent.createChooser(intent, getString(R.string.share_note)));
 	}
-	
+
 	private File generateGPXForRecordings(ArrayList<Recording> selected) {
 //		File tmpFile = getMyApplication().getAppPath("cache/noteLocations.gpx");
 		File tmpFile = new File(getActivity().getCacheDir(), "share/noteLocations.gpx");
@@ -373,7 +375,7 @@ public class NotesFragment extends OsmAndListFragment {
 						return true;
 					}
 				});
-				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				selected.clear();
 				listAdapter.notifyDataSetInvalidated();
 				updateSelectionMode(mode);
@@ -417,7 +419,7 @@ public class NotesFragment extends OsmAndListFragment {
 
 		public void delete(Recording pnt) {
 			remove(pnt);
-			
+
 		}
 
 		@Override
@@ -438,8 +440,8 @@ public class NotesFragment extends OsmAndListFragment {
 //			((ImageView) row.findViewById(R.id.play)).setImageDrawable(getMyApplication().getIconsCache()
 //					.getIcon(R.drawable.ic_play_dark));
 			row.findViewById(R.id.play).setVisibility(View.GONE);
-			
-			
+
+
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_local_index);
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
 			options.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
@@ -459,11 +461,16 @@ public class NotesFragment extends OsmAndListFragment {
 				options.setVisibility(View.VISIBLE);
 				ch.setVisibility(View.GONE);
 			}
-			
+
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					openPopUpMenu(v, recording);
+					ItemMenuBottomSheetDialogFragment fragment = new ItemMenuBottomSheetDialogFragment();
+					fragment.setUsedOnMap(false);
+					fragment.setListener(createItemMenuFragmentListener());
+					fragment.setRecording(recording);
+					fragment.setRetainInstance(true);
+					fragment.show(getChildFragmentManager(), ItemMenuBottomSheetDialogFragment.TAG);
 				}
 			});
 			row.setOnClickListener(new View.OnClickListener() {
@@ -479,7 +486,7 @@ public class NotesFragment extends OsmAndListFragment {
 			});
 			return row;
 		}
-		
+
 		public void onItemSelect(CheckBox ch, Recording child) {
 			if (ch.isChecked()) {
 				selected.add(child);
@@ -497,43 +504,15 @@ public class NotesFragment extends OsmAndListFragment {
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
 
-	private void openPopUpMenu(View v, final AudioVideoNotesPlugin.Recording recording) {
-		IconsCache iconsCache = getMyApplication().getIconsCache();
-		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
-		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-		MenuItem item;
-		boolean isPhoto = recording.isPhoto();
-		Drawable playIcon;
-		if (isPhoto) {
-			playIcon = getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_view);
-		} else {
-			playIcon = getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_play_dark);
-		}
-		item = optionsMenu.getMenu().add(isPhoto ? R.string.watch : R.string.recording_context_menu_play)
-				.setIcon(playIcon);
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+	private ItemMenuFragmentListener createItemMenuFragmentListener() {
+		return new ItemMenuFragmentListener() {
 			@Override
-			public boolean onMenuItemClick(MenuItem item) {
+			public void playOnClick(Recording recording) {
 				plugin.playRecording(getActivity(), recording);
-				return true;
 			}
-		});
 
-		item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map).setIcon(
-				iconsCache.getThemedIcon(R.drawable.ic_show_on_map));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				showOnMap(recording);
-				return true;
-			}
-		});
-
-		item = optionsMenu.getMenu().add(R.string.shared_string_share)
-				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_gshare_dark));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
+			public void shareOnClick(Recording recording) {
 				Intent sharingIntent = new Intent(Intent.ACTION_SEND);
 				if (recording.isPhoto()) {
 					Uri screenshotUri = Uri.parse(recording.getFile().getAbsolutePath());
@@ -549,25 +528,20 @@ public class NotesFragment extends OsmAndListFragment {
 					sharingIntent.putExtra(Intent.EXTRA_STREAM, videoUri);
 				}
 				startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_note)));
-				return true;
 			}
-		});
 
-		item = optionsMenu.getMenu().add(R.string.shared_string_rename)
-				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
-			public boolean onMenuItemClick(MenuItem item) {
+			public void showOnMapOnClick(Recording recording) {
+				showOnMap(recording);
+			}
+
+			@Override
+			public void renameOnClick(Recording recording) {
 				editNote(recording);
-				return true;
 			}
-		});
 
-		item = optionsMenu.getMenu().add(R.string.recording_context_menu_delete)
-				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_dark));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
-			public boolean onMenuItemClick(MenuItem item) {
+			public void deleteOnClick(final Recording recording) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setMessage(R.string.recording_delete_confirm);
 				builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
@@ -579,10 +553,8 @@ public class NotesFragment extends OsmAndListFragment {
 				});
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
-				return true;
 			}
-		});
-		optionsMenu.show();
+		};
 	}
 
 	private void editNote(final Recording recording) {
