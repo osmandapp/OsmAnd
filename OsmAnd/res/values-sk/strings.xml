@@ -943,7 +943,7 @@ Niektoré z hlavných funkcií:
     <string name="max_speed_none">žiadna</string>
     <string name="prefer_motorways">Uprednostniť diaľnice</string>
     <string name="prefer_in_routing_title">Uprednostniť…</string>
-    <string name="prefer_in_routing_descr">Uprednostnenie diaľnic</string>
+    <string name="prefer_in_routing_descr">Uprednostniť diaľnice.</string>
     <string name="item_checked">označené</string>
     <string name="item_unchecked">neoznačené</string>
     <string name="av_def_action_choose">Vybrať pri požiadaní</string>
@@ -957,7 +957,7 @@ Niektoré z hlavných funkcií:
     <string name="hno">Číslo domu</string>
     <string name="monitoring_settings">Zaznamenávanie výletu</string>
     <string name="monitoring_settings_descr">Konfigurovať ako sa majú zaznamenať vaše výlety.</string>
-    <string name="choose_osmand_theme_descr">Výber témy pre aplikáciu</string>
+    <string name="choose_osmand_theme_descr">Vyberte tému pre aplikáciu.</string>
     <string name="choose_osmand_theme">Téma aplikácie</string>
     <string name="accessibility_options">Voľby zjednodušeného prístupu</string>
     <string name="select_address_activity">Vybrať adresu</string>
@@ -971,10 +971,10 @@ Niektoré z hlavných funkcií:
     <string name="files_limit">%1$d súborov zostáva</string>
     <string name="available_downloads_left">Je dostupných %1$d súborov na stiahnutie</string>
     <string name="install_paid">Úplná verzia</string>
-    <string name="use_magnetic_sensor_descr">Použiť magnetický senzor namiesto orientačného na zistenie hodnôt kompasu</string>
+    <string name="use_magnetic_sensor_descr">Použiť magnetický senzor namiesto orientačného na zistenie hodnôt kompasu.</string>
     <string name="use_magnetic_sensor">Použiť magnetický senzor (kompas)</string>
     <string name="wait_current_task_finished">Prosím, čakajte, kým sa dokončí aktuálna úloha</string>
-    <string name="use_kalman_filter_compass_descr">Zníži šum v hodnotách z kompasu, ale spomalí zmeny smeru</string>
+    <string name="use_kalman_filter_compass_descr">Zníži šum v hodnotách z kompasu, ale spomalí zmeny smeru.</string>
     <string name="use_kalman_filter_compass">Použiť Kalmanov filter</string>
     <string name="delete_point">Odstrániť bod</string>
     <string name="plugin_distance_point_time">čas</string>
@@ -1033,7 +1033,7 @@ Niektoré z hlavných funkcií:
     <string name="edit_tilesource_choose_existing">Zvoliť existujúci…</string>
     <string name="maps_define_edit">Určiť/Upraviť…</string>
     <string name="map_widget_fps_info">Ladiace info o FPS</string>
-    <string name="driving_region_descr">Výber jazdnej oblasti: USA, Európa, Spojené kráľovstvo, Ázia a ostatné</string>
+    <string name="driving_region_descr">Vyberte jazdnú oblasť: USA, Európa, Spojené kráľovstvo, Ázia a ostatné.</string>
     <string name="driving_region">Jazdná oblasť</string>
     <string name="driving_region_japan">Japonsko</string>
     <string name="driving_region_us">Spojené štáty</string>
@@ -1042,7 +1042,7 @@ Niektoré z hlavných funkcií:
     <string name="driving_region_uk">UK, India a podobné</string>
     <string name="announce_gpx_waypoints">GPX waypointy</string>
     <string name="speak_title">Ohlásiť…</string>
-    <string name="speak_descr">Konfigurácia ohlásení názvov ulíc, dopravných varovaní (vynútené zastavenia, spomaľovače), upozornení na radary, obmedzení rýchlosti</string>
+    <string name="speak_descr">Konfigurácia ohlásení názvov ulíc, dopravných varovaní (vynútené zastavenia, spomaľovače), upozornení na radary, obmedzení rýchlosti.</string>
     <string name="speak_street_names">Názvy ulíc (TTS)</string>
     <string name="osb_author_or_password_not_specified">Prosím, zadajte používateľa OSM a heslo v nastaveniach</string>
     <string name="clear_intermediate_points">Zmazať prechodné body</string>
@@ -1149,12 +1149,12 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="app_mode_aircraft">Lietadlo</string>
     <string name="app_modes_choose">Profily aplikácie</string>
     <string name="map_widget_map_rendering">Vykresľovanie mapy</string>
-    <string name="app_modes_choose_descr">Zvoľte profily použitia, ktoré majú byť viditeľné v aplikácii</string>
+    <string name="app_modes_choose_descr">Zvoľte profily použitia, ktoré majú byť viditeľné v aplikácii.</string>
     <string name="amenity_type_seamark">Morská značka</string>
     <string name="complex_route_calculation_failed">Rýchly prepočet trasy zlyhal (%s), použije sa pomalý výpočet.</string>
-    <string name="disable_complex_routing_descr">Vypnúť dvojfázovú navigáciu pre režim auta</string>
+    <string name="disable_complex_routing_descr">Vypnúť dvojfázovú navigáciu pre režim auta.</string>
     <string name="disable_complex_routing">Vypnúť komplexnú navigáciu</string>
-    <string name="speech_rate_descr">Zadajte rýchlosť reči TTS</string>
+    <string name="speech_rate_descr">Zadajte rýchlosť reči TTS.</string>
     <string name="speech_rate">Rýchlosť reči</string>
     <string name="guidance_preferences_descr">Nastavenia navigácie</string>
     <string name="routing_preferences_descr">Nastavenia určovania trasy</string>
@@ -1166,19 +1166,19 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="android_19_location_disabled">Od Androidu verzie 4.4 (KitKat) nie je možné sťahovať a aktualizovať mapy v pôvodnom úložnom priečinku (%s). Chcete ho zmeniť na vhodné nové úložisko a skopírovať tam všetky súbory?
 \n Poznámka 1: pôvodné súbory zostanú nedotknuté (môžete ich neskôr vymazať ručne).\n Poznámka 2: v novom úložisku nebude možné zdieľať súbory medzi OsmAnd a OsmAnd+.</string>
     <string name="routing_attr_prefer_motorway_name">Uprednostniť diaľnice</string>
-    <string name="routing_attr_prefer_motorway_description">Uprednostniť diaľnice</string>
+    <string name="routing_attr_prefer_motorway_description">Uprednostniť diaľnice.</string>
     
     
     <string name="routing_attr_avoid_toll_name">Vyhnúť sa spoplatneným cestám</string>
-    <string name="routing_attr_avoid_toll_description">Vyhnúť sa spoplatneným cestám</string>
+    <string name="routing_attr_avoid_toll_description">Vyhnúť sa spoplatneným cestám.</string>
     <string name="routing_attr_avoid_unpaved_name">Vyhnúť sa nespevneným cestám</string>
-    <string name="routing_attr_avoid_unpaved_description">Vyhnúť sa nespevneným cestám</string>
+    <string name="routing_attr_avoid_unpaved_description">Vyhnúť sa nespevneným cestám.</string>
     <string name="routing_attr_avoid_ferries_name">Vyhnúť sa trajektom</string>
-    <string name="routing_attr_avoid_ferries_description">Vyhnúť sa trajektom</string>
+    <string name="routing_attr_avoid_ferries_description">Vyhnúť sa trajektom.</string>
     <string name="routing_attr_avoid_motorway_name">Vyhnúť sa diaľniciam</string>
-    <string name="routing_attr_avoid_motorway_description">Vyhnúť sa diaľniciam</string>
+    <string name="routing_attr_avoid_motorway_description">Vyhnúť sa diaľniciam.</string>
     <string name="routing_attr_weight_name">Hmotnostný limit</string>
-    <string name="routing_attr_weight_description">Zadajte hmotnosť vozidla, ktorá musí byť povolená na cestách</string>
+    <string name="routing_attr_weight_description">Zadajte hmotnosť vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="select_gpx">Vybrať GPX…</string>
     <string name="route_descr_select_destination">Vybrať cieľ</string>
     <string name="route_preferences">Predvoľby trasy</string>
@@ -1363,7 +1363,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="gpx_selection_track">%1$s \nStopa %2$s</string>
     <string name="save_as_favorites_points">Uložiť ako skupinu obľúbených</string>
     <string name="select_destination_and_intermediate_points">Vybrať ciele</string>
-    <string name="layer_amenity_label">Popisy bodov</string>
+    <string name="layer_amenity_label">Prekrývacie popisy bodov</string>
     <string name="show_zoom_buttons_navigation_descr">Zobraziť tlačidlá priblíženia počas navigácie.</string>
     <string name="show_zoom_buttons_navigation">Zobraziť tlačidlá priblíženia</string>
     <string name="sort_by_distance">Zoradiť podľa vzdialenosti</string>
@@ -1751,9 +1751,9 @@ Dĺžka %2$s</string>
     <string name="application_dir_change_warning3">Chcete aby OsmAnd skopíroval svoje údaje do nového cieľa?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Čísla domov</string>
     
-    <string name="routing_attr_avoid_borders_description">Vyhnúť sa prekročeniu hranice do inej krajiny</string>
+    <string name="routing_attr_avoid_borders_description">Vyhnúť sa prekročeniu hranice do inej krajiny.</string>
     <string name="routing_attr_height_name">Výškový limit</string>
-    <string name="routing_attr_height_description">Zadajte výšku vozidla aká musí byť povolená na cestách</string>
+    <string name="routing_attr_height_description">Zadajte výšku vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="use_fast_recalculation">Inteligentné prepočítanie trasy</string>
     <string name="use_fast_recalculation_desc">Pri dlhých výletoch prepočítať iba začiatočný úsek trasy</string>
     <string name="osmo_share_my_location">Odosielať polohu</string>
@@ -2027,7 +2027,7 @@ Dĺžka %2$s</string>
     <string name="use_drawer_btn">Použiť menu</string>
     <string name="please_specify_poi_type_only_from_list">Prosím zadajte správny typ POI alebo ho preskočte.</string>
     <string name="routing_attr_avoid_stairs_name">Vyhnúť sa schodom</string>
-	<string name="routing_attr_avoid_stairs_description">Vyhnúť sa schodom</string>
+	<string name="routing_attr_avoid_stairs_description">Vyhnúť sa schodom.</string>
 	<string name="routing_attr_avoid_borders_name">Vyhnúť sa hraničným priechodom</string>
 	
 	
@@ -2782,10 +2782,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="wrong_user_name">Chybné používateľské meno!</string>
     <string name="shared_string_to">Do</string>
     <string name="mapillary_menu_date_from">Od</string>
-    <string name="mapillary_menu_descr_dates">Zobraziť obrázky pridané v danom období.</string>
-    <string name="mapillary_menu_title_dates">Dátumy</string>
+    <string name="mapillary_menu_descr_dates">Zobraziť iba obrázky pridané</string>
+    <string name="mapillary_menu_title_dates">Dátum</string>
     <string name="mapillary_menu_edit_text_hint">Zadajte meno používateľa</string>
-    <string name="mapillary_menu_descr_username">Zobraziť obrázky pridané daným používateľom.</string>
+    <string name="mapillary_menu_descr_username">Zobraziť iba obrázky pridané</string>
     <string name="mapillary_menu_title_username">Meno používateľa</string>
     <string name="mapillary_menu_filter_description">Môžete filtrovať obrázky podľa odosielateľa alebo dátumu. Filtre sa aplikujú len pri vysokom priblížení.</string>
     <string name="store_tracks_in_monthly_directories">Ukladať zaznamenané stopy v priečinkoch po mesiacoch</string>
