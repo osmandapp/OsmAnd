@@ -56,21 +56,22 @@ import java.util.Iterator;
 import java.util.List;
 
 public class NotesFragment extends OsmAndListFragment {
+
 	private static final Log LOG = PlatformUtil.getLog(NotesFragment.class);
+	private static final int MODE_DELETE = 100;
+	private static final int MODE_SHARE = 101;
 
 	AudioVideoNotesPlugin plugin;
-	List<AudioVideoNotesPlugin.Recording> items;
+	List<Recording> items;
 	NotesAdapter listAdapter;
+
 	private View footerView;
 
 	private boolean selectionMode = false;
 
-	private final static int MODE_DELETE = 100;
-	private final static int MODE_SHARE = 101;
-
 	private ActionMode actionMode;
 
-	private ArrayList<AudioVideoNotesPlugin.Recording> selected = new ArrayList<>();
+	private ArrayList<Recording> selected = new ArrayList<>();
 	Recording shareLocationFile = new Recording(new File("."));
 
 	@Override
@@ -122,7 +123,7 @@ public class NotesFragment extends OsmAndListFragment {
 		listAdapter.notifyDataSetInvalidated();
 	}
 
-	private void deselectAll(){
+	private void deselectAll() {
 		selected.clear();
 		listAdapter.notifyDataSetInvalidated();
 	}
@@ -130,10 +131,8 @@ public class NotesFragment extends OsmAndListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		getListView().setBackgroundColor(
-				getResources().getColor(
-						getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
-								: R.color.ctx_menu_info_view_bg_dark));
+		getListView().setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
+				.isLightContent() ? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
 	}
 
 	@Override
@@ -143,7 +142,6 @@ public class NotesFragment extends OsmAndListFragment {
 		sortItemsDescending();
 		ListView listView = getListView();
 		if (items.size() > 0 && footerView == null) {
-			//listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
 			footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false);
 			listView.addFooterView(footerView);
 			listView.setHeaderDividersEnabled(false);
@@ -223,8 +221,63 @@ public class NotesFragment extends OsmAndListFragment {
 		};
 	}
 
-	private void enterSelectionMode(int type){
-		enterDeleteMode(type);
+	private void enterSelectionMode(final int type) {
+		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
+
+			@Override
+			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
+				LOG.debug("onCreateActionMode");
+				if (type == MODE_SHARE) {
+					listAdapter.insert(shareLocationFile, 0);
+				}
+				switchSelectionMode(true);
+				MenuItem item;
+				if (type == MODE_DELETE) {
+					item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
+				} else {
+					item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_gshare_dark);
+				}
+				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						if (type == MODE_DELETE) {
+							deleteItems(selected);
+						} else if (type == MODE_SHARE) {
+							shareItems(selected);
+						}
+						mode.finish();
+						return true;
+					}
+				});
+				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				selected.clear();
+				listAdapter.notifyDataSetInvalidated();
+				updateSelectionMode(mode);
+				return true;
+			}
+
+			@Override
+			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+				LOG.debug("onPrepareActionMode");
+				return false;
+			}
+
+			@Override
+			public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+				LOG.debug("onActionItemClicked");
+				return false;
+			}
+
+			@Override
+			public void onDestroyActionMode(ActionMode mode) {
+				LOG.debug("onDestroyActionMode");
+				if (type == MODE_SHARE) {
+					listAdapter.remove(shareLocationFile);
+				}
+				switchSelectionMode(false);
+				listAdapter.notifyDataSetInvalidated();
+			}
+		});
 	}
 
 	public OsmandActionBarActivity getActionBarActivity() {
@@ -234,21 +287,21 @@ public class NotesFragment extends OsmAndListFragment {
 		return null;
 	}
 
-	private void enableSelectionMode(boolean selectionMode) {
-		this.selectionMode = selectionMode;
+	private void switchSelectionMode(boolean enable) {
+		this.selectionMode = enable;
 		View view = getView();
 		if (view != null) {
 			view.findViewById(R.id.select_all).setVisibility(selectionMode ? View.VISIBLE : View.GONE);
-			((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode &&
-					AndroidUiHelper.isOrientationPortrait(getActivity()));
+			((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode
+					&& AndroidUiHelper.isOrientationPortrait(getActivity()));
 			((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 		}
 	}
 
-	private void updateSelectionTitle(ActionMode m){
-		if(selected.size() > 0) {
+	private void updateSelectionTitle(ActionMode m) {
+		if (selected.size() > 0) {
 			m.setTitle(selected.size() + " " + getMyApplication().getString(R.string.shared_string_selected_lowercase));
-		} else{
+		} else {
 			m.setTitle("");
 		}
 	}
@@ -288,7 +341,6 @@ public class NotesFragment extends OsmAndListFragment {
 					listAdapter.delete(pnt);
 				}
 				listAdapter.notifyDataSetChanged();
-
 			}
 		});
 		b.setNegativeButton(R.string.shared_string_cancel, null);
@@ -300,15 +352,15 @@ public class NotesFragment extends OsmAndListFragment {
 		intent.setAction(Intent.ACTION_SEND_MULTIPLE);
 		intent.setType("image/*"); /* This example is sharing jpeg images. */
 		ArrayList<Uri> files = new ArrayList<Uri>();
-		for(Recording path : selected) {
-			if(path == shareLocationFile) {
+		for (Recording path : selected) {
+			if (path == shareLocationFile) {
 				File fl = generateGPXForRecordings(selected);
-				if(fl != null) {
+				if (fl != null) {
 					files.add(FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".fileprovider", fl));
 				}
 			} else {
 				File src = path.getFile();
-				File dst = new File(getActivity().getCacheDir(), "share/"+src.getName());
+				File dst = new File(getActivity().getCacheDir(), "share/" + src.getName());
 				try {
 					Algorithms.fileCopy(src, dst);
 					files.add(FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".fileprovider", dst));
@@ -323,14 +375,13 @@ public class NotesFragment extends OsmAndListFragment {
 	}
 
 	private File generateGPXForRecordings(ArrayList<Recording> selected) {
-//		File tmpFile = getMyApplication().getAppPath("cache/noteLocations.gpx");
 		File tmpFile = new File(getActivity().getCacheDir(), "share/noteLocations.gpx");
 		tmpFile.getParentFile().mkdirs();
 		GPXFile file = new GPXFile();
-		for(Recording r : selected) {
-			if(r != shareLocationFile) {
+		for (Recording r : selected) {
+			if (r != shareLocationFile) {
 				String desc = r.getDescriptionName(r.getFileName());
-				if(desc == null) {
+				if (desc == null) {
 					desc = r.getFileName();
 				}
 				WptPt wpt = new WptPt();
@@ -347,79 +398,18 @@ public class NotesFragment extends OsmAndListFragment {
 		return tmpFile;
 	}
 
-	private void enterDeleteMode(final int type) {
-		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
-
-			@Override
-			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
-				LOG.debug("onCreateActionMode");
-				if(type == MODE_SHARE) {
-					listAdapter.insert(shareLocationFile, 0);
-				}
-				enableSelectionMode(true);
-				MenuItem item;
-				if(type == MODE_DELETE) {
-					item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
-				} else {
-					item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_gshare_dark);
-				}
-				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-					@Override
-					public boolean onMenuItemClick(MenuItem item) {
-						if(type == MODE_DELETE) {
-							deleteItems(selected);
-						} else if(type == MODE_SHARE) {
-							shareItems(selected);
-						}
-						mode.finish();
-						return true;
-					}
-				});
-				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-				selected.clear();
-				listAdapter.notifyDataSetInvalidated();
-				updateSelectionMode(mode);
-				return true;
-			}
-
-			@Override
-			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-				LOG.debug("onPrepareActionMode");
-				return false;
-			}
-
-			@Override
-			public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-				LOG.debug("onActionItemClicked");
-				return false;
-			}
-
-			@Override
-			public void onDestroyActionMode(ActionMode mode) {
-				LOG.debug("onDestroyActionMode");
-				if(type == MODE_SHARE) {
-					listAdapter.remove(shareLocationFile);
-				}
-				enableSelectionMode(false);
-				listAdapter.notifyDataSetInvalidated();
-			}
-
-		});
-	}
-
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	class NotesAdapter extends ArrayAdapter<AudioVideoNotesPlugin.Recording> {
+	class NotesAdapter extends ArrayAdapter<Recording> {
 
-		NotesAdapter(List<AudioVideoNotesPlugin.Recording> recordingList) {
+		NotesAdapter(List<Recording> recordingList) {
 			super(getActivity(), R.layout.note, recordingList);
 		}
 
 		public void delete(Recording pnt) {
 			remove(pnt);
-
 		}
 
 		@Override
@@ -430,22 +420,19 @@ public class NotesFragment extends OsmAndListFragment {
 				row = inflater.inflate(R.layout.note, parent, false);
 			}
 
-			final AudioVideoNotesPlugin.Recording recording = getItem(position);
+			final Recording recording = getItem(position);
 			if (recording == shareLocationFile) {
 				((TextView) row.findViewById(R.id.name)).setText(R.string.av_locations);
 				((TextView) row.findViewById(R.id.description)).setText(R.string.av_locations_descr);
 			} else {
 				DashAudioVideoNotesFragment.getNoteView(recording, row, getMyApplication());
 			}
-//			((ImageView) row.findViewById(R.id.play)).setImageDrawable(getMyApplication().getIconsCache()
-//					.getIcon(R.drawable.ic_play_dark));
 			row.findViewById(R.id.play).setVisibility(View.GONE);
-
 
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_local_index);
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
 			options.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
-			if(selectionMode) {
+			if (selectionMode) {
 				options.setVisibility(View.GONE);
 				ch.setVisibility(View.VISIBLE);
 				ch.setChecked(selected.contains(recording));
@@ -499,8 +486,8 @@ public class NotesFragment extends OsmAndListFragment {
 
 	private void showOnMap(Recording recording) {
 		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15,
-				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)), true,
-				recording); //$NON-NLS-1$
+				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)),
+				true, recording);
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
 
@@ -579,5 +566,4 @@ public class NotesFragment extends OsmAndListFragment {
 		builder.create().show();
 		editText.requestFocus();
 	}
-
 }
