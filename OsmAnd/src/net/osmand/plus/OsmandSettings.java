@@ -1333,6 +1333,8 @@ public class OsmandSettings {
 		MAP_MARKERS_MODE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, MapMarkersMode.TOOLBAR);
 	}
 
+	public final CommonPreference<NotesSortByMode> NOTES_SORT_BY_MODE = new EnumIntPreference<>("notes_sort_by_mode", NotesSortByMode.BY_DATE, NotesSortByMode.values());
+
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference("animate_my_location", true).makeGlobal().cache();
 
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_START_MY_LOC = new BooleanPreference("route_map_markers_start_my_loc", false).makeGlobal().cache();
@@ -3154,6 +3156,19 @@ public class OsmandSettings {
 
 		public String toHumanString(Context ctx) {
 			return ctx.getString(key);
+		}
+	}
+
+	public enum NotesSortByMode {
+		BY_TYPE,
+		BY_DATE;
+
+		public boolean isByType() {
+			return this == BY_TYPE;
+		}
+
+		public boolean isByDate() {
+			return this == BY_DATE;
 		}
 	}
 

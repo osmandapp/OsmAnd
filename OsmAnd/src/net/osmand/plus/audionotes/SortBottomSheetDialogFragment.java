@@ -9,6 +9,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.NotesSortByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 
@@ -36,13 +38,13 @@ public class SortBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 		mainView.findViewById(R.id.by_type_row).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				notifyListenerAndDismiss();
+				selectSortByMode(NotesSortByMode.BY_TYPE);
 			}
 		});
 		mainView.findViewById(R.id.by_date_row).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				notifyListenerAndDismiss();
+				selectSortByMode(NotesSortByMode.BY_DATE);
 			}
 		});
 		mainView.findViewById(R.id.close_row).setOnClickListener(new OnClickListener() {
@@ -57,9 +59,13 @@ public class SortBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 		return mainView;
 	}
 
-	private void notifyListenerAndDismiss() {
-		if (listener != null) {
-			listener.onSortModeChanged();
+	private void selectSortByMode(NotesSortByMode mode) {
+		final OsmandSettings.CommonPreference<NotesSortByMode> sortByMode = getMyApplication().getSettings().NOTES_SORT_BY_MODE;
+		if (sortByMode.get() != mode) {
+			sortByMode.set(mode);
+			if (listener != null) {
+				listener.onSortModeChanged();
+			}
 		}
 		dismiss();
 	}

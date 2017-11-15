@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
@@ -40,6 +41,7 @@ import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.audionotes.SortBottomSheetDialogFragment.SortFragmentListener;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -76,6 +78,12 @@ public class NotesFragment extends OsmAndListFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		// Handle screen rotation:
+		Fragment sortByMenu = getChildFragmentManager().findFragmentByTag(SortBottomSheetDialogFragment.TAG);
+		if (sortByMenu != null) {
+			((SortBottomSheetDialogFragment) sortByMenu).setListener(createSortFragmentListener());
+		}
+
 		setHasOptionsMenu(true);
 		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
@@ -174,9 +182,9 @@ public class NotesFragment extends OsmAndListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				// todo: handle screen rotation
 				SortBottomSheetDialogFragment fragment = new SortBottomSheetDialogFragment();
 				fragment.setUsedOnMap(false);
+				fragment.setListener(createSortFragmentListener());
 				fragment.show(getChildFragmentManager(), SortBottomSheetDialogFragment.TAG);
 				return true;
 			}
@@ -202,6 +210,15 @@ public class NotesFragment extends OsmAndListFragment {
 			}
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+	}
+
+	private SortFragmentListener createSortFragmentListener() {
+		return new SortFragmentListener() {
+			@Override
+			public void onSortModeChanged() {
+				Toast.makeText(getContext(), "Sort by mode changed", Toast.LENGTH_SHORT).show();
+			}
+		};
 	}
 	
 	private void enterSelectionMode(int type){
