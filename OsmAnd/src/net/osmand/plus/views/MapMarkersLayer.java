@@ -32,6 +32,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
@@ -324,7 +325,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		for (MapMarker marker : markersHelper.getMapMarkers()) {
 			if (isLocationVisible(tileBox, marker) && !overlappedByWaypoint(marker)
-					&& !isInMotion(marker)) {
+					&& !isInMotion(marker) && !isSynced(marker)) {
 				Bitmap bmp = getMapMarkerBitmap(marker.colorIndex);
 				int marginX = bmp.getWidth() / 6;
 				int marginY = bmp.getHeight();
@@ -363,15 +364,34 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		if (contextMenuLayer.getMoveableObject() instanceof MapMarker) {
 			MapMarker objectInMotion = (MapMarker) contextMenuLayer.getMoveableObject();
-			Bitmap bitmap = getMapMarkerBitmap(objectInMotion.colorIndex);
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-			int marginX = bitmap.getWidth() / 6;
-			int marginY = bitmap.getHeight();
-			float locationX = pf.x;
-			float locationY = pf.y;
-			canvas.rotate(-tileBox.getRotate(), locationX, locationY);
-			canvas.drawBitmap(bitmap, locationX - marginX, locationY - marginY, bitmapPaint);
+			if (isSynced(objectInMotion)) {
+				drawSyncedPoint(canvas, pf, objectInMotion);
+			} else {
+				drawPoint(canvas, tileBox, pf, objectInMotion);
+			}
+
 		}
+	}
+
+	private void drawSyncedPoint(Canvas canvas, PointF pf, MapMarker marker) {
+		FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(),
+				MapMarker.getColorId(marker.colorIndex), true);
+		fid.drawBitmapInCenter(canvas, pf.x, pf.y);
+	}
+
+	private void drawPoint(Canvas canvas, RotatedTileBox tileBox, PointF pf, MapMarker marker) {
+		Bitmap bitmap = getMapMarkerBitmap(marker.colorIndex);
+		int marginX = bitmap.getWidth() / 6;
+		int marginY = bitmap.getHeight();
+		float locationX = pf.x;
+		float locationY = pf.y;
+		canvas.rotate(-tileBox.getRotate(), locationX, locationY);
+		canvas.drawBitmap(bitmap, locationX - marginX, locationY - marginY, bitmapPaint);
+	}
+
+	private boolean isSynced(@NonNull MapMarker marker) {
+		return marker.groupKey != null;
 	}
 
 	private boolean isInMotion(@NonNull MapMarker marker) {

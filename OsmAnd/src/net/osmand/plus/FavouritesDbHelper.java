@@ -44,6 +44,7 @@ public class FavouritesDbHelper {
 	private List<FavouritePoint> cachedFavoritePoints = new ArrayList<FavouritePoint>();
 	private List<FavoriteGroup> favoriteGroups = new ArrayList<FavouritesDbHelper.FavoriteGroup>();
 	private Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<String, FavouritesDbHelper.FavoriteGroup>();
+	private List<FavouritePoint> syncedFavouritePoints = new ArrayList<>();
 	private final OsmandApplication context;
 	protected static final String HIDDEN = "HIDDEN";
 	private static final String DELIMETER = "__";
@@ -58,6 +59,29 @@ public class FavouritesDbHelper {
 		public boolean visible = true;
 		public int color;
 		public List<FavouritePoint> points = new ArrayList<FavouritePoint>();
+	}
+
+	public void addSyncedGroup(FavoriteGroup group) {
+		List<FavouritePoint> copyList = new ArrayList<>(syncedFavouritePoints);
+		copyList.addAll(group.points);
+		syncedFavouritePoints = copyList;
+	}
+
+	public void removeSyncedGroup(FavoriteGroup group) {
+		List<FavouritePoint> copyList = new ArrayList<>(syncedFavouritePoints);
+		List<FavouritePoint> pointsToRemove = new ArrayList<>();
+		for (int i = 0; i < copyList.size(); i++) {
+			FavouritePoint point = copyList.get(i);
+			if (point.getCategory().equals(group.name)) {
+				pointsToRemove.add(point);
+			}
+		}
+		copyList.removeAll(pointsToRemove);
+		syncedFavouritePoints = copyList;
+	}
+
+	public List<FavouritePoint> getSyncedFavouritePoints() {
+		return syncedFavouritePoints;
 	}
 
 	public void loadFavorites() {

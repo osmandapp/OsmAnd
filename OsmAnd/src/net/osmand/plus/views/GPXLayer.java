@@ -179,7 +179,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			SelectedGpxFile gpxFile = pointFileMap.get(objectInMotion);
 			if (gpxFile != null) {
-				drawBigPoint(canvas, objectInMotion, getFileColor(gpxFile), pf.x, pf.y);
+				drawBigPoint(canvas, objectInMotion, getFileColor(gpxFile), pf.x, pf.y, isSynced(gpxFile));
 			}
 		}
 	}
@@ -382,10 +382,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					}
 					pointFileMap.put(o, g);
 				}
+				boolean synced = isSynced(g);
 				for (WptPt o : fullObjects) {
 					float x = tileBox.getPixXFromLatLon(o.lat, o.lon);
 					float y = tileBox.getPixYFromLatLon(o.lat, o.lon);
-					drawBigPoint(canvas, o, fileColor, x, y);
+					drawBigPoint(canvas, o, fileColor, x, y, synced);
 				}
 			}
 			if (trackChartPoints != null) {
@@ -450,9 +451,14 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		return g.getColor() == 0 ? defPointColor : g.getColor();
 	}
 
-	private void drawBigPoint(Canvas canvas, WptPt o, int fileColor, float x, float y) {
+	private void drawBigPoint(Canvas canvas, WptPt o, int fileColor, float x, float y, boolean synced) {
 		int pointColor = getPointColor(o, fileColor);
-		FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, true);
+		FavoriteImageDrawable fid;
+		if (synced) {
+			fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), pointColor);
+		} else {
+			fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, true);
+		}
 		fid.drawBitmapInCenter(canvas, x, y);
 	}
 
@@ -517,6 +523,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private List<WptPt> getListStarPoints(SelectedGpxFile g) {
 		return g.getGpxFile().getPoints();
+	}
+
+	private boolean isSynced(SelectedGpxFile g) {
+		return g.getGpxFile().isSynced();
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {

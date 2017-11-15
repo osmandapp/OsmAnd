@@ -42,6 +42,7 @@ public class MapMarkersHelper {
 	private OsmandSettings settings;
 	private List<MapMarkerChangedListener> listeners = new ArrayList<>();
 	private OsmandApplication ctx;
+	private FavouritesDbHelper favouritesDbHelper;
 	private MapMarkersDbHelper markersDbHelper;
 	private boolean startFromMyLocation;
 	private ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -240,6 +241,7 @@ public class MapMarkersHelper {
 	public MapMarkersHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
 		settings = ctx.getSettings();
+		favouritesDbHelper = ctx.getFavorites();
 		markersDbHelper = ctx.getMapMarkersDbHelper();
 		planRouteContext = new MarkersPlanRouteContext(ctx);
 		startFromMyLocation = settings.ROUTE_MAP_MARKERS_START_MY_LOC.get();
@@ -506,6 +508,7 @@ public class MapMarkersHelper {
 				if (!favGroup.visible) {
 					removeActiveMarkersFromSyncGroup(group.getId());
 					removeActiveMarkersFromGroup(group.getId());
+					favouritesDbHelper.removeSyncedGroup(favGroup);
 					return;
 				}
 				if (group.getColor() == -1) {
@@ -515,6 +518,8 @@ public class MapMarkersHelper {
 				for (FavouritePoint fp : favGroup.points) {
 					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName(), enabled);
 				}
+				favouritesDbHelper.removeSyncedGroup(favGroup);
+				favouritesDbHelper.addSyncedGroup(favGroup);
 
 				removeOldMarkersIfNeeded(dbMarkers);
 			} else if (group.getType() == MarkersSyncGroup.GPX_TYPE) {
@@ -538,6 +543,7 @@ public class MapMarkersHelper {
 					group.setColor(pt.getColor(defColor));
 					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name, enabled);
 				}
+				gpx.setSynced(true);
 
 				removeOldMarkersIfNeeded(dbMarkers);
 			}

@@ -781,6 +781,16 @@ public class GPXUtilities {
 		private Track generalTrack;
 		private TrkSegment generalSegment;
 
+		private boolean synced = false;
+
+		public void setSynced(boolean synced) {
+			this.synced = synced;
+		}
+
+		public boolean isSynced() {
+			return synced;
+		}
+
 		public List<WptPt> getPoints() {
 			return Collections.unmodifiableList(points);
 		}
