@@ -477,7 +477,7 @@
 	<string name="gpx_visibility_txt">Бачнасьць</string>
 	<string name="gpx_tags_txt">Цэтлікі</string>
 	<string name="gpx_description_txt">Апісаньне</string>
-	<string name="validate_gpx_upload_name_pwd">Калі ласка, пазначце імя й пароль карыстальніка OSM каб адсылаць файлы GPX.</string>
+	<string name="validate_gpx_upload_name_pwd">Калі ласка, пазначце імя і пароль карыстальніка OSM, каб адсылаць GPX-файлы.</string>
     	<string name="default_buttons_support">Падтрымка</string>
 	<string name="support_new_features">Падтрымка новых уласьцівасьцяў</string>
 	<string name="support_new_features_descr">Ахвяраваць, каб убачыць новыя магчымасці, рэалізаваныя ў дастасаванні.</string>
@@ -586,7 +586,7 @@
 	<string name="general_settings">Агульныя</string>
 	<string name="general_settings_descr">Налады экрану і агульныя налады дастасавання.</string>
 	<string name="global_app_settings">Агульныя налады праграмы</string>
-	<string name="user_name">Вашае імя карыстальніка OSM</string>
+	<string name="user_name">Ваша імя карыстальніка OSM</string>
 	<string name="open_street_map_login_descr">Патрэбна для прадстаўлення ў openstreetmap.org.</string>
 	<string name="user_password">Ваш пароль OSM</string>
 	
@@ -2780,10 +2780,10 @@
     <string name="wrong_user_name">Няправільнае імя карыстальніка!</string>
     <string name="shared_string_to">Да</string>
     <string name="mapillary_menu_date_from">Ад</string>
-    <string name="mapillary_menu_descr_dates">Паглядзець выявы даданыя ў пэўны перыяд.</string>
-    <string name="mapillary_menu_title_dates">Даты</string>
+    <string name="mapillary_menu_descr_dates">Паглядзець толькі даданыя выявы</string>
+    <string name="mapillary_menu_title_dates">Дата</string>
     <string name="mapillary_menu_edit_text_hint">Увядзіце імя карыстальніка</string>
-    <string name="mapillary_menu_descr_username">Паглядзець выявы даданыя пэўным карыстальнікам.</string>
+    <string name="mapillary_menu_descr_username">Паглядзець толькі выявы даданыя</string>
     <string name="mapillary_menu_title_username">Імя карыстальніка</string>
     <string name="mapillary_menu_filter_description">Вы можаце фільтраваць выявы па адпраўніку ці даце. Фільтры ўжываюцца толькі для буйнога павелічэння.</string>
     <string name="shared_string_reload">Абнавіць</string>
@@ -2964,4 +2964,9 @@
     <string name="show_arrows_descr">Адна ці дзве стрэлкі, якія паказваюць кірунак да актыўных маркераў, будуць паказаная на мапе.</string>
     <string name="distance_indication_descr">Выберыце, як вы хочаце, каб выглядала адлегласць да актыўных маркераў.</string>
     <string name="active_markers_descr">Выберыце, колькі накірункаў індыкатараў вы хацелі б бачыць.</string>
+    <string name="appearance_on_the_map">З\'яўленне на мапе</string>
+    <string name="add_track_to_markers_descr">Абраць след шляхавых кропак, якія OsmAnd дадасць у маркеры</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
+    <string name="shared_string_right">Направа</string>
+    <string name="shared_string_left">Налева</string>
     </resources>
