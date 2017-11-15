@@ -41,7 +41,7 @@ import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.audionotes.SortBottomSheetDialogFragment.SortFragmentListener;
+import net.osmand.plus.audionotes.SortByMenuBottomSheetDialogFragment.SortFragmentListener;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -79,9 +79,9 @@ public class NotesFragment extends OsmAndListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		// Handle screen rotation:
-		Fragment sortByMenu = getChildFragmentManager().findFragmentByTag(SortBottomSheetDialogFragment.TAG);
+		Fragment sortByMenu = getChildFragmentManager().findFragmentByTag(SortByMenuBottomSheetDialogFragment.TAG);
 		if (sortByMenu != null) {
-			((SortBottomSheetDialogFragment) sortByMenu).setListener(createSortFragmentListener());
+			((SortByMenuBottomSheetDialogFragment) sortByMenu).setListener(createSortFragmentListener());
 		}
 
 		setHasOptionsMenu(true);
@@ -182,10 +182,10 @@ public class NotesFragment extends OsmAndListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				SortBottomSheetDialogFragment fragment = new SortBottomSheetDialogFragment();
+				SortByMenuBottomSheetDialogFragment fragment = new SortByMenuBottomSheetDialogFragment();
 				fragment.setUsedOnMap(false);
 				fragment.setListener(createSortFragmentListener());
-				fragment.show(getChildFragmentManager(), SortBottomSheetDialogFragment.TAG);
+				fragment.show(getChildFragmentManager(), SortByMenuBottomSheetDialogFragment.TAG);
 				return true;
 			}
 		});

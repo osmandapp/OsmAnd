@@ -14,9 +14,9 @@ import net.osmand.plus.OsmandSettings.NotesSortByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 
-public class SortBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+public class SortByMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "SortBottomSheetDialogFragment";
+	public static final String TAG = "SortByMenuBottomSheetDialogFragment";
 
 	private SortFragmentListener listener;
 
