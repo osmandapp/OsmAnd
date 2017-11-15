@@ -1756,7 +1756,7 @@
     <string name="navigate_point_easting">به‌طرف شرق</string>
     <string name="download_tab_downloads">همهٔ دانلودها</string>
     <string name="download_tab_updates">به‌روز‌رسانی‌ها</string>
-    <string name="shared_string_dismiss">نپذیرفتن</string>
+    <string name="shared_string_dismiss">بی‌خیال</string>
     <string name="use_opengl_render">استفاده از رندرینگ OpenGL</string>
     <string name="use_opengl_render_descr">از رندرینگ سرعت‌یافتهٔ OpenGL استفاده کن (روی برخی دستگاه‌ها کار نمی‌کند).</string>
     <string name="lock_screen_request_explanation">%1$s به این مجوز نیاز دارد تا برای صرفه‌جویی در انرژی، بتواند نمایشگر را خاموش کند.</string>
@@ -2513,7 +2513,7 @@
     <string name="quick_action_map_style_switch">سبک نقشه به «%s» تغییر کرد.</string>
     <string name="quick_action_take_audio_note">یادداشت صوتی</string>
     <string name="quick_action_take_video_note">یادداشت ویدئویی</string>
-    <string name="quick_action_take_photo_note">عکس‌گرفتن</string>
+    <string name="quick_action_take_photo_note">یادداشت عکسی</string>
     <string name="quick_action_add_osm_bug">افزودن توضیح ویرایشی OSM</string>
     <string name="quick_action_navigation_voice">صدا روشن/خاموش</string>
     <string name="quick_action_navigation_voice_off">صدا خاموش است</string>
