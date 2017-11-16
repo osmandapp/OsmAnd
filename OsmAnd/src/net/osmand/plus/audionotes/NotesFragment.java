@@ -107,7 +107,7 @@ public class NotesFragment extends OsmAndListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		List<Object> items = createItemsList(sortItemsDescending(new LinkedList<>(plugin.getAllRecordings())));
+		List<Object> items = createItemsList();
 		ListView listView = getListView();
 		listView.setDivider(null);
 		if (items.size() > 0 && footerView == null) {
@@ -176,12 +176,38 @@ public class NotesFragment extends OsmAndListFragment {
 		return null;
 	}
 
-	private List<Object> createItemsList(List<Recording> recs) {
+	private List<Object> createItemsList() {
+		List<Recording> recs = new LinkedList<>(plugin.getAllRecordings());
 		List<Object> res = new LinkedList<>();
 		OsmandSettings settings = getMyApplication().getSettings();
 		if (settings.NOTES_SORT_BY_MODE.get().isByDate()) {
-			res.add(NotesAdapter.TYPE_HEADER);
-			res.addAll(recs);
+			res.add(NotesAdapter.TYPE_DATE_HEADER);
+			res.addAll(sortItemsByDateDescending(recs));
+		} else if (settings.NOTES_SORT_BY_MODE.get().isByType()) {
+			List<Recording> audios = new LinkedList<>();
+			List<Recording> photos = new LinkedList<>();
+			List<Recording> videos = new LinkedList<>();
+			for (Recording rec : recs) {
+				if (rec.isAudio()) {
+					audios.add(rec);
+				} else if (rec.isPhoto()) {
+					photos.add(rec);
+				} else {
+					videos.add(rec);
+				}
+			}
+			if (!audios.isEmpty()) {
+				res.add(NotesAdapter.TYPE_AUDIO_HEADER);
+				res.addAll(audios);
+			}
+			if (!photos.isEmpty()) {
+				res.add(NotesAdapter.TYPE_PHOTO_HEADER);
+				res.addAll(photos);
+			}
+			if (!videos.isEmpty()) {
+				res.add(NotesAdapter.TYPE_VIDEO_HEADER);
+				res.addAll(videos);
+			}
 		}
 		return res;
 	}
@@ -250,7 +276,7 @@ public class NotesFragment extends OsmAndListFragment {
 		listAdapter.notifyDataSetInvalidated();
 	}
 
-	private List<Recording> sortItemsDescending(List<Recording> recs) {
+	private List<Recording> sortItemsByDateDescending(List<Recording> recs) {
 		Collections.sort(recs, new Comparator<Recording>() {
 			@Override
 			public int compare(Recording first, Recording second) {
@@ -272,7 +298,9 @@ public class NotesFragment extends OsmAndListFragment {
 		return new SortFragmentListener() {
 			@Override
 			public void onSortModeChanged() {
-				Toast.makeText(getContext(), "Sort by mode changed", Toast.LENGTH_SHORT).show();
+				listAdapter.clear();
+				listAdapter.addAll(createItemsList());
+				listAdapter.notifyDataSetChanged();
 			}
 		};
 	}

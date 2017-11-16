@@ -21,9 +21,12 @@ import java.util.Set;
 
 public class NotesAdapter extends ArrayAdapter<Object> {
 
-	public static final int TYPE_COUNT = 2;
-	public static final int TYPE_HEADER = 0;
-	public static final int TYPE_ITEM = 1;
+	public static final int TYPE_COUNT = 5;
+	public static final int TYPE_DATE_HEADER = 0;
+	public static final int TYPE_AUDIO_HEADER = 1;
+	public static final int TYPE_PHOTO_HEADER = 2;
+	public static final int TYPE_VIDEO_HEADER = 3;
+	public static final int TYPE_ITEM = 4;
 
 	private OsmandApplication app;
 	private NotesAdapterListener listener;
@@ -52,9 +55,13 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 	@Override
 	public View getView(final int position, View row, @NonNull ViewGroup parent) {
 		final int type = getItemViewType(position);
+		boolean header = type == TYPE_DATE_HEADER
+				|| type == TYPE_AUDIO_HEADER
+				|| type == TYPE_PHOTO_HEADER
+				|| type == TYPE_VIDEO_HEADER;
 		if (row == null) {
 			LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			if (type == TYPE_HEADER) {
+			if (header) {
 				row = inflater.inflate(R.layout.list_item_header, parent, false);
 				HeaderViewHolder hHolder = new HeaderViewHolder(row);
 				row.setTag(hHolder);
@@ -65,10 +72,9 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			}
 		}
 
-		if (type == TYPE_HEADER) {
+		if (header) {
 			final HeaderViewHolder holder = (HeaderViewHolder) row.getTag();
 			holder.checkBox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
-			holder.view.setEnabled(selectionMode);
 			holder.headerRow.setEnabled(selectionMode);
 			if (selectionMode) {
 				holder.checkBox.setChecked(isSelectAllChecked());
@@ -89,7 +95,17 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			} else {
 				holder.view.setOnClickListener(null);
 			}
-			holder.title.setText(R.string.notes_by_date);
+			int titleId;
+			if (type == TYPE_DATE_HEADER) {
+				titleId = R.string.notes_by_date;
+			} else if (type == TYPE_AUDIO_HEADER) {
+				titleId = R.string.shared_string_audio;
+			} else if (type == TYPE_PHOTO_HEADER) {
+				titleId = R.string.shared_string_photo;
+			} else {
+				titleId = R.string.shared_string_video;
+			}
+			holder.title.setText(titleId);
 		} else {
 			final Object item = getItem(position);
 			if (item instanceof Recording) {
