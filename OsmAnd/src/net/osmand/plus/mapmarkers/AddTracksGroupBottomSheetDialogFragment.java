@@ -36,16 +36,21 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 	private GpxSelectionHelper gpxSelectionHelper;
 
 	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		gpxList = new ArrayList<>();
-		super.onViewCreated(view, savedInstanceState);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		gpxSelectionHelper = getMyApplication().getSelectedGpxHelper();
+	}
+
+	@Override
+	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 		asyncProcessor = new ProcessGpxTask();
 		asyncProcessor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	@Override
 	public void createAdapter() {
+		gpxList = new ArrayList<>();
 		adapter = new TracksGroupsAdapter(getContext(), gpxList);
 	}
 
