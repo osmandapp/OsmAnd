@@ -2953,4 +2953,5 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="empty_state_markers_history_desc">標記為已通過的標點將顯現在此螢幕上。</string>
     <string name="show_guide_line_descr">從您的位置顯示指引路線到現行的標記位置。</string>
     <string name="show_arrows_descr">顯示一個或兩個箭頭指示方向到現行的標記。</string>
+    <string name="shared_string_more_without_dots">更多</string>
     </resources>
