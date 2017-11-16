@@ -59,6 +59,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
@@ -455,6 +456,29 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			updateInternalDescription();
 			return time + " " + getDuration(ctx);
 
+		}
+
+		public String getNewSmallDescription(Context ctx) {
+			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(ctx);
+			String date = dateFormat.format(file.lastModified());
+			int size = (int) ((file.length() + 512) >> 10);
+			String sz = "";
+			if (size > 0) {
+				if (size > 1 << 20) {
+					sz = DownloadActivity.formatGb.format(new Object[]{(float) size / (1 << 20)});
+				} else {
+					if (file.length() > (100 * (1 << 10))) {
+						sz = DownloadActivity.formatMb.format(new Object[]{(float) file.length() / (1 << 20)});
+					} else {
+						sz = DownloadActivity.formatKb.format(new Object[]{(float) file.length() / (1 << 10)});
+					}
+				}
+			}
+			if (isPhoto()) {
+				return date + " • " + sz;
+			}
+			updateInternalDescription();
+			return date + " • " + sz + " • " + getDuration(ctx);
 		}
 
 		public String getPlainDuration(boolean accessibilityEnabled) {

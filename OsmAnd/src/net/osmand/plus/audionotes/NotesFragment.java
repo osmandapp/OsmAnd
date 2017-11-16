@@ -19,10 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
@@ -31,6 +29,7 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
@@ -52,9 +51,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class NotesFragment extends OsmAndListFragment {
 
@@ -66,8 +67,7 @@ public class NotesFragment extends OsmAndListFragment {
 
 	private AudioVideoNotesPlugin plugin;
 	private NotesAdapter listAdapter;
-	private List<Recording> items;
-	private List<Recording> selected = new LinkedList<>();
+	private Set<Recording> selected = new HashSet<>();
 
 	private View footerView;
 
@@ -92,21 +92,8 @@ public class NotesFragment extends OsmAndListFragment {
 		setHasOptionsMenu(true);
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
-		view.findViewById(R.id.select_all).setVisibility(View.GONE);
-		((TextView) view.findViewById(R.id.header)).setText(R.string.notes);
-		final CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
-		selectAll.setVisibility(View.GONE);
-		selectAll.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (selectAll.isChecked()) {
-					selectAll();
-				} else {
-					deselectAll();
-				}
-				updateSelectionTitle(actionMode);
-			}
-		});
+		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
+
 		return view;
 	}
 
@@ -120,9 +107,9 @@ public class NotesFragment extends OsmAndListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		items = new ArrayList<>(plugin.getAllRecordings());
-		sortItemsDescending();
+		List<Object> items = createItemsList(sortItemsDescending(new LinkedList<>(plugin.getAllRecordings())));
 		ListView listView = getListView();
+		listView.setDivider(null);
 		if (items.size() > 0 && footerView == null) {
 			footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false);
 			listView.addFooterView(footerView);
@@ -130,6 +117,7 @@ public class NotesFragment extends OsmAndListFragment {
 			listView.setFooterDividersEnabled(false);
 		}
 		listAdapter = new NotesAdapter(getMyApplication(), items);
+		listAdapter.setSelectionMode(selectionMode);
 		listAdapter.setSelected(selected);
 		listAdapter.setListener(createAdapterListener());
 		listView.setAdapter(listAdapter);
@@ -188,10 +176,31 @@ public class NotesFragment extends OsmAndListFragment {
 		return null;
 	}
 
+	private List<Object> createItemsList(List<Recording> recs) {
+		List<Object> res = new LinkedList<>();
+		OsmandSettings settings = getMyApplication().getSettings();
+		if (settings.NOTES_SORT_BY_MODE.get().isByDate()) {
+			res.add(NotesAdapter.TYPE_HEADER);
+			res.addAll(recs);
+		}
+		return res;
+	}
+
 	private NotesAdapterListener createAdapterListener() {
 		return new NotesAdapterListener() {
+
 			@Override
-			public void onItemClick(Recording rec, boolean checked) {
+			public void onHeaderClick(int type, boolean checked) {
+				if (checked) {
+					selectAll();
+				} else {
+					deselectAll();
+				}
+				updateSelectionTitle(actionMode);
+			}
+
+			@Override
+			public void onCheckBoxClick(Recording rec, boolean checked) {
 				if (selectionMode) {
 					if (checked) {
 						selected.add(rec);
@@ -199,9 +208,12 @@ public class NotesFragment extends OsmAndListFragment {
 						selected.remove(rec);
 					}
 					updateSelectionMode(actionMode);
-				} else {
-					showOnMap(rec);
 				}
+			}
+
+			@Override
+			public void onItemClick(Recording rec) {
+				showOnMap(rec);
 			}
 
 			@Override
@@ -225,9 +237,9 @@ public class NotesFragment extends OsmAndListFragment {
 
 	private void selectAll() {
 		for (int i = 0; i < listAdapter.getCount(); i++) {
-			Recording rec = listAdapter.getItem(i);
-			if (!selected.contains(rec)) {
-				selected.add(rec);
+			Object item = listAdapter.getItem(i);
+			if (item instanceof Recording) {
+				selected.add((Recording) item);
 			}
 		}
 		listAdapter.notifyDataSetInvalidated();
@@ -238,8 +250,8 @@ public class NotesFragment extends OsmAndListFragment {
 		listAdapter.notifyDataSetInvalidated();
 	}
 
-	private void sortItemsDescending() {
-		Collections.sort(items, new Comparator<Recording>() {
+	private List<Recording> sortItemsDescending(List<Recording> recs) {
+		Collections.sort(recs, new Comparator<Recording>() {
 			@Override
 			public int compare(Recording first, Recording second) {
 				long firstTime = first.getLastModified();
@@ -253,6 +265,7 @@ public class NotesFragment extends OsmAndListFragment {
 				}
 			}
 		});
+		return recs;
 	}
 
 	private SortFragmentListener createSortFragmentListener() {
@@ -291,7 +304,6 @@ public class NotesFragment extends OsmAndListFragment {
 				});
 				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				selected.clear();
-				listAdapter.notifyDataSetInvalidated();
 				updateSelectionMode(mode);
 				return true;
 			}
@@ -323,13 +335,8 @@ public class NotesFragment extends OsmAndListFragment {
 	private void switchSelectionMode(boolean enable) {
 		selectionMode = enable;
 		listAdapter.setSelectionMode(enable);
-		View view = getView();
-		if (view != null) {
-			view.findViewById(R.id.select_all).setVisibility(enable ? View.VISIBLE : View.GONE);
-			((FavoritesActivity) getActivity()).setToolbarVisibility(!enable
-					&& AndroidUiHelper.isOrientationPortrait(getActivity()));
-			((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
-		}
+		((FavoritesActivity) getActivity()).setToolbarVisibility(!enable && AndroidUiHelper.isOrientationPortrait(getActivity()));
+		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 	}
 
 	private void updateSelectionTitle(ActionMode m) {
@@ -342,26 +349,10 @@ public class NotesFragment extends OsmAndListFragment {
 
 	private void updateSelectionMode(ActionMode m) {
 		updateSelectionTitle(m);
-		refreshSelectAll();
+		listAdapter.notifyDataSetInvalidated();
 	}
 
-	private void refreshSelectAll() {
-		View view = getView();
-		if (view == null) {
-			return;
-		}
-		CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
-		for (int i = 0; i < listAdapter.getCount(); i++) {
-			Recording point = listAdapter.getItem(i);
-			if (!selected.contains(point)) {
-				selectAll.setChecked(false);
-				return;
-			}
-		}
-		selectAll.setChecked(true);
-	}
-
-	private void deleteItems(final List<Recording> selected) {
+	private void deleteItems(final Set<Recording> selected) {
 		new AlertDialog.Builder(getActivity())
 				.setMessage(getString(R.string.local_recordings_delete_all_confirm, selected.size()))
 				.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
@@ -381,7 +372,7 @@ public class NotesFragment extends OsmAndListFragment {
 				.show();
 	}
 
-	private void shareItems(List<Recording> selected) {
+	private void shareItems(Set<Recording> selected) {
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_SEND_MULTIPLE);
 		intent.setType("image/*"); /* This example is sharing jpeg images. */
@@ -408,7 +399,7 @@ public class NotesFragment extends OsmAndListFragment {
 		startActivity(Intent.createChooser(intent, getString(R.string.share_note)));
 	}
 
-	private File generateGPXForRecordings(List<Recording> selected) {
+	private File generateGPXForRecordings(Set<Recording> selected) {
 		File tmpFile = new File(getActivity().getCacheDir(), "share/noteLocations.gpx");
 		tmpFile.getParentFile().mkdirs();
 		GPXFile file = new GPXFile();
