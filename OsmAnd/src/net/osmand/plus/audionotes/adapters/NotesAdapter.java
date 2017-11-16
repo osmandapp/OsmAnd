@@ -21,12 +21,12 @@ import java.util.Set;
 
 public class NotesAdapter extends ArrayAdapter<Object> {
 
-	public static final int TYPE_COUNT = 5;
 	public static final int TYPE_DATE_HEADER = 0;
 	public static final int TYPE_AUDIO_HEADER = 1;
 	public static final int TYPE_PHOTO_HEADER = 2;
 	public static final int TYPE_VIDEO_HEADER = 3;
-	public static final int TYPE_ITEM = 4;
+	private static final int TYPE_ITEM = 4;
+	private static final int TYPE_COUNT = 5;
 
 	private OsmandApplication app;
 	private NotesAdapterListener listener;
@@ -59,6 +59,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 				|| type == TYPE_AUDIO_HEADER
 				|| type == TYPE_PHOTO_HEADER
 				|| type == TYPE_VIDEO_HEADER;
+
 		if (row == null) {
 			LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			if (header) {
