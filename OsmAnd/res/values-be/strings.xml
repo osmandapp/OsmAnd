@@ -875,7 +875,7 @@
 	<string name="rotate_map_compass_opt">Па компасе</string>
 	<string name="rotate_map_bearing_opt">У напрамку руху</string>
 	<string name="rotate_map_none_opt">Не варочаць (поўнач уверсе)</string>
-	<string name="rotate_map_to_bearing_descr">Абраць раўнаванне мапы на экране.</string>
+	<string name="rotate_map_to_bearing_descr">Абраць раўнаваньне мапы на экране.</string>
 	<string name="rotate_map_to_bearing">Арыентацыя мапы</string>
 	<string name="show_route">Падрабязнасьці маршруту</string>
 	<string name="fav_imported_sucessfully">Выбраныя паспяхова імпартаваны</string>
@@ -2960,7 +2960,7 @@
     <string name="empty_state_markers_groups">Імпартаваць групы</string>
     <string name="empty_state_markers_groups_desc">Вы можаце імпартаваць групы улюбёных ці шляхавыя кропкі як маркеры.</string>
     <string name="empty_state_markers_history_desc">Маркеры, пазначаныя як пройдзенныя, з\'явяцца на гэтым экране.</string>
-    <string name="show_guide_line_descr">Паказваць кірунак ад вашага становішча да актыўнага маркера.</string>
+    <string name="show_guide_line_descr">Паказвае кірунак ад вашага становішча да актыўнага маркера.</string>
     <string name="show_arrows_descr">Адлюстроўвае адну ці дзьве стрэлкі, якія паказваюць кірунак да актыўных маркераў.</string>
     <string name="distance_indication_descr">Выберыце, як адлюстроўваць адлегласьць да актыўных маркераў.</string>
     <string name="active_markers_descr">Выберыце, колькі індыкатараў накірунку будзе адлюстравана.</string>
