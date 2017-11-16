@@ -2424,7 +2424,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="save_filter">儲存篩選</string>
     <string name="delete_filter">刪除篩選</string>
     <string name="new_filter">新的篩選</string>
-    <string name="new_filter_desc">請輸入新的篩選名稱。這會加到您的類別標籤裡。</string>
+    <string name="new_filter_desc">請輸入新的篩選名稱，這會加到您的類別標籤裡。</string>
     <string name="translit_names">音譯名稱</string>
     <string name="search_hint">輸入城市、地址、poi 名稱</string>
     <string name="translit_name_if_miss">如果 %1$s 的名稱缺失則音譯</string>
