@@ -2960,7 +2960,7 @@
     <string name="empty_state_markers_groups">Імпартаваць групы</string>
     <string name="empty_state_markers_groups_desc">Вы можаце імпартаваць групы улюбёных ці шляхавыя кропкі як маркеры.</string>
     <string name="empty_state_markers_history_desc">Маркеры, пазначаныя як пройдзенныя, з\'явяцца на гэтым экране.</string>
-    <string name="show_guide_line_descr">Лінія, якая злучае ваша становішча са становішчам актыўных маркераў, будзе паказаная на мапе.</string>
+    <string name="show_guide_line_descr">Паказваць кірунак ад вашага становішча да актыўнага маркера.</string>
     <string name="show_arrows_descr">Адлюстроўвае адну ці дзьве стрэлкі, якія паказваюць кірунак да актыўных маркераў.</string>
     <string name="distance_indication_descr">Выберыце, як адлюстроўваць адлегласьць да актыўных маркераў.</string>
     <string name="active_markers_descr">Выберыце, колькі індыкатараў накірунку будзе адлюстравана.</string>
