@@ -23,10 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_title_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/content_padding"
                 android:paddingLeft="@dimen/content_padding"
                 android:paddingRight="@dimen/content_padding"
-                android:paddingStart="@dimen/content_padding"
                 android:text="@string/shared_string_options"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 osmand:typeface="@string/font_roboto_medium"/>
@@ -37,10 +35,8 @@
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/content_padding"
                 android:paddingLeft="@dimen/content_padding"
-                android:paddingRight="@dimen/content_padding"
-                android:paddingStart="@dimen/content_padding">
+                android:paddingRight="@dimen/content_padding">
 
                 <ImageView
                     android:id="@+id/sort_by_icon"
@@ -60,16 +56,23 @@
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
             </LinearLayout>
 
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/bottom_sheet_divider_margin_bottom"
+                android:layout_marginLeft="@dimen/bottom_sheet_divider_margin_start"
+                android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
+                android:layout_marginTop="@dimen/bottom_sheet_divider_margin_top"
+                android:background="?attr/dashboard_divider"/>
+
             <LinearLayout
                 android:id="@+id/show_direction_row"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/content_padding"
                 android:paddingLeft="@dimen/content_padding"
-                android:paddingRight="@dimen/content_padding"
-                android:paddingStart="@dimen/content_padding">
+                android:paddingRight="@dimen/content_padding">
 
                 <ImageView
                     android:id="@+id/show_direction_icon"
@@ -91,25 +94,14 @@
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
             </LinearLayout>
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_marginBottom="@dimen/bottom_sheet_divider_margin_bottom"
-                android:layout_marginLeft="@dimen/bottom_sheet_divider_margin_start"
-                android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
-                android:layout_marginTop="@dimen/bottom_sheet_divider_margin_top"
-                android:background="?attr/dashboard_divider"/>
-
             <LinearLayout
                 android:id="@+id/coordinate_input_row"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/content_padding"
                 android:paddingLeft="@dimen/content_padding"
-                android:paddingRight="@dimen/content_padding"
-                android:paddingStart="@dimen/content_padding">
+                android:paddingRight="@dimen/content_padding">
 
                 <ImageView
                     android:id="@+id/coordinate_input_icon"
@@ -135,10 +127,8 @@
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/content_padding"
                 android:paddingLeft="@dimen/content_padding"
-                android:paddingRight="@dimen/content_padding"
-                android:paddingStart="@dimen/content_padding">
+                android:paddingRight="@dimen/content_padding">
 
                 <ImageView
                     android:id="@+id/build_route_icon"
@@ -158,16 +148,23 @@
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
             </LinearLayout>
 
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/bottom_sheet_divider_margin_bottom"
+                android:layout_marginLeft="@dimen/bottom_sheet_divider_margin_start"
+                android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
+                android:layout_marginTop="@dimen/bottom_sheet_divider_margin_top"
+                android:background="?attr/dashboard_divider"/>
+
             <LinearLayout
                 android:id="@+id/save_as_new_track_row"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/content_padding"
                 android:paddingLeft="@dimen/content_padding"
-                android:paddingRight="@dimen/content_padding"
-                android:paddingStart="@dimen/content_padding">
+                android:paddingRight="@dimen/content_padding">
 
                 <ImageView
                     android:id="@+id/save_as_new_track_icon"
@@ -187,26 +184,14 @@
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
             </LinearLayout>
 
-            <View
-                android:id="@+id/move_all_to_history_divider"
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_marginBottom="@dimen/bottom_sheet_divider_margin_bottom"
-                android:layout_marginLeft="@dimen/bottom_sheet_divider_margin_start"
-                android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
-                android:layout_marginTop="@dimen/bottom_sheet_divider_margin_top"
-                android:background="?attr/dashboard_divider"/>
-
             <LinearLayout
                 android:id="@+id/move_all_to_history_row"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/content_padding"
                 android:paddingLeft="@dimen/content_padding"
-                android:paddingRight="@dimen/content_padding"
-                android:paddingStart="@dimen/content_padding">
+                android:paddingRight="@dimen/content_padding">
 
                 <ImageView
                     android:id="@+id/move_all_to_history_icon"
@@ -229,28 +214,5 @@
         </LinearLayout>
 
     </ScrollView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/dashboard_divider"/>
-
-    <FrameLayout
-        android:id="@+id/cancel_row"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_sheet_cancel_button_height"
-        android:background="?attr/selectableItemBackground">
-
-        <TextView
-            android:id="@+id/cancel_row_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/shared_string_close"
-            android:textAllCaps="true"
-            android:textColor="?attr/color_dialog_buttons"
-            android:textSize="@dimen/default_desc_text_size"
-            android:textStyle="bold"/>
-    </FrameLayout>
 
 </LinearLayout>
