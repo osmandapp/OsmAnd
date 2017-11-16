@@ -1621,7 +1621,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="favourites_context_menu_edit">Redahavańnie ŭlubionaha</string>
 	<string name="favourites_context_menu_delete">Vydalić ulubionaje</string>
 	<string name="favourites_remove_dialog_msg">Vydalić ulubionuju kropku \'%s\' z zakładak?</string>
-	<string name="favourites_remove_dialog_success">Punkt {0} byŭ paspiachova vydaleny z zakładak.</string>
+	<string name="favourites_remove_dialog_success">Ulubiony punkt {0} byŭ paśpiachova vydaleny z zakładak.</string>
 	
 	
 	
@@ -1840,7 +1840,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="route_duration">Čas:</string>
     <string name="rendering_attr_horseRoutes_name">Konnyja maršruty</string>
     <string name="no_address_found">Adresa nia vyznačanaja</string>
-    <string name="shared_string_near">Niedaloka</string>
+    <string name="shared_string_near">Pobač</string>
     <string name="shared_string_hide">Schavać</string>
     <string name="av_video_quality_low">Nіzkaja jakaść</string>
     <string name="av_video_quality_high">Vysokaja jakaść</string>
@@ -2801,7 +2801,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="empty_state_my_tracks">Dadać i zapisać slady</string>
     <string name="empty_state_my_tracks_desc">Zapisać ci impartavać sliady dlia prahliadu.</string>
     <string name="empty_state_favourites">Dadać va Ŭlubionyja</string>
-    <string name="empty_state_favourites_desc">Dadać uliublionyja na mapie ci impartavać z fajlavaj sistemy.</string>
+    <string name="empty_state_favourites_desc">Dadać ulubionyja na mapie ci impartavać z fajłavaj systemy.</string>
     <string name="import_track">Impartavać śled</string>
     <string name="import_track_desc">Fajł %1$s nie źmiaščaje kropki šlachu, impartavać jak śled?</string>
     <string name="move_point">Pieramiascić kropku</string>
@@ -2892,30 +2892,30 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="tap_on_map_to_hide_interface">Poŭnyekranny režym</string>
     <string name="show_on_top_bar">Pakazać na vierchniaj paneli</string>
     <string name="mark_passed">Adznačyć prajdzienyja</string>
-    <string name="add_favourites_group_to_markers_descr">Abiarycie, jakija ŭlubionyja hrupy vy chočacie dadać da markieraŭ</string>
+    <string name="add_favourites_group_to_markers_descr">Abiarycie, jakija hrupy ŭlubionych vy chočacie dadać da markieraŭ.</string>
     <string name="track_waypoints">Šliachavyja kropki</string>
-    <string name="favourites_group">Ulubionyja hrupy</string>
+    <string name="favourites_group">Hrupa ŭlubionych</string>
     <string name="add_group">Dadać hrupu</string>
-    <string name="add_group_descr">Vy možacie dadać hrupu ŭlubionych ci šlachavych kropak.</string>
+    <string name="add_group_descr">Vy možacie dadać hrupu ŭlubionych ci šlachavyja kropki.</string>
     <string name="empty_state_markers_active">Markiery na mapie!</string>
     <string name="empty_state_markers_active_desc">Adznačyć miesca na mapie dotykam.</string>
     <string name="empty_state_markers_groups">Impartavać hrupy</string>
-    <string name="empty_state_markers_groups_desc">Vy možacie impartavać uliublionyja hrupy ci šliachavyja kropki jak markiery.</string>
+    <string name="empty_state_markers_groups_desc">Vy možacie impartavać hrupy ulubionych ci šlachavyja kropki jak markiery.</string>
     <string name="empty_state_markers_history_desc">Markiery, paznačanyja jak projdziennyja, z\'javiacca na hetym ekranie.</string>
     <string name="shared_string_two">Dva</string>
     <string name="shared_string_one">Adzin</string>
     <string name="show_guide_line_descr">Linija, jakaja zlučaje vaša stanovišča sa stanoviščam aktyŭnych markieraŭ, budzie pakazanaja na mapie.</string>
-    <string name="show_arrows_descr">Adna ci dzvie strelki, jakija pakazvajuć kirunak da aktyŭnych markieraŭ, buduć pakazanaja na mapie.</string>
-    <string name="distance_indication_descr">Vybierycie, jak vy chočacie, kab vyhliadala adliehlasć da aktyŭnych markieraŭ.</string>
-    <string name="active_markers_descr">Vybierycie, koĺki nakirunkaŭ indykataraŭ vy chacieli b bačyć.</string>
-    <string name="digits_quantity">Koĺkasć ličbaŭ</string>
+    <string name="show_arrows_descr">Adlustroŭvaie adnu ci dzvie strełki, jakija pakazvajuć kirunak da aktyŭnych markieraŭ.</string>
+    <string name="distance_indication_descr">Vybierycie, jak adlustroŭvać adlehłaść da aktyŭnych markieraŭ.</string>
+    <string name="active_markers_descr">Vybierycie, kolki indykataraŭ nakirunku budzie adlustravana.</string>
+    <string name="digits_quantity">Kolkaść ličbaŭ</string>
     <string name="show_number_pad">Pakazać ličbavuju paneĺ</string>
     <string name="shared_string_paste">Ustavić</string>
-    <string name="coordinate_input_accuracy_description">Aŭtamatyčna pierakliučycca ŭ nastupnaje polie paslia ŭvodu %1$d ličbaŭ paslia dziesiatkovaj kropki</string>
+    <string name="coordinate_input_accuracy_description">Aŭtamatyčna pieraklučycca ŭ nastupnaje pole paśla ŭvodu %1$d ličbaŭ paśla dziesiatkovaj kropki.</string>
     <string name="coordinate_input_accuracy">%1$d ličbaŭ</string>
     <string name="go_to_next_field">Parajsci ŭ nastupnaje polie</string>
     <string name="rename_marker">Pierajmienavać markier</string>
-    <string name="appearance_on_the_map">Z\'jaŭliennie na mapie</string>
+    <string name="appearance_on_the_map">Źniešni vyhlad na mapie</string>
     <string name="add_track_to_markers_descr">Abrać slied šliachavych kropak, jakija OsmAnd dadasć u markiery</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_right">Naprava</string>
