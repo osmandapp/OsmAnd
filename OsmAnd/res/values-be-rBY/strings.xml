@@ -1361,7 +1361,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="rotate_map_compass_opt">Pa kompasie</string>
 	<string name="rotate_map_bearing_opt">U napramku ruchu</string>
 	<string name="rotate_map_none_opt">Nie varočać (poŭnač uviersie)</string>
-	<string name="rotate_map_to_bearing_descr">Abrać raŭnavannie mapy na ekranie.</string>
+	<string name="rotate_map_to_bearing_descr">Abrać raŭnavańnie mapy na ekranie.</string>
 	<string name="rotate_map_to_bearing">Aryjentacyja mapy</string>
 	<string name="show_route">Padrabiaznaścі maršrutu</string>
 	<string name="fav_imported_sucessfully">Ulubionyja paśpiachova іmpartavany</string>
@@ -2904,7 +2904,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="empty_state_markers_history_desc">Markiery, paznačanyja jak projdziennyja, z\'javiacca na hetym ekranie.</string>
     <string name="shared_string_two">Dva</string>
     <string name="shared_string_one">Adzin</string>
-    <string name="show_guide_line_descr">Pakazvać kirunak ad vašaha stanovišča da aktyŭnaha markiera.</string>
+    <string name="show_guide_line_descr">Pakazvaje kirunak ad vašaha stanovišča da aktyŭnaha markiera.</string>
     <string name="show_arrows_descr">Adlustroŭvaie adnu ci dzvie strełki, jakija pakazvajuć kirunak da aktyŭnych markieraŭ.</string>
     <string name="distance_indication_descr">Vybierycie, jak adlustroŭvać adlehłaść da aktyŭnych markieraŭ.</string>
     <string name="active_markers_descr">Vybierycie, kolki indykataraŭ nakirunku budzie adlustravana.</string>
