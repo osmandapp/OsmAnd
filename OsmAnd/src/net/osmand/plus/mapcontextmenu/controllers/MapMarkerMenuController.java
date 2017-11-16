@@ -3,15 +3,19 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 
+import net.osmand.data.Amenity;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.TransportStop;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.builders.MapMarkerMenuBuilder;
 import net.osmand.util.Algorithms;
 
 public class MapMarkerMenuController extends MenuController {
@@ -19,9 +23,8 @@ public class MapMarkerMenuController extends MenuController {
 	private MapMarker mapMarker;
 
 	public MapMarkerMenuController(MapActivity mapActivity, PointDescription pointDescription, MapMarker mapMarker) {
-		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
+		super(new MapMarkerMenuBuilder(mapActivity, mapMarker), pointDescription, mapActivity);
 		this.mapMarker = mapMarker;
-		builder.setShowNearestWiki(true);
 		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
 
 		leftTitleButtonController = new TitleButtonController() {
@@ -52,6 +55,10 @@ public class MapMarkerMenuController extends MenuController {
 				isLight() ? R.color.on_map_icon_color : R.color.ctx_menu_info_text_dark);
 		Drawable topbar = ic.getIcon(R.drawable.ic_action_device_topbar, R.color.dashboard_blue);
 		return new LayerDrawable(new Drawable[]{background, topbar});
+	}
+
+	private MapMarkerMenuBuilder getBuilder() {
+		return (MapMarkerMenuBuilder) builder;
 	}
 
 	@Override
@@ -103,5 +110,28 @@ public class MapMarkerMenuController extends MenuController {
 	@Override
 	public int getWaypointActionStringId() {
 		return R.string.rename_marker;
+	}
+
+	@Override
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
+		FavouritePoint fav = mapMarker.favouritePoint;
+		if (fav != null && !Algorithms.isEmpty(fav.getDescription())) {
+			addPlainMenuItem(R.drawable.ic_action_note_dark, fav.getDescription(), true, false, null);
+		}
+		Object originObject = getBuilder().getOriginObject();
+		if (originObject != null) {
+			if (originObject instanceof Amenity) {
+				Amenity amenity = (Amenity) originObject;
+				AmenityMenuController.addPlainMenuItems(amenity, AmenityMenuController.getTypeStr(amenity), builder);
+			} else if (originObject instanceof TransportStop) {
+				TransportStop stop = (TransportStop) originObject;
+				TransportStopController transportStopController =
+						new TransportStopController(getMapActivity(), pointDescription, stop);
+				transportStopController.addPlainMenuItems(builder, latLon);
+				addMyLocationToPlainItems(latLon);
+			}
+		} else {
+			addMyLocationToPlainItems(latLon);
+		}
 	}
 }

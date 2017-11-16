@@ -574,13 +574,15 @@ public class MapMarkersHelper {
 		for (MapMarker marker : markers) {
 			if (marker.id.equals(group.getId() + name)) {
 				exists = true;
-				if (!marker.history && (!marker.point.equals(latLon))) {
-					for (MapMarker m : mapMarkers) {
-						if (m.id.equals(marker.id)) {
+				for (MapMarker m : mapMarkers) {
+					if (m.id.equals(marker.id)) {
+						m.favouritePoint = favouritePoint;
+						m.wptPt = wptPt;
+						if (!marker.history && !marker.point.equals(latLon)) {
 							m.point = latLon;
 							updateMapMarker(m, true);
-							break;
 						}
+						break;
 					}
 				}
 				markers.remove(marker);
