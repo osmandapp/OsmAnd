@@ -580,7 +580,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	private void syncGpx(GPXFile gpxFile) {
 		File gpx = new File(gpxFile.path);
 		if (gpx.exists()) {
-			app.getMapMarkersHelper().syncGroup(new MarkersSyncGroup(gpx.getAbsolutePath(),
+			app.getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(gpx.getAbsolutePath(),
 					AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE));
 		}
 	}
@@ -635,7 +635,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		final MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(),
 				AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
 		markersHelper.addMarkersSyncGroup(syncGroup);
-		markersHelper.syncGroup(syncGroup);
+		markersHelper.syncGroupAsync(syncGroup);
 		GPXFile gpxFile = getTrackActivity().getGpx();
 		if (gpxFile != null) {
 			app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);

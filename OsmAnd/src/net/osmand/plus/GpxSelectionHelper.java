@@ -538,7 +538,7 @@ public class GpxSelectionHelper {
 					mapMarkersHelper.removeMarkersSyncGroup(gpx.getAbsolutePath(), true);
 				}
 			}
-			mapMarkersHelper.syncGroup(syncGroup, enabled);
+			mapMarkersHelper.syncGroupAsync(syncGroup, enabled);
 		}
 	}
 

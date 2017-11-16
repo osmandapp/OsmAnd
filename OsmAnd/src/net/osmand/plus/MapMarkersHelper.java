@@ -452,28 +452,33 @@ public class MapMarkersHelper {
 		return markersDbHelper.isGroupDisabled(id);
 	}
 
-	public void syncAllGroups() {
+	public void syncAllGroupsAsync() {
 		List<MarkersSyncGroup> groups = markersDbHelper.getAllGroups();
 		for (MarkersSyncGroup gr : groups) {
-			syncGroup(gr);
+			syncGroupAsync(gr);
 		}
 	}
 
-	public void syncGroup(MarkersSyncGroup group) {
-		syncGroup(group, true, null);
+	public void syncGroupAsync(MarkersSyncGroup group) {
+		syncGroupAsync(group, true, null);
 	}
 
-	public void syncGroup(MarkersSyncGroup group, boolean enabled) {
-		syncGroup(group, enabled, null);
+	public void syncGroupAsync(MarkersSyncGroup group, boolean enabled) {
+		syncGroupAsync(group, enabled, null);
 	}
 
-	public void syncGroup(MarkersSyncGroup group, OnGroupSyncedListener groupSyncedListener) {
-		syncGroup(group, true, groupSyncedListener);
+	public void syncGroupAsync(MarkersSyncGroup group, OnGroupSyncedListener groupSyncedListener) {
+		syncGroupAsync(group, true, groupSyncedListener);
 	}
 
-	private void syncGroup(MarkersSyncGroup group, boolean enabled, OnGroupSyncedListener groupSyncedListener) {
-		SyncGroupTask syncGroupTask = new SyncGroupTask(group, enabled, groupSyncedListener);
-		syncGroupTask.executeOnExecutor(executorService);
+	private void syncGroupAsync(final MarkersSyncGroup group, final boolean enabled, final OnGroupSyncedListener groupSyncedListener) {
+		ctx.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				SyncGroupTask syncGroupTask = new SyncGroupTask(group, enabled, groupSyncedListener);
+				syncGroupTask.executeOnExecutor(executorService);
+			}
+		});
 	}
 
 	private class SyncGroupTask extends AsyncTask<Void, Void, Void> {
@@ -491,7 +496,6 @@ public class MapMarkersHelper {
 		@Override
 		protected Void doInBackground(Void... voids) {
 			runGroupSynchronization();
-			onGroupSynced();
 			return null;
 		}
 
@@ -551,7 +555,8 @@ public class MapMarkersHelper {
 			}
 		}
 
-		private void onGroupSynced() {
+		@Override
+		protected void onPostExecute(Void aVoid) {
 			if (listener != null) {
 				ctx.runInUIThread(new Runnable() {
 					@Override
