@@ -183,7 +183,7 @@
     <string name="offline_edition">Frakoblet redigering</string>
     <string name="offline_edition_descr">Bruk alltid frakoblet redigering.</string>
 
-    <string name="free_version_message">Denne gratis OsmAnd-versjonen er begrenset til %1$s kartnedlastinger (inkludert oppdateringsnedlastinger) og støtter ikke offline Wikipedia-artikler.</string>
+    <string name="free_version_message">Denne gratis OsmAnd-versjonen er begrenset til %1$s kartnedlastinger (å legge til eller oppdatere kart) og støtter ikke offline Wikipedia-artikler.</string>
     <string name="free_version_title">Gratisversjon</string>
     <string name="poi_context_menu_showdescription">Vis interessepunkt-beskrivelse.</string>
     <string name="index_name_north_america">Nord-Amerika</string>
@@ -394,7 +394,7 @@
     <string name="none_region_found">Ingen offline-data for regioner funnet på SD-kortet. Last ned regioner fra internett.</string>
     <string name="layer_route">Rute</string>
     
-    <string name="layer_poi">Interessepunkt…</string>
+    <string name="layer_poi">Interessepunktoverlegg…</string>
     <string name="layer_map">Kartkilde…</string>
     <string name="menu_layers">Kartlag</string>
     <string name="context_menu_item_search_poi">Søk interessepunkt</string>
@@ -489,8 +489,8 @@
     <string name="show_view_angle">Vis synsretning</string>
     <string name="map_view_3d_descr">Aktiver 3D-visning av kartet.</string>
     <string name="map_view_3d">3D-kartvisning</string>
-    <string name="show_poi_over_map_description">Vis interessepunkt over kart (bruk sist valgte filter).</string>
-    <string name="show_poi_over_map">Vis interessepunkt</string>
+    <string name="show_poi_over_map_description">Vis det sist valgte interessepunktoverlegget på kartet.</string>
+    <string name="show_poi_over_map">Vis interessepunktoverlegg</string>
     <string name="map_tile_source_descr">Velg kilden til nettbaserte eller hurtigbufrede kartdeler.</string>
     <string name="map_tile_source">Fliskartkilde</string>
     <string name="map_source">Kartkilde</string>
@@ -787,7 +787,7 @@
     <string name="rendering_attr_showSurfaceGrade_name">Vis veikvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Vis veidekke</string>
     <string name="select_destination_and_intermediate_points">Velg reisemål</string>
-    <string name="layer_amenity_label">Punktnavn</string>
+    <string name="layer_amenity_label">Overleggspåskrifter for interessepunkter</string>
     <string name="gpx_wpt">Rutepunkt</string>
     <string name="voice_pref_title">Tale</string>
     <string name="misc_pref_title">Diverse</string>
@@ -1789,11 +1789,11 @@
     <string name="si_mi_meters">Mil/meter</string>
     <string name="give_permission">Gi tilgang</string>
     <string name="allow_access_location">Gi tilgang til plassering</string>
-    <string name="no_update_info_desc">Ikke se etter oppdateringer om nye versjoner eller rabatter relatert til OsmAnd</string>
+    <string name="no_update_info_desc">Ikke se etter oppdateringer om nye versjoner eller rabatter relatert til OsmAnd.</string>
     <string name="shared_string_change">Endre</string>
     <string name="access_disable_offroute_recalc">Ikke endre ruten når du har forlatt veien</string>
-    <string name="access_disable_wrong_direction_recalc">Ikke endre ruten når du tar feil retning</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Forhindre automatisk omregning av rute når du beveger deg i feil retning</string>
+    <string name="access_disable_wrong_direction_recalc">Ingen ny ruteberegning ved motsatt retning</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Forhindre automatisk omregning av rute når du beveger deg i feil retning.</string>
     <string name="access_smart_autoannounce">Smart auto-meddelelse</string>
     <string name="rendering_value_fine_name">Fin</string>
     <string name="report">Rapport</string>
@@ -1878,20 +1878,20 @@
     <string name="save_track_min_distance">Logging ved bevegelsesoppdagelse</string>
     <string name="save_track_min_distance_descr">Filter: Angi minste avstand fra siste posisjon for at et punkt skal logges.</string>
     <string name="save_track_precision">Minste loggingspresisjon</string>
-    <string name="save_track_precision_descr">Velg minste presisjon som starter loggføring av et punkt</string>
+    <string name="save_track_precision_descr">Filter: Velg minste presisjon som starter loggføring av et punkt.</string>
     <string name="christmas_desc">I anledning jul og nyttår kan du velge å vise interessepunkter knyttet til julen: juletrær, markeder, etc.</string>
     <string name="translit_name_if_miss">Transkriber hvis %1$s navn mangler</string>
     <string name="translit_names">Transkriber navn</string>
     <string name="get_for_month">Innhent for %1$s måned</string>
     <string name="osm_live_banner_desc">Få ubegrensede kartnedlastinger, og kartopplastinger mer enn en gang om måneden: Ukentlig, daglig, eller timebasert.</string>
     <string name="access_direction_audio_feedback">Lydbasert retningsanvisning</string>
-    <string name="access_direction_audio_feedback_descr">Indikerer målets retning med lyd</string>
+    <string name="access_direction_audio_feedback_descr">Indikerer målets retning med lyd.</string>
     <string name="access_direction_haptic_feedback">Retningstilbakemelding med vibrasjon</string>
-    <string name="access_direction_haptic_feedback_descr">Angi retningen til målet med vibrasjon</string>
-    <string name="use_osm_live_routing_description">Skru på navigasjon for OSM- endringer i sanntid (beta)</string>
+    <string name="access_direction_haptic_feedback_descr">Angi retningen til målet med vibrasjon.</string>
+    <string name="use_osm_live_routing_description">Skru på navigasjon for OSM-endringer i sanntid.</string>
     <string name="map_widget_magnetic_bearing">Magnetisk peiling</string>
     <string name="map_widget_bearing">Relativ peiling</string>
-    <string name="access_disable_offroute_recalc_descr">Forhindre automatisk ruteutregning når du er ganske langt unna rett vei</string>
+    <string name="access_disable_offroute_recalc_descr">Forhindre automatisk ruteutregning når du er ganske langt unna rett vei.</string>
     <string name="access_smart_autoannounce_descr">Varsle bare når retningen til målpunktet endres</string>
     <string name="access_autoannounce_period">Periode for automatisk annonsering</string>
     <string name="access_autoannounce_period_descr">Minimumstid mellom meddelelser</string>
@@ -2162,7 +2162,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="change_color">Endre farge</string>
     <string name="edit_name">Rediger navn</string>
     <string name="animate_my_location">Animer min posisjon</string>
-    <string name="animate_my_location_desc">Aktiver animasjon av min posisjon under navigering</string>
+    <string name="animate_my_location_desc">Aktiver animasjon av min posisjon under navigering.</string>
     <string name="shared_string_overview">Oversikt</string>
     <string name="select_street">Velg gate</string>
     <string name="shared_string_in_name">i %1$s</string>
@@ -2280,7 +2280,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="wrong_user_name">Feil brukernavn!</string>
     <string name="shared_string_to">Til</string>
     <string name="mapillary_menu_date_from">Fra</string>
-    <string name="mapillary_menu_title_dates">Datoer</string>
+    <string name="mapillary_menu_title_dates">Dato</string>
     <string name="mapillary_menu_edit_text_hint">Skriv inn brukernavn</string>
     <string name="mapillary_menu_title_username">Brukernavn</string>
     <string name="shared_string_reset">Tilbakestill</string>
@@ -2343,10 +2343,10 @@ Representerer området: %1$s x %2$s</string>
     <string name="improve_coverage_mapillary">Forbedre billeddekningen med Mapillary</string>
     <string name="online_photos">Nettbaserte bilder</string>
     <string name="shared_string_add_photos">Legg til bilder</string>
-    <string name="no_photos_descr">Vi har ingen bilder fra dette stedet</string>
+    <string name="no_photos_descr">Vi har ingen bilder fra dette stedet.</string>
     <string name="mapillary_action_descr">Bidra med dine egne visninger på gatenivå fra denne plasseringen via Mapillary.</string>
     <string name="mapillary_widget">Mapillary-miniprogram</string>
-    <string name="mapillary_widget_descr">Lar deg bidra raskt til Mapillary</string>
+    <string name="mapillary_widget_descr">Lar deg bidra raskt til Mapillary.</string>
     <string name="mapillary_descr">Nettbaserte bilder på gatenivå for alle. Oppdag steder, samarbeid, fang inn verden.</string>
     <string name="mapillary">Mapillary</string>
     <string name="nautical_maps">Sjøkart</string>
@@ -2379,7 +2379,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="fast_coordinates_input_descr">Velg format for koordinatinntasting. Du kan alltid endre det ved å trykke Alternativer.</string>
     <string name="fast_coordinates_input">Rask koordinatinntasting</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Unngå isette veier, vadesteder</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Unngå isete veier og vadesteder</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Unngå isete veier og vadesteder.</string>
     <string name="use_location">Bruk posisjon</string>
     <string name="add_location_as_first_point_descr">Legg til din posisjon som første punkt for planlegging av den perfekte ruten.</string>
     <string name="my_location">Min posisjon</string>
@@ -2408,7 +2408,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="index_item_depth_contours_osmand_ext">Havdybdekonturer</string>
     <string name="download_depth_countours">Havdybdekonturer</string>
     <string name="route_points_category_name">Svinger å passere langs ruten</string>
-    <string name="rendering_attr_depthContours_description">Vis havdybdekonturer og punkter</string>
+    <string name="rendering_attr_depthContours_description">Vis havdybdekonturer og punkter.</string>
     <string name="rendering_attr_depthContours_name">Nautiske dybdekonturer</string>
     <string name="auto_split_recording_title">Del opp opptak automatisk etter opphold</string>
     <string name="auto_split_recording_descr">Start et nytt segment etter en pause på seks min., en ny tur etter en pause på to timer, eller ei ny fil etter et lengre opphold, hvis datoen har endret seg.</string>
@@ -2444,7 +2444,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="date_added">Dato lagt til</string>
     <string name="order_by">Sorter etter:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartorienteringsterskel</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Velg når farten er lav nok til å bytte kartorientering fra \"Bevegelsesretning\" til \"Kompass\"</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Velg når farten er lav nok til å bytte kartorientering fra \"Bevegelsesretning\" til \"Kompass\".</string>
     <string name="srtm_purchase_header">For å se koter på kartet, må du kjøpe og installere programtillegget for koter</string>
     <string name="native_app_allocated_memory">Totalt innebygget minne</string>
     <string name="starting_point_too_far">Startpunkt for langt unna nærmeste vei.</string>
@@ -2564,4 +2564,21 @@ Representerer området: %1$s x %2$s</string>
     <string name="import_gpx_file_description">kan importeres som favorittpunkter, eller som sporfil.</string>
     <string name="tap_on_map_to_hide_interface">Fullskjermmodus</string>
     <string name="show_on_top_bar">Vis på topplinjen</string>
+    <string name="appearance_on_the_map">Utseende på kartet</string>
+    <string name="add_group">Legg til gruppe</string>
+    <string name="empty_state_markers_groups">Importer grupper</string>
+    <string name="shared_string_two">To</string>
+    <string name="shared_string_one">Én</string>
+    <string name="favourites_group">Favorittergruppe</string>
+    <string name="empty_state_markers_active">Markører på kartet!</string>
+    <string name="empty_state_markers_active_desc">Marker steder på kartet med et trykk.</string>
+    <string name="empty_state_markers_history_desc">Markører markert som passert vises på denne skjermen.</string>
+    <string name="digits_quantity">Antall sifre</string>
+    <string name="shared_string_right">Høyre</string>
+    <string name="shared_string_left">Venstre</string>
+    <string name="shared_string_paste">Lim inn</string>
+    <string name="coordinate_input_accuracy_description">Skift automatisk til det neste feltet etter å ha angitt %1$d sifre etter desimaltegnet.</string>
+    <string name="coordinate_input_accuracy">%1$d sifre</string>
+    <string name="go_to_next_field">Gå til neste felt</string>
+    <string name="rename_marker">Gi nytt navn til markør</string>
     </resources>

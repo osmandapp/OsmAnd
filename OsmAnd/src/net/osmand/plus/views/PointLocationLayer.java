@@ -52,7 +52,6 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		locationPaint = new Paint();
 		locationPaint.setAntiAlias(true);
 		locationPaint.setFilterBitmap(true);
-		locationPaint.setDither(true);
 
 		area = new Paint();
 		area.setColor(view.getResources().getColor(R.color.pos_area));

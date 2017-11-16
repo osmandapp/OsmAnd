@@ -686,7 +686,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="route_from">Desde:</string>
     <string name="app_mode_default">Ver mapa</string>
     <string name="settings_preset">Perfil predefinido</string>
-    <string name="settings_preset_descr">Los ajustes de la vista y navegación del mapa son recordados por el perfil usado. Elige tu perfil predefinido aquí.</string>
+    <string name="settings_preset_descr">La vista del mapa y los ajustes de navegación se recuerdan por el perfil usado. Elige tu perfil predefinido aquí.</string>
     <string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Fijar como destino</string>
     <string name="please_select_address">Elige primero la ciudad o calle</string>
@@ -2829,21 +2829,22 @@ Proporciona un código completo</string>
     <string name="coordinate_input_accuracy">%1$d dígitos</string>
     <string name="go_to_next_field">Ir al campo siguiente</string>
     <string name="add_track_to_markers_descr">Elige los puntos de referencia de la traza que se añadirán a los marcadores.</string>
-    <string name="add_favourites_group_to_markers_descr">Elige el grupo de favoritos que se añadirán a los marcadores.</string>
+    <string name="add_favourites_group_to_markers_descr">Elige grupos de favoritos para añadir a los marcadores.</string>
     <string name="track_waypoints">Puntos de referencia de la traza</string>
     <string name="favourites_group">Grupo de favoritos</string>
     <string name="add_group">Añadir grupo</string>
     <string name="add_group_descr">Puedes añadir un grupo de favoritos o puntos de referencia de la traza.</string>
     <string name="empty_state_markers_active">¡Marcadores del mapa!</string>
-    <string name="empty_state_markers_active_desc">Marca lugares del mapa con una pulsación.</string>
+    <string name="empty_state_markers_active_desc">Marca los lugares del mapa con una pulsación.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
     <string name="empty_state_markers_groups_desc">Puedes importar grupos de favoritos o puntos de referencias de la traza como marcadores.</string>
     <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Uno</string>
-    <string name="show_guide_line_descr">Se mostrará en el mapa una línea que conecta su ubicación con la de los marcadores activos.</string>
-    <string name="show_arrows_descr">Se mostrará en el mapa una o dos flechas indicando la dirección a los marcadores activos.</string>
-    <string name="distance_indication_descr">Elige cómo desea ver la distancia a los marcadores activos.</string>
-    <string name="active_markers_descr">Elige cuántos indicadores de dirección desea ver.</string>
+    <string name="show_guide_line_descr">Muestra líneas guía desde su ubicación hasta los marcadores activos.</string>
+    <string name="show_arrows_descr">Muestra una o dos flechas indicando la dirección a los marcadores activos.</string>
+    <string name="distance_indication_descr">Elige cómo mostrar la distancia a los marcadores activos.</string>
+    <string name="active_markers_descr">Elige cuántos indicadores de dirección mostrar.</string>
     <string name="appearance_on_the_map">Aspecto en el mapa</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     </resources>

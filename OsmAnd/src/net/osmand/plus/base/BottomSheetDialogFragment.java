@@ -44,12 +44,14 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 	public void onStart() {
 		super.onStart();
 
-		final Window window = getDialog().getWindow();
-		WindowManager.LayoutParams params = window.getAttributes();
-		params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-		params.gravity = Gravity.BOTTOM;
-		params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-		window.setAttributes(params);
+		if (getDialog() != null) {
+			final Window window = getDialog().getWindow();
+			WindowManager.LayoutParams params = window.getAttributes();
+			params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+			params.gravity = Gravity.BOTTOM;
+			params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+			window.setAttributes(params);
+		}
 	}
 
 
