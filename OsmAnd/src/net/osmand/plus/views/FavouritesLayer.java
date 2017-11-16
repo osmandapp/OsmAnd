@@ -54,7 +54,11 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 	protected List<? extends FavouritePoint> getPoints() {
 		return favorites.getFavouritePoints();
 	}
-	
+
+	protected List<? extends FavouritePoint> getSyncedPoints() {
+		return favorites.getSyncedFavouritePoints();
+	}
+
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
@@ -93,8 +97,13 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (contextMenuLayer.getMoveableObject() instanceof FavouritePoint) {
 			FavouritePoint objectInMotion = (FavouritePoint) contextMenuLayer.getMoveableObject();
-			FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(),
-					objectInMotion.getColor(), true);
+			FavoriteImageDrawable fid;
+			if (getSyncedPoints().contains(objectInMotion)) {
+				fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), objectInMotion.getColor());
+			} else {
+				fid = FavoriteImageDrawable.getOrCreate(view.getContext(),
+						objectInMotion.getColor(), true);
+			}
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			fid.drawBitmapInCenter(canvas, pf.x, pf.y);
 		}
@@ -134,7 +143,8 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 				}
 				for (FavouritePoint o : fullObjects) {
 					if (o != contextMenuLayer.getMoveableObject()) {
-						drawPoint(canvas, tileBox, latLonBounds, o);
+						boolean syncedPoint = getSyncedPoints().contains(o);
+						drawPoint(canvas, tileBox, latLonBounds, o, syncedPoint);
 					}
 				}
 				this.fullObjectsLatLon = fullObjectsLatLon;
@@ -147,14 +157,18 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 
 	}
 
-
-	private void drawPoint(Canvas canvas, RotatedTileBox tileBox, final QuadRect latLonBounds, FavouritePoint o) {
+	private void drawPoint(Canvas canvas, RotatedTileBox tileBox, final QuadRect latLonBounds, FavouritePoint o, boolean synced) {
 		if (o.isVisible() && o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left
 				&& o.getLongitude() <= latLonBounds.right ) {
 			cache.add(o);
 			int x = (int) tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 			int y = (int) tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-			FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor(), true);
+			FavoriteImageDrawable fid;
+			if (synced) {
+				fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), o.getColor());
+			} else {
+				fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor(), true);
+			}
 			fid.drawBitmapInCenter(canvas, x, y);
 		}
 	}
@@ -170,7 +184,9 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		for (FavouritePoint n : getPoints()) {
-			getFavFromPoint(tb, res, r, ex, ey, n);
+			if (!getSyncedPoints().contains(n)) {
+				getFavFromPoint(tb, res, r, ex, ey, n);
+			}
 		}
 	}
 
