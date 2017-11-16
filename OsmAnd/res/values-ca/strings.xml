@@ -330,8 +330,8 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="osmand_short_description_80_chars">Visualització de mapes global mòbil i navegació amb mapes OSM en línia i fora de línia</string>
     <string name="osmand_plus_short_description_80_chars">Visualització de mapes mòbil global i navegació amb mapes OSM en línia i fora de línia</string>
     <string name="local_index_routing_data">Dades de la ruta</string>
-    <string name="settings_preset">Perfil d\'usuari</string>
-    <string name="settings_preset_descr">Seleccioneu un perfil d\'usuari amb paràmetres personalitzats dels mapes i la navegació.</string>
+    <string name="settings_preset">Perfil predeterminat</string>
+    <string name="settings_preset_descr">La configuració de la representació del mapa i de la navegació segueix un perfil d\'utilització. Seleccioneu aquí el vostre perfil predeterminat.</string>
     <string name="osmand_service">Mode en segon pla</string>
     <string name="osmand_service_descr">OsmAnd continua executant-se en procés de fons mentre la pantalla està apagada.</string>
     <string name="pref_raster_map">Configuració de la font del mapa</string>
