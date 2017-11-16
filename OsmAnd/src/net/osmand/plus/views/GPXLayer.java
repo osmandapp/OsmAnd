@@ -643,7 +643,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void syncGpx(GPXFile gpxFile) {
 		File gpx = new File(gpxFile.path);
 		if (gpx.exists()) {
-			view.getApplication().getMapMarkersHelper().syncGroup(new MarkersSyncGroup(gpx.getAbsolutePath(),
+			view.getApplication().getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(gpx.getAbsolutePath(),
 					AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE));
 		}
 	}

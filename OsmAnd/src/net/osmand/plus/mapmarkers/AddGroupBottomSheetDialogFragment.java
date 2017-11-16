@@ -1,7 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
 import android.app.Dialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +9,6 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
@@ -65,7 +63,7 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 				mainView.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
 				MarkersSyncGroup group = createMapMarkersSyncGroup(position);
 				mapMarkersHelper.addMarkersSyncGroup(group);
-				mapMarkersHelper.syncGroup(group, new MapMarkersHelper.OnGroupSyncedListener() {
+				mapMarkersHelper.syncGroupAsync(group, new MapMarkersHelper.OnGroupSyncedListener() {
 					@Override
 					public void onSyncDone() {
 						if (listener != null) {
