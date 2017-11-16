@@ -2920,4 +2920,5 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_right">Naprava</string>
     <string name="shared_string_left">Nalieva</string>
+    <string name="shared_string_more_without_dots">Boĺš</string>
     </resources>
