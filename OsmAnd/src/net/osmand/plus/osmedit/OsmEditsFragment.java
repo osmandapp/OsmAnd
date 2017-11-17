@@ -101,11 +101,13 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
 		plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
-		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
-		((TextView) view.findViewById(R.id.header)).setText(R.string.your_edits);
 
-		final CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
-		selectAll.setVisibility(View.GONE);
+		ListView listView = new ListView(getContext());
+		View headerView = getActivity().getLayoutInflater().inflate(R.layout.list_item_header, listView, false);
+		listView.addHeaderView(headerView);
+
+		((TextView) headerView.findViewById(R.id.title_text_view)).setText(R.string.your_edits);
+		final CheckBox selectAll = (CheckBox) headerView.findViewById(R.id.check_box);
 		selectAll.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -118,7 +120,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			}
 		});
 		plugin.getPoiModificationLocalUtil().addNodeCommittedListener(this);
-		return view;
+		return listView;
 	}
 
 	@Override
@@ -304,7 +306,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		if (view == null) {
 			return;
 		}
-		CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
+		CheckBox selectAll = (CheckBox) view.findViewById(R.id.check_box);
 		for (int i = 0; i < osmEdits.size(); i++) {
 			OsmPoint point = osmEdits.get(i);
 			if (!osmEditsSelected.contains(point)) {
@@ -318,7 +320,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	private void enableSelectionMode(boolean selectionMode) {
 		listAdapter.setSelectionMode(selectionMode);
 		//noinspection ConstantConditions
-		getView().findViewById(R.id.select_all).setVisibility(selectionMode ? View.VISIBLE : View.GONE);
+		getView().findViewById(R.id.check_box).setVisibility(selectionMode ? View.VISIBLE : View.GONE);
 		((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode && AndroidUiHelper.isOrientationPortrait(getActivity()));
 		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 	}
@@ -376,7 +378,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			ListView listView = getListView();
 			if (osmEdits.size() > 0 && footerView == null) {
 				//listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
-				footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false);
+				footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, listView, false);
 				listView.addFooterView(footerView);
 				listView.setHeaderDividersEnabled(false);
 				listView.setFooterDividersEnabled(false);
