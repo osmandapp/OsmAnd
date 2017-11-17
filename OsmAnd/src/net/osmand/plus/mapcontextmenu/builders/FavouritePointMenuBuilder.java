@@ -23,11 +23,6 @@ public class FavouritePointMenuBuilder extends SyncedItemMenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		if (originObject != null && originObject instanceof Amenity) {
-			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
-			builder.setLatLon(getLatLon());
-			builder.setLight(light);
-			builder.buildInternal(view);
-		}
+		buildFavouriteInternal(view);
 	}
 }
