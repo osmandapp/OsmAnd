@@ -78,7 +78,9 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 			holder.selectCheckBox.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					selectItem(holder.selectCheckBox, child);
+					if (listener != null) {
+						listener.onItemSelect(child, holder.selectCheckBox.isChecked());
+					}
 				}
 			});
 		} else {
@@ -100,9 +102,7 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 			@Override
 			public void onClick(View v) {
 				if (selectionMode) {
-					CheckBox checkBox = holder.selectCheckBox;
-					checkBox.setChecked(!checkBox.isChecked());
-					selectItem(checkBox, child);
+					holder.selectCheckBox.performClick();
 				} else {
 					if (listener != null) {
 						listener.onItemShowMap(child);
@@ -112,17 +112,6 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 			}
 		});
 		return view;
-	}
-
-	private void selectItem(CheckBox checkBox, OsmPoint note) {
-		if (checkBox.isChecked()) {
-			selectedOsmEdits.add(note);
-		} else {
-			selectedOsmEdits.remove(note);
-		}
-		if (listener != null) {
-			listener.onItemSelect(note);
-		}
 	}
 
 	private class OsmEditViewHolder {
@@ -143,7 +132,7 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 
 	public interface OsmEditsAdapterListener {
 
-		void onItemSelect(OsmPoint point);
+		void onItemSelect(OsmPoint point, boolean checked);
 
 		void onItemShowMap(OsmPoint point);
 

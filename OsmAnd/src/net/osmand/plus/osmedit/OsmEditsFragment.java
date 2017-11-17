@@ -361,7 +361,12 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			listAdapter.setSelectedOsmEdits(osmEditsSelected);
 			listAdapter.setAdapterListener(new OsmEditsAdapter.OsmEditsAdapterListener() {
 				@Override
-				public void onItemSelect(OsmPoint point) {
+				public void onItemSelect(OsmPoint point, boolean checked) {
+					if (checked) {
+						osmEditsSelected.add(point);
+					} else {
+						osmEditsSelected.remove(point);
+					}
 					updateSelectionMode(actionMode);
 				}
 
