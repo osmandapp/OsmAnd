@@ -206,6 +206,9 @@
 	<dimen name="map_markers_recycler_view_padding_bottom">52dp</dimen>
 	<dimen name="map_markers_recycler_view_padding_top">10dp</dimen>
 
+	<dimen name="list_item_text_container_padding_top">10dp</dimen>
+	<dimen name="list_item_text_container_padding_bottom">12dp</dimen>
+
 	<dimen name="shadow_height">5dp</dimen>
 	<dimen name="map_marker_title_height">28dp</dimen>
 
