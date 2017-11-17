@@ -392,7 +392,7 @@ public class GpxSelectionHelper {
 	public void setGpxFileToDisplay(GPXFile... gpxs) {
 		// special case for gpx current route
 		for (GPXFile gpx : gpxs) {
-			selectGpxFileImpl(gpx, true, false);
+			selectGpxFileImpl(gpx, true, false, true);
 		}
 		saveCurrentSelections();
 	}
@@ -458,7 +458,7 @@ public class GpxSelectionHelper {
 		app.getSettings().SELECTED_GPX.set(ar.toString());
 	}
 
-	private SelectedGpxFile selectGpxFileImpl(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
+	private SelectedGpxFile selectGpxFileImpl(GPXFile gpx, boolean show, boolean notShowNavigationDialog, boolean syncGroup) {
 		boolean displayed;
 		SelectedGpxFile sf;
 		if (gpx != null && gpx.showCurrentTrack) {
@@ -482,12 +482,18 @@ public class GpxSelectionHelper {
 				selectedGPXFiles.remove(sf);
 			}
 		}
-		syncGpx(gpx);
+		if (syncGroup) {
+			syncGpx(gpx, true);
+		}
 		return sf;
 	}
 
 	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
-		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, notShowNavigationDialog);
+		return selectGpxFile(gpx, show, notShowNavigationDialog, true);
+	}
+
+	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog, boolean syncGroup) {
+		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, notShowNavigationDialog, syncGroup);
 		saveCurrentSelections();
 		return sf;
 	}
@@ -514,10 +520,25 @@ public class GpxSelectionHelper {
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
+		syncGpx(gpxFile, false);
+	}
+
+	private void syncGpx(GPXFile gpxFile, boolean createOrDeleteGroup) {
 		File gpx = new File(gpxFile.path);
 		if (gpx.exists()) {
-			app.getMapMarkersHelper().syncGroup(new MarkersSyncGroup(gpx.getAbsolutePath(),
-					AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE));
+			MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
+			MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(), AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
+			boolean enabled = true;
+			if (createOrDeleteGroup) {
+				boolean show = getSelectedFileByPath(gpx.getAbsolutePath()) != null;
+				enabled = mapMarkersHelper.isGroupSynced(gpx.getAbsolutePath());
+				if (show && !enabled) {
+					mapMarkersHelper.addMarkersSyncGroup(syncGroup);
+				} else if (!show && mapMarkersHelper.isGroupDisabled(gpx.getAbsolutePath())) {
+					mapMarkersHelper.removeMarkersSyncGroup(gpx.getAbsolutePath(), true);
+				}
+			}
+			mapMarkersHelper.syncGroupAsync(syncGroup, enabled);
 		}
 	}
 

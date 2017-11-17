@@ -313,11 +313,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		widgetsFactory.updateInfo(useFingerLocation ? fingerLocation : (myLoc == null
 				? tileBox.getCenterLatLon() : new LatLon(myLoc.getLatitude(), myLoc.getLongitude())), tileBox.getZoom());
 		OsmandSettings settings = map.getMyApplication().getSettings();
-		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 
 		if (tileBox.getZoom() < 3 || !settings.USE_MAP_MARKERS.get()) {
 			return;
 		}
+
+		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 
