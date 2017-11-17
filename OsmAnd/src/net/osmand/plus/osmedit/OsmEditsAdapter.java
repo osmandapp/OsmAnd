@@ -19,7 +19,6 @@ import java.util.List;
 
 public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 
-	private List<OsmPoint> osmEdits;
 	private OsmandApplication app;
 
 	private boolean selectionMode;
@@ -28,18 +27,8 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 	private OsmEditsAdapterListener listener;
 
 	public OsmEditsAdapter(OsmandApplication app, @NonNull List<OsmPoint> points) {
-		super(app, R.layout.note, points);
+		super(app, 0, points);
 		this.app = app;
-		osmEdits = points;
-	}
-
-	public List<OsmPoint> getOsmEdits() {
-		return osmEdits;
-	}
-
-	public void setOsmEdits(List<OsmPoint> osmEdits) {
-		this.osmEdits = osmEdits;
-		notifyDataSetChanged();
 	}
 
 	public boolean isSelectionMode() {

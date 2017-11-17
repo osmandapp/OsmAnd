@@ -356,41 +356,37 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmbugsPoints();
 		osmEdits.addAll(l1);
 		osmEdits.addAll(l2);
-		if (listAdapter == null) {
-			listAdapter = new OsmEditsAdapter(getMyApplication(), osmEdits);
-			listAdapter.setSelectedOsmEdits(osmEditsSelected);
-			listAdapter.setAdapterListener(new OsmEditsAdapter.OsmEditsAdapterListener() {
-				@Override
-				public void onItemSelect(OsmPoint point, boolean checked) {
-					if (checked) {
-						osmEditsSelected.add(point);
-					} else {
-						osmEditsSelected.remove(point);
-					}
-					updateSelectionMode(actionMode);
-				}
-
-				@Override
-				public void onItemShowMap(OsmPoint point) {
-					showOnMap(point);
-				}
-
-				@Override
-				public void onOptionsClick(View view, OsmPoint note) {
-					openPopUpMenu(view, note);
-				}
-			});
-			ListView listView = getListView();
-			if (osmEdits.size() > 0 && footerView == null) {
-				//listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
-				footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, listView, false);
-				listView.setDivider(null);
-				listView.addFooterView(footerView);
-			}
-			listView.setAdapter(listAdapter);
-		} else {
-			listAdapter.setOsmEdits(osmEdits);
+		ListView listView = getListView();
+		if (osmEdits.size() > 0 && footerView == null) {
+			//listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
+			footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, listView, false);
+			listView.setDivider(null);
+			listView.addFooterView(footerView);
 		}
+		listAdapter = new OsmEditsAdapter(getMyApplication(), osmEdits);
+		listAdapter.setSelectedOsmEdits(osmEditsSelected);
+		listAdapter.setAdapterListener(new OsmEditsAdapter.OsmEditsAdapterListener() {
+			@Override
+			public void onItemSelect(OsmPoint point, boolean checked) {
+				if (checked) {
+					osmEditsSelected.add(point);
+				} else {
+					osmEditsSelected.remove(point);
+				}
+				updateSelectionMode(actionMode);
+			}
+
+			@Override
+			public void onItemShowMap(OsmPoint point) {
+				showOnMap(point);
+			}
+
+			@Override
+			public void onOptionsClick(View view, OsmPoint note) {
+				openPopUpMenu(view, note);
+			}
+		});
+		listView.setAdapter(listAdapter);
 	}
 
 	private void showBugDialog(final OsmNotesPoint point) {
