@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import net.osmand.plus.OsmandApplication;
@@ -56,38 +57,38 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 
 	@NonNull
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		View v = convertView;
-		final OsmPoint child = getItem(position);
-		if (v == null) {
-			v = LayoutInflater.from(getContext()).inflate(R.layout.note, parent, false);
+	public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+		View view = convertView;
+		if (view == null) {
+			view = LayoutInflater.from(getContext()).inflate(R.layout.note, parent, false);
+			OsmEditViewHolder holder = new OsmEditViewHolder(view);
+			view.setTag(holder);
 		}
-		OsmEditsFragment.getOsmEditView(v, child, app);
+		final OsmPoint child = getItem(position);
 
-		v.findViewById(R.id.play).setVisibility(View.GONE);
+		OsmEditsFragment.getOsmEditView(view, child, app);
 
-		final CheckBox ch = (CheckBox) v.findViewById(R.id.check_local_index);
-		View options = v.findViewById(R.id.options);
+		final OsmEditViewHolder holder = (OsmEditViewHolder) view.getTag();
+		holder.playImageButton.setVisibility(View.GONE);
 		if (selectionMode) {
-			options.setVisibility(View.GONE);
-			ch.setVisibility(View.VISIBLE);
-			ch.setChecked(selectedOsmEdits.contains(child));
-			v.findViewById(R.id.icon).setVisibility(View.GONE);
-			ch.setOnClickListener(new View.OnClickListener() {
+			holder.optionsImageButton.setVisibility(View.GONE);
+			holder.selectCheckBox.setVisibility(View.VISIBLE);
+			holder.selectCheckBox.setChecked(selectedOsmEdits.contains(child));
+			holder.icon.setVisibility(View.GONE);
+			holder.selectCheckBox.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					selectItem(ch, child);
+					selectItem(holder.selectCheckBox, child);
 				}
 			});
 		} else {
-			v.findViewById(R.id.icon).setVisibility(View.VISIBLE);
-			options.setVisibility(View.VISIBLE);
-			ch.setVisibility(View.GONE);
+			holder.icon.setVisibility(View.VISIBLE);
+			holder.optionsImageButton.setVisibility(View.VISIBLE);
+			holder.selectCheckBox.setVisibility(View.GONE);
 		}
 
-		((ImageView) options).setImageDrawable(app.getIconsCache()
-				.getThemedIcon(R.drawable.ic_overflow_menu_white));
-		options.setOnClickListener(new View.OnClickListener() {
+		holder.optionsImageButton.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
+		holder.optionsImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (listener != null) {
@@ -95,12 +96,13 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 				}
 			}
 		});
-		v.setOnClickListener(new View.OnClickListener() {
+		holder.mainView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (selectionMode) {
-					ch.setChecked(!ch.isChecked());
-					selectItem(ch, child);
+					CheckBox checkBox = holder.selectCheckBox;
+					checkBox.setChecked(!checkBox.isChecked());
+					selectItem(checkBox, child);
 				} else {
 					if (listener != null) {
 						listener.onItemShowMap(child);
@@ -109,7 +111,7 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 
 			}
 		});
-		return v;
+		return view;
 	}
 
 	private void selectItem(CheckBox checkBox, OsmPoint note) {
@@ -120,6 +122,22 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 		}
 		if (listener != null) {
 			listener.onItemSelect(note);
+		}
+	}
+
+	private class OsmEditViewHolder {
+		View mainView;
+		ImageView icon;
+		ImageButton playImageButton;
+		CheckBox selectCheckBox;
+		ImageButton optionsImageButton;
+
+		OsmEditViewHolder(View view) {
+			mainView = view;
+			icon = (ImageView) view.findViewById(R.id.icon);
+			playImageButton = (ImageButton) view.findViewById(R.id.play);
+			selectCheckBox = (CheckBox) view.findViewById(R.id.check_local_index);
+			optionsImageButton = (ImageButton) view.findViewById(R.id.options);
 		}
 	}
 
