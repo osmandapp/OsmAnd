@@ -12,9 +12,9 @@ import android.widget.TextView;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 
-public class AddMarkersGroupBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+public class SelectionMarkersGroupBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "AddMarkersGroupBottomSheetDialogFragment";
+	public final static String TAG = "SelectionMarkersGroupBottomSheetDialogFragment";
 
 	private AddMarkersGroupFragmentListener listener;
 

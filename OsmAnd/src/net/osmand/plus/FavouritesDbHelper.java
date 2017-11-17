@@ -124,7 +124,7 @@ public class FavouritesDbHelper {
 				cachedFavoritePoints.remove(p);
 			}
 			for (FavoriteGroup gr : groupsToSync) {
-				context.getMapMarkersHelper().syncGroup(new MarkersSyncGroup(gr.name, gr.name, MarkersSyncGroup.FAVORITES_TYPE));
+				context.getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(gr.name, gr.name, MarkersSyncGroup.FAVORITES_TYPE));
 			}
 		}
 		if (groupsToDelete != null) {
@@ -147,7 +147,7 @@ public class FavouritesDbHelper {
 			FavoriteGroup group = flatGroups.get(p.getCategory());
 			if (group != null) {
 				group.points.remove(p);
-				context.getMapMarkersHelper().syncGroup(new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE));
+				context.getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE));
 			}
 			cachedFavoritePoints.remove(p);
 		}
@@ -177,7 +177,7 @@ public class FavouritesDbHelper {
 			sortAll();
 			saveCurrentPointsIntoFile();
 		}
-		context.getMapMarkersHelper().syncGroup(new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE, group.color));
+		context.getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE, group.color));
 
 		return true;
 	}
@@ -272,7 +272,7 @@ public class FavouritesDbHelper {
 		}
 		sortAll();
 		saveCurrentPointsIntoFile();
-		context.getMapMarkersHelper().syncGroup(new MarkersSyncGroup(category, category, MarkersSyncGroup.FAVORITES_TYPE, p.getColor()));
+		context.getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(category, category, MarkersSyncGroup.FAVORITES_TYPE, p.getColor()));
 		return true;
 	}
 
@@ -280,7 +280,7 @@ public class FavouritesDbHelper {
 		p.setLatitude(lat);
 		p.setLongitude(lon);
 		saveCurrentPointsIntoFile();
-		context.getMapMarkersHelper().syncGroup(new MarkersSyncGroup(p.getCategory(), p.getCategory(), MarkersSyncGroup.FAVORITES_TYPE, p.getColor()));
+		context.getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(p.getCategory(), p.getCategory(), MarkersSyncGroup.FAVORITES_TYPE, p.getColor()));
 		return true;
 	}
 
@@ -597,7 +597,7 @@ public class FavouritesDbHelper {
 			for (FavouritePoint p : gr.points) {
 				p.setColor(color);
 			}
-			markersHelper.syncGroup(new MarkersSyncGroup(gr.name, gr.name, MarkersSyncGroup.FAVORITES_TYPE, color));
+			markersHelper.syncGroupAsync(new MarkersSyncGroup(gr.name, gr.name, MarkersSyncGroup.FAVORITES_TYPE, color));
 		}
 		if (group.visible != visible) {
 			FavoriteGroup gr = flatGroups.get(group.name);
@@ -605,7 +605,7 @@ public class FavouritesDbHelper {
 			for (FavouritePoint p : gr.points) {
 				p.setVisible(visible);
 			}
-			markersHelper.syncGroup(new MarkersSyncGroup(gr.name, gr.name, MarkersSyncGroup.FAVORITES_TYPE, group.color));
+			markersHelper.syncGroupAsync(new MarkersSyncGroup(gr.name, gr.name, MarkersSyncGroup.FAVORITES_TYPE, group.color));
 		}
 		if (!group.name.equals(newName)) {
 			FavoriteGroup gr = flatGroups.remove(group.name);
@@ -627,7 +627,7 @@ public class FavouritesDbHelper {
 			}
 			MarkersSyncGroup syncGroup = new MarkersSyncGroup(renamedGroup.name, renamedGroup.name, MarkersSyncGroup.FAVORITES_TYPE, group.color);
 			markersHelper.addMarkersSyncGroup(syncGroup);
-			markersHelper.syncGroup(syncGroup);
+			markersHelper.syncGroupAsync(syncGroup);
 		}
 		saveCurrentPointsIntoFile();
 	}
