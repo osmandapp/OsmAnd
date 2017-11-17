@@ -526,7 +526,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private boolean isSynced(SelectedGpxFile g) {
-		return g.getGpxFile().isSynced();
+		return g.isSynced();
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {

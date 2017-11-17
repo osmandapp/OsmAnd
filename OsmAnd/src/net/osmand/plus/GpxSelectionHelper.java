@@ -556,6 +556,16 @@ public class GpxSelectionHelper {
 
 		private List<GpxDisplayGroup> displayGroups;
 
+		private boolean synced;
+
+		public void setSynced(boolean synced) {
+			this.synced = synced;
+		}
+
+		public boolean isSynced() {
+			return synced;
+		}
+
 		public void setGpxFile(GPXFile gpxFile) {
 			this.gpxFile = gpxFile;
 			if (gpxFile.tracks.size() > 0) {

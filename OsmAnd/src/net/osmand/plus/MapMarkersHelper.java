@@ -549,7 +549,7 @@ public class MapMarkersHelper {
 					group.setColor(pt.getColor(defColor));
 					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name, enabled, null, pt);
 				}
-				gpx.setSynced(true);
+				selectedGpxFile.setSynced(true);
 
 				removeOldMarkersIfNeeded(dbMarkers);
 			}
