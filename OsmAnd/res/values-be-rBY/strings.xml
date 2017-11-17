@@ -2414,7 +2414,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="restore_purchases">Adnaŭleńnie pakupak</string>
     <string name="fonts_header">Šryfty dła mapy</string>
     <string name="right_side_navigation">Pravabakavy ruch</string>
-    <string name="driving_region_automatic">Aŭtamatyčny</string>
+    <string name="driving_region_automatic">Aŭtamatyčna</string>
     <string name="do_not_show_startup_messages">Nie pakazvać paviedamlieńni pry starcie</string>
     <string name="parking_options">Opcyi parkoŭki</string>
     <string name="full_version_thanks">Dziakuj Vam za nabyćcio poŭnaj versii OsmAnd!</string>
@@ -2920,5 +2920,5 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_right">Naprava</string>
     <string name="shared_string_left">Nalieva</string>
-    <string name="shared_string_more_without_dots">Boĺš</string>
+    <string name="shared_string_more_without_dots">Bolš</string>
     </resources>

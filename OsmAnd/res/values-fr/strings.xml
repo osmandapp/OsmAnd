@@ -3020,4 +3020,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="show_arrows_descr">Afficher une ou deux flèches indiquant la direction vers les marques actives.</string>
     <string name="distance_indication_descr">Indiquez comment afficher la distance avec les marques actives.</string>
     <string name="active_markers_descr">Indiquez le nombre d\'indicateurs de direction à afficher.</string>
+    <string name="shared_string_more_without_dots">Plus</string>
     </resources>

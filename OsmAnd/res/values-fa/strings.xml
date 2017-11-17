@@ -2959,4 +2959,5 @@
     <string name="empty_state_markers_groups">واردکردن گروه‌ها</string>
     <string name="empty_state_markers_groups_desc">می‌توانید گروه‌های نقاط برگزیده یا نقاط بین‌راهی را به‌عنوان نشانه وارد کنید.</string>
     <string name="empty_state_markers_history_desc">نشانه‌هایی که به‌عنوان عبورکرده مشخص شده‌اند در این صفحه نشان داده می‌شوند.</string>
+    <string name="shared_string_more_without_dots">بیشتر</string>
     </resources>
