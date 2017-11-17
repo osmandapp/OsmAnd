@@ -23,9 +23,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.IconsCache;
@@ -36,9 +33,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 
@@ -188,7 +182,7 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 				@Override
 				public void onClick(View v) {
 					markersHelper.addMarkersSyncGroup(syncGroup);
-					markersHelper.syncGroup(syncGroup);
+					markersHelper.syncGroupAsync(syncGroup);
 					dismiss();
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}

@@ -159,6 +159,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 
 	void updateAdapter() {
 		if (adapter != null) {
+			adapter.changeMarkers();
 			adapter.notifyDataSetChanged();
 		}
 	}

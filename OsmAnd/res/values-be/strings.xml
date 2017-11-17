@@ -2969,4 +2969,5 @@
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_right">Направа</string>
     <string name="shared_string_left">Налева</string>
+    <string name="shared_string_more_without_dots">Больш</string>
     </resources>

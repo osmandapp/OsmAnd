@@ -46,4 +46,10 @@
 
     </LinearLayout>
 
+    <include
+        android:id="@+id/bottom_shadow"
+        layout="@layout/card_bottom_divider"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
 </LinearLayout>

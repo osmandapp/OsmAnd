@@ -60,6 +60,7 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OnDismissDialogFragmentListener;
@@ -714,7 +715,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 			}
 			if (intent.hasExtra(MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS)) {
-				MapMarkersDialogFragment.showInstance(this, true);
+				Bundle openMapMarkersGroupsExtra = intent.getBundleExtra(MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS);
+				if (openMapMarkersGroupsExtra != null) {
+					MapMarkersDialogFragment.showInstance(this, openMapMarkersGroupsExtra.getString(MapMarkersHelper.MarkersSyncGroup.MARKERS_SYNC_GROUP_ID));
+				}
+				setIntent(null);
 			}
 		}
 		mapView.refreshMap(true);
@@ -1460,7 +1465,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapLayers;
 	}
 
-	public static void launchMapActivityMoveToTop(Context activity, String intentExtraActionName) {
+	public static void launchMapActivityMoveToTop(Context activity, String intentExtraActionName, Bundle intentExtraActionValue) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1483,14 +1488,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					.getAppCustomization().getMapActivity());
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			if (intentExtraActionName != null) {
-				newIntent.putExtra(intentExtraActionName, true);
+				newIntent.putExtra(intentExtraActionName, intentExtraActionValue);
 			}
 			activity.startActivity(newIntent);
 		}
 	}
 
 	public static void launchMapActivityMoveToTop(Context activity) {
-		launchMapActivityMoveToTop(activity, null);
+		launchMapActivityMoveToTop(activity, null, null);
 	}
 
 	public static void clearPrevActivityIntent() {

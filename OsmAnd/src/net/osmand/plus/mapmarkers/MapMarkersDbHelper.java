@@ -87,7 +87,8 @@ public class MapMarkersDbHelper {
 	private static final String GROUPS_TABLE_SELECT = "SELECT " +
 			GROUPS_COL_ID + ", " +
 			GROUPS_COL_NAME + ", " +
-			GROUPS_COL_TYPE +
+			GROUPS_COL_TYPE + ", " +
+			GROUPS_COL_DISABLED +
 			" FROM " + GROUPS_TABLE_NAME;
 
 	public static final String TAIL_NEXT_VALUE = "tail_next";
@@ -273,6 +274,23 @@ public class MapMarkersDbHelper {
 				db.close();
 			}
 		}
+	}
+
+	public boolean isGroupDisabled(String id) {
+		boolean disabled = false;
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(GROUPS_TABLE_SELECT + " WHERE " + GROUPS_COL_ID + " = ?", new String[]{id});
+				if (query.moveToFirst()) {
+					disabled = query.getInt(3) == 1;
+				}
+				query.close();
+			} finally {
+				db.close();
+			}
+		}
+		return disabled;
 	}
 
 	public void removeDisabledGroups() {

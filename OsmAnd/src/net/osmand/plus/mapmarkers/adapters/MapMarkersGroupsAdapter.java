@@ -84,7 +84,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	}
 
 	public void createDisplayGroups() {
-		items.clear();
+		items = new ArrayList<>();
 		app.getMapMarkersHelper().updateGroups();
 		List<MapMarkersGroup> groups = app.getMapMarkersHelper().getMapMarkersGroups();
 		for (int i = 0; i < groups.size(); i++) {
@@ -134,17 +134,41 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			} else {
 				GroupHeader header = group.getGroupHeader();
 				items.add(header);
-				ShowHideHistoryButton showHideHistoryButton = group.getShowHideHistoryButton();
+				populateAdapterWithGroupMarkers(group, getItemCount());
+			}
+		}
+	}
+
+	private void populateAdapterWithGroupMarkers(MapMarkersGroup group, int position) {
+		if (position != RecyclerView.NO_POSITION) {
+			ShowHideHistoryButton showHideHistoryButton = group.getShowHideHistoryButton();
+			if (!group.isDisabled()) {
+				List<Object> objectsToAdd = new ArrayList<>();
 				if (showHideHistoryButton != null && showHideHistoryButton.isShowHistory()) {
-					items.addAll(group.getMarkers());
+					objectsToAdd.addAll(group.getMarkers());
 				} else {
-					items.addAll(group.getActiveMarkers());
+					objectsToAdd.addAll(group.getActiveMarkers());
 				}
 				if (showHideHistoryButton != null) {
-					items.add(showHideHistoryButton);
+					objectsToAdd.add(showHideHistoryButton);
+				}
+				items.addAll(position, objectsToAdd);
+			} else {
+				items.removeAll(group.getActiveMarkers());
+				if (showHideHistoryButton != null) {
+					items.remove(showHideHistoryButton);
 				}
 			}
 		}
+	}
+
+	public int getGroupHeaderPosition(String groupId) {
+		int pos = -1;
+		MapMarkersGroup group = app.getMapMarkersHelper().getMapMarkerGroupByKey(groupId);
+		if (group != null) {
+			pos = items.indexOf(group.getGroupHeader());
+		}
+		return pos;
 	}
 
 	public void setLocation(LatLon location) {
@@ -267,8 +291,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				itemViewHolder.description.setVisibility(View.GONE);
 			}
 
-			final String markerGroupName = marker.groupName;
-			final MapMarkersGroup group = app.getMapMarkersHelper().getMapMarkerGroupByName(markerGroupName);
 			itemViewHolder.optionsBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -278,42 +300,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					}
 					if (markerInHistory) {
 						app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
-						if (group != null) {
-							ShowHideHistoryButton showHideHistoryButton = group.getShowHideHistoryButton();
-							if (showHideHistoryButton != null) {
-								if (group.getHistoryMarkers().size() == 0) {
-									items.remove(showHideHistoryButton);
-									group.setShowHideHistoryButton(null);
-								}
-							}
-						}
 					} else {
 						app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
-						if (group != null) {
-							ShowHideHistoryButton showHideHistoryButton = group.getShowHideHistoryButton();
-							if (showHideHistoryButton == null) {
-								items.remove(marker);
-								if (markerGroupName != null) {
-									showHideHistoryButton = new ShowHideHistoryButton();
-									showHideHistoryButton.setShowHistory(false);
-									showHideHistoryButton.setMarkerGroup(group);
-									int index = getLastDisplayItemIndexOfGroup(group);
-									if (index != -1) {
-										items.add(index + 1, showHideHistoryButton);
-										group.setShowHideHistoryButton(showHideHistoryButton);
-									}
-								} else {
-									boolean firstItemInDisplayGroup = position - 1 != -1 && getItem(position - 1) instanceof Integer;
-									boolean lastItemInDisplayGroup = position == getItemCount() || !(getItem(position) instanceof MapMarker);
-									if (firstItemInDisplayGroup && lastItemInDisplayGroup) {
-										items.remove(position - 1);
-									}
-								}
-							} else if (!showHideHistoryButton.isShowHistory()) {
-								items.remove(marker);
-							}
-						}
 					}
+					createDisplayGroups();
 					updateShowDirectionMarkers();
 					notifyDataSetChanged();
 					if (!markerInHistory) {
@@ -386,19 +376,19 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				headerViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), R.color.divider_color));
 				boolean groupIsDisabled = group.isDisabled();
 				headerViewHolder.disableGroupSwitch.setVisibility(View.VISIBLE);
-				headerViewHolder.disableGroupSwitch.setChecked(!groupIsDisabled);
-				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
 						group.setDisabled(!enabled);
 						app.getMapMarkersHelper().updateGroupDisabled(group, !enabled);
+						createDisplayGroups();
+						updateShowDirectionMarkers();
+						notifyDataSetChanged();
 						if (!enabled) {
 							snackbar = Snackbar.make(holder.itemView, app.getString(R.string.group_will_be_removed_after_restart), Snackbar.LENGTH_LONG)
 									.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 										@Override
 										public void onClick(View view) {
-											group.setDisabled(false);
-											app.getMapMarkersHelper().updateGroupDisabled(group, false);
 											headerViewHolder.disableGroupSwitch.setChecked(true);
 										}
 									});
@@ -408,11 +398,15 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							snackbar.show();
 						}
 					}
-				});
+				};
+				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(null);
+				headerViewHolder.disableGroupSwitch.setChecked(!groupIsDisabled);
+				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(checkedChangeListener);
 			} else {
 				throw new IllegalArgumentException("Unsupported header");
 			}
 			headerViewHolder.title.setText(headerString);
+			headerViewHolder.bottomShadow.setVisibility(position == getItemCount() - 1 ? View.VISIBLE : View.GONE);
 		} else if (holder instanceof MapMarkersShowHideHistoryViewHolder) {
 			final MapMarkersShowHideHistoryViewHolder showHideHistoryViewHolder = (MapMarkersShowHideHistoryViewHolder) holder;
 			final ShowHideHistoryButton showHideHistoryButton = (ShowHideHistoryButton) getItem(position);
@@ -426,15 +420,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			showHideHistoryViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					List<MapMarker> historyMarkers = showHideHistoryButton.getMapMarkerGroup().getHistoryMarkers();
-					int pos = holder.getAdapterPosition();
-					if (showHistory) {
-						showHideHistoryButton.setShowHistory(false);
-						items.removeAll(historyMarkers);
-					} else {
-						showHideHistoryButton.setShowHistory(true);
-						items.addAll(pos, historyMarkers);
-					}
+					showHideHistoryButton.setShowHistory(!showHistory);
+					createDisplayGroups();
 					notifyDataSetChanged();
 				}
 			});
@@ -479,24 +466,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			monthStr = Character.toUpperCase(monthStr.charAt(0)) + monthStr.substring(1);
 		}
 		return monthStr;
-	}
-
-	private int getLastDisplayItemIndexOfGroup(MapMarkersGroup group) {
-		List<MapMarker> markers = group.getActiveMarkers();
-		int index = -1;
-		for (MapMarker marker : markers) {
-			int markerIndex = items.indexOf(marker);
-			if (markerIndex > index) {
-				index = markerIndex;
-			}
-		}
-		if (index == -1) {
-			GroupHeader header = group.getGroupHeader();
-			if (header != null) {
-				index = items.indexOf(group.getGroupHeader());
-			}
-		}
-		return index;
 	}
 
 	public interface MapMarkersGroupsAdapterListener {
