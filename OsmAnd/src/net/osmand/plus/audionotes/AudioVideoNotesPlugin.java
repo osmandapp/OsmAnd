@@ -1640,11 +1640,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
-		if (getAllRecordings().size() > 0) {
-			mTabs.add(favoritesActivity.getTabIndicator(NOTES_TAB, NotesFragment.class));
-			if (intent != null && "AUDIO".equals(intent.getStringExtra("TAB"))) {
-				app.getSettings().FAVORITES_TAB.set(NOTES_TAB);
-			}
+		mTabs.add(favoritesActivity.getTabIndicator(NOTES_TAB, NotesFragment.class));
+		if (intent != null && "AUDIO".equals(intent.getStringExtra("TAB"))) {
+			app.getSettings().FAVORITES_TAB.set(NOTES_TAB);
 		}
 	}
 
