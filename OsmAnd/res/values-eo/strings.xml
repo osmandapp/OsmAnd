@@ -361,7 +361,7 @@
     <string name="shared_string_edit">Redakti</string>
     <string name="shared_string_places">Lokoj</string>
     <string name="shared_string_search">Serĉi</string>
-    <string name="shared_string_show_description">Montri priskribon.</string>
+    <string name="shared_string_show_description">Montri priskribon</string>
     <string name="welmode_download_maps">Elŝuti mapojn</string>
     <string name="shared_string_yes">Jes</string>
     <string name="shared_string_cancel">Nuligi</string>
@@ -2861,12 +2861,12 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_left">Maldekstre</string>
     <string name="show_number_pad">Montri nombran klavaron</string>
     <string name="shared_string_paste">Englui</string>
-    <string name="coordinate_input_accuracy_description">Aŭtomate baskuli al la sekva kampo post entajpi %1$d ciferojn post la komo</string>
+    <string name="coordinate_input_accuracy_description">Aŭtomate baskuli al la sekva kampo post entajpi %1$d ciferojn post la komo.</string>
     <string name="coordinate_input_accuracy">%1$d ciferoj</string>
     <string name="go_to_next_field">Iri al la sekva kampo</string>
     <string name="appearance_on_the_map">Aspekto sur la mapo</string>
     <string name="add_track_to_markers_descr">Elekti navigadpunktojn por aldoni al map-markoj</string>
-    <string name="add_favourites_group_to_markers_descr">Elekti grupon de ŝatataj por aldoni al map-markoj</string>
+    <string name="add_favourites_group_to_markers_descr">Elekti grupon de ŝatataj por aldoni al map-markoj.</string>
     <string name="track_waypoints">Navigadpunktoj de kurso</string>
     <string name="favourites_group">Ŝatataro</string>
     <string name="add_group">Aldoni grupon</string>
@@ -2878,8 +2878,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="empty_state_markers_history_desc">Markoj markitaj kiel pasigitajn montriĝos sur tiu ĉi ekrano.</string>
     <string name="shared_string_two">Du</string>
     <string name="shared_string_one">Unu</string>
-    <string name="show_guide_line_descr">Linio kuniganta vian pozicion kun aktivaj map-markoj montriĝos sur la mapo.</string>
-    <string name="show_arrows_descr">Unu aŭ du sagetoj indikantaj direkton al aktivaj map-markoj montriĝos sur la mapo.</string>
+    <string name="show_guide_line_descr">Vidigi gvid-liniojn el via pozicio al aktivaj map-markoj.</string>
+    <string name="show_arrows_descr">Vidigi unu aŭ du sagetojn indikantajn direkton al map-markoj.</string>
     <string name="distance_indication_descr">Elekti kiel vidigi distancon al aktivaj map-markoj.</string>
     <string name="active_markers_descr">Elekti nombron da direkt-indikiloj por vidigi.</string>
     </resources>

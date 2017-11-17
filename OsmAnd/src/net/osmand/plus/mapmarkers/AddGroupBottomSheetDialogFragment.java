@@ -41,14 +41,6 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_add_group_bottom_sheet_dialog, container);
 
-		setupHeightAndBackground(mainView, R.id.groups_recycler_view);
-
-		return mainView;
-	}
-
-	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
 		final RecyclerView recyclerView = mainView.findViewById(R.id.groups_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		createAdapter();
@@ -59,8 +51,7 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 				if (position == RecyclerView.NO_POSITION) {
 					return;
 				}
-				mainView.findViewById(R.id.groups_recycler_view).setVisibility(View.GONE);
-				mainView.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+				showProgressBar();
 				MarkersSyncGroup group = createMapMarkersSyncGroup(position);
 				mapMarkersHelper.addMarkersSyncGroup(group);
 				mapMarkersHelper.syncGroupAsync(group, new MapMarkersHelper.OnGroupSyncedListener() {
@@ -82,6 +73,10 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 				dismiss();
 			}
 		});
+
+		setupHeightAndBackground(mainView, R.id.groups_recycler_view);
+
+		return mainView;
 	}
 
 	@Override
@@ -91,6 +86,11 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 			dialog.setDismissMessage(null);
 		}
 		super.onDestroyView();
+	}
+
+	private void showProgressBar() {
+		mainView.findViewById(R.id.groups_recycler_view).setVisibility(View.GONE);
+		mainView.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
 	}
 
 	protected abstract void createAdapter();

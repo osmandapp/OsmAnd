@@ -3550,7 +3550,7 @@
 	<string name="poi_vhf">Canal VHF</string>
 
 <string name="poi_gorge">Cañón (desfiladero)</string>
-	<string name="poi_couloir">Barranco estrecho</string>
+	<string name="poi_couloir">Couloir (barranco estrecho y empinado)</string>
 	<string name="poi_mountain_area">Área montañosa</string>
 
 	<string name="poi_surface_clay">Polvo de ladrillo</string>

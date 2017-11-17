@@ -24,7 +24,7 @@
     <string name="download_tab_downloads">Dastupnaje</string>
     <string name="download_tab_updates">Abnaŭleńnі</string>
     <string name="download_tab_local">Lakalnyja</string>
-	<string name="no_internet_connection">Niemahčyma cciahnuć. Kali łaska, praviercie vaša Іnternet-złučeńnie.</string>
+	<string name="no_internet_connection">Niemahčyma ściahnuć. Kali łaska, praviercie vaša Іnternet-złučeńnie.</string>
     <string name="shared_string_dismiss">Adchіlić</string>
     <string name="everything_up_to_date">Usie fajły ŭ aktualnym stanie</string>
     <string name="use_opengl_render">Vykarystoŭvać OpenGL</string>
@@ -183,13 +183,13 @@ Heta moža być vyklikana časovaj niepracazdolnaściu słužby cі skańčeńni
 
 Chočacie zarehіstravacca іznoŭ?</string>
     <string name="osmo_group_by_invite">Uvachod pa zaprašeńni</string>
-    <string name="osmo_group_information_desc">- Kali laska, uviadzicie nazvu i apisańnie hrupy pry stvareńni 
-\n - Z dastasavańnia stvarajucca toĺki hrupy prostaha typu, padrabiaźniej na sajcie https://osmo.mobi/g/new 
+    <string name="osmo_group_information_desc">- Kali łaska, uviadzicie nazvu i apisańnie hrupy pry stvareńni 
+\n - Z dastasavańnia stvarajucca tolki hrupy prostaha typu, padrabiaźniej na sajcie https://osmo.mobi/g/new 
 \n - Hrupami možna kiravać praz veb-sajt, raźmiaščajučy maršruty i punkty dastupnyja ŭsim 
-\n - My nie padtrymlivajem vykarystańnie toĺki adnaho karystaĺnika, kali toĺki hetaja hrupa nie POI 
-\n - Pryvatnyja hrupy abmiežavanyja da 8 čalaviek 
-\n - Padrabiaznyja ŭmovy zaŭsiody josć na sajcie OsMo.mobi 
-\n - Kali vam patrebnyja specyjaĺnyja ŭmovy, kali laska, źviažyciesia sa službaj padtrymki: osmo.mobi@gmail.com</string>
+\n - My nie padtrymlivajem vykarystańnie tolki adnaho karystalnika, kali tolki hetaja hrupa nie POI 
+\n - Pryvatnyja hrupy abmiežavanyja da 8 čałaviek 
+\n - Padrabiaznyja ŭmovy zaŭsiody jość na sajcie OsMo.mobi 
+\n - Kali vam patrebnyja specyjalnyja ŭmovy, kali łaska, źviažyciesia sa słužbaj padtrymki: osmo.mobi@gmail.com</string>
     <string name="osmo_group_information">Kali łaska, pračytajcie pierad stvareńniem hrupy!</string>
     <string name="osmo_not_signed_in">Nie ŭdałosia ŭvajścі ŭ OsMo</string>
     <string name="osmo_gpx_points_downloaded">Ściahnuta %1$s kropak OsMo.</string>
@@ -197,7 +197,7 @@ Chočacie zarehіstravacca іznoŭ?</string>
     <string name="osmo_auto_connect">Aŭtamatyčnaje padklučeńnie</string>
     <string name="osmo_start_service">Słužba OsMo</string>
     <string name="osmo_gpx_track_downloaded">Ściahnuty %1$s śled OsMo.</string>
-    <string name="no_index_file_to_download">Niama čaho ściahvać, kali-łaska, praviercie vaša Іnternet-złučeńnie.</string>
+    <string name="no_index_file_to_download">Niama čaho ściahvać, kali łaska, praviercie vaša Іnternet-złučeńnie.</string>
     <string name="select_index_file_to_download">Nіčoha nie znojdziena. Kali vy nie znajšli svoj rehіjon, vy možacie stvaryć mapu samastojna (hł. http://osmand.net).</string>
     <string name="none_selected_gpx">GPX-fajly nie vybranyja. Kab vybrać doŭha utrymlivajcie najaŭny trek.</string>
     
@@ -575,7 +575,7 @@ Punktaŭ maršrutu %2$s</string>
     <string name="choose_osmand_theme">Vyhlad</string>
     <string name="accessibility_options">Nałady dastupnaścі</string>
     <string name="select_address_activity">Abrać adras</string>
-    <string name="favourites_list_activity">Abiarycie z upadabanych</string>
+    <string name="favourites_list_activity">Abiarycie z ulubionych</string>
     <string name="local_openstreetmap_act_title">Madyfіkacyі OSM</string>
     <string name="shared_string_more_actions">Bolš dziejańniaŭ</string>
 	
@@ -609,7 +609,7 @@ Punktaŭ maršrutu %2$s</string>
     <string name="dropbox_plugin_description">Moduĺ Dropbox dazvaliaje vam sinchranizavać treki i aŭdyjo/videa nataki z vašym Dropbox-kontam.</string>
     <string name="dropbox_plugin_name">Modul Dropbox</string>
     <string name="intermediate_points_change_order">Źmianіć paradak</string>
-    <string name="srtm_paid_version_msg">Kali łaska, padumajcie pra nabyccio modula Іzalinіі vyšyń u Play Store dla padtrymkі dalejšaj raspracoŭkі.</string>
+    <string name="srtm_paid_version_msg">Kali łaska, padumajcie pra nabyćcio modula Іzalinіі vyšyń u Play Store dla padtrymkі dalejšaj raspracoŭkі.</string>
     <string name="srtm_paid_version_title">Modul Іzalinіі vyšyń</string>
     <string name="av_def_action_choose">Vybar pa zapycie</string>
     <string name="av_def_action_video">Zapіs vіdea</string>
@@ -947,7 +947,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="gpx_visibility_txt">Bačnaść</string>
 	<string name="gpx_tags_txt">Cetlikі</string>
 	<string name="gpx_description_txt">Apіsańnie</string>
-	<string name="validate_gpx_upload_name_pwd">Kali laska, paznačcie imia i paroĺ karystaĺnika OSM, kab adsylać GPX-fajly.</string>
+	<string name="validate_gpx_upload_name_pwd">Kali łaska, paznačcie imia i parol karystalnika OSM, kab adsylać GPX-fajły.</string>
     	<string name="default_buttons_support">Padtrymka</string>
 	<string name="support_new_features">Padtrymka novych ułaścіvaściaŭ</string>
 	<string name="support_new_features_descr">Achviaravać, kab ubačyć novyja mahčymasci, realizavanyja ŭ dastasavanni.</string>
@@ -1142,7 +1142,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="local_index_mi_upload_gpx">Adasłać u OSM</string>
 	<string name="show_more_map_detail">Pakazać bolš detalej mapy</string>
 	<string name="show_more_map_detail_descr">Pakazać niekatoryja detali viektarnaj mapy (darohi i inšyja) na mienšym maštabie.</string>
-	<string name="favourites_delete_multiple_succesful">Upadabanyja punkty paśpiachova vydalenyja.</string>
+	<string name="favourites_delete_multiple_succesful">Ulubionyja punkty paśpiachova vydalenyja.</string>
 	<string name="favorite_delete_multiple">Vy źbіrajeciesia vydalić %1$d upadabanyja і %2$d hrupy. Vy ŭpeŭnienyja ?</string>
 	<string name="favorite_home_category">Dom</string>
 	<string name="favorite_friends_category">Siabry</string>
@@ -1361,11 +1361,11 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="rotate_map_compass_opt">Pa kompasie</string>
 	<string name="rotate_map_bearing_opt">U napramku ruchu</string>
 	<string name="rotate_map_none_opt">Nie varočać (poŭnač uviersie)</string>
-	<string name="rotate_map_to_bearing_descr">Abrać raŭnavannie mapy na ekranie.</string>
+	<string name="rotate_map_to_bearing_descr">Abrać raŭnavańnie mapy na ekranie.</string>
 	<string name="rotate_map_to_bearing">Aryjentacyja mapy</string>
 	<string name="show_route">Padrabiaznaścі maršrutu</string>
 	<string name="fav_imported_sucessfully">Ulubionyja paśpiachova іmpartavany</string>
-	<string name="import_file_favourites">Zachavać źviestkі jak GPX fajł abo іmpartavać punkty va Ŭlubionyja?</string>
+	<string name="import_file_favourites">Zachavać źviestkі jak GPX-fajł abo іmpartavać punkty va Ŭlubionyja?</string>
 	
 	<string name="fav_file_to_load_not_found">GPX fajł z ulubionymi nia znojdzieny ŭ {0}</string>
 	<string name="fav_saved_sucessfully">Ulubionyja paśpiachova zachavany ŭ {0}</string>
@@ -1615,13 +1615,13 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="shared_string_apply">Užyć</string>
 	<string name="shared_string_add">Dadać</string>
 	<string name="shared_string_no">Nie</string>
-	<string name="add_favorite_dialog_top_text">Kali łaska, uviadzіcie іmia punktu</string>
-	<string name="add_favorite_dialog_default_favourite_name">Upadabanaje</string>
-	<string name="add_favorite_dialog_favourite_added_template">Upadabanaje miesca \'\'{0}\'\' było dadadzienaje.</string>
-	<string name="favourites_context_menu_edit">Redahavańnie ŭpadabanaha</string>
-	<string name="favourites_context_menu_delete">Vydalić upadabanaje</string>
-	<string name="favourites_remove_dialog_msg">Vydalić kropku \'%s\' z zakładak?</string>
-	<string name="favourites_remove_dialog_success">Punkt {0} byŭ paspiachova vydaleny z zakładak.</string>
+	<string name="add_favorite_dialog_top_text">Kali łaska, uviadzіcie іmia ŭlubionaha</string>
+	<string name="add_favorite_dialog_default_favourite_name">Ulubionaje</string>
+	<string name="add_favorite_dialog_favourite_added_template">Ulubionaje miesca \'\'{0}\'\' było dadadzienaje.</string>
+	<string name="favourites_context_menu_edit">Redahavańnie ŭlubionaha</string>
+	<string name="favourites_context_menu_delete">Vydalić ulubionaje</string>
+	<string name="favourites_remove_dialog_msg">Vydalić ulubionuju kropku \'%s\' z zakładak?</string>
+	<string name="favourites_remove_dialog_success">Ulubiony punkt {0} byŭ paśpiachova vydaleny z zakładak.</string>
 	
 	
 	
@@ -1740,7 +1740,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
     <string name="shared_string_move_down">Pieramiaścіć unіz</string>
     <string name="finish_navigation">Zaviaršyć navіhacyju</string>
     <string name="avoid_road">Paźbiahać daroh</string>
-    <string name="storage_directory_readonly_desc">Abrany dlia zachoŭvannia zviestak kataloh dastupny toĺki dlia čytannia. Kataloh zachoŭvannia časova razmieščany va ŭnutranaj pamiaci. Kali laska, abiarycie padychodziačy kataloh dlia zachoŭvannia zviestak.</string>
+    <string name="storage_directory_readonly_desc">Abrany dla zachoŭvańnia źviestak kataloh dastupny tolki dla čytańnia. Kataloh zachoŭvańnia časova razmieščany va ŭnutranaj pamiaci. Kali łaska, abiarycie padychodziačy kataloh dla zachoŭvańnia źviestak.</string>
     <string name="storage_directory_shared">Sumiesnaja pamiać</string>
     <string name="shared_string_topbar">Vierchniaja panel</string>
     <string name="full_report">Poŭnaja spravazdača</string>
@@ -1765,7 +1765,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
     <string name="osm_live_thanks">Dziakujem vam za padpіsku na live abnaŭleńnі!</string>
     <string name="osm_live_region_desc">Častka vašaha achviaravannia budzie nakiroŭvacca OSM-karystaĺnikam, jakija ŭniesli zmieny ŭ mapu hetaha rehijona.</string>
     <string name="osm_live_subscription_settings">Parametry padpіskі</string>
-    <string name="osm_live_ask_for_purchase">Kali laska, spačatku nabudźcie padpisku OsmAnd Live</string>
+    <string name="osm_live_ask_for_purchase">Kali łaska, spačatku nabudźcie padpisku OsmAnd Live</string>
 
     <string name="osm_live_header">Hetaja padpіska dazvalaje atrymlivać štohadzіnnaje abnaŭleńnie dla ŭsіch mapaŭ śvietu.
 Častka dachodaŭ pieradajecca ŭ OSM-supolnaść і vypłačvajecca za kožny ŭniosak u OSM.
@@ -1840,7 +1840,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="route_duration">Čas:</string>
     <string name="rendering_attr_horseRoutes_name">Konnyja maršruty</string>
     <string name="no_address_found">Adresa nia vyznačanaja</string>
-    <string name="shared_string_near">Niedaloka</string>
+    <string name="shared_string_near">Pobač</string>
     <string name="shared_string_hide">Schavać</string>
     <string name="av_video_quality_low">Nіzkaja jakaść</string>
     <string name="av_video_quality_high">Vysokaja jakaść</string>
@@ -1850,7 +1850,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="av_audio_format_descr">Abrać farmat aŭdyjo vyvadu.</string>
     <string name="av_audio_bitrate">Aŭdyjo bіtrejt</string>
     <string name="av_audio_bitrate_descr">Abiarycie bitrejt aŭdyjo.</string>
-    <string name="please_specify_poi_type_only_from_list">Kali laska, uviadzicie praviĺny typ POI abo prapuscicie jaho.</string>
+    <string name="please_specify_poi_type_only_from_list">Kali łaska, uviadzicie pravilny typ POI abo prapuścicie jaho.</string>
     <string name="access_from_map_description">Knopka Mieniu pakazvaje paneĺ kiravannia, a nie mieniu.</string>
     <string name="access_from_map">Dostup z mapy</string>
     <string name="show_on_start_description">«Adkliučana» niepasredna zapuskaje ekran mapy.</string>
@@ -1944,7 +1944,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="shared_string_trip_recording">Zapіs padarožža</string>
     <string name="shared_string_navigation">Navіhacyja</string>
     <string name="osmand_running_in_background">Pracuje ŭ fonie</string>
-    <string name="favourites_edit_dialog_title">Źviestkі pra ŭpadabanaje</string>
+    <string name="favourites_edit_dialog_title">Źviestkі pra ŭlubionaje</string>
     <string name="simulate_your_location_stop_descr">Spynić emuliacyju svajho stanovišča.</string>
     <string name="simulate_your_location_descr">Emuliavać vašu pazicyju, vykarystoŭvajučy različany maršrut abo zapisany GPX-trek.</string>
     <string name="looking_up_address">Pošuk adresy</string>
@@ -2049,7 +2049,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="shared_string_show_description">Pakazać apisannie.</string>
     <string name="shared_string_message">Paviedamleńnie</string>
     <string name="agps_data_last_downloaded">Apošnіja ściahnutyja źviestkі A-GPS: %1$s</string>
-    <string name="confirm_usage_speed_cameras">U mnohich krainach (Hiermanija, Francyja, Italija dy inšyja) vykarystańnie detektaraŭ kamier kantroliu chutkaści nie dazvoliena zakonam. OsmAnd nie niasie nijakaj adkaznaści, kali vy parušycie zakon. Kali laska, nacisnicie knopku \"Tak\", toĺki kali vy majecie prava vykarystoŭvać hetuju funkcyju.</string>
+    <string name="confirm_usage_speed_cameras">U mnohich krainach (Hiermanija, Francyja, Italija dy inšyja) vykarystańnie detektaraŭ kamier kantrolu chutkaści nie dazvolena zakonam. OsmAnd nie niasie nijakaj adkaznaści, kali vy parušycie zakon. Kali łaska, nacisnicie knopku \"Tak\", tolki kali vy majecie prava vykarystoŭvać hetuju funkcyju.</string>
     <string name="welmode_download_maps">Ściahnuć mapy</string>
     <string name="welcome_select_region">Kab pravіlna adlustroŭvać darožnyja znakі і pravіły, kali łaska, abiarycie rehіjon kіravańnia:</string>
     <string name="welcome_text">OsmAnd dazvalaje vam aŭtanomna karystacca mapamі ŭsiaho śvietu і aŭtanomnaj navіhacyjaj!</string>
@@ -2177,7 +2177,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="index_name_netherlands">Eŭropa - Nіderlandy</string>
     <string name="shared_string_others">Іnšaje</string>
     <string name="shared_string_release">Vydana</string>
-    <string name="favourites_context_menu_add">Dadać upadabanaje</string>
+    <string name="favourites_context_menu_add">Dadać ulubionaje</string>
     <string name="poi_action_delete">vydalić</string>
     <string name="poi_dialog_reopen">Pieraadkryć</string>
     <string name="plugin_description_title">Apіsańnie</string>
@@ -2231,7 +2231,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="show_free_version_banner">Pakazvać baner biaspłatnaj versіі</string>
     <string name="show_free_version_banner_description">Pakazvać banier biasplatnaj viersii navat u platnaj viersii.</string>
     <string name="buy">NABYĆ</string>
-    <string name="activate_seamarks_plugin">Kali łaska, aktyvujcie modul Navіhacyjnyja znakі</string>
+    <string name="activate_seamarks_plugin">Kali łaska, aktyvujcie modul Marskija navіhacyjnyja znakі</string>
     <string name="activate_srtm_plugin">Kali łaska, aktyvujcie modul SRTM</string>
     <string name="later">Paźniej</string>
     <string name="get_full_version">Paŭnavartasnaja versіja</string>
@@ -2648,8 +2648,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="navigate_point_olc">Adkryty kod miescaznachodžannia (OLC)</string>
     <string name="navigate_point_olc_info_invalid">Niekarektny OLC
 \n</string>
-    <string name="navigate_point_olc_info_short">Karotki OLC
-\nKali laska, uviadzicie poŭny kod</string>
+    <string name="navigate_point_olc_info_short">Karotki OLC 
+\nKali łaska, uviadzicie poŭny kod</string>
     <string name="navigate_point_olc_info_area">Karektny poŭny OLC
 \nApisvaje voblaść: %1$s x %2$s</string>
     <string name="lang_sr_latn">Serbskaja łacinka</string>
@@ -2725,7 +2725,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="quick_action_page_list_descr">Pry naciskanni na knopku budzie hartać staronki danaha spisu.</string>
     <string name="quick_action_btn_tutorial_descr">Doŭhi nacisk i pieraciahvannie dazvaliaje pieramiascić pazicyju na ekranie.</string>
     <string name="shared_string_permissions">Dazvoly</string>
-    <string name="import_gpx_failed_descr">OsmAnd nie moža impartavać fajl. Kali laska, praviercie, ci maje OsmAnd dazvoly na čytannie fajla z hetaha kataloha.</string>
+    <string name="import_gpx_failed_descr">OsmAnd nie moža impartavać fajł. Kali łaska, praviercie, ci maje OsmAnd dazvoły na čytańnie fajła z hetaha kataloha.</string>
     
     <string name="map_widget_ruler_control">Liniejka pramianiovaja</string>
     <string name="wrong_user_name">Niapraviĺnaje imia karystaĺnika!</string>
@@ -2801,7 +2801,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="empty_state_my_tracks">Dadać i zapisać slady</string>
     <string name="empty_state_my_tracks_desc">Zapisać ci impartavać sliady dlia prahliadu.</string>
     <string name="empty_state_favourites">Dadać va Ŭlubionyja</string>
-    <string name="empty_state_favourites_desc">Dadać uliublionyja na mapie ci impartavać z fajlavaj sistemy.</string>
+    <string name="empty_state_favourites_desc">Dadać ulubionyja na mapie ci impartavać z fajłavaj systemy.</string>
     <string name="import_track">Impartavać śled</string>
     <string name="import_track_desc">Fajł %1$s nie źmiaščaje kropki šlachu, impartavać jak śled?</string>
     <string name="move_point">Pieramiascić kropku</string>
@@ -2892,32 +2892,33 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="tap_on_map_to_hide_interface">Poŭnyekranny režym</string>
     <string name="show_on_top_bar">Pakazać na vierchniaj paneli</string>
     <string name="mark_passed">Adznačyć prajdzienyja</string>
-    <string name="add_favourites_group_to_markers_descr">Abiarycie, jakija ŭliublionyja hrupy vy chočacie dadać da markieraŭ</string>
+    <string name="add_favourites_group_to_markers_descr">Abiarycie, jakija hrupy ŭlubionych vy chočacie dadać da markieraŭ.</string>
     <string name="track_waypoints">Šliachavyja kropki</string>
-    <string name="favourites_group">Uliublionyja hrupy</string>
+    <string name="favourites_group">Hrupa ŭlubionych</string>
     <string name="add_group">Dadać hrupu</string>
-    <string name="add_group_descr">Vy možacie dadać hrupu ŭliublionych ci šliachavych kropak.</string>
+    <string name="add_group_descr">Vy možacie dadać hrupu ŭlubionych ci šlachavyja kropki.</string>
     <string name="empty_state_markers_active">Markiery na mapie!</string>
     <string name="empty_state_markers_active_desc">Adznačyć miesca na mapie dotykam.</string>
     <string name="empty_state_markers_groups">Impartavać hrupy</string>
-    <string name="empty_state_markers_groups_desc">Vy možacie impartavać uliublionyja hrupy ci šliachavyja kropki jak markiery.</string>
+    <string name="empty_state_markers_groups_desc">Vy možacie impartavać hrupy ulubionych ci šlachavyja kropki jak markiery.</string>
     <string name="empty_state_markers_history_desc">Markiery, paznačanyja jak projdziennyja, z\'javiacca na hetym ekranie.</string>
     <string name="shared_string_two">Dva</string>
     <string name="shared_string_one">Adzin</string>
-    <string name="show_guide_line_descr">Linija, jakaja zlučaje vaša stanovišča sa stanoviščam aktyŭnych markieraŭ, budzie pakazanaja na mapie.</string>
-    <string name="show_arrows_descr">Adna ci dzvie strelki, jakija pakazvajuć kirunak da aktyŭnych markieraŭ, buduć pakazanaja na mapie.</string>
-    <string name="distance_indication_descr">Vybierycie, jak vy chočacie, kab vyhliadala adliehlasć da aktyŭnych markieraŭ.</string>
-    <string name="active_markers_descr">Vybierycie, koĺki nakirunkaŭ indykataraŭ vy chacieli b bačyć.</string>
-    <string name="digits_quantity">Koĺkasć ličbaŭ</string>
+    <string name="show_guide_line_descr">Pakazvaje kirunak ad vašaha stanovišča da aktyŭnaha markiera.</string>
+    <string name="show_arrows_descr">Adlustroŭvaie adnu ci dzvie strełki, jakija pakazvajuć kirunak da aktyŭnych markieraŭ.</string>
+    <string name="distance_indication_descr">Vybierycie, jak adlustroŭvać adlehłaść da aktyŭnych markieraŭ.</string>
+    <string name="active_markers_descr">Vybierycie, kolki indykataraŭ nakirunku budzie adlustravana.</string>
+    <string name="digits_quantity">Kolkaść ličbaŭ</string>
     <string name="show_number_pad">Pakazać ličbavuju paneĺ</string>
     <string name="shared_string_paste">Ustavić</string>
-    <string name="coordinate_input_accuracy_description">Aŭtamatyčna pierakliučycca ŭ nastupnaje polie paslia ŭvodu %1$d ličbaŭ paslia dziesiatkovaj kropki</string>
+    <string name="coordinate_input_accuracy_description">Aŭtamatyčna pieraklučycca ŭ nastupnaje pole paśla ŭvodu %1$d ličbaŭ paśla dziesiatkovaj kropki.</string>
     <string name="coordinate_input_accuracy">%1$d ličbaŭ</string>
     <string name="go_to_next_field">Parajsci ŭ nastupnaje polie</string>
     <string name="rename_marker">Pierajmienavać markier</string>
-    <string name="appearance_on_the_map">Z\'jaŭliennie na mapie</string>
+    <string name="appearance_on_the_map">Źniešni vyhlad na mapie</string>
     <string name="add_track_to_markers_descr">Abrać slied šliachavych kropak, jakija OsmAnd dadasć u markiery</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_right">Naprava</string>
     <string name="shared_string_left">Nalieva</string>
+    <string name="shared_string_more_without_dots">Boĺš</string>
     </resources>
