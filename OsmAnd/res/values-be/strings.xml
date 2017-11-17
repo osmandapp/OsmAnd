@@ -2950,7 +2950,7 @@
     <string name="rename_marker">Перайменаваць маркер</string>
     <string name="shared_string_two">Два</string>
     <string name="shared_string_one">Адзін</string>
-    <string name="add_favourites_group_to_markers_descr">Абярыце, якія групы ўлюбёных вы хочаце дадаць да маркераў.</string>
+    <string name="add_favourites_group_to_markers_descr">Абярыце ўлюблёную групу, якую вы хочаце дадаць да маркераў. Мы паказваем толькі сляды са шляхавымі кропкамі</string>
     <string name="track_waypoints">Шляхавыя кропкі</string>
     <string name="favourites_group">Група ўлюбёных</string>
     <string name="add_group">Дадаць групу</string>
@@ -2970,4 +2970,5 @@
     <string name="shared_string_right">Направа</string>
     <string name="shared_string_left">Налева</string>
     <string name="shared_string_more_without_dots">Больш</string>
+    <string name="looking_for_tracks_with_waypoints">Пошук слядоў з шляхавымі кропкамі</string>
     </resources>
