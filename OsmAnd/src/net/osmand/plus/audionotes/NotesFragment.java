@@ -218,9 +218,9 @@ public class NotesFragment extends OsmAndListFragment {
 			@Override
 			public void onHeaderClick(int type, boolean checked) {
 				if (checked) {
-					selectAll();
+					selectAll(type);
 				} else {
-					deselectAll();
+					deselectAll(type);
 				}
 				updateSelectionTitle(actionMode);
 			}
@@ -261,18 +261,46 @@ public class NotesFragment extends OsmAndListFragment {
 		fragment.show(getChildFragmentManager(), SortByMenuBottomSheetDialogFragment.TAG);
 	}
 
-	private void selectAll() {
-		for (int i = 0; i < listAdapter.getCount(); i++) {
-			Object item = listAdapter.getItem(i);
-			if (item instanceof Recording) {
-				selected.add((Recording) item);
+	private List<Recording> getRecordingsByType(int type) {
+		List<Recording> allRecs = new LinkedList<>(plugin.getAllRecordings());
+		List<Recording> res = new LinkedList<>();
+		for (Recording rec : allRecs) {
+			if (isAppropriate(rec, type)) {
+				res.add(rec);
 			}
+		}
+		return res;
+	}
+
+	private boolean isAppropriate(Recording rec, int type) {
+		if (type == NotesAdapter.TYPE_AUDIO_HEADER) {
+			return rec.isAudio();
+		} else if (type == NotesAdapter.TYPE_PHOTO_HEADER) {
+			return rec.isPhoto();
+		}
+		return rec.isVideo();
+	}
+
+	private void selectAll(int type) {
+		if (type == NotesAdapter.TYPE_DATE_HEADER) {
+			for (int i = 0; i < listAdapter.getCount(); i++) {
+				Object item = listAdapter.getItem(i);
+				if (item instanceof Recording) {
+					selected.add((Recording) item);
+				}
+			}
+		} else {
+			selected.addAll(getRecordingsByType(type));
 		}
 		listAdapter.notifyDataSetInvalidated();
 	}
 
-	private void deselectAll() {
-		selected.clear();
+	private void deselectAll(int type) {
+		if (type == NotesAdapter.TYPE_DATE_HEADER) {
+			selected.clear();
+		} else {
+			selected.removeAll(getRecordingsByType(type));
+		}
 		listAdapter.notifyDataSetInvalidated();
 	}
 

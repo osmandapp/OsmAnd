@@ -78,7 +78,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			holder.checkBox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
 			holder.headerRow.setEnabled(selectionMode);
 			if (selectionMode) {
-				holder.checkBox.setChecked(isSelectAllChecked());
+				holder.checkBox.setChecked(isSelectAllChecked(type));
 				holder.checkBox.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -187,16 +187,28 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		return pos == getCount() - 1 || !(getItem(pos + 1) instanceof Recording);
 	}
 
-	private boolean isSelectAllChecked() {
+	private boolean isSelectAllChecked(int type) {
 		for (int i = 0; i < getCount(); i++) {
 			Object item = getItem(i);
 			if (item instanceof Recording) {
+				if (type != TYPE_DATE_HEADER && !isAppropriate((Recording) item, type)) {
+					continue;
+				}
 				if (!selected.contains(item)) {
 					return false;
 				}
 			}
 		}
 		return true;
+	}
+
+	private boolean isAppropriate(Recording rec, int type) {
+		if (type == NotesAdapter.TYPE_AUDIO_HEADER) {
+			return rec.isAudio();
+		} else if (type == NotesAdapter.TYPE_PHOTO_HEADER) {
+			return rec.isPhoto();
+		}
+		return rec.isVideo();
 	}
 
 	private class HeaderViewHolder {
