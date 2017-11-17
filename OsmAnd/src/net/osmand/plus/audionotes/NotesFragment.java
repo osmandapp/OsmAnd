@@ -3,6 +3,7 @@ package net.osmand.plus.audionotes;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -508,22 +509,26 @@ public class NotesFragment extends OsmAndListFragment {
 		};
 	}
 
-	private void shareNote(Recording recording) {
-		Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-		if (recording.isPhoto()) {
-			Uri screenshotUri = Uri.parse(recording.getFile().getAbsolutePath());
-			sharingIntent.setType("image/*");
-			sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-		} else if (recording.isAudio()) {
-			Uri audioUri = Uri.parse(recording.getFile().getAbsolutePath());
-			sharingIntent.setType("audio/*");
-			sharingIntent.putExtra(Intent.EXTRA_STREAM, audioUri);
-		} else if (recording.isVideo()) {
-			Uri videoUri = Uri.parse(recording.getFile().getAbsolutePath());
-			sharingIntent.setType("video/*");
-			sharingIntent.putExtra(Intent.EXTRA_STREAM, videoUri);
+	private void shareNote(final Recording recording) {
+		if (!recording.getFile().exists()) {
+			return;
 		}
-		startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_note)));
+		MediaScannerConnection.scanFile(getActivity(), new String[]{recording.getFile().getAbsolutePath()},
+				null, new MediaScannerConnection.OnScanCompletedListener() {
+					public void onScanCompleted(String path, Uri uri) {
+						Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+						if (recording.isPhoto()) {
+							shareIntent.setType("image/*");
+						} else if (recording.isAudio()) {
+							shareIntent.setType("audio/*");
+						} else if (recording.isVideo()) {
+							shareIntent.setType("video/*");
+						}
+						shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+						shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+						startActivity(Intent.createChooser(shareIntent, getString(R.string.share_note)));
+					}
+				});
 	}
 
 	private void showOnMap(Recording recording) {
