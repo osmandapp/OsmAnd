@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="?attrs:searchbar_text"
+                android:textColor="?attr/searchbar_text"
                 android:textSize="@dimen/default_list_text_size"
                 tools:text="Nov 17, 2017 Audio Note"/>
 
