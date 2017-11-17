@@ -436,8 +436,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
-	private static String getPrefix(OsmPoint osmPoint) {
-		return (osmPoint.getGroup() == OsmPoint.Group.POI ? "POI " : "Bug ") + " id: " + osmPoint.getId() + " ";
+	public static String getPrefix(OsmPoint osmPoint) {
+		return (osmPoint.getGroup() == OsmPoint.Group.POI ? "POI" : "Bug") + " id: " + osmPoint.getId() + " ";
 	}
 
 	@Override
