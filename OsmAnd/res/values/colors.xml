@@ -305,4 +305,8 @@
 	<color name="coordinate_input_keyboard_icon_color">#9fadfc</color>
 	<color name="coordinate_input_error_color">#ed5421</color>
 
+	<color name="color_osm_edit_create">#73b825</color>
+	<color name="color_osm_edit_modify">#FDD835</color>
+	<color name="color_osm_edit_delete">#e53935</color>
+
 </resources>
