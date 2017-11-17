@@ -720,16 +720,6 @@ public class MapActivityActions implements DialogProvider {
 				}).createItem());
 		*/
 
-		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.measurement_tool, mapActivity)
-				.setIcon(R.drawable.ic_action_ruler)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
-						MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager());
-						return true;
-					}
-				}).createItem());
-
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.configure_map, mapActivity)
 				.setIcon(R.drawable.ic_action_layers_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -778,16 +768,12 @@ public class MapActivityActions implements DialogProvider {
 					}).createItem());
 		}
 
-		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.prefs_plugins, mapActivity)
-				.setIcon(R.drawable.ic_extension_dark)
-				.setListener(new ItemClickListener() {
+		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.measurement_tool, mapActivity)
+				.setIcon(R.drawable.ic_action_ruler)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
-						app.logEvent(mapActivity, "drawer_plugins_open");
-						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
-								.getPluginsActivity());
-						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-						mapActivity.startActivity(newIntent);
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+						MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager());
 						return true;
 					}
 				}).createItem());
@@ -801,6 +787,20 @@ public class MapActivityActions implements DialogProvider {
 						MapActivity.clearPrevActivityIntent();
 						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN);
 						return false;
+					}
+				}).createItem());
+
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.prefs_plugins, mapActivity)
+				.setIcon(R.drawable.ic_extension_dark)
+				.setListener(new ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						app.logEvent(mapActivity, "drawer_plugins_open");
+						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+								.getPluginsActivity());
+						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						mapActivity.startActivity(newIntent);
+						return true;
 					}
 				}).createItem());
 
@@ -850,7 +850,7 @@ public class MapActivityActions implements DialogProvider {
 		// Place divider between functionality and configuration related menu items
 		int dividerItemIndex = -1;
 		for (int i = 0; i < optionsMenuHelper.length(); i++) {
-			if (optionsMenuHelper.getItem(i).getTitleId() == R.string.configure_map) {
+			if (optionsMenuHelper.getItem(i).getTitleId() == R.string.layer_map_appearance) {
 				dividerItemIndex = i;
 				break;
 			}
