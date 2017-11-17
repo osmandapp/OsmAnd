@@ -325,11 +325,15 @@ public class NotesFragment extends OsmAndListFragment {
 		return new SortFragmentListener() {
 			@Override
 			public void onSortModeChanged() {
-				listAdapter.clear();
-				listAdapter.addAll(createItemsList());
-				listAdapter.notifyDataSetChanged();
+				recreateAdapterData();
 			}
 		};
+	}
+
+	private void recreateAdapterData() {
+		listAdapter.clear();
+		listAdapter.addAll(createItemsList());
+		listAdapter.notifyDataSetChanged();
 	}
 
 	private void enterSelectionMode(final int type) {
@@ -418,9 +422,8 @@ public class NotesFragment extends OsmAndListFragment {
 							Recording rec = it.next();
 							plugin.deleteRecording(rec, true);
 							it.remove();
-							listAdapter.remove(rec);
 						}
-						listAdapter.notifyDataSetChanged();
+						recreateAdapterData();
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
