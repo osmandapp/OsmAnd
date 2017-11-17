@@ -1163,7 +1163,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="driving_region_us">美國</string>
     <string name="driving_region_canada">加拿大</string>
     <string name="driving_region_europe_asia">歐洲、亞洲、拉丁美洲和同類的</string>
-    <string name="driving_region_uk">英國、印度和其他</string>
+    <string name="driving_region_uk">英國、印度和同類的</string>
     <string name="driving_region">駕駛區域</string>
     <string name="map_widget_fps_info">FPS 除錯資訊</string>
 
