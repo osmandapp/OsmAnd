@@ -18,8 +18,8 @@
     <string name="favourites_group">Favorites group</string>
     <string name="add_group">Add group</string>
     <string name="add_group_descr">You can add a group of favorites or track waypoints.</string>
-    <string name="empty_state_markers_active">Markers on map!</string>
-    <string name="empty_state_markers_active_desc">Mark places on the map by a tap.</string>
+    <string name="empty_state_markers_active">Create map markers!</string>
+    <string name="empty_state_markers_active_desc">Long or short tap places, then tap the marker flag button.</string>
     <string name="empty_state_markers_groups">Import groups</string>
     <string name="empty_state_markers_groups_desc">You can import favorite groups or track waypoints as markers.</string>
     <string name="empty_state_markers_history">@string/shared_string_history</string>
