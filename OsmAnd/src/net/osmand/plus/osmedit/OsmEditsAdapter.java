@@ -137,11 +137,11 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 	private String getDescription(OsmPoint point) {
 		String action = "";
 		if (point.getAction() == OsmPoint.Action.CREATE) {
-			action = getContext().getString(R.string.action_create);
+			action = getContext().getString(R.string.shared_string_added);
 		} else if (point.getAction() == OsmPoint.Action.MODIFY) {
-			action = getContext().getString(R.string.action_modify);
+			action = getContext().getString(R.string.shared_string_edited);
 		} else if (point.getAction() == OsmPoint.Action.DELETE) {
-			action = getContext().getString(R.string.action_delete);
+			action = getContext().getString(R.string.shared_string_deleted);
 		} else if (point.getAction() == OsmPoint.Action.REOPEN) {
 			action = getContext().getString(R.string.action_modify);
 		}
