@@ -143,7 +143,7 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 		} else if (point.getAction() == OsmPoint.Action.DELETE) {
 			action = getContext().getString(R.string.shared_string_deleted);
 		} else if (point.getAction() == OsmPoint.Action.REOPEN) {
-			action = getContext().getString(R.string.action_modify);
+			action = getContext().getString(R.string.shared_string_edited);
 		}
 
 		String subtype = "";
