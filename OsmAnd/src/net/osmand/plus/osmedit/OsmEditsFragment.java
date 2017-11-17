@@ -384,15 +384,6 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 				listView.setFooterDividersEnabled(false);
 			}
 			listView.setAdapter(listAdapter);
-			listView.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					OsmPoint it = listAdapter.getItem(position);
-					openPopUpMenu(view, it);
-
-				}
-			});
 		} else {
 			listAdapter.setOsmEdits(osmEdits);
 		}
