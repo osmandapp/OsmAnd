@@ -384,9 +384,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			if (osmEdits.size() > 0 && footerView == null) {
 				//listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
 				footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, listView, false);
+				listView.setDivider(null);
 				listView.addFooterView(footerView);
-				listView.setHeaderDividersEnabled(false);
-				listView.setFooterDividersEnabled(false);
 			}
 			listView.setAdapter(listAdapter);
 		} else {

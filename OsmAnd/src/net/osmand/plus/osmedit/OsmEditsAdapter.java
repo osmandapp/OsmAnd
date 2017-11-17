@@ -119,6 +119,8 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 
 				}
 			});
+			boolean showDivider = getCount() > 1 && position != getCount() - 1;
+			holder.bottomDivider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
 		}
 
 		return view;
