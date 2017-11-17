@@ -87,14 +87,6 @@
 			android:src="@drawable/ic_play_dark"/>
 		</LinearLayout>
 
-	<View
-		android:id="@+id/bottom_divider"
-		android:layout_width="match_parent"
-		android:layout_height="1dp"
-		android:layout_marginLeft="64dp"
-		android:background="?attr/dashboard_divider"
-		android:focusable="false"
-		android:visibility="gone"
-		tools:visibility="visible"/>
+
 
 </LinearLayout>
