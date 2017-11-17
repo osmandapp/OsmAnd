@@ -125,7 +125,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 					holder.icon.setImageDrawable(app.getIconsCache().getIcon(iconRes, colorRes));
 				}
 
-				holder.bottomDivider.setVisibility(View.VISIBLE);
+				holder.bottomDivider.setVisibility(hideBottomDivider(position) ? View.GONE : View.VISIBLE);
 				holder.icon.setVisibility(selectionMode ? View.GONE : View.VISIBLE);
 				holder.checkBox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
 				holder.options.setVisibility(selectionMode ? View.GONE : View.VISIBLE);
@@ -181,6 +181,10 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 	@Override
 	public int getViewTypeCount() {
 		return TYPE_COUNT;
+	}
+
+	private boolean hideBottomDivider(int pos) {
+		return pos == getCount() - 1 || !(getItem(pos + 1) instanceof Recording);
 	}
 
 	private boolean isSelectAllChecked() {
