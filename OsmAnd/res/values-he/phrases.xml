@@ -1042,4 +1042,36 @@
 	<string name="poi_socket_as3112_current">שקע: AS/NZS 3112: זרם</string>
 	<string name="poi_socket_as3112_output">שקע: AS/NZS 3112: פלט</string>
 
+	<string name="poi_payment_others_no">שיטות תשלום אחרות אינן מכובדות</string>
+	<string name="poi_payment_routex_yes">Routex</string>
+	<string name="poi_payment_routex_no">כרטיסי תדלוק של Routex אינם מכובדים</string>
+	<string name="poi_payment_bancomat_yes">בנקומט</string>
+	<string name="poi_payment_bancomat_no">בנקומט אינו מכובד</string>
+	<string name="poi_payment_icsf_yes">כרטיסי IC Stored Fare</string>
+	<string name="poi_payment_icsf_no">כרטיסי IC Stored Fare אינם מכובדים</string>
+	<string name="poi_payment_prepaid_ticket_yes">כרטיסים בתשלום מראש</string>
+	<string name="poi_payment_jcb_yes">JCB</string>
+	<string name="poi_payment_jcb_no">כרטיסי JCB אינם מכובדים</string>
+	<string name="poi_payment_laser_yes">Laser</string>
+	<string name="poi_payment_laser_no">כרטיסי Laser אינם מכובדים</string>
+	<string name="poi_payment_ep_quick_yes">Quick</string>
+	<string name="poi_payment_ep_quick_no">כרטיסי Quick אינם מכובדים</string>
+	<string name="poi_payment_eurowag_yes">Eurowag</string>
+	<string name="poi_payment_eurowag_no">כרטיסי Eurowag אינם מכובדים</string>
+	<string name="poi_payment_e_zpass_yes">E‑ZPass</string>
+	<string name="poi_payment_e_zpass_no">כרטיסי E‑ZPass אינם מכובדים</string>
+	<string name="poi_payment_euroshell_yes">Euroshell</string>
+	<string name="poi_payment_euroshell_no">כרטיסי תדלוק Euroshell אינם מכובדים</string>
+	<string name="poi_payment_kitcard_yes">KITCard</string>
+	<string name="poi_payment_kitcard_no">כרטיסי KITCard אינם מכובדים</string>
+	<string name="poi_payment_westfalen_card_yes">Westfalen</string>
+	<string name="poi_payment_westfalen_card_no">כרטיסי Westfalen אינם מכובדים</string>
+	<string name="poi_payment_v_pay_yes">V PAY</string>
+	<string name="poi_payment_v_pay_no">כרטיסי V PAY אינם מכובדים</string>
+	<string name="poi_payment_dogecoin_yes">Dogecoin</string>
+	<string name="poi_payment_dogecoin_no">מטבעות Dogecoin אינם מכובדים</string>
+	<string name="poi_payment_cibus_yes">סיבוס</string>
+	<string name="poi_payment_cibus_no">כרטיסי סיבוס אינם מכובדים</string>
+	<string name="poi_payment_wire_transfer_yes">העברות בינלאומיות</string>
+	<string name="poi_payment_wire_transfer_no">העברות בינלאומיות אינן מכובדות</string>
 	</resources>

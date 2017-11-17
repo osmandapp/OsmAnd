@@ -14,4 +14,8 @@
         android:id="@+id/action_history"
         android:icon="@drawable/ic_action_history"
         android:title="@string/shared_string_history"/>
+
+    <item android:id="@+id/action_more"
+          android:icon="@drawable/ic_navigation_drawer"
+          android:title="@string/shared_string_more_without_dots"/>
 </menu>

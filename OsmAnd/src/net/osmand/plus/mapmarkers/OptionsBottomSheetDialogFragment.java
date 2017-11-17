@@ -1,26 +1,32 @@
 package net.osmand.plus.mapmarkers;
 
+import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
-public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	public final static String TAG = "OptionsBottomSheetDialogFragment";
-	public final static String SHOW_SORT_BY_ROW = "show_sort_by_row";
-	public final static String SHOW_MOVE_ALL_TO_HISTORY_ROW = "show_move_to_history_row";
+	public final static String GROUPS_MARKERS_MENU = "groups_markers_menu";
+	public final static String HISTORY_MARKERS_MENU = "history_markers_menu";
 
 	private MarkerOptionsFragmentListener listener;
-	private boolean showSortBy;
-	private boolean showMoveAllToHistory;
+	private boolean disableSortBy;
+	private boolean disableSaveAsTrack;
+	private boolean disableMoveAllToHistory;
 
 	public void setListener(MarkerOptionsFragmentListener listener) {
 		this.listener = listener;
@@ -30,16 +36,18 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle args = getArguments();
-		showSortBy = args == null || args.getBoolean(SHOW_SORT_BY_ROW, true);
-		showMoveAllToHistory = args == null || args.getBoolean(SHOW_MOVE_ALL_TO_HISTORY_ROW, true);
+		boolean groupsMenu = args != null && args.getBoolean(GROUPS_MARKERS_MENU, false);
+		boolean historyMenu = args != null && args.getBoolean(HISTORY_MARKERS_MENU, false);
+		disableSortBy = disableSaveAsTrack = groupsMenu || historyMenu;
+		disableMoveAllToHistory = historyMenu;
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		final int themeRes = getMyApplication().getSettings().isLightContent() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_options_bottom_sheet_dialog, container);
+		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_options_bottom_sheet_dialog, null);
 
 		((ImageView) mainView.findViewById(R.id.sort_by_icon)).setImageDrawable(getContentIcon(R.drawable.ic_sort_waypoint_dark));
 		OsmandSettings.MapMarkersMode mode = getMyApplication().getSettings().MAP_MARKERS_MODE.get();
@@ -64,8 +72,8 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		((ImageView) mainView.findViewById(R.id.move_all_to_history_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_history2));
 
 		View sortByRow = mainView.findViewById(R.id.sort_by_row);
-		if (!showSortBy) {
-			sortByRow.setVisibility(View.GONE);
+		if (disableSortBy) {
+			disableView(sortByRow);
 		} else {
 			sortByRow.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -104,19 +112,23 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				dismiss();
 			}
 		});
-		mainView.findViewById(R.id.save_as_new_track_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.saveAsNewTrackOnClick();
+		View saveAsTrackRow = mainView.findViewById(R.id.save_as_new_track_row);
+		if (disableSaveAsTrack) {
+			disableView(saveAsTrackRow);
+		} else {
+			saveAsTrackRow.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (listener != null) {
+						listener.saveAsNewTrackOnClick();
+					}
+					dismiss();
 				}
-				dismiss();
-			}
-		});
+			});
+		}
 		View moveAllToHistoryRow = mainView.findViewById(R.id.move_all_to_history_row);
-		if (!showMoveAllToHistory) {
-			mainView.findViewById(R.id.move_all_to_history_divider).setVisibility(View.GONE);
-			moveAllToHistoryRow.setVisibility(View.GONE);
+		if (disableMoveAllToHistory) {
+			disableView(moveAllToHistoryRow);
 		} else {
 			moveAllToHistoryRow.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -128,16 +140,60 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				}
 			});
 		}
-		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
+
+		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
-			public void onClick(View view) {
-				dismiss();
+			public void onGlobalLayout() {
+				Activity activity = getActivity();
+				boolean nightMode = !getMyApplication().getSettings().isLightContent();
+				int allowedHeight = getAllowedHeight();
+
+				if (AndroidUiHelper.isOrientationPortrait(activity)) {
+					if (allowedHeight - mainView.getHeight() >= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
+						AndroidUtils.setBackground(activity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+					}
+				} else {
+					if (allowedHeight - mainView.getHeight() >= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
+						AndroidUtils.setBackground(activity, mainView, nightMode,
+								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
+					} else {
+						AndroidUtils.setBackground(activity, mainView, nightMode,
+								R.drawable.bg_bottom_sheet_sides_landscape_light, R.drawable.bg_bottom_sheet_sides_landscape_dark);
+					}
+				}
+
+				ViewTreeObserver obs = mainView.getViewTreeObserver();
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
+				}
 			}
 		});
 
-		setupHeightAndBackground(mainView, R.id.marker_options_scroll_view);
-
 		return mainView;
+	}
+
+	@Override
+	public void dismiss() {
+		if (listener != null) {
+			listener.dismiss();
+		}
+		super.dismiss();
+	}
+
+	private void disableView(View view) {
+		view.setEnabled(false);
+		view.setAlpha(.5f);
+	}
+
+	private int getAllowedHeight() {
+		Activity activity = getActivity();
+		int scrH = AndroidUtils.getScreenHeight(activity);
+		int stBarH = AndroidUtils.getStatusBarHeight(activity);
+		int nBarH = AndroidUtils.getNavBarHeight(activity);
+		// 56dp below is height of the bottom navigation view
+		return scrH - stBarH - nBarH - AndroidUtils.dpToPx(activity, 56);
 	}
 
 	interface MarkerOptionsFragmentListener {
@@ -153,5 +209,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		void saveAsNewTrackOnClick();
 
 		void moveAllToHistoryOnClick();
+
+		void dismiss();
 	}
 }

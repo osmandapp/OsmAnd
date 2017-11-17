@@ -2846,13 +2846,13 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_left">Manca</string>
     <string name="show_number_pad">Ammustra tecladu numèricu</string>
     <string name="shared_string_paste">Incolla</string>
-    <string name="coordinate_input_accuracy_description">Cola automaticamente a su campu imbeniente a pustis de àere iscritu %1$d tzifras a pustis de sa vìrgula</string>
+    <string name="coordinate_input_accuracy_description">Cola automaticamente a su campu imbeniente a pustis de àere iscritu %1$d tzifras a pustis de sa vìrgula.</string>
     <string name="coordinate_input_accuracy">%1$d tzifras</string>
     <string name="go_to_next_field">Cola a su campu imbeniente</string>
     <string name="rename_marker">Torra a numenare su marcadore</string>
     <string name="appearance_on_the_map">Visualizatzione in sa mapa</string>
     <string name="add_track_to_markers_descr">Issèbera sos puntos de coladòrgiu chi OsmAnd at a annànghere a sos marcadores</string>
-    <string name="add_favourites_group_to_markers_descr">Issèbera cale de sos grupos de preferidos cheres annànghere a sos marcadores</string>
+    <string name="add_favourites_group_to_markers_descr">Issèbera sos grupos de preferidos chi cheres annànghere a sos marcadores.</string>
     <string name="track_waypoints">Puntos de coladòrgiu</string>
     <string name="favourites_group">Grupu de preferidos</string>
     <string name="add_group">Annanghe grupu</string>
@@ -2865,8 +2865,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="empty_state_markers_history_desc">Sos marcadores sinnados comente colados ant a aparire in custu ischermu.</string>
     <string name="shared_string_two">Duos</string>
     <string name="shared_string_one">Unu</string>
-    <string name="show_guide_line_descr">Una lìnia de collegamentu intre sa positzione tua e sas de sos marcadores ativos ant a aparire in sa mapa.</string>
-    <string name="show_arrows_descr">Una o duas fritzas chi indicant sa diretzione cara a sos marcadores ativos ant a èssere ammustradas in sa mapa.</string>
-    <string name="distance_indication_descr">Issèbera comente dias bòlere visualizare sa distàntzia cun sos marcadores ativos.</string>
-    <string name="active_markers_descr">Issèbera cantos indicadores de diretzione ti diat agradare a bìdere.</string>
+    <string name="show_guide_line_descr">Ammustra lìnias ghia dae sa positzione tua a sos marcadores ativos.</string>
+    <string name="show_arrows_descr">Ammustra una o duas fritzas chi indicant sa diretzione cara a sos marcadores ativos.</string>
+    <string name="distance_indication_descr">Issèbera comente ammustrare sa distàntzia cun sos marcadores ativos.</string>
+    <string name="active_markers_descr">Issèbera cantos indicadores de diretzione cheres ammustrare.</string>
     </resources>
