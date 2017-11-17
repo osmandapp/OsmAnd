@@ -5,11 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
 import android.view.LayoutInflater;
@@ -43,12 +43,10 @@ import net.osmand.plus.audionotes.adapters.NotesAdapter.NotesAdapterListener;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -430,29 +428,20 @@ public class NotesFragment extends OsmAndListFragment {
 	}
 
 	private void shareItems(Set<Recording> selected) {
-		Intent intent = new Intent();
-		intent.setAction(Intent.ACTION_SEND_MULTIPLE);
-		intent.setType("image/*"); /* This example is sharing jpeg images. */
-		ArrayList<Uri> files = new ArrayList<Uri>();
-		for (Recording path : selected) {
-			if (path == SHARE_LOCATION_FILE) {
-				File fl = generateGPXForRecordings(selected);
-				if (fl != null) {
-					files.add(FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".fileprovider", fl));
-				}
-			} else {
-				File src = path.getFile();
-				File dst = new File(getActivity().getCacheDir(), "share/" + src.getName());
-				try {
-					Algorithms.fileCopy(src, dst);
-					files.add(FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".fileprovider", dst));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+		ArrayList<Uri> files = new ArrayList<>();
+		for (Recording rec : selected) {
+			File file = rec == SHARE_LOCATION_FILE ? generateGPXForRecordings(selected) : rec.getFile();
+			if (file != null) {
+				files.add(Uri.parse(file.getAbsolutePath()));
 			}
 		}
-		intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, files);
+		Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+		intent.setType("*/*");
+		intent.putExtra(Intent.EXTRA_STREAM, files);
 		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		if (Build.VERSION.SDK_INT > 18) {
+			intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+		}
 		startActivity(Intent.createChooser(intent, getString(R.string.share_note)));
 	}
 
