@@ -292,7 +292,7 @@ public class NotesFragment extends OsmAndListFragment {
 		} else {
 			selected.addAll(getRecordingsByType(type));
 		}
-		listAdapter.notifyDataSetInvalidated();
+		listAdapter.notifyDataSetChanged();
 	}
 
 	private void deselectAll(int type) {
@@ -301,7 +301,7 @@ public class NotesFragment extends OsmAndListFragment {
 		} else {
 			selected.removeAll(getRecordingsByType(type));
 		}
-		listAdapter.notifyDataSetInvalidated();
+		listAdapter.notifyDataSetChanged();
 	}
 
 	private List<Recording> sortItemsByDateDescending(List<Recording> recs) {
@@ -405,7 +405,7 @@ public class NotesFragment extends OsmAndListFragment {
 
 	private void updateSelectionMode(ActionMode m) {
 		updateSelectionTitle(m);
-		listAdapter.notifyDataSetInvalidated();
+		listAdapter.notifyDataSetChanged();
 	}
 
 	private void deleteItems(final Set<Recording> selected) {
