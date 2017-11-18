@@ -2954,8 +2954,8 @@
     <string name="favourites_group">گروه نقاط برگزیده</string>
     <string name="add_group">افزودن گروه</string>
     <string name="add_group_descr">می‌توانید گروهی از نقاط برگزیده یا نقاط بین‌راهی را اضافه کنید.</string>
-    <string name="empty_state_markers_active">نشانه‌گذاری روی نقشه!</string>
-    <string name="empty_state_markers_active_desc">با لمسِ نقشه، مکان‌های مختلف را نشانه بزنید.</string>
+    <string name="empty_state_markers_active">روی نقشه نشانه‌گذاری کنید!</string>
+    <string name="empty_state_markers_active_desc">مکان‌ها به‌صورت کوتاه یا طولانی لمس کنید و سپس دکمهٔ پرچم را بزنید.</string>
     <string name="empty_state_markers_groups">واردکردن گروه‌ها</string>
     <string name="empty_state_markers_groups_desc">می‌توانید گروه‌های نقاط برگزیده یا نقاط بین‌راهی را به‌عنوان نشانه وارد کنید.</string>
     <string name="empty_state_markers_history_desc">نشانه‌هایی که به‌عنوان عبورکرده مشخص شده‌اند در این صفحه نشان داده می‌شوند.</string>
