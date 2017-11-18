@@ -2762,7 +2762,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="add_route_points">Aldoni kurspunktojn</string>
     <string name="add_line">Aldoni linion</string>
     <string name="empty_state_my_tracks">Aldoni kaj registri spurojn</string>
-    <string name="empty_state_my_tracks_desc">Registri aŭ enporti spurojn por vidigi.</string>
+    <string name="empty_state_my_tracks_desc">Registru aŭ enportu spurojn por vidigi.</string>
     <string name="empty_state_favourites">Aldoni ŝatatajn</string>
     <string name="empty_state_favourites_desc">Aldonu ŝatatajn punktojn al la mapo aŭ enportu ilin el dosiero.</string>
     <string name="import_track">Enporti spuron</string>
@@ -2799,7 +2799,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="ascendingly">kreskante</string>
     <string name="date_added">Dato de aldono</string>
     <string name="order_by">Ordigi laŭ:</string>
-    <string name="show_guide_line">Montri gvidan linion</string>
+    <string name="show_guide_line">Montri gvid-liniojn</string>
     <string name="show_arrows_on_the_map">Montri sagetojn sur la mapo</string>
     <string name="show_passed">Montri malaktivajn</string>
     <string name="hide_passed">Kaŝi malaktivajn</string>
@@ -2828,7 +2828,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="osn_modify_dialog_error">Eraro okazis: rimarko ne estis ŝanĝita</string>
     <string name="osn_modify_dialog_title">Redakti rimarkon</string>
     <string name="context_menu_item_modify_note">Redakti OSM-rimarkon</string>
-    <string name="release_2_8">• Tute refaritaj map-markoj kun helpo pri planado de vojaĝo 
+    <string name="release_2_8">• Tute refaritaj map-markoj kun gvid-linioj kaj planado de vojaĝo
 \n 
 \n• Ilo por mezuri distancoj kun ebloj proksimumigi pozicion al vojo kaj konservi punktojn kiel kurson 
 \n 
@@ -2856,23 +2856,23 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="show_on_top_bar">Montri en supra breto</string>
     <string name="mark_passed">Marki pasigitajn</string>
     <string name="rename_marker">Alinomi markon</string>
-    <string name="digits_quantity">Nombro da ciferoj</string>
+    <string name="digits_quantity">Nombro da dekumaj pozicioj</string>
     <string name="shared_string_right">Dekstre</string>
     <string name="shared_string_left">Maldekstre</string>
     <string name="show_number_pad">Montri nombran klavaron</string>
     <string name="shared_string_paste">Englui</string>
-    <string name="coordinate_input_accuracy_description">Aŭtomate baskuli al la sekva kampo post entajpi %1$d ciferojn post la komo.</string>
+    <string name="coordinate_input_accuracy_description">Aŭtomate baskuli al la sekva kampo post entajpi %1$d dekumajn ciferojn.</string>
     <string name="coordinate_input_accuracy">%1$d ciferoj</string>
     <string name="go_to_next_field">Iri al la sekva kampo</string>
     <string name="appearance_on_the_map">Aspekto sur la mapo</string>
-    <string name="add_track_to_markers_descr">Elekti navigadpunktojn por aldoni al map-markoj</string>
-    <string name="add_favourites_group_to_markers_descr">Elekti grupon de ŝatataj por aldoni al map-markoj.</string>
+    <string name="add_track_to_markers_descr">Elektu kurson por aldoni ĝiajn navigadpunktojn al map-markoj. (Nur kursoj kun navigadpunktoj vidiĝas.)</string>
+    <string name="add_favourites_group_to_markers_descr">Elektu grupon de ŝatataj por aldoni al map-markoj.</string>
     <string name="track_waypoints">Navigadpunktoj de kurso</string>
-    <string name="favourites_group">Ŝatataro</string>
+    <string name="favourites_group">Kategorio de ŝatataj</string>
     <string name="add_group">Aldoni grupon</string>
-    <string name="add_group_descr">Vi povas aldoni grupon da ŝatataj aŭ navigadpunktojn de kurso.</string>
-    <string name="empty_state_markers_active">Map-markoj!</string>
-    <string name="empty_state_markers_active_desc">Vi povas marki ejojn sur la mapo per frapeti.</string>
+    <string name="add_group_descr">Vi povas enporti grupon el ŝatataj aŭ navigadpunktoj de kurso.</string>
+    <string name="empty_state_markers_active">Krei map-markoj!</string>
+    <string name="empty_state_markers_active_desc">Frapetu aŭ frapetadu ejojn kaj poste frapetu la butonon de flago.</string>
     <string name="empty_state_markers_groups">Enporti grupojn</string>
     <string name="empty_state_markers_groups_desc">Vi povas enporti grupojn de ŝatataj aŭ kurs-navigadpunktojn kiel map-markojn.</string>
     <string name="empty_state_markers_history_desc">Markoj markitaj kiel pasigitajn montriĝos sur tiu ĉi ekrano.</string>
@@ -2882,4 +2882,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="show_arrows_descr">Vidigi unu aŭ du sagetojn indikantajn direkton al map-markoj.</string>
     <string name="distance_indication_descr">Elekti kiel vidigi distancon al aktivaj map-markoj.</string>
     <string name="active_markers_descr">Elekti nombron da direkt-indikiloj por vidigi.</string>
+    <string name="looking_for_tracks_with_waypoints">Serĉado de kursoj kun navigadpunktoj</string>
+    <string name="shared_string_more_without_dots">Pli</string>
     </resources>
