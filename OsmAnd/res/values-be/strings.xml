@@ -2954,7 +2954,7 @@
     <string name="track_waypoints">Шляхавыя кропкі</string>
     <string name="favourites_group">Група ўлюбёных</string>
     <string name="add_group">Дадаць групу</string>
-    <string name="add_group_descr">Вы можаце дадаць групу ўлюбёных ці шляхавыя кропкі.</string>
+    <string name="add_group_descr">Вы можаце імпартаваць групы з улюбёных ці шляхавых кропак.</string>
     <string name="empty_state_markers_active">Стварыце маркеры мапы!</string>
     <string name="empty_state_markers_active_desc">Дакраніцеся месца і потым націсніце кнопку маркера.</string>
     <string name="empty_state_markers_groups">Імпартаваць групы</string>
