@@ -12,12 +12,12 @@
     <string name="looking_for_tracks_with_waypoints">Looking for tracks with waypoints</string>
     <string name="shared_string_more_without_dots">More</string>
     <string name="appearance_on_the_map">Appearance on the map</string>
-    <string name="add_track_to_markers_descr">Select track waypoints of which OsmAnd will add to markers</string>
-    <string name="add_favourites_group_to_markers_descr">Select favorite group you want to add to markers. We show only tracks with waypoints</string>
+    <string name="add_track_to_markers_descr">Select a track to add its waypoints to the markers. (Only tracks with waypoints are listed.)</string>
+    <string name="add_favourites_group_to_markers_descr">Select a favorite category to add to the markers.</string>
     <string name="track_waypoints">Track waypoints</string>
-    <string name="favourites_group">Favorites group</string>
-    <string name="add_group">Add group</string>
-    <string name="add_group_descr">You can add a group of favorites or track waypoints.</string>
+    <string name="favourites_group">Favorites category</string>
+    <string name="add_group">Add a group</string>
+    <string name="add_group_descr">You can import groups from favorites or track waypoints.</string>
     <string name="empty_state_markers_active">Create map markers!</string>
     <string name="empty_state_markers_active_desc">Long or short tap places, then tap the marker flag button.</string>
     <string name="empty_state_markers_groups">Import groups</string>
@@ -26,16 +26,16 @@
     <string name="empty_state_markers_history_desc">Markers marked as passed will appear on this screen.</string>
     <string name="shared_string_two">Two</string>
     <string name="shared_string_one">One</string>
-    <string name="show_guide_line_descr">Display guidelines from your position to the active marker locations.</string>
+    <string name="show_guide_line_descr">Display guide lines from your position to the active marker locations.</string>
     <string name="show_arrows_descr">Display one or two arrows indicating the direction to the active markers.</string>
     <string name="distance_indication_descr">Choose how to display the distance to active markers.</string>
     <string name="active_markers_descr">Choose how many direction indicators are displayed.</string>
-    <string name="digits_quantity">Digits quantity</string>
+    <string name="digits_quantity">Number of decimal digits</string>
     <string name="shared_string_right">Right</string>
     <string name="shared_string_left">Left</string>
     <string name="show_number_pad">Show number pad</string>
     <string name="shared_string_paste">Paste</string>
-    <string name="coordinate_input_accuracy_description">Automatically switch to the next field after entering %1$d digits after the decimal point.</string>
+    <string name="coordinate_input_accuracy_description">Automatically switch to the next field after entering %1$d decimal digits.</string>
     <string name="coordinate_input_accuracy">%1$d digits</string>
     <string name="go_to_next_field">Go to next field</string>
     <string name="rename_marker">Rename marker</string>
@@ -83,7 +83,7 @@
     <string name="marker_save_as_track">Save as track</string>
     <string name="move_to_history">Move to history</string>
     <string name="group_will_be_removed_after_restart">Group will be removed after restart</string>
-    <string name="show_guide_line">Show guide line</string>
+    <string name="show_guide_line">Show guide lines</string>
     <string name="show_arrows_on_the_map">Show arrows on the map</string>
     <string name="show_passed">Show passed</string>
     <string name="hide_passed">Hide passed</string>
@@ -297,7 +297,7 @@
 	\u2022 Other improvements and bug fixes\n\n
 	</string>
     <string name="release_2_8">
-	\u2022 Completely reworked map markers with guidelines and route planning\n\n
+	\u2022 Completely reworked map markers with guide lines and route planning\n\n
 	\u2022 Measure distance tool offering snap to road feature and saving points as track\n\n
 	\u2022 OsmAnd Live: bug fixes, fresh data on the server every 30 minutes, updates implemented into the navigation\n\n
 	</string>
