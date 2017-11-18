@@ -538,7 +538,7 @@
     <string name="system_locale">Системная</string>
     <string name="preferred_locale_descr">Выбор языка программы (перезапустите OsmAnd после изменения)</string>
     <string name="preferred_locale">Локализация</string>
-    <string name="shared_string_next">След.</string>
+    <string name="shared_string_next">Далее</string>
     <string name="shared_string_previous">Предыдущий</string>
     <string name="unit_of_length_descr">Единицы измерения длины и скорости</string>
     <string name="unit_of_length">Единицы измерения</string>
