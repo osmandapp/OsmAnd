@@ -1746,7 +1746,7 @@
     <string name="edit_group">Редактировать группу</string>
     <string name="plugin_install_needs_network">Вам необходимо интернет соединение для установки этого плагина.</string>
     <string name="shared_string_enable">Включить</string>
-    <string name="shared_string_disable">Выключить</string>
+    <string name="shared_string_disable">Отключить</string>
     <string name="get_plugin">Получить</string>
     <string name="plugin_ski_name">Лыжные карты</string>
     <string name="plugin_nautical_name">Морские карты</string>
@@ -2596,7 +2596,7 @@
     <string name="tap_on_map_to_hide_interface">Полноэкранный режим</string>
     <string name="mark_passed">Отметить пройденным</string>
     <string name="import_track_desc">Файл %1$s не содержит путевых точек, импортировать его как трек?</string>
-    <string name="add_track_to_markers_descr">Выбрать трек путевых точек, которые OsmAnd добавит в маркеры</string>
+    <string name="add_track_to_markers_descr">Выберите трек, чтобы добавить свои путевые точки к маркерам. (Отображаются только треки с путевыми точками).</string>
     <string name="track_waypoints">Трек путевых точек</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_right">Направо</string>
