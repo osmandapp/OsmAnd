@@ -2896,7 +2896,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="track_waypoints">Šliachavyja kropki</string>
     <string name="favourites_group">Hrupa ŭlubionych</string>
     <string name="add_group">Dadać hrupu</string>
-    <string name="add_group_descr">Vy možacie dadać hrupu ŭlubionych ci šlachavyja kropki.</string>
+    <string name="add_group_descr">Vy možacie impartavać hrupy z ulubionych ci šlachavych kropak.</string>
     <string name="empty_state_markers_active">Markiery na mapie!</string>
     <string name="empty_state_markers_active_desc">Adznačyć miesca na mapie dotykam.</string>
     <string name="empty_state_markers_groups">Impartavać hrupy</string>
