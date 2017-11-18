@@ -2733,7 +2733,7 @@
     <string name="quick_favorites_show_favorites_dialog">Show favorites dialog</string>
     <string name="quick_favorites_name_preset">Name preset</string>
     <string name="quick_action_add_marker_descr">Tapping the action button will add a map marker at the screen center location.</string>
-    <string name="quick_action_add_gpx_descr">Tapping the action button will add a GPX waypiont at the screen center location.</string>
+    <string name="quick_action_add_gpx_descr">Tapping the action button will add a GPX waypoint at the screen center location.</string>
     <string name="quick_action_take_audio_note_descr">Tapping the action button will add an audio note at the screen center location.</string>
     <string name="quick_action_take_video_note_descr">Tapping the action button will add a video note at the screen center location.</string>
     <string name="quick_action_take_photo_note_descr">Tapping the action button will add a photo note at the screen center location.</string>
