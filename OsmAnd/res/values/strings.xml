@@ -26,7 +26,7 @@
     <string name="empty_state_markers_history_desc">Markers marked as passed will appear on this screen.</string>
     <string name="shared_string_two">Two</string>
     <string name="shared_string_one">One</string>
-    <string name="show_guide_line_descr">Display guidelines from your position to the active marker locations.</string>
+    <string name="show_guide_line_descr">Display guide lines from your position to the active marker locations.</string>
     <string name="show_arrows_descr">Display one or two arrows indicating the direction to the active markers.</string>
     <string name="distance_indication_descr">Choose how to display the distance to active markers.</string>
     <string name="active_markers_descr">Choose how many direction indicators are displayed.</string>
@@ -297,7 +297,7 @@
 	\u2022 Other improvements and bug fixes\n\n
 	</string>
     <string name="release_2_8">
-	\u2022 Completely reworked map markers with guidelines and route planning\n\n
+	\u2022 Completely reworked map markers with guide lines and route planning\n\n
 	\u2022 Measure distance tool offering snap to road feature and saving points as track\n\n
 	\u2022 OsmAnd Live: bug fixes, fresh data on the server every 30 minutes, updates implemented into the navigation\n\n
 	</string>
