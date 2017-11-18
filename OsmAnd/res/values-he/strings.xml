@@ -931,7 +931,7 @@
 	
 	<string name="poi_edit_title">עריכת נ״ע</string>
 	<string name="poi_create_title">יצירת נ״ע</string>
-	<string name="poi_error_poi_not_found">לא ניתן למצוא את המפרק או שנותן השירות מפוזר על פני מספר מפרקים</string>
+	<string name="poi_error_poi_not_found">לא ניתן למצוא את המפרק או שהמתחם מורכב ממספר מפרקים, מצב שלא נתמך עדיין.</string>
 	<string name="poi_remove_confirm_template">האם למחוק את {0} (להזין הערה)?</string>
 	<string name="poi_remove_title">מחיקת נ״ע</string>
 	<string name="shared_string_delete">מחיקה</string>

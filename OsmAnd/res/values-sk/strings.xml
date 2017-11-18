@@ -2950,13 +2950,13 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="rename_marker">Premenovať značku</string>
     <string name="appearance_on_the_map">Vzhľad na mape</string>
     <string name="add_track_to_markers_descr">Zvoľte body stopy, z ktorých má OsmAnd vytvoriť značky</string>
-    <string name="add_favourites_group_to_markers_descr">Zvoľte skupinu obľúbených bodov, z ktorých majú byť vytvorené značky.</string>
+    <string name="add_favourites_group_to_markers_descr">Zvoľte skupinu obľúbených bodov, z ktorých majú byť vytvorené značky. Zobrazuj[ sa iba stopy s waypointami</string>
     <string name="track_waypoints">Body stopy</string>
     <string name="favourites_group">Skupina obľúbených bodov</string>
     <string name="add_group">Pridať skupinu</string>
     <string name="add_group_descr">Môžete pridať skupinu obľúbených bodov alebo bodov trasy.</string>
-    <string name="empty_state_markers_active">Značky na mape!</string>
-    <string name="empty_state_markers_active_desc">Stlačením označte miesta na mape.</string>
+    <string name="empty_state_markers_active">Vytvoriť mapové značky!</string>
+    <string name="empty_state_markers_active_desc">Stlačením označte miesta na mape, potom stlačte tlačidlo s vlajkou značky.</string>
     <string name="empty_state_markers_groups">Importovať skupiny</string>
     <string name="empty_state_markers_groups_desc">Môžete importovať skupiny obľúbených bodov alebo body stopy ako značky.</string>
     <string name="empty_state_markers_history_desc">Značky označené ako prejdené sa zobrazia na tejto obrazovke.</string>
@@ -2967,4 +2967,5 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="distance_indication_descr">Zvoľte ako chcete zobraziť vzdialenosť k aktívnym značkám.</string>
     <string name="active_markers_descr">Zvoľte koľko ukazovateľov smeru chcete zobraziť.</string>
     <string name="shared_string_more_without_dots">Viac</string>
+    <string name="looking_for_tracks_with_waypoints">Hľadajú sa stopy s waypointami</string>
     </resources>

@@ -2418,8 +2418,8 @@
 	<string name="poi_seamark_dyke">防波堤</string>
 	<string name="poi_historic_period_villager">"歷史時期：村民 (新時代 I, II, 西元前 1580 年  – 西元 133 年)"</string>
 	<string name="poi_historic_period_urban">歷史時期：城市（新時代 III，西元 133 年 - 西元 374 年）</string>
-	<string name="poi_fuel_type">類型</string>
-	<string name="poi_fuel_avia_type">類型</string>
+	<string name="poi_fuel_type">燃料類型</string>
+	<string name="poi_fuel_avia_type">燃料類型 (avia)</string>
 	<string name="poi_payment_type">支付型式</string>
 	<string name="poi_payment_fuel_type">燃料卡</string>
 	<string name="poi_additional_type">附加</string>
@@ -3530,4 +3530,151 @@
 <string name="poi_operational_status">操作狀態</string>
 	<string name="poi_water_supply_type">供水類型</string>
 	<string name="poi_water_purification">水淨化</string>
-	</resources>
+	<string name="poi_water_place_access">水體通行</string>
+
+<string name="poi_gorge">峽谷</string>
+	<string name="poi_couloir">走廊</string>
+	<string name="poi_mountain_area">山區</string>
+
+	<string name="poi_surface_clay">粘土</string>
+	<string name="poi_surface_tartan">格子花呢</string>
+	<string name="poi_surface_artificial_turf">人工草坪</string>
+	<string name="poi_surface_decoturf">DecoTurf</string>
+	<string name="poi_surface_metal_grid">金屬網格</string>
+
+	<string name="poi_location_underground">位置：地下</string>
+	<string name="poi_location_underwater">位置：水下</string>
+	<string name="poi_location_overground">位置：地上</string>
+	<string name="poi_location_overhead">位置：高架</string>
+	<string name="poi_location_roof">位置：屋頂</string>
+	<string name="poi_location_rooftop">位置：屋頂上</string>
+	<string name="poi_location_outdoor">位置：戶外</string>
+	<string name="poi_location_indoor">位置：室內</string>
+	<string name="poi_location_platform">位置：平台</string>
+	<string name="poi_location_kiosk">位置：涼亭</string>
+	<string name="poi_location_bridge">位置：橋樑</string>
+	<string name="poi_location_wall">位置：牆</string>
+	<string name="poi_location_entrance">位置：入口</string>
+
+	<string name="poi_visibility_house">能見度：房子</string>
+	<string name="poi_visibility_street">能見度：街道</string>
+	<string name="poi_visibility_area">能見度：區域</string>
+
+	<string name="poi_operational_status_open">開放</string>
+	<string name="poi_operational_status_closed">關閉</string>
+	<string name="poi_operational_status_restricted">受限制</string>
+	<string name="poi_operational_status_broken">毀損</string>
+	<string name="poi_operational_status_needs_maintenance">需要維修</string>
+
+	<string name="poi_water_place_durability_durable">水體耐用度：耐用</string>
+	<string name="poi_water_place_durability_emergency">水體耐用度：緊急</string>
+
+	<string name="poi_water_purification_none">無</string>
+	<string name="poi_water_purification_chlorine">氯</string>
+	<string name="poi_water_purification_reverse_osmosis">反滲透</string>
+	<string name="poi_water_purification_aquatabs">Aquatabs</string>
+
+	<string name="poi_water_supply_water_well">水井</string>
+	<string name="poi_water_supply_pipeline">水管</string>
+	<string name="poi_water_supply_running_water">自來水</string>
+	<string name="poi_water_supply_pump">泵</string>
+	<string name="poi_water_supply_borehole">炮眼</string>
+	<string name="poi_water_supply_water_trucking">運水車</string>
+	<string name="poi_water_supply_water_tank">水塔</string>
+	<string name="poi_water_supply_bottled_water">瓶裝水</string>
+
+	<string name="poi_water_place_access_community">社區</string>
+	<string name="poi_water_place_access_family">家庭</string>
+	<string name="poi_water_place_access_multifamilies">多個家庭</string>
+
+	<string name="poi_socket_cee_blue">插座：CEE 藍色</string>
+	<string name="poi_socket_cee_blue_current">插座：CEE 藍色：電流</string>
+	<string name="poi_socket_cee_blue_output">插座：CEE 藍色：輸出</string>
+	<string name="poi_socket_cee_red_16a">插座：CEE 紅色 16A</string>
+	<string name="poi_socket_cee_red_16a_current">插座：CEE 紅色：電流</string>
+	<string name="poi_socket_cee_red_16a_output">插座：CEE 紅色 16A：輸出</string>
+	<string name="poi_socket_cee_red_32a">插座：CEE 紅色 32A</string>
+	<string name="poi_socket_cee_red_32a_current">插座：CEE 紅色 32A：電流</string>
+	<string name="poi_socket_cee_red_32a_output">插座：CEE 紅色 32A：輸出</string>
+	<string name="poi_socket_cee_red_64a">插座：CEE 紅色 64A</string>
+	<string name="poi_socket_cee_red_64a_current">插座：CEE 紅色 64A：電流</string>
+	<string name="poi_socket_cee_red_64a_output">插座：CEE 紅色 64A：輸出</string>
+	<string name="poi_socket_cee_red_125a">插座：CEE 紅色 125A</string>
+	<string name="poi_socket_cee_red_125a_current">插座：CEE 紅色 125A：電流</string>
+	<string name="poi_socket_cee_red_125a_output">插座：CEE 紅色 125A：輸出</string>
+	<string name="poi_socket_type1">插座：種類 1</string>
+	<string name="poi_socket_type1_current">插座：種類 1：電流</string>
+	<string name="poi_socket_type1_output">插座：種類 1：輸出</string>
+	<string name="poi_socket_type1_combo">插座：種類 1 二合一</string>
+	<string name="poi_socket_type1_combo_current">插座：種類 1 二合一：電流</string>
+	<string name="poi_socket_type1_combo_output">插座：種類 1 二合一：輸出</string>
+	<string name="poi_socket_type2">插座：種類 2</string>
+	<string name="poi_socket_type2_current">插座：種類 2：電流</string>
+	<string name="poi_socket_type2_output">插座：種類 2：輸出</string>
+	<string name="poi_socket_type2_combo">插座：種類 2 二合一</string>
+	<string name="poi_socket_type2_combo_current">插座：種類 2 二合一：電流</string>
+	<string name="poi_socket_type2_combo_output">插座：種類 2 二合一：輸出</string>
+	<string name="poi_socket_type3">插座：種類 3</string>
+	<string name="poi_socket_type3_current">插座：種類 3：電流</string>
+	<string name="poi_socket_type3_output">插座：種類 3：輸出</string>
+	<string name="poi_socket_chademo">插座：CHAdeMO</string>
+	<string name="poi_socket_chademo_current">插座：CHAdeMO：電流</string>
+	<string name="poi_socket_chademo_output">插座：CHAdeMO：輸出</string>
+	<string name="poi_socket_tesla_standard">插座：特斯拉標準</string>
+	<string name="poi_socket_tesla_standard_current">插座：特斯拉標準：電流</string>
+	<string name="poi_socket_tesla_standard_output">插座：特斯拉標準：輸出</string>
+	<string name="poi_socket_tesla_supercharger">插座：特斯拉超級充電器</string>
+	<string name="poi_socket_tesla_supercharger_current">插座：特斯拉超級充電器：電流</string>
+	<string name="poi_socket_tesla_supercharger_output">插座：特斯拉超級充電器：輸出</string>
+	<string name="poi_socket_tesla_roadster">插座：特斯拉 Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">插座：特斯拉 Roadster：電流</string>
+	<string name="poi_socket_tesla_roadster_output">插座：特斯拉 Roadster：輸出</string>
+	<string name="poi_socket_nema_5_15">插座：NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">插座：NEMA 5-15R：電流</string>
+	<string name="poi_socket_nema_5_15_output">插座：NEMA 5-15R：輸出</string>
+	<string name="poi_socket_nema_5_20">插座：NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">插座：NEMA 5-20：電流</string>
+	<string name="poi_socket_nema_5_20_output">插座：NEMA 5-20：輸出</string>
+	<string name="poi_socket_nema_14_30">插座：NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">插座：NEMA 14-30：電流</string>
+	<string name="poi_socket_nema_14_30_output">插座：NEMA 14-30：輸出</string>
+	<string name="poi_socket_nema_14_50">插座：NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">NEMA 14-50：電流</string>
+	<string name="poi_socket_nema_14_50_output">NEMA 14-50：輸出</string>
+	<string name="poi_socket_schuko">插座：Schuko</string>
+	<string name="poi_socket_schuko_current">插座：Schuko：電流</string>
+	<string name="poi_socket_schuko_output">插座：Schuko：輸出</string>
+	<string name="poi_socket_bs1363">插座：BS 1363</string>
+	<string name="poi_socket_bs1363_current">插座：BS 1363：電流</string>
+	<string name="poi_socket_bs1363_output">插座：BS 1363：輸出</string>
+	<string name="poi_socket_as3112">插座：AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">插座：AS/NZS 3112：電流</string>
+	<string name="poi_socket_as3112_output">插座：AS/NZS 3112：輸出</string>
+
+	<string name="poi_car_yes">汽車：是</string>
+	<string name="poi_car_no">汽車：否</string>
+	<string name="poi_bicycle_yes">單車：是</string>
+	<string name="poi_bicycle_no">單車：否</string>
+	<string name="poi_scooter_yes">摩托車：是</string>
+	<string name="poi_scooter_no">摩托車：否</string>
+	<string name="poi_truck_yes">貨車：是</string>
+	<string name="poi_truck_no">貨車：否</string>
+
+	<string name="poi_parking_fee_yes">停車費用：是</string>
+	<string name="poi_parking_fee_no">停車費用：否</string>
+	<string name="poi_parking_fee">停車費用</string>
+
+	<string name="poi_amperage">安培</string>
+	<string name="poi_charging_station_output">充電站輸出</string>
+
+	<string name="poi_map_type_topo">地圖類型：拓撲</string>
+	<string name="poi_map_type_street">地圖類型：街道</string>
+	<string name="poi_map_type_scheme">地圖類型：大略</string>
+	<string name="poi_map_type_toposcope">地圖類型：高處圖</string>
+	<string name="poi_map_size_site">地圖大小：地點</string>
+	<string name="poi_map_size_city">地圖大小：城市</string>
+	<string name="poi_map_size_region">地圖大小：區域</string>
+
+	<string name="poi_charging_station_filter">充電站</string>
+
+</resources>

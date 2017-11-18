@@ -3670,4 +3670,6 @@
 	<string name="poi_map_size_city">Rozmiar mapy: miasto</string>
 	<string name="poi_map_size_region">Rozmiar mapy: region</string>
 
+<string name="poi_charging_station_filter">Stacja ładowania</string>
+
 </resources>

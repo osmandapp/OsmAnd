@@ -5,6 +5,8 @@
 		This file is manually maintained in res/values-en-rGB and should ONLY contain strings where a different spelling should be used for English as used in the United Kingdom
 	-->
 <!--  categories -->
+	<string name="poi_books">Bookshop</string>
+	<string name="poi_soccer">Football</string>
 	<string name="poi_shop">Shop</string>
 	<string name="poi_filling_station">Filling station</string>
 	<string name="poi_trash_disposal">Waste disposal</string>
