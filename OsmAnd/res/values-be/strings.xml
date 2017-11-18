@@ -2955,8 +2955,8 @@
     <string name="favourites_group">Група ўлюбёных</string>
     <string name="add_group">Дадаць групу</string>
     <string name="add_group_descr">Вы можаце дадаць групу ўлюбёных ці шляхавыя кропкі.</string>
-    <string name="empty_state_markers_active">Маркеры на мапе!</string>
-    <string name="empty_state_markers_active_desc">Адзначыць месца на мапе дотыкам.</string>
+    <string name="empty_state_markers_active">Стварыце маркеры мапы!</string>
+    <string name="empty_state_markers_active_desc">Дакраніцеся месца і потым націсніце кнопку маркера.</string>
     <string name="empty_state_markers_groups">Імпартаваць групы</string>
     <string name="empty_state_markers_groups_desc">Вы можаце імпартаваць групы улюбёных ці шляхавыя кропкі як маркеры.</string>
     <string name="empty_state_markers_history_desc">Маркеры, пазначаныя як пройдзенныя, з\'явяцца на гэтым экране.</string>
