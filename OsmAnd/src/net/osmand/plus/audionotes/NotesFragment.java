@@ -30,7 +30,7 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.NotesSortByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
@@ -178,37 +178,37 @@ public class NotesFragment extends OsmAndListFragment {
 	private List<Object> createItemsList() {
 		List<Recording> recs = new LinkedList<>(plugin.getAllRecordings());
 		List<Object> res = new LinkedList<>();
-		OsmandSettings settings = getMyApplication().getSettings();
-		if (settings.NOTES_SORT_BY_MODE.get().isByDate()) {
-			res.add(NotesAdapter.TYPE_DATE_HEADER);
-			res.addAll(sortItemsByDateDescending(recs));
-		} else if (settings.NOTES_SORT_BY_MODE.get().isByType()) {
-			List<Recording> audios = new LinkedList<>();
-			List<Recording> photos = new LinkedList<>();
-			List<Recording> videos = new LinkedList<>();
-			for (Recording rec : recs) {
-				if (rec.isAudio()) {
-					audios.add(rec);
-				} else if (rec.isPhoto()) {
-					photos.add(rec);
-				} else {
-					videos.add(rec);
+		if (!recs.isEmpty()) {
+			NotesSortByMode sortByMode = getMyApplication().getSettings().NOTES_SORT_BY_MODE.get();
+			if (sortByMode.isByDate()) {
+				res.add(NotesAdapter.TYPE_DATE_HEADER);
+				res.addAll(sortItemsByDateDescending(recs));
+			} else if (sortByMode.isByType()) {
+				List<Recording> audios = new LinkedList<>();
+				List<Recording> photos = new LinkedList<>();
+				List<Recording> videos = new LinkedList<>();
+				for (Recording rec : recs) {
+					if (rec.isAudio()) {
+						audios.add(rec);
+					} else if (rec.isPhoto()) {
+						photos.add(rec);
+					} else {
+						videos.add(rec);
+					}
 				}
-			}
-			if (!audios.isEmpty()) {
-				res.add(NotesAdapter.TYPE_AUDIO_HEADER);
-				res.addAll(audios);
-			}
-			if (!photos.isEmpty()) {
-				res.add(NotesAdapter.TYPE_PHOTO_HEADER);
-				res.addAll(photos);
-			}
-			if (!videos.isEmpty()) {
-				res.add(NotesAdapter.TYPE_VIDEO_HEADER);
-				res.addAll(videos);
+				addToResIfNotEmpty(res, audios, NotesAdapter.TYPE_AUDIO_HEADER);
+				addToResIfNotEmpty(res, photos, NotesAdapter.TYPE_PHOTO_HEADER);
+				addToResIfNotEmpty(res, videos, NotesAdapter.TYPE_VIDEO_HEADER);
 			}
 		}
 		return res;
+	}
+
+	private void addToResIfNotEmpty(List<Object> res, List<Recording> recs, int header) {
+		if (!recs.isEmpty()) {
+			res.add(header);
+			res.addAll(recs);
+		}
 	}
 
 	private NotesAdapterListener createAdapterListener() {
