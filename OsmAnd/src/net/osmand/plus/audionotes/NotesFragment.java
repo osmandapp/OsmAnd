@@ -18,9 +18,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -69,6 +71,7 @@ public class NotesFragment extends OsmAndListFragment {
 	private Set<Recording> selected = new HashSet<>();
 
 	private View footerView;
+	private View emptyView;
 
 	private boolean selectionMode;
 
@@ -92,6 +95,12 @@ public class NotesFragment extends OsmAndListFragment {
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
+		ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
+		emptyStub.setLayoutResource(R.layout.empty_state_av_notes);
+		emptyView = emptyStub.inflate();
+		int icRes = getMyApplication().getSettings().isLightContent()
+				? R.drawable.ic_empty_state_av_notes_day : R.drawable.ic_empty_state_av_notes_night;
+		((ImageView) emptyView.findViewById(R.id.empty_state_image_view)).setImageResource(icRes);
 
 		return view;
 	}
@@ -109,6 +118,7 @@ public class NotesFragment extends OsmAndListFragment {
 		List<Object> items = createItemsList();
 		ListView listView = getListView();
 		listView.setDivider(null);
+		listView.setEmptyView(emptyView);
 		if (items.size() > 0 && footerView == null) {
 			footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false);
 			listView.addFooterView(footerView);
