@@ -30,12 +30,12 @@
     <string name="show_arrows_descr">Display one or two arrows indicating the direction to the active markers.</string>
     <string name="distance_indication_descr">Choose how to display the distance to active markers.</string>
     <string name="active_markers_descr">Choose how many direction indicators are displayed.</string>
-    <string name="digits_quantity">Digits quantity</string>
+    <string name="digits_quantity">Number of decimal digits</string>
     <string name="shared_string_right">Right</string>
     <string name="shared_string_left">Left</string>
     <string name="show_number_pad">Show number pad</string>
     <string name="shared_string_paste">Paste</string>
-    <string name="coordinate_input_accuracy_description">Automatically switch to the next field after entering %1$d digits after the decimal point.</string>
+    <string name="coordinate_input_accuracy_description">Automatically switch to the next field after entering %1$d decimal digits.</string>
     <string name="coordinate_input_accuracy">%1$d digits</string>
     <string name="go_to_next_field">Go to next field</string>
     <string name="rename_marker">Rename marker</string>
