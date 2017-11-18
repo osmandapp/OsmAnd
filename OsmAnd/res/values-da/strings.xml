@@ -2962,13 +2962,13 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="favourites_group">Favoritgruppe</string>
     <string name="add_group">Tilføj gruppe</string>
     <string name="add_group_descr">Tilføjer en gruppe af favoritter eller et spor af rutepunkter.</string>
-    <string name="empty_state_markers_active">Markører på kortet!</string>
-    <string name="empty_state_markers_active_desc">Marker steder på kortet med et tryk.</string>
+    <string name="empty_state_markers_active">Opret kortmarkører!</string>
+    <string name="empty_state_markers_active_desc">Lange eller korte tryk steder, og tryk derefter på markør flag knappen.</string>
     <string name="empty_state_markers_groups">Importer grupper</string>
     <string name="empty_state_markers_groups_desc">Importer favoritgrupper eller et spor af rutepunkter som markører.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Markører, der er markeret som passeret vises på denne skærm.</string>
     <string name="appearance_on_the_map">Udseende på kortet</string>
-    <string name="looking_for_tracks_with_waypoints">Leder efter spor med rutepunkter</string>
+    <string name="looking_for_tracks_with_waypoints">Find spor med rutepunkter</string>
     <string name="shared_string_more_without_dots">Mere</string>
     </resources>
