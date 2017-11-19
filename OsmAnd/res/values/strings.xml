@@ -82,7 +82,7 @@
     <string name="marker_save_as_track_descr">Export your markers to a file you can specify here:</string>
     <string name="marker_save_as_track">Save as track</string>
     <string name="move_to_history">Move to history</string>
-    <string name="group_will_be_removed_after_restart">Group will be removed after restart</string>
+    <string name="group_will_be_removed_after_restart">Group will be removed after the next app restart.</string>
     <string name="show_guide_line">Show guide lines</string>
     <string name="show_arrows_on_the_map">Show arrows on the map</string>
     <string name="show_passed">Show passed</string>
