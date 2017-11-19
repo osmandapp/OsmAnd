@@ -2929,4 +2929,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="coordinate_input_accuracy_description">Przechodzi automatycznie do następnego pola po wprowadzeniu %1$d cyfr za przecinkiem.</string>
     <string name="coordinate_input_accuracy">%1$d cyfr</string>
     <string name="go_to_next_field">Przechodzenie do następnego pola</string>
+    <string name="tap_on_map_to_hide_interface">Tryb pełnego ekranu</string>
     </resources>
