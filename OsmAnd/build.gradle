@@ -65,6 +65,17 @@ android {
 		javaMaxHeapSize "4g"
 	}
 
+    packagingOptions {
+        exclude 'com/ibm/icu/impl/data/icudt50b/brkitr/**'
+        exclude 'com/ibm/icu/impl/data/icudt50b/coll/**'
+        exclude 'com/ibm/icu/impl/data/icudt50b/curr/**'
+        exclude 'com/ibm/icu/impl/data/icudt50b/lang/**'
+        exclude 'com/ibm/icu/impl/data/icudt50b/rbnf/**'
+        exclude 'com/ibm/icu/impl/data/icudt50b/region/**'
+        exclude 'com/ibm/icu/impl/data/icudt50b/translit/**'
+        exclude 'com/ibm/icu/impl/data/icudt50b/zone/**'
+    }
+
 	sourceSets {
 		main {
 			manifest.srcFile "AndroidManifest.xml"
