@@ -55,7 +55,7 @@
     <string name="fav_export_confirmation">Ya existe un archivo anterior con favoritos exportados. ¿Quiere sustituirlo?</string>
     <string name="profile_settings">Ajustes específicos por perfil</string>
     <string name="settings_preset">Perfil predeterminado</string>
-    <string name="settings_preset_descr">Ajustes de la vista y navegación del mapa son recordados por perfil usado. Establezca su perfil predeterminado aquí.</string>
+    <string name="settings_preset_descr">Los ajustes de vista del mapa y de navegación se recuerdan por perfil de uso. Establece tu perfil predeterminado aquí.</string>
     <string name="routing_settings">Navegación</string>
     <string name="routing_settings_descr">Opciones específicas para la navegación.</string>
     <string name="global_settings">Ajustes globales</string>
@@ -333,9 +333,9 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="poi_context_menu_modify">Modificar PDI</string>
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">A la brújula</string>
-    <string name="rotate_map_bearing_opt">En dirección al movimiento</string>
-    <string name="rotate_map_none_opt">No rotar (norte arriba)</string>
-    <string name="rotate_map_to_bearing_descr">Selecciona la alineación del mapa.</string>
+    <string name="rotate_map_bearing_opt">A la dirección del movimiento</string>
+    <string name="rotate_map_none_opt">No rotar (norte está arriba)</string>
+    <string name="rotate_map_to_bearing_descr">Selecciona la alineación de la pantalla del mapa.</string>
     <string name="rotate_map_to_bearing">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
     <string name="fav_imported_sucessfully">Favoritos importados correctamente</string>
@@ -2311,7 +2311,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="quick_action_add_marker_descr">Pulsar el botón de acción agregará un marcador de mapa en la ubicación del centro de la pantalla.</string>
-    <string name="quick_action_add_gpx_descr">Pulsar el botón de acción agregará un punto intermedio GPX en la ubicación del centro de la pantalla.</string>
+    <string name="quick_action_add_gpx_descr">"Pulsar el botón de acción agregará un punto  de referencia GPX en la ubicación del centro de la pantalla."</string>
     <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción agregará una nota de audio en la ubicación del centro de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Pulsar el botón de acción agregará una nota de video en la ubicación del centro de la pantalla.</string>
     <string name="quick_action_take_photo_note_descr">Pulsar el botón de acción agregará una nota de la foto en el lugar del centro de la pantalla.</string>
@@ -2693,7 +2693,7 @@ Por favor proporciona un código completo</string>
     <string name="this_year">Este año</string>
     <string name="widget">Control</string>
     <string name="top_bar">Barra superior</string>
-    <string name="show_guide_line">Mostrar las directrices</string>
+    <string name="show_guide_line">Mostrar indicaciones</string>
     <string name="show_arrows_on_the_map">Mostrar flechas en el mapa</string>
     <string name="show_passed">Mostrar descartados</string>
     <string name="hide_passed">Ocultar descartados</string>
@@ -2733,13 +2733,13 @@ Por favor proporciona un código completo</string>
     <string name="route_is_calculated">Ruta calculada</string>
     <string name="round_trip">Ruta circular</string>
     <string name="plan_route_no_markers_toast">Debes añadir al menos un marcador para usar esta función.</string>
-    <string name="release_2_8">• Marcadores del mapa totalmente rediseñados con directrices y planificación de rutas 
+    <string name="release_2_8">"• Marcadores del mapa totalmente rediseñados con  indicaciones y planificación de rutas 
 \n 
 \n • La herramienta de medición de distancias permite el ajuste al camino y guardar puntos como una traza 
 \n 
-\n • OSM Live: corrección de errores, nuevos datos en el servidor cada 30 minutos, actualizaciones implementadas en la navegación 
-\n 
-\n</string>
+\n • OSM Live: corrección de errores, nuevos datos en el servidor cada 30 minutos, actualizaciones implementadas en la navegación
+\n
+\n"</string>
     <string name="rendering_value_darkyellow_name">Amarillo oscuro</string>
     <string name="wrong_input">Entrada incorrecta</string>
     <string name="enter_new_name">Ingresar nombre nuevo</string>
@@ -2754,12 +2754,12 @@ Por favor proporciona un código completo</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
     <string name="import_as_favorites">Importar como Favoritos</string>
     <string name="import_file">Importar archivo</string>
-	<string name="digits_quantity">Cantidad de dígitos</string>
+	<string name="digits_quantity">Número de dígitos decimales</string>
     <string name="shared_string_right">Derecha</string>
     <string name="shared_string_left">Izquierda</string>
     <string name="show_number_pad">Mostrar teclado numérico</string>
     <string name="shared_string_paste">Pegar</string>
-    <string name="coordinate_input_accuracy_description">Cambia automáticamente al campo siguiente después de escribir %1$d dígitos tras el punto decimal.</string>
+    <string name="coordinate_input_accuracy_description">Cambia automáticamente al campo siguiente después de escribir %1$d dígitos decimales.</string>
     <string name="coordinate_input_accuracy">%1$d dígitos</string>
     <string name="go_to_next_field">Ir al campo siguiente</string>
     <string name="rename_marker">Renombrar marcador</string>
@@ -2769,19 +2769,19 @@ Por favor proporciona un código completo</string>
     <string name="track_waypoints">Puntos de referencia de traza</string>
     <string name="favourites_group">Grupo de favoritos</string>
     <string name="add_group">Añadir grupo</string>
-    <string name="add_group_descr">Puedes añadir un grupo de favoritos o puntos de referencia de traza.</string>
-    <string name="empty_state_markers_active">¡Marcadores del mapa!</string>
-    <string name="empty_state_markers_active_desc">Marca lugares en el mapa con una pulsación.</string>
+    <string name="add_group_descr">Puedes importar grupos desde favoritos o puntos de referencia de traza.</string>
+    <string name="empty_state_markers_active">¡Crea marcadores de mapa!</string>
+    <string name="empty_state_markers_active_desc">Pulsa en lugares en el mapa y luego pulsa en el botón de bandera del marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
     <string name="empty_state_markers_groups_desc">Puedes importar grupos de favoritos o puntos de referencia de traza como marcadores.</string>
     <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Uno</string>
-    <string name="show_guide_line_descr">Muestra indicaciones desde tu ubicación hasta la de los marcadores activos.</string>
+    <string name="show_guide_line_descr">Muestra indicaciones desde tu ubicación hasta las posiciones de los marcadores activos.</string>
     <string name="show_arrows_descr">Muestra una o dos flechas indicando la dirección hacia los marcadores activos.</string>
     <string name="distance_indication_descr">Elige cómo mostrar la distancia hasta los marcadores activos.</string>
     <string name="active_markers_descr">Elige cuántos indicadores de dirección se muestran.</string>
     <string name="shared_string_more_without_dots">Más</string>
-    <string name="empty_state_markers_history"/>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de referencia</string>
     </resources>
