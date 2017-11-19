@@ -2294,7 +2294,7 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="quick_favorites_show_favorites_dialog">Mostra el diàleg de preferides</string>
     <string name="quick_favorites_name_preset">Configuració de nom</string>
     <string name="quick_action_add_marker_descr">Si premeu el botó de l\'acció s\'afegirà un marcador a la posició del centre de la pantalla.</string>
-    <string name="quick_action_add_gpx_descr">Si premeu el botó de l\'acció s\'afegirà una fita de GPX a la posició del centre de la pantalla.</string>
+    <string name="quick_action_add_gpx_descr">Prement el botó de l\'acció s\'afegirà, al centre de la pantalla, una fita GPX.</string>
     <string name="quick_action_take_audio_note_descr">Si premeu el botó de l\'acció s\'afegirà una nota d\'àudio a la posició del centre de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">"Si premeu el botó de l\'acció  s\'afegirà una nota de vídeo a la posició del centre de la pantalla."</string>
     <string name="quick_action_take_photo_note_descr">Si premeu el botó de l\'acció s\'afegirà una nota fotogràfica a la posició del centre de la pantalla.</string>
@@ -2653,7 +2653,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="marker_save_as_track">Desa com una traça</string>
     <string name="move_to_history">Mou a l\'historial</string>
     <string name="plan_route">Planifica la ruta</string>
-    <string name="group_will_be_removed_after_restart">Ss\'esborrarà el grup després de reiniciar</string>
+    <string name="group_will_be_removed_after_restart">S\'esborrarà el grup un cop es reiniciï l\'aplicació.</string>
     <string name="shared_string_markers">Marcadors</string>
     <string name="coordinates_format">Format de coordenades</string>
     <string name="use_system_keyboard">Utilitza el teclat del sistema</string>
