@@ -2898,7 +2898,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="add_group">Dadać hrupu</string>
     <string name="add_group_descr">Vy možacie impartavać hrupy z ulubionych ci šlachavych kropak.</string>
     <string name="empty_state_markers_active">Stvarycie markiery mapy!</string>
-    <string name="empty_state_markers_active_desc">Adznačyć miesca na mapie dotykam.</string>
+    <string name="empty_state_markers_active_desc">Dakraniciesia miesca i potym nacisnicie knopku markiera.</string>
     <string name="empty_state_markers_groups">Impartavać hrupy</string>
     <string name="empty_state_markers_groups_desc">Vy možacie impartavać hrupy ulubionych ci šlachavyja kropki jak markiery.</string>
     <string name="empty_state_markers_history_desc">Markiery, paznačanyja jak projdziennyja, z\'javiacca na hetym ekranie.</string>
