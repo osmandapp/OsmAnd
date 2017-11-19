@@ -2807,7 +2807,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="marker_save_as_track_descr">Esporta sos marcadores tuos in unu documentu chi podes dislindare inoghe:</string>
     <string name="marker_save_as_track">Sarva comente rasta</string>
     <string name="move_to_history">Pone in sa cronologia</string>
-    <string name="group_will_be_removed_after_restart">Su grupu at a èssere iscantzelladu a pustis de s\'allughìngiu imbeniente</string>
+    <string name="group_will_be_removed_after_restart">Su grupu at a èssere iscantzelladu a pustis de s\'allughìngiu imbeniente de s\'aplicatzione.</string>
     <string name="osn_modify_dialog_error">B\'est istadu un\'errore: sa nota no est istada modificada</string>
     <string name="osn_modify_dialog_title">Modìfica sa nota</string>
     <string name="context_menu_item_modify_note">Modìfica sa nota OSM</string>
