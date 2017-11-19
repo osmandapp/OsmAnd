@@ -2581,6 +2581,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="coordinate_input_accuracy">%1$d sifre</string>
     <string name="go_to_next_field">Gå til neste felt</string>
     <string name="rename_marker">Gi nytt navn til markør</string>
-    <string name="empty_state_osm_edits_descr">Opprett eller endre OSM-interessepunkter, åpning eller kommentering av OSM-notiser, og bidrag av innspilte GPX-filer.</string>
+    <string name="empty_state_osm_edits_descr">Opprett eller endre OSM-interessepunkter, åpning eller kommentering av OSM-notiser, og bidrag av opptegnede GPX-filer.</string>
     <string name="shared_string_deleted">Slettet</string>
+    <string name="shared_string_edited">Redigert</string>
     </resources>
