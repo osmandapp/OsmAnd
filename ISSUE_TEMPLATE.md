@@ -1,6 +1,6 @@
 Before entering an issue, please read the information below.
 
-```GitHub is a main development tool for developers. There are hundreds requests a month and there are only few developers. So by opening an issue, please know that your issue will be sent out to all developers and please be ready that it could be closed without explanation or with a brief message. Comments on the closed issues are also sent to all developers, so you will definitely will be heard, but there is no guarantee that somebody from developers will pick up the issue to work on it.```
+```GitHub is a main development tool for developers. There are hundreds requests a month and there are only few developers. So by opening an issue, please know that your issue will be sent out to all developers and acknowledge that it could be closed without explanation or with a brief message. Comments on the closed issues are also sent to all developers, so you will definitely will be heard. However, there is no guarantee that a developer will pick up the issue to work on it.```
 
 In case you are not sure to open issue or not, please send your request to support support@osmand.net. For **general questions** about OsmAnd, please use the [Google group](https://groups.google.com/forum/#!forum/osmand).
 
