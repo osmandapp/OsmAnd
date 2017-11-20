@@ -2911,7 +2911,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="digits_quantity">Kolkaść dziesiatkovych ličbaŭ</string>
     <string name="show_number_pad">Pakazać ličbavuju paneĺ</string>
     <string name="shared_string_paste">Ustavić</string>
-    <string name="coordinate_input_accuracy_description">Aŭtamatyčna pieraklučycca ŭ nastupnaje pole paśla ŭvodu %1$ dziesiatkovych ličbaŭ.</string>
+    <string name="coordinate_input_accuracy_description">Aŭtamatyčna pieraklučycca ŭ nastupnaje pole paśla ŭvodu %1$d dziesiatkovych ličbaŭ.</string>
     <string name="coordinate_input_accuracy">%1$d ličbaŭ</string>
     <string name="go_to_next_field">Parajsci ŭ nastupnaje polie</string>
     <string name="rename_marker">Pierajmienavać markier</string>
