@@ -1429,7 +1429,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="map_widget_plain_time">Orario attuale</string>
     <string name="save_as_favorites_points">Salva come gruppo di preferiti</string>
     <string name="select_destination_and_intermediate_points">Scegli le destinazioni</string>
-    <string name="layer_amenity_label">Sovrapposizione etichette PDI</string>
+    <string name="layer_amenity_label">Visualizza etichette PDI</string>
     <string name="show_zoom_buttons_navigation">Mostra i pulsanti dello zoom</string>
     <string name="show_zoom_buttons_navigation_descr">Mostra i pulsanti dello zoom durante la navigazione.</string>
 
@@ -2599,24 +2599,41 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="auto_split_recording_title">Divisione automatica delle registrazioni dopo un periodo</string>
 	<string name="auto_split_recording_descr">Inizia un nuovo segmento dopo 6 minuti, una nuova traccia dopo 2 ore, o un nuovo file dopo un intervallo maggiore.</string>
     <string name="rendering_attr_depthContours_description">Mostra contorni e punti in profondità.</string>
-    <string name="release_2_6">"• Nuove funzionalità: Pulsante azione veloce 
+    <string name="release_2_6">"\\022 Nuove funzionalità: Pulsante azione veloce 
+\n
 \n 
+\n
 \n • Migliorata la risposta del touch screen ai gesti (es. zoommare e allargare) 
 \n
+\n 
 \n • Nuovi caratteri della mappa  mappa per estendere la copertura di più lingue 
+\n
 \n 
+\n
 \n • Supporto TTS per le lingue locali (e accenti) 
+\n
 \n 
+\n
 \n • Miglioramento della visibilità in molti stili mappa e wikipedia 
+\n
 \n 
+\n
 \n • Supporto all\'Open Location Code (OLC) 
+\n
 \n 
+\n
 \n • Visualizzazione di un profilo altimetrico, pendenza, e velocità per i GPX registrati e percorsi calcolati 
+\n
 \n 
+\n
 \n • Impostazione e miglioramenti della logica dello \"Stile guida\" nella guida svolta per svolta in bicicletta 
+\n
 \n 
+\n
 \n • Molti altri miglioramenti e correzioni di errori 
+\n
 \n 
+\n
 \n e altro ancora…"</string>
 	<string name="routing_attr_driving_style_name">Stile di guida</string>
     
@@ -2809,11 +2826,11 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="max_min">Max/Min</string>
     <string name="min_max">Min/Max</string>
     <string name="quick_action_resume_pause_navigation">Riprendi/sospendi la navigazione</string>
-    <string name="release_2_7">• Componente aggiuntivo Mapillary con immagini stradali 
+    <string name="release_2_7">\\022 Componente aggiuntivo Mapillary con immagini stradali 
 \n 
 \n • Widget righello per la misurazione della distanza 
 \n 
-\n • Scelta degli intervalli delle tracce GPX con informazioni dettagliate sul tuo percorso
+\n • Scelta degli intervalli delle tracce GPX con informazioni dettagliate sul tuo percorso 
 \n 
 \n • Altre migliorie e correzioni di errori
 \n
@@ -2939,37 +2956,39 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="import_as_gpx">Importa come file GPX</string>
     <string name="import_as_favorites">Importa come Preferito</string>
     <string name="import_file">Importa file</string>
-	<string name="tap_on_map_to_hide_interface_descr">Un tap sulla mappa per modificare i pulsanti di controllo e i widgets.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Un tap sulla mappa per visualizzare o meno i pulsanti di controllo e i widgets.</string>
     <string name="tap_on_map_to_hide_interface">Modalità a schermo intero</string>
     <string name="show_on_top_bar">Mostra nella barra superiore</string>
     <string name="mark_passed">Marcatore superato</string>
     <string name="import_gpx_file_description">può essere importato come Luogo Preferito oppure come file traccia.</string>
     <string name="appearance_on_the_map">Visualizzazione nella mappa</string>
-    <string name="add_track_to_markers_descr">Scegli i punti intermedi della traccia che OsmAnd aggiungerà ai marcatori</string>
-    <string name="add_favourites_group_to_markers_descr">Scegli quali gruppo di luoghi preferiti che OsmAnd aggiungerà ai marcatori</string>
+    <string name="add_track_to_markers_descr">Scegli una traccia per aggiungere punti intermedi ai marcatori. (Saranno elencate solo tracce con punti intermedi.)</string>
+    <string name="add_favourites_group_to_markers_descr">Scegli quale gruppo di luoghi preferiti da aggiungere ai marcatori.</string>
     <string name="track_waypoints">Punti intermedi della traccia</string>
     <string name="favourites_group">Gruppo di luoghi preferiti</string>
-    <string name="add_group">Aggiungi gruppo</string>
-    <string name="add_group_descr">Puoi aggiungere un gruppo di preferiti o i punti intermedi di una traccia.</string>
-    <string name="empty_state_markers_active">Marcatori nella mappa!</string>
-    <string name="empty_state_markers_active_desc">Marca i luoghi sulla mappa tappando su di essi.</string>
+    <string name="add_group">Aggiungi un gruppo</string>
+    <string name="add_group_descr">Puoi importare un gruppo dai preferiti o i punti intermedi di una traccia.</string>
+    <string name="empty_state_markers_active">Crea i marcatori nella mappa!</string>
+    <string name="empty_state_markers_active_desc">Tap lungo o breve nel luogo, poi tappa il pulsante bandiera del marcatore.</string>
     <string name="empty_state_markers_groups">Importa gruppi</string>
     <string name="empty_state_markers_groups_desc">Puoi importare, come marcatori, gruppi di luoghi preferiti o punti intermedi di tracce.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
-    <string name="empty_state_markers_history_desc">Marcatori indicati come superati appariranno su questa schermata.</string>
+    <string name="empty_state_markers_history_desc">Marcatori indicati come passati appariranno su questa schermata.</string>
     <string name="shared_string_two">Due</string>
     <string name="shared_string_one">Uno</string>
-    <string name="show_guide_line_descr">Una linea di collegamento fra la tua posizione e le posizioni dei marcatori attivi verrà visualizzata sulla mappa.</string>
-    <string name="show_arrows_descr">Una o due frecce, indicanti la direzione verso i marcatori attivi, verranno visualizzate sulla mappa.</string>
-    <string name="distance_indication_descr">Scegli come vorresti visualizzare la distanza verso marcatori attivi.</string>
-    <string name="active_markers_descr">Scegli quante indicazioni di direzione vuoi vedere.</string>
-    <string name="digits_quantity">Numero di cifre</string>
+    <string name="show_guide_line_descr">Una linea-guida fra la tua posizione e le posizioni dei marcatori attivi verrà visualizzata sulla mappa.</string>
+    <string name="show_arrows_descr">Visualizza una o due frecce, indicanti la direzione verso i marcatori attivi.</string>
+    <string name="distance_indication_descr">Scegli come visualizzare la distanza verso marcatori attivi.</string>
+    <string name="active_markers_descr">Scegli quante indicazioni di direzione sono visualizzate.</string>
+    <string name="digits_quantity">Numero di cifre decimali</string>
     <string name="shared_string_right">Destra</string>
     <string name="shared_string_left">Sinistra</string>
     <string name="show_number_pad">Mostra la tastiera numerica</string>
     <string name="shared_string_paste">Incolla</string>
-    <string name="coordinate_input_accuracy_description">Spostati automaticamente nel campo successivo dopo l\'immissione di %1$d cifre dopo il punto decimale</string>
+    <string name="coordinate_input_accuracy_description">Spostati automaticamente nel campo successivo dopo l\'immissione di %1$d cifre decimali.</string>
     <string name="coordinate_input_accuracy">%1$d cifre</string>
     <string name="go_to_next_field">Vai al campo successivo</string>
     <string name="rename_marker">Rinomina il marcatore</string>
+    <string name="looking_for_tracks_with_waypoints">Cerco tracce con punti intermedi</string>
+    <string name="shared_string_more_without_dots">Altro</string>
     </resources>

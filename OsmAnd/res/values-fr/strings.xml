@@ -46,7 +46,7 @@
     <string name="fav_export_confirmation">Un fichier de favoris précédemment exporté existe déjà. Voulez-vous le remplacer ?</string>
     <string name="profile_settings">Paramètres pour le profil</string>
     <string name="settings_preset">Profil par défaut</string>
-    <string name="settings_preset_descr">Les paramètres d’affichage et de navigation sont mémorisés dans un profil. Créez votre profil par défaut ici.</string>
+    <string name="settings_preset_descr">Les paramètres d’affichage et de navigation sont mémorisés dans un profil. Définissez votre profil par défaut ici.</string>
 
 
     <string name="routing_settings">Navigation</string>
@@ -333,7 +333,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="phone">Téléphone</string>
     <string name="download_type_to_filter">Filtre</string>
     <string name="use_high_res_maps">Carte haute résolution</string>
-    <string name="use_high_res_maps_descr">Utilisez des cartes de haute résolution pour les appareils les mieux équipés</string>
+    <string name="use_high_res_maps_descr">Ne pas étirer (et rendre flou) les tuiles de carte sur les écrans haute résolution.</string>
     <string name="unknown_location">Position inconnue</string>
 
     <string name="context_menu_item_search_transport">Chercher un transport public</string>
@@ -378,7 +378,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="shared_string_favorites">Favoris</string>
     <string name="layer_osm_bugs">Notes OSM (en ligne)</string>
     
-    <string name="layer_poi">Points d\'intérêt…</string>
+    <string name="layer_poi">Sur-couche des points d\'intérêt…</string>
     <string name="layer_map">Carte en ligne…</string>
     <string name="menu_layers">Couches</string>
     <string name="context_menu_item_search_poi">Rechercher un Point d\'Intérêt</string>
@@ -567,8 +567,8 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="show_view_angle">Afficher l\'angle de vue</string>
     <string name="map_view_3d_descr">Activer la vue 3D de la carte</string>
     <string name="map_view_3d">Vue 3D</string>
-    <string name="show_poi_over_map_description">Afficher les points d\'intérêt sur la carte (utiliser le dernier filtre)</string>
-    <string name="show_poi_over_map">Afficher point d\'intérêt</string>
+    <string name="show_poi_over_map_description">Afficher sur la carte la dernière sur-couche de points d\'intérêt sélectionnée.</string>
+    <string name="show_poi_over_map">Afficher la sur-couche points d\'intérêt</string>
     <string name="map_tile_source_descr">Sélectionnez la source des cartes dites tuiles (en ligne ou en cache).</string>
     <string name="map_tile_source">Carte en ligne (tuiles)</string>
     <string name="map_source">Source cartographique</string>
@@ -1466,7 +1466,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="loading_smth">Chargement de %1$s…</string>
     <string name="save_as_favorites_points">Enregistrer comme groupe de favoris</string>
     <string name="select_destination_and_intermediate_points">Sélectionnez les étapes</string>
-    <string name="layer_amenity_label">Libellés de point</string>
+    <string name="layer_amenity_label">Libellés de la sur-couche des points d\'intérêt</string>
     <string name="route_descr_destination">Destination</string>
     <string name="show_zoom_buttons_navigation_descr">Afficher les boutons de zoom pendant la navigation.</string>
     <string name="show_zoom_buttons_navigation">Afficher les boutons de zoom</string>
@@ -2541,7 +2541,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_btn_tutorial_title">Déplacer le bouton</string>
     <string name="quick_action_btn_tutorial_descr">Appui long pour déplacer le bouton sur l\'écran</string>
 <string name="quick_action_add_marker_descr">Appuyez sur le bouton d\'action pour ajouter une marque au centre de la carte.</string>
-    <string name="quick_action_add_gpx_descr">Appuyez sur le bouton d\'action pour ajouter une étape GPX au centre de la carte.</string>
+    <string name="quick_action_add_gpx_descr">Un appui sur le bouton d\'action ajoutera une étape GPX au centre de la carte.</string>
     <string name="quick_action_take_audio_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Audio au centre de la carte.</string>
     <string name="quick_action_take_video_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Vidéo au centre de la carte.</string>
     <string name="quick_action_take_photo_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Photo au centre de la carte.</string>
@@ -2951,7 +2951,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="marker_save_as_track_descr">Exporte vos marques dans un fichier portant le nom :</string>
     <string name="marker_save_as_track">Enregistrer comme trace</string>
     <string name="move_to_history">Déplacer vers l\'historique</string>
-    <string name="group_will_be_removed_after_restart">Le groupe sera supprimé au prochain démarrage</string>
+    <string name="group_will_be_removed_after_restart">Le groupe sera supprimé au prochain démarrage de l\'application.</string>
     <string name="shared_string_markers">Marques</string>
     <string name="coordinates_format">Format des coordonnées</string>
     <string name="use_system_keyboard">Utiliser le clavier système</string>
