@@ -258,11 +258,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabActivity.TabItem> mTabs, Intent intent) {
-		if (getDBPOI().getOpenstreetmapPoints().size() > 0 || getDBBug().getOsmbugsPoints().size() > 0) {
-			mTabs.add(favoritesActivity.getTabIndicator(R.string.osm_edits, OsmEditsFragment.class));
-			if (intent != null && "OSM".equals(intent.getStringExtra("TAB"))) {
-				app.getSettings().FAVORITES_TAB.set(R.string.osm_edits);
-			}
+		mTabs.add(favoritesActivity.getTabIndicator(R.string.osm_edits, OsmEditsFragment.class));
+		if (intent != null && "OSM".equals(intent.getStringExtra("TAB"))) {
+			app.getSettings().FAVORITES_TAB.set(R.string.osm_edits);
 		}
 	}
 

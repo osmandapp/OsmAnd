@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -66,6 +67,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	private OsmEditingPlugin plugin;
 
 	private View footerView;
+	private View headerView;
+	private View emptyView;
 
 	private List<OsmPoint> osmEdits;
 	private OsmEditsAdapter listAdapter;
@@ -102,25 +105,17 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		setHasOptionsMenu(true);
 		plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 
-		ListView listView = new ListView(getContext());
-		View headerView = getActivity().getLayoutInflater().inflate(R.layout.list_item_header, listView, false);
-		listView.addHeaderView(headerView);
+		View view = inflater.inflate(R.layout.update_index, container, false);
+		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
+		ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
+		emptyStub.setLayoutResource(R.layout.empty_state_osm_edits);
+		emptyView = emptyStub.inflate();
+		int icRes = getMyApplication().getSettings().isLightContent()
+				? R.drawable.ic_empty_state_osm_edits_day : R.drawable.ic_empty_state_osm_edits_night;
+		((ImageView) emptyView.findViewById(R.id.empty_state_image_view)).setImageResource(icRes);
 
-		((TextView) headerView.findViewById(R.id.title_text_view)).setText(R.string.your_edits);
-		final CheckBox selectAll = (CheckBox) headerView.findViewById(R.id.check_box);
-		selectAll.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (selectAll.isChecked()) {
-					selectAll();
-				} else {
-					deselectAll();
-				}
-				updateSelectionTitle(actionMode);
-			}
-		});
 		plugin.getPoiModificationLocalUtil().addNodeCommittedListener(this);
-		return listView;
+		return view;
 	}
 
 	@Override
@@ -357,11 +352,31 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		osmEdits.addAll(l1);
 		osmEdits.addAll(l2);
 		ListView listView = getListView();
-		if (osmEdits.size() > 0 && footerView == null) {
-			//listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
-			footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, listView, false);
-			listView.setDivider(null);
-			listView.addFooterView(footerView);
+		listView.setDivider(null);
+		listView.setEmptyView(emptyView);
+
+		if (osmEdits.size() > 0) {
+			if (footerView == null) {
+				footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, listView, false);
+				listView.addFooterView(footerView);
+			}
+			if (headerView == null) {
+				headerView = getActivity().getLayoutInflater().inflate(R.layout.list_item_header, listView, false);
+				listView.addHeaderView(headerView);
+				((TextView) headerView.findViewById(R.id.title_text_view)).setText(R.string.your_edits);
+				final CheckBox selectAll = (CheckBox) headerView.findViewById(R.id.check_box);
+				selectAll.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (selectAll.isChecked()) {
+							selectAll();
+						} else {
+							deselectAll();
+						}
+						updateSelectionTitle(actionMode);
+					}
+				});
+			}
 		}
 		listAdapter = new OsmEditsAdapter(getMyApplication(), osmEdits);
 		listAdapter.setSelectedOsmEdits(osmEditsSelected);
