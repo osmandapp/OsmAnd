@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="marker_activated">Marker %s activated.</string>
     <string name="one_tap_active_descr">Tap on marker on the map, move it to the first place in active markers, without opening context menu.</string>
     <string name="one_tap_active">One tap active</string>
     <string name="looking_for_tracks_with_waypoints">Looking for tracks with waypoints</string>
