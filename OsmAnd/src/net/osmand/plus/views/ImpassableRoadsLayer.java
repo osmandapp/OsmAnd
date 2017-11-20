@@ -162,6 +162,11 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	@Override
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		if (tileBox.getZoom() >= startZoom) {
 			int ex = (int) point.x;
