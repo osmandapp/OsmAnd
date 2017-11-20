@@ -9,9 +9,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
-import android.support.v7.widget.PopupMenu;
 import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,8 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -40,13 +38,12 @@ import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.OsmAndListFragment;
-import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.PoiUploaderType;
+import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
 import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -70,7 +67,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	private View headerView;
 	private View emptyView;
 
-	private List<OsmPoint> osmEdits;
+	private List<OsmPoint> osmEdits = new ArrayList<>();
 	private OsmEditsAdapter listAdapter;
 	private ArrayList<OsmPoint> osmEditsSelected = new ArrayList<>();
 
@@ -113,6 +110,11 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		int icRes = getMyApplication().getSettings().isLightContent()
 				? R.drawable.ic_empty_state_osm_edits_day : R.drawable.ic_empty_state_osm_edits_night;
 		((ImageView) emptyView.findViewById(R.id.empty_state_image_view)).setImageResource(icRes);
+
+		Fragment optionsFragment = getChildFragmentManager().findFragmentByTag(OsmEditOptionsBottomSheetDialogFragment.TAG);
+		if (optionsFragment != null) {
+			((OsmEditOptionsBottomSheetDialogFragment) optionsFragment).setListener(createOsmEditOptionsFragmentListener());
+		}
 
 		plugin.getPoiModificationLocalUtil().addNodeCommittedListener(this);
 		return view;
@@ -397,8 +399,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			}
 
 			@Override
-			public void onOptionsClick(View view, OsmPoint note) {
-				openPopUpMenu(view, note);
+			public void onOptionsClick(OsmPoint note) {
+				openPopUpMenu(note);
 			}
 		});
 		listView.setAdapter(listAdapter);
@@ -441,66 +443,50 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		});
 	}
 
-	private void openPopUpMenu(View v, final OsmPoint info) {
-		OsmandApplication app = getMyApplication();
-		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
-		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-		MenuItem item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map).setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_show_on_map));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+	private void openPopUpMenu(final OsmPoint info) {
+		OsmEditOptionsBottomSheetDialogFragment optionsFragment = new OsmEditOptionsBottomSheetDialogFragment();
+		Bundle args = new Bundle();
+		args.putSerializable(OsmEditOptionsBottomSheetDialogFragment.OSM_POINT, info);
+		optionsFragment.setUsedOnMap(false);
+		optionsFragment.setArguments(args);
+		optionsFragment.setListener(createOsmEditOptionsFragmentListener());
+		optionsFragment.show(getChildFragmentManager(), OsmEditOptionsBottomSheetDialogFragment.TAG);
+	}
+
+	private OsmEditOptionsFragmentListener createOsmEditOptionsFragmentListener() {
+		return new OsmEditOptionsFragmentListener() {
 			@Override
-			public boolean onMenuItemClick(MenuItem item) {
+			public void onUploadClick(OsmPoint osmPoint) {
+				uploadItems(new OsmPoint[]{getPointAfterModify(osmPoint)});
+			}
+
+			@Override
+			public void onShowOnMapClick(OsmPoint osmPoint) {
 				OsmandSettings settings = getMyApplication().getSettings();
-				settings.setMapLocationToShow(info.getLatitude(), info.getLongitude(), settings.getLastKnownMapZoom());
+				settings.setMapLocationToShow(osmPoint.getLatitude(), osmPoint.getLongitude(), settings.getLastKnownMapZoom());
 				MapActivity.launchMapActivityMoveToTop(getActivity());
-				return true;
 			}
-		});
-		if (info instanceof OpenstreetmapPoint && info.getAction() != Action.DELETE) {
-			item = optionsMenu.getMenu().add(R.string.poi_context_menu_modify_osm_change).setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_edit_dark));
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 
-
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					OpenstreetmapPoint i = (OpenstreetmapPoint) getPointAfterModify(info);
-					final Node entity = i.getEntity();
-					refreshId = entity.getId();
-					EditPoiDialogFragment.createInstance(entity, false).show(getActivity().getSupportFragmentManager(), "edit_poi");
-					return true;
-				}
-			});
-		}
-		if (info instanceof OsmNotesPoint) {
-			item = optionsMenu.getMenu().add(R.string.context_menu_item_modify_note).setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_edit_dark));
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					showBugDialog((OsmNotesPoint) info);
-					return true;
-				}
-			});
-		}
-		item = optionsMenu.getMenu().add(R.string.shared_string_delete).setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_delete_dark));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
-			public boolean onMenuItemClick(MenuItem item) {
+			public void onModifyOsmChangeClick(OsmPoint osmPoint) {
+				OpenstreetmapPoint i = (OpenstreetmapPoint) getPointAfterModify(osmPoint);
+				final Node entity = i.getEntity();
+				refreshId = entity.getId();
+				EditPoiDialogFragment.createInstance(entity, false).show(getActivity().getSupportFragmentManager(), "edit_poi");
+			}
+
+			@Override
+			public void onModifyOsmNoteClick(OsmPoint osmPoint) {
+				showBugDialog((OsmNotesPoint) osmPoint);
+			}
+
+			@Override
+			public void onDeleteClick(OsmPoint osmPoint) {
 				ArrayList<OsmPoint> points = new ArrayList<>();
-				points.add(info);
+				points.add(osmPoint);
 				deleteItems(new ArrayList<>(points));
-				return true;
-
 			}
-		});
-		item = optionsMenu.getMenu().add(R.string.local_openstreetmap_upload).setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_export));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				uploadItems(new OsmPoint[]{getPointAfterModify(info)});
-				return true;
-			}
-		});
-		optionsMenu.show();
+		};
 	}
 
 	protected OsmPoint getPointAfterModify(OsmPoint info) {

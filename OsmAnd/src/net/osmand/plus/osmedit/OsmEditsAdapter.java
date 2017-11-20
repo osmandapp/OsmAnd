@@ -64,7 +64,7 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 		if (osmEdit != null) {
 			final OsmEditViewHolder holder = (OsmEditViewHolder) view.getTag();
 
-			holder.titleTextView.setText(getName(osmEdit));
+			holder.titleTextView.setText(OsmEditingPlugin.getName(osmEdit));
 			holder.descriptionTextView.setText(getDescription(osmEdit));
 			Drawable icon = getIcon(osmEdit);
 			if (icon != null) {
@@ -94,7 +94,7 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 				@Override
 				public void onClick(View v) {
 					if (listener != null) {
-						listener.onOptionsClick(v, osmEdit);
+						listener.onOptionsClick(osmEdit);
 					}
 				}
 			});
@@ -145,16 +145,6 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 			return app.getIconsCache().getIcon(R.drawable.ic_type_bug, R.color.color_distance);
 		}
 		return null;
-	}
-
-	private String getName(OsmPoint point) {
-		if (point.getGroup() == OsmPoint.Group.POI) {
-			return ((OpenstreetmapPoint) point).getName();
-		} else if (point.getGroup() == OsmPoint.Group.BUG) {
-			return ((OsmNotesPoint) point).getText();
-		} else {
-			return "";
-		}
 	}
 
 	private String getDescription(OsmPoint point) {
@@ -214,6 +204,6 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 
 		void onItemShowMap(OsmPoint point);
 
-		void onOptionsClick(View view, OsmPoint note);
+		void onOptionsClick(OsmPoint note);
 	}
 }
