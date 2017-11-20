@@ -13,11 +13,11 @@ import android.graphics.PointF;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -210,6 +210,11 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	@Override
 	public boolean isObjectClickable(Object o) {
 		return o instanceof OsMoDevice;
+	}
+
+	@Override
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
 	}
 
 	@Override

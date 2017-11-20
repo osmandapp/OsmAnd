@@ -1477,14 +1477,14 @@
     <string name="rename_marker">שינוי שם סמן</string>
     <string name="tap_on_map_to_hide_interface_descr">נגיעה במפה מחליפה את תצוגת הכפתורים והווידג׳טים.</string>
     <string name="appearance_on_the_map">הופעה על המפה</string>
-    <string name="add_track_to_markers_descr">נא לבחור נקודות דרך במסלול שאותן OsmAnd יצרף לסמנים</string>
-    <string name="add_favourites_group_to_markers_descr">נא לבחור קבוצות מועדפים להוספה לסמנים.</string>
+    <string name="add_track_to_markers_descr">נא לבחור נקודות דרך במסלול שאותן OsmAnd יצרף לסמנים. (המסלולים המוצגים הם בעלי נקודות דרך בלבד.)</string>
+    <string name="add_favourites_group_to_markers_descr">נא לבחור קטגוריה מועדפת להוספה לסמנים.</string>
     <string name="track_waypoints">נקודות דרך במסלול</string>
-    <string name="favourites_group">קבוצת מועדפים</string>
+    <string name="favourites_group">קטגוריית מועדפים</string>
     <string name="add_group">הוספת קבוצה</string>
-    <string name="add_group_descr">ניתן להוסיף קבוצת מועדפים או נקודות דרך של מסלול.</string>
-    <string name="empty_state_markers_active">סמנים במפה!</string>
-    <string name="empty_state_markers_active_desc">ניתן לסמן מקומות במפה בנגיעה.</string>
+    <string name="add_group_descr">ניתן לייבא קבוצות ממועדפים או נקודות דרך של מסלול.</string>
+    <string name="empty_state_markers_active">ליצור סמנים במפה!</string>
+    <string name="empty_state_markers_active_desc">ניתן לסמן מקומות במפה בנגיעה קצרה או ארוכה ולאחר מכן ללחוץ על כפתור דגל הסמן.</string>
     <string name="empty_state_markers_groups">ייבוא קבוצות</string>
     <string name="empty_state_markers_groups_desc">ניתן לייבא קבוצות מועדפים או נקודות דרך במסלול כסמנים.</string>
     <string name="shared_string_two">שניים</string>
@@ -1995,4 +1995,12 @@
     <string name="ascendingly">עולה</string>
     <string name="date_added">תאריך ההוספה</string>
     <string name="order_by">סידור לפי:</string>
+    <string name="looking_for_tracks_with_waypoints">מתבצע חיפוש אחר מסלולים עם נקודות דרך</string>
+    <string name="shared_string_more_without_dots">עוד</string>
+    <string name="do_not_send_anonymous_app_usage">לא לשלוח סטטיסטיקת שימוש אלמונית</string>
+    <string name="osn_comment_dialog_title">הוספת הערה</string>
+    <string name="osn_reopen_dialog_title">פתיחת הערה מחדש</string>
+    <string name="osn_close_dialog_title">סגירת הערה</string>
+    <string name="osn_add_dialog_success">ההערה נוצרה בהצלחה</string>
+    <string name="osn_add_dialog_error">אירעה שגיאה: ההערה לא נוצרה</string>
     </resources>

@@ -2773,7 +2773,7 @@ Proporciona un código completo</string>
     <string name="shared_string_finish">Finalizar</string>
     <string name="plan_route">Planificar ruta</string>
     <string name="shared_string_sort">Ordenar</string>
-    <string name="coordinate_input">Ingreso de coordenadas</string>
+    <string name="coordinate_input">Ingresar coordenadas</string>
     <string name="is_saved">está guardado</string>
     <string name="marker_save_as_track_descr">Exporta los marcadores a un archivo que puedes nombrar aquí:</string>
     <string name="marker_save_as_track">Guardar como traza</string>
@@ -2833,7 +2833,7 @@ Proporciona un código completo</string>
     <string name="track_waypoints">Puntos de referencia de la traza</string>
     <string name="favourites_group">Categoría de favoritos</string>
     <string name="add_group">Añadir un grupo</string>
-    <string name="add_group_descr">Puedes importar grupos desde favoritos o puntos de referencia de la traza.</string>
+    <string name="add_group_descr">Puedes importar grupos desde «Favoritos» o puntos de referencia de la traza.</string>
     <string name="empty_state_markers_active">¡Crea marcadores del mapa!</string>
     <string name="empty_state_markers_active_desc">Haz una pulsación corta o larga sobre los lugares, luego pulsa la bandera del marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>

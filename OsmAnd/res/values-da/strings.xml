@@ -2900,7 +2900,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="marker_save_as_track_descr">Eksporter markører til den angivne fil:</string>
     <string name="marker_save_as_track">Gem som spor</string>
     <string name="move_to_history">Flyt til historik</string>
-    <string name="group_will_be_removed_after_restart">Gruppen vil blive fjernet efter genstart</string>
+    <string name="group_will_be_removed_after_restart">Gruppen vil blive fjernet efter næste genstart.</string>
     <string name="shared_string_markers">Markører</string>
     <string name="coordinates_format">Koordinatformat</string>
     <string name="use_system_keyboard">Brug systemtastaturet</string>
@@ -2963,7 +2963,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="add_group">Tilføj en gruppe</string>
     <string name="add_group_descr">Importer grupper fra favoritter eller et spor af rutepunkter.</string>
     <string name="empty_state_markers_active">Opret kortmarkører!</string>
-    <string name="empty_state_markers_active_desc">Lange eller korte tryk steder, og tryk derefter på markør flag knappen.</string>
+    <string name="empty_state_markers_active_desc">Langt eller kort tryk på steder, og tryk derefter på markørflag knappen.</string>
     <string name="empty_state_markers_groups">Importer grupper</string>
     <string name="empty_state_markers_groups_desc">Importer favoritgrupper eller et spor af rutepunkter som markører.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>

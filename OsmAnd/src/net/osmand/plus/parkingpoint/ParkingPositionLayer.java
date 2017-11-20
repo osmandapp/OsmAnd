@@ -136,6 +136,11 @@ public class ParkingPositionLayer extends OsmandMapLayer implements
 	}
 
 	@Override
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		getParkingFromPoint(tileBox, point, o);
 	}

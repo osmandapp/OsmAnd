@@ -1543,7 +1543,7 @@ Chcete pokračovať v novej registrácii?</string>
     <string name="dash_download_msg">Stiahli ste %1$s máp</string>
     <string name="dash_download_new_one">Stiahnuť novú mapu</string>
     <string name="dash_download_manage">Spravovať</string>
-    <string name="rendering_attr_roadStyle_name">Štýl cesty</string>
+    <string name="rendering_attr_roadStyle_name">Štýl ciest</string>
     <string name="rendering_value_default_name">Predvolené</string>
     <string name="rendering_value_orange_name">Oranžová</string>
     <string name="rendering_value_germanRoadAtlas_name">Nemecký atlas ciest</string>
@@ -2015,7 +2015,7 @@ Dĺžka %2$s</string>
 	
     <string name="rendering_attr_currentTrackColor_description">Farba GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Šírka GPX</string>
-    <string name="rendering_attr_roadStyle_description">Štýl cesty</string>
+    <string name="rendering_attr_roadStyle_description">Štýl ciest</string>
     <string name="poi_dialog_reopen">Znovuotvoriť</string>
 	
     
@@ -2895,8 +2895,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="marker_save_as_track_descr">Exportovať vaše značky do súboru, ktorý môžete určiť tu:</string>
     <string name="marker_save_as_track">Uložiť ako stopu</string>
     <string name="move_to_history">Presunúť do histórie</string>
-    <string name="group_will_be_removed_after_restart">Skupina bude odstránená po reštarte</string>
-    <string name="show_guide_line">Zobraziť vodiacu čiaru</string>
+    <string name="group_will_be_removed_after_restart">Skupina bude odstránená po nasledujúcom reštarte aplikácie.</string>
+    <string name="show_guide_line">Zobraziť vodiace čiary</string>
     <string name="show_arrows_on_the_map">Zobraziť šípky na mape</string>
     <string name="show_passed">Zobraziť prešlé</string>
     <string name="hide_passed">Skryť prešlé</string>
@@ -2916,10 +2916,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="make_round_trip_descr">Pridať kópiu počiatočného bodu ako cieľ.</string>
     <string name="make_round_trip">Vytvoriť okružnú trasu</string>
     <string name="shared_string_navigate">Navigovať</string>
-    <string name="release_2_8">\\022 Prepracované mapové značky s usmerneniami a plánovaním trasy
-\n
-\n • Nástroj na meranie vzdialeností má funkciu prichytenia k ceste a uloženie bodov ako stopu
-\n
+    <string name="release_2_8">\\022 Prepracované mapové značky s vodiacimi čiarami a plánovaním trasy
+\n 
+\n • Nástroj na meranie vzdialeností má funkciu prichytenia k ceste a uloženie bodov ako stopu 
+\n 
 \n • OsmAnd Live: opravy chýb, nové dáta na serveri každých 30 minút, aktualizácie začlenené do navigácie
 \n
 \n</string>
@@ -2939,22 +2939,22 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="tap_on_map_to_hide_interface">Režim na celú obrazovku</string>
     <string name="show_on_top_bar">Zobraziť na hornej lište</string>
     <string name="mark_passed">Značka prejdená</string>
-    <string name="digits_quantity">Počet číslic</string>
+    <string name="digits_quantity">Počet desatinných miest</string>
     <string name="shared_string_right">Vpravo</string>
     <string name="shared_string_left">Vľavo</string>
     <string name="show_number_pad">Zobraziť numerickú klávesnicu</string>
     <string name="shared_string_paste">Prilepiť</string>
-    <string name="coordinate_input_accuracy_description">Automaticky prepnúť na ďalšie pole po zadaní %1$d číslic za desatinnou čiarkou.</string>
+    <string name="coordinate_input_accuracy_description">Automaticky prepnúť na ďalšie pole po zadaní %1$d desatinných miest.</string>
     <string name="coordinate_input_accuracy">%1$d číslic</string>
     <string name="go_to_next_field">Prejsť na ďalšie pole</string>
     <string name="rename_marker">Premenovať značku</string>
     <string name="appearance_on_the_map">Vzhľad na mape</string>
-    <string name="add_track_to_markers_descr">Zvoľte body stopy, z ktorých má OsmAnd vytvoriť značky</string>
-    <string name="add_favourites_group_to_markers_descr">Zvoľte skupinu obľúbených bodov, z ktorých majú byť vytvorené značky. Zobrazuj[ sa iba stopy s waypointami</string>
+    <string name="add_track_to_markers_descr">Zvoľte stopy, ktorých waypointy má OsmAnd pridať ako značky. (Zobrazujú sa len stopy s waypointami.)</string>
+    <string name="add_favourites_group_to_markers_descr">Zvoľte skupinu obľúbených bodov, ktoré majú byť pridané k značkám.</string>
     <string name="track_waypoints">Body stopy</string>
-    <string name="favourites_group">Skupina obľúbených bodov</string>
+    <string name="favourites_group">Kategória obľúbených bodov</string>
     <string name="add_group">Pridať skupinu</string>
-    <string name="add_group_descr">Môžete pridať skupinu obľúbených bodov alebo bodov trasy.</string>
+    <string name="add_group_descr">Môžete importovať skupinu obľúbených bodov alebo waypointy stopy.</string>
     <string name="empty_state_markers_active">Vytvoriť mapové značky!</string>
     <string name="empty_state_markers_active_desc">Stlačením označte miesta na mape, potom stlačte tlačidlo s vlajkou značky.</string>
     <string name="empty_state_markers_groups">Importovať skupiny</string>
@@ -2962,7 +2962,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="empty_state_markers_history_desc">Značky označené ako prejdené sa zobrazia na tejto obrazovke.</string>
     <string name="shared_string_two">Dve</string>
     <string name="shared_string_one">Jedna</string>
-    <string name="show_guide_line_descr">Zobraziť smerovníky z vašej polohy k aktívnym značkám.</string>
+    <string name="show_guide_line_descr">Zobraziť vodiace čiary z vašej polohy k aktívnym značkám.</string>
     <string name="show_arrows_descr">Zobraziť jednu alebo dve šípky smerujúce k aktívnym značkám.</string>
     <string name="distance_indication_descr">Zvoľte ako chcete zobraziť vzdialenosť k aktívnym značkám.</string>
     <string name="active_markers_descr">Zvoľte koľko ukazovateľov smeru chcete zobraziť.</string>

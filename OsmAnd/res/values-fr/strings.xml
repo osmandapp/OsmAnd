@@ -1776,7 +1776,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="shared_string_action_template">Action {0}</string>
     <string name="shared_string_video">Vidéo</string>
     <string name="shared_string_photo">Photo</string>
-    <string name="shared_string_release">Publié</string>
+    <string name="shared_string_release">sortit le</string>
     <string name="drawer">Liste simple</string>
     <string name="waypoint_visit_after">Visiter après</string>
     <string name="waypoint_visit_before">Visiter avant</string>
@@ -2065,7 +2065,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     
     <string name="shared_string_update">Mise à jour</string>
     <string name="read_more">Lire plus</string>
-    <string name="whats_new">Quoi de neuf dans</string>
+    <string name="whats_new">Quoi de neuf en version</string>
     <string name="rendering_attr_hideProposed_name">Objets proposés</string>
     <string name="lang_mk">Macédonien</string>
     <string name="lang_fy">Frison occidental</string>
