@@ -2269,7 +2269,7 @@ Długość %2$s</string>
     <string name="shared_string_move_up">Przenieś w górę</string>
     <string name="shared_string_move_down">Przenieś w dół</string>
     <string name="finish_navigation">Zakończ nawigację</string>
-    <string name="shared_string_topbar">Belka górna</string>
+    <string name="shared_string_topbar">Górny pasek</string>
     <string name="osm_user_stat">Edycji %1$s, range %2$s, zmian łącznie %3$s</string>
     <string name="osm_live_subscription">Subskrypcja OsmAnd Live</string>
     <string name="osm_live_email_desc">Wymagany, aby dostarczyć informacje o wkładzie</string>
@@ -2880,7 +2880,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="marker_save_as_track">Zapisywanie śladu</string>
     <string name="move_to_history">Przenieś do historii</string>
     <string name="group_will_be_removed_after_restart">Grupa zostanie usunięta po ponownym uruchomieniu</string>
-    <string name="use_system_keyboard">Użyj klawiatury systemowej</string>
+    <string name="use_system_keyboard">Użycie klawiatury systemowej</string>
     <string name="is_saved">jest zapisany</string>
     <string name="wrong_format">Błędny format</string>
     <string name="shared_string_road">Droga</string>
@@ -2909,16 +2909,25 @@ Reprezentuje obszar: %1$s x %2$s</string>
 	<string name="shared_string_back">Wróć</string>
 	<string name="view">Wyświetl</string>
 	<string name="waypoints_added_to_map_markers">Dodano punkty pośrednie do znaczników mapy</string>
-	<string name="track_waypoints">Punkty trasy</string>
+	<string name="track_waypoints">Punkty śladu</string>
     <string name="favourites_group">Grupa ulubionych</string>
     <string name="add_group">Dodawanie grupy</string>
-    <string name="add_group_descr">Dodaje grupę ulubionych miejsc lub punktów trasy.</string>
+    <string name="add_group_descr">Dodaje grupę ulubionych miejsc lub punktów śladu.</string>
     <string name="empty_state_markers_active">Znaczniki na mapie!</string>
-    <string name="empty_state_markers_active_desc">Oznacza miejsca na mapie dotknięciem.</string>
+    <string name="empty_state_markers_active_desc">Proszę dotknąć miejsce a następnie przycisk znacznika opatrzony flagą.</string>
     <string name="shared_string_two">Dwa</string>
     <string name="shared_string_one">Jeden</string>
     <string name="show_guide_line_descr">Wyświetla na mapie linię łączącą aktualne położenie z położeniem aktywnego znacznika.</string>
     <string name="show_arrows_descr">Wyświetla na mapie jedną lub dwie strzałki wskazujące kierunek do aktywnych znaczników.</string>
     <string name="distance_indication_descr">Wybiera sposób wyświetlania odległości od aktywnego znacznika.</string>
     <string name="active_markers_descr">Wybiera ilość wyświetlanych wskaźników kierunku.</string>
+    <string name="looking_for_tracks_with_waypoints">Wyszukiwanie śladów z punktami</string>
+    <string name="shared_string_more_without_dots">Więcej</string>
+    <string name="appearance_on_the_map">Wygląd na mapie</string>
+    <string name="add_track_to_markers_descr">Proszę wybrać ślad, którego punkty zostaną dodane do znaczników.</string>
+    <string name="shared_string_paste">Wklej</string>
+    <string name="coordinate_input_accuracy_description">Przechodzi automatycznie do następnego pola po wprowadzeniu %1$d cyfr za przecinkiem.</string>
+    <string name="coordinate_input_accuracy">%1$d cyfr</string>
+    <string name="go_to_next_field">Przechodzenie do następnego pola</string>
+    <string name="tap_on_map_to_hide_interface">Tryb pełnego ekranu</string>
     </resources>

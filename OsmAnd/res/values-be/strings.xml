@@ -2606,7 +2606,7 @@
     <string name="quick_favorites_show_favorites_dialog">Паказаць дыялёг улюбёных</string>
     <string name="quick_favorites_name_preset">Назва перадусталёўкі</string>
     <string name="quick_action_add_marker_descr">Пры націсканні на кнопку дадасць маркер на мапу ў цэнтры экрана.</string>
-    <string name="quick_action_add_gpx_descr">Пры націсканні на кнопку дадасць GPX-кропку на мапу ў цэнтры экрана.</string>
+    <string name="quick_action_add_gpx_descr">Пры націску на кнопку дзеяньня дадасьць GPX-кропку на мапу ў цэнтры экрана.</string>
     <string name="quick_action_take_audio_note_descr">Пры націсканні на кнопку дадасць аўдыянататку на мапу ў цэнтры экрана.</string>
     <string name="quick_action_take_video_note_descr">Пры націсканні на кнопку дадасць відэанататку на мапу ў цэнтры экрана.</string>
     <string name="quick_action_take_photo_note_descr">Пры націсканні на кнопку дадасць фотанататку на мапу ў цэнтры экрана.</string>
@@ -2649,7 +2649,7 @@
     <string name="full_version_thanks">Дякуй вам за набыццё поўнай версіі OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_name">Абраць перасечанасць мясцовасці</string>
     <string name="right_side_navigation">Правабаковы рух</string>
-    <string name="driving_region_automatic">Аўтаматычны</string>
+    <string name="driving_region_automatic">Аўтаматычна</string>
     <string name="restore_purchases">Аднаўленне пакупак</string>
     <string name="fonts_header">Шрыфты для мапы</string>
     <string name="quick_action_auto_zoom">Аўтамаштаб мапы ўкл/адкл</string>
@@ -2885,7 +2885,7 @@
     <string name="ascendingly">па ўзрастаньні</string>
     <string name="date_added">Дата дадаваньня</string>
     <string name="order_by">Сартаваць па:</string>
-    <string name="show_guide_line">Паказаць лінію кірунку</string>
+    <string name="show_guide_line">Паказаць лініі кірунку</string>
     <string name="show_arrows_on_the_map">Паказаць стрэлкі на карце</string>
     <string name="show_passed">Паказаць пройдзеныя</string>
     <string name="hide_passed">Схаваць пройдзеныя</string>
@@ -2900,7 +2900,7 @@
     <string name="marker_save_as_track_descr">Экспартаваць вашы маркеры ў файл, які вы можаце пазначыць тут:</string>
     <string name="marker_save_as_track">Захаваць як сьлед</string>
     <string name="move_to_history">Перамясьціць у гісторыю</string>
-    <string name="group_will_be_removed_after_restart">Група будзе выдаленая пасьля перазапуску</string>
+    <string name="group_will_be_removed_after_restart">Група будзе выдаленая пасьля наступнага пэразапуску праграмы.</string>
     <string name="shared_string_markers">Маркеры</string>
     <string name="coordinates_format">Фармат каардынат</string>
     <string name="use_system_keyboard">Выкарыстоўваць сыстэмную клявіятуру</string>
@@ -2914,7 +2914,7 @@
     <string name="osn_modify_dialog_error">Адбылося выключэньне: нататка не была зьмененая</string>
     <string name="osn_modify_dialog_title">Зьмяніць нататку</string>
     <string name="context_menu_item_modify_note">Зьмяніць OSM-нататку</string>
-    <string name="release_2_8">• Цалкам перапрацаваныя маркеры з рэкамэндацыямі і плянаваньнем маршрута 
+    <string name="release_2_8">• Цалкам перапрацаваныя маркеры з лініямі кірунку і плянаваньнем маршрута 
 \n 
 \n • Інструмэнт вымярэньня адлегласьцей з прывязкай да дарогі і з захаваньнем кропак у сьлед 
 \n 
@@ -2941,33 +2941,34 @@
     <string name="tap_on_map_to_hide_interface">Поўныэкранны рэжым</string>
     <string name="show_on_top_bar">Паказаць на верхняй панэлі</string>
     <string name="mark_passed">Адзначыць прайдзеныя</string>
-    <string name="digits_quantity">Колькасьць лічбаў</string>
+    <string name="digits_quantity">Колькасьць дзесятковых лічбаў</string>
     <string name="show_number_pad">Паказаць лічбавую панэль</string>
     <string name="shared_string_paste">Уставіць</string>
-    <string name="coordinate_input_accuracy_description">Аўтаматычна пераключыцца ў наступнае поле пасьля ўводу %1$d лічбаў пасьля дзесятковай кропкі.</string>
+    <string name="coordinate_input_accuracy_description">Аўтаматычна пераключыцца ў наступнае поле пасьля ўводу %1$d дзесятковых лічбаў.</string>
     <string name="coordinate_input_accuracy">%1$d лічбаў</string>
     <string name="go_to_next_field">Парайсці ў наступнае поле</string>
     <string name="rename_marker">Перайменаваць маркер</string>
     <string name="shared_string_two">Два</string>
     <string name="shared_string_one">Адзін</string>
-    <string name="add_favourites_group_to_markers_descr">Абярыце, якія групы ўлюбёных вы хочаце дадаць да маркераў.</string>
+    <string name="add_favourites_group_to_markers_descr">Абярыце катэгорыю ўлюбёных, каб дадаць да маркераў.</string>
     <string name="track_waypoints">Шляхавыя кропкі</string>
-    <string name="favourites_group">Група ўлюбёных</string>
+    <string name="favourites_group">Катэгорыя ўлюбёных</string>
     <string name="add_group">Дадаць групу</string>
-    <string name="add_group_descr">Вы можаце дадаць групу ўлюбёных ці шляхавыя кропкі.</string>
-    <string name="empty_state_markers_active">Маркеры на мапе!</string>
-    <string name="empty_state_markers_active_desc">Адзначыць месца на мапе дотыкам.</string>
+    <string name="add_group_descr">Вы можаце імпартаваць групы з улюбёных ці шляхавых кропак.</string>
+    <string name="empty_state_markers_active">Стварыце маркеры мапы!</string>
+    <string name="empty_state_markers_active_desc">Дакраніцеся месца і потым націсніце кнопку маркера.</string>
     <string name="empty_state_markers_groups">Імпартаваць групы</string>
     <string name="empty_state_markers_groups_desc">Вы можаце імпартаваць групы улюбёных ці шляхавыя кропкі як маркеры.</string>
     <string name="empty_state_markers_history_desc">Маркеры, пазначаныя як пройдзенныя, з\'явяцца на гэтым экране.</string>
-    <string name="show_guide_line_descr">Паказвае кірунак ад вашага становішча да актыўнага маркера.</string>
+    <string name="show_guide_line_descr">Адлюстроўвае лініі кірунку ад вашага становішча да актыўнага маркера.</string>
     <string name="show_arrows_descr">Адлюстроўвае адну ці дзьве стрэлкі, якія паказваюць кірунак да актыўных маркераў.</string>
     <string name="distance_indication_descr">Выберыце, як адлюстроўваць адлегласьць да актыўных маркераў.</string>
     <string name="active_markers_descr">Выберыце, колькі індыкатараў накірунку будзе адлюстравана.</string>
     <string name="appearance_on_the_map">Зьнешні выгляд на мапе</string>
-    <string name="add_track_to_markers_descr">Абраць след шляхавых кропак, якія OsmAnd дадасць у маркеры</string>
+    <string name="add_track_to_markers_descr">Абярыце трэк, каб дадаць шляхавые кропкі да маркераў. (Пералічаныя толькі трэкі з шляхавымі кропкамі.)</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_right">Направа</string>
     <string name="shared_string_left">Налева</string>
     <string name="shared_string_more_without_dots">Больш</string>
+    <string name="looking_for_tracks_with_waypoints">Пошук слядоў з шляхавымі кропкамі</string>
     </resources>

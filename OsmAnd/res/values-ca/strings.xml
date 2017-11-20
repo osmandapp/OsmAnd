@@ -2294,7 +2294,7 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="quick_favorites_show_favorites_dialog">Mostra el diàleg de preferides</string>
     <string name="quick_favorites_name_preset">Configuració de nom</string>
     <string name="quick_action_add_marker_descr">Si premeu el botó de l\'acció s\'afegirà un marcador a la posició del centre de la pantalla.</string>
-    <string name="quick_action_add_gpx_descr">Si premeu el botó de l\'acció s\'afegirà una fita de GPX a la posició del centre de la pantalla.</string>
+    <string name="quick_action_add_gpx_descr">Prement el botó de l\'acció s\'afegirà, al centre de la pantalla, una fita GPX.</string>
     <string name="quick_action_take_audio_note_descr">Si premeu el botó de l\'acció s\'afegirà una nota d\'àudio a la posició del centre de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">"Si premeu el botó de l\'acció  s\'afegirà una nota de vídeo a la posició del centre de la pantalla."</string>
     <string name="quick_action_take_photo_note_descr">Si premeu el botó de l\'acció s\'afegirà una nota fotogràfica a la posició del centre de la pantalla.</string>
@@ -2638,7 +2638,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="date_added">S\'ha afegit la data</string>
     <string name="order_by">Ordena segons:</string>
     <string name="marker_show_distance_descr">Seleccioneu com indicar la distància i direcció vers els marcadors de mapa a la pantalla del mapa:</string>
-    <string name="show_guide_line">Mostra la línia guia</string>
+    <string name="show_guide_line">Mostra les línies guia</string>
     <string name="show_arrows_on_the_map">Mostra fletxes sobre el mapa</string>
     <string name="show_passed">Mostra ja passat</string>
     <string name="hide_passed">Amaga ja passat</string>
@@ -2653,7 +2653,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="marker_save_as_track">Desa com una traça</string>
     <string name="move_to_history">Mou a l\'historial</string>
     <string name="plan_route">Planifica la ruta</string>
-    <string name="group_will_be_removed_after_restart">Ss\'esborrarà el grup després de reiniciar</string>
+    <string name="group_will_be_removed_after_restart">S\'esborrarà el grup un cop es reiniciï l\'aplicació.</string>
     <string name="shared_string_markers">Marcadors</string>
     <string name="coordinates_format">Format de coordenades</string>
     <string name="use_system_keyboard">Utilitza el teclat del sistema</string>
@@ -2667,10 +2667,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="osn_modify_dialog_error">S\'ha produït una excepció: la nota no s\'ha modificat</string>
     <string name="osn_modify_dialog_title">Modifica nota</string>
     <string name="context_menu_item_modify_note">Modifica nota d\'OSM</string>
-    <string name="release_2_8">\\022 Marcadors revisats totalment amb orientacions i planificació de la ruta
-\n
-\n • Eina de mesura de distàncies amb capacitat per resseguir les vies i desar els punts com una traça
-\n
+    <string name="release_2_8">\\022 Marcadors revisats totalment amb orientacions i planificació de la ruta 
+\n 
+\n • Eina de mesura de distàncies amb capacitat per resseguir les vies i desar els punts com una traça 
+\n 
 \n • OsmAnd Live: correcció d\'errors, actualització de dades al servidor cada 30 minuts, implementació d\'actualitzacions durant la navegació
 \n
 \n</string>
@@ -2694,24 +2694,24 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="tap_on_map_to_hide_interface">Mode de pantalla completa</string>
     <string name="show_on_top_bar">Mostra a la barra superior</string>
     <string name="mark_passed">Marca com passat</string>
-    <string name="digits_quantity">Nombre de dígits</string>
+    <string name="digits_quantity">Nombre de dígits decimals</string>
     <string name="shared_string_right">Dreta</string>
     <string name="shared_string_left">Esquerra</string>
     <string name="show_number_pad">Mostra el teclat numèric</string>
     <string name="shared_string_paste">Enganxa</string>
-    <string name="coordinate_input_accuracy_description">Canvia automàticament al següent camp després d\'introduïr %1$d dígits decimals.</string>
+    <string name="coordinate_input_accuracy_description">Canvia automàticament al següent camp després d\'introduir %1$d dígits decimals.</string>
     <string name="coordinate_input_accuracy">%1$d dígits</string>
     <string name="go_to_next_field">Vés al camp següent</string>
     <string name="rename_marker">Reanomena el marcador</string>
     <string name="appearance_on_the_map">Aparença al mapa</string>
-    <string name="add_track_to_markers_descr">Seleccioneu les fites de la traça que OsmAnd afegirà als marcadors</string>
-    <string name="add_favourites_group_to_markers_descr">Seleccioneu els grups preferits que voleu afegir als marcadors.</string>
+    <string name="add_track_to_markers_descr">Seleccioneu una traça per afegir les seves fites als marcadors. (Només es llisten les traces amb fites).</string>
+    <string name="add_favourites_group_to_markers_descr">Seleccioneu una categoria preferida per afegir-la als marcadors.</string>
     <string name="track_waypoints">Fites de la traça</string>
-    <string name="favourites_group">Grup de preferits</string>
+    <string name="favourites_group">Categoria de preferits</string>
     <string name="add_group">Afegeix un grup</string>
-    <string name="add_group_descr">Podeu afegir un grup de preferits o fites de la traça.</string>
-    <string name="empty_state_markers_active">Marcadors al mapa!</string>
-    <string name="empty_state_markers_active_desc">Destaca llocs al mapa per prémer-hi.</string>
+    <string name="add_group_descr">Podeu importar grups des de preferits o des de fites d\'una traça.</string>
+    <string name="empty_state_markers_active">Creeu marcadors de mapa!</string>
+    <string name="empty_state_markers_active_desc">Premeu més o menys temps sobre els llocs i després el botó tipus bandera del marcador.</string>
     <string name="empty_state_markers_groups">Importa grups</string>
     <string name="empty_state_markers_groups_desc">Podeu importar com marcadors a grups de preferits o a fites de la traça.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
@@ -2723,4 +2723,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="distance_indication_descr">Seleccioneu com indicar la distància als marcadors actius.</string>
     <string name="active_markers_descr">Trieu quants indicadors de direcció es mostren.</string>
     <string name="shared_string_more_without_dots">Més</string>
+    <string name="looking_for_tracks_with_waypoints">Recerca de traces amb fites</string>
     </resources>

@@ -1924,7 +1924,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
 	<string name="shared_string_commit">Confirmar</string>
 	
     <string name="context_menu_item_delete_waypoint">¿Borrar el punto GPX?</string>
-    <string name="context_menu_item_edit_waypoint">Editar el punto GPX</string>
+    <string name="context_menu_item_edit_waypoint">Editar punto GPX</string>
     <string name="rendering_attr_currentTrackColor_description">Color del GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Ancho del GPX</string>
     <string name="rendering_attr_roadStyle_description">Estilo del camino</string>
@@ -2764,7 +2764,7 @@ Proporciona un código completo</string>
     <string name="ascendingly">ascendente</string>
     <string name="date_added">Fecha de adición</string>
     <string name="order_by">Ordenar por:</string>
-    <string name="show_guide_line">Mostrar línea guía</string>
+    <string name="show_guide_line">Mostrar líneas guía</string>
     <string name="show_arrows_on_the_map">Mostrar flechas en el mapa</string>
     <string name="show_passed">Mostrar descartados</string>
     <string name="hide_passed">Ocultar descartados</string>
@@ -2779,7 +2779,7 @@ Proporciona un código completo</string>
     <string name="marker_save_as_track_descr">Exporta los marcadores a un archivo que puedes nombrar aquí:</string>
     <string name="marker_save_as_track">Guardar como traza</string>
     <string name="move_to_history">Mover al historial</string>
-    <string name="group_will_be_removed_after_restart">El grupo se quitará al reiniciar</string>
+    <string name="group_will_be_removed_after_restart">El grupo se quitará al reiniciar la aplicación.</string>
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formato de coordenadas</string>
     <string name="use_system_keyboard">Usar teclado del sistema</string>
@@ -2793,10 +2793,10 @@ Proporciona un código completo</string>
     <string name="osn_modify_dialog_error">Excepción ocurrida: el informe de problema no se modificó</string>
     <string name="osn_modify_dialog_title">Modificar informe</string>
     <string name="context_menu_item_modify_note">Modificar informe de problema OSM</string>
-    <string name="release_2_8">• Marcadores del mapa totalmente rediseñados con directrices y planificación de rutas
-\n
-\n • La herramienta de medición de distancias permite el ajuste al camino y guardar puntos como una traza
-\n
+    <string name="release_2_8">• Marcadores del mapa totalmente rediseñados con líneas guía y planificación de rutas 
+\n 
+\n • La herramienta de medición de distancias permite el ajuste al camino y guardar puntos como una traza 
+\n 
 \n • OSM Live: corrección de errores, nuevos datos en el servidor cada 30 minutos, actualizaciones implementadas en la navegación
 \n
 \n</string>
@@ -2820,23 +2820,23 @@ Proporciona un código completo</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     <string name="show_on_top_bar">Mostrar en la barra superior</string>
     <string name="mark_passed">Descartar marcador</string>
-    <string name="digits_quantity">Cantidad de dígitos</string>
+    <string name="digits_quantity">Número de dígitos decimales</string>
     <string name="shared_string_right">Derecha</string>
     <string name="shared_string_left">Izquierda</string>
     <string name="show_number_pad">Mostrar teclado numérico</string>
     <string name="shared_string_paste">Pegar</string>
-    <string name="coordinate_input_accuracy_description">Cambiar automáticamente al campo siguiente al ingresar %1$d dígitos después del punto decimal.</string>
+    <string name="coordinate_input_accuracy_description">Cambiar automáticamente al campo siguiente al ingresar %1$d dígitos decimales.</string>
     <string name="coordinate_input_accuracy">%1$d dígitos</string>
     <string name="go_to_next_field">Ir al campo siguiente</string>
     <string name="rename_marker">Renombrar marcador</string>
-    <string name="add_track_to_markers_descr">Elige los puntos de referencia de la traza que se añadirán a los marcadores.</string>
-    <string name="add_favourites_group_to_markers_descr">Elige grupos de favoritos para añadir a los marcadores.</string>
+    <string name="add_track_to_markers_descr">Elige una traza y sus puntos de referencia se añadirán a los marcadores. (Sólo se listan las trazas con puntos de referencia.)</string>
+    <string name="add_favourites_group_to_markers_descr">Elige una categoría de favoritos para añadir a los marcadores.</string>
     <string name="track_waypoints">Puntos de referencia de la traza</string>
-    <string name="favourites_group">Grupo de favoritos</string>
-    <string name="add_group">Añadir grupo</string>
-    <string name="add_group_descr">Puedes añadir un grupo de favoritos o puntos de referencia de la traza.</string>
-    <string name="empty_state_markers_active">¡Marcadores en el mapa!</string>
-    <string name="empty_state_markers_active_desc">Marca los lugares del mapa con una pulsación.</string>
+    <string name="favourites_group">Categoría de favoritos</string>
+    <string name="add_group">Añadir un grupo</string>
+    <string name="add_group_descr">Puedes importar grupos desde favoritos o puntos de referencia de la traza.</string>
+    <string name="empty_state_markers_active">¡Crea marcadores del mapa!</string>
+    <string name="empty_state_markers_active_desc">Haz una pulsación corta o larga sobre los lugares, luego pulsa la bandera del marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
     <string name="empty_state_markers_groups_desc">Puedes importar grupos de favoritos o puntos de referencias de la traza como marcadores.</string>
     <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
@@ -2847,4 +2847,7 @@ Proporciona un código completo</string>
     <string name="distance_indication_descr">Elige cómo mostrar la distancia a los marcadores activos.</string>
     <string name="active_markers_descr">Elige cuántos indicadores de dirección mostrar.</string>
     <string name="appearance_on_the_map">Aspecto en el mapa</string>
+    <string name="looking_for_tracks_with_waypoints">Búsqueda de trazas con puntos de referencia</string>
+    <string name="shared_string_more_without_dots">Más</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     </resources>

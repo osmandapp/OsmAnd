@@ -1163,7 +1163,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="driving_region_us">美國</string>
     <string name="driving_region_canada">加拿大</string>
     <string name="driving_region_europe_asia">歐洲、亞洲、拉丁美洲和同類的</string>
-    <string name="driving_region_uk">英國、印度和其他</string>
+    <string name="driving_region_uk">英國、印度和同類的</string>
     <string name="driving_region">駕駛區域</string>
     <string name="map_widget_fps_info">FPS 除錯資訊</string>
 
@@ -2926,7 +2926,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="show_on_top_bar">在頂列上顯示</string>
     <string name="mark_passed">已經過標記</string>
     <string name="rename_marker">重新命名標記</string>
-    <string name="digits_quantity">數位量</string>
+    <string name="digits_quantity">小數位數</string>
     <string name="shared_string_right">右方</string>
     <string name="shared_string_left">左方</string>
     <string name="show_number_pad">顯示數字鍵盤</string>
@@ -2935,14 +2935,14 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="coordinate_input_accuracy">%1$d 個數字</string>
     <string name="go_to_next_field">到下一段</string>
     <string name="appearance_on_the_map">顯現在地圖上</string>
-    <string name="add_track_to_markers_descr">選擇 OsmAnd 將哪個軌跡航點增加到標記</string>
-    <string name="add_favourites_group_to_markers_descr">選擇您想增加標記的我的收藏群組。</string>
+    <string name="add_track_to_markers_descr">選擇一個軌跡將航點增加到標記 (只有軌跡的航點才會列出)</string>
+    <string name="add_favourites_group_to_markers_descr">選擇您想增加標記的收藏類別。</string>
     <string name="track_waypoints">軌跡航點</string>
-    <string name="favourites_group">我的收藏群組</string>
+    <string name="favourites_group">我的收藏類別</string>
     <string name="add_group">新增群組</string>
-    <string name="add_group_descr">您可以增加一個我的收藏群組或軌跡航點。</string>
-    <string name="empty_state_markers_active">在地圖上標記！</string>
-    <string name="empty_state_markers_active_desc">在地圖上點一下標記地點。</string>
+    <string name="add_group_descr">您可以從我的收藏匯入群組或軌跡航點。</string>
+    <string name="empty_state_markers_active">建立地圖標記！</string>
+    <string name="empty_state_markers_active_desc">長按或點一下地點，然後點擊標記標誌按鈕。</string>
     <string name="empty_state_markers_groups">匯入群組</string>
     <string name="empty_state_markers_groups_desc">您可以匯入我的收藏群組或軌跡航點作為標記。</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
@@ -2954,4 +2954,5 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="show_guide_line_descr">從您的位置顯示指引路線到現行的標記位置。</string>
     <string name="show_arrows_descr">顯示一個或兩個箭頭指示方向到現行的標記。</string>
     <string name="shared_string_more_without_dots">更多</string>
+    <string name="looking_for_tracks_with_waypoints">尋找軌跡跟航點</string>
     </resources>

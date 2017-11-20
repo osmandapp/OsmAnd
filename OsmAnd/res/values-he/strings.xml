@@ -854,7 +854,7 @@
 	<string name="map_view_3d">הצגת המפה בתלת־ממד</string>
 	<string name="show_poi_over_map_description">הצגת נ״ע על גבי המפה (שימוש במסנן האחרון שנבחר)</string>
 	<string name="show_poi_over_map">הצגת נ״ע</string>
-	<string name="map_tile_source_descr">נא לבחור את המקור של אריחי מפה מקוונים או שמורים</string>
+	<string name="map_tile_source_descr">נא לבחור מקור של אריחי מפה מקוונים או שמורים.</string>
 	<string name="map_tile_source">מקור אריחי המפה</string>
 	<string name="map_source">מקור המפה</string>
 	<string name="use_internet">להשתמש באינטרנט</string>
@@ -931,7 +931,7 @@
 	
 	<string name="poi_edit_title">עריכת נ״ע</string>
 	<string name="poi_create_title">יצירת נ״ע</string>
-	<string name="poi_error_poi_not_found">לא ניתן למצוא את המפרק או שנותן השירות מפוזר על פני מספר מפרקים</string>
+	<string name="poi_error_poi_not_found">לא ניתן למצוא את המפרק או שהמתחם מורכב ממספר מפרקים, מצב שלא נתמך עדיין.</string>
 	<string name="poi_remove_confirm_template">האם למחוק את {0} (להזין הערה)?</string>
 	<string name="poi_remove_title">מחיקת נ״ע</string>
 	<string name="shared_string_delete">מחיקה</string>
@@ -1134,7 +1134,7 @@
     <string name="starting_point">נקודת המוצא</string>
     <string name="shared_string_not_selected">לא נבחר</string>
     <string name="rec_split_clip_length">אורך סרטון</string>
-    <string name="rec_split_clip_length_desc">האורך של כל סרטון מוקלט לא יהיה גדול ממרווח הזמן המוגדר</string>
+    <string name="rec_split_clip_length_desc">הגבול העליון לאורך סרטונים מוקלטים.</string>
     <string name="rec_split_storage_size_desc">כמות המקום שמותר לנצל לצורך אחסון כל הסרטונים המוקלטים.</string>
     <string name="live_updates">עדכונים חיים</string>
     <string name="select_voice_provider">בחירת הנחיה קולית</string>
@@ -1210,10 +1210,10 @@
     <string name="wrong_user_name">שם המשתמש שגוי!</string>
     <string name="shared_string_to">עד</string>
     <string name="mapillary_menu_date_from">מ־</string>
-    <string name="mapillary_menu_descr_dates">הצגת תמונות שנוספו בתקופה מסוימת.</string>
-    <string name="mapillary_menu_title_dates">תאריכים</string>
+    <string name="mapillary_menu_descr_dates">הצגת תמונות שנוספו בלבד</string>
+    <string name="mapillary_menu_title_dates">תאריך</string>
     <string name="mapillary_menu_edit_text_hint">הקלדת שם משתמש</string>
-    <string name="mapillary_menu_descr_username">הצגת תמונות שנוספו על ידי משתמש מסוים.</string>
+    <string name="mapillary_menu_descr_username">הצגת תמונות שנוספו רק על ידי</string>
     <string name="mapillary_menu_title_username">שם משתמש</string>
     <string name="mapillary_menu_filter_description">אפשר לסנן תמונות לפי השולח או לפי תאריך. המסננים חלים רק על תקריב בגודל מסוים.</string>
     <string name="map_widget_ruler_control">מד זווית</string>
@@ -1489,16 +1489,16 @@
     <string name="empty_state_markers_groups_desc">ניתן לייבא קבוצות מועדפים או נקודות דרך במסלול כסמנים.</string>
     <string name="shared_string_two">שניים</string>
     <string name="shared_string_one">אחד</string>
-    <string name="show_guide_line_descr">על המפה יופיע קו שמחבר בין המיקום שלך למיקומים של הסמנים הפעילים.</string>
-    <string name="show_arrows_descr">על המפה יופיעו חץ או שניים המציינים את כיוון הסמנים הפעילים.</string>
-    <string name="distance_indication_descr">ניתן לבחור איך ברצונך להציג את המרחק עד לסמנים הפעילים.</string>
-    <string name="active_markers_descr">נא לבחור כמה מחווני כיוון ברצונך לראות.</string>
+    <string name="show_guide_line_descr">הצגת קווים מנחים מהמיקום שלך למיקומים של הסמנים הפעילים.</string>
+    <string name="show_arrows_descr">הצגת חץ או שניים המציינים את כיוון הסמנים הפעילים.</string>
+    <string name="distance_indication_descr">ניתן לבחור כיצד להציג את המרחק עד לסמנים הפעילים.</string>
+    <string name="active_markers_descr">נא לבחור כמה מחווני כיוון יופיעו.</string>
     <string name="digits_quantity">כמות הספרות</string>
     <string name="shared_string_right">ימין</string>
     <string name="shared_string_left">שמאל</string>
     <string name="show_number_pad">הצגת מקלדת ספרות</string>
     <string name="shared_string_paste">הדבקה</string>
-    <string name="coordinate_input_accuracy_description">מעבר אוטומטי לשדה הבא לאחר הזנת %1$d ספרות אחרי הנקודה העשרונית</string>
+    <string name="coordinate_input_accuracy_description">מעבר אוטומטי לשדה הבא לאחר הזנת %1$d ספרות אחרי הנקודה העשרונית.</string>
     <string name="coordinate_input_accuracy">%1$d ספרות</string>
     <string name="go_to_next_field">מעבר לשדה הבא</string>
     <string name="waypoints_added_to_map_markers">נוספו נקודות דרך לסמני המפה</string>
@@ -1989,4 +1989,10 @@
     <string name="feedback">משוב</string>
     <string name="contact_us">יצירת קשר אתנו</string>
     <string name="map_legend">מקרא מפה</string>
+    <string name="show_arrows_on_the_map">הצגת חצים על המפה</string>
+    <string name="remove_from_map_markers">הסרה מסמני המפה</string>
+    <string name="descendingly">יורד</string>
+    <string name="ascendingly">עולה</string>
+    <string name="date_added">תאריך ההוספה</string>
+    <string name="order_by">סידור לפי:</string>
     </resources>

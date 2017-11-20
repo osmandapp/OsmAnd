@@ -2893,4 +2893,20 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_right">Rechts</string>
     <string name="shared_string_left">Links</string>
     <string name="shared_string_paste">Einfügen</string>
+    <string name="looking_for_tracks_with_waypoints">Suche nach Spuren mit Wegpunkten</string>
+    <string name="shared_string_more_without_dots">Mehr</string>
+    <string name="appearance_on_the_map">Darstellung auf der Karte</string>
+    <string name="favourites_group">Favoriten Kategorie</string>
+    <string name="add_group">Gruppe hinzufügen</string>
+    <string name="empty_state_markers_active">Kartenmarkierungen erstellen!</string>
+    <string name="empty_state_markers_groups">Gruppen importieren</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
+    <string name="empty_state_markers_history_desc">Markierungen, die als passiert gekennzeichnet sind, werden auf diesem Bildschirm angezeigt.</string>
+    <string name="digits_quantity">Anzahl der Dezimalstellen</string>
+    <string name="show_number_pad">Nummernblock anzeigen</string>
+    <string name="coordinate_input_accuracy_description">Automatisch in das nächste Feld wechseln nach der Eingabe von \" %1$d Dezimalstellen.</string>
+    <string name="coordinate_input_accuracy">%1$d Ziffern</string>
+    <string name="go_to_next_field">Zum nächsten Feld</string>
+    <string name="rename_marker">Markierung umbenennen</string>
+    <string name="mark_passed">Markierung passiert</string>
     </resources>

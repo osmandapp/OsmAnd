@@ -188,7 +188,7 @@
     <string name="av_use_external_recorder_descr">برای ویدئو از ضبط‌کنندهٔ خود دستگاه استفاده کن.</string>
     <string name="recording_open_external_player">بازکردن پخش‌کنندهٔ خارجی</string>
     <string name="recording_unavailable">موجود نیست</string>
-    <string name="map_widget_distancemeasurement">اندازه‌گیری فاصله</string>
+    <string name="map_widget_distancemeasurement">اندازه‌گیری مسافت</string>
     <string name="index_srtm_parts">بخش‌ها</string>
     <string name="map_widget_show_destination_arrow">نشان‌دادن جهت مقصد</string>
     <string name="no_route">مسیری وجود ندارد</string>
@@ -514,7 +514,7 @@
     <string name="context_menu_item_first_intermediate_point">افزودن به‌عنوان اولین مقصد میانی</string>
     <string name="add_as_last_destination_point">افزودن به‌عنوان آخرین مقصد میانی</string>
     <string name="add_as_first_destination_point">افزودن به‌عنوان اولین مقصد میانی</string>
-    <string name="intermediate_point_too_far">مقصد میانی %1$s با نزدیک‌ترین جاده فاصلهٔ زیادی دارد.</string>
+    <string name="intermediate_point_too_far">مقصد میانی %1$s از نزدیک‌ترین جاده خیلی دور است.</string>
     <string name="arrived_at_intermediate_point">به مقصد میانی خود رسیده‌اید</string>
     <string name="context_menu_item_intermediate_point">افزودن به‌عنوان مقصد میانی</string>
     <string name="add_waypoint_dialog_added">نقطهٔ بین‌راهی GPX، ‏«{0}»، افزوده شد</string>
@@ -678,8 +678,8 @@
 	<string name="osm_settings">ویرایش نقشهٔ OSM</string>
 	<string name="save_current_track_descr">مسیر جاری را همین الآن روی کارت حافظه ذخیره کن.</string>
 	<string name="save_current_track">ذخیرهٔ مسیر GPX جاری</string>
-	<string name="save_track_interval">فاصلهٔ زمانی ثبت داده‌ها در هنگام راهبری</string>
-	<string name="save_track_interval_descr">مشخص کنید فاصلهٔ زمانی ورود داده‌ها برای ضبط مسیر در هنگام راهبری چقدر باشد.</string>
+	<string name="save_track_interval">بازهٔ زمانی ثبت داده‌ها در هنگام راهبری</string>
+	<string name="save_track_interval_descr">مشخص کنید در هنگام راهبری بازهٔ زمانی ورود داده‌ها برای ضبط مسیر چقدر باشد.</string>
 	<string name="save_track_to_gpx_descrp">هنگام راهبری، مسیر GPX به‌صورت خودکار ضبط می‌شود و در پوشهٔ مسیرها (tracks) ذخیره می‌گردد.</string>
 	
 	<string name="osm_settings_descr">تنظیمات لازم برای ارتباط با (OpenStreetMap.org (OSM را مشخص کنید.</string>
@@ -827,7 +827,7 @@
 	<string name="tile_source_already_installed">نقشه قبلاً نصب شده است، تنظیمات به‌روز خواهد شد.</string>
 	<string name="internet_not_available">برای این عملیات ارتباط اینترنتی لازم است ولی اکنون وجود ندارد.</string>
 	<string name="install_more">نصب بیشتر…</string>
-	<string name="level_to_switch_vector_raster_descr">حداقل زوم برای استفاده از نقشه‌های بُرداری.</string>
+	<string name="level_to_switch_vector_raster_descr">کمترین زوم برای استفاده از نقشه‌های بُرداری.</string>
 	
 	<string name="error_doing_search">در هنگام جست‌وجوی آفلاین خطایی رخ داد.</string>
 	
@@ -958,7 +958,7 @@
 \nتنها می‌توانید نقشه‌های ازپیش‌بارگیری‌شده را ببینید و نمی‌توانید از اینترنت دانلود کنید.</string>
 	<string name="process_navigation_service">سرویس راهبری OsmAnd</string>
 	<string name="background_service_int_descr">بازهٔ بیدارباش سرویس پس‌زمینه را تنظیم کنید.</string>
-	<string name="background_service_int">فاصلهٔ زمانی بیدارباش GPS</string>
+	<string name="background_service_int">بازهٔ زمانی بیدارباش GPS</string>
 	<string name="background_service_provider_descr">مشخص کنید سرویس پس‌زمینه اطلاعات مکانی را چگونه دریافت کند.</string>
 	<string name="background_service_provider">ارائه‌دهندهٔ موقعیت</string>
 	<string name="background_router_service_descr">برنامهٔ OsmAnd در پس‌زمینه اجرا می‌ماند تا در زمانی‌که صفحه خاموش است موقعیت شما را ردگیری کند.</string>
@@ -1180,7 +1180,7 @@
 	<string name="map_transparency_descr">شفافیت نقشهٔ پایه را تغییر دهید.</string>
 	<string name="map_transparency">شفافیت نقشهٔ پایه</string>
 	<string name="select_tile_source_to_install">نقشه‌ها (کاشی) را برای نصب یا به‌روزرسانی انتخاب کنید.</string>
-	<string name="level_to_switch_vector_raster">حداقل سطح زوم بُرداری</string>
+	<string name="level_to_switch_vector_raster">کمترین سطح زوم بُرداری</string>
 	
 	
 	<string name="search_offline_geo_error">نشانی جغرافیایی \'%s\' قابل‌تجزیه نیست.</string>
@@ -1251,12 +1251,12 @@
     <string name="local_index_tile_data_expire">انقضا (به دقیقه): %1$s</string>
     <string name="local_index_tile_data_downloadable">قابل‌دانلود: %1$s</string>
     <string name="local_index_tile_data_maxzoom">حداکثر زوم: %1$s</string>
-    <string name="local_index_tile_data_minzoom">حداقل زوم: %1$s</string>
+    <string name="local_index_tile_data_minzoom">کمترین زوم: %1$s</string>
     <string name="local_index_tile_data_name">داده‌های کاشی: %1$s</string>
     <string name="edit_tilesource_successfully">منبع کاشی %1$s ذخیره شد</string>
     <string name="edit_tilesource_maxzoom">حداکثر زوم</string>
     <string name="edit_tilesource_expiration_time">انقضا (به دقیقه)</string>
-    <string name="edit_tilesource_minzoom">حداقل زوم</string>
+    <string name="edit_tilesource_minzoom">کمترین زوم</string>
     <string name="edit_tilesource_choose_existing">انتخاب از بین موارد موجود…</string>
     <string name="maps_define_edit">تعریف/ویرایش…</string>
 	<string name="driving_region">منطقهٔ رانندگی</string>
@@ -1619,9 +1619,9 @@
     <string name="rendering_attr_showSurfaces_name">نمایش سطح جاده</string>
     <string name="rendering_attr_showCycleRoutes_name">نمایش مسیرهای دوچرخه</string>
     <string name="save_global_track_interval_descr">بازهٔ زمانی برای ضبط مسیر را انتخاب کنید (که از طریق ابزارک ضبط جی‌پی‌ایکس روی نقشه فعال می‌شود).</string>
-	<string name="save_global_track_interval">فاصلهٔ زمانی برای ورود داده‌ها</string>
+	<string name="save_global_track_interval">بازهٔ زمانی ورود داده‌ها (سراسری)</string>
 	<string name="save_track_to_gpx_globally_descr">می‌توانید ثبت موقعیت در فایل GPX را با استفاده از ابزارک ضبط GPX روی صفحهٔ نقشه، خاموش یا روشن کنید.</string>
-	<string name="save_track_interval_globally">فاصلهٔ زمانی ورود</string>
+	<string name="save_track_interval_globally">بازهٔ زمانی ثبت</string>
 	<string name="record_plugin_description">با این افزونه می‌توانید همهٔ مسیرهایتان را ضبط و در قالب فایل GPX ذخیره کنید؛ چه آن مسیرهایی که خودتان می‌روید و چه مسیرهایی که با مسیریابی خواهید پیمود. برای این منظور ابزارک ضبط جی‌پی‌ایکس را بر روی صفحهٔ نقشه لمس کنید. 
 \n 
 \nمی‌توانید مسیرهای ضبط‌شده را با دوستان یا برای استفاده در مشارکت‌های OSM به‌اشتراک بگذارید. ورزشکاران می‌توانند برای کنترل تمرین‌هایشان از مسیرهای ضبط‌شده استفاده کنند. برنامهٔ OsmAnd آنالیزهای ساده‌ای مانند مدت مسیر، سرعت متوسط و... را انجام می‌دهد و البته می‌توانید این مسیرها را در سایر نرم‌افزارهای تحلیلگر نیز آنالیز کنید.</string>
@@ -2034,7 +2034,7 @@
     <string name="access_smart_autoannounce">اعلام هوشمند خودکار</string>
     <string name="access_smart_autoannounce_descr">فقط اگر جهتم از سمت نقطهٔ مقصد منحرف شد، اعلام کن.</string>
     <string name="access_autoannounce_period">بازهٔ زمانی اعلام خودکار</string>
-    <string name="access_autoannounce_period_descr">حداقل فاصلهٔ زمانی بین تکرار پیام‌ها.</string>
+    <string name="access_autoannounce_period_descr">کمترین فاصله بین اعلام پیام‌ها.</string>
     <string name="access_default_color">رنگ پیش‌فرض</string>
     <string name="access_category_choice">انتخاب دسته</string>
     <string name="access_hint_enter_name">نام</string>
@@ -2183,7 +2183,7 @@
     <string name="gpx_logging_no_data">اطلاعاتی وجود ندارد</string>
     <string name="rendering_attr_contourColorScheme_description">رنگ‌بندی منحنی‌های تراز</string>
     <string name="save_track_min_speed">کمترین سرعت برای ورود به سیستم</string>
-    <string name="save_track_precision">حداقل دقت برای ثبت</string>
+    <string name="save_track_precision">کمترین دقت برای ثبت</string>
     <string name="christmas_poi">نقطهٔ POI کریسمس</string>
     <string name="christmas_desc">پیش‌بینی کریسمس و تعطیلات سال نو. برای نمایش POIهای مرتبط با کریسمس: درخت کریسمس، فروشگاه‌ها و غیره.</string>
     <string name="christmas_desc_q">آیا POIهای مربوط به کریسمس نمایش داده شود؟</string>
@@ -2206,7 +2206,7 @@
     <string name="enter_gpx_name">نام فایل GPX:</string>
     <string name="show_on_map_after_saving">مشاهده بر روی نقشه پس از ذخیره‌شدن</string>
     <string name="measurement_tool_action_bar">نقشه را بپیمایید و نقاط را اضافه کنید</string>
-    <string name="measurement_tool">اندازه‌گیری فاصله</string>
+    <string name="measurement_tool">اندازه‌گیری مسافت</string>
     <string name="quick_action_resume_pause_navigation">ادامه/مکث راهبری</string>
     <string name="quick_action_show_navigation_finish_dialog">نمایش پیغام پایان‌یافتن راهبری</string>
     <string name="quick_action_start_stop_navigation">شروع/اتمام راهبری</string>
@@ -2598,7 +2598,7 @@
     <string name="move_to_history">فرستادن به سابقه</string>
     <string name="group_will_be_removed_after_restart">گروه بعد از راه‌اندازی مجدد حذف می‌شود</string>
     <string name="descendingly">نزولی</string>
-    <string name="marker_show_distance_descr">فاصله تا نشانه‌ها و جهت‌گیری به‌سمت آن‌ها چگونه روی نقشه نشان داده شود:</string>
+    <string name="marker_show_distance_descr">مسافت تا نشانه‌ها و جهت‌گیری به‌سمت آن‌ها چگونه روی نقشه نشان داده شود:</string>
     <string name="map_orientation_change_in_accordance_with_speed">آستانهٔ تغییر جهت نقشه</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">مشخص کنید که در چه سرعتی جهت نقشه از «در جهت حرکت» به «در جهت قطب‌نما» تغییر کند.</string>
     <string name="all_markers_moved_to_history">همهٔ نشانه‌های نقشه به سابقه منتقل شد</string>
@@ -2696,14 +2696,14 @@
     <string name="upload_osm_note_description">می‌توانید ویرایش‌های OSM خود را به‌صورت ناشناس یا با نام کاربری سایت OpenStreetMap.org آپلود کنید.</string>
     <string name="route_roundabout_short">خروجی %1$d را بگیرید و بروید</string>
     <string name="trip_rec_notification_settings_desc">در نوار اعلان دستگاه یک اعلان نشان می‌دهد که بتوانید ضبط سفر را شروع کنید.</string>
-    <string name="save_track_min_speed_descr">فیلتر: حداقل سرعتی که یک نقطه باید داشته باشد تا ثبت شود.</string>
-    <string name="save_track_min_distance_descr">فیلتر: حداقل فاصله‌ای که یک نقطه باید از موقعیت قبلی داشته باشد تا ثبت شود.</string>
-    <string name="save_track_precision_descr">فیلتر: حداقل دقتی که یک نقطه باید داشته باشد تا ثبت شود.</string>
+    <string name="save_track_min_speed_descr">فیلتر: کمترین سرعتی که یک نقطه باید داشته باشد تا ثبت شود.</string>
+    <string name="save_track_min_distance_descr">فیلتر: کمترین مسافتی که یک نقطه باید از موقعیت قبلی داشته باشد تا ثبت شود.</string>
+    <string name="save_track_precision_descr">فیلتر: کمترین دقتی که یک نقطه باید داشته باشد تا ثبت شود.</string>
     <string name="find_parking">پیداکردن پارکینگ</string>
     <string name="add_time_span">افزودن بازهٔ زمانی</string>
     <string name="shared_string_undo_all">خنثی‌کردن همه</string>
     <string name="auto_split_recording_title">قطعه‌کردن ضبط‌ها پس از وقفه</string>
-    <string name="save_track_min_distance">حداقل جابه‌جایی برای ثبت</string>
+    <string name="save_track_min_distance">کمترین جابه‌جایی برای ثبت</string>
     <string name="translit_names">نویسه‌گردانی نام‌ها</string>
     <string name="rec_split_clip_length">مدت کلیپ</string>
     <string name="shared_string_sound">صدا</string>
@@ -2759,7 +2759,7 @@
     <string name="empty_state_my_tracks_desc">برای مشاهده مسیری را وارد کنید یا ضبط کنید.</string>
     <string name="import_track">واردکردن مسیر</string>
     <string name="fast_coordinates_input">ورود فوری مختصات</string>
-    <string name="show_guide_line">نمایش خط راهنما</string>
+    <string name="show_guide_line">نمایش خطوط راهنما</string>
     <string name="keep_showing_on_map">به نمایشش روی نقشه ادامه بده</string>
     <string name="save_as_route_point">ذخیره به‌عنوان نقاط مسیر</string>
     <string name="route_point">نقطهٔ مسیر</string>
@@ -2791,9 +2791,9 @@
     <string name="show_legacy_search">نمایش جست‌وجوی موروثی</string>
     <string name="show_legacy_search_desc">جست‌وجوی موروثی را به منو اضافه می‌کند.</string>
     <string name="osmand_extended_description_part3">نقشه • نقاط محبوب (POI یا Points of interest) اطرافتان را نشان می‌دهد • نقشه را در راستای حرکتتان (یا قطب‌نما) تنظیم می‌کند • موقعیتتان یا جایی را که جست‌وجو کرده‌اید، نشانتان می‌دهد • موقعیتتان را با دوستانتان به‌اشتراک بگذارید تا شما را پیدا کنند • جاهایی را که دوست دارید در قسمت نقاط برگزیده ذخیره کنید • شیوهٔ نمایش نام‌های روی نقشه را انتخاب کنید: انگلیسی، محلی یا نویسه‌گردانی‌شده • نمایش نقشه‌های تخصصی آنلاین، تصاویر ماهواره‌ای (بینگ) و رولایه‌های مختلف مانند مسیرهای گردشگردی یا راهبری GPX با امکان تنظیم شفافیت</string>
-    <string name="release_2_8">• نشانه‌های نقشه ضمن اضافه‌شدن قابلیت‌های خطوط راهنما و طرح‌ریزی مسیر به‌صورت کامل بازسازی شد
+    <string name="release_2_8">• نشانه‌های نقشه را به‌صورت کامل بازسازی کردیم و قابلیت‌های خطوط راهنما و طرح‌ریزی مسیر نیز به آن افزوده شد
 \n 
-\n • قابلیت چسبیدن به جاده و ذخیره‌کردن نقاط به‌عنوان مسیر، به ابزار اندازه‌گیری فاصله اضافه شد 
+\n • قابلیت چسبیدن به جاده و ذخیره‌کردن نقاط به‌عنوان مسیر، به ابزار مسافت‌سنج اضافه شد 
 \n 
 \n • به‌روزرسانی پویا (OsmAnd Live): رفع ایرادات - داده‌های سرور هر ۳۰ دقیقه به‌روز می‌شود - به‌روزرسانی‌ها در مسیریابی استفاده می‌شود
 \n
@@ -2933,30 +2933,32 @@
     <string name="show_on_top_bar">در نوار بالا نشان بده</string>
     <string name="mark_passed">از این عبور کردم</string>
     <string name="rename_marker">تغییر نام نشانه</string>
-    <string name="digits_quantity">تعداد ارقام</string>
+    <string name="digits_quantity">تعداد رقم‌های اعشاری</string>
     <string name="shared_string_right">راست</string>
     <string name="shared_string_left">چپ</string>
     <string name="show_number_pad">نمایش صفحه‌کلید عددی</string>
     <string name="shared_string_paste">الصاق</string>
-    <string name="coordinate_input_accuracy_description">با واردکردن %1$d رقم پس از ممیز، خانۀ بعدی به‌صورت خودکار فعال شود.</string>
+    <string name="coordinate_input_accuracy_description">با واردکردن %1$d رقم اعشار، خانۀ بعدی به‌صورت خودکار فعال شود.</string>
     <string name="coordinate_input_accuracy">%1$d رقم</string>
     <string name="go_to_next_field">پرش خودکار به خانهٔ بعدی</string>
     <string name="shared_string_two">دو</string>
     <string name="shared_string_one">یک</string>
-    <string name="show_guide_line_descr">نمایش خطوط راهنما از موقعیت شما به‌سوی نشانه‌های فعال.</string>
+    <string name="show_guide_line_descr">نمایش خطوط راهنما از موقعیت شما به‌سمت نشانه‌های فعال.</string>
     <string name="show_arrows_descr">نمایش سمت قرارگیری نشانه‌های فعال روی نقشه با یک یا دو پیکان.</string>
-    <string name="distance_indication_descr">مشخص کنید که فاصلهٔ شما تا نشانه‌های فعال چگونه نشان داده شود.</string>
+    <string name="distance_indication_descr">مشخص کنید که مسافت شما تا نشانه‌های فعال چگونه نشان داده شود.</string>
     <string name="active_markers_descr">مشخص کنید چند پیکانِ جهت‌نما نشان داده شود.</string>
     <string name="appearance_on_the_map">ظاهر بر روی نقشه</string>
-    <string name="add_track_to_markers_descr">نقاط بین‌راهی موردنظرتان را انتخاب کنید تا به نشانه‌ها اضافه شوند</string>
-    <string name="add_favourites_group_to_markers_descr">گروه موردنظرتان از نقاط برگزیده را انتخاب کنید تا به نشانه‌ها اضافه شود.</string>
+    <string name="add_track_to_markers_descr">مسیری را انتخاب کنید تا نقاط بین‌راهیِ آن به نشانه‌ها اضافه شود. (فقط مسیرهای دارای نقطهٔ بین‌راهی فهرست شده‌اند.)</string>
+    <string name="add_favourites_group_to_markers_descr">یک گروه از نقاط برگزیده را انتخاب کنید تا به نشانه‌ها اضافه شود.</string>
     <string name="track_waypoints">نقاط بین‌راهی مسیر</string>
     <string name="favourites_group">گروه نقاط برگزیده</string>
     <string name="add_group">افزودن گروه</string>
-    <string name="add_group_descr">می‌توانید گروهی از نقاط برگزیده یا نقاط بین‌راهی را اضافه کنید.</string>
-    <string name="empty_state_markers_active">نشانه‌گذاری روی نقشه!</string>
-    <string name="empty_state_markers_active_desc">با لمسِ نقشه، مکان‌های مختلف را نشانه بزنید.</string>
+    <string name="add_group_descr">می‌توانید گروهی از نقاط برگزیده یا نقاط بین‌راهی را وارد کنید.</string>
+    <string name="empty_state_markers_active">روی نقشه نشانه‌گذاری کنید!</string>
+    <string name="empty_state_markers_active_desc">مکان‌ها به‌صورت کوتاه یا طولانی لمس کنید و سپس دکمهٔ پرچم را بزنید.</string>
     <string name="empty_state_markers_groups">واردکردن گروه‌ها</string>
     <string name="empty_state_markers_groups_desc">می‌توانید گروه‌های نقاط برگزیده یا نقاط بین‌راهی را به‌عنوان نشانه وارد کنید.</string>
     <string name="empty_state_markers_history_desc">نشانه‌هایی که به‌عنوان عبورکرده مشخص شده‌اند در این صفحه نشان داده می‌شوند.</string>
+    <string name="shared_string_more_without_dots">بیشتر</string>
+    <string name="looking_for_tracks_with_waypoints">جست‌وجو برای مسیرهای دارای نقطهٔ بین‌راهی</string>
     </resources>
