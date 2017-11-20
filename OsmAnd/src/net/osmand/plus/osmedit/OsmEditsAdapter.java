@@ -11,8 +11,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.RenderingIcons;
@@ -159,9 +157,9 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 			action = getContext().getString(R.string.shared_string_edited);
 		}
 
-		String subtype = "";
-		if (point.getGroup() == OsmPoint.Group.POI && !Algorithms.isEmpty(((OpenstreetmapPoint) point).getSubtype())) {
-			subtype = ((OpenstreetmapPoint) point).getSubtype();
+		String category = "";
+		if (point.getGroup() == OsmPoint.Group.POI) {
+			category = ((OpenstreetmapPoint) point).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
 		}
 
 		String prefix = OsmEditingPlugin.getPrefix(point);
@@ -170,8 +168,8 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 		if (!Algorithms.isEmpty(action)) {
 			description += action + " • ";
 		}
-		if (!Algorithms.isEmpty(subtype)) {
-			description += subtype + " • ";
+		if (!Algorithms.isEmpty(category)) {
+			description += category + " • ";
 		}
 		description += prefix;
 
