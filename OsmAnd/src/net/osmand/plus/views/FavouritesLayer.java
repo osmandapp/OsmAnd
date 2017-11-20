@@ -20,6 +20,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -37,6 +38,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 	protected OsmandMapTileView view;
 	private Paint paint;
 	private FavouritesDbHelper favorites;
+	private MapMarkersHelper mapMarkersHelper;
 	protected List<FavouritePoint> cache = new ArrayList<>();
 	private MapTextLayer textLayer;
 	private Paint paintIcon;
@@ -55,10 +57,6 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		return favorites.getFavouritePoints();
 	}
 
-	protected List<? extends FavouritePoint> getSyncedPoints() {
-		return favorites.getSyncedFavouritePoints();
-	}
-
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
@@ -68,6 +66,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		paint.setDither(true);
 		settings = view.getApplication().getSettings();
 		favorites = view.getApplication().getFavorites();
+		mapMarkersHelper = view.getApplication().getMapMarkersHelper();
 		textLayer = view.getLayerByClass(MapTextLayer.class);
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
@@ -98,7 +97,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		if (contextMenuLayer.getMoveableObject() instanceof FavouritePoint) {
 			FavouritePoint objectInMotion = (FavouritePoint) contextMenuLayer.getMoveableObject();
 			FavoriteImageDrawable fid;
-			if (getSyncedPoints().contains(objectInMotion)) {
+			if (mapMarkersHelper.isSynced(objectInMotion)) {
 				fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), objectInMotion.getColor());
 			} else {
 				fid = FavoriteImageDrawable.getOrCreate(view.getContext(),
@@ -143,7 +142,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 				}
 				for (FavouritePoint o : fullObjects) {
 					if (o != contextMenuLayer.getMoveableObject()) {
-						boolean syncedPoint = getSyncedPoints().contains(o);
+						boolean syncedPoint = mapMarkersHelper.isSynced(o);
 						drawPoint(canvas, tileBox, latLonBounds, o, syncedPoint);
 					}
 				}
@@ -184,7 +183,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		for (FavouritePoint n : getPoints()) {
-			if (!getSyncedPoints().contains(n)) {
+			if (!mapMarkersHelper.isSynced(n)) {
 				getFavFromPoint(tb, res, r, ex, ey, n);
 			}
 		}

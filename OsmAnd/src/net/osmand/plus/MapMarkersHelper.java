@@ -514,7 +514,6 @@ public class MapMarkersHelper {
 				if (!favGroup.visible) {
 					removeActiveMarkersFromSyncGroup(group.getId());
 					removeActiveMarkersFromGroup(group.getId());
-					favouritesDbHelper.removeSyncedGroup(favGroup);
 					return;
 				}
 				if (group.getColor() == -1) {
@@ -524,8 +523,6 @@ public class MapMarkersHelper {
 				for (FavouritePoint fp : favGroup.points) {
 					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName(), enabled, fp, null);
 				}
-				favouritesDbHelper.removeSyncedGroup(favGroup);
-				favouritesDbHelper.addSyncedGroup(favGroup);
 
 				removeOldMarkersIfNeeded(dbMarkers);
 			} else if (group.getType() == MarkersSyncGroup.GPX_TYPE) {
@@ -549,7 +546,6 @@ public class MapMarkersHelper {
 					group.setColor(pt.getColor(defColor));
 					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name, enabled, null, pt);
 				}
-				selectedGpxFile.setSynced(true);
 
 				removeOldMarkersIfNeeded(dbMarkers);
 			}
@@ -566,6 +562,29 @@ public class MapMarkersHelper {
 				});
 			}
 		}
+	}
+
+	public boolean isSynced(SelectedGpxFile gpxFile) {
+		GPXFile gpx = gpxFile.getGpxFile();
+		List<WptPt> gpxPoints = gpx.getPoints();
+		for (WptPt wptPt : gpxPoints) {
+			for (MapMarker marker : mapMarkers) {
+				if (marker.id.equals(gpx.path + wptPt.name)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public boolean isSynced(FavouritePoint favouritePoint) {
+		FavoriteGroup group = favouritesDbHelper.getGroup(favouritePoint);
+		for (MapMarker marker : mapMarkers) {
+			if (marker.id.equals(favouritePoint.getName() + group.name)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void addNewMarkerIfNeeded(MarkersSyncGroup group, List<MapMarker> markers, LatLon latLon, String name, boolean enabled, FavouritePoint favouritePoint, WptPt wptPt) {

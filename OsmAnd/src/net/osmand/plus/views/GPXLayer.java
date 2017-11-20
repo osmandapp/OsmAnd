@@ -35,6 +35,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.CommonPreference;
@@ -80,6 +81,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 
 	private GpxSelectionHelper selectedGpxHelper;
+	private MapMarkersHelper mapMarkersHelper;
 	private Paint paintBmp;
 	private List<WptPt> cache = new ArrayList<>();
 	private Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
@@ -108,6 +110,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		selectedGpxHelper = view.getApplication().getSelectedGpxHelper();
+		mapMarkersHelper = view.getApplication().getMapMarkersHelper();
 		osmandRenderer = view.getApplication().getResourceManager().getRenderer().getRenderer();
 		initUI();
 	}
@@ -526,7 +529,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private boolean isSynced(SelectedGpxFile g) {
-		return g.isSynced();
+		return mapMarkersHelper.isSynced(g);
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
@@ -655,7 +658,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void syncGpx(GPXFile gpxFile) {
 		File gpx = new File(gpxFile.path);
 		if (gpx.exists()) {
-			view.getApplication().getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(gpx.getAbsolutePath(),
+			mapMarkersHelper.syncGroupAsync(new MarkersSyncGroup(gpx.getAbsolutePath(),
 					AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE));
 		}
 	}
