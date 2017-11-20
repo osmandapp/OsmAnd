@@ -11,12 +11,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
+import java.util.Map;
 
 public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 
@@ -119,14 +121,25 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 	private Drawable getIcon(OsmPoint point) {
 		if (point.getGroup() == OsmPoint.Group.POI) {
 			OpenstreetmapPoint osmPoint = (OpenstreetmapPoint) point;
-			String type = osmPoint.getType();
-			String subtype = osmPoint.getSubtype();
-			int iconResId = RenderingIcons.getBigIconResourceId(type);
-			if (iconResId == 0) {
-				iconResId = RenderingIcons.getBigIconResourceId(type + "_" + subtype);
-				if (iconResId == 0) {
-					iconResId = R.drawable.ic_type_info;
+			int iconResId = 0;
+			String poiTranslation = osmPoint.getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+			if (poiTranslation != null) {
+				Map<String, PoiType> poiTypeMap = app.getPoiTypes().getAllTranslatedNames(false);
+				PoiType poiType = poiTypeMap.get(poiTranslation.toLowerCase());
+				if (poiType != null) {
+					String id = null;
+					if (RenderingIcons.containsBigIcon(poiType.getIconKeyName())) {
+						id = poiType.getIconKeyName();
+					} else if (RenderingIcons.containsBigIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
+						id = poiType.getOsmTag() + "_" + poiType.getOsmValue();
+					}
+					if (id != null) {
+						iconResId = RenderingIcons.getBigIconResourceId(id);
+					}
 				}
+			}
+			if (iconResId == 0) {
+				iconResId = R.drawable.ic_type_info;
 			}
 			int colorResId = R.color.color_distance;
 			if (point.getAction() == OsmPoint.Action.CREATE) {
