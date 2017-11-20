@@ -483,7 +483,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
-		if (unknownLocation || !(o instanceof MapMarker)
+		if (unknownLocation || o == null || !(o instanceof MapMarker)
 				|| !map.getMyApplication().getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
 			return false;
 		}
