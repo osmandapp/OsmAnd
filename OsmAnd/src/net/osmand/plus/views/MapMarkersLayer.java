@@ -512,14 +512,16 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		int r = getRadiusPoi(tileBox);
 		for (int i = 0; i < markers.size(); i++) {
 			MapMarker marker = markers.get(i);
-			LatLon latLon = marker.point;
-			if (latLon != null) {
-				int ex = (int) point.x;
-				int ey = (int) point.y;
-				int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-				int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-				if (calculateBelongs(ex, ey, x, y, r)) {
-					o.add(marker);
+			if (marker.wptPt == null && marker.favouritePoint == null) {
+				LatLon latLon = marker.point;
+				if (latLon != null) {
+					int ex = (int) point.x;
+					int ey = (int) point.y;
+					int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+					int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+					if (calculateBelongs(ex, ey, x, y, r)) {
+						o.add(marker);
+					}
 				}
 			}
 		}

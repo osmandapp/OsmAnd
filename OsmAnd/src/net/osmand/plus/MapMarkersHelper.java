@@ -587,6 +587,24 @@ public class MapMarkersHelper {
 		return false;
 	}
 
+	public MapMarker getMapMarker(WptPt wptPt) {
+		for (MapMarker marker : mapMarkers) {
+			if (marker.wptPt == wptPt) {
+				return marker;
+			}
+		}
+		return null;
+	}
+
+	public MapMarker getMapMarker(FavouritePoint favouritePoint) {
+		for (MapMarker marker : mapMarkers) {
+			if (marker.favouritePoint == favouritePoint) {
+				return marker;
+			}
+		}
+		return null;
+	}
+
 	private void addNewMarkerIfNeeded(MarkersSyncGroup group, List<MapMarker> markers, LatLon latLon, String name, boolean enabled, FavouritePoint favouritePoint, WptPt wptPt) {
 		boolean exists = false;
 

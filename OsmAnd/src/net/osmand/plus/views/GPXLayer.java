@@ -542,15 +542,13 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		for (SelectedGpxFile g : selectedGpxHelper.getSelectedGPXFiles()) {
-			if (!isSynced(g)) {
-				List<WptPt> pts = getListStarPoints(g);
-				// int fcolor = g.getColor() == 0 ? clr : g.getColor();
-				for (WptPt n : pts) {
-					int x = (int) tb.getPixXFromLatLon(n.lat, n.lon);
-					int y = (int) tb.getPixYFromLatLon(n.lat, n.lon);
-					if (calculateBelongs(ex, ey, x, y, r)) {
-						res.add(n);
-					}
+			List<WptPt> pts = getListStarPoints(g);
+			// int fcolor = g.getColor() == 0 ? clr : g.getColor();
+			for (WptPt n : pts) {
+				int x = (int) tb.getPixXFromLatLon(n.lat, n.lon);
+				int y = (int) tb.getPixYFromLatLon(n.lat, n.lon);
+				if (calculateBelongs(ex, ey, x, y, r)) {
+					res.add(n);
 				}
 			}
 		}
