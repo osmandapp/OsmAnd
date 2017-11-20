@@ -120,14 +120,15 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 
 	private Drawable getIcon(OsmPoint point) {
 		if (point.getGroup() == OsmPoint.Group.POI) {
-			Node node = ((OpenstreetmapPoint) point).getEntity();
-			int iconResId = 0;
-			String typeStr = node.getTag(OSMSettings.OSMTagKey.AMENITY);
-			if (!Algorithms.isEmpty(typeStr)) {
-				iconResId = RenderingIcons.getBigIconResourceId(OSMSettings.OSMTagKey.AMENITY.getValue() + "_" + typeStr);
-			}
+			OpenstreetmapPoint osmPoint = (OpenstreetmapPoint) point;
+			String type = osmPoint.getType();
+			String subtype = osmPoint.getSubtype();
+			int iconResId = RenderingIcons.getBigIconResourceId(type);
 			if (iconResId == 0) {
-				iconResId = R.drawable.ic_type_info;
+				iconResId = RenderingIcons.getBigIconResourceId(type + "_" + subtype);
+				if (iconResId == 0) {
+					iconResId = R.drawable.ic_type_info;
+				}
 			}
 			int colorResId = R.color.color_distance;
 			if (point.getAction() == OsmPoint.Action.CREATE) {
