@@ -3,28 +3,27 @@ package net.osmand.plus.audionotes;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.FileProvider;
-import android.support.v4.view.MenuItemCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
-import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
@@ -32,119 +31,292 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings.NotesSortByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.audionotes.ItemMenuBottomSheetDialogFragment.ItemMenuFragmentListener;
+import net.osmand.plus.audionotes.SortByMenuBottomSheetDialogFragment.SortFragmentListener;
+import net.osmand.plus.audionotes.adapters.NotesAdapter;
+import net.osmand.plus.audionotes.adapters.NotesAdapter.NotesAdapterListener;
 import net.osmand.plus.base.OsmAndListFragment;
-import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class NotesFragment extends OsmAndListFragment {
+
+	public static final Recording SHARE_LOCATION_FILE = new Recording(new File("."));
+
 	private static final Log LOG = PlatformUtil.getLog(NotesFragment.class);
+	private static final int MODE_DELETE = 100;
+	private static final int MODE_SHARE = 101;
 
-	AudioVideoNotesPlugin plugin;
-	List<AudioVideoNotesPlugin.Recording> items;
-	NotesAdapter listAdapter;
+	private AudioVideoNotesPlugin plugin;
+	private NotesAdapter listAdapter;
+	private Set<Recording> selected = new HashSet<>();
+
 	private View footerView;
+	private View emptyView;
 
-	private boolean selectionMode = false;
+	private boolean selectionMode;
 
-	private final static int MODE_DELETE = 100;
-	private final static int MODE_SHARE = 101;
-	
 	private ActionMode actionMode;
-
-	private ArrayList<AudioVideoNotesPlugin.Recording> selected = new ArrayList<>();
-	Recording shareLocationFile = new Recording(new File("."));
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		setHasOptionsMenu(true);
-		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
-		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
-		view.findViewById(R.id.select_all).setVisibility(View.GONE);
-		((TextView) view.findViewById(R.id.header)).setText(R.string.notes);
-		final CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
-		selectAll.setVisibility(View.GONE);
-		selectAll.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (selectAll.isChecked()) {
-					selectAll();
-				} else {
-					deselectAll();
-				}
-				updateSelectionTitle(actionMode);
-			}
-		});
-		return view;
-	}
-	
-	@Override
-	public ArrayAdapter<?> getAdapter() {
-		return listAdapter;
-	}
-	
-	private void selectAll() {
-		for (int i = 0; i < listAdapter.getCount(); i++) {
-			Recording point = listAdapter.getItem(i);
-			if (!selected.contains(point)) {
-				selected.add(point);
-			}
+		// Handle screen rotation:
+		FragmentManager fm = getChildFragmentManager();
+		Fragment sortByMenu = fm.findFragmentByTag(SortByMenuBottomSheetDialogFragment.TAG);
+		if (sortByMenu != null) {
+			((SortByMenuBottomSheetDialogFragment) sortByMenu).setListener(createSortFragmentListener());
 		}
-		listAdapter.notifyDataSetInvalidated();
-	}
+		Fragment itemMenu = fm.findFragmentByTag(ItemMenuBottomSheetDialogFragment.TAG);
+		if (itemMenu != null) {
+			((ItemMenuBottomSheetDialogFragment) itemMenu).setListener(createItemMenuFragmentListener());
+		}
 
-	private void deselectAll(){
-		selected.clear();
-		listAdapter.notifyDataSetInvalidated();
+		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+		setHasOptionsMenu(true);
+
+		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
+		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
+		ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
+		emptyStub.setLayoutResource(R.layout.empty_state_av_notes);
+		emptyView = emptyStub.inflate();
+		int icRes = getMyApplication().getSettings().isLightContent()
+				? R.drawable.ic_empty_state_av_notes_day : R.drawable.ic_empty_state_av_notes_night;
+		((ImageView) emptyView.findViewById(R.id.empty_state_image_view)).setImageResource(icRes);
+		emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
+				.isLightContent() ? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
+
+		return view;
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		getListView().setBackgroundColor(
-				getResources().getColor(
-						getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
-								: R.color.ctx_menu_info_view_bg_dark));
+		getListView().setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
+				.isLightContent() ? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		items = new ArrayList<>(plugin.getAllRecordings());
-		sortItemsDescending();
+		List<Object> items = createItemsList();
 		ListView listView = getListView();
+		listView.setDivider(null);
+		listView.setEmptyView(emptyView);
 		if (items.size() > 0 && footerView == null) {
-			//listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
 			footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false);
 			listView.addFooterView(footerView);
 			listView.setHeaderDividersEnabled(false);
 			listView.setFooterDividersEnabled(false);
 		}
-		listAdapter = new NotesAdapter(items);
+		listAdapter = new NotesAdapter(getMyApplication(), items);
+		listAdapter.setSelectionMode(selectionMode);
+		listAdapter.setSelected(selected);
+		listAdapter.setListener(createAdapterListener());
 		listView.setAdapter(listAdapter);
 	}
 
-	private void sortItemsDescending() {
-		Collections.sort(items, new Comparator<Recording>() {
+	@Override
+	public ArrayAdapter<?> getAdapter() {
+		return listAdapter;
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		menu.clear();
+		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
+			menu = ((ActionBarProgressActivity) getActivity()).getClearToolbar(true).getMenu();
+		} else {
+			((ActionBarProgressActivity) getActivity()).getClearToolbar(false);
+		}
+		((ActionBarProgressActivity) getActivity()).updateListViewFooter(footerView);
+
+		MenuItem item = menu.add(R.string.shared_string_sort).setIcon(R.drawable.ic_action_list_sort);
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				showSortMenuFragment();
+				return true;
+			}
+		});
+		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+		item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_gshare_dark);
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				enterSelectionMode(MODE_SHARE);
+				return true;
+			}
+		});
+		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+		item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				enterSelectionMode(MODE_DELETE);
+				return true;
+			}
+		});
+		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+	}
+
+	public OsmandActionBarActivity getActionBarActivity() {
+		if (getActivity() instanceof OsmandActionBarActivity) {
+			return (OsmandActionBarActivity) getActivity();
+		}
+		return null;
+	}
+
+	private List<Object> createItemsList() {
+		List<Recording> recs = new LinkedList<>(plugin.getAllRecordings());
+		List<Object> res = new LinkedList<>();
+		if (!recs.isEmpty()) {
+			NotesSortByMode sortByMode = getMyApplication().getSettings().NOTES_SORT_BY_MODE.get();
+			if (sortByMode.isByDate()) {
+				res.add(NotesAdapter.TYPE_DATE_HEADER);
+				res.addAll(sortItemsByDateDescending(recs));
+			} else if (sortByMode.isByType()) {
+				List<Recording> audios = new LinkedList<>();
+				List<Recording> photos = new LinkedList<>();
+				List<Recording> videos = new LinkedList<>();
+				for (Recording rec : recs) {
+					if (rec.isAudio()) {
+						audios.add(rec);
+					} else if (rec.isPhoto()) {
+						photos.add(rec);
+					} else {
+						videos.add(rec);
+					}
+				}
+				addToResIfNotEmpty(res, audios, NotesAdapter.TYPE_AUDIO_HEADER);
+				addToResIfNotEmpty(res, photos, NotesAdapter.TYPE_PHOTO_HEADER);
+				addToResIfNotEmpty(res, videos, NotesAdapter.TYPE_VIDEO_HEADER);
+			}
+		}
+		return res;
+	}
+
+	private void addToResIfNotEmpty(List<Object> res, List<Recording> recs, int header) {
+		if (!recs.isEmpty()) {
+			res.add(header);
+			res.addAll(recs);
+		}
+	}
+
+	private NotesAdapterListener createAdapterListener() {
+		return new NotesAdapterListener() {
+
+			@Override
+			public void onHeaderClick(int type, boolean checked) {
+				if (checked) {
+					selectAll(type);
+				} else {
+					deselectAll(type);
+				}
+				updateSelectionTitle(actionMode);
+			}
+
+			@Override
+			public void onCheckBoxClick(Recording rec, boolean checked) {
+				if (selectionMode) {
+					if (checked) {
+						selected.add(rec);
+					} else {
+						selected.remove(rec);
+					}
+					updateSelectionMode(actionMode);
+				}
+			}
+
+			@Override
+			public void onItemClick(Recording rec) {
+				showOnMap(rec);
+			}
+
+			@Override
+			public void onOptionsClick(Recording rec) {
+				ItemMenuBottomSheetDialogFragment fragment = new ItemMenuBottomSheetDialogFragment();
+				fragment.setUsedOnMap(false);
+				fragment.setListener(createItemMenuFragmentListener());
+				fragment.setRecording(rec);
+				fragment.setRetainInstance(true);
+				fragment.show(getChildFragmentManager(), ItemMenuBottomSheetDialogFragment.TAG);
+			}
+		};
+	}
+
+	private void showSortMenuFragment() {
+		SortByMenuBottomSheetDialogFragment fragment = new SortByMenuBottomSheetDialogFragment();
+		fragment.setUsedOnMap(false);
+		fragment.setListener(createSortFragmentListener());
+		fragment.show(getChildFragmentManager(), SortByMenuBottomSheetDialogFragment.TAG);
+	}
+
+	private List<Recording> getRecordingsByType(int type) {
+		List<Recording> allRecs = new LinkedList<>(plugin.getAllRecordings());
+		List<Recording> res = new LinkedList<>();
+		for (Recording rec : allRecs) {
+			if (isAppropriate(rec, type)) {
+				res.add(rec);
+			}
+		}
+		return res;
+	}
+
+	private boolean isAppropriate(Recording rec, int type) {
+		if (type == NotesAdapter.TYPE_AUDIO_HEADER) {
+			return rec.isAudio();
+		} else if (type == NotesAdapter.TYPE_PHOTO_HEADER) {
+			return rec.isPhoto();
+		}
+		return rec.isVideo();
+	}
+
+	private void selectAll(int type) {
+		if (type == NotesAdapter.TYPE_DATE_HEADER) {
+			for (int i = 0; i < listAdapter.getCount(); i++) {
+				Object item = listAdapter.getItem(i);
+				if (item instanceof Recording) {
+					selected.add((Recording) item);
+				}
+			}
+		} else {
+			selected.addAll(getRecordingsByType(type));
+		}
+		listAdapter.notifyDataSetChanged();
+	}
+
+	private void deselectAll(int type) {
+		if (type == NotesAdapter.TYPE_DATE_HEADER) {
+			selected.clear();
+		} else {
+			selected.removeAll(getRecordingsByType(type));
+		}
+		listAdapter.notifyDataSetChanged();
+	}
+
+	private List<Recording> sortItemsByDateDescending(List<Recording> recs) {
+		Collections.sort(recs, new Comparator<Recording>() {
 			@Override
 			public int compare(Recording first, Recording second) {
 				long firstTime = first.getLastModified();
@@ -158,197 +330,51 @@ public class NotesFragment extends OsmAndListFragment {
 				}
 			}
 		});
+		return recs;
 	}
 
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		menu.clear();
-		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
-			menu = ((ActionBarProgressActivity) getActivity()).getClearToolbar(true).getMenu();
-		} else {
-			((ActionBarProgressActivity) getActivity()).getClearToolbar(false);
-		}
-		((ActionBarProgressActivity) getActivity()).updateListViewFooter(footerView);
-
-		MenuItem item = menu.add(R.string.shared_string_share).
-				setIcon(R.drawable.ic_action_export);
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+	private SortFragmentListener createSortFragmentListener() {
+		return new SortFragmentListener() {
 			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				enterSelectionMode(MODE_SHARE);
-				return true;
+			public void onSortModeChanged() {
+				recreateAdapterData();
 			}
-		});
-		MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-
-		item = menu.add(R.string.shared_string_delete_all).
-				setIcon(R.drawable.ic_action_delete_dark);
-		MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				enterSelectionMode(MODE_DELETE);
-				return true;
-			}
-		});
-
-	}
-	
-	private void enterSelectionMode(int type){
-		enterDeleteMode(type);
-	}
-	
-	public OsmandActionBarActivity getActionBarActivity() {
-		if (getActivity() instanceof OsmandActionBarActivity) {
-			return (OsmandActionBarActivity) getActivity();
-		}
-		return null;
-	}
-	
-	private void enableSelectionMode(boolean selectionMode) {
-		this.selectionMode = selectionMode;
-		View view = getView();
-		if (view != null) {
-			view.findViewById(R.id.select_all).setVisibility(selectionMode ? View.VISIBLE : View.GONE);
-			((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode &&
-					AndroidUiHelper.isOrientationPortrait(getActivity()));
-			((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
-		}
-	}
-	
-	private void updateSelectionTitle(ActionMode m){
-		if(selected.size() > 0) {
-			m.setTitle(selected.size() + " " + getMyApplication().getString(R.string.shared_string_selected_lowercase));
-		} else{
-			m.setTitle("");
-		}
-	}
-	
-	private void updateSelectionMode(ActionMode m) {
-		updateSelectionTitle(m);
-		refreshSelectAll();
-	}
-	
-	private void refreshSelectAll() {
-		View view = getView();
-		if (view == null) {
-			return;
-		}
-		CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
-		for (int i = 0; i < listAdapter.getCount(); i++) {
-			Recording point = listAdapter.getItem(i);
-			if (!selected.contains(point)) {
-				selectAll.setChecked(false);
-				return;
-			}
-		}
-		selectAll.setChecked(true);
-	}
-	
-	private void deleteItems(final ArrayList<Recording> selected) {
-		AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
-		b.setMessage(getString(R.string.local_recordings_delete_all_confirm, selected.size()));
-		b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Iterator<Recording> it = selected.iterator();
-				while (it.hasNext()) {
-					Recording pnt = it.next();
-					plugin.deleteRecording(pnt, true);
-					it.remove();
-					listAdapter.delete(pnt);
-				}
-				listAdapter.notifyDataSetChanged();
-
-			}
-		});
-		b.setNegativeButton(R.string.shared_string_cancel, null);
-		b.show();		
-	}
-	
-	private void shareItems(ArrayList<Recording> selected) {
-		Intent intent = new Intent();
-		intent.setAction(Intent.ACTION_SEND_MULTIPLE);
-		intent.setType("image/*"); /* This example is sharing jpeg images. */
-		ArrayList<Uri> files = new ArrayList<Uri>();
-		for(Recording path : selected) {
-			if(path == shareLocationFile) {
-				File fl = generateGPXForRecordings(selected);
-				if(fl != null) {
-					files.add(FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".fileprovider", fl));
-				}
-			} else {
-				File src = path.getFile();
-				File dst = new File(getActivity().getCacheDir(), "share/"+src.getName());
-				try {
-					Algorithms.fileCopy(src, dst);
-					files.add(FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".fileprovider", dst));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, files);
-		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		startActivity(Intent.createChooser(intent, getString(R.string.share_note)));
-	}
-	
-	private File generateGPXForRecordings(ArrayList<Recording> selected) {
-//		File tmpFile = getMyApplication().getAppPath("cache/noteLocations.gpx");
-		File tmpFile = new File(getActivity().getCacheDir(), "share/noteLocations.gpx");
-		tmpFile.getParentFile().mkdirs();
-		GPXFile file = new GPXFile();
-		for(Recording r : selected) {
-			if(r != shareLocationFile) {
-				String desc = r.getDescriptionName(r.getFileName());
-				if(desc == null) {
-					desc = r.getFileName();
-				}
-				WptPt wpt = new WptPt();
-				wpt.lat = r.getLatitude();
-				wpt.lon = r.getLongitude();
-				wpt.name = desc;
-				wpt.link = r.getFileName();
-				wpt.time = r.getFile().lastModified();
-				wpt.category = r.getSearchHistoryType();
-				getMyApplication().getSelectedGpxHelper().addPoint(wpt, file);
-			}
-		}
-		GPXUtilities.writeGpxFile(tmpFile, file, getMyApplication());
-		return tmpFile;
+		};
 	}
 
-	private void enterDeleteMode(final int type) {
+	private void recreateAdapterData() {
+		listAdapter.clear();
+		listAdapter.addAll(createItemsList());
+		listAdapter.notifyDataSetChanged();
+	}
+
+	private void enterSelectionMode(final int type) {
 		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
 			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
 				LOG.debug("onCreateActionMode");
-				if(type == MODE_SHARE) {
-					listAdapter.insert(shareLocationFile, 0);
+				if (type == MODE_SHARE) {
+					listAdapter.insert(SHARE_LOCATION_FILE, 0);
 				}
-				enableSelectionMode(true);
-				MenuItem item;
-				if(type == MODE_DELETE) {
-					item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
-				} else {
-					item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_export);
-				}
+				switchSelectionMode(true);
+				int titleRes = type == MODE_DELETE ? R.string.shared_string_delete_all : R.string.shared_string_share;
+				int iconRes = type == MODE_DELETE ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_gshare_dark;
+				MenuItem item = menu.add(titleRes).setIcon(iconRes);
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						if(type == MODE_DELETE) {
+						if (type == MODE_DELETE) {
 							deleteItems(selected);
-						} else if(type == MODE_SHARE) {
+						} else if (type == MODE_SHARE) {
 							shareItems(selected);
 						}
 						mode.finish();
 						return true;
 					}
 				});
-				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				selected.clear();
-				listAdapter.notifyDataSetInvalidated();
 				updateSelectionMode(mode);
 				return true;
 			}
@@ -368,194 +394,152 @@ public class NotesFragment extends OsmAndListFragment {
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
 				LOG.debug("onDestroyActionMode");
-				if(type == MODE_SHARE) {
-					listAdapter.remove(shareLocationFile);
+				if (type == MODE_SHARE) {
+					listAdapter.remove(SHARE_LOCATION_FILE);
 				}
-				enableSelectionMode(false);
+				switchSelectionMode(false);
 				listAdapter.notifyDataSetInvalidated();
 			}
-
 		});
 	}
 
-	public OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
+	private void switchSelectionMode(boolean enable) {
+		selectionMode = enable;
+		listAdapter.setSelectionMode(enable);
+		((FavoritesActivity) getActivity()).setToolbarVisibility(!enable && AndroidUiHelper.isOrientationPortrait(getActivity()));
+		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 	}
 
-	class NotesAdapter extends ArrayAdapter<AudioVideoNotesPlugin.Recording> {
-
-		NotesAdapter(List<AudioVideoNotesPlugin.Recording> recordingList) {
-			super(getActivity(), R.layout.note, recordingList);
+	private void updateSelectionTitle(ActionMode m) {
+		if (selected.size() > 0) {
+			m.setTitle(selected.size() + " " + getString(R.string.shared_string_selected_lowercase));
+		} else {
+			m.setTitle("");
 		}
+	}
 
-		public void delete(Recording pnt) {
-			remove(pnt);
-			
-		}
+	private void updateSelectionMode(ActionMode m) {
+		updateSelectionTitle(m);
+		listAdapter.notifyDataSetChanged();
+	}
 
-		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
-			LayoutInflater inflater = getActivity().getLayoutInflater();
-			View row = convertView;
-			if (row == null) {
-				row = inflater.inflate(R.layout.note, parent, false);
-			}
-
-			final AudioVideoNotesPlugin.Recording recording = getItem(position);
-			if (recording == shareLocationFile) {
-				((TextView) row.findViewById(R.id.name)).setText(R.string.av_locations);
-				((TextView) row.findViewById(R.id.description)).setText(R.string.av_locations_descr);
-			} else {
-				DashAudioVideoNotesFragment.getNoteView(recording, row, getMyApplication());
-			}
-//			((ImageView) row.findViewById(R.id.play)).setImageDrawable(getMyApplication().getIconsCache()
-//					.getIcon(R.drawable.ic_play_dark));
-			row.findViewById(R.id.play).setVisibility(View.GONE);
-			
-			
-			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_local_index);
-			ImageButton options = (ImageButton) row.findViewById(R.id.options);
-			options.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
-			if(selectionMode) {
-				options.setVisibility(View.GONE);
-				ch.setVisibility(View.VISIBLE);
-				ch.setChecked(selected.contains(recording));
-				row.findViewById(R.id.icon).setVisibility(View.GONE);
-				ch.setOnClickListener(new View.OnClickListener() {
+	private void deleteItems(final Set<Recording> selected) {
+		new AlertDialog.Builder(getActivity())
+				.setMessage(getString(R.string.local_recordings_delete_all_confirm, selected.size()))
+				.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
 					@Override
-					public void onClick(View v) {
-						onItemSelect(ch, recording);
+					public void onClick(DialogInterface dialog, int which) {
+						Iterator<Recording> it = selected.iterator();
+						while (it.hasNext()) {
+							Recording rec = it.next();
+							plugin.deleteRecording(rec, true);
+							it.remove();
+						}
+						recreateAdapterData();
+					}
+				})
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.show();
+	}
+
+	private void shareItems(Set<Recording> selected) {
+		ArrayList<Uri> files = new ArrayList<>();
+		for (Recording rec : selected) {
+			File file = rec == SHARE_LOCATION_FILE ? generateGPXForRecordings(selected) : rec.getFile();
+			if (file != null) {
+				files.add(Uri.parse(file.getAbsolutePath()));
+			}
+		}
+		Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+		intent.setType("*/*");
+		intent.putExtra(Intent.EXTRA_STREAM, files);
+		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		if (Build.VERSION.SDK_INT > 18) {
+			intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+		}
+		startActivity(Intent.createChooser(intent, getString(R.string.share_note)));
+	}
+
+	private File generateGPXForRecordings(Set<Recording> selected) {
+		File tmpFile = new File(getActivity().getCacheDir(), "share/noteLocations.gpx");
+		tmpFile.getParentFile().mkdirs();
+		GPXFile file = new GPXFile();
+		for (Recording r : selected) {
+			if (r != SHARE_LOCATION_FILE) {
+				String desc = r.getDescriptionName(r.getFileName());
+				if (desc == null) {
+					desc = r.getFileName();
+				}
+				WptPt wpt = new WptPt();
+				wpt.lat = r.getLatitude();
+				wpt.lon = r.getLongitude();
+				wpt.name = desc;
+				wpt.link = r.getFileName();
+				wpt.time = r.getFile().lastModified();
+				wpt.category = r.getSearchHistoryType();
+				getMyApplication().getSelectedGpxHelper().addPoint(wpt, file);
+			}
+		}
+		GPXUtilities.writeGpxFile(tmpFile, file, getMyApplication());
+		return tmpFile;
+	}
+
+	private ItemMenuFragmentListener createItemMenuFragmentListener() {
+		return new ItemMenuFragmentListener() {
+			@Override
+			public void playOnClick(Recording recording) {
+				plugin.playRecording(getActivity(), recording);
+			}
+
+			@Override
+			public void shareOnClick(Recording recording) {
+				shareNote(recording);
+			}
+
+			@Override
+			public void showOnMapOnClick(Recording recording) {
+				showOnMap(recording);
+			}
+
+			@Override
+			public void renameOnClick(Recording recording) {
+				editNote(recording);
+			}
+
+			@Override
+			public void deleteOnClick(final Recording recording) {
+				deleteNote(recording);
+			}
+		};
+	}
+
+	private void shareNote(final Recording recording) {
+		if (!recording.getFile().exists()) {
+			return;
+		}
+		MediaScannerConnection.scanFile(getActivity(), new String[]{recording.getFile().getAbsolutePath()},
+				null, new MediaScannerConnection.OnScanCompletedListener() {
+					public void onScanCompleted(String path, Uri uri) {
+						Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+						if (recording.isPhoto()) {
+							shareIntent.setType("image/*");
+						} else if (recording.isAudio()) {
+							shareIntent.setType("audio/*");
+						} else if (recording.isVideo()) {
+							shareIntent.setType("video/*");
+						}
+						shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+						shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+						startActivity(Intent.createChooser(shareIntent, getString(R.string.share_note)));
 					}
 				});
-			} else {
-				row.findViewById(R.id.icon).setVisibility(View.VISIBLE);
-				options.setVisibility(View.VISIBLE);
-				ch.setVisibility(View.GONE);
-			}
-			
-			options.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					openPopUpMenu(v, recording);
-				}
-			});
-			row.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (selectionMode) {
-						ch.setChecked(!ch.isChecked());
-						onItemSelect(ch, recording);
-					} else {
-						showOnMap(recording);
-					}
-				}
-			});
-			return row;
-		}
-		
-		public void onItemSelect(CheckBox ch, Recording child) {
-			if (ch.isChecked()) {
-				selected.add(child);
-			} else {
-				selected.remove(child);
-			}
-			updateSelectionMode(actionMode);
-		}
 	}
 
 	private void showOnMap(Recording recording) {
 		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15,
-				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)), true,
-				recording); //$NON-NLS-1$
+				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)),
+				true, recording);
 		MapActivity.launchMapActivityMoveToTop(getActivity());
-	}
-
-	private void openPopUpMenu(View v, final AudioVideoNotesPlugin.Recording recording) {
-		IconsCache iconsCache = getMyApplication().getIconsCache();
-		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
-		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-		MenuItem item;
-		boolean isPhoto = recording.isPhoto();
-		Drawable playIcon;
-		if (isPhoto) {
-			playIcon = getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_view);
-		} else {
-			playIcon = getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_play_dark);
-		}
-		item = optionsMenu.getMenu().add(isPhoto ? R.string.watch : R.string.recording_context_menu_play)
-				.setIcon(playIcon);
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				plugin.playRecording(getActivity(), recording);
-				return true;
-			}
-		});
-
-		item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map).setIcon(
-				iconsCache.getThemedIcon(R.drawable.ic_show_on_map));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				showOnMap(recording);
-				return true;
-			}
-		});
-
-		item = optionsMenu.getMenu().add(R.string.shared_string_share)
-				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_gshare_dark));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-				if (recording.isPhoto()) {
-					Uri screenshotUri = Uri.parse(recording.getFile().getAbsolutePath());
-					sharingIntent.setType("image/*");
-					sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-				} else if (recording.isAudio()) {
-					Uri audioUri = Uri.parse(recording.getFile().getAbsolutePath());
-					sharingIntent.setType("audio/*");
-					sharingIntent.putExtra(Intent.EXTRA_STREAM, audioUri);
-				} else if (recording.isVideo()) {
-					Uri videoUri = Uri.parse(recording.getFile().getAbsolutePath());
-					sharingIntent.setType("video/*");
-					sharingIntent.putExtra(Intent.EXTRA_STREAM, videoUri);
-				}
-				startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_note)));
-				return true;
-			}
-		});
-
-		item = optionsMenu.getMenu().add(R.string.shared_string_rename)
-				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				editNote(recording);
-				return true;
-			}
-		});
-
-		item = optionsMenu.getMenu().add(R.string.recording_context_menu_delete)
-				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_dark));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-				builder.setMessage(R.string.recording_delete_confirm);
-				builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						plugin.deleteRecording(recording, true);
-						listAdapter.remove(recording);
-					}
-				});
-				builder.setNegativeButton(R.string.shared_string_cancel, null);
-				builder.show();
-				return true;
-			}
-		});
-		optionsMenu.show();
 	}
 
 	private void editNote(final Recording recording) {
@@ -581,4 +565,17 @@ public class NotesFragment extends OsmAndListFragment {
 		editText.requestFocus();
 	}
 
+	private void deleteNote(final Recording recording) {
+		new AlertDialog.Builder(getActivity())
+				.setMessage(R.string.recording_delete_confirm)
+				.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						plugin.deleteRecording(recording, true);
+						listAdapter.remove(recording);
+					}
+				})
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.show();
+	}
 }

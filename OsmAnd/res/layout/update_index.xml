@@ -36,4 +36,9 @@
 		android:layout_marginRight="0dp"
 		android:layout_marginTop="0dp"
 		android:layout_weight="1"/>
+`
+	<ViewStub
+		android:id="@+id/empty_view_stub"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"/>
 </LinearLayout>
