@@ -568,23 +568,17 @@ public class MapMarkersHelper {
 		GPXFile gpx = gpxFile.getGpxFile();
 		List<WptPt> gpxPoints = gpx.getPoints();
 		for (WptPt wptPt : gpxPoints) {
-			for (MapMarker marker : mapMarkers) {
-				if (marker.id.equals(gpx.path + wptPt.name)) {
-					return true;
-				}
+			MapMarker mapMarker = getMapMarker(wptPt);
+			if (mapMarker != null) {
+				return true;
 			}
 		}
 		return false;
 	}
 
 	public boolean isSynced(FavouritePoint favouritePoint) {
-		FavoriteGroup group = favouritesDbHelper.getGroup(favouritePoint);
-		for (MapMarker marker : mapMarkers) {
-			if (marker.id.equals(favouritePoint.getName() + group.name)) {
-				return true;
-			}
-		}
-		return false;
+		MapMarker mapMarker = getMapMarker(favouritePoint);
+		return mapMarker != null;
 	}
 
 	public MapMarker getMapMarker(WptPt wptPt) {
