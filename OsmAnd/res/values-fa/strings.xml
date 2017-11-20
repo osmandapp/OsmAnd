@@ -1152,7 +1152,7 @@
 	
 	<string name="update_poi_file_not_found">فایل محلی برای نگهداری تغییرات POI وجود ندارد و قابل‌ایجاد نیست.</string>
 	<string name="map_version_changed_info">فایل‌های نقشهٔ موجود در سایت با نسخهٔ فعلی نرم‌افزار سازگار نیست. لطفاً برای دانلود و استفاده از نقشه‌ها، نرم‌افزار را به نسخهٔ جدیدتر ارتقا دهید.</string>
-	<string name="poi_filter_nominatim">جست‌وجو با نامی‌ناتیم</string>
+	<string name="poi_filter_nominatim">جست‌وجوی آنلاین با Nominatim</string>
 	
 	<string name="vector_data_missing">داده‌های آفلاین نقشه روی کارت حافظه وجود ندارد. لطفاً برای استفاده از نقشه‌های آفلاین، آن را دانلود کنید.</string>
 	<string name="local_index_gpx_info_show">"
@@ -2596,7 +2596,7 @@
     <string name="is_saved">ذخیره شد</string>
     <string name="marker_save_as_track_descr">نشانه‌هایتان را در یک فایل ذخیره کنید. نام فایل را بنویسید:</string>
     <string name="move_to_history">فرستادن به سابقه</string>
-    <string name="group_will_be_removed_after_restart">گروه بعد از راه‌اندازی مجدد حذف می‌شود</string>
+    <string name="group_will_be_removed_after_restart">گروه با راه‌اندازی مجدد برنامه حذف می‌شود.</string>
     <string name="descendingly">نزولی</string>
     <string name="marker_show_distance_descr">مسافت تا نشانه‌ها و جهت‌گیری به‌سمت آن‌ها چگونه روی نقشه نشان داده شود:</string>
     <string name="map_orientation_change_in_accordance_with_speed">آستانهٔ تغییر جهت نقشه</string>

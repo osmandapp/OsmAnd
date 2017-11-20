@@ -1,16 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/bottom_sheet_selected_item_title_height"
+    android:layout_height="wrap_content"
     android:background="?attr/bg_color"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/bottom_sheet_selected_item_title_height"
         android:background="?attr/selectableItemBackground">
 
         <CheckBox
@@ -35,7 +34,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="@dimen/content_padding"
             android:layout_marginRight="@dimen/content_padding"
@@ -45,10 +44,11 @@
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/map_marker_title_height"
                 android:ellipsize="end"
+                android:gravity="bottom"
                 android:maxLines="1"
-                android:textColor="?android:textColorPrimary"
+                android:textColor="?attr/searchbar_text"
                 android:textSize="@dimen/default_list_text_size"
                 tools:text="Nov 17, 2017 Audio Note"/>
 

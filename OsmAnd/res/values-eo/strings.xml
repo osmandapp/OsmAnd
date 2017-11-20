@@ -2821,7 +2821,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="marker_save_as_track_descr">Elporti map-markojn al dosiero difinita tie ĉi:</string>
     <string name="marker_save_as_track">Konservi kiel kurson</string>
     <string name="move_to_history">Movi al historio</string>
-    <string name="group_will_be_removed_after_restart">Grupo estos forigita post restarto</string>
+    <string name="group_will_be_removed_after_restart">Grupo estos forigita post la sekva restarto de la aplikaĵo.</string>
     <string name="make_round_trip_descr">Aldoni kopion de komenc-punkto kiel celon.</string>
     <string name="make_round_trip">Fermita ekskurso</string>
     <string name="shared_string_navigate">Navigi</string>
@@ -2854,7 +2854,7 @@ Indikas lokon:  %1$s x %2$s"</string>
 	<string name="tap_on_map_to_hide_interface_descr">Frapeti la mapon por baskuli butonojn kaj fenestraĵojn.</string>
     <string name="tap_on_map_to_hide_interface">Plenekrana reĝimo</string>
     <string name="show_on_top_bar">Montri en supra breto</string>
-    <string name="mark_passed">Marki pasigitajn</string>
+    <string name="mark_passed">Marki kiel pasigitan</string>
     <string name="rename_marker">Alinomi markon</string>
     <string name="digits_quantity">Nombro da dekumaj pozicioj</string>
     <string name="shared_string_right">Dekstre</string>

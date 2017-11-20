@@ -1079,7 +1079,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="use_magnetic_sensor">Utilizza il sensore magnetico (bussola)</string>
     <string name="local_indexes_cat_srtm">Linee isoipse</string>
     <string name="use_kalman_filter_compass_descr">Riduce il rumore delle letture della bussola ma introduce dell\'inerzia</string>
-    <string name="use_kalman_filter_compass">Uso del filtro di Kalman</string>
+    <string name="use_kalman_filter_compass">Usa il filtro di Kalman</string>
     <string name="wait_current_task_finished">Prego attendere il termine dell\'operazione</string>
     <string name="plugin_distance_point_time">orario</string>
     <string name="plugin_distance_point_hdop">Accuratezza</string>
@@ -1302,10 +1302,10 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="navigation_intent_invalid">Formato non valido: %s</string>
     <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale.</string>
-    <string name="osmo_plugin_description">Questo componente aggiuntivo fornisce parzialmente le funzionalità del monitoraggio di OpenStreetMap, vedi http://osmo.mobi.
-\n
-\nPuoi tracciare in tempo reale tutti i dispositivi di un gruppo di partecipanti. Puoi anche visualizzare i punti e le tracce caricate dal gruppo a cui appartieni.
-\n
+    <string name="osmo_plugin_description">Questo componente aggiuntivo fornisce parzialmente le funzionalità del monitoraggio di OpenStreetMap, vedi http://osmo.mobi. 
+\n 
+\nPuoi tracciare in tempo reale tutti i dispositivi di un gruppo di partecipanti. Puoi anche visualizzare i punti e le tracce caricate dal gruppo a cui appartieni. 
+\n 
 \nIl gruppo che non è stato rimosso da mesi viene allineato con le tue regole per la creazione di gruppi nel sito OsMo.mobi</string>
     <string name="osmo_plugin_name">Monitoraggio OpenStreetMap</string>
     <string name="osmo_settings">OsMO</string>
@@ -1367,7 +1367,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="osmo_enable_tracker">Invia le mie posizioni</string>
     <string name="osmo_control">Accesso rapido ad OsMo</string>
 
-    <string name="import_file_favourites">Salvare i punti come file GPX o importare i waypoint nei favoriti?</string>
+    <string name="import_file_favourites">Salvare i punti come file GPX o importare i punti intermedi nei favoriti?</string>
 
 
     <string name="rendering_value_pink_name">Rosa</string>
@@ -1384,7 +1384,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="osmo_create_groups_confirm">Per creare dei gruppi è necessario essere utenti registrati di OsMo.</string>
     <string name="osmo_credentials_not_valid">Le tue credenziali di OsMo non sono valide.</string>
     <string name="osmo_regenerate_login_ids_confirm">Sei sicuro di voler rigenerare gli id personali? Tutti i dispositivi collegati a te non saranno più in grado di tracciarti.</string>
-    <string name="osmo_regenerate_login_ids">Rigenera l\'id</string>
+    <string name="osmo_regenerate_login_ids">Rigenera l\'id dell\'utilizzatore</string>
     <string name="osmo_cancel_moving_target">Cancella l\'obiettivo mobile</string>
     <string name="osmo_center_location">Centra nello schermo</string>
     <string name="osmo_set_moving_target">Imposta come obiettivo mobile</string>
@@ -1462,10 +1462,8 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 \n - Se avete altre necessità particolari - per favore contattate il supporto osmo.mobi@gmail.com</string>
     <string name="osmo_group_information">Per favore leggere prima di creare un gruppo!</string>
     <string name="osmo_auth_error">Errore di autorizzazione OsMo: %1$s.
-
-Potrebbe essere un disservizio temporaneo oppure che la registrazione è scaduta.
-
-Vuoi procedere con una nuova registrazione?</string>
+\n Potrebbe essere un disservizio temporaneo oppure che la registrazione è scaduta.
+\n Vuoi procedere con una nuova registrazione?</string>
     <string name="rendering_attr_hideBuildings_name">Edifici</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Strade non carrabili</string>
     <string name="rendering_attr_hideText_name">Testo</string>
@@ -1572,10 +1570,10 @@ Vuoi procedere con una nuova registrazione?</string>
     <string name="speed_limit_exceed">Tolleranza del limite di velocità</string>
     <string name="speed_limit_exceed_message">Seleziona il valore di superamento del limite di velocità dal quale si desidera avere l\'avviso vocale.</string>
     <string name="osmo_device_not_found">Dispositivo non trovato</string>
-    <string name="osmo_no_connection_msg">Connessione al server OsMo non riuscita:
-- controlla la connessione a Internet;
-- controlla le impostazioni;
-- contattaci su Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Connessione al server OsMo non riuscita: 
+\n- controlla la connessione a Internet; 
+\n- controlla le impostazioni; 
+\n- contattaci su Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Un utente anonimo non può:\n- creare gruppi;\n- sincronizzare con il server gruppi e dispositivi;\n- gestire gruppi e dispositivi nel pannello di controllo sul sito.</string>
     <string name="anonymous_user">Utente anonimo</string>
     <string name="logged_as">Registrato come %1$s</string>
@@ -1791,7 +1789,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="waypoint_visit_before">Visita prima</string>
     <string name="shared_string_collapse">Compatta</string>
     <string name="action_create">Azione crea</string>
-    <string name="action_modify">Modificato</string>
+    <string name="action_modify">Azione modifica</string>
     <string name="action_delete">Azione elimina</string>
     <string name="osm_edits">Modifiche OSM</string>
     <string name="osmand_parking_hour">h</string>
@@ -2962,10 +2960,10 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="mark_passed">Marcatore superato</string>
     <string name="import_gpx_file_description">può essere importato come Luogo Preferito oppure come file traccia.</string>
     <string name="appearance_on_the_map">Visualizzazione nella mappa</string>
-    <string name="add_track_to_markers_descr">Scegli una traccia per aggiungere punti intermedi ai marcatori. (Saranno elencate solo tracce con punti intermedi.)</string>
-    <string name="add_favourites_group_to_markers_descr">Scegli quale gruppo di luoghi preferiti da aggiungere ai marcatori.</string>
+    <string name="add_track_to_markers_descr">Scegli una traccia per aggiungerne i punti intermedi ai marcatori. (Saranno elencate solo tracce con punti intermedi.)</string>
+    <string name="add_favourites_group_to_markers_descr">Scegli una categoria di luoghi preferiti da aggiungere ai marcatori.</string>
     <string name="track_waypoints">Punti intermedi della traccia</string>
-    <string name="favourites_group">Gruppo di luoghi preferiti</string>
+    <string name="favourites_group">Categoria di luoghi preferiti</string>
     <string name="add_group">Aggiungi un gruppo</string>
     <string name="add_group_descr">Puoi importare un gruppo dai preferiti o i punti intermedi di una traccia.</string>
     <string name="empty_state_markers_active">Crea i marcatori nella mappa!</string>

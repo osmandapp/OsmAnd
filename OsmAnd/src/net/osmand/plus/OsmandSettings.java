@@ -716,6 +716,8 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_LINES_TO_FIRST_MARKERS = new BooleanPreference("show_lines_to_first_markers", false).makeProfile();
 	public final CommonPreference<Boolean> SHOW_ARROWS_TO_FIRST_MARKERS = new BooleanPreference("show_arrows_to_first_markers", false).makeProfile();
 
+	public final CommonPreference<Boolean> SELECT_MARKER_ON_SINGLE_TAP = new BooleanPreference("select_marker_on_single_tap", false).makeProfile();
+
 	public final CommonPreference<Boolean> USE_MAPILLARY_FILTER = new BooleanPreference("use_mapillary_filters", false).makeGlobal();
 	public final CommonPreference<String> MAPILLARY_FILTER_USER_KEY = new StringPreference("mapillary_filter_user_key", "").makeGlobal();
 	public final CommonPreference<String> MAPILLARY_FILTER_USERNAME = new StringPreference("mapillary_filter_username", "").makeGlobal();
@@ -1332,6 +1334,8 @@ public class OsmandSettings {
 		MAP_MARKERS_MODE.setModeDefaultValue(ApplicationMode.BICYCLE, MapMarkersMode.TOOLBAR);
 		MAP_MARKERS_MODE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, MapMarkersMode.TOOLBAR);
 	}
+
+	public final CommonPreference<NotesSortByMode> NOTES_SORT_BY_MODE = new EnumIntPreference<>("notes_sort_by_mode", NotesSortByMode.BY_DATE, NotesSortByMode.values());
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference("animate_my_location", true).makeGlobal().cache();
 
@@ -3154,6 +3158,19 @@ public class OsmandSettings {
 
 		public String toHumanString(Context ctx) {
 			return ctx.getString(key);
+		}
+	}
+
+	public enum NotesSortByMode {
+		BY_TYPE,
+		BY_DATE;
+
+		public boolean isByType() {
+			return this == BY_TYPE;
+		}
+
+		public boolean isByDate() {
+			return this == BY_DATE;
 		}
 	}
 
