@@ -26,7 +26,7 @@
   <string name="left_side_navigation_descr">Увімкніть для країн з лівостороннім рухом.</string>
   
   <string name="unknown_from_location">Початкове місцезнаходження не визначено</string>
-  <string name="unknown_location">Позиція ще не визначена</string>
+  <string name="unknown_location">Розташування ще не визначено</string>
   <string name="modify_transparency">Змінити прозорість (0 - прозорий, 255 - непрозорий)</string>
   <string name="confirm_interrupt_download">Перервати завантаження файлу?</string>
   <string name="first_time_msg">Дякуємо вам за використання OsmAnd. Для роботи більшості основних можливостей програми потрібні детальні мапи регіонів, які можна завантажити з Інтернету за допомогою пункту меню \'Налаштування\' → \'Управління мапами\'. Після завантаження цих мап Ви зможете здійснювати пошук за адресою, POI і зупинками громадського транспорту.</string>
@@ -176,8 +176,8 @@
   <string name="amenity_type_user_defined">Користувацькі</string>
   <string name="fav_export_confirmation">Файл зі закладками вже існує. Чи Ви хочете його замінити?</string>
   <string name="profile_settings">Налаштування профілю</string>
-  <string name="settings_preset">Профіль</string>
-  <string name="settings_preset_descr">Виберіть профіль роботи програми (кожен профіль зберігає налаштування окремо).</string>
+  <string name="settings_preset">Типовий профіль</string>
+  <string name="settings_preset_descr">Вид мапи й налаштування навігації зберігаються для кожного окремого профілю. Встановіть Ваш типовий профіль.</string>
   
   
   <string name="routing_settings">Навігація</string>
@@ -215,7 +215,7 @@
   
   <string name="auto_follow_route_navigation">Автоцентрування мапи тільки під час навігації</string>
   <string name="auto_follow_route_navigation_descr">Повертати мапу в поточну позицію тільки при навігації за маршрутом.</string>
-  <string name="auto_follow_location_enabled">Центрування мапи увімкнене.</string>
+  <string name="auto_follow_location_enabled">Використовується режим автоматичного центрування мапи.</string>
   <string name="pref_vector_rendering">Налаштування векторного рендерінгу</string>
   <string name="pref_overlay">Додаткові шари</string>
   <string name="pref_raster_map">Налаштування онлайн мап</string>
@@ -3099,4 +3099,6 @@
     <string name="active_markers_descr">Виберіть, скільки індикаторів напрямків ви хотіли б бачити.</string>
     <string name="shared_string_right">Направо</string>
     <string name="shared_string_left">Наліво</string>
+    <string name="looking_for_tracks_with_waypoints">Пошук треків з шляховими точками</string>
+    <string name="shared_string_more_without_dots">Більше</string>
     </resources>
