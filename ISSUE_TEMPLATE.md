@@ -19,7 +19,7 @@ __*In case of wrong routing:*__
 
 Tell us whether you have used OsmAnd's in-app offline routing, or any online routing provider like YOURS, OpenRouteService or OSRM.
 
-What routing profile is choosen in OsmAnd app? (car, bike, pedestrian, fastest or shortest)
+What routing profile is chosen in OsmAnd app? (car, bike, pedestrian, fastest or shortest)
 
 Please specify as exactly as possible the start and end point of your route by telling us city name and street name so that we can find it via in-app address search easily. Also a permalink from openstreetmap.org can be helpful.
 
