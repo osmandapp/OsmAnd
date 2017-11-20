@@ -101,6 +101,8 @@ public class NotesFragment extends OsmAndListFragment {
 		int icRes = getMyApplication().getSettings().isLightContent()
 				? R.drawable.ic_empty_state_av_notes_day : R.drawable.ic_empty_state_av_notes_night;
 		((ImageView) emptyView.findViewById(R.id.empty_state_image_view)).setImageResource(icRes);
+		emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
+				.isLightContent() ? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
 
 		return view;
 	}
