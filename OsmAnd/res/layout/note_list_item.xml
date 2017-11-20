@@ -39,15 +39,14 @@
             android:layout_marginEnd="@dimen/content_padding"
             android:layout_marginRight="@dimen/content_padding"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/list_item_text_container_padding_bottom"
-            android:paddingTop="@dimen/list_item_text_container_padding_top">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/map_marker_title_height"
                 android:ellipsize="end"
+                android:gravity="bottom"
                 android:maxLines="1"
                 android:textColor="?attr/searchbar_text"
                 android:textSize="@dimen/default_list_text_size"
