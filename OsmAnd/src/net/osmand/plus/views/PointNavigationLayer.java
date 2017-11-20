@@ -14,7 +14,6 @@ import android.support.v4.content.ContextCompat;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -22,7 +21,6 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class PointNavigationLayer extends OsmandMapLayer implements
@@ -177,6 +175,11 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@Override
 	public boolean isObjectClickable(Object o) {
+		return false;
+	}
+
+	@Override
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
 		return false;
 	}
 

@@ -482,6 +482,16 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		if (unknownLocation || !(o instanceof MapMarker)
+				|| !map.getMyApplication().getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
+			return false;
+		}
+		map.getMyApplication().getMapMarkersHelper().moveMarkerToTop((MapMarker) o);
+		return true;
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		if (tileBox.getZoom() < 3 || !map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
 			return;

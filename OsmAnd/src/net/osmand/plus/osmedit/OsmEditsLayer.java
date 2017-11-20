@@ -161,6 +161,11 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	}
 
 	@Override
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		if (tileBox.getZoom() >= startZoom) {
 			getOsmEditsFromPoint(point, tileBox, o);
