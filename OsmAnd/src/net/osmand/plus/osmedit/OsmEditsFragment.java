@@ -159,8 +159,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		}
 		((ActionBarProgressActivity) getActivity()).updateListViewFooter(footerView);
 
-		MenuItem item = menu.add(R.string.local_openstreetmap_uploadall).
-				setIcon(R.drawable.ic_action_export);
+		MenuItem item = menu.add(R.string.local_openstreetmap_uploadall).setIcon(R.drawable.ic_action_export);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -170,8 +169,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
-		item = menu.add(R.string.local_osm_changes_backup).
-				setIcon(R.drawable.ic_action_gshare_dark);
+		item = menu.add(R.string.local_osm_changes_backup).setIcon(R.drawable.ic_action_gshare_dark);
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -181,8 +179,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 				return true;
 			}
 		});
-		item = menu.add(R.string.shared_string_delete_all).
-				setIcon(R.drawable.ic_action_delete_dark);
+		item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -293,8 +290,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 	private void updateSelectionTitle(ActionMode m) {
 		if (osmEditsSelected.size() > 0) {
-			m.setTitle(osmEditsSelected.size() + " "
-					+ getMyApplication().getString(R.string.shared_string_selected_lowercase));
+			m.setTitle(osmEditsSelected.size() + " " + getString(R.string.shared_string_selected_lowercase));
 		} else {
 			m.setTitle("");
 		}
