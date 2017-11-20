@@ -58,8 +58,9 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:layout_marginTop="@dimen/map_widget_icon_margin"
                 android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/default_sub_text_size"
+                android:textSize="@dimen/default_desc_text_size"
                 tools:text="Oct 13, 2017 * 3 MB * 01:14"/>
         </LinearLayout>
 

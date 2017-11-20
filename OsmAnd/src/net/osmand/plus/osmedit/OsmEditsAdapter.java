@@ -175,11 +175,19 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 			category = ((OpenstreetmapPoint) point).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
 		}
 
+		String comment = "";
+		if (point.getGroup() == OsmPoint.Group.BUG) {
+			comment = getContext().getString(R.string.osn_bug_name);
+		}
+
 		String prefix = OsmEditingPlugin.getPrefix(point);
 
 		String description = "";
 		if (!Algorithms.isEmpty(action)) {
 			description += action + " • ";
+		}
+		if (!Algorithms.isEmpty(comment)) {
+			description += comment + " • ";
 		}
 		if (!Algorithms.isEmpty(category)) {
 			description += category + " • ";
