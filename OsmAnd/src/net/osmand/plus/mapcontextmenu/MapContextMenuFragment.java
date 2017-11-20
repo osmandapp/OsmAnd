@@ -30,9 +30,12 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -459,12 +462,17 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 		buttonWaypoint.setContentDescription(getString(menu.getWaypointActionStringId()));
 		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonWaypoint, nightMode);
-		buttonWaypoint.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				menu.buttonWaypointPressed();
-			}
-		});
+		boolean shouldDeactivateMarkerButton = shouldDeactivateMarkerButton(menu.getObject());
+		if (shouldDeactivateMarkerButton) {
+			deactivate(buttonWaypoint);
+		} else {
+			buttonWaypoint.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					menu.buttonWaypointPressed();
+				}
+			});
+		}
 
 		final ImageButton buttonShare = (ImageButton) view.findViewById(R.id.context_menu_share_button);
 		buttonShare.setImageDrawable(getIcon(R.drawable.map_action_gshare_dark,
@@ -512,6 +520,26 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		created = true;
 		return view;
+	}
+
+	private boolean shouldDeactivateMarkerButton(Object object) {
+		MapMarkersHelper mapMarkersHelper = map.getApplication().getMapMarkersHelper();
+		boolean shouldDeactivateMarkerButton = false;
+		if (object instanceof WptPt) {
+			if (mapMarkersHelper.getMapMarker((WptPt) object) != null) {
+				shouldDeactivateMarkerButton = true;
+			}
+		} else if (object instanceof FavouritePoint) {
+			if (mapMarkersHelper.getMapMarker((FavouritePoint) object) != null) {
+				shouldDeactivateMarkerButton = true;
+			}
+		}
+		return shouldDeactivateMarkerButton;
+	}
+
+	private void deactivate(View view) {
+		view.setEnabled(false);
+		view.setAlpha(0.5f);
 	}
 
 	@Override
