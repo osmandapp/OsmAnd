@@ -428,8 +428,8 @@
 	<string name="poi_boat_canoe_rental_rental_yes">Kanu: haj</string>
 	<string name="poi_boat_canoe_rental_rental_no">Kanu: ně</string>
 
-<string name="poi_fuel_type">typ ćěriwa</string>
-	<string name="poi_fuel_avia_type">typ</string>
+<string name="poi_fuel_type">družina ćěriwa</string>
+	<string name="poi_fuel_avia_type">družina ćěriwa (avia)</string>
 	<string name="poi_clothes_type">typ</string>
 	<string name="poi_shoes_type">typ</string>
 	<string name="poi_fire_hydrant_type">typ</string>
@@ -1504,7 +1504,7 @@
 	<string name="poi_religion">nabožinske twory</string>
 
 	<string name="poi_police">policija</string>
-	<string name="poi_fire_station">wohnjowa wobora</string>
+	<string name="poi_fire_station">wohnjostraža</string>
 	<string name="poi_emergency_phone">nuzowy telefon</string>
 	<string name="poi_fire_hydrant">hydrant</string>
 	<string name="poi_fire_extinguisher">woheńhašak</string>
@@ -1962,4 +1962,48 @@
 	<string name="poi_bridge_ref">čisło mosta</string>
 	<string name="poi_tunnel_ref">čisło tunla</string>
 
-	</resources>
+	<string name="poi_electronics_repair_computer">Reparatura elektroniki: ličaki</string>
+	<string name="poi_electronics_repair_appliance">Reparatura elektroniki: domjacnostne nastroje</string>
+	<string name="poi_electronics_repair_phone">Reparatura elektroniki: telefony</string>
+	<string name="poi_electronics_repair_tv">Reparatura elektroniki: telewizory</string>
+
+	<string name="poi_life_ring">wuchowanska rynka</string>
+
+	<string name="poi_zoo_petting_zoo">majkanski zwěrjenc</string>
+	<string name="poi_zoo_wildlife_park">dźiwinowy park</string>
+	<string name="poi_zoo_enclosure">hajnišćo</string>
+	<string name="poi_zoo_aviary">woljera</string>
+	<string name="poi_zoo_falconry">sokolnistwo</string>
+	<string name="poi_stands">stejnišća</string>
+
+	<string name="poi_motorcycle_sales_yes">předań</string>
+	<string name="poi_motorcycle_sales_no">předań: ně</string>
+	<string name="poi_motorcycle_sales_yes_used">předań: haj; trjebane</string>
+	<string name="poi_motorcycle_sales_used">předań: trjebane</string>
+	<string name="poi_motorcycle_parts_yes">narunanki</string>
+	<string name="poi_motorcycle_parts_no">narunanki: ně</string>
+	<string name="poi_location_outdoor">stejišćo: wonka</string>
+	<string name="poi_location_indoor">stejišćo: nutřka</string>
+	<string name="poi_location_platform">stejišćo: platforma</string>
+	<string name="poi_location_kiosk">stejišćo: kiosk</string>
+	<string name="poi_location_bridge">stejišćo: móst</string>
+	<string name="poi_location_wall">stejišćo: sćěna</string>
+	<string name="poi_location_entrance">stejišćo: zachod</string>
+
+	<string name="poi_visibility_house">widźomnosć: dom</string>
+	<string name="poi_visibility_street">widźomnosć: dróha</string>
+	<string name="poi_operational_status_open">wočinjene</string>
+	<string name="poi_operational_status_closed">začinjene</string>
+	<string name="poi_operational_status_restricted">wobmjezowane</string>
+	<string name="poi_operational_status_broken">wobškodźene</string>
+	<string name="poi_operational_status_needs_maintenance">reparatura trěbna</string>
+
+	<string name="poi_bicycle_yes">koleso: haj</string>
+	<string name="poi_bicycle_no">koleso: ně</string>
+	<string name="poi_parking_fee_yes">Parkowanski popłatk: haj</string>
+	<string name="poi_parking_fee_no">Parkowanski popłatk: ně</string>
+	<string name="poi_parking_fee">Parkowanski popłatk</string>
+
+	<string name="poi_charging_station_filter">nabiwanska stacija</string>
+
+</resources>
