@@ -4,7 +4,7 @@ Before entering an issue, please read the information below.
 
 In case you are not sure to open issue or not, please send your request to support support@osmand.net. For **general questions** about OsmAnd, please use the [Google group](https://groups.google.com/forum/#!forum/osmand).
 
-Please be sure to have read our [FAQ](http://osmand.net/help-online) before creating an issue here. (Also tell us in Google Groups when the FAQ is wrong or outdated.)
+Please be sure to have read our [FAQ](http://osmand.net/help-online) before creating an issue here. (Also, tell us in Google Groups when the FAQ is wrong or outdated.)
 
 The best way to get help about an OsmAnd issue is to create a valid and detailed issue content.
 Please give us the following information so that we can try to **reproduce** your issue:
