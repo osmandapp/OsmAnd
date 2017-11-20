@@ -23,8 +23,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.Location;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.MapMarkersHelper;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -224,8 +226,22 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
 					MapMarker marker = (MapMarker) item;
+					WptPt wptPt = marker.wptPt;
+					FavouritePoint favouritePoint = marker.favouritePoint;
+					Object objectToShow;
+					PointDescription pointDescription;
+					if (wptPt != null) {
+						pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, wptPt.name);
+						objectToShow = wptPt;
+					} else if (favouritePoint != null) {
+						pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, favouritePoint.getName());
+						objectToShow = favouritePoint;
+					} else {
+						pointDescription = marker.getPointDescription(mapActivity);
+						objectToShow = marker;
+					}
 					mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
-							15, marker.getPointDescription(mapActivity), true, marker);
+							15, pointDescription, true, objectToShow);
 					MapActivity.launchMapActivityMoveToTop(mapActivity);
 					((DialogFragment) getParentFragment()).dismiss();
 				}
