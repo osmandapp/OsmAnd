@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_road_obstacle">Ugur n webrid</string>
 		<string name="poi_healthcare">Tazmart</string>
-	<string name="poi_fuel_type">Ṣṣenf</string>
-	<string name="poi_fuel_avia_type">Ṣṣenf</string>
+	<string name="poi_fuel_type">Tawsit n tumast</string>
+	<string name="poi_fuel_avia_type">Tawsit n tumast (avia)</string>
 	<string name="poi_clothes_type">Ṣṣenf</string>
 	<string name="poi_shoes_type">Ṣṣenf</string>
 	<string name="poi_fire_hydrant_type">Ṣṣenf</string>
@@ -25,4 +25,6 @@
 	<string name="poi_music_school">Aγerbaz n cna</string>
 	<string name="poi_language_school">Aγerbaz n tutlayin</string>
 
+	<string name="poi_payment_type">Tawsit n usellek</string>
+	<string name="poi_payment_fuel_type">Tikaṛḍiwin n tumast</string>
 	</resources>
