@@ -2849,4 +2849,17 @@ Proporciona un código completo</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="looking_for_tracks_with_waypoints">Búsqueda de trazas con puntos de referencia</string>
     <string name="shared_string_more_without_dots">Más</string>
+    <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
+    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés (OSM), abre o comenta problemas del mapa (OSM), y contribuye con archivos de grabaciones GPX.</string>
+    <string name="shared_string_deleted">Borrado</string>
+    <string name="shared_string_edited">Editado</string>
+    <string name="shared_string_added">Añadido</string>
+    <string name="marker_activated">Marcador «%s» activado.</string>
+    <string name="one_tap_active_descr">Pulsa sobre el marcador en el mapa y desplázalo al primer lugar en los marcadores activos, sin abrir el menú contextual.</string>
+    <string name="one_tap_active">Una pulsación activa</string>
+    <string name="empty_state_av_notes">¡Tomar notas multimedia!</string>
+    <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto para cada punto del mapa, utilizando el controlador o el menú contextual.</string>
+    <string name="notes_by_date">Notas por fecha</string>
+    <string name="by_date">Por fecha</string>
+    <string name="by_type">Por tipo</string>
     </resources>
