@@ -258,11 +258,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabActivity.TabItem> mTabs, Intent intent) {
-		if (getDBPOI().getOpenstreetmapPoints().size() > 0 || getDBBug().getOsmbugsPoints().size() > 0) {
-			mTabs.add(favoritesActivity.getTabIndicator(R.string.osm_edits, OsmEditsFragment.class));
-			if (intent != null && "OSM".equals(intent.getStringExtra("TAB"))) {
-				app.getSettings().FAVORITES_TAB.set(R.string.osm_edits);
-			}
+		mTabs.add(favoritesActivity.getTabIndicator(R.string.osm_edits, OsmEditsFragment.class));
+		if (intent != null && "OSM".equals(intent.getStringExtra("TAB"))) {
+			app.getSettings().FAVORITES_TAB.set(R.string.osm_edits);
 		}
 	}
 
@@ -423,21 +421,32 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	public static String getEditName(OsmPoint point) {
 		String prefix = getPrefix(point);
+		String name = getName(point);
 		if (point.getGroup() == OsmPoint.Group.POI) {
 			String subtype = "";
 			if (!Algorithms.isEmpty(((OpenstreetmapPoint) point).getSubtype())) {
 				subtype = " (" + ((OpenstreetmapPoint) point).getSubtype() + ") ";
 			}
-			return prefix + subtype + ((OpenstreetmapPoint) point).getName();
+			return prefix + subtype + name;
 		} else if (point.getGroup() == OsmPoint.Group.BUG) {
-			return prefix + ((OsmNotesPoint) point).getText();
+			return prefix + name;
 		} else {
 			return prefix;
 		}
 	}
 
-	private static String getPrefix(OsmPoint osmPoint) {
-		return (osmPoint.getGroup() == OsmPoint.Group.POI ? "POI " : "Bug ") + " id: " + osmPoint.getId() + " ";
+	public static String getName(OsmPoint point) {
+		if (point.getGroup() == OsmPoint.Group.POI) {
+			return ((OpenstreetmapPoint) point).getName();
+		} else if (point.getGroup() == OsmPoint.Group.BUG) {
+			return ((OsmNotesPoint) point).getText();
+		} else {
+			return "";
+		}
+	}
+
+	public static String getPrefix(OsmPoint osmPoint) {
+		return (osmPoint.getGroup() == OsmPoint.Group.POI ? "POI" : "Bug") + " id: " + osmPoint.getId() + " ";
 	}
 
 	@Override

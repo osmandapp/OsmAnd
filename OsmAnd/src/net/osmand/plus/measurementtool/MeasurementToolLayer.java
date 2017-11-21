@@ -409,6 +409,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return !isInMeasurementMode();
 	}
 
+	@Override
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
 	interface OnSingleTapListener {
 
 		void onAddPoint();

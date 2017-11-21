@@ -803,8 +803,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		}
 		removeMapillaryFiltersFragment();
 
-		mapActivity.updateStatusBarColor();
-
 		if (visible) {
 			mapActivity.dismissCardDialog();
 			mapActivity.getContextMenu().hideMenues();
@@ -899,6 +897,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
 			}
 		}
+		mapActivity.updateStatusBarColor();
 	}
 
 	public void updateDashboard() {

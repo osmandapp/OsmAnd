@@ -182,6 +182,15 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 			}
 		});
 
+		final CompoundButton oneTapActiveToggle = (CompoundButton) mainView.findViewById(R.id.one_tap_active_switch);
+		oneTapActiveToggle.setChecked(settings.SELECT_MARKER_ON_SINGLE_TAP.get());
+		mainView.findViewById(R.id.one_tap_active_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				updateChecked(settings.SELECT_MARKER_ON_SINGLE_TAP, oneTapActiveToggle);
+			}
+		});
+
 		return mainView;
 	}
 
