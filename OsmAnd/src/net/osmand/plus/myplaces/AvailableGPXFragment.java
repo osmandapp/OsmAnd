@@ -450,7 +450,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		optionsMenuAdapter = new ContextMenuAdapter();
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, final int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, final int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 				if (itemId == R.string.local_index_mi_reload) {
 					reloadTracks();
 				} else if (itemId == R.string.shared_string_show_on_map) {
@@ -521,7 +521,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(i);
 			if (itemId == contextMenuItem.getTitleId()) {
-				contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false);
+				contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false, null);
 				return true;
 			}
 		}

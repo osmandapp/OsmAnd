@@ -220,7 +220,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		ItemClickListener addListener = new ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId,
-					int pos, boolean isChecked) {
+					int pos, boolean isChecked, int[] viewCoordinates) {
 				if (resId == R.string.context_menu_item_add_parking_point) {
 					showAddParkingDialog(mapActivity, latitude, longitude);
 				}

@@ -96,7 +96,7 @@ public class ContourLinesMenu {
 
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
-											  final int itemId, final int pos, final boolean isChecked) {
+											  final int itemId, final int pos, final boolean isChecked, int[] viewCoordinates) {
 				if (itemId == toggleActionStringId) {
 					app.runInUIThread(new Runnable() {
 						@Override
@@ -268,7 +268,7 @@ public class ContourLinesMenu {
 									.setIcon(DownloadActivityType.SRTM_COUNTRY_FILE.getIconResource())
 									.setListener(new ContextMenuAdapter.ItemClickListener() {
 										@Override
-										public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+										public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
 											ContextMenuItem item = adapter.getItem(position);
 											if (downloadThread.isDownloading(indexItem)) {
 												downloadThread.cancelDownload(indexItem);
