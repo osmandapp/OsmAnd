@@ -42,7 +42,6 @@ public class MapMarkersHelper {
 	private OsmandSettings settings;
 	private List<MapMarkerChangedListener> listeners = new ArrayList<>();
 	private OsmandApplication ctx;
-	private FavouritesDbHelper favouritesDbHelper;
 	private MapMarkersDbHelper markersDbHelper;
 	private boolean startFromMyLocation;
 	private ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -243,7 +242,6 @@ public class MapMarkersHelper {
 	public MapMarkersHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
 		settings = ctx.getSettings();
-		favouritesDbHelper = ctx.getFavorites();
 		markersDbHelper = ctx.getMapMarkersDbHelper();
 		planRouteContext = new MarkersPlanRouteContext(ctx);
 		startFromMyLocation = settings.ROUTE_MAP_MARKERS_START_MY_LOC.get();
