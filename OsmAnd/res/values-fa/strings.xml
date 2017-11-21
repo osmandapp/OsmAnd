@@ -800,7 +800,7 @@
 	<string name="local_index_mi_upload_gpx">ارسال به OSM</string>
 	<string name="show_more_map_detail_descr">برخی جزئیات نقشهٔ بُرداری را در زوم‌های پایین‌تر نشان می‌دهد (جاده‌ها و...).</string>
 	<string name="favourites_delete_multiple_succesful">نقطه(های) برگزیده حذف شد.</string>
-	<string name="favorite_delete_multiple">دارید %1$d نقطهٔ برگزیده و %2$d گروه را پاک می‌کنید. آیا مطمن هستید؟</string>
+	<string name="favorite_delete_multiple">دارید %1$d نقطهٔ برگزیده و %2$d گروه را پاک می‌کنید. آیا مطمئن هستید؟</string>
 	<string name="basemap_missing">نقشه پایهٔ جهان (که تمام دنیا را در زوم‌های پایین پوشش می‌دهد) پیدا نشد. برای داشتن نمای جهانی لطفاً فایل World_basemap_x.obf را دانلود کنید.</string>
 	<string name="local_index_installed">نسخهٔ محلی</string>
 	
@@ -1811,7 +1811,7 @@
     <string name="osm_changes_added_to_local_edits">تغییرات OSM به بستهٔ تغییرات محلی اضافه شد</string>
    	<string name="mark_to_delete">برای حذف‌کردن علامت بزنید</string>
 	<string name="osmo_grop_name_length_alert">نام گروه باید حداقل ۳حرفی باشد!</string>
-	<string name="local_osm_changes_upload_all_confirm">دارید تعداد %1$d تغییر را به OSM ارسال می‌کنید. مطمئنید؟</string>
+	<string name="local_osm_changes_upload_all_confirm">دارید تعداد %1$d تغییر را به OSM ارسال می‌کنید. مطمئن هستید؟</string>
     <string name="confirmation_to_clear_history">آیا سوابق را پاک می‌کنید؟</string>
     <string name="delay_to_start_navigation_descr">زمان انتظار برای باقی‌ماندن در صفحهٔ طراحی مسیر را مشخص کنید.</string>
     <string name="delay_to_start_navigation">مسیریابی مرحله‌به‌مرحله را بعد از … شروع کن</string>
@@ -2140,7 +2140,7 @@
     <string name="routing_attr_driving_style_safety_name">ترجیح‌دادن بیراهه</string>
     <string name="relief_smoothness_factor_descr">اولویت ساختار زمین: هموار یا پرتپه.</string>
     <string name="shared_string_slope">شیب</string>
-    <string name="points_delete_multiple">دارید %1$d نقطه را حذف می‌کنید؛ مطمئنید؟</string>
+    <string name="points_delete_multiple">دارید %1$d نقطه را حذف می‌کنید؛ مطمئن هستید؟</string>
     <string name="track_points_category_name">نقاط مهم این مسیر</string>
     <string name="gpx_track">مسیر</string>
     <string name="shared_string_time_span">مدت‌زمان</string>
@@ -2420,7 +2420,7 @@
     <string name="rate_this_app">به این برنامه امتیاز بدهید</string>
     <string name="rate_this_app_long">لطفاً در فروشگاه Play به OsmAnd امتیاز بدهید</string>
     <string name="user_hates_app_get_feedback">لطفاً علتش به ما بگویید.</string>
-    <string name="user_hates_app_get_feedback_long">لطفاً به ما بگویید دوست دارید چه چیزی در این برنامه تغییر بکند.</string>
+    <string name="user_hates_app_get_feedback_long">دوست دارید این برنامه چه تغییری بکند؟ لطفاً به ما بگویید.</string>
     <string name="failed_to_upload">آپلود نشد</string>
     <string name="delete_change">حذف تغییر</string>
     <string name="successfully_uploaded_pattern">{0} مورد از {1} مورد آپلود شد</string>
@@ -2461,7 +2461,7 @@
     <string name="later">بعداً</string>
     <string name="get_full_version">نسخهٔ کامل</string>
     <string name="downloads">دانلودها</string>
-    <string name="confirm_download_roadmaps">آیا بااینکه نقشهٔ استاندارد (کامل) را دارید، هنوز می‌خواهید نقشهٔ فقط-جاده را دانلود کنید؟</string>
+    <string name="confirm_download_roadmaps">آیا با اینکه نقشهٔ استاندارد (کامل) را دارید، نقشهٔ فقط-جاده را هم دانلود می‌کنید؟</string>
     <string name="value_downloaded_of_max">%1$.1f از %2$.1f مگابایت</string>
     <string name="file_size_in_mb">%.1f مگابایت</string>
     <string name="update_all">به‌روزرسانی همه (%1$s مگابایت)</string>
@@ -2955,7 +2955,7 @@
     <string name="add_group">افزودن گروه</string>
     <string name="add_group_descr">می‌توانید گروهی از نقاط برگزیده یا نقاط بین‌راهی را وارد کنید.</string>
     <string name="empty_state_markers_active">روی نقشه نشانه‌گذاری کنید!</string>
-    <string name="empty_state_markers_active_desc">مکان‌ها به‌صورت کوتاه یا طولانی لمس کنید و سپس دکمهٔ پرچم را بزنید.</string>
+    <string name="empty_state_markers_active_desc">مکان‌ها را به‌صورت کوتاه یا طولانی لمس کنید و سپس دکمهٔ پرچم را بزنید.</string>
     <string name="empty_state_markers_groups">واردکردن گروه‌ها</string>
     <string name="empty_state_markers_groups_desc">می‌توانید گروه‌های نقاط برگزیده یا نقاط بین‌راهی را به‌عنوان نشانه وارد کنید.</string>
     <string name="empty_state_markers_history_desc">نشانه‌هایی که به‌عنوان عبورکرده مشخص شده‌اند در این صفحه نشان داده می‌شوند.</string>
