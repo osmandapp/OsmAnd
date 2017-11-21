@@ -843,7 +843,7 @@
 	<string name="layer_overlay">خريطة فوقية…</string>
 	<string name="shared_string_none">لا شيء</string>
 	<string name="map_overlay">خريطة فوقية</string>
-	<string name="map_overlay_descr">اختيار خريطة الطبقة العلوية</string>
+	<string name="map_overlay_descr">اختيار خريطة الطبقة العلوية.</string>
 	<string name="poi_dialog_other_tags_message">يتم الاحتفاظ بكافة العلامات الاخري</string>
 	<string name="amenity_type_seamark">سيمارك</string>
     <string name="poi_dialog_comment_default">متغير POI</string>
@@ -2214,7 +2214,7 @@
     <string name="loading_builds">عملية تحميل إصدارات التطبيق جارية …</string>
     <string name="select_build_to_install">حدد إصدار التطبيق للتثبيت</string>
     <string name="voice_is_not_available_msg">التوجيهات الصوتية غير متوفرة، يرجى الذهاب إلى \"إعدادات\" ← \"عامة\" ← \"التوجيه الصوتي\" وحدد أو حمل حزمة صوت.</string>
-    <string name="daynight_descr">تحديد قاعدة تحويل وضع النهار/ الليل</string>
+    <string name="daynight_descr">تحديد قاعدة تحويل وضع النهار/الليل.</string>
     <string name="download_files_question">تحميل {0} ملف ({1} مب)؟</string>
     <string name="items_were_selected">{0} عنصر محدد</string>
     <string name="fast_route_mode_descr">تفعيل لحساب الطريق الأسرع أو تعطيل لحساب المسار الأقل استهلاكا للوقود.</string>
