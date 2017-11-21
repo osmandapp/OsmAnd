@@ -15,7 +15,6 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
@@ -46,7 +45,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		this.mapActivity = mapActivity;
 		markers = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers();
 		night = !mapActivity.getMyApplication().getSettings().isLightContent();
-		showDirectionEnabled = mapActivity.getMyApplication().getSettings().MAP_MARKERS_MODE.get() != OsmandSettings.MapMarkersMode.NONE;
+		showDirectionEnabled = mapActivity.getMyApplication().getSettings().MARKERS_DISTANCE_INDICATION_ENABLED.get();
 	}
 
 	public void setShowDirectionEnabled(boolean showDirectionEnabled) {

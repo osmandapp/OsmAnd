@@ -166,7 +166,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				ContextMenuItem item = adapter.getItem(which);
 				if (item.getItemClickListener() != null) {
 					item.getItemClickListener().onContextMenuClick(null,
-							item.getTitleId(), which, false);
+							item.getTitleId(), which, false, null);
 				}
 			}
 
@@ -178,7 +178,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	private void basicFileOperation(final LocalIndexInfo info, ContextMenuAdapter adapter) {
 		ItemClickListener listener = new ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked, int[] viewCoordinates) {
 				return performBasicOperation(resId, info);
 			}
 		};
@@ -619,7 +619,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
-											  int itemId, int pos, boolean isChecked) {
+											  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 				localOptionsMenu(itemId);
 				return true;
 			}
@@ -681,7 +681,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(i);
 			if (itemId == contextMenuItem.getTitleId()) {
-				contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false);
+				contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false, null);
 				return true;
 			}
 		}

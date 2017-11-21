@@ -242,7 +242,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (menu.hasHiddenBottomInfo()) {
 			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
-				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 					menu.openMenuFullScreen();
 					return true;
 				}
@@ -256,7 +256,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (isObjectMoveable(o)) {
 			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
-				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 					RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
 					enterMovingMode(tileBox);
 					return true;

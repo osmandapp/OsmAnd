@@ -252,7 +252,7 @@ public class ContextMenuAdapter {
 							ItemClickListener ca = item.getItemClickListener();
 							item.setSelected(isChecked);
 							if (ca != null) {
-								ca.onContextMenuClick(la, item.getTitleId(), position, isChecked);
+								ca.onContextMenuClick(la, item.getTitleId(), position, isChecked, null);
 							}
 						}
 					};
@@ -348,7 +348,8 @@ public class ContextMenuAdapter {
 		boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
 								   int itemId,
 								   int position,
-								   boolean isChecked);
+								   boolean isChecked,
+								   int[] viewCoordinates);
 	}
 
 	public interface ProgressListener {
@@ -372,7 +373,7 @@ public class ContextMenuAdapter {
 				btn.setChecked(!btn.isChecked());
 				return false;
 			} else {
-				return onContextMenuClick(adapter, itemId, position, false);
+				return onContextMenuClick(adapter, itemId, position, false, null);
 			}
 		}
 	}

@@ -99,7 +99,7 @@ public class RasterMapMenu {
 
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
-											  final int itemId, final int pos, final boolean isChecked) {
+											  final int itemId, final int pos, final boolean isChecked, int[] viewCoordinates) {
 				if (itemId == toggleActionStringId) {
 					app.runInUIThread(new Runnable() {
 						@Override
