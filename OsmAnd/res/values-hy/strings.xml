@@ -98,7 +98,7 @@
     <string name="max_speed_none">Ոչ</string>
     <string name="index_name_openmaps">OpenMaps - Եվրոպա</string>
     <string name="local_indexes_cat_srtm">Կոնտուրային գծերի/եզրագծերի տվյալներ</string>
-    <string name="precise_routing_mode_descr">Միացնել ճշգրիտ ճանապարհի հաշվարկի ռեժիմը։ Այս ռեժիմը աշխատում է կարճ հեռավորությունների վրա և չի օգտագործում սեփական գրադարանը</string>
+    <string name="precise_routing_mode_descr">Միացնել ճշգրիտ երթուղիների հաշվարկի ռեժիմը։ Այս ռեժիմը դեր սահմանափակված է հեռավորությամբ և դանդախ է։</string>
     <string name="dropbox_plugin_name">Dropbox փլագին</string>
     <string name="av_def_action_choose">Ընտրել ըստ հարցման</string>
     <string name="av_widget_action_descr">Ընտրել default Widget գործողություն։</string>
@@ -233,10 +233,10 @@
     <string name="wrong_user_name">Սխալ օգտագործողի անուն!</string>
     <string name="shared_string_to">Մինչև</string>
     <string name="mapillary_menu_date_from">Սկսած</string>
-    <string name="mapillary_menu_descr_dates">Դիտել լուսանկարներ ավելացրած որոշակի ժամանակահատվածում:</string>
-    <string name="mapillary_menu_title_dates">Ամսաթվեր</string>
+    <string name="mapillary_menu_descr_dates">Դիտել միայն ավելացրած լուսանկարներ</string>
+    <string name="mapillary_menu_title_dates">Ամսաթիվ</string>
     <string name="mapillary_menu_edit_text_hint">"Մուտքագրեք  օգտատերի անունը"</string>
-    <string name="mapillary_menu_descr_username">Դիտել որոշակի օգտագործողի կողմից վերբեռնված լուսանկարները:</string>
+    <string name="mapillary_menu_descr_username">Դիտել լուսանկարները ավելացրած օգտագործողի կողմից</string>
     <string name="mapillary_menu_title_username">Օգտատերի անունը</string>
     <string name="mapillary_menu_filter_description">Դուք կարող եք դասավորել լուսանկարներ ըստ ուղարկողի կամ ամսաթվի: Զտիչները օգտագործվում են միայն մեծ չափերի համար:</string>
     <string name="map_widget_ruler_control">Շառավիղ-քանոն</string>
@@ -619,7 +619,7 @@
     <string name="shared_string_sound">Ձայն</string>
     <string name="consider_turning_polygons_off">Ցանկալի է անջատել պոլիգենների ցուցադրումը։</string>
     <string name="rec_split_clip_length">"Clip  երկարությունը"</string>
-    <string name="rec_split_clip_length_desc">Յուրաքանչյուր ձայնագրված տեսահոլովակի(clip) երկարությունը չի նշանակվի ավելի երկար ընտրված ժամանակահատվածից</string>
+    <string name="rec_split_clip_length_desc">Ձայնագրված տեսահոլովակի(clip) երկարության սահմանաչափը։</string>
     <string name="rec_split_storage_size_desc">Հիշողության ծավալը, որը կարող է զբաղեցված լինի բոլոր clips-ներով։</string>
     <string name="route_distance">Հեռավորություն։</string>
     <string name="route_duration">Ժամանակ՝</string>
@@ -1077,7 +1077,7 @@
     <string name="version_settings">Հավաքներ</string>
     <string name="rendering_attr_streetLighting_name">Փողոցային լուսավորություն</string>
     <string name="proxy_pref_title">Proxy սերվեր</string>
-    <string name="proxy_pref_descr">Ինտերնետային կապի հաստատում proxy սերվերի միջոցով</string>
+    <string name="proxy_pref_descr">Նշեք Ինտերնետային proxy սերվերը։</string>
     <string name="settings_privacy">Գաղտնիություն</string>
     <string name="points">Կետեր</string>
     <string name="navigation_over_track">Ցանկանում եք սկսել նավարկությունը ըստ տրեկի?</string>
@@ -1326,7 +1326,7 @@
     <string name="osmo_session_id_share">Նիստի URL սարքի հետեւելու համար</string>
     <string name="osmo_tracker_id_share">"Թիրախային սարքին միանալու համար %2$s, սեխմել հղման վրա %3$s կամ նշեք track ID-ն  (%1$s)"</string>
     <string name="osmo_track_interval">Մուտքագրման ընդմիջում</string>
-    <string name="osmo_track_interval_descr">Ընտրեք ժամանակի ընդմիջում դիրքը ուղղարկելու համար</string>
+    <string name="osmo_track_interval_descr">Ընտրեք ժամանակի ընդմիջումը գտնվելու վայրի տվյալները ուղղարկելու համար։</string>
     <string name="int_days">օրեր</string>
     <string name="osmo_connect_menu">Միացում</string>
     <string name="osmo_expire_group">Սպառվում է</string>
@@ -1785,7 +1785,7 @@
     <string name="gpx_visibility_txt">Տեսանելիություն</string>
     <string name="gpx_tags_txt">Թեգեր(Tags)</string>
     <string name="gpx_description_txt">Նկարագրություն</string>
-    <string name="validate_gpx_upload_name_pwd">Նշեք OSM-ի օգտվողի անունը և գաղտնաբառը, GPX ֆայլերը OpenStreetMap-ին վերբեռնելու համար:</string>
+    <string name="validate_gpx_upload_name_pwd">Նշեք OSM-ի օգտվողի անունը և գաղտնաբառը, GPX ֆայլերը OpenStreetMap վերբեռնելու համար:</string>
     <string name="default_buttons_support">Աջակցում</string>
     <string name="support_new_features">Աջակցել նոր հատկությունների զարգացումը</string>
     <string name="support_new_features_descr">Նվիրատվություն կատարեք նոր հատկությունները հավելվածում տեսնելու համար։</string>
@@ -1896,17 +1896,17 @@
     <string name="general_settings">Ընդհանուր</string>
     <string name="general_settings_descr">Էկրանի պարամետրերը, տեղայնացում, միավորներ և այլն։</string>
     <string name="global_app_settings">Հավելվածի ընդհանուր կարգավորումները</string>
-    <string name="user_name">Ձեր OSM օգտվողի անունը (user name)</string>
+    <string name="user_name">Ձեր OSM օգտվողի անունը (username)</string>
     <string name="open_street_map_login_descr">Նշեք OSM-ի օգտվողի անունը (պահանջվում է OSM-ի հետ աշխատելու համար)։</string>
     <string name="user_password">Ձեր OSM գաղտնաբառը</string>
     <string name="osmand_service">Ֆոնային ռեժիմ</string>
-    <string name="osmand_service_descr">Միացնում է OsmAnd-ը ֆոնային ռեժիմում երբ էկրանը անջատված է</string>
+    <string name="osmand_service_descr">Աշխատեցնում է OsmAnd-ը ֆոնային ռեժիմում երբ էկրանը անջատված է։</string>
     <string name="download_files_not_enough_space">Ներբեռնելու համար բավարար ազատ տեղ չկա %1$s ՄԲ (ազատ է: %2$s)։</string>
     <string name="use_transparent_map_theme">Թափանցիկ թեմա</string>
     <string name="native_library_not_supported">Հիմնական գրադարանը չի աջակցվում այս սարքում:</string>
     <string name="init_native_library">Տեղական գրադարանի ստեղծում …</string>
     <string name="choose_auto_follow_route">Քարտեզի ավտոմատ վերադարձման կարգավորումները</string>
-    <string name="choose_auto_follow_route_descr">Ընտրեք այն ժամանակը, երբ քարտեզը կվերադառնա ընթացիկ դիրքին</string>
+    <string name="choose_auto_follow_route_descr">Ընտրեք այն ժամանակը, երբ քարտեզը կվերադառնա ընթացիկ դիրքին։</string>
     <string name="keep_informing_never">Միայն ձեռքով (սեղմելով «սլաքը»)</string>
     <string name="keep_informing_descr">Կրկնել նավիգացիոն հրահանգները պարբերաբար։</string>
     <string name="keep_informing">Կրկնել նավիգացիոն հրահանգները</string>
@@ -2105,7 +2105,7 @@
     <string name="daynight_mode_night">Գիշերային</string>
     <string name="daynight_mode_auto">Արևածագ/մայրամուտ</string>
     <string name="daynight_mode_sensor">Լույսի սենսոր</string>
-    <string name="daynight_descr">Ընտրեք քարտեզի ցերեկային/գիշերային ռեժիմը</string>
+    <string name="daynight_descr">Ընտրեք քարտեզի ցերեկային/գիշերային ռեժիմը։</string>
     <string name="daynight">Ցերեկային/գիշերային ռեժիմ</string>
     <string name="download_files_question">Ներբերնել {0} ֆայլ(եր) ({1} ՄԲ)?</string>
     <string name="items_were_selected">Ընտրվեց {0}</string>
@@ -2178,7 +2178,7 @@
     <string name="int_seconds">վայրկյան</string>
     <string name="int_min">րոպ․</string>
     <string name="background_service_int_descr">Ընտրեք արթնացման ժամանակի ընդմիջումը ֆոնային ծառայության համար։</string>
-    <string name="background_service_provider_descr">Ֆոնային ծառայության համար ընտրել դիրքորոշման աղբյուր</string>
+    <string name="background_service_provider_descr">Ֆոնային ծառայության համար ընտրել դիրքորոշման աղբյուր։</string>
     <string name="background_service_provider">Դիրքորոշման աղբյուր</string>
     <string name="background_router_service_descr">Միացնում է OsmAnd-ը ֆոնային ռեժիմում, ձեր գտնվելու վայրը հետեւելու համար, երբ էկրանը անջատված է։</string>
     <string name="background_router_service">Միացնում է OsmAnd-ը ֆոնին ռեժիմում</string>
@@ -2325,8 +2325,8 @@
     <string name="ChooseCountry">Ընտրեք երկիրը</string>
     <string name="map_view_3d_descr">Միացնել քարտեզի 3D ռեժիմը:</string>
     <string name="map_view_3d">Քարտեզի 3D տեսք</string>
-    <string name="show_poi_over_map_description">Ցուցադրել POI-ի քարտեզի վրա (օգտագործել վերջին ընտրված ֆիլտրը):</string>
-    <string name="show_poi_over_map">Ցույց տալ POI</string>
+    <string name="show_poi_over_map_description">Ցուցադրել վերջին ընտրած POI-ին քարտեզի վրա:</string>
+    <string name="show_poi_over_map">Ցույց տալ POI-ի</string>
     <string name="map_source">Քարտեզի աղբյուրը</string>
     <string name="use_internet">Օգտագործել Ինտերնետը</string>
     <string name="show_location">Ցույց տալ ձեր դիրքը</string>
@@ -2597,9 +2597,9 @@
     <string name="retry">Կրկնել</string>
     <string name="track_waypoints">Տրեկի (track) կետերը</string>
     <string name="add_group">Ավելացնել խումբ</string>
-    <string name="add_group_descr">Դուք կարող եք ավելացնել «Սիրված»-ի խումբ կամ տրեկի կետեր:</string>
+    <string name="add_group_descr">Դուք կարող եք ավելացնել «Սիրված» խումբ կամ տրեկի կետեր:</string>
     <string name="empty_state_markers_groups">Ներմուծել խմբերը</string>
-    <string name="empty_state_markers_groups_desc">Դուք կարող եք ներմուծել «Սիրված»-ի խմբերը կամ տրեկի կետերը որպես մարկերներ:</string>
+    <string name="empty_state_markers_groups_desc">Դուք կարող եք ներմուծել «Սիրված» խմբեր կամ տրեկի կետերը որպես մարկերներ:</string>
     <string name="shared_string_two">Երկու</string>
     <string name="shared_string_one">Մեկ</string>
     <string name="add_waypoint">Ավելացնել կետ</string>
@@ -2616,4 +2616,16 @@
     <string name="import_track_desc">Ֆայլ %1$s չի պարունակում կետեր, ներմուծել այդ որպես տրեկ?</string>
     <string name="move_point">Տեղափոխել կետը</string>
     <string name="add_segment_to_the_track">Ավելացնել սեգմենտը GPX-ին</string>
-</resources>
+<string name="shared_string_more_without_dots">Ավելին</string>
+    <string name="appearance_on_the_map">Տեսքը քարտեզի վրա</string>
+    <string name="add_track_to_markers_descr">Ընտրել տրեկը որը OsmAnd-ը կավելացնի մարկերներին</string>
+    <string name="add_favourites_group_to_markers_descr">Ընտրեք «Սիրված» խումբը, որը ցանկանում եք ավելացնել մարկերներին</string>
+    <string name="favourites_group">«Սիրված»-ի խումբը</string>
+    <string name="empty_state_markers_active">Մարկերները քարտեզի վրա է!</string>
+    <string name="empty_state_markers_active_desc">Կետերի նշում քարտեզի վրա սխմելով էկրանին։</string>
+    <string name="empty_state_markers_history_desc">Այս էկրանին կհայտնվեն մարկերներ, որոնք նշված են ինչպես անցած։</string>
+    <string name="digits_quantity">Թվերի քանակը</string>
+    <string name="show_number_pad">Ցուցադրել թվային վահանակը</string>
+    <string name="coordinate_input_accuracy">%1$d թվեր</string>
+    <string name="mark_passed">Նշել անցած</string>
+    </resources>

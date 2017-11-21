@@ -642,6 +642,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 			}
 		}
+		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
+			IContextMenuProvider provider = entry.getValue();
+			if (provider != null && provider.runExclusiveAction(entry.getKey(), showUnknownLocation)) {
+				return true;
+			}
+		}
 		if (selectedObjects.size() == 1) {
 			Object selectedObj = selectedObjects.keySet().iterator().next();
 			LatLon latLon = objectLatLon;
@@ -924,6 +930,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		boolean isObjectClickable(Object o);
 
+		boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation);
 	}
 
 	public interface IMoveObjectProvider {

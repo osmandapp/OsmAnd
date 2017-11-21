@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/empty_state_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/empty_state_image_margin_bottom"
+        android:layout_marginTop="@dimen/empty_state_image_margin_top"
+        tools:src="@drawable/ic_empty_state_av_notes_night"/>
+
+    <net.osmand.plus.widgets.TextViewEx
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/empty_state_text_interval"
+        android:background="@null"
+        android:text="@string/empty_state_av_notes"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="@dimen/empty_state_text_size"
+        osmand:typeface="@string/font_roboto_medium"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/empty_state_text_desc_margin"
+        android:layout_marginRight="@dimen/empty_state_text_desc_margin"
+        android:background="@null"
+        android:gravity="center"
+        android:text="@string/empty_state_av_notes_desc"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="@dimen/empty_state_text_desc_size"/>
+
+</LinearLayout>

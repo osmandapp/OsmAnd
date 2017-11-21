@@ -3060,4 +3060,9 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="moving_time">移動時間</string>
     <string name="max_min">最大/最小</string>
     <string name="min_max">最小/最大</string>
+    <string name="looking_for_tracks_with_waypoints">経由地点のある経路を探す</string>
+    <string name="shared_string_more_without_dots">もっと見る</string>
+    <string name="appearance_on_the_map">マップの外観</string>
+    <string name="add_track_to_markers_descr">マーカーに経由地点を追加する経路を選択します。(経由地点を含む経路のみリストアップされます)</string>
+    <string name="add_favourites_group_to_markers_descr">マーカーに追加するお気に入りのカテゴリを選択します。</string>
     </resources>

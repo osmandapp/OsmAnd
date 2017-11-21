@@ -333,6 +333,11 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		return o instanceof MapillaryImage;
 	}
 
+	@Override
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
 	private void getImagesFromPoint(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
 		Map<QuadPointDouble, Map> points = this.visiblePoints;
 		if (points != null) {

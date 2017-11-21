@@ -55,7 +55,7 @@
     <string name="fav_export_confirmation">Ya existe un archivo anterior con favoritos exportados. ¿Quiere sustituirlo?</string>
     <string name="profile_settings">Ajustes específicos por perfil</string>
     <string name="settings_preset">Perfil predeterminado</string>
-    <string name="settings_preset_descr">Ajustes de la vista y navegación del mapa son recordados por perfil usado. Establezca su perfil predeterminado aquí.</string>
+    <string name="settings_preset_descr">Los ajustes de vista del mapa y de navegación se recuerdan por perfil de uso. Establece tu perfil predeterminado aquí.</string>
     <string name="routing_settings">Navegación</string>
     <string name="routing_settings_descr">Opciones específicas para la navegación.</string>
     <string name="global_settings">Ajustes globales</string>
@@ -333,9 +333,9 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="poi_context_menu_modify">Modificar PDI</string>
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">A la brújula</string>
-    <string name="rotate_map_bearing_opt">En dirección al movimiento</string>
-    <string name="rotate_map_none_opt">No rotar (norte arriba)</string>
-    <string name="rotate_map_to_bearing_descr">Selecciona la alineación del mapa.</string>
+    <string name="rotate_map_bearing_opt">A la dirección del movimiento</string>
+    <string name="rotate_map_none_opt">No rotar (norte está arriba)</string>
+    <string name="rotate_map_to_bearing_descr">Selecciona la alineación de la pantalla del mapa.</string>
     <string name="rotate_map_to_bearing">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
     <string name="fav_imported_sucessfully">Favoritos importados correctamente</string>
@@ -2311,7 +2311,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="quick_action_add_marker_descr">Pulsar el botón de acción agregará un marcador de mapa en la ubicación del centro de la pantalla.</string>
-    <string name="quick_action_add_gpx_descr">Pulsar el botón de acción agregará un punto intermedio GPX en la ubicación del centro de la pantalla.</string>
+    <string name="quick_action_add_gpx_descr">"Pulsar el botón de acción agregará un punto  de referencia GPX en la ubicación del centro de la pantalla."</string>
     <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción agregará una nota de audio en la ubicación del centro de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Pulsar el botón de acción agregará una nota de video en la ubicación del centro de la pantalla.</string>
     <string name="quick_action_take_photo_note_descr">Pulsar el botón de acción agregará una nota de la foto en el lugar del centro de la pantalla.</string>
@@ -2677,7 +2677,7 @@ Por favor proporciona un código completo</string>
     <string name="show_direction">Indicación de distancia</string>
     <string name="sort_by">Ordenar por</string>
     <string name="marker_options">Opciones del marcador</string>
-    <string name="marker_show_distance_descr">Elige cómo se indica la distancia y dirección a los marcadores del mapa en la pantalla del mapa:</string>
+    <string name="marker_show_distance_descr">Elige cómo se indica la distancia y la dirección a los marcadores del mapa en la pantalla del mapa:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Umbral de orientación del mapa</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Elije la velocidad a partir de la cual la orientación del mapa cambia de «Dirección del movimiento» a «Brújula».</string>
     <string name="all_markers_moved_to_history">Todos los marcadores del mapa movidos al historial</string>
@@ -2693,11 +2693,11 @@ Por favor proporciona un código completo</string>
     <string name="this_year">Este año</string>
     <string name="widget">Control</string>
     <string name="top_bar">Barra superior</string>
-    <string name="show_guide_line">Mostrar las directrices</string>
-    <string name="show_arrows_on_the_map">Mostrar las flechas en el mapa</string>
+    <string name="show_guide_line">Mostrar indicaciones</string>
+    <string name="show_arrows_on_the_map">Mostrar flechas en el mapa</string>
     <string name="show_passed">Mostrar descartados</string>
     <string name="hide_passed">Ocultar descartados</string>
-    <string name="remove_from_map_markers">Eliminar de Map Markers</string>
+    <string name="remove_from_map_markers">Eliminar de Marcadores de mapa</string>
     <string name="descendingly">descendente</string>
     <string name="ascendingly">ascendente</string>
     <string name="date_added">Fecha añadida</string>
@@ -2710,7 +2710,7 @@ Por favor proporciona un código completo</string>
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Entrada de coordenadas</string>
     <string name="is_saved">está guardado</string>
-    <string name="marker_save_as_track_descr">Exporte sus marcadores a un archivo que puede nombrar aquí:</string>
+    <string name="marker_save_as_track_descr">Exporte sus marcadores a un archivo que puedes indicar aquí:</string>
     <string name="marker_save_as_track">Guardar como traza</string>
     <string name="move_to_history">Mover al historial</string>
     <string name="group_will_be_removed_after_restart">El grupo se quitará al reiniciar</string>
@@ -2721,64 +2721,67 @@ Por favor proporciona un código completo</string>
     <string name="fast_coordinates_input">Entrada rápida de coordenadas</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evitar carreteras de hielo, vados</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evita carreteras de hielo y vados.</string>
-    <string name="osn_modify_dialog_error">Excepción ocurrida: nota no modificada</string>
+    <string name="osn_modify_dialog_error">Ha ocurrido una excepción: la nota no se ha modificado</string>
     <string name="osn_modify_dialog_title">Modificar nota</string>
     <string name="context_menu_item_modify_note">Modificar nota OSM</string>
-    <string name="make_round_trip_descr">Duplica el punto de inicio y lo añade como destino.</string>
-    <string name="make_round_trip">Viaje de ida y vuelta</string>
+    <string name="make_round_trip_descr">Añade una copia del punto de inicio como destino.</string>
+    <string name="make_round_trip">Hacer ruta circular</string>
     <string name="shared_string_navigate">Navegar</string>
     <string name="wrong_format">Formato incorrecto</string>
     <string name="shared_string_road">Carretera</string>
     <string name="show_map">Mostrar mapa</string>
     <string name="route_is_calculated">Ruta calculada</string>
-    <string name="round_trip">Viaje de ida y vuelta</string>
+    <string name="round_trip">Ruta circular</string>
     <string name="plan_route_no_markers_toast">Debes añadir al menos un marcador para usar esta función.</string>
-    <string name="release_2_8">• Marcadores del mapa totalmente rediseñados con directrices y planificación de rutas 
+    <string name="release_2_8">"• Marcadores del mapa totalmente rediseñados con  indicaciones y planificación de rutas 
 \n 
 \n • La herramienta de medición de distancias permite el ajuste al camino y guardar puntos como una traza 
 \n 
-\n • OSM Live: corrección de errores, nuevos datos en el servidor cada 30 minutos, actualizaciones implementadas en la navegación 
-\n 
-\n</string>
+\n • OSM Live: corrección de errores, nuevos datos en el servidor cada 30 minutos, actualizaciones implementadas en la navegación
+\n
+\n"</string>
     <string name="rendering_value_darkyellow_name">Amarillo oscuro</string>
     <string name="wrong_input">Entrada incorrecta</string>
     <string name="enter_new_name">Ingresar nombre nuevo</string>
     <string name="shared_string_back">Atrás</string>
     <string name="view">Ver</string>
 	<string name="waypoints_added_to_map_markers">Puntos de referencia añadidos a marcadores de mapa</string>
-	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna la vista de la interfaz y los controles.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna los botones y los controles.</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     <string name="show_on_top_bar">Mostrar en la barra superior</string>
     <string name="mark_passed">Descartar marcador</string>
-    <string name="import_gpx_file_description">puede importarse como puntos de favoritos, o como un archivo de trazas.</string>
+    <string name="import_gpx_file_description">puede importarse como puntos Favoritos, o como un archivo de traza.</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
-    <string name="import_as_favorites">Importar como favoritos</string>
+    <string name="import_as_favorites">Importar como Favoritos</string>
     <string name="import_file">Importar archivo</string>
-	<string name="digits_quantity">Cantidad de dígitos</string>
+	<string name="digits_quantity">Número de dígitos decimales</string>
     <string name="shared_string_right">Derecha</string>
     <string name="shared_string_left">Izquierda</string>
     <string name="show_number_pad">Mostrar teclado numérico</string>
     <string name="shared_string_paste">Pegar</string>
-    <string name="coordinate_input_accuracy_description">Cambiar automáticamente al campo siguiente al ingresar %1$d dígitos después del punto decimal.</string>
+    <string name="coordinate_input_accuracy_description">Cambia automáticamente al campo siguiente después de escribir %1$d dígitos decimales.</string>
     <string name="coordinate_input_accuracy">%1$d dígitos</string>
     <string name="go_to_next_field">Ir al campo siguiente</string>
     <string name="rename_marker">Renombrar marcador</string>
     <string name="appearance_on_the_map">Apariencia en el mapa</string>
-    <string name="add_track_to_markers_descr">Seleccione los puntos de referencia de la traza que se añadirán a los marcadores.</string>
-    <string name="add_favourites_group_to_markers_descr">Seleccione el grupo de favoritos que se añadirán a los marcadores.</string>
-    <string name="track_waypoints">Puntos de referencia de la traza</string>
+    <string name="add_track_to_markers_descr">Selecciona una traza para añadir sus puntos de referencia a los marcadores. (Sólo se muestran las trazas con puntos de referencia)</string>
+    <string name="add_favourites_group_to_markers_descr">Selecciona un grupo de favoritos para añadirlos a marcadores.</string>
+    <string name="track_waypoints">Puntos de referencia de traza</string>
     <string name="favourites_group">Grupo de favoritos</string>
     <string name="add_group">Añadir grupo</string>
-    <string name="add_group_descr">Puedes añadir un grupo de favoritos o puntos de referencia de la traza.</string>
-    <string name="empty_state_markers_active">¡Marcadores del mapa!</string>
-    <string name="empty_state_markers_active_desc">Marca lugares del mapa con una pulsación.</string>
+    <string name="add_group_descr">Puedes importar grupos desde favoritos o puntos de referencia de traza.</string>
+    <string name="empty_state_markers_active">¡Crea marcadores de mapa!</string>
+    <string name="empty_state_markers_active_desc">Pulsa en lugares en el mapa y luego pulsa en el botón de bandera del marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
-    <string name="empty_state_markers_groups_desc">Puede importar grupos de favoritos o puntos de referencias de la traza como marcadores.</string>
+    <string name="empty_state_markers_groups_desc">Puedes importar grupos de favoritos o puntos de referencia de traza como marcadores.</string>
     <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Uno</string>
-    <string name="show_guide_line_descr">Se mostrará en el mapa una línea que conecta su ubicación con la de los marcadores activos.</string>
-    <string name="show_arrows_descr">Se mostrará en el mapa una o dos flechas indicando la dirección a los marcadores activos.</string>
-    <string name="distance_indication_descr">Seleccione cómo desea ver la distancia a los marcadores activos.</string>
-    <string name="active_markers_descr">Seleccione cuántos indicadores de dirección desea ver.</string>
+    <string name="show_guide_line_descr">Muestra indicaciones desde tu ubicación hasta las posiciones de los marcadores activos.</string>
+    <string name="show_arrows_descr">Muestra una o dos flechas indicando la dirección hacia los marcadores activos.</string>
+    <string name="distance_indication_descr">Elige cómo mostrar la distancia hasta los marcadores activos.</string>
+    <string name="active_markers_descr">Elige cuántos indicadores de dirección se muestran.</string>
+    <string name="shared_string_more_without_dots">Más</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
+    <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de referencia</string>
     </resources>

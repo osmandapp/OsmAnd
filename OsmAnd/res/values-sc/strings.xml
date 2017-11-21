@@ -2785,7 +2785,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="marker_show_distance_descr">Issèbera comente indicare sa distàntzia e sa diretzione a sos marcadores in sa mapa:</string>
     <string name="passed">Ùrtimu impreu: %1$s</string>
     <string name="make_active">Ativa</string>
-    <string name="show_guide_line">Ammustra sa lìnia de ghia</string>
+    <string name="show_guide_line">Ammustra sas lìnias de ghia</string>
     <string name="show_arrows_on_the_map">Ammustra sas fritzas in sa mapa</string>
     <string name="show_passed">Ammustra sos colados</string>
     <string name="hide_passed">Istichi sos colados</string>
@@ -2807,7 +2807,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="marker_save_as_track_descr">Esporta sos marcadores tuos in unu documentu chi podes dislindare inoghe:</string>
     <string name="marker_save_as_track">Sarva comente rasta</string>
     <string name="move_to_history">Pone in sa cronologia</string>
-    <string name="group_will_be_removed_after_restart">Su grupu at a èssere iscantzelladu a pustis de s\'allughìngiu imbeniente</string>
+    <string name="group_will_be_removed_after_restart">Su grupu at a èssere iscantzelladu a pustis de s\'allughìngiu imbeniente de s\'aplicatzione.</string>
     <string name="osn_modify_dialog_error">B\'est istadu un\'errore: sa nota no est istada modificada</string>
     <string name="osn_modify_dialog_title">Modìfica sa nota</string>
     <string name="context_menu_item_modify_note">Modìfica sa nota OSM</string>
@@ -2819,10 +2819,10 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="route_is_calculated">Àndala torrada a calculare</string>
     <string name="round_trip">Àndala tzirculare</string>
     <string name="plan_route_no_markers_toast">Depes annànghere a su mancu unu marcadore pro impreare custa funtzionalidade.</string>
-    <string name="release_2_8">\\022 Marcadores de mapa noos cun lìnias de ghia e càlculu de s\'àndala
-\n
-\n • Aina pro sa medidura de sas distàntzias chi permitit de ischertare puntos particulares de sa mapa e de sarvare puntos comente una rasta
-\n
+    <string name="release_2_8">\\022 Marcadores de mapa noos cun lìnias de ghia e càlculu de s\'àndala 
+\n 
+\n • Aina pro sa medidura de sas distàntzias chi permitit de ischertare puntos particulares de sa mapa e de sarvare puntos comente una rasta 
+\n 
 \n • OsmAnd Live: curretzione de errores, agiornamentu de sos datos in su server cada 30 minutos, agiornamentos impostados in su mentres de su nàvigu
 \n
 \n</string>
@@ -2841,24 +2841,24 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="tap_on_map_to_hide_interface">Modalidade a ischermu intreu</string>
     <string name="show_on_top_bar">Ammustra in sa barra superiore</string>
     <string name="mark_passed">Sinna comente coladu</string>
-    <string name="digits_quantity">Nùmeru de tzifras</string>
+    <string name="digits_quantity">Nùmeru de tzifras detzimales</string>
     <string name="shared_string_right">Destra</string>
     <string name="shared_string_left">Manca</string>
     <string name="show_number_pad">Ammustra tecladu numèricu</string>
     <string name="shared_string_paste">Incolla</string>
-    <string name="coordinate_input_accuracy_description">Cola automaticamente a su campu imbeniente a pustis de àere iscritu %1$d tzifras a pustis de sa vìrgula.</string>
+    <string name="coordinate_input_accuracy_description">Cola automaticamente a su campu imbeniente a pustis de àere iscritu %1$d tzifras detzimales.</string>
     <string name="coordinate_input_accuracy">%1$d tzifras</string>
     <string name="go_to_next_field">Cola a su campu imbeniente</string>
     <string name="rename_marker">Torra a numenare su marcadore</string>
     <string name="appearance_on_the_map">Visualizatzione in sa mapa</string>
-    <string name="add_track_to_markers_descr">Issèbera sos puntos de coladòrgiu chi OsmAnd at a annànghere a sos marcadores</string>
-    <string name="add_favourites_group_to_markers_descr">Issèbera sos grupos de preferidos chi cheres annànghere a sos marcadores.</string>
+    <string name="add_track_to_markers_descr">Issèbera una rasta pro annànghere sos puntos de coladòrgiu suos a sos marcadores (petzi sas rastas cun puntos de coladòrgiu sunt allistadas)</string>
+    <string name="add_favourites_group_to_markers_descr">Issèbera una categoria de preferidos pro l\'annànghere a sos marcadores.</string>
     <string name="track_waypoints">Puntos de coladòrgiu</string>
-    <string name="favourites_group">Grupu de preferidos</string>
-    <string name="add_group">Annanghe grupu</string>
-    <string name="add_group_descr">Podes annànghere unu grupu de preferidos o puntos de coladòrgiu de una rasta.</string>
-    <string name="empty_state_markers_active">Marcadores in sa mapa!</string>
-    <string name="empty_state_markers_active_desc">Marca logos in sa mapa cun un\'incarcu.</string>
+    <string name="favourites_group">Categoria de preferidos</string>
+    <string name="add_group">Annanghe unu grupu</string>
+    <string name="add_group_descr">Podes importare unu grupu de preferidos o puntos de coladòrgiu de una rasta.</string>
+    <string name="empty_state_markers_active">Crea marcadores in sa mapa!</string>
+    <string name="empty_state_markers_active_desc">Marca logos in sa mapa cun un\'incarcu curtzu o longu e, a pustis, incarchende su butone cun sa bandera de sos marcadores.</string>
     <string name="empty_state_markers_groups">Importa grupos</string>
     <string name="empty_state_markers_groups_desc">Podes importare grupos de preferidos o puntos de coladòrgiu de una rasta comente marcadores.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
@@ -2869,4 +2869,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="show_arrows_descr">Ammustra una o duas fritzas chi indicant sa diretzione cara a sos marcadores ativos.</string>
     <string name="distance_indication_descr">Issèbera comente ammustrare sa distàntzia cun sos marcadores ativos.</string>
     <string name="active_markers_descr">Issèbera cantos indicadores de diretzione cheres ammustrare.</string>
+    <string name="shared_string_more_without_dots">Àteru</string>
+    <string name="looking_for_tracks_with_waypoints">Chirchende rastas cun puntos de coladòrgiu</string>
     </resources>
