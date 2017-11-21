@@ -72,7 +72,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		if (addGroupFragment != null) {
 			((AddGroupBottomSheetDialogFragment) addGroupFragment).setListener(createAddGroupListener());
 		}
-		Fragment historyMarkerMenuFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(HistoryMarkerMenuBottomSheetDialogFragment.TAG);
+		Fragment historyMarkerMenuFragment = getChildFragmentManager().findFragmentByTag(HistoryMarkerMenuBottomSheetDialogFragment.TAG);
 		if (historyMarkerMenuFragment != null) {
 			((HistoryMarkerMenuBottomSheetDialogFragment) historyMarkerMenuFragment).setListener(createHistoryMarkerMenuListener());
 		}
@@ -259,7 +259,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 						arguments.putLong(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_VISITED_DATE, marker.visitedDate);
 						fragment.setArguments(arguments);
 						fragment.setListener(createHistoryMarkerMenuListener());
-						fragment.show(mapActivity.getSupportFragmentManager(), HistoryMarkerMenuBottomSheetDialogFragment.TAG);
+						fragment.show(getChildFragmentManager(), HistoryMarkerMenuBottomSheetDialogFragment.TAG);
 					}
 				}
 			}
