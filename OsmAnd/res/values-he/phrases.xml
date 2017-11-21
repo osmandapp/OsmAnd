@@ -1145,4 +1145,41 @@
 	<string name="poi_diet_gluten_free_no">תזונה נטולת גלוטן: אין</string>
 	<string name="poi_diet_kosher_filter_yes">כשר</string>
 	<string name="poi_socket_nema_14_50_output">שקע: NEMA 14-50: פלט</string>
+	<string name="poi_diet_kosher_only">כשר בלבד</string>
+	<string name="poi_diet_kosher_yes">השגחת כשרות</string>
+	<string name="poi_diet_kosher_no">השגחת כשרות: אין</string>
+	<string name="poi_diet_halal_filter_yes">השגחת חלאל</string>
+	<string name="poi_diet_halal_only">חלאל בלבד</string>
+	<string name="poi_diet_halal_yes">חלאל</string>
+	<string name="poi_diet_halal_no">השגחת חלאל: אין</string>
+	<string name="poi_diet_lactose_free_filter_yes">נטול לקטוז</string>
+	<string name="poi_diet_lactose_free_only">נטול לקטוז בלבד</string>
+	<string name="poi_diet_lactose_free_yes">נטול לקטוז</string>
+	<string name="poi_diet_lactose_free_no">מזון נטול לקטוז: אין</string>
+	<string name="poi_diet_pescetarian_yes">פסקטריאני</string>
+
+	<string name="poi_drive_in_yes">יש</string>
+	<string name="poi_drive_in_no">כניסה עם רכב: אין</string>
+	<string name="poi_drive_through_yes">יש</string>
+	<string name="poi_drive_through_no">דלפק הגשה לרכב: אין</string>
+
+	<string name="poi_brewery_additional">שם מבשלה</string>
+	<string name="poi_microbrewery_yes">מבשלת בוטיק</string>
+	<string name="poi_microbrewery_no">אין מבשלות בוטיק</string>
+
+	<string name="poi_takeaway_filter_yes">יש</string>
+	<string name="poi_takeaway_yes">איסוף עצמי</string>
+	<string name="poi_takeaway_no">אין איסוף עצמי</string>
+	<string name="poi_takeaway_only">איסוף עצמי בלבד</string>
+
+	<string name="poi_delivery_filter_yes">יש</string>
+	<string name="poi_delivery_yes">משלוחים</string>
+	<string name="poi_delivery_no">אין משלוחים</string>
+	<string name="poi_delivery_only">משלוחים בלבד</string>
+
+	<string name="poi_outdoor_seating_filter_yes">יש</string>
+	<string name="poi_outdoor_seating_yes">ישיבה בחוץ: יש</string>
+	<string name="poi_outdoor_seating_no">אין ישיבה בחוץ</string>
+	<string name="poi_outdoor_seating_terrace">ישיבה בחוץ: מרפסת</string>
+	<string name="poi_outdoor_seating_sidewalk">ישיבה בחוץ: מדרכה</string>
 	</resources>
