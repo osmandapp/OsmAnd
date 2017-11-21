@@ -117,11 +117,12 @@ public class NotesFragment extends OsmAndListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		List<Object> items = createItemsList();
 		ListView listView = getListView();
 		listView.setDivider(null);
 		listView.setEmptyView(emptyView);
-		if (items.size() > 0 && footerView == null) {
+		if (items.size() > 0 && footerView == null && portrait) {
 			footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false);
 			listView.addFooterView(footerView);
 			listView.setHeaderDividersEnabled(false);
@@ -131,6 +132,7 @@ public class NotesFragment extends OsmAndListFragment {
 		listAdapter.setSelectionMode(selectionMode);
 		listAdapter.setSelected(selected);
 		listAdapter.setListener(createAdapterListener());
+		listAdapter.setPortrait(portrait);
 		listView.setAdapter(listAdapter);
 	}
 
@@ -294,7 +296,7 @@ public class NotesFragment extends OsmAndListFragment {
 
 	private void selectAll(int type) {
 		if (type == NotesAdapter.TYPE_DATE_HEADER) {
-			for (int i = 0; i < listAdapter.getCount(); i++) {
+			for (int i = 0; i < listAdapter.getItemsCount(); i++) {
 				Object item = listAdapter.getItem(i);
 				if (item instanceof Recording) {
 					selected.add((Recording) item);
@@ -354,7 +356,7 @@ public class NotesFragment extends OsmAndListFragment {
 			@Override
 			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
 				LOG.debug("onCreateActionMode");
-				if (type == MODE_SHARE) {
+				if (type == MODE_SHARE && AndroidUiHelper.isOrientationPortrait(getActivity())) {
 					listAdapter.insert(SHARE_LOCATION_FILE, 0);
 				}
 				switchSelectionMode(true);
