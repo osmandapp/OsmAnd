@@ -2972,10 +2972,12 @@
     <string name="shared_string_more_without_dots">Больш</string>
     <string name="looking_for_tracks_with_waypoints">Пошук слядоў з шляхавымі кропкамі</string>
     <string name="empty_state_osm_edits">Стварыць або зьмяніць OSM аб’екты</string>
-    <string name="shared_string_deleted">Выдалены</string>
-    <string name="shared_string_edited">Адрэдагаваны</string>
+    <string name="shared_string_deleted">Выдалена</string>
+    <string name="shared_string_edited">Адрэдагавана</string>
     <string name="marker_activated">Маркер %s актываваны.</string>
     <string name="notes_by_date">Нататкі па даце</string>
     <string name="by_date">Па даце</string>
     <string name="by_type">Па тыпу</string>
+    <string name="empty_state_osm_edits_descr">Стварайце або зьмяняйце OSM POI, адкрывайце або камэнтуйце OSM-нататкі, а таксама адсылайце запісаныя GPX-файлы.</string>
+    <string name="shared_string_added">Дададзена</string>
     </resources>
