@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -881,7 +882,7 @@ public class MapInfoWidgetsFactory {
 					all.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							map.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
+							map.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS, AndroidUtils.getViewLocation(view));
 						}
 					});
 					remove.setOnClickListener(new OnClickListener() {

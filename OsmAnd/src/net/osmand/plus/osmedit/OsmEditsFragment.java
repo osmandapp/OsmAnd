@@ -315,7 +315,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	private void enableSelectionMode(boolean selectionMode) {
 		listAdapter.setSelectionMode(selectionMode);
 		//noinspection ConstantConditions
-		getView().findViewById(R.id.check_box).setVisibility(selectionMode ? View.VISIBLE : View.GONE);
+		if (headerView != null) {
+			headerView.findViewById(R.id.check_box).setVisibility(selectionMode ? View.VISIBLE : View.GONE);
+		}
 		((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode && AndroidUiHelper.isOrientationPortrait(getActivity()));
 		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 	}

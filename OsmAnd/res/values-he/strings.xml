@@ -2177,4 +2177,7 @@
     <string name="arrival_distance">הכרזת הגעה</string>
     <string name="index_name_netherlands">אירופה - הולנד</string>
     <string name="keep_informing_never">ידני בלבד (נגיעה בחץ)</string>
+    <string name="empty_state_osm_edits">יצירה או שינוי של עצמים ב־OSM</string>
+    <string name="shared_string_deleted">נמחקה</string>
+    <string name="shared_string_edited">נערכה</string>
     </resources>

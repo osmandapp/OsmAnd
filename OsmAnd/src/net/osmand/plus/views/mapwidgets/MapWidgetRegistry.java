@@ -326,7 +326,7 @@ public class MapWidgetRegistry {
 					.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map))
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
-						public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int position, boolean isChecked) {
+						public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int position, boolean isChecked, int[] viewCoordinates) {
 							DirectionIndicationDialogFragment fragment = new DirectionIndicationDialogFragment();
 							fragment.setListener(new DirectionIndicationDialogFragment.DirectionIndicationFragmentListener() {
 								@Override
@@ -418,7 +418,7 @@ public class MapWidgetRegistry {
 				.setSecondaryIcon( R.drawable.ic_action_additional_option)
 				.setListener(new ContextMenuAdapter.OnRowItemClick() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
 						setVisibility(adapter, position, isChecked);
 						return false;
 					}
@@ -557,7 +557,7 @@ public class MapWidgetRegistry {
 
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a,
-														  int itemId, int pos, boolean isChecked) {
+														  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 							setVisibility(a, pos, isChecked, false);
 							return false;
 						}
@@ -780,7 +780,7 @@ public class MapWidgetRegistry {
 
 		@Override
 		public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a,
-										  int itemId, int pos, boolean isChecked) {
+										  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 			pref.set(!pref.get());
 			map.updateApplicationModeSettings();
 			a.notifyDataSetChanged();

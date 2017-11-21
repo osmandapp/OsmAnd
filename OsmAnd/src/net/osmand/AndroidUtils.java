@@ -284,6 +284,12 @@ public class AndroidUtils {
 		decorView.setSystemUiVisibility(uiOptions);
 	}
 
+	public static int[] getViewLocation(View view) {
+		int[] coordinates = new int[2];
+		view.getLocationOnScreen(coordinates);
+		return coordinates;
+	}
+
 	public static void enterToFullScreen(Activity activity) {
 		if (Build.VERSION.SDK_INT >= 21) {
 			activity.getWindow().getDecorView()

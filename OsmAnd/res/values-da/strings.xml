@@ -2971,4 +2971,17 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="appearance_on_the_map">Udseende på kortet</string>
     <string name="looking_for_tracks_with_waypoints">Find spor med rutepunkter</string>
     <string name="shared_string_more_without_dots">Mere</string>
+    <string name="empty_state_osm_edits">Opret eller rediger OSM objekter</string>
+    <string name="empty_state_osm_edits_descr">Opret eller ændre OSM interessepunkter, åbne eller kommentere OSM noter, og bidrag med GPX-filer.</string>
+    <string name="shared_string_deleted">Slettet</string>
+    <string name="shared_string_edited">Redigeret</string>
+    <string name="shared_string_added">Tilføjet</string>
+    <string name="marker_activated">Markør %s er aktiveret.</string>
+    <string name="one_tap_active_descr">Tryk på markør på kortet, flyt den til det første sted i aktive markører, uden at åbne kontekstmenuen.</string>
+    <string name="one_tap_active">Et tryk aktiv</string>
+    <string name="empty_state_av_notes">Tag noter!</string>
+    <string name="empty_state_av_notes_desc">Tilføj lyd-, video- eller fotobesked til hvert punkt på kortet ved hjælp af modul- eller kontekstmenu.</string>
+    <string name="notes_by_date">Noter efter dato</string>
+    <string name="by_date">Efter dato</string>
+    <string name="by_type">Efter type</string>
     </resources>

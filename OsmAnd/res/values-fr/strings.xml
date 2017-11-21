@@ -3022,4 +3022,17 @@ représentant la zone : %1$s x %2$s</string>
     <string name="active_markers_descr">Indiquez le nombre d\'indicateurs de direction à afficher.</string>
     <string name="shared_string_more_without_dots">Plus</string>
     <string name="looking_for_tracks_with_waypoints">Rechercher des traces avec points de passage</string>
+    <string name="empty_state_osm_edits">Créer et modifier des éléments OSM</string>
+    <string name="empty_state_osm_edits_descr">Créer ou modifier les PI OSM, ouvrir ou commenter des Notes OSM et contribuer aux traces GPX enregistrées.</string>
+    <string name="shared_string_deleted">Supprimé</string>
+    <string name="shared_string_edited">Modifié</string>
+    <string name="shared_string_added">Ajouté</string>
+    <string name="marker_activated">Marque %s activée.</string>
+    <string name="one_tap_active_descr">Appuyez sur une marque présente sur la carte, déplacez-la en première position des marques actives sans ouvrir le menu contextuel.</string>
+    <string name="one_tap_active">Un appui activé</string>
+    <string name="empty_state_av_notes">Prenez des notes !</string>
+    <string name="empty_state_av_notes_desc">Ajoutez des notes sonores, vidéos ou photo à tout point de la carte en utilisant le gadget ou le menu contextuel.</string>
+    <string name="notes_by_date">Notes par date</string>
+    <string name="by_date">Par date</string>
+    <string name="by_type">Par type</string>
     </resources>

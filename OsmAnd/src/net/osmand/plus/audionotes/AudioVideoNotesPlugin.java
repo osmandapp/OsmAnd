@@ -444,7 +444,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				return ctx.getString(R.string.recording_photo_description, "", time).trim();
 			}
 			updateInternalDescription();
-			return ctx.getString(R.string.recording_description, "", getDuration(ctx), time)
+			return ctx.getString(R.string.recording_description, "", getDuration(ctx, true), time)
 					.trim();
 		}
 
@@ -454,11 +454,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				return time;
 			}
 			updateInternalDescription();
-			return time + " " + getDuration(ctx);
+			return time + " " + getDuration(ctx, true);
 
 		}
 
-		public String getNewSmallDescription(Context ctx) {
+		public String getExtendedDescription(Context ctx) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(ctx);
 			String date = dateFormat.format(file.lastModified());
 			int size = (int) ((file.length() + 512) >> 10);
@@ -478,7 +478,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				return date + " • " + sz;
 			}
 			updateInternalDescription();
-			return date + " • " + sz + " • " + getDuration(ctx);
+			return date + " • " + sz + " • " + getDuration(ctx, false);
 		}
 
 		public String getPlainDuration(boolean accessibilityEnabled) {
@@ -491,16 +491,18 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 		}
 
-		private String getDuration(Context ctx) {
-			String additional = "";
+		private String getDuration(Context ctx, boolean addRoundBrackets) {
+			StringBuilder additional = new StringBuilder("");
 			if (duration > 0) {
 				int d = (int) (duration / 1000);
-				additional += "(" + Algorithms.formatDuration(d, ((OsmandApplication)ctx.getApplicationContext()).accessibilityEnabled()) + ")";
+				additional.append(addRoundBrackets ? "(" : "");
+				additional.append(Algorithms.formatDuration(d, ((OsmandApplication) ctx.getApplicationContext()).accessibilityEnabled()));
+				additional.append(addRoundBrackets ? ")" : "");
 			}
 			if (!available) {
-				additional += "[" + ctx.getString(R.string.recording_unavailable) + "]";
+				additional.append("[").append(ctx.getString(R.string.recording_unavailable)).append("]");
 			}
-			return additional;
+			return additional.toString();
 		}
 
 	}
@@ -623,7 +625,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 				if (itemId == R.string.layer_recordings) {
 					SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());
 					adapter.getItem(pos).setColorRes(SHOW_RECORDINGS.get() ?
@@ -653,7 +655,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						recordAudio(latitude, longitude, mapActivity);
 						return true;
 					}
@@ -664,7 +666,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setListener(new ItemClickListener() {
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						recordVideo(latitude, longitude, mapActivity, false);
 						return true;
 					}
@@ -674,7 +676,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setIcon(R.drawable.ic_action_photo_dark)
 				.setListener(new ItemClickListener() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						takePhoto(latitude, longitude, mapActivity, false, false);
 						return true;
 					}

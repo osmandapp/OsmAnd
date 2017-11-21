@@ -7,9 +7,12 @@
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
-    <include layout="@layout/list_item_divider"/>
+    <include
+        android:id="@+id/top_divider"
+        layout="@layout/list_item_divider"/>
 
     <FrameLayout
+        android:id="@+id/background_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/bg_color">
