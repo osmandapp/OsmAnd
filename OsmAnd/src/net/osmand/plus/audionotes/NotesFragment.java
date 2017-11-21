@@ -356,7 +356,7 @@ public class NotesFragment extends OsmAndListFragment {
 			@Override
 			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
 				LOG.debug("onCreateActionMode");
-				if (type == MODE_SHARE) {
+				if (type == MODE_SHARE && AndroidUiHelper.isOrientationPortrait(getActivity())) {
 					listAdapter.insert(SHARE_LOCATION_FILE, 0);
 				}
 				switchSelectionMode(true);
