@@ -444,7 +444,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				return ctx.getString(R.string.recording_photo_description, "", time).trim();
 			}
 			updateInternalDescription();
-			return ctx.getString(R.string.recording_description, "", getDuration(ctx), time)
+			return ctx.getString(R.string.recording_description, "", getDuration(ctx, true), time)
 					.trim();
 		}
 
@@ -454,7 +454,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				return time;
 			}
 			updateInternalDescription();
-			return time + " " + getDuration(ctx);
+			return time + " " + getDuration(ctx, true);
 
 		}
 
@@ -478,7 +478,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				return date + " • " + sz;
 			}
 			updateInternalDescription();
-			return date + " • " + sz + " • " + getDuration(ctx);
+			return date + " • " + sz + " • " + getDuration(ctx, false);
 		}
 
 		public String getPlainDuration(boolean accessibilityEnabled) {
@@ -491,16 +491,18 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 		}
 
-		private String getDuration(Context ctx) {
-			String additional = "";
+		private String getDuration(Context ctx, boolean addRoundBrackets) {
+			StringBuilder additional = new StringBuilder("");
 			if (duration > 0) {
 				int d = (int) (duration / 1000);
-				additional += "(" + Algorithms.formatDuration(d, ((OsmandApplication)ctx.getApplicationContext()).accessibilityEnabled()) + ")";
+				additional.append(addRoundBrackets ? "(" : "");
+				additional.append(Algorithms.formatDuration(d, ((OsmandApplication) ctx.getApplicationContext()).accessibilityEnabled()));
+				additional.append(addRoundBrackets ? ")" : "");
 			}
 			if (!available) {
-				additional += "[" + ctx.getString(R.string.recording_unavailable) + "]";
+				additional.append("[").append(ctx.getString(R.string.recording_unavailable)).append("]");
 			}
-			return additional;
+			return additional.toString();
 		}
 
 	}
