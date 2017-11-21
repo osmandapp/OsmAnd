@@ -173,7 +173,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 											  final Object selectedObj) {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked, int[] viewCoordinates) {
 				if (resId == R.string.context_menu_item_create_poi) {
 					//getPoiActions(mapActivity).showCreateDialog(latitude, longitude);
 					EditPoiDialogFragment editPoiDialogFragment =
@@ -273,7 +273,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						if (itemId == R.string.layer_osm_bugs) {
 							OsmandSettings.OsmandPreference<Boolean> showOsmBugs = settings.SHOW_OSM_BUGS;
 							showOsmBugs.set(isChecked);
@@ -303,7 +303,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 						@Override
-						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 							sendGPXFiles(la, (AvailableGPXFragment) fragment, (GpxInfo) info);
 							return true;
 						}
@@ -321,7 +321,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setListener(new ItemClickListener() {
 
 						@Override
-						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 							f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_export,
 									R.drawable.ic_action_export, new OnClickListener() {
 										@Override

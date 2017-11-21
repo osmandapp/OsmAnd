@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -129,11 +130,12 @@ public class SRTMPlugin extends OsmandPlugin {
 
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+				int[] viewCoordinates = AndroidUtils.getViewLocation(view);
 				if (itemId == R.string.srtm_plugin_name) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONTOUR_LINES);
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONTOUR_LINES, viewCoordinates);
 					return false;
 				} else if (itemId == R.string.layer_hillshade) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.HILLSHADE);
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.HILLSHADE, viewCoordinates);
 					return false;
 				}
 				return true;
@@ -143,7 +145,8 @@ public class SRTMPlugin extends OsmandPlugin {
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
 											  final int itemId,
 											  final int position,
-											  final boolean isChecked) {
+											  final boolean isChecked,
+											  final int[] viewCoordinates) {
 				if (itemId == R.string.srtm_plugin_name) {
 					toggleContourLines(mapActivity, isChecked, new Runnable() {
 						@Override

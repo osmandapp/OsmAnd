@@ -74,7 +74,7 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		ContextMenuAdapter.ItemClickListener listener =
 				mAdapter.getItem(position).getItemClickListener();
 		if (listener != null) {
-			listener.onContextMenuClick(mAdapter, position, position, false);
+			listener.onContextMenuClick(mAdapter, position, position, false, null);
 		}
 	}
 
@@ -200,7 +200,8 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
 													  int itemId,
 													  int position,
-													  boolean isChecked) {
+													  boolean isChecked,
+													  int[] viewCoordinates) {
 						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 						startActivity(intent);
 						return false;
@@ -227,7 +228,7 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		}
 
 		@Override
-		public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+		public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
 			String title = mTitle == null ? adapter.getItem(position).getTitle() : mTitle;
 			HelpArticleDialogFragment.instantiateWithAsset(filename, title)
 					.show(ctx.getSupportFragmentManager(), "DIALOG_HELP_ARTICLE");

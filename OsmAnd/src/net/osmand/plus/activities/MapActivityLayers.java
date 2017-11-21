@@ -293,7 +293,7 @@ public class MapActivityLayers {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				ContextMenuItem item = listAdapter.getItem(position);
 				item.setSelected(!item.getSelected());
-				item.getItemClickListener().onContextMenuClick(listAdapter, position, position, item.getSelected());
+				item.getItemClickListener().onContextMenuClick(listAdapter, position, position, item.getSelected(), null);
 				listAdapter.notifyDataSetChanged();
 			}
 		});
@@ -416,7 +416,7 @@ public class MapActivityLayers {
 			builder.setListener(new ContextMenuAdapter.ItemClickListener() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
-												  int itemId, int position, boolean isChecked) {
+												  int itemId, int position, boolean isChecked, int[] viewCoordinates) {
 					ContextMenuItem item = adapter.getItem(position);
 					item.setSelected(isChecked);
 					return false;
