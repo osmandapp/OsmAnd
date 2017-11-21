@@ -2980,4 +2980,8 @@
     <string name="by_type">Па тыпу</string>
     <string name="empty_state_osm_edits_descr">Стварайце або зьмяняйце OSM POI, адкрывайце або камэнтуйце OSM-нататкі, а таксама адсылайце запісаныя GPX-файлы.</string>
     <string name="shared_string_added">Дададзена</string>
+    <string name="one_tap_active_descr">Націск на маркер на мапе перамесціць гэты маркер на першае месца ў спісе актыўных маркераў, не адкрываючы кантэкстнае меню.</string>
+    <string name="one_tap_active">Актывацыя адным націскам</string>
+    <string name="empty_state_av_notes">Рабі нататкі!</string>
+    <string name="empty_state_av_notes_desc">Дадай аўдыё-, відэа- ці фотанататку на любую кропку на мапе, выкарастоўваючы віджэт ці кантэкстае меню.</string>
     </resources>
