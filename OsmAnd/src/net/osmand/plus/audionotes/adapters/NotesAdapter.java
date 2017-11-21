@@ -195,7 +195,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			holder.description.setText(R.string.av_locations_descr);
 		} else {
 			holder.title.setText(recording.getName(app, true));
-			holder.description.setText(recording.getNewSmallDescription(app));
+			holder.description.setText(recording.getExtendedDescription(app));
 			int iconRes = recording.isAudio() ? R.drawable.ic_type_audio
 					: (recording.isVideo() ? R.drawable.ic_type_video : R.drawable.ic_type_img);
 			int colorRes = app.getSettings().isLightContent() ? R.color.icon_color : R.color.ctx_menu_info_text_dark;
