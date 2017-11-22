@@ -2962,6 +2962,9 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_added">已增加</string>
     <string name="marker_activated">標記 %s 已啟動。</string>
     <string name="one_tap_active">點一下啟動</string>
-    <string name="empty_state_av_notes">記筆記！</string>
+    <string name="empty_state_av_notes">記註解！</string>
     <string name="empty_state_av_notes_desc">使用小工具或內容選單，增加音訊、視訊或照片附註在地圖上的每個標點。</string>
+    <string name="notes_by_date">註解按照日期</string>
+    <string name="by_date">按照日期</string>
+    <string name="by_type">按照類型</string>
     </resources>
