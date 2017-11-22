@@ -718,6 +718,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				? R.string.shared_string_add_to_map_markers : R.string.context_menu_item_destination_point;
 	}
 
+	public boolean isButtonWaypointEnabled() {
+		if (menuController != null) {
+			return menuController.isWaypointButtonEnabled();
+		}
+		return true;
+	}
+
 	protected void acquireIcons() {
 		super.acquireIcons();
 		if (menuController != null) {

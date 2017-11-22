@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.v4.app.Fragment;
 
 import net.osmand.data.Amenity;
@@ -8,6 +9,9 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -24,6 +28,13 @@ public class FavouritePointMenuController extends MenuController {
 	public FavouritePointMenuController(MapActivity mapActivity, PointDescription pointDescription, final FavouritePoint fav) {
 		super(new FavouritePointMenuBuilder(mapActivity, fav), pointDescription, mapActivity);
 		this.fav = fav;
+
+		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		final MapMarker mapMarker = markersHelper.getMapMarker(fav);
+
+		if (mapMarker != null) {
+			MapMarkerMenuController.createMarkerButtons(this, mapActivity, mapMarker);
+		}
 	}
 
 	@Override
@@ -66,6 +77,11 @@ public class FavouritePointMenuController extends MenuController {
 	@Override
 	public Drawable getLeftIcon() {
 		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(), fav.getColor(), false);
+	}
+
+	@Override
+	public boolean isWaypointButtonEnabled() {
+		return getMapActivity().getMyApplication().getMapMarkersHelper().getMapMarker(fav) == null;
 	}
 
 	@Override

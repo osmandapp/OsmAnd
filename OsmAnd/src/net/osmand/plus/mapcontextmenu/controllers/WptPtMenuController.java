@@ -1,10 +1,14 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.v4.content.ContextCompat;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -19,6 +23,13 @@ public class WptPtMenuController extends MenuController {
 	public WptPtMenuController(MapActivity mapActivity, PointDescription pointDescription, WptPt wpt) {
 		super(new WptPtMenuBuilder(mapActivity, wpt), pointDescription, mapActivity);
 		this.wpt = wpt;
+
+		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		final MapMarker mapMarker = markersHelper.getMapMarker(wpt);
+
+		if (mapMarker != null) {
+			MapMarkerMenuController.createMarkerButtons(this, mapActivity, mapMarker);
+		}
 	}
 
 	@Override
@@ -68,6 +79,11 @@ public class WptPtMenuController extends MenuController {
 		} else {
 			return getIcon(R.drawable.map_small_group);
 		}
+	}
+
+	@Override
+	public boolean isWaypointButtonEnabled() {
+		return getMapActivity().getMyApplication().getMapMarkersHelper().getMapMarker(wpt) == null;
 	}
 
 	@Override
