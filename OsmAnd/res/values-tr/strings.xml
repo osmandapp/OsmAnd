@@ -2273,4 +2273,5 @@
     <string name="today">Bugün</string>
     <string name="yesterday">Dün</string>
     <string name="shared_string_install">Kurulum</string>
+    <string name="empty_state_osm_edits">OSM nesnesi oluştur veya değiştir</string>
     </resources>
