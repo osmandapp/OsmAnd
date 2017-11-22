@@ -844,7 +844,7 @@
     <string name="poi_edit_title">POI změnić</string>
     <string name="poi_create_title">POI dodać</string>
     <string name="poi_remove_title">POI wušmórnyć</string>
-    <string name="poi_action_add">dodać</string>
+    <string name="poi_action_add">přidać</string>
     <string name="poi_action_change">změnić</string>
     <string name="poi_action_delete">wušmórnyć</string>
     <string name="poi_dialog_opening_hours">Wotewrjenske časy</string>
@@ -926,7 +926,7 @@
     <string name="enter_gpx_name">mjeno GPX-dataje:</string>
     <string name="show_on_map_after_saving">Po składowanju na karće pokazać</string>
     <string name="measurement_tool_action_bar">Kartu wobhladać a dypki dodać</string>
-    <string name="measurement_tool">zdalenosć měrić</string>
+    <string name="measurement_tool">Zdalenosć měrić</string>
     <string name="quick_action_resume_pause_navigation">Nawigaciju znowa startować/přetorhnyć</string>
     <string name="shared_string_to">Do</string>
     <string name="mapillary_menu_descr_dates">Jenož přidate wobrazy pokazać</string>
@@ -1327,4 +1327,6 @@
     <string name="mapillary_action_descr">Přinošuj swoje wobrazy wot tutoho městna přez Mapillary.</string>
     <string name="animate_my_location">Animěruj moje stejišćo</string>
     <string name="shared_string_change">Změnić</string>
+    <string name="shared_string_close">Začinić</string>
+    <string name="shared_string_add">Přidać</string>
     </resources>
