@@ -436,7 +436,7 @@ public abstract class MenuController extends BaseMenuController {
 		return true;
 	}
 
-	protected Drawable getShowOnTopBarIcon() {
+	public Drawable getShowOnTopBarIcon() {
 		if (showOnTopBarIcon == null) {
 			IconsCache ic = getMapActivity().getMyApplication().getIconsCache();
 			Drawable background = ic.getIcon(R.drawable.ic_action_device_top,

@@ -22,7 +22,7 @@ public class MapMarkerMenuController extends MenuController {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.mapMarker = mapMarker;
 		builder.setShowNearestWiki(true);
-		createMarkerButtons(this, mapActivity, mapMarker, getShowOnTopBarIcon());
+		createMarkerButtons(this, mapActivity, mapMarker);
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class MapMarkerMenuController extends MenuController {
 		return R.string.rename_marker;
 	}
 
-	public static void createMarkerButtons(MenuController menuController, final MapActivity mapActivity, final MapMarker mapMarker, Drawable leftIcon) {
+	public static void createMarkerButtons(MenuController menuController, final MapActivity mapActivity, final MapMarker mapMarker) {
 		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
 
 		TitleButtonController leftTitleButtonController = menuController.new TitleButtonController() {
@@ -99,7 +99,7 @@ public class MapMarkerMenuController extends MenuController {
 			}
 		};
 		leftSubtitleButtonController.caption = mapActivity.getString(R.string.show_on_top_bar);
-		leftSubtitleButtonController.leftIcon = leftIcon;
+		leftSubtitleButtonController.leftIcon = menuController.getShowOnTopBarIcon();
 		menuController.setLeftSubtitleButtonController(leftSubtitleButtonController);
 	}
 }

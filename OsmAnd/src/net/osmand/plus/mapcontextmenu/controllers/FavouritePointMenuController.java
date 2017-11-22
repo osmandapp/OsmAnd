@@ -33,7 +33,7 @@ public class FavouritePointMenuController extends MenuController {
 		final MapMarker mapMarker = markersHelper.getMapMarker(fav);
 
 		if (mapMarker != null) {
-			MapMarkerMenuController.createMarkerButtons(this, mapActivity, mapMarker, getShowOnTopBarIcon());
+			MapMarkerMenuController.createMarkerButtons(this, mapActivity, mapMarker);
 		}
 	}
 

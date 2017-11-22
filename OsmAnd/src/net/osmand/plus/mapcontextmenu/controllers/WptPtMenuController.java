@@ -28,7 +28,7 @@ public class WptPtMenuController extends MenuController {
 		final MapMarker mapMarker = markersHelper.getMapMarker(wpt);
 
 		if (mapMarker != null) {
-			MapMarkerMenuController.createMarkerButtons(this, mapActivity, mapMarker, getShowOnTopBarIcon());
+			MapMarkerMenuController.createMarkerButtons(this, mapActivity, mapMarker);
 		}
 	}
 
