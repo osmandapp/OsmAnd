@@ -2900,7 +2900,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="add_group">Gruppe hinzufügen</string>
     <string name="empty_state_markers_active">Kartenmarkierungen erstellen!</string>
     <string name="empty_state_markers_groups">Gruppen importieren</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Markierungen, die als passiert gekennzeichnet sind, werden auf diesem Bildschirm angezeigt.</string>
     <string name="digits_quantity">Anzahl der Dezimalstellen</string>
     <string name="show_number_pad">Nummernblock anzeigen</string>

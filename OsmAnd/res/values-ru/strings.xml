@@ -2634,7 +2634,6 @@
     <string name="import_track_desc">Файл %1$s не содержит путевых точек, импортировать его как трек?</string>
     <string name="add_track_to_markers_descr">Выберите трек для добавления путевых точек. (Показаны только треки с путевыми точками.)</string>
     <string name="track_waypoints">Трек путевых точек</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_right">Направо</string>
     <string name="shared_string_left">Налево</string>
     <string name="show_number_pad">Показать цифровую панель</string>

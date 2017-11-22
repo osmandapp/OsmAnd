@@ -76,4 +76,3 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		buildPlainMenuItems(view);
 	}
 }
-

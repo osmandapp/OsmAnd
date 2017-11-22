@@ -23,8 +23,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.Location;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.MapMarkersHelper;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -69,6 +71,10 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		Fragment addGroupFragment = getChildFragmentManager().findFragmentByTag(AddGroupBottomSheetDialogFragment.TAG);
 		if (addGroupFragment != null) {
 			((AddGroupBottomSheetDialogFragment) addGroupFragment).setListener(createAddGroupListener());
+		}
+		Fragment historyMarkerMenuFragment = getChildFragmentManager().findFragmentByTag(HistoryMarkerMenuBottomSheetDialogFragment.TAG);
+		if (historyMarkerMenuFragment != null) {
+			((HistoryMarkerMenuBottomSheetDialogFragment) historyMarkerMenuFragment).setListener(createHistoryMarkerMenuListener());
 		}
 
 		final EmptyStateRecyclerView recyclerView = (EmptyStateRecyclerView) mainView.findViewById(R.id.list);
@@ -224,10 +230,37 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
 					MapMarker marker = (MapMarker) item;
-					mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
-							15, marker.getPointDescription(mapActivity), true, marker);
-					MapActivity.launchMapActivityMoveToTop(mapActivity);
-					((DialogFragment) getParentFragment()).dismiss();
+					if (!marker.history) {
+						WptPt wptPt = marker.wptPt;
+						FavouritePoint favouritePoint = marker.favouritePoint;
+						Object objectToShow;
+						PointDescription pointDescription;
+						if (wptPt != null) {
+							pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, wptPt.name);
+							objectToShow = wptPt;
+						} else if (favouritePoint != null) {
+							pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, favouritePoint.getName());
+							objectToShow = favouritePoint;
+						} else {
+							pointDescription = marker.getPointDescription(mapActivity);
+							objectToShow = marker;
+						}
+						mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
+								15, pointDescription, true, objectToShow);
+						MapActivity.launchMapActivityMoveToTop(mapActivity);
+						((DialogFragment) getParentFragment()).dismiss();
+					} else {
+						HistoryMarkerMenuBottomSheetDialogFragment fragment = new HistoryMarkerMenuBottomSheetDialogFragment();
+						fragment.setUsedOnMap(false);
+						Bundle arguments = new Bundle();
+						arguments.putInt(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_POSITION, pos);
+						arguments.putString(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_NAME, marker.getName(mapActivity));
+						arguments.putInt(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_COLOR_INDEX, marker.colorIndex);
+						arguments.putLong(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_VISITED_DATE, marker.visitedDate);
+						fragment.setArguments(arguments);
+						fragment.setListener(createHistoryMarkerMenuListener());
+						fragment.show(getChildFragmentManager(), HistoryMarkerMenuBottomSheetDialogFragment.TAG);
+					}
 				}
 			}
 		});
@@ -275,6 +308,32 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		}
 
 		return mainView;
+	}
+
+	private HistoryMarkerMenuBottomSheetDialogFragment.HistoryMarkerMenuFragmentListener createHistoryMarkerMenuListener() {
+		return new HistoryMarkerMenuBottomSheetDialogFragment.HistoryMarkerMenuFragmentListener() {
+			@Override
+			public void onMakeMarkerActive(int pos) {
+				Object item = adapter.getItem(pos);
+				if (item instanceof MapMarker) {
+					if (getMyApplication() != null) {
+						getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory((MapMarker) item, 0);
+					}
+					updateAdapter();
+				}
+			}
+
+			@Override
+			public void onDeleteMarker(int pos) {
+				Object item = adapter.getItem(pos);
+				if (item instanceof MapMarker) {
+					if (getMyApplication() != null) {
+						getMyApplication().getMapMarkersHelper().removeMarker((MapMarker) item);
+					}
+					updateAdapter();
+				}
+			}
+		};
 	}
 
 	void setGroupIdToOpen(String groupIdToOpen) {

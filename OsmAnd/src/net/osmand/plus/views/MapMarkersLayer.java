@@ -34,6 +34,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
@@ -326,7 +327,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		for (MapMarker marker : markersHelper.getMapMarkers()) {
 			if (isLocationVisible(tileBox, marker) && !overlappedByWaypoint(marker)
-					&& !isInMotion(marker)) {
+					&& !isInMotion(marker) && !isSynced(marker)) {
 				Bitmap bmp = getMapMarkerBitmap(marker.colorIndex);
 				int marginX = bmp.getWidth() / 6;
 				int marginY = bmp.getHeight();
@@ -365,15 +366,20 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		if (contextMenuLayer.getMoveableObject() instanceof MapMarker) {
 			MapMarker objectInMotion = (MapMarker) contextMenuLayer.getMoveableObject();
-			Bitmap bitmap = getMapMarkerBitmap(objectInMotion.colorIndex);
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
+			Bitmap bitmap = getMapMarkerBitmap(objectInMotion.colorIndex);
 			int marginX = bitmap.getWidth() / 6;
 			int marginY = bitmap.getHeight();
 			float locationX = pf.x;
 			float locationY = pf.y;
 			canvas.rotate(-tileBox.getRotate(), locationX, locationY);
 			canvas.drawBitmap(bitmap, locationX - marginX, locationY - marginY, bitmapPaint);
+
 		}
+	}
+
+	private boolean isSynced(@NonNull MapMarker marker) {
+		return marker.wptPt != null || marker.favouritePoint != null;
 	}
 
 	private boolean isInMotion(@NonNull MapMarker marker) {
@@ -515,14 +521,16 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		int r = getRadiusPoi(tileBox);
 		for (int i = 0; i < markers.size(); i++) {
 			MapMarker marker = markers.get(i);
-			LatLon latLon = marker.point;
-			if (latLon != null) {
-				int ex = (int) point.x;
-				int ey = (int) point.y;
-				int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-				int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-				if (calculateBelongs(ex, ey, x, y, r)) {
-					o.add(marker);
+			if (!isSynced(marker)) {
+				LatLon latLon = marker.point;
+				if (latLon != null) {
+					int ex = (int) point.x;
+					int ey = (int) point.y;
+					int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+					int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+					if (calculateBelongs(ex, ey, x, y, r)) {
+						o.add(marker);
+					}
 				}
 			}
 		}
