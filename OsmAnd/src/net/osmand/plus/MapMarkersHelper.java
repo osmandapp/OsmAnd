@@ -935,7 +935,7 @@ public class MapMarkersHelper {
 	}
 
 	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group, boolean enabled) {
-		addMarkers(points, historyNames, group, enabled, new ArrayList<FavouritePoint>(), new ArrayList<WptPt>());
+		addMarkers(points, historyNames, group, enabled, null, null);
 	}
 
 	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group,
@@ -946,8 +946,8 @@ public class MapMarkersHelper {
 			for (int i = 0; i < points.size(); i++) {
 				LatLon point = points.get(i);
 				PointDescription historyName = historyNames.get(i);
-				FavouritePoint favouritePoint = favouritePoints.get(i);
-				WptPt wptPt = wptPts.get(i);
+				FavouritePoint favouritePoint = favouritePoints == null ? null : favouritePoints.get(i);
+				WptPt wptPt = wptPts == null ? null : wptPts.get(i);
 				final PointDescription pointDescription;
 				if (historyName == null) {
 					pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
