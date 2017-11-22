@@ -1805,7 +1805,7 @@
     <string name="osmo_session_not_available">Mevcut değil Session, konumlarını Gönder \'olmadığını kontrol edin açıktır.</string>
     <string name="osmo_share_session">Hisse oturumu</string>
     <string name="osmo_session_id_share">(%1$s) aygıtını takip için oturum adresi</string>
-    <string name="osmo_tracker_id_share">Hedef cihaz%2$s bağlayın amacıyla, bağlantı%3$s tıklayabilir veya izci id (%1$s) belirtmek</string>
+    <string name="osmo_tracker_id_share">%2$s hedef aygıtına bağlanmak için, %3$s bağlantısına dokunun veya iz sürücü kimliği belirtin (%1$s)</string>
     <string name="osmo_track_interval">Günlük aralığı</string>
     <string name="osmo_track_interval_descr">Konumu göndermek için zaman aralığını seçin</string>
     <string name="int_days">Günler</string>
