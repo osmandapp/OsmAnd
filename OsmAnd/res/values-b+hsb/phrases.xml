@@ -56,7 +56,7 @@
 	<string name="poi_greengrocer">Zeleninarstwo</string>
 	<string name="poi_seafood">Mórske płody</string>
 	<string name="poi_farm">Burski wobchod</string>
-	<string name="poi_butcher">Rěznistwo</string>
+	<string name="poi_butcher">rěznistwo</string>
 	<string name="poi_pastry">Konditornja</string>
 	<string name="poi_dairy">Mlokarniske produkty</string>
 	<string name="poi_anime">Anime</string>
@@ -170,7 +170,7 @@
 
 	<string name="poi_residential">bydlenska kónčina</string>
 	<string name="poi_industrial">industrijowy areal</string>
-	<string name="poi_landuse_railway">železniski areal</string>
+	<string name="poi_landuse_railway">železniska přestrjeń</string>
 	<string name="poi_commercial">komercielny areal</string>
 	<string name="poi_quarry">skała</string>
 	<string name="poi_vineyard">winica</string>
@@ -1982,13 +1982,13 @@
 	<string name="poi_motorcycle_sales_used">předań: trjebane</string>
 	<string name="poi_motorcycle_parts_yes">narunanki</string>
 	<string name="poi_motorcycle_parts_no">narunanki: ně</string>
-	<string name="poi_location_outdoor">stejišćo: wonka</string>
-	<string name="poi_location_indoor">stejišćo: nutřka</string>
-	<string name="poi_location_platform">stejišćo: platforma</string>
-	<string name="poi_location_kiosk">stejišćo: kiosk</string>
-	<string name="poi_location_bridge">stejišćo: móst</string>
-	<string name="poi_location_wall">stejišćo: sćěna</string>
-	<string name="poi_location_entrance">stejišćo: zachod</string>
+	<string name="poi_location_outdoor">městno: wonka</string>
+	<string name="poi_location_indoor">městno: nutřka</string>
+	<string name="poi_location_platform">městno: platforma</string>
+	<string name="poi_location_kiosk">městno: kiosk</string>
+	<string name="poi_location_bridge">městno: móst</string>
+	<string name="poi_location_wall">městno: sćěna</string>
+	<string name="poi_location_entrance">městno: zachod</string>
 
 	<string name="poi_visibility_house">widźomnosć: dom</string>
 	<string name="poi_visibility_street">widźomnosć: dróha</string>
@@ -2006,4 +2006,10 @@
 
 	<string name="poi_charging_station_filter">nabiwanska stacija</string>
 
-</resources>
+<string name="poi_location_underground">městno: podzemske</string>
+	<string name="poi_location_underwater">městno: pod wodu</string>
+	<string name="poi_location_overground">městno: nad zemju</string>
+	<string name="poi_location_overhead">městno: horjeka</string>
+	<string name="poi_location_roof">městno: třěcha</string>
+	<string name="poi_location_rooftop">městno: na třěše</string>
+	</resources>
