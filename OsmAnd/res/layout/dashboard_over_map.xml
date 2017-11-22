@@ -86,9 +86,8 @@
                 android:fadeScrollbars="true"/>
         </FrameLayout>
 
-        <include layout="@layout/dashboard_toolbar"/>
-
     </FrameLayout>
 
+    <include layout="@layout/dashboard_toolbar"/>
 
 </FrameLayout>
