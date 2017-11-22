@@ -2846,7 +2846,6 @@ Proporciona un código completo</string>
     <string name="distance_indication_descr">Elige cómo mostrar la distancia a los marcadores activos.</string>
     <string name="active_markers_descr">Elige cuántos indicadores de dirección mostrar.</string>
     <string name="appearance_on_the_map">Aspecto en el mapa</string>
-    <string name="empty_state_markers_history"></string>
     <string name="looking_for_tracks_with_waypoints">Búsqueda de trazas con puntos de referencia</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
