@@ -2980,7 +2980,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="one_tap_active_descr">Tryk på markør på kortet, flyt den til det første sted i aktive markører, uden at åbne kontekstmenuen.</string>
     <string name="one_tap_active">Et tryk aktiv</string>
     <string name="empty_state_av_notes">Tag noter!</string>
-    <string name="empty_state_av_notes_desc">Tilføj lyd-, video- eller fotobesked til hvert punkt på kortet ved hjælp af modul- eller kontekstmenu.</string>
+    <string name="empty_state_av_notes_desc">Tilføj en lyd-, video- eller fotonote til hvert punkt på kortet ved hjælp af modul- eller kontekstmenu.</string>
     <string name="notes_by_date">Noter efter dato</string>
     <string name="by_date">Efter dato</string>
     <string name="by_type">Efter type</string>
