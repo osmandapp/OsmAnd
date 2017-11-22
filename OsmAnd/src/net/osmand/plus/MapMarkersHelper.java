@@ -457,19 +457,19 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void syncGroupAsync(MarkersSyncGroup group) {
+	public void syncGroupAsync(@NonNull MarkersSyncGroup group) {
 		syncGroupAsync(group, true, null);
 	}
 
-	public void syncGroupAsync(MarkersSyncGroup group, boolean enabled) {
+	public void syncGroupAsync(@NonNull MarkersSyncGroup group, boolean enabled) {
 		syncGroupAsync(group, enabled, null);
 	}
 
-	public void syncGroupAsync(MarkersSyncGroup group, OnGroupSyncedListener groupSyncedListener) {
+	public void syncGroupAsync(@NonNull MarkersSyncGroup group, @Nullable OnGroupSyncedListener groupSyncedListener) {
 		syncGroupAsync(group, true, groupSyncedListener);
 	}
 
-	private void syncGroupAsync(final MarkersSyncGroup group, final boolean enabled, final OnGroupSyncedListener groupSyncedListener) {
+	private void syncGroupAsync(@NonNull final MarkersSyncGroup group, final boolean enabled, @Nullable final OnGroupSyncedListener groupSyncedListener) {
 		ctx.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
@@ -597,7 +597,13 @@ public class MapMarkersHelper {
 		return null;
 	}
 
-	private void addNewMarkerIfNeeded(MarkersSyncGroup group, List<MapMarker> markers, LatLon latLon, String name, boolean enabled, FavouritePoint favouritePoint, WptPt wptPt) {
+	private void addNewMarkerIfNeeded(@NonNull MarkersSyncGroup group,
+									  @NonNull List<MapMarker> markers,
+									  @NonNull LatLon latLon,
+									  @NonNull String name,
+									  boolean enabled,
+									  @Nullable FavouritePoint favouritePoint,
+									  @Nullable WptPt wptPt) {
 		boolean exists = false;
 
 		for (MapMarker marker : markers) {
@@ -880,7 +886,7 @@ public class MapMarkersHelper {
 		markersDbHelper.removeDisabledGroups();
 	}
 
-	public void updateGroupDisabled(MapMarkersGroup group, boolean disabled) {
+	public void updateGroupDisabled(@NonNull MapMarkersGroup group, boolean disabled) {
 		String id = group.getGroupKey();
 		if (id != null) {
 			markersDbHelper.updateSyncGroupDisabled(id, disabled);
@@ -888,7 +894,7 @@ public class MapMarkersHelper {
 		}
 	}
 
-	private void updateSyncGroupDisabled(MapMarkersGroup group, boolean disabled) {
+	private void updateSyncGroupDisabled(@NonNull MapMarkersGroup group, boolean disabled) {
 		List<MapMarker> groupMarkers = group.getMarkers();
 		for (MapMarker marker : groupMarkers) {
 			if (marker.history) {
@@ -926,20 +932,20 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void addMapMarker(LatLon point, PointDescription historyName) {
+	public void addMapMarker(@NonNull LatLon point, @Nullable PointDescription historyName) {
 		addMarkers(Collections.singletonList(point), Collections.singletonList(historyName), null, true);
 	}
 
-	public void addMapMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group) {
+	public void addMapMarkers(@NonNull List<LatLon> points, @NonNull List<PointDescription> historyNames, @Nullable MarkersSyncGroup group) {
 		addMarkers(points, historyNames, group, true);
 	}
 
-	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group, boolean enabled) {
+	private void addMarkers(@NonNull List<LatLon> points, @NonNull List<PointDescription> historyNames, @Nullable MarkersSyncGroup group, boolean enabled) {
 		addMarkers(points, historyNames, group, enabled, null, null);
 	}
 
-	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group,
-							boolean enabled, List<FavouritePoint> favouritePoints, List<WptPt> wptPts) {
+	private void addMarkers(@NonNull List<LatLon> points, @NonNull List<PointDescription> historyNames, @Nullable MarkersSyncGroup group,
+							boolean enabled, @Nullable List<FavouritePoint> favouritePoints, @Nullable List<WptPt> wptPts) {
 		if (points.size() > 0) {
 			int colorIndex = -1;
 			List<MapMarker> addedMarkers = new ArrayList<>();
@@ -1192,7 +1198,7 @@ public class MapMarkersHelper {
 		}
 	}
 
-	private void addMarkersToGroups(List<MapMarker> markers, boolean enabled) {
+	private void addMarkersToGroups(@NonNull List<MapMarker> markers, boolean enabled) {
 		List<MapMarkersGroup> groups = new ArrayList<>();
 		for (int i = 0; i < markers.size(); i++) {
 			MapMarkersGroup group = addMarkerToGroup(markers.get(i));
@@ -1227,7 +1233,7 @@ public class MapMarkersHelper {
 		return null;
 	}
 
-	private MapMarkersGroup createMapMarkerGroup(MapMarker marker) {
+	private MapMarkersGroup createMapMarkerGroup(@NonNull MapMarker marker) {
 		MapMarkersGroup group = new MapMarkersGroup();
 		if (marker.groupName != null) {
 			group.setName(marker.groupName);
@@ -1246,7 +1252,7 @@ public class MapMarkersHelper {
 		return group;
 	}
 
-	private void createHeaderAndHistoryButtonInGroup(MapMarkersGroup group) {
+	private void createHeaderAndHistoryButtonInGroup(@NonNull MapMarkersGroup group) {
 		if (group.getName() != null) {
 			GroupHeader header = new GroupHeader();
 			int type = group.getType();

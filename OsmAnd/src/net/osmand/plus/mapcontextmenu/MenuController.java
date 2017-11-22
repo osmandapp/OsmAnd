@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -23,6 +24,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -95,6 +97,7 @@ public abstract class MenuController extends BaseMenuController {
 	private PointDescription pointDescription;
 	private LatLon latLon;
 	private boolean active;
+	private Drawable showOnTopBarIcon;
 
 	protected TitleButtonController leftTitleButtonController;
 	protected TitleButtonController rightTitleButtonController;
@@ -311,6 +314,10 @@ public abstract class MenuController extends BaseMenuController {
 		this.currentMenuState = currentMenuState;
 	}
 
+	public void setLeftTitleButtonController(TitleButtonController leftDownloadButtonController) {
+		this.leftTitleButtonController = leftDownloadButtonController;
+	}
+
 	public TitleButtonController getLeftTitleButtonController() {
 		return leftTitleButtonController;
 	}
@@ -321,6 +328,10 @@ public abstract class MenuController extends BaseMenuController {
 
 	public TitleButtonController getTopRightTitleButtonController() {
 		return topRightTitleButtonController;
+	}
+
+	public void setLeftSubtitleButtonController(TitleButtonController leftSubtitleButtonController) {
+		this.leftSubtitleButtonController = leftSubtitleButtonController;
 	}
 
 	public TitleButtonController getLeftSubtitleButtonController() {
@@ -419,6 +430,21 @@ public abstract class MenuController extends BaseMenuController {
 	public int getWaypointActionStringId() {
 		return getMapActivity().getMyApplication().getSettings().USE_MAP_MARKERS.get()
 				? R.string.shared_string_add_to_map_markers : R.string.context_menu_item_destination_point;
+	}
+
+	public boolean isWaypointButtonEnabled() {
+		return true;
+	}
+
+	protected Drawable getShowOnTopBarIcon() {
+		if (showOnTopBarIcon == null) {
+			IconsCache ic = getMapActivity().getMyApplication().getIconsCache();
+			Drawable background = ic.getIcon(R.drawable.ic_action_device_top,
+					isLight() ? R.color.on_map_icon_color : R.color.ctx_menu_info_text_dark);
+			Drawable topbar = ic.getIcon(R.drawable.ic_action_device_topbar, R.color.dashboard_blue);
+			showOnTopBarIcon = new LayerDrawable(new Drawable[]{background, topbar});
+		}
+		return showOnTopBarIcon;
 	}
 
 	public String getTypeStr() {

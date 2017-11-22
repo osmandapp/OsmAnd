@@ -28,26 +28,7 @@ public class WptPtMenuController extends MenuController {
 		final MapMarker mapMarker = markersHelper.getMapMarker(wpt);
 
 		if (mapMarker != null) {
-			leftTitleButtonController = new TitleButtonController() {
-				@Override
-				public void buttonPressed() {
-					markersHelper.moveMapMarkerToHistory(mapMarker);
-					getMapActivity().getContextMenu().close();
-				}
-			};
-			leftTitleButtonController.needColorizeIcon = false;
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.mark_passed);
-			leftTitleButtonController.leftIconId = isLight() ? R.drawable.passed_icon_light : R.drawable.passed_icon_dark;
-
-			leftSubtitleButtonController = new TitleButtonController() {
-				@Override
-				public void buttonPressed() {
-					markersHelper.moveMarkerToTop(mapMarker);
-					getMapActivity().getContextMenu().close();
-				}
-			};
-			leftSubtitleButtonController.caption = getMapActivity().getString(R.string.show_on_top_bar);
-			leftSubtitleButtonController.leftIcon = createShowOnTopbarIcon();
+			MapMarkerMenuController.createMarkerButtons(this, mapActivity, mapMarker, getShowOnTopBarIcon());
 		}
 	}
 
@@ -101,6 +82,11 @@ public class WptPtMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean isWaypointButtonEnabled() {
+		return getMapActivity().getMyApplication().getMapMarkersHelper().getMapMarker(wpt) == null;
+	}
+
+	@Override
 	public String getTypeStr() {
 		return wpt.category != null ? wpt.category : "";
 	}
@@ -108,13 +94,5 @@ public class WptPtMenuController extends MenuController {
 	@Override
 	public String getCommonTypeStr() {
 		return getMapActivity().getString(R.string.gpx_wpt);
-	}
-
-	private Drawable createShowOnTopbarIcon() {
-		IconsCache ic = getMapActivity().getMyApplication().getIconsCache();
-		Drawable background = ic.getIcon(R.drawable.ic_action_device_top,
-				isLight() ? R.color.on_map_icon_color : R.color.ctx_menu_info_text_dark);
-		Drawable topbar = ic.getIcon(R.drawable.ic_action_device_topbar, R.color.dashboard_blue);
-		return new LayerDrawable(new Drawable[]{background, topbar});
 	}
 }

@@ -33,26 +33,7 @@ public class FavouritePointMenuController extends MenuController {
 		final MapMarker mapMarker = markersHelper.getMapMarker(fav);
 
 		if (mapMarker != null) {
-			leftTitleButtonController = new TitleButtonController() {
-				@Override
-				public void buttonPressed() {
-					markersHelper.moveMapMarkerToHistory(mapMarker);
-					getMapActivity().getContextMenu().close();
-				}
-			};
-			leftTitleButtonController.needColorizeIcon = false;
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.mark_passed);
-			leftTitleButtonController.leftIconId = isLight() ? R.drawable.passed_icon_light : R.drawable.passed_icon_dark;
-
-			leftSubtitleButtonController = new TitleButtonController() {
-				@Override
-				public void buttonPressed() {
-					markersHelper.moveMarkerToTop(mapMarker);
-					getMapActivity().getContextMenu().close();
-				}
-			};
-			leftSubtitleButtonController.caption = getMapActivity().getString(R.string.show_on_top_bar);
-			leftSubtitleButtonController.leftIcon = createShowOnTopbarIcon();
+			MapMarkerMenuController.createMarkerButtons(this, mapActivity, mapMarker, getShowOnTopBarIcon());
 		}
 	}
 
@@ -96,6 +77,11 @@ public class FavouritePointMenuController extends MenuController {
 	@Override
 	public Drawable getLeftIcon() {
 		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(), fav.getColor(), false);
+	}
+
+	@Override
+	public boolean isWaypointButtonEnabled() {
+		return getMapActivity().getMyApplication().getMapMarkersHelper().getMapMarker(fav) == null;
 	}
 
 	@Override
@@ -143,13 +129,5 @@ public class FavouritePointMenuController extends MenuController {
 		} else {
 			addMyLocationToPlainItems(latLon);
 		}
-	}
-
-	private Drawable createShowOnTopbarIcon() {
-		IconsCache ic = getMapActivity().getMyApplication().getIconsCache();
-		Drawable background = ic.getIcon(R.drawable.ic_action_device_top,
-				isLight() ? R.color.on_map_icon_color : R.color.ctx_menu_info_text_dark);
-		Drawable topbar = ic.getIcon(R.drawable.ic_action_device_topbar, R.color.dashboard_blue);
-		return new LayerDrawable(new Drawable[]{background, topbar});
 	}
 }
