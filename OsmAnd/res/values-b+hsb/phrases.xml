@@ -51,7 +51,7 @@
 		<string name="poi_landuse">Wužiwanje płoninow</string>
 	<string name="poi_sustenance">Zežiwidła</string>
 	<string name="poi_deli">Delikatesy</string>
-	<string name="poi_confectionery">Słódčizny</string>
+	<string name="poi_confectionery">słódčizny</string>
 	<string name="poi_ice_cream">Lodarnja</string>
 	<string name="poi_greengrocer">Zeleninarstwo</string>
 	<string name="poi_seafood">Mórske płody</string>
@@ -87,7 +87,7 @@
 	<string name="poi_fishing">Wudźerske potrjeby</string>
 	<string name="poi_florist">Kwětkarnja</string>
 	<string name="poi_frame">Wobrazowe ramiki</string>
-	<string name="poi_free_flying">Free flying</string>
+	<string name="poi_free_flying">free flying</string>
 	<string name="poi_furnace">Tepjenski wobchod</string>
 	<string name="poi_furniture">Meblowy wobchod</string>
 	<string name="poi_garden_centre">Zahrodniske potrjeby</string>
@@ -2012,4 +2012,6 @@
 	<string name="poi_location_overhead">městno: horjeka</string>
 	<string name="poi_location_roof">městno: třěcha</string>
 	<string name="poi_location_rooftop">městno: na třěše</string>
+	<string name="poi_backcountry">Zadni kraj</string>
+	<string name="poi_aerialway_transport">powětrowy transport</string>
 	</resources>
