@@ -2966,6 +2966,7 @@
     <string name="active_markers_descr">Выберыце, колькі індыкатараў накірунку будзе адлюстравана.</string>
     <string name="appearance_on_the_map">Зьнешні выгляд на мапе</string>
     <string name="add_track_to_markers_descr">Абярыце трэк, каб дадаць шляхавые кропкі да маркераў. (Пералічаныя толькі трэкі з шляхавымі кропкамі.)</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_right">Направа</string>
     <string name="shared_string_left">Налева</string>
     <string name="shared_string_more_without_dots">Больш</string>

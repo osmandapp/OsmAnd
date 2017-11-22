@@ -2966,6 +2966,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="empty_state_markers_active_desc">Langt eller kort tryk på steder, og tryk derefter på markørflag knappen.</string>
     <string name="empty_state_markers_groups">Importer grupper</string>
     <string name="empty_state_markers_groups_desc">Importer favoritgrupper eller et spor af rutepunkter som markører.</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Markører, der er markeret som passeret vises på denne skærm.</string>
     <string name="appearance_on_the_map">Udseende på kortet</string>
     <string name="looking_for_tracks_with_waypoints">Find spor med rutepunkter</string>

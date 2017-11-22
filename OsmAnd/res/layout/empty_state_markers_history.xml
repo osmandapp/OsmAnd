@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/empty_state_text_interval"
         android:background="@null"
-        android:text="@string/shared_string_history"
+        android:text="@string/empty_state_markers_history"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="@dimen/empty_state_text_size"/>
 

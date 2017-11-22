@@ -2917,6 +2917,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="rename_marker">Pierajmienavać markier</string>
     <string name="appearance_on_the_map">Źniešni vyhlad na mapie</string>
     <string name="add_track_to_markers_descr">Abiarycie trek, kab dadać šlachavyja kropki da markieraŭ. (Pieraličanyja tolki treki z šlachavymi kropkami.)</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_right">Naprava</string>
     <string name="shared_string_left">Nalieva</string>
     <string name="shared_string_more_without_dots">Bolš</string>

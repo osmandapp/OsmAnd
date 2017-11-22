@@ -35,6 +35,7 @@
     <string name="empty_state_markers_active_desc">Long or short tap places, then tap the marker flag button.</string>
     <string name="empty_state_markers_groups">Import groups</string>
     <string name="empty_state_markers_groups_desc">You can import favorite groups or track waypoints as markers.</string>
+    <string name="empty_state_markers_history">@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Markers marked as passed will appear on this screen.</string>
     <string name="shared_string_two">Two</string>
     <string name="shared_string_one">One</string>

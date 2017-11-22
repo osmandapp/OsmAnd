@@ -2970,6 +2970,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="empty_state_markers_active_desc">Tap lungo o breve nel luogo, poi tappa il pulsante bandiera del marcatore.</string>
     <string name="empty_state_markers_groups">Importa gruppi</string>
     <string name="empty_state_markers_groups_desc">Puoi importare, come marcatori, gruppi di luoghi preferiti o punti intermedi di tracce.</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Marcatori indicati come passati appariranno su questa schermata.</string>
     <string name="shared_string_two">Due</string>
     <string name="shared_string_one">Uno</string>

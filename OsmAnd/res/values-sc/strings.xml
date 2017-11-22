@@ -2861,6 +2861,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="empty_state_markers_active_desc">Marca logos in sa mapa cun un\'incarcu curtzu o longu e, a pustis, incarchende su butone cun sa bandera de sos marcadores.</string>
     <string name="empty_state_markers_groups">Importa grupos</string>
     <string name="empty_state_markers_groups_desc">Podes importare grupos de preferidos o puntos de coladòrgiu de una rasta comente marcadores.</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Sos marcadores sinnados comente colados ant a aparire in custu ischermu.</string>
     <string name="shared_string_two">Duos</string>
     <string name="shared_string_one">Unu</string>

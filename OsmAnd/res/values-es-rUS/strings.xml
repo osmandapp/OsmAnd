@@ -2849,6 +2849,7 @@ Proporciona un código completo</string>
     <string name="appearance_on_the_map">Aspecto en el mapa</string>
     <string name="looking_for_tracks_with_waypoints">Búsqueda de trazas con puntos de referencia</string>
     <string name="shared_string_more_without_dots">Más</string>
+    <string name="empty_state_markers_history"></string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
     <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés (OSM), abre o comenta problemas del mapa (OSM), y contribuye con archivos de grabaciones GPX.</string>
     <string name="shared_string_deleted">Borrado</string>
