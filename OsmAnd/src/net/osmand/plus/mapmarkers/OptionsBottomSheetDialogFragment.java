@@ -47,7 +47,18 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final int themeRes = getMyApplication().getSettings().isLightContent() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_options_bottom_sheet_dialog, null);
+		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_options_bottom_sheet_dialog, null);
+		view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
+
+		final View mainView = view.findViewById(R.id.main_view);
+		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
+			mainView.getLayoutParams().width = getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
+		}
 
 		((ImageView) mainView.findViewById(R.id.sort_by_icon)).setImageDrawable(getContentIcon(R.drawable.ic_sort_waypoint_dark));
 		OsmandSettings.MapMarkersMode mode = getMyApplication().getSettings().MAP_MARKERS_MODE.get();
@@ -171,7 +182,19 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			}
 		});
 
-		return mainView;
+		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		((MapMarkersDialogFragment) getParentFragment()).blurStatusBar();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		((MapMarkersDialogFragment) getParentFragment()).clearStatusBar();
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package net.osmand.plus.mapmarkers;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +30,6 @@ import net.osmand.plus.OsmandSettings.MapMarkersOrderByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.OnMapMarkersSavedListener;
 import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment.DirectionIndicationFragmentListener;
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
@@ -63,6 +64,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 	private boolean lightTheme;
 	private String groupIdToOpen;
+
+	private int statusBarColor = -1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -151,11 +154,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		viewPager.setSwipeLocked(true);
 		final MapMarkersViewPagerAdapter adapter = new MapMarkersViewPagerAdapter(getChildFragmentManager());
 		viewPager.setAdapter(adapter);
-
-		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
-			mainView.findViewById(R.id.menu_container).getLayoutParams().width =
-					getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
-		}
 
 		bottomNav = mainView.findViewById(R.id.map_markers_bottom_navigation);
 		BottomNavigationViewHelper.disableShiftMode(bottomNav);
@@ -263,6 +261,26 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 				updateAdapters();
 			}
 		};
+	}
+
+	public void blurStatusBar() {
+		if (Build.VERSION.SDK_INT >= 21) {
+			Window window = getDialog().getWindow();
+			if (window != null) {
+				statusBarColor = window.getStatusBarColor();
+				window.setStatusBarColor(ContextCompat.getColor(getActivity(),
+						lightTheme ? R.color.status_bar_dim_light : R.color.status_bar_dim_dark));
+			}
+		}
+	}
+
+	public void clearStatusBar() {
+		if (Build.VERSION.SDK_INT >= 21 && statusBarColor != -1) {
+			Window window = getDialog().getWindow();
+			if (window != null) {
+				window.setStatusBarColor(statusBarColor);
+			}
+		}
 	}
 
 	private void showOptionsMenuFragment() {
