@@ -498,7 +498,7 @@
     <string name="osmo_group_info">Talγut</string>
     <string name="osmo_expire_group">Ad ifat di</string>
     <string name="osmo_connect_to_device_name">Isem n useqdac</string>
-    <string name="misc_pref_title"></string>
+    <string name="misc_pref_title"/>
     <string name="localization_pref_title">Asideg</string>
     <string name="lang_pt_br">Tapurtugit (Birizil)</string>
     <string name="lang_eu">Tabaskit</string>
@@ -640,4 +640,7 @@
     <string name="shared_string_show_description">Sekned aglam-is</string>
     <string name="lang_vi">Tabyatnamit</string>
     <string name="context_menu_item_search">Nadi di liqrib</string>
+    <string name="empty_state_osm_edits">Rnu neγ ẓreg ifarisen n OSM</string>
+    <string name="shared_string_deleted">Ittwakkes</string>
+    <string name="shared_string_edited">Ittwaẓreg</string>
     </resources>
