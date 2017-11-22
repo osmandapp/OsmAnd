@@ -169,6 +169,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	private boolean portrait;
 	private long lastUpOrCancelMotionEventTime;
 	private TextView listEmptyTextView;
+	private int[] animationCoordinates;
 
 	int baseColor;
 
@@ -1248,6 +1249,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			content.setVisibility(View.VISIBLE);
 			toolbar.setVisibility(View.VISIBLE);
 		}
+		this.animationCoordinates = animationCoordinates;
 	}
 
 	private void hide(boolean animation) {
@@ -1264,6 +1266,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		} else {
 			AnimatorSet set = new AnimatorSet();
 			List<Animator> animators = new ArrayList<>();
+			if (animationCoordinates != null) {
+				int screenHeight = mapActivity.getResources().getDisplayMetrics().heightPixels;
+				int screenWidth = mapActivity.getResources().getDisplayMetrics().widthPixels;
+				animators.add(ObjectAnimator.ofFloat(content, View.TRANSLATION_X, 0, animationCoordinates[0] - screenWidth / 2));
+				animators.add(ObjectAnimator.ofFloat(content, View.TRANSLATION_Y, 0, animationCoordinates[1] - screenHeight / 2));
+				animationCoordinates = null;
+			}
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 				int centerX = content.getMeasuredWidth() / 2;
 				int centerY = content.getMeasuredHeight() / 2;
