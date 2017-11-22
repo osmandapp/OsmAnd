@@ -2922,4 +2922,17 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="shared_string_left">Nalieva</string>
     <string name="shared_string_more_without_dots">Bolš</string>
     <string name="looking_for_tracks_with_waypoints">Pošuk sliadoŭ z šliachavymi kropkami</string>
+    <string name="empty_state_osm_edits">Stvaryć abo źmianić OSM abjekty</string>
+    <string name="empty_state_osm_edits_descr">Stvarajcie abo źmianiajcie OSM POI, adkravajcie abo kamentujcie OSM-natatki, a taksama adsyłajcie zapisanyja GPX-fajły.</string>
+    <string name="shared_string_deleted">Vydalena</string>
+    <string name="shared_string_edited">Adredahavana</string>
+    <string name="shared_string_added">Dadadziena</string>
+    <string name="marker_activated">Markier %s aktyvavany.</string>
+    <string name="notes_by_date">Natatki pa dacie</string>
+    <string name="by_date">Pa dacie</string>
+    <string name="by_type">Pa typu</string>
+    <string name="one_tap_active_descr">Nacisk na markier na mapie pieramiescić hety markier na pieršaje miesca ŭ spisie aktyŭnych markieraŭ, nie adkryvajučy kantekstnaje mieniu.</string>
+    <string name="one_tap_active">Aktyvacyja adnym naciskam</string>
+    <string name="empty_state_av_notes">Rabi natatki!</string>
+    <string name="empty_state_av_notes_desc">Dadaj aŭdyjo-, videa- ci fotanatatku na liubuju kropku na mapie, vykarastoŭvajučy vidžet ci kantekstaje mieniu.</string>
     </resources>

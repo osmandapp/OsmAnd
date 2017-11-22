@@ -2884,4 +2884,12 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="active_markers_descr">Elekti nombron da direkt-indikiloj por vidigi.</string>
     <string name="looking_for_tracks_with_waypoints">Serĉado de kursoj kun navigadpunktoj</string>
     <string name="shared_string_more_without_dots">Pli</string>
+    <string name="empty_state_osm_edits">Krei aŭ redakti OSM-objektojn</string>
+    <string name="empty_state_osm_edits_descr">Krei aŭ redakti OSM-punktojn, krei aŭ komenti OSM-rimarkojn kaj kontribui per registritaj GPX-kursoj.</string>
+    <string name="shared_string_deleted">Forigita</string>
+    <string name="shared_string_edited">Redaktita</string>
+    <string name="shared_string_added">Aldonita</string>
+    <string name="marker_activated">Aktivis markon %s.</string>
+    <string name="one_tap_active_descr">Per frapeti markon sur la mapo, movi ĝin al komenco de la listo senmalfermante kuntekstan menuon.</string>
+    <string name="one_tap_active">Aktivigi per unu frapeto</string>
     </resources>
