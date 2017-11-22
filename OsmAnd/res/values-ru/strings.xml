@@ -841,7 +841,7 @@
     
     <string name="user_password">Пароль</string>
     <string name="osm_settings_descr">Укажите настройки для загрузки данных в Openstreetmap.org (OSM).</string>
-    <string name="data_settings_descr">Настройка данных: язык, обновление данных</string>
+    <string name="data_settings_descr">Настройка данных: язык, обновление данных.</string>
     <string name="data_settings">Данные</string>
     <string name="osm_settings">Редактирование OSM</string>
     <string name="auto_zoom_map_descr">Автоматически изменять масштаб карты при изменении скорости (пока карта синхронизирована с текущим положением).</string>
@@ -858,7 +858,7 @@
     <string name="open_street_map_login_descr">Необходимы для авторизации на openstreetmap.org.</string>
     <string name="user_name">Имя пользователя OSM</string>
     <string name="mark_point">Цель</string>
-    <string name="use_english_names_descr">Использовать английские названия вместо местных</string>
+    <string name="use_english_names_descr">Использовать английские названия вместо местных.</string>
     <string name="use_english_names">Использовать английские названия</string>
     <string name="app_settings">Настройки приложения</string>
     <string name="search_address">Искать адрес</string>
@@ -869,7 +869,7 @@
     <string name="show_view_angle">Угол обзора</string>
     <string name="map_view_3d_descr">Включить 3D вид для карты.</string>
     <string name="map_view_3d">3D вид</string>
-    <string name="show_poi_over_map_description">Показывать слой POI</string>
+    <string name="show_poi_over_map_description">Показывать на карте последние выбранные POI.</string>
     <string name="show_poi_over_map">Отображать POI</string>
     <string name="map_tile_source_descr">Выберите источник онлайн или кэшированных тайлов карты.</string>
     <string name="map_tile_source">Растровые карты</string>
@@ -1035,7 +1035,7 @@
     <string name="navpoint_search_desc">Координаты</string>
     <string name="transport_search_desc">Поиск общественного транспорта</string>
     <string name="favourites_search_desc">Поиск в избранном</string>
-    <string name="rendering_attr_noPolygons_description">Отображать только границы многоугольников, без заливки</string>
+    <string name="rendering_attr_noPolygons_description">Отображать только контуры, без заливки.</string>
     <string name="rendering_attr_noPolygons_name">Полигоны</string>
     <string name="rendering_attr_appMode_name">Режим рендеринга</string>
     <string name="rendering_attr_appMode_description">Оптимизация карты для соответствующего профиля</string>
@@ -1651,7 +1651,7 @@
     <string name="index_tours">Туры</string>
     <string name="shared_string_all">Все</string>
     <string name="distance">Расстояние</string>
-    <string name="gpx_info_subtracks">"Подтрек: %1$s "</string>
+    <string name="gpx_info_subtracks">Сегмент: %1$s</string>
     <string name="route_descr_destination">Пункт назначения</string>
     <string name="record_plugin_name">Запись поездки</string>
     <string name="int_hour">час</string>
@@ -2613,7 +2613,7 @@
     <string name="add_group">Добавить группу</string>
     <string name="add_group_descr">Вы можете импортировать группу из избранных или путевых точек.</string>
     <string name="empty_state_markers_active">Создайте маркеры карт!</string>
-    <string name="empty_state_markers_active_desc">Нажмите на нужное место и затем нажмите кнопку флажка маркера.</string>
+    <string name="empty_state_markers_active_desc">Нажмите на нужное место, а затем на флажок маркера.</string>
     <string name="empty_state_markers_groups">Импорт групп</string>
     <string name="empty_state_markers_groups_desc">Вы можете импортировать группы избранных или путевых точек как маркеры.</string>
     <string name="empty_state_markers_history_desc">На этом экране появятся маркеры, отмеченные как пройденные.</string>
