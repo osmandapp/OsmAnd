@@ -3012,6 +3012,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="empty_state_markers_active_desc">Sélectionnez des emplacements sur la carte puis appuyez sur le drapeau de marque.</string>
     <string name="empty_state_markers_groups">Importer des groupes</string>
     <string name="empty_state_markers_groups_desc">Vous pouvez importer des groupes de favoris ou des points de passage comme marques.</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Les marques visitées s\'afficheront sur cet écran.</string>
     <string name="shared_string_two">Deux</string>
     <string name="shared_string_one">Une</string>

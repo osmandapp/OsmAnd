@@ -3089,6 +3089,7 @@
     <string name="empty_state_markers_active_desc">Відзначити місце на мапі дотиком.</string>
     <string name="empty_state_markers_groups">Імпортувати групи</string>
     <string name="empty_state_markers_groups_desc">Ви можете імпортувати групи закладок або шляхові точки треку як маркери.</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Маркери, позначені як пройдені, з\'являться на цьому екрані.</string>
     <string name="shared_string_two">Два</string>
     <string name="shared_string_one">Один</string>
