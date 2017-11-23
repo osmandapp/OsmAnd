@@ -1,12 +1,10 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.support.v4.content.ContextCompat;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
@@ -28,7 +26,10 @@ public class WptPtMenuController extends MenuController {
 		final MapMarker mapMarker = markersHelper.getMapMarker(wpt);
 
 		if (mapMarker != null) {
-			MapMarkerMenuController.createMarkerButtons(this, mapActivity, mapMarker);
+			MapMarkerMenuController markerMenuController =
+					new MapMarkerMenuController(mapActivity, mapMarker.getPointDescription(mapActivity), mapMarker);
+			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
+			leftSubtitleButtonController = markerMenuController.getLeftSubtitleButtonController();
 		}
 	}
 

@@ -22,7 +22,36 @@ public class MapMarkerMenuController extends MenuController {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.mapMarker = mapMarker;
 		builder.setShowNearestWiki(true);
-		createMarkerButtons(this, mapActivity, mapMarker);
+
+		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		leftTitleButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				markersHelper.moveMapMarkerToHistory(getMapMarker());
+				getMapActivity().getContextMenu().close();
+			}
+		};
+		leftTitleButtonController.needColorizeIcon = false;
+		leftTitleButtonController.caption = getMapActivity().getString(R.string.mark_passed);
+		leftTitleButtonController.leftIconId = isLight() ? R.drawable.passed_icon_light : R.drawable.passed_icon_dark;
+
+		leftSubtitleButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				markersHelper.moveMarkerToTop(getMapMarker());
+				getMapActivity().getContextMenu().close();
+			}
+		};
+		leftSubtitleButtonController.caption = getMapActivity().getString(R.string.show_on_top_bar);
+		leftSubtitleButtonController.leftIcon = createShowOnTopbarIcon();
+	}
+
+	private Drawable createShowOnTopbarIcon() {
+		IconsCache ic = getMapActivity().getMyApplication().getIconsCache();
+		Drawable background = ic.getIcon(R.drawable.ic_action_device_top,
+				isLight() ? R.color.on_map_icon_color : R.color.ctx_menu_info_text_dark);
+		Drawable topbar = ic.getIcon(R.drawable.ic_action_device_topbar, R.color.dashboard_blue);
+		return new LayerDrawable(new Drawable[]{background, topbar});
 	}
 
 	@Override
@@ -74,32 +103,5 @@ public class MapMarkerMenuController extends MenuController {
 	@Override
 	public int getWaypointActionStringId() {
 		return R.string.rename_marker;
-	}
-
-	public static void createMarkerButtons(MenuController menuController, final MapActivity mapActivity, final MapMarker mapMarker) {
-		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
-
-		TitleButtonController leftTitleButtonController = menuController.new TitleButtonController() {
-			@Override
-			public void buttonPressed() {
-				markersHelper.moveMapMarkerToHistory(mapMarker);
-				mapActivity.getContextMenu().close();
-			}
-		};
-		leftTitleButtonController.needColorizeIcon = false;
-		leftTitleButtonController.caption = mapActivity.getString(R.string.mark_passed);
-		leftTitleButtonController.leftIconId = menuController.isLight() ? R.drawable.passed_icon_light : R.drawable.passed_icon_dark;
-		menuController.setLeftTitleButtonController(leftTitleButtonController);
-
-		TitleButtonController leftSubtitleButtonController = menuController.new TitleButtonController() {
-			@Override
-			public void buttonPressed() {
-				markersHelper.moveMarkerToTop(mapMarker);
-				mapActivity.getContextMenu().close();
-			}
-		};
-		leftSubtitleButtonController.caption = mapActivity.getString(R.string.show_on_top_bar);
-		leftSubtitleButtonController.leftIcon = menuController.getShowOnTopBarIcon();
-		menuController.setLeftSubtitleButtonController(leftSubtitleButtonController);
 	}
 }
