@@ -1,8 +1,12 @@
 package net.osmand.plus.osmedit;
 
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.system.Os;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -172,7 +176,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 	}
 
 	private void bindOsmEditViewHolder(final OsmEditViewHolder holder, final OsmPoint osmEdit, int position) {
-		holder.titleTextView.setText(OsmEditingPlugin.getName(osmEdit));
+		holder.titleTextView.setText(getTitle(osmEdit));
 		holder.descriptionTextView.setText(getDescription(osmEdit));
 		Drawable icon = getIcon(osmEdit);
 		if (icon != null) {
@@ -227,6 +231,15 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 		return items.size();
 	}
 
+	private SpannableString getTitle(OsmPoint osmPoint) {
+		SpannableString title = new SpannableString(OsmEditingPlugin.getName(osmPoint));
+		if (TextUtils.isEmpty(title)) {
+			title = SpannableString.valueOf(getCategory(osmPoint));
+			title.setSpan(new StyleSpan(Typeface.ITALIC), 0, title.length(), 0);
+		}
+		return title;
+	}
+
 	private Drawable getIcon(OsmPoint point) {
 		if (point.getGroup() == OsmPoint.Group.POI) {
 			OpenstreetmapPoint osmPoint = (OpenstreetmapPoint) point;
@@ -279,6 +292,14 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 		return true;
 	}
 
+	private String getCategory(OsmPoint point) {
+		String category = "";
+		if (point.getGroup() == OsmPoint.Group.POI) {
+			category = ((OpenstreetmapPoint) point).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+		}
+		return category;
+	}
+
 	private String getDescription(OsmPoint point) {
 		String action = "";
 		if (point.getAction() == OsmPoint.Action.CREATE) {
@@ -291,10 +312,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 			action = getContext().getString(R.string.shared_string_edited);
 		}
 
-		String category = "";
-		if (point.getGroup() == OsmPoint.Group.POI) {
-			category = ((OpenstreetmapPoint) point).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
-		}
+		String category = getCategory(point);
 
 		String comment = "";
 		if (point.getGroup() == OsmPoint.Group.BUG) {
