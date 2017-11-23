@@ -2898,8 +2898,18 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="make_active">Označi kot dejavno</string>
     <string name="appearance_on_the_map">Videz na zemljevidu</string>
     <string name="track_waypoints">Vmesne točke sledi</string>
-    <string name="favourites_group">Skupina priljubljenih</string>
+    <string name="favourites_group">Kategorija priljubljenih</string>
     <string name="add_group">Dodaj skupino</string>
     <string name="empty_state_markers_groups">Uvozi skupine</string>
     <string name="shared_string_paste">Prilepi</string>
+    <string name="empty_state_osm_edits">Ustvari ali spremeni predmete OSM</string>
+    <string name="shared_string_deleted">Izbrisano</string>
+    <string name="shared_string_edited">Urejeno</string>
+    <string name="shared_string_added">Dodano</string>
+    <string name="by_date">Po datumu</string>
+    <string name="by_type">Po vrsti</string>
+    <string name="shared_string_more_without_dots">Več ...</string>
+    <string name="shared_string_right">Desno</string>
+    <string name="shared_string_left">Levo</string>
+    <string name="show_number_pad">Pokaži številčnico</string>
     </resources>
