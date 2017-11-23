@@ -149,7 +149,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 		int count = 0;
 		for (int i = 0; i < items.size(); i++) {
 			Object item = items.get(i);
-			if (!(item instanceof OsmPoint)) {
+			if (item instanceof Integer) {
 				count++;
 			}
 		}
