@@ -2948,11 +2948,11 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_two">二</string>
     <string name="shared_string_one">一</string>
-    <string name="distance_indication_descr">選擇如何顯示現行標記的距離。</string>
+    <string name="distance_indication_descr">選擇如何顯示活動標記的距離。</string>
     <string name="active_markers_descr">選擇想顯示多少的方向指標。</string>
     <string name="empty_state_markers_history_desc">標記為已通過的標點將顯現在此螢幕上。</string>
-    <string name="show_guide_line_descr">從您的位置顯示指引路線到現行的標記位置。</string>
-    <string name="show_arrows_descr">顯示一個或兩個箭頭指示方向到現行的標記。</string>
+    <string name="show_guide_line_descr">從您的位置顯示指引路線到活動標記位置。</string>
+    <string name="show_arrows_descr">顯示一個或兩個箭頭指示方向到活動標記。</string>
     <string name="shared_string_more_without_dots">更多</string>
     <string name="looking_for_tracks_with_waypoints">尋找軌跡跟航點</string>
     <string name="empty_state_osm_edits">建立或修改 OSM 物件</string>
