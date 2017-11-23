@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.editors;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
 
@@ -42,6 +44,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 							 Bundle savedInstanceState) {
 
 		view = inflater.inflate(R.layout.point_editor_fragment, container, false);
+		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
 
 		getEditor().updateLandscapePortrait();
 		getEditor().updateNightMode();
@@ -140,6 +143,12 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 						ScrollView scrollView = (ScrollView) view.findViewById(R.id.editor_scroll_view);
 						scrollView.scrollTo(0, bottom);
 					}
+					if (Build.VERSION.SDK_INT >= 21 && AndroidUiHelper.isOrientationPortrait(getActivity())) {
+						Rect rect = new Rect();
+						getActivity().getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+						int heightDiff = getResources().getDisplayMetrics().heightPixels - rect.bottom;
+						view.findViewById(R.id.buttons_container).setPadding(0, 0, 0, heightDiff);
+					}
 				}
 			});
 		} else {
@@ -217,11 +226,6 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	@Override
 	public int getStatusBarColorId() {
 		return R.color.status_bar_light;
-	}
-
-	@Override
-	protected boolean isFullScreenAllowed() {
-		return false;
 	}
 
 	private void hideKeyboard() {
