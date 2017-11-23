@@ -22,6 +22,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
@@ -168,6 +169,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	private boolean portrait;
 	private long lastUpOrCancelMotionEventTime;
 	private TextView listEmptyTextView;
+	private int[] animationCoordinates;
 
 	int baseColor;
 
@@ -877,13 +879,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 			updateToolbarActions();
 			//fabButton.showFloatingActionButton();
-			open(dashboardView.findViewById(R.id.animateContent), animation, animationCoordinates);
+			open(animation, animationCoordinates);
 			updateLocation(true, true, false);
 //			addOrUpdateDashboardFragments();
 			mapActivity.getRoutingHelper().addListener(this);
 		} else {
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
-			hide(dashboardView.findViewById(R.id.animateContent), animation);
+			hide(animation);
 
 			if (!MapRouteInfoMenu.isVisible()) {
 				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin_external), false);
@@ -1211,54 +1213,84 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 
 	// To animate view slide out from right to left
-	private void open(final View view, boolean animation, int[] animationCoordinates) {
+	private void open(boolean animation, int[] animationCoordinates) {
+		final View content = dashboardView.findViewById(R.id.animateContent);
+		final View toolbar = dashboardView.findViewById(R.id.toolbar);
 		if (animation) {
 			AnimatorSet set = new AnimatorSet();
 			List<Animator> animators = new ArrayList<>();
 			if (animationCoordinates != null) {
 				int screenHeight = mapActivity.getResources().getDisplayMetrics().heightPixels;
 				int screenWidth = mapActivity.getResources().getDisplayMetrics().widthPixels;
-				animators.add(ObjectAnimator.ofFloat(view, View.TRANSLATION_X, animationCoordinates[0] - screenWidth / 2, 0));
-				animators.add(ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, animationCoordinates[1] - screenHeight / 2, 0));
+				animators.add(ObjectAnimator.ofFloat(content, View.TRANSLATION_X, animationCoordinates[0] - screenWidth / 2, 0));
+				animators.add(ObjectAnimator.ofFloat(content, View.TRANSLATION_Y, animationCoordinates[1] - screenHeight / 2, 0));
 			}
-			animators.add(ObjectAnimator.ofFloat(view, View.ALPHA, 0f, 1f));
-			animators.add(ObjectAnimator.ofFloat(view, View.SCALE_X, 0.2f, 1f));
-			animators.add(ObjectAnimator.ofFloat(view, View.SCALE_Y, 0.2f, 1f));
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+				int centerX = content.getMeasuredWidth() / 2;
+				int centerY = content.getMeasuredHeight() / 2;
+				float finalRadius = (float) Math.sqrt(Math.pow(content.getWidth() / 2, 2) + Math.pow(content.getHeight() / 2, 2));
+				Animator circleAnimator = ViewAnimationUtils.createCircularReveal(content, centerX, centerY, 0, finalRadius);
+				animators.add(circleAnimator);
+			}
+			animators.add(ObjectAnimator.ofFloat(content, View.SCALE_X, 0f, 1f));
+			animators.add(ObjectAnimator.ofFloat(content, View.SCALE_Y, 0f, 1f));
+			animators.add(ObjectAnimator.ofFloat(toolbar, View.TRANSLATION_Y, -toolbar.getHeight(), 0));
 			set.setDuration(300).playTogether(animators);
 			set.addListener(new AnimatorListenerAdapter() {
 				@Override
 				public void onAnimationStart(Animator animation) {
 					super.onAnimationStart(animation);
-					view.setVisibility(View.VISIBLE);
+					content.setVisibility(View.VISIBLE);
+					toolbar.setVisibility(View.VISIBLE);
 				}
 			});
 			set.start();
 		} else {
-			view.setVisibility(View.VISIBLE);
+			content.setVisibility(View.VISIBLE);
+			toolbar.setVisibility(View.VISIBLE);
 		}
+		this.animationCoordinates = animationCoordinates;
 	}
 
-	private void hide(final View view, boolean animation) {
+	private void hide(boolean animation) {
+		final View content = dashboardView.findViewById(R.id.animateContent);
+		final View toolbar = dashboardView.findViewById(R.id.toolbar);
 		if (compassButton != null) {
 			mapActivity.getMapLayers().getMapControlsLayer().restoreCompassButton(nightMode);
 			compassButton = null;
 		}
 		if (!animation) {
 			dashboardView.setVisibility(View.GONE);
-			view.setVisibility(View.GONE);
+			content.setVisibility(View.GONE);
+			toolbar.setVisibility(View.GONE);
 		} else {
 			AnimatorSet set = new AnimatorSet();
-			set.setDuration(300).playTogether(
-					ObjectAnimator.ofFloat(view, View.ALPHA, 1f, 0f),
-					ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, 0, view.getHeight())
-			);
+			List<Animator> animators = new ArrayList<>();
+			if (animationCoordinates != null) {
+				int screenHeight = mapActivity.getResources().getDisplayMetrics().heightPixels;
+				int screenWidth = mapActivity.getResources().getDisplayMetrics().widthPixels;
+				animators.add(ObjectAnimator.ofFloat(content, View.TRANSLATION_X, 0, animationCoordinates[0] - screenWidth / 2));
+				animators.add(ObjectAnimator.ofFloat(content, View.TRANSLATION_Y, 0, animationCoordinates[1] - screenHeight / 2));
+				animationCoordinates = null;
+			}
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+				int centerX = content.getMeasuredWidth() / 2;
+				int centerY = content.getMeasuredHeight() / 2;
+				float initialRadius = (float) Math.sqrt(Math.pow(content.getWidth() / 2, 2) + Math.pow(content.getHeight() / 2, 2));
+				Animator circleAnimator = ViewAnimationUtils.createCircularReveal(content, centerX, centerY, initialRadius, 0);
+				animators.add(circleAnimator);
+			}
+			animators.add(ObjectAnimator.ofFloat(content, View.SCALE_X, 1f, 0f));
+			animators.add(ObjectAnimator.ofFloat(content, View.SCALE_Y, 1f, 0f));
+			animators.add(ObjectAnimator.ofFloat(toolbar, View.TRANSLATION_Y, 0, -toolbar.getHeight()));
+			set.setDuration(300).playTogether(animators);
 			set.addListener(new AnimatorListenerAdapter() {
 				@Override
 				public void onAnimationEnd(Animator animation) {
 					super.onAnimationEnd(animation);
 					dashboardView.setVisibility(View.GONE);
-					view.setVisibility(View.GONE);
-					view.setTranslationY(0);
+					content.setVisibility(View.GONE);
+					toolbar.setVisibility(View.GONE);
 				}
 			});
 			set.start();
