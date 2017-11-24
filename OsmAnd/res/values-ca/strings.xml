@@ -2732,4 +2732,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="marker_activated">Marcador %s activat.</string>
     <string name="one_tap_active_descr">Premeu sobre el marcador en el mapa, arrossegueu-lo al capdavant dels marcadors actius, sense obrir el menú de context.</string>
     <string name="empty_state_av_notes">Preneu notes!</string>
+    <string name="empty_state_av_notes_desc">Afegiu notes d\'àudio, de vídeo o fotogràfiques a qualsevol lloc del mapa, utilitzant el giny o el menú contextual.</string>
+    <string name="notes_by_date">Anotacions per data</string>
+    <string name="by_date">Per data</string>
+    <string name="by_type">Per tipus</string>
     </resources>
