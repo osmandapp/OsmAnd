@@ -2804,7 +2804,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_to">A</string>
     <string name="mapillary_menu_date_from">Da</string>
     <string name="mapillary_menu_descr_dates">Visualizza solo le immagini aggiunte</string>
-    <string name="mapillary_menu_title_dates">Date</string>
+    <string name="mapillary_menu_title_dates">Data</string>
     <string name="mapillary_menu_edit_text_hint">Scrivi il nome utente</string>
     <string name="mapillary_menu_descr_username">Visualizza le immagini aggiunte da</string>
     <string name="mapillary_menu_title_username">Nome utente</string>
@@ -2908,7 +2908,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="marker_save_as_track_descr">Esporta i marcatori in un file, puoi indicarlo qui:</string>
     <string name="marker_save_as_track">Salva come traccia</string>
     <string name="move_to_history">Sposta nella cronologia</string>
-    <string name="group_will_be_removed_after_restart">Il gruppo verrà rimosso al riavvio</string>
+    <string name="group_will_be_removed_after_restart">Il gruppo verrà rimosso al prossimo riavvio dell\'app.</string>
     <string name="show_guide_line">Mostra le linee guida</string>
     <string name="show_arrows_on_the_map">Mostra le frecce nella mappa</string>
     <string name="show_passed">Mostra i precedenti</string>
@@ -2944,9 +2944,9 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="waypoints_added_to_map_markers">Punti intermedi aggiunti ai marcatori della mappa</string>
 	<string name="wrong_format">Formato errato</string>
     <string name="release_2_8">\\022 Rivisti completamente i marcatori, le indicazioni e la pianificazione del percorso 
-\n
-\n • Lo strumento di misura della distanza offre l\'aderisci alle strade e il salvataggio come traccia
-\n
+\n 
+\n • Lo strumento di misura della distanza offre l\'aderisci alle strade e il salvataggio come traccia 
+\n 
 \n • OsmAnd Live: correzione di errori, dati aggiornati sul server ogni 30 minuti, aggiornamenti implementati nella navigazione
 \n
 \n</string>
@@ -2989,4 +2989,17 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="rename_marker">Rinomina il marcatore</string>
     <string name="looking_for_tracks_with_waypoints">Cerco tracce con punti intermedi</string>
     <string name="shared_string_more_without_dots">Altro</string>
+    <string name="empty_state_osm_edits">Crea o modifica oggetti OSM</string>
+    <string name="empty_state_osm_edits_descr">Crea o modifica PDI OSM, apri o commenta note OSM, e invia tracce GPX registrate.</string>
+    <string name="shared_string_deleted">Eliminato</string>
+    <string name="shared_string_edited">Modificato</string>
+    <string name="shared_string_added">Aggiunto</string>
+    <string name="marker_activated">Marcatore %s attivato.</string>
+    <string name="one_tap_active_descr">Tappa sul marcatore nella mappa, muovilo al primo posto nei marcatori attivi, senza aprire il menù contestuale.</string>
+    <string name="one_tap_active">Un solo tap attivo</string>
+    <string name="empty_state_av_notes">Prendi delle note!</string>
+    <string name="empty_state_av_notes_desc">Aggiungi note audio, video o foto ad ogni punto sulla mappa, utilizzando il widget o il menù contestuale.</string>
+    <string name="notes_by_date">Note ordinate per data</string>
+    <string name="by_date">Per data</string>
+    <string name="by_type">Per ordine alfabetico</string>
     </resources>
