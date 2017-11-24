@@ -1272,6 +1272,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					dashboardView.setVisibility(View.GONE);
 					content.setVisibility(View.GONE);
 					toolbar.setVisibility(View.GONE);
+					content.setTranslationX(0);
+					content.setTranslationY(0);
+					toolbar.setTranslationY(0);
 				}
 			}
 		});
