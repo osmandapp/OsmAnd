@@ -1212,7 +1212,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 
-	// To animate view slide out from right to left
+	// To bounce animate view
 	private void open(boolean animation, int[] animationCoordinates) {
 		if (animation) {
 			this.animationCoordinates = animationCoordinates;
@@ -1221,7 +1221,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			dashboardView.findViewById(R.id.animateContent).setVisibility(View.VISIBLE);
 			dashboardView.findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
 		}
-		this.animationCoordinates = animationCoordinates;
 	}
 
 	private void animateDashboard(final boolean show) {
