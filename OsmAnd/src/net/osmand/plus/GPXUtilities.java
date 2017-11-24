@@ -57,6 +57,8 @@ public class GPXUtilities {
 
 	private final static NumberFormat latLonFormat = new DecimalFormat("0.00#####", new DecimalFormatSymbols(
 			new Locale("EN", "US")));
+	private final static NumberFormat decimalFormat = new DecimalFormat("#.###", new DecimalFormatSymbols(
+			new Locale("EN", "US")));
 
 	public static class GPXExtensions {
 		Map<String, String> extensions = null;
@@ -1299,7 +1301,7 @@ public class GPXUtilities {
 		serializer.attribute(null, "lon", latLonFormat.format(p.lon)); //$NON-NLS-1$ //$NON-NLS-2$
 
 		if (!Double.isNaN(p.ele)) {
-			writeNotNullText(serializer, "ele", (float) p.ele + "");
+			writeNotNullText(serializer, "ele", decimalFormat.format(p.ele));
 		}
 		if (p.time != 0) {
 			writeNotNullText(serializer, "time", format.format(new Date(p.time)));
@@ -1316,10 +1318,10 @@ public class GPXUtilities {
 			writeNotNullText(serializer, "cmt", p.comment);
 		}
 		if (!Double.isNaN(p.hdop)) {
-			writeNotNullText(serializer, "hdop", p.hdop + "");
+			writeNotNullText(serializer, "hdop", decimalFormat.format(p.hdop));
 		}
 		if (p.speed > 0) {
-			p.getExtensionsToWrite().put("speed", p.speed + "");
+			p.getExtensionsToWrite().put("speed", decimalFormat.format(p.speed));
 		}
 		writeExtensions(serializer, p);
 	}
