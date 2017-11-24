@@ -1,6 +1,10 @@
 package net.osmand.plus.views;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -656,13 +660,64 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomOutButton.setOnLongClickListener(listener);
 	}
 
-	public void showMapControls() {
-		mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
+	public void showMapControlsIfHidden() {
+		if (!isMapControlsVisible()) {
+			showMapControls();
+		}
+	}
+
+	private void showMapControls() {
+		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
+			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
+		} else {
+			animateMapControls(true);
+		}
 		AndroidUtils.showNavBar(mapActivity);
 	}
 
 	public void hideMapControls() {
-		mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
+		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
+			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
+		} else {
+			animateMapControls(false);
+		}
+	}
+
+	private void animateMapControls(final boolean show) {
+		final View mapHudButtonsOverlay = mapActivity.findViewById(R.id.MapHudButtonsOverlay);
+		View mapHudButtonsTop = mapActivity.findViewById(R.id.MapHudButtonsOverlayTop);
+		View mapHudButtonsBottom = mapActivity.findViewById(R.id.MapHudButtonsOverlayBottom);
+		View mapHudButtonsQuickActions = mapActivity.findViewById(R.id.MapHudButtonsOverlayQuickActions);
+		AnimatorSet set = new AnimatorSet();
+		float transTopInitial = show ? -mapHudButtonsTop.getHeight() : 0;
+		float transTopFinal = show ? 0 : -mapHudButtonsTop.getHeight();
+		float transBottomInitial = show ? mapHudButtonsBottom.getHeight() : 0;
+		float transBottomFinal = show ? 0 : mapHudButtonsBottom.getHeight();
+		float alphaInitial = show ? 0f : 1f;
+		float alphaFinal = show ? 1f : 0f;
+		set.setDuration(300).playTogether(
+				ObjectAnimator.ofFloat(mapHudButtonsTop, View.TRANSLATION_Y, transTopInitial, transTopFinal),
+				ObjectAnimator.ofFloat(mapHudButtonsBottom, View.TRANSLATION_Y, transBottomInitial, transBottomFinal),
+				ObjectAnimator.ofFloat(mapHudButtonsQuickActions, View.ALPHA, alphaInitial, alphaFinal)
+		);
+		set.addListener(new AnimatorListenerAdapter() {
+			@Override
+			public void onAnimationStart(Animator animation) {
+				super.onAnimationStart(animation);
+				if (show) {
+					mapHudButtonsOverlay.setVisibility(View.VISIBLE);
+				}
+			}
+
+			@Override
+			public void onAnimationEnd(Animator animation) {
+				super.onAnimationEnd(animation);
+				if (!show) {
+					mapHudButtonsOverlay.setVisibility(View.INVISIBLE);
+				}
+			}
+		});
+		set.start();
 	}
 
 	public void setMapControlsVisibility(boolean visible) {

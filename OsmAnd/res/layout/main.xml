@@ -46,11 +46,14 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true">
 
-            <include layout="@layout/map_hud_top"/>
+            <include layout="@layout/map_hud_top"
+                android:id="@+id/MapHudButtonsOverlayTop"/>
 
-            <include layout="@layout/map_hud_bottom"/>
+            <include layout="@layout/map_hud_bottom"
+                android:id="@+id/MapHudButtonsOverlayBottom"/>
 
-            <include layout="@layout/map_hud_quick_actions"/>
+            <include layout="@layout/map_hud_quick_actions"
+                android:id="@+id/MapHudButtonsOverlayQuickActions"/>
         </FrameLayout>
 
         <FrameLayout
