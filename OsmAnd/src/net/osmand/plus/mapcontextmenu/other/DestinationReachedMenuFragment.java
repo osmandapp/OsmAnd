@@ -51,7 +51,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismissMenu(true);
+				dismissMenu();
 			}
 		});
 
@@ -62,7 +62,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 		closeImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismissMenu(true);
+				dismissMenu();
 			}
 		});
 
@@ -82,7 +82,10 @@ public class DestinationReachedMenuFragment extends Fragment {
 						getMapActivity().getContextMenu().close();
 					}
 				}
-				dismissMenu(true);
+				OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
+				settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
+				getMapActivity().getMapActions().stopNavigationWithoutConfirm();
+				dismissMenu();
 			}
 		});
 
@@ -96,7 +99,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 				TargetPointsHelper helper = getMapActivity().getMyApplication().getTargetPointsHelper();
 				TargetPoint target = helper.getPointToNavigate();
 
-				dismissMenu(false);
+				dismissMenu();
 
 				if (target != null) {
 					helper.navigateToPoint(new LatLon(target.getLatitude(), target.getLongitude()),
@@ -130,7 +133,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 					newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
 					startActivityForResult(newIntent, 0);
 				}
-				dismissMenu(false);
+				dismissMenu();
 			}
 		});
 
@@ -182,12 +185,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 				.addToBackStack(TAG).commitAllowingStateLoss();
 	}
 
-	public void dismissMenu(boolean restoreAppMode) {
-		if (restoreAppMode) {
-			OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
-			settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
-		}
-		getMapActivity().getMapActions().stopNavigationWithoutConfirm();
+	public void dismissMenu() {
 		getMapActivity().getSupportFragmentManager().popBackStack();
 	}
 
