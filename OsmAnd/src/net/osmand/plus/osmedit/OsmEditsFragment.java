@@ -21,7 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -64,7 +63,6 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	private OsmEditingPlugin plugin;
 
 	private View footerView;
-	private View headerView;
 	private View emptyView;
 
 	private List<OsmPoint> osmEdits = new ArrayList<>();
@@ -131,6 +129,12 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	@Override
 	public ArrayAdapter<?> getAdapter() {
 		return listAdapter;
+	}
+
+	private void recreateAdapterData() {
+		listAdapter.clear();
+		listAdapter.addAll(createItemsList());
+		listAdapter.notifyDataSetChanged();
 	}
 
 	private void selectAll() {
@@ -285,7 +289,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 	private void updateSelectionMode(ActionMode m) {
 		updateSelectionTitle(m);
-		refreshSelectAll();
+		listAdapter.notifyDataSetChanged();
 	}
 
 	private void updateSelectionTitle(ActionMode m) {
@@ -296,28 +300,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		}
 	}
 
-	private void refreshSelectAll() {
-		View view = getView();
-		if (view == null) {
-			return;
-		}
-		CheckBox selectAll = (CheckBox) view.findViewById(R.id.check_box);
-		for (int i = 0; i < osmEdits.size(); i++) {
-			OsmPoint point = osmEdits.get(i);
-			if (!osmEditsSelected.contains(point)) {
-				selectAll.setChecked(false);
-				return;
-			}
-		}
-		selectAll.setChecked(true);
-	}
-
 	private void enableSelectionMode(boolean selectionMode) {
 		listAdapter.setSelectionMode(selectionMode);
 		//noinspection ConstantConditions
-		if (headerView != null) {
-			headerView.findViewById(R.id.check_box).setVisibility(selectionMode ? View.VISIBLE : View.GONE);
-		}
 		((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode && AndroidUiHelper.isOrientationPortrait(getActivity()));
 		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 	}
@@ -348,6 +333,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	}
 
 	private void fetchData() {
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		osmEdits = new ArrayList<>();
 		List<OpenstreetmapPoint> l1 = plugin.getDBPOI().getOpenstreetmapPoints();
 		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmbugsPoints();
@@ -357,32 +343,24 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		listView.setDivider(null);
 		listView.setEmptyView(emptyView);
 
-		if (osmEdits.size() > 0) {
-			if (footerView == null) {
-				footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, listView, false);
-				listView.addFooterView(footerView);
-			}
-			if (headerView == null) {
-				headerView = getActivity().getLayoutInflater().inflate(R.layout.list_item_header, listView, false);
-				listView.addHeaderView(headerView);
-				((TextView) headerView.findViewById(R.id.title_text_view)).setText(R.string.your_edits);
-				final CheckBox selectAll = (CheckBox) headerView.findViewById(R.id.check_box);
-				selectAll.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (selectAll.isChecked()) {
-							selectAll();
-						} else {
-							deselectAll();
-						}
-						updateSelectionTitle(actionMode);
-					}
-				});
-			}
+		if (osmEdits.size() > 0 && footerView == null && portrait) {
+			footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, listView, false);
+			listView.addFooterView(footerView);
 		}
-		listAdapter = new OsmEditsAdapter(getMyApplication(), osmEdits);
+		List<Object> items = createItemsList();
+		listAdapter = new OsmEditsAdapter(getMyApplication(), items);
 		listAdapter.setSelectedOsmEdits(osmEditsSelected);
 		listAdapter.setAdapterListener(new OsmEditsAdapter.OsmEditsAdapterListener() {
+			@Override
+			public void onHeaderCheckboxClick(boolean checked) {
+				if (checked) {
+					selectAll();
+				} else {
+					deselectAll();
+				}
+				updateSelectionTitle(actionMode);
+			}
+
 			@Override
 			public void onItemSelect(OsmPoint point, boolean checked) {
 				if (checked) {
@@ -403,7 +381,17 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 				openPopUpMenu(note);
 			}
 		});
+		listAdapter.setPortrait(portrait);
 		listView.setAdapter(listAdapter);
+	}
+
+	private List<Object> createItemsList() {
+		List<Object> items = new ArrayList<>();
+		if (!osmEdits.isEmpty()) {
+			items.add(OsmEditsAdapter.TYPE_HEADER);
+			items.addAll(osmEdits);
+		}
+		return items;
 	}
 
 	private void showBugDialog(final OsmNotesPoint point) {
@@ -527,7 +515,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 						osmEdits.remove(osmPoint);
 					}
 				}
-				listAdapter.notifyDataSetChanged();
+				recreateAdapterData();
 			}
 		};
 		dialog.show(getActivity().getSupportFragmentManager(), ProgressDialogFragment.TAG);
@@ -546,7 +534,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 	private void deletePoint(OsmPoint osmPoint) {
 		osmEdits.remove(osmPoint);
-		listAdapter.notifyDataSetChanged();
+		recreateAdapterData();
 	}
 
 	private void notifyDataSetChanged() {

@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.support.v4.app.Fragment;
 
 import net.osmand.data.Amenity;
@@ -9,7 +8,6 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
@@ -31,9 +29,11 @@ public class FavouritePointMenuController extends MenuController {
 
 		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
 		final MapMarker mapMarker = markersHelper.getMapMarker(fav);
-
 		if (mapMarker != null) {
-			MapMarkerMenuController.createMarkerButtons(this, mapActivity, mapMarker);
+			MapMarkerMenuController markerMenuController =
+					new MapMarkerMenuController(mapActivity, mapMarker.getPointDescription(mapActivity), mapMarker);
+			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
+			leftSubtitleButtonController = markerMenuController.getLeftSubtitleButtonController();
 		}
 	}
 

@@ -13,6 +13,7 @@ import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -40,6 +41,7 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.context_menu_card_dialog, container, false);
+		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
 		if (dialog.getType() == ContextMenuCardDialog.CardDialogType.MAPILLARY) {
 			view.findViewById(R.id.dialog_layout)
 					.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.mapillary_action_bar));
@@ -117,11 +119,6 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 			return R.color.status_bar_mapillary;
 		}
 		return -1;
-	}
-
-	@Override
-	protected boolean isFullScreenAllowed() {
-		return false;
 	}
 
 	public static void showInstance(ContextMenuCardDialog menu) {
