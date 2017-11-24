@@ -196,7 +196,7 @@ public class NotesFragment extends OsmAndListFragment {
 			NotesSortByMode sortByMode = getMyApplication().getSettings().NOTES_SORT_BY_MODE.get();
 			if (sortByMode.isByDate()) {
 				res.add(NotesAdapter.TYPE_DATE_HEADER);
-				res.addAll(sortItemsByDateDescending(recs));
+				res.addAll(sortRecsByDateDescending(recs));
 			} else if (sortByMode.isByType()) {
 				List<Recording> audios = new LinkedList<>();
 				List<Recording> photos = new LinkedList<>();
@@ -221,7 +221,7 @@ public class NotesFragment extends OsmAndListFragment {
 	private void addToResIfNotEmpty(List<Object> res, List<Recording> recs, int header) {
 		if (!recs.isEmpty()) {
 			res.add(header);
-			res.addAll(recs);
+			res.addAll(sortRecsByDateDescending(recs));
 		}
 	}
 
@@ -317,7 +317,7 @@ public class NotesFragment extends OsmAndListFragment {
 		listAdapter.notifyDataSetChanged();
 	}
 
-	private List<Recording> sortItemsByDateDescending(List<Recording> recs) {
+	private List<Recording> sortRecsByDateDescending(List<Recording> recs) {
 		Collections.sort(recs, new Comparator<Recording>() {
 			@Override
 			public int compare(Recording first, Recording second) {

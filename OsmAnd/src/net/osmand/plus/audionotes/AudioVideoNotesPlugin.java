@@ -1581,12 +1581,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void updateRecordControl(final MapActivity mapActivity, final File f) {
 		recordControl.setText(app.getString(R.string.shared_string_control_stop), "");
 		recordControl.setIcons(R.drawable.widget_icon_av_active, R.drawable.widget_icon_av_active);
-		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-		if (!recordControl.isVisible()) {
-			recordControl.setExplicitlyVisible(true);
-			mil.recreateControls();
-			mapActivity.getMapView().refreshMap(true);
-		}
 		recordControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1599,10 +1593,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (!recordingDone) {
 			if (!restart || !stopMediaRecording(true)) {
 				recordingDone = true;
-				if (!recordControl.isVisible()) {
-					recordControl.setExplicitlyVisible(false);
-					mapActivity.getMapLayers().getMapInfoLayer().recreateControls();
-				}
 				stopMediaRecording(false);
 				if (recordControl != null) {
 					setRecordListener(recordControl, mapActivity);
