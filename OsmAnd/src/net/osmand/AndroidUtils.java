@@ -284,9 +284,11 @@ public class AndroidUtils {
 		decorView.setSystemUiVisibility(uiOptions);
 	}
 
-	public static int[] getViewLocation(View view) {
+	public static int[] getCenterViewCoordinates(View view) {
 		int[] coordinates = new int[2];
 		view.getLocationOnScreen(coordinates);
+		coordinates[0] += view.getWidth() / 2;
+		coordinates[1] += view.getHeight() / 2;
 		return coordinates;
 	}
 
