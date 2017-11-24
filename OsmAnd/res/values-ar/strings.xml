@@ -2843,4 +2843,9 @@
     <string name="tap_on_map_to_hide_interface">وضع الشاشة الكاملة</string>
     <string name="show_on_top_bar">اظهار في الشريط العلوي</string>
     <string name="mark_passed">تعيين كمتجاوز</string>
+    <string name="empty_state_osm_edits">إنشاء أو تعديل أشياء OSM</string>
+    <string name="empty_state_osm_edits_descr">إنشاء أو تعديل OSM POI، فتح أو التعليق على ملاحظات OSM والمساهمة بملفات GPX مسجلة.</string>
+    <string name="shared_string_deleted">تم حذفه</string>
+    <string name="shared_string_edited">تم تعديله</string>
+    <string name="shared_string_added">تمت إضافة</string>
     </resources>
