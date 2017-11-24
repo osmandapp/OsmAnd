@@ -1426,7 +1426,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				setTranslationY(listBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
 			}
 		}
-		if (portrait) {
+		if (portrait && toolbar.getVisibility() == View.VISIBLE) {
 			setTranslationY(toolbar, Math.min(0, -scrollY + mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight));
 		}
 		updateColorOfToolbar(scrollY);
