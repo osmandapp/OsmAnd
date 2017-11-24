@@ -86,7 +86,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			
 			@Override
 			public void onClick(View v) {
-				dashboard.setDashboardVisibility(true, DashboardType.WAYPOINTS, AndroidUtils.getViewLocation(v));
+				dashboard.setDashboardVisibility(true, DashboardType.WAYPOINTS, AndroidUtils.getCenterViewCoordinates(v));
 			}
 		});
 		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.items);

@@ -513,7 +513,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					@Override
 					public void onClick(View v) {
 						setDashboardVisibility(true, flatNow ? DashboardType.WAYPOINTS : DashboardType.WAYPOINTS_FLAT,
-								previousVisibleType, false, AndroidUtils.getViewLocation(v));
+								previousVisibleType, false, AndroidUtils.getCenterViewCoordinates(v));
 					}
 				});
 			}
@@ -664,7 +664,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		markersSelectionButton.onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				setDashboardVisibility(true, DashboardType.MAP_MARKERS_SELECTION, AndroidUtils.getViewLocation(v));
+				setDashboardVisibility(true, DashboardType.MAP_MARKERS_SELECTION, AndroidUtils.getCenterViewCoordinates(v));
 			}
 		};
 

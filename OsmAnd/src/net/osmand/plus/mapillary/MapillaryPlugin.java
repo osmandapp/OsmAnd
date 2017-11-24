@@ -151,7 +151,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
 				if (itemId == R.string.mapillary) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY, AndroidUtils.getViewLocation(view));
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY, AndroidUtils.getCenterViewCoordinates(view));
 					return false;
 				}
 				return true;

@@ -228,7 +228,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     private void animateWidget(final boolean show) {
         AnimatorSet set = new AnimatorSet();
         List<Animator> animators = new ArrayList<>();
-        int[] animationCoordinates = AndroidUtils.getViewLocation(quickActionButton);
+        int[] animationCoordinates = AndroidUtils.getCenterViewCoordinates(quickActionButton);
         int centerX = quickActionsWidget.getWidth() / 2;
         int centerY = quickActionsWidget.getHeight() / 2;
         float initialValueX = show ? animationCoordinates[0] - centerX : 0;

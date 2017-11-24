@@ -253,7 +253,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				MapActivity.clearPrevActivityIntent();
-				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, AndroidUtils.getViewLocation(v));
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, AndroidUtils.getCenterViewCoordinates(v));
 			}
 		});
 
@@ -414,7 +414,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onClick(View v) {
 				MapActivity.clearPrevActivityIntent();
 				if (dash) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD, AndroidUtils.getViewLocation(v));
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD, AndroidUtils.getCenterViewCoordinates(v));
 				} else {
 					mapActivity.openDrawer();
 				}
