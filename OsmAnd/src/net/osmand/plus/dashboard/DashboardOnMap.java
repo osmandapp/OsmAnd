@@ -1259,6 +1259,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			@Override
 			public void onAnimationStart(Animator animation) {
 				super.onAnimationStart(animation);
+				listView.setVerticalScrollBarEnabled(false);
 				if (show) {
 					content.setVisibility(View.VISIBLE);
 					toolbar.setVisibility(View.VISIBLE);
@@ -1268,6 +1269,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			@Override
 			public void onAnimationEnd(Animator animation) {
 				super.onAnimationEnd(animation);
+				listView.setVerticalScrollBarEnabled(true);
 				if (!show) {
 					dashboardView.setVisibility(View.GONE);
 					content.setVisibility(View.GONE);
