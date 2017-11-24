@@ -294,6 +294,7 @@ public class MapRenderRepositories {
 		if(library == null) {
 			return;
 		}
+		boolean useLive = context.getSettings().USE_OSM_LIVE_FOR_ROUTING.get();
 		for (String mapName : files.keySet()) {
 			BinaryMapIndexReader fr = files.get(mapName);
 			if (fr != null && (fr.containsMapData(leftX, topY, rightX, bottomY, zoom) || 
@@ -301,7 +302,7 @@ public class MapRenderRepositories {
 				if (!nativeFiles.contains(mapName)) {
 					long time = System.currentTimeMillis();
 					nativeFiles.add(mapName);
-					if (!library.initMapFile(fr.getFile().getAbsolutePath())) {
+					if (!library.initMapFile(fr.getFile().getAbsolutePath(), useLive)) {
 						continue;
 					}
 					log.debug("Native resource " + mapName + " initialized " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$
