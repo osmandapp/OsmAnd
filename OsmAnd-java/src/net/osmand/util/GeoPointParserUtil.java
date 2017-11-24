@@ -171,6 +171,14 @@ public class GeoPointParserUtil {
 		assertGeoPoint(actual, new GeoParsedPoint(qstr));
 		assertUrlEquals(url, actual.getGeoUriString());
 
+		// geo:?q=Paris
+		qstr = "Paris";
+		url = "geo:?q=" + URLEncoder.encode(qstr);
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qstr));
+		assertUrlEquals("geo:0,0?q=" + URLEncoder.encode(qstr), actual.getGeoUriString());
+
 		// geo:0,0?q=760 West Genesee Street Syracuse NY 13204
 		qstr = "760 West Genesee Street Syracuse NY 13204";
 		url = "geo:0,0?q=" + qstr;
@@ -1247,11 +1255,12 @@ public class GeoPointParserUtil {
 			final Pattern positionPattern = Pattern.compile(
 					"([+-]?\\d+(?:\\.\\d+)?),\\s?([+-]?\\d+(?:\\.\\d+)?)");
 			final Matcher positionMatcher = positionPattern.matcher(positionPart);
-			if (!positionMatcher.find()) {
-				return null;
+			double lat = 0.0;
+			double lon = 0.0;
+			if (positionMatcher.find()) {
+				lat = Double.valueOf(positionMatcher.group(1));
+				lon = Double.valueOf(positionMatcher.group(2));
 			}
-			double lat = Double.valueOf(positionMatcher.group(1));
-			double lon = Double.valueOf(positionMatcher.group(2));
 
 			int zoom = GeoParsedPoint.NO_ZOOM;
 			String searchRequest = null;
