@@ -2424,7 +2424,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="si_mi_meters">Mil/Meter</string>
     <string name="get_for">Få for %1$s</string>
     <string name="get_for_month">Få for %1$s måned</string>
-    <string name="osm_live_banner_desc">Få ubegrænset hentning af kort og kort opdateringer mere end en gang om måneden: ugentligt, dagligt eller hver time.</string>
+    <string name="osm_live_banner_desc">Få ubegrænset hentning - og opdatering af kort mere end en gang om måneden: ugentligt, dagligt eller hver time.</string>
     <string name="osmand_plus_banner_desc">Ubegrænset adgang til kort, opdateringer og Wikipedia udvidelse.</string>
     <string name="get_it">Få det</string>
     <string name="osm_live_payment_desc">Abonnementsafgift opkræves hver måned. Kan opsiges på Google Play når som helst.</string>
