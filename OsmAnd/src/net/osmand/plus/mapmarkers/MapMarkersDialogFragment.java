@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -265,10 +264,10 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 	public void blurStatusBar() {
 		if (Build.VERSION.SDK_INT >= 21) {
-			Window window = getDialog().getWindow();
-			if (window != null) {
-				statusBarColor = window.getStatusBarColor();
-				window.setStatusBarColor(ContextCompat.getColor(getActivity(),
+			Dialog dialog = getDialog();
+			if (dialog != null && dialog.getWindow() != null) {
+				statusBarColor = dialog.getWindow().getStatusBarColor();
+				dialog.getWindow().setStatusBarColor(ContextCompat.getColor(getActivity(),
 						lightTheme ? R.color.status_bar_dim_light : R.color.status_bar_dim_dark));
 			}
 		}
@@ -276,9 +275,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 	public void clearStatusBar() {
 		if (Build.VERSION.SDK_INT >= 21 && statusBarColor != -1) {
-			Window window = getDialog().getWindow();
-			if (window != null) {
-				window.setStatusBarColor(statusBarColor);
+			Dialog dialog = getDialog();
+			if (dialog != null && dialog.getWindow() != null) {
+				dialog.getWindow().setStatusBarColor(statusBarColor);
 			}
 		}
 	}

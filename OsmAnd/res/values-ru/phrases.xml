@@ -3662,4 +3662,7 @@
 	<string name="poi_enforcement_check">Требование: контроль</string>
 	<string name="poi_payment_account_cards_no">Карточки не принимаются</string>
 	<string name="poi_payment_prepaid_ticket_yes">Предоплаченные билеты</string>
+
+	<string name="poi_depot">Депо</string>
+
 	</resources>

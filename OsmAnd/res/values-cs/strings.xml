@@ -2845,4 +2845,16 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="tap_on_map_to_hide_interface">Režim celé obrazovky</string>
     <string name="show_on_top_bar">Zobrazit na horní liště</string>
     <string name="mark_passed">Značka prošlá</string>
+    <string name="empty_state_osm_edits_descr">Vytvořit nebo upravit OSM POI, otevřít nebo okomentovat OSM poznámky a přispět zaznamenanými GPX soubory.</string>
+    <string name="shared_string_deleted">Odstraněné</string>
+    <string name="shared_string_edited">Upravené</string>
+    <string name="shared_string_added">Přidané</string>
+    <string name="marker_activated">Značka %s aktivována.</string>
+    <string name="one_tap_active_descr">Klepněte na značku na mapě, přesuňte ji na první místo v aktivních značkách bez otevření kontextové nabídky.</string>
+    <string name="empty_state_av_notes">Dělejte si poznámky!</string>
+    <string name="empty_state_av_notes_desc">Přidejte audio, video nebo fotografickou poznámku pro každý bod na mapě, pomocí nástroje nebo kontextového menu.</string>
+    <string name="notes_by_date">Poznámky podle datumu</string>
+    <string name="by_date">Podle datumu</string>
+    <string name="by_type">Podle typu</string>
+    <string name="empty_state_markers_active_desc">Klepnutím nebo přidržením označte místa, pak klepněte na tlačítko značky s vlajkou.</string>
     </resources>
