@@ -2982,7 +2982,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="marker_save_as_track">経路を保存</string>
     <string name="move_to_history">履歴に移動</string>
     <string name="group_will_be_removed_after_restart">グループは再起動後に削除されます</string>
-    <string name="show_guide_line">ガイド線を表示</string>
+    <string name="show_guide_line">案内線を表示</string>
     <string name="show_arrows_on_the_map">マップ上に矢印を表示</string>
     <string name="remove_from_map_markers">マップマーカーを削除</string>
     <string name="descendingly">降順</string>
@@ -3066,4 +3066,13 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="add_track_to_markers_descr">マーカーに経由地点を追加する経路を選択します。(経由地点を含む経路のみリストアップされます)</string>
     <string name="add_favourites_group_to_markers_descr">マーカーに追加するお気に入りのカテゴリを選択します。</string>
     <string name="show_on_top_bar">画面上部のバーに表示</string>
+    <string name="add_group_descr">お気に入りや経路内の経由地点をグループでインポートできます。</string>
+    <string name="empty_state_markers_groups">グループでインポート</string>
+    <string name="empty_state_markers_groups_desc">お気に入りや経路内の経由地点をマーカーとしてグループで追加できます。</string>
+    <string name="shared_string_two">二つ</string>
+    <string name="shared_string_one">一つ</string>
+    <string name="show_guide_line_descr">現在地からアクティブマーカーへの方向を示す案内線を表示させます。</string>
+    <string name="show_arrows_descr">画面上にアクティブマーカーの方向を示す矢印を、一つあるいは二つ表示させます。</string>
+    <string name="distance_indication_descr">アクティブマーカーまでの距離を示す案内をどこに表示するか選択してください。</string>
+    <string name="active_markers_descr">マーカーの方向と距離を示す案内をいくつ表示させるか選択してください。</string>
     </resources>
