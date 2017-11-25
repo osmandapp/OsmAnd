@@ -140,7 +140,7 @@ Lon %2$s</string>
     <string name="osm_settings">Edición OSM</string>
     <string name="debugging_and_development">Desarrollo de OsmAnd</string>
     <string name="back_to_map">Volver al mapa</string>
-    <string name="share_note">Compartir nota de OSM</string>
+    <string name="share_note">Compartir nota multimedia</string>
     <string name="location_on_map">Ubicación:\n Lat %1$s\n Lon %2$s</string>
     <string name="watch">Ver</string>
     <string name="notes">Notas</string>
@@ -1105,13 +1105,13 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="offline_edition_descr">Usa siempre edición sin conexión.</string>
     <string name="update_poi_does_not_change_indexes">Los cambios de PDIs dentro de la aplicación, no afectan a los archivos del mapa descargados. Estos se guardan en un archivo local.</string>
     <string name="local_openstreetmap_uploading">Subiendo…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} PDIs/Notas de OSM subidos</string>
+    <string name="local_openstreetmap_were_uploaded">{0} PDIs/Notas subidos</string>
     <string name="local_openstreetmap_uploadall">Enviar todos</string>
     <string name="local_openstreetmap_upload">Enviar cambio a OSM</string>
     <string name="local_openstreetmap_delete">Quitar modificación</string>
     <string name="local_openstreetmap_descr_title">Edición asíncrona OSM:</string>
-    <string name="local_openstreetmap_settings">PDIs/Notas de OSM guardados localmente</string>
-    <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDIs/notas de OSM guardadas en la base de datos local.</string>
+    <string name="local_openstreetmap_settings">PDIs/Notas guardados localmente</string>
+    <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDIs/notas guardadas en la base de datos local.</string>
     <string name="live_monitoring_interval_descr">Indica el intervalo de registro en vivo.</string>
     <string name="live_monitoring_interval">Intervalo de registro en vivo</string>
     <string name="live_monitoring_url_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -1909,10 +1909,10 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="osm_edit_removed_note">Nota de OSM borrada</string>
 	<string name="osm_edit_created_note">Nota de OSM creada</string>
 	<string name="osn_bug_name">Nota de OSM</string>
-	<string name="osn_add_dialog_title">Crear informe</string>
+	<string name="osn_add_dialog_title">Crear nota</string>
 	<string name="osn_comment_dialog_title">Añadir comentario</string>
-	<string name="osn_reopen_dialog_title">Reabrir nota de OSM</string>
-	<string name="osn_close_dialog_title">Cerrar nota de OSM</string>
+	<string name="osn_reopen_dialog_title">Reabrir nota</string>
+	<string name="osn_close_dialog_title">Cerrar nota</string>
 	<string name="osn_add_dialog_success">Nota de OSM creada con éxito</string>
 	<string name="osn_add_dialog_error">Error: no se creó la nota de OSM</string>
 	<string name="osn_close_dialog_success">Nota de OSM cerrada con éxito</string>
@@ -2620,7 +2620,7 @@ Proporciona un código completo</string>
     <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, debes comprar e instalar el complemento «Curvas de nivel»</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de ampliación</string>
     <string name="quick_action_showhide_osmbugs_title">Alternar vista de notas de OSM</string>
-    <string name="quick_action_osmbugs_show">Mostrar notas de OSM en el mapa</string>
+    <string name="quick_action_osmbugs_show">Mostrar notas de OSM</string>
     <string name="quick_action_osmbugs_hide">Ocultar notas de OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Al pulsar el botón de acción se mostrarán u ocultarán las notas de OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenados por distancia</string>
@@ -2785,8 +2785,8 @@ Proporciona un código completo</string>
     <string name="make_round_trip_descr">Duplica el punto de inicio y lo añade como destino.</string>
     <string name="make_round_trip">Viaje de ida y vuelta</string>
     <string name="shared_string_navigate">Navegar</string>
-    <string name="osn_modify_dialog_error">Excepción ocurrida: nota de OSM no modificada</string>
-    <string name="osn_modify_dialog_title">Modificar nota de OSM</string>
+    <string name="osn_modify_dialog_error">Excepción ocurrida: nota no modificada</string>
+    <string name="osn_modify_dialog_title">Modificar nota</string>
     <string name="context_menu_item_modify_note">Modificar nota de OSM</string>
     <string name="release_2_8">• Marcadores del mapa totalmente rediseñados con líneas guía y planificación de rutas 
 \n 
@@ -2846,7 +2846,7 @@ Proporciona un código completo</string>
     <string name="looking_for_tracks_with_waypoints">Búsqueda de trazas con puntos de referencia</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta notas de OSM, y contribuye con grabaciones GPX.</string>
+    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta problemas del mapa (notas de OSM), y contribuye con grabaciones GPX.</string>
     <string name="shared_string_deleted">Borrado</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Añadido</string>
