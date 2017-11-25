@@ -1182,4 +1182,50 @@
 	<string name="poi_outdoor_seating_no">אין ישיבה בחוץ</string>
 	<string name="poi_outdoor_seating_terrace">ישיבה בחוץ: מרפסת</string>
 	<string name="poi_outdoor_seating_sidewalk">ישיבה בחוץ: מדרכה</string>
-	</resources>
+	<string name="poi_attraction_maze">מבוך</string>
+	<string name="poi_attraction_roller_coaster">רכבת הרים</string>
+	<string name="poi_attraction_slide">מגלשה</string>
+	<string name="poi_attraction_swing_carousel">קרוסלת נדנדות</string>
+	<string name="poi_attraction_train">רכבת (שעשוע)</string>
+	<string name="poi_attraction_water_slide">מגלשת מים</string>
+
+	<string name="poi_lodging">אכסניה</string>
+	<string name="poi_hotel">בית מלון</string>
+	<string name="poi_guest_house">בית הארחה</string>
+	<string name="poi_hostel">הוסטל</string>
+	<string name="poi_motel">מלון זול</string>
+	<string name="poi_alpine_hut">בקתה הררית</string>
+	<string name="poi_chalet">בקתה אלפינית</string>
+	<string name="poi_apartment">דירה</string>
+	<string name="poi_place_of_worship">בית תפילה</string>
+	<string name="poi_religion_christian">נצרות</string>
+	<string name="poi_religion_jewish">יהדות</string>
+	<string name="poi_religion_muslim">אסלאם</string>
+	<string name="poi_religion_sikh">סיקיזם</string>
+	<string name="poi_religion_buddhist">בודהיזם</string>
+	<string name="poi_religion_hindu">הינודאיזם</string>
+	<string name="poi_religion_shinto">שינטו</string>
+	<string name="poi_religion_taoist">דאואיזם</string>
+	<string name="poi_religion_voodoo">וודו</string>
+	<string name="poi_religion_unitarian_universalist">אוניברסליזם אוניטריאני</string>
+	<string name="poi_religion_multifaith">פוליתאיזם</string>
+	<string name="poi_religion_jain">ג׳ייניזם</string>
+	<string name="poi_religion_spiritualist">ספיריטואליזם</string>
+	<string name="poi_religion_bahai">הדת הבהאית</string>
+	<string name="poi_religion_scientologist">סיינטולוגיה</string>
+	<string name="poi_religion_pagan">עבודת אלילים</string>
+	<string name="poi_religion_tenrikyo">טנריקיו</string>
+	<string name="poi_religion_zoroastrian">זורואסטריות</string>
+
+	<string name="poi_denomination_catholic">נצרות קתולית</string>
+	<string name="poi_denomination_baptist">בפטיזם</string>
+	<string name="poi_denomination_orthodox">אורתודוקסיה</string>
+	<string name="poi_denomination_lutheran">לותרניזם</string>
+	<string name="poi_denomination_jehovahs_witness">עדי יהוה</string>
+	<string name="poi_denomination_episcopal">אפיסקופלי</string>
+	<string name="poi_denomination_shia">אסלאם שיעי</string>
+	<string name="poi_denomination_tibetan">בודהיזם טיבטי</string>
+	<string name="poi_denomination_salvation_army">צבא הישע</string>
+	<string name="poi_depot">מחסן</string>
+
+</resources>
