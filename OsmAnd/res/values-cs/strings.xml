@@ -2850,7 +2850,7 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="shared_string_edited">Upravené</string>
     <string name="shared_string_added">Přidané</string>
     <string name="marker_activated">Značka %s aktivována.</string>
-    <string name="one_tap_active_descr">Klepněte na značku na mapě, přesuňte ji na první místo v aktivních značkách bez otevření kontextové nabídky.</string>
+    <string name="one_tap_active_descr">Klepněte na značku na mapě pro její přesunutí na první místo v aktivních značkách bez otevření kontextové nabídky.</string>
     <string name="empty_state_av_notes">Dělejte si poznámky!</string>
     <string name="empty_state_av_notes_desc">Přidejte audio, video nebo fotografickou poznámku pro každý bod na mapě, pomocí nástroje nebo kontextového menu.</string>
     <string name="notes_by_date">Poznámky podle datumu</string>
