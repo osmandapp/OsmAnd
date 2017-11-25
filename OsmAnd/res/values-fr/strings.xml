@@ -3028,7 +3028,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_edited">Modifié</string>
     <string name="shared_string_added">Ajouté</string>
     <string name="marker_activated">Marque %s activée.</string>
-    <string name="one_tap_active_descr">Appuyez sur une marque présente sur la carte, déplacez-la en première position des marques actives sans ouvrir le menu contextuel.</string>
+    <string name="one_tap_active_descr">Appuyez sur une marque de la carte pour la déplacer en première position des marques actives sans ouvrir le menu contextuel.</string>
     <string name="one_tap_active">Un appui activé</string>
     <string name="empty_state_av_notes">Prenez des notes !</string>
     <string name="empty_state_av_notes_desc">Ajoutez des notes sonores, vidéos ou photo à tout point de la carte en utilisant le gadget ou le menu contextuel.</string>
