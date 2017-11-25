@@ -3,7 +3,7 @@ package net.osmand.plus.osmedit;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.system.Os;
+import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
@@ -157,6 +157,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 	}
 
 	private void bindHeaderViewHolder(final HeaderViewHolder holder) {
+		setupBackground(holder.backgroundView);
 		holder.topDivider.setVisibility(portrait ? View.VISIBLE : View.GONE);
 		holder.title.setText(R.string.your_edits);
 		holder.checkBox.setChecked(isAllSelected());
@@ -176,6 +177,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 	}
 
 	private void bindOsmEditViewHolder(final OsmEditViewHolder holder, final OsmPoint osmEdit, int position) {
+		setupBackground(holder.mainView);
 		holder.titleTextView.setText(getTitle(osmEdit));
 		holder.descriptionTextView.setText(getDescription(osmEdit));
 		Drawable icon = getIcon(osmEdit);
@@ -225,6 +227,12 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 		});
 		boolean showDivider = getItemsCount() > 1 && position != getItemsCount() - 1;
 		holder.bottomDivider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
+	}
+
+	private void setupBackground(View view) {
+		if (!portrait) {
+			view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.color_transparent));
+		}
 	}
 
 	private int getItemsCount() {
@@ -339,12 +347,14 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 	private class HeaderViewHolder {
 		View mainView;
 		View topDivider;
+		View backgroundView;
 		CheckBox checkBox;
 		TextView title;
 
 		HeaderViewHolder(View view) {
 			mainView = view;
 			topDivider = view.findViewById(R.id.top_divider);
+			backgroundView = view.findViewById(R.id.background_view);
 			checkBox = (CheckBox) view.findViewById(R.id.check_box);
 			title = (TextView) view.findViewById(R.id.title_text_view);
 		}

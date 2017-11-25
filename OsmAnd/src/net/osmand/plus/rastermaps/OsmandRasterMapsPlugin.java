@@ -242,7 +242,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
-				int[] viewCoordinates = AndroidUtils.getViewLocation(view);
+				int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
 				if (itemId == R.string.layer_overlay) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.OVERLAY_MAP, viewCoordinates);
 					return false;

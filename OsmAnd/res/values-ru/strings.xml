@@ -938,7 +938,7 @@
     <string name="osb_comment_dialog_author">Автор</string>
     <string name="poi_edit_title">Редактирование POI</string>
     <string name="poi_create_title">Добавление POI</string>
-    <string name="poi_error_poi_not_found">Узел не найден или удобство (amenity) состоит из нескольких узлов, что не поддерживается.</string>
+    <string name="poi_error_poi_not_found">Узел не найден или объект состоит из нескольких узлов, что не поддерживается.</string>
     <string name="poi_remove_confirm_template">Вы действительно хотите удалить {0}?</string>
     <string name="poi_remove_title">Удаление POI</string>
     <string name="poi_remove_success">POI успешно удалена</string>

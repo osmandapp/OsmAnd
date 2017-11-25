@@ -882,7 +882,7 @@ public class MapInfoWidgetsFactory {
 					all.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							map.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS, AndroidUtils.getViewLocation(view));
+							map.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS, AndroidUtils.getCenterViewCoordinates(view));
 						}
 					});
 					remove.setOnClickListener(new OnClickListener() {

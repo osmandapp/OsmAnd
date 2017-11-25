@@ -60,7 +60,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		if (menu == null) {
 			dismiss();
 		}
-		getMapActivity().getMapLayers().getMapControlsLayer().showMapControls();
+		getMapActivity().getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 	}
 
 	@Override

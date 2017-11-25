@@ -116,8 +116,8 @@ public class NativeLibrary {
 		return getRouteDataObjects(rs.region.routeReg, rs.nativeHandler, x31, y31);
 	}
 
-	public boolean initMapFile(String filePath) {
-        return initBinaryMapFile(filePath);
+	public boolean initMapFile(String filePath, boolean useLive) {
+        return initBinaryMapFile(filePath, useLive);
 	}
 
 	public boolean initCacheMapFile(String filePath) {
@@ -160,7 +160,7 @@ public class NativeLibrary {
 
 	protected static native void deleteSearchResult(long searchResultHandle);
 
-	protected static native boolean initBinaryMapFile(String filePath);
+	protected static native boolean initBinaryMapFile(String filePath, boolean useLive);
 
 	protected static native boolean initCacheMapFiles(String filePath);
 

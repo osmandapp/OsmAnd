@@ -513,7 +513,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					@Override
 					public void onClick(View v) {
 						setDashboardVisibility(true, flatNow ? DashboardType.WAYPOINTS : DashboardType.WAYPOINTS_FLAT,
-								previousVisibleType, false, AndroidUtils.getViewLocation(v));
+								previousVisibleType, false, AndroidUtils.getCenterViewCoordinates(v));
 					}
 				});
 			}
@@ -664,7 +664,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		markersSelectionButton.onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				setDashboardVisibility(true, DashboardType.MAP_MARKERS_SELECTION, AndroidUtils.getViewLocation(v));
+				setDashboardVisibility(true, DashboardType.MAP_MARKERS_SELECTION, AndroidUtils.getCenterViewCoordinates(v));
 			}
 		};
 
@@ -893,7 +893,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				mapActivity.getMapView().refreshMap();
 			}
 
-			mapActivity.getMapLayers().getMapControlsLayer().showMapControls();
+			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 			hideActionButton();
 			for (WeakReference<DashBaseFragment> df : fragList) {
 				if (df.get() != null) {
@@ -1212,7 +1212,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 
-	// To animate view slide out from right to left
+	// To bounce animate view
 	private void open(boolean animation, int[] animationCoordinates) {
 		if (animation) {
 			this.animationCoordinates = animationCoordinates;
@@ -1221,7 +1221,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			dashboardView.findViewById(R.id.animateContent).setVisibility(View.VISIBLE);
 			dashboardView.findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
 		}
-		this.animationCoordinates = animationCoordinates;
 	}
 
 	private void animateDashboard(final boolean show) {
@@ -1259,6 +1258,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			@Override
 			public void onAnimationStart(Animator animation) {
 				super.onAnimationStart(animation);
+				listView.setVerticalScrollBarEnabled(false);
 				if (show) {
 					content.setVisibility(View.VISIBLE);
 					toolbar.setVisibility(View.VISIBLE);
@@ -1268,10 +1268,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			@Override
 			public void onAnimationEnd(Animator animation) {
 				super.onAnimationEnd(animation);
+				listView.setVerticalScrollBarEnabled(true);
 				if (!show) {
 					dashboardView.setVisibility(View.GONE);
 					content.setVisibility(View.GONE);
 					toolbar.setVisibility(View.GONE);
+					content.setTranslationX(0);
+					content.setTranslationY(0);
+					toolbar.setTranslationY(0);
 				}
 			}
 		});
@@ -1421,7 +1425,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				setTranslationY(listBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
 			}
 		}
-		if (portrait) {
+		if (portrait && toolbar.getVisibility() == View.VISIBLE) {
 			setTranslationY(toolbar, Math.min(0, -scrollY + mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight));
 		}
 		updateColorOfToolbar(scrollY);

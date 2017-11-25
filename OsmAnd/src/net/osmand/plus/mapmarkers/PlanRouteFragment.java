@@ -362,7 +362,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
 		mapActivity.getMyApplication().getLocationProvider().addLocationListener(this);
-		mapActivity.getMapLayers().getMapControlsLayer().showMapControls();
+		mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 	}
 
 	@Override

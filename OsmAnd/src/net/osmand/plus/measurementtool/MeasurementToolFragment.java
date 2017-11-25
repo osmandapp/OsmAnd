@@ -460,7 +460,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		getMapActivity().getMapLayers().getMapControlsLayer().showMapControls();
+		getMapActivity().getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 	}
 
 	@Override

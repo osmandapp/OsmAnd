@@ -19,9 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.RouteLayer;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -130,7 +128,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
-				int[] viewCoordinates = AndroidUtils.getViewLocation(view);
+				int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
 				if (itemId == R.string.srtm_plugin_name) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONTOUR_LINES, viewCoordinates);
 					return false;

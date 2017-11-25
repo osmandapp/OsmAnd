@@ -913,7 +913,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
 		}
 		menu.updateControlsVisibility(true);
-		getMapActivity().getMapLayers().getMapControlsLayer().showMapControls();
+		getMapActivity().getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 	}
 
 	@Override

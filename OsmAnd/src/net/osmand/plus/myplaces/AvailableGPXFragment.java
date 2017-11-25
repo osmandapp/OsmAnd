@@ -332,12 +332,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_trip_day : R.drawable.ic_empty_state_trip_night);
 		Button importButton = (Button) emptyView.findViewById(R.id.import_button);
-		importButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				addTrack();
-			}
-		});
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			importButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					addTrack();
+				}
+			});
+		} else {
+			importButton.setVisibility(View.GONE);
+		}
 		if (this.adapter != null) {
 			listView.setAdapter(this.adapter);
 		}
