@@ -3035,4 +3035,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="notes_by_date">Notes par date</string>
     <string name="by_date">Par date</string>
     <string name="by_type">Par type</string>
+    <string name="modify_the_search_query">Modifier la recherche.</string>
     </resources>
