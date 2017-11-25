@@ -2779,4 +2779,5 @@
     <string name="notes_by_date">Заметки по дате</string>
     <string name="by_date">По дате</string>
     <string name="by_type">По типу</string>
+    <string name="modify_the_search_query">Изменить поисковый запрос.</string>
     </resources>
