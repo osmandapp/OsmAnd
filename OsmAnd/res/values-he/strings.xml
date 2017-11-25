@@ -160,7 +160,8 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">נקודת החנייה</string>
-	<string name="osmand_parking_plugin_description">תוסף זה מאפשר לך לאחסן את מיקום הרכב שחנית.</string>
+	<string name="osmand_parking_plugin_description">תוסף מיקום החנייה מאפשר לך לזכור איפה רכבך חנה וכמה זמן נותר לחנייה (אם יש מגבלת זמן).
+\nהמיקום והשעה מופיעים בלוח הבקרה של OsmAnd וגם בחלונית על מסך המפה. ניתן להוסיף התרעה ליומן של Android כתזכורת.</string>
 	<string name="osmand_parking_plugin_name">מיקום החנייה</string>
 	<string name="context_menu_item_add_parking_point">סימון כמיקום החנייה</string>
 	<string name="context_menu_item_delete_parking_point">מחיקת סימון חנייה</string>
@@ -203,7 +204,7 @@
 	
 	
 	
-	<string name="osmand_development_plugin_description">הצגת הגדרות לתכונות פיתוח או ניפוי שגיאות כגון ניווט מונפש או הצגת ביצועי עיבוד התמונה.</string>
+	<string name="osmand_development_plugin_description">תוסף זה מציג הגדרות פיתוח וניפוי שגיאות כגון בדיקה או הדמיה של ניתוב, ביצועי עיבוד התמונה או התרעות קוליות. הגדרות אלו מיועדות למפתחים ואינן נחוצות למשתמשים על פי רוב.</string>
 	<string name="plugins_screen">מנהל התוספים</string>
 	
 	<string name="prefs_plugins_descr">התוספים מאפשרים הגדרות במצב מומחה ומספקים תכונות נוספות</string>
@@ -595,7 +596,7 @@
 	<string name="daynight_mode_night">לילה</string>
 	<string name="daynight_mode_auto">זריחה/שקיעה</string>
 	<string name="daynight_mode_sensor">חיישן אור</string>
-	<string name="daynight_descr">נא לבחור כלל למצבי יום/לילה</string>
+	<string name="daynight_descr">נא לבחור כלל להחלפה בין מצבי יום/לילה.</string>
 	<string name="daynight">מצב יום/לילה</string>
 	<string name="download_files_question">האם להוריד {0} קבצים ({1} מ״ב)?</string>
 	<string name="items_were_selected">נבחרו {0} פריטים</string>
@@ -610,7 +611,7 @@
 	<string name="select_max_zoom_preload_area">יש לבחור את רמת התקריב המרבית כדי לטעון מראש</string>
 	<string name="maps_could_not_be_downloaded">לא ניתן להוריד מפה זאת</string>
 	<string name="continuous_rendering">עיבוד תמונה רציף</string>
-	<string name="continuous_rendering_descr">הצגת עיבוד תמונה רציף במקום תמונה אחת בכל פעם</string>
+	<string name="continuous_rendering_descr">הצגת עיבוד תמונה רציף במקום תמונה אחת בכל פעם.</string>
 	<string name="rendering_exception">אירעה שגיאה בעת עיבוד האיזור הנבחר</string>
 	<string name="show_point_options">שימוש במיקום…</string>
 	<string name="renderer_load_sucess">תכונת העיבוד נטענה בהצלחה</string>
@@ -623,18 +624,18 @@
 	<string name="phone">טלפון</string>
 	<string name="download_type_to_filter">יש להקליד כדי לסנן</string>
 	<string name="use_high_res_maps">תצוגה ברזולוציה גבוהה</string>
-	<string name="use_high_res_maps_descr">אין למתוח (או לטשטש) אריחי מפה בתצוגות בצפיפות גבוהה</string>
+	<string name="use_high_res_maps_descr">אין למתוח (או לטשטש) אריחי מפה בתצוגות בצפיפות גבוהה.</string>
 	
-	<string name="context_menu_item_search_transport">חיפוש תחבורה</string>
+	<string name="context_menu_item_search_transport">חיפוש תחבורה ציבורית</string>
 	<string name="transport_searching_transport">תוצאות תחבורה (אין יעד):</string>
 	<string name="transport_searching_route">תוצאות תחבורה ({0} ליעד):</string>
 	
 	<string name="transport_search_again">איפוס חיפוש התחבורה</string>
 	
-	<string name="voice">קול</string>
+	<string name="voice">קול מוקלט</string>
 	<string name="no_vector_map_loaded">המפות הווקטוריות לא נטענו</string>
 	<string name="map_route_by_gpx">ניווט באמצעות GPX</string>
-	<string name="gpx_files_not_found">קובצי ה־GPX לא נמצאו בתיקייה ‎/tracks</string>
+	<string name="gpx_files_not_found">לא נמצאו קובצי GPX בתיקיית המסלולים</string>
 	<string name="layer_gpx_layer">דרך ה־GPX…</string>
 	<string name="error_reading_gpx">שגיאה בקריאת נתוני ה־GPX</string>
 	<string name="vector_data">מפות וקטוריות בלתי מקוונות</string>
@@ -646,7 +647,7 @@
 	<string name="rotate_map_compass_opt">למצפן</string>
 	<string name="rotate_map_bearing_opt">לכיוון התנועה</string>
 	<string name="rotate_map_none_opt">לא לסובב (הצפון למעלה)</string>
-	<string name="rotate_map_to_bearing_descr">יש לבחור את יישור מסך המפה</string>
+	<string name="rotate_map_to_bearing_descr">יש לבחור את יישור מסך המפה.</string>
 	<string name="rotate_map_to_bearing">יישור המפה</string>
 	<string name="show_route">פרטי המסלול</string>
 	<string name="fav_imported_sucessfully">המועדפים יובאו בהצלחה</string>
@@ -682,7 +683,7 @@
 	<string name="transport_route_distance">מרחק המסלול</string>
 	<string name="transport">תחבורה</string>
 	<string name="shared_string_ok">אישור</string>
-	<string name="show_transport_over_map_description">הצגת תחנות תחבורה ציבורית במפה</string>
+	<string name="show_transport_over_map_description">הצגת תחנות תחבורה ציבורית במפה.</string>
 	<string name="show_transport_over_map">הצגת תחנות תחבורה</string>
 	<string name="hello">יישום הניווט OsmAnd</string>
 	<string name="layer_poi">נ״ע…</string>
@@ -761,9 +762,9 @@
 	<string name="search_offline_address">בלתי מקוון</string>
 	<string name="search_online_address">אינטרנט</string>
 	<string name="max_level_download_tile">תקריב מרבי מקוון</string>
-	<string name="max_level_download_tile_descr">נא לבחור את רמת התקריב במרבית להורדה עבור אריחי מפה מקוונים</string>
+	<string name="max_level_download_tile_descr">נא לבחור את רמת התקריב המרבית להורדת אריחי מפה מקוונים.</string>
 	<string name="route_general_information">סך כל המרחק: %1$s, זמן הנסיעה: %2$d שע׳ %3$d דק׳.</string>
-	<string name="router_service_descr">נא לבחור בשירות ניווט מקוון או בלתי מקוון</string>
+	<string name="router_service_descr">בחירה בשירות ניווט מקוון או בלתי מקוון.</string>
 	<string name="router_service">שירות ניווט</string>
 	<string name="sd_dir_not_accessible">תיקיית אחסון הנתונים בכרטיס ה־SD אינה נגישה!</string>
 	<string name="download_question">האם להוריד {0} - {1} ?</string>
@@ -819,10 +820,10 @@
 	
 	
 	
-	<string name="use_online_routing_descr">שימוש באינטרנט כדי לחשב מסלול</string>
+	<string name="use_online_routing_descr">שימוש באינטרנט כדי לחשב מסלול.</string>
 	<string name="use_online_routing">שימוש בניווט מקוון</string>
-	<string name="osm_settings_descr">נא לציין הגדרות Openstreetmap.org‏ (OSM) הנדרשות לשליחות אל OSM</string>
-	<string name="data_settings_descr">נא לציין שפה, הורדה/רענון של הנתונים</string>
+	<string name="osm_settings_descr">נא לציין הגדרות Openstreetmap.org‏ (OSM) הנדרשות לשליחות אל OSM.</string>
+	<string name="data_settings_descr">הגדרת שפה, הורדה/רענון של הנתונים.</string>
 	<string name="data_settings">נתונים</string>
 	
 	<string name="osm_settings">עריכה ב־OSM</string>
@@ -841,7 +842,7 @@
 	
 	
 	<string name="shared_string_add_to_favorites">הוספה למועדפים</string>
-	<string name="use_english_names_descr">נא לבחור בין שמות מקומיים לאנגליים</string>
+	<string name="use_english_names_descr">בחירה בין שמות מקומיים ללועזיים.</string>
 	<string name="use_english_names">שימוש בשמות באנגלית במפה</string>
 	<string name="app_settings">הגדרות היישום</string>
 	<string name="search_address">חיפוש אחר כתובת</string>
@@ -850,7 +851,7 @@
 	<string name="choose_city">נא לבחור בעיר או במיקוד</string>
 	<string name="ChooseCountry">נא לבחור במדינה</string>
 	<string name="show_view_angle">הצגת כיוון הצפייה</string>
-	<string name="map_view_3d_descr">הפעלת הצגה תלת־ממדית של המפה</string>
+	<string name="map_view_3d_descr">הפעלת הצגה תלת־ממדית של המפה.</string>
 	<string name="map_view_3d">הצגת המפה בתלת־ממד</string>
 	<string name="show_poi_over_map_description">הצגת נ״ע על גבי המפה (שימוש במסנן האחרון שנבחר)</string>
 	<string name="show_poi_over_map">הצגת נ״ע</string>
@@ -1022,10 +1023,10 @@
     <string name="av_def_action_audio">הקלטת שמע</string>
     <string name="av_widget_action_descr">בחירת פעולת הווידג׳ט כבררת המחדל</string>
     <string name="av_widget_action">פעולת הווידג׳ט כבררת המחדל</string>
-    <string name="av_video_format_descr">נא לבחור תבנית פלט וידאו</string>
+    <string name="av_video_format_descr">נא לבחור את תבנית פלט הווידאו.</string>
     <string name="av_video_format">תבנית פלט וידאו</string>
-    <string name="av_use_external_recorder_descr">להשתמש במקליט המערכת עבור וידאו</string>
-    <string name="av_use_external_recorder">להשתמש במקליט חיצוני</string>
+    <string name="av_use_external_recorder_descr">שימוש במקליט המערכת עבור וידאו.</string>
+    <string name="av_use_external_recorder">שימוש במקליט חיצוני</string>
     <string name="av_settings_descr">הגדרת תצורת השמע והווידאו</string>
     <string name="av_settings">הגדרות שמע/וידאו</string>
     <string name="recording_error">אירעה שגיאה בזמן ההקלטה</string>
@@ -1042,7 +1043,7 @@
     <string name="av_def_action_picture">צילום תמונה</string>
     <string name="recording_context_menu_precord">צילום תמונה</string>
     <string name="stop_routing_confirm">האם אכן לעצור את הניווט?</string>
-    <string name="clear_dest_confirm">האם אכן למחוק את נקודת היעד?</string>
+    <string name="clear_dest_confirm">למחוק את נקודת היעד (ואת נקודות הביניים)?</string>
     <string name="precise_routing_mode_descr">יש להפעיל כדי לחשב נתיבים מדויקים ללא סטיות. עדיין קיימת הגבלת מרחק ואטיות.</string>
     <string name="precise_routing_mode">ניתוב מדויק (אלפא)</string>
     <string name="local_indexes_cat_av">נתוני שמע/וידאו</string>
@@ -1051,14 +1052,14 @@
 	
     <string name="download_hillshade_maps">מפות צל מדומה</string>
     
-    <string name="av_use_external_camera_descr">שימוש ביישום המערכת לצילום</string>
+    <string name="av_use_external_camera_descr">שימוש ביישום המערכת לצילום תמונות.</string>
     <string name="av_use_external_camera">שימוש ביישום מצלמה</string>
     <string name="index_name_openmaps">OpenMaps אירופה</string>
     
     <string name="max_speed_none">אין</string>
     <string name="prefer_motorways">העדפת כבישים סלולים</string>
 	<string name="prefer_in_routing_title">העדפה…</string>
-	<string name="prefer_in_routing_descr">העדפת כבישים סלולים</string>
+	<string name="prefer_in_routing_descr">העדפת כבישים סלולים.</string>
     <string name="av_def_action_choose">נא לבחור בקשה</string>
     <string name="item_checked">לאחר בדיקה</string>
     <string name="item_unchecked">ללא בדיקה</string>
@@ -1077,7 +1078,7 @@
     <string name="monitoring_settings_descr">ניתן להגדיר כיצד לשמור את הטיולים שלך.</string>
     
     
-    <string name="choose_osmand_theme_descr">בחירת ערכת העיצוב של היישום</string>
+    <string name="choose_osmand_theme_descr">בחירת ערכת העיצוב של היישום.</string>
     <string name="choose_osmand_theme">ערכת עיצוב ליישום</string>
     <string name="accessibility_options">אפשרויות נגישות</string>
     <string name="select_address_activity">נא לבחור בכתובת</string>
@@ -2212,4 +2213,123 @@
     <string name="average_speed">מהירות ממוצעת</string>
     <string name="shared_string_time_moving">זמן תנועה</string>
     <string name="shared_string_max">מרבי</string>
+    <string name="give_permission">הענקת הרשאות</string>
+    <string name="allow_access_location">לאפשר גישה למיקום</string>
+    <string name="first_usage_greeting">קבלת הנחיות ואיתור מקומות חדשים ללא חיבור לאינטרנט</string>
+    <string name="search_my_location">איתור המיקום שלי</string>
+    <string name="no_update_info_desc">לא לחפש עדכוני גרסה או הנחות שקשורות ב־OsmAnd.</string>
+    <string name="no_update_info">לא להציג עדכונים</string>
+    <string name="update_all_maps_now">לעדכן את כל המפות כעת?</string>
+    <string name="clear_tile_data">מחיקת כל האריחים</string>
+    <string name="routing_attr_short_way_name">דרך חסכונית בדלק</string>
+    <string name="routing_attr_short_way_description">שימוש בדרך חסכונית בדלק (בד״כ קצרה יותר).</string>
+    <string name="replace_favorite_confirmation">להחליף את המועדף %1$s?</string>
+    <string name="rendering_attr_hideOverground_name">עצמים מעל הקרקע</string>
+    <string name="shared_string_change">שינוי</string>
+    <string name="get_started">יסודות</string>
+    <string name="route_stops_before">%1$s תחנות לפני</string>
+    <string name="coords_search">חיפוש נקודות ציון</string>
+    <string name="advanced_coords_search">חיפוש נקודות ציון מתקדם</string>
+    <string name="back_to_search">חזרה לחיפוש</string>
+    <string name="confirmation_to_delete_history_items">להסיר את הפריטים הנבחרים מההיסטוריה?</string>
+    <string name="show_something_on_map">הצגת %1$s במפה</string>
+    <string name="dist_away_from_my_location">לחפש את %1$s בכל זאת</string>
+    <string name="share_history_subject">שותף דרך OsmAnd</string>
+    <string name="search_categories">קטגוריות</string>
+    <string name="postcode">מיקוד</string>
+    <string name="shared_string_from">מאת</string>
+    <string name="city_type_district">מחוז</string>
+    <string name="city_type_neighbourhood">שכונה</string>
+    <string name="map_widget_search">חיפוש</string>
+    <string name="shared_string_is_open_24_7">פתוח 24/7</string>
+    <string name="storage_directory_card">כרטיס זיכרון</string>
+    <string name="coords_format">תבנית נקודות ציון</string>
+    <string name="coords_format_descr">תבנית לנקודות ציון גאוגרפיות.</string>
+    <string name="current_track">מסלול נוכחי</string>
+    <string name="map_widget_battery">עצמת הסוללה</string>
+    <string name="change_markers_position">החלפת מיקום הסמן</string>
+    <string name="access_disable_wrong_direction_recalc_descr">מניעת חישוב נתיב אוטומטי בזמן תנועה בכיוון הנגדי.</string>
+    <string name="access_smart_autoannounce">הכרזה אוטומטית חכמה</string>
+    <string name="access_default_color">צבע בררת מחדל</string>
+    <string name="access_category_choice">בחירת קטגוריה</string>
+    <string name="access_hint_enter_name">נא להקליד שם</string>
+    <string name="access_hint_enter_category">נא להקליד קטגוריה</string>
+    <string name="access_hint_enter_description">נא להקליד תיאור.</string>
+    <string name="access_map_linked_to_location">המפה מקושרת למיקום</string>
+    <string name="access_collapsed_list">רשימה מצומצמם</string>
+    <string name="access_expanded_list">רשימה מורחבת</string>
+    <string name="access_empty_list">רשימה ריקה</string>
+    <string name="access_tree_list">רשימת עץ</string>
+    <string name="access_shared_string_not_installed">לא מותקן</string>
+    <string name="access_widget_expand">הרחבה</string>
+    <string name="access_shared_string_navigate_up">ניווט למעלה</string>
+    <string name="access_sort">מיון</string>
+    <string name="map_mode">מצב מפה</string>
+    <string name="number_of_gpx_files_selected_pattern">נבחרו %s קובצי GPX</string>
+    <string name="no_map_markers_found">נא להוסיף סמני מפה דרך המפה</string>
+    <string name="no_waypoints_found">לא נמצאו נקודות דרך</string>
+    <string name="osmand_parking_minute">דק׳</string>
+    <string name="parking_place_limited">זמן החנייה מוגבל עד</string>
+    <string name="osmand_parking_time_left">נותרו</string>
+    <string name="your_edits">העריכות שלך</string>
+    <string name="waypoint_visit_after">ביקור לאחר</string>
+    <string name="waypoint_visit_before">ביקור לפני</string>
+    <string name="simulate_your_location">הדמיית המיקום שלך</string>
+    <string name="drawer">רשימה שטוחה</string>
+    <string name="short_location_on_map">רוחב %1$s
+\nאורך %2$s</string>
+    <string name="tips_and_tricks_descr">שאלות נפוצות, שינויים אחרונים ועוד.</string>
+    <string name="routing_settings_2">הגדרות ניווט</string>
+    <string name="general_settings_2">הגדרות כלליות</string>
+    <string name="shared_string_ellipsis">…</string>
+    <string name="shared_string_dismiss">התעלמות</string>
+    <string name="shared_string_do_not_use">לא להשתמש</string>
+    <string name="shared_string_enable">הפעלה</string>
+    <string name="shared_string_disable">השבתה</string>
+    <string name="shared_string_enabled">פועל</string>
+    <string name="shared_string_disabled">מושבת</string>
+    <string name="shared_string_selected">נבחר</string>
+    <string name="shared_string_selected_lowercase">נבחרו</string>
+    <string name="shared_string_never">לעולם לא</string>
+    <string name="shared_string_and">וגם</string>
+    <string name="shared_string_or">או</string>
+    <string name="shared_string_select_on_map">בחירה על המפה</string>
+    <string name="shared_string_deselect">ביטול הבחירה</string>
+    <string name="shared_string_deselect_all">ביטול הבחירה</string>
+    <string name="shared_string_delete_all">למחוק הכול</string>
+    <string name="shared_string_share">שיתוף</string>
+    <string name="shared_string_export">יצוא</string>
+    <string name="shared_string_more">עוד…</string>
+    <string name="shared_string_remember_my_choice">שמירת הבחירה שלי</string>
+    <string name="shared_string_unexpected_error">אירעה שגיאה בלתי צפויה</string>
+    <string name="shared_string_action_template">פעולה {0}</string>
+    <string name="shared_string_show">הצגה</string>
+    <string name="shared_string_show_all">להציג הכול</string>
+    <string name="shared_string_collapse">צמצום</string>
+    <string name="shared_string_favorite">מועדף</string>
+    <string name="shared_string_address">כתובת</string>
+    <string name="shared_string_my_location">המיקום שלי</string>
+    <string name="shared_string_my_places">המקומות שלי</string>
+    <string name="shared_string_my_favorites">המועדפים שלי</string>
+    <string name="shared_string_my_tracks">המסלולים שלי</string>
+    <string name="shared_string_currently_recording_track">המסלול מוקלט</string>
+    <string name="shared_string_audio">שמע</string>
+    <string name="shared_string_video">וידאו</string>
+    <string name="shared_string_photo">תמונה</string>
+    <string name="route_points">נקודות נתיב</string>
+    <string name="track_segments">מקטעי מסלול</string>
+    <string name="track_points">נקודות מסלול</string>
+    <string name="record_plugin_name">הקלטת מסלול</string>
+    <string name="plugin_touringview_name">תצוגת מפת סיור</string>
+    <string name="plugin_nautical_name">תצוגת מפה ימית</string>
+    <string name="plugin_ski_name">תצוגת מפת סקי</string>
+    <string name="share_note">שיתוף פתק</string>
+    <string name="world_ski_missing">כדי להציג מפות סקי יש להוריד מפה מיוחדת בלתי מקוונת</string>
+    <string name="nautical_maps_missing">כדי להציג מפות ימיות, יש להוריד מפות מיוחדות בלתי מקוונות</string>
+    <string name="avoid_roads_msg">ניתן לבקש נתיב חלופי על ידי בחירת דרכים בלתי רצויות</string>
+    <string name="routing_attr_no_new_routing_name">כללי ניתוב גרסה 1.9</string>
+    <string name="routing_attr_no_new_routing_description">לא להשתמש בכללי הניתוב שנוספו ב־1.9.</string>
+    <string name="gpx_info_waypoints">נקודות דרך: %1$s</string>
+    <string name="download_wikipedia_maps">ויקיפדיה</string>
+    <string name="voices">הנחיות קוליות</string>
     </resources>
