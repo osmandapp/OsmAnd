@@ -2923,7 +2923,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="shared_string_more_without_dots">Bolš</string>
     <string name="looking_for_tracks_with_waypoints">Pošuk sliadoŭ z šliachavymi kropkami</string>
     <string name="empty_state_osm_edits">Stvaryć abo źmianić OSM abjekty</string>
-    <string name="empty_state_osm_edits_descr">Stvarajcie abo źmianiajcie OSM POI, adkravajcie abo kamentujcie OSM-natatki, a taksama adsyłajcie zapisanyja GPX-fajły.</string>
+    <string name="empty_state_osm_edits_descr">Stvarajcie abo źmianiajcie OSM POI, adkryvajcie abo kamentujcie OSM-natatki, a taksama adsylajcie zapisanyja GPX-fajly.</string>
     <string name="shared_string_deleted">Vydalena</string>
     <string name="shared_string_edited">Adredahavana</string>
     <string name="shared_string_added">Dadadziena</string>
