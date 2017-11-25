@@ -10,12 +10,12 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="empty_state_osm_edits">Create or modify OSM objects</string>
-    <string name="empty_state_osm_edits_descr">Create or modify OSM POI, opening or commenting OSM Notes, and contributing recorded GPX files.</string>
+    <string name="empty_state_osm_edits_descr">Create or modify OSM POI, open or comment OSM Notes, and contribute recorded GPX files.</string>
     <string name="shared_string_deleted">Deleted</string>
     <string name="shared_string_edited">Edited</string>
     <string name="shared_string_added">Added</string>
     <string name="marker_activated">Marker %s activated.</string>
-    <string name="one_tap_active_descr">Tap on marker on the map, move it to the first place in active markers, without opening context menu.</string>
+    <string name="one_tap_active_descr">Tap a marker on the map to move it to the top of the active markers without opening the context menu.</string>
     <string name="one_tap_active">One tap active</string>
     <string name="empty_state_av_notes">Take notes!</string>
     <string name="empty_state_av_notes_desc">Add audio, video or photo note to every point on the map, using widget or context menu.</string>
