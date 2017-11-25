@@ -432,7 +432,7 @@ POIの更新は利用できません</string>
      <string name="empty_route_calculated">空のルートが計算されました</string>
      <string name="new_route_calculated_dist">新しいルートが計算されました、距離</string>
      <string name="arrived_at_destination">目的地に到着しました</string>
-     <string name="invalid_locations">座標の値が不適切です！</string>
+     <string name="invalid_locations">入力された座標の形式が間違っています！</string>
      <string name="go_back_to_osmand">OsmAnd マップに戻る</string>
      <string name="shared_string_close">閉じる</string>
      <string name="loading_data">データをロード中…</string>
@@ -2987,7 +2987,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="remove_from_map_markers">マップマーカーを削除</string>
     <string name="descendingly">降順</string>
     <string name="ascendingly">昇順</string>
-    <string name="date_added">日付の追加</string>
+    <string name="date_added">作成日時</string>
     <string name="order_by">並び順:</string>
     <string name="marker_show_distance_descr">マップ画面でマーカーへの方向と距離を示す方法を選択します:</string>
     <string name="do_not_use_animations">アニメーションを使用しない</string>
@@ -3065,4 +3065,5 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="appearance_on_the_map">マップの外観</string>
     <string name="add_track_to_markers_descr">マーカーに経由地点を追加する経路を選択します。(経由地点を含む経路のみリストアップされます)</string>
     <string name="add_favourites_group_to_markers_descr">マーカーに追加するお気に入りのカテゴリを選択します。</string>
+    <string name="show_on_top_bar">画面上部のバーに表示</string>
     </resources>
