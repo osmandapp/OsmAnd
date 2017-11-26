@@ -371,7 +371,7 @@
   
   <string name="shared_string_next">Наступний</string>
   <string name="shared_string_previous">Попередній</string>
-  <string name="unit_of_length_descr">Змінити одиниці вимірювання довжини.</string>
+  <string name="unit_of_length_descr">Змінити одиниці довжини.</string>
   <string name="unit_of_length">Одиниці довжини</string>
   <string name="si_mi_feet">Милі, фути</string>
   <string name="si_mi_yard">Милі, ярди</string>
@@ -446,7 +446,7 @@
   <string name="voice_is_not_available_title">Голосові дані не знайдено</string>
   <string name="daynight_mode_day">День</string>
   <string name="daynight_mode_night">Ніч</string>
-  <string name="daynight_mode_auto">Схід/захід</string>
+  <string name="daynight_mode_auto">Схід/захід сонця</string>
   <string name="daynight_mode_sensor">Датчик освітленості</string>
   <string name="daynight_descr">Виберіть режим перемикання денного/нічного вигляду мапи.</string>
   <string name="daynight">Денний/нічний режим</string>
@@ -496,10 +496,10 @@
   
   <string name="poi_context_menu_modify">Редагувати POI</string>
   <string name="poi_context_menu_delete">Вилучити POI</string>
-  <string name="rotate_map_compass_opt">За напрямком компаса</string>
+  <string name="rotate_map_compass_opt">За компасом</string>
   <string name="rotate_map_bearing_opt">За напрямком руху</string>
-  <string name="rotate_map_none_opt">Не повертати (північ вгорі)</string>
-  <string name="rotate_map_to_bearing_descr">Виберіть спосіб повороту мапи.</string>
+  <string name="rotate_map_none_opt">Не обертати (північ угорі)</string>
+  <string name="rotate_map_to_bearing_descr">Виберіть спосіб обертання мапи.</string>
   <string name="rotate_map_to_bearing">Орієнтація мапи</string>
   <string name="show_route">Деталі маршруту</string>
   <string name="fav_imported_sucessfully">Точки закладок успішно імпортовано</string>
@@ -1048,7 +1048,7 @@
 	<string name="select_navigation_mode">Виберіть режим пересування</string>
 	<string name="day_night_info_description">Схід: %1$s
 \nЗахід: %2$s</string>
-	<string name="day_night_info">Схід/Захід</string>
+	<string name="day_night_info">Подробиці дня/ночі</string>
 	
 	<string name="map_widget_vector_attributes">Налаштування візуалізації</string>
 	<string name="map_widget_renderer">Стиль мапи</string>
@@ -1061,7 +1061,7 @@
 	<string name="map_widget_fluorescent">Флуоресцентні маршрути</string>
 	<string name="map_widget_show_ruler">Лінійка</string>
 	
-	<string name="map_widget_transparent">Прозорість віджетів</string>
+	<string name="map_widget_transparent">Прозорі віджети</string>
 	
 	
 	<string name="gps_wakeup_interval">Інтервал пробудження GPS: %s</string>
@@ -1575,7 +1575,7 @@
     
     <string name="local_osm_changes_delete_all_confirm">Ви збираєтесь вилучити %1$d змін OSM. Ви впевнені?</string>
     <string name="shared_string_delete_all">Вилучити все</string>
-    <string name="animate_routing_route_not_calculated">Будь ласка, спочатку розрахуйте маршрут</string>
+    <string name="animate_routing_route_not_calculated">Будь ласка, розрахуйте маршрут спершу</string>
     <string name="animate_routing_route">Моделювати за допомогою розрахованого маршруту</string>
     <string name="animate_routing_gpx">Моделювати за допомогою записаного треку GPX</string>
     <string name="shared_string_remember_my_choice">Запам’ятати мій вибір</string>
@@ -1652,8 +1652,8 @@
     <string name="speak_favorites">Довколишні закладки</string>
     <string name="speak_poi">Довколишні POI</string>
     <string name="confirm_every_run">Завжди питати</string>
-	<string name="save_global_track_interval_descr">Оберіть інтервал періодичності запису треку (вмикається через віджет логування GPX).</string>
-	<string name="save_global_track_interval">Загальний інтервал запису</string>
+	<string name="save_global_track_interval_descr">Виберіть інтервал для запису треку (включається через віджет запису GPX на мапі).</string>
+	<string name="save_global_track_interval">Загальний інтервал запису треку</string>
 	<string name="home_button">До початку</string>
     
 	
@@ -1970,7 +1970,7 @@
     <string name="shared_string_update">Оновити</string>
     <string name="rendering_attr_horseRoutes_name">Кінні маршрути</string>
     <string name="no_address_found">Адреса не визначена</string>
-    <string name="shared_string_near">Поруч</string>
+    <string name="shared_string_near">Поблизу</string>
     <string name="shared_string_hide">Приховати</string>
     <string name="av_video_quality_low">Нижча якість</string>
     <string name="av_video_quality_high">Вища якість</string>
@@ -3028,8 +3028,8 @@
     <string name="marker_save_as_track_descr">Експортувати Ваші маркери у файл, який Ви можете вказати тут:</string>
     <string name="marker_save_as_track">Зберегти як трек</string>
     <string name="move_to_history">Перемістити в історію</string>
-    <string name="group_will_be_removed_after_restart">Група буде вилучена після перезапуску</string>
-    <string name="show_guide_line">Показати напрямну лінію</string>
+    <string name="group_will_be_removed_after_restart">Група буде вилучена після перезапуску застосунку.</string>
+    <string name="show_guide_line">Показувати напрямні лінії</string>
     <string name="show_arrows_on_the_map">Показати стрілки на мапі</string>
     <string name="show_passed">Показати проходження</string>
     <string name="hide_passed">Приховати проходження</string>
@@ -3053,8 +3053,8 @@
     <string name="route_is_calculated">Маршрут розраховується</string>
     <string name="round_trip">Подорож туди і назад</string>
     <string name="plan_route_no_markers_toast">Ви повинні додати принаймні один маркер, щоб використовувати цю функцію.</string>
-    <string name="release_2_8">• Повністю перероблені маркери мапи, з направляючими лініями і плануванням маршруту
-\n• Інструмент вимірювання відстані, з прив’язкою до дороги і збереженням точок в якості треку
+    <string name="release_2_8">• Повністю перероблені маркери мапи, з направляючими лініями і плануванням маршруту 
+\n• Інструмент вимірювання відстані, з прив’язкою до дороги і збереженням точок в якості треку 
 \n• OsmAnd Live: виправлення помилок, оновлення даних на сервері кожні 30 хвилин, поновлення враховуються в навігації
 \n
 \n</string>
@@ -3071,7 +3071,7 @@
     <string name="tap_on_map_to_hide_interface">Повноекранний режим</string>
     <string name="show_on_top_bar">Показати на верхній панелі</string>
     <string name="mark_passed">Позначати пройдене</string>
-    <string name="digits_quantity">Кількість цифр</string>
+    <string name="digits_quantity">Кількість десяткових цифр</string>
     <string name="show_number_pad">Показати цифрову панель</string>
     <string name="shared_string_paste">Вставити</string>
     <string name="coordinate_input_accuracy_description">Автоматично перемикається в наступне поле після введення %1$d цифр після десяткової точки</string>
@@ -3079,26 +3079,39 @@
     <string name="go_to_next_field">Перейти до наступного поля</string>
     <string name="rename_marker">Перейменувати маркер</string>
     <string name="appearance_on_the_map">Поява на мапі</string>
-    <string name="add_track_to_markers_descr">Вибрати трек шляхових точок, з яких OsmAnd буде додавати маркери</string>
-    <string name="add_favourites_group_to_markers_descr">Виберіть, яку групу закладок ви хочете додати до маркерів</string>
+    <string name="add_track_to_markers_descr">Виберіть трек для додавання шляхових точок (показані лише треки з точками).</string>
+    <string name="add_favourites_group_to_markers_descr">Виберіть категорію закладок для додавання до маркерів.</string>
     <string name="track_waypoints">Шляхові точки треку</string>
-    <string name="favourites_group">Група закладок</string>
+    <string name="favourites_group">Категорія закладок</string>
     <string name="add_group">Додати групу</string>
-    <string name="add_group_descr">Ви можете додати групу закладок або шляхові точки треку.</string>
-    <string name="empty_state_markers_active">Маркери на мапі!</string>
-    <string name="empty_state_markers_active_desc">Відзначити місце на мапі дотиком.</string>
+    <string name="add_group_descr">Ви можете імпортувати групу з закладок або шляхових точок.</string>
+    <string name="empty_state_markers_active">Створіть маркери на мапі!</string>
+    <string name="empty_state_markers_active_desc">Натисніть на потрібне місце, а потім на прапорець маркера.</string>
     <string name="empty_state_markers_groups">Імпортувати групи</string>
     <string name="empty_state_markers_groups_desc">Ви можете імпортувати групи закладок або шляхові точки треку як маркери.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Маркери, позначені як пройдені, з\'являться на цьому екрані.</string>
     <string name="shared_string_two">Два</string>
     <string name="shared_string_one">Один</string>
-    <string name="show_guide_line_descr">На мапі буде показана лінія, що з\'єднує ваше розташування з розташуванням активних маркерів.</string>
-    <string name="show_arrows_descr">На мапі буде показана одна чи дві стрілки, що вказують напрям на активні маркери.</string>
-    <string name="distance_indication_descr">Виберіть спосіб відображення відстані до активного маркера.</string>
-    <string name="active_markers_descr">Виберіть, скільки індикаторів напрямків ви хотіли б бачити.</string>
+    <string name="show_guide_line_descr">Відображати напрямні лінії від Вашого місця розташування до активних маркерів.</string>
+    <string name="show_arrows_descr">Відображати одну або дві стрілки, що вказують напрямок на активні маркери.</string>
+    <string name="distance_indication_descr">Виберіть спосіб відображення відстані до активних маркерів.</string>
+    <string name="active_markers_descr">Виберіть скільки відображати індикаторів напрямку.</string>
     <string name="shared_string_right">Направо</string>
     <string name="shared_string_left">Наліво</string>
     <string name="looking_for_tracks_with_waypoints">Пошук треків з шляховими точками</string>
     <string name="shared_string_more_without_dots">Більше</string>
+    <string name="empty_state_osm_edits">Створити або змінити OSM-об\'єкти</string>
+    <string name="empty_state_osm_edits_descr">Створюйте або змінюйте цікаві точки в OSM, відкривайте або коментуйте OSM-замітки, а також надсилайте записані GPX-файли.</string>
+    <string name="shared_string_deleted">Вилучено</string>
+    <string name="shared_string_edited">Відредаговано</string>
+    <string name="shared_string_added">Додано</string>
+    <string name="marker_activated">Маркер %s активовано.</string>
+    <string name="one_tap_active_descr">Натискання на маркер на мапі перемістить його на перше місце в списку активних маркерів, не відкриваючи контекстне меню.</string>
+    <string name="one_tap_active">Активація одним натисненням</string>
+    <string name="empty_state_av_notes">Робіть нотатки!</string>
+    <string name="empty_state_av_notes_desc">Додайте аудіо, відео або фото замітку в будь-яку точку на мапі, використовуючи віджет або контекстне меню.</string>
+    <string name="notes_by_date">Примітки за датою</string>
+    <string name="by_date">За датою</string>
+    <string name="by_type">За типом</string>
     </resources>
