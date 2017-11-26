@@ -1811,7 +1811,7 @@
     <string name="osm_changes_added_to_local_edits">تغییرات OSM به بستهٔ تغییرات محلی اضافه شد</string>
    	<string name="mark_to_delete">برای حذف‌کردن علامت بزنید</string>
 	<string name="osmo_grop_name_length_alert">نام گروه باید حداقل ۳حرفی باشد!</string>
-	<string name="local_osm_changes_upload_all_confirm">دارید تعداد %1$d تغییر را به OSM ارسال می‌کنید. مطمئن هستید؟</string>
+	<string name="local_osm_changes_upload_all_confirm">دارید %1$d تغییر را به OSM ارسال می‌کنید. مطمئن هستید؟</string>
     <string name="confirmation_to_clear_history">آیا سوابق را پاک می‌کنید؟</string>
     <string name="delay_to_start_navigation_descr">زمان انتظار برای باقی‌ماندن در صفحهٔ طراحی مسیر را مشخص کنید.</string>
     <string name="delay_to_start_navigation">مسیریابی مرحله‌به‌مرحله را بعد از … شروع کن</string>
@@ -1828,8 +1828,7 @@
     <string name="waypoint_visit_after">بازدیدکردن بعد از</string>
     <string name="waypoint_visit_before">بازدیدکردن قبل از</string>
     <string name="simulate_your_location">شبیه‌سازی موقعیت شما</string>
-    <string name="short_location_on_map">عرض %1$s 
-\nطول %2$s</string>
+    <string name="short_location_on_map">%1$s,%2$s</string>
     <string name="tips_and_tricks_descr">پرسش‌های رایج، تغییرات اخیر و سایر موارد.</string>
     <string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_selected">انتخاب شده</string>
@@ -2380,10 +2379,10 @@
     <string name="navigate_point_olc">کدِ مکانی باز (OLC)</string>
     <string name="navigate_point_olc_info_invalid">کد OLC نامعتبر است
 \n</string>
-    <string name="navigate_point_olc_info_short">کد OLC بیش از حد کوتاه است
-\nلطفاً کد کامل را ارائه دهید</string>
-    <string name="navigate_point_olc_info_area">کد OLC معتبر
-\nمکان متناظر:‬ ‎ %1$s x %2$s</string>
+    <string name="navigate_point_olc_info_short">کد بیش از حد کوتاه است؛
+\nلطفاً کد کامل را بنویسید.</string>
+    <string name="navigate_point_olc_info_area">کد کامل و معتبر است؛
+\nپهنهٔ متناظر: %1$s × %2$s</string>
     <string name="increase_search_radius">محدودهٔ جست‌وجو را بزرگ‌تر کن</string>
     <string name="nothing_found_descr">عبارت جست‌وجو را اصلاح کنید یا اینکه محدودهٔ جست‌وجو را بزرگ‌تر کنید.</string>
     <string name="save_track_to_gpx_globally_headline">ضبط مسیر درصورت تقاضا</string>
@@ -2962,16 +2961,17 @@
     <string name="shared_string_more_without_dots">بیشتر</string>
     <string name="looking_for_tracks_with_waypoints">جست‌وجو برای مسیرهای دارای نقطهٔ بین‌راهی</string>
     <string name="empty_state_osm_edits">ایجاد یا ویرایش اشیای OSM</string>
-    <string name="empty_state_osm_edits_descr">ایجاد یا ویرایش POI، بازگشایی و نظردادن روی توضیحات ویرایشی و آپلود فایل‌های GPX.</string>
+    <string name="empty_state_osm_edits_descr">ایجاد یا ویرایش POIها، بازگشایی توضیحات ویرایشی و نظردادن روی آن‌ها و آپلود فایل‌های ذخیره‌شدهٔ GPX.</string>
     <string name="shared_string_deleted">حذف شد</string>
     <string name="shared_string_edited">ویرایش شد</string>
     <string name="shared_string_added">افزوده شد</string>
     <string name="marker_activated">نشانهٔ %s فعال شد.</string>
-    <string name="one_tap_active_descr">یکی از نشانه‌ها را روی نقشه انتخاب کنید و آن را به بالاترین مکان در میان نشانه‌های فعال ببرید؛ بدون نیاز به بازکردن منوی زمینه.</string>
+    <string name="one_tap_active_descr">یکی از نشانه‌ها را روی نقشه انتخاب کنید و بدون بازکردن منوی زمینه، آن را به بالاترین مکان در میان نشانه‌های فعال ببرید.</string>
     <string name="one_tap_active">فعال‌کردن با یک بار لمس</string>
     <string name="empty_state_av_notes">یادداشت بگذارید!</string>
     <string name="empty_state_av_notes_desc">با استفاده از ابزارک یا منوی زمینه، برای هر نقطه‌ای روی نقشه یادداشت صوتی، عکسی یا ویدئویی بگذارید.</string>
     <string name="notes_by_date">یادداشت‌ها بر اساس تاریخ</string>
     <string name="by_date">بر اساس تاریخ</string>
     <string name="by_type">بر اساس نوع</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     </resources>
