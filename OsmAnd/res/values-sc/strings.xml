@@ -2872,12 +2872,12 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_more_without_dots">Àteru</string>
     <string name="looking_for_tracks_with_waypoints">Chirchende rastas cun puntos de coladòrgiu</string>
     <string name="empty_state_osm_edits">Crea o modìfica ogetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Crea o modìfica PDI OSM, aberende o cummentende notas OSM, e contribuende cun documentos GPX registrados.</string>
+    <string name="empty_state_osm_edits_descr">Crea o modìfica PDI OSM, aberi o cummenta notas OSM, e contribui cun documentos GPX registrados.</string>
     <string name="shared_string_deleted">Iscantzelladu</string>
     <string name="shared_string_edited">Modificadu</string>
     <string name="shared_string_added">Annantu</string>
     <string name="marker_activated">Marcadore %s ativadu.</string>
-    <string name="one_tap_active_descr">Incarca in unu marcadore in sa mapa, moe·lu in sa prima positzione in sos marcadores ativos, chene abèrrere su menù contestuale.</string>
+    <string name="one_tap_active_descr">Incarca in unu marcadore in sa mapa pro lu moere in sa prima positzione in sos marcadores ativos, chene abèrrere su menù contestuale.</string>
     <string name="one_tap_active">Ativatzione cun un\'incarcu</string>
     <string name="empty_state_av_notes">Piga notas!</string>
     <string name="empty_state_av_notes_desc">Annanghe notas sonoras, vìdeos o fotografias a cada puntu in sa mapa, impreende su widget o su menù contestuale.</string>
