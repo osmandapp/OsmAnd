@@ -236,8 +236,8 @@
 	
 	<string name="shared_string_next">下一页</string>
 	<string name="shared_string_previous">上一页</string>
-	<string name="unit_of_length_descr">变更单位的长度和速度</string>
-	<string name="unit_of_length">度量单位</string>
+	<string name="unit_of_length_descr">更改长度单位。</string>
+	<string name="unit_of_length">长度单位</string>
 	<string name="si_mi_feet">英里/英尺</string>
 	<string name="si_mi_yard">英里/码</string>
 	<string name="si_km_m">公里/米</string>
@@ -542,7 +542,7 @@
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ 地图与导航</string>
 	<string name="filterpoi_activity">创建 POI 过滤器</string>
 	<string name="day_night_info_description">日出：%1$s \n日落：%2$s</string>
-	<string name="day_night_info">白天/黑夜信息</string>
+	<string name="day_night_info">日/夜信息</string>
 	
 	<string name="map_widget_vector_attributes">渲染属性</string>
 	<string name="layer_map_appearance">配置屏幕</string>
@@ -1657,7 +1657,7 @@
     <string name="shared_string_is_open_24_7">24小时开放</string>
     <string name="storage_directory_card">存储卡</string>
     <string name="coords_format">坐标格式</string>
-    <string name="coords_format_descr">地理坐标格式</string>
+    <string name="coords_format_descr">地理坐标的格式。</string>
     <string name="app_mode_bus">公交车</string>
     <string name="app_mode_train">火车</string>
     <string name="current_track">当前轨迹</string>
@@ -2350,7 +2350,7 @@
     <string name="keep_informing_descr">定期重新通报导航指令</string>
     <string name="keep_informing">重复导航指令</string>
     <string name="auto_follow_route_navigation_descr">仅在导航时地图视图自动位于屏幕中心。</string>
-    <string name="auto_follow_location_enabled">自动将使用中的地图视图放在屏幕中间。</string>
+    <string name="auto_follow_location_enabled">自动将使用中的地图视图置中。</string>
     <string name="poi_filter_nominatim">按名称在线</string>
     <string name="select_search_position">起点：</string>
     <string name="context_menu_item_search">在这附近搜索</string>
@@ -2648,4 +2648,23 @@
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">半透明粉红色</string>
+    <string name="empty_state_osm_edits">创建或修改 OSM 对象</string>
+    <string name="import_as_gpx">作为 GPX 文件导入</string>
+    <string name="wrong_input">错误输入</string>
+	<string name="enter_new_name">输入新名称</string>
+	<string name="shared_string_back">返回</string>
+	<string name="wrong_format">格式错误</string>
+    <string name="shared_string_road">道路</string>
+    <string name="show_map">显示地图</string>
+    <string name="osn_modify_dialog_title">修改笔记</string>
+    <string name="context_menu_item_modify_note">修改 OSM 笔记</string>
+    <string name="coordinates_format">坐标格式</string>
+    <string name="use_system_keyboard">使用系统键盘</string>
+    <string name="use_location">使用位置</string>
+    <string name="shared_string_sort">排序</string>
+    <string name="coordinate_input">坐标输入</string>
+    <string name="is_saved">已保存</string>
+    <string name="marker_save_as_track">保存为轨迹</string>
+    <string name="today">今天</string>
+    <string name="yesterday">昨天</string>
     </resources>
