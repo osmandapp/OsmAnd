@@ -27,4 +27,34 @@
 
 	<string name="poi_payment_type">Tawsit n usellek</string>
 	<string name="poi_payment_fuel_type">Tikaṛḍiwin n tumast</string>
+	<string name="poi_service_car">Ameẓlu</string>
+	<string name="poi_pump">Tamejγart</string>
+	<string name="poi_city_capital">Tamaneγt</string>
+	<string name="poi_religion_type">Asγan</string>
+	<string name="poi_fee">Taṣerrift</string>
+	<string name="poi_cafeteria">Taneγlust</string>
+	<string name="poi_filling_station">Taγsert n yimeẓla</string>
+	<string name="poi_power">Taẓwert</string>
+	<string name="poi_education">Assegmi</string>
+	<string name="poi_bakery">Taneγrumt</string>
+	<string name="poi_police">Tamsulta</string>
+	<string name="poi_post_office">Tanazent</string>
+	<string name="poi_telephone">Tiliγri</string>
+	<string name="poi_embassy">Tamahelt</string>
+	<string name="poi_town">Tamdint</string>
+	<string name="poi_village">Taddart</string>
+	<string name="poi_hamlet">Taddart tameẓyant</string>
+	<string name="poi_clinic">Taklinit</string>
+	<string name="poi_dentist">Imsujji n tuγmas</string>
+	<string name="poi_company">Taṛmist</string>
+	<string name="poi_townhall">Taγiwant</string>
+	<string name="poi_hotel">Asensu</string>
+	<string name="poi_travel_agent">Tanegga n ussikel</string>
+	<string name="poi_cinema">Ssinima</string>
+	<string name="poi_hairdresser">Anersam</string>
+	<string name="poi_bank">Tabanka</string>
+	<string name="poi_love_hotel">Asensu n tayri</string>
+
+	<string name="poi_payment_telephone_cards_yes">Tikarḍiwin n usiwel</string>
+	<string name="poi_cuisine_bakery">Taneγrumt</string>
 	</resources>
