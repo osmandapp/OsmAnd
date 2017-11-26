@@ -7,7 +7,7 @@
 	<string name="poi_fire_hydrant_position">位置</string>
 	<string name="poi_fire_hydrant_water_source">水源</string>
 	<string name="poi_payment_toll_type">支付类别</string>
-	<string name="poi_fuel_type">类型</string>
+	<string name="poi_fuel_type">燃料类型</string>
 	<string name="poi_payment_fuel_type">加油卡</string>
 	<string name="poi_additional_type">额外的</string>
 	<string name="poi_internet_access_type">互联网接入类型</string>
@@ -16,4 +16,10 @@
 	<string name="poi_subway_station_filter">地铁站</string>
 	<string name="poi_beauty_salon_service">服务</string>
 	<string name="poi_shop_food">便利店和超市</string>
+	<string name="poi_traffic_signals_sound">语音</string>
+	<string name="poi_service_car">服务</string>
+	<string name="poi_brushless">无刷</string>
+	<string name="poi_animal_training_type">类型</string>
+	<string name="poi_embassy_type">类型</string>
+	<string name="poi_clock_option">额外的</string>
 	</resources>
