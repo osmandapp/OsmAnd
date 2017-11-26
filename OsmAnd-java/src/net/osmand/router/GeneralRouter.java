@@ -148,6 +148,10 @@ public class GeneralRouter implements VehicleRouter {
 		return profile;
 	}
 	
+	public boolean getHeightObstacles()
+	{
+		return heightObstacles;
+	}
 
 	public Map<String, RoutingParameter> getParameters() {
 		return parameters;
