@@ -1430,7 +1430,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="loading_smth">Indlæser %1$s…</string>
     <string name="save_as_favorites_points">Gem som en gruppe af favoritter</string>
     <string name="select_destination_and_intermediate_points">Vælg destinationer</string>
-    <string name="layer_amenity_label">IP overlejringsetiketter</string>
+    <string name="layer_amenity_label">Overlejring af IP-etiketter</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kort klassificering med billeder.</string>
     <string name="show_zoom_buttons_navigation_descr">Vis zoom-knapperne under navigation.</string>
     <string name="show_zoom_buttons_navigation">Vis zoom-knapperne</string>
@@ -2956,14 +2956,14 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="show_arrows_descr">Viser en eller to pile der angiver retningen til de aktive markører.</string>
     <string name="distance_indication_descr">Vælg hvordan afstanden til de aktive markører skal vises.</string>
     <string name="active_markers_descr">Vælg hvor mange retningsindikatorer der vises.</string>
-    <string name="add_track_to_markers_descr">Vælg et spor for at tilføje dets rutepunkter til markører (Kun spor med rutepunkter er angivet.)</string>
-    <string name="add_favourites_group_to_markers_descr">Vælg favoritkategori, der skal tilføjes markører.</string>
+    <string name="add_track_to_markers_descr">Vælg et spor for at tilføje dets rutepunkter til markører (Kun spor med rutepunkter vises.)</string>
+    <string name="add_favourites_group_to_markers_descr">Vælg den kategori af favoritter, der skal tilføjes markørerne.</string>
     <string name="track_waypoints">Spor af rutepunkter</string>
-    <string name="favourites_group">Favoritkategorier</string>
+    <string name="favourites_group">Kategori af favoritter</string>
     <string name="add_group">Tilføj en gruppe</string>
     <string name="add_group_descr">Importer grupper fra favoritter eller et spor af rutepunkter.</string>
     <string name="empty_state_markers_active">Opret kortmarkører!</string>
-    <string name="empty_state_markers_active_desc">Langt eller kort tryk på steder, og tryk derefter på markørflag knappen.</string>
+    <string name="empty_state_markers_active_desc">Langt eller kort tryk på steder, og tryk derefter på markørflaget.</string>
     <string name="empty_state_markers_groups">Importer grupper</string>
     <string name="empty_state_markers_groups_desc">Importer favoritgrupper eller et spor af rutepunkter som markører.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
@@ -2978,7 +2978,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_added">Tilføjet</string>
     <string name="marker_activated">Markør %s er aktiveret.</string>
     <string name="one_tap_active_descr">Tryk på en markør på kortet for at flytte den til toppen af de aktive markører uden at åbne kontekstmenuen.</string>
-    <string name="one_tap_active">Et tryk aktiv</string>
+    <string name="one_tap_active">Et tryk aktivering</string>
     <string name="empty_state_av_notes">Tag noter!</string>
     <string name="empty_state_av_notes_desc">Tilføj en lyd-, video- eller fotonote til hvert punkt på kortet ved hjælp af modul- eller kontekstmenu.</string>
     <string name="notes_by_date">Noter efter dato</string>
