@@ -7,7 +7,7 @@
     <string name="shared_string_from">sγur</string>
     <string name="access_hint_enter_name">Ger isem</string>
     <string name="access_hint_enter_category">Ger taggayt</string>
-    <string name="access_hint_enter_description">Ger aglam</string>
+    <string name="access_hint_enter_description">Gred aglam.</string>
     <string name="access_sort">Smizzwer</string>
     <string name="rendering_value_medium_name">Alemmas</string>
     <string name="rendering_value_bold_name">Azuran</string>
@@ -643,4 +643,11 @@
     <string name="empty_state_osm_edits">Rnu neγ ẓreg ifarisen n OSM</string>
     <string name="shared_string_deleted">Ittwakkes</string>
     <string name="shared_string_edited">Ittwaẓreg</string>
+    <string name="search_favorites">Anadi γef imenyafen</string>
+    <string name="select_street">Fren abrid</string>
+    <string name="context_menu_item_open_note">Ldi tamawt n OSM</string>
+    <string name="search_poi_category_hint">Aru kra iw nadi γef kullec</string>
+    <string name="shared_string_my_favorites">Imenyafen-iw</string>
+    <string name="route_tr">Bren γer tama tayeffust t edfreḍ</string>
+    <string name="route_tl">Bren γer tama tazelmaṭ t edfraḍ</string>
     </resources>
