@@ -175,7 +175,7 @@
 	<string name="route_kl">להיצמד לשמאל ולהמשיך</string>
 	<string name="route_kr">להיצמד לימין ולהמשיך</string>
 	<string name="rendering_attr_noPolygons_description">הפיכת כל תכונות הקרקע במפה לשקופות</string>
-	<string name="rendering_attr_noPolygons_name">ללא מצולעים</string>
+	<string name="rendering_attr_noPolygons_name">מצולעים</string>
 	<string name="rendering_attr_appMode_name">מצב עיבוד תמונה</string>
 	<string name="rendering_attr_appMode_description">מיטוב המפה לטובת</string>
 	<string name="rendering_attr_contourLines_description">הצגה החל מרמת תקריב (נדרש קובץ SRTM):</string>
@@ -2332,4 +2332,22 @@
     <string name="gpx_info_waypoints">נקודות דרך: %1$s</string>
     <string name="download_wikipedia_maps">ויקיפדיה</string>
     <string name="voices">הנחיות קוליות</string>
+    <string name="shared_string_start_time">מועד התחלה</string>
+    <string name="shared_string_end_time">מועד סיום</string>
+    <string name="shared_string_color">צבע</string>
+    <string name="select_gpx_folder">בחירת תיקיית מסלולים</string>
+    <string name="file_can_not_be_moved">אי אפשר להעביר את הקובץ.</string>
+    <string name="shared_string_move">העברה</string>
+    <string name="shared_string_tracks">מסלולים</string>
+    <string name="routing_attr_driving_style_name">סגנון נהיגה</string>
+    <string name="route_altitude">תוואי נתיב</string>
+    <string name="altitude_descent">עלייה</string>
+    <string name="altitude_ascent">ירידה</string>
+    <string name="average_altitude">גובה ממוצע</string>
+    <string name="shared_string_time">זמן</string>
+    <string name="total_distance">מרחק כללי</string>
+    <string name="osmo_connect_to_group_id">מזהה קבוצה</string>
+    <string name="osmo_connect">הצטרפות</string>
+    <string name="osmo_groups">קבוצות OsMo</string>
+    <string name="osmo_connect_to_my_nickname">כינוי</string>
     </resources>
