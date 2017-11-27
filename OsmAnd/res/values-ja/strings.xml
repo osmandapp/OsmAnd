@@ -432,7 +432,7 @@ POIの更新は利用できません</string>
      <string name="empty_route_calculated">空のルートが計算されました</string>
      <string name="new_route_calculated_dist">新しいルートが計算されました、距離</string>
      <string name="arrived_at_destination">目的地に到着しました</string>
-     <string name="invalid_locations">座標の値が不適切です！</string>
+     <string name="invalid_locations">入力された座標の形式が間違っています！</string>
      <string name="go_back_to_osmand">OsmAnd マップに戻る</string>
      <string name="shared_string_close">閉じる</string>
      <string name="loading_data">データをロード中…</string>
@@ -1938,7 +1938,7 @@ POIの更新は利用できません</string>
 	<string name="routing_attr_height_name">高さ制限</string>
 	<string name="routing_attr_height_description">ルート上で通行可能な車両の高さを指定します</string>
     <string name="use_fast_recalculation">スマートなルート再計算</string>
-	<string name="use_fast_recalculation_desc">経路が長い場合、最初の部分のみ再計算します</string>
+	<string name="use_fast_recalculation_desc">経路が長い場合、最初の部分のみ再計算します。</string>
 <string name="light_theme">明色</string>
     <string name="dark_theme">暗色</string>
     <string name="lang_pms">ピエモンテ語</string>
@@ -2669,7 +2669,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="quick_action_map_source_action">ソースマップを追加</string>
     <string name="quick_action_map_source_switch">ソースマップは\"%s\"に変更されました。</string>
     <string name="quick_action_btn_tutorial_title">ボタン位置を変更</string>
-    <string name="quick_action_btn_tutorial_descr">長押しとドラッグで画面上のボタンの位置を変更します</string>
+    <string name="quick_action_btn_tutorial_descr">ロングタップとドラッグで画面上のボタンの位置を変更します。</string>
 	<string name="shared_string_action_name">アクション名</string>
 <string name="shared_string_slope">坂</string>
     <string name="add_new_folder">新しいフォルダーを追加</string>
@@ -2745,7 +2745,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="coords_search">座標検索</string>
     <string name="advanced_coords_search">高度な座標検索</string>
     <string name="lang_ber">ベルベル諸語</string>
-    <string name="route_is_too_long_v2">現在のルートが長すぎて計算できない可能性があります。10分以内にルートが決定されなければ、中間目的地を設定してください。</string>
+    <string name="route_is_too_long_v2">現在の経路は計算するには長すぎるようです。10分以内に結果が出なければ中間に目的地(経由地点)を追加してください。</string>
     <string name="osmand_extended_description_part1">" OsmAnd(OSM Automated Navigation Directions～自動ナビ案内)は、『無償利用可、ワールドワイド対応、高品質のOpenStreetMap(OSM)データ』を使用した、地図＆ナビゲーションアプリです。
 \n音声と視覚による案内、POI(Point Of Interest～興味的地点)表示、GPX経路の作成と管理、等高線を使った地形情報(要プラグイン)、ドライブ、サイクリング、徒歩移動各移動手段別のモード、OSMの編集等々に対応。 "</string>
     <string name="osmand_extended_description_part2">"
@@ -2982,12 +2982,12 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="marker_save_as_track">経路を保存</string>
     <string name="move_to_history">履歴に移動</string>
     <string name="group_will_be_removed_after_restart">グループは再起動後に削除されます</string>
-    <string name="show_guide_line">ガイド線を表示</string>
+    <string name="show_guide_line">案内線を表示</string>
     <string name="show_arrows_on_the_map">マップ上に矢印を表示</string>
     <string name="remove_from_map_markers">マップマーカーを削除</string>
     <string name="descendingly">降順</string>
     <string name="ascendingly">昇順</string>
-    <string name="date_added">日付の追加</string>
+    <string name="date_added">作成日時</string>
     <string name="order_by">並び順:</string>
     <string name="marker_show_distance_descr">マップ画面でマーカーへの方向と距離を示す方法を選択します:</string>
     <string name="do_not_use_animations">アニメーションを使用しない</string>
@@ -3065,4 +3065,16 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="appearance_on_the_map">マップの外観</string>
     <string name="add_track_to_markers_descr">マーカーに経由地点を追加する経路を選択します。(経由地点を含む経路のみリストアップされます)</string>
     <string name="add_favourites_group_to_markers_descr">マーカーに追加するお気に入りのカテゴリを選択します。</string>
+    <string name="show_on_top_bar">画面上部のバーに表示</string>
+    <string name="add_group_descr">お気に入りや経路内の経由地点をグループでインポートできます。</string>
+    <string name="empty_state_markers_groups">グループでインポート</string>
+    <string name="empty_state_markers_groups_desc">お気に入りや経路内の経由地点をマーカーとしてグループで追加できます。</string>
+    <string name="shared_string_two">二つ</string>
+    <string name="shared_string_one">一つ</string>
+    <string name="show_guide_line_descr">現在地からアクティブマーカーへの方向を示す案内線を表示させます。</string>
+    <string name="show_arrows_descr">画面上にアクティブマーカーの方向を示す矢印を、一つあるいは二つ表示させます。</string>
+    <string name="distance_indication_descr">アクティブマーカーまでの距離を示す案内をどこに表示するか選択してください。</string>
+    <string name="active_markers_descr">マーカーの方向と距離を示す案内をいくつ表示させるか選択してください。</string>
+    <string name="favourites_group">お気に入りカテゴリ</string>
+    <string name="empty_state_markers_active_desc">任意の場所をロングまたはショートタップで指定後、旗のボタンでマーカーを作成します。</string>
     </resources>

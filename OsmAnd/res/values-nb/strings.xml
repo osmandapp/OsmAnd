@@ -2581,4 +2581,25 @@ Representerer området: %1$s x %2$s</string>
     <string name="coordinate_input_accuracy">%1$d sifre</string>
     <string name="go_to_next_field">Gå til neste felt</string>
     <string name="rename_marker">Gi nytt navn til markør</string>
+    <string name="empty_state_osm_edits_descr">Opprett eller endre OSM-interessepunkter, åpning eller kommentering av OSM-notater, og bidrag av opptegnede GPX-filer.</string>
+    <string name="shared_string_deleted">Slettet</string>
+    <string name="shared_string_edited">Redigert</string>
+    <string name="empty_state_osm_edits">Opprett eller endre OSM-objekter</string>
+    <string name="shared_string_added">Lagt til</string>
+    <string name="marker_activated">Markøren %s er aktivert.</string>
+    <string name="one_tap_active_descr">Trykk på markøren på kartet, flytt det til første steg i aktive markører, uten å åpne bindeleddsinformasjonsmenyen.</string>
+    <string name="one_tap_active">Ett trykk aktiv</string>
+    <string name="empty_state_av_notes">Ta notater.</string>
+    <string name="empty_state_av_notes_desc">Legg til lyd-, video- eller bildentat til hvert punkt på kartet, ved bruk av miniprogram eller bindeleddsinformasjonsmeny.</string>
+    <string name="notes_by_date">Notater etter dato</string>
+    <string name="by_date">Etter dato</string>
+    <string name="by_type">Etter type</string>
+    <string name="shared_string_more_without_dots">Mer</string>
+    <string name="add_favourites_group_to_markers_descr">Velg en favorittkategori å legge til markørene.</string>
+    <string name="show_number_pad">Vis numerisk tastatur</string>
+    <string name="wrong_input">Feil inndata</string>
+	<string name="osn_modify_dialog_title">Endre notat</string>
+    <string name="context_menu_item_modify_note">Endre OSM-notat</string>
+    <string name="rendering_value_darkyellow_name">Mørkegul</string>
+    <string name="rendering_value_translucent_pink_name">Gjennomsiktig rosa</string>
     </resources>

@@ -140,7 +140,7 @@ Lon %2$s</string>
     <string name="osm_settings">Edición OSM</string>
     <string name="debugging_and_development">Desarrollo de OsmAnd</string>
     <string name="back_to_map">Volver al mapa</string>
-    <string name="share_note">Compartir informe</string>
+    <string name="share_note">Compartir nota multimedia</string>
     <string name="location_on_map">Ubicación:\n Lat %1$s\n Lon %2$s</string>
     <string name="watch">Ver</string>
     <string name="notes">Notas</string>
@@ -493,11 +493,7 @@ Lon %2$s</string>
 Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú principal y en el control del mapa. Puedes añadir una notificación al calendario, en el caso de que desees tener un recordatorio al respecto.</string>
     <string name="osmand_distance_planning_plugin_description">Este complemento proporciona un control en la pantalla del mapa, permitiendo crear caminos pulsando en el mapa, o usar o modificar archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX y usarse luego para la orientación.</string>
     <string name="osmand_accessibility_description">Este complemento activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control de ampliación, o el uso de comentarios de conversión de texto a voz, o para el anuncio automático de tu ubicación.</string>
-    <string name="osm_editing_plugin_description">Este complemento puede usarse para hacer contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar informes de problemas de OSM y contribuir con archivos de trazas GPX.
-
-OSM es un proyecto de mapeo global impulsado por la comunidad y de dominio público. Para más detalles, consulta https://openstreetmap.org.
-
-Se aprecia la participación activa, y las contribuciones pueden hacerse directamente desde OsmAnd, especificando las credenciales personales de OSM en la aplicación.</string>
+    <string name="osm_editing_plugin_description">Este complemento puede usarse para hacer contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar notas de OSM y contribuir con archivos de trazas GPX. OSM es un proyecto de mapeo global impulsado por la comunidad y de dominio público. Para más detalles, consulta https://openstreetmap.org. Se aprecia la participación activa, y las contribuciones pueden hacerse directamente desde OsmAnd, especificando las credenciales personales de OSM en la aplicación.</string>
     <string name="osmand_development_plugin_description">Este complemento muestra los ajustes de funciones de desarrollo y depuración para probar la simulación de rutas, el rendimiento del renderizado en pantalla, o las indicaciones por voz. Estos ajustes están destinados para los desarrolladores y no son necesarios para el usuario general.</string>
     <string name="world_ski_missing">Para mostrar mapas de esquí, necesita descargarse el mapa especial sin conexión</string>
     <string name="nautical_maps_missing">Para mostrar mapas náuticos, necesita descargarse el mapa especial sin conexión</string>
@@ -629,7 +625,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="app_mode_motorcycle">Motocicleta</string>
     <string name="app_mode_boat">Barco</string>
     <string name="app_mode_aircraft">Avión</string>
-    <string name="local_osm_changes_delete_all_confirm">¿Quieres borrar %1$d cambio(s) en OSM?</string>
+    <string name="local_osm_changes_delete_all_confirm">Borrarás %1$d cambio(s) en OSM. ¿Continuar?</string>
     <string name="animate_routing_route_not_calculated">Primero calcula la ruta</string>
     <string name="animate_routing_route">Simular, usando la ruta calculada</string>
     <string name="animate_routing_gpx">Simular, usando la traza GPX</string>
@@ -1109,13 +1105,13 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="offline_edition_descr">Usa siempre edición sin conexión.</string>
     <string name="update_poi_does_not_change_indexes">Los cambios de PDIs dentro de la aplicación, no afectan a los archivos del mapa descargados. Estos se guardan en un archivo local.</string>
     <string name="local_openstreetmap_uploading">Subiendo…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} PDIs/Informes subidos</string>
+    <string name="local_openstreetmap_were_uploaded">{0} PDIs/Notas subidos</string>
     <string name="local_openstreetmap_uploadall">Enviar todos</string>
     <string name="local_openstreetmap_upload">Enviar cambio a OSM</string>
     <string name="local_openstreetmap_delete">Quitar modificación</string>
     <string name="local_openstreetmap_descr_title">Edición asíncrona OSM:</string>
-    <string name="local_openstreetmap_settings">PDIs/Informes OSM guardados localmente</string>
-    <string name="local_openstreetmap_settings_descr">Muestra y gestiona informes de problemas y PDIs de OSM guardados en la base de datos local.</string>
+    <string name="local_openstreetmap_settings">PDIs/Notas guardados localmente</string>
+    <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDIs/notas guardadas en la base de datos local.</string>
     <string name="live_monitoring_interval_descr">Indica el intervalo de registro en vivo.</string>
     <string name="live_monitoring_interval">Intervalo de registro en vivo</string>
     <string name="live_monitoring_url_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -1178,7 +1174,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="pref_overlay">Superpuesta / subyacente</string>
     <string name="pref_raster_map">Ajustes de fuente del mapa</string>
     <string name="pref_vector_map">Ajustes del mapa vectorial</string>
-    <string name="delete_confirmation_msg">¿Quieres borrar %1$s?</string>
+    <string name="delete_confirmation_msg">Borrarás %1$s. ¿Continuar?</string>
     <string name="city_type_suburb">Suburbio</string>
     <string name="city_type_hamlet">Aldea</string>
     <string name="city_type_village">Villa</string>
@@ -1215,7 +1211,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="show_more_map_detail">Mostrar más detalle del mapa</string>
     <string name="show_more_map_detail_descr">Muestra detalles del mapa vectorial (caminos, etc.) a niveles inferiores de ampliación.</string>
     <string name="favourites_delete_multiple_succesful">Punto(s) favorito(s) correctamente borrado(s).</string>
-    <string name="favorite_delete_multiple">¿Quieres borrar %1$d favorito(s) y %2$d grupo(s) de favoritos?</string>
+    <string name="favorite_delete_multiple">Borrarás %1$d favorito(s) y %2$d grupo(s) de favoritos. ¿Continuar?</string>
     <string name="favorite_home_category">Inicio</string>
     <string name="favorite_friends_category">Amigos</string>
     <string name="favorite_places_category">Lugares</string>
@@ -1423,7 +1419,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="thanks_yandex_traffic">Gracias a Yandex por la información de tráfico.</string>
     <string name="layer_yandex_traffic">Tráfico Yandex</string>
     <string name="layer_route">Ruta</string>
-    <string name="layer_osm_bugs">Informes de problemas (en línea)</string>
+    <string name="layer_osm_bugs">Notas de OSM (en línea)</string>
     
     <string name="layer_poi">Superposición de PDI…</string>
     <string name="layer_map">Fuente de mapas…</string>
@@ -1645,7 +1641,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="poi_edit_title">Editar PDI</string>
     <string name="poi_create_title">Crear PDI</string>
     <string name="poi_error_poi_not_found">No se encontró el nodo, o el PDI se compone de varios nodos, lo cuál todavía no está soportado.</string>
-    <string name="poi_remove_confirm_template">¿Quieres borrar {0} (añadir comentario)?</string>
+    <string name="poi_remove_confirm_template">Borrarás {0} (añadir comentario). ¿Continuar?</string>
     <string name="poi_remove_title">Borrar PDI</string>
     <string name="poi_remove_success">PDI borrado correctamente</string>
     <string name="poi_action_add">añadir</string>
@@ -1667,7 +1663,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="email">correo electrónico</string>
     <string name="av_camera_focus">Método de enfoque</string>
     <string name="av_camera_focus_descr">Elige el modo de enfoque de la cámara interna.</string>
-    <string name="av_camera_focus_auto">Auto enfoque</string>
+    <string name="av_camera_focus_auto">Enfoque automático</string>
     <string name="av_camera_focus_hiperfocal">Enfoque hiperfocal</string>
     <string name="av_camera_focus_edof">Profundidad de campo extendido (EDOF)</string>
     <string name="av_camera_focus_infinity">Enfoque al infinito</string>
@@ -1699,7 +1695,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="shared_string_show_details">Ver detalles</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importar a OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">¿Quieres borrar %1$d nota(s)?</string>
+    <string name="local_recordings_delete_all_confirm">Borrarás %1$d nota(s). ¿Continuar?</string>
     <string name="disable_recording_once_app_killed">Prevenir grabación independiente</string>
     <string name="disable_recording_once_app_killed_descrp">La grabación GPX se pausará al cerrar la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
     <string name="gps_network_not_enabled">El servicio de ubicación está desactivado. ¿Quieres activarlo?</string>
@@ -1907,20 +1903,20 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="poi_context_menu_modify_osm_change">Modificar cambio OSM</string>
     <string name="osm_edit_modified_poi">PDI de OSM modificado</string>
     <string name="osm_edit_deleted_poi">PDI de OSM borrado</string>
-    <string name="context_menu_item_open_note">Informar problema del mapa</string>
-    <string name="osm_edit_reopened_note">Informe de problema reabierto</string>
-    <string name="osm_edit_commented_note">Informe de problema comentado</string>
-    <string name="osm_edit_removed_note">Informe de problema borrado</string>
-	<string name="osm_edit_created_note">Informe de problema creado</string>
-	<string name="osn_bug_name">Problema del mapa</string>
-	<string name="osn_add_dialog_title">Crear informe</string>
+    <string name="context_menu_item_open_note">Abrir nota de OSM</string>
+    <string name="osm_edit_reopened_note">Nota de OSM reabierta</string>
+    <string name="osm_edit_commented_note">Nota de OSM comentada</string>
+    <string name="osm_edit_removed_note">Nota de OSM borrada</string>
+	<string name="osm_edit_created_note">Nota de OSM creada</string>
+	<string name="osn_bug_name">Nota de OSM</string>
+	<string name="osn_add_dialog_title">Crear nota</string>
 	<string name="osn_comment_dialog_title">Añadir comentario</string>
-	<string name="osn_reopen_dialog_title">Reabrir informe</string>
-	<string name="osn_close_dialog_title">Cerrar informe</string>
-	<string name="osn_add_dialog_success">Informe creado con éxito</string>
-	<string name="osn_add_dialog_error">Error: no se creó el informe</string>
-	<string name="osn_close_dialog_success">El informe se cerró con éxito</string>
-	<string name="osn_close_dialog_error">Error: no se cerró el informe</string>
+	<string name="osn_reopen_dialog_title">Reabrir nota</string>
+	<string name="osn_close_dialog_title">Cerrar nota</string>
+	<string name="osn_add_dialog_success">Nota de OSM creada con éxito</string>
+	<string name="osn_add_dialog_error">Error: no se creó la nota de OSM</string>
+	<string name="osn_close_dialog_success">Nota de OSM cerrada con éxito</string>
+	<string name="osn_close_dialog_error">Error: no se cerró la nota de OSM</string>
 	<string name="shared_string_commit">Confirmar</string>
 	
     <string name="context_menu_item_delete_waypoint">¿Borrar el punto GPX?</string>
@@ -2063,8 +2059,8 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="map_markers_other">Otros marcadores</string>
     <string name="upload_anonymously">Subir anónimamente</string>
     <string name="show_transparency_seekbar">Mostrar barra de transparencia en el mapa</string>
-    <string name="upload_osm_note_description">Puedes subir informes de problemas anónimos o usar tu perfil de OpenStreetMap.org.</string>
-    <string name="upload_osm_note">Subir problema(s) del mapa</string>
+    <string name="upload_osm_note_description">Puedes subir notas de OSM anónimas o usar tu perfil de OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Subir nota(s) de OSM</string>
     <string name="donations">Donaciones</string>
     <string name="number_of_recipients">Número de destinatarios</string>
     <string name="osm_user_stat">Ediciones %1$s de %3$s, posición %2$s</string>
@@ -2328,7 +2324,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="quick_action_take_audio_note">Grabar nota de audio</string>
     <string name="quick_action_take_video_note">Grabar nota de video</string>
     <string name="quick_action_take_photo_note">Tomar nota fotográfica</string>
-    <string name="quick_action_add_osm_bug">Añadir problema de OSM</string>
+    <string name="quick_action_add_osm_bug">Añadir nota de OSM</string>
     <string name="quick_action_navigation_voice">Alternar activación de voz</string>
     <string name="quick_action_navigation_voice_off">Voz desactivada</string>
     <string name="quick_action_navigation_voice_on">Voz activada</string>
@@ -2348,7 +2344,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción añadirá una nota de audio en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Pulsar el botón de acción añadirá una nota de video en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_photo_note_descr">Pulsar el botón de acción añadirá una nota fotográfica en la ubicación central de la pantalla.</string>
-    <string name="quick_action_add_osm_bug_descr">Pulsar el botón de acción añadirá un informe de problema de OSM, en la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_osm_bug_descr">Pulsar el botón de acción añadirá una nota de OSM, en la ubicación central de la pantalla.</string>
     <string name="quick_action_add_poi_descr">Pulsar el botón de acción añadirá un PDI en la ubicación central de la pantalla.</string>
     <string name="quick_action_navigation_voice_descr">Pulsar el botón de acción desactivará o activará las indicaciones por voz durante la navegación.</string>
     <string name="quick_action_add_parking_descr">Pulsar el botón de acción añadirá un lugar de estacionamiento en la ubicación central de la pantalla.</string>
@@ -2623,10 +2619,10 @@ Proporciona un código completo</string>
     <string name="hillshade_menu_download_descr">Para ver el sombreado del relieve en el mapa, debes descargar la superposición del sombreado de esta región.</string>
     <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, debes comprar e instalar el complemento «Curvas de nivel»</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de ampliación</string>
-    <string name="quick_action_showhide_osmbugs_title">Alternar vista de problemas OSM en el mapa</string>
-    <string name="quick_action_osmbugs_show">Mostrar problemas OSM en el mapa</string>
-    <string name="quick_action_osmbugs_hide">Ocultar problemas OSM en el mapa</string>
-    <string name="quick_action_showhide_osmbugs_descr">Al pulsar el botón de acción se mostrarán u ocultarán los informes de problemas OSM en el mapa.</string>
+    <string name="quick_action_showhide_osmbugs_title">Alternar vista de notas de OSM</string>
+    <string name="quick_action_osmbugs_show">Mostrar notas de OSM</string>
+    <string name="quick_action_osmbugs_hide">Ocultar notas de OSM</string>
+    <string name="quick_action_showhide_osmbugs_descr">Al pulsar el botón de acción se mostrarán u ocultarán las notas de OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenados por distancia</string>
     <string name="search_favorites">Buscar favoritos</string>
     <string name="restart_search">Reiniciar búsqueda</string>
@@ -2789,9 +2785,9 @@ Proporciona un código completo</string>
     <string name="make_round_trip_descr">Duplica el punto de inicio y lo añade como destino.</string>
     <string name="make_round_trip">Viaje de ida y vuelta</string>
     <string name="shared_string_navigate">Navegar</string>
-    <string name="osn_modify_dialog_error">Excepción ocurrida: el informe de problema no se modificó</string>
-    <string name="osn_modify_dialog_title">Modificar informe</string>
-    <string name="context_menu_item_modify_note">Modificar informe de problema OSM</string>
+    <string name="osn_modify_dialog_error">Excepción ocurrida: nota no modificada</string>
+    <string name="osn_modify_dialog_title">Modificar nota</string>
+    <string name="context_menu_item_modify_note">Modificar nota de OSM</string>
     <string name="release_2_8">• Marcadores del mapa totalmente rediseñados con líneas guía y planificación de rutas 
 \n 
 \n • La herramienta de medición de distancias permite el ajuste al camino y guardar puntos como una traza 
@@ -2850,12 +2846,12 @@ Proporciona un código completo</string>
     <string name="looking_for_tracks_with_waypoints">Búsqueda de trazas con puntos de referencia</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés (OSM), abre o comenta problemas del mapa (OSM), y contribuye con archivos de grabaciones GPX.</string>
+    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta problemas del mapa (notas de OSM), y contribuye con grabaciones GPX.</string>
     <string name="shared_string_deleted">Borrado</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Añadido</string>
     <string name="marker_activated">Marcador «%s» activado.</string>
-    <string name="one_tap_active_descr">Pulsa sobre el marcador en el mapa y desplázalo al primer lugar en los marcadores activos, sin abrir el menú contextual.</string>
+    <string name="one_tap_active_descr">Pulsa un marcador en el mapa para moverlo al primer lugar de los marcadores activos, sin abrir el menú contextual.</string>
     <string name="one_tap_active">Una pulsación activa</string>
     <string name="empty_state_av_notes">¡Tomar notas multimedia!</string>
     <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto para cada punto del mapa, utilizando el controlador o el menú contextual.</string>

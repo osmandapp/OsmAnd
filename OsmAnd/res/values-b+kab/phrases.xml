@@ -3,9 +3,9 @@
 		<string name="poi_healthcare">Tazmart</string>
 	<string name="poi_fuel_type">Tawsit n tumast</string>
 	<string name="poi_fuel_avia_type">Tawsit n tumast (avia)</string>
-	<string name="poi_clothes_type">Ṣṣenf</string>
-	<string name="poi_shoes_type">Ṣṣenf</string>
-	<string name="poi_fire_hydrant_type">Ṣṣenf</string>
+	<string name="poi_clothes_type">Tawsit</string>
+	<string name="poi_shoes_type">Tawsit</string>
+	<string name="poi_fire_hydrant_type">Tawsit</string>
 	<string name="poi_highway_crossing_type">Ṣṣenf</string>
 	<string name="poi_zoo_type">Ṣṣenf</string>
 	<string name="poi_traffic_signals_sound">Imesli</string>

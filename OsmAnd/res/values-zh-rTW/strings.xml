@@ -2956,7 +2956,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_more_without_dots">更多</string>
     <string name="looking_for_tracks_with_waypoints">尋找軌跡跟航點</string>
     <string name="empty_state_osm_edits">建立或修改 OSM 物件</string>
-    <string name="empty_state_osm_edits_descr">"建立或修改 OSM  的 POI，開啟或備注 OSM 註解，並提供所記錄的 GPX 檔案。"</string>
+    <string name="empty_state_osm_edits_descr">"建立或修改 OSM  的 POI，開啟或評注 OSM 註解，並提供所記錄的 GPX 檔案。"</string>
     <string name="shared_string_deleted">已刪除</string>
     <string name="shared_string_edited">已編輯</string>
     <string name="shared_string_added">已增加</string>
@@ -2967,5 +2967,5 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="notes_by_date">註解按照日期</string>
     <string name="by_date">按照日期</string>
     <string name="by_type">按照類型</string>
-    <string name="one_tap_active_descr">輕點在地圖上的標記，將其移動到活動標記中的第一個地點上，而不需要打開內容選單。</string>
+    <string name="one_tap_active_descr">輕點在地圖上的標記，將其移動到活動標記的頂端，而不用打開內容選單。</string>
     </resources>
