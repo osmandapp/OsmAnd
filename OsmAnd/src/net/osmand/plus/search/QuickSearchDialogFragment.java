@@ -761,7 +761,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		paused = false;
 		hidden = false;
 		if (interruptedSearch) {
-			addMoreButton();
+			addMoreButton(true);
 			interruptedSearch = false;
 		}
 	}
@@ -1066,9 +1066,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 				if (getResultCollection() != null) {
 					updateSearchResult(getResultCollection(), false);
-					if (interruptedSearch || searchUICore.isSearchMoreAvailable(searchUICore.getPhrase())) {
-						addMoreButton();
-					}
+					addMoreButton(searchUICore.isSearchMoreAvailable(searchUICore.getPhrase()));
 				}
 				break;
 		}
@@ -1537,9 +1535,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								searching = false;
 								if (resultListener == null || resultListener.searchFinished(object.requiredSearchPhrase)) {
 									hideProgressBar();
-									if (searchUICore.isSearchMoreAvailable(object.requiredSearchPhrase)) {
-										addMoreButton();
-									}
+									addMoreButton(searchUICore.isSearchMoreAvailable(object.requiredSearchPhrase));
 								}
 							}
 						});
@@ -1741,7 +1737,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	private void addMoreButton() {
+	private void addMoreButton(boolean searchMoreAvailable) {
 		if (!paused && !cancelPrev && mainSearchFragment != null && !isTextEmpty()) {
 			QuickSearchMoreListItem moreListItem =
 					new QuickSearchMoreListItem(app, null, new SearchMoreItemOnClickListener() {
@@ -1765,6 +1761,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			moreListItem.setInterruptedSearch(interruptedSearch);
 			moreListItem.setEmptySearch(isResultEmpty());
 			moreListItem.setOnlineSearch(isOnlineSearch());
+			moreListItem.setSearchMoreAvailable(searchMoreAvailable);
 			mainSearchFragment.addListItem(moreListItem);
 		}
 	}
