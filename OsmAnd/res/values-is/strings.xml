@@ -1458,7 +1458,7 @@ og leiðsögn</string>
     <string name="osmo_tracker_id">Auðkenni skrásetjara (tracker)</string>
     <string name="osmo_tracker_id_descr">Smelltu til að skoða auðkenni skrásetjara.</string>
     <string name="osmo_share_my_location">Senda inn staðsetninguna</string>
-    <string name="shared_string_topbar">Toppstika.</string>
+    <string name="shared_string_topbar">Toppstika</string>
     <string name="full_report">Full skýrsla</string>
     <string name="osm_live_hide_user_name">Ekki birta nafnið mitt í skýrslum</string>
     <string name="osm_live_month_cost">Mánaðarlegur kostnaður</string>
@@ -1581,7 +1581,7 @@ Len %2$s</string>
     <string name="please_specify_poi_type">Tilgreindu tegund af merkisstað.</string>
     <string name="poi_deleted_localy">Merkisstaðnum verður eytt um leið og þú sendir inn breytingarnar þínar</string>
     <string name="save_poi_without_poi_type_message">Viltu í alvörunni vista merkisstað á þess að gefa upp tegund hans?</string>
-    <string name="proxy_pref_descr">Tilgreindu milliþjón (proxy - vefsel)</string>
+    <string name="proxy_pref_descr">Tilgreindu milliþjón (proxy - vefsel).</string>
     <string name="avoid_roads_msg">Þú getur sett í gang varaleið með því að velja götur sem á að forðast</string>
     <string name="rendering_value_germanRoadAtlas_name">Þýsk vegakort</string>
     <string name="rendering_value_highContrastRoads_name">Götukort með mikil birtuskil</string>
