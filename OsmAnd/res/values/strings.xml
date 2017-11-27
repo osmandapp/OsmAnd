@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="modify_the_search_query">Modify the search query.</string>
     <string name="empty_state_osm_edits">Create or modify OSM objects</string>
     <string name="empty_state_osm_edits_descr">Create or modify OSM POI, open or comment OSM Notes, and contribute recorded GPX files.</string>
     <string name="shared_string_deleted">Deleted</string>
