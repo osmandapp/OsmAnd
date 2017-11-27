@@ -628,7 +628,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return new Dialog(getActivity(), getTheme()){
+		Dialog dialog = new Dialog(getActivity(), getTheme()){
 			@Override
 			public void onBackPressed() {
 				if (!processBackAction()) {
@@ -636,6 +636,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 			}
 		};
+		if (!getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			dialog.getWindow().getAttributes().windowAnimations = R.style.Animations_Alpha;
+		}
+		return dialog;
 	}
 
 	public void saveCustomFilter() {

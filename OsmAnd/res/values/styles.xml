@@ -461,6 +461,11 @@
         <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
     </style>
 
+    <style name="Animations.Alpha">
+        <item name="android:windowEnterAnimation">@anim/alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/alpha_out</item>
+    </style>
+
     <style name="create_poi_text_field">
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginRight">16dp</item>

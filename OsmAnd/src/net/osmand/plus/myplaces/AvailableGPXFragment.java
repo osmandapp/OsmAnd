@@ -332,16 +332,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_trip_day : R.drawable.ic_empty_state_trip_night);
 		Button importButton = (Button) emptyView.findViewById(R.id.import_button);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			importButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					addTrack();
-				}
-			});
-		} else {
-			importButton.setVisibility(View.GONE);
-		}
+		importButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				addTrack();
+			}
+		});
 		if (this.adapter != null) {
 			listView.setAdapter(this.adapter);
 		}
@@ -474,11 +470,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				return true;
 			}
 		};
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.gpx_add_track, getActivity())
-					.setIcon(R.drawable.ic_action_plus)
-					.setListener(listener).createItem());
-		}
+		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.gpx_add_track, getActivity())
+				.setIcon(R.drawable.ic_action_plus)
+				.setListener(listener).createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_show_on_map, getActivity())
 				.setIcon(R.drawable.ic_show_on_map)
 				.setListener(listener).createItem());
@@ -533,9 +527,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	private void addTrack() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			((FavoritesActivity) getActivity()).addTrack();
-		}
+		((FavoritesActivity) getActivity()).addTrack();
 	}
 
 	public void showProgressBar() {

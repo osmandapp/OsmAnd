@@ -78,7 +78,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return new Dialog(getActivity(), getTheme()) {
+		Dialog dialog = new Dialog(getActivity(), getTheme()) {
 			@Override
 			public void onBackPressed() {
 				if (!dismissOptionsMenuFragment()) {
@@ -86,6 +86,10 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 				}
 			}
 		};
+		if (!getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			dialog.getWindow().getAttributes().windowAnimations = R.style.Animations_Alpha;
+		}
+		return dialog;
 	}
 
 	@Nullable
