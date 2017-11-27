@@ -2278,7 +2278,7 @@
     <string name="n_items_removed">حذف شدند</string>
     <string name="starting_point">مبدأ</string>
     <string name="shared_string_not_selected">انتخاب نشده</string>
-    <string name="rec_split_desc">هنگامی که حجم فضای استفاده‌شده از فضای موجود بیشتر می‌شود کلیپ‌ها را جایگزین کن.</string>
+    <string name="rec_split_desc">هنگامی که فضای استفاده‌شده افزون بر فضای ذخیره‌سازی می‌شود، کلیپ‌ها را جایگزین کن.</string>
     <string name="rec_split_clip_length_desc">محدودیت برای مدت‌زمان کلیپ‌های ضبط‌شده.</string>
     <string name="rec_split_storage_size">حجم فضای ذخیره‌سازی</string>
     <string name="rec_split_storage_size_desc">مقدار فضای قابل‌تصرف برای همهٔ کلیپ‌های ضبط‌شده.</string>
@@ -2974,4 +2974,5 @@
     <string name="by_date">بر اساس تاریخ</string>
     <string name="by_type">بر اساس نوع</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
+    <string name="modify_the_search_query">عبارت جست‌وجوشده را اصلاح کنید.</string>
     </resources>
