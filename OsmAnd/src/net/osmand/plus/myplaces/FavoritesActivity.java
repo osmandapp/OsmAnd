@@ -84,16 +84,28 @@ public class FavoritesActivity extends TabActivity {
 		}
 	}
 
-	@RequiresApi(Build.VERSION_CODES.KITKAT)
 	public void addTrack() {
-		Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+		Intent intent = new Intent();
+		String action;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			action = Intent.ACTION_OPEN_DOCUMENT;
+		} else {
+			action = Intent.ACTION_GET_CONTENT;
+		}
+		intent.setAction(action);
 		intent.setType("*/*");
 		startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
 	}
 
-	@RequiresApi(Build.VERSION_CODES.KITKAT)
 	public void importFavourites() {
-		Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+		Intent intent = new Intent();
+		String action;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			action = Intent.ACTION_OPEN_DOCUMENT;
+		} else {
+			action = Intent.ACTION_GET_CONTENT;
+		}
+		intent.setAction(action);
 		intent.setType("*/*");
 		startActivityForResult(intent, IMPORT_FAVOURITES_REQUEST);
 	}

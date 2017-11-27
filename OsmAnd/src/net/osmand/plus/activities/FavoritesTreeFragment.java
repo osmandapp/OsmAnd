@@ -167,16 +167,12 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_favorites_day : R.drawable.ic_empty_state_favorites_night);
 		Button importButton = (Button) emptyView.findViewById(R.id.import_button);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			importButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					importFavourites();
-				}
-			});
-		} else {
-			importButton.setVisibility(View.GONE);
-		}
+		importButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				importFavourites();
+			}
+		});
 		listView.setEmptyView(emptyView);
 		listView.setAdapter(favouritesAdapter);
 		setListView(listView);
@@ -325,10 +321,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 
 		if (!MenuItemCompat.isActionViewExpanded(mi)) {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-				createMenuItem(menu, IMPORT_FAVOURITES_ID, R.string.shared_string_add_to_favorites, R.drawable.ic_action_plus,
-						R.drawable.ic_action_plus, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			}
+			createMenuItem(menu, IMPORT_FAVOURITES_ID, R.string.shared_string_add_to_favorites, R.drawable.ic_action_plus,
+					R.drawable.ic_action_plus, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark,
 					R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			if (getSettings().USE_MAP_MARKERS.get()) {
@@ -542,9 +536,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	}
 
 	private void importFavourites() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			((FavoritesActivity) getActivity()).importFavourites();
-		}
+		((FavoritesActivity) getActivity()).importFavourites();
 	}
 
 	public void shareFavorites(final FavoriteGroup group) {
