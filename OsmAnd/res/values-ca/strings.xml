@@ -234,8 +234,8 @@ S\'ocuparà una memòria de {1} MB
     <string name="shared_string_save">Desa</string>
     <string name="show_more_map_detail">Mostra més detalls al mapa</string>
     <string name="filterpoi_activity">Crea un filtre pels PDI</string>
-    <string name="day_night_info_description">Alba: %1$s
-\nCapvespre: %2$s</string>
+    <string name="day_night_info_description">Sol ixent: %1$s 
+\nOcàs: %2$s</string>
     <string name="map_widget_vector_attributes">Atributs de renderització</string>
     <string name="map_widget_renderer">Estil de renderització</string>
     <string name="map_widget_mini_route">Minimapa de ruta</string>
@@ -437,7 +437,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="loading_cities">S\'estan carregant les ciutats…</string>
     <string name="daynight_mode_day">Dia</string>
     <string name="daynight_mode_night">Nit</string>
-    <string name="daynight_mode_auto">Alba/capvespre</string>
+    <string name="daynight_mode_auto">Sol ixent/ocàs</string>
     <string name="daynight_mode_sensor">Sensor de llum</string>
     <string name="daynight">Mode dia/nit</string>
     <string name="download_files_question">Voleu baixar {0} fitxer(s) ({1} MB)?</string>
