@@ -24,6 +24,7 @@ import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -108,6 +109,8 @@ public class RouteResultPreparation {
 	}
 
 	private void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
+		boolean usePedestrianHeight = ((((GeneralRouter) ctx.getRouter()).getProfile() == GeneralRouterProfile.PEDESTRIAN) && ((GeneralRouter) ctx.getRouter()).getHeightObstacles());
+		
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
@@ -125,6 +128,16 @@ public class RouteResultPreparation {
 			boolean plus = rr.getStartPointIndex() < rr.getEndPointIndex();
 			int next;
 			double distance = 0;
+			
+			float prevHeight = -9999.0f;
+			float[] heightDistanceArray = null;
+			
+			if (usePedestrianHeight)
+			{
+				road.calculateHeightArray();
+				heightDistanceArray = road.heightDistanceArray;
+			}
+			
 			for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
 				next = plus ? j + 1 : j - 1;
 				double d = measuredDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
@@ -134,8 +147,34 @@ public class RouteResultPreparation {
 				if (obstacle < 0) {
 					obstacle = 0;
 				}
-				distOnRoadToPass += d / speed + obstacle;
-
+				distOnRoadToPass += d / speed + obstacle; //time in seconds
+				
+				if (usePedestrianHeight)
+				{
+					int heightIndex = 2*j + 1;
+					
+					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length)
+					{
+						float height = heightDistanceArray[heightIndex];
+						
+						if (prevHeight != -9999.0f)
+						{
+							float ascent = 0;
+							float heightDiff = height - prevHeight;
+							
+							if (heightDiff > 0)
+							{
+								ascent = heightDiff;
+							}
+							
+							float timePerHeightMeter = 6.0f; //600m per 1 hour
+							float timeHeight = ascent * timePerHeightMeter;
+							distOnRoadToPass += timeHeight;
+						}
+						
+					prevHeight = height;
+					}
+				}
 			}
 			// last point turn time can be added
 			// if(i + 1 < result.size()) { distOnRoadToPass += ctx.getRouter().calculateTurnTime(); }
