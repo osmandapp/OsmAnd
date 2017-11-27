@@ -112,12 +112,12 @@
 	
 	<string name="offline_navigation_not_available">ניווט בלתי מקוון ב־OsmAnd אינו זמין נכון לעכשיו.</string>
 	<string name="left_side_navigation">נהיגה בצד שמאל</string>
-	<string name="left_side_navigation_descr">יש לבחור עבור מדינות בהן נוהגים משמאל (לא תקף לישראל)</string>
+	<string name="left_side_navigation_descr">יש לבחור עבור מדינות בהן נוהגים משמאל (לא תקף לישראל).</string>
 	
 	<string name="unknown_from_location">נקודת ההתחלה לא נקבעה עדיין</string>
 	<string name="unknown_location">המיקום עדיין לא ידוע</string>
 	<string name="modify_transparency">שינוי השקיפות (0 - שקוף, 255 - אטום)</string>
-	<string name="confirm_interrupt_download">האם להפריע להורדת הקובץ?</string>
+	<string name="confirm_interrupt_download">האם לבטל את הורדת הקובץ?</string>
 	
 	<string name="map_widget_fluorescent">הארת מסלולים</string>
 	<string name="map_widget_time">משך הנסיעה</string>
@@ -180,10 +180,10 @@
 	<string name="rendering_attr_appMode_description">מיטוב המפה לטובת</string>
 	<string name="rendering_attr_contourLines_description">הצגה החל מרמת תקריב (נדרש קובץ SRTM):</string>
 	<string name="rendering_attr_contourLines_name">הצגת קווי מתאר</string>
-	<string name="rendering_attr_hmRendered_description">הגברת כמות פרטי המפה המופיעים</string>
+	<string name="rendering_attr_hmRendered_description">הגדלת כמות פרטי המפה המופיעים.</string>
 	<string name="rendering_attr_hmRendered_name">הצגת יותר פרטים במפה</string>
 	<string name="local_index_routing_data">נתוני המסלול</string>
-	<string name="navigate_point_format">עיצוב :</string>
+	<string name="navigate_point_format">עיצוב</string>
 	<string name="first_time_msg">תודה לך על השימוש ב־OsmAnd. עבור תכונות רבות של יישום זה יש צורך בנתונים אזוריים בלתי מקוונים אותם ניתן להוריד דרך \'הגדרות\' -&gt; \'נתונים בלתי מקוונים\'. לאחר מכן יתאפשר לך לצפות במקום, לאתר כתובות, לחפש נקודות עניין ולמצוא תחבורה ציבורית.</string>    
 	<string name="basemap_was_selected_to_download">נדרשת מפת בסיס לצורך התפקוד התקין של התכנה ונבחרה אחת כזאת להורדה.</string>
 	<string name="select_index_file_to_download">לא נמצא כלום. אם האזור שלך לא נמצא, ניתן ליצור אותו בעצמך (לפרטים http://osmand.net).</string>
@@ -739,13 +739,13 @@
 	<string name="first_time_continue">בהמשך</string>
 	<string name="first_time_download">הורדת אזורים</string>
 	<string name="search_poi_location">מתבצע חיפוש אחר אות…</string>
-	<string name="search_near_map">חיפוש ליד מיקום המפה האחרון</string>
+	<string name="search_near_map">חיפוש ליד מרכז המפה הנוכחי</string>
 	<string name="search_nearby">חיפוש בסביבה</string>
 	<string name="map_orientation_default">כמו ההתקן</string>
 	<string name="map_orientation_portrait">לאורך</string>
 	<string name="map_orientation_landscape">לרוחב</string>
 	<string name="map_screen_orientation">כיוון המסך</string>
-	<string name="map_screen_orientation_descr">לאורך, לרוחב או לפי ההתקן</string>
+	<string name="map_screen_orientation_descr">לאורך, לרוחב או לפי ההתקן.</string>
 	<string name="opening_hours_not_supported">אין תמיכה בעריכת תבנית שעות הפתיחה</string>
 	<string name="search_history_int_streets">צומת: {0} x {1} ב־{2}</string>
 	<string name="search_history_building">בניין: {0}, {1}, {2}</string>
@@ -854,7 +854,7 @@
 	<string name="map_view_3d_descr">הפעלת הצגה תלת־ממדית של המפה.</string>
 	<string name="map_view_3d">הצגת המפה בתלת־ממד</string>
 	<string name="show_poi_over_map_description">הצגת נ״ע על גבי המפה (שימוש במסנן האחרון שנבחר)</string>
-	<string name="show_poi_over_map">הצגת נ״ע</string>
+	<string name="show_poi_over_map">הצגת שכבת נ״ע</string>
 	<string name="map_tile_source_descr">נא לבחור מקור של אריחי מפה מקוונים או שמורים.</string>
 	<string name="map_tile_source">מקור אריחי המפה</string>
 	<string name="map_source">מקור המפה</string>
@@ -2350,4 +2350,26 @@
     <string name="osmo_connect">הצטרפות</string>
     <string name="osmo_groups">קבוצות OsMo</string>
     <string name="osmo_connect_to_my_nickname">כינוי</string>
+    <string name="local_index_description">ניתן לגעת בכל פריט קיים כדי לקבל פרטים נוספים, נגיעה ארוכה כדי להשבית או למחוק. הנתונים הנוכחיים בהתקן (%1$s פנויים):</string>
+    <string name="favourites_context_menu_add">הוספה למועדפים</string>
+    <string name="poi_action_delete">מחיקה</string>
+    <string name="poi_dialog_reopen">פתיחה מחדש</string>
+    <string name="av_camera_focus">סוג מיקוד המצלמה</string>
+    <string name="av_camera_focus_descr">נא לבחור את מצב המיקוד של המצלמה הפנימית.</string>
+    <string name="av_camera_focus_auto">מיקוד אוטומטי</string>
+    <string name="av_camera_focus_hiperfocal">מיקוד רב מוקדי</string>
+    <string name="av_camera_focus_edof">עומק שדה מורחב (EDOF)</string>
+    <string name="av_camera_focus_infinity">המיקוד מוגדר לאינסוף</string>
+    <string name="av_camera_focus_macro">מצב מיקוד לעצמים זעירים (תקריב)</string>
+    <string name="av_camera_focus_continuous">המצלמה תנסה למקד כל הזמן</string>
+    <string name="av_photo_play_sound">השמעת צליל עם צילום תמונה</string>
+    <string name="av_photo_play_sound_descr">בחירה האם להשמיע צליל בעת צילום תמונות.</string>
+    <string name="av_camera_pic_size">גודל תמונת המצלמה</string>
+    <string name="av_camera_pic_size_descr">בחירת גודל התמונה של המצלמה הפנימית.</string>
+    <string name="navigation_intent_invalid">תבנית שגויה: %s</string>
+    <string name="plugin_description_title">תיאור</string>
+    <string name="plugin_install_needs_network">כדי להתקין את התוסף הזה צריך חיבור לאינטרנט.</string>
+    <string name="get_plugin">קבלה</string>
+    <string name="use_fast_recalculation">חישוב חכם לנתיב מחדש</string>
+    <string name="use_fast_recalculation_desc">לטיולים ארוכים, יש לחשב מחדש רק את החלק ההתחלתי של הנתיב.</string>
     </resources>
