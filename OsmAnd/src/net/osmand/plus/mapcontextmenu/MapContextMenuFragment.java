@@ -68,7 +68,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private View view;
 	private View mainView;
-	private ImageView fabView;
 	private View zoomButtonsView;
 	private ImageButton zoomInButtonView;
 	private ImageButton zoomOutButtonView;
@@ -77,7 +76,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private OnLayoutChangeListener containerLayoutListener;
 
 	private int menuTopViewHeight;
-	private int menuTopShadowHeight;
 	private int menuTopShadowAllHeight;
 	private int menuTitleHeight;
 	private int menuBottomViewHeight;
@@ -345,8 +343,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		View topView = view.findViewById(R.id.context_menu_top_view);
 		topView.setOnTouchListener(slideTouchListener);
-		View topShadowView = view.findViewById(R.id.context_menu_top_shadow);
-		topShadowView.setOnTouchListener(slideTouchListener);
 		View topShadowAllView = view.findViewById(R.id.context_menu_top_shadow_all);
 		AndroidUtils.setBackground(getMapActivity(), topShadowAllView, nightMode, R.drawable.bg_map_context_menu_light,
 				R.drawable.bg_map_context_menu_dark);
@@ -382,25 +378,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		AndroidUtils.setTextSecondaryColor(getMapActivity(),
 				(TextView) view.findViewById(R.id.progressTitle), nightMode);
-
-		// FAB
-		fabView = (ImageView) view.findViewById(R.id.context_menu_fab_view);
-		if (menu.fabVisible()) {
-			fabView.setImageDrawable(getIcon(menu.getFabIconId(), 0));
-			if (menu.isLandscapeLayout()) {
-				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) fabView.getLayoutParams();
-				params.setMargins(0, 0, dpToPx(28f), 0);
-				fabView.setLayoutParams(params);
-			}
-			fabView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					menu.fabPressed();
-				}
-			});
-		} else {
-			fabView.setVisibility(View.GONE);
-		}
 
 		// Zoom buttons
 		zoomButtonsView = view.findViewById(R.id.context_menu_zoom_buttons);
@@ -666,11 +643,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								}
 							}
 						})
-						.start();
-
-				fabView.animate().y(getFabY(posY))
-						.setDuration(200)
-						.setInterpolator(new DecelerateInterpolator())
 						.start();
 
 				zoomButtonsView.animate().y(getZoomButtonsY(posY))
@@ -997,7 +969,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						}
 
 						int newMenuTopViewHeight = view.findViewById(R.id.context_menu_top_view).getHeight();
-						menuTopShadowHeight = view.findViewById(R.id.context_menu_top_shadow).getHeight();
 						int newMenuTopShadowAllHeight = view.findViewById(R.id.context_menu_top_shadow_all).getHeight();
 						menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
 						zoomButtonsHeight = zoomButtonsView.getHeight();
@@ -1061,7 +1032,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						}
 						menuTopViewHeight = newMenuTopViewHeight;
 						menuTopShadowAllHeight = newMenuTopShadowAllHeight;
-						menuTitleHeight = menuTopShadowHeight + menuTopShadowAllHeight + dy;
+						menuTitleHeight = menuTopShadowAllHeight + dy;
 						menuBottomViewHeight = view.findViewById(R.id.context_menu_bottom_view).getHeight();
 
 						menuFullHeightMax = menuTitleHeight + menuBottomViewHeight;
@@ -1231,7 +1202,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				posY = Math.max(posY, minHalfY);
 				break;
 			case MenuState.FULL_SCREEN:
-				posY = -menuTopShadowHeight - dpToPx(SHADOW_HEIGHT_TOP_DP);
+				posY = -dpToPx(SHADOW_HEIGHT_TOP_DP);
 				posY = addStatusBarHeightIfNeeded(posY);
 				break;
 			default:
@@ -1274,11 +1245,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void setViewY(int y, boolean animated, boolean adjustMapPos) {
 		if (!oldAndroid()) {
 			mainView.setY(y);
-			fabView.setY(getFabY(y));
 			zoomButtonsView.setY(getZoomButtonsY(y));
 		} else {
 			mainView.setPadding(0, y, 0, 0);
-			fabView.setPadding(0, getFabY(y), 0, 0);
 			zoomButtonsView.setPadding(0, getZoomButtonsY(y), 0, 0);
 		}
 		if (!customMapCenter) {

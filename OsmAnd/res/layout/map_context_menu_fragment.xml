@@ -14,14 +14,6 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/context_menu_top_shadow"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/context_menu_top_shadow_h"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/context_menu_top_shadow_all"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -490,17 +482,6 @@
                 android:contentDescription="@string/zoomOut"
                 tools:src="@drawable/ic_action_test_light"/>
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/context_menu_fab_view"
-            android:contentDescription="@string/layer_route"
-            android:layout_width="@dimen/fab_size_with_shadow"
-            android:layout_height="@dimen/fab_size_with_shadow"
-            android:layout_gravity="right"
-            android:layout_marginRight="@dimen/fab_margin_right"
-            android:background="@drawable/fab_background_style"
-            android:scaleType="center"
-            android:src="@drawable/map_directions"/>
 
     </FrameLayout>
 
