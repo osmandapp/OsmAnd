@@ -2321,4 +2321,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="context_menu_item_modify_note">Breyta OSM-minnispunkti</string>
     <string name="shared_string_markers">Kortamerki</string>
     <string name="shared_string_sort">Raða</string>
+    <string name="none_point_error">Bættu við a.m.k. einum punkti.</string>
     </resources>
