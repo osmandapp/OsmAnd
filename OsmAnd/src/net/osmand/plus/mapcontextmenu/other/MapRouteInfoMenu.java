@@ -438,7 +438,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	protected void selectFavorite(final View parentView, final boolean target) {
 		final FavouritesAdapter favouritesAdapter = new FavouritesAdapter(mapActivity, mapActivity.getMyApplication()
-				.getFavorites().getFavouritePoints(), false);
+				.getFavorites().getVisibleFavouritePoints(), false);
 		Dialog[] dlgHolder = new Dialog[1];
 		OnItemClickListener click = getOnFavoriteClickListener(target, favouritesAdapter, dlgHolder);
 		OnDismissListener dismissListener = new DialogInterface.OnDismissListener() {
