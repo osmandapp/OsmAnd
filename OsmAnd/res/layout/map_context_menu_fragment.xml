@@ -380,6 +380,7 @@
                         android:src="@drawable/map_action_fav_dark"/>
 
                     <TextView
+                        android:id="@+id/context_menu_fav_text_view"
                         android:layout_marginTop="@dimen/context_menu_padding_margin_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -406,6 +407,7 @@
                         android:src="@drawable/map_action_flag_dark"/>
 
                     <TextView
+                        android:id="@+id/context_menu_route_text_view"
                         android:layout_marginTop="@dimen/context_menu_padding_margin_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -433,6 +435,7 @@
                         android:src="@drawable/map_action_gshare_dark"/>
 
                     <TextView
+                        android:id="@+id/context_menu_share_text_view"
                         android:layout_marginTop="@dimen/context_menu_padding_margin_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -460,6 +463,7 @@
                         android:src="@drawable/map_overflow_menu_white"/>
 
                     <TextView
+                        android:id="@+id/context_menu_more_text_view"
                         android:layout_marginTop="@dimen/context_menu_padding_margin_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
