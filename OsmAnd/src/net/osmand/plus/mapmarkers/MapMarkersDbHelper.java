@@ -13,10 +13,10 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class MapMarkersDbHelper {
@@ -406,7 +406,7 @@ public class MapMarkersDbHelper {
 	}
 
 	public List<MapMarker> getActiveMarkers() {
-		HashMap<String, MapMarker> markers = new LinkedHashMap<>();
+		Map<String, MapMarker> markers = new LinkedHashMap<>();
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
@@ -455,7 +455,7 @@ public class MapMarkersDbHelper {
 		return marker;
 	}
 
-	private List<MapMarker> buildLinkedList(HashMap<String, MapMarker> markers) {
+	private List<MapMarker> buildLinkedList(Map<String, MapMarker> markers) {
 		List<MapMarker> res = new LinkedList<>();
 		int markersCount = markers.size();
 		for (int i = 0; i < markersCount; i++) {
