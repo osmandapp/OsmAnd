@@ -129,6 +129,9 @@
     <dimen name="context_menu_progress_min_height">54dp</dimen>
     <dimen name="context_menu_progress_cancel_button_size">44dp</dimen>
     <dimen name="context_menu_action_buttons_h">54dp</dimen>
+	<dimen name="context_menu_buttons_bottom">48dp</dimen>
+	<dimen name="context_menu_padding_medium">8dp</dimen>
+	<dimen name="context_menu_padding_small">6dp</dimen>
 
 	<dimen name="fab_size_with_shadow">62dp</dimen>
     <dimen name="fab_margin_right">12dp</dimen>
