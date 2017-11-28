@@ -474,7 +474,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		hasTargets = false;
 	}
 
-	public void navigateFab() {
+	public void navigateButton() {
 		if (!OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 			ActivityCompat.requestPermissions(mapActivity,
 					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -1302,7 +1302,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		} else if (requestCode == REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION
 				&& grantResults.length > 0
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-			navigateFab();
+			navigateButton();
 		} else if (requestCode == REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION
 				&& grantResults.length > 0
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {

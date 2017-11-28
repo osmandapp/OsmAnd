@@ -30,12 +30,9 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -412,13 +409,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			buttons.setVisibility(View.GONE);
 		}
 
-		AndroidUtils.setBackground(getMapActivity(), mainView.findViewById(R.id.divider_hor_1), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
-		AndroidUtils.setBackground(getMapActivity(), mainView.findViewById(R.id.divider_hor_2), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
-		AndroidUtils.setBackground(getMapActivity(), mainView.findViewById(R.id.divider_hor_3), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
-
 		// Action buttons
 		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
 		buttonFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(),
@@ -467,6 +457,23 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			@Override
 			public void onClick(View v) {
 				menu.buttonMorePressed();
+			}
+		});
+
+		TextView detailsButton = (TextView) view.findViewById(R.id.context_menu_details_button);
+		detailsButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+			}
+		});
+		TextView directionsButton = (TextView) view.findViewById(R.id.context_menu_directions_button);
+		Drawable drawable = getIcon(R.drawable.map_directions, nightMode ? R.color.osmand_orange : R.color.map_widget_blue);
+		directionsButton.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+		directionsButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				menu.navigateButtonPressed();
 			}
 		});
 

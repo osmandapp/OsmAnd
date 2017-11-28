@@ -746,8 +746,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void fabPressed() {
-		mapActivity.getMapLayers().getMapControlsLayer().navigateFab();
+	public void navigateButtonPressed() {
+		mapActivity.getMapLayers().getMapControlsLayer().navigateButton();
 	}
 
 	public boolean zoomInPressed() {
