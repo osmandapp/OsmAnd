@@ -304,12 +304,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 							setViewY((int) newY, false, false);
 
 							menuFullHeight = view.getHeight() - (int) newY + 10;
-							if (!oldAndroid()) {
-								ViewGroup.LayoutParams lp = mainView.getLayoutParams();
-								lp.height = Math.max(menuFullHeight, menuTitleHeight);
-								mainView.setLayoutParams(lp);
-								mainView.requestLayout();
-							}
+							ViewGroup.LayoutParams lp = mainView.getLayoutParams();
+							lp.height = Math.max(menuFullHeight, menuTitleHeight);
+							mainView.setLayoutParams(lp);
+							mainView.requestLayout();
 
 							velocity.addMovement(event);
 							velocity.computeCurrentVelocity(1000);
@@ -616,53 +614,41 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				updateMainViewLayout(posY);
 			}
 
-			if (!oldAndroid()) {
-				mainView.animate().y(posY)
-						.setDuration(200)
-						.setInterpolator(new DecelerateInterpolator())
-						.setListener(new AnimatorListenerAdapter() {
+			mainView.animate().y(posY)
+					.setDuration(200)
+					.setInterpolator(new DecelerateInterpolator())
+					.setListener(new AnimatorListenerAdapter() {
 
-							boolean canceled = false;
+						boolean canceled = false;
 
-							@Override
-							public void onAnimationCancel(Animator animation) {
-								canceled = true;
-							}
+						@Override
+						public void onAnimationCancel(Animator animation) {
+							canceled = true;
+						}
 
-							@Override
-							public void onAnimationEnd(Animator animation) {
-								if (!canceled) {
-									if (needCloseMenu) {
-										menu.close();
-									} else {
-										updateMainViewLayout(posY);
-										if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
-											doAfterMenuStateChange(previousMenuState, newMenuState);
-										}
+						@Override
+						public void onAnimationEnd(Animator animation) {
+							if (!canceled) {
+								if (needCloseMenu) {
+									menu.close();
+								} else {
+									updateMainViewLayout(posY);
+									if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
+										doAfterMenuStateChange(previousMenuState, newMenuState);
 									}
 								}
 							}
-						})
-						.start();
+						}
+					})
+					.start();
 
-				zoomButtonsView.animate().y(getZoomButtonsY(posY))
-						.setDuration(200)
-						.setInterpolator(new DecelerateInterpolator())
-						.start();
+			zoomButtonsView.animate().y(getZoomButtonsY(posY))
+					.setDuration(200)
+					.setInterpolator(new DecelerateInterpolator())
+					.start();
 
-				if (needMapAdjust) {
-					adjustMapPosition(posY, true, centered, dZoom);
-				}
-			} else {
-				setViewY(posY, false, needMapAdjust);
-				if (needCloseMenu) {
-					menu.close();
-				} else {
-					updateMainViewLayout(posY);
-					if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
-						doAfterMenuStateChange(previousMenuState, newMenuState);
-					}
-				}
+			if (needMapAdjust) {
+				adjustMapPosition(posY, true, centered, dZoom);
 			}
 		}
 	}
@@ -1225,31 +1211,20 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void updateMainViewLayout(int posY) {
 		if (view != null) {
 			menuFullHeight = view.getHeight() - posY;
-			if (!oldAndroid()) {
-				ViewGroup.LayoutParams lp = mainView.getLayoutParams();
-				lp.height = Math.max(menuFullHeight, menuTitleHeight);
-				mainView.setLayoutParams(lp);
-				mainView.requestLayout();
-			}
+			ViewGroup.LayoutParams lp = mainView.getLayoutParams();
+			lp.height = Math.max(menuFullHeight, menuTitleHeight);
+			mainView.setLayoutParams(lp);
+			mainView.requestLayout();
 		}
 	}
 
 	private int getViewY() {
-		if (!oldAndroid()) {
-			return (int) mainView.getY();
-		} else {
-			return mainView.getPaddingTop();
-		}
+		return (int) mainView.getY();
 	}
 
 	private void setViewY(int y, boolean animated, boolean adjustMapPos) {
-		if (!oldAndroid()) {
-			mainView.setY(y);
-			zoomButtonsView.setY(getZoomButtonsY(y));
-		} else {
-			mainView.setPadding(0, y, 0, 0);
-			zoomButtonsView.setPadding(0, getZoomButtonsY(y), 0, 0);
-		}
+		mainView.setY(y);
+		zoomButtonsView.setY(getZoomButtonsY(y));
 		if (!customMapCenter) {
 			if (adjustMapPos) {
 				adjustMapPosition(y, animated, centered, 0);
@@ -1352,10 +1327,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private int getZoomButtonsY(int y) {
 		return y - zoomButtonsHeight - fabPaddingTopPx;
-	}
-
-	private boolean oldAndroid() {
-		return (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH);
 	}
 
 	private void doLayoutMenu() {
