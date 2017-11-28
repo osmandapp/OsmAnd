@@ -406,7 +406,6 @@ public class MapMarkersDbHelper {
 	}
 
 	public List<MapMarker> getActiveMarkers() {
-		List<MapMarker> res = new LinkedList<>();
 		HashMap<String, MapMarker> markers = new LinkedHashMap<>();
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
@@ -423,9 +422,8 @@ public class MapMarkersDbHelper {
 			} finally {
 				db.close();
 			}
-			buildLinkedList(markers, res);
 		}
-		return res;
+		return buildLinkedList(markers);
 	}
 
 	private MapMarker readItem(SQLiteCursor query) {
@@ -457,12 +455,13 @@ public class MapMarkersDbHelper {
 		return marker;
 	}
 
-	private void buildLinkedList(HashMap<String, MapMarker> markers, List<MapMarker> res) {
+	private List<MapMarker> buildLinkedList(HashMap<String, MapMarker> markers) {
+		List<MapMarker> res = new LinkedList<>();
 		int markersCount = markers.size();
 		for (int i = 0; i < markersCount; i++) {
 			int count = 1;
 			for (MapMarker marker : markers.values()) {
-				if (!markers.keySet().contains(marker.nextKey) || count == markers.size()) {
+				if (!markers.containsKey(marker.nextKey) || count == markers.size()) {
 					res.add(0, marker);
 					markers.remove(marker.id);
 					break;
@@ -470,6 +469,7 @@ public class MapMarkersDbHelper {
 				count++;
 			}
 		}
+		return res;
 	}
 
 	public void updateMarker(MapMarker marker) {
