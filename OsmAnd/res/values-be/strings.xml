@@ -2709,8 +2709,8 @@
     <string name="restart_search">Перазапусціць пошук</string>
     <string name="increase_search_radius">Павялічыць радыус пошуку</string>
     <string name="nothing_found">Нічога не знойдзена :(</string>
-    <string name="nothing_found_descr">Змяніць запыт пошуку ці павялічыць радыус пошуку.</string>
-    <string name="quick_action_showhide_osmbugs_title">Паказаць/схаваць нататкі OSM</string>
+    <string name="nothing_found_descr">Зьмяніце пошукавы запыт або павялічце радыюс пошуку.</string>
+    <string name="quick_action_showhide_osmbugs_title">Паказаць/схаваць OSM-нататкі</string>
     <string name="quick_action_osmbugs_show">Паказаць нататкі OSM</string>
     <string name="quick_action_osmbugs_hide">Схаваць нататкі OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Націск на кнопку дзеяння пакажа/схавае нататкі OSM на мапе.</string>
