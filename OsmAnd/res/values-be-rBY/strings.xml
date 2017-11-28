@@ -2369,8 +2369,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="restart_search">Pierazapuscić pošuk</string>
     <string name="increase_search_radius">Pavialičyć radyus pošuku</string>
     <string name="nothing_found">Ničoha nie znojdziena :(</string>
-    <string name="nothing_found_descr">Zmianić zapyt pošuku ci pavialičyć radyus pošuku.</string>
-    <string name="quick_action_showhide_osmbugs_title">Pakazać/schavać natatki OSM</string>
+    <string name="nothing_found_descr">Źmianicie pošukavy zapyt abo pavialičcie radyus pošuku.</string>
+    <string name="quick_action_showhide_osmbugs_title">Pakazać/schavać OSM-natatki</string>
     <string name="quick_action_osmbugs_show">Pakazać natatki OSM</string>
     <string name="quick_action_osmbugs_hide">Schavać natatki OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Nacisk na knopky dziejańnia pakaža/schavaje natatki OSM na mapie.</string>
