@@ -442,7 +442,7 @@
                     android:paddingRight="@dimen/context_menu_button_padding_x"
                     android:gravity="end|center_vertical"
                     tools:drawableEnd="@drawable/map_directions"
-                    android:drawablePadding="8dp"
+                    android:drawablePadding="@dimen/context_menu_padding_medium"
                     android:textColor="?attr/contextMenuButtonColor"
                     android:textSize="@dimen/default_desc_text_size"
                     android:text="@string/get_directions"/>
