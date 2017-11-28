@@ -2933,4 +2933,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_deleted">Usunięte</string>
     <string name="shared_string_edited">Zmodyfikowane</string>
     <string name="shared_string_added">Dodane</string>
+    <string name="empty_state_osm_edits">Tworzenie lub modyfikowanie obiektów OSM</string>
     </resources>
