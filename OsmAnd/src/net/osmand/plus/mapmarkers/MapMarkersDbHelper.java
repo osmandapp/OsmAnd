@@ -458,7 +458,8 @@ public class MapMarkersDbHelper {
 	}
 
 	private void buildLinkedList(HashMap<String, MapMarker> markers, List<MapMarker> res) {
-		if (!markers.isEmpty()) {
+		int markersCount = markers.size();
+		for (int i = 0; i < markersCount; i++) {
 			int count = 1;
 			for (MapMarker marker : markers.values()) {
 				if (!markers.keySet().contains(marker.nextKey) || count == markers.size()) {
@@ -468,7 +469,6 @@ public class MapMarkersDbHelper {
 				}
 				count++;
 			}
-			buildLinkedList(markers, res);
 		}
 	}
 
