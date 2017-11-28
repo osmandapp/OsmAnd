@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto">
+    android:background="@android:color/transparent">
 
     <LinearLayout
         android:id="@+id/context_menu_main"
@@ -355,52 +354,116 @@
 
             <LinearLayout
                 android:id="@+id/context_menu_buttons"
-                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/context_menu_action_buttons_h">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/context_menu_fav_button"
-                    android:contentDescription="@string/shared_string_add_to_favorites"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
+                <LinearLayout
+                    android:clickable="true"
+                    android:id="@+id/context_menu_fav_view"
+                    android:gravity="center"
+                    android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:background="?attr/dashboard_button"
-                    android:scaleType="center"
-                    android:src="@drawable/map_action_fav_dark"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/context_menu_padding_margin_medium"
+                    android:paddingBottom="@dimen/context_menu_padding_margin_medium">
 
-                <ImageButton
-                    android:id="@+id/context_menu_route_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:background="?attr/dashboard_button"
-                    android:scaleType="center"
-                    android:src="@drawable/map_action_flag_dark"/>
+                    <ImageView
+                        android:id="@+id/context_menu_fav_image_view"
+                        android:contentDescription="@string/shared_string_add_to_favorites"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="center"
+                        android:src="@drawable/map_action_fav_dark"/>
 
-                <ImageButton
-                    android:id="@+id/context_menu_share_button"
-                    android:contentDescription="@string/context_menu_item_share_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:background="?attr/dashboard_button"
-                    android:scaleType="center"
-                    android:src="@drawable/map_action_gshare_dark"/>
+                    <TextView
+                        android:layout_marginTop="@dimen/context_menu_padding_margin_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/favourites_context_menu_add"/>
 
-                <ImageButton
-                    android:id="@+id/context_menu_more_button"
-                    android:contentDescription="@string/shared_string_more"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:clickable="true"
+                    android:id="@+id/context_menu_route_view"
+                    android:gravity="center"
+                    android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:background="?attr/dashboard_button"
-                    android:scaleType="center"
-                    android:src="@drawable/map_overflow_menu_white"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/context_menu_padding_margin_medium"
+                    android:paddingBottom="@dimen/context_menu_padding_margin_medium">
+
+                    <ImageView
+                        android:id="@+id/context_menu_route_image_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="center"
+                        android:src="@drawable/map_action_flag_dark"/>
+
+                    <TextView
+                        android:layout_marginTop="@dimen/context_menu_padding_margin_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shared_string_marker"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:clickable="true"
+                    android:id="@+id/context_menu_share_view"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/context_menu_padding_margin_medium"
+                    android:paddingBottom="@dimen/context_menu_padding_margin_medium">
+
+                    <ImageView
+                        android:id="@+id/context_menu_share_image_view"
+                        android:contentDescription="@string/context_menu_item_share_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="center"
+                        android:src="@drawable/map_action_gshare_dark"/>
+
+                    <TextView
+                        android:layout_marginTop="@dimen/context_menu_padding_margin_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shared_string_share"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:clickable="true"
+                    android:id="@+id/context_menu_more_view"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/context_menu_padding_margin_medium"
+                    android:paddingBottom="@dimen/context_menu_padding_margin_medium">
+
+                    <ImageView
+                        android:id="@+id/context_menu_more_image_view"
+                        android:contentDescription="@string/shared_string_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="center"
+                        android:src="@drawable/map_overflow_menu_white"/>
+
+                    <TextView
+                        android:layout_marginTop="@dimen/context_menu_padding_margin_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shared_string_actions"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -414,10 +477,10 @@
                 android:id="@+id/context_menu_bottom_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/context_menu_buttons_bottom"
-                android:paddingLeft="@dimen/context_menu_padding_medium"
-                android:paddingRight="@dimen/context_menu_padding_medium"
-                android:paddingTop="@dimen/context_menu_padding_small"
-                android:paddingBottom="@dimen/context_menu_padding_small">
+                android:paddingLeft="@dimen/context_menu_padding_margin_medium"
+                android:paddingRight="@dimen/context_menu_padding_margin_medium"
+                android:paddingTop="@dimen/context_menu_padding_margin_small"
+                android:paddingBottom="@dimen/context_menu_padding_margin_small">
 
                 <Button
                     android:background="?attr/selectableItemBackground"
@@ -442,7 +505,7 @@
                     android:paddingRight="@dimen/context_menu_button_padding_x"
                     android:gravity="end|center_vertical"
                     tools:drawableEnd="@drawable/map_directions"
-                    android:drawablePadding="@dimen/context_menu_padding_medium"
+                    android:drawablePadding="@dimen/context_menu_padding_margin_medium"
                     android:textColor="?attr/contextMenuButtonColor"
                     android:textSize="@dimen/default_desc_text_size"
                     android:text="@string/get_directions"/>

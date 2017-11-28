@@ -409,64 +409,69 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		// Action buttons
-		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
-		buttonFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(),
+		final ImageView imageFavorite = (ImageView) view.findViewById(R.id.context_menu_fav_image_view);
+		imageFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(),
 				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonFavorite, nightMode);
-		buttonFavorite.setContentDescription(getString(menu.getFavActionStringId()));
-		buttonFavorite.setOnClickListener(new View.OnClickListener() {
+		imageFavorite.setContentDescription(getString(menu.getFavActionStringId()));
+		View favView = view.findViewById(R.id.context_menu_fav_view);
+		AndroidUtils.setDashButtonBackground(getMapActivity(), favView, nightMode);
+		favView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				menu.buttonFavoritePressed();
 			}
 		});
 
-		final ImageButton buttonWaypoint = (ImageButton) view.findViewById(R.id.context_menu_route_button);
-		buttonWaypoint.setImageDrawable(getIcon(menu.getWaypointActionIconId(),
+		final ImageView imageWaypoint = (ImageView) view.findViewById(R.id.context_menu_route_image_view);
+		imageWaypoint.setImageDrawable(getIcon(menu.getWaypointActionIconId(),
 				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-		buttonWaypoint.setContentDescription(getString(menu.getWaypointActionStringId()));
-		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonWaypoint, nightMode);
+		imageWaypoint.setContentDescription(getString(menu.getWaypointActionStringId()));
+		View waypointView = view.findViewById(R.id.context_menu_route_view);
+		AndroidUtils.setDashButtonBackground(getMapActivity(), waypointView, nightMode);
 		if (menu.isButtonWaypointEnabled()) {
-			buttonWaypoint.setOnClickListener(new View.OnClickListener() {
+			waypointView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					menu.buttonWaypointPressed();
 				}
 			});
 		} else {
-			deactivate(buttonWaypoint);
+			deactivate(waypointView);
 		}
 
-		final ImageButton buttonShare = (ImageButton) view.findViewById(R.id.context_menu_share_button);
-		buttonShare.setImageDrawable(getIcon(R.drawable.map_action_gshare_dark,
+		final ImageView imageShare = (ImageView) view.findViewById(R.id.context_menu_share_image_view);
+		imageShare.setImageDrawable(getIcon(R.drawable.map_action_gshare_dark,
 				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonShare, nightMode);
-		buttonShare.setOnClickListener(new View.OnClickListener() {
+		View shareView = view.findViewById(R.id.context_menu_share_view);
+		AndroidUtils.setDashButtonBackground(getMapActivity(), shareView, nightMode);
+		shareView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				menu.buttonSharePressed();
 			}
 		});
 
-		final ImageButton buttonMore = (ImageButton) view.findViewById(R.id.context_menu_more_button);
-		buttonMore.setImageDrawable(getIcon(R.drawable.map_overflow_menu_white,
+		final ImageView imageMore = (ImageView) view.findViewById(R.id.context_menu_more_image_view);
+		imageMore.setImageDrawable(getIcon(R.drawable.map_overflow_menu_white,
 				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonMore, nightMode);
-		buttonMore.setOnClickListener(new View.OnClickListener() {
+		View moreView = view.findViewById(R.id.context_menu_more_view);
+		AndroidUtils.setDashButtonBackground(getMapActivity(), moreView, nightMode);
+		moreView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				menu.buttonMorePressed();
 			}
 		});
 
-		TextView detailsButton = (TextView) view.findViewById(R.id.context_menu_details_button);
+		//Bottom buttons
+		Button detailsButton = (Button) view.findViewById(R.id.context_menu_details_button);
 		detailsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 
 			}
 		});
-		TextView directionsButton = (TextView) view.findViewById(R.id.context_menu_directions_button);
+		Button directionsButton = (Button) view.findViewById(R.id.context_menu_directions_button);
 		Drawable drawable = getIcon(R.drawable.map_directions, nightMode ? R.color.osmand_orange : R.color.map_widget_blue);
 		directionsButton.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
 		directionsButton.setOnClickListener(new View.OnClickListener() {
@@ -914,7 +919,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void rebuildMenu(boolean centered) {
 		OsmandApplication app = getMyApplication();
 		if (app != null && view != null) {
-			final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
+			final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_image_view);
 			buttonFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(),
 					!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 			buttonFavorite.setContentDescription(getString(menu.getFavActionStringId()));
