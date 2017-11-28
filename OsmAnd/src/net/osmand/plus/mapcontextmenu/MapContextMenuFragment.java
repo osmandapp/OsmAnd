@@ -107,7 +107,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private int screenOrientation;
 	private boolean created;
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -486,18 +485,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		//getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
 
-		if (Build.VERSION.SDK_INT >= 11) {
-			containerLayoutListener = new OnLayoutChangeListener() {
-				@Override
-				public void onLayoutChange(View view, int left, int top, int right, int bottom,
-										   int oldLeft, int oldTop, int oldRight, int oldBottom) {
-					if (bottom != oldBottom) {
-						processScreenHeight(view.getParent());
-						runLayoutListener();
-					}
+		containerLayoutListener = new OnLayoutChangeListener() {
+			@Override
+			public void onLayoutChange(View view, int left, int top, int right, int bottom,
+									   int oldLeft, int oldTop, int oldRight, int oldBottom) {
+				if (bottom != oldBottom) {
+					processScreenHeight(view.getParent());
+					runLayoutListener();
 				}
-			};
-		}
+			}
+		};
 
 		created = true;
 		return view;
@@ -528,11 +525,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void processScreenHeight(ViewParent parent) {
 		View container = (View)parent;
-		if (Build.VERSION.SDK_INT >= 11) {
-			screenHeight = container.getHeight() + AndroidUtils.getStatusBarHeight(getActivity());
-		} else {
-			screenHeight = AndroidUtils.getScreenHeight(getActivity());
-		}
+		screenHeight = container.getHeight() + AndroidUtils.getStatusBarHeight(getActivity());
 		skipHalfScreenStateLimit = screenHeight * SKIP_HALF_SCREEN_STATE_KOEF;
 		viewHeight = screenHeight - AndroidUtils.getStatusBarHeight(getMapActivity());
 	}
