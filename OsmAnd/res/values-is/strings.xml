@@ -2396,4 +2396,23 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="empty_state_my_tracks">Bæta við og skrá ferla</string>
     <string name="import_track">Flytja inn feril</string>
     <string name="add_segment_to_the_track">Bæta við GPX-feril</string>
-</resources>
+<string name="add_favourites_group_to_markers_descr">Veldu eftirlætisflokk sem bæta skal kortamerkjum í.</string>
+    <string name="mark_passed">Merkja sem liðinn</string>
+    <string name="make_round_trip_descr">Bæta við afriti af upphafspunkti til að nota sem áfangastað.</string>
+    <string name="show_passed">Sýna liðna</string>
+    <string name="hide_passed">Fela liðna</string>
+    <string name="all_markers_moved_to_history">Öll kortamerki flutt í aðgerðaferil</string>
+    <string name="marker_moved_to_history">Kortamerki flutt í aðgerðaferil</string>
+    <string name="marker_moved_to_active">Kortamerki flutt í virkt</string>
+    <string name="choose_navigation_type">Veldu leiðsagnarsnið</string>
+    <string name="quick_action_show_navigation_finish_dialog">Birta glugga fyrir lok leiðsagnar</string>
+    <string name="quick_action_start_stop_navigation_descr">Smelltu á þennan hnapp til að ræsa hefja eða ljúka leiðsögn.</string>
+    <string name="disable_complex_routing_descr">Gera 2-fasa leiðaval í akstri óvirkt.</string>
+    <string name="use_magnetic_sensor_descr">Við lestur áttavita skal nota segulskynjara í stað stefnuskynjara.</string>
+    <string name="quick_action_interim_dialog">Birta millistigsglugga</string>
+    <string name="mappilary_no_internet_desc">Þú þarft internettengingu til að skoða myndir frá Mapillary.</string>
+    <string name="empty_state_favourites">Bæta við eftirlætum</string>
+    <string name="empty_state_favourites_desc">Bæta við eftirlætum á korti eða flytja þau inn úr skrá.</string>
+    <string name="import_track_desc">Skráin %1$s inniheldur enga ferilpunkta, á að flytja hana inn sem leið?</string>
+    <string name="move_point">Færa punkt</string>
+    </resources>
