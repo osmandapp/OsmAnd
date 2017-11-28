@@ -302,7 +302,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="voice_is_not_available_title">Aucune donnée vocale n\'est spécifiée</string>
     <string name="daynight_mode_day">Jour</string>
     <string name="daynight_mode_night">Nuit</string>
-    <string name="daynight_mode_auto">Horaires de lever / coucher du soleil</string>
+    <string name="daynight_mode_auto">Lever / coucher du soleil</string>
     <string name="daynight_mode_sensor">Détecter la luminosité</string>
     <string name="daynight_descr">Sélectionnez les règles de bascule entre les modes jour / nuit</string>
     <string name="daynight">Mode jour / nuit</string>
@@ -898,7 +898,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="select_navigation_mode">Sélectionnez le mode de transport</string>
 <string name="day_night_info_description">Lever : %1$s
 \nCoucher : %2$s</string>
-    <string name="day_night_info">Information jour/nuit</string>
+    <string name="day_night_info">Information jour / nuit</string>
     <string name="filterpoi_activity">Créer un filtre de points d\'intérêt</string>
     <string name="map_widget_renderer">Style de la carte</string>
     <string name="int_continuosly">En continu</string>
