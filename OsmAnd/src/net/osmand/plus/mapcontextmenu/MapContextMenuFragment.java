@@ -462,6 +462,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		Button directionsButton = (Button) view.findViewById(R.id.context_menu_directions_button);
 		Drawable drawable = getIcon(R.drawable.map_directions, nightMode ? R.color.osmand_orange : R.color.map_widget_blue);
 		directionsButton.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+		directionsButton.setCompoundDrawablePadding(dpToPx(8));
 		directionsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
