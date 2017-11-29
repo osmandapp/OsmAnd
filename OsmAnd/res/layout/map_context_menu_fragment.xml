@@ -232,15 +232,13 @@
 
             <LinearLayout
                 android:id="@+id/download_buttons_container"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/context_menu_action_buttons_h"
                 android:layout_marginTop="@dimen/context_menu_buttons_top_margin"
                 android:clickable="true"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/context_menu_buttons_padding_bottom"
-                android:paddingLeft="62dp"
-                android:paddingRight="2dp"
                 android:visibility="gone"
                 tools:visibility="visible">
 
@@ -256,29 +254,53 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/download_button_left"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:gravity="left|center_vertical"
-                        android:paddingLeft="@dimen/context_menu_button_padding_x"
-                        android:paddingRight="@dimen/context_menu_button_padding_x"
-                        android:text="@string/shared_string_download"
-                        android:textColor="?attr/contextMenuButtonColor"
-                        android:textSize="@dimen/default_desc_text_size"/>
+                    <LinearLayout
+                        android:id="@+id/download_button_left_view"
+                        android:background="?attr/ctx_menu_controller_bg"
+                        android:layout_marginLeft="@dimen/context_menu_padding_margin_medium"
+                        android:layout_marginRight="@dimen/context_menu_padding_margin_medium"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/context_menu_controller_height">
 
-                    <Button
-                        android:id="@+id/download_button_right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:gravity="center"
-                        android:paddingLeft="@dimen/context_menu_button_padding_x"
-                        android:paddingRight="@dimen/context_menu_button_padding_x"
-                        android:text="@string/shared_string_delete"
-                        android:textColor="?attr/contextMenuButtonColor"
-                        android:textSize="@dimen/default_desc_text_size"/>
+                        <TextView
+                            android:textAllCaps="true"
+                            android:id="@+id/download_button_left"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/context_menu_button_padding_x"
+                            android:paddingRight="@dimen/context_menu_button_padding_x"
+                            android:text="@string/shared_string_download"
+                            android:textColor="?attr/contextMenuButtonColor"
+                            android:textSize="@dimen/default_desc_text_size"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/download_button_right_view"
+                        android:background="?attr/ctx_menu_controller_bg"
+                        android:layout_marginLeft="@dimen/context_menu_padding_margin_medium"
+                        android:layout_marginRight="@dimen/context_menu_padding_margin_medium"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/context_menu_controller_height">
+
+                        <TextView
+                            android:textAllCaps="true"
+                            android:id="@+id/download_button_right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/context_menu_button_padding_x"
+                            android:paddingRight="@dimen/context_menu_button_padding_x"
+                            android:text="@string/shared_string_delete"
+                            android:textColor="?attr/contextMenuButtonColor"
+                            android:textSize="@dimen/default_desc_text_size"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

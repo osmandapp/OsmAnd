@@ -50,6 +50,8 @@ import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.util.Algorithms;
 
+import org.w3c.dom.Text;
+
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
@@ -170,8 +172,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		});
 
 		// Left download button
-		final Button leftDownloadButton = (Button) view.findViewById(R.id.download_button_left);
-		leftDownloadButton.setOnClickListener(new View.OnClickListener() {
+		final View leftDownloadButtonView = view.findViewById(R.id.download_button_left_view);
+		leftDownloadButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				TitleButtonController leftDownloadButtonController = menu.getLeftDownloadButtonController();
@@ -182,8 +184,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		});
 
 		// Right download button
-		final Button rightDownloadButton = (Button) view.findViewById(R.id.download_button_right);
-		rightDownloadButton.setOnClickListener(new View.OnClickListener() {
+		final View rightDownloadButtonView = (View) view.findViewById(R.id.download_button_right_view);
+		rightDownloadButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				TitleButtonController rightDownloadButtonController = menu.getRightDownloadButtonController();
@@ -744,10 +746,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 
 			// Left download button
-			final Button leftDownloadButton = (Button) view.findViewById(R.id.download_button_left);
+			final View leftDownloadButtonView = view.findViewById(R.id.download_button_left_view);
+			final TextView leftDownloadButton = (TextView) view.findViewById(R.id.download_button_left);
 			if (leftDownloadButtonController != null) {
 				leftDownloadButton.setText(leftDownloadButtonController.caption);
-				leftDownloadButton.setVisibility(leftDownloadButtonController.visible ? View.VISIBLE : View.GONE);
+				leftDownloadButtonView.setVisibility(leftDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 				Drawable leftIcon = leftDownloadButtonController.getLeftIcon();
 				if (leftIcon != null) {
@@ -755,20 +758,21 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					leftDownloadButton.setCompoundDrawablePadding(dpToPx(8f));
 				}
 			} else {
-				leftDownloadButton.setVisibility(View.GONE);
+				leftDownloadButtonView.setVisibility(View.INVISIBLE);
 			}
 
 			// Right download button
-			final Button rightDownloadButton = (Button) view.findViewById(R.id.download_button_right);
+			final View rightDownloadButtonView = view.findViewById(R.id.download_button_right_view);
+			final TextView rightDownloadButton = (TextView) view.findViewById(R.id.download_button_right);
 			if (rightDownloadButtonController != null) {
 				rightDownloadButton.setText(rightDownloadButtonController.caption);
-				rightDownloadButton.setVisibility(rightDownloadButtonController.visible ? View.VISIBLE : View.GONE);
+				rightDownloadButtonView.setVisibility(rightDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 				Drawable leftIcon = rightDownloadButtonController.getLeftIcon();
 				rightDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
 				rightDownloadButton.setCompoundDrawablePadding(dpToPx(8f));
 			} else {
-				rightDownloadButton.setVisibility(View.GONE);
+				rightDownloadButtonView.setVisibility(View.GONE);
 			}
 
 			// Progress bar
