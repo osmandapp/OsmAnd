@@ -146,8 +146,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		// Left title button
-		final Button leftTitleButton = (Button) view.findViewById(R.id.title_button);
-		leftTitleButton.setOnClickListener(new View.OnClickListener() {
+		final View leftTitleButtonView = view.findViewById(R.id.title_button_view);
+		leftTitleButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				TitleButtonController leftTitleButtonController = menu.getLeftTitleButtonController();
@@ -158,25 +158,13 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		});
 
 		// Right title button
-		final Button rightTitleButton = (Button) view.findViewById(R.id.title_button_right);
-		rightTitleButton.setOnClickListener(new View.OnClickListener() {
+		final View rightTitleButtonView = view.findViewById(R.id.title_button_right_view);
+		rightTitleButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				TitleButtonController rightTitleButtonController = menu.getRightTitleButtonController();
 				if (rightTitleButtonController != null) {
 					rightTitleButtonController.buttonPressed();
-				}
-			}
-		});
-
-		// Left subtitle button
-		final Button leftSubtitleButton = (Button) view.findViewById(R.id.subtitle_button);
-		leftSubtitleButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				TitleButtonController leftSubtitleButtonController = menu.getLeftSubtitleButtonController();
-				if (leftSubtitleButtonController != null) {
-					leftSubtitleButtonController.buttonPressed();
 				}
 			}
 		});
@@ -363,11 +351,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		AndroidUtils.setTextSecondaryColor(getMapActivity(),
 				(TextView) view.findViewById(R.id.distance), nightMode);
 
-		((Button) view.findViewById(R.id.title_button))
+		((TextView) view.findViewById(R.id.title_button))
 				.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue) : getResources().getColor(R.color.osmand_orange));
 		AndroidUtils.setTextSecondaryColor(getMapActivity(),
 				(TextView) view.findViewById(R.id.title_button_right_text), nightMode);
-		((Button) view.findViewById(R.id.title_button_right))
+		((TextView) view.findViewById(R.id.title_button_right))
 				.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue) : getResources().getColor(R.color.osmand_orange));
 
 		AndroidUtils.setTextSecondaryColor(getMapActivity(),
@@ -672,53 +660,55 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			TitleButtonController leftTitleButtonController = menu.getLeftTitleButtonController();
 			TitleButtonController rightTitleButtonController = menu.getRightTitleButtonController();
 			TitleButtonController topRightTitleButtonController = menu.getTopRightTitleButtonController();
-			TitleButtonController leftSubtitleButtonController = menu.getLeftSubtitleButtonController();
 			TitleButtonController leftDownloadButtonController = menu.getLeftDownloadButtonController();
 			TitleButtonController rightDownloadButtonController = menu.getRightDownloadButtonController();
 			TitleProgressController titleProgressController = menu.getTitleProgressController();
 
 			// Title buttons
 			boolean showTitleButtonsContainer = (leftTitleButtonController != null || rightTitleButtonController != null);
-			boolean showTitleDivider = leftSubtitleButtonController != null;
 			final View titleButtonsContainer = view.findViewById(R.id.title_button_container);
 			titleButtonsContainer.setVisibility(showTitleButtonsContainer ? View.VISIBLE : View.GONE);
-			view.findViewById(R.id.title_divider).setVisibility(showTitleDivider ? View.VISIBLE : View.GONE);
 
 			// Left title button
-			final Button leftTitleButton = (Button) view.findViewById(R.id.title_button);
+			final View leftTitleButtonView = view.findViewById(R.id.title_button_view);
+			final TextView leftTitleButton = (TextView) view.findViewById(R.id.title_button);
 			final TextView titleButtonRightText = (TextView) view.findViewById(R.id.title_button_right_text);
 			if (leftTitleButtonController != null) {
 				leftTitleButton.setText(leftTitleButtonController.caption);
-				leftTitleButton.setVisibility(leftTitleButtonController.visible ? View.VISIBLE : View.GONE);
+				if (leftTitleButtonController.visible) {
+					leftTitleButtonView.setVisibility(View.VISIBLE);
+					Drawable leftIcon = leftTitleButtonController.getLeftIcon();
+					if (leftIcon != null) {
+						leftTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
+						leftTitleButton.setCompoundDrawablePadding(dpToPx(8f));
+					}
 
-				Drawable leftIcon = leftTitleButtonController.getLeftIcon();
-				if (leftIcon != null) {
-					leftTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-					leftTitleButton.setCompoundDrawablePadding(dpToPx(8f));
-				}
-
-				if (leftTitleButtonController.needRightText) {
-					titleButtonRightText.setText(leftTitleButtonController.rightTextCaption);
-					titleButtonRightText.setVisibility(View.VISIBLE);
+					if (leftTitleButtonController.needRightText) {
+						titleButtonRightText.setText(leftTitleButtonController.rightTextCaption);
+						titleButtonRightText.setVisibility(View.VISIBLE);
+					} else {
+						titleButtonRightText.setVisibility(View.GONE);
+					}
 				} else {
-					titleButtonRightText.setVisibility(View.GONE);
+					leftTitleButtonView.setVisibility(View.INVISIBLE);
 				}
 			} else {
-				leftTitleButton.setVisibility(View.GONE);
+				leftTitleButtonView.setVisibility(View.INVISIBLE);
 				titleButtonRightText.setVisibility(View.GONE);
 			}
 
 			// Right title button
-			final Button rightTitleButton = (Button) view.findViewById(R.id.title_button_right);
+			final View rightTitleButtonView = view.findViewById(R.id.title_button_right_view);
+			final TextView rightTitleButton = (TextView) view.findViewById(R.id.title_button_right);
 			if (rightTitleButtonController != null) {
 				rightTitleButton.setText(rightTitleButtonController.caption);
-				rightTitleButton.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.GONE);
+				rightTitleButtonView.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 				Drawable leftIcon = rightTitleButtonController.getLeftIcon();
 				rightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
 				rightTitleButton.setCompoundDrawablePadding(dpToPx(8f));
 			} else {
-				rightTitleButton.setVisibility(View.GONE);
+				rightTitleButtonView.setVisibility(View.INVISIBLE);
 			}
 
 			// Top Right title button
@@ -732,21 +722,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				topRightTitleButton.setCompoundDrawablePadding(dpToPx(8f));
 			} else {
 				topRightTitleButton.setVisibility(View.GONE);
-			}
-
-			// Left subtitle button
-			final Button leftSubtitleButton = (Button) view.findViewById(R.id.subtitle_button);
-			if (leftSubtitleButtonController != null) {
-				leftSubtitleButton.setText(leftSubtitleButtonController.caption);
-				leftSubtitleButton.setVisibility(leftSubtitleButtonController.visible ? View.VISIBLE : View.GONE);
-
-				Drawable leftIcon = leftSubtitleButtonController.getLeftIcon();
-				if (leftIcon != null) {
-					leftSubtitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-					leftSubtitleButton.setCompoundDrawablePadding(dpToPx(8f));
-				}
-			} else {
-				leftSubtitleButton.setVisibility(View.GONE);
 			}
 
 			// Download buttons

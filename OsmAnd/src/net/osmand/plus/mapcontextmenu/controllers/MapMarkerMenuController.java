@@ -35,15 +35,15 @@ public class MapMarkerMenuController extends MenuController {
 		leftTitleButtonController.caption = getMapActivity().getString(R.string.mark_passed);
 		leftTitleButtonController.leftIconId = isLight() ? R.drawable.passed_icon_light : R.drawable.passed_icon_dark;
 
-		leftSubtitleButtonController = new TitleButtonController() {
+		rightTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
 				markersHelper.moveMarkerToTop(getMapMarker());
 				getMapActivity().getContextMenu().close();
 			}
 		};
-		leftSubtitleButtonController.caption = getMapActivity().getString(R.string.show_on_top_bar);
-		leftSubtitleButtonController.leftIcon = createShowOnTopbarIcon();
+		rightTitleButtonController.caption = getMapActivity().getString(R.string.show_on_top_bar);
+		rightTitleButtonController.leftIcon = createShowOnTopbarIcon();
 	}
 
 	private Drawable createShowOnTopbarIcon() {

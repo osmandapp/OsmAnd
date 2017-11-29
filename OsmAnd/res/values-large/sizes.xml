@@ -61,6 +61,7 @@
 	<dimen name="context_menu_buttons_bottom">63dp</dimen>
 	<dimen name="context_menu_padding_margin_medium">12dp</dimen>
 	<dimen name="context_menu_padding_margin_small">9dp</dimen>
+	<dimen name="context_menu_controller_height">54dp</dimen>
 
 	<dimen name="fab_size_with_shadow">90dp</dimen>
 	<dimen name="fab_margin_right">18dp</dimen>

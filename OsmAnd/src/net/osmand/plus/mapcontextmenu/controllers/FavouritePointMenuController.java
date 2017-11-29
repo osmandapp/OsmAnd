@@ -33,7 +33,7 @@ public class FavouritePointMenuController extends MenuController {
 			MapMarkerMenuController markerMenuController =
 					new MapMarkerMenuController(mapActivity, mapMarker.getPointDescription(mapActivity), mapMarker);
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
-			leftSubtitleButtonController = markerMenuController.getLeftSubtitleButtonController();
+			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
 		}
 	}
 
