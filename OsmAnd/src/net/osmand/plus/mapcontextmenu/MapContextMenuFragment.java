@@ -735,16 +735,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final View downloadButtonsContainer = view.findViewById(R.id.download_buttons_container);
 			downloadButtonsContainer.setVisibility(showDownloadButtonsContainer ? View.VISIBLE : View.GONE);
 
-			if (showDownloadButtonsContainer) {
-				view.findViewById(R.id.download_buttons_top_border).setVisibility(showTitleButtonsContainer ? View.VISIBLE : View.INVISIBLE);
-				if (showTitleButtonsContainer) {
-					LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) downloadButtonsContainer.getLayoutParams();
-					if (ll.topMargin != 0) {
-						ll.setMargins(0, 0, 0, 0);
-					}
-				}
-			}
-
 			// Left download button
 			final View leftDownloadButtonView = view.findViewById(R.id.download_button_left_view);
 			final TextView leftDownloadButton = (TextView) view.findViewById(R.id.download_button_left);
@@ -772,7 +762,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				rightDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
 				rightDownloadButton.setCompoundDrawablePadding(dpToPx(8f));
 			} else {
-				rightDownloadButtonView.setVisibility(View.GONE);
+				rightDownloadButtonView.setVisibility(View.INVISIBLE);
 			}
 
 			// Progress bar
