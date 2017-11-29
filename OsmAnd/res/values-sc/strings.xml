@@ -2885,4 +2885,11 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="by_date">Pro data</string>
     <string name="by_type">Pro casta</string>
     <string name="modify_the_search_query">Modìfica sa chirca.</string>
+    <string name="release_3_0">\\022 S\'individuatzione de sos sinnales de stop como cunsiderat sa diretzione de ghia
+\n
+\n • Algoritmu nou chi frunit valores significativos ascendentes e discendentes pro sas rastas GPX
+\n
+\n • Su tempus calculadu pro acabare sas àndalas pro s\'escursionismu como tenet in cunsìderu sas artiadas (règula de Naismith)
+\n
+\n</string>
     </resources>
