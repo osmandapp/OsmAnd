@@ -316,8 +316,10 @@
                 android:minHeight="@dimen/context_menu_action_buttons_h"
                 android:orientation="horizontal"
                 android:paddingBottom="@dimen/context_menu_buttons_padding_bottom"
-                android:paddingLeft="72dp"
-                android:paddingRight="2dp"
+                android:paddingLeft="@dimen/context_menu_progress_padding_left"
+                android:paddingStart="@dimen/context_menu_progress_padding_left"
+                android:paddingRight="@dimen/context_menu_progress_padding_right"
+                android:paddingEnd="@dimen/context_menu_progress_padding_right"
                 android:visibility="gone"
                 tools:visibility="visible">
 
