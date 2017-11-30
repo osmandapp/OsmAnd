@@ -2456,4 +2456,6 @@
     <string name="activate_seamarks_plugin">נא להפעיל את תוסף הסמנים הימיים</string>
     <string name="activate_srtm_plugin">נא להפעיל את תוסף ה־SRTM</string>
     <string name="poi_context_menu_modify_osm_change">עריכת שינוי ב־OSM</string>
+    <string name="christmas_poi">נקודת עניין של חג המולד</string>
+    <string name="christmas_desc_q">להציג נקודת עניין של חג המולד?</string>
     </resources>
