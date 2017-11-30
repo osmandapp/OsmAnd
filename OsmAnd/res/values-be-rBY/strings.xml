@@ -606,7 +606,7 @@ Punktaŭ maršrutu %2$s</string>
     <string name="recording_photo_description">Fota %1$s %2$s</string>
     <string name="av_def_action_picture">Sfatahrafavać</string>
     <string name="recording_context_menu_precord">Sfatahrafavać</string>
-    <string name="dropbox_plugin_description">Moduĺ Dropbox dazvaliaje vam sinchranizavać treki i aŭdyjo/videa nataki z vašym Dropbox-kontam.</string>
+    <string name="dropbox_plugin_description">Modul Dropbox dazvalaje vam sinchranizavać treki i aŭdyjo/videa-nataki z vašym Dropbox-akaŭntam.</string>
     <string name="dropbox_plugin_name">Modul Dropbox</string>
     <string name="intermediate_points_change_order">Źmianіć paradak</string>
     <string name="srtm_paid_version_msg">Kali łaska, padumajcie pra nabyćcio modula Іzalinіі vyšyń u Play Store dla padtrymkі dalejšaj raspracoŭkі.</string>
@@ -642,7 +642,7 @@ Punktaŭ maršrutu %2$s</string>
     <string name="recording_default_name">Zapіs</string>
     <string name="shared_string_control_stop">Spynіć</string>
     <string name="shared_string_control_start">Pačać</string>
-    <string name="map_widget_av_notes">Aŭdyjo/vіdea natatkі</string>
+    <string name="map_widget_av_notes">Aŭdyjo/vіdea-natatkі</string>
     <string name="osmand_srtm_short_description_80_chars">Modul OsmAnd dla pazasietkavych іzalinіj vyšyń</string>
     <string name="osmand_srtm_long_description_1000_chars">Hety moduĺ pakazvaje jak izalinii vyšyń tak i reĺjef na standartnych mapach OsmAnd. Hetyja mahčymasci spatrebiacca spartsmienam, turystam, padarožnikam i ŭsim, chto cikavicca strukturaj reĺjefu miascovasci. 
 \n 
@@ -651,8 +651,8 @@ Punktaŭ maršrutu %2$s</string>
     <string name="audionotes_location_not_defined">Miescaznachodžańnie dla pryviazki natatki pakul jašče nie vyznačyłasia. «Vykarystać miescaznachodžańnie…» kab pryznačyć natatku ŭ vybranym miescy.</string>
     
     <string name="map_widget_audionotes">Aŭdyjo-natatkі</string>
-    <string name="audionotes_plugin_description">Modul dla stvareńnia aŭdyjo/vіdea natatak padčas padarožžaŭ, z dapamohaj vykarystańnia knopkі na ekranie mapy abo praz kantekstnaje meniu na lubym miescy na mapie.</string>
-    <string name="audionotes_plugin_name">Aŭdyjo/vіdea natatkі</string>
+    <string name="audionotes_plugin_description">Modul dla stvareńnia aŭdyjo/vіdea-natatak padčas padarožžaŭ, z dapamohaj vykarystańnia knopkі na ekranie mapy abo praz kantekstnaje meniu na lubym miescy na mapie.</string>
+    <string name="audionotes_plugin_name">Aŭdyjo/vіdea-natatkі</string>
     <string name="index_srtm_parts">častak</string>
     <string name="index_srtm_ele">Іzalinіі vyšyń</string>
     <string name="srtm_plugin_description">Hety moduĺ pakazvaje jak izalinii vyšyń tak i reĺjef na standartnych mapach OsmAnd. Heta mahčyma spatrebiacca spartsmienam, turystam, padarožnikam i ŭsim, chto cikavicca strukturaj reĺjefu miascovasci. (Zviarnicie ŭvahu, što dadzienyja vyšyń i reĺjefu asobnyja, dadatkova dastupnyja da spampoŭki, paslia aktyvacyi modulia.) 
@@ -1019,14 +1019,14 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	
 	<string name="update_poi_does_not_change_indexes">Źmieny POI u dastasavańnі nie ŭpłyvajuć na cciahnutyja fajły mapaŭ, źmieny zachoŭvajucca tolkі ŭ lakalnyja fajły.</string>
 	<string name="local_openstreetmap_uploading">Pieradača …</string>
-	<string name="local_openstreetmap_were_uploaded">{0} POI/Zaŭvahі byli adasłany</string>
+	<string name="local_openstreetmap_were_uploaded">{0} POI/Natatki byli adasłany</string>
 	<string name="local_openstreetmap_uploadall">Adasłać usio</string>
 	
 	<string name="local_openstreetmap_upload">Adasłać źmieny ŭ OSM</string>
 	<string name="local_openstreetmap_delete">Vydalić źmieny</string>
 	<string name="local_openstreetmap_descr_title">Asіnchronnaje redahavańnie OSM:</string>
-	<string name="local_openstreetmap_settings">Lakalna zachavanyja OSM POI/Zaŭvahі</string>
-	<string name="local_openstreetmap_settings_descr">Pakazać i kiravać OSM-POI/Zaŭvahami ŭ lakaĺnaj bazie danych.</string>
+	<string name="local_openstreetmap_settings">Lakalna zachavanyja OSM POI/Natatki</string>
+	<string name="local_openstreetmap_settings_descr">Pakazać i kiravać OSM POI/Natatkami ŭ lakalnaj bazie danych.</string>
 	<string name="live_monitoring_interval_descr">Zadajcie interval sietkavaha sačennia.</string>
 	<string name="live_monitoring_interval">Іntervał sietkavaha sačeńnia</string>
 	<string name="live_monitoring_url_descr">Zadajcie veb-adras z nastupnymi paramietrami: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -1384,7 +1384,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="layer_yandex_traffic">Jandeks zatory</string>
 	<string name="layer_route">Maršrut</string>
 	<string name="shared_string_favorites">Ulubionyja</string>
-	<string name="layer_osm_bugs">OSM Zaŭvahі (onłajn)</string>
+	<string name="layer_osm_bugs">OSM-natatki (anłajn)</string>
 	
 	<string name="layer_poi">POI-nakladka…</string>
 	<string name="layer_map">Krynіca mapy…</string>
@@ -2371,9 +2371,9 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="nothing_found">Ničoha nie znojdziena :(</string>
     <string name="nothing_found_descr">Źmianicie pošukavy zapyt abo pavialičcie radyus pošuku.</string>
     <string name="quick_action_showhide_osmbugs_title">Pakazać/schavać OSM-natatki</string>
-    <string name="quick_action_osmbugs_show">Pakazać natatki OSM</string>
-    <string name="quick_action_osmbugs_hide">Schavać natatki OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Nacisk na knopky dziejańnia pakaža/schavaje natatki OSM na mapie.</string>
+    <string name="quick_action_osmbugs_show">Pakazać OSM-natatki</string>
+    <string name="quick_action_osmbugs_hide">Schavać OSM-natatki</string>
+    <string name="quick_action_showhide_osmbugs_descr">Nacisk na knopky dziejańnia pakaža/schavaje OSM-natatki na mapie.</string>
     <string name="sorted_by_distance">Adsartavana pa adlehłaści</string>
     <string name="search_favorites">Pošuk ulubionych</string>
     <string name="srtm_menu_download_descr">Kab ubačyć konturnyja linii, vam nieabchodna spampavać admyslovuju mapu dla hetaha rehijona.</string>
@@ -2934,6 +2934,6 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="one_tap_active_descr">Nacisk na markier na mapie pieramiescić hety markier na pieršaje miesca ŭ spisie aktyŭnych markieraŭ, nie adkryvajučy kantekstnaje mieniu.</string>
     <string name="one_tap_active">Aktyvacyja adnym naciskam</string>
     <string name="empty_state_av_notes">Rabi natatki!</string>
-    <string name="empty_state_av_notes_desc">Dadaj aŭdyjo-, videa- ci fotanatatku na liubuju kropku na mapie, vykarastoŭvajučy vidžet ci kantekstaje mieniu.</string>
+    <string name="empty_state_av_notes_desc">Dadajcie aŭdyjo-, videa- ci fotanatatku na lubuju kropku na mapie, vykarystoŭvajučy vidžet ci kantekstnaje mieniu.</string>
     <string name="modify_the_search_query">Źmianicie pošukavy zapyt.</string>
     </resources>
