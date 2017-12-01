@@ -268,7 +268,7 @@ Lon %2$s</string>
     <string name="show_zoom_buttons_navigation_descr">Mostrar botones de ampliación durante la navegación.</string>
     <string name="show_zoom_buttons_navigation">Mostrar botones de ampliación</string>
     <string name="select_destination_and_intermediate_points">Elige los destinos intermedios</string>
-    <string name="layer_amenity_label">Nombres superpuestos de PDI</string>
+    <string name="layer_amenity_label">Nombres de PDIs superpuestos</string>
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
     <string name="gpx_wpt">Punto de referencia</string>
