@@ -47,7 +47,7 @@
     <string name="av_video_format">قالب خروجی ویدئو</string>
     <string name="av_settings">تنظیمات صدا/ویدئو</string>
     <string name="av_use_external_recorder">استفاده از ضبط‌کنندهٔ سیستم</string>
-    <string name="av_use_external_camera_descr">برای عکس از برنامهٔ خود دستگاه استفاده کن.</string>
+    <string name="av_use_external_camera_descr">برای عکس‌گرفتن از برنامهٔ خود دستگاه استفاده کن.</string>
     <string name="av_use_external_camera">از برنامهٔ دوربین استفاده کن</string>
     <string name="av_settings_descr">تنظیمات صدا و ویدئو را پیکربندی کنید.</string>
     <string name="recording_error">در حین ضبط خطایی رخ داد</string>
@@ -667,13 +667,13 @@
 	
 	<string name="av_photo_play_sound_descr">تعیین کنید در زمان عکسبرداری صدای شاتر پخش شود یا خیر.</string>
 <string name="av_camera_focus">نوع فوکوس دوربین</string>
-	<string name="av_camera_focus_descr">انتخاب نوع فوکوس داخلی دوربین.</string>
+	<string name="av_camera_focus_descr">نوع فوکوس داخلی دوربین را انتخاب کنید.</string>
 	<string name="av_camera_focus_auto">فوکوس خودکار</string>
 	<string name="av_camera_focus_hiperfocal">فوکوس فراکانونی</string>
 	<string name="av_camera_focus_edof">عمق میدان گسترده (EDOF)</string>
 	<string name="av_camera_focus_infinity">فوکوس بر روی بینهایت تنظیم شده است</string>
-	<string name="av_camera_focus_macro">حالت فوکوس ماکرو (از نزدیک)</string>
-	<string name="av_camera_focus_continuous">دوربین دائماً فوکوس می‌کند</string>
+	<string name="av_camera_focus_macro">فوکوس ماکرو (از نزدیک)</string>
+	<string name="av_camera_focus_continuous">دوربین، پیوسته وضوح را تنظیم می‌کند</string>
 	<string name="choose_intersected_street">تقاطع را انتخاب کنید</string>
 	<string name="osm_settings">ویرایش نقشهٔ OSM</string>
 	<string name="save_current_track_descr">مسیر جاری را همین الآن روی کارت حافظه ذخیره کن.</string>
@@ -2013,7 +2013,7 @@
 	<string name="shared_string_is_open_24_7">ساعت کار 24/7</string>
     <string name="storage_directory_card">حافظهٔ جانبی</string>
     <string name="coords_format">قالب مختصات</string>
-    <string name="coords_format_descr">قالب برای مختصات جغرافیایی.</string>
+    <string name="coords_format_descr">قالب نمایش مختصات جغرافیایی را مشخص کنید.</string>
   	<string name="app_mode_bus">اتوبوس</string>
  	<string name="app_mode_train">قطار</string>
     <string name="follow_us">ما را دنبال کنید</string>
@@ -2151,7 +2151,7 @@
     <string name="altitude_range">دامنهٔ ارتفاع</string>
     <string name="average_altitude">میانگین ارتفاع</string>
     <string name="total_distance">مسافت کل</string>
-    <string name="routing_attr_height_obstacles_name">استفاده از اطلاعات ارتفاع</string>
+    <string name="routing_attr_height_obstacles_name">استفاده از داده‌های ارتفاعی</string>
     <string name="routing_attr_height_obstacles_description">استفاده از اطلاعات ارتفاع زمین ارائه‌شده توسط SRTM،‏ ASTER و EU-DEM.</string>
 
     <string name="rendering_attr_depthContours_description">نمایش نقاط و خطوط تراز عمقی.</string>
@@ -2244,7 +2244,7 @@
     <string name="upload_anonymously">آپلود به‌صورت ناشناس</string>
     <string name="show_transparency_seekbar">نوار تنظیم شفافیت را نشان بده</string>
     <string name="download_files_error_not_enough_space">فضای ذخیره‌سازی ناکافی است! {3} مگابایت برای ذخیره‌سازی موقت و {1} مگابایت برای ذخیره‌سازی دائمی لازم است. فضای موجود فقط {2} مگابایت است.</string>
-    <string name="upload_osm_note">آپلود ویرایش‌های OSM</string>
+    <string name="upload_osm_note">آپلود توضیح ویرایشی OSM</string>
     <string name="map_marker_1st">اولین نشانهٔ نقشه</string>
     <string name="map_marker_2nd">دومین نشانهٔ نقشه</string>
     <string name="shared_string_toolbar">نوار ابزار</string>
@@ -2279,7 +2279,7 @@
     <string name="starting_point">مبدأ</string>
     <string name="shared_string_not_selected">انتخاب نشده</string>
     <string name="rec_split_desc">هنگامی که فضای استفاده‌شده افزون بر فضای ذخیره‌سازی می‌شود، کلیپ‌ها را جایگزین کن.</string>
-    <string name="rec_split_clip_length_desc">محدودیت برای مدت‌زمان کلیپ‌های ضبط‌شده.</string>
+    <string name="rec_split_clip_length_desc">مدت‌زمان کلیپ‌های ضبط‌شده را مشخص کنید.</string>
     <string name="rec_split_storage_size">حجم فضای ذخیره‌سازی</string>
     <string name="rec_split_storage_size_desc">مقدار فضای قابل‌تصرف برای همهٔ کلیپ‌های ضبط‌شده.</string>
     <string name="live_updates">به‌روزرسانی‌های پویا</string>
@@ -2298,8 +2298,8 @@
     <string name="show_on_start">هنگام شروع نشانش بده</string>
     <string name="copied_to_clipboard">کپی شد</string>
     <string name="osm_edit_deleted_poi">حذف POI</string>
-    <string name="osm_edit_removed_note">حذف توضیح ویرایشی OSM</string>
-    <string name="osn_bug_name">توضیح ویرایشی OSM</string>
+    <string name="osm_edit_removed_note">حذف توضیح ویرایشی</string>
+    <string name="osn_bug_name">توضیح ویرایشی</string>
     <string name="osn_add_dialog_title">نوشتن یادداشت</string>
     <string name="osn_comment_dialog_title">افزودن توضیح</string>
     <string name="osn_reopen_dialog_title">بازگشایی توضیح ویرایشی</string>
@@ -2513,7 +2513,7 @@
     <string name="quick_action_take_audio_note">یادداشت صوتی</string>
     <string name="quick_action_take_video_note">یادداشت ویدئویی</string>
     <string name="quick_action_take_photo_note">یادداشت عکسی</string>
-    <string name="quick_action_add_osm_bug">افزودن توضیح ویرایشی OSM</string>
+    <string name="quick_action_add_osm_bug">افزودن توضیح ویرایشی</string>
     <string name="quick_action_navigation_voice">صدا روشن/خاموش</string>
     <string name="quick_action_navigation_voice_off">صدا خاموش است</string>
     <string name="quick_action_navigation_voice_on">صدا روشن است</string>
@@ -2650,9 +2650,9 @@
     <string name="private_access_routing_req">مقصد شما در ناحیه‌ای با دسترسی خصوصی قرار دارد. آیا دسترسی به مسیرهای خصوصی برای این سفر مجاز شود؟</string>
     <string name="restart_search">شروع مجدد جست‌وجو</string>
     <string name="nothing_found">چیزی پیدا نشد :(</string>
-    <string name="quick_action_showhide_osmbugs_title">آشکار/پنهان‌کردن توضیحات ویرایشی OSM</string>
-    <string name="quick_action_osmbugs_show">نشان‌دادن توضیحات ویرایشی OSM</string>
-    <string name="quick_action_osmbugs_hide">پنهان‌کردن توضیحات ویرایشی OSM</string>
+    <string name="quick_action_showhide_osmbugs_title">آشکار/پنهان‌کردن توضیحات ویرایشی</string>
+    <string name="quick_action_osmbugs_show">نشان‌دادن توضیحات ویرایشی</string>
+    <string name="quick_action_osmbugs_hide">پنهان‌کردن توضیحات ویرایشی</string>
     <string name="quick_action_showhide_osmbugs_descr">با لمس دکمهٔ عملیاتی، توضیحات ویرایشی OSM را روی نقشه آشکار یا پنهان کنید.</string>
     <string name="sorted_by_distance">مرتب‌شده بر اساس مسافت</string>
     <string name="search_favorites">جست‌وجوی نقاط برگزیده</string>
@@ -2692,7 +2692,7 @@
 \n
 \n</string>
     <string name="auto_split_recording_descr">بعد از ۶ دقیقه وقفه، بخش جدید شروع می‌شود. بعد از ۲ ساعت وقفه، مسیر جدید شروع می‌شود. بعد از وقفهٔ طولانی‌تر درصورتی‌که تاریخ تغییر کند فایل جدید ایجاد می‌شود.</string>
-    <string name="upload_osm_note_description">می‌توانید ویرایش‌های OSM خود را به‌صورت ناشناس یا با نام کاربری سایت OpenStreetMap.org آپلود کنید.</string>
+    <string name="upload_osm_note_description">می‌توانید توضیحات ویرایشی OSM را به‌صورت ناشناس یا با نام کاربری‌تان در سایت OpenStreetMap.org، آپلود کنید.</string>
     <string name="route_roundabout_short">خروجی %1$d را بگیرید و بروید</string>
     <string name="trip_rec_notification_settings_desc">در نوار اعلان دستگاه یک اعلان نشان می‌دهد که بتوانید ضبط سفر را شروع کنید.</string>
     <string name="save_track_min_speed_descr">فیلتر: کمترین سرعتی که یک نقطه باید داشته باشد تا ثبت شود.</string>
@@ -2708,7 +2708,7 @@
     <string name="shared_string_sound">صدا</string>
     <string name="show_on_start_description">اگر خاموش باشد، مستقیماً صفحهٔ نقشه را برایتان می‌آورد.</string>
     <string name="osm_edit_modified_poi">اصلاح POI</string>
-    <string name="osm_edit_commented_note">توضیح ویرایشی دارای نظر</string>
+    <string name="osm_edit_commented_note">توضیح ویرایشیِ دارای نظر</string>
     <string name="lang_mk">مقدونی</string>
     <string name="lang_fy">فریسی غربی</string>
     <string name="lang_als">آلبانیایی (تُسک)</string>
@@ -2729,7 +2729,7 @@
     <string name="shared_string_action_template">عملیات {0}</string>
     <string name="osn_modify_dialog_error">خطایی رخ داد: یادداشت اصلاح نشد</string>
     <string name="osn_modify_dialog_title">اصلاح یادداشت</string>
-    <string name="context_menu_item_modify_note">اصلاح توضیح ویرایشی OSM</string>
+    <string name="context_menu_item_modify_note">اصلاح توضیح ویرایشی</string>
     <string name="marker_save_as_track">ذخیره به‌عنوان مسیر</string>
     <string name="show_arrows_on_the_map">فلش‌ها را روی نقشه نشان بده</string>
     <string name="show_passed">ردشده‌ها را نشان بده</string>
@@ -2742,7 +2742,7 @@
     <string name="gpx_no_tracks_title">هنوز مسیری ندارید</string>
     <string name="gpx_no_tracks_title_folder">همچنین می‌توانید مسیرها را در این پوشه قرار دهید</string>
     <string name="rec_split_title">استفاده از تقسیمگر ضبط‌کننده</string>
-    <string name="context_menu_item_open_note">ایجاد توضیحات ویرایشی OSM</string>
+    <string name="context_menu_item_open_note">ایجاد توضیح ویرایشی OSM</string>
     <string name="osm_edit_reopened_note">توضیح ویرایشی بازگشوده</string>
     <string name="osm_edit_created_note">ایجاد توضیح ویرایشی</string>
     <string name="rendering_attr_hideProposed_name">مکان‌های در حد پیشنهاد</string>
@@ -2762,7 +2762,7 @@
     <string name="keep_showing_on_map">به نمایشش روی نقشه ادامه بده</string>
     <string name="save_as_route_point">ذخیره به‌عنوان نقاط مسیر</string>
     <string name="route_point">نقطهٔ مسیر</string>
-    <string name="routing_attr_relief_smoothness_factor_name">نوسان ارتفاع را انتخاب کنید</string>
+    <string name="routing_attr_relief_smoothness_factor_name">میزان اُفت‌وخیز ارتفاع را انتخاب کنید</string>
     <string name="osm_save_offline">ذخیره به‌صورت آفلاین</string>
     <string name="share_osm_edits_subject">ویرایش‌های OSM - ارسال‌شده با برنامهٔ OsmAnd</string>
     <string name="nm">nmi</string>
