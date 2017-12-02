@@ -2152,7 +2152,7 @@
 	<string name="poi_self_service">Libre service</string>
 	<string name="poi_automated">Automatisé</string>
 	<string name="poi_parking_type">Type</string>
-	<string name="poi_fuel_type">Type</string>
+	<string name="poi_fuel_type">Type de carburant</string>
 	<string name="poi_fuel_avia_type">Type</string>
 	<string name="poi_payment_type">Type de paiement</string>
 	<string name="poi_traffic_signals_sound">Son</string>
@@ -3105,4 +3105,5 @@
 
 	<string name="poi_parking_fee">Tarif de stationnement</string>
 
+	<string name="poi_water_purification">Assainissement de l\'eau</string>
 	</resources>
