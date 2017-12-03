@@ -2116,7 +2116,7 @@ Lon %2$s</string>
 
     <string name="shared_string_location">Standort</string>
     <string name="hillshade_layer_disabled">Relief deaktiviert</string>
-    <string name="shared_string_commit">Freigeben</string>
+    <string name="shared_string_commit">OSM-Notiz</string>
 	
     <string name="av_locations">Standorte</string>
     <string name="shared_string_hide">verbergen</string>
@@ -2910,4 +2910,16 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="rename_marker">Markierung umbenennen</string>
     <string name="mark_passed">Markierung passiert</string>
     <string name="track_waypoints">Track-Wegpunkte</string>
+    <string name="modify_the_search_query">Suchanfrage ändern.</string>
+    <string name="empty_state_osm_edits">Erstellen oder ändern von OSM-Objekten</string>
+    <string name="empty_state_osm_edits_descr">Erstellen oder ändern von OSM-POI, OSM-Notes öffnen oder kommentieren, und hinzufügen von aufgezeichnete GPX-Dateien.</string>
+    <string name="shared_string_deleted">Gelöscht</string>
+    <string name="shared_string_edited">Bearbeitet</string>
+    <string name="shared_string_added">Hinzugefügt</string>
+    <string name="marker_activated">Marker %s aktiviert.</string>
+    <string name="one_tap_active_descr">Tippen Sie auf eine Markierung auf der Karte um ihn an die Spitze der aktiven Marker zu verschieben, ohne das Kontextmenü zu öffnen.</string>
+    <string name="empty_state_av_notes">Machen Sie sich Notizen!</string>
+    <string name="by_date">Nach Datum</string>
+    <string name="by_type">Nach Typ</string>
+    <string name="import_gpx_file_description">kann als Favoriten-Punkte oder als Track-Datei importiert werden.</string>
     </resources>
