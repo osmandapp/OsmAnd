@@ -3106,4 +3106,14 @@
 	<string name="poi_parking_fee">Tarif de stationnement</string>
 
 	<string name="poi_water_purification">Assainissement de l\'eau</string>
+	<string name="poi_water_place_access">Point d\'eau</string>
+
+<string name="poi_seamark_clearance_height">Hauteur maximale</string>
+	<string name="poi_seamark_clearance_height_closed">Hauteur maximale (fermé)</string>
+	<string name="poi_seamark_clearance_height_open">Hauteur maximale (ouvert)</string>
+	<string name="poi_seamark_clearance_width">Largeur maximale</string>
+
+	<string name="poi_health_specialty_general_yes">Médecin généraliste</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Médecine palliative</string>
+
 	</resources>
