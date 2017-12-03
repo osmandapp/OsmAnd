@@ -2923,5 +2923,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="by_type">Nach Typ</string>
     <string name="import_gpx_file_description">kann als Favoriten-Punkte oder als Track-Datei importiert werden.</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Widget oder Kontextmenü hinzufügen.</string>
-    <string name="notes_by_date">Notizen nach Zeitpunkt</string>
+    <string name="notes_by_date">Notizen nach Datum</string>
     </resources>
