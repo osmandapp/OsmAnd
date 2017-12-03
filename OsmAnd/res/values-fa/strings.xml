@@ -2308,7 +2308,7 @@
     <string name="osn_add_dialog_error">خطایی رخ داد: یادداشت ایجاد نشد</string>
     <string name="osn_close_dialog_success">یادداشت بسته شد</string>
     <string name="osn_close_dialog_error">خطایی رخ داد: یادداشت بسته نشد</string>
-    <string name="shared_string_location">\nمکان</string>
+    <string name="shared_string_location">مکان</string>
     <string name="lang_nds">آلمانی فرودین</string>
     <string name="read_more">بیشتر بخوانید</string>
     <string name="whats_new">امکانات جدید در</string>
