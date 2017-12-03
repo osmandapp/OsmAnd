@@ -2030,7 +2030,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="map_downloaded">Carte téléchargée</string>
     <string name="go_to_map">Afficher la carte</string>
     <string name="map_downloaded_descr">La carte %1$s a été téléchargée, vous pouvez l\'utiliser immédiatement.</string>
-    <string name="shared_string_qr_code">QR-code</string>
+    <string name="shared_string_qr_code">Code QR</string>
     <string name="enter_country_name">Saisissez le pays</string>
     <string name="world_map_download_descr">La carte mondiale de base est manquante ou périmée. Merci de télécharger cette carte mondiale de base pour permettre un affichage sommaire.</string>
     <string name="new_version">Nouvelle version</string>
@@ -2104,7 +2104,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="use_drawer_btn">Utiliser le menu</string>
     <string name="dashboard_or_drawer_title">Lancement du Tableau de bord ou du Menu</string>
     <string name="dashboard_or_drawer_description">Nouvelle option permettant de définir le comportement du bouton Menu : lancement du Tableau de bord ou du Menu statique ? Ce paramètre peut être modifié par la suite dans les préférences.</string>
-    <string name="access_from_map_description">Le bouton Menu lance le tableau de bord (plutôt que le Menu)</string>
+    <string name="access_from_map_description">Le bouton Menu affiche le tableau de bord (plutôt que le menu).</string>
     <string name="access_from_map">Accès depuis la carte</string>
     <string name="please_specify_poi_type_only_from_list">Indiquez un type pour ce point d\'intérêt ou ignorez</string>
     <string name="routing_attr_avoid_stairs_name">Éviter les escaliers</string>
@@ -2781,7 +2781,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="mapillary_action_descr">Participez en ajoutant vos photos détaillées sur Mapillary.</string>
     <string name="mapillary_widget">Gadget Mapillary</string>
     <string name="mapillary_widget_descr">Vous permet de contribuer facilement à Mapillary.</string>
-    <string name="mapillary_descr">Des photos en-ligne détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
+    <string name="mapillary_descr">Des photos détaillées en ligne pour tous. Découvrez des lieux, collaborez, capturez le monde.</string>
     <string name="plugin_mapillary_descr">Des photos détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
     <string name="mapillary_image">Image Mapillary</string>
     <string name="distance_moving">Distance corrigée</string>
