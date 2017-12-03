@@ -3639,4 +3639,12 @@
 
 	<string name="poi_charging_station_output">Ladestation Ausgang</string>
 
+<string name="poi_map_type_topo">Karte Typ: Topo</string>
+	<string name="poi_map_type_street">Karte Typ: Straße</string>
+	<string name="poi_map_type_scheme">Karte Typ: Schema</string>
+	<string name="poi_map_type_toposcope">Karte Typ: Orientierungstafel</string>
+	<string name="poi_charging_station_filter">Ladestation</string>
+
+	<string name="poi_depot">Lager</string>
+
 </resources>
