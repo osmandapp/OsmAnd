@@ -2628,4 +2628,9 @@
     <string name="show_number_pad">Ցուցադրել թվային վահանակը</string>
     <string name="coordinate_input_accuracy">%1$d թվեր</string>
     <string name="mark_passed">Նշել անցած</string>
+    <string name="empty_state_osm_edits">Ստեղծեք կամ փոփոխել OSM օբյեկտները</string>
+    <string name="empty_state_osm_edits_descr">Ստեղծեք կամ փոփոխեք OSM POI-րը, բացեք կամ մեկնաբանեք OSM-ի նշումները և ուղարկեք գրանցված GPX ֆայլեր:</string>
+    <string name="shared_string_deleted">Ջնջված է</string>
+    <string name="shared_string_edited">Խմբագրվեց</string>
+    <string name="shared_string_added">Ավելացված է</string>
     </resources>
