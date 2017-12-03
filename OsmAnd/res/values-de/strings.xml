@@ -2917,7 +2917,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_edited">Bearbeitet</string>
     <string name="shared_string_added">Hinzugefügt</string>
     <string name="marker_activated">Markierung %s aktiviert.</string>
-    <string name="one_tap_active_descr">Tippen Sie auf eine Markierung auf der Karte um ihn an die Spitze der aktiven Marker zu verschieben, ohne das Kontextmenü zu öffnen.</string>
+    <string name="one_tap_active_descr">Markierung auf der Karte antippen, um sie an die erste Stelle der aktiven Markierungen zu verschieben, ohne das Kontextmenü zu öffnen.</string>
     <string name="empty_state_av_notes">Machen Sie sich Notizen!</string>
     <string name="by_date">Nach Datum</string>
     <string name="by_type">Nach Typ</string>
