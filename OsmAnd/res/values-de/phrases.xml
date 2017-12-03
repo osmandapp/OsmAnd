@@ -3641,7 +3641,7 @@
 
 <string name="poi_map_type_topo">Kartentyp: Gelände</string>
 	<string name="poi_map_type_street">Kartentyp: Straße</string>
-	<string name="poi_map_type_scheme">Kartentypen: Übersicht</string>
+	<string name="poi_map_type_scheme">Kartentyp: Übersicht</string>
 	<string name="poi_map_type_toposcope">Karte Typ: Orientierungstafel</string>
 	<string name="poi_charging_station_filter">Ladestation</string>
 
