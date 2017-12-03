@@ -2905,7 +2905,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="digits_quantity">Anzahl der Dezimalstellen</string>
     <string name="show_number_pad">Nummernblock anzeigen</string>
     <string name="coordinate_input_accuracy_description">Automatisch in das nächste Feld wechseln nach der Eingabe von \" %1$d Dezimalstellen.</string>
-    <string name="coordinate_input_accuracy">%1$d Ziffern</string>
+    <string name="coordinate_input_accuracy">%1$d Stellen</string>
     <string name="go_to_next_field">Zum nächsten Feld</string>
     <string name="rename_marker">Markierung umbenennen</string>
     <string name="mark_passed">Markierung passiert</string>
