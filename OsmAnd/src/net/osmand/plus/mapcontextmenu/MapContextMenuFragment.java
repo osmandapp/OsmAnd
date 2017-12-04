@@ -50,8 +50,6 @@ import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.util.Algorithms;
 
-import org.w3c.dom.Text;
-
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
@@ -196,7 +194,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		});
 
 		// Top Right title button
-		final Button topRightTitleButton = (Button) view.findViewById(R.id.title_button_top_right);
+		final View topRightTitleButton = view.findViewById(R.id.title_button_bottom_view);
 		topRightTitleButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -348,7 +346,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (menuLine2 != null) {
 			AndroidUtils.setTextSecondaryColor(getMapActivity(), (TextView) menuLine2, nightMode);
 		}
-		((Button) view.findViewById(R.id.title_button_top_right))
+		((TextView) view.findViewById(R.id.title_button_bottom))
 				.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue) : getResources().getColor(R.color.osmand_orange));
 		AndroidUtils.setTextSecondaryColor(getMapActivity(),
 				(TextView) view.findViewById(R.id.distance), nightMode);
@@ -715,16 +713,17 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 
 			// Top Right title button
-			final Button topRightTitleButton = (Button) view.findViewById(R.id.title_button_top_right);
+			final View topRightTitleButtonView = view.findViewById(R.id.title_button_bottom_view);
+			final TextView topRightTitleButton = (TextView) view.findViewById(R.id.title_button_bottom);
 			if (topRightTitleButtonController != null) {
 				topRightTitleButton.setText(topRightTitleButtonController.caption);
-				topRightTitleButton.setVisibility(topRightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
+				topRightTitleButtonView.setVisibility(topRightTitleButtonController.visible ? View.VISIBLE : View.GONE);
 
 				Drawable leftIcon = topRightTitleButtonController.getLeftIcon();
 				topRightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
 				topRightTitleButton.setCompoundDrawablePadding(dpToPx(8f));
 			} else {
-				topRightTitleButton.setVisibility(View.GONE);
+				topRightTitleButtonView.setVisibility(View.GONE);
 			}
 
 			// Download buttons

@@ -71,27 +71,6 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:id="@+id/context_menu_close_btn_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:minWidth="@dimen/context_menu_top_right_button_min_width"
-                            android:orientation="horizontal">
-
-                            <Button
-                                android:id="@+id/title_button_top_right"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="?attr/selectableItemBackground"
-                                android:gravity="center"
-                                android:paddingLeft="@dimen/context_menu_button_padding_x"
-                                android:paddingRight="@dimen/context_menu_button_padding_x"
-                                android:text="@string/shared_string_others"
-                                android:textColor="?attr/contextMenuButtonColor"
-                                android:textSize="@dimen/default_desc_text_size"/>
-
-                        </LinearLayout>
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -286,6 +265,34 @@
                         android:textSize="@dimen/default_desc_text_size"/>
 
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginBottom="@dimen/context_menu_padding_margin_medium"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:clickable="true"
+                android:id="@+id/title_button_bottom_view"
+                android:background="?attr/ctx_menu_controller_bg"
+                android:layout_marginLeft="@dimen/context_menu_padding_margin_medium"
+                android:layout_marginRight="@dimen/context_menu_padding_margin_medium"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/context_menu_controller_height"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:textAllCaps="true"
+                    android:id="@+id/title_button_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/context_menu_button_padding_x"
+                    android:paddingRight="@dimen/context_menu_button_padding_x"
+                    android:text="@string/shared_string_others"
+                    android:textColor="?attr/contextMenuButtonColor"
+                    android:textSize="@dimen/default_desc_text_size"/>
 
             </LinearLayout>
 
