@@ -793,19 +793,18 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void buildHeader() {
 		OsmandApplication app = getMyApplication();
 		if (app != null && view != null) {
-			final View iconLayout = view.findViewById(R.id.context_menu_icon_layout);
 			final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
 			Drawable icon = menu.getLeftIcon();
 			int iconId = menu.getLeftIconId();
 			if (icon != null) {
 				iconView.setImageDrawable(icon);
-				iconLayout.setVisibility(View.VISIBLE);
+				iconView.setVisibility(View.VISIBLE);
 			} else if (iconId != 0) {
 				iconView.setImageDrawable(getIcon(iconId,
 						!nightMode ? R.color.osmand_orange : R.color.osmand_orange_dark));
-				iconLayout.setVisibility(View.VISIBLE);
+				iconView.setVisibility(View.VISIBLE);
 			} else {
-				iconLayout.setVisibility(View.GONE);
+				iconView.setVisibility(View.GONE);
 			}
 			setAddressLocation();
 		}
