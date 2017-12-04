@@ -1945,7 +1945,7 @@
     <!-- string name="lat_lon_pattern">طول: %1$.5f عرض: %2$.5f</string -->
     <string name="access_sort">مرتب‌سازی</string>
     <string name="number_of_gpx_files_selected_pattern">%s فایل GPX انتخاب شده است</string>
-    <string name="osm_live_email_desc">به‌منظور اینکه دربارهٔ مشارکت‌ها اطلاعاتی برایتان ارسال کنیم، نوشتنش ضروری است.</string>
+    <string name="osm_live_email_desc">به‌منظور اینکه اطلاعاتی دربارهٔ مشارکت‌ها برایتان ارسال کنیم، نوشتنش ضروری است.</string>
     <string name="download_files_question_space_with_temp">آیا {0} فایل را دانلود می‌کنید؟ 
 \n{3} مگابایت برای ذخیره‌سازی موقت و {1} مگابایت برای ذخیره‌سازی دائمی لازم دارید. 
 \n{2} مگابایت فضای آزاد وجود دارد.</string>
@@ -1963,7 +1963,7 @@
     <string name="closing_at">بستن در</string>
     <string name="osm_live_payment_desc">هزینهٔ اشتراک ماهانه است. هر زمان که بخواهید می‌توانید اشتراک خود را در گوگل‌پلی لغو کنید.</string>
     <string name="donation_to_osm">کمک مالی به OpenStreetMap</string>
-    <string name="donation_to_osm_desc">بخشی از کمک‌های مالی به مشترکین OpenStreetMap که به تغییرات کمک می‌کنند ارسال می‌شود. هزینهٔ اشتراک ثابت می‌ماند.</string>
+    <string name="donation_to_osm_desc">بخشی از کمک‌های مالی را به مشترکینی می‌دهیم که به تغییرات OpenStreetMap کمک می‌کنند. هزینهٔ اشتراک تغییری نمی‌کند.</string>
     <string name="osm_live_subscription_desc">این اشتراک، به‌روزرسانی‌های ساعتی، روزانه و هفتگی و همچنین دانلود نامحدود همهٔ نقشه‌ها در سراسر دنیا را فعال می‌کند.</string>
     <string name="get_it">دریافت</string>
     <string name="get_for">پرداخت برای %1$s</string>
@@ -2073,7 +2073,7 @@
     <string name="osm_live_subscribe_btn">اشتراک</string>
     <string name="osm_live_user_public_name">اسم جهانی</string>
     <string name="osm_live_hide_user_name">اسم من را در گزارش‌ها نشان نده</string>
-    <string name="osm_live_support_region">منطقهٔ پشتیبانی‌شده</string>
+    <string name="osm_live_support_region">منطقهٔ تحتِ‌پوشش</string>
     <string name="osm_live_month_cost">هزینهٔ ماهانه</string>
     <string name="osm_live_month_cost_desc">پرداخت ماهیانه.</string>
     <string name="osm_live_active">فعال</string>
@@ -2081,7 +2081,7 @@
     <string name="osm_live_enter_email">لطفاً نشانی ایمیل معتبر وارد کنید</string>
     <string name="osm_live_enter_user_name">لطفاً اسم جهانی را وارد کنید</string>
     <string name="osm_live_thanks">سپاسگزاریم که مشترک به‌روزرسانی‌های پویا شدید!</string>
-    <string name="osm_live_region_desc">بخشی از کمک‌های مالی شما به کاربرانی پرداخت می‌شود که در آن منطقه اصلاحات نقشه را انجام می‌دهند.</string>
+    <string name="osm_live_region_desc">بخشی از کمک‌های مالی شما به کاربرانی پرداخت می‌شود که این منطقه از نقشه را سروسامان می‌دهند.</string>
     <string name="osm_live_subscription_settings">تنظیمات اشتراک</string>
     <string name="quick_action_auto_zoom">زوم خودکار روشن/خاموش</string>
     <string name="select_street">انتخاب خیابان</string>
@@ -2184,8 +2184,8 @@
     <string name="save_track_min_speed">کمترین سرعت برای ورود به سیستم</string>
     <string name="save_track_precision">کمترین دقت برای ثبت</string>
     <string name="christmas_poi">نقطهٔ POI کریسمس</string>
-    <string name="christmas_desc">پیش‌بینی کریسمس و تعطیلات سال نو. برای نمایش POIهای مرتبط با کریسمس: درخت کریسمس، فروشگاه‌ها و غیره.</string>
-    <string name="christmas_desc_q">آیا POIهای مربوط به کریسمس نمایش داده شود؟</string>
+    <string name="christmas_desc">در آستانهٔ کریسمس و تعطیلات سال نو، نقاط محبوب مرتبط با کریسمس را ببینید: درخت‌های کریسمس، فروشگاه‌ها و غیره.</string>
+    <string name="christmas_desc_q">نقاط محبوبی (POI) که برچسب کریسمس دارند نمایش داده شود؟</string>
     <string name="rendering_value_light_brown_name">قهوه‌ای روشن</string>
     <string name="rendering_value_dark_brown_name">قهوه‌ای تیره</string>
     <string name="rendering_attr_contourColorScheme_name">رنگ‌بندی منحنی‌های تراز</string>
