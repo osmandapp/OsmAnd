@@ -2909,4 +2909,10 @@ Kérlek adj meg egy teljes kódot</string>
 	<string name="waypoints_added_to_map_markers">Útpontok hozzáadva a térképjelölőkhöz</string>
 	<string name="wrong_format">Hibás formátum</string>
     <string name="shared_string_road">Út</string>
+    <string name="empty_state_osm_edits">OSM-objektumok létrehozása és módosítása</string>
+    <string name="empty_state_osm_edits_descr">Hozz létre vagy módosíts OSM POI-kat, nyiss vagy kommentelj OSM Jegyzeteket és járulj hozzá a projekthez felvett GPX nyomvonalakkal.</string>
+    <string name="shared_string_deleted">Törölve</string>
+    <string name="shared_string_edited">Szerkesztve</string>
+    <string name="shared_string_added">Hozzáadva</string>
+    <string name="marker_activated">%s jelölő aktiválva.</string>
     </resources>
