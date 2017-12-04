@@ -341,7 +341,8 @@ public class MainActivity extends AppCompatActivity implements SampleLocationLis
 	public void initMapMarkers() {
 
 		// Create my location marker
-		Drawable myLocationDrawable = OsmandResources.getDrawable("map_pedestrian_location");
+		String locIconId = "map_pedestrian_location";
+		Drawable myLocationDrawable = OsmandResources.getDrawable(locIconId);
 		myMarkersCollection = new MapMarkersCollection();
 		myLocationMarker = new MapMarkerBuilder()
 				.setMarkerId(MARKER_ID_MY_LOCATION)
@@ -354,13 +355,14 @@ public class MainActivity extends AppCompatActivity implements SampleLocationLis
 				//		SampleUtils.getDrawableAsByteArray(myLocationDrawable)))
 				.setPinIcon(SwigUtilities.createSkBitmapARGB888With(
 						myLocationDrawable.getIntrinsicWidth(), myLocationDrawable.getIntrinsicHeight(),
-						SampleUtils.getDrawableAsByteArray(myLocationDrawable)))
+						SampleUtils.getBitmapAsByteArray(OsmandResources.getBitmap(locIconId))))
 				.buildAndAddToCollection(myMarkersCollection);
 
 		mapView.addSymbolsProvider(myMarkersCollection);
 
 		// Create context pin marker
-		Drawable pinDrawable = OsmandResources.getDrawable("map_pin_context_menu");
+		String pinIconId = "map_pin_context_menu";
+		Drawable pinDrawable = OsmandResources.getDrawable(pinIconId);
 		contextPinMarkersCollection = new MapMarkersCollection();
 		contextPinMarker = new MapMarkerBuilder()
 				.setMarkerId(MARKER_ID_CONTEXT_PIN)
@@ -369,7 +371,7 @@ public class MainActivity extends AppCompatActivity implements SampleLocationLis
 				.setIsHidden(true)
 				.setPinIcon(SwigUtilities.createSkBitmapARGB888With(
 						pinDrawable.getIntrinsicWidth(), pinDrawable.getIntrinsicHeight(),
-						SampleUtils.getDrawableAsByteArray(pinDrawable)))
+						SampleUtils.getBitmapAsByteArray(OsmandResources.getBitmap(pinIconId))))
 				.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
 				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
 				.buildAndAddToCollection(contextPinMarkersCollection);

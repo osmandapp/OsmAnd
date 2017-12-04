@@ -3,6 +3,8 @@ package net.osmand.core.samples.android.sample1;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 
@@ -76,6 +78,13 @@ public class OsmandResources {
 
 	public static Drawable getDrawable(int id) {
 		return getDrawableInternal(id);
+	}
+
+	public static Bitmap getBitmap(String id) {
+		if (osmandResources != null) {
+			return BitmapFactory.decodeResource(osmandResources, resolveDrawableId(id));
+		}
+		return null;
 	}
 
 	public static Drawable getDrawableNonCached(int id) {
