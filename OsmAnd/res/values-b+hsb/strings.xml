@@ -1329,4 +1329,13 @@
     <string name="shared_string_change">Změnić</string>
     <string name="shared_string_close">Začinić</string>
     <string name="shared_string_add">Přidać</string>
+    <string name="osn_modify_dialog_error">Zmylk je so stał: notica njeje so změniła</string>
+    <string name="context_menu_item_open_note">OSM-noticu wočinić</string>
+    <string name="osm_edit_created_note">OSM-notica je so wutworiła</string>
+    <string name="osn_reopen_dialog_title">Noticu znowa wočinić</string>
+    <string name="av_locations_descr">GPX-dataja z městnami noticow.</string>
+    <string name="share_note">Noticu rozšěrić</string>
+    <string name="stop_routing_confirm">Chceš nawigaciju woprawdźe přetorhnyć?</string>
+    <string name="recording_context_menu_arecord">Awdio-noticu nahrać</string>
+    <string name="recording_context_menu_vrecord">Widejo-noticu nahrać</string>
     </resources>

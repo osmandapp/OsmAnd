@@ -646,8 +646,8 @@
 	<string name="poi_car_sharing">Cumpartzidura de veturas</string>
 	<string name="poi_photo">Butega de fotografia</string>
 	<string name="poi_fuel_diesel">Diesel</string>
-	<string name="poi_fuel_gtl_diesel">GTL diesel</string>
-	<string name="poi_fuel_hgv_diesel">HGV diesel</string>
+	<string name="poi_fuel_gtl_diesel">Diesel GTL</string>
+	<string name="poi_fuel_hgv_diesel">Diesel HGV (pro veìculos pesantes)</string>
 	<string name="poi_fuel_biodiesel">Bio diesel</string>
 	<string name="poi_fuel_lpg">LPG</string>
 	<string name="poi_fuel_ethanol">Etanolo</string>

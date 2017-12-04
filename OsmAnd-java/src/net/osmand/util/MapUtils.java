@@ -463,10 +463,18 @@ public class MapUtils {
 		int mod1 = y1 % div;
 		int div2 = y2 / div;
 		int mod2 = y2 % div;
-		double h1 = coefficientsY[div1] + mod1 / (double)div *
-				(coefficientsY[div1 + 1] - coefficientsY[div1]);
-		double h2 = coefficientsY[div2] + mod2 / (double)div *
-				(coefficientsY[div2 + 1] - coefficientsY[div2]);
+		double h1 ;
+		if(div1 + 1 >= coefficientsY.length) {
+			h1 = coefficientsY[div1] + mod1 / (double) div * (coefficientsY[div1] - coefficientsY[div1 - 1]);
+		} else {
+			h1 = coefficientsY[div1] + mod1 / (double) div * (coefficientsY[div1 + 1] - coefficientsY[div1]);
+		}
+		double h2 ;
+		if(div2 + 1 >= coefficientsY.length) {
+			h2 = coefficientsY[div2] + mod2 / (double) div * (coefficientsY[div2] - coefficientsY[div2 - 1]);
+		} else {
+			h2 = coefficientsY[div2] + mod2 / (double) div * (coefficientsY[div2 + 1] - coefficientsY[div2]);
+		}
 		double res = h1 - h2;
 		return res;
 	}

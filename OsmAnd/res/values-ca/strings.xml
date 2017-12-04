@@ -2736,4 +2736,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="notes_by_date">Anotacions per data</string>
     <string name="by_date">Per data</string>
     <string name="by_type">Per tipus</string>
+    <string name="modify_the_search_query">Modifica la consulta de cerca.</string>
     </resources>

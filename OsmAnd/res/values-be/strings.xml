@@ -146,7 +146,7 @@
     <string name="recording_photo_description">Фота %1$s %2$s</string>
     <string name="av_def_action_picture">Сфатаграфаваць</string>
     <string name="recording_context_menu_precord">Сфатаграфаваць</string>
-    <string name="dropbox_plugin_description">Модуль Dropbox дазваляе вам сінхранізаваць трэкі і аўдыё/відэа натакi з вашым Dropbox-контам.</string>
+    <string name="dropbox_plugin_description">Модуль Dropbox дазваляе вам сынхранізаваць трэкі і аўдыё/відэа-натакi з вашым Dropbox-акаўнтам.</string>
     <string name="dropbox_plugin_name">Модуль Dropbox</string>
     
     <string name="intermediate_points_change_order">Зьмяніць парадак</string>
@@ -180,14 +180,14 @@
     <string name="recording_context_menu_play">Граць</string>
     <string name="recording_description">Запіс %1$s %3$s %2$s</string>
     <string name="recording_default_name">Запіс</string>
-    <string name="map_widget_av_notes">Аўдыё/відэа нататкі</string>
+    <string name="map_widget_av_notes">Аўдыё/відэа-нататкі</string>
     <string name="osmand_srtm_short_description_80_chars">Модуль OsmAnd для пазасеткавых ізаліній вышынь</string>
     <string name="map_widget_distancemeasurement">Вымярэньне адлегласьці</string>
     <string name="audionotes_location_not_defined">Месцазнаходжаньне для прывязкі нататкі пакуль яшчэ не вызначылася. «Выкарыстаць месцазнаходжаньне…» каб прызначыць нататку ў выбраным месцы.</string>
     
     <string name="map_widget_audionotes">Аўдыё-нататкі</string>
-    <string name="audionotes_plugin_description">Модуль для стварэньня аўдыё/відэа нататак падчас падарожжаў, з дапамогай выкарыстаньня кнопкі на экране мапы або праз кантэкстнае мэню на любым месцы на мапе.</string>
-    <string name="audionotes_plugin_name">Аўдыё/відэа нататкі</string>
+    <string name="audionotes_plugin_description">Модуль для стварэньня аўдыё/відэа-нататак падчас падарожжаў, з дапамогай выкарыстаньня кнопкі на экране мапы або праз кантэкстнае мэню на любым месцы на мапе.</string>
+    <string name="audionotes_plugin_name">Аўдыё/відэа-нататкі</string>
     <string name="index_srtm_parts">частак</string>
     <string name="index_srtm_ele">Ізалініі вышынь</string>
     <string name="srtm_plugin_name">Ізалініі вышынь</string>
@@ -540,14 +540,14 @@
 	
 	<string name="update_poi_does_not_change_indexes">Зьмены POI у дастасаваньні не ўплываюць на cьцягнутыя файлы мапаў, зьмены захоўваюцца толькі ў лякальныя файлы.</string>
 	<string name="local_openstreetmap_uploading">Перадача …</string>
-	<string name="local_openstreetmap_were_uploaded">{0} POI/Заўвагі былі адасланы</string>
+	<string name="local_openstreetmap_were_uploaded">{0} POI/Нататкі былі адасланы</string>
 	<string name="local_openstreetmap_uploadall">Адаслаць усё</string>
 	
 	<string name="local_openstreetmap_upload">Адаслаць зьмены ў OSM</string>
 	<string name="local_openstreetmap_delete">Выдаліць зьмены</string>
 	<string name="local_openstreetmap_descr_title">Асінхроннае рэдагаваньне OSM:</string>
-	<string name="local_openstreetmap_settings">Лякальна захаваныя OSM POI/Заўвагі</string>
-	<string name="local_openstreetmap_settings_descr">Паказаць і кіраваць OSM-POI/Заўвагамі ў лакальнай базе даных.</string>
+	<string name="local_openstreetmap_settings">Лякальна захаваныя OSM POI/Нататкі</string>
+	<string name="local_openstreetmap_settings_descr">Паказаць і кіраваць OSM POI/Нататкамі ў лякальнай базе даных.</string>
 	
 	
 	<string name="live_monitoring_interval_descr">Задайце інтэрвал сеткавага сачэння.</string>
@@ -892,7 +892,7 @@
 	<string name="thanks_yandex_traffic">Дзякуй Яндэксу за дарожную інфармацыю.</string>
 	<string name="layer_yandex_traffic">Яндэкс заторы</string>
 	<string name="layer_route">Маршрут</string>
-	<string name="layer_osm_bugs">OSM Заўвагі (онлайн)</string>
+	<string name="layer_osm_bugs">OSM-нататкі (анлайн)</string>
 	
 	<string name="layer_poi">POI-накладка…</string>
 	<string name="layer_map">Крыніца мапы…</string>
@@ -2709,11 +2709,11 @@
     <string name="restart_search">Перазапусціць пошук</string>
     <string name="increase_search_radius">Павялічыць радыус пошуку</string>
     <string name="nothing_found">Нічога не знойдзена :(</string>
-    <string name="nothing_found_descr">Змяніць запыт пошуку ці павялічыць радыус пошуку.</string>
-    <string name="quick_action_showhide_osmbugs_title">Паказаць/схаваць нататкі OSM</string>
-    <string name="quick_action_osmbugs_show">Паказаць нататкі OSM</string>
-    <string name="quick_action_osmbugs_hide">Схаваць нататкі OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Націск на кнопку дзеяння пакажа/схавае нататкі OSM на мапе.</string>
+    <string name="nothing_found_descr">Зьмяніце пошукавы запыт або павялічце радыюс пошуку.</string>
+    <string name="quick_action_showhide_osmbugs_title">Паказаць/схаваць OSM-нататкі</string>
+    <string name="quick_action_osmbugs_show">Паказаць OSM-нататкі</string>
+    <string name="quick_action_osmbugs_hide">Схаваць OSM-нататкі</string>
+    <string name="quick_action_showhide_osmbugs_descr">Націск на кнопку дзеяньня пакажа/схавае OSM-нататкі на мапе.</string>
     <string name="sorted_by_distance">Адсартавана па адлегласці</string>
     <string name="search_favorites">Пошук улюбёных</string>
     <string name="shared_string_plugin">Дадатак</string>
@@ -2983,6 +2983,6 @@
     <string name="one_tap_active_descr">Націск на маркер на мапе перамесціць гэты маркер на першае месца ў спісе актыўных маркераў, не адкрываючы кантэкстнае меню.</string>
     <string name="one_tap_active">Актывацыя адным націскам</string>
     <string name="empty_state_av_notes">Рабі нататкі!</string>
-    <string name="empty_state_av_notes_desc">Дадай аўдыё-, відэа- ці фотанататку на любую кропку на мапе, выкарастоўваючы віджэт ці кантэкстае меню.</string>
+    <string name="empty_state_av_notes_desc">Дадайце аўдыё-, відэа- ці фотанататку на любую кропку на мапе, выкарыстоўваючы віджэт ці кантэкстнае меню.</string>
     <string name="modify_the_search_query">Зьмяніце пошукавы запыт.</string>
     </resources>
