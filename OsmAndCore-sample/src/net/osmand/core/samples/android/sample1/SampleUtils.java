@@ -190,11 +190,15 @@ public class SampleUtils {
 	}
 
 	public static byte[] getDrawableAsByteArray(Drawable drawable) {
+		Bitmap bitmap;
 		if (drawable instanceof BitmapDrawable) {
-			Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-			return getBitmapAsByteArray(bitmap);
+			bitmap = ((BitmapDrawable) drawable).getBitmap();
+		} else if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+			bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+		} else {
+			bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
 		}
-		return null;
+		return getBitmapAsByteArray(bitmap);
 	}
 
 	public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
