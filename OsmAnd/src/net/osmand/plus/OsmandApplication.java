@@ -599,7 +599,11 @@ public class OsmandApplication extends MultiDexApplication {
 				}
 				if (routingHelper.isFollowingMode()) {
 					AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-					mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
+					if (Build.VERSION.SDK_INT >= 19) {
+						mgr.setExact(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
+					} else {
+						mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
+					}
 					System.exit(2);
 				}
 				defaultHandler.uncaughtException(thread, ex);
