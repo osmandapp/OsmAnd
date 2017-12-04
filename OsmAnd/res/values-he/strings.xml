@@ -2458,4 +2458,5 @@
     <string name="poi_context_menu_modify_osm_change">עריכת שינוי ב־OSM</string>
     <string name="christmas_poi">נקודת עניין של חג המולד</string>
     <string name="christmas_desc_q">להציג נקודת עניין של חג המולד?</string>
+    <string name="copied_to_clipboard">הועתק ללוח הגזירים</string>
     </resources>
