@@ -2579,7 +2579,7 @@
 	<string name="poi_xmas_market">Mercat nadalenc</string>
 	<string name="poi_xmas_pyramid">Piràmide nadalenca</string>
 	<string name="poi_xmas_shop">Subministraments nadalencs</string>
-	<string name="poi_xmas_shop_christmas_tree">Venda d\'abres</string>
+	<string name="poi_xmas_shop_christmas_tree">Venda d\'arbres</string>
 	<string name="poi_xmas_tree">Arbre nadalenc</string>
 	<string name="poi_xmas_day_date">Nadal: període per l\'esdeveniment</string>
 	<string name="poi_xmas_note">Nadal: nota</string>
@@ -3130,4 +3130,9 @@
 	<string name="poi_water_purification">Depuració d\'aigües</string>
 	<string name="poi_water_place_access">Accés del lloc aquàtic</string>
 
-</resources>
+<string name="poi_seamark_clearance_height">Altura màxima</string>
+	<string name="poi_seamark_clearance_height_closed">Altura màxima (tancat)</string>
+	<string name="poi_seamark_clearance_height_open">Altura màxima (obert)</string>
+	<string name="poi_seamark_clearance_width">Amplada màxima</string>
+
+	</resources>
