@@ -444,7 +444,7 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static void registerMapContextMenu(MapActivity map, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {
+	public static void registerMapContextMenu(MapActivity map, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj, int dividerLayoutResId) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			if (plugin instanceof ParkingPositionPlugin) {
 				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
@@ -459,11 +459,15 @@ public abstract class OsmandPlugin {
 				if (adapter.length() > itemsCount) {
 					adapter.addItem(new ContextMenuItem.ItemBuilder()
 							.setPosition(itemsCount)
-							.setLayout(R.layout.context_menu_list_divider)
+							.setLayout(dividerLayoutResId)
 							.createItem());
 				}
 			}
 		}
+	}
+
+	public static void registerMapContextMenu(MapActivity map, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {
+		registerMapContextMenu(map, latitude, longitude, adapter, selectedObj, R.layout.context_menu_list_divider);
 	}
 
 	public static void registerLayerContextMenu(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
