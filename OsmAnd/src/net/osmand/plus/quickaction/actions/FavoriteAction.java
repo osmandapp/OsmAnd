@@ -2,6 +2,9 @@ package net.osmand.plus.quickaction.actions;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +14,8 @@ import android.widget.ImageView;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GeocodingLookupService;
+import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
+import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
@@ -28,6 +32,9 @@ public class FavoriteAction extends QuickAction {
 	public static final String KEY_CATEGORY_NAME = "category_name";
 	public static final String KEY_CATEGORY_COLOR = "category_color";
 
+	private transient AddressLookupRequest lookupRequest;
+	private transient ProgressDialog progressDialog;
+
 	public FavoriteAction() {
 		super(TYPE);
 	}
@@ -38,46 +45,73 @@ public class FavoriteAction extends QuickAction {
 
 	@Override
 	public void execute(final MapActivity activity) {
-
-		final LatLon latLon = activity.getMapView()
-				.getCurrentRotatedTileBox()
-				.getCenterLatLon();
-
+		final LatLon latLon = activity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 		final String title = getParams().get(KEY_NAME);
 
 		if (title == null || title.isEmpty()) {
+			progressDialog = createProgressDialog(activity, new DialogOnClickListener() {
+				@Override
+				public void skipOnClick() {
+					onClick(activity.getString(R.string.favorite), !Boolean.valueOf(getParams().get(KEY_DIALOG)));
+				}
 
-			final Dialog progressDialog = new ProgressDialog(activity);
-			progressDialog.setCancelable(false);
-			progressDialog.setTitle(R.string.search_address);
+				@Override
+				public void enterNameOnClick() {
+					onClick("", false);
+				}
+
+				private void onClick(String title, boolean autoFill) {
+					activity.getMyApplication().getGeocodingLookupService().cancel(lookupRequest);
+					dismissProgressDialog();
+					addFavorite(activity, latLon, title, autoFill);
+				}
+			});
 			progressDialog.show();
 
-			GeocodingLookupService.AddressLookupRequest lookupRequest = new GeocodingLookupService.AddressLookupRequest(latLon,
-
-					new GeocodingLookupService.OnAddressLookupResult() {
-
-						@Override
-						public void geocodingDone(String address) {
-
-							if (progressDialog != null) progressDialog.dismiss();
-
-							if (activity != null) {
-
-								activity.getContextMenu().getFavoritePointEditor().add(latLon, address, "",
-										getParams().get(KEY_CATEGORY_NAME),
-										Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)),
-										!Boolean.valueOf(getParams().get(KEY_DIALOG)));
-							}
-						}
-
-					}, null);
+			lookupRequest = new AddressLookupRequest(latLon, new OnAddressLookupResult() {
+				@Override
+				public void geocodingDone(String address) {
+					dismissProgressDialog();
+					addFavorite(activity, latLon, address, !Boolean.valueOf(getParams().get(KEY_DIALOG)));
+				}
+			}, null);
 
 			activity.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
+		} else {
+			addFavorite(activity, latLon, title, !Boolean.valueOf(getParams().get(KEY_DIALOG)));
+		}
+	}
 
-		} else activity.getContextMenu().getFavoritePointEditor().add(latLon, title, "",
-				getParams().get(KEY_CATEGORY_NAME),
-				Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)),
-				!Boolean.valueOf(getParams().get(KEY_DIALOG)));
+	private ProgressDialog createProgressDialog(Context context, @NonNull final DialogOnClickListener listener) {
+		ProgressDialog dialog = new ProgressDialog(context);
+		dialog.setCancelable(false);
+		dialog.setMessage(context.getString(R.string.search_address));
+		dialog.setButton(Dialog.BUTTON_POSITIVE, context.getString(R.string.shared_string_skip),
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						listener.skipOnClick();
+					}
+				});
+		dialog.setButton(Dialog.BUTTON_NEGATIVE, context.getString(R.string.access_hint_enter_name),
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						listener.enterNameOnClick();
+					}
+				});
+		return dialog;
+	}
+
+	private void dismissProgressDialog() {
+		if (progressDialog != null) {
+			progressDialog.dismiss();
+		}
+	}
+
+	private void addFavorite(MapActivity mapActivity, LatLon latLon, String title, boolean autoFill) {
+		mapActivity.getContextMenu().getFavoritePointEditor().add(latLon, title, "",
+				getParams().get(KEY_CATEGORY_NAME), Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)), autoFill);
 	}
 
 	@Override
@@ -207,5 +241,12 @@ public class FavoriteAction extends QuickAction {
 
 		getParams().put(KEY_CATEGORY_NAME, name);
 		getParams().put(KEY_CATEGORY_COLOR, String.valueOf(color));
+	}
+
+	private interface DialogOnClickListener {
+
+		void skipOnClick();
+
+		void enterNameOnClick();
 	}
 }

@@ -359,6 +359,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 							mapActivity.getContextMenu().closeActiveToolbar();
 							showToolbar();
+							getMapActivity().updateStatusBarColor();
 							getMapActivity().refreshMap();
 							hide();
 						} else {
@@ -933,6 +934,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			hideToolbar();
+			mapActivity.updateStatusBarColor();
+			mapActivity.refreshMap();
 			getChildFragmentManager().popBackStack();
 		}
 		super.onDismiss(dialog);
