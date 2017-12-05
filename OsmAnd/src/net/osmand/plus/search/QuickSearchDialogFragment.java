@@ -933,6 +933,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			hideToolbar();
+			mapActivity.refreshMap();
 			getChildFragmentManager().popBackStack();
 		}
 		super.onDismiss(dialog);
