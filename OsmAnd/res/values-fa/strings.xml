@@ -433,7 +433,7 @@
 	<string name="accuracy">دقت</string>
 	<string name="altitude">ارتفاع</string>
 	<string name="i_am_here">من اینجا هستم</string>
-	<string name="local_openstreetmap_uploadall">همه را آپلود کن</string>
+	<string name="local_openstreetmap_uploadall">آپلود همه</string>
 	
 	<string name="local_openstreetmap_upload">آپلود اصلاحات به OSM</string>
 	<string name="local_openstreetmap_delete">حذف اصلاحات</string>
@@ -922,7 +922,7 @@
 	<string name="uploading">در حال آپلود…</string>
 	<string name="uploading_data">در حال آپلود داده‌ها…</string>
 	<string name="shared_string_clear_all">پاک‌کردن همه</string>
-	<string name="favorite">برگزیده</string>
+	<string name="favorite">نقطهٔ برگزیده</string>
 	<string name="search_history_building">ساختمان: {0}، {1}، {2}</string>
 	<string name="search_history_street">خیابان: {0}، {1}</string>
 	<string name="search_history_int_streets">تقاطع: {0} x {1} به {2}</string>
@@ -1328,7 +1328,7 @@
     <string name="select_gpx">انتخاب فایل GPX…</string>
     <string name="route_descr_select_destination">انتخاب مقصد</string>
     <string name="shared_string_select_on_map">انتخاب روی نقشه</string>
-    <string name="shared_string_favorite">برگزیده</string>
+    <string name="shared_string_favorite">نقطهٔ برگزیده</string>
     <string name="route_preferences">ترجیحات مسیر</string>
     <string name="route_info">اطلاعات مسیر</string>
     <string name="use_displayed_track_for_navigation">آیا از مسیر نمایش‌داده‌شده برای راهبری استفاده می‌کنید؟</string>
@@ -1799,7 +1799,7 @@
 	<string name="shared_string_edit">ویرایش</string>
 	<string name="shared_string_places">مکان‌ها</string>
 	<string name="shared_string_search">جست‌وجو</string>
-	<string name="shared_string_show_description">نمایش توضیحات.</string>
+	<string name="shared_string_show_description">نمایش توضیحات</string>
 	<string name="shared_string_message">پیام</string>
 	<string name="agps_data_last_downloaded">آخرین باری که اطلاعات A-GPS دانلود شده: %1$s</string>
     <string name="confirm_usage_speed_cameras">در بسیاری از کشورها (آلمان، فرانسه، ایتالیا و...) بنا بر قانون، استفاده از هشداردهندهٔ دوربین‌های ترافیکی مجاز نیست. OsmAnd هیچ‌گونه مسئولیتی در قبال نقض قانون از سوی شما ندارد. لطفاً تنها در صورتی که مجاز به استفاده از این ویژگی هستید بله را انتخاب کنید.</string>
@@ -2535,7 +2535,7 @@
     <string name="quick_action_add_parking_descr">با لمس دکمهٔ عملیاتی یک جای پارک در مرکز صفحه علامت‌گذاری می‌شود.</string>
     <string name="favorite_autofill_toast_text">" اینجا ذخیره شد: "</string>
     <string name="favorite_empty_place_name">مکان</string>
-    <string name="quick_action_duplicates">نام عملیات فوری موردنظر در حال حاضر استفاده شده است. برای جلوگیری از تکرار به %1$s تغییر کرد.</string>
+    <string name="quick_action_duplicates">نام عملیات فوری موردنظر قبلاً استفاده شده است. برای جلوگیری از تکرار، به «%1$s» تغییر کرد.</string>
     <string name="quick_action_duplicate">نام تکراری برای عملیات فوری</string>
     <string name="quick_action_showhide_favorites_descr">با لمس دکمهٔ عملیاتی، نقاط برگزیده روی نقشه پنهان/آشکار می‌شوند.</string>
     <string name="quick_action_showhide_poi_descr">با لمس دکمهٔ عملیاتی، POIها روی نقشه پنهان/آشکار می‌شوند.</string>
