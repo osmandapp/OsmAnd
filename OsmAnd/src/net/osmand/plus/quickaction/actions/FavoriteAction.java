@@ -52,16 +52,18 @@ public class FavoriteAction extends QuickAction {
 			progressDialog = createProgressDialog(activity, new DialogOnClickListener() {
 				@Override
 				public void skipOnClick() {
-					activity.getMyApplication().getGeocodingLookupService().cancel(lookupRequest);
-					dismissProgressDialog();
-					addFavorite(activity, latLon, activity.getString(R.string.favorite), !Boolean.valueOf(getParams().get(KEY_DIALOG)));
+					onClick(activity.getString(R.string.favorite), !Boolean.valueOf(getParams().get(KEY_DIALOG)));
 				}
 
 				@Override
 				public void enterNameOnClick() {
+					onClick("", false);
+				}
+
+				private void onClick(String title, boolean autoFill) {
 					activity.getMyApplication().getGeocodingLookupService().cancel(lookupRequest);
 					dismissProgressDialog();
-					addFavorite(activity, latLon, "", false);
+					addFavorite(activity, latLon, title, autoFill);
 				}
 			});
 			progressDialog.show();
