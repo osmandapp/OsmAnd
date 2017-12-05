@@ -3,6 +3,8 @@ package net.osmand.plus.mapcontextmenu.other;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.text.TextUtilsCompat;
+import android.support.v4.view.ViewCompat;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
@@ -14,6 +16,7 @@ import net.osmand.util.MapUtils;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 public class ShareMenu extends BaseMenuController {
 
@@ -92,6 +95,9 @@ public class ShareMenu extends BaseMenuController {
 			sb.append(address).append("\n");
 		}
 		sb.append(getMapActivity().getString(R.string.shared_string_location)).append(": ");
+		if (TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL) {
+			sb.append("\n");
+		}
 		sb.append(geoUrl).append("\n").append(httpUrl);
 		String sms = sb.toString();
 		switch (item) {

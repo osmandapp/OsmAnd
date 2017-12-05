@@ -2959,8 +2959,8 @@
 	<string name="poi_takeaway">Jídlo s sebou</string>
 	<string name="poi_wheelchair_accessibility">Přístupné pro vozíčkáře</string>
 	<string name="poi_cuisine_ice_cream">Zmrzlina</string>
-	<string name="poi_fuel_type">Typ</string>
-	<string name="poi_fuel_avia_type">Typ</string>
+	<string name="poi_fuel_type">Typ paliva</string>
+	<string name="poi_fuel_avia_type">Typ paliva (letecké)</string>
 	<string name="poi_clothes_type">Typ</string>
 	<string name="poi_shoes_type">Typ</string>
 	<string name="poi_fire_hydrant_type">Typ</string>

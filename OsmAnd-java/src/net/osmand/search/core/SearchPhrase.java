@@ -587,6 +587,9 @@ public class SearchPhrase {
         Iterator<BinaryMapIndexReader> it = indexes.iterator();
         while (it.hasNext()) {
             BinaryMapIndexReader r = it.next();
+            if(r == null || r.getFile() == null) {
+            	continue;
+            }
             String filename = r.getFile().getName();
             if (filename.matches("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+\\.obf")) {
                 String currRegionName = r.getRegionName();

@@ -95,7 +95,7 @@
     <string name="animate_route_off">Arrêter l\'animation</string>
     <string name="animate_route">Démarrer l\'animation</string>
 
-    <string name="file_can_not_be_renamed">Fichier ne peut être renommé.</string>
+    <string name="file_can_not_be_renamed">Le fichier ne peut pas être renommé.</string>
     <string name="file_with_name_already_exists">Un fichier avec ce nom existe déjà.</string>
     <string name="gpx_navigation">Itinéraire GPX</string>
     <string name="poi_query_by_name_matches_categories">Des catégories de points d\'intérêt correspondantes à la recherche ont été trouvées :</string>
@@ -302,7 +302,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="voice_is_not_available_title">Aucune donnée vocale n\'est spécifiée</string>
     <string name="daynight_mode_day">Jour</string>
     <string name="daynight_mode_night">Nuit</string>
-    <string name="daynight_mode_auto">Horaires de lever / coucher du soleil</string>
+    <string name="daynight_mode_auto">Lever / coucher du soleil</string>
     <string name="daynight_mode_sensor">Détecter la luminosité</string>
     <string name="daynight_descr">Sélectionnez les règles de bascule entre les modes jour / nuit</string>
     <string name="daynight">Mode jour / nuit</string>
@@ -315,7 +315,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="fast_route_mode">Itinéraire le plus rapide</string>
     <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide ou Désactiver pour calculer l\'itinéraire le plus économe en carburant</string>
     <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} tuiles ({2} Mb)</string>
-    <string name="shared_string_download_map">Télécharger la carte</string>
+    <string name="shared_string_download_map">Télécharger une carte</string>
     <string name="select_max_zoom_preload_area">Sélectionnez le zoom maximum pour précharger la zone visible</string>
     <string name="maps_could_not_be_downloaded">Impossible de télécharger cette carte</string>
     <string name="continuous_rendering">Affichage continu</string>
@@ -898,7 +898,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="select_navigation_mode">Sélectionnez le mode de transport</string>
 <string name="day_night_info_description">Lever : %1$s
 \nCoucher : %2$s</string>
-    <string name="day_night_info">Information jour/nuit</string>
+    <string name="day_night_info">Information jour / nuit</string>
     <string name="filterpoi_activity">Créer un filtre de points d\'intérêt</string>
     <string name="map_widget_renderer">Style de la carte</string>
     <string name="int_continuosly">En continu</string>
@@ -1636,7 +1636,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Voies partagées pour les taxis</string>
     <string name="rendering_attr_tramTrainRoutes_name">Lignes de tramway et train</string>
 
-    <string name="impassable_road">Évitez les routes</string>
+    <string name="impassable_road">Éviter les routes…</string>
     <string name="rendering_category_hide">Masquer</string>
     <string name="wake_on_voice">Allumer l\'écran</string>
     <string name="wake_on_voice_descr">Allumer l\'écran (si éteint) à l\'approche d\'une bifurcation.</string>
@@ -2030,7 +2030,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="map_downloaded">Carte téléchargée</string>
     <string name="go_to_map">Afficher la carte</string>
     <string name="map_downloaded_descr">La carte %1$s a été téléchargée, vous pouvez l\'utiliser immédiatement.</string>
-    <string name="shared_string_qr_code">QR-code</string>
+    <string name="shared_string_qr_code">Code QR</string>
     <string name="enter_country_name">Saisissez le pays</string>
     <string name="world_map_download_descr">La carte mondiale de base est manquante ou périmée. Merci de télécharger cette carte mondiale de base pour permettre un affichage sommaire.</string>
     <string name="new_version">Nouvelle version</string>
@@ -2104,7 +2104,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="use_drawer_btn">Utiliser le menu</string>
     <string name="dashboard_or_drawer_title">Lancement du Tableau de bord ou du Menu</string>
     <string name="dashboard_or_drawer_description">Nouvelle option permettant de définir le comportement du bouton Menu : lancement du Tableau de bord ou du Menu statique ? Ce paramètre peut être modifié par la suite dans les préférences.</string>
-    <string name="access_from_map_description">Le bouton Menu lance le tableau de bord (plutôt que le Menu)</string>
+    <string name="access_from_map_description">Le bouton Menu affiche le tableau de bord (plutôt que le menu).</string>
     <string name="access_from_map">Accès depuis la carte</string>
     <string name="please_specify_poi_type_only_from_list">Indiquez un type pour ce point d\'intérêt ou ignorez</string>
     <string name="routing_attr_avoid_stairs_name">Éviter les escaliers</string>
@@ -2373,8 +2373,8 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="no_update_info_desc">Ne pas vérifier les mises à jour ni les offres promotionnelles OsmAnd</string>
     <string name="no_update_info">Ne pas afficher les mises à jour</string>
     <string name="skip_map_downloading">Ignorer le téléchargement des cartes</string>
-    <string name="skip_map_downloading_desc">"Aucune carte hors-ligne n\'est installée. Vous pouvez  sélectionner une carte dans la liste ou télécharger ultérieurement une carte depuis le menu - %1$s."</string>
-    <string name="search_another_country">Sélectionnez une autre région</string>
+    <string name="skip_map_downloading_desc">Aucune carte hors-ligne n\'est installée. Vous pouvez sélectionner une carte dans la liste ou télécharger ultérieurement une carte depuis le menu « %1$s ».</string>
+    <string name="search_another_country">Sélectionner une autre région</string>
     <string name="search_map">Recherche des cartes …</string>
     <string name="first_usage_wizard_desc">Laisser OsmAnd déterminer votre position et vous suggérer les cartes de la région.</string>
     <string name="location_not_found">Position non trouvée</string>
@@ -2781,7 +2781,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="mapillary_action_descr">Participez en ajoutant vos photos détaillées sur Mapillary.</string>
     <string name="mapillary_widget">Gadget Mapillary</string>
     <string name="mapillary_widget_descr">Vous permet de contribuer facilement à Mapillary.</string>
-    <string name="mapillary_descr">Des photos en-ligne détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
+    <string name="mapillary_descr">Des photos détaillées en ligne pour tous. Découvrez des lieux, collaborez, capturez le monde.</string>
     <string name="plugin_mapillary_descr">Des photos détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
     <string name="mapillary_image">Image Mapillary</string>
     <string name="distance_moving">Distance corrigée</string>
@@ -2857,10 +2857,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="choose_navigation_type">Sélectionnez le type de navigation</string>
     <string name="add_route_points">Ajouter des points à la route</string>
     <string name="add_line">Ajouter une ligne</string>
-    <string name="empty_state_my_tracks">Ajouter et enregistrer la trace</string>
+    <string name="empty_state_my_tracks">Ajouter et enregistrer des traces</string>
     <string name="empty_state_my_tracks_desc">Enregistrer ou importer les traces à afficher.</string>
     <string name="empty_state_favourites">Ajouter des favoris</string>
-    <string name="empty_state_favourites_desc">Ajouter des favoris sur le carte ou importer les depuis un fichier</string>
+    <string name="empty_state_favourites_desc">Ajouter des favoris sur la carte ou en importer depuis un fichier.</string>
     <string name="import_track">Importer la trace</string>
     <string name="import_track_desc">Le fichier %1$s ne contient aucune étape, l\'importer comme trace ?</string>
     <string name="move_point">Déplacer le point</string>
@@ -3035,4 +3035,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="notes_by_date">Notes par date</string>
     <string name="by_date">Par date</string>
     <string name="by_type">Par type</string>
+    <string name="modify_the_search_query">Modifier la recherche.</string>
     </resources>

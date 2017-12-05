@@ -131,7 +131,7 @@
 	<string name="poi_payment_type">wašnje zapłaćenja</string>
 	<string name="poi_additional_type">přidatne</string>
 	<string name="poi_internet_access_type">wašnje přistupa do interneta</string>
-	<string name="poi_bicycle_service">Kolesowarski serwis</string>
+	<string name="poi_bicycle_service">kolesowarski serwis</string>
 	<string name="poi_payment_toll_type">wašnje zapłaćenja</string>
 	<string name="poi_traffic_signals_sound">Zwuk</string>
 	<string name="poi_subway_station_filter">Zastanišćo metra</string>
@@ -2014,4 +2014,7 @@
 	<string name="poi_location_rooftop">městno: na třěše</string>
 	<string name="poi_backcountry">Zadni kraj</string>
 	<string name="poi_aerialway_transport">powětrowy transport</string>
+	<string name="poi_payment_fuel_type">tankowanske karty</string>
+	<string name="poi_fire_hydrant_position">městno</string>
+	<string name="poi_fire_hydrant_water_source">wodowa žórła</string>
 	</resources>

@@ -951,7 +951,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 								.getActivity(c, mPendingIntentId, mStartActivity,
 										PendingIntent.FLAG_CANCEL_CURRENT);
 						AlarmManager mgr = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
-						mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+						if (Build.VERSION.SDK_INT >= 19) {
+							mgr.setExact(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+						} else {
+							mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+						}
 						//kill the application
 						res = true;
 						android.os.Process.killProcess(android.os.Process.myPid());

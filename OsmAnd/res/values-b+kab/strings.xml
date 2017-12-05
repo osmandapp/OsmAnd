@@ -650,4 +650,17 @@
     <string name="shared_string_my_favorites">Imenyafen-iw</string>
     <string name="route_tr">Bren γer tama tayeffust t edfreḍ</string>
     <string name="route_tl">Bren γer tama tazelmaṭ t edfraḍ</string>
+    <string name="modify_the_search_query">Ẓreg asuter n unadi.</string>
+    <string name="shared_string_added">Iţwarna</string>
+    <string name="marker_activated">Creḍ %s immed.</string>
+    <string name="empty_state_av_notes">Ṭṭef tizmilin !</string>
+    <string name="shared_string_more_without_dots">Ugar</string>
+    <string name="favourites_group">Taggayt Ismenyifen</string>
+    <string name="add_group">Rnu agraw</string>
+    <string name="shared_string_two">Sin</string>
+    <string name="shared_string_one">Yiwet</string>
+    <string name="shared_string_right">Ayfus</string>
+    <string name="shared_string_left">Aẓelmaḍ</string>
+    <string name="show_number_pad">Sken-d anasiw umḍin</string>
+    <string name="shared_string_paste">Senṭeḍ</string>
     </resources>

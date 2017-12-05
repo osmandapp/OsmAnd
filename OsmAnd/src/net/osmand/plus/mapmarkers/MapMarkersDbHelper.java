@@ -12,12 +12,16 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 public class MapMarkersDbHelper {
 
@@ -406,8 +410,8 @@ public class MapMarkersDbHelper {
 	}
 
 	public List<MapMarker> getActiveMarkers() {
-		List<MapMarker> res = new LinkedList<>();
-		HashMap<String, MapMarker> markers = new LinkedHashMap<>();
+		Map<String, MapMarker> markers = new LinkedHashMap<>();
+		Set<String> nextKeys = new HashSet<>();
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
@@ -417,15 +421,15 @@ public class MapMarkersDbHelper {
 					do {
 						MapMarker marker = readItem(query);
 						markers.put(marker.id, marker);
+						nextKeys.add(marker.nextKey);
 					} while (query.moveToNext());
 				}
 				query.close();
 			} finally {
 				db.close();
 			}
-			buildLinkedList(markers, res);
 		}
-		return res;
+		return buildLinkedList(markers, nextKeys);
 	}
 
 	private MapMarker readItem(SQLiteCursor query) {
@@ -457,19 +461,32 @@ public class MapMarkersDbHelper {
 		return marker;
 	}
 
-	private void buildLinkedList(HashMap<String, MapMarker> markers, List<MapMarker> res) {
-		if (!markers.isEmpty()) {
-			int count = 1;
-			for (MapMarker marker : markers.values()) {
-				if (!markers.keySet().contains(marker.nextKey) || count == markers.size()) {
-					res.add(0, marker);
-					markers.remove(marker.id);
+	private List<MapMarker> buildLinkedList(Map<String, MapMarker> markers, Set<String> nextKeys) {
+		List<MapMarker> res = new ArrayList<>(markers.size());
+
+		while (!markers.isEmpty()) {
+			MapMarker head = null;
+
+			Iterator<MapMarker> iterator = markers.values().iterator();
+			while (iterator.hasNext()) {
+				MapMarker marker = iterator.next();
+				if (!nextKeys.contains(marker.id) || !iterator.hasNext()) {
+					head = marker;
 					break;
 				}
-				count++;
 			}
-			buildLinkedList(markers, res);
+
+			if (head == null) {
+				break;
+			}
+
+			do {
+				res.add(head);
+				markers.remove(head.id);
+			} while ((head = markers.get(head.nextKey)) != null);
 		}
+
+		return res;
 	}
 
 	public void updateMarker(MapMarker marker) {

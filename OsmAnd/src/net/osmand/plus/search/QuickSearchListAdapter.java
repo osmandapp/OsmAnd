@@ -20,16 +20,13 @@ import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
-import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -215,10 +212,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		LinearLayout view;
 		if (type == QuickSearchListItemType.SEARCH_MORE) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = (LinearLayout) inflater.inflate(
-						R.layout.search_more_list_item, null);
+				LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				view = (LinearLayout) inflater.inflate(R.layout.search_more_list_item, null);
 			} else {
 				view = (LinearLayout) convertView;
 			}
@@ -228,26 +223,32 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			} else {
 				((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
 			}
-			QuickSearchMoreListItem searchMoreListItem = (QuickSearchMoreListItem) listItem;
-			if (searchMoreListItem.isEmptySearch() && !searchMoreListItem.isInterruptedSearch()) {
-				view.findViewById(R.id.empty_search).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.more_divider).setVisibility(View.VISIBLE);
-			} else {
-				view.findViewById(R.id.empty_search).setVisibility(View.GONE);
-				view.findViewById(R.id.more_divider).setVisibility(View.GONE);
-			}
-			view.findViewById(R.id.increase_radius_row).setOnClickListener(new View.OnClickListener() {
+
+			final QuickSearchMoreListItem searchMoreItem = (QuickSearchMoreListItem) listItem;
+			int emptyDescId = searchMoreItem.isSearchMoreAvailable() ? R.string.nothing_found_descr : R.string.modify_the_search_query;
+			((TextView) view.findViewById(R.id.empty_search_description)).setText(emptyDescId);
+
+			boolean emptySearchVisible = searchMoreItem.isEmptySearch() && !searchMoreItem.isInterruptedSearch();
+			boolean moreDividerVisible = emptySearchVisible && searchMoreItem.isSearchMoreAvailable();
+			view.findViewById(R.id.empty_search).setVisibility(emptySearchVisible ? View.VISIBLE : View.GONE);
+			view.findViewById(R.id.more_divider).setVisibility(moreDividerVisible ? View.VISIBLE : View.GONE);
+
+			View increaseRadiusRow = view.findViewById(R.id.increase_radius_row);
+			increaseRadiusRow.setVisibility(searchMoreItem.isSearchMoreAvailable() ? View.VISIBLE : View.GONE);
+			increaseRadiusRow.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					((QuickSearchMoreListItem) listItem).increaseRadiusOnClick();
 				}
 			});
-			if (!searchMoreListItem.isOnlineSearch()) {
-				view.findViewById(R.id.online_search_row).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.online_search_row).setOnClickListener(new View.OnClickListener() {
+
+			if (!searchMoreItem.isOnlineSearch()) {
+				View onlineSearchRow = view.findViewById(R.id.online_search_row);
+				onlineSearchRow.setVisibility(View.VISIBLE);
+				onlineSearchRow.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						((QuickSearchMoreListItem) listItem).onlineSearchOnClick();
+						searchMoreItem.onlineSearchOnClick();
 					}
 				});
 			}
