@@ -97,7 +97,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			return row;
 		} else {
 			LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			boolean lastCard = getHeadersCount() == position + 1;
+			boolean lastCard = getCardsCount() == position + 1;
 			int margin = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 			int sideMargin = app.getResources().getDisplayMetrics().widthPixels / 10;
 
@@ -108,7 +108,12 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			ll.setBackgroundResource(app.getSettings().isLightContent() ? R.drawable.bg_card_light : R.drawable.bg_card_dark);
 			((FrameLayout.LayoutParams) ll.getLayoutParams()).setMargins(sideMargin, margin, sideMargin, lastCard ? margin : 0);
 
-			int headerInd = getHeaderIndex(position);
+			if (position == 0 && hasShareLocationItem()) {
+				createItem(parent, inflater, ll, 0, NotesFragment.SHARE_LOCATION_FILE);
+				return fl;
+			}
+
+			int headerInd = getHeaderIndex(hasShareLocationItem() ? position - 1 : position);
 			HeaderViewHolder headerVH = new HeaderViewHolder(inflater.inflate(R.layout.list_item_header, parent, false));
 			setupHeader((int) items.get(headerInd), headerVH);
 			ll.addView(headerVH.view);
@@ -116,9 +121,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			for (int i = headerInd + 1; i < items.size(); i++) {
 				Object item = items.get(i);
 				if (item instanceof Recording) {
-					ItemViewHolder itemVH = new ItemViewHolder(inflater.inflate(R.layout.note_list_item, parent, false));
-					setupItem(i, (Recording) item, itemVH);
-					ll.addView(itemVH.view);
+					createItem(parent, inflater, ll, i, (Recording) item);
 				} else {
 					break;
 				}
@@ -128,12 +131,18 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		}
 	}
 
+	private void createItem(@NonNull ViewGroup parent, LayoutInflater inflater, LinearLayout ll, int pos, Recording item) {
+		ItemViewHolder itemVH = new ItemViewHolder(inflater.inflate(R.layout.note_list_item, parent, false));
+		setupItem(pos, item, itemVH);
+		ll.addView(itemVH.view);
+	}
+
 	@Override
 	public int getCount() {
 		if (portrait) {
 			return super.getCount();
 		}
-		return getHeadersCount();
+		return getCardsCount();
 	}
 
 	@Override
@@ -148,6 +157,10 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 	@Override
 	public int getViewTypeCount() {
 		return TYPE_COUNT;
+	}
+
+	private boolean hasShareLocationItem() {
+		return items.get(0) == NotesFragment.SHARE_LOCATION_FILE;
 	}
 
 	private void setupHeader(final int type, final HeaderViewHolder holder) {
@@ -252,10 +265,10 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		return items.size();
 	}
 
-	private int getHeadersCount() {
+	private int getCardsCount() {
 		int res = 0;
-		for (Object item : items) {
-			if (item instanceof Integer) {
+		for (int i = 0; i < items.size(); i++) {
+			if ((i == 0 && hasShareLocationItem()) || items.get(i) instanceof Integer) {
 				res++;
 			}
 		}
