@@ -93,6 +93,7 @@ import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.GpxImportHelper.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.inapp.InAppHelper;
+import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
@@ -345,6 +346,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapLayers.getMapControlsLayer().getTrackDetailsMenu().hide();
 		}
 		removeFragment(ImportGpxBottomSheetDialogFragment.TAG);
+		removeFragment(AdditionalActionsBottomSheetDialogFragment.TAG);
 		super.onSaveInstanceState(outState);
 	}
 
