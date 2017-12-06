@@ -140,7 +140,7 @@ Lon %2$s</string>
     <string name="osm_settings">Edición OSM</string>
     <string name="debugging_and_development">Desarrollo de OsmAnd</string>
     <string name="back_to_map">Volver al mapa</string>
-    <string name="share_note">Compartir informe</string>
+    <string name="share_note">Compartir nota multimedia</string>
     <string name="location_on_map">Ubicación:\n Lat %1$s\n Lon %2$s</string>
     <string name="watch">Ver</string>
     <string name="notes">Notas</string>
@@ -207,7 +207,7 @@ Lon %2$s</string>
     <string name="osmo_no_connection_msg">No se pudo conectar con el servicio OsMo:\n- comprueba tu conexión a Internet;\n- comprueba los ajustes;\n- visita nuestro Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user">Usuario anónimo</string>
     <string name="logged_as">Conectado como «%1$s»</string>
-    <string name="speed_limit_exceed">Tolerancia de límite de velocidad</string>
+    <string name="speed_limit_exceed">Tolerancia del límite de velocidad</string>
     <string name="print_route">Imprimir ruta</string>
     <string name="text_size">Tamaño del texto</string>
     <string name="traffic_warning_speed_limit">Límite de velocidad</string>
@@ -268,7 +268,7 @@ Lon %2$s</string>
     <string name="show_zoom_buttons_navigation_descr">Mostrar botones de ampliación durante la navegación.</string>
     <string name="show_zoom_buttons_navigation">Mostrar botones de ampliación</string>
     <string name="select_destination_and_intermediate_points">Elige los destinos intermedios</string>
-    <string name="layer_amenity_label">Etiquetas de PDIs superpuestas</string>
+    <string name="layer_amenity_label">Nombres de PDI superpuestos</string>
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
     <string name="gpx_wpt">Punto de referencia</string>
@@ -493,11 +493,7 @@ Lon %2$s</string>
 Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú principal y en el control del mapa. Puedes añadir una notificación al calendario, en el caso de que desees tener un recordatorio al respecto.</string>
     <string name="osmand_distance_planning_plugin_description">Este complemento proporciona un control en la pantalla del mapa, permitiendo crear caminos pulsando en el mapa, o usar o modificar archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX y usarse luego para la orientación.</string>
     <string name="osmand_accessibility_description">Este complemento activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control de ampliación, o el uso de comentarios de conversión de texto a voz, o para el anuncio automático de tu ubicación.</string>
-    <string name="osm_editing_plugin_description">Este complemento puede usarse para hacer contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar informes de problemas de OSM y contribuir con archivos de trazas GPX.
-
-OSM es un proyecto de mapeo global impulsado por la comunidad y de dominio público. Para más detalles, consulta https://openstreetmap.org.
-
-Se aprecia la participación activa, y las contribuciones pueden hacerse directamente desde OsmAnd, especificando las credenciales personales de OSM en la aplicación.</string>
+    <string name="osm_editing_plugin_description">Este complemento puede usarse para hacer contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar notas de OSM y contribuir con archivos de trazas GPX. OSM es un proyecto de mapeo global impulsado por la comunidad y de dominio público. Para más detalles, consulta https://openstreetmap.org. Se aprecia la participación activa, y las contribuciones pueden hacerse directamente desde OsmAnd, especificando las credenciales personales de OSM en la aplicación.</string>
     <string name="osmand_development_plugin_description">Este complemento muestra los ajustes de funciones de desarrollo y depuración para probar la simulación de rutas, el rendimiento del renderizado en pantalla, o las indicaciones por voz. Estos ajustes están destinados para los desarrolladores y no son necesarios para el usuario general.</string>
     <string name="world_ski_missing">Para mostrar mapas de esquí, necesita descargarse el mapa especial sin conexión</string>
     <string name="nautical_maps_missing">Para mostrar mapas náuticos, necesita descargarse el mapa especial sin conexión</string>
@@ -629,7 +625,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="app_mode_motorcycle">Motocicleta</string>
     <string name="app_mode_boat">Barco</string>
     <string name="app_mode_aircraft">Avión</string>
-    <string name="local_osm_changes_delete_all_confirm">¿Quieres borrar %1$d cambio(s) en OSM?</string>
+    <string name="local_osm_changes_delete_all_confirm">Borrarás %1$d cambio(s) en OSM. ¿Continuar?</string>
     <string name="animate_routing_route_not_calculated">Primero calcula la ruta</string>
     <string name="animate_routing_route">Simular, usando la ruta calculada</string>
     <string name="animate_routing_gpx">Simular, usando la traza GPX</string>
@@ -668,7 +664,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="speak_title">Anunciar…</string>
     <string name="speak_descr">Configura el anuncio de nombres de calles, avisos de tráfico (paradas, lomadas), radares y límites de velocidad.</string>
     <string name="speak_street_names">Nombres de calles (TTS)</string>
-    <string name="speak_speed_limit">Límites de velocidad</string>
+    <string name="speak_speed_limit">Límite de velocidad</string>
     <string name="speak_cameras">Radares de velocidad</string>
     <string name="speak_traffic_warnings">Avisos de tráfico</string>
     <string name="osb_author_or_password_not_specified">Indica el usuario y contraseña de OSM en los ajustes</string>
@@ -686,7 +682,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="route_from">Desde:</string>
     <string name="app_mode_default">Ver mapa</string>
     <string name="settings_preset">Perfil predefinido</string>
-    <string name="settings_preset_descr">Los ajustes de la vista y navegación del mapa son recordados por el perfil usado. Elige tu perfil predefinido aquí.</string>
+    <string name="settings_preset_descr">La vista del mapa y los ajustes de navegación se recuerdan por el perfil usado. Elige tu perfil predefinido aquí.</string>
     <string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Fijar como destino</string>
     <string name="please_select_address">Elige primero la ciudad o calle</string>
@@ -870,7 +866,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM), es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión, incluyendo indicaciones giro-a-giro por voz. 
-\n 
+\n
 \n Algunas de las funciones fundamentales: 
 \n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo) 
 \n - Mapas vectoriales compactos disponibles de todo el planeta 
@@ -878,37 +874,50 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
 \n - Búsqueda sin conexión de direcciones y lugares (PDI) 
 \n - Rutas sin conexión para distancias de rango medio 
-\n 
+\n
 \n - Modos de automóvil, bicicleta y peatón con: 
 \n  - (Opcional) Cambio automático de vista día/noche 
 \n  - (Opcional) Ampliación del mapa según la velocidad 
 \n  - (Opcional) Alineación del mapa, según brújula o dirección del movimiento 
-\n  - (Opcional) Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas
+\n  - (Opcional) Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas 
 \n 
 \n Limitaciones de la versión gratuita de OsmAnd: 
 \n - Límite del número de mapas descargados 
-\n - Sin acceso a los PDIs descargados de Wikipedia. 
-\n 
+\n - Sin acceso a los PDI descargados de Wikipedia. 
+\n
 \n OsmAnd está siendo desarrollado activamente. Nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en OsmAnd.net."</string>
     
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM), es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro por voz. 
 \n
+\n 
 \n OsmAnd+ es la versión de pago de la aplicación, comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones. 
 \n
+\n 
 \n Algunas de las funciones fundamentales: 
+\n
 \n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) 
+\n
 \n - Mapas mundiales vectoriales compactos disponibles 
+\n
 \n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación 
+\n
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
-\n - Búsqueda sin conexión de direcciones y lugares (PDIs) 
-\n - Rutas sin conexión para distancias de rango medio
+\n
+\n - Búsqueda sin conexión de direcciones y lugares (PDI) 
+\n
+\n - Rutas sin conexión para distancias de rango medio 
 \n  
+\n
 \n - Modos de automóvil, bicicleta y peatón con: 
+\n
 \n  - (Opcional) Cambio automático de vista día/noche 
+\n
 \n  - (Opcional) Ampliación del mapa según la velocidad 
+\n
 \n  - (Opcional) Alineación del mapa, según brújula o dirección del movimiento 
+\n
 \n  - (Opcional) Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas"</string>
     
     <string name="filterpoi_activity">Crear filtro PDI</string>
@@ -955,7 +964,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="bg_service_screen_lock_toast">Pantalla bloqueada</string>
     <string name="bg_service_interval">Definir intervalo de activación:</string>
     <string name="show_cameras">Radares de velocidad</string>
-    <string name="show_traffic_warnings">Límites de velocidad</string>
+    <string name="show_traffic_warnings">Avisos de tráfico</string>
     <string name="avoid_toll_roads">Evitar peajes</string>
     <string name="continue_follow_previous_route_auto">La navegación anterior no finalizó. ¿Continuar siguiéndola? (%1$s segundos)</string>
     <string name="route_updated_loc_found">La ruta será calculada cuando se encuentre la ubicación</string>
@@ -1022,7 +1031,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="unknown_location">Ubicación desconocida</string>
     <string name="modify_transparency">Modificar transparencia (0 - transparente, 255 - opaco)</string>
     <string name="confirm_interrupt_download">¿Cancelar la descarga del archivo?</string>
-    <string name="first_time_msg">Gracias por usar OsmAnd. Para muchas funciones de la aplicación, necesitas algunos datos regionales sin conexión que puedes descargar mediante «Ajustes» → «Gestionar mapas». Luego serás capaz de ver los mapas, ubicar direcciones, buscar PDIs y transporte público.</string>
+    <string name="first_time_msg">Gracias por usar OsmAnd. Para muchas funciones de la aplicación, necesitas algunos datos regionales sin conexión que puedes descargar mediante «Ajustes» → «Gestionar mapas». Luego serás capaz de ver los mapas, ubicar direcciones, buscar PDI y transporte público.</string>
     <string name="basemap_was_selected_to_download">Para el correcto funcionamiento de la aplicación, se necesita el mapa base (World Basemap) y se marcó para tu descarga.</string>
     <string name="local_indexes_cat_tile">Mapas de teselas en línea y en caché</string>
     <string name="local_indexes_cat_map">Mapas descargados (vectores)</string>
@@ -1107,22 +1116,22 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="use_fluorescent_overlays_descr">Usa colores fluorescentes para mostrar trazas y rutas.</string>
     <string name="offline_edition">Edición sin conexión</string>
     <string name="offline_edition_descr">Usa siempre edición sin conexión.</string>
-    <string name="update_poi_does_not_change_indexes">Los cambios de PDIs dentro de la aplicación, no afectan a los archivos del mapa descargados. Estos se guardan en un archivo local.</string>
+    <string name="update_poi_does_not_change_indexes">Los cambios de PDI dentro de la aplicación, no afectan a los archivos del mapa descargados. Estos se guardan en un archivo local.</string>
     <string name="local_openstreetmap_uploading">Subiendo…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} PDIs/Informes subidos</string>
+    <string name="local_openstreetmap_were_uploaded">{0} PDI/Notas subidas</string>
     <string name="local_openstreetmap_uploadall">Enviar todos</string>
     <string name="local_openstreetmap_upload">Enviar cambio a OSM</string>
     <string name="local_openstreetmap_delete">Quitar modificación</string>
     <string name="local_openstreetmap_descr_title">Edición asíncrona OSM:</string>
-    <string name="local_openstreetmap_settings">PDIs/Informes OSM guardados localmente</string>
-    <string name="local_openstreetmap_settings_descr">Muestra y gestiona informes de problemas y PDIs de OSM guardados en la base de datos local.</string>
+    <string name="local_openstreetmap_settings">PDI/Notas de OSM guardados localmente</string>
+    <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDI y notas de OSM guardados en la base de datos local.</string>
     <string name="live_monitoring_interval_descr">Indica el intervalo de registro en vivo.</string>
     <string name="live_monitoring_interval">Intervalo de registro en vivo</string>
     <string name="live_monitoring_url_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Dirección web de registro en vivo</string>
     <string name="gpx_monitoring_disabled_warn">Registra trazas usando el control GPX o mediante la opción «Grabar viaje».</string>
     <string name="show_current_gpx_title">Mostrar traza actual</string>
-    <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas de mapas (añadir y actualizar mapas) y no soporta artículos de Wikipedia sin conexión.</string>
+    <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas de mapas (añadir o actualizar mapas) y no soporta artículos de Wikipedia sin conexión.</string>
     <string name="free_version_title">Versión gratuita</string>
     <string name="poi_context_menu_showdescription">Detalles del PDI.</string>
     <string name="index_name_north_america">Norteamérica</string>
@@ -1146,11 +1155,11 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="fav_export_confirmation">Ya existe un archivo anterior con favoritos exportados. ¿Quieres sustituirlo?</string>
     <string name="profile_settings">Ajustes de perfiles específicos</string>
     <string name="routing_settings">Navegación</string>
-    <string name="routing_settings_descr">Indica los ajustes para la navegación.</string>
+    <string name="routing_settings_descr">Indica las opciones de navegación.</string>
     <string name="global_settings">Ajustes globales</string>
     <string name="index_settings">Gestionar mapas</string>
     <string name="general_settings">General</string>
-    <string name="general_settings_descr">Configura la presentación y otros ajustes globales.</string>
+    <string name="general_settings_descr">Configura la pantalla y ajustes globales de la aplicación.</string>
     <string name="global_app_settings">Ajustes globales de la aplicación</string>
     <string name="user_name">Tu usuario de OSM</string>
     <string name="open_street_map_login_descr">Necesario para envíos a openstreetmap.org.</string>
@@ -1178,7 +1187,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="pref_overlay">Superpuesta / subyacente</string>
     <string name="pref_raster_map">Ajustes de fuente del mapa</string>
     <string name="pref_vector_map">Ajustes del mapa vectorial</string>
-    <string name="delete_confirmation_msg">¿Quieres borrar %1$s?</string>
+    <string name="delete_confirmation_msg">Borrarás %1$s. ¿Continuar?</string>
     <string name="city_type_suburb">Suburbio</string>
     <string name="city_type_hamlet">Aldea</string>
     <string name="city_type_village">Villa</string>
@@ -1215,7 +1224,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="show_more_map_detail">Mostrar más detalle del mapa</string>
     <string name="show_more_map_detail_descr">Muestra detalles del mapa vectorial (caminos, etc.) a niveles inferiores de ampliación.</string>
     <string name="favourites_delete_multiple_succesful">Punto(s) favorito(s) correctamente borrado(s).</string>
-    <string name="favorite_delete_multiple">¿Quieres borrar %1$d favorito(s) y %2$d grupo(s) de favoritos?</string>
+    <string name="favorite_delete_multiple">Borrarás %1$d favorito(s) y %2$d grupo(s) de favoritos. ¿Continuar?</string>
     <string name="favorite_home_category">Inicio</string>
     <string name="favorite_friends_category">Amigos</string>
     <string name="favorite_places_category">Lugares</string>
@@ -1338,7 +1347,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="km_h">km/h</string>
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">No se soporta el formato «{0}» de datos obsoletos</string>
-    <string name="poi_filter_closest_poi">PDIs más cercanos</string>
+    <string name="poi_filter_closest_poi">PDI más cercanos</string>
     <string name="poi_filter_custom_filter">Filtro propio</string>
     <string name="poi_filter_namefinder">NameFinder en línea</string>
     <string name="reading_cached_tiles">Leyendo teselas guardadas…</string>
@@ -1423,9 +1432,9 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="thanks_yandex_traffic">Gracias a Yandex por la información de tráfico.</string>
     <string name="layer_yandex_traffic">Tráfico Yandex</string>
     <string name="layer_route">Ruta</string>
-    <string name="layer_osm_bugs">Informes de problemas (en línea)</string>
+    <string name="layer_osm_bugs">Notas de OSM (en línea)</string>
     
-    <string name="layer_poi">Superposición de PDIs…</string>
+    <string name="layer_poi">Superposición de PDI…</string>
     <string name="layer_map">Fuente de mapas…</string>
     <string name="menu_layers">Capas de mapas</string>
     <string name="context_menu_item_search_poi">Buscar PDI</string>
@@ -1493,11 +1502,11 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="show_transport_over_map_description">Muestra las paradas de transporte público en el mapa.</string>
     <string name="show_transport_over_map">Mostrar paradas de transporte</string>
     <string name="hello">Aplicación de navegación OsmAnd</string>
-    <string name="update_poi_success">Datos de PDIs correctamente actualizados (cargados {0})</string>
-    <string name="update_poi_error_local">Error al actualizar lista de PDIs locales</string>
+    <string name="update_poi_success">Datos de PDI correctamente actualizados (cargados {0})</string>
+    <string name="update_poi_error_local">Error al actualizar lista de PDI locales</string>
     <string name="update_poi_error_loading">Error durante la descarga de datos del servidor</string>
-    <string name="update_poi_no_offline_poi_index">Sin datos de PDIs disponibles para esta área</string>
-    <string name="update_poi_is_not_available_for_zoom">No se puede actualizar PDIs para niveles de ampliación pequeños</string>
+    <string name="update_poi_no_offline_poi_index">Sin datos de PDI disponibles para esta área</string>
+    <string name="update_poi_is_not_available_for_zoom">La actualización de PDI no está disponible para niveles de ampliación pequeños</string>
     <string name="context_menu_item_update_poi">Actualizar PDI</string>
     <string name="context_menu_item_update_map_confirm">¿Actualizar datos locales vía Internet?</string>
     <string name="search_history_city">Ciudad: {0}</string>
@@ -1578,7 +1587,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="show_view_angle">Mostrar dirección de visualización</string>
     <string name="map_view_3d_descr">Activa la vista 3D del mapa.</string>
     <string name="map_view_3d">Visión 3D del mapa</string>
-    <string name="show_poi_over_map_description">Muestra la última superposición de PDIs elegida en el mapa.</string>
+    <string name="show_poi_over_map_description">Muestra la última superposición de PDI elegida en el mapa.</string>
     <string name="show_poi_over_map">Mostrar superposición de PDI</string>
     <string name="map_tile_source_descr">Elige la fuente de mapas en línea o teselas guardadas.</string>
     <string name="map_tile_source">Fuente de teselas de mapa</string>
@@ -1645,7 +1654,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="poi_edit_title">Editar PDI</string>
     <string name="poi_create_title">Crear PDI</string>
     <string name="poi_error_poi_not_found">No se encontró el nodo, o el PDI se compone de varios nodos, lo cuál todavía no está soportado.</string>
-    <string name="poi_remove_confirm_template">¿Quieres borrar {0} (añadir comentario)?</string>
+    <string name="poi_remove_confirm_template">Borrarás {0} (añadir comentario). ¿Continuar?</string>
     <string name="poi_remove_title">Borrar PDI</string>
     <string name="poi_remove_success">PDI borrado correctamente</string>
     <string name="poi_action_add">añadir</string>
@@ -1667,7 +1676,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="email">correo electrónico</string>
     <string name="av_camera_focus">Método de enfoque</string>
     <string name="av_camera_focus_descr">Elige el modo de enfoque de la cámara interna.</string>
-    <string name="av_camera_focus_auto">Auto enfoque</string>
+    <string name="av_camera_focus_auto">Enfoque automático</string>
     <string name="av_camera_focus_hiperfocal">Enfoque hiperfocal</string>
     <string name="av_camera_focus_edof">Profundidad de campo extendido (EDOF)</string>
     <string name="av_camera_focus_infinity">Enfoque al infinito</string>
@@ -1699,7 +1708,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="shared_string_show_details">Ver detalles</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importar a OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">¿Quieres borrar %1$d nota(s)?</string>
+    <string name="local_recordings_delete_all_confirm">Borrarás %1$d nota(s). ¿Continuar?</string>
     <string name="disable_recording_once_app_killed">Prevenir grabación independiente</string>
     <string name="disable_recording_once_app_killed_descrp">La grabación GPX se pausará al cerrar la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
     <string name="gps_network_not_enabled">El servicio de ubicación está desactivado. ¿Quieres activarlo?</string>
@@ -1907,20 +1916,20 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="poi_context_menu_modify_osm_change">Modificar cambio OSM</string>
     <string name="osm_edit_modified_poi">PDI de OSM modificado</string>
     <string name="osm_edit_deleted_poi">PDI de OSM borrado</string>
-    <string name="context_menu_item_open_note">Informar problema del mapa</string>
-    <string name="osm_edit_reopened_note">Informe de problema reabierto</string>
-    <string name="osm_edit_commented_note">Informe de problema comentado</string>
-    <string name="osm_edit_removed_note">Informe de problema borrado</string>
-	<string name="osm_edit_created_note">Informe de problema creado</string>
-	<string name="osn_bug_name">Problema del mapa</string>
-	<string name="osn_add_dialog_title">Crear informe</string>
+    <string name="context_menu_item_open_note">Abrir nota de OSM</string>
+    <string name="osm_edit_reopened_note">Nota de OSM reabierta</string>
+    <string name="osm_edit_commented_note">Nota de OSM comentada</string>
+    <string name="osm_edit_removed_note">Nota de OSM borrada</string>
+	<string name="osm_edit_created_note">Nota de OSM creada</string>
+	<string name="osn_bug_name">Notas de OSM</string>
+	<string name="osn_add_dialog_title">Crear nota</string>
 	<string name="osn_comment_dialog_title">Añadir comentario</string>
-	<string name="osn_reopen_dialog_title">Reabrir informe</string>
-	<string name="osn_close_dialog_title">Cerrar informe</string>
-	<string name="osn_add_dialog_success">Informe creado con éxito</string>
-	<string name="osn_add_dialog_error">Error: no se creó el informe</string>
-	<string name="osn_close_dialog_success">El informe se cerró con éxito</string>
-	<string name="osn_close_dialog_error">Error: no se cerró el informe</string>
+	<string name="osn_reopen_dialog_title">Reabrir nota</string>
+	<string name="osn_close_dialog_title">Cerrar nota</string>
+	<string name="osn_add_dialog_success">Nota de OSM creada con éxito</string>
+	<string name="osn_add_dialog_error">Error: no se creó la nota de OSM</string>
+	<string name="osn_close_dialog_success">Nota de OSM cerrada con éxito</string>
+	<string name="osn_close_dialog_error">Error: no se cerró la nota de OSM</string>
 	<string name="shared_string_commit">Confirmar</string>
 	
     <string name="context_menu_item_delete_waypoint">¿Borrar el punto GPX?</string>
@@ -2088,8 +2097,8 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="map_markers_other">Otros marcadores</string>
     <string name="upload_anonymously">Subir anónimamente</string>
     <string name="show_transparency_seekbar">Mostrar barra de transparencia en el mapa</string>
-    <string name="upload_osm_note_description">Puedes subir informes de problemas anónimos o usar tu perfil de OpenStreetMap.org.</string>
-    <string name="upload_osm_note">Subir problema(s) del mapa</string>
+    <string name="upload_osm_note_description">Puedes subir notas de OSM anónimas o usar tu perfil de OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Subir nota(s) de OSM</string>
     <string name="recalculate_route">Recalcular ruta</string>
     <string name="shared_string_topbar">Barra superior</string>
     <string name="storage_directory_readonly_desc">La carpeta de almacenamiento de datos elegida actualmente, es de sólo lectura. Esta, se cambió temporalmente a la memoria interna. Elige un directorio de almacenamiento válido.</string>
@@ -2257,8 +2266,8 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="rendering_attr_contourColorScheme_name">Esquema de color de las curvas de nivel</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridad de la superficie del camino</string>
     <string name="christmas_poi">PDI navideño</string>
-    <string name="christmas_desc">Anticipando Navidad y Año Nuevo, puedes elegir mostrar el PDI asociado con la Navidad: Árboles navideños, tiendas, etc.</string>
-    <string name="christmas_desc_q">¿Mostrar el PDI navideño?</string>
+    <string name="christmas_desc">Anticipando los días festivos de Navidad y Año Nuevo, puedes elegir mostrar los punto de interés asociados a la Navidad: Árboles navideños, tiendas, etc.</string>
+    <string name="christmas_desc_q">¿Mostrar los PDI navideños?</string>
     <string name="save_track_min_speed">Velocidad mínima del registro</string>
     <string name="save_track_min_speed_descr">Filtro: Define la velocidad mínima para registrar un punto.</string>
     <string name="save_track_min_distance">Registro de desplazamiento mínimo</string>
@@ -2328,7 +2337,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_take_audio_note">Grabar nota de audio</string>
     <string name="quick_action_take_video_note">Grabar nota de video</string>
     <string name="quick_action_take_photo_note">Tomar nota fotográfica</string>
-    <string name="quick_action_add_osm_bug">Añadir problema de OSM</string>
+    <string name="quick_action_add_osm_bug">Añadir nota de OSM</string>
     <string name="quick_action_navigation_voice">Alternar activación de voz</string>
     <string name="quick_action_navigation_voice_off">Voz desactivada</string>
     <string name="quick_action_navigation_voice_on">Voz activada</string>
@@ -2348,7 +2357,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción añadirá una nota de audio en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Pulsar el botón de acción añadirá una nota de video en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_photo_note_descr">Pulsar el botón de acción añadirá una nota fotográfica en la ubicación central de la pantalla.</string>
-    <string name="quick_action_add_osm_bug_descr">Pulsar el botón de acción añadirá un informe de problema de OSM, en la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_osm_bug_descr">Pulsar el botón de acción añadirá una nota de OSM, en la ubicación central de la pantalla.</string>
     <string name="quick_action_add_poi_descr">Pulsar el botón de acción añadirá un PDI en la ubicación central de la pantalla.</string>
     <string name="quick_action_navigation_voice_descr">Pulsar el botón de acción desactivará o activará las indicaciones por voz durante la navegación.</string>
     <string name="quick_action_add_parking_descr">Pulsar el botón de acción añadirá un lugar de estacionamiento en la ubicación central de la pantalla.</string>
@@ -2357,7 +2366,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_duplicates">El nombre de la acción rápida ya existe y se cambió a «%1$s» para evitar duplicados.</string>
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Pulsar el botón de acción mostrará u ocultará los favoritos en el mapa.</string>
-    <string name="quick_action_showhide_poi_descr">Pulsar el botón de acción mostrará u ocultará los PDIs en el mapa.</string>
+    <string name="quick_action_showhide_poi_descr">Pulsar el botón de acción mostrará u ocultará los PDI en el mapa.</string>
     <string name="quick_action_showhide_favorites_title">Alternar vista de favoritos</string>
     <string name="quick_action_favorites_show">Mostrar Favoritos</string>
     <string name="quick_action_favorites_hide">Ocultar Favoritos</string>
@@ -2373,7 +2382,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_bug_message">Mensaje</string>
     <string name="quick_action_category_descr">Marca la categoría en la que deseas guardar el favorito.</string>
     <string name="quick_action_gpx_category_descr">Elige una categoría opcional.</string>
-    <string name="quick_action_poi_list">Lista de PDIs</string>
+    <string name="quick_action_poi_list">Lista de PDI</string>
     <string name="quick_action_sh_poi_descr">Puedes añadir una o más categorías PDI para mostrar en el mapa.</string>
     <string name="quick_action_map_style_action">Añadir un estilo de mapa</string>
     <string name="quick_action_empty_param_error">Los parámetros no deben estar vacíos</string>
@@ -2478,7 +2487,7 @@ Proporciona un código completo</string>
     <string name="driving_region_automatic">Automático</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OpenStreetMap (OSM), en todo el mundo y de alta calidad. 
 \n 
-\n Disfruta del navegador por voz y óptico, la visualización de PDIs (puntos de interés), la creación y gestión de trazas GPX, utiliza la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.</string>
+\n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, utiliza la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.</string>
     <string name="osmand_extended_description_part2">"Navegación GPS 
 \n • Puedes eligir entre los modos  sin conexión (sin cargos de roaming al viajar al extranjero) o en línea (rápido) 
 \n • La guía por voz giro-a-giro lo guía a lo largo del camino (voces grabadas y sintetizadas) 
@@ -2491,7 +2500,7 @@ Proporciona un código completo</string>
 \n • Soporta puntos intermedios en el itinerario 
 \n • Puedes grabar tu viaje o subir una traza GPX y seguirla"</string>
     <string name="osmand_extended_description_part3">Mapa 
-\n • Muestra PDIs (puntos de interés) cerca de ti 
+\n • Muestra PDI (puntos de interés) cercanos
 \n • Ajusta el mapa a la dirección del movimiento (o brújula) 
 \n • Muestra dónde estás y hacia dónde miras 
 \n • Comparte la ubicación para que tus amigos te encuentren 
@@ -2504,7 +2513,7 @@ Proporciona un código completo</string>
     <string name="osmand_extended_description_part7">Contribuye con OSM 
 \n • Informa sobre problemas de datos en el mapa 
 \n • Sube trazas GPX a OSM directamente desde la aplicación 
-\n • Añade PDIs y súbelos directamente a OSM (o más tarde, si no estás conectado)</string>
+\n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado)</string>
     <string name="osmand_extended_description_part8">OsmAnd es de código abierto y se desarrolla activamente. Puedes contribuir con la aplicación al informar sobre errores, mejorar las traducciones o desarrollar nuevas funciones. El proyecto se encuentra en un estado de mejora continua gracias a todas estas formas de interacción entre el desarrollador y el usuario. El progreso del proyecto también depende de contribuciones financieras para financiar el desarrollo y pruebas de nuevas funcionalidades. 
 \n Cobertura y calidad aproximada del mapa: 
 \n • Europa Occidental: **** 
@@ -2530,13 +2539,13 @@ Proporciona un código completo</string>
 \n • Muestra tu ubicación y orientación 
 \n • (Opcional) Ajusta el mapa a la dirección del movimiento (o brújula) 
 \n • Guarda lugares importantes en Favoritos 
-\n • Muestra PDIs (puntos de interés) cerca de ti 
+\n • Muestra PDI (puntos de interés) cercanos
 \n • Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable 
 \n • Permite elegir como mostrar los nombres en el mapa: en inglés, local, u ortografía fonética</string>
     <string name="osmand_plus_extended_description_part4">Uso de datos de OSM y Wikipedia 
 \n • Información de alta calidad del mejor proyecto colaborativo del mundo 
 \n • Datos OSM disponibles por país o región 
-\n • PDIs de Wikipedia, ideal para el turismo 
+\n • PDI de Wikipedia, ideal para el turismo 
 \n • Descargas gratis ilimitadas, directamente desde la aplicación 
 \n • Mapas vectoriales reducidos sin conexión, actualizados al menos una vez cada mes 
 \n • Elije entre datos completos de la región o sólo la red de rutas (Ejemplo: Todo Japón tiene 700 MB o sólo 200 MB para la red de rutas)</string>
@@ -2549,8 +2558,9 @@ Proporciona un código completo</string>
     <string name="osmand_plus_extended_description_part7">"Contribuye con OSM 
 \n • Informa sobre problemas de datos en el mapa 
 \n • Sube trazas GPX a OSM directamente desde la aplicación 
-\n • Añade PDIs y súbelos directamente a OSM (o más tarde, si no estás conectado) 
+\n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado) 
 \n • (Opcional) Grabación del viaje en segundo plano (mientras el dispositivo está bloqueado) 
+\n
 \n  OsmAnd es de código abierto y se desarrolla activamente. Puedes contribuir con la aplicación al informar sobre errores, mejorar las traducciones o desarrollar nuevas funciones. El proyecto se encuentra en un estado de mejora continua gracias a todas estas formas de interacción entre el desarrollador y el usuario. El progreso del proyecto también depende de contribuciones financieras para financiar el desarrollo y pruebas de nuevas funcionalidades."</string>
     <string name="osmand_plus_extended_description_part8">Cobertura y calidad aproximada del mapa: 
 \n • Europa Occidental: **** 
@@ -2566,7 +2576,7 @@ Proporciona un código completo</string>
 \n ¡Más países alrededor del globo están disponibles para descargar! Desde Afganistán a Zimbabue, desde Australia a Estados Unidos. Argentina, Brasil, Canadá, Francia, Alemania, México, Reino Unido, España, …</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OpenStreetMap (OSM), en todo el mundo y de alta calidad. 
 \n 
-\n Disfruta del navegador por voz y óptico, la visualización de PDIs (puntos de interés), la creación y gestión de trazas GPX, utiliza la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más. 
+\n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, utiliza la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más. 
 \n 
 \nOsmAnd+ es una versión de pago. Comprando la aplicación, ayudas al proyecto, financiando el desarrollo de nuevas funciones y recibiendo las últimas actualizaciones. 
 \n 
@@ -2624,15 +2634,15 @@ Proporciona un código completo</string>
     <string name="hillshade_menu_download_descr">Para ver el sombreado del relieve en el mapa, debes descargar la superposición del sombreado de esta región.</string>
     <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, debes comprar e instalar el complemento «Curvas de nivel»</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de ampliación</string>
-    <string name="quick_action_showhide_osmbugs_title">Alternar vista de problemas OSM en el mapa</string>
-    <string name="quick_action_osmbugs_show">Mostrar problemas OSM en el mapa</string>
-    <string name="quick_action_osmbugs_hide">Ocultar problemas OSM en el mapa</string>
-    <string name="quick_action_showhide_osmbugs_descr">Al pulsar el botón de acción se mostrarán u ocultarán los informes de problemas OSM en el mapa.</string>
+    <string name="quick_action_showhide_osmbugs_title">Alternar vista de notas de OSM</string>
+    <string name="quick_action_osmbugs_show">Mostrar notas de OSM</string>
+    <string name="quick_action_osmbugs_hide">Ocultar notas de OSM</string>
+    <string name="quick_action_showhide_osmbugs_descr">Al pulsar el botón de acción se mostrarán u ocultarán los notas de OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenados por distancia</string>
     <string name="search_favorites">Buscar favoritos</string>
     <string name="restart_search">Reiniciar búsqueda</string>
     <string name="increase_search_radius">Aumentar radio de búsqueda</string>
-    <string name="nothing_found">Nada encontrado 😞</string>
+    <string name="nothing_found">¡Nada por aquí! 😞</string>
     <string name="nothing_found_descr">Modifica la consulta de búsqueda o aumenta el radio de búsqueda.</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Quieres acceder en este viaje a los caminos privados?</string>
     <string name="mapillary">Mapillary</string>
@@ -2666,7 +2676,7 @@ Proporciona un código completo</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
     <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por usuario o por fecha. Los filtros sólo aplican para los primeros acercamientos.</string>
     <string name="shared_string_reload">Recargar</string>
-    <string name="mapillary_menu_descr_tile_cache">Recargar teselas para ver la información actualizada.</string>
+    <string name="mapillary_menu_descr_tile_cache">Recarga las teselas para ver la información actualizada.</string>
     <string name="mapillary_menu_title_tile_cache">Caché de teselas</string>
     <string name="shared_string_reset">Restablecer</string>
     <string name="store_tracks_in_monthly_directories">Guardar las trazas grabadas en carpetas mensuales</string>
@@ -2790,9 +2800,9 @@ Proporciona un código completo</string>
     <string name="make_round_trip_descr">Duplica el punto de inicio y lo añade como destino.</string>
     <string name="make_round_trip">Viaje de ida y vuelta</string>
     <string name="shared_string_navigate">Navegar</string>
-    <string name="osn_modify_dialog_error">Excepción ocurrida: el informe de problema no se modificó</string>
-    <string name="osn_modify_dialog_title">Modificar informe</string>
-    <string name="context_menu_item_modify_note">Modificar informe de problema OSM</string>
+    <string name="osn_modify_dialog_error">Excepción ocurrida: nota no modificada</string>
+    <string name="osn_modify_dialog_title">Modificar nota</string>
+    <string name="context_menu_item_modify_note">Modificar nota de OSM</string>
     <string name="release_2_8">• Marcadores del mapa totalmente rediseñados con líneas guía y planificación de rutas 
 \n 
 \n • La herramienta de medición de distancias permite el ajuste al camino y guardar puntos como una traza 
@@ -2851,7 +2861,7 @@ Proporciona un código completo</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta problemas del mapa (OSM), y contribuye con grabaciones GPX.</string>
+    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta problemas del mapa (notas de OSM), y contribuye con grabaciones GPX.</string>
     <string name="shared_string_deleted">Borrado</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Añadido</string>
