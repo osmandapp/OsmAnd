@@ -35,7 +35,7 @@
             <RelativeLayout
                 android:id="@+id/snap_to_road_row"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
                 android:paddingEnd="@dimen/content_padding"

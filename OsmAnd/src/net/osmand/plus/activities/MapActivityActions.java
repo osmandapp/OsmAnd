@@ -312,7 +312,6 @@ public class MapActivityActions implements DialogProvider {
 			}
 		}
 
-		adapter.setDefaultLayoutId(R.layout.bottom_sheet_dialog_fragment_item);
 		final ArrayAdapter<ContextMenuItem> listAdapter =
 				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
 
