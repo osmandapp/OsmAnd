@@ -296,7 +296,7 @@
 	<string name="poi_gasometer">Gasómetro</string>
 	<string name="poi_silo">Silo</string>
 	<string name="poi_storage_tank">Tanque de almacenamiento</string>
-	<string name="poi_college">Instituto educativo</string>
+	<string name="poi_college">Instituto superior</string>
 	<string name="poi_driving_school">Autoescuela</string>
 	<string name="poi_kindergarten">Jardín de infantes</string>
 	<string name="poi_school">Escuela</string>
@@ -1909,7 +1909,7 @@
 	<string name="poi_clothes_wedding">Vestidos de novia</string>
 	<string name="poi_clothes_sports">Deportiva</string>
 	<string name="poi_clothes_babies">De bebes</string>
-	<string name="poi_clothes_workwear">De trabajo</string>
+	<string name="poi_clothes_workwear">Laboral</string>
 	<string name="poi_clothes_hats">Sombreros</string>
 	<string name="poi_clothes_fur">De piel</string>
 	<string name="poi_clothes_leather">De cuero</string>
@@ -3312,7 +3312,7 @@
 	<string name="poi_vhf">Canal VHF</string>
 
 <string name="poi_gorge">Cañón (desfiladero)</string>
-	<string name="poi_couloir">Barranco estrecho</string>
+	<string name="poi_couloir">Couloir (barranco estrecho y empinado)</string>
 	<string name="poi_mountain_area">Área montañosa</string>
 
 	<string name="poi_surface_clay">Polvo de ladrillo (arcilla)</string>
