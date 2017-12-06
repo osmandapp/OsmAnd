@@ -2975,4 +2975,12 @@
     <string name="by_type">بر اساس نوع</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="modify_the_search_query">عبارت جست‌وجوشده را اصلاح کنید.</string>
+    <string name="release_3_0">• تشخیص علائم ایست با توجه به جهت رانندگی
+\n
+\n• الگوریتم جدید برای دادن مقادیر فراز و فرود مناسب به مسیرهای GPX
+\n
+\n
+\n • Terrain (ascent) aware hiking time (Naismith\'s rule)
+\n
+\n</string>
     </resources>
