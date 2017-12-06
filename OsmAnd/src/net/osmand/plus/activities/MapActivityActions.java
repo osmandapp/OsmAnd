@@ -49,7 +49,7 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
-import net.osmand.plus.mapcontextmenu.ActionsBottomSheetDialogFragment;
+import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
@@ -275,20 +275,12 @@ public class MapActivityActions implements DialogProvider {
 				.setIcon(R.drawable.ic_action_search_dark).createItem());
 		adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
 				.setIcon(R.drawable.ic_action_gdirections_dark).createItem());
-		adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_search, mapActivity)
-				.setIcon(R.drawable.ic_action_search_dark).createItem());
-		adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
-				.setIcon(R.drawable.ic_action_gdirections_dark).createItem());
-		adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_search, mapActivity)
-				.setIcon(R.drawable.ic_action_search_dark).createItem());
-		adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
-				.setIcon(R.drawable.ic_action_gdirections_dark).createItem());
 		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() != null &&
 				(mapActivity.getRoutingHelper().isFollowingMode() || mapActivity.getRoutingHelper().isRoutePlanningMode())) {
 			adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_last_intermediate_point, mapActivity)
 					.setIcon(R.drawable.ic_action_intermediate).createItem());
 		}
-		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj, R.layout.bottom_sheet_dialog_fragment_divider);
+		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
@@ -324,16 +316,15 @@ public class MapActivityActions implements DialogProvider {
 		final ArrayAdapter<ContextMenuItem> listAdapter =
 				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
 
-		ActionsBottomSheetDialogFragment actionsBottomSheetDialogFragment = new ActionsBottomSheetDialogFragment();
-		actionsBottomSheetDialogFragment.setUsedOnMap(true);
-		actionsBottomSheetDialogFragment.setAdapter(listAdapter, new AdapterView.OnItemClickListener() {
+		AdditionalActionsBottomSheetDialogFragment actionsBottomSheetDialogFragment = new AdditionalActionsBottomSheetDialogFragment();
+		actionsBottomSheetDialogFragment.setAdapter(adapter, new AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-				ContextMenuItem item = adapter.getItem(i);
+			public void onItemClick(int position) {
+				ContextMenuItem item = adapter.getItem(position);
 				int standardId = item.getTitleId();
 				ItemClickListener click = item.getItemClickListener();
 				if (click != null) {
-					click.onContextMenuClick(listAdapter, standardId, i, false, null);
+					click.onContextMenuClick(listAdapter, standardId, position, false, null);
 				} else if (standardId == R.string.context_menu_item_last_intermediate_point) {
 					mapActivity.getContextMenu().addAsLastIntermediate();
 				} else if (standardId == R.string.context_menu_item_search) {
@@ -354,7 +345,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}
 		});
-		actionsBottomSheetDialogFragment.show(mapActivity.getSupportFragmentManager(), ActionsBottomSheetDialogFragment.TAG);
+		actionsBottomSheetDialogFragment.show(mapActivity.getSupportFragmentManager(), AdditionalActionsBottomSheetDialogFragment.TAG);
 	}
 
 	public void setGPXRouteParams(GPXFile result) {
