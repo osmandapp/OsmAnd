@@ -2713,7 +2713,7 @@ Por favor proporciona un código completo</string>
     <string name="marker_save_as_track_descr">Exporte sus marcadores a un archivo que puedes indicar aquí:</string>
     <string name="marker_save_as_track">Guardar como traza</string>
     <string name="move_to_history">Mover al historial</string>
-    <string name="group_will_be_removed_after_restart">El grupo se quitará al reiniciar</string>
+    <string name="group_will_be_removed_after_restart">El grupo se quitará al reiniciar la aplicación.</string>
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formato de coordenadas</string>
     <string name="use_system_keyboard">Usar el teclado del sistema</string>
@@ -2784,4 +2784,25 @@ Por favor proporciona un código completo</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de referencia</string>
+    <string name="release_3_0">• La detección de señales de alto, ahora considera la dirección de desplazamiento
+\n
+\n • Nuevo algoritmo que proporciona valores significativos de ascenso y descenso para trazas GPX.
+\n
+\n • El tiempo de caminata es consciente del terreno ascendente (regla de Naismith).
+\n
+\n</string>
+    <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
+    <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
+    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta problemas del mapa (notas de OSM), y contribuye con grabaciones GPX.</string>
+    <string name="shared_string_deleted">Borrado</string>
+    <string name="shared_string_edited">Editado</string>
+    <string name="shared_string_added">Añadido</string>
+    <string name="marker_activated">Marcador «%s» activado.</string>
+    <string name="one_tap_active_descr">Pulsa un marcador en el mapa para moverlo al primer lugar de los marcadores activos, sin abrir el menú contextual.</string>
+    <string name="one_tap_active">Una pulsación activa</string>
+    <string name="empty_state_av_notes">¡Tomar notas multimedia!</string>
+    <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto para cada punto del mapa, utilizando el controlador o el menú contextual.</string>
+    <string name="notes_by_date">Notas por fecha</string>
+    <string name="by_date">Por fecha</string>
+    <string name="by_type">Por tipo</string>
     </resources>
