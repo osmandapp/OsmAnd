@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -382,19 +381,25 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			zoomButtonsView.setVisibility(View.GONE);
 		}
 
+		View buttonsBottomBorder = view.findViewById(R.id.buttons_bottom_border);
 		View buttonsTopBorder = view.findViewById(R.id.buttons_top_border);
-		AndroidUtils.setBackground(getMapActivity(), buttonsTopBorder, nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+		View buttons = view.findViewById(R.id.context_menu_buttons);
+		buttons.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
 		if (!menu.buttonsVisible()) {
-			View buttons = view.findViewById(R.id.context_menu_buttons);
 			buttonsTopBorder.setVisibility(View.GONE);
 			buttons.setVisibility(View.GONE);
+		}
+		View bottomButtons = view.findViewById(R.id.context_menu_bottom_buttons);
+		bottomButtons.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
+		if (!menu.bottomButtonsVisible()) {
+			buttonsBottomBorder.setVisibility(View.GONE);
+			bottomButtons.setVisibility(View.GONE);
 		}
 
 		// Action buttons
 		final ImageView imageFavorite = (ImageView) view.findViewById(R.id.context_menu_fav_image_view);
 		imageFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(),
-				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+				R.color.ctx_menu_buttons_icon_color));
 		imageFavorite.setContentDescription(getString(menu.getFavActionStringId()));
 		View favView = view.findViewById(R.id.context_menu_fav_view);
 		AndroidUtils.setDashButtonBackground(getMapActivity(), favView, nightMode);
@@ -407,7 +412,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		final ImageView imageWaypoint = (ImageView) view.findViewById(R.id.context_menu_route_image_view);
 		imageWaypoint.setImageDrawable(getIcon(menu.getWaypointActionIconId(),
-				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+				R.color.ctx_menu_buttons_icon_color));
 		imageWaypoint.setContentDescription(getString(menu.getWaypointActionStringId()));
 		View waypointView = view.findViewById(R.id.context_menu_route_view);
 		AndroidUtils.setDashButtonBackground(getMapActivity(), waypointView, nightMode);
@@ -424,7 +429,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		final ImageView imageShare = (ImageView) view.findViewById(R.id.context_menu_share_image_view);
 		imageShare.setImageDrawable(getIcon(R.drawable.map_action_gshare_dark,
-				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+				R.color.ctx_menu_buttons_icon_color));
 		View shareView = view.findViewById(R.id.context_menu_share_view);
 		AndroidUtils.setDashButtonBackground(getMapActivity(), shareView, nightMode);
 		shareView.setOnClickListener(new View.OnClickListener() {
@@ -436,7 +441,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		final ImageView imageMore = (ImageView) view.findViewById(R.id.context_menu_more_image_view);
 		imageMore.setImageDrawable(getIcon(R.drawable.map_overflow_menu_white,
-				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+				R.color.ctx_menu_buttons_icon_color));
 		View moreView = view.findViewById(R.id.context_menu_more_view);
 		AndroidUtils.setDashButtonBackground(getMapActivity(), moreView, nightMode);
 		moreView.setOnClickListener(new View.OnClickListener() {
@@ -447,15 +452,18 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		});
 
 		//Bottom buttons
-		Button detailsButton = (Button) view.findViewById(R.id.context_menu_details_button);
+		int bottomButtonsColor = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
+		TextView detailsButton = (TextView) view.findViewById(R.id.context_menu_details_button);
+		detailsButton.setTextColor(ContextCompat.getColor(getContext(), bottomButtonsColor));
 		detailsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 
 			}
 		});
-		Button directionsButton = (Button) view.findViewById(R.id.context_menu_directions_button);
-		Drawable drawable = getIcon(R.drawable.map_directions, nightMode ? R.color.osmand_orange : R.color.map_widget_blue);
+		TextView directionsButton = (TextView) view.findViewById(R.id.context_menu_directions_button);
+		Drawable drawable = getIcon(R.drawable.map_directions, bottomButtonsColor);
+		directionsButton.setTextColor(ContextCompat.getColor(getContext(), bottomButtonsColor));
 		directionsButton.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
 		directionsButton.setCompoundDrawablePadding(dpToPx(8));
 		directionsButton.setOnClickListener(new View.OnClickListener() {

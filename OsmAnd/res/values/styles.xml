@@ -133,6 +133,7 @@
         <item name="ctx_menu_info_view_bg">@color/ctx_menu_info_view_bg_light</item>
         <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_light</item>
         <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_light</item>
+        <item name="ctx_menu_divider">@color/ctx_menu_buttons_divider_light</item>
         <item name="search_background">@color/search_background_dark</item>
         <item name="actionModeCloseDrawable">@drawable/ic_action_mode_back</item>
         <item name="actionModeStyle">@style/WhiteActionMode</item>
@@ -320,6 +321,7 @@
         <item name="ctx_menu_info_view_bg">@color/ctx_menu_info_view_bg_dark</item>
         <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_dark</item>
         <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_dark</item>
+        <item name="ctx_menu_divider">@color/ctx_menu_buttons_divider_dark</item>
         <item name="search_background">@color/color_white</item>
         <item name="switch_ex_background">@drawable/switch_ex_background_dark</item>
         <item name="switch_ex_text_color">@color/switch_ex_button_text_dark</item>

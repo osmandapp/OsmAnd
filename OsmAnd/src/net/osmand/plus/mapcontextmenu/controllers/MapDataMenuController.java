@@ -300,7 +300,7 @@ public class MapDataMenuController extends MenuController {
 	}
 
 	@Override
-	public boolean fabVisible() {
+	public boolean bottomButtonsVisible() {
 		return false;
 	}
 
