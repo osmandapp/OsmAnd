@@ -2742,11 +2742,11 @@ Por favor proporciona un código completo</string>
 \n"</string>
     <string name="rendering_value_darkyellow_name">Amarillo oscuro</string>
     <string name="wrong_input">Entrada incorrecta</string>
-    <string name="enter_new_name">Ingresar nombre nuevo</string>
+    <string name="enter_new_name">Ingresar nuevo nombre</string>
     <string name="shared_string_back">Atrás</string>
     <string name="view">Ver</string>
 	<string name="waypoints_added_to_map_markers">Puntos de referencia añadidos a marcadores de mapa</string>
-	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna los botones y los controles.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna la vista de la interfaz y los controles.</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     <string name="show_on_top_bar">Mostrar en la barra superior</string>
     <string name="mark_passed">Descartar marcador</string>
