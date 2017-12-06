@@ -2982,4 +2982,11 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="by_type">Podľa typu</string>
     <string name="one_tap_active">Jedno stlačenie aktívne</string>
     <string name="modify_the_search_query">Upraviť vyhľadávacie kritériá.</string>
+    <string name="release_3_0">\\022 Detekcia značiek \"stop\" zohľadňuje smer jazdy
+\n
+\n • Nový algoritmus poskytuje zmysluplné hodnoty pre stúpanie/klesanie v stopách GPX
+\n
+\n • Čas pešej trasy zohľadňuje terén/stúpanie (Naismithovo pravidlo)
+\n
+\n</string>
     </resources>
