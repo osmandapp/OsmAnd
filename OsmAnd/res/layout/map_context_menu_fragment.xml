@@ -541,13 +541,13 @@
                 android:id="@+id/context_menu_bottom_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="?attr/ctx_menu_info_view_bg">
+                tools:background="?attr/ctx_menu_info_view_bg">
 
                 <LinearLayout
                     android:id="@+id/context_menu_bottom_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/ctx_menu_info_view_bg"
+                    tools:background="?attr/ctx_menu_info_view_bg"
                     android:orientation="vertical">
 
                 </LinearLayout>

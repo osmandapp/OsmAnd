@@ -475,10 +475,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		buildBottomView();
 
-		view.findViewById(R.id.context_menu_bottom_scroll).setBackgroundColor(nightMode ?
-				getResources().getColor(R.color.ctx_menu_info_view_bg_dark) : getResources().getColor(R.color.ctx_menu_info_view_bg_light));
-		view.findViewById(R.id.context_menu_bottom_view).setBackgroundColor(nightMode ?
-				getResources().getColor(R.color.ctx_menu_info_view_bg_dark) : getResources().getColor(R.color.ctx_menu_info_view_bg_light));
+		view.findViewById(R.id.context_menu_bottom_scroll).setBackgroundColor(getResources()
+				.getColor(nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
+		view.findViewById(R.id.context_menu_bottom_view).setBackgroundColor(getResources()
+				.getColor(nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
 
 		//getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
 

@@ -338,5 +338,7 @@
 	<color name="ctx_menu_buttons_icon_color">#727272</color>
 	<color name="ctx_menu_bottom_buttons_text_color_light">#536dfe</color>
 	<color name="ctx_menu_bottom_buttons_text_color_dark">#e69122</color>
+	<color name="ctx_menu_bottom_view_bg_light">#fcfcfc</color>
+	<color name="ctx_menu_bottom_view_bg_dark">#17191a</color>
 
 </resources>
