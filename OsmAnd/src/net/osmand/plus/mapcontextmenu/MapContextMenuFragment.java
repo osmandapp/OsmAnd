@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -193,14 +194,14 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 		});
 
-		// Top Right title button
-		final View topRightTitleButton = view.findViewById(R.id.title_button_bottom_view);
-		topRightTitleButton.setOnClickListener(new View.OnClickListener() {
+		// Bottom title button
+		final View bottomTitleButton = view.findViewById(R.id.title_button_bottom_view);
+		bottomTitleButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				TitleButtonController topRightTitleButtonController = menu.getTopRightTitleButtonController();
-				if (topRightTitleButtonController != null) {
-					topRightTitleButtonController.buttonPressed();
+				TitleButtonController bottomTitleButtonController = menu.getBottomTitleButtonController();
+				if (bottomTitleButtonController != null) {
+					bottomTitleButtonController.buttonPressed();
 				}
 			}
 		});
@@ -340,23 +341,17 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		buildHeader();
 
-		AndroidUtils.setTextPrimaryColor(getMapActivity(),
-				(TextView) view.findViewById(R.id.context_menu_line1), nightMode);
+		((TextView) view.findViewById(R.id.context_menu_line1)).setTextColor(ContextCompat.getColor(getContext(),
+				nightMode ? R.color.ctx_menu_title_color_dark : R.color.ctx_menu_title_color_light));
 		View menuLine2 = view.findViewById(R.id.context_menu_line2);
 		if (menuLine2 != null) {
-			AndroidUtils.setTextSecondaryColor(getMapActivity(), (TextView) menuLine2, nightMode);
+			((TextView) menuLine2).setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_subtitle_color));
 		}
-		((TextView) view.findViewById(R.id.title_button_bottom))
-				.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue) : getResources().getColor(R.color.osmand_orange));
-		AndroidUtils.setTextSecondaryColor(getMapActivity(),
-				(TextView) view.findViewById(R.id.distance), nightMode);
+		((TextView) view.findViewById(R.id.distance)).setTextColor(ContextCompat.getColor(getContext(),
+				nightMode ? R.color.ctx_menu_direction_color_dark : R.color.ctx_menu_direction_color_light));
 
-		((TextView) view.findViewById(R.id.title_button))
-				.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue) : getResources().getColor(R.color.osmand_orange));
 		AndroidUtils.setTextSecondaryColor(getMapActivity(),
 				(TextView) view.findViewById(R.id.title_button_right_text), nightMode);
-		((TextView) view.findViewById(R.id.title_button_right))
-				.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue) : getResources().getColor(R.color.osmand_orange));
 
 		AndroidUtils.setTextSecondaryColor(getMapActivity(),
 				(TextView) view.findViewById(R.id.progressTitle), nightMode);
@@ -660,7 +655,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (view != null) {
 			TitleButtonController leftTitleButtonController = menu.getLeftTitleButtonController();
 			TitleButtonController rightTitleButtonController = menu.getRightTitleButtonController();
-			TitleButtonController topRightTitleButtonController = menu.getTopRightTitleButtonController();
+			TitleButtonController bottomTitleButtonController = menu.getBottomTitleButtonController();
 			TitleButtonController leftDownloadButtonController = menu.getLeftDownloadButtonController();
 			TitleButtonController rightDownloadButtonController = menu.getRightDownloadButtonController();
 			TitleProgressController titleProgressController = menu.getTitleProgressController();
@@ -712,18 +707,18 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				rightTitleButtonView.setVisibility(View.INVISIBLE);
 			}
 
-			// Top Right title button
-			final View topRightTitleButtonView = view.findViewById(R.id.title_button_bottom_view);
-			final TextView topRightTitleButton = (TextView) view.findViewById(R.id.title_button_bottom);
-			if (topRightTitleButtonController != null) {
-				topRightTitleButton.setText(topRightTitleButtonController.caption);
-				topRightTitleButtonView.setVisibility(topRightTitleButtonController.visible ? View.VISIBLE : View.GONE);
+			// Bottom title button
+			final View bottomTitleButtonView = view.findViewById(R.id.title_button_bottom_view);
+			final TextView bottomTitleButton = (TextView) view.findViewById(R.id.title_button_bottom);
+			if (bottomTitleButtonController != null) {
+				bottomTitleButton.setText(bottomTitleButtonController.caption);
+				bottomTitleButtonView.setVisibility(bottomTitleButtonController.visible ? View.VISIBLE : View.GONE);
 
-				Drawable leftIcon = topRightTitleButtonController.getLeftIcon();
-				topRightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-				topRightTitleButton.setCompoundDrawablePadding(dpToPx(8f));
+				Drawable leftIcon = bottomTitleButtonController.getLeftIcon();
+				bottomTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
+				bottomTitleButton.setCompoundDrawablePadding(dpToPx(8f));
 			} else {
-				topRightTitleButtonView.setVisibility(View.GONE);
+				bottomTitleButtonView.setVisibility(View.GONE);
 			}
 
 			// Download buttons
@@ -1129,8 +1124,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			TextView distanceText = (TextView) view.findViewById(R.id.distance);
 			ImageView direction = (ImageView) view.findViewById(R.id.direction);
 			float myHeading = menu.getHeading() == null ? 0f : menu.getHeading();
-			DashLocationFragment.updateLocationView(false, menu.getMyLocation(), myHeading, direction, distanceText,
-					menu.getLatLon().getLatitude(), menu.getLatLon().getLongitude(), screenOrientation, app, activity);
+			int color = nightMode ? R.color.ctx_menu_direction_color_dark : R.color.ctx_menu_direction_color_light;
+			DashLocationFragment.updateLocationView(false, menu.getMyLocation(), myHeading, direction, color, distanceText,
+					color, menu.getLatLon().getLatitude(), menu.getLatLon().getLongitude(), screenOrientation, app, activity);
 		}
 	}
 

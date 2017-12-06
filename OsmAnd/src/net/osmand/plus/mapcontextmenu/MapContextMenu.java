@@ -1056,9 +1056,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public TitleButtonController getTopRightTitleButtonController() {
+	public TitleButtonController getBottomTitleButtonController() {
 		if (menuController != null) {
-			return menuController.getTopRightTitleButtonController();
+			return menuController.getBottomTitleButtonController();
 		} else {
 			return null;
 		}

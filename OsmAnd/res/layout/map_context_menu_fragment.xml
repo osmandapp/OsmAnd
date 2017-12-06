@@ -113,7 +113,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="2dp"
                         android:layout_marginStart="2dp"
-                        android:textColor="?android:textColorSecondary"
+                        tools:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_desc_text_size"
                         tools:text="100500 km"/>
 
@@ -151,7 +151,7 @@
                         android:paddingRight="@dimen/context_menu_button_padding_x"
                         android:textAllCaps="true"
                         android:text="@string/recording_context_menu_play"
-                        android:textColor="?attr/contextMenuButtonColor"
+                        android:textColor="?attr/ctx_menu_controller_text_color"
                         android:textSize="@dimen/default_desc_text_size"/>
 
                     <TextView
@@ -186,7 +186,7 @@
                         android:paddingLeft="@dimen/context_menu_button_padding_x"
                         android:paddingRight="@dimen/context_menu_button_padding_x"
                         android:text="@string/shared_string_delete"
-                        android:textColor="?attr/contextMenuButtonColor"
+                        android:textColor="?attr/ctx_menu_controller_text_color"
                         android:textSize="@dimen/default_desc_text_size"/>
 
                 </LinearLayout>
@@ -222,7 +222,7 @@
                         android:paddingLeft="@dimen/context_menu_button_padding_x"
                         android:paddingRight="@dimen/context_menu_button_padding_x"
                         android:text="@string/shared_string_download"
-                        android:textColor="?attr/contextMenuButtonColor"
+                        android:textColor="?attr/ctx_menu_controller_text_color"
                         android:textSize="@dimen/default_desc_text_size"/>
 
                 </LinearLayout>
@@ -246,7 +246,7 @@
                         android:paddingLeft="@dimen/context_menu_button_padding_x"
                         android:paddingRight="@dimen/context_menu_button_padding_x"
                         android:text="@string/shared_string_delete"
-                        android:textColor="?attr/contextMenuButtonColor"
+                        android:textColor="?attr/ctx_menu_controller_text_color"
                         android:textSize="@dimen/default_desc_text_size"/>
 
                 </LinearLayout>
@@ -276,7 +276,7 @@
                     android:paddingLeft="@dimen/context_menu_button_padding_x"
                     android:paddingRight="@dimen/context_menu_button_padding_x"
                     android:text="@string/shared_string_others"
-                    android:textColor="?attr/contextMenuButtonColor"
+                    android:textColor="?attr/ctx_menu_controller_text_color"
                     android:textSize="@dimen/default_desc_text_size"/>
 
             </LinearLayout>

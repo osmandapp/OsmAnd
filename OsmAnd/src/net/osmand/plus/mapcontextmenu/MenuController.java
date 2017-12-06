@@ -98,7 +98,7 @@ public abstract class MenuController extends BaseMenuController {
 
 	protected TitleButtonController leftTitleButtonController;
 	protected TitleButtonController rightTitleButtonController;
-	protected TitleButtonController topRightTitleButtonController;
+	protected TitleButtonController bottomTitleButtonController;
 
 	protected TitleButtonController leftDownloadButtonController;
 	protected TitleButtonController rightDownloadButtonController;
@@ -318,8 +318,8 @@ public abstract class MenuController extends BaseMenuController {
 		return rightTitleButtonController;
 	}
 
-	public TitleButtonController getTopRightTitleButtonController() {
-		return topRightTitleButtonController;
+	public TitleButtonController getBottomTitleButtonController() {
+		return bottomTitleButtonController;
 	}
 
 	public TitleButtonController getLeftDownloadButtonController() {

@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -200,12 +201,13 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 
 		// Text line 1
 		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
-		AndroidUtils.setTextPrimaryColor(mapActivity, line1, !menu.isLight());
+		((TextView) view.findViewById(R.id.context_menu_line1)).setTextColor(ContextCompat.getColor(getContext(),
+				!menu.isLight() ? R.color.ctx_menu_title_color_dark : R.color.ctx_menu_title_color_light));
 		line1.setText(item.getTitleStr());
 
 		// Text line 2
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		AndroidUtils.setTextSecondaryColor(mapActivity, line2, !menu.isLight());
+		((TextView) line2).setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_subtitle_color));
 		line2.setText(item.getTypeStr());
 		Drawable slIcon = item.getTypeIcon();
 		line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);

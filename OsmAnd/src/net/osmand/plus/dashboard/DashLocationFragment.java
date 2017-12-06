@@ -112,6 +112,12 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 	}
 
 	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
+										  ImageView arrow, int imgColor, TextView txt, int textColor, double toLat, double toLon,
+										  int screenOrientation, OsmandApplication app, Context ctx) {
+		updateLocationView(useCenter, fromLoc, h, arrow, 0, imgColor, txt, textColor, new LatLon(toLat, toLon), screenOrientation, app, ctx, true);
+	}
+
+	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
 										  ImageView arrow, TextView txt, double toLat, double toLon,
 										  int screenOrientation, OsmandApplication app, Context ctx) {
 		updateLocationView(useCenter, fromLoc, h, arrow, 0, txt, new LatLon(toLat, toLon), screenOrientation, app, ctx, true);
@@ -120,11 +126,17 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
 										  ImageView arrow, int arrowResId, TextView txt, LatLon toLoc,
 										  int screenOrientation, OsmandApplication app, Context ctx, boolean paint) {
-		updateLocationView(useCenter, fromLoc, h, arrow, arrowResId, 0, txt, toLoc, screenOrientation, app, ctx, paint);
+		updateLocationView(useCenter, fromLoc, h, arrow, arrowResId, 0, txt, 0, toLoc, screenOrientation, app, ctx, paint);
 	}
 
 	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
-										  ImageView arrow, int arrowResId, int color, TextView txt, LatLon toLoc,
+										  ImageView arrow, int arrowResId, int imgColor, TextView txt, LatLon toLoc,
+										  int screenOrientation, OsmandApplication app, Context ctx, boolean paint) {
+		updateLocationView(useCenter, fromLoc, h, arrow, arrowResId, imgColor, txt, 0, toLoc, screenOrientation, app, ctx, paint);
+	}
+
+	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
+										  ImageView arrow, int arrowResId, int imgColor, TextView txt, int textColor, LatLon toLoc,
 										  int screenOrientation, OsmandApplication app, Context ctx, boolean paint) {
 		float[] mes = new float[2];
 		if (fromLoc != null && toLoc != null) {
@@ -142,7 +154,7 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 			} else {
 				dd = (DirectionDrawable) arrow.getDrawable();
 			}
-			dd.setImage(arrowResId, color == 0 ? useCenter ? R.color.color_distance : R.color.color_myloc_distance : color);
+			dd.setImage(arrowResId, imgColor == 0 ? useCenter ? R.color.color_distance : R.color.color_myloc_distance : imgColor);
 			if (fromLoc == null || h == null || toLoc == null) {
 				dd.setAngle(0);
 			} else {
@@ -157,7 +169,7 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 			if (fromLoc != null && toLoc != null) {
 				if (paint) {
 					txt.setTextColor(app.getResources().getColor(
-							useCenter ? R.color.color_distance : R.color.color_myloc_distance));
+							textColor == 0 ? useCenter ? R.color.color_distance : R.color.color_myloc_distance : textColor));
 				}
 				txt.setText(OsmAndFormatter.getFormattedDistance(mes[0], app));
 			} else {

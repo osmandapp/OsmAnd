@@ -311,4 +311,24 @@
 	<color name="color_osm_edit_modify">#fac403</color>
 	<color name="color_osm_edit_delete">#ee5622</color>
 
+	<color name="ctx_menu_bg_light">#ffffff</color>
+	<color name="ctx_menu_bg_dark">#17191a</color>
+	<color name="ctx_menu_title_color_light">#212121</color>
+	<color name="ctx_menu_title_color_dark">#cccccc</color>
+	<color name="ctx_menu_subtitle_color">#727272</color>
+	<color name="ctx_menu_direction_color_light">#536dfe</color>
+	<color name="ctx_menu_direction_color_dark">#e69122</color>
+	<color name="ctx_menu_controller_button_text_color_light_n">#536dfe</color>
+	<color name="ctx_menu_controller_button_text_color_dark_n">#e69122</color>
+	<color name="ctx_menu_controller_button_text_color_light_p">#ffffff</color>
+	<color name="ctx_menu_controller_button_text_color_dark_p">#cccccc</color>
+	<color name="ctx_menu_controller_button_outline_color_light_n">#e6e6e6</color>
+	<color name="ctx_menu_controller_button_outline_color_light_p">#4c63e6</color>
+	<color name="ctx_menu_controller_button_outline_color_dark_n">#2d3133</color>
+	<color name="ctx_menu_controller_button_outline_color_dark_p">#b36a0b</color>
+	<color name="ctx_menu_controller_button_bg_color_light_n">#fafafa</color>
+	<color name="ctx_menu_controller_button_bg_color_light_p">#6d82fc</color>
+	<color name="ctx_menu_controller_button_bg_color_dark_n">#222526</color>
+	<color name="ctx_menu_controller_button_bg_color_dark_p">#d28521</color>
+
 </resources>
