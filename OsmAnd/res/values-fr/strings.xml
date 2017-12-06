@@ -2291,7 +2291,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="access_hint_enter_category">Saisissez une catégorie</string>
     <string name="access_hint_enter_description">Saisissez une description</string>
     <string name="access_collapsed_list">Plier la liste</string>
-    <string name="access_expanded_list">Déplier la liste</string>
+    <string name="access_expanded_list">Liste dépliée</string>
     <string name="access_empty_list">Vider la liste</string>
     <string name="access_tree_list">Liste arborescente</string>
     <string name="access_shared_string_not_installed">Non installé</string>
@@ -2376,7 +2376,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="skip_map_downloading_desc">Aucune carte hors-ligne n\'est installée. Vous pouvez sélectionner une carte dans la liste ou télécharger ultérieurement une carte depuis le menu « %1$s ».</string>
     <string name="search_another_country">Sélectionner une autre région</string>
     <string name="search_map">Recherche des cartes …</string>
-    <string name="first_usage_wizard_desc">Laisser OsmAnd déterminer votre position et vous suggérer les cartes de la région.</string>
+    <string name="first_usage_wizard_desc">Autoriser OsmAnd à vous localiser et à vous suggérer le téléchargement des cartes de la région.</string>
     <string name="location_not_found">Position non trouvée</string>
     <string name="no_inet_connection">Aucune connexion Internet</string>
     <string name="no_inet_connection_desc_map">Indispensable pour télécharger des cartes.</string>
@@ -3031,7 +3031,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="one_tap_active_descr">Appuyez sur une marque de la carte pour la déplacer en première position des marques actives sans ouvrir le menu contextuel.</string>
     <string name="one_tap_active">Un appui activé</string>
     <string name="empty_state_av_notes">Prenez des notes !</string>
-    <string name="empty_state_av_notes_desc">Ajoutez des notes sonores, vidéos ou photo à tout point de la carte en utilisant le gadget ou le menu contextuel.</string>
+    <string name="empty_state_av_notes_desc">Associez des notes sonore, vidéo ou photo à n\'importe quel point de la carte depuis le gadget ou le menu contextuel.</string>
     <string name="notes_by_date">Notes par date</string>
     <string name="by_date">Par date</string>
     <string name="by_type">Par type</string>
