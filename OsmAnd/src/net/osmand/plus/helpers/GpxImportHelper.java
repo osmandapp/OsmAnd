@@ -1,11 +1,13 @@
 package net.osmand.plus.helpers;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
@@ -183,7 +185,9 @@ public class GpxImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				progress.dismiss();
+				if (isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
 				handleResult(result, fileName, save, useImportDir, false);
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -221,7 +225,9 @@ public class GpxImportHelper {
 
 			@Override
 			protected void onPostExecute(final GPXFile result) {
-				progress.dismiss();
+				if (isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
 				importFavourites(result, fileName, save, useImportDir, forceImportFavourites);
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -251,7 +257,9 @@ public class GpxImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				progress.dismiss();
+				if (isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
 				Toast.makeText(activity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG).show();
 				final Intent newIntent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
 				newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -307,7 +315,9 @@ public class GpxImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				progress.dismiss();
+				if (isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
 				handleResult(result, name, save, useImportDir, false);
 			}
 
@@ -352,10 +362,19 @@ public class GpxImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				progress.dismiss();
+				if (isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
 				handleResult(result, name, save, useImportDir, false);
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private boolean isActivityNotDestroyed(Activity activity) {
+		if (Build.VERSION.SDK_INT >= 17) {
+			return !activity.isFinishing() && !activity.isDestroyed();
+		}
+		return !activity.isFinishing();
 	}
 
 	private void handleResult(final GPXFile result, final String name, final boolean save,
