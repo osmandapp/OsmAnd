@@ -11,6 +11,7 @@
     -->
     <string name="shared_string_opened">Opened</string>
     <string name="opened_from">Opened from</string>
+    <string name="opened_till">Opened till</string>
     <string name="will_be_closed_at">Will be closed at</string>
     <string name="additional_actions">Additional actions</string>
     <string name="release_3_0">

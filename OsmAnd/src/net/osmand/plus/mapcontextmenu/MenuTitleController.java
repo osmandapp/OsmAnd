@@ -21,6 +21,7 @@ public abstract class MenuTitleController {
 	protected boolean open24_7;
 	protected String openFromStr = "";
 	protected String closedAtStr = "";
+	protected String openedTillStr = "";
 
 	private AddressLookupRequest addressLookupRequest;
 
@@ -113,8 +114,12 @@ public abstract class MenuTitleController {
 		return closedAtStr;
 	}
 
+	public String getOpenedTillStr() {
+		return openedTillStr;
+	}
+
 	public boolean isOpened() {
-		if (isOpen24_7() || !Algorithms.isEmpty(getOpenFromStr()) || !Algorithms.isEmpty(getClosedAtStr())) {
+		if (isOpen24_7() || !Algorithms.isEmpty(getOpenFromStr()) || !Algorithms.isEmpty(getClosedAtStr()) || !Algorithms.isEmpty(getOpenedTillStr())) {
 			return true;
 		} else {
 			return false;
@@ -217,6 +222,7 @@ public abstract class MenuTitleController {
 			open24_7 = menuController.isOpen24_7();
 			openFromStr = menuController.getOpenFromStr();
 			closedAtStr = menuController.getClosedAtStr();
+			openedTillStr = menuController.getOpenedTillStr();
 		}
 	}
 
