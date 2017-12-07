@@ -44,6 +44,7 @@ public class ShareMenuFragment extends Fragment implements OnItemClickListener {
 
 		View mainView = view.findViewById(R.id.main_view);
 		if (menu.isLandscapeLayout()) {
+			AndroidUtils.addStatusBarPadding21v(getContext(), view);
 			AndroidUtils.setBackground(view.getContext(), mainView, !menu.isLight(),
 					R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
 		} else {

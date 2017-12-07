@@ -1258,7 +1258,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		settings.setLastKnownMapLocation((float) mapView.getLatitude(), (float) mapView.getLongitude());
 		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
-		if (animatedThread.isAnimating() && animatedThread.getTargetIntZoom() != 0) {
+		if (animatedThread.isAnimating() && animatedThread.getTargetIntZoom() != 0 && !mapViewTrackingUtilities.isMapLinkedToLocation()) {
 			settings.setMapLocationToShow(animatedThread.getTargetLatitude(), animatedThread.getTargetLongitude(),
 					animatedThread.getTargetIntZoom());
 		}
