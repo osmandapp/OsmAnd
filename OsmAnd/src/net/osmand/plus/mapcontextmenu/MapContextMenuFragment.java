@@ -1103,6 +1103,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				}
 				line2.setText(line2Str.toString());
 			}
+
+			View openingHoursView = view.findViewById(R.id.opening_hours_view);
+			TextView openingHoursTextView = (TextView) view.findViewById(R.id.opening_hours_text_view);
+			openingHoursTextView.setTextColor(ContextCompat.getColor(getContext(), menu.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color));
+			if (menu.isOpen24_7()) {
+				openingHoursTextView.setText(getString(R.string.shared_string_is_open_24_7));
+				openingHoursView.setVisibility(View.VISIBLE);
+			} else {
+				openingHoursView.setVisibility(View.GONE);
+			}
 		}
 		updateCompassVisibility();
 	}

@@ -343,5 +343,7 @@
 	<color name="ctx_menu_bottom_view_icon">#505050</color>
 	<color name="ctx_menu_bottom_view_text_color_light">#212121</color>
 	<color name="ctx_menu_bottom_view_text_color_dark">#cccccc</color>
+	<color name="ctx_menu_amenity_opened_text_color">#5baf3f</color>
+	<color name="ctx_menu_amenity_closed_text_color">#c66545</color>
 
 </resources>

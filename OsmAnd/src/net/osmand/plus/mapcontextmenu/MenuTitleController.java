@@ -18,6 +18,7 @@ public abstract class MenuTitleController {
 	protected String commonTypeStr = "";
 	protected Drawable secondLineTypeIcon;
 	protected String streetStr = "";
+	protected boolean open24_7;
 
 	private AddressLookupRequest addressLookupRequest;
 
@@ -98,6 +99,18 @@ public abstract class MenuTitleController {
 		}
 	}
 
+	public boolean isOpen24_7() {
+		return open24_7;
+	}
+
+	public boolean isOpened() {
+		if (isOpen24_7()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	protected void initTitle() {
 		searchAddressStr = PointDescription.getSearchAddressStr(getMapActivity());
 		addressNotFoundStr = PointDescription.getAddressNotFoundStr(getMapActivity());
@@ -111,6 +124,8 @@ public abstract class MenuTitleController {
 		if (needStreetName()) {
 			acquireStreetName();
 		}
+
+		acquireOpeningHoursData();
 	}
 
 	protected boolean needStreetName() {
@@ -184,6 +199,13 @@ public abstract class MenuTitleController {
 		});
 
 		getMapActivity().getMyApplication().getGeocodingLookupService().lookupAddress(addressLookupRequest);
+	}
+
+	protected void acquireOpeningHoursData() {
+		MenuController menuController = getMenuController();
+		if (menuController != null) {
+			open24_7 = menuController.isOpen24_7();
+		}
 	}
 
 	protected void onSearchAddressDone() {

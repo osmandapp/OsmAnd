@@ -186,6 +186,14 @@ public class OpeningHoursParser {
 			return isOpenDay || isOpenPrevious;
 		}
 
+		public boolean isOpen24_7() {
+			boolean open24_7 = false;
+			for (OpeningHoursRule r : rules) {
+				open24_7 = r.isOpen24_7();
+			}
+			return open24_7;
+		}
+
 		public String getCurrentRuleTime(Calendar cal) {
 			// make exception for overlapping times i.e.
 			// (1) Mo 14:00-16:00; Tu off
@@ -341,6 +349,8 @@ public class OpeningHoursParser {
 		public String toRuleString();
 
 		public String toLocalRuleString();
+
+		boolean isOpen24_7();
 	}
 
 	/**
@@ -628,7 +638,6 @@ public class OpeningHoursParser {
 			return false;
 		}
 
-
 		@Override
 		public String toRuleString() {
 			return toRuleString(daysStr, monthsStr);
@@ -658,24 +667,17 @@ public class OpeningHoursParser {
 				addArray(dayMonths, null, b);
 			}
 			// Day
-			boolean open24_7 = true;
-			for (int i = 0; i < 7; i++) {
-				if (!days[i]) {
-					open24_7 = false;
-					break;
-				}
-			}
 			appendDaysString(b, dayNames);
 			// Time
 			if (startTimes == null || startTimes.size() == 0) {
 				b.append("off");
 			} else {
+				if (isOpen24_7()) {
+					return "24/7";
+				}
 				for (int i = 0; i < startTimes.size(); i++) {
 					int startTime = startTimes.get(i);
 					int endTime = endTimes.get(i);
-					if (open24_7 && startTime == 0 && endTime / 60 == 24) {
-						return "24/7";
-					}
 					if(i > 0) {
 						b.append(", ");
 					}
@@ -723,6 +725,28 @@ public class OpeningHoursParser {
 		@Override
 		public String toLocalRuleString() {
 			return toRuleString(localDaysStr, localMothsStr);
+		}
+
+		@Override
+		public boolean isOpen24_7() {
+			boolean open24_7 = true;
+			for (int i = 0; i < 7; i++) {
+				if (!days[i]) {
+					open24_7 = false;
+					break;
+				}
+			}
+
+			if (open24_7 && startTimes != null && startTimes.size() > 0) {
+				for (int i = 0; i < startTimes.size(); i++) {
+					int startTime = startTimes.get(i);
+					int endTime = endTimes.get(i);
+					if (startTime == 0 && endTime / 60 == 24) {
+						return true;
+					}
+				}
+			}
+			return false;
 		}
 
 		@Override
@@ -913,6 +937,11 @@ public class OpeningHoursParser {
 		@Override
 		public String toLocalRuleString() {
 			return toRuleString();
+		}
+
+		@Override
+		public boolean isOpen24_7() {
+			return false;
 		}
 
 		@Override

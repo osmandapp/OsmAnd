@@ -424,6 +424,10 @@ public abstract class MenuController extends BaseMenuController {
 		return "";
 	}
 
+	public boolean isOpen24_7() {
+		return false;
+	}
+
 	public String getCommonTypeStr() {
 		return "";
 	}

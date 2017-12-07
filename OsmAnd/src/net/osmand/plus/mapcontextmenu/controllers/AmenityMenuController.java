@@ -23,8 +23,10 @@ import net.osmand.plus.resources.TransportIndexRepository;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.OpeningHoursParser;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -116,6 +118,11 @@ public class AmenityMenuController extends MenuController {
 		return getTypeStr(amenity);
 	}
 
+	@Override
+	public boolean isOpen24_7() {
+		return isOpen24_7(amenity);
+	}
+
 	public static String getTypeStr(Amenity amenity) {
 		PoiCategory pc = amenity.getType();
 		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
@@ -126,6 +133,22 @@ public class AmenityMenuController extends MenuController {
 			typeStr = Algorithms.capitalizeFirstLetterAndLowercase(typeStr.replace('_', ' '));
 		}
 		return typeStr;
+	}
+
+	public static boolean isOpen24_7(Amenity amenity) {
+		boolean isOpen24_7 = false;
+		OpeningHoursParser.OpeningHours openingHours = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
+		if (openingHours == null) {
+			isOpen24_7 = false;
+		} else {
+			Calendar calendar = Calendar.getInstance();
+			if (openingHours.isOpenedForTime(calendar)) {
+				if (openingHours.isOpen24_7()) {
+					isOpen24_7 = true;
+				}
+			}
+		}
+		return isOpen24_7;
 	}
 
 	@Override
