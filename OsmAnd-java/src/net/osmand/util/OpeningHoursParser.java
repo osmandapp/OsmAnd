@@ -850,6 +850,7 @@ public class OpeningHoursParser {
 
 		@Override
 		public String getOpenedFromStr(Calendar cal, boolean checkPrevious) {
+			int limit = 300;
 			StringBuilder sb = new StringBuilder();
 			int d = getCurrentDay(cal);
 			int p = getPreviousDay(d);
@@ -859,7 +860,7 @@ public class OpeningHoursParser {
 				int endTime = endTimes.get(i);
 				if (startTime < endTime || endTime == -1) {
 					if (days[d] && !checkPrevious) {
-						if (time - startTime <= 600 && (endTime == -1 || time <= endTime)) {
+						if (time - startTime <= limit && (endTime == -1 || time <= endTime)) {
 							formatTime(startTime, sb);
 							break;
 						}
@@ -869,7 +870,7 @@ public class OpeningHoursParser {
 						formatTime(startTime, sb);
 						break;
 					} else if (time < endTime && days[p] && checkPrevious) {
-						if (24 * 60 - endTime + time <= 600) {
+						if (24 * 60 - endTime + time <= limit) {
 							formatTime(startTime, sb);
 							break;
 						}
@@ -881,7 +882,7 @@ public class OpeningHoursParser {
 
 		@Override
 		public String getClosedAtStr(Calendar cal, boolean checkNext) {
-			int limit = 300;
+			int limit = 120;
 			StringBuilder sb = new StringBuilder();
 			int d = getCurrentDay(cal);
 			int n = getNextDay(d);
