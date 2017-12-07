@@ -194,6 +194,34 @@ public class OpeningHoursParser {
 			return open24_7;
 		}
 
+		public String getOpenFromStr(Calendar cal) {
+			String openFrom = getOpenFromDayStr(cal);
+			if (Algorithms.isEmpty(openFrom)) {
+				openFrom = getOpenFromPreviousStr(cal);
+			}
+			return openFrom;
+		}
+
+		private String getOpenFromDayStr(Calendar cal) {
+			String openFrom = "";
+			for (OpeningHoursRule r : rules) {
+				if (r.containsDay(cal) && r.containsMonth(cal)) {
+					openFrom = r.getOpenedFromStr(cal, false);
+				}
+			}
+			return openFrom;
+		}
+
+		private String getOpenFromPreviousStr(Calendar cal) {
+			String openFrom = "";
+			for (OpeningHoursRule r : rules) {
+				if (r.containsPreviousDay(cal) && r.containsMonth(cal)) {
+					openFrom = r.getOpenedFromStr(cal, true);
+				}
+			}
+			return openFrom;
+		}
+
 		public String getCurrentRuleTime(Calendar cal) {
 			// make exception for overlapping times i.e.
 			// (1) Mo 14:00-16:00; Tu off
@@ -351,6 +379,8 @@ public class OpeningHoursParser {
 		public String toLocalRuleString();
 
 		boolean isOpen24_7();
+
+		String getOpenedFromStr(Calendar cal, boolean checkPrevious);
 	}
 
 	/**
@@ -607,14 +637,10 @@ public class OpeningHoursParser {
 		 */
 		@Override
 		public boolean isOpenedForTime(Calendar cal, boolean checkPrevious) {
-			int i = cal.get(Calendar.DAY_OF_WEEK);
-			int d = (i + 5) % 7;
-			int p = d - 1;
-			if (p < 0) {
-				p += 7;
-			}
-			int time = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE); // Time in minutes
-			for (i = 0; i < startTimes.size(); i++) {
+			int d = getCurrentDay(cal);
+			int p = getPreviousDay(d);
+			int time = getCurrentTimeInMinutes(cal); // Time in minutes
+			for (int i = 0; i < startTimes.size(); i++) {
 				int startTime = this.startTimes.get(i);
 				int endTime = this.endTimes.get(i);
 				if (startTime < endTime || endTime == -1) {
@@ -636,6 +662,23 @@ public class OpeningHoursParser {
 				}
 			}
 			return false;
+		}
+
+		private int getCurrentDay(Calendar cal) {
+			int i = cal.get(Calendar.DAY_OF_WEEK);
+			return (i + 5) % 7;
+		}
+
+		private int getPreviousDay(int currentDay) {
+			int p = currentDay - 1;
+			if (p < 0) {
+				p += 7;
+			}
+			return p;
+		}
+
+		private int getCurrentTimeInMinutes(Calendar cal) {
+			return cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
 		}
 
 		@Override
@@ -747,6 +790,43 @@ public class OpeningHoursParser {
 				}
 			}
 			return false;
+		}
+
+		@Override
+		public String getOpenedFromStr(Calendar cal, boolean checkPrevious) {
+			StringBuilder sb = new StringBuilder();
+			int d = getCurrentDay(cal);
+			int p = getPreviousDay(d);
+			int time = getCurrentTimeInMinutes(cal);
+			for (int i = 0; i < startTimes.size(); i++) {
+				int startTime = startTimes.get(i);
+				int endTime = endTimes.get(i);
+				if (startTime < endTime || endTime == -1) {
+					if (days[d] && !checkPrevious) {
+						if (time - startTime <= 600 && (endTime == -1 || time <= endTime)) {
+							int stHour = startTime / 60;
+							int stTime = startTime - stHour * 60;
+							formatTime(stHour, stTime, sb);
+							break;
+						}
+					}
+				} else {
+					if (time >= startTime && days[d] && !checkPrevious) {
+						int stHour = startTime / 60;
+						int stTime = startTime - stHour * 60;
+						formatTime(stHour, stTime, sb);
+						break;
+					} else if (time < endTime && days[p] && checkPrevious) {
+						if (24 * 60 - endTime + time <= 600) {
+							int stHour = startTime / 60;
+							int stTime = startTime - stHour * 60;
+							formatTime(stHour, stTime, sb);
+							break;
+						}
+					}
+				}
+			}
+			return sb.toString();
 		}
 
 		@Override
@@ -942,6 +1022,11 @@ public class OpeningHoursParser {
 		@Override
 		public boolean isOpen24_7() {
 			return false;
+		}
+
+		@Override
+		public String getOpenedFromStr(Calendar cal, boolean checkPrevious) {
+			return "";
 		}
 
 		@Override

@@ -19,6 +19,7 @@ public abstract class MenuTitleController {
 	protected Drawable secondLineTypeIcon;
 	protected String streetStr = "";
 	protected boolean open24_7;
+	protected String openFromStr = "";
 
 	private AddressLookupRequest addressLookupRequest;
 
@@ -103,8 +104,12 @@ public abstract class MenuTitleController {
 		return open24_7;
 	}
 
+	public String getOpenFromStr() {
+		return openFromStr;
+	}
+
 	public boolean isOpened() {
-		if (isOpen24_7()) {
+		if (isOpen24_7() || !Algorithms.isEmpty(getOpenFromStr())) {
 			return true;
 		} else {
 			return false;
@@ -205,6 +210,7 @@ public abstract class MenuTitleController {
 		MenuController menuController = getMenuController();
 		if (menuController != null) {
 			open24_7 = menuController.isOpen24_7();
+			openFromStr = menuController.getOpenFromStr();
 		}
 	}
 

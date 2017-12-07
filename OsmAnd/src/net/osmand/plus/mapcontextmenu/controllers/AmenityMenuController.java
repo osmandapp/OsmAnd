@@ -123,6 +123,11 @@ public class AmenityMenuController extends MenuController {
 		return isOpen24_7(amenity);
 	}
 
+	@Override
+	public String getOpenFromStr() {
+		return getOpenFromStr(amenity);
+	}
+
 	public static String getTypeStr(Amenity amenity) {
 		PoiCategory pc = amenity.getType();
 		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
@@ -149,6 +154,16 @@ public class AmenityMenuController extends MenuController {
 			}
 		}
 		return isOpen24_7;
+	}
+
+	public static String getOpenFromStr(Amenity amenity) {
+		OpeningHoursParser.OpeningHours openingHours = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
+		if (openingHours == null) {
+			return "";
+		} else {
+			Calendar cal = Calendar.getInstance();
+			return openingHours.getOpenFromStr(cal);
+		}
 	}
 
 	@Override
