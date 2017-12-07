@@ -222,6 +222,34 @@ public class OpeningHoursParser {
 			return openFrom;
 		}
 
+		public String getClosedAtStr(Calendar cal) {
+			String closedAt = getClosedAtDayStr(cal);
+			if (Algorithms.isEmpty(closedAt)) {
+				closedAt = getClosedAtNextDayStr(cal);
+			}
+			return closedAt;
+		}
+
+		private String getClosedAtDayStr(Calendar cal) {
+			String closedAt = "";
+			for (OpeningHoursRule r : rules) {
+				if (r.containsDay(cal) && r.containsMonth(cal)) {
+					closedAt = r.getClosedAtStr(cal, false);
+				}
+			}
+			return closedAt;
+		}
+
+		private String getClosedAtNextDayStr(Calendar cal) {
+			String closedAt = "";
+			for (OpeningHoursRule r : rules) {
+				if (r.containsNextDay(cal) && r.containsMonth(cal)) {
+					closedAt = r.getClosedAtStr(cal, true);
+				}
+			}
+			return closedAt;
+		}
+
 		public String getCurrentRuleTime(Calendar cal) {
 			// make exception for overlapping times i.e.
 			// (1) Mo 14:00-16:00; Tu off
@@ -355,6 +383,14 @@ public class OpeningHoursParser {
 		public boolean containsDay(Calendar cal);
 
 		/**
+		 * Check if the next day after "cal" is part of this rule
+		 *
+		 * @param cal the time to check
+		 * @return true if the next day is part of the rule
+		 */
+		boolean containsNextDay(Calendar cal);
+
+		/**
 		 * Check if the month of "cal" is part of this rule
 		 *
 		 * @param cal the time to check
@@ -381,6 +417,8 @@ public class OpeningHoursParser {
 		boolean isOpen24_7();
 
 		String getOpenedFromStr(Calendar cal, boolean checkPrevious);
+
+		String getClosedAtStr(Calendar cal, boolean checkNext);
 	}
 
 	/**
@@ -598,6 +636,16 @@ public class OpeningHoursParser {
 			return false;
 		}
 
+		@Override
+		public boolean containsNextDay(Calendar cal) {
+			int i = cal.get(Calendar.DAY_OF_WEEK);
+			int p = (i + 6) % 7;
+			if (days[p]) {
+				return true;
+			}
+			return false;
+		}
+
 		/**
 		 * Check if the previous weekday of time "cal" is part of this rule
 		 *
@@ -675,6 +723,14 @@ public class OpeningHoursParser {
 				p += 7;
 			}
 			return p;
+		}
+
+		private int getNextDay(int currentDay) {
+			int n = currentDay + 1;
+			if (n > 6) {
+				n -= 7;
+			}
+			return n;
 		}
 
 		private int getCurrentTimeInMinutes(Calendar cal) {
@@ -804,23 +860,49 @@ public class OpeningHoursParser {
 				if (startTime < endTime || endTime == -1) {
 					if (days[d] && !checkPrevious) {
 						if (time - startTime <= 600 && (endTime == -1 || time <= endTime)) {
-							int stHour = startTime / 60;
-							int stTime = startTime - stHour * 60;
-							formatTime(stHour, stTime, sb);
+							formatTime(startTime, sb);
 							break;
 						}
 					}
 				} else {
 					if (time >= startTime && days[d] && !checkPrevious) {
-						int stHour = startTime / 60;
-						int stTime = startTime - stHour * 60;
-						formatTime(stHour, stTime, sb);
+						formatTime(startTime, sb);
 						break;
 					} else if (time < endTime && days[p] && checkPrevious) {
 						if (24 * 60 - endTime + time <= 600) {
-							int stHour = startTime / 60;
-							int stTime = startTime - stHour * 60;
-							formatTime(stHour, stTime, sb);
+							formatTime(startTime, sb);
+							break;
+						}
+					}
+				}
+			}
+			return sb.toString();
+		}
+
+		@Override
+		public String getClosedAtStr(Calendar cal, boolean checkNext) {
+			int limit = 300;
+			StringBuilder sb = new StringBuilder();
+			int d = getCurrentDay(cal);
+			int n = getNextDay(d);
+			int time = getCurrentTimeInMinutes(cal);
+			for (int i = 0; i < startTimes.size(); i++) {
+				int startTime = startTimes.get(i);
+				int endTime = endTimes.get(i);
+				if (startTime < endTime && endTime != -1) {
+					if (days[d] && !checkNext) {
+						if (time <= endTime && endTime - time <= limit ) {
+							formatTime(endTime, sb);
+							break;
+						}
+					}
+				} else {
+					if (time <= endTime && days[d] && !checkNext) {
+						formatTime(endTime, sb);
+						break;
+					} else if (time < endTime && days[n] && checkNext) {
+						if (endTime - time <= limit) {
+							formatTime(endTime, sb);
 							break;
 						}
 					}
@@ -1005,6 +1087,11 @@ public class OpeningHoursParser {
 		}
 
 		@Override
+		public boolean containsNextDay(Calendar cal) {
+			return false;
+		}
+
+		@Override
 		public boolean containsMonth(Calendar cal) {
 			return false;
 		}
@@ -1026,6 +1113,11 @@ public class OpeningHoursParser {
 
 		@Override
 		public String getOpenedFromStr(Calendar cal, boolean checkPrevious) {
+			return "";
+		}
+
+		@Override
+		public String getClosedAtStr(Calendar cal, boolean checkNext) {
 			return "";
 		}
 
@@ -1374,6 +1466,11 @@ public class OpeningHoursParser {
 		b.append(t);
 	}
 
+	private static void formatTime(int minutes, StringBuilder sb) {
+		int hour = minutes / 60;
+		int time = minutes - hour * 60;
+		formatTime(hour, time, sb);
+	}
 
 	/**
 	 * test if the calculated opening hours are what you expect

@@ -432,6 +432,10 @@ public abstract class MenuController extends BaseMenuController {
 		return "";
 	}
 
+	public String getClosedAtStr() {
+		return "";
+	}
+
 	public String getCommonTypeStr() {
 		return "";
 	}

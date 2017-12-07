@@ -1112,6 +1112,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					openingHoursStr = getString(R.string.shared_string_is_open_24_7);
 				} else if (!Algorithms.isEmpty(menu.getOpenFromStr())) {
 					openingHoursStr = getString(R.string.opened_from) + " " + menu.getOpenFromStr();
+				} else if (!Algorithms.isEmpty(menu.getClosedAtStr())) {
+					openingHoursStr = getString(R.string.will_be_closed_at) + " " + menu.getClosedAtStr();
 				}
 				openingHoursTextView.setText(openingHoursStr);
 				openingHoursView.setVisibility(View.VISIBLE);
