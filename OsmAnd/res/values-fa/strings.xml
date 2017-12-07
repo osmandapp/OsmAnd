@@ -433,7 +433,7 @@
 	<string name="accuracy">دقت</string>
 	<string name="altitude">ارتفاع</string>
 	<string name="i_am_here">من اینجا هستم</string>
-	<string name="local_openstreetmap_uploadall">همه را آپلود کن</string>
+	<string name="local_openstreetmap_uploadall">آپلود همه</string>
 	
 	<string name="local_openstreetmap_upload">آپلود اصلاحات به OSM</string>
 	<string name="local_openstreetmap_delete">حذف اصلاحات</string>
@@ -922,7 +922,7 @@
 	<string name="uploading">در حال آپلود…</string>
 	<string name="uploading_data">در حال آپلود داده‌ها…</string>
 	<string name="shared_string_clear_all">پاک‌کردن همه</string>
-	<string name="favorite">برگزیده</string>
+	<string name="favorite">نقطهٔ برگزیده</string>
 	<string name="search_history_building">ساختمان: {0}، {1}، {2}</string>
 	<string name="search_history_street">خیابان: {0}، {1}</string>
 	<string name="search_history_int_streets">تقاطع: {0} x {1} به {2}</string>
@@ -1328,7 +1328,7 @@
     <string name="select_gpx">انتخاب فایل GPX…</string>
     <string name="route_descr_select_destination">انتخاب مقصد</string>
     <string name="shared_string_select_on_map">انتخاب روی نقشه</string>
-    <string name="shared_string_favorite">برگزیده</string>
+    <string name="shared_string_favorite">نقطهٔ برگزیده</string>
     <string name="route_preferences">ترجیحات مسیر</string>
     <string name="route_info">اطلاعات مسیر</string>
     <string name="use_displayed_track_for_navigation">آیا از مسیر نمایش‌داده‌شده برای راهبری استفاده می‌کنید؟</string>
@@ -1799,7 +1799,7 @@
 	<string name="shared_string_edit">ویرایش</string>
 	<string name="shared_string_places">مکان‌ها</string>
 	<string name="shared_string_search">جست‌وجو</string>
-	<string name="shared_string_show_description">نمایش توضیحات.</string>
+	<string name="shared_string_show_description">نمایش توضیحات</string>
 	<string name="shared_string_message">پیام</string>
 	<string name="agps_data_last_downloaded">آخرین باری که اطلاعات A-GPS دانلود شده: %1$s</string>
     <string name="confirm_usage_speed_cameras">در بسیاری از کشورها (آلمان، فرانسه، ایتالیا و...) بنا بر قانون، استفاده از هشداردهندهٔ دوربین‌های ترافیکی مجاز نیست. OsmAnd هیچ‌گونه مسئولیتی در قبال نقض قانون از سوی شما ندارد. لطفاً تنها در صورتی که مجاز به استفاده از این ویژگی هستید بله را انتخاب کنید.</string>
@@ -1945,7 +1945,7 @@
     <!-- string name="lat_lon_pattern">طول: %1$.5f عرض: %2$.5f</string -->
     <string name="access_sort">مرتب‌سازی</string>
     <string name="number_of_gpx_files_selected_pattern">%s فایل GPX انتخاب شده است</string>
-    <string name="osm_live_email_desc">به‌منظور اینکه دربارهٔ مشارکت‌ها اطلاعاتی برایتان ارسال کنیم، نوشتنش ضروری است.</string>
+    <string name="osm_live_email_desc">به‌منظور اینکه اطلاعاتی دربارهٔ مشارکت‌ها برایتان ارسال کنیم، نوشتنش ضروری است.</string>
     <string name="download_files_question_space_with_temp">آیا {0} فایل را دانلود می‌کنید؟ 
 \n{3} مگابایت برای ذخیره‌سازی موقت و {1} مگابایت برای ذخیره‌سازی دائمی لازم دارید. 
 \n{2} مگابایت فضای آزاد وجود دارد.</string>
@@ -1963,7 +1963,7 @@
     <string name="closing_at">بستن در</string>
     <string name="osm_live_payment_desc">هزینهٔ اشتراک ماهانه است. هر زمان که بخواهید می‌توانید اشتراک خود را در گوگل‌پلی لغو کنید.</string>
     <string name="donation_to_osm">کمک مالی به OpenStreetMap</string>
-    <string name="donation_to_osm_desc">بخشی از کمک‌های مالی به مشترکین OpenStreetMap که به تغییرات کمک می‌کنند ارسال می‌شود. هزینهٔ اشتراک ثابت می‌ماند.</string>
+    <string name="donation_to_osm_desc">بخشی از کمک‌های مالی را به مشترکینی می‌دهیم که به تغییرات OpenStreetMap کمک می‌کنند. هزینهٔ اشتراک تغییری نمی‌کند.</string>
     <string name="osm_live_subscription_desc">این اشتراک، به‌روزرسانی‌های ساعتی، روزانه و هفتگی و همچنین دانلود نامحدود همهٔ نقشه‌ها در سراسر دنیا را فعال می‌کند.</string>
     <string name="get_it">دریافت</string>
     <string name="get_for">پرداخت برای %1$s</string>
@@ -2073,7 +2073,7 @@
     <string name="osm_live_subscribe_btn">اشتراک</string>
     <string name="osm_live_user_public_name">اسم جهانی</string>
     <string name="osm_live_hide_user_name">اسم من را در گزارش‌ها نشان نده</string>
-    <string name="osm_live_support_region">منطقهٔ پشتیبانی‌شده</string>
+    <string name="osm_live_support_region">منطقهٔ تحتِ‌پوشش</string>
     <string name="osm_live_month_cost">هزینهٔ ماهانه</string>
     <string name="osm_live_month_cost_desc">پرداخت ماهیانه.</string>
     <string name="osm_live_active">فعال</string>
@@ -2081,7 +2081,7 @@
     <string name="osm_live_enter_email">لطفاً نشانی ایمیل معتبر وارد کنید</string>
     <string name="osm_live_enter_user_name">لطفاً اسم جهانی را وارد کنید</string>
     <string name="osm_live_thanks">سپاسگزاریم که مشترک به‌روزرسانی‌های پویا شدید!</string>
-    <string name="osm_live_region_desc">بخشی از کمک‌های مالی شما به کاربرانی پرداخت می‌شود که در آن منطقه اصلاحات نقشه را انجام می‌دهند.</string>
+    <string name="osm_live_region_desc">بخشی از کمک‌های مالی شما به کاربرانی پرداخت می‌شود که این منطقه از نقشه را سروسامان می‌دهند.</string>
     <string name="osm_live_subscription_settings">تنظیمات اشتراک</string>
     <string name="quick_action_auto_zoom">زوم خودکار روشن/خاموش</string>
     <string name="select_street">انتخاب خیابان</string>
@@ -2184,8 +2184,8 @@
     <string name="save_track_min_speed">کمترین سرعت برای ورود به سیستم</string>
     <string name="save_track_precision">کمترین دقت برای ثبت</string>
     <string name="christmas_poi">نقطهٔ POI کریسمس</string>
-    <string name="christmas_desc">پیش‌بینی کریسمس و تعطیلات سال نو. برای نمایش POIهای مرتبط با کریسمس: درخت کریسمس، فروشگاه‌ها و غیره.</string>
-    <string name="christmas_desc_q">آیا POIهای مربوط به کریسمس نمایش داده شود؟</string>
+    <string name="christmas_desc">در آستانهٔ کریسمس و تعطیلات سال نو، نقاط محبوب مرتبط با کریسمس را ببینید: درخت‌های کریسمس، فروشگاه‌ها و غیره.</string>
+    <string name="christmas_desc_q">نقاط محبوبی (POI) که برچسب کریسمس دارند نمایش داده شود؟</string>
     <string name="rendering_value_light_brown_name">قهوه‌ای روشن</string>
     <string name="rendering_value_dark_brown_name">قهوه‌ای تیره</string>
     <string name="rendering_attr_contourColorScheme_name">رنگ‌بندی منحنی‌های تراز</string>
@@ -2535,7 +2535,7 @@
     <string name="quick_action_add_parking_descr">با لمس دکمهٔ عملیاتی یک جای پارک در مرکز صفحه علامت‌گذاری می‌شود.</string>
     <string name="favorite_autofill_toast_text">" اینجا ذخیره شد: "</string>
     <string name="favorite_empty_place_name">مکان</string>
-    <string name="quick_action_duplicates">نام عملیات فوری موردنظر در حال حاضر استفاده شده است. برای جلوگیری از تکرار به %1$s تغییر کرد.</string>
+    <string name="quick_action_duplicates">نام عملیات فوری موردنظر قبلاً استفاده شده است. برای جلوگیری از تکرار، به «%1$s» تغییر کرد.</string>
     <string name="quick_action_duplicate">نام تکراری برای عملیات فوری</string>
     <string name="quick_action_showhide_favorites_descr">با لمس دکمهٔ عملیاتی، نقاط برگزیده روی نقشه پنهان/آشکار می‌شوند.</string>
     <string name="quick_action_showhide_poi_descr">با لمس دکمهٔ عملیاتی، POIها روی نقشه پنهان/آشکار می‌شوند.</string>
@@ -2975,4 +2975,12 @@
     <string name="by_type">بر اساس نوع</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="modify_the_search_query">عبارت جست‌وجوشده را اصلاح کنید.</string>
+    <string name="release_3_0">• تشخیص علائم ایست با توجه به جهت رانندگی
+\n
+\n• الگوریتم جدید برای دادن مقادیر فراز و فرود مناسب به مسیرهای GPX
+\n
+\n
+\n • Terrain (ascent) aware hiking time (Naismith\'s rule)
+\n
+\n</string>
     </resources>

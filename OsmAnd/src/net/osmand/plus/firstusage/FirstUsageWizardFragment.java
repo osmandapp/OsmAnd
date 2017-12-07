@@ -22,6 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ValueHolder;
 import net.osmand.binary.BinaryMapDataObject;
@@ -119,6 +120,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.first_usage_wizard_fragment, container, false);
+		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
 
 		if (!AndroidUiHelper.isOrientationPortrait(getActivity()) && !AndroidUiHelper.isXLargeDevice(getActivity())) {
 			TextView wizardDescription = (TextView) view.findViewById(R.id.wizard_description);
@@ -448,11 +450,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public void onPause() {
 		super.onPause();
 		((MapActivity)getActivity()).enableDrawer();
-	}
-
-	@Override
-	protected boolean isFullScreenAllowed() {
-		return false;
 	}
 
 	@Override

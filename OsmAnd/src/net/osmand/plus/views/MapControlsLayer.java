@@ -715,6 +715,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				if (!show) {
 					mapHudButtonsOverlay.setVisibility(View.INVISIBLE);
 				}
+				mapActivity.updateStatusBarColor();
 			}
 		});
 		set.start();

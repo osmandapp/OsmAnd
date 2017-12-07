@@ -190,12 +190,12 @@
 	<string name="local_indexes_cat_tile">מפות מקוונות ואריחים</string>
 	<string name="local_indexes_cat_map">מפות בלתי מקוונות (וקטור)</string>
 	
-	<string name="index_settings_descr">הורדה, צפייה בפרטים וניהול של מפות בלתי מקוונות</string>
+	<string name="index_settings_descr">הורדה וניהול של מפות בלתי מקוונות שמאוחסנות בהתקן שלך.</string>
 	<string name="map_online_plugin_is_not_installed">ניתן להפעיל את תוסף המפות המקוונות כדי לבחור במקורות שונים למפה</string>
 	<string name="map_online_data">מפות מקוונות ואריחים</string>
-	<string name="map_online_data_descr">שימוש במפות מקוונות (הורדה ואחסון המפות בכרטיס ה־SD)</string>
+	<string name="map_online_data_descr">שימוש במפות מקוונות (הורדה ואחסון אריחי המפה בכרטיס ה־SD).</string>
 	<string name="shared_string_online_maps">מפות מקוונות</string>
-	<string name="online_map_settings_descr">הגדרת מקורות אריחי מפה מקוונים או שמורים</string>
+	<string name="online_map_settings_descr">הגדרת מקורות אריחי מפה מקוונים או שמורים.</string>
 	
 	
 	<string name="osmand_rastermaps_plugin_description">הצגת תצורה להגדרת מגוון של אריחים מפה מקוונים או שמורים כמפת בסיס או כשכבת על / תחת. ניתן להכין מפות אלה באופן בלתי מקוון ואז להעתיק אותן לתיקייה של OsmAnd.</string>
@@ -992,7 +992,7 @@
     <string name="download_srtm_maps">מפות SRTM</string>
     
 	
-<string name="audionotes_location_not_defined">המיקום לא מוגדר עדיין לצורכי שמירת הערות קוליות</string>
+<string name="audionotes_location_not_defined">המיקום לא מוגדר עדיין לצורכי שמירת הערות. יש לבחור ב„שימוש במיקום…” כדי להקצות הערה למיקום שצוין.</string>
     
     <string name="map_widget_audionotes">הערות קוליות</string>
     <string name="audionotes_plugin_description">תיאור תוסף ההערות הקוליות</string>
@@ -1021,13 +1021,13 @@
     <string name="map_widget_av_notes">הערות קוליות</string>
     <string name="av_def_action_video">הקלטת וידאו</string>
     <string name="av_def_action_audio">הקלטת שמע</string>
-    <string name="av_widget_action_descr">בחירת פעולת הווידג׳ט כבררת המחדל</string>
+    <string name="av_widget_action_descr">בחירת פעולת הווידג׳ט כבררת המחדל.</string>
     <string name="av_widget_action">פעולת הווידג׳ט כבררת המחדל</string>
     <string name="av_video_format_descr">נא לבחור את תבנית פלט הווידאו.</string>
     <string name="av_video_format">תבנית פלט וידאו</string>
     <string name="av_use_external_recorder_descr">שימוש במקליט המערכת עבור וידאו.</string>
     <string name="av_use_external_recorder">שימוש במקליט חיצוני</string>
-    <string name="av_settings_descr">הגדרת תצורת השמע והווידאו</string>
+    <string name="av_settings_descr">הגדרת תצורת השמע והווידאו.</string>
     <string name="av_settings">הגדרות שמע/וידאו</string>
     <string name="recording_error">אירעה שגיאה בזמן ההקלטה</string>
     <string name="recording_camera_not_available">המצלמה אינה זמינה</string>
@@ -1117,12 +1117,15 @@
     <string name="distance_measurement_clear_route">מחיקת הנקודות</string>
     
     <string name="distance_measurement_load_gpx">פתיחת GPX קיים</string>
-    <string name="use_distance_measurement_help">* יש לגעת כדי לסמן נקודה.\n * יש ללחוץ ולהחזיק על המפה כדי למחוק נקודה קודמת.\n * יש ללחוץ ולהחזיק על נקודה כדי לצפות ולצרף תיאור.\n * יש ללחוץ על וידג׳ט המדידה כדי לצפות בפעולות נוספות.</string>
+    <string name="use_distance_measurement_help">* יש לגעת כדי לסמן נקודה.
+\n * נגיעה ארוכה במפה כדי למחוק נקודה קודמת.
+\n * נגיעה ארוכה על נקודה כדי לצפות ולצרף תיאור.
+\n * יש לגעת בווידג׳ט המדידה כדי לצפות בפעולות נוספות.</string>
     <string name="local_osm_changes_backup_successful">קובץ השינוי ב־OSM נוצר בהצלחה %1$s</string>
     <string name="local_osm_changes_backup_failed">גיבוי השינויים ב־OSM נכשל</string>
     <string name="local_osm_changes_backup">גיבוי כשינוי ב־OSM</string>
     <string name="search_street_in_neighborhood_cities">חיפוש רחוב בערים סמוכות</string>
-    <string name="intermediate_items_sort_return">נקודות הביניים שבדרך סודרו מחדש באופן המיטבי בדרך אל היעד.</string>
+    <string name="intermediate_items_sort_return">יעדי הביניים שבדרך סודרו מחדש באופן המיטבי בדרך אל היעד.</string>
     <string name="intermediate_items_sort_by_distance">סידור דלת לדלת</string>
     
     <string name="please_select_address">נא לבחור בעיר או ברחוב תחילה</string>
@@ -2459,4 +2462,23 @@
     <string name="christmas_poi">נקודת עניין של חג המולד</string>
     <string name="christmas_desc_q">להציג נקודת עניין של חג המולד?</string>
     <string name="copied_to_clipboard">הועתק ללוח הגזירים</string>
+    <string name="osm_save_offline">שמירה באופן בלתי מקוון</string>
+    <string name="animate_routing_route_not_calculated">נא לחשב את הנתיב תחילה</string>
+    <string name="animate_routing_route">הדמיה באמצעות נתיב מחושב</string>
+    <string name="animate_routing_gpx">הדמיה באמצעות מסלול GPX</string>
+    <string name="route_is_too_long_v2">יכול להיות שמסלול זה ארוך מדי לחישוב. נא להוסיף נקודות ביניים אם לא מופיעות תוצאות ב־10 הדקות הקרובות.</string>
+    <string name="auto_zoom_close">קרוב מאוד</string>
+    <string name="auto_zoom_far">טווח בינוני</string>
+    <string name="auto_zoom_farthest">טווח ארוך</string>
+    <string name="map_magnifier">מגדיל מפה</string>
+    <string name="about_settings_descr">פרטי גרסה, רשיונות, חברי המיזם</string>
+    <string name="local_index_tile_data_zooms">רמות תקריב שהתקבלו: %1$s</string>
+    <string name="local_index_tile_data_expire">תפוגה (דקות): %1$s</string>
+    <string name="local_index_tile_data_downloadable">ניתן להורדה: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">תקריב מרבי: %1$s</string>
+    <string name="local_index_tile_data_minzoom">תקריב מזערי: %1$s</string>
+    <string name="local_index_tile_data_name">נתוני אריח: %1$s</string>
+    <string name="edit_tilesource_successfully">מקור האריח %1$s נשמר בהצלחה</string>
+    <string name="driving_region_descr">נא לבחור את איזור הנהיגה: ארה״ב, אירופה, הממלכה המאוחדת, אסיה ואחרות.</string>
+    <string name="speak_descr">יש להגדיר כדי לצורך הקראה של שמות רחובות, אזהרות תנועה (עצירות מאולצות, פסי האטה), אזהרות על מצלמות מהירות, מגבלת מהירות.</string>
     </resources>

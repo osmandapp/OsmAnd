@@ -1470,7 +1470,7 @@
     <string name="av_video_quality_low">En düşük kalite</string>
     <string name="av_video_quality_high">En yüksek kalite</string>
     <string name="av_video_quality">Video çıkış kalitesi</string>
-    <string name="av_video_quality_descr">Seçin video çıkış kalitesi</string>
+    <string name="av_video_quality_descr">Video kalitesi seç.</string>
     <string name="av_audio_format">Ses çıkış biçimi</string>
     <string name="av_audio_format_descr">Ses çıkış biçimini seçin</string>
     <string name="av_audio_bitrate">ses bitrate</string>
@@ -1747,7 +1747,7 @@
     <string name="seconds_ago">Saniye önce</string>
     <string name="osmo_connected_devices">Bağlı aygıtlar</string>
     <string name="osmo_groups">OsMo Grupları / Aygıtlar</string>
-    <string name="osmo_auto_send_locations_descr">Uygulama başladığında otomatik olarak gezintiyi başlat ve lokasyonları gönder</string>
+    <string name="osmo_auto_send_locations_descr">Uygulama başladığında otomatik olarak yolculuğu başlat ve lokasyonları gönder.</string>
     <string name="osmo_auto_send_locations">Otomatik olarak gezinti oturumu başlatın</string>
     <string name="osmo_tracker_id">İzleyici Kimliği</string>
     <string name="osmo_tracker_id_descr">İzleyici kimliğini incelemek için tıkla</string>
@@ -1914,8 +1914,14 @@
     <string name="rendering_category_others">Diğer harita özellikleri</string>
     <string name="map_widget_appearance_rem">Kalan unsurlar</string>
     <string name="search_radius_proximity">Yakınında</string>
-    <string name="osmo_no_connection_msg">Sunucu OSMO bağlanamıyor:\n- Internet bağlantınızı kontrol;\n- Ayarlarını kontrol;\n- Check out bizim Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Bir anonim kullanıcı olamaz:\n- Grupları oluşturmak;\n- Sunucuyla grupları ve cihazları senkronize;\n- Web sitesinde kişisel pano grupları ve aygıtları yönetmek.</string>
+    <string name="osmo_no_connection_msg">OsMo sunucusuna OSMO bağlanılamıyor:
+\n- İnternet bağlantınızı kontrol edin;
+\n- Ayarları kontrol edin;
+\n- Twitter\'ımızı kontrol edin: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Bir anonim kullanıcı şunları yapamaz:
+\n- Grupları oluşturmak;
+\n- Grupları ve aygıtları sunucu ile senkronize etmek;
+\n- Web sitesindeki kişisel dashboard\'da grupları ve aygıtları yönetmek.</string>
     <string name="anonymous_user">Anonim Kullanıcı</string>
     <string name="logged_as">%1$s olarak giriş</string>
     <string name="speed_limit_exceed_message">Üzerine çıktığınızda sesli uyarı alacağınız hız sınırı payı seçin.</string>
@@ -1990,7 +1996,7 @@
     <string name="update_now">Şimdi güncelle</string>
 <string name="missing_write_external_storage_permission">App SD kartı kullanma iznine sahip değil</string>
 <string name="select_voice_provider">Sesli yönlendirme seç</string>
-    <string name="select_voice_provider_descr">Diliniz için sesli yönlendirme indirin veya seçin</string>
+    <string name="select_voice_provider_descr">Diliniz için sesli yönlendirme seçin veya indirin.</string>
     <string name="impassable_road_desc">Gezinti esnasında kaçınmak istediğiniz yolları seçiniz</string>
     <string name="shared_string_sound">Ses</string>
     <string name="no_location_permission">App\'in konum verilerine erişme izni yok.</string>
@@ -2009,7 +2015,7 @@
     <string name="rec_split_clip_length">klip uzunluğu</string>
     <string name="rec_split_clip_length_desc">Kaydedilen her klibin uzunluğunu artık bu belirtilen zaman aralığı olmayacak</string>
     <string name="rec_split_storage_size">Depolama boyutu</string>
-    <string name="rec_split_storage_size_desc">Tüm kaydedilen kliplerin tarafından işgal edilebilir alan miktarı</string>
+    <string name="rec_split_storage_size_desc">Tüm kaydedilen klipler tarafından işgal edilebilir alan miktarı.</string>
     <string name="last_map_change">Son harita değişikliği: %s</string>
     <string name="hourly">Saatlik</string>
     <string name="daily">Günlük</string>
@@ -2088,7 +2094,7 @@
     <string name="map_markers_other">Diğer işaretler</string>
     <string name="upload_anonymously">Anonim yükle</string>
     <string name="show_transparency_seekbar">Şeffaflık seekbar göster</string>
-    <string name="download_files_error_not_enough_space">Yeterli alan yok! Bu kalıcı olarak {3} MB geçici olarak ve {1} MB gerekir. Şu anda, orada sadece (2 MB) mevcuttur.</string>
+    <string name="download_files_error_not_enough_space">Yeterli alan yok! İhtiyaç duyulan depolama alanı {3} MB geçici olarak ve {1} MB kalıcı olarak gereklidir. Şu anda kullanılabilir alan olarak yalnızca (2 MB) mevcuttur.</string>
     <string name="download_files_question_space_with_temp">Gerçekten {0} dosyaları download? Bu {3} MB geçici olarak ve {1} MB kalıcı olarak ihtiyacı var. Şu anda kullanılabilir (2) MB vardır.</string>
     <string name="upload_osm_note_description">OpenStreetMap.org kullanıyorsanız OSM notunuzu anonim olarak profilinize yükleyebilirsiniz.</string>
     <string name="upload_osm_note">OSM Not yükle</string>
@@ -2096,21 +2102,21 @@
     <string name="shared_string_move_down">Aşağı taşı</string>
     <string name="finish_navigation">Gezintiyi bitir</string>
     <string name="avoid_road">Yol önlemek</string>
-    <string name="storage_directory_readonly_desc">Seçili veri depolama klasörü salt okunur olduğunu. Depolama klasörü geçici olarak dahili hafızaya geçildi. Lütfen geçerli depolama dizini seçin.</string>
+    <string name="storage_directory_readonly_desc">Seçili veri depolama klasörü salt okunur. Depolama klasörü geçici olarak dahili hafızaya geçirildi. Lütfen geçerli depolama dizini seçin.</string>
     <string name="storage_directory_shared">Paylaşılan bellek</string>
     <string name="shared_string_topbar">Üstçubuk</string>
     <string name="recalculate_route">Rota yeniden hesaplama</string>
     <string name="report">Rapor</string>
     <string name="access_no_destination">Varış noktası ayarlanmadı</string>
-    <string name="access_disable_offroute_recalc">Yolun dışındayken rota değiştirilmesin</string>
-    <string name="access_disable_offroute_recalc_descr">Doğru yoldan oldukça uzakta iken otomatik rota yeniden hesaplama önlensin</string>
-    <string name="access_disable_wrong_direction_recalc">Hatalı yönde iken rota değiştirilmesin</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Hatalı yönde ilerlerken otomatik rota hesaplama önlensin</string>
+    <string name="access_disable_offroute_recalc">Rota terkedildiğinde yeniden hesaplanmasın</string>
+    <string name="access_disable_offroute_recalc_descr">Rotanızı takip etmeyi bıraktıktan sonra rota yeniden-hesaplama önlensin.</string>
+    <string name="access_disable_wrong_direction_recalc">Aksi yönde iken rota yeniden-hesaplanmasın</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Aksi yönde ilerlerken otomatik rota yeniden-hesaplama önlensin.</string>
     <string name="access_default_color">Varsayılan renk</string>
     <string name="access_category_choice">Kategori seç</string>
     <string name="access_hint_enter_name">Ad gir</string>
     <string name="access_hint_enter_category">Kategori gir</string>
-    <string name="access_hint_enter_description">Tanım gir</string>
+    <string name="access_hint_enter_description">Tanım girin.</string>
     <string name="access_map_linked_to_location">Harita konuma linklidir</string>
     <string name="access_empty_list">Boş liste</string>
     <string name="access_tree_list">Ağaç görünümü</string>
@@ -2147,7 +2153,7 @@
     <string name="get_it">Al</string>
     <string name="si_mi_meters">Mil/metre</string>
     <string name="routing_attr_short_way_name">Yakıt verimli yol</string>
-    <string name="routing_attr_short_way_description">Yakıt verimi iyi olan yolu kullan (çoğunlukla daha kısadır)</string>
+    <string name="routing_attr_short_way_description">Yakıt tasarruflu yolu kullan (çoğunlukla daha kısadır).</string>
     <string name="add_new_folder">Yeni klasör ekle</string>
     <string name="points_delete_multiple_succesful">Nokta(lar) başarıyla silindi.</string>
     <string name="gpx_track">Takip et</string>
@@ -2205,11 +2211,11 @@
     <string name="shared_string_reload">Tekrar yükle</string>
     <string name="mapillary_menu_descr_tile_cache">Güncel verileri görmek için döşemeleri yeniden yükleyin.</string>
     <string name="mapillary_menu_title_tile_cache">Karo önbellek</string>
-    <string name="wrong_user_name">Yanlış kullanıcı adı!</string>
+    <string name="wrong_user_name">Yanlış kullanıcı-adı!</string>
     <string name="shared_string_to">İçin</string>
-    <string name="mapillary_menu_descr_dates">Belirli bir dönemde eklenen görüntüleri görüntüleyin.</string>
+    <string name="mapillary_menu_descr_dates">Yalnızca eklenmiş imajları görüntüleyin.</string>
     <string name="mapillary_menu_title_dates">Tarih</string>
-    <string name="mapillary_menu_edit_text_hint">Kullanıcı adını yazın</string>
+    <string name="mapillary_menu_edit_text_hint">Kullanıcı-adını yazın</string>
     <string name="mapillary_menu_descr_username">Belirli bir kullanıcı tarafından eklenen görüntüleri görüntüleyin.</string>
     <string name="route_point">Güzergah noktası</string>
     <string name="nearest_cities">Yakın şehirler</string>
@@ -2268,7 +2274,7 @@
     <string name="fast_coordinates_input_descr">Koordinat giriş biçimini seç. Bunu her zaman Seçenekler\'den değiştirebilirsiniz.</string>
     <string name="fast_coordinates_input">Hızlı koordinat girişi</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Buzlu yollardan, nehir geçişlerinden kaçın</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Buzlu yollardan ve nehir geçişlerinden kaçın</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Buzlu yollardan ve nehir geçişlerinden kaçınılsın.</string>
     <string name="use_location">Pozisyonu kullan</string>
     <string name="today">Bugün</string>
     <string name="yesterday">Dün</string>

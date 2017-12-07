@@ -2864,4 +2864,11 @@ Proporciona un código completo</string>
     <string name="by_date">Por fecha</string>
     <string name="by_type">Por tipo</string>
     <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
+    <string name="release_3_0">• La detección de señales de alto, ahora considera la dirección de desplazamiento
+\n
+\n • Nuevo algoritmo que proporciona valores significativos de ascenso y descenso para trazas GPX.
+\n
+\n • El tiempo de caminata es consciente del terreno ascendente (regla de Naismith).
+\n
+\n</string>
     </resources>
