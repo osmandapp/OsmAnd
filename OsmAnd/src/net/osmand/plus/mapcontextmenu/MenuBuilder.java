@@ -8,7 +8,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.AppCompatButton;
@@ -23,7 +22,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.binary.BinaryMapIndexReader;
@@ -38,12 +36,14 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -467,12 +467,13 @@ public class MenuBuilder {
 		llText.setOrientation(LinearLayout.VERTICAL);
 		ll.addView(llText);
 
-		TextView textView = new TextView(view.getContext());
+		TextViewEx textView = new TextViewEx(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llTextParams.setMargins(0, dpToPx(8f), 0, dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
+		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
+		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
 
 		if (isUrl) {
 			textView.setTextColor(textView.getLinkTextColors());
@@ -510,8 +511,8 @@ public class MenuBuilder {
 			llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL;
 			iconViewCollapse.setLayoutParams(llIconCollapseParams);
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-			iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(collapsableView.getContenView().getVisibility() == View.GONE ?
-					R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up));
+			iconViewCollapse.setImageDrawable(app.getIconsCache().getIcon(collapsableView.getContenView().getVisibility() == View.GONE ?
+					R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up, R.color.ctx_menu_bottom_view_icon));
 			llIconCollapse.addView(iconViewCollapse);
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -519,17 +520,17 @@ public class MenuBuilder {
 					if (collapsableView.getContenView().getVisibility() == View.VISIBLE) {
 						collapsableView.setCollapsed(true);
 						collapsableView.getContenView().setVisibility(View.GONE);
-						iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_down));
+						iconViewCollapse.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_down, R.color.ctx_menu_bottom_view_icon));
 					} else {
 						collapsableView.setCollapsed(false);
 						collapsableView.getContenView().setVisibility(View.VISIBLE);
-						iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_up));
+						iconViewCollapse.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_up, R.color.ctx_menu_bottom_view_icon));
 					}
 				}
 			});
 			if (collapsableView.isCollapsed()) {
 				collapsableView.getContenView().setVisibility(View.GONE);
-				iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_down));
+				iconViewCollapse.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_down, R.color.ctx_menu_bottom_view_icon));
 			}
 			baseView.addView(collapsableView.getContenView());
 		}
@@ -638,15 +639,13 @@ public class MenuBuilder {
 
 	public Drawable getRowIcon(int iconId) {
 		IconsCache iconsCache = app.getIconsCache();
-		return iconsCache.getIcon(iconId,
-				light ? R.color.icon_color : R.color.icon_color_light);
+		return iconsCache.getIcon(iconId, R.color.ctx_menu_bottom_view_icon);
 	}
 
 	public Drawable getRowIcon(Context ctx, String fileName) {
 		Drawable d = RenderingIcons.getBigIcon(ctx, fileName);
 		if (d != null) {
-			d.setColorFilter(app.getResources()
-					.getColor(light ? R.color.icon_color : R.color.icon_color_light), PorterDuff.Mode.SRC_IN);
+			d.setColorFilter(app.getResources().getColor(R.color.ctx_menu_bottom_view_icon), PorterDuff.Mode.SRC_IN);
 			return d;
 		} else {
 			return null;
@@ -669,13 +668,14 @@ public class MenuBuilder {
 	}
 
 	protected CollapsableView getCollapsableTextView(Context context, boolean collapsed, String text) {
-		final TextView textView = new TextView(context);
+		final TextViewEx textView = new TextViewEx(context);
 		textView.setVisibility(collapsed ? View.GONE : View.VISIBLE);
 		LinearLayout.LayoutParams llTextDescParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llTextDescParams.setMargins(dpToPx(72f), 0, dpToPx(40f), dpToPx(13f));
 		textView.setLayoutParams(llTextDescParams);
+		textView.setTypeface(FontCache.getRobotoRegular(context));
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
+		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
 		textView.setText(text);
 		return new CollapsableView(textView, collapsed);
 	}
