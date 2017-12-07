@@ -403,7 +403,7 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public int getFavActionStringId() {
-		return R.string.favourites_context_menu_add;
+		return R.string.shared_string_add;
 	}
 
 	public int getWaypointActionIconId() {

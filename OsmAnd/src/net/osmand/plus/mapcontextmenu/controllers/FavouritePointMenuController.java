@@ -96,7 +96,7 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public int getFavActionStringId() {
-		return R.string.favourites_context_menu_edit;
+		return R.string.shared_string_edit;
 	}
 
 	@Override
