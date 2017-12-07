@@ -32,7 +32,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-	public static final String TAG = "SnapToRoadBottomSheetDialogFragment";
+	public static final String TAG = "AdditionalActionsBottomSheetDialogFragment";
 
 	private boolean nightMode;
 	private boolean portrait;
