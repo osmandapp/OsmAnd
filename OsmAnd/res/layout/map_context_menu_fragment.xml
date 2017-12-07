@@ -366,6 +366,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:background="?selectableItemBackground"
                     android:clickable="true"
                     android:id="@+id/context_menu_fav_view"
                     android:gravity="center"
@@ -399,6 +400,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:background="?selectableItemBackground"
                     android:clickable="true"
                     android:id="@+id/context_menu_route_view"
                     android:gravity="center"
@@ -431,6 +433,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:background="?selectableItemBackground"
                     android:clickable="true"
                     android:id="@+id/context_menu_share_view"
                     android:gravity="center"
@@ -464,6 +467,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:background="?selectableItemBackground"
                     android:clickable="true"
                     android:id="@+id/context_menu_more_view"
                     android:gravity="center"

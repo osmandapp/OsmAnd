@@ -403,7 +403,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		imageFavorite.setContentDescription(getString(menu.getFavActionStringId()));
 		((TextView) view.findViewById(R.id.context_menu_fav_text_view)).setText(menu.getFavActionStringId());
 		View favView = view.findViewById(R.id.context_menu_fav_view);
-		AndroidUtils.setDashButtonBackground(getMapActivity(), favView, nightMode);
 		favView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -416,7 +415,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				R.color.ctx_menu_buttons_icon_color));
 		imageWaypoint.setContentDescription(getString(menu.getWaypointActionStringId()));
 		View waypointView = view.findViewById(R.id.context_menu_route_view);
-		AndroidUtils.setDashButtonBackground(getMapActivity(), waypointView, nightMode);
 		if (menu.isButtonWaypointEnabled()) {
 			waypointView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -432,7 +430,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		imageShare.setImageDrawable(getIcon(R.drawable.map_action_gshare_dark,
 				R.color.ctx_menu_buttons_icon_color));
 		View shareView = view.findViewById(R.id.context_menu_share_view);
-		AndroidUtils.setDashButtonBackground(getMapActivity(), shareView, nightMode);
 		shareView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -444,7 +441,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		imageMore.setImageDrawable(getIcon(R.drawable.map_overflow_menu_white,
 				R.color.ctx_menu_buttons_icon_color));
 		View moreView = view.findViewById(R.id.context_menu_more_view);
-		AndroidUtils.setDashButtonBackground(getMapActivity(), moreView, nightMode);
 		moreView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
