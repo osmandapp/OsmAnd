@@ -703,7 +703,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public int getFavActionStringId() {
 		if (menuController != null)
 			return menuController.getFavActionStringId();
-		return R.string.favourites_context_menu_add;
+		return R.string.shared_string_add;
 	}
 
 	public int getWaypointActionIconId() {

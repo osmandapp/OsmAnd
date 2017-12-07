@@ -401,6 +401,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		imageFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(),
 				R.color.ctx_menu_buttons_icon_color));
 		imageFavorite.setContentDescription(getString(menu.getFavActionStringId()));
+		((TextView) view.findViewById(R.id.context_menu_fav_text_view)).setText(menu.getFavActionStringId());
 		View favView = view.findViewById(R.id.context_menu_fav_view);
 		AndroidUtils.setDashButtonBackground(getMapActivity(), favView, nightMode);
 		favView.setOnClickListener(new View.OnClickListener() {
