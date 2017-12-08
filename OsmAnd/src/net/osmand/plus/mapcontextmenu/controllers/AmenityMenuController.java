@@ -121,7 +121,7 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public OpeningHoursInfo getOpeningHoursInfo() {
-		return getOpeningHoursInfo(amenity);
+		return processOpeningHours(amenity);
 	}
 
 	public static String getTypeStr(Amenity amenity) {
@@ -136,7 +136,7 @@ public class AmenityMenuController extends MenuController {
 		return typeStr;
 	}
 
-	public static OpeningHoursInfo getOpeningHoursInfo(Amenity amenity) {
+	public static OpeningHoursInfo processOpeningHours(Amenity amenity) {
 		OpeningHoursParser.OpeningHours openingHours = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
 		if (openingHours == null) {
 			return null;

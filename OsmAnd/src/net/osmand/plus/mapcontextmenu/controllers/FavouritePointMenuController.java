@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.OpeningHoursInfo;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
@@ -129,5 +130,14 @@ public class FavouritePointMenuController extends MenuController {
 		} else {
 			addMyLocationToPlainItems(latLon);
 		}
+	}
+
+	@Override
+	public OpeningHoursInfo getOpeningHoursInfo() {
+		Object originObject = getBuilder().getOriginObject();
+		if (originObject instanceof Amenity) {
+			return AmenityMenuController.processOpeningHours((Amenity) originObject);
+		}
+		return null;
 	}
 }
