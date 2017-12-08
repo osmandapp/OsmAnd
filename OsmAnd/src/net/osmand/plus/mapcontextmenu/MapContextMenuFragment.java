@@ -457,7 +457,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		detailsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-
+				menu.openMenuFullScreen();
 			}
 		});
 		TextView directionsButton = (TextView) view.findViewById(R.id.context_menu_directions_button);
