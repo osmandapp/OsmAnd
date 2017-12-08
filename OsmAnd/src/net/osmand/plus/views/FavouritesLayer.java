@@ -11,7 +11,9 @@ import android.graphics.PorterDuffColorFilter;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -21,8 +23,10 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
@@ -32,6 +36,8 @@ import java.util.List;
 
 public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 	ContextMenuLayer.IMoveObjectProvider, MapTextProvider<FavouritePoint> {
+
+	private MapActivity mapActivity;
 
 	protected int startZoom = 6;
 	
@@ -55,6 +61,10 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 	
 	protected List<? extends FavouritePoint> getPoints() {
 		return favorites.getFavouritePoints();
+	}
+
+	public FavouritesLayer(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
 	}
 
 	@Override
@@ -224,6 +234,25 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 
 	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		if (unknownLocation || o == null || !(o instanceof FavouritePoint)
+				|| !view.getApplication().getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
+			return false;
+		}
+		MapMarker marker = mapMarkersHelper.getMapMarker((FavouritePoint) o);
+		if (marker != null) {
+			final MapMarker old = mapMarkersHelper.getMapMarkers().get(0);
+			mapMarkersHelper.moveMarkerToTop(marker);
+			String title = mapActivity.getString(R.string.marker_activated, mapMarkersHelper.getMapMarkers().get(0).getName(mapActivity));
+			Snackbar.make(mapActivity.findViewById(R.id.bottomFragmentContainer), title, Snackbar.LENGTH_LONG)
+					.setAction(R.string.shared_string_cancel, new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							mapMarkersHelper.moveMarkerToTop(old);
+						}
+					})
+					.show();
+			return true;
+		}
 		return false;
 	}
 
