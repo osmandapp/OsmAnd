@@ -10,6 +10,7 @@ public class OpeningHoursInfo {
 	private String nearToOpeningTime = "";
 	private String closingTime = "";
 	private String nearToClosingTime = "";
+	private String openingDay = "";
 
 	public boolean isOpened() {
 		return opened;
@@ -59,11 +60,20 @@ public class OpeningHoursInfo {
 		this.nearToClosingTime = nearToClosingTime;
 	}
 
+	public String getOpeningDay() {
+		return openingDay;
+	}
+
+	public void setOpeningDay(String openingDay) {
+		this.openingDay = openingDay;
+	}
+
 	public boolean containsInfo() {
 		return opened24_7
 				|| !Algorithms.isEmpty(openingTime)
 				|| !Algorithms.isEmpty(nearToOpeningTime)
 				|| !Algorithms.isEmpty(closingTime)
-				|| !Algorithms.isEmpty(nearToClosingTime);
+				|| !Algorithms.isEmpty(nearToClosingTime)
+				|| !Algorithms.isEmpty(openingDay);
 	}
 }

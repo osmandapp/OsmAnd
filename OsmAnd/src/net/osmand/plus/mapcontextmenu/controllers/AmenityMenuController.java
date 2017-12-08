@@ -143,12 +143,17 @@ public class AmenityMenuController extends MenuController {
 		} else {
 			OpeningHoursInfo info = new OpeningHoursInfo();
 			Calendar cal = Calendar.getInstance();
-			info.setOpened(openingHours.isOpenedForTime(cal));
-			info.setOpened24_7(openingHours.isOpened24_7());
-			info.setOpeningTime(openingHours.getOpeningTime(cal));
-			info.setNearToOpeningTime(openingHours.getNearToOpeningTime(cal));
-			info.setClosingTime(openingHours.getClosingTime(cal));
-			info.setNearToClosingTime(openingHours.getNearToClosingTime(cal));
+			boolean opened = openingHours.isOpenedForTime(cal);
+			info.setOpened(opened);
+			if (opened) {
+				info.setOpened24_7(openingHours.isOpened24_7());
+				info.setClosingTime(openingHours.getClosingTime(cal));
+				info.setNearToClosingTime(openingHours.getNearToClosingTime(cal));
+			} else {
+				info.setOpeningTime(openingHours.getOpeningTime(cal));
+				info.setNearToOpeningTime(openingHours.getNearToOpeningTime(cal));
+				info.setOpeningDay(openingHours.getOpeningDay(cal));
+			}
 			return info;
 		}
 	}

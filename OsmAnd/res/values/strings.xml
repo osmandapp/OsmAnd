@@ -13,6 +13,7 @@
     <string name="opened_till">Opened till</string>
     <string name="will_be_closed_at">Will be closed at</string>
     <string name="will_be_opened_at">Will be opened at</string>
+    <string name="will_be_opened_on">Will be opened on</string>
     <string name="additional_actions">Additional actions</string>
     <string name="release_3_0">
 	\u2022 Detection of stop signs now considers driving direction\n\n

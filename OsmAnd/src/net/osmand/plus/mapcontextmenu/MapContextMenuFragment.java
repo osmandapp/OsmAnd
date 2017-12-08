@@ -1118,6 +1118,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					openingHoursStr = getString(R.string.opened_till) + " " + openingHoursInfo.getClosingTime();
 				} else if (!Algorithms.isEmpty(openingHoursInfo.getNearToClosingTime())) {
 					openingHoursStr = getString(R.string.will_be_closed_at) + " " + openingHoursInfo.getNearToClosingTime();
+				} else if (!Algorithms.isEmpty(openingHoursInfo.getOpeningDay())) {
+					openingHoursStr = getString(R.string.will_be_opened_on) + " " + openingHoursInfo.getOpeningDay() + ".";
 				}
 				openingHoursTextView.setText(openingHoursStr);
 				openingHoursTextView.setVisibility(View.VISIBLE);
