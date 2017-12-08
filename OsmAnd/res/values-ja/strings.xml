@@ -3063,18 +3063,22 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="looking_for_tracks_with_waypoints">経由地点のある経路を探す</string>
     <string name="shared_string_more_without_dots">もっと見る</string>
     <string name="appearance_on_the_map">マップの外観</string>
-    <string name="add_track_to_markers_descr">マーカーに経由地点を追加する経路を選択します。(経由地点を含む経路のみリストアップされます)</string>
-    <string name="add_favourites_group_to_markers_descr">マーカーに追加するお気に入りのカテゴリを選択します。</string>
+    <string name="add_track_to_markers_descr">マーカーとして追加する経由地点を経路データから選択してください。(経由地点を含む経路のみリストアップされます)</string>
+    <string name="add_favourites_group_to_markers_descr">マーカーとして追加するお気に入りのカテゴリを選択してください。</string>
     <string name="show_on_top_bar">画面上部のバーに表示</string>
-    <string name="add_group_descr">お気に入りや経路内の経由地点をグループでインポートできます。</string>
+    <string name="add_group_descr">お気に入り地点や経路データ内の経由地点をまとめてインポートできます。</string>
     <string name="empty_state_markers_groups">グループでインポート</string>
-    <string name="empty_state_markers_groups_desc">お気に入りや経路内の経由地点をマーカーとしてグループで追加できます。</string>
+    <string name="empty_state_markers_groups_desc">お気に入り地点や経路データ内の経由地点をマーカーとしてまとめて追加できます。</string>
     <string name="shared_string_two">二つ</string>
     <string name="shared_string_one">一つ</string>
     <string name="show_guide_line_descr">現在地からアクティブマーカーへの方向を示す案内線を表示させます。</string>
     <string name="show_arrows_descr">画面上にアクティブマーカーの方向を示す矢印を、一つあるいは二つ表示させます。</string>
     <string name="distance_indication_descr">アクティブマーカーまでの距離を示す案内をどこに表示するか選択してください。</string>
     <string name="active_markers_descr">マーカーの方向と距離を示す案内をいくつ表示させるか選択してください。</string>
-    <string name="favourites_group">お気に入りカテゴリ</string>
+    <string name="favourites_group">お気に入り地点のカテゴリ</string>
     <string name="empty_state_markers_active_desc">任意の場所をロングまたはショートタップで指定後、旗のボタンでマーカーを作成します。</string>
+    <string name="track_waypoints">経路データ内の経由地点</string>
+    <string name="show_passed">通過したものも表示</string>
+    <string name="hide_passed">通過したものは非表示</string>
+    <string name="import_track_desc">ファイル %1$s は経由地点を含んでいません、それでも経路としてインポートしますか？</string>
     </resources>
