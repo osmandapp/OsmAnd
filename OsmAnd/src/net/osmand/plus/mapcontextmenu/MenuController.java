@@ -424,20 +424,8 @@ public abstract class MenuController extends BaseMenuController {
 		return "";
 	}
 
-	public boolean isOpen24_7() {
-		return false;
-	}
-
-	public String getOpenFromStr() {
-		return "";
-	}
-
-	public String getClosedAtStr() {
-		return "";
-	}
-
-	public String getOpenedTillStr() {
-		return "";
+	public OpeningHoursInfo getOpeningHoursInfo() {
+		return null;
 	}
 
 	public String getCommonTypeStr() {

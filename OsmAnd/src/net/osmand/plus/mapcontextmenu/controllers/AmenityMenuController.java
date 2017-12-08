@@ -16,6 +16,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.OpeningHoursInfo;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
 import net.osmand.plus.render.RenderingIcons;
@@ -119,23 +120,8 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
-	public boolean isOpen24_7() {
-		return isOpen24_7(amenity);
-	}
-
-	@Override
-	public String getOpenFromStr() {
-		return getOpenFromStr(amenity);
-	}
-
-	@Override
-	public String getClosedAtStr() {
-		return getClosedAtStr(amenity);
-	}
-
-	@Override
-	public String getOpenedTillStr() {
-		return getOpenedTillStr(amenity);
+	public OpeningHoursInfo getOpeningHoursInfo() {
+		return getOpeningHoursInfo(amenity);
 	}
 
 	public static String getTypeStr(Amenity amenity) {
@@ -150,50 +136,22 @@ public class AmenityMenuController extends MenuController {
 		return typeStr;
 	}
 
-	public static boolean isOpen24_7(Amenity amenity) {
-		boolean isOpen24_7 = false;
+	public static OpeningHoursInfo getOpeningHoursInfo(Amenity amenity) {
 		OpeningHoursParser.OpeningHours openingHours = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
 		if (openingHours == null) {
-			isOpen24_7 = false;
+			return null;
 		} else {
-			Calendar calendar = Calendar.getInstance();
-			if (openingHours.isOpenedForTime(calendar)) {
-				if (openingHours.isOpen24_7()) {
-					isOpen24_7 = true;
-				}
+			OpeningHoursInfo info = new OpeningHoursInfo();
+			Calendar cal = Calendar.getInstance();
+			if (openingHours.isOpenedForTime(cal)) {
+				info.setOpened(true);
+				info.setOpened24_7(openingHours.isOpen24_7());
+//				info.setOpenedFromTime(openingHours.getOpenedFromTime(cal));
+				info.setOpenedFromTime("");
+				info.setClosedAtTime(openingHours.getClosedAtTime(cal));
+				info.setOpenedTillTime(openingHours.getOpenedTillTime(cal));
 			}
-		}
-		return isOpen24_7;
-	}
-
-	public static String getOpenFromStr(Amenity amenity) {
-		return "";
-//		OpeningHoursParser.OpeningHours openingHours = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
-//		if (openingHours == null) {
-//			return "";
-//		} else {
-//			Calendar cal = Calendar.getInstance();
-//			return openingHours.getOpenFromStr(cal);
-//		}
-	}
-
-	public static String getClosedAtStr(Amenity amenity) {
-		OpeningHoursParser.OpeningHours openingHours = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
-		if (openingHours == null) {
-			return "";
-		} else {
-			Calendar cal = Calendar.getInstance();
-			return openingHours.getClosedAtStr(cal);
-		}
-	}
-
-	public static String getOpenedTillStr(Amenity amenity) {
-		OpeningHoursParser.OpeningHours openingHours = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
-		if (openingHours == null) {
-			return "";
-		} else {
-			Calendar cal = Calendar.getInstance();
-			return openingHours.getOpenedTillStr(cal);
+			return info;
 		}
 	}
 

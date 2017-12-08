@@ -1105,17 +1105,18 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			View openingHoursView = view.findViewById(R.id.opening_hours_view);
 			TextView openingHoursTextView = (TextView) view.findViewById(R.id.opening_hours_text_view);
-			openingHoursTextView.setTextColor(ContextCompat.getColor(getContext(), menu.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color));
-			String openingHoursStr = "";
-			if (menu.isOpened()) {
-				if (menu.isOpen24_7()) {
+			OpeningHoursInfo openingHoursInfo = menu.getOpeningHoursInfo();
+			if (openingHoursInfo != null) {
+				openingHoursTextView.setTextColor(ContextCompat.getColor(getContext(), openingHoursInfo.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color));
+				String openingHoursStr = "";
+				if (openingHoursInfo.isOpened24_7()) {
 					openingHoursStr = getString(R.string.shared_string_is_open_24_7);
-				} else if (!Algorithms.isEmpty(menu.getOpenFromStr())) {
-					openingHoursStr = getString(R.string.opened_from) + " " + menu.getOpenFromStr();
-				} else if (!Algorithms.isEmpty(menu.getClosedAtStr())) {
-					openingHoursStr = getString(R.string.will_be_closed_at) + " " + menu.getClosedAtStr();
-				} else if (!Algorithms.isEmpty(menu.getOpenedTillStr())) {
-					openingHoursStr = getString(R.string.opened_till) + " " + menu.getOpenedTillStr();
+				} else if (!Algorithms.isEmpty(openingHoursInfo.getOpenedFromTime())) {
+					openingHoursStr = getString(R.string.opened_from) + " " + openingHoursInfo.getOpenedFromTime();
+				} else if (!Algorithms.isEmpty(openingHoursInfo.getClosedAtTime())) {
+					openingHoursStr = getString(R.string.will_be_closed_at) + " " + openingHoursInfo.getClosedAtTime();
+				} else if (!Algorithms.isEmpty(openingHoursInfo.getOpenedTillTime())) {
+					openingHoursStr = getString(R.string.opened_till) + " " + openingHoursInfo.getOpenedTillTime();
 				}
 				openingHoursTextView.setText(openingHoursStr);
 				openingHoursView.setVisibility(View.VISIBLE);

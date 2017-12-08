@@ -18,10 +18,7 @@ public abstract class MenuTitleController {
 	protected String commonTypeStr = "";
 	protected Drawable secondLineTypeIcon;
 	protected String streetStr = "";
-	protected boolean open24_7;
-	protected String openFromStr = "";
-	protected String closedAtStr = "";
-	protected String openedTillStr = "";
+	protected OpeningHoursInfo openingHoursInfo;
 
 	private AddressLookupRequest addressLookupRequest;
 
@@ -102,28 +99,8 @@ public abstract class MenuTitleController {
 		}
 	}
 
-	public boolean isOpen24_7() {
-		return open24_7;
-	}
-
-	public String getOpenFromStr() {
-		return openFromStr;
-	}
-
-	public String getClosedAtStr() {
-		return closedAtStr;
-	}
-
-	public String getOpenedTillStr() {
-		return openedTillStr;
-	}
-
-	public boolean isOpened() {
-		if (isOpen24_7() || !Algorithms.isEmpty(getOpenFromStr()) || !Algorithms.isEmpty(getClosedAtStr()) || !Algorithms.isEmpty(getOpenedTillStr())) {
-			return true;
-		} else {
-			return false;
-		}
+	public OpeningHoursInfo getOpeningHoursInfo() {
+		return openingHoursInfo;
 	}
 
 	protected void initTitle() {
@@ -140,7 +117,7 @@ public abstract class MenuTitleController {
 			acquireStreetName();
 		}
 
-		acquireOpeningHoursData();
+		acquireOpeningHoursInfo();
 	}
 
 	protected boolean needStreetName() {
@@ -216,13 +193,10 @@ public abstract class MenuTitleController {
 		getMapActivity().getMyApplication().getGeocodingLookupService().lookupAddress(addressLookupRequest);
 	}
 
-	protected void acquireOpeningHoursData() {
+	protected void acquireOpeningHoursInfo() {
 		MenuController menuController = getMenuController();
 		if (menuController != null) {
-			open24_7 = menuController.isOpen24_7();
-			openFromStr = menuController.getOpenFromStr();
-			closedAtStr = menuController.getClosedAtStr();
-			openedTillStr = menuController.getOpenedTillStr();
+			openingHoursInfo = menuController.getOpeningHoursInfo();
 		}
 	}
 

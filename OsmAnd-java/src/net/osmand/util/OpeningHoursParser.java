@@ -189,70 +189,70 @@ public class OpeningHoursParser {
 		public boolean isOpen24_7() {
 			boolean open24_7 = false;
 			for (OpeningHoursRule r : rules) {
-				open24_7 = r.isOpen24_7();
+				open24_7 = r.isOpened24_7();
 			}
 			return open24_7;
 		}
 
-		public String getOpenFromStr(Calendar cal) {
-			String openFrom = getOpenFromDayStr(cal);
+		public String getOpenedFromTime(Calendar cal) {
+			String openFrom = getOpenFromTimeDay(cal);
 			if (Algorithms.isEmpty(openFrom)) {
-				openFrom = getOpenFromPreviousStr(cal);
+				openFrom = getOpenFromTimePrevious(cal);
 			}
 			return openFrom;
 		}
 
-		private String getOpenFromDayStr(Calendar cal) {
+		private String getOpenFromTimeDay(Calendar cal) {
 			String openFrom = "";
 			for (OpeningHoursRule r : rules) {
 				if (r.containsDay(cal) && r.containsMonth(cal)) {
-					openFrom = r.getOpenedFromStr(cal, false);
+					openFrom = r.getOpenedFromTime(cal, false);
 				}
 			}
 			return openFrom;
 		}
 
-		private String getOpenFromPreviousStr(Calendar cal) {
+		private String getOpenFromTimePrevious(Calendar cal) {
 			String openFrom = "";
 			for (OpeningHoursRule r : rules) {
 				if (r.containsPreviousDay(cal) && r.containsMonth(cal)) {
-					openFrom = r.getOpenedFromStr(cal, true);
+					openFrom = r.getOpenedFromTime(cal, true);
 				}
 			}
 			return openFrom;
 		}
 
-		public String getClosedAtStr(Calendar cal) {
-			return getClosedStr(cal, true);
+		public String getClosedAtTime(Calendar cal) {
+			return getClosedTime(cal, true);
 		}
 
-		public String getOpenedTillStr(Calendar cal) {
-			return getClosedStr(cal, false);
+		public String getOpenedTillTime(Calendar cal) {
+			return getClosedTime(cal, false);
 		}
 
-		public String getClosedStr(Calendar cal, boolean nearToClosing) {
-			String closedAt = getClosedAtDayStr(cal, nearToClosing);
+		private String getClosedTime(Calendar cal, boolean nearToClosing) {
+			String closedAt = getClosedAtTimeDay(cal, nearToClosing);
 			if (Algorithms.isEmpty(closedAt)) {
-				closedAt = getClosedAtNextDayStr(cal, nearToClosing);
+				closedAt = getClosedAtTimeNextDay(cal, nearToClosing);
 			}
 			return closedAt;
 		}
 
-		private String getClosedAtDayStr(Calendar cal, boolean nearToClosing) {
+		private String getClosedAtTimeDay(Calendar cal, boolean nearToClosing) {
 			String closedAt = "";
 			for (OpeningHoursRule r : rules) {
 				if (r.containsDay(cal) && r.containsMonth(cal)) {
-					closedAt = r.getClosedAtStr(cal, false, nearToClosing);
+					closedAt = r.getClosedAtTime(cal, false, nearToClosing);
 				}
 			}
 			return closedAt;
 		}
 
-		private String getClosedAtNextDayStr(Calendar cal, boolean nearToClosing) {
+		private String getClosedAtTimeNextDay(Calendar cal, boolean nearToClosing) {
 			String closedAt = "";
 			for (OpeningHoursRule r : rules) {
 				if (r.containsNextDay(cal) && r.containsMonth(cal)) {
-					closedAt = r.getClosedAtStr(cal, true, nearToClosing);
+					closedAt = r.getClosedAtTime(cal, true, nearToClosing);
 				}
 			}
 			return closedAt;
@@ -422,11 +422,11 @@ public class OpeningHoursParser {
 
 		public String toLocalRuleString();
 
-		boolean isOpen24_7();
+		boolean isOpened24_7();
 
-		String getOpenedFromStr(Calendar cal, boolean checkPrevious);
+		String getOpenedFromTime(Calendar cal, boolean checkPrevious);
 
-		String getClosedAtStr(Calendar cal, boolean checkNext, boolean nearToClosing);
+		String getClosedAtTime(Calendar cal, boolean checkNext, boolean nearToClosing);
 	}
 
 	/**
@@ -779,7 +779,7 @@ public class OpeningHoursParser {
 			if (startTimes == null || startTimes.size() == 0) {
 				b.append("off");
 			} else {
-				if (isOpen24_7()) {
+				if (isOpened24_7()) {
 					return "24/7";
 				}
 				for (int i = 0; i < startTimes.size(); i++) {
@@ -835,16 +835,16 @@ public class OpeningHoursParser {
 		}
 
 		@Override
-		public boolean isOpen24_7() {
-			boolean open24_7 = true;
+		public boolean isOpened24_7() {
+			boolean opened24_7 = true;
 			for (int i = 0; i < 7; i++) {
 				if (!days[i]) {
-					open24_7 = false;
+					opened24_7 = false;
 					break;
 				}
 			}
 
-			if (open24_7 && startTimes != null && startTimes.size() > 0) {
+			if (opened24_7 && startTimes != null && startTimes.size() > 0) {
 				for (int i = 0; i < startTimes.size(); i++) {
 					int startTime = startTimes.get(i);
 					int endTime = endTimes.get(i);
@@ -857,7 +857,7 @@ public class OpeningHoursParser {
 		}
 
 		@Override
-		public String getOpenedFromStr(Calendar cal, boolean checkPrevious) {
+		public String getOpenedFromTime(Calendar cal, boolean checkPrevious) {
 			int limit = 300;
 			StringBuilder sb = new StringBuilder();
 			int d = getCurrentDay(cal);
@@ -889,7 +889,7 @@ public class OpeningHoursParser {
 		}
 
 		@Override
-		public String getClosedAtStr(Calendar cal, boolean checkNext, boolean nearToClosing) {
+		public String getClosedAtTime(Calendar cal, boolean checkNext, boolean nearToClosing) {
 			int nearToClosingLimit = 120;
 			int freeLimit = 300;
 			StringBuilder sb = new StringBuilder();
@@ -1118,17 +1118,17 @@ public class OpeningHoursParser {
 		}
 
 		@Override
-		public boolean isOpen24_7() {
+		public boolean isOpened24_7() {
 			return false;
 		}
 
 		@Override
-		public String getOpenedFromStr(Calendar cal, boolean checkPrevious) {
+		public String getOpenedFromTime(Calendar cal, boolean checkPrevious) {
 			return "";
 		}
 
 		@Override
-		public String getClosedAtStr(Calendar cal, boolean checkNext, boolean nearToClosing) {
+		public String getClosedAtTime(Calendar cal, boolean checkNext, boolean nearToClosing) {
 			return "";
 		}
 
