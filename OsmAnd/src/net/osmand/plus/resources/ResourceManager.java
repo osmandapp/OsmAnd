@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -60,7 +61,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -980,9 +980,13 @@ public class ResourceManager {
 		return !basemapFileNames.isEmpty();
 	}
 
-	public boolean isAnyMapIstalled() {
-		File appPath = context.getAppPath(null);
-		File[] maps = appPath.listFiles(new FileFilter() {
+	public boolean isAnyMapInstalled() {
+		return isMapsPresentInDirectory(null) || isMapsPresentInDirectory(IndexConstants.ROADS_INDEX_DIR);
+	}
+
+	private boolean isMapsPresentInDirectory(@Nullable String path) {
+		File dir = context.getAppPath(path);
+		File[] maps = dir.listFiles(new FileFilter() {
 			@Override
 			public boolean accept(File pathname) {
 				return pathname.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT);
