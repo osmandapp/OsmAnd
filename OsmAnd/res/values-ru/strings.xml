@@ -81,8 +81,8 @@
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Равнинный</string>
     <string name="routing_attr_driving_style_speed_name">Короткие маршруты</string>
     <string name="routing_attr_driving_style_balance_name">Сбалансированный</string>
-    <string name="routing_attr_driving_style_safety_name">Предпочитать переулком</string>
-    <string name="relief_smoothness_factor_descr">Предпочтительный рельеф: равнинный или холмистый.</string>
+    <string name="routing_attr_driving_style_safety_name">Предпочитать переулки</string>
+    <string name="relief_smoothness_factor_descr">Предпочтительный рельеф: равнинный или холмистый</string>
     <string name="shared_string_slope">Уклон</string>
     <string name="add_new_folder">Добавить новую папку</string>
     <string name="points_delete_multiple_succesful">Точки успешно удалены.</string>
