@@ -2976,7 +2976,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
 \n</string>
     <string name="empty_state_osm_edits_descr">Ustvari ali spremeni točke POI, ureja opombe OSM in omogoča objavljanje zabeleženih sledi GPX.</string>
     <string name="coordinate_input_accuracy_description">Samodejno preklopi na naslednje polje, ko je vpisana %1$d decimalka.</string>
-    <string name="tap_on_map_to_hide_interface_descr">S pritiskom na zemljevid se preklopi prikaz gumbov in gradnikov.</string>
+    <string name="tap_on_map_to_hide_interface_descr">S pritiskom na zemljevid se skrijejo gumbi in gradniki.</string>
     <string name="import_gpx_file_description">"je lahko  uvožen med priljubljene točke ali kot datoteka sledi."</string>
     <string name="marker_show_distance_descr">Način določanja razdalje in smeri do označb zemljevida na zaslonu:</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Hitrost, pri kateri se usmerjenost preklopi »iz smeri gibanja« na »kompas«.</string>
