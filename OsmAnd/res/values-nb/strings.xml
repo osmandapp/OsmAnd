@@ -2619,4 +2619,26 @@ Representerer området: %1$s x %2$s</string>
 \n • Vandretid tar hensyn til terreng (stigning) (Naismiths regel)
 \n
 \n</string>
+    <string name="mark_passed">Marker som passert</string>
+    <string name="osn_modify_dialog_error">Unntak inntraff: Notat ble ikke endret</string>
+    <string name="quick_action_auto_zoom_desc">Handlingsknappen vil skru av/på automatisk forstørrelse i henhold til fart.</string>
+    <string name="quick_action_add_destination_desc">Handlingsknappen vil legge til et mål midt på skjermen. Forrige valgte mål vil bli siste mellomliggende mål.</string>
+    <string name="quick_action_replace_destination_desc">Handlingsknappen vil erstatte målet med skjermens sentrum.</string>
+    <string name="quick_action_add_first_intermediate_desc">Handlingsknappen vil først legge til et mellomliggende punkt i dens sentrum.</string>
+    <string name="subscribe_email_desc">Abonner på vår e-postliste om programrabatter og få tre kartnedlastinger til!</string>
+    <string name="index_item_depth_points_southern_hemisphere">Havdybdepunkter for sørlig halvkule</string>
+    <string name="index_item_depth_points_northern_hemisphere">Havdybdepunkter for nordlig halvkule</string>
+    <string name="download_files_error_not_enough_space">Ikke nok plass. Trenger {3} MB midlertidig, {1} MB permanent. Kun {2} MB tilgjengelig.</string>
+    <string name="download_files_question_space_with_temp">Last ned {0} file(r)? Trenger {3} MB midlertidig, {1} MB permanent. Kun {2} MB tilgjengelig.</string>
+    <string name="simulate_initial_startup_descr">Setter flagget som indikerer første programoppstart, alle andre innstillinger forblir uendret.</string>
+    <string name="local_osm_changes_backup_successful">OSM-endringsfil opprettet uten problem %1$s</string>
+    <string name="dropbox_plugin_description">Dropbox-utvidelsen muliggjør synkronisering av spor og lyd/video-notater til din Dropbox-konto.</string>
+    <string name="local_openstreetmap_were_uploaded">{0} Interessepunkter/notater opplastet</string>
+    <string name="local_openstreetmap_settings">Lokalt lagrede OSM-interessepunkter/notater</string>
+    <string name="local_openstreetmap_settings_descr">Vis og behandle OSM-interessepunkter/notater i lokal database.</string>
+    <string name="gpx_monitoring_disabled_warn">Logg spor ved bruk av GPX-miniprogram eller via \"Turopptak\"-innstillinger.</string>
+    <string name="native_library_not_supported">Innebygd bibliotek støttes ikke på denne enheten.</string>
+    <string name="init_native_library">Igangsetter innebygget bibliotek…</string>
+    <string name="local_index_upload_gpx_description">Last opp GPX-filer til OSM-gemenskapen. De kan brukes til å forbedre kartene.</string>
+    <string name="build_installed">Byggversion {0} ble installert ({1}).</string>
     </resources>
