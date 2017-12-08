@@ -186,76 +186,84 @@ public class OpeningHoursParser {
 			return isOpenDay || isOpenPrevious;
 		}
 
-		public boolean isOpen24_7() {
-			boolean open24_7 = false;
+		public boolean isOpened24_7() {
+			boolean opened24_7 = false;
 			for (OpeningHoursRule r : rules) {
-				open24_7 = r.isOpened24_7();
+				opened24_7 = r.isOpened24_7();
 			}
-			return open24_7;
+			return opened24_7;
 		}
 
-		public String getOpenedFromTime(Calendar cal) {
-			String openFrom = getOpenFromTimeDay(cal);
-			if (Algorithms.isEmpty(openFrom)) {
-				openFrom = getOpenFromTimePrevious(cal);
-			}
-			return openFrom;
+		public String getNearToOpeningTime(Calendar cal) {
+			return getOpeningTime(cal, false);
 		}
 
-		private String getOpenFromTimeDay(Calendar cal) {
-			String openFrom = "";
+		public String getOpeningTime(Calendar cal) {
+			return getOpeningTime(cal, true);
+		}
+
+		private String getOpeningTime(Calendar cal, boolean nearToOpening) {
+			String openingAt = getOpeningTimeDay(cal, nearToOpening);
+			if (Algorithms.isEmpty(openingAt)) {
+				openingAt = getOpeningTimePrevious(cal, nearToOpening);
+			}
+			return openingAt;
+		}
+
+		private String getOpeningTimeDay(Calendar cal, boolean nearToOpening) {
+			String openingAt = "";
 			for (OpeningHoursRule r : rules) {
 				if (r.containsDay(cal) && r.containsMonth(cal)) {
-					openFrom = r.getOpenedFromTime(cal, false);
+					openingAt = r.getTime(cal, false, nearToOpening, true);
 				}
 			}
-			return openFrom;
+			return openingAt;
 		}
 
-		private String getOpenFromTimePrevious(Calendar cal) {
-			String openFrom = "";
+		private String getOpeningTimePrevious(Calendar cal, boolean nearToOpening) {
+			String openingAt = "";
 			for (OpeningHoursRule r : rules) {
 				if (r.containsPreviousDay(cal) && r.containsMonth(cal)) {
-					openFrom = r.getOpenedFromTime(cal, true);
+					openingAt = r.getTime(cal, true, nearToOpening, true);
 				}
 			}
-			return openFrom;
+			return openingAt;
 		}
 
-		public String getClosedAtTime(Calendar cal) {
-			return getClosedTime(cal, true);
+		public String getNearToClosingTime(Calendar cal) {
+			return getClosingTime(cal, true);
 		}
 
-		public String getOpenedTillTime(Calendar cal) {
-			return getClosedTime(cal, false);
+		public String getClosingTime(Calendar cal) {
+			return getClosingTime(cal, false);
 		}
 
-		private String getClosedTime(Calendar cal, boolean nearToClosing) {
-			String closedAt = getClosedAtTimeDay(cal, nearToClosing);
-			if (Algorithms.isEmpty(closedAt)) {
-				closedAt = getClosedAtTimeNextDay(cal, nearToClosing);
+		private String getClosingTime(Calendar cal, boolean nearToClosing) {
+			String closingAt = getClosingTimeDay(cal, nearToClosing);
+			if (Algorithms.isEmpty(closingAt)) {
+				closingAt = getClosingTimeNext(cal, nearToClosing);
 			}
-			return closedAt;
+			return closingAt;
 		}
 
-		private String getClosedAtTimeDay(Calendar cal, boolean nearToClosing) {
-			String closedAt = "";
+		private String getClosingTimeDay(Calendar cal, boolean nearToClosing) {
+			String closingAt = "";
 			for (OpeningHoursRule r : rules) {
 				if (r.containsDay(cal) && r.containsMonth(cal)) {
-					closedAt = r.getClosedAtTime(cal, false, nearToClosing);
+					closingAt = r.getTime(cal, false, nearToClosing, false);
 				}
 			}
-			return closedAt;
+			return closingAt;
 		}
 
-		private String getClosedAtTimeNextDay(Calendar cal, boolean nearToClosing) {
-			String closedAt = "";
+		private String getClosingTimeNext(Calendar cal, boolean nearToClosing) {
+			String closingAt = "";
 			for (OpeningHoursRule r : rules) {
 				if (r.containsNextDay(cal) && r.containsMonth(cal)) {
-					closedAt = r.getClosedAtTime(cal, true, nearToClosing);
+					closingAt = r.getTime(cal, true, nearToClosing, false);
 				}
 			}
-			return closedAt;
+			return closingAt;
 		}
 
 		public String getCurrentRuleTime(Calendar cal) {
@@ -424,9 +432,7 @@ public class OpeningHoursParser {
 
 		boolean isOpened24_7();
 
-		String getOpenedFromTime(Calendar cal, boolean checkPrevious);
-
-		String getClosedAtTime(Calendar cal, boolean checkNext, boolean nearToClosing);
+		String getTime(Calendar cal, boolean checkAnotherDay, boolean nearToEvent, boolean opening);
 	}
 
 	/**
@@ -857,62 +863,54 @@ public class OpeningHoursParser {
 		}
 
 		@Override
-		public String getOpenedFromTime(Calendar cal, boolean checkPrevious) {
-			int limit = 300;
-			StringBuilder sb = new StringBuilder();
-			int d = getCurrentDay(cal);
-			int p = getPreviousDay(d);
-			int time = getCurrentTimeInMinutes(cal);
-			for (int i = 0; i < startTimes.size(); i++) {
-				int startTime = startTimes.get(i);
-				int endTime = endTimes.get(i);
-				if (startTime < endTime || endTime == -1) {
-					if (days[d] && !checkPrevious) {
-						if (time - startTime <= limit && (endTime == -1 || time <= endTime)) {
-							formatTime(startTime, sb);
-							break;
-						}
-					}
-				} else {
-					if (time >= startTime && days[d] && !checkPrevious) {
-						formatTime(startTime, sb);
-						break;
-					} else if (time < endTime && days[p] && checkPrevious) {
-						if (24 * 60 - endTime + time <= limit) {
-							formatTime(startTime, sb);
-							break;
-						}
-					}
-				}
-			}
-			return sb.toString();
-		}
-
-		@Override
-		public String getClosedAtTime(Calendar cal, boolean checkNext, boolean nearToClosing) {
-			int nearToClosingLimit = 120;
+		public String getTime(Calendar cal, boolean checkAnotherDay, boolean nearToEvent, boolean opening) {
+			int nearToEventLimit = 120;
 			int freeLimit = 300;
 			StringBuilder sb = new StringBuilder();
 			int d = getCurrentDay(cal);
-			int n = getNextDay(d);
+			int ad = opening ? getNextDay(d) : getPreviousDay(d);
 			int time = getCurrentTimeInMinutes(cal);
 			for (int i = 0; i < startTimes.size(); i++) {
 				int startTime = startTimes.get(i);
 				int endTime = endTimes.get(i);
-				int diff = endTime - time;
-				if (startTime < endTime && endTime != -1) {
-					if (days[d] && !checkNext) {
-						if ((time <= endTime) && ((!nearToClosing && diff >= freeLimit) || (nearToClosing && diff <= nearToClosingLimit))) {
-							formatTime(endTime, sb);
+				if (opening) {
+					if (startTime < endTime || endTime == -1) {
+						if (days[d] && !checkAnotherDay) {
+							int diff = startTime - time;
+							if ((time <= startTime) && ((!nearToEvent && diff <= freeLimit) || (nearToEvent && diff <= nearToEventLimit))) {
+								formatTime(startTime, sb);
+								break;
+							}
+						}
+					} else {
+						int diff = -1;
+						if (time <= startTime && days[d] && !checkAnotherDay) {
+							diff = startTime - time;
+						} else if (time > endTime && days[ad] && checkAnotherDay) {
+							diff = 24 * 60 - endTime  + time;
+						}
+						if ((diff != -1) && ((!nearToEvent && diff <= freeLimit) || (nearToEvent && diff <= nearToEventLimit))) {
+							formatTime(startTime, sb);
 							break;
 						}
 					}
 				} else {
-					if (time <= endTime && days[d] && !checkNext) {
-						formatTime(endTime, sb);
-						break;
-					} else if (time < endTime && days[n] && checkNext) {
-						if ((!nearToClosing && diff >= freeLimit) || (nearToClosing && diff <= nearToClosingLimit)) {
+					if (startTime < endTime && endTime != -1) {
+						if (days[d] && !checkAnotherDay) {
+							int diff = endTime - time;
+							if ((time <= endTime) && ((!nearToEvent && diff >= freeLimit) || (nearToEvent && diff <= nearToEventLimit))) {
+								formatTime(endTime, sb);
+								break;
+							}
+						}
+					} else {
+						int diff = -1;
+						if (time <= endTime && days[d] && !checkAnotherDay) {
+							diff = 24 * 60 - time + endTime;
+						} else if (time < endTime && days[ad] && checkAnotherDay) {
+							diff = startTime - time;
+						}
+						if ((diff != -1) && ((!nearToEvent && diff >= freeLimit) || (nearToEvent && diff <= nearToEventLimit))) {
 							formatTime(endTime, sb);
 							break;
 						}
@@ -1123,12 +1121,7 @@ public class OpeningHoursParser {
 		}
 
 		@Override
-		public String getOpenedFromTime(Calendar cal, boolean checkPrevious) {
-			return "";
-		}
-
-		@Override
-		public String getClosedAtTime(Calendar cal, boolean checkNext, boolean nearToClosing) {
+		public String getTime(Calendar cal, boolean checkAnotherDay, boolean nearToEvent, boolean opening) {
 			return "";
 		}
 
