@@ -164,18 +164,18 @@
 <string name="poi_bicycle_rental">اجاره دوچرخه</string>
 <string name="poi_bicycle_parking">پارکینگ دوچرخه</string>
 
-<string name="poi_aerialway_station">ایستگاه Aerialway</string>
-<string name="poi_aerialway_cable_car">تراموای برقی</string>
-<string name="poi_aerialway_gondola">واگن سربازبر</string>
+<string name="poi_aerialway_station">ایستگاه راه هوایی</string>
+<string name="poi_aerialway_cable_car">ماشین کابلی</string>
+<string name="poi_aerialway_gondola">تله‌کابین</string>
 <string name="poi_aerialway_chair_lift">صندلی بالابر</string>
-<string name="poi_aerialway_t_bar">T-bar بالابر</string>
-<string name="poi_aerialway_j_bar">J-bar بالاب</string>
-<string name="poi_aerialway_platter">پلاتر آسانسور</string>
-<string name="poi_aerialway_mixed_lift">بالابر مخلوطt</string>
+<string name="poi_aerialway_t_bar">بالابر میله‌ای T شکل</string>
+<string name="poi_aerialway_j_bar">بالابر میله‌ای J شکل</string>
+<string name="poi_aerialway_platter">بالابر پلاتر</string>
+<string name="poi_aerialway_mixed_lift">بالابر ترکیبی</string>
 <string name="poi_aerialway_drag_lift">بالابر کشنده</string>
-<string name="poi_aerialway_rope_tow">بالابر دو طنابه</string>
-<string name="poi_aerialway_goods">بالابر محصولات</string>
-<string name="poi_aerialway_magic_carpet">بالابر فرش</string>
+<string name="poi_aerialway_rope_tow">بالابر بکسلی</string>
+<string name="poi_aerialway_goods">بالابر کالا</string>
+<string name="poi_aerialway_magic_carpet">تسمه نقاله بالابر</string>
 
 <string name="poi_tunnel">تونل</string>
 <string name="poi_bridge">پل</string>
@@ -219,7 +219,7 @@
 <string name="poi_construction">ساخت و ساز</string>
 <string name="poi_works">کارگاه</string>
 <string name="poi_mineshaft">معدن</string>
-<string name="poi_adit">گذرگاه افقی</string>
+<string name="poi_adit">گذرگاه افقی معدن</string>
 <string name="poi_petroleum_well">نفت خام</string>
 <string name="poi_survey_point">مرکز تحقیقات</string>
 <string name="poi_windmill">اسیاب بادی</string>
@@ -310,8 +310,8 @@
 <string name="poi_bicycle_track">مسیر دوچرخه</string>
 <string name="poi_horse_track">مسیز سوارکاری</string>
 <string name="poi_raceway">جوی اب</string>
-<string name="poi_9pin">نه پین بولینگ</string>
-<string name="poi_10pin">ده پین بولینگ</string>
+<string name="poi_9pin">بولینگ نه‌ماسوره‌ای</string>
+<string name="poi_10pin">بولینگ ده‌ماسوره‌ای</string>
 <string name="poi_archery">مرکز تیر اندازی</string>
 <string name="poi_athletics">سالن بدنسازی</string>
 <string name="poi_american_football">زمین فوتبال آمریکایی</string>
@@ -736,4 +736,33 @@
 	<string name="poi_shelter_type_public_transport">حمل و نقل عمومی</string>
 	<string name="poi_clothes_sports">ورزشی</string>
 	<string name="poi_shoes_sport">ورزشی</string>
+	<string name="poi_aerialway_pylon">شاه‌تیر بالابر هوایی</string>
+
+	<string name="facebook">فیسبوک</string>
+	<string name="poi_access_private">دسترسی خصوصی</string>
+	<string name="poi_access_no">ورود ممنوع</string>
+	<string name="poi_access_customers">دسترسی مشتری</string>
+	<string name="poi_access_agricultural">دسترسی کشاورزی</string>
+
+	<string name="poi_aerialway_occupancy">ظرفیت اتاقک/صندلی/ماشین</string>
+	<string name="poi_aerialway_capacity">ظرفیت در ساعت</string>
+	<string name="poi_aerialway_duration">متوسط زمان سفر، دقیقه</string>
+	<string name="poi_aerialway_heating_yes">بله</string>
+	<string name="poi_aerialway_heating_no">بدون سیستم گرمایشی</string>
+	<string name="poi_aerialway_bicycle_yes">مجاز</string>
+	<string name="poi_aerialway_bicycle_no">دوچرخه: ممنوع</string>
+	<string name="poi_aerialway_bicycle_summer">فقط در تابستان مجاز است</string>
+	<string name="poi_aerialway_access_entry">فقط ورود</string>
+	<string name="poi_aerialway_access_exit">فقط خروج</string>
+	<string name="poi_aerialway_access_both">ورود و خروج</string>
+	<string name="poi_aerialway_summer_access_entry">دسترسی تابستانه: فقط ورود</string>
+	<string name="poi_aerialway_summer_access_exit">دسترسی تابستانه: فقط خروج</string>
+	<string name="poi_aerialway_summer_access_both">دسترسی تابستانه: ورود و خروج</string>
+
+	<string name="poi_aerialway_length">درازا</string>
+
+	<string name="poi_additional_atm_yes">خودپرداز: بله</string>
+	<string name="poi_addr_housename">نام خانه</string>
+
+
 	</resources>
