@@ -131,7 +131,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			} else {
 				getTargets().setStartPoint(latlon, true, null);
 			}
-			contextMenu.showMinimized(latlon, null, null);
 			show();
 			return true;
 		}

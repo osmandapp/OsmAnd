@@ -753,7 +753,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		boolean showWelcomeScreen = ((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app))
-				|| !app.getResourceManager().isAnyMapIstalled()) && FirstUsageWelcomeFragment.SHOW;
+				|| !app.getResourceManager().isAnyMapInstalled()) && FirstUsageWelcomeFragment.SHOW;
 
 		if (!showWelcomeScreen && !permissionDone && !app.getAppInitializer().isFirstTime()) {
 			if (!permissionAsked) {
