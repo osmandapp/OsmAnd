@@ -2641,4 +2641,26 @@ Representerer området: %1$s x %2$s</string>
     <string name="init_native_library">Igangsetter innebygget bibliotek…</string>
     <string name="local_index_upload_gpx_description">Last opp GPX-filer til OSM-gemenskapen. De kan brukes til å forbedre kartene.</string>
     <string name="build_installed">Byggversion {0} ble installert ({1}).</string>
+    <string name="poi_context_menu_call">Vis interessepunktstelefon</string>
+    <string name="use_high_res_maps_descr">Ikke strekk (og tilslør) kartflis på høyoppløselige skjermer.</string>
+    <string name="gpx_files_not_found">Finner ingen GPX-filer i spormappen</string>
+    <string name="poi_namefinder_query_empty">Skriv inn søkespørring for å finne interessepunkt</string>
+    <string name="background_service_wait_int_descr">Sett maksimal ventetid for hver bakgrunnsposisjonsfiks.</string>
+    <string name="background_service_wait_int">Maksimal ventetid for fiks</string>
+    <string name="background_service_int_descr">Sett oppvåkningsintervall for bakgrunnstjenesten.</string>
+    <string name="background_service_provider_descr">Velg plasseringstilbyderen brukt av bakgrunnstjenesten.</string>
+    <string name="transport_search_after">Påfølgende ruteplan</string>
+    <string name="transport_search_before">Tidligere ruteplan</string>
+    <string name="update_poi_error_local">Feil under oppdatering av lokal interessepunktsliste</string>
+    <string name="search_osm_nominatim">Nettbasert søk med OSM Nominatim</string>
+    <string name="opening_changeset">Åpner endringssett…</string>
+    <string name="closing_changeset">Lukker endringssett…</string>
+    <string name="downloading_number_of_files">Laster ned - %1$d fil</string>
+    <string name="activate_seamarks_plugin">Aktiver sjømerketillegget</string>
+    <string name="save_poi_too_many_uppercase">Navnet inneholder for mange store bokstaver. Ønsker du å fortsette?</string>
+    <string name="quick_action_add_poi">Legg til interessepunkt</string>
+    <string name="quick_action_showhide_poi_descr">Handlingsknappen vil vise eller skjule interessepunkter på kartet.</string>
+    <string name="quick_action_page_list_descr">Handlingsknappen blar gjennom listen nedenfor.</string>
+    <string name="quick_action_empty_param_error">Parameterne kan ikke være tomme</string>
+    <string name="quick_action_btn_tutorial_descr">Trykk lenge og dra knappen for å endre dens posisjon på skjermen.</string>
     </resources>
