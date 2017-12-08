@@ -167,13 +167,14 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	public static String getOpenFromStr(Amenity amenity) {
-		OpeningHoursParser.OpeningHours openingHours = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
-		if (openingHours == null) {
-			return "";
-		} else {
-			Calendar cal = Calendar.getInstance();
-			return openingHours.getOpenFromStr(cal);
-		}
+		return "";
+//		OpeningHoursParser.OpeningHours openingHours = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
+//		if (openingHours == null) {
+//			return "";
+//		} else {
+//			Calendar cal = Calendar.getInstance();
+//			return openingHours.getOpenFromStr(cal);
+//		}
 	}
 
 	public static String getClosedAtStr(Amenity amenity) {
