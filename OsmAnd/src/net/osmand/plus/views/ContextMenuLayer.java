@@ -363,7 +363,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				if (success && !cancelApplyingNewMarkerPosition) {
 					mMoveMarkerBottomSheetHelper.hide();
 					quitMovingMarker();
-
+					menu.close();
 
 					view.refreshMap();
 				}
