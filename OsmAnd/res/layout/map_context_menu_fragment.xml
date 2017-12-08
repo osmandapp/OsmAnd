@@ -31,7 +31,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_marginTop="@dimen/context_menu_padding_margin_large"
+                    android:layout_marginTop="@dimen/context_menu_padding_margin_default"
                     android:layout_marginRight="@dimen/context_menu_padding_margin_default"
                     android:layout_marginEnd="@dimen/context_menu_padding_margin_default"
                     android:layout_width="0dp"
@@ -47,6 +47,7 @@
                         style="@style/TextAppearance.ContextMenuTitle"/>
 
                     <LinearLayout
+                        android:layout_marginTop="@dimen/context_menu_subtitle_margin"
                         android:id="@+id/context_menu_line2_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -76,7 +77,7 @@
                 android:paddingLeft="@dimen/context_menu_padding_margin_default"
                 android:paddingRight="@dimen/context_menu_padding_margin_default"
                 android:layout_marginTop="@dimen/context_menu_padding_margin_small"
-                android:layout_marginBottom="@dimen/context_menu_padding_margin_medium"
+                android:layout_marginBottom="@dimen/context_menu_direction_margin"
                 android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/context_menu_sub_info_height"
