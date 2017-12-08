@@ -2987,7 +2987,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="by_date">Efter dato</string>
     <string name="by_type">Efter type</string>
     <string name="modify_the_search_query">Ændre søgning.</string>
-    <string name="release_3_0">• Påvisning af stopskilt betragter nu kørselsretningen
+    <string name="release_3_0">• Påvisning af stopskilt tager nu hensyn til kørselsretningen
 \n
 \n• Ny algoritme giver meningsfulde stignings-/nedstigningsværdier for GPX-spor
 \n
