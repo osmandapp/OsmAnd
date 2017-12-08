@@ -870,7 +870,7 @@ public class OpeningHoursParser {
 					if (startTime < endTime && endTime != -1) {
 						if (days[d] && !checkAnotherDay) {
 							int diff = endTime - time;
-							if ((time <= endTime) && ((!nearToEvent && diff >= freeLimit) || (nearToEvent && diff <= nearToEventLimit))) {
+							if ((time <= endTime) && ((!nearToEvent && diff <= freeLimit) || (nearToEvent && diff <= nearToEventLimit))) {
 								formatTime(endTime, sb);
 								break;
 							}
