@@ -217,6 +217,7 @@ public class OpeningHoursParser {
 			Calendar cal = (Calendar) calendar.clone();
 			String openingTime = "";
 			for (int i = 0; i < 7; i++) {
+				cal.add(Calendar.DAY_OF_MONTH, 1);
 				for (OpeningHoursRule r : rules) {
 					if (r.containsDay(cal) && r.containsMonth(cal)) {
 						openingTime = r.getTime(cal, false, -1, true);
@@ -225,8 +226,6 @@ public class OpeningHoursParser {
 				if (!Algorithms.isEmpty(openingTime)) {
 					openingTime += " " + localDaysStr[cal.get(Calendar.DAY_OF_WEEK)];
 					break;
-				} else {
-					cal.add(Calendar.DAY_OF_MONTH, 1);
 				}
 			}
 			return openingTime;
