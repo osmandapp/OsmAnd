@@ -1103,7 +1103,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				line2.setText(line2Str.toString());
 			}
 
-			View openingHoursView = view.findViewById(R.id.opening_hours_view);
 			TextView openingHoursTextView = (TextView) view.findViewById(R.id.opening_hours_text_view);
 			OpeningHoursInfo openingHoursInfo = menu.getOpeningHoursInfo();
 			if (openingHoursInfo != null && openingHoursInfo.containsInfo()) {
@@ -1121,9 +1120,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					openingHoursStr = getString(R.string.will_be_closed_at) + " " + openingHoursInfo.getNearToClosingTime();
 				}
 				openingHoursTextView.setText(openingHoursStr);
-				openingHoursView.setVisibility(View.VISIBLE);
+				openingHoursTextView.setVisibility(View.VISIBLE);
 			} else {
-				openingHoursView.setVisibility(View.GONE);
+				openingHoursTextView.setVisibility(View.GONE);
 			}
 		}
 		updateCompassVisibility();
@@ -1138,11 +1137,23 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				updateDistanceDirection();
 				compassView.setVisibility(View.VISIBLE);
 			} else {
-				if (!menu.displayDistanceDirection()) {
-					compassView.setVisibility(View.GONE);
-				} else {
-					compassView.setVisibility(View.INVISIBLE);
-				}
+				compassView.setVisibility(View.GONE);
+			}
+			updateCompassBulletVisibility();
+		}
+	}
+
+	private void updateCompassBulletVisibility() {
+		OsmandApplication app = getMyApplication();
+		if (app != null && view != null) {
+			View bulletView = view.findViewById(R.id.compass_layout_bullet);
+			Location ll = app.getLocationProvider().getLastKnownLocation();
+			OpeningHoursInfo openingHoursInfo = menu.getOpeningHoursInfo();
+			if (ll != null && menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN
+					&& openingHoursInfo != null && openingHoursInfo.containsInfo()) {
+				bulletView.setVisibility(View.VISIBLE);
+			} else {
+				bulletView.setVisibility(View.GONE);
 			}
 		}
 	}

@@ -82,25 +82,19 @@
                 android:layout_height="@dimen/context_menu_sub_info_height"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:id="@+id/opening_hours_view"
+                <TextView
+                    tools:text="Closed till 10:00"
+                    android:id="@+id/opening_hours_text_view"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"/>
 
-                    <TextView
-                        tools:text="Closed till 10:00"
-                        android:id="@+id/opening_hours_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/context_menu_padding_margin_default"
-                        android:paddingRight="@dimen/context_menu_padding_margin_default"
-                        android:text="•"/>
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/compass_layout_bullet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/context_menu_padding_margin_default"
+                    android:paddingRight="@dimen/context_menu_padding_margin_default"
+                    android:text="•"/>
 
                 <LinearLayout
                     android:id="@+id/compass_layout"
