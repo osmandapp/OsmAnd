@@ -1575,7 +1575,7 @@
 	<string name="use_trackball">Kullanım topunu</string>
 	<string name="background_service_int_descr">Arka plan hizmeti tarafından kullanılan Set uyandırma aralık</string>
 	<string name="background_service_provider_descr">Arka plan hizmeti tarafından kullanılan konum sağlayıcı seçin</string>
-	<string name="route_head"></string>
+	<string name="route_head"/>
 	<string name="map_screen_orientation">Ekran yönlendirme</string>
 	<string name="no_address_found">Hiçbir adres belirlenmedi</string>
 	<string name="voices">Sesli uyarılar</string>
@@ -1839,7 +1839,7 @@
     <string name="share_geo">Yer:</string>
     <string name="region_maps">Bölge çapında haritalar</string>
     <string name="world_maps">Dünya Haritaları</string>
-    <string name="hillshade_layer_disabled"></string>
+    <string name="hillshade_layer_disabled"/>
     <string name="srtm_plugin_disabled">Kontur hatları devre dışı</string>
     <string name="nm">nmi</string>
     <string name="si_kmh">Kilometre/saat</string>
@@ -2015,8 +2015,8 @@
     <string name="update_time">Güncelleme zamanı</string>
     
 <string name="shared_string_not_selected">Seçilmedi</string>
-    <string name="rec_split"></string>
-    <string name="rec_split_title"></string>
+    <string name="rec_split"/>
+    <string name="rec_split_title"/>
     <string name="rec_split_desc">Kullanılan alan depolama alanı boyutunu aştığında klipleri yeniden yaz.</string>
     <string name="rec_split_clip_length">klip uzunluğu</string>
     <string name="rec_split_clip_length_desc">Kaydedilen klipler için üst süre limiti.</string>
@@ -2307,7 +2307,7 @@
     <string name="empty_state_markers_active">Harita işaretleyicileri oluştur!</string>
     <string name="empty_state_markers_active_desc">Yerler üzerinde uzun veya kısa basıp, sonra bayrak butonuna bas.</string>
     <string name="empty_state_markers_groups">Grupları al</string>
-    <string name="empty_state_markers_history"></string>
+    <string name="empty_state_markers_history"/>
     <string name="shared_string_two">İki</string>
     <string name="shared_string_one">Bir</string>
     <string name="active_markers_descr">Kaç tane yön göstergesi görüntüleneceğini seçin.</string>
@@ -2491,6 +2491,5 @@
     <string name="access_direction_audio_feedback_descr">Hedef nokta yönünü sesle belirt.</string>
     <string name="access_direction_haptic_feedback_descr">Hedef nokta yönünü titreşimle belirt.</string>
     <string name="access_autoannounce_period_descr">Bildirimler arasındaki minimum zaman aralığı.</string>
-    <string name="osmand_extended_description_part2">"GPS navigasyon 
-\n• Offline -çevrimdışı-(yurtdışındayken internet roaming ücreti yansıtılmaz) ya da online -çevrimiçi-(daha hızlıdır) modlarından birini seçebilirsiniz. • Rotadan her saptığınızda rota tekrar oluşturulur • Yol gidiş şeridi, cadde adları ve tahmini varış zamanı yol boyunca yardımcı olacaktır. • Seyahatinizi daha güvenli kılmak için, gündüz/gece modları otomatik olarak değişir. • Hız limitlerini göstermeyi seçebilirsiniz ve eğer limiti aşarsanız uyarılar alabilirsiniz. • Harita görüntü yakınlaştırma özelliği hızınıza göre uyarlanır. • Gidilecek yerleri (varış noktası) adrese göre, türe göre (örneğin: park yeri, restoran, otel, benzin istasyonu, müze) ya da coğrafi koordinatlar ile arayabilirsiniz. • Kendinizinkini kaydedebilir ya da  bir GPX track\'ı yükleyerek onu takip edebilirsiniz."</string>
+    <string name="osmand_extended_description_part2">"GPS navigasyon • Offline -çevrimdışı-(yurtdışındayken internet roaming ücreti yansıtılmaz) ya da online -çevrimiçi-(daha hızlıdır) modlarından birini seçebilirsiniz. • Rotadan her saptığınızda rota tekrar oluşturulur • Yol gidiş şeridi, cadde adları ve tahmini varış zamanı yol boyunca yardımcı olacaktır. • Seyahatinizi daha güvenli kılmak için, gündüz/gece modları otomatik olarak değişir. • Hız limitlerini göstermeyi seçebilirsiniz ve eğer limiti aşarsanız uyarılar alabilirsiniz. • Harita görüntü yakınlaştırma özelliği hızınıza göre uyarlanır. • Gidilecek yerleri (varış noktası) adrese göre, türe göre (örneğin: park yeri, restoran, otel, benzin istasyonu, müze) ya da coğrafi koordinatlar ile arayabilirsiniz. • Kendinizinkini kaydedebilir ya da  bir GPX track\'ı yükleyerek onu takip edebilirsiniz"</string>
     </resources>
