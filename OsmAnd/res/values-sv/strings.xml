@@ -2677,4 +2677,18 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="fast_coordinates_input">Snabbinmatning av koordinater</string>
     <string name="add_location_as_first_point_descr">Lägg till din position som första punkt för att planera en perfekt rutt.</string>
     <string name="coordinate_input">Koordinatinmatning</string>
+    <string name="modify_the_search_query">Ändra sökningen.</string>
+    <string name="empty_state_osm_edits">Skapa eller ändra OSM-objekt</string>
+    <string name="empty_state_osm_edits_descr">Skapa eller ändra OSM-POI, öppna eller kommentera OSM-anteckningar och bidraga med inspelade GPX-filer.</string>
+    <string name="shared_string_deleted">Raderad</string>
+    <string name="shared_string_edited">Redigerad</string>
+    <string name="shared_string_added">Tillagd</string>
+    <string name="marker_activated">Markör %s aktiverad.</string>
+    <string name="empty_state_av_notes">Gör anteckningar!</string>
+    <string name="notes_by_date">Anteckningar efter datum</string>
+    <string name="by_date">Efter datum</string>
+    <string name="by_type">Efter typ</string>
+    <string name="looking_for_tracks_with_waypoints">Söker spår med waypoints</string>
+    <string name="shared_string_more_without_dots">Mer</string>
+    <string name="appearance_on_the_map">Utseende på kartan</string>
     </resources>
