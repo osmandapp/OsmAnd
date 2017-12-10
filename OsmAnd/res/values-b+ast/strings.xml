@@ -205,10 +205,7 @@
 - comprueba la conexón a Internet;
 - comprueba los axustes;
 - visita\'l nuesu Twitter: https://twitter.com/OsMomobi</string>
-	<string name="anonymous_user_hint">Un usuariu anónimu nun puede:
-- crear grupos;
-- sincronizar grupos y preseos col sirvidor;
-- xestionar grupos y preseos d\'un tableru personal de la web.</string>
+	<string name="anonymous_user_hint"></string>
 	<string name="logged_as">Aniciesti sesión como %1$s</string>
 	<string name="text_size">Tamañu de testos</string>
 	<string name="traffic_warning_speed_limit">Llende de velocidá</string>
@@ -261,7 +258,7 @@
 	<string name="osm_live_user_public_name">Nome públicu</string>
 	<string name="osm_live_month_cost">Costu mensual</string>
 	<string name="osm_live_month_cost_desc">Pagu mensual.</string>
-	<string name="osm_live_ask_for_purchase">Primero tendríes de soscribite a OsmAnd Live</string>
+	<string name="osm_live_ask_for_purchase">Primero has soscribite a OsmAnd Live</string>
 	<string name="shared_string_toolbar">Barra de ferramientes</string>
 	<string name="upload_osm_note_description">Pues xubir la nota d\'OSM anónimamente o usando\'l perfil d\'OpenStreetMap.org.</string>
 	<string name="consider_turning_polygons_off">Aconséyase desactivar el renderizáu de polígonos.</string>
@@ -308,7 +305,7 @@
     <string name="local_map_names">Nomes llocales</string>
     <string name="rendering_attr_hideBuildings_name">Edificios</string>
     <string name="no_index_file_to_download">Nun s\'alcontraron descargues, por favor comprueba la to conexón d\'internet.</string>
-    <string name="select_index_file_to_download">Nun s\'alcontró nada. Si nun pues alcontrar la to rexón, pue facela tu mesmu (mira http://osmand.net).</string>
+    <string name="select_index_file_to_download">Nun s\'alcontró nada. Si nun pues alcontrar la to rexón, pues facela tu mesmu (mira http://osmand.net).</string>
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="gpx_info_average_speed">Velocidá media: %1$s</string>
     <string name="gpx_info_maximum_speed">Velocidá máxima: %1$s</string>
@@ -470,7 +467,7 @@ Llo %2$s</string>
     <string name="lang_lb">Luxemburgués</string>
     <string name="lang_os">Osetiu</string>
     <string name="lang_es_us">Español (Americanu)</string>
-    <string name="lang_es_ar">Español (Arxentína)</string>
+    <string name="lang_es_ar">Español (Arxentina)</string>
     <string name="lang_nb">Noruegu (Bokmål)</string>
     <string name="lang_vo">Volapuk</string>
     <string name="lang_th">Tailandés</string>
@@ -714,7 +711,7 @@ Puntos</string>
     <string name="shared_string_topbar">Barra superior</string>
     <string name="text_size_descr">Afita\'l tamañu\'l testu nel mapa.</string>
     <string name="use_osm_live_routing_description">Activa la navegación peles camudancies d\'OsmAnd Live.</string>
-	<string name="access_disable_offroute_recalc_descr">Evita\'l recálculu automáticu de la ruta después d\'abandonala.</string>
+	<string name="access_disable_offroute_recalc_descr">Evita\'l recálculu automáticu de la ruta tres abandonala.</string>
     <string name="access_disable_wrong_direction_recalc_descr">Evita\'l recálculu automáticu de la ruta cuando sólo te muevas en direición contraria.</string>
     <string name="osmo_tracker_id_descr">Toca pa ver la ID del rastrexador.</string>
     <string name="osmo_plugin_description">Esti complementu apurre de mou parcial la función de Siguimientu d\'OpenStreetMap, mira https://osmo.mobi 
@@ -973,7 +970,7 @@ Puntos</string>
     <string name="shared_string_left">Izquierda</string>
     <string name="show_number_pad">Amosar tecláu numbéricu</string>
     <string name="shared_string_paste">Pegar</string>
-    <string name="coordinate_input_accuracy_description">Cambiar automáticamente al siguiente campu en escribiendo %1$d cifres tres la coma decimal</string>
+    <string name="coordinate_input_accuracy_description">Camudar automáticamente al campu siguiente tres introducir %1$d díxitos decimales.</string>
     <string name="coordinate_input_accuracy">%1$d cifres</string>
     <string name="go_to_next_field">Dir al siguiente campu</string>
     <string name="rename_marker">Cambiar nome del marcador</string>
