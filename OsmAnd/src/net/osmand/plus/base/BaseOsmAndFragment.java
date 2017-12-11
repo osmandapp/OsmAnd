@@ -10,6 +10,7 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 
 import net.osmand.plus.IconsCache;
@@ -18,10 +19,11 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 
-public class BaseOsmAndFragment extends Fragment {
+public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	private IconsCache iconsCache;
 
 	private int statusBarColor = -1;
+	private boolean transitionAnimationAllowed = true;
 
 	@Override
 	public void onResume() {
@@ -66,6 +68,27 @@ public class BaseOsmAndFragment extends Fragment {
 				((MapActivity) activity).updateStatusBarColor();
 			}
 		}
+	}
+
+	@Override
+	public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+		if (transitionAnimationAllowed) {
+			return super.onCreateAnimation(transit, enter, nextAnim);
+		}
+		Animation anim = new Animation() {
+		};
+		anim.setDuration(0);
+		return anim;
+	}
+
+	@Override
+	public void disableTransitionAnimation() {
+		transitionAnimationAllowed = false;
+	}
+
+	@Override
+	public void enableTransitionAnimation() {
+		transitionAnimationAllowed = true;
 	}
 
 	@ColorRes
