@@ -142,6 +142,7 @@
 	<dimen name="context_menu_actions_buttons_height">56dp</dimen>
 	<dimen name="context_menu_subtitle_margin">3dp</dimen>
 	<dimen name="context_menu_direction_margin">18dp</dimen>
+	<dimen name="context_menu_transport_stop_item_height">16dp</dimen>
 
 	<dimen name="fab_size_with_shadow">62dp</dimen>
     <dimen name="fab_margin_right">12dp</dimen>

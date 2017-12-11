@@ -77,7 +77,7 @@
                 android:paddingLeft="@dimen/context_menu_padding_margin_default"
                 android:paddingRight="@dimen/context_menu_padding_margin_default"
                 android:visibility="gone"
-                android:horizontalSpacing="8dp"
+                android:horizontalSpacing="@dimen/context_menu_padding_margin_medium"
                 android:id="@+id/transport_stop_routes_grid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
