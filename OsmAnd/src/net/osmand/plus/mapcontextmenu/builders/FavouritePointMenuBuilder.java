@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import android.graphics.Color;
 import android.view.View;
 
 import net.osmand.ResultMatcher;
@@ -9,10 +10,11 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.mapillary.MapillaryPlugin;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -59,6 +61,21 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 			builder.setLatLon(getLatLon());
 			builder.setLight(light);
 			builder.buildInternal(view);
+		}
+		buildGroupFavsView(view);
+	}
+
+	private void buildGroupFavsView(View view) {
+		FavoriteGroup favoriteGroup = app.getFavorites().getGroup(fav);
+		List<FavouritePoint> groupFavs = favoriteGroup.points;
+		if (groupFavs.size() > 0) {
+			int color = favoriteGroup.color == 0 || favoriteGroup.color == Color.BLACK ? view.getResources().getColor(R.color.color_favorite) : favoriteGroup.color;
+			int disabledColor = light ? R.color.secondary_text_light : R.color.secondary_text_dark;
+			color = favoriteGroup.visible ? (color | 0xff000000) : view.getResources().getColor(disabledColor);
+			String name = Algorithms.isEmpty(favoriteGroup.name) ? view.getResources().getString(R.string.shared_string_favorites) : favoriteGroup.name;
+			buildRow(view, app.getIconsCache().getPaintedIcon(R.drawable.ic_action_folder, color), name, 0,
+					true, getCollapsableItemsView(view.getContext(), true, groupFavs, fav),
+					false, 0, false, null);
 		}
 	}
 

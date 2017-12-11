@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -681,6 +682,10 @@ public class MenuBuilder {
 	}
 
 	protected CollapsableView getCollapsableWikiView(Context context, boolean collapsed) {
+		return getCollapsableItemsView(context, collapsed, nearestWiki, null);
+	}
+
+	protected CollapsableView getCollapsableItemsView(Context context, boolean collapsed, final List items, Object selectedObject) {
 		final LinearLayout view = new LinearLayout(context);
 		view.setOrientation(LinearLayout.VERTICAL);
 		view.setVisibility(collapsed ? View.GONE : View.VISIBLE);
@@ -698,31 +703,57 @@ public class MenuBuilder {
 						context.getResources().getColor(light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n)
 				}
 		);
-		for (final Amenity wiki : nearestWiki) {
-			TextViewEx wikiButton = new TextViewEx(new ContextThemeWrapper(view.getContext(), light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
+		for (final Object item : items) {
+			TextViewEx button = new TextViewEx(new ContextThemeWrapper(view.getContext(), light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
 			LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.context_menu_controller_height));
 			llWikiButtonParams.setMargins(0, 0, 0, dpToPx(8f));
-			wikiButton.setLayoutParams(llWikiButtonParams);
-			wikiButton.setTypeface(FontCache.getRobotoMedium(context));
-			wikiButton.setBackgroundResource(light ? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark);
-			int paddingSides = (int) context.getResources().getDimension(R.dimen.context_menu_button_padding_x);
-			wikiButton.setPadding(paddingSides, 0, paddingSides, 0);
-			wikiButton.setTextColor(buttonColorStateList);
-			wikiButton.setText(wiki.getName(preferredMapAppLang, transliterateNames));
+			button.setLayoutParams(llWikiButtonParams);
+			button.setTypeface(FontCache.getRobotoMedium(context));
 
-			wikiButton.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-			wikiButton.setSingleLine(true);
-			wikiButton.setEllipsize(TextUtils.TruncateAt.END);
-			wikiButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					PointDescription pointDescription = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(wiki);
-					mapActivity.getContextMenu().show(
-							new LatLon(wiki.getLocation().getLatitude(), wiki.getLocation().getLongitude()),
-							pointDescription, wiki);
-				}
-			});
-			view.addView(wikiButton);
+			boolean selected = selectedObject != null && selectedObject.equals(item);
+			int bg;
+			if (selected) {
+				bg = light ? R.drawable.context_menu_controller_bg_light_selected: R.drawable.context_menu_controller_bg_dark_selected;
+			} else {
+				bg = light ? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark;
+			}
+			button.setBackgroundResource(bg);
+			int paddingSides = (int) context.getResources().getDimension(R.dimen.context_menu_button_padding_x);
+			button.setPadding(paddingSides, 0, paddingSides, 0);
+			button.setTextColor(buttonColorStateList);
+			String name = "";
+			if (item instanceof Amenity) {
+				name = ((Amenity) item).getName(preferredMapAppLang, transliterateNames);
+			} else if (item instanceof FavouritePoint) {
+				name = ((FavouritePoint) item).getName();
+			}
+			button.setText(name);
+
+			button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+			button.setSingleLine(true);
+			button.setEllipsize(TextUtils.TruncateAt.END);
+			if (!selected) {
+				button.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						LatLon latLon = null;
+						PointDescription pointDescription = null;
+						if (item instanceof Amenity) {
+							Amenity amenity = (Amenity) item;
+							latLon = new LatLon(amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude());
+							pointDescription = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(amenity);
+						} else if (item instanceof FavouritePoint) {
+							FavouritePoint fav = (FavouritePoint) item;
+							latLon = new LatLon(fav.getLatitude(), fav.getLongitude());
+							pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, fav.getName());
+						}
+						if (latLon != null && pointDescription != null) {
+							mapActivity.getContextMenu().show(latLon, pointDescription, item);
+						}
+					}
+				});
+			}
+			view.addView(button);
 		}
 
 		return new CollapsableView(view, collapsed);
