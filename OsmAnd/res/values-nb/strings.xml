@@ -2621,7 +2621,7 @@ Representerer området: %1$s x %2$s</string>
 \n</string>
     <string name="mark_passed">Marker som passert</string>
     <string name="osn_modify_dialog_error">Unntak inntraff: Notat ble ikke endret</string>
-    <string name="quick_action_auto_zoom_desc">Handlingsknappen vil skru av/på automatisk forstørrelse i henhold til fart.</string>
+    <string name="quick_action_auto_zoom_desc">Trykk på handlingsknappen vil slå av/på automatisk zoom i henhold til din hastighet.</string>
     <string name="quick_action_add_destination_desc">Handlingsknappen vil legge til et mål midt på skjermen. Forrige valgte mål vil bli siste mellomliggende mål.</string>
     <string name="quick_action_replace_destination_desc">Handlingsknappen vil erstatte målet med skjermens sentrum.</string>
     <string name="quick_action_add_first_intermediate_desc">Handlingsknappen vil først legge til et mellomliggende punkt i dens sentrum.</string>
