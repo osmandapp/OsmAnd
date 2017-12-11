@@ -765,4 +765,12 @@
 	<string name="poi_addr_housename">نام خانه</string>
 
 
+	<string name="poi_fireplace">شومینه</string>
+	<string name="poi_seasonal">فصلی</string>
+	<string name="poi_water_characteristic">ویژگی آب</string>
+	<string name="poi_beach_surface_type">نوع سطح ساحل</string>
+	<string name="poi_diet">نوع خوراک</string>
+	<string name="poi_massage_type">نوع ماساژ</string>
+	<string name="poi_tents">چادر</string>
+	<string name="poi_washing_machine">­ماشين‌ لباس شویی</string>
 	</resources>
