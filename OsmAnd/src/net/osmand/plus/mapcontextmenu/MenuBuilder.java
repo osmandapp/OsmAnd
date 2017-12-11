@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -10,7 +11,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.AppCompatButton;
 import android.text.ClipboardManager;
 import android.text.TextUtils;
 import android.text.util.Linkify;
@@ -685,18 +685,29 @@ public class MenuBuilder {
 		view.setOrientation(LinearLayout.VERTICAL);
 		view.setVisibility(collapsed ? View.GONE : View.VISIBLE);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llParams.setMargins(dpToPx(68f), 0, dpToPx(12f), dpToPx(13f));
+		llParams.setMargins(dpToPx(68f), 0, dpToPx(12f), 0);
 		view.setLayoutParams(llParams);
 
+		ColorStateList buttonColorStateList = new ColorStateList(
+				new int[][] {
+						new int[]{android.R.attr.state_pressed},
+						new int[]{}
+				},
+				new int[] {
+						context.getResources().getColor(light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p),
+						context.getResources().getColor(light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n)
+				}
+		);
 		for (final Amenity wiki : nearestWiki) {
-			AppCompatButton wikiButton = new AppCompatButton(
-					new ContextThemeWrapper(view.getContext(), light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
-			LinearLayout.LayoutParams llWikiButtonParams =
-					new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			TextViewEx wikiButton = new TextViewEx(new ContextThemeWrapper(view.getContext(), light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
+			LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.context_menu_controller_height));
+			llWikiButtonParams.setMargins(0, 0, 0, dpToPx(8f));
 			wikiButton.setLayoutParams(llWikiButtonParams);
-			wikiButton.setPadding(dpToPx(14f), 0, dpToPx(14f), 0);
-			wikiButton.setTextColor(app.getResources()
-					.getColor(light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark));
+			wikiButton.setTypeface(FontCache.getRobotoMedium(context));
+			wikiButton.setBackgroundResource(light ? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark);
+			int paddingSides = (int) context.getResources().getDimension(R.dimen.context_menu_button_padding_x);
+			wikiButton.setPadding(paddingSides, 0, paddingSides, 0);
+			wikiButton.setTextColor(buttonColorStateList);
 			wikiButton.setText(wiki.getName(preferredMapAppLang, transliterateNames));
 
 			wikiButton.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
