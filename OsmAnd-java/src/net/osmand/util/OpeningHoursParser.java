@@ -30,6 +30,7 @@ public class OpeningHoursParser {
 
 	private static final int LOW_TIME_LIMIT = 120;
 	private static final int HIGH_TIME_LIMIT = 300;
+	private static final int WITHOUT_TIME_LIMIT = -1;
 
 	static {
 		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(Locale.US);
@@ -210,7 +211,7 @@ public class OpeningHoursParser {
 		}
 
 		public String getClosingTime(Calendar cal) {
-			return getTime(cal, HIGH_TIME_LIMIT, false);
+			return getTime(cal, WITHOUT_TIME_LIMIT, false);
 		}
 
 		public String getOpeningDay(Calendar calendar) {
@@ -220,7 +221,7 @@ public class OpeningHoursParser {
 				cal.add(Calendar.DAY_OF_MONTH, 1);
 				for (OpeningHoursRule r : rules) {
 					if (r.containsDay(cal) && r.containsMonth(cal)) {
-						openingTime = r.getTime(cal, false, -1, true);
+						openingTime = r.getTime(cal, false, WITHOUT_TIME_LIMIT, true);
 					}
 				}
 				if (!Algorithms.isEmpty(openingTime)) {
@@ -868,7 +869,7 @@ public class OpeningHoursParser {
 					if (startTime < endTime || endTime == -1) {
 						if (days[d] && !checkAnotherDay) {
 							int diff = startTime - time;
-							if (limit == -1 || ((time <= startTime) && (diff <= limit))) {
+							if (limit == WITHOUT_TIME_LIMIT || ((time <= startTime) && (diff <= limit))) {
 								formatTime(startTime, sb);
 								break;
 							}
@@ -880,7 +881,7 @@ public class OpeningHoursParser {
 						} else if (time > endTime && days[ad] && checkAnotherDay) {
 							diff = 24 * 60 - endTime  + time;
 						}
-						if (limit == -1 || ((diff != -1) && (diff <= limit))) {
+						if (limit == WITHOUT_TIME_LIMIT || ((diff != -1) && (diff <= limit))) {
 							formatTime(startTime, sb);
 							break;
 						}
@@ -889,7 +890,7 @@ public class OpeningHoursParser {
 					if (startTime < endTime && endTime != -1) {
 						if (days[d] && !checkAnotherDay) {
 							int diff = endTime - time;
-							if (limit == -1 || ((time <= endTime) && (diff <= limit))) {
+							if (limit == WITHOUT_TIME_LIMIT || ((time <= endTime) && (diff <= limit))) {
 								formatTime(endTime, sb);
 								break;
 							}
@@ -901,7 +902,7 @@ public class OpeningHoursParser {
 						} else if (time < endTime && days[ad] && checkAnotherDay) {
 							diff = startTime - time;
 						}
-						if (limit == -1 || ((diff != -1) && (diff <= limit))) {
+						if (limit == WITHOUT_TIME_LIMIT || ((diff != -1) && (diff <= limit))) {
 							formatTime(endTime, sb);
 							break;
 						}
