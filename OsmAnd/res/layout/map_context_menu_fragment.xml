@@ -73,6 +73,16 @@
 
             </LinearLayout>
 
+            <GridView
+                android:paddingLeft="@dimen/context_menu_padding_margin_default"
+                android:paddingRight="@dimen/context_menu_padding_margin_default"
+                android:visibility="gone"
+                android:horizontalSpacing="8dp"
+                android:id="@+id/transport_stop_routes_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="10" />
+
             <LinearLayout
                 android:paddingLeft="@dimen/context_menu_padding_margin_default"
                 android:paddingRight="@dimen/context_menu_padding_margin_default"

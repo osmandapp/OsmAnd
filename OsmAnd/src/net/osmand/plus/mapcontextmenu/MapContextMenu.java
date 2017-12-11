@@ -37,6 +37,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
@@ -744,6 +745,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		} else {
 			return R.drawable.map_directions;
 		}
+	}
+
+	public List<TransportStopRoute> getTransportStopRoutes() {
+		if (menuController != null) {
+			return menuController.getTransportStopRoutes();
+		}
+		return null;
 	}
 
 	public void navigateButtonPressed() {

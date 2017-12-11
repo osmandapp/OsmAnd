@@ -108,6 +108,11 @@ public class TransportStopController extends MenuController {
 	}
 
 	@Override
+	public List<TransportStopRoute> getTransportStopRoutes() {
+		return routes;
+	}
+
+	@Override
 	public boolean needStreetName() {
 		return Algorithms.isEmpty(getNameStr());
 	}

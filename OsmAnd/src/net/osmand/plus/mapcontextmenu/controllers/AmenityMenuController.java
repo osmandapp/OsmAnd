@@ -165,6 +165,11 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
+	public List<TransportStopRoute> getTransportStopRoutes() {
+		return routes;
+	}
+
+	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		addPlainMenuItems(amenity, typeStr, builder);
 		for (final TransportStopRoute r : routes) {

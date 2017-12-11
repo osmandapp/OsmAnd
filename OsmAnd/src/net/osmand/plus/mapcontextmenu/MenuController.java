@@ -436,6 +436,10 @@ public abstract class MenuController extends BaseMenuController {
 		return pointDescription.getName();
 	}
 
+	public List<TransportStopRoute> getTransportStopRoutes() {
+		return null;
+	}
+
 	public void share(LatLon latLon, String title, String address) {
 		ShareMenu.show(latLon, title, address, getMapActivity());
 	}
