@@ -2107,7 +2107,13 @@ Representerer området: %1$s x %2$s</string>
 
  and more…
  "</string>
-    <string name="osmo_group_information_desc"/>
+    <string name="osmo_group_information_desc">"- Ved opprettelse av en gruppe, angi et navn og fyll ut beskrivelsen 
+\n- Fra programmet kan det kun opprettes en gruppe av enkel type, les mer på hjemmesiden https://osmo.mobi/g/new 
+\n- Via en hjemmeside kan administreres en gruppe, til å plassere spor og punkter tilgjengelig for alle 
+\n- Støtter ikke bruk av gruppen for kun én bruker, hvis dette ikke er IP-gruppen 
+\n- Private grupper er begrenset til 8 personer 
+\n- Detaljerte vilkår er å finne på hjemmesiden OsMo.mobi 
+\n- Bruk for  særlige vilkår - kontakt brukerstøtte: osmo.mobi@gmail.com"</string>
     <string name="lang_bpy">Bishnupriya manipuri</string>
     <string name="lang_new">Nepal bhasa</string>
     <string name="lang_ceb">Cebuano</string>
@@ -2663,4 +2669,13 @@ Representerer området: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Handlingsknappen blar gjennom listen nedenfor.</string>
     <string name="quick_action_empty_param_error">Parameterne kan ikke være tomme</string>
     <string name="quick_action_btn_tutorial_descr">Trykk lenge og dra knappen for å endre dens posisjon på skjermen.</string>
+    <string name="add_track_to_markers_descr">Velg et spor for å legge dets rutepunkter til markørene. (Kun spor med rutepunkter vises).</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
+    <string name="depth_contour_descr">Knippe kart som inneholder havdybdekotelinjer og sjømerker.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samler inn informasjon om hvilke deler av programmet du åpner. Plasseringen din blir aldri sendt, ei heller noe du måtte skrive inn i programmet eller detaljer om områder som vises, søkes etter, eller lastes ned.</string>
+    <string name="do_not_show_startup_messages_desc">Skrur av visning av programrabatter og spesielle lokale hendelsesmeldinger.</string>
+    <string name="routing_attr_driving_style_safety_name">Foretrekk småveier</string>
+    <string name="osm_live_header">Dette abonnementet skrur på timevise oppdateringer av alle kart verden over. Deler av inntekten går tilbake til OSM-gemenskapen, og er betalt for hvert OSM-bidrag. Hvis du elsker OsmAnd og OSM, og ønsker å støtte opp, dette er den perfekte måten å gjøre det.</string>
+    <string name="m_s">m/s</string>
+    <string name="lang_ber">Berber</string>
     </resources>
