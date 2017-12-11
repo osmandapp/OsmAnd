@@ -3067,7 +3067,7 @@
     <string name="import_as_gpx">Імпортувати як GPX-файл</string>
     <string name="import_as_favorites">Імпортувати як закладки</string>
     <string name="import_file">Імпортувати файл</string>
-	<string name="tap_on_map_to_hide_interface_descr">Дотик на мапі перемикає кнопки управління і віджети.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Дотик на мапі приховує кнопки управління і віджети.</string>
     <string name="tap_on_map_to_hide_interface">Повноекранний режим</string>
     <string name="show_on_top_bar">Показати на верхній панелі</string>
     <string name="mark_passed">Позначати пройдене</string>
