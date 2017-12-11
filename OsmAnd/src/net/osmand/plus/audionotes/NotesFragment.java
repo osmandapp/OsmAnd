@@ -137,6 +137,14 @@ public class NotesFragment extends OsmAndListFragment {
 	}
 
 	@Override
+	public void onPause() {
+		super.onPause();
+		if (actionMode != null) {
+			actionMode.finish();
+		}
+	}
+
+	@Override
 	public ArrayAdapter<?> getAdapter() {
 		return listAdapter;
 	}
@@ -462,8 +470,13 @@ public class NotesFragment extends OsmAndListFragment {
 		startActivity(Intent.createChooser(intent, getString(R.string.share_note)));
 	}
 
+	@Nullable
 	private File generateGPXForRecordings(Set<Recording> selected) {
-		File tmpFile = new File(getActivity().getCacheDir(), "share/noteLocations.gpx");
+		File externalCacheDir = getActivity().getExternalCacheDir();
+		if (externalCacheDir == null) {
+			return null;
+		}
+		File tmpFile = new File(externalCacheDir, "share/noteLocations.gpx");
 		tmpFile.getParentFile().mkdirs();
 		GPXFile file = new GPXFile();
 		for (Recording r : selected) {

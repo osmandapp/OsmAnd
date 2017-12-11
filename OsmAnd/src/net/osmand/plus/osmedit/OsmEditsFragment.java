@@ -332,6 +332,14 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		fetchData();
 	}
 
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (actionMode != null) {
+			actionMode.finish();
+		}
+	}
+
 	private void fetchData() {
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		osmEdits = new ArrayList<>();

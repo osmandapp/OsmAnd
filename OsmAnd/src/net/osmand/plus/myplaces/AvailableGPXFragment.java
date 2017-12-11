@@ -207,6 +207,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			asyncProcessor.cancel(false);
 			asyncProcessor = null;
 		}
+		if (actionMode != null) {
+			actionMode.finish();
+		}
 	}
 
 	public void updateCurrentTrack() {
