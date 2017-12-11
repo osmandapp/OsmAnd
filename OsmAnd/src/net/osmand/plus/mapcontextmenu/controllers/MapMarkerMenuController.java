@@ -7,6 +7,8 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
@@ -20,10 +22,11 @@ public class MapMarkerMenuController extends MenuController {
 
 	public MapMarkerMenuController(MapActivity mapActivity, PointDescription pointDescription, MapMarker mapMarker) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
+		final OsmandApplication app = mapActivity.getMyApplication();
 		this.mapMarker = mapMarker;
 		builder.setShowNearestWiki(true);
 
-		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
@@ -38,6 +41,11 @@ public class MapMarkerMenuController extends MenuController {
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
+				OsmandSettings.OsmandPreference<Boolean> indication = app.getSettings().MARKERS_DISTANCE_INDICATION_ENABLED;
+				if (!indication.get()) {
+					indication.set(true);
+					getMapActivity().getMapLayers().getMapWidgetRegistry().updateMapMarkersMode(getMapActivity());
+				}
 				markersHelper.moveMarkerToTop(getMapMarker());
 				getMapActivity().getContextMenu().close();
 			}

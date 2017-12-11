@@ -225,9 +225,9 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="send_location_email_pattern">Para ver la ubicación sigue el enlace del navegador %1$s o el enlace interno de Android %2$s</string>
     <string name="send_location">Enviar ubicación</string>
     <string name="context_menu_item_share_location">Compartir ubicación</string>
-    <string name="add_waypoint_dialog_added">El punto GPX «{0}» fue añadido correctamente</string>
-    <string name="add_waypoint_dialog_title">Añadir punto de referencia a la traza GPX grabada</string>
-    <string name="context_menu_item_add_waypoint">Añadir punto GPX</string>
+    <string name="add_waypoint_dialog_added">El punto de ruta GPX \"{0}\" fue añadido correctamente</string>
+    <string name="add_waypoint_dialog_title">Añadir punto de ruta a la traza GPX grabada</string>
+    <string name="context_menu_item_add_waypoint">Añadir punto de ruta GPX</string>
     <string name="amenity_type_administrative">Administrativo</string>
     <string name="amenity_type_barrier">Barrera</string>
     <string name="amenity_type_education">Educación</string>
@@ -1038,7 +1038,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="speak_cameras">Radares</string>
     <string name="speak_traffic_warnings">Avisos de tráfico</string>
     <string name="osb_author_dialog_password">Contraseña OSM (opcional)</string>
-    <string name="announce_gpx_waypoints">Puntos GPX</string>
+    <string name="announce_gpx_waypoints">Puntos de ruta GPX</string>
     <string name="speak_title">Anunciar…</string>
     <string name="speak_descr">Configura el anuncio de nombres de calles, advertencias de tráfico (paradas, badenes), advertencias de radares de velocidad, límites de velocidad.</string>
     <string name="speak_street_names">Nombres de calles (TTS)</string>
@@ -1269,7 +1269,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="osmo_session_token">Token de sesión: %1$s</string>
     <string name="osmo_mode_restart">Reiniciar sesión OsMo</string>
     <string name="osmo_settings_debug">Información de depuración</string>
-    <string name="import_file_favourites">¿Guardar datos como archivo GPX o importar los puntos de referencia a Favoritos?</string>
+    <string name="import_file_favourites">¿Guardar datos como archivo GPX o importar los puntos de ruta a Favoritos?</string>
     <string name="osmo_follow">Seguir</string>
     <string name="osmo_sign_in">Ingresar</string>
     <string name="osmo_create_groups_confirm">Con el fin de crear grupos es necesario ser usuario registrado de OsMo.</string>
@@ -1306,7 +1306,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="shared_string_selected_lowercase">seleccionado</string>
     <string name="gpx_split_interval">Intervalo de división</string>
     <string name="gpx_info_subtracks">Subtrazas: %1$s</string>
-    <string name="gpx_info_waypoints">Puntos de referencia: %1$s</string>
+    <string name="gpx_info_waypoints">Puntos de ruta: %1$s</string>
     <string name="gpx_info_distance">Distancia: %1$s (%2$s puntos) </string>
     <string name="gpx_info_start_time">Hora inicio: %1$tF, %1$tT</string>
     <string name="gpx_info_end_time">Hora fin: %1$tF, %1$tT</string>
@@ -1316,7 +1316,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="gpx_info_diff_altitude">Rango de altitud: %1$s</string>
     <string name="gpx_info_asc_altitude">Descenso/ascenso: %1$s</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
-    <string name="gpx_wpt">Punto de referencia</string>
+    <string name="gpx_wpt">Punto de ruta</string>
     <string name="select_destination_and_intermediate_points">Marque los destinos</string>
     <string name="layer_amenity_label">Etiquetas superpuestas de PDI</string>
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
@@ -1410,7 +1410,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="rendering_value_pedestrian_name">Peatón</string>
     <string name="shared_string_more">Más…</string>
     <string name="download_additional_maps">¿Descargar los mapas que faltan %1$s (%2$d MB)?</string>
-    <string name="waypoints">Puntos de referencia</string>
+    <string name="waypoints">Puntos de ruta</string>
     <string name="targets">Destinos</string>
     <string name="way_alarms">Advertencias de tráfico</string>
     <string name="speak_favorites">Favoritos cercanos</string>
@@ -1878,8 +1878,8 @@ Lon %2$s</string>
     <string name="save_poi_without_poi_type_message">¿Realmente quieres guardar el PDI sin especificar el tipo?</string>
     <string name="shared_string_location">Ubicación</string>
     <string name="poi_context_menu_modify_osm_change">Modificar cambio OSM</string>
-    <string name="context_menu_item_delete_waypoint">¿Borrar punto GPX?</string>
-    <string name="context_menu_item_edit_waypoint">Editar punto GPX</string>
+    <string name="context_menu_item_delete_waypoint">¿Borrar punto de ruta GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Editar punto de ruta GPX</string>
 
 <string name="context_menu_item_open_note">Abrir nota OSM</string>
     <string name="osm_edit_reopened_note">Nota OSM reabierta</string>
@@ -2084,7 +2084,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="open_street_map_login_and_pass">Usuario y contraseña de OpenStreetMap</string>
     <string name="report">Informe</string>
     <string name="no_map_markers_found">Por favor, añade marcadores a través del mapa</string>
-    <string name="no_waypoints_found">No se han encontrado puntos de referencia</string>
+    <string name="no_waypoints_found">No se han encontrado puntos de ruta</string>
     <string name="file_name_containes_illegal_char">El nombre de archivo contiene caracteres ilegales</string>
 <string name="map_mode">Modo del mapa</string>
     <string name="number_of_gpx_files_selected_pattern">%s archivos GPX seleccionados</string>
@@ -2300,7 +2300,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_action_navigation_voice">Voz sí/no</string>
     <string name="quick_action_navigation_voice_off">La voz está apagada</string>
     <string name="quick_action_navigation_voice_on">La voz está encendida</string>
-    <string name="quick_action_add_gpx">Añadir punto GPX</string>
+    <string name="quick_action_add_gpx">Añadir punto de ruta GPX</string>
     <string name="quick_action_add_parking">Añadir lugar de estacionamiento</string>
     <string name="quick_action_new_action">Añadir acción</string>
     <string name="quick_action_edit_action">Editar acción</string>
@@ -2311,7 +2311,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="quick_action_add_marker_descr">Pulsar el botón de acción agregará un marcador de mapa en la ubicación del centro de la pantalla.</string>
-    <string name="quick_action_add_gpx_descr">"Pulsar el botón de acción agregará un punto  de referencia GPX en la ubicación del centro de la pantalla."</string>
+    <string name="quick_action_add_gpx_descr">Pulsar el botón de acción agregará un punto de ruta GPX en la ubicación del centro de la pantalla.</string>
     <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción agregará una nota de audio en la ubicación del centro de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Pulsar el botón de acción agregará una nota de video en la ubicación del centro de la pantalla.</string>
     <string name="quick_action_take_photo_note_descr">Pulsar el botón de acción agregará una nota de la foto en el lugar del centro de la pantalla.</string>
@@ -2642,11 +2642,11 @@ Por favor proporciona un código completo</string>
     <string name="mappilary_no_internet_desc">Debes tener conexión a Internet para ver fotos de Mapillary.</string>
     <string name="retry">Reintentar</string>
     <string name="add_route_point">Añadir punto de ruta</string>
-    <string name="add_waypoint">Añadir punto de referencia</string>
-    <string name="save_gpx_waypoint">Guardar punto GPX</string>
+    <string name="add_waypoint">Añadir punto de ruta</string>
+    <string name="save_gpx_waypoint">Guardar punto de ruta GPX</string>
     <string name="save_route_point">Guardar punto de ruta</string>
     <string name="route_point_one">Punto de ruta 1</string>
-<string name="waypoint_one">Punto de referencia 1</string>
+<string name="waypoint_one">Punto de ruta 1</string>
     <string name="do_not_use_animations">No usar animaciones</string>
     <string name="do_not_use_animations_descr">Desactiva las animaciones en la aplicación.</string>
     <string name="keep_showing_on_map">Mantener en el mapa</string>
@@ -2669,7 +2669,7 @@ Por favor proporciona un código completo</string>
     <string name="empty_state_favourites">Añadir favoritos</string>
     <string name="empty_state_favourites_desc">Añade favoritos al mapa o importa luego desde un archivo.</string>
     <string name="import_track">Importar traza</string>
-    <string name="import_track_desc">El archivo «%1$s» no contiene puntos de referencia, ¿Quiere importarlo como una traza?</string>
+    <string name="import_track_desc">El archivo %1$s no contiene puntos de ruta, ¿quieres importarlo como una traza?</string>
     <string name="move_point">Mover punto</string>
     <string name="add_segment_to_the_track">Añadir a una traza GPX</string>
 <string name="move_all_to_history">Mover todo al historial</string>
@@ -2742,11 +2742,11 @@ Por favor proporciona un código completo</string>
 \n"</string>
     <string name="rendering_value_darkyellow_name">Amarillo oscuro</string>
     <string name="wrong_input">Entrada incorrecta</string>
-    <string name="enter_new_name">Ingresar nombre nuevo</string>
+    <string name="enter_new_name">Ingresar nuevo nombre</string>
     <string name="shared_string_back">Atrás</string>
     <string name="view">Ver</string>
-	<string name="waypoints_added_to_map_markers">Puntos de referencia añadidos a marcadores de mapa</string>
-	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna los botones y los controles.</string>
+	<string name="waypoints_added_to_map_markers">Puntos de ruta añadidos a marcadores de mapa</string>
+	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna la vista de la interfaz y los controles.</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     <string name="show_on_top_bar">Mostrar en la barra superior</string>
     <string name="mark_passed">Descartar marcador</string>
@@ -2764,16 +2764,16 @@ Por favor proporciona un código completo</string>
     <string name="go_to_next_field">Ir al campo siguiente</string>
     <string name="rename_marker">Renombrar marcador</string>
     <string name="appearance_on_the_map">Apariencia en el mapa</string>
-    <string name="add_track_to_markers_descr">Selecciona una traza para añadir sus puntos de referencia a los marcadores. (Sólo se muestran las trazas con puntos de referencia)</string>
+    <string name="add_track_to_markers_descr">Selecciona una traza para añadir sus puntos de ruta a los marcadores. (Sólo se muestran las trazas con puntos de ruta)</string>
     <string name="add_favourites_group_to_markers_descr">Selecciona un grupo de favoritos para añadirlos a marcadores.</string>
-    <string name="track_waypoints">Puntos de referencia de traza</string>
-    <string name="favourites_group">Grupo de favoritos</string>
+    <string name="track_waypoints">Puntos de ruta de traza</string>
+    <string name="favourites_group">Categoría Favoritos</string>
     <string name="add_group">Añadir grupo</string>
-    <string name="add_group_descr">Puedes importar grupos desde favoritos o puntos de referencia de traza.</string>
+    <string name="add_group_descr">Puedes importar grupos desde favoritos o desde puntos de ruta de traza.</string>
     <string name="empty_state_markers_active">¡Crea marcadores de mapa!</string>
     <string name="empty_state_markers_active_desc">Pulsa en lugares en el mapa y luego pulsa en el botón de bandera del marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
-    <string name="empty_state_markers_groups_desc">Puedes importar grupos de favoritos o puntos de referencia de traza como marcadores.</string>
+    <string name="empty_state_markers_groups_desc">Puedes importar grupos de favoritos o puntos de ruta de traza como marcadores.</string>
     <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Uno</string>
@@ -2783,25 +2783,25 @@ Por favor proporciona un código completo</string>
     <string name="active_markers_descr">Elige cuántos indicadores de dirección se muestran.</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
-    <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de referencia</string>
-    <string name="release_3_0">• La detección de señales de alto, ahora considera la dirección de desplazamiento
-\n
-\n • Nuevo algoritmo que proporciona valores significativos de ascenso y descenso para trazas GPX.
-\n
-\n • El tiempo de caminata es consciente del terreno ascendente (regla de Naismith).
+    <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de ruta</string>
+    <string name="release_3_0">• La detección de señales de alto, ahora considera la dirección de desplazamiento 
+\n 
+\n • Nuevo algoritmo que proporciona valores significativos de ascenso y descenso para trazas GPX. 
+\n 
+\n • La duración del recorrido a pie tiene en cuenta si el terreno es ascendente (regla de Naismith).
 \n
 \n</string>
     <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta problemas del mapa (notas de OSM), y contribuye con grabaciones GPX.</string>
+    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta notas de OSM y aporta grabaciones GPX.</string>
     <string name="shared_string_deleted">Borrado</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Añadido</string>
-    <string name="marker_activated">Marcador «%s» activado.</string>
+    <string name="marker_activated">Marcador %s activado.</string>
     <string name="one_tap_active_descr">Pulsa un marcador en el mapa para moverlo al primer lugar de los marcadores activos, sin abrir el menú contextual.</string>
-    <string name="one_tap_active">Una pulsación activa</string>
-    <string name="empty_state_av_notes">¡Tomar notas multimedia!</string>
-    <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto para cada punto del mapa, utilizando el controlador o el menú contextual.</string>
+    <string name="one_tap_active">Activar con una pulsación</string>
+    <string name="empty_state_av_notes">¡Toma notas!</string>
+    <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto para cada punto del mapa, utilizando el control o el menú contextual.</string>
     <string name="notes_by_date">Notas por fecha</string>
     <string name="by_date">Por fecha</string>
     <string name="by_type">Por tipo</string>

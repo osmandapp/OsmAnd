@@ -3115,4 +3115,11 @@
     <string name="by_date">За датою</string>
     <string name="by_type">За типом</string>
     <string name="modify_the_search_query">Змінити пошуковий запит.</string>
+    <string name="release_3_0">• Виявлення стоп-сигналів тепер враховує напрямок руху 
+\n 
+\n• Новий алгоритм, що надає дійсні значення підйому/спуску для треків GPX 
+\n 
+\n• Час ходьби в залежності від місцевості (підйому) (правило Нейсміта)
+\n
+\n</string>
     </resources>

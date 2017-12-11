@@ -1036,7 +1036,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="shared_string_control_stop">Arrêter</string>
     <string name="map_widget_av_notes">Notes audio/vidéo</string>
 
-    <string name="shared_string_control_start">Démarrer</string>
+    <string name="shared_string_control_start">Départ</string>
     <string name="srtm_paid_version_msg">Merci d\'acheter le greffon \"Courbes de niveau\" pour soutenir les développements futurs.</string>
     <string name="srtm_paid_version_title">Greffon \"Courbes de niveau\"</string>
 
@@ -1114,7 +1114,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="plugin_distance_point_speed">vitesse</string>
     <string name="plugin_distance_point_ele">altitude</string>
     <string name="gpx_file_name">Nom du fichier GPX</string>
-    <string name="gpx_saved_sucessfully">L\'enregistrement du fichier GPX {0} a réussi.</string>
+    <string name="gpx_saved_sucessfully">L\'enregistrement du fichier GPX {0} a réussi</string>
     <string name="osmand_distance_planning_plugin_description">Ce greffon permet, depuis la carte, de créer un itinéraire soit un cliquant sur la carte, soit en ouvrant ou en modifiant un fichier GPX existant; ainsi que de mesurer la distance entre des points. L\'itinéraire peut être enregistré dans un fichier GPX qui peut lui-même être utilisé plus tard pour une navigation.</string>
     <string name="osmand_distance_planning_plugin_name">Mesure de distance et Outil de planification</string>
     <string name="shared_string_do_not_show_again">Ne plus afficher</string>
@@ -1819,7 +1819,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="shared_string_edit">Modifier</string>
     <string name="shared_string_is_open">Ouvert</string>
     <string name="filter_poi_hint">Filtrer par nom</string>
-    <string name="search_poi_category_hint">Saisir pour rechercher partout</string>
+    <string name="search_poi_category_hint">Saisissez votre recherche</string>
     <string name="index_name_netherlands">Europe - Pays-Bas</string>
     <string name="rendering_value__name">Par défaut</string>
     <string name="rendering_value_highContrastRoads_name">Routes avec fort contraste</string>
@@ -2698,12 +2698,12 @@ représentant la zone : %1$s x %2$s</string>
     <string name="quick_action_auto_zoom_on">Activer le zoom automatique</string>
     <string name="quick_action_auto_zoom_off">Désactiver le zoom automatique</string>
     <string name="shared_string_paused">Mis en pause</string>
-    <string name="type_city_town">Entrer la ville ou le village</string>
-    <string name="type_postcode">Entrer le code postal</string>
+    <string name="type_city_town">Saisissez la ville ou le village</string>
+    <string name="type_postcode">Saisissez le code postal</string>
     <string name="nearest_cities">Villes les plus proches</string>
     <string name="select_city">Sélectionner la ville</string>
     <string name="select_postcode">Sélectionner le code postal</string>
-    <string name="type_address">Entrer une adresse</string>
+    <string name="type_address">Saisissez une adresse</string>
     <string name="select_street">Sélectionner la rue</string>
     <string name="shared_string_in_name">dans %1$s</string>
     <string name="shared_string_overview">Vue d\'ensemble</string>
@@ -2818,7 +2818,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="quick_action_start_stop_navigation_descr">Appuyez sur ce bouton pour démarrer la navigation ou l\'arrêter lorsqu\'elle est en cours.</string>
     <string name="mappilary_no_internet_desc">Vous devez être connecté à Internet pour afficher les photos Mapillary</string>
     <string name="retry">Essayer à nouveau</string>
-<string name="measurement_tool_action_bar">Parcourez la carte et ajoutez des points</string>
+<string name="measurement_tool_action_bar">Déplacez la carte et ajoutez des points</string>
     <string name="measurement_tool">Mesurer de distance</string>
     <string name="shared_string_create">Créer</string>
 <string name="add_gpx_waypoint_bottom_sheet_title">Ajouter un point GPX</string>
@@ -3036,4 +3036,11 @@ représentant la zone : %1$s x %2$s</string>
     <string name="by_date">Par date</string>
     <string name="by_type">Par type</string>
     <string name="modify_the_search_query">Modifier la recherche.</string>
+    <string name="release_3_0">\\022 Les panneaux stop sont maintenant considérés comme des consignes de direction
+\n
+\n • Nouvel algorithme fournissant des données d\'altitude (montée / descente) sur les traces GPX
+\n
+\n • Durée d\'ascension en fonction du terrain (basé sur la règle de Naismith)
+\n
+\n</string>
     </resources>

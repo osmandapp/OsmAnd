@@ -1408,7 +1408,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="gpx_info_maximum_speed">Maks hastighed: %1$s </string>
     <string name="gpx_info_avg_altitude">Gennemsnitshøjde: %1$s</string>
     <string name="gpx_info_diff_altitude">Højdeinterval: %1$s</string>
-    <string name="gpx_info_asc_altitude">Fald/stigning: %1$s</string>
+    <string name="gpx_info_asc_altitude">Ned-/stigning: %1$s</string>
     <string name="gpx_timespan">Tidsrum: %1$s</string>
     <string name="gpx_timemoving">Tid i bevægelse: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
@@ -2987,11 +2987,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="by_date">Efter dato</string>
     <string name="by_type">Efter type</string>
     <string name="modify_the_search_query">Ændre søgning.</string>
-    <string name="release_3_0">• Påvisning af stopskilt betragter nu kørselsretningen
-\n
-\n• Ny algoritme giver meningsfulde stignings-/nedstigningsværdier for GPX-spor
-\n
-\n• Terræn (stigning) opmærksom på vandringstid (Naismiths regel)
+    <string name="release_3_0">• Påvisning af stopskilt tager nu hensyn til kørselsretningen 
+\n 
+\n• Ny algoritme giver meningsfulde stignings-/nedstigningsværdier for GPX-spor 
+\n 
+\n• Vandretid tager hensyn til terræn (stigning) (Naismiths regel)
 \n
 \n</string>
     </resources>

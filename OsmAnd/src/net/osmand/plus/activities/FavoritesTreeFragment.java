@@ -209,6 +209,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		initListExpandedState();
 	}
 
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (actionMode != null) {
+			actionMode.finish();
+		}
+	}
+
 	private int getSelectedFavoritesCount() {
 		int count = 0;
 		for (Set<FavouritePoint> set : favoritesSelected.values()) {

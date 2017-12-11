@@ -332,7 +332,7 @@
 	<string name="download_files_not_enough_space">Speicherplatz (frei: %2$s MB) reicht nicht aus, um %1$s MB herunterzuladen.</string>
 	<string name="download_files_question_space">{0} Datei(en) herunterladen?
  Es werden dauerhaft {1} MB Speicherplatz benötigt.
- (Aktuell sind {2} MB verfügbar.)</string>
+ (Derzeit sind {2} MB verfügbar.)</string>
 	<string name="use_transparent_map_theme">Transparentes Layout</string>
 	<string name="native_library_not_supported">Native Bibliothek wird auf diesem Gerät nicht unterstützt.</string>
 	<string name="init_native_library">Native Bibliothek wird initialisiert…</string>
@@ -662,7 +662,7 @@
 	<string name="voice_data_initializing">Sprachansagen werden initialisiert…</string>
 	<string name="voice_data_not_supported">Sprachpaket-Version wird nicht unterstützt</string>
 	<string name="voice_data_corrupted">Sprachpaket ist defekt</string>
-	<string name="voice_data_unavailable">Das aktuelle Sprachpaket ist nicht verfügbar</string>
+	<string name="voice_data_unavailable">Das gewählte Sprachpaket ist nicht verfügbar</string>
 	
 	<string name="sd_unmounted">Die SD-Karte ist nicht verfügbar. \nKarte lässt sich nicht darstellen.</string>
 	<string name="sd_mounted_ro">Die SD-Karte befindet sich im Nur-Lesen-Modus.
@@ -1131,7 +1131,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="available_downloads_left">Es können noch %1$d Dateien herunter geladen werden.</string>
 	<string name="install_paid">Vollversion</string>
 	<string name="cancel_navigation">Navigation stoppen</string>
-	<string name="cancel_route">Route ablehnen</string>
+	<string name="cancel_route">Route verwerfen</string>
 	<string name="use_kalman_filter_compass_descr">Kompass-Rauschreduzierung (erhöht die Kompassträgheit etwas).</string>
 	<string name="use_kalman_filter_compass">Kalman-Filter verwenden</string>
 	<string name="use_magnetic_sensor_descr">Für den Kompass Magnetsensor statt Lagesensor verwenden.</string>
@@ -1300,7 +1300,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="shared_string_my_favorites">Meine Favoriten</string>
 	<string name="shared_string_my_places">Meine Orte</string>
 	<string name="loading_smth">%1$s wird geladen …</string>
-	<string name="map_widget_plain_time">Aktuelle Zeit</string>
+	<string name="map_widget_plain_time">Uhrzeit</string>
 	<string name="selected_gpx_info_show">"
 \n
 \nZur Darstellung auf der Karte lange drücken"</string>
@@ -1618,7 +1618,7 @@ Mit Neuanmeldung fortfahren?</string>
 \n 
 \nAufgenommene Tracks können z. B. mit Bekannten geteilt oder als Beiträge zu OSM verwendet werden. Sportler können gespeicherte Tracks zur Überwachung ihres Trainings verwenden. Einige Basisauswertungen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, usw.. Die Aufzeichnungen können natürlich auch mit speziellen Analyse-Tools von Drittanbietern nachbearbeitet werden.</string>
     <string name="route_descr_destination">Ziel</string>
-    <string name="local_index_description">Um Einzelheiten zu einem Eintrag zu sehen, auf einen beliebigen Eintrag drücken. Um ihn zu deaktivieren oder zu löschen, lang drücken. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
+    <string name="local_index_description">Um Einzelheiten zu einem Eintrag zu sehen, auf einen beliebigen Eintrag drücken. Um ihn zu deaktivieren oder zu löschen, lang drücken. Derzeit auf dem Gerät vorhandene Daten (%1$s frei):</string>
 	<string name="text_size_descr">Karten-Schriftgröße festlegen.</string>
     <string name="text_size">Schriftgröße</string>
     <string name="fav_point_dublicate">Doppelung beim Favoritennamen</string>
@@ -2205,10 +2205,10 @@ Lon %2$s</string>
     <string name="shared_string_widgets">Steuerelemente</string>
     <string name="download_files_error_not_enough_space">Nicht genug Speicher!
 Es werden vorübergehend {3} MB und dauerhaft {1} MB Speicherplatz benötigt.
-Aktuell sind nur {2} MB verfügbar.</string>
+Derzeit sind nur {2} MB verfügbar.</string>
     <string name="download_files_question_space_with_temp">{0} Datei(en) herunterladen?
  Es werden vorübergehend {3} MB und dauerhaft {1} MB Speicherplatz benötigt.
- (Aktuell sind {2} MB verfügbar.)</string>
+ (Derzeit sind {2} MB verfügbar.)</string>
     <string name="select_map_marker">Kartenmarkierung auswählen</string>
     <string name="map_markers_other">Andere Markierungen</string>
     <string name="upload_osm_note_description">Sie können Ihre OSM-Notizen anonym hochladen oder Ihr OpenStreetMap.org-Profil nutzen.</string>

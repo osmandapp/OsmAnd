@@ -231,24 +231,29 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				if (item instanceof MapMarker) {
 					MapMarker marker = (MapMarker) item;
 					if (!marker.history) {
-						WptPt wptPt = marker.wptPt;
-						FavouritePoint favouritePoint = marker.favouritePoint;
-						Object objectToShow;
-						PointDescription pointDescription;
-						if (wptPt != null) {
-							pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, wptPt.name);
-							objectToShow = wptPt;
-						} else if (favouritePoint != null) {
-							pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, favouritePoint.getName());
-							objectToShow = favouritePoint;
+						if (mapActivity.getMyApplication().getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
+							mapActivity.getMyApplication().getMapMarkersHelper().moveMarkerToTop(marker);
+							updateAdapter();
 						} else {
-							pointDescription = marker.getPointDescription(mapActivity);
-							objectToShow = marker;
+							WptPt wptPt = marker.wptPt;
+							FavouritePoint favouritePoint = marker.favouritePoint;
+							Object objectToShow;
+							PointDescription pointDescription;
+							if (wptPt != null) {
+								pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, wptPt.name);
+								objectToShow = wptPt;
+							} else if (favouritePoint != null) {
+								pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, favouritePoint.getName());
+								objectToShow = favouritePoint;
+							} else {
+								pointDescription = marker.getPointDescription(mapActivity);
+								objectToShow = marker;
+							}
+							mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
+									15, pointDescription, true, objectToShow);
+							MapActivity.launchMapActivityMoveToTop(mapActivity);
+							((DialogFragment) getParentFragment()).dismiss();
 						}
-						mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
-								15, pointDescription, true, objectToShow);
-						MapActivity.launchMapActivityMoveToTop(mapActivity);
-						((DialogFragment) getParentFragment()).dismiss();
 					} else {
 						HistoryMarkerMenuBottomSheetDialogFragment fragment = new HistoryMarkerMenuBottomSheetDialogFragment();
 						fragment.setUsedOnMap(false);

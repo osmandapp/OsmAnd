@@ -81,7 +81,7 @@
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Равнинный</string>
     <string name="routing_attr_driving_style_speed_name">Короткие маршруты</string>
     <string name="routing_attr_driving_style_balance_name">Сбалансированный</string>
-    <string name="routing_attr_driving_style_safety_name">Предпочитать переулком</string>
+    <string name="routing_attr_driving_style_safety_name">Предпочитать переулки</string>
     <string name="relief_smoothness_factor_descr">Предпочтительный рельеф: равнинный или холмистый.</string>
     <string name="shared_string_slope">Уклон</string>
     <string name="add_new_folder">Добавить новую папку</string>
@@ -2780,4 +2780,11 @@
     <string name="by_date">По дате</string>
     <string name="by_type">По типу</string>
     <string name="modify_the_search_query">Изменить поисковый запрос.</string>
+    <string name="release_3_0">• Обнаружение стоп-сигналов теперь учитывает направление движения
+\n
+\n• Новый алгоритм, предоставляющий действительные значения подъема/спуска для треков GPX
+\n
+\n• Время ходьбы в зависимости от местности (подъема) (правило Нейсмита)
+\n
+\n</string>
     </resources>

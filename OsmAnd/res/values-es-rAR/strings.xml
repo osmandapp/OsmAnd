@@ -1105,13 +1105,13 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="offline_edition_descr">Usa siempre edición sin conexión.</string>
     <string name="update_poi_does_not_change_indexes">Los cambios de PDI dentro de la aplicación, no afectan a los archivos del mapa descargados. Estos se guardan en un archivo local.</string>
     <string name="local_openstreetmap_uploading">Subiendo…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} PDI/Notas subidos</string>
+    <string name="local_openstreetmap_were_uploaded">{0} PDI/Notas de OSM subidos</string>
     <string name="local_openstreetmap_uploadall">Enviar todos</string>
     <string name="local_openstreetmap_upload">Enviar cambio a OSM</string>
     <string name="local_openstreetmap_delete">Quitar modificación</string>
     <string name="local_openstreetmap_descr_title">Edición asíncrona OSM:</string>
-    <string name="local_openstreetmap_settings">PDI/Notas guardados localmente</string>
-    <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDI/notas guardadas en la base de datos local.</string>
+    <string name="local_openstreetmap_settings">PDI/Notas de OSM guardados localmente</string>
+    <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDI/notas de OSM guardadas en la base de datos local.</string>
     <string name="live_monitoring_interval_descr">Indica el intervalo de registro en vivo.</string>
     <string name="live_monitoring_interval">Intervalo de registro en vivo</string>
     <string name="live_monitoring_url_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -1174,7 +1174,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="pref_overlay">Superpuesta / subyacente</string>
     <string name="pref_raster_map">Ajustes de fuente del mapa</string>
     <string name="pref_vector_map">Ajustes del mapa vectorial</string>
-    <string name="delete_confirmation_msg">Borrarás %1$s. ¿Continuar?</string>
+    <string name="delete_confirmation_msg">Borrarás «%1$s». ¿Continuar?</string>
     <string name="city_type_suburb">Suburbio</string>
     <string name="city_type_hamlet">Aldea</string>
     <string name="city_type_village">Villa</string>

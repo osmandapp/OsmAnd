@@ -68,7 +68,6 @@
     <string name="rename_marker">Rename marker</string>
     <string name="tap_on_map_to_hide_interface_descr">A tap on the map toggles the control buttons and widgets.</string>
     <string name="tap_on_map_to_hide_interface">Full screen mode</string>
-    <string name="show_on_top_bar">Show on Top Bar</string>
     <string name="mark_passed">Mark passed</string>
     <string name="import_gpx_file_description">can be imported as Favorites points, or as track file.</string>
     <string name="import_as_gpx">Import as GPX file</string>

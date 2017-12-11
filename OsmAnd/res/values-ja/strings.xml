@@ -678,7 +678,7 @@ POIの更新は利用できません</string>
     <string name="please_select_address">最初に都市か通りを選択してください</string>
     <string name="search_street_in_neighborhood_cities">近くの都市の通りを探す</string>
     <string name="intermediate_items_sort_return">現在地から目的地へのルート最適化のために経由地点の順序が変更されました。</string>
-    <string name="intermediate_items_sort_by_distance">ルートを最適化して並び替える</string>
+    <string name="intermediate_items_sort_by_distance">ルートを最適化して並び替え</string>
     <string name="local_osm_changes_backup_successful">OSMの変更ファイルが正常に生成されました %1$s</string>
     <string name="local_osm_changes_backup_failed">OSMの変更のバックアップに失敗しました</string>
     <string name="local_osm_changes_backup">OSMの変更としてバックアップ</string>
@@ -1014,7 +1014,7 @@ POIの更新は利用できません</string>
 	<string name="support_new_features">新機能をサポート</string>
 	<string name="support_new_features_descr">アプリケーションに実装された新機能を見てから寄付します</string>
 	<string name="show_ruler_level">尺度を表示</string>	
-	<string name="info_button">概要</string>
+	<string name="info_button">補足情報</string>
 	<string name="back_to_location">現在位置に戻す</string>
 	<string name="shared_string_help">ヘルプ</string>
 	
@@ -1821,7 +1821,7 @@ POIの更新は利用できません</string>
 	<string name="your_edits">あなたの編集</string>
     <string name="waypoint_visit_after">後で立ち寄る</string>
     <string name="waypoint_visit_before">先に立ち寄る</string>
-    <string name="simulate_your_location">移動シミュレーション</string>
+    <string name="simulate_your_location">仮想GPSでナビのシミュレート</string>
     <string name="drawer">フラットリスト</string>
     <string name="short_location_on_map">緯度 %1$s\n経度 %2$s</string>
     <string name="tips_and_tricks_descr">よくある質問(FAQ)</string>
@@ -2272,7 +2272,7 @@ POIの更新は利用できません</string>
     <string name="download_files_question_space_with_temp">{0}個のファイルをダウンロードしますか？
  一時的に {3}MB 保存のために {1}MB が必要です。
  (現在利用可能なのは {2}MBです)</string>
-    <string name="upload_osm_note_description">OSMメモのアップロードには匿名、または貴方自身のOpenStreetMap.orgプロファイルを使用することも可能です。</string>
+    <string name="upload_osm_note_description">OSMメモのアップロードには、匿名またはあなたのOpenStreetMap.orgプロファイルを使用することが可能です。</string>
     <string name="upload_osm_note">OSMメモをアップロード</string>
     <string name="map_marker_1st">1番目のマップマーカー</string>
     <string name="map_marker_2nd">2番目のマップマーカー</string>
@@ -2482,7 +2482,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_pause">一時停止</string>
     <string name="rendering_attr_contourColorScheme_description">等高線の配色</string>
     <string name="christmas_poi">クリスマスPOI</string>
-    <string name="christmas_desc">クリスマスと新年などに配されるであろう、クリスマスツリーや特別な市場などのPOIを表示することができます。</string>
+    <string name="christmas_desc">クリスマスや年越しなどの祝祭日に配されるであろう、クリスマスツリーや特別な市場などのPOIを表示することができます。</string>
     <string name="christmas_desc_q">クリスマスPOIを表示しますか？</string>
     <string name="rendering_value_light_brown_name">ライトブラウン</string>
     <string name="rendering_value_dark_brown_name">ダークブラウン</string>
@@ -2974,7 +2974,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="add_location_as_first_point_descr">現在地を最初の地点として追加することでより完璧なルートプランが立てられます。</string>
     <string name="my_location">現在地</string>
     <string name="shared_string_finish">完了</string>
-    <string name="plan_route">ルートプラン</string>
+    <string name="plan_route">ルートプランの設定</string>
     <string name="shared_string_sort">並べ替え</string>
     <string name="coordinate_input">座標入力</string>
     <string name="is_saved">は、保存されました</string>
@@ -2988,7 +2988,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="descendingly">降順</string>
     <string name="ascendingly">昇順</string>
     <string name="date_added">作成日時</string>
-    <string name="order_by">並び順:</string>
+    <string name="order_by">並び順の変更</string>
     <string name="marker_show_distance_descr">マップ画面でマーカーへの方向と距離を示す方法を選択します:</string>
     <string name="do_not_use_animations">アニメーションを使用しない</string>
     <string name="do_not_use_animations_descr">アプリ内で使用される画面のアニメ効果を無効化します</string>
@@ -3004,7 +3004,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="yesterday">昨日</string>
     <string name="last_seven_days">直近の7日間</string>
     <string name="this_year">今年</string>
-    <string name="move_all_to_history">全て履歴に移動します</string>
+    <string name="move_all_to_history">全て履歴に移動</string>
     <string name="show_direction">距離表示</string>
     <string name="sort_by">並び順:</string>
     <string name="keep_showing_on_map">マップ上に表示し続ける</string>
@@ -3031,7 +3031,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="enter_gpx_name">GPXファイル名:</string>
     <string name="show_on_map_after_saving">保存後マップ上に表示</string>
     <string name="measurement_tool_action_bar">マップを閲覧してポイントを追加</string>
-    <string name="measurement_tool">距離を測定</string>
+    <string name="measurement_tool">距離測定</string>
     <string name="quick_action_resume_pause_navigation">ナビゲーションの再開/一時停止</string>
     <string name="quick_action_resume_pause_navigation_descr">このボタンをタップすることでナビゲーションを一時停止または再開できます。</string>
     <string name="quick_action_show_navigation_finish_dialog">ナビゲーション終了の確認ダイアログを表示</string>
@@ -3061,20 +3061,38 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="max_min">最大/最小</string>
     <string name="min_max">最小/最大</string>
     <string name="looking_for_tracks_with_waypoints">経由地点のある経路を探す</string>
-    <string name="shared_string_more_without_dots">もっと見る</string>
-    <string name="appearance_on_the_map">マップの外観</string>
-    <string name="add_track_to_markers_descr">マーカーに経由地点を追加する経路を選択します。(経由地点を含む経路のみリストアップされます)</string>
-    <string name="add_favourites_group_to_markers_descr">マーカーに追加するお気に入りのカテゴリを選択します。</string>
+    <string name="shared_string_more_without_dots">その他</string>
+    <string name="appearance_on_the_map">マップ画面での表示設定</string>
+    <string name="add_track_to_markers_descr">マーカーとして追加する経由地点を経路データから選択してください。(経由地点を含む経路のみリストアップされます)</string>
+    <string name="add_favourites_group_to_markers_descr">マーカーとして追加するお気に入りのカテゴリを選択してください。</string>
     <string name="show_on_top_bar">画面上部のバーに表示</string>
-    <string name="add_group_descr">お気に入りや経路内の経由地点をグループでインポートできます。</string>
+    <string name="add_group_descr">お気に入り地点や経路データ内の経由地点をまとめてインポートできます。</string>
     <string name="empty_state_markers_groups">グループでインポート</string>
-    <string name="empty_state_markers_groups_desc">お気に入りや経路内の経由地点をマーカーとしてグループで追加できます。</string>
+    <string name="empty_state_markers_groups_desc">お気に入り地点や経路データ内の経由地点をマーカーとしてまとめて追加できます。</string>
     <string name="shared_string_two">二つ</string>
     <string name="shared_string_one">一つ</string>
     <string name="show_guide_line_descr">現在地からアクティブマーカーへの方向を示す案内線を表示させます。</string>
     <string name="show_arrows_descr">画面上にアクティブマーカーの方向を示す矢印を、一つあるいは二つ表示させます。</string>
-    <string name="distance_indication_descr">アクティブマーカーまでの距離を示す案内をどこに表示するか選択してください。</string>
-    <string name="active_markers_descr">マーカーの方向と距離を示す案内をいくつ表示させるか選択してください。</string>
-    <string name="favourites_group">お気に入りカテゴリ</string>
+    <string name="distance_indication_descr">アクティブマーカーまでの距離を示す情報をどこに表示するか選択してください。</string>
+    <string name="active_markers_descr">マーカーの方向と距離に関する情報の表示数を選択してください。</string>
+    <string name="favourites_group">お気に入り地点のカテゴリ</string>
     <string name="empty_state_markers_active_desc">任意の場所をロングまたはショートタップで指定後、旗のボタンでマーカーを作成します。</string>
+    <string name="track_waypoints">経路データ内の経由地点</string>
+    <string name="show_passed">通過済みも表示</string>
+    <string name="hide_passed">通過済みは非表示</string>
+    <string name="import_track_desc">ファイル %1$s は経由地点を含んでいません、それでも経路としてインポートしますか？</string>
+    <string name="marker_activated">マーカー[%s]がアクティブ化されました。</string>
+    <string name="one_tap_active_descr">コンテキストメニューを開かずにマップ上のマーカーをタップするだけで1番目のマーカーとしてアクティブ化させます。</string>
+    <string name="one_tap_active">ワンタップアクティブ</string>
+    <string name="empty_state_av_notes">場所に関するメモをつけよう！</string>
+    <string name="empty_state_av_notes_desc">ウィジェットやコンテキストメニューから、音声、動画、写真を使った注釈をマップ上のどの場所にでもつけることができます。</string>
+    <string name="by_date">日付別</string>
+    <string name="by_type">種類別</string>
+    <string name="digits_quantity">小数点以下の桁数</string>
+    <string name="coordinate_input_accuracy_description">小数点(.)以下 %1$d桁入力されたら次の入力項目へ自動的に移動します。</string>
+    <string name="go_to_next_field">次の入力項目へ移動</string>
+    <string name="tap_on_map_to_hide_interface_descr">マップ画面のタップで操作ボタンやウィジェットの表示と交互に切り替えます。</string>
+    <string name="tap_on_map_to_hide_interface">フルスクリーンモード</string>
+    <string name="live_monitoring_max_interval_to_send">オンライン追跡用のバッファ指定</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">送信用現在地データをネット接続せずにどのくらいの時間記録するか、バッファを指定します</string>
     </resources>
