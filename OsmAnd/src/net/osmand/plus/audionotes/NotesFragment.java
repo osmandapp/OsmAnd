@@ -137,6 +137,14 @@ public class NotesFragment extends OsmAndListFragment {
 	}
 
 	@Override
+	public void onPause() {
+		super.onPause();
+		if (actionMode != null) {
+			actionMode.finish();
+		}
+	}
+
+	@Override
 	public ArrayAdapter<?> getAdapter() {
 		return listAdapter;
 	}
