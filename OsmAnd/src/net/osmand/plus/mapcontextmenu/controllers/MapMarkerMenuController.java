@@ -50,7 +50,7 @@ public class MapMarkerMenuController extends MenuController {
 				getMapActivity().getContextMenu().close();
 			}
 		};
-		rightTitleButtonController.caption = getMapActivity().getString(R.string.show_on_top_bar);
+		rightTitleButtonController.caption = getMapActivity().getString(R.string.make_active);
 		rightTitleButtonController.leftIcon = createShowOnTopbarIcon();
 	}
 
