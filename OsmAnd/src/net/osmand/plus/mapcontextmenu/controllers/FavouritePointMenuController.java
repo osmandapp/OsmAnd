@@ -87,7 +87,7 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public Drawable getSecondLineTypeIcon() {
-		return getIcon(R.drawable.map_small_group);
+		return getIcon(R.drawable.ic_action_group_name_16);
 	}
 
 	@Override

@@ -78,7 +78,7 @@ public class WptPtMenuController extends MenuController {
 		if (Algorithms.isEmpty(getTypeStr())) {
 			return null;
 		} else {
-			return getIcon(R.drawable.map_small_group);
+			return getIcon(R.drawable.ic_action_group_name_16);
 		}
 	}
 
