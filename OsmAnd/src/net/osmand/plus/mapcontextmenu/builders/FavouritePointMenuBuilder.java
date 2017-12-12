@@ -79,7 +79,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 			color = favoriteGroup.visible ? (color | 0xff000000) : view.getResources().getColor(disabledColor);
 			String name = view.getContext().getString(R.string.context_menu_points_of_group);
 			buildRow(view, app.getIconsCache().getPaintedIcon(R.drawable.ic_action_folder, color), name, 0,
-					true, getCollapsableFavouritesView(view.getContext(), true, groupFavourites, fav),
+					true, getCollapsableFavouritesView(view.getContext(), true, favoriteGroup, fav),
 					false, 0, false, null);
 		}
 	}

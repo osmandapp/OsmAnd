@@ -31,7 +31,9 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -43,6 +45,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
@@ -681,18 +684,17 @@ public class MenuBuilder {
 		return new CollapsableView(textView, collapsed);
 	}
 
-	protected CollapsableView getCollapsableFavouritesView(Context context, boolean collapsed, List<FavouritePoint> points, FavouritePoint selectedPoint) {
+	protected CollapsableView getCollapsableFavouritesView(final Context context, boolean collapsed, @NonNull final FavoriteGroup group, FavouritePoint selectedPoint) {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed);
 
-		for (final FavouritePoint point : points) {
+		List<FavouritePoint> points = group.points;
+		for (int i = 0; i < points.size() && i < 10; i++) {
+			final FavouritePoint point = points.get(i);
 			boolean selected = selectedPoint != null && selectedPoint.equals(point);
 			TextViewEx button = buildButtonInCollapsableView(context, selected);
 			String name = point.getName();
 			button.setText(name);
 
-			button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-			button.setSingleLine(true);
-			button.setEllipsize(TextUtils.TruncateAt.END);
 			if (!selected) {
 				button.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -703,6 +705,23 @@ public class MenuBuilder {
 					}
 				});
 			}
+			view.addView(button);
+		}
+
+		if (points.size() > 10) {
+			TextViewEx button = buildButtonInCollapsableView(context, false);
+			button.setText(context.getString(R.string.shared_string_show_all));
+			button.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					OsmAndAppCustomization appCustomization = app.getAppCustomization();
+					final Intent intent = new Intent(context, appCustomization.getFavoritesActivity());
+					intent.putExtra(FavoritesActivity.OPEN_FAVOURITES_TAB, true);
+					intent.putExtra(FavoritesActivity.GROUP_NAME_TO_SHOW, group.name);
+					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					context.startActivity(intent);
+				}
+			});
 			view.addView(button);
 		}
 
@@ -717,9 +736,6 @@ public class MenuBuilder {
 			String name = wiki.getName(preferredMapAppLang, transliterateNames);
 			button.setText(name);
 
-			button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-			button.setSingleLine(true);
-			button.setEllipsize(TextUtils.TruncateAt.END);
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -771,6 +787,9 @@ public class MenuBuilder {
 		int paddingSides = (int) context.getResources().getDimension(R.dimen.context_menu_button_padding_x);
 		button.setPadding(paddingSides, 0, paddingSides, 0);
 		button.setTextColor(buttonColorStateList);
+		button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+		button.setSingleLine(true);
+		button.setEllipsize(TextUtils.TruncateAt.END);
 
 		return button;
 	}
