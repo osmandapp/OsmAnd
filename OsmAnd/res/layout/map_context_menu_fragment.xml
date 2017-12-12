@@ -417,7 +417,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/context_menu_padding_margin_small"
+                    android:paddingTop="@dimen/context_menu_main_actions_padding_top"
                     android:paddingBottom="@dimen/context_menu_padding_margin_small">
 
                     <ImageView
@@ -449,7 +449,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/context_menu_padding_margin_small"
+                    android:paddingTop="@dimen/context_menu_main_actions_padding_top"
                     android:paddingBottom="@dimen/context_menu_padding_margin_small">
 
                     <ImageView
@@ -482,7 +482,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/context_menu_padding_margin_small"
+                    android:paddingTop="@dimen/context_menu_main_actions_padding_top"
                     android:paddingBottom="@dimen/context_menu_padding_margin_small">
 
                     <ImageView
