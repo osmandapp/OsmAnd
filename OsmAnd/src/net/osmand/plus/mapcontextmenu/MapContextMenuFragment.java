@@ -1120,7 +1120,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			TextView openingHoursTextView = (TextView) view.findViewById(R.id.opening_hours_text_view);
 			OpeningHoursInfo openingHoursInfo = menu.getOpeningHoursInfo();
 			if (openingHoursInfo != null && openingHoursInfo.containsInfo()) {
-				openingHoursTextView.setTextColor(ContextCompat.getColor(getContext(), openingHoursInfo.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color));
+				int color = ContextCompat.getColor(getContext(), openingHoursInfo.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color);
+				openingHoursTextView.setTextColor(color);
 				String openingHoursStr = "";
 				if (openingHoursInfo.isOpened24_7()) {
 					openingHoursStr = getString(R.string.shared_string_is_open_24_7);
@@ -1135,6 +1136,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				} else if (!Algorithms.isEmpty(openingHoursInfo.getOpeningDay())) {
 					openingHoursStr = getString(R.string.will_be_opened_on) + " " + openingHoursInfo.getOpeningDay() + ".";
 				}
+				Drawable drawable = getPaintedContentIcon(R.drawable.ic_action_opening_hour_16, color);
+				openingHoursTextView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+				openingHoursTextView.setCompoundDrawablePadding(dpToPx(8));
 				openingHoursTextView.setText(openingHoursStr);
 				openingHoursTextView.setVisibility(View.VISIBLE);
 			} else {
