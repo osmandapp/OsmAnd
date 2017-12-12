@@ -372,7 +372,7 @@
                 android:paddingRight="@dimen/context_menu_padding_margin_small"
                 android:id="@+id/context_menu_buttons"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/context_menu_actions_buttons_height"
+                android:layout_height="@dimen/context_menu_action_buttons_height"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -384,7 +384,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/context_menu_padding_margin_small"
+                    android:paddingTop="@dimen/context_menu_main_actions_padding_top"
                     android:paddingBottom="@dimen/context_menu_padding_margin_small">
 
                     <ImageView
