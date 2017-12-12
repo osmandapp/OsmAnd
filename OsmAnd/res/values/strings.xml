@@ -58,7 +58,7 @@
     <string name="coordinate_input_accuracy">%1$d digits</string>
     <string name="go_to_next_field">Go to next field</string>
     <string name="rename_marker">Rename marker</string>
-    <string name="tap_on_map_to_hide_interface_descr">A tap on the map toggles the control buttons and widgets.</string>
+    <string name="tap_on_map_to_hide_interface_descr">A tap on the map hide the control buttons and widgets.</string>
     <string name="tap_on_map_to_hide_interface">Full screen mode</string>
     <string name="mark_passed">Mark passed</string>
     <string name="import_gpx_file_description">can be imported as Favorites points, or as track file.</string>
