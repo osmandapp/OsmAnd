@@ -1157,23 +1157,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				updateDistanceDirection();
 				compassView.setVisibility(View.VISIBLE);
 			} else {
-				compassView.setVisibility(View.GONE);
-			}
-			updateCompassBulletVisibility();
-		}
-	}
-
-	private void updateCompassBulletVisibility() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && view != null) {
-			View bulletView = view.findViewById(R.id.compass_layout_bullet);
-			Location ll = app.getLocationProvider().getLastKnownLocation();
-			OpeningHoursInfo openingHoursInfo = menu.getOpeningHoursInfo();
-			if (ll != null && menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN
-					&& openingHoursInfo != null && openingHoursInfo.containsInfo()) {
-				bulletView.setVisibility(View.VISIBLE);
-			} else {
-				bulletView.setVisibility(View.GONE);
+				compassView.setVisibility(View.INVISIBLE);
 			}
 		}
 	}

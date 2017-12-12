@@ -94,18 +94,12 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_marginRight="@dimen/context_menu_padding_margin_small"
+                    android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
                     tools:text="Closed till 10:00"
                     android:id="@+id/opening_hours_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:id="@+id/compass_layout_bullet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/context_menu_padding_margin_default"
-                    android:paddingRight="@dimen/context_menu_padding_margin_default"
-                    android:text="•"/>
 
                 <LinearLayout
                     android:id="@+id/compass_layout"
