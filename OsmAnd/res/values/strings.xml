@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="context_menu_points_of_group">All points of group</string>
     <string name="opened_from">Opened from</string>
     <string name="opened_till">Opened till</string>
     <string name="will_be_closed_at">Will be closed at</string>
