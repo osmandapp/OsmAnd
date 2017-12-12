@@ -23,7 +23,7 @@
     <string name="intermediate_point_too_far">Ara hedef %1$s çok uzak en yakın yol var.</string>
     <string name="arrived_at_intermediate_point">Ara hedefine ulaştın</string>
     <string name="context_menu_item_intermediate_point">Ara hedef olarak eklemek</string>
-    <string name="map_widget_intermediate_distance">Ara hedef</string>
+    <string name="map_widget_intermediate_distance">Seyahatte ara hedef</string>
     <string name="ending_point_too_far">Bitiş noktası en yakın yoldan çok uzakta.</string>
     <string name="add_tag">Etiket Ekle</string>
     <string name="btn_advanced_mode">Gelişmiş Kip…</string>
@@ -205,7 +205,7 @@
 	<string name="map_widget_fluorescent">Floresan rotalar</string>
 	<string name="map_widget_show_ruler">Cetvel</string>
 	
-	<string name="map_widget_transparent">Şeffaf widget</string>
+	<string name="map_widget_transparent">Şeffaf widget\'lar</string>
 	
 	<string name="gps_wakeup_interval">GPS uyandırma aralığı:%1$s</string>
 	<string name="map_widget_config">Ekranı ayarla</string>
@@ -498,7 +498,7 @@
 	<string name="navpoint_search_desc">Koordinatlar</string>
 	<string name="transport_search_desc">Toplu taşıma arama</string>
 	<string name="offline_navigation_not_available">OsmAnd çevrim dışı yolbul geçici olarak kullanılamıyor.</string>
-	<string name="left_side_navigation">Sol sürüş</string>
+	<string name="left_side_navigation">Soldan-direksiyonlu araç sürüşü</string>
 	<string name="left_side_navigation_descr">Sol taraftan akan trafiğe sahip ülkeler için seçin</string>
 	
 	<string name="modify_transparency">"Şeffaflık değiştir(0 -Şeffaf,255-opak) "</string>
@@ -795,7 +795,7 @@
     <string name="local_openstreetmap_act_title">OSM değişiklikleri</string>
     <string name="shared_string_more_actions">Diğer komutlar</string>
     <string name="local_indexes_cat_srtm">Kontür çizgileri</string>
-    <string name="announce_gpx_waypoints">GPX waypoints</string>
+    <string name="announce_gpx_waypoints">GPX uğranacak-ara-noktaları</string>
     <string name="about_version">Sürüm :</string>
     <string name="shared_string_about">Hakkında</string>
     <string name="about_settings_descr">Sürüm bilgisi, lisanslar, proje üyeleri</string>
@@ -1043,7 +1043,7 @@
 	
 	<string name="routing_attr_avoid_toll_name">Paralı yollardan sakın</string>
 	<string name="routing_attr_avoid_toll_description">Paralı yollardan kaçın</string>
-	<string name="routing_attr_avoid_unpaved_name">Asfaltsız yollardan kaçın</string>
+	<string name="routing_attr_avoid_unpaved_name">Asfaltsız yollardan sakın</string>
 	<string name="routing_attr_avoid_unpaved_description">Asfaltsız yollardan kaçın</string>
 	<string name="routing_attr_avoid_ferries_name">Feribotlardan sakın</string>
 	<string name="routing_attr_avoid_ferries_description">Feribotlardan kaçın</string>
@@ -1070,7 +1070,7 @@
     <string name="app_modes_choose_descr"/>
     <string name="app_modes_choose">Uygulama Profilleri</string>
 	<string name="map_widget_map_rendering">Harita oluşturma</string>
-    <string name="app_mode_hiking">yürüyüş</string>
+    <string name="app_mode_hiking">Yürüyüş</string>
     <string name="app_mode_motorcycle">Motosikletler</string>
     <string name="app_mode_boat">Tekne</string>
     <string name="app_mode_aircraft">Uçak</string>
@@ -1611,7 +1611,7 @@
 	<string name="context_menu_item_add_waypoint">GPX yol noktası ekle</string>
 	<string name="amenity_type_geocache">Geocache</string>
 	<string name="amenity_type_leisure">Boş</string>
-	<string name="gpx_option_from_start_point">Tüm pist boyunca geçmek</string>
+	<string name="gpx_option_from_start_point">Tüm yol-izi boyunca geç</string>
 	<string name="layer_underlay">Underlay haritası …</string>
 	<string name="select_tile_source_to_install">Seç (kiremit) yüklemek veya güncellemek haritalar</string>
 	<string name="create_poi_link_to_osm_doc">&lt;u&gt; Online OSM &lt;/ u&gt; görüntüleri ile harita sınıflandırma<u>Online OSM</u> map classification with images</string>
@@ -1646,7 +1646,7 @@
 	<string name="interrupt_music">Müziği duraklat</string>
 	
 	<string name="download_wikipedia_maps">Wikipedia</string>
-    <string name="use_displayed_track_for_navigation">Navigasyon için görüntülenen parçayı kullanmak istiyor musunuz?</string>
+    <string name="use_displayed_track_for_navigation">Görüntülenen yol-izini navigasyon için kullanmak istiyor musunuz?</string>
     <string name="keep_and_add_destination_point">Son varış noktası olarak ekle</string>
     <string name="select_gpx">GPX Seçiniz …</string>
     <string name="route_descr_select_destination">Varış Noktası seç</string>
@@ -1703,8 +1703,8 @@
     <string name="index_name_canada">Kuzey Amerika - Kanada</string>
     <string name="index_name_italy">Avrupa - İtalya</string>
     <string name="index_name_gb">Avrupa - İngiltere</string>
-    <string name="calculate_osmand_route_without_internet">İnternet olmadan Osmand rota bölümünü hesaplayın</string>
-    <string name="gpx_option_calculate_first_last_segment">Ilk ve son rota bölümü için Osmand rotayı hesaplamak</string>
+    <string name="calculate_osmand_route_without_internet">İnternet olmadan OsmAnd rota bölümünü hesaplayın</string>
+    <string name="gpx_option_calculate_first_last_segment">Rotanın ilk ve son bölümleri için OsmAnd rotası hesapla</string>
     <string name="index_item_world_bitcoin_payments">Ödemeler Bitcoin Dünya</string>
     <string name="index_item_world_basemap">Dünya genel bakış haritası</string>
     <string name="index_item_world_ski">Dünya kayak haritası</string>
@@ -1896,7 +1896,7 @@
     <string name="proxy_pref_title">Vekil sunucu</string>
     <string name="proxy_pref_descr">Vekil sunucu internet iletişimi kurun</string>
     <string name="settings_privacy">Gizlilik</string>
-    <string name="navigation_over_track">İz boyunca navigasyon başlat?</string>
+    <string name="navigation_over_track">Yol-izi boyunca navigasyon başlat?</string>
     <string name="avoid_roads_msg">Kaçınılacak yolları seçerek bir başka güzergah başlatabilirsin</string>
     <string name="speak_pedestrian">Yaya geçitleri</string>
     <string name="rendering_attr_roadStyle_description">Yol tarzı</string>
@@ -1953,7 +1953,7 @@
     <string name="fav_point_dublicate_message">Belirtilen favori isim zaten kullanımda , tekrarından kaçınmak için %1$s değiştirildi.</string>
     <string name="traffic_warning_border_control">Sınır kontrolü</string>
     <string name="traffic_warning_payment">Gişe</string>
-    <string name="traffic_warning_calming">Trafik Sakinleştirici</string>
+    <string name="traffic_warning_calming">Trafik-hızı-yavaşlatıcı-düzenek</string>
     <string name="sleep_mode_stop_dialog">GPS arka plan modunu durdur?</string>
     <string name="stop_navigation_service">Dur</string>
     <string name="save_global_track_interval_descr">(Haritada GPX günlüğü widget üzerinden etkin) kayıt genel pist için oturum aralığını seçin</string>
@@ -2218,7 +2218,7 @@
     <string name="show_from_zoom_level">Zum düzeyinden görüntüleme</string>
     <string name="routing_attr_allow_private_name">Özel-arazi erişimine izin ver</string>
     <string name="routing_attr_allow_private_description">Özel-arazi alanlarına erişime izin ver.</string>
-    <string name="display_zoom_level">Görüntü-yakınlaştırma düzeyini göster: %1$s</string>
+    <string name="display_zoom_level">Görüntü-yakınlaştırma düzeyi gösterimi: %1$s</string>
     <string name="favorite_group_name">Grup ismi</string>
     <string name="change_color">Renk değiştir</string>
     <string name="edit_name">Adı düzenle</string>
@@ -2316,7 +2316,7 @@
     <string name="by_type">Tipe göre</string>
     <string name="shared_string_more_without_dots">Daha fazla</string>
     <string name="appearance_on_the_map">Harita üzerinde görünüş</string>
-    <string name="track_waypoints"></string>
+    <string name="track_waypoints"/>
     <string name="favourites_group">Favoriler kategorisi</string>
     <string name="add_group">Grup ekle</string>
     <string name="add_group_descr">Grupları, favorilerden veya işaretleri takip etden alabilirsiniz.</string>
@@ -2582,4 +2582,5 @@
 \n
 \n ve fazlası…</string>
     <string name="lang_es_us">İspanyolca (Amerikan)</string>
+    <string name="moving_time">Hareket Zamanı</string>
     </resources>
