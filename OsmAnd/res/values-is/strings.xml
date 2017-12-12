@@ -2422,4 +2422,32 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="quick_action_sh_poi_descr">Þú getur bætt við einum eða fleiri flokkum merkisstaða til að birta á kortinu.</string>
     <string name="quick_action_page_list_descr">Bank á aðgerðahnappinn mun fletta í gegnum listann hér fyrir neðan.</string>
     <string name="empty_state_my_tracks_desc">Skrá eða flytja inn ferla til skoðunar.</string>
+    <string name="download_using_mobile_internet">Í augnablikinu er þráðlaust Wi-Fi net ekki tengt. Viltu nota núverandi internettengingu undir niðurhal?</string>
+    <string name="srtm_paid_version_msg">Íhugaðu að kaupa viðbótina fyrir hæðarlínur á markaðnum til að styðja við áframhaldandi þróun forritsins.</string>
+    <string name="recording_is_recorded">Verið er að taka upp hjóð/myndskeið. Til að stöðva hana, bankaðu á HM-viðmótshlutann.</string>
+    <string name="recording_playing">Verið er að spila hjóð úr tilgreindri upptöku.
+\n%1$s</string>
+    <string name="audionotes_location_not_defined">Staðsetning sem tengja á minnispunktinum er ekki ennþá skilgreind. \"Nota staðsetningu …\" til að úthluta minnispunkti á uppgefna staðsetningu.</string>
+    <string name="native_library_not_running">Forritið er keyrandi í öryggisham (gerðu hann óvirkan í stillingunum)</string>
+    <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner forritið er ekki uppsett. Leita á Google Play markaðnum?</string>
+    <string name="osmand_plus_extended_description_part8">Áætluð kortaþekja og gæði: • Vestur-Evrópa: **** • Austur-Evrópa: *** • Rússland: *** • Norður-Ameríka: *** • Suður-Ameríka: ** • Asía: ** • Japan &amp; Kórea: *** • Miðausturlönd: ** • Afríka: ** • Antarktíka: * Flest lönd í heiminum eru tiltæk sem niðurhalspakkar! Frá Afghanistan til Simbabve, frá Ástralíu til BNA. Argentína, Brasilía, Kanada, Frakkland, Þýskaland, Mexíkó, UK, Spánn, …</string>
+    <string name="rendering_attr_contourLines_description">Birta frá aðdráttarstigi (krefst hæðarlínugagna):</string>
+    <string name="live_monitoring_max_interval_to_send">Tímabiðminni fyrir rakningu með netstuðningi</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Skilgreindu tímabiðminni þar sem geymdar eru staðsetningar sem á að senda án tengingar</string>
+    <string name="map_version_changed_info">Þjónninn inniheldur kortaskrár sem ekki eru samhæfanlegar þinni útgáfu forritsins. Til að sækja þær og nota, ættirðu að uppfæra forritið í nýrri útgáfu.</string>
+    <string name="amenity_type_geocache">GPS-ratleikur (geocache)</string>
+    <string name="quick_action_add_marker_descr">Bank á aðgerðahnappinn mun bæta kortamerki á miðju skjásins.</string>
+    <string name="quick_action_add_gpx_descr">Bank á aðgerðahnappinn mun bæta GPX-ferilpunkti á miðju skjásins.</string>
+    <string name="quick_action_take_audio_note_descr">Bank á aðgerðahnappinn mun bæta hljóð-minnispunkti á miðju skjásins.</string>
+    <string name="quick_action_take_video_note_descr">Bank á aðgerðahnappinn mun bæta myndskeiðs-minnispunkti á miðju skjásins.</string>
+    <string name="quick_action_take_photo_note_descr">Bank á aðgerðahnappinn mun bæta ljósmyndar-minnispunkti á miðju skjásins.</string>
+    <string name="quick_action_add_osm_bug_descr">Bank á aðgerðahnappinn mun bæta OSM-minnispunkti á miðju skjásins.</string>
+    <string name="quick_action_add_poi_descr">Bank á aðgerðahnappinn mun bæta merkisstað á miðju skjásins.</string>
+    <string name="quick_action_navigation_voice_descr">Bank á aðgerðahnappinn mun gera raddleiðsögn virka eða óvirka á meðan leiðsögn stendur.</string>
+    <string name="quick_action_add_parking_descr">Bank á aðgerðahnappinn mun bæta staðsetningu bílastæðis á miðju skjásins.</string>
+    <string name="quick_action_duplicates">Nafnið á uppgefinni flýtiaðgerð er nú þegar í notkun, var breytt í %1$s til að koma í veg fyrir tvítekningu.</string>
+    <string name="quick_action_showhide_favorites_descr">Bank á aðgerðahnappinn mun birta eða fela eftirlætisstaði á kortinu.</string>
+    <string name="quick_action_showhide_poi_descr">Bank á aðgerðahnappinn mun birta eða fela merkisstaði á kortinu.</string>
+    <string name="quick_action_bug_descr">Þessi skilaboð verða sjálfkláruð í athuasemdareitnum.</string>
+    <string name="quick_action_btn_tutorial_descr">Bankaðu lengi og dragðu hnappinn til á skjánum til að breyta staðsetningu hans.</string>
     </resources>
