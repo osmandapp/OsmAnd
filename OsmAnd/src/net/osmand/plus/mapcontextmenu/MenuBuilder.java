@@ -681,18 +681,70 @@ public class MenuBuilder {
 		return new CollapsableView(textView, collapsed);
 	}
 
-	protected CollapsableView getCollapsableWikiView(Context context, boolean collapsed) {
-		return getCollapsableItemsView(context, collapsed, nearestWiki, null);
+	protected CollapsableView getCollapsableFavouritesView(Context context, boolean collapsed, List<FavouritePoint> points, FavouritePoint selectedPoint) {
+		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed);
+
+		for (final FavouritePoint point : points) {
+			boolean selected = selectedPoint != null && selectedPoint.equals(point);
+			TextViewEx button = buildButtonInCollapsableView(context, selected);
+			String name = point.getName();
+			button.setText(name);
+
+			button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+			button.setSingleLine(true);
+			button.setEllipsize(TextUtils.TruncateAt.END);
+			if (!selected) {
+				button.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName());
+						mapActivity.getContextMenu().show(latLon, pointDescription, point);
+					}
+				});
+			}
+			view.addView(button);
+		}
+
+		return new CollapsableView(view, collapsed);
 	}
 
-	protected CollapsableView getCollapsableItemsView(Context context, boolean collapsed, final List items, Object selectedObject) {
+	protected CollapsableView getCollapsableWikiView(Context context, boolean collapsed) {
+		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed);
+
+		for (final Amenity wiki : nearestWiki) {
+			TextViewEx button = buildButtonInCollapsableView(context, false);
+			String name = wiki.getName(preferredMapAppLang, transliterateNames);
+			button.setText(name);
+
+			button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+			button.setSingleLine(true);
+			button.setEllipsize(TextUtils.TruncateAt.END);
+			button.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					LatLon latLon = new LatLon(wiki.getLocation().getLatitude(), wiki.getLocation().getLongitude());
+					PointDescription pointDescription = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(wiki);
+					mapActivity.getContextMenu().show(latLon, pointDescription, wiki);
+				}
+			});
+			view.addView(button);
+		}
+
+		return new CollapsableView(view, collapsed);
+	}
+
+	protected LinearLayout buildCollapsableContentView(Context context, boolean collapsed) {
 		final LinearLayout view = new LinearLayout(context);
 		view.setOrientation(LinearLayout.VERTICAL);
 		view.setVisibility(collapsed ? View.GONE : View.VISIBLE);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llParams.setMargins(dpToPx(64f), 0, dpToPx(12f), 0);
 		view.setLayoutParams(llParams);
+		return view;
+	}
 
+	protected TextViewEx buildButtonInCollapsableView(Context context, boolean selected) {
 		ColorStateList buttonColorStateList = new ColorStateList(
 				new int[][] {
 						new int[]{android.R.attr.state_pressed},
@@ -703,60 +755,24 @@ public class MenuBuilder {
 						context.getResources().getColor(light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n)
 				}
 		);
-		for (final Object item : items) {
-			TextViewEx button = new TextViewEx(new ContextThemeWrapper(view.getContext(), light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
-			LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.context_menu_controller_height));
-			llWikiButtonParams.setMargins(0, 0, 0, dpToPx(8f));
-			button.setLayoutParams(llWikiButtonParams);
-			button.setTypeface(FontCache.getRobotoMedium(context));
 
-			boolean selected = selectedObject != null && selectedObject.equals(item);
-			int bg;
-			if (selected) {
-				bg = light ? R.drawable.context_menu_controller_bg_light_selected: R.drawable.context_menu_controller_bg_dark_selected;
-			} else {
-				bg = light ? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark;
-			}
-			button.setBackgroundResource(bg);
-			int paddingSides = (int) context.getResources().getDimension(R.dimen.context_menu_button_padding_x);
-			button.setPadding(paddingSides, 0, paddingSides, 0);
-			button.setTextColor(buttonColorStateList);
-			String name = "";
-			if (item instanceof Amenity) {
-				name = ((Amenity) item).getName(preferredMapAppLang, transliterateNames);
-			} else if (item instanceof FavouritePoint) {
-				name = ((FavouritePoint) item).getName();
-			}
-			button.setText(name);
-
-			button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-			button.setSingleLine(true);
-			button.setEllipsize(TextUtils.TruncateAt.END);
-			if (!selected) {
-				button.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						LatLon latLon = null;
-						PointDescription pointDescription = null;
-						if (item instanceof Amenity) {
-							Amenity amenity = (Amenity) item;
-							latLon = new LatLon(amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude());
-							pointDescription = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(amenity);
-						} else if (item instanceof FavouritePoint) {
-							FavouritePoint fav = (FavouritePoint) item;
-							latLon = new LatLon(fav.getLatitude(), fav.getLongitude());
-							pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, fav.getName());
-						}
-						if (latLon != null && pointDescription != null) {
-							mapActivity.getContextMenu().show(latLon, pointDescription, item);
-						}
-					}
-				});
-			}
-			view.addView(button);
+		TextViewEx button = new TextViewEx(new ContextThemeWrapper(context, light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
+		LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.context_menu_controller_height));
+		llWikiButtonParams.setMargins(0, 0, 0, dpToPx(8f));
+		button.setLayoutParams(llWikiButtonParams);
+		button.setTypeface(FontCache.getRobotoMedium(context));
+		int bg;
+		if (selected) {
+			bg = light ? R.drawable.context_menu_controller_bg_light_selected: R.drawable.context_menu_controller_bg_dark_selected;
+		} else {
+			bg = light ? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark;
 		}
+		button.setBackgroundResource(bg);
+		int paddingSides = (int) context.getResources().getDimension(R.dimen.context_menu_button_padding_x);
+		button.setPadding(paddingSides, 0, paddingSides, 0);
+		button.setTextColor(buttonColorStateList);
 
-		return new CollapsableView(view, collapsed);
+		return button;
 	}
 
 	protected boolean processNearstWiki() {
