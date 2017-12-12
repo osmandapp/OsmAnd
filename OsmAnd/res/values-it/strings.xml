@@ -2954,7 +2954,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="import_as_gpx">Importa come file GPX</string>
     <string name="import_as_favorites">Importa come Preferito</string>
     <string name="import_file">Importa file</string>
-	<string name="tap_on_map_to_hide_interface_descr">Un tap sulla mappa per visualizzare o meno i pulsanti di controllo e i widgets.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Un tap sulla mappa per nascondere i pulsanti di controllo e i widgets.</string>
     <string name="tap_on_map_to_hide_interface">Modalità a schermo intero</string>
     <string name="show_on_top_bar">Mostra nella barra superiore</string>
     <string name="mark_passed">Marcatore superato</string>
