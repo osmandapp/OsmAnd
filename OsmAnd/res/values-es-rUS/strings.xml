@@ -2826,7 +2826,7 @@ Proporciona un código completo</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
     <string name="import_as_favorites">Importar como favoritos</string>
     <string name="import_file">Importar archivo</string>
-	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna la vista de la interfaz y los controles.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa oculta los botones de la interfaz y los controles.</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     <string name="show_on_top_bar">Mostrar en la barra superior</string>
     <string name="mark_passed">Descartar marcador</string>
