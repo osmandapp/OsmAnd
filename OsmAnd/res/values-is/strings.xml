@@ -2415,4 +2415,11 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="empty_state_favourites_desc">Bæta við eftirlætum á korti eða flytja þau inn úr skrá.</string>
     <string name="import_track_desc">Skráin %1$s inniheldur enga ferilpunkta, á að flytja hana inn sem leið?</string>
     <string name="move_point">Færa punkt</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
+    <string name="add_points_to_map_markers_q">Viltu bæta öllum punktum í kortamerki?</string>
+    <string name="complex_route_calculation_failed">Hraður leiðarútreikningur mistókst (%s), nota til vara hægari útreikning.</string>
+    <string name="quick_action_fav_name_descr">Skildu þetta eftir autt til að nota heimilisfangið eða staðarheiti.</string>
+    <string name="quick_action_sh_poi_descr">Þú getur bætt við einum eða fleiri flokkum merkisstaða til að birta á kortinu.</string>
+    <string name="quick_action_page_list_descr">Bank á aðgerðahnappinn mun fletta í gegnum listann hér fyrir neðan.</string>
+    <string name="empty_state_my_tracks_desc">Skrá eða flytja inn ferla til skoðunar.</string>
     </resources>

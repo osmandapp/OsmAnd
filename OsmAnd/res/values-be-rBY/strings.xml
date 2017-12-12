@@ -2936,4 +2936,11 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="empty_state_av_notes">Rabi natatki!</string>
     <string name="empty_state_av_notes_desc">Dadajcie aŭdyjo-, videa- ci fotanatatku na lubuju kropku na mapie, vykarystoŭvajučy vidžet ci kantekstnaje mieniu.</string>
     <string name="modify_the_search_query">Źmianicie pošukavy zapyt.</string>
+    <string name="release_3_0">• Vyjaŭliennie stop-sihnalaŭ ciapier uličvaje napramak ruchu
+\n
+\n • Navy alharytm, što nadaje dziejsnyja značenni padjomu/spusku dlia GPX-sliadoŭ
+\n
+\n • Čas chadźby ŭ zaliežnasci ad miascovasci (padjomu) (pravila Niejsmita)
+\n
+\n</string>
     </resources>
