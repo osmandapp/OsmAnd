@@ -516,7 +516,7 @@ public class MenuBuilder {
 			iconViewCollapse.setLayoutParams(llIconCollapseParams);
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 			iconViewCollapse.setImageDrawable(app.getIconsCache().getIcon(collapsableView.getContenView().getVisibility() == View.GONE ?
-					R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up, R.color.ctx_menu_bottom_view_icon));
+					R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up, light ? R.color.ctx_menu_bottom_view_icon_light : R.color.ctx_menu_bottom_view_icon_dark));
 			llIconCollapse.addView(iconViewCollapse);
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -524,17 +524,17 @@ public class MenuBuilder {
 					if (collapsableView.getContenView().getVisibility() == View.VISIBLE) {
 						collapsableView.setCollapsed(true);
 						collapsableView.getContenView().setVisibility(View.GONE);
-						iconViewCollapse.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_down, R.color.ctx_menu_bottom_view_icon));
+						iconViewCollapse.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_down, light ? R.color.ctx_menu_bottom_view_icon_light : R.color.ctx_menu_bottom_view_icon_dark));
 					} else {
 						collapsableView.setCollapsed(false);
 						collapsableView.getContenView().setVisibility(View.VISIBLE);
-						iconViewCollapse.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_up, R.color.ctx_menu_bottom_view_icon));
+						iconViewCollapse.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_up, light ? R.color.ctx_menu_bottom_view_icon_light : R.color.ctx_menu_bottom_view_icon_dark));
 					}
 				}
 			});
 			if (collapsableView.isCollapsed()) {
 				collapsableView.getContenView().setVisibility(View.GONE);
-				iconViewCollapse.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_down, R.color.ctx_menu_bottom_view_icon));
+				iconViewCollapse.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_down, light ? R.color.ctx_menu_bottom_view_icon_light : R.color.ctx_menu_bottom_view_icon_dark));
 			}
 			baseView.addView(collapsableView.getContenView());
 		}
@@ -616,7 +616,7 @@ public class MenuBuilder {
 			llHorLineParams.setMargins(dpToPx(64f), 0, 0, 0);
 		}
 		horizontalLine.setLayoutParams(llHorLineParams);
-		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_info_divider_light : R.color.ctx_menu_info_divider_dark));
+		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_divider_light : R.color.ctx_menu_bottom_view_divider_dark));
 		((LinearLayout) view).addView(horizontalLine);
 	}
 
@@ -643,13 +643,13 @@ public class MenuBuilder {
 
 	public Drawable getRowIcon(int iconId) {
 		IconsCache iconsCache = app.getIconsCache();
-		return iconsCache.getIcon(iconId, R.color.ctx_menu_bottom_view_icon);
+		return iconsCache.getIcon(iconId, light ? R.color.ctx_menu_bottom_view_icon_light : R.color.ctx_menu_bottom_view_icon_dark);
 	}
 
 	public Drawable getRowIcon(Context ctx, String fileName) {
 		Drawable d = RenderingIcons.getBigIcon(ctx, fileName);
 		if (d != null) {
-			d.setColorFilter(app.getResources().getColor(R.color.ctx_menu_bottom_view_icon), PorterDuff.Mode.SRC_IN);
+			d.setColorFilter(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_icon_light : R.color.ctx_menu_bottom_view_icon_dark), PorterDuff.Mode.SRC_IN);
 			return d;
 		} else {
 			return null;
