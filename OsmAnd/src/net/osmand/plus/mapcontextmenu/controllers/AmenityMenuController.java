@@ -36,6 +36,8 @@ public class AmenityMenuController extends MenuController {
 	private Amenity amenity;
 	private List<TransportStopRoute> routes = new ArrayList<>();
 
+	private MapMarker marker;
+
 	public AmenityMenuController(MapActivity mapActivity, PointDescription pointDescription, Amenity amenity) {
 		super(new AmenityMenuBuilder(mapActivity, amenity), pointDescription, mapActivity);
 		this.amenity = amenity;
@@ -55,7 +57,7 @@ public class AmenityMenuController extends MenuController {
 			}
 		}
 
-		final MapMarker marker = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarker(amenity.getName());
+		marker = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarker(amenity.getName());
 		if (marker != null) {
 			MapMarkerMenuController markerMenuController =
 					new MapMarkerMenuController(mapActivity, marker.getPointDescription(mapActivity), marker);
@@ -78,7 +80,7 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public boolean isWaypointButtonEnabled() {
-		return getMapActivity().getMyApplication().getMapMarkersHelper().getMapMarker(amenity.getName()) == null;
+		return marker == null;
 	}
 
 	@Override
