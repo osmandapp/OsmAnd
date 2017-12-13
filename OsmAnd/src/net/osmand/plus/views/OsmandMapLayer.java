@@ -12,14 +12,16 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
@@ -28,6 +30,7 @@ import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.MapAlgorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -216,6 +219,46 @@ public abstract class OsmandMapLayer {
 		double bottom = top + height;
 		rf = new QuadRect(left, top, right, bottom);
 		return rf;
+	}
+
+	public Amenity findAmenity(OsmandApplication app, long id, List<String> names, LatLon latLon) {
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), 50);
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(
+				new BinaryMapIndexReader.SearchPoiTypeFilter() {
+					@Override
+					public boolean accept(PoiCategory type, String subcategory) {
+						return true;
+					}
+
+					@Override
+					public boolean isEmpty() {
+						return false;
+					}
+				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+
+		Amenity res = null;
+		for (Amenity amenity : amenities) {
+			Long amenityId = amenity.getId() >> 1;
+			if (amenityId == id) {
+				res = amenity;
+				break;
+			}
+		}
+		if (res == null && names != null && names.size() > 0) {
+			for (Amenity amenity : amenities) {
+				for (String name : names) {
+					if (name.equals(amenity.getName())) {
+						res = amenity;
+						break;
+					}
+				}
+				if (res != null) {
+					break;
+				}
+			}
+		}
+
+		return res;
 	}
 
 	public abstract class MapLayerData<T> {

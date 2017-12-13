@@ -21,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import net.osmand.Location;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -34,7 +35,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
@@ -43,6 +43,7 @@ import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -529,7 +530,16 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 					int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 					if (calculateBelongs(ex, ey, x, y, r)) {
-						o.add(marker);
+						if (map.getMyApplication().getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
+							o.add(marker);
+						} else {
+							Amenity mapObj = null;
+							if (marker.mapObjectName != null && marker.point != null) {
+								mapObj = findAmenity(map.getMyApplication(), -1,
+										Collections.singletonList(marker.mapObjectName), marker.point);
+							}
+							o.add(mapObj == null ? marker : mapObj);
+						}
 					}
 				}
 			}

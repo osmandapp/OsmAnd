@@ -24,13 +24,10 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.RenderingContext;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.ContextMenuAdapter;
@@ -627,7 +624,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						if (searchLatLon == null) {
 							searchLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
 						}
-						Amenity amenity = findAmenity(renderedObject.getId() >> 7, names, searchLatLon);
+						Amenity amenity = findAmenity(activity.getMyApplication(), renderedObject.getId() >> 7, names, searchLatLon);
 						if (amenity != null) {
 							if (renderedObject.getX() != null && renderedObject.getX().size() > 1
 									&& renderedObject.getY() != null && renderedObject.getY().size() > 1) {
@@ -821,46 +818,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			activity.getMapLayers().getMapControlsLayer().switchMapControlsVisibility(true);
 		}
 		return false;
-	}
-
-	private Amenity findAmenity(long id, List<String> names, LatLon latLon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), 50);
-		List<Amenity> amenities = activity.getMyApplication().getResourceManager().searchAmenities(
-				new BinaryMapIndexReader.SearchPoiTypeFilter() {
-					@Override
-					public boolean accept(PoiCategory type, String subcategory) {
-						return true;
-					}
-
-					@Override
-					public boolean isEmpty() {
-						return false;
-					}
-				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
-
-		Amenity res = null;
-		for (Amenity amenity : amenities) {
-			Long amenityId = amenity.getId() >> 1;
-			if (amenityId == id) {
-				res = amenity;
-				break;
-			}
-		}
-		if (res == null && names != null && names.size() > 0) {
-			for (Amenity amenity : amenities) {
-				for (String name : names) {
-					if (name.equals(amenity.getName())) {
-						res = amenity;
-						break;
-					}
-				}
-				if (res != null) {
-					break;
-				}
-			}
-		}
-
-		return res;
 	}
 
 	private boolean hideVisibleMenues() {

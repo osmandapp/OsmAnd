@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import net.osmand.Location;
+import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -31,6 +32,8 @@ import net.osmand.plus.mapmarkers.adapters.MapMarkersActiveAdapter.MapMarkersAct
 import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;
 import net.osmand.util.MapUtils;
+
+import java.util.Collections;
 
 public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassListener, OsmAndLocationListener {
 
@@ -78,8 +81,15 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 						pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, favouritePoint.getName());
 						objectToShow = favouritePoint;
 					} else {
-						pointDescription = marker.getPointDescription(mapActivity);
-						objectToShow = marker;
+						Amenity mapObj = null;
+						if (marker.mapObjectName != null && marker.point != null) {
+							mapObj = mapActivity.getMapLayers().getMapMarkersLayer()
+									.findAmenity(mapActivity.getMyApplication(), -1, Collections.singletonList(marker.mapObjectName), marker.point);
+						}
+						pointDescription = mapObj == null
+								? marker.getPointDescription(mapActivity)
+								: mapActivity.getMapLayers().getPoiMapLayer().getObjectName(mapObj);
+						objectToShow = mapObj == null ? marker : mapObj;
 					}
 					mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
 							15, pointDescription, true, objectToShow);

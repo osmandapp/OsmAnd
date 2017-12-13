@@ -11,6 +11,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -53,6 +54,14 @@ public class AmenityMenuController extends MenuController {
 				processTransportStop();
 			}
 		}
+
+		final MapMarker marker = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarker(amenity.getName());
+		if (marker != null) {
+			MapMarkerMenuController markerMenuController =
+					new MapMarkerMenuController(mapActivity, marker.getPointDescription(mapActivity), marker);
+			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
+			leftSubtitleButtonController = markerMenuController.getLeftSubtitleButtonController();
+		}
 	}
 
 	@Override
@@ -65,6 +74,11 @@ public class AmenityMenuController extends MenuController {
 	@Override
 	protected Object getObject() {
 		return amenity;
+	}
+
+	@Override
+	public boolean isWaypointButtonEnabled() {
+		return getMapActivity().getMyApplication().getMapMarkersHelper().getMapMarker(amenity.getName()) == null;
 	}
 
 	@Override
