@@ -1254,7 +1254,7 @@
     <string name="local_index_tile_data_minzoom">کمترین زوم: %1$s</string>
     <string name="local_index_tile_data_name">داده‌های کاشی: %1$s</string>
     <string name="edit_tilesource_successfully">منبع کاشی %1$s ذخیره شد</string>
-    <string name="edit_tilesource_maxzoom">حداکثر زوم</string>
+    <string name="edit_tilesource_maxzoom">بیشترین زوم</string>
     <string name="edit_tilesource_expiration_time">انقضا (به دقیقه)</string>
     <string name="edit_tilesource_minzoom">کمترین زوم</string>
     <string name="edit_tilesource_choose_existing">انتخاب از بین موارد موجود…</string>
@@ -1968,8 +1968,8 @@
     <string name="donation_to_osm_desc">بخشی از کمک‌های مالی را به مشترکینی می‌دهیم که به تغییرات OpenStreetMap کمک می‌کنند. هزینهٔ اشتراک تغییری نمی‌کند.</string>
     <string name="osm_live_subscription_desc">این اشتراک، به‌روزرسانی‌های ساعتی، روزانه و هفتگی و همچنین دانلود نامحدود همهٔ نقشه‌ها در سراسر دنیا را فعال می‌کند.</string>
     <string name="get_it">دریافت</string>
-    <string name="get_for">پرداخت برای %1$s</string>
-    <string name="get_for_month">پرداخت ماهانه %1$s</string>
+    <string name="get_for">خرید با %1$s</string>
+    <string name="get_for_month">خرید با ماهی %1$s</string>
     <string name="osm_live_banner_desc">دانلود نامحدود نقشه‌ها و به‌روزرسانی آن‌ها بیش از یک بار در ماه: هفتگی، روزانه یا ساعتی.</string>
     <string name="osmand_plus_banner_desc">دانلود نامحدود نقشه‌ها، به‌روزرسانی‌های نامحدود و افزونهٔ ویکی‌پدیا.</string>
     <string name="si_mi_meters">مایل/متر</string>
