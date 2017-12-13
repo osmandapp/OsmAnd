@@ -2935,7 +2935,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="import_as_gpx">Importovať ako súbor GPX</string>
     <string name="import_as_favorites">Importovať ako Obľúbené</string>
     <string name="import_file">Importovať súbor</string>
-	<string name="tap_on_map_to_hide_interface_descr">Ťuknutie na mapu prepína ovládacie tlačidlá a nástroje.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Ťuknutie na mapu skryje ovládacie tlačidlá a nástroje.</string>
     <string name="tap_on_map_to_hide_interface">Režim na celú obrazovku</string>
     <string name="show_on_top_bar">Zobraziť na hornej lište</string>
     <string name="mark_passed">Značka prejdená</string>
