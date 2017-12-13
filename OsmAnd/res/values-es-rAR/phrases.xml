@@ -3701,4 +3701,9 @@
 
 <string name="poi_depot">Depósito</string>
 
+<string name="poi_letter_box">Buzón postal</string>
+	<string name="poi_post_street">Calle</string>
+	<string name="poi_post_housenumber">Número de portal</string>
+	<string name="poi_post_flats">Plano</string>
+
 </resources>
