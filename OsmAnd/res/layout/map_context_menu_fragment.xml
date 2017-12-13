@@ -366,7 +366,7 @@
                 android:paddingRight="@dimen/context_menu_padding_margin_small"
                 android:id="@+id/context_menu_buttons"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/context_menu_action_buttons_height"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <LinearLayout
