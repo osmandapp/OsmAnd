@@ -121,7 +121,7 @@
     <string name="shared_string_left">Kiri</string>
     <string name="show_number_pad">Tampilkan nomor pad</string>
     <string name="shared_string_paste">Disisipkan</string>
-    <string name="coordinate_input_accuracy_description">Secara otomatis beralih ke bidang berikutnya setelah memasukkan% 1 $ d digit desimal.</string>
+    <string name="coordinate_input_accuracy_description">Secara otomatis beralih ke bidang berikutnya setelah memasukkan %1$d digit desimal.</string>
     <string name="coordinate_input_accuracy">1$d digit</string>
     <string name="go_to_next_field">Lanjut ke bidang selanjutnya</string>
     <string name="rename_marker">Ubah nama penanda</string>
@@ -329,7 +329,7 @@
     <string name="shared_string_slope">Lereng</string>
     <string name="add_new_folder">Tambahkan folder baru</string>
     <string name="points_delete_multiple_succesful">Titik berhasil dihapus.</string>
-    <string name="points_delete_multiple">Anda akan menghapus% 1 $ d point (s). Apakah kamu yakin?</string>
+    <string name="points_delete_multiple">Anda akan menghapus %1$d point (s). Apakah kamu yakin?</string>
     <string name="route_points_category_name">Turn untuk meneruskan rute ini</string>
     <string name="track_points_category_name">Poin penting pada rute ini</string>
     <string name="gpx_track">Trek</string>

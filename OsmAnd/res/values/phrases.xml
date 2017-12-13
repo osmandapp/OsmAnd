@@ -3641,4 +3641,7 @@
 	<string name="poi_post_housenumber">Housenumber</string>
 	<string name="poi_post_flats">Flat</string>
 
+	<string name="poi_payment_centre">Payment centre</string>
+	<string name="poi_money_transfer">Money transfer</string>
+
 </resources>
