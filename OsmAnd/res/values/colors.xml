@@ -348,5 +348,7 @@
 	<color name="ctx_menu_amenity_closed_text_color">#c66545</color>
 	<color name="ctx_menu_bottom_view_divider_light">#f2f2f2</color>
 	<color name="ctx_menu_bottom_view_divider_dark">#536dfe</color>
+	<color name="ctx_menu_bottom_view_url_color_light">#536dfe</color>
+	<color name="ctx_menu_bottom_view_url_color_dark">#d28521</color>
 
 </resources>

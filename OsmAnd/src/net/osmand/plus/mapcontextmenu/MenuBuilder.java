@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.ClipboardManager;
 import android.text.TextUtils;
@@ -480,7 +481,7 @@ public class MenuBuilder {
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
 
 		if (isUrl) {
-			textView.setTextColor(textView.getLinkTextColors());
+			textView.setTextColor(ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark));
 		} else if (needLinks) {
 			textView.setAutoLinkMask(Linkify.ALL);
 			textView.setLinksClickable(true);
