@@ -198,6 +198,8 @@ public class TransportStopController extends MenuController {
 				return o1.desc.compareTo(o2.desc);
 			}
 		});
+
+		builder.setRoutes(routes);
 	}
 
 	private void addRoutes(boolean useEnglishNames, TransportIndexRepository t, TransportStop s, TransportStop refStop, int dist) {

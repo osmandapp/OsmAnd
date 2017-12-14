@@ -378,6 +378,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					sb.append(poiTypes.getPoiTranslation("cuisine_" + c).toLowerCase());
 				}
 				vl = sb.toString();
+			} else if (key.contains(Amenity.ROUTE)) {
+				continue;
 			} else {
 				if (key.contains(Amenity.DESCRIPTION)) {
 					iconId = R.drawable.ic_action_note_dark;

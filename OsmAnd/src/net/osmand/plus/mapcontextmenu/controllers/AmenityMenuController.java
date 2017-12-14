@@ -171,29 +171,6 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
-		addPlainMenuItems(amenity, typeStr, builder);
-		for (final TransportStopRoute r : routes) {
-			View.OnClickListener listener = new View.OnClickListener() {
-				@Override
-				public void onClick(View arg0) {
-					MapContextMenu mm = getMapActivity().getContextMenu();
-					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
-							r.getDescription(getMapActivity().getMyApplication(), false));
-					mm.show(amenity.getLocation(), pd, r);
-					TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
-					stopsLayer.setRoute(r.route);
-					int cz = r.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
-					getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
-				}
-			};
-			if (r.type == null) {
-				builder.addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.getDescription(getMapActivity().getMyApplication(), true),
-						false, false, listener);
-			} else {
-				builder.addPlainMenuItem(r.type.getResourceId(), r.getDescription(getMapActivity().getMyApplication(), true),
-						false, false, listener);
-			}
-		}
 	}
 
 	public static void addPlainMenuItems(Amenity amenity, String typeStr, MenuBuilder builder) {
@@ -242,6 +219,8 @@ public class AmenityMenuController extends MenuController {
 				return o1.desc.compareTo(o2.desc);
 			}
 		});
+
+		builder.setRoutes(routes);
 	}
 
 	private void addRoutes(boolean useEnglishNames, TransportIndexRepository t, TransportStop s, int dist) {

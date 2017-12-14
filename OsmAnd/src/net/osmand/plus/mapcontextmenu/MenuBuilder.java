@@ -46,8 +46,10 @@ import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
+import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -81,6 +83,7 @@ public class MenuBuilder {
 	private boolean showOnlinePhotos = true;
 	protected List<Amenity> nearestWiki = new ArrayList<>();
 	private List<OsmandPlugin> menuPlugins = new ArrayList<>();
+	private List<TransportStopRoute> routes = new ArrayList<>();
 	private CardsRowBuilder onlinePhotoCardsRow;
 	private List<AbstractCard> onlinePhotoCards;
 
@@ -204,6 +207,10 @@ public class MenuBuilder {
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 	}
 
+	public void setRoutes(List<TransportStopRoute> routes) {
+		this.routes = routes;
+	}
+
 	public String getPreferredMapLang() {
 		return preferredMapLang;
 	}
@@ -278,6 +285,10 @@ public class MenuBuilder {
 		buildNearestWikiRow(view);
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
+		}
+		if (routes.size() > 0) {
+			buildRow(view, 0, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), true),
+					false, 0, false, null);
 		}
 		buildInternal(view);
 		if (showOnlinePhotos) {
@@ -419,7 +430,7 @@ public class MenuBuilder {
 	public View buildRow(View view, int iconId, String text, int textColor,
 							boolean collapsable, final CollapsableView collapsableView,
 							boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener) {
-		return buildRow(view, getRowIcon(iconId), text, textColor, collapsable, collapsableView,
+		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textColor, collapsable, collapsableView,
 				needLinks, textLinesLimit, isUrl, onClickListener);
 	}
 
@@ -452,20 +463,24 @@ public class MenuBuilder {
 		baseView.addView(ll);
 
 		// Icon
-		LinearLayout llIcon = new LinearLayout(view.getContext());
-		llIcon.setOrientation(LinearLayout.HORIZONTAL);
-		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(64f), dpToPx(48f)));
-		llIcon.setGravity(Gravity.CENTER_VERTICAL);
-		ll.addView(llIcon);
+		boolean showIcon = false;
+		if (icon != null) {
+			LinearLayout llIcon = new LinearLayout(view.getContext());
+			llIcon.setOrientation(LinearLayout.HORIZONTAL);
+			llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(64f), dpToPx(48f)));
+			llIcon.setGravity(Gravity.CENTER_VERTICAL);
+			ll.addView(llIcon);
 
-		ImageView iconView = new ImageView(view.getContext());
-		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
-		llIconParams.setMargins(dpToPx(16f), dpToPx(12f), dpToPx(24f), dpToPx(12f));
-		llIconParams.gravity = Gravity.CENTER_VERTICAL;
-		iconView.setLayoutParams(llIconParams);
-		iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-		iconView.setImageDrawable(icon);
-		llIcon.addView(iconView);
+			ImageView iconView = new ImageView(view.getContext());
+			LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
+			llIconParams.setMargins(dpToPx(16f), dpToPx(12f), dpToPx(24f), dpToPx(12f));
+			llIconParams.gravity = Gravity.CENTER_VERTICAL;
+			iconView.setLayoutParams(llIconParams);
+			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+			iconView.setImageDrawable(icon);
+			llIcon.addView(iconView);
+			showIcon = true;
+		}
 
 		// Text
 		LinearLayout llText = new LinearLayout(view.getContext());
@@ -474,7 +489,7 @@ public class MenuBuilder {
 
 		TextViewEx textView = new TextViewEx(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextParams.setMargins(0, dpToPx(8f), 0, dpToPx(8f));
+		llTextParams.setMargins(showIcon ? 0 : dpToPx(16f), dpToPx(8f), 0, dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textView.setTextSize(16);
@@ -672,6 +687,30 @@ public class MenuBuilder {
 		);
 	}
 
+	private CollapsableView getCollapsableTransportStopRoutesView(final Context context, boolean collapsed) {
+		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, false);
+
+		for (final TransportStopRoute r : routes) {
+			View.OnClickListener listener = new View.OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					MapContextMenu mm = getMapActivity().getContextMenu();
+					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
+							r.getDescription(getMapActivity().getMyApplication(), false));
+					mm.show(latLon, pd, r);
+					TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+					stopsLayer.setRoute(r.route);
+					int cz = r.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
+					getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
+				}
+			};
+			int drawableResId = r.type == null ? R.drawable.ic_action_polygom_dark : r.type.getResourceId();
+			buildRow(view, drawableResId, r.getDescription(getMapActivity().getMyApplication(), true), 0, false, null, false, 0, false, listener);
+		}
+
+		return new CollapsableView(view, collapsed);
+	}
+
 	protected CollapsableView getCollapsableTextView(Context context, boolean collapsed, String text) {
 		final TextViewEx textView = new TextViewEx(context);
 		textView.setVisibility(collapsed ? View.GONE : View.VISIBLE);
@@ -686,7 +725,7 @@ public class MenuBuilder {
 	}
 
 	protected CollapsableView getCollapsableFavouritesView(final Context context, boolean collapsed, @NonNull final FavoriteGroup group, FavouritePoint selectedPoint) {
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed);
+		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
 
 		List<FavouritePoint> points = group.points;
 		for (int i = 0; i < points.size() && i < 10; i++) {
@@ -730,7 +769,7 @@ public class MenuBuilder {
 	}
 
 	protected CollapsableView getCollapsableWikiView(Context context, boolean collapsed) {
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed);
+		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
 
 		for (final Amenity wiki : nearestWiki) {
 			TextViewEx button = buildButtonInCollapsableView(context, false);
@@ -751,12 +790,14 @@ public class MenuBuilder {
 		return new CollapsableView(view, collapsed);
 	}
 
-	protected LinearLayout buildCollapsableContentView(Context context, boolean collapsed) {
+	protected LinearLayout buildCollapsableContentView(Context context, boolean collapsed, boolean needMargin) {
 		final LinearLayout view = new LinearLayout(context);
 		view.setOrientation(LinearLayout.VERTICAL);
 		view.setVisibility(collapsed ? View.GONE : View.VISIBLE);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llParams.setMargins(dpToPx(64f), 0, dpToPx(12f), 0);
+		if (needMargin) {
+			llParams.setMargins(dpToPx(64f), 0, dpToPx(12f), 0);
+		}
 		view.setLayoutParams(llParams);
 		return view;
 	}
