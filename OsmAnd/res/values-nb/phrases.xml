@@ -1156,9 +1156,9 @@
 	<string name="poi_generator_source_solar">Energikilde: Solkraft</string>
 	<string name="poi_generator_source_hydro">Energikilde: Vannkraft</string>
 	<string name="poi_generator_source_wind">Energikilde: Vind</string>
-	<string name="poi_generator_source_geothermal">Energikulde: Geotermisk</string>
-	<string name="poi_generator_source_oil">Energikulde: Olje</string>
-	<string name="poi_generator_source_diesel">Energikulde: Diesel</string>
+	<string name="poi_generator_source_geothermal">Energikilde: Geotermisk</string>
+	<string name="poi_generator_source_oil">Energikilde: Olje</string>
+	<string name="poi_generator_source_diesel">Energikilde: Diesel</string>
 
 	<string name="poi_int_name">Internasjonalt navn</string>
 	<string name="poi_loc_name">Lokalt navn</string>
@@ -1262,4 +1262,6 @@
 	<string name="poi_diet_kosher_yes">Kosher</string>
 	<string name="poi_charging_station_filter">Ladestasjon</string>
 
+	<string name="poi_nat_name">Nasjonalt navn</string>
+	<string name="poi_reg_name">Regionalt navn</string>
 	</resources>
