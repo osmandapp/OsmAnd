@@ -696,7 +696,7 @@
 	<string name="poi_operational_status">Driftsstatus</string>
 	<string name="poi_water_supply_type">Vannforsyningstype</string>
 	<string name="poi_water_purification">Vannrenseanlegg</string>
-	<string name="poi_traffic_enforcement">Trafikkhåndtering</string>
+	<string name="poi_traffic_enforcement">Trafikkhåndhevelse</string>
 	<string name="poi_power">Energi</string>
 	<string name="poi_administrative">Administrativt</string>
 	<string name="poi_club">Klubb</string>
@@ -763,7 +763,7 @@
 	<string name="poi_perfumery">Parfymeri</string>
 	<string name="poi_spices">Krydderbasar</string>
 	<string name="poi_honey">Honningutsalg</string>
-	<string name="poi_religion">Religiøse nips</string>
+	<string name="poi_religion">Religiøse artikler</string>
 
 	<string name="poi_fire_hose">Brannslange</string>
 	<string name="poi_grit_bin">Grusbeholder</string>
@@ -846,7 +846,7 @@
 	<string name="poi_country">Land</string>
 	<string name="poi_doctors">Doktorer</string>
 	<string name="poi_nursing_home">Pleiehjem</string>
-	<string name="poi_veterinary">Vetrinær</string>
+	<string name="poi_veterinary">Veterinær</string>
 	<string name="poi_audiologist">Audiolog</string>
 	<string name="poi_blood_bank">Blodbank</string>
 	<string name="poi_midwife">Jordmor</string>
@@ -877,7 +877,7 @@
 	<string name="poi_base">Basehopp</string>
 	<string name="poi_basketball">Kurvball</string>
 	<string name="poi_beachvolleyball">Sandvolleyball</string>
-	<string name="poi_bmx">Triksesykkel</string>
+	<string name="poi_bmx">BMX</string>
 	<string name="poi_canoe">Kano</string>
 	<string name="poi_chess">Sjakk</string>
 	<string name="poi_climbing">Klatring</string>
@@ -956,7 +956,7 @@
 	<string name="poi_craft_dressmaker">Skredder</string>
 	<string name="poi_craft_electrician">Elektriker</string>
 	<string name="poi_craft_gardener">Gartner</string>
-	<string name="poi_craft_handicraft">Kunsthåndtverk</string>
+	<string name="poi_craft_handicraft">Håndtverk</string>
 	<string name="poi_craft_insulation">Isolering</string>
 	<string name="poi_craft_locksmith">Låsesmed</string>
 	<string name="poi_craft_key_cutter">Nøkkelfiler</string>
@@ -1046,7 +1046,7 @@
 	<string name="poi_wiki_lang_pnb">Punjab wiki</string>
 	<string name="poi_wiki_lang_my">Burmesisk wiki</string>
 	<string name="poi_wiki_lang_ne">Nepalsk wiki</string>
-	<string name="poi_wiki_lang_bar">Bavarisk wiki</string>
+	<string name="poi_wiki_lang_bar">Bayersk wiki</string>
 	<string name="poi_wiki_lang_mn">Mongolsk wiki</string>
 	<string name="poi_wiki_lang_nap">Napolitansk wiki</string>
 
@@ -1085,11 +1085,11 @@
 	<string name="poi_crossing_unmarked">Umarkert</string>
 	<string name="poi_wholesale">Engros</string>
 
-	<string name="poi_access_private">Privat tilkomst</string>
+	<string name="poi_access_private">Privat tilgang</string>
 	<string name="poi_access_no">Ingen adgang</string>
 	<string name="poi_access_customers">Kundeadgang</string>
 	<string name="poi_access_delivery">Leveringsadgang</string>
-	<string name="poi_access_agricultural">Adgang for lan</string>
+	<string name="poi_access_agricultural">Landbrukstilgang</string>
 
 	<string name="poi_content_water">Innhold: Vann</string>
 	<string name="poi_content_oil">Innhold: Olje</string>
@@ -1110,7 +1110,7 @@
 	<string name="poi_nudism_permissive">Med tillatelse</string>
 
 	<string name="poi_trade_building_supplies">Byggematerialer</string>
-	<string name="poi_trade_wood">Tømmer</string>
+	<string name="poi_trade_wood">Trehandel</string>
 	<string name="poi_population">Befolkning</string>
 	<string name="poi_bicycle_parking_shed">Sykkelskur</string>
 	<string name="poi_bicycle_parking_informal">Uformell</string>
@@ -1144,18 +1144,18 @@
 	<string name="poi_animal_shelter_cat">Katter</string>
 	<string name="poi_animal_shelter_dog_cat">Hunder, katter</string>
 	<string name="poi_animal_shelter_bird">Fulger</string>
-	<string name="poi_animal_shelter_wildlife">Skogsdyr</string>
+	<string name="poi_animal_shelter_wildlife">Dyreliv</string>
 	<string name="poi_animal_shelter_horse">Hester</string>
 	<string name="poi_animal_shelter_mammal">Pattedyr</string>
 	<string name="poi_animal_shelter_fish">Fisker</string>
 
 	<string name="poi_seats">Seter</string>
 	<string name="poi_generator_source_coal">Energikilde: Kull</string>
-	<string name="poi_generator_source_gas">Energikulde: Gass</string>
-	<string name="poi_generator_source_nuclear">Energikulde: Atomkraft</string>
-	<string name="poi_generator_source_solar">Energikulde: Solkraft</string>
-	<string name="poi_generator_source_hydro">Energikulde: Vannkraft</string>
-	<string name="poi_generator_source_wind">Energikulde: Vindmøller</string>
+	<string name="poi_generator_source_gas">Energikilde: Gass</string>
+	<string name="poi_generator_source_nuclear">Energikilde: Atomkraft</string>
+	<string name="poi_generator_source_solar">Energikilde: Solkraft</string>
+	<string name="poi_generator_source_hydro">Energikilde: Vannkraft</string>
+	<string name="poi_generator_source_wind">Energikilde: Vindmøller</string>
 	<string name="poi_generator_source_geothermal">Energikulde: Geotermisk</string>
 	<string name="poi_generator_source_oil">Energikulde: Olje</string>
 	<string name="poi_generator_source_diesel">Energikulde: Diesel</string>
@@ -1167,8 +1167,8 @@
 
 	<string name="poi_pump_no">Ingen pumpe</string>
 	<string name="poi_information_sign">Skilt</string>
-	<string name="poi_information_tactile_model">Inget ildsted</string>
-	<string name="poi_information_tactile_map"></string>
+	<string name="poi_information_tactile_model">Taktil modell</string>
+	<string name="poi_information_tactile_map">Taktilt kart</string>
 	<string name="poi_fireplace_no">Inget ildsted</string>
 
 	<string name="poi_grass">Gress</string>
