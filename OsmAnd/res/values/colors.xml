@@ -339,14 +339,14 @@
 	<color name="ctx_menu_bottom_buttons_text_color_light">#536dfe</color>
 	<color name="ctx_menu_bottom_buttons_text_color_dark">#e69122</color>
 	<color name="ctx_menu_bottom_view_bg_light">#ffffff</color>
-	<color name="ctx_menu_bottom_view_bg_dark">#536dfe</color>
+	<color name="ctx_menu_bottom_view_bg_dark">#17191a</color>
 	<color name="ctx_menu_bottom_view_icon_light">#b3b3b3</color>
 	<color name="ctx_menu_bottom_view_icon_dark">#536dfe</color>
 	<color name="ctx_menu_bottom_view_text_color_light">#212121</color>
 	<color name="ctx_menu_bottom_view_text_color_dark">#cccccc</color>
 	<color name="ctx_menu_amenity_opened_text_color">#5baf3f</color>
 	<color name="ctx_menu_amenity_closed_text_color">#c66545</color>
-	<color name="ctx_menu_bottom_view_divider_light">#d9d9d9</color>
-	<color name="ctx_menu_bottom_view_divider_dark">#333b40</color>
+	<color name="ctx_menu_bottom_view_divider_light">#f2f2f2</color>
+	<color name="ctx_menu_bottom_view_divider_dark">#536dfe</color>
 
 </resources>
