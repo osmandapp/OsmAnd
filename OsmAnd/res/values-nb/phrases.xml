@@ -1155,7 +1155,7 @@
 	<string name="poi_generator_source_nuclear">Energikilde: Atomkraft</string>
 	<string name="poi_generator_source_solar">Energikilde: Solkraft</string>
 	<string name="poi_generator_source_hydro">Energikilde: Vannkraft</string>
-	<string name="poi_generator_source_wind">Energikilde: Vindmøller</string>
+	<string name="poi_generator_source_wind">Energikilde: Vind</string>
 	<string name="poi_generator_source_geothermal">Energikulde: Geotermisk</string>
 	<string name="poi_generator_source_oil">Energikulde: Olje</string>
 	<string name="poi_generator_source_diesel">Energikulde: Diesel</string>
