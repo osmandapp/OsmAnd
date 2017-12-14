@@ -136,14 +136,16 @@
 	<dimen name="context_menu_padding_margin_medium">10dp</dimen>
 	<dimen name="context_menu_padding_margin_small">8dp</dimen>
 	<dimen name="context_menu_padding_margin_tiny">6dp</dimen>
+	<dimen name="context_menu_title_padding">15dp</dimen>
 	<dimen name="context_menu_controller_height">36dp</dimen>
 	<dimen name="context_menu_progress_padding_left">18dp</dimen>
 	<dimen name="context_menu_progress_padding_right">2dp</dimen>
 	<dimen name="context_menu_action_buttons_height">56dp</dimen>
 	<dimen name="context_menu_subtitle_margin">3dp</dimen>
-	<dimen name="context_menu_direction_margin">18dp</dimen>
+	<dimen name="context_menu_direction_margin">12dp</dimen>
 	<dimen name="context_menu_transport_stop_item_height">16dp</dimen>
-	<dimen name="context_menu_main_actions_padding_top">5dp</dimen>
+	<dimen name="context_menu_main_actions_padding_top">6dp</dimen>
+	<dimen name="context_menu_main_actions_icon_margin">3dp</dimen>
 
 	<dimen name="fab_size_with_shadow">62dp</dimen>
     <dimen name="fab_margin_right">12dp</dimen>

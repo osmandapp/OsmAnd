@@ -382,6 +382,7 @@
                     android:paddingBottom="@dimen/context_menu_padding_margin_small">
 
                     <ImageView
+                        android:layout_marginBottom="@dimen/context_menu_main_actions_icon_margin"
                         android:id="@+id/context_menu_fav_image_view"
                         android:contentDescription="@string/shared_string_add_to_favorites"
                         android:layout_width="wrap_content"
@@ -415,6 +416,7 @@
                     android:paddingBottom="@dimen/context_menu_padding_margin_small">
 
                     <ImageView
+                        android:layout_marginBottom="@dimen/context_menu_main_actions_icon_margin"
                         android:id="@+id/context_menu_route_image_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -447,6 +449,7 @@
                     android:paddingBottom="@dimen/context_menu_padding_margin_small">
 
                     <ImageView
+                        android:layout_marginBottom="@dimen/context_menu_main_actions_icon_margin"
                         android:id="@+id/context_menu_share_image_view"
                         android:contentDescription="@string/context_menu_item_share_location"
                         android:layout_width="wrap_content"
@@ -480,6 +483,7 @@
                     android:paddingBottom="@dimen/context_menu_padding_margin_small">
 
                     <ImageView
+                        android:layout_marginBottom="@dimen/context_menu_main_actions_icon_margin"
                         android:id="@+id/context_menu_more_image_view"
                         android:contentDescription="@string/shared_string_more"
                         android:layout_width="wrap_content"
