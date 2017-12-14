@@ -313,7 +313,7 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects, boolean unknownLocation) {
 		if (map != null && tileBox.getZoom() >= map.getMinimumZoomSupported()) {
 			getImagesFromPoint(tileBox, point, objects);
 		}
