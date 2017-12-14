@@ -182,7 +182,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
 		if (tileBox.getZoom() >= 3) {
 			getMyLocationFromPoint(tileBox, point, o);
 		}

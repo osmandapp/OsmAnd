@@ -21,7 +21,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import net.osmand.Location;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -31,6 +30,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -43,7 +43,6 @@ import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -512,34 +511,21 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
 		if (tileBox.getZoom() < 3 || !map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
 			return;
 		}
 
-		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
-		List<MapMarker> markers = markersHelper.getMapMarkers();
+		OsmandApplication app = map.getMyApplication();
 		int r = getRadiusPoi(tileBox);
-		for (int i = 0; i < markers.size(); i++) {
-			MapMarker marker = markers.get(i);
-			if (!isSynced(marker)) {
+		for (MapMarker marker : app.getMapMarkersHelper().getMapMarkers()) {
+			if ((!unknownLocation && app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) || !isSynced(marker)) {
 				LatLon latLon = marker.point;
 				if (latLon != null) {
-					int ex = (int) point.x;
-					int ey = (int) point.y;
 					int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 					int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-					if (calculateBelongs(ex, ey, x, y, r)) {
-						if (map.getMyApplication().getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
-							o.add(marker);
-						} else {
-							Amenity mapObj = null;
-							if (marker.mapObjectName != null && marker.point != null) {
-								mapObj = findAmenity(map.getMyApplication(), -1,
-										Collections.singletonList(marker.mapObjectName), marker.point);
-							}
-							o.add(mapObj == null ? marker : mapObj);
-						}
+					if (calculateBelongs((int) point.x, (int) point.y, x, y, r)) {
+						o.add(marker);
 					}
 				}
 			}

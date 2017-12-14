@@ -410,7 +410,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	// IContextMenuProvider
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects, boolean unknownLocation) {
 		boolean isMenuVisible = false;
 		if (view.getContext() instanceof MapActivity) {
 			MapActivity mapActivity = (MapActivity) view.getContext();

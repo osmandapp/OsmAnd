@@ -573,7 +573,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private boolean showContextMenu(PointF point, RotatedTileBox tileBox, boolean showUnknownLocation) {
 		LatLon objectLatLon = null;
-		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsForContextMenu(tileBox, point, false);
+		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsForContextMenu(tileBox, point, false, showUnknownLocation);
 		NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
 		if (nativeLib != null) {
 			MapRenderRepositories maps = activity.getMyApplication().getResourceManager().getRenderer();
@@ -728,7 +728,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	private Map<Object, IContextMenuProvider> selectObjectsForContextMenu(RotatedTileBox tileBox,
-																		  PointF point, boolean acquireObjLatLon) {
+																		  PointF point, boolean acquireObjLatLon,
+																		  boolean unknownLocation) {
 		List<LatLon> pressedLatLonFull = new ArrayList<>();
 		List<LatLon> pressedLatLonSmall = new ArrayList<>();
 		Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
@@ -737,7 +738,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			if (lt instanceof ContextMenuLayer.IContextMenuProvider) {
 				s.clear();
 				final IContextMenuProvider l = (ContextMenuLayer.IContextMenuProvider) lt;
-				l.collectObjectsFromPoint(point, tileBox, s);
+				l.collectObjectsFromPoint(point, tileBox, s, unknownLocation);
 				for (Object o : s) {
 					selectedObjects.put(o, l);
 					if (acquireObjLatLon && l.isObjectClickable(o)) {
@@ -856,7 +857,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
 				if (!mInChangeMarkerPositionMode && !mInGpxDetailsMode) {
-					selectObjectsForContextMenu(tileBox, new PointF(event.getX(), event.getY()), true);
+					selectObjectsForContextMenu(tileBox, new PointF(event.getX(), event.getY()), true, true);
 					if (pressedLatLonFull.size() > 0 || pressedLatLonSmall.size() > 0) {
 						view.refreshMap();
 					}
@@ -875,7 +876,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public interface IContextMenuProvider {
 
-		void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o);
+		void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation);
 
 		LatLon getObjectLocation(Object o);
 
