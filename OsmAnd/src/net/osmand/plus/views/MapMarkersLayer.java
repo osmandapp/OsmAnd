@@ -30,11 +30,11 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
@@ -511,24 +511,20 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
 		if (tileBox.getZoom() < 3 || !map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
 			return;
 		}
 
-		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
-		List<MapMarker> markers = markersHelper.getMapMarkers();
+		OsmandApplication app = map.getMyApplication();
 		int r = getRadiusPoi(tileBox);
-		for (int i = 0; i < markers.size(); i++) {
-			MapMarker marker = markers.get(i);
-			if (!isSynced(marker)) {
+		for (MapMarker marker : app.getMapMarkersHelper().getMapMarkers()) {
+			if ((!unknownLocation && app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) || !isSynced(marker)) {
 				LatLon latLon = marker.point;
 				if (latLon != null) {
-					int ex = (int) point.x;
-					int ey = (int) point.y;
 					int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 					int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-					if (calculateBelongs(ex, ey, x, y, r)) {
+					if (calculateBelongs((int) point.x, (int) point.y, x, y, r)) {
 						o.add(marker);
 					}
 				}

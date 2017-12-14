@@ -136,7 +136,7 @@ public class MapActivityLayers {
 		mapView.addLayer(downloadedRegionsLayer, 0.5f);
 
 		// 0.9 gpx layer
-		gpxLayer = new GPXLayer(activity);
+		gpxLayer = new GPXLayer();
 		mapView.addLayer(gpxLayer, 0.9f);
 
 		// 1. route layer
@@ -148,7 +148,7 @@ public class MapActivityLayers {
 		poiMapLayer = new POIMapLayer(activity);
 		mapView.addLayer(poiMapLayer, 3);
 		// 4. favorites layer
-		mFavouritesLayer = new FavouritesLayer(activity);
+		mFavouritesLayer = new FavouritesLayer();
 		mapView.addLayer(mFavouritesLayer, 4);
 		// 4.6 measurement tool layer
 		measurementToolLayer = new MeasurementToolLayer();
