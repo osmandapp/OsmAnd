@@ -3090,4 +3090,11 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="import_track_desc">Fails %1$s nesatur ceļapunktus, importēt kā treku?</string>
     <string name="move_point">Pārvietot punktu</string>
     <string name="add_segment_to_the_track">Pievienot GPX trekam</string>
-</resources>
+<string name="modify_the_search_query">Mainīt meklējamo vārdu.</string>
+    <string name="empty_state_osm_edits">Izveidot vai labot OSM objektus</string>
+    <string name="empty_state_osm_edits_descr">Izveidot vai labot OSM POI, atvērt vai komentēt OSM piezīmes, nosūtīt ierakstītos GPX failus.</string>
+    <string name="shared_string_deleted">Izdzēsts</string>
+    <string name="shared_string_edited">Labots</string>
+    <string name="shared_string_added">Pievienots</string>
+    <string name="marker_activated">Marķieris %s ir aktivizēts.</string>
+    </resources>
