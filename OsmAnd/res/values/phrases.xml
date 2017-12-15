@@ -3637,4 +3637,12 @@
 
 	<string name="poi_depot">Depot</string>
 
+	<string name="poi_letter_box">Letter box</string>
+	<string name="poi_post_street">Street</string>
+	<string name="poi_post_housenumber">Housenumber</string>
+	<string name="poi_post_flats">Flat</string>
+
+	<string name="poi_payment_centre">Payment centre</string>
+	<string name="poi_money_transfer">Money transfer</string>
+
 </resources>

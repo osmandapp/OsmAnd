@@ -2826,7 +2826,7 @@ Proporciona un código completo</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
     <string name="import_as_favorites">Importar como favoritos</string>
     <string name="import_file">Importar archivo</string>
-	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna la vista de la interfaz y los controles.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa oculta los botones de la interfaz y los controles.</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     <string name="show_on_top_bar">Mostrar en la barra superior</string>
     <string name="mark_passed">Descartar marcador</string>
@@ -2867,7 +2867,7 @@ Proporciona un código completo</string>
     <string name="shared_string_added">Añadido</string>
     <string name="marker_activated">Marcador «%s» activado.</string>
     <string name="one_tap_active_descr">Pulsa un marcador en el mapa para moverlo al primer lugar de los marcadores activos, sin abrir el menú contextual.</string>
-    <string name="one_tap_active">Una pulsación activa</string>
+    <string name="one_tap_active">Activar con una pulsación</string>
     <string name="empty_state_av_notes">¡Tomar notas multimedia!</string>
     <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto para cada punto del mapa, utilizando el controlador o el menú contextual.</string>
     <string name="notes_by_date">Notas por fecha</string>

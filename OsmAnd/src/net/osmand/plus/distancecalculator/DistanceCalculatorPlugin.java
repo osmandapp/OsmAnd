@@ -499,7 +499,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 
 			List<Object> s = new ArrayList<>();
-			collectObjectsFromPoint(point, tileBox, s);
+			collectObjectsFromPoint(point, tileBox, s, true);
 
 			if (s.size() == 0 && distanceMeasurementMode == 1 && measurementPoints.size() > 0) {
 				LinkedList<WptPt> lt = measurementPoints.get(measurementPoints.size() - 1);
@@ -595,7 +595,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		}
 
 		@Override
-		public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
+		public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
 			getMPointsFromPoint(tileBox, point, o);
 		}
 		

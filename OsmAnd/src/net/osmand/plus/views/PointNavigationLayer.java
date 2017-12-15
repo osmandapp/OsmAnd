@@ -184,7 +184,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
 		if (tileBox.getZoom() >= 3) {
 			TargetPointsHelper tg = map.getMyApplication().getTargetPointsHelper();
 			List<TargetPoint> intermediatePoints = tg.getAllPoints();

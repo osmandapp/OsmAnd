@@ -2837,7 +2837,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="import_as_gpx">Importa comente documentu GPX</string>
     <string name="import_as_favorites">Importa comente Preferidu</string>
     <string name="import_file">Importa documentu</string>
-	<string name="tap_on_map_to_hide_interface_descr">Un\'incarcada in sa mapa allughet o istudat sos butones e sos widgets de controllu.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Un\'incarcada in sa mapa istichit sos butones e sos widgets de controllu.</string>
     <string name="tap_on_map_to_hide_interface">Modalidade a ischermu intreu</string>
     <string name="show_on_top_bar">Ammustra in sa barra superiore</string>
     <string name="mark_passed">Sinna comente coladu</string>
@@ -2885,4 +2885,11 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="by_date">Pro data</string>
     <string name="by_type">Pro casta</string>
     <string name="modify_the_search_query">Modìfica sa chirca.</string>
+    <string name="release_3_0">\\022 S\'individuatzione de sos sinnales de stop como cunsiderat sa diretzione de ghia
+\n
+\n • Algoritmu nou chi frunit valores significativos ascendentes e discendentes pro sas rastas GPX
+\n
+\n • Su tempus calculadu pro acabare sas àndalas pro s\'escursionismu como tenet in cunsìderu sas artiadas (règula de Naismith)
+\n
+\n</string>
     </resources>
