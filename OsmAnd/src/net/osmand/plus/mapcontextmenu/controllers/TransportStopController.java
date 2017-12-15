@@ -201,19 +201,30 @@ public class TransportStopController extends MenuController {
 		if (rts != null) {
 			for (TransportRoute rs : rts) {
 				TransportStopType type = TransportStopType.findType(rs.getType());
-				TransportStopRoute r = new TransportStopRoute();
 				if (topType == null && type != null && type.isTopType()) {
 					topType = type;
 				}
-				r.type = type;
-				r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
-				r.route = rs;
-				r.refStop = refStop;
-				r.stop = s;
-				r.distance = dist;
-				this.routes.add(r);
+				if (!containsRef(rs)) {
+					TransportStopRoute r = new TransportStopRoute();
+					r.type = type;
+					r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
+					r.route = rs;
+					r.refStop = refStop;
+					r.stop = s;
+					r.distance = dist;
+					this.routes.add(r);
+				}
 			}
 		}
+	}
+
+	private boolean containsRef(TransportRoute transportRoute) {
+		for (TransportStopRoute route : routes) {
+			if (route.route.getRef().equals(transportRoute.getRef())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static class TransportStopRoute {

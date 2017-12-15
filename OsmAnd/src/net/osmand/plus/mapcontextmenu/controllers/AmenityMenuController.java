@@ -227,15 +227,26 @@ public class AmenityMenuController extends MenuController {
 		Collection<TransportRoute> rts = t.getRouteForStop(s);
 		if (rts != null) {
 			for (TransportRoute rs : rts) {
-				TransportStopController.TransportStopType type = TransportStopController.TransportStopType.findType(rs.getType());
-				TransportStopRoute r = new TransportStopRoute();
-				r.type = type;
-				r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
-				r.route = rs;
-				r.stop = s;
-				r.distance = dist;
-				this.routes.add(r);
+				if (!containsRef(rs)) {
+					TransportStopController.TransportStopType type = TransportStopController.TransportStopType.findType(rs.getType());
+					TransportStopRoute r = new TransportStopRoute();
+					r.type = type;
+					r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
+					r.route = rs;
+					r.stop = s;
+					r.distance = dist;
+					this.routes.add(r);
+				}
 			}
 		}
+	}
+
+	private boolean containsRef(TransportRoute transportRoute) {
+		for (TransportStopRoute route : routes) {
+			if (route.route.getRef().equals(transportRoute.getRef())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
