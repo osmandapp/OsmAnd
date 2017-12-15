@@ -100,6 +100,15 @@
                 <TextView
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
+                    tools:text="Museum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/context_menu_line3"
+                    style="@style/TextAppearance.ContextMenuSubtitle"/>
+
+                <TextView
+                    android:layout_marginRight="@dimen/context_menu_padding_margin_small"
+                    android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
                     tools:text="Closed till 10:00"
                     android:id="@+id/opening_hours_text_view"
                     android:layout_width="wrap_content"

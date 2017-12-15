@@ -5,6 +5,8 @@ import android.support.v4.content.ContextCompat;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
@@ -13,6 +15,8 @@ import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.WptPtMenuBuilder;
 import net.osmand.util.Algorithms;
+
+import java.io.File;
 
 public class WptPtMenuController extends MenuController {
 
@@ -74,8 +78,8 @@ public class WptPtMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getSecondLineTypeIcon() {
-		if (Algorithms.isEmpty(getTypeStr())) {
+	public Drawable getAdditionalLineTypeIcon() {
+		if (Algorithms.isEmpty(getAdditionalTypeStr())) {
 			return null;
 		} else {
 			return getIcon(R.drawable.ic_action_group_name_16);
@@ -88,7 +92,27 @@ public class WptPtMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean needAdditionalTypeStr() {
+		return true;
+	}
+
+	@Override
 	public String getTypeStr() {
+		GpxSelectionHelper helper = getMapActivity().getMyApplication().getSelectedGpxHelper();
+		SelectedGpxFile selectedGpxFile = helper.getSelectedGPXFile(wpt);
+		StringBuilder sb = new StringBuilder();
+		sb.append(getMapActivity().getString(R.string.gpx_wpt));
+		sb.append(", ");
+		if (selectedGpxFile != null) {
+			File file = new File(selectedGpxFile.getGpxFile().path);
+			String gpxName = file.getName().replace(".gpx", "").replace("/", " ").replace("_", " ");
+			sb.append(gpxName);
+		}
+		return sb.toString();
+	}
+
+	@Override
+	public String getAdditionalTypeStr() {
 		return wpt.category != null ? wpt.category : "";
 	}
 

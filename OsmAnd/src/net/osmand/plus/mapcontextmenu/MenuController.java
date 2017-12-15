@@ -378,6 +378,10 @@ public abstract class MenuController extends BaseMenuController {
 		return true;
 	}
 
+	public boolean needAdditionalTypeStr() {
+		return false;
+	}
+
 	public boolean displayStreetNameInTitle() {
 		return false;
 	}
@@ -395,6 +399,10 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public Drawable getSecondLineTypeIcon() {
+		return null;
+	}
+
+	public Drawable getAdditionalLineTypeIcon() {
 		return null;
 	}
 
@@ -421,6 +429,10 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public String getTypeStr() {
+		return "";
+	}
+
+	public String getAdditionalTypeStr() {
 		return "";
 	}
 

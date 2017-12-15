@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -1115,6 +1116,18 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					line2Str.append(streetStr);
 				}
 				line2.setText(line2Str.toString());
+			}
+
+			TextView line3 = (TextView) view.findViewById(R.id.context_menu_line3);
+			String additionalTypeStr = menu.getAdditionalTypeStr();
+			if (TextUtils.isEmpty(additionalTypeStr)) {
+				line3.setVisibility(View.GONE);
+			} else {
+				line3.setVisibility(View.VISIBLE);
+				line3.setText(additionalTypeStr);
+				Drawable icon = menu.getAdditionalLineTypeIcon();
+				line3.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+				line3.setCompoundDrawablePadding(dpToPx(5f));
 			}
 
 			TextView openingHoursTextView = (TextView) view.findViewById(R.id.opening_hours_text_view);
