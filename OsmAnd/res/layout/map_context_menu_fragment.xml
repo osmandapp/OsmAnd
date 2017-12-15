@@ -74,14 +74,16 @@
             </LinearLayout>
 
             <GridView
-                android:paddingLeft="@dimen/context_menu_padding_margin_default"
-                android:paddingRight="@dimen/context_menu_padding_margin_default"
-                android:visibility="gone"
-                android:horizontalSpacing="@dimen/context_menu_padding_margin_medium"
                 android:id="@+id/transport_stop_routes_grid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:numColumns="10" />
+                android:columnWidth="@dimen/context_menu_transport_grid_item_width"
+                android:horizontalSpacing="@dimen/context_menu_transport_grid_spacing"
+                android:numColumns="auto_fit"
+                android:paddingLeft="@dimen/context_menu_padding_margin_default"
+                android:paddingRight="@dimen/context_menu_padding_margin_default"
+                android:verticalSpacing="@dimen/context_menu_transport_grid_spacing"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:paddingLeft="@dimen/context_menu_padding_margin_default"

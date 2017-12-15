@@ -146,6 +146,9 @@
 	<dimen name="context_menu_transport_stop_item_height">16dp</dimen>
 	<dimen name="context_menu_main_actions_padding_top">6dp</dimen>
 	<dimen name="context_menu_main_actions_icon_margin">3dp</dimen>
+	<dimen name="context_menu_transport_grid_spacing">4dp</dimen>
+	<dimen name="context_menu_transport_grid_item_width">32dp</dimen>
+	<dimen name="context_menu_transport_grid_item_height">18dp</dimen>
 
 	<dimen name="fab_size_with_shadow">62dp</dimen>
     <dimen name="fab_margin_right">12dp</dimen>
@@ -155,6 +158,7 @@
     <dimen name="default_list_text_size">16sp</dimen>
     <dimen name="default_desc_text_size">14sp</dimen>
     <dimen name="default_sub_text_size">12sp</dimen>
+	<dimen name="default_sub_text_size_small">10sp</dimen>
 	<dimen name="welcome_header_text_size">23sp</dimen>
 
 	<dimen name="default_split_segments_overview">13sp</dimen>

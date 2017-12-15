@@ -75,6 +75,9 @@
 	<dimen name="context_menu_transport_stop_item_height">24dp</dimen>
 	<dimen name="context_menu_main_actions_padding_top">9dp</dimen>
 	<dimen name="context_menu_main_actions_icon_margin">5dp</dimen>
+	<dimen name="context_menu_transport_grid_spacing">6dp</dimen>
+	<dimen name="context_menu_transport_grid_item_width">48dp</dimen>
+	<dimen name="context_menu_transport_grid_item_height">27dp</dimen>
 
 	<dimen name="fab_size_with_shadow">90dp</dimen>
 	<dimen name="fab_margin_right">18dp</dimen>
@@ -90,6 +93,7 @@
     <dimen name="default_list_text_size">18sp</dimen>
     <dimen name="default_desc_text_size">16sp</dimen>
     <dimen name="default_sub_text_size">14sp</dimen>
+	<dimen name="default_sub_text_size_small">12sp</dimen>
 	<dimen name="welcome_header_text_size">27sp</dimen>
 
 	<dimen name="dialog_header_text_size">24sp</dimen>
