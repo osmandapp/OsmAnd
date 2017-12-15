@@ -36,6 +36,11 @@ public class FavouritePointMenuController extends MenuController {
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
 		}
+		if (getObject() instanceof TransportStop) {
+			TransportStop stop = (TransportStop) getObject();
+			TransportStopController transportStopController = new TransportStopController(getMapActivity(), pointDescription, stop);
+			transportStopController.processTransportStop(builder);
+		}
 	}
 
 	@Override
@@ -120,12 +125,6 @@ public class FavouritePointMenuController extends MenuController {
 			if (originObject instanceof Amenity) {
 				Amenity amenity = (Amenity) originObject;
 				AmenityMenuController.addPlainMenuItems(amenity, AmenityMenuController.getTypeStr(amenity), builder);
-			} else if (originObject instanceof TransportStop) {
-				TransportStop stop = (TransportStop) originObject;
-				TransportStopController transportStopController =
-						new TransportStopController(getMapActivity(), pointDescription, stop);
-				transportStopController.addPlainMenuItems(builder, latLon);
-				addMyLocationToPlainItems(latLon);
 			}
 		} else {
 			addMyLocationToPlainItems(latLon);

@@ -17,12 +17,14 @@ import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.binary.BinaryMapIndexReader;
@@ -463,7 +465,6 @@ public class MenuBuilder {
 		baseView.addView(ll);
 
 		// Icon
-		boolean showIcon = false;
 		if (icon != null) {
 			LinearLayout llIcon = new LinearLayout(view.getContext());
 			llIcon.setOrientation(LinearLayout.HORIZONTAL);
@@ -479,7 +480,6 @@ public class MenuBuilder {
 			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 			iconView.setImageDrawable(icon);
 			llIcon.addView(iconView);
-			showIcon = true;
 		}
 
 		// Text
@@ -489,7 +489,7 @@ public class MenuBuilder {
 
 		TextViewEx textView = new TextViewEx(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextParams.setMargins(showIcon ? 0 : dpToPx(16f), dpToPx(8f), 0, dpToPx(8f));
+		llTextParams.setMargins(icon != null ? 0 : dpToPx(16f), dpToPx(8f), 0, dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textView.setTextSize(16);
@@ -687,6 +687,65 @@ public class MenuBuilder {
 		);
 	}
 
+	private void buildTransportRouteRow(ViewGroup parent, TransportStopRoute r, OnClickListener listener) {
+		if (!isFirstRow()) {
+			buildRowDivider(parent, false);
+		}
+
+		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ctx_menu_transport_route_layout, parent, false);
+		TextView routeDesc = (TextView) view.findViewById(R.id.route_desc);
+		routeDesc.setText(r.getDescription(getMapActivity().getMyApplication(), true));
+		routeDesc.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		int drawableResId = r.type == null ? R.drawable.ic_action_polygom_dark : r.type.getResourceId();
+		((ImageView) view.findViewById(R.id.route_type_icon)).setImageDrawable(getRowIcon(drawableResId));
+		((TextView) view.findViewById(R.id.route_ref)).setText(r.route.getRef());
+		view.setOnClickListener(listener);
+		int typeResId;
+		switch (r.type) {
+			case BUS:
+				typeResId = R.string.poi_route_bus_ref;
+				break;
+			case TRAM:
+				typeResId = R.string.poi_route_tram_ref;
+				break;
+			case FERRY:
+				typeResId = R.string.poi_route_ferry_ref;
+				break;
+			case TRAIN:
+				typeResId = R.string.poi_route_train_ref;
+				break;
+			case SHARE_TAXI:
+				typeResId = R.string.poi_route_share_taxi_ref;
+				break;
+			case FUNICULAR:
+				typeResId = R.string.poi_route_funicular_ref;
+				break;
+			case LIGHT_RAIL:
+				typeResId = R.string.poi_route_light_rail_ref;
+				break;
+			case MONORAIL:
+				typeResId = R.string.poi_route_monorail_ref;
+				break;
+			case TROLLEYBUS:
+				typeResId = R.string.poi_route_trolleybus_ref;
+				break;
+			case RAILWAY:
+				typeResId = R.string.poi_route_railway_ref;
+				break;
+			case SUBWAY:
+				typeResId = R.string.poi_route_subway_ref;
+				break;
+			default:
+				typeResId = R.string.poi_filter_public_transport;
+				break;
+		}
+		((TextView) view.findViewById(R.id.route_type_text)).setText(typeResId);
+
+		parent.addView(view);
+
+		rowBuilt();
+	}
+
 	private CollapsableView getCollapsableTransportStopRoutesView(final Context context, boolean collapsed) {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, false);
 
@@ -704,8 +763,7 @@ public class MenuBuilder {
 					getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
 				}
 			};
-			int drawableResId = r.type == null ? R.drawable.ic_action_polygom_dark : r.type.getResourceId();
-			buildRow(view, drawableResId, r.getDescription(getMapActivity().getMyApplication(), true), 0, false, null, false, 0, false, listener);
+			buildTransportRouteRow(view, r, listener);
 		}
 
 		return new CollapsableView(view, collapsed);

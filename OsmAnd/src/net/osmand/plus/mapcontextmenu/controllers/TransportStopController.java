@@ -82,14 +82,14 @@ public class TransportStopController extends MenuController {
 								   PointDescription pointDescription, TransportStop transportStop) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.transportStop = transportStop;
-		processTransportStop();
+		processTransportStop(builder);
 	}
 
 	@Override
 	protected void setObject(Object object) {
 		if (object instanceof TransportStop) {
 			this.transportStop = (TransportStop) object;
-			processTransportStop();
+			processTransportStop(builder);
 		}
 	}
 
@@ -127,19 +127,13 @@ public class TransportStopController extends MenuController {
 		return getPointDescription().getTypeName();
 	}
 
-	@Override
-	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, final LatLon latLon) {
-		addPlainMenuItems(builder, latLon);
-		super.addPlainMenuItems(typeStr, pointDescription, latLon);
-	}
-
 	public void addPlainMenuItems(MenuBuilder builder, final LatLon latLon) {
 		for (final TransportStopRoute r : routes) {
 			OnClickListener listener = new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
 					MapContextMenu mm = getMapActivity().getContextMenu();
-					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE, 
+					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
 							r.getDescription(getMapActivity().getMyApplication(), false));
 					mm.show(latLon, pd, r);
 					TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
@@ -158,7 +152,7 @@ public class TransportStopController extends MenuController {
 		}
 	}
 
-	private void processTransportStop() {
+	public void processTransportStop(MenuBuilder builder) {
 		routes.clear();
 		List<TransportIndexRepository> reps = getMapActivity().getMyApplication()
 				.getResourceManager().searchTransportRepositories(transportStop.getLocation().getLatitude(),
@@ -212,7 +206,7 @@ public class TransportStopController extends MenuController {
 					topType = type;
 				}
 				r.type = type;
-				r.desc = rs.getRef() + " " + (useEnglishNames ?  rs.getEnName(true) : rs.getName());
+				r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
 				r.route = rs;
 				r.refStop = refStop;
 				r.stop = s;

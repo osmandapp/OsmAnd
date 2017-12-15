@@ -230,7 +230,7 @@ public class AmenityMenuController extends MenuController {
 				TransportStopController.TransportStopType type = TransportStopController.TransportStopType.findType(rs.getType());
 				TransportStopRoute r = new TransportStopRoute();
 				r.type = type;
-				r.desc = rs.getRef() + " " + (useEnglishNames ? rs.getEnName(true) : rs.getName());
+				r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
 				r.route = rs;
 				r.stop = s;
 				r.distance = dist;
