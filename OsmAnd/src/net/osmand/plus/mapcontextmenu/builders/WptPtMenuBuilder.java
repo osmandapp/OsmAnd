@@ -1,5 +1,8 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import net.osmand.plus.GPXUtilities;
@@ -92,10 +95,30 @@ public class WptPtMenuBuilder extends MenuBuilder {
 				String title = view.getContext().getString(R.string.context_menu_points_of_group);
 				File file = new File(gpx.path);
 				String gpxName = file.getName().replace(".gpx", "").replace("/", " ").replace("_", " ");
-				buildRow(view, app.getIconsCache().getIcon(R.drawable.ic_action_folder), title, 0, gpxName,
+				int color = getPointColor(wpt, getFileColor(selectedGpxFile));
+				buildRow(view, app.getIconsCache().getPaintedIcon(R.drawable.ic_type_waypoints_group, color), title, 0, gpxName,
 						true, getCollapsableWaypointsView(view.getContext(), true, gpx, wpt),
 						false, 0, false, null);
 			}
 		}
+	}
+
+	private int getFileColor(@NonNull SelectedGpxFile g) {
+		return g.getColor() == 0 ? ContextCompat.getColor(app, R.color.gpx_color_point) : g.getColor();
+	}
+
+	@ColorInt
+	private int getPointColor(WptPt o, @ColorInt int fileColor) {
+		boolean visit = isPointVisited(o);
+		return visit ? ContextCompat.getColor(app, R.color.color_ok) : o.getColor(fileColor);
+	}
+
+	private boolean isPointVisited(WptPt o) {
+		boolean visit = false;
+		String visited = o.getExtensionsToRead().get("VISITED_KEY");
+		if (visited != null && !visited.equals("0")) {
+			visit = true;
+		}
+		return visit;
 	}
 }
