@@ -72,7 +72,7 @@
     
 	<string name="rendering_attr_noAdminboundaries_name">مرزها</string>
 	<string name="map_widget_max_speed">سرعت مجاز</string>
-    <string name="route_descr_lat_lon">عرض جغرافیایی %1$.3f، طول جغرافیایی %2$.3f</string>
+    <string name="route_descr_lat_lon">عرض %1$.3f، طول %2$.3f</string>
     
     <string name="no_buildings_found">ساختمانی یافت نشد.</string>
     <string name="search_villages_and_postcodes">جست‌وجوی روستاها یا کدهای پستی بیشتر</string>
@@ -1430,7 +1430,7 @@
     <string name="osmo_auto_send_locations">شروع خودکار سفر</string>
     <string name="osmo_tracker_id">شناسهٔ ردیاب</string>
     <string name="osmo_tracker_id_descr">برای مشاهدهٔ شناسهٔ ردیاب لمس کنید.</string>
-    <string name="osmo_session_token">توکن نشست: %1$s</string>
+    <string name="osmo_session_token">شناسهٔ نشست: %1$s</string>
     <string name="osmo_auth_pending">در انتظار اعتبارسنجی…</string>
     <string name="osmo_locations_sent">مکان‌های ارسال‌شده %1$d (در حافظهٔ میانجی %2$d)</string>
     <string name="osmo_conn_successfull">اتصال برقرار شد: %1$s</string>
@@ -1438,7 +1438,7 @@
     <string name="use_points_as_intermediates">محاسبهٔ مسیر بین نقاط</string>
     <string name="osmo_mode_restart">راه‌اندازی مجدد نشست OsMo</string>
     <string name="osmo_settings_debug">اطلاعات خطایابی</string>
-    <string name="osmo_follow">در جریان</string>
+    <string name="osmo_follow">دنبال‌کردن</string>
     <string name="osmo_sign_in">ورود</string>
     <string name="osmo_create_groups_confirm">برای ساختن گروه باید ابتدا در OsMo عضو شده باشید.</string>
     <string name="osmo_credentials_not_valid">اطلاعات کاربری شما برای OsMo معتبر نیست.</string>
@@ -1495,8 +1495,8 @@
     <string name="shared_string_my_favorites">نقاط برگزیدهٔ من</string>
     <string name="shared_string_my_places">مکان‌های من</string>
     
-    <string name="osmo_user_joined">کاربر %1$s تاریخ عضویت %2$s</string>
-    <string name="osmo_user_left">کاربر %1$s گروه را ترک کرد %2$s</string>
+    <string name="osmo_user_joined">کاربر %1$s به گروه %2$s پیوست</string>
+    <string name="osmo_user_left">کاربر %1$s گروه %2$s را ترک کرد</string>
     <string name="osmo_show_group_notifications">نمایش اطلاعیه‌های گروه</string>
     <string name="osmo_show_group_notifications_descr">زمانی که کاربر به گروه می‌پیوندد یا گروه را ترک می‌کند، پیام محوشونده نشان بده.</string>
     <string name="loading_smth">بارگیری %1$s…</string>
@@ -1554,7 +1554,7 @@
     <string name="osmo_auto_connect_descr">پس از راه‌اندازی برنامه به‌صورت خودکار به سرویس متصل شو.</string>
     <string name="osmo_auto_connect">اتصال خودکار</string>
     <string name="osmo_start_service">سرویس OsMo</string>
-    <string name="osmo_gpx_track_downloaded">OsMo مسیر %1$s دانلود شد.</string>
+    <string name="osmo_gpx_track_downloaded">مسیر OsMo %1$s دانلود شد.</string>
     <string name="no_index_file_to_download">فایلی برای دانلود پیدا نشد. لطفاً اتصال اینترنت را بررسی کنید.</string>
     <string name="osmo_auth_error_short">اجازهٔ دسترسی احراز نشد</string>
     <string name="osmo_auth_error">تأیید مجوز OsMo با خطا مواجه شد: %1$s.
@@ -1830,7 +1830,8 @@
     <string name="waypoint_visit_after">بازدیدکردن بعد از</string>
     <string name="waypoint_visit_before">بازدیدکردن قبل از</string>
     <string name="simulate_your_location">شبیه‌سازی موقعیت شما</string>
-    <string name="short_location_on_map">%1$s,%2$s</string>
+    <string name="short_location_on_map">عرض %1$s
+\nطول %2$s</string>
     <string name="tips_and_tricks_descr">پرسش‌های رایج، تغییرات اخیر و سایر موارد.</string>
     <string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_selected">انتخاب شده</string>
@@ -2976,12 +2977,12 @@
     <string name="by_date">بر اساس تاریخ</string>
     <string name="by_type">بر اساس نوع</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
-    <string name="modify_the_search_query">عبارت جست‌وجوشده را اصلاح کنید.</string>
-    <string name="release_3_0">• تشخیص علائم ایست با توجه به مسیر رانندگی
-\n
-\n• الگوریتم جدید برای دادن مقادیر صعود و نزولِ مناسب به مسیرهای GPX
-\n
-\n
+    <string name="modify_the_search_query">کلمات جست‌وجوشده را اصلاح کنید.</string>
+    <string name="release_3_0">• تشخیص علائم ایست با توجه به مسیر رانندگی 
+\n 
+\n• الگوریتم جدید برای دادن مقادیر صعود و نزولِ مناسب به مسیرهای GPX 
+\n 
+\n 
 \n • در نظر گرفتن ناهمواری (صعود) برای محاسبهٔ زمان پیاده‌گردی (قاعدهٔ نای‌اسمیت)
 \n
 \n</string>
