@@ -365,7 +365,21 @@ public class MapMarkersDbHelper {
 					"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{marker.id, TAIL_NEXT_VALUE});
 		}
 
-		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " (" +
+						MARKERS_COL_ID + ", " +
+						MARKERS_COL_LAT + ", " +
+						MARKERS_COL_LON + ", " +
+						MARKERS_COL_DESCRIPTION + ", " +
+						MARKERS_COL_ACTIVE + ", " +
+						MARKERS_COL_ADDED + ", " +
+						MARKERS_COL_VISITED + ", " +
+						MARKERS_COL_GROUP_NAME + ", " +
+						MARKERS_COL_GROUP_KEY + ", " +
+						MARKERS_COL_COLOR + ", " +
+						MARKERS_COL_NEXT_KEY + ", " +
+						MARKERS_COL_DISABLED + ", " +
+						MARKERS_COL_SELECTED + ") " +
+						"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				new Object[]{marker.id, marker.getLatitude(), marker.getLongitude(), descr, active,
 						currentTime, visited, marker.groupName, marker.groupKey, marker.colorIndex,
 						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE, 0, 0});
