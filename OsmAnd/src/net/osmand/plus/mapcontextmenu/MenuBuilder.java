@@ -437,11 +437,17 @@ public class MenuBuilder {
 	public View buildRow(View view, int iconId, String text, int textColor,
 							boolean collapsable, final CollapsableView collapsableView,
 							boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener) {
-		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textColor, collapsable, collapsableView,
+		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textColor, null, collapsable, collapsableView,
 				needLinks, textLinesLimit, isUrl, onClickListener);
 	}
 
 	public View buildRow(final View view, Drawable icon, final String text, int textColor,
+						 boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
+						 int textLinesLimit, boolean isUrl, OnClickListener onClickListener) {
+		return buildRow(view, icon, text, textColor, null, collapsable, collapsableView, needLinks, textLinesLimit, isUrl, onClickListener);
+	}
+
+	public View buildRow(final View view, Drawable icon, final String text, int textColor, String secondaryText,
 							boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
 							int textLinesLimit, boolean isUrl, OnClickListener onClickListener) {
 
@@ -490,11 +496,17 @@ public class MenuBuilder {
 		// Text
 		LinearLayout llText = new LinearLayout(view.getContext());
 		llText.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+		llTextViewParams.weight = 1f;
+		llTextViewParams.setMargins(0, 0, dpToPx(10f), 0);
+		llTextViewParams.gravity = Gravity.CENTER_VERTICAL;
+		llText.setLayoutParams(llTextViewParams);
 		ll.addView(llText);
 
+		// Primary text
 		TextViewEx textView = new TextViewEx(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextParams.setMargins(icon != null ? 0 : dpToPx(16f), dpToPx(8f), 0, dpToPx(8f));
+		llTextParams.setMargins(icon != null ? 0 : dpToPx(16f), dpToPx(secondaryText != null ? 10f : 8f), 0, dpToPx(secondaryText != null ? 6f : 8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textView.setTextSize(16);
@@ -514,13 +526,20 @@ public class MenuBuilder {
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
 		}
-
-		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextViewParams.weight = 1f;
-		llTextViewParams.setMargins(0, 0, dpToPx(10f), 0);
-		llTextViewParams.gravity = Gravity.CENTER_VERTICAL;
-		llText.setLayoutParams(llTextViewParams);
 		llText.addView(textView);
+
+		// Secondary text
+		if (!TextUtils.isEmpty(secondaryText)) {
+			TextViewEx textViewSecondary = new TextViewEx(view.getContext());
+			LinearLayout.LayoutParams llTextSecondaryParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			llTextSecondaryParams.setMargins(icon != null ? 0 : dpToPx(16f), 0, 0, dpToPx(6f));
+			textViewSecondary.setLayoutParams(llTextSecondaryParams);
+			textViewSecondary.setTypeface(FontCache.getRobotoRegular(view.getContext()));
+			textViewSecondary.setTextSize(14);
+			textViewSecondary.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_secondary_text_color_light: R.color.ctx_menu_bottom_view_secondary_text_color_dark));
+			textViewSecondary.setText(secondaryText);
+			llText.addView(textViewSecondary);
+		}
 
 		final ImageView iconViewCollapse = new ImageView(view.getContext());
 		if (collapsable && collapsableView != null) {

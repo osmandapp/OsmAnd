@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import android.view.View;
 
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -13,6 +14,7 @@ import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
@@ -85,10 +87,13 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedGPXFile(wpt);
 		if (selectedGpxFile != null) {
 			List<WptPt> points = selectedGpxFile.getGpxFile().getPoints();
+			GPXUtilities.GPXFile gpx = selectedGpxFile.getGpxFile();
 			if (points.size() > 0) {
-				String name = view.getContext().getString(R.string.context_menu_points_of_group);
-				buildRow(view, app.getIconsCache().getIcon(R.drawable.ic_action_folder), name, 0,
-						true, getCollapsableWaypointsView(view.getContext(), true, selectedGpxFile.getGpxFile(), wpt),
+				String title = view.getContext().getString(R.string.context_menu_points_of_group);
+				File file = new File(gpx.path);
+				String gpxName = file.getName().replace(".gpx", "").replace("/", " ").replace("_", " ");
+				buildRow(view, app.getIconsCache().getIcon(R.drawable.ic_action_folder), title, 0, gpxName,
+						true, getCollapsableWaypointsView(view.getContext(), true, gpx, wpt),
 						false, 0, false, null);
 			}
 		}
