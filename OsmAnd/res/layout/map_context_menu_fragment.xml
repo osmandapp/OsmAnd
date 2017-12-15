@@ -82,6 +82,8 @@
                 android:numColumns="auto_fit"
                 android:paddingLeft="@dimen/context_menu_padding_margin_default"
                 android:paddingRight="@dimen/context_menu_padding_margin_default"
+                android:paddingTop="@dimen/context_menu_transport_padding_top"
+                android:paddingBottom="@dimen/context_menu_transport_grid_spacing"
                 android:verticalSpacing="@dimen/context_menu_transport_grid_spacing"
                 android:visibility="gone"/>
 
@@ -106,7 +108,7 @@
                 <LinearLayout
                     android:id="@+id/compass_layout"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/context_menu_sub_info_height"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <ImageView
