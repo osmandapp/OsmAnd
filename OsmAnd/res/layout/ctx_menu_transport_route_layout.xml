@@ -44,8 +44,10 @@
 
             <ImageView
                 android:id="@+id/route_type_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/context_menu_transport_grid_spacing"
+                android:layout_marginEnd="@dimen/context_menu_transport_grid_spacing"
+                android:layout_width="@dimen/context_menu_transport_icon_size"
+                android:layout_height="@dimen/context_menu_transport_icon_size"
                 tools:src="@drawable/ic_action_polygom_dark"/>
 
             <TextView
