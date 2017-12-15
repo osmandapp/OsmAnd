@@ -3,6 +3,8 @@ package net.osmand.plus.mapcontextmenu.builders;
 import android.view.View;
 
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -13,6 +15,7 @@ import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class WptPtMenuBuilder extends MenuBuilder {
 
@@ -73,6 +76,21 @@ public class WptPtMenuBuilder extends MenuBuilder {
 			});
 		}
 
+		buildWaypointsView(view);
 		buildPlainMenuItems(view);
+	}
+
+	private void buildWaypointsView(View view) {
+		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
+		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedGPXFile(wpt);
+		if (selectedGpxFile != null) {
+			List<WptPt> points = selectedGpxFile.getGpxFile().getPoints();
+			if (points.size() > 0) {
+				String name = view.getContext().getString(R.string.context_menu_points_of_group);
+				buildRow(view, app.getIconsCache().getIcon(R.drawable.ic_action_folder), name, 0,
+						true, getCollapsableWaypointsView(view.getContext(), true, selectedGpxFile.getGpxFile(), wpt),
+						false, 0, false, null);
+			}
+		}
 	}
 }
