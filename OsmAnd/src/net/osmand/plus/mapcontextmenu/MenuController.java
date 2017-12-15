@@ -444,6 +444,14 @@ public abstract class MenuController extends BaseMenuController {
 		return "";
 	}
 
+	public String getLimitedTimeInfo() {
+		return "";
+	}
+
+	public boolean isLimitedTime() {
+		return false;
+	}
+
 	public String getNameStr() {
 		return pointDescription.getName();
 	}

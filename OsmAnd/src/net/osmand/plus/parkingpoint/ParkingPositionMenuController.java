@@ -1,6 +1,7 @@
 package net.osmand.plus.parkingpoint;
 
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
@@ -8,12 +9,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.util.Algorithms;
 
 public class ParkingPositionMenuController extends MenuController {
 
 	private ParkingPositionPlugin plugin;
-	private String parkingDescription = "";
+	private String parkingStartDescription = "";
+	private String parkingLeftDescription = "";
 
 	public ParkingPositionMenuController(MapActivity mapActivity, PointDescription pointDescription) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
@@ -34,13 +35,8 @@ public class ParkingPositionMenuController extends MenuController {
 	}
 
 	private void buildParkingDescription(MapActivity mapActivity) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(plugin.getParkingStartDesc(mapActivity));
-		String leftDesc = plugin.getParkingLeftDesc(mapActivity);
-		if (!Algorithms.isEmpty(leftDesc)) {
-			sb.append("\n").append(leftDesc);
-		}
-		parkingDescription = sb.toString();
+		parkingStartDescription = plugin.getParkingStartDesc(mapActivity);
+		parkingLeftDescription = plugin.getParkingLeftDesc(mapActivity);
 	}
 
 	@Override
@@ -62,7 +58,21 @@ public class ParkingPositionMenuController extends MenuController {
 
 	@Override
 	public boolean needTypeStr() {
-		return !Algorithms.isEmpty(parkingDescription);
+		return true;
+	}
+
+	@Override
+	public String getLimitedTimeInfo() {
+		boolean unlimited = TextUtils.isEmpty(parkingLeftDescription);
+		if (unlimited) {
+			return getMapActivity().getString(R.string.without_time_limit);
+		}
+		return parkingLeftDescription;
+	}
+
+	@Override
+	public boolean isLimitedTime() {
+		return !TextUtils.isEmpty(parkingLeftDescription);
 	}
 
 	@Override
@@ -77,7 +87,7 @@ public class ParkingPositionMenuController extends MenuController {
 
 	@Override
 	public String getTypeStr() {
-		return parkingDescription;
+		return parkingStartDescription;
 	}
 
 	@Override

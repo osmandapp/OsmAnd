@@ -1137,6 +1137,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
+	public String getLimitedTimeInfo() {
+		if (menuController != null) {
+			return menuController.getLimitedTimeInfo();
+		}
+		return "";
+	}
+
+	public boolean isLimitedTime() {
+		return menuController != null && menuController.isLimitedTime();
+	}
+
 	public boolean hasCustomAddressLine() {
 		return menuController != null && menuController.hasCustomAddressLine();
 	}

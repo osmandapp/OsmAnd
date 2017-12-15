@@ -1132,27 +1132,39 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			TextView openingHoursTextView = (TextView) view.findViewById(R.id.opening_hours_text_view);
 			OpeningHoursInfo openingHoursInfo = menu.getOpeningHoursInfo();
-			if (openingHoursInfo != null && openingHoursInfo.containsInfo()) {
-				int color = ContextCompat.getColor(getContext(), openingHoursInfo.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color);
-				openingHoursTextView.setTextColor(color);
-				String openingHoursStr = "";
-				if (openingHoursInfo.isOpened24_7()) {
-					openingHoursStr = getString(R.string.shared_string_is_open_24_7);
-				} else if (!Algorithms.isEmpty(openingHoursInfo.getNearToOpeningTime())) {
-					openingHoursStr = getString(R.string.will_be_opened_at) + " " + openingHoursInfo.getNearToOpeningTime();
-				} else if (!Algorithms.isEmpty(openingHoursInfo.getOpeningTime())) {
-					openingHoursStr = getString(R.string.opened_from) + " " + openingHoursInfo.getOpeningTime();
-				} else if (!Algorithms.isEmpty(openingHoursInfo.getNearToClosingTime())) {
-					openingHoursStr = getString(R.string.will_be_closed_at) + " " + openingHoursInfo.getNearToClosingTime();
-				} else if (!Algorithms.isEmpty(openingHoursInfo.getClosingTime())) {
-					openingHoursStr = getString(R.string.opened_till) + " " + openingHoursInfo.getClosingTime();
-				} else if (!Algorithms.isEmpty(openingHoursInfo.getOpeningDay())) {
-					openingHoursStr = getString(R.string.will_be_opened_on) + " " + openingHoursInfo.getOpeningDay() + ".";
+			String limitedTimeInfo = menu.getLimitedTimeInfo();
+			boolean containsOpeningHours = openingHoursInfo != null && openingHoursInfo.containsInfo();
+			boolean containsLimitedHoursInfo = !TextUtils.isEmpty(limitedTimeInfo);
+			if (containsOpeningHours || containsLimitedHoursInfo) {
+				int colorId;
+				if (containsOpeningHours) {
+					colorId = openingHoursInfo.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
+				} else {
+					colorId = menu.isLimitedTime() ? R.color.ctx_menu_amenity_closed_text_color : !nightMode ? R.color.icon_color : R.color.dash_search_icon_dark;
 				}
-				Drawable drawable = getPaintedContentIcon(R.drawable.ic_action_opening_hour_16, color);
+				openingHoursTextView.setTextColor(ContextCompat.getColor(getContext(), colorId));
+				String timeInfo = "";
+				if (containsOpeningHours) {
+					if (openingHoursInfo.isOpened24_7()) {
+						timeInfo = getString(R.string.shared_string_is_open_24_7);
+					} else if (!Algorithms.isEmpty(openingHoursInfo.getNearToOpeningTime())) {
+						timeInfo = getString(R.string.will_be_opened_at) + " " + openingHoursInfo.getNearToOpeningTime();
+					} else if (!Algorithms.isEmpty(openingHoursInfo.getOpeningTime())) {
+						timeInfo = getString(R.string.opened_from) + " " + openingHoursInfo.getOpeningTime();
+					} else if (!Algorithms.isEmpty(openingHoursInfo.getNearToClosingTime())) {
+						timeInfo = getString(R.string.will_be_closed_at) + " " + openingHoursInfo.getNearToClosingTime();
+					} else if (!Algorithms.isEmpty(openingHoursInfo.getClosingTime())) {
+						timeInfo = getString(R.string.opened_till) + " " + openingHoursInfo.getClosingTime();
+					} else if (!Algorithms.isEmpty(openingHoursInfo.getOpeningDay())) {
+						timeInfo = getString(R.string.will_be_opened_on) + " " + openingHoursInfo.getOpeningDay() + ".";
+					}
+				} else {
+					timeInfo = limitedTimeInfo;
+				}
+				Drawable drawable = getIcon(R.drawable.ic_action_opening_hour_16, colorId);
 				openingHoursTextView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
 				openingHoursTextView.setCompoundDrawablePadding(dpToPx(8));
-				openingHoursTextView.setText(openingHoursStr);
+				openingHoursTextView.setText(timeInfo);
 				openingHoursTextView.setVisibility(View.VISIBLE);
 			} else {
 				openingHoursTextView.setVisibility(View.GONE);
