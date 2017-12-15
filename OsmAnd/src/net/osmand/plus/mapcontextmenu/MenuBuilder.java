@@ -76,6 +76,7 @@ public class MenuBuilder {
 	protected OsmandApplication app;
 	protected LinkedList<PlainMenuItem> plainMenuItems;
 	private boolean firstRow;
+	private boolean matchWidthDivider;
 	protected boolean light;
 	private long objectId;
 	private LatLon latLon;
@@ -291,6 +292,7 @@ public class MenuBuilder {
 		if (routes.size() > 0) {
 			buildRow(view, 0, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false),
 					false, 0, false, null);
+			matchWidthDivider = true;
 		}
 		buildInternal(view);
 		if (showOnlinePhotos) {
@@ -625,6 +627,10 @@ public class MenuBuilder {
 	}
 
 	public void buildRowDivider(View view, boolean matchWidth) {
+		if (matchWidthDivider) {
+			matchWidth = true;
+			matchWidthDivider = false;
+		}
 		View horizontalLine = new View(view.getContext());
 		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
 		llHorLineParams.gravity = Gravity.BOTTOM;
