@@ -289,7 +289,7 @@ public class MenuBuilder {
 			buildPlainMenuItems(view);
 		}
 		if (routes.size() > 0) {
-			buildRow(view, 0, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), true),
+			buildRow(view, 0, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false),
 					false, 0, false, null);
 		}
 		buildInternal(view);
