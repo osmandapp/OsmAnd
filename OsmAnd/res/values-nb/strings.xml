@@ -1138,9 +1138,7 @@
     <string name="open_street_map_login_descr">Trengs for bidrag til openstreetmap.org.</string>
     
     <string name="download_files_not_enough_space">Det er ikke nok ledig plass til å laste ned %1$s MB (ledig: %2$s).</string>
-    <string name="download_files_question_space">Laste ned {0} fil(er)?
- Lagringsplass brukt er {1} MB.
- (Tilgjengelig plass er {2} MB.)</string>
+    <string name="download_files_question_space">Laste ned {0} fil(er)? Brukt lagringsplass er {1} MB. (Tilgjengelig plass er {2} MB.)</string>
     <string name="auto_follow_route_navigation">Auto-sentrer bare navigering</string>
     <string name="auto_follow_route_navigation_descr">Auto-sentrer kartvisning bare under navigering.</string>
     <string name="auto_follow_location_enabled">Auto-sentrer kartvisning i bruk.</string>

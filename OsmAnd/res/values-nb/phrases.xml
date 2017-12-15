@@ -393,7 +393,7 @@
 	<string name="poi_outdoor">Friluftslivsbutikk</string>
 	<string name="poi_paint">Fargehandel</string>
 	<string name="poi_payment_type">Betalingstype</string>
-	<string name="poi_fuel_type">Type</string>
+	<string name="poi_fuel_type">Brenselstype</string>
 	<string name="poi_aerodrome_type_public">Offentlig</string>
 	<string name="poi_aerodrome_type_military_public">Militær/offentlig</string>
 	<string name="poi_aerodrome_type_private">Privat</string>
@@ -573,7 +573,7 @@
 	<string name="poi_tents_no">Telt ikke tillatt</string>
 	<string name="poi_washing_machine">Vaskemaskin</string>
 	<string name="poi_washing_machine_no">Vaskemaskin: nei</string>
-	<string name="poi_fuel_avia_type">Type</string>
+	<string name="poi_fuel_avia_type">Brenselstype (avia)</string>
 	<string name="poi_clothes_type">Type</string>
 	<string name="poi_shoes_type">Type</string>
 	<string name="poi_fire_hydrant_type">Type</string>
@@ -695,7 +695,7 @@
 	<string name="poi_boat_rental_type">Leide båter</string>
 	<string name="poi_operational_status">Driftsstatus</string>
 	<string name="poi_water_supply_type">Vannforsyningstype</string>
-	<string name="poi_water_purification">Vannrenseanlegg</string>
+	<string name="poi_water_purification">Vannrensing</string>
 	<string name="poi_traffic_enforcement">Trafikkhåndhevelse</string>
 	<string name="poi_power">Energi</string>
 	<string name="poi_administrative">Administrativt</string>
@@ -1050,7 +1050,7 @@
 	<string name="poi_wiki_lang_mn">Mongolsk wiki</string>
 	<string name="poi_wiki_lang_nap">Napolitansk wiki</string>
 
-	<string name="poi_bus_trap">Busslomme</string>
+	<string name="poi_bus_trap">Bussluse</string>
 	<string name="poi_cattle_grid">Ferist</string>
 	<string name="poi_entrance_main">Hovedinngang</string>
 	<string name="poi_entrance">Inngang</string>
@@ -1211,7 +1211,7 @@
 	<string name="poi_payment_bitcoin_yes">bitcoin</string>
 	<string name="poi_payment_bitcoin_no">bitcoin godtas ikke</string>
 	<string name="poi_payment_visa_yes">Visakort</string>
-	<string name="poi_payment_visa_no">Visakort godtas</string>
+	<string name="poi_payment_visa_no">Visa-kort er ikke akseptert</string>
 	<string name="poi_payment_mastercard_yes">MasterCard</string>
 	<string name="poi_payment_maestro_yes">Mastro-kort</string>
 	<string name="poi_payment_maestro_no">Maestro-kort godtas ikke</string>
