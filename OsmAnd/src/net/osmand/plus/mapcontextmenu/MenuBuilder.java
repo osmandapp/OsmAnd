@@ -932,22 +932,11 @@ public class MenuBuilder {
 	}
 
 	protected TextViewEx buildButtonInCollapsableView(Context context, boolean selected) {
-		ColorStateList buttonColorStateList = new ColorStateList(
-				new int[][] {
-						new int[]{android.R.attr.state_pressed},
-						new int[]{}
-				},
-				new int[] {
-						context.getResources().getColor(light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p),
-						context.getResources().getColor(light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n)
-				}
-		);
-
 		TextViewEx button = new TextViewEx(new ContextThemeWrapper(context, light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
 		LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.context_menu_controller_height));
 		llWikiButtonParams.setMargins(0, 0, 0, dpToPx(8f));
 		button.setLayoutParams(llWikiButtonParams);
-		button.setTypeface(FontCache.getRobotoMedium(context));
+		button.setTypeface(FontCache.getRobotoRegular(context));
 		int bg;
 		if (selected) {
 			bg = light ? R.drawable.context_menu_controller_bg_light_selected: R.drawable.context_menu_controller_bg_dark_selected;
@@ -955,9 +944,24 @@ public class MenuBuilder {
 			bg = light ? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark;
 		}
 		button.setBackgroundResource(bg);
+		button.setTextSize(14);
 		int paddingSides = (int) context.getResources().getDimension(R.dimen.context_menu_button_padding_x);
 		button.setPadding(paddingSides, 0, paddingSides, 0);
-		button.setTextColor(buttonColorStateList);
+		if (!selected) {
+			ColorStateList buttonColorStateList = new ColorStateList(
+					new int[][] {
+							new int[]{android.R.attr.state_pressed},
+							new int[]{}
+					},
+					new int[] {
+							context.getResources().getColor(light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p),
+							context.getResources().getColor(light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n)
+					}
+			);
+			button.setTextColor(buttonColorStateList);
+		} else {
+			button.setTextColor(ContextCompat.getColor(context, light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		}
 		button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
 		button.setSingleLine(true);
 		button.setEllipsize(TextUtils.TruncateAt.END);
