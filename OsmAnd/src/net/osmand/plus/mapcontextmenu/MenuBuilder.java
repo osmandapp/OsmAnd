@@ -79,7 +79,7 @@ public class MenuBuilder {
 	protected OsmandApplication app;
 	protected LinkedList<PlainMenuItem> plainMenuItems;
 	private boolean firstRow;
-	private boolean matchWidthDivider;
+	protected boolean matchWidthDivider;
 	protected boolean light;
 	private long objectId;
 	private LatLon latLon;
@@ -933,7 +933,7 @@ public class MenuBuilder {
 
 	protected TextViewEx buildButtonInCollapsableView(Context context, boolean selected, boolean showAll) {
 		TextViewEx button = new TextViewEx(new ContextThemeWrapper(context, light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
-		LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.context_menu_controller_height));
+		LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(36f));
 		llWikiButtonParams.setMargins(0, 0, 0, dpToPx(8f));
 		button.setLayoutParams(llWikiButtonParams);
 		button.setTypeface(FontCache.getRobotoRegular(context));
@@ -947,7 +947,7 @@ public class MenuBuilder {
 		}
 		button.setBackgroundResource(bg);
 		button.setTextSize(14);
-		int paddingSides = (int) context.getResources().getDimension(R.dimen.context_menu_button_padding_x);
+		int paddingSides = dpToPx(10f);
 		button.setPadding(paddingSides, 0, paddingSides, 0);
 		if (!selected) {
 			ColorStateList buttonColorStateList = new ColorStateList(
