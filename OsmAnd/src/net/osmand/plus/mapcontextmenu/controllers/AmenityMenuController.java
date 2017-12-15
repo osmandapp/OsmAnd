@@ -21,6 +21,7 @@ import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.TransportIndexRepository;
+import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -38,7 +39,7 @@ public class AmenityMenuController extends MenuController {
 	private Amenity amenity;
 	private List<TransportStopRoute> routes = new ArrayList<>();
 
-	public AmenityMenuController(MapActivity mapActivity, PointDescription pointDescription, Amenity amenity) {
+	public AmenityMenuController(final MapActivity mapActivity, PointDescription pointDescription, final Amenity amenity) {
 		super(new AmenityMenuBuilder(mapActivity, amenity), pointDescription, mapActivity);
 		this.amenity = amenity;
 		if (amenity.getType().getKeyName().equals("transportation")) {
@@ -55,6 +56,16 @@ public class AmenityMenuController extends MenuController {
 			if (showTransportStops) {
 				processTransportStop();
 			}
+		}
+		if (amenity.getType().isWiki()) {
+			leftTitleButtonController = new TitleButtonController() {
+				@Override
+				public void buttonPressed() {
+					POIMapLayer.showWikipediaDialog(mapActivity, mapActivity.getMyApplication(), amenity);
+				}
+			};
+			leftTitleButtonController.caption = getMapActivity().getString(R.string.context_menu_read_article);
+			leftTitleButtonController.leftIcon = getIcon(R.drawable.ic_action_note_dark, isLight() ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
 		}
 	}
 
