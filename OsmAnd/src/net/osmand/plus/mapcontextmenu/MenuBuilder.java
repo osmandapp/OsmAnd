@@ -817,7 +817,7 @@ public class MenuBuilder {
 		for (int i = 0; i < points.size() && i < 10; i++) {
 			final FavouritePoint point = points.get(i);
 			boolean selected = selectedPoint != null && selectedPoint.equals(point);
-			TextViewEx button = buildButtonInCollapsableView(context, selected);
+			TextViewEx button = buildButtonInCollapsableView(context, selected, false);
 			String name = point.getName();
 			button.setText(name);
 
@@ -835,7 +835,7 @@ public class MenuBuilder {
 		}
 
 		if (points.size() > 10) {
-			TextViewEx button = buildButtonInCollapsableView(context, false);
+			TextViewEx button = buildButtonInCollapsableView(context, false, true);
 			button.setText(context.getString(R.string.shared_string_show_all));
 			button.setOnClickListener(new OnClickListener() {
 				@Override
@@ -861,7 +861,7 @@ public class MenuBuilder {
 		for (int i = 0; i < points.size() && i < 10; i++) {
 			final WptPt point = points.get(i);
 			boolean selected = selectedPoint != null && selectedPoint.equals(point);
-			TextViewEx button = buildButtonInCollapsableView(context, selected);
+			TextViewEx button = buildButtonInCollapsableView(context, selected, false);
 			button.setText(point.name);
 
 			if (!selected) {
@@ -878,7 +878,7 @@ public class MenuBuilder {
 		}
 
 		if (points.size() > 10) {
-			TextViewEx button = buildButtonInCollapsableView(context, false);
+			TextViewEx button = buildButtonInCollapsableView(context, false, true);
 			button.setText(context.getString(R.string.shared_string_show_all));
 			button.setOnClickListener(new OnClickListener() {
 				@Override
@@ -901,7 +901,7 @@ public class MenuBuilder {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
 
 		for (final Amenity wiki : nearestWiki) {
-			TextViewEx button = buildButtonInCollapsableView(context, false);
+			TextViewEx button = buildButtonInCollapsableView(context, false, false);
 			String name = wiki.getName(preferredMapAppLang, transliterateNames);
 			button.setText(name);
 
@@ -931,7 +931,7 @@ public class MenuBuilder {
 		return view;
 	}
 
-	protected TextViewEx buildButtonInCollapsableView(Context context, boolean selected) {
+	protected TextViewEx buildButtonInCollapsableView(Context context, boolean selected, boolean showAll) {
 		TextViewEx button = new TextViewEx(new ContextThemeWrapper(context, light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
 		LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.context_menu_controller_height));
 		llWikiButtonParams.setMargins(0, 0, 0, dpToPx(8f));
@@ -940,6 +940,8 @@ public class MenuBuilder {
 		int bg;
 		if (selected) {
 			bg = light ? R.drawable.context_menu_controller_bg_light_selected: R.drawable.context_menu_controller_bg_dark_selected;
+		} else if (showAll) {
+			bg = light ? R.drawable.context_menu_controller_bg_light_show_all : R.drawable.context_menu_controller_bg_dark_show_all;
 		} else {
 			bg = light ? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark;
 		}
