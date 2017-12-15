@@ -2109,9 +2109,9 @@ Lon %2$s</string>
     <string name="favorite_category_add_new">neu erstellen</string>
     <string name="next_proceed">Weiter</string>
 	<string name="file_size_in_mb">%.1f MB</string>
-    <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ angeben oder überspringen</string>
+    <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ angeben oder überspringen.</string>
     <string name="share_osm_edits_subject">OSM-Bearbeitung mit OsmAnd geteilt</string>
-    <string name="av_locations_descr">GPX-Datei mit Notizen</string>
+    <string name="av_locations_descr">GPX-Datei mit Notizen.</string>
     <string name="free_downloads_used_description">Anzeige der genutzten freien Downloads.</string>
 
     <string name="shared_string_location">Standort</string>
@@ -2225,7 +2225,7 @@ Derzeit sind nur {2} MB verfügbar.</string>
     <string name="osm_live_user_public_name">Öffentlicher Name</string>
     <string name="osm_live_hide_user_name">Meinen Namen nicht in Berichten anzeigen</string>
     <string name="osm_live_month_cost">Monatliche Kosten</string>
-    <string name="osm_live_month_cost_desc">Monatliche Zahlung</string>
+    <string name="osm_live_month_cost_desc">Monatliche Zahlung.</string>
     <string name="osm_live_active">Aktiv</string>
     <string name="osm_live_not_active">Inaktiv</string>
     <string name="osm_live_enter_email">Bitte gültige E-Mail-Adresse eingeben</string>
@@ -2234,7 +2234,7 @@ Derzeit sind nur {2} MB verfügbar.</string>
     <string name="osm_live_subscription_settings">Abonnementeinstellungen</string>
     <string name="osm_live_ask_for_purchase">Bitte kaufen Sie zuerst ein OsmAnd-Live-Abonnement</string>
 
-    <string name="osm_live_region_desc">Teile Ihrer Spende werden an OSM-Mitwirkende weitergegeben, die diese Region bearbeiten</string>
+    <string name="osm_live_region_desc">Teile Ihrer Spende werden an OSM-Mitwirkende weitergegeben, die diese Region bearbeiten.</string>
     <string name="osm_live_header">Dieses Abonnement schaltet stündliche Updates für die gesamten weltweiten Karten frei. 
 Ein Teil dieser Einnahmen geht zurück an die OSM-Gemeinschaft, eine Auszahlung erfolgt je nach Anzahl der Beiträge zu den OSM-Daten. 
 Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekte Möglichkeit.</string>
@@ -2317,7 +2317,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Zug</string>
     <string name="coords_format">Koordinatenformat</string>
-    <string name="coords_format_descr">Format geographischer Koordinaten</string>
+    <string name="coords_format_descr">Format geographischer Koordinaten.</string>
 		<string name="shared_string_is_open_24_7">24/7 geöffnet</string>
   	<string name="storage_directory_card">Speicherkarte</string>
     
@@ -2660,7 +2660,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_add_first_intermediate_desc">Drücken der Aktionstaste fügt die zum Bildschirmmittelpunkt gehörende Position als ersten Zwischenstopp ein.</string>
     <string name="subscribe_email_error">Fehler</string>
     <string name="subscribe_email_desc">Tragen Sie sich in unsere Mail-Liste zu App-Angeboten ein, und erhalten Sie dafür 3 zusätzliche Karten-Downloads!</string>
-    <string name="depth_contour_descr">Kartensatz, der die Meeresbodenkonturlinien und Meerestiefen enthält.</string>
+    <string name="depth_contour_descr">Kartensatz, der die Meeresbodenkonturlinien und nautischen Punkte enthält.</string>
     <string name="sea_depth_thanks">Vielen Dank, dass Sie die Meerestiefenkonturen erworben haben!</string>
     <string name="index_item_depth_contours_osmand_ext">Nautische Tiefenkonturen</string>
     <string name="index_item_depth_points_southern_hemisphere">Nautische Meerestiefen der Südhalbkugel</string>
@@ -2730,7 +2730,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_permissions">Berechtigungen</string>
     <string name="import_gpx_failed_descr">OsmAnd kann die Datei nicht importieren. Überprüfen Sie, ob OsmAnd Leserechte für den Dateispeicherort besitzt.</string>
     <string name="mapillary_menu_edit_text_hint">Benutzernamen eingeben</string>
-    <string name="mapillary_menu_descr_username">Bilder betrachten, die von einem bestimmten Benutzer eingestellt wurden.</string>
+    <string name="mapillary_menu_descr_username">Nur Bilder betrachten von</string>
     <string name="mapillary_menu_title_username">Benutzername</string>
     <string name="shared_string_reload">Erneut laden</string>
     <string name="mapillary_menu_descr_tile_cache">Kacheln neu laden, um nach Datumswerten zu suchen.</string>
@@ -2738,8 +2738,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="wrong_user_name">Falscher Benutzername!</string>
     <string name="shared_string_to">Bis</string>
     <string name="mapillary_menu_date_from">Von</string>
-    <string name="mapillary_menu_descr_dates">Bilder betrachten, die in einem bestimmten Zeitabschnitt eingestellt wurden.</string>
-    <string name="mapillary_menu_title_dates">Datumswerte</string>
+    <string name="mapillary_menu_descr_dates">Nur hinzugefügte Bilder betrachten</string>
+    <string name="mapillary_menu_title_dates">Datum</string>
     <string name="average">Durchschnitt</string>
     <string name="max_min">max/min</string>
     <string name="shared_string_reset">Zurücksetzen</string>
@@ -2831,7 +2831,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="yesterday">Gestern</string>
     <string name="last_seven_days">Letzte 7 Tage</string>
     <string name="this_year">Dieses Jahr</string>
-    <string name="passed">Passiert: %1$s</string>
+    <string name="passed">Zuletzt verwendet: %1$s</string>
     <string name="shared_string_markers">Markierungen</string>
     <string name="coordinates_format">Koordinatenformat</string>
     <string name="fast_coordinates_input_descr">Format zur Koordinateneingabe auswählen. Kann durch Anklicken von »Einstellungen« jederzeit geändert werden.</string>
@@ -2847,7 +2847,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="marker_save_as_track_descr">Markierungen in die hier festgelegte Datei exportieren:</string>
     <string name="marker_save_as_track">Als Track speichern</string>
     <string name="move_to_history">In den Verlauf verschieben</string>
-    <string name="group_will_be_removed_after_restart">Gruppe wird bei einem Neustart entfernt</string>
+    <string name="group_will_be_removed_after_restart">Gruppe wird beim nächsten Neustart entfernt.</string>
     <string name="show_passed">Passierte anzeigen</string>
     <string name="hide_passed">Passierte ausblenden</string>
     <string name="marker_show_distance_descr">Auswahl der Anzeige für Entfernungen und Richtungen zu Kartenmarkierungen in der Kartenansicht:</string>
@@ -2864,10 +2864,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_finish">Beenden</string>
     <string name="use_system_keyboard">Gerätetastatur verwenden</string>
     <string name="marker_moved_to_active">Kartenmarkierung auf Karte verschoben</string>
-    <string name="release_2_8">• Komplett überarbeitete Kartenmarkierungen mit Linien und Routenplanung
-\n
-\n• Entfernungsmesser bietet ausrichten auf Straße Funktion und speichern als Track
-\n
+    <string name="release_2_8">• Komplett überarbeitete Kartenmarkierungen mit Linien und Routenplanung 
+\n 
+\n• Entfernungsmesser bietet ausrichten auf Straße Funktion und speichern als Track 
+\n 
 \n• Bug-Fixes, neue Daten auf dem Server alle 30 Minuten, Updates implementiert in der Navigation
 \n
 \n</string>
@@ -2924,5 +2924,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="import_gpx_file_description">kann als Favoriten-Punkte oder als Track-Datei importiert werden.</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Widget oder Kontextmenü hinzufügen.</string>
     <string name="notes_by_date">Notizen nach Datum</string>
-    <string name="tap_on_map_to_hide_interface_descr">Berührung der Karte wechselt zwischen Steuerungselementen und Widgets.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Berührung der Karte verbirgt Steuerungselementen und Widgets.</string>
     </resources>
