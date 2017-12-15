@@ -177,7 +177,7 @@
 
 	<string name="osmand_development_plugin_description">Diese Erweiterung aktiviert Entwicklereinstellungen und Funktionen zur Fehlersuche, wie Testung oder Simulation der Routenberechnung, der Bildschirm-Render-Leistung oder der Sprachsteuerung. Diese Einstellungen sind für Entwickler gedacht und werden für die Verwendung von OsmAnd sonst nicht benötigt.</string>
 	<string name="plugins_screen">Erweiterungen</string>
-	<string name="prefs_plugins_descr">Erweiterungen aktivieren weiterte Einstellungen und zusätzliche Funktionen</string>
+	<string name="prefs_plugins_descr">Erweiterungen aktivieren weitere Einstellungen und zusätzliche Funktionen.</string>
 	<string name="prefs_plugins">Erweiterungen</string>
 	<string name="osm_editing_plugin_description">Diese Erweiterung ermöglicht das Erstellen und Bearbeiten von OSM-POI-Objekten, das Eintragen oder Kommentieren von OSM-Notizen, sowie das Hochladen von GPX-Dateien als Beiträge zu OSM (benötigt ein OSM-Benutzerkonto).
 \n
@@ -275,7 +275,7 @@
 	<string name="live_monitoring_start">Online-Aufzeichnung starten</string>
 	<string name="live_monitoring_stop">Online-Aufzeichnung beenden</string>
 	<string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
-	<string name="free_version_message">Diese kostenlose Version von OsmAnd ist limitiert auf %1$s Downloads und unterstützt keine offline Wikipedia-Artikel.</string>
+	<string name="free_version_message">Diese kostenlose Version von OsmAnd ist limitiert auf %1$s Downloads(Zum Hinzufügen und Aktualisieren der Karten) und unterstützt keine offline Wikipedia-Artikel.</string>
 	<string name="free_version_title">Kostenlose Version</string>
 	<string name="poi_context_menu_showdescription">Zeige POI-Beschreibung.</string>
 	<string name="index_name_north_america">Nordamerika</string>
@@ -383,7 +383,7 @@
 	<string name="file_with_name_already_exist">Datei mit gleichem Namen besteht bereits.</string>
 	<string name="shared_string_save">Speichern</string>
 	
-	<string name="local_index_upload_gpx_description">GPX-Dateien an OSM-Gemeinschaft übermitteln. Die Dateien können dort zur Kartenverbesserung verwendet werden.</string>
+	<string name="local_index_upload_gpx_description">GPX-Dateien an die OSM-Gemeinschaft übermitteln. Die Dateien können dort zur Kartenverbesserung verwendet werden.</string>
 	<string name="local_index_items_uploaded">%1$d von %2$d Datei(en) erfolgreich hochgeladen.</string>
 	<string name="local_index_mi_upload_gpx">An OSM senden</string>
 	<string name="show_more_map_detail">Mehr Kartendetails</string>
@@ -462,15 +462,15 @@
 	<string name="shared_string_none">Keine(r/s)</string>
 	<string name="map_overlay">Overlay-Karte</string>
 	<string name="map_overlay_descr">Karte als Überlagerung auswählen.</string>
-	<string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert</string>
-	<string name="select_tile_source_to_install">Wähle Karten(Kacheln) zu installieren oder aktualisieren</string>
-	<string name="internet_not_available">Internet Verbindung erforderlich, aber nicht verfügbar!</string>
+	<string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert.</string>
+	<string name="select_tile_source_to_install">Wähle Karten(Kacheln) zu installieren oder aktualisieren.</string>
+	<string name="internet_not_available">Internet Verbindung erforderlich, aber nicht verfügbar.</string>
 	<string name="install_more">Weitere installieren…</string>
 
 	<string name="level_to_switch_vector_raster_descr">Niedrigste Zoomstufe mit der Vektorkarten (statt Kacheln) verwendet werden sollen.</string>
 	<string name="level_to_switch_vector_raster">Min. Vektor-Zoomstufe</string>
 	
-	<string name="create_poi_link_to_osm_doc"> <u>Online OSM</u> Klassifizierung mit Bildern"</string>
+	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Klassifizierung mit Bildern.</string>
 	<string name="error_doing_search">Fehler in der Offline-Suche aufgetreten</string>
 	<string name="search_offline_geo_error">Konnte geointent nicht verarbeiten: \'%s\'</string>
 	<string name="search_osm_offline">Adresssuche mit Offline-Daten</string>
@@ -587,8 +587,8 @@
 	<string name="phone">Telefon</string>
 	<string name="download_type_to_filter">Nach Typ filtern</string>
 	<string name="use_high_res_maps">Hochauflösende Anzeige</string>
-	<string name="use_high_res_maps_descr">Unterdrückt Streckung (Unschärfe) von Kartenkacheln auf manchen Anzeigen</string>
-	<string name="unknown_location">Standort noch nicht ermittelt</string>
+	<string name="use_high_res_maps_descr">Unterdrückt Streckung (Unschärfe) von Kartenkacheln auf manchen Anzeigen.</string>
+	<string name="unknown_location">Position noch nicht bekannt</string>
 	
 	<string name="context_menu_item_search_transport">Suche ÖPNV</string>
 	<string name="transport_searching_transport">ÖPNV-Ergebnisse (kein Ziel):</string>
@@ -1263,7 +1263,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="app_mode_truck">LKW</string>
 	<string name="guidance_preferences_descr">Navigationseinstellungen</string>
 	<string name="routing_preferences_descr">Einstellungen für Routenberechnung</string>
-	<string name="speech_rate_descr">Sprachgeschwindigkeit der TTS-Ausgabe</string>
+	<string name="speech_rate_descr">Sprachgeschwindigkeit der TTS-Ausgabe bestimmen.</string>
 	<string name="speech_rate">Sprachgeschwindigkeit</string>
 	<string name="complex_route_calculation_failed">Schnelle Routenberechnung fehlgeschlagen (%s), Rückfall auf langsame Berechnung.</string>
 	<string name="disable_complex_routing_descr">Zwei-Phasen-Routing für Autonavigation deaktivieren.</string>
@@ -2925,4 +2925,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Widget oder Kontextmenü hinzufügen.</string>
     <string name="notes_by_date">Notizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Berührung der Karte verbirgt Steuerungselementen und Widgets.</string>
+    <string name="release_3_0">• Erkennung von Stoppschildern jetzt nach Fahrtrichtung
+\n
+\n• Neuer Algorithmus für die Bereitstellung von sinnvollen Auf-/Abstieg-Werten für GPX-tracks
+\n
+\n• Dauer des Aufstiegs entsprechend dem Gelände (Naismiths Regel)
+\n
+\n</string>
+    <string name="one_tap_active">Aktiviren mit einem Tap</string>
     </resources>
