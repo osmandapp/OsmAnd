@@ -33,8 +33,6 @@ import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;
 import net.osmand.util.MapUtils;
 
-import java.util.Collections;
-
 public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassListener, OsmAndLocationListener {
 
 	private MapMarkersActiveAdapter adapter;
@@ -65,37 +63,42 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 				if (pos == RecyclerView.NO_POSITION) {
 					return;
 				}
+
 				MapMarker marker = adapter.getItem(pos);
-				if (mapActivity.getMyApplication().getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
-					mapActivity.getMyApplication().getMapMarkersHelper().moveMarkerToTop(marker);
+				OsmandApplication app = mapActivity.getMyApplication();
+				if (app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
+					app.getMapMarkersHelper().moveMarkerToTop(marker);
 					updateAdapter();
 				} else {
-					WptPt wptPt = marker.wptPt;
-					FavouritePoint favouritePoint = marker.favouritePoint;
-					Object objectToShow;
-					PointDescription pointDescription;
-					if (wptPt != null) {
-						pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, wptPt.name);
-						objectToShow = wptPt;
-					} else if (favouritePoint != null) {
-						pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, favouritePoint.getName());
-						objectToShow = favouritePoint;
-					} else {
-						Amenity mapObj = null;
-						if (marker.mapObjectName != null && marker.point != null) {
-							mapObj = mapActivity.getMapLayers().getMapMarkersLayer()
-									.findAmenity(mapActivity.getMyApplication(), -1, Collections.singletonList(marker.mapObjectName), marker.point);
-						}
-						pointDescription = mapObj == null
-								? marker.getPointDescription(mapActivity)
-								: mapActivity.getMapLayers().getPoiMapLayer().getObjectName(mapObj);
-						objectToShow = mapObj == null ? marker : mapObj;
+					FavouritePoint fav = marker.favouritePoint == null
+							? app.getFavorites().getVisibleFavByLatLon(marker.point)
+							: marker.favouritePoint;
+					if (fav != null) {
+						showMap(marker.point, fav.getPointDescription(), fav);
+						return;
 					}
-					mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
-							15, pointDescription, true, objectToShow);
-					MapActivity.launchMapActivityMoveToTop(mapActivity);
-					((DialogFragment) getParentFragment()).dismiss();
+
+					WptPt pt = marker.wptPt == null
+							? app.getSelectedGpxHelper().getVisibleWayPointByLatLon(marker.point)
+							: marker.wptPt;
+					if (pt != null) {
+						showMap(marker.point, pt.getPointDescription(mapActivity), pt);
+						return;
+					}
+
+					Amenity mapObj = mapActivity.getMapLayers().getMapMarkersLayer().getMapObjectByMarker(marker);
+					PointDescription desc = mapObj == null
+							? marker.getPointDescription(mapActivity)
+							: mapActivity.getMapLayers().getPoiMapLayer().getObjectName(mapObj);
+					showMap(marker.point, desc, mapObj == null ? marker : mapObj);
 				}
+			}
+
+			private void showMap(LatLon latLon, PointDescription desc, Object objToShow) {
+				mapActivity.getMyApplication().getSettings().setMapLocationToShow(latLon.getLatitude(),
+						latLon.getLongitude(), 15, desc, true, objToShow);
+				MapActivity.launchMapActivityMoveToTop(mapActivity);
+				((DialogFragment) getParentFragment()).dismiss();
 			}
 
 			@Override

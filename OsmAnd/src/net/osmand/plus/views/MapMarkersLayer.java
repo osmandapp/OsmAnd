@@ -533,17 +533,32 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 						if (!unknownLocation && selectMarkerOnSingleTap) {
 							o.add(marker);
 						} else {
-							Amenity mapObj = null;
-							if (marker.mapObjectName != null && marker.point != null) {
-								mapObj = findAmenity(map.getMyApplication(), -1,
-										Collections.singletonList(marker.mapObjectName), marker.point);
+							if (isMarkerOnFavorite(marker) || isMarkerOnWaypoint(marker)) {
+								continue;
 							}
+							Amenity mapObj = getMapObjectByMarker(marker);
 							o.add(mapObj == null ? marker : mapObj);
 						}
 					}
 				}
 			}
 		}
+	}
+
+	private boolean isMarkerOnWaypoint(@NonNull MapMarker marker) {
+		return marker.point != null && map.getMyApplication().getSelectedGpxHelper().getVisibleWayPointByLatLon(marker.point) != null;
+	}
+
+	private boolean isMarkerOnFavorite(@NonNull MapMarker marker) {
+		return marker.point != null && map.getMyApplication().getFavorites().getVisibleFavByLatLon(marker.point) != null;
+	}
+
+	@Nullable
+	public Amenity getMapObjectByMarker(@NonNull MapMarker marker) {
+		if (marker.mapObjectName != null && marker.point != null) {
+			return findAmenity(map.getMyApplication(), -1, Collections.singletonList(marker.mapObjectName), marker.point);
+		}
+		return null;
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {

@@ -599,6 +599,16 @@ public class MapMarkersHelper {
 	}
 
 	@Nullable
+	public MapMarker getMapMarker(@NonNull LatLon latLon) {
+		for (MapMarker marker : mapMarkers) {
+			if (marker.point != null && marker.point.equals(latLon)) {
+				return marker;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
 	public MapMarker getMapMarker(@NonNull String mapObjectName) {
 		for (MapMarker marker : mapMarkers) {
 			if (marker.mapObjectName != null && marker.mapObjectName.equals(mapObjectName)) {
