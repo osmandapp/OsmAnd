@@ -2267,4 +2267,5 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_back">Voltar</string>
 	<string name="view">Ver</string>
 	<string name="waypoints_added_to_map_markers">Pontos de passagem adicionados nos marcadores de mapa</string>
-	</resources>
+	<string name="show_passed">Mostrar o que passou</string>
+    </resources>
