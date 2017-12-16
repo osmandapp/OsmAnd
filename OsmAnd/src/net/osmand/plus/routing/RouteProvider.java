@@ -728,6 +728,8 @@ public class RouteProvider {
 			p = GeneralRouterProfile.PEDESTRIAN;
 		} else if(params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)){
 			p = GeneralRouterProfile.CAR;
+		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BOAT)) {
+			p = GeneralRouterProfile.BOAT;
 		} else {
 			return null;
 		}
@@ -830,7 +832,7 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult applicationModeNotSupported(RouteCalculationParams params) {
-		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanStringCtx(params.ctx)+ "'is not supported.");
+		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanStringCtx(params.ctx)+ "' is not supported.");
 	}
 
 	private RouteCalculationResult interrupted() {
