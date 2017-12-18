@@ -23,13 +23,17 @@ import net.osmand.util.Algorithms;
 public class FavouritePointMenuController extends MenuController {
 
 	private FavouritePoint fav;
+	private MapMarker mapMarker;
 
 	public FavouritePointMenuController(MapActivity mapActivity, PointDescription pointDescription, final FavouritePoint fav) {
 		super(new FavouritePointMenuBuilder(mapActivity, fav), pointDescription, mapActivity);
 		this.fav = fav;
 
 		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
-		final MapMarker mapMarker = markersHelper.getMapMarker(fav);
+		mapMarker = markersHelper.getMapMarker(fav);
+		if (mapMarker == null) {
+			mapMarker = markersHelper.getMapMarker(new LatLon(fav.getLatitude(), fav.getLongitude()));
+		}
 		if (mapMarker != null) {
 			MapMarkerMenuController markerMenuController =
 					new MapMarkerMenuController(mapActivity, mapMarker.getPointDescription(mapActivity), mapMarker);
@@ -87,7 +91,7 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public boolean isWaypointButtonEnabled() {
-		return getMapActivity().getMyApplication().getMapMarkersHelper().getMapMarker(fav) == null;
+		return mapMarker == null;
 	}
 
 	@Override

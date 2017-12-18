@@ -2711,7 +2711,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_paused">In pausa</string>
     <string name="type_city_town">Scrivi la città o il paese</string>
     <string name="type_postcode">Scrivi il codice postale</string>
-    <string name="nearest_cities">Città nei dintorni</string>
+    <string name="nearest_cities">Città vicine</string>
     <string name="select_city">Seleziona la città</string>
     <string name="select_postcode">Seleziona il codice postale</string>
     <string name="select_street">Seleziona la strada</string>
@@ -2740,7 +2740,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="hide_from_zoom_level">Nascondi dal livello di zoom</string>
     <string name="srtm_menu_download_descr">Per visualizzare le linee isoipse nella mappa, devi scaricare la mappa delle linee isoipse per questa regione.</string>
     <string name="shared_string_plugin">Componente aggiuntivo</string>
-    <string name="srtm_purchase_header">Per visualizzare le linee isoipse nella mappa, devi acquistare e installare il componente aggiuntivo Contour Lines</string>
+    <string name="srtm_purchase_header">Per visualizzare le linee isoipse nella mappa, devi acquistare e installare il componente aggiuntivo delle curve di livello</string>
     <string name="srtm_color_scheme">Schema colori</string>
     <string name="routing_attr_allow_private_name">Permetti l\'accesso alle proprietà private</string>
     <string name="routing_attr_allow_private_description">Permetti l\'accesso alle aree private.</string>
@@ -2837,7 +2837,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="measurement_tool">Distanziometro</string>
     <string name="none_point_error">Aggiungi almeno un punto.</string>
     <string name="enter_gpx_name">Nome del file GPX:</string>
-    <string name="show_on_map_after_saving">Mostra sulla mappa dopo averlo salvato</string>
+    <string name="show_on_map_after_saving">Dopo averlo salvato mostralo sulla mappa</string>
     <string name="mappilary_no_internet_desc">Hai bisogno di internet per vedere le foto di Mapillary</string>
     <string name="add_waypoint">Aggiungi Waypoint</string>
     <string name="save_gpx_waypoint">Salva Waypoint GPX</string>
@@ -2852,7 +2852,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="add_point_before">Aggiungi un punto prima</string>
     <string name="add_point_after">Aggiungi un punto dopo</string>
     <string name="shared_string_options">Opzioni</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd aggiungerà i punti al percorso, in base al tipo di navigazione.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd collegherà i punti ai percorso in base al profilo di navigazione.</string>
     <string name="measurement_tool_save_as_new_track_descr">Puoi salvare i punti sia come punti di un percorso che come linea.</string>
     <string name="choose_navigation_type">Scegli il profilo di navigazione</string>
     <string name="exit_without_saving">Uscire senza salvare?</string>
@@ -2898,7 +2898,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evita strade di ghiaccio e guadi</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evita strade di ghiaccio e guadi.</string>
     <string name="use_location">Utilizza la posizione</string>
-    <string name="add_location_as_first_point_descr">Aggiungo la tua posizione come primo punto per pianificare un percorso perfetto.</string>
+    <string name="add_location_as_first_point_descr">Aggiungi la tua posizione come primo punto per pianificare un percorso perfetto.</string>
     <string name="my_location">Mia posizione</string>
     <string name="shared_string_finish">Fine</string>
     <string name="plan_route">Pianifica percorso</string>
@@ -2911,8 +2911,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="group_will_be_removed_after_restart">Il gruppo verrà rimosso al prossimo riavvio dell\'app.</string>
     <string name="show_guide_line">Mostra le linee guida</string>
     <string name="show_arrows_on_the_map">Mostra le frecce nella mappa</string>
-    <string name="show_passed">Mostra i precedenti</string>
-    <string name="hide_passed">Nascondi i precedenti</string>
+    <string name="show_passed">Mostra superati</string>
+    <string name="hide_passed">Nascondi i superati</string>
     <string name="osmand_extended_description_part2">Navigazione GPS • Puoi scegliere fra la modalità offline (nessun costo di roaming quando sei all\'estero) oppure online (più veloce) • La guida vocale svolta per svolta ti guida lungo il percorso (voci registrate e sintetizzate) • Il percorso viene ricalcolato quando devii • Indicazioni di corsia, nomi delle strade e tempo di arrivo stimato saranno d\'aiuto lungo il percorso • Per rendere il percorso più veloce il passaggio dalla modalità diurna/notturna automatico •Puoi scegliere di visualizzare i limiti di velocità, ed essere avvisato quando li superi • Lo zoom della mappa si adegua alla velocità • Puoi cercare le destinazioni per indirizzo, per categoria (es.: parcheggio, ristorante, hotel, stazione di rifornimento, museo), oppure tramite le coordinate geografiche • Supporta i punti intermedi nel tuo itinerario • Puoi registrare la tua traccia GPX oppure caricarne una e seguirla</string>
     <string name="osmand_extended_description_part3">Mappa • Mostra i PDI (punti di interesse) vicino a te • Disponi la mappa nella direzione del movimento (o della bussola) • Mostra dove sei e dove stai andando • Condividi la tua posizione perché i tuoi amici possano trovarti • Raccogli i luoghi più importanti nei Favoriti • Ti permette di scegliere come visualizzare i nomi nella mappa: in inglese, locale, oppure la pronuncia • Visualizza mattonelle online speciali, vista satellitare (di Bing), diverse sovrapposizioni come turistico/navigazione tracce GPX e strati aggiuntivi con trasparenze personalizzabili</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automatizzata Navigazione Direzioni) è un\'applicazione di navigazione con l\'accesso ai dati delle mappe mondiali, gratuite e di grande qualità OpenStreetMap (OSM). Goditi la navigazione con indicazioni visive e vocali, la visualizzazione dei PDI (punti di interesse), creando e gestendo le tracce GPX, usando visualizzazione delle linee isoipse e dell\'altitudine, scegliendo fra le modalità auto, bici, pedone, modifiche OSM e molto altro. OsmAnd+ è la versione dell\'app a pagamento. Acquistandola supporti il progetto, finanzi lo sviluppo di nuove funzionalità e ricevi gli ultimi aggiornamenti. Alcune delle maggiori caratteristiche:</string>
@@ -2931,10 +2931,10 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="import_track_desc">Il file %1$s non contiene punti intermedi, importarlo come traccia?</string>
     <string name="move_point">Sposta il punto</string>
     <string name="add_segment_to_the_track">Aggiungi a una traccia GPX</string>
-<string name="osn_modify_dialog_error">Si é verificato un errore: la nota non è stata modificata</string>
+<string name="osn_modify_dialog_error">Si è verificato un errore: la nota non è stata modificata</string>
     <string name="shared_string_road">Strada</string>
     <string name="show_map">Mostra la mappa</string>
-    <string name="route_is_calculated">Percorso ricalcolato</string>
+    <string name="route_is_calculated">Il percorso è calcolato</string>
     <string name="round_trip">Percorso circolare</string>
     <string name="plan_route_no_markers_toast">Devi aggiungere almeno un marcatore per utilizzare questa funzionalità.</string>
     <string name="wrong_input">Dati immessi errati</string>
@@ -2998,7 +2998,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="one_tap_active_descr">Tappa un marcatore sulla mappa per muoverlo al primo posto nei marcatori attivi senza aprire il menù contestuale.</string>
     <string name="one_tap_active">Un solo tap attivo</string>
     <string name="empty_state_av_notes">Prendi delle note!</string>
-    <string name="empty_state_av_notes_desc">Aggiungi note audio, video o foto ad ogni punto sulla mappa, utilizzando il widget o il menù contestuale.</string>
+    <string name="empty_state_av_notes_desc">Aggiungi note audio, video o foto in qualsiasi punto sulla mappa, utilizzando il widget o il menù contestuale.</string>
     <string name="notes_by_date">Note ordinate per data</string>
     <string name="by_date">Per data</string>
     <string name="by_type">Per ordine alfabetico</string>

@@ -3,10 +3,12 @@ package net.osmand.plus;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
+import net.osmand.data.LatLon;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
@@ -384,6 +386,21 @@ public class GpxSelectionHelper {
 		for (SelectedGpxFile s : selectedGPXFiles) {
 			if (s.isShowCurrentTrack()) {
 				return s;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public WptPt getVisibleWayPointByLatLon(@NonNull LatLon latLon) {
+		for (SelectedGpxFile selectedGpx : selectedGPXFiles) {
+			GPXFile gpx;
+			if (selectedGpx != null && (gpx = selectedGpx.getGpxFile()) != null) {
+				for (WptPt pt : gpx.getPoints()) {
+					if (latLon.equals(new LatLon(pt.getLatitude(), pt.getLongitude()))) {
+						return pt;
+					}
+				}
 			}
 		}
 		return null;

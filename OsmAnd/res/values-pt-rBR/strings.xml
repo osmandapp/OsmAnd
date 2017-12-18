@@ -2264,4 +2264,9 @@ Pôr do Sol: %2$s</string>
     <string name="save_track_min_speed">Velocidade mínima para registro</string>
     <string name="save_track_precision">Acuidade mínima para registro</string>
     <string name="coords_format_descr">Formato para as coordenadas geográficas</string>
+    <string name="shared_string_back">Voltar</string>
+	<string name="view">Ver</string>
+	<string name="waypoints_added_to_map_markers">Pontos de passagem adicionados nos marcadores de mapa</string>
+	<string name="show_passed">Mostrar o que passou</string>
+    <string name="hide_passed">Ocultar o que passou</string>
     </resources>

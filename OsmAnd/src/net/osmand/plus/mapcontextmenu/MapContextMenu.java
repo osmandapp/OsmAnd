@@ -797,7 +797,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					MapMarkersDialogFragment.showInstance(mapActivity);
 				} else {
 					mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
-							getPointDescriptionForMarker());
+							getPointDescriptionForMarker(), object instanceof Amenity ? ((Amenity) object).getName() : null);
 				}
 			} else {
 				mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),

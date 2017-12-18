@@ -2845,7 +2845,7 @@
     <string name="mark_passed">تعيين كمتجاوز</string>
     <string name="empty_state_osm_edits">إنشاء أو تعديل أشياء OSM</string>
     <string name="empty_state_osm_edits_descr">إنشاء أو تعديل OSM POI، فتح أو التعليق على ملاحظات OSM والمساهمة بملفات GPX مسجلة.</string>
-    <string name="shared_string_deleted">تم حذفه</string>
+    <string name="shared_string_deleted">حُذف</string>
     <string name="shared_string_edited">تم تعديله</string>
     <string name="shared_string_added">تمت إضافة</string>
     <string name="modify_the_search_query">تغيير طلب البحث.</string>

@@ -11,6 +11,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -39,7 +40,9 @@ public class AmenityMenuController extends MenuController {
 	private Amenity amenity;
 	private List<TransportStopRoute> routes = new ArrayList<>();
 
-	public AmenityMenuController(final MapActivity mapActivity, PointDescription pointDescription, final Amenity amenity) {
+	private MapMarker marker;
+
+	public AmenityMenuController(MapActivity mapActivity, PointDescription pointDescription, Amenity amenity) {
 		super(new AmenityMenuBuilder(mapActivity, amenity), pointDescription, mapActivity);
 		this.amenity = amenity;
 		if (amenity.getType().getKeyName().equals("transportation")) {
@@ -57,15 +60,24 @@ public class AmenityMenuController extends MenuController {
 				processTransportStop();
 			}
 		}
-		if (amenity.getType().isWiki()) {
-			leftTitleButtonController = new TitleButtonController() {
-				@Override
-				public void buttonPressed() {
-					POIMapLayer.showWikipediaDialog(mapActivity, mapActivity.getMyApplication(), amenity);
-				}
-			};
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.context_menu_read_article);
-			leftTitleButtonController.leftIcon = getIcon(R.drawable.ic_action_note_dark, isLight() ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
+
+		marker = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarker(amenity.getName());
+		if (marker != null) {
+			MapMarkerMenuController markerMenuController =
+					new MapMarkerMenuController(mapActivity, marker.getPointDescription(mapActivity), marker);
+			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
+			leftSubtitleButtonController = markerMenuController.getLeftSubtitleButtonController();
+		} else {
+			if (amenity.getType().isWiki()) {
+				leftTitleButtonController = new TitleButtonController() {
+					@Override
+					public void buttonPressed() {
+						POIMapLayer.showWikipediaDialog(mapActivity, mapActivity.getMyApplication(), amenity);
+					}
+				};
+				leftTitleButtonController.caption = getMapActivity().getString(R.string.context_menu_read_article);
+				leftTitleButtonController.leftIcon = getIcon(R.drawable.ic_action_note_dark, isLight() ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
+			}
 		}
 	}
 
@@ -79,6 +91,11 @@ public class AmenityMenuController extends MenuController {
 	@Override
 	protected Object getObject() {
 		return amenity;
+	}
+
+	@Override
+	public boolean isWaypointButtonEnabled() {
+		return marker == null;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
@@ -21,14 +22,17 @@ import java.io.File;
 public class WptPtMenuController extends MenuController {
 
 	private WptPt wpt;
+	private MapMarker mapMarker;
 
 	public WptPtMenuController(MapActivity mapActivity, PointDescription pointDescription, WptPt wpt) {
 		super(new WptPtMenuBuilder(mapActivity, wpt), pointDescription, mapActivity);
 		this.wpt = wpt;
 
 		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
-		final MapMarker mapMarker = markersHelper.getMapMarker(wpt);
-
+		mapMarker = markersHelper.getMapMarker(wpt);
+		if (mapMarker == null) {
+			mapMarker = markersHelper.getMapMarker(new LatLon(wpt.lat, wpt.lon));
+		}
 		if (mapMarker != null) {
 			MapMarkerMenuController markerMenuController =
 					new MapMarkerMenuController(mapActivity, mapMarker.getPointDescription(mapActivity), mapMarker);
@@ -88,7 +92,7 @@ public class WptPtMenuController extends MenuController {
 
 	@Override
 	public boolean isWaypointButtonEnabled() {
-		return getMapActivity().getMyApplication().getMapMarkersHelper().getMapMarker(wpt) == null;
+		return mapMarker == null;
 	}
 
 	@Override

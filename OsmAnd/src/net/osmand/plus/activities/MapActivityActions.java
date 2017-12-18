@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -105,9 +106,9 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 
-	public void addMapMarker(double latitude, double longitude, PointDescription pd) {
+	public void addMapMarker(double latitude, double longitude, PointDescription pd, @Nullable String mapObjectName) {
 		MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
-		markersHelper.addMapMarker(new LatLon(latitude, longitude), pd);
+		markersHelper.addMapMarker(new LatLon(latitude, longitude), pd, mapObjectName);
 	}
 
 	public void editWaypoints() {
