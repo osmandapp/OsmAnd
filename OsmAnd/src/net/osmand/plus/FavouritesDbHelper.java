@@ -1,10 +1,13 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
@@ -449,6 +452,16 @@ public class FavouritesDbHelper {
 			}
 		}
 		return fp;
+	}
+
+	@Nullable
+	public FavouritePoint getVisibleFavByLatLon(@NonNull LatLon latLon) {
+		for (FavouritePoint fav : cachedFavoritePoints) {
+			if (fav.isVisible() && latLon.equals(new LatLon(fav.getLatitude(), fav.getLongitude()))) {
+				return fav;
+			}
+		}
+		return null;
 	}
 
 
