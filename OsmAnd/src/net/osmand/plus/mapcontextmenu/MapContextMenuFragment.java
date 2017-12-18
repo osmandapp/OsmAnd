@@ -476,7 +476,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 		});
 		TextView directionsButton = (TextView) view.findViewById(R.id.context_menu_directions_button);
-		Drawable drawable = getIcon(R.drawable.map_directions, bottomButtonsColor);
+		int iconResId = R.drawable.map_directions;
+		if (menu.navigateInPedestrianMode()) {
+			iconResId = R.drawable.map_action_pedestrian_dark;
+		}
+		Drawable drawable = getIcon(iconResId, bottomButtonsColor);
 		directionsButton.setTextColor(ContextCompat.getColor(getContext(), bottomButtonsColor));
 		directionsButton.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
 		directionsButton.setCompoundDrawablePadding(dpToPx(8));

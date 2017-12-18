@@ -47,6 +47,7 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.RenameMarkerBottomSheetDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -416,6 +417,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		init(latLon, pointDescription, object);
 	}
 
+	public boolean navigateInPedestrianMode() {
+		return menuController instanceof ParkingPositionMenuController;
+	}
+
 	public boolean close() {
 		boolean result = false;
 		if (active) {
@@ -762,6 +767,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public void navigateButtonPressed() {
+		if (navigateInPedestrianMode()) {
+			settings.APPLICATION_MODE.set(ApplicationMode.PEDESTRIAN);
+		}
 		mapActivity.getMapLayers().getMapControlsLayer().navigateButton();
 	}
 
