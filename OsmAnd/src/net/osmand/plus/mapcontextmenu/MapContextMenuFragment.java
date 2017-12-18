@@ -1120,7 +1120,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			TextView line3 = (TextView) view.findViewById(R.id.context_menu_line3);
 			String additionalTypeStr = menu.getAdditionalTypeStr();
-			if (TextUtils.isEmpty(additionalTypeStr)) {
+			boolean displayAdditionalTypeStrInHours = menu.displayAdditionalTypeStrInHours();
+			boolean emptyAdditionalTypeStr = TextUtils.isEmpty(additionalTypeStr);
+			if (emptyAdditionalTypeStr || displayAdditionalTypeStrInHours) {
 				line3.setVisibility(View.GONE);
 			} else {
 				line3.setVisibility(View.VISIBLE);
@@ -1132,17 +1134,14 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			TextView openingHoursTextView = (TextView) view.findViewById(R.id.opening_hours_text_view);
 			OpeningHoursInfo openingHoursInfo = menu.getOpeningHoursInfo();
-			String limitedTimeInfo = menu.getLimitedTimeInfo();
 			boolean containsOpeningHours = openingHoursInfo != null && openingHoursInfo.containsInfo();
-			boolean containsLimitedHoursInfo = !TextUtils.isEmpty(limitedTimeInfo);
-			if (containsOpeningHours || containsLimitedHoursInfo) {
+			if (containsOpeningHours || (displayAdditionalTypeStrInHours && !emptyAdditionalTypeStr)) {
 				int colorId;
 				if (containsOpeningHours) {
 					colorId = openingHoursInfo.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
 				} else {
-					colorId = menu.isLimitedTime() ? R.color.ctx_menu_amenity_closed_text_color : !nightMode ? R.color.icon_color : R.color.dash_search_icon_dark;
+					colorId = menu.getTimeStrColor();
 				}
-				openingHoursTextView.setTextColor(ContextCompat.getColor(getContext(), colorId));
 				String timeInfo = "";
 				if (containsOpeningHours) {
 					if (openingHoursInfo.isOpened24_7()) {
@@ -1159,11 +1158,14 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						timeInfo = getString(R.string.will_be_opened_on) + " " + openingHoursInfo.getOpeningDay() + ".";
 					}
 				} else {
-					timeInfo = limitedTimeInfo;
+					timeInfo = additionalTypeStr;
 				}
-				Drawable drawable = getIcon(R.drawable.ic_action_opening_hour_16, colorId);
-				openingHoursTextView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-				openingHoursTextView.setCompoundDrawablePadding(dpToPx(8));
+				if (colorId != 0) {
+					openingHoursTextView.setTextColor(ContextCompat.getColor(getContext(), colorId));
+					Drawable drawable = getIcon(R.drawable.ic_action_opening_hour_16, colorId);
+					openingHoursTextView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+					openingHoursTextView.setCompoundDrawablePadding(dpToPx(8));
+				}
 				openingHoursTextView.setText(timeInfo);
 				openingHoursTextView.setVisibility(View.VISIBLE);
 			} else {

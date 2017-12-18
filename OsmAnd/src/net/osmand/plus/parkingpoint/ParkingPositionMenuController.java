@@ -15,6 +15,7 @@ public class ParkingPositionMenuController extends MenuController {
 	private ParkingPositionPlugin plugin;
 	private String parkingStartDescription = "";
 	private String parkingLeftDescription = "";
+	private String parkingTitle = "";
 
 	public ParkingPositionMenuController(MapActivity mapActivity, PointDescription pointDescription) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
@@ -37,6 +38,7 @@ public class ParkingPositionMenuController extends MenuController {
 	private void buildParkingDescription(MapActivity mapActivity) {
 		parkingStartDescription = plugin.getParkingStartDesc(mapActivity);
 		parkingLeftDescription = plugin.getParkingLeftDesc(mapActivity);
+		parkingTitle = plugin.getParkingTitle(mapActivity);
 	}
 
 	@Override
@@ -62,17 +64,23 @@ public class ParkingPositionMenuController extends MenuController {
 	}
 
 	@Override
-	public String getLimitedTimeInfo() {
-		boolean unlimited = TextUtils.isEmpty(parkingLeftDescription);
-		if (unlimited) {
-			return getMapActivity().getString(R.string.without_time_limit);
-		}
+	public String getAdditionalTypeStr() {
 		return parkingLeftDescription;
 	}
 
 	@Override
-	public boolean isLimitedTime() {
-		return !TextUtils.isEmpty(parkingLeftDescription);
+	public boolean displayAdditionalTypeStrInHours() {
+		return true;
+	}
+
+	@Override
+	public int getTimeStrColor() {
+		return plugin.getParkingType() ? R.color.ctx_menu_amenity_closed_text_color : isLight() ? R.color.icon_color : R.color.dash_search_icon_dark;
+	}
+
+	@Override
+	public String getNameStr() {
+		return parkingTitle;
 	}
 
 	@Override

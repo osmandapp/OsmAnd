@@ -96,11 +96,6 @@ public class WptPtMenuController extends MenuController {
 	}
 
 	@Override
-	public boolean needAdditionalTypeStr() {
-		return true;
-	}
-
-	@Override
 	public String getTypeStr() {
 		GpxSelectionHelper helper = getMapActivity().getMyApplication().getSelectedGpxHelper();
 		SelectedGpxFile selectedGpxFile = helper.getSelectedGPXFile(wpt);

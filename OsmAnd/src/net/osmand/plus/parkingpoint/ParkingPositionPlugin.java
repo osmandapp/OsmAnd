@@ -2,7 +2,6 @@ package net.osmand.plus.parkingpoint;
 
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -11,7 +10,6 @@ import android.text.format.Time;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -582,9 +580,32 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		return timeStringBuilder.toString();
 	}
 
+	public String getParkingTitle(Activity ctx) {
+		StringBuilder title = new StringBuilder();
+		if (getParkingType()) {
+			title.append(ctx.getString(R.string.pick_up_till)).append(" ");
+			long endTime = getParkingTime();
+			title.append(getFormattedTime(endTime, ctx));
+		} else {
+			title.append(ctx.getString(R.string.osmand_parking_position_name));
+		}
+		return title.toString();
+	}
+
 	public String getParkingStartDesc(Activity ctx) {
-		return ctx.getString(R.string.osmand_parking_position_description_add_time)
-				+ " " + getFormattedTime(getStartParkingTime(), ctx);
+		StringBuilder parkingStartDesc = new StringBuilder();
+		String startTime = getFormattedTime(getStartParkingTime(), ctx);
+		if (getParkingType()) {
+			parkingStartDesc.append(ctx.getString(R.string.osmand_parking_position_name));
+			parkingStartDesc.append(", ");
+			parkingStartDesc.append(ctx.getString(R.string.parked_at));
+			parkingStartDesc.append(" ").append(startTime);
+		} else {
+			parkingStartDesc.append(ctx.getString(R.string.osmand_parking_position_description_add_time));
+			parkingStartDesc.append(" ");
+			parkingStartDesc.append(startTime);
+		}
+		return parkingStartDesc.toString();
 	}
 
 	public String getParkingLeftDesc(Activity ctx) {
@@ -599,6 +620,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			} else {
 				descr.append(ctx.getString(R.string.osmand_parking_time_left));
 			}
+		} else {
+			descr.append(ctx.getString(R.string.without_time_limit));
 		}
 		return descr.toString();
 	}

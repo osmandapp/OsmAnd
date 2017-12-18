@@ -378,15 +378,15 @@ public abstract class MenuController extends BaseMenuController {
 		return true;
 	}
 
-	public boolean needAdditionalTypeStr() {
-		return false;
-	}
-
 	public boolean displayStreetNameInTitle() {
 		return false;
 	}
 
 	public boolean displayDistanceDirection() {
+		return false;
+	}
+
+	public boolean displayAdditionalTypeStrInHours() {
 		return false;
 	}
 
@@ -436,20 +436,16 @@ public abstract class MenuController extends BaseMenuController {
 		return "";
 	}
 
+	public int getTimeStrColor() {
+		return 0;
+	}
+
 	public OpeningHoursInfo getOpeningHoursInfo() {
 		return null;
 	}
 
 	public String getCommonTypeStr() {
 		return "";
-	}
-
-	public String getLimitedTimeInfo() {
-		return "";
-	}
-
-	public boolean isLimitedTime() {
-		return false;
 	}
 
 	public String getNameStr() {

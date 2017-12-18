@@ -95,7 +95,7 @@ public abstract class MenuTitleController {
 
 	public String getAdditionalTypeStr() {
 		MenuController menuController = getMenuController();
-		if (menuController != null && menuController.needAdditionalTypeStr()) {
+		if (menuController != null) {
 			return additionalTypeStr;
 		} else {
 			return "";

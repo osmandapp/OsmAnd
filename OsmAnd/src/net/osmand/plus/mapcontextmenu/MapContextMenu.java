@@ -1127,6 +1127,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return menuController != null && menuController.displayDistanceDirection();
 	}
 
+	public boolean displayAdditionalTypeStrInHours() {
+		return menuController != null && menuController.displayAdditionalTypeStrInHours();
+	}
+
+	public int getTimeStrColor() {
+		if (menuController != null) {
+			return menuController.getTimeStrColor();
+		}
+		return 0;
+	}
+
 	public boolean isMapDownloaded() {
 		return menuController != null && menuController.isMapDownloaded();
 	}
@@ -1135,17 +1146,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (menuController != null) {
 			menuController.updateData();
 		}
-	}
-
-	public String getLimitedTimeInfo() {
-		if (menuController != null) {
-			return menuController.getLimitedTimeInfo();
-		}
-		return "";
-	}
-
-	public boolean isLimitedTime() {
-		return menuController != null && menuController.isLimitedTime();
 	}
 
 	public boolean hasCustomAddressLine() {

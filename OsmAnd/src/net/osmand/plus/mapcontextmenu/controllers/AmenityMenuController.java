@@ -42,7 +42,7 @@ public class AmenityMenuController extends MenuController {
 
 	private MapMarker marker;
 
-	public AmenityMenuController(MapActivity mapActivity, PointDescription pointDescription, Amenity amenity) {
+	public AmenityMenuController(final MapActivity mapActivity, PointDescription pointDescription, final Amenity amenity) {
 		super(new AmenityMenuBuilder(mapActivity, amenity), pointDescription, mapActivity);
 		this.amenity = amenity;
 		if (amenity.getType().getKeyName().equals("transportation")) {
@@ -66,7 +66,7 @@ public class AmenityMenuController extends MenuController {
 			MapMarkerMenuController markerMenuController =
 					new MapMarkerMenuController(mapActivity, marker.getPointDescription(mapActivity), marker);
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
-			leftSubtitleButtonController = markerMenuController.getLeftSubtitleButtonController();
+			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
 		} else {
 			if (amenity.getType().isWiki()) {
 				leftTitleButtonController = new TitleButtonController() {

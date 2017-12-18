@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="parked_at">parked at</string>
+    <string name="pick_up_till">Pick up till</string>
     <string name="without_time_limit">Without time limit</string>
     <string name="context_menu_read_full_article">Read full article</string>
     <string name="context_menu_read_article">Read article</string>
