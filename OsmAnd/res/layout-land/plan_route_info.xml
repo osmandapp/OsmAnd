@@ -373,7 +373,9 @@
             android:background="@color/dashboard_divider_dark"
             android:focusable="false"/>
 
-        <include layout="@layout/map_route_prepare_bottom"/>
+        <include
+            android:id="@+id/map_route_prepare_bottom_view"
+            layout="@layout/map_route_prepare_bottom"/>
 
     </LinearLayout>
 

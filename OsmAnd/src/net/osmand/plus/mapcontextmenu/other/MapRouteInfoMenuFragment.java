@@ -143,6 +143,9 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		} else {
 			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
 		}
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.map_route_prepare_bottom_view), nightMode,
+				R.color.route_info_bottom_view_bg_light, R.color.route_info_bottom_view_bg_dark);
+
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerModesLayout), nightMode,
 				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), nightMode,
@@ -155,11 +158,11 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
 
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn1), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn2), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn3), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 
 		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.ViaView), nightMode);
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.ViaSubView), nightMode);

@@ -353,4 +353,9 @@
 	<color name="ctx_menu_bottom_view_url_color_light">#536dfe</color>
 	<color name="ctx_menu_bottom_view_url_color_dark">#d28521</color>
 
+	<color name="route_info_bottom_view_bg_light">#f2f2f2</color>
+	<color name="route_info_bottom_view_bg_dark">#222526</color>
+	<color name="route_info_divider_light">#e6e6e6</color>
+	<color name="route_info_divider_dark">#2d3133</color>
+
 </resources>

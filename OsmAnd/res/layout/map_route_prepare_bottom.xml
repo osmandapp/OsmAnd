@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/map_route_preparation_layout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/map_route_buttons_height"
-    android:layout_gravity="bottom" >
+    android:layout_height="wrap_content"
+    tools:background="@color/route_info_bottom_view_bg_dark"
+    android:layout_gravity="bottom">
 
     <ImageButton
         android:id="@+id/map_cancel_route_button"
         android:contentDescription="@string/cancel_route"
-        android:layout_width="@dimen/map_route_buttons_width"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/map_route_buttons_padding_top_bottom"
+        android:paddingBottom="@dimen/map_route_buttons_padding_top_bottom"
+        android:paddingLeft="@dimen/map_route_buttons_padding_left_right"
+        android:paddingRight="@dimen/map_route_buttons_padding_left_right"
         android:layout_gravity="center_vertical"
         android:background="?attr/dashboard_button"
         android:src="@drawable/ic_action_test_light" />
@@ -19,13 +25,20 @@
         android:id="@+id/dividerBtn1"
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@color/dashboard_divider_dark"/>
+        android:layout_marginTop="@dimen/map_route_buttons_padding_top_bottom"
+        android:layout_marginBottom="@dimen/map_route_buttons_padding_top_bottom"
+        android:layout_gravity="center"
+        tools:background="@color/route_info_divider_dark"/>
 
     <ImageButton
         android:id="@+id/map_waypoints_route_button"
         android:contentDescription="@string/waypoints"
-        android:layout_width="@dimen/map_route_buttons_width"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/map_route_buttons_padding_top_bottom"
+        android:paddingBottom="@dimen/map_route_buttons_padding_top_bottom"
+        android:paddingLeft="@dimen/map_route_buttons_padding_left_right"
+        android:paddingRight="@dimen/map_route_buttons_padding_left_right"
         android:layout_gravity="center_vertical"
         android:background="?attr/dashboard_button"
         android:src="@drawable/ic_action_test_light" />
@@ -34,13 +47,20 @@
         android:id="@+id/dividerBtn2"
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@color/dashboard_divider_dark"/>
+        android:layout_marginTop="@dimen/map_route_buttons_padding_top_bottom"
+        android:layout_marginBottom="@dimen/map_route_buttons_padding_top_bottom"
+        android:layout_gravity="center"
+        tools:background="@color/route_info_divider_dark"/>
 
     <ImageButton
         android:id="@+id/map_options_route_button"
         android:contentDescription="@string/shared_string_more"
-        android:layout_width="@dimen/map_route_buttons_width"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/map_route_buttons_padding_top_bottom"
+        android:paddingBottom="@dimen/map_route_buttons_padding_top_bottom"
+        android:paddingLeft="@dimen/map_route_buttons_padding_left_right"
+        android:paddingRight="@dimen/map_route_buttons_padding_left_right"
         android:layout_gravity="center_vertical"
         android:background="?attr/dashboard_button"
         android:src="@drawable/ic_action_test_light" />
@@ -49,7 +69,10 @@
         android:id="@+id/dividerBtn3"
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@color/dashboard_divider_dark"/>
+        android:layout_marginTop="@dimen/map_route_buttons_padding_top_bottom"
+        android:layout_marginBottom="@dimen/map_route_buttons_padding_top_bottom"
+        android:layout_gravity="center"
+        tools:background="@color/route_info_divider_dark"/>
 
     <TextView
         android:id="@+id/map_go_route_button"
