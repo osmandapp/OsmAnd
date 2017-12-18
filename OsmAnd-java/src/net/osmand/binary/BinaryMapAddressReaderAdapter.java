@@ -4,12 +4,13 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.set.TIntSet;
 import gnu.trove.set.hash.TIntHashSet;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.PlatformUtil;
@@ -593,6 +594,7 @@ public class BinaryMapAddressReaderAdapter {
 	}
 
 	public void searchAddressDataByName(AddressRegion reg, SearchRequest<MapObject> req, List<Integer> typeFilter) throws IOException {
+		Set<LatLon> added = new HashSet<>();
 		TIntArrayList loffsets = new TIntArrayList();
 		CollatorStringMatcher stringMatcher = new CollatorStringMatcher(req.nameQuery, req.matcherMode);
 		String postcode = Postcode.normalize(req.nameQuery, map.getCountryName());
@@ -707,7 +709,9 @@ public class BinaryMapAddressReaderAdapter {
 									}
 								}
 								if (matches) {
-									req.publish(s);
+									if (added.add(s.getLocation())) {
+										req.publish(s);
+									}
 								}
 								codedIS.popLimit(old);
 							}
