@@ -66,10 +66,6 @@
 	<dimen name="map_route_buttons_width">60dp</dimen>
 	<dimen name="map_route_buttons_height">54dp</dimen>
 	<dimen name="map_route_buttons_height_land">48dp</dimen>
-	<dimen name="map_route_buttons_padding_top_bottom">16dp</dimen>
-	<dimen name="map_route_buttons_padding_left_right">22dp</dimen>
-	<dimen name="map_route_button_go_margin">3dp</dimen>
-	<dimen name="map_route_button_go_drawable_padding">14dp</dimen>
 	<dimen name="map_mode_button_width">56dp</dimen>
 
 	<dimen name="map_address_height">40dp</dimen>
@@ -237,4 +233,15 @@
 	<dimen name="map_marker_title_height">28dp</dimen>
 
 	<dimen name="fab_recycler_view_padding_bottom">88dp</dimen>
+
+	<!--Route info-->
+	<dimen name="route_info_buttons_padding_top_bottom">16dp</dimen>
+	<dimen name="route_info_buttons_padding_left_right">22dp</dimen>
+	<dimen name="route_info_button_go_margin">3dp</dimen>
+	<dimen name="route_info_button_go_drawable_padding">14dp</dimen>
+	<dimen name="route_info_directions_margin">56dp</dimen>
+	<dimen name="route_info_icon_padding_left">12dp</dimen>
+	<dimen name="route_info_icon_padding_right">16dp</dimen>
+	<dimen name="route_info_divider_margin">52dp</dimen>
+	<dimen name="route_info_modes_height">48dp</dimen>
 </resources>
