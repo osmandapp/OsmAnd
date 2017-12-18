@@ -4,7 +4,6 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.set.TIntSet;
 import gnu.trove.set.hash.TIntHashSet;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -701,7 +700,6 @@ public class BinaryMapAddressReaderAdapter {
 										MapUtils.get31TileNumberY(l.getLatitude()) >> 7, obj.isPostcode() ? obj.getName() : null,
 										reg.attributeTagsTable);
 								boolean matches = stringMatcher.matches(s.getName());
-								System.out.println(s.getName() + " " + s.getCity());
 								if (!matches) {
 									for (String n : s.getAllNames()) {
 										matches = stringMatcher.matches(n);
