@@ -2969,10 +2969,10 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="by_type">按照類型</string>
     <string name="one_tap_active_descr">輕點在地圖上的標記，將其移動到活動標記的頂端，而不用打開內容選單。</string>
     <string name="modify_the_search_query">變更搜尋的查詢。</string>
-    <string name="release_3_0">\\022 停止標誌的檢測現在考量駕駛的方向
-\n
-\n• 為 GPX 軌跡提供有意義的上坡/下坡值的新運算法則
-\n
+    <string name="release_3_0">\\022 停止標誌的檢測現在考量了駕駛的方向 
+\n 
+\n• 為 GPX 軌跡提供有意義的上坡/下坡值的新運算法則 
+\n 
 \n• 地形（上坡）察覺爬山時間（尼史密夫定律）
 \n
 \n</string>

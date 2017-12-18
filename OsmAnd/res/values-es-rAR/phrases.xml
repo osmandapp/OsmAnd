@@ -1600,7 +1600,7 @@
 	<string name="poi_drive_through_yes">Sí</string>
 	<string name="poi_drive_through_no">Servicio en el automóvil: No</string>
 
-	<string name="poi_brewery_additional">Nombre de cervecería</string>
+	<string name="poi_brewery_additional">Nombre de la cervecería</string>
 	<string name="poi_microbrewery_yes">Sí</string>
 	<string name="poi_microbrewery_no">Cerveza artesanal: No</string>
 
@@ -3704,7 +3704,7 @@
 <string name="poi_letter_box">Buzón postal</string>
 	<string name="poi_post_street">Calle</string>
 	<string name="poi_post_housenumber">Número de portal</string>
-	<string name="poi_post_flats">Plano</string>
+	<string name="poi_post_flats">Pisos de oficina</string>
 
 <string name="poi_payment_centre">Centro de pagos</string>
 	<string name="poi_money_transfer">Transferencia de dinero</string>

@@ -2483,4 +2483,5 @@
     <string name="speak_descr">יש להגדיר כדי לצורך הקראה של שמות רחובות, אזהרות תנועה (עצירות מאולצות, פסי האטה), אזהרות על מצלמות מהירות, מגבלת מהירות.</string>
     <string name="animate_my_location_desc">הפעלת הנפשת גלישת מפה של המיקום שלי במהלך ניווט.</string>
     <string name="shared_string_in_name">ב־%1$s</string>
+    <string name="one_tap_active_descr">ניתן לגעת בסמן על המפה כדי להעביר אותו לראש הסמנים הפעילים מבלי לפתוח את תפריט ההקשר.</string>
     </resources>

@@ -2679,4 +2679,9 @@
 	<string name="poi_visibility_area">Visibilidade: àrea</string>
 
 <string name="poi_operational_status">Istadu operativu</string>
-	</resources>
+	<string name="poi_post_street">Istrada</string>
+	<string name="poi_post_housenumber">Nùmeru tzìvicu</string>
+	<string name="poi_payment_centre">Tzentru de pagamentu</string>
+	<string name="poi_money_transfer">Tramudòngiu de dinare</string>
+
+</resources>

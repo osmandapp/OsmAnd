@@ -87,7 +87,8 @@ public class GeneralRouter implements VehicleRouter {
 	public enum GeneralRouterProfile {
 		CAR,
 		PEDESTRIAN,
-		BICYCLE
+		BICYCLE,
+		BOAT
 	}
 
 	

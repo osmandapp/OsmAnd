@@ -3013,7 +3013,7 @@
 
 <string name="poi_spices">Gewürzgeschäft</string>
 
-<string name="poi_fuel_type">Typ</string>
+<string name="poi_fuel_type">Kraftstoffart</string>
 	<string name="poi_payment_type">Zahlungsart</string>
 	<string name="poi_additional_type">Zusätzlich</string>
 <string name="poi_service_bicycle_charging_yes">Ladestation: ja</string>
@@ -3021,7 +3021,7 @@
 
 <string name="poi_shop_craft">Geschäft für Kunsthandwerksbedarf</string>
 
-	<string name="poi_fuel_avia_type">Typ</string>
+	<string name="poi_fuel_avia_type">Kraftstoffart (avia)</string>
 	<string name="poi_payment_fuel_type">Tankkarten</string>
 	<string name="poi_internet_access_type">Internet-Zugangsart</string>
 	<string name="poi_clothes_type">Typ</string>
@@ -3646,5 +3646,17 @@
 	<string name="poi_charging_station_filter">Ladestation</string>
 
 	<string name="poi_depot">Lager</string>
+
+<string name="poi_map_size_site">Kartengröße: Platz</string>
+	<string name="poi_map_size_city">Kartengröße: Stadt</string>
+	<string name="poi_map_size_region">Kartengröße: Region</string>
+
+	<string name="poi_letter_box">Briefkasten</string>
+	<string name="poi_post_street">Straße</string>
+	<string name="poi_post_housenumber">Hausnummer</string>
+	<string name="poi_post_flats">Flach</string>
+
+	<string name="poi_payment_centre">Zahlungs-Zentrum</string>
+	<string name="poi_money_transfer">Überweisung</string>
 
 </resources>

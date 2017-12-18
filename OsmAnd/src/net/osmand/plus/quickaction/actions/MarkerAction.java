@@ -40,7 +40,8 @@ public class MarkerAction extends QuickAction {
 		activity.getMapActions().addMapMarker(
 				latLon.getLatitude(),
 				latLon.getLongitude(),
-				pointDescription);
+				pointDescription,
+				null);
 	}
 
 	@Override
