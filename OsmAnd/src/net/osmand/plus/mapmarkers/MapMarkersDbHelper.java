@@ -25,7 +25,7 @@ import java.util.Set;
 
 public class MapMarkersDbHelper {
 
-	private static final int DB_VERSION = 11;
+	private static final int DB_VERSION = 12;
 	public static final String DB_NAME = "map_markers_db";
 
 	private static final String MARKERS_TABLE_NAME = "map_markers";
@@ -42,6 +42,7 @@ public class MapMarkersDbHelper {
 	private static final String MARKERS_COL_NEXT_KEY = "marker_next_key";
 	private static final String MARKERS_COL_DISABLED = "marker_disabled";
 	private static final String MARKERS_COL_SELECTED = "marker_selected";
+	private static final String MARKERS_COL_MAP_OBJECT_NAME = "marker_map_object_name";
 
 	private static final String MARKERS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 			MARKERS_TABLE_NAME + " (" +
@@ -57,7 +58,8 @@ public class MapMarkersDbHelper {
 			MARKERS_COL_COLOR + " int, " +
 			MARKERS_COL_NEXT_KEY + " TEXT, " +
 			MARKERS_COL_DISABLED + " int, " + // 1 = true, 0 = false
-			MARKERS_COL_SELECTED + " int);"; // 1 = true, 0 = false
+			MARKERS_COL_SELECTED + " int, " + // 1 = true, 0 = false
+			MARKERS_COL_MAP_OBJECT_NAME + " TEXT);";
 
 	private static final String MARKERS_TABLE_SELECT = "SELECT " +
 			MARKERS_COL_ID + ", " +
@@ -72,7 +74,8 @@ public class MapMarkersDbHelper {
 			MARKERS_COL_COLOR + ", " +
 			MARKERS_COL_NEXT_KEY + ", " +
 			MARKERS_COL_DISABLED + ", " +
-			MARKERS_COL_SELECTED +
+			MARKERS_COL_SELECTED + ", " +
+			MARKERS_COL_MAP_OBJECT_NAME +
 			" FROM " + MARKERS_TABLE_NAME;
 
 	private static final String GROUPS_TABLE_NAME = "map_markers_groups";
@@ -149,6 +152,9 @@ public class MapMarkersDbHelper {
 			db.execSQL("UPDATE " + MARKERS_TABLE_NAME +
 					" SET " + MARKERS_COL_SELECTED + " = ? " +
 					"WHERE " + MARKERS_COL_SELECTED + " IS NULL", new Object[]{0});
+		}
+		if (oldVersion < 12) {
+			db.execSQL("ALTER TABLE " + MARKERS_TABLE_NAME + " ADD " + MARKERS_COL_MAP_OBJECT_NAME + " TEXT");
 		}
 	}
 
@@ -378,11 +384,12 @@ public class MapMarkersDbHelper {
 						MARKERS_COL_COLOR + ", " +
 						MARKERS_COL_NEXT_KEY + ", " +
 						MARKERS_COL_DISABLED + ", " +
-						MARKERS_COL_SELECTED + ") " +
-						"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+						MARKERS_COL_SELECTED + ", " +
+				 		MARKERS_COL_MAP_OBJECT_NAME + ") " +
+						"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				new Object[]{marker.id, marker.getLatitude(), marker.getLongitude(), descr, active,
 						currentTime, visited, marker.groupName, marker.groupKey, marker.colorIndex,
-						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE, 0, 0});
+						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE, 0, 0, marker.mapObjectName});
 	}
 
 	public List<MapMarker> getMarkersFromGroup(MarkersSyncGroup group) {
@@ -459,6 +466,7 @@ public class MapMarkersDbHelper {
 		int colorIndex = query.getInt(9);
 		String nextKey = query.getString(10);
 		boolean selected = query.getInt(12) == 1;
+		String mapObjectName = query.getString(13);
 
 		LatLon latLon = new LatLon(lat, lon);
 		MapMarker marker = new MapMarker(latLon, PointDescription.deserializeFromString(desc, latLon),
@@ -471,6 +479,7 @@ public class MapMarkersDbHelper {
 		marker.groupKey = groupKey;
 		marker.nextKey = nextKey;
 		marker.selected = selected;
+		marker.mapObjectName = mapObjectName;
 
 		return marker;
 	}

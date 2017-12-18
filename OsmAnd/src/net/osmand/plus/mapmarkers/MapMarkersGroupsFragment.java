@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.Location;
+import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -35,9 +36,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.mapmarkers.SelectionMarkersGroupBottomSheetDialogFragment.AddMarkersGroupFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersGroupsAdapter;
-import net.osmand.plus.mapmarkers.SelectionMarkersGroupBottomSheetDialogFragment.AddMarkersGroupFragmentListener;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;
 import net.osmand.util.MapUtils;
 
@@ -230,43 +231,58 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
 					MapMarker marker = (MapMarker) item;
+					OsmandApplication app = mapActivity.getMyApplication();
 					if (!marker.history) {
-						if (mapActivity.getMyApplication().getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
-							mapActivity.getMyApplication().getMapMarkersHelper().moveMarkerToTop(marker);
+						if (app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
+							app.getMapMarkersHelper().moveMarkerToTop(marker);
 							updateAdapter();
 						} else {
-							WptPt wptPt = marker.wptPt;
-							FavouritePoint favouritePoint = marker.favouritePoint;
-							Object objectToShow;
-							PointDescription pointDescription;
-							if (wptPt != null) {
-								pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, wptPt.name);
-								objectToShow = wptPt;
-							} else if (favouritePoint != null) {
-								pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, favouritePoint.getName());
-								objectToShow = favouritePoint;
-							} else {
-								pointDescription = marker.getPointDescription(mapActivity);
-								objectToShow = marker;
+							FavouritePoint fav = marker.favouritePoint == null
+									? app.getFavorites().getVisibleFavByLatLon(marker.point)
+									: marker.favouritePoint;
+							if (fav != null) {
+								showMap(marker.point, fav.getPointDescription(), fav);
+								return;
 							}
-							mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
-									15, pointDescription, true, objectToShow);
-							MapActivity.launchMapActivityMoveToTop(mapActivity);
-							((DialogFragment) getParentFragment()).dismiss();
+
+							WptPt pt = marker.wptPt == null
+									? app.getSelectedGpxHelper().getVisibleWayPointByLatLon(marker.point)
+									: marker.wptPt;
+							if (pt != null) {
+								showMap(marker.point, pt.getPointDescription(mapActivity), pt);
+								return;
+							}
+
+							Amenity mapObj = mapActivity.getMapLayers().getMapMarkersLayer().getMapObjectByMarker(marker);
+							PointDescription desc = mapObj == null
+									? marker.getPointDescription(mapActivity)
+									: mapActivity.getMapLayers().getPoiMapLayer().getObjectName(mapObj);
+							showMap(marker.point, desc, mapObj == null ? marker : mapObj);
 						}
 					} else {
-						HistoryMarkerMenuBottomSheetDialogFragment fragment = new HistoryMarkerMenuBottomSheetDialogFragment();
-						fragment.setUsedOnMap(false);
-						Bundle arguments = new Bundle();
-						arguments.putInt(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_POSITION, pos);
-						arguments.putString(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_NAME, marker.getName(mapActivity));
-						arguments.putInt(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_COLOR_INDEX, marker.colorIndex);
-						arguments.putLong(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_VISITED_DATE, marker.visitedDate);
-						fragment.setArguments(arguments);
-						fragment.setListener(createHistoryMarkerMenuListener());
-						fragment.show(getChildFragmentManager(), HistoryMarkerMenuBottomSheetDialogFragment.TAG);
+						showHistoryMenuFragment(pos, marker);
 					}
 				}
+			}
+
+			private void showMap(LatLon latLon, PointDescription desc, Object objToShow) {
+				mapActivity.getMyApplication().getSettings().setMapLocationToShow(latLon.getLatitude(),
+						latLon.getLongitude(), 15, desc, true, objToShow);
+				MapActivity.launchMapActivityMoveToTop(mapActivity);
+				((DialogFragment) getParentFragment()).dismiss();
+			}
+
+			private void showHistoryMenuFragment(int pos, MapMarker marker) {
+				HistoryMarkerMenuBottomSheetDialogFragment fragment = new HistoryMarkerMenuBottomSheetDialogFragment();
+				fragment.setUsedOnMap(false);
+				Bundle arguments = new Bundle();
+				arguments.putInt(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_POSITION, pos);
+				arguments.putString(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_NAME, marker.getName(mapActivity));
+				arguments.putInt(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_COLOR_INDEX, marker.colorIndex);
+				arguments.putLong(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_VISITED_DATE, marker.visitedDate);
+				fragment.setArguments(arguments);
+				fragment.setListener(createHistoryMarkerMenuListener());
+				fragment.show(getChildFragmentManager(), HistoryMarkerMenuBottomSheetDialogFragment.TAG);
 			}
 		});
 		adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {

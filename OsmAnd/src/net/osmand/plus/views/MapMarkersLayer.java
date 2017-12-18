@@ -21,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import net.osmand.Location;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -43,6 +44,7 @@ import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -518,18 +520,45 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		OsmandApplication app = map.getMyApplication();
 		int r = getRadiusPoi(tileBox);
+		boolean selectMarkerOnSingleTap = app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get();
+
 		for (MapMarker marker : app.getMapMarkersHelper().getMapMarkers()) {
-			if ((!unknownLocation && app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) || !isSynced(marker)) {
+			if ((!unknownLocation && selectMarkerOnSingleTap) || !isSynced(marker)) {
 				LatLon latLon = marker.point;
 				if (latLon != null) {
 					int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 					int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+
 					if (calculateBelongs((int) point.x, (int) point.y, x, y, r)) {
-						o.add(marker);
+						if (!unknownLocation && selectMarkerOnSingleTap) {
+							o.add(marker);
+						} else {
+							if (isMarkerOnFavorite(marker) || isMarkerOnWaypoint(marker)) {
+								continue;
+							}
+							Amenity mapObj = getMapObjectByMarker(marker);
+							o.add(mapObj == null ? marker : mapObj);
+						}
 					}
 				}
 			}
 		}
+	}
+
+	private boolean isMarkerOnWaypoint(@NonNull MapMarker marker) {
+		return marker.point != null && map.getMyApplication().getSelectedGpxHelper().getVisibleWayPointByLatLon(marker.point) != null;
+	}
+
+	private boolean isMarkerOnFavorite(@NonNull MapMarker marker) {
+		return marker.point != null && map.getMyApplication().getFavorites().getVisibleFavByLatLon(marker.point) != null;
+	}
+
+	@Nullable
+	public Amenity getMapObjectByMarker(@NonNull MapMarker marker) {
+		if (marker.mapObjectName != null && marker.point != null) {
+			return findAmenity(map.getMyApplication(), -1, Collections.singletonList(marker.mapObjectName), marker.point);
+		}
+		return null;
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
