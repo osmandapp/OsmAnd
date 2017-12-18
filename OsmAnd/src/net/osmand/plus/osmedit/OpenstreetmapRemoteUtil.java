@@ -1,20 +1,7 @@
 package net.osmand.plus.osmedit;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.text.MessageFormat;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import android.util.Xml;
+import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -37,8 +24,21 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
-import android.util.Xml;
-import android.widget.Toast;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.text.MessageFormat;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
@@ -330,7 +330,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				Node entity = (Node) st.getRegisteredEntities().get(id);
 				// merge non existing tags
 				for (String rtag : entity.getTagKeySet()) {
-					if (!n.getTagKeySet().contains(rtag)) {
+					if (!n.getTagKeySet().contains(rtag) && !n.getTagKeySet().contains("----" + rtag)) {
 						n.putTagNoLC(rtag, entity.getTag(rtag));
 					}
 				}
