@@ -357,5 +357,7 @@
 	<color name="route_info_bottom_view_bg_dark">#222526</color>
 	<color name="route_info_divider_light">#e6e6e6</color>
 	<color name="route_info_divider_dark">#2d3133</color>
+	<color name="route_info_icon_color_light">#505050</color>
+	<color name="route_info_icon_color_dark">#727272</color>
 
 </resources>
