@@ -68,6 +68,8 @@
 	<dimen name="map_route_buttons_height_land">48dp</dimen>
 	<dimen name="map_route_buttons_padding_top_bottom">16dp</dimen>
 	<dimen name="map_route_buttons_padding_left_right">22dp</dimen>
+	<dimen name="map_route_button_go_margin">3dp</dimen>
+	<dimen name="map_route_button_go_drawable_padding">14dp</dimen>
 	<dimen name="map_mode_button_width">56dp</dimen>
 
 	<dimen name="map_address_height">40dp</dimen>

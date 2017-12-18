@@ -9,6 +9,8 @@
 	<dimen name="map_route_buttons_height_land">72dp</dimen>
 	<dimen name="map_route_buttons_padding_top_bottom">24dp</dimen>
 	<dimen name="map_route_buttons_padding_left_right">33dp</dimen>
+	<dimen name="map_route_button_go_margin">5dp</dimen>
+	<dimen name="map_route_button_go_drawable_padding">21dp</dimen>
 	<dimen name="map_route_planning_max_height">450dp</dimen>
 	<dimen name="map_minwidth_widget">160dp</dimen>
 	<dimen name="map_route_planning_land_width">510dp</dimen>

@@ -16,6 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
@@ -324,10 +325,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		TextView routeGoButton = (TextView) main.findViewById(R.id.map_go_route_button);
-		routeGoButton.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache().getIcon(R.drawable.map_start_navigation, R.color.color_myloc_distance), null, null, null);
+		routeGoButton.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache().getIcon(R.drawable.map_start_navigation, R.color.color_white), null, null, null);
 		routeGoButton.setText(mapActivity.getString(R.string.shared_string_go));
-		AndroidUtils.setTextSecondaryColor(mapActivity, routeGoButton, nightMode);
-		AndroidUtils.setBackground(mapActivity, routeGoButton, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
+		routeGoButton.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_white));
+		AndroidUtils.setBackground(mapActivity, routeGoButton, nightMode, R.drawable.route_info_go_btn_bg_light, R.drawable.route_info_go_btn_bg_dark);
 		routeGoButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
