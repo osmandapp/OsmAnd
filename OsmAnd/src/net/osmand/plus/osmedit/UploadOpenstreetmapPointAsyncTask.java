@@ -56,7 +56,7 @@ public class UploadOpenstreetmapPointAsyncTask
 					entityInfo = remotepoi.loadNode(p.getEntity());
 				}
 				Node n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo,
-						p.getComment(), false);
+						p.getComment(), false, null);
 				if (n != null) {
 					uploaded = true;
 					plugin.getDBPOI().deletePOI(p);

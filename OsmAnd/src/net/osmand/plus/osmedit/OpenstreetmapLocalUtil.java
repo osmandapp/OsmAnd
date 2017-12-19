@@ -16,6 +16,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 
@@ -45,12 +46,14 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	}
 	
 	@Override
-	public Node commitNodeImpl(OsmPoint.Action action, Node n, EntityInfo info, String comment, boolean closeChangeSet){
+	public Node commitNodeImpl(OsmPoint.Action action, Node n, EntityInfo info, String comment,
+							   boolean closeChangeSet, Set<String> changedTags){
 		Node newNode = n;
 		if (n.getId() == -1) {
 			newNode = new Node(n, Math.min(-2, plugin.getDBPOI().getMinID() - 1)); // generate local id for the created node
 		}
 		OpenstreetmapPoint p = new OpenstreetmapPoint();
+		newNode.setChangedTags(changedTags);
 		p.setEntity(newNode);
 		p.setAction(action);
 		p.setComment(comment);
