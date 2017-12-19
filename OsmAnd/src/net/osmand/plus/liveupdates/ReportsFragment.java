@@ -52,6 +52,8 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 
 	private static final Log LOG = PlatformUtil.getLog(ReportsFragment.class);
 	public static final String OSM_LIVE_URL = "https://osmand.net/osm_live";
+	public static final String EDITS_FRAGMENT = "NumberOfEditsFragment";
+	public static final String RECIPIENTS_FRAGMENT = "RecipientsFragment";
 
 	private TextView contributorsTextView;
 	private TextView editsTextView;
@@ -129,15 +131,23 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 				String countryUrlString = selectedCountryItem.getDownloadName();
 				if (countryUrlString.length() > 0) {
 					Bundle bl = new Bundle();
-					bl.putString(UsersReportFragment.URL_REQUEST,
-							String.format(USERS_RANKING_BY_MONTH, monthUrlString, countryUrlString));
-					userReportFragment.setArguments(bl);
-					userReportFragment.show(getChildFragmentManager(), "NumberOfEditsFramgnet");
+					if (v.getId() == R.id.numberOfRecipientsLayout) {
+						bl.putString(UsersReportFragment.URL_REQUEST,
+								String.format(RECIPIENTS_BY_MONTH, monthUrlString, countryUrlString));
+						userReportFragment.setArguments(bl);
+						userReportFragment.show(getChildFragmentManager(), RECIPIENTS_FRAGMENT);
+					} else {
+						bl.putString(UsersReportFragment.URL_REQUEST,
+								String.format(USERS_RANKING_BY_MONTH, monthUrlString, countryUrlString));
+						userReportFragment.setArguments(bl);
+						userReportFragment.show(getChildFragmentManager(), EDITS_FRAGMENT);
+					}
 				}
 			}
 		};
 		view.findViewById(R.id.numberOfContributorsLayout).setOnClickListener(listener);
 		view.findViewById(R.id.numberOfEditsLayout).setOnClickListener(listener);
+		view.findViewById(R.id.numberOfRecipientsLayout).setOnClickListener(listener);
 
 		countrySelectionFragment.initCountries(getMyApplication());
 		selectedCountryItem = countrySelectionFragment.getCountryItems().get(0);

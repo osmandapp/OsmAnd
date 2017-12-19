@@ -275,6 +275,9 @@
                 android:background="?attr/dashboard_divider"/>
 
             <LinearLayout
+                android:id="@+id/numberOfRecipientsLayout"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -289,7 +292,6 @@
                     android:src="@drawable/ic_group"/>
 
                 <LinearLayout
-                    android:id="@+id/numberOfRecipientsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
