@@ -189,7 +189,7 @@ public class SearchUICore {
 					if (r1.objectType == ObjectType.STREET) {
 						Street st1 = (Street) r1.object;
 						Street st2 = (Street) r2.object;
-						return st1.compareStreet(st2);
+						return st1.getLocation().equals(st2.getLocation());
 					}
 				} 
 				Amenity a1 = null;

@@ -86,13 +86,4 @@ public class Street extends MapObject {
 		}
 		return nm;
 	}
-
-	public boolean compareStreet(Street thatObj) {
-		boolean res = this.location.equals(thatObj.location);
-		if (res) {
-			res = (this.getNameWithoutCityPart("en", true).trim()).equals(thatObj.getNameWithoutCityPart("en", true).trim());
-		}
-		return res;
-	}
-
 }
