@@ -82,9 +82,17 @@ public class Street extends MapObject {
 		String nm = getName(lang, transliterate);
 		int t = nm.lastIndexOf('(');
 		if (t > 0) {
-			return nm.substring(0, t);
+			return nm.substring(0, t).trim();
 		}
 		return nm;
+	}
+
+	public boolean compareStreet(Street thatObj) {
+		boolean res = this.location.equals(thatObj.location);
+		if (res) {
+			res = this.getNameWithoutCityPart("en", true).equals(thatObj.getNameWithoutCityPart("en", true));
+		}
+		return res;
 	}
 
 }
