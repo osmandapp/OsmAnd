@@ -330,7 +330,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				Node entity = (Node) st.getRegisteredEntities().get(id);
 				// merge non existing tags
 				for (String rtag : entity.getTagKeySet()) {
-					if (!n.getTagKeySet().contains(rtag) && !n.getTagKeySet().contains("----" + rtag)) {
+					if (!n.getTagKeySet().contains(rtag) && !n.getTagKeySet().contains(EditPoiData.REMOVE_TAG_PREFIX + rtag)) {
 						n.putTagNoLC(rtag, entity.getTag(rtag));
 					}
 				}
