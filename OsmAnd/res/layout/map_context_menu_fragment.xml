@@ -31,7 +31,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_marginTop="@dimen/context_menu_padding_margin_default"
+                    android:layout_marginTop="@dimen/context_menu_first_line_top_margin"
                     android:layout_marginRight="@dimen/context_menu_padding_margin_default"
                     android:layout_marginEnd="@dimen/context_menu_padding_margin_default"
                     android:layout_width="0dp"
@@ -392,7 +392,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingTop="@dimen/context_menu_main_actions_padding_top"
-                    android:paddingBottom="@dimen/context_menu_padding_margin_small">
+                    android:paddingBottom="@dimen/context_menu_main_actions_padding_bottom">
 
                     <ImageView
                         android:layout_marginBottom="@dimen/context_menu_main_actions_icon_margin"
@@ -426,7 +426,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingTop="@dimen/context_menu_main_actions_padding_top"
-                    android:paddingBottom="@dimen/context_menu_padding_margin_small">
+                    android:paddingBottom="@dimen/context_menu_main_actions_padding_bottom">
 
                     <ImageView
                         android:layout_marginBottom="@dimen/context_menu_main_actions_icon_margin"
@@ -459,7 +459,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingTop="@dimen/context_menu_main_actions_padding_top"
-                    android:paddingBottom="@dimen/context_menu_padding_margin_small">
+                    android:paddingBottom="@dimen/context_menu_main_actions_padding_bottom">
 
                     <ImageView
                         android:layout_marginBottom="@dimen/context_menu_main_actions_icon_margin"
@@ -493,7 +493,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingTop="@dimen/context_menu_main_actions_padding_top"
-                    android:paddingBottom="@dimen/context_menu_padding_margin_small">
+                    android:paddingBottom="@dimen/context_menu_main_actions_padding_bottom">
 
                     <ImageView
                         android:layout_marginBottom="@dimen/context_menu_main_actions_icon_margin"

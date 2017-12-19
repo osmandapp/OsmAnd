@@ -73,7 +73,8 @@
 	<dimen name="context_menu_subtitle_margin">5dp</dimen>
 	<dimen name="context_menu_direction_margin">18dp</dimen>
 	<dimen name="context_menu_transport_stop_item_height">24dp</dimen>
-	<dimen name="context_menu_main_actions_padding_top">9dp</dimen>
+	<dimen name="context_menu_main_actions_padding_top">11dp</dimen>
+	<dimen name="context_menu_main_actions_padding_bottom">9dp</dimen>
 	<dimen name="context_menu_main_actions_icon_margin">5dp</dimen>
 	<dimen name="context_menu_transport_grid_spacing">6dp</dimen>
 	<dimen name="context_menu_transport_grid_item_width">48dp</dimen>
