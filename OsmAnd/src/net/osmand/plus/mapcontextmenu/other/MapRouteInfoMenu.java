@@ -593,9 +593,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			infoDurationView.setVisibility(View.GONE);
 			textView.setVisibility(View.VISIBLE);
 		} else {
-			infoIcon.setImageDrawable(ctx.getIconsCache().getIcon(R.drawable.ic_action_polygom_dark, isLight()));
+			infoIcon.setImageDrawable(ctx.getIconsCache().getIcon(R.drawable.ic_action_route_distance, R.color.route_info_unchecked_mode_icon_color));
 			infoIcon.setVisibility(View.VISIBLE);
-			durationIcon.setImageDrawable(ctx.getIconsCache().getIcon(R.drawable.ic_action_time, isLight()));
+			durationIcon.setImageDrawable(ctx.getIconsCache().getIcon(R.drawable.ic_action_time, R.color.route_info_unchecked_mode_icon_color));
 			durationIcon.setVisibility(View.VISIBLE);
 			infoDistanceView.setVisibility(View.VISIBLE);
 			infoDurationView.setVisibility(View.VISIBLE);
