@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@drawable/bg_bottom_menu_dark"
+        tools:background="@drawable/route_info_menu_bg_dark"
         android:clickable="true"
         android:orientation="vertical">
 

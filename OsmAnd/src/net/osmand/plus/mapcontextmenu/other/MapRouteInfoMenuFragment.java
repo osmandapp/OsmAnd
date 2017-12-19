@@ -139,9 +139,9 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		boolean landscapeLayout = !portraitMode;
 		boolean nightMode = ctx.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		if (!landscapeLayout) {
-			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.route_info_menu_bg_light, R.drawable.route_info_menu_bg_dark);
 		} else {
-			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
+			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.route_info_menu_bg_left_light, R.drawable.route_info_menu_bg_left_dark);
 		}
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.map_route_prepare_bottom_view), nightMode,
 				R.color.route_info_bottom_view_bg_light, R.color.route_info_bottom_view_bg_dark);

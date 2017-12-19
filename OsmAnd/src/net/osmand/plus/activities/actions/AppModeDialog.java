@@ -1,6 +1,7 @@
 package net.osmand.plus.activities.actions;
 
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,13 +47,13 @@ public class AppModeDialog {
 	public static View prepareAppModeView(Activity a, final List<ApplicationMode> values , final Set<ApplicationMode> selected, 
 				ViewGroup parent, final boolean singleSelection, boolean drawer, boolean useMapTheme, final View.OnClickListener onClickListener) {
 		View ll = a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
+		boolean nightMode;
 		if (useMapTheme) {
-			AndroidUtils.setListItemBackground(a, ll,
-					((OsmandApplication) a.getApplication()).getDaynightHelper().isNightModeForMapControls());
+			nightMode = ((OsmandApplication) a.getApplication()).getDaynightHelper().isNightModeForMapControls();
 		} else {
-			AndroidUtils.setListItemBackground(a, ll,
-					!((OsmandApplication) a.getApplication()).getSettings().isLightContent());
+			nightMode = !((OsmandApplication) a.getApplication()).getSettings().isLightContent();
 		}
+		ll.setBackgroundColor(ContextCompat.getColor(a, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
 		final View[] buttons = new View[values.size()];
 		int k = 0;
 		for(ApplicationMode ma : values) {

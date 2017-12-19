@@ -13,7 +13,7 @@
         android:layout_width="@dimen/dashboard_land_width"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
-        android:background="@drawable/bg_left_menu_dark"
+        tools:background="@drawable/route_info_menu_bg_dark"
         android:clickable="true"
         android:orientation="vertical">
 
