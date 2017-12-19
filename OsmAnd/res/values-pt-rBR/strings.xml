@@ -2265,7 +2265,7 @@ Pôr do Sol: %2$s</string>
     <string name="do_not_show_startup_messages_desc">Suprime a exibição de descontos do aplicativo e mensagens de eventos locais especiais.</string>
     <string name="shared_string_record">Registro</string>
     <string name="save_track_min_speed">Velocidade mínima para registro</string>
-    <string name="save_track_precision">Acuidade mínima para registro</string>
+    <string name="save_track_precision">Precisão mínima para registro</string>
     <string name="coords_format_descr">Formato para as coordenadas geográficas.</string>
     <string name="shared_string_back">Voltar</string>
 	<string name="view">Ver</string>
@@ -2413,7 +2413,7 @@ Pôr do Sol: %2$s</string>
     <string name="gpx_logging_no_data">Sem dados</string>
     <string name="rendering_attr_contourColorScheme_description">Esquema de cores das curvas de nível</string>
     <string name="save_track_min_speed_descr">Filtro: Definir velocidade mínima para um ponto ser registrado.</string>
-    <string name="save_track_min_distance">Deslocamento mínimo de registo</string>
+    <string name="save_track_min_distance">Deslocamento mínimo de registro</string>
     <string name="save_track_min_distance_descr">Filtro: Definir a distância mínima da última posição para o ponto ser registrado.</string>
     <string name="save_track_precision_descr">Filtro: Definir precisão mínima para um ponto ser registrado.</string>
     <string name="christmas_poi">POI de Natal</string>
