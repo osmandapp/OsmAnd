@@ -7,7 +7,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.CustomSearchPoiFilter;
