@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
 import net.osmand.ValueHolder;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -258,10 +259,22 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private void updateViaView(final View parentView) {
 		String via = generateViaDescription();
 		View viaLayout = parentView.findViewById(R.id.ViaLayout);
+		View fromLayoutEmptyView = parentView.findViewById(R.id.from_layout_empty_view);
+		View toLayoutEmptyView = parentView.findViewById(R.id.to_layout_empty_view);
+		View dividerFromDropDownEmpty = parentView.findViewById(R.id.divider_from_drop_down_empty);
+		ImageView swapDirectionView = (ImageView) parentView.findViewById(R.id.swap_direction_image_view);
 		if (via.length() == 0) {
 			viaLayout.setVisibility(View.GONE);
 			parentView.findViewById(R.id.viaLayoutDivider).setVisibility(View.GONE);
+			dividerFromDropDownEmpty.setVisibility(View.GONE);
+			fromLayoutEmptyView.setVisibility(View.VISIBLE);
+			toLayoutEmptyView.setVisibility(View.VISIBLE);
+			swapDirectionView.setVisibility(View.VISIBLE);
 		} else {
+			fromLayoutEmptyView.setVisibility(View.GONE);
+			toLayoutEmptyView.setVisibility(View.GONE);
+			swapDirectionView.setVisibility(View.GONE);
+			dividerFromDropDownEmpty.setVisibility(View.VISIBLE);
 			viaLayout.setVisibility(View.VISIBLE);
 			parentView.findViewById(R.id.viaLayoutDivider).setVisibility(View.VISIBLE);
 			((TextView) parentView.findViewById(R.id.ViaView)).setText(via);
@@ -278,6 +291,36 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 		ImageView viaIcon = (ImageView) parentView.findViewById(R.id.viaIcon);
 		viaIcon.setImageDrawable(getIconOrig(R.drawable.list_intermediate));
+
+		swapDirectionView.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_test_light,
+				isLight() ? R.color.route_info_control_icon_color_light : R.color.route_info_control_icon_color_dark));
+		AndroidUtils.setBackground(mapActivity, swapDirectionView, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
+		swapDirectionView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				TargetPointsHelper targetPointsHelper = getTargets();
+				TargetPoint startPoint = targetPointsHelper.getPointToStart();
+				TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
+
+				if (startPoint == null) {
+					Location loc = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+					if (loc != null) {
+						startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
+								new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
+										mapActivity.getString(R.string.shared_string_my_location)));
+					}
+				}
+
+				if (startPoint != null) {
+					targetPointsHelper.navigateToPoint(startPoint.point, false, -1, startPoint.getPointDescription(mapActivity));
+					targetPointsHelper.setStartPoint(endPoint.point, false, endPoint.getPointDescription(mapActivity));
+					targetPointsHelper.updateRouteAndRefresh(true);
+
+					updateFromIcon();
+					updateToIcon(parentView);
+				}
+			}
+		});
 	}
 
 	private void updateToSpinner(final View parentView) {

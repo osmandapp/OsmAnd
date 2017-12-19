@@ -150,6 +150,8 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), nightMode,
 				R.color.route_info_divider_light, R.color.route_info_divider_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.divider_from_drop_down_empty), nightMode,
+				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.viaLayoutDivider), nightMode,
 				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerToDropDown), nightMode,
