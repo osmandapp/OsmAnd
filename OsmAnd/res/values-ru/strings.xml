@@ -432,7 +432,7 @@
     <string name="amenity_type_user_defined">Пользовательские</string>
     <string name="fav_export_confirmation">Файл с избранными уже существует. Вы хотите его заменить?</string>
     <string name="profile_settings">Настройка профиля</string>
-    <string name="settings_preset">Профиль</string>
+    <string name="settings_preset">Профиль по умолчанию</string>
     <string name="settings_preset_descr">Выберите профиль работы приложения (в каждом профиле настройки хранятся отдельно).</string>
     <string name="global_settings">Общие настройки</string>
     <string name="global_app_settings">Общие настройки приложения</string>
