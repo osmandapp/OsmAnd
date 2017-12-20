@@ -387,7 +387,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		GridView transportStopRoutesGrid = (GridView) view.findViewById(R.id.transport_stop_routes_grid);
 		List<TransportStopRoute> transportStopRoutes = menu.getTransportStopRoutes();
 		if (transportStopRoutes != null && transportStopRoutes.size() > 0) {
-			TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(getContext(), transportStopRoutes);
+			TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(getContext(), transportStopRoutes, nightMode);
 			transportStopRoutesGrid.setAdapter(adapter);
 			transportStopRoutesGrid.setVisibility(View.VISIBLE);
 		} else {
