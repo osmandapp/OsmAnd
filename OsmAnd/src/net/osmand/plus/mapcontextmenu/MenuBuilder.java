@@ -7,6 +7,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -726,7 +727,10 @@ public class MenuBuilder {
 		routeDesc.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
 		int drawableResId = r.type == null ? R.drawable.ic_action_polygom_dark : r.type.getResourceId();
 		((ImageView) view.findViewById(R.id.route_type_icon)).setImageDrawable(getRowIcon(drawableResId));
-		((TextView) view.findViewById(R.id.route_ref)).setText(r.route.getRef());
+		TextView refTextView = (TextView) view.findViewById(R.id.route_ref);
+		refTextView.setText(r.route.getRef());
+		GradientDrawable refBg = (GradientDrawable) refTextView.getBackground();
+		refBg.setColor(ContextCompat.getColor(parent.getContext(), r.getColor(!light)));
 		view.setOnClickListener(listener);
 		int typeResId;
 		switch (r.type) {

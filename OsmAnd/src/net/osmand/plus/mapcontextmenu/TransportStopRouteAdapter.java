@@ -42,7 +42,7 @@ public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> 
 			TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
 			transportStopRouteTextView.setText(transportStopRoute.route.getRef());
 			GradientDrawable gradientDrawableBg = (GradientDrawable) transportStopRouteTextView.getBackground();
-			gradientDrawableBg.setColor(ContextCompat.getColor(getContext(), getColor(transportStopRoute)));
+			gradientDrawableBg.setColor(ContextCompat.getColor(getContext(), transportStopRoute.getColor(nightMode)));
 		}
 
 		convertView.setOnClickListener(new View.OnClickListener() {
@@ -55,40 +55,6 @@ public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> 
 		});
 
 		return convertView;
-	}
-
-	private int getColor(TransportStopRoute route) {
-		int color;
-		switch (route.type) {
-			case BUS:
-				color = R.color.route_bus_color;
-				break;
-			case SHARE_TAXI:
-				color = R.color.route_share_taxi_color;
-				break;
-			case TROLLEYBUS:
-				color = R.color.route_trolleybus_color;
-				break;
-			case TRAM:
-				color = R.color.route_tram_color;
-				break;
-			case TRAIN:
-				color = nightMode ? R.color.route_train_color_dark : R.color.route_train_color_light;
-				break;
-			case LIGHT_RAIL:
-				color = R.color.route_lightrail_color;
-				break;
-			case FUNICULAR:
-				color = R.color.route_funicular_color;
-				break;
-			case FERRY:
-				color = nightMode ? R.color.route_ferry_color_dark : R.color.route_ferry_color_light;
-				break;
-			default:
-				color = R.color.nav_track;
-				break;
-		}
-		return color;
 	}
 
 	public interface OnClickListener {
