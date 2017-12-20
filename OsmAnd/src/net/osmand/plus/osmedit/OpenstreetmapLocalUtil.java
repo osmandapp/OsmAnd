@@ -2,6 +2,8 @@ package net.osmand.plus.osmedit;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
@@ -13,6 +15,8 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 
@@ -42,12 +46,14 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	}
 	
 	@Override
-	public Node commitNodeImpl(OsmPoint.Action action, Node n, EntityInfo info, String comment, boolean closeChangeSet){
+	public Node commitNodeImpl(OsmPoint.Action action, Node n, EntityInfo info, String comment,
+							   boolean closeChangeSet, Set<String> changedTags){
 		Node newNode = n;
 		if (n.getId() == -1) {
 			newNode = new Node(n, Math.min(-2, plugin.getDBPOI().getMinID() - 1)); // generate local id for the created node
 		}
 		OpenstreetmapPoint p = new OpenstreetmapPoint();
+		newNode.setChangedTags(changedTags);
 		p.setEntity(newNode);
 		p.setAction(action);
 		p.setComment(comment);
@@ -84,6 +90,16 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		}
 		if(!Algorithms.isEmpty(n.getOpeningHours())) {
 			entity.putTagNoLC(OSMTagKey.OPENING_HOURS.getValue(), n.getOpeningHours());
+		}
+
+		for (Map.Entry<String, String> entry : n.getAdditionalInfo().entrySet()) {
+			AbstractPoiType abstractPoi = MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(entry.getKey());
+			if (abstractPoi != null && abstractPoi instanceof PoiType) {
+				PoiType p = (PoiType) abstractPoi;
+				if (!p.isNotEditableOsm() && !Algorithms.isEmpty(p.getOsmTag())) {
+					entity.putTagNoLC(p.getOsmTag(), entry.getValue());
+				}
+			}
 		}
 
 		// check whether this is node (because id of node could be the same as relation)
