@@ -106,7 +106,7 @@
 	<string name="poi_communication_tower">Tour de télécommunication</string>
 	<string name="poi_compressed_air">Station de gonflage des pneumatiques</string>
 	<string name="poi_confectionery">Confiserie</string>
-	<string name="poi_construction">Voie ferrée en construction</string>
+	<string name="poi_construction">Construction</string>
 	<string name="poi_convenience">Épicerie</string>
 	<string name="poi_copyshop">Service de photocopies et d\'impression</string>
 	<string name="poi_cosmetics">Magasin de cosmétiques</string>
@@ -3085,7 +3085,7 @@
 	<string name="poi_historic_period_classical">Période historique: classique (époque IV, 374 ap. JC - 900 ap. JC)</string>
 	<string name="poi_historic_period_imperial">Période historique: impériale (époque V, 900 ap. JC - 1200 ap. JC)</string>
 
-	<string name="poi_stone_type_conciliation_cross">Type: croix de conciliation</string>
+	<string name="poi_stone_type_conciliation_cross">Type : croix de conciliation</string>
 	<string name="poi_site_type_earthwork">Terrassement</string>
 	<string name="poi_nuclear_explosion_date_utc">Date de l\'explosion (UTC)</string>
 	<string name="poi_nuclear_explosion_time_utc">Heure de l\'explosion (UTC)</string>
@@ -3115,5 +3115,11 @@
 
 	<string name="poi_health_specialty_general_yes">Médecin généraliste</string>
 	<string name="poi_health_specialty_palliative_medicine_yes">Médecine palliative</string>
+
+	<string name="poi_stone_type_coat_of_arms">Type : blason</string>
+
+	<string name="poi_reservation_yes">Réservation : oui</string>
+	<string name="poi_reservation_no">Réservation : non</string>
+	<string name="poi_reservation_members_only">Réservation : membres uniquement</string>
 
 	</resources>
