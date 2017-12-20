@@ -245,4 +245,6 @@
 	<dimen name="route_info_icon_padding_right">16dp</dimen>
 	<dimen name="route_info_divider_margin">52dp</dimen>
 	<dimen name="route_info_modes_height">48dp</dimen>
+
+	<dimen name="multi_selection_header_height">52dp</dimen>
 </resources>

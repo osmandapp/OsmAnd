@@ -173,4 +173,6 @@
 	<dimen name="route_info_divider_margin">66dp</dimen>
 	<dimen name="route_info_modes_height">72dp</dimen>
 
+	<dimen name="multi_selection_header_height">78dp</dimen>
+
 </resources>
