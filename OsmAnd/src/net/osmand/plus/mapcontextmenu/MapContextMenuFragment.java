@@ -386,7 +386,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		GridView transportStopRoutesGrid = (GridView) view.findViewById(R.id.transport_stop_routes_grid);
 		List<TransportStopRoute> transportStopRoutes = menu.getTransportStopRoutes();
-		if (transportStopRoutes != null) {
+		if (transportStopRoutes != null && transportStopRoutes.size() > 0) {
 			TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(getContext(), transportStopRoutes);
 			transportStopRoutesGrid.setAdapter(adapter);
 			transportStopRoutesGrid.setVisibility(View.VISIBLE);
@@ -966,35 +966,28 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								line2MeasuredHeight = line2.getMeasuredHeight();
 							}
 
-							int dp16 = dpToPx(16f);
-							boolean has16margin = false;
 							int titleButtonHeight = 0;
 							View titleButtonContainer = view.findViewById(R.id.title_button_container);
 							if (titleButtonContainer.getVisibility() == View.VISIBLE) {
-								titleButtonHeight = titleButtonContainer.getMeasuredHeight() - dp16;
-								if (titleButtonHeight < 0) {
-									titleButtonHeight = 0;
-								} else {
-									has16margin = true;
-								}
+								titleButtonHeight = titleButtonContainer.getMeasuredHeight();
 							}
+
 							int downloadButtonsHeight = 0;
 							View downloadButtonsContainer = view.findViewById(R.id.download_buttons_container);
 							if (downloadButtonsContainer.getVisibility() == View.VISIBLE) {
-								downloadButtonsHeight = downloadButtonsContainer.getMeasuredHeight() - (has16margin ? 0 : dp16);
-								if (downloadButtonsHeight < 0) {
-									downloadButtonsHeight = 0;
-								} else {
-									has16margin = true;
-								}
+								downloadButtonsHeight = downloadButtonsContainer.getMeasuredHeight();
 							}
+
+							int titleBottomButtonHeight = 0;
+							View titleBottomButtonContainer = view.findViewById(R.id.title_bottom_button_container);
+							if (titleBottomButtonContainer.getVisibility() == View.VISIBLE) {
+								titleBottomButtonHeight = titleBottomButtonContainer.getMeasuredHeight();
+							}
+
 							int titleProgressHeight = 0;
 							View titleProgressContainer = view.findViewById(R.id.title_progress_container);
 							if (titleProgressContainer.getVisibility() == View.VISIBLE) {
-								titleProgressHeight = titleProgressContainer.getMeasuredHeight() - (has16margin ? 0 : dp16);
-								if (titleProgressHeight < 0) {
-									titleProgressHeight = 0;
-								}
+								titleProgressHeight = titleProgressContainer.getMeasuredHeight();
 							}
 
 							if (menuTopViewHeight != 0) {
@@ -1002,10 +995,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								if (titleHeight < line1.getMeasuredHeight() + line2MeasuredHeight) {
 									titleHeight = line1.getMeasuredHeight() + line2MeasuredHeight;
 								}
-								newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight + titleButtonHeight + downloadButtonsHeight + titleProgressHeight;
+								newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight + titleButtonHeight + downloadButtonsHeight + titleBottomButtonHeight + titleProgressHeight;
 								dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight - (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
 							} else {
-								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight - titleButtonHeight - downloadButtonsHeight - titleProgressHeight;
+								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight - titleButtonHeight - downloadButtonsHeight - titleBottomButtonHeight - titleProgressHeight;
 								menuTitleTopBottomPadding = (line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight())
 										+ (line2MeasuredHeight - line2LineCount * line2LineHeight);
 							}

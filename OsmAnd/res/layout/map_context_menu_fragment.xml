@@ -181,7 +181,6 @@
                         android:id="@+id/title_button_right_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="-4dp"
                         android:gravity="center_vertical"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_desc_text_size"
@@ -280,31 +279,39 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginBottom="@dimen/context_menu_padding_margin_small"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:clickable="true"
-                android:id="@+id/title_button_bottom_view"
-                android:background="?attr/ctx_menu_controller_bg"
-                android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
-                android:layout_marginRight="@dimen/context_menu_padding_margin_small"
+                android:id="@+id/title_bottom_button_container"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/context_menu_controller_height"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/context_menu_padding_margin_small"
+                android:visibility="gone"
+                tools:visibility="visible">
 
-                <net.osmand.plus.widgets.TextViewEx
-                    osmand:typeface="@string/font_roboto_medium"
-                    android:textAllCaps="true"
-                    android:id="@+id/title_button_bottom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/context_menu_button_padding_x"
-                    android:paddingRight="@dimen/context_menu_button_padding_x"
-                    android:text="@string/shared_string_others"
-                    android:textColor="?attr/ctx_menu_controller_text_color"
-                    android:textSize="@dimen/default_desc_text_size"/>
+                <LinearLayout
+                    android:id="@+id/title_button_bottom_view"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/context_menu_controller_height"
+                    android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
+                    android:layout_marginRight="@dimen/context_menu_padding_margin_small"
+                    android:layout_weight="1"
+                    android:background="?attr/ctx_menu_controller_bg">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/title_button_bottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/context_menu_button_padding_x"
+                        android:paddingRight="@dimen/context_menu_button_padding_x"
+                        android:text="@string/shared_string_others"
+                        android:textAllCaps="true"
+                        android:textColor="?attr/ctx_menu_controller_text_color"
+                        android:textSize="@dimen/default_desc_text_size"
+                        osmand:typeface="@string/font_roboto_medium"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
