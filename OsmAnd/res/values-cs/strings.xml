@@ -2841,7 +2841,7 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="coordinate_input_accuracy">%1$d číslic</string>
     <string name="go_to_next_field">Přejít na další pole</string>
     <string name="rename_marker">Přejmenovat značku</string>
-    <string name="tap_on_map_to_hide_interface_descr">Klepnutí na mapu přepíná ovládací tlačítka a nástroje.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Klepnutí na mapu skryje ovládací tlačítka a nástroje.</string>
     <string name="tap_on_map_to_hide_interface">Režim celé obrazovky</string>
     <string name="show_on_top_bar">Zobrazit na horní liště</string>
     <string name="mark_passed">Značka prošlá</string>
@@ -2859,4 +2859,11 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="empty_state_markers_active_desc">Klepnutím nebo přidržením označte místa, pak klepněte na tlačítko značky s vlajkou.</string>
     <string name="modify_the_search_query">Upravit vyhledávací dotaz.</string>
     <string name="one_tap_active">Jedním klepnutím aktivní</string>
+    <string name="release_3_0">\\022 Detekce značek \"stop\" zohledňuje směr jízdy 
+\n 
+\n • Nový algoritmus poskytuje smysluplné hodnoty pro stoupání/klesání v GPX trasách 
+\n 
+\n • Čas pěší trasy zohledňuje terén/stoupání (Naismithovo pravidlo)
+\n
+\n</string>
     </resources>
