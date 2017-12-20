@@ -33,6 +33,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -49,6 +50,7 @@ import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.Transp
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.util.Algorithms;
@@ -387,7 +389,22 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		GridView transportStopRoutesGrid = (GridView) view.findViewById(R.id.transport_stop_routes_grid);
 		List<TransportStopRoute> transportStopRoutes = menu.getTransportStopRoutes();
 		if (transportStopRoutes != null && transportStopRoutes.size() > 0) {
-			TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(getContext(), transportStopRoutes, nightMode);
+			final TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(getContext(), transportStopRoutes, nightMode);
+			adapter.setListener(new TransportStopRouteAdapter.OnClickListener() {
+				@Override
+				public void onClick(int position) {
+					TransportStopRoute route = adapter.getItem(position);
+					if (route != null) {
+						PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
+								route.getDescription(getMapActivity().getMyApplication(), false));
+						menu.show(menu.getLatLon(), pd, route);
+						TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+						stopsLayer.setRoute(route.route);
+						int cz = route.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
+						getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
+					}
+				}
+			});
 			transportStopRoutesGrid.setAdapter(adapter);
 			transportStopRoutesGrid.setVisibility(View.VISIBLE);
 		} else {

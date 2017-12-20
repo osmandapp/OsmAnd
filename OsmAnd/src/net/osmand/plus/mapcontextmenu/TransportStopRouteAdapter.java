@@ -19,15 +19,20 @@ import java.util.List;
 public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> {
 
 	private boolean nightMode;
+	private OnClickListener listener;
 
 	public TransportStopRouteAdapter(@NonNull Context context, @NonNull List<TransportStopRoute> objects, boolean nightMode) {
 		super(context, 0, objects);
 		this.nightMode = nightMode;
 	}
 
+	public void setListener(OnClickListener listener) {
+		this.listener = listener;
+	}
+
 	@NonNull
 	@Override
-	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+	public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 		if (convertView == null) {
 			convertView = LayoutInflater.from(getContext()).inflate(R.layout.transport_stop_route_item, parent, false);
 		}
@@ -39,6 +44,15 @@ public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> 
 			GradientDrawable gradientDrawableBg = (GradientDrawable) transportStopRouteTextView.getBackground();
 			gradientDrawableBg.setColor(ContextCompat.getColor(getContext(), getColor(transportStopRoute)));
 		}
+
+		convertView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (listener != null) {
+					listener.onClick(position);
+				}
+			}
+		});
 
 		return convertView;
 	}
@@ -75,5 +89,9 @@ public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> 
 				break;
 		}
 		return color;
+	}
+
+	public interface OnClickListener {
+		void onClick(int position);
 	}
 }
