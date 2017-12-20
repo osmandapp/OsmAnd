@@ -499,6 +499,7 @@ public class NotesFragment extends OsmAndListFragment {
 				wpt.link = r.getFileName();
 				wpt.time = r.getFile().lastModified();
 				wpt.category = r.getSearchHistoryType();
+				wpt.desc = r.getTypeWithDuration(getContext());
 				getMyApplication().getSelectedGpxHelper().addPoint(wpt, file);
 			}
 		}
