@@ -406,9 +406,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 		View bottomButtons = view.findViewById(R.id.context_menu_bottom_buttons);
 		bottomButtons.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
-		if (!menu.bottomButtonsVisible()) {
-			buttonsBottomBorder.setVisibility(View.GONE);
-			bottomButtons.setVisibility(View.GONE);
+		if (!menu.navigateButtonVisible()) {
+			bottomButtons.findViewById(R.id.context_menu_directions_button).setVisibility(View.GONE);
 		}
 
 		// Action buttons

@@ -350,7 +350,7 @@ public abstract class MenuController extends BaseMenuController {
 		return true;
 	}
 
-	public boolean bottomButtonsVisible() {
+	public boolean navigateButtonVisible() {
 		return true;
 	}
 
