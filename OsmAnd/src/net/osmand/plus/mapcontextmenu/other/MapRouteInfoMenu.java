@@ -292,7 +292,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		ImageView viaIcon = (ImageView) parentView.findViewById(R.id.viaIcon);
 		viaIcon.setImageDrawable(getIconOrig(R.drawable.list_intermediate));
 
-		swapDirectionView.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_test_light,
+		swapDirectionView.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_change_navigation_points,
 				isLight() ? R.color.route_info_control_icon_color_light : R.color.route_info_control_icon_color_dark));
 		AndroidUtils.setBackground(mapActivity, swapDirectionView, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 		swapDirectionView.setOnClickListener(new View.OnClickListener() {
