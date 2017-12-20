@@ -68,7 +68,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		stopBus = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bus);
 		stopSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_small);
 		attrs = new RenderingLineAttributes("transport_route");
-		attrs.defaultWidth = (int) (12 * view.getDensity());
+		attrs.defaultWidth = (int) (6 * view.getDensity());
 		data = new OsmandMapLayer.MapLayerData<List<TransportStop>>() {
 			{
 				ZOOM_THRESHOLD = 0;
