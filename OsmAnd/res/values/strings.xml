@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
+    <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
 	<string name="release_3_0">
 	\u2022 Detection of stop signs now considers driving direction\n\n
 	\u2022 New algorithm providing meaningful ascent/descent values for GPX tracks\n\n
