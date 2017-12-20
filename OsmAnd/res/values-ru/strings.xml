@@ -1,5 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="av_locations_selected_desc">Файл GPX с координатами и данными выбранных заметок.</string>
+    <string name="av_locations_all_desc">Файл GPX с координатами и данными всех заметок.</string>
     <string name="favorite_empty_place_name">Место</string>
     <string name="private_access_routing_req">Ваш пункт назначения находится на частной территории. Вы хотите разрешить доступ к частным дорогам для этой поездки?</string>
     <string name="restart_search">Искать снова</string>
