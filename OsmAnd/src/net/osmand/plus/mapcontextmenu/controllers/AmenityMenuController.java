@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import android.view.View;
-
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -14,16 +12,14 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.OpeningHoursInfo;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
+import net.osmand.plus.TransportStopRoute;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.TransportIndexRepository;
 import net.osmand.plus.views.POIMapLayer;
-import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;

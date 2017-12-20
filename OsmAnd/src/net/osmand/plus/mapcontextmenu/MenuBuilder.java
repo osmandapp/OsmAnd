@@ -52,7 +52,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
+import net.osmand.plus.TransportStopRoute;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.TransportStopsLayer;
@@ -790,7 +790,7 @@ public class MenuBuilder {
 							r.getDescription(getMapActivity().getMyApplication(), false));
 					mm.show(latLon, pd, r);
 					TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
-					stopsLayer.setRoute(r.route);
+					stopsLayer.setRoute(r);
 					int cz = r.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
 					getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
 				}

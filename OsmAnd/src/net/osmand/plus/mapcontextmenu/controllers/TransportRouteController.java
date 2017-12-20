@@ -12,7 +12,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
+import net.osmand.plus.TransportStopRoute;
 import net.osmand.plus.views.TransportStopsLayer;
 
 import java.util.List;
@@ -202,7 +202,7 @@ public class TransportRouteController extends MenuController {
 		TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
 		int cz = transportRoute.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
 		getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
-		stopsLayer.setRoute(transportRoute.route);
+		stopsLayer.setRoute(transportRoute);
 	}
 
 	private void resetRoute() {

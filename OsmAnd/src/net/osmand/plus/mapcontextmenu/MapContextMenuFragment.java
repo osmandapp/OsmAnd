@@ -46,7 +46,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
+import net.osmand.plus.TransportStopRoute;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -399,7 +399,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								route.getDescription(getMapActivity().getMyApplication(), false));
 						menu.show(menu.getLatLon(), pd, route);
 						TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
-						stopsLayer.setRoute(route.route);
+						stopsLayer.setRoute(route);
 						int cz = route.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
 						getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
 					}
