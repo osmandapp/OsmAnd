@@ -9,6 +9,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -28,6 +29,8 @@ public class EditPoiData {
 	private boolean hasChangesBeenMade = false;
 	private Map<String, PoiType> allTranslatedSubTypes;
 	private PoiCategory category;
+
+	private Set<String> changedTags = new HashSet<>();
 	
 	public EditPoiData(Node node, OsmandApplication app) {
 		allTranslatedSubTypes = app.getPoiTypes().getAllTranslatedNames(true);
@@ -45,6 +48,7 @@ public class EditPoiData {
 		if(type != null && type != category) {
 			category = type;
 			tagValues.put(POI_TYPE_TAG, "");
+			changedTags.add(POI_TYPE_TAG);
 		}
 	}
 	
@@ -74,6 +78,7 @@ public class EditPoiData {
 		checkNotInEdit();
 		this.tagValues.clear();
 		this.tagValues.putAll(mp);
+		changedTags.clear();
 		retrieveType();
 	}
 	
@@ -112,6 +117,7 @@ public class EditPoiData {
 			isInEdit = true;
 			tagValues.remove(REMOVE_TAG_PREFIX+tag);
 			tagValues.put(tag, value);
+			changedTags.add(tag);
 			notifyDatasetChanged(tag);
 		} finally {
 			isInEdit = false;
@@ -141,6 +147,7 @@ public class EditPoiData {
 			isInEdit = true;
 			tagValues.put(REMOVE_TAG_PREFIX+tag, REMOVE_TAG_VALUE);
 			tagValues.remove(tag);
+			changedTags.remove(tag);
 			notifyDatasetChanged(tag);
 		} finally {
 			isInEdit = false;
@@ -154,8 +161,11 @@ public class EditPoiData {
 	public boolean isInEdit() {
 		return isInEdit;
 	}
-	
-	
+
+	public Set<String> getChangedTags() {
+		return changedTags;
+	}
+
 	private void notifyDatasetChanged(String tag) {
 		if (mListeners.size() > 0) {
 			hasChangesBeenMade = true;
@@ -185,6 +195,7 @@ public class EditPoiData {
 
 	public void updateTypeTag(String string) {
 		tagValues.put(POI_TYPE_TAG, string);
+		changedTags.add(POI_TYPE_TAG);
 		retrieveType();
 		PoiType pt = getPoiTypeDefined();
 		if(pt != null) {
@@ -192,6 +203,7 @@ public class EditPoiData {
 			tagValues.put(REMOVE_TAG_PREFIX+pt.getOsmTag2(), REMOVE_TAG_VALUE);
 			tagValues.remove(pt.getOsmTag());
 			tagValues.remove(pt.getOsmTag2());
+			changedTags.removeAll(Arrays.asList(pt.getOsmTag(), pt.getOsmTag2()));
 			category = pt.getCategory();
 		}
 		notifyDatasetChanged(POI_TYPE_TAG);

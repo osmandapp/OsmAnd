@@ -103,6 +103,7 @@ public abstract class Entity implements Serializable {
 
 	// lazy initializing
 	private Map<String, String> tags = null;
+	private Set<String> changedTags;
 	private final long id;
 	private boolean dataLoaded;
 	private int modify;
@@ -123,6 +124,14 @@ public abstract class Entity implements Serializable {
 			putTagNoLC(t, copy.getTag(t));
 		}
 		this.dataLoaded = copy.dataLoaded;
+	}
+
+	public Set<String> getChangedTags() {
+		return changedTags;
+	}
+
+	public void setChangedTags(Set<String> changedTags) {
+		this.changedTags = changedTags;
 	}
 
 	public int getModify() {
