@@ -90,7 +90,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private int viewHeight;
 	private int zoomButtonsHeight;
 
-	private int fabPaddingTopPx;
 	private int markerPaddingPx;
 	private int markerPaddingXPx;
 
@@ -118,7 +117,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		processScreenHeight(container);
 
-		fabPaddingTopPx = dpToPx(FAB_PADDING_TOP_DP);
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
 
@@ -1363,17 +1361,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		return latlon;
 	}
 
-	private int getFabY(int y) {
-		int fabY = y + fabPaddingTopPx;
-		if (fabY < fabPaddingTopPx) {
-			fabY = fabPaddingTopPx;
-			fabY = addStatusBarHeightIfNeeded(fabY);
-		}
-		return fabY;
-	}
-
 	private int getZoomButtonsY(int y) {
-		return y - zoomButtonsHeight - fabPaddingTopPx;
+		return y - zoomButtonsHeight;
 	}
 
 	private void doLayoutMenu() {
