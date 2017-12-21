@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/content"
-        android:background="?attr/expandable_list_item_background"
+        android:background="?attr/selectableItemBackground"
         android:paddingLeft="@dimen/list_content_padding"
         android:paddingRight="@dimen/list_content_padding"
         android:orientation="horizontal"
