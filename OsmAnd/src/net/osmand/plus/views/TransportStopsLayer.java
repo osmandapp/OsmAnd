@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -21,7 +20,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.R;
-import net.osmand.plus.TransportStopRoute;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.activities.MapActivity;
 
 import java.util.ArrayList;
@@ -39,7 +38,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	private final MapActivity mapActivity;
 	private OsmandMapTileView view;
 
-	private int cachedColor;
 	private Paint paintIcon;
 	private Bitmap stopBus;
 	private Bitmap stopSmall;
@@ -183,11 +181,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		if (tb.getZoom() >= startZoomRoute) {
 			if (stopRoute != null) {
 				objects = stopRoute.route.getForwardStops();
-				int color = stopRoute.getColor(settings.isNightMode());
-				if (cachedColor != color) {
-					cachedColor = color;
-					attrs.paint.setColor(ContextCompat.getColor(mapActivity, cachedColor));
-				}
+				int color = stopRoute.getColor(mapActivity.getMyApplication(), settings.isNightMode());
+				attrs.paint.setColor(color);
 				attrs.updatePaints(view, settings, tb);
 				try {
 					path.reset();

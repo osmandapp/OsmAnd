@@ -370,16 +370,5 @@
 	<color name="route_info_checked_mode_icon_color_light">#ff8800</color>
 	<color name="route_info_checked_mode_icon_color_dark">#d28521</color>
 	<color name="route_info_unchecked_mode_icon_color">#727272</color>
-	
-	<color name="route_bus_color">#ff0000</color>
-	<color name="route_share_taxi_color">#f620cb</color>
-	<color name="route_trolleybus_color">#920071</color>
-	<color name="route_tram_color">#0000ff</color>
-	<color name="route_train_color_light">#8c3f01</color>
-	<color name="route_train_color_dark">#cb6e23</color>
-	<color name="route_lightrail_color">#009100</color>
-	<color name="route_funicular_color">#3880a9</color>
-	<color name="route_ferry_color_light">#53A3BE</color>
-	<color name="route_ferry_color_dark">#185499</color>
 
 </resources>

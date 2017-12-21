@@ -16,9 +16,10 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.OpeningHoursInfo;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
-import net.osmand.plus.TransportStopRoute;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.TransportIndexRepository;
+import net.osmand.plus.transport.TransportStopType;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -252,7 +253,7 @@ public class AmenityMenuController extends MenuController {
 		if (rts != null) {
 			for (TransportRoute rs : rts) {
 				if (!containsRef(rs)) {
-					TransportStopController.TransportStopType type = TransportStopController.TransportStopType.findType(rs.getType());
+					TransportStopType type = TransportStopType.findType(rs.getType());
 					TransportStopRoute r = new TransportStopRoute();
 					r.type = type;
 					r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();

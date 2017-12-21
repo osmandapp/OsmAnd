@@ -52,7 +52,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
-import net.osmand.plus.TransportStopRoute;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.TransportStopsLayer;
@@ -730,7 +730,7 @@ public class MenuBuilder {
 		TextView refTextView = (TextView) view.findViewById(R.id.route_ref);
 		refTextView.setText(r.route.getRef());
 		GradientDrawable refBg = (GradientDrawable) refTextView.getBackground();
-		refBg.setColor(ContextCompat.getColor(parent.getContext(), r.getColor(!light)));
+		refBg.setColor(r.getColor(mapActivity.getMyApplication(), !light));
 		view.setOnClickListener(listener);
 		int typeResId;
 		switch (r.type) {

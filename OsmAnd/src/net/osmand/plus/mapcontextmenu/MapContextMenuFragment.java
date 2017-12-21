@@ -46,7 +46,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
-import net.osmand.plus.TransportStopRoute;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -389,7 +389,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		GridView transportStopRoutesGrid = (GridView) view.findViewById(R.id.transport_stop_routes_grid);
 		List<TransportStopRoute> transportStopRoutes = menu.getTransportStopRoutes();
 		if (transportStopRoutes != null && transportStopRoutes.size() > 0) {
-			final TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(getContext(), transportStopRoutes, nightMode);
+			final TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(getMyApplication(), transportStopRoutes, nightMode);
 			adapter.setListener(new TransportStopRouteAdapter.OnClickListener() {
 				@Override
 				public void onClick(int position) {

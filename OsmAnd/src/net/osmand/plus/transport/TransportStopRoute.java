@@ -1,20 +1,26 @@
-package net.osmand.plus;
+package net.osmand.plus.transport;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
 
 import java.util.List;
 
 public class TransportStopRoute {
 	public TransportStop refStop;
-	public TransportStopController.TransportStopType type;
+	public TransportStopType type;
 	public String desc;
 	public TransportRoute route;
 	public TransportStop stop;
 	public int distance;
 	public boolean showWholeRoute;
+	private int cachedColor;
+	private boolean cachedNight;
 
 	public String getDescription(OsmandApplication ctx, boolean useDistance) {
 		if (useDistance && distance > 0) {
@@ -45,37 +51,20 @@ public class TransportStopRoute {
 		return cp.getZoom();
 	}
 
-	public int getColor(boolean nightMode) {
-		int color;
-		switch (type) {
-			case BUS:
-				color = R.color.route_bus_color;
-				break;
-			case SHARE_TAXI:
-				color = R.color.route_share_taxi_color;
-				break;
-			case TROLLEYBUS:
-				color = R.color.route_trolleybus_color;
-				break;
-			case TRAM:
-				color = R.color.route_tram_color;
-				break;
-			case TRAIN:
-				color = nightMode ? R.color.route_train_color_dark : R.color.route_train_color_light;
-				break;
-			case LIGHT_RAIL:
-				color = R.color.route_lightrail_color;
-				break;
-			case FUNICULAR:
-				color = R.color.route_funicular_color;
-				break;
-			case FERRY:
-				color = nightMode ? R.color.route_ferry_color_dark : R.color.route_ferry_color_light;
-				break;
-			default:
-				color = R.color.nav_track;
-				break;
+	public int getColor(OsmandApplication ctx, boolean nightMode) {
+		if (cachedColor == 0 || cachedNight != nightMode) {
+			cachedColor = ctx.getResources().getColor(R.color.transport_route_line);
+			cachedNight = nightMode;
+			RenderingRulesStorage rrs = ctx.getRendererRegistry().getCurrentSelectedRenderer();
+			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
+			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
+			String typeStr = type.getTypeStr();
+			if (req.searchRenderingAttribute(typeStr)) {
+				cachedColor = req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
+			}
 		}
-		return color;
+
+		return cachedColor;
 	}
+
 }
