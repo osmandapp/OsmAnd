@@ -2823,4 +2823,5 @@
     <string name="move_point">Move Point</string>
     <string name="add_segment_to_the_track">Add to a GPX track</string>
     <string name="osm_recipients_label">OSM Recipients</string>
+    <string name="total_donations">Total Donations</string>
 </resources>
