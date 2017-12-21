@@ -5,13 +5,16 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.data.PointDescription;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
-import net.osmand.util.Algorithms;
+import net.osmand.plus.render.RenderingIcons;
+
+import java.util.Map;
 
 public class EditPOIMenuController extends MenuController {
 
@@ -95,6 +98,11 @@ public class EditPOIMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean displayAdditionalTypeStrInHours() {
+		return true;
+	}
+
+	@Override
 	protected void setObject(Object object) {
 		if (object instanceof OsmPoint) {
 			this.osmPoint = (OsmPoint) object;
@@ -112,17 +120,57 @@ public class EditPOIMenuController extends MenuController {
 
 	@Override
 	public boolean needTypeStr() {
-		return !Algorithms.isEmpty(pointTypeStr);
+		return false;
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
-		return getIcon(R.drawable.ic_action_gabout_dark, R.color.created_poi_icon_color);
-	}
-
-	@Override
-	public String getTypeStr() {
+	public String getAdditionalTypeStr() {
 		return pointTypeStr;
+	}
+
+	@Override
+	public int getTimeStrColor() {
+		if (osmPoint.getAction() == OsmPoint.Action.CREATE) {
+			return R.color.color_osm_edit_create;
+		} else if (osmPoint.getAction() == OsmPoint.Action.MODIFY) {
+			return R.color.color_osm_edit_modify;
+		} else if (osmPoint.getAction() == OsmPoint.Action.DELETE) {
+			return R.color.color_osm_edit_delete;
+		} else {
+			return R.color.color_osm_edit_modify;
+		}
+	}
+
+	@Override
+	public Drawable getAdditionalLineTypeIcon() {
+		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
+			OpenstreetmapPoint osmP = (OpenstreetmapPoint) osmPoint;
+			int iconResId = 0;
+			String poiTranslation = osmP.getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+			if (poiTranslation != null) {
+				Map<String, PoiType> poiTypeMap = getMapActivity().getMyApplication().getPoiTypes().getAllTranslatedNames(false);
+				PoiType poiType = poiTypeMap.get(poiTranslation.toLowerCase());
+				if (poiType != null) {
+					String id = null;
+					if (RenderingIcons.containsBigIcon(poiType.getIconKeyName())) {
+						id = poiType.getIconKeyName();
+					} else if (RenderingIcons.containsBigIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
+						id = poiType.getOsmTag() + "_" + poiType.getOsmValue();
+					}
+					if (id != null) {
+						iconResId = RenderingIcons.getBigIconResourceId(id);
+					}
+				}
+			}
+			if (iconResId == 0) {
+				iconResId = R.drawable.ic_type_info;
+			}
+			return getIcon(iconResId);
+		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
+			return getIcon(R.drawable.ic_type_bug);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
