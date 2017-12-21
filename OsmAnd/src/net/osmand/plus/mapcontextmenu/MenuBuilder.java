@@ -778,7 +778,7 @@ public class MenuBuilder {
 		TextView typeTextView = new TextView(view.getContext());
 		LinearLayout.LayoutParams typeTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		typeTextView.setLayoutParams(typeTextParams);
-		typeTextView.setText(route.type.getTypeStrRes());
+		typeTextView.setText(route.getTypeStrRes());
 		typeView.addView(typeTextView);
 
 		baseView.setOnClickListener(listener);
