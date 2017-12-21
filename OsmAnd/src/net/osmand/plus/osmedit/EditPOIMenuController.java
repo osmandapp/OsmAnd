@@ -13,6 +13,7 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
@@ -20,7 +21,8 @@ public class EditPOIMenuController extends MenuController {
 
 	private OsmPoint osmPoint;
 	private OsmEditingPlugin plugin;
-	private String pointTypeStr;
+	private String category;
+	private String actionStr;
 
 	public EditPOIMenuController(final MapActivity mapActivity, PointDescription pointDescription, OsmPoint osmPoint) {
 		super(new EditPOIMenuBuilder(mapActivity, osmPoint), pointDescription, mapActivity);
@@ -73,33 +75,34 @@ public class EditPOIMenuController extends MenuController {
 		rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
 		rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 
+		category = getCategory();
+
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
 			if(osmPoint.getAction() == Action.DELETE) {
-				pointTypeStr = getMapActivity().getString(R.string.osm_edit_deleted_poi);
+				actionStr = getMapActivity().getString(R.string.osm_edit_deleted_poi);
 			} else if(osmPoint.getAction() == Action.MODIFY) {
-				pointTypeStr = getMapActivity().getString(R.string.osm_edit_modified_poi);
+				actionStr = getMapActivity().getString(R.string.osm_edit_modified_poi);
 			} else/* if(osmPoint.getAction() == Action.CREATE) */{
-				pointTypeStr = getMapActivity().getString(R.string.osm_edit_created_poi);
+				actionStr = getMapActivity().getString(R.string.osm_edit_created_poi);
 			}
-			
 		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
 			if(osmPoint.getAction() == Action.DELETE) {
-				pointTypeStr = getMapActivity().getString(R.string.osm_edit_removed_note);
+				actionStr = getMapActivity().getString(R.string.osm_edit_removed_note);
 			} else if(osmPoint.getAction() == Action.MODIFY) {
-				pointTypeStr = getMapActivity().getString(R.string.osm_edit_commented_note);
+				actionStr = getMapActivity().getString(R.string.osm_edit_commented_note);
 			} else if(osmPoint.getAction() == Action.REOPEN) {
-				pointTypeStr = getMapActivity().getString(R.string.osm_edit_reopened_note);
+				actionStr = getMapActivity().getString(R.string.osm_edit_reopened_note);
 			} else/* if(osmPoint.getAction() == Action.CREATE) */{
-				pointTypeStr = getMapActivity().getString(R.string.osm_edit_created_note);
+				actionStr = getMapActivity().getString(R.string.osm_edit_created_note);
 			}
 		} else {
-			pointTypeStr = "";
+			actionStr = "";
 		}
 	}
 
 	@Override
-	public boolean displayAdditionalTypeStrInHours() {
-		return true;
+	public String getTypeStr() {
+		return category;
 	}
 
 	@Override
@@ -120,29 +123,27 @@ public class EditPOIMenuController extends MenuController {
 
 	@Override
 	public boolean needTypeStr() {
-		return false;
+		return !Algorithms.isEmpty(category);
 	}
 
 	@Override
-	public String getAdditionalTypeStr() {
-		return pointTypeStr;
+	public String getAdditionalInfoStr() {
+		return actionStr;
 	}
 
 	@Override
-	public int getTimeStrColor() {
-		if (osmPoint.getAction() == OsmPoint.Action.CREATE) {
-			return R.color.color_osm_edit_create;
-		} else if (osmPoint.getAction() == OsmPoint.Action.MODIFY) {
-			return R.color.color_osm_edit_modify;
-		} else if (osmPoint.getAction() == OsmPoint.Action.DELETE) {
+	public int getAdditionalInfoColor() {
+		if (osmPoint.getAction() == Action.DELETE) {
 			return R.color.color_osm_edit_delete;
-		} else {
+		} else if (osmPoint.getAction() == Action.MODIFY || osmPoint.getAction() == Action.REOPEN) {
 			return R.color.color_osm_edit_modify;
+		} else {
+			return R.color.color_osm_edit_create;
 		}
 	}
 
 	@Override
-	public Drawable getAdditionalLineTypeIcon() {
+	public int getAdditionalInfoIconRes() {
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
 			OpenstreetmapPoint osmP = (OpenstreetmapPoint) osmPoint;
 			int iconResId = 0;
@@ -165,16 +166,26 @@ public class EditPOIMenuController extends MenuController {
 			if (iconResId == 0) {
 				iconResId = R.drawable.ic_type_info;
 			}
-			return getIcon(iconResId);
+			return iconResId;
 		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
-			return getIcon(R.drawable.ic_type_bug);
+			return R.drawable.ic_type_bug;
 		} else {
-			return null;
+			return 0;
 		}
 	}
 
 	@Override
 	public boolean needStreetName() {
 		return false;
+	}
+
+	private String getCategory() {
+		String category = "";
+		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
+			category = ((OpenstreetmapPoint) osmPoint).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
+			category = getMapActivity().getString(R.string.osn_bug_name);
+		}
+		return category;
 	}
 }

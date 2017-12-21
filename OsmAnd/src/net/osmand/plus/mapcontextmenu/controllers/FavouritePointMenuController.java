@@ -24,6 +24,7 @@ public class FavouritePointMenuController extends MenuController {
 
 	private FavouritePoint fav;
 	private MapMarker mapMarker;
+	private OpeningHoursInfo openingHoursInfo;
 
 	public FavouritePointMenuController(MapActivity mapActivity, PointDescription pointDescription, final FavouritePoint fav) {
 		super(new FavouritePointMenuBuilder(mapActivity, fav), pointDescription, mapActivity);
@@ -44,6 +45,11 @@ public class FavouritePointMenuController extends MenuController {
 			TransportStop stop = (TransportStop) getObject();
 			TransportStopController transportStopController = new TransportStopController(getMapActivity(), pointDescription, stop);
 			transportStopController.processTransportStop(builder);
+		}
+
+		Object originObject = getBuilder().getOriginObject();
+		if (originObject instanceof Amenity) {
+			openingHoursInfo = AmenityMenuController.processOpeningHours((Amenity) originObject);
 		}
 	}
 
@@ -136,11 +142,26 @@ public class FavouritePointMenuController extends MenuController {
 	}
 
 	@Override
-	public OpeningHoursInfo getOpeningHoursInfo() {
-		Object originObject = getBuilder().getOriginObject();
-		if (originObject instanceof Amenity) {
-			return AmenityMenuController.processOpeningHours((Amenity) originObject);
+	public int getAdditionalInfoColor() {
+		if (openingHoursInfo != null) {
+			return openingHoursInfo.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
 		}
-		return null;
+		return 0;
+	}
+
+	@Override
+	public String getAdditionalInfoStr() {
+		if (openingHoursInfo != null) {
+			return openingHoursInfo.getInfo(getMapActivity());
+		}
+		return "";
+	}
+
+	@Override
+	public int getAdditionalInfoIconRes() {
+		if (openingHoursInfo != null) {
+			return R.drawable.ic_action_opening_hour_16;
+		}
+		return 0;
 	}
 }

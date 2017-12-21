@@ -82,8 +82,8 @@ public class WptPtMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getAdditionalLineTypeIcon() {
-		if (Algorithms.isEmpty(getAdditionalTypeStr())) {
+	public Drawable getSubtypeIcon() {
+		if (Algorithms.isEmpty(getSubtypeStr())) {
 			return null;
 		} else {
 			return getIcon(R.drawable.ic_action_group_name_16);
@@ -111,7 +111,7 @@ public class WptPtMenuController extends MenuController {
 	}
 
 	@Override
-	public String getAdditionalTypeStr() {
+	public String getSubtypeStr() {
 		return wpt.category != null ? wpt.category : "";
 	}
 

@@ -1126,61 +1126,43 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					}
 					line2Str.append(streetStr);
 				}
-				line2.setText(line2Str.toString());
+				if (!TextUtils.isEmpty(line2Str)) {
+					line2.setText(line2Str.toString());
+					line2.setVisibility(View.VISIBLE);
+				} else {
+					line2.setVisibility(View.GONE);
+				}
 			}
 
 			TextView line3 = (TextView) view.findViewById(R.id.context_menu_line3);
-			String additionalTypeStr = menu.getAdditionalTypeStr();
-			boolean displayAdditionalTypeStrInHours = menu.displayAdditionalTypeStrInHours();
-			boolean emptyAdditionalTypeStr = TextUtils.isEmpty(additionalTypeStr);
-			if (emptyAdditionalTypeStr || displayAdditionalTypeStrInHours) {
+			String subtypeStr = menu.getSubtypeStr();
+			if (TextUtils.isEmpty(subtypeStr)) {
 				line3.setVisibility(View.GONE);
 			} else {
 				line3.setVisibility(View.VISIBLE);
-				line3.setText(additionalTypeStr);
-				Drawable icon = menu.getAdditionalLineTypeIcon();
+				line3.setText(subtypeStr);
+				Drawable icon = menu.getSubtypeIcon();
 				line3.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 				line3.setCompoundDrawablePadding(dpToPx(5f));
 			}
 
-			TextView openingHoursTextView = (TextView) view.findViewById(R.id.opening_hours_text_view);
-			OpeningHoursInfo openingHoursInfo = menu.getOpeningHoursInfo();
-			boolean containsOpeningHours = openingHoursInfo != null && openingHoursInfo.containsInfo();
-			if (containsOpeningHours || (displayAdditionalTypeStrInHours && !emptyAdditionalTypeStr)) {
-				int colorId;
-				if (containsOpeningHours) {
-					colorId = openingHoursInfo.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
-				} else {
-					colorId = menu.getTimeStrColor();
-				}
-				String timeInfo = "";
-				if (containsOpeningHours) {
-					if (openingHoursInfo.isOpened24_7()) {
-						timeInfo = getString(R.string.shared_string_is_open_24_7);
-					} else if (!Algorithms.isEmpty(openingHoursInfo.getNearToOpeningTime())) {
-						timeInfo = getString(R.string.will_be_opened_at) + " " + openingHoursInfo.getNearToOpeningTime();
-					} else if (!Algorithms.isEmpty(openingHoursInfo.getOpeningTime())) {
-						timeInfo = getString(R.string.opened_from) + " " + openingHoursInfo.getOpeningTime();
-					} else if (!Algorithms.isEmpty(openingHoursInfo.getNearToClosingTime())) {
-						timeInfo = getString(R.string.will_be_closed_at) + " " + openingHoursInfo.getNearToClosingTime();
-					} else if (!Algorithms.isEmpty(openingHoursInfo.getClosingTime())) {
-						timeInfo = getString(R.string.opened_till) + " " + openingHoursInfo.getClosingTime();
-					} else if (!Algorithms.isEmpty(openingHoursInfo.getOpeningDay())) {
-						timeInfo = getString(R.string.will_be_opened_on) + " " + openingHoursInfo.getOpeningDay() + ".";
-					}
-				} else {
-					timeInfo = additionalTypeStr;
-				}
+			TextView additionalInfoTextView = (TextView) view.findViewById(R.id.additional_info_text_view);
+			String additionalInfoStr = menu.getAdditionalInfo();
+			if (!TextUtils.isEmpty(additionalInfoStr)) {
+				int colorId = menu.getAdditionalInfoColor();
+				int additionalInfoIconRes = menu.getAdditionalInfoIconRes();
 				if (colorId != 0) {
-					openingHoursTextView.setTextColor(ContextCompat.getColor(getContext(), colorId));
-					Drawable drawable = getIcon(R.drawable.ic_action_opening_hour_16, colorId);
-					openingHoursTextView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-					openingHoursTextView.setCompoundDrawablePadding(dpToPx(8));
+					additionalInfoTextView.setTextColor(ContextCompat.getColor(getContext(), colorId));
+					if (additionalInfoIconRes != 0) {
+						Drawable additionalIcon = getIcon(additionalInfoIconRes, colorId);
+						additionalInfoTextView.setCompoundDrawablesWithIntrinsicBounds(additionalIcon, null, null, null);
+						additionalInfoTextView.setCompoundDrawablePadding(dpToPx(8));
+					}
 				}
-				openingHoursTextView.setText(timeInfo);
-				openingHoursTextView.setVisibility(View.VISIBLE);
+				additionalInfoTextView.setText(additionalInfoStr);
+				additionalInfoTextView.setVisibility(View.VISIBLE);
 			} else {
-				openingHoursTextView.setVisibility(View.GONE);
+				additionalInfoTextView.setVisibility(View.GONE);
 			}
 		}
 		updateCompassVisibility();

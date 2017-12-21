@@ -386,10 +386,6 @@ public abstract class MenuController extends BaseMenuController {
 		return false;
 	}
 
-	public boolean displayAdditionalTypeStrInHours() {
-		return false;
-	}
-
 	public int getLeftIconId() {
 		return 0;
 	}
@@ -402,7 +398,7 @@ public abstract class MenuController extends BaseMenuController {
 		return null;
 	}
 
-	public Drawable getAdditionalLineTypeIcon() {
+	public Drawable getSubtypeIcon() {
 		return null;
 	}
 
@@ -432,16 +428,20 @@ public abstract class MenuController extends BaseMenuController {
 		return "";
 	}
 
-	public String getAdditionalTypeStr() {
+	public String getSubtypeStr() {
 		return "";
 	}
 
-	public int getTimeStrColor() {
+	public int getAdditionalInfoColor() {
 		return 0;
 	}
 
-	public OpeningHoursInfo getOpeningHoursInfo() {
-		return null;
+	public String getAdditionalInfoStr() {
+		return "";
+	}
+
+	public int getAdditionalInfoIconRes() {
+		return 0;
 	}
 
 	public String getCommonTypeStr() {

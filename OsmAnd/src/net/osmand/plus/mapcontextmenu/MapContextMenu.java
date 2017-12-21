@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -1135,13 +1136,37 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return menuController != null && menuController.displayDistanceDirection();
 	}
 
-	public boolean displayAdditionalTypeStrInHours() {
-		return menuController != null && menuController.displayAdditionalTypeStrInHours();
+	public String getSubtypeStr() {
+		if (menuController != null) {
+			return menuController.getSubtypeStr();
+		}
+		return "";
 	}
 
-	public int getTimeStrColor() {
+	public Drawable getSubtypeIcon() {
 		if (menuController != null) {
-			return menuController.getTimeStrColor();
+			return menuController.getSubtypeIcon();
+		}
+		return null;
+	}
+
+	public int getAdditionalInfoColor() {
+		if (menuController != null) {
+			return menuController.getAdditionalInfoColor();
+		}
+		return 0;
+	}
+
+	public String getAdditionalInfo() {
+		if (menuController != null) {
+			return menuController.getAdditionalInfoStr();
+		}
+		return "";
+	}
+
+	public int getAdditionalInfoIconRes() {
+		if (menuController != null) {
+			return menuController.getAdditionalInfoIconRes();
 		}
 		return 0;
 	}

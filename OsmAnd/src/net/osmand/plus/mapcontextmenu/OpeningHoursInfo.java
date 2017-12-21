@@ -1,5 +1,8 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.content.Context;
+
+import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
 public class OpeningHoursInfo {
@@ -68,12 +71,20 @@ public class OpeningHoursInfo {
 		this.openingDay = openingDay;
 	}
 
-	public boolean containsInfo() {
-		return opened24_7
-				|| !Algorithms.isEmpty(openingTime)
-				|| !Algorithms.isEmpty(nearToOpeningTime)
-				|| !Algorithms.isEmpty(closingTime)
-				|| !Algorithms.isEmpty(nearToClosingTime)
-				|| !Algorithms.isEmpty(openingDay);
+	public String getInfo(Context context) {
+		if (isOpened24_7()) {
+			return context.getString(R.string.shared_string_is_open_24_7);
+		} else if (!Algorithms.isEmpty(getNearToOpeningTime())) {
+			return context.getString(R.string.will_be_opened_at) + " " + getNearToOpeningTime();
+		} else if (!Algorithms.isEmpty(getOpeningTime())) {
+			return context.getString(R.string.opened_from) + " " + getOpeningTime();
+		} else if (!Algorithms.isEmpty(getNearToClosingTime())) {
+			return context.getString(R.string.will_be_closed_at) + " " + getNearToClosingTime();
+		} else if (!Algorithms.isEmpty(getClosingTime())) {
+			return context.getString(R.string.opened_till) + " " + getClosingTime();
+		} else if (!Algorithms.isEmpty(getOpeningDay())) {
+			return context.getString(R.string.will_be_opened_on) + " " + getOpeningDay() + ".";
+		}
+		return "";
 	}
 }

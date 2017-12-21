@@ -36,6 +36,7 @@ public class AmenityMenuController extends MenuController {
 
 	private Amenity amenity;
 	private List<TransportStopRoute> routes = new ArrayList<>();
+	private OpeningHoursInfo openingHoursInfo;
 
 	private MapMarker marker;
 
@@ -76,6 +77,8 @@ public class AmenityMenuController extends MenuController {
 				leftTitleButtonController.leftIcon = getIcon(R.drawable.ic_action_note_dark, isLight() ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
 			}
 		}
+
+		openingHoursInfo = processOpeningHours(amenity);
 	}
 
 	@Override
@@ -145,8 +148,27 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
-	public OpeningHoursInfo getOpeningHoursInfo() {
-		return processOpeningHours(amenity);
+	public int getAdditionalInfoColor() {
+		if (openingHoursInfo != null) {
+			return openingHoursInfo.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
+		}
+		return 0;
+	}
+
+	@Override
+	public String getAdditionalInfoStr() {
+		if (openingHoursInfo != null) {
+			return openingHoursInfo.getInfo(getMapActivity());
+		}
+		return "";
+	}
+
+	@Override
+	public int getAdditionalInfoIconRes() {
+		if (openingHoursInfo != null) {
+			return R.drawable.ic_action_opening_hour_16;
+		}
+		return 0;
 	}
 
 	public static String getTypeStr(Amenity amenity) {
