@@ -67,17 +67,15 @@ public class AmenityMenuController extends MenuController {
 					new MapMarkerMenuController(mapActivity, marker.getPointDescription(mapActivity), marker);
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
-		} else {
-			if (amenity.getType().isWiki()) {
-				leftTitleButtonController = new TitleButtonController() {
-					@Override
-					public void buttonPressed() {
-						POIMapLayer.showWikipediaDialog(mapActivity, mapActivity.getMyApplication(), amenity);
-					}
-				};
-				leftTitleButtonController.caption = getMapActivity().getString(R.string.context_menu_read_article);
-				leftTitleButtonController.leftIcon = getIcon(R.drawable.ic_action_note_dark, isLight() ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
-			}
+		} else if (amenity.getType().isWiki()) {
+			leftTitleButtonController = new TitleButtonController() {
+				@Override
+				public void buttonPressed() {
+					POIMapLayer.showWikipediaDialog(mapActivity, mapActivity.getMyApplication(), amenity);
+				}
+			};
+			leftTitleButtonController.caption = getMapActivity().getString(R.string.context_menu_read_article);
+			leftTitleButtonController.leftIcon = getIcon(R.drawable.ic_action_note_dark, isLight() ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
 		}
 	}
 
