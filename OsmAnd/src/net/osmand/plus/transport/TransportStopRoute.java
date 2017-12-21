@@ -70,48 +70,36 @@ public class TransportStopRoute {
 	}
 
 	public int getTypeStrRes() {
-		int typeResId = R.string.poi_filter_public_transport;
 		if (type != null) {
 			switch (type) {
 				case BUS:
-					typeResId = R.string.poi_route_bus_ref;
-					break;
+					return R.string.poi_route_bus_ref;
 				case TRAM:
-					typeResId = R.string.poi_route_tram_ref;
-					break;
+					return R.string.poi_route_tram_ref;
 				case FERRY:
-					typeResId = R.string.poi_route_ferry_ref;
-					break;
+					return R.string.poi_route_ferry_ref;
 				case TRAIN:
-					typeResId = R.string.poi_route_train_ref;
-					break;
+					return R.string.poi_route_train_ref;
 				case SHARE_TAXI:
-					typeResId = R.string.poi_route_share_taxi_ref;
-					break;
+					return R.string.poi_route_share_taxi_ref;
 				case FUNICULAR:
-					typeResId = R.string.poi_route_funicular_ref;
-					break;
+					return R.string.poi_route_funicular_ref;
 				case LIGHT_RAIL:
-					typeResId = R.string.poi_route_light_rail_ref;
-					break;
+					return R.string.poi_route_light_rail_ref;
 				case MONORAIL:
-					typeResId = R.string.poi_route_monorail_ref;
-					break;
+					return R.string.poi_route_monorail_ref;
 				case TROLLEYBUS:
-					typeResId = R.string.poi_route_trolleybus_ref;
-					break;
+					return R.string.poi_route_trolleybus_ref;
 				case RAILWAY:
-					typeResId = R.string.poi_route_railway_ref;
-					break;
+					return R.string.poi_route_railway_ref;
 				case SUBWAY:
-					typeResId = R.string.poi_route_subway_ref;
-					break;
+					return R.string.poi_route_subway_ref;
 				default:
-					typeResId = R.string.poi_filter_public_transport;
-					break;
+					return R.string.poi_filter_public_transport;
 			}
+		} else {
+			return R.string.poi_filter_public_transport;
 		}
-		return typeResId;
 	}
 
 }
