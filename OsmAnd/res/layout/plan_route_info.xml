@@ -366,7 +366,7 @@
                             android:layout_marginRight="@dimen/list_content_padding"
                             android:contentDescription="@string/info_button"
                             android:scaleType="center"
-                            android:src="@drawable/ic_action_time"/>
+                            android:src="@drawable/ic_action_time_span"/>
 
                         <LinearLayout
                             android:id="@+id/InfoDuration"
