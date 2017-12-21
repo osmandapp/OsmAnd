@@ -118,7 +118,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		});
 
 		((ImageView) view.findViewById(R.id.distance_icon))
-				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
+				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_route_distance));
 		((ImageView) view.findViewById(R.id.time_icon))
 				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_time_span));
 
