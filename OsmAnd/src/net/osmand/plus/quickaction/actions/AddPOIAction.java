@@ -157,7 +157,7 @@ public class AddPOIAction extends QuickAction {
 
 							return false;
 						}
-					}, activity, mOpenstreetmapUtil);
+					}, activity, mOpenstreetmapUtil, null);
 
 		}
 	}

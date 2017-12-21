@@ -470,6 +470,13 @@ public class NotesFragment extends OsmAndListFragment {
 		startActivity(Intent.createChooser(intent, getString(R.string.share_note)));
 	}
 
+	private Set<Recording> getRecordingsForGpx(Set<Recording> selected) {
+		if (selected.size() == 1 && selected.contains(SHARE_LOCATION_FILE)) {
+			return new HashSet<>(plugin.getAllRecordings());
+		}
+		return selected;
+	}
+
 	@Nullable
 	private File generateGPXForRecordings(Set<Recording> selected) {
 		File externalCacheDir = getActivity().getExternalCacheDir();
@@ -479,7 +486,7 @@ public class NotesFragment extends OsmAndListFragment {
 		File tmpFile = new File(externalCacheDir, "share/noteLocations.gpx");
 		tmpFile.getParentFile().mkdirs();
 		GPXFile file = new GPXFile();
-		for (Recording r : selected) {
+		for (Recording r : getRecordingsForGpx(selected)) {
 			if (r != SHARE_LOCATION_FILE) {
 				String desc = r.getDescriptionName(r.getFileName());
 				if (desc == null) {
@@ -492,6 +499,7 @@ public class NotesFragment extends OsmAndListFragment {
 				wpt.link = r.getFileName();
 				wpt.time = r.getFile().lastModified();
 				wpt.category = r.getSearchHistoryType();
+				wpt.desc = r.getTypeWithDuration(getContext());
 				getMyApplication().getSelectedGpxHelper().addPoint(wpt, file);
 			}
 		}

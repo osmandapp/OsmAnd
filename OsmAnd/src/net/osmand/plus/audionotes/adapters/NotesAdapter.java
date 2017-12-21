@@ -205,7 +205,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		setupBackground(holder.view);
 		if (recording == NotesFragment.SHARE_LOCATION_FILE) {
 			holder.title.setText(R.string.av_locations);
-			holder.description.setText(R.string.av_locations_descr);
+			holder.description.setText(getLocationsDescId());
 		} else {
 			holder.title.setText(recording.getName(app, true));
 			holder.description.setText(recording.getExtendedDescription(app));
@@ -253,6 +253,13 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 				}
 			}
 		});
+	}
+
+	private int getLocationsDescId() {
+		if (selected.contains(NotesFragment.SHARE_LOCATION_FILE)) {
+			return selected.size() == 1 ? R.string.av_locations_all_desc : R.string.av_locations_selected_desc;
+		}
+		return R.string.av_locations_descr;
 	}
 
 	private void setupBackground(View view) {
