@@ -131,11 +131,11 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 				String countryUrlString = selectedCountryItem.getDownloadName();
 				if (countryUrlString.length() > 0) {
 					Bundle bl = new Bundle();
-					boolean is = v.getId() == R.id.numberOfRecipientsLayout;
+					boolean isRecipientsReport = v.getId() == R.id.numberOfRecipientsLayout;
 					bl.putString(UsersReportFragment.URL_REQUEST,
-							String.format(is ? RECIPIENTS_BY_MONTH : USERS_RANKING_BY_MONTH, monthUrlString, countryUrlString));
+							String.format(isRecipientsReport ? RECIPIENTS_BY_MONTH : USERS_RANKING_BY_MONTH, monthUrlString, countryUrlString));
 					userReportFragment.setArguments(bl);
-					userReportFragment.show(getChildFragmentManager(), is ? RECIPIENTS_FRAGMENT : EDITS_FRAGMENT);
+					userReportFragment.show(getChildFragmentManager(), isRecipientsReport ? RECIPIENTS_FRAGMENT : EDITS_FRAGMENT);
 				}
 			}
 		};
