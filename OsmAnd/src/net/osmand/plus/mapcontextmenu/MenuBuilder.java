@@ -716,11 +716,7 @@ public class MenuBuilder {
 		);
 	}
 
-	private void buildTransportRouteRow(ViewGroup parent, TransportStopRoute r, OnClickListener listener) {
-		if (!isFirstRow()) {
-			buildRowDivider(parent, false);
-		}
-
+	private void buildTransportRouteRow(ViewGroup parent, TransportStopRoute r, OnClickListener listener, boolean showDivider) {
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ctx_menu_transport_route_layout, parent, false);
 		TextView routeDesc = (TextView) view.findViewById(R.id.route_desc);
 		routeDesc.setText(r.getDescription(getMapActivity().getMyApplication(), true));
@@ -775,13 +771,16 @@ public class MenuBuilder {
 
 		parent.addView(view);
 
-		rowBuilt();
+		if (showDivider) {
+			buildRowDivider(parent, false);
+		}
 	}
 
 	private CollapsableView getCollapsableTransportStopRoutesView(final Context context, boolean collapsed) {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, false);
 
-		for (final TransportStopRoute r : routes) {
+		for (int i = 0; i < routes.size(); i++) {
+			final TransportStopRoute r  = routes.get(i);
 			View.OnClickListener listener = new View.OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
@@ -795,7 +794,8 @@ public class MenuBuilder {
 					getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
 				}
 			};
-			buildTransportRouteRow(view, r, listener);
+			boolean showDivider = i < routes.size() - 1;
+			buildTransportRouteRow(view, r, listener, showDivider);
 		}
 
 		return new CollapsableView(view, collapsed);
