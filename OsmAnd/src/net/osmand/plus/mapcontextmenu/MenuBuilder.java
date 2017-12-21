@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -716,60 +717,79 @@ public class MenuBuilder {
 		);
 	}
 
-	private void buildTransportRouteRow(ViewGroup parent, TransportStopRoute r, OnClickListener listener, boolean showDivider) {
-		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ctx_menu_transport_route_layout, parent, false);
-		TextView routeDesc = (TextView) view.findViewById(R.id.route_desc);
-		routeDesc.setText(r.getDescription(getMapActivity().getMyApplication(), true));
-		routeDesc.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
-		int drawableResId = r.type == null ? R.drawable.ic_action_polygom_dark : r.type.getResourceId();
-		((ImageView) view.findViewById(R.id.route_type_icon)).setImageDrawable(getRowIcon(drawableResId));
-		TextView refTextView = (TextView) view.findViewById(R.id.route_ref);
-		refTextView.setText(r.route.getRef());
-		GradientDrawable refBg = (GradientDrawable) refTextView.getBackground();
-		refBg.setColor(r.getColor(mapActivity.getMyApplication(), !light));
-		view.setOnClickListener(listener);
-		int typeResId;
-		switch (r.type) {
-			case BUS:
-				typeResId = R.string.poi_route_bus_ref;
-				break;
-			case TRAM:
-				typeResId = R.string.poi_route_tram_ref;
-				break;
-			case FERRY:
-				typeResId = R.string.poi_route_ferry_ref;
-				break;
-			case TRAIN:
-				typeResId = R.string.poi_route_train_ref;
-				break;
-			case SHARE_TAXI:
-				typeResId = R.string.poi_route_share_taxi_ref;
-				break;
-			case FUNICULAR:
-				typeResId = R.string.poi_route_funicular_ref;
-				break;
-			case LIGHT_RAIL:
-				typeResId = R.string.poi_route_light_rail_ref;
-				break;
-			case MONORAIL:
-				typeResId = R.string.poi_route_monorail_ref;
-				break;
-			case TROLLEYBUS:
-				typeResId = R.string.poi_route_trolleybus_ref;
-				break;
-			case RAILWAY:
-				typeResId = R.string.poi_route_railway_ref;
-				break;
-			case SUBWAY:
-				typeResId = R.string.poi_route_subway_ref;
-				break;
-			default:
-				typeResId = R.string.poi_filter_public_transport;
-				break;
-		}
-		((TextView) view.findViewById(R.id.route_type_text)).setText(typeResId);
+	private View buildTransportRowItem(View view, TransportStopRoute route, OnClickListener listener) {
+		LinearLayout baseView = new LinearLayout(view.getContext());
+		baseView.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+		baseView.setLayoutParams(llBaseViewParams);
+		baseView.setPadding(dpToPx(16), 0, dpToPx(16), dpToPx(12));
+		baseView.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 
-		parent.addView(view);
+		TextViewEx transportRect = new TextViewEx(view.getContext());
+		LinearLayout.LayoutParams trParams = new LinearLayout.LayoutParams(dpToPx(32), dpToPx(18));
+		trParams.setMargins(0, dpToPx(16), 0, 0);
+		transportRect.setLayoutParams(trParams);
+		transportRect.setGravity(Gravity.CENTER);
+		transportRect.setAllCaps(true);
+		transportRect.setTypeface(FontCache.getRobotoMedium(view.getContext()));
+		transportRect.setTextColor(Color.WHITE);
+		transportRect.setTextSize(10);
+
+		GradientDrawable shape = new GradientDrawable();
+		shape.setShape(GradientDrawable.RECTANGLE);
+		shape.setCornerRadius(dpToPx(3));
+		shape.setColor(route.getColor(mapActivity.getMyApplication(), !light));
+
+		transportRect.setBackgroundDrawable(shape);
+		transportRect.setText(route.route.getRef());
+		baseView.addView(transportRect);
+
+		LinearLayout infoView = new LinearLayout(view.getContext());
+		infoView.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout.LayoutParams infoViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		infoViewLayoutParams.setMargins(dpToPx(16), dpToPx(12), dpToPx(16), 0);
+		infoView.setLayoutParams(infoViewLayoutParams);
+		baseView.addView(infoView);
+
+		TextView titleView = new TextView(view.getContext());
+		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		titleView.setLayoutParams(titleParams);
+		titleView.setTextSize(16);
+		titleView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		titleView.setText(route.getDescription(getMapActivity().getMyApplication(), true));
+		infoView.addView(titleView);
+
+		LinearLayout typeView = new LinearLayout(view.getContext());
+		typeView.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout.LayoutParams typeViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		typeViewParams.setMargins(0, dpToPx(8), 0, 0);
+		typeView.setGravity(Gravity.CENTER);
+		typeView.setLayoutParams(typeViewParams);
+		infoView.addView(typeView);
+
+		ImageView typeImageView = new ImageView(view.getContext());
+		LinearLayout.LayoutParams typeImageParams = new LinearLayout.LayoutParams(dpToPx(16), dpToPx(16));
+		typeImageParams.setMargins(dpToPx(4), 0, dpToPx(4), 0);
+		typeImageView.setLayoutParams(typeImageParams);
+		int drawableResId = route.type == null ? R.drawable.ic_action_polygom_dark : route.type.getResourceId();
+		typeImageView.setImageDrawable(getRowIcon(drawableResId));
+		typeView.addView(typeImageView);
+
+		TextView typeTextView = new TextView(view.getContext());
+		LinearLayout.LayoutParams typeTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		typeTextView.setLayoutParams(typeTextParams);
+		typeTextView.setText(route.type.getTypeStrRes());
+		typeView.addView(typeTextView);
+
+		baseView.setOnClickListener(listener);
+
+		((ViewGroup) view).addView(baseView);
+
+		return baseView;
+	}
+
+	private void buildTransportRouteRow(ViewGroup parent, TransportStopRoute r, OnClickListener listener, boolean showDivider) {
+		buildTransportRowItem(parent, r, listener);
 
 		if (showDivider) {
 			buildRowDivider(parent, false);

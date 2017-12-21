@@ -17,12 +17,12 @@ public enum TransportStopType {
 
 	final int resId;
 	final int topResId;
-	final String typeStr;
+	final String renderAttr;
 
-	TransportStopType(int resId, int topResId, String typeStr) {
+	TransportStopType(int resId, int topResId, String renderAttr) {
 		this.resId = resId;
 		this.topResId = topResId;
-		this.typeStr = typeStr;
+		this.renderAttr = renderAttr;
 	}
 
 	public int getResourceId() {
@@ -33,8 +33,8 @@ public enum TransportStopType {
 		return topResId;
 	}
 
-	public String getTypeStr() {
-		return typeStr;
+	public String getRendeAttr() {
+		return renderAttr;
 	}
 
 	public boolean isTopType() {
@@ -49,6 +49,49 @@ public enum TransportStopType {
 			}
 		}
 		return null;
+	}
+
+	public int getTypeStrRes() {
+		int typeResId;
+		switch (this) {
+			case BUS:
+				typeResId = R.string.poi_route_bus_ref;
+				break;
+			case TRAM:
+				typeResId = R.string.poi_route_tram_ref;
+				break;
+			case FERRY:
+				typeResId = R.string.poi_route_ferry_ref;
+				break;
+			case TRAIN:
+				typeResId = R.string.poi_route_train_ref;
+				break;
+			case SHARE_TAXI:
+				typeResId = R.string.poi_route_share_taxi_ref;
+				break;
+			case FUNICULAR:
+				typeResId = R.string.poi_route_funicular_ref;
+				break;
+			case LIGHT_RAIL:
+				typeResId = R.string.poi_route_light_rail_ref;
+				break;
+			case MONORAIL:
+				typeResId = R.string.poi_route_monorail_ref;
+				break;
+			case TROLLEYBUS:
+				typeResId = R.string.poi_route_trolleybus_ref;
+				break;
+			case RAILWAY:
+				typeResId = R.string.poi_route_railway_ref;
+				break;
+			case SUBWAY:
+				typeResId = R.string.poi_route_subway_ref;
+				break;
+			default:
+				typeResId = R.string.poi_filter_public_transport;
+				break;
+		}
+		return typeResId;
 	}
 
 }
