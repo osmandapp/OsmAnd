@@ -270,8 +270,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 							}
 							if (donationsTotalLayout != null &&
 									donationsTotalTextView != null) {
-								boolean world = regionUrlString.isEmpty();
-								donationsTotalLayout.setVisibility(world ? View.VISIBLE : View.GONE);
+								donationsTotalLayout.setVisibility(regionUrlString.isEmpty() ? View.VISIBLE : View.GONE);
 								donationsTotalTextView.setText(String.format("%.3f", response.btc*1000f) + " mBTC");
 							}
 						}
