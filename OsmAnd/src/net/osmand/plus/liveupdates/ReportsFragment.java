@@ -278,18 +278,18 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 					}
 				};
 		recChangesByMontAsyncTask.setOnResponseListener(recResponseListener);
+		clearTextViewResult(recipientsTextView);
+		clearTextViewResult(donationsTextView);
+		clearTextViewResult(donationsTotalTextView);
 		
-		if (recipientsTextView != null) {
-			recipientsTextView.setText("-");
-		}
-		if (donationsTextView != null) {
-			donationsTextView.setText("-");
-		}
-		if (donationsTotalTextView != null) {
-			donationsTotalTextView.setText("-");
-		}
 		String recfinalUrl = String.format(RECIPIENTS_BY_MONTH, monthUrlString, regionUrlString);
 		recChangesByMontAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, recfinalUrl);
+	}
+
+	private void clearTextViewResult(TextView textView) {
+		if (textView != null) {
+			textView.setText("-");
+		}
 	}
 
 	@Override
