@@ -3122,4 +3122,6 @@
 	<string name="poi_reservation_no">Réservation : non</string>
 	<string name="poi_reservation_members_only">Réservation : membres uniquement</string>
 
+	<string name="poi_operational_status">État opérationnel</string>
+	<string name="poi_water_supply_type">Mode de distribution de l\\\'eau</string>
 	</resources>
