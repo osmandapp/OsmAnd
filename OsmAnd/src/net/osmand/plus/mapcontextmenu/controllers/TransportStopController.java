@@ -81,31 +81,6 @@ public class TransportStopController extends MenuController {
 		return getPointDescription().getTypeName();
 	}
 
-	public void addPlainMenuItems(MenuBuilder builder, final LatLon latLon) {
-		for (final TransportStopRoute r : routes) {
-			OnClickListener listener = new OnClickListener() {
-				@Override
-				public void onClick(View arg0) {
-					MapContextMenu mm = getMapActivity().getContextMenu();
-					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
-							r.getDescription(getMapActivity().getMyApplication(), false));
-					mm.show(latLon, pd, r);
-					TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
-					stopsLayer.setRoute(r);
-					int cz = r.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
-					getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
-				}
-			};
-			if (r.type == null) {
-				builder.addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.getDescription(getMapActivity().getMyApplication(), true),
-						false, false, listener );
-			} else {
-				builder.addPlainMenuItem(r.type.getResourceId(), r.getDescription(getMapActivity().getMyApplication(), true),
-						false, false, listener);
-			}
-		}
-	}
-
 	public void processTransportStop(MenuBuilder builder) {
 		routes.clear();
 		List<TransportIndexRepository> reps = getMapActivity().getMyApplication()
