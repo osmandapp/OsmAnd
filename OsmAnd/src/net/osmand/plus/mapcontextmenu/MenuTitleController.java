@@ -15,9 +15,12 @@ public abstract class MenuTitleController {
 	protected Drawable leftIcon;
 	protected String nameStr = "";
 	protected String typeStr = "";
+	protected String additionalTypeStr = "";
 	protected String commonTypeStr = "";
 	protected Drawable secondLineTypeIcon;
+	protected Drawable additionalLineTypeIcon;
 	protected String streetStr = "";
+	protected OpeningHoursInfo openingHoursInfo;
 
 	private AddressLookupRequest addressLookupRequest;
 
@@ -77,10 +80,23 @@ public abstract class MenuTitleController {
 		return secondLineTypeIcon;
 	}
 
+	public Drawable getAdditionalLineTypeIcon() {
+		return additionalLineTypeIcon;
+	}
+
 	public String getTypeStr() {
 		MenuController menuController = getMenuController();
 		if (menuController != null && menuController.needTypeStr()) {
 			return typeStr;
+		} else {
+			return "";
+		}
+	}
+
+	public String getAdditionalTypeStr() {
+		MenuController menuController = getMenuController();
+		if (menuController != null) {
+			return additionalTypeStr;
 		} else {
 			return "";
 		}
@@ -98,6 +114,10 @@ public abstract class MenuTitleController {
 		}
 	}
 
+	public OpeningHoursInfo getOpeningHoursInfo() {
+		return openingHoursInfo;
+	}
+
 	protected void initTitle() {
 		searchAddressStr = PointDescription.getSearchAddressStr(getMapActivity());
 		addressNotFoundStr = PointDescription.getAddressNotFoundStr(getMapActivity());
@@ -111,6 +131,8 @@ public abstract class MenuTitleController {
 		if (needStreetName()) {
 			acquireStreetName();
 		}
+
+		acquireOpeningHoursInfo();
 	}
 
 	protected boolean needStreetName() {
@@ -128,11 +150,13 @@ public abstract class MenuTitleController {
 		leftIconId = 0;
 		leftIcon = null;
 		secondLineTypeIcon = null;
+		additionalLineTypeIcon = null;
 
 		if (menuController != null) {
 			leftIconId = menuController.getLeftIconId();
 			leftIcon = menuController.getLeftIcon();
 			secondLineTypeIcon = menuController.getSecondLineTypeIcon();
+			additionalLineTypeIcon = menuController.getAdditionalLineTypeIcon();
 		}
 	}
 
@@ -146,6 +170,7 @@ public abstract class MenuTitleController {
 		if (menuController != null) {
 			nameStr = menuController.getNameStr();
 			typeStr = menuController.getTypeStr();
+			additionalTypeStr = menuController.getAdditionalTypeStr();
 			commonTypeStr = menuController.getCommonTypeStr();
 		}
 
@@ -184,6 +209,13 @@ public abstract class MenuTitleController {
 		});
 
 		getMapActivity().getMyApplication().getGeocodingLookupService().lookupAddress(addressLookupRequest);
+	}
+
+	protected void acquireOpeningHoursInfo() {
+		MenuController menuController = getMenuController();
+		if (menuController != null) {
+			openingHoursInfo = menuController.getOpeningHoursInfo();
+		}
 	}
 
 	protected void onSearchAddressDone() {

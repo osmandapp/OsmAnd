@@ -38,7 +38,7 @@ public class MapMarkerMenuController extends MenuController {
 		leftTitleButtonController.caption = getMapActivity().getString(R.string.mark_passed);
 		leftTitleButtonController.leftIconId = isLight() ? R.drawable.passed_icon_light : R.drawable.passed_icon_dark;
 
-		leftSubtitleButtonController = new TitleButtonController() {
+		rightTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
 				OsmandSettings.OsmandPreference<Boolean> indication = app.getSettings().MARKERS_DISTANCE_INDICATION_ENABLED;
@@ -50,8 +50,8 @@ public class MapMarkerMenuController extends MenuController {
 				getMapActivity().getContextMenu().close();
 			}
 		};
-		leftSubtitleButtonController.caption = getMapActivity().getString(R.string.make_active);
-		leftSubtitleButtonController.leftIcon = createShowOnTopbarIcon();
+		rightTitleButtonController.caption = getMapActivity().getString(R.string.make_active);
+		rightTitleButtonController.leftIcon = createShowOnTopbarIcon();
 	}
 
 	private Drawable createShowOnTopbarIcon() {

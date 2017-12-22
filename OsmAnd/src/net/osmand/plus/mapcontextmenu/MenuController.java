@@ -98,8 +98,7 @@ public abstract class MenuController extends BaseMenuController {
 
 	protected TitleButtonController leftTitleButtonController;
 	protected TitleButtonController rightTitleButtonController;
-	protected TitleButtonController topRightTitleButtonController;
-	protected TitleButtonController leftSubtitleButtonController;
+	protected TitleButtonController bottomTitleButtonController;
 
 	protected TitleButtonController leftDownloadButtonController;
 	protected TitleButtonController rightDownloadButtonController;
@@ -319,12 +318,8 @@ public abstract class MenuController extends BaseMenuController {
 		return rightTitleButtonController;
 	}
 
-	public TitleButtonController getTopRightTitleButtonController() {
-		return topRightTitleButtonController;
-	}
-
-	public TitleButtonController getLeftSubtitleButtonController() {
-		return leftSubtitleButtonController;
+	public TitleButtonController getBottomTitleButtonController() {
+		return bottomTitleButtonController;
 	}
 
 	public TitleButtonController getLeftDownloadButtonController() {
@@ -355,7 +350,7 @@ public abstract class MenuController extends BaseMenuController {
 		return true;
 	}
 
-	public boolean fabVisible() {
+	public boolean navigateButtonVisible() {
 		return true;
 	}
 
@@ -391,6 +386,10 @@ public abstract class MenuController extends BaseMenuController {
 		return false;
 	}
 
+	public boolean displayAdditionalTypeStrInHours() {
+		return false;
+	}
+
 	public int getLeftIconId() {
 		return 0;
 	}
@@ -403,12 +402,16 @@ public abstract class MenuController extends BaseMenuController {
 		return null;
 	}
 
+	public Drawable getAdditionalLineTypeIcon() {
+		return null;
+	}
+
 	public int getFavActionIconId() {
 		return R.drawable.map_action_fav_dark;
 	}
 
 	public int getFavActionStringId() {
-		return R.string.shared_string_add_to_favorites;
+		return R.string.shared_string_add;
 	}
 
 	public int getWaypointActionIconId() {
@@ -429,12 +432,28 @@ public abstract class MenuController extends BaseMenuController {
 		return "";
 	}
 
+	public String getAdditionalTypeStr() {
+		return "";
+	}
+
+	public int getTimeStrColor() {
+		return 0;
+	}
+
+	public OpeningHoursInfo getOpeningHoursInfo() {
+		return null;
+	}
+
 	public String getCommonTypeStr() {
 		return "";
 	}
 
 	public String getNameStr() {
 		return pointDescription.getName();
+	}
+
+	public List<TransportStopRoute> getTransportStopRoutes() {
+		return null;
 	}
 
 	public void share(LatLon latLon, String title, String address) {

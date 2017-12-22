@@ -1,6 +1,7 @@
 package net.osmand.plus.parkingpoint;
 
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
@@ -8,12 +9,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.util.Algorithms;
 
 public class ParkingPositionMenuController extends MenuController {
 
 	private ParkingPositionPlugin plugin;
-	private String parkingDescription = "";
+	private String parkingStartDescription = "";
+	private String parkingLeftDescription = "";
+	private String parkingTitle = "";
 
 	public ParkingPositionMenuController(MapActivity mapActivity, PointDescription pointDescription) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
@@ -34,13 +36,9 @@ public class ParkingPositionMenuController extends MenuController {
 	}
 
 	private void buildParkingDescription(MapActivity mapActivity) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(plugin.getParkingStartDesc(mapActivity));
-		String leftDesc = plugin.getParkingLeftDesc(mapActivity);
-		if (!Algorithms.isEmpty(leftDesc)) {
-			sb.append("\n").append(leftDesc);
-		}
-		parkingDescription = sb.toString();
+		parkingStartDescription = plugin.getParkingStartDesc(mapActivity);
+		parkingLeftDescription = plugin.getParkingLeftDesc(mapActivity);
+		parkingTitle = plugin.getParkingTitle(mapActivity);
 	}
 
 	@Override
@@ -62,7 +60,27 @@ public class ParkingPositionMenuController extends MenuController {
 
 	@Override
 	public boolean needTypeStr() {
-		return !Algorithms.isEmpty(parkingDescription);
+		return true;
+	}
+
+	@Override
+	public String getAdditionalTypeStr() {
+		return parkingLeftDescription;
+	}
+
+	@Override
+	public boolean displayAdditionalTypeStrInHours() {
+		return true;
+	}
+
+	@Override
+	public int getTimeStrColor() {
+		return plugin.getParkingType() ? R.color.ctx_menu_amenity_closed_text_color : isLight() ? R.color.icon_color : R.color.dash_search_icon_dark;
+	}
+
+	@Override
+	public String getNameStr() {
+		return parkingTitle;
 	}
 
 	@Override
@@ -77,7 +95,7 @@ public class ParkingPositionMenuController extends MenuController {
 
 	@Override
 	public String getTypeStr() {
-		return parkingDescription;
+		return parkingStartDescription;
 	}
 
 	@Override

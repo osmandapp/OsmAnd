@@ -134,7 +134,7 @@ public class MapDataMenuController extends MenuController {
 		rightDownloadButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
 		rightDownloadButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 
-		topRightTitleButtonController = new TitleButtonController() {
+		bottomTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
 				getMapActivity().getContextMenu().close();
@@ -158,7 +158,7 @@ public class MapDataMenuController extends MenuController {
 						mapActivity.getContextMenu().getLatLon(), selectedObjects);
 			}
 		};
-		topRightTitleButtonController.caption = getMapActivity().getString(R.string.download_select_map_types);
+		bottomTitleButtonController.caption = getMapActivity().getString(R.string.download_select_map_types);
 
 		titleProgressController = new TitleProgressController() {
 			@Override
@@ -300,7 +300,7 @@ public class MapDataMenuController extends MenuController {
 	}
 
 	@Override
-	public boolean fabVisible() {
+	public boolean navigateButtonVisible() {
 		return false;
 	}
 
@@ -350,7 +350,7 @@ public class MapDataMenuController extends MenuController {
 		}
 
 		rightDownloadButtonController.visible = downloaded;
-		topRightTitleButtonController.visible = (otherIndexItems != null && otherIndexItems.size() > 0)
+		bottomTitleButtonController.visible = (otherIndexItems != null && otherIndexItems.size() > 0)
 				|| (otherLocalIndexInfos != null && otherLocalIndexInfos.size() > 0);
 
 		boolean internetConnectionAvailable =

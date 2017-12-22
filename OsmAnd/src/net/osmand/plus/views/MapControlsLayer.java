@@ -16,6 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
@@ -293,7 +294,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void updateRouteButtons(View main, boolean routeInfo) {
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		ImageView cancelRouteButton = (ImageView) main.findViewById(R.id.map_cancel_route_button);
-		cancelRouteButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.map_action_cancel, !nightMode));
+		cancelRouteButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.map_action_cancel, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
 		AndroidUtils.setBackground(mapActivity, cancelRouteButton, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 		cancelRouteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -303,7 +304,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		ImageView waypointsButton = (ImageView) main.findViewById(R.id.map_waypoints_route_button);
-		waypointsButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.map_action_waypoint, !nightMode));
+		waypointsButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.map_action_flag_dark, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
 		AndroidUtils.setBackground(mapActivity, waypointsButton, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 		waypointsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -314,7 +315,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		ImageView options = (ImageView) main.findViewById(R.id.map_options_route_button);
 		options.setImageDrawable(!routeInfo ? app.getIconsCache().getIcon(R.drawable.map_action_settings,
-				R.color.osmand_orange) : app.getIconsCache().getIcon(R.drawable.map_action_settings, !nightMode));
+				R.color.osmand_orange) : app.getIconsCache().getIcon(R.drawable.map_action_settings, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
 		AndroidUtils.setBackground(mapActivity, options, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 		options.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -324,10 +325,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		TextView routeGoButton = (TextView) main.findViewById(R.id.map_go_route_button);
-		routeGoButton.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache().getIcon(R.drawable.map_start_navigation, R.color.color_myloc_distance), null, null, null);
+		routeGoButton.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache().getIcon(R.drawable.map_start_navigation, R.color.color_white), null, null, null);
 		routeGoButton.setText(mapActivity.getString(R.string.shared_string_go));
-		AndroidUtils.setTextSecondaryColor(mapActivity, routeGoButton, nightMode);
-		AndroidUtils.setBackground(mapActivity, routeGoButton, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
+		routeGoButton.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_white));
+		AndroidUtils.setBackground(mapActivity, routeGoButton, nightMode, R.drawable.route_info_go_btn_bg_light, R.drawable.route_info_go_btn_bg_dark);
 		routeGoButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -474,7 +475,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		hasTargets = false;
 	}
 
-	public void navigateFab() {
+	public void navigateButton() {
 		if (!OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 			ActivityCompat.requestPermissions(mapActivity,
 					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -1303,7 +1304,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		} else if (requestCode == REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION
 				&& grantResults.length > 0
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-			navigateFab();
+			navigateButton();
 		} else if (requestCode == REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION
 				&& grantResults.length > 0
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {

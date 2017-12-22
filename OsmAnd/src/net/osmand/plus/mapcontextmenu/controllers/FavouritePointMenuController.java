@@ -14,15 +14,20 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.OpeningHoursInfo;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FavouritePointMenuController extends MenuController {
 
 	private FavouritePoint fav;
 	private MapMarker mapMarker;
+	private List<TransportStopController.TransportStopRoute> routes = new ArrayList<>();
 
 	public FavouritePointMenuController(MapActivity mapActivity, PointDescription pointDescription, final FavouritePoint fav) {
 		super(new FavouritePointMenuBuilder(mapActivity, fav), pointDescription, mapActivity);
@@ -37,7 +42,13 @@ public class FavouritePointMenuController extends MenuController {
 			MapMarkerMenuController markerMenuController =
 					new MapMarkerMenuController(mapActivity, mapMarker.getPointDescription(mapActivity), mapMarker);
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
-			leftSubtitleButtonController = markerMenuController.getLeftSubtitleButtonController();
+			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
+		}
+		if (getObject() instanceof TransportStop) {
+			TransportStop stop = (TransportStop) getObject();
+			TransportStopController transportStopController = new TransportStopController(getMapActivity(), pointDescription, stop);
+			routes = transportStopController.processTransportStop();
+			builder.setRoutes(routes);
 		}
 	}
 
@@ -51,6 +62,11 @@ public class FavouritePointMenuController extends MenuController {
 	@Override
 	protected Object getObject() {
 		return fav;
+	}
+
+	@Override
+	public List<TransportStopController.TransportStopRoute> getTransportStopRoutes() {
+		return routes;
 	}
 
 	@Override
@@ -90,7 +106,7 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public Drawable getSecondLineTypeIcon() {
-		return getIcon(R.drawable.map_small_group);
+		return getIcon(R.drawable.ic_action_group_name_16);
 	}
 
 	@Override
@@ -100,7 +116,7 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public int getFavActionStringId() {
-		return R.string.favourites_context_menu_edit;
+		return R.string.shared_string_edit;
 	}
 
 	@Override
@@ -123,15 +139,18 @@ public class FavouritePointMenuController extends MenuController {
 			if (originObject instanceof Amenity) {
 				Amenity amenity = (Amenity) originObject;
 				AmenityMenuController.addPlainMenuItems(amenity, AmenityMenuController.getTypeStr(amenity), builder);
-			} else if (originObject instanceof TransportStop) {
-				TransportStop stop = (TransportStop) originObject;
-				TransportStopController transportStopController =
-						new TransportStopController(getMapActivity(), pointDescription, stop);
-				transportStopController.addPlainMenuItems(builder, latLon);
-				addMyLocationToPlainItems(latLon);
 			}
 		} else {
 			addMyLocationToPlainItems(latLon);
 		}
+	}
+
+	@Override
+	public OpeningHoursInfo getOpeningHoursInfo() {
+		Object originObject = getBuilder().getOriginObject();
+		if (originObject instanceof Amenity) {
+			return AmenityMenuController.processOpeningHours((Amenity) originObject);
+		}
+		return null;
 	}
 }

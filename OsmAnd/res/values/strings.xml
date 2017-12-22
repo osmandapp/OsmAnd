@@ -9,14 +9,29 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="what_is_here">What\'s here:</string>
+    <string name="parked_at">parked at</string>
+    <string name="pick_up_till">Pick up till</string>
+    <string name="without_time_limit">Without time limit</string>
+    <string name="context_menu_read_full_article">Read full article</string>
+    <string name="context_menu_read_article">Read article</string>
+    <string name="context_menu_points_of_group">All points of group</string>
+    <string name="opened_from">Opened from</string>
+    <string name="opened_till">Opened till</string>
+    <string name="will_be_closed_at">Will be closed at</string>
+    <string name="will_be_opened_at">Will be opened at</string>
+    <string name="will_be_opened_on">Will be opened on</string>
+    <string name="additional_actions">Additional actions</string>
     <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
     <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
-	<string name="release_3_0">
+    <string name="release_3_0">
 	\u2022 Detection of stop signs now considers driving direction\n\n
 	\u2022 New algorithm providing meaningful ascent/descent values for GPX tracks\n\n
 	\u2022 Terrain (ascent) aware hiking time (Naismith\'s rule)\n\n
 	</string>
     <string name="modify_the_search_query">Modify the search query.</string>
+    <string name="shared_string_actions">Actions</string>
+    <string name="shared_string_marker">Marker</string>
     <string name="empty_state_osm_edits">Create or modify OSM objects</string>
     <string name="empty_state_osm_edits_descr">Create or modify OSM POI, open or comment OSM Notes, and contribute recorded GPX files.</string>
     <string name="shared_string_deleted">Deleted</string>
