@@ -19,7 +19,6 @@ import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -29,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
@@ -466,7 +466,7 @@ public class MenuBuilder {
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setLayoutParams(llParams);
-		ll.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		ll.setOnLongClickListener(new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
@@ -613,7 +613,7 @@ public class MenuBuilder {
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setLayoutParams(llParams);
-		ll.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 
 		// Empty
 		LinearLayout llIcon = new LinearLayout(view.getContext());
@@ -634,7 +634,7 @@ public class MenuBuilder {
 		buttonView.setPadding(dpToPx(10f), 0, dpToPx(10f), 0);
 		buttonView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 		//buttonView.setTextSize(view.getResources().getDimension(resolveAttribute(view.getContext(), R.dimen.default_desc_text_size)));
-		buttonView.setTextColor(view.getResources().getColor(resolveAttribute(view.getContext(), R.attr.contextMenuButtonColor)));
+		buttonView.setTextColor(view.getResources().getColor(AndroidUtils.resolveAttribute(view.getContext(), R.attr.contextMenuButtonColor)));
 		buttonView.setText(text);
 
 		if (buttonIcon != null) {
@@ -702,12 +702,6 @@ public class MenuBuilder {
 		}
 	}
 
-	public int resolveAttribute(Context ctx, int attribute) {
-		TypedValue outValue = new TypedValue();
-		ctx.getTheme().resolveAttribute(attribute, outValue, true);
-		return outValue.resourceId;
-	}
-
 	public int dpToPx(float dp) {
 		Resources r = app.getResources();
 		return (int) TypedValue.applyDimension(
@@ -723,7 +717,7 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		baseView.setLayoutParams(llBaseViewParams);
 		baseView.setPadding(dpToPx(16), 0, dpToPx(16), dpToPx(12));
-		baseView.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 
 		TextViewEx transportRect = new TextViewEx(view.getContext());
 		LinearLayout.LayoutParams trParams = new LinearLayout.LayoutParams(dpToPx(32), dpToPx(18));

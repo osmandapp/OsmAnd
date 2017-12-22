@@ -177,6 +177,12 @@ public class AndroidUtils {
 		);
 	}
 
+	public static int resolveAttribute(Context ctx, int attribute) {
+		TypedValue outValue = new TypedValue();
+		ctx.getTheme().resolveAttribute(attribute, outValue, true);
+		return outValue.resourceId;
+	}
+
 	public static int getStatusBarHeight(Context ctx) {
 		int result = 0;
 		int resourceId = ctx.getResources().getIdentifier("status_bar_height", "dimen", "android");

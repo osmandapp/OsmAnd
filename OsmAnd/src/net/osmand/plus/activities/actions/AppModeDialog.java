@@ -88,7 +88,7 @@ public class AppModeDialog {
 			} else {
 				if (useMapTheme) {
 					iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), R.color.route_info_unchecked_mode_icon_color));
-					AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
+					iv.setBackgroundResource(AndroidUtils.resolveAttribute(ctx, android.R.attr.selectableItemBackground));
 				} else {
 					iv.setImageDrawable(ctx.getIconsCache().getThemedIcon(mode.getSmallIconDark()));
 				}

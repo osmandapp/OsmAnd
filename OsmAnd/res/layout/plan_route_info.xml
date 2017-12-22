@@ -49,7 +49,7 @@
                         android:id="@+id/waypoints"
                         android:layout_width="@dimen/list_item_height"
                         android:layout_height="@dimen/list_item_height"
-                        android:background="?attr/dashboard_button"
+                        android:background="?attr/selectableItemBackground"
                         android:scaleType="center"
                         android:src="@drawable/map_action_waypoints"/>
                 </LinearLayout>
@@ -73,16 +73,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <FrameLayout
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content">
 
                         <LinearLayout
+                            android:background="?attr/selectableItemBackground"
                             android:id="@+id/FromLayout"
                             android:layout_width="fill_parent"
                             android:layout_height="@dimen/list_item_height"
@@ -131,39 +134,19 @@
                                 android:layout_marginRight="@dimen/list_header_text_left_margin"
                                 android:src="@drawable/ic_action_arrow_drop_down"/>
 
-                            <View
-                                android:id="@+id/from_layout_empty_view"
-                                android:layout_width="@dimen/route_info_directions_margin"
-                                android:layout_height="match_parent"/>
-
                         </LinearLayout>
 
-                        <FrameLayout
+                        <View
+                            android:layout_marginStart="@dimen/route_info_divider_margin"
+                            android:layout_marginLeft="@dimen/route_info_divider_margin"
+                            android:id="@+id/dividerFromDropDown"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <View
-                                android:layout_marginStart="@dimen/route_info_divider_margin"
-                                android:layout_marginLeft="@dimen/route_info_divider_margin"
-                                android:layout_marginRight="@dimen/route_info_directions_margin"
-                                android:layout_marginEnd="@dimen/route_info_directions_margin"
-                                android:id="@+id/dividerFromDropDown"
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/dashboard_divider_dark"
-                                android:focusable="false"/>
-
-                            <View
-                                android:id="@+id/divider_from_drop_down_empty"
-                                android:layout_gravity="end"
-                                android:layout_width="@dimen/route_info_directions_margin"
-                                android:layout_height="1dp"
-                                android:focusable="false"
-                                android:background="@color/dashboard_divider_dark"/>
-
-                        </FrameLayout>
+                            android:layout_height="1dp"
+                            android:background="@color/dashboard_divider_dark"
+                            android:focusable="false"/>
 
                         <LinearLayout
+                            android:background="?attr/selectableItemBackground"
                             android:id="@+id/ViaLayout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/list_item_height"
@@ -219,6 +202,7 @@
                             android:focusable="false"/>
 
                         <LinearLayout
+                            android:background="?attr/selectableItemBackground"
                             android:id="@+id/ToLayout"
                             android:layout_width="fill_parent"
                             android:layout_height="@dimen/list_item_height"
@@ -267,16 +251,12 @@
                                 android:layout_marginRight="@dimen/list_header_text_left_margin"
                                 android:src="@drawable/ic_action_arrow_drop_down"/>
 
-                            <View
-                                android:id="@+id/to_layout_empty_view"
-                                android:layout_width="@dimen/route_info_directions_margin"
-                                android:layout_height="match_parent"/>
-
                         </LinearLayout>
 
                     </LinearLayout>
 
                     <ImageView
+                        android:background="?attr/selectableItemBackground"
                         android:id="@+id/swap_direction_image_view"
                         android:paddingRight="@dimen/route_info_icon_padding_right"
                         android:paddingLeft="@dimen/route_info_icon_padding_right"
@@ -285,7 +265,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"/>
 
-                </FrameLayout>
+                </LinearLayout>
 
                 <View
                     android:id="@+id/dividerToDropDown"
@@ -304,7 +284,7 @@
                         android:id="@+id/Info"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:background="?attr/dashboard_button"
+                        android:background="?attr/selectableItemBackground"
                         android:minHeight="@dimen/list_item_height"
                         android:orientation="horizontal">
 
@@ -312,7 +292,7 @@
                             android:id="@+id/Prev"
                             android:layout_width="@dimen/list_item_height"
                             android:layout_height="@dimen/list_item_height"
-                            android:background="?attr/dashboard_button"
+                            android:background="?attr/selectableItemBackground"
                             android:contentDescription="@string/shared_string_previous"
                             android:scaleType="center"
                             android:src="@drawable/ic_prev"/>
@@ -411,7 +391,7 @@
                             android:layout_width="@dimen/list_item_height"
                             android:layout_height="@dimen/list_item_height"
                             android:layout_marginLeft="5dp"
-                            android:background="?attr/dashboard_button"
+                            android:background="?attr/selectableItemBackground"
                             android:contentDescription="@string/shared_string_next"
                             android:scaleType="center"
                             android:src="@drawable/ic_next"/>
