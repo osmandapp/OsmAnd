@@ -134,9 +134,9 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 				int monthItemPosition = monthReportsSpinner.getSelectedItemPosition();
 				String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
 				String countryUrlString = selectedCountryItem.getDownloadName();
-				if (countryUrlString.length() > 0) {
+				boolean isRecipientsReport = v.getId() == R.id.numberOfRecipientsLayout;
+				if (countryUrlString.length() > 0 || isRecipientsReport) {
 					Bundle bl = new Bundle();
-					boolean isRecipientsReport = v.getId() == R.id.numberOfRecipientsLayout;
 					bl.putString(UsersReportFragment.URL_REQUEST,
 							String.format(isRecipientsReport ? RECIPIENTS_BY_MONTH : USERS_RANKING_BY_MONTH, monthUrlString, countryUrlString));
 					userReportFragment.setArguments(bl);
@@ -281,7 +281,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		clearTextViewResult(recipientsTextView);
 		clearTextViewResult(donationsTextView);
 		clearTextViewResult(donationsTotalTextView);
-		
+
 		String recfinalUrl = String.format(RECIPIENTS_BY_MONTH, monthUrlString, regionUrlString);
 		recChangesByMontAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, recfinalUrl);
 	}
