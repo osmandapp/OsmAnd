@@ -37,6 +37,7 @@ import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.text.MessageFormat;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -330,11 +331,20 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
 				Node entity = (Node) st.getRegisteredEntities().get(id);
 				// merge non existing tags
-				for (String rtag : entity.getTagKeySet()) {
-					if (!deletedTag(n, rtag) && (!containsTag(n, rtag) || !tagChanged(n, rtag))) {
-						n.putTagNoLC(rtag, entity.getTag(rtag));
+				Map<String, String> updatedTags = new HashMap<>();
+				for (String tagKey : entity.getTagKeySet()) {
+					if (tagKey != null && !deletedTag(n, tagKey)) {
+						addIfNotNull(tagKey, entity.getTag(tagKey), updatedTags);
 					}
 				}
+				if (n.getChangedTags() != null) {
+					for (String tagKey : n.getChangedTags()) {
+						if (tagKey != null) {
+							addIfNotNull(tagKey, n.getTag(tagKey), updatedTags);
+						}
+					}
+				}
+				n.replaceTags(updatedTags);
 				if(MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) < 10) {
 					// avoid shifting due to round error
 					n.setLatitude(entity.getLatitude());
@@ -353,16 +363,14 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return null;
 	}
 
+	private void addIfNotNull(String key, String value, Map<String, String> tags) {
+		if (value != null) {
+			tags.put(key, value);
+		}
+	}
+
 	private boolean deletedTag(Node node, String tag) {
 		return node.getTagKeySet().contains(EditPoiData.REMOVE_TAG_PREFIX + tag);
-	}
-
-	private boolean containsTag(Node node, String tag) {
-		return node.getTagKeySet().contains(tag);
-	}
-
-	private boolean tagChanged(Node node, String tag) {
-		return node.getChangedTags() != null && node.getChangedTags().contains(tag);
 	}
 
 	@Override

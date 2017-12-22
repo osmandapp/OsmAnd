@@ -481,6 +481,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return date + " • " + sz + " • " + getDuration(ctx, false);
 		}
 
+		public String getTypeWithDuration(Context ctx) {
+			StringBuilder res = new StringBuilder(getType(ctx));
+			if (isAudio() || isVideo()) {
+				updateInternalDescription();
+				res.append(", ").append(getDuration(ctx, false));
+			}
+			return res.toString();
+		}
+
 		public String getPlainDuration(boolean accessibilityEnabled) {
 			updateInternalDescription();
 			if (duration > 0) {

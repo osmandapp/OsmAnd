@@ -2866,4 +2866,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="show_arrows_on_the_map">Rodyti rodykles žemėlapyje</string>
     <string name="show_passed">Rodyti praeitą</string>
     <string name="hide_passed">Slėpti praeitą</string>
+    <string name="notes_by_date">Užrašai pagal datą</string>
+    <string name="appearance_on_the_map">Išvaizda žemėlapyje</string>
     </resources>

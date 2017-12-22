@@ -258,6 +258,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		poiNameEditText.setText(editPoiData.getTag(OSMSettings.OSMTagKey.NAME.getValue()));
 		poiTypeTextInputLayout = (TextInputLayout) view.findViewById(R.id.poiTypeTextInputLayout);
 		poiTypeEditText = (AutoCompleteTextView) view.findViewById(R.id.poiTypeEditText);
+		poiTypeEditText.setText(editPoiData.getPoiTypeString());
 		poiTypeEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -270,7 +271,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (!getEditPoiData().isInEdit()) {
-					getEditPoiData().updateTypeTag(s.toString());
+					getEditPoiData().updateTypeTag(s.toString(), true);
 					if (!getMyApplication().isApplicationInitializing()) {
 						poiTypeTextInputLayout.setHint(editPoiData.getPoiCategory().getTranslation());
 					}
@@ -279,7 +280,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		});
 		poiNameEditText.setOnEditorActionListener(mOnEditorActionListener);
 		poiTypeEditText.setOnEditorActionListener(mOnEditorActionListener);
-		poiTypeEditText.setText(editPoiData.getPoiTypeString());
 		poiTypeEditText.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(final View v, MotionEvent event) {

@@ -886,7 +886,7 @@
 	<string name="poi_breakwater">Falochron</string>
 	<string name="poi_groyne">Ostroga brzegowa</string>
 
-	<string name="poi_basin">Basen</string>
+	<string name="poi_basin">Zbiornik wodny</string>
 	<string name="poi_conservation">Obszar chroniony</string>
 
 	<string name="poi_crane">Dźwig</string>
@@ -1361,7 +1361,7 @@
 	<string name="poi_tomb_tumulus">Typ: kurchan</string>
 	<string name="poi_tomb_mausoleum">Typ: mauzoleum</string>
 	<string name="poi_clothes_socks">Skarpetki</string>
-	<string name="poi_clothes_shirts">Koszulki</string>
+	<string name="poi_clothes_shirts">Koszule</string>
 	<string name="poi_historic_milestone">Zabytkowy kamień milowy</string>
 
 	<string name="poi_clothes_leather">Skóra</string>
@@ -1449,7 +1449,7 @@
 	<string name="poi_massage_thai">Tajski</string>
 	<string name="poi_massage_sexual">Erotyczny</string>
 	<string name="poi_massage_chinese">Chiński</string>
-	<string name="poi_massage_therapeutic">Tterapeutyczny</string>
+	<string name="poi_massage_therapeutic">Terapeutyczny</string>
 
 	<string name="poi_handrail_yes">Poręcz: tak</string>
 	<string name="poi_handrail_no">Poręcz: nie</string>
@@ -1675,7 +1675,7 @@
 	<string name="poi_capacity_disabled">Specjalnych miejsc dla niepełnosprawnych</string>
 	<string name="poi_capacity_women_yes">Ze specjalnymi miejscami dla kobiet</string>
 	<string name="poi_capacity_women_no">Bez specjalnych miejsc dla kobiet</string>
-	<string name="poi_capacity_women">Specjalnych miejsc dla kobiet</string>
+	<string name="poi_capacity_women">Ze specjalnymi miejscami dla kobiet</string>
 	<string name="poi_capacity_pupils">Specjalnych miejsc dla uczniów</string>
 	<string name="poi_capacity_teachers">Specjalnych miejsc dla nauczycieli</string>
 	<string name="poi_capacity_parent_yes">Ze specjalnymi miejscami dla rodziców</string>
@@ -2545,7 +2545,7 @@
 
 	<string name="poi_bicycle_parking_lockers">Szafki</string>
 	<string name="poi_bicycle_parking_tree">Wieszak rowerowy</string>
-	<string name="poi_bicycle_parking_streetpod">Pół-otwarty stojak</string>
+	<string name="poi_bicycle_parking_streetpod">Półotwarty stojak</string>
 
 	<string name="poi_salt_yes">Słona woda</string>
 	<string name="poi_salt_no">Słodka woda</string>
@@ -3172,7 +3172,7 @@
 	<string name="poi_cuisine_cake">Ciasta</string>
 	<string name="poi_cuisine_pancake">Naleśniki</string>
 	<string name="poi_cuisine_pasta">Spaghetti i makarony</string>
-	<string name="poi_cuisine_fast_food">Szybkie żarcie</string>
+	<string name="poi_cuisine_fast_food">Fast-food</string>
 	<string name="poi_cuisine_juice">Soki</string>
 	<string name="poi_cuisine_soba">Soba (makaron z mąki gryczanej)</string>
 	<string name="poi_cuisine_fine_dining">Ekskluzywne dania</string>
@@ -3229,7 +3229,7 @@
 	<string name="poi_shower_filter_yes">Tak</string>
 
 <string name="poi_takeaway_filter_yes">Tak</string>
-	<string name="poi_diet_lactose_free_filter_yes">Bez-laktozowa</string>
+	<string name="poi_diet_lactose_free_filter_yes">Bezlaktozowa</string>
 	<string name="poi_diet_halal_filter_yes">Halal</string>
 	<string name="poi_diet_kosher_filter_yes">Koszerne potrawy</string>
 	<string name="poi_diet_gluten_free_filter_yes">Bezglutenowa</string>
@@ -3671,5 +3671,13 @@
 	<string name="poi_map_size_region">Rozmiar mapy: region</string>
 
 <string name="poi_charging_station_filter">Stacja ładowania</string>
+
+<string name="poi_letter_box">Skrzynka na listy</string>
+	<string name="poi_post_street">Ulica</string>
+	<string name="poi_post_housenumber">Numer budynku</string>
+	<string name="poi_post_flats">Mieszkania</string>
+
+	<string name="poi_payment_centre">Centrum płatności</string>
+	<string name="poi_money_transfer">Przelew pieniędzy</string>
 
 </resources>

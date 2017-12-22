@@ -277,6 +277,64 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/donationsTotal"
+                android:visibility="gone"
+                android:minHeight="60dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:minHeight="60dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/donationsTotalIcon"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_action_bitcoin"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/donationsTotalTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/total_donations"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="@dimen/default_sub_text_size"/>
+
+                        <TextView
+                            android:id="@+id/donationsTotalTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:textColor="?android:textColorPrimary"
+                            android:textSize="@dimen/default_list_text_size"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="56dp"
+                    android:background="?attr/dashboard_divider"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/numberOfRecipientsLayout"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:minHeight="60dp"
                 android:orientation="horizontal">
@@ -289,7 +347,6 @@
                     android:src="@drawable/ic_group"/>
 
                 <LinearLayout
-                    android:id="@+id/numberOfRecipientsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
