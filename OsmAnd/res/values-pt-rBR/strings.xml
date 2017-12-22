@@ -2427,4 +2427,23 @@ Pôr do Sol: %2$s</string>
     <string name="translit_names">Transliterar nomes</string>
     <string name="import_track_desc">Arquivo %1$s não possui pontos de passagem, importe-o como uma trilha?</string>
     <string name="add_segment_to_the_track">Adicionar a uma trilha GPX</string>
-</resources>
+<string name="empty_state_av_notes_desc">Adicionar nota de áudio, vídeo ou foto para cada ponto no mapa, usando o widget ou o menu de contexto.</string>
+    <string name="quick_action_add_destination_desc">Tocando no botão de ação adicionará um destino na localização do centro da tela. O destino anteriormente definido se torna o último destino intermediário.</string>
+    <string name="quick_action_replace_destination_desc">Tocando no botão de ação substituirá o destino com a localização do centro da tela.</string>
+    <string name="quick_action_add_first_intermediate_desc">Tocando no botão de ação adicionará um primeiro ponto intermédio na localização do centro da tela.</string>
+    <string name="subscribe_email_desc">Se inscreva na nossa lista de e-mail sobre descontos do app e obtenha mais 3 downloads de mapa!</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd coleta informações sobre quais partes do aplicativo você abrir. A sua localização nunca é enviada, nem qualquer coisa digitada no aplicativo ou detalhes das áreas que você visualizar, pesquisar ou baixar.</string>
+    <string name="auto_split_recording_title">Autodividir gravações após um intervalo</string>
+    <string name="auto_split_recording_descr">Iniciar novo segmento após intervalo de 6 min, um novo trajeto após intervalo de 2 h, ou um novo arquivo depois de um longo intervalo se a data foi alterada.</string>
+    <string name="upload_osm_note_description">Você pode enviar sua nota de OSM anonimamente ou usando seu perfil OpenStreetMap.org.</string>
+    <string name="trip_rec_notification_settings_desc">Exiba uma notificação de sistema que permite iniciar a gravação de viagem.</string>
+    <string name="christmas_desc">Antecipando os feriados de Natal e ano novo, você pode optar por exibir o POI associado com o Natal: árvores de Natal, mercados, etc.</string>
+    <string name="osm_live_payment_desc">Assinatura será cobrada mensalmente. Você pode cancelar sua assinatura no Google Play a qualquer momento.</string>
+    <string name="donation_to_osm_desc">Parte de sua doação será enviada aos usuários OSM que enviam alterações ao OpenStreetMap. O custo da inscrição permanece o mesmo.</string>
+    <string name="osm_live_subscription_desc">Assinatura permite atualizações a cada hora, diariamente e semanais, e downloads ilimitados para todos os mapas globalmente.</string>
+    <string name="get_it">Adquira já</string>
+    <string name="get_for">Adquira por %1$s</string>
+    <string name="get_for_month">Adquira por %1$s mês</string>
+    <string name="osm_live_banner_desc">Obter downloads ilimitados de mapa e atualizações de mapas mais de uma vez por mês: por hora, diária ou semanal.</string>
+    <string name="quick_action_add_gpx_descr">Tocando o botão de ação adicionará um ponto de passagem de GPX na localização do centro da tela.</string>
+    </resources>
