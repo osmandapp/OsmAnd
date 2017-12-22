@@ -2792,4 +2792,82 @@
 	<string name="poi_piste_difficulty">Dificuldade da pista</string>
 	<string name="poi_piste_grooming">Preparação de pista</string>
 	<string name="poi_smoking">Fumantes</string>
+	<string name="poi_takeaway">Comida para levar</string>
+	<string name="poi_cocktails">Coquetéis</string>
+	<string name="poi_microbrewery">Microcervejaria</string>
+	<string name="poi_recycling_accepted_waste">Resíduos aceitos</string>
+	<string name="poi_fireplace">Lareira</string>
+	<string name="poi_water_characteristic">Característica da água</string>
+	<string name="poi_diet">Dieta</string>
+	<string name="poi_health_specialty">Especialidade de saúde</string>
+	<string name="poi_massage_type">Tipo de massagem</string>
+	<string name="poi_tents">Barracas</string>
+	<string name="poi_washing_machine">Máquina de lavar roupa</string>
+	<string name="poi_caravans">Trailer</string>
+	<string name="poi_power_supply">Fonte de energia</string>
+	<string name="poi_medical_system">Sistema médico</string>
+	<string name="poi_home_visit">Visita domiciliar</string>
+	<string name="poi_dish">Prato</string>
+	<string name="poi_payment_transport_type">Tipo de pagamento (transporte)</string>
+	<string name="poi_social_facility_type">Tipo</string>
+	<string name="poi_social_facility_for">Grupo-alvo</string>
+	<string name="poi_compressed_air_filter">Ar comprimido</string>
+	<string name="poi_vacuum_cleaner_filter">Aspirador de pó</string>
+	<string name="poi_free_flying_characteristic">Característica</string>
+	<string name="poi_cafeteria">Cafetaria</string>
+	<string name="poi_zoo_type">Tipo</string>
+	<string name="poi_motorcycle_services">Serviços</string>
+	<string name="poi_motorcycle_type">Tipo de motocicleta</string>
+	<string name="poi_animal_shelter_type">Animais aceitos</string>
+	<string name="poi_animal_shelter_purpose">Finalidade</string>
+	<string name="poi_boat_rental_type">Barcos alugados</string>
+	<string name="poi_operational_status">Estado operacional</string>
+	<string name="poi_water_supply_type">Tipo de abastecimento de água</string>
+	<string name="poi_water_purification">Purificação de água</string>
+	<string name="poi_water_place_access">Acesso a local com água</string>
+
+<string name="poi_emergency_infrastructure">Infraestrutura de emergência</string>
+	<string name="poi_spices">Loja de especiarias</string>
+	<string name="poi_shop_craft">Loja de materiais artísticos</string>
+	<string name="poi_waterway_fuel">Posto de gasolina para embarcações</string>
+	<string name="poi_lock_basin">Eclusa</string>
+	<string name="poi_seamark_clearance_height">Altura livre</string>
+	<string name="poi_seamark_clearance_height_closed">Altura livre (fechada)</string>
+	<string name="poi_seamark_clearance_height_open">Altura livre (aberta)</string>
+	<string name="poi_seamark_clearance_width">Largura livre</string>
+
+	<string name="poi_wheelchair_accessibility">Acesso para cadeira de rodas</string>
+	<string name="poi_animal_shelter_wildlife">Animais selvagens</string>
+	<string name="poi_animal_shelter_horse">Cavalos</string>
+	<string name="poi_animal_shelter_mammal">Mamíferos</string>
+	<string name="poi_animal_shelter_fish">Peixes</string>
+
+	<string name="poi_diet_vegetarian_filter_yes">Vegetariano</string>
+	<string name="poi_diet_vegan_filter_yes">Vegano</string>
+	<string name="poi_diet_gluten_free_filter_yes">Livre de glúten</string>
+	<string name="poi_diet_kosher_filter_yes">Kosher</string>
+	<string name="poi_diet_halal_filter_yes">Halal</string>
+	<string name="poi_diet_lactose_free_filter_yes">Livre de lactose</string>
+	<string name="poi_takeaway_filter_yes">Sim</string>
+	<string name="poi_delivery_filter_yes">Sim</string>
+	<string name="poi_outdoor_seating_filter_yes">Sim</string>
+	<string name="poi_service_bicycle_charging_yes">Cobrança: sim</string>
+	<string name="poi_service_bicycle_charging_no">Cobrança: não</string>
+	<string name="poi_bicycle_repair_station">Estação de auto-reparo de bicicletas</string>
+
+	<string name="poi_shower_filter_yes">Sim</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Medicina paliativa</string>
+
+	<string name="poi_sport_free_flying">Voo livre (esporte)</string>
+
+	<string name="poi_water_tap">Torneira de água</string>
+	<string name="poi_button_operated_yes">Operado por botões: sim</string>
+	<string name="poi_button_operated_no">Operado por botões: não</string>
+
+	<string name="poi_free_flying_site_takeoff">Decolagem</string>
+	<string name="poi_free_flying_site_landing">Pouso</string>
+	<string name="poi_free_flying_site_training">Treinamento</string>
+	<string name="poi_free_flying_official_yes">Oficial: sim</string>
+	<string name="poi_free_flying_official_no">Oficial: não</string>
+	<string name="poi_free_flying_paragliding_yes">Parapente</string>
 	</resources>

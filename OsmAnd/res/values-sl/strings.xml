@@ -2967,10 +2967,10 @@ Koda predstavlja območje: %1$s x %2$s</string>
 \n • OsmAnd Live: odprava hroščev, posodobitve, ki so samodejno vključene v navigacijo, se objavljajo vsakih 30 minut
 \n
 \n</string>
-    <string name="release_3_0">\\022 Zaznava znakov STOP po novem vpliva na usmerjanje vožnje
-\n
-\n • Z novim algoritmom so vrednosti spustov in vzponov na sledeh GPX bolj smiselne
-\n
+    <string name="release_3_0">\\022 Zaznava znakov STOP po novem vpliva na usmerjanje vožnje 
+\n 
+\n • Z novim algoritmom so vrednosti spustov in vzponov na sledeh GPX bolj smiselne 
+\n 
 \n • Čas hoje upošteva tudi vrsto terena (vzpon) po Naismithovem pravilu
 \n
 \n</string>

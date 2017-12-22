@@ -2976,4 +2976,9 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 \n• 地形（上坡）察覺登山健行時間（尼史密夫定律）
 \n
 \n</string>
-    </resources>
+    <string name="av_locations_selected_desc">包括座標和所選註解資料的 GPX 檔案。</string>
+    <string name="av_locations_all_desc">包括座標和所有註解資料的 GPX 檔案。</string>
+	<string name="osm_recipient_stat">編輯 %1$s，合計 %2$s mBTC</string>
+    <string name="osm_recipients_label">OSM 收件人</string>
+    <string name="total_donations">捐款總計</string>
+</resources>

@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -52,6 +53,8 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 
 	private static final Log LOG = PlatformUtil.getLog(ReportsFragment.class);
 	public static final String OSM_LIVE_URL = "https://osmand.net/osm_live";
+	public static final String EDITS_FRAGMENT = "NumberOfEditsFragment";
+	public static final String RECIPIENTS_FRAGMENT = "RecipientsFragment";
 
 	private TextView contributorsTextView;
 	private TextView editsTextView;
@@ -70,11 +73,15 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 	private ImageView numberOfEditsIcon;
 	private ImageView donationsIcon;
 	private ImageView numberOfRecipientsIcon;
+	private ImageView donationsTotalIcon;
+	private TextView donationsTotalTitle;
+	private TextView donationsTotalTextView;
 	private TextView numberOfContributorsTitle;
 	private TextView numberOfEditsTitle;
 	private TextView numberOfRecipientsTitle;
 	private TextView donationsTitle;
 	private ProgressBar progressBar;
+	private LinearLayout donationsTotalLayout;
 
 	private int inactiveColor;
 	private int textColorPrimary;
@@ -127,17 +134,19 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 				int monthItemPosition = monthReportsSpinner.getSelectedItemPosition();
 				String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
 				String countryUrlString = selectedCountryItem.getDownloadName();
-				if (countryUrlString.length() > 0) {
+				boolean isRecipientsReport = v.getId() == R.id.numberOfRecipientsLayout;
+				if (countryUrlString.length() > 0 || isRecipientsReport) {
 					Bundle bl = new Bundle();
 					bl.putString(UsersReportFragment.URL_REQUEST,
-							String.format(USERS_RANKING_BY_MONTH, monthUrlString, countryUrlString));
+							String.format(isRecipientsReport ? RECIPIENTS_BY_MONTH : USERS_RANKING_BY_MONTH, monthUrlString, countryUrlString));
 					userReportFragment.setArguments(bl);
-					userReportFragment.show(getChildFragmentManager(), "NumberOfEditsFramgnet");
+					userReportFragment.show(getChildFragmentManager(), isRecipientsReport ? RECIPIENTS_FRAGMENT : EDITS_FRAGMENT);
 				}
 			}
 		};
 		view.findViewById(R.id.numberOfContributorsLayout).setOnClickListener(listener);
 		view.findViewById(R.id.numberOfEditsLayout).setOnClickListener(listener);
+		view.findViewById(R.id.numberOfRecipientsLayout).setOnClickListener(listener);
 
 		countrySelectionFragment.initCountries(getMyApplication());
 		selectedCountryItem = countrySelectionFragment.getCountryItems().get(0);
@@ -155,9 +164,11 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		numberOfEditsIcon = (ImageView) view.findViewById(R.id.numberOfEditsIcon);
 		numberOfRecipientsIcon = (ImageView) view.findViewById(R.id.numberOfRecipientsIcon);
 		donationsIcon = (ImageView) view.findViewById(R.id.donationsIcon);
+		donationsTotalIcon = (ImageView) view.findViewById(R.id.donationsTotalIcon);
 		setThemedDrawable(numberOfContributorsIcon, R.drawable.ic_action_group2);
 		setThemedDrawable(numberOfRecipientsIcon, R.drawable.ic_group);
 		setThemedDrawable(donationsIcon, R.drawable.ic_action_bitcoin);
+		setThemedDrawable(donationsTotalIcon, R.drawable.ic_action_bitcoin);
 		setThemedDrawable(numberOfEditsIcon, R.drawable.ic_map);
 		
 		
@@ -165,6 +176,10 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		numberOfEditsTitle = (TextView) view.findViewById(R.id.numberOfEditsTitle);
 		donationsTitle = (TextView) view.findViewById(R.id.donationsTitle);
 		numberOfRecipientsTitle = (TextView) view.findViewById(R.id.numberOfRecipientsTitle);
+		donationsTotalLayout = (LinearLayout) view.findViewById(R.id.donationsTotal);
+		donationsTotalTitle = (TextView) view.findViewById(R.id.donationsTotalTitle);
+		donationsTotalTextView = (TextView) view.findViewById(R.id.donationsTotalTextView);
+
 		
 		progressBar = (ProgressBar) view.findViewById(R.id.progress);
 
@@ -203,7 +218,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		tryUpdateData(monthUrlString, countryUrlString);
 	}
 
-	private void tryUpdateData(String monthUrlString, String regionUrlString) {
+	private void tryUpdateData(String monthUrlString, final String regionUrlString) {
 		GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse> onResponseListener =
 				new GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse>() {
 					@Override
@@ -251,22 +266,30 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 								recipientsTextView.setText(String.valueOf(response.regionCount));
 							}
 							if (donationsTextView != null) {
-								donationsTextView.setText(String.format("%.3f", response.regionBtc*1000.0) + " mBTC");
+								donationsTextView.setText(String.format("%.3f", response.regionBtc*1000f) + " mBTC");
+							}
+							if (donationsTotalLayout != null &&
+									donationsTotalTextView != null) {
+								donationsTotalLayout.setVisibility(regionUrlString.isEmpty() ? View.VISIBLE : View.GONE);
+								donationsTotalTextView.setText(String.format("%.3f", response.btc*1000f) + " mBTC");
 							}
 						}
 						disableProgress();
 					}
 				};
 		recChangesByMontAsyncTask.setOnResponseListener(recResponseListener);
-		
-		if (recipientsTextView != null) {
-			recipientsTextView.setText("-");
-		}
-		if (donationsTextView != null) {
-			donationsTextView.setText("-");
-		}
+		clearTextViewResult(recipientsTextView);
+		clearTextViewResult(donationsTextView);
+		clearTextViewResult(donationsTotalTextView);
+
 		String recfinalUrl = String.format(RECIPIENTS_BY_MONTH, monthUrlString, regionUrlString);
 		recChangesByMontAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, recfinalUrl);
+	}
+
+	private void clearTextViewResult(TextView textView) {
+		if (textView != null) {
+			textView.setText("-");
+		}
 	}
 
 	@Override
@@ -364,16 +387,19 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		numberOfEditsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_map, inactiveColor));
 		numberOfRecipientsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_group, inactiveColor));
 		donationsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bitcoin, inactiveColor));
+		donationsTotalIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bitcoin, inactiveColor));
 		
 		numberOfContributorsTitle.setTextColor(inactiveColor);
 		numberOfEditsTitle.setTextColor(inactiveColor);
 		numberOfRecipientsTitle.setTextColor(inactiveColor);
 		donationsTitle.setTextColor(inactiveColor);
+		donationsTotalTitle.setTextColor(inactiveColor);
 		
 		progressBar.setVisibility(View.VISIBLE);
 
 		contributorsTextView.setTextColor(inactiveColor);
 		donationsTextView.setTextColor(inactiveColor);
+		donationsTotalTextView.setTextColor(inactiveColor);
 		recipientsTextView.setTextColor(inactiveColor);
 		editsTextView.setTextColor(inactiveColor);
 	}
@@ -383,17 +409,20 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		numberOfEditsIcon.setImageDrawable(getContentIcon(R.drawable.ic_map));
 		numberOfRecipientsIcon.setImageDrawable(getContentIcon(R.drawable.ic_group));
 		donationsIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_bitcoin));
+		donationsTotalIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_bitcoin));
 		
 		numberOfContributorsTitle.setTextColor(textColorSecondary);
 		numberOfEditsTitle.setTextColor(textColorSecondary);
 		numberOfRecipientsTitle.setTextColor(textColorSecondary);
 		donationsTitle.setTextColor(textColorSecondary);
+		donationsTotalTitle.setTextColor(textColorSecondary);
 		
 		progressBar.setVisibility(View.INVISIBLE);
 
 		contributorsTextView.setTextColor(textColorPrimary);
 		editsTextView.setTextColor(textColorPrimary);
 		donationsTextView.setTextColor(textColorPrimary);
+		donationsTotalTextView.setTextColor(textColorPrimary);
 		recipientsTextView.setTextColor(textColorPrimary);
 	}
 

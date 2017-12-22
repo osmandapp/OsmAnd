@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
 import android.view.LayoutInflater;
@@ -453,16 +454,17 @@ public class NotesFragment extends OsmAndListFragment {
 	}
 
 	private void shareItems(Set<Recording> selected) {
-		ArrayList<Uri> files = new ArrayList<>();
+		ArrayList<Uri> uris = new ArrayList<>();
 		for (Recording rec : selected) {
 			File file = rec == SHARE_LOCATION_FILE ? generateGPXForRecordings(selected) : rec.getFile();
 			if (file != null) {
-				files.add(Uri.parse(file.getAbsolutePath()));
+				uris.add(FileProvider.getUriForFile(getContext(), getActivity().getPackageName() + ".fileprovider", file));
 			}
 		}
+
 		Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
 		intent.setType("*/*");
-		intent.putExtra(Intent.EXTRA_STREAM, files);
+		intent.putExtra(Intent.EXTRA_STREAM, uris);
 		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		if (Build.VERSION.SDK_INT > 18) {
 			intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
@@ -470,16 +472,18 @@ public class NotesFragment extends OsmAndListFragment {
 		startActivity(Intent.createChooser(intent, getString(R.string.share_note)));
 	}
 
-	@Nullable
-	private File generateGPXForRecordings(Set<Recording> selected) {
-		File externalCacheDir = getActivity().getExternalCacheDir();
-		if (externalCacheDir == null) {
-			return null;
+	private Set<Recording> getRecordingsForGpx(Set<Recording> selected) {
+		if (selected.size() == 1 && selected.contains(SHARE_LOCATION_FILE)) {
+			return new HashSet<>(plugin.getAllRecordings());
 		}
-		File tmpFile = new File(externalCacheDir, "share/noteLocations.gpx");
+		return selected;
+	}
+
+	private File generateGPXForRecordings(Set<Recording> selected) {
+		File tmpFile = new File(getActivity().getCacheDir(), "share/noteLocations.gpx");
 		tmpFile.getParentFile().mkdirs();
 		GPXFile file = new GPXFile();
-		for (Recording r : selected) {
+		for (Recording r : getRecordingsForGpx(selected)) {
 			if (r != SHARE_LOCATION_FILE) {
 				String desc = r.getDescriptionName(r.getFileName());
 				if (desc == null) {
@@ -492,6 +496,7 @@ public class NotesFragment extends OsmAndListFragment {
 				wpt.link = r.getFileName();
 				wpt.time = r.getFile().lastModified();
 				wpt.category = r.getSearchHistoryType();
+				wpt.desc = r.getTypeWithDuration(getContext());
 				getMyApplication().getSelectedGpxHelper().addPoint(wpt, file);
 			}
 		}

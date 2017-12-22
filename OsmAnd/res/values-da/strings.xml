@@ -2994,4 +2994,9 @@ Repræsenterer område: %1$s x %2$s</string>
 \n• Vandretid tager hensyn til terræn (stigning) (Naismiths regel)
 \n
 \n</string>
-    </resources>
+    <string name="av_locations_selected_desc">GPX fil med koordinaterne og data for de valgte noter.</string>
+    <string name="av_locations_all_desc">GPX-fil med koordinater og data for alle noter.</string>
+	<string name="osm_recipient_stat">Redigeringer %1$s, sum %2$s mBTC</string>
+    <string name="osm_recipients_label">OSM modtagere</string>
+    <string name="total_donations">Samlede donationer</string>
+</resources>

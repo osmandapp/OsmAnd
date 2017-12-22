@@ -22,6 +22,8 @@
     <string name="will_be_opened_at">Will be opened at</string>
     <string name="will_be_opened_on">Will be opened on</string>
     <string name="additional_actions">Additional actions</string>
+    <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
+    <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
     <string name="release_3_0">
 	\u2022 Detection of stop signs now considers driving direction\n\n
 	\u2022 New algorithm providing meaningful ascent/descent values for GPX tracks\n\n
@@ -569,6 +571,7 @@
     <string name="donations">Donations</string>
     <string name="number_of_recipients">Number of recipients</string>
     <string name="osm_user_stat">Edits %1$s, rank %2$s, total edits %3$s</string>
+    <string name="osm_recipient_stat">Edits %1$s, sum %2$s mBTC</string>
     <string name="osm_editors_ranking">OSM Editors ranking</string>
     <string name="osm_live_subscription">OsmAnd Live subscription</string>
     <string name="osm_live_subscribe_btn">Subscribe</string>
@@ -2834,4 +2837,6 @@
     <string name="import_track_desc">File %1$s does not contain waypoints, import it as a track?</string>
     <string name="move_point">Move Point</string>
     <string name="add_segment_to_the_track">Add to a GPX track</string>
+    <string name="osm_recipients_label">OSM Recipients</string>
+    <string name="total_donations">Total Donations</string>
 </resources>

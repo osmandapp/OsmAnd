@@ -37,7 +37,7 @@ public class EditPoiData {
 		category = app.getPoiTypes().getOtherPoiCategory();
 		entity = node;
 		initTags(node);
-		updateTypeTag(getPoiTypeString());
+		updateTypeTag(getPoiTypeString(), false);
 	}
 	
 	public Map<String, PoiType> getAllTranslatedSubTypes() {
@@ -109,15 +109,18 @@ public class EditPoiData {
 	public Map<String, String> getTagValues() {
 		return Collections.unmodifiableMap(tagValues);
 	}
-	
+
 
 	public void putTag(String tag, String value) {
 		checkNotInEdit();
-		try { 
+		try {
 			isInEdit = true;
 			tagValues.remove(REMOVE_TAG_PREFIX+tag);
+			String oldValue = tagValues.get(tag);
+			if (oldValue == null || !oldValue.equals(value)) {
+				changedTags.add(tag);
+			}
 			tagValues.put(tag, value);
-			changedTags.add(tag);
 			notifyDatasetChanged(tag);
 		} finally {
 			isInEdit = false;
@@ -193,9 +196,11 @@ public class EditPoiData {
 		return hasChangesBeenMade;
 	}
 
-	public void updateTypeTag(String string) {
+	public void updateTypeTag(String string, boolean userChanges) {
 		tagValues.put(POI_TYPE_TAG, string);
-		changedTags.add(POI_TYPE_TAG);
+		if (userChanges) {
+			changedTags.add(POI_TYPE_TAG);
+		}
 		retrieveType();
 		PoiType pt = getPoiTypeDefined();
 		if(pt != null) {

@@ -2867,4 +2867,9 @@ Proporciona un código completo</string>
 \n • El tiempo de caminata es consciente del terreno ascendente (regla de Naismith).
 \n
 \n</string>
-    </resources>
+    <string name="av_locations_selected_desc">Archivo GPX con coordenadas y datos de las notas elegidas.</string>
+    <string name="av_locations_all_desc">Archivo GPX con coordenadas y datos de todas las notas.</string>
+	<string name="osm_recipient_stat">Ediciones %1$s, sum %2$s mBTC</string>
+    <string name="osm_recipients_label">Destinatarios de OSM</string>
+    <string name="total_donations">Total de donaciones</string>
+</resources>
