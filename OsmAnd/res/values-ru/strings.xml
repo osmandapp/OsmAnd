@@ -2792,4 +2792,19 @@
     <string name="osm_recipient_stat">Правок %1$s, сумма %2$s mBTC</string>
     <string name="osm_recipients_label">OSM получателей</string>
     <string name="total_donations">Всего пожертвований</string>
-</resources>
+<string name="what_is_here">Что здесь:</string>
+    <string name="parked_at">припаркован в</string>
+    <string name="pick_up_till">Забрать до</string>
+    <string name="without_time_limit">Без ограничения по времени</string>
+    <string name="context_menu_read_full_article">Читать статью целиком</string>
+    <string name="context_menu_read_article">Читать статью</string>
+    <string name="context_menu_points_of_group">Все точки группы</string>
+    <string name="opened_from">Открыто с</string>
+    <string name="opened_till">Открыто до</string>
+    <string name="will_be_closed_at">Закроется в</string>
+    <string name="will_be_opened_at">Откроется в</string>
+    <string name="will_be_opened_on">Откроется</string>
+    <string name="additional_actions">Дополнительные действия</string>
+    <string name="shared_string_actions">Действия</string>
+    <string name="shared_string_marker">Маркер</string>
+    </resources>
