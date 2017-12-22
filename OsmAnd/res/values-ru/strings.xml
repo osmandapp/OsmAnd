@@ -2790,7 +2790,7 @@
 \n
 \n</string>
     <string name="osm_recipient_stat">Правок %1$s, сумма %2$s mBTC</string>
-    <string name="osm_recipients_label">OSM получателей</string>
+    <string name="osm_recipients_label">OSM получатели</string>
     <string name="total_donations">Всего пожертвований</string>
 <string name="what_is_here">Что здесь:</string>
     <string name="parked_at">припаркован в</string>
