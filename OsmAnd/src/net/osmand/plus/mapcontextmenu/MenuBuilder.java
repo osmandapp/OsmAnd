@@ -288,13 +288,13 @@ public class MenuBuilder {
 		if (showTitleIfTruncated) {
 			buildTitleRow(view);
 		}
+		if (showTransportRoutes()) {
+			buildRow(view, 0, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false),
+					false, 0, false, null, true);
+		}
 		buildNearestWikiRow(view);
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
-		}
-		if (routes.size() > 0) {
-			buildRow(view, 0, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false),
-					false, 0, false, null, true);
 		}
 		buildInternal(view);
 		if (showOnlinePhotos) {
@@ -302,6 +302,10 @@ public class MenuBuilder {
 		}
 		buildPluginRows(view);
 		buildAfter(view);
+	}
+
+	private boolean showTransportRoutes() {
+		return routes.size() > 0;
 	}
 
 	void onHide() {
