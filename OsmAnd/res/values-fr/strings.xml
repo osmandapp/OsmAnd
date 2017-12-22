@@ -3045,7 +3045,7 @@ représentant la zone : %1$s x %2$s</string>
 \n</string>
     <string name="total_donations">Total des dons</string>
 <string name="av_locations_selected_desc">Fichier GPX comprenant les coordonnées et le contenu des notes sélectionnées.</string>
-    <string name="av_locations_all_desc">Fichier GPX comprenant les coordonnées et le contenu de toutes les notes.</string>
-	<string name="osm_recipient_stat">Modifications %1$s, total %2$s mBTC</string>
+    <string name="av_locations_all_desc">Fichier GPX contenant les coordonnées et les notes.</string>
+	<string name="osm_recipient_stat">Modifications : %1$s, Total : %2$s mBTC</string>
     <string name="osm_recipients_label">Bénéficiaires d\\\'OSM</string>
     </resources>
