@@ -143,7 +143,7 @@ public class EditPOIMenuController extends MenuController {
 	}
 
 	@Override
-	public int getAdditionalInfoIconRes() {
+	public int getLeftIconId() {
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
 			OpenstreetmapPoint osmP = (OpenstreetmapPoint) osmPoint;
 			int iconResId = 0;
@@ -171,6 +171,17 @@ public class EditPOIMenuController extends MenuController {
 			return R.drawable.ic_type_bug;
 		} else {
 			return 0;
+		}
+	}
+
+	@Override
+	public int getAdditionalInfoIconRes() {
+		if (osmPoint.getAction() == Action.DELETE) {
+			return R.drawable.ic_action_type_delete_16;
+		} else if (osmPoint.getAction() == Action.MODIFY || osmPoint.getAction() == Action.REOPEN) {
+			return R.drawable.ic_action_type_edit_16;
+		} else {
+			return R.drawable.ic_action_type_add_16;
 		}
 	}
 
