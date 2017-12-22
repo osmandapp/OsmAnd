@@ -2789,4 +2789,7 @@
 \n• Время ходьбы в зависимости от местности (подъема) (правило Нейсмита)
 \n
 \n</string>
-    </resources>
+    <string name="osm_recipient_stat">Правок %1$s, сумма %2$s mBTC</string>
+    <string name="osm_recipients_label">OSM получателей</string>
+    <string name="total_donations">Всего пожертвований</string>
+</resources>
