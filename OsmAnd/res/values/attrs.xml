@@ -24,6 +24,9 @@
         <attr name="bg_map_context_menu" format="reference" />
         <attr name="bg_point_editor_view" format="reference" />
         <attr name="ctx_menu_info_view_bg" format="reference" />
+        <attr name="ctx_menu_controller_bg" format="reference" />
+        <attr name="ctx_menu_controller_text_color" format="reference" />
+        <attr name="ctx_menu_divider" format="reference" />
         <attr name="bottom_menu_view_bg" format="reference" />
         <attr name="left_menu_view_bg" format="reference" />
 

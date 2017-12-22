@@ -8,7 +8,6 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -191,6 +190,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				getGroupExpandedPreference(groupName).set(true);
 			}
 		});
+		String groupNameToShow = ((FavoritesActivity) getActivity()).getGroupNameToShow();
+		if (groupNameToShow != null) {
+			int position = favouritesAdapter.getGroupPosition(groupNameToShow);
+			if (position != -1) {
+				listView.setSelectedGroup(position);
+			}
+		}
 		return view;
 	}
 
@@ -966,6 +972,16 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 		public void setFilterResults(Set<?> values) {
 			this.filter = values;
+		}
+
+		public int getGroupPosition(String groupName) {
+			for (int i = 0; i < getGroupCount(); i++) {
+				FavoriteGroup group = getGroup(i);
+				if (group.name.equals(groupName)) {
+					return i;
+				}
+			}
+			return -1;
 		}
 	}
 

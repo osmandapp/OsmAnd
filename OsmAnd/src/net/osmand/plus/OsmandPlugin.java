@@ -459,7 +459,7 @@ public abstract class OsmandPlugin {
 				if (adapter.length() > itemsCount) {
 					adapter.addItem(new ContextMenuItem.ItemBuilder()
 							.setPosition(itemsCount)
-							.setLayout(R.layout.context_menu_list_divider)
+							.setLayout(R.layout.bottom_sheet_dialog_fragment_divider)
 							.createItem());
 				}
 			}

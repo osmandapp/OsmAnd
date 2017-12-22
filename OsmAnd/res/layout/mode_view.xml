@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="48dp"
-    android:layout_height="48dp" >
+             android:layout_width="@dimen/route_info_modes_height"
+             android:layout_height="@dimen/route_info_modes_height"
+             xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:id="@+id/app_mode_icon"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:src="@drawable/ic_dashboard_dark"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:src="@drawable/ic_dashboard_dark"
         android:background="?attr/dashboard_button"
-        android:scaleType="center" />
+        android:scaleType="center"/>
 
     
     <View

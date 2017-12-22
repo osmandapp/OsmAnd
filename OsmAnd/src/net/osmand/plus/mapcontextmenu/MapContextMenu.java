@@ -37,6 +37,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
@@ -46,6 +47,7 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.RenameMarkerBottomSheetDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -415,6 +417,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		init(latLon, pointDescription, object);
 	}
 
+	public boolean navigateInPedestrianMode() {
+		return menuController instanceof ParkingPositionMenuController;
+	}
+
 	public boolean close() {
 		boolean result = false;
 		if (active) {
@@ -710,7 +716,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public int getFavActionStringId() {
 		if (menuController != null)
 			return menuController.getFavActionStringId();
-		return R.string.shared_string_add_to_favorites;
+		return R.string.shared_string_add;
 	}
 
 	public int getWaypointActionIconId() {
@@ -753,8 +759,18 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void fabPressed() {
-		mapActivity.getMapLayers().getMapControlsLayer().navigateFab();
+	public List<TransportStopRoute> getTransportStopRoutes() {
+		if (menuController != null) {
+			return menuController.getTransportStopRoutes();
+		}
+		return null;
+	}
+
+	public void navigateButtonPressed() {
+		if (navigateInPedestrianMode()) {
+			settings.APPLICATION_MODE.set(ApplicationMode.PEDESTRIAN);
+		}
+		mapActivity.getMapLayers().getMapControlsLayer().navigateButton();
 	}
 
 	public boolean zoomInPressed() {
@@ -1063,17 +1079,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public TitleButtonController getTopRightTitleButtonController() {
+	public TitleButtonController getBottomTitleButtonController() {
 		if (menuController != null) {
-			return menuController.getTopRightTitleButtonController();
-		} else {
-			return null;
-		}
-	}
-
-	public TitleButtonController getLeftSubtitleButtonController() {
-		if (menuController != null) {
-			return menuController.getLeftSubtitleButtonController();
+			return menuController.getBottomTitleButtonController();
 		} else {
 			return null;
 		}
@@ -1107,8 +1115,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return menuController == null || menuController.supportZoomIn();
 	}
 
-	public boolean fabVisible() {
-		return menuController == null || menuController.fabVisible();
+	public boolean navigateButtonVisible() {
+		return menuController == null || menuController.navigateButtonVisible();
 	}
 
 	public boolean zoomButtonsVisible() {
@@ -1125,6 +1133,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public boolean displayDistanceDirection() {
 		return menuController != null && menuController.displayDistanceDirection();
+	}
+
+	public boolean displayAdditionalTypeStrInHours() {
+		return menuController != null && menuController.displayAdditionalTypeStrInHours();
+	}
+
+	public int getTimeStrColor() {
+		if (menuController != null) {
+			return menuController.getTimeStrColor();
+		}
+		return 0;
 	}
 
 	public boolean isMapDownloaded() {

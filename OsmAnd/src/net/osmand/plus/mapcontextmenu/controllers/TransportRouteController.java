@@ -78,7 +78,7 @@ public class TransportRouteController extends MenuController {
 	}
 
 	@Override
-	public boolean fabVisible() {
+	public boolean navigateButtonVisible() {
 		return false;
 	}
 

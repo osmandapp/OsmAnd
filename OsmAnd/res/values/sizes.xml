@@ -129,6 +129,29 @@
     <dimen name="context_menu_progress_min_height">54dp</dimen>
     <dimen name="context_menu_progress_cancel_button_size">44dp</dimen>
     <dimen name="context_menu_action_buttons_h">54dp</dimen>
+	<dimen name="context_menu_sub_info_height">24dp</dimen>
+	<dimen name="context_menu_buttons_bottom_height">48dp</dimen>
+	<dimen name="context_menu_padding_margin_large">20dp</dimen>
+	<dimen name="context_menu_padding_margin_default">16dp</dimen>
+	<dimen name="context_menu_padding_margin_medium">10dp</dimen>
+	<dimen name="context_menu_padding_margin_small">8dp</dimen>
+	<dimen name="context_menu_padding_margin_tiny">6dp</dimen>
+	<dimen name="context_menu_title_padding">15dp</dimen>
+	<dimen name="context_menu_controller_height">36dp</dimen>
+	<dimen name="context_menu_progress_padding_left">18dp</dimen>
+	<dimen name="context_menu_progress_padding_right">2dp</dimen>
+	<dimen name="context_menu_action_buttons_height">56dp</dimen>
+	<dimen name="context_menu_subtitle_margin">3dp</dimen>
+	<dimen name="context_menu_direction_margin">12dp</dimen>
+	<dimen name="context_menu_transport_stop_item_height">16dp</dimen>
+	<dimen name="context_menu_main_actions_padding_top">7dp</dimen>
+	<dimen name="context_menu_main_actions_padding_bottom">6dp</dimen>
+	<dimen name="context_menu_main_actions_icon_margin">3dp</dimen>
+	<dimen name="context_menu_transport_grid_spacing">4dp</dimen>
+	<dimen name="context_menu_transport_grid_item_width">32dp</dimen>
+	<dimen name="context_menu_transport_grid_item_height">18dp</dimen>
+	<dimen name="context_menu_transport_icon_size">16dp</dimen>
+	<dimen name="context_menu_transport_padding_top">12dp</dimen>
 
 	<dimen name="fab_size_with_shadow">62dp</dimen>
     <dimen name="fab_margin_right">12dp</dimen>
@@ -138,6 +161,7 @@
     <dimen name="default_list_text_size">16sp</dimen>
     <dimen name="default_desc_text_size">14sp</dimen>
     <dimen name="default_sub_text_size">12sp</dimen>
+	<dimen name="default_sub_text_size_small">10sp</dimen>
 	<dimen name="welcome_header_text_size">23sp</dimen>
 
 	<dimen name="default_split_segments_overview">13sp</dimen>
@@ -210,4 +234,17 @@
 	<dimen name="map_marker_title_height">28dp</dimen>
 
 	<dimen name="fab_recycler_view_padding_bottom">88dp</dimen>
+
+	<!--Route info-->
+	<dimen name="route_info_buttons_padding_top_bottom">16dp</dimen>
+	<dimen name="route_info_buttons_padding_left_right">22dp</dimen>
+	<dimen name="route_info_button_go_margin">3dp</dimen>
+	<dimen name="route_info_button_go_drawable_padding">14dp</dimen>
+	<dimen name="route_info_directions_margin">56dp</dimen>
+	<dimen name="route_info_icon_padding_left">12dp</dimen>
+	<dimen name="route_info_icon_padding_right">16dp</dimen>
+	<dimen name="route_info_divider_margin">52dp</dimen>
+	<dimen name="route_info_modes_height">48dp</dimen>
+
+	<dimen name="multi_selection_header_height">52dp</dimen>
 </resources>

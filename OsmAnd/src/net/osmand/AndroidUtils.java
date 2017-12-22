@@ -188,7 +188,11 @@ public class AndroidUtils {
 
 	public static void addStatusBarPadding21v(Context ctx, View view) {
 		if (Build.VERSION.SDK_INT >= 21) {
-			view.setPadding(0, getStatusBarHeight(ctx), 0, 0);
+			int paddingLeft = view.getPaddingLeft();
+			int paddingTop = view.getPaddingTop();
+			int paddingRight = view.getPaddingRight();
+			int paddingBottom = view.getPaddingBottom();
+			view.setPadding(paddingLeft, paddingTop + getStatusBarHeight(ctx), paddingRight, paddingBottom);
 		}
 	}
 
