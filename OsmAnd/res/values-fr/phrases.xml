@@ -2153,7 +2153,7 @@
 	<string name="poi_automated">Automatisé</string>
 	<string name="poi_parking_type">Type</string>
 	<string name="poi_fuel_type">Type de carburant</string>
-	<string name="poi_fuel_avia_type">Type</string>
+	<string name="poi_fuel_avia_type">Type de carburant (avions)</string>
 	<string name="poi_payment_type">Type de paiement</string>
 	<string name="poi_traffic_signals_sound">Son</string>
 	<string name="poi_tactile_paving">Bande podotactile</string>
@@ -3013,7 +3013,7 @@
 	<string name="poi_animal_shelter_mammal">Mammifères</string>
 	<string name="poi_animal_shelter_fish">Poissons</string>
 
-	<string name="poi_information_trail_blaze">Balise de voie</string>
+	<string name="poi_information_trail_blaze">Balise de chemin</string>
 	<string name="poi_traffic_signals_sound_walk">Autorisé uniquement à pied</string>
 
 	<string name="poi_piste_grooming_backcountry">Arrière-pays</string>
@@ -3165,4 +3165,19 @@
 	<string name="poi_water_purification_none">Aucune</string>
 	<string name="poi_water_purification_reverse_osmosis">Osmose inverse</string>
 	<string name="poi_water_supply_pump">Pompe</string>
+	<string name="poi_site_type_settlement">Implantation</string>
+	<string name="poi_fortification_type_sconce">Type de fortification : rempart</string>
+	<string name="poi_bridge_ref">Référence du pont</string>
+	<string name="poi_tunnel_ref">Référence du tunnel</string>
+
+	<string name="poi_health_specialty_paediatrics_no">Spécialité médicale : pédiatrie : non</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Spécialité médicale : médecine d\'urgence : non</string>
+	<string name="poi_health_specialty_tropical_medicine_no">Spécialité médicale : médecine tropicale : non</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">Spécialité médicale : obstétrique (postnatale) : non</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Spécialité médicale : obstétrique (prénatale) : non</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Spécialité médicale : pédiatrie sociale : non</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Spécialité médicale : obstétrique (césarienne) : non</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">Addictologie</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Orthophonie</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Thérapie manuelle</string>
 	</resources>
