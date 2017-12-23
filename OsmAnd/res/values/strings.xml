@@ -11,11 +11,11 @@
     -->
     <string name="what_is_here">What\'s here:</string>
     <string name="parked_at">parked at</string>
-    <string name="pick_up_till">Pick up till</string>
+    <string name="pick_up_till">Pick up until</string>
     <string name="without_time_limit">Without time limit</string>
     <string name="context_menu_read_full_article">Read full article</string>
     <string name="context_menu_read_article">Read article</string>
-    <string name="context_menu_points_of_group">All points of group</string>
+    <string name="context_menu_points_of_group">All points of the group</string>
     <string name="opened_from">Opened from</string>
     <string name="opened_till">Opened till</string>
     <string name="will_be_closed_at">Will be closed at</string>
@@ -75,7 +75,7 @@
     <string name="coordinate_input_accuracy">%1$d digits</string>
     <string name="go_to_next_field">Go to next field</string>
     <string name="rename_marker">Rename marker</string>
-    <string name="tap_on_map_to_hide_interface_descr">A tap on the map hide the control buttons and widgets.</string>
+    <string name="tap_on_map_to_hide_interface_descr">A tap on the map toggles the control buttons and widgets.</string>
     <string name="tap_on_map_to_hide_interface">Full screen mode</string>
     <string name="mark_passed">Mark passed</string>
     <string name="import_gpx_file_description">can be imported as Favorites points, or as track file.</string>
@@ -2033,7 +2033,7 @@
     <string name="accessibility_mode">Accessibility mode</string>
     <string name="accessibility_mode_descr">Turns on the accessibility features.</string>
     <string name="accessibility_default">According to the global system setting</string>
-    <string name="backToMenu">Back To Menu</string>
+    <string name="backToMenu">Back to menu</string>
     <string name="zoomOut">Zoom out</string>
     <string name="zoomIn">Zoom in</string>
     <string name="zoomIs">Zoom level is</string>
@@ -2837,6 +2837,6 @@
     <string name="import_track_desc">File %1$s does not contain waypoints, import it as a track?</string>
     <string name="move_point">Move Point</string>
     <string name="add_segment_to_the_track">Add to a GPX track</string>
-    <string name="osm_recipients_label">OSM Recipients</string>
-    <string name="total_donations">Total Donations</string>
+    <string name="osm_recipients_label">OSM recipients</string>
+    <string name="total_donations">Total donations</string>
 </resources>
