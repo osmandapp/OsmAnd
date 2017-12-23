@@ -228,7 +228,7 @@
     <string name="shared_string_on">開啟</string>
     <string name="shared_string_off">關閉</string>
     <string name="accessibility_default">配合整體的系統設定</string>
-    <string name="backToMenu">回主選單</string>
+    <string name="backToMenu">回到選單</string>
     <string name="zoomOut">縮小</string>
     <string name="zoomIn">放大</string>
     <string name="zoomIs">縮放程度為</string>
@@ -2921,7 +2921,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="import_as_gpx">匯入為 GPX 檔案</string>
     <string name="import_as_favorites">匯入為我的收藏</string>
     <string name="import_file">匯入檔案</string>
-	<string name="tap_on_map_to_hide_interface_descr">在地圖上輕點以隱藏控制按鈕和小工具。</string>
+	<string name="tap_on_map_to_hide_interface_descr">在地圖上輕點以切換控制按鈕和小工具。</string>
     <string name="tap_on_map_to_hide_interface">全螢幕模式</string>
     <string name="show_on_top_bar">在頂列上顯示</string>
     <string name="mark_passed">已經過標記</string>
@@ -2990,4 +2990,10 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="opened_till">已開啟直到</string>
     <string name="will_be_closed_at">將關閉于</string>
     <string name="will_be_opened_at">將開啟于</string>
+    <string name="what_is_here">這裡的內容：</string>
+    <string name="pick_up_till">取得直到</string>
+    <string name="will_be_opened_on">將被開啟</string>
+    <string name="additional_actions">輔助的操作</string>
+    <string name="shared_string_actions">操作</string>
+    <string name="shared_string_marker">標記</string>
     </resources>
