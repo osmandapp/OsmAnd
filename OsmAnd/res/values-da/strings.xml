@@ -2999,4 +2999,19 @@ Repræsenterer område: %1$s x %2$s</string>
 	<string name="osm_recipient_stat">Redigeringer %1$s, sum %2$s mBTC</string>
     <string name="osm_recipients_label">OSM modtagere</string>
     <string name="total_donations">Samlede donationer</string>
-</resources>
+<string name="what_is_here">Hvad er der her:</string>
+    <string name="parked_at">parkeret på</string>
+    <string name="pick_up_till">Hent til</string>
+    <string name="without_time_limit">Uden tidsbegrænsning</string>
+    <string name="context_menu_read_full_article">Læs hele artiklen</string>
+    <string name="context_menu_read_article">Læs artikel</string>
+    <string name="context_menu_points_of_group">Alle punkter i gruppen</string>
+    <string name="opened_from">Åben fra</string>
+    <string name="opened_till">Åben til</string>
+    <string name="will_be_closed_at">Vil være lukket på</string>
+    <string name="will_be_opened_at">Vil blive åbnet på</string>
+    <string name="will_be_opened_on">Der åbnes på</string>
+    <string name="additional_actions">Yderligere handlinger</string>
+    <string name="shared_string_actions">Handlinger</string>
+    <string name="shared_string_marker">Markør</string>
+    </resources>
