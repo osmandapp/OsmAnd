@@ -2981,4 +2981,13 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 	<string name="osm_recipient_stat">編輯 %1$s，合計 %2$s mBTC</string>
     <string name="osm_recipients_label">OSM 收件人</string>
     <string name="total_donations">捐款總計</string>
-</resources>
+<string name="parked_at">停在</string>
+    <string name="without_time_limit">沒有時間限制</string>
+    <string name="context_menu_read_full_article">閱讀全文</string>
+    <string name="context_menu_read_article">閱讀文章</string>
+    <string name="context_menu_points_of_group">群組的全部標點</string>
+    <string name="opened_from">已開啟自</string>
+    <string name="opened_till">已開啟直到</string>
+    <string name="will_be_closed_at">將關閉于</string>
+    <string name="will_be_opened_at">將開啟于</string>
+    </resources>
