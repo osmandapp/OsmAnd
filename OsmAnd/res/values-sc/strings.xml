@@ -765,7 +765,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="accessibility_mode_descr">Abìlita sas funtziones chi pertocant a s’atzessibilidade.</string>
     <string name="shared_string_on">Ativau</string>
     <string name="shared_string_off">Istudadu</string>
-    <string name="backToMenu">Torra a su Menù</string>
+    <string name="backToMenu">Torra a su menù</string>
     <string name="zoomIs">Su livellu de ismanniamentu est</string>
     <string name="north">nord</string>
     <string name="north_north_east">nord-nord-est</string>
@@ -2884,12 +2884,32 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="notes_by_date">Notas pro data</string>
     <string name="by_date">Pro data</string>
     <string name="by_type">Pro casta</string>
-    <string name="modify_the_search_query">Modìfica sa chirca.</string>
-    <string name="release_3_0">\\022 S\'individuatzione de sos sinnales de stop como cunsiderat sa diretzione de ghia
-\n
-\n • Algoritmu nou chi frunit valores significativos ascendentes e discendentes pro sas rastas GPX
-\n
+    <string name="modify_the_search_query">Modìfica sa rechesta de chirca.</string>
+    <string name="release_3_0">\\022 S\'individuatzione de sos sinnales de stop como cunsiderat sa diretzione de ghia 
+\n 
+\n • Algoritmu nou chi frunit valores significativos ascendentes e discendentes pro sas rastas GPX 
+\n 
 \n • Su tempus calculadu pro acabare sas àndalas pro s\'escursionismu como tenet in cunsìderu sas artiadas (règula de Naismith)
 \n
 \n</string>
-    </resources>
+    <string name="what_is_here">Ite b\'est inoghe:</string>
+    <string name="parked_at">parchegiadu in</string>
+    <string name="pick_up_till">Piga intre</string>
+    <string name="without_time_limit">Chene lìmite de tempus</string>
+    <string name="context_menu_read_full_article">Leghe s\'artìculu intreu</string>
+    <string name="context_menu_read_article">Leghe s\'artìculu</string>
+    <string name="context_menu_points_of_group">Totu sos puntos de su grupu</string>
+    <string name="opened_from">Abertu dae sas</string>
+    <string name="opened_till">Abertu finas a sas</string>
+    <string name="will_be_closed_at">At a serrare a sas</string>
+    <string name="will_be_opened_at">At a abèrrere a sas</string>
+    <string name="will_be_opened_on">At a èssere abertu</string>
+    <string name="additional_actions">Atziones additzionales</string>
+    <string name="av_locations_selected_desc">Documentu GPX cun coordinatas e datos de sas notas ichertadas.</string>
+    <string name="av_locations_all_desc">Documentu GPX cun coordinatas e datos de totu sas notas.</string>
+    <string name="shared_string_actions">Atziones</string>
+    <string name="shared_string_marker">Marcadore</string>
+    <string name="osm_recipient_stat">Modìficas %1$s, sum %2$s mBTC</string>
+    <string name="osm_recipients_label">Destinatàrios OSM</string>
+    <string name="total_donations">Donatziones totales</string>
+</resources>
