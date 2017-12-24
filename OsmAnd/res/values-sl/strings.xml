@@ -366,7 +366,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="osmand_parking_warning_text">Obvestilo, da odpeljite vozilo s parkirišča, je bilo dodano v koledar. Ostalo bo zapisano, dokler ga ne izbrišete ročno.</string>
     <string name="osmand_parking_time_limit_title">Nastavi časovno omejitev parkiranja</string>
     <string name="osmand_parking_delete_confirm">Ali želite izbrisati označbo mesta, kjer je vozilo parkirano?</string>
-    <string name="osmand_parking_delete">Izbriši mesto parkiranja</string>
+    <string name="osmand_parking_delete">Izbriši označbo mesta parkiranja</string>
     <string name="osmand_parking_choose_type">Izbira vrste parkiranja</string>
     <string name="osmand_parking_lim_text">Časovno omejeno</string>
     <string name="osmand_parking_no_lim_text">Časovno neomejeno</string>
@@ -375,12 +375,12 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="osmand_parking_time_no_limit">Časovno neomejeno parkiranje</string>
     <string name="osmand_parking_position_description">Položaj parkiranega vozila: %1$s</string>
     <string name="osmand_parking_position_description_add">Prevzem vozila ob:</string>
-    <string name="osmand_parking_position_name">Točka parkiranja</string>
+    <string name="osmand_parking_position_name">Mesto parkiranja</string>
     <string name="osmand_parking_plugin_description">Vstavek za parkiranje omogoča enostavno shranjevanje mesta parkiranja vozila in časa parkirne ure. Podatki so prikazani na zaslonu za enostavno opozarjanje.
 
 Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih parkiranja (letališča, letovišča …).</string>
     <string name="osmand_parking_plugin_name">Parkiranje (mesto in čas)</string>
-    <string name="context_menu_item_add_parking_point">Označi kot kraj parkiranja</string>
+    <string name="context_menu_item_add_parking_point">Označi kot mesto parkiranja</string>
     <string name="context_menu_item_delete_parking_point">Izbriši označbo parkirnega mesta</string>
     <string name="local_index_routing_data">Podatki usmerjanja</string>
     <string name="search_position_favorites">Izbor priljubljene točke …</string>
@@ -1074,7 +1074,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="plugin_distance_point_ele">nadmorska višina</string>
     <string name="plugin_distance_point">Točka</string>
     <string name="gpx_file_name">Ime datoteke GPX</string>
-    <string name="gpx_saved_sucessfully">Datoteka GPX uspešno shranjena v {0}</string>
+    <string name="gpx_saved_sucessfully">Datoteka GPX je uspešno shranjena v {0}</string>
     <string name="shared_string_do_not_show_again">Ne pokaži več</string>
     <string name="distance_measurement_start_editing">Začni z merjenjem razdalje</string>
     <string name="distance_measurement_finish_editing">Končaj določanje razdalje</string>
@@ -1107,12 +1107,9 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="local_indexes_cat_srtm">Podatki izohips</string>
     <string name="shared_string_downloading">Poteka prejemanje</string>
     <string name="use_distance_measurement_help">* Pritisnite za določitev točke.
-
-* Zadržite pritisk na zemljevidu za brisanje prejšnje točke.
-
-* Zadržite pritisk na točki za ogled ali dodajanje opisa.
-
-* Kliknite na gradnik za merjenje za prikaz več možnosti.</string>
+\n* Zadržite pritisk na zemljevidu za brisanje predhodne točke.
+\n* Zadržite pritisk na točki za ogled in dodajanje opisa.
+\n* Za prikaz več možnosti, kliknite na gradnik za merjenje.</string>
     
     <string name="osmand_plus_extended_description_4000_chars">"
 OsmAnd (OSM Automated Navigation Directions - Avtomatsko usmerjanje), je zemljevid in program za navigacijo z dostopom do svetovnih brezplačnih, zelo kakovostnih OpenStreetMap (OSM) podatkov. Vse podatke map je mogoče shraniti na pomnilniško kartico vašega telefona za uporabo brez povezave. OsmAnd ponuja usmerjanje preko sledilnika  GPS naprave, s prikazom na zaslonu in glasovno, za avto, kolo in pešce. Vse glavne funkcije delujejo tako v povezavi kot brez nje (internet ni potreben).
@@ -2451,7 +2448,7 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="shared_string_record">Zabeleži</string>
     <string name="gpx_logging_no_data">Ni podatkov</string>
     <string name="christmas_poi">Božične točke POI</string>
-    <string name="christmas_desc_q">Ali želite prikaz Božičnih točk POI?</string>
+    <string name="christmas_desc_q">Ali želite omogočiti prikaz prazničnih prizorišč?</string>
     <string name="rendering_value_light_brown_name">Svetlorjava</string>
     <string name="rendering_value_dark_brown_name">Temnorjava</string>
     <string name="rendering_attr_surfaceIntegrity_name">Kakovost površine ceste</string>
@@ -2468,13 +2465,13 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="save_track_precision_descr">Filter: nastavitev najmanjše natančnosti beleženja točk na zemljevidu.</string>
     <string name="osmo_share_location">Objavi</string>
     <string name="trip_rec_notification_settings_desc">Pokaži obvestilo za možnost začetka beleženja potovanja.</string>
-    <string name="release_2_5">\\022 Dejavne ikone na zemljevidu 
+    <string name="release_2_5">• Gradnik Dejavne ikone na zemljevidu 
 \n 
 \n • Zmogljivo iskanje točk POI: iskanje na primer restavracij po vrsti kuhinje, ali pa prostore za kampiranje s posebnimi zahtevami 
 \n 
 \n • Topo – Nov slog zemljevida za kolesarje in pohodnike 
 \n 
-\n • Izboljšano beleženje potovanja 
+\n • Izboljšano beleženje potovanja
 \n 
 \n • Prilagojena obvestila navigacije za različne naprave (Android Wear) 
 \n 
@@ -2482,7 +2479,7 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
 \n 
 \n in še veliko več …</string>
     <string name="rendering_attr_contourColorScheme_description">Barvna shema izohips</string>
-    <string name="christmas_desc">Ob koncu leta je mogoče izbrati prikaz točk POI, ki so povezane z božičnimi in novoletnimi dogodki: božična in novoletna drevesca, prodajalne, razstave ...</string>
+    <string name="christmas_desc">V zadnjih dneh koledarskega leta je mogoče izbrati prikaz točk POI, ki so povezane z božičnimi in novoletnimi dogodki: postavljena novoletna drevesca, božične jasli, prodajalne, razstave ...</string>
     <string name="rendering_attr_contourColorScheme_name">Barvna shema izohips</string>
     <string name="upload_poi">Pošlji točko POI</string>
     <string name="route_calculation">Izračunavanje poti</string>
@@ -2790,12 +2787,12 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="osmand_extended_description_part8">OsmAnd je odprtokodni program, ki je v neprestanem razvoju. Vsakdo lahko sodeluje pri razvoju z objavljanjem hroščev, pregledom prevodov in razvojem programske opreme. Pri programu sodeluje živahna odprtokodna skupnost s celega sveta. Napredek razvoja je odvisen tudi od donacij za programiranje in preizkušanje programske opreme. Ocena kakovosti in pokritosti zemljevidov: • Zahodna Evropa: **** • Vzhodna Evropa: *** • Rusija: *** • Severna Amerika: *** • Južna Amerika: ** • Azija: ** • Japonska in Koreja: *** • Bližnji vzhod: ** • Afrika: ** • Antarktika: * Večina zemljevidov držav je na voljo za prejem! Uporabite zanesljiv navigacijski sistem za različne države – Francijo, Nemčijo, Mehiko, Združeno kraljestvo, Španijo, Nizozemsko, Združene države, Rusijo, Brazilijo in mnoge druge.</string>
     <string name="quick_action_resume_pause_navigation">Nadaljuj/Ustavi navigacijo</string>
     <string name="quick_action_start_stop_navigation">Začni/Končaj navigacijo</string>
-    <string name="release_2_7">\\022 Vstavek Mapillary za slikovno podporo ulic
-\n
-\n • Gradnik ravnila za merjenje razdalj
-\n
-\n • Razdelitev intervalov GPX za podrobnejši prikaz poti
-\n
+    <string name="release_2_7">• Vstavek Mapillary za slikovno podporo ulic 
+\n 
+\n • Gradnik Ravnilo za merjenje razdalj 
+\n 
+\n • Razdelitev intervalov GPX za podrobnejši prikaz poti 
+\n 
 \n • Druge posodobitve in razrešene napake
 \n
 \n</string>
@@ -2960,14 +2957,14 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="waypoints_added_to_map_markers">Vmesne točke so dodane med označbe zemljevida.</string>
 	<string name="plan_route_no_markers_toast">Za uporabo te zmožnosti je treba dodati vsaj eno označbo.</string>
     <string name="marker_moved_to_active">Označba zemljevida je premaknjena med dejavne</string>
-    <string name="release_2_8">\\022 Popolnoma predelane označbe zemljevida z vodilnimi črtami in načrtovanjem poti
-\n
-\n • Orodje za merjenje razdalje sedaj omogoča prilagajanje potem in shranjevanje točk kot sledi
-\n
-\n • OsmAnd Live: odprava hroščev, posodobitve, ki so samodejno vključene v navigacijo, se objavljajo vsakih 30 minut
+    <string name="release_2_8">• Popolnoma predelane označbe zemljevida z vodilnimi črtami in načrtovanjem poti 
+\n 
+\n • Orodje za merjenje razdalje sedaj omogoča prilagajanje potem in shranjevanje točk kot sledi 
+\n 
+\n • OsmAnd Live: razrešeni hrošči in posodobitve, ki so samodejno vključene v navigacijo, se objavljajo vsakih 30 minut
 \n
 \n</string>
-    <string name="release_3_0">\\022 Zaznava znakov STOP po novem vpliva na usmerjanje vožnje 
+    <string name="release_3_0">• Zaznava znakov STOP po novem vpliva na usmerjanje vožnje 
 \n 
 \n • Z novim algoritmom so vrednosti spustov in vzponov na sledeh GPX bolj smiselne 
 \n 
@@ -2976,8 +2973,28 @@ Koda predstavlja območje: %1$s x %2$s</string>
 \n</string>
     <string name="empty_state_osm_edits_descr">Ustvari ali spremeni točke POI, ureja opombe OSM in omogoča objavljanje zabeleženih sledi GPX.</string>
     <string name="coordinate_input_accuracy_description">Samodejno preklopi na naslednje polje, ko je vpisana %1$d decimalka.</string>
-    <string name="tap_on_map_to_hide_interface_descr">S pritiskom na zemljevid se skrijejo gumbi in gradniki.</string>
+    <string name="tap_on_map_to_hide_interface_descr">S pritiskom na zemljevid se preklopi prikaz gumbov in gradnikov.</string>
     <string name="import_gpx_file_description">"je lahko  uvožen med priljubljene točke ali kot datoteka sledi."</string>
     <string name="marker_show_distance_descr">Način določanja razdalje in smeri do označb zemljevida na zaslonu:</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Hitrost, pri kateri se usmerjenost preklopi »iz smeri gibanja« na »kompas«.</string>
-    </resources>
+    <string name="what_is_here">Kaj je tu:</string>
+    <string name="parked_at">parkirano</string>
+    <string name="pick_up_till">Odpelji do</string>
+    <string name="without_time_limit">Brez časovne omejitve</string>
+    <string name="context_menu_read_full_article">Preberi celotno objavo</string>
+    <string name="context_menu_read_article">Preberi objavo</string>
+    <string name="context_menu_points_of_group">Vse točke skupine</string>
+    <string name="opened_from">Odprto od</string>
+    <string name="opened_till">Odprto do</string>
+    <string name="will_be_closed_at">Zapre se ob</string>
+    <string name="will_be_opened_at">Odpre se ob</string>
+    <string name="will_be_opened_on">Odprto bo na</string>
+    <string name="additional_actions">Dodatna dejanja</string>
+    <string name="av_locations_selected_desc">Datoteka GPX s koordinatami in podatki izbranih sporočil.</string>
+    <string name="av_locations_all_desc">Datoteka GPX s koordinatami in podatki vseh sporočil.</string>
+    <string name="shared_string_actions">Dejanja</string>
+    <string name="shared_string_marker">Označba</string>
+    <string name="osm_recipient_stat">Število urejanj %1$s, vsota %2$s mBTC</string>
+    <string name="osm_recipients_label">Prejemniki skupine OSM</string>
+    <string name="total_donations">Skupno donacij</string>
+</resources>
