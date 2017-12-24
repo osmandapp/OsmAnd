@@ -488,7 +488,7 @@
 	<string name="accessibility_mode">Рэжым даступнасьці</string>
 	<string name="accessibility_mode_descr">Уключыць уласцівасьці даступнасці.</string>
 	<string name="accessibility_default">Паводле глябальных наладаў сыстэмы</string>
-	<string name="backToMenu">Назад да мэню</string>
+	<string name="backToMenu">Назад да меню</string>
 	<string name="zoomOut">Аддаліць</string>
 	<string name="zoomIn">Наблізіць</string>
 	<string name="zoomIs">Маштаб</string>
@@ -2937,7 +2937,7 @@
     <string name="import_as_gpx">Імпартаваць як GPX-файл</string>
     <string name="import_as_favorites">Імпартаваць як Улюбёныя</string>
     <string name="import_file">Імпартаваць файл</string>
-	<string name="tap_on_map_to_hide_interface_descr">Дотык на мапе хавае кнопкі кіраваньня і віджэты.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Дотык на мапе пераключае кнопкі кіраваньня і віджэты.</string>
     <string name="tap_on_map_to_hide_interface">Поўныэкранны рэжым</string>
     <string name="show_on_top_bar">Паказаць на верхняй панэлі</string>
     <string name="mark_passed">Адзначыць прайдзеныя</string>
