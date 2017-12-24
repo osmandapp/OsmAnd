@@ -63,7 +63,7 @@
 	<string name="poi_parking_entrance">Parkolóház-bejárat</string>
 	<string name="poi_garages">Garázsok</string>
 
-	<string name="poi_public_transport_platform">Tömegközlekedési megálló</string>
+	<string name="poi_public_transport_platform">Peron</string>
 	<string name="poi_public_transport_platform_bus">Buszmegálló</string>
 	<string name="poi_public_transport_platform_trolleybus">Trolibuszmegálló</string>
 	<string name="poi_public_transport_platform_tram">Villamosmegálló</string>
