@@ -3685,10 +3685,19 @@
 	<string name="poi_map_size_city">Tamaño del mapa: Ciudad</string>
 	<string name="poi_map_size_region">Tamaño del mapa: Región</string>
 
-<string name="poi_couloir">Barranco estrecho</string>
+<string name="poi_couloir">Couloir (barranco estrecho y empinado)</string>
 	<string name="poi_charging_station_filter">Estación de carga</string>
 
 <string name="poi_depot">Depósito</string>
 
 <string name="poi_letter_box">Buzón</string>
-	</resources>
+	<string name="poi_route_subway_ref">Metro</string>
+
+	<string name="poi_post_street">Calle</string>
+	<string name="poi_post_housenumber">Número de portal</string>
+	<string name="poi_post_flats">Piso de oficina</string>
+
+	<string name="poi_payment_centre">Centro de pago</string>
+	<string name="poi_money_transfer">Transferencia de dinero</string>
+
+</resources>
