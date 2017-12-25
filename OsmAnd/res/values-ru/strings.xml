@@ -965,7 +965,7 @@
     <string name="shared_string_on">Включён</string>
     <string name="shared_string_off">Отключён</string>
     <string name="accessibility_default">Использовать системную настройку</string>
-    <string name="backToMenu">Главное меню</string>
+    <string name="backToMenu">Назад к меню</string>
     <string name="zoomOut">Уменьшить</string>
     <string name="zoomIn">Увеличить</string>
     <string name="zoomIs">Масштаб</string>
@@ -2640,7 +2640,7 @@
     <string name="shared_string_right">Направо</string>
     <string name="shared_string_left">Налево</string>
     <string name="show_number_pad">Показать цифровую панель</string>
-    <string name="tap_on_map_to_hide_interface_descr">Нажатие на карте скрывает кнопки управления и виджеты.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Нажатие на карте переключает кнопки управления и виджеты.</string>
     <string name="show_on_top_bar">Показать на верхней панели</string>
     <string name="import_gpx_file_description">могут быть импортированы как избранные точки или как трек файл.</string>
     <string name="shared_string_more_without_dots">Больше</string>
