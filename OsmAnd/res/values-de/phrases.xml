@@ -3659,4 +3659,6 @@
 	<string name="poi_payment_centre">Zahlungs-Zentrum</string>
 	<string name="poi_money_transfer">Überweisung</string>
 
-</resources>
+<string name="poi_route_subway_ref">U-Bahn</string>
+
+	</resources>
