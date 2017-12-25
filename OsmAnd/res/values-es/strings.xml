@@ -659,7 +659,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="shared_string_on">Activado</string>
     <string name="shared_string_off">Desactivado</string>
     <string name="accessibility_default">De acuerdo con el ajuste global del sistema</string>
-    <string name="backToMenu">Volver al Menú</string>
+    <string name="backToMenu">Volver al menú</string>
     <string name="zoomOut">Alejar</string>
     <string name="zoomIn">Acercar</string>
     <string name="zoomIs">El nivel de zoom es</string>
@@ -2746,7 +2746,7 @@ Por favor proporciona un código completo</string>
     <string name="shared_string_back">Atrás</string>
     <string name="view">Ver</string>
 	<string name="waypoints_added_to_map_markers">Puntos de ruta añadidos a marcadores de mapa</string>
-	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa oculta los botones y los controles.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna los botones y los controles.</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     <string name="show_on_top_bar">Mostrar en la barra superior</string>
     <string name="mark_passed">Descartar marcador</string>
@@ -2807,7 +2807,7 @@ Por favor proporciona un código completo</string>
     <string name="by_type">Por tipo</string>
     <string name="what_is_here">Lo que hay aquí:</string>
     <string name="parked_at">Aparcado en</string>
-    <string name="pick_up_till">Recoger antes de las</string>
+    <string name="pick_up_till">Recoger hasta las</string>
     <string name="without_time_limit">Tiempo ilimitado</string>
     <string name="context_menu_read_full_article">Leer el artículo completo</string>
     <string name="context_menu_read_article">Leer artículo</string>
