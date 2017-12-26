@@ -18,6 +18,7 @@ import net.osmand.plus.mapcontextmenu.OpeningHoursInfo;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class FavouritePointMenuController extends MenuController {
 
 	private FavouritePoint fav;
 	private MapMarker mapMarker;
-	private List<TransportStopController.TransportStopRoute> routes = new ArrayList<>();
+	private List<TransportStopRoute> routes = new ArrayList<>();
 	private OpeningHoursInfo openingHoursInfo;
 
 	public FavouritePointMenuController(MapActivity mapActivity, PointDescription pointDescription, final FavouritePoint fav) {
@@ -71,7 +72,7 @@ public class FavouritePointMenuController extends MenuController {
 	}
 
 	@Override
-	public List<TransportStopController.TransportStopRoute> getTransportStopRoutes() {
+	public List<TransportStopRoute> getTransportStopRoutes() {
 		return routes;
 	}
 

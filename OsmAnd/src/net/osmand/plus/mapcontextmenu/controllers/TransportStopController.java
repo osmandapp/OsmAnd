@@ -36,17 +36,20 @@ public class TransportStopController extends MenuController {
 								   PointDescription pointDescription, TransportStop transportStop) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.transportStop = transportStop;
-		routes = processTransportStop();
-		builder.setRoutes(routes);
+		processRoutes();
 	}
 
 	@Override
 	protected void setObject(Object object) {
 		if (object instanceof TransportStop) {
 			this.transportStop = (TransportStop) object;
-			routes = processTransportStop();
-			builder.setRoutes(routes);
+			processRoutes();
 		}
+	}
+
+	private void processRoutes() {
+		routes = processTransportStop();
+		builder.setRoutes(routes);
 	}
 
 	@Override

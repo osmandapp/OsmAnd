@@ -710,8 +710,81 @@ public class MenuBuilder {
 		);
 	}
 
-	private void buildTransportRouteRow(ViewGroup parent, TransportStopRoute r, OnClickListener listener) {
-		if (!isFirstRow()) {
+	private View buildTransportRowItem(View view, TransportStopRoute route, OnClickListener listener) {
+		LinearLayout baseView = new LinearLayout(view.getContext());
+		baseView.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+		baseView.setLayoutParams(llBaseViewParams);
+		baseView.setPadding(dpToPx(16), 0, dpToPx(16), dpToPx(12));
+		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+
+		TextViewEx transportRect = new TextViewEx(view.getContext());
+		LinearLayout.LayoutParams trParams = new LinearLayout.LayoutParams(dpToPx(32), dpToPx(18));
+		trParams.setMargins(0, dpToPx(16), 0, 0);
+		transportRect.setLayoutParams(trParams);
+		transportRect.setGravity(Gravity.CENTER);
+		transportRect.setAllCaps(true);
+		transportRect.setTypeface(FontCache.getRobotoMedium(view.getContext()));
+		transportRect.setTextColor(Color.WHITE);
+		transportRect.setTextSize(10);
+
+		GradientDrawable shape = new GradientDrawable();
+		shape.setShape(GradientDrawable.RECTANGLE);
+		shape.setCornerRadius(dpToPx(3));
+		shape.setColor(route.getColor(mapActivity.getMyApplication(), !light));
+
+		transportRect.setBackgroundDrawable(shape);
+		transportRect.setText(route.route.getRef());
+		baseView.addView(transportRect);
+
+		LinearLayout infoView = new LinearLayout(view.getContext());
+		infoView.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout.LayoutParams infoViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		infoViewLayoutParams.setMargins(dpToPx(16), dpToPx(12), dpToPx(16), 0);
+		infoView.setLayoutParams(infoViewLayoutParams);
+		baseView.addView(infoView);
+
+		TextView titleView = new TextView(view.getContext());
+		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		titleView.setLayoutParams(titleParams);
+		titleView.setTextSize(16);
+		titleView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		titleView.setText(route.getDescription(getMapActivity().getMyApplication(), true));
+		infoView.addView(titleView);
+
+		LinearLayout typeView = new LinearLayout(view.getContext());
+		typeView.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout.LayoutParams typeViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		typeViewParams.setMargins(0, dpToPx(8), 0, 0);
+		typeView.setGravity(Gravity.CENTER);
+		typeView.setLayoutParams(typeViewParams);
+		infoView.addView(typeView);
+
+		ImageView typeImageView = new ImageView(view.getContext());
+		LinearLayout.LayoutParams typeImageParams = new LinearLayout.LayoutParams(dpToPx(16), dpToPx(16));
+		typeImageParams.setMargins(dpToPx(4), 0, dpToPx(4), 0);
+		typeImageView.setLayoutParams(typeImageParams);
+		int drawableResId = route.type == null ? R.drawable.ic_action_polygom_dark : route.type.getResourceId();
+		typeImageView.setImageDrawable(getRowIcon(drawableResId));
+		typeView.addView(typeImageView);
+
+		TextView typeTextView = new TextView(view.getContext());
+		LinearLayout.LayoutParams typeTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		typeTextView.setLayoutParams(typeTextParams);
+		typeTextView.setText(route.getTypeStrRes());
+		typeView.addView(typeTextView);
+
+		baseView.setOnClickListener(listener);
+
+		((ViewGroup) view).addView(baseView);
+
+		return baseView;
+	}
+
+	private void buildTransportRouteRow(ViewGroup parent, TransportStopRoute r, OnClickListener listener, boolean showDivider) {
+		buildTransportRowItem(parent, r, listener);
+
+		if (showDivider) {
 			buildRowDivider(parent);
 		}
 	}
