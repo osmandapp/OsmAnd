@@ -32,6 +32,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.WikipediaDialogFragment;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
@@ -235,7 +236,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					POIMapLayer.showWikipediaDialog(view.getContext(), app, amenity);
+					WikipediaDialogFragment.showInstance(mapActivity, amenity);
 				}
 			});
 			button.setAllCaps(true);
@@ -285,7 +286,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					POIMapLayer.showWikipediaDialog(view.getContext(), app, amenity);
+					WikipediaDialogFragment.showInstance(mapActivity, amenity);
 				}
 			});
 		} else if (isText && text.length() > 200) {

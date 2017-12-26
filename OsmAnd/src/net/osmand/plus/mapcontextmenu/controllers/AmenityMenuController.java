@@ -15,6 +15,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.OpeningHoursInfo;
+import net.osmand.plus.mapcontextmenu.WikipediaDialogFragment;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.render.RenderingIcons;
@@ -69,7 +70,7 @@ public class AmenityMenuController extends MenuController {
 			leftTitleButtonController = new TitleButtonController() {
 				@Override
 				public void buttonPressed() {
-					POIMapLayer.showWikipediaDialog(mapActivity, mapActivity.getMyApplication(), amenity);
+					WikipediaDialogFragment.showInstance(mapActivity, amenity);
 				}
 			};
 			leftTitleButtonController.caption = getMapActivity().getString(R.string.context_menu_read_article);
