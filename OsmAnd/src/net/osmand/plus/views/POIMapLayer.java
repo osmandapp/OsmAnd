@@ -18,6 +18,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -366,6 +367,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			}
 		});
 		final WebView wv = new WebView(ctx);
+		final TextView textView = new TextView(ctx);
 		WebSettings settings = wv.getSettings();
 		settings.setDefaultTextEncodingName("utf-8");
 
@@ -391,6 +393,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			}
 		}
 
+		textView.setText(Html.fromHtml(content));
 		wv.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
 //		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
 		//For pinch zooming to work WebView must not be inside ScrollView
@@ -400,13 +403,14 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		lp.weight = 1;
 		//ll.addView(scrollView, lp);
 		//scrollView.addView(wv);
-		ll.addView(wv, lp);
+//		ll.addView(wv, lp);
+		ll.addView(textView, lp);
 		ll.addView(bottomBar, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		dialog.setContentView(ll);
-		wv.setFocusable(true);
-		wv.setFocusableInTouchMode(true);
-		wv.requestFocus(View.FOCUS_DOWN);
-		wv.setOnTouchListener(new View.OnTouchListener() {
+		textView.setFocusable(true);
+		textView.setFocusableInTouchMode(true);
+		textView.requestFocus(View.FOCUS_DOWN);
+		textView.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				switch (event.getAction()) {
