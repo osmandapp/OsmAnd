@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
   <string name="osmand_parking_position_description_add_time">Die motor was geparkeer om:</string>
@@ -1290,4 +1291,5 @@
     <string name="rendering_attr_contourWidth_name">Dikte van die hoogtelyne</string>
     <string name="rendering_attr_hideWaterPolygons_description">Water</string>
     <string name="rendering_attr_hideWaterPolygons_name">Verberg watervlaktes</string>
+    <string name="what_is_here">Wat is hier:</string>
     </resources>
