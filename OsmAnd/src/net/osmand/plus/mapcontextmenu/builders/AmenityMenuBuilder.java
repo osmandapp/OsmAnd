@@ -241,7 +241,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			});
 			button.setAllCaps(true);
 			button.setText(R.string.context_menu_read_full_article);
-			Drawable compoundDrawable = app.getIconsCache().getIcon(R.drawable.ic_action_note_dark, light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
+			Drawable compoundDrawable = app.getIconsCache().getIcon(R.drawable.ic_action_read_text, light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
 			button.setCompoundDrawablesWithIntrinsicBounds(compoundDrawable, null, null, null);
 			button.setCompoundDrawablePadding(dpToPx(8f));
 			llText.addView(button);
