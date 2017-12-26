@@ -10,7 +10,7 @@
     <string name="first_time_msg">Obrigado por usar OsmAnd. Para usufruir de todos os recursos do aplicativo, você precisa de alguns dados regionais off-line, que você pode baixar em \'Configurações\' → \'Gerenciar mapas\'. Depois, você poderá procurar por um endereço, um Ponto de Interesse (POI) ou um meio de transporte público.</string>    
 	<string name="favorite_home_category">Casa</string>
 	<string name="local_index_action_do">Você está prestes a %1$s %2$s item(s). Continuar?</string>
-	<string name="rendering_attr_hideHouseNumbers_name">Números de porta</string>
+	<string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="application_dir_change_warning3">Você quer que o OsmAnd também copie seus arquivos de dados para o novo destino?</string>
     <string name="specified_directiory_not_writeable">Mapas não podem ser criados no diretório especificado</string>
 	<string name="copying_osmand_file_failed">A cópia de arquivos falhou</string>    
@@ -31,7 +31,7 @@
 	<string name="shared_string_edit">Editar</string>
 	<string name="shared_string_places">Lugares</string>
 	<string name="shared_string_search">Pesquisar</string>
-	<string name="shared_string_show_description">Mostrar descrição</string>
+	<string name="shared_string_show_description">Mostrar descrição.</string>
 	<string name="shared_string_message">Mensagem</string>
 	<string name="agps_data_last_downloaded">Últimos dados A-GPS baixados: %1$s</string>
     <string name="confirm_usage_speed_cameras">Em diversos países (Alemanha, França, Itália, etc.) o uso de alertas de radar é proibido por lei. OsmAnd não assume qualquer responsabilidade se você violar a lei. Por favor, toque em \"sim\" somente se você pode aceitar o uso deste recurso.</string>
@@ -494,7 +494,7 @@
     <string name="osmo_connect_to_device_name">Usuário</string>
     <string name="osmo_connect_to_group_id">ID do grupo</string>
     <string name="osmo_group_name">Nome do grupo</string>
-    <string name="osmo_connect">Conectar a</string>
+    <string name="osmo_connect">Participar</string>
     <string name="osmo_create_group">Criar grupo</string>
     <string name="osmo_server_operation_failed">Falha na operação do servidor OsMo</string>
     <string name="osmo_activity">Monitoramento do OpenStreetMap</string>
@@ -879,7 +879,7 @@ Pôr do Sol: %2$s</string>
     <string name="zxing_barcode_scanner_not_found">Aplicativo Barcode Scanner da ZXing não está instalado. Pesquisar na loja de apps?</string>
 	<string name="shared_location">Posição compartilhada</string>
 	<string name="osmand_parking_lim_text">Tempo limitado</string>
-	<string name="left_side_navigation">Conduzir do lado esquerdo</string>
+	<string name="left_side_navigation">Condução pela faixa da esquerda</string>
 	<string name="index_settings_descr">Baixar e gerenciar mapas armazenados no seu aparelho</string>
 	<string name="plugins_screen">Complementos</string>
 	<string name="support_new_features">Apoiar novos recursos</string>
@@ -1138,14 +1138,14 @@ Pôr do Sol: %2$s</string>
 	
 	
 	<string name="download_files_not_enough_space">Não há espaço livre suficiente para baixar %1$s MB (disponível: %2$s).</string>
-	<string name="download_files_question_space">Espaço livre agora {2} MB! Baixar {0} arquivo(s) de ({1} MB)?</string>
+	<string name="download_files_question_space">Baixar {0} arquivo(s)? Espaço de armazenamento utilizado é {1} MB. (Espaço disponível é {2} MB.)</string>
 	
 	<string name="use_transparent_map_theme">Tema transparente</string>
 	<string name="native_library_not_supported">Biblioteca nativa não é suportada neste aparelho.</string>
 	<string name="choose_auto_follow_route">Centrar visualização do mapa</string>
 	<string name="choose_auto_follow_route_descr">Tempo para o mapa ser centrado na posição atual</string>
 	
-	<string name="keep_informing_never">Apenas manualmente (toque a seta)</string>
+	<string name="keep_informing_never">Apenas manualmente (toque na seta)</string>
     <string name="keep_informing_descr">Repetir as instruções de navegação em intervalos regulares</string>
     <string name="keep_informing">Repetir as instruções de navegação</string>
 	<string name="auto_follow_route_navigation">Centralizar apenas na navegação</string>
@@ -1201,7 +1201,7 @@ Pôr do Sol: %2$s</string>
 	<string name="show_poi_over_map">Mostrar POI</string>
 	
 	<string name="poi_edit_title">Modificar POI</string>
-	<string name="city_type_suburb">Subúrbio</string>
+	<string name="city_type_suburb">Bairro</string>
 	<string name="city_type_hamlet">Lugarejo</string>
 	<string name="city_type_village">Povoado</string>
 	<string name="city_type_town">Cidade pequena</string>
@@ -1276,7 +1276,7 @@ Pôr do Sol: %2$s</string>
 	<string name="tts_missing_language_data">Nenhum dado para o idioma selecionado está instalado. Você quer ir para a loja de apps?</string>
 	<string name="gpx_option_reverse_route">Inverter direção GPX</string>
 	<string name="gpx_option_destination_point">Usar destino atual</string>
-	<string name="gpx_option_from_start_point">Percorrer toda a trilha</string>
+	<string name="gpx_option_from_start_point">Percorrer todo o trajeto</string>
 	<string name="switch_to_vector_map_to_see">Mapa vetorial off-line presente para esse local.
 \n\t\n\tPara usá-lo, ative em \'Menu\' → \'Configurar mapa\' → \'Fonte de mapas…\' → \'Mapas vetoriais off-line\'.</string>
 	<string name="choose_audio_stream">Saída para orientação por voz</string>
@@ -1290,12 +1290,12 @@ Pôr do Sol: %2$s</string>
 	<string name="map_transparency">Transparência do mapa base</string>
 	<string name="layer_underlay">Camada inferior…</string>
 	<string name="map_underlay">Mapa da camada inferior</string>
-	<string name="map_underlay_descr">Escolher mapa da camada inferior</string>
+	<string name="map_underlay_descr">Escolher mapa da camada inferior.</string>
 	<string name="layer_overlay">Camada superior…</string>
 	<string name="map_overlay">Mapa da camada superior</string>
-	<string name="map_overlay_descr">Escolher mapa da camada superior</string>
-	<string name="tile_source_already_installed">Mapa já está instalado, as configurações serão atualizadas</string>
-	<string name="select_tile_source_to_install">Selecione os mapas (quadrículas) para instalar ou atualizar</string>
+	<string name="map_overlay_descr">Escolher mapa da camada superior.</string>
+	<string name="tile_source_already_installed">Mapa já está instalado, as configurações serão atualizadas.</string>
+	<string name="select_tile_source_to_install">Selecione os mapas (quadrículas) para instalar ou atualizar.</string>
 	<string name="internet_not_available">Uma conexão com a Internet é necessária para esta operação, mas não está disponível</string>
 	<string name="install_more">Instalar mais…</string>
 	<string name="level_to_switch_vector_raster_descr">Nível de zoom mínimo para usar mapas vetoriais</string>
@@ -1563,9 +1563,9 @@ Pôr do Sol: %2$s</string>
 	<string name="show_view_angle">Mostrar ângulo de visão</string>
 	<string name="map_view_3d_descr">Ativar a visualização em 3D do mapa</string>
 	<string name="map_view_3d">Visão em 3D</string>
-	<string name="map_tile_source_descr">Escolher a fonte de mapa on-line ou de quadrículas salvas</string>
+	<string name="map_tile_source_descr">Escolher a fonte de mapa on-line ou de quadrículas salvas.</string>
 	<string name="map_tile_source">Fonte do mapa de quadrículas</string>
-	<string name="map_source">Origem do mapa</string>
+	<string name="map_source">Fonte do mapa</string>
 	<string name="use_internet">Usar a Internet</string>
 	<string name="show_location">Mostrar sua posição</string>
 	<string name="show_gps_coordinates_text">Mostrar coordenadas GPS no mapa</string>
@@ -1674,8 +1674,8 @@ Pôr do Sol: %2$s</string>
     <string name="use_fast_recalculation">Recálculo de rota inteligente</string>
 	<string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota para viagens longas</string>
 <string name="rendering_value_disabled_name">Desativado</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorir de acordo com o alcance de rota</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Colorir conforme OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Cor por afiliação da rede</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Colorir conforme símbolo de caminhadas OSMC</string>
     <string name="osm_edit_context_menu_delete">Apagar edição no OSM</string>
     <string name="shared_string_show_details">Mostrar detalhes</string>
     <string name="read_full_article">Leia o artigo completo (on-line)</string>
@@ -1773,7 +1773,7 @@ Pôr do Sol: %2$s</string>
 	<string name="next_proceed">Próximo</string>
 	<string name="opening_at">Abre às</string>
 	<string name="closing_at">Fecha em</string>
-<string name="av_locations_descr">Arquivo GPX com notas de posição</string>
+<string name="av_locations_descr">Arquivo GPX com notas de posição.</string>
     <string name="av_locations">Posições</string>
     
 	<string name="contact_info">Informações de contato</string>
@@ -1803,12 +1803,28 @@ Pôr do Sol: %2$s</string>
     
     <string name="shared_string_qr_code">QR-code</string>
     <string name="map_downloaded">Mapa baixado</string>
-    <string name="please_specify_poi_type_only_from_list">Especifique o tipo correto de POI ou ignore</string>
+    <string name="please_specify_poi_type_only_from_list">Especifique o tipo correto de POI ou ignore.</string>
     <string name="access_from_map">Acessar a partir do mapa</string>
-    <string name="show_on_start_description">\'Desligado\' lança diretamente para a tela do mapa</string>
+    <string name="show_on_start_description">\'Desligado\' lança diretamente para a tela do mapa.</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
-    <string name="release_2_2">" • Nova interface do usuário sensível ao contexto, ao tocar locais no mapa ou em outras telas\n\n • Tela do mapa agora é lançada diretamente, a menos que \'Mostrar painel de controle no início\' esteja selecionado\n\n • Configure quais e de que forma os cartões são exibidos no painel de controle\n\n • Desative o painel de controle, se preferir um controle baseado em menus\n\n • Para baixar mapas, as regiões podem ser selecionadas diretamente, tocando no mapa do mundo\n\n • Pesquisa por \'Pontos de interesse\' agora oferece suporte a consultas mais específicas\n\n • Melhoria nos \'Pontos de interesse\' e funcionalidades de edição OSM\n\n • Reformulação de estrutura e de interface para baixar dados de mapa.\n\n e mais… "</string>
-    <string name="access_from_map_description">O botão menu lança o painel de controle, não o menu</string>
+    <string name="release_2_2">\\022 Nova interface do usuário sensível ao contexto, ao tocar locais no mapa ou em outras telas
+\n
+\n • Tela do mapa agora é lançada diretamente, a menos que \'Mostrar painel de controle no início\' esteja selecionado
+\n
+\n • Configure quais e de que forma os cartões são exibidos no painel de controle
+\n
+\n • Desative o painel de controle, se preferir um controle baseado em menus
+\n
+\n • Para baixar mapas, as regiões podem ser selecionadas diretamente, tocando no mapa do mundo
+\n
+\n • Pesquisa por \'Pontos de interesse\' agora oferece suporte a consultas mais específicas
+\n
+\n • Melhoria nos \'Pontos de interesse\' e funcionalidades de edição OSM
+\n
+\n • Reformulação de estrutura e de interface para baixar dados de mapa.
+\n
+\n e mais…</string>
+    <string name="access_from_map_description">O botão menu abre o painel de controle, não o menu.</string>
     <string name="osm_save_offline">Salvar offline</string>
     <string name="osm_edit_modified_poi">POI no OSM modificado</string>
     <string name="osm_edit_deleted_poi">POI no OSM apagado</string>
@@ -1838,10 +1854,10 @@ Pôr do Sol: %2$s</string>
     <string name="read_more">Ler mais</string>
     <string name="whats_new">O que há de novo</string>
     <string name="rendering_attr_hideProposed_name">Objetos propostos</string>
-    <string name="world_map_download_descr">Mapa-base mundial (que abrange o mundo inteiro em pequenos zooms) está faltando ou desatualizado. Por favor, considere baixar o mapa-base mundial para um ambiente completo.</string>
-    <string name="map_downloaded_descr">Mapa de %1$s foi baixado. Volte para o mapa para começar a usá-lo.</string>
-    <string name="go_to_map">Ir para o mapa</string>
-    <string name="simulate_initial_startup_descr">Define o sinalizador indicando primeira inicialização do app, mantém todas as outras configurações inalteradas</string>
+    <string name="world_map_download_descr">Mapa-base mundial (abrangendo o mundo inteiro em pequenos zooms) está faltando ou desatualizado. Por favor, considere baixá-lo para uma visão global.</string>
+    <string name="map_downloaded_descr">O mapa de %1$s foi baixado, você pode começar a usá-lo.</string>
+    <string name="go_to_map">Exibir o mapa</string>
+    <string name="simulate_initial_startup_descr">Define o sinalizador indicando a primeira inicialização do app, mantém todas as outras configurações inalteradas.</string>
     <string name="simulate_initial_startup">Simular primeiro início do app</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Compartilhar posição</string>
@@ -1856,8 +1872,8 @@ Pôr do Sol: %2$s</string>
     <string name="srtm_plugin_disabled">Curvas de nível desativadas</string>
     <string name="favorite_category_add_new">Adicionar novo</string>
     <string name="favorite_category_select">Selecione categoria</string>
-    <string name="default_speed_system_descr">Definir o sistema de medição de velocidade</string>
-    <string name="default_speed_system">Medição de velocidade</string>
+    <string name="default_speed_system_descr">Defina a unidade de velocidade.</string>
+    <string name="default_speed_system">Unidade de velocidade</string>
     <string name="nm">mn</string>
     <string name="si_nm">Milhas náuticas</string>
     <string name="si_kmh">Quilômetros por hora</string>
@@ -1875,8 +1891,8 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_running_in_background">Rodando em segundo plano</string>
     <string name="lang_fy">Frisão</string>
     <string name="favourites_edit_dialog_title">Informação do favorito</string>
-    <string name="simulate_your_location_stop_descr">Parar simulação de rota</string>
-    <string name="simulate_your_location_descr">Simular usando a rota calculada ou um GPX gravado</string>
+    <string name="simulate_your_location_stop_descr">Parar de simular sua posição.</string>
+    <string name="simulate_your_location_descr">Simular a sua posição usando uma rota calculada ou um trajeto GPX gravado.</string>
     <string name="rendering_attr_currentTrackColor_description">Cor do GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Largura do GPX</string>
     <string name="rendering_attr_roadStyle_description">Estilo das vias</string>
@@ -2217,7 +2233,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_showhide_osmbugs_title">Mostrar/ocultar Anotações do OSM</string>
     <string name="quick_action_osmbugs_show">Mostrar Anotações do OSM</string>
     <string name="quick_action_osmbugs_hide">Ocultar Anotações do OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Tocar o botão de ação irá mostrar ou ocultar as Anotações do OSM no mapa.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Tocar no botão de ação irá mostrar ou ocultar as Anotações do OSM no mapa.</string>
     <string name="sorted_by_distance">Classificado por distância</string>
     <string name="search_favorites">Pesquisar favoritos</string>
     <string name="hillshade_menu_download_descr">Para ver o sombreamento do relevo no mapa, você precisa baixar a camada de mapa de sombreamento de relevo desta região.</string>
@@ -2246,14 +2262,14 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_overview">Visão geral</string>
     <string name="select_street">Selecionar rua</string>
     <string name="shared_string_in_name">em %1$s</string>
-    <string name="type_address">Digitar o endereço</string>
+    <string name="type_address">Digitar endereço</string>
     <string name="type_city_town">Digitar a cidade ou vila</string>
     <string name="type_postcode">Digitar código postal</string>
     <string name="nearest_cities">Cidades mais próximas</string>
     <string name="select_city">Selecionar cidade</string>
     <string name="select_postcode">Selecionar código postal</string>
     <string name="quick_action_auto_zoom">Ampliação/redução do mapa automática ligar/desligar</string>
-    <string name="quick_action_auto_zoom_desc">Tocar o botão de ação irá ligar/desligar a ampliação/redução automática do mapa de acordo com sua velocidade.</string>
+    <string name="quick_action_auto_zoom_desc">Tocar no botão de ação irá ligar/desligar a ampliação/redução automática do mapa de acordo com sua velocidade.</string>
     <string name="quick_action_auto_zoom_on">Ativar ampliação do mapa automática</string>
     <string name="quick_action_auto_zoom_off">Desativar ampliação do mapa automática</string>
     <string name="quick_action_add_destination">Adicionar destino</string>
@@ -2314,7 +2330,7 @@ Pôr do Sol: %2$s</string>
     <string name="coordinate_input_accuracy">%1$d dígitos</string>
     <string name="go_to_next_field">Ir para o próximo campo</string>
     <string name="rename_marker">Renomear marcador</string>
-    <string name="tap_on_map_to_hide_interface_descr">Um toque no mapa oculta os botões de controle e widgets.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Um toque no mapa mostra/oculta os botões de controle e widgets.</string>
     <string name="tap_on_map_to_hide_interface">Modo tela cheia</string>
     <string name="mark_passed">Marcador visitado</string>
     <string name="import_gpx_file_description">pode ser importado como pontos favoritos, ou como arquivo de trilha.</string>
@@ -2428,9 +2444,9 @@ Pôr do Sol: %2$s</string>
     <string name="import_track_desc">Arquivo %1$s não possui pontos de passagem, importe-o como uma trilha?</string>
     <string name="add_segment_to_the_track">Adicionar a uma trilha GPX</string>
 <string name="empty_state_av_notes_desc">Adicionar nota de áudio, vídeo ou foto para cada ponto no mapa, usando o widget ou o menu de contexto.</string>
-    <string name="quick_action_add_destination_desc">Tocando no botão de ação adicionará um destino no local do centro da tela. O destino anteriormente definido se torna o último destino intermediário.</string>
-    <string name="quick_action_replace_destination_desc">Tocando no botão de ação substituirá o destino com o local do centro da tela.</string>
-    <string name="quick_action_add_first_intermediate_desc">Tocando no botão de ação adicionará um primeiro ponto intermédio no local do centro da tela.</string>
+    <string name="quick_action_add_destination_desc">Tocar no botão de ação adicionará um destino no local do centro da tela. O destino anteriormente definido se torna o último destino intermediário.</string>
+    <string name="quick_action_replace_destination_desc">Tocar no botão de ação substituirá o destino com o local do centro da tela.</string>
+    <string name="quick_action_add_first_intermediate_desc">Tocar no botão de ação adicionará um primeiro ponto intermédio no local do centro da tela.</string>
     <string name="subscribe_email_desc">Assine a nossa lista de e-mail sobre descontos do aplicativo e obtenha mais 3 downloads de mapa!</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd coleta informações sobre quais partes do aplicativo você abrir. A sua localização nunca é enviada, nem qualquer coisa digitada no aplicativo ou detalhes das áreas que você visualizar, pesquisar ou baixar.</string>
     <string name="auto_split_recording_title">Autodividir gravações após um intervalo</string>
@@ -2445,7 +2461,7 @@ Pôr do Sol: %2$s</string>
     <string name="get_for">Adquira por %1$s</string>
     <string name="get_for_month">Adquira por %1$s mês</string>
     <string name="osm_live_banner_desc">Obter downloads ilimitados de mapa e atualizações de mapas mais de uma vez por mês: por hora, diária ou semanal.</string>
-    <string name="quick_action_add_gpx_descr">Tocando o botão de ação adicionará um ponto de passagem GPX no local do centro da tela.</string>
+    <string name="quick_action_add_gpx_descr">Tocar no botão de ação adicionará um ponto de passagem GPX no local do centro da tela.</string>
     <string name="av_locations_all_desc">Arquivo GPX com coordenadas e dados de todas as notas.</string>
 	<string name="storage_place_description">Armazenamento de dados do OsmAnd (para mapas, trilhas, etc.): %1$s.</string>
     <string name="first_usage_greeting">Obtenha direções e descobra novos lugares sem precisar de conexão com Internet</string>
@@ -2576,6 +2592,108 @@ Pôr do Sol: %2$s</string>
     <string name="quick_actions_delete_text">Tem certeza de que deseja apagar a ação \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo favoritos</string>
     <string name="quick_favorites_name_preset">Nome do preset</string>
-    <string name="quick_action_add_marker_descr">Tocando o botão de ação adicionará um marcador de mapa no local do centro da tela.</string>
-    <string name="quick_action_add_parking_descr">Tocar o botão de ação adicionará um lugar de estacionamento no local do centro da tela.</string>
+    <string name="quick_action_add_marker_descr">Tocar no botão de ação adicionará um marcador de mapa no local do centro da tela.</string>
+    <string name="quick_action_add_parking_descr">Tocar no botão de ação adicionará um lugar de estacionamento no local do centro da tela.</string>
+    <string name="release_3_0">\\022 Detecção de sinais \"PARE\" agora considera a direção de condução
+\n
+\n • Novo algoritmo fornecendo valores de subida/descida significativa para trajetos GPX
+\n
+\n • Tempo de caminhada leva em conta terrenos em aclive (Regra de Naismith)
+\n
+\n</string>
+    <string name="route_points_category_name">Converte como visitado nesta rota</string>
+    <string name="release_2_7">\\022 Mapillary plugin com imagens ao nível da rua
+\n
+\n• Widget de régua para medição de distância
+\n
+\n• Intervalos de divisão GPX, com informações detalhadas sobre o seu trajeto
+\n
+\n• Outras melhorias e correções de bugs
+\n
+\n</string>
+    <string name="release_2_8">\\022 Marcadores de mapa completamente reformulado com as linhas de guia e planejamento de rota
+\n • Ferramenta de medição de distância oferecendo recurso de alinhar com estrada e salvar pontos como trajeto
+\n • OsmAnd Live: correções de bugs, novos dados no servidor a cada 30 minutos, atualizações implementadas para a navegação
+\n
+\n</string>
+    <string name="download_files_error_not_enough_space">Não há espaço suficiente! O espaço de armazenamento necessário é {3} MB temporariamente, {1} MB permanentemente. O espaço disponível é de apenas {2} MB.</string>
+    <string name="download_files_question_space_with_temp">Baixar {0} arquivo(s)? O espaço de armazenamento usado é de {3} MB temporariamente, {1} MB permanentemente. (Espaço disponível é de {2} MB.)</string>
+    <string name="lang_hsb">Alto sorábio</string>
+    <string name="lang_kab">Cabila</string>
+    <string name="lang_ber">Berberes</string>
+    <string name="navigate_point_olc_info_short">OLC curto
+\nPor favor, forneça um código completo</string>
+    <string name="navigate_point_olc_info_area">OLC completo válido 
+\nRepresenta área: %1$s x %2$s</string>
+    <string name="route_is_too_long_v2">Esta rota pode ser muito longa para calcular. Por favor, adicione destinos intermediários se nenhum resultado for encontrado dentro de 10 minutos.</string>
+    <string name="osmand_extended_description_part5">Ciclismo • Você pode encontrar caminhos de bicicleta no mapa • Navegação por GPS no modo ciclismo constrói a sua rota utilizando caminhos de bicicleta • Você pode ver a sua velocidade e altitude • Opção de gravação GPX permite-lhe gravar a sua viagem e compartilhá-la • Através de plugin adicionais você pode ativar a exibição de curvas de nível e sombreamento de relevo</string>
+    <string name="osmand_extended_description_part6">Passeio, caminhada, turismo pela cidade • O mapa mostra caminhos para passeios e caminhadas • A Wikipédia no seu idioma preferido pode dizer muito durante um turismo pela cidade • Paradas de transportes públicos (ônibus, troleibus, trem) incluindo nomes de linha, ajuda a navegar em uma nova cidade • Navegação GPS em modo pedestre constrói a sua rota usando caminhos para pedestres • Você pode fazer o upload e seguir uma rota GPX ou gravar e compartilhar a sua própria rota</string>
+    <string name="osmand_extended_description_part7">Contribua para o OSM • Comunique falha de dados • Carregue trajetos GPX diretamente do app • Adicione POIs e carregue-os diretamente ao OSM (ou mais tarde se off-line)</string>
+    <string name="osmand_plus_extended_description_part5">Recursos de segurança • Alternância de exibição dia/noite automatizada opcional • Exibição de limite de velocidade opcional, com lembrete se você ultrapassá-lo • Zoom dependente da velocidade opcional • Compartilhe sua localização para que seus amigos possam encontrar você</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Especificar um buffer de tempo para manter locais para enviar sem conexão</string>
+    <string name="quick_action_take_audio_note_descr">Tocar no botão de ação adicionará uma nota de áudio no local do centro da tela.</string>
+    <string name="quick_action_take_video_note_descr">Tocar no botão de ação adicionará uma nota de vídeo no local do centro da tela.</string>
+    <string name="quick_action_take_photo_note_descr">Tocar no botão de ação adicionará uma nota de foto no local do centro da tela.</string>
+    <string name="quick_action_add_osm_bug_descr">Tocar no botão de ação adicionará uma nota OSM no local do centro da tela.</string>
+    <string name="quick_action_add_poi_descr">Tocar no botão de ação adicionará um POI no local do centro da tela.</string>
+    <string name="quick_action_navigation_voice_descr">Tocar no botão de ação irá ativar ou desativar a orientação por voz durante a navegação.</string>
+    <string name="quick_action_interim_dialog">Mostrar um diálogo intermediário</string>
+    <string name="favorite_autofill_toast_text">" está salvo no "</string>
+    <string name="favorite_empty_place_name">Lugar</string>
+    <string name="quick_action_duplicates">Nome de ação rápida especificada já em uso foi mudado para %1$s para evitar a duplicação.</string>
+    <string name="quick_action_duplicate">Nome de ação rápida duplicado</string>
+    <string name="quick_action_showhide_favorites_descr">Tocar no botão de ação irá mostrar ou ocultar os pontos favoritos no mapa.</string>
+    <string name="quick_action_showhide_poi_descr">Tocar no botão de ação irá mostrar ou ocultar POIs no mapa.</string>
+    <string name="quick_action_showhide_favorites_title">Mostrar/ocultar favoritos</string>
+    <string name="quick_action_favorites_show">Mostrar Favoritos</string>
+    <string name="quick_action_favorites_hide">Ocultar Favoritos</string>
+    <string name="quick_action_showhide_poi_title">Mostrar/ocultar POI</string>
+    <string name="quick_action_poi_show">Mostrar %1$s</string>
+    <string name="quick_action_poi_hide">Ocultar %1$s</string>
+    <string name="quick_action_add_category">Adicionar uma categoria</string>
+    <string name="quick_action_add_create_items">Criar itens</string>
+    <string name="quick_action_add_configure_map">Configurar mapa</string>
+    <string name="quick_action_add_navigation">Navegação</string>
+    <string name="quick_action_fav_name_descr">Deixe em branco para automaticamente usar o endereço ou nome de lugar.</string>
+    <string name="quick_action_bug_descr">Esta mensagem será autocompletada no campo de comentário.</string>
+    <string name="quick_action_bug_message">Mensagem</string>
+    <string name="quick_action_category_descr">Selecione a categoria para salvar o favorito.</string>
+    <string name="quick_action_gpx_category_descr">Selecione uma categoria opcional.</string>
+    <string name="quick_action_poi_list">Lista de POIs</string>
+    <string name="quick_action_sh_poi_descr">Você pode adicionar uma ou mais categorias de POI para exibir no mapa.</string>
+    <string name="quick_action_page_list_descr">Tocar no botão de ação irá percorrer a lista abaixo.</string>
+    <string name="quick_action_map_style_action">Adicionar um estilo de mapa</string>
+    <string name="quick_action_empty_param_error">Parâmetros não podem ficar em branco</string>
+    <string name="quick_action_map_styles">Estilos de mapa</string>
+    <string name="quick_action_map_overlay">Mudar camada superior de mapa</string>
+    <string name="quick_action_map_overlay_title">Camada superior de mapa</string>
+    <string name="quick_action_map_overlay_action">Adicionar camada superior</string>
+    <string name="quick_action_map_overlay_switch">A camada superior de mapa foi alterada para \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">A camada inferior de mapa foi alterada para \"%s\".</string>
+    <string name="quick_action_map_underlay">Mudar camada inferior de mapa</string>
+    <string name="quick_action_map_underlay_title">Camadas inferiores de mapa</string>
+    <string name="quick_action_map_underlay_action">Adicionar camada inferior</string>
+    <string name="quick_action_map_source">Mudar fonte de mapa</string>
+    <string name="quick_action_map_source_title">Fontes do mapa</string>
+    <string name="quick_action_map_source_action">Adicionar fonte de mapa</string>
+    <string name="quick_action_map_source_switch">A fonte do mapa foi alterada para \"%s\".</string>
+    <string name="quick_action_btn_tutorial_title">Mudar posição do botão</string>
+    <string name="quick_action_btn_tutorial_descr">Segure e arraste o botão para mudar a sua posição na tela.</string>
+    <string name="shared_string_action_name">Nome da ação</string>
+    <string name="mappilary_no_internet_desc">Você precisa de internet para ver as fotos do Mapillary.</string>
+    <string name="retry">Repetir</string>
+    <string name="add_route_points">Adicionar Pontos de Rota</string>
+    <string name="add_waypoint">Adicionar Ponto de Passagem</string>
+    <string name="add_line">Adicionar Linha</string>
+    <string name="save_gpx_waypoint">Salvar Ponto de Passagem GPX</string>
+    <string name="save_route_point">Salvar Ponto de Rota</string>
+    <string name="waypoint_one">Ponto de Passagem 1</string>
+    <string name="route_point_one">Ponto de Rota 1</string>
+    <string name="empty_state_my_tracks">Adicionar e Gravar Trajetos</string>
+    <string name="empty_state_my_tracks_desc">Gravar ou importar trajetos para ver.</string>
+    <string name="empty_state_favourites">Adicionar Favoritos</string>
+    <string name="empty_state_favourites_desc">Adicionar favoritos no mapa ou importá-los de um arquivo.</string>
+    <string name="import_track">Importar trajeto</string>
+    <string name="move_point">Mover Ponto</string>
+    <string name="osm_recipients_label">Destinatários OSM</string>
     </resources>
