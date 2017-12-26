@@ -290,14 +290,13 @@ public class MenuBuilder {
 		if (showTitleIfTruncated) {
 			buildTitleRow(view);
 		}
+		if (showTransportRoutes()) {
+			buildRow(view, 0, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false),
+					false, 0, false, null, true);
+		}
 		buildNearestWikiRow(view);
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
-		}
-		if (routes.size() > 0) {
-			buildRow(view, 0, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false),
-					false, 0, false, null);
-			matchWidthDivider = true;
 		}
 		buildInternal(view);
 		if (showOnlinePhotos) {
@@ -305,6 +304,10 @@ public class MenuBuilder {
 		}
 		buildPluginRows(view);
 		buildAfter(view);
+	}
+
+	private boolean showTransportRoutes() {
+		return routes.size() > 0;
 	}
 
 	void onHide() {
@@ -324,7 +327,7 @@ public class MenuBuilder {
 	protected void buildPlainMenuItems(View view) {
 		for (PlainMenuItem item : plainMenuItems) {
 			buildRow(view, item.getIconId(), item.getText(), 0, item.collapsable, item.collapsableView,
-					item.isNeedLinks(), 0, item.isUrl(), item.getOnClickListener());
+					item.isNeedLinks(), 0, item.isUrl(), item.getOnClickListener(), false);
 		}
 	}
 
@@ -348,7 +351,7 @@ public class MenuBuilder {
 		if (mapContextMenu != null) {
 			String title = mapContextMenu.getTitleStr();
 			if (title.length() > TITLE_LIMIT) {
-				buildRow(view, R.drawable.ic_action_note_dark, title, 0, false, null, false, 0, false, null);
+				buildRow(view, R.drawable.ic_action_note_dark, title, 0, false, null, false, 0, false, null, false);
 			}
 		}
 	}
@@ -357,7 +360,7 @@ public class MenuBuilder {
 		if (processNearstWiki() && nearestWiki.size() > 0) {
 			buildRow(view, R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around) + " (" + nearestWiki.size()+")", 0,
 					true, getCollapsableWikiView(view.getContext(), true),
-					false, 0, false, null);
+					false, 0, false, null, false);
 		}
 	}
 
@@ -380,7 +383,7 @@ public class MenuBuilder {
 			}
 		});
 		buildRow(view, R.drawable.ic_action_photo_dark, app.getString(R.string.online_photos), 0, true,
-				collapsableView, false, 1, false, null);
+				collapsableView, false, 1, false, null, false);
 
 		if (needUpdateOnly && onlinePhotoCards != null) {
 			onlinePhotoCardsRow.setCards(onlinePhotoCards);
@@ -425,7 +428,7 @@ public class MenuBuilder {
 	}
 
 	protected void buildAfter(View view) {
-		buildRowDivider(view, false);
+		buildRowDivider(view);
 	}
 
 	public boolean isFirstRow() {
@@ -438,23 +441,17 @@ public class MenuBuilder {
 
 	public View buildRow(View view, int iconId, String text, int textColor,
 							boolean collapsable, final CollapsableView collapsableView,
-							boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener) {
+							boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
 		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textColor, null, collapsable, collapsableView,
-				needLinks, textLinesLimit, isUrl, onClickListener);
-	}
-
-	public View buildRow(final View view, Drawable icon, final String text, int textColor,
-						 boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
-						 int textLinesLimit, boolean isUrl, OnClickListener onClickListener) {
-		return buildRow(view, icon, text, textColor, null, collapsable, collapsableView, needLinks, textLinesLimit, isUrl, onClickListener);
+				needLinks, textLinesLimit, isUrl, onClickListener, matchWidthDivider);
 	}
 
 	public View buildRow(final View view, Drawable icon, final String text, int textColor, String secondaryText,
 							boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
-							int textLinesLimit, boolean isUrl, OnClickListener onClickListener) {
+							int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
 
 		if (!isFirstRow()) {
-			buildRowDivider(view, false);
+			buildRowDivider(view);
 		}
 
 		LinearLayout baseView = new LinearLayout(view.getContext());
@@ -598,7 +595,13 @@ public class MenuBuilder {
 
 		rowBuilt();
 
+		setDividerWidth(matchWidthDivider);
+
 		return ll;
+	}
+
+	protected void setDividerWidth(boolean matchWidthDivider) {
+		this.matchWidthDivider = matchWidthDivider;
 	}
 
 	protected void copyToClipboard(String text, Context ctx) {
@@ -650,15 +653,11 @@ public class MenuBuilder {
 		rowBuilt();
 	}
 
-	public void buildRowDivider(View view, boolean matchWidth) {
-		if (matchWidthDivider) {
-			matchWidth = true;
-			matchWidthDivider = false;
-		}
+	public void buildRowDivider(View view) {
 		View horizontalLine = new View(view.getContext());
 		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
 		llHorLineParams.gravity = Gravity.BOTTOM;
-		if (!matchWidth) {
+		if (!matchWidthDivider) {
 			llHorLineParams.setMargins(dpToPx(64f), 0, 0, 0);
 		}
 		horizontalLine.setLayoutParams(llHorLineParams);
@@ -711,82 +710,9 @@ public class MenuBuilder {
 		);
 	}
 
-	private View buildTransportRowItem(View view, TransportStopRoute route, OnClickListener listener) {
-		LinearLayout baseView = new LinearLayout(view.getContext());
-		baseView.setOrientation(LinearLayout.HORIZONTAL);
-		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-		baseView.setLayoutParams(llBaseViewParams);
-		baseView.setPadding(dpToPx(16), 0, dpToPx(16), dpToPx(12));
-		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
-
-		TextViewEx transportRect = new TextViewEx(view.getContext());
-		LinearLayout.LayoutParams trParams = new LinearLayout.LayoutParams(dpToPx(32), dpToPx(18));
-		trParams.setMargins(0, dpToPx(16), 0, 0);
-		transportRect.setLayoutParams(trParams);
-		transportRect.setGravity(Gravity.CENTER);
-		transportRect.setAllCaps(true);
-		transportRect.setTypeface(FontCache.getRobotoMedium(view.getContext()));
-		transportRect.setTextColor(Color.WHITE);
-		transportRect.setTextSize(10);
-
-		GradientDrawable shape = new GradientDrawable();
-		shape.setShape(GradientDrawable.RECTANGLE);
-		shape.setCornerRadius(dpToPx(3));
-		shape.setColor(route.getColor(mapActivity.getMyApplication(), !light));
-
-		transportRect.setBackgroundDrawable(shape);
-		transportRect.setText(route.route.getRef());
-		baseView.addView(transportRect);
-
-		LinearLayout infoView = new LinearLayout(view.getContext());
-		infoView.setOrientation(LinearLayout.VERTICAL);
-		LinearLayout.LayoutParams infoViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		infoViewLayoutParams.setMargins(dpToPx(16), dpToPx(12), dpToPx(16), 0);
-		infoView.setLayoutParams(infoViewLayoutParams);
-		baseView.addView(infoView);
-
-		TextView titleView = new TextView(view.getContext());
-		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		titleView.setLayoutParams(titleParams);
-		titleView.setTextSize(16);
-		titleView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
-		titleView.setText(route.getDescription(getMapActivity().getMyApplication(), true));
-		infoView.addView(titleView);
-
-		LinearLayout typeView = new LinearLayout(view.getContext());
-		typeView.setOrientation(LinearLayout.HORIZONTAL);
-		LinearLayout.LayoutParams typeViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		typeViewParams.setMargins(0, dpToPx(8), 0, 0);
-		typeView.setGravity(Gravity.CENTER);
-		typeView.setLayoutParams(typeViewParams);
-		infoView.addView(typeView);
-
-		ImageView typeImageView = new ImageView(view.getContext());
-		LinearLayout.LayoutParams typeImageParams = new LinearLayout.LayoutParams(dpToPx(16), dpToPx(16));
-		typeImageParams.setMargins(dpToPx(4), 0, dpToPx(4), 0);
-		typeImageView.setLayoutParams(typeImageParams);
-		int drawableResId = route.type == null ? R.drawable.ic_action_polygom_dark : route.type.getResourceId();
-		typeImageView.setImageDrawable(getRowIcon(drawableResId));
-		typeView.addView(typeImageView);
-
-		TextView typeTextView = new TextView(view.getContext());
-		LinearLayout.LayoutParams typeTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		typeTextView.setLayoutParams(typeTextParams);
-		typeTextView.setText(route.getTypeStrRes());
-		typeView.addView(typeTextView);
-
-		baseView.setOnClickListener(listener);
-
-		((ViewGroup) view).addView(baseView);
-
-		return baseView;
-	}
-
-	private void buildTransportRouteRow(ViewGroup parent, TransportStopRoute r, OnClickListener listener, boolean showDivider) {
-		buildTransportRowItem(parent, r, listener);
-
-		if (showDivider) {
-			buildRowDivider(parent, false);
+	private void buildTransportRouteRow(ViewGroup parent, TransportStopRoute r, OnClickListener listener) {
+		if (!isFirstRow()) {
+			buildRowDivider(parent);
 		}
 	}
 

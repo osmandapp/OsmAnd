@@ -44,23 +44,23 @@ public class WptPtMenuBuilder extends MenuBuilder {
 			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
 			Date date = new Date(wpt.time);
 			buildRow(view, R.drawable.ic_action_data,
-					dateFormat.format(date) + " — " + timeFormat.format(date), 0, false, null, false, 0, false, null);
+					dateFormat.format(date) + " — " + timeFormat.format(date), 0, false, null, false, 0, false, null, false);
 		}
 		if (wpt.speed > 0) {
 			buildRow(view, R.drawable.ic_action_speed,
-					OsmAndFormatter.getFormattedSpeed((float)wpt.speed, app), 0, false, null, false, 0, false, null);
+					OsmAndFormatter.getFormattedSpeed((float)wpt.speed, app), 0, false, null, false, 0, false, null, false);
 		}
 		if (!Double.isNaN(wpt.ele)) {
 			buildRow(view, R.drawable.ic_action_altitude,
-					OsmAndFormatter.getFormattedDistance((float) wpt.ele, app), 0, false, null, false, 0, false, null);
+					OsmAndFormatter.getFormattedDistance((float) wpt.ele, app), 0, false, null, false, 0, false, null, false);
 		}
 		if (!Double.isNaN(wpt.hdop)) {
 			buildRow(view, R.drawable.ic_action_gps_info,
 					Algorithms.capitalizeFirstLetterAndLowercase(app.getString(R.string.plugin_distance_point_hdop)) + ": " + (int)wpt.hdop, 0,
-					false, null, false, 0, false, null);
+					false, null, false, 0, false, null, false);
 		}
 		if (!Algorithms.isEmpty(wpt.desc)) {
-			final View row = buildRow(view, R.drawable.ic_action_note_dark, wpt.desc, 0, false, null, true, 10, false, null);
+			final View row = buildRow(view, R.drawable.ic_action_note_dark, wpt.desc, 0, false, null, true, 10, false, null, false);
 			row.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -71,7 +71,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		}
 		if (!Algorithms.isEmpty(wpt.comment)) {
 			final View rowc = buildRow(view, R.drawable.ic_action_note_dark, wpt.comment, 0,
-					false, null, true, 10, false, null);
+					false, null, true, 10, false, null, false);
 			rowc.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -98,7 +98,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 				int color = getPointColor(wpt, getFileColor(selectedGpxFile));
 				buildRow(view, app.getIconsCache().getPaintedIcon(R.drawable.ic_type_waypoints_group, color), title, 0, gpxName,
 						true, getCollapsableWaypointsView(view.getContext(), true, gpx, wpt),
-						false, 0, false, null);
+						false, 0, false, null, false);
 			}
 		}
 	}

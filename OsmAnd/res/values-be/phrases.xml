@@ -3698,4 +3698,6 @@
 	<string name="poi_payment_centre">Плацёжны цэнтр</string>
 	<string name="poi_money_transfer">Грашовы перавод</string>
 
-</resources>
+<string name="poi_route_subway_ref">Метро</string>
+
+	</resources>

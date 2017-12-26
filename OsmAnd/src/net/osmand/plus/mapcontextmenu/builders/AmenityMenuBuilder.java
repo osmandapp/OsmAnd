@@ -63,18 +63,18 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	private void buildRow(View view, int iconId, String text, String textPrefix,
 						  boolean collapsable, final CollapsableView collapsableView,
 						  int textColor, boolean isWiki, boolean isText, boolean needLinks,
-						  boolean isPhoneNumber, boolean isUrl) {
+						  boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider) {
 		buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textPrefix, collapsable, collapsableView, textColor,
-				isWiki, isText, needLinks, isPhoneNumber, isUrl);
+				isWiki, isText, needLinks, isPhoneNumber, isUrl, matchWidthDivider);
 	}
 
 	protected void buildRow(final View view, Drawable icon, final String text, final String textPrefix,
 							boolean collapsable, final CollapsableView collapsableView,
 							int textColor, boolean isWiki, boolean isText, boolean needLinks,
-							boolean isPhoneNumber, boolean isUrl) {
+							boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider) {
 
 		if (!isFirstRow()) {
-			buildRowDivider(view, false);
+			buildRowDivider(view);
 		}
 
 		final String txt;
@@ -244,8 +244,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			button.setCompoundDrawablesWithIntrinsicBounds(compoundDrawable, null, null, null);
 			button.setCompoundDrawablePadding(dpToPx(8f));
 			llText.addView(button);
-
-			matchWidthDivider = true;
 		}
 
 		((LinearLayout) view).addView(baseView);
@@ -300,6 +298,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 
 		rowBuilt();
+
+		setDividerWidth(matchWidthDivider);
 	}
 
 	@Override
@@ -449,15 +449,16 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				isUrl = true;
 			}
 
+			boolean matchWidthDivider = !isDescription && isWiki;
 			if (isDescription) {
 				descriptions.add(new AmenityInfoRow(key, R.drawable.ic_action_note_dark, textPrefix,
-						vl, collapsable, collapsableView, 0, false, true, true, 0, "", false, false));
+						vl, collapsable, collapsableView, 0, false, true, true, 0, "", false, false, matchWidthDivider));
 			} else if (icon != null) {
 				infoRows.add(new AmenityInfoRow(key, icon, textPrefix, vl, collapsable, collapsableView,
-						textColor, isWiki, isText, needLinks, poiTypeOrder, poiTypeKeyName, isPhoneNumber, isUrl));
+						textColor, isWiki, isText, needLinks, poiTypeOrder, poiTypeKeyName, isPhoneNumber, isUrl, matchWidthDivider));
 			} else {
 				infoRows.add(new AmenityInfoRow(key, iconId, textPrefix, vl, collapsable, collapsableView,
-						textColor, isWiki, isText, needLinks, poiTypeOrder, poiTypeKeyName, isPhoneNumber, isUrl));
+						textColor, isWiki, isText, needLinks, poiTypeOrder, poiTypeKeyName, isPhoneNumber, isUrl, matchWidthDivider));
 			}
 		}
 
@@ -500,7 +501,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			AmenityInfoRow wikiInfo = new AmenityInfoRow(
 					"nearest_wiki", R.drawable.ic_action_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size() + ")", true,
 					getCollapsableWikiView(view.getContext(), true),
-					0, false, false, false, 1000, null, false, false);
+					0, false, false, false, 1000, null, false, false, false);
 			buildAmenityRow(view, wikiInfo);
 		}
 
@@ -517,11 +518,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				link = "https://www.openstreetmap.org/way/";
 			}
 			buildRow(view, R.drawable.ic_action_info_dark, link + (amenity.getId() >> 1),
-					0, false, null, true, 0, true, null);
+					0, false, null, true, 0, true, null, false);
 		}
 		buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationName(app,
 				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true)
-				.replaceAll("\n", " "), 0, false, null, false, 0, false, null);
+				.replaceAll("\n", " "), 0, false, null, false, 0, false, null, false);
 		//if (st.COORDINATES_FORMAT.get() != PointDescription.OLC_FORMAT)
 		//	buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationOlcName(
 		//			amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude())
@@ -532,10 +533,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
 		if (info.icon != null) {
 			buildRow(view, info.icon, info.text, info.textPrefix, info.collapsable, info.collapsableView,
-					info.textColor, info.isWiki, info.isText, info.needLinks, info.isPhoneNumber, info.isUrl);
+					info.textColor, info.isWiki, info.isText, info.needLinks, info.isPhoneNumber, info.isUrl, info.matchWidthDivider);
 		} else {
 			buildRow(view, info.iconId, info.text, info.textPrefix, info.collapsable, info.collapsableView,
-					info.textColor, info.isWiki, info.isText, info.needLinks, info.isPhoneNumber, info.isUrl);
+					info.textColor, info.isWiki, info.isText, info.needLinks, info.isPhoneNumber, info.isUrl, info.matchWidthDivider);
 		}
 	}
 
@@ -570,11 +571,12 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		private boolean isUrl;
 		private int order;
 		private String name;
+		private boolean matchWidthDivider;
 
 		public AmenityInfoRow(String key, Drawable icon, String textPrefix, String text,
 							  boolean collapsable, CollapsableView collapsableView,
 							  int textColor, boolean isWiki, boolean isText, boolean needLinks,
-							  int order, String name, boolean isPhoneNumber, boolean isUrl) {
+							  int order, String name, boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider) {
 			this.key = key;
 			this.icon = icon;
 			this.textPrefix = textPrefix;
@@ -589,12 +591,13 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			this.name = name;
 			this.isPhoneNumber = isPhoneNumber;
 			this.isUrl = isUrl;
+			this.matchWidthDivider = matchWidthDivider;
 		}
 
 		public AmenityInfoRow(String key, int iconId, String textPrefix, String text,
 							  boolean collapsable, CollapsableView collapsableView,
 							  int textColor, boolean isWiki, boolean isText, boolean needLinks,
-							  int order, String name, boolean isPhoneNumber, boolean isUrl) {
+							  int order, String name, boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider) {
 			this.key = key;
 			this.iconId = iconId;
 			this.textPrefix = textPrefix;
@@ -609,6 +612,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			this.name = name;
 			this.isPhoneNumber = isPhoneNumber;
 			this.isUrl = isUrl;
+			this.matchWidthDivider = matchWidthDivider;
 		}
 	}
 }

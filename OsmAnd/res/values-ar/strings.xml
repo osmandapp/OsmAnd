@@ -2848,7 +2848,7 @@
     <string name="shared_string_deleted">حُذف</string>
     <string name="shared_string_edited">تم تعديله</string>
     <string name="shared_string_added">تمت إضافة</string>
-    <string name="modify_the_search_query">تغيير طلب البحث.</string>
+    <string name="modify_the_search_query">تغيير البحث.</string>
     <string name="marker_activated">%s علامة مفعلة.</string>
     <string name="one_tap_active_descr">اضغط علامة على الخريطة لتحريكها الى أعلى العلامات المفعلة دون فتح قائمة السياق.</string>
     <string name="empty_state_av_notes">تدوين ملاحظات!</string>

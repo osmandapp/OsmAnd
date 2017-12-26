@@ -43,7 +43,7 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
 			Date date = new Date(recording.getFile().lastModified());
 			buildRow(view, R.drawable.ic_action_data, dateFormat.format(date) + " — " + timeFormat.format(date),
-					0, false, null, false, 0, false, null);
+					0, false, null, false, 0, false, null, false);
 
 			buildPlainMenuItems(view);
 

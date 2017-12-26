@@ -228,7 +228,7 @@
     <string name="shared_string_on">開啟</string>
     <string name="shared_string_off">關閉</string>
     <string name="accessibility_default">配合整體的系統設定</string>
-    <string name="backToMenu">回主選單</string>
+    <string name="backToMenu">回到選單</string>
     <string name="zoomOut">縮小</string>
     <string name="zoomIn">放大</string>
     <string name="zoomIs">縮放程度為</string>
@@ -2921,7 +2921,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="import_as_gpx">匯入為 GPX 檔案</string>
     <string name="import_as_favorites">匯入為我的收藏</string>
     <string name="import_file">匯入檔案</string>
-	<string name="tap_on_map_to_hide_interface_descr">在地圖上輕點以隱藏控制按鈕和小工具。</string>
+	<string name="tap_on_map_to_hide_interface_descr">在地圖上輕點以切換控制按鈕和小工具。</string>
     <string name="tap_on_map_to_hide_interface">全螢幕模式</string>
     <string name="show_on_top_bar">在頂列上顯示</string>
     <string name="mark_passed">已經過標記</string>
@@ -2976,4 +2976,24 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 \n• 地形（上坡）察覺登山健行時間（尼史密夫定律）
 \n
 \n</string>
+    <string name="av_locations_selected_desc">包括座標和所選註解資料的 GPX 檔案。</string>
+    <string name="av_locations_all_desc">包括座標和所有註解資料的 GPX 檔案。</string>
+	<string name="osm_recipient_stat">編輯 %1$s，合計 %2$s mBTC</string>
+    <string name="osm_recipients_label">OSM 收件人</string>
+    <string name="total_donations">捐款總計</string>
+<string name="parked_at">停在</string>
+    <string name="without_time_limit">沒有時間限制</string>
+    <string name="context_menu_read_full_article">閱讀全文</string>
+    <string name="context_menu_read_article">閱讀文章</string>
+    <string name="context_menu_points_of_group">群組的全部標點</string>
+    <string name="opened_from">已開啟自</string>
+    <string name="opened_till">已開啟直到</string>
+    <string name="will_be_closed_at">將關閉于</string>
+    <string name="will_be_opened_at">將開啟于</string>
+    <string name="what_is_here">這裡的內容：</string>
+    <string name="pick_up_till">取得直到</string>
+    <string name="will_be_opened_on">將被開啟</string>
+    <string name="additional_actions">輔助的操作</string>
+    <string name="shared_string_actions">操作</string>
+    <string name="shared_string_marker">標記</string>
     </resources>

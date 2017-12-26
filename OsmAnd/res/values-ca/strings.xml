@@ -2690,7 +2690,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="import_as_gpx">Importa com un arxiu GPX</string>
     <string name="import_as_favorites">Importa com punts Preferits</string>
     <string name="import_file">Importa fitxer</string>
-	<string name="tap_on_map_to_hide_interface_descr">Prement en el mapa s\'oculten els botons de control i els ginys.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Prement el mapa canvien els botons de control i els ginys.</string>
     <string name="tap_on_map_to_hide_interface">Mode de pantalla completa</string>
     <string name="show_on_top_bar">Mostra a la barra superior</string>
     <string name="mark_passed">Marca com passat</string>
@@ -2745,4 +2745,24 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="one_tap_active">S\'activa amb un toc</string>
-    </resources>
+    <string name="what_is_here">El que hi ha aquí:</string>
+    <string name="parked_at">aparcat a</string>
+    <string name="pick_up_till">Treure abans de</string>
+    <string name="without_time_limit">Sense límit de temps</string>
+    <string name="context_menu_read_full_article">Llegiu l\'article complet</string>
+    <string name="context_menu_read_article">Llegiu l\'article</string>
+    <string name="context_menu_points_of_group">Tots els punts del grup</string>
+    <string name="opened_from">Obert des de</string>
+    <string name="opened_till">Obert fins a</string>
+    <string name="will_be_closed_at">Es tancarà a</string>
+    <string name="will_be_opened_at">S\'obrirà a</string>
+    <string name="will_be_opened_on">S\'obrirà el</string>
+    <string name="additional_actions">Accions addicionals</string>
+    <string name="av_locations_selected_desc">Arxiu GPX amb coordenades i dades de les notes seleccionades.</string>
+    <string name="av_locations_all_desc">Fitxer GPX amb coordenades i dades de totes les notes.</string>
+    <string name="shared_string_actions">Accions</string>
+    <string name="shared_string_marker">Marcador</string>
+    <string name="osm_recipient_stat">%1$s edicions, %2$s mBTC en total</string>
+    <string name="osm_recipients_label">Receptors OSM</string>
+    <string name="total_donations">Total de donacions</string>
+</resources>

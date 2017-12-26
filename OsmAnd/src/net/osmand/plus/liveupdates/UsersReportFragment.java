@@ -122,6 +122,7 @@ public class UsersReportFragment extends BaseOsmAndDialogFragment {
 			text2.setTextColor(textSecondaryColor);
 			text1.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
 			text1.setCompoundDrawablePadding(getResources().getDimensionPixelSize(R.dimen.list_content_padding));
+			text2.setPadding(text1.getTotalPaddingLeft(), text1.getTotalPaddingTop(), text1.getTotalPaddingRight(), text1.getTotalPaddingBottom());
 			Object item = getItem(position);
 			if (item instanceof UserRankingByMonth) {
 				UserRankingByMonth rankingByMonth = (UserRankingByMonth) item;

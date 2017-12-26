@@ -36,14 +36,16 @@ public class TransportStopController extends MenuController {
 								   PointDescription pointDescription, TransportStop transportStop) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.transportStop = transportStop;
-		processTransportStop(builder);
+		routes = processTransportStop();
+		builder.setRoutes(routes);
 	}
 
 	@Override
 	protected void setObject(Object object) {
 		if (object instanceof TransportStop) {
 			this.transportStop = (TransportStop) object;
-			processTransportStop(builder);
+			routes = processTransportStop();
+			builder.setRoutes(routes);
 		}
 	}
 
@@ -81,8 +83,8 @@ public class TransportStopController extends MenuController {
 		return getPointDescription().getTypeName();
 	}
 
-	public void processTransportStop(MenuBuilder builder) {
-		routes.clear();
+	public List<TransportStopRoute> processTransportStop() {
+		ArrayList<TransportStopRoute> routes = new ArrayList<>();
 		List<TransportIndexRepository> reps = getMapActivity().getMyApplication()
 				.getResourceManager().searchTransportRepositories(transportStop.getLocation().getLatitude(),
 						transportStop.getLocation().getLongitude());
@@ -93,14 +95,14 @@ public class TransportStopController extends MenuController {
 			if (t.acceptTransportStop(transportStop)) {
 				boolean empty = transportStop.getReferencesToRoutes() == null || transportStop.getReferencesToRoutes().length == 0;
 				if(!empty) {
-					addRoutes(useEnglishNames, t, transportStop, transportStop, 0);
+					addRoutes(routes, useEnglishNames, t, transportStop, transportStop, 0);
 				}
 				ArrayList<TransportStop> ls = new ArrayList<>();
 				QuadRect ll = MapUtils.calculateLatLonBbox(transportStop.getLocation().getLatitude(), transportStop.getLocation().getLongitude(), 150);
 				t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
 				for(TransportStop tstop : ls) {
 					if(tstop.getId().longValue() != transportStop.getId().longValue() || empty) {
-						addRoutes(useEnglishNames, t, tstop, transportStop,  
+						addRoutes(routes, useEnglishNames, t, tstop, transportStop,
 								(int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
 					}
 				}
@@ -122,10 +124,10 @@ public class TransportStopController extends MenuController {
 			}
 		});
 
-		builder.setRoutes(routes);
+		return routes;
 	}
 
-	private void addRoutes(boolean useEnglishNames, TransportIndexRepository t, TransportStop s, TransportStop refStop, int dist) {
+	private void addRoutes(List<TransportStopRoute> routes, boolean useEnglishNames, TransportIndexRepository t, TransportStop s, TransportStop refStop, int dist) {
 		Collection<TransportRoute> rts = t.getRouteForStop(s);
 		if (rts != null) {
 			for (TransportRoute rs : rts) {
@@ -133,7 +135,7 @@ public class TransportStopController extends MenuController {
 				if (topType == null && type != null && type.isTopType()) {
 					topType = type;
 				}
-				if (!containsRef(rs)) {
+				if (!containsRef(routes, rs)) {
 					TransportStopRoute r = new TransportStopRoute();
 					r.type = type;
 					r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
@@ -141,13 +143,13 @@ public class TransportStopController extends MenuController {
 					r.refStop = refStop;
 					r.stop = s;
 					r.distance = dist;
-					this.routes.add(r);
+					routes.add(r);
 				}
 			}
 		}
 	}
 
-	private boolean containsRef(TransportRoute transportRoute) {
+	private boolean containsRef(List<TransportStopRoute> routes, TransportRoute transportRoute) {
 		for (TransportStopRoute route : routes) {
 			if (route.route.getRef().equals(transportRoute.getRef())) {
 				return true;

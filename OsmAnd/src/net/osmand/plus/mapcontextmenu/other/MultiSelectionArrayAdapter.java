@@ -33,13 +33,13 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 	@NonNull
 	@Override
 	public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-		View v = convertView;
-		if (v == null) {
-			v = menu.getMapActivity().getLayoutInflater().inflate(R.layout.menu_obj_list_item, parent, false);
+		if (convertView == null) {
+			convertView = menu.getMapActivity().getLayoutInflater().inflate(R.layout.menu_obj_list_item, parent, false);
 		}
 		final MapMultiSelectionMenu.MenuObject item = getItem(position);
 		if (item != null) {
-			v.setOnClickListener(new View.OnClickListener() {
+			AndroidUtils.setBackground(menu.getMapActivity(), convertView, !menu.isLight(), R.drawable.expandable_list_item_background_light, R.drawable.expandable_list_item_background_dark);
+			convertView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					if (listener != null) {
@@ -48,8 +48,8 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 				}
 			});
 			IconsCache iconsCache = menu.getMapActivity().getMyApplication().getIconsCache();
-			final View iconLayout = v.findViewById(R.id.context_menu_icon_layout);
-			final ImageView iconView = (ImageView) v.findViewById(R.id.context_menu_icon_view);
+			final View iconLayout = convertView.findViewById(R.id.context_menu_icon_layout);
+			final ImageView iconView = (ImageView) convertView.findViewById(R.id.context_menu_icon_view);
 			Drawable icon = item.getLeftIcon();
 			int iconId = item.getLeftIconId();
 			if (icon != null) {
@@ -64,13 +64,13 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			}
 
 			// Text line 1
-			TextView line1 = (TextView) v.findViewById(R.id.context_menu_line1);
-			((TextView) v.findViewById(R.id.context_menu_line1)).setTextColor(ContextCompat.getColor(getContext(),
+			TextView line1 = (TextView) convertView.findViewById(R.id.context_menu_line1);
+			((TextView) convertView.findViewById(R.id.context_menu_line1)).setTextColor(ContextCompat.getColor(getContext(),
 					!menu.isLight() ? R.color.ctx_menu_title_color_dark : R.color.ctx_menu_title_color_light));
 			line1.setText(item.getTitleStr());
 
 			// Text line 2
-			TextView line2 = (TextView) v.findViewById(R.id.context_menu_line2);
+			TextView line2 = (TextView) convertView.findViewById(R.id.context_menu_line2);
 			((TextView) line2).setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_subtitle_color));
 			line2.setText(item.getTypeStr());
 			Drawable slIcon = item.getTypeIcon();
@@ -78,11 +78,11 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(menu.getMapActivity(), 5f));
 
 			// Divider
-			View divider = v.findViewById(R.id.divider);
+			View divider = convertView.findViewById(R.id.divider);
 			divider.setVisibility(position != getCount() - 1 ? View.VISIBLE : View.GONE);
 		}
 
-		return v;
+		return convertView;
 	}
 
 	public interface OnClickListener {

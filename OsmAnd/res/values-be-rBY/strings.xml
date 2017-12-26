@@ -961,7 +961,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="shared_string_on">Uklučyć</string>
 	<string name="shared_string_off">Vyklučyć</string>
 	<string name="accessibility_default">Pavodle hlabalnych naładaŭ systemy</string>
-	<string name="backToMenu">Nazad da meniu</string>
+	<string name="backToMenu">Nazad da mieniu</string>
 	<string name="zoomOut">Addalić</string>
 	<string name="zoomIn">Nablizіć</string>
 	<string name="zoomIs">Maštab</string>
@@ -2888,7 +2888,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="import_as_gpx">Impartavać jak GPX-fajł</string>
     <string name="import_as_favorites">Impartavać jak Ulubionyja</string>
     <string name="import_file">Impartavać fajł</string>
-	<string name="tap_on_map_to_hide_interface_descr">Dotyk na mapie chavaje knopki kiravańnia i vidžety.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Dotyk na mapie pierakliučaje knopki kiravańnia i vidžety.</string>
     <string name="tap_on_map_to_hide_interface">Poŭnyekranny režym</string>
     <string name="show_on_top_bar">Pakazać na vierchniaj paneli</string>
     <string name="mark_passed">Adznačyć prajdzienyja</string>
@@ -2943,4 +2943,24 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
 \n • Čas chadźby ŭ zaliežnasci ad miascovasci (padjomu) (pravila Niejsmita)
 \n
 \n</string>
-    </resources>
+    <string name="what_is_here">Što tut:</string>
+    <string name="parked_at">praparkavany na</string>
+    <string name="pick_up_till">Uziać da</string>
+    <string name="without_time_limit">Biez abmiežavannia času</string>
+    <string name="context_menu_read_full_article">Čytać uvieś artykul</string>
+    <string name="context_menu_read_article">Čytać artykul</string>
+    <string name="context_menu_points_of_group">Usie kropki hrupy</string>
+    <string name="opened_from">Adčyniena ad</string>
+    <string name="opened_till">Adčyniena da</string>
+    <string name="will_be_closed_at">Budzie začyniena a</string>
+    <string name="will_be_opened_at">Budzie adčyniena a</string>
+    <string name="will_be_opened_on">Budzie adčyniena</string>
+    <string name="additional_actions">Dadatkovyja dziejanni</string>
+    <string name="av_locations_selected_desc">GPX-fajl z kaardynatami i danymi vybranych natatak.</string>
+    <string name="av_locations_all_desc">GPX-fajl z kaardynatami i danymi ŭsich natatak.</string>
+    <string name="shared_string_actions">Dziejanni</string>
+    <string name="shared_string_marker">Markier</string>
+    <string name="osm_recipient_stat">Zmien %1$s, suma %2$s mBTC</string>
+    <string name="osm_recipients_label">OSM-atrymaĺniki</string>
+    <string name="total_donations">Usiaho achviaravanniaŭ</string>
+</resources>

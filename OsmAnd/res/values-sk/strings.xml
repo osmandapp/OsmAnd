@@ -2989,4 +2989,24 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 \n • Čas pešej trasy zohľadňuje terén/stúpanie (Naismithovo pravidlo)
 \n
 \n</string>
-    </resources>
+    <string name="what_is_here">Čo je tu:</string>
+    <string name="parked_at">zaparkované o</string>
+    <string name="pick_up_till">Vyzdvihnúť do</string>
+    <string name="without_time_limit">Bez časového obmedzenia</string>
+    <string name="context_menu_read_full_article">Prečítať celý článok</string>
+    <string name="context_menu_read_article">Prečítať článok</string>
+    <string name="context_menu_points_of_group">Všetky body skupiny</string>
+    <string name="opened_from">Otvorené od</string>
+    <string name="opened_till">Otvorené do</string>
+    <string name="will_be_closed_at">Bude zatvorené o</string>
+    <string name="will_be_opened_at">Bude otvorené o</string>
+    <string name="will_be_opened_on">Bude otvorené v</string>
+    <string name="additional_actions">Ďalšie akcie</string>
+    <string name="av_locations_selected_desc">Súbor GPX so súradnicami a údajmi vybraných poznámok.</string>
+    <string name="av_locations_all_desc">Súbor GPX so súradnicami a údajmi všetkých poznámok.</string>
+    <string name="shared_string_actions">Akcie</string>
+    <string name="shared_string_marker">Značka</string>
+    <string name="osm_recipient_stat">Počet úprav %1$s, suma %2$s mBTC</string>
+    <string name="osm_recipients_label">Prijímatelia OSM</string>
+    <string name="total_donations">Celkové príspevky</string>
+</resources>

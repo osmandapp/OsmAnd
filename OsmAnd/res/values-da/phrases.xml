@@ -3743,4 +3743,6 @@
 <string name="poi_payment_centre">Betalingscenter</string>
 	<string name="poi_money_transfer">Pengeoverførsel</string>
 
-</resources>
+<string name="poi_route_subway_ref">Metro</string>
+
+	</resources>

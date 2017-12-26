@@ -471,8 +471,8 @@
 	<string name="level_to_switch_vector_raster">Min. Vektor-Zoomstufe</string>
 	
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Klassifizierung mit Bildern.</string>
-	<string name="error_doing_search">Fehler in der Offline-Suche aufgetreten</string>
-	<string name="search_offline_geo_error">Konnte geointent nicht verarbeiten: \'%s\'</string>
+	<string name="error_doing_search">Fehler in der Offline-Suche aufgetreten.</string>
+	<string name="search_offline_geo_error">Konnte geo intent nicht verarbeiten: \'%s\'.</string>
 	<string name="search_osm_offline">Adresssuche mit Offline-Daten</string>
 	<string name="system_locale">Systemeinstellung</string>
 	<string name="preferred_locale_descr">Anzeigesprache wählen (App nach Änderungen neu starten).</string>
@@ -1276,7 +1276,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="use_displayed_track_for_navigation">Möchten Sie die angezeigte Strecke zur Navigation verwenden?</string>
 	<string name="keep_and_add_destination_point">Als letztes Ziel hinzufügen</string>
 	<string name="select_gpx">GPX-Datei auswählen…</string>
-	<string name="route_descr_select_destination">Ziel auswählen.</string>
+	<string name="route_descr_select_destination">Ziel auswählen</string>
 	<string name="interrupt_music_descr">Sprachansagen pausieren (nicht nur dämpfen) Musikwiedergabe.</string>
 	<string name="always_center_position_on_map">Standort immer in Bildschirmmitte anzeigen</string>
 	<string name="voice_pref_title">Stimme</string>
@@ -1300,7 +1300,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="shared_string_my_favorites">Meine Favoriten</string>
 	<string name="shared_string_my_places">Meine Orte</string>
 	<string name="loading_smth">%1$s wird geladen …</string>
-	<string name="map_widget_plain_time">Uhrzeit</string>
+	<string name="map_widget_plain_time">Aktuelle Zeit</string>
 	<string name="selected_gpx_info_show">"
 \n
 \nZur Darstellung auf der Karte lange drücken"</string>
@@ -2655,7 +2655,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_add_destination">Ziel hinzufügen</string>
     <string name="quick_action_replace_destination">Ziel ersetzen</string>
     <string name="quick_action_add_first_intermediate">Ersten Zwischenstopp hinzufügen</string>
-    <string name="quick_action_add_destination_desc">Drücken der Aktionstaste fügt die zum Bildschirmmittelpunkt gehörende Position als Ziel hinzu. Ursprüngliches Ziel wird zum letzten Zwischenstopp.</string>
+    <string name="quick_action_add_destination_desc">Drücken der Aktionstaste fügt die zum Bildschirmmittelpunkt gehörende Position als Ziel hinzu. Das zuvor eingestellte Ziel wird zum letzten Zwischenziel.</string>
     <string name="quick_action_replace_destination_desc">Drücken der Aktionstaste ersetzt das Ziel durch die dem Bildschirmmittelpunkt entsprechende Position.</string>
     <string name="quick_action_add_first_intermediate_desc">Drücken der Aktionstaste fügt die zum Bildschirmmittelpunkt gehörende Position als ersten Zwischenstopp ein.</string>
     <string name="subscribe_email_error">Fehler</string>
@@ -2896,7 +2896,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="looking_for_tracks_with_waypoints">Suche nach Spuren mit Wegpunkten</string>
     <string name="shared_string_more_without_dots">Mehr</string>
     <string name="appearance_on_the_map">Darstellung auf der Karte</string>
-    <string name="favourites_group">Favoriten Kategorie</string>
+    <string name="favourites_group">Favoritenkategorie</string>
     <string name="add_group">Gruppe hinzufügen</string>
     <string name="empty_state_markers_active">Kartenmarkierungen erstellen!</string>
     <string name="empty_state_markers_groups">Gruppen importieren</string>
@@ -2909,7 +2909,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="go_to_next_field">Zum nächsten Feld gehen</string>
     <string name="rename_marker">Markierung umbenennen</string>
     <string name="mark_passed">Markierung passiert</string>
-    <string name="track_waypoints">Track-Wegpunkte</string>
+    <string name="track_waypoints">Spuren-Wegpunkte</string>
     <string name="modify_the_search_query">Suchanfrage verändern.</string>
     <string name="empty_state_osm_edits">Erstellen oder ändern von OSM-Objekten</string>
     <string name="empty_state_osm_edits_descr">OSM-POI erstellen oder verändern, OSM-Notizen eröffnen oder bearbeiten, und aufgezeichnete GPX-Dateien hinzufügen.</string>
@@ -2924,7 +2924,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="import_gpx_file_description">kann als Favoriten-Punkte oder als Track-Datei importiert werden.</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Widget oder Kontextmenü hinzufügen.</string>
     <string name="notes_by_date">Notizen nach Datum</string>
-    <string name="tap_on_map_to_hide_interface_descr">Berührung der Karte verbirgt Steuerungselementen und Widgets.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuerschaltflächen und Bedienelemente um.</string>
     <string name="release_3_0">• Erkennung von Stoppschildern jetzt nach Fahrtrichtung
 \n
 \n• Neuer Algorithmus für die Bereitstellung von sinnvollen Auf-/Abstieg-Werten für GPX-tracks
@@ -2933,4 +2933,33 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="one_tap_active">Aktiviren mit einem Tap</string>
-    </resources>
+    <string name="what_is_here">Was ist hier:</string>
+    <string name="without_time_limit">Ohne Zeitbegrenzung</string>
+    <string name="context_menu_read_full_article">Ganzen Artikel lesen</string>
+    <string name="context_menu_read_article">Artikel lesen</string>
+    <string name="context_menu_points_of_group">Alle Punkte der Gruppe</string>
+    <string name="opened_from">Geöffnet ab</string>
+    <string name="opened_till">Geöffnet bis</string>
+    <string name="will_be_closed_at">Schließt um</string>
+    <string name="will_be_opened_at">Öffnet um</string>
+    <string name="will_be_opened_on">Öffnet am</string>
+    <string name="additional_actions">Zusätzliche Aktionen</string>
+    <string name="parked_at">geparkt um</string>
+    <string name="pick_up_till">Abholung bis</string>
+    <string name="av_locations_selected_desc">GPX-Datei mit Koordinaten und Daten der ausgewählten Notizen.</string>
+    <string name="av_locations_all_desc">GPX-Datei mit Koordinaten und Daten aller Notizen.</string>
+    <string name="shared_string_actions">Aktionen</string>
+    <string name="shared_string_marker">Markierung</string>
+    <string name="add_track_to_markers_descr">Wählen Sie eine Spur aus, um ihre Wegpunkte zu den Markierungen hinzuzufügen. (Nur Spuren mit Wegpunkten werden aufgelistet.)</string>
+    <string name="add_favourites_group_to_markers_descr">Wählen Sie eine Favoritenkategorie aus, die Sie den Markierungen hinzufügen möchten.</string>
+    <string name="add_group_descr">Sie können Gruppen aus Favoriten oder Spuren-Wegpunkten importieren.</string>
+    <string name="empty_state_markers_active_desc">Tippen Sie Orte lang oder kurz an, tippen Sie anschließend auf die Markierungsfahnenschaltfläche.</string>
+    <string name="empty_state_markers_groups_desc">Sie können Favoritengruppen oder Spuren-Wegpunkte als Markierungen importieren.</string>
+    <string name="show_guide_line_descr">Hilfslinien von Ihrem Standort bis zu den aktiven Markierungspunkten anzeigen.</string>
+    <string name="show_arrows_descr">Ein oder zwei Pfeile anzeigen, die die Richtung zu den aktiven Markierungen angeben.</string>
+    <string name="distance_indication_descr">Wählen Sie aus, wie der Abstand zu aktiven Markierungen angezeigt werden soll.</string>
+    <string name="active_markers_descr">Wählen Sie aus, wie viele Richtungsanzeiger angezeigt werden sollen.</string>
+    <string name="osm_recipient_stat">%1$s bearbeitet, Summe %2$s mBTC</string>
+    <string name="osm_recipients_label">OSM-Empfänger</string>
+    <string name="total_donations">Spenden insgesamt</string>
+</resources>

@@ -47,12 +47,7 @@ public class AppModeDialog {
 	public static View prepareAppModeView(Activity a, final List<ApplicationMode> values , final Set<ApplicationMode> selected, 
 				ViewGroup parent, final boolean singleSelection, boolean drawer, boolean useMapTheme, final View.OnClickListener onClickListener) {
 		View ll = a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
-		boolean nightMode;
-		if (useMapTheme) {
-			nightMode = ((OsmandApplication) a.getApplication()).getDaynightHelper().isNightModeForMapControls();
-		} else {
-			nightMode = !((OsmandApplication) a.getApplication()).getSettings().isLightContent();
-		}
+		boolean nightMode = isNightMode(((OsmandApplication) a.getApplication()), useMapTheme);
 		ll.setBackgroundColor(ContextCompat.getColor(a, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
 		final View[] buttons = new View[values.size()];
 		int k = 0;
@@ -75,12 +70,7 @@ public class AppModeDialog {
 			final ApplicationMode mode = visible.get(i);
 			final boolean checked = selected.contains(mode);
 			ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
-			boolean nightMode;
-			if (useMapTheme) {
-				nightMode = ctx.getDaynightHelper().isNightModeForMapControls();
-			} else {
-				nightMode = !ctx.getSettings().isLightContent();
-			}
+			boolean nightMode = isNightMode(ctx, useMapTheme);
 			if (checked) {
 				iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), nightMode ? R.color.route_info_checked_mode_icon_color_dark : R.color.route_info_checked_mode_icon_color_light));
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_checked)));
@@ -129,18 +119,22 @@ public class AppModeDialog {
 		int metricsY = (int) ctx.getResources().getDimension(R.dimen.route_info_modes_height);
 		View tb = layoutInflater.inflate(R.layout.mode_view, null);
 		ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
-		boolean nightMode;
-		if (useMapTheme) {
-			nightMode = ctx.getDaynightHelper().isNightModeForMapControls();
-		} else {
-			nightMode = !ctx.getSettings().isLightContent();
-		}
-		iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), nightMode ? R.color.route_info_checked_mode_icon_color_dark : R.color.route_info_checked_mode_icon_color_light));
+		iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), isNightMode(ctx, useMapTheme) ? R.color.route_info_checked_mode_icon_color_dark : R.color.route_info_checked_mode_icon_color_light));
 		iv.setContentDescription(mode.toHumanString(ctx));
 //		tb.setCompoundDrawablesWithIntrinsicBounds(null, ctx.getIconsCache().getIcon(mode.getIconId(), R.color.app_mode_icon_color), null, null);
 		LayoutParams lp = new LinearLayout.LayoutParams(metricsX, metricsY);
 //		lp.setMargins(left, 0, 0, 0);
 		layout.addView(tb, lp);
 		return tb;
+	}
+
+	private static boolean isNightMode(OsmandApplication ctx, boolean useMapTheme) {
+		boolean nightMode;
+		if (useMapTheme) {
+			nightMode = ctx.getDaynightHelper().isNightModeForMapControls();
+		} else {
+			nightMode = !ctx.getSettings().isLightContent();
+		}
+		return nightMode;
 	}
 }

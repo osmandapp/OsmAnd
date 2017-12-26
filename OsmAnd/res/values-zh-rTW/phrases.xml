@@ -3677,4 +3677,16 @@
 
 	<string name="poi_charging_station_filter">充電站</string>
 
+<string name="poi_route_subway_ref">捷運</string>
+
+	<string name="poi_depot">車站</string>
+
+	<string name="poi_letter_box">信箱</string>
+	<string name="poi_post_street">街</string>
+	<string name="poi_post_housenumber">門牌號碼</string>
+	<string name="poi_post_flats">平地</string>
+
+	<string name="poi_payment_centre">支付中心</string>
+	<string name="poi_money_transfer">匯款</string>
+
 </resources>
