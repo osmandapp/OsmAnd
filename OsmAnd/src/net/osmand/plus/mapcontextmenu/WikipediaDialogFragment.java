@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.DialogFragment;
@@ -17,9 +19,7 @@ import android.support.v7.widget.PopupMenu;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,7 +32,6 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
@@ -189,9 +188,7 @@ public class WikipediaDialogFragment extends DialogFragment {
 				@Override
 				public void onClick(View view) {
 					String article = "https://" + langSelected.toLowerCase() + ".wikipedia.org/wiki/" + title.replace(' ', '_');
-					Intent i = new Intent(Intent.ACTION_VIEW);
-					i.setData(Uri.parse(article));
-					startActivity(i);
+					showFullArticle(Uri.parse(article));
 				}
 			});
 
@@ -211,6 +208,19 @@ public class WikipediaDialogFragment extends DialogFragment {
 			int length = spannableContent.length();
 			spannableContent.setSpan(new RelativeSizeSpan(1.2f), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			articleTextView.setText(spannableContent);
+		}
+	}
+
+	private void showFullArticle(Uri uri) {
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+					.setToolbarColor(ContextCompat.getColor(getContext(), darkMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
+					.build();
+			customTabsIntent.launchUrl(getContext(), uri);
+		} else {
+			Intent i = new Intent(Intent.ACTION_VIEW);
+			i.setData(uri);
+			startActivity(i);
 		}
 	}
 
