@@ -234,8 +234,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		// Progress bar
 		final ImageView progressButton = (ImageView) view.findViewById(R.id.progressButton);
-		progressButton.setImageDrawable(getIcon(R.drawable.ic_action_remove_dark,
-				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+		progressButton.setImageDrawable(getIcon(R.drawable.ic_action_remove_dark, R.color.ctx_menu_buttons_icon_color));
 		progressButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -945,8 +944,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		OsmandApplication app = getMyApplication();
 		if (app != null && view != null) {
 			final ImageView buttonFavorite = (ImageView) view.findViewById(R.id.context_menu_fav_image_view);
-			buttonFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(),
-					!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+			buttonFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(), R.color.ctx_menu_buttons_icon_color));
 			String favActionString = getString(menu.getFavActionStringId());
 			buttonFavorite.setContentDescription(favActionString);
 			((TextView) view.findViewById(R.id.context_menu_fav_text_view)).setText(favActionString);
