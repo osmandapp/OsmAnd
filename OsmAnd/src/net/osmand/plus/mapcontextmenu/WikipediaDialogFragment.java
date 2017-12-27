@@ -63,7 +63,7 @@ public class WikipediaDialogFragment extends DialogFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		OsmandApplication app = getMyApplication();
-		darkMode = app.getDaynightHelper().isNightMode();
+		darkMode = app.getDaynightHelper().isNightMode() || !app.getSettings().isLightContent();
 		int themeId = darkMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
