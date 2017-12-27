@@ -21,7 +21,6 @@ import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.TransportIndexRepository;
 import net.osmand.plus.transport.TransportStopType;
-import net.osmand.plus.views.POIMapLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
@@ -109,11 +108,11 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
-	public int getLeftIconId() {
-		return getLeftIconId(amenity);
+	public int getRightIconId() {
+		return getRightIconId(amenity);
 	}
 
-	private static int getLeftIconId(Amenity amenity) {
+	private static int getRightIconId(Amenity amenity) {
 		String id = null;
 		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (st != null) {
@@ -221,7 +220,7 @@ public class AmenityMenuController extends MenuController {
 
 	public static void addPlainMenuItems(Amenity amenity, String typeStr, MenuBuilder builder) {
 		if (!Algorithms.isEmpty(typeStr)) {
-			int resId = getLeftIconId(amenity);
+			int resId = getRightIconId(amenity);
 			if (resId == 0) {
 				PoiCategory pc = amenity.getType();
 				resId = RenderingIcons.getBigIconResourceId(pc.getIconKeyName());

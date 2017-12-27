@@ -49,7 +49,7 @@ public class RenderedObjectMenuController extends MenuController {
 	}
 
 	@Override
-	public int getLeftIconId() {
+	public int getRightIconId() {
 		if (renderedObject.getIconRes() != null && RenderingIcons.containsBigIcon(renderedObject.getIconRes())) {
 			return RenderingIcons.getBigIconResourceId(renderedObject.getIconRes());
 		} else {

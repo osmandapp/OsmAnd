@@ -148,7 +148,7 @@ public class EditPOIMenuController extends MenuController {
 	}
 
 	@Override
-	public int getLeftIconId() {
+	public int getRightIconId() {
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
 			OpenstreetmapPoint osmP = (OpenstreetmapPoint) osmPoint;
 			int iconResId = 0;

@@ -851,8 +851,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		OsmandApplication app = getMyApplication();
 		if (app != null && view != null) {
 			final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
-			Drawable icon = menu.getLeftIcon();
-			int iconId = menu.getLeftIconId();
+			Drawable icon = menu.getRightIcon();
+			int iconId = menu.getRightIconId();
 			if (icon != null) {
 				iconView.setImageDrawable(icon);
 				iconView.setVisibility(View.VISIBLE);

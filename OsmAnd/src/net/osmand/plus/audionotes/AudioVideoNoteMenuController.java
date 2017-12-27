@@ -86,7 +86,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		if (mRecording.isPhoto()) {
 			return getIcon(R.drawable.ic_action_photo_dark, R.color.audio_video_icon_color);
 		} else if (mRecording.isAudio()) {

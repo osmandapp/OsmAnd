@@ -231,7 +231,7 @@ public class MapDataMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		int iconResId;
 		if (getDownloadActivityType() != null) {
 			iconResId = getDownloadActivityType().getIconResource();

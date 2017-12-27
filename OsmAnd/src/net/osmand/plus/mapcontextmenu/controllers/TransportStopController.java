@@ -58,7 +58,7 @@ public class TransportStopController extends MenuController {
 	}
 
 	@Override
-	public int getLeftIconId() {
+	public int getRightIconId() {
 		if (topType == null) {
 			return R.drawable.mx_public_transport;
 		} else {

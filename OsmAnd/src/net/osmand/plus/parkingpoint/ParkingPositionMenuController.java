@@ -89,7 +89,7 @@ public class ParkingPositionMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return getIcon(R.drawable.ic_action_parking_dark, R.color.map_widget_blue);
 	}
 

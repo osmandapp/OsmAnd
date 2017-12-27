@@ -504,7 +504,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		view.setLatLon(lat, lon);
 
 		mInChangeMarkerPositionMode = true;
-		mMoveMarkerBottomSheetHelper.show(menu.getLeftIcon());
+		mMoveMarkerBottomSheetHelper.show(menu.getRightIcon());
 		mark(View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 

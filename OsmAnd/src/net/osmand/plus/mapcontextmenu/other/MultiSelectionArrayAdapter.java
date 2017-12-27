@@ -49,8 +49,8 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			IconsCache iconsCache = menu.getMapActivity().getMyApplication().getIconsCache();
 			final View iconLayout = convertView.findViewById(R.id.context_menu_icon_layout);
 			final ImageView iconView = (ImageView) convertView.findViewById(R.id.context_menu_icon_view);
-			Drawable icon = item.getLeftIcon();
-			int iconId = item.getLeftIconId();
+			Drawable icon = item.getRightIcon();
+			int iconId = item.getRightIconId();
 			if (icon != null) {
 				iconView.setImageDrawable(icon);
 				iconLayout.setVisibility(View.VISIBLE);

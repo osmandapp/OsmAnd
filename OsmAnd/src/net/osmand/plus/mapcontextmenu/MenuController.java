@@ -386,11 +386,11 @@ public abstract class MenuController extends BaseMenuController {
 		return false;
 	}
 
-	public int getLeftIconId() {
+	public int getRightIconId() {
 		return 0;
 	}
 
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return null;
 	}
 

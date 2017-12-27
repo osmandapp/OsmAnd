@@ -11,8 +11,8 @@ import net.osmand.util.Algorithms;
 
 public abstract class MenuTitleController {
 
-	protected int leftIconId;
-	protected Drawable leftIcon;
+	protected int rightIconId;
+	protected Drawable rightIcon;
 	protected String nameStr = "";
 	protected String typeStr = "";
 	protected String commonTypeStr = "";
@@ -65,12 +65,12 @@ public abstract class MenuTitleController {
 		return !addressNotFoundStr.equals(title) && !searchAddressStr.equals(title);
 	}
 
-	public int getLeftIconId() {
-		return leftIconId;
+	public int getRightIconId() {
+		return rightIconId;
 	}
 
-	public Drawable getLeftIcon() {
-		return leftIcon;
+	public Drawable getRightIcon() {
+		return rightIcon;
 	}
 
 	public Drawable getTypeIcon() {
@@ -125,13 +125,13 @@ public abstract class MenuTitleController {
 	protected void acquireIcons() {
 		MenuController menuController = getMenuController();
 
-		leftIconId = 0;
-		leftIcon = null;
+		rightIconId = 0;
+		rightIcon = null;
 		secondLineTypeIcon = null;
 
 		if (menuController != null) {
-			leftIconId = menuController.getLeftIconId();
-			leftIcon = menuController.getLeftIcon();
+			rightIconId = menuController.getRightIconId();
+			rightIcon = menuController.getRightIcon();
 			secondLineTypeIcon = menuController.getSecondLineTypeIcon();
 		}
 	}

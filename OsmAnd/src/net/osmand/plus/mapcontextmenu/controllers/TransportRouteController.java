@@ -61,7 +61,7 @@ public class TransportRouteController extends MenuController {
 	}
 
 	@Override
-	public int getLeftIconId() {
+	public int getRightIconId() {
 		return this.transportRoute.type == null ?
 				R.drawable.mx_public_transport :
 				this.transportRoute.type.getTopResourceId();
