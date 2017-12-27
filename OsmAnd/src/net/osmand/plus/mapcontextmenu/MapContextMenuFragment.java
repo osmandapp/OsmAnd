@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -150,8 +151,21 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			mapZoom = map.getZoom();
 		}
 
+		ColorStateList buttonColorStateList = new ColorStateList(
+				new int[][]{
+						new int[]{android.R.attr.state_pressed},
+						new int[]{}
+				},
+				new int[] {
+						getResources().getColor(nightMode ? R.color.ctx_menu_controller_button_text_color_dark_p : R.color.ctx_menu_controller_button_text_color_light_p),
+						getResources().getColor(nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n)
+				}
+		);
+
 		// Left title button
 		final View leftTitleButtonView = view.findViewById(R.id.title_button_view);
+		((TextView) leftTitleButtonView.findViewById(R.id.title_button)).setTextColor(buttonColorStateList);
+		leftTitleButtonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
 		leftTitleButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -164,6 +178,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		// Right title button
 		final View rightTitleButtonView = view.findViewById(R.id.title_button_right_view);
+		((TextView) rightTitleButtonView.findViewById(R.id.title_button_right)).setTextColor(buttonColorStateList);
+		rightTitleButtonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
 		rightTitleButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -176,6 +192,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		// Left download button
 		final View leftDownloadButtonView = view.findViewById(R.id.download_button_left_view);
+		((TextView) leftDownloadButtonView.findViewById(R.id.download_button_left)).setTextColor(buttonColorStateList);
+		leftDownloadButtonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
 		leftDownloadButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -188,6 +206,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		// Right download button
 		final View rightDownloadButtonView = (View) view.findViewById(R.id.download_button_right_view);
+		((TextView) rightDownloadButtonView.findViewById(R.id.download_button_right)).setTextColor(buttonColorStateList);
+		rightDownloadButtonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
 		rightDownloadButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -199,8 +219,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		});
 
 		// Bottom title button
-		final View bottomTitleButton = view.findViewById(R.id.title_button_bottom_view);
-		bottomTitleButton.setOnClickListener(new View.OnClickListener() {
+		final View bottomTitleButtonView = view.findViewById(R.id.title_button_bottom_view);
+		((TextView) bottomTitleButtonView.findViewById(R.id.title_button_bottom)).setTextColor(buttonColorStateList);
+		bottomTitleButtonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
+		bottomTitleButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				TitleButtonController bottomTitleButtonController = menu.getBottomTitleButtonController();
