@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -8,9 +9,11 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.FileProvider;
@@ -38,6 +41,7 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
@@ -51,6 +55,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
@@ -134,7 +139,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		View bottomShadowView = inflater.inflate(R.layout.list_shadow_footer, listView, false);
 		listView.addFooterView(bottomShadowView, null, false);
 
-		adapter = new RouteInfoAdapter(helper.getRouteDirections());
+		adapter = new RouteInfoAdapter(helper.getRouteDirectionsWithRoutePoints());
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
@@ -142,18 +147,43 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 				if (position < 2) {
 					return;
 				}
-				RouteDirectionInfo item = adapter.getItem(position - 2);
-				Location loc = helper.getLocationFromRouteDirection(item);
-				if (loc != null) {
-					MapRouteInfoMenu.directionInfo = position - 2;
+
+				int pos = position - 2;
+				Object item = adapter.getItem(pos);
+				Location loc = null;
+				PointDescription pointDescription = null;
+				if (item instanceof RouteDirectionInfo) {
+					MapRouteInfoMenu.directionInfo = pos - getIndexOffset(pos);
+					RouteDirectionInfo dirInfo = (RouteDirectionInfo) item;
+					loc = helper.getLocationFromRouteDirection(dirInfo);
+					pointDescription = new PointDescription(PointDescription.POINT_TYPE_MARKER,
+							dirInfo.getDescriptionRoutePart() + " " + getTimeDescription(dirInfo));
+				} else if (item instanceof TargetPoint) {
+					TargetPoint point = (TargetPoint) item;
+					loc = new Location("");
+					loc.setLatitude(point.getLatitude());
+					loc.setLongitude(point.getLongitude());
+					pointDescription = point.getOriginalPointDescription();
+				}
+
+				if (loc != null && pointDescription != null) {
 					OsmandSettings settings = getMyApplication().getSettings();
 					settings.setMapLocationToShow(loc.getLatitude(), loc.getLongitude(),
 							Math.max(13, settings.getLastKnownMapZoom()),
-							new PointDescription(PointDescription.POINT_TYPE_MARKER, item.getDescriptionRoutePart() + " " + getTimeDescription(item)),
-							false, null);
+							pointDescription, false, null);
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 					dismiss();
 				}
+			}
+
+			private int getIndexOffset(int toPosition) {
+				int res = 0;
+				for (int i = 0; i < toPosition; i++) {
+					if (adapter.getItem(i) instanceof TargetPoint) {
+						res++;
+					}
+				}
+				return res;
 			}
 		});
 
@@ -476,7 +506,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		fragment.show(fragmentManager, TAG);
 	}
 
-	class RouteInfoAdapter extends ArrayAdapter<RouteDirectionInfo> {
+	class RouteInfoAdapter extends ArrayAdapter<Object> {
 		public class CumulativeInfo {
 			public int distance;
 			public int time;
@@ -490,24 +520,26 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		private final int lastItemIndex;
 		private boolean light;
 
-		RouteInfoAdapter(List<RouteDirectionInfo> list) {
+		RouteInfoAdapter(List<Object> list) {
 			super(getActivity(), R.layout.route_info_list_item, list);
-			lastItemIndex = list.size() - 1;
+			lastItemIndex = (list.size() - 1) - 1; // last -1 is needed because getItem(list.size() - 1) is instanceof TargetPoint
 			this.setNotifyOnChange(false);
 			light = getMyApplication().getSettings().isLightContent();
 		}
 
 
+		@SuppressLint("SetTextI18n")
+		@NonNull
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View row = convertView;
+		public View getView(int position, View row, @NonNull ViewGroup parent) {
+			OsmandApplication app = getMyApplication();
 			if (row == null) {
-				LayoutInflater inflater =
-						(LayoutInflater) getMyApplication().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				row = inflater.inflate(R.layout.route_info_list_item, parent, false);
 			}
-			RouteDirectionInfo model = getItem(position);
+
 			TextView label = (TextView) row.findViewById(R.id.description);
+			TextView subLabel = (TextView) row.findViewById(R.id.subdescription);
 			TextView distanceLabel = (TextView) row.findViewById(R.id.distance);
 			TextView timeLabel = (TextView) row.findViewById(R.id.time);
 			TextView cumulativeDistanceLabel = (TextView) row.findViewById(R.id.cumulative_distance);
@@ -515,38 +547,100 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 			ImageView icon = (ImageView) row.findViewById(R.id.direction);
 			row.findViewById(R.id.divider).setVisibility(position == getCount() - 1 ? View.INVISIBLE : View.VISIBLE);
 
-			TurnPathHelper.RouteDrawable drawable = new TurnPathHelper.RouteDrawable(getResources(), true);
-			drawable.setColorFilter(new PorterDuffColorFilter(light ? getResources().getColor(R.color.icon_color) : Color.WHITE, PorterDuff.Mode.SRC_ATOP));
-			drawable.setRouteType(model.getTurnType());
-			icon.setImageDrawable(drawable);
+			Object item = getItem(position);
+			if (item instanceof RouteDirectionInfo) {
+				int indexOffset = getPointsBeforeIndexCount(position);
+				RouteDirectionInfo model = (RouteDirectionInfo) item;
+				row.findViewById(R.id.distance_time_container).setVisibility(View.VISIBLE);
+				subLabel.setVisibility(View.GONE);
 
-			label.setText(String.valueOf(position + 1) + ". " + model.getDescriptionRoutePart());
-			if (model.distance > 0) {
-				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(
-						model.distance, getMyApplication()));
-				timeLabel.setText(getTimeDescription(model));
-				row.setContentDescription(label.getText() + " " + timeLabel.getText()); //$NON-NLS-1$
-			} else {
-				if (label.getText().equals(String.valueOf(position + 1) + ". ")) {
-					label.setText(String.valueOf(position + 1) + ". " + getString((position != lastItemIndex) ? R.string.arrived_at_intermediate_point : R.string.arrived_at_destination));
+				TurnPathHelper.RouteDrawable drawable = new TurnPathHelper.RouteDrawable(getResources(), true);
+				drawable.setColorFilter(new PorterDuffColorFilter(light ? getResources().getColor(R.color.icon_color) : Color.WHITE, PorterDuff.Mode.SRC_ATOP));
+				drawable.setRouteType(model.getTurnType());
+				icon.setImageDrawable(drawable);
+
+				label.setMaxLines(2);
+				label.setText(String.valueOf(position + 1 - indexOffset) + ". " + model.getDescriptionRoutePart());
+				if (model.distance > 0) {
+					distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, app));
+					timeLabel.setText(getTimeDescription(model));
+					row.setContentDescription(label.getText() + " " + timeLabel.getText());
+				} else {
+					if (label.getText().equals(String.valueOf(position + 1 - indexOffset) + ". ")) {
+						String s = getString((position != lastItemIndex) ? R.string.arrived_at_intermediate_point : R.string.arrived_at_destination);
+						label.setText(String.valueOf(position + 1 - indexOffset) + ". " + s);
+					}
+					clearText(distanceLabel, timeLabel);
+					row.setContentDescription("");
 				}
-				distanceLabel.setText(""); //$NON-NLS-1$
-				timeLabel.setText(""); //$NON-NLS-1$
-				row.setContentDescription(""); //$NON-NLS-1$
+				CumulativeInfo cumulativeInfo = getRouteDirectionCumulativeInfo(position);
+				cumulativeDistanceLabel.setText(OsmAndFormatter.getFormattedDistance(cumulativeInfo.distance, app));
+				cumulativeTimeLabel.setText(Algorithms.formatDuration(cumulativeInfo.time, app.accessibilityEnabled()));
+			} else if (item instanceof TargetPoint) {
+				TargetPoint point = (TargetPoint) item;
+				row.findViewById(R.id.distance_time_container).setVisibility(View.GONE);
+				subLabel.setVisibility(View.VISIBLE);
+				icon.setImageDrawable(getIcon(point));
+				label.setMaxLines(1);
+				label.setText(point.getOnlyName());
+				subLabel.setText(getSubDescriptionResId(point));
+				clearText(distanceLabel, timeLabel, cumulativeDistanceLabel, cumulativeTimeLabel);
 			}
-			CumulativeInfo cumulativeInfo = getRouteDirectionCumulativeInfo(position);
-			cumulativeDistanceLabel.setText(OsmAndFormatter.getFormattedDistance(
-					cumulativeInfo.distance, getMyApplication()));
-			cumulativeTimeLabel.setText(Algorithms.formatDuration(cumulativeInfo.time, getMyApplication().accessibilityEnabled()));
+
 			return row;
+		}
+
+		private int getPointsBeforeIndexCount(int index) {
+			int res = 0;
+			for (int i = 0; i < index; i++) {
+				if (getItem(i) instanceof TargetPoint) {
+					res++;
+				}
+			}
+			return res;
+		}
+
+		private void clearText(TextView... textViews) {
+			for (TextView tv : textViews) {
+				tv.setText("");
+			}
+		}
+
+		private Drawable getIcon(TargetPoint point) {
+			int iconRes;
+			if (point.start) {
+				if (point.getOriginalPointDescription().isMyLocation()) {
+					ApplicationMode appMode = getMyApplication().getSettings().getApplicationMode();
+					iconRes = appMode.getResourceLocationDay();
+				} else {
+					iconRes = R.drawable.list_startpoint;
+				}
+			} else if (point.intermediate) {
+				iconRes = R.drawable.list_intermediate;
+			} else {
+				iconRes = R.drawable.list_destination;
+			}
+			return getMyApplication().getIconsCache().getIcon(iconRes);
+		}
+
+		private int getSubDescriptionResId(TargetPoint point) {
+			if (point.start) {
+				return R.string.shared_string_control_start;
+			} else if (point.intermediate) {
+				return R.string.map_widget_intermediate_distance;
+			}
+			return R.string.route_descr_destination;
 		}
 
 		public CumulativeInfo getRouteDirectionCumulativeInfo(int position) {
 			CumulativeInfo cumulativeInfo = new CumulativeInfo();
 			for (int i = 0; i < position; i++) {
-				RouteDirectionInfo routeDirectionInfo = (RouteDirectionInfo) getItem(i);
-				cumulativeInfo.time += routeDirectionInfo.getExpectedTime();
-				cumulativeInfo.distance += routeDirectionInfo.distance;
+				Object item = getItem(i);
+				if (item instanceof RouteDirectionInfo) {
+					RouteDirectionInfo routeDirectionInfo = (RouteDirectionInfo) item;
+					cumulativeInfo.time += routeDirectionInfo.getExpectedTime();
+					cumulativeInfo.distance += routeDirectionInfo.distance;
+				}
 			}
 			return cumulativeInfo;
 		}
@@ -614,15 +708,18 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		final String NBSP = "&nbsp;";
 		final String BR = "<br>";
 		for (int i = 0; i < routeInfo.getCount(); i++) {
-			RouteDirectionInfo routeDirectionInfo = (RouteDirectionInfo) routeInfo.getItem(i);
-			StringBuilder sb = new StringBuilder();
-			sb.append(OsmAndFormatter.getFormattedDistance(routeDirectionInfo.distance, getMyApplication()));
-			sb.append(", ").append(NBSP);
-			sb.append(getTimeDescription(routeDirectionInfo));
-			String distance = sb.toString().replaceAll("\\s", NBSP);
-			String description = routeDirectionInfo.getDescriptionRoutePart();
-			html.append(BR);
-			html.append("<p>" + String.valueOf(i + 1) + ". " + NBSP + description + NBSP + "(" + distance + ")</p>");
+			Object item = routeInfo.getItem(i);
+			if (item instanceof RouteDirectionInfo) {
+				RouteDirectionInfo routeDirectionInfo = (RouteDirectionInfo) item;
+				StringBuilder sb = new StringBuilder();
+				sb.append(OsmAndFormatter.getFormattedDistance(routeDirectionInfo.distance, getMyApplication()));
+				sb.append(", ").append(NBSP);
+				sb.append(getTimeDescription(routeDirectionInfo));
+				String distance = sb.toString().replaceAll("\\s", NBSP);
+				String description = routeDirectionInfo.getDescriptionRoutePart();
+				html.append(BR);
+				html.append("<p>" + String.valueOf(i + 1) + ". " + NBSP + description + NBSP + "(" + distance + ")</p>");
+			}
 		}
 		return html;
 	}
@@ -654,6 +751,9 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		final String NBSP = "&nbsp;";
 		final String BR = "<br>";
 		for (int i = 0; i < routeInfo.getCount(); i++) {
+			if (!(routeInfo.getItem(i) instanceof RouteDirectionInfo)) {
+				continue;
+			}
 			RouteDirectionInfo routeDirectionInfo = (RouteDirectionInfo) routeInfo.getItem(i);
 			html.append("<tr>");
 			StringBuilder sb = new StringBuilder();

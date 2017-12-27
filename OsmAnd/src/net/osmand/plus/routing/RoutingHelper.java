@@ -808,6 +808,10 @@ public class RoutingHelper {
 		return route.getRouteDirections();
 	}
 
+	public List<Object> getRouteDirectionsWithRoutePoints() {
+		return route.getRouteDirectionsWithRoutePoints();
+	}
+
 
 
 	private class RouteRecalculationThread extends Thread {
