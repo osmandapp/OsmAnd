@@ -139,11 +139,11 @@ public class WikipediaDialogFragment extends DialogFragment {
 		readFullArticleButton.setLayoutParams(params);
 		readFullArticleButton.setBackgroundResource(darkMode ? R.drawable.bt_round_long_night : R.drawable.bt_round_long_day);
 		readFullArticleButton.setTextColor(buttonColorStateList);
-		int paddingLeft = (int) getResources().getDimension(R.dimen.content_padding_small);
+		int paddingLeft = (int) getResources().getDimension(R.dimen.wikipedia_button_left_padding);
 		int paddingRight = (int) getResources().getDimension(R.dimen.dialog_content_margin);
 		readFullArticleButton.setPadding(paddingLeft, 0, paddingRight, 0);
 		readFullArticleButton.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_world_globe_dark), null, null, null);
-		readFullArticleButton.setCompoundDrawablePadding(paddingLeft);
+		readFullArticleButton.setCompoundDrawablePadding((int) getResources().getDimension(R.dimen.content_padding_small));
 
 		final TextView selectLanguageTextView = mainView.findViewById(R.id.select_language_text_view);
 		selectLanguageTextView.setTextColor(buttonColorStateList);

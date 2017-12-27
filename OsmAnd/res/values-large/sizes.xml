@@ -175,4 +175,6 @@
 
 	<dimen name="multi_selection_header_height">78dp</dimen>
 
+	<dimen name="wikipedia_button_left_padding">29dp</dimen>
+
 </resources>
