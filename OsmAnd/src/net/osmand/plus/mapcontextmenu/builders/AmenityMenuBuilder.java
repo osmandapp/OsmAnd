@@ -133,7 +133,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		llTextParams.setMargins(icon == null ? dpToPx(16f) : 0, collapsable ? dpToPx(13f) : dpToPx(8f), 0, collapsable ? dpToPx(13f) : dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
+		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
 
 		boolean textDefined = false;
 		if (isPhoneNumber || isUrl) {
