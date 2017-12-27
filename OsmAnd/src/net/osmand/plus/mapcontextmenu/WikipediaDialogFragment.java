@@ -1,8 +1,8 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,7 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -43,7 +42,7 @@ public class WikipediaDialogFragment extends DialogFragment {
 	public static final String TAG = "WikipediaDialogFragment";
 
 	private View mainView;
-	private boolean darkTheme;
+	private boolean darkMode;
 	private Amenity amenity;
 	private String lang;
 
@@ -59,8 +58,8 @@ public class WikipediaDialogFragment extends DialogFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		OsmandApplication app = getMyApplication();
-		darkTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME;
-		int themeId = darkTheme ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		darkMode = app.getDaynightHelper().isNightMode();
+		int themeId = darkMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
 
@@ -79,10 +78,10 @@ public class WikipediaDialogFragment extends DialogFragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		mainView = inflater.inflate(R.layout.wikipedia_dialog_fragment, container, false);
 
-		mainView.setBackgroundColor(ContextCompat.getColor(getContext(), darkTheme ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
+		mainView.setBackgroundColor(ContextCompat.getColor(getContext(), darkMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
 
 		AppBarLayout appBarLayout = (AppBarLayout) mainView.findViewById(R.id.app_bar);
-		appBarLayout.setBackgroundColor(ContextCompat.getColor(getContext(), darkTheme ? R.color.ctx_menu_buttons_bg_dark: R.color.ctx_menu_buttons_bg_light));
+		appBarLayout.setBackgroundColor(ContextCompat.getColor(getContext(), darkMode ? R.color.ctx_menu_buttons_bg_dark: R.color.ctx_menu_buttons_bg_light));
 
 		int toolbarTextColor = ContextCompat.getColor(getContext(), R.color.dashboard_subheader_text_light);
 
@@ -97,6 +96,17 @@ public class WikipediaDialogFragment extends DialogFragment {
 
 		TextView titleTextView = (TextView) mainView.findViewById(R.id.title_text_view);
 		titleTextView.setTextColor(toolbarTextColor);
+
+		ColorStateList buttonColorStateList = new ColorStateList(
+				new int[][]{
+						new int[]{android.R.attr.state_pressed},
+						new int[]{}
+				},
+				new int[] {
+						getResources().getColor(darkMode ? R.color.ctx_menu_controller_button_text_color_dark_p : R.color.ctx_menu_controller_button_text_color_light_p),
+						getResources().getColor(darkMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n)
+				}
+		);
 
 		final TextView readFullArticleButton = (TextView) mainView.findViewById(R.id.read_full_article);
 		CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) readFullArticleButton.getLayoutParams();
@@ -122,7 +132,8 @@ public class WikipediaDialogFragment extends DialogFragment {
 			}
 		});
 		readFullArticleButton.setLayoutParams(params);
-		readFullArticleButton.setBackgroundResource(darkTheme ? R.drawable.bt_round_long_night : R.drawable.bt_round_long_day);
+		readFullArticleButton.setBackgroundResource(darkMode ? R.drawable.bt_round_long_night : R.drawable.bt_round_long_day);
+		readFullArticleButton.setTextColor(buttonColorStateList);
 		int paddingLeft = (int) getResources().getDimension(R.dimen.content_padding_small);
 		int paddingRight = (int) getResources().getDimension(R.dimen.dialog_content_margin);
 		readFullArticleButton.setPadding(paddingLeft, 0, paddingRight, 0);
@@ -130,8 +141,10 @@ public class WikipediaDialogFragment extends DialogFragment {
 		readFullArticleButton.setCompoundDrawablePadding(paddingLeft);
 
 		final TextView selectLanguageTextView = mainView.findViewById(R.id.select_language_text_view);
+		selectLanguageTextView.setTextColor(buttonColorStateList);
 		selectLanguageTextView.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_map_language), null, null, null);
 		selectLanguageTextView.setCompoundDrawablePadding((int) getResources().getDimension(R.dimen.context_menu_padding_margin_small));
+		selectLanguageTextView.setBackgroundResource(darkMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
 
 		return mainView;
 	}
@@ -235,7 +248,7 @@ public class WikipediaDialogFragment extends DialogFragment {
 	}
 
 	private Drawable getIcon(int resId) {
-		int colorId = darkTheme ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
+		int colorId = darkMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
 		return getMyApplication().getIconsCache().getIcon(resId, colorId);
 	}
 

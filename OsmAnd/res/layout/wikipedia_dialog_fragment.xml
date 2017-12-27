@@ -35,7 +35,7 @@
                         style="@style/Widget.AppCompat.ActionButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_arrow_back"/>
+                        tools:src="@drawable/ic_arrow_back"/>
 
                     <View
                         android:layout_width="0dp"
@@ -50,11 +50,11 @@
                         android:layout_marginTop="@dimen/content_padding_small"
                         android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
                         android:layout_marginRight="@dimen/context_menu_padding_margin_small"
-                        android:background="?attr/ctx_menu_controller_bg"
+                        tools:background="?attr/ctx_menu_controller_bg"
                         android:gravity="center_vertical"
                         android:padding="@dimen/context_menu_padding_margin_tiny"
                         android:textAllCaps="true"
-                        android:textColor="?attr/ctx_menu_controller_text_color"
+                        tools:textColor="?attr/ctx_menu_controller_text_color"
                         android:textSize="@dimen/default_desc_text_size"
                         osmand:typeface="@string/font_roboto_medium"
                         tools:text="RU"/>
@@ -96,6 +96,6 @@
         android:text="@string/read_full_article"
         android:gravity="center_vertical"
         android:textAllCaps="true"
-        android:textColor="?attr/ctx_menu_controller_text_color"/>
+        tools:textColor="?attr/ctx_menu_controller_text_color"/>
 
 </android.support.design.widget.CoordinatorLayout>
