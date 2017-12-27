@@ -15,7 +15,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -202,7 +207,10 @@ public class WikipediaDialogFragment extends DialogFragment {
 			String content = amenity.getDescription(langSelected);
 
 			TextView articleTextView = (TextView) mainView.findViewById(R.id.content);
-			articleTextView.setText(Html.fromHtml(content));
+			Spannable spannableContent = new SpannableString(Html.fromHtml(content));
+			int length = spannableContent.length();
+			spannableContent.setSpan(new RelativeSizeSpan(1.2f), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			articleTextView.setText(spannableContent);
 		}
 	}
 
