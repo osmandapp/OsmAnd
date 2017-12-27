@@ -127,6 +127,11 @@ public class EditPOIMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean displayDistanceDirection() {
+		return true;
+	}
+
+	@Override
 	public String getAdditionalInfoStr() {
 		return actionStr;
 	}
