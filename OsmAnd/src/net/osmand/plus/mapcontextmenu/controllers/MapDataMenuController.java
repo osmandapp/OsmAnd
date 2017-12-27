@@ -120,23 +120,6 @@ public class MapDataMenuController extends MenuController {
 		rightDownloadButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				if (indexItem != null) {
-					if (backuped) {
-						deleteItem(indexItem.getBackupFile(app));
-					} else {
-						deleteItem(indexItem.getTargetFile(app));
-					}
-				} else if (localIndexInfo != null) {
-					deleteItem(new File(localIndexInfo.getPathToData()));
-				}
-			}
-		};
-		rightDownloadButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
-		rightDownloadButtonController.leftIconId = R.drawable.ic_action_delete_dark;
-
-		bottomTitleButtonController = new TitleButtonController() {
-			@Override
-			public void buttonPressed() {
 				getMapActivity().getContextMenu().close();
 
 				Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
@@ -158,7 +141,25 @@ public class MapDataMenuController extends MenuController {
 						mapActivity.getContextMenu().getLatLon(), selectedObjects);
 			}
 		};
-		bottomTitleButtonController.caption = getMapActivity().getString(R.string.download_select_map_types);
+		rightDownloadButtonController.caption = getMapActivity().getString(R.string.download_select_map_types);
+		rightDownloadButtonController.leftIconId = R.drawable.ic_plugin_srtm;
+
+		bottomTitleButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				if (indexItem != null) {
+					if (backuped) {
+						deleteItem(indexItem.getBackupFile(app));
+					} else {
+						deleteItem(indexItem.getTargetFile(app));
+					}
+				} else if (localIndexInfo != null) {
+					deleteItem(new File(localIndexInfo.getPathToData()));
+				}
+			}
+		};
+		bottomTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
+		bottomTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 
 		titleProgressController = new TitleProgressController() {
 			@Override
@@ -176,6 +177,39 @@ public class MapDataMenuController extends MenuController {
 		}
 
 		updateData();
+	}
+
+	@Override
+	public boolean displayDistanceDirection() {
+		return true;
+	}
+
+	@Override
+	public int getAdditionalInfoColor() {
+		return R.color.icon_color;
+	}
+
+	@Override
+	public String getAdditionalInfoStr() {
+		double mb = 0;
+		if (backuped) {
+			if (localIndexInfo != null) {
+				mb = localIndexInfo.getSize();
+			} else if (indexItem != null) {
+				mb = indexItem.getArchiveSizeMB();
+			}
+		} else if (indexItem != null) {
+			mb = indexItem.getArchiveSizeMB();
+		}
+		if (mb != 0) {
+			return getMapActivity().getString(R.string.file_size_in_mb, mb);
+		}
+		return "";
+	}
+
+	@Override
+	public int getAdditionalInfoIconRes() {
+		return R.drawable.ic_sdcard_16;
 	}
 
 	@Override
@@ -349,8 +383,8 @@ public class MapDataMenuController extends MenuController {
 			leftDownloadButtonController.visible = false;
 		}
 
-		rightDownloadButtonController.visible = downloaded;
-		bottomTitleButtonController.visible = (otherIndexItems != null && otherIndexItems.size() > 0)
+		bottomTitleButtonController.visible = downloaded;
+		rightDownloadButtonController.visible = (otherIndexItems != null && otherIndexItems.size() > 0)
 				|| (otherLocalIndexInfos != null && otherLocalIndexInfos.size() > 0);
 
 		boolean internetConnectionAvailable =

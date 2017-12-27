@@ -271,7 +271,7 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/context_menu_button_padding_x"
                         android:paddingRight="@dimen/context_menu_button_padding_x"
-                        android:text="@string/shared_string_delete"
+                        android:text="@string/shared_string_others"
                         tools:textColor="?attr/ctx_menu_controller_text_color"
                         android:textSize="@dimen/default_desc_text_size"/>
 
@@ -306,7 +306,7 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/context_menu_button_padding_x"
                         android:paddingRight="@dimen/context_menu_button_padding_x"
-                        android:text="@string/shared_string_others"
+                        android:text="@string/shared_string_delete"
                         android:textAllCaps="true"
                         tools:textColor="?attr/ctx_menu_controller_text_color"
                         android:textSize="@dimen/default_desc_text_size"
