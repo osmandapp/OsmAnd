@@ -149,7 +149,7 @@ public class WikipediaDialogFragment extends DialogFragment {
 		selectLanguageTextView.setTextColor(buttonColorStateList);
 		selectLanguageTextView.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_map_language), null, null, null);
 		selectLanguageTextView.setCompoundDrawablePadding((int) getResources().getDimension(R.dimen.context_menu_padding_margin_small));
-		selectLanguageTextView.setBackgroundResource(darkMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
+		selectLanguageTextView.setBackgroundResource(darkMode ? R.drawable.wikipedia_select_lang_bg_dark : R.drawable.wikipedia_select_lang_bg_light);
 
 		return mainView;
 	}
