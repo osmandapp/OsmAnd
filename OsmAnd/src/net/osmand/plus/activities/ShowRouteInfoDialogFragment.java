@@ -153,7 +153,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 				Location loc = null;
 				PointDescription pointDescription = null;
 				if (item instanceof RouteDirectionInfo) {
-					MapRouteInfoMenu.directionInfo = pos - getIndexOffset(pos);
+					MapRouteInfoMenu.directionInfo = pos - adapter.getTargetsCountBeforeIndex(pos);
 					RouteDirectionInfo dirInfo = (RouteDirectionInfo) item;
 					loc = helper.getLocationFromRouteDirection(dirInfo);
 					pointDescription = new PointDescription(PointDescription.POINT_TYPE_MARKER,
@@ -174,16 +174,6 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 					dismiss();
 				}
-			}
-
-			private int getIndexOffset(int toPosition) {
-				int res = 0;
-				for (int i = 0; i < toPosition; i++) {
-					if (adapter.getItem(i) instanceof TargetPoint) {
-						res++;
-					}
-				}
-				return res;
 			}
 		});
 
@@ -517,12 +507,12 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 			}
 		}
 
-		private final int lastItemIndex;
+		private final int lastRouteDirectionItemIndex;
 		private boolean light;
 
 		RouteInfoAdapter(List<Object> list) {
 			super(getActivity(), R.layout.route_info_list_item, list);
-			lastItemIndex = (list.size() - 1) - 1; // last -1 is needed because getItem(list.size() - 1) is instanceof TargetPoint
+			lastRouteDirectionItemIndex = (list.size() - 1) - 1;
 			this.setNotifyOnChange(false);
 			light = getMyApplication().getSettings().isLightContent();
 		}
@@ -549,7 +539,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 
 			Object item = getItem(position);
 			if (item instanceof RouteDirectionInfo) {
-				int indexOffset = getPointsBeforeIndexCount(position);
+				int indexOffset = getTargetsCountBeforeIndex(position);
 				RouteDirectionInfo model = (RouteDirectionInfo) item;
 				row.findViewById(R.id.distance_time_container).setVisibility(View.VISIBLE);
 				subLabel.setVisibility(View.GONE);
@@ -567,7 +557,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 					row.setContentDescription(label.getText() + " " + timeLabel.getText());
 				} else {
 					if (label.getText().equals(String.valueOf(position + 1 - indexOffset) + ". ")) {
-						String s = getString((position != lastItemIndex) ? R.string.arrived_at_intermediate_point : R.string.arrived_at_destination);
+						String s = getString((position != lastRouteDirectionItemIndex) ? R.string.arrived_at_intermediate_point : R.string.arrived_at_destination);
 						label.setText(String.valueOf(position + 1 - indexOffset) + ". " + s);
 					}
 					clearText(distanceLabel, timeLabel);
@@ -590,7 +580,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 			return row;
 		}
 
-		private int getPointsBeforeIndexCount(int index) {
+		int getTargetsCountBeforeIndex(int index) {
 			int res = 0;
 			for (int i = 0; i < index; i++) {
 				if (getItem(i) instanceof TargetPoint) {
