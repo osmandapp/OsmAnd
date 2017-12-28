@@ -7,12 +7,9 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
@@ -48,7 +45,6 @@ public class RouteCalculationResult {
 	protected int currentWaypointGPX = 0;
 	protected int lastWaypointGPX = 0;
 	protected ApplicationMode appMode;
-	protected OsmandApplication app;
 
 	public RouteCalculationResult(String errorMessage) {
 		this.errorMessage = errorMessage;
@@ -81,7 +77,6 @@ public class RouteCalculationResult {
 			introduceFirstPointAndLastPoint(locations, localDirections, null, params.start, params.end);
 		}
 		this.appMode = params.mode;
-		this.app = params.ctx;
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = new ArrayList<RouteSegmentResult>();
 		this.listDistance = new int[locations.size()];
@@ -112,8 +107,7 @@ public class RouteCalculationResult {
 		calculateIntermediateIndexes(ctx, this.locations, intermediates, computeDirections, this.intermediatePoints);
 		updateListDistanceTime(this.listDistance, this.locations);
 		this.appMode = mode;
-		this.app = ctx;
-		
+
 		this.directions = Collections.unmodifiableList(computeDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
 		this.alarmInfo = Collections.unmodifiableList(alarms);
@@ -129,6 +123,10 @@ public class RouteCalculationResult {
 	
 	public List<AlarmInfo> getAlarmInfo() {
 		return alarmInfo;
+	}
+
+	public int[] getIntermediatePointsIndexes() {
+		return intermediatePoints;
 	}
 
 	private static void calculateIntermediateIndexes(Context ctx, List<Location> locations,
@@ -854,50 +852,6 @@ public class RouteCalculationResult {
 		return null;
 	}
 
-	public List<Object> getRouteDirectionsWithRoutePoints() {
-		List<Object> res = new ArrayList<>();
-		List<RouteDirectionInfo> directions = getRouteDirections();
-
-		if (app != null) {
-			TargetPointsHelper pointsHelper = app.getTargetPointsHelper();
-			TargetPoint targetPoint;
-			int indexOffset = 0 - currentDirectionInfo;
-
-			if (currentDirectionInfo == 0) {
-				if ((targetPoint = pointsHelper.getPointToStart()) == null) {
-					Location loc = app.getLocationProvider().getLastKnownLocation();
-					if (loc != null) {
-						targetPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
-								new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, app.getString(R.string.shared_string_my_location)));
-
-					}
-				}
-				if (targetPoint != null) {
-					res.add(targetPoint);
-					indexOffset++;
-				}
-			}
-
-			res.addAll(directions);
-
-			List<TargetPoint> intermediates = pointsHelper.getIntermediatePoints();
-			if (intermediates.size() == intermediatePoints.length) {
-				for (int i = nextIntermediate; i < intermediatePoints.length; i++) {
-					res.add(intermediatePoints[i] + 1 + indexOffset, intermediates.get(i));
-					indexOffset++;
-				}
-			}
-
-			if ((targetPoint = pointsHelper.getPointToNavigate()) != null) {
-				res.add(targetPoint);
-			}
-		} else {
-			res.addAll(directions);
-		}
-
-		return res;
-	}
-	
 	public List<RouteDirectionInfo> getRouteDirections() {
 		if(currentDirectionInfo < directions.size() - 1){
 			if(cacheCurrentTextDirectionInfo != currentDirectionInfo) {

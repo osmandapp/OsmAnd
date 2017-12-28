@@ -5,6 +5,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.NavigationService;
@@ -26,6 +27,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -809,7 +811,48 @@ public class RoutingHelper {
 	}
 
 	public List<Object> getRouteDirectionsWithRoutePoints() {
-		return route.getRouteDirectionsWithRoutePoints();
+		List<Object> res = new ArrayList<>();
+		List<RouteDirectionInfo> directions = route.getRouteDirections();
+
+		if (app != null) {
+			TargetPointsHelper pointsHelper = app.getTargetPointsHelper();
+			TargetPoint targetPoint;
+			int indexOffset = 0 - route.currentDirectionInfo;
+
+			if (route.currentDirectionInfo == 0) {
+				if ((targetPoint = pointsHelper.getPointToStart()) == null) {
+					Location loc = app.getLocationProvider().getLastKnownLocation();
+					if (loc != null) {
+						targetPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
+								new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, app.getString(R.string.shared_string_my_location)));
+
+					}
+				}
+				if (targetPoint != null) {
+					res.add(targetPoint);
+					indexOffset++;
+				}
+			}
+
+			res.addAll(directions);
+
+			List<TargetPoint> intermediates = pointsHelper.getIntermediatePoints();
+			int[] intermediateIndexes = route.getIntermediatePointsIndexes();
+			if (intermediates.size() == intermediateIndexes.length) {
+				for (int i = route.nextIntermediate; i < intermediateIndexes.length; i++) {
+					res.add(intermediateIndexes[i] + 1 + indexOffset, intermediates.get(i));
+					indexOffset++;
+				}
+			}
+
+			if ((targetPoint = pointsHelper.getPointToNavigate()) != null) {
+				res.add(targetPoint);
+			}
+		} else {
+			res.addAll(directions);
+		}
+
+		return res;
 	}
 
 
