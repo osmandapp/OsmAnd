@@ -774,6 +774,8 @@ public abstract class MenuController extends BaseMenuController {
 		public ContextMenuToolbarController(MenuController menuController) {
 			super(TopToolbarControllerType.CONTEXT_MENU);
 			this.menuController = menuController;
+			setBgIds(R.color.actionbar_light_color, R.color.actionbar_dark_color,
+					R.color.actionbar_light_color, R.color.actionbar_dark_color);
 		}
 
 		public MenuController getMenuController() {
