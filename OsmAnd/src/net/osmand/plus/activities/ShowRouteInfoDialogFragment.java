@@ -538,6 +538,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 			row.findViewById(R.id.divider).setVisibility(position == getCount() - 1 ? View.INVISIBLE : View.VISIBLE);
 
 			Object item = getItem(position);
+			CumulativeInfo cumulativeInfo = null;
 			if (item instanceof RouteDirectionInfo) {
 				int indexOffset = getTargetsCountBeforeIndex(position);
 				RouteDirectionInfo model = (RouteDirectionInfo) item;
@@ -563,9 +564,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 					clearText(distanceLabel, timeLabel);
 					row.setContentDescription("");
 				}
-				CumulativeInfo cumulativeInfo = getRouteDirectionCumulativeInfo(position);
-				cumulativeDistanceLabel.setText(OsmAndFormatter.getFormattedDistance(cumulativeInfo.distance, app));
-				cumulativeTimeLabel.setText(Algorithms.formatDuration(cumulativeInfo.time, app.accessibilityEnabled()));
+				cumulativeInfo = getRouteDirectionCumulativeInfo(position);
 			} else if (item instanceof TargetPoint) {
 				TargetPoint point = (TargetPoint) item;
 				row.findViewById(R.id.distance_time_container).setVisibility(View.GONE);
@@ -575,6 +574,11 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 				label.setText(point.getOnlyName());
 				subLabel.setText(getSubDescriptionResId(point));
 				clearText(distanceLabel, timeLabel, cumulativeDistanceLabel, cumulativeTimeLabel);
+				cumulativeInfo = getTargetPointCumulativeInfo(position);
+			}
+			if (cumulativeInfo != null) {
+				cumulativeDistanceLabel.setText(OsmAndFormatter.getFormattedDistance(cumulativeInfo.distance, app));
+				cumulativeTimeLabel.setText(Algorithms.formatDuration(cumulativeInfo.time, app.accessibilityEnabled()));
 			}
 
 			return row;
@@ -633,6 +637,24 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 				}
 			}
 			return cumulativeInfo;
+		}
+
+		public CumulativeInfo getTargetPointCumulativeInfo(int position) {
+			CumulativeInfo res = getRouteDirectionCumulativeInfo(position - 1);
+			Object item = getItem(position);
+			if (item instanceof TargetPoint && position > 0) {
+				TargetPoint point = (TargetPoint) item;
+				if (point.intermediate) {
+					int dist = helper.getRoute().getDistanceToIntermediate(point.index, null);
+					item = getItem(position - 1);
+					if (item instanceof RouteDirectionInfo) {
+						int distDiff = dist - res.distance;
+						res.distance += distDiff;
+						res.time += Math.round(distDiff / ((RouteDirectionInfo) item).getAverageSpeed());
+					}
+				}
+			}
+			return res;
 		}
 	}
 

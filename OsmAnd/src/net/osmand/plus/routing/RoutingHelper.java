@@ -840,7 +840,8 @@ public class RoutingHelper {
 			int[] intermediateIndexes = route.getIntermediatePointsIndexes();
 			if (intermediates.size() == intermediateIndexes.length) {
 				for (int i = route.nextIntermediate; i < intermediateIndexes.length; i++) {
-					res.add(intermediateIndexes[i] + 1 + indexOffset, intermediates.get(i));
+					int ind = intermediateIndexes[i] - getSkippedDirections(intermediateIndexes[i]);
+					res.add(ind + 1 + indexOffset, intermediates.get(i));
 					indexOffset++;
 				}
 			}
@@ -852,6 +853,16 @@ public class RoutingHelper {
 			res.addAll(directions);
 		}
 
+		return res;
+	}
+
+	private int getSkippedDirections(int toPosition) {
+		int res = 0;
+		for (int i : route.skippedDirectionsIndexes) {
+			if (i <= toPosition) {
+				res++;
+			}
+		}
 		return res;
 	}
 

@@ -1,6 +1,7 @@
 package net.osmand.plus.routing;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -17,7 +18,9 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
@@ -36,6 +39,7 @@ public class RouteCalculationResult {
 	protected int cacheCurrentTextDirectionInfo = -1;
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
+	protected Set<Integer> skippedDirectionsIndexes = new HashSet<>();
 
 	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
 	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
@@ -856,29 +860,32 @@ public class RouteCalculationResult {
 		if(currentDirectionInfo < directions.size() - 1){
 			if(cacheCurrentTextDirectionInfo != currentDirectionInfo) {
 				cacheCurrentTextDirectionInfo = currentDirectionInfo;
-				List<RouteDirectionInfo> list = currentDirectionInfo == 0 ? directions : 
+				List<RouteDirectionInfo> list = currentDirectionInfo == 0 ? directions :
 					directions.subList(currentDirectionInfo + 1, directions.size());
 				cacheAgreggatedDirections = new ArrayList<RouteDirectionInfo>();
 				RouteDirectionInfo p = null;
-				for(RouteDirectionInfo i : list) {
-//					if(p == null || !i.getTurnType().isSkipToSpeak() ||
-//							(!Algorithms.objectEquals(p.getRef(), i.getRef()) &&
-//									!Algorithms.objectEquals(p.getStreetName(), i.getStreetName()))) {
-					if(p == null || 
-							(i.getTurnType() != null && !i.getTurnType().isSkipToSpeak())) {
-						p = new RouteDirectionInfo(i.getAverageSpeed(), i.getTurnType());
-						p.routePointOffset = i.routePointOffset;
-						p.routeEndPointOffset = i.routeEndPointOffset;
-						p.setDestinationName(i.getDestinationName());
-						p.setRef(i.getRef());
-						p.setStreetName(i.getStreetName());
-						p.setDescriptionRoute(i.getDescriptionRoutePart());
+				for (int i = 0; i < list.size(); i++) {
+					RouteDirectionInfo info = list.get(i);
+					boolean added = false;
+					if(p == null || (info.getTurnType() != null && !info.getTurnType().isSkipToSpeak())) {
+						p = new RouteDirectionInfo(info.getAverageSpeed(), info.getTurnType());
+						p.routePointOffset = info.routePointOffset;
+						p.routeEndPointOffset = info.routeEndPointOffset;
+						p.setDestinationName(info.getDestinationName());
+						p.setRef(info.getRef());
+						p.setStreetName(info.getStreetName());
+						p.setDescriptionRoute(info.getDescriptionRoutePart());
 						cacheAgreggatedDirections.add(p);
+						added = true;
 					}
-					float time = i.getExpectedTime() + p.getExpectedTime();
-					p.distance += i.distance;
+
+					if (!added) {
+						skippedDirectionsIndexes.add(i);
+					}
+					float time = info.getExpectedTime() + p.getExpectedTime();
+					p.distance += info.distance;
 					p.setAverageSpeed(p.distance / time);
-					p.afterLeftTime = i.afterLeftTime;
+					p.afterLeftTime = info.afterLeftTime;
 				}
 			}
 			return cacheAgreggatedDirections;
@@ -925,18 +932,22 @@ public class RouteCalculationResult {
 		return 0;
 	}
 	
-	public int getDistanceToNextIntermediate(Location fromLoc) {
-		if(listDistance != null && currentRoute < listDistance.length){
+	public int getDistanceToNextIntermediate(@Nullable Location fromLoc) {
+		return getDistanceToIntermediate(nextIntermediate, fromLoc);
+	}
+
+	public int getDistanceToIntermediate(int intermediateIndex, @Nullable Location fromLoc) {
+		if (listDistance != null && currentRoute < listDistance.length) {
 			int dist = listDistance[currentRoute];
 			Location l = locations.get(currentRoute);
-			if(fromLoc != null){
+			if (fromLoc != null) {
 				dist += fromLoc.distanceTo(l);
 			}
-			if(nextIntermediate >= intermediatePoints.length ){
+			if (intermediateIndex >= intermediatePoints.length) {
 				return 0;
 			} else {
-				int directionInd = intermediatePoints[nextIntermediate];
-				return dist - listDistance[directions.get(directionInd).routePointOffset];	
+				int directionInd = intermediatePoints[intermediateIndex];
+				return dist - listDistance[directions.get(directionInd).routePointOffset];
 			}
 		}
 		return 0;
