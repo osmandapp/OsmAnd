@@ -2955,4 +2955,13 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="tap_on_map_to_hide_interface">Teljes képernyős mód</string>
     <string name="show_on_top_bar">Megjelenítés a felső sávon</string>
     <string name="import_gpx_file_description">importálható kedvencek pontként, vagy nyomvonal fájlként.</string>
+    <string name="what_is_here">Mi van itt:</string>
+    <string name="parked_at">leparkolva ekkor:</string>
+    <string name="pick_up_till">Felvenni eddig:</string>
+    <string name="without_time_limit">Időkorlát nélkül</string>
+    <string name="context_menu_read_full_article">Olvasd el a tejes cikket</string>
+    <string name="context_menu_read_article">Cikk elolvasása</string>
+    <string name="context_menu_points_of_group">A csoport összes pontja</string>
+    <string name="opened_from">Nyitott ekkor:</string>
+    <string name="opened_till">Nyitva eddig:</string>
     </resources>
