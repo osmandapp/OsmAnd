@@ -531,11 +531,13 @@ public abstract class MenuController extends BaseMenuController {
 	public abstract class TitleButtonController {
 		public String caption = "";
 		public int leftIconId = 0;
+		public int rightIconId = 0;
 		public boolean needRightText = false;
 		public String rightTextCaption = "";
 		public boolean visible = true;
 		public boolean needColorizeIcon = true;
 		public Drawable leftIcon;
+		public Drawable rightIcon;
 
 		public Drawable getLeftIcon() {
 			if (leftIcon != null) {
@@ -546,6 +548,20 @@ public abstract class MenuController extends BaseMenuController {
 					return getIcon(leftIconId, isLight() ? R.color.map_widget_blue : R.color.osmand_orange);
 				}
 				return ContextCompat.getDrawable(getMapActivity(), leftIconId);
+			} else {
+				return null;
+			}
+		}
+
+		public Drawable getRightIcon() {
+			if (rightIcon != null) {
+				return rightIcon;
+			}
+			if (rightIconId != 0) {
+				if (needColorizeIcon) {
+					return getIcon(rightIconId, isLight() ? R.color.map_widget_blue : R.color.osmand_orange);
+				}
+				return ContextCompat.getDrawable(getMapActivity(), rightIconId);
 			} else {
 				return null;
 			}

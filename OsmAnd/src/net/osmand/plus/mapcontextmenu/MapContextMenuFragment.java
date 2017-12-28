@@ -14,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -735,10 +736,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				if (leftTitleButtonController.visible) {
 					leftTitleButtonView.setVisibility(View.VISIBLE);
 					Drawable leftIcon = leftTitleButtonController.getLeftIcon();
-					if (leftIcon != null) {
-						leftTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-						leftTitleButton.setCompoundDrawablePadding(dpToPx(8f));
-					}
+					Drawable rightIcon = leftTitleButtonController.getRightIcon();
+					leftTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
+					leftTitleButton.setCompoundDrawablePadding(dpToPx(8f));
+					((LinearLayout) leftTitleButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
 
 					if (leftTitleButtonController.needRightText) {
 						titleButtonRightText.setText(leftTitleButtonController.rightTextCaption);
@@ -762,8 +763,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				rightTitleButtonView.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 				Drawable leftIcon = rightTitleButtonController.getLeftIcon();
-				rightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
+				Drawable rightIcon = rightTitleButtonController.getRightIcon();
+				rightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
 				rightTitleButton.setCompoundDrawablePadding(dpToPx(8f));
+				((LinearLayout) rightTitleButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
 			} else {
 				rightTitleButtonView.setVisibility(View.INVISIBLE);
 			}
@@ -776,8 +779,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				bottomTitleButtonView.setVisibility(bottomTitleButtonController.visible ? View.VISIBLE : View.GONE);
 
 				Drawable leftIcon = bottomTitleButtonController.getLeftIcon();
-				bottomTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
+				Drawable rightIcon = bottomTitleButtonController.getRightIcon();
+				bottomTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
 				bottomTitleButton.setCompoundDrawablePadding(dpToPx(8f));
+				((LinearLayout) bottomTitleButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
 			} else {
 				bottomTitleButtonView.setVisibility(View.GONE);
 			}
@@ -798,10 +803,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				leftDownloadButtonView.setVisibility(leftDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 				Drawable leftIcon = leftDownloadButtonController.getLeftIcon();
-				if (leftIcon != null) {
-					leftDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-					leftDownloadButton.setCompoundDrawablePadding(dpToPx(8f));
-				}
+				Drawable rightIcon = leftDownloadButtonController.getRightIcon();
+				leftDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
+				leftDownloadButton.setCompoundDrawablePadding(dpToPx(8f));
+				((LinearLayout) leftDownloadButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
 			} else {
 				leftDownloadButtonView.setVisibility(View.INVISIBLE);
 			}
@@ -814,8 +819,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				rightDownloadButtonView.setVisibility(rightDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 				Drawable leftIcon = rightDownloadButtonController.getLeftIcon();
-				rightDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
+				Drawable rightIcon = rightDownloadButtonController.getRightIcon();
+				rightDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
 				rightDownloadButton.setCompoundDrawablePadding(dpToPx(8f));
+				((LinearLayout) rightDownloadButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
 			} else {
 				rightDownloadButtonView.setVisibility(View.INVISIBLE);
 			}

@@ -58,6 +58,7 @@ public class TransportRouteController extends MenuController {
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_previous);
+		leftTitleButtonController.leftIconId = R.drawable.ic_arrow_back;
 
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
@@ -69,6 +70,7 @@ public class TransportRouteController extends MenuController {
 			}
 		};
 		rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_next);
+		rightTitleButtonController.rightIconId = R.drawable.ic_arrow_forward;
 	}
 
 	@Override
