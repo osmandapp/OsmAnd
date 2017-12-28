@@ -86,7 +86,7 @@
   <string name="shared_string_on">Увімкнено</string>
   <string name="shared_string_off">Вимкнено</string>
   <string name="accessibility_default">Використовувати системні налаштування</string>
-  <string name="backToMenu">Головне меню</string>
+  <string name="backToMenu">Повернутися до меню</string>
   <string name="zoomOut">Зменшити</string>
   <string name="zoomIn">Збільшити</string>
   <string name="zoomIs">Масштаб</string>
@@ -1106,35 +1106,50 @@
 	
 	<string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions) 
 \n
+\n 
 \nOsmAnd+ — навігаційне програмне забезпечення з відкритим кодом з доступом до різноманітних картографічних даних від OpenStreetMap (OSM). Всі картографічні дані (векторні та растрові) можуть бути збережені на карті пам’яті для подальшого автономного використання. OsmAnd також пропонує можливість прокладання маршруту як оффлайн, так і використовуючи онлайн-сервіси з покроковим голосовим супроводженням. 
 \n
+\n 
 \nOsmAnd+ — це платна версія, купуючи яку ви підтримуєте проект, фінансуючи розробку нових функцій, одержуючи останні оновлення. 
 \n
+\n 
 \nКілька основних можливостей: 
 \n
+\n 
 \n - повна оффлайн функціональність (просто збережіть векторні чи растрові дані на пристрій), 
 \n
+\n 
 \n - компактна векторна мапа для усього світу, 
 \n
+\n 
 \n - необмежена кількість звантажень мап окремої країни чи областей безпосередньо у програмі, 
 \n
+\n 
 \n - можливість автономної роботи із даними Вікіпедії (звантаження POI з Вікіпедії) є чудовим для інструментом для мандрівників, 
 \n
+\n 
 \n - можливість показу додаткових даних на мапі, наприклад шар для прокладання маршруту чи шар із записом GPX-треку, з POI, закладками, ізолініями висот, громадським транспортом, додатковими мапами з можливістю налаштовування рівня прозорості, 
 \n
+\n 
 \n - автономний пошук адрес та POI, 
 \n
+\n 
 \n - прокладання маршрутів оффлайн для середнього розміру відстаней, 
 \n
+\n 
 \n - режими для пішохідної, автомобільної та велонавігації: 
 \n
+\n 
 \n   - можливість перемикання на денний/нічний режим показу, 
 \n
+\n 
 \n   - мапи відповідно до швидкості руху, 
 \n
+\n 
 \n   - можливість орієнтації мапи за компасом чи напрямком руху, 
 \n
-\n   - показ руху по смугах та обмежень швидкості, голосове супроводження (записане чи синтезоване)."</string>
+\n 
+\n   - показ руху по смугах та обмежень швидкості, голосове супроводження (записане чи синтезоване)"</string>
 	
 	
 		
@@ -2890,7 +2905,7 @@
 \n • Африка: ** 
 \n • Антарктида: * 
 \nБільшість країн по всьому світу доступні для звантаження! 
-\nОтримайте надійний навігатор у Вашій країні — будь то Україна, Франція, Німеччина, Мексика, Великобританія, Іспанія, Нідерланди, США, Росія, Бразилія чи будь-яка інша.</string>
+\nОтримайте надійний навігатор у Вашій країні — будь то Україна, Франція, Німеччина, Мексика, Великобританія, Іспанія, Нідерланди, США, Росія, Бразилія чи будь-яка інша…</string>
     <string name="save_poi_too_many_uppercase">Назва містить занадто багато заголовних букв. Ви хочете продовжити?</string>
     <string name="shared_string_add_photos">Додати фотографії</string>
     <string name="mapillary_action_descr">Поділитися своїми вуличними видами цієї місцевості через Mapillary.</string>
@@ -2931,7 +2946,7 @@
     <string name="of">%1$d зі %2$d</string>
     <string name="ascent_descent">Підйом/спуск</string>
     <string name="moving_time">Час руху</string>
-    <string name="max_min">Макс./мін.</string>
+    <string name="max_min">Макс/мін</string>
     
     <string name="min_max">Мін/макс</string>
     <string name="release_2_7">• Втулок Mapillary з вуличними зображеннями 
@@ -3067,19 +3082,19 @@
     <string name="import_as_gpx">Імпортувати як GPX-файл</string>
     <string name="import_as_favorites">Імпортувати як закладки</string>
     <string name="import_file">Імпортувати файл</string>
-	<string name="tap_on_map_to_hide_interface_descr">Дотик на мапі приховує кнопки управління і віджети.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Дотик на карті змінює кнопки управління та віджети.</string>
     <string name="tap_on_map_to_hide_interface">Повноекранний режим</string>
     <string name="show_on_top_bar">Показати на верхній панелі</string>
     <string name="mark_passed">Позначати пройдене</string>
     <string name="digits_quantity">Кількість десяткових цифр</string>
     <string name="show_number_pad">Показати цифрову панель</string>
     <string name="shared_string_paste">Вставити</string>
-    <string name="coordinate_input_accuracy_description">Автоматично перемикається в наступне поле після введення %1$d цифр після десяткової точки</string>
+    <string name="coordinate_input_accuracy_description">Автоматично перемикається в наступне поле після введення %1$d цифр після десяткової точки.</string>
     <string name="coordinate_input_accuracy">%1$d цифр</string>
     <string name="go_to_next_field">Перейти до наступного поля</string>
     <string name="rename_marker">Перейменувати маркер</string>
     <string name="appearance_on_the_map">Поява на мапі</string>
-    <string name="add_track_to_markers_descr">Виберіть трек для додавання шляхових точок (показані лише треки з точками).</string>
+    <string name="add_track_to_markers_descr">Виберіть трек для додавання шляхових точок (показані лише треки з точками)</string>
     <string name="add_favourites_group_to_markers_descr">Виберіть категорію закладок для додавання до маркерів.</string>
     <string name="track_waypoints">Шляхові точки треку</string>
     <string name="favourites_group">Категорія закладок</string>
@@ -3116,10 +3131,30 @@
     <string name="by_type">За типом</string>
     <string name="modify_the_search_query">Змінити пошуковий запит.</string>
     <string name="release_3_0">• Виявлення стоп-сигналів тепер враховує напрямок руху 
-\n 
+\n
 \n• Новий алгоритм, що надає дійсні значення підйому/спуску для треків GPX 
-\n 
+\n
 \n• Час ходьби в залежності від місцевості (підйому) (правило Нейсміта)
 \n
 \n</string>
-    </resources>
+    <string name="what_is_here">Що тут:</string>
+    <string name="parked_at">припаркований біля</string>
+    <string name="pick_up_till">Забрати до</string>
+    <string name="without_time_limit">Без обмеження по часу</string>
+    <string name="context_menu_read_full_article">Читайте повну статтю</string>
+    <string name="context_menu_read_article">Читати статтю</string>
+    <string name="context_menu_points_of_group">Всі пункти групи</string>
+    <string name="opened_from">Відкрито з</string>
+    <string name="opened_till">Відкрито до</string>
+    <string name="will_be_closed_at">Буде закрито в</string>
+    <string name="will_be_opened_at">Буде відкрито в</string>
+    <string name="will_be_opened_on">Буде відкрито</string>
+    <string name="additional_actions">Додаткові дії</string>
+    <string name="av_locations_selected_desc">Файл GPX з координатами та даними вибраних нотаток.</string>
+    <string name="av_locations_all_desc">Файл GPX з координатами та даними всіх нотаток.</string>
+    <string name="shared_string_actions">Дія</string>
+    <string name="shared_string_marker">Маркер</string>
+    <string name="osm_recipient_stat">Редагувань %1$s, сума %2$s mBTC</string>
+    <string name="osm_recipients_label">OSM-одержувачі</string>
+    <string name="total_donations">Всього пожертвувань</string>
+</resources>
