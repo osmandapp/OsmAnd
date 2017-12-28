@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -116,13 +117,19 @@ public class TransportRouteController extends MenuController {
 
 	@Override
 	public String getTypeStr() {
-		if (transportRoute.refStop != null) {
+		if (transportRoute.refStop != null && !TextUtils.isEmpty(transportRoute.refStop.getName())) {
 			return transportRoute.refStop.getName();
-		} else if (transportRoute.stop != null) {
+		} else if (transportRoute.stop != null && !TextUtils.isEmpty(transportRoute.stop.getName())) {
 			return transportRoute.stop.getName();
-		} else {
+		} else if (!TextUtils.isEmpty(getPointDescription().getTypeName())) {
 			return getPointDescription().getTypeName();
+		} else {
+			return getStopType();
 		}
+	}
+
+	private String getStopType() {
+		return getMapActivity().getString(transportRoute.getTypeStrRes()) + " " + getMapActivity().getString(R.string.transport_Stop).toLowerCase();
 	}
 
 	@Override
@@ -215,7 +222,10 @@ public class TransportRouteController extends MenuController {
 		}
 		for (int i = startPosition; i < stops.size(); i++) {
 			final TransportStop stop = stops.get(i);
-			final String name = useEnglishNames ? stop.getEnName(true) : stop.getName();
+			String name = useEnglishNames ? stop.getEnName(true) : stop.getName();
+			if (TextUtils.isEmpty(name)) {
+				name = getStopType();
+			}
 			addPlainMenuItem(currentStop == i ? R.drawable.ic_action_marker_dark : defaultIcon,
 					name, false, false, new OnClickListener() {
 
