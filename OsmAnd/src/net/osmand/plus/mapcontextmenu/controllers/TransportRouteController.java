@@ -152,12 +152,30 @@ public class TransportRouteController extends MenuController {
 		}
 	}
 
+	private void updateControllers() {
+		boolean previousStopEnabled = false;
+		final int previousStop = getPreviousStop();
+		if (previousStop != -1) {
+			previousStopEnabled = true;
+		}
+		leftTitleButtonController.enabled = previousStopEnabled;
+
+		boolean nextStopEnabled = false;
+		final int nextStop = getNextStop();
+		if (nextStop != -1) {
+			nextStopEnabled = true;
+		}
+		rightTitleButtonController.enabled = nextStopEnabled;
+	}
+
 	private void showTransportStop(TransportStop stop) {
 		if (mapContextMenu != null) {
 			transportRoute.stop = stop;
 			transportRoute.refStop = stop;
 			PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
 					transportRoute.getDescription(getMapActivity().getMyApplication(), false));
+
+			updateControllers();
 
 			LatLon stopLocation = stop.getLocation();
 			if (mapContextMenu.isVisible()) {

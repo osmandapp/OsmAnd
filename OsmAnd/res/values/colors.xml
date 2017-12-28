@@ -352,6 +352,8 @@
 	<color name="ctx_menu_bottom_view_divider_dark">#222526</color>
 	<color name="ctx_menu_bottom_view_url_color_light">#536dfe</color>
 	<color name="ctx_menu_bottom_view_url_color_dark">#d28521</color>
+	<color name="ctx_menu_controller_disabled_text_color_light">#b3b3b3</color>
+	<color name="ctx_menu_controller_disabled_text_color_dark">#666666</color>
 
 	<color name="route_info_bg_light">#ffffff</color>
 	<color name="route_info_bg_dark">#17191a</color>

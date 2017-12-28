@@ -538,6 +538,7 @@ public abstract class MenuController extends BaseMenuController {
 		public boolean needColorizeIcon = true;
 		public Drawable leftIcon;
 		public Drawable rightIcon;
+		public boolean enabled = true;
 
 		public Drawable getLeftIcon() {
 			if (leftIcon != null) {
@@ -545,7 +546,7 @@ public abstract class MenuController extends BaseMenuController {
 			}
 			if (leftIconId != 0) {
 				if (needColorizeIcon) {
-					return getIcon(leftIconId, isLight() ? R.color.map_widget_blue : R.color.osmand_orange);
+					return getIcon(leftIconId, getColorRes());
 				}
 				return ContextCompat.getDrawable(getMapActivity(), leftIconId);
 			} else {
@@ -559,12 +560,22 @@ public abstract class MenuController extends BaseMenuController {
 			}
 			if (rightIconId != 0) {
 				if (needColorizeIcon) {
-					return getIcon(rightIconId, isLight() ? R.color.map_widget_blue : R.color.osmand_orange);
+					return getIcon(rightIconId, getColorRes());
 				}
 				return ContextCompat.getDrawable(getMapActivity(), rightIconId);
 			} else {
 				return null;
 			}
+		}
+
+		private int getColorRes() {
+			int colorRes;
+			if (enabled) {
+				colorRes = isLight() ? R.color.map_widget_blue : R.color.osmand_orange;
+			} else {
+				colorRes = isLight() ? R.color.ctx_menu_controller_disabled_text_color_dark : R.color.ctx_menu_controller_disabled_text_color_light;
+			}
+			return colorRes;
 		}
 
 		public abstract void buttonPressed();

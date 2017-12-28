@@ -152,21 +152,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			mapZoom = map.getZoom();
 		}
 
-		ColorStateList buttonColorStateList = new ColorStateList(
-				new int[][]{
-						new int[]{android.R.attr.state_pressed},
-						new int[]{}
-				},
-				new int[] {
-						getResources().getColor(nightMode ? R.color.ctx_menu_controller_button_text_color_dark_p : R.color.ctx_menu_controller_button_text_color_light_p),
-						getResources().getColor(nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n)
-				}
-		);
-
 		// Left title button
 		final View leftTitleButtonView = view.findViewById(R.id.title_button_view);
-		((TextView) leftTitleButtonView.findViewById(R.id.title_button)).setTextColor(buttonColorStateList);
-		leftTitleButtonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
 		leftTitleButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -179,8 +166,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		// Right title button
 		final View rightTitleButtonView = view.findViewById(R.id.title_button_right_view);
-		((TextView) rightTitleButtonView.findViewById(R.id.title_button_right)).setTextColor(buttonColorStateList);
-		rightTitleButtonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
 		rightTitleButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -193,8 +178,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		// Left download button
 		final View leftDownloadButtonView = view.findViewById(R.id.download_button_left_view);
-		((TextView) leftDownloadButtonView.findViewById(R.id.download_button_left)).setTextColor(buttonColorStateList);
-		leftDownloadButtonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
 		leftDownloadButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -207,8 +190,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		// Right download button
 		final View rightDownloadButtonView = (View) view.findViewById(R.id.download_button_right_view);
-		((TextView) rightDownloadButtonView.findViewById(R.id.download_button_right)).setTextColor(buttonColorStateList);
-		rightDownloadButtonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
 		rightDownloadButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -221,8 +202,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		// Bottom title button
 		final View bottomTitleButtonView = view.findViewById(R.id.title_button_bottom_view);
-		((TextView) bottomTitleButtonView.findViewById(R.id.title_button_bottom)).setTextColor(buttonColorStateList);
-		bottomTitleButtonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
 		bottomTitleButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -713,7 +692,29 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		origMarkerY = box.getCenterPixelY();
 	}
 
-	private void updateButtonsAndProgress() {
+	private void enableDisableButtons(View buttonView, TextView button, boolean enabled) {
+		if (enabled) {
+			ColorStateList buttonColorStateList = new ColorStateList(
+					new int[][]{
+							new int[]{android.R.attr.state_pressed},
+							new int[]{}
+					},
+					new int[] {
+							getResources().getColor(nightMode ? R.color.ctx_menu_controller_button_text_color_dark_p : R.color.ctx_menu_controller_button_text_color_light_p),
+							getResources().getColor(nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n)
+					}
+			);
+
+			buttonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
+			button.setTextColor(buttonColorStateList);
+		} else {
+			buttonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_disabled_bg_dark: R.drawable.context_menu_controller_disabled_bg_light);
+			button.setTextColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_controller_disabled_text_color_dark : R.color.ctx_menu_controller_disabled_text_color_light));
+		}
+		button.setEnabled(enabled);
+	}
+
+	public void updateButtonsAndProgress() {
 		if (view != null) {
 			TitleButtonController leftTitleButtonController = menu.getLeftTitleButtonController();
 			TitleButtonController rightTitleButtonController = menu.getRightTitleButtonController();
@@ -732,6 +733,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final TextView leftTitleButton = (TextView) view.findViewById(R.id.title_button);
 			final TextView titleButtonRightText = (TextView) view.findViewById(R.id.title_button_right_text);
 			if (leftTitleButtonController != null) {
+				enableDisableButtons(leftTitleButtonView, leftTitleButton, leftTitleButtonController.enabled);
 				leftTitleButton.setText(leftTitleButtonController.caption);
 				if (leftTitleButtonController.visible) {
 					leftTitleButtonView.setVisibility(View.VISIBLE);
@@ -759,6 +761,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final View rightTitleButtonView = view.findViewById(R.id.title_button_right_view);
 			final TextView rightTitleButton = (TextView) view.findViewById(R.id.title_button_right);
 			if (rightTitleButtonController != null) {
+				enableDisableButtons(rightTitleButtonView, rightTitleButton, rightTitleButtonController.enabled);
 				rightTitleButton.setText(rightTitleButtonController.caption);
 				rightTitleButtonView.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
@@ -775,6 +778,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final View bottomTitleButtonView = view.findViewById(R.id.title_button_bottom_view);
 			final TextView bottomTitleButton = (TextView) view.findViewById(R.id.title_button_bottom);
 			if (bottomTitleButtonController != null) {
+				enableDisableButtons(bottomTitleButtonView, bottomTitleButton, bottomTitleButtonController.enabled);
 				bottomTitleButton.setText(bottomTitleButtonController.caption);
 				bottomTitleButtonView.setVisibility(bottomTitleButtonController.visible ? View.VISIBLE : View.GONE);
 
@@ -799,6 +803,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final View leftDownloadButtonView = view.findViewById(R.id.download_button_left_view);
 			final TextView leftDownloadButton = (TextView) view.findViewById(R.id.download_button_left);
 			if (leftDownloadButtonController != null) {
+				enableDisableButtons(leftDownloadButtonView, leftDownloadButton, leftDownloadButtonController.enabled);
 				leftDownloadButton.setText(leftDownloadButtonController.caption);
 				leftDownloadButtonView.setVisibility(leftDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
@@ -815,6 +820,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final View rightDownloadButtonView = view.findViewById(R.id.download_button_right_view);
 			final TextView rightDownloadButton = (TextView) view.findViewById(R.id.download_button_right);
 			if (rightDownloadButtonController != null) {
+				enableDisableButtons(rightDownloadButtonView, rightDownloadButton, rightDownloadButtonController.enabled);
 				rightDownloadButton.setText(rightDownloadButtonController.caption);
 				rightDownloadButtonView.setVisibility(rightDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
@@ -966,6 +972,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				this.initLayout = true;
 				this.centered = true;
 			}
+			updateButtonsAndProgress();
 			runLayoutListener();
 		}
 	}
