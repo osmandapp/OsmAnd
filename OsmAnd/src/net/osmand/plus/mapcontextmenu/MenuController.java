@@ -803,6 +803,9 @@ public abstract class MenuController extends BaseMenuController {
 			this.menuController = menuController;
 			setBgIds(R.color.actionbar_light_color, R.color.actionbar_dark_color,
 					R.color.actionbar_light_color, R.color.actionbar_dark_color);
+			setBackBtnIconClrIds(R.color.color_white, R.color.color_white);
+			setCloseBtnIconClrIds(R.color.color_white, R.color.color_white);
+			setTitleTextClrIds(R.color.color_white, R.color.color_white);
 		}
 
 		public MenuController getMenuController() {
