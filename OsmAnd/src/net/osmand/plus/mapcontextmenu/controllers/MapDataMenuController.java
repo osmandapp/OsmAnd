@@ -253,6 +253,10 @@ public class MapDataMenuController extends MenuController {
 		} else {
 			res = getMapActivity().getString(R.string.shared_string_map);
 		}
+		DownloadActivityType downloadActivityType = getDownloadActivityType();
+		if (downloadActivityType != null) {
+			res += ", " + downloadActivityType.getString(getMapActivity());
+		}
 		if (getMenuType() == MenuType.STANDARD) {
 			res += "\n";
 		}
