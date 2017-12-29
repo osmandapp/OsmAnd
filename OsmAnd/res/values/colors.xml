@@ -373,4 +373,9 @@
 	<color name="route_info_checked_mode_icon_color_dark">#d28521</color>
 	<color name="route_info_unchecked_mode_icon_color">#727272</color>
 
+	<color name="multi_selection_menu_divider_light">#f0f0f0</color>
+	<color name="multi_selection_menu_divider_dark">#222526</color>
+	<color name="multi_selection_menu_close_btn_light">#2f7af5</color>
+	<color name="multi_selection_menu_close_btn_dark">#e69122</color>
+
 </resources>
