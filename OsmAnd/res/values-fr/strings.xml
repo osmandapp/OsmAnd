@@ -2819,7 +2819,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="mappilary_no_internet_desc">Vous devez être connecté à Internet pour afficher les photos Mapillary</string>
     <string name="retry">Essayer à nouveau</string>
 <string name="measurement_tool_action_bar">Déplacez la carte et ajoutez des points</string>
-    <string name="measurement_tool">Mesurer de distance</string>
+    <string name="measurement_tool">Mesurer une distance</string>
     <string name="shared_string_create">Créer</string>
 <string name="add_gpx_waypoint_bottom_sheet_title">Ajouter un point GPX</string>
     <string name="release_2_7">\\022 Greffon Mapillary avec les images de rue
