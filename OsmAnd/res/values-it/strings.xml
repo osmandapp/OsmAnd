@@ -1989,7 +1989,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="si_min_km">Minuti al chilometro</string>
     <string name="si_min_m">Minuti per miglia</string>
     <string name="si_nm_h">Miglia nautiche per ora (nodi)</string>
-    <string name="nm_h">kn/h</string>
+    <string name="nm_h">nm/h</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
