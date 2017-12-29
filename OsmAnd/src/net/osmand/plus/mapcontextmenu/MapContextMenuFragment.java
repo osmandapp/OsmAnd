@@ -1492,7 +1492,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			boolean progressVisible = menu.getTitleProgressController() != null && menu.getTitleProgressController().visible;
 			updateButtonsAndProgress();
 			if (wasProgressVisible != progressVisible) {
-				runLayoutListener();
+				refreshTitle();
 			}
 		}
 	}
