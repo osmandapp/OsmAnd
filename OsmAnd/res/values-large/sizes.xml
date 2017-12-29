@@ -177,4 +177,7 @@
 
 	<dimen name="wikipedia_button_left_padding">29dp</dimen>
 
+	<dimen name="multi_selection_menu_padding_top">20dp</dimen>
+	<dimen name="multi_selection_menu_padding_bottom">23dp</dimen>
+
 </resources>

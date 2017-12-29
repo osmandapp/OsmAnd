@@ -19,8 +19,8 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/content_padding_small"
-            android:paddingTop="@dimen/list_content_padding"
+            android:paddingBottom="@dimen/multi_selection_menu_padding_bottom"
+            android:paddingTop="@dimen/multi_selection_menu_padding_top"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -43,7 +43,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:paddingTop="@dimen/list_content_padding"
+            android:paddingTop="@dimen/multi_selection_menu_padding_top"
             android:id="@+id/context_menu_icon_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
