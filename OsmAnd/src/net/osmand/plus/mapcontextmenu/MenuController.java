@@ -573,7 +573,7 @@ public abstract class MenuController extends BaseMenuController {
 			if (enabled) {
 				colorRes = isLight() ? R.color.map_widget_blue : R.color.osmand_orange;
 			} else {
-				colorRes = isLight() ? R.color.ctx_menu_controller_disabled_text_color_dark : R.color.ctx_menu_controller_disabled_text_color_light;
+				colorRes = isLight() ? R.color.ctx_menu_controller_disabled_text_color_light : R.color.ctx_menu_controller_disabled_text_color_dark;
 			}
 			return colorRes;
 		}
