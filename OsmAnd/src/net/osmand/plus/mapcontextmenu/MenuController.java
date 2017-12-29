@@ -403,6 +403,10 @@ public abstract class MenuController extends BaseMenuController {
 		return null;
 	}
 
+	public boolean navigateInPedestrianMode() {
+		return false;
+	}
+
 	public int getFavActionIconId() {
 		return R.drawable.map_action_fav_dark;
 	}

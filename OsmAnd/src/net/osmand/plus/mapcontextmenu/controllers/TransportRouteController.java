@@ -81,6 +81,11 @@ public class TransportRouteController extends MenuController {
 	}
 
 	@Override
+	public boolean navigateInPedestrianMode() {
+		return true;
+	}
+
+	@Override
 	protected Object getObject() {
 		return transportRoute;
 	}
@@ -99,11 +104,6 @@ public class TransportRouteController extends MenuController {
 
 	@Override
 	public boolean displayDistanceDirection() {
-		return false;
-	}
-
-	@Override
-	public boolean navigateButtonVisible() {
 		return false;
 	}
 

@@ -84,6 +84,11 @@ public class ParkingPositionMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean navigateInPedestrianMode() {
+		return true;
+	}
+
+	@Override
 	public boolean displayDistanceDirection() {
 		return true;
 	}

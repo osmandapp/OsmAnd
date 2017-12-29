@@ -419,7 +419,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public boolean navigateInPedestrianMode() {
-		return menuController instanceof ParkingPositionMenuController;
+		if (menuController != null) {
+			return menuController.navigateInPedestrianMode();
+		}
+		return false;
 	}
 
 	public boolean close() {
