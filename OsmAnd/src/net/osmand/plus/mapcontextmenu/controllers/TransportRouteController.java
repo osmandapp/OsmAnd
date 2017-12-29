@@ -71,8 +71,6 @@ public class TransportRouteController extends MenuController {
 		};
 		rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_next);
 		rightTitleButtonController.rightIconId = R.drawable.ic_arrow_forward;
-
-		updateControllers();
 	}
 
 	@Override
@@ -126,6 +124,12 @@ public class TransportRouteController extends MenuController {
 
 	private String getStopType() {
 		return getMapActivity().getString(transportRoute.getTypeStrRes()) + " " + getMapActivity().getString(R.string.transport_Stop).toLowerCase();
+	}
+
+	@Override
+	public void updateData() {
+		super.updateData();
+		updateControllers();
 	}
 
 	@Override
