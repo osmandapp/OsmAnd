@@ -121,15 +121,7 @@ public class TransportRouteController extends MenuController {
 
 	@Override
 	public String getTypeStr() {
-		if (transportRoute.refStop != null && !TextUtils.isEmpty(transportRoute.refStop.getName())) {
-			return transportRoute.refStop.getName();
-		} else if (transportRoute.stop != null && !TextUtils.isEmpty(transportRoute.stop.getName())) {
-			return transportRoute.stop.getName();
-		} else if (!TextUtils.isEmpty(getPointDescription().getTypeName())) {
-			return getPointDescription().getTypeName();
-		} else {
-			return getStopType();
-		}
+		return getPointDescription().getName();
 	}
 
 	private String getStopType() {
@@ -218,6 +210,19 @@ public class TransportRouteController extends MenuController {
 			return currentPos - 1;
 		}
 		return -1;
+	}
+
+	@Override
+	public String getNameStr() {
+		if (transportRoute.refStop != null && !TextUtils.isEmpty(transportRoute.refStop.getName())) {
+			return transportRoute.refStop.getName();
+		} else if (transportRoute.stop != null && !TextUtils.isEmpty(transportRoute.stop.getName())) {
+			return transportRoute.stop.getName();
+		} else if (!TextUtils.isEmpty(getPointDescription().getTypeName())) {
+			return getPointDescription().getTypeName();
+		} else {
+			return getStopType();
+		}
 	}
 
 	@Override
