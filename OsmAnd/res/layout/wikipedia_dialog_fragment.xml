@@ -65,7 +65,10 @@
                     android:id="@+id/title_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/content_padding"
+                    android:paddingLeft="@dimen/content_padding"
+                    android:paddingRight="@dimen/content_padding"
+                    android:paddingTop="@dimen/list_header_padding"
+                    android:paddingBottom="@dimen/list_header_padding"
                     android:textSize="@dimen/map_button_text_size"
                     tools:text="Title"/>
 
