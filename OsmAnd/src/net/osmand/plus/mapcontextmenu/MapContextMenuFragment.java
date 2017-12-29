@@ -530,6 +530,23 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		return view;
 	}
 
+	private void toggleDetailsHideButton() {
+		int menuState = menu.getCurrentMenuState();
+		final boolean showShowHideButton = menuState == MenuState.HALF_SCREEN || (!menu.isLandscapeLayout() && menuState == MenuState.FULL_SCREEN);
+		TextView detailsButton = (TextView) view.findViewById(R.id.context_menu_details_button);
+		detailsButton.setText(showShowHideButton ? R.string.shared_string_collapse : R.string.description);
+		detailsButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (showShowHideButton) {
+					openMenuHeaderOnly();
+				} else {
+					openMenuFullScreen();
+				}
+			}
+		});
+	}
+
 	private void deactivate(View view) {
 		view.setEnabled(false);
 		view.setAlpha(0.5f);
@@ -564,6 +581,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		changeMenuState(getViewY(), true, true, false);
 	}
 
+	public void openMenuHeaderOnly() {
+		changeMenuState(getViewY(), true, false, true);
+	}
+
 	public void openMenuHalfScreen() {
 		int oldMenuState = menu.getCurrentMenuState();
 		if (oldMenuState == MenuState.HEADER_ONLY) {
@@ -596,6 +617,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			restoreCustomMapRatio();
 			menu.updateControlsVisibility(true);
 			doBeforeMenuStateChange(oldMenuState, newMenuState);
+			toggleDetailsHideButton();
 		}
 
 		applyPosY(currentY, needCloseMenu, needMapAdjust, oldMenuState, newMenuState, 0);
