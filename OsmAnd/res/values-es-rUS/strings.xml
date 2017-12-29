@@ -2888,7 +2888,7 @@ Proporciona un código completo</string>
     <string name="context_menu_read_full_article">Leer artículo completo</string>
     <string name="context_menu_read_article">Leer artículo</string>
     <string name="context_menu_points_of_group">Todos los puntos del grupo</string>
-    <string name="opened_from">Abierto de</string>
+    <string name="opened_from">Abierto desde las</string>
     <string name="opened_till">Abierto hasta las</string>
     <string name="will_be_closed_at">Cerrará a las</string>
     <string name="will_be_opened_at">Abrirá a las</string>

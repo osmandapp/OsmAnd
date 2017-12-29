@@ -2986,7 +2986,7 @@
 \n • در نظر گرفتن ناهمواری (صعود) برای محاسبهٔ زمان پیاده‌گردی (قاعدهٔ نای‌اسمیت)
 \n
 \n</string>
-    <string name="what_is_here">اینجا کجاست:</string>
+    <string name="what_is_here">چیزهایی که اینجاست:</string>
     <string name="parked_at">ساعت پارک‌کردن</string>
     <string name="pick_up_till">برداشتن تا</string>
     <string name="without_time_limit">بدون محدودیت زمانی</string>
@@ -2999,8 +2999,8 @@
     <string name="will_be_opened_at">ساعت بازکردن</string>
     <string name="will_be_opened_on">روز بازکردن</string>
     <string name="additional_actions">عملیات بیشتر</string>
-    <string name="av_locations_selected_desc">فایل GPX با مختصات و داده‌های یادداشت‌های انتخاب‌شده</string>
-    <string name="av_locations_all_desc">فایل GPX با مختصات و داده‌های همهٔ یادداشت‌ها</string>
+    <string name="av_locations_selected_desc">فایل GPX با مختصات و داده‌های یادداشت‌هایی که انتخاب شده است.</string>
+    <string name="av_locations_all_desc">فایل GPX با مختصات و داده‌های یادداشت‌هایی که انتخاب شده است.</string>
     <string name="shared_string_actions">عملیات‌ها</string>
     <string name="shared_string_marker">نشانه</string>
     <string name="osm_recipient_stat">ویرایش‌ها</string>

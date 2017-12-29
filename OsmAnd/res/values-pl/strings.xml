@@ -2935,4 +2935,19 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_added">Dodane</string>
     <string name="empty_state_osm_edits">Tworzenie lub modyfikowanie obiektów OSM</string>
     <string name="rename_marker">Zmień nazwę znacznika</string>
+    <string name="opened_from">Otwarte od</string>
+    <string name="opened_till">Otwarte do</string>
+    <string name="additional_actions">Dodatkowe czynności</string>
+    <string name="release_3_0">\\022 Wykrywanie znaków stop uwzględnia teraz kierunek jazdy,
+\n
+\n • nowy algorytm udostępnia bardziej precyzyjne wartości podejścia/zejścia dla śladów GPX,
+\n
+\n • czas wędrówki uwzględnia ukształtowanie terenu (reguła Naismitha).
+\n
+\n</string>
+    <string name="shared_string_actions">Czynności</string>
+    <string name="shared_string_marker">Znacznik</string>
+    <string name="marker_activated">Uaktywniono znacznik %s.</string>
+    <string name="by_date">Według daty</string>
+    <string name="by_type">Według rodzaju</string>
     </resources>
