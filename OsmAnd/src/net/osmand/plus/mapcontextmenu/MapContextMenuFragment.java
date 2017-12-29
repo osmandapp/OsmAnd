@@ -1501,7 +1501,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (created) {
 			menu.updateData();
 			updateButtonsAndProgress();
-			runLayoutListener();
+			refreshTitle();
 		}
 	}
 

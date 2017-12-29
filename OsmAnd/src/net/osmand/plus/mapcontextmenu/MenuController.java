@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -433,14 +434,23 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public int getAdditionalInfoColor() {
+		if (indexItem != null) {
+			return R.color.icon_color;
+		}
 		return 0;
 	}
 
 	public String getAdditionalInfoStr() {
+		if (indexItem != null) {
+			return getMapActivity().getString(R.string.file_size_in_mb, indexItem.getArchiveSizeMB());
+		}
 		return "";
 	}
 
 	public int getAdditionalInfoIconRes() {
+		if (indexItem != null) {
+			return R.drawable.ic_sdcard_16;
+		}
 		return 0;
 	}
 
@@ -646,7 +656,7 @@ public abstract class MenuController extends BaseMenuController {
 		}
 	}
 
-	public void buildMapDownloadButton(final LatLon latLon) {
+	public void buildMapDownloadButtonAndSizeInfo(final LatLon latLon) {
 		new AsyncTask<Void, Void, BinaryMapDataObject>() {
 
 			ResourceManager rm;

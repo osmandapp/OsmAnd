@@ -598,7 +598,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				historyStack.add(menuData);
 			}
 			if (!(menuController instanceof MapDataMenuController)) {
-				menuController.buildMapDownloadButton(latLon);
+				menuController.buildMapDownloadButtonAndSizeInfo(latLon);
 			}
 			return true;
 		} else {

@@ -150,7 +150,7 @@ public class AmenityMenuController extends MenuController {
 		if (openingHoursInfo != null) {
 			return openingHoursInfo.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
 		}
-		return 0;
+		return super.getAdditionalInfoColor();
 	}
 
 	@Override
@@ -158,7 +158,7 @@ public class AmenityMenuController extends MenuController {
 		if (openingHoursInfo != null) {
 			return openingHoursInfo.getInfo(getMapActivity());
 		}
-		return "";
+		return super.getAdditionalInfoStr();
 	}
 
 	@Override
@@ -166,7 +166,7 @@ public class AmenityMenuController extends MenuController {
 		if (openingHoursInfo != null) {
 			return R.drawable.ic_action_opening_hour_16;
 		}
-		return 0;
+		return super.getAdditionalInfoIconRes();
 	}
 
 	public static String getTypeStr(Amenity amenity) {
