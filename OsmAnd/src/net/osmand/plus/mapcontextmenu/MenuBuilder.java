@@ -693,7 +693,7 @@ public class MenuBuilder {
 	}
 
 	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
-		plainMenuItems.add(new PlainMenuItem(iconId, text, null, needLinks, isUrl, false, null, onClickListener));
+		plainMenuItems.add(new PlainMenuItem(iconId, null, text, needLinks, isUrl, false, null, onClickListener));
 	}
 
 	public void addPlainMenuItem(int iconId, String buttonText, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
@@ -703,7 +703,7 @@ public class MenuBuilder {
 	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl,
 								 boolean collapsable, CollapsableView collapsableView,
 								 OnClickListener onClickListener) {
-		plainMenuItems.add(new PlainMenuItem(iconId, text, null, needLinks, isUrl, collapsable, collapsableView, onClickListener));
+		plainMenuItems.add(new PlainMenuItem(iconId, null, text, needLinks, isUrl, collapsable, collapsableView, onClickListener));
 	}
 
 	public void clearPlainMenuItems() {
