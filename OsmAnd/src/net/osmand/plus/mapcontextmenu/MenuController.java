@@ -226,8 +226,8 @@ public abstract class MenuController extends BaseMenuController {
 		return true;
 	}
 
-	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
-		builder.addPlainMenuItem(iconId, text, needLinks, isUrl, onClickListener);
+	public void addPlainMenuItem(int iconId, String buttonText, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
+		builder.addPlainMenuItem(iconId, buttonText, text, needLinks, isUrl, onClickListener);
 	}
 
 	public void clearPlainMenuItems() {
@@ -240,7 +240,7 @@ public abstract class MenuController extends BaseMenuController {
 
 	protected void addMyLocationToPlainItems(LatLon latLon) {
 		OsmandSettings st = ((OsmandApplication) getMapActivity().getApplicationContext()).getSettings();
-		addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationName(getMapActivity(),
+		addPlainMenuItem(R.drawable.ic_action_get_my_location, null, PointDescription.getLocationName(getMapActivity(),
 				latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", " "), false, false, null);
 		//if (st.COORDINATES_FORMAT.get() != PointDescription.OLC_FORMAT)
 		//	addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationOlcName(

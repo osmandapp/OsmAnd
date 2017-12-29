@@ -271,16 +271,16 @@ public class MapDataMenuController extends MenuController {
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		if (indexItem != null) {
-			addPlainMenuItem(R.drawable.ic_action_info_dark, indexItem.getType().getString(getMapActivity()), false, false, null);
+			addPlainMenuItem(R.drawable.ic_action_info_dark, null, indexItem.getType().getString(getMapActivity()), false, false, null);
 			StringBuilder sizeStr = new StringBuilder();
 			sizeStr.append(indexItem.getSizeDescription(getMapActivity()));
 			if (backuped) {
 				sizeStr.append(" — ").append(LocalIndexType.DEACTIVATED.getHumanString(getMapActivity()));
 			}
-			addPlainMenuItem(R.drawable.ic_action_info_dark, sizeStr.toString(), false, false, null);
+			addPlainMenuItem(R.drawable.ic_action_info_dark, null, sizeStr.toString(), false, false, null);
 		} else if (localIndexInfo != null) {
 			if (getDownloadActivityType() != null) {
-				addPlainMenuItem(R.drawable.ic_action_info_dark, getDownloadActivityType().getString(getMapActivity()), false, false, null);
+				addPlainMenuItem(R.drawable.ic_action_info_dark, null, getDownloadActivityType().getString(getMapActivity()), false, false, null);
 			}
 			StringBuilder sizeStr = new StringBuilder();
 			if (localIndexInfo.getSize() >= 0) {
@@ -297,7 +297,7 @@ public class MapDataMenuController extends MenuController {
 					sizeStr.append(LocalIndexType.DEACTIVATED.getHumanString(getMapActivity()));
 				}
 			}
-			addPlainMenuItem(R.drawable.ic_action_info_dark, sizeStr.toString(), false, false, null);
+			addPlainMenuItem(R.drawable.ic_action_info_dark, null, sizeStr.toString(), false, false, null);
 		}
 		if (!Algorithms.isEmpty(mapObject.getWorldRegion().getParams().getWikiLink())) {
 			String[] items = mapObject.getWorldRegion().getParams().getWikiLink().split(":");
@@ -307,7 +307,7 @@ public class MapDataMenuController extends MenuController {
 			} else {
 				url = "https://wikipedia.org/wiki/" + items[0].replace(' ', '_');
 			}
-			addPlainMenuItem(R.drawable.ic_world_globe_dark, url, false, true, null);
+			addPlainMenuItem(R.drawable.ic_world_globe_dark, null, url, false, true, null);
 		}
 		if (!Algorithms.isEmpty(mapObject.getWorldRegion().getParams().getPopulation())) {
 			String population = mapObject.getWorldRegion().getParams().getPopulation();
@@ -321,14 +321,14 @@ public class MapDataMenuController extends MenuController {
 				b.insert(0, population.charAt(i));
 				k++;
 			}
-			addPlainMenuItem(R.drawable.ic_action_info_dark, getMapActivity().getResources().getString(R.string.poi_population)
+			addPlainMenuItem(R.drawable.ic_action_info_dark, null, getMapActivity().getResources().getString(R.string.poi_population)
 					+ ": " + b, false, false, null);
 		}
 		if (indexItem != null) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(getMapActivity());
-			addPlainMenuItem(R.drawable.ic_action_data, indexItem.getRemoteDate(dateFormat), false, false, null);
+			addPlainMenuItem(R.drawable.ic_action_data, null, indexItem.getRemoteDate(dateFormat), false, false, null);
 		} else if (localIndexInfo != null) {
-			addPlainMenuItem(R.drawable.ic_action_data, localIndexInfo.getDescription(), false, false, null);
+			addPlainMenuItem(R.drawable.ic_action_data, null, localIndexInfo.getDescription(), false, false, null);
 		}
 	}
 

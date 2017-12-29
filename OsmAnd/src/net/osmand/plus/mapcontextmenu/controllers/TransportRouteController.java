@@ -240,7 +240,8 @@ public class TransportRouteController extends MenuController {
 		if (!transportRoute.showWholeRoute) {
 			startPosition = (currentStop == -1 ? 0 : currentStop);
 			if (currentStop > 0) {
-				addPlainMenuItem(defaultIcon, getMapActivity().getString(R.string.route_stops_before, currentStop),
+				addPlainMenuItem(defaultIcon, getMapActivity().getString(R.string.shared_string_show),
+						getMapActivity().getString(R.string.route_stops_before, currentStop),
 						false, false, new OnClickListener() {
 
 							@Override
@@ -258,7 +259,7 @@ public class TransportRouteController extends MenuController {
 				name = getStopType();
 			}
 			addPlainMenuItem(currentStop == i ? R.drawable.ic_action_marker_dark : defaultIcon,
-					name, false, false, new OnClickListener() {
+					null, name, false, false, new OnClickListener() {
 
 						@Override
 						public void onClick(View arg0) {

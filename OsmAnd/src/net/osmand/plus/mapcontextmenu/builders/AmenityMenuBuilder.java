@@ -518,10 +518,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else {
 				link = "https://www.openstreetmap.org/way/";
 			}
-			buildRow(view, R.drawable.ic_action_info_dark, link + (amenity.getId() >> 1),
+			buildRow(view, R.drawable.ic_action_info_dark, null, link + (amenity.getId() >> 1),
 					0, false, null, true, 0, true, null, false);
 		}
-		buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationName(app,
+		buildRow(view, R.drawable.ic_action_get_my_location, null, PointDescription.getLocationName(app,
 				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true)
 				.replaceAll("\n", " "), 0, false, null, false, 0, false, null, false);
 		//if (st.COORDINATES_FORMAT.get() != PointDescription.OLC_FORMAT)
