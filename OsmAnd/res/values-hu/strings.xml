@@ -2964,4 +2964,20 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="context_menu_points_of_group">A csoport összes pontja</string>
     <string name="opened_from">Nyitott ekkor:</string>
     <string name="opened_till">Nyitva eddig:</string>
+    <string name="will_be_closed_at">Ekkor fog bezárni:</string>
+    <string name="will_be_opened_at">Ekkor fog kinyitni:</string>
+    <string name="will_be_opened_on">Ekkor fog kinyitni:</string>
+    <string name="additional_actions">További műveletek</string>
+    <string name="av_locations_selected_desc">"GPX fájl a kiválasztott pont  koordinátáival és adataival."</string>
+    <string name="av_locations_all_desc">"GPX fájl az összes jegyzet  koordinátáival és adataival."</string>
+    <string name="release_3_0">• A stoptáblák felismerése már figyelembe veszi a vezetési irányt
+\n
+\n • Új GPX nyomvonal feldolgozási algoritmus, ami valósabb szintemelkedés/szintvesztés adatokat számol
+\n
+\n • Terep (emelkedőket) figyelembe vevő gyaloglási idő számítás (Naismith-szabály)
+\n
+\n</string>
+    <string name="modify_the_search_query">Keresési kifejezés módosítása.</string>
+    <string name="shared_string_actions">Műveletek</string>
+    <string name="shared_string_marker">Jelölő</string>
     </resources>
