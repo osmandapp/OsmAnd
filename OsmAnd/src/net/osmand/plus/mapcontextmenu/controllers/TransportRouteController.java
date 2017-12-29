@@ -71,6 +71,8 @@ public class TransportRouteController extends MenuController {
 		};
 		rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_next);
 		rightTitleButtonController.rightIconId = R.drawable.ic_arrow_forward;
+
+		updateControllers();
 	}
 
 	@Override
