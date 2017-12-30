@@ -1259,7 +1259,7 @@
 	<string name="poi_water_point">Ponto de água</string>
 
 <string name="poi_cooling_tower">Torre de resfriamento</string>
-	<string name="poi_bicycle_parking_wall_loops">Suporte de parede</string>
+	<string name="poi_bicycle_parking_wall_loops">Suporte de roda</string>
 	<string name="poi_bicycle_parking_rack">Prateleira</string>
 	<string name="poi_deadlock">Impasse</string>
 
@@ -2872,4 +2872,62 @@
 	<string name="poi_free_flying_paragliding_yes">Parapente</string>
 	<string name="poi_outdoor_seating">Lugares ao ar livre</string>
 	<string name="poi_diaper_table_count">Fraldário</string>
+	<string name="poi_drive_in">Drive-in</string>
+	<string name="poi_drive_through">Drive-through</string>
+	<string name="poi_route_subway_ref">Metrô</string>
+
+	<string name="poi_free_flying_site_toplanding">Pouso elevado</string>
+	<string name="poi_free_flying_site_towing">Reboque</string>
+	<string name="poi_free_flying_paragliding_no">Parapente: não</string>
+	<string name="poi_free_flying_hanggliding_yes">Asa-delta</string>
+	<string name="poi_free_flying_hanggliding_no">Asa-delta: não</string>
+	<string name="poi_free_flying_rigid_yes">Rígido</string>
+	<string name="poi_free_flying_rigid_no">Asa-delta rígida: não</string>
+	<string name="poi_tanning_salon">Solário</string>
+
+	<string name="poi_sanitary_dump_station">Estação de descarga sanitária</string>
+
+	<string name="poi_medical_system_western_yes">Ocidental</string>
+	<string name="poi_medical_system_chinese_yes">Chinês tradicional</string>
+	<string name="poi_medical_system_mongolian_yes">Mongol tradicional</string>
+	<string name="poi_medical_system_tibetan_yes">Tibetano tradicional</string>
+	<string name="poi_health_service_nursing_yes">Serviço de saúde: enfermagem: sim</string>
+	<string name="poi_health_service_nursing_no">Serviço de saúde: enfermagem: não</string>
+	<string name="poi_health_service_counselling_yes">Serviço de saúde: aconselhamento: sim</string>
+	<string name="poi_health_service_counselling_no">Serviço de saúde: aconselhamento: não</string>
+	<string name="poi_health_service_examination_yes">Serviço de saúde: exame: sim</string>
+	<string name="poi_health_service_examination_no">Serviço de saúde: exame: não</string>
+	<string name="poi_health_service_child_care_yes">Serviço de saúde: cuidados infantis: sim</string>
+	<string name="poi_health_service_child_care_no">Serviço de saúde: cuidados infantis: não</string>
+	<string name="poi_health_service_prevention_yes">Serviço de saúde: prevenção: sim</string>
+	<string name="poi_health_service_prevention_no">Serviço de saúde: prevenção: não</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Serviço de saúde: vacinação: sim</string>
+	<string name="poi_health_service_prevention_vaccination_no">Serviço de saúde: vacinação: não</string>
+	<string name="poi_health_service_support_yes">Serviço de saúde: apoio: sim</string>
+	<string name="poi_health_service_support_no">Serviço de saúde: apoio: não</string>
+	<string name="poi_health_service_test_yes">Serviço de saúde: teste: sim</string>
+	<string name="poi_health_service_test_no">Serviço de saúde: teste: não</string>
+
+	<string name="poi_health_facility_type_office">Consultório médico</string>
+	<string name="poi_health_facility_type_laboratory">Tipo de instalação de saúde: laboratório</string>
+	<string name="poi_health_facility_type_therapy">Tipo de instalação de saúde: terapia</string>
+	<string name="poi_health_facility_type_department">Tipo de instalação de saúde: departamento</string>
+	<string name="poi_health_facility_type_dispensary">Tipo de instalação de saúde: farmácia</string>
+	<string name="poi_health_facility_type_first_aid">Tipo de instalação de saúde: primeiros socorros</string>
+	<string name="poi_health_facility_type_nursing_home">Tipo de instalação de saúde: lar de idosos</string>
+	<string name="poi_health_facility_type_support_group_home">Tipo de instalação de saúde: casa de grupo de apoio</string>
+
+	<string name="poi_suction_point">Ponto de sucção</string>
+
+	<string name="poi_fire_hydrant_type_underground">Subterrâneo</string>
+	<string name="poi_fire_hydrant_type_pillar">Coluna</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Coluna seca</string>
+	<string name="poi_fire_hydrant_type_wall">Parede</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Kit de primeiros socorros</string>
+	<string name="poi_toilets_disposal_flush">Eliminação de dejetos: descarga</string>
+	<string name="poi_toilets_disposal_pitlatrine">Eliminação de dejetos: latrina por poço</string>
+	<string name="poi_toilets_disposal_chemical">Eliminação de dejetos: químico</string>
+	<string name="poi_toilets_disposal_bucket">Eliminação de dejetos: balde</string>
+
 	</resources>
