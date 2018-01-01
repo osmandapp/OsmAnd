@@ -43,9 +43,9 @@
     <string name="osm_changes_added_to_local_edits">Mudanças no OSM adicionadas ao conjunto de alterações locais</string>
    	<string name="mark_to_delete">Selecione para apagar</string>
 	<string name="osmo_grop_name_length_alert">O nome do grupo deve ter pelo menos 3 caracteres!</string>
-	<string name="local_osm_changes_upload_all_confirm">Você enviará %1$d mudanças ao OSM. Tem certeza?</string>
+	<string name="local_osm_changes_upload_all_confirm">Você enviará %1$d alterações ao OSM. Tem certeza?</string>
     <string name="confirmation_to_clear_history">Você quer limpar o histórico?</string>
-    <string name="delay_to_start_navigation_descr">Especifique o tempo de espera para permanecer na tela de planejamento de rota</string>
+    <string name="delay_to_start_navigation_descr">Especifique o tempo de espera para permanecer na tela de planejamento de rota.</string>
     <string name="delay_to_start_navigation">Iniciar navegação curva a curva depois de…</string>
     <string name="shared_string_go">Ir</string>
 	<string name="osmand_parking_overdue">vencido</string>
@@ -62,8 +62,9 @@
     <string name="waypoint_visit_before">Passar antes</string>
     <string name="simulate_your_location">Simular rota</string>
     <string name="drawer">Lista simples</string>
-    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
-    <string name="tips_and_tricks_descr">Respostas às perguntas frequentes, mudanças recentes e outras</string>
+    <string name="short_location_on_map">Lat %1$s
+\nLon %2$s</string>
+    <string name="tips_and_tricks_descr">Respostas às perguntas frequentes, mudanças recentes e outras.</string>
     <string name="routing_settings_2">Configurações de navegação</string>
     <string name="general_settings_2">Configurações gerais</string>
 	<string name="shared_string_ellipsis">…</string>
@@ -2696,4 +2697,5 @@ Pôr do Sol: %2$s</string>
     <string name="import_track">Importar trajeto</string>
     <string name="move_point">Mover Ponto</string>
     <string name="osm_recipients_label">Destinatários OSM</string>
+    <string name="osmand_plus_extended_description_part6">Recursos de ciclismo e pedestre • Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre • Roteamento e modos de exibição especiais para bicicleta e pedestres • Paradas de transporte público opcionais (ônibus, troleibus, trem) incluindo nomes de linhas • Gravação opcional de viagem para arquivo GPX local ou serviço on-line • Exibição opcional de velocidade e altitudes • Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
     </resources>
