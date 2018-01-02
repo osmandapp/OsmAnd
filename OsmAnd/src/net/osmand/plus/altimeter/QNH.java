@@ -5,13 +5,13 @@ import java.lang.Math;
 //http://en.wikipedia.org/wiki/Atmospheric_pressure
 
 class QNH{
-	public static double standardAtmospherePressure = 1013.25; //standard sea level pressure (hPa)
-	private static double L = 0.0065;    //temperature lapse rate
-	private static double cp = 1007;     //constant pressure specific heat
-	private static double T = 288.15;    //sea level standard temperature
-	private static double g = 9.80665;   //Earth-surface gravitational acceleration
-	private static double M = 0.0289644; //molar mass of dry air
-	private static double R = 8.31447;   //universal gas constant
+	public static final double standardAtmospherePressure = 1013.25; //standard sea level pressure (hPa)
+	private static final double L = 0.0065;    //temperature lapse rate
+	private static final double cp = 1007;     //constant pressure specific heat
+	private static final double T = 288.15;    //sea level standard temperature
+	private static final double g = 9.80665;   //Earth-surface gravitational acceleration
+	private static final double M = 0.0289644; //molar mass of dry air
+	private static final double R = 8.31447;   //universal gas constant
 
 	public static double qnh(double h, double p){
 		double qnh = 0;
