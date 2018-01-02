@@ -52,7 +52,6 @@ public class AltimeterPlugin extends OsmandPlugin implements SensorEventListener
   private	EditText edittextQNH;
   private	EditText edittextAltitude;
   private	boolean promoteChange = true;
-  private	double qnhDialog = QNH.standardAtmospherePressure;
 
 	public AltimeterPlugin(OsmandApplication app) {
 		this.app = app;
@@ -125,7 +124,11 @@ public class AltimeterPlugin extends OsmandPlugin implements SensorEventListener
     bld.setMessage(app.getString(R.string.map_widget_altimeter));
     bld.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int id) {
-          qnh = qnhDialog;
+            try{
+              qnh = Double.parseDouble(edittextQNH.getText().toString());
+            }catch(NumberFormatException e){
+              return;
+            }
         }
       });
     bld.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
@@ -136,51 +139,22 @@ public class AltimeterPlugin extends OsmandPlugin implements SensorEventListener
     edittextQNH = (EditText)dialogView.findViewById(R.id.edittext_qnh);
     edittextAltitude = (EditText)dialogView.findViewById(R.id.edittext_altitude);
 
-    edittextQNH.addTextChangedListener(new TextWatcher(){
-          @Override
-          public void afterTextChanged(Editable s){}
-          @Override
-          public void beforeTextChanged(CharSequence s, int start, int count, int after){};
-          @Override
-          public void onTextChanged(CharSequence s, int start, int before, int count){
-            if(!promoteChange)return;
-            double altitude = 0;
-            double tmpQNH = QNH.standardAtmospherePressure;
-            try{
-              tmpQNH = Double.parseDouble(s.toString());
-            }catch(NumberFormatException e){
-              return;
+    edittextQNH.addTextChangedListener(new qnhAltitudeTextWatcher(edittextAltitude){
+            @Override
+            String conversionMethod(double v){
+                return formatAltitude(QNH.altitude(v,pressure));
             }
-            qnhDialog = tmpQNH;
-            altitude = QNH.altitude(qnhDialog,pressure);
-            promoteChange = false;
-            edittextAltitude.setText(formatAltitude(altitude));
-            promoteChange = true;
-          }
+        });
+    edittextAltitude.addTextChangedListener(new qnhAltitudeTextWatcher(edittextQNH){
+            @Override
+            String conversionMethod(double v){
+                return formatQNH(QNH.qnh(v,pressure));
+            }
         });
 
-    edittextAltitude.addTextChangedListener(new TextWatcher(){
-          @Override
-          public void afterTextChanged(Editable s){}
-          @Override
-          public void beforeTextChanged(CharSequence s, int start, int count, int after){};
-          @Override
-          public void onTextChanged(CharSequence s, int start, int before, int count){
-            if(!promoteChange)return;
-            try{
-              qnhDialog = QNH.qnh(Double.parseDouble(s.toString()),pressure);
-            }catch(NumberFormatException e){
-              return;
-            }
-            promoteChange = false;
-            edittextQNH.setText(formatQNH(qnhDialog));
-            promoteChange = true;
-          }
-        });
 
-    qnhDialog = qnh;
-    edittextQNH.setText(formatQNH(qnhDialog));
-    edittextAltitude.setText(formatAltitude(QNH.altitude(qnhDialog,pressure)));
+    edittextQNH.setText(formatQNH(qnh));
+    edittextAltitude.setText(formatAltitude(QNH.altitude(qnh,pressure)));
 
     Button buttonUseStandardPressure = (Button) dialogView.findViewById(R.id.button_use_standard_pressure);
     buttonUseStandardPressure.setOnClickListener(new View.OnClickListener() {
@@ -203,6 +177,38 @@ public class AltimeterPlugin extends OsmandPlugin implements SensorEventListener
 
     bld.show();
   }
+
+  private abstract class qnhAltitudeTextWatcher implements TextWatcher {
+      private EditText editTextToUpdate = null;
+
+      public qnhAltitudeTextWatcher(EditText editTextToUpdate){
+          this.editTextToUpdate = editTextToUpdate;
+      }
+
+      @Override
+      public void afterTextChanged(Editable s) {
+      }
+
+      @Override
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+      }
+
+      @Override
+      public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (!promoteChange) return;
+        double v;
+        try{
+          v = Double.parseDouble(s.toString());
+        }catch(NumberFormatException e){
+          return;
+        }
+        promoteChange = false;
+        editTextToUpdate.setText(conversionMethod(v));
+        promoteChange = true;
+      }
+
+      abstract String conversionMethod(double v);
+    }
 
 	private TextInfoWidget createAltimeterControl(final MapActivity activity){
 		final TextInfoWidget altimeterControl = new TextInfoWidget(activity);
