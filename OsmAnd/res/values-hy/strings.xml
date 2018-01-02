@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="download_hillshade_maps">Տարածքի մգեցված ռելիեֆով քարտեզներ</string>
+    <string name="download_hillshade_maps">Տարածքի մգեցված ռելիեֆով քարտեզներ (Hillshades)</string>
     
     <string name="local_indexes_cat_av">Ձայնա/Տեսանյութեր</string>
     <string name="clear_dest_confirm">Վստահ ե՞ք, որ ցանկանում եք ջնջել ձեր նպատակակետը(և միջանկյալ նպատակակետը)?</string>
@@ -145,7 +145,7 @@
 	<string name="routing_attr_avoid_motorway_description">Խուսափել ավտոճանապարհները։</string>
 	<string name="routing_attr_weight_name">Առավելագույն քաշը</string>
 	<string name="routing_attr_weight_description">Նշել մեքենայի քաշը երթուղին հաշվառկելու համար։</string>
-    <string name="osmand_distance_planning_plugin_description">Ստեղծել ուղիներ (կամ օգտագործել/փոփոխել առկա GPX ֆայլերը) կետեռի միջև հեռավորության չափման համար։ Պահպանել որպես GPX, որը կարող է օգտագործվել GPX ուղիների պլանավորման համար։</string>
+    <string name="osmand_distance_planning_plugin_description">Այս plugin-նը ապահովում է քարտեզի էկրանի վրա վիջեթ, որը հնարավորություն է տալիս ստեղծել ուղիներ, քարտեզի վրա կտտացնելով, նաև օգտագործել կամ փոփոխել առկա GPX ֆայլերը, ուղեւորություն պլանավորել և չափել կետերի միջև հեռավորությունը։</string>
     <string name="shared_string_no">Ոչ</string>
 	<string name="shared_string_yes">Այո</string>
 	<string name="osn_modify_dialog_error">Բացառություն է տեղի ունեցել՝ նշումը չի փոփոխվել</string>
@@ -172,8 +172,8 @@
     <string name="marker_save_as_track_descr">Արտահանեք ձեր մարկերները այն ֆայլի մեջ, որը կարող եք նշել այստեղ:</string>
     <string name="marker_save_as_track">Պահպանել որպես հետեւել</string>
     <string name="move_to_history">Տեղափոխեք պատմություն</string>
-    <string name="group_will_be_removed_after_restart">Վերագործարկվելուց հետո խումբը կհեռացվի</string>
-    <string name="show_guide_line">Ցույց տալ ուղեցույցի գիծը</string>
+    <string name="group_will_be_removed_after_restart">Հերթական ծրագրի վերագործարկվելուց հետո խումբը կհեռացվի։</string>
+    <string name="show_guide_line">Ցույց տալ ուղեցույցներ</string>
     <string name="show_arrows_on_the_map">Ցույց տալ սլաքները քարտեզի վրա</string>
     <string name="show_passed">Ցույց տալ անցած</string>
     <string name="hide_passed">Թաքցնել անցած</string>
@@ -284,7 +284,7 @@
     <string name="change_color">Փոխել գույնը</string>
     <string name="edit_name">Խմբագրել անունը</string>
     <string name="animate_my_location">Անիմացնել իմ դիրքը</string>
-    <string name="shared_string_overview">Ակնարկ</string>
+    <string name="shared_string_overview">Համատեսք</string>
     <string name="select_street">Ընտրեք փողոցը</string>
     <string name="shared_string_in_name">%1$s</string>
     <string name="type_address">Մուտքագրեք հասցեն</string>
@@ -431,7 +431,7 @@
     <string name="animate_my_location_desc">"Միացնել  Իմ Դիրքի անիմացումը քարտեզի համայնապատկերում նավիգացիայի ժամանակ։"</string>
     <string name="index_item_depth_points_southern_hemisphere">Ծովային խորության կետերը հարավային կիսագնդում</string>
     <string name="index_item_depth_points_northern_hemisphere">Ծովային խորության կետերը հյուսիսային կիսագնդում</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd հավաքում է միայն այն տեղեկատվությունները, որոնք վերաբերվում են հավելվածին օգտագործման։ Ձեր դիրքը երբեք չի ուղարկվի, ոչ էլ այն, ինչ դուք մուտք եք գործել հավեվածում կամ ձեր դիտած, որոնման և ներբեռնելու տարածքների մանրամասները:</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd հավաքում է միայն այն տեղեկատվությունները, որոնք վերաբերվում են հավելվածին օգտագործման։ Ձեր գտնվելու վայրը երբեք չի ուղարկվի, ոչ էլ այն, ինչ դուք մուտք եք գործել հավեվածում կամ ձեր դիտած, որոնման և ներբեռնելու տարածքների մանրամասները:</string>
     <string name="do_not_show_startup_messages_desc">Չցուցադրել հավելվածի զեղչերի և տեղական միջոցառման հատուկ հաղորդագրությունները։</string>
     <string name="auto_split_recording_descr">Սկսել նոր սեգմենտ 6 րոպեանոց ընդմիջումից հետո, նոր տրեկ 2 ժամանոց ընդմիջումից հետո կամ նոր ֆայլ երկարատև ընդմիջումից հետո (եթե ամսաթիվը փոխվել է):</string>
     <string name="rendering_attr_contourColorScheme_description">Եզրագծերի գունային սխեման</string>
@@ -684,10 +684,10 @@
 \n• Այլ բարելավումներ և սխալներ ուղղում
 \n
 \n</string>
-    <string name="release_2_8">• Լիովին վերամշակված քարտեզի մարկերներ, ուղեցույցների գծերը և երթուղիների պլանավորումը
-\n
-\n• Հեռավորության չափման գործիք, որը փոխկապակցված է ճանապարհին և կետերին պահպանում որպես ուղու
-\n
+    <string name="release_2_8">\\022 Լիովին վերամշակված քարտեզի մարկերներ, ուղեցույցների գծերը և երթուղիների պլանավորումը 
+\n 
+\n• Հեռավորության չափման գործիք, որը փոխկապակցված է ճանապարհին և կետերին պահպանում որպես ուղու 
+\n 
 \n• OsmAnd Live: սխալների ուղղում, յուրաքանչյուր 30 րոպեում սերվերի վրա տվյալների թարմացում, թարմացումները հաշվի են առնվում նավիգացիայում
 \n
 \n</string>
@@ -1128,7 +1128,7 @@
     <string name="rendering_attr_tramTrainRoutes_name">Տրամվայների և գնացքների երթուղիները</string>
     <string name="rendering_attr_subwayMode_name">Մետրոի երթուղիները</string>
     <string name="lock_screen_request_explanation">%1$s պետք է այդ թույլտվությունը էկրանը անջատելու համար էներգիա խնայելու համար:</string>
-    <string name="wake_on_voice">Ինքնաբերաբար միացնել էկրանը մինչև շրջադարձ</string>
+    <string name="wake_on_voice">Ինքնաբերաբար միացնել էկրանը շրջադարձից առաջ</string>
     <string name="wake_on_voice_descr">Միացնել սարքի էկրանը(եթե անջատված է), երբ մոտենում եք շրջադարձին։</string>
     <string name="impassable_road">Խուսափել ճանապարհներից…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Գնացքների երթուղիները</string>
@@ -1246,7 +1246,7 @@
     <string name="rendering_attr_showSurfaceGrade_name">Ցույց տալ ճանապարհների որակը</string>
     <string name="rendering_attr_showSurfaces_name">Ցույց տալ ճանապարհների ծածկույթի տեսակը</string>
     <string name="rendering_attr_showCycleRoutes_name">Ցուցադրել հեծանիվային երթուղիները</string>
-    <string name="osmo_auth_error_short">Թույլտվության ձախողում</string>
+    <string name="osmo_auth_error_short">Մուտք գործելը ձախողվեց</string>
     <string name="osmo_group_by_invite">Մուտք գործել հրավերով</string>
     <string name="osmo_group_information">Խումբը ստեղծելուց առաջ կարդացեք!</string>
     <string name="osmo_not_signed_in">Չհաջողվեց մուտք գործել OsMo</string>
@@ -1266,7 +1266,7 @@
     <string name="show_zoom_buttons_navigation">Ցույց տալ խոշորացման կոճակները</string>
     <string name="save_as_favorites_points">Պահպանել որպես «Սիրված» խումբ</string>
     <string name="select_destination_and_intermediate_points">Ընտրեք նպատակակետերը</string>
-    <string name="layer_amenity_label">Կետերի պիտակներ</string>
+    <string name="layer_amenity_label">"POI  կետերի պիտակները"</string>
     <string name="loading_smth">Բեռնում %1$s…</string>
     <string name="map_widget_plain_time">Ընթացիկ ժամը</string>
     <string name="gpx_wpt">Կետ</string>
@@ -1661,7 +1661,7 @@
     <string name="day_night_info">Արևածագ/մայրամուտ</string>
     <string name="map_widget_renderer">Քարտեզի ոճը</string>
     <string name="layer_map_appearance">Կարգավորել էկրանը</string>
-    <string name="show_lanes">Ցույց տար երթևեկության շերտերը</string>
+    <string name="show_lanes">Ցույց տար երթևեկության գոտիները</string>
     <string name="avoid_unpaved">Խուսափել չմշակված ճանապարհներից</string>
     <string name="avoid_ferries">Խուսափել լաստանավերից</string>
     <string name="avoid_in_routing_title">Երթուղին կառուցման ժամանակ խուսափել…</string>
@@ -1795,7 +1795,7 @@
     <string name="accessibility_mode">Հատուկ հնարավորությունների ռեժիմ</string>
     <string name="accessibility_mode_descr">Միացնում է հատուկ հնարավորություններ։</string>
     <string name="accessibility_default">Օգտագործել համակարգի պարամետրերը</string>
-    <string name="backToMenu">Վերադառնալ «Մենյուին»</string>
+    <string name="backToMenu">Վերադառնալ Մենյուին</string>
     <string name="zoomOut">Մանրացնել</string>
     <string name="zoomIn">Խոշորացնել. մոտեցնել</string>
     <string name="zoomIs">Մասշտաբը</string>
@@ -2597,7 +2597,7 @@
     <string name="retry">Կրկնել</string>
     <string name="track_waypoints">Տրեկի (track) կետերը</string>
     <string name="add_group">Ավելացնել խումբ</string>
-    <string name="add_group_descr">Դուք կարող եք ավելացնել «Սիրված» խումբ կամ տրեկի կետեր:</string>
+    <string name="add_group_descr">Դուք կարող եք ներմուծել խումբ «Սիրված»-ներից կամ տրեկի կետերից:</string>
     <string name="empty_state_markers_groups">Ներմուծել խմբերը</string>
     <string name="empty_state_markers_groups_desc">Դուք կարող եք ներմուծել «Սիրված» խմբեր կամ տրեկի կետերը որպես մարկերներ:</string>
     <string name="shared_string_two">Երկու</string>
@@ -2618,13 +2618,13 @@
     <string name="add_segment_to_the_track">Ավելացնել սեգմենտը GPX-ին</string>
 <string name="shared_string_more_without_dots">Ավելին</string>
     <string name="appearance_on_the_map">Տեսքը քարտեզի վրա</string>
-    <string name="add_track_to_markers_descr">Ընտրել տրեկը որը OsmAnd-ը կավելացնի մարկերներին</string>
-    <string name="add_favourites_group_to_markers_descr">Ընտրեք «Սիրված» խումբը, որը ցանկանում եք ավելացնել մարկերներին</string>
-    <string name="favourites_group">«Սիրված»-ի խումբը</string>
-    <string name="empty_state_markers_active">Մարկերները քարտեզի վրա է!</string>
-    <string name="empty_state_markers_active_desc">Կետերի նշում քարտեզի վրա սխմելով էկրանին։</string>
+    <string name="add_track_to_markers_descr">"Ընտրեք տրեկը ճանապարհային կետերը ավելացնելու մարկերներին։ (Ցուցադրված միայն  այն տրեկների որոնք ունեն ճանապարհային կետեր։)"</string>
+    <string name="add_favourites_group_to_markers_descr">Ընտրեք «Սիրված» խումբը, որը ցանկանում եք ավելացնել մարկերներին։</string>
+    <string name="favourites_group">«Սիրված»-ի կատեգորիան</string>
+    <string name="empty_state_markers_active">Ստեղծեք քարտեզի մարկերներ!</string>
+    <string name="empty_state_markers_active_desc">Սեղմեք ցանկալի վայրում, ապա մարկերի վրա:</string>
     <string name="empty_state_markers_history_desc">Այս էկրանին կհայտնվեն մարկերներ, որոնք նշված են ինչպես անցած։</string>
-    <string name="digits_quantity">Թվերի քանակը</string>
+    <string name="digits_quantity">Տասներորդ թվերի թվաքանակը</string>
     <string name="show_number_pad">Ցուցադրել թվային վահանակը</string>
     <string name="coordinate_input_accuracy">%1$d թվեր</string>
     <string name="mark_passed">Նշել անցած</string>
@@ -2633,4 +2633,86 @@
     <string name="shared_string_deleted">Ջնջված է</string>
     <string name="shared_string_edited">Խմբագրվեց</string>
     <string name="shared_string_added">Ավելացված է</string>
-    </resources>
+    <string name="what_is_here">Ինչ է այստեղ`</string>
+    <string name="parked_at">կայանված է</string>
+    <string name="pick_up_till">Վերցնել մինչև</string>
+    <string name="without_time_limit">Առանց ժամանակի սահմանափակում</string>
+    <string name="context_menu_read_full_article">Կարդալ ամբողջ հոդվածը</string>
+    <string name="context_menu_read_article">Կարդալ հոդվածը</string>
+    <string name="context_menu_points_of_group">Խմբի բոլոր կետերը</string>
+    <string name="opened_from">Բացվում է</string>
+    <string name="opened_till">Բաց Է մինև</string>
+    <string name="will_be_closed_at">Կփակվի</string>
+    <string name="will_be_opened_at">Կբացվի</string>
+    <string name="will_be_opened_on">Բացվելու է</string>
+    <string name="additional_actions">Լրացուցիչ գործողություններ</string>
+    <string name="av_locations_selected_desc">GPX ֆայլը կոորդինատներով և ընտրված գրառումների տվյալներով:</string>
+    <string name="av_locations_all_desc">GPX ֆայլը կոորդինատներով և բոլոր նշումների տվյալները։</string>
+    <string name="release_3_0">"• Հիմա դադարեցման լապտերի հայտնաբերումը հաշվի է առնում ճամփորդության ուղղությունը
+\n
+\n• Նոր ալգորիթմ, որը տրամադրում է վերելքի/վայրեջքի  իրական արժեքները  GPX տրեկների համար
+\n
+\n• Քայլելու ժամանակը կախված տեղանքից (վերելքից) (ըստ Նեյսմիտի կանոնին)
+\n
+\n"</string>
+    <string name="modify_the_search_query">Փոխել որոնման հարցումը:</string>
+    <string name="shared_string_actions">Գործողություններ</string>
+    <string name="shared_string_marker">Մարկեր</string>
+    <string name="marker_activated">Մարկեր %s ակտիվացված է:</string>
+    <string name="one_tap_active_descr">"Քարտեզի վրա  մարկերի նշումը, տեղափոխելու է այն առաջին տեղը ակտիվ մարկերների ցուցակում,       
+\nառանց  կոնտեքստային մենյուն բացելու։"</string>
+    <string name="one_tap_active">Մեկ սեղմումով ակտիվացում</string>
+    <string name="empty_state_av_notes">Նշումներ կատարեք:</string>
+    <string name="empty_state_av_notes_desc">Տեղադրեք աուդիո, վիդեո կամ ֆոտո գրառումներ քարտեզի ցանկացած կետի վրա, օգտագործելով վիջեթ կամ համատեքստային մենյու:</string>
+    <string name="notes_by_date">Նշումներ ըստ ամսաթվի</string>
+    <string name="by_date">Ըստ ամսաթվի</string>
+    <string name="by_type">Ըստ տեսակի</string>
+    <string name="looking_for_tracks_with_waypoints">Տրեկների որոնում ճանապարհային կետեր հետ</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history (պատմությունը)</string>
+    <string name="show_guide_line_descr">Ցուցադրել ուղեցույցները ձեր գտնվելու վայրից մինչև ակտիվ մարկերներ:</string>
+    <string name="show_arrows_descr">Ցուցադրել մեկ կամ երկու նետ, նշելով ակտիվ մարկերների ուղղությունը:</string>
+    <string name="distance_indication_descr">Ընտրեք, թե ինչպես ցուցադրեք հեռավորությունը մինչև ակտիվ մարկերներին:</string>
+    <string name="active_markers_descr">Ընտրեք, թե որքան ուղղության ցուցիչներ ցույց տալ:</string>
+    <string name="coordinate_input_accuracy_description">Ավտոմատ առաջընթաց հաջորդ դաշտ տասնորդական կետից հետո մուտքագրելուց %1$d թվեր:</string>
+    <string name="tap_on_map_to_hide_interface_descr">Սեղմելով քարտեզի վրա փոխարինում են հսկողության կոճակները եւ վիջեթները:</string>
+    <string name="tap_on_map_to_hide_interface">Ամբողջ էկրանով ռեժիմ</string>
+    <string name="osm_recipient_stat">"Խմբագրումները կազմում են %1$s, գումարը  %2$s mBTC"</string>
+    <string name="release_2_2">"\\ 022 Քարտեզի և այլ էկրանների վրա տեղադրելու համար նոր համատեքստի զգայուն գրաֆիկական ինտերֆեյս
+\n
+\n• Այժմ քարտեզի էկրանը միանվում է ուղղակիորեն, եթե դուք չեք ընտրում «Ցուցադրել վահանակը, երբ ծրագիրը մեկնարկեց»
+\n
+\n• Կառավարման վահանակում ընտրվում է քարտերի տեսակն ու տեսակը ցուցադրելու համար
+\n
+\n• Անջատեք վահանակը եթե Ձեզ դուր է գալիս մենյուից  հիմնական ծրագրերի կառավարումը
+\n
+\n• Քարտեզները ներբեռնելու համար տարածաշրջանները կարող են ուղղակիորեն ընտրվել համաշխարհային քարտեզի վրա `փնտրելով 
+\n
+\n• POI որոնումը այժմ աջակցում է ավելի կոնկրետ հարցումներ
+\n
+\n• Բարելավված POI և OSM խմբագրման գործառույթ
+\n
+\n• Քարտեզի տվյալների ներբեռնումը
+\n
+\n․․և այլ…"</string>
+    <string name="plugin_ski_descr">"OsmAnd-ի այս հավելվածը  տրքմքդրում է մանրամասները գլոբալ ցածր լեռնադահուկային լանջերի, խաչաձեւ լեռնադահուկային լեռնանցքի, ալպիական լեռնադահուկային երթուղիների, ճոպանուղիների և լեռնադահուկային վերելակների մանրամասների մասին:
+\n
+\nԱյս տեսակը ակտիվացնելու դեպքում, քարտեզի ոճը փոխվում է «Ձմեռային եւ լեռնադահուկային սպորտին», ցույց տալով լանդշաֆտի բոլոր մանրամասները `ձմռանը նայելու ձևով: Այս (ձմեռային) տեսքը կարող է չեղյալ համարվել ,  այստեղ կրկին անջատելով այն, կամ եթե փոխեք «Քարտի ոճը» ցանկալի տեսք, «Քարտեզների կարգավորումը» ցանկում:"</string>
+    <string name="tiles_to_download_estimated_size">Մասշտաբով {0} ներբեռնել {1} սալիկներ ({2} ՄԲ)</string>
+    <string name="use_high_res_maps_descr">"Չձգել  պատկերացանցային(ռաստրային) քարտեզները բարձրորակ էկրանների վրա:"</string>
+    <string name="route_tu">Կատարեք շրջադարձ(U-turn) և շարժվեք</string>
+    <string name="map_orientation_default">Ըստ սարքի</string>
+    <string name="map_orientation_portrait">Դիմանկարի ձև (Portrait)</string>
+    <string name="map_orientation_landscape">Լանդշաֆտ (Landscape)</string>
+    <string name="map_screen_orientation">Էկրանի կողմնորոշումը (Screen orientation)</string>
+    <string name="map_screen_orientation_descr">Ընտրեք էկրանի կողմնորոշումը (Portrait, landscape, or device):</string>
+    <string name="update_poi_error_loading">Խնդիր առաջացավ սերվերից տվյալների ներբեռման ժամանակ</string>
+    <string name="max_level_download_tile_descr">Նշեք առավելագույն մաշտաբը առցանց քարտեզի սալիկները ներբեռնելու համար:</string>
+    <string name="map_tile_source">Սալիկային(ռաստրային) քարտեզների աղբյուրը</string>
+    <string name="navigation_item_description">Կարգավորում(Setup) նավարկության:</string>
+    <string name="map_viewing_item">Քարտեզի դիտում</string>
+    <string name="search_on_the_map_item">Քարտեզի որոնում</string>
+    <string name="quick_favorites_name_preset">Նախադրվածի(preset) անունը</string>
+    <string name="add_route_points">Ավելացնել կետեր երթուղուն</string>
+    <string name="osm_recipients_label">OSM ստացողներ</string>
+    <string name="total_donations">Ընդհանուր նվիրատվությունները</string>
+</resources>
