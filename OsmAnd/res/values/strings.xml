@@ -2701,7 +2701,7 @@
 
 	<string name="map_widget_altimeter">Altimeter</string>
     <string name="osmand_altimeter_plugin_name">Altimeter plugin</string>
-    <string name="osmand_altimeter_plugin_description">This plugin displayes altitude based on pressure measured by altimeter</string>
+    <string name="osmand_altimeter_plugin_description">This plugin displays altitude based on pressure measured by altimeter</string>
     <string name="osmand_altimeter_plugin_altitude">Altitude (m)</string>
     <string name="osmand_altimeter_plugin_qnh">QNH (hPa)</string>
     <string name="osmand_altimeter_plugin_use_standard_pressure">use standard pressure (1013.25 hPa)</string>
