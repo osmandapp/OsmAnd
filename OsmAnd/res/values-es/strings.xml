@@ -2784,7 +2784,7 @@ Por favor proporciona un código completo</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de ruta</string>
-    <string name="release_3_0">• La detección de señales de alto, ahora considera la dirección de desplazamiento 
+    <string name="release_3_0">• La detección de señales de stop ahora considera la dirección de desplazamiento 
 \n 
 \n • Nuevo algoritmo que proporciona valores significativos de ascenso y descenso para trazas GPX. 
 \n 
