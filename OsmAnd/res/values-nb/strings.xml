@@ -2676,4 +2676,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="osm_live_header">Dette abonnementet skrur på timevise oppdateringer av alle kart verden over. Deler av inntekten går tilbake til OSM-gemenskapen, og er betalt for hvert OSM-bidrag. Hvis du elsker OsmAnd og OSM, og ønsker å støtte opp, dette er den perfekte måten å gjøre det.</string>
     <string name="m_s">m/s</string>
     <string name="lang_ber">Berber</string>
+    <string name="additional_actions">Flere handlinger</string>
+    <string name="shared_string_actions">Handlinger</string>
+    <string name="shared_string_marker">Markør</string>
     </resources>
