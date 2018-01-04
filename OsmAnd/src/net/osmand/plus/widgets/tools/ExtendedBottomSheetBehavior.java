@@ -105,10 +105,15 @@ public class ExtendedBottomSheetBehavior<V extends View> extends CoordinatorLayo
 	public static final int STATE_HIDDEN = 5;
 
 	/**
+	 * The bottom sheet is manually opened to a certain height.
+	 */
+	public static final int STATE_MANUALLY_MOVED = 6;
+
+	/**
 	 * @hide
 	 */
 	@RestrictTo(LIBRARY_GROUP)
-	@IntDef({STATE_EXPANDED, STATE_COLLAPSED, STATE_DRAGGING, STATE_SETTLING, STATE_HIDDEN})
+	@IntDef({STATE_EXPANDED, STATE_COLLAPSED, STATE_DRAGGING, STATE_SETTLING, STATE_HIDDEN, STATE_MANUALLY_MOVED})
 	@Retention(RetentionPolicy.SOURCE)
 	public @interface State {
 	}
@@ -400,7 +405,7 @@ public class ExtendedBottomSheetBehavior<V extends View> extends CoordinatorLayo
 				targetState = STATE_EXPANDED;
 			} else {
 				top = child.getTop();
-				targetState = STATE_DRAGGING;
+				targetState = STATE_MANUALLY_MOVED;
 			}
 		} else if (mHideable && shouldHide(child, getYVelocity())) {
 			top = mParentHeight;
@@ -420,7 +425,7 @@ public class ExtendedBottomSheetBehavior<V extends View> extends CoordinatorLayo
 				targetState = STATE_COLLAPSED;
 			} else {
 				top = child.getTop();
-				targetState = STATE_DRAGGING;
+				targetState = STATE_MANUALLY_MOVED;
 			}
 		}
 		if (mViewDragHelper.smoothSlideViewTo(child, child.getLeft(), top)) {
