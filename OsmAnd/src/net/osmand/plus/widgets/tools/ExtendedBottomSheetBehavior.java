@@ -125,6 +125,8 @@ public class ExtendedBottomSheetBehavior<V extends View> extends CoordinatorLayo
 
 	private static final float HIDE_FRICTION = 0.1f;
 
+	private static final float MIN_VELOCITY_FOR_SLIDE = 2000;
+
 	private float mMaximumVelocity;
 
 	private int mPeekHeight;
@@ -393,8 +395,13 @@ public class ExtendedBottomSheetBehavior<V extends View> extends CoordinatorLayo
 		int top;
 		int targetState;
 		if (mLastNestedScrollDy > 0) {
-			top = mMinOffset;
-			targetState = STATE_EXPANDED;
+			if (Math.abs(getYVelocity()) > MIN_VELOCITY_FOR_SLIDE) {
+				top = mMinOffset;
+				targetState = STATE_EXPANDED;
+			} else {
+				top = child.getTop();
+				targetState = STATE_DRAGGING;
+			}
 		} else if (mHideable && shouldHide(child, getYVelocity())) {
 			top = mParentHeight;
 			targetState = STATE_HIDDEN;
@@ -408,8 +415,13 @@ public class ExtendedBottomSheetBehavior<V extends View> extends CoordinatorLayo
 				targetState = STATE_COLLAPSED;
 			}
 		} else {
-			top = mMaxOffset;
-			targetState = STATE_COLLAPSED;
+			if (Math.abs(getYVelocity()) > MIN_VELOCITY_FOR_SLIDE) {
+				top = mMaxOffset;
+				targetState = STATE_COLLAPSED;
+			} else {
+				top = child.getTop();
+				targetState = STATE_DRAGGING;
+			}
 		}
 		if (mViewDragHelper.smoothSlideViewTo(child, child.getLeft(), top)) {
 			setStateInternal(STATE_SETTLING);
@@ -808,24 +820,24 @@ public class ExtendedBottomSheetBehavior<V extends View> extends CoordinatorLayo
 	}
 
 	/**
-	 * A utility function to get the {@link BottomSheetBehavior} associated with the {@code view}.
+	 * A utility function to get the {@link ExtendedBottomSheetBehavior} associated with the {@code view}.
 	 *
-	 * @param view The {@link View} with {@link BottomSheetBehavior}.
-	 * @return The {@link BottomSheetBehavior} associated with the {@code view}.
+	 * @param view The {@link View} with {@link ExtendedBottomSheetBehavior}.
+	 * @return The {@link ExtendedBottomSheetBehavior} associated with the {@code view}.
 	 */
 	@SuppressWarnings("unchecked")
-	public static <V extends View> BottomSheetBehavior<V> from(V view) {
+	public static <V extends View> ExtendedBottomSheetBehavior<V> from(V view) {
 		ViewGroup.LayoutParams params = view.getLayoutParams();
 		if (!(params instanceof CoordinatorLayout.LayoutParams)) {
 			throw new IllegalArgumentException("The view is not a child of CoordinatorLayout");
 		}
 		CoordinatorLayout.Behavior behavior = ((CoordinatorLayout.LayoutParams) params)
 				.getBehavior();
-		if (!(behavior instanceof BottomSheetBehavior)) {
+		if (!(behavior instanceof ExtendedBottomSheetBehavior)) {
 			throw new IllegalArgumentException(
 					"The view is not associated with BottomSheetBehavior");
 		}
-		return (BottomSheetBehavior<V>) behavior;
+		return (ExtendedBottomSheetBehavior<V>) behavior;
 	}
 
 }
