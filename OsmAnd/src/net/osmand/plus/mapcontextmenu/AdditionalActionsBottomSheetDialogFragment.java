@@ -1,36 +1,29 @@
 package net.osmand.plus.mapcontextmenu;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.DrawableRes;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetDialog;
-import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior;
+import net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior.BottomSheetCallback;
 
-public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.base.BottomSheetDialogFragment {
 
 	public static final String TAG = "AdditionalActionsBottomSheetDialogFragment";
 
@@ -44,24 +37,18 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 		this.listener = listener;
 	}
 
+	@Nullable
 	@Override
-	public void setupDialog(Dialog dialog, int style) {
-		super.setupDialog(dialog, style);
-
-		if (getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-			dialog.getWindow().setWindowAnimations(R.style.Animations_NoAnimation);
-		}
-
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		final OsmandSettings settings = getMyApplication().getSettings();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_context_menu_actions_bottom_sheet_dialog, null);
 
-		AndroidUtils.setBackground(getActivity(), mainView, nightMode,
-				portrait ? R.drawable.bg_bottom_menu_light : R.drawable.bg_bottom_sheet_topsides_landscape_light,
-				portrait ? R.drawable.bg_bottom_menu_dark : R.drawable.bg_bottom_sheet_topsides_landscape_dark);
+//		AndroidUtils.setBackground(getActivity(), mainView, nightMode,
+//				portrait ? R.drawable.bg_bottom_menu_light : R.drawable.bg_bottom_sheet_topsides_landscape_light,
+//				portrait ? R.drawable.bg_bottom_menu_dark : R.drawable.bg_bottom_sheet_topsides_landscape_dark);
 
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -74,18 +61,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 		if (nightMode) {
 			headerTitle.setTextColor(ContextCompat.getColor(getActivity(), R.color.ctx_menu_info_text_dark));
 		}
-		headerTitle.setText(getString(R.string.additional_actions));
-
-		if (!portrait) {
-			dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-				@Override
-				public void onShow(DialogInterface dialogInterface) {
-					BottomSheetDialog dialog = (BottomSheetDialog) dialogInterface;
-					FrameLayout bottomSheet = (FrameLayout) dialog.findViewById(android.support.design.R.id.design_bottom_sheet);
-					BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
-				}
-			});
-		}
+		headerTitle.setText(R.string.additional_actions);
 
 		View.OnClickListener onClickListener = new View.OnClickListener() {
 			@Override
@@ -114,8 +90,21 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 			itemsLinearLayout.addView(row);
 		}
 
-		dialog.setContentView(mainView);
-		((View) mainView.getParent()).setBackgroundResource(0);
+		ExtendedBottomSheetBehavior.from(mainView.findViewById(R.id.bottom_sheet_scroll_view)).setBottomSheetCallback(new BottomSheetCallback() {
+			@Override
+			public void onStateChanged(@NonNull View bottomSheet, int newState) {
+				if (newState == ExtendedBottomSheetBehavior.STATE_HIDDEN) {
+					dismiss();
+				}
+			}
+
+			@Override
+			public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+			}
+		});
+
+		return mainView;
 	}
 
 	@Override
@@ -129,11 +118,8 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 		}
 	}
 
-	private OsmandApplication getMyApplication() {
-		return ((MapActivity) getActivity()).getMyApplication();
-	}
-
-	private Drawable getContentIcon(@DrawableRes int id) {
+	@Override
+	protected Drawable getContentIcon(@DrawableRes int id) {
 		return getMyApplication().getIconsCache().getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
 	}
 
