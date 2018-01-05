@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,15 +43,24 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		Activity activity = getActivity();
 		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
+		portrait = AndroidUiHelper.isOrientationPortrait(activity);
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_context_menu_actions_bottom_sheet_dialog, null);
+		View scrollView = mainView.findViewById(R.id.bottom_sheet_scroll_view);
 
 //		AndroidUtils.setBackground(getActivity(), mainView, nightMode,
 //				portrait ? R.drawable.bg_bottom_menu_light : R.drawable.bg_bottom_sheet_topsides_landscape_light,
 //				portrait ? R.drawable.bg_bottom_menu_dark : R.drawable.bg_bottom_sheet_topsides_landscape_dark);
+
+		AndroidUtils.setBackground(activity, scrollView, nightMode,
+				R.color.route_info_bottom_view_bg_light, R.color.route_info_bg_dark);
+		AndroidUtils.setBackground(activity, mainView.findViewById(R.id.cancel_row), nightMode,
+				R.color.route_info_bottom_view_bg_light, R.color.route_info_bg_dark);
+		AndroidUtils.setBackground(activity, mainView.findViewById(R.id.divider), nightMode,
+				R.color.route_info_divider_light, R.color.route_info_bottom_view_bg_dark);
 
 		View.OnClickListener dismissOnClickListener = new View.OnClickListener() {
 			@Override
@@ -64,7 +74,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 
 		TextView headerTitle = (TextView) mainView.findViewById(R.id.header_title);
 		if (nightMode) {
-			headerTitle.setTextColor(ContextCompat.getColor(getActivity(), R.color.ctx_menu_info_text_dark));
+			headerTitle.setTextColor(ContextCompat.getColor(activity, R.color.ctx_menu_info_text_dark));
 		}
 		headerTitle.setText(R.string.additional_actions);
 
@@ -79,23 +89,34 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 		};
 
 		LinearLayout itemsLinearLayout = (LinearLayout) mainView.findViewById(R.id.context_menu_items_container);
+		LinearLayout row = (LinearLayout) View.inflate(getContext(), R.layout.grid_menu_row, null);
+		int itemsAdded = 0;
 		for (int i = 0; i < adapter.length(); i++) {
 			ContextMenuItem item = adapter.getItem(i);
 			int layoutResId = item.getLayout();
-			layoutResId = layoutResId != ContextMenuItem.INVALID_ID ? layoutResId : R.layout.bottom_sheet_dialog_fragment_item;
-			View row = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutResId, null);
-			if (layoutResId != R.layout.bottom_sheet_dialog_fragment_divider) {
+			layoutResId = layoutResId == ContextMenuItem.INVALID_ID ? R.layout.grid_menu_item : layoutResId;
+			boolean dividerItem = layoutResId == R.layout.bottom_sheet_dialog_fragment_divider;
+
+			if (!dividerItem) {
+				View menuItem = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutResId, null);
 				if (item.getIcon() != ContextMenuItem.INVALID_ID) {
-					((ImageView) row.findViewById(R.id.icon)).setImageDrawable(getContentIcon(item.getIcon()));
+					((ImageView) menuItem.findViewById(R.id.icon)).setImageDrawable(getContentIcon(item.getIcon()));
 				}
-				((TextView) row.findViewById(R.id.title)).setText(item.getTitle());
+				((TextView) menuItem.findViewById(R.id.title)).setText(item.getTitle());
+				menuItem.setTag(i);
+				menuItem.setOnClickListener(onClickListener);
+				((FrameLayout) row.findViewById(getMenuItemContainerId(itemsAdded))).addView(menuItem);
+				itemsAdded++;
 			}
-			row.setTag(i);
-			row.setOnClickListener(onClickListener);
-			itemsLinearLayout.addView(row);
+
+			if (dividerItem || itemsAdded == 3 || (i == adapter.length() - 1 && itemsAdded > 0)) {
+				itemsLinearLayout.addView(row);
+				row = (LinearLayout) View.inflate(getContext(), R.layout.grid_menu_row, null);
+				itemsAdded = 0;
+			}
 		}
 
-		ExtendedBottomSheetBehavior behavior = ExtendedBottomSheetBehavior.from(mainView.findViewById(R.id.bottom_sheet_scroll_view));
+		ExtendedBottomSheetBehavior behavior = ExtendedBottomSheetBehavior.from(scrollView);
 		behavior.setPeekHeight(getPeekHeight());
 		behavior.setBottomSheetCallback(new BottomSheetCallback() {
 			@Override
@@ -127,7 +148,16 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getMyApplication().getIconsCache().getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
+		return getMyApplication().getIconsCache().getIcon(id, nightMode ? R.color.grid_menu_icon_dark : R.color.on_map_icon_color);
+	}
+
+	private int getMenuItemContainerId(int itemsAdded) {
+		if (itemsAdded == 0) {
+			return R.id.first_item_container;
+		} else if (itemsAdded == 1) {
+			return R.id.second_item_container;
+		}
+		return R.id.third_item_container;
 	}
 
 	private int getPeekHeight() {

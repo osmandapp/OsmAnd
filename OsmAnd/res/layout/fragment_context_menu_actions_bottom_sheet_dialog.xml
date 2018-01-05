@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -16,9 +17,9 @@
             android:id="@+id/bottom_sheet_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color"
             app:behavior_hideable="true"
-            app:layout_behavior="net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior">
+            app:layout_behavior="net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior"
+            tools:background="?attr/bg_color">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,13 +44,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/bg_color"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:background="?attr/bg_color">
 
         <View
+            android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?attr/dashboard_divider"/>
+            tools:background="?attr/dashboard_divider"/>
 
         <FrameLayout
             android:id="@+id/cancel_row"

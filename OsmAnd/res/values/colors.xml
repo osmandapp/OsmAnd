@@ -371,4 +371,6 @@
 	<color name="route_info_checked_mode_icon_color_dark">#d28521</color>
 	<color name="route_info_unchecked_mode_icon_color">#727272</color>
 
+	<color name="grid_menu_icon_dark">#808080</color>
+
 </resources>
