@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/scroll_view_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -17,7 +18,6 @@
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
             app:behavior_hideable="true"
-            app:behavior_peekHeight="300dp"
             app:layout_behavior="net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior">
 
             <LinearLayout

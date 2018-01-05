@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.R;
@@ -50,12 +52,15 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 //				portrait ? R.drawable.bg_bottom_menu_light : R.drawable.bg_bottom_sheet_topsides_landscape_light,
 //				portrait ? R.drawable.bg_bottom_menu_dark : R.drawable.bg_bottom_sheet_topsides_landscape_dark);
 
-		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
+		View.OnClickListener dismissOnClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				dismiss();
 			}
-		});
+		};
+
+		mainView.findViewById(R.id.cancel_row).setOnClickListener(dismissOnClickListener);
+		mainView.findViewById(R.id.scroll_view_container).setOnClickListener(dismissOnClickListener);
 
 		TextView headerTitle = (TextView) mainView.findViewById(R.id.header_title);
 		if (nightMode) {
@@ -90,7 +95,9 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 			itemsLinearLayout.addView(row);
 		}
 
-		ExtendedBottomSheetBehavior.from(mainView.findViewById(R.id.bottom_sheet_scroll_view)).setBottomSheetCallback(new BottomSheetCallback() {
+		ExtendedBottomSheetBehavior behavior = ExtendedBottomSheetBehavior.from(mainView.findViewById(R.id.bottom_sheet_scroll_view));
+		behavior.setPeekHeight(getPeekHeight());
+		behavior.setBottomSheetCallback(new BottomSheetCallback() {
 			@Override
 			public void onStateChanged(@NonNull View bottomSheet, int newState) {
 				if (newState == ExtendedBottomSheetBehavior.STATE_HIDDEN) {
@@ -121,6 +128,13 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
 		return getMyApplication().getIconsCache().getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
+	}
+
+	private int getPeekHeight() {
+		Activity ctx = getActivity();
+		int screenH = AndroidUtils.getScreenHeight(ctx);
+		int availableH = screenH - AndroidUtils.getNavBarHeight(ctx) - AndroidUtils.getStatusBarHeight(ctx);
+		return (availableH * 2 / 3) - getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
 	}
 
 	public interface ContextMenuItemClickListener {
