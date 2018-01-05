@@ -22,20 +22,11 @@
             tools:background="?attr/bg_color">
 
             <LinearLayout
+                android:id="@+id/context_menu_items_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <include layout="@layout/bottom_sheet_dialog_fragment_title"/>
-
-                <LinearLayout
-                    android:id="@+id/context_menu_items_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingBottom="@dimen/bottom_sheet_content_padding_small"/>
-
-            </LinearLayout>
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/bottom_sheet_content_padding_small"/>
 
         </android.support.v4.widget.NestedScrollView>
 

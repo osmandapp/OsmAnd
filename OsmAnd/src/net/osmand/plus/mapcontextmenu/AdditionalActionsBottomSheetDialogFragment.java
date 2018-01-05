@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,12 +70,6 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(dismissOnClickListener);
 		mainView.findViewById(R.id.scroll_view_container).setOnClickListener(dismissOnClickListener);
-
-		TextView headerTitle = (TextView) mainView.findViewById(R.id.header_title);
-		if (nightMode) {
-			headerTitle.setTextColor(ContextCompat.getColor(activity, R.color.ctx_menu_info_text_dark));
-		}
-		headerTitle.setText(R.string.additional_actions);
 
 		View.OnClickListener onClickListener = new View.OnClickListener() {
 			@Override
