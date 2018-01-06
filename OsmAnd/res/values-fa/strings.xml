@@ -1786,8 +1786,8 @@
     <string name="application_dir_change_warning3">آیا فایل‌های دادهٔ OsmAnd نیز به مکان جدید کپی شود؟</string>
     <string name="specified_directiory_not_writeable">نمی‌توان نقشه‌ها را در پوشهٔ موردنظر ایجاد کرد</string>
 	<string name="copying_osmand_file_failed">کپی‌کردن فایل‌ها ناموفق بود</string>    
-    <string name="storage_directory_external">محل ذخیره‌سازی خارجی</string>
-    <string name="storage_directory_multiuser">محل ذخیره‌سازی چندکاربره</string>
+    <string name="storage_directory_external">ذخیره‌گاه خارجی</string>
+    <string name="storage_directory_multiuser">ذخیره‌گاه چندکاربره</string>
     <string name="storage_directory_internal_app">حافظهٔ داخلی برنامه</string>
     <string name="storage_directory_manual">انتخاب دستی</string>
     <string name="storage_directory_default">حافظهٔ داخلی</string>
@@ -1984,7 +1984,7 @@
     <string name="no_inet_connection_desc_map">برای دانلودکردن نقشه‌ها لازم است.</string>
     <string name="search_location">در حال جست‌وجوی مکان…</string>
     <string name="storage_free_space">فضای خالی</string>
-    <string name="storage_place_description">محل ذخیرهٔ اطلاعات برنامه (برای نقشه‌ها، مسیرها و...): %1$s.</string>
+    <string name="storage_place_description">محل ذخیرهٔ اطلاعات (برای نقشه‌ها، مسیرها و...): %1$s.</string>
     <string name="give_permission">اجازهٔ دسترسی</string>
     <string name="allow_access_location">اجازهٔ دسترسی به موقعیتتان را بدهید</string>
     <string name="first_usage_greeting">مسیریابی و کشف جاهای تازه بدون اتصال به اینترنت</string>
@@ -2014,7 +2014,7 @@
     <string name="city_type_neighbourhood">محله</string>
     <string name="map_widget_search">جست‌وجو</string>
 	<string name="shared_string_is_open_24_7">ساعت کار 24/7</string>
-    <string name="storage_directory_card">حافظهٔ جانبی</string>
+    <string name="storage_directory_card">کارت حافظه</string>
     <string name="coords_format">قالب مختصات</string>
     <string name="coords_format_descr">قالب نمایش مختصات جغرافیایی را مشخص کنید.</string>
   	<string name="app_mode_bus">اتوبوس</string>
@@ -2057,13 +2057,13 @@
     <string name="no_map_markers_found">لطفاً نشانه‌ها را از طریق نقشه اضافه کنید</string>
     <string name="no_waypoints_found">هیچ نقطهٔ بین‌راهی پیدا نشد</string>
     <string name="report">گزارش</string>
-    <string name="storage_permission_restart_is_required">اکنون برنامه اجازهٔ ذخیره‌سازی در کارت حافظه را دارد. برنامه را ببندید و دوباره اجرا کنید.</string>
+    <string name="storage_permission_restart_is_required">اکنون برنامه اجازه دارد تا اطلاعات را در ذخیره‌گاه خارجی بنویسد. برنامه را ببندید و دوباره اجرا کنید.</string>
     <string name="shared_string_move_up">برو بالا</string>
     <string name="shared_string_move_down">برو پایین</string>
     <string name="finish_navigation">پایان راهبری</string>
     <string name="avoid_road">اجتناب از این جاده</string>
-    <string name="storage_directory_readonly_desc">پوشهٔ ذخیره‌سازی که انتخاب کرده‌اید فقط‌خواندنی است. پوشهٔ ذخیره‌سازی به‌طور موقت به حافظهٔ داخلی تغییر کرد. لطفاً یک مکان ذخیره‌سازی معتبر را انتخاب نمایید.</string>
-    <string name="storage_directory_shared">حافظهٔ مورداستفاده</string>
+    <string name="storage_directory_readonly_desc">پوشهٔ ذخیره‌سازی که انتخاب کرده‌اید فقط‌خواندنی است. پوشهٔ ذخیره‌سازی موقتاً به حافظهٔ داخلی تغییر کرد. لطفاً یک مکان ذخیره‌سازی معتبر را انتخاب نمایید.</string>
+    <string name="storage_directory_shared">حافظهٔ اشتراکی</string>
     <string name="shared_string_topbar">نوار بالا</string>
     <string name="full_report">گزارش کامل</string>
     <string name="recalculate_route">پیداکردن مجدد مسیر</string>
@@ -2581,7 +2581,7 @@
     <string name="empty_state_favourites">افزودن نقاط برگزیده</string>
     <string name="empty_state_favourites_desc">نقاط برگزیده را روی نقشه اضافه کنید یا آن‌ها را از یک فایل وارد کنید.</string>
     <string name="move_point">جابه‌جاکردن نقطه</string>
-    <string name="make_round_trip_descr">نقطهٔ شروع را به‌عنوان مقصد هم درنظر بگیر.</string>
+    <string name="make_round_trip_descr">نقطهٔ شروع را به‌عنوان مقصد هم در نظر بگیر.</string>
     <string name="make_round_trip">ایجاد سفر رفت‌وبرگشتی</string>
     <string name="coordinates_format">قالب مختصات</string>
     <string name="use_system_keyboard">استفاده از صفحه‌کلید سیستم</string>
