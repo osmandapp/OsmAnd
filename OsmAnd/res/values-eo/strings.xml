@@ -2926,4 +2926,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="osm_recipient_stat">%1$s redaktoj, %2$s m₿ tute</string>
     <string name="osm_recipients_label">OSM-ricevantoj</string>
     <string name="total_donations">Donacoj tute</string>
-</resources>
+<string name="shared_string_without_name">Sennoma</string>
+    </resources>
