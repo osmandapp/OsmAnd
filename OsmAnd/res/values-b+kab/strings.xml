@@ -676,4 +676,6 @@
     <string name="av_locations_selected_desc">Afaylu GPX igebren adig akked isefka n tezmilin ittwafernen.</string>
     <string name="av_locations_all_desc">Afaylu igebren adig akked tizmilin.</string>
     <string name="shared_string_actions">Tigawin</string>
+    <string name="parked_at">Sers deg</string>
+    <string name="without_time_limit">Ulac tilist deg wakud</string>
     </resources>
