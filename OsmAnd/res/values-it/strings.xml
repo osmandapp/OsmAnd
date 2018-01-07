@@ -3018,11 +3018,11 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="context_menu_read_full_article">Leggi l\'articolo completo</string>
     <string name="context_menu_read_article">Leggi l\'articolo</string>
     <string name="context_menu_points_of_group">Tutti i punti del gruppo</string>
-    <string name="opened_from">Aperto da</string>
-    <string name="opened_till">Aperto sino</string>
-    <string name="will_be_closed_at">Chiuderà alle</string>
-    <string name="will_be_opened_at">Aprirà alle</string>
-    <string name="will_be_opened_on">Sarà aperto in</string>
+    <string name="open_from">Aperto da</string>
+    <string name="open_till">Aperto sino</string>
+    <string name="will_close_at">Chiuderà alle</string>
+    <string name="will_open_at">Aprirà alle</string>
+    <string name="will_open_on">Sarà aperto in</string>
     <string name="additional_actions">Altre azioni</string>
     <string name="av_locations_selected_desc">File GPX con le coordinate e i dati delle note selezionate</string>
     <string name="av_locations_all_desc">File GPX con le coordinate e i dati di tutte le note.</string>

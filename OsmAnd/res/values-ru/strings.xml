@@ -2799,11 +2799,11 @@
     <string name="context_menu_read_full_article">Читать статью целиком</string>
     <string name="context_menu_read_article">Читать статью</string>
     <string name="context_menu_points_of_group">Все точки группы</string>
-    <string name="opened_from">Открыто с</string>
-    <string name="opened_till">Открыто до</string>
-    <string name="will_be_closed_at">Закроется в</string>
-    <string name="will_be_opened_at">Откроется в</string>
-    <string name="will_be_opened_on">Откроется</string>
+    <string name="open_from">Открыто с</string>
+    <string name="open_till">Открыто до</string>
+    <string name="will_close_at">Закроется в</string>
+    <string name="will_open_at">Откроется в</string>
+    <string name="will_open_on">Откроется</string>
     <string name="additional_actions">Дополнительные действия</string>
     <string name="shared_string_actions">Действия</string>
     <string name="shared_string_marker">Маркер</string>

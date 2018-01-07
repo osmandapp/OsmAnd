@@ -16,11 +16,11 @@
     <string name="context_menu_read_full_article">Read full article</string>
     <string name="context_menu_read_article">Read article</string>
     <string name="context_menu_points_of_group">All points of the group</string>
-    <string name="opened_from">Opened from</string>
-    <string name="opened_till">Opened till</string>
-    <string name="will_be_closed_at">Will be closed at</string>
-    <string name="will_be_opened_at">Will be opened at</string>
-    <string name="will_be_opened_on">Will be opened on</string>
+    <string name="open_from">Open from</string>
+    <string name="open_till">Open till</string>
+    <string name="will_close_at">Will close at</string>
+    <string name="will_open_at">Will open at</string>
+    <string name="will_open_on">Will open on</string>
     <string name="additional_actions">Additional actions</string>
     <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
     <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>

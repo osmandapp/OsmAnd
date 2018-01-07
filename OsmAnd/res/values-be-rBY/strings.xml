@@ -2950,11 +2950,11 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="context_menu_read_full_article">Čytać uvieś artykul</string>
     <string name="context_menu_read_article">Čytać artykul</string>
     <string name="context_menu_points_of_group">Usie kropki hrupy</string>
-    <string name="opened_from">Adčyniena ad</string>
-    <string name="opened_till">Adčyniena da</string>
-    <string name="will_be_closed_at">Budzie začyniena a</string>
-    <string name="will_be_opened_at">Budzie adčyniena a</string>
-    <string name="will_be_opened_on">Budzie adčyniena</string>
+    <string name="open_from">Adčyniena ad</string>
+    <string name="open_till">Adčyniena da</string>
+    <string name="will_close_at">Budzie začyniena a</string>
+    <string name="will_open_at">Budzie adčyniena a</string>
+    <string name="will_open_on">Budzie adčyniena</string>
     <string name="additional_actions">Dadatkovyja dziejanni</string>
     <string name="av_locations_selected_desc">GPX-fajl z kaardynatami i danymi vybranych natatak.</string>
     <string name="av_locations_all_desc">GPX-fajl z kaardynatami i danymi ŭsich natatak.</string>

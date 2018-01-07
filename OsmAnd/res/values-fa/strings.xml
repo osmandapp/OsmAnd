@@ -2993,11 +2993,11 @@
     <string name="context_menu_read_full_article">مقالهٔ کامل را بخوانید</string>
     <string name="context_menu_read_article">خواندن مقاله</string>
     <string name="context_menu_points_of_group">همهٔ نقاط این گروه</string>
-    <string name="opened_from">ساعت بازشدن</string>
-    <string name="opened_till">ساعت کاری تا</string>
-    <string name="will_be_closed_at">ساعت تعطیل‌کردن</string>
-    <string name="will_be_opened_at">ساعت بازکردن</string>
-    <string name="will_be_opened_on">روز بازکردن</string>
+    <string name="open_from">ساعت بازشدن</string>
+    <string name="open_till">ساعت کاری تا</string>
+    <string name="will_close_at">ساعت تعطیل‌کردن</string>
+    <string name="will_open_at">ساعت بازکردن</string>
+    <string name="will_open_on">روز بازکردن</string>
     <string name="additional_actions">عملیات بیشتر</string>
     <string name="av_locations_selected_desc">فایل GPX با مختصات و داده‌های یادداشت‌هایی که انتخاب شده است.</string>
     <string name="av_locations_all_desc">فایل GPX با مختصات و داده‌های یادداشت‌هایی که انتخاب شده است.</string>
