@@ -2691,4 +2691,9 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="looking_for_tracks_with_waypoints">Söker spår med waypoints</string>
     <string name="shared_string_more_without_dots">Mer</string>
     <string name="appearance_on_the_map">Utseende på kartan</string>
+    <string name="what_is_here">Det som finns här:</string>
+    <string name="parked_at">Parkerad på</string>
+    <string name="without_time_limit">Utan tidsbegränsning</string>
+    <string name="context_menu_read_full_article">Läs hela artikeln</string>
+    <string name="context_menu_read_article">Läs artikel</string>
     </resources>
