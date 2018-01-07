@@ -2679,4 +2679,16 @@ Representerer området: %1$s x %2$s</string>
     <string name="additional_actions">Flere handlinger</string>
     <string name="shared_string_actions">Handlinger</string>
     <string name="shared_string_marker">Markør</string>
+    <string name="what_is_here">Hva finnes her:</string>
+    <string name="parked_at">parkert på</string>
+    <string name="pick_up_till">Henting til</string>
+    <string name="without_time_limit">Uten tidsbegrensning</string>
+    <string name="context_menu_read_full_article">Les hele artikkelen</string>
+    <string name="context_menu_read_article">Les artikkel</string>
+    <string name="context_menu_points_of_group">Alle punkter i gruppen</string>
+    <string name="opened_from">Åpnet fra</string>
+    <string name="opened_till">Åpen til</string>
+    <string name="will_be_closed_at">Stengt på</string>
+    <string name="will_be_opened_at">Åpen på</string>
+    <string name="will_be_opened_on">Åpen på</string>
     </resources>
