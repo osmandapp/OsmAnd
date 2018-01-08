@@ -3056,7 +3056,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="context_menu_read_article">Lire l\'article</string>
     <string name="context_menu_points_of_group">Tous les points du groupe</string>
     <string name="open_from">Ouvert de</string>
-    <string name="open_till">Ouvert jusqu'à</string>
+    <string name="open_till">Ouvert jusqu\'à</string>
     <string name="will_close_at">Fermera à</string>
     <string name="will_open_at">Ouvrira à</string>
     <string name="will_open_on">Sera ouvert le</string>
