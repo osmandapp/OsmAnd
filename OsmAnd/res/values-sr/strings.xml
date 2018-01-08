@@ -1503,11 +1503,11 @@
     <string name="context_menu_read_full_article">Читати цео чланак</string>
     <string name="context_menu_read_article">Читати чланак</string>
     <string name="context_menu_points_of_group">Све тачке групе</string>
-    <string name="opened_from">Отворено од</string>
-    <string name="opened_till">Отворено до</string>
-    <string name="will_be_closed_at">Биће затворено у</string>
-    <string name="will_be_opened_at">Биће отворено у</string>
-    <string name="will_be_opened_on">Биће отворено у</string>
+    <string name="open_from">Отворено од</string>
+    <string name="open_till">Отворено до</string>
+    <string name="will_close_at">Биће затворено у</string>
+    <string name="will_open_at">Биће отворено у</string>
+    <string name="will_open_on">Биће отворено у</string>
     <string name="additional_actions">Додатне радње</string>
     <string name="av_locations_selected_desc">Датотека ГПИкс-а са координатама и подацима изабране белешке.</string>
     <string name="av_locations_all_desc">Датотека ГПИкс-а са координатама и подацима свих бележака.</string>

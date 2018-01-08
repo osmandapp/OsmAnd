@@ -2984,11 +2984,11 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="context_menu_read_full_article">Preberi celotno objavo</string>
     <string name="context_menu_read_article">Preberi objavo</string>
     <string name="context_menu_points_of_group">Vse točke skupine</string>
-    <string name="opened_from">Odprto od</string>
-    <string name="opened_till">Odprto do</string>
-    <string name="will_be_closed_at">Zapre se ob</string>
-    <string name="will_be_opened_at">Odpre se ob</string>
-    <string name="will_be_opened_on">Odprto bo na</string>
+    <string name="open_from">Odprto od</string>
+    <string name="open_till">Odprto do</string>
+    <string name="will_close_at">Zapre se ob</string>
+    <string name="will_open_at">Odpre se ob</string>
+    <string name="will_open_on">Odprto bo na</string>
     <string name="additional_actions">Dodatna dejanja</string>
     <string name="av_locations_selected_desc">Datoteka GPX s koordinatami in podatki izbranih sporočil.</string>
     <string name="av_locations_all_desc">Datoteka GPX s koordinatami in podatki vseh sporočil.</string>

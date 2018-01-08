@@ -2962,11 +2962,11 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="context_menu_read_full_article">Olvasd el a tejes cikket</string>
     <string name="context_menu_read_article">Cikk elolvasása</string>
     <string name="context_menu_points_of_group">A csoport összes pontja</string>
-    <string name="opened_from">Nyitott ekkor:</string>
-    <string name="opened_till">Nyitva eddig:</string>
-    <string name="will_be_closed_at">Ekkor fog bezárni:</string>
-    <string name="will_be_opened_at">Ekkor fog kinyitni:</string>
-    <string name="will_be_opened_on">Ekkor fog kinyitni:</string>
+    <string name="open_from">Nyitott ekkor:</string>
+    <string name="open_till">Nyitva eddig:</string>
+    <string name="will_close_at">Ekkor fog bezárni:</string>
+    <string name="will_open_at">Ekkor fog kinyitni:</string>
+    <string name="will_open_on">Ekkor fog kinyitni:</string>
     <string name="additional_actions">További műveletek</string>
     <string name="av_locations_selected_desc">"GPX fájl a kiválasztott pont  koordinátáival és adataival."</string>
     <string name="av_locations_all_desc">"GPX fájl az összes jegyzet  koordinátáival és adataival."</string>

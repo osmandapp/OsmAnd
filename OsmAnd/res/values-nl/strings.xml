@@ -2986,11 +2986,11 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="context_menu_read_full_article">Lees het hele artikel</string>
     <string name="context_menu_read_article">Lees artikel</string>
     <string name="context_menu_points_of_group">Alle punten van de groep</string>
-    <string name="opened_from">Open van</string>
-    <string name="opened_till">Open tot</string>
-    <string name="will_be_closed_at">Sluit om</string>
-    <string name="will_be_opened_at">Gaat open om</string>
-    <string name="will_be_opened_on">Zal opengaan om</string>
+    <string name="open_from">Open van</string>
+    <string name="open_till">Open tot</string>
+    <string name="will_close_at">Sluit om</string>
+    <string name="will_open_at">Gaat open om</string>
+    <string name="will_open_on">Zal opengaan om</string>
     <string name="additional_actions">Verdere acties</string>
     <string name="modify_the_search_query">Zoekopdracht veranderen.</string>
     <string name="shared_string_actions">Acties</string>

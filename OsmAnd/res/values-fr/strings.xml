@@ -3055,11 +3055,11 @@ représentant la zone : %1$s x %2$s</string>
     <string name="context_menu_read_full_article">Lire l\'article complet</string>
     <string name="context_menu_read_article">Lire l\'article</string>
     <string name="context_menu_points_of_group">Tous les points du groupe</string>
-    <string name="opened_from">Ouvert depuis</string>
-    <string name="opened_till">Ouvert depuis</string>
-    <string name="will_be_closed_at">Fermera à</string>
-    <string name="will_be_opened_at">Ouvrira à</string>
-    <string name="will_be_opened_on">Sera ouvert le</string>
+    <string name="open_from">Ouvert de</string>
+    <string name="open_till">Ouvert jusqu'à</string>
+    <string name="will_close_at">Fermera à</string>
+    <string name="will_open_at">Ouvrira à</string>
+    <string name="will_open_on">Sera ouvert le</string>
     <string name="additional_actions">Actions supplémentaires</string>
     <string name="shared_string_actions">Actions</string>
     <string name="shared_string_marker">Marque</string>

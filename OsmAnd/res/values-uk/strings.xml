@@ -3144,11 +3144,11 @@
     <string name="context_menu_read_full_article">Читайте повну статтю</string>
     <string name="context_menu_read_article">Читати статтю</string>
     <string name="context_menu_points_of_group">Всі пункти групи</string>
-    <string name="opened_from">Відкрито з</string>
-    <string name="opened_till">Відкрито до</string>
-    <string name="will_be_closed_at">Буде закрито в</string>
-    <string name="will_be_opened_at">Буде відкрито в</string>
-    <string name="will_be_opened_on">Буде відкрито</string>
+    <string name="open_from">Відкрито з</string>
+    <string name="open_till">Відкрито до</string>
+    <string name="will_close_at">Буде закрито в</string>
+    <string name="will_open_at">Буде відкрито в</string>
+    <string name="will_open_on">Буде відкрито</string>
     <string name="additional_actions">Додаткові дії</string>
     <string name="av_locations_selected_desc">Файл GPX з координатами та даними вибраних нотаток.</string>
     <string name="av_locations_all_desc">Файл GPX з координатами та даними всіх нотаток.</string>

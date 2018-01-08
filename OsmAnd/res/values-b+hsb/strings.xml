@@ -1343,8 +1343,8 @@
     <string name="context_menu_read_full_article">Cyły zapisk čitać</string>
     <string name="context_menu_read_article">Zapisk čitać</string>
     <string name="context_menu_points_of_group">Wšě dypki tuteje skupiny</string>
-    <string name="opened_from">Wočinjene wot</string>
-    <string name="opened_till">Wočinjene hač do</string>
+    <string name="open_from">Wočinjene wot</string>
+    <string name="open_till">Wočinjene hač do</string>
     <string name="additional_actions">Přidatne akcije</string>
     <string name="av_locations_selected_desc">GPX-dataja z koordinatami a datami wubranych noticow.</string>
     <string name="av_locations_all_desc">GPX-dataja z koordinatami a datami wšěch noticow.</string>
