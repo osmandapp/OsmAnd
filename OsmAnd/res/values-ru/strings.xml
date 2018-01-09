@@ -1903,7 +1903,7 @@
     <string name="rendering_value__name">По умолчанию</string>
     <string name="rendering_value_highContrastRoads_name">Высокий контраст</string>
     <string name="storage_directory_default">Внутренняя память</string>
-    <string name="specified_directiory_not_writeable">Не возможно создать карты в указанном каталоге</string>
+    <string name="specified_directiory_not_writeable">Невозможно создать карты в указанном каталоге</string>
     <string name="copying_osmand_file_failed">Не удалось переместить файлы</string>
     <string name="storage_directory_external">Внешнее хранилище</string>
     <string name="storage_directory_multiuser">Многопользовательское хранилище</string>
