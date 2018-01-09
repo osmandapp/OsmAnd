@@ -2746,7 +2746,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="mapillary_widget_descr">Segítségével gyorsan hozzájárulhatsz a Mapillaryhez.</string>
     <string name="mapillary_descr">Online utcaszintű fotók mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
     <string name="plugin_mapillary_descr">Utcaszintű fotók mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
-    <string name="osmand_extended_description_part4">Az OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a a felvonók helyét, és más berendezéseket.</string>
+    <string name="osmand_extended_description_part4">Az OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a felvonók helyét, és más berendezéseket.</string>
     <string name="online_photos">Online fényképek</string>
     <string name="improve_coverage_mapillary">Fényképes lefedettség javítása a Mapillaryvel</string>
     <string name="improve_coverage_install_mapillary_desc">Készíthet saját fényképet vagy fényképsorozatot, és hozzáadhatja ehhez a térképhelyhez. 

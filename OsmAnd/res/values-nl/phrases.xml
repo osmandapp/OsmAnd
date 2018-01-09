@@ -1579,7 +1579,7 @@
 	<string name="poi_free_flying_characteristic">Karakteristiek</string>
 	<string name="poi_cafeteria">Cafetaria</string>
 	<string name="poi_zoo_type">Type</string>
-	<string name="poi_motorcycle_services">Service</string>
+	<string name="poi_motorcycle_services">Diensten</string>
 	<string name="poi_motorcycle_type">Soort motorfiets</string>
 
 <string name="poi_emergency_infrastructure">Noodvoorzieningen</string>
@@ -2278,15 +2278,15 @@
 
 	<string name="poi_internet_access_type_terminal">Terminal</string>
 	<string name="poi_internet_access_type_public">Type internettoegang: openbaar</string>
-	<string name="poi_internet_access_type_service">Type internettoegang: service</string>
-	<string name="poi_internet_access_type_no">Geen Internettoegang</string>
+	<string name="poi_internet_access_type_service">Type internettoegang: dienst</string>
+	<string name="poi_internet_access_type_no">Geen internettoegang</string>
 	<string name="poi_internet_access_type_yes">Met internettoegang</string>
 
 	<string name="poi_maxwidth">Maximale breedte</string>
 	<string name="poi_iata">IATA-code</string>
 	<string name="poi_icao">ICAO-code</string>
 	<string name="poi_operational_status">Bedrijfsstatus</string>
-	<string name="poi_wiki_lang_bpy"></string>
+	<string name="poi_wiki_lang_bpy"/>
 	<string name="poi_historic_farm">Historische boerderij</string>
 	<string name="poi_historic_railway_station">Historisch treinstation</string>
 
@@ -2488,4 +2488,7 @@
 	<string name="poi_disease_autism_yes">Autisme: ja</string>
 	<string name="poi_disease_autism_no">Autisme: nee</string>
 	<string name="poi_office_physician">Arts kantoor</string>
+	<string name="poi_animal_shelter_type">Dieren toegestaan</string>
+	<string name="poi_faa">FAA-code</string>
+	
 	</resources>

@@ -2993,18 +2993,18 @@
 \n
 \n</string>
     <string name="what_is_here">Што тут:</string>
-    <string name="parked_at">прапаркаваны на</string>
+    <string name="parked_at">прыпаркаваны на</string>
     <string name="pick_up_till">Узяць да</string>
-    <string name="without_time_limit">Без абмежавання часу</string>
+    <string name="without_time_limit">Без абмежаваньня часу</string>
     <string name="context_menu_read_full_article">Чытаць увесь артыкул</string>
     <string name="context_menu_read_article">Чытаць артыкул</string>
     <string name="context_menu_points_of_group">Усе кропкі групы</string>
-    <string name="open_from">Адчынена ад</string>
-    <string name="open_till">Адчынена да</string>
-    <string name="will_close_at">Будзе зачынена а</string>
-    <string name="will_open_at">Будзе адчынена а</string>
-    <string name="will_open_on">Будзе адчынена</string>
-    <string name="additional_actions">Дадатковыя дзеянні</string>
+    <string name="opened_from">Адчынена ад</string>
+    <string name="opened_till">Адчынена да</string>
+    <string name="will_be_closed_at">Будзе зачынена а</string>
+    <string name="will_be_opened_at">Будзе адчынена а</string>
+    <string name="will_be_opened_on">Будзе адчынена</string>
+    <string name="additional_actions">Дадатковыя дзеяньні</string>
     <string name="av_locations_selected_desc">GPX-файл з каардынатамі і данымі выбраных нататак.</string>
     <string name="av_locations_all_desc">GPX-файл з каардынатамі і данымі ўсіх нататак.</string>
     <string name="shared_string_actions">Дзеянні</string>
