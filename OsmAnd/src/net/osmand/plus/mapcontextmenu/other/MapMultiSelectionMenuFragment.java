@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
@@ -50,6 +51,8 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 		View headerView = inflater.inflate(R.layout.menu_obj_selection_header, listView, false);
 		if (!menu.isLight()) {
 			((TextViewEx) headerView.findViewById(R.id.header_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
+			((TextView) view.findViewById(R.id.cancel_row_text)).setTextColor(getResources().getColor(R.color.color_dialog_buttons_dark));
+			view.findViewById(R.id.divider).setBackgroundResource(R.color.dashboard_divider_dark);
 		}
 		headerView.setOnClickListener(null);
 		listView.addHeaderView(headerView);
