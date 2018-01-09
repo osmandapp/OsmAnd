@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
   <string name="left_side_navigation">მარცხენა ხელით ტარება</string>
   <string name="left_side_navigation_descr">აირჩიეთ მარცხენა მხარეს საჭის გამომყენებელი ქვეყნებისათვის</string>
   
@@ -1345,4 +1346,22 @@
     <string name="quick_action_replace_destination">დანიშნულების წერტილის შეცვლა</string>
     <string name="subscribe_email_error">შეცდომა</string>
     <string name="fonts_header">რუკის ფონტები</string>
+    <string name="parked_at">პარკირების ადგილი</string>
+    <string name="pick_up_till">გაყვანის დრო</string>
+    <string name="without_time_limit">დროის შეზღუდვის გარეშე</string>
+    <string name="context_menu_read_full_article">"მთლიანი  სტატიის წაკითხვა"</string>
+    <string name="context_menu_read_article">სტატიის წაკითხვა</string>
+    <string name="opened_from">გახსნის დროა</string>
+    <string name="opened_till">დახურვის დრო</string>
+    <string name="will_be_closed_at">დახურვის დრო</string>
+    <string name="will_be_opened_at">გახსნის დრო</string>
+    <string name="will_be_opened_on">გაიხსნება</string>
+    <string name="additional_actions">დამატებითი მოქმედებები</string>
+    <string name="modify_the_search_query">ძებნის შინაარსის შეცვლა.</string>
+    <string name="shared_string_actions">მოქმედებები</string>
+    <string name="shared_string_marker">სანიშნი</string>
+    <string name="shared_string_deleted">წაშლილია</string>
+    <string name="shared_string_edited">ჩასწორებულია</string>
+    <string name="shared_string_added">დამატებულია</string>
+    <string name="shared_string_action_name">მოქმედების სახელი</string>
     </resources>
