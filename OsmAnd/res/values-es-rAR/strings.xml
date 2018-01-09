@@ -2628,7 +2628,7 @@ Proporciona un código completo</string>
     <string name="search_favorites">Buscar favoritos</string>
     <string name="restart_search">Reiniciar búsqueda</string>
     <string name="increase_search_radius">Aumentar radio de búsqueda</string>
-    <string name="nothing_found">¡Nada por aquí! 😞</string>
+    <string name="nothing_found">¡Nada por aquí! :-(</string>
     <string name="nothing_found_descr">Modifica la consulta de búsqueda o aumenta el radio de búsqueda.</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Quieres acceder en este viaje a los caminos privados?</string>
     <string name="mapillary">Mapillary</string>
