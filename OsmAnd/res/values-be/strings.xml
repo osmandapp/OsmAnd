@@ -3012,4 +3012,9 @@
     <string name="osm_recipient_stat">Змен %1$s, сума %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-атрымальнікі</string>
     <string name="total_donations">Усяго ахвяраванняў</string>
-</resources>
+<string name="open_from">Адкрыта з</string>
+    <string name="open_till">Адкрыта да</string>
+    <string name="will_close_at">Закрыецца а</string>
+    <string name="will_open_at">Адкрыецца а</string>
+    <string name="will_open_on">Адкрыецца</string>
+    </resources>
