@@ -3006,11 +3006,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="context_menu_read_full_article">Læs hele artiklen</string>
     <string name="context_menu_read_article">Læs artikel</string>
     <string name="context_menu_points_of_group">Alle punkter i gruppen</string>
-    <string name="opened_from">Åben fra</string>
-    <string name="opened_till">Åben til</string>
-    <string name="will_be_closed_at">Vil være lukket på</string>
-    <string name="will_be_opened_at">Vil blive åbnet på</string>
-    <string name="will_be_opened_on">Der åbnes på</string>
+    <string name="open_from">Åben fra</string>
+    <string name="open_till">Åben til</string>
+    <string name="will_close_at">Vil være lukket på</string>
+    <string name="will_open_at">Vil blive åbnet på</string>
+    <string name="will_open_on">Der åbnes på</string>
     <string name="additional_actions">Yderligere handlinger</string>
     <string name="shared_string_actions">Handlinger</string>
     <string name="shared_string_marker">Markør</string>

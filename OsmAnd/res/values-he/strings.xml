@@ -82,10 +82,11 @@
 	
 	
 	<string name="bg_service_sleep_mode_off">הפעלת\n מצב שינה</string>
-	<string name="bg_service_sleep_mode_on">הפסקת\n מצב שינה</string>
+	<string name="bg_service_sleep_mode_on">הפסקת
+\n הפעלה ברקע</string>
 	<string name="gps_wakeup_interval">הפרשי התעוררות של רכיב האיכון: %s</string>
 	<string name="int_continuosly">רציף</string>
-	<string name="screen_is_locked">כדי לשחרר את המסכים יש ללחוץ על סמל הנעילה</string>
+	<string name="screen_is_locked">כדי לשחרר את המסך יש ללחוץ על סמל המנעול</string>
 	<string name="map_widget_top_text">שם הרחוב</string>
 	<string name="map_widget_config">מסך ההגדרות</string>
 	
@@ -97,7 +98,7 @@
 	
 	
 	<string name="map_widget_parking">חנייה</string>
-	<string name="map_widget_monitoring">הקלטת GPX</string>
+	<string name="map_widget_monitoring">רישום GPX</string>
 	<string name="map_widget_speed">מהירות</string>
 	<string name="map_widget_distance">יעד</string>
 	<string name="map_widget_altitude">גובה</string>
@@ -126,9 +127,9 @@
 	<string name="bg_service_screen_unlock">שחרור המסך</string>
 	<string name="bg_service_screen_lock_toast">המסך נעול</string>
 	<string name="bg_service_interval">הגדרת משך התעוררות:</string>
-	<string name="show_cameras">הצגת מכמונות מהירות</string>
-	<string name="show_traffic_warnings">הצגת אזהרות תנועה</string>
-	<string name="avoid_toll_roads">המנעות מכבישי אגרה</string>
+	<string name="show_cameras">מכמונות מהירות</string>
+	<string name="show_traffic_warnings">אזהרות תנועה</string>
+	<string name="avoid_toll_roads">הימנעות מכבישי אגרה</string>
 	<string name="continue_follow_previous_route_auto">הניווט הקודם לא הושלם. האם להמשיך לעקוב אחריו? (%1$s שניות)</string>
 	<string name="route_updated_loc_found">המסלול יחושב מחדש כאשר המיקום יימצא</string>
 	<string name="osmand_parking_hours">שעות</string>
@@ -502,7 +503,7 @@
 	<string name="search_offline_geo_error">לא ניתן לנתח את הפריט הגאוגרפי \'%s\'</string>
 	<string name="search_osm_offline">חיפוש כתובת באמצעות המפה הבלתי מקוונת</string>
 	<string name="system_locale">מערכת</string>
-	<string name="preferred_locale_descr">נא לבחור את שפת התצוגה</string>
+	<string name="preferred_locale_descr">נא לבחור את שפת התצוגה (יש להפעיל את OsmAnd מחדש לאחר השינוי).</string>
 	<string name="preferred_locale">שפת התצוגה</string>
 	
 	
@@ -518,8 +519,8 @@
 	
 	<string name="shared_string_next">הבא</string>
 	<string name="shared_string_previous">הקודם</string>
-	<string name="unit_of_length_descr">שינוי יחידות האורך והמהירות</string>
-	<string name="unit_of_length">יחידת המידה</string>
+	<string name="unit_of_length_descr">שינוי יחידות האורך.</string>
+	<string name="unit_of_length">יחידות אורך</string>
 	<string name="si_mi_feet">מיילים/רגל</string>
 	<string name="si_mi_yard">מיילים/יארדים</string>
 	<string name="si_km_m">קילומטרים/מטרים</string>
@@ -565,7 +566,7 @@
 	<string name="km_h">קמ״ש</string>
 	<string name="m">מ׳</string>
 	<string name="old_map_index_is_not_supported">תבנית נתוני המפה שנזנחה „{0}“ אינה נתמכת</string>
-	<string name="poi_filter_closest_poi">נ״ע הקרובה ביותר</string>
+	<string name="poi_filter_closest_poi">נ״ע הקרובות ביותר</string>
 	<string name="poi_filter_custom_filter">מסנן מותאם אישית</string>
 	<string name="poi_filter_namefinder">מחפש שמות מקוון</string>
 	<string name="reading_cached_tiles">האריחים שנשמרו נקראים…</string>
@@ -584,7 +585,7 @@
 	<string name="build_installed">הבנייה {0} הותקנה בהצלחה ({1}).</string>
 	
 	<string name="downloading_build">הבנייה מתקבלת…</string>
-	<string name="install_selected_build">האם ברצונך להתקין את OsmAnd - {0} מהמיקום {1}‏ {2} מ״ב ?</string>
+	<string name="install_selected_build">האם ברצונך להתקין את OsmAnd‏ - {0} מתוך {1}‏ {2} מ״ב ?</string>
 	<string name="loading_builds_failed">קבלת רשימת הבניות של OsmAnd נכשלה</string>
 	<string name="loading_builds">הבניות של OsmAnd נטענות…</string>
 	<string name="select_build_to_install">יש לבחור את אחת הבניות של OsmAnd להתקנה</string>
@@ -605,7 +606,7 @@
 	<string name="shared_string_select_all">בחירת הכול</string>
 	<string name="shared_string_refresh">רענון</string>
 	<string name="fast_route_mode">המסלול המהיר ביותר</string>
-	<string name="fast_route_mode_descr">"יש להפעיל כדי לחשב את המסלול המהיר ביותר או לנטרל כדי לקבל את המסלול הקצר ביותר "</string>
+	<string name="fast_route_mode_descr">יש להפעיל כדי לחשב את המסלול המהיר ביותר או להשבית כדי לקבל את המסלול החסכוני ביותר.</string>
 	<string name="tiles_to_download_estimated_size">ברמת תקריב {0} יש להוריד {1} אריחים ({2} מ״ב)</string>
 	<string name="shared_string_download_map">הורדת המפה</string>
 	<string name="select_max_zoom_preload_area">יש לבחור את רמת התקריב המרבית כדי לטעון מראש</string>
@@ -617,7 +618,7 @@
 	<string name="renderer_load_sucess">תכונת העיבוד נטענה בהצלחה</string>
 	<string name="renderer_load_exception">אירעה חריגה: תכונת העיבוד לא נטענה</string>
 	<string name="renderers">תכונת עיבוד וקטורים</string>
-	<string name="renderers_descr">נא לבחור את הופעת תכונת העיבוד</string>
+	<string name="renderers_descr">נא לבחור את הופעת תכונת העיבוד.</string>
 	<string name="poi_context_menu_website">הצגת אתר הנ״ע</string>
 	<string name="poi_context_menu_call">הצגת טלפון הנ״ע</string>
 	<string name="website">אתר</string>
@@ -666,7 +667,7 @@
 	<string name="layer_yandex_traffic">תנועה מ־Yandex</string>
 	<string name="layer_route">מסלול</string>
 	<string name="shared_string_favorites">מועדפים</string>
-	<string name="layer_osm_bugs">תקלות ב־OSM</string>
+	<string name="layer_osm_bugs">הערות ב־OSM (מקוון)</string>
 	
 	
 	<string name="transport_Stop">תחנה</string>
@@ -686,12 +687,12 @@
 	<string name="show_transport_over_map_description">הצגת תחנות תחבורה ציבורית במפה.</string>
 	<string name="show_transport_over_map">הצגת תחנות תחבורה</string>
 	<string name="hello">יישום הניווט OsmAnd</string>
-	<string name="layer_poi">נ״ע…</string>
+	<string name="layer_poi">שכבת נ״ע…</string>
 	<string name="layer_map">מקור המפה…</string>
 	<string name="menu_layers">הגדרת תצוגה</string>
 	<string name="context_menu_item_search_poi">חיפוש נ״ע</string>
 	
-	<string name="use_trackball_descr">יש להשתמש בכדור מעקב כדי להזיז את המפה</string>
+	<string name="use_trackball_descr">יש להשתמש בכדור מעקב כדי להזיז את המפה.</string>
 	<string name="where_am_i">איפה אני?</string>
 	<string name="update_poi_success">נתוני הנ״ע עודכנו בהצלחה ({0} נטענו)</string>
 	<string name="use_trackball">שימוש בכדור המעקב</string>
@@ -700,7 +701,7 @@
 	<string name="gps_provider">רכיב איכון</string>
 	<string name="int_seconds">שניות</string>
 	<string name="int_min">דקות</string>
-	<string name="background_service_int_descr">הגדרת הפסקות שינה שמשמשות את שירות מצב השינה</string>
+	<string name="background_service_int_descr">הגדרת הפסקות שינה שמשמשות את שירות מצב הרקע.</string>
 	<string name="background_service_int">הפרשי התעוררות GPS</string>
 	<string name="update_poi_error_local">אירעה שגיאה בעת עדכון רשימת הנ״ע המקומית</string>
 	<string name="update_poi_error_loading">אירעה שגיאה בעת טעינת הנתונים מהשרת</string>
@@ -709,10 +710,10 @@
 	<string name="context_menu_item_update_poi">עדכון נ״ע</string>
 	<string name="context_menu_item_update_map_confirm">האם לעדכן את הנתונים המקומיים שלך מהאינטרנט?</string>
 	<string name="search_history_city">עיר:\n {0}</string>
-	<string name="background_service_provider_descr">נא לבחור את ספק המיקום בעת הפעלה במצב רקע</string>
+	<string name="background_service_provider_descr">נא לבחור את ספק המיקום שמשמש להפעלה במצב רקע.</string>
 	<string name="background_service_provider">ספק מיקום</string>
-	<string name="background_router_service_descr">הפעלת OsmAnd ברקע כדי לעקוב אחר המיקום שלך כשהמסך כבוי</string>
-	<string name="background_router_service">הפעלה ברקע</string>
+	<string name="background_router_service_descr">הפעלת OsmAnd ברקע כדי לעקוב אחר המיקום שלך כשהמסך כבוי.</string>
+	<string name="background_router_service">הפעלת OsmAnd ברקע</string>
 	<string name="off_router_service_no_gps_available">שירות הניווט ברקע דורש הפעלה של ספק מיקום.</string>
 	<string name="hide_poi_filter">הסתרת מסנן</string>
 	<string name="show_poi_filter">הצגת מסנן</string>
@@ -788,7 +789,7 @@
 	<string name="opening_hours">שעות הפתיחה</string>
 	<string name="background_service_wait_int">זמן ההמתנה המרבי לתיקון</string>
 	
-	<string name="background_service_wait_int_descr">הגדרת זמן ההמתנה המרבי לכל תיקון במיקום ברקע</string>
+	<string name="background_service_wait_int_descr">הגדרת זמן ההמתנה המרבי לכל תיקון במיקום ברקע.</string>
 	<string name="opening_changeset">ערכת השינויים נפתחת…</string>
 	<string name="closing_changeset">ערכת השינויים נסגרת…</string>
 	<string name="commiting_node">המפרק נשלח…</string>
@@ -2508,11 +2509,11 @@
     <string name="context_menu_read_full_article">קריאת הכתבה המלאה</string>
     <string name="context_menu_read_article">קריאת הכתבה</string>
     <string name="context_menu_points_of_group">כל הנקודות בקבוצה</string>
-    <string name="opened_from">פתיחה בשעה</string>
-    <string name="opened_till">סגירה בשעה</string>
-    <string name="will_be_closed_at">סגירה בשעה</string>
-    <string name="will_be_opened_at">פתיחה בשעה</string>
-    <string name="will_be_opened_on">פתיחה ביום</string>
+    <string name="open_from">פתיחה בשעה</string>
+    <string name="open_till">סגירה בשעה</string>
+    <string name="will_close_at">סגירה בשעה</string>
+    <string name="will_open_at">פתיחה בשעה</string>
+    <string name="will_open_on">פתיחה ביום</string>
     <string name="additional_actions">פעולות נוספות</string>
     <string name="av_locations_selected_desc">קובץ GPX עם נקודות ציון ונתונים על ההערות הנבחרות.</string>
     <string name="av_locations_all_desc">קובץ GPX עם נקודות ציון ונתונים על כל ההערות.</string>
@@ -2594,4 +2595,14 @@
     <string name="osmand_extended_description_part7">תרומה ל־OSM • דיווח על תקלה בנתונים • העלאת מסלולי GPX ישירות מהיישומון אל OSM • הוספת נקודות עניין והעלאה ישירה שלהן ל־OSM (או לאחר מכן אם אין חיבור)</string>
     <string name="arrival_distance_descr">כמה לפני המועד ברצונך להיוודע על הגעה ליעד?</string>
     <string name="live_monitoring_max_interval_to_send">חוצץ זמן למעקב מקוון</string>
-    </resources>
+    <string name="osm_edit_removed_note">הערת OSM נמחקה</string>
+    <string name="osm_edit_created_note">נוצרה הערת OSM</string>
+    <string name="osn_bug_name">הערת OSM</string>
+    <string name="osn_add_dialog_title">יצירת הערה</string>
+    <string name="share_geo">גאו:</string>
+    <string name="osm_edits">עריכות ב־OSM</string>
+    <string name="osmand_parking_hour">שע</string>
+    <string name="navigate_point_olc">פתיחת קוד מיקום</string>
+    <string name="osm_recipients_label">נמעני OSM</string>
+    <string name="total_donations">סך כל התרומות</string>
+</resources>

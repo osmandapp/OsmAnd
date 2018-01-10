@@ -3680,4 +3680,8 @@
 	<string name="poi_payment_centre">Centrum płatności</string>
 	<string name="poi_money_transfer">Przelew pieniędzy</string>
 
-</resources>
+<string name="poi_route_subway_ref">Metro</string>
+
+	<string name="poi_depot">Zajezdnia</string>
+
+	</resources>

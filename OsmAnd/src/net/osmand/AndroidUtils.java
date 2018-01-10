@@ -7,8 +7,12 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.os.IBinder;
+import android.support.annotation.DrawableRes;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
@@ -112,6 +116,23 @@ public class AndroidUtils {
 		}
 
 		return null;
+	}
+
+	public static StateListDrawable createStateListDrawable(Context ctx, boolean night,
+															@DrawableRes int lightNormal, @DrawableRes int lightPressed,
+															@DrawableRes int darkNormal, @DrawableRes int darkPressed) {
+		return createStateListDrawable(night,
+				ContextCompat.getDrawable(ctx, lightNormal), ContextCompat.getDrawable(ctx, lightPressed),
+				ContextCompat.getDrawable(ctx, darkNormal), ContextCompat.getDrawable(ctx, darkPressed));
+	}
+
+	public static StateListDrawable createStateListDrawable(boolean night,
+															Drawable lightNormal, Drawable lightPressed,
+															Drawable darkNormal, Drawable darkPressed) {
+		StateListDrawable res = new StateListDrawable();
+		res.addState(new int[]{android.R.attr.state_pressed}, night ? darkPressed : lightPressed);
+		res.addState(new int[]{}, night ? darkNormal : lightNormal);
+		return res;
 	}
 
 	@SuppressLint("NewApi")

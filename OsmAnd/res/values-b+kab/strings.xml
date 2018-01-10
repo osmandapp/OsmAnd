@@ -667,13 +667,15 @@
     <string name="context_menu_read_full_article">Γer amagrad akk</string>
     <string name="context_menu_read_article">Γer amagrad</string>
     <string name="context_menu_points_of_group">Akk tinqiḍin n ugraw</string>
-    <string name="opened_from">Yeldi si</string>
-    <string name="opened_till">Yeldi si</string>
-    <string name="will_be_closed_at">Ad imdel γef</string>
-    <string name="will_be_opened_at">Ad yeldi γef</string>
-    <string name="will_be_opened_on">Ad yeldi ass</string>
+    <string name="open_from">Yeldi si</string>
+    <string name="open_till">Yeldi si</string>
+    <string name="will_close_at">Ad imdel γef</string>
+    <string name="will_open_at">Ad yeldi γef</string>
+    <string name="will_open_on">Ad yeldi ass</string>
     <string name="additional_actions">Tiggawin nniḍen</string>
     <string name="av_locations_selected_desc">Afaylu GPX igebren adig akked isefka n tezmilin ittwafernen.</string>
     <string name="av_locations_all_desc">Afaylu igebren adig akked tizmilin.</string>
     <string name="shared_string_actions">Tigawin</string>
+    <string name="parked_at">Sers deg</string>
+    <string name="without_time_limit">Ulac tilist deg wakud</string>
     </resources>

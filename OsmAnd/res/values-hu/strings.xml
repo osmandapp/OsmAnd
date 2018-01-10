@@ -287,7 +287,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="search_offline_geo_error">Nem sikerült értelmezni a geo intent által küldött parancsot:\'%s\'.</string>
     <string name="search_osm_offline">Cím keresése offline térképen</string>
     <string name="system_locale">Rendszer nyelve</string>
-    <string name="preferred_locale_descr">Kijelző nyelvének kiválasztása (módosítás után indítsd újra az OsmAnd programot)</string>
+    <string name="preferred_locale_descr">Kijelző nyelvének kiválasztása (módosítás után indítsd újra az OsmAndot).</string>
     <string name="preferred_locale">Preferált nyelv</string>
 
 
@@ -903,7 +903,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
 
 
     <string name="osmand_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM térképekkel</string>
-    <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions) Az OsmAnd nyílt forráskódú navigációs alkalmazás az OpenStreetMap (OSM) adatainak széleskörű használatával. Bármelyik térképadat (vektoros és raszteres térképek) tárolható a készülék memóriakártyáján offline használatra. Az OsmAnd továbbá lehetővé teszi az offline és online útvonaltervezést is, részletes hangutasításokkal. Néhány fontosabb funkció: - Teljesen offline működés (a letöltött vektoros és raszteres térképek az eszközön tárolódnak) - A kompakt, offline vektoros térképek az egész világhoz elérhetőek - Az ország vagy régió térképei letölthetők közvetlenül az alkalmazásból - Számos rávetíthető térképréteg, mint GPX-ek, navigációs útvonalak, POI-k (érdekes helyek), kedvencek, szintvonalak, tömegközlekedési megállók, további térképek beállítható átlátszósággal - Címek és helyek offline kereshetősége - Offline útvonaltervezés rövidebb távolságokra (kísérleti) - Autós, kerékpáros és gyalogos módok: - opcionális automata nappali/éjszakai nézetváltással - opcionális sebességfüggő nagyítással - opcionális térképforgatással a mozgás vagy az iránytű alapján - opcionális sávasszisztens, sebességkorlátozás kijelzés, felvett és gépi hangutasítás Az OsmAnd ingyenes változatának korlátozásai: - Korlátozott számú vektoros térképletöltés - Offline Wikipédia cikkek nem elérhetőek Az OsmAnd folyamatosan fejlesztés alatt áll és a projektünk nagyban függ a pénzügyi támogatásoktól, amiből finanszírozhatók a fejlesztések és az új funkciók tesztelése. Kérlek, fontold meg az OsmAnd+ megvásárlását, vagy egy-egy funkció támogatását az osmand.net oldalon. "</string>
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) Az OsmAnd nyílt forráskódú navigációs alkalmazás az OpenStreetMap (OSM) adatainak széleskörű használatával. Bármelyik térképadat (vektoros és raszteres térképek) tárolható a készülék memóriakártyáján offline használatra. Az OsmAnd továbbá lehetővé teszi az offline és online útvonaltervezést is, részletes hangutasításokkal. Néhány fontosabb funkció: - Teljesen offline működés (a letöltött vektoros és raszteres térképek az eszközön tárolódnak) - A kompakt, offline vektoros térképek az egész világhoz elérhetőek - Az ország vagy régió térképei letölthetők közvetlenül az alkalmazásból - Számos rávetíthető térképréteg, mint GPX-ek, navigációs útvonalak, POI-k (érdekes helyek), kedvencek, szintvonalak, tömegközlekedési megállók, további térképek beállítható átlátszósággal - Címek és helyek offline kereshetősége - Offline útvonaltervezés rövidebb távolságokra (kísérleti) - Autós, kerékpáros és gyalogos módok: - opcionális automata nappali/éjszakai nézetváltással - opcionális sebességfüggő nagyítással - opcionális térképforgatással a mozgás vagy az iránytű alapján - opcionális sávasszisztens, sebességkorlátozás kijelzés, felvett és gépi hangutasítás Az OsmAnd ingyenes változatának korlátozásai: - Korlátozott számú vektoros térképletöltés - Offline Wikipédia cikkek nem elérhetőek Az OsmAnd folyamatosan fejlesztés alatt áll és a projektünk nagyban függ a pénzügyi támogatásoktól, amiből finanszírozhatók a fejlesztések és az új funkciók tesztelése. Kérlek, fontold meg az OsmAnd+ megvásárlását, vagy egy-egy funkció támogatását az osmand.net oldalon.</string>
     <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions)Az OsmAnd+ egy nyílt forráskódú navigációs alkalmazás az OpenStreetMap (OSM) adatainak széleskörű használatával. Bármelyik térképadat (vektoros és raszteres térképek) tárolható a készülék memóriakártyáján offline használatra. Az OsmAnd továbbá lehetővé teszi az offline és online útvonaltervezést is, részletes hangutasításokkal.Az OsmAnd+ az alkalmazás fizetős változata, aminek megvásárlásával támogatod a projektet, az új funkciók fejlesztésének finanszírozását és megkapod a legújabb frissítéseket.Néhány fontosabb funkció: - Teljesen offline működés (a letöltött vektoros és raszteres térképek az eszközön tárolódnak) - A kompakt, offline vektoros térképek az egész világhoz elérhetőek - Az ország vagy régió térképei letölthetők közvetlenül az alkalmazásból - Offline Wikipédia szócikkek letöltése, ami hasznos segítség városnézéshez - Számos rávetíthető térképréteg, mint GPX-ek, navigációs útvonalak, POI-k (érdekes helyek), kedvencek, szintvonalak, tömegközlekedési megállók, további térképek beállítható átlátszósággal - Címek és helyek offline kereshetősége - Offline útvonaltervezés közepes távolságokra - Autós, kerékpáros és gyalogos módok: - opcionális automata nappali/éjszakai nézetváltással - opcionális sebességfüggő nagyítással - opcionális térképforgatással a mozgás vagy az iránytű alapján - opcionális sávasszisztens, sebességhatár kijelzés, felvett és gépi hangutasítás "</string>
     <string name="osmand_plus_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM térképekkel</string>
     <string name="avoid_motorway">Autópályák elkerülése</string>
@@ -1006,7 +1006,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="audionotes_plugin_description">A hang- és videojegyzetek bővítmény biztosítja az utazás közbeni hang-, fénykép- és videojegyzetek készítésének lehetőségét a térkép képernyőn lévő gomb segítségével, vagy közvetlenül a térképen lévő bármely pozíció helyi menüjének használatával.</string>
     <string name="av_def_action_video">Videofelvétel</string>
     <string name="av_def_action_audio">Hangfelvétel</string>
-    <string name="av_video_format_descr">Videókimeneti formátum kiválasztása</string>
+    <string name="av_video_format_descr">Video kimeneti formátum kiválasztása.</string>
     <string name="av_video_format">Videó kimeneti formátuma</string>
     <string name="av_use_external_recorder_descr">Rendszerprogram használata videofelvételre.</string>
     <string name="av_use_external_recorder">Külső felvevő használata</string>
@@ -1018,7 +1018,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="osmand_srtm_long_description_1000_chars">Ez a bővítmény egy szintvonal fedvényt és egy domborzatárnyékolás réteget biztosít, amelyek az OsmAnd normál térképein jelennek meg. Ezt a funkcionalitást nagyon fogják értékelni a sportolók, túrázók, nyomvonalrögzítők és mindenki, akiket a táj domborzati szerkezete érdekel. 
 \n 
 \nA globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, amely a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági, Kereskedelmi és Ipari Minisztérium (METI), valamint a Japán Űrügynökség (J-spacesystems) közös projektje.</string>
-    <string name="av_widget_action_descr">Vezérlőgomb alapértelmezett működési módjának kiválasztása</string>
+    <string name="av_widget_action_descr">Vezérlőgomb alapértelmezett működési módja.</string>
     <string name="av_widget_action">Alapértelmezett mód</string>
     <string name="recording_description">Felvétel %1$s %3$s %2$s</string>
     <string name="srtm_paid_version_msg">Kérlek fontold meg a Szintvonal bővítmény megvásárlását a Play Store-ban, ezzel támogatva a további fejlesztéseket.</string>
@@ -2060,7 +2060,7 @@ Hosszúság: %2$s</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Összes frissítése (%1$s MB)</string>
     <string name="free_downloads_used">Elhasznált ingyenes letöltés</string>
-    <string name="free_downloads_used_description">Megjeleníti a használt ingyenes letöltéseket</string>
+    <string name="free_downloads_used_description">Megjeleníti az elhasznált ingyenes letöltéseket.</string>
     <string name="simulate_initial_startup_descr">Az első indítást jelző flag beállítása, a többi beállítás változatlan marad.</string>
     <string name="simulate_initial_startup">Alkalmazás első indításának szimulálása</string>
     <string name="share_geo">geo:</string>
@@ -2440,7 +2440,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="get_for">Beszerzés %1$s-ért</string>
     <string name="edit_filter">Kategóriák szerkesztése</string>
     <string name="subcategories">Alkategóriák</string>
-    <string name="selected_categories">Kijelölt kategóriák</string>
+    <string name="selected_categories">Kiválasztott kategóriák</string>
     <string name="create_custom_poi">Egyéni szűrő létrehozása</string>
     <string name="custom_search">Egyéni keresés</string>
     <string name="shared_string_filters">Szűrők</string>
@@ -2571,7 +2571,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="quick_action_bug_descr">Ez az üzenet automatikusan bekerül a megjegyzés mezőbe.</string>
     <string name="quick_action_bug_message">Üzenet</string>
     <string name="quick_action_category_descr">Válaszd ki, melyik kategóriába kerüljön a kedvenc hely.</string>
-    <string name="quick_action_gpx_category_descr">Opcionális kategória kiválasztása</string>
+    <string name="quick_action_gpx_category_descr">Opcionális kategória kiválasztása.</string>
     <string name="quick_action_poi_list">POI lista</string>
     <string name="quick_action_sh_poi_descr">Hozzáadhatsz egy, vagy több, a térképen megjelenítendő POI kategóriát.</string>
     <string name="quick_action_map_style_action">Térképstílus hozzáadása</string>
@@ -2638,7 +2638,7 @@ Kérlek adj meg egy teljes kódot</string>
 \n 
 \n • Magassági adatok használata kerékpáros tervezésnél 
 \n 
-\n • Sok egyéb apró fejlesztés és hibajavítás</string>
+\n • Sok egyéb apró fejlesztés és hibajavítás…</string>
 	<string name="auto_split_recording_title">Felvételek auto-vágása szünet után</string>
 	<string name="auto_split_recording_descr">Új szakasz készítése 6 perc szünet után, új nyomvonal 2 óra szünet után, és új fájl hosszabb szünet után, vagy dátum változásakor.</string>
     <string name="max_speed">Max sebesség</string>
@@ -2731,7 +2731,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="animate_my_location_desc">Helyzetem animálásának engedélyezése navigáció közben.</string>
     <string name="shared_string_overview">Áttekintés</string>
     <string name="route_is_too_long_v2">Ennek az útnak a kiszámítása túl hosszú ideig tarthat. Ha 10 percen belül nem kap eredményt, kérjük, adjon hozzá köztes célpontokat.</string>
-    <string name="osmand_extended_description_part1">" OsmAnd (OSM Automated Navigation Directions) egy térkép- és navigációs alkalmazás, amellyel hozzáférhet az ingyenes, globális és kiváló minőségű OpenStreetMap (OSM) adataihoz. Élvezze a hangalapú és vizuális navigációs szolgáltatást, tekintsen meg érdekes pontokat (POI-kat), hozzon létre és kezeljen GPX-útvonalakat szintvonalak és magasságinformációk használatával (egy plugin segítségével), válasszon az autós, kerékpáros és gyalogos üzemmód közül és használjon ki számos egyéb lehetőséget. "</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) egy térkép- és navigációs alkalmazás, amellyel hozzáférhet az ingyenes, globális és kiváló minőségű OpenStreetMap (OSM) adataihoz. Élvezze a hangalapú és vizuális navigációs szolgáltatást, tekintsen meg érdekes pontokat (POI-kat), hozzon létre és kezeljen GPX-útvonalakat szintvonalak és magasságinformációk használatával (egy plugin segítségével), válasszon az autós, kerékpáros és gyalogos üzemmód közül és használjon ki számos egyéb lehetőséget.</string>
     <string name="save_poi_too_many_uppercase">A név túl sok nagybetűt tartalmaz. Folytatja?</string>
     <string name="private_access_routing_req">A célpont korlátozott hozzáférésű területen található. Engedélyezed a magánutak használatát ennél az útvonaltervnél?</string>
     <string name="restart_search">Keresés újraindítása</string>
@@ -2746,7 +2746,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="mapillary_widget_descr">Segítségével gyorsan hozzájárulhatsz a Mapillaryhez.</string>
     <string name="mapillary_descr">Online utcaszintű fotók mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
     <string name="plugin_mapillary_descr">Utcaszintű fotók mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
-    <string name="osmand_extended_description_part4">" Az OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a a felvonók helyét, és más berendezéseket. "</string>
+    <string name="osmand_extended_description_part4">Az OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a felvonók helyét, és más berendezéseket.</string>
     <string name="online_photos">Online fényképek</string>
     <string name="improve_coverage_mapillary">Fényképes lefedettség javítása a Mapillaryvel</string>
     <string name="improve_coverage_install_mapillary_desc">Készíthet saját fényképet vagy fényképsorozatot, és hozzáadhatja ehhez a térképhelyhez. 
@@ -2755,7 +2755,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_install">Telepítés</string>
     <string name="open_mapillary">Mapillary megnyitása</string>
     <string name="mapillary_image">Mapillary-kép</string>
-    <string name="osmand_plus_extended_description_part8">" Hozzávetőleges lefedettség és térképminőség:  • Nyugat-Európa: ****  • Kelet-Európa: ***  • Oroszország: ***  • Észak-Amerika: ***  • Dél-Amerika: **  • Ázsia: **  • Japán és Korea: ***  • Közel-Kelet: **  • Afrika: **  • Antarktisz: *  A világ legtöbb országa letölthető. Afganisztántól Zimbabwéig, Ausztráliától az Egyesült Államokig. Magyarország, Szlovákia, Románia, Ausztria, Németország, Olaszország… "</string>
+    <string name="osmand_plus_extended_description_part8">"Hozzávetőleges lefedettség és térképminőség:  • Nyugat-Európa: ****  • Kelet-Európa: ***  • Oroszország: ***  • Észak-Amerika: ***  • Dél-Amerika: **  • Ázsia: **  • Japán és Korea: ***  • Közel-Kelet: **  • Afrika: **  • Antarktisz: *  A világ legtöbb országa letölthető. Afganisztántól Zimbabwéig, Ausztráliától az Egyesült Államokig. Magyarország, Szlovákia, Románia, Ausztria, Németország, Olaszország…"</string>
     <string name="distance_moving">Korrigált távolság</string>
     <string name="shared_string_permissions">Engedélyek</string>
     <string name="import_gpx_failed_descr">Az OsmAnd nem tudja importálni a fájlt. Ellenőrizze, hogy az OsmAndnak van-e engedélye fájlt olvasni erről a helyről.</string>
@@ -2767,7 +2767,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="mapillary_menu_title_tile_cache">Csempegyorsítótár</string>
     <string name="wrong_user_name">Hibás felhasználónév!</string>
     <string name="shared_string_to">Ide:</string>
-    <string name="mapillary_menu_date_from">Innen:</string>
+    <string name="mapillary_menu_date_from">Ettől:</string>
     <string name="mapillary_menu_descr_dates">Csak az ekkor hozzáadott képek megtekintése:</string>
     <string name="mapillary_menu_title_dates">Dátum</string>
     <string name="mapillary_menu_edit_text_hint">Felhasználónév megadása</string>
@@ -2858,7 +2858,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="osn_modify_dialog_error">Kivétel történt: a megjegyzés nem módosult</string>
     <string name="osn_modify_dialog_title">Megjegyzés módosítása</string>
     <string name="context_menu_item_modify_note">OSM-megjegyzés módosítása</string>
-    <string name="make_round_trip_descr">Kiindulási pont másolatának hozzáadása célpontként</string>
+    <string name="make_round_trip_descr">Kiindulási pont másolatának hozzáadása célpontként.</string>
     <string name="make_round_trip">Körút készítése</string>
     <string name="shared_string_navigate">Navigáció</string>
     <string name="show_map">Térkép megjelenítése</string>
@@ -2962,11 +2962,11 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="context_menu_read_full_article">Olvasd el a tejes cikket</string>
     <string name="context_menu_read_article">Cikk elolvasása</string>
     <string name="context_menu_points_of_group">A csoport összes pontja</string>
-    <string name="opened_from">Nyitott ekkor:</string>
-    <string name="opened_till">Nyitva eddig:</string>
-    <string name="will_be_closed_at">Ekkor fog bezárni:</string>
-    <string name="will_be_opened_at">Ekkor fog kinyitni:</string>
-    <string name="will_be_opened_on">Ekkor fog kinyitni:</string>
+    <string name="open_from">Nyitott ekkor:</string>
+    <string name="open_till">Nyitva eddig:</string>
+    <string name="will_close_at">Ekkor fog bezárni:</string>
+    <string name="will_open_at">Ekkor fog kinyitni:</string>
+    <string name="will_open_on">Ekkor fog kinyitni:</string>
     <string name="additional_actions">További műveletek</string>
     <string name="av_locations_selected_desc">"GPX fájl a kiválasztott pont  koordinátáival és adataival."</string>
     <string name="av_locations_all_desc">"GPX fájl az összes jegyzet  koordinátáival és adataival."</string>
@@ -2980,4 +2980,6 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="modify_the_search_query">Keresési kifejezés módosítása.</string>
     <string name="shared_string_actions">Műveletek</string>
     <string name="shared_string_marker">Jelölő</string>
-    </resources>
+    <string name="osm_recipients_label">OSM címzettek</string>
+    <string name="total_donations">Összes adomány</string>
+</resources>

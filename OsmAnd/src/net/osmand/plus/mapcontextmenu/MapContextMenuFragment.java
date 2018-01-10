@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -683,6 +684,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			TitleButtonController rightDownloadButtonController = menu.getRightDownloadButtonController();
 			TitleProgressController titleProgressController = menu.getTitleProgressController();
 
+			ColorStateList textColorStateList = ContextCompat.getColorStateList(getContext(),
+					nightMode ? R.color.context_menu_controller_text_color_dark : R.color.context_menu_controller_text_color_light);
+			int buttonViewBackgroundResId = nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light;
+
 			// Title buttons
 			boolean showTitleButtonsContainer = (leftTitleButtonController != null || rightTitleButtonController != null);
 			final View titleButtonsContainer = view.findViewById(R.id.title_button_container);
@@ -694,8 +699,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final TextView titleButtonRightText = (TextView) view.findViewById(R.id.title_button_right_text);
 			if (leftTitleButtonController != null) {
 				leftTitleButton.setText(leftTitleButtonController.caption);
+				leftTitleButton.setTextColor(textColorStateList);
 				if (leftTitleButtonController.visible) {
 					leftTitleButtonView.setVisibility(View.VISIBLE);
+					leftTitleButtonView.setBackgroundResource(buttonViewBackgroundResId);
 					Drawable leftIcon = leftTitleButtonController.getLeftIcon();
 					if (leftIcon != null) {
 						leftTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
@@ -721,7 +728,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final TextView rightTitleButton = (TextView) view.findViewById(R.id.title_button_right);
 			if (rightTitleButtonController != null) {
 				rightTitleButton.setText(rightTitleButtonController.caption);
+				rightTitleButton.setTextColor(textColorStateList);
 				rightTitleButtonView.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
+				if (rightTitleButtonController.visible) {
+					rightTitleButtonView.setBackgroundResource(buttonViewBackgroundResId);
+				}
 
 				Drawable leftIcon = rightTitleButtonController.getLeftIcon();
 				rightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
@@ -735,7 +746,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final TextView bottomTitleButton = (TextView) view.findViewById(R.id.title_button_bottom);
 			if (bottomTitleButtonController != null) {
 				bottomTitleButton.setText(bottomTitleButtonController.caption);
+				bottomTitleButton.setTextColor(textColorStateList);
 				bottomTitleButtonView.setVisibility(bottomTitleButtonController.visible ? View.VISIBLE : View.GONE);
+				if (bottomTitleButtonController.visible) {
+					bottomTitleButtonView.setBackgroundResource(buttonViewBackgroundResId);
+				}
 
 				Drawable leftIcon = bottomTitleButtonController.getLeftIcon();
 				bottomTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
@@ -757,7 +772,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final TextView leftDownloadButton = (TextView) view.findViewById(R.id.download_button_left);
 			if (leftDownloadButtonController != null) {
 				leftDownloadButton.setText(leftDownloadButtonController.caption);
+				leftDownloadButton.setTextColor(textColorStateList);
 				leftDownloadButtonView.setVisibility(leftDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
+				if (leftDownloadButtonController.visible) {
+					leftDownloadButtonView.setBackgroundResource(buttonViewBackgroundResId);
+				}
 
 				Drawable leftIcon = leftDownloadButtonController.getLeftIcon();
 				if (leftIcon != null) {
@@ -773,7 +792,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final TextView rightDownloadButton = (TextView) view.findViewById(R.id.download_button_right);
 			if (rightDownloadButtonController != null) {
 				rightDownloadButton.setText(rightDownloadButtonController.caption);
+				rightDownloadButton.setTextColor(textColorStateList);
 				rightDownloadButtonView.setVisibility(rightDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
+				if (rightDownloadButtonController.visible) {
+					rightDownloadButtonView.setBackgroundResource(buttonViewBackgroundResId);
+				}
 
 				Drawable leftIcon = rightDownloadButtonController.getLeftIcon();
 				rightDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
@@ -1141,15 +1164,15 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					if (openingHoursInfo.isOpened24_7()) {
 						timeInfo = getString(R.string.shared_string_is_open_24_7);
 					} else if (!Algorithms.isEmpty(openingHoursInfo.getNearToOpeningTime())) {
-						timeInfo = getString(R.string.will_be_opened_at) + " " + openingHoursInfo.getNearToOpeningTime();
+						timeInfo = getString(R.string.will_open_at) + " " + openingHoursInfo.getNearToOpeningTime();
 					} else if (!Algorithms.isEmpty(openingHoursInfo.getOpeningTime())) {
-						timeInfo = getString(R.string.opened_from) + " " + openingHoursInfo.getOpeningTime();
+						timeInfo = getString(R.string.open_from) + " " + openingHoursInfo.getOpeningTime();
 					} else if (!Algorithms.isEmpty(openingHoursInfo.getNearToClosingTime())) {
-						timeInfo = getString(R.string.will_be_closed_at) + " " + openingHoursInfo.getNearToClosingTime();
+						timeInfo = getString(R.string.will_close_at) + " " + openingHoursInfo.getNearToClosingTime();
 					} else if (!Algorithms.isEmpty(openingHoursInfo.getClosingTime())) {
-						timeInfo = getString(R.string.opened_till) + " " + openingHoursInfo.getClosingTime();
+						timeInfo = getString(R.string.open_till) + " " + openingHoursInfo.getClosingTime();
 					} else if (!Algorithms.isEmpty(openingHoursInfo.getOpeningDay())) {
-						timeInfo = getString(R.string.will_be_opened_on) + " " + openingHoursInfo.getOpeningDay() + ".";
+						timeInfo = getString(R.string.will_open_on) + " " + openingHoursInfo.getOpeningDay() + ".";
 					}
 				} else {
 					timeInfo = additionalTypeStr;

@@ -38,7 +38,8 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 		}
 		final MapMultiSelectionMenu.MenuObject item = getItem(position);
 		if (item != null) {
-			AndroidUtils.setBackground(menu.getMapActivity(), convertView, !menu.isLight(), R.drawable.expandable_list_item_background_light, R.drawable.expandable_list_item_background_dark);
+			convertView.findViewById(R.id.content).setBackgroundResource(menu.isLight()
+					? R.drawable.expandable_list_item_background_light : R.drawable.expandable_list_item_background_dark);
 			convertView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -79,6 +80,9 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 
 			// Divider
 			View divider = convertView.findViewById(R.id.divider);
+			if (!menu.isLight()) {
+				divider.setBackgroundResource(R.color.dashboard_divider_dark);
+			}
 			divider.setVisibility(position != getCount() - 1 ? View.VISIBLE : View.GONE);
 		}
 
