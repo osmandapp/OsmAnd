@@ -1729,4 +1729,6 @@
     <string name="shared_string_reload">Επαναφόρτωση</string>
     <string name="mapillary_menu_date_from">Από</string>
     <string name="mapillary_menu_title_username">Παρωνύμιο</string>
+    <string name="shared_string_permissions">Άδειες</string>
+    <string name="distance_moving">Η απόσταση διορθώθηκε</string>
     </resources>
