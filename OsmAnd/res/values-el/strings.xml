@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -1084,7 +1085,7 @@
     <string name="keep_intermediate_points">Διατήρηση ενδιάμεσων προορισμών</string>
     <string name="context_menu_item_directions_to">Οδηγίες προς</string>
     <string name="context_menu_item_directions_from">Οδηγίες από</string>
-    <string name="route_descr_map_location">Χάρτης:… </string>
+    <string name="route_descr_map_location">Χάρτης:</string>
     <string name="route_to">Προς:</string>
     <string name="route_via">Μέσω:</string>
     <string name="route_from">Από:</string>
@@ -1719,4 +1720,5 @@
     <string name="rendering_value_medium_name">Μέτριο</string>
     <string name="rendering_value_bold_name">Παχύ</string>
     <string name="report">Αναφορά</string>
+    <string name="keep_showing_on_map">Διατήρηση εμφάνισης στο χάρτη</string>
     </resources>
