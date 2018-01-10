@@ -1727,4 +1727,5 @@
     <string name="show_on_map_after_saving">Εμφάνιση στο χάρτη μετά την αποθήκευση</string>
     <string name="shared_string_reset">Επαναφορά</string>
     <string name="shared_string_reload">Επαναφόρτωση</string>
+    <string name="mapillary_menu_date_from">Από</string>
     </resources>
