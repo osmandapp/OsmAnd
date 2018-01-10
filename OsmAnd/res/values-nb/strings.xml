@@ -2615,7 +2615,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="show_arrows_descr">Vis en eller to piler som indikerer retningen til de aktive markørene.</string>
     <string name="distance_indication_descr">Velg hvordan avstanden til aktive markører skal vises.</string>
     <string name="active_markers_descr">Velg hvor mange retningsindikatorer som vises.</string>
-    <string name="tap_on_map_to_hide_interface_descr">Et trykk på kartet skjuler/viser kontrollknappene og modulene.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Et trykk på kartet skjuler/viser kontrollknappene og miniprogrammene.</string>
     <string name="release_3_0">\\022 Oppdagelse av stoppskilt tar nå hensyn til kjøreretning
 \n
 \n • Ny algoritme gir meningsfulle verdier for ned-/stigning for GPX-spor
