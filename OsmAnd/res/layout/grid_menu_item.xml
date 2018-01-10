@@ -2,12 +2,12 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="120dp"
+    android:layout_width="@dimen/grid_menu_item_width"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
     android:orientation="vertical"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
+    android:paddingLeft="@dimen/bottom_sheet_content_padding_small"
+    android:paddingRight="@dimen/bottom_sheet_content_padding_small"
     tools:background="#17171A"
     tools:layout_gravity="center">
 
@@ -15,10 +15,10 @@
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="@dimen/grid_menu_item_bottom_top_margin"
+        android:layout_marginLeft="@dimen/grid_menu_item_sides_margin"
+        android:layout_marginRight="@dimen/grid_menu_item_sides_margin"
+        android:layout_marginTop="@dimen/grid_menu_item_bottom_top_margin"
         tools:src="@drawable/ic_action_delete_dark"
         tools:tint="#808080"/>
 

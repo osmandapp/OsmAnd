@@ -247,4 +247,8 @@
 	<dimen name="route_info_modes_height">48dp</dimen>
 
 	<dimen name="multi_selection_header_height">52dp</dimen>
+
+	<dimen name="grid_menu_item_width">120dp</dimen>
+	<dimen name="grid_menu_item_bottom_top_margin">16dp</dimen>
+	<dimen name="grid_menu_item_sides_margin">40dp</dimen>
 </resources>
