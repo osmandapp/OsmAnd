@@ -1731,4 +1731,5 @@
     <string name="mapillary_menu_title_username">Παρωνύμιο</string>
     <string name="shared_string_permissions">Άδειες</string>
     <string name="distance_moving">Η απόσταση διορθώθηκε</string>
+    <string name="open_mapillary">Άνοιγμα του Mapillary</string>
     </resources>
