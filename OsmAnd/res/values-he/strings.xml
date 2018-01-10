@@ -2605,4 +2605,6 @@
     <string name="navigate_point_olc">פתיחת קוד מיקום</string>
     <string name="osm_recipients_label">נמעני OSM</string>
     <string name="total_donations">סך כל התרומות</string>
-</resources>
+<string name="access_direction_audio_feedback_descr">ציון כיוון נקודת היעד עם צליל.</string>
+    <string name="delay_to_start_navigation_descr">נא לציין את זמן ההמתנה להישאר במסך תכנון הנתיב.</string>
+    </resources>
