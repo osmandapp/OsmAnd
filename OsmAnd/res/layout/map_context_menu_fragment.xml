@@ -157,7 +157,7 @@
                     android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:id="@+id/title_button_view"
-                    android:background="?attr/ctx_menu_controller_bg"
+                    tools:background="?attr/ctx_menu_controller_bg"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="@dimen/context_menu_controller_height"
@@ -192,7 +192,7 @@
                     android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:id="@+id/title_button_right_view"
-                    android:background="?attr/ctx_menu_controller_bg"
+                    tools:background="?attr/ctx_menu_controller_bg"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="@dimen/context_menu_controller_height"
@@ -228,7 +228,7 @@
 
                 <LinearLayout
                     android:id="@+id/download_button_left_view"
-                    android:background="?attr/ctx_menu_controller_bg"
+                    tools:background="?attr/ctx_menu_controller_bg"
                     android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:layout_width="0dp"
@@ -253,7 +253,7 @@
 
                 <LinearLayout
                     android:id="@+id/download_button_right_view"
-                    android:background="?attr/ctx_menu_controller_bg"
+                    tools:background="?attr/ctx_menu_controller_bg"
                     android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:layout_width="0dp"
@@ -295,7 +295,7 @@
                     android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:layout_weight="1"
-                    android:background="?attr/ctx_menu_controller_bg">
+                    tools:background="?attr/ctx_menu_controller_bg">
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:id="@+id/title_button_bottom"

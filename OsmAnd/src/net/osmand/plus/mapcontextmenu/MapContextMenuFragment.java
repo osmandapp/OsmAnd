@@ -686,6 +686,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			ColorStateList textColorStateList = ContextCompat.getColorStateList(getContext(),
 					nightMode ? R.color.context_menu_controller_text_color_dark : R.color.context_menu_controller_text_color_light);
+			int buttonViewBackgroundResId = nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light;
 
 			// Title buttons
 			boolean showTitleButtonsContainer = (leftTitleButtonController != null || rightTitleButtonController != null);
@@ -701,6 +702,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				leftTitleButton.setTextColor(textColorStateList);
 				if (leftTitleButtonController.visible) {
 					leftTitleButtonView.setVisibility(View.VISIBLE);
+					leftTitleButtonView.setBackgroundResource(buttonViewBackgroundResId);
 					Drawable leftIcon = leftTitleButtonController.getLeftIcon();
 					if (leftIcon != null) {
 						leftTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
@@ -728,6 +730,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				rightTitleButton.setText(rightTitleButtonController.caption);
 				rightTitleButton.setTextColor(textColorStateList);
 				rightTitleButtonView.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
+				if (rightTitleButtonController.visible) {
+					rightTitleButtonView.setBackgroundResource(buttonViewBackgroundResId);
+				}
 
 				Drawable leftIcon = rightTitleButtonController.getLeftIcon();
 				rightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
@@ -743,6 +748,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				bottomTitleButton.setText(bottomTitleButtonController.caption);
 				bottomTitleButton.setTextColor(textColorStateList);
 				bottomTitleButtonView.setVisibility(bottomTitleButtonController.visible ? View.VISIBLE : View.GONE);
+				if (bottomTitleButtonController.visible) {
+					bottomTitleButtonView.setBackgroundResource(buttonViewBackgroundResId);
+				}
 
 				Drawable leftIcon = bottomTitleButtonController.getLeftIcon();
 				bottomTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
@@ -766,6 +774,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				leftDownloadButton.setText(leftDownloadButtonController.caption);
 				leftDownloadButton.setTextColor(textColorStateList);
 				leftDownloadButtonView.setVisibility(leftDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
+				if (leftDownloadButtonController.visible) {
+					leftDownloadButtonView.setBackgroundResource(buttonViewBackgroundResId);
+				}
 
 				Drawable leftIcon = leftDownloadButtonController.getLeftIcon();
 				if (leftIcon != null) {
@@ -783,6 +794,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				rightDownloadButton.setText(rightDownloadButtonController.caption);
 				rightDownloadButton.setTextColor(textColorStateList);
 				rightDownloadButtonView.setVisibility(rightDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
+				if (rightDownloadButtonController.visible) {
+					rightDownloadButtonView.setBackgroundResource(buttonViewBackgroundResId);
+				}
 
 				Drawable leftIcon = rightDownloadButtonController.getLeftIcon();
 				rightDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
