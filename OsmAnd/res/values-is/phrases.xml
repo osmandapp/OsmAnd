@@ -3105,4 +3105,47 @@
 	<string name="poi_payment_centre">Greiðslumiðstöð</string>
 	<string name="poi_money_transfer">Greiðslumiðlun</string>
 
-</resources>
+<string name="poi_government_archive">Skjalasafn</string>
+	<string name="poi_government_treasury">Ríkissjóður</string>
+	<string name="poi_government_transportation">Samgöngustofnun</string>
+	<string name="poi_government_legislative">Lagastofnun</string>
+
+	<string name="poi_location_underwater">Staðsetning: neðan vatnsyfirborðs</string>
+	<string name="poi_location_overground">Staðsetning: á yfirborði</string>
+	<string name="poi_location_overhead">Staðsetning: upphengt</string>
+	<string name="poi_location_roof">Staðsetning: þak</string>
+	<string name="poi_location_rooftop">Staðsetning: efst á þaki</string>
+	<string name="poi_location_outdoor">Staðsetning: utandyra</string>
+	<string name="poi_location_indoor">Staðsetning: innandyra</string>
+	<string name="poi_location_platform">Staðsetning: pallur</string>
+	<string name="poi_location_kiosk">Staðsetning: sölubás</string>
+	<string name="poi_location_bridge">Staðsetning: brú</string>
+	<string name="poi_location_wall">Staðsetning: veggur</string>
+	<string name="poi_location_entrance">Staðsetning: inngangur</string>
+
+	<string name="poi_visibility_house">Sýnileiki: hús</string>
+	<string name="poi_visibility_street">Sýnileiki: gata</string>
+	<string name="poi_visibility_area">Sýnileiki: svæði</string>
+
+	<string name="poi_socket_nema_5_15_current">Rafmagnsinnstunga: NEMA 5-15R: straumur</string>
+	<string name="poi_socket_nema_5_15_output">Rafmagnsinnstunga: NEMA 5-15R: úttak</string>
+	<string name="poi_socket_nema_5_20">Rafmagnsinnstunga: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Rafmagnsinnstunga: NEMA 5-20: straumur</string>
+	<string name="poi_socket_nema_5_20_output">Rafmagnsinnstunga: NEMA 5-20: úttak</string>
+	<string name="poi_socket_nema_14_30">Rafmagnsinnstunga: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Rafmagnsinnstunga: NEMA 14-30: straumur</string>
+	<string name="poi_socket_nema_14_30_output">Rafmagnsinnstunga: NEMA 14-30: úttak</string>
+	<string name="poi_socket_nema_14_50">Rafmagnsinnstunga: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Rafmagnsinnstunga: NEMA 14-50: straumur</string>
+	<string name="poi_socket_nema_14_50_output">Rafmagnsinnstunga: NEMA 14-50: úttak</string>
+	<string name="poi_socket_schuko">Rafmagnsinnstunga: Schuko</string>
+	<string name="poi_socket_schuko_current">Rafmagnsinnstunga: Schuko: straumur</string>
+	<string name="poi_socket_schuko_output">Rafmagnsinnstunga: Schuko: úttak</string>
+	<string name="poi_socket_bs1363">Rafmagnsinnstunga: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Rafmagnsinnstunga: BS 1363: straumur</string>
+	<string name="poi_socket_bs1363_output">Rafmagnsinnstunga: BS 1363: úttak</string>
+	<string name="poi_socket_as3112">Rafmagnsinnstunga: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Rafmagnsinnstunga: AS/NZS 3112: straumur</string>
+	<string name="poi_socket_as3112_output">Rafmagnsinnstunga: AS/NZS 3112: úttak</string>
+
+	</resources>
