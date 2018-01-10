@@ -1738,4 +1738,5 @@
     <string name="nothing_found">Δεν βρέθηκε κάτι :(</string>
     <string name="quick_action_showhide_osmbugs_title">Εμφάνιση/απόκρυψη σημειώσεων OSM</string>
     <string name="quick_action_osmbugs_show">Εμφάνιση σημειώσεων OSM</string>
+    <string name="quick_action_osmbugs_hide">Απόκρυψη σημειώσεων OSM</string>
     </resources>
