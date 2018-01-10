@@ -1737,4 +1737,5 @@
     <string name="shared_string_add_photos">Προσθήκη φωτογραφιών</string>
     <string name="nothing_found">Δεν βρέθηκε κάτι :(</string>
     <string name="quick_action_showhide_osmbugs_title">Εμφάνιση/απόκρυψη σημειώσεων OSM</string>
+    <string name="quick_action_osmbugs_show">Προβολή σημειώσεων OSM</string>
     </resources>
