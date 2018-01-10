@@ -1725,4 +1725,5 @@
     <string name="shared_string_options">Επιλογές</string>
     <string name="none_point_error">Παρακαλώ προσθέστε τουλάχιστον ένα σημείο.</string>
     <string name="show_on_map_after_saving">Εμφάνιση στο χάρτη μετά την αποθήκευση</string>
+    <string name="shared_string_reset">Επαναφορά</string>
     </resources>
