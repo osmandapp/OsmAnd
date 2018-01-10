@@ -1141,15 +1141,15 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					if (openingHoursInfo.isOpened24_7()) {
 						timeInfo = getString(R.string.shared_string_is_open_24_7);
 					} else if (!Algorithms.isEmpty(openingHoursInfo.getNearToOpeningTime())) {
-						timeInfo = getString(R.string.will_be_opened_at) + " " + openingHoursInfo.getNearToOpeningTime();
+						timeInfo = getString(R.string.will_open_at) + " " + openingHoursInfo.getNearToOpeningTime();
 					} else if (!Algorithms.isEmpty(openingHoursInfo.getOpeningTime())) {
-						timeInfo = getString(R.string.opened_from) + " " + openingHoursInfo.getOpeningTime();
+						timeInfo = getString(R.string.open_from) + " " + openingHoursInfo.getOpeningTime();
 					} else if (!Algorithms.isEmpty(openingHoursInfo.getNearToClosingTime())) {
-						timeInfo = getString(R.string.will_be_closed_at) + " " + openingHoursInfo.getNearToClosingTime();
+						timeInfo = getString(R.string.will_close_at) + " " + openingHoursInfo.getNearToClosingTime();
 					} else if (!Algorithms.isEmpty(openingHoursInfo.getClosingTime())) {
-						timeInfo = getString(R.string.opened_till) + " " + openingHoursInfo.getClosingTime();
+						timeInfo = getString(R.string.open_till) + " " + openingHoursInfo.getClosingTime();
 					} else if (!Algorithms.isEmpty(openingHoursInfo.getOpeningDay())) {
-						timeInfo = getString(R.string.will_be_opened_on) + " " + openingHoursInfo.getOpeningDay() + ".";
+						timeInfo = getString(R.string.will_open_on) + " " + openingHoursInfo.getOpeningDay() + ".";
 					}
 				} else {
 					timeInfo = additionalTypeStr;

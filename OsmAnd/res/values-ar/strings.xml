@@ -2856,11 +2856,11 @@
     <string name="context_menu_read_full_article">إقرأ المقال كاملا</string>
     <string name="context_menu_read_article">قراءة المقال</string>
     <string name="context_menu_points_of_group">كافة نقاط المجموعة</string>
-    <string name="opened_from">مفتوح مِن</string>
-    <string name="opened_till">مفتوح إلى غاية</string>
-    <string name="will_be_closed_at">يغلق أبوابه على</string>
-    <string name="will_be_opened_at">سيفتح الأبواب على</string>
-    <string name="will_be_opened_on">يفتح أبوابه أيام</string>
+    <string name="open_from">مفتوح مِن</string>
+    <string name="open_till">مفتوح إلى غاية</string>
+    <string name="will_close_at">يغلق أبوابه على</string>
+    <string name="will_open_at">سيفتح الأبواب على</string>
+    <string name="will_open_on">يفتح أبوابه أيام</string>
     <string name="additional_actions">إجراءات إضافية</string>
     <string name="shared_string_actions">الإجراءات</string>
     <string name="shared_string_marker">العلامة</string>

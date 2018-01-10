@@ -2938,11 +2938,11 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="context_menu_read_full_article">Ganzen Artikel lesen</string>
     <string name="context_menu_read_article">Artikel lesen</string>
     <string name="context_menu_points_of_group">Alle Punkte der Gruppe</string>
-    <string name="opened_from">Geöffnet ab</string>
-    <string name="opened_till">Geöffnet bis</string>
-    <string name="will_be_closed_at">Schließt um</string>
-    <string name="will_be_opened_at">Öffnet um</string>
-    <string name="will_be_opened_on">Öffnet am</string>
+    <string name="open_from">Geöffnet ab</string>
+    <string name="open_till">Geöffnet bis</string>
+    <string name="will_close_at">Schließt um</string>
+    <string name="will_open_at">Öffnet um</string>
+    <string name="will_open_on">Öffnet am</string>
     <string name="additional_actions">Zusätzliche Aktionen</string>
     <string name="parked_at">geparkt um</string>
     <string name="pick_up_till">Abholung bis</string>

@@ -2640,11 +2640,11 @@
     <string name="context_menu_read_full_article">Կարդալ ամբողջ հոդվածը</string>
     <string name="context_menu_read_article">Կարդալ հոդվածը</string>
     <string name="context_menu_points_of_group">Խմբի բոլոր կետերը</string>
-    <string name="opened_from">Բացվում է</string>
-    <string name="opened_till">Բաց Է մինև</string>
-    <string name="will_be_closed_at">Կփակվի</string>
-    <string name="will_be_opened_at">Կբացվի</string>
-    <string name="will_be_opened_on">Բացվելու է</string>
+    <string name="open_from">Բացվում է</string>
+    <string name="open_till">Բաց Է մինև</string>
+    <string name="will_close_at">Կփակվի</string>
+    <string name="will_open_at">Կբացվի</string>
+    <string name="will_open_on">Բացվելու է</string>
     <string name="additional_actions">Լրացուցիչ գործողություններ</string>
     <string name="av_locations_selected_desc">GPX ֆայլը կոորդինատներով և ընտրված գրառումների տվյալներով:</string>
     <string name="av_locations_all_desc">GPX ֆայլը կոորդինատներով և բոլոր նշումների տվյալները։</string>

@@ -2752,11 +2752,11 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="context_menu_read_full_article">Llegiu l\'article complet</string>
     <string name="context_menu_read_article">Llegiu l\'article</string>
     <string name="context_menu_points_of_group">Tots els punts del grup</string>
-    <string name="opened_from">Obert des de</string>
-    <string name="opened_till">Obert fins a</string>
-    <string name="will_be_closed_at">Es tancarà a</string>
-    <string name="will_be_opened_at">S\'obrirà a</string>
-    <string name="will_be_opened_on">S\'obrirà el</string>
+    <string name="open_from">Obert des de</string>
+    <string name="open_till">Obert fins a</string>
+    <string name="will_close_at">Es tancarà a</string>
+    <string name="will_open_at">S\'obrirà a</string>
+    <string name="will_open_on">S\'obrirà el</string>
     <string name="additional_actions">Accions addicionals</string>
     <string name="av_locations_selected_desc">Arxiu GPX amb coordenades i dades de les notes seleccionades.</string>
     <string name="av_locations_all_desc">Fitxer GPX amb coordenades i dades de totes les notes.</string>

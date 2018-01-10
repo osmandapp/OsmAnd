@@ -2508,11 +2508,11 @@ Pôr do Sol: %2$s</string>
     <string name="context_menu_read_full_article">Leia o artigo completo</string>
     <string name="context_menu_read_article">Leia o artigo</string>
     <string name="context_menu_points_of_group">Todos os pontos do grupo</string>
-    <string name="opened_from">Aberto a partir de</string>
-    <string name="opened_till">Aberto até</string>
-    <string name="will_be_closed_at">Fechará às</string>
-    <string name="will_be_opened_at">Abrirá às</string>
-    <string name="will_be_opened_on">Ficará aberto aos/às</string>
+    <string name="open_from">Aberto a partir de</string>
+    <string name="open_till">Aberto até</string>
+    <string name="will_close_at">Fechará às</string>
+    <string name="will_open_at">Abrirá às</string>
+    <string name="will_open_on">Ficará aberto aos/às</string>
     <string name="additional_actions">Ações adicionais</string>
     <string name="av_locations_selected_desc">Arquivo GPX com coordenadas e dados das notas selecionadas.</string>
     <string name="shared_string_actions">Ações</string>

@@ -2509,11 +2509,11 @@
     <string name="context_menu_read_full_article">קריאת הכתבה המלאה</string>
     <string name="context_menu_read_article">קריאת הכתבה</string>
     <string name="context_menu_points_of_group">כל הנקודות בקבוצה</string>
-    <string name="opened_from">פתיחה בשעה</string>
-    <string name="opened_till">סגירה בשעה</string>
-    <string name="will_be_closed_at">סגירה בשעה</string>
-    <string name="will_be_opened_at">פתיחה בשעה</string>
-    <string name="will_be_opened_on">פתיחה ביום</string>
+    <string name="open_from">פתיחה בשעה</string>
+    <string name="open_till">סגירה בשעה</string>
+    <string name="will_close_at">סגירה בשעה</string>
+    <string name="will_open_at">פתיחה בשעה</string>
+    <string name="will_open_on">פתיחה ביום</string>
     <string name="additional_actions">פעולות נוספות</string>
     <string name="av_locations_selected_desc">קובץ GPX עם נקודות ציון ונתונים על ההערות הנבחרות.</string>
     <string name="av_locations_all_desc">קובץ GPX עם נקודות ציון ונתונים על כל ההערות.</string>
