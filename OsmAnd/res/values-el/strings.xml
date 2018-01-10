@@ -1721,4 +1721,7 @@
     <string name="rendering_value_bold_name">Παχύ</string>
     <string name="report">Αναφορά</string>
     <string name="keep_showing_on_map">Διατήρηση εμφάνισης στο χάρτη</string>
+    <string name="exit_without_saving">Έξοδος χωρίς αποθήκευση;</string>
+    <string name="shared_string_options">Επιλογές</string>
+    <string name="none_point_error">Παρακαλούμε προσθέστε τουλάχιστον ένα σημείο.</string>
     </resources>
