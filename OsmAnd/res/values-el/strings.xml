@@ -1734,4 +1734,7 @@
     <string name="open_mapillary">Άνοιγμα του Mapillary</string>
     <string name="shared_string_install">Εγκατάσταση</string>
     <string name="online_photos">Online φωτογραφίες</string>
+    <string name="shared_string_add_photos">Προσθήκη φωτογραφιών</string>
+    <string name="nothing_found">Δεν βρέθηκε κάτι :(</string>
+    <string name="quick_action_showhide_osmbugs_title">"Προβολή/απόκρυψη σημειώσεων OSM "</string>
     </resources>
