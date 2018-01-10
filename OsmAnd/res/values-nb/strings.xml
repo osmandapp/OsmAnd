@@ -1873,7 +1873,7 @@
     <string name="trip_rec_notification_settings_desc">Vis et systemvarsel slik at du kan starte turopptak.</string>
     <string name="save_track_min_speed">Minimumshastighet for logging</string>
     <string name="save_track_min_speed_descr">Filter: Still inn minimumshastighet for at et punkt skal logges.</string>
-    <string name="save_track_min_distance">Logging ved bevegelsesoppdagelse</string>
+    <string name="save_track_min_distance">Minsteavstand for logging</string>
     <string name="save_track_min_distance_descr">Filter: Angi minste avstand fra siste posisjon for at et punkt skal logges.</string>
     <string name="save_track_precision">Minste loggingspresisjon</string>
     <string name="save_track_precision_descr">Filter: Velg minste presisjon som starter loggføring av et punkt.</string>
@@ -2690,7 +2690,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="opened_till">Åpen til</string>
     <string name="will_be_closed_at">Stenger</string>
     <string name="will_be_opened_at">Åpner</string>
-    <string name="will_be_opened_on">Åpen på</string>
+    <string name="will_be_opened_on">Åpner</string>
     <string name="av_locations_selected_desc">GPX-fil med de valgte notatenes koordinater og data.</string>
     <string name="av_locations_all_desc">GPX-fil med alle notaters koordinater og data.</string>
     </resources>
