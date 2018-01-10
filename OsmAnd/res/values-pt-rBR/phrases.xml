@@ -2771,7 +2771,7 @@
 	<string name="poi_min_age">Idade mínima</string>
 
 	<string name="poi_organic_yes">Sim</string>
-	<string name="poi_organic_no">Nnão</string>
+	<string name="poi_organic_no">Não</string>
 	<string name="poi_organic_only">Somente alimentos orgânigos</string>
 
 	<string name="poi_diplomatic_consulate">Consulado</string>
@@ -3458,4 +3458,97 @@
 	<string name="poi_music_school">Escola de música</string>
 	<string name="poi_language_school">Escola de idiomas</string>
 
+	<string name="poi_lighting">Luminárias</string>
+	<string name="poi_gambling">Local de jogos de azar</string>
+
+	<string name="poi_gambling_pachinko">Pachinko</string>
+	<string name="poi_gambling_slot_machines">Caça-niqueis</string>
+	<string name="poi_gambling_betting">Apostas</string>
+	<string name="poi_gambling_bingo">Bingo</string>
+
+	<string name="poi_e_cigarette">Loja de cigarros eletrônicos</string>
+
+	<string name="poi_coworking_space">Espaço de coworking</string>
+
+	<string name="poi_life_ring">Boia salva-vidas</string>
+
+	<string name="poi_zoo_petting_zoo">Zoológico interativo</string>
+	<string name="poi_zoo_wildlife_park">Reserva natural</string>
+	<string name="poi_zoo_enclosure">Cativeiro</string>
+	<string name="poi_zoo_safari_park">Parque safári</string>
+	<string name="poi_zoo_birds">Aves</string>
+	<string name="poi_zoo_aviary">Aviário</string>
+	<string name="poi_zoo_falconry">Falcoaria</string>
+	<string name="poi_zoo_reptile">Répteis</string>
+
+	<string name="poi_stands">Estandes</string>
+
+	<string name="poi_motorcycle_sales_yes">Vendas</string>
+	<string name="poi_motorcycle_sales_no">Vendas: não</string>
+	<string name="poi_motorcycle_sales_yes_used">Vendas: sim; usado</string>
+	<string name="poi_motorcycle_sales_used">Vendas: usado</string>
+	<string name="poi_motorcycle_rental_yes">Locação</string>
+	<string name="poi_motorcycle_rental_no">Locação: não</string>
+	<string name="poi_motorcycle_repair_yes">Reparo</string>
+	<string name="poi_motorcycle_repair_no">Reparo: não</string>
+	<string name="poi_motorcycle_parts_yes">Peças</string>
+	<string name="poi_motorcycle_parts_no">Peças: não</string>
+	<string name="poi_motorcycle_tyres_yes">Pneus</string>
+	<string name="poi_motorcycle_tyres_no">Pneus: não</string>
+	<string name="poi_motorcycle_clothes_yes">Roupas para moto</string>
+	<string name="poi_motorcycle_clothes_no">Roupas para moto: não</string>
+	<string name="poi_motorcycle_type_scooter">Lambreta</string>
+	<string name="poi_motorcycle_type_sportbike">Esportiva</string>
+	<string name="poi_motorcycle_type_chopper">Chopper</string>
+	<string name="poi_motorcycle_type_offroad">Off-road</string>
+	<string name="poi_motorcycle_type_dualsport">Trail</string>
+	<string name="poi_motorcycle_type_standard">Comum</string>
+
+	<string name="poi_generator_output_electricity_no">Saída (eletricidade): não</string>
+
+	<string name="poi_owner">Proprietário</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Adoção: sim</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Adoção: não</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Soltura: sim</string>
+	<string name="poi_animal_shelter_purpose_release_no">Soltura: não</string>
+
+	<string name="poi_spaceport">Bases de lançamento</string>
+
+	<string name="poi_direction_n">Direção: norte</string>
+	<string name="poi_direction_nne">Direção: norte-nordeste</string>
+	<string name="poi_direction_ne">Direção: nordeste</string>
+	<string name="poi_direction_ene">Direção: leste-nordeste</string>
+	<string name="poi_direction_e">Direção: leste</string>
+	<string name="poi_direction_ese">Direção: leste-sudeste</string>
+	<string name="poi_direction_se">Direção: sudeste</string>
+	<string name="poi_direction_sse">Direção: sul-sudeste</string>
+	<string name="poi_direction_s">Direção: sul</string>
+	<string name="poi_direction_ssw">Direção: sul-sudeste</string>
+	<string name="poi_direction_sw">Direção: sudoeste</string>
+	<string name="poi_direction_wsw">Direção: oeste-sudoeste</string>
+	<string name="poi_direction_w">Direção: oeste</string>
+	<string name="poi_direction_wnw">Direção: oeste-noroeste</string>
+	<string name="poi_direction_nw">Direcção: noroeste</string>
+	<string name="poi_direction_nnw">Direção: norte-noroeste</string>
+	<string name="poi_direction_forward">Direção: para frente</string>
+	<string name="poi_direction_backward">Direção: para trás</string>
+	<string name="poi_direction_clockwise">Direção: sentido horário</string>
+	<string name="poi_direction_anticlockwise">Direção: sentido anti-horário</string>
+	<string name="poi_direction_up">Direção: para cima</string>
+	<string name="poi_direction_down">Direção: para baixo</string>
+	<string name="poi_direction_entrance">Direção: entrada</string>
+	<string name="poi_direction_exit">Direção: saída</string>
+	<string name="poi_direction_all">Direção: todas</string>
+
+	<string name="poi_reservation_required">Reserva: requerida</string>
+	<string name="poi_reservation_recommended">Reserva: recomendada</string>
+	<string name="poi_reservation_yes">Reserva: sim</string>
+	<string name="poi_reservation_no">Reserva: não</string>
+	<string name="poi_reservation_members_only">Reserva: somente membros</string>
+
+	<string name="poi_beds">Leitos</string>
+
+	<string name="poi_boat_rental">Locação de barcos</string>
+	<string name="poi_government_treasury">Tesouro</string>
 	</resources>
