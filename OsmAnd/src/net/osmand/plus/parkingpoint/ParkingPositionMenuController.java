@@ -64,17 +64,17 @@ public class ParkingPositionMenuController extends MenuController {
 	}
 
 	@Override
-	public String getAdditionalTypeStr() {
+	public int getAdditionalInfoIconRes() {
+		return R.drawable.ic_action_opening_hour_16;
+	}
+
+	@Override
+	public String getAdditionalInfoStr() {
 		return parkingLeftDescription;
 	}
 
 	@Override
-	public boolean displayAdditionalTypeStrInHours() {
-		return true;
-	}
-
-	@Override
-	public int getTimeStrColor() {
+	public int getAdditionalInfoColor() {
 		return plugin.getParkingType() ? R.color.ctx_menu_amenity_closed_text_color : isLight() ? R.color.icon_color : R.color.dash_search_icon_dark;
 	}
 
@@ -84,12 +84,17 @@ public class ParkingPositionMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean navigateInPedestrianMode() {
+		return true;
+	}
+
+	@Override
 	public boolean displayDistanceDirection() {
 		return true;
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return getIcon(R.drawable.ic_action_parking_dark, R.color.map_widget_blue);
 	}
 

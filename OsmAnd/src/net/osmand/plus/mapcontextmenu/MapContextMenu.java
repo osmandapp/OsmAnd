@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -37,7 +38,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
@@ -418,7 +419,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public boolean navigateInPedestrianMode() {
-		return menuController instanceof ParkingPositionMenuController;
+		if (menuController != null) {
+			return menuController.navigateInPedestrianMode();
+		}
+		return false;
 	}
 
 	public boolean close() {
@@ -597,7 +601,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				historyStack.add(menuData);
 			}
 			if (!(menuController instanceof MapDataMenuController)) {
-				menuController.buildMapDownloadButton(latLon);
+				menuController.buildMapDownloadButtonAndSizeInfo(latLon);
 			}
 			return true;
 		} else {
@@ -1135,13 +1139,37 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return menuController != null && menuController.displayDistanceDirection();
 	}
 
-	public boolean displayAdditionalTypeStrInHours() {
-		return menuController != null && menuController.displayAdditionalTypeStrInHours();
+	public String getSubtypeStr() {
+		if (menuController != null) {
+			return menuController.getSubtypeStr();
+		}
+		return "";
 	}
 
-	public int getTimeStrColor() {
+	public Drawable getSubtypeIcon() {
 		if (menuController != null) {
-			return menuController.getTimeStrColor();
+			return menuController.getSubtypeIcon();
+		}
+		return null;
+	}
+
+	public int getAdditionalInfoColor() {
+		if (menuController != null) {
+			return menuController.getAdditionalInfoColor();
+		}
+		return 0;
+	}
+
+	public String getAdditionalInfo() {
+		if (menuController != null) {
+			return menuController.getAdditionalInfoStr();
+		}
+		return "";
+	}
+
+	public int getAdditionalInfoIconRes() {
+		if (menuController != null) {
+			return menuController.getAdditionalInfoIconRes();
 		}
 		return 0;
 	}

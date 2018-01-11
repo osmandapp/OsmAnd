@@ -2229,7 +2229,7 @@ Pôr do Sol: %2$s</string>
     <string name="private_access_routing_req">Seu destino está localizado em uma área de acesso privado. Você quer permitir acesso à estradas privadas para esta viagem?</string>
     <string name="restart_search">Reiniciar pesquisa</string>
     <string name="increase_search_radius">Aumentar o raio de busca</string>
-    <string name="nothing_found">Não encontrou nada :(</string>
+    <string name="nothing_found">Nada encontrado :(</string>
     <string name="nothing_found_descr">Modificar o texto da pesquisa ou aumentar o raio de busca.</string>
     <string name="quick_action_showhide_osmbugs_title">Mostrar/ocultar Anotações do OSM</string>
     <string name="quick_action_osmbugs_show">Mostrar Anotações do OSM</string>

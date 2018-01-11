@@ -49,7 +49,7 @@ public class AMapPointMenuController  extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return getIcon(R.drawable.ic_action_get_my_location);
 	}
 

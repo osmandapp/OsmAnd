@@ -341,7 +341,7 @@
 	<color name="ctx_menu_bottom_view_bg_light">#ffffff</color>
 	<color name="ctx_menu_bottom_view_bg_dark">#17191a</color>
 	<color name="ctx_menu_bottom_view_icon_light">#b3b3b3</color>
-	<color name="ctx_menu_bottom_view_icon_dark">#536dfe</color>
+	<color name="ctx_menu_bottom_view_icon_dark">#454a4d</color>
 	<color name="ctx_menu_bottom_view_text_color_light">#212121</color>
 	<color name="ctx_menu_bottom_view_text_color_dark">#cccccc</color>
 	<color name="ctx_menu_bottom_view_secondary_text_color_light">#a6a6a6</color>
@@ -349,9 +349,11 @@
 	<color name="ctx_menu_amenity_opened_text_color">#5baf3f</color>
 	<color name="ctx_menu_amenity_closed_text_color">#c66545</color>
 	<color name="ctx_menu_bottom_view_divider_light">#f2f2f2</color>
-	<color name="ctx_menu_bottom_view_divider_dark">#536dfe</color>
+	<color name="ctx_menu_bottom_view_divider_dark">#222526</color>
 	<color name="ctx_menu_bottom_view_url_color_light">#536dfe</color>
 	<color name="ctx_menu_bottom_view_url_color_dark">#d28521</color>
+	<color name="ctx_menu_controller_disabled_text_color_light">#b3b3b3</color>
+	<color name="ctx_menu_controller_disabled_text_color_dark">#666666</color>
 
 	<color name="route_info_bg_light">#ffffff</color>
 	<color name="route_info_bg_dark">#17191a</color>
@@ -371,6 +373,11 @@
 	<color name="route_info_checked_mode_icon_color_dark">#d28521</color>
 	<color name="route_info_unchecked_mode_icon_color">#727272</color>
 
-	<color name="grid_menu_icon_dark">#808080</color>
+	<color name="multi_selection_menu_divider_light">#f0f0f0</color>
+	<color name="multi_selection_menu_divider_dark">#222526</color>
+	<color name="multi_selection_menu_close_btn_light">#2f7af5</color>
+	<color name="multi_selection_menu_close_btn_dark">#e69122</color>
+
+    <color name="grid_menu_icon_dark">#808080</color>
 
 </resources>

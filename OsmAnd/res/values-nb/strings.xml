@@ -844,7 +844,7 @@
     <string name="show_more_map_detail_descr">Vis noen vektorkartdetaljer (veier etc.) allerede ved lavere zoom.</string>
     <string name="choose_audio_stream">Utdata for taleveiledning</string>
     <string name="choose_audio_stream_descr">Velg høyttaleren til å avspille taleveiledningen.</string>
-    <string name="voice_stream_voice_call">Taleanropslyd</string>
+    <string name="voice_stream_voice_call">"Telefonanropslyd  (også for å avbryte bluetooth-bilstereo)"</string>
     <string name="voice_stream_notification">Varslingslyd</string>
     <string name="voice_stream_music">Media-/musikklyd</string>
     <string name="level_to_switch_vector_raster_descr">Minimum zoomnivå for å bruke vektorkart.</string>
@@ -1873,7 +1873,7 @@
     <string name="trip_rec_notification_settings_desc">Vis et systemvarsel slik at du kan starte turopptak.</string>
     <string name="save_track_min_speed">Minimumshastighet for logging</string>
     <string name="save_track_min_speed_descr">Filter: Still inn minimumshastighet for at et punkt skal logges.</string>
-    <string name="save_track_min_distance">Logging ved bevegelsesoppdagelse</string>
+    <string name="save_track_min_distance">Minsteavstand for logging</string>
     <string name="save_track_min_distance_descr">Filter: Angi minste avstand fra siste posisjon for at et punkt skal logges.</string>
     <string name="save_track_precision">Minste loggingspresisjon</string>
     <string name="save_track_precision_descr">Filter: Velg minste presisjon som starter loggføring av et punkt.</string>
@@ -2469,7 +2469,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Oppgi tidsmellomlager for å beholde plasseringer å sende uten tilkobling</string>
     <string name="shared_string_others">Annet</string>
     <string name="trace_rendering">Tegner feilrettingsinfo</string>
-    <string name="trace_rendering_descr">Vis tegningsytelse</string>
+    <string name="trace_rendering_descr">Vis opptegningsytelsen.</string>
     <string name="tts_missing_language_data">Ingen data for valgt språk installert. Vil du gå til markedet for å installere det?</string>
     <string name="gpx_option_reverse_route">Inverter GPX-retning</string>
     <string name="gpx_option_from_start_point">Passer langs hele turen</string>
@@ -2626,8 +2626,8 @@ Representerer området: %1$s x %2$s</string>
     <string name="mark_passed">Marker som passert</string>
     <string name="osn_modify_dialog_error">Unntak inntraff: Notat ble ikke endret</string>
     <string name="quick_action_auto_zoom_desc">Trykk på handlingsknappen vil slå av/på automatisk kartzoom i henhold til din hastighet.</string>
-    <string name="quick_action_add_destination_desc">Handlingsknappen vil legge til et mål midt på skjermen. Forrige valgte mål vil bli siste mellomliggende mål.</string>
-    <string name="quick_action_replace_destination_desc">Handlingsknappen vil erstatte målet med skjermens sentrum.</string>
+    <string name="quick_action_add_destination_desc">Trykk på handlingsknappen vil legge til et mål midt på skjermen. Det tidligere angitte målet blir det siste mellomliggende målet.</string>
+    <string name="quick_action_replace_destination_desc">Trykk på handlingsknappen vil erstatte målet med posisjonen midt på skjermen.</string>
     <string name="quick_action_add_first_intermediate_desc">Trykk på handlingsknappen vil legge til et første mellomliggende punkt midt på skjermen.</string>
     <string name="subscribe_email_desc">Abonner på vår e-postliste om programrabatter og få tre kartnedlastinger til!</string>
     <string name="index_item_depth_points_southern_hemisphere">Havdybdepunkter for sørlig halvkule</string>
@@ -2663,11 +2663,11 @@ Representerer området: %1$s x %2$s</string>
     <string name="activate_seamarks_plugin">Aktiver sjømerketillegget</string>
     <string name="save_poi_too_many_uppercase">Navnet inneholder for mange store bokstaver. Ønsker du å fortsette?</string>
     <string name="quick_action_add_poi">Legg til interessepunkt</string>
-    <string name="quick_action_showhide_poi_descr">Handlingsknappen vil vise eller skjule interessepunkter på kartet.</string>
-    <string name="quick_action_page_list_descr">Handlingsknappen blar gjennom listen nedenfor.</string>
+    <string name="quick_action_showhide_poi_descr">Trykk på handlingsknappen vil vise eller skjule interessepunkter på kartet.</string>
+    <string name="quick_action_page_list_descr">Trykk på handlingsknappen vil bla gjennom listen nedenfor.</string>
     <string name="quick_action_empty_param_error">Parameterne kan ikke være tomme</string>
     <string name="quick_action_btn_tutorial_descr">Trykk lenge og dra knappen for å endre dens posisjon på skjermen.</string>
-    <string name="add_track_to_markers_descr">Velg et spor for å legge dets rutepunkter til markørene. (Kun spor med rutepunkter vises).</string>
+    <string name="add_track_to_markers_descr">Velg et spor for å legge til dets rutepunkter til markørene. (Kun spor med rutepunkter er listet opp.)</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="depth_contour_descr">Knippe kart som inneholder havdybdekotelinjer og sjømerker.</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samler inn informasjon om hvilke deler av programmet du åpner. Plasseringen din blir aldri sendt, ei heller noe du måtte skrive inn i programmet eller detaljer om områder som vises, søkes etter, eller lastes ned.</string>
@@ -2690,7 +2690,8 @@ Representerer området: %1$s x %2$s</string>
     <string name="opened_till">Åpen til</string>
     <string name="will_be_closed_at">Stenger</string>
     <string name="will_be_opened_at">Åpner</string>
-    <string name="will_be_opened_on">Åpen på</string>
+    <string name="will_be_opened_on">Åpner</string>
     <string name="av_locations_selected_desc">GPX-fil med de valgte notatenes koordinater og data.</string>
     <string name="av_locations_all_desc">GPX-fil med alle notaters koordinater og data.</string>
+    <string name="quick_action_add_poi_descr">Trykk på handlingsknappen vil legge til et interessepunkt midt på skjermen.</string>
     </resources>

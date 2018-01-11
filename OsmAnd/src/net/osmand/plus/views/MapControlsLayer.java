@@ -295,7 +295,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		ImageView cancelRouteButton = (ImageView) main.findViewById(R.id.map_cancel_route_button);
 		cancelRouteButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.map_action_cancel, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
-		AndroidUtils.setBackground(mapActivity, cancelRouteButton, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 		cancelRouteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -305,7 +304,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		ImageView waypointsButton = (ImageView) main.findViewById(R.id.map_waypoints_route_button);
 		waypointsButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.map_action_flag_dark, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
-		AndroidUtils.setBackground(mapActivity, waypointsButton, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 		waypointsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -316,7 +314,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		ImageView options = (ImageView) main.findViewById(R.id.map_options_route_button);
 		options.setImageDrawable(!routeInfo ? app.getIconsCache().getIcon(R.drawable.map_action_settings,
 				R.color.osmand_orange) : app.getIconsCache().getIcon(R.drawable.map_action_settings, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
-		AndroidUtils.setBackground(mapActivity, options, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 		options.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

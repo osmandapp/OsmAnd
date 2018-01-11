@@ -227,7 +227,7 @@
 	<string name="poi_driving_school">Szkoła nauki jazdy</string>
 	<string name="poi_school">Szkoła</string>
 	<string name="poi_kindergarten">Przedszkole</string>
-	<string name="poi_college">Kolegium</string>
+	<string name="poi_college">Uczelnia</string>
 	<string name="poi_university">Uniwersytet</string>
 
 	<string name="poi_social_facility">Placówka społeczna</string>
@@ -715,7 +715,7 @@
 	<string name="poi_craft_boatbuilder">Stocznia</string>
 	<string name="poi_craft_jeweller">Jubiler</string>
 	<string name="poi_transport_construction">Roboty drogowe</string>
-		<string name="poi_base">Miejsce do base jumpingu</string>
+		<string name="poi_base">Base jumping</string>
 	<string name="poi_ice_stock">Ice stock</string>
 	<string name="poi_artwork">Dzieło sztuki</string>
 	<string name="poi_attraction_amusement_ride">Karuzela</string>
@@ -1197,7 +1197,7 @@
 	<string name="poi_denomination_adventist">Adwentyści</string>
 	<string name="poi_denomination_nazarene">Kościół Nazarejczyka</string>
 	<string name="poi_denomination_old_believers">Staroobrzędowcy</string>
-	<string name="poi_denomination_serbian_orthodox">Serbski ortodoksyjny</string>
+	<string name="poi_denomination_serbian_orthodox">Serbski prawosławny</string>
 	<string name="poi_denomination_armenian_apostolic">Apostolski Kościół Ormiański</string>
 	<string name="poi_denomination_dutch_reformed">Holenderski Kościół Reformowany</string>
 	<string name="poi_denomination_apostolic">Kościół Apostolski</string>
