@@ -219,16 +219,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			button.setTextSize(14);
 			int paddingSides = dpToPx(10f);
 			button.setPadding(paddingSides, 0, paddingSides, 0);
-			ColorStateList buttonColorStateList = new ColorStateList(
-					new int[][] {
-							new int[]{android.R.attr.state_pressed},
-							new int[]{}
-					},
-					new int[] {
-							view.getResources().getColor(light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p),
-							view.getResources().getColor(light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n)
-					}
-			);
+			ColorStateList buttonColorStateList = AndroidUtils.createColorStateList(view.getContext(), !light,
+					R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
+					R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 			button.setTextColor(buttonColorStateList);
 			button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
 			button.setSingleLine(true);

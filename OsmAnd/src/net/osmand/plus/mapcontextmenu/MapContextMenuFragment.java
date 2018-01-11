@@ -716,16 +716,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void enableDisableButtons(View buttonView, TextView button, boolean enabled) {
 		if (enabled) {
-			ColorStateList buttonColorStateList = new ColorStateList(
-					new int[][]{
-							new int[]{android.R.attr.state_pressed},
-							new int[]{}
-					},
-					new int[] {
-							getResources().getColor(nightMode ? R.color.ctx_menu_controller_button_text_color_dark_p : R.color.ctx_menu_controller_button_text_color_light_p),
-							getResources().getColor(nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n)
-					}
-			);
+			ColorStateList buttonColorStateList = AndroidUtils.createColorStateList(getContext(), nightMode,
+					R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
+					R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 
 			buttonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
 			button.setTextColor(buttonColorStateList);

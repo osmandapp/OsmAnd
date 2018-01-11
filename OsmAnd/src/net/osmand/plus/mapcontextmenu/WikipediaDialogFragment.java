@@ -102,16 +102,9 @@ public class WikipediaDialogFragment extends DialogFragment {
 		TextView titleTextView = (TextView) mainView.findViewById(R.id.title_text_view);
 		titleTextView.setTextColor(toolbarTextColor);
 
-		ColorStateList buttonColorStateList = new ColorStateList(
-				new int[][]{
-						new int[]{android.R.attr.state_pressed},
-						new int[]{}
-				},
-				new int[] {
-						getResources().getColor(darkMode ? R.color.ctx_menu_controller_button_text_color_dark_p : R.color.ctx_menu_controller_button_text_color_light_p),
-						getResources().getColor(darkMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n)
-				}
-		);
+		ColorStateList buttonColorStateList = AndroidUtils.createColorStateList(getContext(), darkMode,
+				R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
+				R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 
 		final TextView readFullArticleButton = (TextView) mainView.findViewById(R.id.read_full_article);
 		CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) readFullArticleButton.getLayoutParams();

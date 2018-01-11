@@ -75,15 +75,15 @@ public class OpeningHoursInfo {
 		if (isOpened24_7()) {
 			return context.getString(R.string.shared_string_is_open_24_7);
 		} else if (!Algorithms.isEmpty(getNearToOpeningTime())) {
-			return context.getString(R.string.will_be_opened_at) + " " + getNearToOpeningTime();
+			return context.getString(R.string.will_open_at) + " " + getNearToOpeningTime();
 		} else if (!Algorithms.isEmpty(getOpeningTime())) {
-			return context.getString(R.string.opened_from) + " " + getOpeningTime();
+			return context.getString(R.string.open_from) + " " + getOpeningTime();
 		} else if (!Algorithms.isEmpty(getNearToClosingTime())) {
-			return context.getString(R.string.will_be_closed_at) + " " + getNearToClosingTime();
+			return context.getString(R.string.will_close_at) + " " + getNearToClosingTime();
 		} else if (!Algorithms.isEmpty(getClosingTime())) {
-			return context.getString(R.string.opened_till) + " " + getClosingTime();
+			return context.getString(R.string.open_till) + " " + getClosingTime();
 		} else if (!Algorithms.isEmpty(getOpeningDay())) {
-			return context.getString(R.string.will_be_opened_on) + " " + getOpeningDay() + ".";
+			return context.getString(R.string.will_open_on) + " " + getOpeningDay() + ".";
 		}
 		return "";
 	}

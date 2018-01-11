@@ -4,6 +4,7 @@ package net.osmand;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.PointF;
@@ -11,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.os.IBinder;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -116,6 +118,21 @@ public class AndroidUtils {
 		}
 
 		return null;
+	}
+
+	public static ColorStateList createColorStateList(Context ctx, boolean night,
+													  @ColorRes int lightNormal, @ColorRes int lightPressed,
+													  @ColorRes int darkNormal, @ColorRes int darkPressed) {
+		return new ColorStateList(
+				new int[][]{
+						new int[]{android.R.attr.state_pressed},
+						new int[]{}
+				},
+				new int[]{
+						ContextCompat.getColor(ctx, night ? darkPressed : lightPressed),
+						ContextCompat.getColor(ctx, night ? darkNormal : lightNormal)
+				}
+		);
 	}
 
 	public static StateListDrawable createStateListDrawable(Context ctx, boolean night,
