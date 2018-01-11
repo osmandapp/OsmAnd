@@ -602,8 +602,8 @@
 	<string name="poi_wood">Skógur</string>
 	<string name="poi_strait">Sund</string>
 	<string name="poi_anchorage">Akkerisfestar</string>
-	<string name="poi_anchor_berth">Viðlegufæri</string>
-	<string name="poi_berth">Ból</string>
+	<string name="poi_anchor_berth">Akkerislægi</string>
+	<string name="poi_berth">Skipalægi</string>
 	<string name="poi_buoy_isolated_danger">Bauja, einangruð hætta</string>
 	<string name="poi_dry_dock">Þurrkví</string>
 	<string name="poi_floating_dock">Flotkví</string>
@@ -3147,5 +3147,45 @@
 	<string name="poi_socket_as3112">Rafmagnsinnstunga: AS/NZS 3112</string>
 	<string name="poi_socket_as3112_current">Rafmagnsinnstunga: AS/NZS 3112: straumur</string>
 	<string name="poi_socket_as3112_output">Rafmagnsinnstunga: AS/NZS 3112: úttak</string>
+
+	<string name="poi_variety_store">Smávörumarkaður</string>
+	<string name="poi_energy">Verslun orkusöluaðila</string>
+	<string name="poi_denomination_bulgarian_orthodox">Búlgarska réttrúnaðarkirkjan</string>
+	<string name="poi_denomination_armenian_apostolic">Armenska postulakirkjan</string>
+	<string name="poi_denomination_romanian_orthodox">Rúmenska rétttrúnaðarkirkjan</string>
+	<string name="poi_craft_stand_builder">Kynningarbásagerð</string>
+	<string name="poi_craft_sun_protection">Sólarvarnir</string>
+	<string name="poi_craft_sweep">Sóthreinsun</string>
+	<string name="poi_craft_tiler">Flísaleggjari</string>
+	<string name="poi_cutline">Grisjunarfar</string>
+	<string name="poi_beacon_cardinal">Höfuðáttamerki</string>
+	<string name="poi_beacon_lateral">Hliðarmerki</string>
+	<string name="poi_beacon_safe_water">Sjómerki á öruggri siglingaleið</string>
+	<string name="poi_buoy_cardinal">Höfuðáttadufl</string>
+	<string name="poi_buoy_installation">Festardufl</string>
+	<string name="poi_buoy_lateral">Hliðardufl</string>
+	<string name="poi_buoy_safe_water">Dufl á öruggri siglingaleið</string>
+	<string name="poi_notice">Upplýsingar, sjómerki</string>
+	<string name="poi_pile">Staur</string>
+	<string name="poi_small_craft_facility">Smábátaaðstaða</string>
+	<string name="poi_topmark">Toppmerki, sjómerki</string>
+	<string name="poi_sally_port">Virkishlið</string>
+	<string name="poi_kent_carriage_gap">Kent-hlið fyrir hestaumferð</string>
+	<string name="poi_payment_token_yes">Aðrir greiðslumátar</string>
+	<string name="poi_payment_token_no">Ekki tekið við öðru en reiðufé og greiðslukortum</string>
+	<string name="poi_events_venue">Aðstaða fyrir atburð</string>
+
+	<string name="poi_vending_elongated_coin">Myntpressa</string>
+	<string name="poi_motorcycle_type_standard">Staðlað</string>
+
+	<string name="poi_generator_output_electricity_no">Úttak: (rafmagn): nei</string>
+
+	<string name="poi_owner">Eigandi</string>
+
+	<string name="poi_reservation_required">Panta fyrirfram: nauðsynleg</string>
+	<string name="poi_reservation_recommended">Panta fyrirfram: mælt með</string>
+	<string name="poi_reservation_yes">Panta fyrirfram: já</string>
+	<string name="poi_reservation_no">Panta fyrirfram: nei</string>
+	<string name="poi_reservation_members_only">Panta fyrirfram: einungis meðlimir</string>
 
 	</resources>
