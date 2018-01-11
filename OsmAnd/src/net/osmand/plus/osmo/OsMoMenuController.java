@@ -96,7 +96,7 @@ public class OsMoMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		if (isLight()) {
 			return getIconOrig(R.drawable.widget_osmo_connected_location_day);
 		} else {

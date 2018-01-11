@@ -842,9 +842,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			boolean mapControlsVisible = findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
 			boolean night = app.getDaynightHelper().isNightModeForMapControls();
 			boolean quickSearchTopBar = getTopToolbarController(TopToolbarControllerType.QUICK_SEARCH) != null;
+			boolean contextMenuTopBar = getTopToolbarController(TopToolbarControllerType.CONTEXT_MENU) != null;
 			boolean mapTopBar = findViewById(R.id.map_top_bar).getVisibility() == View.VISIBLE;
 			boolean markerTopBar = findViewById(R.id.map_markers_top_bar).getVisibility() == View.VISIBLE;
-			if ((quickSearchTopBar || mapTopBar) && mapControlsVisible) {
+			if (((quickSearchTopBar || mapTopBar) && mapControlsVisible) || contextMenuTopBar) {
 				colorId = night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
 			} else if (markerTopBar && mapControlsVisible) {
 				colorId = R.color.status_bar_dark;
@@ -1885,11 +1886,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void showTopToolbar(TopToolbarController controller) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		mapInfoLayer.addTopToolbarController(controller);
+		updateStatusBarColor();
 	}
 
 	public void hideTopToolbar(TopToolbarController controller) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		mapInfoLayer.removeTopToolbarController(controller);
+		updateStatusBarColor();
 	}
 
 	public void registerActivityResultListener(ActivityResultListener listener) {

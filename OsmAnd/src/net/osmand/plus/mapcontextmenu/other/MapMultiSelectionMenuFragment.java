@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,10 +39,10 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 		view = inflater.inflate(R.layout.menu_obj_selection_fragment, container, false);
 		if (menu.isLandscapeLayout()) {
 			AndroidUtils.setBackground(view.getContext(), view, !menu.isLight(),
-					R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
+					R.drawable.multi_selection_menu_bg_light_land, R.drawable.multi_selection_menu_bg_dark_land);
 		} else {
 			AndroidUtils.setBackground(view.getContext(), view, !menu.isLight(),
-					R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+					R.drawable.multi_selection_menu_bg_light, R.drawable.multi_selection_menu_bg_dark);
 		}
 
 		ListView listView = (ListView) view.findViewById(R.id.list);
@@ -49,11 +50,6 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 			AndroidUtils.addStatusBarPadding21v(getActivity(), listView);
 		}
 		View headerView = inflater.inflate(R.layout.menu_obj_selection_header, listView, false);
-		if (!menu.isLight()) {
-			((TextViewEx) headerView.findViewById(R.id.header_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
-			((TextView) view.findViewById(R.id.cancel_row_text)).setTextColor(getResources().getColor(R.color.color_dialog_buttons_dark));
-			view.findViewById(R.id.divider).setBackgroundResource(R.color.dashboard_divider_dark);
-		}
 		headerView.setOnClickListener(null);
 		listView.addHeaderView(headerView);
 		listAdapter = createAdapter();
@@ -62,6 +58,9 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 
 		runLayoutListener();
 
+		view.findViewById(R.id.divider).setBackgroundColor(ContextCompat.getColor(getContext(), menu.isLight() ? R.color.multi_selection_menu_divider_light : R.color.multi_selection_menu_divider_dark));
+
+		((TextView) view.findViewById(R.id.cancel_row_text)).setTextColor(ContextCompat.getColor(getContext(), menu.isLight() ? R.color.multi_selection_menu_close_btn_light : R.color.multi_selection_menu_close_btn_dark));
 		view.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

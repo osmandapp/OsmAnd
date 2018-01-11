@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
+              xmlns:tools="http://schemas.android.com/tools"
               android:minHeight="@dimen/list_item_height"
               android:orientation="vertical"
               android:baselineAligned="false">
 
     <LinearLayout
         android:id="@+id/content"
-        android:background="?attr/expandable_list_item_background"
+        android:background="?attr/selectableItemBackground"
         android:paddingLeft="@dimen/list_content_padding"
         android:paddingRight="@dimen/list_content_padding"
         android:orientation="horizontal"
@@ -18,8 +19,8 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/content_padding_small"
-            android:paddingTop="@dimen/list_content_padding"
+            android:paddingBottom="@dimen/multi_selection_menu_padding_bottom"
+            android:paddingTop="@dimen/multi_selection_menu_padding_top"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -42,7 +43,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:paddingTop="@dimen/list_content_padding"
+            android:paddingTop="@dimen/multi_selection_menu_padding_top"
             android:id="@+id/context_menu_icon_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -64,6 +65,6 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?attr/dashboard_divider"/>
+        tools:background="@color/multi_selection_menu_divider_dark"/>
 
 </LinearLayout>

@@ -73,7 +73,7 @@ public class OsmBugMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		if (bug.isOpened()) {
 			return getIcon(R.drawable.ic_action_gabout_dark, R.color.osm_bug_unresolved_icon_color);
 		} else {
@@ -95,7 +95,7 @@ public class OsmBugMenuController extends MenuController {
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
 		for (String description : bug.getCommentDescriptionList()) {
-			addPlainMenuItem(R.drawable.ic_action_note_dark, description, true, false, null);
+			addPlainMenuItem(R.drawable.ic_action_note_dark, null, description, true, false, null);
 		}
 	}
 

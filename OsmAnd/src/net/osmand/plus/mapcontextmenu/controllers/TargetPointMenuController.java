@@ -79,7 +79,7 @@ public class TargetPointMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		if (targetPoint.start) {
 			return getIconOrig(R.drawable.list_startpoint);
 		} else if (!targetPoint.intermediate) {

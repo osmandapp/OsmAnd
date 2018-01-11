@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -17,7 +19,6 @@ import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
@@ -51,7 +53,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.TransportStopsLayer;
@@ -99,6 +101,7 @@ public class MenuBuilder {
 
 	public class PlainMenuItem {
 		private int iconId;
+		private String buttonText;
 		private String text;
 		private boolean needLinks;
 		private boolean url;
@@ -106,10 +109,11 @@ public class MenuBuilder {
 		private CollapsableView collapsableView;
 		private OnClickListener onClickListener;
 
-		public PlainMenuItem(int iconId, String text, boolean needLinks, boolean url,
+		public PlainMenuItem(int iconId, String buttonText, String text, boolean needLinks, boolean url,
 							 boolean collapsable, CollapsableView collapsableView,
 							 OnClickListener onClickListener) {
 			this.iconId = iconId;
+			this.buttonText = buttonText;
 			this.text = text;
 			this.needLinks = needLinks;
 			this.url = url;
@@ -120,6 +124,10 @@ public class MenuBuilder {
 
 		public int getIconId() {
 			return iconId;
+		}
+
+		public String getButtonText() {
+			return buttonText;
 		}
 
 		public String getText() {
@@ -289,7 +297,7 @@ public class MenuBuilder {
 			buildTitleRow(view);
 		}
 		if (showTransportRoutes()) {
-			buildRow(view, 0, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false),
+			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false),
 					false, 0, false, null, true);
 		}
 		buildNearestWikiRow(view);
@@ -324,7 +332,7 @@ public class MenuBuilder {
 
 	protected void buildPlainMenuItems(View view) {
 		for (PlainMenuItem item : plainMenuItems) {
-			buildRow(view, item.getIconId(), item.getText(), 0, item.collapsable, item.collapsableView,
+			buildRow(view, item.getIconId(), item.getButtonText(), item.getText(), 0, item.collapsable, item.collapsableView,
 					item.isNeedLinks(), 0, item.isUrl(), item.getOnClickListener(), false);
 		}
 	}
@@ -349,14 +357,14 @@ public class MenuBuilder {
 		if (mapContextMenu != null) {
 			String title = mapContextMenu.getTitleStr();
 			if (title.length() > TITLE_LIMIT) {
-				buildRow(view, R.drawable.ic_action_note_dark, title, 0, false, null, false, 0, false, null, false);
+				buildRow(view, R.drawable.ic_action_note_dark, null, title, 0, false, null, false, 0, false, null, false);
 			}
 		}
 	}
 
 	protected void buildNearestWikiRow(View view) {
 		if (processNearstWiki() && nearestWiki.size() > 0) {
-			buildRow(view, R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around) + " (" + nearestWiki.size()+")", 0,
+			buildRow(view, R.drawable.ic_action_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size()+")", 0,
 					true, getCollapsableWikiView(view.getContext(), true),
 					false, 0, false, null, false);
 		}
@@ -380,7 +388,7 @@ public class MenuBuilder {
 				}
 			}
 		});
-		buildRow(view, R.drawable.ic_action_photo_dark, app.getString(R.string.online_photos), 0, true,
+		buildRow(view, R.drawable.ic_action_photo_dark, null, app.getString(R.string.online_photos), 0, true,
 				collapsableView, false, 1, false, null, false);
 
 		if (needUpdateOnly && onlinePhotoCards != null) {
@@ -437,14 +445,14 @@ public class MenuBuilder {
 		firstRow = false;
 	}
 
-	public View buildRow(View view, int iconId, String text, int textColor,
+	public View buildRow(View view, int iconId, String buttonText, String text, int textColor,
 							boolean collapsable, final CollapsableView collapsableView,
 							boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
-		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textColor, null, collapsable, collapsableView,
+		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, text, textColor, null, collapsable, collapsableView,
 				needLinks, textLinesLimit, isUrl, onClickListener, matchWidthDivider);
 	}
 
-	public View buildRow(final View view, Drawable icon, final String text, int textColor, String secondaryText,
+	public View buildRow(final View view, Drawable icon, final String buttonText, final String text, int textColor, String secondaryText,
 							boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
 							int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
 
@@ -461,7 +469,7 @@ public class MenuBuilder {
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setLayoutParams(llParams);
-		ll.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		ll.setOnLongClickListener(new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
@@ -536,6 +544,20 @@ public class MenuBuilder {
 			textViewSecondary.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_secondary_text_color_light: R.color.ctx_menu_bottom_view_secondary_text_color_dark));
 			textViewSecondary.setText(secondaryText);
 			llText.addView(textViewSecondary);
+		}
+
+		//Button
+		if (!TextUtils.isEmpty(buttonText)) {
+			TextViewEx buttonTextView = new TextViewEx(view.getContext());
+			LinearLayout.LayoutParams buttonTextViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			buttonTextViewParams.gravity = Gravity.CENTER_VERTICAL;
+			buttonTextViewParams.setMargins(dpToPx(8), 0, dpToPx(8), 0);
+			buttonTextView.setLayoutParams(buttonTextViewParams);
+			buttonTextView.setTypeface(FontCache.getRobotoMedium(view.getContext()));
+			buttonTextView.setAllCaps(true);
+			buttonTextView.setTextColor(ContextCompat.getColor(view.getContext(), !light ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n));
+			buttonTextView.setText(buttonText);
+			ll.addView(buttonTextView);
 		}
 
 		final ImageView iconViewCollapse = new ImageView(view.getContext());
@@ -614,7 +636,7 @@ public class MenuBuilder {
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setLayoutParams(llParams);
-		ll.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 
 		// Empty
 		LinearLayout llIcon = new LinearLayout(view.getContext());
@@ -635,7 +657,7 @@ public class MenuBuilder {
 		buttonView.setPadding(dpToPx(10f), 0, dpToPx(10f), 0);
 		buttonView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 		//buttonView.setTextSize(view.getResources().getDimension(resolveAttribute(view.getContext(), R.dimen.default_desc_text_size)));
-		buttonView.setTextColor(view.getResources().getColor(resolveAttribute(view.getContext(), R.attr.contextMenuButtonColor)));
+		buttonView.setTextColor(view.getResources().getColor(AndroidUtils.resolveAttribute(view.getContext(), R.attr.contextMenuButtonColor)));
 		buttonView.setText(text);
 
 		if (buttonIcon != null) {
@@ -671,13 +693,17 @@ public class MenuBuilder {
 	}
 
 	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
-		plainMenuItems.add(new PlainMenuItem(iconId, text, needLinks, isUrl, false, null, onClickListener));
+		plainMenuItems.add(new PlainMenuItem(iconId, null, text, needLinks, isUrl, false, null, onClickListener));
+	}
+
+	public void addPlainMenuItem(int iconId, String buttonText, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
+		plainMenuItems.add(new PlainMenuItem(iconId, buttonText, text, needLinks, isUrl, false, null, onClickListener));
 	}
 
 	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl,
 								 boolean collapsable, CollapsableView collapsableView,
 								 OnClickListener onClickListener) {
-		plainMenuItems.add(new PlainMenuItem(iconId, text, needLinks, isUrl, collapsable, collapsableView, onClickListener));
+		plainMenuItems.add(new PlainMenuItem(iconId, null, text, needLinks, isUrl, collapsable, collapsableView, onClickListener));
 	}
 
 	public void clearPlainMenuItems() {
@@ -699,12 +725,6 @@ public class MenuBuilder {
 		}
 	}
 
-	public int resolveAttribute(Context ctx, int attribute) {
-		TypedValue outValue = new TypedValue();
-		ctx.getTheme().resolveAttribute(attribute, outValue, true);
-		return outValue.resourceId;
-	}
-
 	public int dpToPx(float dp) {
 		Resources r = app.getResources();
 		return (int) TypedValue.applyDimension(
@@ -714,69 +734,90 @@ public class MenuBuilder {
 		);
 	}
 
-	private void buildTransportRouteRow(ViewGroup parent, TransportStopRoute r, OnClickListener listener) {
-		if (!isFirstRow()) {
+	private View buildTransportRowItem(View view, TransportStopRoute route, OnClickListener listener) {
+		LinearLayout baseView = new LinearLayout(view.getContext());
+		baseView.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+		baseView.setLayoutParams(llBaseViewParams);
+		baseView.setPadding(dpToPx(16), 0, dpToPx(16), dpToPx(12));
+		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+
+		TextViewEx transportRect = new TextViewEx(view.getContext());
+		LinearLayout.LayoutParams trParams = new LinearLayout.LayoutParams(dpToPx(32), dpToPx(18));
+		trParams.setMargins(0, dpToPx(16), 0, 0);
+		transportRect.setLayoutParams(trParams);
+		transportRect.setGravity(Gravity.CENTER);
+		transportRect.setAllCaps(true);
+		transportRect.setTypeface(FontCache.getRobotoMedium(view.getContext()));
+		transportRect.setTextColor(Color.WHITE);
+		transportRect.setTextSize(10);
+
+		GradientDrawable shape = new GradientDrawable();
+		shape.setShape(GradientDrawable.RECTANGLE);
+		shape.setCornerRadius(dpToPx(3));
+		shape.setColor(route.getColor(mapActivity.getMyApplication(), !light));
+
+		transportRect.setBackgroundDrawable(shape);
+		transportRect.setText(route.route.getRef());
+		baseView.addView(transportRect);
+
+		LinearLayout infoView = new LinearLayout(view.getContext());
+		infoView.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout.LayoutParams infoViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		infoViewLayoutParams.setMargins(dpToPx(16), dpToPx(12), dpToPx(16), 0);
+		infoView.setLayoutParams(infoViewLayoutParams);
+		baseView.addView(infoView);
+
+		TextView titleView = new TextView(view.getContext());
+		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		titleView.setLayoutParams(titleParams);
+		titleView.setTextSize(16);
+		titleView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		titleView.setText(route.getDescription(getMapActivity().getMyApplication(), true));
+		infoView.addView(titleView);
+
+		LinearLayout typeView = new LinearLayout(view.getContext());
+		typeView.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout.LayoutParams typeViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		typeViewParams.setMargins(0, dpToPx(8), 0, 0);
+		typeView.setGravity(Gravity.CENTER);
+		typeView.setLayoutParams(typeViewParams);
+		infoView.addView(typeView);
+
+		ImageView typeImageView = new ImageView(view.getContext());
+		LinearLayout.LayoutParams typeImageParams = new LinearLayout.LayoutParams(dpToPx(16), dpToPx(16));
+		typeImageParams.setMargins(dpToPx(4), 0, dpToPx(4), 0);
+		typeImageView.setLayoutParams(typeImageParams);
+		int drawableResId = route.type == null ? R.drawable.ic_action_polygom_dark : route.type.getResourceId();
+		typeImageView.setImageDrawable(getRowIcon(drawableResId));
+		typeView.addView(typeImageView);
+
+		TextView typeTextView = new TextView(view.getContext());
+		LinearLayout.LayoutParams typeTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		typeTextView.setLayoutParams(typeTextParams);
+		typeTextView.setText(route.getTypeStrRes());
+		typeView.addView(typeTextView);
+
+		baseView.setOnClickListener(listener);
+
+		((ViewGroup) view).addView(baseView);
+
+		return baseView;
+	}
+
+	private void buildTransportRouteRow(ViewGroup parent, TransportStopRoute r, OnClickListener listener, boolean showDivider) {
+		buildTransportRowItem(parent, r, listener);
+
+		if (showDivider) {
 			buildRowDivider(parent);
 		}
-
-		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ctx_menu_transport_route_layout, parent, false);
-		TextView routeDesc = (TextView) view.findViewById(R.id.route_desc);
-		routeDesc.setText(r.getDescription(getMapActivity().getMyApplication(), true));
-		routeDesc.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
-		int drawableResId = r.type == null ? R.drawable.ic_action_polygom_dark : r.type.getResourceId();
-		((ImageView) view.findViewById(R.id.route_type_icon)).setImageDrawable(getRowIcon(drawableResId));
-		((TextView) view.findViewById(R.id.route_ref)).setText(r.route.getRef());
-		view.setOnClickListener(listener);
-		int typeResId;
-		switch (r.type) {
-			case BUS:
-				typeResId = R.string.poi_route_bus_ref;
-				break;
-			case TRAM:
-				typeResId = R.string.poi_route_tram_ref;
-				break;
-			case FERRY:
-				typeResId = R.string.poi_route_ferry_ref;
-				break;
-			case TRAIN:
-				typeResId = R.string.poi_route_train_ref;
-				break;
-			case SHARE_TAXI:
-				typeResId = R.string.poi_route_share_taxi_ref;
-				break;
-			case FUNICULAR:
-				typeResId = R.string.poi_route_funicular_ref;
-				break;
-			case LIGHT_RAIL:
-				typeResId = R.string.poi_route_light_rail_ref;
-				break;
-			case MONORAIL:
-				typeResId = R.string.poi_route_monorail_ref;
-				break;
-			case TROLLEYBUS:
-				typeResId = R.string.poi_route_trolleybus_ref;
-				break;
-			case RAILWAY:
-				typeResId = R.string.poi_route_railway_ref;
-				break;
-			case SUBWAY:
-				typeResId = R.string.poi_route_subway_ref;
-				break;
-			default:
-				typeResId = R.string.poi_filter_public_transport;
-				break;
-		}
-		((TextView) view.findViewById(R.id.route_type_text)).setText(typeResId);
-
-		parent.addView(view);
-
-		rowBuilt();
 	}
 
 	private CollapsableView getCollapsableTransportStopRoutesView(final Context context, boolean collapsed) {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, false);
 
-		for (final TransportStopRoute r : routes) {
+		for (int i = 0; i < routes.size(); i++) {
+			final TransportStopRoute r  = routes.get(i);
 			View.OnClickListener listener = new View.OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
@@ -785,12 +826,13 @@ public class MenuBuilder {
 							r.getDescription(getMapActivity().getMyApplication(), false));
 					mm.show(latLon, pd, r);
 					TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
-					stopsLayer.setRoute(r.route);
+					stopsLayer.setRoute(r);
 					int cz = r.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
 					getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
 				}
 			};
-			buildTransportRouteRow(view, r, listener);
+			boolean showDivider = i < routes.size() - 1;
+			buildTransportRouteRow(view, r, listener, showDivider);
 		}
 
 		return new CollapsableView(view, collapsed);
@@ -949,16 +991,9 @@ public class MenuBuilder {
 		int paddingSides = dpToPx(10f);
 		button.setPadding(paddingSides, 0, paddingSides, 0);
 		if (!selected) {
-			ColorStateList buttonColorStateList = new ColorStateList(
-					new int[][] {
-							new int[]{android.R.attr.state_pressed},
-							new int[]{}
-					},
-					new int[] {
-							context.getResources().getColor(light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p),
-							context.getResources().getColor(light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n)
-					}
-			);
+			ColorStateList buttonColorStateList = AndroidUtils.createColorStateList(context, !light,
+					R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
+					R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 			button.setTextColor(buttonColorStateList);
 		} else {
 			button.setTextColor(ContextCompat.getColor(context, light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));

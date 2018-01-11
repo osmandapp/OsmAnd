@@ -29,7 +29,7 @@
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?attr/dashboard_divider"/>
+            tools:background="@color/multi_selection_menu_divider_dark"/>
 
         <FrameLayout
             android:id="@+id/cancel_row"
@@ -44,7 +44,6 @@
                 android:layout_gravity="center"
                 android:text="@string/shared_string_close"
                 android:textAllCaps="true"
-                android:textColor="?attr/color_dialog_buttons"
                 android:textSize="@dimen/default_desc_text_size"
                 android:textStyle="bold"/>
         </FrameLayout>

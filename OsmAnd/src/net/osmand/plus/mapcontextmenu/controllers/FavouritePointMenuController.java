@@ -18,6 +18,7 @@ import net.osmand.plus.mapcontextmenu.OpeningHoursInfo;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -27,7 +28,8 @@ public class FavouritePointMenuController extends MenuController {
 
 	private FavouritePoint fav;
 	private MapMarker mapMarker;
-	private List<TransportStopController.TransportStopRoute> routes = new ArrayList<>();
+	private List<TransportStopRoute> routes = new ArrayList<>();
+	private OpeningHoursInfo openingHoursInfo;
 
 	public FavouritePointMenuController(MapActivity mapActivity, PointDescription pointDescription, final FavouritePoint fav) {
 		super(new FavouritePointMenuBuilder(mapActivity, fav), pointDescription, mapActivity);
@@ -50,6 +52,11 @@ public class FavouritePointMenuController extends MenuController {
 			routes = transportStopController.processTransportStop();
 			builder.setRoutes(routes);
 		}
+
+		Object originObject = getBuilder().getOriginObject();
+		if (originObject instanceof Amenity) {
+			openingHoursInfo = AmenityMenuController.processOpeningHours((Amenity) originObject);
+		}
 	}
 
 	@Override
@@ -65,7 +72,7 @@ public class FavouritePointMenuController extends MenuController {
 	}
 
 	@Override
-	public List<TransportStopController.TransportStopRoute> getTransportStopRoutes() {
+	public List<TransportStopRoute> getTransportStopRoutes() {
 		return routes;
 	}
 
@@ -95,7 +102,7 @@ public class FavouritePointMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(), fav.getColor(), false);
 	}
 
@@ -106,7 +113,7 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public Drawable getSecondLineTypeIcon() {
-		return getIcon(R.drawable.ic_action_group_name_16);
+		return getIcon(R.drawable.ic_action_group_name_16, isLight() ? R.color.icon_color : R.color.ctx_menu_bottom_view_icon_dark);
 	}
 
 	@Override
@@ -132,7 +139,7 @@ public class FavouritePointMenuController extends MenuController {
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		if (!Algorithms.isEmpty(fav.getDescription())) {
-			addPlainMenuItem(R.drawable.ic_action_note_dark, fav.getDescription(), true, false, null);
+			addPlainMenuItem(R.drawable.ic_action_note_dark, null, fav.getDescription(), true, false, null);
 		}
 		Object originObject = getBuilder().getOriginObject();
 		if (originObject != null) {
@@ -146,11 +153,26 @@ public class FavouritePointMenuController extends MenuController {
 	}
 
 	@Override
-	public OpeningHoursInfo getOpeningHoursInfo() {
-		Object originObject = getBuilder().getOriginObject();
-		if (originObject instanceof Amenity) {
-			return AmenityMenuController.processOpeningHours((Amenity) originObject);
+	public int getAdditionalInfoColor() {
+		if (openingHoursInfo != null) {
+			return openingHoursInfo.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
 		}
-		return null;
+		return 0;
+	}
+
+	@Override
+	public String getAdditionalInfoStr() {
+		if (openingHoursInfo != null) {
+			return openingHoursInfo.getInfo(getMapActivity());
+		}
+		return "";
+	}
+
+	@Override
+	public int getAdditionalInfoIconRes() {
+		if (openingHoursInfo != null) {
+			return R.drawable.ic_action_opening_hour_16;
+		}
+		return 0;
 	}
 }

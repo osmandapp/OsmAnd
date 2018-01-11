@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import android.view.View;
-
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -14,16 +12,15 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.OpeningHoursInfo;
+import net.osmand.plus.mapcontextmenu.WikipediaDialogFragment;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.TransportIndexRepository;
-import net.osmand.plus.views.POIMapLayer;
-import net.osmand.plus.views.TransportStopsLayer;
+import net.osmand.plus.transport.TransportStopType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
@@ -39,6 +36,7 @@ public class AmenityMenuController extends MenuController {
 
 	private Amenity amenity;
 	private List<TransportStopRoute> routes = new ArrayList<>();
+	private OpeningHoursInfo openingHoursInfo;
 
 	private MapMarker marker;
 
@@ -71,12 +69,14 @@ public class AmenityMenuController extends MenuController {
 			leftTitleButtonController = new TitleButtonController() {
 				@Override
 				public void buttonPressed() {
-					POIMapLayer.showWikipediaDialog(mapActivity, mapActivity.getMyApplication(), amenity);
+					WikipediaDialogFragment.showInstance(mapActivity, amenity);
 				}
 			};
 			leftTitleButtonController.caption = getMapActivity().getString(R.string.context_menu_read_article);
-			leftTitleButtonController.leftIcon = getIcon(R.drawable.ic_action_note_dark, isLight() ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
+			leftTitleButtonController.leftIcon = getIcon(R.drawable.ic_action_read_text, isLight() ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
 		}
+
+		openingHoursInfo = processOpeningHours(amenity);
 	}
 
 	@Override
@@ -108,11 +108,11 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
-	public int getLeftIconId() {
-		return getLeftIconId(amenity);
+	public int getRightIconId() {
+		return getRightIconId(amenity);
 	}
 
-	private static int getLeftIconId(Amenity amenity) {
+	private static int getRightIconId(Amenity amenity) {
 		String id = null;
 		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (st != null) {
@@ -146,8 +146,27 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
-	public OpeningHoursInfo getOpeningHoursInfo() {
-		return processOpeningHours(amenity);
+	public int getAdditionalInfoColor() {
+		if (openingHoursInfo != null) {
+			return openingHoursInfo.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
+		}
+		return super.getAdditionalInfoColor();
+	}
+
+	@Override
+	public String getAdditionalInfoStr() {
+		if (openingHoursInfo != null) {
+			return openingHoursInfo.getInfo(getMapActivity());
+		}
+		return super.getAdditionalInfoStr();
+	}
+
+	@Override
+	public int getAdditionalInfoIconRes() {
+		if (openingHoursInfo != null) {
+			return R.drawable.ic_action_opening_hour_16;
+		}
+		return super.getAdditionalInfoIconRes();
 	}
 
 	public static String getTypeStr(Amenity amenity) {
@@ -201,7 +220,7 @@ public class AmenityMenuController extends MenuController {
 
 	public static void addPlainMenuItems(Amenity amenity, String typeStr, MenuBuilder builder) {
 		if (!Algorithms.isEmpty(typeStr)) {
-			int resId = getLeftIconId(amenity);
+			int resId = getRightIconId(amenity);
 			if (resId == 0) {
 				PoiCategory pc = amenity.getType();
 				resId = RenderingIcons.getBigIconResourceId(pc.getIconKeyName());
@@ -254,7 +273,7 @@ public class AmenityMenuController extends MenuController {
 		if (rts != null) {
 			for (TransportRoute rs : rts) {
 				if (!containsRef(rs)) {
-					TransportStopController.TransportStopType type = TransportStopController.TransportStopType.findType(rs.getType());
+					TransportStopType type = TransportStopType.findType(rs.getType());
 					TransportStopRoute r = new TransportStopRoute();
 					r.type = type;
 					r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
