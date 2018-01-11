@@ -1,36 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/bg_color">
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/scroll_view_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/bottom_sheet_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/bottom_sheet_content_padding_small">
-
-            <include layout="@layout/bottom_sheet_dialog_fragment_title"/>
+            app:behavior_hideable="true"
+            app:layout_behavior="net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior"
+            tools:background="?attr/bg_color">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:id="@+id/context_menu_items_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/bottom_sheet_content_padding_small"/>
 
-        </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <LinearLayout
+        android:id="@+id/cancel_row_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:background="?attr/bg_color">
 
         <View
+            android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?attr/dashboard_divider"/>
+            tools:background="?attr/dashboard_divider"/>
 
         <FrameLayout
             android:id="@+id/cancel_row"
@@ -51,4 +64,4 @@
 
     </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+</LinearLayout>

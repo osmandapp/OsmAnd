@@ -180,4 +180,7 @@
 	<dimen name="multi_selection_menu_padding_top">20dp</dimen>
 	<dimen name="multi_selection_menu_padding_bottom">23dp</dimen>
 
+    <dimen name="grid_menu_item_width">180dp</dimen>
+    <dimen name="grid_menu_item_bottom_top_margin">24dp</dimen>
+    <dimen name="grid_menu_item_sides_margin">60dp</dimen>
 </resources>

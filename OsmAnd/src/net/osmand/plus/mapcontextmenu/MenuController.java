@@ -3,8 +3,8 @@ package net.osmand.plus.mapcontextmenu;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -52,7 +52,6 @@ import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportRouteController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapillary.MapillaryImage;
@@ -65,6 +64,7 @@ import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoMenuController;
 import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
@@ -554,42 +554,37 @@ public abstract class MenuController extends BaseMenuController {
 		public Drawable rightIcon;
 		public boolean enabled = true;
 
+		@Nullable
 		public Drawable getLeftIcon() {
-			if (leftIcon != null) {
-				return leftIcon;
-			}
-			if (leftIconId != 0) {
-				if (needColorizeIcon) {
-					return getIcon(leftIconId, getColorRes());
-				}
-				return ContextCompat.getDrawable(getMapActivity(), leftIconId);
-			} else {
-				return null;
-			}
+			return getIconDrawable(true);
 		}
 
+		@Nullable
 		public Drawable getRightIcon() {
-			if (rightIcon != null) {
-				return rightIcon;
+			return getIconDrawable(false);
+		}
+
+		@Nullable
+		private Drawable getIconDrawable(boolean left) {
+			Drawable drawable = left ? leftIcon : rightIcon;
+			if (drawable != null) {
+				return drawable;
 			}
-			if (rightIconId != 0) {
+			int resId = left ? leftIconId : rightIconId;
+			if (resId != 0) {
 				if (needColorizeIcon) {
-					return getIcon(rightIconId, getColorRes());
+					return getIcon(resId, getColorRes());
 				}
-				return ContextCompat.getDrawable(getMapActivity(), rightIconId);
-			} else {
-				return null;
+				return ContextCompat.getDrawable(getMapActivity(), resId);
 			}
+			return null;
 		}
 
 		private int getColorRes() {
-			int colorRes;
 			if (enabled) {
-				colorRes = isLight() ? R.color.map_widget_blue : R.color.osmand_orange;
-			} else {
-				colorRes = isLight() ? R.color.ctx_menu_controller_disabled_text_color_light : R.color.ctx_menu_controller_disabled_text_color_dark;
+				return isLight() ? R.color.map_widget_blue : R.color.osmand_orange;
 			}
-			return colorRes;
+			return isLight() ? R.color.ctx_menu_controller_disabled_text_color_light : R.color.ctx_menu_controller_disabled_text_color_dark;
 		}
 
 		public abstract void buttonPressed();

@@ -378,4 +378,6 @@
 	<color name="multi_selection_menu_close_btn_light">#2f7af5</color>
 	<color name="multi_selection_menu_close_btn_dark">#e69122</color>
 
+    <color name="grid_menu_icon_dark">#808080</color>
+
 </resources>
