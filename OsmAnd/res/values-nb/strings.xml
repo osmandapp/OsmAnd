@@ -844,7 +844,7 @@
     <string name="show_more_map_detail_descr">Vis noen vektorkartdetaljer (veier etc.) allerede ved lavere zoom.</string>
     <string name="choose_audio_stream">Utdata for taleveiledning</string>
     <string name="choose_audio_stream_descr">Velg høyttaleren til å avspille taleveiledningen.</string>
-    <string name="voice_stream_voice_call">"Telefonanropslyd  (også for å avbryte bluetooth-bilstereo)"</string>
+    <string name="voice_stream_voice_call">Telefonanropslyd (også for å avbryte bluetooth-bilstereo)</string>
     <string name="voice_stream_notification">Varslingslyd</string>
     <string name="voice_stream_music">Media-/musikklyd</string>
     <string name="level_to_switch_vector_raster_descr">Minimum zoomnivå for å bruke vektorkart.</string>
@@ -2694,4 +2694,9 @@ Representerer området: %1$s x %2$s</string>
     <string name="av_locations_selected_desc">GPX-fil med de valgte notatenes koordinater og data.</string>
     <string name="av_locations_all_desc">GPX-fil med alle notaters koordinater og data.</string>
     <string name="quick_action_add_poi_descr">Trykk på handlingsknappen vil legge til et interessepunkt midt på skjermen.</string>
+    <string name="open_from">Åpen fra</string>
+    <string name="open_till">Åpen til</string>
+    <string name="will_close_at">Stenger</string>
+    <string name="will_open_at">Åpner</string>
+    <string name="will_open_on">Åpner</string>
     </resources>
