@@ -31,11 +31,11 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 
 	private boolean nightMode;
 	private boolean portrait;
+	private int availableScreenH;
 
 	private ContextMenuAdapter adapter;
 	private ContextMenuItemClickListener listener;
 
-	private View mainView;
 	private View scrollView;
 	private View cancelRowBgView;
 
@@ -51,8 +51,12 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(activity);
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		availableScreenH = AndroidUtils.getScreenHeight(activity) - AndroidUtils.getStatusBarHeight(activity);
+		if (portrait) {
+			availableScreenH -= AndroidUtils.getNavBarHeight(activity);
+		}
 
-		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_context_menu_actions_bottom_sheet_dialog, null);
+		View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_context_menu_actions_bottom_sheet_dialog, null);
 		scrollView = mainView.findViewById(R.id.bottom_sheet_scroll_view);
 		cancelRowBgView = mainView.findViewById(R.id.cancel_row_background);
 
@@ -154,12 +158,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 	}
 
 	private boolean expandedToFullScreen() {
-		Activity ctx = getActivity();
-		int availableH = AndroidUtils.getScreenHeight(ctx) - AndroidUtils.getStatusBarHeight(ctx);
-		if (portrait) {
-			availableH -= AndroidUtils.getNavBarHeight(ctx);
-		}
-		return availableH - scrollView.getHeight() - cancelRowBgView.getHeight() <= 0;
+		return availableScreenH - scrollView.getHeight() - cancelRowBgView.getHeight() <= 0;
 	}
 
 	private void updateBackground(boolean expanded) {
@@ -186,10 +185,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 	}
 
 	private int getPeekHeight() {
-		Activity ctx = getActivity();
-		int screenH = AndroidUtils.getScreenHeight(ctx);
-		int availableH = screenH - AndroidUtils.getNavBarHeight(ctx) - AndroidUtils.getStatusBarHeight(ctx);
-		return (availableH * 2 / 3) - getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
+		return (availableScreenH * 2 / 3) - getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
 	}
 
 	public interface ContextMenuItemClickListener {
