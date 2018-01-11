@@ -2532,7 +2532,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="osm_editing_plugin_description">Í gegnum þessa viðbót er hægt að nota OsmAnd beint til að bæta inn í OSM-kortagrunninn, eins og til dæmis að búa til eða breyta merkisstöðum í OSM (POI objects), opna eða gera athugasemdir í OSM Notes, og að setja inn skráðar GPX-skrár. OSM er samfélagsdrifinn allsherjar kortagerðargrunnur sem skoða má nánar á https://openstreetmap.org. Virk þáttaka er vel þegin, og með þessari viðbót er því hægt að vinna beint úr OsmAnd með því að setja OSM-persónuauðkennin þín upp í forritinu.</string>
     <string name="osmand_development_plugin_description">Þessi viðbót birtir stillingar fyrir þróun og aflúsun, eins og fyrir prófanir eða leiðahermingu, upplýsingar um afköst skjásins, eða raddskilaboð. Þessar stillingar eru ætlaðar fyrir forritara en eru ekki nauðsynlegar fyrir almenna notendur.</string>
     <string name="osmo_group_share">Til að tengjast við hópinn %2$s, tilgreindu hópauðkenni (%1$s) eða bankaðu á %3$s.</string>
-    <string name="osmo_tracker_id_share">Til að tengjast við marktækið %2$s, bankaðu á tengilinn %3$s eða tilgreindu rakningarauðkenni (%1$s).</string>
+    <string name="osmo_tracker_id_share">Til að tengjast við marktækið %2$s, bankaðu á tengilinn %3$s eða tilgreindu rakningarauðkenni (%1$s)</string>
     <string name="use_distance_measurement_help">* Bankaðu til að merkja punkt.
 \n * Ýta og halda á kortið til að eyða fyrri punkti.
 \n * Ýta og halda á punkt til að skoða og bæta við lýsingu.
