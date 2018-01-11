@@ -507,7 +507,7 @@
 	<string name="poi_hotel">Hotel</string>
 	<string name="poi_guest_house">Guesthouse</string>
 	<string name="poi_hostel">Hostel</string>
-	<string name="poi_motel">Hotel de estrada</string>
+	<string name="poi_motel">Hospedagem</string>
 	<string name="poi_alpine_hut">Abrigo de montanha</string>
 	<string name="poi_chalet">Chalé</string>
 	<string name="poi_apartment">Apartamento</string>
@@ -517,7 +517,7 @@
 	<string name="poi_hunting_lodge">Pavilhão de caça</string>
 
 	<string name="poi_place_of_worship">Lugar de prática religiosa</string>
-	<string name="poi_religion_christian">Cristianismo</string>
+	<string name="poi_religion_christian">Cristãos</string>
 	<string name="poi_religion_jewish">Judaísmo</string>
 	<string name="poi_religion_muslim">Islamismo</string>
 	<string name="poi_religion_sikh">Sikhismo</string>
