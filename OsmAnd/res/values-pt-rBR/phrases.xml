@@ -3551,4 +3551,43 @@
 
 	<string name="poi_boat_rental">Locação de barcos</string>
 	<string name="poi_government_treasury">Tesouro</string>
+	<string name="poi_network">Rede</string>
+
+	<string name="poi_government_archive">Arquivo</string>
+	<string name="poi_government_ministry">Ministério</string>
+	<string name="poi_government_public_service">Serviço público</string>
+	<string name="poi_government_social_security">Seguridade social</string>
+	<string name="poi_government_social_services">Serviços sociais</string>
+	<string name="poi_government_transportation">Instituição de transporte</string>
+	<string name="poi_government_legislative">Instituição legislativa</string>
+
+	<string name="poi_vhf">Canal VHF</string>
+
+	<string name="poi_surface_clay">Argila</string>
+	<string name="poi_surface_metal_grid">Grelha metálica</string>
+
+	<string name="poi_location_underground">Localização: subterrâneo</string>
+	<string name="poi_location_underwater">Localização: submerso</string>
+	<string name="poi_location_overground">Localização: superfície</string>
+	<string name="poi_location_overhead">Localização: suspenso</string>
+	<string name="poi_location_roof">Localização: teto</string>
+	<string name="poi_location_rooftop">Localização: telhado</string>
+	<string name="poi_location_outdoor">Localização: externo</string>
+	<string name="poi_location_indoor">Localização: interno</string>
+	<string name="poi_location_platform">Localização: plataforma</string>
+	<string name="poi_location_kiosk">Localização: quiosque</string>
+	<string name="poi_location_bridge">Localização: ponte</string>
+	<string name="poi_location_wall">Localização: parede</string>
+	<string name="poi_location_entrance">Localização: entrada</string>
+
+	<string name="poi_visibility_house">Visibilidade: casa</string>
+	<string name="poi_visibility_street">Visibilidade: rua</string>
+	<string name="poi_visibility_area">Visibilidade: área</string>
+
+	<string name="poi_operational_status_open">Aberto</string>
+	<string name="poi_operational_status_closed">Fechado</string>
+	<string name="poi_operational_status_restricted">Restrito</string>
+	<string name="poi_operational_status_broken">Quebrado</string>
+	<string name="poi_operational_status_needs_maintenance">Precisa de manutenção</string>
+
 	</resources>
