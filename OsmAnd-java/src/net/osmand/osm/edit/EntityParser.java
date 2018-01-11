@@ -41,6 +41,9 @@ public class EntityParser {
 		if (mo.getName().length() == 0) {
 			mo.setName(mo.getEnName(false));
 		}
+		if (mo.getName().length() == 0 && tags.containsKey(OSMTagKey.LOCK_NAME.getValue())) {
+			mo.setName(tags.get(OSMTagKey.LOCK_NAME.getValue()));
+		}
 		if (mo.getLocation() == null) {
 			LatLon l = null;
 			if (mo instanceof Building) {
