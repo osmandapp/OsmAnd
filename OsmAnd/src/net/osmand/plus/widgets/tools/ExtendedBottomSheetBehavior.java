@@ -411,14 +411,8 @@ public class ExtendedBottomSheetBehavior<V extends View> extends CoordinatorLayo
 			top = mParentHeight;
 			targetState = STATE_HIDDEN;
 		} else if (mLastNestedScrollDy == 0) {
-			int currentTop = child.getTop();
-			if (Math.abs(currentTop - mMinOffset) < Math.abs(currentTop - mMaxOffset)) {
-				top = mMinOffset;
-				targetState = STATE_EXPANDED;
-			} else {
-				top = mMaxOffset;
-				targetState = STATE_COLLAPSED;
-			}
+			top = child.getTop();
+			targetState = STATE_MANUALLY_MOVED;
 		} else {
 			if (Math.abs(getYVelocity()) > MIN_VELOCITY_FOR_SLIDE) {
 				top = mMaxOffset;
