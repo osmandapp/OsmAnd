@@ -89,7 +89,7 @@ public class MapMarkerMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return MapMarkerDialogHelper.getMapMarkerIcon(getMapActivity().getMyApplication(), mapMarker.colorIndex);
 	}
 

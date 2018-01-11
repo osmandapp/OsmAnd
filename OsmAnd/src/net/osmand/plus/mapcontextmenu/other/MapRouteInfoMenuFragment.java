@@ -150,8 +150,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), nightMode,
 				R.color.route_info_divider_light, R.color.route_info_divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.divider_from_drop_down_empty), nightMode,
-				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.viaLayoutDivider), nightMode,
 				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerToDropDown), nightMode,
@@ -169,14 +167,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.toTitle), nightMode);
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.fromTitle), nightMode);
 		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.InfoTextView), nightMode);
-
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.FromLayout), nightMode);
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.ViaLayout), nightMode);
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.ToLayout), nightMode);
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.Info), nightMode);
-
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.Next), nightMode);
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.Prev), nightMode);
 
 		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.DistanceText), nightMode);
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.DistanceTitle), nightMode);

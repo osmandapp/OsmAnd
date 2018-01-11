@@ -45,7 +45,7 @@ public class GpxItemMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return getIcon(R.drawable.ic_action_polygom_dark, R.color.osmand_orange);
 	}
 }

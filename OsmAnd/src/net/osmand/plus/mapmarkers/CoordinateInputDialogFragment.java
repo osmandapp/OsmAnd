@@ -754,26 +754,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	private class KeyboardAdapter extends ArrayAdapter<Object> {
 
-		private ColorStateList dividerControlColorStateList = new ColorStateList(
-				new int[][]{
-						new int[]{android.R.attr.state_pressed},
-						new int[]{}
-				},
-				new int[] {
-						getResources().getColor(R.color.keyboard_item_divider_control_color_light_pressed),
-						getResources().getColor(R.color.keyboard_item_divider_control_color_light)
-				}
-		);
-		private ColorStateList numberColorStateList = new ColorStateList(
-				new int[][]{
-						new int[]{android.R.attr.state_pressed},
-						new int[]{}
-				},
-				new int[] {
-						getResources().getColor(R.color.keyboard_item_text_color_light_pressed),
-						getResources().getColor(R.color.keyboard_item_text_color_light)
-				}
-		);
+		private ColorStateList dividerControlColorStateList = AndroidUtils.createColorStateList(getContext(), false,
+				R.color.keyboard_item_divider_control_color_light, R.color.keyboard_item_divider_control_color_light_pressed,
+				0, 0);
+		private ColorStateList numberColorStateList = AndroidUtils.createColorStateList(getContext(), false,
+				R.color.keyboard_item_text_color_light, R.color.keyboard_item_text_color_light_pressed,
+				0, 0);
 
 		KeyboardAdapter(@NonNull Context context, @NonNull Object[] objects) {
 			super(context, 0, objects);

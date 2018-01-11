@@ -42,7 +42,7 @@ public class MyLocationMenuController  extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		ApplicationMode appMode = getMapActivity().getMyApplication().getSettings().getApplicationMode();
 		return getMapActivity().getResources().getDrawable(appMode.getResourceLocationDay());
 	}

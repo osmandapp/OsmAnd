@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -51,7 +52,7 @@ import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportRouteController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapillary.MapillaryImage;
@@ -225,8 +226,8 @@ public abstract class MenuController extends BaseMenuController {
 		return true;
 	}
 
-	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
-		builder.addPlainMenuItem(iconId, text, needLinks, isUrl, onClickListener);
+	public void addPlainMenuItem(int iconId, String buttonText, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
+		builder.addPlainMenuItem(iconId, buttonText, text, needLinks, isUrl, onClickListener);
 	}
 
 	public void clearPlainMenuItems() {
@@ -239,7 +240,7 @@ public abstract class MenuController extends BaseMenuController {
 
 	protected void addMyLocationToPlainItems(LatLon latLon) {
 		OsmandSettings st = ((OsmandApplication) getMapActivity().getApplicationContext()).getSettings();
-		addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationName(getMapActivity(),
+		addPlainMenuItem(R.drawable.ic_action_get_my_location, null, PointDescription.getLocationName(getMapActivity(),
 				latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", " "), false, false, null);
 		//if (st.COORDINATES_FORMAT.get() != PointDescription.OLC_FORMAT)
 		//	addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationOlcName(
@@ -386,15 +387,11 @@ public abstract class MenuController extends BaseMenuController {
 		return false;
 	}
 
-	public boolean displayAdditionalTypeStrInHours() {
-		return false;
-	}
-
-	public int getLeftIconId() {
+	public int getRightIconId() {
 		return 0;
 	}
 
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return null;
 	}
 
@@ -402,8 +399,12 @@ public abstract class MenuController extends BaseMenuController {
 		return null;
 	}
 
-	public Drawable getAdditionalLineTypeIcon() {
+	public Drawable getSubtypeIcon() {
 		return null;
+	}
+
+	public boolean navigateInPedestrianMode() {
+		return false;
 	}
 
 	public int getFavActionIconId() {
@@ -432,16 +433,29 @@ public abstract class MenuController extends BaseMenuController {
 		return "";
 	}
 
-	public String getAdditionalTypeStr() {
+	public String getSubtypeStr() {
 		return "";
 	}
 
-	public int getTimeStrColor() {
+	public int getAdditionalInfoColor() {
+		if (indexItem != null) {
+			return R.color.icon_color;
+		}
 		return 0;
 	}
 
-	public OpeningHoursInfo getOpeningHoursInfo() {
-		return null;
+	public String getAdditionalInfoStr() {
+		if (indexItem != null) {
+			return getMapActivity().getString(R.string.file_size_in_mb, indexItem.getArchiveSizeMB());
+		}
+		return "";
+	}
+
+	public int getAdditionalInfoIconRes() {
+		if (indexItem != null) {
+			return R.drawable.ic_sdcard_16;
+		}
+		return 0;
 	}
 
 	public String getCommonTypeStr() {
@@ -531,11 +545,14 @@ public abstract class MenuController extends BaseMenuController {
 	public abstract class TitleButtonController {
 		public String caption = "";
 		public int leftIconId = 0;
+		public int rightIconId = 0;
 		public boolean needRightText = false;
 		public String rightTextCaption = "";
 		public boolean visible = true;
 		public boolean needColorizeIcon = true;
 		public Drawable leftIcon;
+		public Drawable rightIcon;
+		public boolean enabled = true;
 
 		public Drawable getLeftIcon() {
 			if (leftIcon != null) {
@@ -543,12 +560,36 @@ public abstract class MenuController extends BaseMenuController {
 			}
 			if (leftIconId != 0) {
 				if (needColorizeIcon) {
-					return getIcon(leftIconId, isLight() ? R.color.map_widget_blue : R.color.osmand_orange);
+					return getIcon(leftIconId, getColorRes());
 				}
 				return ContextCompat.getDrawable(getMapActivity(), leftIconId);
 			} else {
 				return null;
 			}
+		}
+
+		public Drawable getRightIcon() {
+			if (rightIcon != null) {
+				return rightIcon;
+			}
+			if (rightIconId != 0) {
+				if (needColorizeIcon) {
+					return getIcon(rightIconId, getColorRes());
+				}
+				return ContextCompat.getDrawable(getMapActivity(), rightIconId);
+			} else {
+				return null;
+			}
+		}
+
+		private int getColorRes() {
+			int colorRes;
+			if (enabled) {
+				colorRes = isLight() ? R.color.map_widget_blue : R.color.osmand_orange;
+			} else {
+				colorRes = isLight() ? R.color.ctx_menu_controller_disabled_text_color_light : R.color.ctx_menu_controller_disabled_text_color_dark;
+			}
+			return colorRes;
 		}
 
 		public abstract void buttonPressed();
@@ -619,7 +660,7 @@ public abstract class MenuController extends BaseMenuController {
 		}
 	}
 
-	public void buildMapDownloadButton(final LatLon latLon) {
+	public void buildMapDownloadButtonAndSizeInfo(final LatLon latLon) {
 		new AsyncTask<Void, Void, BinaryMapDataObject>() {
 
 			ResourceManager rm;
@@ -774,6 +815,11 @@ public abstract class MenuController extends BaseMenuController {
 		public ContextMenuToolbarController(MenuController menuController) {
 			super(TopToolbarControllerType.CONTEXT_MENU);
 			this.menuController = menuController;
+			setBgIds(R.color.actionbar_light_color, R.color.actionbar_dark_color,
+					R.color.actionbar_light_color, R.color.actionbar_dark_color);
+			setBackBtnIconClrIds(R.color.color_white, R.color.color_white);
+			setCloseBtnIconClrIds(R.color.color_white, R.color.color_white);
+			setTitleTextClrIds(R.color.color_white, R.color.color_white);
 		}
 
 		public MenuController getMenuController() {

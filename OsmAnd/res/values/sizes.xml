@@ -247,4 +247,9 @@
 	<dimen name="route_info_modes_height">48dp</dimen>
 
 	<dimen name="multi_selection_header_height">52dp</dimen>
+
+	<dimen name="wikipedia_button_left_padding">19dp</dimen>
+
+	<dimen name="multi_selection_menu_padding_top">13dp</dimen>
+	<dimen name="multi_selection_menu_padding_bottom">15dp</dimen>
 </resources>

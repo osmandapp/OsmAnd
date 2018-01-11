@@ -76,17 +76,17 @@ public class WptPtMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(),
 				wpt.getColor(ContextCompat.getColor(getMapActivity(), R.color.gpx_color_point)), false);
 	}
 
 	@Override
-	public Drawable getAdditionalLineTypeIcon() {
-		if (Algorithms.isEmpty(getAdditionalTypeStr())) {
+	public Drawable getSubtypeIcon() {
+		if (Algorithms.isEmpty(getSubtypeStr())) {
 			return null;
 		} else {
-			return getIcon(R.drawable.ic_action_group_name_16);
+			return getIcon(R.drawable.ic_action_group_name_16, isLight() ? R.color.icon_color : R.color.ctx_menu_bottom_view_icon_dark);
 		}
 	}
 
@@ -111,7 +111,7 @@ public class WptPtMenuController extends MenuController {
 	}
 
 	@Override
-	public String getAdditionalTypeStr() {
+	public String getSubtypeStr() {
 		return wpt.category != null ? wpt.category : "";
 	}
 
