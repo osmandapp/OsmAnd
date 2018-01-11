@@ -2793,7 +2793,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="import_track_desc">%1$s fitxategiak ez du bide-punturik, inportatu lorratz gisa?</string>
     <string name="move_point">Mugitu puntua</string>
     <string name="add_segment_to_the_track">Gehitu GPX lorratzera</string>
-<string name="map_orientation_change_in_accordance_with_speed">Maparen orientazioa abiaduraren arabera aldatzen da</string>
+<string name="map_orientation_change_in_accordance_with_speed">Maparen orientazioaren atalasea</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Erabili barne ipar-orratza eta ez mugimenduaren norabidea maparen orientazioa erabakitzeko abiadura txikia denean</string>
     <string name="all_markers_moved_to_history">Markatzaile guztiak historialera mugituta</string>
     <string name="marker_moved_to_history">Markatzailea historialera mugitu da</string>
@@ -2808,4 +2808,17 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="this_year">Aurten</string>
     <string name="widget">Trepeta</string>
     <string name="top_bar">Goiko barra</string>
+    <string name="what_is_here">Hemen dagoena:</string>
+    <string name="parked_at">aparkatzeko ordua</string>
+    <string name="pick_up_till">Jaso beranduenez</string>
+    <string name="without_time_limit">Denbora mugarik gabe</string>
+    <string name="context_menu_read_full_article">Irakurri artikulu osoa</string>
+    <string name="context_menu_read_article">Irakurri artikulua</string>
+    <string name="context_menu_points_of_group">Taldeko puntu guztiak</string>
+    <string name="open_from">Irekitze-ordua</string>
+    <string name="open_till">Ixte ordua</string>
+    <string name="will_close_at">Ixte-ordua</string>
+    <string name="will_open_at">Irekitze-ordua</string>
+    <string name="will_open_on">Irekitze-ordua</string>
+    <string name="additional_actions">Ekintza gehigarriak</string>
     </resources>

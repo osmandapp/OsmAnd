@@ -2675,7 +2675,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="add_new_folder">新しいフォルダーを追加</string>
     <string name="points_delete_multiple_succesful">ポイントは正常に削除されました。</string>
     <string name="points_delete_multiple">%1$d個のポイントを削除します。よろしいですか？</string>
-    <string name="track_points_category_name">このルートで重要な場所</string>
+    <string name="track_points_category_name">このルートで重要とされた地点(マーカー)一覧</string>
     <string name="gpx_track">経路</string>
     <string name="get_for_month">月額</string>
     <string name="favorite_group_name">グループ名</string>
@@ -2978,7 +2978,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_sort">並べ替え</string>
     <string name="coordinate_input">座標入力</string>
     <string name="is_saved">は、保存されました</string>
-    <string name="marker_save_as_track_descr">マーカーはあなたの指定した以下の場所に保存されます:</string>
+    <string name="marker_save_as_track_descr">マーカーは以下に指定したファイル名でエクスポートされます:</string>
     <string name="marker_save_as_track">経路を保存</string>
     <string name="move_to_history">履歴に移動</string>
     <string name="group_will_be_removed_after_restart">グループは再起動後に削除されます</string>
@@ -2988,7 +2988,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="descendingly">降順</string>
     <string name="ascendingly">昇順</string>
     <string name="date_added">作成日時</string>
-    <string name="order_by">並び順の変更</string>
+    <string name="order_by">並び順:</string>
     <string name="marker_show_distance_descr">マップ画面でマーカーへの方向と距離を示す方法を選択します:</string>
     <string name="do_not_use_animations">アニメーションを使用しない</string>
     <string name="do_not_use_animations_descr">アプリ内で使用される画面のアニメ効果を無効化します</string>
@@ -3006,7 +3006,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="this_year">今年</string>
     <string name="move_all_to_history">全て履歴に移動</string>
     <string name="show_direction">距離表示</string>
-    <string name="sort_by">並び順:</string>
+    <string name="sort_by">並び順の変更</string>
     <string name="keep_showing_on_map">マップ上に表示し続ける</string>
     <string name="exit_without_saving">保存せずに終了しますか？</string>
     <string name="line">線</string>
@@ -3089,10 +3089,17 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="by_date">日付別</string>
     <string name="by_type">種類別</string>
     <string name="digits_quantity">小数点以下の桁数</string>
-    <string name="coordinate_input_accuracy_description">小数点(.)以下 %1$d桁入力されたら次の入力項目へ自動的に移動します。</string>
+    <string name="coordinate_input_accuracy_description">小数点(.)以下[%1$d桁]入力されたら次の入力項目へ自動的に移動します。</string>
     <string name="go_to_next_field">次の入力項目へ移動</string>
     <string name="tap_on_map_to_hide_interface_descr">マップ画面のタップで操作ボタンやウィジェットの表示と交互に切り替えます。</string>
     <string name="tap_on_map_to_hide_interface">フルスクリーンモード</string>
     <string name="live_monitoring_max_interval_to_send">オンライン追跡用のバッファ指定</string>
     <string name="live_monitoring_max_interval_to_send_desrc">送信用現在地データをネット接続せずにどのくらいの時間記録するか、バッファを指定します</string>
+    <string name="release_3_0">• 停止標識の案内は運転方向を考慮するように変更
+\n
+\n • GPX経路に残す上昇下降値に有意かつ新しいアルゴリズムを採用
+\n
+\n • 地形(上り坂)を考慮した徒歩移動時間を算出するように改良(ネイスミスのルール／Naismith\'s ruleを適用)
+\n
+\n</string>
     </resources>

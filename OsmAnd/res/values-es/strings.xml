@@ -2784,7 +2784,7 @@ Por favor proporciona un código completo</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de ruta</string>
-    <string name="release_3_0">• La detección de señales de alto, ahora considera la dirección de desplazamiento 
+    <string name="release_3_0">• La detección de señales de stop ahora considera la dirección de desplazamiento 
 \n 
 \n • Nuevo algoritmo que proporciona valores significativos de ascenso y descenso para trazas GPX. 
 \n 
@@ -2812,11 +2812,11 @@ Por favor proporciona un código completo</string>
     <string name="context_menu_read_full_article">Leer el artículo completo</string>
     <string name="context_menu_read_article">Leer artículo</string>
     <string name="context_menu_points_of_group">Todos los puntos del grupo</string>
-    <string name="opened_from">Abierto desde las</string>
-    <string name="opened_till">Abierto hasta las</string>
-    <string name="will_be_closed_at">Cerrará a las</string>
-    <string name="will_be_opened_at">Abrirá a las</string>
-    <string name="will_be_opened_on">Abrirá sobre las</string>
+    <string name="open_from">Abierto desde las</string>
+    <string name="open_till">Abierto hasta las</string>
+    <string name="will_close_at">Cerrará a las</string>
+    <string name="will_open_at">Abrirá a las</string>
+    <string name="will_open_on">Abrirá sobre las</string>
     <string name="additional_actions">Acciones adicionales</string>
     <string name="av_locations_selected_desc">Archivo GPX con coordenadas y datos de las notas seleccionadas.</string>
     <string name="av_locations_all_desc">Archivo GPX con las coordenadas y los datos de todas las notas.</string>

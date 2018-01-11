@@ -2944,9 +2944,9 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
 \n
 \n</string>
     <string name="what_is_here">Što tut:</string>
-    <string name="parked_at">praparkavany na</string>
+    <string name="parked_at">pryparkavany na</string>
     <string name="pick_up_till">Uziać da</string>
-    <string name="without_time_limit">Biez abmiežavannia času</string>
+    <string name="without_time_limit">Biez abmiežavańnia času</string>
     <string name="context_menu_read_full_article">Čytać uvieś artykul</string>
     <string name="context_menu_read_article">Čytać artykul</string>
     <string name="context_menu_points_of_group">Usie kropki hrupy</string>
@@ -2955,7 +2955,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="will_be_closed_at">Budzie začyniena a</string>
     <string name="will_be_opened_at">Budzie adčyniena a</string>
     <string name="will_be_opened_on">Budzie adčyniena</string>
-    <string name="additional_actions">Dadatkovyja dziejanni</string>
+    <string name="additional_actions">Dadatkovyja dziejańni</string>
     <string name="av_locations_selected_desc">GPX-fajl z kaardynatami i danymi vybranych natatak.</string>
     <string name="av_locations_all_desc">GPX-fajl z kaardynatami i danymi ŭsich natatak.</string>
     <string name="shared_string_actions">Dziejanni</string>
@@ -2963,4 +2963,9 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="osm_recipient_stat">Zmien %1$s, suma %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-atrymaĺniki</string>
     <string name="total_donations">Usiaho achviaravanniaŭ</string>
-</resources>
+<string name="open_from">Adkryta z</string>
+    <string name="open_till">Adkryta da</string>
+    <string name="will_close_at">Zakryjecca a</string>
+    <string name="will_open_at">Adkryjecca a</string>
+    <string name="will_open_on">Adkryjecca</string>
+    </resources>

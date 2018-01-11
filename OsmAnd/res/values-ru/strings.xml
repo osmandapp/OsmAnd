@@ -1903,7 +1903,7 @@
     <string name="rendering_value__name">По умолчанию</string>
     <string name="rendering_value_highContrastRoads_name">Высокий контраст</string>
     <string name="storage_directory_default">Внутренняя память</string>
-    <string name="specified_directiory_not_writeable">Не возможно создать карты в указанном каталоге</string>
+    <string name="specified_directiory_not_writeable">Невозможно создать карты в указанном каталоге</string>
     <string name="copying_osmand_file_failed">Не удалось переместить файлы</string>
     <string name="storage_directory_external">Внешнее хранилище</string>
     <string name="storage_directory_multiuser">Многопользовательское хранилище</string>
@@ -2799,11 +2799,11 @@
     <string name="context_menu_read_full_article">Читать статью целиком</string>
     <string name="context_menu_read_article">Читать статью</string>
     <string name="context_menu_points_of_group">Все точки группы</string>
-    <string name="opened_from">Открыто с</string>
-    <string name="opened_till">Открыто до</string>
-    <string name="will_be_closed_at">Закроется в</string>
-    <string name="will_be_opened_at">Откроется в</string>
-    <string name="will_be_opened_on">Откроется</string>
+    <string name="open_from">Открыто с</string>
+    <string name="open_till">Открыто до</string>
+    <string name="will_close_at">Закроется в</string>
+    <string name="will_open_at">Откроется в</string>
+    <string name="will_open_on">Откроется</string>
     <string name="additional_actions">Дополнительные действия</string>
     <string name="shared_string_actions">Действия</string>
     <string name="shared_string_marker">Маркер</string>
