@@ -31,8 +31,13 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 
 	private boolean nightMode;
 	private boolean portrait;
+
 	private ContextMenuAdapter adapter;
 	private ContextMenuItemClickListener listener;
+
+	private View mainView;
+	private View scrollView;
+	private View cancelRowBgView;
 
 	public void setAdapter(ContextMenuAdapter adapter, ContextMenuItemClickListener listener) {
 		this.adapter = adapter;
@@ -47,19 +52,14 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 		portrait = AndroidUiHelper.isOrientationPortrait(activity);
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
-		View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_context_menu_actions_bottom_sheet_dialog, null);
-		View scrollView = mainView.findViewById(R.id.bottom_sheet_scroll_view);
+		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_context_menu_actions_bottom_sheet_dialog, null);
+		scrollView = mainView.findViewById(R.id.bottom_sheet_scroll_view);
+		cancelRowBgView = mainView.findViewById(R.id.cancel_row_background);
 
-//		AndroidUtils.setBackground(getActivity(), mainView, nightMode,
-//				portrait ? R.drawable.bg_bottom_menu_light : R.drawable.bg_bottom_sheet_topsides_landscape_light,
-//				portrait ? R.drawable.bg_bottom_menu_dark : R.drawable.bg_bottom_sheet_topsides_landscape_dark);
-
-		AndroidUtils.setBackground(activity, scrollView, nightMode,
-				R.color.route_info_bottom_view_bg_light, R.color.route_info_bg_dark);
-		AndroidUtils.setBackground(activity, mainView.findViewById(R.id.cancel_row), nightMode,
-				R.color.route_info_bottom_view_bg_light, R.color.route_info_bg_dark);
-		AndroidUtils.setBackground(activity, mainView.findViewById(R.id.divider), nightMode,
-				R.color.route_info_divider_light, R.color.route_info_bottom_view_bg_dark);
+		updateBackground(false);
+		cancelRowBgView.setBackgroundResource(getCancelRowBgResId());
+		mainView.findViewById(R.id.divider).setBackgroundResource(nightMode
+				? R.color.route_info_bottom_view_bg_dark : R.color.route_info_divider_light);
 
 		View.OnClickListener dismissOnClickListener = new View.OnClickListener() {
 			@Override
@@ -116,6 +116,8 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 			public void onStateChanged(@NonNull View bottomSheet, int newState) {
 				if (newState == ExtendedBottomSheetBehavior.STATE_HIDDEN) {
 					dismiss();
+				} else {
+					updateBackground(newState == ExtendedBottomSheetBehavior.STATE_EXPANDED);
 				}
 			}
 
@@ -142,6 +144,36 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
 		return getMyApplication().getIconsCache().getIcon(id, nightMode ? R.color.grid_menu_icon_dark : R.color.on_map_icon_color);
+	}
+
+	private int getCancelRowBgResId() {
+		if (portrait) {
+			return nightMode ? R.color.ctx_menu_bg_dark : R.color.route_info_bottom_view_bg_light;
+		}
+		return nightMode ? R.drawable.bg_additional_menu_sides_dark : R.drawable.bg_additional_menu_sides_light;
+	}
+
+	private boolean expandedToFullScreen() {
+		Activity ctx = getActivity();
+		int availableH = AndroidUtils.getScreenHeight(ctx) - AndroidUtils.getStatusBarHeight(ctx);
+		if (portrait) {
+			availableH -= AndroidUtils.getNavBarHeight(ctx);
+		}
+		return availableH - scrollView.getHeight() - cancelRowBgView.getHeight() <= 0;
+	}
+
+	private void updateBackground(boolean expanded) {
+		int bgResId;
+		if (portrait) {
+			bgResId = expanded && expandedToFullScreen()
+					? (nightMode ? R.color.ctx_menu_bg_dark : R.color.route_info_bottom_view_bg_light)
+					: (nightMode ? R.drawable.bg_additional_menu_dark : R.drawable.bg_additional_menu_light);
+		} else {
+			bgResId = expanded && expandedToFullScreen()
+					? (nightMode ? R.drawable.bg_additional_menu_sides_dark : R.drawable.bg_additional_menu_sides_light)
+					: (nightMode ? R.drawable.bg_additional_menu_topsides_dark : R.drawable.bg_additional_menu_topsides_light);
+		}
+		scrollView.setBackgroundResource(bgResId);
 	}
 
 	private int getMenuItemContainerId(int itemsAdded) {
