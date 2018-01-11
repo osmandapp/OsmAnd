@@ -2960,7 +2960,7 @@
 	<string name="poi_payment_bancomat_yes">Bancomat</string>
 	<string name="poi_payment_bancomat_no">Ekki tekið við Bancomat</string>
 	<string name="poi_payment_icsf_yes">IC-miðakort</string>
-	<string name="poi_payment_icsf_no">Ekki tekið við IC Stored Fare kortum</string>
+	<string name="poi_payment_icsf_no">Ekki tekið við IC-miðakortum (Stored Fare)</string>
 	<string name="poi_payment_prepaid_ticket_yes">Fyrirframgreiddir miðar</string>
 	<string name="poi_payment_jcb_yes">JCB</string>
 	<string name="poi_payment_jcb_no">Ekki tekið við JCB-kortum</string>
@@ -3188,4 +3188,10 @@
 	<string name="poi_reservation_no">Panta fyrirfram: nei</string>
 	<string name="poi_reservation_members_only">Panta fyrirfram: einungis meðlimir</string>
 
+	<string name="poi_route_subway_ref">Neðanjarðarlest</string>
+
+	<string name="poi_consulting">Ráðgjafarskrifstofa</string>
+	<string name="poi_publisher">Útgáfuskrifstofa</string>
+
+	<string name="poi_fuel_autogas">Autogas</string>
 	</resources>
