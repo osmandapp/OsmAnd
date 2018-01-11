@@ -5,6 +5,7 @@ public class OSMSettings {
 	public enum OSMTagKey {
 		NAME("name"), //$NON-NLS-1$
 		NAME_EN("name:en"), //$NON-NLS-1$
+		LOCK_NAME("lock_name"), //$NON-NLS-1$
 		
 		// ways
 		HIGHWAY("highway"), //$NON-NLS-1$
