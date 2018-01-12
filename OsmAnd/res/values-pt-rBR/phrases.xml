@@ -269,7 +269,7 @@
 	<string name="poi_water_works">Estação de tratamento de água</string>
 	<string name="poi_boatyard">Estaleiro</string>
 	<string name="poi_wastewater_plant">Estação de tratamento de esgoto</string>
-	<string name="poi_water_tower">Castelo d\'água</string>
+	<string name="poi_water_tower">Reservatório elevado</string>
 	<string name="poi_lock_gate">Comporta de eclusa</string>
 	<string name="poi_telephone">Telefone público</string>
 	<string name="poi_waterway_turning_point">Balão de retorno aquático</string>
@@ -617,7 +617,7 @@
 	<string name="poi_water_park">Parque aquático</string>
 	<string name="poi_park">Parque/praça</string>
 	<string name="poi_recreation_ground">Área de recreação</string>
-	<string name="poi_village_green">Vila verde</string>
+	<string name="poi_village_green">Área verde</string>
 	<string name="poi_cafe">Cafeteria</string>
 	<string name="poi_biergarten">Biergarten</string>
 	<string name="poi_restaurant">Restaurante</string>
@@ -3589,5 +3589,16 @@
 	<string name="poi_operational_status_restricted">Restrito</string>
 	<string name="poi_operational_status_broken">Quebrado</string>
 	<string name="poi_operational_status_needs_maintenance">Precisa de manutenção</string>
+
+	<string name="poi_winter_room_yes">Refúgio de inverno: sim</string>
+	<string name="poi_winter_room_no">Refúgio de inverno: não</string>
+	<string name="poi_boat_pedalboat_rental_yes">Pedalinhos: sim</string>
+	<string name="poi_boat_pedalboat_rental_no">Pedalinhos: não</string>
+	<string name="poi_boat_jetski_rental_yes">Jetskis: sim</string>
+	<string name="poi_boat_jetski_rental_no">Jetskis: não</string>
+	<string name="poi_boat_kayak_rental_rental_yes">Caiaques: sim</string>
+	<string name="poi_boat_kayak_rental_rental_no">Caiaques: não</string>
+	<string name="poi_boat_canoe_rental_rental_yes">Canoa: sim</string>
+	<string name="poi_boat_canoe_rental_rental_no">Canoa: não</string>
 
 	</resources>
