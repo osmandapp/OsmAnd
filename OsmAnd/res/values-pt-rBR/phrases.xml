@@ -3601,4 +3601,13 @@
 	<string name="poi_boat_canoe_rental_rental_yes">Canoa: sim</string>
 	<string name="poi_boat_canoe_rental_rental_no">Canoa: não</string>
 
+	<string name="poi_boat_motorboat_rental_yes">Lanchas: sim</string>
+	<string name="poi_boat_motorboat_rental_no">Lanchas: não</string>
+	<string name="poi_boat_houseboat_rental_yes">Casas-barco: sim</string>
+	<string name="poi_boat_houseboat_rental_no">Casas-barco: não</string>
+	<string name="poi_boat_sailboat_rental_yes">Veleiros: sim</string>
+	<string name="poi_boat_sailboat_rental_no">Veleiros: não</string>
+	<string name="poi_gorge">Desfiladeiro</string>
+	<string name="poi_mountain_area">Área montanhosa</string>
+
 	</resources>
