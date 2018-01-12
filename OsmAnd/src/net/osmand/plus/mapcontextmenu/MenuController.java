@@ -1,7 +1,9 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.AsyncTask;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.aidl.maplayer.point.AMapPoint;
@@ -573,18 +576,39 @@ public abstract class MenuController extends BaseMenuController {
 			int resId = left ? leftIconId : rightIconId;
 			if (resId != 0) {
 				if (needColorizeIcon) {
-					return getIcon(resId, getColorRes());
+					return enabled ? getNormalIcon(resId) : getDisabledIcon(resId);
 				}
 				return ContextCompat.getDrawable(getMapActivity(), resId);
 			}
 			return null;
 		}
 
-		private int getColorRes() {
-			if (enabled) {
-				return isLight() ? R.color.map_widget_blue : R.color.osmand_orange;
+		public void updateStateListDrawableIcon(@DrawableRes int resId, boolean left) {
+			if (left) {
+				leftIcon = enabled ? getStateListDrawable(resId) : null;
+				leftIconId = enabled ? 0 : resId;
+			} else {
+				rightIcon = enabled ? getStateListDrawable(resId) : null;
+				rightIconId = enabled ? 0 : resId;
 			}
-			return isLight() ? R.color.ctx_menu_controller_disabled_text_color_light : R.color.ctx_menu_controller_disabled_text_color_dark;
+		}
+
+		private Drawable getDisabledIcon(@DrawableRes int iconResId) {
+			return getIcon(iconResId, isLight() ? R.color.ctx_menu_controller_disabled_text_color_light
+					: R.color.ctx_menu_controller_disabled_text_color_dark);
+		}
+
+		private Drawable getNormalIcon(@DrawableRes int iconResId) {
+			return getIcon(iconResId, isLight() ? R.color.map_widget_blue : R.color.osmand_orange);
+		}
+
+		private Drawable getPressedIcon(@DrawableRes int iconResId) {
+			return getIcon(iconResId, isLight() ? R.color.ctx_menu_controller_button_text_color_light_p
+					: R.color.ctx_menu_controller_button_text_color_dark_p);
+		}
+
+		private StateListDrawable getStateListDrawable(@DrawableRes int iconResId) {
+			return AndroidUtils.createStateListDrawable(getNormalIcon(iconResId), getPressedIcon(iconResId));
 		}
 
 		public abstract void buttonPressed();

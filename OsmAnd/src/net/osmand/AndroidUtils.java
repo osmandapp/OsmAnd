@@ -138,17 +138,14 @@ public class AndroidUtils {
 	public static StateListDrawable createStateListDrawable(Context ctx, boolean night,
 															@DrawableRes int lightNormal, @DrawableRes int lightPressed,
 															@DrawableRes int darkNormal, @DrawableRes int darkPressed) {
-		return createStateListDrawable(night,
-				ContextCompat.getDrawable(ctx, lightNormal), ContextCompat.getDrawable(ctx, lightPressed),
-				ContextCompat.getDrawable(ctx, darkNormal), ContextCompat.getDrawable(ctx, darkPressed));
+		return createStateListDrawable(ContextCompat.getDrawable(ctx, night ? darkNormal : lightNormal),
+				ContextCompat.getDrawable(ctx, night ? darkPressed : lightPressed));
 	}
 
-	public static StateListDrawable createStateListDrawable(boolean night,
-															Drawable lightNormal, Drawable lightPressed,
-															Drawable darkNormal, Drawable darkPressed) {
+	public static StateListDrawable createStateListDrawable(Drawable normal, Drawable pressed) {
 		StateListDrawable res = new StateListDrawable();
-		res.addState(new int[]{android.R.attr.state_pressed}, night ? darkPressed : lightPressed);
-		res.addState(new int[]{}, night ? darkNormal : lightNormal);
+		res.addState(new int[]{android.R.attr.state_pressed}, pressed);
+		res.addState(new int[]{}, normal);
 		return res;
 	}
 
