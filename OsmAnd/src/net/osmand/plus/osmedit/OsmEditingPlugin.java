@@ -445,6 +445,19 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
+	public static String getCategory(OsmPoint osmPoint, Context context) {
+		String category = "";
+		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
+			category = ((OpenstreetmapPoint) osmPoint).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+			if (Algorithms.isEmpty(category)) {
+				category = context.getString(R.string.shared_string_without_name);
+			}
+		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
+			category = context.getString(R.string.osn_bug_name);
+		}
+		return category;
+	}
+
 	public static String getPrefix(OsmPoint osmPoint) {
 		return (osmPoint.getGroup() == OsmPoint.Group.POI ? "POI" : "Bug") + " id: " + osmPoint.getId() + " ";
 	}
