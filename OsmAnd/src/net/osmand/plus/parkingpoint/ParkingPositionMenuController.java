@@ -1,7 +1,6 @@
 package net.osmand.plus.parkingpoint;
 
 import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
@@ -32,7 +31,7 @@ public class ParkingPositionMenuController extends MenuController {
 			}
 		};
 		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
-		leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+		leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
 	}
 
 	private void buildParkingDescription(MapActivity mapActivity) {
