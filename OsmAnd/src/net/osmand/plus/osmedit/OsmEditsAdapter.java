@@ -301,11 +301,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 	}
 
 	private String getCategory(OsmPoint point) {
-		String category = "";
-		if (point.getGroup() == OsmPoint.Group.POI) {
-			category = ((OpenstreetmapPoint) point).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
-		}
-		return category;
+		return OsmEditingPlugin.getCategory(point, getContext());
 	}
 
 	private String getDescription(OsmPoint point) {
@@ -322,19 +318,11 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 
 		String category = getCategory(point);
 
-		String comment = "";
-		if (point.getGroup() == OsmPoint.Group.BUG) {
-			comment = getContext().getString(R.string.osn_bug_name);
-		}
-
 		String prefix = OsmEditingPlugin.getPrefix(point);
 
 		String description = "";
 		if (!Algorithms.isEmpty(action)) {
 			description += action + " • ";
-		}
-		if (!Algorithms.isEmpty(comment)) {
-			description += comment + " • ";
 		}
 		if (!Algorithms.isEmpty(category)) {
 			description += category + " • ";

@@ -196,12 +196,6 @@ public class EditPOIMenuController extends MenuController {
 	}
 
 	private String getCategory() {
-		String category = "";
-		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
-			category = ((OpenstreetmapPoint) osmPoint).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
-		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
-			category = getMapActivity().getString(R.string.osn_bug_name);
-		}
-		return category;
+		return OsmEditingPlugin.getCategory(osmPoint, getMapActivity());
 	}
 }
