@@ -2997,7 +2997,7 @@
     <string name="open_till">ساعت کاری تا</string>
     <string name="will_close_at">ساعت تعطیل‌کردن</string>
     <string name="will_open_at">ساعت بازکردن</string>
-    <string name="will_open_on">روز بازکردن</string>
+    <string name="will_open_on">زمان بازشدن</string>
     <string name="additional_actions">عملیات بیشتر</string>
     <string name="av_locations_selected_desc">فایل GPX با مختصات و داده‌های یادداشت‌هایی که انتخاب شده است.</string>
     <string name="av_locations_all_desc">فایل GPX با مختصات و داده‌های یادداشت‌هایی که انتخاب شده است.</string>
