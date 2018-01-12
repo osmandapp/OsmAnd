@@ -1824,7 +1824,7 @@
 	<string name="poi_car_repair">Bílaviðgerðir</string>
 	<string name="poi_vehicle_inspection">Bifreiðaskoðun</string>
 	<string name="poi_fuel_gtl_diesel">GTL-dísel</string>
-	<string name="poi_fuel_hgv_diesel">HGV-dísel</string>
+	<string name="poi_fuel_hgv_diesel">Þyngri vöruflutningabifreiðar (HGV) dísel</string>
 	<string name="poi_fuel_lpg">LPG</string>
 	<string name="poi_fuel_cng">CNG</string>
 	<string name="poi_fuel_svo">SVO</string>
@@ -1872,7 +1872,7 @@
 
 	<string name="poi_toll_yes">Gjaldskylda</string>
 	<string name="poi_toll_no">Ekkert gjald</string>
-	<string name="poi_toll_hgv_yes">HGV-tollur</string>
+	<string name="poi_toll_hgv_yes">Tollur þyngri vöruflutningabifreiða (HGV)</string>
 	<string name="poi_rescue_station">Björgunarstöð</string>
 
 	<string name="poi_piste_difficulty_easy">Auðvelt</string>
@@ -2874,7 +2874,7 @@
 	<string name="poi_direction_down">Stefna: niður</string>
 	<string name="poi_direction_entrance">Stefna: inngangur</string>
 	<string name="poi_direction_exit">Stefna: útgangur</string>
-	<string name="poi_direction_all">Stefna: allt</string>
+	<string name="poi_direction_all">Stefna: allar</string>
 
 	<string name="poi_beds">Rúm</string>
 
@@ -3075,14 +3075,14 @@
 	<string name="poi_socket_tesla_roadster_current">Rafmagnsinnstunga: Tesla Roadster: straumur</string>
 	<string name="poi_socket_tesla_roadster_output">Rafmagnsinnstunga: Tesla Roadster: úttak</string>
 	<string name="poi_socket_nema_5_15">Rafmagnsinnstunga: NEMA 5-15R</string>
-	<string name="poi_car_yes">Bíll: já</string>
-	<string name="poi_car_no">Bíll: nei</string>
+	<string name="poi_car_yes">Bílar: já</string>
+	<string name="poi_car_no">Bílar: nei</string>
 	<string name="poi_bicycle_yes">Reiðhjól: já</string>
 	<string name="poi_bicycle_no">Reiðhjól: nei</string>
-	<string name="poi_scooter_yes">Skellinaðra: já</string>
-	<string name="poi_scooter_no">Skellinaðra: nei</string>
-	<string name="poi_truck_yes">Flutningabifreið: já</string>
-	<string name="poi_truck_no">Flutningabifreið: nei</string>
+	<string name="poi_scooter_yes">Skellinöðrur: já</string>
+	<string name="poi_scooter_no">Skellinöðrur: nei</string>
+	<string name="poi_truck_yes">Flutningabifreiðir: já</string>
+	<string name="poi_truck_no">Flutningabifreiðir: nei</string>
 
 	<string name="poi_parking_fee_yes">Bílastæðagjöld: já</string>
 	<string name="poi_parking_fee_no">Bílastæðagjöld: nei</string>
@@ -3194,4 +3194,83 @@
 	<string name="poi_publisher">Útgáfuskrifstofa</string>
 
 	<string name="poi_fuel_autogas">Autogas</string>
+	<string name="poi_shoes_orthopedic">Bæklunarskurðlækningar</string>
+
+	<string name="poi_bridge_ref">Tilvísun brúar</string>
+	<string name="poi_tunnel_ref">Tilvísun ganga</string>
+
+	<string name="poi_ref">Tilv.</string>
+
+	<string name="poi_cargo_hgv">Þyngri vöruflutningabifreiðar</string>
+
+	<string name="poi_health_specialty_child_psychiatry_yes">Barnageðlækningar</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Taugaskurðlækningar</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Taugasálfræði</string>
+	<string name="poi_health_specialty_tropical_medicine_no">Heilsutengt sérsvið: hitabeltissjúkdómar: nei</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Íþróttalækningar</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Geðlækningar fullorðinna</string>
+	<string name="poi_karting">Kart</string>
+	<string name="poi_health_person_type_podologist">Hlutverk heilbrigðisstarfsmanns: fótaaðgerðafræðingur</string>
+	<string name="poi_office_physician">Skrifstofa læknis</string>
+	<string name="poi_office_podologist">Skrifstofa fótaaðgerðafræðings</string>
+	<string name="poi_office_psychologist">Skrifstofa sálfræðings</string>
+	<string name="poi_office_midwife">Skrifstofa ljósmóður</string>
+
+	<string name="poi_fire_hydrant_diameter">Þvermál brunahana</string>
+	<string name="poi_fire_hydrant_pressure">Þrýstingur brunahana</string>
+	<string name="poi_fire_hydrant_count">Fjöldi brunahana</string>
+	<string name="poi_fire_hydrant_flow_capacity">Afkastageta brunahana</string>
+	<string name="poi_fire_hydrant_style_wsh">Gerð brunahana: wsh</string>
+	<string name="poi_military_checkpoint">Varðstöð</string>
+
+	<string name="poi_spoil_heap">Losunarhaugur</string>
+	
+	<string name="poi_recreation_center">Leikjamiðstöð</string>
+
+	<string name="poi_payment_troika_yes">Troika</string>
+	<string name="poi_payment_troika_no">Ekki tekið við Troika-kortum</string>
+
+	<string name="poi_mdf">Aðaltengivirki</string>
+	<string name="poi_lighting">Ljósafestingar</string>
+	<string name="poi_energy_supplier">Skrifstofa orkusala</string>
+
+	<string name="poi_electronics_repair_computer">Raftækjaviðgerðir: tölvur</string>
+	<string name="poi_electronics_repair_appliance">Raftækjaviðgerðir: almenn raftæki</string>
+	<string name="poi_electronics_repair_phone">Raftækjaviðgerðir: símar</string>
+	<string name="poi_electronics_repair_tv">Raftækjaviðgerðir: sjónvörp</string>
+
+	<string name="poi_resort_kids_camp">Krakkabúðir</string>
+	<string name="poi_life_ring">Björgunarhringur</string>
+
+	<string name="poi_zoo_petting_zoo">Barnadýragarður</string>
+	<string name="poi_zoo_wildlife_park">Opinn dýragarður</string>
+	<string name="poi_zoo_enclosure">Í búrum</string>
+	<string name="poi_zoo_safari_park">Safarígarður</string>
+	<string name="poi_motorcycle_clothes_yes">Mótorhjólafatnaður</string>
+	<string name="poi_motorcycle_clothes_no">Mótorhjólafatnaður: nei</string>
+	<string name="poi_motorcycle_type_scooter">Skellinöðrur</string>
+	<string name="poi_motorcycle_type_sportbike">Sporthjól (racer)</string>
+	<string name="poi_motorcycle_type_chopper">Þjóðvegahjól (chopper)</string>
+	<string name="poi_motorcycle_type_offroad">Torfæruhjól</string>
+	<string name="poi_motorcycle_type_dualsport">Enduro-hjól</string>
+	<string name="poi_animal_shelter_purpose_adoption_yes">Hægt að taka í fóstur: já</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Hægt að taka í fóstur: nei</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Sleppingar: já</string>
+	<string name="poi_animal_shelter_purpose_release_no">Sleppingar: nei</string>
+
+	<string name="poi_spaceport">Geimflaugastöð</string>
+
+	<string name="poi_winter_room_yes">Vetrargarður: já</string>
+	<string name="poi_winter_room_no">Vetrargarður: nei</string>
+	<string name="poi_surface_decoturf">DecoTurf gervigras</string>
+	<string name="poi_water_place_durability_durable">Ending vatnsbóls: varanleg</string>
+	<string name="poi_water_place_durability_emergency">Ending vatnsbóls: í neyðartilfellum</string>
+
+	<string name="poi_water_purification_aquatabs">Hreinsitöflur</string>
+
+	<string name="poi_water_supply_water_trucking">Vatn með tankbílum</string>
+	<string name="poi_water_place_access_multifamilies">Fyrir margar fjölskyldur</string>
+
+	<string name="poi_map_type_toposcope">Tegund korts: skýringakort (toposcope)</string>
+	<string name="poi_map_size_site">Tegund korts: staðarkort</string>
 	</resources>
