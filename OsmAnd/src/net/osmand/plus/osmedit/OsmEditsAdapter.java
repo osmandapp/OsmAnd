@@ -300,8 +300,17 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 		return true;
 	}
 
-	private String getCategory(OsmPoint point) {
-		return OsmEditingPlugin.getCategory(point, getContext());
+	private String getCategory(OsmPoint osmPoint) {
+		String category = "";
+		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
+			category = ((OpenstreetmapPoint) osmPoint).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+			if (Algorithms.isEmpty(category)) {
+				category = getContext().getString(R.string.shared_string_without_name);
+			}
+		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
+			category = getContext().getString(R.string.osn_bug_name);
+		}
+		return category;
 	}
 
 	private String getDescription(OsmPoint point) {
