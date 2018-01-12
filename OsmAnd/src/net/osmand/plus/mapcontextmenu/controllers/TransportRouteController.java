@@ -58,7 +58,7 @@ public class TransportRouteController extends MenuController {
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_previous);
-		leftTitleButtonController.leftIconId = R.drawable.ic_arrow_back;
+		updateLeftTitleButtonIcon();
 
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
@@ -70,7 +70,7 @@ public class TransportRouteController extends MenuController {
 			}
 		};
 		rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_next);
-		rightTitleButtonController.rightIconId = R.drawable.ic_arrow_forward;
+		updateRightTitleButtonIcon();
 	}
 
 	@Override
@@ -144,6 +144,14 @@ public class TransportRouteController extends MenuController {
 		resetRoute();
 	}
 
+	private void updateLeftTitleButtonIcon() {
+		leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_arrow_back, true);
+	}
+
+	private void updateRightTitleButtonIcon() {
+		rightTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_arrow_forward, false);
+	}
+
 	public void onAcquireNewController(PointDescription pointDescription, Object object) {
 		if (object instanceof TransportRouteStop) {
 			resetRoute();
@@ -151,19 +159,17 @@ public class TransportRouteController extends MenuController {
 	}
 
 	private void updateControllers() {
-		boolean previousStopEnabled = false;
-		final int previousStop = getPreviousStop();
-		if (previousStop != -1) {
-			previousStopEnabled = true;
+		boolean previousStopEnabled = getPreviousStop() != -1;
+		if (leftTitleButtonController.enabled != previousStopEnabled) {
+			leftTitleButtonController.enabled = previousStopEnabled;
+			updateLeftTitleButtonIcon();
 		}
-		leftTitleButtonController.enabled = previousStopEnabled;
 
-		boolean nextStopEnabled = false;
-		final int nextStop = getNextStop();
-		if (nextStop != -1) {
-			nextStopEnabled = true;
+		boolean nextStopEnabled = getNextStop() != -1;
+		if (rightTitleButtonController.enabled != nextStopEnabled) {
+			rightTitleButtonController.enabled = nextStopEnabled;
+			updateRightTitleButtonIcon();
 		}
-		rightTitleButtonController.enabled = nextStopEnabled;
 	}
 
 	private void showTransportStop(TransportStop stop) {
