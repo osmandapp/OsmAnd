@@ -1247,7 +1247,7 @@ Sólsetur: %2$s</string>
     <string name="map_widget_fluorescent">Flúrlýstar leiðir</string>
     <string name="osmand_parking_position_name">Bílastæði</string>
     <string name="context_menu_item_add_parking_point">Merkja sem bílastæði</string>
-    <string name="context_menu_item_delete_parking_point">Eyða merki fyrir bílastæði</string>
+    <string name="context_menu_item_delete_parking_point">Eyða kortamerki fyrir bílastæði</string>
     <string name="route_roundabout">Hringtorg: Beygðu útaf við %1$d afrein og haltu áfram</string>
     <string name="route_kl">Vertu til vinstri og haltu áfram</string>
     <string name="route_kr">Vertu til hægri og haltu áfram</string>
@@ -1322,8 +1322,8 @@ og leiðsögn</string>
     <string name="osmand_parking_event">Ná í bíl af bílastæði</string>
     <string name="osmand_parking_warning_text">Aðvörun um að ná í bílinn þinn var sett inn í dagatalið þitt. Hún mun vera þar þangað til þú eyðir henni handvirkt.</string>
     <string name="osmand_parking_time_limit_title">Stilltu tímatakmörkun bílastæðis</string>
-    <string name="osmand_parking_delete_confirm">Viltu eyða merkinu fyrir staðsetningu bílastæðis?</string>
-    <string name="osmand_parking_delete">Eyða merki fyrir bílastæði</string>
+    <string name="osmand_parking_delete_confirm">Viltu eyða kortamerkinu fyrir staðsetningu bílastæðis?</string>
+    <string name="osmand_parking_delete">Eyða kortamerki fyrir bílastæði</string>
     <string name="osmand_parking_choose_type">Veldu gerð bílastæðis</string>
     <string name="osmand_parking_lim_text">Með tímamörkum</string>
     <string name="osmand_parking_no_lim_text">Ótakmarkaður tími</string>
@@ -1470,7 +1470,7 @@ og leiðsögn</string>
     <string name="shared_string_add_to_map_markers">Bæta í kortamerki</string>
     <string name="select_map_markers">Veldu kortamerki</string>
     <string name="show_map_markers_description">Virkja kortamerkjaeiginleikann.</string>
-    <string name="clear_active_markers_q">Viltu fjarlægja öll virk merki?</string>
+    <string name="clear_active_markers_q">Viltu fjarlægja öll virk kortamerki?</string>
     <string name="clear_markers_history_q">Viltu í alvörunni hreinsa breytingaskrána fyrir kortamerki?</string>
     <string name="active_markers">Virk kortamerki</string>
     <string name="consider_turning_polygons_off">Það er ráðlagt að slökkva á myndgerð marghyrninga.</string>
@@ -2244,7 +2244,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="plugin_mapillary_descr">Götumyndir fyrir alla. Uppgötvaðu staði, útvíkkaðu heiminn og vertu með í samstarfinu.</string>
     <string name="hillshade_menu_download_descr">Til að sjá hæðarskyggingar á kortinu, þarftu að sækja hæðaskyggingakortið af þessu svæði.</string>
     <string name="hillshade_purchase_header">Til að sjá hæðarskyggingar á kortinu, þarftu að kaupa og setja inn hæðaskyggingaviðbótina</string>
-    <string name="srtm_menu_download_descr">Til að sjá hæðarlínur á kortinu, þarftu að sækja hæðarlínukortið af þessu svæði..</string>
+    <string name="srtm_menu_download_descr">Til að sjá hæðarlínur á kortinu, þarftu að sækja hæðarlínukortið af þessu svæði.</string>
     <string name="srtm_purchase_header">Til að sjá hæðarlínur á kortinu, þarftu að kaupa og setja inn hæðarlínuviðbótina</string>
     <string name="show_from_zoom_level">Birta frá aðdráttarstigi</string>
     <string name="subscribe_email_desc">Gerstu áskrifandi að póstlistanum um forritaafslætti og fáðu ókeypis 3 niðurhöl á kortum til viðbótar!</string>
@@ -2290,7 +2290,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="add_group">Bæta við hópi</string>
     <string name="empty_state_markers_active">Búa til kortamerki!</string>
     <string name="empty_state_markers_groups">Flytja inn hópa</string>
-    <string name="empty_state_markers_history_desc">Merki sem farið hefur verið hjá munu birtast á þessum skjá.</string>
+    <string name="empty_state_markers_history_desc">Kortamerki sem farið hefur verið hjá munu birtast á þessum skjá.</string>
     <string name="shared_string_two">Tvö</string>
     <string name="shared_string_one">Eitt</string>
     <string name="digits_quantity">Fjöldi fastra aukastafa</string>
@@ -2336,7 +2336,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="plan_route">Skipuleggja leið</string>
     <string name="coordinate_input">Innsett hnit</string>
     <string name="is_saved">eru vistuð</string>
-    <string name="marker_save_as_track_descr">Flytja merkin þín út í skrá sem þú getur tilgreint hér:</string>
+    <string name="marker_save_as_track_descr">Flyttu kortamerkin þín út í skrá sem þú getur tilgreint hér:</string>
     <string name="marker_save_as_track">Vista sem feril</string>
     <string name="move_to_history">Flytja í aðgerðaferil</string>
     <string name="group_will_be_removed_after_restart">Hópur verður fjarlægður eftir að forritið hefur verið endurræst.</string>
@@ -2463,7 +2463,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="additional_actions">Aðrar aðgerðir</string>
     <string name="modify_the_search_query">Breyta leitarorðum.</string>
     <string name="shared_string_actions">Aðgerðir</string>
-    <string name="shared_string_marker">Merking</string>
+    <string name="shared_string_marker">Kortamerki</string>
     <string name="plan_route_no_markers_toast">Þú verður að bæta við a.m.k. einni merkingu til að geta notað þessa aðgerð.</string>
     <string name="osm_recipient_stat">Breytingar %1$s, upphæð %2$s mBTC</string>
     <string name="rec_split_clip_length_desc">Efri tímamörk fyrir upptökur myndskeiða.</string>
@@ -2472,10 +2472,10 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \nHvert þessara korta má nota sem aðalkort (grunnkort) til birtingar á kortaskjá OsmAnd, eða sem yfir- eða undirlag á öðru grunnkorti (eins og stöðluðu ónettengdu OsmAnd kortunum). Til að gera undirlagskort sýnilegri, er einfalt að fela eftir þörfum ýmis einindi OsmAnd vigurkortanna með því að fara í valmyndina \'Stilla kort\'. 
 \n
 \nTígluð kort er hægt að sækja beint frá gagnagjöfum á netinu, en einnig er hægt að undirbúa þau fyrir ónettengda notkun (og afrita síðan handvirkt í gagnamöppu OsmAnd) sem SQLite-gagnagrunn, sem er hægt að útbúa í fjölmörgum utanaðkomandi kortaumsýslutólum.</string>
-    <string name="osmand_srtm_long_description_1000_chars">Þessi viðbót kemur með bæði yfirlag fyrir hæðarínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins. 
+    <string name="osmand_srtm_long_description_1000_chars">Þessi viðbót kemur með bæði yfirlag fyrir hæðarlínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins. 
 \n
 \nAlmennt byggjast þessi gögn (milli 70 breiddargráðu norður og 70 breiddargráðu suður) á mælingum frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), og frá myndgreiningartækjum um borð í Terra, aðalgervihnetti Earth Observing System hjá NASA. ASTER er samvinnuverkefni NASA, Ráðuneytis efnahags, viðskipta og iðnaðar í Japan (METI), og Japan Space Systems (J-spacesystems).</string>
-    <string name="srtm_plugin_description">Þessi viðbót kemur með bæði yfirlag fyrir hæðarínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins. (Taktu efti því að hæðarlínu- og skyggingargögnin eru aðskildir pakkar sem þarf að sækja eftir að viðbótin hefur verið gerð virk.) 
+    <string name="srtm_plugin_description">Þessi viðbót kemur með bæði yfirlag fyrir hæðarlínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins. (Taktu eftir því að hæðarlínu- og skyggingargögnin eru aðskildir pakkar sem þarf að sækja eftir að viðbótin hefur verið gerð virk.) 
 \n
 \nAlmennt byggjast þessi gögn (milli 70 breiddargráðu norður og 70 breiddargráðu suður) á mælingum frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), og frá myndgreiningartækjum um borð í Terra, aðalgervihnetti Earth Observing System hjá NASA. ASTER er samvinnuverkefni NASA, Ráðuneytis efnahags, viðskipta og iðnaðar í Japan (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="plugin_nautical_descr">Þessi viðbót bætir eiginleikum inn í landakort OsmAnd og leiðsagnarforritið þannig að úr verði sjókort til skemmtisiglinga, fyrir seglbáta og fleiri tegundir vatnaíþrótta. 
@@ -2538,4 +2538,17 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \n * Ýta og halda á punkt til að skoða og bæta við lýsingu.
 \n * Bankaðu á mælingamerkið til að sjá fleiri aðgerðir.</string>
     <string name="non_optimal_route_calculation">Reikna leiðir yfir langar fjarlægðir sem hugsanlega eru ekki þær bestu</string>
+    <string name="av_locations_selected_desc">GPX-skrá með hnitum og gögnum valinna minnispunkta</string>
+    <string name="av_locations_all_desc">GPX-skrá með hnitum og gögnum allra minnispunkta</string>
+    <string name="release_3_0">\\022 Greining á stöðvunarmerkjum er núna einnig notuð til ákvörðunar akstursstefnu
+\n
+\n • Nýtt reiknirit gefur nothæfari upplýsingar um hækkun/lækkun í GPX-ferlum
+\n
+\n • Göngutímar taka núna mið af landslagi/hækkun (Naismith-reglan)
+\n
+\n</string>
+    <string name="empty_state_osm_edits_descr">Búðu til eða breyttu merkisstöðum í OSM (POI), opnaðu eða gerðu athugasemdir í OSM og sendu inn skráða ferla í GPX-skrám.</string>
+    <string name="one_tap_active_descr">Bankaðu á merki á kortinu til að færa það efst í virk kortamerki án þess að opna samhengisvalmyndina.</string>
+    <string name="empty_state_av_notes_desc">Bættu minnispunkti með hljóði, ljósmynd eða myndskeiði á hvern punkt á kortinu, með hjálp viðmótshluta eða samhengisvalmyndar.</string>
+    <string name="add_track_to_markers_descr">Veldu feril úr hverjum ferilpunktum verður bætt í kortamerkin. (Einungis ferlar með ferilpunktum eru taldir upp.)</string>
     </resources>
