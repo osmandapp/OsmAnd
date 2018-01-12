@@ -115,7 +115,7 @@ public class MapDataMenuController extends MenuController {
 			}
 		};
 		leftDownloadButtonController.caption = getMapActivity().getString(R.string.shared_string_download);
-		leftDownloadButtonController.leftIconId = R.drawable.ic_action_import;
+		leftDownloadButtonController.updateStateListDrawableIcon(R.drawable.ic_action_import, true);
 
 		rightDownloadButtonController = new TitleButtonController() {
 			@Override
@@ -142,7 +142,7 @@ public class MapDataMenuController extends MenuController {
 			}
 		};
 		rightDownloadButtonController.caption = getMapActivity().getString(R.string.download_select_map_types);
-		rightDownloadButtonController.leftIconId = R.drawable.ic_plugin_srtm;
+		rightDownloadButtonController.updateStateListDrawableIcon(R.drawable.ic_plugin_srtm, true);
 
 		bottomTitleButtonController = new TitleButtonController() {
 			@Override
@@ -159,7 +159,7 @@ public class MapDataMenuController extends MenuController {
 			}
 		};
 		bottomTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
-		bottomTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+		bottomTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
 
 		titleProgressController = new TitleProgressController() {
 			@Override
@@ -367,7 +367,7 @@ public class MapDataMenuController extends MenuController {
 		}
 
 		leftDownloadButtonController.visible = true;
-		leftDownloadButtonController.leftIconId = R.drawable.ic_action_import;
+		leftDownloadButtonController.updateStateListDrawableIcon(R.drawable.ic_action_import, true);
 		if (backuped) {
 			leftDownloadButtonController.caption = getMapActivity().getString(R.string.local_index_mi_restore);
 		} else if (indexItem != null) {
@@ -375,7 +375,7 @@ public class MapDataMenuController extends MenuController {
 					|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE)
 					&& srtmDisabled) {
 				leftDownloadButtonController.caption = getMapActivity().getString(R.string.get_plugin);
-				leftDownloadButtonController.leftIconId = 0;
+				leftDownloadButtonController.clearIcon(true);
 			} else if (indexItem.isOutdated()) {
 				leftDownloadButtonController.caption = getMapActivity().getString(R.string.shared_string_update);
 			} else if (!downloaded) {
