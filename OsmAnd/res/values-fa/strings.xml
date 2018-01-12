@@ -3006,4 +3006,5 @@
     <string name="osm_recipient_stat">ویرایش‌ها</string>
     <string name="osm_recipients_label">گیرندگان OSM</string>
     <string name="total_donations">کل پرداخت‌ها</string>
-</resources>
+<string name="shared_string_without_name">بدون نام</string>
+    </resources>
