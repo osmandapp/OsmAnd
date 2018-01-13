@@ -1651,7 +1651,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="shared_string_show_all">AFFICHER TOUT</string>
     <string name="coordinates">Coordonnées</string>
     <string name="map_update">Mise à jour disponible pour %1$s carte(s)</string>
-    <string name="error_avoid_specific_road">Aucun raccourci n\'a été trouvé</string>
+    <string name="error_avoid_specific_road">Aucun itinéraire de contournement</string>
     <string name="use_opengl_render">Utiliser le rendu OpenGL</string>
     <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (peut ne pas fonctionner sur certains appareils).</string>
     <string name="everything_up_to_date">Tous les fichiers sont à jour</string>
@@ -1683,7 +1683,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="routing_attr_no_new_routing_name">Ne pas utiliser le calcul d\'itinéraire de la version 1.9</string>
     <string name="speak_pedestrian">Passages piétons</string>
 
-    <string name="avoid_roads_msg">Vous pouvez générer un itinéraire alternatif en sélectionnant les routes à éviter.</string>
+    <string name="avoid_roads_msg">Vous pouvez générer un itinéraire alternatif en sélectionnant les routes à éviter</string>
     <string name="navigation_over_track">Démarrer la navigation en suivant cette trace ?</string>
     <string name="save_track_to_gpx_globally_headline">Enregistrement de traces à la demande</string>
 
