@@ -2699,4 +2699,5 @@ Representerer området: %1$s x %2$s</string>
     <string name="will_close_at">Stenger</string>
     <string name="will_open_at">Åpner</string>
     <string name="will_open_on">Åpner</string>
+    <string name="shared_string_without_name">Uten navn</string>
     </resources>
