@@ -2912,4 +2912,5 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="osm_recipient_stat">Modìficas %1$s, sum %2$s mBTC</string>
     <string name="osm_recipients_label">Destinatàrios OSM</string>
     <string name="total_donations">Donatziones totales</string>
-</resources>
+<string name="shared_string_without_name">Chene nùmene</string>
+    </resources>
