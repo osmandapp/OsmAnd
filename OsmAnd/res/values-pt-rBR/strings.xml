@@ -1062,7 +1062,7 @@ Pôr do Sol: %2$s</string>
 	<string name="no_info">Sem informação</string>
 	<string name="direction_style_clockwise">No sentido horário (12 setores)</string>
 	<string name="settings_direction_style">Estilo de direção</string>
-	<string name="settings_direction_style_descr">Escolher o estilo para expressar sentidos relativos ao mover</string>
+	<string name="settings_direction_style_descr">Escolher o estilo para expressar sentidos relativos ao mover.</string>
 	<string name="i_am_here">Estou aqui</string>
 	<string name="zoom_by_trackball_descr">Alterar zoom do mapa por movimentos horizontais do trackball</string>
 	<string name="zoom_by_trackball">Usar trackball para controle de zoom</string>
@@ -2214,8 +2214,8 @@ Pôr do Sol: %2$s</string>
     <string name="open_mapillary">Abrir o Mapillary</string>
     <string name="shared_string_install">Instalar</string>
     <string name="improve_coverage_mapillary">Melhorar a cobertura fotográfica com Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Você pode tirar suas próprias fotos ou séries de fotos e anexa-las a esta localização do mapa.
-\n
+    <string name="improve_coverage_install_mapillary_desc">Você pode tirar suas próprias fotos ou séries de fotos e anexá-las a esta localização do mapa. 
+\n 
 \nPara isso você precisa instalar o aplicativo Mapillary da Google Play Store.</string>
     <string name="online_photos">Fotos on-line</string>
     <string name="shared_string_add_photos">Adicionar fotos</string>
@@ -2698,4 +2698,28 @@ Pôr do Sol: %2$s</string>
     <string name="move_point">Mover Ponto</string>
     <string name="osm_recipients_label">Destinatários OSM</string>
     <string name="osmand_plus_extended_description_part6">Recursos de ciclismo e pedestre • Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre • Roteamento e modos de exibição especiais para bicicleta e pedestres • Paradas de transporte público opcionais (ônibus, troleibus, trem) incluindo nomes de linhas • Gravação opcional de viagem para arquivo GPX local ou serviço on-line • Exibição opcional de velocidade e altitudes • Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
+    <string name="shared_string_without_name">Sem nome</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
+    <string name="release_2_6">\\022 Novo recurso: Botão de ação rápida
+\n
+\n • Resposta a gesto de toque de tela melhorada (por exemplo, deslocamento de tela e zoom simultâneos)
+\n
+\n • Novas fontes de mapas cobrindo mais localidades
+\n
+\n • Suporte TTS para variantes de idiomas regionais (e sotaques)
+\n
+\n • Melhorias de visibilidade em vários estilos de mapas e Wikipédia
+\n
+\n • Suporte ao Open Location Code (OLC)
+\n
+\n • Exibe elevação, inclinação e perfil de velocidade para trilhas GPX gravadas e rotas calculadas
+\n
+\n • Definição de \"estilo de condução\" e melhorias de lógica em roteamento de bicicleta
+\n
+\n • Configurações para usar dados de altitude em roteamento de bicicleta
+\n
+\n • Várias outras melhorias e correções de bugs
+\n
+\n e muito mais…</string>
+    <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada: • Europa Ocidental: **** • Europa Oriental: *** • Rússia: *** • América do Norte: *** • América do Sul: ** • Ásia: ** • Japão e Coreia: *** • Oriente Médio: ** • África: ** • Antártica: * A maioria dos países ao redor do globo disponível como downloads! Do Afeganistão ao Zimbabué, da Austrália aos Estados Unidos. Argentina, Brasil, Canadá, França, Alemanha, México, Reino Unido, Espanha,…</string>
     </resources>
