@@ -583,6 +583,16 @@ public abstract class MenuController extends BaseMenuController {
 			return null;
 		}
 
+		public void clearIcon(boolean left) {
+			if (left) {
+				leftIcon = null;
+				leftIconId = 0;
+			} else {
+				rightIcon = null;
+				rightIconId = 0;
+			}
+		}
+
 		public void updateStateListDrawableIcon(@DrawableRes int resId, boolean left) {
 			if (left) {
 				leftIcon = enabled ? getStateListDrawable(resId) : null;

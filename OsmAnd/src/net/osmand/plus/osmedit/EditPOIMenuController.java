@@ -1,7 +1,6 @@
 package net.osmand.plus.osmedit;
 
 import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.data.PointDescription;
@@ -43,7 +42,7 @@ public class EditPOIMenuController extends MenuController {
 			}
 		};
 		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_upload);
-		leftTitleButtonController.leftIconId = R.drawable.ic_action_export;
+		leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_export, true);
 
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
@@ -73,7 +72,7 @@ public class EditPOIMenuController extends MenuController {
 			}
 		};
 		rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
-		rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+		rightTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
 
 		category = getCategory();
 
@@ -196,12 +195,6 @@ public class EditPOIMenuController extends MenuController {
 	}
 
 	private String getCategory() {
-		String category = "";
-		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
-			category = ((OpenstreetmapPoint) osmPoint).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
-		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
-			category = getMapActivity().getString(R.string.osn_bug_name);
-		}
-		return category;
+		return OsmEditingPlugin.getCategory(osmPoint, getMapActivity());
 	}
 }

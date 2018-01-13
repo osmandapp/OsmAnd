@@ -140,7 +140,8 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 		if (!portrait) {
 			final Window window = getDialog().getWindow();
 			WindowManager.LayoutParams params = window.getAttributes();
-			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
+			params.width = getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width)
+					+ AndroidUtils.dpToPx(getContext(), 16); // 8 dp is shadow width on each side
 			window.setAttributes(params);
 		}
 	}
