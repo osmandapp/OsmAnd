@@ -21,7 +21,7 @@
     <string name="open_till">Open till</string>
     <string name="will_close_at">Will close at</string>
     <string name="will_open_at">Will open at</string>
-    <string name="will_open_on">Will open on</string>
+    <string name="will_open_on">Will open at</string>
     <string name="additional_actions">Additional actions</string>
     <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
     <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
