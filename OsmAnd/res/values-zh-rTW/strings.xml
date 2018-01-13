@@ -2990,7 +2990,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="open_till">已開啟直到</string>
     <string name="will_close_at">將關閉于</string>
     <string name="will_open_at">將開啟于</string>
-    <string name="will_open_on">將被開啟</string>
+    <string name="will_open_on">將開啟</string>
     <string name="what_is_here">這裡的內容：</string>
     <string name="pick_up_till">取得直到</string>
     <string name="additional_actions">輔助的操作</string>
