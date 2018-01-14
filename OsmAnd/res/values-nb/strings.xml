@@ -585,7 +585,7 @@
 
     <string name="announce_gpx_waypoints">GPX-rutepunkter</string>
     <string name="speak_title">Meld om…</string>
-    <string name="speak_descr">Innstilling for å meddele gatenavn, trafikkvarsler (tvungne stopp, fartsdumper), fotoboksvarsler, fartsgrenser.</string>
+    <string name="speak_descr">Innstilling for å annonsere gatenavn, trafikkvarsler (tvungne stopp, fartsdumper), fotoboksvarsler, fartsgrenser.</string>
     <string name="speak_street_names">Gatenavn (TTS)</string>
     <string name="speak_speed_limit">Fartsgrense</string>
     <string name="speak_cameras">Fotobokser</string>
@@ -1560,7 +1560,7 @@
     <string name="osm_live_subscribe_btn">Abonner</string>
     <string name="osm_live_user_public_name">Offentlig navn</string>
     <string name="osm_live_month_cost">Månedlig kostnad</string>
-    <string name="osm_live_month_cost_desc">Månedlig betaling</string>
+    <string name="osm_live_month_cost_desc">Månedlig betaling.</string>
     <string name="osm_live_active">Aktiv</string>
     <string name="osm_live_not_active">Inaktiv</string>
     <string name="osm_live_enter_email">Oppgi en gyldig e-postadresse</string>
@@ -1792,7 +1792,7 @@
     <string name="access_disable_offroute_recalc">Ingen ny beregning etter å ha forlatt ruten</string>
     <string name="access_disable_wrong_direction_recalc">Ingen ny ruteberegning ved motsatt retning</string>
     <string name="access_disable_wrong_direction_recalc_descr">Forhindre automatisk omregning av rute når du beveger deg i feil retning.</string>
-    <string name="access_smart_autoannounce">Smart auto-meddelelse</string>
+    <string name="access_smart_autoannounce">Smart auto-annonsering</string>
     <string name="rendering_value_fine_name">Fin</string>
     <string name="report">Rapport</string>
     <string name="osmo_connect">Ta del i</string>
@@ -1891,24 +1891,24 @@
     <string name="map_widget_bearing">Relativ peiling</string>
     <string name="access_disable_offroute_recalc_descr">Forhindre automatisk ruteutregning når du er ganske langt unna rett vei.</string>
     <string name="access_smart_autoannounce_descr">Varsle bare når retningen til målpunktet endres.</string>
-    <string name="access_autoannounce_period">Periode for automatisk annonsering</string>
-    <string name="access_autoannounce_period_descr">Minimumstid mellom meddelelser</string>
+    <string name="access_autoannounce_period">Auto-annonseringsperiode</string>
+    <string name="access_autoannounce_period_descr">Minste tidsintervall mellom annonseringer.</string>
     <string name="osmo_connect_to_device_tracker_id">Sporings-ID</string>
     <string name="osmo_tracker_id">Sporings-ID</string>
-    <string name="osmo_tracker_id_descr">Klikk for å vise sporings-ID</string>
-    <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, %3$s redigeringer totalt</string>
+    <string name="osmo_tracker_id_descr">Trykk for å vise sporings-ID.</string>
+    <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, redigeringer totalt %3$s</string>
     <string name="osm_editors_ranking">Rankering av OSM-bidragsytere</string>
     <string name="osm_live_email_desc">Vi trenger det for å gi deg informasjon om bidragsytere</string>
     <string name="osm_live_support_region">Støttet område</string>
     <string name="osm_live_thanks">Takk for at du abonnerer på sanntidsoppdateringer!</string>
     <string name="osm_live_region_desc">Deler av din donasjon vil bli sendt til OSM-brukere som sender inn endringer til kartet i det området</string>
     <string name="upload_osm_note">Last opp OSM-notis</string>
-    <string name="add_time_span">Tilføy tidsintervall</string>
+    <string name="add_time_span">Legg til tidsramme</string>
     <string name="rec_split">Oppdeling av opptak</string>
     <string name="rec_split_title">Bruk oppdeling av opptak</string>
     <string name="rec_split_desc">Overskriv klipp når lagringsplassen er brukt opp</string>
     <string name="rec_split_clip_length">Klipplengde</string>
-    <string name="rec_split_clip_length_desc">Lengden på hvert innspilte klipp blir ikke lenger enn det angitte tidsintervallet</string>
+    <string name="rec_split_clip_length_desc">Øvre tidsbegrensning for innspilte videoklipp.</string>
     <string name="rec_split_storage_size_desc">Mengden plass som kan tas opp av det totale antall klipp</string>
     <string name="av_audio_bitrate_descr">Velg lydbitrate</string>
     <string name="osm_save_offline">Lagre for frakoblet bruk</string>
@@ -2415,7 +2415,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="rendering_attr_depthContours_description">Vis havdybdekonturer og punkter.</string>
     <string name="rendering_attr_depthContours_name">Nautiske dybdekonturer</string>
     <string name="auto_split_recording_title">Del opp opptak automatisk etter opphold</string>
-    <string name="auto_split_recording_descr">Start et nytt segment etter en pause på seks min., en ny tur etter en pause på to timer, eller ei ny fil etter et lengre opphold, hvis datoen har endret seg.</string>
+    <string name="auto_split_recording_descr">Start nytt segment etter et avbrudd på 6 min., nytt spor etter avbrudd på 2 timer, eller ny fil etter et lengre avbrudd hvis datoen er endret.</string>
     <string name="osmo_no_connection_msg">Kan ikke koble til OsMo-tjeneren:
 \n- sjekk din internettilknytning;
 \n- sjekk innstillingene;
@@ -2669,7 +2669,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="quick_action_btn_tutorial_descr">Trykk lenge og dra knappen for å endre dens posisjon på skjermen.</string>
     <string name="add_track_to_markers_descr">Velg et spor for å legge til dets rutepunkter til markørene. (Kun spor med rutepunkter er listet opp.)</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
-    <string name="depth_contour_descr">Knippe kart som inneholder havdybdekotelinjer og sjømerker.</string>
+    <string name="depth_contour_descr">Kartsett som inneholder havdybdekoter og nautiske punkter.</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samler inn informasjon om hvilke deler av programmet du åpner. Plasseringen din blir aldri sendt, ei heller noe du måtte skrive inn i programmet eller detaljer om områder som vises, søkes etter, eller lastes ned.</string>
     <string name="do_not_show_startup_messages_desc">Skrur av visning av programrabatter og spesielle lokale hendelsesmeldinger.</string>
     <string name="routing_attr_driving_style_safety_name">Foretrekk sideveier</string>
