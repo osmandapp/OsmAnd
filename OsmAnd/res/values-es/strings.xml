@@ -2817,7 +2817,7 @@ Por favor proporciona un código completo</string>
     <string name="open_till">Abierto hasta las</string>
     <string name="will_close_at">Cerrará a las</string>
     <string name="will_open_at">Abrirá a las</string>
-    <string name="will_open_on">Abrirá sobre las</string>
+    <string name="will_open_on">Abrirá a las</string>
     <string name="additional_actions">Acciones adicionales</string>
     <string name="av_locations_selected_desc">Archivo GPX con coordenadas y datos de las notas seleccionadas.</string>
     <string name="av_locations_all_desc">Archivo GPX con las coordenadas y los datos de todas las notas.</string>
@@ -2826,4 +2826,5 @@ Por favor proporciona un código completo</string>
     <string name="osm_recipient_stat">%1$s ediciones, suman %2$s mBTC</string>
     <string name="osm_recipients_label">Destinatarios de OSM</string>
     <string name="total_donations">Total de donaciones</string>
-</resources>
+<string name="shared_string_without_name">Sin nombre</string>
+    </resources>
