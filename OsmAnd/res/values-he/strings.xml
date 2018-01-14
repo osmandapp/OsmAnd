@@ -136,8 +136,8 @@
 	<string name="osmand_parking_minutes">דקות</string>
 	<string name="osmand_parking_position_description_add_time">הרכב חונה במיקום:</string>
 	
-	<string name="select_animate_speedup">בחירה בהנפשת האצה במסלול</string>
-    	<string name="global_app_allocated_memory_descr">הזיכרון המוקצה: %1$s מ״ב (המגבלה של אנדרויד: %2$s מ״ב, Dalvik‏: %3$s מ״ב).</string>
+	<string name="select_animate_speedup">בחירת מהירות הדמיית הנתיב</string>
+    	<string name="global_app_allocated_memory_descr">הזיכרון המוקצה: %1$s מ״ב (המגבלה של Android:‏ %2$s מ״ב, Dalvik‏: %3$s מ״ב).</string>
 	<string name="global_app_allocated_memory">הזיכרון המוקצה</string>
 	<string name="native_app_allocated_memory_descr">סך כל הזיכרון הטבעי שמוקצה על ידי היישום: %1$s מ״ב (Dalvik‏: %2$s מ״ב, אחרים: %3$s מ״ב). זיכרון יחסי: %4$s מ״ב (המגבלה של אנדרויד: %5$s מ״ב, Dalvik‏: %6$s מ״ב).</string>
 	<string name="native_app_allocated_memory">סך כל הזיכרון הטבעי</string>
@@ -148,23 +148,23 @@
 	<string name="osmand_parking_warning">אזהרה</string>
 	<string name="osmand_parking_warning_text">התרעה לאיסוף הרכב שלך נוספה בעבר ליומן שלך. ההתרעה תישאר שם עד למחיקתה ידנית.</string>    
 	<string name="osmand_parking_time_limit_title">הגדרת מגבלת הזמן לחנייה</string>
-	<string name="osmand_parking_delete_confirm">האם ברצונך להסיר את מיקום הרכב החונה?</string>
+	<string name="osmand_parking_delete_confirm">להסיר את סמן מיקום חניית הרכב?</string>
 	<string name="osmand_parking_delete">מחיקת סמן חנייה</string>
 	<string name="osmand_parking_choose_type">נא לבחור את סוג החנייה</string>
 	<string name="osmand_parking_lim_text">מוגבלת בזמן</string>
 	<string name="osmand_parking_no_lim_text">בלתי מוגבלת בזמן</string>
-	<string name="osmand_parking_add_event">הוספת התרעה ליישום היומן</string>
+	<string name="osmand_parking_add_event">הוספת התרעה ליישום יומן</string>
 	<string name="osmand_parking_time_limit">חנייה מוגבלת בזמן</string>
 	<string name="osmand_parking_time_no_limit">חנייה בלתי מוגבלת בזמן</string>
-	<string name="osmand_parking_position_description">מיקום הרכב שחנית. %1$s</string>
+	<string name="osmand_parking_position_description">מיקום חניית הרכב שלך. %1$s</string>
 	<string name="osmand_parking_position_description_add">לאסוף את הרכב מ־:</string>
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
-	<string name="osmand_parking_position_name">נקודת החנייה</string>
+	<string name="osmand_parking_position_name">מקום חנייה</string>
 	<string name="osmand_parking_plugin_description">תוסף מיקום החנייה מאפשר לך לזכור איפה רכבך חנה וכמה זמן נותר לחנייה (אם יש מגבלת זמן).
 \nהמיקום והשעה מופיעים בלוח הבקרה של OsmAnd וגם בחלונית על מסך המפה. ניתן להוסיף התרעה ליומן של Android כתזכורת.</string>
 	<string name="osmand_parking_plugin_name">מיקום החנייה</string>
-	<string name="context_menu_item_add_parking_point">סימון כמיקום החנייה</string>
+	<string name="context_menu_item_add_parking_point">סימון כמקום חנייה</string>
 	<string name="context_menu_item_delete_parking_point">מחיקת סימון חנייה</string>
 	<string name="gpxup_public">ציבורי</string>
 	<string name="gpxup_identifiable">ניתן לזיהוי</string>
@@ -175,7 +175,7 @@
 	<string name="route_roundabout">כיכר : לצאת ביציאה ה%1$d ולהמשיך</string>
 	<string name="route_kl">להיצמד לשמאל ולהמשיך</string>
 	<string name="route_kr">להיצמד לימין ולהמשיך</string>
-	<string name="rendering_attr_noPolygons_description">הפיכת כל תכונות הקרקע במפה לשקופות</string>
+	<string name="rendering_attr_noPolygons_description">הפיכת כל תכונות הקרקע במפה לשקופות.</string>
 	<string name="rendering_attr_noPolygons_name">מצולעים</string>
 	<string name="rendering_attr_appMode_name">מצב עיבוד תמונה</string>
 	<string name="rendering_attr_appMode_description">מיטוב המפה לטובת</string>
@@ -2607,4 +2607,5 @@
     <string name="total_donations">סך כל התרומות</string>
 <string name="access_direction_audio_feedback_descr">ציון כיוון נקודת היעד עם צליל.</string>
     <string name="delay_to_start_navigation_descr">נא לציין את זמן ההמתנה להישאר במסך תכנון הנתיב.</string>
+    <string name="shared_string_without_name">ללא שם</string>
     </resources>
