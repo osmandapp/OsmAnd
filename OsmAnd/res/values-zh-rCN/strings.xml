@@ -963,7 +963,7 @@
     <string name="osm_user_stat">编辑数 %1$s，排名 %2$s，总计编辑 %3$s</string>
     <string name="osm_editors_ranking">OSM 编辑排名</string>
     <string name="osm_live_subscribe_btn">订阅</string>
-    <string name="osm_live_subscription">OSM 实时订阅</string>
+    <string name="osm_live_subscription">OsmAnd 实时订阅</string>
     <string name="osm_live_user_public_name">公开名称</string>
     <string name="osm_live_email_desc">我们需要它来提供您的贡献信息</string>
     <string name="osm_live_hide_user_name">不在报告中显示我的名称</string>
@@ -976,7 +976,7 @@
     <string name="osm_live_enter_user_name">请输入公开名称</string>
     <string name="osm_live_thanks">感谢您订阅在线更新！</string>
     <string name="osm_live_subscription_settings">订阅设置</string>
-    <string name="osm_live_ask_for_purchase">请先购买 OSM 实时订阅</string>
+    <string name="osm_live_ask_for_purchase">请先购买 OsmAnd 实时订阅</string>
 
     <string name="select_map_marker">选择地图标记</string>
     <string name="map_markers_other">其他标记</string>
@@ -1302,7 +1302,7 @@
     <string name="audionotes_plugin_name">音频/视频笔记</string>
     <string name="rendering_value_light_brown_name">浅棕色</string>
     <string name="rendering_value_dark_brown_name">深棕色</string>
-    <string name="use_osm_live_routing">OSM 实时导航</string>
+    <string name="use_osm_live_routing">OsmAnd 实时导航</string>
     <string name="release_2_3">\\u2022 OSM 实时功能。支持地图贡献者和开发者获取每小时更新的地图。
 \n 
 \n • 地图标记。新的快速地图选点的方式。 
@@ -1666,7 +1666,7 @@
     <string name="access_direction_audio_feedback_descr">通过声音指示目标点方向</string>
     <string name="access_direction_haptic_feedback">方向触觉反馈</string>
     <string name="access_direction_haptic_feedback_descr">由振动指示目标点方向</string>
-    <string name="use_osm_live_routing_description">启用导航时的 OSM 实时改变 (Beta)</string>
+    <string name="use_osm_live_routing_description">启用导航时由 OsmAnd 实时服务提供的更新。</string>
     <string name="access_no_destination">未设置目的地</string>
     <string name="map_widget_magnetic_bearing">磁方位</string>
     <string name="map_widget_bearing">相对方位</string>
@@ -1902,7 +1902,7 @@
     <string name="proxy_pref_descr">设置代理互联网通信</string>
     <string name="points">点</string>
     <string name="navigation_over_track">开始沿着轨道导航吗？</string>
-    <string name="avoid_roads_msg">你可以选择一条替代路线以避免</string>
+    <string name="avoid_roads_msg">您可以选择一条需绕开的道路以触发路线重新规划</string>
     <string name="speak_pedestrian">步行街道</string>
     <string name="routing_attr_no_new_routing_name">不用 v1.9 路径规则</string>
     <string name="routing_attr_no_new_routing_description">请不要使用 v1.9 的路径规划规则</string>
@@ -2667,4 +2667,13 @@
     <string name="marker_save_as_track">保存为轨迹</string>
     <string name="today">今天</string>
     <string name="yesterday">昨天</string>
+    <string name="context_menu_read_full_article">阅读完整文章</string>
+    <string name="context_menu_read_article">阅读文章</string>
+    <string name="release_2_8">\\022 彻底重新实现了地图标记功能，带有辅助线和路径规划
+\n
+\n • 距离测量工具，提供道路吸附功能和将点保存为轨迹的功能
+\n
+\n • OsmAnd 实时：缺陷修复、每 30 分钟即从服务器更新最新数据、在导航界面中实现了更新功能
+\n
+\n</string>
     </resources>
