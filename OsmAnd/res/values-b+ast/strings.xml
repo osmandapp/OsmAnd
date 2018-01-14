@@ -205,7 +205,7 @@
 - comprueba la conexón a Internet;
 - comprueba los axustes;
 - visita\'l nuesu Twitter: https://twitter.com/OsMomobi</string>
-	<string name="anonymous_user_hint"></string>
+	<string name="anonymous_user_hint"/>
 	<string name="logged_as">Aniciesti sesión como %1$s</string>
 	<string name="text_size">Tamañu de testos</string>
 	<string name="traffic_warning_speed_limit">Llende de velocidá</string>
@@ -1045,4 +1045,31 @@ Puntos</string>
     <string name="error_message_pattern">Fallu: {0}</string>
     <string name="faq_item">FAQ</string>
     <string name="favorite_empty_place_name">Llugar</string>
+    <string name="shared_string_without_name">Ensin nome</string>
+    <string name="what_is_here">Lo qu\\\'hai equí:</string>
+    <string name="parked_at">aparcáu a les</string>
+    <string name="pick_up_till">Recoyer antes de les</string>
+    <string name="without_time_limit">Sin llende de tiempu</string>
+    <string name="context_menu_read_full_article">Lleer l\\\'artículu completu</string>
+    <string name="context_menu_read_article">Lleer l\\\'artículu</string>
+    <string name="context_menu_points_of_group">Tolos puntos del grupu</string>
+    <string name="open_from">Abierto dende les</string>
+    <string name="open_till">Abierto hasta les</string>
+    <string name="will_close_at">Zarrará a les</string>
+    <string name="will_open_at">Abrirá a les</string>
+    <string name="will_open_on">Abrirá a les</string>
+    <string name="additional_actions">Más aiciones</string>
+    <string name="av_locations_selected_desc">Ficheru GPX con coordenaes y datos de les notes esbillaes.</string>
+    <string name="av_locations_all_desc">Ficheru GPX con coordenaes y datos de toles notes.</string>
+    <string name="release_3_0">\\022 La detección de señales de stop agora considera la direición de conducción 
+\n 
+\n • Nuevu algoritmu qu\\\'ufre valores significativos d\\\'ascensu y descensu pa les traces GPX. 
+\n 
+\n • La duración de la caminata tien en cuenta lo pindio del terrén (regla de Naismith).
+\n
+\n</string>
+    <string name="modify_the_search_query">Cambiar la consulta de la gueta.</string>
+    <string name="shared_string_actions">Aiciones</string>
+    <string name="shared_string_marker">Marcador</string>
+    <string name="empty_state_osm_edits">Crear o tresformar oxetos OSM</string>
     </resources>
