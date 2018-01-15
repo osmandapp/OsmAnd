@@ -114,7 +114,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 		}
 
 		ExtendedBottomSheetBehavior behavior = ExtendedBottomSheetBehavior.from(scrollView);
-		behavior.setPeekHeight(getPeekHeight());
+		behavior.setPeekHeight(getResources().getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height));
 		behavior.setBottomSheetCallback(new BottomSheetCallback() {
 			@Override
 			public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -183,10 +183,6 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 			return R.id.second_item_container;
 		}
 		return R.id.third_item_container;
-	}
-
-	private int getPeekHeight() {
-		return (availableScreenH * 2 / 3) - getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
 	}
 
 	public interface ContextMenuItemClickListener {
