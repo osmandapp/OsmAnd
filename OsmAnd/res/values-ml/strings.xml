@@ -1841,4 +1841,5 @@
     <string name="auto_split_recording_descr">"ആറുമിനിറ്റ് ഇടവേളക്ക് ശേഷം പുതിയ ഭാഗമാക്കുക, പുതിയ പാത 2 മണിക്കൂറിന് ശേഷം, അല്ലെങ്കില്‍ പുതിയ ഫയല്‍ ദിവസം മാറിയ വിധം വലിയ ഇടവേളക്ക് "</string>
     <string name="rendering_attr_contourDensity_description">കോണ്ടൂര്‍ ലൈനുകളുടെ ഡെന്‍സിറ്റി</string>
     <string name="rendering_attr_contourDensity_name">കോണ്ടൂര്‍ ലൈനുകളുടെ ഡെന്‍സിറ്റി</string>
+    <string name="shared_string_without_name">"നാമമില്ലാത്തത് "</string>
     </resources>
