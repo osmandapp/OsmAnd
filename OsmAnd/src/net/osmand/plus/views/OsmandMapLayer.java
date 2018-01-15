@@ -221,8 +221,8 @@ public abstract class OsmandMapLayer {
 		return rf;
 	}
 
-	public Amenity findAmenity(OsmandApplication app, long id, List<String> names, LatLon latLon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), 50);
+	public Amenity findAmenity(OsmandApplication app, long id, List<String> names, LatLon latLon, int radius) {
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
 		List<Amenity> amenities = app.getResourceManager().searchAmenities(
 				new BinaryMapIndexReader.SearchPoiTypeFilter() {
 					@Override

@@ -624,7 +624,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						if (searchLatLon == null) {
 							searchLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
 						}
-						Amenity amenity = findAmenity(activity.getMyApplication(), renderedObject.getId() >> 7, names, searchLatLon);
+						Amenity amenity = findAmenity(activity.getMyApplication(), renderedObject.getId() >> 7, names, searchLatLon, 50);
 						if (amenity != null) {
 							if (renderedObject.getX() != null && renderedObject.getX().size() > 1
 									&& renderedObject.getY() != null && renderedObject.getY().size() > 1) {
