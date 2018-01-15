@@ -2558,4 +2558,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="will_open_on">Mun opna</string>
     <string name="add_group_descr">Þú getur flutt hópa inn úr eftirlætum eða úr ferilpunktum í ferli.</string>
     <string name="empty_state_markers_groups_desc">Þú getur flutt inn eftirlætishópa eða ferilpunkta sem kortamerki.</string>
+    <string name="shared_string_without_name">Án nafns</string>
     </resources>
