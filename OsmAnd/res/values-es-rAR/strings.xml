@@ -2883,8 +2883,10 @@ Proporciona un código completo</string>
     <string name="open_till">Abierto hasta las</string>
     <string name="will_close_at">Cerrará a las</string>
     <string name="will_open_at">Abrirá a las</string>
-    <string name="will_open_on">Abrirá sobre las</string>
+    <string name="will_open_on">Abrirá a las</string>
     <string name="additional_actions">Acciones adicionales</string>
     <string name="shared_string_actions">Acciones</string>
     <string name="shared_string_marker">Marcador</string>
+    <string name="shared_string_without_name">Sin nombre</string>
+    <string name="lang_lo">Laosiana</string>
     </resources>
