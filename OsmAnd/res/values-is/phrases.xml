@@ -3338,4 +3338,13 @@
 	<string name="poi_dyke">Flóðgarður</string>
 	<string name="poi_street_cabinet">Götuklefi</string>
 
+	<string name="poi_dolphin">Bólvirki</string>
+
+	<string name="poi_xmas_event">Jólaskemmtun</string>
+	<string name="poi_xmas_shop">Verslun með jólavarning</string>
+	<string name="poi_xmas_shop_christmas_tree">Jólatrjáasala</string>
+	<string name="poi_xmas_opening_hours">Jól: opnunartímar</string>
+	<string name="poi_xmas_location">Jól: staðsetning</string>
+	<string name="poi_xmas_url">Jól: vefsvæði</string>
+
 	</resources>
