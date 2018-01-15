@@ -679,7 +679,7 @@
 	<string name="poi_service_parts">Bílapartar</string>
 	<string name="poi_memorial_column">Súla</string>
 	<string name="poi_resource_stone">Steinn</string>
-	<string name="poi_wetland_marsh">Votlendi</string>
+	<string name="poi_wetland_marsh">Mýri</string>
 	<string name="poi_beach_sand">Sandur</string>
 	<string name="poi_internet_access_type_public">Tegund internetaðgangs: opinn</string>
 	<string name="poi_internet_access_type_service">Tegund internetaðgangs: þjónusta</string>
@@ -2471,7 +2471,7 @@
 	<string name="poi_resource_peat">Mór</string>
 	<string name="poi_resource_rutile">Títansandur</string>
 	<string name="poi_resource_slate_iron_ore_copper">Steinþynnur;járngrýti;kopar</string>
-	<string name="poi_resource_slate">Þynnur</string>
+	<string name="poi_resource_slate">Steinþynnur</string>
 	<string name="poi_resource_zircon">Zirkon</string>
 
 	<string name="poi_wetland_wet_meadow">Engi</string>
@@ -2623,7 +2623,7 @@
 	<string name="poi_vending_parcel_pickup">Pakkaafgreiðsla</string>
 	<string name="poi_vending_parcel_mail_in">Pakkapóstsending</string>
 	<string name="poi_wetland_bog">Fen</string>
-	<string name="poi_wetland_tidalflat">Flóðslétta</string>
+	<string name="poi_wetland_tidalflat">Leira</string>
 	<string name="poi_route_share_taxi_ref">Deilileigubíll</string>
 	<string name="poi_service_bicycle_diy_yes">Verkfæri fyrir eigin viðgerðir</string>
 	<string name="poi_service_bicycle_diy_no">Verkfæri fyrir eigin hjólaviðgerðir: nei</string>
@@ -3273,4 +3273,69 @@
 
 	<string name="poi_map_type_toposcope">Tegund korts: skýringakort (toposcope)</string>
 	<string name="poi_map_size_site">Tegund korts: staðarkort</string>
+	<string name="poi_wetland_reedbed">Sefbreiða</string>
+	<string name="poi_wetland_swamp">Skógmýri</string>
+	<string name="poi_wetland_saltern">Saltgerði</string>
+	<string name="poi_wetland_saltmarsh">Sjávarfitjar</string>
+	<string name="poi_wetland_mangrove">Leiruviðarskógur</string>
+	<string name="poi_wetland_string_bog">Rimamýri</string>
+	<string name="poi_wetland_fen">Starmýri</string>
+	<string name="poi_wetland_palsa_bog">Rústamýri</string>
+	<string name="poi_bridge_structure_beam">Uppbygging brúar: bitar</string>
+	<string name="poi_bridge_structure_simple_suspension">Uppbygging brúar: einföld upphenging</string>
+	<string name="poi_bridge_structure_suspension">Uppbygging brúar: hengibrú</string>
+	<string name="poi_bridge_structure_arch">Uppbygging brúar: bogi</string>
+	<string name="poi_bridge_structure_truss">Uppbygging brúar: bitavirki</string>
+	<string name="poi_bridge_structure_floating">Uppbygging brúar: flotbrú</string>
+	<string name="poi_bridge_structure_humpback">Uppbygging brúar: kryppubrú</string>
+	<string name="poi_bridge_structure_cable_stayed">Uppbygging brúar: masturhengd</string>
+	<string name="poi_bridge_structure_boardwalk">Uppbygging brúar: plankar</string>
+	<string name="poi_bridge_structure_simple_wooden">Uppbygging brúar: einföld trébrú</string>
+	<string name="poi_bridge_structure_viaduct">Uppbygging brúar: dalbrú</string>
+	<string name="poi_bridge_structure_aqueduct">Uppbygging brúar: vatnsveitubrú</string>
+	<string name="poi_bridge_structure_log">Uppbygging brúar: trjábolir</string>
+	<string name="poi_bridge_type_movable">Gerð brúar: færanleg</string>
+	<string name="poi_bridge_movable_bascule">Gerð færanlegrar brúar: vængjabrú</string>
+	<string name="poi_bridge_movable_swing">Gerð færanlegrar brúar: snúningsbrú</string>
+	<string name="poi_bridge_movable_lift">Gerð færanlegrar brúar: lyftubrú</string>
+	<string name="poi_bridge_movable_drawbridge">Gerð færanlegrar brúar: fellibrú</string>
+	<string name="poi_bridge_movable_submersible">Gerð færanlegrar brúar: sökkbrú</string>
+	<string name="poi_bridge_movable_transporter">Gerð færanlegrar brúar: kláfbrú</string>
+	<string name="poi_bridge_movable_retractable">Gerð færanlegrar brúar: inndraganleg</string>
+
+	<string name="poi_monument_yes">Minnisvarði</string>
+
+	<string name="poi_industrial_brickyard">Tegund: múrsteinagerð</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Tegund: umstöflunarmiðstöð vöruflutninga</string>
+	<string name="poi_watering_place">Vatnsból</string>
+	<string name="poi_animal_boarding">Dýrahótel</string>
+	<string name="poi_animal_boarding_dog">Tegund dýrahótels: hundar</string>
+	<string name="poi_animal_boarding_cat">Tegund dýrahótels: kettir</string>
+	<string name="poi_animal_boarding_dog_cat">Tegund dýrahótels: hundar, kettir</string>
+	<string name="poi_animal_boarding_horse">Tegund dýrahótels: hestar</string>
+
+	<string name="poi_quango">Félagasamtök í samstarfi við hið opinbera (quango)</string>
+	<string name="poi_cooperative">Samstarfsskrifstofa</string>
+	<string name="poi_logistics">Birgðastjórnunarskrifstofa</string>
+	<string name="poi_tomb_war_grave">Tegund: stríðsgrafreitur</string>
+	<string name="poi_tomb_tumulus">Tegund: hörgur</string>
+	<string name="poi_tomb_rock_cut">Tegund: steinhöggvið</string>
+	<string name="poi_tomb_hypogeum">Tegund: neðanjarðargrafhýsi</string>
+	<string name="poi_tomb_vault">Tegund: grafhýsi</string>
+	<string name="poi_tomb_columbarium">Tegund: duftgarður</string>
+	<string name="poi_tomb_mausoleum">Tegund: leghöll</string>
+	<string name="poi_tomb_sarcophagus">Tegund: steinkista</string>
+	<string name="poi_tomb_crypt">Tegund: grafhvelfing</string>
+	<string name="poi_historic_civilization_dacian">Menning: dasísk</string>
+	<string name="poi_historic_civilization_hernici">Menning: hernisísk</string>
+	<string name="poi_historic_civilization_helladic">Menning: hellenísk</string>
+	<string name="poi_historic_civilization_cycladic">Menning: cyclades-eyja</string>
+	<string name="poi_historic_civilization_minoan">Menning: mínóa</string>
+	<string name="poi_historic_civilization_tiahuanacota">Menning: tiahuanacota</string>
+
+	<string name="poi_rc_car">Keppni með fjarstýrðum bílum</string>
+	<string name="poi_lacrosse">Lakross</string>
+	<string name="poi_dyke">Flóðgarður</string>
+	<string name="poi_street_cabinet">Götuklefi</string>
+
 	</resources>
