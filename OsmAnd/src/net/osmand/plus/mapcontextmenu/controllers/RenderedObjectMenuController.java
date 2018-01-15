@@ -49,7 +49,7 @@ public class RenderedObjectMenuController extends MenuController {
 	}
 
 	@Override
-	public int getLeftIconId() {
+	public int getRightIconId() {
 		if (renderedObject.getIconRes() != null && RenderingIcons.containsBigIcon(renderedObject.getIconRes())) {
 			return RenderingIcons.getBigIconResourceId(renderedObject.getIconRes());
 		} else {
@@ -95,7 +95,7 @@ public class RenderedObjectMenuController extends MenuController {
 			if (entry.getKey().equalsIgnoreCase("maxheight")) {
 				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(entry.getKey());
 				if (pt != null) {
-					addPlainMenuItem(R.drawable.ic_action_note_dark, pt.getTranslation() + ": " + entry.getValue(), false, false, null);
+					addPlainMenuItem(R.drawable.ic_action_note_dark, null, pt.getTranslation() + ": " + entry.getValue(), false, false, null);
 				}
 			}
 		}
@@ -110,7 +110,7 @@ public class RenderedObjectMenuController extends MenuController {
 			} else {
 				link = "https://www.openstreetmap.org/way/";
 			}
-			addPlainMenuItem(R.drawable.ic_action_info_dark, link + (renderedObject.getId() >> 7), true, true, null);
+			addPlainMenuItem(R.drawable.ic_action_info_dark, null, link + (renderedObject.getId() >> 7), true, true, null);
 		}
 		addMyLocationToPlainItems(latLon);
 	}

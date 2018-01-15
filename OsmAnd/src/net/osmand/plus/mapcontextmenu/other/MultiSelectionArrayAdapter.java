@@ -38,7 +38,6 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 		}
 		final MapMultiSelectionMenu.MenuObject item = getItem(position);
 		if (item != null) {
-			AndroidUtils.setBackground(menu.getMapActivity(), convertView, !menu.isLight(), R.drawable.expandable_list_item_background_light, R.drawable.expandable_list_item_background_dark);
 			convertView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -50,8 +49,8 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			IconsCache iconsCache = menu.getMapActivity().getMyApplication().getIconsCache();
 			final View iconLayout = convertView.findViewById(R.id.context_menu_icon_layout);
 			final ImageView iconView = (ImageView) convertView.findViewById(R.id.context_menu_icon_view);
-			Drawable icon = item.getLeftIcon();
-			int iconId = item.getLeftIconId();
+			Drawable icon = item.getRightIcon();
+			int iconId = item.getRightIconId();
 			if (icon != null) {
 				iconView.setImageDrawable(icon);
 				iconLayout.setVisibility(View.VISIBLE);
@@ -65,7 +64,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 
 			// Text line 1
 			TextView line1 = (TextView) convertView.findViewById(R.id.context_menu_line1);
-			((TextView) convertView.findViewById(R.id.context_menu_line1)).setTextColor(ContextCompat.getColor(getContext(),
+			line1.setTextColor(ContextCompat.getColor(getContext(),
 					!menu.isLight() ? R.color.ctx_menu_title_color_dark : R.color.ctx_menu_title_color_light));
 			line1.setText(item.getTitleStr());
 
@@ -79,6 +78,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 
 			// Divider
 			View divider = convertView.findViewById(R.id.divider);
+			divider.setBackgroundColor(ContextCompat.getColor(getContext(), menu.isLight() ? R.color.multi_selection_menu_divider_light : R.color.multi_selection_menu_divider_dark));
 			divider.setVisibility(position != getCount() - 1 ? View.VISIBLE : View.GONE);
 		}
 

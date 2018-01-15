@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.Amenity;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
@@ -31,6 +32,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.WikipediaDialogFragment;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
@@ -92,7 +94,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setLayoutParams(llParams);
-		ll.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		ll.setOnLongClickListener(new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
@@ -131,7 +133,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		llTextParams.setMargins(icon == null ? dpToPx(16f) : 0, collapsable ? dpToPx(13f) : dpToPx(8f), 0, collapsable ? dpToPx(13f) : dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
+		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
 
 		boolean textDefined = false;
 		if (isPhoneNumber || isUrl) {
@@ -217,16 +219,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			button.setTextSize(14);
 			int paddingSides = dpToPx(10f);
 			button.setPadding(paddingSides, 0, paddingSides, 0);
-			ColorStateList buttonColorStateList = new ColorStateList(
-					new int[][] {
-							new int[]{android.R.attr.state_pressed},
-							new int[]{}
-					},
-					new int[] {
-							view.getResources().getColor(light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p),
-							view.getResources().getColor(light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n)
-					}
-			);
+			ColorStateList buttonColorStateList = AndroidUtils.createColorStateList(view.getContext(), !light,
+					R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
+					R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 			button.setTextColor(buttonColorStateList);
 			button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
 			button.setSingleLine(true);
@@ -234,13 +229,16 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					POIMapLayer.showWikipediaDialog(view.getContext(), app, amenity);
+					WikipediaDialogFragment.showInstance(mapActivity, amenity);
 				}
 			});
 			button.setAllCaps(true);
 			button.setText(R.string.context_menu_read_full_article);
-			Drawable compoundDrawable = app.getIconsCache().getIcon(R.drawable.ic_action_note_dark, light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
-			button.setCompoundDrawablesWithIntrinsicBounds(compoundDrawable, null, null, null);
+			Drawable normal = app.getIconsCache().getIcon(R.drawable.ic_action_read_text,
+					light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
+			Drawable pressed = app.getIconsCache().getIcon(R.drawable.ic_action_read_text,
+					light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p);
+			button.setCompoundDrawablesWithIntrinsicBounds(AndroidUtils.createStateListDrawable(normal, pressed), null, null, null);
 			button.setCompoundDrawablePadding(dpToPx(8f));
 			llText.addView(button);
 		}
@@ -284,7 +282,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					POIMapLayer.showWikipediaDialog(view.getContext(), app, amenity);
+					WikipediaDialogFragment.showInstance(mapActivity, amenity);
 				}
 			});
 		} else if (isText && text.length() > 200) {
@@ -516,10 +514,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else {
 				link = "https://www.openstreetmap.org/way/";
 			}
-			buildRow(view, R.drawable.ic_action_info_dark, link + (amenity.getId() >> 1),
+			buildRow(view, R.drawable.ic_action_info_dark, null, link + (amenity.getId() >> 1),
 					0, false, null, true, 0, true, null, false);
 		}
-		buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationName(app,
+		buildRow(view, R.drawable.ic_action_get_my_location, null, PointDescription.getLocationName(app,
 				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true)
 				.replaceAll("\n", " "), 0, false, null, false, 0, false, null, false);
 		//if (st.COORDINATES_FORMAT.get() != PointDescription.OLC_FORMAT)

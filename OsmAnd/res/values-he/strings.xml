@@ -82,10 +82,11 @@
 	
 	
 	<string name="bg_service_sleep_mode_off">הפעלת\n מצב שינה</string>
-	<string name="bg_service_sleep_mode_on">הפסקת\n מצב שינה</string>
+	<string name="bg_service_sleep_mode_on">הפסקת
+\n הפעלה ברקע</string>
 	<string name="gps_wakeup_interval">הפרשי התעוררות של רכיב האיכון: %s</string>
 	<string name="int_continuosly">רציף</string>
-	<string name="screen_is_locked">כדי לשחרר את המסכים יש ללחוץ על סמל הנעילה</string>
+	<string name="screen_is_locked">כדי לשחרר את המסך יש ללחוץ על סמל המנעול</string>
 	<string name="map_widget_top_text">שם הרחוב</string>
 	<string name="map_widget_config">מסך ההגדרות</string>
 	
@@ -97,7 +98,7 @@
 	
 	
 	<string name="map_widget_parking">חנייה</string>
-	<string name="map_widget_monitoring">הקלטת GPX</string>
+	<string name="map_widget_monitoring">רישום GPX</string>
 	<string name="map_widget_speed">מהירות</string>
 	<string name="map_widget_distance">יעד</string>
 	<string name="map_widget_altitude">גובה</string>
@@ -126,17 +127,17 @@
 	<string name="bg_service_screen_unlock">שחרור המסך</string>
 	<string name="bg_service_screen_lock_toast">המסך נעול</string>
 	<string name="bg_service_interval">הגדרת משך התעוררות:</string>
-	<string name="show_cameras">הצגת מכמונות מהירות</string>
-	<string name="show_traffic_warnings">הצגת אזהרות תנועה</string>
-	<string name="avoid_toll_roads">המנעות מכבישי אגרה</string>
+	<string name="show_cameras">מכמונות מהירות</string>
+	<string name="show_traffic_warnings">אזהרות תנועה</string>
+	<string name="avoid_toll_roads">הימנעות מכבישי אגרה</string>
 	<string name="continue_follow_previous_route_auto">הניווט הקודם לא הושלם. האם להמשיך לעקוב אחריו? (%1$s שניות)</string>
 	<string name="route_updated_loc_found">המסלול יחושב מחדש כאשר המיקום יימצא</string>
 	<string name="osmand_parking_hours">שעות</string>
 	<string name="osmand_parking_minutes">דקות</string>
 	<string name="osmand_parking_position_description_add_time">הרכב חונה במיקום:</string>
 	
-	<string name="select_animate_speedup">בחירה בהנפשת האצה במסלול</string>
-    	<string name="global_app_allocated_memory_descr">הזיכרון המוקצה: %1$s מ״ב (המגבלה של אנדרויד: %2$s מ״ב, Dalvik‏: %3$s מ״ב).</string>
+	<string name="select_animate_speedup">בחירת מהירות הדמיית הנתיב</string>
+    	<string name="global_app_allocated_memory_descr">הזיכרון המוקצה: %1$s מ״ב (המגבלה של Android:‏ %2$s מ״ב, Dalvik‏: %3$s מ״ב).</string>
 	<string name="global_app_allocated_memory">הזיכרון המוקצה</string>
 	<string name="native_app_allocated_memory_descr">סך כל הזיכרון הטבעי שמוקצה על ידי היישום: %1$s מ״ב (Dalvik‏: %2$s מ״ב, אחרים: %3$s מ״ב). זיכרון יחסי: %4$s מ״ב (המגבלה של אנדרויד: %5$s מ״ב, Dalvik‏: %6$s מ״ב).</string>
 	<string name="native_app_allocated_memory">סך כל הזיכרון הטבעי</string>
@@ -147,23 +148,23 @@
 	<string name="osmand_parking_warning">אזהרה</string>
 	<string name="osmand_parking_warning_text">התרעה לאיסוף הרכב שלך נוספה בעבר ליומן שלך. ההתרעה תישאר שם עד למחיקתה ידנית.</string>    
 	<string name="osmand_parking_time_limit_title">הגדרת מגבלת הזמן לחנייה</string>
-	<string name="osmand_parking_delete_confirm">האם ברצונך להסיר את מיקום הרכב החונה?</string>
+	<string name="osmand_parking_delete_confirm">להסיר את סמן מיקום חניית הרכב?</string>
 	<string name="osmand_parking_delete">מחיקת סמן חנייה</string>
 	<string name="osmand_parking_choose_type">נא לבחור את סוג החנייה</string>
 	<string name="osmand_parking_lim_text">מוגבלת בזמן</string>
 	<string name="osmand_parking_no_lim_text">בלתי מוגבלת בזמן</string>
-	<string name="osmand_parking_add_event">הוספת התרעה ליישום היומן</string>
+	<string name="osmand_parking_add_event">הוספת התרעה ליישום יומן</string>
 	<string name="osmand_parking_time_limit">חנייה מוגבלת בזמן</string>
 	<string name="osmand_parking_time_no_limit">חנייה בלתי מוגבלת בזמן</string>
-	<string name="osmand_parking_position_description">מיקום הרכב שחנית. %1$s</string>
+	<string name="osmand_parking_position_description">מיקום חניית הרכב שלך. %1$s</string>
 	<string name="osmand_parking_position_description_add">לאסוף את הרכב מ־:</string>
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
-	<string name="osmand_parking_position_name">נקודת החנייה</string>
+	<string name="osmand_parking_position_name">מקום חנייה</string>
 	<string name="osmand_parking_plugin_description">תוסף מיקום החנייה מאפשר לך לזכור איפה רכבך חנה וכמה זמן נותר לחנייה (אם יש מגבלת זמן).
 \nהמיקום והשעה מופיעים בלוח הבקרה של OsmAnd וגם בחלונית על מסך המפה. ניתן להוסיף התרעה ליומן של Android כתזכורת.</string>
 	<string name="osmand_parking_plugin_name">מיקום החנייה</string>
-	<string name="context_menu_item_add_parking_point">סימון כמיקום החנייה</string>
+	<string name="context_menu_item_add_parking_point">סימון כמקום חנייה</string>
 	<string name="context_menu_item_delete_parking_point">מחיקת סימון חנייה</string>
 	<string name="gpxup_public">ציבורי</string>
 	<string name="gpxup_identifiable">ניתן לזיהוי</string>
@@ -174,7 +175,7 @@
 	<string name="route_roundabout">כיכר : לצאת ביציאה ה%1$d ולהמשיך</string>
 	<string name="route_kl">להיצמד לשמאל ולהמשיך</string>
 	<string name="route_kr">להיצמד לימין ולהמשיך</string>
-	<string name="rendering_attr_noPolygons_description">הפיכת כל תכונות הקרקע במפה לשקופות</string>
+	<string name="rendering_attr_noPolygons_description">הפיכת כל תכונות הקרקע במפה לשקופות.</string>
 	<string name="rendering_attr_noPolygons_name">מצולעים</string>
 	<string name="rendering_attr_appMode_name">מצב עיבוד תמונה</string>
 	<string name="rendering_attr_appMode_description">מיטוב המפה לטובת</string>
@@ -502,7 +503,7 @@
 	<string name="search_offline_geo_error">לא ניתן לנתח את הפריט הגאוגרפי \'%s\'</string>
 	<string name="search_osm_offline">חיפוש כתובת באמצעות המפה הבלתי מקוונת</string>
 	<string name="system_locale">מערכת</string>
-	<string name="preferred_locale_descr">נא לבחור את שפת התצוגה</string>
+	<string name="preferred_locale_descr">נא לבחור את שפת התצוגה (יש להפעיל את OsmAnd מחדש לאחר השינוי).</string>
 	<string name="preferred_locale">שפת התצוגה</string>
 	
 	
@@ -518,8 +519,8 @@
 	
 	<string name="shared_string_next">הבא</string>
 	<string name="shared_string_previous">הקודם</string>
-	<string name="unit_of_length_descr">שינוי יחידות האורך והמהירות</string>
-	<string name="unit_of_length">יחידת המידה</string>
+	<string name="unit_of_length_descr">שינוי יחידות האורך.</string>
+	<string name="unit_of_length">יחידות אורך</string>
 	<string name="si_mi_feet">מיילים/רגל</string>
 	<string name="si_mi_yard">מיילים/יארדים</string>
 	<string name="si_km_m">קילומטרים/מטרים</string>
@@ -565,7 +566,7 @@
 	<string name="km_h">קמ״ש</string>
 	<string name="m">מ׳</string>
 	<string name="old_map_index_is_not_supported">תבנית נתוני המפה שנזנחה „{0}“ אינה נתמכת</string>
-	<string name="poi_filter_closest_poi">נ״ע הקרובה ביותר</string>
+	<string name="poi_filter_closest_poi">נ״ע הקרובות ביותר</string>
 	<string name="poi_filter_custom_filter">מסנן מותאם אישית</string>
 	<string name="poi_filter_namefinder">מחפש שמות מקוון</string>
 	<string name="reading_cached_tiles">האריחים שנשמרו נקראים…</string>
@@ -584,7 +585,7 @@
 	<string name="build_installed">הבנייה {0} הותקנה בהצלחה ({1}).</string>
 	
 	<string name="downloading_build">הבנייה מתקבלת…</string>
-	<string name="install_selected_build">האם ברצונך להתקין את OsmAnd - {0} מהמיקום {1}‏ {2} מ״ב ?</string>
+	<string name="install_selected_build">האם ברצונך להתקין את OsmAnd‏ - {0} מתוך {1}‏ {2} מ״ב ?</string>
 	<string name="loading_builds_failed">קבלת רשימת הבניות של OsmAnd נכשלה</string>
 	<string name="loading_builds">הבניות של OsmAnd נטענות…</string>
 	<string name="select_build_to_install">יש לבחור את אחת הבניות של OsmAnd להתקנה</string>
@@ -605,7 +606,7 @@
 	<string name="shared_string_select_all">בחירת הכול</string>
 	<string name="shared_string_refresh">רענון</string>
 	<string name="fast_route_mode">המסלול המהיר ביותר</string>
-	<string name="fast_route_mode_descr">"יש להפעיל כדי לחשב את המסלול המהיר ביותר או לנטרל כדי לקבל את המסלול הקצר ביותר "</string>
+	<string name="fast_route_mode_descr">יש להפעיל כדי לחשב את המסלול המהיר ביותר או להשבית כדי לקבל את המסלול החסכוני ביותר.</string>
 	<string name="tiles_to_download_estimated_size">ברמת תקריב {0} יש להוריד {1} אריחים ({2} מ״ב)</string>
 	<string name="shared_string_download_map">הורדת המפה</string>
 	<string name="select_max_zoom_preload_area">יש לבחור את רמת התקריב המרבית כדי לטעון מראש</string>
@@ -617,7 +618,7 @@
 	<string name="renderer_load_sucess">תכונת העיבוד נטענה בהצלחה</string>
 	<string name="renderer_load_exception">אירעה חריגה: תכונת העיבוד לא נטענה</string>
 	<string name="renderers">תכונת עיבוד וקטורים</string>
-	<string name="renderers_descr">נא לבחור את הופעת תכונת העיבוד</string>
+	<string name="renderers_descr">נא לבחור את הופעת תכונת העיבוד.</string>
 	<string name="poi_context_menu_website">הצגת אתר הנ״ע</string>
 	<string name="poi_context_menu_call">הצגת טלפון הנ״ע</string>
 	<string name="website">אתר</string>
@@ -666,7 +667,7 @@
 	<string name="layer_yandex_traffic">תנועה מ־Yandex</string>
 	<string name="layer_route">מסלול</string>
 	<string name="shared_string_favorites">מועדפים</string>
-	<string name="layer_osm_bugs">תקלות ב־OSM</string>
+	<string name="layer_osm_bugs">הערות ב־OSM (מקוון)</string>
 	
 	
 	<string name="transport_Stop">תחנה</string>
@@ -686,12 +687,12 @@
 	<string name="show_transport_over_map_description">הצגת תחנות תחבורה ציבורית במפה.</string>
 	<string name="show_transport_over_map">הצגת תחנות תחבורה</string>
 	<string name="hello">יישום הניווט OsmAnd</string>
-	<string name="layer_poi">נ״ע…</string>
+	<string name="layer_poi">שכבת נ״ע…</string>
 	<string name="layer_map">מקור המפה…</string>
 	<string name="menu_layers">הגדרת תצוגה</string>
 	<string name="context_menu_item_search_poi">חיפוש נ״ע</string>
 	
-	<string name="use_trackball_descr">יש להשתמש בכדור מעקב כדי להזיז את המפה</string>
+	<string name="use_trackball_descr">יש להשתמש בכדור מעקב כדי להזיז את המפה.</string>
 	<string name="where_am_i">איפה אני?</string>
 	<string name="update_poi_success">נתוני הנ״ע עודכנו בהצלחה ({0} נטענו)</string>
 	<string name="use_trackball">שימוש בכדור המעקב</string>
@@ -700,7 +701,7 @@
 	<string name="gps_provider">רכיב איכון</string>
 	<string name="int_seconds">שניות</string>
 	<string name="int_min">דקות</string>
-	<string name="background_service_int_descr">הגדרת הפסקות שינה שמשמשות את שירות מצב השינה</string>
+	<string name="background_service_int_descr">הגדרת הפסקות שינה שמשמשות את שירות מצב הרקע.</string>
 	<string name="background_service_int">הפרשי התעוררות GPS</string>
 	<string name="update_poi_error_local">אירעה שגיאה בעת עדכון רשימת הנ״ע המקומית</string>
 	<string name="update_poi_error_loading">אירעה שגיאה בעת טעינת הנתונים מהשרת</string>
@@ -709,10 +710,10 @@
 	<string name="context_menu_item_update_poi">עדכון נ״ע</string>
 	<string name="context_menu_item_update_map_confirm">האם לעדכן את הנתונים המקומיים שלך מהאינטרנט?</string>
 	<string name="search_history_city">עיר:\n {0}</string>
-	<string name="background_service_provider_descr">נא לבחור את ספק המיקום בעת הפעלה במצב רקע</string>
+	<string name="background_service_provider_descr">נא לבחור את ספק המיקום שמשמש להפעלה במצב רקע.</string>
 	<string name="background_service_provider">ספק מיקום</string>
-	<string name="background_router_service_descr">הפעלת OsmAnd ברקע כדי לעקוב אחר המיקום שלך כשהמסך כבוי</string>
-	<string name="background_router_service">הפעלה ברקע</string>
+	<string name="background_router_service_descr">הפעלת OsmAnd ברקע כדי לעקוב אחר המיקום שלך כשהמסך כבוי.</string>
+	<string name="background_router_service">הפעלת OsmAnd ברקע</string>
 	<string name="off_router_service_no_gps_available">שירות הניווט ברקע דורש הפעלה של ספק מיקום.</string>
 	<string name="hide_poi_filter">הסתרת מסנן</string>
 	<string name="show_poi_filter">הצגת מסנן</string>
@@ -788,7 +789,7 @@
 	<string name="opening_hours">שעות הפתיחה</string>
 	<string name="background_service_wait_int">זמן ההמתנה המרבי לתיקון</string>
 	
-	<string name="background_service_wait_int_descr">הגדרת זמן ההמתנה המרבי לכל תיקון במיקום ברקע</string>
+	<string name="background_service_wait_int_descr">הגדרת זמן ההמתנה המרבי לכל תיקון במיקום ברקע.</string>
 	<string name="opening_changeset">ערכת השינויים נפתחת…</string>
 	<string name="closing_changeset">ערכת השינויים נסגרת…</string>
 	<string name="commiting_node">המפרק נשלח…</string>
@@ -2502,4 +2503,109 @@
     <string name="import_file_favourites">לשמור את הנתונים כקובץ GPX ולייבא את נקודות הדרך למועדפים?</string>
     <string name="share_fav_subject">מועדפים משותפים דרך OsmAnd</string>
     <string name="dashboard_or_drawer_description">ישנה בחירה חדשה לשלוט ביישומון באופן עיקרי באמצעות לוח המחוונים הגמיש או התפריט הסטטי. ניתן לשנות את בחירתך בהגדרות לוח המחוונים.</string>
+    <string name="what_is_here">מה יש כאן:</string>
+    <string name="pick_up_till">איסוף עד</string>
+    <string name="without_time_limit">ללא הגבלת זמן</string>
+    <string name="context_menu_read_full_article">קריאת הכתבה המלאה</string>
+    <string name="context_menu_read_article">קריאת הכתבה</string>
+    <string name="context_menu_points_of_group">כל הנקודות בקבוצה</string>
+    <string name="open_from">פתיחה בשעה</string>
+    <string name="open_till">סגירה בשעה</string>
+    <string name="will_close_at">סגירה בשעה</string>
+    <string name="will_open_at">פתיחה בשעה</string>
+    <string name="will_open_on">פתיחה ביום</string>
+    <string name="additional_actions">פעולות נוספות</string>
+    <string name="av_locations_selected_desc">קובץ GPX עם נקודות ציון ונתונים על ההערות הנבחרות.</string>
+    <string name="av_locations_all_desc">קובץ GPX עם נקודות ציון ונתונים על כל ההערות.</string>
+    <string name="shared_string_actions">פעולות</string>
+    <string name="shared_string_marker">סמן</string>
+    <string name="do_not_show_startup_messages_desc">מעלימה הודעות על הנחות ביישומון ואירועים מקומיים מיוחדים.</string>
+    <string name="routing_attr_driving_style_safety_name">העדפת דרכים משניות</string>
+    <string name="translit_name_if_miss">לשתק אם השם %1$s אם חסר</string>
+    <string name="translit_names">שעתוק שמות</string>
+    <string name="edit_filter">עריכת קטגוריות</string>
+    <string name="subcategories">תת קטגוריות</string>
+    <string name="selected_categories">קטגוריות נבחרות</string>
+    <string name="create_custom_poi">יצירת מסנן בהתאמה אישית</string>
+    <string name="custom_search">חיפוש בהתאמה אישית</string>
+    <string name="new_filter_desc">נא להקליד שם למסנן החדש, שם זה יצטרף ללשוניות הקטגוריות שלך.</string>
+    <string name="osm_live_payment_desc">עמלת המינוי תיגבה כל חודש. ניתן לבטל את המינוי ב־Google Play בכל עת.</string>
+    <string name="donation_to_osm">תרומה לקהילת OpenStreetMap</string>
+    <string name="donation_to_osm_desc">חלק מהתרומות שלך תישלחנה למשתמשי OSM שמגישים שינויים ל־OpenStreetMap. עלות המינוי נותרת בעינה.</string>
+    <string name="osm_live_subscription_desc">מינוי מאפשר עדכונים שעתיים, יומיים או שבועיים ואפשרות להורדת כל המפות בכל העולם ללא הגבלה.</string>
+    <string name="get_it">הרשמה</string>
+    <string name="get_for">הרשמה למשך %1$s</string>
+    <string name="get_for_month">הרשמה למשך חודש</string>
+    <string name="osm_live_banner_desc">קבלת כמות הורדות בלתי מוגבלת ועדכונים מפות בתדירות שהיא יותר מפעם בחודש: שבועית, יומית או שעתית.</string>
+    <string name="osmand_plus_banner_desc">עדכונים והורדות של המפה באופן בלתי מוגבל לרבות תוסף ויקיפדיה.</string>
+    <string name="si_mi_meters">מילים/מטרים</string>
+    <string name="skip_map_downloading">דילוג על הורדת המפות</string>
+    <string name="skip_map_downloading_desc">אין לך מפות בלתי מקוונות מותקנות. ניתן לבחור במפה מהרשימה או להוריד מאוחר יותר באמצעות התפריט - %1$s.</string>
+    <string name="search_another_country">נא לבחור באזור אחר</string>
+    <string name="search_map">מתבצע חיפוש במפות…</string>
+    <string name="first_usage_wizard_desc">לאפשר ל־OsmAnd לזהות את המיקום שלך ולהציע מפות להורדה לאותו האזור.</string>
+    <string name="location_not_found">המיקום לא נמצא</string>
+    <string name="no_inet_connection">אין חיבור לאינטרנט</string>
+    <string name="no_inet_connection_desc_map">נדרש לטובת הורדת מפות.</string>
+    <string name="search_location">המיקום בחיפוש…</string>
+    <string name="storage_free_space">מקום פנוי</string>
+    <string name="storage_place_description">אחסון נתונים של OsmAnd (למפות, מסלולים וכו׳): %1$s.</string>
+    <string name="move_marker_bottom_sheet_title">יש להזיז את המפה כדי לשנות את מיקום הסמן</string>
+    <string name="follow_us">לעקוב אחרינו</string>
+    <string name="access_direction_audio_feedback">משוב קולי על ניווט</string>
+    <string name="access_disable_wrong_direction_recalc">אין חישוב מסלול מחדש לכיוון ההפוך</string>
+    <string name="access_smart_autoannounce_descr">יש להודיע רק כאשר הכיוון ליעד משתנה.</string>
+    <string name="access_autoannounce_period">טווח הכרזה אוטומטית</string>
+    <string name="access_autoannounce_period_descr">מרווח הזמן המזערי בין הכרזות.</string>
+    <string name="rendering_value_fine_name">עדין</string>
+    <string name="rendering_value_thin_name">דק</string>
+    <string name="rendering_value_medium_name">בינוני</string>
+    <string name="rendering_value_bold_name">מודגש</string>
+    <string name="osmo_specify_tracker_id">נא לציין מזהה</string>
+    <string name="osmo_no_connection_msg">לא ניתן להתחבר לשרת ה־OsMo:
+\n- יש לבדוק את החיבור לאינטרנט;
+\n- את ההגדרות;
+\n- להיכנס לטוויטר שלנו: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">משתמש אלמוני לא יכול:
+\n- ליצור קבוצות;
+\n- לסנכרן קבוצות והתקנים עם השרת;
+\n- לנהל קבוצות והתקנים בלוח בקרה אישי בשרת.</string>
+    <string name="report">דיווח</string>
+    <string name="osmo_connect_to_device_tracker_id">מזהה עוקב</string>
+    <string name="osmo_auto_send_locations_descr">להתחיל טיול אוטומטית ולשלוח את המיקומים לאחר הפעלת היישומון.</string>
+    <string name="osmo_auto_send_locations">התחלת טיול אוטומטית</string>
+    <string name="osmo_tracker_id">מזהה עוקב</string>
+    <string name="osmo_tracker_id_descr">יש לגעת כדי לצפות במזהה העוקב.</string>
+    <string name="osmo_share_my_location">העברת המיקום</string>
+    <string name="osmo_plugin_name">ניטור OpenStreetMap</string>
+    <string name="storage_permission_restart_is_required">כעת יש ליישומון הרשאות לכתוב לאחסון חיצוני. נדרשת הפעלת היישומון מחדש באופן ידני.</string>
+    <string name="shared_string_move_up">הזזה למעלה</string>
+    <string name="shared_string_move_down">הזזה למטה</string>
+    <string name="osm_user_stat">עריכות %1$s, דירוג %2$s, סך כל העריכות %3$s</string>
+    <string name="osm_recipient_stat">עריכות %1$s, סכום %2$s mBTC</string>
+    <string name="osm_live_subscription">מינוי ל־OsmAnd חי</string>
+    <string name="osm_live_ask_for_purchase">נא לרכוש מינוי ל־OsmAnd תחילה</string>
+    <string name="gpx_info_asc_altitude">עלייה/ירידה: %1$s</string>
+    <string name="osmo_conn_successfull">החיבור הצליח: %1$s</string>
+    <string name="routing_attr_prefer_motorway_name">העדפת כבישים סלולים</string>
+    <string name="routing_attr_prefer_motorway_description">העדפת כבישים סלולים.</string>
+    <string name="routing_attr_avoid_motorway_name">הימנעות מכבישים סלולים</string>
+    <string name="routing_attr_avoid_motorway_description">הימנעות מכבישים סלולים.</string>
+    <string name="interrupt_music_descr">הנחיות קוליות משהות, לא רק מנמיכות, מוזיקה שברקע.</string>
+    <string name="osmand_extended_description_part7">תרומה ל־OSM • דיווח על תקלה בנתונים • העלאת מסלולי GPX ישירות מהיישומון אל OSM • הוספת נקודות עניין והעלאה ישירה שלהן ל־OSM (או לאחר מכן אם אין חיבור)</string>
+    <string name="arrival_distance_descr">כמה לפני המועד ברצונך להיוודע על הגעה ליעד?</string>
+    <string name="live_monitoring_max_interval_to_send">חוצץ זמן למעקב מקוון</string>
+    <string name="osm_edit_removed_note">הערת OSM נמחקה</string>
+    <string name="osm_edit_created_note">נוצרה הערת OSM</string>
+    <string name="osn_bug_name">הערת OSM</string>
+    <string name="osn_add_dialog_title">יצירת הערה</string>
+    <string name="share_geo">גאו:</string>
+    <string name="osm_edits">עריכות ב־OSM</string>
+    <string name="osmand_parking_hour">שע</string>
+    <string name="navigate_point_olc">פתיחת קוד מיקום</string>
+    <string name="osm_recipients_label">נמעני OSM</string>
+    <string name="total_donations">סך כל התרומות</string>
+<string name="access_direction_audio_feedback_descr">ציון כיוון נקודת היעד עם צליל.</string>
+    <string name="delay_to_start_navigation_descr">נא לציין את זמן ההמתנה להישאר במסך תכנון הנתיב.</string>
+    <string name="shared_string_without_name">ללא שם</string>
     </resources>

@@ -114,7 +114,7 @@
 	<string name="snap_to_road_descr">Standort während der Navigation auf Straßen einrasten.</string>
 	<string name="snap_to_road">Auf Straße einrasten</string>
 	<string name="osmand_play_title_30_chars">OsmAnd Karten &amp; Navigation</string>
-	<string name="osmand_short_description_80_chars">Globale Landkarten- und Navigationsanwendung für Offline- und Online-OSM-Karten.</string>
+	<string name="osmand_short_description_80_chars">Globale Landkarten- und Navigationsanwendung für Offline- und Online-OSM-Karten</string>
 	<string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
 \n
 \nOsmAnd ist eine Open-Source-Navigationsanwendung mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap-(OSM)-Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine Offline- und Online-Routing-Funktion inklusive Sprachnavigation. 
@@ -409,7 +409,7 @@
 	<string name="local_index_items_restored">%1$d von %2$d Datei(en) erfolgreich aktiviert.</string>
 	<string name="local_index_no_items_to_do">Aktion %1$s: Keine Dateien vorhanden</string>
 	<string name="local_index_action_do">Sie wollen %2$s Element(e) %1$s. Fortfahren?</string>
-	<string name="local_index_descr_title">Kartenverwaltung</string>
+	<string name="local_index_descr_title">Kartendateien verwalten.</string>
 	<string name="local_index_mi_restore">Aktivieren</string>
 	<string name="local_index_mi_backup">Deaktivieren</string>
 	
@@ -935,7 +935,7 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parkposition</string>
-	<string name="osmand_parking_plugin_description">Die Erweiterung ermöglicht es, den Standort eines geparkten Fahrzeugs zu speichern sowie die restliche Parkzeit anzuzeigen (falls das Parken zeitlich begrenzt ist). Parkplatz und Restzeit werden sowohl auf dem OsmAnd Dashboard als auch auf dem Kartenbildschirm dargestellt. Es kann ein Eintrag im Android-Kalender als Erinnerung hinzugefügt werden.</string>
+	<string name="osmand_parking_plugin_description">Die Erweiterung ermöglicht es, den Standort eines geparkten Fahrzeugs zu speichern sowie die restliche Parkzeit anzuzeigen (falls das Parken zeitlich begrenzt ist). Parkplatz und Restzeit werden sowohl auf der OsmAnd-Übersichtsseite als auch auf dem Kartenbildschirm dargestellt. Es kann ein Eintrag im Android-Kalender als Erinnerung hinzugefügt werden.</string>
 	<string name="osmand_parking_plugin_name">Parkposition</string>
 	<string name="context_menu_item_add_parking_point">Parkposition festlegen</string>
 	<string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
@@ -1603,7 +1603,7 @@ Mit Neuanmeldung fortfahren?</string>
 <string name="download_additional_maps">Fehlende Karten herunterladen: %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Mehr…</string>
     <string name="osmo_specify_tracker_id">Bitte Kennung angeben</string>
-    <string name="home">Dashboard</string>
+    <string name="home">Übersichtsseite</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, Oberleitungsbus-, Sammeltaxi-Linien</string>
 	<string name="record_plugin_name">Streckenaufzeichnung</string>
     <string name="int_hour">h</string>
@@ -1938,7 +1938,7 @@ Lon %2$s</string>
 	<string name="successfully_uploaded_pattern">Erfolgreich hochgeladen {0}/{1}</string>
 	<string name="try_again">Erneut versuchen</string>
 	<string name="error_message_pattern">Fehler: {0}</string>
-	<string name="dahboard_options_dialog_title">Dashboard konfigurieren</string>
+	<string name="dahboard_options_dialog_title">Übersichtsseite konfigurieren</string>
 	<string name="shared_string_undo">Rückgängig machen</string>
 	<string name="shared_string_skip">Überspringen</string>
 	<string name="app_name_osmand">OsmAnd</string>
@@ -2041,16 +2041,16 @@ Lon %2$s</string>
     <string name="feedback">Bewertung</string>
     <string name="contact_us">Kontakt</string>
     <string name="map_legend">Kartenlegende</string>
-    <string name="access_from_map_description">Menütaste zeigt Dashboard, nicht das Menü.</string>
+    <string name="access_from_map_description">Menütaste startet die Übersichtsseite, nicht das Menü.</string>
     <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht.</string>
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
     <string name="release_2_2">\\022 Neue kontextbezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten 
 \n 
-\n • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\' 
+\n • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Übersichtsseite bei App-Start anzeigen\' 
 \n 
-\n • Auswahl der anzuzeigenden Elemente im Dashboard möglich 
+\n • Auswahl der anzuzeigenden Elemente in der Übersichtsseite möglich 
 \n 
-\n • Dashboard kann umgangen werden, falls menübasierte App-Steuerung gewünscht ist 
+\n • Übersichtsseite kann umgangen werden, falls menübasierte App-Steuerung gewünscht ist 
 \n 
 \n • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden 
 \n 
@@ -2087,7 +2087,7 @@ Lon %2$s</string>
 	<string name="tab_title_advanced">Fortgeschritten</string>
 	<string name="contact_info">Kontakt-Informationen</string>
 	<string name="poi_dialog_poi_type">Art des POI</string>
-	<string name="number_of_rows_in_dash">Anzahl der Zeilen im Dashboard %1$s</string>
+	<string name="number_of_rows_in_dash">Anzahl der Zeilen in der Übersichtsseite %1$s</string>
 	<string name="downloads_left_template">%1$s Downloads übrig</string>
 	<string name="downloading_number_of_files">Herunterladen - %1$d Datei</string>
     <string name="show_free_version_banner">Zeige das Banner der freien Version</string>
@@ -2101,10 +2101,10 @@ Lon %2$s</string>
     <string name="enter_country_name">Name des Landes eingeben</string>
     <string name="save_poi_without_poi_type_message">Möchten Sie den POI wirklich ohne POI-Typ speichern?</string>
     <string name="poi_context_menu_modify_osm_change">OSM-Änderung bearbeiten</string>
-    <string name="use_dashboard_btn">Dashboard verwenden</string>
+    <string name="use_dashboard_btn">Übersichtsseite verwenden</string>
     <string name="use_drawer_btn">Menü verwenden</string>
     <string name="dashboard_or_drawer_title">Auswahl der App-Bedienung</string>
-    <string name="dashboard_or_drawer_description">Es ist nun auswählbar, ob die App primär über das flexible Dashboard oder über ein statisches Menü bedient werden soll. Diese Entscheidung kann jederzeit in den Dashboard-Einstellungen geändert werden.</string>
+    <string name="dashboard_or_drawer_description">Es ist nun auswählbar, ob die App primär über die flexible Übersichtsseite oder über ein statisches Menü bedient werden soll. Diese Entscheidung kann jederzeit in den Übersichtsseiten-Einstellungen geändert werden.</string>
     <string name="access_from_map">Aufruf von der Karte aus</string>
     <string name="favorite_category_add_new">neu erstellen</string>
     <string name="next_proceed">Weiter</string>
@@ -2124,13 +2124,13 @@ Lon %2$s</string>
     <string name="av_video_quality_high">Höchste Qualität</string>
     <string name="av_video_quality">Videoqualität</string>
     <string name="av_video_quality_descr">Videoausgabequalität wählen.</string>
-    <string name="av_audio_format">Audioformat</string>
+    <string name="av_audio_format">Audioausgabeformat</string>
     <string name="av_audio_format_descr">Audioausgabeformat wählen.</string>
     <string name="av_audio_bitrate">Audio-Bitrate</string>
     <string name="av_audio_bitrate_descr">Audio-Bitrate wählen.</string>
     <string name="rendering_attr_horseRoutes_name">Pferdewege</string>
     <string name="update">Aktualisierungsintervall</string>
-    <string name="only_download_over_wifi">Nur über WLAN herunterladen.</string>
+    <string name="only_download_over_wifi">Nur über WLAN herunterladen</string>
     <string name="live_update">Live-Aktualisierung</string>
 <string name="update_now">Jetzt aktualisieren</string>
 <string name="route_distance">Entfernung:</string>
@@ -2546,7 +2546,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
 Bitte geben Sie einen vollständigen Code ein</string>
     <string name="navigate_point_olc_info_area">Gültiger vollständiger OLC
 Abgedeckte Fläche: %1$s x %2$s</string>
-    <string name="auto_split_recording_title">Aufzeichnungen bei Lücken automatisch trennen.</string>
+    <string name="auto_split_recording_title">Aufzeichnungen bei Lücken automatisch trennen</string>
 	<string name="auto_split_recording_descr">Nach 6 min Pause neues Segment, nach 2 h neuen Track und nach Pause mit Datumsänderung neue Datei beginnen.</string>
     <string name="navigate_point_olc">Offener Standortcode (OLC)</string>
     <string name="quick_action_page_list_descr">Drücken der Aktionstaste blättert die untere Liste durch.</string>
@@ -2932,17 +2932,17 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n• Dauer des Aufstiegs entsprechend dem Gelände (Naismiths Regel)
 \n
 \n</string>
-    <string name="one_tap_active">Aktiviren mit einem Tap</string>
+    <string name="one_tap_active">Aktivieren mit einem Tap</string>
     <string name="what_is_here">Was ist hier:</string>
     <string name="without_time_limit">Ohne Zeitbegrenzung</string>
     <string name="context_menu_read_full_article">Ganzen Artikel lesen</string>
     <string name="context_menu_read_article">Artikel lesen</string>
     <string name="context_menu_points_of_group">Alle Punkte der Gruppe</string>
-    <string name="opened_from">Geöffnet ab</string>
-    <string name="opened_till">Geöffnet bis</string>
-    <string name="will_be_closed_at">Schließt um</string>
-    <string name="will_be_opened_at">Öffnet um</string>
-    <string name="will_be_opened_on">Öffnet am</string>
+    <string name="open_from">Geöffnet ab</string>
+    <string name="open_till">Geöffnet bis</string>
+    <string name="will_close_at">Schließt um</string>
+    <string name="will_open_at">Öffnet um</string>
+    <string name="will_open_on">Öffnet</string>
     <string name="additional_actions">Zusätzliche Aktionen</string>
     <string name="parked_at">geparkt um</string>
     <string name="pick_up_till">Abholung bis</string>

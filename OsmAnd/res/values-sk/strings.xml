@@ -2935,7 +2935,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="import_as_gpx">Importovať ako súbor GPX</string>
     <string name="import_as_favorites">Importovať ako Obľúbené</string>
     <string name="import_file">Importovať súbor</string>
-	<string name="tap_on_map_to_hide_interface_descr">Ťuknutie na mapu skryje ovládacie tlačidlá a nástroje.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Ťuknutie na mapu prepne ovládacie tlačidlá a nástroje.</string>
     <string name="tap_on_map_to_hide_interface">Režim na celú obrazovku</string>
     <string name="show_on_top_bar">Zobraziť na hornej lište</string>
     <string name="mark_passed">Značka prejdená</string>
@@ -2996,11 +2996,11 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="context_menu_read_full_article">Prečítať celý článok</string>
     <string name="context_menu_read_article">Prečítať článok</string>
     <string name="context_menu_points_of_group">Všetky body skupiny</string>
-    <string name="opened_from">Otvorené od</string>
-    <string name="opened_till">Otvorené do</string>
-    <string name="will_be_closed_at">Bude zatvorené o</string>
-    <string name="will_be_opened_at">Bude otvorené o</string>
-    <string name="will_be_opened_on">Bude otvorené v</string>
+    <string name="open_from">Otvorené od</string>
+    <string name="open_till">Otvorené do</string>
+    <string name="will_close_at">Bude zatvorené o</string>
+    <string name="will_open_at">Bude otvorené o</string>
+    <string name="will_open_on">Bude otvorené v</string>
     <string name="additional_actions">Ďalšie akcie</string>
     <string name="av_locations_selected_desc">Súbor GPX so súradnicami a údajmi vybraných poznámok.</string>
     <string name="av_locations_all_desc">Súbor GPX so súradnicami a údajmi všetkých poznámok.</string>

@@ -53,7 +53,7 @@ public class ImpassibleRoadsMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return ContextCompat.getDrawable(getMapActivity(), R.drawable.map_pin_avoid_road);
 	}
 }

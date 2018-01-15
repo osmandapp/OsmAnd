@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="poi_fuel_type">Врста горива</string>
+	<string name="poi_payment_type">Начин плаћања</string>
+	<string name="poi_payment_fuel_type">Платежне картице за гориво</string>
+	<string name="poi_additional_type">Додатно</string>
+	<string name="poi_internet_access_type">Врста приступа интернету</string>
+	<string name="poi_vending_type">Начин продаје</string>
+	<string name="poi_bicycle_service">Одржавање бицикала</string>
+	<string name="poi_clothes_type">Врста</string>
+	<string name="poi_shoes_type">Врста</string>
+	<string name="poi_fire_hydrant_type">Врста</string>
+	<string name="poi_fire_hydrant_position">Положај</string>
+	<string name="poi_fire_hydrant_water_source">Извор воде</string>
+	<string name="poi_payment_toll_type">Начин плаћања</string>
+	<string name="poi_traffic_signals_sound">Звук</string>
+	<string name="poi_highway_crossing_type">Врста</string>
+	<string name="poi_service_car">Одржавање</string>
+	</resources>

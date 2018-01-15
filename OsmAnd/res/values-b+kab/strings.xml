@@ -374,7 +374,7 @@
     <string name="shared_string_not_selected">Ur yettwafren ara</string>
     <string name="shared_string_sound">Imesli</string>
     <string name="route_distance">Ameccaq n tamsalt :</string>
-    <string name="shared_string_near">Rrif n</string>
+    <string name="shared_string_near">Zdat n</string>
     <string name="copied_to_clipboard">Aḍris yettwanγel γef afus</string>
     <string name="osn_comment_dialog_title">Rnu awennit</string>
     <string name="osb_comment_dialog_message">Izen</string>
@@ -663,4 +663,19 @@
     <string name="shared_string_left">Aẓelmaḍ</string>
     <string name="show_number_pad">Sken-d anasiw umḍin</string>
     <string name="shared_string_paste">Senṭeḍ</string>
+    <string name="what_is_here">Acu yellan dagi:</string>
+    <string name="context_menu_read_full_article">Γer amagrad akk</string>
+    <string name="context_menu_read_article">Γer amagrad</string>
+    <string name="context_menu_points_of_group">Akk tinqiḍin n ugraw</string>
+    <string name="open_from">Yeldi si</string>
+    <string name="open_till">Yeldi si</string>
+    <string name="will_close_at">Ad imdel γef</string>
+    <string name="will_open_at">Ad yeldi γef</string>
+    <string name="will_open_on">Ad yeldi ass</string>
+    <string name="additional_actions">Tiggawin nniḍen</string>
+    <string name="av_locations_selected_desc">Afaylu GPX igebren adig akked isefka n tezmilin ittwafernen.</string>
+    <string name="av_locations_all_desc">Afaylu igebren adig akked tizmilin.</string>
+    <string name="shared_string_actions">Tigawin</string>
+    <string name="parked_at">Sers deg</string>
+    <string name="without_time_limit">Ulac tilist deg wakud</string>
     </resources>

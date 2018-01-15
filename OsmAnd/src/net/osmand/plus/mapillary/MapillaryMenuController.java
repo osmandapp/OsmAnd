@@ -56,7 +56,7 @@ public class MapillaryMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return getIcon(R.drawable.ic_action_mapillary, R.color.mapillary_color);
 	}
 

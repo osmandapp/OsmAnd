@@ -2628,7 +2628,7 @@ Proporciona un código completo</string>
     <string name="search_favorites">Buscar favoritos</string>
     <string name="restart_search">Reiniciar búsqueda</string>
     <string name="increase_search_radius">Aumentar radio de búsqueda</string>
-    <string name="nothing_found">¡Nada por aquí! 😞</string>
+    <string name="nothing_found">¡Nada por aquí! :-(</string>
     <string name="nothing_found_descr">Modifica la consulta de búsqueda o aumenta el radio de búsqueda.</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Quieres acceder en este viaje a los caminos privados?</string>
     <string name="mapillary">Mapillary</string>
@@ -2869,21 +2869,21 @@ Proporciona un código completo</string>
 \n</string>
     <string name="av_locations_selected_desc">Archivo GPX con coordenadas y datos de las notas elegidas.</string>
     <string name="av_locations_all_desc">Archivo GPX con coordenadas y datos de todas las notas.</string>
-	<string name="osm_recipient_stat">Ediciones %1$s, sum %2$s mBTC</string>
+	<string name="osm_recipient_stat">%1$s ediciones, suman %2$s mBTC</string>
     <string name="osm_recipients_label">Destinatarios de OSM</string>
     <string name="total_donations">Total de donaciones</string>
 <string name="what_is_here">Aquí hay:</string>
     <string name="parked_at">estacionado a las</string>
     <string name="pick_up_till">Recoger hasta las</string>
-    <string name="without_time_limit">Sin límite de tiempo</string>
+    <string name="without_time_limit">Tiempo ilimitado</string>
     <string name="context_menu_read_full_article">Leer artículo completo</string>
     <string name="context_menu_read_article">Leer artículo</string>
     <string name="context_menu_points_of_group">Todos los puntos del grupo</string>
-    <string name="opened_from">Abierto de</string>
-    <string name="opened_till">Abierto hasta las</string>
-    <string name="will_be_closed_at">Cerrará a las</string>
-    <string name="will_be_opened_at">Abrirá a las</string>
-    <string name="will_be_opened_on">Abrirá sobre las</string>
+    <string name="open_from">Abierto desde las</string>
+    <string name="open_till">Abierto hasta las</string>
+    <string name="will_close_at">Cerrará a las</string>
+    <string name="will_open_at">Abrirá a las</string>
+    <string name="will_open_on">Abrirá sobre las</string>
     <string name="additional_actions">Acciones adicionales</string>
     <string name="shared_string_actions">Acciones</string>
     <string name="shared_string_marker">Marcador</string>

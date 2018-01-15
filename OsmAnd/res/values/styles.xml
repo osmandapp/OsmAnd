@@ -256,6 +256,7 @@
     </style>
 
     <style name="OsmandLightTheme.BottomSheet">
+        <item name="android:statusBarColor">@color/color_transparent</item>
         <item name="android:dialogTheme">@style/BottomSheet.Dialog</item>
         <item name="android:windowBackground">@color/color_transparent</item>
         <item name="android:backgroundDimAmount">0.3</item>
@@ -263,6 +264,7 @@
     </style>
 
     <style name="OsmandDarkTheme.BottomSheet">
+        <item name="android:statusBarColor">@color/color_transparent</item>
         <item name="android:dialogTheme">@style/BottomSheet.Dialog</item>
         <item name="android:windowBackground">@color/color_transparent</item>
         <item name="android:backgroundDimAmount">0.3</item>

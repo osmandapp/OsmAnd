@@ -97,20 +97,21 @@
                 android:layout_height="@dimen/context_menu_sub_info_height"
                 android:orientation="horizontal">
 
-                <TextView
+                <net.osmand.plus.widgets.TextViewEx
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
                     tools:text="Museum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/context_menu_line3"
+                    osmand:typeface="@string/font_roboto_medium"
                     style="@style/TextAppearance.ContextMenuSubtitle"/>
 
                 <TextView
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
                     tools:text="Closed till 10:00"
-                    android:id="@+id/opening_hours_text_view"
+                    android:id="@+id/additional_info_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -157,7 +158,7 @@
                     android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:id="@+id/title_button_view"
-                    android:background="?attr/ctx_menu_controller_bg"
+                    tools:background="?attr/ctx_menu_controller_bg"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="@dimen/context_menu_controller_height"
@@ -174,7 +175,7 @@
                         android:paddingRight="@dimen/context_menu_button_padding_x"
                         android:textAllCaps="true"
                         android:text="@string/recording_context_menu_play"
-                        android:textColor="?attr/ctx_menu_controller_text_color"
+                        tools:textColor="?attr/ctx_menu_controller_text_color"
                         android:textSize="@dimen/default_desc_text_size"/>
 
                     <TextView
@@ -192,7 +193,7 @@
                     android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:id="@+id/title_button_right_view"
-                    android:background="?attr/ctx_menu_controller_bg"
+                    tools:background="?attr/ctx_menu_controller_bg"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="@dimen/context_menu_controller_height"
@@ -209,7 +210,7 @@
                         android:paddingLeft="@dimen/context_menu_button_padding_x"
                         android:paddingRight="@dimen/context_menu_button_padding_x"
                         android:text="@string/shared_string_delete"
-                        android:textColor="?attr/ctx_menu_controller_text_color"
+                        tools:textColor="?attr/ctx_menu_controller_text_color"
                         android:textSize="@dimen/default_desc_text_size"/>
 
                 </LinearLayout>
@@ -228,7 +229,7 @@
 
                 <LinearLayout
                     android:id="@+id/download_button_left_view"
-                    android:background="?attr/ctx_menu_controller_bg"
+                    tools:background="?attr/ctx_menu_controller_bg"
                     android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:layout_width="0dp"
@@ -246,14 +247,14 @@
                         android:paddingLeft="@dimen/context_menu_button_padding_x"
                         android:paddingRight="@dimen/context_menu_button_padding_x"
                         android:text="@string/shared_string_download"
-                        android:textColor="?attr/ctx_menu_controller_text_color"
+                        tools:textColor="?attr/ctx_menu_controller_text_color"
                         android:textSize="@dimen/default_desc_text_size"/>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/download_button_right_view"
-                    android:background="?attr/ctx_menu_controller_bg"
+                    tools:background="?attr/ctx_menu_controller_bg"
                     android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:layout_width="0dp"
@@ -270,8 +271,8 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/context_menu_button_padding_x"
                         android:paddingRight="@dimen/context_menu_button_padding_x"
-                        android:text="@string/shared_string_delete"
-                        android:textColor="?attr/ctx_menu_controller_text_color"
+                        android:text="@string/shared_string_others"
+                        tools:textColor="?attr/ctx_menu_controller_text_color"
                         android:textSize="@dimen/default_desc_text_size"/>
 
                 </LinearLayout>
@@ -295,7 +296,7 @@
                     android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:layout_weight="1"
-                    android:background="?attr/ctx_menu_controller_bg">
+                    tools:background="?attr/ctx_menu_controller_bg">
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:id="@+id/title_button_bottom"
@@ -305,9 +306,9 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/context_menu_button_padding_x"
                         android:paddingRight="@dimen/context_menu_button_padding_x"
-                        android:text="@string/shared_string_others"
+                        android:text="@string/shared_string_delete"
                         android:textAllCaps="true"
-                        android:textColor="?attr/ctx_menu_controller_text_color"
+                        tools:textColor="?attr/ctx_menu_controller_text_color"
                         android:textSize="@dimen/default_desc_text_size"
                         osmand:typeface="@string/font_roboto_medium"/>
 
@@ -382,8 +383,8 @@
                 android:background="?attr/ctx_menu_divider"/>
 
             <LinearLayout
-                android:paddingLeft="@dimen/context_menu_padding_margin_small"
-                android:paddingRight="@dimen/context_menu_padding_margin_small"
+                android:paddingLeft="@dimen/map_widget_icon_margin"
+                android:paddingRight="@dimen/map_widget_icon_margin"
                 android:id="@+id/context_menu_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

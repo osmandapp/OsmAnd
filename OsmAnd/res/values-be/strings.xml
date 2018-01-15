@@ -2188,7 +2188,7 @@
     <string name="select_month_and_country">Выберыце месяц і краіну</string>
 <string name="shared_string_select">Абраць</string>
     <string name="shared_string_remove">Выдаліць</string>
-    <string name="road_blocked">Дарога заблякаваная</string>
+    <string name="road_blocked">Дарога заблакаваная</string>
     <string name="switch_start_finish">Памяняць месцамі пункт адпраўленьня і пункт прызначэньня</string>
     <string name="rendering_attr_hideIcons_name">Значкі POI</string>
     <string name="rec_split">Разьбіцьцё на кліпы</string>
@@ -2993,9 +2993,9 @@
 \n
 \n</string>
     <string name="what_is_here">Што тут:</string>
-    <string name="parked_at">прапаркаваны на</string>
+    <string name="parked_at">прыпаркаваны на</string>
     <string name="pick_up_till">Узяць да</string>
-    <string name="without_time_limit">Без абмежавання часу</string>
+    <string name="without_time_limit">Без абмежаваньня часу</string>
     <string name="context_menu_read_full_article">Чытаць увесь артыкул</string>
     <string name="context_menu_read_article">Чытаць артыкул</string>
     <string name="context_menu_points_of_group">Усе кропкі групы</string>
@@ -3004,7 +3004,7 @@
     <string name="will_be_closed_at">Будзе зачынена а</string>
     <string name="will_be_opened_at">Будзе адчынена а</string>
     <string name="will_be_opened_on">Будзе адчынена</string>
-    <string name="additional_actions">Дадатковыя дзеянні</string>
+    <string name="additional_actions">Дадатковыя дзеяньні</string>
     <string name="av_locations_selected_desc">GPX-файл з каардынатамі і данымі выбраных нататак.</string>
     <string name="av_locations_all_desc">GPX-файл з каардынатамі і данымі ўсіх нататак.</string>
     <string name="shared_string_actions">Дзеянні</string>
@@ -3012,4 +3012,11 @@
     <string name="osm_recipient_stat">Змен %1$s, сума %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-атрымальнікі</string>
     <string name="total_donations">Усяго ахвяраванняў</string>
-</resources>
+<string name="open_from">Адкрыта з</string>
+    <string name="open_till">Адкрыта да</string>
+    <string name="will_close_at">Закрыецца а</string>
+    <string name="will_open_at">Адкрыецца а</string>
+    <string name="will_open_on">Адкрыецца а</string>
+    <string name="shared_string_without_name">Без назвы</string>
+    <string name="lang_lo">лаоская</string>
+    </resources>

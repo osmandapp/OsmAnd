@@ -62,7 +62,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 				}
 			};
 			rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
-			rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+			rightTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
 		}
 
 		updateData();
@@ -86,7 +86,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		if (mRecording.isPhoto()) {
 			return getIcon(R.drawable.ic_action_photo_dark, R.color.audio_video_icon_color);
 		} else if (mRecording.isAudio()) {
@@ -136,7 +136,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 		if (!mRecording.isPhoto()) {
 			if (mPlugin.isPlaying(mRecording)) {
 				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_control_stop);
-				leftTitleButtonController.leftIconId = R.drawable.ic_action_rec_stop;
+				leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_rec_stop, true);
 				int pos = mPlugin.getPlayingPosition();
 				String durationStr;
 				if (pos == -1) {
@@ -149,14 +149,14 @@ public class AudioVideoNoteMenuController extends MenuController {
 				rightTitleButtonController.visible = false;
 			} else {
 				leftTitleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_play);
-				leftTitleButtonController.leftIconId = R.drawable.ic_play_dark;
+				leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_play_dark, true);
 				String durationStr = mRecording.getPlainDuration(accessibilityEnabled);
 				leftTitleButtonController.needRightText = true;
 				leftTitleButtonController.rightTextCaption = "— " + durationStr;
 			}
 		} else {
 			leftTitleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_show);
-			leftTitleButtonController.leftIconId = R.drawable.ic_action_view;
+			leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_view, true);
 		}
 	}
 
