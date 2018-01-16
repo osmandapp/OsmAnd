@@ -2705,5 +2705,5 @@
     <string name="update_poi_does_not_change_indexes">Interessepunktendringer i programmet påvirker ikke nedlastede kartfiler, endringer lagres i lokal fil i stedet.</string>
     <string name="si_mi_feet">Eng. mil/fot</string>
     <string name="si_mi_yard">Eng. mil/yard</string>
-    <string name="add_waypoint_dialog_added">"GPX-rutepunkt  \'\'{0}\'\' ble lagt til"</string>
+    <string name="add_waypoint_dialog_added">GPX-rutepunkt \'\'{0}\'\' ble lagt til</string>
     </resources>
