@@ -1901,7 +1901,7 @@
     <string name="osm_live_email_desc">Trengs for å gi deg informasjon om bidrag.</string>
     <string name="osm_live_support_region">Støttet region</string>
     <string name="osm_live_thanks">Takk for at du abonnerer på live-oppdateringer!</string>
-    <string name="osm_live_region_desc">En del av din donasjon blir sendt til OSM-brukere som sender inn kartendringer i den regionen.</string>
+    <string name="osm_live_region_desc">En del av din donasjon blir sendt til OSM-brukere som sender inn endringer til kartet i den regionen.</string>
     <string name="upload_osm_note">Last opp OSM-notis</string>
     <string name="add_time_span">Legg til tidsramme</string>
     <string name="rec_split">Oppdeling av opptak</string>
