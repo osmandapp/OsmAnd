@@ -2420,9 +2420,9 @@ Representerer området: %1$s x %2$s</string>
 \n- sjekk din internettforbindelse;
 \n- sjekk innstillingene;
 \n- se på Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">En anonym bruker kan ikke: 
-\n- opprette grupper; 
-\n- synkronisere grupper og enheter med tjeneren; 
+    <string name="anonymous_user_hint">En anonym bruker kan ikke:
+\n- opprette grupper;
+\n- synkronisere grupper og enheter med tjeneren;
 \n- behandle grupper og enheter i et personlig dashbord på nettstedet.</string>
     <string name="simulate_initial_startup">Simuler første programstart</string>
     <string name="audionotes_plugin_description">Audio/video-notatprogramtillegget tilbyr funksjonalitet for å ta opp lyd, eller video, eller ta bilder på en tur, enten ved bruk av en knapp på skjermen, eller direkte i bindeleddsmenyen for enhver posisjon på kartet.</string>
