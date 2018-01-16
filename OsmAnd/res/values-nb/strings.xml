@@ -2673,7 +2673,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samler inn informasjon om hvilke deler av programmet du åpner. Plasseringen din blir aldri sendt, ei heller noe du måtte skrive inn i programmet eller detaljer om områder som vises, søkes etter, eller lastes ned.</string>
     <string name="do_not_show_startup_messages_desc">Skrur av visning av programrabatter og spesielle lokale hendelsesmeldinger.</string>
     <string name="routing_attr_driving_style_safety_name">Foretrekk sideveier</string>
-    <string name="osm_live_header">Dette abonnementet skrur på timevise oppdateringer av alle kart verden over. Deler av inntekten går tilbake til OSM-gemenskapen, og er betalt for hvert OSM-bidrag. Hvis du elsker OsmAnd og OSM, og ønsker å støtte opp, dette er den perfekte måten å gjøre det.</string>
+    <string name="osm_live_header">Dette abonnementet gir timebaserte oppdateringer av alle kart over hele verden. Deler av inntekten går tilbake til OSM-fellesskapet og utbetales for hvert OSM-bidrag. Hvis du liker OsmAnd og OSM og vil støtte dem, er dette den perfekte måten å gjøre det på.</string>
     <string name="m_s">m/s</string>
     <string name="lang_ber">Berber</string>
     <string name="additional_actions">Flere handlinger</string>
