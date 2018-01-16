@@ -1770,7 +1770,7 @@
     <string name="rendering_attr_hideWaterPolygons_name">Skjul vann</string>
     <string name="wiki_around">Nærliggende Wikipiedia-artikler</string>
     <string name="route_roundabout_short">Ta %1$d avkjørsel og fortsett</string>
-    <string name="route_calculation">Ruteutregning</string>
+    <string name="route_calculation">Ruteberegning</string>
     <string name="gpx_appearance">Utseende</string>
     <string name="osmo_pause_location">Pause</string>
     <string name="osmo_service_running">OsMo-tjeneste kjører</string>
@@ -1784,14 +1784,14 @@
     <string name="christmas_poi">Jule-interessepunkt</string>
     <string name="christmas_desc_q">Vise jule-interessepunkt?</string>
     <string name="rendering_attr_surfaceIntegrity_name">Veistandard</string>
-    <string name="si_mi_meters">Mil/meter</string>
-    <string name="give_permission">Gi tilgang</string>
-    <string name="allow_access_location">Gi tilgang til plassering</string>
+    <string name="si_mi_meters">Engelske mil/meter</string>
+    <string name="give_permission">Gi tillatelse</string>
+    <string name="allow_access_location">Tillat adgang til sted</string>
     <string name="no_update_info_desc">Ikke se etter oppdateringer om nye versjoner eller rabatter relatert til OsmAnd.</string>
     <string name="shared_string_change">Endre</string>
     <string name="access_disable_offroute_recalc">Ingen ny beregning etter å ha forlatt ruten</string>
     <string name="access_disable_wrong_direction_recalc">Ingen ny ruteberegning ved motsatt retning</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Forhindre automatisk omregning av rute når du beveger deg i feil retning.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Forhindre automatisk ny ruteberegning ved bevegelse i motsatt retning.</string>
     <string name="access_smart_autoannounce">Smart auto-annonsering</string>
     <string name="rendering_value_fine_name">Fin</string>
     <string name="report">Rapport</string>
@@ -1865,7 +1865,7 @@
 \n - Ingen tilgang til frakoblede interessepunkter fra Wikipedia
 \n
 \n OsmAnd utvikles aktivt, og prosjektet vårt avhenger av finansielle bidrag for å drive utviklingen og å teste ny funksjonalitet. Overvei å kjøpe OsmAnd+ eller støtte spesifikke nye funksjoner eller bidra med en generell donasjon på osmand.net. "</string>
-	<string name="upload_osm_note_description">Du kan laste opp din OSM-notis anonymt eller bruke din OpenStreetmap.org -profil.</string>
+	<string name="upload_osm_note_description">Du kan laste opp ditt OSM-notat anonymt eller bruke din profil hos OpenStreetmap.org.</string>
     <string name="gpx_no_tracks_title">Du har ingen spor enda</string>
     <string name="gpx_no_tracks_title_folder">Legg til spor i mappen</string>
     <string name="gpx_add_track">Legg til spor</string>
@@ -1875,21 +1875,21 @@
     <string name="save_track_min_speed_descr">Filter: Still inn minimumshastighet for at et punkt skal logges.</string>
     <string name="save_track_min_distance">Minsteavstand for logging</string>
     <string name="save_track_min_distance_descr">Filter: Angi minste avstand fra siste posisjon for at et punkt skal logges.</string>
-    <string name="save_track_precision">Minste loggingspresisjon</string>
+    <string name="save_track_precision">Minimumsnøyaktighet for logging</string>
     <string name="save_track_precision_descr">Filter: Velg minste presisjon som starter loggføring av et punkt.</string>
     <string name="christmas_desc">I anledning jul og nyttår kan du velge å vise interessepunkter knyttet til julen: juletrær, markeder, etc.</string>
     <string name="translit_name_if_miss">Transkriber hvis %1$s navn mangler</string>
     <string name="translit_names">Transkriber navn</string>
-    <string name="get_for_month">Innhent for %1$s måned</string>
-    <string name="osm_live_banner_desc">Få ubegrensede kartnedlastinger, og kartopplastinger mer enn en gang om måneden: Ukentlig, daglig, eller timebasert.</string>
-    <string name="access_direction_audio_feedback">Lydbasert retningsanvisning</string>
-    <string name="access_direction_audio_feedback_descr">Indikerer målets retning med lyd.</string>
+    <string name="get_for_month">Få for %1$s måned</string>
+    <string name="osm_live_banner_desc">Få ubegrensede kartnedlastinger, og kartoppdateringer mer enn en gang i måneden: Ukentlig, daglig eller hver time.</string>
+    <string name="access_direction_audio_feedback">Retningstilbakemelding med lyd</string>
+    <string name="access_direction_audio_feedback_descr">Indiker retning til målpunkt med lyd.</string>
     <string name="access_direction_haptic_feedback">Retningstilbakemelding med vibrasjon</string>
-    <string name="access_direction_haptic_feedback_descr">Angi retningen til målet med vibrasjon.</string>
-    <string name="use_osm_live_routing_description">Skru på navigasjon for OSM-endringer i sanntid.</string>
+    <string name="access_direction_haptic_feedback_descr">Indiker retning til målpunkt med vibrasjon.</string>
+    <string name="use_osm_live_routing_description">Aktiver navigering for OsmAnd Live-endringer.</string>
     <string name="map_widget_magnetic_bearing">Magnetisk peiling</string>
     <string name="map_widget_bearing">Relativ peiling</string>
-    <string name="access_disable_offroute_recalc_descr">Forhindre automatisk ruteutregning når du er ganske langt unna rett vei.</string>
+    <string name="access_disable_offroute_recalc_descr">Forhindre automatisk ny ruteberegning etter at du har forlatt ruten.</string>
     <string name="access_smart_autoannounce_descr">Varsle bare når retningen til målpunktet endres.</string>
     <string name="access_autoannounce_period">Auto-annonseringsperiode</string>
     <string name="access_autoannounce_period_descr">Minste tidsintervall mellom annonseringer.</string>
@@ -2348,7 +2348,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="online_photos">Nettbaserte bilder</string>
     <string name="shared_string_add_photos">Legg til bilder</string>
     <string name="no_photos_descr">Vi har ingen bilder fra dette stedet.</string>
-    <string name="mapillary_action_descr">Bidra med dine egne visninger på gatenivå fra denne plasseringen via Mapillary.</string>
+    <string name="mapillary_action_descr">Bidra med dine egne gatenivåvisninger av dette stedet via Mapillary.</string>
     <string name="mapillary_widget">Mapillary-miniprogram</string>
     <string name="mapillary_widget_descr">Lar deg bidra raskt til Mapillary.</string>
     <string name="mapillary_descr">Nettbaserte bilder på gatenivå for alle. Oppdag steder, samarbeid, fang inn verden.</string>
@@ -2392,34 +2392,34 @@ Representerer området: %1$s x %2$s</string>
     <string name="shared_string_sort">Sorter</string>
     <string name="coordinate_input">Koordinatinntasting</string>
     <string name="is_saved">blir lagret</string>
-    <string name="marker_save_as_track_descr">Eksporter dine markører til ei fil du kan spesifisere her:</string>
-    <string name="marker_save_as_track">Lagre som tur</string>
+    <string name="marker_save_as_track_descr">Eksporter dine markører til en fil du kan spesifisere her:</string>
+    <string name="marker_save_as_track">Lagre som spor</string>
     <string name="all_markers_moved_to_history">Alle kartmarkører flyttet til historikk</string>
     <string name="marker_moved_to_history">Kartmarkør flyttet til historikk</string>
     <string name="marker_moved_to_active">Kartmarkør flyttet til aktive</string>
     <string name="shared_string_list">Liste</string>
     <string name="passed">Sist brukt: %1$s</string>
-    <string name="mapillary_menu_filter_description">Du kan filtrere bilder etter innsender og dato. Filter innvirker bare for nært forstørrelsesnivå.</string>
-    <string name="improve_coverage_install_mapillary_desc">Du kan ta dine egne bilder eller billedserier og tilknytte dem denne kartplasseringen.
+    <string name="mapillary_menu_filter_description">Du kan filtrere bilder etter innsender eller etter dato. Filtere gjelder kun for høyere zoomnivåer.</string>
+    <string name="improve_coverage_install_mapillary_desc">Du kan ta dine egne bilder eller bildeserier og legge dem til denne kartposisjonen.
 \n
-\nAlt du trenger å gjøre er å installere Mapillary-programmet fra Google Play Store.</string>
+\nFor å gjøre dette må du installere Mapillary-appen fra Google Play Store.</string>
     <string name="plugin_mapillary_descr">Foto på gatenivå for alle. Oppdag plasser, samarbeid, fang inn verden.</string>
     <string name="quick_action_showhide_osmbugs_title">Vis/skjul OSM-notater</string>
     <string name="quick_action_osmbugs_show">Vis OSM-notater</string>
     <string name="quick_action_osmbugs_hide">Skjul OSM-notater</string>
     <string name="quick_action_showhide_osmbugs_descr">Å trykke på handlingsknappen vil vise eller skjule OSM-notater på kartet.</string>
-    <string name="sea_depth_thanks">Takk for at du kjøpte nautiske dybdekonturer.</string>
+    <string name="sea_depth_thanks">Takk for at du kjøpte havdybdekonturer!</string>
     <string name="index_item_depth_contours_osmand_ext">Havdybdekonturer</string>
     <string name="download_depth_countours">Havdybdekonturer</string>
     <string name="route_points_category_name">Svinger å passere langs ruten</string>
     <string name="rendering_attr_depthContours_description">Vis havdybdekonturer og punkter.</string>
-    <string name="rendering_attr_depthContours_name">Nautiske dybdekonturer</string>
-    <string name="auto_split_recording_title">Del opp opptak automatisk etter opphold</string>
+    <string name="rendering_attr_depthContours_name">Havdybdekonturer</string>
+    <string name="auto_split_recording_title">Del opp opptak automatisk etter avbrudd</string>
     <string name="auto_split_recording_descr">Start nytt segment etter et avbrudd på 6 min., nytt spor etter avbrudd på 2 timer, eller ny fil etter et lengre avbrudd hvis datoen er endret.</string>
-    <string name="osmo_no_connection_msg">Kan ikke koble til OsMo-tjeneren:
-\n- sjekk din internettilknytning;
-\n- sjekk innstillingene;
-\n- sjekk oss ut på Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Kan ikke koble til OsMo-tjeneren: 
+\n- sjekk din internettforbindelse; 
+\n- sjekk innstillingene; 
+\n- se på Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">En anonym gruppe kan ikke:
 \n- opprette grupper;
 \n- synkronisere grupper og enheter med tjeneren;
@@ -2448,7 +2448,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="date_added">Dato lagt til</string>
     <string name="order_by">Sorter etter:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartorienteringsterskel</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Velg når farten er lav nok til å bytte kartorientering fra \"Bevegelsesretning\" til \"Kompass\".</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Velg ved hvilken hastighet kartorienteringen skifter fra \'I bevegelsesretning\' til \'Ifølge kompass\'.</string>
     <string name="srtm_purchase_header">For å se koter på kartet, må du kjøpe og installere programtillegget for koter</string>
     <string name="native_app_allocated_memory">Totalt innebygget minne</string>
     <string name="starting_point_too_far">Startpunkt for langt unna nærmeste vei.</string>
@@ -2624,14 +2624,14 @@ Representerer området: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="mark_passed">Marker som passert</string>
-    <string name="osn_modify_dialog_error">Unntak inntraff: Notat ble ikke endret</string>
+    <string name="osn_modify_dialog_error">Unntak oppstod: Notat ble ikke endret</string>
     <string name="quick_action_auto_zoom_desc">Trykk på handlingsknappen vil slå av/på automatisk kartzoom i henhold til din hastighet.</string>
     <string name="quick_action_add_destination_desc">Trykk på handlingsknappen vil legge til et mål midt på skjermen. Det tidligere angitte målet blir det siste mellomliggende målet.</string>
     <string name="quick_action_replace_destination_desc">Trykk på handlingsknappen vil erstatte målet med posisjonen midt på skjermen.</string>
     <string name="quick_action_add_first_intermediate_desc">Trykk på handlingsknappen vil legge til et første mellomliggende punkt midt på skjermen.</string>
     <string name="subscribe_email_desc">Abonner på vår e-postliste om programrabatter og få tre kartnedlastinger til!</string>
-    <string name="index_item_depth_points_southern_hemisphere">Havdybdepunkter for sørlig halvkule</string>
-    <string name="index_item_depth_points_northern_hemisphere">Havdybdepunkter for nordlig halvkule</string>
+    <string name="index_item_depth_points_southern_hemisphere">Havdybdepunkter for sørlige halvkule</string>
+    <string name="index_item_depth_points_northern_hemisphere">Havdybdepunkter for nordlige halvkule</string>
     <string name="download_files_error_not_enough_space">Ikke nok plass! Lagringsplass som trengs er {3} MB midlertidig, {1} MB permanent. Tilgjengelig plass er kun {2} MB.</string>
     <string name="download_files_question_space_with_temp">Laste ned {0} fil(er)? Brukt lagringsplass er {3} MB midlertidig, {1} MB permanent. (Tilgjengelig plass er {2} MB.)</string>
     <string name="simulate_initial_startup_descr">Setter flagget som indikerer første programoppstart, alle andre innstillinger forblir uendret.</string>
