@@ -2416,9 +2416,9 @@ Representerer området: %1$s x %2$s</string>
     <string name="rendering_attr_depthContours_name">Havdybdekonturer</string>
     <string name="auto_split_recording_title">Del opp opptak automatisk etter avbrudd</string>
     <string name="auto_split_recording_descr">Start nytt segment etter et avbrudd på 6 min., nytt spor etter avbrudd på 2 timer, eller ny fil etter et lengre avbrudd hvis datoen er endret.</string>
-    <string name="osmo_no_connection_msg">Kan ikke koble til OsMo-tjeneren: 
-\n- sjekk din internettforbindelse; 
-\n- sjekk innstillingene; 
+    <string name="osmo_no_connection_msg">Kan ikke koble til OsMo-tjeneren:
+\n- sjekk din internettforbindelse;
+\n- sjekk innstillingene;
 \n- se på Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">En anonym gruppe kan ikke:
 \n- opprette grupper;
