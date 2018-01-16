@@ -1795,7 +1795,7 @@
     <string name="access_smart_autoannounce">Smart auto-annonsering</string>
     <string name="rendering_value_fine_name">Fin</string>
     <string name="report">Rapport</string>
-    <string name="osmo_connect">Ta del i</string>
+    <string name="osmo_connect">Bli med</string>
     <string name="live_updates">Sanntidsoppdateringer</string>
     <string name="av_video_quality">Videokvalitet</string>
     <string name="av_video_quality_descr">Velg videokvalitet</string>
@@ -1897,11 +1897,11 @@
     <string name="osmo_tracker_id">Sporings-ID</string>
     <string name="osmo_tracker_id_descr">Trykk for å vise sporings-ID.</string>
     <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, redigeringer totalt %3$s</string>
-    <string name="osm_editors_ranking">Rankering av OSM-bidragsytere</string>
-    <string name="osm_live_email_desc">Vi trenger det for å gi deg informasjon om bidragsytere</string>
-    <string name="osm_live_support_region">Støttet område</string>
-    <string name="osm_live_thanks">Takk for at du abonnerer på sanntidsoppdateringer!</string>
-    <string name="osm_live_region_desc">Deler av din donasjon vil bli sendt til OSM-brukere som sender inn endringer til kartet i det området</string>
+    <string name="osm_editors_ranking">Rangering av OSM-bidragsytere</string>
+    <string name="osm_live_email_desc">Trengs for å gi deg informasjon om bidrag.</string>
+    <string name="osm_live_support_region">Støttet region</string>
+    <string name="osm_live_thanks">Takk for at du abonnerer på live-oppdateringer!</string>
+    <string name="osm_live_region_desc">En del av din donasjon blir sendt til OSM-brukere som sender inn kartendringer i den regionen.</string>
     <string name="upload_osm_note">Last opp OSM-notis</string>
     <string name="add_time_span">Legg til tidsramme</string>
     <string name="rec_split">Oppdeling av opptak</string>
