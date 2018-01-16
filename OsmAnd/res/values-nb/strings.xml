@@ -1983,7 +1983,7 @@
     <string name="gpx_info_asc_altitude">Nedstigning/stigning: %1$s</string>
     <string name="gpx_timespan">Tidsrom: %1$s</string>
     <string name="gpx_timemoving">Tid i bevegelse: %1$s</string>
-    <string name="osmo_user_left">Bruker %1$s forlot gruppen %2$s</string>
+    <string name="osmo_user_left">Bruker %1$s forlot gruppe %2$s</string>
     <string name="osmo_show_group_notifications_descr">Vis oppsprettsmeldinger når en bruker tar del i eller forlater gruppa</string>
     <string name="osmo_create_groups_confirm">For å kunne opprette grupper må du registrere en brukerkonto i OsMo.</string>
     <string name="osmo_regenerate_login_ids_confirm">Er du sikker på at du vil regenerere personlige ID-er? Alle enheter, tilkoblet deg, vil ikke kunne spore deg lengre.</string>
