@@ -448,12 +448,10 @@ public abstract class OsmandPlugin {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			if (plugin instanceof ParkingPositionPlugin) {
 				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
-			} else if (plugin instanceof OsmandMonitoringPlugin) {
-				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
 			}
 		}
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			if (!(plugin instanceof ParkingPositionPlugin) && !(plugin instanceof OsmandMonitoringPlugin)) {
+			if (!(plugin instanceof ParkingPositionPlugin)) {
 				int itemsCount = adapter.length();
 				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
 				if (adapter.length() > itemsCount) {
