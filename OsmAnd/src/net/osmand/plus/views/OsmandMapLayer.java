@@ -261,6 +261,21 @@ public abstract class OsmandMapLayer {
 		return res;
 	}
 
+	public int getDefaultRadiusPoi(RotatedTileBox tb) {
+		int r;
+		final double zoom = tb.getZoom();
+		if (zoom <= 15) {
+			r = 10;
+		} else if (zoom <= 16) {
+			r = 14;
+		} else if (zoom <= 17) {
+			r = 16;
+		} else {
+			r = 18;
+		}
+		return (int) (r * tb.getDensity());
+	}
+
 	public abstract class MapLayerData<T> {
 		public int ZOOM_THRESHOLD = 1;
 		public RotatedTileBox queriedBox;
