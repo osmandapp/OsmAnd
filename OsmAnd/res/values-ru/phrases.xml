@@ -3688,4 +3688,31 @@
 	<string name="poi_climbing_mixed_no">Смешанный: нет</string>
 	<string name="poi_climbing_deepwater_yes">Лазание над водой: да</string>
 	<string name="poi_climbing_deepwater_no">Лазание над водой: нет</string>
+
+	<string name="poi_climbing_length">Высота подъёма</string>
+	<string name="poi_climbing_length_min">Высота подъёма (мин)</string>
+	<string name="poi_climbing_length_max">Высота подъёма (макс)</string>
+	<string name="poi_climbing_rock_limestone">Тип камня: известняк</string>
+	<string name="poi_climbing_rock_granite">Тип камня: гранит</string>
+	<string name="poi_climbing_rock_sandstone">Тип камня: песчаник</string>
+	<string name="poi_climbing_rock_quartzite">Тип камня: кварцит</string>
+	<string name="poi_climbing_rock_gneiss">Тип камня: гнейс</string>
+	<string name="poi_climbing_rock_porphyry">Тип камня: порфир</string>
+	<string name="poi_climbing_quality_solid">Надежность камней: прочно</string>
+	<string name="poi_climbing_quality_fragile">Надежность камней: ненадёжно</string>
+	<string name="poi_climbing_bolted_yes">Фиксированные зацепы: есть</string>
+	<string name="poi_climbing_bolted_no">Фиксированные зацепы: нет</string>
+	<string name="poi_climbing_orientation_n">Ориентация стены: С</string>
+	<string name="poi_climbing_orientation_ne">Ориентация стены: СВ</string>
+	<string name="poi_climbing_orientation_e">Ориентация стены: В</string>
+	<string name="poi_climbing_orientation_se">Ориентация стены: ЮГ</string>
+	<string name="poi_climbing_orientation_s">Ориентация стены: Ю</string>
+	<string name="poi_climbing_orientation_sw">Ориентация стены: ЮЗ</string>
+	<string name="poi_climbing_orientation_w">Ориентация стены: З</string>
+	<string name="poi_climbing_orientation_nw">Ориентация стены: СЗ</string>
+	<string name="poi_climbing_summit_log_yes">Журнал восхождений: есть</string>
+	<string name="poi_climbing_summit_log_no">Журнал восхождений: нет</string>
+	<string name="poi_climbing_routes">Скальные маршруты</string>
+
+
 	</resources>
