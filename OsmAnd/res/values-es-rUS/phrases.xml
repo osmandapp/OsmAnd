@@ -3473,4 +3473,51 @@
 
 <string name="poi_route_subway_ref">Metro</string>
 
-	</resources>
+	<string name="poi_climbing_style">Estilo de escalada</string>
+
+<string name="poi_ref_post">Código postal</string>
+
+	<string name="poi_climbing_sport_yes">Deportiva: Sí</string>
+	<string name="poi_climbing_sport_no">Deportiva: No</string>
+	<string name="poi_climbing_boulder_yes">Escalada en bloque: Sí</string>
+	<string name="poi_climbing_boulder_no">Escalada en bloque: No</string>
+	<string name="poi_climbing_toprope_yes">Moulinette: Sí</string>
+	<string name="poi_climbing_toprope_no">Moulinette: No</string>
+	<string name="poi_climbing_trad_yes">Tradicional: Sí</string>
+	<string name="poi_climbing_trad_no">Tradicional: No</string>
+	<string name="poi_climbing_multipitch_yes">Rutas multipaso: Sí</string>
+	<string name="poi_climbing_multipitch_no">Rutas multipaso: No</string>
+	<string name="poi_climbing_ice_yes">Hielo: Sí</string>
+	<string name="poi_climbing_ice_no">Hielo: No</string>
+	<string name="poi_climbing_mixed_yes">Mixto: Sí</string>
+	<string name="poi_climbing_mixed_no">Mixto: No</string>
+	<string name="poi_climbing_deepwater_yes">Psicobloc: Sí</string>
+	<string name="poi_climbing_deepwater_no">Psicobloc: No</string>
+
+	<string name="poi_climbing_length">Longitud de escalada</string>
+	<string name="poi_climbing_length_min">Longitud mínima de escalada</string>
+	<string name="poi_climbing_length_max">Longitud máxima de escalada</string>
+	<string name="poi_climbing_rock_limestone">Escalada en roca: Piedra caliza</string>
+	<string name="poi_climbing_rock_granite">Escalada en roca: Granito</string>
+	<string name="poi_climbing_rock_sandstone">Escalada en roca: Arenisca</string>
+	<string name="poi_climbing_rock_quartzite">Escalada en roca: Cuarcita</string>
+	<string name="poi_climbing_rock_gneiss">Escalada en roca: Gneís</string>
+	<string name="poi_climbing_rock_porphyry">Escalada en roca: Pórfido</string>
+	<string name="poi_climbing_quality_solid">Calidad de la escalada: Sólido</string>
+	<string name="poi_climbing_quality_fragile">Calidad de la escalada: Frágil</string>
+	<string name="poi_climbing_bolted_yes">Anclajes fijos: Sí</string>
+	<string name="poi_climbing_bolted_no">Anclajes fijos: No</string>
+	<string name="poi_climbing_orientation_n">Orientación del muro: N</string>
+	<string name="poi_climbing_orientation_ne">Orientación del muro: NE</string>
+	<string name="poi_climbing_orientation_e">Orientación del muro: E</string>
+	<string name="poi_climbing_orientation_se">Orientación del muro: SE</string>
+	<string name="poi_climbing_orientation_s">Orientación del muro: S</string>
+	<string name="poi_climbing_orientation_sw">Orientación del muro: SO</string>
+	<string name="poi_climbing_orientation_w">Orientación del muro: O</string>
+	<string name="poi_climbing_orientation_nw">Orientación del muro: NO</string>
+	<string name="poi_climbing_summit_log_yes">Registro de la escalada en la cumbre: Sí</string>
+	<string name="poi_climbing_summit_log_no">Registro de la escalada en la cumbre: No</string>
+	<string name="poi_climbing_routes">Rutas de escalada</string>
+
+
+</resources>
