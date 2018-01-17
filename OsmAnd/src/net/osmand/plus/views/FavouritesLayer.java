@@ -75,7 +75,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 	}
 	
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return (Math.abs(objx - ex) <= radius * 2 && Math.abs(objy - ey) <= radius * 2) ;
+		return (Math.abs(objx - ex) <= radius * 1.5 && Math.abs(objy - ey) <= radius * 1.5) ;
 //		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
 		//return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
 	}
@@ -179,7 +179,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 	}
 
 	public void getFavoriteFromPoint(RotatedTileBox tb, PointF point, List<? super FavouritePoint> res) {
-		int r = (int) (15 * tb.getDensity());
+		int r = getDefaultRadiusPoi(tb);
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		for (FavouritePoint n : getPoints()) {

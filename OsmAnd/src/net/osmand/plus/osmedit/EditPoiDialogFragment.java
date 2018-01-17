@@ -308,6 +308,24 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
+		if (!isAddingPoi) {
+			Button deleteButton = (Button) view.findViewById(R.id.deleteButton);
+			deleteButton.setVisibility(View.VISIBLE);
+			deleteButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					DeletePoiHelper deletePoiHelper = new DeletePoiHelper(getMyActivity());
+					deletePoiHelper.setCallback(new DeletePoiHelper.DeletePoiCallback() {
+						@Override
+						public void poiDeleted() {
+							dismiss();
+						}
+					});
+					deletePoiHelper.deletePoiWithDialog(getEditPoiData().getEntity());
+				}
+			});
+		}
+
 		Button saveButton = (Button) view.findViewById(R.id.saveButton);
 		saveButton.setText(mOpenstreetmapUtil instanceof OpenstreetmapRemoteUtil
 				? R.string.shared_string_upload : R.string.shared_string_save);
@@ -700,11 +718,16 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	public static class ShowDeleteDialogAsyncTask extends AsyncTask<Amenity, Void, Node> {
+	public static class DeletePoiHelper {
 		private final OpenstreetmapUtil openstreetmapUtil;
 		private final AppCompatActivity activity;
+		private DeletePoiCallback callback;
 
-		public ShowDeleteDialogAsyncTask(AppCompatActivity activity) {
+		public void setCallback(DeletePoiCallback callback) {
+			this.callback = callback;
+		}
+
+		public DeletePoiHelper(AppCompatActivity activity) {
 			this.activity = activity;
 			OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
 			OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
@@ -715,11 +738,22 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		}
 
-		protected Node doInBackground(Amenity[] params) {
-			return openstreetmapUtil.loadNode(params[0]);
+		public void deletePoiWithDialog(Amenity amenity) {
+			new AsyncTask<Amenity, Void, Node>() {
+
+				@Override
+				protected Node doInBackground(Amenity... params) {
+					return openstreetmapUtil.loadNode(params[0]);
+				}
+
+				@Override
+				protected void onPostExecute(Node node) {
+					deletePoiWithDialog(node);
+				}
+			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, amenity);
 		}
 
-		protected void onPostExecute(final Node n) {
+		public void deletePoiWithDialog(final Node n) {
 			if (n == null) {
 				Toast.makeText(activity, activity.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
 				return;
@@ -767,6 +801,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 						@Override
 						public boolean processResult(Node result) {
 							if (result != null) {
+								if (callback != null) {
+									callback.poiDeleted();
+								}
 								if (isLocalEdit) {
 									Toast.makeText(activity, R.string.osm_changes_added_to_local_edits,
 											Toast.LENGTH_LONG).show();
@@ -781,6 +818,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 							return false;
 						}
 					}, activity, openstreetmapUtil, null);
+		}
+
+		public interface DeletePoiCallback {
+			void poiDeleted();
 		}
 	}
 

@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
@@ -113,8 +114,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 			}
 		}
 
-		ExtendedBottomSheetBehavior behavior = ExtendedBottomSheetBehavior.from(scrollView);
-		behavior.setPeekHeight(getResources().getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height));
+		final ExtendedBottomSheetBehavior behavior = ExtendedBottomSheetBehavior.from(scrollView);
 		behavior.setBottomSheetCallback(new BottomSheetCallback() {
 			@Override
 			public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -130,6 +130,16 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 
 			}
 		});
+		if (portrait) {
+			behavior.setPeekHeight(getResources().getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height));
+		} else {
+			getDialog().setOnShowListener(new DialogInterface.OnShowListener() {
+				@Override
+				public void onShow(DialogInterface dialog) {
+					behavior.setState(ExtendedBottomSheetBehavior.STATE_EXPANDED);
+				}
+			});
+		}
 
 		return mainView;
 	}

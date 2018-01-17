@@ -41,7 +41,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.util.List;
-import java.util.Map;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -185,9 +184,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					openOsmNote(mapActivity, latitude, longitude);
 				} else if (resId == R.string.context_menu_item_modify_note) {
 					modifyOsmNote(mapActivity, (OsmNotesPoint) selectedObj);
-				} else if (resId == R.string.poi_context_menu_delete) {
-					new EditPoiDialogFragment.ShowDeleteDialogAsyncTask(mapActivity)
-							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Amenity) selectedObj);
 				} else if (resId == R.string.poi_context_menu_modify) {
 					EditPoiDialogFragment.showEditInstance((Amenity) selectedObj, mapActivity);
 				} else if (resId == R.string.poi_context_menu_modify_osm_change) {
@@ -207,10 +203,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (isEditable) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify, mapActivity)
 					.setIcon(R.drawable.ic_action_edit_dark)
-					.setListener(listener)
-					.createItem());
-			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_delete, mapActivity)
-					.setIcon(R.drawable.ic_action_delete_dark)
 					.setListener(listener)
 					.createItem());
 		} else if (selectedObj instanceof OpenstreetmapPoint && ((OpenstreetmapPoint) selectedObj).getAction() != Action.DELETE) {
