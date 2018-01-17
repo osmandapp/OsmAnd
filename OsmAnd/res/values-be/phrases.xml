@@ -3721,4 +3721,30 @@
 	<string name="poi_climbing_deepwater_yes">Лажанне над вадой: так</string>
 	<string name="poi_climbing_deepwater_no">Лажанне над вадой: не</string>
 
+<string name="poi_climbing_length">Вышыня пад\'ёму</string>
+	<string name="poi_climbing_length_min">Вышыня пад\'ёму (мін)</string>
+	<string name="poi_climbing_length_max">Вышыня пад\'ёму (макс)</string>
+	<string name="poi_climbing_rock_limestone">Тып каменя: вапняк</string>
+	<string name="poi_climbing_rock_granite">Тып каменя: граніт</string>
+	<string name="poi_climbing_rock_sandstone">Тып каменя: пяшчанік</string>
+	<string name="poi_climbing_rock_quartzite">Тып каменя: кварцыт</string>
+	<string name="poi_climbing_rock_gneiss">Тып каменя: гнейс</string>
+	<string name="poi_climbing_rock_porphyry">Тып каменя: парфір</string>
+	<string name="poi_climbing_quality_solid">Надзейнасць паверхні: цвёрдая</string>
+	<string name="poi_climbing_quality_fragile">Надзейнасць паверхні: крохкая</string>
+	<string name="poi_climbing_bolted_yes">Зафіксаваныя зачэпы: так</string>
+	<string name="poi_climbing_bolted_no">Зафіксаваныя зачэпы: не</string>
+	<string name="poi_climbing_orientation_n">Арыентацыя сцяны: поўнач</string>
+	<string name="poi_climbing_orientation_ne">Арыентацыя сцяны: паўночны ўсход</string>
+	<string name="poi_climbing_orientation_e">Арыентацыя сцяны: усход</string>
+	<string name="poi_climbing_orientation_se">Арыентацыя сцяны: паўднёвы ўсход</string>
+	<string name="poi_climbing_orientation_s">Арыентацыя сцяны: поўдзень</string>
+	<string name="poi_climbing_orientation_sw">Арыентацыя сцяны: паўднёвы захад</string>
+	<string name="poi_climbing_orientation_w">Арыентацыя сцяны: захад</string>
+	<string name="poi_climbing_orientation_nw">Арыентацыя сцяны: паўночны захад</string>
+	<string name="poi_climbing_summit_log_yes">Журнал узыходжанняў: так</string>
+	<string name="poi_climbing_summit_log_no">Журнал узыходжанняў: не</string>
+	<string name="poi_climbing_routes">Маршруты ўзыходжання</string>
+
+
 </resources>
