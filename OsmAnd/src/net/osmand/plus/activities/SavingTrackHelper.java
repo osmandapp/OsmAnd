@@ -203,7 +203,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 						File targetDir = dir;
 						if (ctx.getSettings().STORE_TRACKS_IN_MONTHLY_DIRECTORIES.get()) {
 							SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM");
-							dateDirFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 							String dateDirName = dateDirFormat.format(new Date(pt.time));
 							File dateDir = new File(dir, dateDirName);
 							dateDir.mkdirs();
