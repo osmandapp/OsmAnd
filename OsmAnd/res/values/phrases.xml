@@ -96,6 +96,7 @@
 	<string name="poi_water_supply_type">Water supply type</string>
 	<string name="poi_water_purification">Water purification</string>
 	<string name="poi_water_place_access">Water place access</string>
+	<string name="poi_climbing_style">Climbing style</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3644,5 +3645,24 @@
 
 	<string name="poi_payment_centre">Payment centre</string>
 	<string name="poi_money_transfer">Money transfer</string>
+
+	<string name="poi_ref_post">Postcode</string>
+
+	<string name="poi_climbing_sport_yes">Sport: yes</string>
+	<string name="poi_climbing_sport_no">Sport: no</string>
+	<string name="poi_climbing_boulder_yes">Bouldering: yes</string>
+	<string name="poi_climbing_boulder_no">Bouldering: no</string>
+	<string name="poi_climbing_toprope_yes">Top rope: yes</string>
+	<string name="poi_climbing_toprope_no">Top rope: no</string>
+	<string name="poi_climbing_trad_yes">Traditional: yes</string>
+	<string name="poi_climbing_trad_no">Traditional: no</string>
+	<string name="poi_climbing_multipitch_yes">Multi-pitch routes: yes</string>
+	<string name="poi_climbing_multipitch_no">Multi-pitch routes: yes</string>
+	<string name="poi_climbing_ice_yes">Ice: yes</string>
+	<string name="poi_climbing_ice_no">Ice: no</string>
+	<string name="poi_climbing_mixed_yes">Mixed: yes</string>
+	<string name="poi_climbing_mixed_no">Mixed: no</string>
+	<string name="poi_climbing_deepwater_yes">Deep-water soloing: yes</string>
+	<string name="poi_climbing_deepwater_no">Deep-water soloing: no</string>
 
 </resources>
