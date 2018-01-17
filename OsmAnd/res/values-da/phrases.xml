@@ -3745,4 +3745,51 @@
 
 <string name="poi_route_subway_ref">Metro</string>
 
-	</resources>
+	<string name="poi_climbing_style">Klatrestil</string>
+
+<string name="poi_ref_post">Postnummer</string>
+
+	<string name="poi_climbing_sport_yes">Sport: ja</string>
+	<string name="poi_climbing_sport_no">Sport: nej</string>
+	<string name="poi_climbing_boulder_yes">Bouldering: ja</string>
+	<string name="poi_climbing_boulder_no">Bouldering: nej</string>
+	<string name="poi_climbing_toprope_yes">Toprope: ja</string>
+	<string name="poi_climbing_toprope_no">Toprope: nej</string>
+	<string name="poi_climbing_trad_yes">Traditionel: ja</string>
+	<string name="poi_climbing_trad_no">Traditionel: nej</string>
+	<string name="poi_climbing_multipitch_yes">Multi-pitch ruter: ja</string>
+	<string name="poi_climbing_multipitch_no">Multi-pitch ruter: nej</string>
+	<string name="poi_climbing_ice_yes">Is: ja</string>
+	<string name="poi_climbing_ice_no">Is: nej</string>
+	<string name="poi_climbing_mixed_yes">Blandet: ja</string>
+	<string name="poi_climbing_mixed_no">Blandet: nej</string>
+	<string name="poi_climbing_deepwater_yes">Dybt vand solo: ja</string>
+	<string name="poi_climbing_deepwater_no">Dybt vand solo: nej</string>
+
+	<string name="poi_climbing_length">Klatrelængde</string>
+	<string name="poi_climbing_length_min">Klatrelængde min</string>
+	<string name="poi_climbing_length_max">Klatrelængde max</string>
+	<string name="poi_climbing_rock_limestone">Klatresten: kalksten</string>
+	<string name="poi_climbing_rock_granite">Klatresten: granit</string>
+	<string name="poi_climbing_rock_sandstone">Klatresten: sandsten</string>
+	<string name="poi_climbing_rock_quartzite">Klatresten: kvartsit</string>
+	<string name="poi_climbing_rock_gneiss">Klatresten: gnejs</string>
+	<string name="poi_climbing_rock_porphyry">Klatresten: porfyr</string>
+	<string name="poi_climbing_quality_solid">Klatringskvalitet: solid</string>
+	<string name="poi_climbing_quality_fragile">Klatringskvalitet: skrøbelig</string>
+	<string name="poi_climbing_bolted_yes">Faste ankre: ja</string>
+	<string name="poi_climbing_bolted_no">Faste ankre: nej</string>
+	<string name="poi_climbing_orientation_n">Orientering af væggen: N</string>
+	<string name="poi_climbing_orientation_ne">Orientering af væggen: NØ</string>
+	<string name="poi_climbing_orientation_e">Orientering af væggen: Ø</string>
+	<string name="poi_climbing_orientation_se">Orientering af væggen: SØ</string>
+	<string name="poi_climbing_orientation_s">Orientering af væggen: S</string>
+	<string name="poi_climbing_orientation_sw">Orientering af væggen: SV</string>
+	<string name="poi_climbing_orientation_w">Orientering af væggen: V</string>
+	<string name="poi_climbing_orientation_nw">Orientering af væggen: NV</string>
+	<string name="poi_climbing_summit_log_yes">Klatring-bjergtop log: ja</string>
+	<string name="poi_climbing_summit_log_no">Klatring-bjergtop log: nej</string>
+	<string name="poi_climbing_routes">Klatreruter</string>
+
+
+</resources>
