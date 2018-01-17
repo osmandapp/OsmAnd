@@ -3665,4 +3665,30 @@
 	<string name="poi_climbing_deepwater_yes">Deep-water soloing: yes</string>
 	<string name="poi_climbing_deepwater_no">Deep-water soloing: no</string>
 
+	<string name="poi_climbing_length">Climbing length</string>
+	<string name="poi_climbing_length_min">Climbing min length</string>
+	<string name="poi_climbing_length_max">Climbing max length</string>
+	<string name="poi_climbing_rock_limestone">Climbing rock: limestone</string>
+	<string name="poi_climbing_rock_granite">Climbing rock: granite</string>
+	<string name="poi_climbing_rock_sandstone">Climbing rock: sandstone</string>
+	<string name="poi_climbing_rock_quartzite">Climbing rock: quartzite</string>
+	<string name="poi_climbing_rock_gneiss">Climbing rock: gneiss</string>
+	<string name="poi_climbing_rock_porphyry">Climbing rock: porphyry</string>
+	<string name="poi_climbing_quality_solid">Climbing quality: solid</string>
+	<string name="poi_climbing_quality_fragile">Climbing quality: fragile</string>
+	<string name="poi_climbing_bolted_yes">Fixed anchors: yes</string>
+	<string name="poi_climbing_bolted_no">Fixed anchors: no</string>
+	<string name="poi_climbing_orientation_n">Orientation of the wall: N</string>
+	<string name="poi_climbing_orientation_ne">Orientation of the wall: NE</string>
+	<string name="poi_climbing_orientation_e">Orientation of the wall: E</string>
+	<string name="poi_climbing_orientation_se">Orientation of the wall: SE</string>
+	<string name="poi_climbing_orientation_s">Orientation of the wall: S</string>
+	<string name="poi_climbing_orientation_sw">Orientation of the wall: SW</string>
+	<string name="poi_climbing_orientation_w">Orientation of the wall: W</string>
+	<string name="poi_climbing_orientation_nw">Orientation of the wall: NW</string>
+	<string name="poi_climbing_summit_log_yes">Climbing summit log: yes</string>
+	<string name="poi_climbing_summit_log_no">Climbing summit log: no</string>
+	<string name="poi_climbing_routes">Climbing routes</string>
+
+
 </resources>
