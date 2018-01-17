@@ -1738,4 +1738,7 @@
     <string name="marker_save_as_track">İz kimi saxla</string>
     <string name="shared_string_groups">Qruplar</string>
     <string name="import_track">İz idxal et</string>
+    <string name="context_menu_read_full_article">Tam məqaləni oxu</string>
+    <string name="context_menu_read_article">Məqaləni oxu</string>
+    <string name="modify_the_search_query">Axtarış sorğusunu dəyiş.</string>
     </resources>
