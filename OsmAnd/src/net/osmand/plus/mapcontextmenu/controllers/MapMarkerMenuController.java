@@ -5,6 +5,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
@@ -27,6 +28,7 @@ public class MapMarkerMenuController extends MenuController {
 	public MapMarkerMenuController(MapActivity mapActivity, PointDescription pointDescription, MapMarker mapMarker) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		final OsmandApplication app = mapActivity.getMyApplication();
+		final boolean useStateList = Build.VERSION.SDK_INT >= 21;
 		this.mapMarker = mapMarker;
 		builder.setShowNearestWiki(true);
 
@@ -39,7 +41,8 @@ public class MapMarkerMenuController extends MenuController {
 			}
 		};
 		leftTitleButtonController.caption = getMapActivity().getString(R.string.mark_passed);
-		leftTitleButtonController.leftIcon = createStateListPassedIcon();
+		leftTitleButtonController.leftIcon = useStateList ? createStateListPassedIcon()
+				: createPassedIcon(getPassedIconBgNormalColorId(), 0);
 
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
@@ -54,16 +57,20 @@ public class MapMarkerMenuController extends MenuController {
 			}
 		};
 		rightTitleButtonController.caption = getMapActivity().getString(R.string.make_active);
-		rightTitleButtonController.leftIcon = createStateListShowOnTopbarIcon();
+		rightTitleButtonController.leftIcon = useStateList ? createStateListShowOnTopbarIcon()
+				: createShowOnTopbarIcon(getDeviceTopNormalColorId(), R.color.dashboard_blue);
+	}
+
+	private int getPassedIconBgNormalColorId() {
+		return isLight() ? R.color.map_widget_blue : R.color.osmand_orange;
 	}
 
 	private StateListDrawable createStateListPassedIcon() {
-		int bgNormal = isLight() ? R.color.map_widget_blue : R.color.osmand_orange;
 		int bgPressed = isLight() ? R.color.ctx_menu_controller_button_text_color_light_p
 				: R.color.ctx_menu_controller_button_text_color_dark_p;
 		int icPressed = isLight() ? R.color.ctx_menu_controller_button_text_color_light_n
 				: R.color.ctx_menu_controller_button_bg_color_dark_p;
-		return AndroidUtils.createStateListDrawable(createPassedIcon(bgNormal, 0),
+		return AndroidUtils.createStateListDrawable(createPassedIcon(getPassedIconBgNormalColorId(), 0),
 				createPassedIcon(bgPressed, icPressed));
 	}
 
@@ -74,12 +81,15 @@ public class MapMarkerMenuController extends MenuController {
 		return new LayerDrawable(new Drawable[]{bg, ic});
 	}
 
+	private int getDeviceTopNormalColorId() {
+		return isLight() ? R.color.on_map_icon_color : R.color.ctx_menu_info_text_dark;
+	}
+
 	private StateListDrawable createStateListShowOnTopbarIcon() {
-		int bgNormal = isLight() ? R.color.on_map_icon_color : R.color.ctx_menu_info_text_dark;
 		int bgPressed = isLight() ? R.color.ctx_menu_controller_button_text_color_light_p
 				: R.color.ctx_menu_controller_button_text_color_dark_p;
 		int icPressed = isLight() ? R.color.osmand_orange : R.color.route_info_go_btn_bg_dark_p;
-		return AndroidUtils.createStateListDrawable(createShowOnTopbarIcon(bgNormal, R.color.dashboard_blue),
+		return AndroidUtils.createStateListDrawable(createShowOnTopbarIcon(getDeviceTopNormalColorId(), R.color.dashboard_blue),
 				createShowOnTopbarIcon(bgPressed, icPressed));
 	}
 
