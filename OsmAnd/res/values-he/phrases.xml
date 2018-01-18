@@ -480,7 +480,7 @@
 	<string name="poi_water_tower">מגדל מים</string>
 	<string name="poi_dam">סכר</string>
 	<string name="poi_watermill">טחנת מים</string>
-	<string name="poi_breakwater">שובר גלים</string>
+	<string name="poi_breakwater">מזח</string>
 	<string name="poi_power_plant">מפעל חשמל</string>
 	<string name="poi_power_generator">גנרטור חשמל</string>
 	<string name="poi_power_tower">מגדל חשמל</string>
@@ -1228,4 +1228,9 @@
 	<string name="poi_denomination_salvation_army">צבא הישע</string>
 	<string name="poi_depot">מחסן</string>
 
-</resources>
+<string name="poi_climbing_style">סגנון טיפוס</string>
+
+<string name="poi_lock_gate">תא שיט</string>
+	<string name="poi_groyne">שובר גלים</string>
+
+	</resources>
