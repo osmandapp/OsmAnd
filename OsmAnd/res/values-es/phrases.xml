@@ -3700,4 +3700,16 @@
 	<string name="poi_payment_centre">Centro de pago</string>
 	<string name="poi_money_transfer">Transferencia de dinero</string>
 
-</resources>
+<string name="poi_climbing_style">Estilo de escalada</string>
+
+<string name="poi_ref_post">Código postal</string>
+
+	<string name="poi_climbing_sport_yes">Deporte: sí</string>
+	<string name="poi_climbing_sport_no">Deporte: no</string>
+	<string name="poi_climbing_trad_yes">Tradicional: sí</string>
+	<string name="poi_climbing_trad_no">Tradicional: no</string>
+	<string name="poi_climbing_ice_yes">Hielo: sí</string>
+	<string name="poi_climbing_ice_no">Hielo: no</string>
+	<string name="poi_climbing_mixed_yes">Mixto: sí</string>
+	<string name="poi_climbing_mixed_no">Mixto: no</string>
+	</resources>
