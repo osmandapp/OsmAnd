@@ -1261,7 +1261,7 @@
 <string name="poi_cooling_tower">Torre de resfriamento</string>
 	<string name="poi_bicycle_parking_wall_loops">Suporte de roda</string>
 	<string name="poi_bicycle_parking_rack">Prateleira</string>
-	<string name="poi_deadlock">Impasse</string>
+	<string name="poi_deadlock">Sem saída</string>
 
 	<string name="poi_species">Espécies</string>
 	<string name="poi_genus">Gênero</string>
@@ -1273,7 +1273,7 @@
 	<string name="poi_information_board">Painel</string>
 	<string name="poi_information_map">Mapa</string>
 	<string name="poi_information_office">Centro de informação</string>
-	<string name="poi_information_trail_blaze">Trilha desbravada</string>
+	<string name="poi_information_trail_blaze">Marca de caminho</string>
 	<string name="poi_information_terminal">Terminal</string>
 	<string name="poi_information_route_marker">Marcador de rota</string>
 	<string name="poi_information_hikingmap">Mapa de caminhadas</string>
@@ -1314,7 +1314,7 @@
 	<string name="poi_tactile_paving_no">Sem piso tátil</string>
 	<string name="poi_traffic_signals_sound_yes">Sim</string>
 	<string name="poi_traffic_signals_sound_no">Não</string>
-	<string name="poi_traffic_signals_sound_walk">Com aviso sonoro quando permitido andar</string>
+	<string name="poi_traffic_signals_sound_walk">Somente quando permitido andar</string>
 
 <string name="poi_ford_stepping_stones">Pedra de passagem em rio</string>
 	<string name="poi_toll_hgv_yes">Pedágio para veículos pesados</string>
@@ -1340,7 +1340,7 @@
 	<string name="poi_logging">Desmatamento</string>
 	<string name="poi_sand">Areia</string>
 
-	<string name="poi_dead_wood">Madeira morta</string>
+	<string name="poi_dead_wood">Árvores mortas</string>
 
 	<string name="poi_passing_place">Passing place</string>
 	<string name="poi_level">Nível</string>
@@ -1359,11 +1359,11 @@
 	<string name="poi_tourism_yes">Objeto turístico</string>
 	<string name="poi_rtsa_scale">Escala RTSA</string>
 
-	<string name="poi_piste_difficulty_easy">Dificuldade de pista: fácil</string>
-	<string name="poi_piste_difficulty_intermediate">Dificuldade de pista: intermediária</string>
-	<string name="poi_piste_difficulty_advanced">Dificuldade de pista: avançada</string>
-	<string name="poi_piste_difficulty_novice">Dificuldade de pista: novato</string>
-	<string name="poi_piste_difficulty_expert">Dificuldade de pista: perito</string>
+	<string name="poi_piste_difficulty_easy">Fácil</string>
+	<string name="poi_piste_difficulty_intermediate">Intermediária</string>
+	<string name="poi_piste_difficulty_advanced">Avançada</string>
+	<string name="poi_piste_difficulty_novice">Novato</string>
+	<string name="poi_piste_difficulty_expert">Perito</string>
 	<string name="poi_piste_difficulty_freeride">Dificuldade de pista: freeride</string>
 	<string name="poi_piste_grooming_classic">Pista de preparação: clássica</string>
 	<string name="poi_piste_grooming_classic_skating">Pista de preparação: clássica+patinagem</string>
@@ -1436,7 +1436,7 @@
 	<string name="poi_payment_notes_no">Não aceita nota promissória</string>
 	<string name="poi_traffic_calming_island">Ilha de trânsito</string>
 	<string name="poi_bicycle_parking_anchors">Âncora</string>
-	<string name="poi_windfall">Windfall</string>
+	<string name="poi_windfall">Fruto caído</string>
 	<string name="poi_payment_electronic_purses_yes">Aceita carteira eletrônica</string>
 	<string name="poi_payment_electronic_purses_no">Não aceita carteira eletrônica</string>
 	<string name="poi_payment_cash_yes">Aceita dinheiro</string>
@@ -3612,4 +3612,8 @@
 
 	<string name="poi_boat_dinghy_rental_rental_yes">Bote: sim</string>
 	<string name="poi_boat_dinghy_rental_rental_no">Bote: não</string>
+	<string name="poi_climbing_style">Estilo de escalada</string>
+
+<string name="poi_couloir">Ravina</string>
+	<string name="poi_surface_decoturf">DecoTurf</string>
 	</resources>
