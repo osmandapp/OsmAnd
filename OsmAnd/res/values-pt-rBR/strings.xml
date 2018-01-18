@@ -2512,7 +2512,7 @@ Pôr do Sol: %2$s</string>
     <string name="open_till">Aberto até</string>
     <string name="will_close_at">Fechará às</string>
     <string name="will_open_at">Abrirá às</string>
-    <string name="will_open_on">Ficará aberto aos/às</string>
+    <string name="will_open_on">Abrirá às</string>
     <string name="additional_actions">Ações adicionais</string>
     <string name="av_locations_selected_desc">Arquivo GPX com coordenadas e dados das notas selecionadas.</string>
     <string name="shared_string_actions">Ações</string>
