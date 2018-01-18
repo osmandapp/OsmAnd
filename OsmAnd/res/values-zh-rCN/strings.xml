@@ -2682,7 +2682,7 @@
     <string name="pick_up_till">取得直到</string>
     <string name="without_time_limit">没有时间限制</string>
     <string name="context_menu_points_of_group">组中所有的点</string>
-    <string name="open_from">从..打开</string>
+    <string name="open_from">打开自</string>
     <string name="will_close_at">将要关闭于</string>
     <string name="will_open_at">将打开于</string>
     <string name="will_open_on">将要打开于</string>
