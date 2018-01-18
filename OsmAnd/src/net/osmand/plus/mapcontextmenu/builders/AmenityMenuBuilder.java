@@ -146,9 +146,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else {
 				textView.setTextColor(textView.getLinkTextColors());
 			}
-		} else if (needLinks) {
-			textView.setAutoLinkMask(Linkify.ALL);
+			needLinks = false;
+		}
+		if (!textDefined) {
+			textView.setText(txt);
+		}
+		if (needLinks) {
+			Linkify.addLinks(textView, Linkify.ALL);
 			textView.setLinksClickable(true);
+			AndroidUtils.removeLinkUnderline(textView);
 		}
 		textView.setEllipsize(TextUtils.TruncateAt.END);
 		if (isWiki) {
@@ -157,9 +163,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		} else if (isText) {
 			textView.setMinLines(1);
 			textView.setMaxLines(10);
-		}
-		if (!textDefined) {
-			textView.setText(txt);
 		}
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
