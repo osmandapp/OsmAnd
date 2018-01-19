@@ -194,8 +194,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL;
 			iconViewCollapse.setLayoutParams(llIconCollapseParams);
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-			iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(collapsableView.getContenView().getVisibility() == View.GONE ?
-					R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up));
+			iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContenView().getVisibility() == View.GONE));
 			llIconCollapse.addView(iconViewCollapse);
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -203,17 +202,17 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					if (collapsableView.getContenView().getVisibility() == View.VISIBLE) {
 						collapsableView.setCollapsed(true);
 						collapsableView.getContenView().setVisibility(View.GONE);
-						iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_down));
+						iconViewCollapse.setImageDrawable(getCollapseIcon(true));
 					} else {
 						collapsableView.setCollapsed(false);
 						collapsableView.getContenView().setVisibility(View.VISIBLE);
-						iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_up));
+						iconViewCollapse.setImageDrawable(getCollapseIcon(false));
 					}
 				}
 			});
 			if (collapsableView.isCollapsed()) {
 				collapsableView.getContenView().setVisibility(View.GONE);
-				iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_down));
+				iconViewCollapse.setImageDrawable(getCollapseIcon(true));
 			}
 			baseView.addView(collapsableView.getContenView());
 		}
