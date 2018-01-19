@@ -6,6 +6,7 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.Html;
@@ -136,15 +137,18 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
 
+		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+
 		boolean textDefined = false;
 		if (isPhoneNumber || isUrl) {
 			if (!Algorithms.isEmpty(textPrefix)) {
 				SpannableString spannableString = new SpannableString(txt);
 				spannableString.setSpan(new URLSpan(txt), textPrefix.length() + 2, txt.length(), 0);
 				textView.setText(spannableString);
+				textView.setLinkTextColor(linkTextColor);
 				textDefined = true;
 			} else {
-				textView.setTextColor(textView.getLinkTextColors());
+				textView.setTextColor(linkTextColor);
 			}
 			needLinks = false;
 		}
@@ -154,6 +158,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		if (needLinks) {
 			Linkify.addLinks(textView, Linkify.ALL);
 			textView.setLinksClickable(true);
+			textView.setLinkTextColor(linkTextColor);
 			AndroidUtils.removeLinkUnderline(textView);
 		}
 		textView.setEllipsize(TextUtils.TruncateAt.END);

@@ -517,11 +517,15 @@ public class MenuBuilder {
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
 
+		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+
 		if (isUrl) {
-			textView.setTextColor(ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark));
+			textView.setTextColor(linkTextColor);
 		} else if (needLinks) {
-			textView.setAutoLinkMask(Linkify.ALL);
+			Linkify.addLinks(textView, Linkify.ALL);
 			textView.setLinksClickable(true);
+			textView.setLinkTextColor(linkTextColor);
+			AndroidUtils.removeLinkUnderline(textView);
 		}
 		if (textLinesLimit > 0) {
 			textView.setMinLines(1);
