@@ -309,7 +309,7 @@ public class MenuBuilder {
 			buildNearestPhotosRow(view);
 		}
 		buildPluginRows(view);
-		buildAfter(view);
+//		buildAfter(view);
 	}
 
 	private boolean showTransportRoutes() {
