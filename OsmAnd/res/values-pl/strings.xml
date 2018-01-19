@@ -2292,7 +2292,7 @@ Długość %2$s</string>
 <string name="access_default_color">Domyślny kolor</string>
     <string name="access_category_choice">Wybierz kategorię</string>
     <string name="access_hint_enter_category">Proszę wprowadzić kategorię</string>
-    <string name="access_hint_enter_description">Proszę wprowadzić opis</string>
+    <string name="access_hint_enter_description">Proszę wprowadzić opis.</string>
     <string name="access_collapsed_list">Zwinięta lista</string>
     <string name="access_expanded_list">Rozwinięta lista</string>
     <string name="access_empty_list">Pusta lista</string>
@@ -2956,4 +2956,12 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="parked_at">zaparkowano o</string>
     <string name="without_time_limit">Bez ograniczenia czasu</string>
     <string name="context_menu_points_of_group">Wszystkie punkty w grupie</string>
+    <string name="shared_string_without_name">Bez nazwy</string>
+    <string name="what_is_here">Co tu jest:</string>
+    <string name="context_menu_read_full_article">Czytaj cały artykuł</string>
+    <string name="context_menu_read_article">Czytaj artykuł</string>
+    <string name="empty_state_av_notes">Notuj!</string>
+    <string name="empty_state_av_notes_desc">Dodaj notatkę audio, video lub zdjęciową do każdego punktu na mapie, za pomocą widgetu lub menu kontekstowego.</string>
+    <string name="notes_by_date">Notatki według dat</string>
+    <string name="empty_state_markers_groups">Importuj grupy</string>
     </resources>
