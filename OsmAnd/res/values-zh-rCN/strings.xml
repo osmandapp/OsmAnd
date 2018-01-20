@@ -2682,9 +2682,9 @@
     <string name="pick_up_till">取得直到</string>
     <string name="without_time_limit">没有时间限制</string>
     <string name="context_menu_points_of_group">组中所有的点</string>
-    <string name="open_from">打开自</string>
+    <string name="open_from">开始营业于</string>
     <string name="will_close_at">将要关闭于</string>
-    <string name="will_open_at">将打开于</string>
+    <string name="will_open_at">将要打开于</string>
     <string name="will_open_on">将要打开于</string>
     <string name="additional_actions">额外的活动</string>
     <string name="av_locations_selected_desc">GPX文件，包含所选笔记的坐标和数据。</string>
@@ -2699,7 +2699,7 @@
     <string name="modify_the_search_query">修改搜索查询。</string>
     <string name="shared_string_actions">操作</string>
     <string name="shared_string_marker">标记</string>
-    <string name="empty_state_osm_edits_descr">创建或修改 OSM 的景点, 打开或评论 OSM 笔记, 并贡献记录的 GPX 文件。</string>
+    <string name="empty_state_osm_edits_descr">创建或修改 OSM 兴趣点，打开或评论 OSM 笔记并贡献 GPX 轨迹文件。</string>
     <string name="shared_string_deleted">已删除</string>
     <string name="shared_string_edited">已编辑</string>
     <string name="shared_string_added">已添加</string>
@@ -2735,4 +2735,10 @@
     <string name="digits_quantity">小数位数</string>
     <string name="shared_string_right">右方</string>
     <string name="shared_string_left">左方</string>
+    <string name="open_till">营业至</string>
+    <string name="none_point_error">请添加至少一个点。</string>
+    <string name="enter_gpx_name">GPX 文件名：</string>
+    <string name="show_on_map_after_saving">保存后在地图上显示</string>
+    <string name="measurement_tool_action_bar">浏览地图并添加点</string>
+    <string name="measurement_tool">测量距离</string>
     </resources>
