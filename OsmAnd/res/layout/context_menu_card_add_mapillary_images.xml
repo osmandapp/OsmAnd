@@ -4,7 +4,8 @@
     android:layout_width="@dimen/context_img_card_width"
     android:layout_height="@dimen/context_img_card_height"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?attr/bg_color"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:background="?attr/bg_color"
     android:orientation="vertical">
 
     <TextView
@@ -17,7 +18,7 @@
         android:maxLines="4"
         android:gravity="center"
         android:ellipsize="end"
-        android:textColor="?android:textColorPrimary"
+        tools:textColor="?android:textColorPrimary"
         android:textSize="@dimen/default_list_text_size"
         android:text="@string/mapillary_action_descr"/>
 
@@ -38,8 +39,9 @@
         android:text="@string/shared_string_add_photos"/>
 
     <View
+        android:id="@+id/card_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/context_menu_card"/>
+        tools:background="?attr/context_menu_card"/>
 
 </FrameLayout>

@@ -248,7 +248,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				.setIcon(R.drawable.ic_action_time_span).setTag(2).createItem());
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-		boolean light = app.getSettings().isLightContent() && !app.getDaynightHelper().isNightMode();
+		boolean light = app.getSettings().isLightContent();
 		final ArrayAdapter<ContextMenuItem> listAdapter = menuAdapter.createListAdapter(mapActivity, light);
 		builder.setTitle(R.string.parking_options);
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {

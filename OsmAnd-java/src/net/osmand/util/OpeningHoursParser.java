@@ -59,9 +59,9 @@ public class OpeningHoursParser {
 		for (int i = 0; i < strings.length; i++) {
 			if (strings[i] != null) {
 				if (strings[i].length() > 2) {
-					newStrings[i] = strings[i].substring(0, 2);
+					newStrings[i] = Algorithms.capitalizeFirstLetter(strings[i].substring(0, 2));
 				} else {
-					newStrings[i] = strings[i];
+					newStrings[i] = Algorithms.capitalizeFirstLetter(strings[i]);
 				}
 			}
 		}

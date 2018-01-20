@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -594,12 +595,13 @@ public abstract class MenuController extends BaseMenuController {
 		}
 
 		public void updateStateListDrawableIcon(@DrawableRes int resId, boolean left) {
+			boolean useStateList = enabled && Build.VERSION.SDK_INT >= 21;
 			if (left) {
-				leftIcon = enabled ? getStateListDrawable(resId) : null;
-				leftIconId = enabled ? 0 : resId;
+				leftIcon = useStateList ? getStateListDrawable(resId) : null;
+				leftIconId = useStateList ? 0 : resId;
 			} else {
-				rightIcon = enabled ? getStateListDrawable(resId) : null;
-				rightIconId = enabled ? 0 : resId;
+				rightIcon = useStateList ? getStateListDrawable(resId) : null;
+				rightIconId = useStateList ? 0 : resId;
 			}
 		}
 
