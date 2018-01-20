@@ -3665,4 +3665,51 @@
 
 <string name="poi_route_subway_ref">Metroo</string>
 
-	</resources>
+	<string name="poi_climbing_style">Maniero de grimpado</string>
+
+<string name="poi_ref_post">Poŝtkodo</string>
+
+	<string name="poi_climbing_sport_yes">Sport-grimpado: jes</string>
+	<string name="poi_climbing_sport_no">Sport-grimpado: ne</string>
+	<string name="poi_climbing_boulder_yes">Rok-grimpado: jes</string>
+	<string name="poi_climbing_boulder_no">Rok-grimpado: ne</string>
+	<string name="poi_climbing_toprope_yes">Supreŝnurege-sekurigita: jes</string>
+	<string name="poi_climbing_toprope_no">Supreŝnurege-sekurigita: ne</string>
+	<string name="poi_climbing_trad_yes">Mem-sekurigita (tradicia): jes</string>
+	<string name="poi_climbing_trad_no">Mem-sekurigita (tradicia): ne</string>
+	<string name="poi_climbing_multipitch_yes">Plur-etapa grimpado: jes</string>
+	<string name="poi_climbing_multipitch_no">Plur-etapa grimpado: ne</string>
+	<string name="poi_climbing_ice_yes">Glaci-grimpado: jes</string>
+	<string name="poi_climbing_ice_no">Glaci-grimpado: ne</string>
+	<string name="poi_climbing_mixed_yes">Glaci-roka grimpado: jes</string>
+	<string name="poi_climbing_mixed_no">Glaci-roka grimpado: ne</string>
+	<string name="poi_climbing_deepwater_yes">Supre de profunda akvo: jes</string>
+	<string name="poi_climbing_deepwater_no">Supre de profunda akvo: ne</string>
+
+	<string name="poi_climbing_length">Longo de grimpado</string>
+	<string name="poi_climbing_length_min">Minimuma longo de grimpado</string>
+	<string name="poi_climbing_length_max">Maksimuma longo de grimpado</string>
+	<string name="poi_climbing_rock_limestone">Grimpada roko: kalkoŝtono</string>
+	<string name="poi_climbing_rock_granite">Grimpada roko: granito</string>
+	<string name="poi_climbing_rock_sandstone">Grimpada roko: sabloŝtono</string>
+	<string name="poi_climbing_rock_quartzite">Grimpada roko: kvarcito</string>
+	<string name="poi_climbing_rock_gneiss">Grimpada roko: gnejso</string>
+	<string name="poi_climbing_rock_porphyry">Grimpada roko: porfiro</string>
+	<string name="poi_climbing_quality_solid">Kvalito de grimpado: firma</string>
+	<string name="poi_climbing_quality_fragile">Kvalito de grimpado: malfirma</string>
+	<string name="poi_climbing_bolted_yes">Fiksitaj sekurigiloj: jes</string>
+	<string name="poi_climbing_bolted_no">Fiksitaj sekurigiloj: ne</string>
+	<string name="poi_climbing_orientation_n">Orientiĝo de muro: norda</string>
+	<string name="poi_climbing_orientation_ne">Orientiĝo de muro: nord-orienta</string>
+	<string name="poi_climbing_orientation_e">Orientiĝo de muro: orienta</string>
+	<string name="poi_climbing_orientation_se">Orientiĝo de muro: sud-orienta</string>
+	<string name="poi_climbing_orientation_s">Orientiĝo de muro: suda</string>
+	<string name="poi_climbing_orientation_sw">Orientiĝo de muro: sud-okcidenta</string>
+	<string name="poi_climbing_orientation_w">Orientiĝo de muro: okcidenta</string>
+	<string name="poi_climbing_orientation_nw">Orientiĝo de muro: nord-okcidenta</string>
+	<string name="poi_climbing_summit_log_yes">Pint-taglibro: jes</string>
+	<string name="poi_climbing_summit_log_no">Pint-taglibro: ne</string>
+	<string name="poi_climbing_routes">Grimpad-kursoj</string>
+
+
+</resources>
