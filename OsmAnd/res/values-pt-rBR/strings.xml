@@ -2724,4 +2724,18 @@ Pôr do Sol: %2$s</string>
 \n
 \n e muito mais…</string>
     <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada: • Europa Ocidental: **** • Europa Oriental: *** • Rússia: *** • América do Norte: *** • América do Sul: ** • Ásia: ** • Japão e Coreia: *** • Oriente Médio: ** • África: ** • Antártica: * A maioria dos países ao redor do globo disponível como downloads! Do Afeganistão ao Zimbabué, da Austrália aos Estados Unidos. Argentina, Brasil, Canadá, França, Alemanha, México, Reino Unido, Espanha,…</string>
+    <string name="release_2_5">\\022 Ícones de toque sobre a mapa
+\n
+\n • Filtro de pesquisa de POI robusto: Pesquise, por ex., restaurantes por cozinha, ou áreas de campismo com instalações específicas
+\n
+\n • Novo estilo de mapa topográfico para ciclistas e caminhantes
+\n
+\n • Gravação de viagem melhorado
+\n
+\n • Notificações de navegação melhorados (Android Wear)
+\n
+\n • Outras melhorias e correções de bugs
+\n
+\n e muito mais…</string>
+    <string name="lang_lo">Laociano</string>
     </resources>
