@@ -2905,4 +2905,40 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="use_location">Erabili kokalekua</string>
     <string name="add_location_as_first_point_descr">Gehitu zure kokalekua lehen puntu gisa ibilbide perfektua planifikatzeko.</string>
     <string name="my_location">Nire kokalekua</string>
-    </resources>
+    <string name="coordinate_input_accuracy_description">Aldatu hurrengo eremura automatikoki %1$d digitu dezimal sartu eta gero.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Mapan ukitzean botoiak eta trepetak txandakatzen dira.</string>
+    <string name="mark_passed">Marka pasatuta</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Ekidin izoztutako errepideak eta ibiak</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Ekidin izoztutako errepideak eta ibiak.</string>
+    <string name="shared_string_finish">Bukatu</string>
+    <string name="plan_route">Planifikatu ibilbidea</string>
+    <string name="shared_string_sort">Ordenatu</string>
+    <string name="coordinate_input">Koordenatuen sarrera</string>
+    <string name="is_saved">gorde da</string>
+    <string name="marker_save_as_track_descr">Esportatu zure markatzaileak honako fitxategi honetara:</string>
+    <string name="marker_save_as_track">Gorde lorratz gisa</string>
+    <string name="move_to_history">Eraman historialera</string>
+    <string name="group_will_be_removed_after_restart">Taldea kenduko da aplikazioa berrabiarazten denean.</string>
+    <string name="show_guide_line">Erakutsi gida-lerroak</string>
+    <string name="show_arrows_on_the_map">Erakutsi geziak mapan</string>
+    <string name="show_passed">Erakutsi pasatutakoak</string>
+    <string name="hide_passed">Ezkutatu pasatutakoak</string>
+    <string name="remove_from_map_markers">Kendu mapa-markatzaileetatik</string>
+    <string name="descendingly">beherakorra</string>
+    <string name="ascendingly">gorakorra</string>
+    <string name="date_added">Data honetan gehituta</string>
+    <string name="order_by">Ordenatu honela:</string>
+    <string name="marker_show_distance_descr">Aukeratu nola adierazi mapa-markatzaileetara distantzia eta norabidea maparen pantailan:</string>
+    <string name="release_2_8">\\022 Guztiz eraldatutako mapa-markatzaileak gida-lerroekin eta ibilbide plangintzarekin
+\n
+\n • Distantzien neurketarako tresna errepidera itsasteko eta puntuak lorratz gisa gordetzeko aukerekin
+\n
+\n • OsmAnd Live: akatsen konponketa, datu berriak zerbitzarian 30 minutuero, nabigazioan ezarritako eguneraketak
+\n
+\n</string>
+    <string name="osm_recipient_stat">Edizioak %1$s, guztira %2$s mBTC</string>
+    <string name="rendering_value_darkyellow_name">Hori iluna</string>
+    <string name="lang_lo">Laosera</string>
+    <string name="osm_recipients_label">OSM hartzaileak</string>
+    <string name="total_donations">Dohaintzak guztira</string>
+</resources>
