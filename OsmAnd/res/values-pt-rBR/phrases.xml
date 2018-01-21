@@ -134,7 +134,7 @@
 	<string name="poi_electronics">Loja de eletrônicos</string>
 	<string name="poi_fuel_octane_80">Octano 80</string>
 	<string name="poi_public_transport_platform_trolleybus">Ponto de trólebus</string>
-	<string name="poi_tableware">Loja de utensílios de mesa</string>
+	<string name="poi_tableware">Loja de talheres</string>
 	<string name="poi_ticket">Bilheteria</string>
 	<string name="poi_tobacco">Tabacaria</string>
 	<string name="poi_toys">Loja de brinquedos</string>
@@ -587,7 +587,7 @@
 	<string name="poi_piste_hike">Pista de caminhada</string>
 	<string name="poi_piste_sled">Pista de trenó (carrinho)</string>
 	<string name="poi_piste_snow_park">Parque de neve</string>
-	<string name="poi_piste_playground">Pista de diversão</string>
+	<string name="poi_piste_playground">Pista de esqui infantil</string>
 	<string name="poi_piste_ice_skate">Patim de gelo</string>
 	<string name="poi_ski_rental">Aluguel de esqui</string>
 
@@ -694,7 +694,7 @@
 	<string name="poi_smoking_area">Área de fumantes</string>
 	<string name="poi_mortuary">Necrotério</string>
 	<string name="poi_crematorium">Crematório</string>
-	<string name="poi_internet_cafe">Cybercafé</string>
+	<string name="poi_internet_cafe">Cyber café</string>
 
 	<string name="poi_bank">Agência bancária</string>
 	<string name="poi_amenity_atm">Caixa eletrônico</string>
@@ -921,7 +921,7 @@
 
 	<string name="poi_collection_times">Horário de coleta</string>
 	<string name="poi_enforcement_check">Fiscalização: verificação</string>
-	<string name="poi_cutline">Linha de corte</string>
+	<string name="poi_cutline">Linha de corte florestal</string>
 	<string name="poi_country">País</string>
 	<string name="poi_fee_yes">Sim</string>
 
@@ -1314,7 +1314,7 @@
 	<string name="poi_tactile_paving_no">Sem piso tátil</string>
 	<string name="poi_traffic_signals_sound_yes">Sim</string>
 	<string name="poi_traffic_signals_sound_no">Não</string>
-	<string name="poi_traffic_signals_sound_walk">Somente quando permitido andar</string>
+	<string name="poi_traffic_signals_sound_walk">Só quando permitido atravessar</string>
 
 <string name="poi_ford_stepping_stones">Pedra de passagem em rio</string>
 	<string name="poi_toll_hgv_yes">Pedágio para veículos pesados</string>
@@ -1364,9 +1364,9 @@
 	<string name="poi_piste_difficulty_advanced">Avançada</string>
 	<string name="poi_piste_difficulty_novice">Novato</string>
 	<string name="poi_piste_difficulty_expert">Perito</string>
-	<string name="poi_piste_difficulty_freeride">Dificuldade de pista: freeride</string>
-	<string name="poi_piste_grooming_classic">Pista de preparação: clássica</string>
-	<string name="poi_piste_grooming_classic_skating">Pista de preparação: clássica+patinagem</string>
+	<string name="poi_piste_difficulty_freeride">Freeride</string>
+	<string name="poi_piste_grooming_classic">Clássica</string>
+	<string name="poi_piste_grooming_classic_skating">Clássica+patinagem</string>
 	<string name="poi_piste_grooming_backcountry">Pista de preparação: interior</string>
 	<string name="poi_route_train_ref">Trem</string>
 	<string name="poi_garden_type_residential">Jardim residencial</string>
@@ -1791,7 +1791,7 @@
 	<string name="poi_shelter_type_weather_shelter">Tipo de abrigo: abrigo do tempo</string>
 	<string name="poi_piste_grooming_scooter">Pista de preparação: scooter</string>
 	<string name="poi_piste_grooming_skating">Pista de preparação: skating</string>
-	<string name="poi_piste_grooming_no">Pista de preparação: não</string>
+	<string name="poi_piste_grooming_no">Não</string>
 	<string name="poi_piste_grooming_mogul">Pista de preparação: mogul</string>
 
 	<string name="poi_aerialway_bubble_yes">Bolha</string>
@@ -3616,4 +3616,6 @@
 
 <string name="poi_couloir">Ravina</string>
 	<string name="poi_surface_decoturf">DecoTurf</string>
+	<string name="poi_surface_tartan">Tartan</string>
+	<string name="poi_surface_artificial_turf">Grama sintética</string>
 	</resources>
