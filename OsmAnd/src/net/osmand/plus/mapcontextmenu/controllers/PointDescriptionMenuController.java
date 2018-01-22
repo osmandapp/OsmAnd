@@ -3,22 +3,36 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import android.graphics.drawable.Drawable;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapillary.MapillaryPlugin;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.Algorithms;
 
 public class PointDescriptionMenuController extends MenuController {
 
 	private boolean hasTypeInDescription;
 
-	public PointDescriptionMenuController(MapActivity mapActivity, final PointDescription pointDescription) {
+	public PointDescriptionMenuController(final MapActivity mapActivity, final PointDescription pointDescription) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		builder.setShowNearestWiki(true);
 		initData();
+
+		final OsmandApplication app = mapActivity.getMyApplication();
+		final RoutingHelper routingHelper = app.getRoutingHelper();
+		if (routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode()) {
+			leftTitleButtonController = new TitleButtonController() {
+				@Override
+				public void buttonPressed() {
+					app.getAvoidSpecificRoads().addImpassableRoad(mapActivity, getLatLon(), false, null, false);
+				}
+			};
+			leftTitleButtonController.caption = mapActivity.getString(R.string.avoid_road);
+			leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_road_works_dark, true);
+		}
 	}
 
 	private void initData() {
