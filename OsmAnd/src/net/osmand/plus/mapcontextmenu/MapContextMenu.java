@@ -85,6 +85,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private LatLon myLocation;
 	private Float heading;
 	private boolean inLocationUpdate = false;
+	private boolean useCachedLocation;
 	private boolean appModeChanged;
 	private boolean appModeListenerAdded;
 	private boolean autoHide;
@@ -1215,14 +1216,26 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return myLocation;
 	}
 
+	public boolean isUseCachedLocation() {
+		return useCachedLocation;
+	}
+
 	public Float getHeading() {
 		return heading;
 	}
 
 	public void updateMyLocation(net.osmand.Location location) {
-		if (location != null && active && displayDistanceDirection()) {
-			myLocation = new LatLon(location.getLatitude(), location.getLongitude());
-			updateLocation(false, true, false);
+		if (active && displayDistanceDirection()) {
+			if (location == null) {
+				location = getMapActivity().getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+				useCachedLocation = location != null;
+			} else {
+				useCachedLocation = false;
+			}
+			if (location != null) {
+				myLocation = new LatLon(location.getLatitude(), location.getLongitude());
+				updateLocation(false, true, false);
+			}
 		}
 	}
 
