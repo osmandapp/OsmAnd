@@ -295,14 +295,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		OsmandApplication app = mapActivity.getMyApplication();
 
 		if (myLocation == null) {
-			Location loc = app.getLocationProvider().getLastKnownLocation();
-			if (loc == null) {
-				loc = app.getLocationProvider().getLastStaleKnownLocation();
-				cachedMyLocation = loc != null;
-			}
-			if (loc != null) {
-				myLocation = new LatLon(loc.getLatitude(), loc.getLongitude());
-			}
+			updateMyLocation(app.getLocationProvider().getLastKnownLocation(), false);
 		}
 
 		if (!update && isVisible()) {
@@ -1240,18 +1233,24 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return heading;
 	}
 
-	public void updateMyLocation(net.osmand.Location location) {
-		if (active && displayDistanceDirection()) {
-			if (location == null) {
-				location = getMapActivity().getMyApplication().getLocationProvider().getLastStaleKnownLocation();
-				cachedMyLocation = location != null;
-			} else {
-				cachedMyLocation = false;
-			}
-			if (location != null) {
-				myLocation = new LatLon(location.getLatitude(), location.getLongitude());
+	private void updateMyLocation(Location location, boolean updateLocationUi) {
+		if (location == null) {
+			location = getMapActivity().getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+			cachedMyLocation = location != null;
+		} else {
+			cachedMyLocation = false;
+		}
+		if (location != null) {
+			myLocation = new LatLon(location.getLatitude(), location.getLongitude());
+			if (updateLocationUi) {
 				updateLocation(false, true, false);
 			}
+		}
+	}
+
+	public void updateMyLocation(net.osmand.Location location) {
+		if (active && displayDistanceDirection()) {
+			updateMyLocation(location, true);
 		}
 	}
 
