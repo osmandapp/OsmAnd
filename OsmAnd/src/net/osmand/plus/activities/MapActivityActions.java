@@ -277,11 +277,7 @@ public class MapActivityActions implements DialogProvider {
 				.setIcon(R.drawable.ic_action_search_dark).createItem());
 		adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
 				.setIcon(R.drawable.ic_action_gdirections_dark).createItem());
-		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() != null &&
-				(mapActivity.getRoutingHelper().isFollowingMode() || mapActivity.getRoutingHelper().isRoutePlanningMode())) {
-			adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_last_intermediate_point, mapActivity)
-					.setIcon(R.drawable.ic_action_intermediate).createItem());
-		}
+
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
@@ -322,8 +318,6 @@ public class MapActivityActions implements DialogProvider {
 				ItemClickListener click = item.getItemClickListener();
 				if (click != null) {
 					click.onContextMenuClick(listAdapter, standardId, position, false, null);
-				} else if (standardId == R.string.context_menu_item_last_intermediate_point) {
-					mapActivity.getContextMenu().addAsLastIntermediate();
 				} else if (standardId == R.string.context_menu_item_search) {
 					mapActivity.showQuickSearch(latitude, longitude);
 				} else if (standardId == R.string.context_menu_item_directions_from) {
