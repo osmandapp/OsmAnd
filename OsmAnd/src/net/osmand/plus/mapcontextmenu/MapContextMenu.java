@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
@@ -25,6 +26,7 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -290,9 +292,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 						@Nullable PointDescription pointDescription,
 						@Nullable Object object,
 						boolean update, boolean restorePrevious) {
+		OsmandApplication app = mapActivity.getMyApplication();
 
 		if (myLocation == null) {
-			myLocation = mapActivity.getMyApplication().getSettings().getLastKnownMapLocation();
+			Location loc = app.getLocationProvider().getLastKnownLocation();
+			if (loc == null) {
+				loc = app.getLocationProvider().getLastStaleKnownLocation();
+				cachedMyLocation = loc != null;
+			}
+			if (loc != null) {
+				myLocation = new LatLon(loc.getLatitude(), loc.getLongitude());
+			}
 		}
 
 		if (!update && isVisible()) {
@@ -350,9 +360,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		mapActivity.refreshMap();
 
 		if (object instanceof MapMarker) {
-			mapActivity.getMyApplication().getMapMarkersHelper().addListener(this);
+			app.getMapMarkersHelper().addListener(this);
 		} else if (object instanceof TargetPoint) {
-			mapActivity.getMyApplication().getTargetPointsHelper().addPointListener(this);
+			app.getTargetPointsHelper().addPointListener(this);
 		}
 
 		return true;
@@ -417,6 +427,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void showMinimized(LatLon latLon, PointDescription pointDescription, Object object) {
 		init(latLon, pointDescription, object);
+	}
+
+	public void onFragmentResume() {
+		if (active && displayDistanceDirection() && myLocation != null) {
+			updateLocation(false, true, false);
+		}
 	}
 
 	public boolean navigateInPedestrianMode() {
