@@ -2712,4 +2712,5 @@
     <string name="commit_poi">Send inn interessepunkt</string>
     <string name="poi_deleted_localy">Interessepunkt blir slettet når du laster opp endringene dine</string>
     <string name="only_download_over_wifi">Bare nedlasting over WiFi</string>
+    <string name="map_widget_fps_info">Feilrettingsinfo om billedtakt</string>
     </resources>
