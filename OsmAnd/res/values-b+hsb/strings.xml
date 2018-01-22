@@ -1453,4 +1453,8 @@
     <string name="track_segments">Pućne wotrězki</string>
     <string name="track_points">Pućne dypki</string>
     <string name="shared_string_online_maps">Online-karty</string>
+    <string name="mark_to_delete">Za wotstronjenje markěrować</string>
+    <string name="osmand_parking_delete_confirm">Chceš parkowansku chorhojčku woprawdźe wotstronić?</string>
+    <string name="osmand_parking_delete">Parkowansku chorhojčku wotstronić</string>
+    <string name="context_menu_item_delete_parking_point">Parkowansku chorhojčku wotstronić</string>
     </resources>
