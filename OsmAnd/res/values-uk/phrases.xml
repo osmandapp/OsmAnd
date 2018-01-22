@@ -3654,4 +3654,18 @@
 
 <string name="poi_route_subway_ref">Метро</string>
 
+	<string name="poi_ref_post">Поштовий індекс</string>
+
+	<string name="poi_climbing_sport_yes">Спортивний: так</string>
+	<string name="poi_climbing_sport_no">Спортивний: ні</string>
+	<string name="poi_climbing_trad_yes">Традиційний: так</string>
+	<string name="poi_climbing_trad_no">Традиційний: ні</string>
+	<string name="poi_climbing_ice_yes">Льодяний: так</string>
+	<string name="poi_climbing_ice_no">Льодяний: ні</string>
+	<string name="poi_climbing_mixed_yes">Змішаний: так</string>
+	<string name="poi_climbing_mixed_no">Змішаний: ні</string>
+	<string name="poi_climbing_rock_limestone">Тип каменю: вапняк</string>
+	<string name="poi_climbing_rock_granite">Тип каменю: граніт</string>
+	<string name="poi_climbing_rock_sandstone">Тип каменю: піщаник</string>
+	<string name="poi_climbing_rock_quartzite">Тип каменю: кварцит</string>
 	</resources>
