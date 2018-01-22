@@ -35,6 +35,7 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -295,22 +296,18 @@ public class MapActivityActions implements DialogProvider {
 			}
 		};
 
-		if (!mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles().isEmpty()
+		if (selectedObj instanceof WptPt
+				&& getMyApplication().getSelectedGpxHelper().getSelectedGPXFile((WptPt) selectedObj) != null) {
+			adapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitleId(R.string.context_menu_item_edit_waypoint, mapActivity)
+					.setIcon(R.drawable.ic_action_edit_dark)
+					.setListener(listener).createItem());
+		} else if (!getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles().isEmpty()
 				|| (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null)) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_add_waypoint, mapActivity)
 					.setIcon(R.drawable.ic_action_gnew_label_dark)
 					.setListener(listener).createItem());
-		}
-
-		if (selectedObj instanceof GPXUtilities.WptPt) {
-			GPXUtilities.WptPt pt = (GPXUtilities.WptPt) selectedObj;
-			if (getMyApplication().getSelectedGpxHelper().getSelectedGPXFile(pt) != null) {
-				adapter.addItem(new ContextMenuItem.ItemBuilder()
-						.setTitleId(R.string.context_menu_item_edit_waypoint, mapActivity)
-						.setIcon(R.drawable.ic_action_edit_dark)
-						.setListener(listener).createItem());
-			}
 		}
 
 		final ArrayAdapter<ContextMenuItem> listAdapter =
