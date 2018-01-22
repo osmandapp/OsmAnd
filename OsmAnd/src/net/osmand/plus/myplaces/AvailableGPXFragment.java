@@ -182,7 +182,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (!importing) {
 			if (asyncLoader == null || asyncLoader.getResult() == null) {
 				asyncLoader = new LoadGpxTask();
-				asyncLoader.execute(getActivity());
+				asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			} else {
 				allGpxAdapter.refreshSelected();
 				allGpxAdapter.notifyDataSetChanged();
@@ -206,6 +206,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (asyncProcessor != null) {
 			asyncProcessor.cancel(false);
 			asyncProcessor = null;
+		}
+		if (actionMode != null) {
+			actionMode.finish();
 		}
 	}
 
@@ -330,7 +333,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		listView.addFooterView(footerView);
 		emptyView = v.findViewById(android.R.id.empty);
 		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
-		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_trip_day_result : R.drawable.ic_empty_state_trip_night_result);
+		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_trip_day : R.drawable.ic_empty_state_trip_night);
 		Button importButton = (Button) emptyView.findViewById(R.id.import_button);
 		importButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -391,10 +394,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	public void reloadTracks() {
 		asyncLoader = new LoadGpxTask();
-		asyncLoader.execute(getActivity());
+		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
 		if (asyncProcessor == null) {
 			asyncProcessor = new ProcessGpxTask();
-			asyncProcessor.execute();
+			asyncProcessor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 
@@ -450,7 +453,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		optionsMenuAdapter = new ContextMenuAdapter();
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, final int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, final int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 				if (itemId == R.string.local_index_mi_reload) {
 					reloadTracks();
 				} else if (itemId == R.string.shared_string_show_on_map) {
@@ -470,11 +473,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				return true;
 			}
 		};
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.gpx_add_track, getActivity())
-					.setIcon(R.drawable.ic_action_plus)
-					.setListener(listener).createItem());
-		}
+		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.gpx_add_track, getActivity())
+				.setIcon(R.drawable.ic_action_plus)
+				.setListener(listener).createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_show_on_map, getActivity())
 				.setIcon(R.drawable.ic_show_on_map)
 				.setListener(listener).createItem());
@@ -506,7 +507,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	public void doAction(int actionResId) {
 		if (actionResId == R.string.shared_string_delete) {
 			operationTask = new DeleteGpxTask();
-			operationTask.execute(selectedItems.toArray(new GpxInfo[selectedItems.size()]));
+			operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, selectedItems.toArray(new GpxInfo[selectedItems.size()]));
 		} else {
 			operationTask = null;
 		}
@@ -521,7 +522,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(i);
 			if (itemId == contextMenuItem.getTitleId()) {
-				contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false);
+				contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false, null);
 				return true;
 			}
 		}
@@ -598,7 +599,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			private void runSelection(boolean showOnMap) {
 				operationTask = new SelectGpxTask(showOnMap);
 				originalSelectedItems.addAll(selectedItems);
-				operationTask.execute(originalSelectedItems.toArray(new GpxInfo[originalSelectedItems.size()]));
+				operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, originalSelectedItems.toArray(new GpxInfo[originalSelectedItems.size()]));
 			}
 
 			@Override
@@ -802,7 +803,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 												if (info.file.renameTo(dest)) {
 													app.getGpxDatabase().rename(info.file, dest);
 													asyncLoader = new LoadGpxTask();
-													asyncLoader.execute(getActivity());
+													asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
 												} else {
 													Toast.makeText(app, R.string.file_can_not_be_moved, Toast.LENGTH_LONG).show();
 												}
@@ -825,7 +826,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 						if (info.file.renameTo(dest)) {
 							app.getGpxDatabase().rename(info.file, dest);
 							asyncLoader = new LoadGpxTask();
-							asyncLoader.execute(getActivity());
+							asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
 						} else {
 							Toast.makeText(app, R.string.file_can_not_be_moved, Toast.LENGTH_LONG).show();
 						}
@@ -1367,7 +1368,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						new OpenGpxDetailsTask(gpxInfo).execute();
+						new OpenGpxDetailsTask(gpxInfo).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 						return true;
 					}
 				});
@@ -1393,7 +1394,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					public void renamedTo(File file) {
 						app.getGpxDatabase().rename(gpxInfo.file, file);
 						asyncLoader = new LoadGpxTask();
-						asyncLoader.execute(getActivity());
+						asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
 					}
 				});
 				return true;
@@ -1437,7 +1438,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						operationTask = new DeleteGpxTask();
-						operationTask.execute(gpxInfo);
+						operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxInfo);
 					}
 				});
 				builder.setNegativeButton(R.string.shared_string_cancel, null);

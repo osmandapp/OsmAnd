@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/bg_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:minHeight="@dimen/bottom_sheet_selected_item_title_height">
+
+        <CheckBox
+            android:id="@+id/check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            android:focusable="false"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            android:src="@drawable/ic_type_audio"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            android:layout_weight="1"
+            android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/map_marker_title_height"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:maxLines="1"
+                android:textColor="?attr/searchbar_text"
+                android:textSize="@dimen/default_list_text_size"
+                tools:text="Nov 17, 2017 Audio Note"/>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/map_widget_icon_margin"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/default_desc_text_size"
+                tools:text="Oct 13, 2017 * 3 MB * 01:14"/>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="@string/shared_string_more"
+            android:focusable="false"
+            android:padding="@dimen/content_padding"
+            android:src="@drawable/ic_overflow_menu_white"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/bottom_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/bottom_sheet_selected_item_title_height"
+        android:layout_marginStart="@dimen/bottom_sheet_selected_item_title_height"
+        android:background="?attr/dashboard_divider"
+        android:focusable="false"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+</LinearLayout>

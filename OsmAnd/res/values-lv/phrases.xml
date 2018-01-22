@@ -3331,4 +3331,14 @@
 	<string name="poi_zoo_petting_zoo">Mājdzīvnieku zoo</string>
 	<string name="poi_stands">Sporta tribīnes</string>
 
+	<string name="poi_animal_shelter_type">Pieņem dzīvniekus</string>
+	<string name="poi_animal_shelter_purpose">Mērķis</string>
+	<string name="poi_boat_rental_type">Laivu īre</string>
+	<string name="poi_water_supply_type">Ūdens piegādes tips</string>
+	<string name="poi_water_purification">Ūdens attīrīšana</string>
+	<string name="poi_animal_shelter_wildlife">Savvaļas dzīvnieki</string>
+	<string name="poi_animal_shelter_horse">Zirgi</string>
+	<string name="poi_animal_shelter_mammal">Zīdītāji</string>
+	<string name="poi_animal_shelter_fish">Zivis</string>
+
 	</resources>

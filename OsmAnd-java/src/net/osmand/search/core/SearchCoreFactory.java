@@ -31,6 +31,7 @@ import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPointParserUtil;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
+import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -38,14 +39,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.set.hash.TLongHashSet;
 
 
 public class SearchCoreFactory {
@@ -486,6 +491,7 @@ public class SearchCoreFactory {
 					SearchPhraseDataType.POI);
 			final NameStringMatcher nm = phrase.getNameStringMatcher();
 			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
+			final Set<String> ids = new HashSet<String>();
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int)bbox.centerX(), (int)bbox.centerY(),
 					phrase.getUnknownSearchWord(),
@@ -496,6 +502,10 @@ public class SearchCoreFactory {
 						@Override
 						public boolean publish(Amenity object) {
 							if (limit ++ > LIMIT) {
+								return false;
+							}
+							String poiID = object.getType().getKeyName() + "_" + object.getId();
+							if (ids.contains(poiID)) {
 								return false;
 							}
 							SearchResult sr = new SearchResult(phrase);
@@ -523,6 +533,7 @@ public class SearchCoreFactory {
 							phrase.countUnknownWordsMatch(sr);
 							sr.objectType = ObjectType.POI;
 							resultMatcher.publish(sr);
+							ids.add(poiID);
 							return false;
 						}
 
@@ -551,7 +562,7 @@ public class SearchCoreFactory {
 			if (p.hasObjectType(ObjectType.POI_TYPE)) {
 				return -1;
 			}
-			if (p.getUnknownSearchWordLength() > 3 || p.getRadiusLevel() > 1) {
+			if (p.getUnknownSearchWordLength() >= 3 || p.getRadiusLevel() > 1) {
 				return SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR;
 			}
 			return -1;
@@ -726,8 +737,9 @@ public class SearchCoreFactory {
 
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(10000);
 				List<BinaryMapIndexReader> oo = phrase.getOfflineIndexes();
+				Set<String> searchedPois = new TreeSet<>();
 				for (BinaryMapIndexReader o : oo) {
-					ResultMatcher<Amenity> rm = getResultMatcher(phrase, resultMatcher, o);
+					ResultMatcher<Amenity> rm = getResultMatcher(phrase, resultMatcher, o, searchedPois);
 					if (obj instanceof CustomSearchPoiFilter) {
 						rm = ((CustomSearchPoiFilter) obj).wrapResultMatcher(rm);
 					}
@@ -743,13 +755,20 @@ public class SearchCoreFactory {
 		}
 
 		private ResultMatcher<Amenity> getResultMatcher(final SearchPhrase phrase, final SearchResultMatcher resultMatcher,
-														final BinaryMapIndexReader selected) {
+														final BinaryMapIndexReader selected, final Set<String> searchedPois) {
 			final NameStringMatcher ns = phrase.getNameStringMatcher();
 			return new ResultMatcher<Amenity>() {
 
 				@Override
 				public boolean publish(Amenity object) {
 					SearchResult res = new SearchResult(phrase);
+					String poiID = object.getType().getKeyName() + "_" + object.getId();
+					if(!searchedPois.add(poiID)) {
+						return false;
+					}
+					if(object.isClosed()) {
+						return false;
+					}
 					res.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.otherNames = object.getAllNames(true);
 					if (Algorithms.isEmpty(res.localeName)) {
@@ -1109,279 +1128,17 @@ public class SearchCoreFactory {
 			List<Double> d = new ArrayList<>();
 			List<Object> all = new ArrayList<>();
 			List<String> strings = new ArrayList<>();
-			splitObjects(s, d, all, strings);
+			LocationParser.splitObjects(s, d, all, strings);
 			if (d.size() == 0) {
 				return null;
 			}
-			double lat = parse1Coordinate(all, 0, all.size());
+			double lat = LocationParser.parse1Coordinate(all, 0, all.size());
 			return new LatLon(lat, 0);
-		}
-
-		LatLon parseLocation(String s) {
-			s = s.trim();
-			// detect OLC first
-			// avoid throwing exceptions by carefully checking exceptions
-			if (s.length() > 0 && OpenLocationCode.isValidCode(s)) {
-				OpenLocationCode olc = new OpenLocationCode(s);
-				if (olc.isFull()) {
-					OpenLocationCode.CodeArea codeArea = olc.decode();
-					return new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude());
-				}
-			}
-			if (s.length() == 0 || !(s.charAt(0) == '-' || Character.isDigit(s.charAt(0))
-					|| s.charAt(0) == 'S' || s.charAt(0) == 's'
-					|| s.charAt(0) == 'N' || s.charAt(0) == 'n'
-					|| s.contains("://"))) {
-				return null;
-			}
-			List<Double> d = new ArrayList<>();
-			List<Object> all = new ArrayList<>();
-			List<String> strings = new ArrayList<>();
-			splitObjects(s, d, all, strings);
-			if (d.size() == 0) {
-				return null;
-			}
-			// detect UTM
-			if (all.size() == 4 && d.size() == 3 && all.get(1) instanceof String) {
-				char ch = all.get(1).toString().charAt(0);
-				if (Character.isLetter(ch)) {
-					UTMPoint upoint = new UTMPoint(d.get(2), d.get(1), d.get(0).intValue(), ch);
-					LatLonPoint ll = upoint.toLatLonPoint();
-					return new LatLon(ll.getLatitude(), ll.getLongitude());
-				}
-			}
-
-			if (all.size() == 3 && d.size() == 2 && all.get(1) instanceof String) {
-				char ch = all.get(1).toString().charAt(0);
-				String combined = strings.get(2);
-				if (Character.isLetter(ch)) {
-					try {
-						String east = combined.substring(0, combined.length() / 2);
-						String north = combined.substring(combined.length() / 2, combined.length());
-						UTMPoint upoint = new UTMPoint(Double.parseDouble(north), Double.parseDouble(east), d.get(0)
-								.intValue(), ch);
-						LatLonPoint ll = upoint.toLatLonPoint();
-						return new LatLon(ll.getLatitude(), ll.getLongitude());
-					} catch (NumberFormatException e) {
-					}
-				}
-			}
-			// try to find split lat/lon position
-			int jointNumbers = 0;
-			int lastJoin = 0;
-			int degSplit = -1;
-			int degType = -1; // 0 - degree, 1 - minutes, 2 - seconds
-			boolean finishDegSplit = false;
-			int northSplit = -1;
-			int eastSplit = -1;
-			for (int i = 1; i < all.size(); i++ ) {
-				if (all.get(i - 1) instanceof Double && all.get(i) instanceof Double) {
-					jointNumbers ++;
-					lastJoin = i;
-				}
-				if (all.get(i).equals("n") || all.get(i).equals("s") ||
-						all.get(i).equals("N") || all.get(i).equals("S")) {
-					northSplit = i + 1;
-				}
-				if (all.get(i).equals("e") || all.get(i).equals("w") ||
-						all.get(i).equals("E") || all.get(i).equals("W")) {
-					eastSplit = i;
-				}
-				int dg = -1;
-				if (all.get(i).equals("°")) {
-					dg = 0;
-				} else if (all.get(i).equals("\'") || all.get(i).equals("′")) {
-					dg = 1;
-				} else if (all.get(i).equals("″") || all.get(i).equals("\"")) {
-					dg = 2;
-				}
-				if (dg != -1) {
-					if (!finishDegSplit) {
-						if (degType < dg) {
-							degSplit = i + 1;
-							degType = dg;
-						} else {
-							finishDegSplit = true;
-							degType = dg;
-						}
-					} else {
-						if (degType < dg) {
-							degType = dg;
-						} else {
-							// reject delimiter
-							degSplit = -1;
-						}
-					}
-				}
-			}
-			int split = -1;
-			if (jointNumbers == 1) {
-				split = lastJoin;
-			}
-			if (northSplit != -1 && northSplit < all.size() -1) {
-				split = northSplit;
-			} else if (eastSplit != -1 && eastSplit < all.size() -1) {
-				split = eastSplit;
-			} else if (degSplit != -1 && degSplit < all.size() -1) {
-				split = degSplit;
-			}
-
-			if (split != -1) {
-				double lat = parse1Coordinate(all, 0, split);
-				double lon = parse1Coordinate(all, split, all.size());
-				return new LatLon(lat, lon);
-			}
-			if (d.size() == 2) {
-				return new LatLon(d.get(0), d.get(1));
-			}
-			// simple url case
-			if (s.contains("://")) {
-				double lat = 0;
-				double lon = 0;
-				boolean only2decimals = true;
-				for (int i = 0; i < d.size(); i++) {
-					if (d.get(i).doubleValue() != d.get(i).intValue()) {
-						if (lat == 0) {
-							lat = d.get(i);
-						} else if (lon == 0) {
-							lon = d.get(i);
-						} else {
-							only2decimals = false;
-						}
-					}
-				}
-				if (lat != 0 && lon != 0 && only2decimals) {
-					return new LatLon(lat, lon);
-				}
-			}
-			// split by equal number of digits
-			if (d.size() > 2 && d.size() % 2 == 0) {
-				int ind = d.size() / 2 + 1;
-				int splitEq = -1;
-				for (int i = 0; i < all.size(); i++) {
-					if (all.get(i) instanceof Double) {
-						ind --;
-					}
-					if (ind == 0) {
-						splitEq = i;
-						break;
-					}
-				}
-				if (splitEq != -1) {
-					double lat = parse1Coordinate(all, 0, splitEq);
-					double lon = parse1Coordinate(all, splitEq, all.size());
-					return new LatLon(lat, lon);
-				}
-			}
-			return null;
-
-		}
-
-		public double parse1Coordinate(List<Object> all, int begin, int end) {
-			boolean neg = false;
-			double d = 0;
-			int type = 0; // degree - 0, minutes - 1, seconds = 2
-			Double prevDouble = null;
-			for (int i = begin; i <= end; i++) {
-				Object o = i == end ? "" : all.get(i);
-				if(o.equals("S") || o.equals("W"))  {
-					neg = !neg;
-				}
-				if (prevDouble != null) {
-					if (o.equals("°")) {
-						type = 0;
-					} else if (o.equals("′") /*o.equals("'")*/) {
-						// ' can be used as delimeter ignore it
-						type = 1;
-					} else if (o.equals("\"") || o.equals("″")) {
-						type = 2;
-					}
-					if (type == 0) {
-						double ld = prevDouble.doubleValue();
-						if (ld < 0) {
-							ld = -ld;
-							neg = true;
-						}
-						d += ld;
-					} else if (type == 1) {
-						d += prevDouble.doubleValue() / 60.f;
-					} else /*if (type == 1) */ {
-						d += prevDouble.doubleValue() / 3600.f;
-					}
-					type++;
-				}
-				if (o instanceof Double) {
-					prevDouble = (Double) o;
-				} else {
-					prevDouble = null;
-				}
-			}
-			if (neg) {
-				d = -d;
-			}
-			return d;
-		}
-
-		private void splitObjects(String s, List<Double> d, List<Object> all, List<String> strings) {
-			boolean digit = false;
-			int word = -1;
-			for (int i = 0; i <= s.length(); i++) {
-				char ch = i == s.length() ? ' ' : s.charAt(i);
-				boolean dg = Character.isDigit(ch);
-				boolean nonwh = ch != ',' && ch != ' ' && ch != ';';
-				if (ch == '.' || dg || ch == '-' ) {
-					if (!digit) {
-						if (word != -1) {
-							all.add(s.substring(word, i));
-							strings.add(s.substring(word, i));
-						}
-						digit = true;
-						word = i;
-					} else {
-						if(word == -1) {
-							word = i;
-						}
-						// if digit
-						// continue
-					}
-				} else {
-					if (digit){
-						try {
-							double dl = Double.parseDouble(s.substring(word, i));
-							d.add(dl);
-							all.add(dl);
-							strings.add(s.substring(word, i));
-							digit = false;
-							word = -1;
-						} catch (NumberFormatException e) {
-						}
-					}
-					if (nonwh) {
-						if(!Character.isLetter(ch)) {
-							if(word != -1) {
-								all.add(s.substring(word, i));
-								strings.add(s.substring(word, i));
-							}
-							all.add(s.substring(i, i + 1));
-							strings.add(s.substring(i, i +1));
-							word = -1;
-						} else if(word == -1) {
-							word = i;
-						}
-					} else {
-						if (word != -1) {
-							all.add(s.substring(word, i));
-							strings.add(s.substring(word, i));
-						}
-						word = -1;
-					}
-				}
-			}
 		}
 
 		private void parseLocation(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
 			String lw = phrase.getUnknownSearchPhrase();
-			LatLon l = parseLocation(lw);
+			LatLon l = LocationParser.parseLocation(lw);
 			if (l != null) {
 				if (phrase.isSearchTypeAllowed(ObjectType.LOCATION)) {
 					SearchResult sp = new SearchResult(phrase);

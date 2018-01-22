@@ -3,7 +3,7 @@ package net.osmand.plus.mapcontextmenu.other;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +17,13 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.ShareItem;
 
 import java.util.List;
 
 
-public class ShareMenuFragment extends Fragment implements OnItemClickListener {
+public class ShareMenuFragment extends BaseOsmAndFragment implements OnItemClickListener {
 	public static final String TAG = "ShareMenuFragment";
 
 	private ArrayAdapter<ShareItem> listAdapter;
@@ -43,6 +44,7 @@ public class ShareMenuFragment extends Fragment implements OnItemClickListener {
 
 		View mainView = view.findViewById(R.id.main_view);
 		if (menu.isLandscapeLayout()) {
+			AndroidUtils.addStatusBarPadding21v(getContext(), view);
 			AndroidUtils.setBackground(view.getContext(), mainView, !menu.isLight(),
 					R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
 		} else {
@@ -117,14 +119,14 @@ public class ShareMenuFragment extends Fragment implements OnItemClickListener {
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		menu.share(listAdapter.getItem(position));
+		disableTransitionAnimation();
 		dismissMenu();
 	}
 
 	public void dismissMenu() {
+		menu.getMapActivity().getSupportFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		if (menu.getMapActivity().getContextMenu().isVisible()) {
-			menu.getMapActivity().getContextMenu().hide();
-		} else {
-			menu.getMapActivity().getSupportFragmentManager().popBackStack();
+			menu.getMapActivity().getContextMenu().hide(false);
 		}
 	}
 }

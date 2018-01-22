@@ -547,7 +547,7 @@
 	<string name="poi_cuisine_fast_food">Швидке харчування</string>
 	<string name="poi_cuisine_bakery">Пекарня</string>
 	<string name="poi_fuel_type">Вид палива</string>
-	<string name="poi_fuel_avia_type">Вид палива</string>
+	<string name="poi_fuel_avia_type">Тип авіаційного палива</string>
 	<string name="poi_payment_type">Тип оплати</string>
 	<string name="poi_payment_fuel_type">Паливні картки</string>
 	<string name="poi_internet_access_type">Тип доступу в Інтернет</string>
@@ -3476,4 +3476,182 @@
 
 <string name="poi_network">Мережа</string>
 
-</resources>
+<string name="poi_government_archive">Архів</string>
+	<string name="poi_government_ministry">Міністерство</string>
+	<string name="poi_government_public_service">Державна служба</string>
+	<string name="poi_government_social_security">Соціальний захист</string>
+	<string name="poi_government_social_services">Соціальні послуги</string>
+	<string name="poi_government_treasury">Казначейство</string>
+	<string name="poi_government_transportation">Транспортна установа</string>
+	<string name="poi_government_legislative">Законодавчі установи</string>
+
+<string name="poi_seamark_clearance_height">Габаритна висота</string>
+	<string name="poi_seamark_clearance_height_closed">Габаритна висота (закрита)</string>
+	<string name="poi_seamark_clearance_height_open">Габаритна висота (відкрита)</string>
+	<string name="poi_seamark_clearance_width">Габаритна ширина</string>
+
+	<string name="poi_vhf">УКХ-канал</string>
+
+<string name="poi_operational_status">Робочий стан</string>
+	<string name="poi_water_supply_type">Тип водопостачання</string>
+	<string name="poi_water_purification">Очищення води</string>
+	<string name="poi_water_place_access">Доступ до водопостачання</string>
+
+<string name="poi_gorge">Ущелина</string>
+	<string name="poi_couloir">Кулуар</string>
+	<string name="poi_mountain_area">Гірська місцевість</string>
+
+	<string name="poi_surface_clay">Глина</string>
+	<string name="poi_surface_tartan">Тартан</string>
+	<string name="poi_surface_artificial_turf">Штучна дерновина</string>
+	<string name="poi_surface_decoturf">Декораративна дерновина</string>
+	<string name="poi_surface_metal_grid">Металева сітка</string>
+
+	<string name="poi_location_underground">Розташування: під землею</string>
+	<string name="poi_location_underwater">Розташування: під водою</string>
+	<string name="poi_location_overground">Розташування: над землею</string>
+	<string name="poi_location_overhead">Розташування: зверху</string>
+	<string name="poi_location_roof">Розташування: дах</string>
+	<string name="poi_location_rooftop">Розташування: на даху</string>
+	<string name="poi_location_outdoor">Розташування: на відкритому повітрі</string>
+	<string name="poi_location_indoor">Розташування: в приміщенні</string>
+	<string name="poi_location_platform">Розташування: на платформі</string>
+	<string name="poi_location_kiosk">Розташування: кіоск</string>
+	<string name="poi_location_bridge">Розташування: на мості</string>
+	<string name="poi_location_wall">Розташування: на стіні</string>
+	<string name="poi_location_entrance">Розташування: біля входу</string>
+
+	<string name="poi_visibility_house">Видимість: будинок</string>
+	<string name="poi_visibility_street">Видимість: вулиця</string>
+	<string name="poi_visibility_area">Видимість: площа</string>
+
+	<string name="poi_operational_status_open">Відкрито</string>
+	<string name="poi_operational_status_closed">Закрито</string>
+	<string name="poi_operational_status_restricted">Обмежено</string>
+	<string name="poi_operational_status_broken">Зламано</string>
+	<string name="poi_operational_status_needs_maintenance">Потребує обслуговування</string>
+
+	<string name="poi_water_place_durability_durable">Міцність водостоку: міцний</string>
+	<string name="poi_water_place_durability_emergency">Міцність водостоку: для екстреного використання</string>
+
+	<string name="poi_water_purification_none">Немає</string>
+	<string name="poi_water_purification_chlorine">Хлорування</string>
+	<string name="poi_water_purification_reverse_osmosis">Зворотний осмос</string>
+	<string name="poi_water_purification_aquatabs">Таблетки для дезінфекції води</string>
+
+	<string name="poi_water_supply_water_well">Колодязь</string>
+	<string name="poi_water_supply_pipeline">Трубопровід</string>
+	<string name="poi_water_supply_running_water">Проточна вода</string>
+	<string name="poi_water_supply_pump">Насос</string>
+	<string name="poi_water_supply_borehole">Свердловина</string>
+	<string name="poi_water_supply_water_trucking">Доставка води</string>
+	<string name="poi_water_supply_water_tank">Резервуар для води</string>
+	<string name="poi_water_supply_bottled_water">Бутильована вода</string>
+
+	<string name="poi_water_place_access_community">Спільнота</string>
+	<string name="poi_water_place_access_family">Сім\'я</string>
+	<string name="poi_water_place_access_multifamilies">Декілька сімей</string>
+
+<string name="poi_socket_cee_blue">Роз\'єм: CEE blue</string>
+	<string name="poi_socket_cee_blue_current">Роз\'єм: CEE blue: струм</string>
+	<string name="poi_socket_cee_blue_output">Роз\'єм: CEE blue: потужність</string>
+	<string name="poi_socket_cee_red_16a">Роз\'єм: CEE red 16A</string>
+	<string name="poi_socket_cee_red_16a_current">Роз\'єм: CEE red 16A: струм</string>
+	<string name="poi_socket_cee_red_16a_output">Роз\'єм: CEE red 16A: потужність</string>
+	<string name="poi_socket_cee_red_32a">Роз\'єм: CEE red 32A</string>
+	<string name="poi_socket_cee_red_32a_current">Роз\'єм: CEE red 32A: струм</string>
+	<string name="poi_socket_cee_red_32a_output">Роз\'єм: CEE red 32A: потужність</string>
+	<string name="poi_socket_cee_red_64a">Роз\'єм: CEE red 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Роз\'єм: CEE red 64A: струм</string>
+	<string name="poi_socket_cee_red_64a_output">Роз\'єм: CEE red 64A: потужність</string>
+	<string name="poi_socket_cee_red_125a">Роз\'єм: CEE red 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Роз\'єм: CEE red 125A: струм</string>
+	<string name="poi_socket_cee_red_125a_output">Роз\'єм: CEE red 125A: потужність</string>
+	<string name="poi_socket_type1">Роз\'єм: Type 1</string>
+	<string name="poi_socket_type1_current">Роз\'єм: Type 1: струм</string>
+	<string name="poi_socket_type1_output">Роз\'єм: Type 1: потужність</string>
+	<string name="poi_socket_type1_combo">Роз\'єм: Type 1 combo</string>
+	<string name="poi_socket_type1_combo_current">Роз\'єм: Type 1 combo: струм</string>
+	<string name="poi_socket_type1_combo_output">Роз\'єм: Type 1 combo: потужність</string>
+	<string name="poi_socket_type2">Роз\'єм: Type 2</string>
+	<string name="poi_socket_type2_current">Роз\'єм: Type 2: струм</string>
+	<string name="poi_socket_type2_output">Роз\'єм: Type 2: потужність</string>
+	<string name="poi_socket_type2_combo">Роз\'єм: Type 2 combo</string>
+	<string name="poi_socket_type2_combo_current">Роз\'єм: Type 2 combo: струм</string>
+	<string name="poi_socket_type2_combo_output">Роз\'єм: Type 2 combo: потужність</string>
+	<string name="poi_socket_type3">Роз\'єм: Type 3</string>
+	<string name="poi_socket_type3_current">Роз\'єм: Type 3: струм</string>
+	<string name="poi_socket_type3_output">Роз\'єм: Type 3: потужність</string>
+	<string name="poi_socket_chademo">Роз\'єм: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Роз\'єм: CHAdeMO: струм</string>
+	<string name="poi_socket_chademo_output">Роз\'єм: CHAdeMO: потужність</string>
+	<string name="poi_socket_tesla_standard">Роз\'єм: Tesla standard</string>
+	<string name="poi_socket_tesla_standard_current">Роз\'єм: Tesla standard: струм</string>
+	<string name="poi_socket_tesla_standard_output">Роз\'єм: Tesla standard: потужність</string>
+	<string name="poi_socket_tesla_supercharger">Роз\'єм: Tesla Supercharger</string>
+	<string name="poi_socket_tesla_supercharger_current">Роз\'єм: Tesla Supercharger: струм</string>
+	<string name="poi_socket_tesla_supercharger_output">Роз\'єм: Tesla Supercharger: потужність</string>
+	<string name="poi_socket_tesla_roadster">Роз\'єм: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Роз\'єм: Tesla Roadster: струм</string>
+	<string name="poi_socket_tesla_roadster_output">Роз\'єм: Tesla Roadster: потужність</string>
+	<string name="poi_socket_nema_5_15">Роз\'єм: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Роз\'єм: NEMA 5-15R: струм</string>
+	<string name="poi_socket_nema_5_15_output">Роз\'єм: NEMA 5-15R: потужність</string>
+	<string name="poi_socket_nema_5_20">Роз\'єм: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Роз\'єм: NEMA 5-20: струм</string>
+	<string name="poi_socket_nema_5_20_output">Роз\'єм: NEMA 5-20: потужність</string>
+	<string name="poi_socket_nema_14_30">Роз\'єм: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Роз\'єм: NEMA 14-30: струм</string>
+	<string name="poi_socket_nema_14_30_output">Роз\'єм: NEMA 14-30: потужність</string>
+	<string name="poi_socket_nema_14_50">Роз\'єм: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Роз\'єм: NEMA 14-50: струм</string>
+	<string name="poi_socket_nema_14_50_output">Роз\'єм: NEMA 14-50: потужність</string>
+	<string name="poi_socket_schuko">Роз\'єм: Schuko</string>
+	<string name="poi_socket_schuko_current">Роз\'єм: Schuko: струм</string>
+	<string name="poi_socket_schuko_output">Роз\'єм: Schuko: потужність</string>
+	<string name="poi_socket_bs1363">Роз\'єм: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Роз\'єм: BS 1363: струм</string>
+	<string name="poi_socket_bs1363_output">Роз\'єм: BS 1363: потужність</string>
+	<string name="poi_socket_as3112">Роз\'єм: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Роз\'єм: AS/NZS 3112: струм</string>
+	<string name="poi_socket_as3112_output">Роз\'єм: AS/NZS 3112: потужність</string>
+
+	<string name="poi_car_yes">Автомобіль: так</string>
+	<string name="poi_car_no">Автомобіль: ні</string>
+	<string name="poi_bicycle_yes">Велосипед: так</string>
+	<string name="poi_bicycle_no">Велосипед: ні</string>
+	<string name="poi_scooter_yes">Скутер: так</string>
+	<string name="poi_scooter_no">Скутер: ні</string>
+	<string name="poi_truck_yes">Вантажівка: так</string>
+	<string name="poi_truck_no">Вантажівка: ні</string>
+
+	<string name="poi_parking_fee_yes">Оплата за парковку: так</string>
+	<string name="poi_parking_fee_no">Оплата за парковку: ні</string>
+	<string name="poi_parking_fee">Оплата за парковку</string>
+
+	<string name="poi_amperage">Сила струму</string>
+	<string name="poi_charging_station_output">Потужність зарядної станції</string>
+
+	<string name="poi_map_type_topo">Тип мапи: топографічна</string>
+	<string name="poi_map_type_street">Тип мапи: мапа вулиць</string>
+	<string name="poi_map_type_scheme">Тип мапи: схематична</string>
+	<string name="poi_map_type_toposcope">Тип мапи: панорама</string>
+	<string name="poi_map_size_site">Охоплення мапи: місце</string>
+	<string name="poi_map_size_city">Охоплення мапи: місто</string>
+	<string name="poi_map_size_region">Охоплення мапи: регіон</string>
+
+<string name="poi_charging_station_filter">Зарядна станція</string>
+
+<string name="poi_depot">Депо</string>
+
+<string name="poi_letter_box">Поштова скринька</string>
+	<string name="poi_post_street">Вулиця</string>
+	<string name="poi_post_housenumber">Номер будинку</string>
+	<string name="poi_post_flats">Квартира</string>
+
+	<string name="poi_payment_centre">Платіжний центр</string>
+	<string name="poi_money_transfer">Грошові перекази</string>
+
+<string name="poi_route_subway_ref">Метро</string>
+
+	</resources>

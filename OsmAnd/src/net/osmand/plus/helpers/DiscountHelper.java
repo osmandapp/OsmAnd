@@ -86,7 +86,7 @@ public class DiscountHelper {
 					processDiscountResponse(response, mapActivity);
 				}
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	@SuppressLint("SimpleDateFormat")

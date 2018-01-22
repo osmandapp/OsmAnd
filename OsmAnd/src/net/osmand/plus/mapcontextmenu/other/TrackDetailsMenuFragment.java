@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -16,9 +15,10 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
-public class TrackDetailsMenuFragment extends Fragment {
+public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 	public static final String TAG = "TrackDetailsMenuFragment";
 
 	private TrackDetailsMenu menu;
@@ -35,6 +35,9 @@ public class TrackDetailsMenuFragment extends Fragment {
 
 		menu = mapActivity.getMapLayers().getMapControlsLayer().getTrackDetailsMenu();
 		View view = inflater.inflate(R.layout.track_details, container, false);
+		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
+			AndroidUtils.addStatusBarPadding21v(getActivity(), view);
+		}
 		if (menu == null || menu.getGpxItem() == null) {
 			return view;
 		}
@@ -108,6 +111,11 @@ public class TrackDetailsMenuFragment extends Fragment {
 		}
 	}
 
+	@Override
+	public int getStatusBarColorId() {
+		return R.color.status_bar_transparent_gradient;
+	}
+
 	public int getHeight() {
 		if (mainView != null) {
 			return mainView.getHeight();
@@ -163,19 +171,19 @@ public class TrackDetailsMenuFragment extends Fragment {
 
 		ImageView yAxisArrow = (ImageView) mainView.findViewById(R.id.y_axis_arrow);
 		ImageView xAxisArrow = (ImageView) mainView.findViewById(R.id.x_axis_arrow);
-		yAxisArrow.setImageDrawable(ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_drop_down));
-		xAxisArrow.setImageDrawable(ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_drop_down));
+		yAxisArrow.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_drop_down));
+		xAxisArrow.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_drop_down));
 
 		ImageButton backButton = (ImageButton) mainView.findViewById(R.id.top_bar_back_button);
 		if (backButton != null) {
-			backButton.setImageDrawable(ctx.getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back, R.color.color_white));
+			backButton.setImageDrawable(getIcon(R.drawable.ic_arrow_back, R.color.color_white));
 		}
 
 	}
 
 	public static boolean showInstance(final MapActivity mapActivity) {
 		try {
-			boolean portrait = mapActivity.findViewById(R.id.bottomFragmentContainer) != null;
+			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			TrackDetailsMenuFragment fragment = new TrackDetailsMenuFragment();
 			mapActivity.getSupportFragmentManager().beginTransaction()
 					.add(portrait ? R.id.bottomFragmentContainer : R.id.routeMenuContainer, fragment, TAG)

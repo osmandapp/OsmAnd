@@ -13,11 +13,11 @@ import android.graphics.PointF;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -213,7 +213,12 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
 		getOsmoFromPoint(tileBox, point, o);
 	}
 

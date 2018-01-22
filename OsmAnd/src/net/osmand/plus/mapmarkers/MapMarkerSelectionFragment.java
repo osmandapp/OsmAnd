@@ -72,7 +72,11 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 				LatLon myLoc = l == null ? null : new LatLon(l.getLatitude(), l.getLongitude());
 				useCenter = !mapLinked;
 				loc = (useCenter ? mw : myLoc);
-				heading = useCenter ? -mapRotation : head;
+				if (useCenter) {
+					heading = -mapRotation;
+				} else {
+					heading = head;
+				}
 			}
 		}
 		nightMode = !app.getSettings().isLightContent();
@@ -127,7 +131,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 				convertView = getMapActivity().getLayoutInflater().inflate(R.layout.map_marker_item, null);
 			}
 			MapMarkerDialogHelper.updateMapMarkerInfo(getContext(), convertView, loc, heading,
-					useCenter, nightMode, screenOrientation, false, null, marker);
+					useCenter, nightMode, screenOrientation, false, null, marker, true);
 			final View remove = convertView.findViewById(R.id.info_close);
 			remove.setVisibility(View.GONE);
 			AndroidUtils.setListItemBackground(getMapActivity(), convertView, nightMode);

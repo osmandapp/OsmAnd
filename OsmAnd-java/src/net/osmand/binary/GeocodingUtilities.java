@@ -137,7 +137,7 @@ public class GeocodingUtilities {
 	}
 
 
-	public List<GeocodingResult> reverseGeocodingSearch(RoutingContext ctx, double lat, double lon) throws IOException {
+	public List<GeocodingResult> reverseGeocodingSearch(RoutingContext ctx, double lat, double lon, boolean allowEmptyNames) throws IOException {
 		RoutePlannerFrontEnd rp = new RoutePlannerFrontEnd(false);
 		List<GeocodingResult> lst = new ArrayList<GeocodingUtilities.GeocodingResult>();
 		List<RouteSegmentPoint> listR = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
@@ -151,14 +151,14 @@ public class GeocodingUtilities {
 				continue;
 			}
 //			System.out.println(road.toString() +  " " + Math.sqrt(p.distSquare));
-			boolean emptyName = Algorithms.isEmpty(road.getName()) && Algorithms.isEmpty(road.getRef("", false, true));
-			if (!emptyName) {
+			String name = Algorithms.isEmpty(road.getName()) ? road.getRef("", false, true) : road.getName();
+			if (allowEmptyNames || !Algorithms.isEmpty(name)) {
 				if (distSquare == 0 || distSquare > p.distSquare) {
 					distSquare = p.distSquare;
 				}
 				GeocodingResult sr = new GeocodingResult();
 				sr.searchPoint = new LatLon(lat, lon);
-				sr.streetName = Algorithms.isEmpty(road.getName()) ? road.getRef("", false, true) : road.getName();
+				sr.streetName = name == null ? "" : name;
 				sr.point = p;
 				sr.connectionPoint = new LatLon(MapUtils.get31LatitudeY(p.preciseY), MapUtils.get31LongitudeX(p.preciseX));
 				sr.regionFP = road.region.getFilePointer();

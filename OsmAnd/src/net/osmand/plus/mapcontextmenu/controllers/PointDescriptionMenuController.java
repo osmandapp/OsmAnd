@@ -46,7 +46,7 @@ public class PointDescriptionMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return getIcon(SearchHistoryFragment.getItemIcon(getPointDescription()));
 	}
 

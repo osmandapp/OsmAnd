@@ -16,6 +16,10 @@ public class FontCache {
     public static Typeface getRobotoMedium(Context context) {
     	return getFont(context, ROBOTO_MEDIUM);
     }
+
+    public static Typeface getRobotoRegular(Context context) {
+    	return getFont(context, ROBOTO_REGULAR);
+	}
  
 	public static Typeface getFont(Context context, String fontName) {
 		Typeface typeface = fontMap.get(fontName);

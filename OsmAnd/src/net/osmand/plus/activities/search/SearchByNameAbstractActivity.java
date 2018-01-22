@@ -177,7 +177,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		selectAddress = getIntent() != null && getIntent().hasExtra(SELECT_ADDRESS);
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 		if (initializeTask != null){
-			initializeTask.execute();
+			initializeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 	

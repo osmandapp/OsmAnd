@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
@@ -61,6 +62,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
 import net.osmand.util.Algorithms;
@@ -74,6 +76,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = "EditPoiDialogFragment";
@@ -255,6 +258,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		poiNameEditText.setText(editPoiData.getTag(OSMSettings.OSMTagKey.NAME.getValue()));
 		poiTypeTextInputLayout = (TextInputLayout) view.findViewById(R.id.poiTypeTextInputLayout);
 		poiTypeEditText = (AutoCompleteTextView) view.findViewById(R.id.poiTypeEditText);
+		poiTypeEditText.setText(editPoiData.getPoiTypeString());
 		poiTypeEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -267,14 +271,15 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (!getEditPoiData().isInEdit()) {
-					getEditPoiData().updateTypeTag(s.toString());
-					poiTypeTextInputLayout.setHint(editPoiData.getPoiCategory().getTranslation());
+					getEditPoiData().updateTypeTag(s.toString(), true);
+					if (!getMyApplication().isApplicationInitializing()) {
+						poiTypeTextInputLayout.setHint(editPoiData.getPoiCategory().getTranslation());
+					}
 				}
 			}
 		});
 		poiNameEditText.setOnEditorActionListener(mOnEditorActionListener);
 		poiTypeEditText.setOnEditorActionListener(mOnEditorActionListener);
-		poiTypeEditText.setText(editPoiData.getPoiTypeString());
 		poiTypeEditText.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(final View v, MotionEvent event) {
@@ -302,6 +307,24 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 				return false;
 			}
 		});
+
+		if (!isAddingPoi) {
+			Button deleteButton = (Button) view.findViewById(R.id.deleteButton);
+			deleteButton.setVisibility(View.VISIBLE);
+			deleteButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					DeletePoiHelper deletePoiHelper = new DeletePoiHelper(getMyActivity());
+					deletePoiHelper.setCallback(new DeletePoiHelper.DeletePoiCallback() {
+						@Override
+						public void poiDeleted() {
+							dismiss();
+						}
+					});
+					deletePoiHelper.deletePoiWithDialog(getEditPoiData().getEntity());
+				}
+			});
+		}
 
 		Button saveButton = (Button) view.findViewById(R.id.saveButton);
 		saveButton.setText(mOpenstreetmapUtil instanceof OpenstreetmapRemoteUtil
@@ -424,7 +447,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		Node original = editPoiData.getEntity();
 		final boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
 		Node node = new Node(original.getLatitude(), original.getLongitude(), original.getId());
-		OsmPoint.Action action = node.getId() < 0 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
+		Action action = node.getId() < 0 ? Action.CREATE : Action.MODIFY;
 		for (Map.Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
 			if (!Algorithms.isEmpty(tag.getKey()) && !Algorithms.isEmpty(tag.getValue()) && 
 					!tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
@@ -449,7 +472,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			if (offlineEdit && !Algorithms.isEmpty(poiTypeTag)) {
 				node.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiTypeTag);
 			}
-			String actionString = action == OsmPoint.Action.CREATE ? getString(R.string.default_changeset_add) : getString(R.string.default_changeset_edit);
+			String actionString = action == Action.CREATE ? getString(R.string.default_changeset_add) : getString(R.string.default_changeset_edit);
 			comment = actionString + " " + poiTypeTag;
 		}
 		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(node.getId()), comment, false,
@@ -484,7 +507,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 						return false;
 					}
-				}, getActivity(), mOpenstreetmapUtil);
+				}, getActivity(), mOpenstreetmapUtil, action == Action.MODIFY ? editPoiData.getChangedTags() : null);
 	}
 
 	private void dismissCheckForChanges() {
@@ -504,15 +527,16 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		poiTypeEditText.setText(subCategory);
 	}
 
-	public static void commitNode(final OsmPoint.Action action,
+	public static void commitNode(final Action action,
 								  final Node node,
 								  final EntityInfo info,
 								  final String comment,
 								  final boolean closeChangeSet,
 								  final CallbackWithObject<Node> postExecute,
 								  final Activity activity,
-								  final OpenstreetmapUtil openstreetmapUtil) {
-		if (info == null && OsmPoint.Action.CREATE != action && openstreetmapUtil instanceof OpenstreetmapRemoteUtil) {
+								  final OpenstreetmapUtil openstreetmapUtil,
+								  @Nullable final Set<String> changedTags) {
+		if (info == null && Action.CREATE != action && openstreetmapUtil instanceof OpenstreetmapRemoteUtil) {
 			Toast.makeText(activity, activity.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
 			return;
 		}
@@ -527,7 +551,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 			@Override
 			protected Node doInBackground(Void... params) {
-				return openstreetmapUtil.commitNodeImpl(action, node, info, comment, closeChangeSet);
+				return openstreetmapUtil.commitNodeImpl(action, node, info, comment, closeChangeSet, changedTags);
 			}
 
 			@Override
@@ -537,7 +561,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					postExecute.processResult(result);
 				}
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void setPoiCategory(PoiCategory type) {
@@ -665,7 +689,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 							Toast.LENGTH_LONG).show();
 				}
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public static class MyAdapter extends FragmentPagerAdapter {
@@ -694,11 +718,16 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	public static class ShowDeleteDialogAsyncTask extends AsyncTask<Amenity, Void, Node> {
+	public static class DeletePoiHelper {
 		private final OpenstreetmapUtil openstreetmapUtil;
 		private final AppCompatActivity activity;
+		private DeletePoiCallback callback;
 
-		public ShowDeleteDialogAsyncTask(AppCompatActivity activity) {
+		public void setCallback(DeletePoiCallback callback) {
+			this.callback = callback;
+		}
+
+		public DeletePoiHelper(AppCompatActivity activity) {
 			this.activity = activity;
 			OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
 			OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
@@ -709,11 +738,22 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		}
 
-		protected Node doInBackground(Amenity[] params) {
-			return openstreetmapUtil.loadNode(params[0]);
+		public void deletePoiWithDialog(Amenity amenity) {
+			new AsyncTask<Amenity, Void, Node>() {
+
+				@Override
+				protected Node doInBackground(Amenity... params) {
+					return openstreetmapUtil.loadNode(params[0]);
+				}
+
+				@Override
+				protected void onPostExecute(Node node) {
+					deletePoiWithDialog(node);
+				}
+			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, amenity);
 		}
 
-		protected void onPostExecute(final Node n) {
+		public void deletePoiWithDialog(final Node n) {
 			if (n == null) {
 				Toast.makeText(activity, activity.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
 				return;
@@ -755,12 +795,15 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		private void deleteNode(final Node n, final String c, final boolean closeChangeSet) {
 			final boolean isLocalEdit = openstreetmapUtil instanceof OpenstreetmapLocalUtil;
-			commitNode(OsmPoint.Action.DELETE, n, openstreetmapUtil.getEntityInfo(n.getId()), c, closeChangeSet,
+			commitNode(Action.DELETE, n, openstreetmapUtil.getEntityInfo(n.getId()), c, closeChangeSet,
 					new CallbackWithObject<Node>() {
 
 						@Override
 						public boolean processResult(Node result) {
 							if (result != null) {
+								if (callback != null) {
+									callback.poiDeleted();
+								}
 								if (isLocalEdit) {
 									Toast.makeText(activity, R.string.osm_changes_added_to_local_edits,
 											Toast.LENGTH_LONG).show();
@@ -774,7 +817,11 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 							}
 							return false;
 						}
-					}, activity, openstreetmapUtil);
+					}, activity, openstreetmapUtil, null);
+		}
+
+		public interface DeletePoiCallback {
+			void poiDeleted();
 		}
 	}
 

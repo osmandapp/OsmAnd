@@ -117,11 +117,7 @@ public class GeocodingLookupService {
 
 	@SuppressWarnings("unchecked")
 	private <P> void execute(AsyncTask<P, ?, ?> task, P... requests) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
-		} else {
-			task.execute(requests);
-		}
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
 	}
 
 	private boolean geocode(final LatLon latLon) {

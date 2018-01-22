@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -1084,7 +1085,7 @@
     <string name="keep_intermediate_points">Διατήρηση ενδιάμεσων προορισμών</string>
     <string name="context_menu_item_directions_to">Οδηγίες προς</string>
     <string name="context_menu_item_directions_from">Οδηγίες από</string>
-    <string name="route_descr_map_location">Χάρτης:… </string>
+    <string name="route_descr_map_location">Χάρτης:</string>
     <string name="route_to">Προς:</string>
     <string name="route_via">Μέσω:</string>
     <string name="route_from">Από:</string>
@@ -1719,4 +1720,24 @@
     <string name="rendering_value_medium_name">Μέτριο</string>
     <string name="rendering_value_bold_name">Παχύ</string>
     <string name="report">Αναφορά</string>
+    <string name="keep_showing_on_map">Διατήρηση εμφάνισης στο χάρτη</string>
+    <string name="exit_without_saving">Έξοδος χωρίς αποθήκευση;</string>
+    <string name="shared_string_options">Επιλογές</string>
+    <string name="none_point_error">Παρακαλώ προσθέστε τουλάχιστον ένα σημείο.</string>
+    <string name="show_on_map_after_saving">Εμφάνιση στο χάρτη μετά την αποθήκευση</string>
+    <string name="shared_string_reset">Επαναφορά</string>
+    <string name="shared_string_reload">Επαναφόρτωση</string>
+    <string name="mapillary_menu_date_from">Από</string>
+    <string name="mapillary_menu_title_username">Παρωνύμιο</string>
+    <string name="shared_string_permissions">Άδειες</string>
+    <string name="distance_moving">Η απόσταση διορθώθηκε</string>
+    <string name="open_mapillary">Άνοιγμα του Mapillary</string>
+    <string name="shared_string_install">Εγκατάσταση</string>
+    <string name="online_photos">Online φωτογραφίες</string>
+    <string name="shared_string_add_photos">Προσθήκη φωτογραφιών</string>
+    <string name="nothing_found">Δεν βρέθηκε κάτι :(</string>
+    <string name="quick_action_showhide_osmbugs_title">Εμφάνιση/απόκρυψη σημειώσεων OSM</string>
+    <string name="quick_action_osmbugs_show">Εμφάνιση σημειώσεων OSM</string>
+    <string name="quick_action_osmbugs_hide">Απόκρυψη σημειώσεων OSM</string>
+    <string name="shared_string_to">Προς</string>
     </resources>

@@ -325,7 +325,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 					}
 				}
 			}
-		}.execute((Void) null);
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	@Override

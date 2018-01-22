@@ -7,10 +7,24 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.IndexConstants;
@@ -21,6 +35,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -47,7 +62,7 @@ public class GpxImportHelper {
 	public static final String KML_SUFFIX = ".kml";
 	public static final String KMZ_SUFFIX = ".kmz";
 	public static final String GPX_SUFFIX = ".gpx";
-	private final Activity activity;
+	private final AppCompatActivity activity;
 	private final OsmandApplication app;
 	private final OsmandMapTileView mapView;
 	private OnGpxImportCompleteListener gpxImportCompleteListener;
@@ -56,7 +71,7 @@ public class GpxImportHelper {
 		void onComplete(boolean success);
 	}
 
-	public GpxImportHelper(final Activity activity, final OsmandApplication app, final OsmandMapTileView mapView) {
+	public GpxImportHelper(final AppCompatActivity activity, final OsmandApplication app, final OsmandMapTileView mapView) {
 		this.activity = activity;
 		this.app = app;
 		this.mapView = mapView;
@@ -170,10 +185,12 @@ public class GpxImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				progress.dismiss();
+				if (isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
 				handleResult(result, fileName, save, useImportDir, false);
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void handleFavouritesImport(final Uri gpxFile, final String fileName, final boolean save, final boolean useImportDir, final boolean forceImportFavourites) {
@@ -208,10 +225,12 @@ public class GpxImportHelper {
 
 			@Override
 			protected void onPostExecute(final GPXFile result) {
-				progress.dismiss();
+				if (isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
 				importFavourites(result, fileName, save, useImportDir, forceImportFavourites);
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void importFavoritesImpl(final GPXFile gpxFile, final String fileName, final boolean forceImportFavourites) {
@@ -225,7 +244,7 @@ public class GpxImportHelper {
 
 			@Override
 			protected GPXFile doInBackground(Void... nothing) {
-				final List<FavouritePoint> favourites = asFavourites(gpxFile.points, fileName, forceImportFavourites);
+				final List<FavouritePoint> favourites = asFavourites(gpxFile.getPoints(), fileName, forceImportFavourites);
 				final FavouritesDbHelper favoritesHelper = app.getFavorites();
 				for (final FavouritePoint favourite : favourites) {
 					favoritesHelper.deleteFavourite(favourite, false);
@@ -238,14 +257,16 @@ public class GpxImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				progress.dismiss();
+				if (isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
 				Toast.makeText(activity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG).show();
 				final Intent newIntent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
 				newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				newIntent.putExtra(FavoritesActivity.OPEN_FAVOURITES_TAB, true);
 				activity.startActivity(newIntent);
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void handleKmzImport(final Uri kmzFile, final String name, final boolean save, final boolean useImportDir) {
@@ -294,11 +315,13 @@ public class GpxImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				progress.dismiss();
+				if (isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
 				handleResult(result, name, save, useImportDir, false);
 			}
 
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void handleKmlImport(final Uri kmlFile, final String name, final boolean save, final boolean useImportDir) {
@@ -339,10 +362,19 @@ public class GpxImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				progress.dismiss();
+				if (isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
 				handleResult(result, name, save, useImportDir, false);
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private boolean isActivityNotDestroyed(Activity activity) {
+		if (Build.VERSION.SDK_INT >= 17) {
+			return !activity.isFinishing() && !activity.isDestroyed();
+		}
+		return !activity.isFinishing();
 	}
 
 	private void handleResult(final GPXFile result, final String name, final boolean save,
@@ -355,7 +387,7 @@ public class GpxImportHelper {
 				}
 			} else {
 				if (save) {
-					new SaveAsyncTask(result, name, useImportDir).execute();
+					new SaveAsyncTask(result, name, useImportDir).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				} else {
 					showGpxOnMap(result);
 				}
@@ -492,7 +524,7 @@ public class GpxImportHelper {
 
 	private void importFavourites(final GPXFile gpxFile, final String fileName, final boolean save,
 								  final boolean useImportDir, final boolean forceImportFavourites) {
-		if (gpxFile == null || gpxFile.points == null || gpxFile.points.size() == 0) {
+		if (gpxFile == null || gpxFile.isPointsEmpty()) {
 			if (forceImportFavourites) {
 				final DialogInterface.OnClickListener importAsTrackListener = new DialogInterface.OnClickListener() {
 					@Override
@@ -524,26 +556,14 @@ public class GpxImportHelper {
 		if (forceImportFavourites) {
 			importFavoritesImpl(gpxFile, fileName, true);
 		} else {
-			final DialogInterface.OnClickListener importFavouritesListener = new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					switch (which) {
-						case DialogInterface.BUTTON_POSITIVE:
-							importFavoritesImpl(gpxFile, fileName, false);
-							break;
-						case DialogInterface.BUTTON_NEGATIVE:
-							handleResult(gpxFile, fileName, save, useImportDir, false);
-							break;
-					}
-				}
-			};
-
-			new AlertDialog.Builder(activity)
-					.setTitle(R.string.shared_string_import2osmand)
-					.setMessage(R.string.import_file_favourites)
-					.setPositiveButton(R.string.shared_string_import, importFavouritesListener)
-					.setNegativeButton(R.string.shared_string_save, importFavouritesListener)
-					.show();
+			ImportGpxBottomSheetDialogFragment fragment = new ImportGpxBottomSheetDialogFragment();
+			fragment.setUsedOnMap(true);
+			fragment.setGpxImportHelper(this);
+			fragment.setGpxFile(gpxFile);
+			fragment.setFileName(fileName);
+			fragment.setSave(save);
+			fragment.setUseImportDir(useImportDir);
+			fragment.show(activity.getSupportFragmentManager(), ImportGpxBottomSheetDialogFragment.TAG);
 		}
 	}
 
@@ -596,5 +616,86 @@ public class GpxImportHelper {
 			return false;
 		}
 		return false;
+	}
+
+	public static class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+
+		public static final String TAG = "ImportGpxBottomSheetDialogFragment";
+
+		private GpxImportHelper gpxImportHelper;
+
+		private GPXFile gpxFile;
+		private String fileName;
+		private boolean save;
+		private boolean useImportDir;
+
+		public void setGpxImportHelper(GpxImportHelper gpxImportHelper) {
+			this.gpxImportHelper = gpxImportHelper;
+		}
+
+		public void setGpxFile(GPXFile gpxFile) {
+			this.gpxFile = gpxFile;
+		}
+
+		public void setFileName(String fileName) {
+			this.fileName = fileName;
+		}
+
+		public void setSave(boolean save) {
+			this.save = save;
+		}
+
+		public void setUseImportDir(boolean useImportDir) {
+			this.useImportDir = useImportDir;
+		}
+
+		@Nullable
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+
+			final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_import_gpx_bottom_sheet_dialog, container);
+
+			if (nightMode) {
+				((TextView) mainView.findViewById(R.id.import_gpx_title)).setTextColor(ContextCompat.getColor(getActivity(), R.color.ctx_menu_info_text_dark));
+			}
+
+			((ImageView) mainView.findViewById(R.id.import_as_favorites_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_fav_dark));
+			((ImageView) mainView.findViewById(R.id.import_as_gpx_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
+
+			int nameColor = ContextCompat.getColor(getContext(), nightMode ? R.color.osmand_orange : R.color.dashboard_blue);
+			int descrColor = ContextCompat.getColor(getContext(), nightMode ? R.color.dashboard_subheader_text_dark : R.color.dashboard_subheader_text_light);
+			String descr = getString(R.string.import_gpx_file_description);
+			SpannableStringBuilder text = new SpannableStringBuilder(fileName).append(" ").append(descr);
+			text.setSpan(new ForegroundColorSpan(nameColor), 0, fileName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			text.setSpan(new ForegroundColorSpan(descrColor), fileName.length() + 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			((TextView) mainView.findViewById(R.id.import_gpx_description)).setText(text);
+
+			mainView.findViewById(R.id.import_as_favorites_row).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					gpxImportHelper.importFavoritesImpl(gpxFile, fileName, false);
+					dismiss();
+				}
+			});
+			mainView.findViewById(R.id.import_as_gpx_row).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					gpxImportHelper.handleResult(gpxFile, fileName, save, useImportDir, false);
+					dismiss();
+				}
+			});
+
+			mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					dismiss();
+				}
+			});
+
+			setupHeightAndBackground(mainView, R.id.import_gpx_scroll_view);
+
+			return mainView;
+		}
 	}
 }

@@ -73,7 +73,7 @@ public class LiveMonitoringHelper  {
 		}
 		if (isLiveMonitoringEnabled()) {
 			if (!started) {
-				new LiveSender().execute(queue);
+				new LiveSender().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, queue);
 				started = true;
 			}
 		} else {
@@ -193,7 +193,7 @@ public class LiveMonitoringHelper  {
 
 			log.info("Monitor " + uri);
 
-			if (urlConnection.getResponseCode() != 200) {
+			if (urlConnection.getResponseCode()/100 != 2) {
 
 				String msg = urlConnection.getResponseCode() + " : " + //$NON-NLS-1$//$NON-NLS-2$
 						urlConnection.getResponseMessage();

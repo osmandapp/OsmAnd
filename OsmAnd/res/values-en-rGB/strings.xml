@@ -4,6 +4,18 @@
 		This file is manually maintained in res/values-en-rGB and should ONLY contain strings where a different spelling should be used for English as used in the United Kingdom
 	-->
 
+	<string name="add_favourites_group_to_markers_descr">Select a Favourite category to add to the markers.</string>
+	<string name="favourites_group">Favourites category</string>
+	<string name="add_group_descr">You can import groups from favourites or track waypoints.</string>
+	<string name="empty_state_markers_groups_desc">You can import favourite groups or track waypoints as markers.</string>
+	<string name="empty_state_favourites">Add Favourites</string>
+	<string name="empty_state_favourites_desc">Add favourites on the map or import them from a file.</string>
+	<string name="import_gpx_file_description">can be imported as Favourites points, or as track file.</string>
+	<string name="import_as_favorites">Import as Favourites</string>
+	<string name="search_favorites">Search favourites</string>
+	<string name="favourites_edit_dialog_title">Favourite information</string>
+	<string name="save_as_favorites_points">Save as group of favourites</string>
+	<string name="quick_action_add_favorite">Add favourite</string>
 	<string name="change_color">Change colour</string>
 	<string name="srtm_color_scheme">Colour scheme</string>
 	<string name="towards">towards</string>
@@ -62,5 +74,15 @@
 	<string name="quick_action_add_destination_desc">Tapping the action button will add a destination at the screen centre location.</string>
 	<string name="quick_action_replace_destination_desc">Tapping the action button will replace the destination with the screen centre location.</string>
 	<string name="quick_action_add_first_intermediate_desc">Tapping the action button will add a first intermediate point at the screen centre location.</string>
+	<string name="quick_action_add_parking_descr">Tapping the action button will add a parking place at the screen centre location.</string>
+	<string name="quick_action_add_osm_bug_descr">Tapping the action button will add an OSM note at the screen centre location.</string>
+	<string name="quick_action_add_poi_descr">Tapping the action button will add a POI at the screen centre location.</string>
+	<string name="quick_action_add_marker_descr">Tapping the action button will add a map marker at the screen centre location.</string>
+	<string name="quick_action_add_gpx_descr">Tapping the action button will add a GPX waypoint at the screen centre location.</string>
+	<string name="quick_action_showhide_favorites_descr">Tapping the action button will show or hide the favourite points on the map.</string>
+	<string name="quick_action_showhide_favorites_title">Show/hide favourites</string>
+	<string name="quick_action_favorites_show">Show Favourites</string>
+	<string name="quick_action_favorites_hide">Hide Favourites</string>
+	<string name="quick_action_category_descr">Select the category to save the favourite in.</string>
 	<string name="analyze_on_map">Analyse on map</string>
 </resources>

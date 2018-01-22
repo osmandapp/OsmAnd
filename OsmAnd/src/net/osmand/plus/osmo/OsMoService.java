@@ -126,7 +126,7 @@ public class OsMoService implements OsMoReactor {
 				}
 				return null;
 			}
-		}.execute((Void)null);
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void)null);
 	}
 	
 	public boolean isConnected() {
@@ -446,7 +446,7 @@ public class OsMoService implements OsMoReactor {
 				for(int i = 0; i < a.length; i++) {
 					a[i] = (JSONObject) ar.get(i);
 				}
-				task.execute(a);
+				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, a);
 			} catch (JSONException e) {
 				e.printStackTrace();
 				showErrorMessage(e.getMessage());

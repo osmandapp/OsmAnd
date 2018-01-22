@@ -10,11 +10,11 @@
 	<string name="poi_sport">Sport</string>
 	<string name="poi_tourism">Turism</string>
 	<string name="poi_entertainment">Vaba aeg</string>
-	<string name="poi_shop_food">Toidupood</string>
+	<string name="poi_shop_food">Toidupood või supermarket</string>
 	<string name="poi_road_obstacle">Takistustega tee</string>
 		<string name="poi_filling_station">Tankla</string>
 		<string name="poi_personal_transport">Isiklik transport</string>
-		<string name="poi_public_transport">Avalik transport</string>
+		<string name="poi_public_transport">Ühistransport</string>
 		<string name="poi_air_transport">Õhu transport</string>
 		<string name="poi_water_transport">Vesi transport</string>
 		<string name="poi_bicycle_transport">Jalgratta transport</string>
@@ -150,4 +150,7 @@
 	<string name="poi_payment_toll_type">Makse tüüp</string>
 	<string name="poi_traffic_signals_sound">Heli</string>
 	<string name="poi_highway_crossing_type">Tüüp</string>
+	<string name="poi_traffic_enforcement">Liikluspiirangud</string>
+	<string name="poi_transport_construction">Transpordi ehitus</string>
+	<string name="poi_seamark">Merendus</string>
 	</resources>

@@ -22,6 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ValueHolder;
 import net.osmand.binary.BinaryMapDataObject;
@@ -37,6 +38,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -64,7 +66,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class FirstUsageWizardFragment extends Fragment implements OsmAndLocationListener,
+public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmAndLocationListener,
 		AppInitializeListener, DownloadEvents {
 	public static final String TAG = "FirstUsageWizardFrag";
 	public static final int FIRST_USAGE_LOCATION_PERMISSION = 300;
@@ -118,6 +120,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.first_usage_wizard_fragment, container, false);
+		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
 
 		if (!AndroidUiHelper.isOrientationPortrait(getActivity()) && !AndroidUiHelper.isXLargeDevice(getActivity())) {
 			TextView wizardDescription = (TextView) view.findViewById(R.id.wizard_description);
@@ -376,7 +379,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 							showNoLocationFragment(getActivity());
 						}
 					}
-				}.execute();
+				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 			} else {
 					FragmentActivity activity = getActivity();
@@ -906,10 +909,6 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 					.replace(R.id.fragmentContainer, fragment, FirstUsageWizardFragment.TAG)
 					.commitAllowingStateLoss();
 		}
-	}
-
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	private static void logError(String msg, Throwable e) {

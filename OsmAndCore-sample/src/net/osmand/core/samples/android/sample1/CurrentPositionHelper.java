@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CurrentPositionHelper {
 
@@ -33,6 +35,7 @@ public class CurrentPositionHelper {
 	private List<BinaryMapIndexReader> readers = new ArrayList<>();
 	private List<BinaryMapIndexReader> usedReaders = new ArrayList<>();
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(CurrentPositionHelper.class);
+	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	public CurrentPositionHelper(SampleApplication app) {
 		this.app = app;
@@ -103,7 +106,7 @@ public class CurrentPositionHelper {
 					}
 					return null;
 				}
-			}.execute((Void) null);
+			}.executeOnExecutor(singleThreadExecutor, (Void) null);
 			res = true;
 		}
 		return res;
@@ -148,7 +151,7 @@ public class CurrentPositionHelper {
 			}
 		}
 		try {
-			return new GeocodingUtilities().reverseGeocodingSearch(defCtx, lat, lon);
+			return new GeocodingUtilities().reverseGeocodingSearch(defCtx, lat, lon, false);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

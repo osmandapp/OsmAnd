@@ -38,6 +38,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -69,11 +70,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final int GPS_DIST_REQUEST = 0;
 	private static final int NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS = 12000;
 
-	private static final long STALE_LOCATION_TIMEOUT = 1000 * 60 * 60; // 60 minutes
-	public static final long STALE_LOCATION_TIMEOUT_FOR_ICON = 1000 * 60 * 5; // 5 minutes
+	private static final long STALE_LOCATION_TIMEOUT = 1000 * 60 * 5; // 5 minutes
+	private static final long STALE_LOCATION_TIMEOUT_FOR_UI = 1000 * 60 * 15; // 15 minutes
 
-	private static final int UPDATES_BEFORE_CHECK_LOCATION = 100;
-	private int updatesCounter;
+	private static final int REQUESTS_BEFORE_CHECK_LOCATION = 100;
+	private int locationRequestsCounter;
+	private int staleLocationRequestsCounter;
+
+	private net.osmand.Location cachedLocation;
 
 	private long lastTimeGPSLocationFixed = 0;
 	private boolean gpsSignalLost;
@@ -855,8 +859,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return currentPositionHelper.getLastKnownRouteSegment(getLastKnownLocation());
 	}
 	
-	public boolean getRouteSegment(net.osmand.Location loc, ResultMatcher<RouteDataObject> result) {
-		return currentPositionHelper.getRouteSegment(loc, result);
+	public boolean getRouteSegment(net.osmand.Location loc, @Nullable ApplicationMode appMode,
+								   ResultMatcher<RouteDataObject> result) {
+		return currentPositionHelper.getRouteSegment(loc, appMode, result);
 	}
 	
 	public boolean getGeocodingResult(net.osmand.Location loc, ResultMatcher<GeocodingResult> result) {
@@ -864,17 +869,36 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public net.osmand.Location getLastKnownLocation() {
-		if (location != null && updatesCounter == 0) {
-			if ((System.currentTimeMillis() - location.getTime()) > STALE_LOCATION_TIMEOUT) {
-				location = null;
-			}
+		net.osmand.Location location = this.location;
+		if (location != null && locationRequestsCounter == 0
+				&& System.currentTimeMillis() - location.getTime() > STALE_LOCATION_TIMEOUT) {
+			location = null;
 		}
-		if (updatesCounter == UPDATES_BEFORE_CHECK_LOCATION) {
-			updatesCounter = 0;
+		if (locationRequestsCounter == REQUESTS_BEFORE_CHECK_LOCATION) {
+			locationRequestsCounter = 0;
 		} else {
-			updatesCounter++;
+			locationRequestsCounter++;
 		}
 		return location;
+	}
+
+	@Nullable
+	public net.osmand.Location getLastStaleKnownLocation() {
+		net.osmand.Location newLoc = getLastKnownLocation();
+		if (newLoc == null) {
+			if (staleLocationRequestsCounter == 0 && cachedLocation != null
+					&& System.currentTimeMillis() - cachedLocation.getTime() > STALE_LOCATION_TIMEOUT_FOR_UI) {
+				cachedLocation = null;
+			}
+		} else {
+			cachedLocation = newLoc;
+		}
+		if (staleLocationRequestsCounter == REQUESTS_BEFORE_CHECK_LOCATION) {
+			staleLocationRequestsCounter = 0;
+		} else {
+			staleLocationRequestsCounter++;
+		}
+		return cachedLocation;
 	}
 
 

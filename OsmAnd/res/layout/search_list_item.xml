@@ -110,11 +110,11 @@
                         android:layout_height="wrap_content"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_desc_text_size"
-                        android:maxLines="1"
                         tools:text="City" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/time_layout"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"

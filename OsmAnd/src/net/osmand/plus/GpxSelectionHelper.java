@@ -3,16 +3,20 @@ package net.osmand.plus;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
+import net.osmand.data.LatLon;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -26,6 +30,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class GpxSelectionHelper {
@@ -76,7 +81,7 @@ public class GpxSelectionHelper {
 
 	public SelectedGpxFile getSelectedGPXFile(WptPt point) {
 		for (SelectedGpxFile g : selectedGPXFiles) {
-			if (g.getGpxFile().points.contains(point)) {
+			if (g.getGpxFile().containsPoint(point)) {
 				return g;
 			}
 		}
@@ -214,16 +219,16 @@ public class GpxSelectionHelper {
 			}
 		}
 
-		if (g.points.size() > 0) {
+		if (!g.isPointsEmpty()) {
 			GpxDisplayGroup group = new GpxDisplayGroup(g);
 			group.gpxName = name;
 			group.setType(GpxDisplayItemType.TRACK_POINTS);
-			group.setDescription(getString(R.string.gpx_selection_number_of_points, g.points.size()));
+			group.setDescription(getString(R.string.gpx_selection_number_of_points, g.getPointsSize()));
 			group.setName(getString(R.string.gpx_selection_points, name));
 			dg.add(group);
 			List<GpxDisplayItem> list = group.getModifiableList();
 			int k = 0;
-			for (WptPt r : g.points) {
+			for (WptPt r : g.getPoints()) {
 				GpxDisplayItem item = new GpxDisplayItem();
 				item.group = group;
 				item.description = r.desc;
@@ -386,10 +391,25 @@ public class GpxSelectionHelper {
 		return null;
 	}
 
+	@Nullable
+	public WptPt getVisibleWayPointByLatLon(@NonNull LatLon latLon) {
+		for (SelectedGpxFile selectedGpx : selectedGPXFiles) {
+			GPXFile gpx;
+			if (selectedGpx != null && (gpx = selectedGpx.getGpxFile()) != null) {
+				for (WptPt pt : gpx.getPoints()) {
+					if (latLon.equals(new LatLon(pt.getLatitude(), pt.getLongitude()))) {
+						return pt;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
 	public void setGpxFileToDisplay(GPXFile... gpxs) {
 		// special case for gpx current route
 		for (GPXFile gpx : gpxs) {
-			selectGpxFileImpl(gpx, true, false);
+			selectGpxFileImpl(gpx, true, false, true);
 		}
 		saveCurrentSelections();
 	}
@@ -455,7 +475,7 @@ public class GpxSelectionHelper {
 		app.getSettings().SELECTED_GPX.set(ar.toString());
 	}
 
-	private SelectedGpxFile selectGpxFileImpl(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
+	private SelectedGpxFile selectGpxFileImpl(GPXFile gpx, boolean show, boolean notShowNavigationDialog, boolean syncGroup) {
 		boolean displayed;
 		SelectedGpxFile sf;
 		if (gpx != null && gpx.showCurrentTrack) {
@@ -479,13 +499,64 @@ public class GpxSelectionHelper {
 				selectedGPXFiles.remove(sf);
 			}
 		}
+		if (syncGroup) {
+			syncGpx(gpx, true);
+		}
 		return sf;
 	}
 
 	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
-		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, notShowNavigationDialog);
+		return selectGpxFile(gpx, show, notShowNavigationDialog, true);
+	}
+
+	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog, boolean syncGroup) {
+		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, notShowNavigationDialog, syncGroup);
 		saveCurrentSelections();
 		return sf;
+	}
+
+	public void clearPoints(GPXFile gpxFile) {
+		gpxFile.clearPoints();
+		syncGpx(gpxFile);
+	}
+
+	public void addPoint(WptPt point, GPXFile gpxFile) {
+		gpxFile.addPoint(point);
+		syncGpx(gpxFile);
+	}
+
+	public void addPoints(Collection<? extends WptPt> collection, GPXFile gpxFile) {
+		gpxFile.addPoints(collection);
+		syncGpx(gpxFile);
+	}
+
+	public boolean removePoint(WptPt point, GPXFile gpxFile) {
+		boolean res = gpxFile.deleteWptPt(point);
+		syncGpx(gpxFile);
+		return res;
+	}
+
+	private void syncGpx(GPXFile gpxFile) {
+		syncGpx(gpxFile, false);
+	}
+
+	private void syncGpx(GPXFile gpxFile, boolean createOrDeleteGroup) {
+		File gpx = new File(gpxFile.path);
+		if (gpx.exists()) {
+			MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
+			MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(), AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
+			boolean enabled = true;
+			if (createOrDeleteGroup) {
+				boolean show = getSelectedFileByPath(gpx.getAbsolutePath()) != null;
+				enabled = mapMarkersHelper.isGroupSynced(gpx.getAbsolutePath());
+				if (show && !enabled) {
+					mapMarkersHelper.addMarkersSyncGroup(syncGroup);
+				} else if (!show && mapMarkersHelper.isGroupDisabled(gpx.getAbsolutePath())) {
+					mapMarkersHelper.removeMarkersSyncGroup(gpx.getAbsolutePath(), true);
+				}
+			}
+			mapMarkersHelper.syncGroupAsync(syncGroup, enabled);
+		}
 	}
 
 

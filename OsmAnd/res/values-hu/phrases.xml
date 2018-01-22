@@ -63,7 +63,7 @@
 	<string name="poi_parking_entrance">Parkolóház-bejárat</string>
 	<string name="poi_garages">Garázsok</string>
 
-	<string name="poi_public_transport_platform">Tömegközlekedési megálló</string>
+	<string name="poi_public_transport_platform">Peron</string>
 	<string name="poi_public_transport_platform_bus">Buszmegálló</string>
 	<string name="poi_public_transport_platform_trolleybus">Trolibuszmegálló</string>
 	<string name="poi_public_transport_platform_tram">Villamosmegálló</string>
@@ -288,7 +288,7 @@
 	<string name="poi_fishing">Horgászfelszerelés</string>
 	<string name="poi_frame">Képkeretbolt</string>
 	<string name="poi_furniture">Bútorbolt</string>
-	<string name="poi_shop_yes">Vegyesbolt</string>
+	<string name="poi_shop_yes">Egyéb bolt</string>
 	<string name="poi_glaziery">Üveges</string>
 	<string name="poi_hearing_aids">Hallókészülékbolt</string>
 	<string name="poi_hunting">Vadászfelszerelés</string>
@@ -837,7 +837,7 @@
 	<string name="poi_tourism_yes">Turisztikai látványosság</string>
 	<string name="poi_lodging">Szállás</string>
 	<string name="poi_hostel">Turistaszálló</string>
-	<string name="poi_chalet">Alpesi faház</string>
+	<string name="poi_chalet">Nyaralóház</string>
 	<string name="poi_apartment">Apartman</string>
 	<string name="poi_wilderness_hut">Menedékház (személyzet nélkül)</string>
 	<string name="poi_lean_to">Esőbeálló</string>
@@ -1009,7 +1009,7 @@
 	<string name="poi_start_date">Kezdő dátum</string>
 	<string name="poi_wheelchair_yes">igen</string>
 	<string name="poi_wheelchair_no">nem</string>
-	<string name="poi_wheelchair_limited">Korlátozott</string>
+	<string name="poi_wheelchair_limited">korlátozottan</string>
 	<string name="poi_wholesale">Nagykereskedés</string>
 
 	<string name="poi_access_private">Magántulajdon</string>
@@ -1787,7 +1787,7 @@
 	<string name="poi_route_railway_ref">Vasútvonal</string>
 
 	<string name="poi_historic_yes">Történelmi objektum</string>
-	<string name="poi_fuel_type">Típus</string>
+	<string name="poi_fuel_type">Üzemanyagtípus</string>
 	<string name="poi_payment_type">Fizetési mód</string>
 	<string name="poi_trash_disposal">Hulladékkonténer</string>
 		<string name="poi_beacon">Hajózási jel</string>
@@ -1862,7 +1862,7 @@
 	<string name="poi_self_service">Önkiszolgáló</string>
 	<string name="poi_ramp_wheelchair_yes">Kerekesszékrámpa</string>
 	<string name="poi_ramp_wheelchair_no">Kerekesszékrámpa nincs</string>
-	<string name="poi_wheelchair_designated">Kifejezetten kerekesszékeseknek</string>
+	<string name="poi_wheelchair_designated">kifejezetten kerekesszékeseknek</string>
 	<string name="poi_covered">Fedett</string>
 	<string name="poi_subway_station_filter">Metróállomás</string>
 	<string name="poi_fire_hydrant_type">Típus</string>
@@ -1972,7 +1972,7 @@
 	<string name="poi_diet_lactose_free_filter_yes">Laktózmentes</string>
 	<string name="poi_diet_vegan_filter_yes">Vegán</string>
 	<string name="poi_diet_vegetarian_filter_yes">Vegetáriánus</string>
-	<string name="poi_fuel_avia_type">Típus</string>
+	<string name="poi_fuel_avia_type">Üzemanyagtípus (avia)</string>
 	<string name="poi_vending_type">Árusított termék</string>
 	<string name="poi_bicycle_service">Kerékpáros szolgáltatás</string>
 	<string name="poi_service_bicycle_pump_yes">Kerékpárpumpa</string>
@@ -2253,7 +2253,7 @@
 
 	<string name="poi_tomb_columbarium">Típus: urnafülkék (kolumbárium)</string>
 	<string name="poi_tomb_vault">Típus: sírbolt</string>
-	<string name="poi_monument_yes">Monumentális objektum</string>
+	<string name="poi_monument_yes">Monumentális példány</string>
 
 	<string name="poi_fuel_autogas">Autógáz</string>
 	<string name="poi_fuel_wood">Fa</string>
@@ -2285,7 +2285,7 @@
 	<string name="poi_clothes_dance">Tánc</string>
 	<string name="poi_clothes_military">Katonai</string>
 
-	<string name="poi_historic_milestone">Mérföldkő</string>
+	<string name="poi_historic_milestone">Történelmi mérföldkő</string>
 
 	<string name="poi_shoes_children">Gyermek</string>
 	<string name="poi_shoes_women">Női</string>
@@ -2347,7 +2347,7 @@
 	<string name="poi_social_facility_for_diseased">Betegek</string>
 	<string name="poi_social_facility_for_child_juvenile">Gyermekek; fiatalok</string>
 
-	<string name="poi_kiln">Kemence</string>
+	<string name="poi_kiln">Égetőkemence</string>
 	<string name="poi_product_brick">Termék: tégla</string>
 	<string name="poi_product_leather">Termék: bőr</string>
 	<string name="poi_product_beer">Termék: sör</string>
@@ -2700,7 +2700,7 @@
 
 	<string name="poi_official_name">Hivatalos név</string>
 
-	<string name="poi_dolphin">Delfin</string>
+	<string name="poi_dolphin">Cölöpgúla</string>
 
 	<string name="poi_construction_yes">Építés alatt</string>
 	<string name="poi_additional_atm_yes">Bankautomata</string>
@@ -2825,7 +2825,7 @@
 
 	<string name="poi_greenhouse_horticulture">Üvegházi kertészet</string>
 
-	<string name="poi_voltage">Feszültség</string>
+	<string name="poi_voltage">Feszültség (V)</string>
 	<string name="poi_generator_output_electricity_yes">Kimenet: villamos energia</string>
 	<string name="poi_generator_output_hot_water_yes">Kimenet: forró víz</string>
 	<string name="poi_generator_output_steam_yes">Kimenet: gőz</string>
@@ -2885,11 +2885,11 @@
 	<string name="poi_party">Partikellékek</string>
 	<string name="poi_electrical">Villamossági szaküzlet</string>
 	<string name="poi_lighting">Lámpatestek</string>
-	<string name="poi_lottery">Lottószelvények</string>
+	<string name="poi_lottery">Lottózó</string>
 	<string name="poi_gambling">Szerencsejáték-helyszín</string>
 
 	<string name="poi_gambling_type">Típus</string>
-	<string name="poi_gambling_lottery">Lottó</string>
+	<string name="poi_gambling_lottery">Lottózó</string>
 	<string name="poi_gambling_slot_machines">Játékgépek</string>
 	<string name="poi_gambling_betting">Fogadás</string>
 	<string name="poi_e_cigarette">E-cigaretta-bolt</string>
@@ -3077,7 +3077,7 @@
 	<string name="poi_bicycle_parking_lockers">Zárható szekrény</string>
 	<string name="poi_emergency_infrastructure">Vészhelyzeti infrastruktúra</string>
 	<string name="poi_wiki_lang_bpy">Bisnupria Wikipédia</string>
-	<string name="poi_power_supply_cee_17_blue">Elektromos csatlakozó (konnektor): CEE 17 kék</string>
+	<string name="poi_power_supply_cee_17_blue">Elektromos csatlakozó (konnektor): kék CEE 17</string>
 	<string name="poi_power_supply_cee_7_4">Elektromos csatlakozó (konnektor): CEE 7/4</string>
 	<string name="poi_power_supply_cee_7_5">Elektromos csatlakozó (konnektor): CEE 7/5</string>
 	<string name="poi_power_supply_nema_5_15">Elektromos csatlakozó (konnektor): NEMA 5-15</string>
@@ -3227,7 +3227,7 @@
 
 	<string name="poi_railway_yard">Teherpályaudvar</string>
 
-	<string name="poi_coworking_space">Közösségi iroda</string>
+	<string name="poi_coworking_space">Közösségi (coworking) iroda</string>
 
 	<string name="poi_fast_food_cafeteria">van</string>
 
@@ -3380,7 +3380,7 @@
 
 <string name="poi_zoo_type">Típus</string>
 	<string name="poi_motorcycle_services">Szolgáltatások</string>
-	<string name="poi_motorcycle_type">Motorkerékpár típus</string>
+	<string name="poi_motorcycle_type">Motorkerékpár-kategória</string>
 
 <string name="poi_zoo_petting_zoo">Állatsimogató</string>
 	<string name="poi_zoo_wildlife_park">Vadaspark</string>
@@ -3390,19 +3390,19 @@
 	<string name="poi_zoo_reptile">Hüllők</string>
 
 	<string name="poi_motorcycle_sales_yes">Értékesítés</string>
-	<string name="poi_motorcycle_sales_no">Értékesítés: nincs</string>
-	<string name="poi_motorcycle_sales_yes_used">Értékesítés: van; használt</string>
+	<string name="poi_motorcycle_sales_no">Értékesítés nincs</string>
+	<string name="poi_motorcycle_sales_yes_used">Értékesítés: új és használt</string>
 	<string name="poi_motorcycle_sales_used">Értékesítés: használt</string>
 	<string name="poi_motorcycle_rental_yes">Kölcsönzés</string>
-	<string name="poi_motorcycle_rental_no">Kölcsönzés: nincs</string>
-	<string name="poi_motorcycle_repair_yes">Szerviz</string>
-	<string name="poi_motorcycle_repair_no">Szerviz: nincs</string>
+	<string name="poi_motorcycle_rental_no">Kölcsönzés nincs</string>
+	<string name="poi_motorcycle_repair_yes">Szerelés</string>
+	<string name="poi_motorcycle_repair_no">Szerelés nincs</string>
 	<string name="poi_motorcycle_parts_yes">Alkatrész</string>
-	<string name="poi_motorcycle_parts_no">Alkatrész: nincs</string>
+	<string name="poi_motorcycle_parts_no">Alkatrész nincs</string>
 	<string name="poi_motorcycle_tyres_yes">Gumi</string>
-	<string name="poi_motorcycle_tyres_no">Gumi: nincs</string>
-	<string name="poi_motorcycle_clothes_yes">Motoros ruha</string>
-	<string name="poi_motorcycle_clothes_no">Motoros ruha: nincs</string>
+	<string name="poi_motorcycle_tyres_no">Gumi nincs</string>
+	<string name="poi_motorcycle_clothes_yes">Motorosruha</string>
+	<string name="poi_motorcycle_clothes_no">Motorosruha nincs</string>
 	<string name="poi_motorcycle_type_scooter">Robogó</string>
 	<string name="poi_zoo_enclosure">Kifutó</string>
 	<string name="poi_zoo_falconry">Solymászat</string>
@@ -3482,4 +3482,192 @@
 	<string name="poi_boat_canoe_rental_rental_yes">Kenu</string>
 	<string name="poi_boat_canoe_rental_rental_no">Kenu nincs</string>
 
-</resources>
+<string name="poi_government_archive">Levéltár</string>
+	<string name="poi_government_ministry">Minisztérium</string>
+	<string name="poi_government_public_service">Közszolgáltatás</string>
+	<string name="poi_government_social_security">Társadalombiztosítás</string>
+	<string name="poi_government_social_services">Szociális szolgáltatások</string>
+	<string name="poi_government_treasury">Államkincstár, állmi pénzügyi szerv</string>
+	<string name="poi_government_transportation">Közlekedési intézmény</string>
+	<string name="poi_government_legislative">Jogalkotási intézmény</string>
+
+<string name="poi_stands">Parkolóhely</string>
+
+	<string name="poi_motorcycle_type_sportbike">Sportmotor</string>
+	<string name="poi_motorcycle_type_chopper">Chopper</string>
+	<string name="poi_motorcycle_type_offroad">Terepmotor</string>
+	<string name="poi_motorcycle_type_dualsport">Túraenduró</string>
+	<string name="poi_motorcycle_type_standard">Standard</string>
+
+	<string name="poi_network">Hálózat</string>
+
+	<string name="poi_vhf">URH (VHF) csatorna</string>
+
+<string name="poi_operational_status">Működési állapot</string>
+	<string name="poi_water_supply_type">Vízellátás módja</string>
+	<string name="poi_water_purification">Víztisztítás</string>
+	<string name="poi_water_place_access">Vízvételező hely használata</string>
+
+<string name="poi_seamark_clearance_height">Áthaladási magasság</string>
+	<string name="poi_seamark_clearance_height_closed">Áthaladási magasság (zárva)</string>
+	<string name="poi_seamark_clearance_height_open">Áthaladási magasság (nyitva)</string>
+	<string name="poi_seamark_clearance_width">Áthaladási szélesség</string>
+
+	<string name="poi_gorge">Szurdokvölgy</string>
+	<string name="poi_couloir">Meredek sziklahasadék</string>
+	<string name="poi_mountain_area">Hegyvidék</string>
+
+	<string name="poi_surface_clay">Salak</string>
+	<string name="poi_surface_tartan">Műanyag (tartan)</string>
+	<string name="poi_surface_artificial_turf">Műfű</string>
+	<string name="poi_surface_decoturf">Műanyag (DecoTurf tenisz)</string>
+	<string name="poi_surface_metal_grid">Fémrács</string>
+
+	<string name="poi_location_underground">Hely: föld alatt</string>
+	<string name="poi_location_underwater">Hely: víz alatt</string>
+	<string name="poi_location_overground">Hely: föld fölött</string>
+	<string name="poi_location_overhead">Hely: fent</string>
+	<string name="poi_location_roof">Hely: tetőn</string>
+	<string name="poi_location_rooftop">Hely: lapostetőn</string>
+	<string name="poi_location_outdoor">Hely: kültéren</string>
+	<string name="poi_location_indoor">Hely: beltérben</string>
+	<string name="poi_location_platform">Hely: tengeri platformon</string>
+	<string name="poi_location_kiosk">Hely: kis önálló épületben</string>
+	<string name="poi_location_bridge">Hely: hídon</string>
+	<string name="poi_location_wall">Hely: falon</string>
+	<string name="poi_location_entrance">Hely: bejáratnál</string>
+
+	<string name="poi_visibility_house">Láthatóság: az épülettől (gyalogosoknak)</string>
+	<string name="poi_visibility_street">Láthatóság: az utcából (lassú járműveknek)</string>
+	<string name="poi_visibility_area">Láthatóság: a környékről (járműveknek)</string>
+
+	<string name="poi_operational_status_open">nyitva</string>
+	<string name="poi_operational_status_closed">zárva</string>
+	<string name="poi_operational_status_restricted">korlátozott</string>
+	<string name="poi_operational_status_broken">sérült</string>
+	<string name="poi_operational_status_needs_maintenance">karbantartást igényel</string>
+
+	<string name="poi_water_place_durability_durable">Vízvételező hely tartóssága: tartós</string>
+	<string name="poi_water_place_durability_emergency">Vízvételező hely tartóssága: vészhelyzeti</string>
+
+	<string name="poi_water_purification_none">nincs</string>
+	<string name="poi_water_purification_chlorine">klór</string>
+	<string name="poi_water_purification_reverse_osmosis">fordított ozmózis</string>
+	<string name="poi_water_purification_aquatabs">tabletta (Aquatabs)</string>
+
+	<string name="poi_water_supply_water_well">kút</string>
+	<string name="poi_water_supply_pipeline">vezeték</string>
+	<string name="poi_water_supply_running_water">vezetékes víz</string>
+	<string name="poi_water_supply_pump">szivattyú</string>
+	<string name="poi_water_supply_borehole">fúrt lyuk</string>
+	<string name="poi_water_supply_water_trucking">lajtos kocsi</string>
+	<string name="poi_water_supply_water_tank">víztartály</string>
+	<string name="poi_water_supply_bottled_water">palackozott víz</string>
+
+	<string name="poi_water_place_access_community">közösségi</string>
+	<string name="poi_water_place_access_family">családi</string>
+	<string name="poi_water_place_access_multifamilies">több család</string>
+
+	<string name="poi_map_type_topo">Térképtípus: helyrajzi</string>
+	<string name="poi_map_type_street">Térképtípus: utcák</string>
+	<string name="poi_map_type_scheme">Térképtípus: vázlat</string>
+	<string name="poi_map_type_toposcope">Térképtípus: irányok és távolságok</string>
+	<string name="poi_map_size_site">Térképterület: helyszín</string>
+	<string name="poi_map_size_city">Térképterület: város</string>
+	<string name="poi_map_size_region">Térképterület: térség</string>
+
+<string name="poi_socket_cee_blue">Konnektor: kék CEE</string>
+	<string name="poi_socket_cee_blue_current">Konnektor: kék CEE – áramerősség (A)</string>
+	<string name="poi_socket_cee_blue_output">Konnektor: kék CEE – teljesítmény (W)</string>
+	<string name="poi_socket_cee_red_16a">Konnektor: vörös CEE 16A</string>
+	<string name="poi_socket_cee_red_16a_current">Konnektor: vörös CEE 16A – áramerősség (A)</string>
+	<string name="poi_socket_cee_red_16a_output">Konnektor: vörös CEE 16A – teljesítmény (W)</string>
+	<string name="poi_socket_cee_red_32a">Konnektor: vörös CEE 32A</string>
+	<string name="poi_socket_cee_red_32a_current">Konnektor: vörös CEE 32A – áramerősség (A)</string>
+	<string name="poi_socket_cee_red_32a_output">Konnektor: vörös CEE 32A – teljesítmény (W)</string>
+	<string name="poi_socket_cee_red_64a">Konnektor: vörös CEE 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Konnektor: vörös CEE 64A – áramerősség (A)</string>
+	<string name="poi_socket_cee_red_64a_output">Konnektor: vörös CEE 64A – teljesítmény (W)</string>
+	<string name="poi_socket_cee_red_125a">Konnektor: vörös CEE 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Konnektor: vörös CEE 125A – áramerősség (A)</string>
+	<string name="poi_socket_cee_red_125a_output">Konnektor: vörös CEE 125A – teljesítmény (W)</string>
+	<string name="poi_socket_type1">Konnektor: 1. típusú</string>
+	<string name="poi_socket_type1_current">Konnektor: 1. típusú – áramerősség (A)</string>
+	<string name="poi_socket_type1_output">Konnektor: 1. típusú – teljesítmény (W)</string>
+	<string name="poi_socket_type1_combo">Konnektor: 1. típusú kombinált</string>
+	<string name="poi_socket_type1_combo_current">Konnektor: 1. típusú kombinált – áramerősség (A)</string>
+	<string name="poi_socket_type1_combo_output">Konnektor: 1. típusú kombinált – teljesítmény (W)</string>
+	<string name="poi_socket_type2">Konnektor: 2. típusú</string>
+	<string name="poi_socket_type2_current">Konnektor: 2. típusú – áramerősség (A)</string>
+	<string name="poi_socket_type2_output">Konnektor: 2. típusú – teljesítmény (W)</string>
+	<string name="poi_socket_type2_combo">Konnektor: 2. típusú kombinált</string>
+	<string name="poi_socket_type2_combo_current">Konnektor: 2. típusú kombinált – áramerősség (A)</string>
+	<string name="poi_socket_type2_combo_output">Konnektor: 2. típusú kombinált – teljesítmény (W)</string>
+	<string name="poi_socket_type3">Konnektor: 3. típusú</string>
+	<string name="poi_socket_type3_current">Konnektor: 3. típusú – áramerősség (A)</string>
+	<string name="poi_socket_type3_output">Konnektor: 3. típusú – teljesítmény (W)</string>
+	<string name="poi_socket_chademo">Konnektor: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Konnektor: CHAdeMO – áramerősség (A)</string>
+	<string name="poi_socket_chademo_output">Konnektor: CHAdeMO – teljesítmény (W)</string>
+	<string name="poi_socket_tesla_standard">Konnektor: Tesla Standard</string>
+	<string name="poi_socket_tesla_standard_current">Konnektor: Tesla Standard – áramerősség (A)</string>
+	<string name="poi_socket_tesla_standard_output">Konnektor: Tesla Standard – teljesítmény (W)</string>
+	<string name="poi_socket_tesla_supercharger">Konnektor: Tesla Supercharger</string>
+	<string name="poi_socket_tesla_supercharger_current">Konnektor: Tesla Supercharger – áramerősség (A)</string>
+	<string name="poi_socket_tesla_supercharger_output">Konnektor: Tesla Supercharger – teljesítmény (W)</string>
+	<string name="poi_socket_tesla_roadster">Konnektor: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Konnektor: Tesla Roadster – áramerősség (A)</string>
+	<string name="poi_socket_tesla_roadster_output">Konnektor: Tesla Roadster – teljesítmény (W)</string>
+	<string name="poi_socket_nema_5_15">Konnektor: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Konnektor: NEMA 5-15R – áramerősség (A)</string>
+	<string name="poi_socket_nema_5_15_output">Konnektor: NEMA 5-15R – teljesítmény (W)</string>
+	<string name="poi_socket_nema_5_20">Konnektor: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Konnektor: NEMA 5-20 – áramerősség (A)</string>
+	<string name="poi_socket_nema_5_20_output">Konnektor: NEMA 5-20 – teljesítmény (W)</string>
+	<string name="poi_socket_nema_14_30">Konnektor: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Konnektor: NEMA 14-30 – áramerősség (A)</string>
+	<string name="poi_socket_nema_14_30_output">Konnektor: NEMA 14-30 – teljesítmény (W)</string>
+	<string name="poi_socket_nema_14_50">Konnektor: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Konnektor: NEMA 14-50 – áramerősség (A)</string>
+	<string name="poi_socket_nema_14_50_output">Konnektor: NEMA 14-50 – teljesítmény (W)</string>
+	<string name="poi_socket_schuko">Konnektor: Schuko</string>
+	<string name="poi_socket_schuko_current">Konnektor: Schuko – áramerősség (A)</string>
+	<string name="poi_socket_schuko_output">Konnektor: Schuko – teljesítmény (W)</string>
+	<string name="poi_socket_bs1363">Konnektor: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Konnektor: BS 1363 – áramerősség (A)</string>
+	<string name="poi_socket_bs1363_output">Konnektor: BS 1363 – teljesítmény (W)</string>
+	<string name="poi_socket_as3112">Konnektor: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Konnektor: AS/NZS 3112 – áramerősség (A)</string>
+	<string name="poi_socket_as3112_output">Konnektor: AS/NZS 3112 – teljesítmény (W)</string>
+
+	<string name="poi_car_yes">Személyautó</string>
+	<string name="poi_car_no">Személyautó nem</string>
+	<string name="poi_bicycle_yes">Kerékpár</string>
+	<string name="poi_bicycle_no">Kerékpár nem</string>
+	<string name="poi_scooter_yes">Roller</string>
+	<string name="poi_scooter_no">Roller nem</string>
+	<string name="poi_truck_yes">Teherautó</string>
+	<string name="poi_truck_no">Teherautó nem</string>
+
+	<string name="poi_parking_fee_yes">Parkolási díj</string>
+	<string name="poi_parking_fee_no">Parkolási díj nincs</string>
+	<string name="poi_parking_fee">Parkolási díj</string>
+
+	<string name="poi_amperage">Áramerősség (A)</string>
+	<string name="poi_charging_station_output">Töltőállomás teljesítménye (kW)</string>
+
+	<string name="poi_charging_station_filter">Töltőállomás</string>
+
+	<string name="poi_depot">Járműtároló</string>
+
+<string name="poi_letter_box">Levélszekrény</string>
+	<string name="poi_post_street">Utca</string>
+	<string name="poi_post_housenumber">Házszám</string>
+	<string name="poi_post_flats">Lakás száma</string>
+
+	<string name="poi_payment_centre">Befizetőpont</string>
+	<string name="poi_money_transfer">Pénzküldő</string>
+
+<string name="poi_route_subway_ref">Metró</string>
+
+	</resources>

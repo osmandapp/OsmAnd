@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/grid_menu_item_width"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/bottom_sheet_content_padding_small"
+    android:paddingRight="@dimen/bottom_sheet_content_padding_small"
+    tools:background="#17171A"
+    tools:layout_gravity="center">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/grid_menu_item_bottom_top_margin"
+        android:layout_marginLeft="@dimen/grid_menu_item_sides_margin"
+        android:layout_marginRight="@dimen/grid_menu_item_sides_margin"
+        android:layout_marginTop="@dimen/grid_menu_item_bottom_top_margin"
+        tools:src="@drawable/ic_action_delete_dark"
+        tools:tint="#808080"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center_horizontal"
+        android:lines="2"
+        android:maxLines="2"
+        android:textColor="@color/searchbar_text_hint_light"
+        tools:text="Remove POI"/>
+
+</LinearLayout>

@@ -313,7 +313,7 @@ public class DownloadActivityType {
 			final int extInd = basename.indexOf("osmand_ext");
 			String downloadName = extInd == -1 ? basename.substring(6, basename.length()).replace('_', ' ')
 					: basename.substring(6, extInd).replace('_', ' ');
-			return ctx.getString(R.string.download_depth_countours) + " " + downloadName;
+			return ctx.getString(R.string.download_depth_countours) + " " + Algorithms.capitalizeFirstLetter(downloadName);
 		}
 
 		return osmandRegions.getLocaleName(basename, includingParent);

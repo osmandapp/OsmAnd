@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
@@ -43,6 +44,8 @@ public class FavoritesActivity extends TabActivity {
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1006;
 	private static final int IMPORT_FAVOURITES_REQUEST = 1007;
 
+	public static final String GROUP_NAME_TO_SHOW = "group_name_to_show";
+
 	public static final String OPEN_FAVOURITES_TAB = "open_favourites_tab";
 	public static final String OPEN_MY_PLACES_TAB = "open_my_places_tab";
 
@@ -51,6 +54,7 @@ public class FavoritesActivity extends TabActivity {
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
 	private int tabSize;
 	private GpxImportHelper gpxImportHelper;
+	private String groupNameToShow;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -73,28 +77,46 @@ public class FavoritesActivity extends TabActivity {
 		// setupHomeButton();
 
 		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
-		Intent intent = getIntent();
-		if (intent != null) {
-			if (intent.hasExtra(OPEN_FAVOURITES_TAB) && intent.getBooleanExtra(OPEN_FAVOURITES_TAB, false)) {
-				mViewPager.setCurrentItem(0, false);
-			} else if (intent.hasExtra(OPEN_MY_PLACES_TAB) && intent.getBooleanExtra(OPEN_MY_PLACES_TAB, false)) {
-				mViewPager.setCurrentItem(1, false);
+		if (icicle == null) {
+			Intent intent = getIntent();
+			if (intent != null) {
+				if (intent.hasExtra(OPEN_FAVOURITES_TAB) && intent.getBooleanExtra(OPEN_FAVOURITES_TAB, false)) {
+					if (intent.hasExtra(GROUP_NAME_TO_SHOW)) {
+						groupNameToShow = intent.getStringExtra(GROUP_NAME_TO_SHOW);
+					}
+					mViewPager.setCurrentItem(0, false);
+				} else if (intent.hasExtra(OPEN_MY_PLACES_TAB) && intent.getBooleanExtra(OPEN_MY_PLACES_TAB, false)) {
+					mViewPager.setCurrentItem(1, false);
+				}
 			}
 		}
 	}
 
-	@TargetApi(Build.VERSION_CODES.KITKAT)
+	public String getGroupNameToShow() {
+		return groupNameToShow;
+	}
+
 	public void addTrack() {
-		Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-		intent.setType("*/*");
+		Intent intent = getImportGpxIntent();
 		startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
 	}
 
-	@TargetApi(Build.VERSION_CODES.KITKAT)
 	public void importFavourites() {
-		Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-		intent.setType("*/*");
+		Intent intent = getImportGpxIntent();
 		startActivityForResult(intent, IMPORT_FAVOURITES_REQUEST);
+	}
+
+	private Intent getImportGpxIntent() {
+		Intent intent = new Intent();
+		String action;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			action = Intent.ACTION_OPEN_DOCUMENT;
+		} else {
+			action = Intent.ACTION_GET_CONTENT;
+		}
+		intent.setAction(action);
+		intent.setType("*/*");
+		return intent;
 	}
 
 	@Override

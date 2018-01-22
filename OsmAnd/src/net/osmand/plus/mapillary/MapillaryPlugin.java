@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 
+import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.ApplicationMode;
@@ -54,6 +55,11 @@ public class MapillaryPlugin extends OsmandPlugin {
 	public MapillaryPlugin(OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
+	}
+
+	@Override
+	public boolean isVisible() {
+		return false;
 	}
 
 	@Override
@@ -145,14 +151,14 @@ public class MapillaryPlugin extends OsmandPlugin {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
 				if (itemId == R.string.mapillary) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY);
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY, AndroidUtils.getCenterViewCoordinates(view));
 					return false;
 				}
 				return true;
 			}
 
 			@Override
-			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked) {
+			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
 				final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 				if (itemId == R.string.mapillary) {
 					OsmandMapTileView mapView = mapActivity.getMapView();

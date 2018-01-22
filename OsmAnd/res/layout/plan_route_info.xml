@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_transparent"
-    android:clickable="true">
+    android:clickable="true"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:id="@+id/main_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@drawable/bg_bottom_menu_dark"
+        tools:background="@drawable/route_info_menu_bg_dark"
         android:clickable="true"
         android:orientation="vertical">
 
@@ -24,7 +25,7 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/list_item_height"
+                android:layout_height="@dimen/route_info_modes_height"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -48,7 +49,7 @@
                         android:id="@+id/waypoints"
                         android:layout_width="@dimen/list_item_height"
                         android:layout_height="@dimen/list_item_height"
-                        android:background="?attr/dashboard_button"
+                        android:background="?attr/selectableItemBackground"
                         android:scaleType="center"
                         android:src="@drawable/map_action_waypoints"/>
                 </LinearLayout>
@@ -73,159 +74,196 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/FromLayout"
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/list_item_height"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/fromIcon"
-                        android:layout_width="@dimen/standard_icon_size"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/list_content_padding"
-                        android:layout_marginRight="@dimen/list_content_padding"
-                        android:src="@drawable/map_default_location"/>
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/fromTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="3dp"
-                            android:layout_marginRight="@dimen/list_content_padding"
-                            android:layout_marginTop="5dp"
-                            android:text="@string/route_from"
-                            android:textSize="@dimen/default_sub_text_size"/>
-
-                        <Spinner
-                            android:id="@+id/FromSpinner"
+                        <LinearLayout
+                            android:background="?attr/selectableItemBackground"
+                            android:id="@+id/FromLayout"
                             android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="-8dp"
-                            android:background="@null"
-                            android:textSize="@dimen/default_list_text_size"/>
+                            android:layout_height="@dimen/list_item_height"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/fromIcon"
+                                android:layout_width="@dimen/standard_icon_size"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/route_info_icon_padding_left"
+                                android:layout_marginLeft="@dimen/route_info_icon_padding_left"
+                                android:layout_marginRight="@dimen/route_info_icon_padding_right"
+                                android:layout_marginEnd="@dimen/route_info_icon_padding_right"
+                                android:src="@drawable/map_default_location"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/fromTitle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="3dp"
+                                    android:layout_marginRight="@dimen/list_content_padding"
+                                    android:layout_marginTop="5dp"
+                                    android:text="@string/route_from"
+                                    android:textSize="@dimen/default_sub_text_size"/>
+
+                                <Spinner
+                                    android:id="@+id/FromSpinner"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="-8dp"
+                                    android:background="@null"
+                                    android:textSize="@dimen/default_list_text_size"/>
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/fromDropDownIcon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="@dimen/list_header_text_left_margin"
+                                android:src="@drawable/ic_action_arrow_drop_down"/>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_marginStart="@dimen/route_info_divider_margin"
+                            android:layout_marginLeft="@dimen/route_info_divider_margin"
+                            android:id="@+id/dividerFromDropDown"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/dashboard_divider_dark"
+                            android:focusable="false"/>
+
+                        <LinearLayout
+                            android:background="?attr/selectableItemBackground"
+                            android:id="@+id/ViaLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/list_item_height"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/viaIcon"
+                                android:layout_width="@dimen/standard_icon_size"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/route_info_icon_padding_left"
+                                android:layout_marginLeft="@dimen/route_info_icon_padding_left"
+                                android:layout_marginRight="@dimen/route_info_icon_padding_right"
+                                android:layout_marginEnd="@dimen/route_info_icon_padding_right"
+                                android:src="@drawable/map_default_location"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/ViaSubView"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="3dp"
+                                    android:layout_marginTop="5dp"
+                                    android:gravity="left"
+                                    android:text="@string/route_via"
+                                    android:textSize="@dimen/default_sub_text_size"/>
+
+                                <TextView
+                                    android:id="@+id/ViaView"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/list_content_padding"
+                                    android:gravity="left"
+                                    android:singleLine="true"
+                                    android:textColor="?android:textColorPrimary"
+                                    android:textSize="@dimen/default_list_text_size"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_marginStart="@dimen/route_info_divider_margin"
+                            android:layout_marginLeft="@dimen/route_info_divider_margin"
+                            android:id="@+id/viaLayoutDivider"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/dashboard_divider_dark"
+                            android:focusable="false"/>
+
+                        <LinearLayout
+                            android:background="?attr/selectableItemBackground"
+                            android:id="@+id/ToLayout"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/list_item_height"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/toIcon"
+                                android:layout_width="@dimen/standard_icon_size"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/route_info_icon_padding_left"
+                                android:layout_marginLeft="@dimen/route_info_icon_padding_left"
+                                android:layout_marginRight="@dimen/route_info_icon_padding_right"
+                                android:layout_marginEnd="@dimen/route_info_icon_padding_right"
+                                android:src="@drawable/map_default_location"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/toTitle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="3dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="@string/route_to"
+                                    android:textSize="@dimen/default_sub_text_size">
+                                </TextView>
+
+                                <Spinner
+                                    android:id="@+id/ToSpinner"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="-8dp"
+                                    android:background="@null"
+                                    android:textSize="@dimen/default_list_text_size"/>
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/toDropDownIcon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="@dimen/list_header_text_left_margin"
+                                android:src="@drawable/ic_action_arrow_drop_down"/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/fromDropDownIcon"
+                        android:background="?attr/selectableItemBackground"
+                        android:id="@+id/swap_direction_image_view"
+                        android:paddingRight="@dimen/route_info_icon_padding_right"
+                        android:paddingLeft="@dimen/route_info_icon_padding_right"
+                        android:layout_gravity="end"
+                        tools:src="@drawable/ic_action_test_light"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="@dimen/list_header_text_left_margin"
-                        android:src="@drawable/ic_action_arrow_drop_down"/>
-
-
-                </LinearLayout>
-
-                <View
-                    android:id="@+id/dividerFromDropDown"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/dashboard_divider_dark"
-                    android:focusable="false"/>
-
-                <LinearLayout
-                    android:id="@+id/ViaLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/list_item_height"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/viaIcon"
-                        android:layout_width="@dimen/standard_icon_size"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/list_content_padding"
-                        android:layout_marginRight="@dimen/list_content_padding"
-                        android:src="@drawable/map_default_location"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/ViaSubView"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="3dp"
-                            android:layout_marginTop="5dp"
-                            android:gravity="left"
-                            android:text="@string/route_via"
-                            android:textSize="@dimen/default_sub_text_size"/>
-
-                        <TextView
-                            android:id="@+id/ViaView"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/list_content_padding"
-                            android:gravity="left"
-                            android:singleLine="true"
-                            android:textColor="?android:textColorPrimary"
-                            android:textSize="@dimen/default_list_text_size"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <View
-                    android:id="@+id/viaLayoutDivider"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/dashboard_divider_dark"
-                    android:focusable="false"/>
-
-                <LinearLayout
-                    android:id="@+id/ToLayout"
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/list_item_height"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/toIcon"
-                        android:layout_width="@dimen/standard_icon_size"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/list_content_padding"
-                        android:layout_marginRight="@dimen/list_content_padding"
-                        android:src="@drawable/map_default_location"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/toTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="3dp"
-                            android:layout_marginTop="5dp"
-                            android:text="@string/route_to"
-                            android:textSize="@dimen/default_sub_text_size">
-                        </TextView>
-
-                        <Spinner
-                            android:id="@+id/ToSpinner"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="-8dp"
-                            android:background="@null"
-                            android:textSize="@dimen/default_list_text_size"/>
-
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/toDropDownIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="@dimen/list_header_text_left_margin"
-                        android:src="@drawable/ic_action_arrow_drop_down"/>
+                        android:layout_height="match_parent"/>
 
                 </LinearLayout>
 
@@ -246,7 +284,7 @@
                         android:id="@+id/Info"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:background="?attr/dashboard_button"
+                        android:background="?attr/selectableItemBackground"
                         android:minHeight="@dimen/list_item_height"
                         android:orientation="horizontal">
 
@@ -254,7 +292,7 @@
                             android:id="@+id/Prev"
                             android:layout_width="@dimen/list_item_height"
                             android:layout_height="@dimen/list_item_height"
-                            android:background="?attr/dashboard_button"
+                            android:background="?attr/selectableItemBackground"
                             android:contentDescription="@string/shared_string_previous"
                             android:scaleType="center"
                             android:src="@drawable/ic_prev"/>
@@ -308,7 +346,7 @@
                             android:layout_marginRight="@dimen/list_content_padding"
                             android:contentDescription="@string/info_button"
                             android:scaleType="center"
-                            android:src="@drawable/ic_action_time"/>
+                            android:src="@drawable/ic_action_time_span"/>
 
                         <LinearLayout
                             android:id="@+id/InfoDuration"
@@ -353,7 +391,7 @@
                             android:layout_width="@dimen/list_item_height"
                             android:layout_height="@dimen/list_item_height"
                             android:layout_marginLeft="5dp"
-                            android:background="?attr/dashboard_button"
+                            android:background="?attr/selectableItemBackground"
                             android:contentDescription="@string/shared_string_next"
                             android:scaleType="center"
                             android:src="@drawable/ic_next"/>
@@ -372,7 +410,8 @@
             android:background="@color/dashboard_divider_dark"
             android:focusable="false"/>
 
-        <include layout="@layout/map_route_prepare_bottom"/>
+        <include layout="@layout/map_route_prepare_bottom"
+            android:id="@+id/map_route_prepare_bottom_view"/>
 
     </LinearLayout>
 

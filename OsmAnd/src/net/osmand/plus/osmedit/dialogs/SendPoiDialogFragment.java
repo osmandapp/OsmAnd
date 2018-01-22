@@ -3,6 +3,7 @@ package net.osmand.plus.osmedit.dialogs;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -76,11 +77,13 @@ public class SendPoiDialogFragment extends DialogFragment {
 				break;
 			}
 		}
-		messageEditText.setText(createDefaultChangeSet());
+		String defaultChangeSet = createDefaultChangeSet();
+		messageEditText.setText(defaultChangeSet);
 		final boolean hasPOI = hasPoiGroup;
 		messageLabel.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
 		messageEditText.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
 		closeChangeSetCheckBox.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
+		closeChangeSetCheckBox.setChecked(hasPOI && !defaultChangeSet.equals(""));
 		view.findViewById(R.id.osm_note_header).setVisibility(hasPOI ? View.GONE : View.VISIBLE);
 		uploadAnonymously.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
@@ -201,7 +204,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 					group = deleteGroup;
 					break;
 				case 3:
-					action = getString(R.string.default_changeset_reopen);;
+					action = getString(R.string.default_changeset_reopen);
 					group = reopenGroup;
 					break;
 				default:
@@ -218,9 +221,9 @@ public class SendPoiDialogFragment extends DialogFragment {
 						modifiedItemsOutOfLimit += quantity;
 					} else {
 						if (pos == 0) {
-							comment = comment.concat(comment.length() == 0 ? "" : "; ").concat(action).concat(" ").concat(quantity == 1 ? "" : quantity + "").concat(type);
+							comment = comment.concat(comment.length() == 0 ? "" : "; ").concat(action).concat(" ").concat(quantity == 1 ? "" : quantity + " ").concat(type);
 						} else {
-							comment = comment.concat(", ").concat(quantity == 1 ? "" : quantity + "").concat(type);
+							comment = comment.concat(", ").concat(quantity == 1 ? "" : quantity + " ").concat(type);
 						}
 					}
 					pos++;
@@ -270,7 +273,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 			dialog.show(mapActivity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
 			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
 					dialog, listener, plugin, points.length, closeChangeSet, anonymously);
-			uploadTask.execute(points);
+			uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, points);
 		}
 	}
 }

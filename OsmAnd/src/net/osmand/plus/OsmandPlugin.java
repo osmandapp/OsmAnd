@@ -21,7 +21,6 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapillary.MapillaryPlugin;
@@ -87,6 +86,10 @@ public abstract class OsmandPlugin {
 		return active;
 	}
 
+	public boolean isVisible() {
+		return true;
+	}
+
 	public boolean needsInstallation() {
 		return installURL != null;
 	}
@@ -128,7 +131,10 @@ public abstract class OsmandPlugin {
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
+
 		allPlugins.add(new MapillaryPlugin(app));
+		enabledPlugins.add(MapillaryPlugin.ID);
+
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
 		// allPlugins.add(new OsMoPlugin(app));
@@ -142,7 +148,7 @@ public abstract class OsmandPlugin {
 //		checkMarketPlugin(app, new RoutePointsPlugin(app), false /*FIXME*/, RoutePointsPlugin.ROUTE_POINTS_PLUGIN_COMPONENT, null);
 		allPlugins.add(new AudioVideoNotesPlugin(app));
 		checkMarketPlugin(app, new ParkingPositionPlugin(app), false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
-		allPlugins.add(new DistanceCalculatorPlugin(app));
+		//allPlugins.add(new DistanceCalculatorPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
@@ -305,6 +311,16 @@ public abstract class OsmandPlugin {
 		return allPlugins;
 	}
 
+	public static List<OsmandPlugin> getVisiblePlugins() {
+		List<OsmandPlugin> list = new ArrayList<>(allPlugins.size());
+		for (OsmandPlugin p : allPlugins) {
+			if (p.isVisible()) {
+				list.add(p);
+			}
+		}
+		return list;
+	}
+
 	public static List<OsmandPlugin> getEnabledPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
@@ -315,10 +331,30 @@ public abstract class OsmandPlugin {
 		return lst;
 	}
 
+	public static List<OsmandPlugin> getEnabledVisiblePlugins() {
+		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		for (OsmandPlugin p : allPlugins) {
+			if (p.isActive() && p.isVisible()) {
+				lst.add(p);
+			}
+		}
+		return lst;
+	}
+
 	public static List<OsmandPlugin> getNotEnabledPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
 			if (!p.isActive()) {
+				lst.add(p);
+			}
+		}
+		return lst;
+	}
+
+	public static List<OsmandPlugin> getNotEnabledVisiblePlugins() {
+		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		for (OsmandPlugin p : allPlugins) {
+			if (!p.isActive() && p.isVisible()) {
 				lst.add(p);
 			}
 		}
@@ -414,18 +450,16 @@ public abstract class OsmandPlugin {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			if (plugin instanceof ParkingPositionPlugin) {
 				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
-			} else if (plugin instanceof OsmandMonitoringPlugin) {
-				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
 			}
 		}
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			if (!(plugin instanceof ParkingPositionPlugin) && !(plugin instanceof OsmandMonitoringPlugin)) {
+			if (!(plugin instanceof ParkingPositionPlugin)) {
 				int itemsCount = adapter.length();
 				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
 				if (adapter.length() > itemsCount) {
 					adapter.addItem(new ContextMenuItem.ItemBuilder()
 							.setPosition(itemsCount)
-							.setLayout(R.layout.context_menu_list_divider)
+							.setLayout(R.layout.bottom_sheet_dialog_fragment_divider)
 							.createItem());
 				}
 			}

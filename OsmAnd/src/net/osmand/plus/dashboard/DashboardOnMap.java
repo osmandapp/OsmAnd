@@ -1,5 +1,9 @@
 package net.osmand.plus.dashboard;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +11,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.ColorRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,10 +22,8 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
-import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -166,6 +169,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	private boolean portrait;
 	private long lastUpOrCancelMotionEventTime;
 	private TextView listEmptyTextView;
+	private int[] animationCoordinates;
 
 	int baseColor;
 
@@ -225,6 +229,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		mapMarkerDialogHelper.setHelperCallbacks(this);
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
+		AndroidUtils.addStatusBarPadding21v(mapActivity, dashboardView);
 		final View.OnClickListener listener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -508,7 +513,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					@Override
 					public void onClick(View v) {
 						setDashboardVisibility(true, flatNow ? DashboardType.WAYPOINTS : DashboardType.WAYPOINTS_FLAT,
-								previousVisibleType, false);
+								previousVisibleType, false, AndroidUtils.getCenterViewCoordinates(v));
 					}
 				});
 			}
@@ -659,7 +664,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		markersSelectionButton.onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				setDashboardVisibility(true, DashboardType.MAP_MARKERS_SELECTION);
+				setDashboardVisibility(true, DashboardType.MAP_MARKERS_SELECTION, AndroidUtils.getCenterViewCoordinates(v));
 			}
 		};
 
@@ -757,19 +762,32 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type) {
+		setDashboardVisibility(visible, type, null);
+	}
+
+	public void setDashboardVisibility(boolean visible, DashboardType type, int[] animationCoordinates) {
 		boolean animate = !getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get();
-		setDashboardVisibility(visible, type, this.visible ? visibleType : null, animate);
+		setDashboardVisibility(visible, type, this.visible ? visibleType : null, animate, animationCoordinates);
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type, boolean animation) {
-		setDashboardVisibility(visible, type, this.visible ? visibleType : null, animation);
+		setDashboardVisibility(visible, type, animation, null);
+	}
+
+	public void setDashboardVisibility(boolean visible, DashboardType type, boolean animation, int[] animationCoordinates) {
+		setDashboardVisibility(visible, type, this.visible ? visibleType : null, animation, animationCoordinates);
 	}
 
 	public void refreshDashboardFragments() {
 		addOrUpdateDashboardFragments();
 	}
 
-	public void setDashboardVisibility(boolean visible, DashboardType type, DashboardType prevItem, boolean animation) {
+	@ColorRes
+	public int getStatusBarColor() {
+		return R.color.status_bar_transparent_gradient;
+	}
+
+	public void setDashboardVisibility(boolean visible, DashboardType type, DashboardType prevItem, boolean animation, int[] animationCoordinates) {
 		if (visible == this.visible && type == visibleType) {
 			return;
 		}
@@ -788,9 +806,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		mapActivity.enableDrawer();
 
 		getMyApplication().getMapMarkersHelper().removeListener(this);
-		if (mapActivity.getMapLayers().getMapMarkersLayer().clearRoute()) {
-			mapActivity.refreshMap();
-		}
+//		if (mapActivity.getMapLayers().getMapMarkersLayer().clearRoute()) {
+//			mapActivity.refreshMap();
+//		}
 		if (swipeDismissListener != null) {
 			swipeDismissListener.discardUndo();
 		}
@@ -851,7 +869,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				}
 			}
 			mapActivity.findViewById(R.id.toolbar_back).setVisibility(isBackButtonVisible() ? View.VISIBLE : View.GONE);
-			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
+			mapActivity.getMapLayers().getMapControlsLayer().hideMapControls();
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			if (!portrait) {
 				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin_external), true);
@@ -861,13 +879,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 			updateToolbarActions();
 			//fabButton.showFloatingActionButton();
-			open(dashboardView.findViewById(R.id.animateContent), animation);
+			open(animation, animationCoordinates);
 			updateLocation(true, true, false);
 //			addOrUpdateDashboardFragments();
 			mapActivity.getRoutingHelper().addListener(this);
 		} else {
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
-			hide(dashboardView.findViewById(R.id.animateContent), animation);
+			hide(animation);
 
 			if (!MapRouteInfoMenu.isVisible()) {
 				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin_external), false);
@@ -875,7 +893,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				mapActivity.getMapView().refreshMap();
 			}
 
-			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
+			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 			hideActionButton();
 			for (WeakReference<DashBaseFragment> df : fragList) {
 				if (df.get() != null) {
@@ -890,6 +908,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
 			}
 		}
+		mapActivity.updateStatusBarColor();
 	}
 
 	public void updateDashboard() {
@@ -1113,7 +1132,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					if (btn != null && btn.getVisibility() == View.VISIBLE) {
 						btn.setChecked(!btn.isChecked());
 					} else {
-						if (click.onContextMenuClick(listAdapter, item.getTitleId(), which, false)) {
+						if (click.onContextMenuClick(listAdapter, item.getTitleId(), which, false, null)) {
 							hideDashboard();
 						}
 					}
@@ -1193,52 +1212,89 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 
-	// To animate view slide out from right to left
-	private void open(View view, boolean animation) {
+	// To bounce animate view
+	private void open(boolean animation, int[] animationCoordinates) {
 		if (animation) {
-			TranslateAnimation animate = new TranslateAnimation(-mapActivity.findViewById(R.id.MapHudButtonsOverlay)
-					.getWidth(), 0, 0, 0);
-			animate.setDuration(500);
-			animate.setFillAfter(true);
-			view.startAnimation(animate);
-			view.setVisibility(View.VISIBLE);
+			this.animationCoordinates = animationCoordinates;
+			animateDashboard(true);
 		} else {
-			view.setVisibility(View.VISIBLE);
+			dashboardView.findViewById(R.id.animateContent).setVisibility(View.VISIBLE);
+			dashboardView.findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
 		}
 	}
 
-	private void hide(View view, boolean animation) {
+	private void animateDashboard(final boolean show) {
+		final View content = dashboardView.findViewById(R.id.animateContent);
+		final View toolbar = dashboardView.findViewById(R.id.toolbar);
+		AnimatorSet set = new AnimatorSet();
+		List<Animator> animators = new ArrayList<>();
+		if (animationCoordinates != null) {
+			int screenHeight = mapActivity.getResources().getDisplayMetrics().heightPixels;
+			int screenWidth = mapActivity.getResources().getDisplayMetrics().widthPixels;
+			float initialValueX = show ? animationCoordinates[0] - screenWidth / 2 : 0;
+			float finalValueX = show ? 0 : animationCoordinates[0] - screenWidth / 2;
+			float initialValueY = show ? animationCoordinates[1] - screenHeight / 2 : 0;
+			float finalValueY = show ? 0 : animationCoordinates[1] - screenHeight / 2;
+			animators.add(ObjectAnimator.ofFloat(content, View.TRANSLATION_X, initialValueX, finalValueX));
+			animators.add(ObjectAnimator.ofFloat(content, View.TRANSLATION_Y, initialValueY, finalValueY));
+		}
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			int centerX = content.getMeasuredWidth() / 2;
+			int centerY = content.getMeasuredHeight() / 2;
+			float initialRadius = show ? 0 : (float) Math.sqrt(Math.pow(content.getWidth() / 2, 2) + Math.pow(content.getHeight() / 2, 2));
+			float finalRadius = show ? (float) Math.sqrt(Math.pow(content.getWidth() / 2, 2) + Math.pow(content.getHeight() / 2, 2)) : 0;
+			Animator circleAnimator = ViewAnimationUtils.createCircularReveal(content, centerX, centerY, initialRadius, finalRadius);
+			animators.add(circleAnimator);
+		}
+		float initialValueScale = show ? 0f : 1f;
+		float finalValueScale = show ? 1f : 0f;
+		animators.add(ObjectAnimator.ofFloat(content, View.SCALE_X, initialValueScale, finalValueScale));
+		animators.add(ObjectAnimator.ofFloat(content, View.SCALE_Y, initialValueScale, finalValueScale));
+		float initialToolbarTransY = show ? -toolbar.getHeight() : 0;
+		float finalToolbarTransY = show ? 0 : -toolbar.getHeight();
+		animators.add(ObjectAnimator.ofFloat(toolbar, View.TRANSLATION_Y, initialToolbarTransY, finalToolbarTransY));
+		set.setDuration(300).playTogether(animators);
+		set.addListener(new AnimatorListenerAdapter() {
+			@Override
+			public void onAnimationStart(Animator animation) {
+				super.onAnimationStart(animation);
+				listView.setVerticalScrollBarEnabled(false);
+				if (show) {
+					content.setVisibility(View.VISIBLE);
+					toolbar.setVisibility(View.VISIBLE);
+				}
+			}
+
+			@Override
+			public void onAnimationEnd(Animator animation) {
+				super.onAnimationEnd(animation);
+				listView.setVerticalScrollBarEnabled(true);
+				if (!show) {
+					dashboardView.setVisibility(View.GONE);
+					content.setVisibility(View.GONE);
+					toolbar.setVisibility(View.GONE);
+					content.setTranslationX(0);
+					content.setTranslationY(0);
+					toolbar.setTranslationY(0);
+				}
+			}
+		});
+		set.start();
+	}
+
+	private void hide(boolean animation) {
 		if (compassButton != null) {
 			mapActivity.getMapLayers().getMapControlsLayer().restoreCompassButton(nightMode);
 			compassButton = null;
 		}
 		if (!animation) {
 			dashboardView.setVisibility(View.GONE);
+			dashboardView.findViewById(R.id.animateContent).setVisibility(View.GONE);
+			dashboardView.findViewById(R.id.toolbar).setVisibility(View.GONE);
 		} else {
-			TranslateAnimation animate = new TranslateAnimation(0, -mapActivity.findViewById(R.id.MapHudButtonsOverlay)
-					.getWidth(), 0, 0);
-			animate.setDuration(500);
-			animate.setFillAfter(true);
-			animate.setAnimationListener(new AnimationListener() {
-
-				@Override
-				public void onAnimationStart(Animation animation) {
-
-				}
-
-				@Override
-				public void onAnimationRepeat(Animation animation) {
-
-				}
-
-				@Override
-				public void onAnimationEnd(Animation animation) {
-					dashboardView.setVisibility(View.GONE);
-				}
-			});
-			view.startAnimation(animate);
+			animateDashboard(false);
 		}
-		view.setVisibility(View.GONE);
+		animationCoordinates = null;
 	}
 
 
@@ -1369,7 +1425,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				setTranslationY(listBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
 			}
 		}
-		if (portrait) {
+		if (portrait && toolbar.getVisibility() == View.VISIBLE) {
 			setTranslationY(toolbar, Math.min(0, -scrollY + mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight));
 		}
 		updateColorOfToolbar(scrollY);
@@ -1691,7 +1747,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	public void showMarkersRouteOnMap() {
 		MapMarkersHelper helper = getMyApplication().getMapMarkersHelper();
 		List<LatLon> points = helper.getSelectedMarkersLatLon();
-		mapActivity.getMapLayers().getMapMarkersLayer().setRoute(points);
+//		mapActivity.getMapLayers().getMapMarkersLayer().setRoute(points);
 		showRouteOnMap(points);
 	}
 

@@ -236,7 +236,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 						LinkedList<WptPt> l = new LinkedList<WptPt>(r.points);
 						measurementPoints.add(l);
 					}
-					for (WptPt p : result.points) {
+					for (WptPt p : result.getPoints()) {
 						LinkedList<WptPt> l = new LinkedList<WptPt>();
 						l.add(p);
 						measurementPoints.add(l);
@@ -336,14 +336,14 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					saveTrackToRte = originalGPX.routes.size() > 0 && originalGPX.tracks.size() == 0;
 					gpx.tracks.clear();
 					gpx.routes.clear();
-					gpx.points.clear();
+					app.getSelectedGpxHelper().clearPoints(gpx);
 				} else {
 					gpx = new GPXFile();
 				}
 				for (int i = 0; i < measurementPoints.size(); i++) {
 					LinkedList<WptPt> lt = measurementPoints.get(i);
 					if (lt.size() == 1) {
-						gpx.points.add(lt.getFirst());
+						app.getSelectedGpxHelper().addPoint(lt.getFirst(), gpx);
 					} else if (lt.size() > 1) {
 						if (saveTrackToRte) {
 							Route rt = new Route();
@@ -384,7 +384,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				}
 			};
 		};
-		exportTask.execute();
+		exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 	private void startEditingHelp(MapActivity ctx) {
 		final CommonPreference<Boolean> pref = app.getSettings().registerBooleanPreference("show_measurement_help_first_time", true);
@@ -499,7 +499,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 
 			List<Object> s = new ArrayList<>();
-			collectObjectsFromPoint(point, tileBox, s);
+			collectObjectsFromPoint(point, tileBox, s, true);
 
 			if (s.size() == 0 && distanceMeasurementMode == 1 && measurementPoints.size() > 0) {
 				LinkedList<WptPt> lt = measurementPoints.get(measurementPoints.size() - 1);
@@ -590,7 +590,12 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		}
 
 		@Override
-		public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
+		public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+			return false;
+		}
+
+		@Override
+		public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
 			getMPointsFromPoint(tileBox, point, o);
 		}
 		
@@ -653,7 +658,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 
 						@Override
-						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 							if (itemId == R.string.delete_point) {
 								for (int i = 0; i < measurementPoints.size(); i++) {
 									Iterator<WptPt> it = measurementPoints.get(i).iterator();

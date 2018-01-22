@@ -272,22 +272,12 @@ public class WaypointHelper {
 					RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
 					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
 
-					//Check if stop sign is tagged with direction=forward/backward
-					if (info != null && info.getType() != null && info.getType() == AlarmInfoType.STOP) {
-						//TODO: better than bearingVsRouteDirection would be routeVsWayDirection analysis
-						if (ro.isStopDirectionOpposite(ro.bearingVsRouteDirection(loc))) {
-							info = null;
-						}
-					//TODO: Still missing here is analysis if a stop without direction=* tagging is _behind_ an intersection
-					}
-
-					// Issue #2873 may indicate we need some sort of check here if Alarm is in forward direction
-					// But cannot reproduce the issue for now
-					//if (loc.hasBearing()) {
-					//	if (Math.abs(MapUtils.alignAngleDifference(bearingTo("actual alarm location") - loc.getBearing() / 180f * Math.PI)) >= Math.PI / 2f) {
+					// For STOP first check if it has directional info
+					// Looks like has no effect here
+					//if (info != null && info.getType() != null && info.getType() == AlarmInfoType.STOP) {
+					//	if (!ro.isStopApplicable(ro.bearingVsRouteDirection(loc), i)) {
 					//		info = null;
 					//	}
-					//Toast.makeText(app.getApplicationContext(), Double.toString(ro.directionRoute(0, true)) + ",\n" + Double.toString(loc.getBearing()) + ",\n" + Double.toString(MapUtils.alignAngleDifference(ro.directionRoute(0, true) - loc.getBearing() / 180f * Math.PI))), Toast.LENGTH_LONG).show();
 					//}
 
 					if (info != null) {
@@ -339,25 +329,27 @@ public class WaypointHelper {
 					pointsProgress.set(type, kIterator);
 					while (kIterator < lp.size()) {
 						LocationPointWrapper lwp = lp.get(kIterator);
-						if (route.getDistanceToPoint(lwp.routeIndex) > LONG_ANNOUNCE_RADIUS * 2) {
-							break;
-						}
-						LocationPoint point = lwp.point;
-						double d1 = Math.max(0.0, MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
-								point.getLatitude(), point.getLongitude()) - lwp.getDeviationDistance());
-						Integer state = locationPointsStates.get(point);
-						if (state != null && state.intValue() == ANNOUNCED_ONCE
-								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS, 0f)) {
-							locationPointsStates.put(point, ANNOUNCED_DONE);
-							announcePoints.add(lwp);
-						} else if (type != ALARMS && (state == null || state == NOT_ANNOUNCED)
-								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS, 0f)) {
-							locationPointsStates.put(point, ANNOUNCED_ONCE);
-							approachPoints.add(lwp);
-						} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)
-								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, ALARMS_ANNOUNCE_RADIUS, 0f)) {
-							locationPointsStates.put(point, ANNOUNCED_ONCE);
-							approachPoints.add(lwp);
+						if (lwp.announce) {
+							if (route.getDistanceToPoint(lwp.routeIndex) > LONG_ANNOUNCE_RADIUS * 2) {
+								break;
+							}
+							LocationPoint point = lwp.point;
+							double d1 = Math.max(0.0, MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+									point.getLatitude(), point.getLongitude()) - lwp.getDeviationDistance());
+							Integer state = locationPointsStates.get(point);
+							if (state != null && state.intValue() == ANNOUNCED_ONCE
+									&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS, 0f)) {
+								locationPointsStates.put(point, ANNOUNCED_DONE);
+								announcePoints.add(lwp);
+							} else if (type != ALARMS && (state == null || state == NOT_ANNOUNCED)
+									&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS, 0f)) {
+								locationPointsStates.put(point, ANNOUNCED_ONCE);
+								approachPoints.add(lwp);
+							} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)
+									&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, ALARMS_ANNOUNCE_RADIUS, 0f)) {
+								locationPointsStates.put(point, ANNOUNCED_ONCE);
+								approachPoints.add(lwp);
+							}
 						}
 						kIterator++;
 					}

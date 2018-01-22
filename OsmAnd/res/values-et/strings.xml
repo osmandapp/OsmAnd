@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="add_opening_hours">Lisa lahioleku ajad</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="add_opening_hours">Lisa lahioleku ajad</string>
 	<string name="description">Kirjeldus</string>
 	<string name="contact_info">Kontakti info</string>
 	
@@ -80,10 +81,10 @@
 	<string name="online_map">Online kaart</string>
 	<string name="roads_only">Ainult teed</string>
     <string name="rendering_attr_pisteRoutes_name">Suusarajad</string>
-	<string name="free">"Vaba %1$s "</string>
+	<string name="free">Vaba %1$s</string>
 	<string name="device_memory">Seadme mälu</string>
     <string name="edit_group">Grupi muutmine</string>
-    <string name="parking_place">Parkimise asukohad</string>
+    <string name="parking_place">Parkimiskoht</string>
     <string name="gps_status">GPS staatus</string>
     <string name="rendering_attr_streetLighting_name">Tänava valgustus</string>
     <string name="app_mode_bus">Buss</string>
@@ -104,17 +105,17 @@
 	<string name="shared_string_is_open_24_7">Avatud 24/7</string>
     <string name="storage_directory_card">Mälukaart</string>
     <string name="coords_format">Koordinaatide formaat</string>
-    <string name="coords_format_descr">Geograafiliste koordinaatide formaat</string>
+    <string name="coords_format_descr">Geograafiliste koordinaatide vorming</string>
   	<string name="current_track">Praegune teekond</string>
-    <string name="use_osm_live_routing_description">Aktiveeri OSM Live navigeerimine (beeta)</string>
-	<string name="use_osm_live_routing">OSM reaalajas navigeerimine</string>
+    <string name="use_osm_live_routing_description">Aktiveeri OsmAnd Live muutuste navigeerimine</string>
+	<string name="use_osm_live_routing">OsmAnd Live navigeerimine</string>
     <string name="access_no_destination">Sihtkoht pole määratud</string>
-    <string name="map_widget_magnetic_bearing">Magnetlaager</string>
+    <string name="map_widget_magnetic_bearing">Asimuut</string>
     <string name="map_widget_bearing">Suhteline kurss</string>
-    <string name="access_disable_offroute_recalc">Ära muuda teekonda, kui oled teekonnast väljas</string>
-    <string name="access_disable_offroute_recalc_descr">Väldi teekonna ümber arvutamist, kui oled õigelt teelt eemal</string>
-    <string name="access_disable_wrong_direction_recalc">Ära muuda teekonda vale suuna korral</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Väldi automaatset teekonna ümberarvutamist, kui liigud vales suunas</string>
+    <string name="access_disable_offroute_recalc">Ära otsi uut marsruuti, kui eelmiselt lahkuti</string>
+    <string name="access_disable_offroute_recalc_descr">Väldib automaatset uue marsruudi otsimist, kui eelmiselt marsruudilt lahkuti</string>
+    <string name="access_disable_wrong_direction_recalc">Ära otsi vastassuuna jaoks uut marsruuti</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Väldib automaatset uue marsruudi otsimist kui liigutakse vastassuunas</string>
     <string name="access_smart_autoannounce">Nutikas teavitamine</string>
     <string name="access_smart_autoannounce_descr">Teavita ainult juhul, kui suund sihtkoha poole muutub</string>
     <string name="access_autoannounce_period">Automaatse teavituse periood</string>
@@ -140,7 +141,13 @@
     <string name="rendering_value_bold_name">Rasvane</string>
     <string name="no_map_markers_found">Palun lisa kaardi markerid kaardi abil</string>
     <string name="no_waypoints_found">Marsruudipunkte ei leitud</string>
-    <string name="osmo_group_information_desc">" - Grupi loomisel määra selle nimi ja kirjeldus\n - Rakenduses saab luua ainult lihtsat tüüpi gruppe, loe rohkem lehelt https://osmo.mobi/g/new\n - Veebilehel saad hallata gruppe, asetada radasid ja huvipunkte\n - Me ei toeta ainult ühe kasutajaga gruppe, kui see ei ole POI grupp\n - Privaatgrupid on kuni 8 kasutajale\n - Detailsed kasutustingimused on alati saadaval lehel OsMo.mobi\n - Eritingimuste korral võta ühendust klienditoega: osmo.mobi@gmail.com "</string>
+    <string name="osmo_group_information_desc">- Grupi loomisel määra selle nimi ja kirjeldus
+\n - Rakenduses saab luua ainult lihtsat tüüpi gruppe, loe rohkem lehelt https://osmo.mobi/g/new
+\n - Veebilehel saad hallata gruppe, asetada radasid ja huvipunkte
+\n - Me ei toeta ainult ühe kasutajaga gruppe, kui see ei ole POI grupp
+\n - Privaatgrupid on kuni 8 kasutajale
+\n - Detailsed kasutustingimused on alati saadaval lehel OsMo.mobi
+\n - Eritingimuste korral võta ühendust klienditoega: osmo.mobi@gmail.com</string>
     <string name="osmo_specify_tracker_id">Täpsusta ID</string>
     <string name="osmo_no_connection_msg">Ei suuda ühenduda OsMo serveriga:\n- kontrolli internetiühendust;\n- kontrolli seadeid;\n- kontrolli meie Twitteri lehte: https://twitter.com/OsMomobi</string>
     <string name="mapillary">Mapillary</string>
@@ -163,4 +170,12 @@
     <string name="mapillary_menu_title_dates">Kuupäevad</string>
     <string name="mapillary_menu_edit_text_hint">Sisesta kasutajatunnus</string>
     <string name="mapillary_menu_title_username">Kasutajatunnus</string>
+    <string name="improve_coverage_install_mapillary_desc">Sa võid lisada oma fotod või foto seeriad siia asukohta.
+\n
+\nSelleks, paigalda Mapillary rakendus Google Play veebipoest.</string>
+    <string name="no_photos_descr">Sellest asukohast meil fotosid ei ole</string>
+    <string name="restart_search">Taaskäivita otsing</string>
+    <string name="quick_action_showhide_osmbugs_title">Näita/peida OSM Notes</string>
+    <string name="quick_action_osmbugs_show">Näita OSM Notes</string>
+    <string name="quick_action_osmbugs_hide">Peida OSM Notes</string>
     </resources>

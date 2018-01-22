@@ -1,40 +1,31 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import android.annotation.SuppressLint;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu.MenuObject;
+import net.osmand.plus.widgets.TextViewEx;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-
-public class MapMultiSelectionMenuFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class MapMultiSelectionMenuFragment extends Fragment implements MultiSelectionArrayAdapter.OnClickListener {
 	public static final String TAG = "MapMultiSelectionMenuFragment";
 
 	private View view;
-	private ArrayAdapter<MenuObject> listAdapter;
+	private MultiSelectionArrayAdapter listAdapter;
 	private MapMultiSelectionMenu menu;
 	private boolean dismissing = false;
 	private boolean wasDrawerDisabled;
@@ -48,20 +39,34 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 		view = inflater.inflate(R.layout.menu_obj_selection_fragment, container, false);
 		if (menu.isLandscapeLayout()) {
 			AndroidUtils.setBackground(view.getContext(), view, !menu.isLight(),
-					R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
+					R.drawable.multi_selection_menu_bg_light_land, R.drawable.multi_selection_menu_bg_dark_land);
 		} else {
 			AndroidUtils.setBackground(view.getContext(), view, !menu.isLight(),
-					R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+					R.drawable.multi_selection_menu_bg_light, R.drawable.multi_selection_menu_bg_dark);
 		}
 
 		ListView listView = (ListView) view.findViewById(R.id.list);
-		listAdapter = createAdapter();
-		listView.setAdapter(listAdapter);
-		listView.setOnItemClickListener(this);
-
-		if (!oldAndroid()) {
-			runLayoutListener();
+		if (menu.isLandscapeLayout() && Build.VERSION.SDK_INT >= 21) {
+			AndroidUtils.addStatusBarPadding21v(getActivity(), listView);
 		}
+		View headerView = inflater.inflate(R.layout.menu_obj_selection_header, listView, false);
+		headerView.setOnClickListener(null);
+		listView.addHeaderView(headerView);
+		listAdapter = createAdapter();
+		listAdapter.setListener(this);
+		listView.setAdapter(listAdapter);
+
+		runLayoutListener();
+
+		view.findViewById(R.id.divider).setBackgroundColor(ContextCompat.getColor(getContext(), menu.isLight() ? R.color.multi_selection_menu_divider_light : R.color.multi_selection_menu_divider_dark));
+
+		((TextView) view.findViewById(R.id.cancel_row_text)).setTextColor(ContextCompat.getColor(getContext(), menu.isLight() ? R.color.multi_selection_menu_close_btn_light : R.color.multi_selection_menu_close_btn_dark));
+		view.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				dismissMenu();
+			}
+		});
 		return view;
 	}
 
@@ -136,8 +141,25 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 			@Override
 			public void onGlobalLayout() {
 
-				int maxHeight = (int) (getScreenHeight() * menu.getHalfScreenMaxHeightKoef());
-				int height = view.findViewById(R.id.main_view).getHeight();
+				if (!menu.isLandscapeLayout() && listAdapter.getCount() > 3) {
+					View contentView = view.findViewById(R.id.content);
+					float headerHeight = contentView.getResources().getDimension(R.dimen.multi_selection_header_height);
+					float cancelRowHeight = contentView.getResources().getDimension(R.dimen.bottom_sheet_cancel_button_height);
+					int maxHeight = (int) (headerHeight + cancelRowHeight);
+					for (int i = 0; i < 3; i++) {
+						View childView = listAdapter.getView(0, null, (ListView) contentView.findViewById(R.id.list));
+						childView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+						maxHeight += childView.getMeasuredHeight();
+					}
+					int height = contentView.getHeight();
+
+					if (height > maxHeight) {
+						ViewGroup.LayoutParams lp = contentView.getLayoutParams();
+						lp.height = maxHeight;
+						contentView.setLayoutParams(lp);
+						contentView.requestLayout();
+					}
+				}
 
 				ViewTreeObserver obs = view.getViewTreeObserver();
 
@@ -146,71 +168,21 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 				} else {
 					obs.removeGlobalOnLayoutListener(this);
 				}
-
-				if (!menu.isLandscapeLayout() && height > maxHeight) {
-					ViewGroup.LayoutParams lp = view.getLayoutParams();
-					lp.height = maxHeight;
-					view.setLayoutParams(lp);
-					view.requestLayout();
-				}
 			}
 		});
 	}
 
-	private ArrayAdapter<MenuObject> createAdapter() {
+	private MultiSelectionArrayAdapter createAdapter() {
 		final List<MenuObject> items = new LinkedList<>(menu.getObjects());
-		return new ArrayAdapter<MenuObject>(menu.getMapActivity(), R.layout.menu_obj_list_item, items) {
-
-			@SuppressLint("InflateParams")
-			@Override
-			public View getView(final int position, View convertView, ViewGroup parent) {
-				View v = convertView;
-				if (v == null) {
-					v = menu.getMapActivity().getLayoutInflater().inflate(R.layout.menu_obj_list_item, null);
-				}
-				final MenuObject item = getItem(position);
-				buildHeader(v, item, menu.getMapActivity());
-				return v;
-			}
-		};
-	}
-
-	private void buildHeader(View view, MenuObject item, MapActivity mapActivity) {
-
-		AndroidUtils.setBackground(mapActivity, view, !menu.isLight(), R.drawable.expandable_list_item_background_light, R.drawable.expandable_list_item_background_dark);
-		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
-		final View iconLayout = view.findViewById(R.id.context_menu_icon_layout);
-		final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
-		Drawable icon = item.getLeftIcon();
-		int iconId = item.getLeftIconId();
-		if (icon != null) {
-			iconView.setImageDrawable(icon);
-			iconLayout.setVisibility(View.VISIBLE);
-		} else if (iconId != 0) {
-			iconView.setImageDrawable(iconsCache.getIcon(iconId,
-					menu.isLight() ? R.color.osmand_orange : R.color.osmand_orange_dark));
-			iconLayout.setVisibility(View.VISIBLE);
-		} else {
-			iconLayout.setVisibility(View.GONE);
-		}
-
-		// Text line 1
-		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
-		AndroidUtils.setTextPrimaryColor(mapActivity, line1, !menu.isLight());
-		line1.setText(item.getTitleStr());
-
-		// Text line 2
-		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		AndroidUtils.setTextSecondaryColor(mapActivity, line2, !menu.isLight());
-		line2.setText(item.getTypeStr());
-		Drawable slIcon = item.getTypeIcon();
-		line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
-		line2.setCompoundDrawablePadding(dpToPx(5f));
+		return new MultiSelectionArrayAdapter(menu, R.layout.menu_obj_list_item, items);
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		menu.openContextMenu(listAdapter.getItem(position));
+	public void onClick(int position) {
+		MenuObject menuObject = listAdapter.getItem(position);
+		if (menuObject != null) {
+			menu.openContextMenu(menuObject);
+		}
 	}
 
 	public void dismissMenu() {
@@ -220,24 +192,5 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 		} else {
 			menu.getMapActivity().getSupportFragmentManager().popBackStack();
 		}
-	}
-
-	private int dpToPx(float dp) {
-		Resources r = getActivity().getResources();
-		return (int) TypedValue.applyDimension(
-				COMPLEX_UNIT_DIP,
-				dp,
-				r.getDisplayMetrics()
-		);
-	}
-
-	private int getScreenHeight() {
-		DisplayMetrics dm = new DisplayMetrics();
-		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-		return dm.heightPixels;
-	}
-
-	private boolean oldAndroid() {
-		return (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH);
 	}
 }

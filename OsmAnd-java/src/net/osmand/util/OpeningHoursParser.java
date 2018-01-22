@@ -28,6 +28,10 @@ public class OpeningHoursParser {
 	private static final String[] monthsStr;
 	private static final String[] localMothsStr;
 
+	private static final int LOW_TIME_LIMIT = 120;
+	private static final int HIGH_TIME_LIMIT = 300;
+	private static final int WITHOUT_TIME_LIMIT = -1;
+
 	static {
 		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(Locale.US);
 		monthsStr = dateFormatSymbols.getShortMonths();
@@ -55,9 +59,9 @@ public class OpeningHoursParser {
 		for (int i = 0; i < strings.length; i++) {
 			if (strings[i] != null) {
 				if (strings[i].length() > 2) {
-					newStrings[i] = strings[i].substring(0, 2);
+					newStrings[i] = Algorithms.capitalizeFirstLetter(strings[i].substring(0, 2));
 				} else {
-					newStrings[i] = strings[i];
+					newStrings[i] = Algorithms.capitalizeFirstLetter(strings[i]);
 				}
 			}
 		}
@@ -184,6 +188,76 @@ public class OpeningHoursParser {
 				}
 			}
 			return isOpenDay || isOpenPrevious;
+		}
+
+		public boolean isOpened24_7() {
+			boolean opened24_7 = false;
+			for (OpeningHoursRule r : rules) {
+				opened24_7 = r.isOpened24_7();
+			}
+			return opened24_7;
+		}
+
+		public String getNearToOpeningTime(Calendar cal) {
+			return getTime(cal, LOW_TIME_LIMIT, true);
+		}
+
+		public String getOpeningTime(Calendar cal) {
+			return getTime(cal, HIGH_TIME_LIMIT, true);
+		}
+
+		public String getNearToClosingTime(Calendar cal) {
+			return getTime(cal, LOW_TIME_LIMIT, false);
+		}
+
+		public String getClosingTime(Calendar cal) {
+			return getTime(cal, WITHOUT_TIME_LIMIT, false);
+		}
+
+		public String getOpeningDay(Calendar calendar) {
+			Calendar cal = (Calendar) calendar.clone();
+			String openingTime = "";
+			for (int i = 0; i < 7; i++) {
+				cal.add(Calendar.DAY_OF_MONTH, 1);
+				for (OpeningHoursRule r : rules) {
+					if (r.containsDay(cal) && r.containsMonth(cal)) {
+						openingTime = r.getTime(cal, false, WITHOUT_TIME_LIMIT, true);
+					}
+				}
+				if (!Algorithms.isEmpty(openingTime)) {
+					openingTime += " " + localDaysStr[cal.get(Calendar.DAY_OF_WEEK)];
+					break;
+				}
+			}
+			return openingTime;
+		}
+
+		private String getTime(Calendar cal, int limit, boolean opening) {
+			String time = getTimeDay(cal, limit, opening);
+			if (Algorithms.isEmpty(time)) {
+				time = getTimeAnotherDay(cal, limit, opening);
+			}
+			return time;
+		}
+
+		private String getTimeDay(Calendar cal, int limit, boolean opening) {
+			String atTime = "";
+			for (OpeningHoursRule r : rules) {
+				if (r.containsDay(cal) && r.containsMonth(cal)) {
+					atTime = r.getTime(cal, false, limit, opening);
+				}
+			}
+			return atTime;
+		}
+
+		private String getTimeAnotherDay(Calendar cal, int limit, boolean opening) {
+			String atTime = "";
+			for (OpeningHoursRule r : rules) {
+				if (((opening && r.containsPreviousDay(cal)) || (!opening && r.containsNextDay(cal))) && r.containsMonth(cal)) {
+					atTime = r.getTime(cal, true, limit, opening);
+				}
+			}
+			return atTime;
 		}
 
 		public String getCurrentRuleTime(Calendar cal) {
@@ -319,6 +393,14 @@ public class OpeningHoursParser {
 		public boolean containsDay(Calendar cal);
 
 		/**
+		 * Check if the next day after "cal" is part of this rule
+		 *
+		 * @param cal the time to check
+		 * @return true if the next day is part of the rule
+		 */
+		boolean containsNextDay(Calendar cal);
+
+		/**
 		 * Check if the month of "cal" is part of this rule
 		 *
 		 * @param cal the time to check
@@ -341,6 +423,10 @@ public class OpeningHoursParser {
 		public String toRuleString();
 
 		public String toLocalRuleString();
+
+		boolean isOpened24_7();
+
+		String getTime(Calendar cal, boolean checkAnotherDay, int limit, boolean opening);
 	}
 
 	/**
@@ -558,6 +644,16 @@ public class OpeningHoursParser {
 			return false;
 		}
 
+		@Override
+		public boolean containsNextDay(Calendar cal) {
+			int i = cal.get(Calendar.DAY_OF_WEEK);
+			int p = (i + 6) % 7;
+			if (days[p]) {
+				return true;
+			}
+			return false;
+		}
+
 		/**
 		 * Check if the previous weekday of time "cal" is part of this rule
 		 *
@@ -597,14 +693,10 @@ public class OpeningHoursParser {
 		 */
 		@Override
 		public boolean isOpenedForTime(Calendar cal, boolean checkPrevious) {
-			int i = cal.get(Calendar.DAY_OF_WEEK);
-			int d = (i + 5) % 7;
-			int p = d - 1;
-			if (p < 0) {
-				p += 7;
-			}
-			int time = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE); // Time in minutes
-			for (i = 0; i < startTimes.size(); i++) {
+			int d = getCurrentDay(cal);
+			int p = getPreviousDay(d);
+			int time = getCurrentTimeInMinutes(cal); // Time in minutes
+			for (int i = 0; i < startTimes.size(); i++) {
 				int startTime = this.startTimes.get(i);
 				int endTime = this.endTimes.get(i);
 				if (startTime < endTime || endTime == -1) {
@@ -628,6 +720,30 @@ public class OpeningHoursParser {
 			return false;
 		}
 
+		private int getCurrentDay(Calendar cal) {
+			int i = cal.get(Calendar.DAY_OF_WEEK);
+			return (i + 5) % 7;
+		}
+
+		private int getPreviousDay(int currentDay) {
+			int p = currentDay - 1;
+			if (p < 0) {
+				p += 7;
+			}
+			return p;
+		}
+
+		private int getNextDay(int currentDay) {
+			int n = currentDay + 1;
+			if (n > 6) {
+				n -= 7;
+			}
+			return n;
+		}
+
+		private int getCurrentTimeInMinutes(Calendar cal) {
+			return cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
+		}
 
 		@Override
 		public String toRuleString() {
@@ -658,24 +774,17 @@ public class OpeningHoursParser {
 				addArray(dayMonths, null, b);
 			}
 			// Day
-			boolean open24_7 = true;
-			for (int i = 0; i < 7; i++) {
-				if (!days[i]) {
-					open24_7 = false;
-					break;
-				}
-			}
 			appendDaysString(b, dayNames);
 			// Time
 			if (startTimes == null || startTimes.size() == 0) {
 				b.append("off");
 			} else {
+				if (isOpened24_7()) {
+					return "24/7";
+				}
 				for (int i = 0; i < startTimes.size(); i++) {
 					int startTime = startTimes.get(i);
 					int endTime = endTimes.get(i);
-					if (open24_7 && startTime == 0 && endTime / 60 == 24) {
-						return "24/7";
-					}
 					if(i > 0) {
 						b.append(", ");
 					}
@@ -723,6 +832,84 @@ public class OpeningHoursParser {
 		@Override
 		public String toLocalRuleString() {
 			return toRuleString(localDaysStr, localMothsStr);
+		}
+
+		@Override
+		public boolean isOpened24_7() {
+			boolean opened24_7 = true;
+			for (int i = 0; i < 7; i++) {
+				if (!days[i]) {
+					opened24_7 = false;
+					break;
+				}
+			}
+
+			if (opened24_7 && startTimes != null && startTimes.size() > 0) {
+				for (int i = 0; i < startTimes.size(); i++) {
+					int startTime = startTimes.get(i);
+					int endTime = endTimes.get(i);
+					if (startTime == 0 && endTime / 60 == 24) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+		@Override
+		public String getTime(Calendar cal, boolean checkAnotherDay, int limit, boolean opening) {
+			StringBuilder sb = new StringBuilder();
+			int d = getCurrentDay(cal);
+			int ad = opening ? getNextDay(d) : getPreviousDay(d);
+			int time = getCurrentTimeInMinutes(cal);
+			for (int i = 0; i < startTimes.size(); i++) {
+				int startTime = startTimes.get(i);
+				int endTime = endTimes.get(i);
+				if (opening) {
+					if (startTime < endTime || endTime == -1) {
+						if (days[d] && !checkAnotherDay) {
+							int diff = startTime - time;
+							if (limit == WITHOUT_TIME_LIMIT || ((time <= startTime) && (diff <= limit))) {
+								formatTime(startTime, sb);
+								break;
+							}
+						}
+					} else {
+						int diff = -1;
+						if (time <= startTime && days[d] && !checkAnotherDay) {
+							diff = startTime - time;
+						} else if (time > endTime && days[ad] && checkAnotherDay) {
+							diff = 24 * 60 - endTime  + time;
+						}
+						if (limit == WITHOUT_TIME_LIMIT || ((diff != -1) && (diff <= limit))) {
+							formatTime(startTime, sb);
+							break;
+						}
+					}
+				} else {
+					if (startTime < endTime && endTime != -1) {
+						if (days[d] && !checkAnotherDay) {
+							int diff = endTime - time;
+							if (limit == WITHOUT_TIME_LIMIT || ((time <= endTime) && (diff <= limit))) {
+								formatTime(endTime, sb);
+								break;
+							}
+						}
+					} else {
+						int diff = -1;
+						if (time <= endTime && days[d] && !checkAnotherDay) {
+							diff = 24 * 60 - time + endTime;
+						} else if (time < endTime && days[ad] && checkAnotherDay) {
+							diff = startTime - time;
+						}
+						if (limit == WITHOUT_TIME_LIMIT || ((diff != -1) && (diff <= limit))) {
+							formatTime(endTime, sb);
+							break;
+						}
+					}
+				}
+			}
+			return sb.toString();
 		}
 
 		@Override
@@ -901,6 +1088,11 @@ public class OpeningHoursParser {
 		}
 
 		@Override
+		public boolean containsNextDay(Calendar cal) {
+			return false;
+		}
+
+		@Override
 		public boolean containsMonth(Calendar cal) {
 			return false;
 		}
@@ -913,6 +1105,16 @@ public class OpeningHoursParser {
 		@Override
 		public String toLocalRuleString() {
 			return toRuleString();
+		}
+
+		@Override
+		public boolean isOpened24_7() {
+			return false;
+		}
+
+		@Override
+		public String getTime(Calendar cal, boolean checkAnotherDay, int limit, boolean opening) {
+			return "";
 		}
 
 		@Override
@@ -1260,6 +1462,11 @@ public class OpeningHoursParser {
 		b.append(t);
 	}
 
+	private static void formatTime(int minutes, StringBuilder sb) {
+		int hour = minutes / 60;
+		int time = minutes - hour * 60;
+		formatTime(hour, time, sb);
+	}
 
 	/**
 	 * test if the calculated opening hours are what you expect

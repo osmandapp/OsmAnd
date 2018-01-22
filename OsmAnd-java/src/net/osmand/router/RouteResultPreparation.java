@@ -25,6 +25,7 @@ import net.osmand.osm.MapRenderingTypes;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
+import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -108,6 +109,9 @@ public class RouteResultPreparation {
 	}
 
 	private void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
+		//for Naismith
+		boolean usePedestrianHeight = ((((GeneralRouter) ctx.getRouter()).getProfile() == GeneralRouterProfile.PEDESTRIAN) && ((GeneralRouter) ctx.getRouter()).getHeightObstacles());
+
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
@@ -125,6 +129,15 @@ public class RouteResultPreparation {
 			boolean plus = rr.getStartPointIndex() < rr.getEndPointIndex();
 			int next;
 			double distance = 0;
+
+			//for Naismith
+			float prevHeight = -99999.0f;
+			float[] heightDistanceArray = null;
+			if (usePedestrianHeight) {
+				road.calculateHeightArray();
+				heightDistanceArray = road.heightDistanceArray;
+			}
+
 			for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
 				next = plus ? j + 1 : j - 1;
 				double d = measuredDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
@@ -134,9 +147,24 @@ public class RouteResultPreparation {
 				if (obstacle < 0) {
 					obstacle = 0;
 				}
-				distOnRoadToPass += d / speed + obstacle;
+				distOnRoadToPass += d / speed + obstacle;  //this is time in seconds
 
+				//for Naismith
+				if (usePedestrianHeight) {
+					int heightIndex = 2 * j + 1;
+					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length) {
+						float height = heightDistanceArray[heightIndex];
+						if (prevHeight != -99999.0f) {
+							float heightDiff = height - prevHeight;
+							if (heightDiff > 0) {  //ascent only
+								distOnRoadToPass += heightDiff * 6.0f;  //Naismith's rule: add 1 hour per every 600m of ascent
+							}
+						}
+					prevHeight = height;
+					}
+				}
 			}
+
 			// last point turn time can be added
 			// if(i + 1 < result.size()) { distOnRoadToPass += ctx.getRouter().calculateTurnTime(); }
 			rr.setSegmentTime((float) distOnRoadToPass);
@@ -1429,16 +1457,16 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		// remove all non-slight turns
-		if(possibleTurns.size() > 1) {
-			TIntIterator it = possibleTurns.iterator();
-			while(it.hasNext()) {
-				int nxt = it.next();
-				if(!TurnType.isSlightTurn(nxt)) {
-					it.remove();
-				}
-			}
-		}
+		// remove all non-slight turns // TEST don't pass 
+//		if(possibleTurns.size() > 1) {
+//			TIntIterator it = possibleTurns.iterator();
+//			while(it.hasNext()) {
+//				int nxt = it.next();
+//				if(!TurnType.isSlightTurn(nxt)) {
+//					it.remove();
+//				}
+//			}
+//		}
 		int infer = 0;
 		if (possibleTurns.size() == 1) {
 			infer = possibleTurns.iterator().next();

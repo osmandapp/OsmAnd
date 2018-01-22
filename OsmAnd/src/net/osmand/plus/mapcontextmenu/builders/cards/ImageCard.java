@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
@@ -38,29 +40,32 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import static java.text.DateFormat.FULL;
-
 public abstract class ImageCard extends AbstractCard {
 
-	private String type;
+	public static String TYPE_MAPILLARY_PHOTO = "mapillary-photo";
+	public static String TYPE_MAPILLARY_CONTRIBUTE = "mapillary-contribute";
+
+	protected String type;
 	// Image location
-	private LatLon location;
-	// (optional) Image's camera angle in range  [0, 360].
-	private double ca = Double.NaN;
-	// Date When bitmap was captured.
-	private Date timestamp;
-	// Image key.
-	private String key;
+	protected LatLon location;
+	// (optional) Image's camera angle in range  [0, 360]
+	protected double ca = Double.NaN;
+	// Date When bitmap was captured
+	protected Date timestamp;
+	// Image key
+	protected String key;
+	// Image title
+	protected String title;
 	// User name
-	private String userName;
+	protected String userName;
 	// Image viewer url
-	private String url;
+	protected String url;
 	// Image bitmap url
-	private String imageUrl;
+	protected String imageUrl;
 	// Image high resolution bitmap url
-	private String imageHiresUrl;
+	protected String imageHiresUrl;
 	// true if external browser should to be opened, open webview otherwise
-	private boolean externalLink;
+	protected boolean externalLink;
 
 	protected int topIconId;
 	protected int buttonIconId;
@@ -76,7 +81,8 @@ public abstract class ImageCard extends AbstractCard {
 	protected OnClickListener onClickListener;
 	protected OnClickListener onButtonClickListener;
 
-	private static final DateFormat DATE_FORMAT = SimpleDateFormat.getDateTimeInstance(FULL, FULL, Locale.US); //"yyyy-MM-dd'T'HH:mm:ss");
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
+
 	private boolean downloading;
 	private boolean downloaded;
 	private Bitmap bitmap;
@@ -85,75 +91,81 @@ public abstract class ImageCard extends AbstractCard {
 
 	public ImageCard(MapActivity mapActivity, JSONObject imageObject) {
 		super(mapActivity);
-		try {
-			if (imageObject.has("type")) {
-				this.type = imageObject.getString("type");
-			}
-			if (imageObject.has("ca") && !imageObject.isNull("ca")) {
-				this.ca = imageObject.getDouble("ca");
-			}
-			if (imageObject.has("lat") && imageObject.has("lon")) {
-				double latitude = imageObject.getDouble("lat");
-				double longitude = imageObject.getDouble("lon");
-				this.location = new LatLon(latitude, longitude);
-			}
-			if (imageObject.has("timestamp")) {
-				try {
-					this.timestamp = DATE_FORMAT.parse(imageObject.getString("timestamp"));
-				} catch (ParseException e) {
-					e.printStackTrace();
+		if (imageObject != null) {
+			try {
+				if (imageObject.has("type")) {
+					this.type = imageObject.getString("type");
 				}
-			}
-			if (imageObject.has("key")) {
-				this.key = imageObject.getString("key");
-			}
-			if (imageObject.has("username")) {
-				this.userName = imageObject.getString("username");
-			}
-			if (imageObject.has("url")) {
-				this.url = imageObject.getString("url");
-			}
-			if (imageObject.has("imageUrl")) {
-				this.imageUrl = imageObject.getString("imageUrl");
-			}
-			if (imageObject.has("imageHiresUrl")) {
-				this.imageHiresUrl = imageObject.getString("imageHiresUrl");
-			}
-			if (imageObject.has("externalLink") && !imageObject.isNull("externalLink")) {
-				this.externalLink = imageObject.getBoolean("externalLink");
-			}
-			if (imageObject.has("topIcon") && !imageObject.isNull("topIcon")) {
-				this.topIconId = getDrawableId(imageObject.getString("topIcon"));
-			}
-			if (imageObject.has("buttonIcon") && !imageObject.isNull("buttonIcon")) {
-				this.buttonIconId = getDrawableId(imageObject.getString("buttonIcon"));
-			}
-			if (imageObject.has("buttonText") && !imageObject.isNull("buttonText")) {
-				this.buttonText = imageObject.getString("buttonText");
-			}
-			if (imageObject.has("buttonIconColor") && !imageObject.isNull("buttonIconColor")) {
-				try {
-					this.buttonIconColor = Algorithms.parseColor(imageObject.getString("buttonIconColor"));
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
+				if (imageObject.has("ca") && !imageObject.isNull("ca")) {
+					this.ca = imageObject.getDouble("ca");
 				}
-			}
-			if (imageObject.has("buttonColor") && !imageObject.isNull("buttonColor")) {
-				try {
-					this.buttonColor = Algorithms.parseColor(imageObject.getString("buttonColor"));
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
+				if (imageObject.has("lat") && imageObject.has("lon")
+						&& !imageObject.isNull("lat") && !imageObject.isNull("lon")) {
+					double latitude = imageObject.getDouble("lat");
+					double longitude = imageObject.getDouble("lon");
+					this.location = new LatLon(latitude, longitude);
 				}
-			}
-			if (imageObject.has("buttonTextColor") && !imageObject.isNull("buttonTextColor")) {
-				try {
-					this.buttonTextColor = Algorithms.parseColor(imageObject.getString("buttonTextColor"));
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
+				if (imageObject.has("timestamp")) {
+					try {
+						this.timestamp = DATE_FORMAT.parse(imageObject.getString("timestamp"));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
 				}
+				if (imageObject.has("key")) {
+					this.key = imageObject.getString("key");
+				}
+				if (imageObject.has("title") && !imageObject.isNull("title")) {
+					this.title = imageObject.getString("title");
+				}
+				if (imageObject.has("username") && !imageObject.isNull("username")) {
+					this.userName = imageObject.getString("username");
+				}
+				if (imageObject.has("url") && !imageObject.isNull("url")) {
+					this.url = imageObject.getString("url");
+				}
+				if (imageObject.has("imageUrl") && !imageObject.isNull("imageUrl")) {
+					this.imageUrl = imageObject.getString("imageUrl");
+				}
+				if (imageObject.has("imageHiresUrl") && !imageObject.isNull("imageHiresUrl")) {
+					this.imageHiresUrl = imageObject.getString("imageHiresUrl");
+				}
+				if (imageObject.has("externalLink") && !imageObject.isNull("externalLink")) {
+					this.externalLink = imageObject.getBoolean("externalLink");
+				}
+				if (imageObject.has("topIcon") && !imageObject.isNull("topIcon")) {
+					this.topIconId = getDrawableId(imageObject.getString("topIcon"));
+				}
+				if (imageObject.has("buttonIcon") && !imageObject.isNull("buttonIcon")) {
+					this.buttonIconId = getDrawableId(imageObject.getString("buttonIcon"));
+				}
+				if (imageObject.has("buttonText") && !imageObject.isNull("buttonText")) {
+					this.buttonText = imageObject.getString("buttonText");
+				}
+				if (imageObject.has("buttonIconColor") && !imageObject.isNull("buttonIconColor")) {
+					try {
+						this.buttonIconColor = Algorithms.parseColor(imageObject.getString("buttonIconColor"));
+					} catch (IllegalArgumentException e) {
+						e.printStackTrace();
+					}
+				}
+				if (imageObject.has("buttonColor") && !imageObject.isNull("buttonColor")) {
+					try {
+						this.buttonColor = Algorithms.parseColor(imageObject.getString("buttonColor"));
+					} catch (IllegalArgumentException e) {
+						e.printStackTrace();
+					}
+				}
+				if (imageObject.has("buttonTextColor") && !imageObject.isNull("buttonTextColor")) {
+					try {
+						this.buttonTextColor = Algorithms.parseColor(imageObject.getString("buttonTextColor"));
+					} catch (IllegalArgumentException e) {
+						e.printStackTrace();
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -170,9 +182,9 @@ public abstract class ImageCard extends AbstractCard {
 		try {
 			if (imageObject.has("type")) {
 				String type = imageObject.getString("type");
-				if ("mapillary-photo".equals(type)) {
+				if (TYPE_MAPILLARY_PHOTO.equals(type)) {
 					imageCard = new MapillaryImageCard(mapActivity, imageObject);
-				} else if ("mapillary-contribute".equals(type)) {
+				} else if (TYPE_MAPILLARY_CONTRIBUTE.equals(type)) {
 					imageCard = new MapillaryContributeCard(mapActivity, imageObject);
 				} else {
 					imageCard = new UrlImageCard(mapActivity, imageObject);
@@ -190,6 +202,10 @@ public abstract class ImageCard extends AbstractCard {
 
 	public String getKey() {
 		return key;
+	}
+
+	public String getTitle() {
+		return title;
 	}
 
 	public String getType() {
@@ -302,9 +318,15 @@ public abstract class ImageCard extends AbstractCard {
 		if (view != null) {
 			ImageView image = (ImageView) view.findViewById(R.id.image);
 			ImageView iconImageView = (ImageView) view.findViewById(R.id.icon);
+			TextView urlTextView = (TextView) view.findViewById(R.id.url);
 			TextView watermarkTextView = (TextView) view.findViewById(R.id.watermark);
 			ProgressBar progress = (ProgressBar) view.findViewById(R.id.progress);
 			AppCompatButton button = (AppCompatButton) view.findViewById(R.id.button);
+
+			boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+			AndroidUtils.setBackground(getMapActivity(), view.findViewById(R.id.card_background), night,
+					R.drawable.context_menu_card_light, R.drawable.context_menu_card_dark);
+
 			if (icon == null && topIconId != 0) {
 				icon = getMyApplication().getIconsCache().getIcon(topIconId);
 			}
@@ -328,6 +350,12 @@ public abstract class ImageCard extends AbstractCard {
 			} else {
 				progress.setVisibility(View.GONE);
 				image.setImageBitmap(bitmap);
+				if (bitmap == null) {
+					urlTextView.setVisibility(View.VISIBLE);
+					urlTextView.setText(getUrl());
+				} else {
+					urlTextView.setVisibility(View.GONE);
+				}
 			}
 			if (onClickListener != null) {
 				view.findViewById(R.id.image_card).setOnClickListener(new OnClickListener() {
@@ -377,17 +405,22 @@ public abstract class ImageCard extends AbstractCard {
 		private MapActivity mapActivity;
 		private OsmandApplication app;
 		private LatLon latLon;
+		private Map<String, String> params;
 		private GetImageCardsListener listener;
 		private List<ImageCard> result;
 
 		public interface GetImageCardsListener {
+			void onPostProcess(List<ImageCard> cardList);
+
 			void onFinish(List<ImageCard> cardList);
 		}
 
-		public GetImageCardsTask(@NonNull MapActivity mapActivity, LatLon latLon, GetImageCardsListener listener) {
+		public GetImageCardsTask(@NonNull MapActivity mapActivity, LatLon latLon,
+								 @Nullable Map<String, String> params, GetImageCardsListener listener) {
 			this.mapActivity = mapActivity;
 			this.app = mapActivity.getMyApplication();
 			this.latLon = latLon;
+			this.params = params;
 			this.listener = listener;
 		}
 
@@ -409,6 +442,9 @@ public abstract class ImageCard extends AbstractCard {
 				}
 				if (!Algorithms.isEmpty(preferredLang)) {
 					pms.put("lang", preferredLang);
+				}
+				if (this.params != null) {
+					pms.putAll(this.params);
 				}
 				String response = AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/cm_place.php", pms,
 						"Requesting location images...", false, false);
@@ -434,6 +470,9 @@ public abstract class ImageCard extends AbstractCard {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
+			}
+			if (listener != null) {
+				listener.onPostProcess(result);
 			}
 			return result;
 		}
@@ -465,6 +504,9 @@ public abstract class ImageCard extends AbstractCard {
 			downloading = false;
 			downloaded = true;
 			ImageCard.this.bitmap = bitmap;
+			if (bitmap != null && Algorithms.isEmpty(getImageHiresUrl())) {
+				ImageCard.this.imageHiresUrl = getUrl();
+			}
 			update();
 		}
 	}

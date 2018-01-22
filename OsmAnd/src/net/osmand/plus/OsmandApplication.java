@@ -47,6 +47,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppHelper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
+import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.render.RendererRegistry;
@@ -107,6 +108,7 @@ public class OsmandApplication extends MultiDexApplication {
 	LiveMonitoringHelper liveMonitoringHelper;
 	TargetPointsHelper targetPointsHelper;
 	MapMarkersHelper mapMarkersHelper;
+	MapMarkersDbHelper mapMarkersDbHelper;
 	WaypointHelper waypointHelper;
 	DownloadIndexesThread downloadIndexesThread;
 	AvoidSpecificRoads avoidSpecificRoads;
@@ -144,9 +146,6 @@ public class OsmandApplication extends MultiDexApplication {
 		appCustomization.setup(this);
 		osmandSettings = appCustomization.getOsmandSettings();
 		appInitializer.initVariables();
-		if (osmandSettings.ENABLE_PROXY.get()) {
-			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
-		}
 		if (appInitializer.isAppVersionChanged() && appInitializer.getPrevAppVersion() < AppInitializer.VERSION_2_3) {
 			osmandSettings.freezeExternalStorageDirectory();
 		} else if (appInitializer.isFirstTime()) {
@@ -202,7 +201,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 			protected void onPostExecute(Void result) {
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 	
 	public IconsCache getIconsCache() {
@@ -546,7 +545,13 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startApplication() {
-		Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
+		UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+		if (!(uncaughtExceptionHandler instanceof DefaultExceptionHandler)) {
+			Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
+		}
+		if (NetworkUtils.getProxy() == null && osmandSettings.ENABLE_PROXY.get()) {
+			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
+		}
 		appInitializer.startApplication();
 	}
 
@@ -594,7 +599,11 @@ public class OsmandApplication extends MultiDexApplication {
 				}
 				if (routingHelper.isFollowingMode()) {
 					AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-					mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
+					if (Build.VERSION.SDK_INT >= 19) {
+						mgr.setExact(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
+					} else {
+						mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
+					}
 					System.exit(2);
 				}
 				defaultHandler.uncaughtException(thread, ex);
@@ -613,6 +622,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public MapMarkersHelper getMapMarkersHelper() {
 		return mapMarkersHelper;
+	}
+
+	public MapMarkersDbHelper getMapMarkersDbHelper() {
+		return mapMarkersDbHelper;
 	}
 
 	public void showShortToastMessage(final int msgId, final Object... args) {
@@ -749,7 +762,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return lang;
 	}
 	
-	public RoutingConfiguration.Builder getDefaultRoutingConfig() {
+	public synchronized RoutingConfiguration.Builder getDefaultRoutingConfig() {
 		if(defaultRoutingConfig == null) {
 			defaultRoutingConfig = appInitializer.getLazyDefaultRoutingConfig();
 		}

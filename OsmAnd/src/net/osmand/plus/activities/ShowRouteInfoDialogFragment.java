@@ -95,7 +95,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		boolean isLightTheme = getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
-		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+		int themeId = isLightTheme ? R.style.OsmandLightThemeWithLightStatusBar : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
 
@@ -118,7 +118,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		});
 
 		((ImageView) view.findViewById(R.id.distance_icon))
-				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
+				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_route_distance));
 		((ImageView) view.findViewById(R.id.time_icon))
 				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_time_span));
 
@@ -144,10 +144,10 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 				}
 				RouteDirectionInfo item = adapter.getItem(position - 2);
 				Location loc = helper.getLocationFromRouteDirection(item);
-				if(loc != null){
+				if (loc != null) {
 					MapRouteInfoMenu.directionInfo = position - 2;
 					OsmandSettings settings = getMyApplication().getSettings();
-					settings.setMapLocationToShow(loc.getLatitude(),loc.getLongitude(),
+					settings.setMapLocationToShow(loc.getLatitude(), loc.getLongitude(),
 							Math.max(13, settings.getLastKnownMapZoom()),
 							new PointDescription(PointDescription.POINT_TYPE_MARKER, item.getDescriptionRoutePart() + " " + getTimeDescription(item)),
 							false, null);
@@ -161,7 +161,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		int time = helper.getLeftTime();
 		int hours = time / (60 * 60);
 		int minutes = (time / 60) % 60;
-		((TextView)view.findViewById(R.id.distance)).setText(OsmAndFormatter.getFormattedDistance(dist, app));
+		((TextView) view.findViewById(R.id.distance)).setText(OsmAndFormatter.getFormattedDistance(dist, app));
 		StringBuilder timeStr = new StringBuilder();
 		if (hours > 0) {
 			timeStr.append(hours).append(" ").append(getString(R.string.osmand_parking_hour)).append(" ");
@@ -169,12 +169,12 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		if (minutes > 0) {
 			timeStr.append(minutes).append(" ").append(getString(R.string.osmand_parking_minute));
 		}
-		((TextView)view.findViewById(R.id.time)).setText(timeStr);
+		((TextView) view.findViewById(R.id.time)).setText(timeStr);
 
 		view.findViewById(R.id.go_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapActivity activity = (MapActivity)getActivity();
+				MapActivity activity = (MapActivity) getActivity();
 				if (activity != null) {
 					activity.getMapLayers().getMapControlsLayer().startNavigation();
 					dismiss();
@@ -357,7 +357,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		if (gpxItem != null) {
 			LatLon location = null;
 			WptPt wpt = null;
-			gpxItem.chartTypes = new GPXDataSetType[] { GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE };
+			gpxItem.chartTypes = new GPXDataSetType[]{GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE};
 			if (gpxItem.chartHighlightPos != -1) {
 				TrkSegment segment = gpx.tracks.get(0).segments.get(0);
 				if (segment != null) {
@@ -383,7 +383,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 				gpxItem.locationOnMap = gpxItem.locationStart;
 			}
 
-			final MapActivity activity = (MapActivity)getActivity();
+			final MapActivity activity = (MapActivity) getActivity();
 			if (activity != null) {
 				dismiss();
 
@@ -603,7 +603,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 
 		return file;
 	}
-	
+
 	private StringBuilder generateHtml(RouteInfoAdapter routeInfo, String title) {
 		StringBuilder html = new StringBuilder();
 		if (!TextUtils.isEmpty(title)) {

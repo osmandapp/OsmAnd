@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/context_img_card_width"
     android:layout_height="@dimen/context_img_card_height"
-    android:background="?attr/bg_card"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:background="?attr/bg_card">
 
     <ProgressBar
         android:id="@+id/progress"

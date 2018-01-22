@@ -15,9 +15,9 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -55,6 +55,8 @@ public class MapMarkersWidgetsFactory {
 
 	private LatLon loc;
 
+	private boolean cachedTopBarVisibility;
+
 	public MapMarkersWidgetsFactory(final MapActivity map) {
 		this.map = map;
 		helper = map.getMyApplication().getMapMarkersHelper();
@@ -73,7 +75,7 @@ public class MapMarkersWidgetsFactory {
 		addressText = (TextView) map.findViewById(R.id.map_marker_address);
 		addressText2nd = (TextView) map.findViewById(R.id.map_marker_address_2nd);
 		okButton = (ImageButton) map.findViewById(R.id.marker_btn_ok);
-		okButton2nd = (ImageButton) map.findViewById(R.id.marker_btn_ok_2dn);
+		okButton2nd = (ImageButton) map.findViewById(R.id.marker_btn_ok_2nd);
 		moreButton = (ImageButton) map.findViewById(R.id.marker_btn_more);
 		moreButton2nd = (ImageButton) map.findViewById(R.id.marker_btn_more_2nd);
 
@@ -91,34 +93,37 @@ public class MapMarkersWidgetsFactory {
 		});
 
 		IconsCache iconsCache = map.getMyApplication().getIconsCache();
-		if (isLandscapeLayout() && helper.getMapMarkers().size() > 1) {
+		if (isLandscapeLayout() && helper.getMapMarkers().size() > 1
+				&& !(map.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1)) {
 			moreButton.setVisibility(View.GONE);
 		} else {
-			moreButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, R.color.marker_top_2nd_line_color));
+			moreButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_markers_list, R.color.marker_top_2nd_line_color));
 			moreButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					MapActivity.clearPrevActivityIntent();
-					map.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
+					MapMarkersDialogFragment.showInstance(map);
 				}
 			});
 		}
 		if (moreButton2nd != null) {
-			moreButton2nd.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, R.color.marker_top_2nd_line_color));
+			moreButton2nd.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_markers_list, R.color.marker_top_2nd_line_color));
 			moreButton2nd.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					MapActivity.clearPrevActivityIntent();
-					map.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
+					MapMarkersDialogFragment.showInstance(map);
 				}
 			});
 		}
+		okButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, R.color.color_white));
 		okButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				removeMarker(0);
 			}
 		});
+		okButton2nd.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, R.color.color_white));
 		okButton2nd.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -131,9 +136,7 @@ public class MapMarkersWidgetsFactory {
 
 	private void removeMarker(int index) {
 		if (helper.getMapMarkers().size() > index) {
-			MapMarker marker = helper.getMapMarkers().get(index);
-			helper.removeMapMarker(marker.index);
-			helper.addMapMarkerHistory(marker);
+			helper.moveMapMarkerToHistory(helper.getMapMarkers().get(index));
 		}
 	}
 
@@ -151,7 +154,12 @@ public class MapMarkersWidgetsFactory {
 	}
 
 	public boolean updateVisibility(boolean visible) {
-		return updateVisibility(topBar, visible);
+		boolean res = updateVisibility(topBar, visible);
+		if (visible != cachedTopBarVisibility) {
+			cachedTopBarVisibility = visible;
+			map.updateStatusBarColor();
+		}
+		return res;
 	}
 
 	public boolean updateVisibility(View v, boolean visible) {
@@ -194,12 +202,15 @@ public class MapMarkersWidgetsFactory {
 
 		List<MapMarker> markers = helper.getMapMarkers();
 		if (zoom < 3 || markers.size() == 0
+				|| !map.getMyApplication().getSettings().MARKERS_DISTANCE_INDICATION_ENABLED.get()
 				|| !map.getMyApplication().getSettings().MAP_MARKERS_MODE.get().isToolbar()
 				|| map.getMyApplication().getRoutingHelper().isFollowingMode()
 				|| map.getMyApplication().getRoutingHelper().isRoutePlanningMode()
 				|| MapRouteInfoMenu.isVisible()
 				|| addressTopBar.getVisibility() == View.VISIBLE
-				|| map.isTopToolbarActive()) {
+				|| map.isTopToolbarActive()
+				|| !map.getContextMenu().shouldShowTopControls()
+				|| map.getMapLayers().getMapMarkersLayer().isInPlanRouteMode()) {
 			updateVisibility(false);
 			return;
 		}
@@ -209,7 +220,7 @@ public class MapMarkersWidgetsFactory {
 		MapMarker marker = markers.get(0);
 		updateUI(loc, heading, marker, arrowImg, distText, okButton, addressText, true, customLocation != null);
 
-		if (markers.size() > 1) {
+		if (markers.size() > 1 && map.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 2) {
 			marker = markers.get(1);
 			if (loc != null && customLocation == null) {
 				for (int i = 1; i < markers.size(); i++) {

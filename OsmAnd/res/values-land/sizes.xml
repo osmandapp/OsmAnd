@@ -5,8 +5,8 @@
     <dimen name="splash_screen_logo_top">24dp</dimen>
     <dimen name="splash_screen_text_bottom">48dp</dimen>
 
-    <dimen name="my_places_empty_state_image_margin_top">39dp</dimen>
-    <dimen name="my_places_empty_state_image_margin_bottom">39dp</dimen>
+    <dimen name="empty_state_image_margin_top">39dp</dimen>
+    <dimen name="empty_state_image_margin_bottom">39dp</dimen>
 
     <dimen name="measurement_tool_content_padding_medium">14dp</dimen>
 </resources>

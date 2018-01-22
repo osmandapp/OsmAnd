@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="lang_es_ar">ಅರ್ಜಿಂಟಿನೆಯಾದ ಸ್ಪೇನಿಷ್</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="lang_es_ar">ಅರ್ಜಿಂಟಿನೆಯಾದ ಸ್ಪೇನಿಷ್</string>
     <string name="lang_th">ಥಾಯಿ</string>
     <string name="lang_te">ತೆಲುಗು</string>
     <string name="lang_nn"/>
@@ -256,4 +257,24 @@
     <string name="nearest_cities">ಹತ್ತಿರದ ನಗರಗಳು</string>
     <string name="select_city">ನಗರವನ್ನು ಆರಿಸು</string>
     <string name="select_postcode">ಅಂಚೆಸಂಖ್ಯೆಯನ್ನು ಆರಿಸು</string>
-    </resources>
+    <string name="is_saved">ಉಳಿಸಲಾಗಿದೆ</string>
+    <string name="shared_string_list">ಪಟ್ಟಿ</string>
+    <string name="shared_string_groups">ಗುಂಪುಗಳು</string>
+    <string name="passed">ಕೊನೆಯದಾಗಿ ಬಳಸಿದ್ದು: %1$s</string>
+    <string name="today">ಇಂದು</string>
+    <string name="yesterday">ನಾಳೆ</string>
+    <string name="last_seven_days">ಕೊನೆಯ ೭ ದಿನಗಳು</string>
+    <string name="this_year">ಈ ವರ್ಷ</string>
+    <string name="enter_gpx_name">GPX ಕಡತದ ಹೆಸರು:</string>
+    <string name="shared_string_to">ಗೆ</string>
+    <string name="mapillary_menu_date_from">ಇಂದ</string>
+    <string name="mapillary_menu_title_dates">ದಿನಾಂಕಗಳು</string>
+    <string name="mapillary_menu_edit_text_hint">ಬಳಕೆದಾರರ ಹೆಸರನ್ನು ಟೈಪ್ ಮಾಡಿ</string>
+    <string name="mapillary_menu_title_username">ಬಳಕೆದಾರರ ಹೆಸರು</string>
+    <string name="mapillary_image">Mapillary ಚಿತ್ರ</string>
+    <string name="open_mapillary">Mapillary ತೆರೆ</string>
+    <string name="shared_string_install">ಅನುಸ್ಥಾಪಿಸಿ</string>
+    <string name="mapillary_widget">ಮ್ಯಾಪಿಲರಿ ವಿಜೆಟ್</string>
+    <string name="shared_string_plugin">ಪ್ಲಗಿನ್</string>
+    <string name="add_segment_to_the_track">GPX ಟ್ರ್ಯಾಕ್ಅನ್ನು ಸೇರಿಸಿ</string>
+</resources>

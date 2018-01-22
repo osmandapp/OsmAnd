@@ -1,11 +1,9 @@
 package net.osmand.plus.audionotes;
 
+import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.support.v4.animation.AnimatorCompatHelper;
-import android.support.v4.animation.AnimatorUpdateListenerCompat;
-import android.support.v4.animation.ValueAnimatorCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.util.DisplayMetrics;
@@ -25,7 +23,7 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 
 	protected ImageView imageview;
 	protected ProgressBar progressBar;
-	protected ValueAnimatorCompat animatorCompat;
+	protected ValueAnimator animatorCompat;
 
 	public AudioVideoNoteRecordingMenuFullScreen(AudioVideoNotesPlugin plugin, double lat, double lon) {
 		super(plugin, lat, lon);
@@ -133,14 +131,14 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 		ViewCompat.setAlpha(progressBar, 1f);
 		progressBar.setVisibility(View.VISIBLE);
 
-		animatorCompat = AnimatorCompatHelper.emptyValueAnimator();
+		animatorCompat = ValueAnimator.ofInt(0);
 		final Interpolator interpolator = new LinearInterpolator();
 		animatorCompat.setDuration(duration);
 		animatorCompat.setTarget(progressBar);
-		animatorCompat.addUpdateListener(new AnimatorUpdateListenerCompat() {
+		animatorCompat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 			@Override
-			public void onAnimationUpdate(ValueAnimatorCompat animation) {
-				float fraction = interpolator.getInterpolation(animation.getAnimatedFraction());
+			public void onAnimationUpdate(ValueAnimator valueAnimator) {
+				float fraction = interpolator.getInterpolation(valueAnimator.getAnimatedFraction());
 				progressBar.setProgress((int)(500 * fraction));
 			}
 		});

@@ -161,7 +161,12 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
 		if (tileBox.getZoom() >= startZoom) {
 			getOsmEditsFromPoint(point, tileBox, o);
 		}
@@ -207,13 +212,13 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 				Node node = objectInMotion.getEntity();
 				node.setLatitude(position.getLatitude());
 				node.setLongitude(position.getLongitude());
-				new SaveOsmChangeAsyncTask(mOsmChangeUtil, callback, objectInMotion).execute();
+				new SaveOsmChangeAsyncTask(mOsmChangeUtil, callback, objectInMotion).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			} else if (o instanceof OsmNotesPoint) {
 				OsmNotesPoint objectInMotion = (OsmNotesPoint) o;
 				objectInMotion.setLatitude(position.getLatitude());
 				objectInMotion.setLongitude(position.getLongitude());
 				new SaveOsmNoteAsyncTask(objectInMotion.getText(), activity, callback, plugin, mOsmBugsUtil)
-						.execute(objectInMotion);
+						.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, objectInMotion);
 			}
 		}
 	}
@@ -235,7 +240,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		protected Node doInBackground(Void... params) {
 			Node node = objectInMotion.getEntity();
 			return mOpenstreetmapUtil.commitNodeImpl(objectInMotion.getAction(), node,
-					mOpenstreetmapUtil.getEntityInfo(node.getId()), "", false);
+					mOpenstreetmapUtil.getEntityInfo(node.getId()), "", false, null);
 		}
 
 		@Override

@@ -10,17 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -33,12 +28,10 @@ import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
-import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,9 +82,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		if (index < listAdapter.getCount()) {
 			QuickSearchListItem item = listAdapter.getItem(index);
 			if (item != null) {
-				if (item.getType() == QuickSearchListItemType.SEARCH_MORE) {
-					((QuickSearchMoreListItem) item).getOnClickListener().onClick(view);
-				} else if (item.getType() == QuickSearchListItemType.BUTTON) {
+				if (item.getType() == QuickSearchListItemType.BUTTON) {
 					((QuickSearchButtonListItem) item).getOnClickListener().onClick(view);
 				} else if (item.getType() == QuickSearchListItemType.SEARCH_RESULT) {
 					SearchResult sr = item.getSearchResult();
@@ -177,18 +168,18 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					Amenity a = (Amenity) object;
 					String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(a, lang, transliterate);
 					pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
-					pointDescription.setIconName(QuickSearchListItem.getAmenityIconName(a));
+					pointDescription.setIconName(QuickSearchListItem.getAmenityIconName(app, a));
 					break;
 				case RECENT_OBJ:
 					HistoryEntry entry = (HistoryEntry) object;
 					pointDescription = entry.getName();
 					if (pointDescription.isPoi()) {
-						Amenity amenity = findAmenity(entry.getName().getName(), entry.getLat(), entry.getLon(), lang, transliterate);
+						Amenity amenity = app.getSearchUICore().findAmenity(entry.getName().getName(), entry.getLat(), entry.getLon(), lang, transliterate);
 						if (amenity != null) {
 							object = amenity;
 							pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
 									OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate));
-							pointDescription.setIconName(QuickSearchListItem.getAmenityIconName(amenity));
+							pointDescription.setIconName(QuickSearchListItem.getAmenityIconName(app, amenity));
 						}
 					} else if (pointDescription.isFavorite()) {
 						LatLon entryLatLon = new LatLon(entry.getLat(), entry.getLon());
@@ -289,46 +280,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				}
 			}
 		}
-	}
-
-	private Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
-		OsmandApplication app = getMyApplication();
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(
-				new SearchPoiTypeFilter() {
-					@Override
-					public boolean accept(PoiCategory type, String subcategory) {
-						return true;
-					}
-
-					@Override
-					public boolean isEmpty() {
-						return false;
-					}
-				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
-
-		MapPoiTypes types = app.getPoiTypes();
-		for (Amenity amenity : amenities) {
-			String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate);
-			if (poiSimpleFormat.equals(name)) {
-				return amenity;
-			}
-		}
-		for (Amenity amenity : amenities) {
-			String amenityName = amenity.getName(lang, transliterate);
-			if (Algorithms.isEmpty(amenityName)) {
-				AbstractPoiType st = types.getAnyPoiTypeByKey(amenity.getSubType());
-				if (st != null) {
-					amenityName = st.getTranslation();
-				} else {
-					amenityName = amenity.getSubType();
-				}
-			}
-			if (name.contains(amenityName)) {
-				return amenity;
-			}
-		}
-		return null;
 	}
 
 	public MapActivity getMapActivity() {

@@ -199,7 +199,7 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		}
 		String userKey = settings.MAPILLARY_FILTER_USER_KEY.get();
 		HashMap<String, Object> userData = (HashMap<String, Object>) data;
-		long capturedAt = (long) userData.get("captured_at");
+		long capturedAt = ((Number) userData.get("captured_at")).longValue();
 		long from = settings.MAPILLARY_FILTER_FROM_DATE.get();
 		long to = settings.MAPILLARY_FILTER_TO_DATE.get();
 
@@ -313,7 +313,7 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects, boolean unknownLocation) {
 		if (map != null && tileBox.getZoom() >= map.getMinimumZoomSupported()) {
 			getImagesFromPoint(tileBox, point, objects);
 		}
@@ -331,6 +331,11 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 	@Override
 	public boolean isObjectClickable(Object o) {
 		return o instanceof MapillaryImage;
+	}
+
+	@Override
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
 	}
 
 	private void getImagesFromPoint(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {

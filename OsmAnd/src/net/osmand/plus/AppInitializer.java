@@ -29,6 +29,7 @@ import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
+import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -86,7 +87,7 @@ public class AppInitializer implements IProgress {
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
-	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog?id=osmand-2-7-released";
+	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog?id=osmand-2-8-released";
 //	public static final String LATEST_CHANGES_URL = null; // not enough to read
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
@@ -287,8 +288,8 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void indexRegionsBoundaries(List<String> warnings) {
+		File file = app.getAppPath("regions.ocbf");
 		try {
-			File file = app.getAppPath("regions.ocbf");
 			if (file != null) {
 				if (!file.exists()) {
 					Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"),
@@ -299,6 +300,7 @@ public class AppInitializer implements IProgress {
 			}
 		} catch (Exception e) {
 			warnings.add(e.getMessage());
+			file.delete(); // recreate file
 			LOG.error(e.getMessage(), e);
 		}
 	}
@@ -373,6 +375,7 @@ public class AppInitializer implements IProgress {
 		app.rendererRegistry = startupInit(new RendererRegistry(app), RendererRegistry.class);
 		app.geocodingLookupService = startupInit(new GeocodingLookupService(app), GeocodingLookupService.class);
 		app.targetPointsHelper = startupInit(new TargetPointsHelper(app), TargetPointsHelper.class);
+		app.mapMarkersDbHelper = startupInit(new MapMarkersDbHelper(app), MapMarkersDbHelper.class);
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
 	}
@@ -519,6 +522,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.LOAD_GPX_TRACKS);
 			saveGPXTracks();
 			notifyEvent(InitEvents.SAVE_GPX_TRACKS);
+			app.mapMarkersHelper.syncAllGroupsAsync();
 			// restore backuped favorites to normal file
 			restoreBackupForFavoritesFiles();
 			notifyEvent(InitEvents.RESTORE_BACKUPS);

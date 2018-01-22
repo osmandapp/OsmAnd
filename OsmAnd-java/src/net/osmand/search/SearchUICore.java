@@ -7,6 +7,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.Street;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
@@ -183,6 +184,13 @@ public class SearchUICore {
 
 		public boolean sameSearchResult(SearchResult r1, SearchResult r2) {
 			if (r1.location != null && r2.location != null) {
+				if (r1.objectType == r2.objectType) {
+					if (r1.objectType == ObjectType.STREET) {
+						Street st1 = (Street) r1.object;
+						Street st2 = (Street) r2.object;
+						return st1.getLocation().equals(st2.getLocation());
+					}
+				} 
 				Amenity a1 = null;
 				if (r1.object instanceof Amenity) {
 					a1 = (Amenity) r1.object;
@@ -539,6 +547,10 @@ public class SearchUICore {
 						break;
 					}
 				}
+			}
+			if (Algorithms.isEmpty(object.localeName) && object.alternateName != null) {
+				object.localeName = object.alternateName;
+				object.alternateName = null;
 			}
 			if (matcher == null || matcher.publish(object)) {
 				count++;

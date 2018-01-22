@@ -16,11 +16,11 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.R;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.activities.MapActivity;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	private RenderingLineAttributes attrs;
 
 	private MapLayerData<List<TransportStop>> data;
-	private TransportRoute route = null;
+	private TransportStopRoute stopRoute = null;
 
 	private boolean showTransportStops;
 	private Path path;
@@ -66,8 +66,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		stopBus = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bus);
 		stopSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_small);
 		attrs = new RenderingLineAttributes("transport_route");
-		attrs.defaultWidth = (int) (12 * view.getDensity());
-		attrs.defaultColor = view.getResources().getColor(R.color.transport_route_line);
+		attrs.defaultWidth = (int) (6 * view.getDensity());
 		data = new OsmandMapLayer.MapLayerData<List<TransportStop>>() {
 			{
 				ZOOM_THRESHOLD = 0;
@@ -143,12 +142,12 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		}
 	}
 	
-	public TransportRoute getRoute() {
-		return route;
+	public TransportStopRoute getRoute() {
+		return stopRoute;
 	}
 	
-	public void setRoute(TransportRoute route) {
-		this.route = route;
+	public void setRoute(TransportStopRoute route) {
+		this.stopRoute = route;
 	}
 
 	public boolean isShowTransportStops() {
@@ -175,18 +174,19 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		}
 		return (int) (r * tb.getDensity());
 	}
-	
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		List<TransportStop> objects = null;
 		if (tb.getZoom() >= startZoomRoute) {
-			if (route != null) {
-				objects = route.getForwardStops();
+			if (stopRoute != null) {
+				objects = stopRoute.route.getForwardStops();
+				int color = stopRoute.getColor(mapActivity.getMyApplication(), settings.isNightMode());
+				attrs.paint.setColor(color);
 				attrs.updatePaints(view, settings, tb);
 				try {
 					path.reset();
-					List<Way> ws = route.getForwardWays();
+					List<Way> ws = stopRoute.route.getForwardWays();
 					if (ws != null) {
 						for (Way w : ws) {
 							TIntArrayList tx = new TIntArrayList();
@@ -280,9 +280,14 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res) {
-		if(tileBox.getZoom() >= startZoomRoute  && route != null) {
-			getFromPoint(tileBox, point, res, route.getForwardStops());
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
+	}
+
+	@Override
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res, boolean unknownLocation) {
+		if(tileBox.getZoom() >= startZoomRoute  && stopRoute != null) {
+			getFromPoint(tileBox, point, res, stopRoute.route.getForwardStops());
 		} else if (tileBox.getZoom() >= startZoom && data.getResults() != null) {
 			getFromPoint(tileBox, point, res, data.getResults());
 		} 

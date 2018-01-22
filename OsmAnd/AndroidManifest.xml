@@ -40,7 +40,7 @@
 	<uses-feature android:name="com.sec.feature.spen_usp" android:required="false"/>
 
 	<uses-sdk android:targetSdkVersion="21" android:minSdkVersion="9"
-		tools:overrideLibrary="com.getkeepsafe.taptargetview"/>
+		tools:overrideLibrary="com.getkeepsafe.taptargetview, studio.carbonylgroup.textfieldboxes, android.support.customtabs"/>
 
 	<supports-screens android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true"
 		android:xlargeScreens="true" android:anyDensity="true" />
@@ -175,7 +175,6 @@
 		<activity android:name="net.osmand.plus.activities.SettingsNavigationActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.monitoring.SettingsMonitoringActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.rastermaps.SettingsRasterMapsActivity" android:configChanges="keyboardHidden|orientation" />
-		<activity android:name="net.osmand.plus.routepointsnavigation.RoutePointsActivity" />
 
 		<activity android:name="net.osmand.plus.osmedit.SettingsOsmEditingActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.development.SettingsDevelopmentActivity" android:configChanges="keyboardHidden|orientation" />
@@ -229,8 +228,14 @@
 				<data android:scheme="https" />
 				<data android:host="maps.yandex.ru" />
 				<data android:host="maps.yandex.com" />
-				<data android:host="www.openstreetmap.org" />
-				<data android:host="openstreetmap.org" />
+				<data android:host="www.openstreetmap.org" android:path="/"/> <!-- catches /#map=... -->
+				<data android:host="www.openstreetmap.org" android:pathPrefix="/query"/>
+				<data android:host="www.openstreetmap.org" android:pathPrefix="/go"/>
+				<data android:host="www.openstreetmap.org" android:pathPrefix="/search"/>
+				<data android:host="openstreetmap.org" android:path="/"/> <!-- catches /#map=... -->
+				<data android:host="openstreetmap.org" android:pathPrefix="/query"/>
+				<data android:host="openstreetmap.org" android:pathPrefix="/go"/>
+				<data android:host="openstreetmap.org" android:pathPrefix="/search"/>
 				<data android:host="osm.org" />
 				<data android:host="map.baidu.cn" />
 				<data android:host="map.baidu.com" />

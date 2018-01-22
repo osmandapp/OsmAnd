@@ -90,7 +90,7 @@ public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> implement
                             names.add(NO_INTERNET_CONNECTION);
                             wrong = true;
                         } else {
-                            Pair<String, String> user = new GetMapillaryUserAsyncTask().execute(constraint.toString()).get();
+                            Pair<String, String> user = new GetMapillaryUserAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, constraint.toString()).get();
                             if (user != null) {
                                 settings.MAPILLARY_FILTER_USER_KEY.set(user.first);
                                 settings.MAPILLARY_FILTER_USERNAME.set(user.second);

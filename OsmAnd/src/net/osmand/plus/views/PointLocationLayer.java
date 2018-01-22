@@ -52,7 +52,6 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		locationPaint = new Paint();
 		locationPaint.setAntiAlias(true);
 		locationPaint.setFilterBitmap(true);
-		locationPaint.setDither(true);
 
 		area = new Paint();
 		area.setColor(view.getResources().getColor(R.color.pos_area));
@@ -64,8 +63,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		aroundArea.setAntiAlias(true);
 
 		locationProvider = view.getApplication().getLocationProvider();
-		updateIcons(view.getSettings().getApplicationMode(), false,
-				isLocationOutdated(locationProvider.getLastKnownLocation()));
+		updateIcons(view.getSettings().getApplicationMode(), false, locationProvider.getLastKnownLocation() == null);
 	}
 
 	@Override
@@ -86,9 +84,9 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		}
 		// draw
 		boolean nm = nightMode != null && nightMode.isNightMode();
-		Location lastKnownLocation = locationProvider.getLastKnownLocation();
+		Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
 		updateIcons(view.getSettings().getApplicationMode(), nm,
-				isLocationOutdated(lastKnownLocation));
+				view.getApplication().getLocationProvider().getLastKnownLocation() == null);
 		if(lastKnownLocation == null || view == null){
 			return;
 		}
@@ -114,10 +112,9 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		}
 		// draw bearing/direction/location
 		if (isLocationVisible(box, lastKnownLocation)) {
-			boolean isBearing = lastKnownLocation.hasBearing();
 
 			Float heading = locationProvider.getHeading();
-			if (heading != null && mapViewTrackingUtilities.isShowViewAngle()) {
+			if (!locationOutdated && heading != null && mapViewTrackingUtilities.isShowViewAngle()) {
 
 				canvas.save();
 				canvas.rotate(heading - 180, locationX, locationY);
@@ -126,7 +123,8 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 				canvas.restore();
 
 			}
-			if (isBearing) {
+			boolean isBearing = lastKnownLocation.hasBearing();
+			if (!locationOutdated && isBearing) {
 				float bearing = lastKnownLocation.getBearing();
 				canvas.rotate(bearing - 90, locationX, locationY);
 				canvas.drawBitmap(bearingIcon, locationX - bearingIcon.getWidth() / 2,
@@ -184,7 +182,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
 		if (tileBox.getZoom() >= 3) {
 			getMyLocationFromPoint(tileBox, point, o);
 		}
@@ -214,6 +212,11 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 
 	@Override
 	public boolean isObjectClickable(Object o) {
+		return false;
+	}
+
+	@Override
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
 		return false;
 	}
 

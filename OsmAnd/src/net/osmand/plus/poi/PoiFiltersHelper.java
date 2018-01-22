@@ -73,6 +73,11 @@ public class PoiFiltersHelper {
 		return nominatimAddressFilter;
 	}
 
+	public void resetNominatimFilters() {
+		nominatimPOIFilter = null;
+		nominatimAddressFilter = null;
+	}
+
 	public PoiUIFilter getSearchByNamePOIFilter() {
 		if (searchByNamePOIFilter == null) {
 			PoiUIFilter filter = new SearchByNameFilter(application);

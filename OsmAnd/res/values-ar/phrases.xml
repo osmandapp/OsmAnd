@@ -529,7 +529,7 @@
 	<string name="poi_dish">صحن</string>
 	<string name="poi_payment_transport_type">نوع الدفع (نقل)</string>
 	<string name="poi_social_facility_type">نوع</string>
-	<string name="poi_fuel_type">نوع</string>
+	<string name="poi_fuel_type">نوع الوقود</string>
 	<string name="poi_drive_in">سق في</string>
 	<string name="poi_drive_through">سق عبر</string>
 	<string name="poi_social_facility_for">الفئة المستهدفة</string>
@@ -1582,4 +1582,44 @@
 	<string name="poi_running_track">مسار جري</string>
 	<string name="poi_raceway">مضمار سباق</string>
 	<string name="poi_archery">الرماية</string>
-	</resources>
+	<string name="poi_turning_circle">دائرة دوران</string>
+	<string name="poi_waterway_turning_point">نقطة دوران في مجرى مائي</string>
+	<string name="poi_forest">غابة محمية</string>
+	<string name="poi_brownfield">أرض صناعية سابقة</string>
+	<string name="poi_greenfield">حقل أخضر</string>
+	<string name="poi_works">يعمل</string>
+	<string name="poi_mineshaft">منجم تعدين</string>
+	<string name="poi_adit">ممر منجم</string>
+	<string name="poi_gasometer">مقياس الغاز</string>
+	<string name="poi_silo">صومعة</string>
+	<string name="poi_bailiff">مأمور</string>
+	<string name="poi_baby_hatch">حافظة رضيع</string>
+	<string name="poi_9pin">بولينج 9 دبابيس</string>
+	<string name="poi_10pin">بولينج 10 دبابيس</string>
+	<string name="poi_boules">الكرة الحديدية</string>
+	<string name="poi_cycling">ركوب الدراجات</string>
+	<string name="poi_field_hockey">حقل هوكي</string>
+	<string name="poi_golf">غولف</string>
+	<string name="poi_korfbal">كرة السلة الهولندية</string>
+	<string name="poi_racquet">المضرب</string>
+	<string name="poi_roller_skating">تزحلق بالعجلات</string>
+	<string name="poi_shooting">الرماية</string>
+	<string name="poi_surfing">ركوب الأمواج</string>
+	<string name="poi_artwork">عمل فني</string>
+	<string name="poi_battlefield">ميدان معركة</string>
+	<string name="poi_water_supply_type">نوع إمدادات المياه</string>
+	<string name="poi_water_purification">تنقية المياه</string>
+	<string name="poi_survey_point">نقطة دراسة استقصائية</string>
+	<string name="poi_parking_fee">رسوم الموقف</string>
+
+	<string name="poi_map_type_street">نوع الخريطة: شارع</string>
+	<string name="poi_charging_station_filter">محطة شحن</string>
+
+	<string name="poi_post_street">شارع</string>
+	<string name="poi_post_housenumber">رقم المنزل</string>
+	<string name="poi_post_flats">شقة</string>
+
+	<string name="poi_payment_centre">مركز الدفع</string>
+	<string name="poi_money_transfer">تحويل أموال</string>
+
+</resources>

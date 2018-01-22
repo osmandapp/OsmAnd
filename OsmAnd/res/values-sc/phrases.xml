@@ -646,8 +646,8 @@
 	<string name="poi_car_sharing">Cumpartzidura de veturas</string>
 	<string name="poi_photo">Butega de fotografia</string>
 	<string name="poi_fuel_diesel">Diesel</string>
-	<string name="poi_fuel_gtl_diesel">GTL diesel</string>
-	<string name="poi_fuel_hgv_diesel">HGV diesel</string>
+	<string name="poi_fuel_gtl_diesel">Diesel GTL</string>
+	<string name="poi_fuel_hgv_diesel">Diesel HGV (pro veìculos pesantes)</string>
 	<string name="poi_fuel_biodiesel">Bio diesel</string>
 	<string name="poi_fuel_lpg">LPG</string>
 	<string name="poi_fuel_ethanol">Etanolo</string>
@@ -1904,8 +1904,8 @@
 	<string name="poi_payment_icsf_no">No atzetat cartas IC Stored Fare</string>
 	<string name="poi_spices">Butega de ispètzias</string>
 
-<string name="poi_fuel_type">Casta</string>
-	<string name="poi_fuel_avia_type">Casta</string>
+<string name="poi_fuel_type">Casta de carburante</string>
+	<string name="poi_fuel_avia_type">Casta de carburante (avia)</string>
 	<string name="poi_payment_type">Casta de pagamentu</string>
 	<string name="poi_payment_fuel_type">Cartas carburante</string>
 	<string name="poi_additional_type">Additzionales</string>
@@ -2671,5 +2671,17 @@
 	<string name="poi_boat_canoe_rental_rental_no">Canoas: nono</string>
 
 <string name="poi_network">Retza</string>
+
+<string name="poi_government_legislative">Istitutzione legislativa</string>
+
+<string name="poi_visibility_house">Visibilidade: domo</string>
+	<string name="poi_visibility_street">Visibilidade: istrada</string>
+	<string name="poi_visibility_area">Visibilidade: àrea</string>
+
+<string name="poi_operational_status">Istadu operativu</string>
+	<string name="poi_post_street">Istrada</string>
+	<string name="poi_post_housenumber">Nùmeru tzìvicu</string>
+	<string name="poi_payment_centre">Tzentru de pagamentu</string>
+	<string name="poi_money_transfer">Tramudòngiu de dinare</string>
 
 </resources>

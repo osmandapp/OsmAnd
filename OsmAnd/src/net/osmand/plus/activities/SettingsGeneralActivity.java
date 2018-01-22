@@ -42,6 +42,7 @@ import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment.ChooseAppDirFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment.MoveFilesToDifferentDirectory;
@@ -57,6 +58,12 @@ import java.util.List;
 
 
 public class SettingsGeneralActivity extends SettingsBaseActivity implements OnRequestPermissionsResultCallback {
+
+	private static final String IP_ADDRESS_PATTERN =
+			"^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
 
 	private Preference applicationDir;
 	private ListPreference applicationModePreference;
@@ -160,7 +167,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 					public void onClick(DialogInterface dialog, int which) {
 						if (drs.get(which) == null) {
 							settings.DRIVING_REGION_AUTOMATIC.set(true);
-							MapActivity.getSingleMapViewTrackingUtilities().resetDrivingRegionUpdate();
+							MapViewTrackingUtilities mapViewTrackingUtilities = MapActivity.getSingleMapViewTrackingUtilities();
+							if (mapViewTrackingUtilities != null) {
+								mapViewTrackingUtilities.resetDrivingRegionUpdate();
+							}
 						} else {
 							settings.DRIVING_REGION_AUTOMATIC.set(false);
 							settings.DRIVING_REGION.set(drs.get(which));
@@ -238,6 +248,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				"hr",
 				"hsb",
 				"hu",
+				"hy",
 				"is",
 				"it",
 				"ja",
@@ -288,15 +299,16 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				getString(R.string.lang_es),
 				getString(R.string.lang_es_ar),
 				getString(R.string.lang_es_us),
-				getString(R.string.lang_eu),
+				getString(R.string.lang_eu) + incompleteSuffix,
 				getString(R.string.lang_fa),
 				getString(R.string.lang_fi) + incompleteSuffix,
 				getString(R.string.lang_fr),
-				getString(R.string.lang_gl),
+				getString(R.string.lang_gl) + incompleteSuffix,
 				getString(R.string.lang_he) + incompleteSuffix,
 				getString(R.string.lang_hr) + incompleteSuffix,
 				getString(R.string.lang_hsb) + incompleteSuffix,
 				getString(R.string.lang_hu),
+				getString(R.string.lang_hy),
 				getString(R.string.lang_is) + incompleteSuffix,
 				getString(R.string.lang_it),
 				getString(R.string.lang_ja),
@@ -366,9 +378,15 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		hostPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				settings.PROXY_HOST.set((String) newValue);
-				enableProxy(NetworkUtils.getProxy() != null);
-				return true;
+				String ipAddress = (String) newValue;
+				if (ipAddress.matches(IP_ADDRESS_PATTERN)) {
+					settings.PROXY_HOST.set(ipAddress);
+					enableProxy(NetworkUtils.getProxy() != null);
+					return true;
+				} else {
+					Toast.makeText(SettingsGeneralActivity.this, getString(R.string.wrong_format), Toast.LENGTH_SHORT).show();
+					return false;
+				}
 			}
 		});
 
@@ -473,13 +491,14 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 						OsmandSettings.OSMAND_LIGHT_THEME});
 
 		misc.addPreference(createCheckBoxPreference(settings.USE_KALMAN_FILTER_FOR_COMPASS, R.string.use_kalman_filter_compass, R.string.use_kalman_filter_compass_descr));
+		misc.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS, R.string.use_magnetic_sensor, R.string.use_magnetic_sensor_descr));
+		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_USE_ANIMATIONS, R.string.do_not_use_animations, R.string.do_not_use_animations_descr));
+		misc.addPreference(createCheckBoxPreference(settings.MAP_EMPTY_STATE_ALLOWED, R.string.tap_on_map_to_hide_interface, R.string.tap_on_map_to_hide_interface_descr));
+		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES, R.string.do_not_show_startup_messages, R.string.do_not_show_startup_messages_desc));
 		if (Version.isGooglePlayEnabled(getMyApplication()) && Version.isFreeVersion(getMyApplication())
 				&& !settings.FULL_VERSION_PURCHASED.get() && !settings.LIVE_UPDATES_PURCHASED.get()) {
 			misc.addPreference(createCheckBoxPreference(settings.DO_NOT_SEND_ANONYMOUS_APP_USAGE, R.string.do_not_send_anonymous_app_usage, R.string.do_not_send_anonymous_app_usage_desc));
 		}
-		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES, R.string.do_not_show_startup_messages, R.string.do_not_show_startup_messages_desc));
-		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_USE_ANIMATIONS, R.string.do_not_use_animations, R.string.do_not_use_animations_descr));
-		misc.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS, R.string.use_magnetic_sensor, R.string.use_magnetic_sensor_descr));
 	}
 
 
@@ -572,7 +591,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 						updateSettingsToNewDir(path.getParentFile().getAbsolutePath());
 					}
 				});
-				task.execute();
+				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
 		});
 		builder.setNeutralButton(R.string.shared_string_no, new OnClickListener() {
@@ -614,7 +633,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				setProgressVisibility(false);
 			}
 
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void loadNativeLibrary() {
@@ -640,7 +659,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 						Toast.makeText(SettingsGeneralActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
 					}
 				}
-			}.execute();
+			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 

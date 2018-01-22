@@ -282,7 +282,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 				.setIcon(R.drawable.ic_osmo_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						Intent intent = new Intent(mapActivity, OsMoGroupsActivity.class);
 						mapActivity.startActivity(intent);
 						return true;
@@ -345,14 +345,14 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 					}
 					for (WptPt point : params) {
 						if (point.deleted) {
-							for (WptPt pointInTrack : g.points) {
+							for (WptPt pointInTrack : g.getPoints()) {
 								if (pointInTrack.getExtensionsToRead().get("u").equals(
 										point.getExtensionsToRead().get("u"))) {
-									g.points.remove(pointInTrack);
+									g.deleteWptPt(pointInTrack);
 								}
 							}
 						} else {
-							g.points.add(point);
+							g.addPoint(point);
 						}
 					}
 					errors = GPXUtilities.writeGpxFile(ps, g, app);

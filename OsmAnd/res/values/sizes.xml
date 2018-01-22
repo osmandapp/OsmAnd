@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<dimen name="widget_turn_lane_size">36dp</dimen>
+	<dimen name="widget_turn_lane_border">6dp</dimen>
+	<dimen name="widget_turn_lane_margin">2dp</dimen>
+	<dimen name="widget_turn_lane_min_delta">18dp</dimen>
+
     <dimen name="acceptable_touch_radius">48dp</dimen>
 
 	<dimen name="dialog_button_height">36dp</dimen>
@@ -124,6 +129,29 @@
     <dimen name="context_menu_progress_min_height">54dp</dimen>
     <dimen name="context_menu_progress_cancel_button_size">44dp</dimen>
     <dimen name="context_menu_action_buttons_h">54dp</dimen>
+	<dimen name="context_menu_sub_info_height">24dp</dimen>
+	<dimen name="context_menu_buttons_bottom_height">48dp</dimen>
+	<dimen name="context_menu_padding_margin_large">20dp</dimen>
+	<dimen name="context_menu_padding_margin_default">16dp</dimen>
+	<dimen name="context_menu_padding_margin_medium">10dp</dimen>
+	<dimen name="context_menu_padding_margin_small">8dp</dimen>
+	<dimen name="context_menu_padding_margin_tiny">6dp</dimen>
+	<dimen name="context_menu_title_padding">15dp</dimen>
+	<dimen name="context_menu_controller_height">36dp</dimen>
+	<dimen name="context_menu_progress_padding_left">18dp</dimen>
+	<dimen name="context_menu_progress_padding_right">2dp</dimen>
+	<dimen name="context_menu_action_buttons_height">56dp</dimen>
+	<dimen name="context_menu_subtitle_margin">3dp</dimen>
+	<dimen name="context_menu_direction_margin">12dp</dimen>
+	<dimen name="context_menu_transport_stop_item_height">16dp</dimen>
+	<dimen name="context_menu_main_actions_padding_top">7dp</dimen>
+	<dimen name="context_menu_main_actions_padding_bottom">6dp</dimen>
+	<dimen name="context_menu_main_actions_icon_margin">3dp</dimen>
+	<dimen name="context_menu_transport_grid_spacing">4dp</dimen>
+	<dimen name="context_menu_transport_grid_item_width">32dp</dimen>
+	<dimen name="context_menu_transport_grid_item_height">18dp</dimen>
+	<dimen name="context_menu_transport_icon_size">16dp</dimen>
+	<dimen name="context_menu_transport_padding_top">12dp</dimen>
 
 	<dimen name="fab_size_with_shadow">62dp</dimen>
     <dimen name="fab_margin_right">12dp</dimen>
@@ -133,6 +161,7 @@
     <dimen name="default_list_text_size">16sp</dimen>
     <dimen name="default_desc_text_size">14sp</dimen>
     <dimen name="default_sub_text_size">12sp</dimen>
+	<dimen name="default_sub_text_size_small">10sp</dimen>
 	<dimen name="welcome_header_text_size">23sp</dimen>
 
 	<dimen name="default_split_segments_overview">13sp</dimen>
@@ -143,32 +172,37 @@
 
 	<dimen name="splash_screen_logo_top">150dp</dimen>
 	<dimen name="splash_screen_text_bottom">128dp</dimen>
+	
+	<dimen name="guide_line_text_size">14sp</dimen>
+	<dimen name="guide_line_vertical_offset">6dp</dimen>
 
-	<dimen name="my_places_empty_state_image_margin_top">42dp</dimen>
-	<dimen name="my_places_empty_state_image_margin_bottom">30dp</dimen>
-	<dimen name="my_places_empty_state_text_interval">8dp</dimen>
-	<dimen name="my_places_empty_state_button_margin_top">20dp</dimen>
-	<dimen name="my_places_empty_state_text_size">18sp</dimen>
-	<dimen name="my_places_empty_state_text_desc_size">16sp</dimen>
-	<dimen name="my_places_empty_state_text_desc_margin">45dp</dimen>
-	<dimen name="my_places_empty_state_image_margin_left">92dp</dimen>
-	<dimen name="my_places_empty_state_text_button_padding_left">48dp</dimen>
-	<dimen name="my_places_empty_state_text_button_padding_right">60dp</dimen>
-	<dimen name="my_places_empty_state_text_button_padding_top">64dp</dimen>
+	<dimen name="empty_state_image_margin_top">42dp</dimen>
+	<dimen name="empty_state_image_margin_bottom">30dp</dimen>
+	<dimen name="empty_state_text_interval">8dp</dimen>
+	<dimen name="empty_state_button_margin_top">20dp</dimen>
+	<dimen name="empty_state_text_size">18sp</dimen>
+	<dimen name="empty_state_text_desc_size">16sp</dimen>
+	<dimen name="empty_state_text_desc_margin">45dp</dimen>
+	<dimen name="empty_state_image_margin_left">92dp</dimen>
+	<dimen name="empty_state_text_button_padding_left">48dp</dimen>
+	<dimen name="empty_state_text_button_padding_right">60dp</dimen>
+	<dimen name="empty_state_text_button_padding_top">64dp</dimen>
 
-    <dimen name="measure_distance_bottom_sheet_cancel_button_height">48dp</dimen>
+    <dimen name="bottom_sheet_cancel_button_height">48dp</dimen>
 	<dimen name="landscape_bottom_sheet_dialog_fragment_width">360dp</dimen>
 
 	<dimen name="measurement_tool_select_radius">20dp</dimen>
-	<dimen name="measurement_tool_content_margin">16dp</dimen>
-	<dimen name="measurement_tool_content_margin_small">8dp</dimen>
-	<dimen name="measurement_tool_content_padding">16dp</dimen>
-	<dimen name="measurement_tool_content_padding_small">8dp</dimen>
+	<dimen name="bottom_sheet_content_margin">16dp</dimen>
+	<dimen name="bottom_sheet_content_margin_small">8dp</dimen>
+	<dimen name="content_padding">16dp</dimen>
+	<dimen name="content_padding_small">12dp</dimen>
+	<dimen name="bottom_sheet_content_padding_small">8dp</dimen>
 	<dimen name="measurement_tool_divider_margin">8dp</dimen>
 	<dimen name="measurement_tool_content_padding_medium">12dp</dimen>
-	<dimen name="measurement_tool_text_margin_small">4dp</dimen>
+	<dimen name="text_margin_small">4dp</dimen>
 	<dimen name="measurement_tool_text_margin">8dp</dimen>
 	<dimen name="measurement_tool_points_list_container_height">220dp</dimen>
+	<dimen name="measurement_tool_up_down_row_height">48dp</dimen>
 	<dimen name="measurement_tool_controls_height">52dp</dimen>
 	<dimen name="measurement_tool_text_button_padding_small">12dp</dimen>
 	<dimen name="measurement_tool_text_button_padding">16dp</dimen>
@@ -178,13 +212,50 @@
 	<dimen name="measurement_tool_button_margin">8dp</dimen>
 	<dimen name="measurement_tool_button_padding">8dp</dimen>
 	<dimen name="measurement_tool_button_height">36dp</dimen>
-	<dimen name="measurement_tool_bottom_title_height">52dp</dimen>
-	<dimen name="measurement_tool_bottom_descr_height">44dp</dimen>
-	<dimen name="measurement_tool_bottom_list_item_height">48dp</dimen>
-	<dimen name="measurement_tool_bottom_icon_margin">24dp</dimen>
-	<dimen name="measurement_tool_bottom_divider_margin_top">7dp</dimen>
-	<dimen name="measurement_tool_bottom_divider_margin_bottom">8dp</dimen>
-	<dimen name="measurement_tool_bottom_divider_margin_start">64dp</dimen>
-	<dimen name="measurement_tool_bottom_image_text_margin_start">10dp</dimen>
-	<dimen name="measurement_tool_selected_point_title_height">56dp</dimen>
+	<dimen name="bottom_sheet_title_height">52dp</dimen>
+	<dimen name="bottom_sheet_descr_height">44dp</dimen>
+	<dimen name="bottom_sheet_list_item_height">48dp</dimen>
+	<dimen name="bottom_sheet_icon_margin">24dp</dimen>
+	<dimen name="bottom_sheet_divider_margin_top">7dp</dimen>
+	<dimen name="bottom_sheet_divider_margin_bottom">8dp</dimen>
+	<dimen name="bottom_sheet_divider_margin_start">64dp</dimen>
+	<dimen name="bottom_sheet_image_text_margin_start">10dp</dimen>
+	<dimen name="bottom_sheet_selected_item_title_height">56dp</dimen>
+
+	<dimen name="action_bar_image_width_land">236dp</dimen>
+	<dimen name="action_bar_image_top_margin_land">68dp</dimen>
+	<dimen name="action_bar_image_height">220dp</dimen>
+	<dimen name="action_bar_image_side_margin">70dp</dimen>
+
+	<dimen name="map_markers_recycler_view_padding_bottom">52dp</dimen>
+	<dimen name="map_markers_recycler_view_padding_top">10dp</dimen>
+
+	<dimen name="shadow_height">5dp</dimen>
+	<dimen name="map_marker_title_height">28dp</dimen>
+
+	<dimen name="fab_recycler_view_padding_bottom">88dp</dimen>
+
+	<!--Route info-->
+	<dimen name="route_info_buttons_padding_top_bottom">16dp</dimen>
+	<dimen name="route_info_buttons_padding_left_right">22dp</dimen>
+	<dimen name="route_info_button_go_margin">3dp</dimen>
+	<dimen name="route_info_button_go_drawable_padding">14dp</dimen>
+	<dimen name="route_info_directions_margin">56dp</dimen>
+	<dimen name="route_info_icon_padding_left">12dp</dimen>
+	<dimen name="route_info_icon_padding_right">16dp</dimen>
+	<dimen name="route_info_divider_margin">52dp</dimen>
+	<dimen name="route_info_modes_height">48dp</dimen>
+
+	<dimen name="multi_selection_header_height">52dp</dimen>
+
+	<dimen name="wikipedia_button_left_padding">19dp</dimen>
+
+	<dimen name="multi_selection_menu_padding_top">13dp</dimen>
+	<dimen name="multi_selection_menu_padding_bottom">15dp</dimen>
+
+    <dimen name="grid_menu_item_width">120dp</dimen>
+    <dimen name="grid_menu_item_bottom_top_margin">16dp</dimen>
+    <dimen name="grid_menu_item_sides_margin">40dp</dimen>
+
+	<dimen name="bottom_sheet_menu_peek_height">200dp</dimen>
 </resources>

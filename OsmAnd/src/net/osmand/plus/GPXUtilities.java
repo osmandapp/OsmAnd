@@ -39,6 +39,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -55,6 +56,8 @@ public class GPXUtilities {
 	private final static String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; //$NON-NLS-1$
 
 	private final static NumberFormat latLonFormat = new DecimalFormat("0.00#####", new DecimalFormatSymbols(
+			new Locale("EN", "US")));
+	private final static NumberFormat decimalFormat = new DecimalFormat("#.###", new DecimalFormatSymbols(
 			new Locale("EN", "US")));
 
 	public static class GPXExtensions {
@@ -343,8 +346,8 @@ public class GPXUtilities {
 			double totalSpeedSum = 0;
 			points = 0;
 
-			double channelThresMin = 5;            // Minimum oscillation amplitude considered as noise for Up/Down analysis
-			double channelThres = channelThresMin; // Actual oscillation amplitude considered as noise, try depedency on current hdop/getAccuracy
+			double channelThresMin = 10;           // Minimum oscillation amplitude considered as relevant or as above noise for accumulated Ascent/Descent analysis
+			double channelThres = channelThresMin; // Actual oscillation amplitude considered as above noise (dynamic channel adjustment, accomodates depedency on current VDOP/getAccuracy if desired)
 			double channelBase;
 			double channelTop;
 			double channelBottom;
@@ -359,7 +362,7 @@ public class GPXUtilities {
 				channelBase = 99999;
 				channelTop = channelBase;
 				channelBottom = channelBase;
-				channelThres = channelThresMin;
+				//channelThres = channelThresMin; //only for dynamic channel adjustment
 
 				float segmentDistance = 0f;
 				metricEnd += s.metricEnd;
@@ -423,45 +426,69 @@ public class GPXUtilities {
 						hasSpeedInTrack = true;
 					}
 
-					// Trend channel approach for elevation gain/loss, Hardy 2015-09-22
-					// Self-adjusting turnarund threshold added for testing 2015-09-25: Current rule is now: "All up/down trends of amplitude <X are ignored to smooth the noise, where X is the maximum observed DOP value of any point which contributed to the current trend (but at least 5 m as the minimum noise threshold)".
-					if (!Double.isNaN(point.ele)) {
+					// Trend channel analysis for elevation gain/loss, Hardy 2015-09-22, LPF filtering added 2017-10-26:
+					// - Detect the consecutive elevation trend channels: Only use the net elevation changes of each trend channel (i.e. between the turnarounds) to accumulate the Ascent/Descent values.
+					// - Perform the channel evaluation on Low Pass Filter (LPF) smoothed ele data instead of on the raw ele data
+					// Parameters:
+					// - channelThresMin (in meters): defines the channel turnaround detection, i.e. oscillations smaller than this are ignored as irrelevant or noise.
+					// - smoothWindow (number of points): is the LPF window
+					// NOW REMOVED, as no relevant examples found: Dynamic channel adjustment: To suppress unreliable measurement points, could relax the turnaround detection from the constant channelThresMin to channelThres which is e.g. based on the maximum VDOP of any point which contributed to the current trend. (Good assumption is VDOP=2*HDOP, which accounts for invisibility of lower hemisphere satellites.)
+
+					// LPF smooting of ele data, usually smooth over odd number of values like 5
+					final int smoothWindow = 5;
+					double eleSmoothed = Double.NaN;
+					int j2 = 0;
+					for (int j1 = - smoothWindow + 1; j1 <= 0; j1++) {
+						if ((j + j1 >= 0) && !Double.isNaN(s.get(j + j1).ele)) {
+							j2++;
+							if (!Double.isNaN(eleSmoothed)) {
+								eleSmoothed = eleSmoothed + s.get(j + j1).ele;
+							} else {
+								eleSmoothed = s.get(j + j1).ele;
+							}
+						}
+					}
+					if (!Double.isNaN(eleSmoothed)) {
+						eleSmoothed = eleSmoothed / j2;
+					}
+
+					if (!Double.isNaN(eleSmoothed)) {
 						// Init channel
 						if (channelBase == 99999) {
-							channelBase = point.ele;
+							channelBase = eleSmoothed;
 							channelTop = channelBase;
 							channelBottom = channelBase;
-							channelThres = channelThresMin;
+							//channelThres = channelThresMin; //only for dynamic channel adjustment
 						}
 						// Channel maintenance
-						if (point.ele > channelTop) {
-							channelTop = point.ele;
-							if (!Double.isNaN(point.hdop)) {
-								channelThres = Math.max(channelThres, 2.0 * point.hdop);  //Use empirical 2*getAccuracy(vertical), this better serves very flat tracks or high dop tracks
-							}
-						} else if (point.ele < channelBottom) {
-							channelBottom = point.ele;
-							if (!Double.isNaN(point.hdop)) {
-								channelThres = Math.max(channelThres, 2.0 * point.hdop);
-							}
+						if (eleSmoothed > channelTop) {
+							channelTop = eleSmoothed;
+							//if (!Double.isNaN(point.hdop)) {
+							//	channelThres = Math.max(channelThres, 2.0 * point.hdop); //only for dynamic channel adjustment
+							//}
+						} else if (eleSmoothed < channelBottom) {
+							channelBottom = eleSmoothed;
+							//if (!Double.isNaN(point.hdop)) {
+							//	channelThres = Math.max(channelThres, 2.0 * point.hdop); //only for dynamic channel adjustment
+							//}
 						}
 						// Turnaround (breakout) detection
-						if ((point.ele <= (channelTop - channelThres)) && (climb == true)) {
+						if ((eleSmoothed <= (channelTop - channelThres)) && (climb == true)) {
 							if ((channelTop - channelBase) >= channelThres) {
 								diffElevationUp += channelTop - channelBase;
 							}
 							channelBase = channelTop;
-							channelBottom = point.ele;
+							channelBottom = eleSmoothed;
 							climb = false;
-							channelThres = channelThresMin;
-						} else if ((point.ele >= (channelBottom + channelThres)) && (climb == false)) {
+							//channelThres = channelThresMin; //only for dynamic channel adjustment
+						} else if ((eleSmoothed >= (channelBottom + channelThres)) && (climb == false)) {
 							if ((channelBase - channelBottom) >= channelThres) {
 								diffElevationDown += channelBase - channelBottom;
 							}
 							channelBase = channelBottom;
-							channelTop = point.ele;
+							channelTop = eleSmoothed;
 							climb = true;
-							channelThres = channelThresMin;
+							//channelThres = channelThresMin; //only for dynamic channel adjustment
 						}
 						// End detection without breakout
 						if (j == (numberOfPoints - 1)) {
@@ -745,7 +772,7 @@ public class GPXUtilities {
 	public static class GPXFile extends GPXExtensions {
 		public String author;
 		public List<Track> tracks = new ArrayList<>();
-		public List<WptPt> points = new ArrayList<>();
+		private List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
 
 		public String warning = null;
@@ -755,6 +782,37 @@ public class GPXUtilities {
 
 		private Track generalTrack;
 		private TrkSegment generalSegment;
+
+		public List<WptPt> getPoints() {
+			return Collections.unmodifiableList(points);
+		}
+
+		public boolean isPointsEmpty() {
+			return points.isEmpty();
+		}
+
+		int getPointsSize() {
+			return points.size();
+		}
+
+		boolean containsPoint(WptPt point) {
+			return points.contains(point);
+		}
+
+		void clearPoints() {
+			points.clear();
+			modifiedTime = System.currentTimeMillis();
+		}
+
+		public void addPoint(WptPt point) {
+			points.add(point);
+			modifiedTime = System.currentTimeMillis();
+		}
+
+		void addPoints(Collection<? extends WptPt> collection) {
+			points.addAll(collection);
+			modifiedTime = System.currentTimeMillis();
+		}
 
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);
@@ -980,7 +1038,6 @@ public class GPXUtilities {
 		}
 
 		private void removeGeneralTrackIfExists() {
-			Track generalTrack = getGeneralTrack();
 			if (generalTrack != null) {
 				tracks.remove(generalTrack);
 				this.generalTrack = null;
@@ -1170,20 +1227,22 @@ public class GPXUtilities {
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
 
 			for (Track track : file.tracks) {
-				serializer.startTag(null, "trk"); //$NON-NLS-1$
-				writeNotNullText(serializer, "name", track.name);
-				writeNotNullText(serializer, "desc", track.desc);
-				for (TrkSegment segment : track.segments) {
-					serializer.startTag(null, "trkseg"); //$NON-NLS-1$
-					for (WptPt p : segment.points) {
-						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
-						writeWpt(format, serializer, p);
-						serializer.endTag(null, "trkpt"); //$NON-NLS-1$
+				if (!track.generalTrack) {
+					serializer.startTag(null, "trk"); //$NON-NLS-1$
+					writeNotNullText(serializer, "name", track.name);
+					writeNotNullText(serializer, "desc", track.desc);
+					for (TrkSegment segment : track.segments) {
+						serializer.startTag(null, "trkseg"); //$NON-NLS-1$
+						for (WptPt p : segment.points) {
+							serializer.startTag(null, "trkpt"); //$NON-NLS-1$
+							writeWpt(format, serializer, p);
+							serializer.endTag(null, "trkpt"); //$NON-NLS-1$
+						}
+						serializer.endTag(null, "trkseg"); //$NON-NLS-1$
 					}
-					serializer.endTag(null, "trkseg"); //$NON-NLS-1$
+					writeExtensions(serializer, track);
+					serializer.endTag(null, "trk"); //$NON-NLS-1$
 				}
-				writeExtensions(serializer, track);
-				serializer.endTag(null, "trk"); //$NON-NLS-1$
 			}
 
 			for (Route track : file.routes) {
@@ -1242,7 +1301,7 @@ public class GPXUtilities {
 		serializer.attribute(null, "lon", latLonFormat.format(p.lon)); //$NON-NLS-1$ //$NON-NLS-2$
 
 		if (!Double.isNaN(p.ele)) {
-			writeNotNullText(serializer, "ele", (float) p.ele + "");
+			writeNotNullText(serializer, "ele", decimalFormat.format(p.ele));
 		}
 		if (p.time != 0) {
 			writeNotNullText(serializer, "time", format.format(new Date(p.time)));
@@ -1259,10 +1318,10 @@ public class GPXUtilities {
 			writeNotNullText(serializer, "cmt", p.comment);
 		}
 		if (!Double.isNaN(p.hdop)) {
-			writeNotNullText(serializer, "hdop", p.hdop + "");
+			writeNotNullText(serializer, "hdop", decimalFormat.format(p.hdop));
 		}
 		if (p.speed > 0) {
-			p.getExtensionsToWrite().put("speed", p.speed + "");
+			p.getExtensionsToWrite().put("speed", decimalFormat.format(p.speed));
 		}
 		writeExtensions(serializer, p);
 	}
@@ -1413,6 +1472,26 @@ public class GPXUtilities {
 								WptPt wptPt = parseWptAttributes(parser);
 								((TrkSegment) parse).points.add(wptPt);
 								parserState.push(wptPt);
+							}
+							if (parser.getName().equals("csvattributes")) {
+								String segmentPoints = readText(parser, "csvattributes");
+								String[] pointsArr = segmentPoints.split("\n");
+								for (int i = 0; i < pointsArr.length; i++) {
+									String[] pointAttrs = pointsArr[i].split(",");
+									try {
+										int arrLength = pointsArr.length;
+										if (arrLength > 1) {
+											WptPt wptPt = new WptPt();
+											wptPt.lon = Double.parseDouble(pointAttrs[0]);
+											wptPt.lat = Double.parseDouble(pointAttrs[1]);
+											((TrkSegment) parse).points.add(wptPt);
+											if (arrLength > 2) {
+												wptPt.ele = Double.parseDouble(pointAttrs[2]);
+											}
+										}
+									} catch (NumberFormatException e) {
+									}
+								}
 							}
 							// main object to parse
 						} else if (parse instanceof WptPt) {

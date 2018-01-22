@@ -1,7 +1,6 @@
 package net.osmand.plus.views;
 
 import android.app.Dialog;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -15,11 +14,11 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -35,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -290,13 +290,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		return true;
 	}
 
-	public static void showWikipediaDialog(Context ctx, OsmandApplication app, Amenity a) {
-		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-		if (a.getType().isWiki()) {
-			showWiki(ctx, app, a, lang);
-		}
-	}
-
 	public static void showDescriptionDialog(Context ctx, OsmandApplication app, String text, String title) {
 		showText(ctx, app, text, title);
 	}
@@ -308,122 +301,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		final TypedValue typedvalueattr = new TypedValue();
 		ctx.getTheme().resolveAttribute(attr, typedvalueattr, true);
 		return typedvalueattr.resourceId;
-	}
-	
-
-	@SuppressWarnings("deprecation")
-	private static void showWiki(final Context ctx, final OsmandApplication app, final Amenity a, final String lang) {
-		String preferredLang = lang;
-		if (Algorithms.isEmpty(preferredLang)) {
-			preferredLang = app.getLanguage();
-		}
-		final Dialog dialog = new Dialog(ctx,
-				app.getSettings().isLightContent() ?
-						R.style.OsmandLightTheme :
-						R.style.OsmandDarkTheme);
-		final String title = Algorithms.isEmpty(lang) ? a.getName() : a.getName(lang);
-		LinearLayout ll = new LinearLayout(ctx);
-		ll.setOrientation(LinearLayout.VERTICAL);
-
-		final Toolbar topBar = new Toolbar(ctx);
-		topBar.setClickable(true);
-		Drawable back = app.getIconsCache().getIcon(R.drawable.ic_arrow_back);
-		topBar.setNavigationIcon(back);
-		topBar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		topBar.setTitle(title);
-		topBar.setBackgroundColor(ContextCompat.getColor(ctx, getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
-		topBar.setTitleTextColor(ContextCompat.getColor(ctx, getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
-
-		String lng = a.getContentLanguage("content", preferredLang, "en");
-		if (Algorithms.isEmpty(lng)) {
-			lng = "en";
-		}
-
-		final String langSelected = lng;
-		String content = a.getDescription(langSelected);
-		final Button bottomBar = new Button(ctx);
-		bottomBar.setText(R.string.read_full_article);
-		bottomBar.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				String article = "https://" + langSelected.toLowerCase() + ".wikipedia.org/wiki/" + title.replace(' ', '_');
-				Intent i = new Intent(Intent.ACTION_VIEW);
-				i.setData(Uri.parse(article));
-				ctx.startActivity(i);
-			}
-		});
-		MenuItem mi = topBar.getMenu().add(langSelected.toUpperCase()).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(final MenuItem item) {
-				showPopupLangMenu(ctx, topBar, app, a, dialog, langSelected);
-				return true;
-			}
-		});
-		MenuItemCompat.setShowAsAction(mi, MenuItem.SHOW_AS_ACTION_ALWAYS);
-		topBar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View v) {
-				dialog.dismiss();
-			}
-		});
-		final WebView wv = new WebView(ctx);
-		WebSettings settings = wv.getSettings();
-		settings.setDefaultTextEncodingName("utf-8");
-
-		settings.setBuiltInZoomControls(true);
-		settings.setDisplayZoomControls(false);
-		settings.setSupportZoom(true);
-
-		//Scale web view font size with system font size
-		float scale = ctx.getResources().getConfiguration().fontScale;
-		if (android.os.Build.VERSION.SDK_INT >= 14) {
-			settings.setTextZoom((int) (scale * 100f));
-		} else {
-			if (scale <= 0.7f) {
-				settings.setTextSize(WebSettings.TextSize.SMALLEST);
-			} else if (scale <= 0.85f) {
-				settings.setTextSize(WebSettings.TextSize.SMALLER);
-			} else if (scale <= 1.0f) {
-				settings.setTextSize(WebSettings.TextSize.NORMAL);
-			} else if (scale <= 1.15f) {
-				settings.setTextSize(WebSettings.TextSize.LARGER);
-			} else {
-				settings.setTextSize(WebSettings.TextSize.LARGEST);
-			}
-		}
-
-		wv.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
-//		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
-		//For pinch zooming to work WebView must not be inside ScrollView
-		//ScrollView scrollView = new ScrollView(ctx);
-		ll.addView(topBar);
-		LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, 0);
-		lp.weight = 1;
-		//ll.addView(scrollView, lp);
-		//scrollView.addView(wv);
-		ll.addView(wv, lp);
-		ll.addView(bottomBar, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-		dialog.setContentView(ll);
-		wv.setFocusable(true);
-		wv.setFocusableInTouchMode(true);
-		wv.requestFocus(View.FOCUS_DOWN);
-		wv.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				switch (event.getAction()) {
-					case MotionEvent.ACTION_DOWN:
-					case MotionEvent.ACTION_UP:
-						if (!v.hasFocus()) {
-							v.requestFocus();
-						}
-						break;
-				}
-				return false;
-			}
-		});
-
-		dialog.setCancelable(true);
-		dialog.show();
 	}
 
 	private static void showText(final Context ctx, final OsmandApplication app, final String text, String title) {
@@ -472,56 +349,20 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		dialog.show();
 	}
 
-	protected static void showPopupLangMenu(final Context ctx, Toolbar tb,
-											final OsmandApplication app, final Amenity a,
-											final Dialog dialog, final String langSelected) {
-		final PopupMenu optionsMenu = new PopupMenu(ctx, tb, Gravity.RIGHT);
-		Set<String> namesSet = new TreeSet<>();
-		namesSet.addAll(a.getNames("content", "en"));
-		namesSet.addAll(a.getNames("description", "en"));
-
-		Map<String, String> names = new HashMap<>();
-		for (String n : namesSet) {
-			names.put(n, FileNameTranslationHelper.getVoiceName(ctx, n));
-		}
-		String selectedLangName = names.get(langSelected);
-		if (selectedLangName != null) {
-			names.remove(langSelected);
-		}
-		Map<String, String> sortedNames = AndroidUtils.sortByValue(names);
-
-		if (selectedLangName != null) {
-			MenuItem item = optionsMenu.getMenu().add(selectedLangName);
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					dialog.dismiss();
-					showWiki(ctx, app, a, langSelected);
-					return true;
-				}
-			});
-		}
-		for (final Map.Entry<String, String> e : sortedNames.entrySet()) {
-			MenuItem item = optionsMenu.getMenu().add(e.getValue());
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					dialog.dismiss();
-					showWiki(ctx, app, a, e.getKey());
-					return true;
-				}
-			});
-		}
-		optionsMenu.show();
-
-	}
-
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof Amenity) {
-			return new PointDescription(PointDescription.POINT_TYPE_POI, ((Amenity) o).getName(
-					view.getSettings().MAP_PREFERRED_LOCALE.get(),
-					view.getSettings().MAP_TRANSLITERATE_NAMES.get()));
+			Amenity a = (Amenity) o;
+			String preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+			String preferredMapAppLang = preferredMapLang;
+			if (Algorithms.isEmpty(preferredMapAppLang)) {
+				preferredMapAppLang = app.getLanguage();
+			}
+			boolean transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+
+			return new PointDescription(PointDescription.POINT_TYPE_POI, a.getName(
+					a.getType().isWiki() ? preferredMapAppLang : preferredMapLang,
+					transliterateNames));
 		}
 		return null;
 	}
@@ -537,7 +378,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects, boolean unknownLocation) {
 		if (tileBox.getZoom() >= startZoom) {
 			getAmenityFromPoint(tileBox, point, objects);
 		}
@@ -554,6 +395,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public boolean isObjectClickable(Object o) {
 		return o instanceof Amenity;
+	}
+
+	@Override
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
+		return false;
 	}
 
 	@Override

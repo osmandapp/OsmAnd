@@ -157,13 +157,13 @@ public class ConfigureMapMenu {
 					adapter.notifyDataSetChanged();
 					return false;
 				} else {
-					return onContextMenuClick(adapter, itemId, pos, false);
+					return onContextMenuClick(adapter, itemId, pos, false, null);
 				}
 			}
 		}
 
 		@Override
-		public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked) {
+		public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
 			final OsmandSettings settings = ma.getMyApplication().getSettings();
 			final PoiFiltersHelper poiFiltersHelper = ma.getMyApplication().getPoiFilters();
 			final ContextMenuItem item = cm.getItem(pos);
@@ -271,6 +271,13 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_info_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
+		selected = settings.SHOW_POI_LABEL.get();
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.layer_amenity_label, activity)
+				.setSelected(settings.SHOW_POI_LABEL.get())
+				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setIcon(R.drawable.ic_action_text_dark)
+				.setListener(l).createItem());
 
 		/*
 		ContextMenuItem item = createProperties(customRules, null, R.string.rendering_category_transport, R.drawable.ic_action_bus_dark,
@@ -324,14 +331,14 @@ public class ConfigureMapMenu {
 								adapter.notifyDataSetChanged();
 								return false;
 							} else {
-								return onContextMenuClick(adapter, itemId, position, false);
+								return onContextMenuClick(adapter, itemId, position, false, null);
 							}
 						}
 					}
 
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
-													  final int pos, boolean isChecked) {
+													  final int pos, boolean isChecked, int[] viewCoordinates) {
 						if (transportSelectedInner) {
 							for (int i = 0; i < transportPrefs.size(); i++) {
 								transportPrefs.get(i).set(false);
@@ -451,13 +458,6 @@ public class ConfigureMapMenu {
 						b.show();
 					}
 				}).createItem());
-		selected = settings.SHOW_POI_LABEL.get();
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.layer_amenity_label, activity)
-				.setSelected(settings.SHOW_POI_LABEL.get())
-				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setIcon(R.drawable.ic_action_text_dark)
-				.setListener(l).createItem());
 		selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_gpx_layer, activity)
@@ -499,7 +499,7 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_map).setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
-													  final int pos, boolean isChecked) {
+													  final int pos, boolean isChecked, int[] viewCoordinates) {
 						AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 						bld.setTitle(R.string.renderers);
 						final OsmandApplication app = activity.getMyApplication();
@@ -552,7 +552,7 @@ public class ConfigureMapMenu {
 				.setIcon(getDayNightIcon(activity)).setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
-													  final int pos, boolean isChecked) {
+													  final int pos, boolean isChecked, int[] viewCoordinates) {
 						final OsmandMapTileView view = activity.getMapView();
 						AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 						bld.setTitle(R.string.daynight);
@@ -588,7 +588,7 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_map_magnifier).setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
-													  final int pos, boolean isChecked) {
+													  final int pos, boolean isChecked, int[] viewCoordinates) {
 						final OsmandMapTileView view = activity.getMapView();
 						final OsmandSettings.OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
 						final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
@@ -651,7 +651,7 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_map_text_size).setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
-													  final int pos, boolean isChecked) {
+													  final int pos, boolean isChecked, int[] viewCoordinates) {
 						final OsmandMapTileView view = activity.getMapView();
 						AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
 						// test old descr as title
@@ -690,7 +690,7 @@ public class ConfigureMapMenu {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
-													  final int pos, boolean isChecked) {
+													  final int pos, boolean isChecked, int[] viewCoordinates) {
 						final OsmandMapTileView view = activity.getMapView();
 						final AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
 
@@ -809,7 +809,7 @@ public class ConfigureMapMenu {
 		}
 	}
 
-	public static String[] mapNamesIds = new String[]{"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "ko", "ku", "la", "lb", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "os", "pl", "pms", "pt", "ro", "ru", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
+	public static String[] mapNamesIds = new String[]{"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "os", "pl", "pms", "pt", "ro", "ru", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
 
 	public static String[] getSortedMapNamesIds(Context ctx, String[] ids, String[] values) {
 		final Map<String, String> mp = new HashMap<>();
@@ -889,7 +889,7 @@ public class ConfigureMapMenu {
 			final ItemClickListener clickListener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a, int itemId, int pos,
-												  boolean isChecked) {
+												  boolean isChecked, int[] viewCoordinates) {
 					if (!isChecked && !useDescription) {
 						if (defaultSettings != null) {
 							defaultSettings.set("");
@@ -939,8 +939,8 @@ public class ConfigureMapMenu {
 			} else {
 				builder.setListener(new OnRowItemClick() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a, int itemId, int pos, boolean isChecked) {
-						return clickListener.onContextMenuClick(a, itemId, pos, isChecked);
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+						return clickListener.onContextMenuClick(a, itemId, pos, isChecked, null);
 					}
 
 					@Override
@@ -1210,7 +1210,7 @@ public class ConfigureMapMenu {
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 						@Override
-						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 							pref.set(!pref.get());
 							refreshMapComplete(activity);
 							return false;
@@ -1233,7 +1233,7 @@ public class ConfigureMapMenu {
 
 						@Override
 						public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad,
-														  final int itemId, final int pos, boolean isChecked) {
+														  final int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
 							AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
 							// test old descr as title
 							b.setTitle(propertyDescr);

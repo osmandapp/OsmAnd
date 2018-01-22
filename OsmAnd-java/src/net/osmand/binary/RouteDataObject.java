@@ -685,21 +685,34 @@ public class RouteDataObject {
 		return direction;
 	}
 
-	public boolean isStopDirectionOpposite(boolean direction) {
-		for(int i=0; i<types.length; i++) {
-			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if (r.getTag().equals("highway") && r.getValue().equals("stop")) {
-				for (int j=0; j<types.length; j++) {
-					if (direction = true && r.getTag().equals("direction") && r.getValue().equals("backward")) {
-						return true;
-					}
-					if (direction = false && r.getTag().equals("direction") && r.getValue().equals("forward")) {
-						return true;
-					}
+	public boolean isStopApplicable(boolean direction, int intId, int startPointInd, int endPointInd) {
+		int[] pt = getPointTypes(intId);
+		int sz = pt.length;
+		for (int i = 0; i < sz; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(pt[i]);
+			// Evaluate direction tag if present
+			if (r.getTag().equals("direction")) {
+				String dv = r.getValue();
+				if ((dv.equals("forward") && direction == true) || (dv.equals("backward") && direction == false)) {
+					return true;
+				} else if ((dv.equals("forward") && direction == false) || (dv.equals("backward") && direction == true)) {
+					return false;
 				}
 			}
+			// Tagging stop=all should be ok anyway, usually tagged on intersection node itself, so not needed here
+			//if (r.getTag().equals("stop") && r.getValue().equals("all")) {
+			//	return true;
+			//}
 		}
-		return false;
+		// Heuristic fallback: Distance analysis for STOP with no recognized directional tagging:
+		// Mask STOPs closer to the start than to the end of the routing segment if it is within 50m of start, but do not mask STOPs mapped directly on start/end (likely intersection node)
+		double d2Start = distance(startPointInd, intId);
+		double d2End = distance(intId, endPointInd);
+		if ((d2Start < d2End) && d2Start != 0 && d2End != 0 && d2Start < 50) {
+			return false;
+		}
+		// No directional info detected
+		return true;
 	}
 
 	public double distance(int startPoint, int endPoint) {

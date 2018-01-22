@@ -361,7 +361,7 @@ public class LocalIndexHelper {
 		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up, 30),
 		FONT_DATA(R.string.fonts_header, R.drawable.ic_action_map_language, 35),
 		DEACTIVATED(R.string.local_indexes_cat_backup, R.drawable.ic_type_archive, 1000);
-//		AV_DATA(R.string.local_indexes_cat_av);;
+//		AV_DATA(R.string.local_indexes_cat_av);
 
 		@StringRes
 		private final int resId;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout
-    android:id="@+id/drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/mapBackground">
@@ -43,13 +43,17 @@
         <FrameLayout
             android:id="@+id/MapHudButtonsOverlay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
 
-            <include layout="@layout/map_hud_top"/>
+            <include layout="@layout/map_hud_top"
+                android:id="@+id/MapHudButtonsOverlayTop"/>
 
-            <include layout="@layout/map_hud_bottom"/>
+            <include layout="@layout/map_hud_bottom"
+                android:id="@+id/MapHudButtonsOverlayBottom"/>
 
-            <include layout="@layout/map_hud_quick_actions"/>
+            <include layout="@layout/map_hud_quick_actions"
+                android:id="@+id/MapHudButtonsOverlayQuickActions"/>
         </FrameLayout>
 
         <FrameLayout
@@ -105,6 +109,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="left"
         android:background="?attr/bg_color"
-        android:drawSelectorOnTop="true" />
+        android:clipToPadding="false"
+        android:drawSelectorOnTop="true"/>
 
 </android.support.v4.widget.DrawerLayout>

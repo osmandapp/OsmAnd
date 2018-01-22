@@ -26,9 +26,12 @@ public class Amenity extends MapObject {
 	public static final String WEBSITE = "website";
 	public static final String PHONE = "phone";
 	public static final String DESCRIPTION = "description";
+	public static final String ROUTE = "route";
 	public static final String OPENING_HOURS = "opening_hours";
 	public static final String CONTENT = "content";
 	public static final String CUISINE = "cuisine";
+	public static final String OSM_DELETE_VALUE = "delete";
+	public static final String OSM_DELETE_TAG = "osmand_change";
 
 	private String subType;
 	private PoiCategory type;
@@ -306,5 +309,9 @@ public class Amenity extends MapObject {
 			x = new TIntArrayList();
 		}
 		return x;
+	}
+
+	public boolean isClosed() {
+		return OSM_DELETE_VALUE.equals(getAdditionalInfo(OSM_DELETE_TAG));
 	}
 }

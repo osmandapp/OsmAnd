@@ -3,6 +3,8 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -11,6 +13,8 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
+
+import java.util.Map;
 
 public class RenderedObjectMenuController extends MenuController {
 
@@ -45,7 +49,7 @@ public class RenderedObjectMenuController extends MenuController {
 	}
 
 	@Override
-	public int getLeftIconId() {
+	public int getRightIconId() {
 		if (renderedObject.getIconRes() != null && RenderingIcons.containsBigIcon(renderedObject.getIconRes())) {
 			return RenderingIcons.getBigIconResourceId(renderedObject.getIconRes());
 		} else {
@@ -55,10 +59,10 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		if (!Algorithms.isEmpty(renderedObject.getName())) {
+		if (!Algorithms.isEmpty(renderedObject.getName()) && !isStartingWithRTLChar(renderedObject.getName())) {
 			return renderedObject.getName();
 		} else if (renderedObject.getTags().size() > 0) {
-			String lang = getMapActivity().getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get().toLowerCase();
+			String lang = getPreferredMapLang().toLowerCase();
 			String name = "";
 			if (!Algorithms.isEmpty(lang)) {
 				name = renderedObject.getTags().get("name:" + lang);
@@ -67,6 +71,8 @@ public class RenderedObjectMenuController extends MenuController {
 				name = renderedObject.getTags().get("name");
 			}
 			return name;
+		} else if (!Algorithms.isEmpty(renderedObject.getName())) {
+			return renderedObject.getName();
 		}
 		return "";
 	}
@@ -83,6 +89,17 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, final LatLon latLon) {
+
+		MapPoiTypes poiTypes = getMapActivity().getMyApplication().getPoiTypes();
+		for (Map.Entry<String, String> entry : renderedObject.getTags().entrySet()) {
+			if (entry.getKey().equalsIgnoreCase("maxheight")) {
+				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(entry.getKey());
+				if (pt != null) {
+					addPlainMenuItem(R.drawable.ic_action_note_dark, null, pt.getTranslation() + ": " + entry.getValue(), false, false, null);
+				}
+			}
+		}
+
 		boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
 		if (osmEditingEnabled && renderedObject.getId() != null
 				&& renderedObject.getId() > 0 && 
@@ -93,8 +110,17 @@ public class RenderedObjectMenuController extends MenuController {
 			} else {
 				link = "https://www.openstreetmap.org/way/";
 			}
-			addPlainMenuItem(R.drawable.ic_action_info_dark, link + (renderedObject.getId() >> 7), true, true, null);
+			addPlainMenuItem(R.drawable.ic_action_info_dark, null, link + (renderedObject.getId() >> 7), true, true, null);
 		}
 		addMyLocationToPlainItems(latLon);
 	}
+
+	private boolean isStartingWithRTLChar(String s) {
+		byte directionality = Character.getDirectionality(s.charAt(0));
+		return directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT
+				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC
+				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_EMBEDDING
+				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_OVERRIDE;
+	}
+
 }

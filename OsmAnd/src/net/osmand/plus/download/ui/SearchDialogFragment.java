@@ -349,7 +349,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					CityItem item = (CityItem) obj;
 					viewHolder.bindIndexItem(item);
 					if (item.getIndexItem() == null) {
-						new IndexItemResolverTask(viewHolder, item).execute();
+						new IndexItemResolverTask(viewHolder, item).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 					}
 				}
 			} else {

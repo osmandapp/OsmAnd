@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
@@ -85,7 +86,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			
 			@Override
 			public void onClick(View v) {
-				dashboard.setDashboardVisibility(true, DashboardType.WAYPOINTS);
+				dashboard.setDashboardVisibility(true, DashboardType.WAYPOINTS, AndroidUtils.getCenterViewCoordinates(v));
 			}
 		});
 		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.items);

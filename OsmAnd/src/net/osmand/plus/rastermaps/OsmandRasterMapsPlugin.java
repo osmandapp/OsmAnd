@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
@@ -241,18 +242,19 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+				int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
 				if (itemId == R.string.layer_overlay) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.OVERLAY_MAP);
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.OVERLAY_MAP, viewCoordinates);
 					return false;
 				} else if (itemId == R.string.layer_underlay) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.UNDERLAY_MAP);
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.UNDERLAY_MAP, viewCoordinates);
 					return false;
 				}
 				return true;
 			}
 
 			@Override
-			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked) {
+			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
 				final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 				switch (itemId) {
 					case R.string.layer_overlay:
@@ -346,7 +348,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (mapView.getMainLayer() instanceof MapTileLayer) {
 			ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
-				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked, int[] viewCoordinates) {
 					if (resId == R.string.context_menu_item_update_map) {
 						mapActivity.getMapActions().reloadTile(mapView.getZoom(), latitude, longitude);
 					} else if (resId == R.string.shared_string_download_map) {
@@ -436,7 +438,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				builder.show();
 			}
 		};
-		t.execute();
+		t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public static void defineNewEditLayer(final Activity activity, final ResultMatcher<TileSourceTemplate> resultMatcher) {

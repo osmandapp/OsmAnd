@@ -39,7 +39,7 @@ public class OsmBugMenuController extends MenuController {
 		} else {
 			leftTitleButtonController.caption = getMapActivity().getString(R.string.poi_dialog_reopen);
 		}
-		leftTitleButtonController.leftIconId = R.drawable.ic_action_note_dark;
+		leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_note_dark, true);
 
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
@@ -50,7 +50,7 @@ public class OsmBugMenuController extends MenuController {
 			}
 		};
 		rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_close);
-		rightTitleButtonController.leftIconId = R.drawable.ic_action_remove_dark;
+		rightTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_remove_dark, true);
 
 		updateData();
 	}
@@ -73,7 +73,7 @@ public class OsmBugMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		if (bug.isOpened()) {
 			return getIcon(R.drawable.ic_action_gabout_dark, R.color.osm_bug_unresolved_icon_color);
 		} else {
@@ -95,7 +95,7 @@ public class OsmBugMenuController extends MenuController {
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
 		for (String description : bug.getCommentDescriptionList()) {
-			addPlainMenuItem(R.drawable.ic_action_note_dark, description, true, false, null);
+			addPlainMenuItem(R.drawable.ic_action_note_dark, null, description, true, false, null);
 		}
 	}
 

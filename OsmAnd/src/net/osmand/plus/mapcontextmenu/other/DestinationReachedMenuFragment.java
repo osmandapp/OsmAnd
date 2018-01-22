@@ -16,6 +16,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -81,6 +82,9 @@ public class DestinationReachedMenuFragment extends Fragment {
 						getMapActivity().getContextMenu().close();
 					}
 				}
+				OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
+				settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
+				getMapActivity().getMapActions().stopNavigationWithoutConfirm();
 				dismissMenu();
 			}
 		});
@@ -182,7 +186,6 @@ public class DestinationReachedMenuFragment extends Fragment {
 	}
 
 	public void dismissMenu() {
-		getMapActivity().getMapActions().stopNavigationWithoutConfirm();
 		getMapActivity().getSupportFragmentManager().popBackStack();
 	}
 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/scroll_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/bottom_sheet_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:behavior_hideable="true"
+            app:layout_behavior="net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior"
+            tools:background="?attr/bg_color">
+
+            <LinearLayout
+                android:id="@+id/context_menu_items_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/bottom_sheet_content_padding_small"/>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <LinearLayout
+        android:id="@+id/cancel_row_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:background="?attr/bg_color">
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            tools:background="?attr/dashboard_divider"/>
+
+        <FrameLayout
+            android:id="@+id/cancel_row"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_sheet_cancel_button_height"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/shared_string_close"
+                android:textAllCaps="true"
+                android:textColor="?attr/color_dialog_buttons"
+                android:textSize="@dimen/default_desc_text_size"
+                android:textStyle="bold"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

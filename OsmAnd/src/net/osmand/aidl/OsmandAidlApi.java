@@ -797,7 +797,7 @@ public class OsmandAidlApi {
 			List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
 			for (MapMarker m : mapMarkers) {
 				if (m.getOnlyName().equals(marker.getName()) && latLon.equals(new LatLon(m.getLatitude(), m.getLongitude()))) {
-					markersHelper.removeMapMarker(m);
+					markersHelper.moveMapMarkerToHistory(m);
 					refreshMap();
 					return true;
 				}
@@ -818,7 +818,10 @@ public class OsmandAidlApi {
 				if (m.getOnlyName().equals(markerPrev.getName()) && latLon.equals(new LatLon(m.getLatitude(), m.getLongitude()))) {
 					PointDescription pd = new PointDescription(
 							PointDescription.POINT_TYPE_MAP_MARKER, markerNew.getName() != null ? markerNew.getName() : "");
-					MapMarker marker = new MapMarker(m.point, pd, m.colorIndex, m.selected, m.creationDate, m.index);
+					MapMarker marker = new MapMarker(m.point, pd, m.colorIndex, m.selected, m.index);
+					marker.id = m.id;
+					marker.creationDate = m.creationDate;
+					marker.visitedDate = m.visitedDate;
 					markersHelper.moveMapMarker(marker, latLonNew);
 					refreshMap();
 					return true;
@@ -967,7 +970,7 @@ public class OsmandAidlApi {
 						}
 					}
 
-				}.execute(destination);
+				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, destination);
 			} else {
 				helper.selectGpxFile(selectedGpx.getGpxFile(), false, false);
 				refreshMap();
@@ -988,7 +991,7 @@ public class OsmandAidlApi {
 					}
 				}
 
-			}.execute(destination);
+			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, destination);
 		}
 	}
 
@@ -1095,7 +1098,7 @@ public class OsmandAidlApi {
 						}
 					}
 
-				}.execute(f);
+				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
 
 				return true;
 			}

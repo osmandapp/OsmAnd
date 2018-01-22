@@ -238,8 +238,8 @@ public class RouteProvider {
 			calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
 			useIntermediatePointsRTE = builder.useIntermediatePointsRTE;
 			builder.calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
-			if (!file.points.isEmpty()) {
-				wpt = new ArrayList<LocationPoint>(file.points);
+			if (!file.isPointsEmpty()) {
+				wpt = new ArrayList<LocationPoint>(file.getPoints());
 			}
 			if (file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)) {
 				directions =  parseOsmAndGPXRoute(points, file, OSMAND_ROUTER.equals(file.author), builder.leftSide, 10);
@@ -728,6 +728,8 @@ public class RouteProvider {
 			p = GeneralRouterProfile.PEDESTRIAN;
 		} else if(params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)){
 			p = GeneralRouterProfile.CAR;
+		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BOAT)) {
+			p = GeneralRouterProfile.BOAT;
 		} else {
 			return null;
 		}
@@ -830,7 +832,7 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult applicationModeNotSupported(RouteCalculationParams params) {
-		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanStringCtx(params.ctx)+ "'is not supported.");
+		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanStringCtx(params.ctx)+ "' is not supported.");
 	}
 
 	private RouteCalculationResult interrupted() {
@@ -845,7 +847,7 @@ public class RouteProvider {
 			boolean leftSide, float defSpeed) {
 		List<RouteDirectionInfo> directions = null;
 		if (!osmandRouter) {
-			for (WptPt pt : gpxFile.points) {
+			for (WptPt pt : gpxFile.getPoints()) {
 				res.add(createLocation(pt));
 			}
 		} else {
@@ -1092,7 +1094,7 @@ public class RouteProvider {
 				}
 				pt.desc = pt.name;
 			}
-			gpx.points.add(pt);
+			gpx.addPoint(pt);
 		}
 	return gpx;
 	}

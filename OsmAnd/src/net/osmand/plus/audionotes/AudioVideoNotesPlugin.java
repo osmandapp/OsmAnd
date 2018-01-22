@@ -59,6 +59,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
@@ -443,7 +444,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				return ctx.getString(R.string.recording_photo_description, "", time).trim();
 			}
 			updateInternalDescription();
-			return ctx.getString(R.string.recording_description, "", getDuration(ctx), time)
+			return ctx.getString(R.string.recording_description, "", getDuration(ctx, true), time)
 					.trim();
 		}
 
@@ -453,8 +454,40 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				return time;
 			}
 			updateInternalDescription();
-			return time + " " + getDuration(ctx);
+			return time + " " + getDuration(ctx, true);
 
+		}
+
+		public String getExtendedDescription(Context ctx) {
+			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(ctx);
+			String date = dateFormat.format(file.lastModified());
+			int size = (int) ((file.length() + 512) >> 10);
+			String sz = "";
+			if (size > 0) {
+				if (size > 1 << 20) {
+					sz = DownloadActivity.formatGb.format(new Object[]{(float) size / (1 << 20)});
+				} else {
+					if (file.length() > (100 * (1 << 10))) {
+						sz = DownloadActivity.formatMb.format(new Object[]{(float) file.length() / (1 << 20)});
+					} else {
+						sz = DownloadActivity.formatKb.format(new Object[]{(float) file.length() / (1 << 10)});
+					}
+				}
+			}
+			if (isPhoto()) {
+				return date + " • " + sz;
+			}
+			updateInternalDescription();
+			return date + " • " + sz + " • " + getDuration(ctx, false);
+		}
+
+		public String getTypeWithDuration(Context ctx) {
+			StringBuilder res = new StringBuilder(getType(ctx));
+			if (isAudio() || isVideo()) {
+				updateInternalDescription();
+				res.append(", ").append(getDuration(ctx, false));
+			}
+			return res.toString();
 		}
 
 		public String getPlainDuration(boolean accessibilityEnabled) {
@@ -467,16 +500,18 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 		}
 
-		private String getDuration(Context ctx) {
-			String additional = "";
+		private String getDuration(Context ctx, boolean addRoundBrackets) {
+			StringBuilder additional = new StringBuilder("");
 			if (duration > 0) {
 				int d = (int) (duration / 1000);
-				additional += "(" + Algorithms.formatDuration(d, ((OsmandApplication)ctx.getApplicationContext()).accessibilityEnabled()) + ")";
+				additional.append(addRoundBrackets ? "(" : "");
+				additional.append(Algorithms.formatDuration(d, ((OsmandApplication) ctx.getApplicationContext()).accessibilityEnabled()));
+				additional.append(addRoundBrackets ? ")" : "");
 			}
 			if (!available) {
-				additional += "[" + ctx.getString(R.string.recording_unavailable) + "]";
+				additional.append("[").append(ctx.getString(R.string.recording_unavailable)).append("]");
 			}
-			return additional;
+			return additional.toString();
 		}
 
 	}
@@ -599,7 +634,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 				if (itemId == R.string.layer_recordings) {
 					SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());
 					adapter.getItem(pos).setColorRes(SHOW_RECORDINGS.get() ?
@@ -629,7 +664,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						recordAudio(latitude, longitude, mapActivity);
 						return true;
 					}
@@ -640,7 +675,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setListener(new ItemClickListener() {
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						recordVideo(latitude, longitude, mapActivity, false);
 						return true;
 					}
@@ -650,7 +685,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setIcon(R.drawable.ic_action_photo_dark)
 				.setListener(new ItemClickListener() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						takePhoto(latitude, longitude, mapActivity, false, false);
 						return true;
 					}
@@ -1555,12 +1590,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void updateRecordControl(final MapActivity mapActivity, final File f) {
 		recordControl.setText(app.getString(R.string.shared_string_control_stop), "");
 		recordControl.setIcons(R.drawable.widget_icon_av_active, R.drawable.widget_icon_av_active);
-		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-		if (!recordControl.isVisible()) {
-			recordControl.setExplicitlyVisible(true);
-			mil.recreateControls();
-			mapActivity.getMapView().refreshMap(true);
-		}
 		recordControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1573,10 +1602,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (!recordingDone) {
 			if (!restart || !stopMediaRecording(true)) {
 				recordingDone = true;
-				if (!recordControl.isVisible()) {
-					recordControl.setExplicitlyVisible(false);
-					mapActivity.getMapLayers().getMapInfoLayer().recreateControls();
-				}
 				stopMediaRecording(false);
 				if (recordControl != null) {
 					setRecordListener(recordControl, mapActivity);
@@ -1616,11 +1641,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
-		if (getAllRecordings().size() > 0) {
-			mTabs.add(favoritesActivity.getTabIndicator(NOTES_TAB, NotesFragment.class));
-			if (intent != null && "AUDIO".equals(intent.getStringExtra("TAB"))) {
-				app.getSettings().FAVORITES_TAB.set(NOTES_TAB);
-			}
+		mTabs.add(favoritesActivity.getTabIndicator(NOTES_TAB, NotesFragment.class));
+		if (intent != null && "AUDIO".equals(intent.getStringExtra("TAB"))) {
+			app.getSettings().FAVORITES_TAB.set(NOTES_TAB);
 		}
 	}
 

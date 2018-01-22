@@ -86,8 +86,19 @@
         <item name="android:windowBackground">@drawable/first_splash_screen_free_dev</item>
     </style>
 
+    <style name="OsmandTextFieldBoxes" parent="OsmandDarkTheme">
+        <item name="android:textColorTertiary">@color/white_50_transparent</item>
+        <item name="primaryColor">@color/white_50_transparent</item>
+        <item name="errorColor">@color/coordinate_input_error_color</item>
+    </style>
+
+    <style name="OsmandLightThemeWithLightStatusBar" parent="OsmandLightTheme">
+        <item name="android:statusBarColor">@color/status_bar_route_light</item>
+    </style>
+
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
+        <item name="android:statusBarColor">@color/status_bar_light</item>
         <item name="mapBackground">@color/map_background_color_light</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_light</item>
         <item name="routeParameterTitleColor">@color/color_myloc_distance</item>
@@ -120,6 +131,9 @@
         <item name="divider_color">@color/divider_color</item>
         <item name="dashboard_button">@drawable/dashboard_button_light</item>
         <item name="ctx_menu_info_view_bg">@color/ctx_menu_info_view_bg_light</item>
+        <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_light</item>
+        <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_light</item>
+        <item name="ctx_menu_divider">@color/ctx_menu_buttons_divider_light</item>
         <item name="search_background">@color/search_background_dark</item>
         <item name="actionModeCloseDrawable">@drawable/ic_action_mode_back</item>
         <item name="actionModeStyle">@style/WhiteActionMode</item>
@@ -171,6 +185,8 @@
         <item name="color_dialog_buttons">@color/color_dialog_buttons_light</item>
 
         <item name="popupMenuStyle">@style/PopupMenuLight</item>
+
+        <item name="keyboard_controls_divider">@color/keyboard_item_add_button_divider_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -240,6 +256,7 @@
     </style>
 
     <style name="OsmandLightTheme.BottomSheet">
+        <item name="android:statusBarColor">@color/color_transparent</item>
         <item name="android:dialogTheme">@style/BottomSheet.Dialog</item>
         <item name="android:windowBackground">@color/color_transparent</item>
         <item name="android:backgroundDimAmount">0.3</item>
@@ -247,6 +264,7 @@
     </style>
 
     <style name="OsmandDarkTheme.BottomSheet">
+        <item name="android:statusBarColor">@color/color_transparent</item>
         <item name="android:dialogTheme">@style/BottomSheet.Dialog</item>
         <item name="android:windowBackground">@color/color_transparent</item>
         <item name="android:backgroundDimAmount">0.3</item>
@@ -271,6 +289,7 @@
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
+        <item name="android:statusBarColor">@color/status_bar_dark</item>
         <item name="mapBackground">@color/map_background_color_dark</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_dark</item>
         <item name="routeParameterTitleColor">@color/osmand_orange</item>
@@ -302,6 +321,9 @@
         <item name="divider_color">@color/dashboard_divider_dark</item>
         <item name="dashboard_button">@drawable/dashboard_button_dark</item>
         <item name="ctx_menu_info_view_bg">@color/ctx_menu_info_view_bg_dark</item>
+        <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_dark</item>
+        <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_dark</item>
+        <item name="ctx_menu_divider">@color/ctx_menu_buttons_divider_dark</item>
         <item name="search_background">@color/color_white</item>
         <item name="switch_ex_background">@drawable/switch_ex_background_dark</item>
         <item name="switch_ex_text_color">@color/switch_ex_button_text_dark</item>
@@ -341,6 +363,8 @@
         <item name="color_dialog_buttons">@color/color_dialog_buttons_dark</item>
 
         <item name="popupMenuStyle">@style/PopupMenuDark</item>
+
+        <item name="keyboard_controls_divider">@color/keyboard_item_add_button_divider_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
@@ -445,6 +469,11 @@
         <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
     </style>
 
+    <style name="Animations.Alpha">
+        <item name="android:windowEnterAnimation">@anim/alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/alpha_out</item>
+    </style>
+
     <style name="create_poi_text_field">
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginRight">16dp</item>
@@ -486,7 +515,7 @@
     <style name="TextAppearance.ContextMenuTitle" parent="TextAppearance.AppCompat">
         <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:textSize">@dimen/default_list_text_size_large</item>
-        <item name="android:maxLines">6</item>
+        <item name="android:maxLines">3</item>
         <item name="android:ellipsize">end</item>
     </style>
 

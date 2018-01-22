@@ -114,7 +114,7 @@ public class DownloadValidationManager {
 		double szChange = ((double) szChangeLong) / (1 << 20);
 		double szMaxTemp = szChange + ((double) szMaxTempLong) / (1 << 20);
 
-		// get availabile space
+		// get available space
 		double asz = downloadThread.getAvailableSpace();
 		if (asz != -1 && asz > 0 && (szMaxTemp > asz)) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(context);

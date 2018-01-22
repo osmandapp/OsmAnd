@@ -1,11 +1,9 @@
 package net.osmand.plus.views.mapwidgets;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,16 +17,15 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.MapMarkersMode;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapQuickActionLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.IconPopupMenu;
 
 import java.util.Collections;
@@ -311,8 +308,7 @@ public class MapWidgetRegistry {
 	}
 
 	private void resetDefaultAppearance(ApplicationMode appMode) {
-//		settings.SHOW_RULER.resetToDefault();		
-		settings.SHOW_DESTINATION_ARROW.resetToDefault();
+//		settings.SHOW_RULER.resetToDefault();
 		settings.TRANSPARENT_MAP_THEME.resetToDefault();
 		settings.SHOW_STREET_NAME.resetToDefault();
 		settings.CENTER_POSITION_ON_MAP.resetToDefault();
@@ -320,7 +316,6 @@ public class MapWidgetRegistry {
 	}
 
 	public void addControlsAppearance(final MapActivity map, final ContextMenuAdapter cm, ApplicationMode mode) {
-		addControlId(map, cm, R.string.map_widget_show_destination_arrow, settings.SHOW_DESTINATION_ARROW);
 		addControlId(map, cm, R.string.map_widget_transparent, settings.TRANSPARENT_MAP_THEME);
 		addControlId(map, cm, R.string.always_center_position_on_map, settings.CENTER_POSITION_ON_MAP);
 		if (mode != ApplicationMode.DEFAULT) {
@@ -331,40 +326,39 @@ public class MapWidgetRegistry {
 					.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map))
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
-						public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad,
-														  int itemId, final int pos, boolean isChecked) {
-							final OsmandMapTileView view = map.getMapView();
-							AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
-							bld.setTitle(R.string.map_markers);
-							final String[] items = new String[MapMarkersMode.values().length];
-							for (int i = 0; i < items.length; i++) {
-								items[i] = MapMarkersMode.values()[i].toHumanString(map);
-							}
-							int i = settings.MAP_MARKERS_MODE.get().ordinal();
-							bld.setSingleChoiceItems(items, i, new DialogInterface.OnClickListener() {
+						public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int position, boolean isChecked, int[] viewCoordinates) {
+							DirectionIndicationDialogFragment fragment = new DirectionIndicationDialogFragment();
+							fragment.setListener(new DirectionIndicationDialogFragment.DirectionIndicationFragmentListener() {
 								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									settings.MAP_MARKERS_MODE.set(MapMarkersMode.values()[which]);
-									for (MapWidgetRegInfo info : rightWidgetSet) {
-										if ("map_marker_1st".equals(info.key) || "map_marker_2nd".equals(info.key)) {
-											setVisibility(info, settings.MAP_MARKERS_MODE.get().isWidgets(), false);
-										}
-									}
-									MapInfoLayer mil = map.getMapLayers().getMapInfoLayer();
-									if (mil != null) {
-										mil.recreateControls();
-									}
-									map.refreshMap();
-									dialog.dismiss();
-									cm.getItem(pos).setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map));
-									ad.notifyDataSetChanged();
+								public void onMapMarkersModeChanged(boolean showDirectionEnabled) {
+									updateMapMarkersMode(map);
+									cm.getItem(position).setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map));
+									adapter.notifyDataSetChanged();
 								}
 							});
-							bld.show();
+							fragment.show(map.getSupportFragmentManager(), DirectionIndicationDialogFragment.TAG);
 							return false;
 						}
 					}).setLayout(R.layout.list_item_text_button).createItem());
 		}
+	}
+
+	public void updateMapMarkersMode(MapActivity mapActivity) {
+		for (MapWidgetRegInfo info : rightWidgetSet) {
+			if ("map_marker_1st".equals(info.key)) {
+				setVisibility(info, settings.MAP_MARKERS_MODE.get().isWidgets()
+						&& settings.MARKERS_DISTANCE_INDICATION_ENABLED.get(), false);
+			} else if ("map_marker_2nd".equals(info.key)) {
+				setVisibility(info, settings.MAP_MARKERS_MODE.get().isWidgets()
+						&& settings.MARKERS_DISTANCE_INDICATION_ENABLED.get()
+						&& settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 2, false);
+			}
+		}
+		MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+		if (mil != null) {
+			mil.recreateControls();
+		}
+		mapActivity.refreshMap();
 	}
 
 	private void addControlId(final MapActivity map, ContextMenuAdapter cm,
@@ -424,7 +418,7 @@ public class MapWidgetRegistry {
 				.setSecondaryIcon( R.drawable.ic_action_additional_option)
 				.setListener(new ContextMenuAdapter.OnRowItemClick() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
 						setVisibility(adapter, position, isChecked);
 						return false;
 					}
@@ -563,7 +557,7 @@ public class MapWidgetRegistry {
 
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a,
-														  int itemId, int pos, boolean isChecked) {
+														  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 							setVisibility(a, pos, isChecked, false);
 							return false;
 						}
@@ -786,7 +780,7 @@ public class MapWidgetRegistry {
 
 		@Override
 		public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a,
-										  int itemId, int pos, boolean isChecked) {
+										  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 			pref.set(!pref.get());
 			map.updateApplicationModeSettings();
 			a.notifyDataSetChanged();

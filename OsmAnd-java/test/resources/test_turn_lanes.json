@@ -644,6 +644,20 @@
     "expectedResults": {
       "84975049": "TL|+TR,C"
     }
+  },
+  {
+    "testName": "36.Bierweg TR Äußere Bayreuther Straße (B 2) ",
+    "startPoint": {
+      "latitude": 45.61486172708771,
+      "longitude": 35.50859335064885
+    },
+    "endPoint": {
+      "latitude": 45.61364315690609,
+      "longitude": 35.51007661223409
+    },
+    "expectedResults": {
+      "35361252": "TL|+TR,C"
+    }
   }
 
 ]

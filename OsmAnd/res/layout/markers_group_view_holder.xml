@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/bottom_sheet_list_item_height"
+              android:background="?attr/selectableItemBackground"
+              android:minHeight="@dimen/bottom_sheet_list_item_height"
+              android:paddingEnd="@dimen/content_padding"
+              android:paddingLeft="@dimen/content_padding"
+              android:paddingRight="@dimen/content_padding"
+              android:paddingStart="@dimen/content_padding"
+              android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+        android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+        tools:src="@drawable/ic_action_polygom_dark"/>
+
+    <TextView
+        android:id="@+id/name_text"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="Berlin trip"
+        android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+
+    <TextView
+        android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+        android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+        android:id="@+id/number_count_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        tools:text="25"
+        android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+</LinearLayout>

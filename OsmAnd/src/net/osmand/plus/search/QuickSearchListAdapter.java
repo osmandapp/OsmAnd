@@ -190,7 +190,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		QuickSearchListItemType type = getItem(position).getType();
 		return type != QuickSearchListItemType.HEADER
 				&& type != QuickSearchListItemType.TOP_SHADOW
-				&& type != QuickSearchListItemType.BOTTOM_SHADOW;
+				&& type != QuickSearchListItemType.BOTTOM_SHADOW
+				&& type != QuickSearchListItemType.SEARCH_MORE;
 	}
 
 	@Override
@@ -211,10 +212,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		LinearLayout view;
 		if (type == QuickSearchListItemType.SEARCH_MORE) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = (LinearLayout) inflater.inflate(
-						R.layout.search_more_list_item, null);
+				LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				view = (LinearLayout) inflater.inflate(R.layout.search_more_list_item, null);
 			} else {
 				view = (LinearLayout) convertView;
 			}
@@ -224,13 +223,34 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			} else {
 				((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
 			}
-			QuickSearchMoreListItem searchMoreListItem = (QuickSearchMoreListItem) listItem;
-			if (searchMoreListItem.isEmptySearch() && !searchMoreListItem.isInterruptedSearch()) {
-				view.findViewById(R.id.empty_search).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.more_divider).setVisibility(View.VISIBLE);
-			} else {
-				view.findViewById(R.id.empty_search).setVisibility(View.GONE);
-				view.findViewById(R.id.more_divider).setVisibility(View.GONE);
+
+			final QuickSearchMoreListItem searchMoreItem = (QuickSearchMoreListItem) listItem;
+			int emptyDescId = searchMoreItem.isSearchMoreAvailable() ? R.string.nothing_found_descr : R.string.modify_the_search_query;
+			((TextView) view.findViewById(R.id.empty_search_description)).setText(emptyDescId);
+
+			boolean emptySearchVisible = searchMoreItem.isEmptySearch() && !searchMoreItem.isInterruptedSearch();
+			boolean moreDividerVisible = emptySearchVisible && searchMoreItem.isSearchMoreAvailable();
+			view.findViewById(R.id.empty_search).setVisibility(emptySearchVisible ? View.VISIBLE : View.GONE);
+			view.findViewById(R.id.more_divider).setVisibility(moreDividerVisible ? View.VISIBLE : View.GONE);
+
+			View increaseRadiusRow = view.findViewById(R.id.increase_radius_row);
+			increaseRadiusRow.setVisibility(searchMoreItem.isSearchMoreAvailable() ? View.VISIBLE : View.GONE);
+			increaseRadiusRow.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					((QuickSearchMoreListItem) listItem).increaseRadiusOnClick();
+				}
+			});
+
+			if (!searchMoreItem.isOnlineSearch()) {
+				View onlineSearchRow = view.findViewById(R.id.online_search_row);
+				onlineSearchRow.setVisibility(View.VISIBLE);
+				onlineSearchRow.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						searchMoreItem.onlineSearchOnClick();
+					}
+				});
 			}
 		} else if (type == QuickSearchListItemType.BUTTON) {
 			if (convertView == null) {
@@ -358,6 +378,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				group.setVisibility(View.GONE);
 			}
 
+			LinearLayout timeLayout = (LinearLayout) view.findViewById(R.id.time_layout);
 			TextView timeText = (TextView) view.findViewById(R.id.time);
 			ImageView timeIcon = (ImageView) view.findViewById(R.id.time_icon);
 			if (listItem.getSearchResult().object instanceof Amenity
@@ -372,19 +393,16 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					boolean worksLater = rs.isOpenedForTime(inst);
 					int colorId = worksNow ? worksLater ? R.color.color_ok : R.color.color_intermediate : R.color.color_warning;
 
-					timeIcon.setVisibility(View.VISIBLE);
-					timeText.setVisibility(View.VISIBLE);
+					timeLayout.setVisibility(View.VISIBLE);
 					timeIcon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_small_time, colorId));
 					timeText.setTextColor(app.getResources().getColor(colorId));
 					String rt = rs.getCurrentRuleTime(inst);
 					timeText.setText(rt == null ? "" : rt);
 				} else {
-					timeIcon.setVisibility(View.GONE);
-					timeText.setVisibility(View.GONE);
+					timeLayout.setVisibility(View.GONE);
 				}
 			} else {
-				timeIcon.setVisibility(View.GONE);
-				timeText.setVisibility(View.GONE);
+				timeLayout.setVisibility(View.GONE);
 			}
 
 			updateCompassVisibility(view, listItem);
