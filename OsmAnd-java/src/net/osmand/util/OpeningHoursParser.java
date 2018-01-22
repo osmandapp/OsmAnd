@@ -1305,7 +1305,6 @@ public class OpeningHoursParser {
 			Token t = i == tokens.size() ? null : tokens.get(i);
 			if (t == null || t.type.ord() > currentParse.ord()) {
 				presentTokens.add(currentParse);
-				// case tokens.get(i).type.ordinal() < currentParse.ordinal() - not supported (Fr 15:00-18:00, Sa 16-18)
 				if (currentParse == TokenType.TOKEN_MONTH || currentParse == TokenType.TOKEN_DAY_MONTH
 						|| currentParse == TokenType.TOKEN_DAY_WEEK || currentParse == TokenType.TOKEN_HOLIDAY) {
 
@@ -1360,7 +1359,7 @@ public class OpeningHoursParser {
 				if (t != null) {
 					currentParse = t.type;
 				}
-			} else if (t.type.ord() < currentParse.ord() && indexP == 0) {
+			} else if (t.type.ord() < currentParse.ord() && indexP == 0 && tokens.size() > i) {
 				buildRule(new BasicOpeningHourRule(), tokens.subList(i, tokens.size()), rules);
 				tokens = tokens.subList(0, i + 1);
 			} else if (t.type == TokenType.TOKEN_COMMA) {
