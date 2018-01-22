@@ -702,7 +702,7 @@
 	<string name="poi_club">Klubb</string>
 	<string name="poi_service">Tjeneste</string>
 	<string name="poi_osmwiki">Wikipedia</string>
-	<string name="poi_alcohol">Vinmonopol</string>
+	<string name="poi_alcohol">Alkoholbutikk</string>
 	<string name="poi_cheese">Ostebutikk</string>
 	<string name="poi_chocolate">Sjokoladebutikk</string>
 	<string name="poi_butcher">Kjøttmarked</string>
@@ -711,7 +711,7 @@
 	<string name="poi_pasta">Pastabutikk</string>
 	<string name="poi_pastry">Konditori</string>
 	<string name="poi_vending_machine">Salgsautomat</string>
-	<string name="poi_wine">Vinmonopol</string>
+	<string name="poi_wine">Vinhandel</string>
 	<string name="poi_anime">Animebutikk</string>
 	<string name="poi_baby_goods">Babyutstyr</string>
 	<string name="poi_bag">Veskebutikk</string>
@@ -725,13 +725,13 @@
 	<string name="poi_copyshop">Kopisenter</string>
 	<string name="poi_curtain">Gardinbutikk</string>
 	<string name="poi_fabric">Stoffhandel</string>
-<string name="poi_doityourself">Jernvarehandel</string>
+<string name="poi_doityourself">Byggemarked</string>
 	<string name="poi_doors">Dører</string>
 	<string name="poi_erotic">Erotisk butikk</string>
 	<string name="poi_fashion">Motebutikk</string>
 	<string name="poi_frame">Rammeverksted</string>
 	<string name="poi_furniture">Møbelbutikk</string>
-	<string name="poi_hardware">Maskinvare</string>
+	<string name="poi_hardware">Jernvareforretning</string>
 	<string name="poi_hearing_aids">Høreapparat</string>
 	<string name="poi_herbalist">Urtebutikk</string>
 	<string name="poi_houseware">Husholdningsutstyr</string>
@@ -747,7 +747,7 @@
 	<string name="poi_radiotechnics">Radiotekniker</string>
 	<string name="poi_scuba_diving_shop">Dykkeutstyr</string>
 	<string name="poi_toys">Leketøysbutikk</string>
-	<string name="poi_trade">Handelsplass</string>
+	<string name="poi_trade">Handelssted</string>
 	<string name="poi_tyres">Dekkbutikk</string>
 	<string name="poi_vacuum_cleaner">Støvsugerbutikk</string>
 	<string name="poi_electronics">Elektronikkforretning</string>
@@ -771,7 +771,7 @@
 	<string name="poi_mountain_pass">Fjellpass</string>
 	<string name="poi_traffic_calming_chicane">Sjikane</string>
 	<string name="poi_service_tyres">Dekk</string>
-	<string name="poi_vehicle_inspection">Biltilsyn</string>
+	<string name="poi_vehicle_inspection">Kjøretøykontroll</string>
 	<string name="poi_fuel_diesel">Diesel</string>
 	<string name="poi_fuel_ethanol">Etanol</string>
 	<string name="poi_fuel_methanol">Metanol</string>
@@ -887,7 +887,7 @@
 	<string name="poi_ice_hockey">Ishockey</string>
 	<string name="poi_golf">Golf</string>
 	<string name="poi_gymnastics">Turn</string>
-	<string name="poi_handball">Handball</string>
+	<string name="poi_handball">Håndball</string>
 	<string name="poi_hockey">Hockey</string>
 	<string name="poi_sport_motor">Motorsport</string>
 	<string name="poi_orienteering">Orientering</string>
@@ -1041,7 +1041,7 @@
 	<string name="poi_wiki_lang_ta">Tamilsk wiki</string>
 	<string name="poi_wiki_lang_uz">Usbekistansk wiki</string>
 	<string name="poi_wiki_lang_ce">Tsjetsjensk wiki</string>
-	<string name="poi_wiki_lang_zhyue">Kantonsk wiki</string>
+	<string name="poi_wiki_lang_zhyue">Kantonesisk wiki</string>
 	<string name="poi_wiki_lang_sco">Skotsk wiki</string>
 	<string name="poi_wiki_lang_pnb">Punjab wiki</string>
 	<string name="poi_wiki_lang_my">Burmesisk wiki</string>
@@ -1098,7 +1098,7 @@
 	<string name="poi_content_sewage">Innhold: Kloakk</string>
 	<string name="poi_content_gas">Innhold: Gass</string>
 	<string name="poi_content_biomass">Innhold: Biomasse</string>
-	<string name="poi_content_wastewater">Innhold: Spillvann</string>
+	<string name="poi_content_wastewater">Innhold: Avløpsvann</string>
 	<string name="poi_content_beer">Innhold: Øl</string>
 	<string name="poi_content_salt">Innhold: Salt</string>
 	<string name="poi_content_grain">Innhold: Korn</string>
@@ -1107,9 +1107,9 @@
 	<string name="poi_nudism_no">Forbudt</string>
 	<string name="poi_nudism_obligatory">Obligatorisk</string>
 	<string name="poi_nudism_customary">Sedvane</string>
-	<string name="poi_nudism_permissive">Med tillatelse</string>
+	<string name="poi_nudism_permissive">Tillatt</string>
 
-	<string name="poi_trade_building_supplies">Byggematerialer</string>
+	<string name="poi_trade_building_supplies">Byggevarer</string>
 	<string name="poi_trade_wood">Trehandel</string>
 	<string name="poi_population">Befolkning</string>
 	<string name="poi_bicycle_parking_shed">Sykkelskur</string>
@@ -1123,7 +1123,7 @@
 	<string name="poi_trees_orange">Appelsin</string>
 	<string name="poi_trees_almond">Mandel</string>
 	<string name="poi_trees_banana">Banan</string>
-	<string name="poi_trees_hazel">Hasselnøtt</string>
+	<string name="poi_trees_hazel">Hassel</string>
 	<string name="poi_trees_coconut">Kokospalme</string>
 	<string name="poi_trees_cherry">Kirsebær</string>
 	<string name="poi_trees_walnut">Valnøtt</string>
@@ -1265,4 +1265,6 @@
 	<string name="poi_nat_name">Nasjonalt navn</string>
 	<string name="poi_reg_name">Regionalt navn</string>
 	<string name="poi_payment_mastercard_no">MasterCard er ikke akseptert</string>
+	<string name="poi_access_permissive">Adgang tillatt</string>
+	<string name="poi_toilets_access_permissive">Toalettadgang: Tillatt</string>
 	</resources>

@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
@@ -321,6 +322,10 @@ public abstract class ImageCard extends AbstractCard {
 			TextView watermarkTextView = (TextView) view.findViewById(R.id.watermark);
 			ProgressBar progress = (ProgressBar) view.findViewById(R.id.progress);
 			AppCompatButton button = (AppCompatButton) view.findViewById(R.id.button);
+
+			boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+			AndroidUtils.setBackground(getMapActivity(), view.findViewById(R.id.card_background), night,
+					R.drawable.context_menu_card_light, R.drawable.context_menu_card_dark);
 
 			if (icon == null && topIconId != 0) {
 				icon = getMyApplication().getIconsCache().getIcon(topIconId);

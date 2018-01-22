@@ -256,4 +256,6 @@
     <dimen name="grid_menu_item_width">120dp</dimen>
     <dimen name="grid_menu_item_bottom_top_margin">16dp</dimen>
     <dimen name="grid_menu_item_sides_margin">40dp</dimen>
+
+	<dimen name="bottom_sheet_menu_peek_height">200dp</dimen>
 </resources>

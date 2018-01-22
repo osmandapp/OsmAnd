@@ -155,7 +155,7 @@
 	<string name="osmand_parking_position_name">جای پارک</string>
 	<string name="osmand_parking_plugin_description">با افزونهٔ «جای پارک» محل پارک‌کردن خودروی خود را به خاطر بسپارید و اگر پارکینگ محدودیت زمانی دارد حساب زمان باقی‌مانده را داشته باشید. هم مکان و هم زمان در پیشخوان OsmAnd و نیز در ابزارک افزونه روی صفحهٔ نقشه قابل‌رؤیت است. همچنین می‌توانید برای یادآوری، هشداری را به تقویم اندروید اضافه کنید.</string>
 	<string name="osmand_parking_plugin_name">جای پارک</string>
-	<string name="context_menu_item_add_parking_point">علامت‌گذاری به‌عنوان جای پارک</string>
+	<string name="context_menu_item_add_parking_point">علامت‌گذاری جای پارک</string>
 	<string name="context_menu_item_delete_parking_point">حذف نشانهٔ جای پارک</string>
 	<string name="gpxup_public">عمومی</string>
 	<string name="gpxup_private">خصوصی</string>
@@ -1714,7 +1714,7 @@
     <string name="rendering_attr_trainLightrailRoutes_name">مسیرهای قطار</string>
     <string name="rendering_attr_tramRoutes_name">مسیرهای تراموا</string>
     <string name="rendering_attr_shareTaxiRoutes_name">به‌اشتراک‌گذاری مسیرهای تاکسی</string>
-    <string name="rendering_category_hide">مخفی‌کردن</string>
+    <string name="rendering_category_hide">نشان نده</string>
     <string name="rendering_category_details">جزئیات</string>
     <string name="rendering_category_transport">حمل‌ونقل</string>
     <string name="rendering_category_others">خصوصیات دیگر نقشه</string>
@@ -1722,7 +1722,7 @@
     <string name="map_widget_top">نوار وضعیت</string>
 	<string name="map_widget_right">بخش راست صفحه</string>
 	<string name="map_widget_left">بخش چپ صفحه</string>
-    <string name="shared_string_show">نمایش‌دادن</string>
+    <string name="shared_string_show">نشان بده</string>
 	<string name="configure_map">پیکربندی نقشه</string>
     <string name="search_radius_proximity">کمتر از</string>
     <string name="osmo_device_not_found">دستگاه پیدا نشد</string>
@@ -1910,7 +1910,7 @@
     <string name="osmo_share_my_location">اشتراک‌گذاری موقعیت</string>
     <string name="no_address_found">آدرسی پیدا نشد</string>
 	<string name="shared_string_near">نزدیک</string>
-    <string name="shared_string_hide">مخفی‌کردن</string>
+    <string name="shared_string_hide">نشان نده</string>
     <string name="av_video_quality_low">پایین‌ترین کیفیت</string>
     <string name="av_video_quality_high">بالاترین کیفیت</string>
     <string name="av_video_quality">کیفیت ویدئوی خروجی</string>
@@ -2377,7 +2377,7 @@
     <string name="local_recordings_delete_all_confirm">دارید %1$d یادداشت را پاک می‌کنید. آیا مطمئن هستید؟</string>
     <string name="osmand_parking_hour">س</string>
     <string name="osmand_parking_minute">دق‍</string>
-    <string name="shared_string_collapse">جمع‌شونده</string>
+    <string name="shared_string_collapse">مخفی شود</string>
     <string name="rendering_attr_roadStyle_description">ظاهر جاده</string>
     <string name="navigate_point_olc">کدِ مکانی باز (OLC)</string>
     <string name="navigate_point_olc_info_invalid">کد OLC نامعتبر است
@@ -2625,10 +2625,10 @@
     <string name="wrong_user_name">نام کاربری اشتباه است!</string>
     <string name="shared_string_to">تا</string>
     <string name="mapillary_menu_date_from">از</string>
-    <string name="mapillary_menu_descr_dates">مشاهدهٔ تصاویری که فقط در بازهٔ زمانی زیر اضافه شده‌اند</string>
+    <string name="mapillary_menu_descr_dates">فقط تصاویری که در بازهٔ زمانی زیر اضافه شده است</string>
     <string name="mapillary_menu_title_dates">تاریخ</string>
     <string name="mapillary_menu_edit_text_hint">نام کاربری را بنویسید</string>
-    <string name="mapillary_menu_descr_username">مشاهدهٔ تصاویری که فقط کاربر زیر اضافه کرده است</string>
+    <string name="mapillary_menu_descr_username">فقط تصاویری که کاربر زیر اضافه کرده است</string>
     <string name="mapillary_menu_title_username">نام کاربری</string>
     <string name="mapillary_menu_filter_description">می‌توانید تصاویر را بر اساس تاریخ یا ارسال‌کنندهٔ آن فیلتر کنید. فیلترها فقط برای زوم نزدیک کار می‌کند.</string>
     <string name="map_widget_ruler_control">خط‌کش شعاعی</string>
@@ -2638,18 +2638,18 @@
     <string name="open_mapillary">بازکردن مپیلاری</string>
     <string name="shared_string_install">نصب</string>
     <string name="improve_coverage_mapillary">با مَپیلاری پوشش تصویری را بهتر کنید</string>
-    <string name="improve_coverage_install_mapillary_desc">تصاویر یا مجموعه‌تصاویر دلخواهتان را بگیرید و آن‌ها را به این مکان از نقشه ضمیمه کنید.
-\n
+    <string name="improve_coverage_install_mapillary_desc">خودتان عکس بگیرید و سپس تصاویر یا رشته‌تصاویر خود را به این مکان از نقشه ضمیمه کنید. 
+\n 
 \nبرای این کار باید برنامهٔ Mapillary را از طریق فروشگاه Play نصب کنید.</string>
     <string name="online_photos">تصاویر آنلاین</string>
-    <string name="shared_string_add_photos">افزودن تصاویر</string>
+    <string name="shared_string_add_photos">افزودن تصویر</string>
     <string name="no_photos_descr">برای این مکان تصویری نداریم.</string>
     <string name="mapillary_action_descr">نماهای خیابانی این مکان را به‌وسیلهٔ مپیلاری به‌اشتراک بگذارید.</string>
     <string name="mapillary_widget">ابزارک مپیلاری</string>
     <string name="mapillary_widget_descr">به‌وسیلهٔ این ابزارک با مپیلاری سریع‌تر کار کنید.</string>
-    <string name="mapillary_descr">تصاویر خیابانی آنلاین برای همه. مکان‌ها را کشف کنید، همکاری کنید و جهان را به تصویر درآورید.</string>
+    <string name="mapillary_descr">تصاویر خیابانی آنلاین برای همه. مکان‌ها را کشف کنید، همکاری کنید و جهان را به‌تصویر درآورید.</string>
     <string name="mapillary">مپیلاری</string>
-    <string name="plugin_mapillary_descr">تصاویر خیابانی آنلاین برای همه. مکان‌ها را کشف کنید، همکاری کنید و جهان را به تصویر درآورید.</string>
+    <string name="plugin_mapillary_descr">تصاویر خیابانی آنلاین برای همه. مکان‌ها را کشف کنید، همکاری کنید و جهان را به‌تصویر درآورید.</string>
     <string name="private_access_routing_req">مقصد شما در ناحیه‌ای با دسترسی خصوصی قرار دارد. آیا دسترسی به مسیرهای خصوصی برای این سفر مجاز شود؟</string>
     <string name="restart_search">شروع مجدد جست‌وجو</string>
     <string name="nothing_found">چیزی پیدا نشد :(</string>
@@ -3001,9 +3001,11 @@
     <string name="additional_actions">عملیات بیشتر</string>
     <string name="av_locations_selected_desc">فایل GPX با مختصات و داده‌های یادداشت‌هایی که انتخاب شده است.</string>
     <string name="av_locations_all_desc">فایل GPX با مختصات و داده‌های یادداشت‌هایی که انتخاب شده است.</string>
-    <string name="shared_string_actions">عملیات‌ها</string>
+    <string name="shared_string_actions">عملیات</string>
     <string name="shared_string_marker">نشانه</string>
     <string name="osm_recipient_stat">ویرایش‌ها</string>
     <string name="osm_recipients_label">گیرندگان OSM</string>
     <string name="total_donations">کل پرداخت‌ها</string>
-</resources>
+<string name="shared_string_without_name">بدون نام</string>
+    <string name="lang_lo">لائو</string>
+    </resources>

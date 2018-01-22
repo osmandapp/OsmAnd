@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.Html;
@@ -135,19 +137,29 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
 
+		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+
 		boolean textDefined = false;
 		if (isPhoneNumber || isUrl) {
 			if (!Algorithms.isEmpty(textPrefix)) {
 				SpannableString spannableString = new SpannableString(txt);
 				spannableString.setSpan(new URLSpan(txt), textPrefix.length() + 2, txt.length(), 0);
 				textView.setText(spannableString);
+				textView.setLinkTextColor(linkTextColor);
 				textDefined = true;
 			} else {
-				textView.setTextColor(textView.getLinkTextColors());
+				textView.setTextColor(linkTextColor);
 			}
-		} else if (needLinks) {
-			textView.setAutoLinkMask(Linkify.ALL);
+			needLinks = false;
+		}
+		if (!textDefined) {
+			textView.setText(txt);
+		}
+		if (needLinks) {
+			Linkify.addLinks(textView, Linkify.ALL);
 			textView.setLinksClickable(true);
+			textView.setLinkTextColor(linkTextColor);
+			AndroidUtils.removeLinkUnderline(textView);
 		}
 		textView.setEllipsize(TextUtils.TruncateAt.END);
 		if (isWiki) {
@@ -156,9 +168,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		} else if (isText) {
 			textView.setMinLines(1);
 			textView.setMaxLines(10);
-		}
-		if (!textDefined) {
-			textView.setText(txt);
 		}
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
@@ -185,8 +194,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL;
 			iconViewCollapse.setLayoutParams(llIconCollapseParams);
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-			iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(collapsableView.getContenView().getVisibility() == View.GONE ?
-					R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up));
+			iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContenView().getVisibility() == View.GONE));
 			llIconCollapse.addView(iconViewCollapse);
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -194,17 +202,17 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					if (collapsableView.getContenView().getVisibility() == View.VISIBLE) {
 						collapsableView.setCollapsed(true);
 						collapsableView.getContenView().setVisibility(View.GONE);
-						iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_down));
+						iconViewCollapse.setImageDrawable(getCollapseIcon(true));
 					} else {
 						collapsableView.setCollapsed(false);
 						collapsableView.getContenView().setVisibility(View.VISIBLE);
-						iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_up));
+						iconViewCollapse.setImageDrawable(getCollapseIcon(false));
 					}
 				}
 			});
 			if (collapsableView.isCollapsed()) {
 				collapsableView.getContenView().setVisibility(View.GONE);
-				iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_down));
+				iconViewCollapse.setImageDrawable(getCollapseIcon(true));
 			}
 			baseView.addView(collapsableView.getContenView());
 		}
@@ -238,7 +246,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
 			Drawable pressed = app.getIconsCache().getIcon(R.drawable.ic_action_read_text,
 					light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p);
-			button.setCompoundDrawablesWithIntrinsicBounds(AndroidUtils.createStateListDrawable(normal, pressed), null, null, null);
+			button.setCompoundDrawablesWithIntrinsicBounds(Build.VERSION.SDK_INT >= 21
+					? AndroidUtils.createStateListDrawable(normal, pressed) : normal, null, null, null);
 			button.setCompoundDrawablePadding(dpToPx(8f));
 			llText.addView(button);
 		}

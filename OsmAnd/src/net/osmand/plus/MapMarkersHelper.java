@@ -609,10 +609,12 @@ public class MapMarkersHelper {
 	}
 
 	@Nullable
-	public MapMarker getMapMarker(@NonNull String mapObjectName) {
+	public MapMarker getMapMarker(@NonNull String mapObjectName, @NonNull LatLon latLon) {
 		for (MapMarker marker : mapMarkers) {
-			if (marker.mapObjectName != null && marker.mapObjectName.equals(mapObjectName)) {
-				return marker;
+			if (marker.mapObjectName != null && marker.mapObjectName.equals(mapObjectName) && marker.point != null) {
+				if (MapUtils.getDistance(latLon, marker.point) < 15) {
+					return marker;
+				}
 			}
 		}
 		return null;

@@ -2188,7 +2188,7 @@
     <string name="select_month_and_country">Выберыце месяц і краіну</string>
 <string name="shared_string_select">Абраць</string>
     <string name="shared_string_remove">Выдаліць</string>
-    <string name="road_blocked">Дарога заблякаваная</string>
+    <string name="road_blocked">Дарога заблакаваная</string>
     <string name="switch_start_finish">Памяняць месцамі пункт адпраўленьня і пункт прызначэньня</string>
     <string name="rendering_attr_hideIcons_name">Значкі POI</string>
     <string name="rec_split">Разьбіцьцё на кліпы</string>
@@ -3016,5 +3016,7 @@
     <string name="open_till">Адкрыта да</string>
     <string name="will_close_at">Закрыецца а</string>
     <string name="will_open_at">Адкрыецца а</string>
-    <string name="will_open_on">Адкрыецца</string>
+    <string name="will_open_on">Адкрыецца а</string>
+    <string name="shared_string_without_name">Без назвы</string>
+    <string name="lang_lo">Лаоская</string>
     </resources>

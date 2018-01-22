@@ -1518,7 +1518,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="speak_pedestrian">Pasos de peatones</string>
     <string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
     <string name="navigation_over_track">¿Iniciar la navegación a lo largo de la traza?</string>
-    <string name="avoid_roads_msg">Puede obtener una ruta alternativa seleccionando las carreteras a evitar</string>
+    <string name="avoid_roads_msg">Puedes solicitar una ruta alternativa seleccionando las carreteras a evitar</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Especifica un proxy de Internet.</string>
     <string name="settings_privacy">Privacidad</string>
@@ -2360,12 +2360,12 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_action_btn_tutorial_descr">Mantén pulsado y arrastra el botón para cambiar su ubicación en la pantalla.</string>
 	<string name="shared_string_action_name">Nombre de acción</string>
 <string name="release_2_6">"• Nueva función: Botón de acción rápida 
-\n 
+\n
 \n • Mejorada la respuesta de gestos táctiles (p.e. desplazamiento y acercamiento simultáneos) 
 \n
 \n • El nuevo tipo de letra del mapa abarca más regiones 
 \n
-\n • Soporte TTS para idiomas regionales (y acentos) 
+\n • Soporte TTS para variantes regionales de idiomas (y acentos) 
 \n
 \n • Mejorada la visibilidad en varios estilos de mapas y Wikipedia 
 \n
@@ -2373,6 +2373,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
 \n
 \n • Visualización del perfil de elevación, pendiente y velocidad para las trazas GPX grabadas y la ruta calculada 
 \n
+\n 
 \n • Opción «Estilo de conducción» y mejoras lógicas en el cálculo de rutas para bicicleta 
 \n
 \n • Opciones para usar los datos de altitud en el cálculo de rutas para bicicleta 
@@ -2500,7 +2501,7 @@ Por favor proporciona un código completo</string>
     <string name="select_city">Seleccionar ciudad</string>
     <string name="select_postcode">Seleccionar código postal</string>
     <string name="shared_string_paused">Pausado</string>
-    <string name="favorite_group_name">Nombre del grupo</string>
+    <string name="favorite_group_name">Nombre de grupo</string>
     <string name="change_color">Cambiar color</string>
     <string name="edit_name">Editar nombre</string>
     <string name="animate_my_location">Animar mi ubicación</string>
@@ -2816,7 +2817,7 @@ Por favor proporciona un código completo</string>
     <string name="open_till">Abierto hasta las</string>
     <string name="will_close_at">Cerrará a las</string>
     <string name="will_open_at">Abrirá a las</string>
-    <string name="will_open_on">Abrirá sobre las</string>
+    <string name="will_open_on">Abrirá a las</string>
     <string name="additional_actions">Acciones adicionales</string>
     <string name="av_locations_selected_desc">Archivo GPX con coordenadas y datos de las notas seleccionadas.</string>
     <string name="av_locations_all_desc">Archivo GPX con las coordenadas y los datos de todas las notas.</string>
@@ -2825,4 +2826,5 @@ Por favor proporciona un código completo</string>
     <string name="osm_recipient_stat">%1$s ediciones, suman %2$s mBTC</string>
     <string name="osm_recipients_label">Destinatarios de OSM</string>
     <string name="total_donations">Total de donaciones</string>
-</resources>
+<string name="shared_string_without_name">Sin nombre</string>
+    </resources>

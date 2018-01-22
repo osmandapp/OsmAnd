@@ -132,6 +132,22 @@
         android:gravity="right">
 
         <net.osmand.plus.widgets.ButtonEx
+            android:id="@+id/deleteButton"
+            style="@style/DashboardGeneralButton"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/showAllButtonMarginRight"
+            android:gravity="center"
+            android:text="@string/shared_string_delete"
+            android:visibility="gone"
+            app:textAllCapsCompat="true"
+            tools:visibility="visible"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"/>
+
+        <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/cancelButton"
             style="@style/DashboardGeneralButton"
             android:layout_height="48dp"

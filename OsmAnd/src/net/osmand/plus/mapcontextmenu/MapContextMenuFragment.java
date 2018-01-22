@@ -1238,9 +1238,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			TextView distanceText = (TextView) view.findViewById(R.id.distance);
 			ImageView direction = (ImageView) view.findViewById(R.id.direction);
 			float myHeading = menu.getHeading() == null ? 0f : menu.getHeading();
-			int color = nightMode ? R.color.ctx_menu_direction_color_dark : R.color.ctx_menu_direction_color_light;
-			DashLocationFragment.updateLocationView(false, menu.getMyLocation(), myHeading, direction, color, distanceText,
-					color, menu.getLatLon().getLatitude(), menu.getLatLon().getLongitude(), screenOrientation, app, activity);
+			DashLocationFragment.updateLocationView(false, menu.getMyLocation(), myHeading, direction, distanceText,
+					menu.getLatLon().getLatitude(), menu.getLatLon().getLongitude(), screenOrientation, app, activity);
 		}
 	}
 

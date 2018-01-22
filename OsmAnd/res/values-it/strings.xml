@@ -2845,7 +2845,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="measurement_tool_altitude">Altitudine: %1$s</string>
     <string name="measurement_tool_speed">Velocità %1$s</string>
     <string name="line">Linea</string>
-    <string name="save_as_route_point">Salva come punto di un percorso</string>
+    <string name="save_as_route_point">Salva come punti di un percorso</string>
     <string name="save_as_line">Salva come linea</string>
     <string name="route_point">Punto percorso</string>
     <string name="edit_line">Modifica la linea</string>
@@ -3022,10 +3022,11 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="open_till">Aperto sino</string>
     <string name="will_close_at">Chiuderà alle</string>
     <string name="will_open_at">Aprirà alle</string>
-    <string name="will_open_on">Sarà aperto in</string>
+    <string name="will_open_on">Aprirà alle</string>
     <string name="additional_actions">Altre azioni</string>
     <string name="av_locations_selected_desc">File GPX con le coordinate e i dati delle note selezionate</string>
     <string name="av_locations_all_desc">File GPX con le coordinate e i dati di tutte le note.</string>
     <string name="shared_string_actions">Azioni</string>
     <string name="shared_string_marker">Marcatore</string>
+    <string name="shared_string_without_name">Senza nome</string>
     </resources>

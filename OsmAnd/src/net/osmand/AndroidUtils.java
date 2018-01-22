@@ -15,8 +15,12 @@ import android.os.IBinder;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.text.style.URLSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
@@ -90,6 +94,24 @@ public class AndroidUtils {
 			}
 		}
 		return src;
+	}
+
+	public static void removeLinkUnderline(TextView textView) {
+		Spannable s = new SpannableString(textView.getText());
+		for (URLSpan span : s.getSpans(0, s.length(), URLSpan.class)) {
+			int start = s.getSpanStart(span);
+			int end = s.getSpanEnd(span);
+			s.removeSpan(span);
+			span = new URLSpan(span.getURL()) {
+				@Override
+				public void updateDrawState(TextPaint ds) {
+					super.updateDrawState(ds);
+					ds.setUnderlineText(false);
+				}
+			};
+			s.setSpan(span, start, end, 0);
+		}
+		textView.setText(s);
 	}
 
 	public static String formatDate(Context ctx, long time) {

@@ -236,20 +236,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
-		if (menu.hasHiddenBottomInfo()) {
-			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-					menu.openMenuFullScreen();
-					return true;
-				}
-			};
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
-					.setTitleId(R.string.shared_string_show_description, activity)
-					.setIcon(R.drawable.ic_action_note_dark)
-					.setListener(listener)
-					.createItem());
-		}
 		if (isObjectMoveable(o)) {
 			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
@@ -624,7 +610,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						if (searchLatLon == null) {
 							searchLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
 						}
-						Amenity amenity = findAmenity(activity.getMyApplication(), renderedObject.getId() >> 7, names, searchLatLon);
+						Amenity amenity = findAmenity(activity.getMyApplication(), renderedObject.getId() >> 7, names, searchLatLon, 50);
 						if (amenity != null) {
 							if (renderedObject.getX() != null && renderedObject.getX().size() > 1
 									&& renderedObject.getY() != null && renderedObject.getY().size() > 1) {

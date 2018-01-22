@@ -38,7 +38,6 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
-import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
@@ -48,8 +47,8 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.RenameMarkerBottomSheetDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -379,6 +378,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					 @Nullable PointDescription pointDescription,
 					 @Nullable Object object) {
 		if (init(latLon, pointDescription, object)) {
+			mapActivity.getMyApplication().logEvent(mapActivity, "open_context_menu");
 			showInternal();
 		}
 	}
@@ -808,8 +808,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					MapActivity.clearPrevActivityIntent();
 					MapMarkersDialogFragment.showInstance(mapActivity);
 				} else {
+					String mapObjectName = null;
+					if (object instanceof Amenity) {
+						Amenity amenity = (Amenity) object;
+						mapObjectName = amenity.getName() + "_" + amenity.getType().getKeyName();
+					}
 					mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
-							getPointDescriptionForMarker(), object instanceof Amenity ? ((Amenity) object).getName() : null);
+							getPointDescriptionForMarker(), mapObjectName);
 				}
 			} else {
 				mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),

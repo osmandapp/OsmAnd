@@ -325,11 +325,11 @@
 	<color name="ctx_menu_controller_button_outline_color_light_n">#e6e6e6</color>
 	<color name="ctx_menu_controller_button_outline_color_light_p">#4c63e6</color>
 	<color name="ctx_menu_controller_button_outline_color_dark_n">#2d3133</color>
-	<color name="ctx_menu_controller_button_outline_color_dark_p">#b36a0b</color>
+	<color name="ctx_menu_controller_button_outline_color_dark_p">#d28521</color>
 	<color name="ctx_menu_controller_button_bg_color_light_n">#fafafa</color>
 	<color name="ctx_menu_controller_button_bg_color_light_p">#6d82fc</color>
 	<color name="ctx_menu_controller_button_bg_color_dark_n">#222526</color>
-	<color name="ctx_menu_controller_button_bg_color_dark_p">#d28521</color>
+	<color name="ctx_menu_controller_button_bg_color_dark_p">#b36a0b</color>
 	<color name="ctx_menu_buttons_bg_light">#f2f2f2</color>
 	<color name="ctx_menu_buttons_bg_dark">#222526</color>
 	<color name="ctx_menu_buttons_divider_light">#e6e6e6</color>
@@ -354,6 +354,8 @@
 	<color name="ctx_menu_bottom_view_url_color_dark">#d28521</color>
 	<color name="ctx_menu_controller_disabled_text_color_light">#b3b3b3</color>
 	<color name="ctx_menu_controller_disabled_text_color_dark">#666666</color>
+	<color name="ctx_menu_collapse_icon_color_light">#727272</color>
+	<color name="ctx_menu_collapse_icon_color_dark">#a6a6a6</color>
 
 	<color name="route_info_bg_light">#ffffff</color>
 	<color name="route_info_bg_dark">#17191a</color>

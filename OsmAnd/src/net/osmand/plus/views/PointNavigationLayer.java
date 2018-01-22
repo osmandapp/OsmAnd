@@ -188,7 +188,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		if (tileBox.getZoom() >= 3) {
 			TargetPointsHelper tg = map.getMyApplication().getTargetPointsHelper();
 			List<TargetPoint> intermediatePoints = tg.getAllPoints();
-			int r = getRadiusPoi(tileBox);
+			int r = getDefaultRadiusPoi(tileBox);
 			for (int i = 0; i < intermediatePoints.size(); i++) {
 				TargetPoint tp = intermediatePoints.get(i);
 				LatLon latLon = tp.point;
@@ -207,21 +207,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
 		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius && (objy - ey) <= 2.5 * radius;
-	}
-
-	public int getRadiusPoi(RotatedTileBox tb) {
-		int r;
-		final double zoom = tb.getZoom();
-		if (zoom <= 15) {
-			r = 10;
-		} else if (zoom <= 16) {
-			r = 14;
-		} else if (zoom <= 17) {
-			r = 16;
-		} else {
-			r = 18;
-		}
-		return (int) (r * tb.getDensity());
 	}
 
 	@Override

@@ -221,8 +221,8 @@ public abstract class OsmandMapLayer {
 		return rf;
 	}
 
-	public Amenity findAmenity(OsmandApplication app, long id, List<String> names, LatLon latLon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), 50);
+	public Amenity findAmenity(OsmandApplication app, long id, List<String> names, LatLon latLon, int radius) {
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
 		List<Amenity> amenities = app.getResourceManager().searchAmenities(
 				new BinaryMapIndexReader.SearchPoiTypeFilter() {
 					@Override
@@ -259,6 +259,21 @@ public abstract class OsmandMapLayer {
 		}
 
 		return res;
+	}
+
+	public int getDefaultRadiusPoi(RotatedTileBox tb) {
+		int r;
+		final double zoom = tb.getZoom();
+		if (zoom <= 15) {
+			r = 10;
+		} else if (zoom <= 16) {
+			r = 14;
+		} else if (zoom <= 17) {
+			r = 16;
+		} else {
+			r = 18;
+		}
+		return (int) (r * tb.getDensity());
 	}
 
 	public abstract class MapLayerData<T> {

@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_without_name">Without name</string>
     <string name="what_is_here">What\'s here:</string>
     <string name="parked_at">parked at</string>
     <string name="pick_up_till">Pick up until</string>
@@ -20,7 +21,7 @@
     <string name="open_till">Open till</string>
     <string name="will_close_at">Will close at</string>
     <string name="will_open_at">Will open at</string>
-    <string name="will_open_on">Will open on</string>
+    <string name="will_open_on">Will open at</string>
     <string name="additional_actions">Additional actions</string>
     <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
     <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
@@ -824,6 +825,7 @@
     <string name="lang_ta">Tamil</string>
     <string name="lang_ml">Malayalam</string>
     <string name="lang_lb">Luxembourgish</string>
+    <string name="lang_lo">Lao</string>
     <string name="lang_os">Ossetian</string>
     <string name="lang_eo">Esperanto</string>
     <string name="lang_es_us">Spanish (American)</string>

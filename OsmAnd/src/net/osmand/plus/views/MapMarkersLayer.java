@@ -519,7 +519,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		OsmandApplication app = map.getMyApplication();
-		int r = getRadiusPoi(tileBox);
+		int r = getDefaultRadiusPoi(tileBox);
 		boolean selectMarkerOnSingleTap = app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get();
 
 		for (MapMarker marker : app.getMapMarkersHelper().getMapMarkers()) {
@@ -556,28 +556,14 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Nullable
 	public Amenity getMapObjectByMarker(@NonNull MapMarker marker) {
 		if (marker.mapObjectName != null && marker.point != null) {
-			return findAmenity(map.getMyApplication(), -1, Collections.singletonList(marker.mapObjectName), marker.point);
+			String mapObjName = marker.mapObjectName.split("_")[0];
+			return findAmenity(map.getMyApplication(), -1, Collections.singletonList(mapObjName), marker.point, 15);
 		}
 		return null;
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius && (objy - ey) <= 2.5 * radius;
-	}
-
-	public int getRadiusPoi(RotatedTileBox tb) {
-		int r;
-		final double zoom = tb.getZoom();
-		if (zoom <= 15) {
-			r = 10;
-		} else if (zoom <= 16) {
-			r = 14;
-		} else if (zoom <= 17) {
-			r = 16;
-		} else {
-			r = 18;
-		}
-		return (int) (r * tb.getDensity());
+		return Math.abs(objx - ex) <= radius * 1.5 && (ey - objy) <= radius * 1.5 && (objy - ey) <= 2.5 * radius;
 	}
 
 	@Override

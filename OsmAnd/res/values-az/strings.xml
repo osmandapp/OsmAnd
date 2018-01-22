@@ -907,7 +907,7 @@
     <string name="osmo_share_current_session">Hazırki sessiyanı brauzerdə paylaş</string>
     <string name="osmo_session_not_available">Sessiya mövcud deyil, “Məkanı göndər”in açıq olub-olmadığını yoxlayın.</string>
     <string name="osmo_share_session">Sessiyanı paylaş</string>
-    <string name="osmo_track_interval_descr">Məkanı göndərmək üçün vaxt intervalı seçin</string>
+    <string name="osmo_track_interval_descr">Mövqe məlumatlarını göndərmək üçün vaxt intervalı seçin.</string>
     <string name="osmo_group_policy">Qaydalar</string>
     <string name="osmo_server_operation_failed">OsMo server əməliyyatı uğursuz oldu</string>
     <string name="osmo_enable_tracker">Mövqelərimi göndər</string>
@@ -1133,8 +1133,8 @@
     <string name="display_zoom_level">Görüntünün miqyası: %1$s</string>
     <string name="quick_action_auto_zoom">Avtomatik miqyası yandır/söndür</string>
     <string name="quick_action_auto_zoom_desc">Fəaliyyət düyməsinə toxunulduğunda sürətinizə görə avtomatik xəritə miqyası yandırılır/söndürülür.</string>
-    <string name="quick_action_auto_zoom_on">Avtomatik miqyas yanılıdır</string>
-    <string name="quick_action_auto_zoom_off">Avtomatik miqyas sönülüdür</string>
+    <string name="quick_action_auto_zoom_on">Avtomatik miqyası yandır</string>
+    <string name="quick_action_auto_zoom_off">Avtomatik miqyası söndür</string>
     <string name="auto_zoom_none">Avto-miqyas yoxdur</string>
     <string name="local_index_tile_data_zooms">Miqyaslar endirildi: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maksimum yaxınlaşdırma: %1$s</string>
@@ -1179,7 +1179,7 @@
     <string name="data_settings_descr">Dil seçin, məlumatları endirin/yeniləyin.</string>
     <string name="use_english_names_descr">Yerli və ingiliscə adlar arasında seçim edin.</string>
     <string name="choose_building">Bina seçin</string>
-    <string name="show_poi_over_map_description">Xəritədə POI göstər (son seçilən filtri istifadə et)</string>
+    <string name="show_poi_over_map_description">Son seçilən POI örtüyünü xəritədə göstər.</string>
     <string name="show_location">Mövqeyinizi göstər</string>
     <string name="app_description">Naviqasiya proqramı</string>
     <string name="incremental_search_street">Küçəni tədricən axtar</string>
@@ -1209,7 +1209,7 @@
     <string name="routing_settings">Naviqasiya</string>
     <string name="routing_settings_descr">Naviqasiya üçün seçimlər təyin edin.</string>
     <string name="global_settings">Ümumi parametrlər</string>
-    <string name="osmand_service_descr">Ekran sönülü olduqda OsmAnd arxa fonda işləyir</string>
+    <string name="osmand_service_descr">Ekran sönülü olduqda OsmAnd arxa fonda işləməyə davam edir.</string>
     <string name="download_files_not_enough_space">%1$s MB endirmək üçün kifayət qədər yaddaş yoxdur (boş: %2$s).</string>
     <string name="keep_informing_never">Yalnız əl ilə (oxa toxun)</string>
     <string name="city_type_hamlet">Kənd</string>
@@ -1297,7 +1297,7 @@
     <string name="avoid_in_routing_title">Yayın…</string>
     <string name="map_widget_distance">Təyinat nöqtəsi</string>
     <string name="quick_action_add_first_intermediate">Birinci aralığı əlavə et</string>
-    <string name="quick_action_add_destination_desc">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində bir təyinat nöqtəsi əlavə ediləcək. Əvvəl seçilmiş təyinat nöqtəsi son aralıq nöqtəsi olacaq.</string>
+    <string name="quick_action_add_destination_desc">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində bir təyinat nöqtəsi əlavə ediləcək. Əvvəl seçilmiş təyinat nöqtəsi son ara təyinat nöqtəsi olacaq.</string>
     <string name="quick_action_replace_destination_desc">Fəaliyyət düyməsinə toxunulduqda təyinat nöqtəsi ekranın mərkəzi ilə əvəzlənəcək.</string>
     <string name="quick_action_add_first_intermediate_desc">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində birinci aralıq nöqtə əlavə ediləcək.</string>
     <string name="do_not_show_startup_messages_desc">Proqram endirimləri və xüsusi yerli hadisələr haqda mesajları göstərir.</string>
@@ -1377,7 +1377,7 @@
     <string name="save_current_track">Hazırki GPX izini saxla</string>
     <string name="save_track_to_gpx">Naviqasiya zamanı izi avtomatik qeyd et</string>
     <string name="save_track_to_gpx_descrp">Naviqasiya zamanı iz GPX formatında izlər qovluğunda avtomatik saxlanacaq.</string>
-    <string name="none_selected_gpx">Heç bir GPX faylı seçilməyib. Seçmək üçün mövcud izə basıb saxlayın.</string>
+    <string name="none_selected_gpx">GPX faylı seçilməyib. Birini seçmək üçün mövcud izə basıb saxlayın.</string>
     <string name="gpx_info_subtracks">Alt izlər: %1$s</string>
     <string name="gpx_selection_track">%1$s
 \nİz %2$s</string>
@@ -1705,7 +1705,7 @@
 <string name="shared_string_options">Seçimlər</string>
     <string name="enter_gpx_name">GPX fayl adı:</string>
     <string name="move_all_to_history">Hamısını tarixçəyə daşı</string>
-    <string name="show_direction">İstiqaməti göstər</string>
+    <string name="show_direction">Məsafə göstəricisi</string>
     <string name="sort_by">Sırala</string>
     <string name="marker_options">İşarə seçimləri</string>
     <string name="exit_without_saving">Yadda saxlamadan çıxılsın?</string>
@@ -1738,4 +1738,8 @@
     <string name="marker_save_as_track">İz kimi saxla</string>
     <string name="shared_string_groups">Qruplar</string>
     <string name="import_track">İz idxal et</string>
+    <string name="context_menu_read_full_article">Tam məqaləni oxu</string>
+    <string name="context_menu_read_article">Məqaləni oxu</string>
+    <string name="modify_the_search_query">Axtarış sorğusunu dəyiş.</string>
+    <string name="passed">Son istifadə: %1$s</string>
     </resources>

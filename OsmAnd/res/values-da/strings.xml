@@ -3010,8 +3010,10 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="open_till">Åben til</string>
     <string name="will_close_at">Vil være lukket på</string>
     <string name="will_open_at">Vil blive åbnet på</string>
-    <string name="will_open_on">Der åbnes på</string>
+    <string name="will_open_on">Der åbnes</string>
     <string name="additional_actions">Yderligere handlinger</string>
     <string name="shared_string_actions">Handlinger</string>
     <string name="shared_string_marker">Markør</string>
+    <string name="shared_string_without_name">Uden navn</string>
+    <string name="lang_lo">Laotisk</string>
     </resources>

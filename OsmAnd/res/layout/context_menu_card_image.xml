@@ -80,6 +80,7 @@
             android:visibility="gone"/>
 
         <View
+            android:id="@+id/card_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/context_menu_card"/>
