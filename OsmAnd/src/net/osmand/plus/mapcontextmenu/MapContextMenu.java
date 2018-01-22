@@ -85,7 +85,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private LatLon myLocation;
 	private Float heading;
 	private boolean inLocationUpdate = false;
-	private boolean useCachedLocation;
+	private boolean cachedMyLocation;
 	private boolean appModeChanged;
 	private boolean appModeListenerAdded;
 	private boolean autoHide;
@@ -1216,8 +1216,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return myLocation;
 	}
 
-	public boolean isUseCachedLocation() {
-		return useCachedLocation;
+	public boolean isCachedMyLocation() {
+		return cachedMyLocation;
 	}
 
 	public Float getHeading() {
@@ -1228,9 +1228,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (active && displayDistanceDirection()) {
 			if (location == null) {
 				location = getMapActivity().getMyApplication().getLocationProvider().getLastStaleKnownLocation();
-				useCachedLocation = location != null;
+				cachedMyLocation = location != null;
 			} else {
-				useCachedLocation = false;
+				cachedMyLocation = false;
 			}
 			if (location != null) {
 				myLocation = new LatLon(location.getLatitude(), location.getLongitude());
