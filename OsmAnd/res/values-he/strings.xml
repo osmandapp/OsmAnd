@@ -262,7 +262,7 @@
 	<string name="altitude">גובה</string>
 	<string name="front">מלפנים</string>
 	<string name="front_right">מלפנים מימין</string>
-	<string name="right">מימין</string>
+	<string name="right">לימין</string>
 	<string name="back_right">מאחור מימין</string>
 	<string name="back">מאחור</string>
 	<string name="back_left">מאחור משמאל</string>
@@ -273,31 +273,31 @@
 	<string name="direction_style_sidewise">לצדדים (8 חלקים)</string>
 	<string name="direction_style_clockwise">לפי השעון (12 חלקים)</string>
 	<string name="settings_direction_style">סגנון ההכוונה</string>
-	<string name="settings_direction_style_descr">נא לבחור את הסגנון להבעת יחס ההכוונה בעת התזוזה</string>
+	<string name="settings_direction_style_descr">נא לבחור את הסגנון להבעת יחס ההכוונה בעת התזוזה.</string>
 	<string name="auto_announce_on">התחלת הכרזה אוטומטית</string>
 	<string name="auto_announce_off">הפסקת ההכרזה האוטומטית</string>
 	<string name="i_am_here">הנני כאן</string>
-	<string name="zoom_by_trackball_descr">החלפת התקריב למפה על ידי תזוזות אופקיות של כדור המעקב</string>
+	<string name="zoom_by_trackball_descr">החלפת התקריב למפה על ידי תזוזות אופקיות של כדור המעקב.</string>
 	<string name="zoom_by_trackball">שימוש בכדור המעקב לצורך שליטה בתקריב</string>
-	<string name="accessibility_preferences_descr">העדפות הקשורות בנגישות</string>
+	<string name="accessibility_preferences_descr">העדפות הקשורות בנגישות.</string>
 	<string name="shared_string_accessibility">נגישות</string>
 	<string name="rendering_out_of_memory">אין די זיכרון לתהליך כדי להציג את האיזור הנבחר</string>
 	<string name="use_fluorescent_overlays">שכבות מוארות</string>
-	<string name="use_fluorescent_overlays_descr">ניתן להשתמש בצבעים מוארים כדי להציג דרכים ומסלולים</string>
+	<string name="use_fluorescent_overlays_descr">ניתן להשתמש בצבעים מוארים כדי להציג דרכים ומסלולים.</string>
 	<string name="offline_edition">עריכה בלתי מקוונת</string>
-	<string name="offline_edition_descr">תמיד להשתמש בעריכה בלתי מקוונת</string>
+	<string name="offline_edition_descr">תמיד להשתמש בעריכה בלתי מקוונת.</string>
 	
 	<string name="update_poi_does_not_change_indexes">שינויי הנ״ע בתוך היישום אינם משפיעים על קובצי המפה שהתקבלו, השינויים נשמרים לקבצים מקומיים במקום זאת.</string>
 	<string name="local_openstreetmap_uploading">מתבצעת שליחה…</string>
-	<string name="local_openstreetmap_were_uploaded">{0} נ״ע/תקלות נשלחו</string>
+	<string name="local_openstreetmap_were_uploaded">{0} נ״ע/הערות נשלחו</string>
 	<string name="local_openstreetmap_uploadall">לשלוח הכול</string>
 	
 	
 	<string name="local_openstreetmap_upload">שליחת השינויים ל־OSM</string>
 	<string name="local_openstreetmap_delete">מחיקת השינוי</string>
 	<string name="local_openstreetmap_descr_title">עריכה בלתי מתואמת של OSM:</string>
-	<string name="local_openstreetmap_settings">נ״ע/תקלות של OSM שנשמרו מקומית</string>
-	<string name="local_openstreetmap_settings_descr">הצגה וניהול של נ״ע/תקלות שנרשמו במסד הנתונים המקומי</string>
+	<string name="local_openstreetmap_settings">נ״ע/הערות של OSM שנשמרו מקומית</string>
+	<string name="local_openstreetmap_settings_descr">הצגה וניהול של נ״ע/הערות שנרשמו במסד הנתונים המקומי.</string>
 	
 	
 	<string name="live_monitoring_interval_descr">נא לציין הפסקות בין דיווחי מעקב חי</string>
