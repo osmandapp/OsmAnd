@@ -3158,4 +3158,8 @@
     <string name="osm_recipients_label">OSM-одержувачі</string>
     <string name="total_donations">Всього пожертвувань</string>
     <string name="day_off_label">Вихідний</string>
+    <string name="winter_and_ski_renderer">Зимовий/лижний</string>
+    <string name="touring_view_renderer">Туристичний (контраст і деталі)</string>
+    <string name="nautical_renderer">Морський</string>
+
 </resources>
