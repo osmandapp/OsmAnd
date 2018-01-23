@@ -450,6 +450,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void onNavigationClick() {
+		if (mapRouteInfoMenu != null) {
+			mapRouteInfoMenu.cancelSelectionFromMap();
+		}
 		MapActivity.clearPrevActivityIntent();
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
