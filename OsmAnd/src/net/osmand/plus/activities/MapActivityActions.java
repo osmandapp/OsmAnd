@@ -276,7 +276,7 @@ public class MapActivityActions implements DialogProvider {
 
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
-				.setIcon(R.drawable.ic_action_gdirections_dark)
+				.setIcon(R.drawable.ic_action_route_direction_from_here)
 				.setPosition(0)
 				.createItem());
 		adapter.addItem(itemBuilder
