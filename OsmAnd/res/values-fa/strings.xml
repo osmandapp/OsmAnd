@@ -1252,7 +1252,7 @@
     <string name="local_index_tile_data_downloadable">قابل‌دانلود: %1$s</string>
     <string name="local_index_tile_data_maxzoom">حداکثر زوم: %1$s</string>
     <string name="local_index_tile_data_minzoom">کمترین زوم: %1$s</string>
-    <string name="local_index_tile_data_name">داده‌های کاشی: %1$s</string>
+    <string name="local_index_tile_data_name">منبع کاشی‌ها: %1$s</string>
     <string name="edit_tilesource_successfully">منبع کاشی %1$s ذخیره شد</string>
     <string name="edit_tilesource_maxzoom">بیشترین زوم</string>
     <string name="edit_tilesource_expiration_time">انقضا (به دقیقه)</string>
@@ -1597,7 +1597,7 @@
     <string name="continue_navigation">ادامهٔ راهبری</string>
     <string name="pause_navigation">مکث‌کردن در راهبری</string>
     <string name="rendering_attr_subwayMode_name">مسیرهای مترو</string>
- 	<string name="map_preferred_locale_descr">زبان ارجح برای نام‌های روی نقشه (اگر نام به این زبان وجود نداشته باشد، به‌جایش نام انگلیسی یا محلی نشان داده می‌شود).</string>
+ 	<string name="map_preferred_locale_descr">زبانی که برای نمایش نام‌های روی نقشه می‌پسندید (اگر نام به این زبان موجود نباشد، به‌جایش نام انگلیسی یا محلی نشان داده می‌شود).</string>
     <string name="local_map_names">نام‌های محلی</string>
     <string name="live_monitoring_m_descr">اگر ضبط‌کردن GPX فعال باشد اطلاعات مسیر به سرویس اینترنتی مشخص‌شده ارسال می‌شود.</string>
 	<string name="live_monitoring_m">ردیابی آنلاین (GPX لازم است)</string>
@@ -1822,7 +1822,7 @@
 	<string name="general_settings_2">تنظیمات کلی</string>
 	<string name="routing_settings_2">تنظیمات راهبری</string>
     <string name="shared_string_do_not_use">استفاده نشود</string>
-	<string name="rendering_attr_OSMMapperAssistant_name">همکار نقشه‌کش OSM</string>
+	<string name="rendering_attr_OSMMapperAssistant_name">دستیار نقشه‌کش OSM</string>
 	<string name="osm_edits">ویرایش‌های OSM</string>
 	<string name="parking_place_limited">حداکثر زمان پارک تا</string>
 	<string name="osmand_parking_time_left">باقی مانده</string>
@@ -1918,7 +1918,7 @@
     <string name="av_audio_format">قالب صدای خروجی</string>
     <string name="av_audio_format_descr">قالب صدای خروجی را انتخاب کنید.</string>
     <string name="please_specify_poi_type_only_from_list">لطفاً نوع درست POI را انتخاب کنید یا از این مرحله رد شوید.</string>
-    <string name="access_from_map_description">کلید منو پیشخوان را نشان می‌دهد، نه منو را.</string>
+    <string name="access_from_map_description">کلید منو به‌جای آوردن منو پیشخوان را می‌آورد.</string>
     <string name="access_from_map">دسترسی از نقشه</string>
     <string name="versions_item">نسخه‌ها</string>
     <string name="feedback">بازخورد</string>
@@ -3003,7 +3003,7 @@
     <string name="av_locations_all_desc">فایل GPX با مختصات و داده‌های یادداشت‌هایی که انتخاب شده است.</string>
     <string name="shared_string_actions">عملیات</string>
     <string name="shared_string_marker">نشانه</string>
-    <string name="osm_recipient_stat">ویرایش‌ها</string>
+    <string name="osm_recipient_stat">ویرایش‌ها: %1$s، مبلغ: %2$s هزارم بیت‌کوین</string>
     <string name="osm_recipients_label">گیرندگان OSM</string>
     <string name="total_donations">کل پرداخت‌ها</string>
 <string name="shared_string_without_name">بدون نام</string>
