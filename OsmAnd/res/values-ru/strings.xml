@@ -2809,4 +2809,5 @@
     <string name="shared_string_marker">Маркер</string>
     <string name="shared_string_without_name">Без имени</string>
     <string name="lang_lo">Лаосский</string>
+    <string name="day_off_label">Выходной</string>
     </resources>
