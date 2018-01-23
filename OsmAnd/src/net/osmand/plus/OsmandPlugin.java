@@ -134,7 +134,12 @@ public abstract class OsmandPlugin {
 		allPlugins.add(new MapillaryPlugin(app));
 		enabledPlugins.add(MapillaryPlugin.ID);
 
+		// plugins with additional actions for context menu in right order:
+		allPlugins.add(new AudioVideoNotesPlugin(app));
+		allPlugins.add(new OsmEditingPlugin(app));
+		checkMarketPlugin(app, new ParkingPositionPlugin(app), false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
+
 		allPlugins.add(new OsmandMonitoringPlugin(app));
 		// allPlugins.add(new OsMoPlugin(app));
 		checkMarketPlugin(app, new SRTMPlugin(app), true, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT);
@@ -144,12 +149,7 @@ public abstract class OsmandPlugin {
 		checkMarketPlugin(app, new NauticalMapsPlugin(app), false, NauticalMapsPlugin.COMPONENT, null);
 		checkMarketPlugin(app, new SkiMapsPlugin(app), false, SkiMapsPlugin.COMPONENT, null);
 
-//		checkMarketPlugin(app, new RoutePointsPlugin(app), false /*FIXME*/, RoutePointsPlugin.ROUTE_POINTS_PLUGIN_COMPONENT, null);
-		allPlugins.add(new AudioVideoNotesPlugin(app));
-		checkMarketPlugin(app, new ParkingPositionPlugin(app), false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
-		//allPlugins.add(new DistanceCalculatorPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
-		allPlugins.add(new OsmEditingPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
 		activatePlugins(app, enabledPlugins);
@@ -446,21 +446,7 @@ public abstract class OsmandPlugin {
 
 	public static void registerMapContextMenu(MapActivity map, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			if (plugin instanceof ParkingPositionPlugin) {
-				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
-			}
-		}
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			if (!(plugin instanceof ParkingPositionPlugin)) {
-				int itemsCount = adapter.length();
-				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
-				if (adapter.length() > itemsCount) {
-					adapter.addItem(new ContextMenuItem.ItemBuilder()
-							.setPosition(itemsCount)
-							.setLayout(R.layout.bottom_sheet_dialog_fragment_divider)
-							.createItem());
-				}
-			}
+			plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
 		}
 	}
 

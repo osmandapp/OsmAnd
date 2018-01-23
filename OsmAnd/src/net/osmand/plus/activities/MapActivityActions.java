@@ -273,10 +273,17 @@ public class MapActivityActions implements DialogProvider {
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter() : iadapter;
 		ItemBuilder itemBuilder = new ItemBuilder();
-		adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_search, mapActivity)
-				.setIcon(R.drawable.ic_action_search_dark).createItem());
-		adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
-				.setIcon(R.drawable.ic_action_gdirections_dark).createItem());
+
+		adapter.addItem(itemBuilder
+				.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
+				.setIcon(R.drawable.ic_action_gdirections_dark)
+				.setPosition(0)
+				.createItem());
+		adapter.addItem(itemBuilder
+				.setTitleId(R.string.context_menu_item_search, mapActivity)
+				.setIcon(R.drawable.ic_action_search_dark)
+				.setPosition(1)
+				.createItem());
 
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 
