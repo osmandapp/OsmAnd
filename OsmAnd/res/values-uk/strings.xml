@@ -3157,4 +3157,5 @@
     <string name="osm_recipient_stat">Редагувань %1$s, сума %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-одержувачі</string>
     <string name="total_donations">Всього пожертвувань</string>
+    <string name="day_off_label">Вихідний</string>
 </resources>

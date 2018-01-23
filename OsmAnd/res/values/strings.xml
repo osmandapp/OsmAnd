@@ -2841,4 +2841,5 @@
     <string name="add_segment_to_the_track">Add to a GPX track</string>
     <string name="osm_recipients_label">OSM recipients</string>
     <string name="total_donations">Total donations</string>
+    <string name="day_off_label">off</string>
 </resources>
