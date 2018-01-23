@@ -2842,4 +2842,7 @@
     <string name="osm_recipients_label">OSM recipients</string>
     <string name="total_donations">Total donations</string>
     <string name="day_off_label">off</string>
+    <string name="winter_and_ski_renderer">Winter and ski</string>
+    <string name="touring_view_renderer">Touring view (contrast and details)</string>
+    <string name="nautical_renderer">Nautical</string>
 </resources>
