@@ -123,6 +123,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		this.onDismissListener = onDismissListener;
 	}
 
+	public void cancelSelectionFromMap() {
+		selectFromMapTouch = false;
+	}
+
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (selectFromMapTouch) {
 			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
