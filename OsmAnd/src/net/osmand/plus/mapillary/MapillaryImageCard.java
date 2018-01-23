@@ -9,7 +9,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.util.Algorithms;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MapillaryImageCard extends ImageCard {
@@ -28,7 +27,7 @@ public class MapillaryImageCard extends ImageCard {
 						mapillaryPlugin.updateLayers(getMapActivity().getMapView(), getMapActivity(), true);
 					}
 				}
-				getMapActivity().getContextMenu().hideMenues();
+				getMapActivity().getContextMenu().close();
 				MapillaryImageDialog.show(getMapActivity(), getKey(), getImageHiresUrl(), getUrl(), getLocation(),
 						getCa(), getMyApplication().getString(R.string.mapillary), null, true);
 			}
