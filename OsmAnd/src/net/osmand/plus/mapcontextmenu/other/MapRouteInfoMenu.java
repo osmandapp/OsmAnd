@@ -241,7 +241,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		ViewGroup vg = (ViewGroup) parentView.findViewById(R.id.app_modes);
 		vg.removeAllViews();
 		AppModeDialog.prepareAppModeView(mapActivity, selected, false,
-				vg, true, true, new View.OnClickListener() {
+				vg, true, false,true, new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						if (selected.size() > 0) {

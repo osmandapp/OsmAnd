@@ -22,7 +22,7 @@ import java.util.Set;
 public class AppModeDialog {
 
 	public static View prepareAppModeView(Activity a, final Set<ApplicationMode> selected, boolean showDefault,
-			ViewGroup parent, final boolean singleSelection, boolean useMapTheme, final View.OnClickListener onClickListener) {
+			ViewGroup parent, final boolean singleSelection, boolean useListBg, boolean useMapTheme, final View.OnClickListener onClickListener) {
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));
 		if(!showDefault) {
@@ -31,7 +31,7 @@ public class AppModeDialog {
 		if (showDefault || (settings.getApplicationMode() != ApplicationMode.DEFAULT && !singleSelection)) {
 			selected.add(settings.getApplicationMode());
 		}
-		return prepareAppModeView(a, values, selected, parent, singleSelection, false, useMapTheme, onClickListener);
+		return prepareAppModeView(a, values, selected, parent, singleSelection, useListBg, useMapTheme, onClickListener);
 	}
 
 	//special method for drawer menu
@@ -45,10 +45,14 @@ public class AppModeDialog {
 	}
 	
 	public static View prepareAppModeView(Activity a, final List<ApplicationMode> values , final Set<ApplicationMode> selected, 
-				ViewGroup parent, final boolean singleSelection, boolean drawer, boolean useMapTheme, final View.OnClickListener onClickListener) {
+				ViewGroup parent, final boolean singleSelection, boolean useListBg, boolean useMapTheme, final View.OnClickListener onClickListener) {
 		View ll = a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
 		boolean nightMode = isNightMode(((OsmandApplication) a.getApplication()), useMapTheme);
-		ll.setBackgroundColor(ContextCompat.getColor(a, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
+		if (useListBg) {
+			AndroidUtils.setListItemBackground(a, ll, nightMode);
+		} else {
+			ll.setBackgroundColor(ContextCompat.getColor(a, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
+		}
 		final View[] buttons = new View[values.size()];
 		int k = 0;
 		for(ApplicationMode ma : values) {
