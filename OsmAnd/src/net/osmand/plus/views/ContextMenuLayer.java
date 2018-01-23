@@ -236,21 +236,20 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
-		if (isObjectMoveable(o)) {
-			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-					RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
-					enterMovingMode(tileBox);
-					return true;
-				}
-			};
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
-					.setTitleId(R.string.change_markers_position, activity)
-					.setIcon(R.drawable.ic_show_on_map)
-					.setListener(listener)
-					.createItem());
-		}
+		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
+			@Override
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+				RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
+				enterMovingMode(tileBox);
+				return true;
+			}
+		};
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.change_markers_position, activity)
+				.setIcon(R.drawable.ic_show_on_map)
+				.setClickable(isObjectMoveable(o))
+				.setListener(listener)
+				.createItem());
 	}
 
 	@Override

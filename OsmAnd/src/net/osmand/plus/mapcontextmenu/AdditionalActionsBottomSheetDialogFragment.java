@@ -101,8 +101,13 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 					((ImageView) menuItem.findViewById(R.id.icon)).setImageDrawable(getContentIcon(item.getIcon()));
 				}
 				((TextView) menuItem.findViewById(R.id.title)).setText(item.getTitle());
-				menuItem.setTag(i);
-				menuItem.setOnClickListener(onClickListener);
+				if (item.isClickable()) {
+					menuItem.setTag(i);
+					menuItem.setOnClickListener(onClickListener);
+				} else {
+					menuItem.setEnabled(false);
+					menuItem.setAlpha(.5f);
+				}
 				((FrameLayout) row.findViewById(getMenuItemContainerId(itemsAdded))).addView(menuItem);
 				itemsAdded++;
 			}
