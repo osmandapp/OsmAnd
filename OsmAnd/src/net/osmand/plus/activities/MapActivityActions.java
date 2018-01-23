@@ -304,12 +304,14 @@ public class MapActivityActions implements DialogProvider {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_edit_waypoint, mapActivity)
 					.setIcon(R.drawable.ic_action_edit_dark)
+					.setPosition(getPositionForGpxAction(adapter))
 					.setListener(listener).createItem());
 		} else if (!getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles().isEmpty()
 				|| (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null)) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_add_waypoint, mapActivity)
 					.setIcon(R.drawable.ic_action_gnew_label_dark)
+					.setPosition(getPositionForGpxAction(adapter))
 					.setListener(listener).createItem());
 		}
 
@@ -344,6 +346,17 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 		actionsBottomSheetDialogFragment.show(mapActivity.getSupportFragmentManager(), AdditionalActionsBottomSheetDialogFragment.TAG);
+	}
+
+	private int getPositionForGpxAction(ContextMenuAdapter adapter) {
+		for (int i = 0; i < adapter.length(); i++) {
+			int titleId = adapter.getItem(i).getTitleId();
+			if (titleId == R.string.context_menu_item_add_parking_point
+					|| titleId == R.string.context_menu_item_update_map) {
+				return i;
+			}
+		}
+		return adapter.length();
 	}
 
 	public void setGPXRouteParams(GPXFile result) {
