@@ -2914,4 +2914,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="total_donations">Donatziones totales</string>
 <string name="shared_string_without_name">Chene nùmene</string>
     <string name="lang_lo">Laotianu</string>
-    </resources>
+    <string name="rendering_attr_hidePOILabels_name">Etichetas PDI</string>
+    <string name="winter_and_ski_renderer">Ierru e iscì</string>
+    <string name="touring_view_renderer">Vista pro su turismu (cuntrastu e minujas)</string>
+    <string name="nautical_renderer">Nàutica</string>
+</resources>
