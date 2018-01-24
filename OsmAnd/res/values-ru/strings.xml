@@ -2813,4 +2813,6 @@
     <string name="winter_and_ski_renderer">Зимний/лыжный</string>
     <string name="touring_view_renderer">Туристический (контраст и детали)</string>
     <string name="nautical_renderer">Морской</string>
+    <string name="rendering_attr_hidePOILabels_name">Названия POI</string>
+
     </resources>

@@ -1062,43 +1062,6 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void saveMapMarkers(List<MapMarker> markers, List<MapMarker> markersHistory) {
-		if (markers != null) {
-			List<LatLon> ls = new ArrayList<>(markers.size());
-			List<String> names = new ArrayList<>(markers.size());
-			List<Integer> colors = new ArrayList<>(markers.size());
-			List<Boolean> selections = new ArrayList<>(markers.size());
-			List<Long> creationDates = new ArrayList<>(markers.size());
-			for (MapMarker marker : markers) {
-				ls.add(marker.point);
-				names.add(PointDescription.serializeToString(marker.pointDescription));
-				colors.add(marker.colorIndex);
-				selections.add(marker.selected);
-				creationDates.add(marker.creationDate);
-			}
-			settings.saveMapMarkers(ls, names, colors, selections, creationDates);
-		}
-
-		if (markersHistory != null) {
-			List<LatLon> ls = new ArrayList<>(markersHistory.size());
-			List<String> names = new ArrayList<>(markersHistory.size());
-			List<Integer> colors = new ArrayList<>(markersHistory.size());
-			List<Long> creationDates = new ArrayList<>(markersHistory.size());
-			for (MapMarker marker : markersHistory) {
-				ls.add(marker.point);
-				names.add(PointDescription.serializeToString(marker.pointDescription));
-				colors.add(marker.colorIndex);
-				creationDates.add(marker.creationDate);
-			}
-			settings.saveMapMarkersHistory(ls, names, colors, creationDates);
-		}
-
-		if (markers != null || markersHistory != null) {
-			loadMarkers();
-			refresh();
-		}
-	}
-
 	public void addListener(MapMarkerChangedListener l) {
 		if (!listeners.contains(l)) {
 			listeners.add(l);
