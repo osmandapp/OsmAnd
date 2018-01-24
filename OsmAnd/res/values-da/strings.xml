@@ -1677,7 +1677,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="watch">Vis</string>
     <string name="share_note">Del note</string>
 
-    <string name="plugin_touringview_name">Touring</string>
+    <string name="plugin_touringview_name">Touring kortvisning</string>
 	<string name="plugin_nautical_descr">Udvidelsen giver mulighed for at vise maritime kort til sejlsport, sejlads og andre former for vandsport. 
 \n 
 \nEn særlig kort tilføjelse giver alle maritime sømærker og søkortsymboler, for indre såvel som for kystnært navigation. Beskrivelsen af hvert sømærke giver oplysninger, der er nødvendige for at identificere dem og deres betydning (kategori, form, farve, sekvens, reference, etc.). 
@@ -3016,4 +3016,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_marker">Markør</string>
     <string name="shared_string_without_name">Uden navn</string>
     <string name="lang_lo">Laotisk</string>
-    </resources>
+    <string name="day_off_label">fra</string>
+    <string name="winter_and_ski_renderer">Vinter og ski</string>
+    <string name="touring_view_renderer">Touringvisning (kontrast og detaljer)</string>
+    <string name="nautical_renderer">Nautisk</string>
+</resources>
