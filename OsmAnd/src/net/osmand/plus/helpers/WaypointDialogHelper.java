@@ -270,24 +270,13 @@ public class WaypointDialogHelper {
 			if (locationPointNext) {
 				if (locationPoint) {
 					LocationPointWrapper w = (LocationPointWrapper) obj;
-					if (w.type == WaypointHelper.TARGETS && ((TargetPoint) w.point).start) {
-						d = startingPointDivider; // starting point divider
+					if (w.type == WaypointHelper.TARGETS) {
+						d = halfPointDivider;
 					} else {
-						if (w.type == WaypointHelper.TARGETS) {
-							d = halfPointDivider;
-						} else {
-							d = halfDivider;
-						}
+						d = halfDivider;
 					}
 				} else {
-					LocationPointWrapper w = (LocationPointWrapper) objNext;
-					if (w.type == WaypointHelper.TARGETS) {
-						if (!((TargetPoint) w.point).start) {
-							d = fullDivider;
-						}
-					} else {
-						d = fullDivider;
-					}
+					d = fullDivider;
 				}
 			} else if (objNext instanceof RadiusItem && labelView) {
 				d = headerDivider;
