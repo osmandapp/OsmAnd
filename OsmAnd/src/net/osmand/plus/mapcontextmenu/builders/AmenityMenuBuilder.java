@@ -381,9 +381,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
 				if (rs != null) {
 					vl = rs.toLocalString();
-					if (!preferredLang.equals("en")) {
-						vl = vl.replaceAll("off", view.getContext().getString(R.string.day_off_label));
-					}
 					Calendar inst = Calendar.getInstance();
 					inst.setTimeInMillis(System.currentTimeMillis());
 					boolean opened = rs.isOpenedForTime(inst);
