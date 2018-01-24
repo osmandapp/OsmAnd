@@ -1118,7 +1118,7 @@
     <string name="configure_map">ضبط الخريطة</string>
     <string name="layer_map">مصدر الخريطة…</string>
 	<string name="map_source">مصدر الخريطة</string>
-	<string name="layer_amenity_label">تسميات النقاط</string>
+	<string name="layer_amenity_label">التسميات الفوقية للنقاط</string>
     <string name="layer_gpx_layer">مسار GPX…</string>
 	<string name="map_locale">لغة الخريطة</string>
     <string name="rendering_category_details">تفاصيل</string>
@@ -2255,7 +2255,7 @@
     <string name="converting_names">تحويل الأسماء باللغة المحلية/ الإنجليزية…</string>
     <string name="previous_run_crashed">الاقلاع الأخير للتطبيق فشل. ملف السجل في {0}. الرجاء الإبلاغ عن هذا المشكل وإرفاق ملف السجل.</string>
     <string name="osm_settings_descr">تحديد إعدادات (OpenStreetMap.org (OSM اللازمة لمعالجات OSM.</string>
-    <string name="show_poi_over_map_description">إظهار POI غلى الخريطة (استخدم آخر فيلتر المستخدم).</string>
+    <string name="show_poi_over_map_description">إظهار آخر موضع اهتمام إخترته على الخريطة.</string>
     <string name="navigate_point_top_text">أدخل دائرة العرض وخط الطول في النمط المحدد (د - درجات، د - دقائق، ث - ثواني)</string>
     <string name="navigate_point_format_D">DDD.DD</string>
     <string name="navigate_point_format_DM">ددد دد.دد</string>
@@ -2272,7 +2272,7 @@
 \nليست هناك حاجة لتحميل خريطة خاصة، الرؤية يتم إنشاءها من خلال خرائطنا المحلية.
 \n
 \nهاته الرؤية يمكن التراجع عنها إما عن طريق تعطيلها هنا، أو تغيير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.</string>
-    <string name="create_poi_link_to_osm_doc">تصنيف الخريطة <u> على الإنترنت</u> مع الصور.</string>
+    <string name="create_poi_link_to_osm_doc">تصنيف الخريطة <u>على الإنترنت</u> مع الصور.</string>
     <string name="background_service_wait_int_descr">تعيين الحد الأقصى لوقت الانتظار لكل إصلاح موقع في الخلفية.</string>
     <string name="background_service_wait_int">الانتظار الأقصى للإصلاح</string>
     <string name="voice_data_not_supported">إصدار غير معتمد من البيانات الصوتية</string>
@@ -2783,8 +2783,8 @@
     <string name="exit_without_saving">الخروج دون حفظ؟</string>
     <string name="show_guide_line">إظهار خطوط التوجيه</string>
     <string name="show_arrows_on_the_map">إظهار الأسهم على الخريطة</string>
-    <string name="show_passed">إظهار المتجاوز</string>
-    <string name="hide_passed">إخفاء المتجاوز</string>
+    <string name="show_passed">إظهار المتجاوَز</string>
+    <string name="hide_passed">إخفاء المتجاوَز</string>
     <string name="remove_from_map_markers">إزالة من علامات الخريطة</string>
     <string name="descendingly">تنازلي</string>
     <string name="ascendingly">تصاعدي</string>
@@ -2842,7 +2842,7 @@
 	<string name="tap_on_map_to_hide_interface_descr">نقرة على الخريطة ستفعل أزرار التحكم والويدجت.</string>
     <string name="tap_on_map_to_hide_interface">وضع الشاشة الكاملة</string>
     <string name="show_on_top_bar">اظهار في الشريط العلوي</string>
-    <string name="mark_passed">تعيين كمتجاوز</string>
+    <string name="mark_passed">تعيين كمتجاوَز</string>
     <string name="empty_state_osm_edits">إنشاء أو تعديل عناصر OSM</string>
     <string name="empty_state_osm_edits_descr">إنشاء أو تعديل OSM POI، فتح أو التعليق على ملاحظات OSM والمساهمة بملفات GPX مسجلة.</string>
     <string name="shared_string_deleted">حُذف</string>
@@ -2860,7 +2860,7 @@
     <string name="open_till">مفتوح إلى غاية</string>
     <string name="will_close_at">يغلق أبوابه على</string>
     <string name="will_open_at">سيفتح الأبواب على</string>
-    <string name="will_open_on">يفتح أبوابه أيام</string>
+    <string name="will_open_on">يفتح أبوابه على</string>
     <string name="additional_actions">إجراءات إضافية</string>
     <string name="shared_string_actions">الإجراءات</string>
     <string name="shared_string_marker">العلامة</string>
@@ -2880,4 +2880,17 @@
     <string name="go_to_next_field">الإنتقال إلى الحقل التالي</string>
     <string name="rename_marker">تعديل تسمية العلامة</string>
     <string name="total_donations">التبرعات الإجمالية</string>
+<string name="rendering_attr_hidePOILabels_name">تسميات نقاط مواضع الإهتمام</string>
+    <string name="shared_string_without_name">بدون إسم</string>
+    <string name="parked_at">تم الرّكنُ على</string>
+    <string name="add_favourites_group_to_markers_descr">إختر الفئة التي تود إضافة العلامات إليها.</string>
+    <string name="favourites_group">الفئات المفضلة</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
+    <string name="shared_string_two">الثاني</string>
+    <string name="shared_string_one">واحد</string>
+    <string name="coordinate_input_accuracy">%1$d أرقام</string>
+    <string name="osm_recipient_stat">التعديلات %1$s, المبلغ %2$s mBTC</string>
+    <string name="osm_recipients_label">مساهمي OSM المستفيدون</string>
+    <string name="winter_and_ski_renderer">الشتاء و التزحلق</string>
+    <string name="nautical_renderer">الملاحة البحرية</string>
 </resources>
