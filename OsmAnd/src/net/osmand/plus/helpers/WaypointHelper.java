@@ -576,7 +576,7 @@ public class WaypointHelper {
 			if (i.getType() == AlarmInfoType.SPEED_CAMERA) {
 				if (app.getSettings().SHOW_CAMERAS.getModeValue(mode) || app.getSettings().SPEAK_SPEED_CAMERA.getModeValue(mode)) {
 					LocationPointWrapper lw = new LocationPointWrapper(route, ALARMS, i, 0, i.getLocationIndex());
-					if(prevSpeedCam != null && prevSpeedCam.getType() == AlarmInfoType.SPEED_CAMERA && 
+					if(prevSpeedCam != null &&  
 							MapUtils.getDistance(prevSpeedCam.getLatitude(), prevSpeedCam.getLongitude(), 
 									i.getLatitude(), i.getLongitude()) < DISTANCE_IGNORE_DOUBLE_SPEEDCAMS) {
 						// ignore double speed cams
