@@ -2998,4 +2998,8 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_marker">標記</string>
     <string name="shared_string_without_name">沒有名稱</string>
     <string name="lang_lo">寮語</string>
-    </resources>
+    <string name="day_off_label">關閉</string>
+    <string name="winter_and_ski_renderer">冬季和滑雪</string>
+    <string name="touring_view_renderer">旅遊風景 (對比和細節)</string>
+    <string name="nautical_renderer">航海</string>
+</resources>
