@@ -2941,4 +2941,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="lang_lo">Laosera</string>
     <string name="osm_recipients_label">OSM hartzaileak</string>
     <string name="total_donations">Dohaintzak guztira</string>
+<string name="day_off_label">itxita</string>
+    <string name="winter_and_ski_renderer">Negua eta eskia</string>
+    <string name="touring_view_renderer">Bidaiatze ikuspegia (kontrastea eta xehetasunak)</string>
+    <string name="nautical_renderer">Nautikoa</string>
 </resources>
