@@ -91,23 +91,23 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 		int itemsAdded = 0;
 		for (int i = 0; i < adapter.length(); i++) {
 			ContextMenuItem item = adapter.getItem(i);
-			int layoutResId = item.getLayout();
-			layoutResId = layoutResId == ContextMenuItem.INVALID_ID ? R.layout.grid_menu_item : layoutResId;
-			boolean dividerItem = layoutResId == R.layout.bottom_sheet_dialog_fragment_divider;
 
-			if (!dividerItem) {
-				View menuItem = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutResId, null);
-				if (item.getIcon() != ContextMenuItem.INVALID_ID) {
-					((ImageView) menuItem.findViewById(R.id.icon)).setImageDrawable(getContentIcon(item.getIcon()));
-				}
-				((TextView) menuItem.findViewById(R.id.title)).setText(item.getTitle());
+			View menuItem = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.grid_menu_item, null);
+			if (item.getIcon() != ContextMenuItem.INVALID_ID) {
+				((ImageView) menuItem.findViewById(R.id.icon)).setImageDrawable(getContentIcon(item.getIcon()));
+			}
+			((TextView) menuItem.findViewById(R.id.title)).setText(item.getTitle());
+			if (item.isClickable()) {
 				menuItem.setTag(i);
 				menuItem.setOnClickListener(onClickListener);
-				((FrameLayout) row.findViewById(getMenuItemContainerId(itemsAdded))).addView(menuItem);
-				itemsAdded++;
+			} else {
+				menuItem.setEnabled(false);
+				menuItem.setAlpha(.5f);
 			}
+			((FrameLayout) row.findViewById(getMenuItemContainerId(itemsAdded))).addView(menuItem);
+			itemsAdded++;
 
-			if (dividerItem || itemsAdded == 3 || (i == adapter.length() - 1 && itemsAdded > 0)) {
+			if (itemsAdded == 3 || (i == adapter.length() - 1 && itemsAdded > 0)) {
 				itemsLinearLayout.addView(row);
 				row = (LinearLayout) View.inflate(getContext(), R.layout.grid_menu_row, null);
 				itemsAdded = 0;

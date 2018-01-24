@@ -7,20 +7,16 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.widget.ArrayAdapter;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidSpecificRoadsCallback;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 
 import java.util.HashSet;
@@ -37,7 +33,6 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	private Paint paint;
 	private Map<Long, Location> impassableRoadLocations;
 	private List<RouteDataObject> impassableRoads;
-	private RoutingHelper routingHelper;
 
 	private ContextMenuLayer contextMenuLayer;
 
@@ -51,7 +46,6 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	public void initLayer(OsmandMapTileView view) {
 		roadWorkIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_avoid_road);
 		paint = new Paint();
-		routingHelper = activity.getRoutingHelper();
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 
@@ -209,29 +203,6 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 			return new PointDescription(PointDescription.POINT_TYPE_BLOCKED_ROAD, route.getName());
 		}
 		return null;
-	}
-
-	@Override
-	public void populateObjectContextMenu(final LatLon latLon, final Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
-		if (latLon != null && o == null
-				&& (routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode())) {
-
-			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-					if (itemId == R.string.avoid_road) {
-						activity.getMyApplication().getAvoidSpecificRoads().addImpassableRoad(
-								activity, latLon, false, null, false);
-					}
-					return true;
-				}
-			};
-
-			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.avoid_road, activity)
-					.setIcon(R.drawable.ic_action_road_works_dark)
-					.setListener(listener)
-					.createItem());
-		}
 	}
 
 	@Override

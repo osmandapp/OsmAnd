@@ -1114,7 +1114,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="plugin_distance_point_speed">vitesse</string>
     <string name="plugin_distance_point_ele">altitude</string>
     <string name="gpx_file_name">Nom du fichier GPX</string>
-    <string name="gpx_saved_sucessfully">L\'enregistrement du fichier GPX {0} a réussi</string>
+    <string name="gpx_saved_sucessfully">L\`enregistrement du fichier GPX {0} a réussi</string>
     <string name="osmand_distance_planning_plugin_description">Ce greffon permet, depuis la carte, de créer un itinéraire soit un cliquant sur la carte, soit en ouvrant ou en modifiant un fichier GPX existant; ainsi que de mesurer la distance entre des points. L\'itinéraire peut être enregistré dans un fichier GPX qui peut lui-même être utilisé plus tard pour une navigation.</string>
     <string name="osmand_distance_planning_plugin_name">Mesure de distance et Outil de planification</string>
     <string name="shared_string_do_not_show_again">Ne plus afficher</string>

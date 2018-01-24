@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
@@ -25,6 +26,7 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -85,6 +87,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private LatLon myLocation;
 	private Float heading;
 	private boolean inLocationUpdate = false;
+	private boolean cachedMyLocation;
 	private boolean appModeChanged;
 	private boolean appModeListenerAdded;
 	private boolean autoHide;
@@ -289,9 +292,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 						@Nullable PointDescription pointDescription,
 						@Nullable Object object,
 						boolean update, boolean restorePrevious) {
+		OsmandApplication app = mapActivity.getMyApplication();
 
 		if (myLocation == null) {
-			myLocation = mapActivity.getMyApplication().getSettings().getLastKnownMapLocation();
+			updateMyLocation(app.getLocationProvider().getLastKnownLocation(), false);
 		}
 
 		if (!update && isVisible()) {
@@ -349,9 +353,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		mapActivity.refreshMap();
 
 		if (object instanceof MapMarker) {
-			mapActivity.getMyApplication().getMapMarkersHelper().addListener(this);
+			app.getMapMarkersHelper().addListener(this);
 		} else if (object instanceof TargetPoint) {
-			mapActivity.getMyApplication().getTargetPointsHelper().addPointListener(this);
+			app.getTargetPointsHelper().addPointListener(this);
 		}
 
 		return true;
@@ -416,6 +420,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void showMinimized(LatLon latLon, PointDescription pointDescription, Object object) {
 		init(latLon, pointDescription, object);
+	}
+
+	public void onFragmentResume() {
+		if (active && displayDistanceDirection() && myLocation != null) {
+			updateLocation(false, true, false);
+		}
 	}
 
 	public boolean navigateInPedestrianMode() {
@@ -1215,14 +1225,32 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return myLocation;
 	}
 
+	public boolean isCachedMyLocation() {
+		return cachedMyLocation;
+	}
+
 	public Float getHeading() {
 		return heading;
 	}
 
-	public void updateMyLocation(net.osmand.Location location) {
-		if (location != null && active && displayDistanceDirection()) {
+	private void updateMyLocation(Location location, boolean updateLocationUi) {
+		if (location == null) {
+			location = getMapActivity().getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+			cachedMyLocation = location != null;
+		} else {
+			cachedMyLocation = false;
+		}
+		if (location != null) {
 			myLocation = new LatLon(location.getLatitude(), location.getLongitude());
-			updateLocation(false, true, false);
+			if (updateLocationUi) {
+				updateLocation(false, true, false);
+			}
+		}
+	}
+
+	public void updateMyLocation(net.osmand.Location location) {
+		if (active && displayDistanceDirection()) {
+			updateMyLocation(location, true);
 		}
 	}
 

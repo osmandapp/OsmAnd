@@ -35,6 +35,7 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -272,15 +273,18 @@ public class MapActivityActions implements DialogProvider {
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter() : iadapter;
 		ItemBuilder itemBuilder = new ItemBuilder();
-		adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_search, mapActivity)
-				.setIcon(R.drawable.ic_action_search_dark).createItem());
-		adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
-				.setIcon(R.drawable.ic_action_gdirections_dark).createItem());
-		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() != null &&
-				(mapActivity.getRoutingHelper().isFollowingMode() || mapActivity.getRoutingHelper().isRoutePlanningMode())) {
-			adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_last_intermediate_point, mapActivity)
-					.setIcon(R.drawable.ic_action_intermediate).createItem());
-		}
+
+		adapter.addItem(itemBuilder
+				.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
+				.setIcon(R.drawable.ic_action_route_direction_from_here)
+				.setPosition(0)
+				.createItem());
+		adapter.addItem(itemBuilder
+				.setTitleId(R.string.context_menu_item_search, mapActivity)
+				.setIcon(R.drawable.ic_action_search_dark)
+				.setPosition(1)
+				.createItem());
+
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
@@ -295,22 +299,20 @@ public class MapActivityActions implements DialogProvider {
 			}
 		};
 
-		if (!mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles().isEmpty()
+		if (selectedObj instanceof WptPt
+				&& getMyApplication().getSelectedGpxHelper().getSelectedGPXFile((WptPt) selectedObj) != null) {
+			adapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitleId(R.string.context_menu_item_edit_waypoint, mapActivity)
+					.setIcon(R.drawable.ic_action_edit_dark)
+					.setPosition(getPositionForGpxAction(adapter))
+					.setListener(listener).createItem());
+		} else if (!getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles().isEmpty()
 				|| (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null)) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_add_waypoint, mapActivity)
 					.setIcon(R.drawable.ic_action_gnew_label_dark)
+					.setPosition(getPositionForGpxAction(adapter))
 					.setListener(listener).createItem());
-		}
-
-		if (selectedObj instanceof GPXUtilities.WptPt) {
-			GPXUtilities.WptPt pt = (GPXUtilities.WptPt) selectedObj;
-			if (getMyApplication().getSelectedGpxHelper().getSelectedGPXFile(pt) != null) {
-				adapter.addItem(new ContextMenuItem.ItemBuilder()
-						.setTitleId(R.string.context_menu_item_edit_waypoint, mapActivity)
-						.setIcon(R.drawable.ic_action_edit_dark)
-						.setListener(listener).createItem());
-			}
 		}
 
 		final ArrayAdapter<ContextMenuItem> listAdapter =
@@ -325,8 +327,6 @@ public class MapActivityActions implements DialogProvider {
 				ItemClickListener click = item.getItemClickListener();
 				if (click != null) {
 					click.onContextMenuClick(listAdapter, standardId, position, false, null);
-				} else if (standardId == R.string.context_menu_item_last_intermediate_point) {
-					mapActivity.getContextMenu().addAsLastIntermediate();
 				} else if (standardId == R.string.context_menu_item_search) {
 					mapActivity.showQuickSearch(latitude, longitude);
 				} else if (standardId == R.string.context_menu_item_directions_from) {
@@ -346,6 +346,17 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 		actionsBottomSheetDialogFragment.show(mapActivity.getSupportFragmentManager(), AdditionalActionsBottomSheetDialogFragment.TAG);
+	}
+
+	private int getPositionForGpxAction(ContextMenuAdapter adapter) {
+		for (int i = 0; i < adapter.length(); i++) {
+			int titleId = adapter.getItem(i).getTitleId();
+			if (titleId == R.string.context_menu_item_add_parking_point
+					|| titleId == R.string.context_menu_item_update_map) {
+				return i;
+			}
+		}
+		return adapter.length();
 	}
 
 	public void setGPXRouteParams(GPXFile result) {

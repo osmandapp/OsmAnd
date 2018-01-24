@@ -123,6 +123,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		this.onDismissListener = onDismissListener;
 	}
 
+	public void cancelSelectionFromMap() {
+		selectFromMapTouch = false;
+	}
+
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (selectFromMapTouch) {
 			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
@@ -237,7 +241,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		ViewGroup vg = (ViewGroup) parentView.findViewById(R.id.app_modes);
 		vg.removeAllViews();
 		AppModeDialog.prepareAppModeView(mapActivity, selected, false,
-				vg, true, true, new View.OnClickListener() {
+				vg, true, false,true, new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						if (selected.size() > 0) {

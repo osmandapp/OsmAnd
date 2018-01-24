@@ -33,7 +33,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -48,8 +47,8 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
-import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TransportStopsLayer;
@@ -928,6 +927,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
 		}
 		menu.updateControlsVisibility(true);
+		menu.onFragmentResume();
 		getMapActivity().getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 	}
 
@@ -1221,8 +1221,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		OsmandApplication app = getMyApplication();
 		if (app != null && view != null) {
 			View compassView = view.findViewById(R.id.compass_layout);
-			Location ll = app.getLocationProvider().getLastKnownLocation();
-			if (ll != null && menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
+			if (menu.getMyLocation() != null && menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
 				updateDistanceDirection();
 				compassView.setVisibility(View.VISIBLE);
 			} else {
@@ -1238,7 +1237,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			TextView distanceText = (TextView) view.findViewById(R.id.distance);
 			ImageView direction = (ImageView) view.findViewById(R.id.direction);
 			float myHeading = menu.getHeading() == null ? 0f : menu.getHeading();
-			int color = nightMode ? R.color.ctx_menu_direction_color_dark : R.color.ctx_menu_direction_color_light;
+			int color = menu.isCachedMyLocation() ? R.color.icon_color : 0;
 			DashLocationFragment.updateLocationView(false, menu.getMyLocation(), myHeading, direction, color, distanceText,
 					color, menu.getLatLon().getLatitude(), menu.getLatLon().getLongitude(), screenOrientation, app, activity);
 		}

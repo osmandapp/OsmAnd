@@ -236,21 +236,20 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
-		if (isObjectMoveable(o)) {
-			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-					RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
-					enterMovingMode(tileBox);
-					return true;
-				}
-			};
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
-					.setTitleId(R.string.change_markers_position, activity)
-					.setIcon(R.drawable.ic_show_on_map)
-					.setListener(listener)
-					.createItem());
-		}
+		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
+			@Override
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+				RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
+				enterMovingMode(tileBox);
+				return true;
+			}
+		};
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.change_markers_position, activity)
+				.setIcon(R.drawable.ic_show_on_map)
+				.setClickable(isObjectMoveable(o))
+				.setListener(listener)
+				.createItem());
 	}
 
 	@Override
@@ -617,7 +616,16 @@ public class ContextMenuLayer extends OsmandMapLayer {
 								amenity.getX().addAll(renderedObject.getX());
 								amenity.getY().addAll(renderedObject.getY());
 							}
-							selectedObjects.put(amenity, poiMenuProvider);
+							boolean exists = false;
+							for (Object o : selectedObjects.keySet()) {
+								if (o instanceof Amenity && ((Amenity) o).compareTo(amenity) == 0) {
+									exists = true;
+									break;
+								}
+							}
+							if (!exists) {
+								selectedObjects.put(amenity, poiMenuProvider);
+							}
 							continue;
 						}
 						selectedObjects.put(renderedObject, null);

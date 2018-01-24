@@ -225,7 +225,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		modes.remove(ApplicationMode.DEFAULT);
 		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>(ApplicationMode.values(settings));
 		selected.remove(ApplicationMode.DEFAULT);
-		View v = AppModeDialog.prepareAppModeView(this, modes, selected, null, false, false, false,
+		View v = AppModeDialog.prepareAppModeView(this, modes, selected, null, false, true, false,
 				new View.OnClickListener() {
 
 					@Override
