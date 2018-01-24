@@ -5,7 +5,7 @@
     <!-- string name="app_version_suffix"></string -->
 
     <!-- Not translatable -->
-    <string name="full_version_price">€5,99</string>
+    <string name="full_version_price">€7,99</string>
     <string name="osm_live">OsmAnd Live</string>
     <string name="ga_api_key">UA-28342846-2</string>
     <string name="ga_dispatchPeriod">10</string>
