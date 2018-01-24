@@ -497,7 +497,7 @@
 	<string name="poi_caravans">البيوت المتنقلة</string>
 	<string name="poi_power_supply">الإمداد بالطاقة</string>
 	<string name="poi_medical_system">النظام الطبي</string>
-	<string name="poi_fuel_avia_type">نوع</string>
+	<string name="poi_fuel_avia_type">نوع البنزين (avia)</string>
 	<string name="poi_additional_type">إضافي</string>
 	<string name="poi_vending_type">نوع البيع</string>
 	<string name="poi_clothes_type">نوع</string>
@@ -734,7 +734,7 @@
 	<string name="poi_e_cigarette">متجر السجائر الإلكترونية</string>
 
 	<string name="poi_sewing">متجر البضائع الجافة</string>
-	<string name="poi_traffic_calming_choker">قلادة</string>
+	<string name="poi_traffic_calming_choker">سلسلة كبح السرعة</string>
 	<string name="poi_traffic_calming_island">مكان وقوف المارة</string>
 	<string name="poi_fuel_cng">غاز طبيعي مضغوط</string>
 	<string name="poi_fuel_svo">زيت نباتي</string>
@@ -1529,7 +1529,7 @@
 	<string name="poi_water_well">بئر</string>
 	<string name="poi_standpipe">صنبور</string>
 	<string name="poi_lock_gate">قفل البوابة</string>
-	<string name="poi_weir">حاجز مائي</string>
+	<string name="poi_weir">سدّ غاطس</string>
 	<string name="poi_breakwater">حائل الأمواج</string>
 	<string name="poi_groyne">حاجز كشف الانجراف والتعرية</string>
 
