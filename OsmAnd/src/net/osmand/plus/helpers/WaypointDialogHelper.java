@@ -242,7 +242,6 @@ public class WaypointDialogHelper {
 		final ShapeDrawable halfDivider = new ShapeDrawable(halfDividerShape);
 		final ShapeDrawable halfPointDivider = new ShapeDrawable(halfPointDividerShape);
 		final ShapeDrawable headerDivider = new ShapeDrawable(headerDividerShape);
-		final Drawable startingPointDivider = app.getIconsCache().getIcon(R.drawable.bg_shadow_list_bottom);
 
 		int divHeight = AndroidUtils.dpToPx(ctx, 1f);
 		fullDivider.setIntrinsicHeight(divHeight);
@@ -270,24 +269,13 @@ public class WaypointDialogHelper {
 			if (locationPointNext) {
 				if (locationPoint) {
 					LocationPointWrapper w = (LocationPointWrapper) obj;
-					if (w.type == WaypointHelper.TARGETS && ((TargetPoint) w.point).start) {
-						d = startingPointDivider; // starting point divider
+					if (w.type == WaypointHelper.TARGETS) {
+						d = halfPointDivider;
 					} else {
-						if (w.type == WaypointHelper.TARGETS) {
-							d = halfPointDivider;
-						} else {
-							d = halfDivider;
-						}
+						d = halfDivider;
 					}
 				} else {
-					LocationPointWrapper w = (LocationPointWrapper) objNext;
-					if (w.type == WaypointHelper.TARGETS) {
-						if (!((TargetPoint) w.point).start) {
-							d = fullDivider;
-						}
-					} else {
-						d = fullDivider;
-					}
+					d = fullDivider;
 				}
 			} else if (objNext instanceof RadiusItem && labelView) {
 				d = headerDivider;
