@@ -1,15 +1,7 @@
 package net.osmand.plus.helpers;
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -37,8 +29,16 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.util.MapUtils;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+
+import gnu.trove.list.array.TIntArrayList;
 
 //	import android.widget.Toast;
 
@@ -679,8 +679,7 @@ public class WaypointHelper {
 				IconsCache iconsCache = app.getIconsCache();
 				if (((TargetPoint) point).start) {
 					if (app.getTargetPointsHelper().getPointToStart() == null) {
-						ApplicationMode appMode = app.getSettings().getApplicationMode();
-						return uiCtx.getResources().getDrawable(appMode.getResourceLocationDay());
+						return iconsCache.getIcon(R.drawable.ic_action_location_color, 0);
 					} else {
 						return iconsCache.getIcon(R.drawable.list_startpoint, 0);
 					}

@@ -2871,6 +2871,15 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n• Bug-Fixes, neue Daten auf dem Server alle 30 Minuten, Updates implementiert in der Navigation
 \n
 \n</string>
+	<string name="release_2_9">
+	\u2022 Aktualisiert das Kontextmenü: Zeige, wenn der POI geöffnet / geschlossen wird\n\n
+	\u2022 Transportmenü: Alle verfügbaren Routen sind jetzt oben\n\n
+	\u2022 Wikipedia: Die Schaltfläche zum Öffnen des Originalartikels hinzugefügt, das Erscheinungsbild der Artikel aktualisiert\n\n
+	\u2022 Route: Möglichkeit, Start- und Endpunkte in einem Tipp zu tauschen\n\n
+	\u2022 Notizen: Sortierung nach Typ und Datum hinzugefügt\n\n
+	\u2022 OSM-Bearbeitungen: Symbolen und Namen für die POI-Kategorie und abgeschlossene Aktionen anzeigen\n\n
+	\u2022 Neuer schneller Koordinateneingabebildschirm für die schnelle Erstellung von Markern\n\n
+	</string>
     <string name="rendering_value_darkyellow_name">Dunkelgelb</string>
     <string name="show_map">Karte anzeigen</string>
     <string name="route_is_calculated">Route wird berechnet</string>
