@@ -616,7 +616,16 @@ public class ContextMenuLayer extends OsmandMapLayer {
 								amenity.getX().addAll(renderedObject.getX());
 								amenity.getY().addAll(renderedObject.getY());
 							}
-							selectedObjects.put(amenity, poiMenuProvider);
+							boolean exists = false;
+							for (Object o : selectedObjects.keySet()) {
+								if (o instanceof Amenity && ((Amenity) o).compareTo(amenity) == 0) {
+									exists = true;
+									break;
+								}
+							}
+							if (!exists) {
+								selectedObjects.put(amenity, poiMenuProvider);
+							}
 							continue;
 						}
 						selectedObjects.put(renderedObject, null);
