@@ -388,7 +388,7 @@ public class WaypointDialogHelper {
 			move.setVisibility(View.GONE);
 		} else {
 			boolean notFlatTargets = point.type == WaypointHelper.TARGETS && !flat;
-			boolean startPoint = ((TargetPoint) point.point).start;
+			boolean startPoint = notFlatTargets && ((TargetPoint) point.point).start;
 			final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 			boolean canRemove = !targetPointsHelper.getIntermediatePoints().isEmpty();
 
@@ -627,7 +627,9 @@ public class WaypointDialogHelper {
 								Object item = items.get(0);
 								if (item instanceof LocationPointWrapper) {
 									LocationPointWrapper w = (LocationPointWrapper) item;
-									hasActivePoints = !((TargetPoint) w.point).start;
+									if (w.getPoint() instanceof TargetPoint) {
+										hasActivePoints = !((TargetPoint) w.point).start;
+									}
 								} else {
 									hasActivePoints = true;
 								}
