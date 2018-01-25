@@ -3065,4 +3065,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_marker">Marque</string>
     <string name="shared_string_without_name">Sans nom</string>
     <string name="lang_lo">Laotien</string>
-    </resources>
+    <string name="rendering_attr_hidePOILabels_name">Libellés des PI</string>
+    <string name="day_off_label">éteint</string>
+    <string name="winter_and_ski_renderer">Hiver et ski</string>
+    <string name="touring_view_renderer">Vue grand tourisme (contrastée et détaillée)</string>
+    <string name="nautical_renderer">Maritime</string>
+</resources>

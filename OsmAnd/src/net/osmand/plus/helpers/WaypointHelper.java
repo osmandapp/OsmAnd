@@ -68,6 +68,7 @@ public class WaypointHelper {
 	public static final int ALARMS = 4;
 	public static final int MAX = 5;
 	public static final int[] SEARCH_RADIUS_VALUES = {50, 100, 200, 500, 1000, 2000, 5000};
+	private static final double DISTANCE_IGNORE_DOUBLE_SPEEDCAMS = 150;
 
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<List<LocationPointWrapper>>();
 	private ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<LocationPoint, Integer>();
@@ -570,12 +571,20 @@ public class WaypointHelper {
 
 
 	private void calculateAlarms(RouteCalculationResult route, List<LocationPointWrapper> array, ApplicationMode mode) {
+		AlarmInfo prevSpeedCam = null;
 		for (AlarmInfo i : route.getAlarmInfo()) {
 			if (i.getType() == AlarmInfoType.SPEED_CAMERA) {
 				if (app.getSettings().SHOW_CAMERAS.getModeValue(mode) || app.getSettings().SPEAK_SPEED_CAMERA.getModeValue(mode)) {
 					LocationPointWrapper lw = new LocationPointWrapper(route, ALARMS, i, 0, i.getLocationIndex());
-					lw.setAnnounce(app.getSettings().SPEAK_SPEED_CAMERA.get());
-					array.add(lw);
+					if(prevSpeedCam != null &&  
+							MapUtils.getDistance(prevSpeedCam.getLatitude(), prevSpeedCam.getLongitude(), 
+									i.getLatitude(), i.getLongitude()) < DISTANCE_IGNORE_DOUBLE_SPEEDCAMS) {
+						// ignore double speed cams
+					} else {
+						lw.setAnnounce(app.getSettings().SPEAK_SPEED_CAMERA.get());
+						array.add(lw);
+						prevSpeedCam = i;
+					}
 				}
 			} else {
 				if (app.getSettings().SHOW_TRAFFIC_WARNINGS.getModeValue(mode) || app.getSettings().SPEAK_TRAFFIC_WARNINGS.getModeValue(mode)) {
@@ -584,6 +593,7 @@ public class WaypointHelper {
 					array.add(lw);
 				}
 			}
+			
 
 		}
 
