@@ -416,7 +416,7 @@
 <string name="poi_religion_taoist">تائوئیسم</string>
 <string name="poi_monastery">صومعه</string>
 <string name="poi_historic_monastery">صومعه تاریخی</string>
-<string name="poi_wayside_cross">ایستگاه بین راهی</string>
+<string name="poi_wayside_cross"></string>
 <string name="poi_wayside_shrine">زیارتگاه بین راهی</string>
 <string name="poi_information">اطلاعات گردشگری</string>
 <string name="poi_clock">ساعت</string>
@@ -627,8 +627,8 @@
 <string name="poi_notice">مقررات دریایی</string>
 <string name="poi_pile">ستون</string>
 <string name="poi_radar_transponder">فرستنده رادار دریایی</string>
-<string name="poi_radio_station">ایستگاه رادیویی دریایی</string>
-<string name="poi_signal_station_traffic">ایستگاه سیگنال ترافیکی</string>
+<string name="poi_radio_station">ایستگاه رادیویی، نشانه دریایی</string>
+<string name="poi_signal_station_traffic">ایستگاه سیگنال، ترافیکی</string>
 <string name="poi_signal_station_warning">ایستگاه سیگنال، هشدار دهنده</string>
 <string name="poi_small_craft_facility">تاسیسات صنایع کوچک</string>
 <string name="poi_topmark"/>
