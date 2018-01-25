@@ -55,6 +55,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
@@ -244,6 +245,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 								&& (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT)) {
 							List<Object> activeObjects = ((StableArrayAdapter) listAdapter).getActiveObjects();
 							Object obj = listAdapter.getItem(position);
+							if (obj instanceof LocationPointWrapper) {
+								LocationPointWrapper w = (LocationPointWrapper) obj;
+								return !((TargetPoint) w.getPoint()).start;
+							}
 							return activeObjects.contains(obj);
 						}
 						return false;
@@ -287,10 +292,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 							@Override
 							public String getTitle() {
+								List<Object> activeObjects;
 								if ((visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT)
 										&& (getMyApplication().getRoutingHelper().isRoutePlanningMode() || getMyApplication().getRoutingHelper().isFollowingMode())
 										&& item != null
-										&& stableAdapter.getActiveObjects().size() == 0) {
+										&& ((activeObjects = stableAdapter.getActiveObjects()).isEmpty() || isContainsOnlyStart(activeObjects))) {
 									return mapActivity.getResources().getString(R.string.cancel_navigation);
 								} else {
 									return null;
@@ -307,7 +313,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 							if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT) {
 								onItemsSwapped(stableAdapter.getActiveObjects());
 							}
-							if (stableAdapter.getActiveObjects().size() == 0) {
+							List<Object> activeObjects = stableAdapter.getActiveObjects();
+							if (activeObjects.isEmpty() || isContainsOnlyStart(activeObjects)) {
 								hideDashboard();
 								if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT) {
 									mapActivity.getMapActions().stopNavigationWithoutConfirm();
@@ -318,6 +325,17 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 								}
 							}
 						}
+					}
+
+					private boolean isContainsOnlyStart(List<Object> items) {
+						if (items.size() == 1) {
+							Object item = items.get(0);
+							if (item instanceof LocationPointWrapper) {
+								LocationPointWrapper w = (LocationPointWrapper) item;
+								return ((TargetPoint) w.getPoint()).start;
+							}
+						}
+						return false;
 					}
 				});
 
@@ -1471,10 +1489,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 								LocationPointWrapper p = (LocationPointWrapper) obj;
 								if (p.getPoint() instanceof TargetPoint) {
 									TargetPoint t = (TargetPoint) p.getPoint();
-									if (!t.start) {
-										t.intermediate = true;
-										allTargets.add(t);
-									}
+									t.intermediate = true;
+									allTargets.add(t);
 								}
 							}
 						}
@@ -1482,9 +1498,15 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 							allTargets.get(allTargets.size() - 1).intermediate = false;
 						}
 					}
-					getMyApplication().getTargetPointsHelper().reorderAllTargetPoints(allTargets, false);
+					TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
+					if (allTargets.size() > 0) {
+						TargetPoint start = allTargets.remove(0);
+						targetPointsHelper.setStartPoint(new LatLon(start.getLatitude(), start.getLongitude()),
+								false, start.getPointDescription(getMyApplication()));
+					}
+					targetPointsHelper.reorderAllTargetPoints(allTargets, false);
 					newRouteIsCalculated(false, new ValueHolder<Boolean>());
-					getMyApplication().getTargetPointsHelper().updateRouteAndRefresh(true);
+					targetPointsHelper.updateRouteAndRefresh(true);
 
 				}
 			}

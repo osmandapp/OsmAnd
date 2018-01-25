@@ -213,7 +213,7 @@ public class WaypointDialogHelper {
 		for (Object p : points) {
 			if (p instanceof LocationPointWrapper) {
 				LocationPointWrapper w = (LocationPointWrapper) p;
-				if (w.type == WaypointHelper.TARGETS && !((TargetPoint) w.point).start) {
+				if (w.type == WaypointHelper.TARGETS) {
 					activePoints.add(p);
 				}
 			}
@@ -431,10 +431,6 @@ public class WaypointDialogHelper {
 					}
 				});
 			}
-
-			if (startPoint) {
-				move.setVisibility(View.GONE); // TODO
-			}
 		}
 
 		return v;
@@ -623,7 +619,20 @@ public class WaypointDialogHelper {
 				public void onClick(View v) {
 					boolean hasActivePoints = false;
 					if (thisAdapter instanceof StableArrayAdapter) {
-						hasActivePoints = ((StableArrayAdapter) thisAdapter).getActiveObjects().size() > 0;
+						List<Object> items = ((StableArrayAdapter) thisAdapter).getActiveObjects();
+						if (items.size() > 0) {
+							if (items.size() > 1) {
+								hasActivePoints = true;
+							} else {
+								Object item = items.get(0);
+								if (item instanceof LocationPointWrapper) {
+									LocationPointWrapper w = (LocationPointWrapper) item;
+									hasActivePoints = !((TargetPoint) w.point).start;
+								} else {
+									hasActivePoints = true;
+								}
+							}
+						}
 					}
 
 					final PopupMenu optionsMenu = new PopupMenu(ctx, moreBtn);
