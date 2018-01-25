@@ -1877,7 +1877,7 @@ Punktar</string>
     <string name="local_openstreetmap_descr_title">Ósamstilltar (async) OSM-breytingar:</string>
     <string name="free_version_message">Þessi ókeypis útgáfa af OsmAnd er takmörkuð við %1$s niðurhöl korta og styður ekki lestur ónettengdra Wikipedia-greina.</string>
     <string name="index_name_voice">Raddskipanir (upptökur, takmarkaðir eiginleikar)</string>
-    <string name="profile_settings">Sértækar stillingar persónusniðs</string>
+    <string name="profile_settings">Sértækar stillingar notandasniðs</string>
     <string name="poi_filter_nominatim">Nominatim á netinu</string>
     <string name="favourites_delete_multiple_succesful">Eftirlætispunktum var eytt.</string>
     <string name="local_indexes_cat_voice">Raddskipanir (upptökur)</string>
@@ -2541,11 +2541,11 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="av_locations_selected_desc">GPX-skrá með hnitum og gögnum valinna minnispunkta.</string>
     <string name="av_locations_all_desc">GPX-skrá með hnitum og gögnum allra minnispunkta.</string>
     <string name="release_3_0">\\022 Greining á stöðvunarmerkjum er núna einnig notuð til ákvörðunar akstursstefnu
-\n
+\n 
 \n • Nýtt reiknirit gefur nothæfari upplýsingar um hækkun/lækkun í GPX-ferlum
-\n
+\n 
 \n • Göngutímar taka núna mið af landslagi/hækkun (Naismith-reglan)
-\n
+\n 
 \n</string>
     <string name="empty_state_osm_edits_descr">Búðu til eða breyttu merkisstöðum í OSM (POI), opnaðu eða gerðu athugasemdir í OSM og sendu inn skráða ferla í GPX-skrám.</string>
     <string name="one_tap_active_descr">Bankaðu á merki á kortinu til að færa það efst í virk kortamerki án þess að opna samhengisvalmyndina.</string>
@@ -2559,4 +2559,39 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="add_group_descr">Þú getur flutt hópa inn úr eftirlætum eða úr ferilpunktum í ferli.</string>
     <string name="empty_state_markers_groups_desc">Þú getur flutt inn eftirlætishópa eða ferilpunkta sem kortamerki.</string>
     <string name="shared_string_without_name">Án nafns</string>
-    </resources>
+    <string name="rendering_attr_hidePOILabels_name">Merkingar merkisstaða</string>
+    <string name="show_guide_line_descr">Birta stoðlínur frá staðsetningu þinni að staðsetningum virkra kortamerkja.</string>
+    <string name="show_arrows_descr">Birta eina eða fleiri örvar sem gefa til kynna stefnu á virk kortamerki.</string>
+    <string name="distance_indication_descr">Veldu hvernig á að birta vegalengdina að virkum kortamerkjum.</string>
+    <string name="active_markers_descr">Veldu hve margir stefnuvísar séu birtir.</string>
+    <string name="coordinate_input_accuracy_description">Skipta sjálfkrafa yfir í næsta reit eftir að settir hafa verið inn %1$d tölustafir.</string>
+    <string name="import_gpx_file_description">er hægt að flytja inn sem punkt í Eftirlæti eða sem ferlaskrá</string>
+    <string name="marker_show_distance_descr">Veldu hvernig á að gefa til kynna vegalengd og stefnu að kortamerkjum á kortaskjánum:</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Veldu undir hvaða hraða stefna kortsins skiptir úr \'Eftir átt hreyfingar\' yfir í \'Eftir áttavita\'.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd mun tengja punktana við leiðir fyrir valið notandasnið.</string>
+    <string name="private_access_routing_req">Áfangastaður þinn er innan svæðis með einkaaðgangi. Viltu leyfa aðgang að einkavegum í þessari ferð?</string>
+    <string name="upload_osm_note_description">Þú getur sent OSM-minnispunktinn þinn inn nafnlaust eða með því að nota OpenStreetMap.org notandasniðið þitt.</string>
+    <string name="trip_rec_notification_settings_desc">Birta kerfistilkynningu sem gefur kost á að hefja skráningu ferðar.</string>
+    <string name="osm_live_payment_desc">Áskriftargjaldið verður rukkað í hverjum mánuði. Þú getur hvenær sem er sagt áskriftinni upp á Google Play.</string>
+    <string name="donation_to_osm_desc">Hluti styrktarfjárhæðarinnar verður sendur til OSM-notendanna sem senda inn breytingar á OpenStreetMap. Kostnaður við áskriftina helst hinn sami.</string>
+    <string name="osm_live_subscription_desc">Áskrift virkjar uppfærslur vikulega, daglega eða á klukkustundar fresti og ótakmarkað niðurhal korta út um víða veröld.</string>
+    <string name="osm_live_banner_desc">Fáðu ótakmörkuð niðurhöl korta og kortauppfærslur oftar en mánaðarlega: vikulega, daglega eða á klukkustundar fresti.</string>
+    <string name="osmand_plus_banner_desc">Ótakmörkuð niðurhöl korta, uppfærslur og Wikipedia-viðbót.</string>
+    <string name="use_osm_live_routing_description">Virkja leiðsögn fyrir breytingar í OsmAnd Live.</string>
+    <string name="osmo_auto_send_locations_descr">Hefja ferð sjálfkrafa og senda inn staðsetningar eftir ræsingu forrits.</string>
+    <string name="storage_directory_readonly_desc">Sú mappa sem er valin undir geymslugögn er einungis lesanleg. Geymslumappan er því tímabundið sett í innra minnið. Veldu endilega gilda geymslumöppu.</string>
+    <string name="osm_live_email_desc">Nauðsynlegt til að geta gefið þér upplýsingar um framlög.</string>
+    <string name="osm_live_region_desc">Hluti styrktarfjárhæðarinnar verður sendur til OSM-notendanna sem senda inn breytingar á kortinu á þessu svæði.</string>
+    <string name="osm_live_ask_for_purchase">Kauptu fyrst áskrift að OsmAnd Live</string>
+    <string name="clear_updates_proposition_message">Þú getur fjarlægt sóttar uppfærslur að snúið aftur í upprunalega útgáfu kortsins</string>
+    <string name="lang_lo">Laó</string>
+    <string name="disable_recording_once_app_killed">Hindra sjálfstæða skráningu ferils</string>
+    <string name="save_track_to_gpx_globally_headline">Ferilskráning eftir þörfum</string>
+    <string name="save_track_interval_descr">Veldu millibil skráninga í leiðarskráningu á meðan leiðsögn stendur.</string>
+    <string name="osmo_create_groups_confirm">Til þess að geta útbúið hópa þarftu að vera skráður notandi í OsMo.</string>
+    <string name="osmo_session_id_share">Slóð setu til að rekja tæki (%1$s)</string>
+    <string name="day_off_label">slökkt</string>
+    <string name="winter_and_ski_renderer">Vetur og skíði</string>
+    <string name="touring_view_renderer">Ferðakort (birtuskil og ítarefni)</string>
+    <string name="nautical_renderer">Sjókort</string>
+</resources>
