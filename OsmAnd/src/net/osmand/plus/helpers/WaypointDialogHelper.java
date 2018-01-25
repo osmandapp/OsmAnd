@@ -378,31 +378,52 @@ public class WaypointDialogHelper {
 			v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
 		}
 		updatePointInfoView(app, ctx, v, point, true, nightMode, edit, false);
-		final View more = v.findViewById(R.id.all_points);
-		final View move = v.findViewById(R.id.info_move);
-		final View remove = v.findViewById(R.id.info_close);
+
+		v.findViewById(R.id.all_points).setVisibility(View.GONE);
+		final ImageView move = (ImageView) v.findViewById(R.id.info_move);
+		final ImageButton remove = (ImageButton) v.findViewById(R.id.info_close);
+
 		if (!edit) {
 			remove.setVisibility(View.GONE);
 			move.setVisibility(View.GONE);
-			more.setVisibility(View.GONE);
-		} else if (point.type == WaypointHelper.TARGETS && !flat) {
-			if (((TargetPoint) point.point).start) {
-				remove.setVisibility(View.GONE);
-				move.setVisibility(View.GONE);
-				more.setVisibility(View.GONE);
-			} else {
-				remove.setVisibility(View.VISIBLE);
-				move.setVisibility(View.VISIBLE);
-				more.setVisibility(View.GONE);
+		} else {
+			boolean notFlatTargets = point.type == WaypointHelper.TARGETS && !flat;
+			boolean startPoint = ((TargetPoint) point.point).start;
+			final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+			boolean canRemove = !targetPointsHelper.getIntermediatePoints().isEmpty();
 
-				((ImageButton) remove).setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark, !nightMode));
-				remove.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						deletePoint(app, ctx, adapter, helper, point, deletedPoints, true);
-					}
-				});
-				((ImageView) move).setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_reorder, !nightMode));
+			remove.setVisibility(View.VISIBLE);
+			remove.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark, !nightMode));
+			remove.setEnabled(canRemove);
+			remove.setAlpha(canRemove ? 1 : .5f);
+			if (canRemove) {
+				if (notFlatTargets && startPoint) {
+					remove.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (targetPointsHelper.getPointToStart() == null) {
+								if (!targetPointsHelper.getIntermediatePoints().isEmpty()) {
+									replaceStartWithFirstIntermediate(targetPointsHelper, ctx, helper);
+								}
+							} else {
+								targetPointsHelper.setStartPoint(null, true, null);
+								updateControls(ctx, helper);
+							}
+						}
+					});
+				} else {
+					remove.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							deletePoint(app, ctx, adapter, helper, point, deletedPoints, true);
+						}
+					});
+				}
+			}
+
+			move.setVisibility(notFlatTargets ? View.VISIBLE : View.GONE);
+			if (notFlatTargets) {
+				move.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_reorder, !nightMode));
 				move.setTag(new DragIcon() {
 					@Override
 					public void onClick() {
@@ -410,19 +431,12 @@ public class WaypointDialogHelper {
 					}
 				});
 			}
-		} else {
-			remove.setVisibility(View.VISIBLE);
-			move.setVisibility(View.GONE);
-			more.setVisibility(View.GONE);
 
-			((ImageButton) remove).setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark, !nightMode));
-			remove.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					deletePoint(app, ctx, adapter, helper, point, deletedPoints, true);
-				}
-			});
+			if (startPoint) {
+				move.setVisibility(View.GONE); // TODO
+			}
 		}
+
 		return v;
 	}
 
@@ -456,6 +470,17 @@ public class WaypointDialogHelper {
 			helper.helperCallbacks.reloadAdapter();
 		}
 		updateRouteInfoMenu(ctx);
+	}
+
+	private static void replaceStartWithFirstIntermediate(TargetPointsHelper targetPointsHelper, Activity ctx,
+														  WaypointDialogHelper helper) {
+		List<TargetPoint> intermediatePoints = targetPointsHelper.getIntermediatePointsWithTarget();
+		TargetPoint firstIntermediate = intermediatePoints.remove(0);
+		targetPointsHelper.setStartPoint(new LatLon(firstIntermediate.getLatitude(),
+				firstIntermediate.getLongitude()), false, firstIntermediate.getPointDescription(ctx));
+		targetPointsHelper.reorderAllTargetPoints(intermediatePoints, true);
+
+		updateControls(ctx, helper);
 	}
 
 	// switch start & first intermediate point
