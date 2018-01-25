@@ -222,31 +222,20 @@ public class WaypointDialogHelper {
 	}
 
 	private List<Drawable> getCustomDividers(Context ctx, List<Object> points, boolean nightMode) {
-		int color;
-		int pointColor;
-		if (nightMode) {
-			color = ContextCompat.getColor(ctx, R.color.dashboard_divider_dark);
-			pointColor = ContextCompat.getColor(ctx, R.color.dashboard_divider_dark);
-		} else {
-			color = ContextCompat.getColor(ctx, R.color.dashboard_divider_light);
-			pointColor = ContextCompat.getColor(ctx, R.color.ctx_menu_info_divider_light);
-		}
+		int color = ContextCompat.getColor(ctx, nightMode
+				? R.color.dashboard_divider_dark : R.color.dashboard_divider_light);
 
 		Shape fullDividerShape = new ListDividerShape(color, 0);
 		Shape halfDividerShape = new ListDividerShape(color, AndroidUtils.dpToPx(ctx, 56f));
-		Shape halfPointDividerShape = new ListDividerShape(color, AndroidUtils.dpToPx(ctx, 56f),
-				pointColor, AndroidUtils.dpToPx(ctx, 1.5f), true);
 		Shape headerDividerShape = new ListDividerShape(color, AndroidUtils.dpToPx(ctx, 16f));
 
 		final ShapeDrawable fullDivider = new ShapeDrawable(fullDividerShape);
 		final ShapeDrawable halfDivider = new ShapeDrawable(halfDividerShape);
-		final ShapeDrawable halfPointDivider = new ShapeDrawable(halfPointDividerShape);
 		final ShapeDrawable headerDivider = new ShapeDrawable(headerDividerShape);
 
 		int divHeight = AndroidUtils.dpToPx(ctx, 1f);
 		fullDivider.setIntrinsicHeight(divHeight);
 		halfDivider.setIntrinsicHeight(divHeight);
-		halfPointDivider.setIntrinsicHeight(divHeight);
 		headerDivider.setIntrinsicHeight(divHeight);
 
 		List<Drawable> res = new ArrayList<>();
@@ -267,16 +256,7 @@ public class WaypointDialogHelper {
 			Drawable d = null;
 
 			if (locationPointNext) {
-				if (locationPoint) {
-					LocationPointWrapper w = (LocationPointWrapper) obj;
-					if (w.type == WaypointHelper.TARGETS) {
-						d = halfPointDivider;
-					} else {
-						d = halfDivider;
-					}
-				} else {
-					d = fullDivider;
-				}
+				d = locationPoint ? halfDivider : fullDivider;
 			} else if (objNext instanceof RadiusItem && labelView) {
 				d = headerDivider;
 			} else if (locationPoint && !bottomDividerViewNext) {
@@ -411,79 +391,22 @@ public class WaypointDialogHelper {
 				move.setVisibility(View.GONE);
 				more.setVisibility(View.GONE);
 			} else {
-				remove.setVisibility(View.GONE);
+				remove.setVisibility(View.VISIBLE);
 				move.setVisibility(View.VISIBLE);
 				more.setVisibility(View.GONE);
-				((ImageView) move).setImageDrawable(app.getIconsCache().getIcon(
-						R.drawable.ic_action_reorder, !nightMode));
-				if (app.accessibilityEnabled()) {
-					move.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View view) {
-							((DragIcon) view.getTag()).onClick();
-						}
-					});
-				}
+
+				((ImageButton) remove).setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark, !nightMode));
+				remove.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						deletePoint(app, ctx, adapter, helper, point, deletedPoints, true);
+					}
+				});
+				((ImageView) move).setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_reorder, !nightMode));
 				move.setTag(new DragIcon() {
 					@Override
 					public void onClick() {
-						final PopupMenu optionsMenu = new PopupMenu(ctx, move);
-						DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-						List<Object> activeObjects = ((StableArrayAdapter) adapter).getActiveObjects();
-						int count = activeObjects.size();
-						int t = -1;
-						for (int i = 0; i < activeObjects.size(); i++) {
-							Object o = activeObjects.get(i);
-							if (point == o) {
-								t = i;
-								break;
-							}
-						}
-						final int index = t;
-						MenuItem item;
-						final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-						final TargetPoint start = targetPointsHelper.getPointToStart();
-						if (count > 1 && (index > 0 || start != null)) {
-							item = optionsMenu.getMenu().add(R.string.shared_string_move_up)
-									.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_drop_up));
-							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-								@Override
-								public boolean onMenuItemClick(MenuItem item) {
-									if (index == 0) {
-										switchStartAndFirstIntermediate(targetPointsHelper, ctx, start, helper);
-									} else if (helper != null && helper.helperCallbacks != null) {
-										helper.helperCallbacks.exchangeWaypoints(index, index - 1);
-									}
-									updateRouteInfoMenu(ctx);
-									return true;
-								}
-							});
-						}
-						if (index < count - 1 && count > 1) {
-							item = optionsMenu.getMenu().add(R.string.shared_string_move_down)
-									.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_drop_down));
-							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-								@Override
-								public boolean onMenuItemClick(MenuItem item) {
-									if (helper != null && helper.helperCallbacks != null) {
-										helper.helperCallbacks.exchangeWaypoints(index, index + 1);
-									}
-									updateRouteInfoMenu(ctx);
-									return true;
-								}
-							});
-						}
-
-						item = optionsMenu.getMenu().add(R.string.shared_string_remove)
-								.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
-						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-							@Override
-							public boolean onMenuItemClick(MenuItem item) {
-								deletePoint(app, ctx, adapter, helper, point, deletedPoints, true);
-								return true;
-							}
-						});
-						optionsMenu.show();
+						// do nothing
 					}
 				});
 			}
@@ -491,8 +414,8 @@ public class WaypointDialogHelper {
 			remove.setVisibility(View.VISIBLE);
 			move.setVisibility(View.GONE);
 			more.setVisibility(View.GONE);
-			((ImageButton) remove).setImageDrawable(app.getIconsCache().getIcon(
-					R.drawable.ic_action_remove_dark, !nightMode));
+
+			((ImageButton) remove).setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark, !nightMode));
 			remove.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
