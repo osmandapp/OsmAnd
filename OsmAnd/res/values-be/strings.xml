@@ -3019,4 +3019,24 @@
     <string name="will_open_on">Адкрыецца а</string>
     <string name="shared_string_without_name">Без назвы</string>
     <string name="lang_lo">Лаоская</string>
-    </resources>
+    <string name="rendering_attr_hidePOILabels_name">Назвы POI</string>
+    <string name="release_2_9">\\022 Абноўленае кантэкстнае меню: паказвае калі адкрываюцца/закрываюцца POI
+\n
+\n • Меню транспарта: усе даступныя маршруты цяпер на месце
+\n
+\n • Вікіпедыя: дабаўлена кнопка для адкрыцца артыкула, абноўлены выгляд артыкулаў
+\n
+\n • Маршрут: дабаўлена магчымасць змыны пачатковай і качатковай кропак адным дотыкам
+\n
+\n • Нататкі: дабаўлена сартаванне па тыпу і даце
+\n
+\n • OSM праўкі: паказваецца значка і назва POI-катэгорыі, адлюстроўваецца выкананае дзеянне
+\n
+\n • Новы экран хуткага ўводу каардынат для стварэння маркераў
+\n
+\n</string>
+    <string name="day_off_label">вых.</string>
+    <string name="winter_and_ski_renderer">Зімовы/лыжны</string>
+    <string name="touring_view_renderer">Турыстычны (кантраст і дэталі)</string>
+    <string name="nautical_renderer">Марскі</string>
+</resources>
