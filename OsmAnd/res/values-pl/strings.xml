@@ -2870,7 +2870,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="coordinates_format">Format współrzędnych</string>
     <string name="fast_coordinates_input_descr">Proszę wybrać format współrzędnych. Zawsze można go zmienić za pomocą opcji.</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Omijanie lodowych dróg i brodów</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Omija lodowe drogi i brody</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Omija lodowe drogi i brody.</string>
     <string name="use_location">Użyj położenia</string>
     <string name="my_location">Aktualne położenie</string>
     <string name="shared_string_finish">Koniec trasy</string>
@@ -2879,7 +2879,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="marker_save_as_track_descr">Znaczniki zostaną wyeksportowane do poniższego pliku:</string>
     <string name="marker_save_as_track">Zapisywanie śladu</string>
     <string name="move_to_history">Przenieś do historii</string>
-    <string name="group_will_be_removed_after_restart">Grupa zostanie usunięta po ponownym uruchomieniu</string>
+    <string name="group_will_be_removed_after_restart">Grupa zostanie usunięta po ponownym uruchomieniu.</string>
     <string name="use_system_keyboard">Użycie klawiatury systemowej</string>
     <string name="is_saved">jest zapisany</string>
     <string name="wrong_format">Błędny format</string>
@@ -2966,4 +2966,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="empty_state_markers_groups">Importuj grupy</string>
     <string name="add_favourites_group_to_markers_descr">Wybierz grupę ulubionych, do której chcesz dodać znaczniki.</string>
     <string name="digits_quantity">Liczba cyfr dziesiętnych</string>
+    <string name="tap_on_map_to_hide_interface_descr">Dotknięcie na mapie włącza lub wyłącza przyciski sterowania i widżety.</string>
     </resources>
