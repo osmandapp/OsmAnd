@@ -1806,4 +1806,14 @@
     <string name="do_not_use_animations_descr">Proqramda animasiyaları söndürür.</string>
     <string name="keep_showing_on_map">Xəritədə göstərməyə davam et</string>
     <string name="choose_navigation_type">Naviqasiya profili seçin</string>
+    <string name="none_point_error">Ən azı bir nöqtə əlavə edin.</string>
+    <string name="import_track_desc">%1$s faylı yol nöqtəsi ehtiva etmir, iz kimi idxal edilsin?</string>
+    <string name="move_point">Nöqtəni daşı</string>
+    <string name="add_segment_to_the_track">GPX izinə əlavə et</string>
+    <string name="osm_recipients_label">OSM qəbul edənlər</string>
+    <string name="total_donations">Ümumi ianələr</string>
+    <string name="winter_and_ski_renderer">Qış və xizək</string>
+    <string name="switch_start_finish">Başlanğıc və təyinat nöqtələrinin yerini dəyiş</string>
+    <string name="shared_string_undo_all">HAMISINI QAYTAR</string>
+    <string name="shared_string_undo">QAYTAR</string>
     </resources>
