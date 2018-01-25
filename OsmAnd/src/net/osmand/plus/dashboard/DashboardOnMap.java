@@ -247,7 +247,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 							Object obj = listAdapter.getItem(position);
 							if (obj instanceof LocationPointWrapper) {
 								LocationPointWrapper w = (LocationPointWrapper) obj;
-								return !((TargetPoint) w.getPoint()).start;
+								if (w.getPoint() instanceof TargetPoint) {
+									return !((TargetPoint) w.getPoint()).start;
+								}
 							}
 							return activeObjects.contains(obj);
 						}
@@ -332,7 +334,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 							Object item = items.get(0);
 							if (item instanceof LocationPointWrapper) {
 								LocationPointWrapper w = (LocationPointWrapper) item;
-								return ((TargetPoint) w.getPoint()).start;
+								if (w.getPoint() instanceof TargetPoint) {
+									return ((TargetPoint) w.getPoint()).start;
+								}
 							}
 						}
 						return false;
