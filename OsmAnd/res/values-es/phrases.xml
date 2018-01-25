@@ -3718,4 +3718,32 @@
 	<string name="poi_climbing_rock_limestone">Escalada en roca: caliza</string>
 	<string name="poi_climbing_rock_granite">Escalada en roca: granito</string>
 	<string name="poi_climbing_rock_sandstone">Escalada en roca: arenisca</string>
-	</resources>
+	<string name="poi_climbing_rock_quartzite">Escalada en roca: cuarcita</string>
+	<string name="poi_climbing_rock_gneiss">Escalada en roca: gneis</string>
+	<string name="poi_climbing_rock_porphyry">Escalada en roca: pórfido</string>
+	<string name="poi_climbing_orientation_n">Orientación de la pared: N</string>
+	<string name="poi_climbing_orientation_ne">Orientación de la pared: NE</string>
+	<string name="poi_climbing_orientation_e">Orientación de la pared: E</string>
+	<string name="poi_climbing_orientation_se">Orientación de la pared: SE</string>
+	<string name="poi_climbing_orientation_s">Orientación de la pared: S</string>
+	<string name="poi_climbing_orientation_sw">Orientación de la pared: SO</string>
+	<string name="poi_climbing_orientation_w">Orientación de la pared: O</string>
+	<string name="poi_climbing_orientation_nw">Orientación de la pared: NO</string>
+	<string name="poi_climbing_summit_log_yes">Escalada Registro de cumbre: sí</string>
+	<string name="poi_climbing_summit_log_no">Escalada Registro de cumbre: no</string>
+	<string name="poi_climbing_routes">Vías de escalada</string>
+
+	<string name="poi_circumference">Circunferencia</string>
+	<string name="poi_diameter_crown">Diámetro de la corona</string>
+
+	<string name="poi_meadow_agricultural">Tipo: agrícola</string>
+	<string name="poi_meadow_perpetual">Tipo: perpetuo</string>
+	<string name="poi_meadow_transitional">Tipo: transición</string>
+	<string name="poi_meadow_pasture">Tipo: pasto</string>
+
+	<string name="poi_frozen_food">Comida congelada</string>
+
+	<string name="poi_agrarian">Tienda agrícola</string>
+
+
+</resources>
