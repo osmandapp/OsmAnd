@@ -68,7 +68,7 @@ public class ParkingPositionMenuController extends MenuController {
 	}
 
 	@Override
-	public String getAdditionalInfoStr() {
+	public CharSequence getAdditionalInfoStr() {
 		return parkingLeftDescription;
 	}
 
