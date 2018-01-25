@@ -983,7 +983,8 @@ public class OpeningHoursParser {
 				if (isOpened24_7()) {
 					b.setLength(0);
 					b.append("24/7 ");
-				} else if (off) {
+				}
+				if (off) {
 					b.append(additionalStrings.get("off"));
 				}
 			} else {
