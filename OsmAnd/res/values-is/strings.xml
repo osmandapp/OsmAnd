@@ -2565,7 +2565,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="distance_indication_descr">Veldu hvernig á að birta vegalengdina að virkum kortamerkjum.</string>
     <string name="active_markers_descr">Veldu hve margir stefnuvísar séu birtir.</string>
     <string name="coordinate_input_accuracy_description">Skipta sjálfkrafa yfir í næsta reit eftir að settir hafa verið inn %1$d tölustafir.</string>
-    <string name="import_gpx_file_description">er hægt að flytja inn sem punkt í Eftirlæti eða sem ferlaskrá</string>
+    <string name="import_gpx_file_description">er hægt að flytja inn sem punkt í Eftirlæti eða sem ferlaskrá.</string>
     <string name="marker_show_distance_descr">Veldu hvernig á að gefa til kynna vegalengd og stefnu að kortamerkjum á kortaskjánum:</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Veldu undir hvaða hraða stefna kortsins skiptir úr \'Eftir átt hreyfingar\' yfir í \'Eftir áttavita\'.</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd mun tengja punktana við leiðir fyrir valið notandasnið.</string>
@@ -2594,4 +2594,18 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="winter_and_ski_renderer">Vetur og skíði</string>
     <string name="touring_view_renderer">Ferðakort (birtuskil og ítarefni)</string>
     <string name="nautical_renderer">Sjókort</string>
-</resources>
+<string name="simulate_initial_startup_descr">Stillir flaggið sem gefur til kynna fyrstu keyrslu forrits, heldur öllum öðrum stillingum óbreyttum.</string>
+    <string name="fav_point_dublicate_message">"Tilgreint heiti eftirlætis er þegar  í notkun, var breytt í %1$s til að koma í veg fyrir tvítekningu."</string>
+    <string name="osmo_auth_error">Villa kom upp í OsMo-auðkenningu: %1$s.
+\nÞað gæti verið tímabundin röskun á þjónustu eða að skráning þín sé útrunnin.
+\nViltu halda áfram með nýskráningu?</string>
+    <string name="intermediate_items_sort_by_distance">Raða dyr-til-dyra</string>
+    <string name="osmand_background_plugin_description">Sýnir stillingar til að virkja ham fyrir rakningu og leiðsögn í bakgrunni (slökkt á skjá) með því að vekja GPS-tækið reglulega.</string>
+    <string name="osmand_plus_extended_description_part4">Notaðu gögn frá OSM og Wikipedia
+\n• Hágæða upplýsingar frá bestu samstarfsverkefnum heimsins 
+\n• OSM-gögn tiltæk í hverju landi eða svæði
+\n• Merkisstaðir (POI) frá Wikipedia, frábært fyrir skoðunarferðir
+\n• Ótakmörkuð ókeypis niðurhöl, beint í forritinu
+\n• Þjöppuð ónettengd vektorkort, uppfærð einu sinni í mánuði
+\n• Val á milli heildargagna svæðis eða einungis vegakerfis (dæmi: öll gögn fyrir Japan eru 700 MB en 200 MB fyrir vegakerfið eingöngu)</string>
+    </resources>
