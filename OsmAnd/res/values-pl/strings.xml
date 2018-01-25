@@ -2644,7 +2644,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="do_not_send_anonymous_app_usage">Nie wysyłaj anonimowych statystyk użytkowania</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd zbiera informacje o tym, z których części aplikacji korzysta użytkownik. Twoja lokalizacja nie jest nigdy wysyłana, tak jak teksty wpisywane w aplikacji i szczegóły dotyczące przeglądanych, wyszukiwanych i pobieranych obszarów.</string>
     <string name="do_not_show_startup_messages">Ukrywanie wiadomości podczas uruchamiania</string>
-    <string name="do_not_show_startup_messages_desc">Nie wyświetla rabatów na program i wiadomości specjalnych o wydarzeniach lokalnych</string>
+    <string name="do_not_show_startup_messages_desc">Nie wyświetla rabatów na program i wiadomości specjalnych o wydarzeniach lokalnych.</string>
     <string name="parking_options">Opcje parkowania</string>
     <string name="full_version_thanks">Dziękujemy za zakup pełnej wersji OsmAnd!</string>
     <string name="right_side_navigation">Ruch prawostronny</string>
