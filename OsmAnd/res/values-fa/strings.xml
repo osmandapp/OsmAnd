@@ -1999,7 +1999,7 @@
     <string name="rendering_attr_hideOverground_name">اشیای روی زمین</string>
     <string name="shared_string_change">تغییر</string>
     <string name="get_started">شروع کن</string>
-    <string name="route_stops_before">%1$s ایستگاه قبل</string>
+    <string name="route_stops_before">%1$s ایستگاه قبلی</string>
     <string name="coords_search">جست‌وجوی مختصات</string>
     <string name="advanced_coords_search">جست‌وجوی پیشرفتهٔ مختصات</string>
     <string name="back_to_search">برگشتن به جست‌وجو</string>
@@ -3014,7 +3014,7 @@
     <string name="nautical_renderer">دریایی</string>
 <string name="release_2_9">• به‌روزرسانی برای منوی زمینه: نمایش زمان باز یا بسته‌شدن مکان (POI)
 \n
-\n • Transport menu: all available routes are now at the top
+\n • منوی حمل‌ونقل: همهٔ مسیرهای عبوری از یک ایستگاه در بالای منو نشان داده می‌شوند
 \n
 \n • ویکی‌پدیا: در نظر گرفتن دکمه‌ای برای بازکردن اصل مقاله، به‌روزرسانی ظاهر مقاله‌ها
 \n 
@@ -3022,8 +3022,8 @@
 \n
 \n • یادداشت‌ها: قابلیت مرتب‌سازی بر اساس نوع و تاریخ
 \n
-\n • ویرایش‌های OSM: نمایش آیکون و نام دسته‌ای که POI به آن تعلق دارد، نمایش عملیات‌هتی کامل‌شده
+\n • ویرایش‌های OSM: نمایش آیکون و نام دسته‌ای که POI به آن تعلق دارد، نمایش عملیات‌های کامل‌شده
 \n
-\n • ایجاد سریع نشانه‌ها از طریق صفحه‌ای جدید برای ورود فوری مختصات
+\n • ایجاد سریع نشانه‌ها از طریق صفحهٔ ورود فوری مختصات
 \n</string>
     </resources>
