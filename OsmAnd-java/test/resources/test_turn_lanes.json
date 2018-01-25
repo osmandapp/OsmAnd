@@ -658,6 +658,20 @@
     "expectedResults": {
       "35361252": "TL|+TR,C"
     }
+  },
+  {
+    "testName": "37.Lingener Straße TR Osttangente",
+    "startPoint": {
+      "latitude": 45.61665251148337,
+      "longitude": 35.534761190414315
+    },
+    "endPoint": {
+      "latitude": 45.6152041541823,
+      "longitude": 35.53729453682888
+    },
+    "expectedResults": {
+      "75576478": "TL|C|C|+TR"
+    }
   }
 
 ]
