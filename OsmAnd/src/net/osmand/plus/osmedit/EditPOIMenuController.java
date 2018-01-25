@@ -131,7 +131,7 @@ public class EditPOIMenuController extends MenuController {
 	}
 
 	@Override
-	public String getAdditionalInfoStr() {
+	public CharSequence getAdditionalInfoStr() {
 		return actionStr;
 	}
 

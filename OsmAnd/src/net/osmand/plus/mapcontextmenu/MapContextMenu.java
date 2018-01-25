@@ -1175,7 +1175,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return 0;
 	}
 
-	public String getAdditionalInfo() {
+	public CharSequence getAdditionalInfo() {
 		if (menuController != null) {
 			return menuController.getAdditionalInfoStr();
 		}

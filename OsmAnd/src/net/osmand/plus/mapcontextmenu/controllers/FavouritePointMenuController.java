@@ -14,12 +14,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.OpeningHoursInfo;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.util.Algorithms;
+import net.osmand.util.OpeningHoursParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,6 @@ public class FavouritePointMenuController extends MenuController {
 	private FavouritePoint fav;
 	private MapMarker mapMarker;
 	private List<TransportStopRoute> routes = new ArrayList<>();
-	private OpeningHoursInfo openingHoursInfo;
 
 	public FavouritePointMenuController(MapActivity mapActivity, PointDescription pointDescription, final FavouritePoint fav) {
 		super(new FavouritePointMenuBuilder(mapActivity, fav), pointDescription, mapActivity);
@@ -55,7 +54,7 @@ public class FavouritePointMenuController extends MenuController {
 
 		Object originObject = getBuilder().getOriginObject();
 		if (originObject instanceof Amenity) {
-			openingHoursInfo = AmenityMenuController.processOpeningHours((Amenity) originObject);
+			openingHoursInfo = OpeningHoursParser.getInfo(((Amenity) originObject).getOpeningHours());
 		}
 	}
 
@@ -144,35 +143,10 @@ public class FavouritePointMenuController extends MenuController {
 		Object originObject = getBuilder().getOriginObject();
 		if (originObject != null) {
 			if (originObject instanceof Amenity) {
-				Amenity amenity = (Amenity) originObject;
-				AmenityMenuController.addPlainMenuItems(amenity, AmenityMenuController.getTypeStr(amenity), builder);
+				AmenityMenuController.addTypeMenuItem((Amenity) originObject, builder);
 			}
 		} else {
 			addMyLocationToPlainItems(latLon);
 		}
-	}
-
-	@Override
-	public int getAdditionalInfoColor() {
-		if (openingHoursInfo != null) {
-			return openingHoursInfo.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
-		}
-		return 0;
-	}
-
-	@Override
-	public String getAdditionalInfoStr() {
-		if (openingHoursInfo != null) {
-			return openingHoursInfo.getInfo(getMapActivity());
-		}
-		return "";
-	}
-
-	@Override
-	public int getAdditionalInfoIconRes() {
-		if (openingHoursInfo != null) {
-			return R.drawable.ic_action_opening_hour_16;
-		}
-		return 0;
 	}
 }
