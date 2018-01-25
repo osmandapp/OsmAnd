@@ -2476,7 +2476,7 @@ Długość %2$s</string>
     <string name="wiki_around">Artykuły Wikipedii w pobliżu</string>
     <string name="legacy_search">Przestarzała wyszukiwarka</string>
     <string name="show_legacy_search">Przestarzała wyszukiwarka</string>
-    <string name="show_legacy_search_desc">Dodaje starą wyszukiwarkę do menu rozwijanego</string>
+    <string name="show_legacy_search_desc">Dodaje starą wyszukiwarkę do menu rozwijanego.</string>
     <string name="routing_attr_allow_motorway_name">Uwzglednianie autostrad</string>
     <string name="routing_attr_allow_motorway_description">Zezwala na autostrady</string>
     <string name="lang_sr_latn">Serbski (łaciński)</string>
