@@ -67,7 +67,7 @@
     <string name="offline_edition">Off-line editace</string>
     <string name="offline_edition_descr">Vždy používat off-line editaci.</string>
     <string name="update_poi_does_not_change_indexes">Změny POI bodů v aplikaci nemají vliv na zobrazení stažených map, změny se ukládají do lokálního souboru.</string>
-    <string name="local_openstreetmap_uploading">Odesílám …</string>
+    <string name="local_openstreetmap_uploading">Nahrávání…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/Poznámek bylo odesláno</string>
     <string name="local_openstreetmap_uploadall">Odeslat všechny</string>
     <string name="local_openstreetmap_upload">Odeslat změny do OSM</string>
@@ -124,7 +124,7 @@
  (Aktuálně je k dispozici {2} MB.)</string>
     <string name="use_transparent_map_theme">Transparentní téma</string>
     <string name="native_library_not_supported">Android native library není podporovaná na tomto zařízení.</string>
-    <string name="init_native_library">Inicializuji Android native library…</string>
+    <string name="init_native_library">Probíhá inicializace Android native library…</string>
     <string name="choose_auto_follow_route">Automatické centrování</string>
     <string name="choose_auto_follow_route_descr">Zadejte interval pro automatický návrat mapy na vaši pozici.</string>
     
@@ -228,10 +228,10 @@
     <string name="amenity_type_sustenance">Stravování</string>
     <string name="amenity_type_tourism">Turistika</string>
     <string name="amenity_type_transportation">Doprava</string>
-    <string name="indexing_address">Indexuji adresy…</string>
-    <string name="indexing_map">Indexuji mapu…</string>
-    <string name="indexing_poi">Indexuji POI…</string>
-    <string name="indexing_transport">Indexuji dopravu…</string>
+    <string name="indexing_address">Indexování adresy…</string>
+    <string name="indexing_map">Indexování mapy…</string>
+    <string name="indexing_poi">Indexování POI…</string>
+    <string name="indexing_transport">Indexování dopravy…</string>
     <string name="shared_string_io_error">Došlo k chybě vstupu/výstupu</string>
     <string name="km">km</string>
     <string name="km_h">km/h</string>
@@ -244,21 +244,21 @@
     <string name="poi_filter_for_tourists">Pro turisty</string>
     <string name="poi_filter_fuel">Čerpací stanice</string>
     <string name="poi_filter_namefinder">On-line POI filtr „NameFinder“</string>
-    <string name="reading_cached_tiles">Načítám uložené dlaždice…</string>
+    <string name="reading_cached_tiles">Načítání uložených dlaždic…</string>
     <string name="version_index_is_big_for_memory">Index \'\'{0}\'\' se nevejde do paměti</string>
     <string name="version_index_is_not_supported">Verze indexu \'\'{0}\'\' není podporována</string>
     <string name="osmand_net_previously_installed">Máte nainstalovanou předchozí verzi programu. Všechna off-line data budou podporována novou verzí, avšak oblíbená místa byste měli exportovat ve staré verzi a po aktualizaci importovat do nové verze.</string>
     <string name="build_installed">Balíček {0} úspěšně instalován ({1}).</string>
-    <string name="downloading_build">Stahuji balíček…</string>
+    <string name="downloading_build">Stahování balíčku…</string>
     <string name="install_selected_build">Opravdu chcete instalovat OsmAnd - {0} z {1} {2} MB?</string>
     <string name="loading_builds_failed">Stahování seznamu balíčků selhalo</string>
-    <string name="loading_builds">Načítám balíčky OsmAnd…</string>
+    <string name="loading_builds">Načítání OsmAnd balíčků…</string>
     <string name="select_build_to_install">Vyberte jeden z balíčků OsmAnd k nainstalování</string>
     <string name="contribution_activity">Speciální aktivita pro vývojovou verzi</string>
     <string name="search_offline_clear_search">Nové hledání</string>
     <string name="map_text_size_descr">Zvolte velikost písma ve jménech na mapě.</string>
     <string name="map_text_size">Velikost písma</string>
-    <string name="installing_new_resources">Rozbaluji nová data…</string>
+    <string name="installing_new_resources">Rozbalování nových dat…</string>
     <string name="internet_connection_required_for_online_route">On-line navigaci nelze použít, protože připojení k Internetu není k dispozici.</string>
     <string name="tts_language_not_supported_title">Jazyk není podporován</string>
     <string name="tts_language_not_supported">Vybraný jazyk není podporován nainstalovaným TTS enginem. Chcete zkusit nainstalovat jiný z Marketu? Jinak bude použit výchozí jazyk.</string>
@@ -327,7 +327,7 @@ Navigační služba je dočasně přepnuta na on-line CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
     <string name="application_dir">Adresář pro data</string>
     <string name="gps_status_app_not_found">Aplikace pro zobrazení stavu GPS není nainstalovaná. Hledat v Obchodě?</string>
-    <string name="voice_is_not_available_msg">Hlasové navádění není dostupné, jděte prosím do \'Nastavení\' → \'Obecné\' → \'Hlasové pokyny\' a vyberte, nebo stáhněte balíček s hlasovými pokyny.</string>
+    <string name="voice_is_not_available_msg">Hlasové navádění je nedostupné. Přejděte do „Nastavení“ → „Obecné“ → „Hlasové pokyny“ a vyberte, nebo stáhněte balíček s hlasovými pokyny.</string>
     <string name="voice_is_not_available_title">Žádná hlasová data nejsou zvolena</string>
     <string name="trace_rendering_descr">Zaškrtněte pro zobrazení statistik o vykreslování mapy.</string>
     <string name="trace_rendering">Sledovat vykreslování</string>
@@ -431,13 +431,13 @@ Navigační služba je dočasně přepnuta na on-line CloudMade.</string>
     <string name="menu_mute_on">Zvuk je vypnut</string>
     <string name="voice_provider_descr">Vybrat hlasová data pro navigaci.</string>
     <string name="voice_provider">Hlasová data</string>
-    <string name="voice_data_initializing">Inicializuji hlasová data…</string>
+    <string name="voice_data_initializing">Inicializace hlasových dat…</string>
     <string name="voice_data_not_supported">Nepodporovaná verze hlasových dat</string>
     <string name="voice_data_corrupted">Zvolené hlasové údaje jsou poškozené</string>
     <string name="voice_data_unavailable">Vybraná hlasová data jsou nedostupná</string>
     <string name="sd_unmounted">SD karta není dostupná.\nNeuvidíte mapu a nebudete moci ani nic najít.</string>
     <string name="sd_mounted_ro">SD karta má zakázaný zápis.\nMůžete prohlížet jen přednačtenou mapu a nelze stahovat mapy z internetu.</string>
-    <string name="unzipping_file">Rozbaluji soubor…</string>
+    <string name="unzipping_file">Rozbalování souboru…</string>
     <string name="route_tr">Odbočte vpravo a pokračujte</string>
     <string name="route_tshr">Odbočte ostře vpravo a pokračujte</string>
     <string name="route_tslr">Odbočte mírně vpravo a pokračujte</string>
@@ -449,7 +449,7 @@ Navigační služba je dočasně přepnuta na on-line CloudMade.</string>
     <string name="first_time_continue">Pokračujte</string>
     <string name="first_time_download">Stáhnout regiony</string>
     <string name="first_time_msg">Děkujeme, že jste si zvolili OsmAnd. Abyste mohli využívat všech možností aplikace, potřebujete soubory s mapami a hlasem, které si můžete stáhnout (Nastavení → Spravovat mapové soubory) nebo připravit sami. Poté budete moci hledat podle adres, hledat body zájmu (POI) a spojení veřejnou dopravou.</string>
-    <string name="search_poi_location">Hledám signál…</string>
+    <string name="search_poi_location">Hledání signálu…</string>
     <string name="search_near_map">Hledat poblíž současného středu mapy</string>
     <string name="search_nearby">Hledat poblíž</string>
     <string name="map_orientation_default">Automaticky</string>
@@ -489,10 +489,10 @@ Navigační služba je dočasně přepnuta na on-line CloudMade.</string>
     <string name="favorite">Oblíbené</string>
     <string name="shared_string_clear_all">Vymazat vše</string>
     <string name="shared_string_history">Minulé</string>
-    <string name="uploading_data">Odesílám data…</string>
-    <string name="uploading">Odesílám…</string>
+    <string name="uploading_data">Odesílání dat…</string>
+    <string name="uploading">Odesílání…</string>
     <string name="search_nothing_found">Nic nebylo nalezeno</string>
-    <string name="searching">Hledám…</string>
+    <string name="searching">Hledání…</string>
     <string name="searching_address">Hledám adresu…</string>
     <string name="search_osm_nominatim">Hledat adresu pomocí OSM Nominatim</string>
     <string name="hint_search_online">Hledat on-line: číslo domu, ulice, město</string>
@@ -508,7 +508,7 @@ Navigační služba je dočasně přepnuta na on-line CloudMade.</string>
     <string name="download_question_exist">Index pro {0} už existuje ({1}). Chcete ho aktualizovat ({2}) ?</string>
     <string name="address">Adresa</string>
     <string name="shared_string_download_successful">Stahování úspěšné</string>
-    <string name="downloading_list_indexes">Stahuji seznam dostupných indexů…</string>
+    <string name="downloading_list_indexes">Stahování seznamu dostupných regionů…</string>
     <string name="list_index_files_was_not_loaded">Seznam indexů z osmand.net nebyl stažen.</string>
     <string name="select_index_file_to_download">Nic nebylo nalezeno. Pokud nemůžete najít svou oblast, můžete si data vytvořit sami, viz http://osmand.net.</string>
     <string name="fav_points_edited">Oblíbené místo bylo upraveno</string>
@@ -520,17 +520,17 @@ Navigační služba je dočasně přepnuta na on-line CloudMade.</string>
     <string name="mark_final_location_first">Prosím zadejte nejprve cíl</string>
     <string name="get_directions">Navigace</string>
     <string name="opening_hours">Otevírací doba</string>
-    <string name="opening_changeset">Otevírám sadu změn…</string>
-    <string name="closing_changeset">Zavírám sadu změn…</string>
-    <string name="commiting_node">Odesílám uzel…</string>
-    <string name="loading_poi_obj">Načítám POI…</string>
+    <string name="opening_changeset">Otevírání sady změn…</string>
+    <string name="closing_changeset">Zavírání sady změn…</string>
+    <string name="commiting_node">Odesílání uzlu…</string>
+    <string name="loading_poi_obj">Načítání POI…</string>
     <string name="auth_failed">Autorizace selhala</string>
     <string name="failed_op">chyba</string>
-    <string name="converting_names">Převádím místní/anglická jména…</string>
-    <string name="loading_streets_buildings">Načítám ulice/budovy…</string>
-    <string name="loading_postcodes">Načítám PSČ…</string>
-    <string name="loading_streets">Načítám ulice…</string>
-    <string name="loading_cities">Načítám města…</string>
+    <string name="converting_names">Převádění místních/anglických názvů…</string>
+    <string name="loading_streets_buildings">Načítání ulic/budov…</string>
+    <string name="loading_postcodes">Načítání PSČ…</string>
+    <string name="loading_streets">Načítání ulic…</string>
+    <string name="loading_cities">Načítání měst…</string>
     <string name="poi">POI</string>
     <string name="error_occurred_saving_gpx">Chyba při ukládání GPX</string>
     <string name="error_calculating_route">Chyba při výpočtu trasy</string>
@@ -541,10 +541,10 @@ Navigační služba je dočasně přepnuta na on-line CloudMade.</string>
     <string name="invalid_locations">Neplatné souřadnice!</string>
     <string name="go_back_to_osmand">Vrátit se k mapě OsmAnd</string>
     <string name="shared_string_close">Zavřít</string>
-    <string name="loading_data">Načítám data…</string>
-    <string name="reading_indexes">Načítám indexy…</string>
+    <string name="loading_data">Načítání dat…</string>
+    <string name="reading_indexes">Načítání místních dat…</string>
     <string name="previous_run_crashed">Aplikace při minulém běhu spadla. Soubor s hlášením je v {0}. Prosím ohlaste problém vývojářům a přiložte hlášení o chybě.</string>
-    <string name="saving_gpx_tracks">Ukládám GPX trasy na SD…</string>
+    <string name="saving_gpx_tracks">Ukládání GPX trasy na SD kartu…</string>
     <string name="finished_task">Hotovo</string>
     <string name="use_online_routing_descr">Použít Internet k výpočtu trasy.</string>
     <string name="use_online_routing">Použít on-line navigaci</string>
@@ -554,7 +554,7 @@ Navigační služba je dočasně přepnuta na on-line CloudMade.</string>
     <string name="osm_settings">Editace OSM</string>
     <string name="auto_zoom_map_descr">Automaticky měnit zvětšení podle rychlosti pohybu.</string>
     <string name="auto_zoom_map">Automatické zvětšení mapy</string>
-    <string name="additional_settings">Další volby</string>
+    <string name="additional_settings">Další nastavení</string>
     <string name="shared_string_settings">Nastavení</string>
     <string name="save_current_track_descr">Uloží aktuální trasu na SD kartu.</string>
     <string name="save_current_track">Uložit aktuální trasu GPX</string>
@@ -815,7 +815,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="select_navigation_mode">Vyberte způsob dopravy</string>
     <string name="day_night_info">Denní/noční info</string>
     
-    <string name="map_widget_renderer">Vektorový vykreslovač</string>
+    <string name="map_widget_renderer">Styl mapy</string>
     <string name="avoid_motorway">Vyhnout se dálnicím</string>
     <string name="snap_to_road_descr">Zachytí kurzor na nejbližší silnici/cestu během navigace.</string>
     <string name="map_widget_vector_attributes">Vlastnosti vykreslování</string>
@@ -882,7 +882,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="close_changeset">Zavřít změny</string>
     <string name="background_service_is_enabled_question">Služba OsmAnd stále běží na pozadí. Chcete ji také zastavit?</string>
     <string name="native_library_not_running">Aplikace běží v bezpečném režimu (vypněte ho v nastavení).</string>
-    <string name="safe_mode_description">Spustit aplikaci v bezpečném režimu (kód pro Android namísto nativního).</string>
+    <string name="safe_mode_description">Spustit aplikaci v bezpečném režimu (pomalejší Android kód namísto nativního).</string>
     <string name="safe_mode">Bezpečný režim</string>
     <string name="download_roads_only_item">Silniční mapa</string>
     <string name="download_regular_maps">Standardní mapy</string>
@@ -890,7 +890,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="rendering_attr_showRoadMaps_description">Zvolte, kdy zobrazovat silniční mapy:</string>
     <string name="rendering_attr_showRoadMaps_name">Silniční mapy</string>
     <string name="incomplete_locale">neúplný</string>
-    <string name="no_buildings_found">Nebyly nalezeny žádné budovy.</string>
+    <string name="no_buildings_found">Nenalezeny žádné budovy.</string>
     <string name="search_villages_and_postcodes">Hledat obec/PSČ</string>
     <string name="route_descr_lat_lon">%1$.3f šířky, %2$.3f délky</string>
     
@@ -908,7 +908,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="download_srtm_maps">Vrstevnice</string>
     <string name="audionotes_location_not_defined">GPS pozice pro záznam zvukové poznámky ještě není známa. Pokud chcete použít specifickou lokaci použijte \"Možnosti bodu\".</string>
     <string name="map_widget_audionotes">Audio poznámky</string>
-    <string name="recording_is_recorded">Nahrávám audio/video. Stiskněte tlačítko \"stop\" pro zastavení.</string>
+    <string name="recording_is_recorded">Nahrávání audia/videa. Stiskněte tlačítko Stop pro zastavení.</string>
     <string name="recording_open_external_player">Otevřít externí přehrávač</string>
     <string name="recording_delete_confirm">Chcete smazat tento záznam?</string>
     <string name="recording_context_menu_arecord">Nahrát zvukovou poznámku</string>
@@ -932,11 +932,12 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="av_settings">Nastavení zvuku a videa </string>
     <string name="recording_error">Při nahrávání došlo k chybě </string>
     <string name="recording_camera_not_available">Kamera není dostupná</string>
-    <string name="recording_playing">Přehrávám zvuk z nahrávky:\n%1$s</string>
+    <string name="recording_playing">Probíhá přehrávání zvuku z nahrávky:
+\n%1$s</string>
     <string name="recording_unavailable">nedostupné</string>
     <string name="layer_recordings">Audio/video nahrávky</string>
     <string name="recording_description">Nahrávka %1$s %3$s %2$s</string>
-    <string name="recording_default_name">Nahrávám</string>
+    <string name="recording_default_name">Nahrávání</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd modul pro off-line zobrazování vrstevnic</string>
     <string name="shared_string_control_start">Start</string>
     <string name="dropbox_plugin_name">Modul Dropbox</string>
@@ -999,7 +1000,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="cancel_route">Zrušit trasu</string>
     <string name="clear_destination">Smazat cíl</string>
     <string name="local_indexes_cat_srtm">Vrstevnice</string>
-    <string name="shared_string_downloading">Stahuji</string>
+    <string name="shared_string_downloading">Stahování</string>
     <string name="other_location">Ostatní</string>
     <string name="local_osm_changes_backup_successful">Soubor se změnami mapy OSM úspěšně vytvořen %1$s</string>
     <string name="local_osm_changes_backup_failed">Nezdařilo se zálohovat změny mapy OSM</string>
@@ -1298,7 +1299,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmo_cancel_moving_target">Zrušit pohyblivý cíl</string>
     <string name="osmo_center_location">Zarovnat na střed obrazovky</string>
     <string name="osmo_set_moving_target">Nastavit jako pohyblivý cíl</string>
-    <string name="loading_smth">Načítá se %1$s…</string>
+    <string name="loading_smth">Načítání %1$s…</string>
     <string name="map_widget_plain_time">Aktuální čas</string>
     <string name="delay_navigation_start">Spustit navigaci automaticky</string>
     <string name="shared_string_selected_lowercase">vybraný</string>
@@ -1450,14 +1451,14 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="fav_point_dublicate">Název oblíbeného bodu je již použit</string>
     <string name="fav_point_dublicate_message">Zadaný název oblíbeného bodu již existuje. Nový bod byl změněn na %1$s, aby nevznikla duplicita.</string>
     <string name="print_route">Vytisknout trasu</string>
-    <string name="fav_point_emoticons_message">Jméno oblíbeného bodu bylo změněno na %1$s, aby bylo možné uložit název emotikonu do souboru.</string>
+    <string name="fav_point_emoticons_message">Název oblíbeného bodu byl změněn na %1$s, aby bylo možné uložit název emotikonu do souboru.</string>
     <string name="speed_limit_exceed">Tolerance překročení rychlosti</string>
     <string name="speed_limit_exceed_message">Zvolte toleranci překročení povolené rychlosti, po které uslyšíte hlasové varování.</string>
     <string name="osmo_device_not_found">Zařízení nenalezeno</string>
     <string name="osmo_no_connection_msg">Nelze se připojit k serveru OsMo:
-- zkontrolujte své internetové připojení;
-- zkontrolujte nastavení;
-- zkontrolujte náš Twitter: https://twitter.com/OsMomobi</string>
+\n• zkontrolujte své internetové připojení;
+\n• zkontrolujte nastavení;
+\n• zkontrolujte náš Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Anonymní uživatel nemůže:
 - vytvářet skupiny;
 - synchronizovat skupiny a zařízení se serverem;
@@ -1637,7 +1638,7 @@ Seznam obsažených zemí (prakticky celý svět!): Afghánistán, Albánie, Al�
     <string name="rename_failed">Přejmenování selhalo.</string>
     <string name="shared_string_currently_recording_track">Právě zaznamenávaná trasa</string>
     <string name="back_to_map">Zpět na mapu</string>
-    <string name="plugin_touringview_name">Cestovní mapový pohled (Touring view)</string>
+    <string name="plugin_touringview_name">Cestovní mapový pohled</string>
     <string name="rendering_attr_pisteGrooming_name">Úprava sjezdovky</string>
     <string name="track_segments">Úseky trasy</string>
     <string name="track_points">Body trasy</string>
@@ -1705,17 +1706,17 @@ Délka %2$s</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Pomocník OSM editorů</string>
     <string name="filter_poi_hint">Filtrovat podle jména</string>
     <string name="search_poi_category_hint">Pište pro vyhledání ve všech</string>
-    <string name="plugin_touringview_descr">Aktivováním tohoto pohledu se změní styl mapy na \"Touring view\", který obsahuje víc detailů pro cestovatele a profesionální řidiče.
-\n
-\nTento pohled poskytuje ve všech přiblíženích mapy maximum cestovních detailů (např. silnice, cesty, pěšiny a orientační značky).
-\n
-\nTaké zobrazuje typy cest v jednoznačně odlišných barvách, což je užitečné například pro velká vozidla.
-\n
-\nPoskytuje také speciální možnosti pro cestování jako cyklotrasy a skialpinistické trasy.
-\n
-\nNení potřeba stahovat samostatný soubor, tento pohled používá standardní mapové soubory.
-\n
-\nTento pohled může být vypnut jeho deaktivováním zde, nebo změnou hodnoty ve \"Vykreslování mapy\" v \"Nastavení mapy\".</string>
+    <string name="plugin_touringview_descr">Aktivováním tohoto pohledu se změní styl mapy na „Cestování“, který obsahuje víc detailů pro cestovatele a profesionální řidiče. 
+\n 
+\nTento pohled poskytuje ve všech přiblíženích mapy maximum cestovních detailů (např. silnice, cesty, pěšiny a orientační značky). 
+\n 
+\nTaké zobrazuje typy cest v jednoznačně odlišných barvách, což je užitečné například pro velká vozidla. 
+\n 
+\nPoskytuje také speciální možnosti pro cestování jako cyklotrasy a skialpinistické trasy. 
+\n 
+\nNení potřeba stahovat samostatný soubor, tento pohled používá standardní mapové soubory. 
+\n 
+\nTento pohled může být vypnut jeho deaktivováním zde, nebo změnou hodnoty možnosti „Styl mapy“ v „Nastavení mapy“.</string>
     <string name="plugin_nautical_descr">Tento modul obohacuje OsmAnd mapy a navigaci o poskytování plavebních map pro plavení, plachtění a ostatní typy vodních sportů.
 \n
 \nSpeciální mapový modul pro OsmAnd poskytuje všechny plavební znaky a symboly pro vnitrozemskou i pobřežní navigaci. Popis každého plavebního znaku poskytuje všechny údaje k jejich identifikaci (kategorii, tvar, barvu atd.)
@@ -1891,7 +1892,7 @@ Délka %2$s</string>
     <string name="favourites_context_menu_add">Přidat oblíbený bod</string>
     <string name="downloads_left_template">%1$s stahování zbývá</string>
     <string name="roads">Cesty</string>
-    <string name="downloading_number_of_files">Stahování - soubor %1$d</string>
+    <string name="downloading_number_of_files">Stahování – soubor %1$d</string>
     <string name="buy">KOUPIT</string>
     <string name="hillshade_layer_disabled">Vrstva stínování vypnuta</string>
     <string name="regions">Oblasti</string>
@@ -2279,7 +2280,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="osmo_share_location">Sdílet</string>
     <string name="osmo_pause_location">Pozastavit</string>
     <string name="osmo_service_running">Služba OsMo běží</string>
-    <string name="trip_rec_notification_settings">Povolit rychlý start zánamu</string>
+    <string name="trip_rec_notification_settings">Povolit rychlé spuštění záznamu</string>
     <string name="trip_rec_notification_settings_desc">Zobrazit systémové oznámení, které umožňuje spustit nahrávání.</string>
     <string name="shared_string_notifications">Oznámení</string>
     <string name="shared_string_continue">Pokračovat</string>
@@ -2390,14 +2391,14 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="quick_favorites_show_favorites_dialog">Zobrazit dialog oblíbených</string>
     <string name="quick_favorites_name_preset">Přednastavení názvu</string>
     <string name="quick_action_add_marker_descr">Klepnutím na tlačítko akce se přidá mapová značka do středu obrazovky.</string>
-    <string name="quick_action_add_gpx_descr">Klepnutím na tlačítko akce se přidá GPX mezicíl do středu obrazovky.</string>
-    <string name="quick_action_take_audio_note_descr">Klepnutím na tlačítko akce se přidá audio záznam do středu obrazovky.</string>
-    <string name="quick_action_take_video_note_descr">Klepnutím na tlačítko akce se přidá video záznam do středu obrazovky.</string>
-    <string name="quick_action_take_photo_note_descr">Klepnutím na tlačítko akce se přidá foto záznam do středu obrazovky.</string>
-    <string name="quick_action_add_osm_bug_descr">Klepnutím na tlačítko akce se přidá OSM poznámka do středu obrazovky.</string>
-    <string name="quick_action_add_poi_descr">Klepnutím na tlačítko akce se přidá POI do středu obrazovky.</string>
+    <string name="quick_action_add_gpx_descr">Klepnutím na tlačítko akce se přidá GPX bod trasy na místo ve středu obrazovky.</string>
+    <string name="quick_action_take_audio_note_descr">Klepnutím na tlačítko akce se přidá audio záznam na místo ve středu obrazovky.</string>
+    <string name="quick_action_take_video_note_descr">Klepnutím na tlačítko akce se přidá video záznam na místo ve středu obrazovky.</string>
+    <string name="quick_action_take_photo_note_descr">Klepnutím na tlačítko akce se přidá foto záznam na místo ve středu obrazovky.</string>
+    <string name="quick_action_add_osm_bug_descr">Klepnutím na tlačítko akce se přidá OSM poznámka na místo ve středu obrazovky.</string>
+    <string name="quick_action_add_poi_descr">Klepnutím na tlačítko akce se přidá POI na místo ve středu obrazovky.</string>
     <string name="quick_action_navigation_voice_descr">Klepnutím na tlačítko akce se vypnou nebo zapnou hlasové pokyny během navigace.</string>
-    <string name="quick_action_add_parking_descr">Klepnutím na tlačítko akce se přidá parkovací místo do středu obrazovky.</string>
+    <string name="quick_action_add_parking_descr">Klepnutím na tlačítko akce se přidá parkovací místo na místo ve středu obrazovky.</string>
     <string name="favorite_empty_place_name">Místo</string>
     <string name="quick_action_duplicates">Zadaný název rychlé akce je již použit, byl změněn na %1$s z důvodu duplicity.</string>
     <string name="quick_action_duplicate">Duplicitní název rychlé akce</string>
@@ -2548,7 +2549,7 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="average_speed">Průměrná rychlost</string>
     <string name="add_new_folder">Přidat nový adresář</string>
     <string name="points_delete_multiple_succesful">Bod(y) úspěšně smazány.</string>
-    <string name="points_delete_multiple">Chystáte se smazat %1$d bod(ů). Jste si jist?</string>
+    <string name="points_delete_multiple">Chystáte se smazat body (%1$d). Určitě smazat?</string>
     <string name="route_points_category_name">Potřebné obraty na trase</string>
     <string name="track_points_category_name">Důležité body na této trase</string>
     <string name="gpx_track">Trasa</string>
@@ -2866,4 +2867,25 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
 \n • Čas pěší trasy zohledňuje terén/stoupání (Naismithovo pravidlo)
 \n
 \n</string>
-    </resources>
+    <string name="rendering_attr_hidePOILabels_name">Popisky bodů</string>
+    <string name="shared_string_without_name">Bez názvu</string>
+    <string name="what_is_here">Co je zde:</string>
+    <string name="parked_at">zaparkováno v</string>
+    <string name="pick_up_till">Vyzvednout do</string>
+    <string name="without_time_limit">Bez časového omezení</string>
+    <string name="context_menu_read_full_article">Přečíst celý článek</string>
+    <string name="context_menu_read_article">Přečíst článek</string>
+    <string name="context_menu_points_of_group">Všechny body ze skupiny</string>
+    <string name="open_from">Otevřeno od</string>
+    <string name="open_till">Otevřeno do</string>
+    <string name="will_close_at">Zavírají v</string>
+    <string name="will_open_at">Otevírají v</string>
+    <string name="will_open_on">Otevřou v</string>
+    <string name="additional_actions">Další akce</string>
+    <string name="av_locations_selected_desc">GPX soubor se souřadnicemi a daty vybraných poznámek.</string>
+    <string name="av_locations_all_desc">GPS soubor se souřadnicemi a daty všech poznámek.</string>
+    <string name="shared_string_actions">Akce</string>
+    <string name="winter_and_ski_renderer">Zima a lyžování</string>
+    <string name="touring_view_renderer">Cestování (vysoký kontrast a detaily)</string>
+    <string name="nautical_renderer">Námořnictví</string>
+</resources>
