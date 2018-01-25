@@ -2939,7 +2939,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="open_till">Otwarte do</string>
     <string name="will_close_at">Zostanie zamknięty o</string>
     <string name="will_open_at">Zostanie otwarty o</string>
-    <string name="will_open_on">Zostanie otwarty w</string>
+    <string name="will_open_on">Zostanie otwarty o</string>
     <string name="additional_actions">Dodatkowe czynności</string>
     <string name="release_3_0">• Wykrywanie znaków stop uwzględnia teraz kierunek jazdy,
 \n
@@ -2964,4 +2964,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="empty_state_av_notes_desc">Dodaj notatkę audio, video lub zdjęciową do każdego punktu na mapie, za pomocą widgetu lub menu kontekstowego.</string>
     <string name="notes_by_date">Notatki według dat</string>
     <string name="empty_state_markers_groups">Importuj grupy</string>
+    <string name="add_favourites_group_to_markers_descr">Wybierz grupę ulubionych, do której chcesz dodać znaczniki.</string>
     </resources>
