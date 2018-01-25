@@ -2965,4 +2965,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="notes_by_date">Notatki według dat</string>
     <string name="empty_state_markers_groups">Importuj grupy</string>
     <string name="add_favourites_group_to_markers_descr">Wybierz grupę ulubionych, do której chcesz dodać znaczniki.</string>
+    <string name="digits_quantity">Liczba cyfr dziesiętnych</string>
     </resources>
