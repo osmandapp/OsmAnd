@@ -8,9 +8,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -27,6 +29,7 @@ public class OpeningHoursParser {
 	private static final String[] localDaysStr;
 	private static final String[] monthsStr;
 	private static final String[] localMothsStr;
+	private static final Map<String, String> additionalStrings = new HashMap<>();
 
 	private static final int LOW_TIME_LIMIT = 120;
 	private static final int WITHOUT_TIME_LIMIT = -1;
@@ -39,6 +42,23 @@ public class OpeningHoursParser {
 		dateFormatSymbols = DateFormatSymbols.getInstance();
 		localMothsStr = dateFormatSymbols.getShortMonths();
 		localDaysStr = getTwoLettersStringArray(dateFormatSymbols.getShortWeekdays());
+
+		additionalStrings.put("off", "off");
+		additionalStrings.put("is_open", "Open");
+		additionalStrings.put("is_open_24_7", "Open 24/7");
+		additionalStrings.put("will_open_at", "Will open at");
+		additionalStrings.put("open_from", "Open from");
+		additionalStrings.put("will_close_at", "Will close at");
+		additionalStrings.put("open_till", "Open till");
+		additionalStrings.put("will_open_tomorrow_at", "Will open tomorrow at");
+		additionalStrings.put("will_open_on", "Will open on");
+	}
+
+	/**
+	 * Set additional localized strings like "off", etc.
+	 */
+	public static void setAdditionalString(String key, String value) {
+		additionalStrings.put(key, value);
 	}
 
 	/**
@@ -89,11 +109,61 @@ public class OpeningHoursParser {
 	 */
 	public static class OpeningHours implements Serializable {
 
+		public static final int ALL_SEQUENCES = -1;
+
 		/**
 		 * list of the different rules
 		 */
 		private ArrayList<OpeningHoursRule> rules;
 		private String original;
+		private int sequenceCount;
+
+		public static class Info {
+
+			private boolean opened;
+			private boolean opened24_7;
+			private String openingTime;
+			private String nearToOpeningTime;
+			private String closingTime;
+			private String nearToClosingTime;
+			private String openingTomorrow;
+			private String openingDay;
+			private String ruleString;
+
+			public boolean isOpened() {
+				return opened;
+			}
+
+			public boolean isOpened24_7() {
+				return opened24_7;
+			}
+
+			public String getInfo() {
+				if (isOpened24_7()) {
+					if (!Algorithms.isEmpty(ruleString)) {
+						return additionalStrings.get("is_open") + " " + ruleString;
+					} else {
+						return additionalStrings.get("is_open_24_7");
+					}
+				} else if (!Algorithms.isEmpty(nearToOpeningTime)) {
+					return additionalStrings.get("will_open_at") + " " + nearToOpeningTime;
+				} else if (!Algorithms.isEmpty(openingTime)) {
+					return additionalStrings.get("open_from") + " " + openingTime;
+				} else if (!Algorithms.isEmpty(nearToClosingTime)) {
+					return additionalStrings.get("will_close_at") + " " + nearToClosingTime;
+				} else if (!Algorithms.isEmpty(closingTime)) {
+					return additionalStrings.get("open_till") + " " + closingTime;
+				} else if (!Algorithms.isEmpty(openingTomorrow)) {
+					return additionalStrings.get("will_open_tomorrow_at") + " " + openingTomorrow;
+				} else if (!Algorithms.isEmpty(openingDay)) {
+					return additionalStrings.get("will_open_on") + " " + openingDay + ".";
+				} else if (!Algorithms.isEmpty(ruleString)) {
+					return ruleString;
+				} else {
+					return "";
+				}
+			}
+		}
 
 		/**
 		 * Constructor
@@ -111,6 +181,45 @@ public class OpeningHoursParser {
 			rules = new ArrayList<OpeningHoursRule>();
 		}
 
+		public List<Info> getInfo() {
+			return getInfo(Calendar.getInstance());
+		}
+		
+		public List<Info> getInfo(Calendar cal) {
+			List<Info> res = new ArrayList<>();
+			for (int i = 0; i < sequenceCount; i++) {
+				Info info = getInfo(cal, i);
+				res.add(info);
+			}
+			return res.isEmpty() ? null : res;
+		}
+
+		public Info getCombinedInfo() {
+			return getCombinedInfo(Calendar.getInstance());
+		}
+		
+		public Info getCombinedInfo(Calendar cal) {
+			return getInfo(cal, ALL_SEQUENCES);
+		}
+
+		private Info getInfo(Calendar cal, int sequenceIndex) {
+			Info info = new Info();
+			boolean opened = isOpenedForTimeV2(cal, sequenceIndex);
+			info.opened = opened;
+			info.ruleString = getCurrentRuleTime(cal, sequenceIndex);
+			if (opened) {
+				info.opened24_7 = isOpened24_7(sequenceIndex);
+				info.closingTime = getClosingTime(cal, sequenceIndex);
+				info.nearToClosingTime = getNearToClosingTime(cal, sequenceIndex);
+			} else {
+				info.openingTime = getOpeningTime(cal, sequenceIndex);
+				info.nearToOpeningTime = getNearToOpeningTime(cal, sequenceIndex);
+				info.openingTomorrow = getOpeningTomorrow(cal, sequenceIndex);
+				info.openingDay = getOpeningDay(cal, sequenceIndex);
+			}
+			return info;
+		}
+
 		/**
 		 * add a rule to the opening hours
 		 *
@@ -125,8 +234,16 @@ public class OpeningHoursParser {
 		 *
 		 * @param rules to add
 		 */
-		public void addRules(List<OpeningHoursRule> rules) {
+		public void addRules(List<? extends OpeningHoursRule> rules) {
 			this.rules.addAll(rules);
+		}
+
+		public int getSequenceCount() {
+			return sequenceCount;
+		}
+
+		public void setSequenceCount(int sequenceCount) {
+			this.sequenceCount = sequenceCount;
 		}
 
 		/**
@@ -137,32 +254,47 @@ public class OpeningHoursParser {
 		public ArrayList<OpeningHoursRule> getRules() {
 			return rules;
 		}
-		
+
+		public ArrayList<OpeningHoursRule> getRules(int sequenceIndex) {
+			if (sequenceIndex == ALL_SEQUENCES) {
+				return rules;
+			} else {
+				ArrayList<OpeningHoursRule> sequenceRules = new ArrayList<>();
+				for (OpeningHoursRule r : rules) {
+					if (r.getSequenceIndex() == sequenceIndex) {
+						sequenceRules.add(r);
+					}
+				}
+				return sequenceRules;
+			}
+		}
+
 		/**
 		 * check if the feature is opened at time "cal"
 		 *
 		 * @param cal the time to check
 		 * @return true if feature is open
 		 */
-		public boolean isOpenedForTimeV2(Calendar cal) {
+		public boolean isOpenedForTimeV2(Calendar cal, int sequenceIndex) {
 			// make exception for overlapping times i.e.
 			// (1) Mo 14:00-16:00; Tu off
 			// (2) Mo 14:00-02:00; Tu off
 			// in (2) we need to check first rule even though it is against specification
+			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			boolean overlap = false;
-			for(int i = rules.size() - 1; i >= 0 ; i--) {
+			for (int i = rules.size() - 1; i >= 0 ; i--) {
 				OpeningHoursRule r = rules.get(i);
-				if(r.hasOverlapTimes()) {
+				if (r.hasOverlapTimes()) {
 					overlap = true;
 					break;
 				}
 			}
 			// start from the most specific rule
-			for(int i = rules.size() - 1; i >= 0 ; i--) {
+			for (int i = rules.size() - 1; i >= 0 ; i--) {
 				OpeningHoursRule r = rules.get(i);
-				if(r.contains(cal)) {
+				if (r.contains(cal)) {
 					boolean open = r.isOpenedForTime(cal);
-					if(!open && overlap ) {
+					if (!open && overlap ) {
 						continue;
 					} else {
 						return open;
@@ -179,12 +311,24 @@ public class OpeningHoursParser {
 		 * @return true if feature is open
 		 */
 		public boolean isOpenedForTime(Calendar cal) {
+			return isOpenedForTimeV2(cal, ALL_SEQUENCES);
+		}
+
+		/**
+		 * check if the feature is opened at time "cal"
+		 *
+		 * @param cal the time to check
+		 * @param sequenceIndex the sequence index to check
+		 * @return true if feature is open
+		 */
+		public boolean isOpenedForTime(Calendar cal, int sequenceIndex) {
 			/*
 			 * first check for rules that contain the current day
 			 * afterwards check for rules that contain the previous
 			 * day with overlapping times (times after midnight)
 			 */
 			boolean isOpenDay = false;
+			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			for (OpeningHoursRule r : rules) {
 				if (r.containsDay(cal) && r.containsMonth(cal)) {
 					isOpenDay = r.isOpenedForTime(cal, false);
@@ -199,33 +343,48 @@ public class OpeningHoursParser {
 			return isOpenDay || isOpenPrevious;
 		}
 
-		public boolean isOpened24_7() {
+		public boolean isOpened24_7(int sequenceIndex) {
 			boolean opened24_7 = false;
+			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			for (OpeningHoursRule r : rules) {
 				opened24_7 = r.isOpened24_7();
 			}
 			return opened24_7;
 		}
 
-		public String getNearToOpeningTime(Calendar cal) {
-			return getTime(cal, LOW_TIME_LIMIT, true);
+		public String getNearToOpeningTime(Calendar cal, int sequenceIndex) {
+			return getTime(cal, LOW_TIME_LIMIT, true, sequenceIndex);
 		}
 
-		public String getOpeningTime(Calendar cal) {
-			return getTime(cal, CURRENT_DAY_TIME_LIMIT, true);
+		public String getOpeningTime(Calendar cal, int sequenceIndex) {
+			return getTime(cal, CURRENT_DAY_TIME_LIMIT, true, sequenceIndex);
 		}
 
-		public String getNearToClosingTime(Calendar cal) {
-			return getTime(cal, LOW_TIME_LIMIT, false);
+		public String getNearToClosingTime(Calendar cal, int sequenceIndex) {
+			return getTime(cal, LOW_TIME_LIMIT, false, sequenceIndex);
 		}
 
-		public String getClosingTime(Calendar cal) {
-			return getTime(cal, WITHOUT_TIME_LIMIT, false);
+		public String getClosingTime(Calendar cal, int sequenceIndex) {
+			return getTime(cal, WITHOUT_TIME_LIMIT, false, sequenceIndex);
 		}
 
-		public String getOpeningDay(Calendar calendar) {
+		public String getOpeningTomorrow(Calendar calendar, int sequenceIndex) {
 			Calendar cal = (Calendar) calendar.clone();
 			String openingTime = "";
+			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
+			cal.add(Calendar.DAY_OF_MONTH, 1);
+			for (OpeningHoursRule r : rules) {
+				if (r.containsDay(cal) && r.containsMonth(cal)) {
+					openingTime = r.getTime(cal, false, WITHOUT_TIME_LIMIT, true);
+				}
+			}
+			return openingTime;
+		}
+
+		public String getOpeningDay(Calendar calendar, int sequenceIndex) {
+			Calendar cal = (Calendar) calendar.clone();
+			String openingTime = "";
+			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			for (int i = 0; i < 7; i++) {
 				cal.add(Calendar.DAY_OF_MONTH, 1);
 				for (OpeningHoursRule r : rules) {
@@ -241,16 +400,17 @@ public class OpeningHoursParser {
 			return openingTime;
 		}
 
-		private String getTime(Calendar cal, int limit, boolean opening) {
-			String time = getTimeDay(cal, limit, opening);
+		private String getTime(Calendar cal, int limit, boolean opening, int sequenceIndex) {
+			String time = getTimeDay(cal, limit, opening, sequenceIndex);
 			if (Algorithms.isEmpty(time)) {
-				time = getTimeAnotherDay(cal, limit, opening);
+				time = getTimeAnotherDay(cal, limit, opening, sequenceIndex);
 			}
 			return time;
 		}
 
-		private String getTimeDay(Calendar cal, int limit, boolean opening) {
+		private String getTimeDay(Calendar cal, int limit, boolean opening, int sequenceIndex) {
 			String atTime = "";
+			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			for (OpeningHoursRule r : rules) {
 				if (r.containsDay(cal) && r.containsMonth(cal)) {
 					atTime = r.getTime(cal, false, limit, opening);
@@ -259,8 +419,9 @@ public class OpeningHoursParser {
 			return atTime;
 		}
 
-		private String getTimeAnotherDay(Calendar cal, int limit, boolean opening) {
+		private String getTimeAnotherDay(Calendar cal, int limit, boolean opening, int sequenceIndex) {
 			String atTime = "";
+			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			for (OpeningHoursRule r : rules) {
 				if (((opening && r.containsPreviousDay(cal)) || (!opening && r.containsNextDay(cal))) && r.containsMonth(cal)) {
 					atTime = r.getTime(cal, true, limit, opening);
@@ -270,10 +431,15 @@ public class OpeningHoursParser {
 		}
 
 		public String getCurrentRuleTime(Calendar cal) {
+			return getCurrentRuleTime(cal, ALL_SEQUENCES);
+		}
+
+		public String getCurrentRuleTime(Calendar cal, int sequenceIndex) {
 			// make exception for overlapping times i.e.
 			// (1) Mo 14:00-16:00; Tu off
 			// (2) Mo 14:00-02:00; Tu off
 			// in (2) we need to check first rule even though it is against specification
+			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			String ruleClosed = null;
 			boolean overlap = false;
 			for (int i = rules.size() - 1; i >= 0; i--) {
@@ -428,6 +594,7 @@ public class OpeningHoursParser {
 		 */
 		public boolean contains(Calendar cal);
 
+		public int getSequenceIndex();
 
 		public String toRuleString();
 
@@ -476,6 +643,26 @@ public class OpeningHoursParser {
 		private boolean off = false;
 
 		/**
+		 * Aadditional information or limitation.
+		 * https://wiki.openstreetmap.org/wiki/Key:opening_hours/specification#explain:comment
+		 */
+		private String comment;
+
+		private int sequenceIndex;
+
+		public BasicOpeningHourRule() {
+			this.sequenceIndex = 0;
+		}
+
+		public BasicOpeningHourRule(int sequenceIndex) {
+			this.sequenceIndex = sequenceIndex;
+		}
+
+		public int getSequenceIndex() {
+			return sequenceIndex;
+		}
+
+		/**
 		 * return an array representing the days of the rule
 		 *
 		 * @return the days of the rule
@@ -511,7 +698,14 @@ public class OpeningHoursParser {
 		public boolean appliesToSchoolHolidays() {
 			return schoolHoliday;
 		}
-		
+
+		public String getComment() {
+			return comment;
+		}
+
+		public void setComment(String comment) {
+			this.comment = comment;
+		}
 
 		/**
 		 * set a single start time, erase all previously added start times
@@ -786,27 +980,45 @@ public class OpeningHoursParser {
 			appendDaysString(b, dayNames);
 			// Time
 			if (startTimes == null || startTimes.size() == 0) {
-				b.append("off");
+				if (isOpened24_7()) {
+					b.setLength(0);
+					b.append("24/7 ");
+				}
+				if (off) {
+					b.append(additionalStrings.get("off"));
+				}
 			} else {
 				if (isOpened24_7()) {
-					return "24/7";
-				}
-				for (int i = 0; i < startTimes.size(); i++) {
-					int startTime = startTimes.get(i);
-					int endTime = endTimes.get(i);
-					if(i > 0) {
-						b.append(", ");
+					b.setLength(0);
+					b.append("24/7");
+				} else {
+					for (int i = 0; i < startTimes.size(); i++) {
+						int startTime = startTimes.get(i);
+						int endTime = endTimes.get(i);
+						if (i > 0) {
+							b.append(", ");
+						}
+						int stHour = startTime / 60;
+						int stTime = startTime - stHour * 60;
+						int enHour = endTime / 60;
+						int enTime = endTime - enHour * 60;
+						formatTime(stHour, stTime, b);
+						b.append("-"); //$NON-NLS-1$
+						formatTime(enHour, enTime, b);
 					}
-					int stHour = startTime / 60;
-					int stTime = startTime - stHour * 60;
-					int enHour = endTime / 60;
-					int enTime = endTime - enHour * 60;
-					formatTime(stHour, stTime, b);
-					b.append("-"); //$NON-NLS-1$
-					formatTime(enHour, enTime, b);
+					if (off) {
+						b.append(" ").append(additionalStrings.get("off"));
+					}
 				}
-				if(off) {
-					b.append(" off");
+			}
+			if (!Algorithms.isEmpty(comment)) {
+				if (b.length() > 0) {
+					if (b.charAt(b.length() - 1) != ' ') {
+						b.append(" ");
+					}
+					b.append("(").append(comment).append(")");
+				} else {
+					b.append(comment);
 				}
 			}
 			return b.toString();
@@ -853,13 +1065,17 @@ public class OpeningHoursParser {
 				}
 			}
 
-			if (opened24_7 && startTimes != null && startTimes.size() > 0) {
-				for (int i = 0; i < startTimes.size(); i++) {
-					int startTime = startTimes.get(i);
-					int endTime = endTimes.get(i);
-					if (startTime == 0 && endTime / 60 == 24) {
-						return true;
+			if (opened24_7) {
+				if (startTimes != null && startTimes.size() > 0) {
+					for (int i = 0; i < startTimes.size(); i++) {
+						int startTime = startTimes.get(i);
+						int endTime = endTimes.get(i);
+						if (startTime == 0 && endTime / 60 == 24) {
+							return true;
+						}
 					}
+				} else {
+					return true;
 				}
 			}
 			return false;
@@ -918,7 +1134,11 @@ public class OpeningHoursParser {
 					}
 				}
 			}
-			return sb.toString();
+			String res = sb.toString();
+			if (res.length() > 0 && !Algorithms.isEmpty(comment)) {
+				res += " (" + comment + ")";
+			}
+			return res;
 		}
 
 		@Override
@@ -1015,7 +1235,7 @@ public class OpeningHoursParser {
 			int c = calculate(cal);
 			return c != 0;
 		}
-		
+
 		@Override
 		public boolean hasOverlapTimes() {
 			for (int i = 0; i < startTimes.size(); i++) {
@@ -1062,14 +1282,16 @@ public class OpeningHoursParser {
 					}
 				}
 			}
-			if (thisDay && (startTimes == null || startTimes.isEmpty() || !off)) {
+			if (thisDay && (startTimes == null || startTimes.isEmpty()) && !off) {
+				return 1;
+			} else if (thisDay && (startTimes == null || startTimes.isEmpty() || !off)) {
 				return -1;
 			}
 			return 0;
 		}
 	}
 
-	public static class UnparseableRule implements OpeningHoursParser.OpeningHoursRule {
+	public static class UnparseableRule implements OpeningHoursRule {
 		private String ruleString;
 
 		public UnparseableRule(String ruleString) {
@@ -1140,6 +1362,11 @@ public class OpeningHoursParser {
 		public boolean contains(Calendar cal) {
 			return false;
 		}
+
+		@Override
+		public int getSequenceIndex() {
+			return 0;
+		}
 	}
 	
 	private enum TokenType { 
@@ -1185,8 +1412,22 @@ public class OpeningHoursParser {
 		}
 	}
 
-	public static void parseRuleV2(String r, List<OpeningHoursParser.OpeningHoursRule> rules) {
-		r = r.toLowerCase();
+	public static void parseRuleV2(String r, int sequenceIndex, List<OpeningHoursRule> rules) {
+		String comment = null;
+		int q1Index = r.indexOf('"');
+		if (q1Index >= 0) {
+			int q2Index = r.indexOf('"', q1Index + 1);
+			if (q2Index >= 0) {
+				comment = r.substring(q1Index + 1, q2Index);
+				String a = r.substring(0, q1Index);
+				String b = "";
+				if (r.length() > q2Index + 1) {
+					b = r.substring(q2Index + 1);
+				}
+				r = a + b;
+			}
+		}
+		r = r.toLowerCase().trim();
 		
 		final String[] daysStr = new String[]{"mo", "tu", "we", "th", "fr", "sa", "su"};
 		final String[] monthsStr = new String[]{"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
@@ -1198,7 +1439,8 @@ public class OpeningHoursParser {
 		r = r.replace(')', ' ');
 		String localRuleString = r.replaceAll("sunset", sunset).replaceAll("sunrise", sunrise)
 				.replaceAll("\\+", "-" + endOfDay);
-		BasicOpeningHourRule basic = new BasicOpeningHourRule();
+		BasicOpeningHourRule basic = new BasicOpeningHourRule(sequenceIndex);
+		basic.setComment(comment);
 		boolean[] days = basic.getDays();
 		boolean[] months = basic.getMonths();
 		boolean[] dayMonths = basic.getDayMonths();
@@ -1211,32 +1453,32 @@ public class OpeningHoursParser {
 		}
 		List<Token> tokens = new ArrayList<>();
 		int startWord = 0;
-		for(int i = 0; i <= localRuleString.length(); i++) {
+		for (int i = 0; i <= localRuleString.length(); i++) {
 			char ch = i == localRuleString.length() ? ' ' : localRuleString.charAt(i);
 			boolean delimiter = false;
 			Token del = null;
-			if(Character.isWhitespace(ch)) {
+			if (Character.isWhitespace(ch)) {
 				delimiter = true;
-			} else if(ch == ':') {
+			} else if (ch == ':') {
 				del = new Token(TokenType.TOKEN_COLON, ":");
-			} else if(ch == '-') {
+			} else if (ch == '-') {
 				del = new Token(TokenType.TOKEN_DASH, "-");
-			} else if(ch == ',') {
+			} else if (ch == ',') {
 				del = new Token(TokenType.TOKEN_COMMA, ",");
 			}
-			if(delimiter || del != null) {
+			if (delimiter || del != null) {
 				String wrd = localRuleString.substring(startWord, i).trim();
 				if(wrd.length() > 0) {
 					tokens.add(new Token(TokenType.TOKEN_UNKNOWN, wrd));
 				}
 				startWord = i + 1;
-				if(del != null) {
+				if (del != null) {
 					tokens.add(del);
 				}
 			}
 		}
 		// recognize day of week
-		for(Token t : tokens) {
+		for (Token t : tokens) {
 			if(t.type == TokenType.TOKEN_UNKNOWN) {
 				findInArray(t, daysStr, TokenType.TOKEN_DAY_WEEK);
 			}
@@ -1360,7 +1602,9 @@ public class OpeningHoursParser {
 					currentParse = t.type;
 				}
 			} else if (t.type.ord() < currentParse.ord() && indexP == 0 && tokens.size() > i) {
-				buildRule(new BasicOpeningHourRule(), tokens.subList(i, tokens.size()), rules);
+				BasicOpeningHourRule newRule = new BasicOpeningHourRule(basic.getSequenceIndex());
+				newRule.setComment(basic.getComment());
+				buildRule(newRule, tokens.subList(i, tokens.size()), rules);
 				tokens = tokens.subList(0, i + 1);
 			} else if (t.type == TokenType.TOKEN_COMMA) {
 				if (tokens.size() > i + 1 && tokens.get(i + 1) != null && tokens.get(i + 1).type.ord() < currentParse.ord()) {
@@ -1405,14 +1649,55 @@ public class OpeningHoursParser {
 		}
 	}
 
+	private static List<List<String>> splitSequences(String format) {
+		if (format == null) {
+			return null;
+		}
+		List<List<String>> res = new ArrayList<>();
+		String[] sequences = format.split("\\|\\|");
+		for (String seq : sequences) {
+			seq = seq.trim();
+			if (seq.length() == 0) {
+				continue;
+			}
+
+			List<String> rules = new ArrayList<>();
+			boolean comment = false;
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < seq.length(); i++) {
+				char c = seq.charAt(i);
+				if (c == '"') {
+					comment = !comment;
+					sb.append(c);
+				} else if (c == ';' && !comment) {
+					if (sb.length() > 0) {
+						String s = sb.toString().trim();
+						if (s.length() > 0) {
+							rules.add(s);
+						}
+						sb.setLength(0);
+					}
+				} else {
+					sb.append(c);
+				}
+			}
+			if (sb.length() > 0) {
+				rules.add(sb.toString());
+				sb.setLength(0);
+			}
+			res.add(rules);
+		}
+		return res;
+	}
+
 	/**
 	 * Parse an opening_hours string from OSM to an OpeningHours object which can be used to check
 	 *
 	 * @param r the string to parse
 	 * @return BasicRule if the String is successfully parsed and UnparseableRule otherwise
 	 */
-	public static void parseRules(String r, List<OpeningHoursParser.OpeningHoursRule> rules) {
-		parseRuleV2(r, rules);
+	public static void parseRules(String r, int sequenceIndex, List<OpeningHoursRule> rules) {
+		parseRuleV2(r, sequenceIndex, rules);
 	}
 
 	/**
@@ -1425,25 +1710,38 @@ public class OpeningHoursParser {
 		if (format == null) {
 			return null;
 		}
-		// split the OSM string in multiple rules
-		String[] rules = format.split(";"); //$NON-NLS-1$
-		// FIXME: What if the semicolon is inside a quoted string?
 		OpeningHours rs = new OpeningHours();
 		rs.setOriginal(format);
-		for (String r : rules) {
-			r = r.trim();
-			if (r.length() == 0) {
-				continue;
-			}
-			// check if valid
-			List<OpeningHoursParser.OpeningHoursRule> rList = new ArrayList<>();
-			parseRules(r, rList);
-			for (OpeningHoursParser.OpeningHoursRule rule : rList) {
-				if (rule instanceof BasicOpeningHourRule) {
-					rs.addRule(rule);
+		// split the OSM string in multiple rules
+		List<List<String>> sequences = splitSequences(format);
+		for (int i = 0; i < sequences.size(); i++) {
+			List<String> rules = sequences.get(i);
+			List<BasicOpeningHourRule> basicRules = new ArrayList<>();
+			for (String r : rules) {
+				// check if valid
+				List<OpeningHoursRule> rList = new ArrayList<>();
+				parseRules(r, i, rList);
+				for (OpeningHoursRule rule : rList) {
+					if (rule instanceof BasicOpeningHourRule) {
+						basicRules.add((BasicOpeningHourRule) rule);
+					}
 				}
 			}
+			String basicRuleComment = null;
+			for (BasicOpeningHourRule bRule : basicRules) {
+				if (!Algorithms.isEmpty(bRule.getComment())) {
+					basicRuleComment = bRule.getComment();
+					break;
+				}
+			}
+			if (!Algorithms.isEmpty(basicRuleComment)) {
+				for (BasicOpeningHourRule bRule : basicRules) {
+					bRule.setComment(basicRuleComment);
+				}
+			}
+			rs.addRules(basicRules);
 		}
+		rs.setSequenceCount(sequences.size());
 		return rs;
 	}
 
@@ -1459,20 +1757,33 @@ public class OpeningHoursParser {
 		if (format == null) {
 			return null;
 		}
-		String[] rules = format.split(";"); //$NON-NLS-1$
 		OpeningHoursParser.OpeningHours rs = new OpeningHoursParser.OpeningHours();
 		rs.setOriginal(format);
-		for (String r : rules) {
-			r = r.trim();
-			if (r.length() == 0) {
-				continue;
+		List<List<String>> sequences = splitSequences(format);
+		for (int i = sequences.size() - 1; i >= 0; i--) {
+			List<String> rules = sequences.get(i);
+			for (String r : rules) {
+				r = r.trim();
+				if (r.length() == 0) {
+					continue;
+				}
+				// check if valid
+				List<OpeningHoursRule> rList = new ArrayList<>();
+				parseRules(r, i, rList);
+				rs.addRules(rList);
 			}
-			// check if valid
-			List<OpeningHoursParser.OpeningHoursRule> rList = new ArrayList<>();
-			parseRules(r, rList);
-			rs.addRules(rList);
 		}
+		rs.setSequenceCount(sequences.size());
 		return rs;
+	}
+
+	public static List<OpeningHours.Info> getInfo(String format) {
+		OpeningHours openingHours = OpeningHoursParser.parseOpenedHours(format);
+		if (openingHours == null) {
+			return null;
+		} else {
+			return openingHours.getInfo();
+		}
 	}
 
 	private static void formatTime(int h, int t, StringBuilder b) {
@@ -1502,9 +1813,9 @@ public class OpeningHoursParser {
 	private static void testOpened(String time, OpeningHours hours, boolean expected) throws ParseException {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.US).parse(time));
-		boolean calculated = hours.isOpenedForTimeV2(cal);
+		boolean calculated = hours.isOpenedForTimeV2(cal, OpeningHours.ALL_SEQUENCES);
 		System.out.printf("  %sok: Expected %s: %b = %b (rule %s)\n",
-				((calculated != expected) ? "NOT " : ""), time, expected, calculated, hours.getCurrentRuleTime(cal));
+				((calculated != expected) ? "NOT " : ""), time, expected, calculated, hours.getCurrentRuleTime(cal, OpeningHours.ALL_SEQUENCES));
 		if (calculated != expected) {
 			throw new IllegalArgumentException("BUG!!!");
 		}
@@ -1521,50 +1832,49 @@ public class OpeningHoursParser {
 	 *                         "Open till HH:mm"     - close in 5 hours
 	 *                         "Will close at HH:mm" - close in 2 hours
 	 *                         "Will open on HH:mm (Mo,Tu,We,Th,Fr,Sa,Su)" - open in >5 hours
+	 *                         "Will open tomorrow at HH:mm" - open in >5 hours tomorrow
 	 *                         "Open 24/7"           - open 24/7
 	 */
 	private static void testInfo(String time, OpeningHours hours, String expected) throws ParseException
 	{
+		testInfo(time, hours, expected, OpeningHours.ALL_SEQUENCES);
+	}
+
+	/**
+	 * test if the calculated opening hours are what you expect
+	 *
+	 * @param time        the time to test in the format "dd.MM.yyyy HH:mm"
+	 * @param hours       the OpeningHours object
+	 * @param expected    the expected string in format:
+	 *                         "Open from HH:mm"     - open in 5 hours
+	 *                         "Will open at HH:mm"  - open in 2 hours
+	 *                         "Open till HH:mm"     - close in 5 hours
+	 *                         "Will close at HH:mm" - close in 2 hours
+	 *                         "Will open on HH:mm (Mo,Tu,We,Th,Fr,Sa,Su)" - open in >5 hours
+	 *                         "Will open tomorrow at HH:mm" - open in >5 hours tomorrow
+	 *                         "Open 24/7"           - open 24/7
+	 * @param sequenceIndex sequence index of rules separated by ||
+	 */
+	private static void testInfo(String time, OpeningHours hours, String expected, int sequenceIndex) throws ParseException
+	{
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.US).parse(time));
-	    
-	    boolean opened24_calc = false;
-	    boolean openFrom_calc = false;
-	    boolean willOpenAt_calc = false;
-	    boolean openTill_calc = false;
-	    boolean willCloseAt_calc = false;
-	    boolean willOpenOn_calc = false;
-	    
-	    boolean opened = hours.isOpenedForTimeV2(cal);
-	    if (opened) {
-	        opened24_calc = hours.isOpened24_7();
-	        openTill_calc = !Algorithms.isEmpty(hours.getClosingTime(cal));
-	        willCloseAt_calc = !Algorithms.isEmpty(hours.getNearToClosingTime(cal));
-	    } else {
-	        openFrom_calc = !Algorithms.isEmpty(hours.getOpeningTime(cal));
-	        willOpenAt_calc = !Algorithms.isEmpty(hours.getNearToOpeningTime(cal));
-	        willOpenOn_calc = !Algorithms.isEmpty(hours.getOpeningDay(cal));
-	    }
-	    
-	    String description = "Unknown";
-	    if (opened24_calc) {
-	        description = "Open 24/7";
-	    } else if (willOpenAt_calc) {
-	        description = "Will open at " + hours.getNearToOpeningTime(cal);
-	    } else if (openFrom_calc) {
-	        description = "Open from " + hours.getOpeningTime(cal);
-	    } else if (willCloseAt_calc) {
-	        description = "Will close at " + hours.getNearToClosingTime(cal);
-	    } else if (openTill_calc) {
-	        description = "Open till " + hours.getClosingTime(cal);
-	    } else if (willOpenOn_calc) {
-	        description = "Will open on " + hours.getOpeningDay(cal);
-	    }
-	    
-	    boolean result = expected.equalsIgnoreCase(description);
-	    
+
+		String description;
+		boolean result;
+		if (sequenceIndex == OpeningHours.ALL_SEQUENCES) {
+			OpeningHours.Info info = hours.getCombinedInfo(cal);
+			description = info.getInfo();
+			result = expected.equalsIgnoreCase(description);
+		} else {
+			List<OpeningHours.Info> infos = hours.getInfo(cal);
+			OpeningHours.Info info = infos.get(sequenceIndex);
+			description = info.getInfo();
+			result = expected.equalsIgnoreCase(description);
+		}
+
 		System.out.printf("  %sok: Expected %s (%s): %s (rule %s)\n",
-				(!result ? "NOT " : ""), time, expected, description, hours.getCurrentRuleTime(cal));
+				(!result ? "NOT " : ""), time, expected, description, hours.getCurrentRuleTime(cal, sequenceIndex));
 
 	    if (!result)
 			throw new IllegalArgumentException("BUG!!!");
@@ -1584,22 +1894,15 @@ public class OpeningHoursParser {
 		// 0. not supported MON DAY-MON DAY (only supported Feb 2-14 or Feb-Oct: 09:00-17:30)
 		// parseOpenedHours("Feb 16-Oct 15: 09:00-18:30; Oct 16-Nov 15: 09:00-17:30; Nov 16-Feb 15: 09:00-16:30");
 		
-		// 1. not supported (,)
-		// hours = parseOpenedHours("Mo-Su 07:00-23:00, Fr 08:00-20:00");
-		
-		// 2. not supported break properly
-		// parseOpenedHours("Sa-Su 10:00-17:00 || \"by appointment\"");
-		// comment is dropped
-		
-		// 3. not properly supported
+		// 1. not properly supported
 		// hours = parseOpenedHours("Mo-Su (sunrise-00:30)-(sunset+00:30)");
 		
-		// Test basic case
+		// test basic case
 		OpeningHours hours = parseOpenedHours("Mo-Fr 08:30-14:40"); //$NON-NLS-1$
+		System.out.println(hours);
 		testOpened("09.08.2012 11:00", hours, true);
 		testOpened("09.08.2012 16:00", hours, false);
 		hours = parseOpenedHours("mo-fr 07:00-19:00; sa 12:00-18:00");
-		System.out.println(hours);
 
 		String string = "Mo-Fr 11:30-15:00, 17:30-23:00; Sa, Su, PH 11:30-23:00";
 		hours = parseOpenedHours(string);
@@ -1793,11 +2096,11 @@ public class OpeningHoursParser {
 	    testInfo("15.01.2018 13:10", hours, "Will open at 14:00");
 	    testInfo("15.01.2018 14:00", hours, "Open till 18:00");
 	    testInfo("15.01.2018 16:00", hours, "Will close at 18:00");
-	    testInfo("15.01.2018 18:10", hours, "Will open on 09:00 Tu");
+	    testInfo("15.01.2018 18:10", hours, "Will open tomorrow at 09:00");
 		
 	    hours = parseOpenedHours("Mo-Sa 02:00-10:00; Th off");
 		System.out.println(hours);
-	    testInfo("15.01.2018 23:00", hours, "Will open on 02:00 Tu");
+	    testInfo("15.01.2018 23:00", hours, "Will open tomorrow at 02:00");
 
 	    hours = parseOpenedHours("Mo-Sa 23:00-02:00; Th off");
 		System.out.println(hours);
@@ -1808,10 +2111,10 @@ public class OpeningHoursParser {
 
 	    hours = parseOpenedHours("Mo-Sa 08:30-17:00; Th off");
 		System.out.println(hours);
-	    testInfo("17.01.2018 20:00", hours, "Will open on 08:30 Fr");
-	    testInfo("18.01.2018 05:00", hours, "Will open on 08:30 Fr");
+	    testInfo("17.01.2018 20:00", hours, "Will open on 08:30 Fr.");
+	    testInfo("18.01.2018 05:00", hours, "Will open tomorrow at 08:30");
 	    testInfo("20.01.2018 05:00", hours, "Open from 08:30");
-	    testInfo("21.01.2018 05:00", hours, "Will open on 08:30 Mo");
+	    testInfo("21.01.2018 05:00", hours, "Will open tomorrow at 08:30");
 	    testInfo("22.01.2018 02:00", hours, "Open from 08:30");
 	    testInfo("22.01.2018 04:00", hours, "Open from 08:30");
 	    testInfo("22.01.2018 07:00", hours, "Will open at 08:30");
@@ -1830,6 +2133,31 @@ public class OpeningHoursParser {
 		testOpened("19.01.2018 07:45", hours, false);
 		testOpened("19.01.2018 08:45", hours, true);
 		testOpened("19.01.2018 20:45", hours, false);
-   
+
+		// test fallback case
+		hours = parseOpenedHours("07:00-01:00 open \"Restaurant\" || Mo 00:00-04:00,07:00-04:00; Tu-Th 07:00-04:00; Fr 07:00-24:00; Sa,Su 00:00-24:00 open \"McDrive\"");
+		System.out.println(hours);
+		testOpened("22.01.2018 00:30", hours, true);
+		testOpened("22.01.2018 08:00", hours, true);
+		testOpened("22.01.2018 03:30", hours, true);
+		testOpened("22.01.2018 05:00", hours, false);
+		testOpened("23.01.2018 05:00", hours, false);
+		testOpened("27.01.2018 05:00", hours, true);
+		testOpened("28.01.2018 05:00", hours, true);
+
+		testInfo("22.01.2018 05:00", hours, "Will open at 07:00 (Restaurant)", 0);
+		testInfo("26.01.2018 00:00", hours, "Will close at 01:00 (Restaurant)", 0);
+		testInfo("22.01.2018 05:00", hours, "Will open at 07:00 (McDrive)", 1);
+		testInfo("22.01.2018 00:00", hours, "Open till 04:00 (McDrive)", 1);
+		testInfo("22.01.2018 02:00", hours, "Will close at 04:00 (McDrive)", 1);
+		testInfo("27.01.2018 02:00", hours, "Open till 24:00 (McDrive)", 1);
+		
+		hours = parseOpenedHours("07:00-03:00 open \"Restaurant\" || 24/7 open \"McDrive\"");
+		System.out.println(hours);
+		testOpened("22.01.2018 02:00", hours, true);
+		testOpened("22.01.2018 17:00", hours, true);
+		testInfo("22.01.2018 05:00", hours, "Will open at 07:00 (Restaurant)", 0);
+		testInfo("22.01.2018 04:00", hours, "Open 24/7 (McDrive)", 1);
+
 	}
 }

@@ -8,6 +8,8 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -29,9 +31,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
@@ -74,6 +74,7 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -116,6 +117,8 @@ public abstract class MenuController extends BaseMenuController {
 	private BinaryMapDataObject downloadMapDataObject;
 	private WorldRegion downloadRegion;
 	private DownloadIndexesThread downloadThread;
+
+	protected List<OpeningHours.Info> openingHoursInfo;
 
 	public MenuController(MenuBuilder builder, PointDescription pointDescription, MapActivity mapActivity) {
 		super(mapActivity);
@@ -243,12 +246,8 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	protected void addMyLocationToPlainItems(LatLon latLon) {
-		OsmandSettings st = ((OsmandApplication) getMapActivity().getApplicationContext()).getSettings();
 		addPlainMenuItem(R.drawable.ic_action_get_my_location, null, PointDescription.getLocationName(getMapActivity(),
 				latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", " "), false, false, null);
-		//if (st.COORDINATES_FORMAT.get() != PointDescription.OLC_FORMAT)
-		//	addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationOlcName(
-		//			latLon.getLatitude(), latLon.getLongitude()).replaceAll("\n", " "), false, false, null);
 	}
 
 	public PointDescription getPointDescription() {
@@ -442,21 +441,47 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public int getAdditionalInfoColor() {
-		if (indexItem != null) {
+		if (openingHoursInfo != null) {
+			return 0;
+		} else if (indexItem != null) {
 			return R.color.icon_color;
 		}
 		return 0;
 	}
 
-	public String getAdditionalInfoStr() {
-		if (indexItem != null) {
+	public CharSequence getAdditionalInfoStr() {
+		if (openingHoursInfo != null) {
+			StringBuilder sb = new StringBuilder();
+			int colorOpen = getMapActivity().getResources().getColor(R.color.ctx_menu_amenity_opened_text_color);
+			int colorClosed = getMapActivity().getResources().getColor(R.color.ctx_menu_amenity_closed_text_color);
+			int[] pos = new int[openingHoursInfo.size()];
+			for (int i = 0; i < openingHoursInfo.size(); i++) {
+				OpeningHours.Info info = openingHoursInfo.get(i);
+				if (sb.length() > 0) {
+					sb.append("\n");
+				}
+				sb.append(info.getInfo());
+				pos[i] = sb.length();
+			}
+			SpannableString infoStr = new SpannableString(sb.toString());
+			int k = 0;
+			for (int i = 0; i < openingHoursInfo.size(); i++) {
+				OpeningHours.Info info = openingHoursInfo.get(i);
+				infoStr.setSpan(new ForegroundColorSpan(info.isOpened() ? colorOpen : colorClosed), k, pos[i], 0);
+				k = pos[i];
+			}
+			return infoStr;
+
+		} else if (indexItem != null) {
 			return getMapActivity().getString(R.string.file_size_in_mb, indexItem.getArchiveSizeMB());
 		}
 		return "";
 	}
 
 	public int getAdditionalInfoIconRes() {
-		if (indexItem != null) {
+		if (openingHoursInfo != null) {
+			return R.drawable.ic_action_opening_hour_16;
+		} else if (indexItem != null) {
 			return R.drawable.ic_sdcard_16;
 		}
 		return 0;

@@ -1196,7 +1196,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 
 			TextView additionalInfoTextView = (TextView) view.findViewById(R.id.additional_info_text_view);
-			String additionalInfoStr = menu.getAdditionalInfo();
+			CharSequence additionalInfoStr = menu.getAdditionalInfo();
 			if (!TextUtils.isEmpty(additionalInfoStr)) {
 				int colorId = menu.getAdditionalInfoColor();
 				int additionalInfoIconRes = menu.getAdditionalInfoIconRes();

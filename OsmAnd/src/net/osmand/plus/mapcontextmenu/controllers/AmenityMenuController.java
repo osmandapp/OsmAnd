@@ -14,19 +14,17 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.OpeningHoursInfo;
 import net.osmand.plus.mapcontextmenu.WikipediaDialogFragment;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
-import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.TransportIndexRepository;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.transport.TransportStopType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -36,7 +34,6 @@ public class AmenityMenuController extends MenuController {
 
 	private Amenity amenity;
 	private List<TransportStopRoute> routes = new ArrayList<>();
-	private OpeningHoursInfo openingHoursInfo;
 
 	private MapMarker marker;
 
@@ -77,7 +74,7 @@ public class AmenityMenuController extends MenuController {
 			leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_read_text, true);
 		}
 
-		openingHoursInfo = processOpeningHours(amenity);
+		openingHoursInfo = OpeningHoursParser.getInfo(amenity.getOpeningHours());
 	}
 
 	@Override
@@ -146,30 +143,6 @@ public class AmenityMenuController extends MenuController {
 		return getTypeStr(amenity);
 	}
 
-	@Override
-	public int getAdditionalInfoColor() {
-		if (openingHoursInfo != null) {
-			return openingHoursInfo.isOpened() ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
-		}
-		return super.getAdditionalInfoColor();
-	}
-
-	@Override
-	public String getAdditionalInfoStr() {
-		if (openingHoursInfo != null) {
-			return openingHoursInfo.getInfo(getMapActivity());
-		}
-		return super.getAdditionalInfoStr();
-	}
-
-	@Override
-	public int getAdditionalInfoIconRes() {
-		if (openingHoursInfo != null) {
-			return R.drawable.ic_action_opening_hour_16;
-		}
-		return super.getAdditionalInfoIconRes();
-	}
-
 	public static String getTypeStr(Amenity amenity) {
 		PoiCategory pc = amenity.getType();
 		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
@@ -180,28 +153,6 @@ public class AmenityMenuController extends MenuController {
 			typeStr = Algorithms.capitalizeFirstLetterAndLowercase(typeStr.replace('_', ' '));
 		}
 		return typeStr;
-	}
-
-	public static OpeningHoursInfo processOpeningHours(Amenity amenity) {
-		OpeningHoursParser.OpeningHours openingHours = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
-		if (openingHours == null) {
-			return null;
-		} else {
-			OpeningHoursInfo info = new OpeningHoursInfo();
-			Calendar cal = Calendar.getInstance();
-			boolean opened = openingHours.isOpenedForTime(cal);
-			info.setOpened(opened);
-			if (opened) {
-				info.setOpened24_7(openingHours.isOpened24_7());
-				info.setClosingTime(openingHours.getClosingTime(cal));
-				info.setNearToClosingTime(openingHours.getNearToClosingTime(cal));
-			} else {
-				info.setOpeningTime(openingHours.getOpeningTime(cal));
-				info.setNearToOpeningTime(openingHours.getNearToOpeningTime(cal));
-				info.setOpeningDay(openingHours.getOpeningDay(cal));
-			}
-			return info;
-		}
 	}
 
 	@Override
@@ -219,7 +170,8 @@ public class AmenityMenuController extends MenuController {
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 	}
 
-	public static void addPlainMenuItems(Amenity amenity, String typeStr, MenuBuilder builder) {
+	public static void addTypeMenuItem(Amenity amenity, MenuBuilder builder) {
+		String typeStr = getTypeStr(amenity);
 		if (!Algorithms.isEmpty(typeStr)) {
 			int resId = getRightIconId(amenity);
 			if (resId == 0) {

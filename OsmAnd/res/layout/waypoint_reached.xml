@@ -10,6 +10,23 @@
     android:minHeight="50dp">
 
     <ImageView
+        android:id="@+id/info_move"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:clickable="false"
+        android:contentDescription="@string/shared_string_more"
+        android:focusable="false"
+        android:paddingLeft="12dp"
+        android:paddingStart="12dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_flat_list_dark"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <ImageView
         android:id="@+id/waypoint_icon"
         android:layout_width="56dp"
         android:layout_height="25dp"
@@ -105,20 +122,5 @@
         android:focusable="false"
         android:scaleType="center"
         android:src="@drawable/ic_action_remove_dark"/>
-
-    <ImageView
-        android:id="@+id/info_move"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
-        android:clickable="false"
-        android:contentDescription="@string/shared_string_more"
-        android:focusable="false"
-        android:scaleType="center"
-        android:src="@drawable/ic_flat_list_dark"
-        android:visibility="gone"
-        tools:visibility="visible"/>
 
 </LinearLayout>

@@ -190,7 +190,7 @@ public class MapDataMenuController extends MenuController {
 	}
 
 	@Override
-	public String getAdditionalInfoStr() {
+	public CharSequence getAdditionalInfoStr() {
 		double mb = 0;
 		if (backuped) {
 			if (localIndexInfo != null) {
