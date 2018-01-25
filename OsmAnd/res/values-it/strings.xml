@@ -15,7 +15,7 @@
     <string name="local_openstreetmap_delete">Elimina la modifica</string>
     <string name="local_openstreetmap_descr_title">Modifica asincrona di OSM:</string>
     <string name="local_openstreetmap_settings">PDI/Note OSM salvati in locale</string>
-    <string name="local_openstreetmap_settings_descr">Visualizza e gestisci i PDI/Note OSM inseriti nel database locale</string>
+    <string name="local_openstreetmap_settings_descr">Visualizza e gestisci i PDI/Note OSM inseriti nel database locale.</string>
 
 
     <string name="live_monitoring_interval_descr">Specifica l\'intervallo del tracking in diretta</string>
@@ -40,7 +40,7 @@
     <string name="routing_settings_descr">Specifica le opzioni di navigazione</string>
     <string name="global_settings">Impostazioni globali</string>
     <string name="index_settings">Gestisci i file delle mappe</string>
-    <string name="index_settings_descr">Scarica e gestisci le mappe offline archiviate sul tuo dispositivo</string>
+    <string name="index_settings_descr">Scarica e gestisci le mappe offline archiviate sul tuo dispositivo.</string>
     <string name="general_settings">Impostazioni generali</string>
     <string name="general_settings_descr">Configura le impostazioni globali</string>
     <string name="global_app_settings">Impostazioni globali dell\'applicazione</string>
@@ -632,7 +632,7 @@ La memoria utilizzata è  {1} MB.
 
     <string name="offline_navigation_not_available">La navigazione offline di OsmAnd è temporaneamente non disponibile.</string>
     <string name="left_side_navigation">Guida a sinistra</string>
-    <string name="left_side_navigation_descr">Abilita nei paesi in cui si guida tenendo la sinistra</string>
+    <string name="left_side_navigation_descr">Abilita nei paesi in cui si guida tenendo la sinistra.</string>
 
     <string name="unknown_from_location">La posizione di partenza non è ancora stata determinata</string>
     <string name="confirm_interrupt_download">Vuoi annullare il download del file?</string>
@@ -640,9 +640,9 @@ La memoria utilizzata è  {1} MB.
 
     <string name="map_online_plugin_is_not_installed">Abilita il plugin Mappe Online per scegliere altre sorgenti di mappe</string>
     <string name="map_online_data">Mappe online e a tasselli</string>
-    <string name="map_online_data_descr">Usa le mappe online (scarica e archivia i tasselli nella scheda SD)</string>
+    <string name="map_online_data_descr">Usa le mappe online (scarica e archivia i tasselli nella scheda SD).</string>
     <string name="shared_string_online_maps">Mappe online</string>
-    <string name="online_map_settings_descr">Configura le sorgenti delle mappe online o dei tasselli in cache</string>
+    <string name="online_map_settings_descr">Configura le sorgenti delle mappe online o dei tasselli in cache.</string>
   
   
   <string name="osmand_rastermaps_plugin_description">Con questo plugin puoi accedere a molti tipi di mappe online (chiamate a tasselli o raster), a partire dai tasselli predefiniti di OpenStreetMap (come Mapnik) alle immagini satellitari e strati per scopi speciali come le mappe meteorologiche, climatiche, geologiche, di ombreggiamento dei rilievi ecc.
@@ -657,7 +657,7 @@ La memoria utilizzata è  {1} MB.
     <string name="osmand_development_plugin_description">Questo plugin visualizza le impostazioni per le funzionalità di sviluppo e debug come il test o la simulazione di navigazione, la prestazione del rendering o le indicazioni vocali. Queste impostazioni sono utili agli sviluppatori e non sono necessarie per gli utenti finali.</string>
     <string name="plugins_screen">Componenti aggiuntivi</string>
 
-    <string name="prefs_plugins_descr">I plugin abilitano funzionalità aggiuntive e impostazioni avanzate</string>
+    <string name="prefs_plugins_descr">I plugin abilitano funzionalità aggiuntive e impostazioni avanzate.</string>
     <string name="prefs_plugins">Componenti aggiuntivi</string>
 
     <string name="osm_editing_plugin_description">"Tramite questo plugin OsmAnd può essere utilizzato per contribuire a OSM con la creazione  o modifica dei PDI di OSM, aprendo o commentando le Note di OSM oppure inviando i file GPX registrati. OSM è un progetto comunitario di mappatura di pubblico dominio globale. Per maggiori informazioni visita https://openstreetmap.org. La partecipazione attiva è apprezzata e si può contribuire direttamente da OsmAnd specificando nell\'app le proprie credenziali di accesso OSM."</string>
@@ -673,7 +673,7 @@ La memoria utilizzata è  {1} MB.
     <string name="gpx_visibility_txt">Visibilità</string>
     <string name="gpx_tags_txt">Etichette</string>
     <string name="gpx_description_txt">Descrizione</string>
-    <string name="validate_gpx_upload_name_pwd">Imposta utente e password di OSM per caricare file GPX.</string>
+    <string name="validate_gpx_upload_name_pwd">Imposta il nome utente e password OSM per caricare file GPX.</string>
     <string name="default_buttons_support">Sostieni</string>
     <string name="support_new_features">Sostieni nuove caratteristiche</string>
 
@@ -682,7 +682,7 @@ La memoria utilizzata è  {1} MB.
     <string name="back_to_location">Torna alla posizione</string>
 
     <string name="accessibility_mode">Modalità accessibile</string>
-    <string name="accessibility_mode_descr">Abilita le funzioni relative all\'accessibilità</string>
+    <string name="accessibility_mode_descr">Abilita le funzioni relative all\'accessibilità.</string>
     <string name="accessibility_default">Basata sulle impostazioni globali di sistema</string>
     <string name="backToMenu">Torna al menu</string>
     <string name="zoomOut">Zoom indietro</string>
@@ -753,7 +753,7 @@ La memoria utilizzata è  {1} MB.
     <string name="transport_search_desc">Ricerca dei trasporti pubblici</string>
     <string name="favourites_search_desc">Ricerca dei preferiti</string>
 
-    <string name="rendering_attr_noPolygons_description">Rendi trasparenti tutte le aree del terreno</string>
+    <string name="rendering_attr_noPolygons_description">Rendi trasparenti nella mappa tutte le aree del terreno.</string>
     <string name="rendering_attr_noPolygons_name">Poligoni</string>
     <string name="rendering_attr_appMode_name">Modalità di disegno</string>
     <string name="rendering_attr_appMode_description">Ottimizza la mappa per</string>
@@ -857,7 +857,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="avoid_unpaved">Evita le strade non asfaltate</string>
     <string name="avoid_ferries">Evita i traghetti</string>
     <string name="avoid_in_routing_title">Evita…</string>
-    <string name="avoid_in_routing_descr">Evita strade a pagamento, sterrate, traghetti</string>
+    <string name="avoid_in_routing_descr">Evita strade a pagamento, sterrate, traghetti.</string>
     <string name="show_warnings_title">Mostra avvisi…</string>
     <string name="show_warnings_descr">Configura gli avvisi sul traffico (limiti velocità, fermate forzate, dossi rallentatori), avvisi autovelox e indicazioni di corsia.</string>
     <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
@@ -1033,7 +1033,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 
     <string name="download_hillshade_maps">Ombreggiamento rilievi</string>
 
-    <string name="support_new_features_descr">Fai una donazione per avere nuove funzionalità implementate nell\'applicazione</string>
+    <string name="support_new_features_descr">Fai una donazione per avere nuove funzionalità implementate nell\'applicazione.</string>
     <string name="av_use_external_camera_descr">Usa l\'applicazione di sistema per le foto.</string>
     <string name="index_name_openmaps">OpenMaps UE</string>
     <string name="av_use_external_camera">Usa l\'app fotocamera</string>
@@ -1075,7 +1075,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="files_limit">hai ancora %1$d file</string>
     <string name="available_downloads_left">Disponibili %1$d file da scaricare</string>
     <string name="install_paid">Versione completa</string>
-    <string name="use_magnetic_sensor_descr">Per per determinare il valore della bussola invece del sensore di orientamento utilizza il utilizza il sensore magnetico.</string>
+    <string name="use_magnetic_sensor_descr">Per utilizzare il valore della bussola invece del sensore di orientamento, utilizza il utilizza il sensore magnetico.</string>
     <string name="use_magnetic_sensor">Utilizza il sensore magnetico (bussola)</string>
     <string name="local_indexes_cat_srtm">Linee isoipse</string>
     <string name="use_kalman_filter_compass_descr">Riduce il rumore delle letture della bussola ma introduce dell\'inerzia.</string>
@@ -1145,7 +1145,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="announce_gpx_waypoints">Punti GPX di passaggio</string>
 
 
-    <string name="driving_region_descr">Scegliete la regione di guida: USA, Europa, UK, Asia o altre.</string>
+    <string name="driving_region_descr">Scegli la regione di guida: USA, Europa, UK, Asia o altre.</string>
     <string name="driving_region">Regione di guida</string>
     <string name="driving_region_japan">Giappone</string>
     <string name="driving_region_us">Stati Uniti</string>
@@ -2549,10 +2549,11 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="quick_action_interim_dialog">Mostra una finestra di dialogo temporaneamente</string>
     <string name="favorite_autofill_toast_text">" è salvato in "</string>
     <string name="favorite_empty_place_name">Luogo</string>
-    <string name="navigate_point_olc">Apri il Codice Localizzazione</string>
+    <string name="navigate_point_olc"></string>
     <string name="navigate_point_olc_info_invalid">OLC non valido
 </string>
-    <string name="navigate_point_olc_info_short">OLC breve</string>
+    <string name="navigate_point_olc_info_short">OLC breve
+\nPer favore inserisci il codice completo</string>
     <string name="navigate_point_olc_info_area">Un OLC valido
 Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_duplicates">L\'azione veloce specificata è stata rinominata in %1$s per evitare duplicati.</string>
