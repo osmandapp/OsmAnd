@@ -2714,4 +2714,5 @@
     <string name="only_download_over_wifi">Bare nedlasting over WiFi</string>
     <string name="map_widget_fps_info">Feilrettingsinfo om billedtakt</string>
     <string name="rendering_attr_hidePOILabels_name">Interessepunktpåskrifter</string>
+    <string name="will_open_tomorrow_at">Åpner i morgen</string>
     </resources>
