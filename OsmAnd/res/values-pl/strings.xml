@@ -2738,10 +2738,10 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="mapillary_widget">Widżet Mapillary</string>
     <string name="shared_string_add_photos">Dodaj zdjęcia</string>
     <string name="mapillary_action_descr">Podziel się widokami z poziomu ulicy z tego miejsca przez Mapillary.</string>
-    <string name="mapillary_widget_descr">Pozwala na szybkie udostępnianie do Mapillary</string>
+    <string name="mapillary_widget_descr">Pozwala na szybkie udostępnianie do Mapillary.</string>
     <string name="mapillary_descr">Udostępnia zdjęcia w widoku ulicznym. Pozwala na odkrywanie miejsc, współpracę nad uchwyceniem świata.</string>
     <string name="online_photos">Zdjęcia w sieci</string>
-    <string name="no_photos_descr">Nie ma zdjęć tego położenia</string>
+    <string name="no_photos_descr">Nie ma zdjęć tego położenia.</string>
     <string name="plugin_mapillary_descr">Udostępnia zdjęcia w widoku ulicznym. Pozwala na odkrywanie miejsc, współpracę nad uchwyceniem świata.</string>
     <string name="shared_string_install">Zainstaluj</string>
     <string name="improve_coverage_mapillary">Zwiększ pokrycie zdjęć Mapillary</string>
