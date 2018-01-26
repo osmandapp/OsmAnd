@@ -705,9 +705,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 
 			@Override
-			public void onItemClick(View view) {
+			public void onItemClick(int position) {
 				if (mapActivity != null && measurementLayer != null) {
-					int position = pointsRv.indexOfChild(view);
 					if (pointsListOpened) {
 						hidePointsList();
 					}

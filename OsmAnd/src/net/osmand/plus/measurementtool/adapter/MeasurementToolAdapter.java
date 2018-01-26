@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -52,12 +54,6 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		final int backgroundColor = ContextCompat.getColor(mapActivity,
 				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
 		view.setBackgroundColor(backgroundColor);
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				listener.onItemClick(view);
-			}
-		});
 		return new MeasureToolItemVH(view);
 	}
 
@@ -129,6 +125,12 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 				listener.onRemoveClick(holder.getAdapterPosition());
 			}
 		});
+		holder.holderLayout.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				listener.onItemClick(holder.getAdapterPosition());
+			}
+		});
 	}
 
 	@Override
@@ -150,6 +152,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 	static class MeasureToolItemVH extends RecyclerView.ViewHolder {
 
+		final FrameLayout holderLayout;
 		final ImageView iconReorder;
 		final ImageView icon;
 		final TextView title;
@@ -160,6 +163,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 		MeasureToolItemVH(View view) {
 			super(view);
+			holderLayout = (FrameLayout) view;
 			iconReorder = (ImageView) view.findViewById(R.id.measure_point_reorder_icon);
 			icon = (ImageView) view.findViewById(R.id.measure_point_icon);
 			title = (TextView) view.findViewById(R.id.measure_point_title);
@@ -174,7 +178,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 		void onRemoveClick(int position);
 
-		void onItemClick(View view);
+		void onItemClick(int position);
 
 		void onDragStarted(RecyclerView.ViewHolder holder);
 
