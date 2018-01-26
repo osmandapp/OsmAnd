@@ -90,8 +90,9 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 
 	public void addBoatProfile(boolean flag) {
 		Set<ApplicationMode> selectedProfiles = new LinkedHashSet<>(ApplicationMode.values(app.getSettings()));
-		if((!selectedProfiles.contains(ApplicationMode.BOAT) && flag) ||
-				((selectedProfiles.contains(ApplicationMode.BOAT) && !flag))) {
+		boolean isBoatEnabled = selectedProfiles.contains(ApplicationMode.BOAT);
+		if((!isBoatEnabled && flag) ||
+				((isBoatEnabled && !flag))) {
 			String s = app.getSettings().AVAILABLE_APP_MODES.get();
 			String currModes = flag ? s + ApplicationMode.BOAT.getStringKey() + ","
 					: s.replace(ApplicationMode.BOAT.getStringKey() + ",", "");
