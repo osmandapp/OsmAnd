@@ -2911,7 +2911,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="marker_moved_to_history">Žemėlapio žymeklis perkeltas į istoriją</string>
     <string name="marker_moved_to_active">Žemėlapio žymeklis perkeltas prie aktyvų</string>
     <string name="passed">Paskutinį kartą naudota: %1$s</string>
-    <string name="osm_recipient_stat">Taisymų %1$ s, suma %2$ s mBTC</string>
+    <string name="osm_recipient_stat">Taisymų %1$s, suma %2$s mBTC</string>
     <string name="lang_lo">Laosiečių</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) yra žemėlapio ir navigacijos programa su prieiga prie nemokamų, pasaulinių ir aukštos kokybės OpenStreetMap (OSM) duomenų. Naudokitės balso ir vaizdo navigatoriumi, peržiūrėkite LV (lankytinas vietas), kurkite ir valdytkite GPX kelius, naudojkite kontūro linijos vizualizaciją ir aukščio info (įskiepių pagalba), pasirinkite vairavimo, dviračių, pėsčiųjų režimus, redaguokite OSM duomenis ir daug daugiau.</string>
     <string name="quick_favorites_name_preset">Nuostatos pavadinimas</string>
@@ -2922,7 +2922,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="quick_action_add_osm_bug_descr">Bakstelėję veiksmo mygtuką pridėsite OSM pastabą ekrano centre.</string>
     <string name="quick_action_add_poi_descr">Bakstelėję veiksmo mygtuką pridėsite LV-ą ekrano centre.</string>
     <string name="quick_action_add_parking_descr">Bakstelėję veiksmo mygtuką pridėsite automobilio stovėjimo vietą ekrano centre.</string>
-    <string name="quick_action_duplicates">Nurodyto greito veiksmo pavadinimas jau naudojamas, todėl buvo pakeistas į %1$ s, kad būtų išvengta dubliavimo.</string>
+    <string name="quick_action_duplicates">Nurodyto greito veiksmo pavadinimas jau naudojamas, todėl buvo pakeistas į %1$s, kad būtų išvengta dubliavimo.</string>
     <string name="quick_action_duplicate">Pasikartojantis greitojo veiksmo pavadinimas</string>
     <string name="quick_action_showhide_poi_descr">Bakstelėjus veiksmo mygtuką bus parodoma arba paslepiama LV-a žemėlapyje.</string>
     <string name="quick_action_btn_tutorial_descr">Nuspauskite ir vilkite mygtuką norėdami pakeisti jo padėtį ekrane.</string>
