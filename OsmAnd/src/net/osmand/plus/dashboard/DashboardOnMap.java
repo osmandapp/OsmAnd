@@ -93,6 +93,7 @@ import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener.Undoable
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 
 import java.lang.ref.WeakReference;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -1515,7 +1516,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 							start.start = false;
 							start.intermediate = startInd != allTargets.size() - 1;
 							if (targetPointsHelper.getPointToStart() == null) {
-								start.getOriginalPointDescription().setName(start.getLatitude() + ", " + start.getLongitude());
+								DecimalFormat format = new DecimalFormat("#.#####");
+								start.getOriginalPointDescription().setName(format.format(start.getLatitude())
+										+ ", " + format.format(start.getLongitude()));
 							}
 							first.start = true;
 							first.intermediate = false;
