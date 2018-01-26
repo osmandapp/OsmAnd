@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -124,7 +123,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 				listener.onRemoveClick(holder.getAdapterPosition());
 			}
 		});
-		holder.holderLayout.setOnClickListener(new View.OnClickListener() {
+		holder.itemView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				listener.onItemClick(holder.getAdapterPosition());
@@ -151,7 +150,6 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 	static class MeasureToolItemVH extends RecyclerView.ViewHolder {
 
-		final FrameLayout holderLayout;
 		final ImageView iconReorder;
 		final ImageView icon;
 		final TextView title;
@@ -162,7 +160,6 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 		MeasureToolItemVH(View view) {
 			super(view);
-			holderLayout = (FrameLayout) view;
 			iconReorder = (ImageView) view.findViewById(R.id.measure_point_reorder_icon);
 			icon = (ImageView) view.findViewById(R.id.measure_point_icon);
 			title = (TextView) view.findViewById(R.id.measure_point_title);
