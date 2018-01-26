@@ -2612,4 +2612,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="will_open_tomorrow_at">Mun opna á morgun kl.</string>
     <string name="animate_my_location_desc">Virkja hreyfingu við hliðrun staðsetningar minnar á meðan leiðsögn stendur.</string>
     <string name="storage_permission_restart_is_required">Núna hefur forritið heimild til að skrifa í ytri gagnageymslur. Það þarf að endurræsa forritið handvirkt.</string>
+    <string name="show_transparency_seekbar">Birta gegnsæis-sleða</string>
     </resources>
