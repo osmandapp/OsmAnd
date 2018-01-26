@@ -2842,7 +2842,7 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="coordinate_input_accuracy">%1$d číslic</string>
     <string name="go_to_next_field">Přejít na další pole</string>
     <string name="rename_marker">Přejmenovat značku</string>
-    <string name="tap_on_map_to_hide_interface_descr">Klepnutí na mapu skryje ovládací tlačítka a nástroje.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Klepnutí na mapu přepne ovládací tlačítka a nástroje.</string>
     <string name="tap_on_map_to_hide_interface">Režim celé obrazovky</string>
     <string name="show_on_top_bar">Zobrazit na horní liště</string>
     <string name="mark_passed">Značka prošlá</string>
@@ -2888,4 +2888,23 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="winter_and_ski_renderer">Zima a lyžování</string>
     <string name="touring_view_renderer">Cestování (vysoký kontrast a detaily)</string>
     <string name="nautical_renderer">Námořnictví</string>
-</resources>
+<string name="will_open_tomorrow_at">Otevřou zítra v</string>
+    <string name="shared_string_marker">Značka</string>
+    <string name="release_2_9">\\022 Aktualizováno kontextové menu: zobrazí, kdy POI otevírá / zavírá
+\n
+\n • Dopravní nabídka: všechny dostupné trasy jsou nyní nahoře
+\n
+\n • Wikipedie: přidáno tlačítko pro otevření původního článku, aktualizován vzhled článků
+\n
+\n • Trasa: přidána možnost vyměnit počáteční a koncové body jedním klepnutím
+\n
+\n • Poznámky: přidáno třídění podle typu a data
+\n
+\n • OSM úpravy: zobrazení ikony a názvu kategorie POI, zobrazení dokončených akcí
+\n
+\n • Nová obrazovka rychlých souřadnic pro rychlé vytváření značek
+\n
+\n</string>
+    <string name="osm_recipient_stat">Počet úprav %1$s, součet %2$s mBTC</string>
+    <string name="lang_lo">Laosky</string>
+    </resources>
