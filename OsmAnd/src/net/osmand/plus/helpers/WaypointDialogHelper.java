@@ -391,9 +391,10 @@ public class WaypointDialogHelper {
 			boolean startPoint = notFlatTargets && ((TargetPoint) point.point).start;
 			final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 			boolean canRemove = !targetPointsHelper.getIntermediatePoints().isEmpty();
+			int iconResId = nightMode ? R.color.marker_circle_button_color_dark : R.color.ctx_menu_title_color_dark;
 
 			remove.setVisibility(View.VISIBLE);
-			remove.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark, !nightMode));
+			remove.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark, iconResId));
 			remove.setEnabled(canRemove);
 			remove.setAlpha(canRemove ? 1 : .5f);
 			if (canRemove) {
@@ -423,7 +424,7 @@ public class WaypointDialogHelper {
 
 			move.setVisibility(notFlatTargets ? View.VISIBLE : View.GONE);
 			if (notFlatTargets) {
-				move.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_reorder, !nightMode));
+				move.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_reorder, iconResId));
 				move.setTag(new DragIcon() {
 					@Override
 					public void onClick() {
