@@ -1640,7 +1640,7 @@
     <string name="quick_action_show_navigation_finish_dialog">П</string>
     <string name="quick_action_start_stop_navigation">Почни/заустави навођење</string>
     <string name="will_open_tomorrow_at">Ће бити отворено сутра у</string>
-    <string name="rendering_attr_hidePOILabels_name">Ознаке тачака занимања</string>
+    <string name="rendering_attr_hidePOILabels_name">Ознаке тачака од интереса</string>
     <string name="shared_string_without_name">Без имена</string>
     <string name="empty_state_markers_active_desc">Дуго или кратко тупните места, онда тупните на дугме заставице ознаке.</string>
     <string name="map_orientation_change_in_accordance_with_speed">Задршка усмерења карте</string>
