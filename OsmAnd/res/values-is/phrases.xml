@@ -3091,11 +3091,11 @@
 	<string name="poi_amperage">Amperstyrkur</string>
 	<string name="poi_charging_station_output">Aflúttak hleðslustöðvar</string>
 
-	<string name="poi_map_type_topo">Tegund korts: landfræðileg</string>
-	<string name="poi_map_type_street">Tegund korts: götukort</string>
-	<string name="poi_map_type_scheme">Tegund korts: skematísk</string>
-	<string name="poi_map_size_city">Tegund korts: borgarkort</string>
-	<string name="poi_map_size_region">Tegund korts: héraðskort</string>
+	<string name="poi_map_type_topo">Gerð korts: landfræðileg</string>
+	<string name="poi_map_type_street">Gerð korts: götukort</string>
+	<string name="poi_map_type_scheme">Gerð korts: skematísk</string>
+	<string name="poi_map_size_city">Gerð korts: borgarkort</string>
+	<string name="poi_map_size_region">Gerð korts: héraðskort</string>
 
 	<string name="poi_letter_box">Bréfakassi</string>
 	<string name="poi_post_street">Gata</string>
@@ -3271,8 +3271,8 @@
 	<string name="poi_water_supply_water_trucking">Vatn með tankbílum</string>
 	<string name="poi_water_place_access_multifamilies">Fyrir margar fjölskyldur</string>
 
-	<string name="poi_map_type_toposcope">Tegund korts: skýringakort (toposcope)</string>
-	<string name="poi_map_size_site">Tegund korts: staðarkort</string>
+	<string name="poi_map_type_toposcope">Gerð korts: skýringakort (toposcope)</string>
+	<string name="poi_map_size_site">Gerð korts: staðarkort</string>
 	<string name="poi_wetland_reedbed">Sefbreiða</string>
 	<string name="poi_wetland_swamp">Skógmýri</string>
 	<string name="poi_wetland_saltern">Saltgerði</string>
@@ -3438,4 +3438,5 @@
 	<string name="poi_agrarian">Landbúnaðarverslun</string>
 
 
-</resources>
+<string name="poi_health_specialty_biochemistry_yes">Lífefnafræði</string>
+	</resources>
