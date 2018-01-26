@@ -1740,4 +1740,42 @@
     <string name="quick_action_osmbugs_show">Εμφάνιση σημειώσεων OSM</string>
     <string name="quick_action_osmbugs_hide">Απόκρυψη σημειώσεων OSM</string>
     <string name="shared_string_to">Προς</string>
+    <string name="rendering_attr_hidePOILabels_name">Ετικέτες POI</string>
+    <string name="shared_string_without_name">Χωρίς όνομα</string>
+    <string name="what_is_here">Τι είναι εδώ:</string>
+    <string name="parked_at">σταθμευμένο στο</string>
+    <string name="pick_up_till">Παραλαβή μέχρι</string>
+    <string name="without_time_limit">Χωρίς χρονικό όριο</string>
+    <string name="context_menu_read_full_article">Διαβάστε ολόκληρο το άρθρο</string>
+    <string name="context_menu_read_article">Διαβάστε το άρθρο</string>
+    <string name="context_menu_points_of_group">Όλα τα σημεία της ομάδας</string>
+    <string name="open_from">Ανοιχτό από</string>
+    <string name="open_till">Ανοιχτά μέχρι τις</string>
+    <string name="will_close_at">Θα κλείσει στις</string>
+    <string name="will_open_at">Θα ανοίξει στις</string>
+    <string name="will_open_on">Θα ανοίξει στις</string>
+    <string name="additional_actions">Πρόσθετες ενέργειες</string>
+    <string name="av_locations_selected_desc">Αρχείο GPX με συντεταγμένες και δεδομένα από τις επιλεγμένες σημειώσεις.</string>
+    <string name="av_locations_all_desc">Αρχείο GPX με συντεταγμένες και δεδομένα από όλες τις σημειώσεις.</string>
+    <string name="release_3_0">\\022 Η ανίχνευση των πινακίδων \"stop\" τώρα λαμβάνει υπόψη την κατεύθυνση οδήγησης
+\n
+\n• Νέος αλγόριθμος που παρέχει ουσιαστικές τιμές ανάβασης/κατάβασης για τα ίχνη GPX
+\n
+\n• Χρόνος πεζοπορίας με επίγνωση του εδάφους (ανάβαση) (κανόνας του Naismith)
+\n
+\n</string>
+    <string name="modify_the_search_query">Τροποποίηση ερωτήματος αναζήτησης.</string>
+    <string name="shared_string_actions">Ενέργειες</string>
+    <string name="shared_string_marker">Δείκτης</string>
+    <string name="empty_state_osm_edits">Δημιουργία ή τροποποίηση αντικειμένων OSM</string>
+    <string name="empty_state_osm_edits_descr">Δημιουργήστε ή τροποποιήστε τα OSM POI, ανοίξτε ή σχoλιάστε με τις Σημειώσεις OSM, και συμβάλετε με καταγραμμένα αρχεία GPX.</string>
+    <string name="shared_string_deleted">Διαγραμμένο</string>
+    <string name="shared_string_edited">Επεξεργάστηκε</string>
+    <string name="shared_string_added">Προστέθηκε</string>
+    <string name="marker_activated">Ο δείκτης %s ενεργοποιήθηκε.</string>
+    <string name="one_tap_active_descr">Πατήστε ένα δείκτη στο χάρτη για να τον μετακινήσετε στην κορυφή των ενεργών δεικτών χωρίς να ανοίξει το συναφές μενού.</string>
+    <string name="one_tap_active">Μονό πάτημα ενεργό</string>
+    <string name="empty_state_av_notes">Κρατήστε σημειώσεις!</string>
+    <string name="empty_state_av_notes_desc">Προσθήκη ήχου, βίντεο ή σημείωση φωτογραφίας για κάθε σημείο στο χάρτη, χρησιμοποιώντας το widget ή το συναφές μενού.</string>
+    <string name="notes_by_date">Σημειώσεις κατά ημερομηνία</string>
     </resources>

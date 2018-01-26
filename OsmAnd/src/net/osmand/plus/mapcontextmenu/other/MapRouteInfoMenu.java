@@ -445,16 +445,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		fromDropDownIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_arrow_drop_down, isLight()));
 	}
 
-	@SuppressWarnings("deprecation")
 	public void updateFromIcon(View parentView) {
-		TargetPointsHelper targets = getTargets();
-		ImageView fromIcon = (ImageView) parentView.findViewById(R.id.fromIcon);
-		if (targets.getPointToStart() == null) {
-			ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
-			fromIcon.setImageDrawable(mapActivity.getResources().getDrawable(appMode.getResourceLocationDay()));
-		} else {
-			fromIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.list_startpoint, 0));
-		}
+		((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(ContextCompat.getDrawable(mapActivity,
+				getTargets().getPointToStart() == null ? R.drawable.ic_action_location_color : R.drawable.list_startpoint));
 	}
 
 	protected void selectOnScreen(boolean target) {

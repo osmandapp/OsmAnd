@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
-    <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
+    <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi.</string>
     <string name="offline_edition">Modifiche offline</string>
-    <string name="offline_edition_descr">Usa sempre la modifica offline</string>
+    <string name="offline_edition_descr">Usa sempre la modifica offline.</string>
 
     <string name="update_poi_does_not_change_indexes">Le modifiche dei PDI all\'interno dell\'applicazione non si riflettono nelle mappe scaricate, le modifiche sono salvate in un file locale.</string>
     <string name="local_openstreetmap_uploading">Caricamento…</string>
@@ -18,9 +18,9 @@
     <string name="local_openstreetmap_settings_descr">Visualizza e gestisci i PDI/Note OSM inseriti nel database locale.</string>
 
 
-    <string name="live_monitoring_interval_descr">Specifica l\'intervallo del tracking in diretta</string>
+    <string name="live_monitoring_interval_descr">Specifica l\'intervallo del tracking online.</string>
     <string name="live_monitoring_interval">Intervallo del Live tracking</string>
-    <string name="live_monitoring_url_descr">Specifica l\'indirizzo internet con la sintassi dei parametri: lat={0}, lon={1}, data/ora={2}, hdop={3}, altitudine={4}, velocità={5}, angolo={6}</string>
+    <string name="live_monitoring_url_descr">Specifica l\'indirizzo internet con la sintassi dei parametri: lat={0}, lon={1}, data/ora={2}, hdop={3}, altitudine={4}, velocità={5}, angolo={6}.</string>
     <string name="live_monitoring_url">Indirizzo internet per il tracking in diretta</string>
     <string name="gpx_monitoring_disabled_warn">Registra la traccia usando il widget GPX o le impostazioni \'Registrazione viaggi\'.</string>
     <string name="show_current_gpx_title">Visualizza la traccia corrente</string>
@@ -720,13 +720,13 @@ La memoria utilizzata è  {1} MB.
     <string name="direction_style_sidewise">Direzioni (8 settori)</string>
     <string name="direction_style_clockwise">Bussola (12 settori)</string>
     <string name="settings_direction_style">Stile della direzione</string>
-    <string name="settings_direction_style_descr">Scegli lo stile in cui vengono espresse in movimento le direzioni relative</string>
+    <string name="settings_direction_style_descr">Scegli lo stile in cui vengono espresse le direzioni relative durante il movimento.</string>
     <string name="auto_announce_on">Avvia gli annunci automatici</string>
     <string name="auto_announce_off">Ferma gli annunci automatici</string>
     <string name="i_am_here">Io sono qui</string>
     <string name="zoom_by_trackball_descr">Cambia lo zoom della mappa con movimenti orizzontali della trackball</string>
     <string name="zoom_by_trackball">Usa la trackball per il controllo dello zoom</string>
-    <string name="accessibility_preferences_descr">Preferenze relative all\'accessibilità</string>
+    <string name="accessibility_preferences_descr">Preferenze relative all\'accessibilità.</string>
     <string name="shared_string_accessibility">Accessibilità</string>
     <string name="index_name_north_america">Nord America</string>
     <string name="index_name_us">Nord America - Stati Uniti</string>
@@ -2549,7 +2549,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="quick_action_interim_dialog">Mostra una finestra di dialogo temporaneamente</string>
     <string name="favorite_autofill_toast_text">" è salvato in "</string>
     <string name="favorite_empty_place_name">Luogo</string>
-    <string name="navigate_point_olc"></string>
+    <string name="navigate_point_olc"/>
     <string name="navigate_point_olc_info_invalid">OLC non valido
 </string>
     <string name="navigate_point_olc_info_short">OLC breve

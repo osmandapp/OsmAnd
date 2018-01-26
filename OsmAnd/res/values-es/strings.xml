@@ -2824,4 +2824,9 @@ Por favor proporciona un código completo</string>
     <string name="osm_recipients_label">Destinatarios de OSM</string>
     <string name="total_donations">Total de donaciones</string>
 <string name="shared_string_without_name">Sin nombre</string>
+    <string name="will_open_tomorrow_at">Abrirá mañana a las</string>
+    <string name="rendering_attr_hidePOILabels_name">Etiquetas PDI</string>
+    <string name="lang_lo">laosiano</string>
+    <string name="day_off_label">cerrado</string>
+    <string name="winter_and_ski_renderer">Invierno y esquí</string>
     </resources>

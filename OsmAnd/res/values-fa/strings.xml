@@ -940,7 +940,7 @@
 	<string name="route_tslr">کمی به راست بپیچید و بروید</string>
 	<string name="route_tshl">کاملاً به چپ بپیچید و بروید</string>
 	<string name="route_tsll">کمی به چپ بپیچید و بروید</string>
-	<string name="route_tu">دورِ برگردان بزنید و بروید</string>
+	<string name="route_tu">از دوربرگردان دور بزنید و بروید</string>
 	<string name="first_time_continue">بعداً</string>
 	<string name="first_time_download">دانلود منطقه‌ها</string>
 	<string name="search_poi_location">در حال جست‌وجوی سیگنال…</string>
@@ -3026,4 +3026,5 @@
 \n
 \n • ایجاد سریع نشانه‌ها از طریق صفحهٔ ورود فوری مختصات
 \n</string>
+    <string name="will_open_tomorrow_at">فردا باز می‌شود، در ساعت</string>
     </resources>

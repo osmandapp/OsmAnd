@@ -3684,4 +3684,47 @@
 
 	<string name="poi_depot">Zajezdnia</string>
 
-	</resources>
+	<string name="poi_climbing_style">Styl wspinaczki</string>
+
+<string name="poi_ref_post">Kod pocztowy</string>
+
+	<string name="poi_climbing_sport_yes">Sport: tak</string>
+	<string name="poi_climbing_sport_no">Sport: nie</string>
+	<string name="poi_climbing_boulder_yes">Wspinaczka skalna: tak</string>
+	<string name="poi_climbing_boulder_no">Wspinaczka skalna: nie</string>
+	<string name="poi_climbing_toprope_yes">Lina asekuracyjna: tak</string>
+	<string name="poi_climbing_toprope_no">Lina asekuracyjna: nie</string>
+	<string name="poi_climbing_trad_yes">Tradycyjne: tak</string>
+	<string name="poi_climbing_trad_no">Tradycyjne: nie</string>
+	<string name="poi_climbing_multipitch_yes">Wspinaczka wielowyciągowa: tak</string>
+	<string name="poi_climbing_multipitch_no">Wspinaczka wielowyciągowa: nie</string>
+	<string name="poi_climbing_ice_yes">Lód: tak</string>
+	<string name="poi_climbing_ice_no">Lód: nie</string>
+	<string name="poi_climbing_mixed_yes">Mieszane: tak</string>
+	<string name="poi_climbing_mixed_no">Mieszane: nie</string>
+	<string name="poi_climbing_deepwater_yes">Wspinaczka nad głęboką wodą (psicobloc): tak</string>
+	<string name="poi_climbing_deepwater_no">Wspinaczka nad głęboką wodą (psicobloc): nie</string>
+
+	<string name="poi_climbing_length">Długość wspinaczki</string>
+	<string name="poi_climbing_length_min">Minimalna długość wspinaczki</string>
+	<string name="poi_climbing_length_max">Maksymalna długość wspinaczki</string>
+	<string name="poi_climbing_rock_limestone">Kamień do wspinaczki: wapień</string>
+	<string name="poi_climbing_rock_granite">Kamień do wspinaczki: granit</string>
+	<string name="poi_climbing_rock_sandstone">Kamień do wspinaczki: piaskowiec</string>
+	<string name="poi_climbing_rock_quartzite">Kamień do wspinaczki: kwarcyt</string>
+	<string name="poi_climbing_rock_gneiss">Kamień do wspinaczki: gnejs</string>
+	<string name="poi_climbing_rock_porphyry">Kamień do wspinaczki: porfir</string>
+	<string name="poi_climbing_quality_solid">Jakość wspinaczki: lita</string>
+	<string name="poi_climbing_quality_fragile">Jakość wspinaczki: krucha</string>
+	<string name="poi_climbing_routes">Trasy wspinaczkowe</string>
+
+	<string name="poi_meadow_agricultural">Typ: rolniczy</string>
+	<string name="poi_meadow_transitional">Typ: przejściowy</string>
+	<string name="poi_meadow_pasture">Typ: pastwisko</string>
+
+	<string name="poi_frozen_food">Mrożonki</string>
+
+	<string name="poi_agrarian">Sklep rolniczy</string>
+
+
+</resources>

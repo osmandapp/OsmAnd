@@ -2046,7 +2046,7 @@
     <string name="av_video_format">Videoformat</string>
     <string name="av_use_external_recorder_descr">Bruk systemopptaker for video</string>
     <string name="av_use_external_recorder">Bruk systemopptaker</string>
-    <string name="av_use_external_camera_descr">Bruk systemopptaker for bilder</string>
+    <string name="av_use_external_camera_descr">Bruk systemprogrammet til foto.</string>
     <string name="av_use_external_camera">Bruk kameraprogram</string>
     <string name="recording_error">Feil oppstod under opptak</string>
     <string name="recording_camera_not_available">Kamera ikke tilgjengelig</string>
@@ -2712,5 +2712,9 @@
     <string name="commit_poi">Send inn interessepunkt</string>
     <string name="poi_deleted_localy">Interessepunkt blir slettet når du laster opp endringene dine</string>
     <string name="only_download_over_wifi">Bare nedlasting over WiFi</string>
-    <string name="map_widget_fps_info">Feilrettingsinfo om billedtakt</string>
+    <string name="map_widget_fps_info">Bildefrekvens; feilrettingsinfo</string>
+    <string name="rendering_attr_hidePOILabels_name">Interessepunktpåskrifter</string>
+    <string name="will_open_tomorrow_at">Åpner i morgen</string>
+    <string name="winter_and_ski_renderer">Vinter og ski</string>
+    <string name="touring_view_renderer">Turvisning (kontrast og detaljer)</string>
     </resources>

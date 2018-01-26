@@ -3747,4 +3747,17 @@
 	<string name="poi_climbing_routes">Маршруты ўзыходжання</string>
 
 
+<string name="poi_circumference">Акружнасць ствала</string>
+	<string name="poi_diameter_crown">Дыяметр кроны</string>
+
+	<string name="poi_meadow_agricultural">Тып: сельскагаспадарчы</string>
+	<string name="poi_meadow_perpetual">Тып: прыродны</string>
+	<string name="poi_meadow_transitional">Тып: зарастаючы</string>
+	<string name="poi_meadow_pasture">Тып: выган</string>
+
+	<string name="poi_frozen_food">Замарожаныя прадукты</string>
+
+	<string name="poi_agrarian">Сельскагаспадарчая крама</string>
+
+
 </resources>

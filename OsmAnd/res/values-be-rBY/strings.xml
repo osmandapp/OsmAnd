@@ -2970,4 +2970,25 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="will_open_on">Adkryjecca a</string>
     <string name="shared_string_without_name">Biez nazvy</string>
     <string name="lang_lo">Łaoskaja</string>
-    </resources>
+    <string name="will_open_tomorrow_at">Adčynicca zaŭtra a</string>
+    <string name="rendering_attr_hidePOILabels_name">Nazvy POI</string>
+    <string name="release_2_9">\\022 Abnoŭlienaje kantekstnaje mieniu: pakazvaje kali adkryvajucca/zakryvajucca POI 
+\n 
+\n • Mieniu transparta: usie dastupnyja maršruty ciapier na miescie 
+\n 
+\n • Vikipiedyja: dabaŭliena knopka dlia adkrycca artykula, abnoŭlieny vyhliad artykulaŭ 
+\n 
+\n • Maršrut: dabaŭliena mahčymasć zmyny pačatkovaj i kačatkovaj kropak adnym dotykam 
+\n 
+\n • Natatki: dabaŭliena sartavannie pa typu i dacie 
+\n 
+\n • OSM praŭki: pakazvajecca značka i nazva POI-katehoryi, adliustroŭvajecca vykananaje dziejannie 
+\n 
+\n • Novy ekran chutkaha ŭvodu kaardynat dlia stvarennia markieraŭ 
+\n 
+\n</string>
+    <string name="day_off_label">vych.</string>
+    <string name="winter_and_ski_renderer">Zimovy/lyžny</string>
+    <string name="touring_view_renderer">Turystyčny (kantrast i detali)</string>
+    <string name="nautical_renderer">Marski</string>
+</resources>

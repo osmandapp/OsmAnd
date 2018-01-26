@@ -1540,10 +1540,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_start_service">OsMo paslauga</string>
     <string name="osmo_gpx_track_downloaded">OsMo įrašas %1$s parsiųstas.</string>
     <string name="osmo_group_by_invite">Prisijungti su pakvietimais</string>
-    <string name="osmo_group_information_desc">- Kurdami grupę suteikite jai pavadinimą ir užpildtykite aprašymą
-\n - Iš programėlės sukuriamos tik paprasto tipo grupės. Daugiau informacijos https://osmo.mobi/g/new
-\n - Interneto svetainėje galite valdyti grupę, pridėti pėdsakus ar taškus kurie bus prieinami visiems
-\n - Mes nepritariame tik vieno naudotojo grupėms jei tai ne LV grupė
+    <string name="osmo_group_information_desc">- Kurdami grupę suteikite jai pavadinimą ir užpildykite aprašymą 
+\n - Iš programėlės sukuriamos tik paprasto tipo grupės. Daugiau informacijos https://osmo.mobi/g/new 
+\n - Interneto svetainėje galite valdyti grupę, pridėti pėdsakus ar taškus kurie bus prieinami visiems 
+\n - Mes nepritariame tik vieno naudotojo grupėms jei tai ne LV grupė 
 \n - Uždaros grupės ribojamos iki 8 narių 
 \n - Detalios taisyklės visada prieinamos svetainėje OsMo.mobi 
 \n - Jei jums reikia išskirtinių sąlygų - susisiekite: osmo.mobi@gmail.com</string>
@@ -2646,13 +2646,13 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="srtm_purchase_header">Norėdami matyti konturų linijas ant žemėlapio turėsite nusipirkti ir įsidiegti kontūrų linijų įskiepį</string>
     <string name="show_from_zoom_level">Rodyti nuo mąstelio</string>
     <string name="routing_attr_allow_private_name">Naudoti privačius kelius</string>
-    <string name="display_zoom_level">Mąstelis: %1$s</string>
+    <string name="display_zoom_level">Mastelis: %1$s</string>
     <string name="animate_my_location_desc">Įgalinti mano mano vietos animaciją stumiant žemėlapį navigacijos metu.</string>
     <string name="shared_string_in_name">už %1$s</string>
     <string name="quick_action_auto_zoom">Aut. žem. mąst. į/išj</string>
     <string name="quick_action_auto_zoom_desc">Mygtuko paspaudimas į/išjungs automatinį žemėlapio mąstelio keitimą pagal jūsų greitį.</string>
-    <string name="quick_action_auto_zoom_on">Auto. žemėl. mąstelis įj</string>
-    <string name="quick_action_auto_zoom_off">Aut. žemėl. mąstelis įšjungtas</string>
+    <string name="quick_action_auto_zoom_on">Įjungti auto. žemėl. mąstelį</string>
+    <string name="quick_action_auto_zoom_off">Išjungti aut. žemėl. mąstelį</string>
     <string name="quick_action_replace_destination">Pakeisti kelionės tikslą</string>
     <string name="quick_action_add_destination_desc">Paspaudus mygtuką ekrano centre esanti vieta bus pridėta kaip naujas kelionės tikslas. Anksčiau buvęs tikslas taps paskutiniuoju tarpiniu tikslu.</string>
     <string name="quick_action_replace_destination_desc">Paspaudus mygtuką kelionės tikslas bus pakeistas ekrano centre esančia vieta.</string>
@@ -2711,7 +2711,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="rendering_attr_contourDensity_description">Kontūrų linijų tankis</string>
     <string name="rendering_attr_contourDensity_name">Konturų linijų tankis</string>
     <string name="rendering_attr_contourWidth_description">Konturų linijų plotis</string>
-    <string name="rendering_attr_contourWidth_name">Konturų linijų plotis</string>
+    <string name="rendering_attr_contourWidth_name">Kontūrų linijų plotis</string>
     <string name="show_legacy_search_desc">Priedėti senąją paiešką prie stalčiaus sąrašo.</string>
     <string name="routing_attr_allow_motorway_description">Leisti greitkelius.</string>
     <string name="wiki_around">Šalia esantys Vikipedijos straipsniai</string>
@@ -2743,14 +2743,14 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="quick_action_show_navigation_finish_dialog">Rodyti navigacijos užbaigimo dialogą</string>
     <string name="quick_action_start_stop_navigation">Pradėti/Baigti navigaciją</string>
     <string name="quick_action_start_stop_navigation_descr">Paspauskite šį mygtuką navigacijai pradėti arba sustabdyt.</string>
-    <string name="release_2_7">\\022 Mapillary įskiepis gatvės lygmens vaizdams
-\n
-\n • Liniuoitės įrankis atstumo matavimui
-\n
-\n • GPX padalijimo intervalai su detalia informacija apie jūsų kelią
-\n
-\n • Kiti patobulinimai ir klaidų ištaisymai
-\n
+    <string name="release_2_7">\\022 Mapillary įskiepis gatvės lygmens vaizdams 
+\n 
+\n • Liniuotė matuoti atstumą
+\n 
+\n • GPX padalijimo intervalai su detalia informacija apie jūsų kelią 
+\n 
+\n • Kiti patobulinimai ir klaidų ištaisymai 
+\n 
 \n</string>
     <string name="rendering_value_translucent_pink_name">Permatoma rožinė</string>
     <string name="navigate_point_olc">Open Location kodas (OLC)</string>
@@ -2772,7 +2772,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="top_bar">Viršutinė juosta</string>
     <string name="move_all_to_history">Perkelti visus į istoriją</string>
     <string name="build_route">Sukurti maršrutą</string>
-    <string name="show_direction">Rodyti kryptį</string>
+    <string name="show_direction">Atstumo nuoroda</string>
     <string name="sort_by">Rūšiuoti pagal</string>
     <string name="do_not_use_animations">Nenaudoti animacijos</string>
     <string name="do_not_use_animations_descr">Išjungia animaciją programoje.</string>
@@ -2854,7 +2854,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_paste">Įklijuoti</string>
     <string name="go_to_next_field">Pereiti į kitą lauką</string>
     <string name="rename_marker">Pervardinti žymeklį</string>
-    <string name="tap_on_map_to_hide_interface_descr">Palietus žemėlapų paslėps mygtukus ir valdiklius.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Palietus žemėlapį perjungs mygtukus ir valdiklius.</string>
     <string name="tap_on_map_to_hide_interface">Viso ekrano režimas</string>
     <string name="round_trip">Kelionė</string>
     <string name="context_menu_item_modify_note">Keisti OSM pastabą</string>
@@ -2868,4 +2868,67 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="hide_passed">Slėpti praeitą</string>
     <string name="notes_by_date">Užrašai pagal datą</string>
     <string name="appearance_on_the_map">Išvaizda žemėlapyje</string>
-    </resources>
+    <string name="will_open_tomorrow_at">Bus atidaryta rytoj</string>
+    <string name="rendering_attr_hidePOILabels_name">LV pavadinimai</string>
+    <string name="shared_string_without_name">Be pavadinimo</string>
+    <string name="what_is_here">Kas čia:</string>
+    <string name="parked_at">pastatytas</string>
+    <string name="pick_up_till">Pasiimti iki</string>
+    <string name="without_time_limit">Neribotą laiką</string>
+    <string name="context_menu_read_full_article">Skaityti visą straipsnį</string>
+    <string name="context_menu_read_article">Skaityti straipsnį</string>
+    <string name="context_menu_points_of_group">Visi grupės taškai</string>
+    <string name="open_from">Atidaryta nuo</string>
+    <string name="open_till">Atidaryta iki</string>
+    <string name="will_close_at">Užsidarys</string>
+    <string name="will_open_at">Atsidarys</string>
+    <string name="will_open_on">Atsidarys</string>
+    <string name="additional_actions">Papildomi veiksmai</string>
+    <string name="av_locations_selected_desc">GPX failas su koordinačių ir pasirinktų pastabų duomenimis.</string>
+    <string name="av_locations_all_desc">GPX failas su koordinačių ir visų pastabų duomenimis.</string>
+    <string name="release_3_0">\\022 Stop ženklo nutatymas atliekamas atsižvelgiant į judėjimo kryptį
+\n
+\n• Naujas algoritmas, pateikiantis prasmingas pakilimo/nusileidimo vertes GPX trekams
+\n
+\n• Vaikšiojimo trukmė atsižvelgiant į reljefą (pakilimą) (Naismith taisyklė)
+\n</string>
+    <string name="shared_string_actions">Veiksmai</string>
+    <string name="shared_string_marker">Žymeklis</string>
+    <string name="empty_state_osm_edits_descr">Kurkite arba keiskite OSM LV-as, užrašykite arba komentuokite OSM pastabas bei dalinkitės įrašytais GPX failais.</string>
+    <string name="one_tap_active_descr">Spustelėkite žymeklį ant žemėlapio norėdami jį perkelti į aktyvių žymeklių sarašo viršų neatveriant kontekstinio meniu.</string>
+    <string name="empty_state_av_notes_desc">Pridėkite garso, vaizdo įrašą ar nuotrauką kiekviename žemėlapio taške naudodami valdiklį arba kontekstinį meniu.</string>
+    <string name="add_favourites_group_to_markers_descr">Pasirinkite pamėgtų kategoriją norėdami įtraukti į žymeklius.</string>
+    <string name="show_number_pad">Rodyti skaičių klaviatūrą</string>
+    <string name="mark_passed">Pažymėti kaip praeitą</string>
+    <string name="plan_route_no_markers_toast">Turite pridėti bent vieną žymeklį norėdami naudoti šią funkciją.</string>
+    <string name="make_round_trip_descr">Nukopijuoti pradžios tašką kaip paskirties vietą.</string>
+    <string name="fast_coordinates_input_descr">Pasirinkite koordinačių įvesties formatą. Jūs visada galite pakeisti, spustelėdami Savybės.</string>
+    <string name="plan_route">Planuoti maršrutą</string>
+    <string name="coordinate_input">Koordinačių įrašymas</string>
+    <string name="marker_save_as_track_descr">Žymeklių eksporta į failą galite aprašyti čia:</string>
+    <string name="remove_from_map_markers">Pašalinti iš Žemėlapio Žymeklių</string>
+    <string name="all_markers_moved_to_history">Visi žymekliai perkelti į istorija</string>
+    <string name="marker_moved_to_history">Žemėlapio žymeklis perkeltas į istoriją</string>
+    <string name="marker_moved_to_active">Žemėlapio žymeklis perkeltas prie aktyvų</string>
+    <string name="passed">Paskutinį kartą naudota: %1$ s</string>
+    <string name="osm_recipient_stat">Taisymų %1$ s, suma %2$ s mBTC</string>
+    <string name="lang_lo">Laosiečių</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) yra žemėlapio ir navigacijos programa su prieiga prie nemokamų, pasaulinių ir aukštos kokybės OpenStreetMap (OSM) duomenų. Naudokitės balso ir vaizdo navigatoriumi, peržiūrėkite LV (lankytinas vietas), kurkite ir valdytkite GPX kelius, naudojkite kontūro linijos vizualizaciją ir aukščio info (įskiepių pagalba), pasirinkite vairavimo, dviračių, pėsčiųjų režimus, redaguokite OSM duomenis ir daug daugiau.</string>
+    <string name="quick_favorites_name_preset">Nuostatos pavadinimas</string>
+    <string name="quick_action_add_marker_descr">Bakstelėję veiksmo mygtuką pridėsite žemėlapio žymeklį ekrano centre.</string>
+    <string name="quick_action_take_audio_note_descr">Bakstelėję veiksmo mygtuką pridėsite garso įrašą ekrano centre.</string>
+    <string name="quick_action_take_video_note_descr">Bakstelėję veiksmo mygtuką pridėsite vazido įrašą ekrano centre.</string>
+    <string name="quick_action_take_photo_note_descr">Bakstelėję veiksmo mygtuką pridėsite foto pastabą ekrano centre.</string>
+    <string name="quick_action_add_osm_bug_descr">Bakstelėję veiksmo mygtuką pridėsite OSM pastabą ekrano centre.</string>
+    <string name="quick_action_add_poi_descr">Bakstelėję veiksmo mygtuką pridėsite LV-ą ekrano centre.</string>
+    <string name="quick_action_add_parking_descr">Bakstelėję veiksmo mygtuką pridėsite automobilio stovėjimo vietą ekrano centre.</string>
+    <string name="quick_action_duplicates">Nurodyto greito veiksmo pavadinimas jau naudojamas, todėl buvo pakeistas į %1$ s, kad būtų išvengta dubliavimo.</string>
+    <string name="quick_action_duplicate">Pasikartojantis greitojo veiksmo pavadinimas</string>
+    <string name="quick_action_showhide_poi_descr">Bakstelėjus veiksmo mygtuką bus parodoma arba paslepiama LV-a žemėlapyje.</string>
+    <string name="quick_action_btn_tutorial_descr">Nuspauskite ir vilkite mygtuką norėdami pakeisti jo padėtį ekrane.</string>
+    <string name="mappilary_no_internet_desc">Prisijunkite prie interneto jei norite matyti nuotraukas iš Mapillary.</string>
+    <string name="move_point">Perkelti tašką</string>
+    <string name="osm_recipients_label">OSM gavėjai</string>
+    <string name="total_donations">Iš viso paaukota</string>
+    <string name="nautical_renderer">Jūrinis</string>
+</resources>

@@ -1655,7 +1655,7 @@
 	<string name="poi_cuisine_chocolate">Súkkulaði</string>
 	<string name="poi_cuisine_wine">Vín</string>
 	<string name="poi_cuisine_potato">Kartöflur</string>
-	<string name="poi_cuisine_brunch">Bruns</string>
+	<string name="poi_cuisine_brunch">Bröns</string>
 	<string name="poi_cuisine_sub">Bátar</string>
 	<string name="poi_cuisine_pita">Pítur</string>
 	<string name="poi_cuisine_fondue">Fondú</string>
@@ -3091,11 +3091,11 @@
 	<string name="poi_amperage">Amperstyrkur</string>
 	<string name="poi_charging_station_output">Aflúttak hleðslustöðvar</string>
 
-	<string name="poi_map_type_topo">Tegund korts: landfræðileg</string>
-	<string name="poi_map_type_street">Tegund korts: götukort</string>
-	<string name="poi_map_type_scheme">Tegund korts: skematísk</string>
-	<string name="poi_map_size_city">Tegund korts: borgarkort</string>
-	<string name="poi_map_size_region">Tegund korts: héraðskort</string>
+	<string name="poi_map_type_topo">Gerð korts: landfræðileg</string>
+	<string name="poi_map_type_street">Gerð korts: götukort</string>
+	<string name="poi_map_type_scheme">Gerð korts: skematísk</string>
+	<string name="poi_map_size_city">Gerð korts: borgarkort</string>
+	<string name="poi_map_size_region">Gerð korts: héraðskort</string>
 
 	<string name="poi_letter_box">Bréfakassi</string>
 	<string name="poi_post_street">Gata</string>
@@ -3271,8 +3271,8 @@
 	<string name="poi_water_supply_water_trucking">Vatn með tankbílum</string>
 	<string name="poi_water_place_access_multifamilies">Fyrir margar fjölskyldur</string>
 
-	<string name="poi_map_type_toposcope">Tegund korts: skýringakort (toposcope)</string>
-	<string name="poi_map_size_site">Tegund korts: staðarkort</string>
+	<string name="poi_map_type_toposcope">Gerð korts: skýringakort (toposcope)</string>
+	<string name="poi_map_size_site">Gerð korts: staðarkort</string>
 	<string name="poi_wetland_reedbed">Sefbreiða</string>
 	<string name="poi_wetland_swamp">Skógmýri</string>
 	<string name="poi_wetland_saltern">Saltgerði</string>
@@ -3347,4 +3347,96 @@
 	<string name="poi_xmas_location">Jól: staðsetning</string>
 	<string name="poi_xmas_url">Jól: vefsvæði</string>
 
+	<string name="poi_climbing_style">Klifurstíll</string>
+
+<string name="poi_denomination_apostolic">Postulakirkjan</string>
+	<string name="poi_denomination_georgian_orthodox">Georgíska rétttrúnaðarkirkjan</string>
+	<string name="poi_denomination_scientist">Vísindakirkjan</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Eþíópíska tewahedo rétttrúnaðarkirkjan</string>
+	<string name="poi_stars_1">1 (Ferðaflokkur)</string>
+	<string name="poi_stars_1s">1S (Efri ferðaflokkur)</string>
+	<string name="poi_stars_2">2 (Staðalflokkur)</string>
+	<string name="poi_stars_2s">2S (Efri staðalflokkur)</string>
+	<string name="poi_stars_3">3 (Þægindi)</string>
+	<string name="poi_stars_3s">3S (Efri staðalflokkur)</string>
+	<string name="poi_stars_4">4 (Fyrsti flokkur)</string>
+	<string name="poi_stars_4s">4S (Efri fyrsti flokkur)</string>
+	<string name="poi_stars_5">5 (Lúxusflokkur)</string>
+	<string name="poi_stars_5s">5S (Efri lúxusflokkur)</string>
+	<string name="poi_cuisine_gastropub">Gastróbar</string>
+	<string name="poi_cuisine_smoothie">Þeytingur</string>
+	<string name="poi_cuisine_empanada">Empanöður</string>
+	<string name="poi_cuisine_pastel">Deigfylling</string>
+	<string name="poi_gambling_pachinko">Pachinko</string>
+	<string name="poi_animal_keeping_type_paddock">Tegund: gerði</string>
+	<string name="poi_animal_keeping_type_open_stable">Tegund: opið hólf</string>
+
+	<string name="poi_tower_construction_lattice">Uppbygging: grind</string>
+	<string name="poi_tower_construction_freestanding">Uppbygging: frístandandi</string>
+	<string name="poi_tower_construction_dish">Uppbygging: diskur</string>
+	<string name="poi_tower_construction_dome">Uppbygging: hvelfing</string>
+	<string name="poi_tower_construction_concealed">Uppbygging: dulbúið</string>
+
+	<string name="poi_railway_yard">Vörulestarstöð</string>
+
+	<string name="poi_coworking_space">Sameiginlegt vinnurými</string>
+
+	<string name="poi_ref_post">Póstnúmer</string>
+
+	<string name="poi_climbing_sport_yes">Sportklifur: já</string>
+	<string name="poi_climbing_sport_no">Sportklifur: nei</string>
+	<string name="poi_climbing_boulder_yes">Grettistök: já</string>
+	<string name="poi_climbing_boulder_no">Grettistök: nei</string>
+	<string name="poi_climbing_toprope_yes">Toppreipi: já</string>
+	<string name="poi_climbing_toprope_no">Toppreipi: nei</string>
+	<string name="poi_climbing_trad_yes">Hefðbundið klifur: já</string>
+	<string name="poi_climbing_trad_no">Hefðbundið klifur: nei</string>
+	<string name="poi_climbing_multipitch_yes">Marg-festu leiðir: já</string>
+	<string name="poi_climbing_multipitch_no">Marg-festu leiðir: nei</string>
+	<string name="poi_climbing_ice_yes">Ísklifur: já</string>
+	<string name="poi_climbing_ice_no">Ísklifur: nei</string>
+	<string name="poi_climbing_mixed_yes">Blandað klifur: já</string>
+	<string name="poi_climbing_mixed_no">Blandað klifur: nei</string>
+	<string name="poi_climbing_deepwater_yes">Frjálst klifur yfir djúpu vatni: já</string>
+	<string name="poi_climbing_deepwater_no">Frjálst klifur yfir djúpu vatni: nei</string>
+
+	<string name="poi_climbing_length">Klifurlengd</string>
+	<string name="poi_climbing_length_min">Lágm. lengd klifurs</string>
+	<string name="poi_climbing_length_max">Hám. lengd klifurs</string>
+	<string name="poi_climbing_rock_limestone">Steintegund í klifurleið: kalksteinn</string>
+	<string name="poi_climbing_rock_granite">Steintegund í klifurleið: granít</string>
+	<string name="poi_climbing_rock_sandstone">Steintegund í klifurleið: sandsteinn</string>
+	<string name="poi_climbing_rock_quartzite">Steintegund í klifurleið: kvartsít</string>
+	<string name="poi_climbing_rock_gneiss">Steintegund í klifurleið: gneiss</string>
+	<string name="poi_climbing_rock_porphyry">Steintegund í klifurleið: dílaberg</string>
+	<string name="poi_climbing_quality_solid">Gæði klifurleiðar: föst</string>
+	<string name="poi_climbing_quality_fragile">Gæði klifurleiðar: laus</string>
+	<string name="poi_climbing_bolted_yes">Varanlegar festur: já</string>
+	<string name="poi_climbing_bolted_no">Varanlegar festur: nei</string>
+	<string name="poi_climbing_orientation_n">Stefna veggs: N</string>
+	<string name="poi_climbing_orientation_ne">Stefna veggs: NA</string>
+	<string name="poi_climbing_orientation_e">Stefna veggs: A</string>
+	<string name="poi_climbing_orientation_se">Stefna veggs: SA</string>
+	<string name="poi_climbing_orientation_s">Stefna veggs: S</string>
+	<string name="poi_climbing_orientation_sw">Stefna veggs: SV</string>
+	<string name="poi_climbing_orientation_w">Stefna veggs: V</string>
+	<string name="poi_climbing_orientation_nw">Stefna veggs: NV</string>
+	<string name="poi_climbing_summit_log_yes">Gestabók uppi á toppi: já</string>
+	<string name="poi_climbing_summit_log_no">Gestabók uppi á toppi: nei</string>
+	<string name="poi_climbing_routes">Klifurleiðir</string>
+
+	<string name="poi_circumference">Ummál</string>
+	<string name="poi_diameter_crown">Þvermál trjákrónu</string>
+
+	<string name="poi_meadow_agricultural">Tegund: landbúnaður</string>
+	<string name="poi_meadow_perpetual">Tegund: varanlegt</string>
+	<string name="poi_meadow_transitional">Tegund: millibilsástand</string>
+	<string name="poi_meadow_pasture">Tegund: beitarhólf</string>
+
+	<string name="poi_frozen_food">Frosinn matur</string>
+
+	<string name="poi_agrarian">Landbúnaðarverslun</string>
+
+
+<string name="poi_health_specialty_biochemistry_yes">Lífefnafræði</string>
 	</resources>

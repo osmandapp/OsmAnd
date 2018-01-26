@@ -2986,11 +2986,11 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="context_menu_read_full_article">閱讀全文</string>
     <string name="context_menu_read_article">閱讀文章</string>
     <string name="context_menu_points_of_group">群組的全部標點</string>
-    <string name="open_from">已開啟自</string>
-    <string name="open_till">已開啟直到</string>
-    <string name="will_close_at">將關閉于</string>
-    <string name="will_open_at">將開啟于</string>
-    <string name="will_open_on">將開啟</string>
+    <string name="open_from">開始營業從</string>
+    <string name="open_till">營業至</string>
+    <string name="will_close_at">將結束于</string>
+    <string name="will_open_at">將營業于</string>
+    <string name="will_open_on">將營業于</string>
     <string name="what_is_here">這裡的內容：</string>
     <string name="pick_up_till">取得直到</string>
     <string name="additional_actions">輔助的操作</string>
@@ -3017,4 +3017,5 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 \n
 \n • 為快速標記建立，新增了快速坐標輸入畫面
 \n</string>
+    <string name="will_open_tomorrow_at">將在明天開幕</string>
     </resources>

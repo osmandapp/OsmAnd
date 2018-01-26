@@ -2608,4 +2608,8 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \n• Ótakmörkuð ókeypis niðurhöl, beint í forritinu
 \n• Þjöppuð ónettengd vektorkort, uppfærð einu sinni í mánuði
 \n• Val á milli heildargagna svæðis eða einungis vegakerfis (dæmi: öll gögn fyrir Japan eru 700 MB en 200 MB fyrir vegakerfið eingöngu)</string>
+    <string name="save_global_track_interval_descr">Veldu millibil skráninga í almenna leiðarskráningu (virkjað með viðmótshlutanum fyrir GPX-skráningu á kortinu).</string>
+    <string name="will_open_tomorrow_at">Mun opna á morgun kl.</string>
+    <string name="animate_my_location_desc">Virkja hreyfingu við hliðrun staðsetningar minnar á meðan leiðsögn stendur.</string>
+    <string name="storage_permission_restart_is_required">Núna hefur forritið heimild til að skrifa í ytri gagnageymslur. Það þarf að endurræsa forritið handvirkt.</string>
     </resources>

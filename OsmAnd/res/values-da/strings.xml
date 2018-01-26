@@ -3021,19 +3021,20 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="touring_view_renderer">Touringvisning (kontrast og detaljer)</string>
     <string name="nautical_renderer">Nautisk</string>
 <string name="rendering_attr_hidePOILabels_name">IP etiketter</string>
-    <string name="release_2_9">• Opdateret kontekstmenuen: viser, når interessepunkter åbner / lukker
-\n
-\n• Transportmenu: alle tilgængelige ruter er nu øverst
-\n
-\n• Wikipedia: tilføjet en knap for at åbne den oprindelige artikel, opdateres udseendet af artikler
-\n
-\n• Rute: tilføjet mulighed for at skifte start-og slutpunkt i et enkelt tryk
-\n
-\n• Noter: tilføjet sortering af type og dato
-\n
-\n• OSM redigeringer: viser et ikon og et navn på IP-kategorien, vis udførte handlinger
-\n
-\n• Ny hurtig koordinat input skærm for hurtig markør oprettelse
-\n
+    <string name="release_2_9">• Opdateret kontekstmenuen: viser, når et interessepunkt åbner / lukker 
+\n 
+\n• Transportmenu: alle tilgængelige ruter er nu øverst 
+\n 
+\n• Wikipedia: tilføjet en knap for at åbne den oprindelige artikel, opdateret udseende af artikler 
+\n 
+\n• Rute: tilføjet mulighed for at skifte start-og slutpunkt i et enkelt tryk 
+\n 
+\n• Noter: tilføjet sortering af type og dato 
+\n 
+\n• OSM redigeringer: viser et ikon og et navn på IP-kategorien, vis udførte handlinger 
+\n 
+\n• Ny hurtig koordinat input skærm for hurtig markør oprettelse 
+\n 
 \n</string>
+    <string name="will_open_tomorrow_at">Åbner i morgen kl.</string>
     </resources>
