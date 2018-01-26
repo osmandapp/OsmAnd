@@ -2910,7 +2910,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="all_markers_moved_to_history">Visi žymekliai perkelti į istorija</string>
     <string name="marker_moved_to_history">Žemėlapio žymeklis perkeltas į istoriją</string>
     <string name="marker_moved_to_active">Žemėlapio žymeklis perkeltas prie aktyvų</string>
-    <string name="passed">Paskutinį kartą naudota: %1$ s</string>
+    <string name="passed">Paskutinį kartą naudota: %1$s</string>
     <string name="osm_recipient_stat">Taisymų %1$ s, suma %2$ s mBTC</string>
     <string name="lang_lo">Laosiečių</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) yra žemėlapio ir navigacijos programa su prieiga prie nemokamų, pasaulinių ir aukštos kokybės OpenStreetMap (OSM) duomenų. Naudokitės balso ir vaizdo navigatoriumi, peržiūrėkite LV (lankytinas vietas), kurkite ir valdytkite GPX kelius, naudojkite kontūro linijos vizualizaciją ir aukščio info (įskiepių pagalba), pasirinkite vairavimo, dviračių, pėsčiųjų režimus, redaguokite OSM duomenis ir daug daugiau.</string>
