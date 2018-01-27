@@ -194,8 +194,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		registerListPreference(settings.ARRIVAL_DISTANCE_FACTOR, screen, arrivalNames, arrivalValues);
 
 		//array size should be equal!
-		Float[] speedLimitsKm = new Float[]{0f, 5f, 7f, 10f, 15f, 20f};
-		Float[] speedLimitsMiles = new Float[]{0f, 3f, 5f, 7f, 10f, 15f};
+		Float[] speedLimitsKm = new Float[]{-10f, -7f,-5f, 0f, 5f, 7f, 10f, 15f, 20f};
+		Float[] speedLimitsMiles = new Float[]{-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
 		if (settings.METRIC_SYSTEM.get() == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
 			String[] speedNames = new String[speedLimitsKm.length];
 			for (int i =0; i<speedLimitsKm.length;i++){
