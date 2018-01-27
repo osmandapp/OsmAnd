@@ -2858,4 +2858,5 @@
     <string name="nautical_renderer">Nautical</string>
     <string name="copy_location_name">Copy Point/POI name</string>
     <string name="toast_empty_name_error">Location has no name</string>
+    <string name="clipboard_message">Copied to clipboard</string>
 </resources>
