@@ -643,7 +643,7 @@ public class OpeningHoursParser {
 		private boolean off = false;
 
 		/**
-		 * Aadditional information or limitation.
+		 * Additional information or limitation.
 		 * https://wiki.openstreetmap.org/wiki/Key:opening_hours/specification#explain:comment
 		 */
 		private String comment;
@@ -1106,7 +1106,7 @@ public class OpeningHoursParser {
 						} else if (time > endTime && days[ad] && checkAnotherDay) {
 							diff = 24 * 60 - endTime  + time;
 						}
-						if (limit == WITHOUT_TIME_LIMIT || (diff != -1 && diff <= limit || limit == CURRENT_DAY_TIME_LIMIT)) {
+						if (limit == WITHOUT_TIME_LIMIT || ((diff != -1 && diff <= limit) || limit == CURRENT_DAY_TIME_LIMIT)) {
 							formatTime(startTime, sb);
 							break;
 						}
