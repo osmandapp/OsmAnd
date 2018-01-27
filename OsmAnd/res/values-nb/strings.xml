@@ -1978,7 +1978,7 @@
     <string name="osmo_start_service">OsMo-tjeneste</string>
     <string name="osmo_gpx_track_downloaded">OsMo-spor %1$s lastet ned.</string>
     <string name="select_index_file_to_download">Fant ikke noe. Hvis du ikke finner din region, kan du lage den selv (se http://osmand.net).</string>
-    <string name="none_selected_gpx">Ingen GPX-filer valgt. Trykk lenge for å velge et tilgjengelig spor.</string>
+    <string name="none_selected_gpx">Ingen GPX-filer valgt. For å velge lang-trykk et tilgjengelig spor.</string>
     <string name="gpx_split_interval">Oppdelingsintervall</string>
     <string name="gpx_info_asc_altitude">Nedstigning/stigning: %1$s</string>
     <string name="gpx_timespan">Tidsrom: %1$s</string>
@@ -2666,7 +2666,7 @@
     <string name="quick_action_showhide_poi_descr">Trykk på handlingsknappen vil vise eller skjule interessepunkter på kartet.</string>
     <string name="quick_action_page_list_descr">Trykk på handlingsknappen vil bla gjennom listen nedenfor.</string>
     <string name="quick_action_empty_param_error">Parameterne kan ikke være tomme</string>
-    <string name="quick_action_btn_tutorial_descr">Trykk lenge og dra knappen for å endre dens posisjon på skjermen.</string>
+    <string name="quick_action_btn_tutorial_descr">Lang-trykk og dra knappen for å endre dens posisjon på skjermen.</string>
     <string name="add_track_to_markers_descr">Velg et spor for å legge til dets rutepunkter til markørene. (Kun spor med rutepunkter er listet opp.)</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="depth_contour_descr">Kartsett som inneholder havdybdekoter og nautiske punkter.</string>
@@ -2712,9 +2712,17 @@
     <string name="commit_poi">Send inn interessepunkt</string>
     <string name="poi_deleted_localy">Interessepunkt blir slettet når du laster opp endringene dine</string>
     <string name="only_download_over_wifi">Bare nedlasting over WiFi</string>
-    <string name="map_widget_fps_info">Bildefrekvens; feilrettingsinfo</string>
+    <string name="map_widget_fps_info">Feilrettingsinfo for bildefrekvens</string>
     <string name="rendering_attr_hidePOILabels_name">Interessepunktpåskrifter</string>
     <string name="will_open_tomorrow_at">Åpner i morgen</string>
     <string name="winter_and_ski_renderer">Vinter og ski</string>
     <string name="touring_view_renderer">Turvisning (kontrast og detaljer)</string>
-    </resources>
+    <string name="disable_recording_once_app_killed_descrp">Vil sette GPX-logging i pausemodus når programmet avsluttes (via nylig brukte apper). (OsmAnds bakgrunnsindikasjon forsvinner fra Android-varslingslinjen.)</string>
+    <string name="route_is_too_long_v2">Denne ruten kan være for lang å beregne. Legg til mellomliggende reisemål hvis det ikke blir funnet noe resultat innen 10 minutter.</string>
+    <string name="intermediate_items_sort_return">Mellomliggende reisemål sortert igjen for å optimalisere deres rekkefølge på vei fra nåværende posisjon til målet.</string>
+    <string name="audionotes_location_not_defined">Sted å assosiere med notatet er ikke definert ennå. \"Bruk posisjon …\" for å tilordne et notat til det angitte stedet.</string>
+    <string name="add_waypoint_dialog_title">Legg til rutepunkt i innspilt GPX-spor</string>
+    <string name="voice_is_not_available_msg">Taleveiledning er ikke tilgjengelig, gå til \'Innstillinger\' → \'Navigeringsinnstillinger\' → \'Taleveiledning\' og velg eller last ned en språkpakke.</string>
+    <string name="use_fast_recalculation_desc">For lange turer, beregn på nytt bare den første delen av ruten.</string>
+    <string name="nautical_renderer">Nautisk</string>
+</resources>
