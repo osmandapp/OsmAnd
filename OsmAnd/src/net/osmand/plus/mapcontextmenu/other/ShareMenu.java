@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.text.TextUtilsCompat;
 import android.support.v4.view.ViewCompat;
+import android.widget.Toast;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
@@ -30,6 +31,7 @@ public class ShareMenu extends BaseMenuController {
 	public enum ShareItem {
 		MESSAGE(R.drawable.ic_action_message, R.string.shared_string_send),
 		CLIPBOARD(R.drawable.ic_action_copy, R.string.shared_string_copy),
+		NAME(R.drawable.ic_action_copy, R.string.copy_location_name),
 		GEO(R.drawable.ic_world_globe_dark, R.string.share_geo),
 		QR_CODE(R.drawable.ic_action_qrcode, R.string.shared_string_qr_code);
 
@@ -58,6 +60,7 @@ public class ShareMenu extends BaseMenuController {
 		List<ShareItem> list = new LinkedList<>();
 		list.add(ShareItem.MESSAGE);
 		list.add(ShareItem.CLIPBOARD);
+		list.add(ShareItem.NAME);
 		list.add(ShareItem.GEO);
 		list.add(ShareItem.QR_CODE);
 		return list;
@@ -106,6 +109,15 @@ public class ShareMenu extends BaseMenuController {
 				break;
 			case CLIPBOARD:
 				ShareDialog.sendToClipboard(getMapActivity(), sms);
+				break;
+			case NAME:
+				if (!Algorithms.isEmpty(title)) {
+					ShareDialog.sendToClipboard(getMapActivity(), title);
+				} else {
+					Toast.makeText(getMapActivity(),
+							R.string.toast_empty_name_error,
+							Toast.LENGTH_LONG).show();
+				}
 				break;
 			case GEO:
 				Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUrl));
