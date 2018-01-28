@@ -3031,18 +3031,19 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_marker">Marcatore</string>
     <string name="shared_string_without_name">Senza nome</string>
     <string name="rendering_attr_hidePOILabels_name">Etichette PDI</string>
-    <string name="release_2_9">"\\022 Aggiornato il menù contestuale: mostra quando i PDI aprono / chiudono
-\n
-\n • Menù trasporto pubblico: tutti i percorsi disponibili sono ora in alto
-\n
-\n • Wikipedia: aggiunto il pulsante per aprire l\'articolo originale, aggiornato l\'aspetto degli  articoli
-\n
-\n • Percorso: aggiunta la possibilità di scambiare la partenza è la destinazione con un tocco
-\n
-\n • Notes aggiunto l\'ordina per data e per tipo
-\n
-\n • Modifiche OSM: mostra un\'icona e il nome della categoria del PDI, mostra le azioni completate
-\n
-\n • Nuova schermata veloce per l\'inserimento delle coordinate per la creazione veloce di marcatori"</string>
+    <string name="release_2_9">\\022 Aggiornato il menù contestuale: mostra quando i PDI aprono / chiudono 
+\n 
+\n • Menù trasporto pubblico: tutti i percorsi disponibili sono ora in alto 
+\n 
+\n • Wikipedia: aggiunto il pulsante per aprire l\'articolo originale, aggiornato l\'aspetto degli articoli 
+\n 
+\n • Percorso: aggiunta la possibilità di scambiare la partenza e la destinazione con un tocco 
+\n 
+\n • Note aggiunto l\'ordina per data e per tipo 
+\n 
+\n • Modifiche OSM: mostra un\'icona e il nome della categoria del PDI, mostra le azioni completate 
+\n 
+\n • Nuova schermata veloce per l\'inserimento delle coordinate per la creazione veloce di marcatori</string>
     <string name="osm_recipient_stat">Modifiche %1$s, sum %2$s mBTC</string>
+    <string name="copy_location_name">Copia il nome del punto/PDI</string>
     </resources>
