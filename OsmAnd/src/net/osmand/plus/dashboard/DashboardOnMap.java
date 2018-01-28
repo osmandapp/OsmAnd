@@ -46,6 +46,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
@@ -1515,7 +1516,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 							start.start = false;
 							start.intermediate = startInd != allTargets.size() - 1;
 							if (targetPointsHelper.getPointToStart() == null) {
-								start.getOriginalPointDescription().setName(start.getLatitude() + ", " + start.getLongitude());
+								start.getOriginalPointDescription().setName(PointDescription
+										.getLocationNamePlain(getMyApplication(), start.getLatitude(), start.getLongitude()));
 							}
 							first.start = true;
 							first.intermediate = false;
