@@ -2936,11 +2936,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="empty_state_av_notes">Rabi natatki!</string>
     <string name="empty_state_av_notes_desc">Dadajcie aŭdyjo-, videa- ci fotanatatku na lubuju kropku na mapie, vykarystoŭvajučy vidžet ci kantekstnaje mieniu.</string>
     <string name="modify_the_search_query">Źmianicie pošukavy zapyt.</string>
-    <string name="release_3_0">• Vyjaŭliennie stop-sihnalaŭ ciapier uličvaje napramak ruchu
-\n
-\n • Navy alharytm, što nadaje dziejsnyja značenni padjomu/spusku dlia GPX-sliadoŭ
-\n
-\n • Čas chadźby ŭ zaliežnasci ad miascovasci (padjomu) (pravila Niejsmita)
+    <string name="release_3_0">\\022 
 \n
 \n</string>
     <string name="what_is_here">Što tut:</string>
@@ -2972,7 +2968,13 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="lang_lo">Łaoskaja</string>
     <string name="will_open_tomorrow_at">Adčynicca zaŭtra a</string>
     <string name="rendering_attr_hidePOILabels_name">Nazvy POI</string>
-    <string name="release_2_9">\\022 Abnoŭlienaje kantekstnaje mieniu: pakazvaje kali adkryvajucca/zakryvajucca POI 
+    <string name="release_2_9">• Vyjaŭliennie stop-sihnalaŭ ciapier uličvaje napramak ruchu
+\n
+\n • Navy alharytm, što nadaje dziejsnyja značenni padjomu/spusku dlia GPX-sliadoŭ
+\n
+\n • Čas chadźby ŭ zaliežnasci ad miascovasci (padjomu) (pravila Niejsmita)
+\n
+\n • Abnoŭlienaje kantekstnaje mieniu: pakazvaje kali adkryvajucca/zakryvajucca POI 
 \n 
 \n • Mieniu transparta: usie dastupnyja maršruty ciapier na miescie 
 \n 
@@ -2991,4 +2993,6 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="winter_and_ski_renderer">Zimovy/lyžny</string>
     <string name="touring_view_renderer">Turystyčny (kantrast i detali)</string>
     <string name="nautical_renderer">Marski</string>
+<string name="copy_location_name">Kapijavać nazvu kropki/POI</string>
+    <string name="toast_empty_name_error">Miesca nie maje nazvy</string>
 </resources>
