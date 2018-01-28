@@ -3712,4 +3712,17 @@
 	<string name="poi_climbing_routes">Grimpad-kursoj</string>
 
 
+<string name="poi_circumference">Ĉirkaŭo</string>
+	<string name="poi_diameter_crown">Ĉirkaŭo de arbokrono</string>
+
+	<string name="poi_meadow_agricultural">Speco: falĉata</string>
+	<string name="poi_meadow_perpetual">Speco: konservata de naturo</string>
+	<string name="poi_meadow_transitional">Speco: nekonservata (arbustiĝas)</string>
+	<string name="poi_meadow_pasture">Speco: paŝtejo</string>
+
+	<string name="poi_frozen_food">Frostigit-manĝaĵa vendejo</string>
+
+	<string name="poi_agrarian">Agrokultura vendejo</string>
+
+
 </resources>
