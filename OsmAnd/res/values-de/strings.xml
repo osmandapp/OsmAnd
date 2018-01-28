@@ -1672,7 +1672,7 @@ Mit Neuanmeldung fortfahren?</string>
     
     <string name="shared_string_show_all">Alle anzeigen</string>
     <string name="coordinates">Koordinaten</string>
-    <string name="error_avoid_specific_road">Es konnte keine alternative Streckenführung gefunden werden</string>
+    <string name="error_avoid_specific_road">Keine Umgehungsstraße gefunden</string>
     <string name="shared_string_dismiss">Verwerfen</string>
     <string name="everything_up_to_date">Alle Daten aktuell</string>
     <string name="use_opengl_render">OpenGL-Rendering verwenden</string>
@@ -1720,7 +1720,7 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="shared_string_my_location">Meine Position</string>
 
     <string name="navigation_over_track">Navigation entlang der Strecke starten?</string>
-    <string name="avoid_roads_msg">Sie können die Route ändern, indem Sie Straßen auswählen, die vermieden werden sollen</string>
+    <string name="avoid_roads_msg">Sie können eine Alternativroute einleiten, indem Sie Straßen auswählen, die vermieden werden sollen</string>
     <string name="enable_proxy_title">HTTP-Proxy aktivieren</string>
     <string name="enable_proxy_descr">HTTP-Proxy für alle Netzwerkanfragen einrichten.</string>
     <string name="proxy_host_title">Proxy-Host</string>
