@@ -2860,11 +2860,7 @@ Proporciona un código completo</string>
     <string name="by_date">Por fecha</string>
     <string name="by_type">Por tipo</string>
     <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
-    <string name="release_3_0">• La detección de señales de alto, ahora considera la dirección de desplazamiento
-\n
-\n • Nuevo algoritmo que proporciona valores significativos de ascenso y descenso para trazas GPX.
-\n
-\n • El tiempo de caminata es consciente del terreno ascendente (regla de Naismith).
+    <string name="release_3_0">\\022 
 \n
 \n</string>
     <string name="av_locations_selected_desc">Archivo GPX con coordenadas y datos de las notas elegidas.</string>
@@ -2908,4 +2904,6 @@ Proporciona un código completo</string>
     <string name="winter_and_ski_renderer">Invierno y esquí</string>
     <string name="touring_view_renderer">Vista de Touring (contraste y detalles)</string>
     <string name="nautical_renderer">Náutico</string>
+<string name="copy_location_name">Copiar nombre del punto/PDI</string>
+    <string name="toast_empty_name_error">Ubicación sin nombre</string>
 </resources>
