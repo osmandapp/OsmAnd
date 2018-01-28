@@ -3758,4 +3758,17 @@
 	<string name="poi_climbing_routes">Rutas de escalada</string>
 
 
+<string name="poi_circumference">Circunferencia</string>
+	<string name="poi_diameter_crown">Diámetro de la corona</string>
+
+	<string name="poi_meadow_agricultural">Tipo: Agrícola</string>
+	<string name="poi_meadow_perpetual">Tipo: Perpetuo</string>
+	<string name="poi_meadow_transitional">Tipo: Temporario</string>
+	<string name="poi_meadow_pasture">Tipo: Pasto</string>
+
+	<string name="poi_frozen_food">Alimentos congelados</string>
+
+	<string name="poi_agrarian">Almacén agrícola</string>
+
+
 </resources>
