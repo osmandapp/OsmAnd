@@ -2725,4 +2725,7 @@
     <string name="voice_is_not_available_msg">Taleveiledning er ikke tilgjengelig, gå til \'Innstillinger\' → \'Navigeringsinnstillinger\' → \'Taleveiledning\' og velg eller last ned en språkpakke.</string>
     <string name="use_fast_recalculation_desc">For lange turer, beregn på nytt bare den første delen av ruten.</string>
     <string name="nautical_renderer">Nautisk</string>
+<string name="day_off_label">stengt (fridag)</string>
+    <string name="copy_location_name">Kopier punkt/interessepunkt-navn</string>
+    <string name="toast_empty_name_error">Sted har ikke noe navn</string>
 </resources>
