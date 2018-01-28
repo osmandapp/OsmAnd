@@ -37,6 +37,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -71,8 +72,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public static final float SKIP_HALF_SCREEN_STATE_KOEF = .21f;
 	public static final int ZOOM_IN_STANDARD = 17;
 
+	public static final int CURRENT_Y_UNDEFINED = Integer.MAX_VALUE;
+
 	private View view;
-	private View mainView;
+	private InterceptorLinearLayout mainView;
 	private View zoomButtonsView;
 	private ImageButton zoomInButtonView;
 	private ImageButton zoomOutButtonView;
@@ -246,6 +249,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		final View.OnTouchListener slideTouchListener = new View.OnTouchListener() {
 			private float dy;
 			private float dyMain;
+			private float mDownY;
 			private VelocityTracker velocity;
 			private boolean slidingUp;
 			private boolean slidingDown;
@@ -257,35 +261,40 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 
-				if (singleTapDetector.onTouchEvent(event)) {
-					moving = false;
-					if (hasMoved) {
-						applyPosY(getViewY(), false, false, 0, 0, 0);
+				if (event.getY() <= menuTopViewHeight) {
+					if (singleTapDetector.onTouchEvent(event)) {
+						moving = false;
+						if (hasMoved) {
+							applyPosY(getViewY(), false, false, 0, 0, 0);
+						}
+						openMenuHalfScreen();
+						return true;
 					}
-					openMenuHalfScreen();
-					return true;
-				}
 
-				if (menu.isLandscapeLayout()) {
-					if (swipeDetector.onTouchEvent(event)) {
-						menu.close();
+					if (menu.isLandscapeLayout()) {
+						if (swipeDetector.onTouchEvent(event)) {
+							menu.close();
+						}
+						return true;
 					}
-					return true;
 				}
 
 				switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
 						hasMoved = false;
+						mDownY = event.getRawY();
 						dy = event.getY();
 						dyMain = getViewY();
 						velocity = VelocityTracker.obtain();
 						velocityY = 0;
 						maxVelocityY = 0;
 						velocity.addMovement(event);
-						moving = true;
 						break;
 
 					case MotionEvent.ACTION_MOVE:
+						if (Math.abs(event.getRawY() - mDownY) > mainView.getTouchSlop()) {
+							moving = true;
+						}
 						if (moving) {
 							hasMoved = true;
 							float y = event.getY();
@@ -328,20 +337,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 		};
 
-		View topView = view.findViewById(R.id.context_menu_top_view);
-		topView.setOnTouchListener(slideTouchListener);
 		View topShadowAllView = view.findViewById(R.id.context_menu_top_shadow_all);
 		AndroidUtils.setBackground(getMapActivity(), topShadowAllView, nightMode, R.drawable.bg_map_context_menu_light,
 				R.drawable.bg_map_context_menu_dark);
-		topShadowAllView.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getY() <= dpToPx(SHADOW_HEIGHT_TOP_DP) || event.getAction() != MotionEvent.ACTION_DOWN)
-					return slideTouchListener.onTouch(v, event);
-				else
-					return false;
-			}
-		});
+
+		((InterceptorLinearLayout) mainView).setListener(slideTouchListener);
+		mainView.setOnTouchListener(slideTouchListener);
 
 		buildHeader();
 
@@ -507,7 +508,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		buildBottomView();
 
-		view.findViewById(R.id.context_menu_bottom_scroll).setBackgroundColor(getResources()
+		LockableScrollView bottomScrollView = (LockableScrollView) view.findViewById(R.id.context_menu_bottom_scroll);
+		bottomScrollView.setScrollingEnabled(false);
+		bottomScrollView.setBackgroundColor(getResources()
 				.getColor(nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
 		view.findViewById(R.id.context_menu_bottom_view).setBackgroundColor(getResources()
 				.getColor(nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
@@ -659,7 +662,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
 						   final int previousMenuState, final int newMenuState, int dZoom) {
-		final int posY = getPosY(needCloseMenu);
+		final int posY = getPosY(currentY, needCloseMenu);
 		if (currentY != posY || dZoom != 0) {
 			if (posY < currentY) {
 				updateMainViewLayout(posY);
@@ -897,12 +900,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (view != null) {
 			View bottomView = view.findViewById(R.id.context_menu_bottom_view);
 			if (menu.isExtended()) {
-				bottomView.setOnTouchListener(new View.OnTouchListener() {
-					@Override
-					public boolean onTouch(View v, MotionEvent event) {
-						return true;
-					}
-				});
 				menu.build(bottomView);
 			}
 		}
@@ -1244,10 +1241,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private int getPosY() {
-		return getPosY(false);
+		return getPosY(CURRENT_Y_UNDEFINED, false);
 	}
 
-	private int getPosY(boolean needCloseMenu) {
+	private int getPosY(final int currentY, boolean needCloseMenu) {
 		if (needCloseMenu) {
 			return screenHeight;
 		}
@@ -1272,8 +1269,23 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				posY = Math.max(posY, minHalfY);
 				break;
 			case MenuState.FULL_SCREEN:
-				posY = -dpToPx(SHADOW_HEIGHT_TOP_DP);
-				posY = addStatusBarHeightIfNeeded(posY);
+				if (currentY != CURRENT_Y_UNDEFINED) {
+					int maxPosY = viewHeight - menuFullHeightMax;
+					int minPosY = Math.max(maxPosY, minHalfY);
+					if (maxPosY > minPosY) {
+						maxPosY = minPosY;
+					}
+					if (currentY > minPosY) {
+						posY = minPosY;
+					} else if (currentY < maxPosY) {
+						posY = maxPosY;
+					} else {
+						posY = currentY;
+					}
+				} else {
+					posY = -dpToPx(SHADOW_HEIGHT_TOP_DP);
+					posY = addStatusBarHeightIfNeeded(posY);
+				}
 				break;
 			default:
 				break;
