@@ -3689,4 +3689,16 @@
 	<string name="poi_payment_centre">支付中心</string>
 	<string name="poi_money_transfer">匯款</string>
 
-</resources>
+<string name="poi_climbing_style">攀登方式</string>
+
+<string name="poi_ref_post">郵遞區號</string>
+
+	<string name="poi_climbing_sport_yes">運動：是的</string>
+	<string name="poi_climbing_sport_no">運動：沒有</string>
+	<string name="poi_climbing_boulder_yes">抱石：是的</string>
+	<string name="poi_climbing_boulder_no">抱石：沒有</string>
+	<string name="poi_climbing_toprope_yes">確保繩：是的</string>
+	<string name="poi_climbing_toprope_no">確保繩：沒有</string>
+	<string name="poi_climbing_trad_yes">傳統攀登：是的</string>
+	<string name="poi_climbing_trad_no">傳統攀登：不是</string>
+	</resources>
