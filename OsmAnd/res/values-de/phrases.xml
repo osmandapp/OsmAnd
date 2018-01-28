@@ -3663,4 +3663,37 @@
 
 	<string name="poi_climbing_style">Klettertechnik</string>
 
+<string name="poi_ref_post">Postleitzahl</string>
+
+	<string name="poi_climbing_sport_yes">Sport: ja</string>
+	<string name="poi_climbing_sport_no">Sport: nein</string>
+	<string name="poi_climbing_trad_yes">Traditionell: ja</string>
+	<string name="poi_climbing_trad_no">Traditionell: nein</string>
+	<string name="poi_climbing_ice_yes">Eis: ja</string>
+	<string name="poi_climbing_ice_no">Eis: nein</string>
+	<string name="poi_climbing_rock_limestone">Kletterfelsen: Kalkstein</string>
+	<string name="poi_climbing_rock_granite">Kletterfelsen: Granit</string>
+	<string name="poi_climbing_rock_sandstone">Kletterfelsen: Sandstein</string>
+	<string name="poi_climbing_rock_quartzite">Kletterfelsen: Quarzit</string>
+	<string name="poi_climbing_rock_gneiss">Kletterfelsen: Gneis</string>
+	<string name="poi_climbing_rock_porphyry">Kletterfelsen: Porphyr</string>
+	<string name="poi_climbing_orientation_n">Wandausrichtung: N</string>
+	<string name="poi_climbing_orientation_ne">Wandausrichtung: NO</string>
+	<string name="poi_climbing_orientation_e">Wandausrichtung: O</string>
+	<string name="poi_climbing_orientation_se">Wandausrichtung: SO</string>
+	<string name="poi_climbing_orientation_s">Wandausrichtung: S</string>
+	<string name="poi_climbing_orientation_sw">Wandausrichtung: SW</string>
+	<string name="poi_climbing_orientation_w">Wandausrichtung: W</string>
+	<string name="poi_climbing_orientation_nw">Wandausrichtung: NW</string>
+	<string name="poi_climbing_routes">Kletterrouten</string>
+
+	<string name="poi_diameter_crown">Durchmesser der Krone</string>
+
+	<string name="poi_meadow_agricultural">Typ: landwirtschaftlich</string>
+	<string name="poi_meadow_transitional">Typ: vorübergehend</string>
+	<string name="poi_frozen_food">Tiefkühlkost</string>
+
+	<string name="poi_agrarian">Hofladen</string>
+
+
 </resources>
