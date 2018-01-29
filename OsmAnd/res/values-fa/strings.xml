@@ -2013,7 +2013,7 @@
     <string name="city_type_district">ناحیه</string>
     <string name="city_type_neighbourhood">محله</string>
     <string name="map_widget_search">جست‌وجو</string>
-	<string name="shared_string_is_open_24_7">ساعت کار 24/7</string>
+	<string name="shared_string_is_open_24_7">۲۴/۷ باز است</string>
     <string name="storage_directory_card">کارت حافظه</string>
     <string name="coords_format">قالب مختصات</string>
     <string name="coords_format_descr">قالب نمایش مختصات جغرافیایی را مشخص کنید.</string>
