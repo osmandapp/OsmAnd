@@ -251,10 +251,14 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				newTargetPoint = targetPointsHelper.getPointToNavigate();
 			} else if (oldPoint.intermediate) {
 				List<TargetPoint> points = targetPointsHelper.getIntermediatePointsWithTarget();
-				newTargetPoint = new TargetPoint(position,
-						new PointDescription(PointDescription.POINT_TYPE_LOCATION, ""));
-				points.set(points.indexOf(oldPoint), newTargetPoint);
-				targetPointsHelper.reorderAllTargetPoints(points, true);
+				int i = points.indexOf(oldPoint);
+				if (i != -1) {
+					newTargetPoint = new TargetPoint(position,
+							new PointDescription(PointDescription.POINT_TYPE_LOCATION, ""));
+					points.set(i, newTargetPoint);
+					targetPointsHelper.reorderAllTargetPoints(points, true);
+				}
+
 			}
 			result = true;
 		}
