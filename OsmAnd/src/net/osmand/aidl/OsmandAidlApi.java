@@ -1135,6 +1135,24 @@ public class OsmandAidlApi {
 		return false;
 	}
 
+	boolean removeGpx(String fileName) {
+		if (!Algorithms.isEmpty(fileName)) {
+			final File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
+			if (f.exists()) {
+				new AsyncTask<File, Void, Void>() {
+
+					@Override
+					protected Void doInBackground(File... files) {
+						Algorithms.removeAllFiles(f);
+						app.getGpxDatabase().remove(f);
+						return null;
+					}
+				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
+			}
+		}
+		return false;
+	}
+
 	boolean setMapLocation(double latitude, double longitude, int zoom, boolean animated) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_SET_MAP_LOCATION);

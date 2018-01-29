@@ -15,6 +15,7 @@ import net.osmand.aidl.favorite.group.UpdateFavoriteGroupParams;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.gpx.HideGpxParams;
 import net.osmand.aidl.gpx.ImportGpxParams;
+import net.osmand.aidl.gpx.RemoveGpxParams;
 import net.osmand.aidl.gpx.ShowGpxParams;
 import net.osmand.aidl.gpx.StartGpxRecordingParams;
 import net.osmand.aidl.gpx.StopGpxRecordingParams;
@@ -267,6 +268,14 @@ public class OsmandAidlService extends Service {
 		@Override
 		public boolean getActiveGpx(List<ASelectedGpxFile> files) throws RemoteException {
 			return getApi().getActiveGpx(files);
+		}
+
+		@Override
+		public boolean removeGpx(RemoveGpxParams params) throws RemoteException {
+			if (params != null && params.getFileName() != null) {
+				return getApi().removeGpx(params.getFileName());
+			}
+			return false;
 		}
 
 		@Override
