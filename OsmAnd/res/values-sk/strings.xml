@@ -3032,4 +3032,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="winter_and_ski_renderer">Zima a lyžovanie</string>
     <string name="touring_view_renderer">Cestovanie (kontrast a detaily)</string>
     <string name="nautical_renderer">Námorný</string>
+<string name="copy_location_name">Kopírovať názov bodu</string>
+    <string name="toast_empty_name_error">Umiestnenie nemá žiadny názov</string>
 </resources>
