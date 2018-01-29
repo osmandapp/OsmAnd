@@ -227,10 +227,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@Override
 	public boolean isObjectMovable(Object o) {
-		TargetPointsHelper targetPointsHelper = map.getMyApplication().getTargetPointsHelper();
 		if (o != null && o instanceof TargetPoint) {
-			TargetPoint tp = (TargetPoint) o;
-			return targetPointsHelper.getAllPoints().contains(tp);
+			TargetPointsHelper targetPointsHelper = map.getMyApplication().getTargetPointsHelper();
+			return targetPointsHelper.getAllPoints().contains(o);
 		}
 		return false;
 	}
