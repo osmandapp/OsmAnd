@@ -42,6 +42,7 @@ import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.ExportOptionsBottomSheetDialogFragment.ExportOptionsFragmentListener;
+import net.osmand.plus.osmedit.FileTypeBottomSheetDialogFragment.FileTypeFragmentListener;
 import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
 import net.osmand.plus.osmedit.OsmPoint.Group;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
@@ -122,6 +123,10 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		Fragment exportOptFragment = fm.findFragmentByTag(ExportOptionsBottomSheetDialogFragment.TAG);
 		if (exportOptFragment != null) {
 			((ExportOptionsBottomSheetDialogFragment) exportOptFragment).setListener(createExportOptionsFragmentListener());
+		}
+		Fragment fileTypeFragment = fm.findFragmentByTag(FileTypeBottomSheetDialogFragment.TAG);
+		if (fileTypeFragment != null) {
+			((FileTypeBottomSheetDialogFragment) fileTypeFragment).setListener(createFileTypeFragmentListener());
 		}
 
 		plugin.getPoiModificationLocalUtil().addNodeCommittedListener(this);
@@ -517,18 +522,42 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			@Override
 			public void onPoiClick() {
 				Toast.makeText(getContext(), "poi", Toast.LENGTH_SHORT).show();
+				openFileTypeMenu();
 			}
 
 			@Override
 			public void onOsmNotesClick() {
 				Toast.makeText(getContext(), "osm notes", Toast.LENGTH_SHORT).show();
+				openFileTypeMenu();
 			}
 
 			@Override
 			public void onAllDataClick() {
 				Toast.makeText(getContext(), "all data", Toast.LENGTH_SHORT).show();
+				openFileTypeMenu();
 			}
 		};
+	}
+
+	private FileTypeFragmentListener createFileTypeFragmentListener() {
+		return new FileTypeFragmentListener() {
+			@Override
+			public void onOscClick() {
+				Toast.makeText(getContext(), "osc", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onGpxClick() {
+				Toast.makeText(getContext(), "gpx", Toast.LENGTH_SHORT).show();
+			}
+		};
+	}
+
+	private void openFileTypeMenu() {
+		FileTypeBottomSheetDialogFragment fragment = new FileTypeBottomSheetDialogFragment();
+		fragment.setUsedOnMap(false);
+		fragment.setListener(createFileTypeFragmentListener());
+		fragment.show(getChildFragmentManager(), FileTypeBottomSheetDialogFragment.TAG);
 	}
 
 	protected OsmPoint getPointAfterModify(OsmPoint info) {
