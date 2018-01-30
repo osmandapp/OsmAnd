@@ -11,7 +11,7 @@
 		<string name="poi_water_transport">Transporte aquático</string>
 		<string name="poi_bicycle_transport">Bicicleta</string>
 		<string name="poi_aerialway_transport">Teleférico</string>
-	<string name="poi_man_made">Construção humana</string>
+	<string name="poi_man_made">Estrutura</string>
 		<string name="poi_transport_construction">Transporte em construção</string>
 		<string name="poi_water_supply">Abastecimento de água</string>
 		<string name="poi_power">Energia elétrica</string>
@@ -79,7 +79,7 @@
 	<string name="poi_fabric">Loja de tecidos</string>
 	<string name="poi_bedding">Loja de roupa de cama</string>
 	<string name="poi_dive">Equipamento de mergulho</string>
-	<string name="poi_doityourself">Artigos para casa</string>
+	<string name="poi_doityourself">Bricolagem</string>
 	<string name="poi_erotic">Sex shop</string>
 	<string name="poi_fishing">Equipamento de pesca</string>
 	<string name="poi_florist">Floricultura</string>
@@ -90,7 +90,7 @@
 	<string name="poi_shop_yes">Loja geral</string>
 	<string name="poi_gift">Loja de presentes</string>
 	<string name="poi_glaziery">Vidraçaria</string>
-	<string name="poi_hardware">Loja de material de construção</string>
+	<string name="poi_hardware">Loja de materiais de construção</string>
 	<string name="poi_hearing_aids">Loja de aparelhos auditivos</string>
 	<string name="poi_herbalist">Ervanária</string>
 	<string name="poi_hifi">Loja de aparelhos hi-fi</string>
@@ -646,9 +646,9 @@
 	<string name="poi_craft_hvac">Aquecimento, ventilação, ar condicionado</string>
 	<string name="poi_craft_insulation">Isolação térmica</string>
 	<string name="poi_craft_jeweller">Joalheria</string>
-	<string name="poi_craft_locksmith">Serralheria</string>
-	<string name="poi_craft_key_cutter">Chaveiro</string>
-	<string name="poi_craft_metal_construction">Ofício de construção em metal</string>
+	<string name="poi_craft_locksmith">Chaveiro</string>
+	<string name="poi_craft_key_cutter">Copiador de chaves</string>
+	<string name="poi_craft_metal_construction">Serralheria</string>
 	<string name="poi_craft_optician">Ótica</string>
 	<string name="poi_craft_painter">Pintor</string>
 	<string name="poi_craft_parquet_layer">Instalador de parquet</string>
@@ -1161,10 +1161,10 @@
 	<string name="poi_wholesale">Atacado</string>
 
 	<string name="poi_trade_building_supplies">Materiais de construção</string>
-	<string name="poi_trade_plumbing">Material de canalização</string>
-	<string name="poi_trade_agricultural_supplies">Suprimentos agrícolas</string>
-	<string name="poi_trade_wood">Suprimentos de madeira</string>
-	<string name="poi_trade_tile">Suprimentos de telha</string>
+	<string name="poi_trade_plumbing">Tubos e conexões</string>
+	<string name="poi_trade_agricultural_supplies">Implementos agrícolas</string>
+	<string name="poi_trade_wood">Madeiras</string>
+	<string name="poi_trade_tile">Telhas</string>
 
 	<string name="poi_population">População</string>
 
@@ -2349,15 +2349,15 @@
 	<string name="poi_artist_name">Artista</string>
 	<string name="poi_sculptor">Escultor</string>
 
-	<string name="poi_building_type_church">Tipo de construção: igreja</string>
-	<string name="poi_building_type_chapel">Tipo de construção: capela</string>
-	<string name="poi_building_type_mosque">Tipo de construção: mesquita</string>
-	<string name="poi_building_type_temple">Tipo de construção: templo</string>
-	<string name="poi_building_type_cathedral">Tipo de construção: catedral</string>
-	<string name="poi_building_type_monastery">Tipo de construção: mosteiro</string>
-	<string name="poi_building_type_basilica">Tipo de construção: basílica</string>
-	<string name="poi_building_type_synagogue">Tipo de construção: sinagoga</string>
-	<string name="poi_building_type_shrine">Tipo de construção: santuário</string>
+	<string name="poi_building_type_church">Tipo de edificação: igreja</string>
+	<string name="poi_building_type_chapel">Tipo de edificação: capela</string>
+	<string name="poi_building_type_mosque">Tipo de edificação: mesquita</string>
+	<string name="poi_building_type_temple">Tipo de edificação: templo</string>
+	<string name="poi_building_type_cathedral">Tipo de edificação: catedral</string>
+	<string name="poi_building_type_monastery">Tipo de edificação: mosteiro</string>
+	<string name="poi_building_type_basilica">Tipo de edificação: basílica</string>
+	<string name="poi_building_type_synagogue">Tipo de edificação: sinagoga</string>
+	<string name="poi_building_type_shrine">Tipo de edificação: santuário</string>
 
 	<string name="poi_cross">Cruz</string>
 	<string name="poi_prison_camp">Antigo campo de detenção</string>
@@ -2538,7 +2538,7 @@
 	<string name="poi_health_specialty_depth_psychology_yes">Psicologia profunda</string>
 	<string name="poi_health_specialty_behavior_yes">Comportamental</string>
 
-	<string name="poi_building_type_pyramid">Tipo de construção: pirâmide</string>
+	<string name="poi_building_type_pyramid">Tipo de edificação: pirâmide</string>
 
 <string name="poi_pa">Pa (assentamento fortificado maori)</string>
 
