@@ -12,11 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.ConsoleMessage;
 import android.webkit.JavascriptInterface;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
@@ -237,7 +233,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		view.setLayoutParams(lp);
 		webView.setWebViewClient(new WebViewClient() {
 			@Override
-			public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 				webView.loadUrl("about:blank");
 				noInternetView.setVisibility(View.VISIBLE);
 			}
