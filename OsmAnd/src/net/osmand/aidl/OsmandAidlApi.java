@@ -944,6 +944,7 @@ public class OsmandAidlApi {
 					app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
 			GpxDataItem gpxDataItem = new GpxDataItem(destination, col);
+			gpxDataItem.setApiImported(true);
 			app.getGpxDatabase().add(gpxDataItem);
 		} else {
 			GpxDataItem item = app.getGpxDatabase().getItem(destination);
@@ -1112,6 +1113,7 @@ public class OsmandAidlApi {
 			if (selectedGpxFile != null) {
 				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), false, false);
 				refreshMap();
+				return true;
 			}
 		}
 		return false;
@@ -1131,6 +1133,21 @@ public class OsmandAidlApi {
 				}
 			}
 			return true;
+		}
+		return false;
+	}
+
+	boolean removeGpx(String fileName) {
+		if (!Algorithms.isEmpty(fileName)) {
+			final File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
+			if (f.exists()) {
+				GpxDataItem item = app.getGpxDatabase().getItem(f);
+				if (item != null && item.isApiImported()) {
+					Algorithms.removeAllFiles(f);
+					app.getGpxDatabase().remove(f);
+					return true;
+				}
+			}
 		}
 		return false;
 	}
