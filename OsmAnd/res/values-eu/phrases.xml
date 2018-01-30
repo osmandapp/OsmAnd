@@ -1837,9 +1837,9 @@
 	<string name="poi_wiki_lang_cy">Wikia galesez</string>
 	<string name="poi_wiki_lang_eo">Wikia esperantoz</string>
 	<string name="poi_wiki_lang_eu">Wikia euskaraz</string>
-	<string name="poi_fuel_lpg">Petrolio gas likidotua (PGL)</string>
-	<string name="poi_fuel_cng">Gas natural konprimitua</string>
-	<string name="poi_fuel_svo">Landare-olio erregaia</string>
+	<string name="poi_fuel_lpg">LPG erregaia</string>
+	<string name="poi_fuel_cng">CNG erregaia</string>
+	<string name="poi_fuel_svo">Biodiesel erregaia</string>
 	<string name="poi_aerialway_station">Teleaulki geltokia</string>
 	<string name="poi_aerialway_magic_carpet">Tapiz magikoa (igogailua)</string>
 	<string name="poi_aerialway_rope_tow">Kable-igogailua</string>
