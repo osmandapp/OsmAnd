@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
 import android.util.Xml;
@@ -40,9 +41,11 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.osmedit.ExportOptionsBottomSheetDialogFragment.ExportOptionsFragmentListener;
+import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
+import net.osmand.plus.osmedit.OsmPoint.Group;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.PoiUploaderType;
-import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
 import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -77,9 +80,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
 		String name = OsmEditingPlugin.getEditName(child);
 		viewName.setText(name);
-		if (child.getGroup() == OsmPoint.Group.POI) {
+		if (child.getGroup() == Group.POI) {
 			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_type_info, R.color.color_distance));
-		} else if (child.getGroup() == OsmPoint.Group.BUG) {
+		} else if (child.getGroup() == Group.BUG) {
 			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_type_bug, R.color.color_distance));
 		}
 
@@ -111,9 +114,14 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
 				.isLightContent() ? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
 
-		Fragment optionsFragment = getChildFragmentManager().findFragmentByTag(OsmEditOptionsBottomSheetDialogFragment.TAG);
+		FragmentManager fm = getChildFragmentManager();
+		Fragment optionsFragment = fm.findFragmentByTag(OsmEditOptionsBottomSheetDialogFragment.TAG);
 		if (optionsFragment != null) {
 			((OsmEditOptionsBottomSheetDialogFragment) optionsFragment).setListener(createOsmEditOptionsFragmentListener());
+		}
+		Fragment exportOptFragment = fm.findFragmentByTag(ExportOptionsBottomSheetDialogFragment.TAG);
+		if (exportOptFragment != null) {
+			((ExportOptionsBottomSheetDialogFragment) exportOptFragment).setListener(createExportOptionsFragmentListener());
 		}
 
 		plugin.getPoiModificationLocalUtil().addNodeCommittedListener(this);
@@ -152,6 +160,16 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		listAdapter.notifyDataSetChanged();
 	}
 
+	private List<OsmPoint> getOsmEditsByGroup(Group group) {
+		List<OsmPoint> res = new ArrayList<>();
+		for (OsmPoint point : osmEdits) {
+			if (point.getGroup() == group) {
+				res.add(point);
+			}
+		}
+		return res;
+	}
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
@@ -173,13 +191,21 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
-		item = menu.add(R.string.local_osm_changes_backup).setIcon(R.drawable.ic_action_gshare_dark);
+		item = menu.add(R.string.shared_string_export).setIcon(R.drawable.ic_action_gshare_dark);
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				new BackupOpenstreetmapPointAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
-						osmEdits.toArray(new OsmPoint[osmEdits.size()]));
+				Bundle args = new Bundle();
+				args.putInt(ExportOptionsBottomSheetDialogFragment.POI_COUNT_KEY, getOsmEditsByGroup(Group.POI).size());
+				args.putInt(ExportOptionsBottomSheetDialogFragment.NOTES_COUNT_KEY, getOsmEditsByGroup(Group.BUG).size());
+				ExportOptionsBottomSheetDialogFragment fragment = new ExportOptionsBottomSheetDialogFragment();
+				fragment.setArguments(args);
+				fragment.setUsedOnMap(false);
+				fragment.setListener(createExportOptionsFragmentListener());
+				fragment.show(getChildFragmentManager(), ExportOptionsBottomSheetDialogFragment.TAG);
+//				new BackupOpenstreetmapPointAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
+//						osmEdits.toArray(new OsmPoint[osmEdits.size()]));
 				return true;
 			}
 		});
@@ -485,6 +511,26 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		};
 	}
 
+	private ExportOptionsFragmentListener createExportOptionsFragmentListener() {
+		return new ExportOptionsFragmentListener() {
+
+			@Override
+			public void onPoiClick() {
+				Toast.makeText(getContext(), "poi", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onOsmNotesClick() {
+				Toast.makeText(getContext(), "osm notes", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onAllDataClick() {
+				Toast.makeText(getContext(), "all data", Toast.LENGTH_SHORT).show();
+			}
+		};
+	}
+
 	protected OsmPoint getPointAfterModify(OsmPoint info) {
 		if (info instanceof OpenstreetmapPoint && info.getId() == refreshId) {
 			for (OpenstreetmapPoint p : plugin.getDBPOI().getOpenstreetmapPoints()) {
@@ -533,7 +579,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 	private void showOnMap(OsmPoint osmPoint) {
 		boolean isOsmPoint = osmPoint instanceof OpenstreetmapPoint;
-		String type = osmPoint.getGroup() == OsmPoint.Group.POI ? PointDescription.POINT_TYPE_POI : PointDescription.POINT_TYPE_OSM_BUG;
+		String type = osmPoint.getGroup() == Group.POI ? PointDescription.POINT_TYPE_POI : PointDescription.POINT_TYPE_OSM_BUG;
 		String name = (isOsmPoint ? ((OpenstreetmapPoint) osmPoint).getName() : ((OsmNotesPoint) osmPoint).getText());
 		getMyApplication().getSettings().setMapLocationToShow(osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
 				new PointDescription(type, name), true, osmPoint); //$NON-NLS-1$
@@ -580,9 +626,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 					while (it.hasNext()) {
 						OsmPoint osmPoint = it.next();
 						assert plugin != null;
-						if (osmPoint.getGroup() == OsmPoint.Group.POI) {
+						if (osmPoint.getGroup() == Group.POI) {
 							plugin.getDBPOI().deletePOI((OpenstreetmapPoint) osmPoint);
-						} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
+						} else if (osmPoint.getGroup() == Group.BUG) {
 							plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) osmPoint);
 						}
 						it.remove();
@@ -647,7 +693,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 		private void writeContent(XmlSerializer sz, OsmPoint[] points, OsmPoint.Action a) throws IllegalArgumentException, IllegalStateException, IOException {
 			for (OsmPoint point : points) {
-				if (point.getGroup() == OsmPoint.Group.POI) {
+				if (point.getGroup() == Group.POI) {
 					OpenstreetmapPoint p = (OpenstreetmapPoint) point;
 					if (p.getAction() == a) {
 						sz.startTag("", "node");
@@ -667,7 +713,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 						}
 						sz.endTag("", "node");
 					}
-				} else if (point.getGroup() == OsmPoint.Group.BUG) {
+				} else if (point.getGroup() == Group.BUG) {
 					OsmNotesPoint p = (OsmNotesPoint) point;
 					if (p.getAction() == a) {
 						sz.startTag("", "note");

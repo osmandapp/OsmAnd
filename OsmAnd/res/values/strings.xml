@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osm_edits_export_desc">Select the import type: OSM notes, POI, or both.</string>
+    <string name="all_data">All data</string>
+    <string name="osm_notes">OSM Notes</string>
     <string name="will_open_tomorrow_at">Will open tomorrow at</string>
     <string name="rendering_attr_hidePOILabels_name">POI labels</string>
     <string name="shared_string_without_name">Without name</string>
