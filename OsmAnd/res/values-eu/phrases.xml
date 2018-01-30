@@ -2215,4 +2215,6 @@
 	<string name="poi_crossing_light_no">Bidegurutze argia: ez</string>
 	<string name="poi_crossing_on_demand_yes">Eskapeko bidegurutzea</string>
 	<string name="poi_crossing_on_demand_no">Eskapeko bidegurutzea: ez</string>
+	<string name="poi_boat_rental_type">Alokairuzko ontziak</string>
+	<string name="poi_operational_status">Egoera operatiboa</string>
 	</resources>
