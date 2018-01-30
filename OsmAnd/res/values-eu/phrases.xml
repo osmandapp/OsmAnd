@@ -2155,7 +2155,7 @@
 	<string name="poi_payment_westfalen_card_no">Ez dira Westfalen txartelak onartzen</string>
 	<string name="poi_payment_dogecoin_yes">Dogecoin</string>
 	<string name="poi_payment_dogecoin_no">Ez dira Dogecoin txartelak onartzen</string>
-	<string name="poi_animal_boarding">Animalien ostatua</string>
+	<string name="poi_animal_boarding">Animalientzako ostatua</string>
 	<string name="poi_animal_boarding_dog">Ostatu mota: txakurrak</string>
 	<string name="poi_animal_boarding_cat">Ostatu mota: katuak</string>
 	<string name="poi_animal_boarding_dog_cat">Ostatu mota: txakurrak, katuak</string>
@@ -2270,4 +2270,15 @@
 	<string name="poi_agrarian">Nekazaritza denda</string>
 
 
-</resources>
+<string name="poi_wiki_lang_als">Wikia alsatieraz</string>
+	<string name="poi_memorial_koshinto">Koshinto</string>
+	<string name="poi_health_specialty_pulmonology_yes">Pneumologia</string>
+	<string name="poi_health_specialty_maternity_yes">Amatasuna</string>
+	<string name="poi_health_specialty_physiatry_yes">Fisioterapia eta errehabilitazioa</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Diagnostikorako erradiologia</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Soziologia pediatrikoa</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Osasun espezialitatea: soziologia pediatrikoa: ez</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">"Adikzioen medikuntza "</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Hizketaren terapia</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Psikoanalisia</string>
+	</resources>
