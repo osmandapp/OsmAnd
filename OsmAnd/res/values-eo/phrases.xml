@@ -1063,8 +1063,8 @@
 	<string name="poi_wiki_lang_vi">Vikipedio Vjetnama</string>
 	<string name="poi_wiki_lang_zh">Vikipedio Ĉina</string>
 
-	<string name="facebook">Fejsbuko</string>
-	<string name="poi_skype">Skajpo</string>
+	<string name="facebook">Facebook</string>
+	<string name="poi_skype">Skype</string>
 	<string name="poi_bollard">Paliseto</string>
 	<string name="poi_cycle_barrier">Barilo kontraŭbicikla</string>
 	<string name="poi_motorcycle_barrier">Barilo kontraŭmotorcikla</string>
@@ -1102,7 +1102,7 @@
 
 	<string name="poi_collection_times">Repreno je</string>
 	<string name="poi_phone">Telefono</string>
-	<string name="poi_website">Retpaĝo</string>
+	<string name="poi_website">Retejo</string>
 	<string name="poi_email">Retpoŝto</string>
 	<string name="poi_fax">Telekopiilo</string>
 	<string name="twitter">Twitter</string>
