@@ -3670,4 +3670,63 @@
 
 <string name="poi_route_subway_ref">Metró</string>
 
-	</resources>
+	<string name="poi_climbing_style">Sziklamászási stílus</string>
+
+<string name="poi_ref_post">Irányítószám</string>
+
+	<string name="poi_climbing_sport_yes">Sportmászás</string>
+	<string name="poi_climbing_sport_no">Sportmászás nincs</string>
+	<string name="poi_climbing_boulder_yes">Boulderezés (szabad mászás)</string>
+	<string name="poi_climbing_boulder_no">Boulderezés (szabad mászás) nincs</string>
+	<string name="poi_climbing_toprope_yes">Top rope (legfelül rögzített kötél)</string>
+	<string name="poi_climbing_toprope_no">Top rope (legfelül rögzített kötél) nincs</string>
+	<string name="poi_climbing_trad_yes">Tradicionális mászás</string>
+	<string name="poi_climbing_trad_no">Tradicionális mászás nincs</string>
+	<string name="poi_climbing_multipitch_yes">Több szakaszos utak</string>
+	<string name="poi_climbing_multipitch_no">Több szakaszos utak nincsenek</string>
+	<string name="poi_climbing_ice_yes">Jégmászás</string>
+	<string name="poi_climbing_ice_no">Jégmászás nincs</string>
+	<string name="poi_climbing_mixed_yes">Vegyes mászás (szikla &amp; jég)</string>
+	<string name="poi_climbing_mixed_no">Vegyes mászás (szikla &amp; jég) nincs</string>
+	<string name="poi_climbing_deepwater_yes">Víz fölötti szóló mászás</string>
+	<string name="poi_climbing_deepwater_no">Víz fölötti szóló mászás nincs</string>
+
+	<string name="poi_climbing_length">Mászóút hossza (átlag)</string>
+	<string name="poi_climbing_length_min">Mászóút hossza (legrövidebb)</string>
+	<string name="poi_climbing_length_max">Mászóút hossza (leghosszabb)</string>
+	<string name="poi_climbing_rock_limestone">Mászható szikla: mészkő</string>
+	<string name="poi_climbing_rock_granite">Mászható szikla: gránit</string>
+	<string name="poi_climbing_rock_sandstone">Mászható szikla: homokkő</string>
+	<string name="poi_climbing_rock_quartzite">Mászható szikla: kvarcit</string>
+	<string name="poi_climbing_rock_gneiss">Mászható szikla: gneisz</string>
+	<string name="poi_climbing_rock_porphyry">Mászható szikla: porfír</string>
+	<string name="poi_climbing_quality_solid">Szikla minősége: szilárd</string>
+	<string name="poi_climbing_quality_fragile">Szikla minősége: törékeny</string>
+	<string name="poi_climbing_bolted_yes">Rögzített ékek</string>
+	<string name="poi_climbing_bolted_no">Rögzített ékek nincsenek</string>
+	<string name="poi_climbing_orientation_n">Fal iránya: észak</string>
+	<string name="poi_climbing_orientation_ne">Fal iránya: északkelet</string>
+	<string name="poi_climbing_orientation_e">Fal iránya: kelet</string>
+	<string name="poi_climbing_orientation_se">Fal iránya: délkelet</string>
+	<string name="poi_climbing_orientation_s">Fal iránya: dél</string>
+	<string name="poi_climbing_orientation_sw">Fal iránya: délnyugat</string>
+	<string name="poi_climbing_orientation_w">Fal iránya: nyugat</string>
+	<string name="poi_climbing_orientation_nw">Fal iránya: északnyugat</string>
+	<string name="poi_climbing_summit_log_yes">Csúcskönyv</string>
+	<string name="poi_climbing_summit_log_no">Csúcskönyv nincs</string>
+	<string name="poi_climbing_routes">Mászóutak</string>
+
+	<string name="poi_circumference">Kerület (1,30 m magasan)</string>
+	<string name="poi_diameter_crown">Lombkorona átmérője</string>
+
+	<string name="poi_meadow_agricultural">Típus: mezőgazdasági</string>
+	<string name="poi_meadow_perpetual">Típus: állandó</string>
+	<string name="poi_meadow_transitional">Típus: átmeneti</string>
+	<string name="poi_meadow_pasture">Típus: legelő</string>
+
+	<string name="poi_frozen_food">Mélyhűtött élelmiszer</string>
+
+	<string name="poi_agrarian">Gazdabolt</string>
+
+
+</resources>
