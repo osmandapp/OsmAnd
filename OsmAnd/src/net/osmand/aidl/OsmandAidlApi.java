@@ -1113,6 +1113,7 @@ public class OsmandAidlApi {
 			if (selectedGpxFile != null) {
 				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), false, false);
 				refreshMap();
+				return true;
 			}
 		}
 		return false;
@@ -1144,6 +1145,7 @@ public class OsmandAidlApi {
 				if (item != null && item.isApiImported()) {
 					Algorithms.removeAllFiles(f);
 					app.getGpxDatabase().remove(f);
+					return true;
 				}
 			}
 		}
