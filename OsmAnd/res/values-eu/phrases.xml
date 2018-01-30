@@ -1856,7 +1856,7 @@
 	<string name="poi_greenfield">Orubea</string>
 	<string name="poi_mineshaft">Meazulo</string>
 	<string name="poi_training">Entrenatzeko gunea</string>
-	<string name="poi_baby_hatch">Zurtz tornua</string>
+	<string name="poi_baby_hatch">Umezurtzen tornua</string>
 	<string name="poi_podiatrist">Oin-sendagile</string>
 	<string name="poi_tax_advisor">Zerga aholkularien bulegoa</string>
 
@@ -1875,7 +1875,7 @@
 	<string name="poi_aeroway_fuel">Hegazkinentzako erregai estazioa</string>
 	<string name="poi_waterway_fuel">Ontzientzako erregai estazioa</string>
 	<string name="poi_ice_hockey">Izotz hockeya</string>
-	<string name="poi_attraction_amusement_ride">Atrakzioa</string>
+	<string name="poi_attraction_amusement_ride">Atrakzioa (jolas-parkekoa)</string>
 	<string name="poi_attraction_summer_toboggan">Udako txirrista</string>
 	<string name="poi_attraction_train">Trena (atrakzioa)</string>
 	<string name="poi_lodging">Ostatua</string>
@@ -1954,7 +1954,7 @@
 	<string name="poi_commercial">Lurraren erabilpen komertziala</string>
 	<string name="poi_retail">Txikizkako lurraren erabilpena</string>
 
-	<string name="poi_attraction_swing_carousel">Zabu birakariak</string>
+	<string name="poi_attraction_swing_carousel">Zabu hegalariak</string>
 	<string name="poi_wayside_shrine">Bide ondoko santutegia</string>
 	<string name="poi_trail_riding_station">Zaldizkoentzako zerbitzugunea</string>
 
