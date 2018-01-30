@@ -944,6 +944,7 @@ public class OsmandAidlApi {
 					app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
 			GpxDataItem gpxDataItem = new GpxDataItem(destination, col);
+			gpxDataItem.setApiImported(true);
 			app.getGpxDatabase().add(gpxDataItem);
 		} else {
 			GpxDataItem item = app.getGpxDatabase().getItem(destination);
@@ -1139,15 +1140,18 @@ public class OsmandAidlApi {
 		if (!Algorithms.isEmpty(fileName)) {
 			final File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
 			if (f.exists()) {
-				new AsyncTask<File, Void, Void>() {
+				GpxDataItem item = app.getGpxDatabase().getItem(f);
+				if (item != null && item.isApiImported()) {
+					new AsyncTask<File, Void, Void>() {
 
-					@Override
-					protected Void doInBackground(File... files) {
-						Algorithms.removeAllFiles(f);
-						app.getGpxDatabase().remove(f);
-						return null;
-					}
-				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
+						@Override
+						protected Void doInBackground(File... files) {
+							Algorithms.removeAllFiles(f);
+							app.getGpxDatabase().remove(f);
+							return null;
+						}
+					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
+				}
 			}
 		}
 		return false;
