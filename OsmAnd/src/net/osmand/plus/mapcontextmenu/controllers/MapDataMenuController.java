@@ -25,6 +25,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
@@ -107,9 +108,10 @@ public class MapDataMenuController extends MenuController {
 							Toast.makeText(mapActivity, mapActivity.getString(R.string.activate_srtm_plugin),
 									Toast.LENGTH_SHORT).show();
 						}
-					} else {
-						new DownloadValidationManager(getMapActivity().getMyApplication())
-								.startDownload(getMapActivity(), indexItem);
+					} else if (!downloaded || indexItem.isOutdated()) {
+						new DownloadValidationManager(app).startDownload(mapActivity, indexItem);
+					} else if (isLiveUpdatesOn()) {
+						LiveUpdatesHelper.runLiveUpdate(mapActivity, indexItem.getTargetFileName(), true);
 					}
 				}
 			}
@@ -177,6 +179,10 @@ public class MapDataMenuController extends MenuController {
 		}
 
 		updateData();
+	}
+
+	private boolean isLiveUpdatesOn() {
+		return getMapActivity().getMyApplication().getSettings().IS_LIVE_UPDATES_ON.get();
 	}
 
 	@Override
@@ -380,6 +386,8 @@ public class MapDataMenuController extends MenuController {
 				leftDownloadButtonController.caption = getMapActivity().getString(R.string.shared_string_update);
 			} else if (!downloaded) {
 				leftDownloadButtonController.caption = getMapActivity().getString(R.string.shared_string_download);
+			} else if (isLiveUpdatesOn()) {
+				leftDownloadButtonController.caption = getMapActivity().getString(R.string.live_update);
 			} else {
 				leftDownloadButtonController.visible = false;
 			}

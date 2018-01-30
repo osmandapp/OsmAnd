@@ -200,13 +200,13 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				@Override
 				public void onClick(View v) {
 					if (collapsableView.getContenView().getVisibility() == View.VISIBLE) {
-						collapsableView.setCollapsed(true);
 						collapsableView.getContenView().setVisibility(View.GONE);
 						iconViewCollapse.setImageDrawable(getCollapseIcon(true));
+						collapsableView.setCollapsed(true);
 					} else {
-						collapsableView.setCollapsed(false);
 						collapsableView.getContenView().setVisibility(View.VISIBLE);
 						iconViewCollapse.setImageDrawable(getCollapseIcon(false));
+						collapsableView.setCollapsed(false);
 					}
 				}
 			});

@@ -95,9 +95,15 @@ public class MenuBuilder {
 	private CardsRowBuilder onlinePhotoCardsRow;
 	private List<AbstractCard> onlinePhotoCards;
 
+	private CollapseExpandListener collapseExpandListener;
+
 	private String preferredMapLang;
 	private String preferredMapAppLang;
 	private boolean transliterateNames;
+
+	public interface CollapseExpandListener {
+		void onCollapseExpand(boolean collapsed);
+	}
 
 	public class PlainMenuItem {
 		private int iconId;
@@ -158,22 +164,22 @@ public class MenuBuilder {
 	public static class CollapsableView {
 
 		private View contenView;
+		private MenuBuilder menuBuilder;
 		private OsmandPreference<Boolean> collapsedPref;
 		private boolean collapsed;
-		private OnCollExpListener onCollExpListener;
+		private CollapseExpandListener collapseExpandListener;
 
-		public interface OnCollExpListener {
-			void onCollapseExpand(boolean collapsed);
-		}
-
-		public CollapsableView(@NonNull View contenView, @NonNull OsmandPreference<Boolean> collapsedPref) {
+		public CollapsableView(@NonNull View contenView, @NonNull MenuBuilder menuBuilder,
+							   @NonNull OsmandPreference<Boolean> collapsedPref) {
 			this.contenView = contenView;
+			this.menuBuilder = menuBuilder;
 			this.collapsedPref = collapsedPref;
 		}
 
-		public CollapsableView(@NonNull View contenView, boolean collapsed) {
+		public CollapsableView(@NonNull View contenView, @NonNull MenuBuilder menuBuilder, boolean collapsed) {
 			this.contenView = contenView;
 			this.collapsed = collapsed;
+			this.menuBuilder = menuBuilder;
 		}
 
 		public View getContenView() {
@@ -194,17 +200,20 @@ public class MenuBuilder {
 			} else {
 				this.collapsed = collapsed;
 			}
-			if (onCollExpListener != null) {
-				onCollExpListener.onCollapseExpand(collapsed);
+			if (collapseExpandListener != null) {
+				collapseExpandListener.onCollapseExpand(collapsed);
+			}
+			if (menuBuilder.collapseExpandListener != null) {
+				menuBuilder.collapseExpandListener.onCollapseExpand(collapsed);
 			}
 		}
 
-		public OnCollExpListener getOnCollExpListener() {
-			return onCollExpListener;
+		public CollapseExpandListener getCollapseExpandListener() {
+			return collapseExpandListener;
 		}
 
-		public void setOnCollExpListener(OnCollExpListener onCollExpListener) {
-			this.onCollExpListener = onCollExpListener;
+		public void setCollapseExpandListener(CollapseExpandListener collapseExpandListener) {
+			this.collapseExpandListener = collapseExpandListener;
 		}
 	}
 
@@ -219,6 +228,10 @@ public class MenuBuilder {
 			preferredMapAppLang = app.getLanguage();
 		}
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+	}
+
+	public void setCollapseExpandListener(CollapseExpandListener collapseExpandListener) {
+		this.collapseExpandListener = collapseExpandListener;
 	}
 
 	public void setRoutes(List<TransportStopRoute> routes) {
@@ -378,9 +391,9 @@ public class MenuBuilder {
 		boolean needUpdateOnly = onlinePhotoCardsRow != null && onlinePhotoCardsRow.getMenuBuilder() == this;
 		onlinePhotoCardsRow = new CardsRowBuilder(this, view, false);
 		onlinePhotoCardsRow.build();
-		CollapsableView collapsableView = new CollapsableView(onlinePhotoCardsRow.getContentView(),
+		CollapsableView collapsableView = new CollapsableView(onlinePhotoCardsRow.getContentView(), this,
 				app.getSettings().ONLINE_PHOTOS_ROW_COLLAPSED);
-		collapsableView.setOnCollExpListener(new CollapsableView.OnCollExpListener() {
+		collapsableView.setCollapseExpandListener(new CollapseExpandListener() {
 			@Override
 			public void onCollapseExpand(boolean collapsed) {
 				if (!collapsed && onlinePhotoCards == null) {
@@ -584,13 +597,13 @@ public class MenuBuilder {
 				@Override
 				public void onClick(View v) {
 					if (collapsableView.getContenView().getVisibility() == View.VISIBLE) {
-						collapsableView.setCollapsed(true);
 						collapsableView.getContenView().setVisibility(View.GONE);
 						iconViewCollapse.setImageDrawable(getCollapseIcon(true));
+						collapsableView.setCollapsed(true);
 					} else {
-						collapsableView.setCollapsed(false);
 						collapsableView.getContenView().setVisibility(View.VISIBLE);
 						iconViewCollapse.setImageDrawable(getCollapseIcon(false));
+						collapsableView.setCollapsed(false);
 					}
 				}
 			});
@@ -844,7 +857,7 @@ public class MenuBuilder {
 			buildTransportRouteRow(view, r, listener, showDivider);
 		}
 
-		return new CollapsableView(view, collapsed);
+		return new CollapsableView(view, this, collapsed);
 	}
 
 	protected CollapsableView getCollapsableTextView(Context context, boolean collapsed, String text) {
@@ -857,7 +870,7 @@ public class MenuBuilder {
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
 		textView.setText(text);
-		return new CollapsableView(textView, collapsed);
+		return new CollapsableView(textView, this, collapsed);
 	}
 
 	protected CollapsableView getCollapsableFavouritesView(final Context context, boolean collapsed, @NonNull final FavoriteGroup group, FavouritePoint selectedPoint) {
@@ -901,7 +914,7 @@ public class MenuBuilder {
 			view.addView(button);
 		}
 
-		return new CollapsableView(view, collapsed);
+		return new CollapsableView(view, this, collapsed);
 	}
 
 	protected CollapsableView getCollapsableWaypointsView(final Context context, boolean collapsed, @NonNull final GPXFile gpxFile, WptPt selectedPoint) {
@@ -944,7 +957,7 @@ public class MenuBuilder {
 			view.addView(button);
 		}
 
-		return new CollapsableView(view, collapsed);
+		return new CollapsableView(view, this, collapsed);
 	}
 
 	protected CollapsableView getCollapsableWikiView(Context context, boolean collapsed) {
@@ -966,7 +979,7 @@ public class MenuBuilder {
 			view.addView(button);
 		}
 
-		return new CollapsableView(view, collapsed);
+		return new CollapsableView(view, this, collapsed);
 	}
 
 	protected LinearLayout buildCollapsableContentView(Context context, boolean collapsed, boolean needMargin) {

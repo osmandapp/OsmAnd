@@ -42,6 +42,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
 import net.osmand.plus.mapcontextmenu.controllers.AMapPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
@@ -81,7 +82,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class MenuController extends BaseMenuController {
+public abstract class MenuController extends BaseMenuController implements CollapseExpandListener {
 
 	public static class MenuState {
 		public static final int HEADER_ONLY = 1;
@@ -124,8 +125,44 @@ public abstract class MenuController extends BaseMenuController {
 		super(mapActivity);
 		this.pointDescription = pointDescription;
 		this.builder = builder;
+		this.builder.setCollapseExpandListener(this);
 		this.currentMenuState = getInitialMenuState();
 		this.builder.setLight(isLight());
+	}
+
+	public void onCreated() {
+		/*
+		toolbarController = new ContextMenuToolbarController(this);
+		toolbarController.setTitle(getNameStr());
+		toolbarController.setOnBackButtonClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (mapContextMenu != null) {
+					mapContextMenu.backToolbarAction(MenuController.this);
+				}
+			}
+		});
+		toolbarController.setOnTitleClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			}
+		});
+		toolbarController.setOnCloseButtonClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (mapContextMenu != null) {
+					mapContextMenu.close();
+				}
+			}
+		});
+		*/
+	}
+
+	@Override
+	public void onCollapseExpand(boolean collapsed) {
+		if (mapContextMenu != null) {
+			mapContextMenu.updateMenuUI();
+		}
 	}
 
 	public String getPreferredMapLang() {
@@ -208,6 +245,7 @@ public abstract class MenuController extends BaseMenuController {
 		}
 		menuController.menuType = menuType;
 		menuController.setLatLon(latLon);
+		menuController.onCreated();
 		return menuController;
 	}
 
