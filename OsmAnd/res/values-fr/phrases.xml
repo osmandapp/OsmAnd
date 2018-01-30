@@ -1453,7 +1453,7 @@
 	<string name="poi_shoes_orthopedic">Orthopédique</string>
 
 	<string name="poi_internet_access_type_wlan">Wi-Fi</string>
-	<string name="poi_internet_access_type_terminal">Terminal</string>
+	<string name="poi_internet_access_type_terminal">Borne Internet</string>
 	<string name="poi_architecture_contemporary">Architecture : contemporaine</string>
 	<string name="poi_architecture_art_nouveau">Architecture : art nouveau</string>
 	<string name="poi_architecture_neoclassicism">Architecture : néo-classique</string>
@@ -1626,7 +1626,7 @@
 
 	<string name="poi_theatre_genre_opera">Opéra</string>
 	<string name="poi_theatre_genre_philharmonic">Philharmonique</string>
-	<string name="poi_theatre_genre_musical">Musical</string>
+	<string name="poi_theatre_genre_musical">Comédie musicale</string>
 	<string name="poi_theatre_genre_drama">Dramatique</string>
 	<string name="poi_theatre_genre_cabaret">Cabaret</string>
 	<string name="poi_theatre_genre_puppet">Marionnette</string>
@@ -2734,7 +2734,7 @@
 	<string name="poi_free_flying_rigid_yes">Rigide</string>
 	<string name="poi_medical_system_kampo_yes">Kampo</string>
 	<string name="poi_medical_system_ayurveeda_yes">Ayurveda</string>
-	<string name="poi_medical_system_unani_yes">Unani</string>
+	<string name="poi_medical_system_unani_yes">Yunâni</string>
 
 	<string name="poi_button_operated_yes">Actionné par un bouton : oui</string>
 	<string name="poi_button_operated_no">Actionné par un bouton : non</string>
@@ -2790,7 +2790,7 @@
 	<string name="poi_cuisine_tea_shop">Salon de thé</string>
 	<string name="poi_cuisine_soup">Soupe</string>
 	<string name="poi_cuisine_pie">Tarte</string>
-	<string name="poi_cuisine_hotdog">Hotdog</string>
+	<string name="poi_cuisine_hotdog">Hot-dog</string>
 	<string name="poi_cuisine_salad">Salade</string>
 	<string name="poi_cuisine_frozen_yogurt">Yaourt glacé</string>
 	<string name="poi_cuisine_fried_food">Friture</string>
@@ -2822,7 +2822,7 @@
 	<string name="poi_cuisine_wine">Vin</string>
 	<string name="poi_cuisine_potato">Pomme de terre</string>
 	<string name="poi_cuisine_brunch">Brunch</string>
-	<string name="poi_cuisine_pita">Pita</string>
+	<string name="poi_cuisine_pita">Pain pita</string>
 	<string name="poi_cuisine_fondue">Fondue</string>
 	<string name="poi_cuisine_baguette">Baguette</string>
 	<string name="poi_cuisine_burrito">Burrito</string>
@@ -2884,7 +2884,7 @@
 	<string name="poi_cuisine_mongolian">Mongol</string>
 	<string name="poi_cuisine_middle_eastern">Moyen-oriental</string>
 	<string name="poi_cuisine_ukrainian">Ukrainien</string>
-	<string name="poi_cuisine_afghan">Afghan</string>
+	<string name="poi_cuisine_afghan">Cuisine afghane</string>
 	<string name="poi_cuisine_belgian">Belge</string>
 	<string name="poi_cuisine_basque">Basque</string>
 	<string name="poi_cuisine_swiss">Suisse</string>
@@ -2896,11 +2896,11 @@
 	<string name="poi_cuisine_english">Anglais</string>
 	<string name="poi_cuisine_pakistani">Pakistanais</string>
 	<string name="poi_cuisine_taiwanese">Taïwanais</string>
-	<string name="poi_cuisine_tex_mex">Tex-mex</string>
+	<string name="poi_cuisine_tex_mex">Cuisine tex-mex</string>
 	<string name="poi_cuisine_dutch">Néerlandais</string>
 	<string name="poi_cuisine_syrian">Syrien</string>
 	<string name="poi_cuisine_australian">Australien</string>
-	<string name="poi_cuisine_cajun">Cajun</string>
+	<string name="poi_cuisine_cajun">Cuisine cadienne</string>
 	<string name="poi_cuisine_egyptian">Égyptien</string>
 	<string name="poi_cuisine_senegalese">Sénégalais</string>
 	<string name="poi_cuisine_jewish">Juif</string>
@@ -2915,7 +2915,7 @@
 
 	<string name="poi_tower_construction_dish">Construction : antenne parabolique</string>
 	<string name="poi_cuisine_pastel">Pastel</string>
-	<string name="poi_cuisine_sub">Sub</string>
+	<string name="poi_cuisine_sub">Sandwich sous-marin</string>
 	<string name="poi_xmas_note">Noël : note</string>
 	<string name="poi_xmas_opening_hours">Noël : horaires d\'ouverture</string>
 	<string name="poi_xmas_location">Noël : emplacement</string>
@@ -3030,7 +3030,7 @@
 	<string name="poi_architecture_wilhelminian_style">Architecture : Style wilhelminien</string>
 	<string name="poi_tunnel_waterway">Tunnel d\'eau</string>
 	<string name="poi_bridge_waterway">Pont de voie navigable</string>
-	<string name="poi_payment_ep_minicash_yes">MiniCash</string>
+	<string name="poi_payment_ep_minicash_yes">Minicash</string>
 	<string name="poi_payment_ep_monedero4b_yes">Monedero 4B</string>
 	<string name="poi_payment_ep_monedero_yes">Monedero</string>
 	<string name="poi_brushless_no">Sans balai</string>

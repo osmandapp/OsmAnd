@@ -1792,7 +1792,7 @@
     <string name="is_saved">yadda saxlandı</string>
     <string name="marker_save_as_track_descr">İşarələri burada göstərə biləcəyiniz fayla ixrac edin:</string>
     <string name="move_to_history">Tarixçəyə daşı</string>
-    <string name="group_will_be_removed_after_restart">Proqramı yenidən başladıldıqdan sonra qrup silinəcək.</string>
+    <string name="group_will_be_removed_after_restart">Proqram yenidən başladıldıqdan sonra qrup silinəcək.</string>
     <string name="show_arrows_on_the_map">Xəritədə oxları göstər</string>
     <string name="remove_from_map_markers">Xəritə işarələrindən sil</string>
     <string name="descendingly">azalan</string>
@@ -1816,4 +1816,15 @@
     <string name="switch_start_finish">Başlanğıc və təyinat nöqtələrinin yerini dəyiş</string>
     <string name="shared_string_undo_all">HAMISINI QAYTAR</string>
     <string name="shared_string_undo">QAYTAR</string>
+    <string name="save_poi_without_poi_type_message">POI-ni həqiqətən POI növü olmadan yadda saxlamaq istəyirsiniz?</string>
+    <string name="missing_write_external_storage_permission">Proqramın SD kartdan istifadə etmək icazəsi yoxdur</string>
+    <string name="quick_action_navigation_voice">Səs yanılı/sönülü</string>
+    <string name="quick_action_navigation_voice_off">Səs sönülüdür</string>
+    <string name="quick_action_navigation_voice_on">Səs yanılıdır</string>
+    <string name="quick_action_new_action">Fəaliyyət əlavə et</string>
+    <string name="quick_action_edit_action">Fəaliyyətə düzəliş et</string>
+    <string name="dialog_add_action_title">Fəaliyyət əlavə et</string>
+    <string name="quick_actions_delete">Fəaliyyəti sil</string>
+    <string name="quick_actions_delete_text">“%s” fəaliyyətini silmək istədiyinizə əminsiniz?</string>
+    <string name="quick_favorites_show_favorites_dialog">Favoritlər dialoqunu göstər</string>
     </resources>

@@ -3037,4 +3037,6 @@ Repræsenterer område: %1$s x %2$s</string>
 \n 
 \n</string>
     <string name="will_open_tomorrow_at">Åbner i morgen kl.</string>
-    </resources>
+    <string name="copy_location_name">Kopiér Punkt/IP-navn</string>
+    <string name="toast_empty_name_error">Placering har intet navn</string>
+</resources>

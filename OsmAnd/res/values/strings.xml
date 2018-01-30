@@ -28,9 +28,7 @@
     <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
     <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
     <string name="release_3_0">
-	\u2022 Detection of stop signs now considers driving direction\n\n
-	\u2022 New algorithm providing meaningful ascent/descent values for GPX tracks\n\n
-	\u2022 Terrain (ascent) aware hiking time (Naismith\'s rule)\n\n
+	\u2022 \n\n
 	</string>
     <string name="modify_the_search_query">Modify the search query.</string>
     <string name="shared_string_actions">Actions</string>
@@ -340,9 +338,13 @@
 	\u2022 OsmAnd Live: bug fixes, fresh data on the server every 30 minutes, updates implemented into the navigation\n\n
 	</string>
     <string name="release_2_9">
+	\u2022 Detection of stop signs now considers driving direction\n\n
+	\u2022 New algorithm providing meaningful ascent/descent values for GPX tracks\n\n
+	\u2022 Terrain (ascent) aware hiking time (Naismith\'s rule)\n\n
 	\u2022 Updated the context menu: show when the POI opens / closes\n\n
 	\u2022 Transport menu: all available routes are now at the top\n\n
 	\u2022 Wikipedia: added the button to open the original article, updated the appearance of articles\n\n
+<<<<<<< HEAD
     \u2022 Route: added possibility to swap start and end points in one tap\n\n
     \u2022 Notes: added sorting by type and date\n\n
     \u2022 OSM edits: show an icon and a name of the POI category, display completed actions\n\n
@@ -350,6 +352,12 @@
     \u2022 Detection of stop signs now considers driving direction\n\n
 	\u2022 New algorithm providing meaningful ascent/descent values for GPX tracks\n\n
 	\u2022 Terrain (ascent) aware hiking time (Naismith\'s rule)\n\n
+=======
+	\u2022 Route: added possibility to swap start and end points in one tap\n\n
+	\u2022 Notes: added sorting by type and date\n\n
+	\u2022 OSM edits: show an icon and a name of the POI category, display completed actions\n\n
+	\u2022 New quick coordinate input screen for quick markers creation\n\n
+>>>>>>> 0db64b7abd3b8633241f75ebec0593544eab678b
 	</string>
     <string name="auto_split_recording_title">Auto-split recordings after gap</string>
     <string name="auto_split_recording_descr">Start new segment after gap of 6 min, new track after gap of 2 h, or new file after a longer gap if the date has changed.</string>
@@ -2859,4 +2867,6 @@
     <string name="winter_and_ski_renderer">Winter and ski</string>
     <string name="touring_view_renderer">Touring view (contrast and details)</string>
     <string name="nautical_renderer">Nautical</string>
+    <string name="copy_location_name">Copy Point/POI name</string>
+    <string name="toast_empty_name_error">Location has no name</string>
 </resources>

@@ -1598,16 +1598,16 @@ Chcete pokračovať v novej registrácii?</string>
     <string name="plugin_ski_descr">Tento modul vám sprístupní celosvetové zjazdovky, bežecké trate, alpinistické trasy, lanovky a lyžiarske vleky. Trasy a zjazdovky sú farebne rozlíšené podľa obtiažnosti a zobrazené v špeciálnom \"zimnom\" štýle, ktorý pripomína zasneženú krajinu. 
 \n
 \nAktivovanie tohto pohľadu zmení štýl mapy na \"Zima a lyžovanie\", ktorý zobrazuje krajinné útvary v zimných podmienkach. Tento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".</string>
-    <string name="plugin_touringview_descr">Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Touring view\", ktorý obsahuje viac detailov pre cestovateľov a profesionálnych vodičov.
-\n
-\nTento pohľad poskytuje vo všetkých priblíženiach mapy maximum cestovných detailov (napr. cesty, chodníky a orientačné značky).
-\n
-\nTaktiež zobrazuje typy ciest v jednoznačne odlišných farbách, čo je užitočné napríklad pre veľké vozidlá.
-\n
-\nPoskytuje aj špeciálne možnosti pre cestovanie ako cyklotrasy a turistické značkované chodníky.
-\n
-\nNie je potrebné stiahnuť samostatný súbor, tento pohľad používa štandardné mapové súbory.
-\n
+    <string name="plugin_touringview_descr">Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Cestovanie\", ktorý obsahuje viac detailov pre cestovateľov a profesionálnych vodičov. 
+\n 
+\nTento pohľad poskytuje vo všetkých priblíženiach mapy maximum cestovných detailov (napr. cesty, chodníky a orientačné značky). 
+\n 
+\nTaktiež zobrazuje typy ciest v jednoznačne odlišných farbách, čo je užitočné napríklad pre veľké vozidlá. 
+\n 
+\nPoskytuje aj špeciálne možnosti pre cestovanie ako cyklotrasy a turistické značkované chodníky. 
+\n 
+\nNie je potrebné stiahnuť samostatný súbor, tento pohľad používa štandardné mapové súbory. 
+\n 
 \nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".</string>
     <string name="plugin_touringview_name">Cestovný mapový pohľad (Touring view)</string>
     <string name="location_on_map">Umiestnenie:\n Šírka %1$s\n Dĺžka %2$s</string>
@@ -3011,4 +3011,27 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="total_donations">Celkové príspevky</string>
 <string name="shared_string_without_name">Bez názvu</string>
     <string name="lang_lo">Laosky</string>
-    </resources>
+    <string name="will_open_tomorrow_at">Otvorí zajtra o</string>
+    <string name="rendering_attr_hidePOILabels_name">Popisy bodov záujmu</string>
+    <string name="release_2_9">\\022 Aktualizované kontextové menu: zobrazí kedy bod záujmu otvára / zatvára
+\n
+\n • Dopravné menu: všetky dostupné linky sú teraz navrchu
+\n
+\n • Wikipedia: pridané tlačidlo na otvorenie originálneho článku, vzhľad článkov bol aktualizovaný
+\n
+\n • Trasa: pridaná možnosť vymeniť štart a cieľ jedným stlačením
+\n
+\n • Poznámky: pridané triedenie podľa typu a dátumu
+\n
+\n • Úpravy OSM: zobrazenie ikony a názvu kategórie bodu, zobrazenie dokončených akcií
+\n
+\n • Nová obrazovaka na rýchle zadávanie súradníc pre vytváranie mapových značiek
+\n
+\n</string>
+    <string name="day_off_label">zatvorené</string>
+    <string name="winter_and_ski_renderer">Zima a lyžovanie</string>
+    <string name="touring_view_renderer">Cestovanie (kontrast a detaily)</string>
+    <string name="nautical_renderer">Námorný</string>
+<string name="copy_location_name">Kopírovať názov bodu</string>
+    <string name="toast_empty_name_error">Umiestnenie nemá žiadny názov</string>
+</resources>

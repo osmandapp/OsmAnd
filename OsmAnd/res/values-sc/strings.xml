@@ -2933,4 +2933,7 @@ Pro praghere iscrie su còdighe intreu</string>
 \n
 \n • Ischermada lestra noa pro s\'insertadura de sas coordinatas pro sa creatzione lestra de marcadores
 \n</string>
-    </resources>
+    <string name="day_off_label">serradu</string>
+    <string name="copy_location_name">Còpia su nùmene de su Puntu/PDI</string>
+    <string name="toast_empty_name_error">Su logu non tenet unu nùmene</string>
+</resources>

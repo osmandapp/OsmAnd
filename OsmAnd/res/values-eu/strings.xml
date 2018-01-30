@@ -2824,11 +2824,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_without_name">Izenik gabe</string>
     <string name="av_locations_selected_desc">Hautatutako oharren koordenatuak eta datuak dituen GPX fitxategia.</string>
     <string name="av_locations_all_desc">Ohar guztien koordenatuak eta datuak dituen GPX fitxategia.</string>
-    <string name="release_3_0">\\022 Stop seinaleen detekzioak kontuan hartzen du martxaren noranzkoa
-\n
-\n • GPX lorratzen zentzuzko igoera/jaitsiera balioak ematen dituen algoritmo berria
-\n
-\n • Terrenoa (igoera) kontuan duen mendiko ibilbideen denbora (Naismith araua)
+    <string name="release_3_0">\\022 
 \n
 \n</string>
     <string name="modify_the_search_query">Aldatu bilaketaren galdera.</string>
@@ -2946,19 +2942,28 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="touring_view_renderer">Bidaiatze ikuspegia (kontrastea eta xehetasunak)</string>
     <string name="nautical_renderer">Nautikoa</string>
 <string name="rendering_attr_hidePOILabels_name">POI etiketak</string>
-    <string name="release_2_9">\\022 Laster-menua eguneratuta: erakutsi POI-a irekitzean edo ixtean
+    <string name="release_2_9">\\022 Stop seinaleen detekzioak kontuan hartzen du martxaren noranzkoa
 \n
-\n • Garraio menua: ibilbide eskuragarri guztiak orain goian daude
+\n • GPX lorratzen zentzuzko igoera/jaitsiera balioak ematen dituen algoritmo berria
 \n
-\n • Wikipedia: jatorrizko artikulua irekitzeko botoia gehituta, artikuluen itxura eguneratua
+\n • Terrenoa (igoera) kontuan duen mendiko ibilbideen denbora (Naismith araua)
 \n
-\n • Ibilbidea: hasiera eta amaiera puntuak behin sakatuta txandakatzeko aukera gehituta
-\n
-\n • Oharrak: mota eta dataren arabera ordenatzeko gaitasuna gehituta
-\n
-\n • OSM edizioak: erakutsi POI-aren kategoriaren ikono eta izena, bistaratu burututako ekintzak
-\n
-\n • Koordenatuen sarrerarako pantaila berria markatzaileek sorrera azkarrerako
-\n
+\n • Laster-menua eguneratuta: erakutsi POI-a irekitzean edo ixtean 
+\n 
+\n • Garraio menua: ibilbide eskuragarri guztiak orain goian daude 
+\n 
+\n • Wikipedia: jatorrizko artikulua irekitzeko botoia gehituta, artikuluen itxura eguneratua 
+\n 
+\n • Ibilbidea: hasiera eta amaiera puntuak behin sakatuta txandakatzeko aukera gehituta 
+\n 
+\n • Oharrak: mota eta dataren arabera ordenatzeko gaitasuna gehituta 
+\n 
+\n • OSM edizioak: erakutsi POI-aren kategoriaren ikono eta izena, bistaratu burututako ekintzak 
+\n 
+\n • Koordenatuen sarrerarako pantaila berria markatzaileek sorrera azkarrerako 
+\n 
 \n</string>
-    </resources>
+    <string name="will_open_tomorrow_at">Bihar irekiko du ordu honetan:</string>
+    <string name="copy_location_name">Kopiatu puntuaren / POI-aren izena</string>
+    <string name="toast_empty_name_error">Kokalekuak ez du izenik</string>
+</resources>

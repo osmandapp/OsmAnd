@@ -1426,7 +1426,7 @@
     <string name="versions_item">Sürümler</string>
     <string name="feedback">Görüşleriniz</string>
     <string name="contact_us">Bize Ulaşın</string>
-    <string name="map_legend">Harita Efsanesi</string>
+    <string name="map_legend">Harita İşaretleri</string>
     <string name="save_poi_without_poi_type_message">Gerçekten POI türünü belirtmeden POI\' yi kaydetmek istiyor musunuz?</string>
     <string name="poi_context_menu_modify_osm_change">OSM değişikliği değiştirme</string>
     <string name="new_version">Yeni Sürüm</string>
@@ -1779,7 +1779,7 @@
     <string name="gpx_timespan">Zaman aralığı:%1$s</string>
     <string name="gpx_timemoving">Zaman hareketli:%1$s</string>
     <string name="gpx_selection_segment_title">Bölüm</string>
-    <string name="gpx_selection_number_of_points">" %1$s noktaları"</string>
+    <string name="gpx_selection_number_of_points">%1$s nokta</string>
     <string name="gpx_selection_point">Nokta%1$s</string>
     <string name="gpx_selection_route_points">%1$s\nRota%2$s işaret</string>
     <string name="gpx_selection_points">%1$s\nPoints</string>
@@ -2260,7 +2260,7 @@
     <string name="osm_live_payment_desc">Abonelik ücreti her ay kesilecektir. Aboneliğinizi istediğiniz zaman Google Play\'den iptal edebilirsiniz.</string>
     <string name="donation_to_osm">OpenStreetMap topluluğuna bağış</string>
     <string name="donation_to_osm_desc">Bağışınızın bir bölümü, OpenStreetMap\'e değişiklik yapan OSM kullanıcılarına gönderilir. Abonelik ücretiniz aynı kalır.</string>
-    <string name="osm_live_subscription_desc">Abonelik; tüm küresel haritalar için sınır indirmeyi ve saatlik, günlük, haftalık güncellemeleri etkinleştirir.</string>
+    <string name="osm_live_subscription_desc">Abonelik; tüm küresel haritalar için sınırsız indirmeyi ve saatlik, günlük, haftalık güncellemeleri etkinleştirir.</string>
     <string name="osm_live_banner_desc">Sınırsız harita indirme edin, ve ayda birden çok harita güncellemesi al: haftalık, günlük veya saatlik.</string>
     <string name="osmand_plus_banner_desc">Sınırsız harita indirmeleri, güncellemeleri ve Wikipedia eklentisi.</string>
     <string name="skip_map_downloading">Haritaları indirmeyi atla</string>
@@ -2469,7 +2469,7 @@
     <string name="show_arrows_on_the_map">Haritada yön gösterici okları göster</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd seçilmiş profil için rotalı noktalara bağlanacak.</string>
     <string name="none_point_error">Lütfen en az bir nokta ekleyiniz.</string>
-    <string name="measurement_tool_action_bar">Haritayı görüntüle ve noktalar ekle</string>
+    <string name="measurement_tool_action_bar">Haritayı görüntüle ve nokta ekle</string>
     <string name="store_tracks_in_monthly_directories">Kaydedilmiş track\'ları aylık klasörlerde depola</string>
     <string name="mapillary_menu_filter_description">Resimleri yükleyicisine göre veya tarihe göre süzebilirsiniz. Süzgeçler yalnızca yakınlaştırılmış görüntü yaklaştırmada uygulanır.</string>
     <string name="distance_moving">Düzeltilmiş uzaklık</string>

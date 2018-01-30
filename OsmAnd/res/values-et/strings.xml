@@ -95,9 +95,9 @@
     <!-- string name="lat_lon_pattern">Laius: %1$.5f pikkus: %2$.5f</string -->
     <string name="follow_us">Järgi meid</string>
     <string name="access_direction_audio_feedback">Suunamise tagasiside heliga</string>
-    <string name="access_direction_audio_feedback_descr">Näita sihtpunkti suunda heliga</string>
+    <string name="access_direction_audio_feedback_descr">Näita sihtpunkti suunda heliga.</string>
     <string name="access_direction_haptic_feedback">Suunamise tagasiside kompides</string>
-    <string name="access_direction_haptic_feedback_descr">Näita sihtpunkti suunda vibratsiooniga</string>
+    <string name="access_direction_haptic_feedback_descr">Näita sihtpunkti suunda vibratsiooniga.</string>
     <string name="shared_string_from">alates</string>
     <string name="city_type_district">Linnaosa</string>
     <string name="city_type_neighbourhood">Naabruskond</string>
@@ -105,26 +105,26 @@
 	<string name="shared_string_is_open_24_7">Avatud 24/7</string>
     <string name="storage_directory_card">Mälukaart</string>
     <string name="coords_format">Koordinaatide formaat</string>
-    <string name="coords_format_descr">Geograafiliste koordinaatide vorming</string>
+    <string name="coords_format_descr">Geograafiliste koordinaatide vorming.</string>
   	<string name="current_track">Praegune teekond</string>
-    <string name="use_osm_live_routing_description">Aktiveeri OsmAnd Live muutuste navigeerimine</string>
+    <string name="use_osm_live_routing_description">Aktiveeri OsmAnd Live muutuste navigeerimine.</string>
 	<string name="use_osm_live_routing">OsmAnd Live navigeerimine</string>
     <string name="access_no_destination">Sihtkoht pole määratud</string>
     <string name="map_widget_magnetic_bearing">Asimuut</string>
     <string name="map_widget_bearing">Suhteline kurss</string>
     <string name="access_disable_offroute_recalc">Ära otsi uut marsruuti, kui eelmiselt lahkuti</string>
-    <string name="access_disable_offroute_recalc_descr">Väldib automaatset uue marsruudi otsimist, kui eelmiselt marsruudilt lahkuti</string>
+    <string name="access_disable_offroute_recalc_descr">Väldib automaatset uue marsruudi otsimist, kui eelmiselt marsruudilt lahkuti.</string>
     <string name="access_disable_wrong_direction_recalc">Ära otsi vastassuuna jaoks uut marsruuti</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Väldib automaatset uue marsruudi otsimist kui liigutakse vastassuunas</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Väldib automaatset uue marsruudi otsimist kui liigutakse vastassuunas.</string>
     <string name="access_smart_autoannounce">Nutikas teavitamine</string>
-    <string name="access_smart_autoannounce_descr">Teavita ainult juhul, kui suund sihtkoha poole muutub</string>
+    <string name="access_smart_autoannounce_descr">Teavita ainult juhul, kui suund sihtkoha poole muutub.</string>
     <string name="access_autoannounce_period">Automaatse teavituse periood</string>
-    <string name="access_autoannounce_period_descr">Minimaalne ajaintervall teavituste vahel</string>
+    <string name="access_autoannounce_period_descr">Minimaalne ajaintervall teavituste vahel.</string>
     <string name="access_default_color">Vaikevärv</string>
     <string name="access_category_choice">Vali kategooria</string>
     <string name="access_hint_enter_name">Sisesta nimi</string>
     <string name="access_hint_enter_category">Sisesta kategooria</string>
-    <string name="access_hint_enter_description">Sisesta kirjeldus</string>
+    <string name="access_hint_enter_description">Sisesta kirjeldus.</string>
     <string name="access_map_linked_to_location">Kaart on asukohaga lingitud</string>
     <string name="access_collapsed_list">Kitsendatud nimekiri</string>
     <string name="access_expanded_list">Laiendatud nimekiri</string>
@@ -153,7 +153,7 @@
     <string name="mapillary">Mapillary</string>
     <string name="increase_search_radius">Suurenda otsingu raadiust</string>
     <string name="nothing_found">Midagi ei leitud :(</string>
-    <string name="nothing_found_descr">Muuda otsingu päringut või suurenda otsingu raadiust</string>
+    <string name="nothing_found_descr">Muuda otsingu päringut või suurenda otsingu raadiust.</string>
     
     <string name="shared_string_permissions">Load</string>
     <string name="import_gpx_failed_descr">OsmAnd ei saa faili importida. Palun veendu, et OsmAnd\'il on õigus lugeda faili selle asukohast.</string>
@@ -167,13 +167,13 @@
     <string name="shared_string_reset">Lähtesta</string>
     <string name="shared_string_reload">Laadi uuesti</string>
     <string name="wrong_user_name">Vale kasutajanimi!</string>
-    <string name="mapillary_menu_title_dates">Kuupäevad</string>
+    <string name="mapillary_menu_title_dates">Kuupäev</string>
     <string name="mapillary_menu_edit_text_hint">Sisesta kasutajatunnus</string>
     <string name="mapillary_menu_title_username">Kasutajatunnus</string>
     <string name="improve_coverage_install_mapillary_desc">Sa võid lisada oma fotod või foto seeriad siia asukohta.
 \n
 \nSelleks, paigalda Mapillary rakendus Google Play veebipoest.</string>
-    <string name="no_photos_descr">Sellest asukohast meil fotosid ei ole</string>
+    <string name="no_photos_descr">Sellest asukohast meil fotosid ei ole.</string>
     <string name="restart_search">Taaskäivita otsing</string>
     <string name="quick_action_showhide_osmbugs_title">Näita/peida OSM Notes</string>
     <string name="quick_action_osmbugs_show">Näita OSM Notes</string>

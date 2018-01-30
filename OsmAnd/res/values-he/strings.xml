@@ -2486,11 +2486,7 @@
     <string name="animate_my_location_desc">הפעלת הנפשת גלישת מפה של המיקום שלי במהלך ניווט.</string>
     <string name="shared_string_in_name">ב־%1$s</string>
     <string name="one_tap_active_descr">ניתן לגעת בסמן על המפה כדי להעביר אותו לראש הסמנים הפעילים מבלי לפתוח את תפריט ההקשר.</string>
-    <string name="release_3_0">\\022 זיהוי של שלטי עצור מתחשב בכיוון הניווט
-\n
-\n • אלגוריתם חדש מספק ערכים בעלי משמעות לעלייה/ירידה למסלולי GPX
-\n
-\n • זמן הטיול (כלל נייסמית׳) מודע לתוואי הדרך (עלייה)
+    <string name="release_3_0">\\022 
 \n
 \n</string>
     <string name="one_tap_active">הפעלה בנגיעה אחת</string>
@@ -2609,4 +2605,8 @@
 <string name="access_direction_audio_feedback_descr">ציון כיוון נקודת היעד עם צליל.</string>
     <string name="delay_to_start_navigation_descr">נא לציין את זמן ההמתנה להישאר במסך תכנון הנתיב.</string>
     <string name="shared_string_without_name">ללא שם</string>
-    </resources>
+    <string name="will_open_tomorrow_at">ייפתח מחר ב־</string>
+    <string name="rendering_attr_hidePOILabels_name">תוויות נ״ע</string>
+    <string name="copy_location_name">העתקת שם נקודה/נ״ע</string>
+    <string name="toast_empty_name_error">למיקום אין שם</string>
+</resources>

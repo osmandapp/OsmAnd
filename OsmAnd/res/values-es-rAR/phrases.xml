@@ -210,7 +210,7 @@
 	<string name="poi_public_transport_platform_tram">Parada de tranvía</string>
 	<string name="poi_tram_stop">Parada de tranvía</string>
 	<string name="poi_public_transport_station">Estación de transporte público</string>
-	<string name="poi_bus_station">Estación de colectivo</string>
+	<string name="poi_bus_station">Estación de colectivos</string>
 	<string name="poi_railway_station">Estación de tren</string>
 	<string name="poi_railway_platform">Andén de tren</string>
 	<string name="poi_halt">Parada de tren</string>
@@ -3756,6 +3756,19 @@
 	<string name="poi_climbing_summit_log_yes">Registro de la escalada en la cumbre: Sí</string>
 	<string name="poi_climbing_summit_log_no">Registro de la escalada en la cumbre: No</string>
 	<string name="poi_climbing_routes">Rutas de escalada</string>
+
+
+<string name="poi_circumference">Circunferencia</string>
+	<string name="poi_diameter_crown">Diámetro de la corona</string>
+
+	<string name="poi_meadow_agricultural">Tipo: Agrícola</string>
+	<string name="poi_meadow_perpetual">Tipo: Perpetuo</string>
+	<string name="poi_meadow_transitional">Tipo: Temporario</string>
+	<string name="poi_meadow_pasture">Tipo: Pasto</string>
+
+	<string name="poi_frozen_food">Alimentos congelados</string>
+
+	<string name="poi_agrarian">Almacén agrícola</string>
 
 
 </resources>

@@ -3036,11 +3036,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="by_date">Par date</string>
     <string name="by_type">Par type</string>
     <string name="modify_the_search_query">Modifier la recherche.</string>
-    <string name="release_3_0">\\022 Les panneaux stop sont maintenant considérés comme des consignes de direction
-\n
-\n • Nouvel algorithme fournissant des données d\'altitude (montée / descente) sur les traces GPX
-\n
-\n • Durée d\'ascension en fonction du terrain (basé sur la règle de Naismith)
+    <string name="release_3_0">\\022 
 \n
 \n</string>
     <string name="total_donations">Total des dons</string>
@@ -3086,4 +3082,6 @@ représentant la zone : %1$s x %2$s</string>
 \n • Nouvel écran de saisie rapide des coordonnées pour la création de marques.
 \n
 \n</string>
-    </resources>
+    <string name="copy_location_name">Copier le nom du point</string>
+    <string name="toast_empty_name_error">L\'emplacement n\'a aucun nom</string>
+</resources>

@@ -613,7 +613,7 @@
 	<string name="poi_aquarium">Aquarium</string>
 	<string name="poi_team_handball">Handball</string>
   <string name="poi_shop">Geschäft</string>
-		<string name="poi_shop_food">Gemischtwaren- und Lebensmittelgeschäft</string>
+		<string name="poi_shop_food">Gemischtwarengeschäft und Supermarkt</string>
 	<string name="poi_emergency">Notfall</string>
 	<string name="poi_road_obstacle">Straßenhindernis</string>
 		<string name="poi_filling_station">Tankstelle</string>
@@ -3410,8 +3410,8 @@
 	<string name="poi_animal_shelter_mammal">Säugetiere</string>
 	<string name="poi_animal_shelter_fish">Fische</string>
 
-	<string name="poi_animal_shelter_type">Tierannahme</string>
-	<string name="poi_animal_shelter_purpose">Bestimmung</string>
+	<string name="poi_animal_shelter_type">Tiere erlaubt</string>
+	<string name="poi_animal_shelter_purpose">Zweck</string>
 
 <string name="poi_owner">Eigentümer</string>
 
@@ -3522,9 +3522,9 @@
 	<string name="poi_location_entrance">Lage: Eingang</string>
 
 	<string name="poi_operational_status">Betriebsstatus</string>
-	<string name="poi_water_supply_type">Wasser-Versorgungs-Art</string>
+	<string name="poi_water_supply_type">Wasserversorgungsart</string>
 	<string name="poi_water_purification">Wasseraufbereitung</string>
-	<string name="poi_water_place_access">Zugang zum Wasserplatz</string>
+	<string name="poi_water_place_access">Wasserplatzzugang</string>
 
 <string name="poi_location_rooftop">Lage: Auf dem Dach</string>
 	<string name="poi_visibility_house">Sichtbarkeit: Haus</string>
@@ -3662,5 +3662,38 @@
 <string name="poi_route_subway_ref">U-Bahn</string>
 
 	<string name="poi_climbing_style">Klettertechnik</string>
+
+<string name="poi_ref_post">Postleitzahl</string>
+
+	<string name="poi_climbing_sport_yes">Sport: ja</string>
+	<string name="poi_climbing_sport_no">Sport: nein</string>
+	<string name="poi_climbing_trad_yes">Traditionell: ja</string>
+	<string name="poi_climbing_trad_no">Traditionell: nein</string>
+	<string name="poi_climbing_ice_yes">Eis: ja</string>
+	<string name="poi_climbing_ice_no">Eis: nein</string>
+	<string name="poi_climbing_rock_limestone">Kletterfelsen: Kalkstein</string>
+	<string name="poi_climbing_rock_granite">Kletterfelsen: Granit</string>
+	<string name="poi_climbing_rock_sandstone">Kletterfelsen: Sandstein</string>
+	<string name="poi_climbing_rock_quartzite">Kletterfelsen: Quarzit</string>
+	<string name="poi_climbing_rock_gneiss">Kletterfelsen: Gneis</string>
+	<string name="poi_climbing_rock_porphyry">Kletterfelsen: Porphyr</string>
+	<string name="poi_climbing_orientation_n">Wandausrichtung: N</string>
+	<string name="poi_climbing_orientation_ne">Wandausrichtung: NO</string>
+	<string name="poi_climbing_orientation_e">Wandausrichtung: O</string>
+	<string name="poi_climbing_orientation_se">Wandausrichtung: SO</string>
+	<string name="poi_climbing_orientation_s">Wandausrichtung: S</string>
+	<string name="poi_climbing_orientation_sw">Wandausrichtung: SW</string>
+	<string name="poi_climbing_orientation_w">Wandausrichtung: W</string>
+	<string name="poi_climbing_orientation_nw">Wandausrichtung: NW</string>
+	<string name="poi_climbing_routes">Kletterrouten</string>
+
+	<string name="poi_diameter_crown">Durchmesser der Krone</string>
+
+	<string name="poi_meadow_agricultural">Typ: landwirtschaftlich</string>
+	<string name="poi_meadow_transitional">Typ: vorübergehend</string>
+	<string name="poi_frozen_food">Tiefkühlkost</string>
+
+	<string name="poi_agrarian">Hofladen</string>
+
 
 </resources>

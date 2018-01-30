@@ -126,7 +126,7 @@ public class ShareMenuFragment extends BaseOsmAndFragment implements OnItemClick
 	public void dismissMenu() {
 		menu.getMapActivity().getSupportFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		if (menu.getMapActivity().getContextMenu().isVisible()) {
-			menu.getMapActivity().getContextMenu().hide(false);
+			menu.getMapActivity().getContextMenu().close();
 		}
 	}
 }

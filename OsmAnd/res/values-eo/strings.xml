@@ -2898,11 +2898,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="by_date">Laŭ dato</string>
     <string name="by_type">Laŭ speco</string>
     <string name="modify_the_search_query">Modifi serĉpeton</string>
-    <string name="release_3_0">• Ekkonado de STOP-signoj nun konsideras direkton de veturo
-\n
-\n • Nova algoritmo liveranta sencplenajn valoroj de supreniro/malsupreniro por GPX-spuroj
-\n
-\n • Marŝada tempo konsideras profilon de tereno (regulo de Naismith)
+    <string name="release_3_0">\\022 
 \n
 \n</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
@@ -2928,4 +2924,32 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="total_donations">Donacoj tute</string>
 <string name="shared_string_without_name">Sennoma</string>
     <string name="lang_lo">Laŭa</string>
-    </resources>
+    <string name="will_open_tomorrow_at">Estos malfermita morgaŭ je</string>
+    <string name="rendering_attr_hidePOILabels_name">Etikedoj de interesejoj</string>
+    <string name="release_2_9">• Ekkonado de STOP-signoj nun konsideras direkton de veturo
+\n
+\n• Nova algoritmo liveranta sencplenajn valoroj de supreniro/malsupreniro por GPX-spuroj 
+\n 
+\n• Marŝada tempo konsideras profilon de tereno (regulo de Naismith)
+\n
+\n• Plibonigita kunteksta menuo: montras kiam interesejoj (mal)fermiĝas
+\n
+\n• Transporta menuo: ĉiuj disponeblaj kursoj nun montriĝas ĉe supre
+\n
+\n• Vikipedio: aldonis butonon por malfermi la originalan artikolon, plibonigita vidigo de artikoloj
+\n
+\n• Kurso: aldonis eblon por interŝanĝi komencan punkton per fina je unu frapeto
+\n
+\n• Notoj: aldonis ordigadon laŭ tipo aŭ dato
+\n
+\n• OSM-redaktoj: montras piktogramon kaj nomon de kategorion de interesejo, montras faritajn agojn
+\n
+\n• Nova rapida ekrano por enigi koordinatojn por rapide krei map-markojn
+\n</string>
+    <string name="day_off_label">fermita</string>
+    <string name="winter_and_ski_renderer">Vintro kaj skiado</string>
+    <string name="touring_view_renderer">Turisma mapo (kontrasta kaj detala)</string>
+    <string name="nautical_renderer">Marnavigada</string>
+    <string name="copy_location_name">Kopii nomon de punkto</string>
+    <string name="toast_empty_name_error">Loko estas sennoma</string>
+</resources>

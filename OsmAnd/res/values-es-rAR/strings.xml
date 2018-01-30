@@ -2860,11 +2860,7 @@ Proporciona un código completo</string>
     <string name="by_date">Por fecha</string>
     <string name="by_type">Por tipo</string>
     <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
-    <string name="release_3_0">• La detección de señales de alto, ahora considera la dirección de desplazamiento
-\n
-\n • Nuevo algoritmo que proporciona valores significativos de ascenso y descenso para trazas GPX.
-\n
-\n • El tiempo de caminata es consciente del terreno ascendente (regla de Naismith).
+    <string name="release_3_0">\\022 
 \n
 \n</string>
     <string name="av_locations_selected_desc">Archivo GPX con coordenadas y datos de las notas elegidas.</string>
@@ -2889,4 +2885,25 @@ Proporciona un código completo</string>
     <string name="shared_string_marker">Marcador</string>
     <string name="shared_string_without_name">Sin nombre</string>
     <string name="lang_lo">Laosiana</string>
-    </resources>
+    <string name="will_open_tomorrow_at">Abrirá mañana a las</string>
+    <string name="rendering_attr_hidePOILabels_name">Etiquetas de PDI</string>
+    <string name="release_2_9">• Se actualizó el menú contextual: ahora muestra cuando el PDI está abierto o cerrado.
+\n
+\n • Menú de transporte: todas las rutas disponibles están en la parte superior.
+\n
+\n • Wikipedia: se añadió el botón para abrir el artículo original, se actualizó la apariencia de los artículos
+\n
+\n • Ruta: se añadió la posibilidad de intercambiar los puntos de inicio y fin con una sola pulsación
+\n
+\n • Notas: se añadió el orden por tipo y fecha
+\n
+\n • Edición OSM: ahora muestra un icono y el nombre de la categoría de PDI, también muestra las acciones completadas.
+\n
+\n • Nueva pantalla de ingreso rápido de coordenadas para la creación rápida de marcadores</string>
+    <string name="day_off_label">cerrado (día libre)</string>
+    <string name="winter_and_ski_renderer">Invierno y esquí</string>
+    <string name="touring_view_renderer">Vista de Touring (contraste y detalles)</string>
+    <string name="nautical_renderer">Náutico</string>
+<string name="copy_location_name">Copiar nombre del punto/PDI</string>
+    <string name="toast_empty_name_error">Ubicación sin nombre</string>
+</resources>

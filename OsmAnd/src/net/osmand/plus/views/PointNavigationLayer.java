@@ -227,8 +227,11 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@Override
 	public boolean isObjectMovable(Object o) {
-		TargetPointsHelper targetPoints = map.getMyApplication().getTargetPointsHelper();
-		return o == targetPoints.getPointToNavigate();
+		if (o != null && o instanceof TargetPoint) {
+			TargetPointsHelper targetPointsHelper = map.getMyApplication().getTargetPointsHelper();
+			return targetPointsHelper.getAllPoints().contains(o);
+		}
+		return false;
 	}
 
 	@Override
@@ -238,8 +241,24 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		TargetPoint newTargetPoint = null;
 		if (o instanceof TargetPoint) {
 			TargetPointsHelper targetPointsHelper = map.getMyApplication().getTargetPointsHelper();
-			targetPointsHelper.navigateToPoint(position, true, -1, new PointDescription(PointDescription.POINT_TYPE_LOCATION, ""));
-			newTargetPoint = targetPointsHelper.getPointToNavigate();
+			TargetPoint oldPoint = (TargetPoint) o;
+			if (oldPoint.start) {
+				targetPointsHelper.setStartPoint(position, true, null);
+				newTargetPoint = targetPointsHelper.getPointToStart();
+			} else if (oldPoint == targetPointsHelper.getPointToNavigate()) {
+				targetPointsHelper.navigateToPoint(position, true, -1, null);
+				newTargetPoint = targetPointsHelper.getPointToNavigate();
+			} else if (oldPoint.intermediate) {
+				List<TargetPoint> points = targetPointsHelper.getIntermediatePointsWithTarget();
+				int i = points.indexOf(oldPoint);
+				if (i != -1) {
+					newTargetPoint = new TargetPoint(position,
+							new PointDescription(PointDescription.POINT_TYPE_LOCATION, ""));
+					points.set(i, newTargetPoint);
+					targetPointsHelper.reorderAllTargetPoints(points, true);
+				}
+
+			}
 			result = true;
 		}
 		if (callback != null) {

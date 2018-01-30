@@ -2678,10 +2678,10 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_name">Seleziona la variabilità della quota</string>
     <string name="driving_region_automatic">Automatica</string>
     <string name="do_not_send_anonymous_app_usage">Non inviare statistiche anonime sull\'utilizzo dell\'app</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd raccoglie informazioni su quale parti dell\'applicazione tu utilizzi. La tua geolocalizzazione non viene mai inviata, nemmeno qualsiasi dato che tu immetti nell\'app o dettagli sulle aree che visualizzi cerchi o scarichi.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd raccoglie informazioni su quale parti dell\'applicazione tu utilizzi. La tua geolocalizzazione non viene mai inviata, nemmeno qualsiasi dato che tu immetti nell\'app o dettagli sulle aree che visualizzi, cerchi o scarichi.</string>
     <string name="do_not_show_startup_messages">Non mostrare alcun messaggio all\'avvio</string>
     <string name="do_not_show_startup_messages_desc">Elimina messaggi riguardo sconti dell\'app ed eventi speciali locali.</string>
-    <string name="parking_options">Opzioni parcheggio</string>
+    <string name="parking_options">Opzioni di parcheggio</string>
     <string name="full_version_thanks">Grazie per avere acquistato la versione completa di OsmAnd!</string>
     <string name="fonts_header">Caratteri della mappa</string>
     <string name="right_side_navigation">Guida a destra</string>
@@ -2696,7 +2696,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_visible">Visibile</string>
     <string name="restore_purchases">Ripristina gli acquisti fatti</string>
     <string name="subscribe_email_error">Errore</string>
-    <string name="subscribe_email_desc">Sottoscrivi la mailing list della nostra applicazione e avrai ulteriori 3 download di mappe!</string>
+    <string name="subscribe_email_desc">Sottoscrivi la mailing list della nostra applicazione e otterrai ulteriori 3 download di mappe!</string>
     <string name="quick_action_auto_zoom">Zoom della mappa automatico acceso/spento</string>
     <string name="quick_action_auto_zoom_desc">Toccando il pulsante azione accenderà o spegnerà lo zoom automatico della mappa in base alla tua velocità.</string>
     <string name="quick_action_auto_zoom_on">Abilita lo oom della mappa automatico della mappa</string>
@@ -2708,7 +2708,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_replace_destination_desc">Toccando il pulsante azione sostituirai la destinazione con la posizione al centro dello schermo.</string>
     <string name="quick_action_add_first_intermediate_desc">Toccando il pulsante azione aggiungerai un primo punto intermedio nella posizione al centro dello schermo.</string>
     <string name="no_overlay">Nessun stato sovrapposto</string>
-    <string name="no_underlay">Nessun stato di sfondo</string>
+    <string name="no_underlay">Nessun strato di sfondo</string>
     <string name="shared_string_paused">In pausa</string>
     <string name="type_city_town">Scrivi la città o il paese</string>
     <string name="type_postcode">Scrivi il codice postale</string>
@@ -2719,7 +2719,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_in_name">in %1$s</string>
     <string name="type_address">Scrivi l\'indirizzo</string>
     <string name="animate_my_location">Simula la mia posizione</string>
-    <string name="animate_my_location_desc">In navigazione abilita l\'interpolazione della mia localizzazione.</string>
+    <string name="animate_my_location_desc">In navigazione abilita l\'interpolazione della Mia Posizione.</string>
     <string name="shared_string_overview">Panoramica</string>
     <string name="show_from_zoom_level">Mostra dal livello di zoom</string>
     <string name="display_zoom_level">Mostra il livello dello zoom: %1$s</string>
@@ -2848,7 +2848,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="line">Linea</string>
     <string name="save_as_route_point">Salva come punti di un percorso</string>
     <string name="save_as_line">Salva come linea</string>
-    <string name="route_point">Punto percorso</string>
+    <string name="route_point">Punto del percorso</string>
     <string name="edit_line">Modifica la linea</string>
     <string name="add_point_before">Aggiungi un punto prima</string>
     <string name="add_point_after">Aggiungi un punto dopo</string>
@@ -2890,7 +2890,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="remove_from_map_markers">Rimuovi dai Marcatori Mappa</string>
     <string name="descendingly">discendente</string>
     <string name="ascendingly">ascendente</string>
-    <string name="date_added">Dato aggiunto</string>
+    <string name="date_added">Data aggiunta</string>
     <string name="order_by">Ordina per:</string>
     <string name="coordinates_format">Formato coordinate</string>
     <string name="use_system_keyboard">Utilizza la tastiera di sistema</string>
@@ -2941,7 +2941,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="wrong_input">Dati immessi errati</string>
 	<string name="enter_new_name">Inserisci il nuovo nome</string>
 	<string name="shared_string_back">Indietro</string>
-	<string name="view">Vista</string>
+	<string name="view">Visualizza</string>
 	<string name="waypoints_added_to_map_markers">Punti intermedi aggiunti ai marcatori della mappa</string>
 	<string name="wrong_format">Formato errato</string>
     <string name="release_2_8">\\022 Rivisti completamente i marcatori, le indicazioni e la pianificazione del percorso 
@@ -3003,11 +3003,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="notes_by_date">Note ordinate per data</string>
     <string name="by_date">Per data</string>
     <string name="by_type">Per tipo</string>
-    <string name="release_3_0">\\022 Individuazione dei segnali di stop ora considera le direzioni di guida
-\n
-\n • Nuovo algoritmo fornisce significativi valori di salita/discesa per le tracce GPX
-\n
-\n • Tempo di percorrenza per l\'escursionismo tiene conto delle salite (Regola di Naismith)
+    <string name="release_3_0">\\022
 \n
 \n</string>
     <string name="modify_the_search_query">Modifica la richiesta di ricerca.</string>
@@ -3031,18 +3027,21 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_marker">Marcatore</string>
     <string name="shared_string_without_name">Senza nome</string>
     <string name="rendering_attr_hidePOILabels_name">Etichette PDI</string>
-    <string name="release_2_9">"\\022 Aggiornato il menù contestuale: mostra quando i PDI aprono / chiudono
-\n
-\n • Menù trasporto pubblico: tutti i percorsi disponibili sono ora in alto
-\n
-\n • Wikipedia: aggiunto il pulsante per aprire l\'articolo originale, aggiornato l\'aspetto degli  articoli
-\n
-\n • Percorso: aggiunta la possibilità di scambiare la partenza è la destinazione con un tocco
-\n
-\n • Notes aggiunto l\'ordina per data e per tipo
-\n
-\n • Modifiche OSM: mostra un\'icona e il nome della categoria del PDI, mostra le azioni completate
-\n
-\n • Nuova schermata veloce per l\'inserimento delle coordinate per la creazione veloce di marcatori"</string>
+    <string name="release_2_9">\\022 Aggiornato il menù contestuale: mostra quando i PDI aprono / chiudono 
+\n 
+\n • Menù trasporto pubblico: tutti i percorsi disponibili sono ora in alto 
+\n 
+\n • Wikipedia: aggiunto il pulsante per aprire l\'articolo originale, aggiornato l\'aspetto degli articoli 
+\n 
+\n • Percorso: aggiunta la possibilità di scambiare la partenza e la destinazione con un tocco 
+\n 
+\n • Note aggiunto l\'ordina per data e per tipo 
+\n 
+\n • Modifiche OSM: mostra un\'icona e il nome della categoria del PDI, mostra le azioni completate 
+\n 
+\n • Nuova schermata veloce per l\'inserimento delle coordinate per la creazione veloce di marcatori</string>
     <string name="osm_recipient_stat">Modifiche %1$s, sum %2$s mBTC</string>
-    </resources>
+    <string name="copy_location_name">Copia il nome del punto/PDI</string>
+    <string name="will_open_tomorrow_at">Aprirà domani alle</string>
+    <string name="toast_empty_name_error">Il luogo non ha nome</string>
+</resources>

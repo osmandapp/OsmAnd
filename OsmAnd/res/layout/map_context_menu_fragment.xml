@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
 
-    <LinearLayout
+    <net.osmand.plus.mapcontextmenu.InterceptorLinearLayout
         android:id="@+id/context_menu_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/bg_map_context_menu"
-            android:clickable="true"
             android:orientation="vertical">
 
             <LinearLayout
@@ -398,7 +397,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="?selectableItemBackground"
-                    android:clickable="true"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:paddingBottom="@dimen/context_menu_main_actions_padding_bottom"
@@ -581,7 +579,7 @@
             android:foreground="@drawable/bg_contextmenu_shadow"
             android:foregroundGravity="top|fill_horizontal">
 
-            <ScrollView
+            <net.osmand.plus.LockableScrollView
                 android:id="@+id/context_menu_bottom_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -596,10 +594,11 @@
 
                 </LinearLayout>
 
-            </ScrollView>
+            </net.osmand.plus.LockableScrollView>
+
         </FrameLayout>
 
-    </LinearLayout>
+    </net.osmand.plus.mapcontextmenu.InterceptorLinearLayout>
 
     <FrameLayout
         android:id="@+id/context_menu_fab_container"
