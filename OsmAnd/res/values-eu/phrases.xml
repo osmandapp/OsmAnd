@@ -2217,4 +2217,57 @@
 	<string name="poi_crossing_on_demand_no">Eskapeko bidegurutzea: ez</string>
 	<string name="poi_boat_rental_type">Alokairuzko ontziak</string>
 	<string name="poi_operational_status">Egoera operatiboa</string>
-	</resources>
+	<string name="poi_water_purification">Ur arazketa</string>
+	<string name="poi_climbing_style">Eskalada estiloa</string>
+
+<string name="poi_seamark_building">Eraikuntza nautikoa</string>
+	<string name="poi_seamark_bridge">Zubi nautikoa</string>
+	<string name="poi_buoy_cardinal">Buia kardinala</string>
+	<string name="poi_buoy_isolated_danger">Buia, arrisku isolatua</string>
+	<string name="poi_social_facility_workshop">Lantegia</string>
+	<string name="poi_theatre_genre_philharmonic">Filarmonika</string>
+	<string name="poi_theatre_genre_musical">Musikala</string>
+	<string name="poi_theatre_genre_drama">Drama</string>
+	<string name="poi_theatre_genre_opera">Opera</string>
+	<string name="poi_theatre_genre_cabaret">Kabareta</string>
+	<string name="poi_theatre_genre_puppet">Txotxongiloak</string>
+	<string name="poi_theatre_genre_comedy">Komedia</string>
+	<string name="poi_theatre_genre_chamber_music">Ganbera-musika</string>
+	<string name="poi_theatre_genre_marionette">Marionetak</string>
+	<string name="poi_theatre_genre_ballet">Ballet</string>
+	<string name="poi_theatre_genre_shadow_play">Itzal txinatarrak</string>
+
+	<string name="poi_bandstand">Kioskoa</string>
+	<string name="poi_kiln">Labea</string>
+	<string name="poi_product_brick">Produktua: Adreiluak</string>
+	<string name="poi_product_quicklime">Produktua: Kare bizia</string>
+	<string name="poi_product_leather">Produktua: Larrua</string>
+	<string name="poi_product_lime">Produktua: Karea</string>
+	<string name="poi_product_beer">Produktua: Garagardoa</string>
+	<string name="poi_product_charcoal">Produktua: Ikatz begetala</string>
+	<string name="poi_product_meat">Produktua: haragia</string>
+
+	<string name="poi_wheelchair_description">Gurpil-aulki erabiltzaileentzako deskripzioa</string>
+	<string name="poi_blind_description">Itsuentzako deskripzioa</string>
+	<string name="poi_deaf_description">Gorrentzako deskripzioa</string>
+
+	<string name="poi_highway_steps">Eskailera</string>
+	<string name="poi_handrail_yes">Baranda: bai</string>
+	<string name="poi_handrail_no">Baranda: ez</string>
+	<string name="poi_ramp_yes">Arrapala: bai</string>
+	<string name="poi_ramp_no">Arrapala: ez</string>
+	<string name="poi_ramp_wheelchair_yes">Gurpil-aulkientzako arrapala: bai</string>
+	<string name="poi_ramp_wheelchair_no">Gurpil-aulkientzako arrapala: ez</string>
+	<string name="poi_ramp_stroller_yes">Arrapala (orga): bai</string>
+	<string name="poi_ramp_stroller_no">Arrapala (orga): ez</string>
+	<string name="poi_ramp_bicycle_yes">Bizikletentzako arrapala: bai</string>
+	<string name="poi_ramp_bicycle_no">Bizikletentzako arrapala: ez</string>
+	<string name="poi_ramp_luggage_yes">Bagajearentzako arrapala: bai</string>
+	<string name="poi_ramp_luggage_no">Bagajearentzako arrapala: ez</string>
+	<string name="poi_tomb_tumulus">Mota: Tumulua</string>
+	<string name="poi_frozen_food">Janari izoztua</string>
+
+	<string name="poi_agrarian">Nekazaritza denda</string>
+
+
+</resources>
