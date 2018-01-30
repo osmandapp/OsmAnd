@@ -1142,15 +1142,8 @@ public class OsmandAidlApi {
 			if (f.exists()) {
 				GpxDataItem item = app.getGpxDatabase().getItem(f);
 				if (item != null && item.isApiImported()) {
-					new AsyncTask<File, Void, Void>() {
-
-						@Override
-						protected Void doInBackground(File... files) {
-							Algorithms.removeAllFiles(f);
-							app.getGpxDatabase().remove(f);
-							return null;
-						}
-					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
+					Algorithms.removeAllFiles(f);
+					app.getGpxDatabase().remove(f);
 				}
 			}
 		}
