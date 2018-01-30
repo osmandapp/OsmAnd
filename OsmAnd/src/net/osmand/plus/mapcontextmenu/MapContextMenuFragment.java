@@ -98,6 +98,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private int markerPaddingPx;
 	private int markerPaddingXPx;
+	private int topScreenPosY;
 
 	private OsmandMapTileView map;
 	private LatLon mapCenter;
@@ -112,7 +113,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private boolean wasDrawerDisabled;
 	private boolean zoomIn;
 
-	private float skipHalfScreenStateLimit;
+	private float skipScreenStateLimit;
 
 	private int screenOrientation;
 	private boolean created;
@@ -125,6 +126,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
+		topScreenPosY = -dpToPx(SHADOW_HEIGHT_TOP_DP);
 
 		menu = getMapActivity().getContextMenu();
 		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
@@ -327,8 +329,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 							velocity.recycle();
 
-							boolean skipHalfScreenState = Math.abs(currentY - dyMain) > skipHalfScreenStateLimit;
-							changeMenuState(currentY, skipHalfScreenState, slidingUp, slidingDown);
+							boolean skipScreenState = Math.abs(currentY - dyMain) > skipScreenStateLimit;
+							changeMenuState(currentY, skipScreenState, slidingUp, slidingDown);
 						}
 						break;
 
@@ -487,7 +489,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		detailsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				menu.openMenuFullScreen();
+				openMenuHalfScreen();
 			}
 		});
 		TextView directionsButton = (TextView) view.findViewById(R.id.context_menu_directions_button);
@@ -543,7 +545,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				if (showShowHideButton) {
 					openMenuHeaderOnly();
 				} else {
-					openMenuFullScreen();
+					openMenuHalfScreen();
 				}
 			}
 		});
@@ -575,7 +577,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void processScreenHeight(ViewParent parent) {
 		View container = (View)parent;
 		screenHeight = container.getHeight() + AndroidUtils.getStatusBarHeight(getActivity());
-		skipHalfScreenStateLimit = screenHeight * SKIP_HALF_SCREEN_STATE_KOEF;
+		skipScreenStateLimit = screenHeight * SKIP_HALF_SCREEN_STATE_KOEF;
 		viewHeight = screenHeight - AndroidUtils.getStatusBarHeight(getMapActivity());
 	}
 
@@ -596,19 +598,22 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 	}
 
-	private void changeMenuState(int currentY, boolean skipHalfScreenState,
+	private void changeMenuState(int currentY, boolean skipScreenState,
 								 boolean slidingUp, boolean slidingDown) {
 		boolean needCloseMenu = false;
 
 		int oldMenuState = menu.getCurrentMenuState();
+		if (slidingDown && !skipScreenState && oldMenuState == MenuState.FULL_SCREEN && currentY < topScreenPosY) {
+			slidingDown = false;
+		}
 		if (menuBottomViewHeight > 0 && slidingUp) {
 			menu.slideUp();
-			if (skipHalfScreenState) {
+			if (skipScreenState) {
 				menu.slideUp();
 			}
 		} else if (slidingDown) {
 			needCloseMenu = !menu.slideDown();
-			if (!needCloseMenu && skipHalfScreenState) {
+			if (!needCloseMenu && skipScreenState) {
 				menu.slideDown();
 			}
 		}
@@ -1240,6 +1245,19 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 	}
 
+	private void updateZoomButtonsVisibility(int menuState) {
+		boolean zoomButtonsVisible = menu.zoomButtonsVisible() && menuState == MenuState.HEADER_ONLY;
+		if (zoomButtonsVisible) {
+			if (zoomButtonsView.getVisibility() != View.VISIBLE) {
+				zoomButtonsView.setVisibility(View.VISIBLE);
+			}
+		} else {
+			if (zoomButtonsView.getVisibility() == View.VISIBLE) {
+				zoomButtonsView.setVisibility(View.INVISIBLE);
+			}
+		}
+	}
+
 	private int getPosY() {
 		return getPosY(CURRENT_Y_UNDEFINED, false);
 	}
@@ -1256,8 +1274,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			minHalfY = viewHeight - (int) (viewHeight * menu.getHalfScreenMaxHeightKoef());
 		} else {
 			destinationState = MenuState.HEADER_ONLY;
-			minHalfY = viewHeight;
+			minHalfY = viewHeight - (int) (viewHeight * .75f);
 		}
+
+		updateZoomButtonsVisibility(destinationState);
 
 		int posY = 0;
 		switch (destinationState) {
@@ -1265,13 +1285,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				posY = viewHeight - menuTitleHeight;
 				break;
 			case MenuState.HALF_SCREEN:
-				posY = viewHeight - menuFullHeightMax;
-				posY = Math.max(posY, minHalfY);
+				posY = minHalfY;
 				break;
 			case MenuState.FULL_SCREEN:
 				if (currentY != CURRENT_Y_UNDEFINED) {
 					int maxPosY = viewHeight - menuFullHeightMax;
-					int minPosY = Math.max(maxPosY, minHalfY);
+					int minPosY = addStatusBarHeightIfNeeded(topScreenPosY);
 					if (maxPosY > minPosY) {
 						maxPosY = minPosY;
 					}
@@ -1283,8 +1302,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						posY = currentY;
 					}
 				} else {
-					posY = -dpToPx(SHADOW_HEIGHT_TOP_DP);
-					posY = addStatusBarHeightIfNeeded(posY);
+					posY = addStatusBarHeightIfNeeded(topScreenPosY);
 				}
 				break;
 			default:
@@ -1417,7 +1435,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void doLayoutMenu() {
-		final int posY = getPosY();
+		final int posY = getPosY(getViewY(), false);
 		setViewY(posY, true, !initLayout || !centered);
 		updateMainViewLayout(posY);
 	}
@@ -1430,6 +1448,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			} catch (Exception e) {
 			}
 		}
+	}
+
+	public void updateLayout() {
+		runLayoutListener();
 	}
 
 	public void refreshTitle() {
