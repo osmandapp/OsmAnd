@@ -1519,7 +1519,7 @@
     <string name="shared_string_deleted">Избрисано</string>
     <string name="shared_string_edited">Уређено</string>
     <string name="shared_string_added">Додато</string>
-    <string name="marker_activated">Белешка</string>
+    <string name="marker_activated">Активирана ознака %s</string>
     <string name="one_tap_active_descr">Тупните ознаку на карти ради њеног померања на врх покренутих ознака без отварања приручног изборника.</string>
     <string name="one_tap_active">Покретање на туп</string>
     <string name="empty_state_av_notes">Хватајте белешке!</string>
