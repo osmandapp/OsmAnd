@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dialog_content_bottom_margin"
+        android:paddingLeft="@dimen/dialog_content_margin"
+        android:paddingRight="@dimen/dialog_content_margin"
+        android:paddingTop="@dimen/dialog_content_bottom_margin">
+
+        <TextView
+            android:id="@+id/parkTime"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:text="@string/osmand_parking_position_description_add"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:orientation="horizontal">>
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/osmand_parking_hours"/>
+
+            <TimePicker
+                android:id="@+id/parking_time_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/osmand_parking_minutes"/>
+        </LinearLayout>
+
+
+        <CheckBox
+            android:id="@+id/check_event_in_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/osmand_parking_add_event"/>
+    </LinearLayout>
+</ScrollView>
+
