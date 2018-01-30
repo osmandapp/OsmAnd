@@ -1423,12 +1423,12 @@
     <string name="restart_search">重新开始搜索</string>
     <string name="increase_search_radius">增加搜索范围</string>
     <string name="nothing_found">什么都没找到 :(</string>
-    <string name="nothing_found_descr">尝试改变搜索查询内容或增加搜索范围</string>
+    <string name="nothing_found_descr">尝试改变搜索查询内容或增加搜索范围。</string>
     <string name="quick_action_showhide_osmbugs_title">显示/隐藏 OSM 笔记</string>
     <string name="quick_action_osmbugs_show">显示 OSM 笔记</string>
     <string name="quick_action_osmbugs_hide">隐藏 OSM 笔记</string>
     <string name="shared_string_add_photos">添加照片</string>
-    <string name="routing_attr_allow_private_description">允许进入私有土地</string>
+    <string name="routing_attr_allow_private_description">允许进入私有土地。</string>
     <string name="download_tab_downloads">全部下载</string>
     <string name="download_tab_local">本地</string>
     <string name="download_tab_updates">可更新</string>
@@ -1481,7 +1481,7 @@
     <string name="online_photos">在线照片</string>
     <string name="mapillary_descr">供所有人使用的在线街景照片。协作发现景点，捕捉世界之美。</string>
     <string name="distance_moving">距离已修正</string>
-    <string name="no_photos_descr">我们没有该地点的照片</string>
+    <string name="no_photos_descr">我们没有该地点的照片。</string>
     <string name="routing_attr_short_way_name">节油道路</string>
     <string name="routing_attr_short_way_description">使用节油道路（通常更短）</string>
     <string name="configure_screen_quick_action">快捷操作</string>
@@ -1507,7 +1507,7 @@
 \n要做到這些，您需要去 Google Play 安裝 Mapillary 应用。</string>
     <string name="mapillary_action_descr">在这个地点，通过 Mapillary 贡献您的在线街景图片。</string>
     <string name="mapillary_widget">Mapillary 小工具</string>
-    <string name="mapillary_widget_descr">可以让你迅速将图片提交到 Mapillary</string>
+    <string name="mapillary_widget_descr">可以助您迅速将图片提交到 Mapillary。</string>
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">将街道平面照片給每个人。发现新地点、写作、获取整个世界。</string>
     <string name="quick_action_showhide_osmbugs_descr">轻点动作按钮会在地图上显示或隐藏 OSM 注解。</string>
@@ -1522,7 +1522,7 @@
     <string name="show_from_zoom_level">根据縮放等級显示</string>
     <string name="favorite_group_name">组名称</string>
     <string name="animate_my_location">动画处理我的位置</string>
-    <string name="animate_my_location_desc">在导航时为我的位置启用动画</string>
+    <string name="animate_my_location_desc">在导航时为我的位置启用动画。</string>
     <string name="quick_action_add_destination_desc">轻点按鈕将在屏幕中心位置添加一个目的地。以前设定的目的地成为最后的中转点。</string>
     <string name="quick_action_replace_destination_desc">轻点动作按钮将吧屏幕中心的位置更换为目的地。</string>
     <string name="quick_action_add_first_intermediate_desc">轻点动作按钮将在屏幕中心位置添加一个中转点。</string>
@@ -2618,8 +2618,8 @@
     <string name="mapillary_menu_title_username">用户名</string>
     <string name="mapillary_menu_edit_text_hint">输入用户名</string>
     <string name="mapillary_menu_title_dates">日期</string>
-    <string name="mapillary_menu_descr_username">查看特定用户添加的图像。</string>
-    <string name="mapillary_menu_descr_dates">查看特定时期内添加的图像。</string>
+    <string name="mapillary_menu_descr_username">仅查看特定用户添加的图像</string>
+    <string name="mapillary_menu_descr_dates">仅查看添加的图像</string>
     <string name="mapillary_menu_filter_description">您可以根据提交者或日期过滤图像。过滤器仅在高比例尺放大时产生作用。</string>
     <string name="shared_string_reload">重新载入</string>
     <string name="shared_string_reset">重置</string>
@@ -2634,10 +2634,10 @@
     <string name="moving_time">移动时间</string>
     <string name="min_max">最小/最大</string>
     <string name="quick_action_resume_pause_navigation">继续/暂停导航</string>
-    <string name="quick_action_resume_pause_navigation_descr">点击该按钮以暂停导航，或者在已暂停时恢复导航。</string>
+    <string name="quick_action_resume_pause_navigation_descr">点击该按钮以暂停或恢复导航。</string>
     <string name="quick_action_show_navigation_finish_dialog">显示导航完成对话框</string>
-    <string name="quick_action_start_stop_navigation">开始/结束导航</string>
-    <string name="quick_action_start_stop_navigation_descr">点击该按钮以开始导航，或者在导航已经开始的情况下结束导航。</string>
+    <string name="quick_action_start_stop_navigation">开始/停止导航</string>
+    <string name="quick_action_start_stop_navigation_descr">点击该按钮以开始或结束导航。</string>
     <string name="release_2_7">\\022 带有街道等级图像的 Mapillary 插件
 \n
 \n• 用于距离测量的量尺小部件
@@ -2689,11 +2689,7 @@
     <string name="additional_actions">额外的活动</string>
     <string name="av_locations_selected_desc">GPX文件，包含所选笔记的坐标和数据。</string>
     <string name="av_locations_all_desc">GPX文件，包含所有注释的坐标和数据。</string>
-    <string name="release_3_0">\\022 停车标志的检测，现在考虑驾驶方向
-\n
-\n  •新算法为GPX轨迹提供有意义的上升/下降值
-\n
-\n  •地形（上升）能够感觉到到徒步的时间（奈史密斯的规则）
+    <string name="release_3_0">\\022 
 \n
 \n</string>
     <string name="modify_the_search_query">修改搜索查询。</string>
@@ -2741,4 +2737,7 @@
     <string name="show_on_map_after_saving">保存后在地图上显示</string>
     <string name="measurement_tool_action_bar">浏览地图并添加点</string>
     <string name="measurement_tool">测量距离</string>
+    <string name="will_open_tomorrow_at">明日开始营业时间</string>
+    <string name="rendering_attr_hidePOILabels_name">兴趣点（POI）标签</string>
+    <string name="show_number_pad">显示数字盘</string>
     </resources>
