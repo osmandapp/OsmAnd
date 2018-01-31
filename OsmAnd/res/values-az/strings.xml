@@ -1585,7 +1585,7 @@
     <string name="map_marker_2nd">İkinci xəritə işarəsi</string>
     <string name="add_points_to_map_markers_q">Bütün nöqtələri xəritə işarələrinə əlavə etmək istəyirsiniz?</string>
     <string name="shared_string_add_to_map_markers">Xəritə işarələrinə əlavə et</string>
-    <string name="select_map_markers">Xəritə işarələri seçin</string>
+    <string name="select_map_markers">Xəritə işarələri seç</string>
     <string name="show_map_markers_description">Xəritə işarələri xüsusiyyətini aktivləşdir.</string>
     <string name="clear_active_markers_q">Bütün aktiv işarələri silmək istəyirsiniz?</string>
     <string name="clear_markers_history_q">Xəritə işarələri tarixçəsini təmizləmək istəyirsiniz?</string>
@@ -1827,4 +1827,12 @@
     <string name="quick_actions_delete">Fəaliyyəti sil</string>
     <string name="quick_actions_delete_text">“%s” fəaliyyətini silmək istədiyinizə əminsiniz?</string>
     <string name="quick_favorites_show_favorites_dialog">Favoritlər dialoqunu göstər</string>
+    <string name="rendering_value_darkyellow_name">Tünd sarı</string>
+    <string name="shared_string_more_actions">Digər fəaliyyətlər</string>
+    <string name="local_openstreetmap_act_title">OSM dəyişiklikləri</string>
+    <string name="access_arrival_time">Gəlmə vaxtı</string>
+    <string name="index_name_openmaps">OpenMaps - Avropa</string>
+    <string name="recording_unavailable">dəstəklənmir</string>
+    <string name="close_changeset">Dəyişiklikləri bağla</string>
+    <string name="rotate_map_to_bearing">Xəritənin istiqaməti</string>
     </resources>
