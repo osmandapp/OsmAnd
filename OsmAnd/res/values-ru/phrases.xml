@@ -3728,4 +3728,10 @@
 
 	<string name="poi_shop_fireplace">Магазин каминов</string>
 
+	<string name="poi_mountain_area">Горный массив</string>
+	<string name="poi_couloir">Ущелье</string>
+	<string name="poi_gorge">Теснина</string>
+
+	<string name="poi_shop_boat">Магазин лодок</string>
+
 	</resources>

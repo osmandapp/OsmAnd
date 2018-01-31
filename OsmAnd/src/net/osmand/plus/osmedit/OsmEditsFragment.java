@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
 import android.util.Xml;
@@ -29,6 +31,9 @@ import android.widget.Toast;
 
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Node;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -40,9 +45,12 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.osmedit.ExportOptionsBottomSheetDialogFragment.ExportOptionsFragmentListener;
+import net.osmand.plus.osmedit.FileTypeBottomSheetDialogFragment.FileTypeFragmentListener;
+import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
+import net.osmand.plus.osmedit.OsmPoint.Group;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.PoiUploaderType;
-import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
 import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -50,12 +58,33 @@ import org.xmlpull.v1.XmlSerializer;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialogFragment.ProgressDialogPoiUploader, OpenstreetmapLocalUtil.OnNodeCommittedListener {
+
+	public static final int EXPORT_TYPE_ALL = 0;
+	public static final int EXPORT_TYPE_POI = 1;
+	public static final int EXPORT_TYPE_NOTES = 2;
+
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef({EXPORT_TYPE_ALL, EXPORT_TYPE_POI, EXPORT_TYPE_NOTES})
+	@interface ExportTypesDef {
+	}
+
+	public static final int FILE_TYPE_OSC = 0;
+	public static final int FILE_TYPE_GPX = 1;
+
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef({FILE_TYPE_OSC, FILE_TYPE_GPX})
+	@interface FileTypesDef {
+	}
+
+	private static final String EXPORT_TYPE_KEY = "export_type";
 
 	private final static int MODE_DELETE = 100;
 	private final static int MODE_UPLOAD = 101;
@@ -72,14 +101,16 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	private ActionMode actionMode;
 	private long refreshId;
 
+	private int exportType;
+
 	public static void getOsmEditView(View v, OsmPoint child, OsmandApplication app) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
 		String name = OsmEditingPlugin.getEditName(child);
 		viewName.setText(name);
-		if (child.getGroup() == OsmPoint.Group.POI) {
+		if (child.getGroup() == Group.POI) {
 			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_type_info, R.color.color_distance));
-		} else if (child.getGroup() == OsmPoint.Group.BUG) {
+		} else if (child.getGroup() == Group.BUG) {
 			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_type_bug, R.color.color_distance));
 		}
 
@@ -97,6 +128,10 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		if (savedInstanceState != null) {
+			exportType = savedInstanceState.getInt(EXPORT_TYPE_KEY);
+		}
+
 		setHasOptionsMenu(true);
 		plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 
@@ -111,13 +146,28 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
 				.isLightContent() ? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
 
-		Fragment optionsFragment = getChildFragmentManager().findFragmentByTag(OsmEditOptionsBottomSheetDialogFragment.TAG);
+		FragmentManager fm = getChildFragmentManager();
+		Fragment optionsFragment = fm.findFragmentByTag(OsmEditOptionsBottomSheetDialogFragment.TAG);
 		if (optionsFragment != null) {
 			((OsmEditOptionsBottomSheetDialogFragment) optionsFragment).setListener(createOsmEditOptionsFragmentListener());
+		}
+		Fragment exportOptFragment = fm.findFragmentByTag(ExportOptionsBottomSheetDialogFragment.TAG);
+		if (exportOptFragment != null) {
+			((ExportOptionsBottomSheetDialogFragment) exportOptFragment).setListener(createExportOptionsFragmentListener());
+		}
+		Fragment fileTypeFragment = fm.findFragmentByTag(FileTypeBottomSheetDialogFragment.TAG);
+		if (fileTypeFragment != null) {
+			((FileTypeBottomSheetDialogFragment) fileTypeFragment).setListener(createFileTypeFragmentListener());
 		}
 
 		plugin.getPoiModificationLocalUtil().addNodeCommittedListener(this);
 		return view;
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(EXPORT_TYPE_KEY, exportType);
 	}
 
 	@Override
@@ -152,6 +202,16 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		listAdapter.notifyDataSetChanged();
 	}
 
+	private List<OsmPoint> getOsmEditsByGroup(Group group) {
+		List<OsmPoint> res = new ArrayList<>();
+		for (OsmPoint point : osmEdits) {
+			if (point.getGroup() == group) {
+				res.add(point);
+			}
+		}
+		return res;
+	}
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
@@ -173,13 +233,19 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
-		item = menu.add(R.string.local_osm_changes_backup).setIcon(R.drawable.ic_action_gshare_dark);
+		item = menu.add(R.string.shared_string_export).setIcon(R.drawable.ic_action_gshare_dark);
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				new BackupOpenstreetmapPointAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
-						osmEdits.toArray(new OsmPoint[osmEdits.size()]));
+				Bundle args = new Bundle();
+				args.putInt(ExportOptionsBottomSheetDialogFragment.POI_COUNT_KEY, getOsmEditsByGroup(Group.POI).size());
+				args.putInt(ExportOptionsBottomSheetDialogFragment.NOTES_COUNT_KEY, getOsmEditsByGroup(Group.BUG).size());
+				ExportOptionsBottomSheetDialogFragment fragment = new ExportOptionsBottomSheetDialogFragment();
+				fragment.setArguments(args);
+				fragment.setUsedOnMap(false);
+				fragment.setListener(createExportOptionsFragmentListener());
+				fragment.show(getChildFragmentManager(), ExportOptionsBottomSheetDialogFragment.TAG);
 				return true;
 			}
 		});
@@ -485,6 +551,43 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		};
 	}
 
+	private ExportOptionsFragmentListener createExportOptionsFragmentListener() {
+		return new ExportOptionsFragmentListener() {
+			@Override
+			public void onClick(int type) {
+				exportType = type;
+				openFileTypeMenu();
+			}
+		};
+	}
+
+	private FileTypeFragmentListener createFileTypeFragmentListener() {
+		return new FileTypeFragmentListener() {
+			@Override
+			public void onClick(int type) {
+				List<OsmPoint> points = getPointsToExport();
+				new BackupOpenstreetmapPointAsyncTask(type, exportType).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
+						points.toArray(new OsmPoint[points.size()]));
+			}
+		};
+	}
+
+	private void openFileTypeMenu() {
+		FileTypeBottomSheetDialogFragment fragment = new FileTypeBottomSheetDialogFragment();
+		fragment.setUsedOnMap(false);
+		fragment.setListener(createFileTypeFragmentListener());
+		fragment.show(getChildFragmentManager(), FileTypeBottomSheetDialogFragment.TAG);
+	}
+
+	private List<OsmPoint> getPointsToExport() {
+		if (exportType == EXPORT_TYPE_POI) {
+			return getOsmEditsByGroup(Group.POI);
+		} else if (exportType == EXPORT_TYPE_NOTES) {
+			return getOsmEditsByGroup(Group.BUG);
+		}
+		return osmEdits;
+	}
+
 	protected OsmPoint getPointAfterModify(OsmPoint info) {
 		if (info instanceof OpenstreetmapPoint && info.getId() == refreshId) {
 			for (OpenstreetmapPoint p : plugin.getDBPOI().getOpenstreetmapPoints()) {
@@ -533,7 +636,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 	private void showOnMap(OsmPoint osmPoint) {
 		boolean isOsmPoint = osmPoint instanceof OpenstreetmapPoint;
-		String type = osmPoint.getGroup() == OsmPoint.Group.POI ? PointDescription.POINT_TYPE_POI : PointDescription.POINT_TYPE_OSM_BUG;
+		String type = osmPoint.getGroup() == Group.POI ? PointDescription.POINT_TYPE_POI : PointDescription.POINT_TYPE_OSM_BUG;
 		String name = (isOsmPoint ? ((OpenstreetmapPoint) osmPoint).getName() : ((OsmNotesPoint) osmPoint).getText());
 		getMyApplication().getSettings().setMapLocationToShow(osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
 				new PointDescription(type, name), true, osmPoint); //$NON-NLS-1$
@@ -580,9 +683,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 					while (it.hasNext()) {
 						OsmPoint osmPoint = it.next();
 						assert plugin != null;
-						if (osmPoint.getGroup() == OsmPoint.Group.POI) {
+						if (osmPoint.getGroup() == Group.POI) {
 							plugin.getDBPOI().deletePOI((OpenstreetmapPoint) osmPoint);
-						} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
+						} else if (osmPoint.getGroup() == Group.BUG) {
 							plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) osmPoint);
 						}
 						it.remove();
@@ -600,54 +703,113 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	public class BackupOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPoint, String> {
 
 		private File osmchange;
+		private boolean oscFile;
 
-		public BackupOpenstreetmapPointAsyncTask() {
+		public BackupOpenstreetmapPointAsyncTask(int fileType, int exportType) {
 			OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-			osmchange = app.getAppPath("poi_modification.osc");
+			oscFile = fileType == FILE_TYPE_OSC;
+			osmchange = app.getAppPath(getFileName(exportType));
 		}
-
 
 		@Override
 		protected String doInBackground(OsmPoint... points) {
-			FileOutputStream out = null;
-			try {
-				out = new FileOutputStream(osmchange);
-				XmlSerializer sz = Xml.newSerializer();
-
-				sz.setOutput(out, "UTF-8");
-				sz.startDocument("UTF-8", true);
-				sz.startTag("", "osmChange");
-				sz.attribute("", "generator", "OsmAnd");
-				sz.attribute("", "version", "0.6");
-				sz.startTag("", "create");
-				writeContent(sz, points, OsmPoint.Action.CREATE);
-				sz.endTag("", "create");
-				sz.startTag("", "modify");
-				writeContent(sz, points, OsmPoint.Action.MODIFY);
-				writeContent(sz, points, OsmPoint.Action.REOPEN);
-
-				sz.endTag("", "modify");
-				sz.startTag("", "delete");
-				writeContent(sz, points, OsmPoint.Action.DELETE);
-				sz.endTag("", "delete");
-				sz.endTag("", "osmChange");
-				sz.endDocument();
-			} catch (Exception e) {
-				return e.getMessage();
-			} finally {
+			if (oscFile) {
+				FileOutputStream out = null;
 				try {
-					if (out != null) out.close();
-				} catch (IOException e) {
-					e.printStackTrace();
+					out = new FileOutputStream(osmchange);
+					XmlSerializer sz = Xml.newSerializer();
+
+					sz.setOutput(out, "UTF-8");
+					sz.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+					sz.startDocument("UTF-8", true);
+					sz.startTag("", "osmChange");
+					sz.attribute("", "generator", "OsmAnd");
+					sz.attribute("", "version", "0.6");
+					sz.startTag("", "create");
+					writeContent(sz, points, OsmPoint.Action.CREATE);
+					sz.endTag("", "create");
+					sz.startTag("", "modify");
+					writeContent(sz, points, OsmPoint.Action.MODIFY);
+					writeContent(sz, points, OsmPoint.Action.REOPEN);
+
+					sz.endTag("", "modify");
+					sz.startTag("", "delete");
+					writeContent(sz, points, OsmPoint.Action.DELETE);
+					sz.endTag("", "delete");
+					sz.endTag("", "osmChange");
+					sz.endDocument();
+				} catch (Exception e) {
+					return e.getMessage();
+				} finally {
+					try {
+						if (out != null) out.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
+			} else {
+				GPXFile gpx = new GPXFile();
+				for (OsmPoint point : points) {
+					if (point.getGroup() == Group.POI) {
+						OpenstreetmapPoint p = (OpenstreetmapPoint) point;
+						WptPt wpt = new WptPt();
+						wpt.name = "node" + " " + OsmPoint.stringAction.get(p.getAction());
+						wpt.lat = p.getLatitude();
+						wpt.lon = p.getLongitude();
+						wpt.desc = "id: " + String.valueOf(p.getId());
+						wpt.comment = getTagsString(p);
+						gpx.addPoint(wpt);
+					} else if (point.getGroup() == Group.BUG) {
+						OsmNotesPoint p = (OsmNotesPoint) point;
+						WptPt wpt = new WptPt();
+						wpt.name = "note" + " " + OsmPoint.stringAction.get(p.getAction());
+						wpt.lat = p.getLatitude();
+						wpt.lon = p.getLongitude();
+						wpt.desc = "id: " + String.valueOf(p.getId());
+						wpt.comment = p.getText();
+						gpx.addPoint(wpt);
+					}
+				}
+				GPXUtilities.writeGpxFile(osmchange, gpx, getMyApplication());
 			}
 
 			return null;
 		}
 
+		private String getFileName(int exportType) {
+			StringBuilder sb = new StringBuilder();
+			if (exportType == EXPORT_TYPE_POI) {
+				sb.append("osm_edits_modification");
+			} else if (exportType == EXPORT_TYPE_NOTES) {
+				sb.append("osm_notes_modification");
+			} else {
+				sb.append("osm_modification");
+			}
+			sb.append(oscFile ? ".osc" : ".gpx");
+			return sb.toString();
+		}
+
+		private String getTagsString(OpenstreetmapPoint point) {
+			StringBuilder sb = new StringBuilder();
+			for (String tag : point.getEntity().getTagKeySet()) {
+				String val = point.getEntity().getTag(tag);
+				if (isNotValid(tag, val)) {
+					continue;
+				}
+				sb.append(tag).append(" : ");
+				sb.append(val).append("; ");
+			}
+			return sb.toString();
+		}
+
+		private boolean isNotValid(String tag, String val) {
+			return val == null || val.length() == 0 || tag.length() == 0
+					|| tag.startsWith(EditPoiData.REMOVE_TAG_PREFIX) || tag.equals("poi_type_tag");
+		}
+
 		private void writeContent(XmlSerializer sz, OsmPoint[] points, OsmPoint.Action a) throws IllegalArgumentException, IllegalStateException, IOException {
 			for (OsmPoint point : points) {
-				if (point.getGroup() == OsmPoint.Group.POI) {
+				if (point.getGroup() == Group.POI) {
 					OpenstreetmapPoint p = (OpenstreetmapPoint) point;
 					if (p.getAction() == a) {
 						sz.startTag("", "node");
@@ -657,7 +819,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 						sz.attribute("", "version", "1");
 						for (String tag : p.getEntity().getTagKeySet()) {
 							String val = p.getEntity().getTag(tag);
-							if (val == null || val.length() == 0 || tag.length() == 0 || "poi_type_tag".equals(tag)) {
+							if (isNotValid(tag, val)) {
 								continue;
 							}
 							sz.startTag("", "tag");
@@ -667,7 +829,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 						}
 						sz.endTag("", "node");
 					}
-				} else if (point.getGroup() == OsmPoint.Group.BUG) {
+				} else if (point.getGroup() == Group.BUG) {
 					OsmNotesPoint p = (OsmNotesPoint) point;
 					if (p.getAction() == a) {
 						sz.startTag("", "note");
