@@ -20,7 +20,7 @@ import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
+import android.text.method.LinkMovementMethod;
 import android.text.style.RelativeSizeSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -202,8 +202,9 @@ public class WikipediaDialogFragment extends DialogFragment {
 			int length = spannableContent.length();
 			spannableContent.setSpan(new RelativeSizeSpan(1.2f), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			int contentTextColor = ContextCompat.getColor(getContext(), darkMode ? R.color.ctx_menu_bottom_view_text_color_dark : R.color.ctx_menu_bottom_view_text_color_light);
-			spannableContent.setSpan(new ForegroundColorSpan(contentTextColor), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			articleTextView.setTextColor(contentTextColor);
 			articleTextView.setText(spannableContent);
+			articleTextView.setMovementMethod(LinkMovementMethod.getInstance());
 		}
 	}
 
