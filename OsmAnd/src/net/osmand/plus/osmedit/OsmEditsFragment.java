@@ -566,7 +566,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			@Override
 			public void onClick(int type) {
 				List<OsmPoint> points = getPointsToExport();
-				new BackupOpenstreetmapPointAsyncTask(type).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
+				new BackupOpenstreetmapPointAsyncTask(type, exportType).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
 						points.toArray(new OsmPoint[points.size()]));
 			}
 		};
@@ -705,12 +705,11 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		private File osmchange;
 		private boolean oscFile;
 
-		public BackupOpenstreetmapPointAsyncTask(int fileType) {
+		public BackupOpenstreetmapPointAsyncTask(int fileType, int exportType) {
 			OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 			oscFile = fileType == FILE_TYPE_OSC;
-			osmchange = app.getAppPath(oscFile ? "poi_modification.osc" : "poi_modifications.gpx");
+			osmchange = app.getAppPath(getFileName(exportType));
 		}
-
 
 		@Override
 		protected String doInBackground(OsmPoint... points) {
@@ -774,6 +773,19 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			}
 
 			return null;
+		}
+
+		private String getFileName(int exportType) {
+			StringBuilder sb = new StringBuilder();
+			if (exportType == EXPORT_TYPE_POI) {
+				sb.append("osm_edits_modification");
+			} else if (exportType == EXPORT_TYPE_NOTES) {
+				sb.append("osm_notes_modification");
+			} else {
+				sb.append("osm_modification");
+			}
+			sb.append(oscFile ? ".osc" : ".gpx");
+			return sb.toString();
 		}
 
 		private String getTagsString(OpenstreetmapPoint point) {
