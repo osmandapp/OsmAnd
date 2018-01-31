@@ -66,7 +66,7 @@ import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents {
 	public static final String TAG = "MapContextMenuFragment";
 
-	public static final float FAB_PADDING_TOP_DP = 4f;
+	public static final float ZOOM_PADDING_TOP_DP = 4f;
 	public static final float MARKER_PADDING_DP = 20f;
 	public static final float MARKER_PADDING_X_DP = 50f;
 	public static final float SKIP_HALF_SCREEN_STATE_KOEF = .21f;
@@ -76,6 +76,13 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private View view;
 	private InterceptorLinearLayout mainView;
+
+	private View toolbarContainer;
+	private View toolbarView;
+	private View toolbarBackButton;
+	private TextView toolbarTextView;
+	private View topButtonContainer;
+
 	private View zoomButtonsView;
 	private ImageButton zoomInButtonView;
 	private ImageButton zoomOutButtonView;
@@ -99,6 +106,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private int markerPaddingPx;
 	private int markerPaddingXPx;
 	private int topScreenPosY;
+	private int bottomToolbarPosY;
+	private int minHalfY;
+	private int shadowHeight;
+	private int zoomPaddingTop;
 
 	private OsmandMapTileView map;
 	private LatLon mapCenter;
@@ -124,17 +135,46 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		processScreenHeight(container);
 
+		menu = getMapActivity().getContextMenu();
+
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
-		topScreenPosY = addStatusBarHeightIfNeeded(-dpToPx(SHADOW_HEIGHT_TOP_DP));
+		shadowHeight = dpToPx(SHADOW_HEIGHT_TOP_DP);
+		topScreenPosY = addStatusBarHeightIfNeeded(-shadowHeight);
+		bottomToolbarPosY = addStatusBarHeightIfNeeded(getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar));
+		minHalfY = viewHeight - (int) (viewHeight * menu.getHalfScreenMaxHeightKoef());
+		zoomPaddingTop = dpToPx(ZOOM_PADDING_TOP_DP);
 
-		menu = getMapActivity().getContextMenu();
 		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
 		if (!menu.isActive()) {
 			return view;
 		}
+		AndroidUtils.addStatusBarPadding21v(getMapActivity(), view);
+
 		nightMode = menu.isNightMode();
 		mainView = view.findViewById(R.id.context_menu_main);
+
+		toolbarContainer = view.findViewById(R.id.context_menu_toolbar_container);
+		toolbarView = view.findViewById(R.id.context_menu_toolbar);
+		toolbarBackButton = view.findViewById(R.id.context_menu_toolbar_back);
+		toolbarTextView = (TextView) view.findViewById(R.id.context_menu_toolbar_text);
+		toolbarContainer.setAlpha(0);
+		toolbarBackButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				openMenuHeaderOnly();
+			}
+		});
+		toolbarTextView.setText(menu.getTitleStr());
+
+		topButtonContainer = view.findViewById(R.id.context_menu_top_button_container);
+		view.findViewById(R.id.context_menu_top_back).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				openMenuHeaderOnly();
+			}
+		});
+		topButtonContainer.setAlpha(0);
 
 		map = getMapActivity().getMapView();
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
@@ -252,11 +292,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			private float dy;
 			private float dyMain;
 			private float mDownY;
-			private VelocityTracker velocity;
+			private VelocityTracker velocityTracker;
 			private boolean slidingUp;
 			private boolean slidingDown;
 
-			private float velocityY;
 			private float maxVelocityY;
 			private boolean hasMoved;
 
@@ -270,12 +309,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 							applyPosY(getViewY(), false, false, 0, 0, 0);
 						}
 						openMenuHalfScreen();
+
+						recycleVelocityTracker();
 						return true;
 					}
 				}
 				if (menu.isLandscapeLayout()) {
 					if (swipeDetector.onTouchEvent(event)) {
 						menu.close();
+
+						recycleVelocityTracker();
 						return true;
 					}
 				}
@@ -286,10 +329,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						mDownY = event.getRawY();
 						dy = event.getY();
 						dyMain = getViewY();
-						velocity = VelocityTracker.obtain();
-						velocityY = 0;
+
 						maxVelocityY = 0;
-						velocity.addMovement(event);
+						initOrResetVelocityTracker();
+						velocityTracker.addMovement(event);
 						break;
 
 					case MotionEvent.ACTION_MOVE:
@@ -311,20 +354,22 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 							mainView.setLayoutParams(lp);
 							mainView.requestLayout();
 
-							if (velocity != null) {
-								velocity.addMovement(event);
-								velocity.computeCurrentVelocity(1000);
-								velocityY = Math.abs(velocity.getYVelocity());
+							if (velocityTracker != null) {
+								velocityTracker.addMovement(event);
+								velocityTracker.computeCurrentVelocity(1000);
+								float velocityY = Math.abs(velocityTracker.getYVelocity());
 								if (velocityY > maxVelocityY) {
 									maxVelocityY = velocityY;
 								}
 							}
+
+							updateToolbar();
+							updateTopButton();
 						}
 
 						break;
 
 					case MotionEvent.ACTION_UP:
-					case MotionEvent.ACTION_CANCEL:
 						if (moving) {
 							moving = false;
 							int currentY = getViewY();
@@ -332,18 +377,35 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 							slidingUp = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) < -50;
 							slidingDown = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) > 50;
 
-							if (velocity != null) {
-								velocity.recycle();
-							}
-
 							boolean skipScreenState = Math.abs(currentY - dyMain) > skipScreenStateLimit;
 							changeMenuState(currentY, skipScreenState, slidingUp, slidingDown);
 						}
+						recycleVelocityTracker();
+						break;
+					case MotionEvent.ACTION_CANCEL:
+						moving = false;
+						recycleVelocityTracker();
 						break;
 
 				}
 				return true;
 			}
+
+			private void initOrResetVelocityTracker() {
+				if (velocityTracker == null) {
+					velocityTracker = VelocityTracker.obtain();
+				} else {
+					velocityTracker.clear();
+				}
+			}
+
+			private void recycleVelocityTracker() {
+				if (velocityTracker != null) {
+					velocityTracker.recycle();
+					velocityTracker = null;
+				}
+			}
+
 		};
 
 		View topShadowAllView = view.findViewById(R.id.context_menu_top_shadow_all);
@@ -541,6 +603,43 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		return view;
 	}
 
+	private float getToolbarAlpha(int y) {
+		float a = 0;
+		if (y < minHalfY) {
+			a = 1f - (y - bottomToolbarPosY) * (1f / (minHalfY - bottomToolbarPosY));
+		}
+		if (a < 0) {
+			a = 0;
+		} else if (a > 1) {
+			a = 1;
+		}
+		return a;
+	}
+
+	private void updateToolbar() {
+		float a = getToolbarAlpha(getViewY());
+		toolbarContainer.setAlpha(a);
+	}
+
+	private float getTopButtonAlpha(int y) {
+		float a = 0;
+		int headerTopY = getHeaderOnlyTopY();
+		if (y < headerTopY) {
+			a = 1f - (y - minHalfY) * (1f / (headerTopY - minHalfY));
+		}
+		if (a < 0) {
+			a = 0;
+		} else if (a > 1) {
+			a = 1;
+		}
+		return a;
+	}
+
+	private void updateTopButton() {
+		float a = getTopButtonAlpha(getViewY());
+		topButtonContainer.setAlpha(a);
+	}
+
 	private void toggleDetailsHideButton() {
 		int menuState = menu.getCurrentMenuState();
 		final boolean showShowHideButton = menuState == MenuState.HALF_SCREEN || (!menu.isLandscapeLayout() && menuState == MenuState.FULL_SCREEN);
@@ -582,7 +681,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void processScreenHeight(ViewParent parent) {
-		View container = (View)parent;
+		View container = (View) parent;
 		screenHeight = container.getHeight() + AndroidUtils.getStatusBarHeight(getActivity());
 		skipScreenStateLimit = screenHeight * SKIP_HALF_SCREEN_STATE_KOEF;
 		viewHeight = screenHeight - AndroidUtils.getStatusBarHeight(getMapActivity());
@@ -682,6 +781,18 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				updateMainViewLayout(posY);
 			}
 
+			final float topButtonAlpha = getTopButtonAlpha(posY);
+			topButtonContainer.animate().alpha(topButtonAlpha)
+					.setDuration(200)
+					.setInterpolator(new DecelerateInterpolator())
+					.start();
+
+			final float toolbarAlpha = getToolbarAlpha(posY);
+			toolbarContainer.animate().alpha(toolbarAlpha)
+					.setDuration(200)
+					.setInterpolator(new DecelerateInterpolator())
+					.start();
+
 			mainView.animate().y(posY)
 					.setDuration(200)
 					.setInterpolator(new DecelerateInterpolator())
@@ -739,7 +850,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			buttonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
 			button.setTextColor(buttonColorStateList);
 		} else {
-			buttonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_disabled_bg_dark: R.drawable.context_menu_controller_disabled_bg_light);
+			buttonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_disabled_bg_dark : R.drawable.context_menu_controller_disabled_bg_light);
 			button.setTextColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_controller_disabled_text_color_dark : R.color.ctx_menu_controller_disabled_text_color_light));
 		}
 		button.setEnabled(enabled);
@@ -1267,6 +1378,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 	}
 
+	private int getHeaderOnlyTopY() {
+		return viewHeight - menuTitleHeight;
+	}
+
+
 	private int getPosY() {
 		return getPosY(CURRENT_Y_UNDEFINED, false);
 	}
@@ -1277,13 +1393,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		int destinationState;
-		int minHalfY;
 		if (menu.isExtended()) {
 			destinationState = menu.getCurrentMenuState();
-			minHalfY = viewHeight - (int) (viewHeight * menu.getHalfScreenMaxHeightKoef());
 		} else {
 			destinationState = MenuState.HEADER_ONLY;
-			minHalfY = viewHeight - (int) (viewHeight * .75f);
 		}
 
 		updateZoomButtonsVisibility(destinationState);
@@ -1291,7 +1404,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		int posY = 0;
 		switch (destinationState) {
 			case MenuState.HEADER_ONLY:
-				posY = viewHeight - menuTitleHeight;
+				posY = getHeaderOnlyTopY();
 				break;
 			case MenuState.HALF_SCREEN:
 				posY = minHalfY;
@@ -1440,7 +1553,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private int getZoomButtonsY(int y) {
-		return y - zoomButtonsHeight;
+		return y - zoomButtonsHeight - shadowHeight - zoomPaddingTop;
 	}
 
 	private void doLayoutMenu() {
