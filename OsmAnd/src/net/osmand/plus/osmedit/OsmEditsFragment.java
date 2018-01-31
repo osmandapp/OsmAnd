@@ -720,6 +720,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 					XmlSerializer sz = Xml.newSerializer();
 
 					sz.setOutput(out, "UTF-8");
+					sz.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
 					sz.startDocument("UTF-8", true);
 					sz.startTag("", "osmChange");
 					sz.attribute("", "generator", "OsmAnd");
