@@ -1549,7 +1549,7 @@
     <string name="rename_marker">Преименуј ознаку</string>
     <string name="tap_on_map_to_hide_interface_descr">Тупкање на карту је прекидач управљачких дугмади и справица.</string>
     <string name="mark_passed">Ознака је проминута</string>
-    <string name="import_gpx_file_description">мо</string>
+    <string name="import_gpx_file_description"></string>
     <string name="import_as_gpx">Увези као датотеку ГПИкс-а</string>
     <string name="import_as_favorites">Увези као омиљено</string>
     <string name="import_file">Увези датотеку</string>
@@ -1562,8 +1562,8 @@
     <string name="shared_string_road">Пут</string>
     <string name="show_map">Прикажи карту</string>
     <string name="route_is_calculated">Пут је срачунат</string>
-    <string name="round_trip">Испрекидано путовање</string>
-    <string name="plan_route_no_markers_toast">Морате додати најмање једну ознаку за коришћење ове могућности</string>
+    <string name="round_trip">Повратно путовање</string>
+    <string name="plan_route_no_markers_toast">Морате додати најмање једну ознаку за коришћење ове могућности.</string>
     <string name="osn_modify_dialog_error">Десила се грешка: белешка није измењена</string>
     <string name="osn_modify_dialog_title">Измени белешку</string>
     <string name="context_menu_item_modify_note">Измените белешку ОСМ-а</string>
@@ -1573,17 +1573,17 @@
     <string name="use_system_keyboard">Користи системску тастатуру</string>
     <string name="fast_coordinates_input_descr">Изаберите облик уноса координата. Можете увек променити тапкањем на могућности.</string>
     <string name="fast_coordinates_input">Брзи унос координата</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">Избегавај поледице, плићаке</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Избегавај путеве са поледицама, плићаке</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Избегавајте путеве са поледицама и плићацима</string>
     <string name="use_location">Користи положај</string>
-    <string name="add_location_as_first_point_descr">Додајте свој положај као почетну тачку плана савршеног путовања.</string>
+    <string name="add_location_as_first_point_descr">Додајте свој положај као почетну тачку да испланирате савршено путовање.</string>
     <string name="my_location">Мој положај</string>
     <string name="shared_string_finish">Крај</string>
     <string name="plan_route">План путовања</string>
     <string name="shared_string_sort">Распореди</string>
     <string name="coordinate_input">Унос координата</string>
     <string name="is_saved">је сачуван</string>
-    <string name="marker_save_as_track_descr">Извезите ознаке у датотку коју можете навести овде:</string>
+    <string name="marker_save_as_track_descr">Извезите ознаке у датотеку коју можете навести овде:</string>
     <string name="marker_save_as_track">Сачувај као путању</string>
     <string name="move_to_history">Премести у историју</string>
     <string name="descendingly">силазно</string>
@@ -1593,7 +1593,7 @@
     <string name="empty_state_markers_groups_desc">Можете увести омиљене групе или пролазне тачке путања као ознаке.</string>
     <string name="empty_state_markers_history_desc">Ознаке означене као пређене ће се појавити на екрану.</string>
     <string name="make_round_trip">Начини повратно путовање</string>
-    <string name="group_will_be_removed_after_restart">Групе ће бити уклоњене после следећег препокретања програма.</string>
+    <string name="group_will_be_removed_after_restart">Групе ће бити уклоњене после следећег покретања програма.</string>
     <string name="show_guide_line">Прикажи вођице</string>
     <string name="show_arrows_on_the_map">Приказуј стрелице на карти</string>
     <string name="show_passed">Прикажи пређене</string>
@@ -1613,7 +1613,7 @@
     <string name="yesterday">Јуче</string>
     <string name="last_seven_days">Последње седмице</string>
     <string name="this_year">Ове године</string>
-    <string name="move_all_to_history">Премести у повест</string>
+    <string name="move_all_to_history">Све премести у историју</string>
     <string name="show_direction">Указивач растојања</string>
     <string name="sort_by">Распореди по</string>
     <string name="do_not_use_animations">Не користи оживљавање</string>
@@ -1637,7 +1637,7 @@
     <string name="measurement_tool">Мери растојање</string>
     <string name="quick_action_resume_pause_navigation">Настави/застани навођење</string>
     <string name="quick_action_resume_pause_navigation_descr">Тупните ову тачку за застанак или наставак навођења.</string>
-    <string name="quick_action_show_navigation_finish_dialog">П</string>
+    <string name="quick_action_show_navigation_finish_dialog"></string>
     <string name="quick_action_start_stop_navigation">Почни/заустави навођење</string>
     <string name="will_open_tomorrow_at">Ће бити отворено сутра у</string>
     <string name="rendering_attr_hidePOILabels_name">Ознаке тачака од интереса</string>
