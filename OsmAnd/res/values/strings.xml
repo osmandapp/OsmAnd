@@ -338,9 +338,6 @@
 	\u2022 OsmAnd Live: bug fixes, fresh data on the server every 30 minutes, updates implemented into the navigation\n\n
 	</string>
     <string name="release_2_9">
-	\u2022 Detection of stop signs now considers driving direction\n\n
-	\u2022 New algorithm providing meaningful ascent/descent values for GPX tracks\n\n
-	\u2022 Terrain (ascent) aware hiking time (Naismith\'s rule)\n\n
 	\u2022 Updated the context menu: show when the POI opens / closes\n\n
 	\u2022 Transport menu: all available routes are now at the top\n\n
 	\u2022 Wikipedia: added the button to open the original article, updated the appearance of articles\n\n
@@ -348,6 +345,9 @@
 	\u2022 Notes: added sorting by type and date\n\n
 	\u2022 OSM edits: show an icon and a name of the POI category, display completed actions\n\n
 	\u2022 New quick coordinate input screen for quick markers creation\n\n
+    \u2022 Detection of stop signs now considers driving direction\n\n
+	\u2022 New algorithm providing meaningful ascent/descent values for GPX tracks\n\n
+	\u2022 Terrain (ascent) aware hiking time (Naismith\'s rule)\n\n
 	</string>
     <string name="auto_split_recording_title">Auto-split recordings after gap</string>
     <string name="auto_split_recording_descr">Start new segment after gap of 6 min, new track after gap of 2 h, or new file after a longer gap if the date has changed.</string>
