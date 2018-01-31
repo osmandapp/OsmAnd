@@ -54,35 +54,50 @@ public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		((TextView) mainView.findViewById(R.id.osm_notes_count_text_view)).setText(String.valueOf(osmNotesCount));
 		((TextView) mainView.findViewById(R.id.all_data_count_text_view)).setText(String.valueOf(poiCount + osmNotesCount));
 
-		mainView.findViewById(R.id.poi_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (listener != null) {
-					listener.onClick(OsmEditsFragment.EXPORT_TYPE_POI);
+		View poiRow = mainView.findViewById(R.id.poi_row);
+		if (poiCount > 0) {
+			poiRow.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (listener != null) {
+						listener.onClick(OsmEditsFragment.EXPORT_TYPE_POI);
+					}
+					dismiss();
 				}
-				dismiss();
-			}
-		});
+			});
+		} else {
+			disable(poiRow);
+		}
 
-		mainView.findViewById(R.id.osm_notes_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (listener != null) {
-					listener.onClick(OsmEditsFragment.EXPORT_TYPE_NOTES);
+		View osmNotesRow = mainView.findViewById(R.id.osm_notes_row);
+		if (osmNotesCount > 0) {
+			osmNotesRow.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (listener != null) {
+						listener.onClick(OsmEditsFragment.EXPORT_TYPE_NOTES);
+					}
+					dismiss();
 				}
-				dismiss();
-			}
-		});
+			});
+		} else {
+			disable(osmNotesRow);
+		}
 
-		mainView.findViewById(R.id.all_data_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (listener != null) {
-					listener.onClick(OsmEditsFragment.EXPORT_TYPE_ALL);
+		View allDataRow = mainView.findViewById(R.id.all_data_row);
+		if ((poiCount + osmNotesCount) > 0) {
+			allDataRow.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (listener != null) {
+						listener.onClick(OsmEditsFragment.EXPORT_TYPE_ALL);
+					}
+					dismiss();
 				}
-				dismiss();
-			}
-		});
+			});
+		} else {
+			disable(allDataRow);
+		}
 
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -94,6 +109,11 @@ public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		setupHeightAndBackground(mainView, R.id.scroll_view);
 
 		return mainView;
+	}
+
+	private void disable(View view) {
+		view.setEnabled(false);
+		view.setAlpha(.5f);
 	}
 
 	public interface ExportOptionsFragmentListener {

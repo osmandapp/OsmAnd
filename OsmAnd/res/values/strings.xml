@@ -9,12 +9,12 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="gpx_file_desc">GPX - suitable for import to JOSM or other OSM editors.</string>
-    <string name="osc_file_desc">OSC - suitable for import to OpenStreetMap.</string>
+    <string name="gpx_file_desc">GPX - suitable for export to JOSM or other OSM editors.</string>
+    <string name="osc_file_desc">OSC - suitable for export to OpenStreetMap.</string>
     <string name="gpx_file">GPX file</string>
     <string name="osc_file">OSC file</string>
     <string name="choose_file_type">Choose file type</string>
-    <string name="osm_edits_export_desc">Select the import type: OSM notes, POI, or both.</string>
+    <string name="osm_edits_export_desc">Select the export type: OSM notes, POI, or both.</string>
     <string name="all_data">All data</string>
     <string name="osm_notes">OSM Notes</string>
     <string name="will_open_tomorrow_at">Will open tomorrow at</string>
