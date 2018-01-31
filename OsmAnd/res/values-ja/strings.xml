@@ -3102,4 +3102,18 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
 \n • 地形(上り坂)を考慮した徒歩移動時間を算出するように改良(ネイスミスのルール／Naismith\'s ruleを適用)
 \n
 \n</string>
+    <string name="rendering_attr_hidePOILabels_name">POIのラベル</string>
+    <string name="context_menu_read_article">記事を読む</string>
+    <string name="context_menu_points_of_group">グループのすべてのポイント</string>
+    <string name="additional_actions">追加のアクション</string>
+    <string name="av_locations_selected_desc">選択された注釈と座標が付属しているGPXファイル。</string>
+    <string name="av_locations_all_desc">全ての注釈と座標が付属していGPXファイル。</string>
+    <string name="modify_the_search_query">検索クエリを変更します。</string>
+    <string name="shared_string_marker">マーカー</string>
+    <string name="empty_state_osm_edits">OSMオブジェクトの作成または変更</string>
+    <string name="shared_string_deleted">削除しました</string>
+    <string name="shared_string_edited">編集されました</string>
+    <string name="shared_string_added">追加しました</string>
+    <string name="notes_by_date">日付別の注釈</string>
+    <string name="add_group">グループの追加</string>
     </resources>
