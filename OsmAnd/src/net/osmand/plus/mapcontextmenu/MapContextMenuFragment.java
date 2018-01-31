@@ -605,13 +605,15 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private float getToolbarAlpha(int y) {
 		float a = 0;
-		if (y < minHalfY) {
-			a = 1f - (y - bottomToolbarPosY) * (1f / (minHalfY - bottomToolbarPosY));
-		}
-		if (a < 0) {
-			a = 0;
-		} else if (a > 1) {
-			a = 1;
+		if (menu != null && !menu.isLandscapeLayout()) {
+			if (y < minHalfY) {
+				a = 1f - (y - bottomToolbarPosY) * (1f / (minHalfY - bottomToolbarPosY));
+			}
+			if (a < 0) {
+				a = 0;
+			} else if (a > 1) {
+				a = 1;
+			}
 		}
 		return a;
 	}
@@ -623,14 +625,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private float getTopButtonAlpha(int y) {
 		float a = 0;
-		int headerTopY = getHeaderOnlyTopY();
-		if (y < headerTopY) {
-			a = 1f - (y - minHalfY) * (1f / (headerTopY - minHalfY));
-		}
-		if (a < 0) {
-			a = 0;
-		} else if (a > 1) {
-			a = 1;
+		if (menu != null && !menu.isLandscapeLayout()) {
+			int headerTopY = getHeaderOnlyTopY();
+			if (y < headerTopY) {
+				a = 1f - (y - minHalfY) * (1f / (headerTopY - minHalfY));
+			}
+			if (a < 0) {
+				a = 0;
+			} else if (a > 1) {
+				a = 1;
+			}
 		}
 		return a;
 	}
