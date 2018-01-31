@@ -1958,7 +1958,7 @@ Pôr do Sol: %2$s</string>
     <string name="av_audio_format_descr">Selecionar o formato de saída de áudio.</string>
     <string name="av_audio_bitrate">Bitrate de áudio</string>
     <string name="av_audio_bitrate_descr">Selecionar o bitrate de áudio.</string>
-    <string name="shared_string_near">Perto</string>
+    <string name="shared_string_near">Perto de</string>
     <string name="no_address_found">Sem endereço determinado</string>
 	<string name="looking_up_address">Procurando endereço</string>
     <string name="rendering_attr_horseRoutes_name">Rotas a cavalo</string>
