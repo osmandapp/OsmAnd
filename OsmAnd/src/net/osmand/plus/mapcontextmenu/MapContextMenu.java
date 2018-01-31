@@ -1069,7 +1069,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (menuController != null) {
 			return menuController.getHalfScreenMaxHeightKoef();
 		} else {
-			return 0f;
+			return .75f;
 		}
 	}
 
