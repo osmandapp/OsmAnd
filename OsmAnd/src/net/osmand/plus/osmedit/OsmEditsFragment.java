@@ -31,6 +31,9 @@ import android.widget.Toast;
 
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Node;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -745,10 +748,45 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 					}
 				}
 			} else {
-				return "gpx export not supported yet";
+				GPXFile gpx = new GPXFile();
+				for (OsmPoint point : points) {
+					if (point.getGroup() == Group.POI) {
+						OpenstreetmapPoint p = (OpenstreetmapPoint) point;
+						WptPt wpt = new WptPt();
+						wpt.name = "node" + " " + OsmPoint.stringAction.get(p.getAction());
+						wpt.lat = p.getLatitude();
+						wpt.lon = p.getLongitude();
+						wpt.desc = "id: " + String.valueOf(p.getId());
+						wpt.comment = getTagsString(p);
+						gpx.addPoint(wpt);
+					} else if (point.getGroup() == Group.BUG) {
+						OsmNotesPoint p = (OsmNotesPoint) point;
+						WptPt wpt = new WptPt();
+						wpt.name = "note" + " " + OsmPoint.stringAction.get(p.getAction());
+						wpt.lat = p.getLatitude();
+						wpt.lon = p.getLongitude();
+						wpt.desc = "id: " + String.valueOf(p.getId());
+						wpt.comment = p.getText();
+						gpx.addPoint(wpt);
+					}
+				}
+				GPXUtilities.writeGpxFile(osmchange, gpx, getMyApplication());
 			}
 
 			return null;
+		}
+
+		private String getTagsString(OpenstreetmapPoint point) {
+			StringBuilder sb = new StringBuilder();
+			for (String tag : point.getEntity().getTagKeySet()) {
+				String val = point.getEntity().getTag(tag);
+				if (val == null || val.length() == 0 || tag.length() == 0 || "poi_type_tag".equals(tag)) {
+					continue;
+				}
+				sb.append(tag).append(" : ");
+				sb.append(val).append("; ");
+			}
+			return sb.toString();
 		}
 
 		private void writeContent(XmlSerializer sz, OsmPoint[] points, OsmPoint.Action a) throws IllegalArgumentException, IllegalStateException, IOException {
