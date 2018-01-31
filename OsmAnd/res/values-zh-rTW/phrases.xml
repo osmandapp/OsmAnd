@@ -3707,4 +3707,18 @@
 	<string name="poi_climbing_ice_no">結冰：沒有</string>
 	<string name="poi_climbing_mixed_yes">混合：是的</string>
 	<string name="poi_climbing_mixed_no">混合：否</string>
+	<string name="poi_climbing_deepwater_yes">深水獨攀：是的</string>
+	<string name="poi_climbing_deepwater_no">深水獨攀：不是</string>
+
+	<string name="poi_climbing_length">攀登長度</string>
+	<string name="poi_climbing_length_min">攀登最短長度</string>
+	<string name="poi_climbing_length_max">攀登最大長度</string>
+	<string name="poi_climbing_rock_limestone">攀登的岩石：石灰岩</string>
+	<string name="poi_climbing_rock_granite">攀登的岩石：花崗岩</string>
+	<string name="poi_climbing_rock_sandstone">攀登的岩石：砂岩</string>
+	<string name="poi_climbing_rock_quartzite">攀登的岩石：石英岩</string>
+	<string name="poi_climbing_rock_gneiss">攀登的岩石：片麻岩</string>
+	<string name="poi_climbing_rock_porphyry">攀登的岩石：斑岩</string>
+	<string name="poi_climbing_quality_solid">攀岩的品質：堅實</string>
+	<string name="poi_climbing_quality_fragile">攀岩的品質：脆弱</string>
 	</resources>
