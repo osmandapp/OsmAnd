@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -54,12 +55,33 @@ import org.xmlpull.v1.XmlSerializer;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialogFragment.ProgressDialogPoiUploader, OpenstreetmapLocalUtil.OnNodeCommittedListener {
+
+	public static final int EXPORT_TYPE_ALL = 0;
+	public static final int EXPORT_TYPE_POI = 1;
+	public static final int EXPORT_TYPE_NOTES = 2;
+
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef({EXPORT_TYPE_ALL, EXPORT_TYPE_POI, EXPORT_TYPE_NOTES})
+	@interface ExportTypesDef {
+	}
+
+	public static final int FILE_TYPE_OSC = 0;
+	public static final int FILE_TYPE_GPX = 1;
+
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef({FILE_TYPE_OSC, FILE_TYPE_GPX})
+	@interface FileTypesDef {
+	}
+
+	private static final String EXPORT_TYPE_KEY = "export_type";
 
 	private final static int MODE_DELETE = 100;
 	private final static int MODE_UPLOAD = 101;
@@ -75,6 +97,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 	private ActionMode actionMode;
 	private long refreshId;
+
+	private int exportType;
 
 	public static void getOsmEditView(View v, OsmPoint child, OsmandApplication app) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
@@ -101,6 +125,10 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		if (savedInstanceState != null) {
+			exportType = savedInstanceState.getInt(EXPORT_TYPE_KEY);
+		}
+
 		setHasOptionsMenu(true);
 		plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 
@@ -131,6 +159,12 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 		plugin.getPoiModificationLocalUtil().addNodeCommittedListener(this);
 		return view;
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(EXPORT_TYPE_KEY, exportType);
 	}
 
 	@Override
@@ -209,8 +243,6 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 				fragment.setUsedOnMap(false);
 				fragment.setListener(createExportOptionsFragmentListener());
 				fragment.show(getChildFragmentManager(), ExportOptionsBottomSheetDialogFragment.TAG);
-//				new BackupOpenstreetmapPointAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
-//						osmEdits.toArray(new OsmPoint[osmEdits.size()]));
 				return true;
 			}
 		});
@@ -518,22 +550,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 	private ExportOptionsFragmentListener createExportOptionsFragmentListener() {
 		return new ExportOptionsFragmentListener() {
-
 			@Override
-			public void onPoiClick() {
-				Toast.makeText(getContext(), "poi", Toast.LENGTH_SHORT).show();
-				openFileTypeMenu();
-			}
-
-			@Override
-			public void onOsmNotesClick() {
-				Toast.makeText(getContext(), "osm notes", Toast.LENGTH_SHORT).show();
-				openFileTypeMenu();
-			}
-
-			@Override
-			public void onAllDataClick() {
-				Toast.makeText(getContext(), "all data", Toast.LENGTH_SHORT).show();
+			public void onClick(int type) {
+				exportType = type;
 				openFileTypeMenu();
 			}
 		};
@@ -542,13 +561,10 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	private FileTypeFragmentListener createFileTypeFragmentListener() {
 		return new FileTypeFragmentListener() {
 			@Override
-			public void onOscClick() {
-				Toast.makeText(getContext(), "osc", Toast.LENGTH_SHORT).show();
-			}
-
-			@Override
-			public void onGpxClick() {
-				Toast.makeText(getContext(), "gpx", Toast.LENGTH_SHORT).show();
+			public void onClick(int type) {
+				List<OsmPoint> points = getPointsToExport();
+				new BackupOpenstreetmapPointAsyncTask(type).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
+						points.toArray(new OsmPoint[points.size()]));
 			}
 		};
 	}
@@ -558,6 +574,15 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		fragment.setUsedOnMap(false);
 		fragment.setListener(createFileTypeFragmentListener());
 		fragment.show(getChildFragmentManager(), FileTypeBottomSheetDialogFragment.TAG);
+	}
+
+	private List<OsmPoint> getPointsToExport() {
+		if (exportType == EXPORT_TYPE_POI) {
+			return getOsmEditsByGroup(Group.POI);
+		} else if (exportType == EXPORT_TYPE_NOTES) {
+			return getOsmEditsByGroup(Group.BUG);
+		}
+		return osmEdits;
 	}
 
 	protected OsmPoint getPointAfterModify(OsmPoint info) {
@@ -675,46 +700,52 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	public class BackupOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPoint, String> {
 
 		private File osmchange;
+		private boolean oscFile;
 
-		public BackupOpenstreetmapPointAsyncTask() {
+		public BackupOpenstreetmapPointAsyncTask(int fileType) {
 			OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-			osmchange = app.getAppPath("poi_modification.osc");
+			oscFile = fileType == FILE_TYPE_OSC;
+			osmchange = app.getAppPath(oscFile ? "poi_modification.osc" : "poi_modifications.gpx");
 		}
 
 
 		@Override
 		protected String doInBackground(OsmPoint... points) {
-			FileOutputStream out = null;
-			try {
-				out = new FileOutputStream(osmchange);
-				XmlSerializer sz = Xml.newSerializer();
-
-				sz.setOutput(out, "UTF-8");
-				sz.startDocument("UTF-8", true);
-				sz.startTag("", "osmChange");
-				sz.attribute("", "generator", "OsmAnd");
-				sz.attribute("", "version", "0.6");
-				sz.startTag("", "create");
-				writeContent(sz, points, OsmPoint.Action.CREATE);
-				sz.endTag("", "create");
-				sz.startTag("", "modify");
-				writeContent(sz, points, OsmPoint.Action.MODIFY);
-				writeContent(sz, points, OsmPoint.Action.REOPEN);
-
-				sz.endTag("", "modify");
-				sz.startTag("", "delete");
-				writeContent(sz, points, OsmPoint.Action.DELETE);
-				sz.endTag("", "delete");
-				sz.endTag("", "osmChange");
-				sz.endDocument();
-			} catch (Exception e) {
-				return e.getMessage();
-			} finally {
+			if (oscFile) {
+				FileOutputStream out = null;
 				try {
-					if (out != null) out.close();
-				} catch (IOException e) {
-					e.printStackTrace();
+					out = new FileOutputStream(osmchange);
+					XmlSerializer sz = Xml.newSerializer();
+
+					sz.setOutput(out, "UTF-8");
+					sz.startDocument("UTF-8", true);
+					sz.startTag("", "osmChange");
+					sz.attribute("", "generator", "OsmAnd");
+					sz.attribute("", "version", "0.6");
+					sz.startTag("", "create");
+					writeContent(sz, points, OsmPoint.Action.CREATE);
+					sz.endTag("", "create");
+					sz.startTag("", "modify");
+					writeContent(sz, points, OsmPoint.Action.MODIFY);
+					writeContent(sz, points, OsmPoint.Action.REOPEN);
+
+					sz.endTag("", "modify");
+					sz.startTag("", "delete");
+					writeContent(sz, points, OsmPoint.Action.DELETE);
+					sz.endTag("", "delete");
+					sz.endTag("", "osmChange");
+					sz.endDocument();
+				} catch (Exception e) {
+					return e.getMessage();
+				} finally {
+					try {
+						if (out != null) out.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
+			} else {
+				return "gpx export not supported yet";
 			}
 
 			return null;

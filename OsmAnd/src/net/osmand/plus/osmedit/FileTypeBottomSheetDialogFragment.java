@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.osmedit.OsmEditsFragment.FileTypesDef;
 import net.osmand.plus.widgets.TextViewEx;
 
 public class FileTypeBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -42,7 +43,7 @@ public class FileTypeBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 			@Override
 			public void onClick(View v) {
 				if (listener != null) {
-					listener.onOscClick();
+					listener.onClick(OsmEditsFragment.FILE_TYPE_OSC);
 				}
 				dismiss();
 			}
@@ -52,7 +53,7 @@ public class FileTypeBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 			@Override
 			public void onClick(View v) {
 				if (listener != null) {
-					listener.onGpxClick();
+					listener.onClick(OsmEditsFragment.FILE_TYPE_GPX);
 				}
 				dismiss();
 			}
@@ -72,8 +73,6 @@ public class FileTypeBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 
 	public interface FileTypeFragmentListener {
 
-		void onOscClick();
-
-		void onGpxClick();
+		void onClick(@FileTypesDef int type);
 	}
 }

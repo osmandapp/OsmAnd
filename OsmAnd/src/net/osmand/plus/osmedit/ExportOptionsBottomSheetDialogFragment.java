@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.osmedit.OsmEditsFragment.ExportTypesDef;
 import net.osmand.plus.widgets.TextViewEx;
 
 public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -57,7 +58,7 @@ public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 			@Override
 			public void onClick(View v) {
 				if (listener != null) {
-					listener.onPoiClick();
+					listener.onClick(OsmEditsFragment.EXPORT_TYPE_POI);
 				}
 				dismiss();
 			}
@@ -67,7 +68,7 @@ public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 			@Override
 			public void onClick(View v) {
 				if (listener != null) {
-					listener.onOsmNotesClick();
+					listener.onClick(OsmEditsFragment.EXPORT_TYPE_NOTES);
 				}
 				dismiss();
 			}
@@ -77,7 +78,7 @@ public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 			@Override
 			public void onClick(View v) {
 				if (listener != null) {
-					listener.onAllDataClick();
+					listener.onClick(OsmEditsFragment.EXPORT_TYPE_ALL);
 				}
 				dismiss();
 			}
@@ -97,10 +98,6 @@ public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	public interface ExportOptionsFragmentListener {
 
-		void onPoiClick();
-
-		void onOsmNotesClick();
-
-		void onAllDataClick();
+		void onClick(@ExportTypesDef int type);
 	}
 }
