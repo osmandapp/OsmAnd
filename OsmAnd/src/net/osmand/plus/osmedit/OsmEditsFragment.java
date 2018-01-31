@@ -793,13 +793,18 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			StringBuilder sb = new StringBuilder();
 			for (String tag : point.getEntity().getTagKeySet()) {
 				String val = point.getEntity().getTag(tag);
-				if (val == null || val.length() == 0 || tag.length() == 0 || "poi_type_tag".equals(tag)) {
+				if (isNotValid(tag, val)) {
 					continue;
 				}
 				sb.append(tag).append(" : ");
 				sb.append(val).append("; ");
 			}
 			return sb.toString();
+		}
+
+		private boolean isNotValid(String tag, String val) {
+			return val == null || val.length() == 0 || tag.length() == 0
+					|| tag.startsWith(EditPoiData.REMOVE_TAG_PREFIX) || tag.equals("poi_type_tag");
 		}
 
 		private void writeContent(XmlSerializer sz, OsmPoint[] points, OsmPoint.Action a) throws IllegalArgumentException, IllegalStateException, IOException {
@@ -814,7 +819,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 						sz.attribute("", "version", "1");
 						for (String tag : p.getEntity().getTagKeySet()) {
 							String val = p.getEntity().getTag(tag);
-							if (val == null || val.length() == 0 || tag.length() == 0 || "poi_type_tag".equals(tag)) {
+							if (isNotValid(tag, val)) {
 								continue;
 							}
 							sz.startTag("", "tag");
