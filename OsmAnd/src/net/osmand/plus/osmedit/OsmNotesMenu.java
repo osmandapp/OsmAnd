@@ -1,7 +1,9 @@
 package net.osmand.plus.osmedit;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -12,7 +14,11 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
+import java.util.Arrays;
+
 public class OsmNotesMenu {
+
+	private static Integer[] zoomIntValues = {8, 9, 10, 11, 12, 13, 14, 15, 16};
 
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
@@ -35,17 +41,38 @@ public class OsmNotesMenu {
 
 		final OsmandPreference<Boolean> showOsmBugsPref = settings.SHOW_OSM_BUGS;
 		final CommonPreference<Boolean> showClosedOsmBugsPref = settings.SHOW_CLOSED_OSM_BUGS;
+		final CommonPreference<Integer> showOsmBugsZoomPref = settings.SHOW_OSM_BUGS_MIN_ZOOM;
+
+		final String[] zoomStrings = getZoomStrings(mapActivity);
 
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId,
-											  int position, boolean isChecked, int[] viewCoordinates) {
+			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId,
+											  final int position, boolean isChecked, int[] viewCoordinates) {
 				if (itemId == osmNotesStringId) {
 					showOsmBugsPref.set(isChecked);
 					plugin.updateLayers(mapActivity.getMapView(), mapActivity);
 					mapActivity.refreshMap();
 				} else if (itemId == showZoomLevelStringId) {
-					Toast.makeText(mapActivity, "show zoom level", Toast.LENGTH_SHORT).show(); //todo
+					int checked = Arrays.asList(zoomIntValues).indexOf(showOsmBugsZoomPref.get());
+
+					new AlertDialog.Builder(mapActivity)
+							.setTitle(R.string.show_from_zoom_level)
+							.setSingleChoiceItems(zoomStrings, checked, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									showOsmBugsZoomPref.set(zoomIntValues[which]);
+									ContextMenuItem item = adapter.getItem(position);
+									if (item != null) {
+										item.setDescription(zoomStrings[which]);
+										adapter.notifyDataSetChanged();
+									}
+									mapActivity.refreshMap();
+									dialog.dismiss();
+								}
+							})
+							.setNegativeButton(R.string.shared_string_dismiss, null)
+							.show();
 				} else if (itemId == showClosedNotesStringId) {
 					showClosedOsmBugsPref.set(isChecked);
 					mapActivity.refreshMap();
@@ -64,7 +91,7 @@ public class OsmNotesMenu {
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(showZoomLevelStringId, mapActivity)
-				.setDescription("11") //todo
+				.setDescription(zoomStrings[Arrays.asList(zoomIntValues).indexOf(showOsmBugsZoomPref.get())])
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_magnifier)
 				.setListener(l)
@@ -82,5 +109,14 @@ public class OsmNotesMenu {
 				.setLayout(R.layout.card_bottom_divider)
 				.setClickable(false)
 				.createItem());
+	}
+
+	private static String[] getZoomStrings(Context context) {
+		String[] res = new String[zoomIntValues.length];
+		for (int i = 0; i < zoomIntValues.length; i++) {
+			String strVal = String.valueOf(zoomIntValues[i]);
+			res[i] = i == 0 ? context.getString(R.string.rendering_value_default_name) + " (" + strVal + ")" : strVal;
+		}
+		return res;
 	}
 }
