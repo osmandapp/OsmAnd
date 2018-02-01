@@ -2987,14 +2987,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="by_date">Efter dato</string>
     <string name="by_type">Efter type</string>
     <string name="modify_the_search_query">Ændre søgning.</string>
-    <string name="release_3_0">• Påvisning af stopskilt tager nu hensyn til kørselsretningen 
-\n 
-\n• Ny algoritme giver meningsfulde stignings-/nedstigningsværdier for GPX-spor 
-\n 
-\n• Vandretid tager hensyn til terræn (stigning) (Naismiths regel)
-\n
+    <string name="release_3_0">\\022 
 \n</string>
-    <string name="av_locations_selected_desc">GPX fil med koordinaterne og data for de valgte noter.</string>
+    <string name="av_locations_selected_desc">GPX-fil med koordinaterne og data for de valgte noter.</string>
     <string name="av_locations_all_desc">GPX-fil med koordinater og data for alle noter.</string>
 	<string name="osm_recipient_stat">Redigeringer %1$s, sum %2$s mBTC</string>
     <string name="osm_recipients_label">OSM modtagere</string>
@@ -3008,9 +3003,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="context_menu_points_of_group">Alle punkter i gruppen</string>
     <string name="open_from">Åben fra</string>
     <string name="open_till">Åben til</string>
-    <string name="will_close_at">Vil være lukket på</string>
-    <string name="will_open_at">Vil blive åbnet på</string>
-    <string name="will_open_on">Der åbnes</string>
+    <string name="will_close_at">Lukker kl.</string>
+    <string name="will_open_at">Åbner kl.</string>
+    <string name="will_open_on">Åbner kl.</string>
     <string name="additional_actions">Yderligere handlinger</string>
     <string name="shared_string_actions">Handlinger</string>
     <string name="shared_string_marker">Markør</string>
@@ -3020,7 +3015,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="winter_and_ski_renderer">Vinter og ski</string>
     <string name="touring_view_renderer">Touringvisning (kontrast og detaljer)</string>
     <string name="nautical_renderer">Nautisk</string>
-<string name="rendering_attr_hidePOILabels_name">IP etiketter</string>
+<string name="rendering_attr_hidePOILabels_name">IP-etiketter</string>
     <string name="release_2_9">• Påvisning af stopskilt tager nu hensyn til kørselsretningen 
 \n 
 \n• Ny algoritme giver meningsfulde stignings-/nedstigningsværdier for GPX-spor 
@@ -3046,15 +3041,15 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="copy_location_name">Kopiér Punkt/IP-navn</string>
     <string name="toast_empty_name_error">Placering har intet navn</string>
 <string name="show_closed_notes">Vis lukkede noter</string>
-    <string name="switch_osm_notes_visibility_desc">Vis/skjul OSM noter på kortet.</string>
-    <string name="gpx_file_desc">GPX - velegnet som eksport til JOSM eller andre OSM redigering.</string>
-    <string name="osc_file_desc">OSC - vekegnet som eksport til OpenStreetMap.</string>
+    <string name="switch_osm_notes_visibility_desc">Vis/skjul OSM-noter på kortet.</string>
+    <string name="gpx_file_desc">GPX - velegnet som eksport til JOSM eller andre OSM-redigeringsværktøjer.</string>
+    <string name="osc_file_desc">OSC - velegnet som eksport til OpenStreetMap.</string>
     <string name="gpx_file">GPX-fil</string>
     <string name="osc_file">OSC-fil</string>
     <string name="choose_file_type">Vælg filtype</string>
-    <string name="osm_edits_export_desc">Vælg eksporttype: OSM noter, IP, eller begge.</string>
+    <string name="osm_edits_export_desc">Vælg eksporttype: OSM-noter, IP, eller begge.</string>
     <string name="all_data">Alle data</string>
-    <string name="osm_notes">OSM noter</string>
+    <string name="osm_notes">OSM-noter</string>
     <string name="tunnel_warning">Tunnel forude</string>
     <string name="show_tunnels">"Tunneler "</string>
 </resources>
