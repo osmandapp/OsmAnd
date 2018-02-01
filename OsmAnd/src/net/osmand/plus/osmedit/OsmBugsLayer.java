@@ -127,7 +127,11 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				List<OpenStreetNote> fullObjects = new ArrayList<>();
 				List<LatLon> fullObjectsLatLon = new ArrayList<>();
 				List<LatLon> smallObjectsLatLon = new ArrayList<>();
+				boolean showClosed = activity.getMyApplication().getSettings().SHOW_CLOSED_OSM_BUGS.get();
 				for (OpenStreetNote o : objects) {
+					if (!o.isOpened() && !showClosed) {
+						continue;
+					}
 					float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 
@@ -146,6 +150,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					}
 				}
 				for (OpenStreetNote o : fullObjects) {
+					if (!o.isOpened() && !showClosed) {
+						continue;
+					}
 					float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 					Bitmap b;
@@ -200,9 +207,13 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			final int rad = getRadiusBug(tb);
 			int radius = rad * 3 / 2;
 			int small = rad * 3 / 4;
+			boolean showClosed = activity.getMyApplication().getSettings().SHOW_CLOSED_OSM_BUGS.get();
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					OpenStreetNote n = objects.get(i);
+					if (!n.isOpened() && !showClosed) {
+						continue;
+					}
 					int x = (int) tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
 					int y = (int) tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
