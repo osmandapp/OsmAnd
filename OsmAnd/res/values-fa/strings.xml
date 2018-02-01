@@ -571,7 +571,7 @@
 	<string name="gps_not_available">لطفاً GPS را از طریق تنظیمات فعال کنید</string>
     <string name="map_widget_monitoring_services">خدمات ثبت و ضبط</string>
 	
-    <string name="show_warnings_descr">پیکربندی‌های مربوط به هشدارهای ترافیکی (مانند محدودیت‌های سرعت، توقف‌های اجباری، سرعتگیرها)، هشدارهای دوربین کنترل سرعت و اطلاعات خط عبوری را انجام دهید.</string>
+    <string name="show_warnings_descr">پیکربندی‌های مربوط به هشدارهای ترافیکی (مانند محدودیت‌های سرعت، توقف‌های اجباری، سرعتگیرها، تونل‌ها)، هشدارهای دوربین کنترل سرعت و اطلاعات خط عبوری را انجام دهید.</string>
 	<string name="use_compass_navigation_descr">اگر جهت شناسایی نمی‌شود از قطب‌نما استفاده کن.</string>
 	<string name="avoid_motorway">اجتناب از آزادراه‌ها</string>
 	<string name="snap_to_road_descr">در طول راهبری، موقعیت را به جاده‌ها بچسبان.</string>
@@ -3031,4 +3031,16 @@
     <string name="day_off_label">تعطیل</string>
     <string name="copy_location_name">کپی‌کردن نام نقطه/POI</string>
     <string name="toast_empty_name_error">مکان بدون نام است</string>
+<string name="show_closed_notes">دیدن توضیحات ویرایشی بسته‌شده</string>
+    <string name="switch_osm_notes_visibility_desc">توضیحات ویرایشی OSM را روی نقشه پنهان/آشکار کنید.</string>
+    <string name="gpx_file_desc">جی‌پی‌ایکس - خروجی مناسب برای استفاده در JOSM یا سایر ویرایشگرهای OSM.</string>
+    <string name="osc_file_desc">اُاِس‌سی (OSC) - مناسب برای استفاده در OpenStreetMap.</string>
+    <string name="gpx_file">فایل GPX</string>
+    <string name="osc_file">فایل OSC</string>
+    <string name="choose_file_type">انتخاب قالب فایل</string>
+    <string name="osm_edits_export_desc">نوع خروجی را انتخاب کنید: توضیحات ویرایشی، POI یا هر دو.</string>
+    <string name="all_data">همهٔ داده‌ها</string>
+    <string name="osm_notes">توضیحات ویرایشی OSM</string>
+    <string name="tunnel_warning">به طرف تونل</string>
+    <string name="show_tunnels">تونل‌ها</string>
 </resources>
