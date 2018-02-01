@@ -883,7 +883,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="avoid_in_routing_title">Éviter</string>
     <string name="avoid_in_routing_descr">Éviter les routes à péage, les voies non revêtues, les ferries.</string>
     <string name="show_warnings_title">Annonces visuelles…</string>
-    <string name="show_warnings_descr">Paramétrer les avertissements de circulation (limites de vitesse, stops, ralentisseurs), les radars et les informations sur les voies de circulation.</string>
+    <string name="show_warnings_descr">Paramétrer les avertissements de circulation (limites de vitesse, stops, ralentisseurs, tunnels), les radars et les informations sur les voies de circulation.</string>
     <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
     <string name="map_widget_show_ruler">Échelle</string>
 
@@ -3067,21 +3067,33 @@ représentant la zone : %1$s x %2$s</string>
     <string name="touring_view_renderer">Vue grand tourisme (contrastée et détaillée)</string>
     <string name="nautical_renderer">Maritime</string>
 <string name="will_open_tomorrow_at">Sera ouvert demain à</string>
-    <string name="release_2_9">\\022 Menu contextuel : affichage des horaires des points d\'intérêt
-\n
-\n • Menu Transport : les itinéraires possibles sont maintenant en haut
-\n
-\n • Wikipedia : ajout d\'un bouton pour ouvrir l\'article original, amélioration de l\'apparence des articles
-\n
-\n • Itinéraire : possibilité d\'inverser le point de départ et d\'arrivée
-\n
-\n • Notes : tri par type et date
-\n
-\n • Contributions OSM : affiche icône et nom de la catégorie ainsi que les actions terminées
-\n
-\n • Nouvel écran de saisie rapide des coordonnées pour la création de marques.
-\n
+    <string name="release_2_9">\\022 Menu contextuel : affichage des horaires d\'ouverture des points d\'intérêt 
+\n 
+\n • Menu Transport : les itinéraires possibles sont maintenant en haut 
+\n 
+\n • Wikipedia : ajout d\'un bouton pour ouvrir l\'article original, amélioration de l\'apparence des articles 
+\n 
+\n • Itinéraire : possibilité d\'inverser le point de départ et d\'arrivée en un appui
+\n 
+\n • Notes : tri par type et date 
+\n 
+\n • Contributions OSM : affiche icône et nom de la catégorie ainsi que les actions terminées 
+\n 
+\n • Nouvel écran de saisie rapide des coordonnées pour la création de marques. 
+\n 
 \n</string>
     <string name="copy_location_name">Copier le nom du point</string>
     <string name="toast_empty_name_error">L\'emplacement n\'a aucun nom</string>
+<string name="show_closed_notes">Afficher les notes fermées</string>
+    <string name="switch_osm_notes_visibility_desc">Afficher / Masquer les notes OSM sur la carte.</string>
+    <string name="gpx_file_desc">GPX - adapté à l\'export vers JOSM et d\'autres éditeurs OSM.</string>
+    <string name="osc_file_desc">OSC - adapté à l\'export vers OpenStreetMap.</string>
+    <string name="gpx_file">Fichier GPX</string>
+    <string name="osc_file">Fichier OSC</string>
+    <string name="choose_file_type">Sélectionnez le type de fichier</string>
+    <string name="osm_edits_export_desc">Sélectionnez le type d\'export : notes OSM, PI ou les 2.</string>
+    <string name="all_data">Toutes les données</string>
+    <string name="osm_notes">Notes OSM</string>
+    <string name="tunnel_warning">En approche d\'un tunnel</string>
+    <string name="show_tunnels">Tunnels</string>
 </resources>
