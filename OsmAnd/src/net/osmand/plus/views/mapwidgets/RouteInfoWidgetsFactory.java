@@ -55,6 +55,7 @@ import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -1214,6 +1215,7 @@ public class RouteInfoWidgetsFactory {
 			boolean trafficWarnings = settings.SHOW_TRAFFIC_WARNINGS.get();
 			boolean cams = settings.SHOW_CAMERAS.get();
 			boolean peds = settings.SHOW_PEDESTRIAN.get();
+			boolean tunnels = settings.SHOW_TUNNELS.get();
 			boolean visible = false;
 			if ((rh.isFollowingMode() || trackingUtilities.isMapLinkedToLocation())
 					&& (trafficWarnings || cams)) {
@@ -1271,6 +1273,15 @@ public class RouteInfoWidgetsFactory {
 						} else {
 							locimgId = R.drawable.warnings_pedestrian;
 						}
+					} else if(alarm.getType() == AlarmInfoType.TUNNEL) {
+						DecimalFormat df = new DecimalFormat("#.#");
+						if(settings.DRIVING_REGION.get().americanSigns){
+							locimgId = R.drawable.warnings_tunnel_us;
+							text = df.format(alarm.getFloatValue()) +" mi";
+						} else {
+							locimgId = R.drawable.warnings_tunnel;
+							text = df.format(alarm.getFloatValue()) +" km";
+						}
 					} else {
 						text = null;
 					}
@@ -1280,6 +1291,8 @@ public class RouteInfoWidgetsFactory {
 							visible = cams;
 						} else if (alarm.getType() == AlarmInfoType.PEDESTRIAN) {
 							visible = peds;
+						} else if (alarm.getType() == AlarmInfoType.TUNNEL) {
+							visible = tunnels;
 						} else {
 							visible = trafficWarnings;
 						}

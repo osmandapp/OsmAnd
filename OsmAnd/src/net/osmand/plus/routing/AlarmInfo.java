@@ -18,7 +18,8 @@ public class AlarmInfo implements LocationPoint {
 		STOP(7, R.string.traffic_warning_stop),
 		PEDESTRIAN(8, R.string.traffic_warning_pedestrian),
 		HAZARD(9, R.string.traffic_warning_hazard),
-		MAXIMUM(10, R.string.traffic_warning);
+		MAXIMUM(10, R.string.traffic_warning),
+		TUNNEL(8, R.string.tunnel_warning);
 		
 		private int priority;
 		private int string;
@@ -41,6 +42,7 @@ public class AlarmInfo implements LocationPoint {
 	private AlarmInfoType type;
 	protected final int locationIndex;
 	private int intValue;
+	private float floatValue;
 	private double latitude;
 	private double longitude;
 	
@@ -52,6 +54,14 @@ public class AlarmInfo implements LocationPoint {
 	
 	public AlarmInfoType getType() {
 		return type;
+	}
+
+	public float getFloatValue() {
+		return floatValue;
+	}
+
+	public void setFloatValue(float floatValue) {
+		this.floatValue = floatValue;
 	}
 	
 	@Override
