@@ -17,7 +17,6 @@ import android.hardware.GeomagneticField;
 import android.os.BatteryManager;
 import android.support.annotation.NonNull;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -1294,8 +1293,7 @@ public class RouteInfoWidgetsFactory {
 							visible = peds;
 						} else if (alarm.getType() == AlarmInfoType.TUNNEL) {
 							visible = tunnels;
-						}
-						else {
+						} else {
 							visible = trafficWarnings;
 						}
 					}
