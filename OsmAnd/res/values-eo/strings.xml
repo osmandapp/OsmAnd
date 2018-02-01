@@ -1202,7 +1202,7 @@ Lon: %2$s</string>
     <string name="poi_filter_for_tourists">Por turistoj</string>
     <string name="poi_filter_fuel">Brulaĵo</string>
     <string name="show_warnings_title">Montri avertojn…</string>
-    <string name="show_warnings_descr">Agordi trafikajn avertojn (pri rapidlimoj, endaj haltejoj, strat-ĝiboj), avertojn pri rapid-kontroliloj kaj informojn pri koridoroj.</string>
+    <string name="show_warnings_descr">Agordi trafikajn avertojn (pri rapidlimoj, endaj haltejoj, strat-ĝiboj, tuneloj), avertojn pri rapid-kontroliloj kaj informojn pri koridoroj.</string>
     <string name="use_compass_navigation">Uzi kompason</string>
     <string name="use_compass_navigation_descr">Uzi kompason nur kiam neniu direkto estas trovita.</string>
     <string name="avoid_motorway">Eviti aŭtovojojn</string>
@@ -2952,4 +2952,16 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="nautical_renderer">Marnavigada</string>
     <string name="copy_location_name">Kopii nomon de punkto</string>
     <string name="toast_empty_name_error">Loko estas sennoma</string>
+<string name="show_closed_notes">Montri fermitajn rimarkojn</string>
+    <string name="switch_osm_notes_visibility_desc">Montri/kaŝi OSM-rimarkojn sur la mapo.</string>
+    <string name="gpx_file_desc">GPX - taŭga por elporti al JOSM aŭ aliaj OSM-redaktiloj.</string>
+    <string name="osc_file_desc">OSC - taŭga por elporti al OpenStreetMap.</string>
+    <string name="gpx_file">GPX-dosiero</string>
+    <string name="osc_file">OSC-dosiero</string>
+    <string name="choose_file_type">Elektu dosiertipon</string>
+    <string name="osm_edits_export_desc">Elektu kion elporti: OSM-rimarkojn, interesejojn aŭ ambaŭ.</string>
+    <string name="all_data">Ĉiuj datumoj</string>
+    <string name="osm_notes">OSM-rimarkoj</string>
+    <string name="tunnel_warning">Tunelo antaŭe</string>
+    <string name="show_tunnels">Tuneloj</string>
 </resources>
