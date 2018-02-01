@@ -853,7 +853,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="poi_filter_for_tourists">Para turistas</string>
     <string name="poi_filter_fuel">Combustible</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
-    <string name="show_warnings_descr">Configura avisos de tráfico (límites de velocidad, paradas forzosas, lomadas), radares de velocidad, e información de carriles.</string>
+    <string name="show_warnings_descr">Configura avisos de tráfico (límites de velocidad, paradas forzosas, lomadas, túneles), radares de velocidad, e información de carriles.</string>
     <string name="use_compass_navigation_descr">Usa la brújula cuando no se detecta la dirección.</string>
     <string name="use_compass_navigation">Usar brújula</string>
     <string name="avoid_motorway">Evitar autopistas</string>
@@ -2913,4 +2913,16 @@ Proporciona un código completo</string>
     <string name="nautical_renderer">Náutico</string>
 <string name="copy_location_name">Copiar nombre del punto/PDI</string>
     <string name="toast_empty_name_error">Ubicación sin nombre</string>
+<string name="show_closed_notes">Mostrar notas de OSM cerradas</string>
+    <string name="switch_osm_notes_visibility_desc">Alternar vista de notas de OSM en el mapa.</string>
+    <string name="gpx_file_desc">GPX - adecuado para exportar a JOSM u otros editores OSM.</string>
+    <string name="osc_file_desc">OSC - adecuado para exportar a OpenStreetMap.</string>
+    <string name="gpx_file">Archivo GPX</string>
+    <string name="osc_file">Archivo OSC</string>
+    <string name="choose_file_type">Elegir tipo de archivo</string>
+    <string name="osm_edits_export_desc">Elije el tipo de exportación: notas de OSM, PDI o ambos.</string>
+    <string name="all_data">Todos los datos</string>
+    <string name="osm_notes">Notas de OSM</string>
+    <string name="tunnel_warning">Túnel adelante</string>
+    <string name="show_tunnels">Túneles</string>
 </resources>
