@@ -118,7 +118,7 @@
     <string name="poi_filter_for_tourists">For turister</string>
     <string name="poi_filter_fuel">Brændstof</string>
     <string name="show_warnings_title">Vis advarsler…</string>
-    <string name="show_warnings_descr">Konfigurer trafikadvarsler (hastighedsgrænser, tvungne stop, vejbump), fartkameraadvarsler og vognbane oplysninger.</string>
+    <string name="show_warnings_descr">Konfigurer trafikadvarsler (hastighedsgrænser, tvungne stop, vejbump, tunneler), fartkameraadvarsler og vognbane oplysninger.</string>
     <string name="use_compass_navigation_descr">Brug kompasset, når ingen retning er registret.</string>
     <string name="use_compass_navigation">Kompas</string>
     <string name="avoid_motorway">Undgå motorveje</string>
@@ -3021,7 +3021,13 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="touring_view_renderer">Touringvisning (kontrast og detaljer)</string>
     <string name="nautical_renderer">Nautisk</string>
 <string name="rendering_attr_hidePOILabels_name">IP etiketter</string>
-    <string name="release_2_9">• Opdateret kontekstmenuen: viser, når et interessepunkt åbner / lukker 
+    <string name="release_2_9">• Påvisning af stopskilt tager nu hensyn til kørselsretningen 
+\n 
+\n• Ny algoritme giver meningsfulde stignings-/nedstigningsværdier for GPX-spor 
+\n 
+\n• Vandretid tager hensyn til terræn (stigning) (Naismiths regel) 
+\n
+\n• Opdateret kontekstmenuen: viser, når et interessepunkt åbner / lukker 
 \n 
 \n• Transportmenu: alle tilgængelige ruter er nu øverst 
 \n 
@@ -3039,4 +3045,16 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="will_open_tomorrow_at">Åbner i morgen kl.</string>
     <string name="copy_location_name">Kopiér Punkt/IP-navn</string>
     <string name="toast_empty_name_error">Placering har intet navn</string>
+<string name="show_closed_notes">Vis lukkede noter</string>
+    <string name="switch_osm_notes_visibility_desc">Vis/skjul OSM noter på kortet.</string>
+    <string name="gpx_file_desc">GPX - velegnet som eksport til JOSM eller andre OSM redigering.</string>
+    <string name="osc_file_desc">OSC - vekegnet som eksport til OpenStreetMap.</string>
+    <string name="gpx_file">GPX-fil</string>
+    <string name="osc_file">OSC-fil</string>
+    <string name="choose_file_type">Vælg filtype</string>
+    <string name="osm_edits_export_desc">Vælg eksporttype: OSM noter, IP, eller begge.</string>
+    <string name="all_data">Alle data</string>
+    <string name="osm_notes">OSM noter</string>
+    <string name="tunnel_warning">Tunnel forude</string>
+    <string name="show_tunnels">"Tunneler "</string>
 </resources>
