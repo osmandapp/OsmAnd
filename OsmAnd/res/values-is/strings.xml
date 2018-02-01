@@ -2124,7 +2124,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="auto_split_recording_title">Skipta skráningu sjálfvirkt eftir bil</string>
 	<string name="incremental_search_city">Stigvaxandi leit í borg</string>
     <string name="rendering_attr_showRoadMaps_description">Velja þegar birta á kort einungis með vegum:</string>
-    <string name="show_warnings_descr">Stilla umferðaraðvaranir (hraðatakmarkanir, lokanir, umferðarhnúta, hraðahindranir), aðvaranir um hraðamyndavélar og upplýsingar um akreinaskiptingar.</string>
+    <string name="show_warnings_descr">Stilla umferðaraðvaranir (hraðatakmarkanir, lokanir, umferðarhnúta, hraðahindranir, veggöng), aðvaranir um hraðamyndavélar og upplýsingar um akreinaskiptingar.</string>
     <string name="osmand_short_description_80_chars">Almenn skoðun landakorta í farsíma og flakk á ónettengdum sem nettengdum OSM-landakortum</string>
 	<string name="osmand_extended_description_part7">Leggðu þitt fram til OSM • Tilkynntu um villur í gögnum • Sendu inn GPX-ferla til OSM beint úr forritinu • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar)</string>
     <string name="osmand_extended_description_part8">OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir. 
@@ -2613,4 +2613,8 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="animate_my_location_desc">Virkja hreyfingu við hliðrun staðsetningar minnar á meðan leiðsögn stendur.</string>
     <string name="storage_permission_restart_is_required">Núna hefur forritið heimild til að skrifa í ytri gagnageymslur. Það þarf að endurræsa forritið handvirkt.</string>
     <string name="show_transparency_seekbar">Birta gegnsæis-sleða</string>
+    <string name="gpx_file">GPX-skrá</string>
+    <string name="osc_file">OSC-skrá</string>
+    <string name="choose_file_type">Veldu skráartegund</string>
+    <string name="all_data">Öll gögn</string>
     </resources>
