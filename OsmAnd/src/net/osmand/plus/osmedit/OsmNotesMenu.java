@@ -53,6 +53,7 @@ public class OsmNotesMenu {
 					showOsmBugsPref.set(isChecked);
 					plugin.updateLayers(mapActivity.getMapView(), mapActivity);
 					mapActivity.refreshMap();
+					mapActivity.getDashboard().refreshContent(true);
 				} else if (itemId == showZoomLevelStringId) {
 					int checked = Arrays.asList(zoomIntValues).indexOf(showOsmBugsZoomPref.get());
 
@@ -81,12 +82,22 @@ public class OsmNotesMenu {
 			}
 		};
 
+		boolean showOsmBugs = showOsmBugsPref.get();
+		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		int toggleIconColorId;
+		if (showOsmBugs) {
+			toggleIconColorId = nightMode ? R.color.color_dialog_buttons_dark : R.color.color_dialog_buttons_light;
+		} else {
+			toggleIconColorId = nightMode ? 0 : R.color.icon_color;
+		}
+
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(osmNotesStringId, mapActivity)
 				.setDescription(mapActivity.getString(R.string.switch_osm_notes_visibility_desc))
 				.setIcon(R.drawable.ic_action_bug_dark)
+				.setColor(toggleIconColorId)
 				.setListener(l)
-				.setSelected(showOsmBugsPref.get())
+				.setSelected(showOsmBugs)
 				.createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -95,6 +106,7 @@ public class OsmNotesMenu {
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_magnifier)
 				.setListener(l)
+				.setClickable(showOsmBugs)
 				.createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -102,6 +114,7 @@ public class OsmNotesMenu {
 				.setIcon(R.drawable.ic_action_note_dark)
 				.setListener(l)
 				.setSelected(showClosedOsmBugsPref.get())
+				.setClickable(showOsmBugs)
 				.hideDivider(true)
 				.createItem());
 
