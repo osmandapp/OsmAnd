@@ -50,7 +50,6 @@ import java.util.List;
 public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider {
 
 	private static final Log log = PlatformUtil.getLog(OsmBugsLayer.class);
-	private final static int startZoom = 8;
 	private final OsmEditingPlugin plugin;
 
 	private OsmandMapTileView view;
@@ -64,6 +63,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private final MapActivity activity;
 	private OsmBugsLocalUtil local;
 	private MapLayerData<List<OpenStreetNote>> data;
+
+	private int startZoom;
 
 	public OsmBugsLayer(MapActivity activity, OsmEditingPlugin plugin) {
 		this.activity = activity;
@@ -116,6 +117,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		startZoom = activity.getMyApplication().getSettings().SHOW_OSM_BUGS_MIN_ZOOM.get();
 		if (tileBox.getZoom() >= startZoom) {
 			// request to load
 			data.queryNewData(tileBox);
