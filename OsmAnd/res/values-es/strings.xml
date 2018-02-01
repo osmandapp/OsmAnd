@@ -2782,12 +2782,7 @@ Por favor proporciona un código completo</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de ruta</string>
-    <string name="release_3_0">• La detección de señales de stop ahora considera la dirección de desplazamiento 
-\n 
-\n • Nuevo algoritmo que proporciona valores significativos de ascenso y descenso para trazas GPX. 
-\n 
-\n • La duración del recorrido a pie tiene en cuenta si el terreno es ascendente (regla de Naismith).
-\n
+    <string name="release_3_0">• 
 \n</string>
     <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
@@ -2829,4 +2824,36 @@ Por favor proporciona un código completo</string>
     <string name="lang_lo">laosiano</string>
     <string name="day_off_label">cerrado</string>
     <string name="winter_and_ski_renderer">Invierno y esquí</string>
-    </resources>
+    <string name="gpx_file_desc">GPX - adecuado para exportar a JOSM u otros editores OSM.</string>
+    <string name="osc_file_desc">OSC - adecuado para exportar a OpenStreetMap.</string>
+    <string name="gpx_file">Archivo GPX</string>
+    <string name="osc_file">Archivo OSC</string>
+    <string name="choose_file_type">Elegir tipo de archivo</string>
+    <string name="osm_edits_export_desc">Seleccione el tipo de exportación: notas de OSM, PDI o ambos.</string>
+    <string name="all_data">"Todos los  datos"</string>
+    <string name="osm_notes">Notas de OSM</string>
+    <string name="release_2_9">• Menú contextual actualizado: muestra cuando el PDI se encuentra abierto o cerrado. 
+\n 
+\n • Menú de transporte: todas las rutas disponibles, están ahora en la parte superior. 
+\n 
+\n • Wikipedia: se añadió el botón para abrir el artículo original y se actualizó la apariencia de los artículos 
+\n 
+\n • Navegación: se añadió la posibilidad de intercambiar los puntos de inicio y fin con una sola pulsación 
+\n 
+\n • Notas multimedia: se añadió el orden por tipo y fecha 
+\n 
+\n • Edición OSM: ahora muestra un icono y el nombre de la categoría del PDI, también muestra las acciones completadas. 
+\n 
+\n • Ingreso rápido de coordenadas: Nueva pantalla de ingreso para la creación rápida de marcadores
+\n
+\n • La detección de señales de alto, ahora considera la dirección de desplazamiento
+\n
+\n • Nuevo algoritmo que proporciona valores significativos de ascenso y descenso para trazas GPX.
+\n
+\n • El tiempo de caminata es consciente del terreno ascendente (regla de Naismith).
+\n</string>
+    <string name="touring_view_renderer">Vista de Touring (contraste y detalles)</string>
+    <string name="nautical_renderer">Náutico</string>
+    <string name="copy_location_name">Copiar nombre del punto/PDI</string>
+    <string name="toast_empty_name_error">Ubicación sin nombre</string>
+</resources>
