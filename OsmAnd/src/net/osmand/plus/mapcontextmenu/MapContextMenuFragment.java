@@ -94,6 +94,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private int menuTopShadowAllHeight;
 	private int menuTitleHeight;
 	private int menuBottomViewHeight;
+	private int menuButtonsHeight;
 	private int menuFullHeight;
 	private int menuFullHeightMax;
 	private int menuTopViewHeightExcludingTitle;
@@ -606,8 +607,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private float getToolbarAlpha(int y) {
 		float a = 0;
 		if (menu != null && !menu.isLandscapeLayout()) {
-			if (y < minHalfY) {
-				a = 1f - (y - bottomToolbarPosY) * (1f / (minHalfY - bottomToolbarPosY));
+			if (y < bottomToolbarPosY) {
+				a = 1f - (y - topScreenPosY) * (1f / (bottomToolbarPosY - topScreenPosY));
 			}
 			if (a < 0) {
 				a = 0;
@@ -714,7 +715,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		int oldMenuState = menu.getCurrentMenuState();
 		if (!menu.isLandscapeLayout()) {
-			if (slidingDown && !skipScreenState && oldMenuState == MenuState.FULL_SCREEN && currentY < topScreenPosY) {
+			if (slidingDown && !skipScreenState && oldMenuState == MenuState.FULL_SCREEN
+					&& currentY < (-menuTitleHeight + menuButtonsHeight)) {
 				slidingDown = false;
 			}
 			if (menuBottomViewHeight > 0 && slidingUp) {
@@ -1198,6 +1200,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						menuTopShadowAllHeight = newMenuTopShadowAllHeight;
 						menuTitleHeight = menuTopShadowAllHeight + dy;
 						menuBottomViewHeight = view.findViewById(R.id.context_menu_bottom_view).getHeight();
+						menuButtonsHeight = view.findViewById(R.id.context_menu_bottom_buttons).getHeight() + view.findViewById(R.id.buttons_bottom_border).getHeight() + view.findViewById(R.id.context_menu_buttons).getHeight();
 
 						menuFullHeightMax = menuTitleHeight + menuBottomViewHeight;
 
@@ -1416,7 +1419,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			case MenuState.FULL_SCREEN:
 				if (currentY != CURRENT_Y_UNDEFINED) {
 					int maxPosY = viewHeight - menuFullHeightMax;
-					int minPosY = topScreenPosY;
+					int minPosY;
+					if (menu.isLandscapeLayout()) {
+						minPosY = topScreenPosY;
+					} else {
+						minPosY = -menuTitleHeight + menuButtonsHeight + bottomToolbarPosY;
+					}
 					if (maxPosY > minPosY) {
 						maxPosY = minPosY;
 					}
@@ -1428,7 +1436,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						posY = currentY;
 					}
 				} else {
-					posY = topScreenPosY;
+					if (menu.isLandscapeLayout()) {
+						posY = topScreenPosY;
+					} else {
+						posY = -menuTitleHeight + menuButtonsHeight + bottomToolbarPosY;
+					}
 				}
 				break;
 			default:
