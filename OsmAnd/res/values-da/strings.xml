@@ -2934,8 +2934,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="enter_new_name">Indtast nyt navn</string>
     <string name="shared_string_back">Tilbage</string>
     <string name="view">Vis</string>
-	<string name="waypoints_added_to_map_markers">Rutepunkter tilføjet kortmarkører</string>
-	<string name="import_gpx_file_description">kan importeres som favoritpunkter, eller som en GPX sporfil.</string>
+	<string name="waypoints_added_to_map_markers">Rutepunkter føjet til kortmarkører</string>
+	<string name="import_gpx_file_description">kan importeres som favoritpunkter, eller som en GPX-sporfil.</string>
     <string name="import_as_gpx">Importer som GPX-fil</string>
     <string name="import_as_favorites">Importer som favoritter</string>
     <string name="import_file">Importer fil</string>
