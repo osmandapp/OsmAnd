@@ -1614,7 +1614,7 @@
     <string name="poi_filter_for_tourists">Զբոսաշրջիկների համար</string>
     <string name="poi_filter_fuel">Լիցքավորման կետեր</string>
     <string name="show_warnings_title">"Ցույց տալ  ազդանշանները…"</string>
-    <string name="show_warnings_descr">Ցույց տալ արագության սահմանափակումները, տեսախցիկները և արհեստական անհարթությունները (speed bumps)։</string>
+    <string name="show_warnings_descr">Ցույց տալ արագության սահմանափակումները, արագաչափ տեսախցիկները, թունելները և արհեստական անհարթությունները (speed bumps)։</string>
     <string name="use_compass_navigation_descr">Նավարկել կողմնացույցի օգնությամբ, եթե շարժման ուղղությունը հայտնի չէ։</string>
     <string name="use_compass_navigation">Օգտագործեք կողմնացույցը</string>
     <string name="avoid_motorway">Խուսափել ավտոմայրուղիներից</string>
@@ -2724,4 +2724,37 @@
     <string name="will_open_tomorrow_at">Վաղը կբացվի ժամը</string>
     <string name="rendering_attr_hidePOILabels_name">POI պիտակներ</string>
     <string name="shared_string_without_name">Առանց անունի</string>
-    </resources>
+    <string name="show_closed_notes">Ցույց տալ փակած նշումները</string>
+    <string name="switch_osm_notes_visibility_desc">Ցույց տալ/թաքցնել OSM նշումները քարտեզի վրա․</string>
+    <string name="release_2_9">"\\022 
+\n • Թարմացվել է համատեքստային  մենյու`ցույց տալ, թե երբ POI- ն բացվում է / փակվում է
+\n
+\n • Տրանսպորտի մենյու`Բոլոր հասանելի երթուղիներն այժմ վերևում են
+\n
+\n • Wikipedia: Ավելացվեց կոճակ օրիգինալ հոդվածը բացելու համար, թարմացվել է հոդվածների տեսքը
+\n
+\n • Երթուղին`Ավելացվեց հնարավորություն, փոխարինելու սկզբնական և վերջնական կետերը 
+\n
+\n • Նշումներ`Ավելացվեց հնարավորություն դասավորել ըստ տեսակի և ամսաթվի
+\n
+\n • OSM խմբագրումներ`Ցույց է տալիս պատկերակը եւ  POI-ների կատեգորիա անունը, ցուցադրում է կատարված գործողությունները
+\n
+\n • Նոր մութքագրման էկրան  մարկերների արագ ստեղծման համար
+\n
+\n • Հիմա դադարեցման լապտերի հայտնաբերումը հաշվի է առնում ճամփորդության ուղղությունը
+\n
+\n • Նոր ալգորիթմ, որը տրամադրում է վերելքի/վայրեջքի  իրական արժեքները  GPX տրեկների համար
+\n
+\n• Քայլելու ժամանակը(տևողությունը) կախված տեղանքից (վերելքից) (ըստ Նեյսմիտի կանոնին)  
+\n 
+\n"</string>
+    <string name="lang_lo">"Lao "</string>
+    <string name="day_off_label">Ոչ աշխ․ օր</string>
+    <string name="winter_and_ski_renderer">"Ձմեռային / լեռնադահուկային "</string>
+    <string name="touring_view_renderer">Զբոսաշրջական տեսք (հակադրություն և մանրամասներ)</string>
+    <string name="nautical_renderer">Ծովային</string>
+    <string name="copy_location_name">Պատճենահանել կետի անվանումը / POI</string>
+    <string name="toast_empty_name_error">Դիրքը անուն չունի</string>
+    <string name="tunnel_warning">Առջևում թունել է</string>
+    <string name="show_tunnels">Թունելներ</string>
+</resources>
