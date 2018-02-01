@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="show_closed_notes">Show closed notes</string>
+    <string name="switch_osm_notes_visibility_desc">Show/Hide OSM Notes on the map.</string>
     <string name="gpx_file_desc">GPX - suitable for export to JOSM or other OSM editors.</string>
     <string name="osc_file_desc">OSC - suitable for export to OpenStreetMap.</string>
     <string name="gpx_file">GPX file</string>
@@ -1710,7 +1712,7 @@
     <string name="poi_filter_for_tourists">For tourists</string>
     <string name="poi_filter_fuel">Fuel</string>
     <string name="show_warnings_title">Show alerts…</string>
-    <string name="show_warnings_descr">Configure traffic warnings (speed limits, forced stops, speed bumps), speed camera warnings, and lane information.</string>
+    <string name="show_warnings_descr">Configure traffic warnings (speed limits, forced stops, speed bumps, tunnels), speed camera warnings, and lane information.</string>
     <string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise.</string>
     <string name="use_compass_navigation">Use compass</string>
     <string name="avoid_motorway">Avoid motorways</string>
@@ -2867,4 +2869,6 @@
     <string name="nautical_renderer">Nautical</string>
     <string name="copy_location_name">Copy Point/POI name</string>
     <string name="toast_empty_name_error">Location has no name</string>
+    <string name="tunnel_warning">Tunnel ahead</string>
+    <string name="show_tunnels">Tunnels</string>
 </resources>

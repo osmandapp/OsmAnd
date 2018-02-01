@@ -1070,6 +1070,12 @@ public class OsmandSettings {
 		SHOW_PEDESTRIAN.setModeDefaultValue(ApplicationMode.CAR, true);
 	}
 
+	public final CommonPreference<Boolean> SHOW_TUNNELS = new BooleanPreference("show_tunnels", false).makeProfile().cache();
+
+	{
+		SHOW_TUNNELS.setModeDefaultValue(ApplicationMode.CAR, true);
+	}
+
 	public final OsmandPreference<Boolean> SHOW_CAMERAS = new BooleanPreference("show_cameras", false).makeProfile().cache();
 	public final CommonPreference<Boolean> SHOW_LANES = new BooleanPreference("show_lanes", false).makeProfile().cache();
 
@@ -1155,6 +1161,8 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SHOW_OSM_BUGS = new BooleanPreference("show_osm_bugs", false).makeGlobal();
+	public final CommonPreference<Boolean> SHOW_CLOSED_OSM_BUGS = new BooleanPreference("show_closed_osm_bugs", false).makeGlobal();
+	public final CommonPreference<Integer> SHOW_OSM_BUGS_MIN_ZOOM = new IntPreference("show_osm_bugs_min_zoom", 8).makeGlobal();
 
 	public final CommonPreference<String> MAP_INFO_CONTROLS = new StringPreference("map_info_controls", "").makeProfile();
 	{

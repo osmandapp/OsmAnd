@@ -27,6 +27,7 @@ import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -178,6 +179,7 @@ public class WaypointHelper {
 		}
 		AlarmInfo mostImportant = speedAlarm;
 		int value = speedAlarm != null ? speedAlarm.updateDistanceAndGetPriority(0, 0) : Integer.MAX_VALUE;
+		float speed = lastProjection != null && lastProjection.hasSpeed() ? lastProjection.getSpeed() : 0;
 		if (ALARMS < pointsProgress.size()) {
 			int kIterator = pointsProgress.get(ALARMS);
 			List<LocationPointWrapper> lp = locationPoints.get(ALARMS);
@@ -191,7 +193,6 @@ public class WaypointHelper {
 						break;
 					}
 					AlarmInfo inf = (AlarmInfo) lwp.point;
-					float speed = lastProjection != null && lastProjection.hasSpeed() ? lastProjection.getSpeed() : 0;
 					float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
 					int vl = inf.updateDistanceAndGetPriority(time, d);
 					if (vl < value && (showCameras || inf.getType() != AlarmInfoType.SPEED_CAMERA)) {
@@ -202,7 +203,30 @@ public class WaypointHelper {
 				kIterator++;
 			}
 		}
+		List<RouteSegmentResult> segments = route.getUpcomingTunnel(500);
+		if (segments != null && !segments.isEmpty()) {
+			AlarmInfo inf = new AlarmInfo(AlarmInfoType.TUNNEL, 0);
+			int d = route.getDistanceToPoint(segments.get(0).getStartPointIndex());
+			float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
+			inf.setFloatValue(calculateDistance(segments, mc));
+			int vl = inf.updateDistanceAndGetPriority(time, d);
+			if (vl < value && (showCameras || inf.getType() != AlarmInfoType.SPEED_CAMERA)) {
+				mostImportant = inf;
+			}
+		}
 		return mostImportant;
+	}
+
+	private float calculateDistance(List<RouteSegmentResult> segments, MetricsConstants mc) {
+		float sum = 0f;
+		for (RouteSegmentResult r : segments) {
+			sum += r.getDistance();
+		}
+		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
+			return sum / 1000f;
+		} else {
+			return sum * 0.00062137f;
+		}
 	}
 
 	public void enableWaypointType(int type, boolean enable) {
