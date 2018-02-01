@@ -2644,17 +2644,15 @@
     <string name="open_till">Բաց Է մինև</string>
     <string name="will_close_at">Կփակվի</string>
     <string name="will_open_at">Կբացվի</string>
-    <string name="will_open_on">Բացվելու է</string>
+    <string name="will_open_on">Կբացվի</string>
     <string name="additional_actions">Լրացուցիչ գործողություններ</string>
     <string name="av_locations_selected_desc">GPX ֆայլը կոորդինատներով և ընտրված գրառումների տվյալներով:</string>
     <string name="av_locations_all_desc">GPX ֆայլը կոորդինատներով և բոլոր նշումների տվյալները։</string>
-    <string name="release_3_0">"• Հիմա դադարեցման լապտերի հայտնաբերումը հաշվի է առնում ճամփորդության ուղղությունը
+    <string name="release_3_0">\\022
 \n
-\n• Նոր ալգորիթմ, որը տրամադրում է վերելքի/վայրեջքի  իրական արժեքները  GPX տրեկների համար
 \n
-\n• Քայլելու ժամանակը կախված տեղանքից (վերելքից) (ըստ Նեյսմիտի կանոնին)
-\n
-\n"</string>
+\n 
+\n</string>
     <string name="modify_the_search_query">Փոխել որոնման հարցումը:</string>
     <string name="shared_string_actions">Գործողություններ</string>
     <string name="shared_string_marker">Մարկեր</string>
@@ -2715,4 +2713,15 @@
     <string name="add_route_points">Ավելացնել կետեր երթուղուն</string>
     <string name="osm_recipients_label">OSM ստացողներ</string>
     <string name="total_donations">Ընդհանուր նվիրատվությունները</string>
-</resources>
+<string name="gpx_file_desc">"GPX -  JOSM կամ այլ OSM խմբագրիչների արտահանման համար:"</string>
+    <string name="osc_file_desc">"OSC -  OpenStreetMap արտահանման համար:"</string>
+    <string name="gpx_file">GPX ֆայլ</string>
+    <string name="osc_file">OSC ֆայլ</string>
+    <string name="choose_file_type">Ընտրեք ֆայլի տեսակը</string>
+    <string name="osm_edits_export_desc">Ընտրեք արտահանման տեսակը`OSM նշումներ, POI կամ երկուսն էլ:</string>
+    <string name="all_data">Բոլոր տվյալները</string>
+    <string name="osm_notes">OSM նշումներ</string>
+    <string name="will_open_tomorrow_at">Վաղը կբացվի ժամը</string>
+    <string name="rendering_attr_hidePOILabels_name">POI պիտակներ</string>
+    <string name="shared_string_without_name">Առանց անունի</string>
+    </resources>
