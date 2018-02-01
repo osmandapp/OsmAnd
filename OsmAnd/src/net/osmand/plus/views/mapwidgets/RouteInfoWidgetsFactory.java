@@ -1274,7 +1274,7 @@ public class RouteInfoWidgetsFactory {
 							locimgId = R.drawable.warnings_pedestrian;
 						}
 					} else if(alarm.getType() == AlarmInfoType.TUNNEL) {
-						DecimalFormat df = new DecimalFormat("0.#");
+						DecimalFormat df = new DecimalFormat("#.#");
 						if(settings.DRIVING_REGION.get().americanSigns){
 							locimgId = R.drawable.warnings_tunnel_us;
 							text = df.format(alarm.getFloatValue()) +" mi";
