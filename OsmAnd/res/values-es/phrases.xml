@@ -3748,4 +3748,6 @@
 
 <string name="poi_climbing_boulder_yes">Escalada en bloque (búlder): sí</string>
 	<string name="poi_climbing_boulder_no">Escalada en bloque (búlder): no</string>
+	<string name="poi_climbing_toprope_yes">Moulinette: sí</string>
+	<string name="poi_climbing_toprope_no">Moulinette: no</string>
 	</resources>
