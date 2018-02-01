@@ -76,6 +76,7 @@ import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.LocalRoutingParameter;
 import net.osmand.plus.mapillary.MapillaryFiltersFragment;
 import net.osmand.plus.mapillary.MapillaryPlugin.MapillaryFirstDialogFragment;
+import net.osmand.plus.osmedit.OsmNotesMenu;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
@@ -189,7 +190,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		UNDERLAY_MAP,
 		MAPILLARY,
 		CONTOUR_LINES,
-		HILLSHADE
+		HILLSHADE,
+		OSM_NOTES
 	}
 
 	private Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
@@ -428,6 +430,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			tv.setText(R.string.srtm_plugin_name);
 		} else if (visibleType == DashboardType.HILLSHADE) {
 			tv.setText(R.string.layer_hillshade);
+		} else if (visibleType == DashboardType.OSM_NOTES) {
+			tv.setText(R.string.osm_notes);
 		}
 		ImageView edit = (ImageView) dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -822,7 +826,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				&& visibleType != DashboardType.CONFIGURE_SCREEN
 				&& visibleType != DashboardType.CONFIGURE_MAP
 				&& visibleType != DashboardType.CONTOUR_LINES
-				&& visibleType != DashboardType.HILLSHADE) {
+				&& visibleType != DashboardType.HILLSHADE
+				&& visibleType != DashboardType.OSM_NOTES) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(dpToPx(1f));
 		} else {
@@ -879,6 +884,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				cm = ContourLinesMenu.createListAdapter(mapActivity);
 			} else if (visibleType == DashboardType.HILLSHADE) {
 				cm = HillshadeMenu.createListAdapter(mapActivity);
+			} else if (visibleType == DashboardType.OSM_NOTES) {
+				cm = OsmNotesMenu.createListAdapter(mapActivity);
 			}
 			if (cm != null) {
 				updateListAdapter(cm);

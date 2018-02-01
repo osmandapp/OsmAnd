@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="show_closed_notes">Show closed notes</string>
+    <string name="switch_osm_notes_visibility_desc">Show/Hide OSM Notes on the map.</string>
     <string name="gpx_file_desc">GPX - suitable for export to JOSM or other OSM editors.</string>
     <string name="osc_file_desc">OSC - suitable for export to OpenStreetMap.</string>
     <string name="gpx_file">GPX file</string>
