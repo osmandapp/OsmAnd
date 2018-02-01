@@ -3721,4 +3721,30 @@
 	<string name="poi_climbing_rock_porphyry">攀登的岩石：斑岩</string>
 	<string name="poi_climbing_quality_solid">攀岩的品質：堅實</string>
 	<string name="poi_climbing_quality_fragile">攀岩的品質：脆弱</string>
-	</resources>
+	<string name="poi_climbing_bolted_yes">固定岩栓：有的</string>
+	<string name="poi_climbing_bolted_no">固定岩栓：沒有</string>
+	<string name="poi_climbing_orientation_n">岩壁的方向：朝北</string>
+	<string name="poi_climbing_orientation_ne">岩壁的方向：朝東北</string>
+	<string name="poi_climbing_orientation_e">岩壁的方向：朝東</string>
+	<string name="poi_climbing_orientation_se">岩壁的方向：朝東南</string>
+	<string name="poi_climbing_orientation_s">岩壁的方向：朝南</string>
+	<string name="poi_climbing_orientation_sw">岩壁的方向：朝西南</string>
+	<string name="poi_climbing_orientation_w">岩壁的方向：朝西</string>
+	<string name="poi_climbing_orientation_nw">岩壁的方向：朝西北</string>
+	<string name="poi_climbing_summit_log_yes">登頂日誌：是的</string>
+	<string name="poi_climbing_summit_log_no">登頂日誌：無</string>
+	<string name="poi_climbing_routes">攀登路線</string>
+
+	<string name="poi_circumference">圓週</string>
+	<string name="poi_frozen_food">冷凍食品</string>
+
+	<string name="poi_agrarian">農產品商店</string>
+
+	<string name="poi_shop_fireplace">壁爐商店</string>
+
+	<string name="poi_shop_boat">船商店</string>
+
+	<string name="poi_cannabis">大麻商店</string>
+
+
+</resources>
