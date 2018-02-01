@@ -2767,7 +2767,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="online_photos">Online fotos</string>
     <string name="no_photos_descr">Ingen fotos til denne placering.</string>
     <string name="shared_string_install">Installer</string>
-    <string name="improve_coverage_mapillary">Forbedre fotodækningen med Mapillary</string>
+    <string name="improve_coverage_mapillary">Forbedr fotodækningen med Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Tag egne fotos eller serier af fotos og føj dem til denne placering. 
 \n 
 \nFor at gøre dette skal Mapillary installeres fra Google Play.</string>
