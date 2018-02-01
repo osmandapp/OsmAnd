@@ -2772,12 +2772,12 @@ Repræsenterer område: %1$s x %2$s</string>
 \n 
 \nFor at gøre dette skal Mapillary installeres fra Google Play.</string>
     <string name="open_mapillary">Åbn Mapillary</string>
-    <string name="mapillary_image">Mapillary foto</string>
-    <string name="distance_moving">Korrigeret afstand</string>
+    <string name="mapillary_image">Mapillary-foto</string>
+    <string name="distance_moving">Afstand korrigeret</string>
     <string name="shared_string_permissions">Tilladelser</string>
     <string name="import_gpx_failed_descr">Kan ikke importere filen. Kontroller om der er læsetilladelse på filplaceringen.</string>
     
-    <string name="map_widget_ruler_control">Cirkel lineal</string>
+    <string name="map_widget_ruler_control">Radiusmåler</string>
     <string name="wrong_user_name">Forkert brugernavn!</string>
     <string name="shared_string_to">Til</string>
     <string name="mapillary_menu_date_from">Fra</string>
@@ -2789,10 +2789,10 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="mapillary_menu_descr_dates">Se kun de billeder, der er tilføjet</string>
     <string name="shared_string_reload">Genindlæs</string>
     <string name="mapillary_menu_descr_tile_cache">Genindlæs kortbrikker for at se opdaterede data.</string>
-    <string name="mapillary_menu_title_tile_cache">Kortbrik-cache</string>
+    <string name="mapillary_menu_title_tile_cache">Kortbrikmellemlager (cache)</string>
     <string name="shared_string_reset">Nulstil</string>
     <string name="store_tracks_in_monthly_directories">Gem optagede spor i månedlige mapper</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Gem optagede spor i undermapper arrangeret efter optagelsesmåned (fx. 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Gem optagede spor i undermapper arrangeret efter optagelsesmåned (fx 2017-01).</string>
     <string name="average">Gennemsnit</string>
     <string name="of">%1$d af %2$d</string>
     <string name="ascent_descent">Stigning/fald</string>
@@ -2811,9 +2811,9 @@ Repræsenterer område: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Gennemsigtig lyserød</string>
-    <string name="quick_action_resume_pause_navigation">Genoptag/pause navigation</string>
-    <string name="quick_action_resume_pause_navigation_descr">Tryk på knappen for at pause eller genoptage navigationen.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Vis Navigation færdig dialogboks</string>
+    <string name="quick_action_resume_pause_navigation">Navigation: Genoptag/sæt på pause</string>
+    <string name="quick_action_resume_pause_navigation_descr">Tryk på knappen for at sætte navigationen på pause eller genoptage den.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Vis Navigation færdig-dialogboks</string>
     <string name="quick_action_start_stop_navigation">Start/stop navigation</string>
     <string name="quick_action_start_stop_navigation_descr">Tryk på knappen for at starte eller stoppe navigationen.</string>
     <string name="live_monitoring_max_interval_to_send">Tidsbuffer til online sporing</string>
@@ -2825,7 +2825,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Tilføj gpx rutepunkt</string>
     <string name="shared_string_create">Opret</string>
 <string name="none_point_error">Tilføj mindst ét punkt.</string>
-    <string name="enter_gpx_name">GPX filnavn:</string>
+    <string name="enter_gpx_name">GPX-filnavn:</string>
     <string name="show_on_map_after_saving">Vis på kort efter at have gemt</string>
     <string name="add_route_point">Tilføj rutepunkt</string>
     <string name="add_waypoint">Tilføj rutepunkt</string>
@@ -2844,7 +2844,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="add_point_after">Tilføj punkt efter</string>
     <string name="shared_string_options">Indstillinger</string>
     <string name="measurement_tool_snap_to_road_descr">Forbinder punkterne med ruter for den valgte profil.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Gem punkterne enten som rutepunkter eller som en linje.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Du kan gemme punkterne enten som rutepunkter eller som en linje.</string>
     <string name="choose_navigation_type">Vælg navigationsprofil</string>
     <string name="add_route_points">Tilføj rutepunkter</string>
     <string name="add_line">Tilføj linje</string>
@@ -2879,32 +2879,32 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="marker_moved_to_active">Kortmarkør flyttet til aktiv</string>
     <string name="passed">Sidst anvendt: %1$s</string>
     <string name="make_active">Aktivér</string>
-    <string name="marker_show_distance_descr">Vælg hvordan afstanden og retningen til kortmarkører på kortet angives:</string>
+    <string name="marker_show_distance_descr">Vælg hvordan afstanden og retningen til kortmarkører på kortet skal angives:</string>
     <string name="remove_from_map_markers">Fjern fra kortmarkører</string>
     <string name="descendingly">faldende</string>
     <string name="ascendingly">stigende</string>
     <string name="date_added">Dato tilføjet</string>
     <string name="order_by">Sorter efter:</string>
-    <string name="show_guide_line">Vis vejledningslinjer</string>
+    <string name="show_guide_line">Vis hjælpelinjer</string>
     <string name="show_arrows_on_the_map">Vis pile på kortet</string>
-    <string name="show_passed">Vis passeret</string>
-    <string name="hide_passed">Skjul passeret</string>
+    <string name="show_passed">Vis passerede</string>
+    <string name="hide_passed">Skjul passerede</string>
     <string name="use_location">Brug position</string>
-    <string name="add_location_as_first_point_descr">Tilføj position som første punkt for at planlægge en perfekt rute.</string>
-    <string name="my_location">Position</string>
+    <string name="add_location_as_first_point_descr">Tilføj position som første punkt til planlægning af en perfekt rute.</string>
+    <string name="my_location">Min position</string>
     <string name="shared_string_finish">Afslut</string>
     <string name="plan_route">Planlæg rute</string>
     <string name="shared_string_sort">Sorter</string>
     <string name="coordinate_input">Koordinatindtastning</string>
     <string name="is_saved">er gemt</string>
-    <string name="marker_save_as_track_descr">Eksporter markører til den angivne fil:</string>
+    <string name="marker_save_as_track_descr">Eksporter dine markører til en fil du kan angive her:</string>
     <string name="marker_save_as_track">Gem som spor</string>
     <string name="move_to_history">Flyt til historik</string>
     <string name="group_will_be_removed_after_restart">Gruppen vil blive fjernet efter næste genstart.</string>
     <string name="shared_string_markers">Markører</string>
     <string name="coordinates_format">Koordinatformat</string>
-    <string name="use_system_keyboard">Brug systemtastaturet</string>
-    <string name="fast_coordinates_input_descr">Vælg format for koordinatindtastning. Kan altid ændres ved at trykke på indstillinger.</string>
+    <string name="use_system_keyboard">Brug systemets tastatur</string>
+    <string name="fast_coordinates_input_descr">Vælg format for koordinatindtastning. Kan altid ændres ved at trykke på Indstillinger.</string>
     <string name="fast_coordinates_input">Hurtig koordinatindtastning</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Undgå isglatte veje, vadesteder</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Undgå isglatte veje og vadesteder.</string>
