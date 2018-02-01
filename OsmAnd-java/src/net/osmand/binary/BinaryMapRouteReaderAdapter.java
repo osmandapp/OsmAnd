@@ -52,6 +52,7 @@ public class BinaryMapRouteReaderAdapter {
 		public final static int TRAFFIC_SIGNALS = 6;
 		public final static int RAILWAY_CROSSING = 7;
 		private final static int LANES = 8;
+		private static final int TUNNEL = 9;
 		private final String t;
 		private final String v;
 		private int intValue;
@@ -201,6 +202,8 @@ public class BinaryMapRouteReaderAdapter {
 				if (i > 0) {
 					intValue = Integer.parseInt(v.substring(0, i));
 				}
+			} else if (t.equalsIgnoreCase("tunnel") && v != null) {
+				type = TUNNEL;
 			}
 		}
 	}

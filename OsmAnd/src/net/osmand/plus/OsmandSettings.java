@@ -1070,6 +1070,12 @@ public class OsmandSettings {
 		SHOW_PEDESTRIAN.setModeDefaultValue(ApplicationMode.CAR, true);
 	}
 
+	public final CommonPreference<Boolean> SHOW_TUNNELS = new BooleanPreference("show_tunnels", false).makeProfile().cache();
+
+	{
+		SHOW_TUNNELS.setModeDefaultValue(ApplicationMode.CAR, true);
+	}
+
 	public final OsmandPreference<Boolean> SHOW_CAMERAS = new BooleanPreference("show_cameras", false).makeProfile().cache();
 	public final CommonPreference<Boolean> SHOW_LANES = new BooleanPreference("show_lanes", false).makeProfile().cache();
 

@@ -1702,7 +1702,7 @@
     <string name="poi_filter_for_tourists">For tourists</string>
     <string name="poi_filter_fuel">Fuel</string>
     <string name="show_warnings_title">Show alerts…</string>
-    <string name="show_warnings_descr">Configure traffic warnings (speed limits, forced stops, speed bumps), speed camera warnings, and lane information.</string>
+    <string name="show_warnings_descr">Configure traffic warnings (speed limits, forced stops, speed bumps, tunnels), speed camera warnings, and lane information.</string>
     <string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise.</string>
     <string name="use_compass_navigation">Use compass</string>
     <string name="avoid_motorway">Avoid motorways</string>
@@ -2859,4 +2859,6 @@
     <string name="nautical_renderer">Nautical</string>
     <string name="copy_location_name">Copy Point/POI name</string>
     <string name="toast_empty_name_error">Location has no name</string>
+    <string name="tunnel_warning">Tunnel ahead</string>
+    <string name="show_tunnels">Tunnels</string>
 </resources>
