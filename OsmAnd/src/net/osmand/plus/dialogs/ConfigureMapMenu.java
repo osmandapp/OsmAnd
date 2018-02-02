@@ -517,7 +517,7 @@ public class ConfigureMapMenu {
 							if (item.equals(selectedName)) {
 								selected = i;
 							}
-							visibleNamesList.add(item.replace('_', ' ').replace('-', ' '));
+							visibleNamesList.add(item);
 							i++;
 						}
 
