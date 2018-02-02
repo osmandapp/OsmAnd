@@ -159,14 +159,13 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		toolbarView = view.findViewById(R.id.context_menu_toolbar);
 		toolbarBackButton = view.findViewById(R.id.context_menu_toolbar_back);
 		toolbarTextView = (TextView) view.findViewById(R.id.context_menu_toolbar_text);
-		toolbarContainer.setAlpha(0);
+		updateVisibility(toolbarContainer, 0);
 		toolbarBackButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				openMenuHeaderOnly();
 			}
 		});
-		toolbarTextView.setText(menu.getTitleStr());
 
 		topButtonContainer = view.findViewById(R.id.context_menu_top_button_container);
 		view.findViewById(R.id.context_menu_top_back).setOnClickListener(new View.OnClickListener() {
@@ -175,7 +174,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				openMenuHeaderOnly();
 			}
 		});
-		topButtonContainer.setAlpha(0);
+		updateVisibility(topButtonContainer, 0);
 
 		map = getMapActivity().getMapView();
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
@@ -621,12 +620,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void updateToolbar() {
 		float a = getToolbarAlpha(getViewY());
-		toolbarContainer.setAlpha(a);
+		updateVisibility(toolbarContainer, a);
 	}
 
 	private float getTopButtonAlpha(int y) {
 		float a = 0;
-		if (menu != null && !menu.isLandscapeLayout()) {
+		if (menu != null && !menu.isLandscapeLayout() && !menu.hasActiveToolbar()) {
 			int headerTopY = getHeaderOnlyTopY();
 			if (y < headerTopY) {
 				a = 1f - (y - minHalfY) * (1f / (headerTopY - minHalfY));
@@ -642,7 +641,25 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void updateTopButton() {
 		float a = getTopButtonAlpha(getViewY());
-		topButtonContainer.setAlpha(a);
+		updateVisibility(topButtonContainer, a);
+	}
+
+	private void updateVisibility(View v, float alpha) {
+		boolean visible = alpha > 0;
+		v.setAlpha(alpha);
+		if (visible && v.getVisibility() != View.VISIBLE) {
+			v.setVisibility(View.VISIBLE);
+		} else  if (!visible && v.getVisibility() == View.VISIBLE) {
+			v.setVisibility(View.INVISIBLE);
+		}
+	}
+
+	private void updateVisibility(View v, boolean visible) {
+		if (visible && v.getVisibility() != View.VISIBLE) {
+			v.setVisibility(View.VISIBLE);
+		} else  if (!visible && v.getVisibility() == View.VISIBLE) {
+			v.setVisibility(View.INVISIBLE);
+		}
 	}
 
 	private void toggleDetailsHideButton() {
@@ -788,15 +805,33 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 
 			final float topButtonAlpha = getTopButtonAlpha(posY);
+			if (topButtonAlpha > 0) {
+				updateVisibility(topButtonContainer, true);
+			}
 			topButtonContainer.animate().alpha(topButtonAlpha)
 					.setDuration(200)
 					.setInterpolator(new DecelerateInterpolator())
+					.setListener(new AnimatorListenerAdapter() {
+						@Override
+						public void onAnimationEnd(Animator animation) {
+							updateVisibility(topButtonContainer, topButtonAlpha);
+						}
+					})
 					.start();
 
 			final float toolbarAlpha = getToolbarAlpha(posY);
+			if (toolbarAlpha > 0) {
+				updateVisibility(toolbarContainer, true);
+			}
 			toolbarContainer.animate().alpha(toolbarAlpha)
 					.setDuration(200)
 					.setInterpolator(new DecelerateInterpolator())
+					.setListener(new AnimatorListenerAdapter() {
+						@Override
+						public void onAnimationEnd(Animator animation) {
+							updateVisibility(toolbarContainer, toolbarAlpha);
+						}
+					})
 					.start();
 
 			mainView.animate().y(posY)
@@ -1281,6 +1316,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			// Text line 1
 			TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
 			line1.setText(menu.getTitleStr());
+			toolbarTextView.setText(menu.getTitleStr());
 
 			// Text line 2
 			LinearLayout line2layout = (LinearLayout) view.findViewById(R.id.context_menu_line2_layout);
