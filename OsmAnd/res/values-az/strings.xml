@@ -1835,4 +1835,5 @@
     <string name="recording_unavailable">dəstəklənmir</string>
     <string name="close_changeset">Dəyişiklikləri bağla</string>
     <string name="rotate_map_to_bearing">Xəritənin istiqaməti</string>
+    <string name="navigation_intent_invalid">Yanlış format: %s</string>
     </resources>
