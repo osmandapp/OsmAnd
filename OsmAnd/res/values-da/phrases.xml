@@ -3793,7 +3793,7 @@
 
 
 <string name="poi_circumference">Omkreds</string>
-	<string name="poi_diameter_crown">Diameter på kronen</string>
+	<string name="poi_diameter_crown">Kronens diameter</string>
 
 	<string name="poi_meadow_agricultural">Type: landbrug</string>
 	<string name="poi_meadow_perpetual">Type: evig</string>
