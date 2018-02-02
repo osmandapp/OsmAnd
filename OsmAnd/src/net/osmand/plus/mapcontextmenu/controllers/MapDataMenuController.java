@@ -191,7 +191,7 @@ public class MapDataMenuController extends MenuController {
 	}
 
 	@Override
-	public int getAdditionalInfoColor() {
+	public int getAdditionalInfoColorId() {
 		return R.color.icon_color;
 	}
 

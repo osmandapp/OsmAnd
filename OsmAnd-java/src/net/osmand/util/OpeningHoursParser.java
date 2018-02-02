@@ -1016,7 +1016,7 @@ public class OpeningHoursParser {
 					if (b.charAt(b.length() - 1) != ' ') {
 						b.append(" ");
 					}
-					b.append("(").append(comment).append(")");
+					b.append("- ").append(comment);
 				} else {
 					b.append(comment);
 				}
@@ -1136,7 +1136,7 @@ public class OpeningHoursParser {
 			}
 			String res = sb.toString();
 			if (res.length() > 0 && !Algorithms.isEmpty(comment)) {
-				res += " (" + comment + ")";
+				res += " - " + comment;
 			}
 			return res;
 		}

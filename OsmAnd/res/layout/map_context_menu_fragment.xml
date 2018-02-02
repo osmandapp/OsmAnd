@@ -108,6 +108,15 @@
                     osmand:typeface="@string/font_roboto_medium"
                     tools:text="Museum"/>
 
+                <ImageView
+                    android:id="@+id/additional_info_image_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:paddingTop="1dp"
+                    android:paddingRight="@dimen/context_menu_padding_margin_small"
+                    tools:src="@drawable/ic_action_opening_hour_16"/>
+
                 <TextView
                     android:id="@+id/additional_info_text_view"
                     android:layout_width="wrap_content"

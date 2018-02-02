@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -478,9 +479,17 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return "";
 	}
 
-	public int getAdditionalInfoColor() {
+	@ColorRes
+	public int getAdditionalInfoColorId() {
 		if (openingHoursInfo != null) {
-			return 0;
+			boolean open = false;
+			for (OpeningHours.Info info : openingHoursInfo) {
+				if (info.isOpened() || info.isOpened24_7()) {
+					open = true;
+					break;
+				}
+			}
+			return open ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
 		} else if (indexItem != null) {
 			return R.color.icon_color;
 		}
@@ -516,6 +525,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return "";
 	}
 
+	@DrawableRes
 	public int getAdditionalInfoIconRes() {
 		if (openingHoursInfo != null) {
 			return R.drawable.ic_action_opening_hour_16;
