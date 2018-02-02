@@ -665,6 +665,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
+	public boolean hasActiveToolbar() {
+		TopToolbarController toolbarController = mapActivity.getTopToolbarController(TopToolbarControllerType.CONTEXT_MENU);
+		return toolbarController != null && toolbarController instanceof ContextMenuToolbarController;
+	}
+
 	public void closeActiveToolbar() {
 		TopToolbarController toolbarController = mapActivity.getTopToolbarController(TopToolbarControllerType.CONTEXT_MENU);
 		if (toolbarController != null && toolbarController instanceof ContextMenuToolbarController) {
