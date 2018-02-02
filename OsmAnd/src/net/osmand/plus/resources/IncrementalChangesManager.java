@@ -88,7 +88,8 @@ public class IncrementalChangesManager {
 		if (!regionUpdateFiles.dayUpdates.isEmpty()) {
 			ArrayList<String> list = new ArrayList<String>(regionUpdateFiles.dayUpdates.keySet());
 			for (String month : list) {
-				Iterator<RegionUpdate> it = regionUpdateFiles.dayUpdates.get(month).iterator();
+				List<RegionUpdate> newList = new ArrayList<>(regionUpdateFiles.dayUpdates.get(month));
+				Iterator<RegionUpdate> it = newList.iterator();
 				RegionUpdate monthRu = regionUpdateFiles.monthUpdates.get(month);
 				while (it.hasNext()) {
 					RegionUpdate ru = it.next();
@@ -100,6 +101,7 @@ public class IncrementalChangesManager {
 						log.info("Delete overlapping day update " + ru.file.getName());
 					}
 				}
+				regionUpdateFiles.dayUpdates.put(month, newList);
 			}
 		}
 	}
