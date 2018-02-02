@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_current">Current</string>
+    <string name="last_intermediate_dest_description">Adds the last stop along the route</string>
+    <string name="first_intermediate_dest_description">Adds the first stop on the route</string>
+    <string name="subsequent_dest_description">Move destination up, and create destination</string>
     <string name="show_closed_notes">Show closed notes</string>
     <string name="switch_osm_notes_visibility_desc">Show/Hide OSM Notes on the map.</string>
     <string name="gpx_file_desc">GPX - suitable for export to JOSM or other OSM editors.</string>

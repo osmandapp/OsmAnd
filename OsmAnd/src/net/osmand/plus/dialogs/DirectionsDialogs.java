@@ -2,7 +2,9 @@ package net.osmand.plus.dialogs;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 
 import net.osmand.data.LatLon;
@@ -45,38 +47,17 @@ public class DirectionsDialogs {
 			MapActivity.launchMapActivityMoveToTop(act);
 		}
 	}
-	
-	public static void addWaypointDialogAndLaunchMap(final Activity act, final double lat, final double lon, final PointDescription name) {
-		final OsmandApplication ctx = (OsmandApplication) act.getApplication();
-		final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
+
+	public static void addWaypointDialogAndLaunchMap(final AppCompatActivity act, final double lat, final double lon, final PointDescription name) {
+		final TargetPointsHelper targetPointsHelper = ((OsmandApplication) act.getApplication()).getTargetPointsHelper();
 		if (targetPointsHelper.getPointToNavigate() != null) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(act);
-			builder.setTitle(R.string.new_destination_point_dialog);
-			builder.setItems(
-					new String[] { act.getString(R.string.replace_destination_point),
-							act.getString(R.string.keep_and_add_destination_point),
-							act.getString(R.string.add_as_first_destination_point), act.getString(R.string.add_as_last_destination_point) },
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if (which == 0) {
-								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
-								closeContextMenu(act);
-							} else if (which == 1) {
-								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, 
-										targetPointsHelper.getIntermediatePoints().size() + 1, name);
-								closeContextMenu(act);
-							} else if (which == 2) {
-								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, 0, name);
-								closeContextMenu(act);
-							} else {
-								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, targetPointsHelper.getIntermediatePoints().size(), name);
-								closeContextMenu(act);
-							}
-							MapActivity.launchMapActivityMoveToTop(act);
-						}
-					});
-			builder.show();
+			Bundle args = new Bundle();
+			args.putDouble(AddWaypointBottomSheetDialogFragment.LAT_KEY, lat);
+			args.putDouble(AddWaypointBottomSheetDialogFragment.LON_KEY, lon);
+			args.putString(AddWaypointBottomSheetDialogFragment.POINT_DESCRIPTION_KEY, PointDescription.serializeToString(name));
+			AddWaypointBottomSheetDialogFragment fragment = new AddWaypointBottomSheetDialogFragment();
+			fragment.setArguments(args);
+			fragment.show(act.getSupportFragmentManager(), AddWaypointBottomSheetDialogFragment.TAG);
 		} else {
 			targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
 			closeContextMenu(act);
