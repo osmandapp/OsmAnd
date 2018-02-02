@@ -1182,7 +1182,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public int getAdditionalInfoColor() {
 		if (menuController != null) {
-			return menuController.getAdditionalInfoColor();
+			return menuController.getAdditionalInfoColorId();
 		}
 		return 0;
 	}

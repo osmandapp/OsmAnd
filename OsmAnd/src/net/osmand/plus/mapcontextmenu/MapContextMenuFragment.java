@@ -1360,8 +1360,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				line3.setCompoundDrawablePadding(dpToPx(5f));
 			}
 
+			ImageView additionalInfoImageView = (ImageView) view.findViewById(R.id.additional_info_image_view);
 			TextView additionalInfoTextView = (TextView) view.findViewById(R.id.additional_info_text_view);
 			CharSequence additionalInfoStr = menu.getAdditionalInfo();
+			boolean showAdditionalImage = false;
 			if (!TextUtils.isEmpty(additionalInfoStr)) {
 				int colorId = menu.getAdditionalInfoColor();
 				int additionalInfoIconRes = menu.getAdditionalInfoIconRes();
@@ -1369,8 +1371,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					additionalInfoTextView.setTextColor(ContextCompat.getColor(getContext(), colorId));
 					if (additionalInfoIconRes != 0) {
 						Drawable additionalIcon = getIcon(additionalInfoIconRes, colorId);
-						additionalInfoTextView.setCompoundDrawablesWithIntrinsicBounds(additionalIcon, null, null, null);
-						additionalInfoTextView.setCompoundDrawablePadding(dpToPx(8));
+						additionalInfoImageView.setImageDrawable(additionalIcon);
+						showAdditionalImage = true;
 					}
 				}
 				additionalInfoTextView.setText(additionalInfoStr);
@@ -1378,6 +1380,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			} else {
 				additionalInfoTextView.setVisibility(View.GONE);
 			}
+			additionalInfoImageView.setVisibility(showAdditionalImage ? View.VISIBLE : View.GONE);
 		}
 		updateCompassVisibility();
 	}

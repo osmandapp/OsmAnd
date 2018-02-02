@@ -136,7 +136,7 @@ public class EditPOIMenuController extends MenuController {
 	}
 
 	@Override
-	public int getAdditionalInfoColor() {
+	public int getAdditionalInfoColorId() {
 		if (osmPoint.getAction() == Action.DELETE) {
 			return R.color.color_osm_edit_delete;
 		} else if (osmPoint.getAction() == Action.MODIFY || osmPoint.getAction() == Action.REOPEN) {
