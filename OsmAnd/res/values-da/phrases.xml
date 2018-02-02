@@ -3779,14 +3779,14 @@
 	<string name="poi_climbing_quality_fragile">Klatringskvalitet: skrøbelig</string>
 	<string name="poi_climbing_bolted_yes">Faste ankre: ja</string>
 	<string name="poi_climbing_bolted_no">Faste ankre: nej</string>
-	<string name="poi_climbing_orientation_n">Orientering af væggen: N</string>
-	<string name="poi_climbing_orientation_ne">Orientering af væggen: NØ</string>
-	<string name="poi_climbing_orientation_e">Orientering af væggen: Ø</string>
-	<string name="poi_climbing_orientation_se">Orientering af væggen: SØ</string>
-	<string name="poi_climbing_orientation_s">Orientering af væggen: S</string>
-	<string name="poi_climbing_orientation_sw">Orientering af væggen: SV</string>
-	<string name="poi_climbing_orientation_w">Orientering af væggen: V</string>
-	<string name="poi_climbing_orientation_nw">Orientering af væggen: NV</string>
+	<string name="poi_climbing_orientation_n">Orientering af væg: N</string>
+	<string name="poi_climbing_orientation_ne">Orientering af væg: NØ</string>
+	<string name="poi_climbing_orientation_e">Orientering af væg: Ø</string>
+	<string name="poi_climbing_orientation_se">Orientering af væg: SØ</string>
+	<string name="poi_climbing_orientation_s">Orientering af væg: S</string>
+	<string name="poi_climbing_orientation_sw">Orientering af væg: SV</string>
+	<string name="poi_climbing_orientation_w">Orientering af væg: V</string>
+	<string name="poi_climbing_orientation_nw">Orientering af væg: NV</string>
 	<string name="poi_climbing_summit_log_yes">Klatring-bjergtop log: ja</string>
 	<string name="poi_climbing_summit_log_no">Klatring-bjergtop log: nej</string>
 	<string name="poi_climbing_routes">Klatreruter</string>
@@ -3803,14 +3803,14 @@
 	<string name="poi_frozen_food">Frosne fødevarer</string>
 
 
-<string name="poi_agrarian">Landbrugs-butik</string>
+<string name="poi_agrarian">Gårdbutik</string>
 
 
 <string name="poi_shop_fireplace">Pejsebutik</string>
 
 <string name="poi_shop_boat">Bådforretning</string>
 
-	<string name="poi_cannabis">Cannabis butik</string>
+	<string name="poi_cannabis">Cannabisbutik</string>
 
 
 </resources>
