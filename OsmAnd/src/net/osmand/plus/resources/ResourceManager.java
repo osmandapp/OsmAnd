@@ -716,18 +716,18 @@ public class ResourceManager {
 				int left31 = MapUtils.get31TileNumberX(leftLongitude);
 				int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
 				int right31 = MapUtils.get31TileNumberX(rightLongitude);
-				List<String> fileNames = new ArrayList<String>(amenityRepositories.keySet());
+				List<String> fileNames = new ArrayList<>(amenityRepositories.keySet());
 				Collections.sort(fileNames, Algorithms.getStringVersionComparator());
 				for (String name : fileNames) {
-					AmenityIndexRepository index = amenityRepositories.get(name);
 					if (matcher != null && matcher.isCancelled()) {
 						searchAmenitiesInProgress = false;
 						break;
 					}
-					if (index.checkContainsInt(top31, left31, bottom31, right31)) {
+					AmenityIndexRepository index = amenityRepositories.get(name);
+					if (index != null && index.checkContainsInt(top31, left31, bottom31, right31)) {
 						List<Amenity> r = index.searchAmenities(top31,
 								left31, bottom31, right31, zoom, filter, matcher);
-						if(r != null) {
+						if (r != null) {
 							amenities.addAll(r);
 						}
 					}

@@ -602,11 +602,11 @@
 
     <FrameLayout
         android:id="@+id/context_menu_top_button_container"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/dashboard_map_toolbar"
         android:layout_marginLeft="4dp"
         android:layout_marginStart="4dp"
-        android:alpha="0">
+        android:alpha="1">
 
         <LinearLayout
             android:layout_width="@dimen/list_item_height"
@@ -669,6 +669,10 @@
                 android:scaleType="center"
                 android:textColor="@color/abc_primary_text_material_dark"
                 android:textSize="@dimen/abc_text_size_large_material"
+                android:ellipsize="end"
+                android:lines="1"
+                android:maxLines="1"
+                android:singleLine="true"
                 tools:text="Toolbar"
                 tools:visibility="visible"/>
 
