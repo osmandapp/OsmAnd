@@ -1015,7 +1015,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="navigate_point_top_text">Angiv bredde(lat)- og længdegrad(lon) i det valgte format (D - grader, M - minutter, S - sekunder)</string>
     <string name="navigate_point_latitude">Breddegrad</string>
     <string name="navigate_point_longitude">Længdegrad</string>
-    <string name="navigate_point_format_D">DDD.DD</string>
+    <string name="navigate_point_format_D">GGG.GG</string>
     <string name="navigate_point_format_DM">DDD MM.MM</string>
 
     <string name="search_address_region">Område</string>
