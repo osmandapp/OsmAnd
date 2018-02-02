@@ -39,7 +39,7 @@
     <string name="poi_filter_for_tourists">旅遊點</string>
     <string name="poi_filter_fuel">加油站</string>
     <string name="show_warnings_title">顯示警示…</string>
-    <string name="show_warnings_descr">組態交通警示(速限、強制停車、減速丘)、測速照相警示、車道資訊。</string>
+    <string name="show_warnings_descr">組態交通警示(速限、強制停車、減速丘、隧道)、測速照相警示、車道資訊。</string>
     <string name="use_compass_navigation_descr">使用電子羅盤的地圖，正北朝上。</string>
     <string name="use_compass_navigation">使用電子羅盤</string>
     <string name="avoid_motorway">避開高速公路</string>
@@ -3021,4 +3021,16 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="will_open_tomorrow_at">將在明天開幕</string>
     <string name="copy_location_name">複製標點/POI 名稱</string>
     <string name="toast_empty_name_error">位置沒有名稱</string>
+<string name="show_closed_notes">顯示已關閉的註解</string>
+    <string name="switch_osm_notes_visibility_desc">在地圖上顯示/隱藏 OSM 的註解。</string>
+    <string name="gpx_file_desc">GPX - 適合匯出到 JOSM 或其他 OSM 編輯。</string>
+    <string name="osc_file_desc">OSC - 適合匯出到 OpenStreetMap。</string>
+    <string name="gpx_file">GPX 檔案</string>
+    <string name="osc_file">OSC 檔案</string>
+    <string name="choose_file_type">選擇檔案類型</string>
+    <string name="osm_edits_export_desc">選擇匯出類型：OSM 註解、POI 或著兩者。</string>
+    <string name="all_data">所有的資料</string>
+    <string name="osm_notes">OSM 註解</string>
+    <string name="tunnel_warning">前方有隧道</string>
+    <string name="show_tunnels">隧道</string>
 </resources>
