@@ -3033,8 +3033,8 @@
     <string name="toast_empty_name_error">مکان بدون نام است</string>
 <string name="show_closed_notes">دیدن توضیحات ویرایشی بسته‌شده</string>
     <string name="switch_osm_notes_visibility_desc">توضیحات ویرایشی OSM را روی نقشه پنهان/آشکار کنید.</string>
-    <string name="gpx_file_desc">جی‌پی‌ایکس - خروجی مناسب برای استفاده در JOSM یا سایر ویرایشگرهای OSM.</string>
-    <string name="osc_file_desc">اُاِس‌سی (OSC) - مناسب برای استفاده در OpenStreetMap.</string>
+    <string name="gpx_file_desc">جی‌پی‌ایکس - مناسب برای استفاده در JOSM یا سایر ویرایشگرهای OSM.</string>
+    <string name="osc_file_desc">اُاِس‌سی - مناسب برای استفاده در OpenStreetMap.</string>
     <string name="gpx_file">فایل GPX</string>
     <string name="osc_file">فایل OSC</string>
     <string name="choose_file_type">انتخاب قالب فایل</string>
