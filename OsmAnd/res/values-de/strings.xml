@@ -105,7 +105,7 @@
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
 	<string name="show_warnings_title">Warnungen anzeigen …</string>
-	<string name="show_warnings_descr">Verkehrswarnungen (Tempolimits, Stoppzeichen, Rüttelschwellen), stationäre Radarkontrollen und Fahrspuranzeige konfigurieren.</string>
+	<string name="show_warnings_descr">Verkehrswarnungen (Tempolimits, Stoppzeichen, Rüttelschwellen, Tunnel), stationäre Radarkontrollen und Fahrspuranzeige konfigurieren.</string>
 	<string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich ist.</string>
 	<string name="use_compass_navigation">Kompass verwenden</string>
 	<string name="avoid_motorway">Autobahnen vermeiden</string>
@@ -2989,4 +2989,16 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="nautical_renderer">Nautisch</string>
     <string name="copy_location_name">Punkt/POI-Name kopieren</string>
     <string name="toast_empty_name_error">Ort hat keinen Namen</string>
+<string name="show_closed_notes">Geschlossene Notizen anzeigen</string>
+    <string name="switch_osm_notes_visibility_desc">OSM-Notizen auf der Karte ein-/ausblenden.</string>
+    <string name="gpx_file_desc">GPX - geeignet für den Export in JOSM oder andere OSM-Editoren.</string>
+    <string name="osc_file_desc">OSC - geeignet für den Export nach OpenStreetMap.</string>
+    <string name="gpx_file">GPX-Datei</string>
+    <string name="osc_file">OSC-Datei</string>
+    <string name="choose_file_type">Dateityp auswählen</string>
+    <string name="osm_edits_export_desc">Wählen Sie den Exporttyp aus: OSM-Notizen, POI oder beides.</string>
+    <string name="all_data">Alle Daten</string>
+    <string name="osm_notes">OSM-Notizen</string>
+    <string name="tunnel_warning">Tunnel voraus</string>
+    <string name="show_tunnels">Tunnel</string>
 </resources>
