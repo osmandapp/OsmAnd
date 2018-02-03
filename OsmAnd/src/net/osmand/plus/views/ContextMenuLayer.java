@@ -604,6 +604,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 							if (entry.getKey().startsWith("name:") && !entry.getValue().equals("")) {
 								names.add(entry.getValue());
 							}
+							if (entry.getKey().equals("name") && !entry.getValue().equals("")) {
+								names.add(entry.getValue());
+							}
 						}
 						LatLon searchLatLon = objectLatLon;
 						if (searchLatLon == null) {
