@@ -20,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.View.OnLayoutChangeListener;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
@@ -29,6 +30,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.OverScroller;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -82,6 +84,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private View toolbarBackButton;
 	private TextView toolbarTextView;
 	private View topButtonContainer;
+	private LockableScrollView menuScrollView;
 
 	private View zoomButtonsView;
 	private ImageButton zoomInButtonView;
@@ -292,12 +295,23 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			private float dy;
 			private float dyMain;
 			private float mDownY;
+
+			private int minimumVelocity;
+			private int maximumVelocity;
 			private VelocityTracker velocityTracker;
+			private OverScroller scroller;
+
 			private boolean slidingUp;
 			private boolean slidingDown;
 
-			private float maxVelocityY;
 			private boolean hasMoved;
+
+			{
+				scroller = new OverScroller(getContext());
+				final ViewConfiguration configuration = ViewConfiguration.get(getContext());
+				minimumVelocity = configuration.getScaledMinimumFlingVelocity();
+				maximumVelocity = configuration.getScaledMaximumFlingVelocity();
+			}
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -330,7 +344,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						dy = event.getY();
 						dyMain = getViewY();
 
-						maxVelocityY = 0;
 						initOrResetVelocityTracker();
 						velocityTracker.addMovement(event);
 						break;
@@ -354,14 +367,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 							mainView.setLayoutParams(lp);
 							mainView.requestLayout();
 
-							if (velocityTracker != null) {
-								velocityTracker.addMovement(event);
-								velocityTracker.computeCurrentVelocity(1000);
-								float velocityY = Math.abs(velocityTracker.getYVelocity());
-								if (velocityY > maxVelocityY) {
-									maxVelocityY = velocityY;
-								}
-							}
+							float newEventY = newY - (dyMain - dy);
+							MotionEvent ev = MotionEvent.obtain(event.getDownTime(), event.getEventTime(), event.getAction(),
+									event.getX(), newEventY, event.getMetaState());
+
+							initVelocityTrackerIfNotExists();
+							velocityTracker.addMovement(ev);
 
 							updateToolbar();
 							updateTopButton();
@@ -374,10 +385,28 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 							moving = false;
 							int currentY = getViewY();
 
-							slidingUp = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) < -50;
-							slidingDown = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) > 50;
+							final VelocityTracker velocityTracker = this.velocityTracker;
+							velocityTracker.computeCurrentVelocity(1000, maximumVelocity);
+							int initialVelocity = (int) velocityTracker.getYVelocity();
 
-							boolean skipScreenState = Math.abs(currentY - dyMain) > skipScreenStateLimit;
+							if ((Math.abs(initialVelocity) > minimumVelocity)) {
+
+								scroller.abortAnimation();
+								scroller.fling(0, currentY, 0, initialVelocity, 0, 0,
+										viewHeight - menuFullHeightMax,
+										minHalfY,
+										0, 0);
+								currentY = scroller.getFinalY();
+								scroller.abortAnimation();
+
+								slidingUp = initialVelocity < -2000;
+								slidingDown = initialVelocity > 2000;
+							} else {
+								slidingUp = false;
+								slidingDown = false;
+							}
+
+							boolean skipScreenState = Math.abs(getViewY() - dyMain) > skipScreenStateLimit;
 							changeMenuState(currentY, skipScreenState, slidingUp, slidingDown);
 						}
 						recycleVelocityTracker();
@@ -395,6 +424,13 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				if (velocityTracker == null) {
 					velocityTracker = VelocityTracker.obtain();
 				} else {
+					velocityTracker.clear();
+				}
+			}
+
+			private void initVelocityTrackerIfNotExists() {
+				if (velocityTracker == null) {
+					velocityTracker = VelocityTracker.obtain();
 					velocityTracker.clear();
 				}
 			}
@@ -732,8 +768,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		int oldMenuState = menu.getCurrentMenuState();
 		if (!menu.isLandscapeLayout()) {
-			if (slidingDown && !skipScreenState && oldMenuState == MenuState.FULL_SCREEN
-					&& currentY < (-menuTitleHeight + menuButtonsHeight)) {
+			if (slidingDown && oldMenuState == MenuState.FULL_SCREEN && getViewY() < getFullScreenTopPosY()) {
 				slidingDown = false;
 			}
 			if (menuBottomViewHeight > 0 && slidingUp) {
@@ -798,9 +833,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
 						   final int previousMenuState, final int newMenuState, int dZoom) {
-		final int posY = getPosY(currentY, needCloseMenu);
-		if (currentY != posY || dZoom != 0) {
-			if (posY < currentY) {
+		final int posY = getPosY(currentY, needCloseMenu, previousMenuState);
+		if (getViewY() != posY || dZoom != 0) {
+			if (posY < getViewY()) {
 				updateMainViewLayout(posY);
 			}
 
@@ -1428,12 +1463,19 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		return viewHeight - menuTitleHeight;
 	}
 
+	private int getFullScreenTopPosY() {
+		return -menuTitleHeight + menuButtonsHeight + bottomToolbarPosY;
+	}
 
 	private int getPosY() {
 		return getPosY(CURRENT_Y_UNDEFINED, false);
 	}
 
 	private int getPosY(final int currentY, boolean needCloseMenu) {
+		return getPosY(currentY, needCloseMenu, 0);
+	}
+
+	private int getPosY(final int currentY, boolean needCloseMenu, int previousState) {
 		if (needCloseMenu) {
 			return screenHeight;
 		}
@@ -1462,12 +1504,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					if (menu.isLandscapeLayout()) {
 						minPosY = topScreenPosY;
 					} else {
-						minPosY = -menuTitleHeight + menuButtonsHeight + bottomToolbarPosY;
+						minPosY = getFullScreenTopPosY();
 					}
 					if (maxPosY > minPosY) {
 						maxPosY = minPosY;
 					}
-					if (currentY > minPosY) {
+					if (currentY > minPosY || previousState != MenuState.FULL_SCREEN) {
 						posY = minPosY;
 					} else if (currentY < maxPosY) {
 						posY = maxPosY;
@@ -1478,7 +1520,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					if (menu.isLandscapeLayout()) {
 						posY = topScreenPosY;
 					} else {
-						posY = -menuTitleHeight + menuButtonsHeight + bottomToolbarPosY;
+						posY = getFullScreenTopPosY();
 					}
 				}
 				break;

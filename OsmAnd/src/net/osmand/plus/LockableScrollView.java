@@ -36,7 +36,7 @@ public class LockableScrollView extends ScrollView {
 					return super.onTouchEvent(ev);
 				}
 				// only continue to handle the touch event if scrolling enabled
-				return mScrollable;
+				return false;
 			default:
 				return super.onTouchEvent(ev);
 		}
