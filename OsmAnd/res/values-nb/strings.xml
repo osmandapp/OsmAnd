@@ -2725,4 +2725,19 @@
     <string name="copy_location_name">Kopier punkt/interessepunkt-navn</string>
     <string name="toast_empty_name_error">Sted har ikke noe navn</string>
 <string name="osc_file_desc">OSC - egnet for eksport til OpenStreetMap.</string>
-    </resources>
+    <string name="shared_string_current">Gjeldende</string>
+    <string name="last_intermediate_dest_description">Legger til siste stopp på ruten</string>
+    <string name="first_intermediate_dest_description">Legger til første stopp på ruten</string>
+    <string name="subsequent_dest_description">Flytt reisemål opp og opprett reisemål</string>
+    <string name="show_closed_notes">Vis lukkede notater</string>
+    <string name="switch_osm_notes_visibility_desc">Vis/Skjul OSM-notater på kartet.</string>
+    <string name="gpx_file_desc">GPX - egnet for eksport til JOSM eller andre OSM-redigeringsprogrammer.</string>
+    <string name="gpx_file">GPX-fil</string>
+    <string name="osc_file">OSC-fil</string>
+    <string name="choose_file_type">Velg filtype</string>
+    <string name="osm_edits_export_desc">Velg eksporttypen: OSM-notater, interessepunkt eller begge.</string>
+    <string name="all_data">Alle data</string>
+    <string name="osm_notes">OSM-notater</string>
+    <string name="tunnel_warning">Tunnel foran</string>
+    <string name="show_tunnels">Tunneler</string>
+</resources>
