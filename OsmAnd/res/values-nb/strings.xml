@@ -35,7 +35,7 @@
     <string name="poi_filter_for_tourists">For turister</string>
     <string name="poi_filter_fuel">Drivstoff</string>
     <string name="show_warnings_title">Vis varsler…</string>
-    <string name="show_warnings_descr">Innstilling av trafikkvarsler (fartsgrenser, tvungne stopp, fartsdumper), fotoboksvarsler og kjørefeltinformasjon.</string>
+    <string name="show_warnings_descr">Innstilling av trafikkvarsler (fartsgrenser, tvungne stopp, fartsdumper, tunneler), fotoboksvarsler og kjørefeltinformasjon.</string>
     <string name="use_compass_navigation_descr">Bruk kompass hvis det ikke er mulig med annen retningsfastsettelse.</string>
     <string name="use_compass_navigation">Bruk kompass</string>
     <string name="avoid_motorway">Unngå motorveier</string>
@@ -2724,4 +2724,5 @@
 <string name="day_off_label">stengt (fridag)</string>
     <string name="copy_location_name">Kopier punkt/interessepunkt-navn</string>
     <string name="toast_empty_name_error">Sted har ikke noe navn</string>
-</resources>
+<string name="osc_file_desc">OSC - egnet for eksport til OpenStreetMap.</string>
+    </resources>
