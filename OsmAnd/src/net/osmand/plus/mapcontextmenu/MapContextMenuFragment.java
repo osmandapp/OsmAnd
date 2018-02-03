@@ -316,12 +316,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 
-				if (event.getY() <= menuTopViewHeight) {
+				if (!hasMoved && event.getY() <= menuTopViewHeight) {
 					if (singleTapDetector.onTouchEvent(event)) {
 						moving = false;
-						if (hasMoved) {
-							applyPosY(getViewY(), false, false, 0, 0, 0);
-						}
 						openMenuHalfScreen();
 
 						recycleVelocityTracker();
@@ -383,6 +380,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					case MotionEvent.ACTION_UP:
 						if (moving) {
 							moving = false;
+							hasMoved = false;
 							int currentY = getViewY();
 
 							final VelocityTracker velocityTracker = this.velocityTracker;
@@ -413,6 +411,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						break;
 					case MotionEvent.ACTION_CANCEL:
 						moving = false;
+						hasMoved = false;
 						recycleVelocityTracker();
 						break;
 
