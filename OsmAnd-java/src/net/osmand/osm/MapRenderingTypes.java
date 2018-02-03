@@ -274,7 +274,8 @@ public abstract class MapRenderingTypes {
 			String v = parser.getAttributeValue("", "nameTags");
 			if (v != null) {
 				String[] names = v.split(",");
-				rtype.names = new MapRulType[names.length];
+				rtype.names = new MapRulType[names.length * (langs.length + 1)];
+				int j = 0;
 				for (int i = 0; i < names.length; i++) {
 					String tagName = names[i];
 					if (rtype.namePrefix.length() > 0) {
@@ -282,7 +283,12 @@ public abstract class MapRenderingTypes {
 					}
 					MapRulType mt = MapRulType.createText(tagName);
 					mt = registerRuleType(mt);
-					rtype.names[i] = mt;
+					rtype.names[j++] = mt;
+					for(String lng : langs) {
+						mt = MapRulType.createText(tagName + ":" + lng);
+						mt = registerRuleType(mt);
+						rtype.names[j++] = mt;	
+					}
 				}
 			}
 		}
