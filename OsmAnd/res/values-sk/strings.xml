@@ -3046,4 +3046,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="osm_notes">OSM poznámky</string>
     <string name="tunnel_warning">Blíži sa tunel</string>
     <string name="show_tunnels">Tunely</string>
-</resources>
+<string name="shared_string_current">Súčasný</string>
+    <string name="last_intermediate_dest_description">Pridá poslednú zastávku na ceste</string>
+    <string name="first_intermediate_dest_description">Pridá prvú zastávku na ceste</string>
+    <string name="subsequent_dest_description">Posunúť cieľ nahor a vytvoriť cieľ</string>
+    </resources>
