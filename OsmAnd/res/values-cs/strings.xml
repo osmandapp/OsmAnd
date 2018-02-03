@@ -798,7 +798,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="avoid_in_routing_title">Vyhnout se…</string>
     <string name="avoid_in_routing_descr">Vyhnout se trajektům, placeným a nezpevněným cestám.</string>
     <string name="show_warnings_title">Zobrazit upozornění…</string>
-    <string name="show_warnings_descr">Zobrazit omezení rychlosti, rychlostní radary, retardéry a řazení do pruhů.</string>
+    <string name="show_warnings_descr">Nastavit dopravní varování (omezení rychlosti, značky stop, retardéry, tunely), rychlostní radary a jízdní pruhy.</string>
     <string name="map_widget_show_ruler">Měřítko</string>
     <string name="map_widget_transparent">Průhledné nástroje</string>
     <string name="email">E-mail</string>
@@ -2860,12 +2860,8 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="empty_state_markers_active_desc">Klepnutím nebo přidržením označte místa, pak klepněte na tlačítko značky s vlajkou.</string>
     <string name="modify_the_search_query">Upravit vyhledávací dotaz.</string>
     <string name="one_tap_active">Jedním klepnutím aktivní</string>
-    <string name="release_3_0">\\022 Detekce značek \"stop\" zohledňuje směr jízdy 
+    <string name="release_3_0">\\022
 \n 
-\n • Nový algoritmus poskytuje smysluplné hodnoty pro stoupání/klesání v GPX trasách 
-\n 
-\n • Čas pěší trasy zohledňuje terén/stoupání (Naismithovo pravidlo)
-\n
 \n</string>
     <string name="rendering_attr_hidePOILabels_name">Popisky bodů</string>
     <string name="shared_string_without_name">Bez názvu</string>
@@ -2890,21 +2886,37 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="nautical_renderer">Námořnictví</string>
 <string name="will_open_tomorrow_at">Otevřou zítra v</string>
     <string name="shared_string_marker">Značka</string>
-    <string name="release_2_9">\\022 Aktualizováno kontextové menu: zobrazí, kdy POI otevírá / zavírá
+    <string name="release_2_9">\\022 Aktualizováno kontextové menu: zobrazí, kdy POI otevírá / zavírá 
+\n 
+\n • Dopravní nabídka: všechny dostupné trasy jsou nyní nahoře 
+\n 
+\n • Wikipedie: přidáno tlačítko pro otevření původního článku, aktualizován vzhled článků 
+\n 
+\n • Trasa: přidána možnost vyměnit počáteční a koncové body jedním klepnutím 
+\n 
+\n • Poznámky: přidáno třídění podle typu a data 
+\n 
+\n • OSM úpravy: zobrazení ikony a názvu kategorie POI, zobrazení dokončených akcí 
+\n 
+\n • Nová obrazovka rychlých souřadnic pro rychlé vytváření značek 
 \n
-\n • Dopravní nabídka: všechny dostupné trasy jsou nyní nahoře
-\n
-\n • Wikipedie: přidáno tlačítko pro otevření původního článku, aktualizován vzhled článků
-\n
-\n • Trasa: přidána možnost vyměnit počáteční a koncové body jedním klepnutím
-\n
-\n • Poznámky: přidáno třídění podle typu a data
-\n
-\n • OSM úpravy: zobrazení ikony a názvu kategorie POI, zobrazení dokončených akcí
-\n
-\n • Nová obrazovka rychlých souřadnic pro rychlé vytváření značek
+\n • Detekce značek \"stop\" zohledňuje směr jízdy 
+\n 
+\n • Nový algoritmus poskytuje smysluplné hodnoty pro stoupání/klesání v GPX trasách 
+\n 
+\n • Čas pěší trasy zohledňuje terén/stoupání (Naismithovo pravidlo) 
 \n
 \n</string>
     <string name="osm_recipient_stat">Počet úprav %1$s, součet %2$s mBTC</string>
     <string name="lang_lo">Laosky</string>
+    <string name="show_closed_notes">Zobrazit zavřené poznámky</string>
+    <string name="switch_osm_notes_visibility_desc">Zobrazit/skrýt OSM poznámky na mapě.</string>
+    <string name="gpx_file_desc">GPX - vhodné pro export do JOSM nebo jiných editorů OSM.</string>
+    <string name="osc_file_desc">OSC - vhodné pro export do OpenStreetMap.</string>
+    <string name="gpx_file">Soubor GPX</string>
+    <string name="osc_file">Soubor OSC</string>
+    <string name="choose_file_type">Zvolte typ souboru</string>
+    <string name="osm_edits_export_desc">Vyberte typ exportu: OSM poznámky, POI nebo obojí.</string>
+    <string name="all_data">Všechny údaje</string>
+    <string name="osm_notes">OSM poznámky</string>
     </resources>
