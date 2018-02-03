@@ -43,7 +43,7 @@
     <string name="avoid_in_routing_title">Vyhnúť sa…</string>
     <string name="avoid_in_routing_descr">Obísť spoplatnené cesty, nespevnené cesty, trajekty.</string>
     <string name="show_warnings_title">Zobraziť varovania…</string>
-    <string name="show_warnings_descr">Nastaviť dopravné varovania (rýchlostné obmedzenia, značky stop, spomaľovače), rýchlostné radary a jazdné pruhy.</string>
+    <string name="show_warnings_descr">Nastaviť dopravné varovania (rýchlostné obmedzenia, značky stop, spomaľovače, tunely), rýchlostné radary a jazdné pruhy.</string>
     <string name="map_widget_fluorescent">Fluorescentné trasy</string>
     <string name="map_widget_show_ruler">Pravítko</string>
     <string name="map_widget_view_direction">Zorné pole</string>
@@ -2982,12 +2982,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="by_type">Podľa typu</string>
     <string name="one_tap_active">Jedno stlačenie aktívne</string>
     <string name="modify_the_search_query">Upraviť vyhľadávacie kritériá.</string>
-    <string name="release_3_0">\\022 Detekcia značiek \"stop\" zohľadňuje smer jazdy
-\n
-\n • Nový algoritmus poskytuje zmysluplné hodnoty pre stúpanie/klesanie v stopách GPX
-\n
-\n • Čas pešej trasy zohľadňuje terén/stúpanie (Naismithovo pravidlo)
-\n
+    <string name="release_3_0">\\022 
 \n</string>
     <string name="what_is_here">Čo je tu:</string>
     <string name="parked_at">zaparkované o</string>
@@ -3014,19 +3009,24 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="will_open_tomorrow_at">Otvorí zajtra o</string>
     <string name="rendering_attr_hidePOILabels_name">Popisy bodov záujmu</string>
     <string name="release_2_9">\\022 Aktualizované kontextové menu: zobrazí kedy bod záujmu otvára / zatvára
-\n
+\n 
 \n • Dopravné menu: všetky dostupné linky sú teraz navrchu
-\n
+\n 
 \n • Wikipedia: pridané tlačidlo na otvorenie originálneho článku, vzhľad článkov bol aktualizovaný
-\n
+\n 
 \n • Trasa: pridaná možnosť vymeniť štart a cieľ jedným stlačením
-\n
+\n 
 \n • Poznámky: pridané triedenie podľa typu a dátumu
-\n
+\n 
 \n • Úpravy OSM: zobrazenie ikony a názvu kategórie bodu, zobrazenie dokončených akcií
+\n 
+\n • Nová obrazovka na rýchle zadávanie súradníc pre vytváranie mapových značiek
 \n
-\n • Nová obrazovaka na rýchle zadávanie súradníc pre vytváranie mapových značiek
+\n • Detekcia značiek \"stop\" zohľadňuje smer jazdy
 \n
+\n • Nový algoritmus poskytuje zmysluplné hodnoty pre stúpanie a klesanie v stopách GPX
+\n
+\n • Čas pešej trasy zohľadňuje stúpanie terénu (Naismithovo pravidlo)
 \n</string>
     <string name="day_off_label">zatvorené</string>
     <string name="winter_and_ski_renderer">Zima a lyžovanie</string>
@@ -3034,4 +3034,16 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="nautical_renderer">Námorný</string>
 <string name="copy_location_name">Kopírovať názov bodu</string>
     <string name="toast_empty_name_error">Umiestnenie nemá žiadny názov</string>
+<string name="show_closed_notes">Zobraziť uzavreté poznámky</string>
+    <string name="switch_osm_notes_visibility_desc">Zobraziť/skryť OSM poznámky na mape.</string>
+    <string name="gpx_file_desc">GPX - vhodné na export do JOSM a iných editorov OSM.</string>
+    <string name="osc_file_desc">OSC - vhodné na export do OpenStreetMap.</string>
+    <string name="gpx_file">Súbor GPX</string>
+    <string name="osc_file">Súbor OSC</string>
+    <string name="choose_file_type">Zvoľte typ súboru</string>
+    <string name="osm_edits_export_desc">Vyberte typ exportu: OSM poznámky, body záujmu alebo obe.</string>
+    <string name="all_data">Všetky údaje</string>
+    <string name="osm_notes">OSM poznámky</string>
+    <string name="tunnel_warning">Blíži sa tunel</string>
+    <string name="show_tunnels">Tunely</string>
 </resources>
