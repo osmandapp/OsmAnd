@@ -1280,7 +1280,7 @@
 	<string name="poi_animal_training_type">Mota</string>
 	<string name="poi_embassy_type">Mota</string>
 	<string name="poi_city_capital">Hiriburua</string>
-	<string name="poi_pharmacy_dispensing"/>
+	<string name="poi_pharmacy_dispensing">Farmazia</string>
 	<string name="poi_healthcare_alternative_types">Espezialitatea</string>
 	<string name="poi_free_flying_characteristics">Karakteristikoa</string>
 	<string name="poi_archaeological_site_type">Mota</string>
@@ -2628,7 +2628,7 @@
 	<string name="poi_letter_box">Buzoia</string>
 	<string name="poi_post_street">Kalea</string>
 	<string name="poi_post_housenumber">Portal zenbakia</string>
-	<string name="poi_post_flats"></string>
+	<string name="poi_post_flats"/>
 
 	<string name="poi_money_transfer">Diru-transferentzia</string>
 
@@ -2642,4 +2642,19 @@
 	<string name="poi_climbing_ice_no">Izotza: ez</string>
 	<string name="poi_climbing_mixed_yes">Mistoa: bai</string>
 	<string name="poi_climbing_mixed_no">Mistoa: ez</string>
+	<string name="poi_service_bicycle_retail_yes">Salmenta</string>
+	<string name="poi_service_bicycle_retail_no">Bizikleten salmenta: ez</string>
+	<string name="poi_service_bicycle_repair_yes">Konponketa</string>
+	<string name="poi_service_bicycle_pump_yes">Puzgailua</string>
+	<string name="poi_service_bicycle_pump_no">Bizikletentzako puzgailua: ez</string>
+	<string name="poi_service_bicycle_diy_yes">Zuk zeuk konpontzeko trenak</string>
+	<string name="poi_service_bicycle_diy_no">Zuk zeuk konpontzeko tresnak: ez</string>
+	<string name="poi_service_bicycle_chaintool_yes">Katea</string>
+	<string name="poi_service_bicycle_chaintool_no">Bizikleta-katea: ez</string>
+	<string name="poi_service_bicycle_second_hand_yes">Bigarren eskuko bizikleten salmenta</string>
+	<string name="poi_service_bicycle_second_hand_no">Bigarren eskuko bizikleten salmenta: ez</string>
+	<string name="poi_service_bicycle_charging_yes">Kargagailua: bai</string>
+	<string name="poi_service_bicycle_charging_no">Kargagailua: ez</string>
+	<string name="poi_bicycle_repair_station">Bizikleta norberak konpontzeko estazioa</string>
+
 	</resources>
