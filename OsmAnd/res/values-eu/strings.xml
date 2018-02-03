@@ -255,7 +255,7 @@
   <string name="poi_filter_for_tourists">Turistentzako</string>
   <string name="poi_filter_fuel">Gasolina</string>
   <string name="show_warnings_title">Erakutsi alarmak…</string>
-  <string name="show_warnings_descr">Konfiguratu trafiko abisuak (abiadura mugak, geldialdi behartuak, abiadura aldaketak), radar abisuak eta erraien informazioa.</string>
+  <string name="show_warnings_descr">Konfiguratu trafiko abisuak (abiadura mugak, geldialdi behartuak, abiadura aldaketak, tunelak), abiadura-radar abisuak eta erraien informazioa.</string>
   <string name="use_compass_navigation_descr">Erabili iparrorratza bestelako norabiderik antzematen ez denean.</string>
   <string name="use_compass_navigation">Erabili iparrorratza</string>
   <string name="avoid_motorway">Saihestu autobideak</string>
@@ -2966,4 +2966,20 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="will_open_tomorrow_at">Bihar irekiko du ordu honetan:</string>
     <string name="copy_location_name">Kopiatu puntuaren / POI-aren izena</string>
     <string name="toast_empty_name_error">Kokalekuak ez du izenik</string>
+<string name="shared_string_current">Unekoa</string>
+    <string name="last_intermediate_dest_description">Ibilbideko azken geldialdia gehitzen du</string>
+    <string name="first_intermediate_dest_description">Ibilbideko lehen geldialdia gehitzen du</string>
+    <string name="subsequent_dest_description">Mugitu helburua gora, eta sortu helburua</string>
+    <string name="show_closed_notes">Erakutsi itxitako oharrak</string>
+    <string name="switch_osm_notes_visibility_desc">Erakutsi/ezkutatu OSM oharrak mapan.</string>
+    <string name="gpx_file_desc">GPX - JOSM edo bestelako OSM editoreentzat esportatzeko egokia.</string>
+    <string name="osc_file_desc">OSC - OpenStreeMap-era esportatzeko egokia.</string>
+    <string name="gpx_file">GPX fitxategia</string>
+    <string name="osc_file">OSC fitxategia</string>
+    <string name="choose_file_type">Hautatu fitxategi mota</string>
+    <string name="osm_edits_export_desc">Hautatu esportazio mota: OSM oharra, POI, edo biak.</string>
+    <string name="all_data">Datu guztiak</string>
+    <string name="osm_notes">OSM oharrak</string>
+    <string name="tunnel_warning">Tunela aurrean</string>
+    <string name="show_tunnels">Tunelak</string>
 </resources>
