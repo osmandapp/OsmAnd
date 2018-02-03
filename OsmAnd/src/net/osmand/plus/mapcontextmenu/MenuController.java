@@ -162,7 +162,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	@Override
 	public void onCollapseExpand(boolean collapsed) {
 		if (mapContextMenu != null) {
-			mapContextMenu.updateMenuUI();
+			mapContextMenu.updateLayout();
 		}
 	}
 
