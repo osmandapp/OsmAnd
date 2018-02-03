@@ -3716,4 +3716,5 @@
 	<string name="poi_climbing_quality_solid">Felsqualität: fest</string>
 	<string name="poi_climbing_quality_fragile">Felsqualität: brüchig</string>
 	<string name="poi_climbing_bolted_yes">Fixpunkte: ja</string>
+	<string name="poi_climbing_bolted_no">Fixpunkte: nein</string>
 	</resources>
