@@ -254,7 +254,7 @@
 	<string name="poi_filter_for_tourists">Для турыстаў</string>
 	<string name="poi_filter_fuel">Паліва</string>
 	<string name="show_warnings_title">Паказваць папярэджванні…</string>
-	<string name="show_warnings_descr">Наладзіць папярэджанні руху (абмежаванні хуткасці, вымушаныя прыпынкі, штучныя няроўнасці, тунелі), камеры хуткасці, інфармацыю аб палосах.</string>
+	<string name="show_warnings_descr">Наладзіць папярэджанні руху (абмежаванні хуткасці, вымушаныя прыпынкі, штучныя няроўнасці, тунэлі), камеры хуткасці, інфармацыю аб палосах.</string>
 	<string name="use_compass_navigation_descr">Выкарыстоўваць компас калі інакш немагчыма вызначыць напрамак.</string>
 	<string name="use_compass_navigation">Выкарыстоўваць компас</string>
 	<string name="avoid_motorway">Пазьбягаць аўтамагістраляў</string>
@@ -3059,5 +3059,5 @@
     <string name="all_data">Усе даныя</string>
     <string name="osm_notes">OSM-нататкі</string>
     <string name="tunnel_warning">Наперадзе тунэль</string>
-    <string name="show_tunnels">Тунелі</string>
+    <string name="show_tunnels">Тунэлі</string>
 </resources>
