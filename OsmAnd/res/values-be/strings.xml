@@ -254,7 +254,7 @@
 	<string name="poi_filter_for_tourists">Для турыстаў</string>
 	<string name="poi_filter_fuel">Паліва</string>
 	<string name="show_warnings_title">Паказваць папярэджванні…</string>
-	<string name="show_warnings_descr">Наладзіць папярэджанні руху (абмежаванні хуткасці, вымушаныя прыпынкі, штучныя няроўнасці), камеры хуткасці, інфармацыю аб палосах.</string>
+	<string name="show_warnings_descr">Наладзіць папярэджанні руху (абмежаванні хуткасці, вымушаныя прыпынкі, штучныя няроўнасці, тунелі), камеры хуткасці, інфармацыю аб палосах.</string>
 	<string name="use_compass_navigation_descr">Выкарыстоўваць компас калі інакш немагчыма вызначыць напрамак.</string>
 	<string name="use_compass_navigation">Выкарыстоўваць компас</string>
 	<string name="avoid_motorway">Пазьбягаць аўтамагістраляў</string>
@@ -3044,4 +3044,20 @@
 <string name="will_open_tomorrow_at">Адчыніцца заўтра а</string>
     <string name="copy_location_name">Капіяваць назву кропкі/POI</string>
     <string name="toast_empty_name_error">Месца не мае назвы</string>
+<string name="shared_string_current">Цяперашні</string>
+    <string name="last_intermediate_dest_description">Дадае апошні прыпынак на маршруце</string>
+    <string name="first_intermediate_dest_description">Дадае першы прыпынак на маршруце</string>
+    <string name="subsequent_dest_description">Перасунуць празначэнне далей і стварыць прызначэнне</string>
+    <string name="show_closed_notes">Паказаць закрытыя нататкі</string>
+    <string name="switch_osm_notes_visibility_desc">Паказаць/схаваць OSM-нататкі на мапе.</string>
+    <string name="gpx_file_desc">GPX падыходзіць для экспарту ў JOSM і іншыя OSM-рэдактары.</string>
+    <string name="osc_file_desc">OSC падыходзіць для экспарту ў OpenStreetMap.</string>
+    <string name="gpx_file">GPX-файл</string>
+    <string name="osc_file">OSC-файл</string>
+    <string name="choose_file_type">Абярыце тып файла</string>
+    <string name="osm_edits_export_desc">Абярыце тып экспарту: OSM-нататкі, POI ці абодвыя.</string>
+    <string name="all_data">Усе даныя</string>
+    <string name="osm_notes">OSM-нататкі</string>
+    <string name="tunnel_warning">Наперадзе тунэль</string>
+    <string name="show_tunnels">Тунелі</string>
 </resources>

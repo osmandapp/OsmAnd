@@ -71,7 +71,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public static final float ZOOM_PADDING_TOP_DP = 4f;
 	public static final float MARKER_PADDING_DP = 20f;
 	public static final float MARKER_PADDING_X_DP = 50f;
-	public static final float SKIP_HALF_SCREEN_STATE_KOEF = .21f;
 	public static final int ZOOM_IN_STANDARD = 17;
 
 	public static final int CURRENT_Y_UNDEFINED = Integer.MAX_VALUE;
@@ -127,8 +126,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private boolean initLayout = true;
 	private boolean wasDrawerDisabled;
 	private boolean zoomIn;
-
-	private float skipScreenStateLimit;
 
 	private int screenOrientation;
 	private boolean created;
@@ -353,8 +350,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 							hasMoved = true;
 							float y = event.getY();
 							float newY = getViewY() + (y - dy);
-							if (menu.isLandscapeLayout() && newY > 0) {
-								newY = 0;
+							if (menu.isLandscapeLayout() && newY > topScreenPosY) {
+								newY = topScreenPosY;
 							}
 							setViewY((int) newY, false, false);
 
@@ -391,8 +388,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 								scroller.abortAnimation();
 								scroller.fling(0, currentY, 0, initialVelocity, 0, 0,
-										viewHeight - menuFullHeightMax,
-										minHalfY,
+										Math.min(viewHeight - menuFullHeightMax, getFullScreenTopPosY()),
+										screenHeight,
 										0, 0);
 								currentY = scroller.getFinalY();
 								scroller.abortAnimation();
@@ -404,8 +401,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								slidingDown = false;
 							}
 
-							boolean skipScreenState = Math.abs(getViewY() - dyMain) > skipScreenStateLimit;
-							changeMenuState(currentY, skipScreenState, slidingUp, slidingDown);
+							changeMenuState(currentY, slidingUp, slidingDown);
 						}
 						recycleVelocityTracker();
 						break;
@@ -740,59 +736,90 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void processScreenHeight(ViewParent parent) {
 		View container = (View) parent;
 		screenHeight = container.getHeight() + AndroidUtils.getStatusBarHeight(getActivity());
-		skipScreenStateLimit = screenHeight * SKIP_HALF_SCREEN_STATE_KOEF;
 		viewHeight = screenHeight - AndroidUtils.getStatusBarHeight(getMapActivity());
 	}
 
 	public void openMenuFullScreen() {
-		changeMenuState(getViewY(), true, true, false);
+		changeMenuState(getMenuStatePosY(MenuState.FULL_SCREEN), false, false);
 	}
 
 	public void openMenuHeaderOnly() {
-		changeMenuState(getViewY(), true, false, true);
-	}
-
-	public void openMenuHalfScreen() {
-		int oldMenuState = menu.getCurrentMenuState();
-		if (oldMenuState == MenuState.HEADER_ONLY) {
-			changeMenuState(getViewY(), false, true, false);
-		} else if (oldMenuState == MenuState.FULL_SCREEN && !menu.isLandscapeLayout()) {
-			changeMenuState(getViewY(), false, false, true);
+		if (!menu.isLandscapeLayout()) {
+			changeMenuState(getMenuStatePosY(MenuState.HEADER_ONLY), false, false);
 		}
 	}
 
-	private void changeMenuState(int currentY, boolean skipScreenState,
-								 boolean slidingUp, boolean slidingDown) {
+	public void openMenuHalfScreen() {
+		if (!menu.isLandscapeLayout()) {
+			changeMenuState(getMenuStatePosY(MenuState.HALF_SCREEN), false, false);
+		}
+	}
+
+	private void changeMenuState(int currentY, boolean slidingUp, boolean slidingDown) {
 		boolean needCloseMenu = false;
 
-		int oldMenuState = menu.getCurrentMenuState();
+		int currentMenuState = menu.getCurrentMenuState();
 		if (!menu.isLandscapeLayout()) {
-			if (slidingDown && oldMenuState == MenuState.FULL_SCREEN && getViewY() < getFullScreenTopPosY()) {
+			int headerDist = Math.abs(currentY - getMenuStatePosY(MenuState.HEADER_ONLY));
+			int halfDist = Math.abs(currentY - getMenuStatePosY(MenuState.HALF_SCREEN));
+			int fullDist = Math.abs(currentY - getMenuStatePosY(MenuState.FULL_SCREEN));
+			int newState;
+			if (headerDist < halfDist && headerDist < fullDist) {
+				newState = MenuState.HEADER_ONLY;
+			} else if (halfDist < headerDist && halfDist < fullDist) {
+				newState = MenuState.HALF_SCREEN;
+			} else {
+				newState = MenuState.FULL_SCREEN;
+			}
+
+			if (slidingDown && currentMenuState == MenuState.FULL_SCREEN && getViewY() < getFullScreenTopPosY()) {
 				slidingDown = false;
+				newState = MenuState.FULL_SCREEN;
 			}
 			if (menuBottomViewHeight > 0 && slidingUp) {
-				menu.slideUp();
-				if (skipScreenState) {
-					menu.slideUp();
+				while (menu.getCurrentMenuState() != newState) {
+					if (!menu.slideUp()) {
+						break;
+					}
 				}
 			} else if (slidingDown) {
-				needCloseMenu = !menu.slideDown();
-				if (!needCloseMenu && skipScreenState) {
-					menu.slideDown();
+				if (currentMenuState == MenuState.HEADER_ONLY) {
+					needCloseMenu = true;
+				} else {
+					while (menu.getCurrentMenuState() != newState) {
+						if (!menu.slideDown()) {
+							needCloseMenu = true;
+							break;
+						}
+					}
+				}
+			} else {
+				if (currentMenuState < newState) {
+					while (menu.getCurrentMenuState() != newState) {
+						if (!menu.slideUp()) {
+							break;
+						}
+					}
+				} else {
+					while (menu.getCurrentMenuState() != newState) {
+						if (!menu.slideDown()) {
+							break;
+						}
+					}
 				}
 			}
 		}
 		int newMenuState = menu.getCurrentMenuState();
-		boolean needMapAdjust = oldMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
+		boolean needMapAdjust = currentMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
 
-		if (newMenuState != oldMenuState) {
+		if (newMenuState != currentMenuState) {
 			restoreCustomMapRatio();
 			menu.updateControlsVisibility(true);
-			doBeforeMenuStateChange(oldMenuState, newMenuState);
+			doBeforeMenuStateChange(currentMenuState, newMenuState);
 			toggleDetailsHideButton();
 		}
 
-		applyPosY(currentY, needCloseMenu, needMapAdjust, oldMenuState, newMenuState, 0);
+		applyPosY(currentY, needCloseMenu, needMapAdjust, currentMenuState, newMenuState, 0);
 	}
 
 	private void restoreCustomMapRatio() {
@@ -1466,6 +1493,22 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		return -menuTitleHeight + menuButtonsHeight + bottomToolbarPosY;
 	}
 
+	private int getMenuStatePosY(int menuState) {
+		if (menu.isLandscapeLayout()) {
+			return topScreenPosY;
+		}
+		switch (menuState) {
+			case MenuState.HEADER_ONLY:
+				return getHeaderOnlyTopY();
+			case MenuState.HALF_SCREEN:
+				return minHalfY;
+			case MenuState.FULL_SCREEN:
+				return getFullScreenTopPosY();
+			default:
+				return 0;
+		}
+	}
+
 	private int getPosY() {
 		return getPosY(CURRENT_Y_UNDEFINED, false);
 	}
@@ -1491,20 +1534,15 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		int posY = 0;
 		switch (destinationState) {
 			case MenuState.HEADER_ONLY:
-				posY = getHeaderOnlyTopY();
+				posY = getMenuStatePosY(MenuState.HEADER_ONLY);
 				break;
 			case MenuState.HALF_SCREEN:
-				posY = minHalfY;
+				posY = getMenuStatePosY(MenuState.HALF_SCREEN);
 				break;
 			case MenuState.FULL_SCREEN:
 				if (currentY != CURRENT_Y_UNDEFINED) {
 					int maxPosY = viewHeight - menuFullHeightMax;
-					int minPosY;
-					if (menu.isLandscapeLayout()) {
-						minPosY = topScreenPosY;
-					} else {
-						minPosY = getFullScreenTopPosY();
-					}
+					int minPosY = getMenuStatePosY(MenuState.FULL_SCREEN);
 					if (maxPosY > minPosY) {
 						maxPosY = minPosY;
 					}
@@ -1516,11 +1554,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						posY = currentY;
 					}
 				} else {
-					if (menu.isLandscapeLayout()) {
-						posY = topScreenPosY;
-					} else {
-						posY = getFullScreenTopPosY();
-					}
+					posY = getMenuStatePosY(MenuState.FULL_SCREEN);
 				}
 				break;
 			default:

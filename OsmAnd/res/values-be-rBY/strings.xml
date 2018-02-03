@@ -729,7 +729,7 @@ Punktaŭ maršrutu %2$s</string>
 	<string name="poi_filter_for_tourists">Dla turystaŭ</string>
 	<string name="poi_filter_fuel">Paliva</string>
 	<string name="show_warnings_title">Pakazvać papiaredžvańnі…</string>
-	<string name="show_warnings_descr">Naladzić papiaredžanni ruchu (abmiežavanni chutkasci, vymušanyja prypynki, štučnyja niaroŭnasci), kamiery chutkasci, infarmacyju ab palosach.</string>
+	<string name="show_warnings_descr">Naladzić papiaredžanni ruchu (abmiežavanni chutkasci, vymušanyja prypynki, štučnyja niaroŭnasci, tuneli), kamiery chutkasci, infarmacyju ab palosach.</string>
 	<string name="use_compass_navigation_descr">Vykarystoŭvać kompas kali inakš niemahčyma vyznačyć napramak.</string>
 	<string name="use_compass_navigation">Vykarystoŭvać kompas</string>
 	<string name="avoid_motorway">Paźbiahać aŭtamahіstralaŭ</string>
@@ -2995,4 +2995,20 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="nautical_renderer">Marski</string>
 <string name="copy_location_name">Kapijavać nazvu kropki/POI</string>
     <string name="toast_empty_name_error">Miesca nie maje nazvy</string>
+<string name="shared_string_current">Ciapierašni</string>
+    <string name="last_intermediate_dest_description">Dadaje apošni prypynak na maršrucie</string>
+    <string name="first_intermediate_dest_description">Dadaje pieršy prypynak na maršrucie</string>
+    <string name="subsequent_dest_description">Pierasunuć praznačennie daliej i stvaryć pryznačennie</string>
+    <string name="show_closed_notes">Pakazać zakrytyja natatki</string>
+    <string name="switch_osm_notes_visibility_desc">Pakazać/schavać OSM-natatki na mapie.</string>
+    <string name="gpx_file_desc">GPX padychodzić dlia ekspartu ŭ JOSM i inšyja OSM-redaktary.</string>
+    <string name="osc_file_desc">OSC padychodzić dlia ekspartu ŭ OpenStreetMap.</string>
+    <string name="gpx_file">GPX-fajl</string>
+    <string name="osc_file">OSC-fajl</string>
+    <string name="choose_file_type">Abiarycie typ fajla</string>
+    <string name="osm_edits_export_desc">Abiarycie typ ekspartu: OSM-natatki, POI ci abodvyja.</string>
+    <string name="all_data">Usie danyja</string>
+    <string name="osm_notes">OSM-natatki</string>
+    <string name="tunnel_warning">Napieradzie tuneĺ</string>
+    <string name="show_tunnels">Tuneli</string>
 </resources>
