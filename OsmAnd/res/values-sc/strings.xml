@@ -400,7 +400,7 @@
     <string name="poi_filter_for_tourists">Pro sos turistas</string>
     <string name="poi_filter_fuel">Carburante</string>
     <string name="show_warnings_title">Ammustra avertimentos…</string>
-    <string name="show_warnings_descr">Cunfigura sos avisos pro su tràficu (lìmites de lestresa, stop fortzados, dossos e rallentadores), avisos autovelox e indicatziones de corsia.</string>
+    <string name="show_warnings_descr">Cunfigura sos avisos pro su tràficu (lìmites de lestresa, stop fortzados, dossos, rallentadores e gallerias), avisos autovelox e indicatziones de corsia.</string>
     <string name="use_compass_navigation_descr">Imprea sa bùssola cando sa filada/diretzione non est istada individuada.</string>
     <string name="use_compass_navigation">Imprea sa bùssola</string>
     <string name="avoid_motorway">Istense sas autostradas</string>
@@ -2885,12 +2885,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="by_date">Pro data</string>
     <string name="by_type">Pro casta</string>
     <string name="modify_the_search_query">Modìfica sa rechesta de chirca.</string>
-    <string name="release_3_0">\\022 S\'individuatzione de sos sinnales de stop como cunsiderat sa diretzione de ghia 
-\n 
-\n • Algoritmu nou chi frunit valores significativos ascendentes e discendentes pro sas rastas GPX 
-\n 
-\n • Su tempus calculadu pro acabare sas àndalas pro s\'escursionismu como tenet in cunsìderu sas artiadas (règula de Naismith)
-\n
+    <string name="release_3_0">\\022 
 \n</string>
     <string name="what_is_here">Ite b\'est inoghe:</string>
     <string name="parked_at">parchegiadu in</string>
@@ -2919,21 +2914,40 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="touring_view_renderer">Vista pro su turismu (cuntrastu e minujas)</string>
     <string name="nautical_renderer">Nàutica</string>
 <string name="will_open_tomorrow_at">At a abèrrere cras a sas</string>
-    <string name="release_2_9">\\022 Agiornadu su menù de cuntestu: ammustra cando unu PDI aberit / serrat
-\n
-\n • Menù trasportu pùblicu: totu sas àndalas disponìbiles como sunt in pitzos
-\n
-\n • Wikipedia: butone pro abèrrere s\'artìculu originale annantu, butone pro abèrrere s\'artìculu originale agiornadu, aspetu de sos artìculos agiornadu
-\n
-\n • Àndala: annanta sa possibilidade de cuncambiare su puntu de incumintzu e cussu de arrivu cun un\'incarcu ebbia
-\n
-\n • Notas: annanta sa possibilidade de las ordinare pro casta e data
-\n
-\n • Modìficas OSM: ammustra un\'icona e su nùmene de sa categoria de PDI, ammustra sas atziones cumpridas
-\n
+    <string name="release_2_9">"\\022 Agiornadu su menù de cuntestu: ammustra cando unu PDI aberit / serrat 
+\n 
+\n • Menù trasportu pùblicu: totu sas àndalas disponìbiles como sunt in pitzos 
+\n 
+\n • Wikipedia: butone pro abèrrere s\'artìculu originale annantu, butone pro abèrrere s\'artìculu originale agiornadu, aspetu de sos artìculos agiornadu 
+\n 
+\n • Àndala: annanta sa possibilidade de cuncambiare su puntu de incumintzu e cussu de arrivu cun un\'incarcu ebbia 
+\n 
+\n • Notas: annanta sa possibilidade de las ordinare pro casta e data 
+\n 
+\n • Modìficas OSM: ammustra un\'icona e su nùmene de sa categoria de PDI, ammustra sas atziones cumpridas 
+\n 
 \n • Ischermada lestra noa pro s\'insertadura de sas coordinatas pro sa creatzione lestra de marcadores
-\n</string>
+\n
+\n • S\'individuatzione de sos sinnales de stop como cunsiderat sa diretzione de ghia 
+\n 
+\n • Algoritmu nou chi frunit valores significativos ascendentes e discendentes pro sas rastas GPX 
+\n 
+\n • Su tempus calculadu pro acabare sas àndalas pro s\'escursionismu como tenet in cunsìderu sas artiadas (règula de Naismith) 
+\n  
+\n"</string>
     <string name="day_off_label">serradu</string>
     <string name="copy_location_name">Còpia su nùmene de su Puntu/PDI</string>
     <string name="toast_empty_name_error">Su logu non tenet unu nùmene</string>
+<string name="show_closed_notes">Ammustra sas notas serradas</string>
+    <string name="switch_osm_notes_visibility_desc">Ammustra/Istichi sas notas OSM in sa mapa.</string>
+    <string name="gpx_file_desc">GPX - adatu pro s\'esportatzione a JOSM o a àteros editores OSM.</string>
+    <string name="osc_file_desc">OSC - adatu pro s\'esportatzione in OpenStreetmap.</string>
+    <string name="gpx_file">Documentu GPX</string>
+    <string name="osc_file">Documentu OSC</string>
+    <string name="choose_file_type">Issèbera sa casta de documentu</string>
+    <string name="osm_edits_export_desc">Issèbera sa casta de esportatzione: notas OSM, PDI, o ambos.</string>
+    <string name="all_data">Totu sos datos</string>
+    <string name="osm_notes">Notas OSM</string>
+    <string name="tunnel_warning">Galleria a curtzu</string>
+    <string name="show_tunnels">Gallerias</string>
 </resources>
