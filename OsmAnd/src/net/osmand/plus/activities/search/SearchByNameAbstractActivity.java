@@ -90,7 +90,6 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	private static final Log log = PlatformUtil.getLog(SearchByNameAbstractActivity.class);
 	
 	private static final int NAVIGATE_TO = 3;
-	private static final int ADD_WAYPOINT = 4;
 	private static final int SHOW_ON_MAP = 5;
 	private static final int ADD_TO_FAVORITE = 6;
 	
@@ -570,9 +569,6 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 						searchPoint.getLongitude(), new PointDescription(PointDescription.POINT_TYPE_ADDRESS, ai.objectName));
 			} else if (mode == NAVIGATE_TO) {
 				DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(),
-						searchPoint.getLongitude(), ai.getHistoryName());
-			} else if (mode == ADD_WAYPOINT) {
-				DirectionsDialogs.addWaypointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(),
 						searchPoint.getLongitude(), ai.getHistoryName());
 			} else if (mode == SHOW_ON_MAP) {
 				showOnMap(searchPoint, ai);

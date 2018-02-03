@@ -80,14 +80,12 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				}
 
 				if (AndroidUiHelper.isOrientationPortrait(activity)) {
-					AndroidUtils.setBackground(activity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+					mainView.setBackgroundResource(getPortraitBgResId());
 				} else {
 					if (screenHeight - statusBarHeight - mainView.getHeight() >= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
-						AndroidUtils.setBackground(activity, mainView, nightMode,
-								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
+						mainView.setBackgroundResource(getLandscapeTopsidesBgResId());
 					} else {
-						AndroidUtils.setBackground(activity, mainView, nightMode,
-								R.drawable.bg_bottom_sheet_sides_landscape_light, R.drawable.bg_bottom_sheet_sides_landscape_dark);
+						mainView.setBackgroundResource(getLandscapeSidesBgResId());
 					}
 				}
 
@@ -99,6 +97,21 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				}
 			}
 		});
+	}
+
+	@DrawableRes
+	protected int getPortraitBgResId() {
+		return nightMode ? R.drawable.bg_bottom_menu_dark : R.drawable.bg_bottom_menu_light;
+	}
+
+	@DrawableRes
+	protected int getLandscapeTopsidesBgResId() {
+		return nightMode ? R.drawable.bg_bottom_sheet_topsides_landscape_dark : R.drawable.bg_bottom_sheet_topsides_landscape_light;
+	}
+
+	@DrawableRes
+	protected int getLandscapeSidesBgResId() {
+		return nightMode ? R.drawable.bg_bottom_sheet_sides_landscape_dark : R.drawable.bg_bottom_sheet_sides_landscape_light;
 	}
 
 	protected boolean isNightMode() {
