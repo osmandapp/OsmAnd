@@ -3713,4 +3713,5 @@
 	<string name="poi_climbing_length">Routenlänge</string>
 	<string name="poi_climbing_length_min">Routenmindestlänge</string>
 	<string name="poi_climbing_length_max">Routenhöchstlänge</string>
+	<string name="poi_climbing_quality_solid">Felsqualität: fest</string>
 	</resources>
