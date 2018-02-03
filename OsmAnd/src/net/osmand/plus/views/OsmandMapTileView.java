@@ -130,7 +130,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private float mapRatioX;
 	private float mapRatioY;
-	private LatLon originalRatioCenterLatLon;
 
 	private boolean showMapPosition = true;
 
@@ -496,16 +495,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void setCustomMapRatio(float ratioX, float ratioY) {
 		this.mapRatioX = ratioX;
 		this.mapRatioY = ratioY;
-		originalRatioCenterLatLon = currentViewport.getCenterLatLon();
 	}
 
 	public void restoreMapRatio() {
+		RotatedTileBox box = currentViewport.copy();
+		float rx = (float)box.getCenterPixelX() / box.getPixWidth();
+		float ry = (float)box.getCenterPixelY() / box.getPixHeight();
+		if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
+			ry -= 0.35;
+		}
+		box.setCenterLocation(rx, ry);
+		LatLon screenCenter = box.getLatLonFromPixel(box.getPixWidth() / 2, box.getPixHeight() / 2);
 		mapRatioX = 0;
 		mapRatioY = 0;
-		if (originalRatioCenterLatLon != null) {
-			setLatLon(originalRatioCenterLatLon.getLatitude(), originalRatioCenterLatLon.getLongitude());
-			originalRatioCenterLatLon = null;
-		}
+		setLatLon(screenCenter.getLatitude(), screenCenter.getLongitude());
 	}
 
 	public boolean hasCustomMapRatio() {

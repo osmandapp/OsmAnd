@@ -1572,7 +1572,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		int zoom = getZoom() + dZoom;
 		LatLon latlon = getAdjustedMarkerLocation(y, menu.getLatLon(), center, zoom);
 
-		if (map.getLatitude() == latlon.getLatitude() && map.getLongitude() == latlon.getLongitude() && dZoom == 0) {
+		if (map.hasCustomMapRatio()
+				|| (map.getLatitude() == latlon.getLatitude() && map.getLongitude() == latlon.getLongitude() && dZoom == 0)) {
 			return;
 		}
 
