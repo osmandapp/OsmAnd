@@ -2943,13 +2943,13 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="by_date">Nach Datum</string>
     <string name="by_type">Nach Typ</string>
     <string name="import_gpx_file_description">kann als Favoriten-Punkte oder als Track-Datei importiert werden.</string>
-    <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Widget oder Kontextmenü hinzufügen.</string>
+    <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Bedienelement oder Kontextmenü hinzufügen.</string>
     <string name="notes_by_date">Notizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuerschaltflächen und Bedienelemente um.</string>
     <string name="release_3_0">\\022 
 \n
 \n</string>
-    <string name="one_tap_active">Aktivieren mit einem Tap</string>
+    <string name="one_tap_active">Mit einem Tippen aktiv</string>
     <string name="what_is_here">Was ist hier:</string>
     <string name="without_time_limit">Ohne Zeitbegrenzung</string>
     <string name="context_menu_read_full_article">Ganzen Artikel lesen</string>
@@ -3001,4 +3001,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="osm_notes">OSM-Notizen</string>
     <string name="tunnel_warning">Tunnel voraus</string>
     <string name="show_tunnels">Tunnel</string>
-</resources>
+<string name="shared_string_current">Aktuell</string>
+    <string name="last_intermediate_dest_description">Fügt den letzten Halt entlang der Route hinzu</string>
+    <string name="first_intermediate_dest_description">Fügt den ersten Halt auf der Route hinzu</string>
+    <string name="subsequent_dest_description">Ziel nach oben verschieben und Ziel erstellen</string>
+    </resources>
