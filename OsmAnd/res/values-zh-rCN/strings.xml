@@ -1265,8 +1265,8 @@
     <string name="select_city">选择城市</string>
     <string name="select_postcode">选择邮政编码</string>
     <string name="quick_action_auto_zoom">地图自动缩放开关</string>
-    <string name="quick_action_auto_zoom_on">地图自动缩放开启</string>
-    <string name="quick_action_auto_zoom_off">地图自动缩放关闭</string>
+    <string name="quick_action_auto_zoom_on">启用地图自动缩放</string>
+    <string name="quick_action_auto_zoom_off">禁用地图自动缩放</string>
     <string name="quick_action_add_destination">添加目的地</string>
     <string name="quick_action_replace_destination">更换目的地</string>
     <string name="quick_action_add_first_intermediate">添加第一个途径地</string>
@@ -1369,7 +1369,7 @@
     <string name="rendering_attr_showCycleRoutes_name">显示自行车路线</string>
     <string name="rendering_attr_horseRoutes_name">马匹路线</string>
     <string name="download_wikipedia_maps">维基百科</string>
-    <string name="do_not_show_startup_messages_desc">它显示应用折扣信息和特殊本地事件信息</string>
+    <string name="do_not_show_startup_messages_desc">停止显示应用折扣信息和特殊本地事件信息。</string>
     <string name="shared_string_max">最大</string>
     <string name="shared_string_time">时间</string>
     <string name="total_distance">总距离</string>
@@ -1483,7 +1483,7 @@
     <string name="distance_moving">距离已修正</string>
     <string name="no_photos_descr">我们没有该地点的照片。</string>
     <string name="routing_attr_short_way_name">节油道路</string>
-    <string name="routing_attr_short_way_description">使用节油道路（通常更短）</string>
+    <string name="routing_attr_short_way_description">使用节油道路（通常更短）。</string>
     <string name="configure_screen_quick_action">快捷操作</string>
     <string name="shared_string_show_all">显示全部</string>
     <string name="osmand_plus_short_description_80_chars">全球移动地图浏览，以及使用离线和在线 OSM 地图进行导航</string>
@@ -1523,7 +1523,7 @@
     <string name="favorite_group_name">组名称</string>
     <string name="animate_my_location">动画处理我的位置</string>
     <string name="animate_my_location_desc">在导航时为我的位置启用动画。</string>
-    <string name="quick_action_add_destination_desc">轻点按鈕将在屏幕中心位置添加一个目的地。以前设定的目的地成为最后的中转点。</string>
+    <string name="quick_action_add_destination_desc">轻点按钮将在屏幕中心位置添加一个目的地。以前设定的目的地成为最后的中转点。</string>
     <string name="quick_action_replace_destination_desc">轻点动作按钮将吧屏幕中心的位置更换为目的地。</string>
     <string name="quick_action_add_first_intermediate_desc">轻点动作按钮将在屏幕中心位置添加一个中转点。</string>
     <string name="no_overlay">无覆盖层</string>
@@ -1543,7 +1543,7 @@
     <string name="routing_attr_driving_style_speed_name">更短的路径</string>
     <string name="routing_attr_driving_style_balance_name">平衡</string>
     <string name="routing_attr_driving_style_safety_name">偏好背街小路</string>
-    <string name="relief_smoothness_factor_descr">首选的地形︰ 平坦或丘陵</string>
+    <string name="relief_smoothness_factor_descr">首选的地形︰ 平坦或丘陵。</string>
     <string name="shared_string_slope">坡度</string>
     <string name="add_new_folder">添加新文件夹</string>
     <string name="route_points_category_name">转到这条路线上</string>
@@ -1560,8 +1560,8 @@
     <string name="average_altitude">平均海拔</string>
     <string name="routing_attr_relief_smoothness_factor_name">选择海拔波动</string>
     <string name="routing_attr_height_obstacles_name">使用标高数据</string>
-    <string name="routing_attr_height_obstacles_description">使用提供 SRTM、 ASTER 和 EU-DEM 的地形标高数据</string>
-    <string name="rendering_attr_depthContours_description">显示等深线和标记</string>
+    <string name="routing_attr_height_obstacles_description">使用 SRTM、ASTER 和 EU-DEM 提供的地形标高数据。</string>
+    <string name="rendering_attr_depthContours_description">显示等深线和标记。</string>
     <string name="rendering_attr_depthContours_name">航海等深线</string>
     <string name="auto_split_recording_title">自动拆分录音后的间隙</string>
     <string name="auto_split_recording_descr">如果日期已更改，开始新区段在6分钟后的间隙，新轨迹在2小时后的间隙，或新文件在更长的间隙之后。</string>
@@ -2740,4 +2740,20 @@
     <string name="will_open_tomorrow_at">明日开始营业时间</string>
     <string name="rendering_attr_hidePOILabels_name">兴趣点（POI）标签</string>
     <string name="show_number_pad">显示数字盘</string>
+    <string name="switch_osm_notes_visibility_desc">在地图上显示/隐藏 OSM 笔记。</string>
+    <string name="gpx_file_desc">GPX - 适合导出到 JOSM 或其它 OSM 编辑器。</string>
+    <string name="osc_file_desc">OSC - 适合导出到 OpenStreetMap。</string>
+    <string name="gpx_file">GPX 文件</string>
+    <string name="osc_file">OSC 文件</string>
+    <string name="choose_file_type">选择文件类型</string>
+    <string name="osm_edits_export_desc">选择导出类型：OSM 笔记、POI（兴趣点）或者同时使用两者。</string>
+    <string name="all_data">所有数据</string>
+    <string name="osm_notes">OSM 笔记</string>
+    <string name="shared_string_paste">粘贴</string>
+    <string name="tap_on_map_to_hide_interface">全屏模式</string>
+    <string name="import_file">导入文件</string>
+	<string name="mappilary_no_internet_desc">您需要互联网连接以查看来自 Mapillary 的图片。</string>
+    <string name="retry">重试</string>
+    <string name="save_gpx_waypoint">保存 GPX 航点</string>
+    <string name="import_track">导入轨迹</string>
     </resources>
