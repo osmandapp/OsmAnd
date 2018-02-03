@@ -843,8 +843,8 @@
 	<string name="poi_bench_yes">Bai</string>
 	<string name="poi_bench_no">Eserleku gabe</string>
 	<string name="poi_shelter_type_public_transport">Garraio publikoa</string>
-	<string name="poi_shelter_type_picnic_shelter"></string>
-	<string name="poi_shelter_type_weather_shelter"></string>
+	<string name="poi_shelter_type_picnic_shelter"/>
+	<string name="poi_shelter_type_weather_shelter"/>
 	<string name="poi_shelter_type_basic_hut">Oinarrizko txabola</string>
 	<string name="poi_shelter_type_building">Eraikina</string>
 	<string name="poi_shelter_type_wildlife_hide">Basabizitza parada</string>
@@ -1265,7 +1265,7 @@
 	<string name="poi_traffic_signals_sound">Soinua</string>
 	<string name="poi_highway_crossing_type">Mota</string>
 	<string name="poi_service_car">Zerbitzua</string>
-	<string name="poi_brushless"></string>
+	<string name="poi_brushless"/>
 	<string name="poi_self_service">Autozerbitzua</string>
 	<string name="poi_automated">Automatizatua</string>
 	<string name="poi_parking_type">Mota</string>
@@ -1280,7 +1280,7 @@
 	<string name="poi_animal_training_type">Mota</string>
 	<string name="poi_embassy_type">Mota</string>
 	<string name="poi_city_capital">Hiriburua</string>
-	<string name="poi_pharmacy_dispensing"></string>
+	<string name="poi_pharmacy_dispensing"/>
 	<string name="poi_healthcare_alternative_types">Espezialitatea</string>
 	<string name="poi_free_flying_characteristics">Karakteristikoa</string>
 	<string name="poi_archaeological_site_type">Mota</string>
@@ -2286,4 +2286,192 @@
 	<string name="poi_water_place_access">Ur iturrira sarbidea</string>
 	<string name="poi_buoy_installation">Instalazio buia</string>
 	<string name="poi_radio_station">Itsas irrati estazioa</string>
+	<string name="poi_leaf_type_mixed">Mistoa</string>
+	<string name="poi_urban">Urbanoa</string>
+	<string name="poi_rural">Landatarra</string>
+
+	<string name="poi_enforcement_traffic_signals">Trafikoaren kontrola: semaforoak</string>
+	<string name="poi_enforcement_maxspeed">"Trafikoaren kontrola:  gehieneko abiadura"</string>
+	<string name="poi_enforcement_maxheight">Trafikoaren kontrola: gehieneko altuera</string>
+	<string name="poi_enforcement_mindistance">Trafikoaren kontrola: gutxieneko distantzia</string>
+	<string name="poi_enforcement_check">Trafikoaren kontrola: kontrola</string>
+	<string name="poi_enforcement_access">Trafikoaren kontrola: sarbidea</string>
+	<string name="poi_enforcement_toll">Trafikoaren kontrola: bidesaria</string>
+
+	<string name="poi_payment_paypal_yes">PayPal</string>
+	<string name="poi_payment_paypal_no">Ez da PayPal onartzen</string>
+	<string name="poi_payment_u_key_yes">U-Key</string>
+	<string name="poi_payment_u_key_no">Ez da U-Key onartzen</string>
+	<string name="poi_payment_gift_card_yes">Opari-txartelak</string>
+	<string name="poi_payment_gift_card_no">Ez dira opari-txartelak onartzen</string>
+	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
+	<string name="poi_payment_golden_crown_no">Ez dira Golden Crown txartelak onartzen</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
+	<string name="poi_payment_pro100_no">Ez dira PRO100 txartelak onartzen</string>
+	<string name="poi_payment_union_card_yes">Union Card</string>
+	<string name="poi_payment_union_card_no">Ez dira Union Card txartelak onartzen</string>
+	<string name="poi_payment_mtsmoney_yes">MTS-Money</string>
+	<string name="poi_payment_mtsmoney_no">Ez da MTS-Money onartzen</string>
+	<string name="poi_payment_yandexmoney_yes">Yandex.Money</string>
+	<string name="poi_payment_yandexmoney_no">Ez da Yandex.Money onartzen</string>
+	<string name="poi_description_payment">Ordainketaren deskripzioa</string>
+
+	<string name="poi_diet_vegetarian_filter_yes">Begetarianoa</string>
+	<string name="poi_diet_vegetarian_few">Begetarianoa (gutxi)</string>
+	<string name="poi_diet_vegan_filter_yes">Beganoa</string>
+	<string name="poi_diet_gluten_free_filter_yes">Glutenik gabekoa</string>
+	<string name="poi_diet_kosher_filter_yes">Kosher</string>
+	<string name="poi_diet_halal_filter_yes">Halal</string>
+	<string name="poi_diet_lactose_free_filter_yes">Laktosa gabekoa</string>
+	<string name="poi_takeaway_filter_yes">Bai</string>
+	<string name="poi_delivery_filter_yes">Bai</string>
+	<string name="poi_outdoor_seating_filter_yes">Bai</string>
+	<string name="poi_second_hand_yes">Bigarren eskuko gauzak</string>
+	<string name="poi_second_hand_no">Ez dago bigarren eskuko gauzarik</string>
+	<string name="poi_second_hand_only">Bigarren eskuko gauzak besterik ez</string>
+
+	<string name="poi_service_parts">Parteak</string>
+	<string name="poi_service_dealer">Saltzailea</string>
+	<string name="poi_service_repair">Konponketa</string>
+	<string name="poi_service_repair_no">Konponketarik ez</string>
+	<string name="poi_service_electrical">Gailu elektrikoen konponketa</string>
+	<string name="poi_motorcycle_repair">Motorren konponketa</string>
+	<string name="poi_self_service_no">Autozerbitzurik ez</string>
+	<string name="poi_automated_no">Automatizatu gabea</string>
+	<string name="poi_full_service_yes">Zerbitzu osoa</string>
+	<string name="poi_car_wash_no">Kotxe-garbiketa: ez</string>
+
+
+	<string name="poi_public_bath">Bainu publikoa</string>
+
+	<string name="poi_male_yes">Gizonezkoa</string>
+	<string name="poi_male_no">Gizonezkoentzat debekatua</string>
+	<string name="poi_female_yes">Emakumezkoa</string>
+	<string name="poi_female_no">Emakumezkoentzat debekatua</string>
+	<string name="poi_diaper_table_count">Pixoihala aldatzeko mahaia</string>
+	<string name="poi_vending_fuel">Erregai horniketa</string>
+	<string name="poi_memorial_stolperstein">Stolperstein</string>
+	<string name="poi_crop_rice">Usta: arroza</string>
+	<string name="poi_crop_grass">Usta: belarra</string>
+	<string name="poi_crop_corn">Usta: Artoa</string>
+	<string name="poi_crop_cereal">Usta: zerealak</string>
+	<string name="poi_crop_sugarcane">Usta: azukre-kanabera</string>
+	<string name="poi_crop_wheat">Usta: garia</string>
+	<string name="poi_crop_soy">Usta: soja</string>
+	<string name="poi_crop_barley">Usta: garagarra</string>
+	<string name="poi_crop_vegetables">Usta: barazkiak</string>
+	<string name="poi_crop_hop">Usta: lupulua</string>
+	<string name="poi_crop_rape">Usta: koltza</string>
+	<string name="poi_crop_beet">Usta: erremolatxa</string>
+	<string name="poi_crop_lavender">Usta: izpilikua</string>
+	<string name="poi_crop_tea">Usta: tea</string>
+	<string name="poi_crop_coffee">Usta: kafea</string>
+	<string name="poi_crop_poultry">"Produkzioa: hegaztikia "</string>
+	<string name="poi_crop_sunflower">Usta: ekilorea</string>
+	<string name="poi_crop_raspberry">Usta: mugurdia</string>
+	<string name="poi_crop_tobacco">Usta: tabakoa</string>
+	<string name="poi_crop_strawberry">Urta: marrubia</string>
+	<string name="poi_crop_vegetables_flowers">Usta: barazkiak, loreak</string>
+	<string name="poi_crop_cassava">Usta: manioka</string>
+	<string name="poi_crop_cranberry">Usta: ahabia</string>
+	<string name="poi_crop_asparagus">Usta: zainzuria</string>
+	<string name="poi_crop_flowers">Usta: loreak</string>
+
+	<string name="poi_surveillance_indoor">Zaintza: barnekoa</string>
+	<string name="poi_surveillance_outdoor">Zaintza: kanpokoa</string>
+	<string name="poi_surveillance_public">Zaintza: publikoa</string>
+
+	<string name="poi_clothes_women">Emakumeak</string>
+	<string name="poi_clothes_underwear">Azpiko arropa</string>
+	<string name="poi_clothes_men">Gizonak</string>
+	<string name="poi_clothes_wedding">Ezkontza-jantziak</string>
+	<string name="poi_clothes_sports">Kirolak</string>
+	<string name="poi_clothes_babies">Haurtxoak</string>
+	<string name="poi_clothes_workwear">Lanerako arropa</string>
+	<string name="poi_clothes_hats">Kapelak</string>
+	<string name="poi_clothes_fur">Larrua</string>
+	<string name="poi_clothes_leather">Larrua</string>
+	<string name="poi_clothes_costumes">Mozorroak</string>
+	<string name="poi_clothes_traditional">Tradizionala</string>
+	<string name="poi_clothes_suits">Janzkiak</string>
+	<string name="poi_clothes_maternity">Amatasuna</string>
+	<string name="poi_clothes_vintage">Antzinakoa</string>
+	<string name="poi_clothes_oversize">Taila handiak</string>
+	<string name="poi_clothes_schoolwear">Eskolarako arropa</string>
+	<string name="poi_clothes_swimwear">Bainu jantziak</string>
+	<string name="poi_clothes_socks">Galtzerdiak</string>
+	<string name="poi_clothes_shirts">Alkondarak</string>
+	<string name="poi_clothes_dance">Dantza</string>
+	<string name="poi_clothes_military">Militarra</string>
+
+	<string name="poi_shoes_children">Umeak</string>
+	<string name="poi_shoes_women">Emakumeak</string>
+	<string name="poi_shoes_sport">Kirolak</string>
+	<string name="poi_shoes_men">Gizonak</string>
+	<string name="poi_shoes_orthopedic">Ortopedikoa</string>
+
+	<string name="poi_massage_thai">Thailandiarra</string>
+	<string name="poi_massage_sexual">Sexuala</string>
+	<string name="poi_massage_chinese">Txinatarra</string>
+	<string name="poi_massage_therapeutic">Terapeutikoa</string>
+
+	<string name="poi_massage_yes">Masaje zerbitzuak</string>
+	<string name="poi_sauna_yes">Sauna zerbitzua</string>
+	<string name="poi_solarium_yes">Solarium zerbitzua</string>
+
+	<string name="poi_tents_yes">Baimenduta</string>
+	<string name="poi_tents_no">Ez dira dendak baimentzen</string>
+	<string name="poi_openfire_yes">Sua egitea baimenduta</string>
+	<string name="poi_openfire_no">Ez da sua egitea baimentzen</string>
+	<string name="poi_backcountry_yes">Bai</string>
+	<string name="poi_backcountry_no">Ez</string>
+	<string name="poi_scout_yes">Bai</string>
+	<string name="poi_group_only_yes">Taldeak besterik ez: bai</string>
+	<string name="poi_group_only_no">Taldeak besterik ez: ez</string>
+	<string name="poi_shower_filter_yes">Bai</string>
+	<string name="poi_cuisine_buschenschank">Buschenschank</string>
+	<string name="poi_cuisine_bakery">Okindegia</string>
+	<string name="poi_cuisine_canteen">Kantina</string>
+	<string name="poi_cuisine_tacos">Takoak</string>
+	<string name="poi_owner">Jabea</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Adopzioa: bai</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Adopzioa: ez</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Askatzea: bai</string>
+	<string name="poi_animal_shelter_purpose_release_no">Askatzea: ez</string>
+
+	<string name="poi_direction_nne">"Norabidea: Ipar ipar-ekialdea "</string>
+	<string name="poi_direction_ne">Norabidea: Ipar-ekialdea</string>
+	<string name="poi_direction_ene">Norabidea: Ekialdea ipar-ekialdea</string>
+	<string name="poi_direction_e">Norabidea: ekialdea</string>
+	<string name="poi_direction_ese">Norabidea: ekialdea hego-ekialdea</string>
+	<string name="poi_direction_se">Norabidea: hego-ekialdea</string>
+	<string name="poi_direction_sse">Norabidea: Hegoa hego-ekialdea</string>
+	<string name="poi_direction_s">Norabidea: Hegoa</string>
+	<string name="poi_direction_ssw">Norabidea: Hegoa hego-mendebaldea</string>
+	<string name="poi_direction_sw">Norabidea: Hego-mendebaldea</string>
+	<string name="poi_direction_wsw">Norabidea: Mendebaldea hego-mendebaldea</string>
+	<string name="poi_direction_w">Norabidea: Mendebaldea</string>
+	<string name="poi_direction_wnw">Norabidea: Mendebalde hego-mendebaldea</string>
+	<string name="poi_direction_nw">Norabidea: Ipar-mendebaldea</string>
+	<string name="poi_direction_nnw">Norabidea: Iparra ipar-mendebaldea</string>
+	<string name="poi_direction_forward">Norabidea: aurrera</string>
+	<string name="poi_direction_backward">Norabidea: atzera</string>
+	<string name="poi_direction_clockwise">Norabidea: Erlojuaren orratzen zentzuan</string>
+	<string name="poi_direction_anticlockwise">Norabidea: Erlojuaren orratzen kontrako zentzuan</string>
+	<string name="poi_direction_up">Norabidea: gora</string>
+	<string name="poi_direction_down">Norabidea: behera</string>
+	<string name="poi_direction_entrance">Norabidea: sarrera</string>
+	<string name="poi_direction_exit">Norabidea: irteera</string>
+	<string name="poi_direction_all">Norabidea: denak</string>
+
+	<string name="poi_reservation_required">Erreserba: ezinbestekoa</string>
+	<string name="poi_reservation_recommended">Erreserba: gomendagarria</string>
+	<string name="poi_reservation_yes">Erreserba: bai</string>
+	<string name="poi_reservation_no">Erreserba: ez</string>
+	<string name="poi_reservation_members_only">Erreserba: kideek besterik ez</string>
+
+	<string name="poi_beds">Oheak</string>
+
+	<string name="poi_boat_rental">Ontzien alokairua</string>
 	</resources>
