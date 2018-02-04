@@ -3763,8 +3763,8 @@
 	<string name="poi_climbing_ice_no">Is: nej</string>
 	<string name="poi_climbing_mixed_yes">Blandet: ja</string>
 	<string name="poi_climbing_mixed_no">Blandet: nej</string>
-	<string name="poi_climbing_deepwater_yes">Dybt vand solo: ja</string>
-	<string name="poi_climbing_deepwater_no">Dybt vand solo: nej</string>
+	<string name="poi_climbing_deepwater_yes">Deep-water soloing (psicobloc): ja</string>
+	<string name="poi_climbing_deepwater_no">Deep-water soloing (psicobloc): nej</string>
 
 	<string name="poi_climbing_length">Klatrelængde</string>
 	<string name="poi_climbing_length_min">Klatrelængde min</string>
@@ -3796,8 +3796,8 @@
 	<string name="poi_diameter_crown">Kronens diameter</string>
 
 	<string name="poi_meadow_agricultural">Type: landbrug</string>
-	<string name="poi_meadow_perpetual">Type: evig</string>
-	<string name="poi_meadow_transitional">Type: overgang</string>
+	<string name="poi_meadow_perpetual">Type: permanent</string>
+	<string name="poi_meadow_transitional">Type: midlertidig</string>
 	<string name="poi_meadow_pasture">Type: græsgang</string>
 
 	<string name="poi_frozen_food">Frosne fødevarer</string>
