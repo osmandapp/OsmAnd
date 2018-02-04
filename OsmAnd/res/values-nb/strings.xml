@@ -1807,7 +1807,7 @@
     <string name="osm_edit_created_poi">Opprettet OSM-interessepunkt</string>
 
     <string name="si_nm">Nautisk mil</string>
-    <string name="si_mph">Engelsk mil per time</string>
+    <string name="si_mph">Engelsk mil i timen</string>
     <string name="si_min_m">Minutter per engelsk mil</string>
     <string name="shared_string_manage">Behandle</string>
     <string name="shared_string_selected">Valgt</string>
