@@ -2860,4 +2860,8 @@ Por favor proporciona un código completo</string>
     <string name="switch_osm_notes_visibility_desc">Mostrar/ocultar notas de OSM en el mapa.</string>
     <string name="tunnel_warning">Túnel adelante</string>
     <string name="show_tunnels">Túneles</string>
-</resources>
+<string name="shared_string_current">Actual</string>
+    <string name="last_intermediate_dest_description">Añade la última parada a lo largo de la ruta</string>
+    <string name="first_intermediate_dest_description">Añade la primera parada en la ruta</string>
+    <string name="subsequent_dest_description">Mueve el destino hacia arriba y crea un destino</string>
+    </resources>
