@@ -1807,7 +1807,7 @@
     <string name="osm_edit_created_poi">Opprettet OSM-interessepunkt</string>
 
     <string name="si_nm">Nautisk mil</string>
-    <string name="si_mph">Engelske mil per time</string>
+    <string name="si_mph">Engelsk mil per time</string>
     <string name="si_min_m">Minutter per engelsk mil</string>
     <string name="shared_string_manage">Behandle</string>
     <string name="shared_string_selected">Valgt</string>
@@ -1931,7 +1931,7 @@
 
     <string name="share_osm_edits_subject">OSM-redigeringer delt via OsmAnd</string>
     <string name="whats_new">Hva er nytt i</string>
-    <string name="si_nm_h">Nautiske mil i timen (knop)</string>
+    <string name="si_nm_h">Nautisk mil i timen (knop)</string>
     <string name="simulate_your_location_stop_descr">Stopp simulering av din posisjon.</string>
     <string name="simulate_your_location_descr">Simuler din posisjon ved bruk av en beregnet rute eller et GPX-spor som er tatt opp.</string>
     <string name="av_locations_descr">GPX-fil med plasseringsnotater.</string>
@@ -2740,4 +2740,12 @@
     <string name="osm_notes">OSM-notater</string>
     <string name="tunnel_warning">Tunnel foran</string>
     <string name="show_tunnels">Tunneler</string>
-</resources>
+<string name="enable_plugin_monitoring_services">Aktiver turopptakstillegget for å bruke posisjonloggingstjenester (GPX-logging, nettbasert sporing)</string>
+    <string name="non_optimal_route_calculation">Beregn mulig ikke-optimal rute over lange avstander</string>
+    <string name="vector_data_missing">Nettfrakoblede (offline) data mangler på SD-kortet. Overvei å laste ned for å kunne bruke kart nettfrakoblet.</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> – kartklassifisering med bilder.</string>
+    <string name="quick_action_duplicates">Spesifisert hurtighandlingsnavn er allerede i bruk, ble endret til %1$s for å unngå duplisering.</string>
+    <string name="quick_action_duplicate">Navneduplisering for hurtighandling</string>
+    <string name="osm_recipients_label">OSM-mottakere</string>
+    <string name="total_donations">Donasjoner totalt</string>
+    </resources>
