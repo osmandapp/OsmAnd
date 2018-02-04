@@ -3034,4 +3034,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="tunnel_warning">前方有隧道</string>
     <string name="show_tunnels">隧道</string>
 <string name="shared_string_current">目前</string>
+    <string name="last_intermediate_dest_description">新增沿著路線的終點站</string>
+    <string name="first_intermediate_dest_description">新增在路線上的第一站</string>
+    <string name="subsequent_dest_description">向上移動目標，並建立目的地</string>
     </resources>
