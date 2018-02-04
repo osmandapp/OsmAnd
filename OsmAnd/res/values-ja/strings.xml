@@ -734,7 +734,7 @@ POIの更新は利用できません</string>
     <string name="local_openstreetmap_act_title">OSMの修正</string>
     <string name="shared_string_more_actions">その他のアクション</string>
     
-	<string name="layer_hillshade">陰影起伏図表示レイヤー</string>
+	<string name="layer_hillshade">陰影起伏図レイヤー</string>
     <string name="map_widget_gps_info">GPS情報</string>
     <string name="access_arrival_time">到着時刻</string>
     <string name="item_checked">選択済</string>
@@ -749,7 +749,7 @@ POIの更新は利用できません</string>
     
     
     <string name="local_indexes_cat_srtm">等高線</string>
-    <string name="local_indexes_cat_av">音声/ビデオデータ</string>
+    <string name="local_indexes_cat_av">音声/動画データ</string>
     <string name="stop_routing_confirm">検索したルートを却下してナビゲーションを終了しますか？</string>
     <string name="clear_dest_confirm">本当に目的地(とその経由地点)を削除しますか？</string>
     <string name="precise_routing_mode_descr">グリッチ無しの正確なルート計算を有効化します。現段階では距離が限定されて尚且つ遅いです。</string>
@@ -765,27 +765,27 @@ POIの更新は利用できません</string>
     <string name="srtm_paid_version_msg">さらなるアプリケーションの発展のために、どうかGoogle Play上にある等高線プラグインのご購入をご検討下さい。</string>
     <string name="srtm_paid_version_title">等高線プラグイン</string>
     <string name="av_def_action_choose">ウィジェット起動毎に選択</string>
-    <string name="av_def_action_video">ビデオを撮影</string>
+    <string name="av_def_action_video">動画を撮影</string>
     <string name="av_def_action_audio">音声を録音</string>
-    <string name="av_widget_action_descr">ウィジェットボタンの(音声、ビデオ、写真記録)のデフォルト動作を選択します</string>
+    <string name="av_widget_action_descr">ウィジェットボタンの(音声、動画、写真記録)のデフォルト動作を選択します。</string>
     <string name="av_widget_action">ウィジェット機能のデフォルト設定</string>
-    <string name="av_video_format_descr">ビデオ出力形式を選択します</string>
-    <string name="av_video_format">ビデオ出力形式</string>
-    <string name="av_use_external_recorder_descr">ビデオ撮影時にシステムレコーダを使用します</string>
+    <string name="av_video_format_descr">動画の出力形式を選択します。</string>
+    <string name="av_video_format">動画出力形式</string>
+    <string name="av_use_external_recorder_descr">動画撮影時にシステムレコーダを使用します。</string>
     <string name="av_use_external_recorder">システムレコーダを使用</string>
     <string name="av_use_external_camera_descr">写真の撮影にシステムアプリケーションを使用します</string>
     <string name="av_use_external_camera">カメラアプリを使用</string>
-    <string name="av_settings_descr">音声とビデオに関する設定をします</string>
-    <string name="av_settings">音声/ビデオ設定 </string>
+    <string name="av_settings_descr">音声と動画に関する設定をします。</string>
+    <string name="av_settings">音声/動画設定</string>
     <string name="recording_error">記録中にエラーが発生しました </string>
     <string name="recording_camera_not_available">カメラが利用できません</string>
-    <string name="recording_is_recorded">音声/ビデオは記録中です。停止するにはAVウィジェットをタップして下さい。</string>
+    <string name="recording_is_recorded">音声/動画は記録中です。停止するにはAVウィジェットをタップして下さい。</string>
     <string name="recording_playing">指定されたファイルから音声が再生されています。 \n%1$s</string>
     <string name="recording_open_external_player">外部プレイヤーで開く</string>
     <string name="recording_delete_confirm">この記録を削除しますか？</string>
     <string name="recording_unavailable">利用できません</string>
     <string name="recording_context_menu_arecord">音声を録音</string>
-    <string name="recording_context_menu_vrecord">ビデオを撮影</string>
+    <string name="recording_context_menu_vrecord">動画メモを取る</string>
     <string name="layer_recordings">記録レイヤー</string>
     <string name="recording_can_not_be_played">記録されたファイルは再生できませんでした</string>
     <string name="recording_context_menu_delete">記録を削除</string>
@@ -1839,7 +1839,7 @@ POIの更新は利用できません</string>
 	<string name="shared_string_collapse">折り畳み表示</string>
 	<string name="shared_string_currently_recording_track">現在の経路を記録</string>
 	<string name="shared_string_audio">音声</string>
-	<string name="shared_string_video">ビデオ</string>
+	<string name="shared_string_video">動画</string>
 	<string name="shared_string_photo">写真</string>
 	<string name="route_points">ルート地点</string>
 	<string name="track_segments">経路セグメント</string>
@@ -2030,7 +2030,7 @@ POIの更新は利用できません</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Offline Maps\n&amp; Navigation</string>
 	<string name="commit_poi">POIを申請する</string>
-<string name="av_locations_descr">GPXファイルに位置に関するメモを付けます</string>
+<string name="av_locations_descr">GPXファイルに位置に関するメモを付けます。</string>
     <string name="av_locations">位置</string>
     <string name="poi_action_delete">削除</string>
 	<string name="shared_string_card_was_hidden">項目は非表示</string>
@@ -2319,8 +2319,8 @@ POIの更新は利用できません</string>
     <string name="shared_string_hide">非表示</string>
     <string name="av_video_quality_low">最低画質</string>
     <string name="av_video_quality_high">最高画質</string>
-    <string name="av_video_quality">ビデオ出力時の画質</string>
-    <string name="av_video_quality_descr">ビデオの出力画質を選択します</string>
+    <string name="av_video_quality">動画撮影時の画質</string>
+    <string name="av_video_quality_descr">動画の画質(解像度)を選択します。</string>
     <string name="av_audio_format">音声出力形式</string>
     <string name="av_audio_format_descr">音声出力形式を選択します</string>
     <string name="av_audio_bitrate">音声ビットレート</string>
@@ -2876,7 +2876,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_plugin">プラグイン</string>
     <string name="srtm_purchase_header">等高線をマップ上で見るには、等高線プラグインの購入とインストールが必要です</string>
     <string name="show_from_zoom_level">表示ズームレベル</string>
-    <string name="routing_attr_allow_private_name">専有通路を通行許可</string>
+    <string name="routing_attr_allow_private_name">専有エリア(私有地など)を通行可とみなす</string>
     <string name="routing_attr_allow_private_description">専有エリア(業者用通路、私有地など)を通行可能と見なします</string>
     <string name="display_zoom_level">表示ズームレベル: %1$s</string>
     <string name="index_item_depth_points_southern_hemisphere">南半球の海洋深度マップ</string>
@@ -2999,7 +2999,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="marker_moved_to_active">マップマーカーをアクティブ化させました</string>
     <string name="shared_string_list">リスト</string>
     <string name="shared_string_groups">グループ</string>
-    <string name="make_active">アクティブにします</string>
+    <string name="make_active">アクティブにする</string>
     <string name="today">今日</string>
     <string name="yesterday">昨日</string>
     <string name="last_seven_days">直近の7日間</string>
@@ -3116,4 +3116,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_added">追加しました</string>
     <string name="notes_by_date">日付別の注釈</string>
     <string name="add_group">グループの追加</string>
+    <string name="empty_state_osm_edits_descr">OSM用POIの作成や更新、注釈の追加などが可能で、記録したGPXファイルを用いてあなたもOSMに貢献することができます。</string>
+    <string name="mark_passed">通過済みにする</string>
+    <string name="add_segment_to_the_track">GPX経路に追加</string>
     </resources>
