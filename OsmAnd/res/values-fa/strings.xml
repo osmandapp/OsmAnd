@@ -3043,4 +3043,8 @@
     <string name="osm_notes">توضیحات ویرایشی OSM</string>
     <string name="tunnel_warning">به طرف تونل</string>
     <string name="show_tunnels">تونل‌ها</string>
-</resources>
+<string name="shared_string_current">کنونی</string>
+    <string name="last_intermediate_dest_description">آخرین توقفگاه را به مسیر اضافه می‌کند</string>
+    <string name="first_intermediate_dest_description">اولین توقفگاه را به مسیر اضافه می‌کند</string>
+    <string name="subsequent_dest_description">مقصد کنونی جلوتر می‌آید و مقصد جدیدی ایجاد می‌شود</string>
+    </resources>
