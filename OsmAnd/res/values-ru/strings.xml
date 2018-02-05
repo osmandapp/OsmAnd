@@ -1123,7 +1123,7 @@
     <string name="avoid_ferries">Избегать паромов</string>
     <string name="avoid_in_routing_title">Избегать при прокладке маршрута…</string>
     <string name="avoid_in_routing_descr">Избегать платных и просёлочных дорог, паромов.</string>
-    <string name="show_warnings_descr">Настройка оповещений (ограничения скорости, вынужденные остановки, искусственные неровности), камеры скорости, информацию о полосах.</string>
+    <string name="show_warnings_descr">Настройка оповещений (ограничения скорости, вынужденные остановки, искусственные неровности, тоннели), камеры скорости, информацию о полосах.</string>
     <string name="map_widget_fluorescent">Флуоресцентные маршруты</string>
     <string name="show_warnings_title">Показывать сигналы…</string>
     <string name="map_widget_show_ruler">Линейка</string>
@@ -2834,4 +2834,20 @@
     <string name="will_open_tomorrow_at">Откроется завтра в</string>
     <string name="copy_location_name">Копировать название точки/POI</string>
     <string name="toast_empty_name_error">Место не имеет названия</string>
+<string name="shared_string_current">Текущий</string>
+    <string name="last_intermediate_dest_description">Добавляет последнюю остановку на маршруте</string>
+    <string name="first_intermediate_dest_description">Добавляет первую остановку на маршруте</string>
+    <string name="subsequent_dest_description">Перемещение пункта назначения и создание назначения</string>
+    <string name="show_closed_notes">Показать закрытые заметки</string>
+    <string name="switch_osm_notes_visibility_desc">Показать/скрыть заметки OSM на карте.</string>
+    <string name="gpx_file_desc">GPX - подходит для экспорта в JOSM и другие OSM редакторы.</string>
+    <string name="osc_file_desc">OSC - подходит для экспорта в OpenStreetMap.</string>
+    <string name="gpx_file">GPX файл</string>
+    <string name="osc_file">OSC файл</string>
+    <string name="choose_file_type">Выберите тип файла</string>
+    <string name="osm_edits_export_desc">Выберите тип экспорта: заметки OSM, POI или оба.</string>
+    <string name="all_data">Все данные</string>
+    <string name="osm_notes">Заметки OSM</string>
+    <string name="tunnel_warning">"Впереди тоннель "</string>
+    <string name="show_tunnels">Тоннели</string>
 </resources>
