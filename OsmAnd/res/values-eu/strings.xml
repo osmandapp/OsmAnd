@@ -1266,9 +1266,9 @@ Biltegiratzean {1} MB erabiliko dira.
 	<string name="interrupt_music_descr">Ahots bidezko iragarkiek musika pausatzen dute, ez bolumena jaitsi besterik gabe.</string>
 	<string name="interrupt_music">Eten musika</string>
 	<string name="index_item_world_altitude_correction">Munduko garaiera zuzenketa</string>
-	<string name="rendering_attr_alpineHiking_name">SAC Alpetar ibilbide ikuspegia (Suitzako klub alpinoa)</string>
+	<string name="rendering_attr_alpineHiking_name">SAC Alpetar bidezidor kirol eskala (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Marraztu bideak SAC eskalaren arabera.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Mendi-ibilaldi sinboloen gain-azala</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Bidezidor kirol sinboloen gain-azala</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Marraztu bideak OSMC aztarnen arabera.</string>
     
 	
@@ -1714,7 +1714,7 @@ Lorratza %2$s</string>
     <string name="shared_string_trip_recording">Bidaiaren grabaketa</string>
     <string name="record_plugin_name">Bidaiaren grabaketa</string>
 	<string name="planning_trip_item">Planifikatu bidaia</string>
-    <string name="app_mode_hiking">Mendi-ibilaldia</string>
+    <string name="app_mode_hiking">Bidezidor kirola</string>
     <string name="index_item_nation_addresses">nazio mailako helbideak</string>
     <string name="rendering_attr_horseRoutes_name">Zaldi ibilbideak</string>
     <string name="simulate_your_location_descr">Simulatu kalkulatutako ibilbidea edo grabatutako GPX lorratza erabiliz.</string>
@@ -1943,7 +1943,7 @@ Biltegiratzean {3} MB behar dira une batez, {1} MB behin betiko.
     <string name="lang_ast">Asturiera</string>
     <string name="disable_recording_once_app_killed">Eragotzi bigarren planoko egunkaria</string>
     <string name="disable_recording_once_app_killed_descrp">GPX erregistroa geldiaraziko du aplikazioa hiltzean (azken aplikazioak pantailaren bidez). (OsmAnd bigarren planoan dabilela adierazten duen ikonoa Android jakinarazpen barratik desagertuko da)</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">OSMC mendi-ibilbide sinboloen araberako koloreztatzea</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC bidezidor kirol sinboloen araberako koloreztatzea</string>
     <string name="application_dir_change_warning3">OsmAnd aplikazioak bere datu fitxategiak xede berrira kopiatzea nahi duzu ere?</string>
     <string name="storage_directory_multiuser">Erabiltzaile anitzeko biltegiratzea</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM kartografia laguntzailea</string>
@@ -2731,7 +2731,7 @@ Area honi dagokio: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Arrosa gardena</string>
-    <string name="osmand_extended_description_part6">Oinez, mendian, hirian • Makak oinezko eta mendizaleentzako ibilbideak erakutsiko dizkizu • Wikipediak asko kontatu ahal dizu hiri bat bisitatzean zuk nahiago duzun hizkuntzan • Garraio publikoaren geltokiak (autobusa, tranbia, trena), lineen izenak barne, hirian ibiltzeko laguntza • GPS nabigazioak oinezkoen moduan ibilbidea oinezkoentzako bideak barne-hartuz sortuko du • GPX ibilbide bat igo eta jarraitu dezakezu edo zurea grabatu eta partekatu</string>
+    <string name="osmand_extended_description_part6">Oinez, mendian, hirian • Mapak oinezko eta mendizaleentzako ibilbideak erakutsiko dizkizu • Wikipediak asko kontatu ahal dizu hiri bat bisitatzean zuk nahiago duzun hizkuntzan • Garraio publikoaren geltokiak (autobusa, tranbia, trena), lineen izenak barne, hirian ibiltzeko laguntza • GPS nabigazioak oinezkoen moduan ibilbidea oinezkoentzako bideak barne-hartuz sortuko du • GPX ibilbide bat igo eta jarraitu dezakezu edo zurea grabatu eta partekatu</string>
     <string name="osmand_extended_description_part8">OsmAnd librea da eta garapen aktiboan dago. Edonork egin ditzake ekarpenak, arazoen berri emanez, itzulpenak hobetuz, edo ezaugarri berriak programatuz. Proiektua hobekuntza jarraituan murgilduta dago garatzaile eta erabiltzaileen arteko elkarrekintza hau dela eta. Proiektuak diru-laguntzak eta dohaintzak behar ditu ere kodeketa lana ordaindu eta ezaugarri berriak probatzeko. Gutxi gora-behrako mapen kalitatea: • Mendebaldeko Europa: **** • Ekialdeko Europa: *** • Errusia: *** • Ipar Amerika: *** • Hego Aerika: ** • Asia: ** • Japonia eta Korea: *** • Ekialde hurbila: ** • Afrika: ** • Antartika: * Munduko herrialde gehienetako maopak deskargatu daitezke! Eskuratu nabigatzaile fidagarri bat zuretzat - Frantzian, Alemanian, Mexikon, Erresuma Batuan, Espainian, Herbehereetan, Estatu Batuetan, Errusian, Brasilen, edonon.</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) mapa eta nabigazio aplikazio bat da, mundu osoko, kalitate oneko OpenStreetMaps (OSM) mapak erabiltzen baimentzen dizkizu. Gozatu ahots bidezko ibilbide jarraipena interesezko puntuak (POI), sortu eta kudeatu GPX lorratzak, erabili sestra-kurbak eta garaiera-informazioa, aukeratu kotxe, bizikleta eta oinezko moduen artean, editatu OSM eta askoz gehiago. OsmAnd+ ordainpeko bertsioa da. Erosten baduzu proiektua babesten duzu eta ezaugarri berrien garapena, eta azken eguneraketak izango dituzu. Ezaugarri nagusietako batzuk:</string>
     <string name="osmand_plus_extended_description_part2">Nabigazioa • Internetera konektatua zein deskonektatuta dabil (ibiltaritza gasturik ez atzerriak zaudenean) • Bide-gurutzetik bide-gurutzera ahots gidaritza (grabatutako eta sintetizatutako ahotsekin) • Aukeran erraia gidaritza, kale izenaren bistaratzea, eta iritsiera orduaren estimazioa • Ibilbidean tarteko puntuak onartzen ditu • Ibilbidea uzten baduzu automatikoki birkalkulatzen du • Bilatu tokiak motaren arabera (esaterako, jatetxeak, hotelak, gasolindegiak, mudeoak), edo kokaleku geografikoaren arabera</string>
@@ -2942,27 +2942,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="touring_view_renderer">Bidaiatze ikuspegia (kontrastea eta xehetasunak)</string>
     <string name="nautical_renderer">Nautikoa</string>
 <string name="rendering_attr_hidePOILabels_name">POI etiketak</string>
-    <string name="release_2_9">\\022 Stop seinaleen detekzioak kontuan hartzen du martxaren noranzkoa
-\n
-\n • GPX lorratzen zentzuzko igoera/jaitsiera balioak ematen dituen algoritmo berria
-\n
-\n • Terrenoa (igoera) kontuan duen mendiko ibilbideen denbora (Naismith araua)
-\n
-\n • Laster-menua eguneratuta: erakutsi POI-a irekitzean edo ixtean 
-\n 
-\n • Garraio menua: ibilbide eskuragarri guztiak orain goian daude 
-\n 
-\n • Wikipedia: jatorrizko artikulua irekitzeko botoia gehituta, artikuluen itxura eguneratua 
-\n 
-\n • Ibilbidea: hasiera eta amaiera puntuak behin sakatuta txandakatzeko aukera gehituta 
-\n 
-\n • Oharrak: mota eta dataren arabera ordenatzeko gaitasuna gehituta 
-\n 
-\n • OSM edizioak: erakutsi POI-aren kategoriaren ikono eta izena, bistaratu burututako ekintzak 
-\n 
-\n • Koordenatuen sarrerarako pantaila berria markatzaileek sorrera azkarrerako 
-\n 
-\n</string>
+    <string name="release_2_9">"
+\n"</string>
     <string name="will_open_tomorrow_at">Bihar irekiko du ordu honetan:</string>
     <string name="copy_location_name">Kopiatu puntuaren / POI-aren izena</string>
     <string name="toast_empty_name_error">Kokalekuak ez du izenik</string>
