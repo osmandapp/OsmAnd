@@ -2331,7 +2331,7 @@
 	<string name="poi_aerialway_bicycle">Transport de vélos</string>
 	<string name="poi_aerialway_heating">Chauffage</string>
 	<string name="poi_pharmacy_dispensing">Ordonnance</string>
-	<string name="poi_star_rating">Évaluation</string>
+	<string name="poi_star_rating">Évaluation (étoiles)</string>
 	<string name="poi_power_supply">Prise de courant</string>
 	<string name="poi_retail">Zone commerciale</string>
 
