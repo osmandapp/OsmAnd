@@ -1,53 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout android:id="@+id/share_fragment_layout"
-             xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@android:color/transparent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/bg_color"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/main_view"
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="?attr/bottom_menu_view_bg"
-        android:clickable="true"
         android:orientation="vertical">
 
-        <LinearLayout
+        <net.osmand.plus.widgets.TextViewEx
+            android:id="@+id/title_text_view"
             android:layout_width="match_parent"
-            android:layout_height="48dp">
+            android:layout_height="@dimen/bottom_sheet_title_height"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/content_padding"
+            android:paddingRight="@dimen/content_padding"
+            android:text="@string/share_menu_location"
+            android:textAppearance="@style/TextAppearance.ListItemTitle"
+            osmand:typeface="@string/font_roboto_medium"/>
 
-            <TextView
-                android:id="@+id/header_caption"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="16dp"
-                android:layout_weight="1"
-                android:text="@string/share_menu_location"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/default_list_text_size"/>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <ListView
+            android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
-
-            <ListView
-                android:id="@+id/list"
-                android:divider="@null"
-                android:dividerHeight="0dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </ListView>
-
-        </LinearLayout>
+            android:divider="@null"
+            android:dividerHeight="0dp"/>
 
     </LinearLayout>
 
-</FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/dashboard_divider"/>
+
+    <FrameLayout
+        android:id="@+id/cancel_row"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_sheet_cancel_button_height"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/cancel_row_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/shared_string_cancel"
+            android:textAllCaps="true"
+            android:textColor="?attr/color_dialog_buttons"
+            android:textSize="@dimen/default_desc_text_size"
+            android:textStyle="bold"/>
+    </FrameLayout>
+
+</LinearLayout>
