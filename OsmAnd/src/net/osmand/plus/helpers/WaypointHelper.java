@@ -208,7 +208,7 @@ public class WaypointHelper {
 			AlarmInfo inf = new AlarmInfo(AlarmInfoType.TUNNEL, 0);
 			int d = route.getDistanceToPoint(segments.get(0).getStartPointIndex());
 			float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
-			inf.setFloatValue(calculateDistance(segments, mc));
+			inf.setFloatValue(calculateDistance(segments));
 			int vl = inf.updateDistanceAndGetPriority(time, d);
 			if (vl < value && (showCameras || inf.getType() != AlarmInfoType.SPEED_CAMERA)) {
 				mostImportant = inf;
@@ -217,16 +217,12 @@ public class WaypointHelper {
 		return mostImportant;
 	}
 
-	private float calculateDistance(List<RouteSegmentResult> segments, MetricsConstants mc) {
+	private float calculateDistance(List<RouteSegmentResult> segments) {
 		float sum = 0f;
 		for (RouteSegmentResult r : segments) {
 			sum += r.getDistance();
 		}
-		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
-			return sum / 1000f;
-		} else {
-			return sum * 0.00062137f;
-		}
+		return sum;
 	}
 
 	public void enableWaypointType(int type, boolean enable) {
