@@ -3011,4 +3011,5 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="osm_notes">OSM-natatki</string>
     <string name="tunnel_warning">Napieradzie tuneĺ</string>
     <string name="show_tunnels">Tuneli</string>
-</resources>
+<string name="make_as_start_point">Zrabić pačatkovaj kropkaj</string>
+    </resources>
