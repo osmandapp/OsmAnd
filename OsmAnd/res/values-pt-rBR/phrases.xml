@@ -46,7 +46,7 @@
 	<string name="poi_mall">Centro comercial</string>
 	<string name="poi_butcher">Açougue</string>
 	<string name="poi_deli">Delicatessen</string>
-	<string name="poi_farm">Loja de produtos agrícolas</string>
+	<string name="poi_farm">Quitanda de produção local</string>
 	<string name="poi_greengrocer">Verdureira</string>
 	<string name="poi_seafood">Loja de frutos do mar</string>
 	<string name="poi_confectionery">Doçaria</string>
@@ -165,7 +165,7 @@
 	<string name="poi_lift_gate">Cancela elevatória</string>
 	<string name="poi_toll_booth">Cabine de pedágio</string>
 	<string name="poi_border_control">Alfândega</string>
-	<string name="poi_traffic_calming_bump">Lombada</string>
+	<string name="poi_traffic_calming_bump">Lombada (curta)</string>
 	<string name="poi_traffic_calming_hump">Lombada rápida</string>
 	<string name="poi_traffic_calming_cushion">Lomanda cushion</string>
 	<string name="poi_traffic_calming_chicane">Chicana</string>
@@ -3618,4 +3618,20 @@
 	<string name="poi_surface_decoturf">DecoTurf</string>
 	<string name="poi_surface_tartan">Tartan</string>
 	<string name="poi_surface_artificial_turf">Grama sintética</string>
+	<string name="poi_climbing_routes">Rotas de escalada</string>
+
+	<string name="poi_circumference">Circunferência</string>
+	<string name="poi_diameter_crown">Diâmetro da copa</string>
+
+	<string name="poi_meadow_agricultural">Tipo: agrícola</string>
+	<string name="poi_meadow_perpetual">Tipo: perpétuo</string>
+	<string name="poi_meadow_transitional">Tipo: transição</string>
+	<string name="poi_meadow_pasture">Tipo: pastagem</string>
+
+	<string name="poi_frozen_food">Alimentos congelados</string>
+
+	<string name="poi_agrarian">Loja de produtos agrícolas</string>
+
+	<string name="poi_shop_fireplace">Loja de lareiras</string>
+
 	</resources>
