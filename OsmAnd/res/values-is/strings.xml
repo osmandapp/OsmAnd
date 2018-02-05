@@ -2762,4 +2762,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \n
 \n og fleira til…</string>
     <string name="dashboard_or_drawer_description">Nú er nýtt val um að stýra forritinu með sveigjanlegu stjórnborði eða með fastri valmynd. Þú getur alltaf breytt þessu vali í stillingum stjórnborðsins.</string>
+    <string name="make_as_start_point">Gera að upphafspunkti</string>
     </resources>
