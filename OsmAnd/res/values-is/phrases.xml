@@ -1914,7 +1914,7 @@
 <string name="poi_denomination_coptic_orthodox">Koptísk rétttrúnaðarkirkja</string>
 	<string name="poi_club_tourism">Ferðaklúbbur</string>
 	<string name="poi_height_restrictor">Hæðartakmörkun</string>
-	<string name="poi_highway_crossing">Þverun aðalgötu</string>
+	<string name="poi_highway_crossing">Gangbraut</string>
 
 	<string name="poi_railway_level_crossing">Þverun brautarteina</string>
 	<string name="poi_outdoor_seating_patio">Sæti utandyra: stétt</string>
@@ -3439,4 +3439,27 @@
 
 
 <string name="poi_health_specialty_biochemistry_yes">Lífefnafræði</string>
-	</resources>
+	<string name="poi_firepit">Eldgryfja</string>
+	<string name="poi_counselling_type_addiction_yes">Ráðgjafarþjónusta (fíkn): já</string>
+	<string name="poi_counselling_type_addiction_no">Ráðgjafarþjónusta (fíkn): nei</string>
+	<string name="poi_counselling_type_couple_yes">Ráðgjafarþjónusta (pör): já</string>
+	<string name="poi_counselling_type_couple_no">Ráðgjafarþjónusta (pör): nei</string>
+	<string name="poi_counselling_type_drugs_yes">Ráðgjafarþjónusta (lyf): já</string>
+	<string name="poi_counselling_type_drugs_no">Ráðgjafarþjónusta (lyf): nei</string>
+	<string name="poi_counselling_type_education_yes">Ráðgjafarþjónusta (menntun): já</string>
+	<string name="poi_counselling_type_education_no">Ráðgjafarþjónusta (menntun): nei</string>
+	<string name="poi_counselling_type_family_yes">Ráðgjafarþjónusta (fjölskyldu): já</string>
+	<string name="poi_counselling_type_family_no">Ráðgjafarþjónusta (fjölskyldu): nei</string>
+	<string name="poi_toilets_disposal_flush">Frágangur salerna: vatnssalerni</string>
+	<string name="poi_toilets_disposal_pitlatrine">Frágangur salerna: holukamar</string>
+	<string name="poi_toilets_disposal_chemical">Frágangur salerna: þurrsalerni</string>
+	<string name="poi_toilets_disposal_bucket">Frágangur salerna: fötukamar</string>
+
+	<string name="poi_shop_fireplace">Verslun með eldstæði</string>
+
+	<string name="poi_shop_boat">Bátaverslun</string>
+
+	<string name="poi_cannabis">Verslun með kannabis</string>
+
+
+</resources>
