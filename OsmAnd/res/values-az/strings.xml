@@ -333,7 +333,7 @@
     <string name="sort_by_distance">Məsafəyə görə sırala</string>
     <string name="sort_by_name">Ada görə sırala</string>
     <string name="loading_smth">%1$s yüklənir…</string>
-    <string name="map_widget_plain_time">Hazırki vaxt</string>
+    <string name="map_widget_plain_time">Hazırkı vaxt</string>
     <string name="selected_gpx_info_show">"
 \n
 \nXəritədə görmək üçün uzun basın"</string>
@@ -792,7 +792,7 @@
     <string name="quick_action_showhide_osmbugs_title">OSM qeydlərini göstər/gizlət</string>
     <string name="quick_action_osmbugs_show">OSM qeydlərini göstər</string>
     <string name="quick_action_osmbugs_hide">OSM qeydlərini gizlət</string>
-    <string name="quick_action_showhide_osmbugs_descr">Fəaliyyət düyməsinə toxunulduğunda, xəritədə OSM qeydləri göstərilir və ya gizlədilir.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Fəaliyyət düyməsinə toxunulduqda, xəritədə OSM qeydləri göstərilir və ya gizlədilir.</string>
     <string name="sorted_by_distance">Məsafəyə görə sırala</string>
     <string name="search_favorites">Favoritləri axtar</string>
     <string name="srtm_menu_download_descr">Xəritədə kontur xətlərini göstərmək üçün bu bölgənin kontur xətli xəritəsini endirməlisiniz.</string>
@@ -861,7 +861,7 @@
     <string name="city_type_district">Rayon</string>
     <string name="city_type_neighbourhood">Ətrafında</string>
     <string name="coords_format_descr">Coğrafi koordinatlar üçün format.</string>
-    <string name="current_track">Hazırki iz</string>
+    <string name="current_track">Hazırkı iz</string>
     <string name="change_markers_position">İşarənin mövqeyini dəyiş</string>
     <string name="move_marker_bottom_sheet_title">İşarənin mövqeyini dəyişmək üçün xəritəni daşıyın</string>
     <string name="access_no_destination">Təyinat nöqtəsi seçilməyib</string>
@@ -904,7 +904,7 @@
     <string name="osmo_use_server_name">Qeydiyyatlı ad</string>
     <string name="osmo_edit_device">İstifadəçi xüsusiyyətlərini dəyiş</string>
     <string name="osmo_edit_color">Ekran rəngi</string>
-    <string name="osmo_share_current_session">Hazırki sessiyanı brauzerdə paylaş</string>
+    <string name="osmo_share_current_session">Hazırkı sessiyanı brauzerdə paylaş</string>
     <string name="osmo_session_not_available">Sessiya mövcud deyil, “Məkanı göndər”in açıq olub-olmadığını yoxlayın.</string>
     <string name="osmo_share_session">Sessiyanı paylaş</string>
     <string name="osmo_track_interval_descr">Mövqe məlumatlarını göndərmək üçün vaxt intervalı seçin.</string>
@@ -999,7 +999,7 @@
     <string name="recording_context_menu_play">Oynat</string>
     <string name="map_widget_av_notes">Səs/video qeydləri</string>
     <string name="map_widget_distancemeasurement">Məsafə ölçülməsi</string>
-    <string name="map_widget_audionotes">Səs qeydləri</string>
+    <string name="map_widget_audionotes">Səsli qeydlər</string>
     <string name="index_srtm_parts">hissələr</string>
     <string name="index_srtm_ele">Kontur xətləri</string>
     <string name="download_roads_only_item">Yalnız yollar</string>
@@ -1132,7 +1132,7 @@
     <string name="show_from_zoom_level">Miqyas səviyyəsində göstər</string>
     <string name="display_zoom_level">Görüntünün miqyası: %1$s</string>
     <string name="quick_action_auto_zoom">Avtomatik miqyası yandır/söndür</string>
-    <string name="quick_action_auto_zoom_desc">Fəaliyyət düyməsinə toxunulduğunda sürətinizə görə avtomatik xəritə miqyası yandırılır/söndürülür.</string>
+    <string name="quick_action_auto_zoom_desc">Fəaliyyət düyməsinə toxunulduqda sürətinizə görə avtomatik xəritə miqyası yandırılır/söndürülür.</string>
     <string name="quick_action_auto_zoom_on">Avtomatik miqyası yandır</string>
     <string name="quick_action_auto_zoom_off">Avtomatik miqyası söndür</string>
     <string name="auto_zoom_none">Avto-miqyas yoxdur</string>
@@ -1367,14 +1367,14 @@
     <string name="storage_place_description">OsmAnd-ın məlumat saxlama yeri (xəritələr, izlər və s.): %1$s.</string>
     <string name="shared_string_save_as_gpx">Yeni GPX izi olaraq saxla</string>
     <string name="shared_string_my_tracks">İzlərim</string>
-    <string name="shared_string_currently_recording_track">Hazırki qeyd edilən iz</string>
+    <string name="shared_string_currently_recording_track">Hazırkı qeyd edilən iz</string>
     <string name="track_segments">İz seqmentləri</string>
     <string name="track_points">İz nöqtələri</string>
     <string name="navigation_over_track">İz boyu naviqasiya başladılsın?</string>
     <string name="save_track_to_gpx_globally">İzi GPX faylına qeyd et</string>
     <string name="save_track_to_gpx_globally_headline">Tələbə görə iz qeydiyyatı</string>
-    <string name="save_current_track_descr">Hazırki izi indi SD kartda saxla.</string>
-    <string name="save_current_track">Hazırki GPX izini saxla</string>
+    <string name="save_current_track_descr">Hazırkı izi indi SD kartda saxla.</string>
+    <string name="save_current_track">Hazırkı GPX izini saxla</string>
     <string name="save_track_to_gpx">Naviqasiya zamanı izi avtomatik qeyd et</string>
     <string name="save_track_to_gpx_descrp">Naviqasiya zamanı iz GPX formatında izlər qovluğunda avtomatik saxlanacaq.</string>
     <string name="none_selected_gpx">GPX faylı seçilməyib. Birini seçmək üçün mövcud izə basıb saxlayın.</string>
@@ -1396,7 +1396,7 @@
     <string name="enable_plugin_monitoring_services">Mövqe qeydiyyatı xidmətini (GPX qeydiyyatı, onlayn izləmə) istifadə etmək üçün Səyahət qeydetmə qoşmasını aktivləşdirin</string>
     <string name="gpxup_trackable">İzlənə bilən</string>
     <string name="gpx_monitoring_disabled_warn">GPX widget və ya “Səyahət qeydetmə” parametri ilə izləri qeyd et.</string>
-    <string name="show_current_gpx_title">Hazırki izi göstər</string>
+    <string name="show_current_gpx_title">Hazırkı izi göstər</string>
     <string name="add_waypoint_dialog_title">Qeyd edilən GPX izinə yol nöqtəsi əlavə et</string>
     <string name="gpx_files_not_found">İzlər qovluğunda GPX faylları tapılmadı</string>
     <string name="layer_gpx_layer">GPX iz…</string>
@@ -1504,7 +1504,7 @@
     <string name="lang_ms">Malayca</string>
     <string name="lang_gl">Qalisiyaca</string>
     <string name="lang_ast">Asturiyaca</string>
-    <string name="current_route">Hazırki marşrut</string>
+    <string name="current_route">Hazırkı marşrut</string>
     <string name="configure_map">Xəritəni tənzimlə</string>
     <string name="layer_map_appearance">Ekranı tənzimlə</string>
     <string name="map_widget_config">Ekranı tənzimlə</string>
@@ -1529,7 +1529,7 @@
     <string name="local_indexes_cat_backup">Qeyri-aktiv edilmiş</string>
     <string name="ttsvoice">TTS səsi</string>
     <string name="internet_connection_required_for_online_route">Onlayn naviqasiya xidməti seçildi, amma internet bağlantısı yoxdur.</string>
-    <string name="gpx_option_destination_point">Hazırki təyinat nöqtəsini istifadə et</string>
+    <string name="gpx_option_destination_point">Hazırkı təyinat nöqtəsini istifadə et</string>
     <string name="home">Alət paneli</string>
     <string name="dahboard_options_dialog_title">Alət panelini tənzimlə</string>
     <string name="use_dashboard_btn">Alət panelini istifadə et</string>
@@ -1691,7 +1691,7 @@
     <string name="layer_yandex_traffic">Yandex trafik</string>
     <string name="layer_route">Marşrut</string>
     <string name="layer_osm_bugs">OSM qeydlər (onlayn)</string>
-    <string name="search_near_map">Hazırki xəritə mərkəzinin yaxınında axtar</string>
+    <string name="search_near_map">Hazırkı xəritə mərkəzinin yaxınında axtar</string>
     <string name="transport_Routes">Marşrutlar</string>
     <string name="transport_Stop">Dayanacaq</string>
     <string name="osmand_parking_lim_text">Vaxt-limitli</string>
@@ -1855,7 +1855,7 @@
     <string name="moving_time">Hərəkət vaxtı</string>
     <string name="max_min">Maks/Min</string>
     <string name="min_max">Min/Maks</string>
-    <string name="local_index_description">Ətraflı məlumatı görmək üçün hər hansı mövcud elementə toxunun, qeyri-aktiv etmək və ya silmək üçün uzun basın. Cihazda hazırki məlumatlar (%1$s boş):</string>
+    <string name="local_index_description">Ətraflı məlumatı görmək üçün hər hansı mövcud elementə toxunun, qeyri-aktiv etmək və ya silmək üçün uzun basın. Cihazda hazırkı məlumatlar (%1$s boş):</string>
     <string name="support_new_features_descr">Proqramda tətbiq edilən yeni xüsusiyyətləri görmək üçün ianə edin.</string>
     <string name="native_library_not_supported">Yerli kitabxana bu cihazda dəstəklənmir.</string>
     <string name="init_native_library">Yerli kitabxana başladılır…</string>
@@ -1906,4 +1906,16 @@
     <string name="copy_location_name">Nöqtə/POI adını kopyala</string>
     <string name="toast_empty_name_error">Məkanın adı yoxdur</string>
     <string name="show_tunnels">Tunellər</string>
-</resources>
+<string name="make_as_start_point">Başlanğıc nöqtəsi et</string>
+    <string name="shared_string_current">Hazırkı</string>
+    <string name="add_location_as_first_point_descr">Mükəmməl marşrut planlaşdırmaq üçün mövqeyinizi ilk nöqtə olaraq əlavə edin.</string>
+    <string name="quick_action_add_marker_descr">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində xəritə işarəsi əlavə ediləcək.</string>
+    <string name="quick_action_add_gpx_descr">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində GPX yol nöqtəsi əlavə ediləcək.</string>
+    <string name="quick_action_take_audio_note_descr">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində səsli qeyd əlavə ediləcək.</string>
+    <string name="quick_action_take_video_note_descr">Fəaliyyət düyməsinə toxunulduqda ekran mərkəzində video qeyd əlavə ediləcək.</string>
+    <string name="quick_action_take_photo_note_descr">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində şəkilli qeyd əlavə ediləcək.</string>
+    <string name="quick_action_add_osm_bug_descr">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində OSM qeydi əlavə ediləcək.</string>
+    <string name="quick_action_add_poi_descr">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində POI əlavə ediləcək.</string>
+    <string name="quick_action_showhide_favorites_descr">Fəaliyyət düyməsinə toxunulduqda xəritədə favorit nöqtələr göstəriləcək və ya gizlədiləcək.</string>
+    <string name="quick_action_showhide_poi_descr">Fəaliyyət düyməsinə toxunulduqda xəritədə POI-lər göstəriləcək və ya gizlədiləcək.</string>
+    </resources>
