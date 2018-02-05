@@ -20,6 +20,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 
@@ -43,10 +44,10 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				R.layout.fragment_add_waypoint_bottom_sheet_dialog, container);
 
 		((TextView) mainView.findViewById(R.id.current_dest_text_view))
-				.setText(getCurrentDestinationName(targetPointsHelper.getPointToNavigate()));
+				.setText(getCurrentPointName(targetPointsHelper.getPointToNavigate(), false));
+		((TextView) mainView.findViewById(R.id.current_start_text_view))
+				.setText(getCurrentPointName(targetPointsHelper.getPointToStart(), true));
 
-		((ImageView) mainView.findViewById(R.id.current_dest_icon))
-				.setImageDrawable(getBackgroundIcon(R.drawable.ic_action_point_destination));
 		((ImageView) mainView.findViewById(R.id.subsequent_dest_icon)).setImageDrawable(getSubsequentDestIcon());
 		((ImageView) mainView.findViewById(R.id.first_interm_dest_icon)).setImageDrawable(getFirstIntermDestIcon());
 		((ImageView) mainView.findViewById(R.id.last_interm_dest_icon)).setImageDrawable(getLastIntermDistIcon());
@@ -57,6 +58,13 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				int id = v.getId();
 				if (id == R.id.replace_dest_row) {
 					targetPointsHelper.navigateToPoint(latLon, true, -1, name);
+				} else if (id == R.id.replace_start_row) {
+					TargetPoint start = targetPointsHelper.getPointToStart();
+					if (start != null) {
+						targetPointsHelper.navigateToPoint(new LatLon(start.getLatitude(), start.getLongitude()),
+								false, 0, start.getOriginalPointDescription());
+					}
+					targetPointsHelper.setStartPoint(latLon, true, name);
 				} else if (id == R.id.subsequent_dest_row) {
 					targetPointsHelper.navigateToPoint(latLon, true,
 							targetPointsHelper.getIntermediatePoints().size() + 1, name);
@@ -70,6 +78,7 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 		};
 
 		mainView.findViewById(R.id.replace_dest_row).setOnClickListener(onClickListener);
+		mainView.findViewById(R.id.replace_start_row).setOnClickListener(onClickListener);
 		mainView.findViewById(R.id.subsequent_dest_row).setOnClickListener(onClickListener);
 		mainView.findViewById(R.id.first_intermediate_dest_row).setOnClickListener(onClickListener);
 		mainView.findViewById(R.id.last_intermediate_dest_row).setOnClickListener(onClickListener);
@@ -135,18 +144,20 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				R.drawable.ic_action_route_last_intermediate_point);
 	}
 
-	private String getCurrentDestinationName(@Nullable TargetPointsHelper.TargetPoint finish) {
+	private String getCurrentPointName(@Nullable TargetPoint point, boolean start) {
 		Context ctx = getContext();
 		StringBuilder builder = new StringBuilder(ctx.getString(R.string.shared_string_current));
 		builder.append(": ");
-		if (finish != null) {
-			if (finish.getOnlyName().length() > 0) {
-				builder.append(finish.getOnlyName());
+		if (point != null) {
+			if (point.getOnlyName().length() > 0) {
+				builder.append(point.getOnlyName());
 			} else {
 				builder.append(ctx.getString(R.string.route_descr_map_location));
 				builder.append(" ");
-				builder.append(ctx.getString(R.string.route_descr_lat_lon, finish.getLatitude(), finish.getLongitude()));
+				builder.append(ctx.getString(R.string.route_descr_lat_lon, point.getLatitude(), point.getLongitude()));
 			}
+		} else if (start) {
+			builder.append(ctx.getString(R.string.shared_string_my_location));
 		}
 		return builder.toString();
 	}
