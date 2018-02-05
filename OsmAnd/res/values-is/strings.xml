@@ -2744,4 +2744,22 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \n
 \nLeiðsagnarþjónustu hefur verið skipt tímabundið yfir á hina netlægu CloudMade.</string>
     <string name="poi_error_poi_not_found">Hnútur fannst ekki, eða að aðstaðan samanstendur af mörgum hnútum, sem er ekki ennþá stutt.</string>
+    <string name="release_2_2">\\022 Nýtt samhengisnæmt notandaviðmót til að ýta á staðsetningar á korti og á öðrum skjám
+\n
+\n • Kortaskjár er nú ræstur beint nema ef \'Birta stjórnborð í ræsingu\' sé valið
+\n
+\n • Stilltu hvaða kort eru birt í stjórnborðinu og hvernig
+\n
+\n • Slepptu stjórnborðinu ef þér líkar betur við valmyndir
+\n
+\n • Til að sækja kort er hægt að velja svæði beint með því að ýta á heimskortið
+\n
+\n • Leit að merkisstöðum (POI) styður núna sérhæfðari fyrirspurnir
+\n
+\n • Bættir eiginleikar við breytingar á merkisstöðum og OSM
+\n
+\n • Endurhönnun á uppbyggingu niðurhalsgagna landakorta og viðmóts
+\n
+\n og fleira til…</string>
+    <string name="dashboard_or_drawer_description">Nú er nýtt val um að stýra forritinu með sveigjanlegu stjórnborði eða með fastri valmynd. Þú getur alltaf breytt þessu vali í stillingum stjórnborðsins.</string>
     </resources>
