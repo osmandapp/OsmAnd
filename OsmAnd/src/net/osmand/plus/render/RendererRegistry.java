@@ -1,5 +1,18 @@
 package net.osmand.plus.render;
 
+import net.osmand.IProgress;
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,20 +24,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 
-import net.osmand.IProgress;
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.render.RenderingRuleProperty;
-import net.osmand.render.RenderingRulesStorage;
-import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
 
 public class RendererRegistry {
 
@@ -32,12 +31,11 @@ public class RendererRegistry {
 	
 	public final static String DEFAULT_RENDER = "OsmAnd";  //$NON-NLS-1$
 	public final static String DEFAULT_RENDER_FILE_PATH = "default.render.xml";
+	public final static String TOURING_VIEW = "Touring view (contrast and details)";  //$NON-NLS-1$
+	public final static String WINTER_SKI_RENDER = "Winter and ski";  //$NON-NLS-1$
+	public final static String NAUTICAL_RENDER = "Nautical";  //$NON-NLS-1$
 	public final static String TOPO_RENDER = "Topo";  //$NON-NLS-1$
 	public final static String MAPNIK_RENDER = "Mapnik";  //$NON-NLS-1$
-	// Translatable renders
-	public static String TOURING_VIEW;
-	public static String WINTER_SKI_RENDER;
-	public static String NAUTICAL_RENDER;
 
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;
@@ -57,9 +55,6 @@ public class RendererRegistry {
 	
 	public RendererRegistry(OsmandApplication app){
 		this.app = app;
-		WINTER_SKI_RENDER = app.getResources().getString(R.string.winter_and_ski_renderer);
-		TOURING_VIEW = app.getResources().getString(R.string.touring_view_renderer);
-		NAUTICAL_RENDER = app.getResources().getString(R.string.nautical_renderer);
 		internalRenderers.put(DEFAULT_RENDER, DEFAULT_RENDER_FILE_PATH);
 		internalRenderers.put(TOURING_VIEW, "Touring-view_(more-contrast-and-details)" +".render.xml");
 		internalRenderers.put(TOPO_RENDER, "topo" + ".render.xml");

@@ -42,15 +42,12 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
-import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.RouteLayer;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
@@ -517,7 +514,7 @@ public class ConfigureMapMenu {
 							if (item.equals(selectedName)) {
 								selected = i;
 							}
-							visibleNamesList.add(item);
+							visibleNamesList.add(item.replace('_', ' ').replace('-', ' '));
 							i++;
 						}
 
