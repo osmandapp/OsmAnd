@@ -42,15 +42,12 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
-import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.RouteLayer;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
@@ -62,7 +59,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -503,29 +499,33 @@ public class ConfigureMapMenu {
 						AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 						bld.setTitle(R.string.renderers);
 						final OsmandApplication app = activity.getMyApplication();
-						Collection<String> rendererNames = app.getRendererRegistry().getRendererNames();
-						final String[] items = rendererNames.toArray(new String[rendererNames.size()]);
+						final ArrayList<String> items = new ArrayList<>(app.getRendererRegistry().getRendererNames());
 						boolean nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
 						final List<String> visibleNamesList = new ArrayList<>();
 						int selected = -1;
 						final String selectedName = app.getRendererRegistry().getCurrentSelectedRenderer().getName();
 						int i = 0;
-						for (String item : items) {
+						Iterator<String> iterator = items.iterator();
+						while (iterator.hasNext()) {
+							String item = iterator.next();
 							if (nauticalPluginDisabled && item.equals(RendererRegistry.NAUTICAL_RENDER)) {
-								continue;
+								iterator.remove();
+							} else {
+								if (item.equals(selectedName)) {
+									selected = i;
+								}
+								String translation = RendererRegistry.getTranslatedRendererName(activity, item);
+								visibleNamesList.add(translation != null ? translation
+										: item.replace('_', ' ').replace('-', ' '));
+								i++;
 							}
-							if (item.equals(selectedName)) {
-								selected = i;
-							}
-							visibleNamesList.add(item);
-							i++;
 						}
 
 						bld.setSingleChoiceItems(visibleNamesList.toArray(new String[visibleNamesList.size()]), selected, new DialogInterface.OnClickListener() {
 
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								String renderer = visibleNamesList.get(which);
+								String renderer = items.get(which);
 								RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
 								if (loaded != null) {
 									OsmandMapTileView view = activity.getMapView();
@@ -1135,7 +1135,8 @@ public class ConfigureMapMenu {
 		if (storage == null) {
 			return "";
 		}
-		return storage.getName();
+		String translation = RendererRegistry.getTranslatedRendererName(activity, storage.getName());
+		return translation == null ? storage.getName() : translation;
 	}
 
 	protected String getDayNightDescr(final MapActivity activity) {

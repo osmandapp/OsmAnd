@@ -20,8 +20,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class MapStyleAction extends SwitchableAction<String> {
@@ -120,17 +120,19 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 				final OsmandApplication app = activity.getMyApplication();
 				final List<String> visibleNamesList = new ArrayList<>();
-				final Collection<String> rendererNames = app.getRendererRegistry().getRendererNames();
-				final String[] items = rendererNames.toArray(new String[rendererNames.size()]);
+				final ArrayList<String> items = new ArrayList<>(app.getRendererRegistry().getRendererNames());
 				final boolean nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
 
-				for (String item : items) {
-
+				Iterator<String> iterator = items.iterator();
+				while (iterator.hasNext()) {
+					String item = iterator.next();
 					if (nauticalPluginDisabled && item.equals(RendererRegistry.NAUTICAL_RENDER)) {
-						continue;
+						iterator.remove();
+					} else {
+						String translation = RendererRegistry.getTranslatedRendererName(activity, item);
+						visibleNamesList.add(translation != null ? translation
+								: item.replace('_', ' ').replace('-', ' '));
 					}
-
-					visibleNamesList.add(item.replace('_', ' ').replace('-', ' '));
 				}
 
 				final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity, R.layout.dialog_text_item);
@@ -140,7 +142,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 					@Override
 					public void onClick(DialogInterface dialogInterface, int i) {
 
-						String renderer = visibleNamesList.get(i);
+						String renderer = items.get(i);
 						RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
 
 						if (loaded != null) {
