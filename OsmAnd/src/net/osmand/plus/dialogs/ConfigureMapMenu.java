@@ -1135,7 +1135,8 @@ public class ConfigureMapMenu {
 		if (storage == null) {
 			return "";
 		}
-		return storage.getName();
+		String translation = RendererRegistry.getTranslatedRendererName(activity, storage.getName());
+		return translation == null ? storage.getName() : translation;
 	}
 
 	protected String getDayNightDescr(final MapActivity activity) {
