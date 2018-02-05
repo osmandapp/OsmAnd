@@ -1688,7 +1688,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void doLayoutMenu() {
-		final int posY = getPosY(getViewY(), false);
+		final int posY = getPosY(getViewY(), false, menu.getCurrentMenuState());
 		setViewY(posY, true, !initLayout || !centered);
 		updateMainViewLayout(posY);
 	}

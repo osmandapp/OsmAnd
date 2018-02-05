@@ -131,32 +131,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		this.builder.setLight(isLight());
 	}
 
-	public void onCreated() {
-		/*
-		toolbarController = new ContextMenuToolbarController(this);
-		toolbarController.setTitle(getNameStr());
-		toolbarController.setOnBackButtonClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (mapContextMenu != null) {
-					mapContextMenu.backToolbarAction(MenuController.this);
-				}
-			}
-		});
-		toolbarController.setOnTitleClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-			}
-		});
-		toolbarController.setOnCloseButtonClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (mapContextMenu != null) {
-					mapContextMenu.close();
-				}
-			}
-		});
-		*/
+	protected void onCreated() {
 	}
 
 	@Override
