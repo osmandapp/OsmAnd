@@ -3060,4 +3060,5 @@
     <string name="osm_notes">OSM-нататкі</string>
     <string name="tunnel_warning">Наперадзе тунэль</string>
     <string name="show_tunnels">Тунэлі</string>
-</resources>
+<string name="make_as_start_point">Зрабіць пачатковай кропкай</string>
+    </resources>
