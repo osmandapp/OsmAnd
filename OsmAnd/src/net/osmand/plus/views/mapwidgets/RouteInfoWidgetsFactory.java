@@ -1274,14 +1274,12 @@ public class RouteInfoWidgetsFactory {
 							locimgId = R.drawable.warnings_pedestrian;
 						}
 					} else if(alarm.getType() == AlarmInfoType.TUNNEL) {
-						DecimalFormat df = new DecimalFormat("#.#");
 						if(settings.DRIVING_REGION.get().americanSigns){
 							locimgId = R.drawable.warnings_tunnel_us;
-							text = df.format(alarm.getFloatValue()) +" mi";
 						} else {
 							locimgId = R.drawable.warnings_tunnel;
-							text = df.format(alarm.getFloatValue()) +" km";
 						}
+						text = OsmAndFormatter.getFormattedAlarmInfoDistance(settings.getContext(), alarm.getFloatValue());
 					} else {
 						text = null;
 					}
