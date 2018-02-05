@@ -6,7 +6,7 @@
     <string name="gpx_add_track">Bæta við ferli</string>
     <string name="shared_string_notifications">Tilkynningar</string>
     <string name="shared_string_continue">Halda áfram</string>
-    <string name="shared_string_pause">Í bið</string>
+    <string name="shared_string_pause">Bið</string>
     <string name="gpx_logging_no_data">Engin gögn</string>
     <string name="rendering_value_light_brown_name">Ljósbrúnt</string>
     <string name="rendering_value_dark_brown_name">Dökkbrúnt</string>
@@ -1751,7 +1751,7 @@ Punktar</string>
     <string name="show_gps_coordinates_text">Birta GPS-hnit á korti</string>
     <string name="use_internet_to_download_tile">Nota netið til að sækja kortatígla sem vantar</string>
     <string name="choose_intersected_street">Veldu þvergötu</string>
-    <string name="Closest_Amenities">Næsta almenningsaðstaða</string>
+    <string name="Closest_Amenities">Næsta aðstaða</string>
     <string name="navigate_point_top_text">Settu inn breiddar- &amp; lengdargráður á völdu sniði (D - gráður, M - mínútur, S - sekúndur)</string>
     <string name="search_address_street_option">Þvergata</string>
     <string name="poi_action_succeded_template">Tókst að ljúka {0} aðgerðinni.</string>
@@ -2527,7 +2527,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="welcome_text">OsmAnd gefur kost á ónettengdum kortum og ónettengdri leiðsögn um víða veröld!</string>
     <string name="osm_changes_added_to_local_edits">OSM-breytingum var bætt í staðvært breytingasett</string>
     <string name="delay_to_start_navigation_descr">Tilgreindu biðtímann sem leiðavalsskjárinn á að haldast opinn.</string>
-    <string name="osmand_distance_planning_plugin_description">Þessi viðbót kemur með viðmótsshluta á kortaskjáinn sem gerir kleift að útbúa ferla með því aeinu að banka á kortið, eða nota eða breyta fyrirliggjandi GPX-skrám, í þeim tilgangi að skipuleggja ferðir og mæla vegalengdir milli tveggja punkta. Niðurstöðurnar má vista sem GPX-skrá sem hægt er að nota síðar við leiðsögn.</string>
+    <string name="osmand_distance_planning_plugin_description">Þessi viðbót kemur með viðmótsshluta á kortaskjáinn sem gerir kleift að útbúa ferla með því einu að banka á kortið, eða nota eða breyta fyrirliggjandi GPX-skrám, í þeim tilgangi að skipuleggja ferðir og mæla vegalengdir milli tveggja punkta. Niðurstöðurnar má vista sem GPX-skrá sem hægt er að nota síðar við leiðsögn.</string>
     <string name="osmand_accessibility_description">Þessi viðbót gerir aðgengiseiginleika tækisins nothæfa beint í OsmAnd. Það auðveldar t.d. aðlögun á talhraða TTS-radda talgervils, uppsetningu á stefnuvirkri skjáleiðsögn, notkun á músarkúlu fyrir stýringu á aðdrætti, eða svörun með texta-í-tal eins og þegar tilkynnt er upphátt um staðsetningar.</string>
     <string name="osm_editing_plugin_description">Í gegnum þessa viðbót er hægt að nota OsmAnd beint til að bæta inn í OSM-kortagrunninn, eins og til dæmis að búa til eða breyta merkisstöðum í OSM (POI objects), opna eða gera athugasemdir í OSM Notes, og að setja inn skráðar GPX-skrár. OSM er samfélagsdrifinn allsherjar kortagerðargrunnur sem skoða má nánar á https://openstreetmap.org. Virk þáttaka er vel þegin, og með þessari viðbót er því hægt að vinna beint úr OsmAnd með því að setja OSM-persónuauðkennin þín upp í forritinu.</string>
     <string name="osmand_development_plugin_description">Þessi viðbót birtir stillingar fyrir þróun og aflúsun, eins og fyrir prófanir eða leiðahermingu, upplýsingar um afköst skjásins, eða raddskilaboð. Þessar stillingar eru ætlaðar fyrir forritara en eru ekki nauðsynlegar fyrir almenna notendur.</string>
@@ -2632,4 +2632,116 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="toast_empty_name_error">Staðsetning er ekki með neitt nafn</string>
     <string name="tunnel_warning">Göng framundan</string>
     <string name="show_tunnels">Veggöng</string>
-</resources>
+<string name="shared_string_current">Núverandi</string>
+    <string name="last_intermediate_dest_description">Bætir síðasta stoppinu við leiðina</string>
+    <string name="first_intermediate_dest_description">Bætir fyrsta stoppinu við leiðina</string>
+    <string name="subsequent_dest_description">Færa áfangastað upp, og búa til áfangastað</string>
+    <string name="release_2_6">\\022 Nýr eiginleiki: Hnappur fyrir flýtiaðgerðir
+\n
+\n • Endurbætt svörun bendinga á snertiskjá (t.d. samhliða aðdráttur og hliðrun)
+\n
+\n • Nýjar leturgerðir fyrir kort sem styðja fleiri staðfærslur
+\n
+\n • Stuðningur við TTS texti-í-tal fyrir héraðsmállýskur (og framburðarmun)
+\n
+\n • Sjónrænar endurbætur í mörgum kortastílum og fyrir Wikipedia-gögn
+\n
+\n • Stuðningur við Open Location Code (OLC)
+\n
+\n • Birting á hæð, halla og hraðasniðum fyrir skráða GPX-ferla og reiknaðar leiðir
+\n
+\n • Stilling fyrir \"Akstursstíl\" og endurbætur á rökleiðslu fyrir útreikning hjólaleiða
+\n
+\n • Stilling til að nota hæðargögn við útreikning hjólaleiða
+\n
+\n • Margar aðrar endurbætur og villulausnir
+\n
+\n og fleira…</string>
+    <string name="release_2_7">\\022 Mapillary-viðbót fyrir myndefni í götuhæð
+\n
+\n • Mælistika til að mæla fjarlægðir
+\n
+\n • Uppskipting GPX-ferla með nákvæmum upplýsingum um ferilinn þinn
+\n
+\n • Aðrar endurbætur og villulausnir
+\n
+\n</string>
+    <string name="release_2_8">\\022 Algerlega endurhönnuð kortamerki með stoðlínum og skipulagningu leiða
+\n
+\n • Vegalengdamæling býður nú upp á að grípa í vegi og hægt er að vista punkta sem feril
+\n
+\n • OsmAnd Live: villuleiðréttingar, fersk gögn á þjóninum á 30 mínútna fresti, uppfærslur á leiðsögn
+\n
+\n</string>
+    <string name="release_2_9">\\022 Uppærð samhengisvalmynd: sýnir þegar merkisstaður opnar / lokar
+\n
+\n • Samgönguvalmynd: allar tiltækar leiðir eru núna efst
+\n
+\n • Wikipedia: bætt við hnappi til að opna upprunalega grein, uppfært útlit greina
+\n
+\n • Leiðir: bætt við möguleikanum á að skipta á upphafs- og endapunktum með einum smelli
+\n
+\n • Minnispunktar: bætt við röðun eftir gerð og dagsetningu
+\n
+\n • OSM-breytingar: birtir táknmynd og heiti á flokki merkisstaðar, birting á loknum aðgerðum
+\n
+\n • Nýr flýtigluggi til eða setja snöggt inn ný merki á skjánum
+\n
+\n • Skynjun stöðvunarmerkja tekur núna tillit til akstursstefnu
+\n
+\n • Nýtt reiknirit kemur með merkingarbær gildi á hækkun/lækkun fyrir GPX-ferla
+\n
+\n • Göngutímar taka landslag (hækkun) með í tímaútreikning (Naismith-regla)
+\n
+\n</string>
+    <string name="release_2_5">\\022 Snertinæmar táknmyndir á kortinu
+\n
+\n • Öflug leit og síun merkisstaða (POI): Leit, t.d. veitingastaðir eftir tegund eldamennsku, eða tjaldstæði með ákveðinni aðstöðu
+\n
+\n • Nýr landfræðilegur stíll korts fyrir hjólreiðar og göngu
+\n
+\n • Endurbætt upptaka/skráning ferðar
+\n
+\n • Bættar leiðsagnartilkynningar (Android Wear)
+\n
+\n • Margar aðrar endurbætur og villulausnir
+\n
+\n og fleira…</string>
+    <string name="release_2_4">\\022 Ný mjög öflug textaleit
+\n
+\n • Samtvinnun við hjóðflutningskerfi bíla / símahátalara í gegnum Bluetooth
+\n
+\n • Endurbætt leiðsögn, raddkvaðningar og ábendingar um skipti milli akreina
+\n
+\n • Endurbætt lag fyrir samgöngur myndgerð á leiðum
+\n
+\n • Bætt við fleiri staðfærslum og stuðningi við héraðsbundnar staðfærslur
+\n
+\n • Margar aðrar endurbætur og villulausnir
+\n
+\n og fleira…</string>
+    <string name="release_2_3">\\022 OSM Live. Styður við framlög kortagerðarfólks og forritara og gefur uppfærslur korta á klukkustundar fresti. 
+\n
+\n • Kortamerki. Ný leið til að velja fljótt staði á korti.
+\n
+\n • Nákvæmari OSM-kort með sértökum umferðarmerkjum fyrir hvert land og heilan helling af nýjum kortafitjum.
+\n
+\n • Endurbætt útlit og virkni við undirbúning leiða. 
+\n
+\n • Margar endurbætur í samhengisvalmynd korta á borð við samhengisháða uppflettingu heimilisfanga.
+\n
+\n og fleira…</string>
+    <string name="osm_live_header">Þessi áskrift virkjar uppfærslur á klukkustundar fresti fyrir öll kort um allan heim. Hluti innkomunnar fer til OSM-samfélagsins og er greitt fyrir hvert framlag til OSM. Ef þér líkar við OsmAnd og OSM og vilt styðja við verkefnið, þá er þetta kjörin leið til að sýna slíkan stuðning.</string>
+    <string name="disable_recording_once_app_killed_descrp">Mun setja GPX-skráningu í bið þegar forritið er drepið (slökkt á því í gegnum nýleg forrit skjáinn - bakgrunnsvísir OsmAnd hverfur þar með úr tilkynningastiku Android-kerfisins.)</string>
+    <string name="fav_point_emoticons_message">Nafni eftirlætispunktsins hefur evrið breytt í %1$s til að auðvelda rétta vistun strengsins ásamt tjáningartáknum yfir í skrá.</string>
+    <string name="save_track_to_gpx_globally_descr">Hægt er að kveikja og slökkva á almennri skráningu staðsetninga í GPX-skrá með viðmótshlutanum fyrir GPX-skráningu á kortaskjánum.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Ertu viss um að þú viljir endurgera persónuauðkennin? Öll tæki sem tengjast þér, munu ekki lengur geta fylgst með ferðum þínum.</string>
+    <string name="android_19_location_disabled">Síðan í Android útgáfu 4.4 (KitKat) geturðu ekki niðurhalað og uppfært landakort í fyrrverandi geymslumöppu (%s). Viltu breyta staðsetningu leyfðrar geymslumöppu og afrita allar OsmAnd-skrár þangað? 
+\n Athugasemd 1: Gömlu skrárnar þínar haldast óbreyttar (en hægt er að eyða þeim handvirkt). 
+\n Athugasemd 2: Á nýja geymslustaðnum verður ekki lengur hægt að deila skrám á milli OsmAnd og OsmAnd+.</string>
+    <string name="enable_plugin_monitoring_services">Virkjaðu viðbótina fyrir skráningu ferða, sem notar þjónustur fyrir skráningu staðsetninga (GPX-skráning, rakning með netstuðningi)</string>
+    <string name="osmand_routing_experimental">Ónettengd OsmAnd-leiðsögn er eiginleiki á tilraunastigi og virkar ekki fyrir vegalengdir sem eru lengri en u.þ.b. 20 km.
+\n
+\nLeiðsagnarþjónustu hefur verið skipt tímabundið yfir á hina netlægu CloudMade.</string>
+    <string name="poi_error_poi_not_found">Hnútur fannst ekki, eða að aðstaðan samanstendur af mörgum hnútum, sem er ekki ennþá stutt.</string>
+    </resources>
