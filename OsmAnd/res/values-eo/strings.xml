@@ -2968,4 +2968,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="last_intermediate_dest_description">Aldoni la lastan celon al la kurso</string>
     <string name="first_intermediate_dest_description">Aldoni la unuan celon al la kurso</string>
     <string name="subsequent_dest_description">Movi celon supren kaj krei celon</string>
+    <string name="make_as_start_point">Igi komenc-punkton</string>
     </resources>
