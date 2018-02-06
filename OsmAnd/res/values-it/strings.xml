@@ -2549,7 +2549,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="quick_action_interim_dialog">Mostra una finestra di dialogo temporaneamente</string>
     <string name="favorite_autofill_toast_text">" è salvato in "</string>
     <string name="favorite_empty_place_name">Luogo</string>
-    <string name="navigate_point_olc"/>
+    <string name="navigate_point_olc">Codifica Open Location</string>
     <string name="navigate_point_olc_info_invalid">OLC non valido
 </string>
     <string name="navigate_point_olc_info_short">OLC breve
@@ -3044,4 +3044,24 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="copy_location_name">Copia il nome del punto/PDI</string>
     <string name="will_open_tomorrow_at">Aprirà domani alle</string>
     <string name="toast_empty_name_error">Il luogo non ha nome</string>
+<string name="make_as_start_point">Usalo come Punto di Partenza</string>
+    <string name="shared_string_current">Attuale</string>
+    <string name="last_intermediate_dest_description">Aggiungi l\'ultima fermata lungo il percorso</string>
+    <string name="first_intermediate_dest_description">Aggiungi la prima fermata del percorso</string>
+    <string name="subsequent_dest_description">Sposta in alto la destinazione e crea la destinazione</string>
+    <string name="show_closed_notes">Mostra le note chiuse</string>
+    <string name="switch_osm_notes_visibility_desc">Mostra/nascondi le note OSM sulla mappa.</string>
+    <string name="gpx_file_desc">GPX - adatto all\'esportazione in JOSM o altri editor OSM.</string>
+    <string name="osc_file_desc">OSC - adatto per l\'esportazione in OpenStreeMap.</string>
+    <string name="gpx_file">File GPX</string>
+    <string name="osc_file">File OSC</string>
+    <string name="choose_file_type">Scelgi il tipo di file</string>
+    <string name="osm_edits_export_desc">Scegli il tipo di file da esportare: note OSM, PDI, o entrambi.</string>
+    <string name="all_data">Tutti i dati</string>
+    <string name="osm_notes">Note OSM</string>
+    <string name="total_donations">Donazioni totali</string>
+    <string name="day_off_label">Chiuso</string>
+    <string name="nautical_renderer">Nautico</string>
+    <string name="tunnel_warning">"Tunnel "</string>
+    <string name="show_tunnels">Serie di tunnel</string>
 </resources>
