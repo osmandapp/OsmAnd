@@ -941,8 +941,8 @@ Ferill %2$s</string>
     <string name="installing_new_resources">Afpakka nýjum gögnum…</string>
     <string name="tts_missing_language_data_title">Vantar gögn</string>
     <string name="voice_stream_notification">Hljóðtilkynning</string>
-    <string name="overlay_transparency_descr">Breyta gegnsæi yfirlags.</string>
-    <string name="overlay_transparency">Gegnsæi yfirlags</string>
+    <string name="overlay_transparency_descr">Breyta gegnsæi þekju.</string>
+    <string name="overlay_transparency">Gegnsæi þekju</string>
     <string name="map_transparency_descr">Breyta gegnsæi grunnkorts.</string>
     <string name="map_transparency">Gegnsæi grunnkorts</string>
     <string name="layer_underlay">Undirlagskort…</string>
@@ -1261,7 +1261,7 @@ Sólsetur: %2$s</string>
     <string name="local_index_address_data">Gögn um heimilisfang</string>
     <string name="local_index_transport_data">Gögn um almenningssamgöngur</string>
     <string name="map_text_size">Stærð leturs á korti</string>
-    <string name="layer_poi">Yfirlag merkisstaða…</string>
+    <string name="layer_poi">Þekja merkisstaða…</string>
     <string name="background_router_service_descr">Keyrir OsmAnd í bakgrunni þannig að rakin er staðsetning þín á meðan slökkt er á skjánum.</string>
     <string name="background_router_service">Keyra OsmAnd í bakgrunni</string>
     <string name="route_tr">Beygðu til hægri og haltu áfram</string>
@@ -1567,8 +1567,8 @@ Len %2$s</string>
     <string name="fav_points_edited">Eftirlætispunktinum var breytt</string>
     <string name="fav_points_not_exist">Enginn eftirlætisstaður er til</string>
     <string name="loading_poi_obj">Hleð inn merkisstöðum…</string>
-    <string name="show_poi_over_map_description">Birta merkisstað yfir korti (nota síðast valið).</string>
-    <string name="show_poi_over_map">Birta yfirlag merkisstaða</string>
+    <string name="show_poi_over_map_description">Birta síðast valda þekju merkisstaða yfir kortinu.</string>
+    <string name="show_poi_over_map">Birta þekju merkisstaða</string>
     <string name="searchpoi_activity">Veldu merkisstað</string>
     <string name="context_menu_item_create_poi">Búa til merkisstað</string>
     <string name="poi_edit_title">Breyta merkisstað</string>
@@ -1637,7 +1637,7 @@ Len %2$s</string>
     <string name="sort_by_distance">Raða eftir vegalengd</string>
     <string name="show_zoom_buttons_navigation_descr">Birta aðdráttarhnappa á meðan leiðsögn stendur.</string>
     <string name="save_as_favorites_points">Vista sem hóp af eftirlætum</string>
-    <string name="layer_amenity_label">Yfirlagsmerkingar merkisstaða</string>
+    <string name="layer_amenity_label">Merkingar á þekju merkisstaða</string>
     <string name="selected_gpx_info_show">"
 \n
 \nÝta og halda til að skoða á korti"</string>
@@ -1857,7 +1857,7 @@ Punktar</string>
     <string name="rendering_value_low_name">Lágur</string>
     <string name="rendering_attr_hideWaterPolygons_name">Fela vatn</string>
     <string name="rendering_attr_alpineHiking_name">Svissneska gönguleiðakvörðunin (SAC)</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Yfirlag með göngutáknum</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Þekja með göngutáknum</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-kortagerðaraðstoð</string>
     <string name="first_usage_greeting">Fáðu leiðbeiningar og uppgötvaðu nýja staði, án nettengingar</string>
     <string name="rendering_attr_roadColors_description">Veldu litastef fyrir vegi:</string>
@@ -1926,9 +1926,9 @@ Punktar</string>
     <string name="quick_action_map_style_action">Bæta við kortastíl</string>
     <string name="quick_action_empty_param_error">Viðföng ættu ekki að vera auð</string>
     <string name="quick_action_map_styles">Stílar landakorta</string>
-    <string name="quick_action_map_overlay">Breyta yfirlagi korts</string>
-    <string name="quick_action_map_overlay_title">Yfirlög korts</string>
-    <string name="quick_action_map_overlay_action">Bæta við yfirlagi</string>
+    <string name="quick_action_map_overlay">Breyta þekju korts</string>
+    <string name="quick_action_map_overlay_title">Þekjur korts</string>
+    <string name="quick_action_map_overlay_action">Bæta við þekju</string>
     <string name="quick_action_map_underlay">Breyta undirlagi korts</string>
     <string name="quick_action_map_underlay_title">Undirlög korts</string>
     <string name="quick_action_map_underlay_action">Bæta við undirlagi</string>
@@ -2080,7 +2080,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="support_new_features_descr">Styrkja til að fá nýja eiginleika þróaða fyrir forritið.</string>
     <string name="settings_direction_style_descr">Veldu stíl til framsetningar á afstæðum stefnum á meðan verið er á ferð.</string>
     <string name="accessibility_preferences_descr">Kjörstillingar sem tengjast aðgengi.</string>
-    <string name="use_fluorescent_overlays">Flúrlituð yfirlög</string>
+    <string name="use_fluorescent_overlays">Flúrlitaðar þekjur</string>
     <string name="update_poi_does_not_change_indexes">Breytingar á merkisstöðum inni í forritinu hafa ekki áhrif á sóttar kortaskrár, breytingar eru vistaðar í staðinn í skrá á tækinu.</string>
     <string name="live_monitoring_url_descr">Tilgreindu vefslóð með málskipan færibreytu: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="gpx_monitoring_disabled_warn">Skrá feril með GPX-viðmóti eða með stillingum í \'Skráning ferðar\'.</string>
@@ -2099,7 +2099,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \tTil að nota það virkjaðu \'Valmynd\' → \'Stilla kort\' → \'Uppruni korts…\' → \'Ónettengd vektorkort\'.</string>
     <string name="voice_stream_voice_call">Hljóð símtala (reynir einnig að grípa inn í Bluetooth-hljómkerfi bifreiða)</string>
     <string name="install_selected_build">Viltu setja upp OsmAnd - {0} af {1} {2} MB ?</string>
-    <string name="quick_action_map_overlay_switch">Yfirlagi kortsins var breytt yfir í \"%s\".</string>
+    <string name="quick_action_map_overlay_switch">Þekju kortsins var breytt yfir í \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Undirlagi kortsins var breytt yfir í \"%s\".</string>
     <string name="osmo_locations_sent">Sendar %1$d staðsetningar (í biðminni %2$d)</string>
     <string name="keep_and_add_destination_point">Bæta við sem áfangastað í framhaldinu</string>
@@ -2135,7 +2135,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="send_location_email_pattern">Til að sjá staðsetninguna, fylgdu veftenglinum %1$s eða Android-virkniskipunatenglinum %2$s</string>
     <string name="version_index_is_not_supported">Ekki er stuðningur við \'\'{0}\'\' útgáfu af vísi</string>
     <string name="gps_status_app_not_found">Forrit til að birta stöðu GPS fannst ekki. Leita á markaðnum?</string>
-    <string name="no_overlay">Ekkert yfirlag</string>
+    <string name="no_overlay">Engin þekja (yfirlag)</string>
     <string name="no_underlay">Ekkert undirlag</string>
     <string name="subscribe_email_error">Villa</string>
     <string name="sea_depth_thanks">Takk fyrir að kaupa sjódýptarlínur!</string>
@@ -2468,15 +2468,15 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="osm_recipient_stat">Breytingar %1$s, upphæð %2$s mBTC</string>
     <string name="rec_split_clip_length_desc">Efri tímamörk fyrir upptökur hljóð/myndskeiða.</string>
     <string name="osmand_rastermaps_plugin_description">Með þessari viðbót geturðu fengið aðgang að margskyns nettengdum landakortum (svokölluðum kortatígla- eða rastakortum), allt frá forákvörðuðum OpenStreetMap tíglum (eins og Mapnik) til gervitunglamynda eða sértækra laga á borð við veðurkort, veðurfarskort, jarðfræðikort, hæðaskygginga, o.s.frv. 
-\n
-\nHvert þessara korta má nota sem aðalkort (grunnkort) til birtingar á kortaskjá OsmAnd, eða sem yfir- eða undirlag á öðru grunnkorti (eins og stöðluðu ónettengdu OsmAnd kortunum). Til að gera undirlagskort sýnilegri, er einfalt að fela eftir þörfum ýmis einindi OsmAnd vigurkortanna með því að fara í valmyndina \'Stilla kort\'. 
-\n
+\n 
+\nHvert þessara korta má nota sem aðalkort (grunnkort) til birtingar á kortaskjá OsmAnd, eða sem yfir- eða undirlag (þekjur) á öðru grunnkorti (eins og stöðluðu ónettengdu OsmAnd kortunum). Til að gera undirlagskort sýnilegri, er einfalt að fela eftir þörfum ýmis einindi OsmAnd vigurkortanna með því að fara í valmyndina \'Stilla kort\'. 
+\n 
 \nTígluð kort er hægt að sækja beint frá gagnagjöfum á netinu, en einnig er hægt að undirbúa þau fyrir ónettengda notkun (og afrita síðan handvirkt í gagnamöppu OsmAnd) sem SQLite-gagnagrunn, sem er hægt að útbúa í fjölmörgum utanaðkomandi kortaumsýslutólum.</string>
-    <string name="osmand_srtm_long_description_1000_chars">Þessi viðbót kemur með bæði yfirlag fyrir hæðarlínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins. 
-\n
+    <string name="osmand_srtm_long_description_1000_chars">Þessi viðbót kemur með bæði yfirlag/þekju fyrir hæðarlínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins. 
+\n 
 \nAlmennt byggjast þessi gögn (milli 70 breiddargráðu norður og 70 breiddargráðu suður) á mælingum frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), og frá myndgreiningartækjum um borð í Terra, aðalgervihnetti Earth Observing System hjá NASA. ASTER er samvinnuverkefni NASA, Ráðuneytis efnahags, viðskipta og iðnaðar í Japan (METI), og Japan Space Systems (J-spacesystems).</string>
-    <string name="srtm_plugin_description">Þessi viðbót kemur með bæði yfirlag fyrir hæðarlínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins. (Taktu eftir því að hæðarlínu- og skyggingargögnin eru aðskildir pakkar sem þarf að sækja eftir að viðbótin hefur verið gerð virk.) 
-\n
+    <string name="srtm_plugin_description">Þessi viðbót kemur með bæði yfirlag/þekju fyrir hæðarlínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins. (Taktu eftir því að hæðarlínu- og skyggingargögnin eru aðskildir pakkar sem þarf að sækja eftir að viðbótin hefur verið gerð virk.) 
+\n 
 \nAlmennt byggjast þessi gögn (milli 70 breiddargráðu norður og 70 breiddargráðu suður) á mælingum frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), og frá myndgreiningartækjum um borð í Terra, aðalgervihnetti Earth Observing System hjá NASA. ASTER er samvinnuverkefni NASA, Ráðuneytis efnahags, viðskipta og iðnaðar í Japan (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="plugin_nautical_descr">Þessi viðbót bætir eiginleikum inn í landakort OsmAnd og leiðsagnarforritið þannig að úr verði sjókort til skemmtisiglinga, fyrir seglbáta og fleiri tegundir vatnaíþrótta. 
 \n
@@ -2772,4 +2772,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) er landakorta- og leiðsagnarforrit með aðgangi að gögnum frjálsa, hágæða, OpenStreetMap (OSM) heimskortins. Nýttu þér leiðsögn með raddskilaboðum eða myndrænum ábendingum, skoðaðu merkisstaði (e: POI - points of interest), útbúðu og sýslaðu með GPX-ferla, nýttu þér hæðarlínur og hæðarupplýsingar (með hjálp viðbótar), veldu á milli aksturs-, hjólreiða- og göngustillinga, breyttu OSM beint í forritinu, og margt fleira. OsmAnd+ er sú útgáfa forritsins sem þú borgar fyrir. Með því að kaupa hana, ertu að styðja við verkefnið, fjármagna þróun nýrra eiginleika, og færð í kaupbæti allar nýjustu uppfærslur. Nokkrir af helstu eiginleikunum:</string>
     <string name="osmand_plus_extended_description_part5">Öryggiseiginleikar • Hægt að velja sjálfvirka skiptingu milli dags- og nætursýnar • Valkvæð birting hraðatakmarkana, með áminningu ef farið er yfir hraðatakmörk • Hægt að láta aðdrátt vera háðan hraða • Deildu staðsetningunni þinni svo að vinir þínir geti fundið þig</string>
     <string name="osmand_plus_extended_description_part6">Eiginleikar fyrir hjóla- og göngufólk • Skoðaðu göngu-, bakpokaferða- og hjólaslóðir, frábært fyrir útilífsfólk • Sérstakir birtingar- og leiðarvalshamir fyrir hjólandi og gangandi • Hægt að sjá biðstöðvar almenningssamgangna (strætó, sporvagnar, lestir) ásamt nöfnum leiða • Hægt að skrá ferð í GPX-skrá á tækinu eða í þjónustu á netinu • Valkvæð birting á hraða og hæðarupplýsingum • Birting á hæðarlínum og hæðaskyggingum (í gegnum forritsviðbót)</string>
+    <string name="osmand_plus_extended_description_part3">Skoðun landakorts • Birting á staðsetningu þinni og stefnu • Hægt er að láta skjáinn stefna samkvæmt áttavita eða hreyfingarstefnu þinni • Vistaðu mikilvæga staði í Eftirlæti • Birtu merkisstaði (POI - point of interests) í kringum þig • Birtu sérstakar kortaflísar af netinu, gervihnattasýn (frá Bing), mismunandi þekjur á borð við GPX-ferla fyrir leiðsögn/ferðamennsku og viðbótarlög með sérsníðanlegu gegnsæi • Hægt er að birta staðaheiti á ensku, tungumáli heimamanna eða með hljóðframburði</string>
     </resources>
