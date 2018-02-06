@@ -225,7 +225,7 @@
 	<string name="poi_fuel_biogas">ബയൊഗ്യാസ്</string>
 	<string name="poi_fuel_lh2">ദ്രവീകൃത ഹൈഡ്റജന്‍</string>
 	<string name="poi_fuel_electricity">വൈദ്യുതി (ഇന് ധനം)</string>
-	<string name="poi_charging_station">ചാര്‍ജിങ്ങ് സ്ടേഷന്‍</string>
+	<string name="poi_electricity_combined_charging">ചാര്‍ജിങ്ങ് സ്ടേഷന്‍</string>
 	<string name="poi_vehicle_ramp">വാഹന റാംപ്</string>
 	<string name="poi_compressed_air">എയര്‍</string>
 	<string name="poi_parking">പാര്‍ക്കിങ്ങ്</string>

@@ -432,7 +432,7 @@
 	<string name="poi_fuel_electricity">חשמל</string>
 	<string name="poi_aeroway_fuel">תחנת תדלוק לכלי טיס</string>
 	<string name="poi_waterway_fuel">תחנת דלק לכלי שיט</string>
-	<string name="poi_charging_station">תחנת טעינה</string>
+	<string name="poi_electricity_combined_charging">תחנת טעינה</string>
 	<string name="poi_vehicle_ramp">ליפט</string>
 	<string name="poi_compressed_air">אוויר דחוס</string>
 	<string name="poi_parking">חנייה</string>

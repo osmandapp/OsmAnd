@@ -172,7 +172,7 @@
 	<string name="poi_fuel_e20">E20</string>
 	<string name="poi_fuel_lh2">Течен водород</string>
 	<string name="poi_fuel_electricity">Електричество</string>
-	<string name="poi_charging_station">Станция за зареждане</string>
+	<string name="poi_electricity_combined_charging">Станция за зареждане</string>
 	<string name="poi_compressed_air">Сгъстен въздух</string>
 	<string name="poi_parking">Паркинг</string>
 	<string name="poi_motorcycle_parking">Паркинг за мотоциклети</string>

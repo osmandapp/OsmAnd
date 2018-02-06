@@ -29,7 +29,7 @@
 	<string name="poi_emergency_phone">Nødtelefon</string>
 	<string name="poi_fire_hydrant">Brannhydrant</string>
 	<string name="poi_fire_extinguisher">Brannslokningsapparat</string>
-	<string name="poi_charging_station">Ladestasjon</string>
+	<string name="poi_electricity_combined_charging">Ladestasjon</string>
 	<string name="poi_parking">Parkering</string>
 	<string name="poi_public_transport_platform_bus">Bussholdeplass</string>
 	<string name="poi_bus_stop">Bussholdeplass</string>

@@ -86,7 +86,7 @@
 	<string name="poi_cave_entrance">Entrée de grotte</string>
 	<string name="poi_cemetery">Cimetière</string>
 	<string name="poi_chalet">Gîte</string>
-	<string name="poi_charging_station">Station de recharge pour véhicule électrique</string>
+	<string name="poi_electricity_combined_charging">Station de recharge pour véhicule électrique</string>
 	<string name="poi_chemist">Magasin de produits d\'hygiène</string>
 	<string name="poi_city">Ville</string>
 	<string name="poi_city_wall">Remparts</string>
