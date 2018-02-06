@@ -3467,4 +3467,7 @@
 	<string name="poi_health_specialty_herbalism_yes">Grasalækningar</string>
 	<string name="poi_health_specialty_chiropractic_yes">Hnykkjalækningar</string>
 	<string name="poi_health_specialty_naturopathy_yes">Náttúrulækningar</string>
+	<string name="poi_denomination_evangelical">Evangelísk</string>
+	<string name="poi_xmas_pyramid">Jólapýramídi</string>
+	<string name="poi_xmas_note">Jól: minnismiði</string>
 	</resources>
