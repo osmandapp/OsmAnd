@@ -365,7 +365,8 @@ public class GpxSelectionHelper {
 	}
 
 	public SelectedGpxFile getSelectedFileByPath(String path) {
-		for (SelectedGpxFile s : selectedGPXFiles) {
+		List<SelectedGpxFile> newList = new ArrayList<>(selectedGPXFiles);
+		for (SelectedGpxFile s : newList) {
 			if (s.getGpxFile().path.equals(path)) {
 				return s;
 			}
