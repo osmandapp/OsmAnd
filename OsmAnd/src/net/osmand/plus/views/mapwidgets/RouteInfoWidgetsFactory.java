@@ -16,6 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.hardware.GeomagneticField;
 import android.os.BatteryManager;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -1192,6 +1193,7 @@ public class RouteInfoWidgetsFactory {
 		private View layout;
 		private ImageView icon;
 		private TextView text;
+		private TextView bottomText;
 		private OsmandSettings settings;
 		private RoutingHelper rh;
 		private MapViewTrackingUtilities trackingUtilities;
@@ -1199,11 +1201,13 @@ public class RouteInfoWidgetsFactory {
 		private WaypointHelper wh;
 		private int imgId;
 		private String textString;
+		private String bottomTextString;
 
 		public AlarmWidget(final OsmandApplication app, MapActivity ma) {
 			layout = ma.findViewById(R.id.map_alarm_warning);
 			icon = (ImageView) ma.findViewById(R.id.map_alarm_warning_icon);
 			text = (TextView) ma.findViewById(R.id.map_alarm_warning_text);
+			bottomText = (TextView) ma.findViewById(R.id.map_alarm_warning_text_bottom);
 			settings = app.getSettings();
 			rh = ma.getRoutingHelper();
 			trackingUtilities = ma.getMapViewTrackingUtilities();
@@ -1234,6 +1238,7 @@ public class RouteInfoWidgetsFactory {
 				if(alarm != null) {
 					int locimgId = R.drawable.warnings_limit;
 					String text = "";
+					String bottomText = "";
 					if(alarm.getType() == AlarmInfoType.SPEED_LIMIT) {
 						if(settings.DRIVING_REGION.get().americanSigns){
 							locimgId = R.drawable.warnings_speed_limit_us;
@@ -1279,9 +1284,10 @@ public class RouteInfoWidgetsFactory {
 						} else {
 							locimgId = R.drawable.warnings_tunnel;
 						}
-						text = OsmAndFormatter.getFormattedAlarmInfoDistance(settings.getContext(), alarm.getFloatValue());
+						bottomText = OsmAndFormatter.getFormattedAlarmInfoDistance(settings.getContext(), alarm.getFloatValue());
 					} else {
 						text = null;
+						bottomText = null;
 					}
 					visible = (text != null &&  text.length() > 0) || (locimgId != 0);
 					if (visible) {
@@ -1303,7 +1309,13 @@ public class RouteInfoWidgetsFactory {
 						if (!Algorithms.objectEquals(text, this.textString)) {
 							textString = text;
 							this.text.setText(this.textString);
-						} 
+						}
+						if (!Algorithms.objectEquals(bottomText, this.bottomTextString)) {
+							bottomTextString = bottomText;
+							this.bottomText.setText(this.bottomTextString);
+							this.bottomText.setTextColor(ContextCompat.getColor(layout.getContext(),
+									settings.DRIVING_REGION.get().americanSigns ? R.color.color_black : R.color.color_white));
+						}
 					}
 				}
 			}
