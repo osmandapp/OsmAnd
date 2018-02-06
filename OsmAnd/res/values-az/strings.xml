@@ -1918,6 +1918,6 @@
     <string name="quick_action_add_poi_descr">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində POI əlavə ediləcək.</string>
     <string name="quick_action_showhide_favorites_descr">Fəaliyyət düyməsinə toxunulduqda xəritədə favorit nöqtələr göstəriləcək və ya gizlədiləcək.</string>
     <string name="quick_action_showhide_poi_descr">Fəaliyyət düyməsinə toxunulduqda xəritədə POI-lər göstəriləcək və ya gizlədiləcək.</string>
-    <string name="audionotes_location_not_defined">Qeyd ilə əlaqələndiriləcək məkan hələ müəyyənləşdirilməyib. Göstərilən məkana qeyd təyin etmək üçün \"Məkan istifadə et…\".</string>
+    <string name="audionotes_location_not_defined">Qeyd ilə əlaqələndiriləcək məkan hələ müəyyənləşdirilməyib. Göstərilən məkana qeyd təyin etmək üçün “Məkan istifadə et…”.</string>
     <string name="send_location_way_choose_title">İstifadə etməklə paylaş</string>
     </resources>
