@@ -1,8 +1,6 @@
 package net.osmand.plus.routing;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import android.content.Context;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -12,12 +10,14 @@ import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
-import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import android.content.Context;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
@@ -221,12 +221,26 @@ public class RouteCalculationResult {
 		float prevDirectionDistance = 0;
 		double lastHeight = HEIGHT_UNDEFINED;
 		List<RouteSegmentResult> segmentsToPopulate = new ArrayList<RouteSegmentResult>();
+		AlarmInfo tunnelAlarm = null;
 		for (int routeInd = 0; routeInd < list.size(); routeInd++) {
 			RouteSegmentResult s = list.get(routeInd);
 			float[] vls = s.getObject().calculateHeightArray();
 			boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
 			int i = s.getStartPointIndex();
 			int prevLocationSize = locations.size();
+			if (s.getObject().tunnel()) {
+				if (tunnelAlarm == null) {
+					LatLon latLon = s.getPoint(i);
+					tunnelAlarm = new AlarmInfo(AlarmInfoType.TUNNEL, prevLocationSize);
+					tunnelAlarm.setLatLon(latLon.getLatitude(), latLon.getLongitude());
+					tunnelAlarm.setFloatValue(s.getDistance());
+					alarms.add(tunnelAlarm);
+				} else {
+					tunnelAlarm.setFloatValue(tunnelAlarm.getFloatValue() + s.getDistance());
+				}
+			} else {
+				tunnelAlarm = null;
+			}
 			while (true) {
 				Location n = new Location(""); //$NON-NLS-1$
 				LatLon point = s.getPoint(i);
