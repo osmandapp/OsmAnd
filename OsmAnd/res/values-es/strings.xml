@@ -2861,7 +2861,7 @@ Por favor proporciona un código completo</string>
     <string name="tunnel_warning">Túnel adelante</string>
     <string name="show_tunnels">Túneles</string>
 <string name="shared_string_current">Actual</string>
-    <string name="last_intermediate_dest_description">Añade la última parada a lo largo de la ruta</string>
-    <string name="first_intermediate_dest_description">Añade la primera parada en la ruta</string>
-    <string name="subsequent_dest_description">Mueve el destino hacia arriba y crea un destino</string>
+    <string name="last_intermediate_dest_description">Añade la ubicación como último destino intermedio</string>
+    <string name="first_intermediate_dest_description">Añade la ubicación como primer destino intermedio</string>
+    <string name="subsequent_dest_description">Sube el destino como última parada y crea un nuevo destino</string>
     </resources>
