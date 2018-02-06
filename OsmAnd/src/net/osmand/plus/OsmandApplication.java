@@ -56,6 +56,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.search.SearchUICore;
 import net.osmand.util.Algorithms;
 
 import java.io.BufferedWriter;
@@ -171,6 +172,8 @@ public class OsmandApplication extends MultiDexApplication {
 		timeToStart = System.currentTimeMillis();
 		OsmandPlugin.initPlugins(this);
 		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
+
+		SearchUICore.setDebugMode(OsmandPlugin.isDevelopment());
 	}
 
 	public boolean isExternalStorageDirectoryReadOnly() {

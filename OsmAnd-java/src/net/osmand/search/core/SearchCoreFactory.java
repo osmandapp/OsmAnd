@@ -154,6 +154,11 @@ public class SearchCoreFactory {
 //				resultMatcher.publish(res);
 //			}
 		}
+
+		@Override
+		public String toString() {
+			return getClass().getSimpleName();
+		}
 	}
 
 
