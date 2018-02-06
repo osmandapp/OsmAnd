@@ -2837,7 +2837,7 @@
 <string name="shared_string_current">Текущий</string>
     <string name="last_intermediate_dest_description">Добавляет последнюю остановку на маршруте</string>
     <string name="first_intermediate_dest_description">Добавляет первую остановку на маршруте</string>
-    <string name="subsequent_dest_description">Перемещение пункта назначения и создание назначения</string>
+    <string name="subsequent_dest_description">Перемещает пункт назначения и создает промежуточную остановку</string>
     <string name="show_closed_notes">Показать закрытые заметки</string>
     <string name="switch_osm_notes_visibility_desc">Показать/скрыть заметки OSM на карте.</string>
     <string name="gpx_file_desc">GPX - подходит для экспорта в JOSM и другие OSM редакторы.</string>
