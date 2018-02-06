@@ -2850,4 +2850,5 @@
     <string name="osm_notes">Заметки OSM</string>
     <string name="tunnel_warning">"Впереди тоннель "</string>
     <string name="show_tunnels">Тоннели</string>
-</resources>
+<string name="make_as_start_point">Сделать пунктом отправления</string>
+    </resources>
