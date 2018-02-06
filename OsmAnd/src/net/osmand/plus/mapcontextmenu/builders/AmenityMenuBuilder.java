@@ -659,7 +659,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			});
 			buttons.add(button);
-			if (buttons.size() > 3) {
+			if (buttons.size() > 3 && categoryTypes.size() > 4) {
 				button.setVisibility(View.GONE);
 			}
 			view.addView(button);
@@ -672,7 +672,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			view.addView(button);
 		}
 
-		if (categoryTypes.size() > 3) {
+		if (categoryTypes.size() > 4) {
 			final TextViewEx button = buildButtonInCollapsableView(context, false, true);
 			button.setText(context.getString(R.string.shared_string_show_all));
 			button.setOnClickListener(new View.OnClickListener() {
