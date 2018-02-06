@@ -2267,7 +2267,7 @@
 	<string name="poi_payment_electronic_purses_no">Porte-monnaie électroniques non acceptés</string>
 	<string name="poi_payment_visa_debit_no">Cartes de débit Visa non acceptées</string>
 	<string name="poi_payment_dogecoin_no">Dogecoin non acceptés</string>
-	<string name="poi_brewery_additional">Nom de la brasserie</string>
+	<string name="poi_brewery_additional">Nom de brasserie</string>
 	<string name="poi_vending_excrement_bags">Sacs pour récupérer les déjections canines</string>
 	<string name="poi_brushless">Sans balais</string>
 	<string name="poi_vending_fuel">Station essence</string>
@@ -3193,4 +3193,18 @@
 	<string name="poi_climbing_routes">Voies d\'escalade</string>
 
 
-</resources>
+<string name="poi_fire_hydrant_position_sidewalk">Trottoir</string>
+	<string name="poi_fire_hydrant_position_green">Herbe</string>
+	<string name="poi_fire_hydrant_position_lane">Chaussée</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Parking</string>
+	<string name="poi_fire_hydrant_position_street">Rue</string>
+	<string name="poi_fire_hydrant_position_underground">Souterrain</string>
+	<string name="poi_street_cabinet_telecom">Type d\'armoire : télécom</string>
+	<string name="poi_street_cabinet_cable_tv">Type d\'armoire : tv câblée</string>
+	<string name="poi_street_cabinet_gas">Type d\'armoire : gaz</string>
+	<string name="poi_street_cabinet_postal_service">Type d\'armoire : service postal</string>
+	<string name="poi_street_cabinet_waste">Type d\'armoire : déchets</string>
+	<string name="poi_street_cabinet_water_management">Type d\'armoire : gestion de l\'eau</string>
+	<string name="poi_street_cabinet_street_lighting">Type d\'armoire : éclairage public</string>
+
+	</resources>
