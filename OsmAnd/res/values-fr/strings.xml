@@ -2869,11 +2869,11 @@ représentant la zone : %1$s x %2$s</string>
     <string name="exit_without_saving">Quitter sans enregistrer ?</string>
     <string name="do_not_use_animations">Ne pas utiliser les animations</string>
     <string name="do_not_use_animations_descr">Désactive les animations dans l\'application.</string>
-    <string name="osmand_extended_description_part6">Marche, randonnée, visite guidée
-\n• Carte des sentiers pédestres et de randonnée
-\n• Articles Wikipedia dans la langue de votre choix pour découvrir les lieux visités
-\n• Arrêts de transports publics (bus, tram, train), incluant les noms de lignes, pour vous aider dans vos déplacements en ville
-\n• Guidage de navigation piéton en suivant les itinéraires piétons
+    <string name="osmand_extended_description_part6">Marche, randonnée, visite guidée 
+\n• Carte des sentiers pédestres et de randonnée 
+\n• Articles Wikipédia dans la langue de votre choix pour découvrir les lieux visités 
+\n• Arrêts de transports publics (bus, tram, train), incluant les noms de lignes, pour vous aider dans vos déplacements en ville 
+\n• Guidage de navigation piéton en suivant les itinéraires piétons 
 \n• Vous pouvez charger et suivre une trace GPX existante; enregistrer et partager un nouvel itinéraire GPX</string>
     <string name="move_all_to_history">Déplacer tout dans l\'historique</string>
     <string name="build_route">Calculer l\'itinéraire</string>
@@ -2909,12 +2909,12 @@ représentant la zone : %1$s x %2$s</string>
 \n• Affichez les point d\'intérêts aux alentours
 \n• Affichez des tuiles spécialisées en ligne, la vue satellite (source : Bing) et de nombreuses autres couches comme des traces GPX avec une transparence personnalisable
 \n• Affichez les noms de lieux en anglais, en langue locale ou en phonétique.</string>
-    <string name="osmand_plus_extended_description_part4">Utilisez les données d\'OpenStreetMap et de Wikipedia :
-\n• Informations de haute qualité provenant de l\'un des meilleurs projets collaboratifs au monde
-\n• Données disponibles par pays ou région
-\n• Points d\'intérêt de Wikipédia, idéal pour les visites
-\n• Téléchargements gratuits illimités, directement à partir de l\'application
-\n• Cartes vectorielles compactes et mises à jour au moins une fois par mois
+    <string name="osmand_plus_extended_description_part4">Utilisez les données d\'OpenStreetMap et de Wikipédia : 
+\n• Informations de haute qualité provenant de l\'un des meilleurs projets collaboratifs au monde 
+\n• Données disponibles par pays ou région 
+\n• Points d\'intérêt de Wikipédia, idéal pour les visites 
+\n• Téléchargements gratuits illimités, directement à partir de l\'application 
+\n• Cartes vectorielles compactes et mises à jour au moins une fois par mois 
 \n• Sélection entre les données régionales complètes ou le réseau routier uniquement (par exemple: 700 Mo pour la carte intégrale du Japon et 200 Mo uniquement pour la carte du réseau routier japonnais).</string>
     <string name="today">Aujourd\'hui</string>
     <string name="yesterday">Hier</string>
