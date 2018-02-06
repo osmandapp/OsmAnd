@@ -324,14 +324,17 @@
     <string name="shared_string_show">Прикажи</string>
 	<string name="configure_map">Подесите мапу</string>
     <string name="osmo_device_not_found">Није пронађен уређај</string>
-    <string name="anonymous_user_hint">Безимени корисник не може\n- да прави скупове;\n- да усклађује скупове и уређаје са сервером;\n- да управља скуповима и уређајима у личном уреду.</string>
+    <string name="anonymous_user_hint">Анонимни корисник не може:
+\n- да прави групе;
+\n- да усклађује групе и уређаје са сервером;
+\n- да управља групама и уређајима на својој контролној табли на сајту.</string>
     <string name="anonymous_user">Безимени корисник</string>
     <string name="logged_as">Пријављен као %1$s</string>
 	<string name="speed_limit_exceed">Допуштено прекорачење брзине</string>
 	<string name="speed_limit_exceed_message">Граница допуштеног прекорачења брзине, изнад које ћете добити гласовно упозорење.</string>
 	<string name="fav_point_emoticons_message">Име омиљене тачке је измењено у %1$s да би се олакшало правилно чување ниске са знаком осећања у датотеку.</string>
     <string name="fav_point_dublicate">Име омиљене тачке је удвостручено</string>
-    <string name="fav_point_dublicate_message">Изменио сам име Ваше омиљене тачке у %1$s ради избегавања истих имена за више тачака.</string>
+    <string name="fav_point_dublicate_message">Наведено име је већ у употреби, измењено је у %1$s да се избегну иста имена.</string>
     <string name="text_size_descr">Подеси величину писма на мапи.</string>
     <string name="text_size">Величина писма</string>
     <string name="traffic_warning_speed_limit">Ограничење брзине</string>
@@ -345,7 +348,7 @@
 	<string name="show_railway_warnings">Пружни прелази</string>
 	<string name="rendering_attr_streetLighting_name">Осветљење улице</string>
     <string name="proxy_pref_title">Мрежни посредник</string>
-    <string name="proxy_pref_descr">Подесите мрежног посредника за интернет</string>
+    <string name="proxy_pref_descr">Наведите мрежног посредника за интернет.</string>
     <string name="settings_privacy">Приватност</string>
     <string name="routing_attr_no_new_routing_name">Без усмеравања по издању v1.9</string>
     <string name="routing_attr_no_new_routing_description">Немој да користиш правила усмеравања из издања v1.9.</string>
@@ -441,7 +444,7 @@
     <string name="simulate_initial_startup">Подражавај прво покретање програма</string>
     <string name="share_menu_location">Дели свој положај</string>
     <string name="shared_string_send">Шаљи</string>
-    <string name="favorite_category_dublicate_message">Означено име врсте већ постоји. Молим, одредите друго име.</string>
+    <string name="favorite_category_dublicate_message">Означено име категорије већ постоји. Молимо, користите друго име.</string>
     <string name="favorite_category_name">Име врсте</string>
     <string name="favorite_category_add_new_title">Додај нову врсту</string>
     <string name="regions">Области</string>
@@ -562,7 +565,7 @@
     <string name="local_recordings_delete_all_confirm">Избрисаћете %1$d белешки. Да ли сте сигурни?</string>
     <string name="local_osm_changes_upload_all_confirm">Отпремићете %1$d измена на ОСМ-и. Да ли сте сигурни?</string>
     <string name="confirmation_to_clear_history">Да ли желите да очистите записе програма?</string>
-    <string name="delay_to_start_navigation_descr">Одредите преостало време за чекање екрана за исцртавање путање</string>
+    <string name="delay_to_start_navigation_descr">Одредите преостало време за чекање екрана за исцртавање путање.</string>
     <string name="delay_to_start_navigation">Покрени навођење скретања након…</string>
     <string name="action_modify">Дејство измене</string>
     <string name="action_delete">Дејство брисања</string>
@@ -648,7 +651,9 @@
 	<string name="audionotes_plugin_name">Забелешке звука и снимака</string>
     <string name="audionotes_plugin_description">Прикључак забелешки звука и снимака омогућује да се сниме звуци, слике и видео приликом путовања, или притиском дугмета на приказу карте, или непосредно у приручном изборнику за сваки положај на карти.</string>
     <string name="osmand_parking_plugin_name">Положај паркирања</string>
-	<string name="osmand_parking_plugin_description">Прикључак за положај паркирања омогућава запис положаја остављеног возила и колико је времена преостало (ако је са временским ограничењем).\nВреме и положај су видљиви на полетнику ОсмАнда, или као справица на приказу карте. Може се додати узбуна као подсетник Андроидовом колендару.</string>
+	<string name="osmand_parking_plugin_description">Прикључак за положај паркирања омогућава запис положаја остављеног возила и колико је времена преостало (ако је са временским ограничењем).
+\n
+\nВреме и положај су видљиви на полетнику ОсмАнда, или као справица на приказу карте. Може се додати узбуна као подсетник Андроидовом колендару.</string>
     <string name="osmand_distance_planning_plugin_description">Овај прикључак додаје справицу на приказу карте која омогућава стварање путањи тапкањем на карту, или употребу и измену постојећих датотека ГПИкс-а, ради зацртавања путовања и мерења растојања између тачака. Добијени излази се могу сачувати као датотеке ГПИкс-а које се касније могу користити као водичи.</string>
     <string name="shared_string_accessibility">Приступачност</string>
     <string name="osm_settings">Уређивање ОСМ-а</string>
@@ -665,11 +670,11 @@
     <string name="speak_poi">Оближње занимљиве тачке</string>
     <string name="save_current_track_descr">Сачувај тренутну путању на складишну картицу сада.</string>
     <string name="save_current_track">Сачувај тренутну путању ГПИкс-а</string>
-    <string name="voice_provider_descr">Изаберите гласовно навођење</string>
+    <string name="voice_provider_descr">Изаберите гласовно навођење.</string>
     <string name="voice_provider">Гласовно навођење</string>
 
     <string name="monitoring_settings">Снимање путовања</string>
-    <string name="monitoring_settings_descr">Подесите како снимати Ваша путовања</string>
+    <string name="monitoring_settings_descr">Подесите како снимати Ваша путовања.</string>
     <string name="duration">Трајање</string>
     <string name="distance">Растојање</string>
     <string name="shared_string_all">Све</string>
@@ -690,14 +695,14 @@
     <string name="forward">Напред</string>
     <string name="home">Полетник</string>
     <string name="gpx_start_new_segment">Покрени нови одсечак</string>
-    <string name="rendering_attr_hideBuildings_name">Сакриј зграде</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Сакриј путеве који нису за моторна возила</string>
-    <string name="rendering_attr_hideText_name">Сакриј текст</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Сакриј шуме и шумарке</string>
+    <string name="rendering_attr_hideBuildings_name">Зграде</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Путеви који нису за моторна возила</string>
+    <string name="rendering_attr_hideText_name">Текст</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Шуме и шумарци</string>
     <string name="rendering_attr_buildings15zoom_name">Приказ зграда је на увеличању 15</string>
     <string name="rendering_attr_moreDetailed_name">Још појединости</string>
     <string name="rendering_attr_lessDetailed_name">Мање појединости</string>
-    <string name="rendering_attr_hideAccess_name">Сакриј забране приступа</string>
+    <string name="rendering_attr_hideAccess_name">Забране приступа</string>
     <string name="rendering_attr_showAccess_name">Приказуј забране приступа</string>
     <string name="rendering_attr_showSurfaceGrade_name">Приказуј стање путева</string>
     <string name="rendering_attr_showSurfaces_name">Приказуј материјале путева</string>
@@ -729,7 +734,7 @@
     <string name="share_osm_edits_subject">Уредбе ОСМ-а дељене на Османду</string>
     <string name="osm_edit_created_poi">Тачка занимања ОСМ-а је направљена</string>
 
-    <string name="nm">nm</string>
+    <string name="nm">nmi</string>
     <string name="nm_h">nmi/h</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
@@ -754,7 +759,7 @@
     <string name="sleep_mode_stop_dialog">Прекинути режим да ГПС ради у позадини?</string>
     <string name="stop_navigation_service">Заустави</string>
     <string name="confirm_every_run">Увек питај</string>
-    <string name="save_global_track_interval_descr">Изаберите међувреме писања ради снимања путања (које су омогућене пријавом преко справице ГПИкс-а на карти)</string>
+    <string name="save_global_track_interval_descr">Изаберите међувреме писања ради снимања путања (које су омогућене пријавом преко справице ГПИкс-а на карти).</string>
     <string name="save_global_track_interval">Међувреме опште пријаве</string>
     <string name="background_service_int">Међувреме буђења ГПИкс-а</string>
     <string name="enable_sleep_mode">Укључи да ГПС ради у позадини</string>
@@ -767,7 +772,7 @@
     <string name="starting_point">Почетна тачка</string>
     <string name="impassable_road">Избегавај путеве…</string>
     <string name="traffic_warning_border_control">Управљање границама</string>
-    <string name="osmo_auto_connect_descr">Самостално се повежи на услуге по покретању програма</string>
+    <string name="osmo_auto_connect_descr">Самостално се повежи на услуге по покретању програма.</string>
     <string name="osmo_auto_connect">Самоповезивање</string>
     <string name="osmo_start_service">Услуга ОсМа</string>
     <string name="osmo_gpx_track_downloaded">Преузета је путања ОсМа %1$s.</string>
@@ -777,7 +782,7 @@
     <string name="gpx_split_interval">Време развдвајања</string>
     <string name="sort_by_distance">Распоред по даљини</string>
     <string name="sort_by_name">Распоред по имену</string>
-    <string name="show_zoom_buttons_navigation_descr">Приказуј дугмад за увеличавање приликом навођења</string>
+    <string name="show_zoom_buttons_navigation_descr">Приказуј дугмад за увеличавање приликом навођења.</string>
     <string name="show_zoom_buttons_navigation">Приказуј дугмад за увеличавање</string>
     <string name="save_as_favorites_points">Сачувај као скуп омиљених</string>
     <string name="select_destination_and_intermediate_points">Изаберите одредиште</string>
@@ -800,7 +805,7 @@
     <string name="gpx_timespan">Временски распон: %1$s</string>
     <string name="gpx_timemoving">Време кретања: %1$s</string>
     <string name="gpx_selection_segment_title">Одсечак</string>
-    <string name="gpx_selection_number_of_points">" %1$s тачака"</string>
+    <string name="gpx_selection_number_of_points">%1$s тачака</string>
     <string name="gpx_selection_point">"Тачка  %1$s"</string>
     <string name="gpx_selection_route_points">%1$s\nТачке путање %2$s</string>
     <string name="gpx_selection_points">%1$s\nТачака</string>
@@ -809,7 +814,7 @@
     <string name="osmo_user_joined">"Корисник  %1$s се придружио скупу %2$s"</string>
     <string name="osmo_user_left">"Корисник  %1$s је напустио скуп %2$s"</string>
     <string name="osmo_show_group_notifications">Приказуј обавештења о скупу</string>
-    <string name="osmo_show_group_notifications_descr">Приказуј поруке када се корисник придружи или напусти скуп</string>
+    <string name="osmo_show_group_notifications_descr">Приказуј поруке када се корисник придружи или напусти скуп.</string>
     <string name="osmo_follow">Прати</string>
     <string name="osmo_sign_in">Упиши се</string>
     <string name="osmo_create_groups_confirm">Да би правили скупове треба да будете пријављени корисник ОсМа.</string>
@@ -831,7 +836,7 @@
     <string name="osmo_session_not_available">Заседање није доступно, молим, проверите да ли је укључено „слање положаја“.</string>
     <string name="osmo_share_session">Дели заседање</string>
     <string name="osmo_track_interval">Међувреме пријаве</string>
-    <string name="osmo_track_interval_descr">Изаберите међувреме којим ћете слати положај</string>
+    <string name="osmo_track_interval_descr">Изаберите међувреме којим ћете слати податке о положају.</string>
     <string name="int_days">дана</string>
     <string name="osmo_connect_menu">Повежи се</string>
     <string name="osmo_expire_group">Истиче</string>
@@ -883,7 +888,7 @@
     <string name="route_preferences">Својства пута</string>
     <string name="route_info">Подаци о путу</string>
     <string name="routing_attr_prefer_motorway_name">Предност путевима за моторна возила</string>
-    <string name="routing_attr_prefer_motorway_description">Предност путевима за моторна возила</string>
+    <string name="routing_attr_prefer_motorway_description">Предност путевима за моторна возила.</string>
     
     
     <string name="routing_attr_avoid_motorway_name">Избегавај путеве за моторна возила</string>
@@ -973,7 +978,23 @@
     <string name="osmand_parking_minutes">Минута</string>
     <string name="shared_location">Дељени положај</string>
     <string name="osmand_parking_warning">Упозорење</string>
-    <string name="release_2_2">" • Ново сучеље осетљиво на положај тапкања по карти или другим површима\n\n • Приказ карте се сада покреће непосредно осим ако је означено „Приказуј полетника при покретању“\n\n • Подешава се која карта и како се приказује у полетнику\n\n • Премошћава се полетник ако Вам се више свиђа управљање програмом изборником\n\n • За преузимање карата, области се могу непосредно изабрати тапкањем по светској карти\n\n • Претрага тачака занимања сада подржава одређеније упите\n\n • Побољшане су могућности тачака занимања и уређивања ОСМ-а\n\n • Прерађен је склоп преузимања карата и његово сучеље\n\n и још којешта... "</string>
+    <string name="release_2_2">\\022 Ново сучеље осетљиво на положај тапкања по карти или другим површима
+\n
+\n • Приказ карте се сада покреће непосредно осим ако је означено „Приказуј полетника при покретању“
+\n
+\n • Подешава се која карта и како се приказује у полетнику
+\n
+\n • Премошћава се полетник ако Вам се више свиђа управљање програмом изборником
+\n
+\n • За преузимање карата, области се могу непосредно изабрати тапкањем по светској карти
+\n
+\n • Претрага тачака занимања сада подржава одређеније упите
+\n
+\n • Побољшане су могућности тачака занимања и уређивања ОСМ-а
+\n
+\n • Прерађен је склоп преузимања карата и његово сучеље
+\n
+\n и још којешта…</string>
     <string name="hillshade_layer_disabled">Слој сенчења падина је онемогућен</string>
     <string name="traffic_warning_hazard">Опасност</string>
     <string name="lang_al">Албански</string>
@@ -1012,7 +1033,7 @@
     <string name="gpx_option_calculate_first_last_segment">Рачунај од првог до последњег осдечка стазе Османда</string>
     <string name="use_displayed_track_for_navigation">Да ли желите приказ стазе за навођење?</string>
     <string name="select_gpx">Изаберите ГПИкс…</string>
-    <string name="routing_attr_avoid_toll_description">Избегавај путеве са наплатним станицама</string>
+    <string name="routing_attr_avoid_toll_description">Избегавај путеве са наплатним станицама.</string>
     <string name="routing_attr_avoid_toll_name">Избегавај путеве са наплатним станицама</string>
     <string name="routing_attr_avoid_unpaved_name">Избегавај неасвалтиране путеве</string>
     <string name="routing_attr_avoid_unpaved_description">Избегавај неасвалтиране путеве</string>
@@ -1113,7 +1134,7 @@
     <string name="release_2_5"/>
     <string name="rendering_attr_contourColorScheme_description">Образац боја линија обриса</string>
     <string name="save_track_min_speed">Најмања брзина бележења</string>
-    <string name="save_track_min_speed_descr">Услов: Постави најмању брзину при којој ће тачка бити записана</string>
+    <string name="save_track_min_speed_descr">Услов: Постави најмању брзину при којој ће тачка бити записана.</string>
     <string name="save_track_min_distance">Најмањи померај бележења</string>
     <string name="save_track_min_distance_descr">Услов: Постави најмање растојање од последњег положаја за бележење тачке.</string>
     <string name="save_track_precision">Најмања тачност бележења</string>
@@ -1164,7 +1185,7 @@
     <string name="allow_access_location">Омогућите приступ одређивању положаја</string>
     <string name="first_usage_greeting">Добави упутства и откриј нова места без мрежне везе</string>
     <string name="search_my_location">Пронађи мој положај</string>
-    <string name="no_update_info_desc">Не проверавај да ли постоје нове верзије нити попусти који се односе на ОсмАнд</string>
+    <string name="no_update_info_desc">Не проверавај да ли постоје нове верзије нити попусти који се односе на ОсмАнд.</string>
     <string name="no_update_info">Не приказуј надоградње</string>
     <string name="update_all_maps_now">Желите ли освежити све карте сада?</string>
     <string name="clear_tile_data">Очисти све плочице</string>
@@ -1207,7 +1228,7 @@
     <string name="access_no_destination">Одредиште није подешено</string>
     <string name="access_category_choice">Изаберите врсту</string>
     <string name="storage_directory_readonly_desc">Тренутно изабрани омот складишта је само за читање. Омот складишта је тренутно пребачен у унутрашње складиште. Молим, изаберите ваљани омот складишта.</string>
-    <string name="save_track_interval_descr">Изаберите међувреме уписа снимања путање приликом навођења</string>
+    <string name="save_track_interval_descr">Изаберите међувреме уписа снимања путање приликом навођења.</string>
     <string name="app_modes_choose_descr">Изаберите видљивост корисничког пресека у програму</string>
     <string name="osmand_parking_choose_type">Изаберите врсту паркирања</string>
     <string name="settings_direction_style_descr">Изаберите начин изражавања односних праваца приликом кретања</string>
@@ -1520,7 +1541,7 @@
     <string name="shared_string_deleted">Избрисано</string>
     <string name="shared_string_edited">Уређено</string>
     <string name="shared_string_added">Додато</string>
-    <string name="marker_activated">Активирана ознака %s</string>
+    <string name="marker_activated">Активирана ознака %s.</string>
     <string name="one_tap_active_descr">Тупните ознаку на карти ради њеног померања на врх покренутих ознака без отварања приручног изборника.</string>
     <string name="one_tap_active">Покретање на туп</string>
     <string name="empty_state_av_notes">Хватајте белешке!</string>
@@ -1546,7 +1567,7 @@
     <string name="digits_quantity">Број децималних бројки</string>
     <string name="show_number_pad">Приказуј бројчану ставку</string>
     <string name="shared_string_paste">Налепи</string>
-    <string name="coordinate_input_accuracy_description">Самостално пређи на следеће поље после уноса</string>
+    <string name="coordinate_input_accuracy_description">Самостално пређи на следеће поље после уноса.</string>
     <string name="rename_marker">Преименуј ознаку</string>
     <string name="tap_on_map_to_hide_interface_descr">Тупкање на карту је прекидач управљачких дугмади и справица.</string>
     <string name="mark_passed">Ознака је проминута</string>
@@ -1575,7 +1596,7 @@
     <string name="fast_coordinates_input_descr">Изаберите облик уноса координата. Можете увек променити тапкањем на могућности.</string>
     <string name="fast_coordinates_input">Брзи унос координата</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Избегавај путеве са поледицама, плићаке</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Избегавајте путеве са поледицама и плићацима</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Избегавајте путеве са поледицама и плићацима.</string>
     <string name="use_location">Користи положај</string>
     <string name="add_location_as_first_point_descr">Додајте свој положај као почетну тачку да испланирате савршено путовање.</string>
     <string name="my_location">Мој положај</string>
@@ -1632,7 +1653,7 @@
     <string name="measurement_tool_snap_to_road_descr">Османд ће се повезати тачке са путевима изабраног налога.</string>
     <string name="measurement_tool_save_as_new_track_descr">Можете сачувати тачке или као тачке пута, или као линију.</string>
     <string name="choose_navigation_type">Изаберите налог навођења</string>
-    <string name="enter_gpx_name">Име датотеке ГПИкс-а</string>
+    <string name="enter_gpx_name">Име датотеке ГПИкс-а:</string>
     <string name="show_on_map_after_saving">Прикажи на карти после чувања</string>
     <string name="measurement_tool_action_bar">Прегледај карту и додај тачке</string>
     <string name="measurement_tool">Мери растојање</string>
