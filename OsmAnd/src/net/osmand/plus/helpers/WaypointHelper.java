@@ -733,9 +733,9 @@ public class WaypointHelper {
 					}
 				} else if (typeString.equals("TUNNEL")) {
 					if (app.getSettings().DRIVING_REGION.get().americanSigns) {
-						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_tunnel);
-					} else {
 						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_tunnel_us);
+					} else {
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_tunnel);
 					}
 				} else {
 					return null;
