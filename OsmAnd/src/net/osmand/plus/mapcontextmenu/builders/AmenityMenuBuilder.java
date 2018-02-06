@@ -97,7 +97,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		ll.setOnLongClickListener(new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-				copyToClipboard(txt, view.getContext());
+				String textToCopy = !Algorithms.isEmpty(textPrefix) ? textPrefix + ": " + txt : txt;
+				copyToClipboard(textToCopy, view.getContext());
 				return true;
 			}
 		});
@@ -429,8 +430,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				for (String c : e.getValue().split(";")) {
 					if (sb.length() > 0) {
 						sb.append(", ");
+						sb.append(poiTypes.getPoiTranslation("cuisine_" + c).toLowerCase());
+					} else {
+						sb.append(poiTypes.getPoiTranslation("cuisine_" + c));
 					}
-					sb.append(poiTypes.getPoiTranslation("cuisine_" + c).toLowerCase());
 				}
 				textPrefix = app.getString(R.string.poi_cuisine);
 				vl = sb.toString();
@@ -501,30 +504,33 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			}
 		}
 
-		if (cuisineRow != null && poiAdditionalCategories.size() == 0) {
-			infoRows.add(cuisineRow);
+		if (cuisineRow != null) {
+			boolean hasCuisineOrDish = poiAdditionalCategories.get(Amenity.CUISINE) != null
+					|| poiAdditionalCategories.get(Amenity.DISH) != null;
+			if (!hasCuisineOrDish) {
+				infoRows.add(cuisineRow);
+			}
 		}
 
-		for (List<PoiType> categoryTypes : poiAdditionalCategories.values()) {
-			Drawable icon;
-			PoiType pType = categoryTypes.get(0);
-			String poiAdditionalCategoryName = pType.getPoiAdditionalCategory();
-			String poiAddidionalIconName = poiTypes.getPoiAdditionalCategoryIconName(poiAdditionalCategoryName);
-			icon = getRowIcon(view.getContext(), poiAddidionalIconName);
-			if (icon == null) {
-				icon = getRowIcon(view.getContext(), poiAdditionalCategoryName);
-			}
-			if (icon == null) {
-				icon = getRowIcon(view.getContext(), pType.getIconKeyName());
-			}
-			if (icon == null) {
-				icon = getRowIcon(R.drawable.ic_action_note_dark);
-			}
-			if (categoryTypes.size() == 1) {
-				String vl = pType.getTranslation();
-				infoRows.add(new AmenityInfoRow(poiAdditionalCategoryName, icon, pType.getPoiAdditionalCategoryTranslation(), vl, false, null,
-						0, false, false, false, pType.getOrder(), pType.getKeyName(), false, false, false, 0));
-			} else {
+		for (Map.Entry<String, List<PoiType>> e : poiAdditionalCategories.entrySet()) {
+			String categoryName = e.getKey();
+			List<PoiType> categoryTypes = e.getValue();
+			if (categoryTypes.size() > 0) {
+				Drawable icon;
+				PoiType pType = categoryTypes.get(0);
+				String poiAdditionalCategoryName = pType.getPoiAdditionalCategory();
+				String poiAddidionalIconName = poiTypes.getPoiAdditionalCategoryIconName(poiAdditionalCategoryName);
+				icon = getRowIcon(view.getContext(), poiAddidionalIconName);
+				if (icon == null) {
+					icon = getRowIcon(view.getContext(), poiAdditionalCategoryName);
+				}
+				if (icon == null) {
+					icon = getRowIcon(view.getContext(), pType.getIconKeyName());
+				}
+				if (icon == null) {
+					icon = getRowIcon(R.drawable.ic_action_note_dark);
+				}
+
 				StringBuilder sb = new StringBuilder();
 				for (PoiType pt : categoryTypes) {
 					if (sb.length() > 0) {
@@ -532,7 +538,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					}
 					sb.append(pt.getTranslation());
 				}
-				CollapsableView collapsableView = getPoiAdditionalCollapsableView(view.getContext(), true, categoryTypes, cuisineRow);
+				boolean cuisineOrDish = categoryName.equals(Amenity.CUISINE) || categoryName.equals(Amenity.DISH);
+				CollapsableView collapsableView = getPoiAdditionalCollapsableView(view.getContext(), true, categoryTypes, cuisineOrDish ? cuisineRow : null);
 				infoRows.add(new AmenityInfoRow(poiAdditionalCategoryName, icon, pType.getPoiAdditionalCategoryTranslation(), sb.toString(), true, collapsableView,
 						0, false, false, false, pType.getOrder(), pType.getKeyName(), false, false, false, 1));
 			}
@@ -644,13 +651,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					AbstractPoiType parent = pt.getParentType();
-					if (parent != null) {
-						PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + parent.getKeyName());
-						//PoiUIFilter filter = app.getPoiFilters().getCustomPOIFilter();
+					if (amenity.getType() != null) {
+						PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + amenity.getType().getKeyName());
 						if (filter != null) {
 							filter.clearFilter();
-							filter.setTypeToAccept(pt.getCategory(), true);
+							filter.setTypeToAccept(amenity.getType(), true);
 							filter.updateTypesToAccept(pt);
 							filter.setFilterByName(pt.getKeyName().replace('_', ':').toLowerCase());
 							getMapActivity().showQuickSearch(filter);
@@ -667,7 +672,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		if (textCuisineRow != null) {
 			TextViewEx button = buildButtonInCollapsableView(context, true, false, false);
-			String name = textCuisineRow.textPrefix + ": " + textCuisineRow.text;
+			String name = textCuisineRow.textPrefix + ": " + textCuisineRow.text.toLowerCase();
 			button.setText(name);
 			view.addView(button);
 		}
