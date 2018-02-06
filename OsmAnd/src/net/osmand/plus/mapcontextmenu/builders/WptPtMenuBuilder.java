@@ -1,20 +1,28 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.LinearLayout;
 
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.views.POIMapLayer;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -120,5 +128,48 @@ public class WptPtMenuBuilder extends MenuBuilder {
 			visit = true;
 		}
 		return visit;
+	}
+
+	private CollapsableView getCollapsableWaypointsView(final Context context, boolean collapsed, @NonNull final GPXUtilities.GPXFile gpxFile, WptPt selectedPoint) {
+		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
+
+		List<WptPt> points = gpxFile.getPoints();
+		for (int i = 0; i < points.size() && i < 10; i++) {
+			final WptPt point = points.get(i);
+			boolean selected = selectedPoint != null && selectedPoint.equals(point);
+			TextViewEx button = buildButtonInCollapsableView(context, selected, false);
+			button.setText(point.name);
+
+			if (!selected) {
+				button.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, point.name);
+						mapActivity.getContextMenu().show(latLon, pointDescription, point);
+					}
+				});
+			}
+			view.addView(button);
+		}
+
+		if (points.size() > 10) {
+			TextViewEx button = buildButtonInCollapsableView(context, false, true);
+			button.setText(context.getString(R.string.shared_string_show_all));
+			button.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					OsmAndAppCustomization appCustomization = app.getAppCustomization();
+					final Intent intent = new Intent(context, appCustomization.getTrackActivity());
+					intent.putExtra(TrackActivity.TRACK_FILE_NAME, gpxFile.path);
+					intent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
+					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					context.startActivity(intent);
+				}
+			});
+			view.addView(button);
+		}
+
+		return new CollapsableView(view, this, collapsed);
 	}
 }

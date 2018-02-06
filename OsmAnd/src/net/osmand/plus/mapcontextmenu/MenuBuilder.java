@@ -873,93 +873,6 @@ public class MenuBuilder {
 		return new CollapsableView(textView, this, collapsed);
 	}
 
-	protected CollapsableView getCollapsableFavouritesView(final Context context, boolean collapsed, @NonNull final FavoriteGroup group, FavouritePoint selectedPoint) {
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
-
-		List<FavouritePoint> points = group.points;
-		for (int i = 0; i < points.size() && i < 10; i++) {
-			final FavouritePoint point = points.get(i);
-			boolean selected = selectedPoint != null && selectedPoint.equals(point);
-			TextViewEx button = buildButtonInCollapsableView(context, selected, false);
-			String name = point.getName();
-			button.setText(name);
-
-			if (!selected) {
-				button.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
-						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName());
-						mapActivity.getContextMenu().show(latLon, pointDescription, point);
-					}
-				});
-			}
-			view.addView(button);
-		}
-
-		if (points.size() > 10) {
-			TextViewEx button = buildButtonInCollapsableView(context, false, true);
-			button.setText(context.getString(R.string.shared_string_show_all));
-			button.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					OsmAndAppCustomization appCustomization = app.getAppCustomization();
-					final Intent intent = new Intent(context, appCustomization.getFavoritesActivity());
-					intent.putExtra(FavoritesActivity.OPEN_FAVOURITES_TAB, true);
-					intent.putExtra(FavoritesActivity.GROUP_NAME_TO_SHOW, group.name);
-					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-					context.startActivity(intent);
-				}
-			});
-			view.addView(button);
-		}
-
-		return new CollapsableView(view, this, collapsed);
-	}
-
-	protected CollapsableView getCollapsableWaypointsView(final Context context, boolean collapsed, @NonNull final GPXFile gpxFile, WptPt selectedPoint) {
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
-
-		List<WptPt> points = gpxFile.getPoints();
-		for (int i = 0; i < points.size() && i < 10; i++) {
-			final WptPt point = points.get(i);
-			boolean selected = selectedPoint != null && selectedPoint.equals(point);
-			TextViewEx button = buildButtonInCollapsableView(context, selected, false);
-			button.setText(point.name);
-
-			if (!selected) {
-				button.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
-						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, point.name);
-						mapActivity.getContextMenu().show(latLon, pointDescription, point);
-					}
-				});
-			}
-			view.addView(button);
-		}
-
-		if (points.size() > 10) {
-			TextViewEx button = buildButtonInCollapsableView(context, false, true);
-			button.setText(context.getString(R.string.shared_string_show_all));
-			button.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					OsmAndAppCustomization appCustomization = app.getAppCustomization();
-					final Intent intent = new Intent(context, appCustomization.getTrackActivity());
-					intent.putExtra(TrackActivity.TRACK_FILE_NAME, gpxFile.path);
-					intent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
-					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-					context.startActivity(intent);
-				}
-			});
-			view.addView(button);
-		}
-
-		return new CollapsableView(view, this, collapsed);
-	}
-
 	protected CollapsableView getCollapsableWikiView(Context context, boolean collapsed) {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
 
@@ -995,9 +908,14 @@ public class MenuBuilder {
 	}
 
 	protected TextViewEx buildButtonInCollapsableView(Context context, boolean selected, boolean showAll) {
+		return buildButtonInCollapsableView(context, selected, showAll, true);
+	}
+
+	protected TextViewEx buildButtonInCollapsableView(Context context, boolean selected, boolean showAll, boolean singleLine) {
 		TextViewEx button = new TextViewEx(new ContextThemeWrapper(context, light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
-		LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(36f));
+		LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llWikiButtonParams.setMargins(0, 0, 0, dpToPx(8f));
+		//button.setMinimumHeight(dpToPx(36f));
 		button.setLayoutParams(llWikiButtonParams);
 		button.setTypeface(FontCache.getRobotoRegular(context));
 		int bg;
@@ -1011,7 +929,7 @@ public class MenuBuilder {
 		button.setBackgroundResource(bg);
 		button.setTextSize(14);
 		int paddingSides = dpToPx(10f);
-		button.setPadding(paddingSides, 0, paddingSides, 0);
+		button.setPadding(paddingSides, paddingSides, paddingSides, paddingSides);
 		if (!selected) {
 			ColorStateList buttonColorStateList = AndroidUtils.createColorStateList(context, !light,
 					R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
@@ -1021,7 +939,7 @@ public class MenuBuilder {
 			button.setTextColor(ContextCompat.getColor(context, light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
 		}
 		button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-		button.setSingleLine(true);
+		button.setSingleLine(singleLine);
 		button.setEllipsize(TextUtils.TruncateAt.END);
 
 		return button;
