@@ -1744,4 +1744,5 @@
     <string name="rendering_attr_busRoutes_name">Аутобуски путеви</string>
     <string name="rendering_category_routes">Путеви</string>
     <string name="quick_action_add_gpx">Додај ГПИкс пролазну тачку</string>
+    <string name="quick_action_edit_action">Уреди акцију</string>
     </resources>
