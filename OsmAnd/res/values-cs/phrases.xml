@@ -51,7 +51,7 @@
 	<string name="poi_service_tyres">Pneu</string>
 	<string name="poi_car_wash">Myčka</string>
 	<string name="poi_fuel">Čerpací stanice</string>
-	<string name="poi_charging_station">Dobíjecí stanice</string>
+	<string name="poi_electricity_combined_charging">Dobíjecí stanice</string>
 	<string name="poi_parking">Parkoviště</string>
 	<string name="poi_garages">Garáže</string>
 

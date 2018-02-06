@@ -124,7 +124,7 @@
 	<string name="poi_vehicle_inspection">Stacja diagnostyczna</string>
 	<string name="poi_car_wash">Myjnia samochodowa</string>
 	<string name="poi_fuel">Stacja benzynowa</string>
-	<string name="poi_charging_station">Stacja ładowania</string>
+	<string name="poi_electricity_combined_charging">Stacja ładowania</string>
 	<string name="poi_vehicle_ramp">Podnośnik</string>
 	<string name="poi_compressed_air">Kompresor</string>
 	<string name="poi_parking">Parking</string>

@@ -205,7 +205,7 @@
 	<string name="poi_fuel_e85">85% Етанолу (Е85)</string>
 	<string name="poi_fuel_lh2">Рідкий водень</string>
 	<string name="poi_fuel_electricity">Електроенергія</string>
-	<string name="poi_charging_station">Станція зарядки</string>
+	<string name="poi_electricity_combined_charging">Станція зарядки</string>
 	<string name="poi_vehicle_ramp">Рампа для огляду/перевірки машин</string>
 	<string name="poi_compressed_air">Стиснене повітря</string>
 	<string name="poi_parking">Стоянка</string>

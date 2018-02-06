@@ -138,7 +138,7 @@
 	<string name="poi_vehicle_inspection">Kontrola vozidla (technická/emisná)</string>
 	<string name="poi_car_wash">Autoumyváreň</string>
 	<string name="poi_fuel">Benzínová pumpa</string>
-	<string name="poi_charging_station">Nabíjacia stanica</string>
+	<string name="poi_electricity_combined_charging">Nabíjacia stanica</string>
 	<string name="poi_vehicle_ramp">Servisná rampa na auto</string>
 	<string name="poi_compressed_air">Stlačený vzduch</string>
 	<string name="poi_parking">Parkovisko</string>

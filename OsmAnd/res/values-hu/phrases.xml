@@ -56,7 +56,7 @@
 	<string name="poi_service_tyres">Autógumi-szerelő</string>
 	<string name="poi_car_wash">Autómosó</string>
 	<string name="poi_fuel">Benzinkút</string>
-	<string name="poi_charging_station">Elektromos töltőállomás</string>
+	<string name="poi_electricity_combined_charging">Elektromos töltőállomás</string>
 	<string name="poi_compressed_air">Sűrített levegő</string>
 	<string name="poi_parking">Parkoló</string>
 	<string name="poi_motorcycle_parking">Motorkerékpár-parkoló</string>

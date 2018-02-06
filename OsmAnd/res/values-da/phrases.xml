@@ -124,7 +124,7 @@
         <string name="poi_vehicle_inspection">Bilsyn</string>
         <string name="poi_car_wash">Bilvask</string>
         <string name="poi_fuel">Tankstation</string>
-        <string name="poi_charging_station">Ladestation</string>
+        <string name="poi_electricity_combined_charging">Ladestation</string>
         <string name="poi_vehicle_ramp">Kørerampe</string>
         <string name="poi_compressed_air">Trykluft</string>
         <string name="poi_parking">Parkering</string>

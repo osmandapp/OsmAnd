@@ -58,7 +58,7 @@
 	<string name="poi_vehicle_inspection">Centro revisioni</string>
 	<string name="poi_car_wash">Autolavaggio</string>
 	<string name="poi_fuel">Stazione di servizio</string>
-	<string name="poi_charging_station">Stazione di ricarica</string>
+	<string name="poi_electricity_combined_charging">Stazione di ricarica</string>
 	<string name="poi_compressed_air">Aria compressa</string>
 	<string name="poi_parking">Parcheggio</string>
 	<string name="poi_motorcycle_parking">Parcheggio per moto</string>

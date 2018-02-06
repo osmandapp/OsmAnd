@@ -254,7 +254,7 @@
 	<string name="poi_fuel_biogas">غاز حيوي</string>
 	<string name="poi_fuel_lh2">هيدروجين سائل</string>
 	<string name="poi_fuel_electricity">كهرباء</string>
-	<string name="poi_charging_station">محطة شحن</string>
+	<string name="poi_electricity_combined_charging">محطة شحن</string>
 	<string name="poi_compressed_air">هواء مضغوط</string>
 	<string name="poi_garages">كراجات</string>
 

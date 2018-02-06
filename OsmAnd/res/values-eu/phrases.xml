@@ -315,7 +315,7 @@
 	<string name="poi_traffic_calming_rumble_strip">Burrunba-banda</string>
 	<string name="poi_car_repair">Kotxe konponketa</string>
 	<string name="poi_vehicle_inspection">Ibilgailuen azterketa</string>
-	<string name="poi_charging_station">Birkargarako estazioa</string>
+	<string name="poi_electricity_combined_charging">Birkargarako estazioa</string>
 	<string name="poi_medical_supply">Medikuntza gaiak</string>
 	<string name="poi_vehicle_ramp">Ibilgailuen arrapala</string>
 	<string name="poi_public_transport_stop_position">Garraio publikoaren geldigunea</string>

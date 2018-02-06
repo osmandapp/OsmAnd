@@ -431,7 +431,7 @@
 	<string name="poi_vending_type">Vrsta avtomata</string>
 	<string name="poi_fire_hydrant_position">Položaj</string>
 	<string name="poi_parking_type">Vrsta</string>
-	<string name="poi_charging_station">Polnilna postaja</string>
+	<string name="poi_electricity_combined_charging">Polnilna postaja</string>
 	<string name="poi_charging_station_filter">Polnilna postaja</string>
 
 	</resources>

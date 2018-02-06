@@ -240,7 +240,7 @@
 	<string name="poi_fuel_e85">E85</string>
 	<string name="poi_fuel_biogas">Biokaasu</string>
 	<string name="poi_waterway_fuel">Huoltoasema veneille</string>
-	<string name="poi_charging_station">Latausasema</string>
+	<string name="poi_electricity_combined_charging">Latausasema</string>
 	<string name="poi_compressed_air">Paineilma</string>
 	<string name="poi_parking">Pysäköinti</string>
 	<string name="poi_motorcycle_parking">Moottoripyöräpysäköinti</string>
