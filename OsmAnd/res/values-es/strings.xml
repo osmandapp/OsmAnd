@@ -2863,5 +2863,6 @@ Por favor proporciona un código completo</string>
 <string name="shared_string_current">Actual</string>
     <string name="last_intermediate_dest_description">Añade la ubicación como último destino intermedio</string>
     <string name="first_intermediate_dest_description">Añade la ubicación como primer destino intermedio</string>
-    <string name="subsequent_dest_description">Sube el destino como última parada y crea un nuevo destino</string>
+    <string name="subsequent_dest_description">Mueve el destino hacia arriba y crea un nuevo destino</string>
+    <string name="make_as_start_point">Reemplazar punto de inicio</string>
     </resources>
