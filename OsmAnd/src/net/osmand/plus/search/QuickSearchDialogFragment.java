@@ -1134,7 +1134,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								QuickSearchDialogFragment.this, filter.getFilterId());
 					}
 				}));
-				categoriesSearchFragment.updateListAdapter(rows, false);
+				if (categoriesSearchFragment != null) {
+					categoriesSearchFragment.updateListAdapter(rows, false);
+				}
 			}
 			LOG.info("--- categories loaded");
 		} catch (IOException e) {
@@ -1810,6 +1812,21 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					SearchResult sr = new SearchResult(phrase);
 					sr.localeName = objectLocalizedName;
 					sr.object = c;
+					sr.priority = SEARCH_AMENITY_TYPE_PRIORITY;
+					sr.priorityDistance = 0;
+					sr.objectType = ObjectType.POI_TYPE;
+					searchUICore.selectSearchResult(sr);
+
+					bundle.putBoolean(QUICK_SEARCH_PHRASE_DEFINED_KEY, true);
+
+				} else if (object instanceof PoiUIFilter) {
+					PoiUIFilter filter = (PoiUIFilter) object;
+					objectLocalizedName = filter.getName();
+					SearchUICore searchUICore = mapActivity.getMyApplication().getSearchUICore().getCore();
+					SearchPhrase phrase = searchUICore.resetPhrase();
+					SearchResult sr = new SearchResult(phrase);
+					sr.localeName = objectLocalizedName;
+					sr.object = filter;
 					sr.priority = SEARCH_AMENITY_TYPE_PRIORITY;
 					sr.priorityDistance = 0;
 					sr.objectType = ObjectType.POI_TYPE;

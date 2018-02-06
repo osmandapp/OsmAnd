@@ -1,19 +1,28 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -126,5 +135,49 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 			}
 		}
 		return null;
+	}
+
+	private CollapsableView getCollapsableFavouritesView(final Context context, boolean collapsed, @NonNull final FavoriteGroup group, FavouritePoint selectedPoint) {
+		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
+
+		List<FavouritePoint> points = group.points;
+		for (int i = 0; i < points.size() && i < 10; i++) {
+			final FavouritePoint point = points.get(i);
+			boolean selected = selectedPoint != null && selectedPoint.equals(point);
+			TextViewEx button = buildButtonInCollapsableView(context, selected, false);
+			String name = point.getName();
+			button.setText(name);
+
+			if (!selected) {
+				button.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName());
+						mapActivity.getContextMenu().show(latLon, pointDescription, point);
+					}
+				});
+			}
+			view.addView(button);
+		}
+
+		if (points.size() > 10) {
+			TextViewEx button = buildButtonInCollapsableView(context, false, true);
+			button.setText(context.getString(R.string.shared_string_show_all));
+			button.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					OsmAndAppCustomization appCustomization = app.getAppCustomization();
+					final Intent intent = new Intent(context, appCustomization.getFavoritesActivity());
+					intent.putExtra(FavoritesActivity.OPEN_FAVOURITES_TAB, true);
+					intent.putExtra(FavoritesActivity.GROUP_NAME_TO_SHOW, group.name);
+					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					context.startActivity(intent);
+				}
+			});
+			view.addView(button);
+		}
+
+		return new CollapsableView(view, this, collapsed);
 	}
 }

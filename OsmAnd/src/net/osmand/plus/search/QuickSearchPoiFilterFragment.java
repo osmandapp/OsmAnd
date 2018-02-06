@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
@@ -558,7 +557,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 					boolean showAll = showAllCategories.contains(category);
 					items.add(new PoiFilterListItem(PoiFilterListItemType.DIVIDER, 0, null, -1, false, false, false, null, null));
 
-					String categoryIconStr = poiTypes.getPoiAdditionalCategoryIcon(category);
+					String categoryIconStr = poiTypes.getPoiAdditionalCategoryIconName(category);
 					int categoryIconId = 0;
 					if (!Algorithms.isEmpty(categoryIconStr)) {
 						categoryIconId = RenderingIcons.getBigIconResourceId(categoryIconStr);
