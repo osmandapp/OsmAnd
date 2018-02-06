@@ -1036,7 +1036,7 @@
     <string name="routing_attr_avoid_toll_description">Избегавај путеве са наплатним станицама.</string>
     <string name="routing_attr_avoid_toll_name">Избегавај путеве са наплатним станицама</string>
     <string name="routing_attr_avoid_unpaved_name">Избегавај неасвалтиране путеве</string>
-    <string name="routing_attr_avoid_unpaved_description">Избегавај неасвалтиране путеве</string>
+    <string name="routing_attr_avoid_unpaved_description">Избегавај неасфалтиране путеве.</string>
     <string name="maps_define_edit">Одреди/уреди…</string>
     <string name="switch_start_finish">Замени полазну и циљну тачку</string>
     <string name="rendering_attr_hideIcons_name">Сличице тачака занимања</string>
