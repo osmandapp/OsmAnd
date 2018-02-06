@@ -155,7 +155,7 @@
 	<string name="poi_vehicle_inspection">Пункт техосмотра</string>
 	<string name="poi_car_wash">Автомойка</string>
 	<string name="poi_fuel">Автомобильная заправка</string>
-	<string name="poi_charging_station">Зарядная станция</string>
+	<string name="poi_electricity_combined_charging">Зарядная станция</string>
 	<string name="poi_vehicle_ramp">Ремонтная эстакада/яма</string>
 	<string name="poi_compressed_air">Подкачка шин</string>
 	<string name="poi_parking">Парковка</string>
