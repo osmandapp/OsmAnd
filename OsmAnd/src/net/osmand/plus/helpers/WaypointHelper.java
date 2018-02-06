@@ -27,7 +27,6 @@ import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.VoiceRouter;
-import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -203,26 +202,7 @@ public class WaypointHelper {
 				kIterator++;
 			}
 		}
-		List<RouteSegmentResult> segments = route.getUpcomingTunnel(500);
-		if (segments != null && !segments.isEmpty()) {
-			AlarmInfo inf = new AlarmInfo(AlarmInfoType.TUNNEL, 0);
-			int d = route.getDistanceToPoint(segments.get(0).getStartPointIndex());
-			float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
-			inf.setFloatValue(calculateDistance(segments));
-			int vl = inf.updateDistanceAndGetPriority(time, d);
-			if (vl < value && (showCameras || inf.getType() != AlarmInfoType.SPEED_CAMERA)) {
-				mostImportant = inf;
-			}
-		}
 		return mostImportant;
-	}
-
-	private float calculateDistance(List<RouteSegmentResult> segments) {
-		float sum = 0f;
-		for (RouteSegmentResult r : segments) {
-			sum += r.getDistance();
-		}
-		return sum;
 	}
 
 	public void enableWaypointType(int type, boolean enable) {
@@ -724,31 +704,38 @@ public class WaypointHelper {
 
 			} else if (type == ALARMS) {
 				//assign alarm list icons manually for now
-				if (((AlarmInfo) point).getType().toString().equals("SPEED_CAMERA")) {
+				String typeString = ((AlarmInfo) point).getType().toString();
+				if (typeString.equals("SPEED_CAMERA")) {
 					return uiCtx.getResources().getDrawable(R.drawable.mx_highway_speed_camera);
-				} else if (((AlarmInfo) point).getType().toString().equals("BORDER_CONTROL")) {
+				} else if (typeString.equals("BORDER_CONTROL")) {
 					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_border_control);
-				} else if (((AlarmInfo) point).getType().toString().equals("RAILWAY")) {
+				} else if (typeString.equals("RAILWAY")) {
 					if (app.getSettings().DRIVING_REGION.get().americanSigns) {
 						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways_us);
 					} else {
 						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways);
 					}
-				} else if (((AlarmInfo) point).getType().toString().equals("TRAFFIC_CALMING")) {
+				} else if (typeString.equals("TRAFFIC_CALMING")) {
 					if (app.getSettings().DRIVING_REGION.get().americanSigns) {
 						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_traffic_calming_us);
 					} else {
 						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_traffic_calming);
 					}
-				} else if (((AlarmInfo) point).getType().toString().equals("TOLL_BOOTH")) {
+				} else if (typeString.equals("TOLL_BOOTH")) {
 					return uiCtx.getResources().getDrawable(R.drawable.mx_toll_booth);
-				} else if (((AlarmInfo) point).getType().toString().equals("STOP")) {
+				} else if (typeString.equals("STOP")) {
 					return uiCtx.getResources().getDrawable(R.drawable.list_stop);
-				} else if (((AlarmInfo) point).getType().toString().equals("PEDESTRIAN")) {
+				} else if (typeString.equals("PEDESTRIAN")) {
 					if (app.getSettings().DRIVING_REGION.get().americanSigns) {
 						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian_us);
 					} else {
 						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian);
+					}
+				} else if (typeString.equals("TUNNEL")) {
+					if (app.getSettings().DRIVING_REGION.get().americanSigns) {
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_tunnel);
+					} else {
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_tunnel_us);
 					}
 				} else {
 					return null;
