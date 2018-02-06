@@ -1920,4 +1920,10 @@
     <string name="quick_action_showhide_poi_descr">Fəaliyyət düyməsinə toxunulduqda xəritədə POI-lər göstəriləcək və ya gizlədiləcək.</string>
     <string name="audionotes_location_not_defined">Qeyd ilə əlaqələndiriləcək məkan hələ müəyyənləşdirilməyib. Göstərilən məkana qeyd təyin etmək üçün “Məkan istifadə et…”.</string>
     <string name="send_location_way_choose_title">İstifadə etməklə paylaş</string>
+    <string name="gpx_file_desc">GPX - JOSM və ya digər OSM redaktorlarına ixrac üçün uygundur.</string>
+    <string name="osc_file_desc">OSC - OpenStreetMap-a ixrac üçün uyğundur.</string>
+    <string name="osm_edits_export_desc">İxrac növünü seçin: OSM qeydləri, POI və ya hər ikisi.</string>
+    <string name="rendering_attr_hidePOILabels_name">POI adları</string>
+    <string name="without_time_limit">Vaxt limiti olmadan</string>
+    <string name="plan_route">Marşrut planlaşdır</string>
     </resources>
