@@ -1453,7 +1453,7 @@
 	<string name="poi_shoes_orthopedic">Orthopédique</string>
 
 	<string name="poi_internet_access_type_wlan">Wi-Fi</string>
-	<string name="poi_internet_access_type_terminal">Borne Internet</string>
+	<string name="poi_internet_access_type_terminal">Terminal</string>
 	<string name="poi_architecture_contemporary">Architecture : contemporaine</string>
 	<string name="poi_architecture_art_nouveau">Architecture : art nouveau</string>
 	<string name="poi_architecture_neoclassicism">Architecture : néo-classique</string>
@@ -2884,7 +2884,7 @@
 	<string name="poi_cuisine_mongolian">Mongol</string>
 	<string name="poi_cuisine_middle_eastern">Moyen-oriental</string>
 	<string name="poi_cuisine_ukrainian">Ukrainien</string>
-	<string name="poi_cuisine_afghan">Cuisine afghane</string>
+	<string name="poi_cuisine_afghan">Afghane</string>
 	<string name="poi_cuisine_belgian">Belge</string>
 	<string name="poi_cuisine_basque">Basque</string>
 	<string name="poi_cuisine_swiss">Suisse</string>
@@ -2896,11 +2896,11 @@
 	<string name="poi_cuisine_english">Anglais</string>
 	<string name="poi_cuisine_pakistani">Pakistanais</string>
 	<string name="poi_cuisine_taiwanese">Taïwanais</string>
-	<string name="poi_cuisine_tex_mex">Cuisine tex-mex</string>
+	<string name="poi_cuisine_tex_mex">Tex-mex</string>
 	<string name="poi_cuisine_dutch">Néerlandais</string>
 	<string name="poi_cuisine_syrian">Syrien</string>
 	<string name="poi_cuisine_australian">Australien</string>
-	<string name="poi_cuisine_cajun">Cuisine cadienne</string>
+	<string name="poi_cuisine_cajun">Cadienne</string>
 	<string name="poi_cuisine_egyptian">Égyptien</string>
 	<string name="poi_cuisine_senegalese">Sénégalais</string>
 	<string name="poi_cuisine_jewish">Juif</string>
@@ -3034,7 +3034,7 @@
 	<string name="poi_payment_ep_monedero4b_yes">Monedero 4B</string>
 	<string name="poi_payment_ep_monedero_yes">Monedero</string>
 	<string name="poi_brushless_no">Sans balai</string>
-	<string name="poi_boat_rental_type">Location bateaux</string>
+	<string name="poi_boat_rental_type">Bateaux loués</string>
 
 <string name="poi_toilets_access_community">Accès aux toilettes : propriété collective</string>
 	<string name="poi_vending_toll">Péage par automate</string>
@@ -3207,4 +3207,53 @@
 	<string name="poi_street_cabinet_water_management">Type d\'armoire : gestion de l\'eau</string>
 	<string name="poi_street_cabinet_street_lighting">Type d\'armoire : éclairage public</string>
 
+	<string name="poi_support_pole">Support : poteau</string>
+	<string name="poi_support_billboard">Support : panneau</string>
+	<string name="poi_diplomatic_consulate">Consulat</string>
+	<string name="poi_diplomatic_consulate_general">Consulat général</string>
+	<string name="poi_diplomatic_honorary_consulate">Consulat honoraire</string>
+	<string name="poi_diplomatic_delegation">Délégation</string>
+	<string name="poi_diplomatic_ambassadors_residence">Résidence de l\'ambassadeur</string>
+	<string name="poi_diplomatic_high_commission">Haute commission</string>
+
+	<string name="poi_tower_construction_freestanding">Construction : autoportante</string>
+	<string name="poi_gorge">Gorge</string>
+	<string name="poi_couloir">Couloir</string>
+	<string name="poi_surface_clay">Argile</string>
+	<string name="poi_surface_tartan">Tartan</string>
+	<string name="poi_surface_artificial_turf">Pelouse artificielle</string>
+	<string name="poi_surface_decoturf">Decoturf</string>
+	<string name="poi_surface_metal_grid">Grille métallique</string>
+
+	<string name="poi_location_underground">Emplacement : souterrain</string>
+	<string name="poi_location_underwater">Emplacement : sous l\'eau</string>
+	<string name="poi_location_overground">Emplacement : au dessus du sol</string>
+	<string name="poi_location_overhead">Emplacement : aérien</string>
+	<string name="poi_location_roof">Emplacement : toit</string>
+	<string name="poi_location_rooftop">Emplacement : dessus du toit</string>
+	<string name="poi_location_outdoor">Emplacement : extérieur</string>
+	<string name="poi_location_indoor">Emplacement : intérieur</string>
+	<string name="poi_location_platform">Emplacement : plateforme</string>
+	<string name="poi_location_kiosk">Emplacement : kiosque</string>
+	<string name="poi_location_bridge">Emplacement : pont</string>
+	<string name="poi_location_wall">Emplacement : mur</string>
+	<string name="poi_location_entrance">Emplacement : entrée</string>
+
+	<string name="poi_visibility_house">Visibilité : maison</string>
+	<string name="poi_visibility_street">Visibilité : rue</string>
+	<string name="poi_visibility_area">Visibilité : zone</string>
+
+	<string name="poi_map_type_topo">Type de carte : topo</string>
+	<string name="poi_map_type_street">Type de carte : rue</string>
+	<string name="poi_map_type_scheme">Type de carte : schéma</string>
+	<string name="poi_map_type_toposcope">Type de carte : toposcope</string>
+	<string name="poi_map_size_site">Taille de carte : site</string>
+	<string name="poi_map_size_city">Taille de carte : ville</string>
+	<string name="poi_map_size_region">Taille de carte : région</string>
+
+	<string name="poi_post_housenumber">Numéro de maison</string>
+	<string name="poi_ref_post">Code postal</string>
+
+	<string name="poi_climbing_sport_yes">Sport : oui</string>
+	<string name="poi_climbing_sport_no">Sport : non</string>
 	</resources>
