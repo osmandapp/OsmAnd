@@ -1906,8 +1906,8 @@
 	<string name="poi_motorcycle">Mótorhjólaverslun</string>
 	<string name="poi_optician">Sjóntækjafræðingur</string>
 	<string name="poi_toys">Leikfangaverslun</string>
-	<string name="poi_public_transport_platform">Stoppistöð</string>
-	<string name="poi_public_transport_stop_position">Staðsetning stoppistöðvar</string>
+	<string name="poi_public_transport_platform">Biðstöð almenningssamgangna</string>
+	<string name="poi_public_transport_stop_position">Staðsetning biðstöðvar almenningssamgangna</string>
 	<string name="poi_public_transport_station">Umferðarmiðstöð</string>
 	<string name="poi_optometrist">Sjónskoðun</string>
 	<string name="poi_attraction">Aðdráttarafl fyrir ferðafólk</string>
@@ -3470,4 +3470,5 @@
 	<string name="poi_denomination_evangelical">Evangelísk</string>
 	<string name="poi_xmas_pyramid">Jólapýramídi</string>
 	<string name="poi_xmas_note">Jól: minnismiði</string>
+	<string name="poi_xmas_day_date">Jól: tímabil fyrir atburðinn</string>
 	</resources>
