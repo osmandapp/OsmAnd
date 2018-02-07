@@ -709,7 +709,7 @@
     <string name="poi_action_add">Əlavə etmə</string>
     <string name="poi_action_change">Dəyişdirmə</string>
     <string name="poi_action_delete">Silmə</string>
-    <string name="poi_dialog_opening_hours">Açılır</string>
+    <string name="poi_dialog_opening_hours">İş vaxtı:</string>
     <string name="poi_dialog_comment">Rəy</string>
     <string name="poi_dialog_reopen">Yenidən aç</string>
     <string name="filter_current_poiButton">Filtr</string>
@@ -1926,4 +1926,15 @@
     <string name="rendering_attr_hidePOILabels_name">POI adları</string>
     <string name="without_time_limit">Vaxt limiti olmadan</string>
     <string name="plan_route">Marşrut planlaşdır</string>
+    <string name="please_specify_poi_type">POI növünü göstərin.</string>
+    <string name="poi_deleted_localy">Dəyişikliklərinizi yüklədikdən sonra POI silinəcək</string>
+    <string name="unsaved_changes_will_be_lost">Yadda saxlanmamış dəyişikliklər itəcək. Davam edilsin?</string>
+    <string name="help_us_to_improve_menu_group">OsmAnd-ı təkmilləşdirməyə kömək edin</string>
+    <string name="search_on_the_map_item">Xəritədə axtarış</string>
+    <string name="instalation_troubleshooting_item">Quraşdırma və problem aradan qaldırma</string>
+    <string name="techical_articles_item">Texniki məqalələr</string>
+    <string name="feedback">Əks əlaqə</string>
+    <string name="poi_context_menu_modify_osm_change">OSM dəyişikliyinə düzəliş et</string>
+    <string name="quick_action_item_action">Fəaliyyət %d</string>
+    <string name="quick_action_item_screen">Ekran %d</string>
     </resources>
