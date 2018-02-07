@@ -2950,4 +2950,9 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="osm_notes">Notas OSM</string>
     <string name="tunnel_warning">Galleria a curtzu</string>
     <string name="show_tunnels">Gallerias</string>
-</resources>
+<string name="make_as_start_point">Pone comente Puntu de incumintzu</string>
+    <string name="shared_string_current">Atuale</string>
+    <string name="last_intermediate_dest_description">Annanghet s\'ùrtima firmada a s\'àndala</string>
+    <string name="first_intermediate_dest_description">Annanghet sa prima firmada a s\'àndala</string>
+    <string name="subsequent_dest_description">Moe sa destinatzione in subra, e crea una destinatzione</string>
+    </resources>
