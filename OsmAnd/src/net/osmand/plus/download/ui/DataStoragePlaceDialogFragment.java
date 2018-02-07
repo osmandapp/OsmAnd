@@ -268,6 +268,8 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		Bundle args = new Bundle();
 		args.putBoolean(STORAGE_READOLNY_KEY, storageReadOnly);
 		f.setArguments(args);
-		f.show(fragmentManager, DataStoragePlaceDialogFragment.TAG);
+		fragmentManager.beginTransaction()
+				.add(f, DataStoragePlaceDialogFragment.TAG)
+				.commitAllowingStateLoss();
 	}
 }
