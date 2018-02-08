@@ -41,6 +41,7 @@ public class AlarmInfo implements LocationPoint {
 	
 	private AlarmInfoType type;
 	protected final int locationIndex;
+	private int lastLocationIndex = -1;
 	private int intValue;
 	private float floatValue;
 	private double latitude;
@@ -81,11 +82,19 @@ public class AlarmInfo implements LocationPoint {
 	public int getLocationIndex() {
 		return locationIndex;
 	}
-	
+
+	public int getLastLocationIndex() {
+		return lastLocationIndex;
+	}
+
+	public void setLastLocationIndex(int lastLocationIndex) {
+		this.lastLocationIndex = lastLocationIndex;
+	}
+
 	public void setIntValue(int intValue) {
 		this.intValue = intValue;
 	}
-	
+
 	public static AlarmInfo createSpeedLimit(int speed, Location loc){
 		AlarmInfo info = new AlarmInfo(AlarmInfoType.SPEED_LIMIT, 0);
 		info.setLatLon(loc.getLatitude(), loc.getLongitude());

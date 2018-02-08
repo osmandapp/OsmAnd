@@ -183,15 +183,15 @@ public class WaypointHelper {
 			int kIterator = pointsProgress.get(ALARMS);
 			List<LocationPointWrapper> lp = locationPoints.get(ALARMS);
 			while (kIterator < lp.size()) {
-				LocationPointWrapper lwp = lp.get(kIterator);
-				if (lp.get(kIterator).routeIndex < route.getCurrentRoute()) {
+				AlarmInfo inf = (AlarmInfo) lp.get(kIterator).point;
+				if (inf.getLocationIndex() < route.getCurrentRoute() && inf.getLastLocationIndex() != -1
+						&& inf.getLastLocationIndex() < route.getCurrentRoute()) {
 					// skip
 				} else {
-					int d = route.getDistanceToPoint(lwp.routeIndex);
+					int d = route.getDistanceToPoint(inf.getLocationIndex());
 					if (d > LONG_ANNOUNCE_RADIUS) {
 						break;
 					}
-					AlarmInfo inf = (AlarmInfo) lwp.point;
 					float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
 					int vl = inf.updateDistanceAndGetPriority(time, d);
 					if (vl < value && (showCameras || inf.getType() != AlarmInfoType.SPEED_CAMERA)) {
@@ -325,11 +325,21 @@ public class WaypointHelper {
 				if (lp != null) {
 					int kIterator = pointsProgress.get(type);
 					while (kIterator < lp.size() && lp.get(kIterator).routeIndex < currentRoute) {
+						if (type == ALARMS) {
+							AlarmInfo alarm = (AlarmInfo) lp.get(kIterator).getPoint();
+							if (alarm.getLastLocationIndex() >= currentRoute) {
+								break;
+							}
+						}
 						kIterator++;
 					}
 					pointsProgress.set(type, kIterator);
 					while (kIterator < lp.size()) {
 						LocationPointWrapper lwp = lp.get(kIterator);
+						if (type == ALARMS && lwp.routeIndex < currentRoute) {
+							kIterator++;
+							continue;
+						}
 						if (lwp.announce) {
 							if (route.getDistanceToPoint(lwp.routeIndex) > LONG_ANNOUNCE_RADIUS * 2) {
 								break;

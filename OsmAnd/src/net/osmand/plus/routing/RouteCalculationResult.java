@@ -239,6 +239,9 @@ public class RouteCalculationResult {
 					tunnelAlarm.setFloatValue(tunnelAlarm.getFloatValue() + s.getDistance());
 				}
 			} else {
+				if (tunnelAlarm != null) {
+					tunnelAlarm.setLastLocationIndex(locations.size());
+				}
 				tunnelAlarm = null;
 			}
 			while (true) {
