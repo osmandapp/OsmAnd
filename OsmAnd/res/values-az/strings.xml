@@ -939,7 +939,7 @@
 \n Qeyd 2: Yeni saxlama yerində OsmAnd və OsmAnd+ arasında fayl paylaşmaq mümkün olmayacaq.</string>
     <string name="copying_osmand_one_file_descr">Fayl (%s) yeni təyinat yerinə kopyalanır…</string>
     <string name="copying_osmand_files_descr">OsmAnd məlumat faylları yeni təyinat yerinə kopyalanır (%s)…</string>
-    <string name="quick_action_btn_tutorial_title">Düymə mövqeyini dəyiş</string>
+    <string name="quick_action_btn_tutorial_title">Düymənin mövqeyini dəyiş</string>
     <string name="road_blocked">Yol bağlanıb</string>
     <string name="si_kmh">Saatda kilometr</string>
     <string name="si_mph">Saatda mil</string>
