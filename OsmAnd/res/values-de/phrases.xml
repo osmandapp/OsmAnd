@@ -3723,4 +3723,6 @@
 	<string name="poi_meadow_perpetual">Typ: dauernd</string>
 	<string name="poi_meadow_pasture">Typ: Weide</string>
 
+	<string name="poi_shop_fireplace">Kaminofenbauer</string>
+
 	</resources>
