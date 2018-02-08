@@ -517,7 +517,7 @@
 	<string name="poi_hunting_lodge">Cabana de caça</string>
 
 	<string name="poi_place_of_worship">Lugar de prática religiosa</string>
-	<string name="poi_religion_christian">Cristãos</string>
+	<string name="poi_religion_christian">Cristianismo</string>
 	<string name="poi_religion_jewish">Judaísmo</string>
 	<string name="poi_religion_muslim">Islamismo</string>
 	<string name="poi_religion_sikh">Sikhismo</string>
@@ -966,7 +966,7 @@
 	<string name="poi_recycling_scrap_metal">Sucata de metal</string>
 	<string name="poi_recycling_batteries">Pilhas</string>
 	<string name="poi_recycling_plastic_bottles">Garrafas de plástico</string>
-	<string name="poi_recycling_green_waste">Resíduo verde</string>
+	<string name="poi_recycling_green_waste">Resíduos verdes</string>
 	<string name="poi_recycling_waste">Resíduos (sacos pretos)</string>
 	<string name="poi_recycling_plastic_packaging">Embalagens de plástico</string>
 	<string name="poi_recycling_newspaper">Jornal</string>
@@ -981,7 +981,7 @@
 	<string name="poi_recycling_aluminium">Alumínio</string>
 	<string name="poi_recycling_organic">Orgânico</string>
 	<string name="poi_recycling_beverage_cartons">Caixas de bebidas</string>
-	<string name="poi_recycling_garden_waste">Resíduo de jardim</string>
+	<string name="poi_recycling_garden_waste">Resíduos de jardim</string>
 	<string name="poi_recycling_low_energy_bulbs">Lâmpadas de baixo consumo</string>
 	<string name="poi_recycling_fluorescent_tubes">Lâmpadas fluorescentes</string>
 	<string name="poi_recycling_metal">Metal</string>
@@ -3334,7 +3334,7 @@
 	<string name="poi_cuisine_teriyaki">Teriyaki</string>
 	<string name="poi_cuisine_shawarma">Xauarma</string>
 
-	<string name="poi_cuisine_regional">Regional</string>
+	<string name="poi_cuisine_regional">Local</string>
 	<string name="poi_cuisine_italian">Italiana</string>
 	<string name="poi_cuisine_chinese">Chinês</string>
 	<string name="poi_cuisine_mexican">Mexicana</string>
