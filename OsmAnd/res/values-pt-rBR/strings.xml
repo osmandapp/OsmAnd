@@ -2744,4 +2744,22 @@ Pôr do Sol: %2$s</string>
     <string name="osc_file">Arquivo OSC</string>
     <string name="choose_file_type">Escolha o tipo de arquivo</string>
     <string name="show_tunnels">Túneis</string>
-</resources>
+<string name="shared_string_current">Atual</string>
+    <string name="last_intermediate_dest_description">Adiciona a última parada ao longo do percurso</string>
+    <string name="first_intermediate_dest_description">Adiciona a primeira parada na rota</string>
+    <string name="subsequent_dest_description">Mover destino para cima, e criar destino</string>
+    <string name="gpx_file_desc">GPX - adequado para exportar para JOSM ou outros editores OSM.</string>
+    <string name="osc_file_desc">OSC - adequado para exportar para OpenStreetMap.</string>
+    <string name="osm_edits_export_desc">Selecione o tipo de exportação: notas OSM, POI, ou ambos.</string>
+    <string name="all_data">Todos os dados</string>
+    <string name="osm_notes">Notas OSM</string>
+    <string name="will_open_tomorrow_at">Abrirá amanhã às</string>
+    <string name="rendering_attr_hidePOILabels_name">Rótulos POI</string>
+    <string name="day_off_label">desligado</string>
+    <string name="winter_and_ski_renderer">Inverno e esqui</string>
+    <string name="touring_view_renderer">Vista de turismo (contraste e detalhes)</string>
+    <string name="nautical_renderer">Náutico</string>
+    <string name="copy_location_name">Copiar nome de Ponto/POI</string>
+    <string name="toast_empty_name_error">O local não tem nome</string>
+    <string name="tunnel_warning">Túnel à frente</string>
+    </resources>
