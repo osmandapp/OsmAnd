@@ -3005,4 +3005,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="last_intermediate_dest_description">Fügt den letzten Halt entlang der Route hinzu</string>
     <string name="first_intermediate_dest_description">Fügt den ersten Halt auf der Route hinzu</string>
     <string name="subsequent_dest_description">Ziel nach oben verschieben und Ziel erstellen</string>
+    <string name="make_as_start_point">Zum Startpunkt machen</string>
     </resources>
