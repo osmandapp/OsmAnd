@@ -2811,8 +2811,8 @@
 	<string name="poi_treat_inpatient_only">Nur stationäre Dienste</string>
 	<string name="poi_counselling_yes">Beratung: ja</string>
 	<string name="poi_counselling_no">Beratung: nein</string>
-	<string name="poi_emergency_yes">Notfall: ja</string>
-	<string name="poi_emergency_no">Notfall: nein</string>
+	<string name="poi_emergency_yes">Notaufnahme: ja</string>
+	<string name="poi_emergency_no">Notaufnahme: nein</string>
 	<string name="poi_home_visit_yes">ja</string>
 	<string name="poi_home_visit_no">Hausbesuch: nein</string>
 
