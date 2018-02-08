@@ -2599,10 +2599,10 @@
 
 	<string name="poi_conveying_yes">輸送裝置︰有</string>
 
-	<string name="poi_bridge_ref">橋梁參考</string>
-	<string name="poi_tunnel_ref">隧道參考</string>
+	<string name="poi_bridge_ref">橋梁編號</string>
+	<string name="poi_tunnel_ref">隧道編號</string>
 
-	<string name="poi_ref">参考</string>
+	<string name="poi_ref">編號</string>
 
 	<string name="poi_cargo_passengers">乘客</string>
 	<string name="poi_cargo_vehicle">車輛</string>
