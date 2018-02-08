@@ -1660,41 +1660,43 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull final int[] grantResults) {
-		OsmandPlugin.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		if (grantResults.length > 0) {
+			OsmandPlugin.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-		MapControlsLayer mcl = mapView.getLayerByClass(MapControlsLayer.class);
-		if (mcl != null) {
-			mcl.onRequestPermissionsResult(requestCode, permissions, grantResults);
-		}
+			MapControlsLayer mcl = mapView.getLayerByClass(MapControlsLayer.class);
+			if (mcl != null) {
+				mcl.onRequestPermissionsResult(requestCode, permissions, grantResults);
+			}
 
-		if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
-				&& grantResults.length > 0 && permissions.length > 0
-				&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
-			permissionAsked = true;
-			permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-		} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION
-				&& grantResults.length > 0 && permissions.length > 0
-				&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
+			if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+					&& grantResults.length > 0 && permissions.length > 0
+					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
+				permissionAsked = true;
+				permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+			} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION
+					&& grantResults.length > 0 && permissions.length > 0
+					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
 
-			new Timer().schedule(new TimerTask() {
-				@Override
-				public void run() {
-					FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-					if (wizardFragment != null) {
-						wizardFragment.processStoragePermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
+				new Timer().schedule(new TimerTask() {
+					@Override
+					public void run() {
+						FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+						if (wizardFragment != null) {
+							wizardFragment.processStoragePermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
+						}
 					}
-				}
-			}, 1);
-		} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_LOCATION_PERMISSION) {
-			new Timer().schedule(new TimerTask() {
-				@Override
-				public void run() {
-					FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-					if (wizardFragment != null) {
-						wizardFragment.processLocationPermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
+				}, 1);
+			} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_LOCATION_PERMISSION) {
+				new Timer().schedule(new TimerTask() {
+					@Override
+					public void run() {
+						FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+						if (wizardFragment != null) {
+							wizardFragment.processLocationPermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
+						}
 					}
-				}
-			}, 1);
+				}, 1);
+			}
 		}
 
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
