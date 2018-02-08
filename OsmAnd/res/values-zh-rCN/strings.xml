@@ -198,7 +198,7 @@
 	<string name="global_settings">全局设置</string>
 	<string name="general_settings">一般</string>
 	<string name="user_name">你的OSM用户名</string>
-	<string name="open_street_map_login_descr">为提交openstreetmap.org需要</string>
+	<string name="open_street_map_login_descr">用于向 openstreetmap.org 进行提交。</string>
 	<string name="user_password">您的OSM密码</string>
 	
 	<string name="osmand_service">睡眠模式功能</string>
@@ -2609,7 +2609,7 @@
     <string name="quick_action_map_source_title">地图来源</string>
     <string name="quick_action_map_source_switch">地图来源已更改为\"%s\"。</string>
     <string name="quick_action_btn_tutorial_title">更改按钮的位置</string>
-    <string name="quick_action_btn_tutorial_descr">长按并拖动按钮来改变其在屏幕上的位置</string>
+    <string name="quick_action_btn_tutorial_descr">长按并拖动按钮来改变其在屏幕上的位置。</string>
     
     <string name="map_widget_ruler_control">半径量尺</string>
     <string name="wrong_user_name">错误的用户名！</string>
@@ -2756,4 +2756,15 @@
     <string name="retry">重试</string>
     <string name="save_gpx_waypoint">保存 GPX 航点</string>
     <string name="import_track">导入轨迹</string>
+    <string name="make_as_start_point">标记为起始点</string>
+    <string name="tap_on_map_to_hide_interface_descr">可以轻触屏幕切换显示控制按钮和小工具。</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">避开结冰路面和浅滩</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">避开结冰路面和浅滩。</string>
+    <string name="last_seven_days">最近 7 天</string>
+    <string name="sort_by">排序方式</string>
+    <string name="do_not_use_animations">不要使用动画效果</string>
+    <string name="do_not_use_animations_descr">禁用应用程序中的动画效果。</string>
+    <string name="empty_state_my_tracks">添加并记录轨迹</string>
+    <string name="empty_state_favourites">添加收藏</string>
+    <string name="empty_state_favourites_desc">在地图上添加收藏地点或从文件导入。</string>
     </resources>
