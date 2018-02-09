@@ -7,7 +7,7 @@
 	<string name="poi_landuse">Landnotkun</string>
 	<string name="poi_education">Menntun</string>
 	<string name="poi_administrative">Stjórnsýsla</string>
-	<string name="poi_healthcare">Heilbrigðistengt</string>
+	<string name="poi_healthcare">Heilsugæsla</string>
 	<string name="poi_sport">Íþróttir</string>
 	<string name="poi_tourism">Ferðamennska</string>
 	<string name="poi_sightseeing">Skoðunarferðir</string>
@@ -63,7 +63,7 @@
 	<string name="poi_veterinary">Dýraspítali</string>
 	<string name="poi_blood_bank">Blóðbanki</string>
 	<string name="poi_midwife">Ljósmóðir</string>
-	<string name="poi_studio">Stúdíó</string>
+	<string name="poi_studio">Upptökustúdíó</string>
 	<string name="poi_golf_course">Golfvöllur</string>
 	<string name="poi_museum">Safn</string>
 	<string name="poi_memorial">Minnismerki</string>
@@ -3516,5 +3516,42 @@
 	<string name="poi_nuclear_explosion_crater_diameter">Sprenging: þvermál gígar</string>
 	<string name="poi_nuclear_explosion_warhead">Sprenging: sprengioddur</string>
 	<string name="poi_nuclear_explosion_device">Sprenging: útbúnaður</string>
+
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Tilgangur sprengingar: tengt kjarnavopnum</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Tilgangur sprengingar: áhrif vopna</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Tilgangur sprengingar: öryggistilraun</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Tilgangur sprengingar: rannsóknir á notkun í friðsamlegum tilgangi</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Tilgangur sprengingar: grunnvísindi</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Tilgangur sprengingar: notkun í iðnaði, gröftur jarðrýmis</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Tilgangur sprengingar: notkun í iðnaði, jarðskjálftamælingar</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Tilgangur sprengingar: notkun í iðnaði, herming olíulaga</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Tilgangur sprengingar: notkun í iðnaði</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Tilgangur sprengingar: notkun í iðnaði, tilfærsla jarðvegs</string>
+	<string name="poi_nuclear_explosion_hole">Sprengihola</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Hæð sprengiþeytingar</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Hæð sprengiflatar (ground zero)</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Styrkur rúmbylgju</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Sprengiröð: fyrsta sprenging í röð prófana</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Sprengiröð: næsta eða síðari sprenging í röð prófana</string>
+	<string name="poi_counselling_type_antenatal_yes">Ráðgjafarþjónusta (meðganga): já</string>
+	<string name="poi_counselling_type_antenatal_no">Ráðgjafarþjónusta (meðganga): nei</string>
+	<string name="poi_counselling_type_homeless_yes">Ráðgjafarþjónusta (heimilislausir): já</string>
+	<string name="poi_counselling_type_homeless_no">Ráðgjafarþjónusta (heimilislausir): nei</string>
+	<string name="poi_counselling_type_immigrant_yes">Ráðgjafarþjónusta (innflytjendur): já</string>
+	<string name="poi_counselling_type_immigrant_no">Ráðgjafarþjónusta (innflytjendur): nei</string>
+	<string name="poi_counselling_type_marriage_yes">Ráðgjafarþjónusta (hjónabönd): já</string>
+	<string name="poi_counselling_type_marriage_no">Ráðgjafarþjónusta (hjónabönd): nei</string>
+	<string name="poi_counselling_type_nutrition_yes">Ráðgjafarþjónusta (næring): já</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Ráðgjafarþjónusta (næring): nei</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Ráðgjafarþjónusta (endurhæfing): já</string>
+	<string name="poi_counselling_type_rehabilitation_no">Ráðgjafarþjónusta (endurhæfing): nei</string>
+	<string name="poi_counselling_type_sexual_yes">Ráðgjafarþjónusta (kynlíf): já</string>
+	<string name="poi_counselling_type_sexual_no">Ráðgjafarþjónusta (kynlíf): nei</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Ráðgjafarþjónusta (kynferðisleg misnotkun): já</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Ráðgjafarþjónusta (kynferðisleg misnotkun): nei</string>
+	<string name="poi_counselling_type_victim_yes">Ráðgjafarþjónusta (þolendur): já</string>
+	<string name="poi_counselling_type_victim_no">Ráðgjafarþjónusta (þolendur): nei</string>
+	<string name="poi_counselling_type_violence_yes">Ráðgjafarþjónusta (ofbeldi): já</string>
+	<string name="poi_counselling_type_violence_no">Ráðgjafarþjónusta (ofbeldi): nei</string>
 
 	</resources>
