@@ -883,7 +883,7 @@ Miejsce parkowania oraz czas można znaleźć na karcie w panelu oraz na widżec
     <string name="avoid_in_routing_title">Omijanie…</string>
     <string name="avoid_in_routing_descr">Wyznacza trasy omijając drogi płatne, nieutwardzone, promy.</string>
     <string name="show_warnings_title">Wyświetlanie ostrzeżeń…</string>
-    <string name="show_warnings_descr">Wyświetla ostrzeżenia ruchu drogowego, ostrzeżenia o fotoradarach i informacje o pasach ruchu.</string>
+    <string name="show_warnings_descr">Wyświetla ostrzeżenia ruchu drogowego (ograniczenia prędkości, znaki \"stop\", progi zwalniające, tunele), ostrzeżenia o fotoradarach i informacje o pasach ruchu.</string>
 
 
     <string name="osmand_short_description_80_chars">Mapy dla całego świata i nawigacja działająca w oparciu o stacjonarne jak i sieciowe mapy OSM</string>
@@ -2861,7 +2861,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="ascendingly">rosnąco</string>
     <string name="date_added">Data dodania</string>
     <string name="order_by">Porządkowanie według:</string>
-    <string name="show_guide_line">Linia przewodnia</string>
+    <string name="show_guide_line">Pokaż linie przewodnie</string>
     <string name="show_arrows_on_the_map">Strzałki na mapie</string>
     <string name="show_passed">Wyświetl datę ostatniego użycia</string>
     <string name="hide_passed">Ukryj datę ostatniego użycia</string>
@@ -2995,5 +2995,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="one_tap_active_descr">Naciśnij znacznik na mapie, by przesunąć do na górę listy aktywnych znaczników bez otwierania menu kontekstowego.</string>
     <string name="one_tap_active">Aktywacja jednym dotknięciem</string>
     <string name="show_tunnels">Tunele</string>
-<string name="import_as_gpx">Zapisz plik w formacie gpx.</string>
+<string name="import_as_gpx">Zapisz plik w formacie GPX.</string>
+    <string name="copy_location_name">Kopiuj nazwę punktu</string>
+    <string name="toast_empty_name_error">Miejsce nie ma nazwy</string>
+    <string name="tunnel_warning">Zbliżasz się do tunelu</string>
     </resources>
