@@ -2913,7 +2913,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="favourites_group">Grupa ulubionych</string>
     <string name="add_group">"Dodaj grupę "</string>
     <string name="add_group_descr">Dodaje grupę ulubionych miejsc lub punktów śladu.</string>
-    <string name="empty_state_markers_active">Znaczniki na mapie!</string>
+    <string name="empty_state_markers_active">Utwórz znaczniki na mapie!</string>
     <string name="empty_state_markers_active_desc">Proszę dotknąć miejsce a następnie przycisk znacznika opatrzony flagą.</string>
     <string name="shared_string_two">Dwa</string>
     <string name="shared_string_one">Jeden</string>
@@ -2992,4 +2992,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="av_locations_selected_desc">Plik GPX ze współrzędnymi i danymi wybranych notatek.</string>
     <string name="av_locations_all_desc">Plik GPX ze współrzędnymi i danymi wszystkich notatek.</string>
     <string name="modify_the_search_query">Modyfikuj zapytanie.</string>
-    </resources>
+    <string name="one_tap_active_descr">Naciśnij znacznik na mapie, by przesunąć do na górę listy aktywnych znaczników bez otwierania menu kontekstowego.</string>
+    <string name="one_tap_active">Aktywacja jednym dotknięciem</string>
+    <string name="show_tunnels">Tunele</string>
+</resources>
