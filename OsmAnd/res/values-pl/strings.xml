@@ -2995,4 +2995,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="one_tap_active_descr">Naciśnij znacznik na mapie, by przesunąć do na górę listy aktywnych znaczników bez otwierania menu kontekstowego.</string>
     <string name="one_tap_active">Aktywacja jednym dotknięciem</string>
     <string name="show_tunnels">Tunele</string>
-</resources>
+<string name="import_as_gpx">Zapisz plik w formacie gpx.</string>
+    </resources>
