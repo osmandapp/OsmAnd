@@ -218,7 +218,7 @@
 	<string name="poi_public_transport">Almenningssamgöngur</string>
 	<string name="poi_air_transport">Flugsamgöngur</string>
 	<string name="poi_water_transport">Samgöngur á legi</string>
-	<string name="poi_power">Veldi</string>
+	<string name="poi_power">Orka</string>
 	<string name="poi_communication">Samskipti</string>
 	<string name="poi_trash_disposal">Ruslsöfnun</string>
 	<string name="poi_office">Skrifstofa</string>
@@ -271,7 +271,7 @@
 	<string name="poi_city_wall">Borgarmúr</string>
 	<string name="poi_traffic_calming_table">Pallur</string>
 	<string name="poi_traffic_calming_island">Umferðareyja</string>
-	<string name="poi_traffic_signals">Stöðvunarljós</string>
+	<string name="poi_traffic_signals">Umferðarljós</string>
 
 	<string name="poi_service_tyres">Hjólbarðar</string>
 	<string name="poi_car_wash">Bílaþvottastöð</string>
@@ -1353,11 +1353,11 @@
 	<string name="poi_impromptu_no">Án pöntunar: nei</string>
 	<string name="poi_sanitary_dump_station_yes">Stöð fyrir hreinlætisúrgang: já</string>
 	<string name="poi_sanitary_dump_station_no">Stöð fyrir hreinlætisúrgang: nei</string>
-	<string name="poi_power_supply_no">Aflgjafi: nei</string>
-	<string name="poi_power_supply_cee_17_blue">Aflgjafi (innstunga): CEE 17 blátt</string>
-	<string name="poi_power_supply_cee_7_4">Aflgjafi (innstunga): CEE 7/4</string>
-	<string name="poi_power_supply_cee_7_5">Aflgjafi (innstunga): CEE 7/5</string>
-	<string name="poi_power_supply_nema_5_15">Aflgjafi (innstunga): NEMA 5-15</string>
+	<string name="poi_power_supply_no">Rafmagnstengill: nei</string>
+	<string name="poi_power_supply_cee_17_blue">Rafmagnstengill (innstunga): CEE 17 blátt</string>
+	<string name="poi_power_supply_cee_7_4">Rafmagnstengill (innstunga): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Rafmagnstengill (innstunga): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Rafmagnstengill (innstunga): NEMA 5-15</string>
 
 	<string name="poi_capacity_tents">Hámarksfjöldi tjalda</string>
 	<string name="poi_capacity_caravans">Hámarksfjöldi hjólhýsa</string>
@@ -1782,7 +1782,7 @@
 	<string name="poi_diet">Mataræði</string>
 	<string name="poi_health_specialty">Heilsutengt sérsvið</string>
 	<string name="poi_massage_type">Tegund af nuddi</string>
-	<string name="poi_power_supply">Aflgjafi</string>
+	<string name="poi_power_supply">Rafmagnstengill</string>
 	<string name="poi_medical_system">Lækningasvið</string>
 	<string name="poi_home_visit">Heimsóknir</string>
 	<string name="poi_free_flying_characteristic">Eiginleikar</string>
@@ -2300,7 +2300,7 @@
 	<string name="poi_disused">Aflagt</string>
 
 	<string name="poi_brand">Vörumerki</string>
-	<string name="poi_crossing_traffic_signals">Með stöðvunarljósum</string>
+	<string name="poi_crossing_traffic_signals">Með umferðarljósum</string>
 	<string name="poi_crossing_uncontrolled">Óstýrt</string>
 	<string name="poi_wholesale">Heildsala</string>
 
@@ -2317,7 +2317,7 @@
 	<string name="poi_urban">Í byggð</string>
 	<string name="poi_rural">Sveit</string>
 
-	<string name="poi_enforcement_traffic_signals">Umferðareftirlit: stöðvunarljós</string>
+	<string name="poi_enforcement_traffic_signals">Umferðareftirlit: umferðarljós</string>
 	<string name="poi_enforcement_maxspeed">Umferðareftirlit: hámarkshraði</string>
 	<string name="poi_enforcement_maxheight">Umferðareftirlit: hámarkshæð</string>
 	<string name="poi_enforcement_mindistance">Umferðareftirlit: lágmarksmillibil</string>
@@ -3471,4 +3471,50 @@
 	<string name="poi_xmas_pyramid">Jólapýramídi</string>
 	<string name="poi_xmas_note">Jól: minnismiði</string>
 	<string name="poi_xmas_day_date">Jól: tímabil fyrir atburðinn</string>
+	<string name="poi_trade">Heildsala</string>
+	<string name="poi_architecture_eclectic">Byggingastíll: eklektískur (yfirburðastíll)</string>
+	<string name="poi_architecture_new_objectivity">Byggingastíll: nýhlutlægni</string>
+	<string name="poi_historic_period_principate">Sögutími: keisaraveldi (27 f.Kr. – 284 e.Kr.)</string>
+	<string name="poi_historic_period_old_kingdom">Sögutími: gamla konungsveldið (2686 – 2181 f.Kr.)</string>
+	<string name="poi_historic_period_first_persian_period">Sögutími: fyrra persneska tímabilið</string>
+	<string name="poi_historic_period_second_persian_period">Sögutími: seinna persneska tímabilið</string>
+	<string name="poi_historic_period_persian_occupation">Sögutími: persneska hernámið</string>
+	<string name="poi_site_type_megalith">Stórsteinn</string>
+	<string name="poi_site_type_necropolis">Grafhýsaþyrping</string>
+	<string name="poi_megalith_type_menhir">Tegund steins: bautasteinn</string>
+	<string name="poi_megalith_type_dolmen">Tegund steins: dolmen</string>
+	<string name="poi_megalith_type_nuraghe">Tegund steins: hringhleðsla (nuraghe)</string>
+	<string name="poi_megalith_type_stone_circle">Tegund steins: steinahringur</string>
+	<string name="poi_megalith_type_passage_grave">Tegund steins: gangagröf</string>
+	<string name="poi_fortification_type_hill_fort">Tegund virkis: jarðmanir</string>
+	<string name="poi_fortification_type_limes">Tegund virkis: víggirðingar (limes)</string>
+	<string name="poi_fortification_type_sconce">Tegund virkis: skans (sconce)</string>
+	<string name="poi_fortification_type_ring_ditch">Tegund virkis: hringgrafir</string>
+
+	<string name="poi_pa">Pa (víggirt byggð maóría)</string>
+
+	<string name="poi_forestry_compartment">Merkistaur: skipting skógarreita</string>
+	<string name="poi_forestry_allotment">Merkistaur: úthlutun skógarreita</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Tegund sprengingar: neðanjarðar, stokkur</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Tegund sprengingar: neðanjarðar, göng</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Tegund sprengingar: í andrúmslofti</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Tegund sprengingar: í andrúmslofti, kastað úr flugfari</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Tegund sprengingar: í andrúmslofti, á jörðu niðri, turn</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Tegund sprengingar: í andrúmslofti, loftbelgur</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Tegund sprengingar: í andrúmslofti, á jörðu niðri</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Tegund sprengingar: í andrúmslofti, á vatnsyfirborði, prammi</string>
+	<string name="poi_nuclear_explosion_type_underground">Tegund sprengingar: neðanjarðar</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Tegund sprengingar: gígmyndun (grunnt neðanjarðar)</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Tegund sprengingar: í andrúmslofti, eldflaug eða flugskeyti</string>
+	<string name="poi_nuclear_explosion_type_space">Tegund sprengingar: í geimnum (hæð yfir 80 km)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Tegund sprengingar: neðansjávar</string>
+	<string name="poi_nuclear_explosion_date_utc">Dagsetning sprengingar (UTC)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Heiti sprengingar (en)</string>
+	<string name="poi_nuclear_explosion_series">Sprengiruna</string>
+	<string name="poi_nuclear_explosion_time_utc">Tímasetning sprengingar (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Afl sprengingar</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Sprenging: þvermál gígar</string>
+	<string name="poi_nuclear_explosion_warhead">Sprenging: sprengioddur</string>
+	<string name="poi_nuclear_explosion_device">Sprenging: útbúnaður</string>
+
 	</resources>
