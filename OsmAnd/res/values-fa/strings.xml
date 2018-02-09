@@ -3032,7 +3032,7 @@
     <string name="copy_location_name">کپی‌کردن نام نقطه/POI</string>
     <string name="toast_empty_name_error">مکان بدون نام است</string>
 <string name="show_closed_notes">دیدن توضیحات ویرایشی بسته‌شده</string>
-    <string name="switch_osm_notes_visibility_desc">توضیحات ویرایشی OSM را روی نقشه پنهان/آشکار کنید.</string>
+    <string name="switch_osm_notes_visibility_desc">پنهان/آشکارکردن توضیحات ویرایشی.</string>
     <string name="gpx_file_desc">جی‌پی‌ایکس - مناسب برای استفاده در JOSM یا سایر ویرایشگرهای OSM.</string>
     <string name="osc_file_desc">اُاِس‌سی - مناسب برای استفاده در OpenStreetMap.</string>
     <string name="gpx_file">فایل GPX</string>
