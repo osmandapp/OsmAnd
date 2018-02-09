@@ -193,7 +193,7 @@
 
 
     <string name="map_widget_parking">Parkering</string>
-    <string name="map_widget_monitoring">GPX logning</string>
+    <string name="map_widget_monitoring">GPX-logning</string>
     <string name="map_widget_speed">Hastighed</string>
     <string name="map_widget_distance">Destination</string>
     <string name="map_widget_altitude">Højde</string>
@@ -321,7 +321,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="send_files_to_osm">Sende GPX-filer til OSM?</string>
     <string name="gpx_visibility_txt">Synlighed</string>
     <string name="gpx_description_txt">Beskrivelse</string>
-    <string name="validate_gpx_upload_name_pwd">Angiv OSM brugernavn og kodeord til at overføre GPX-filer.</string>
+    <string name="validate_gpx_upload_name_pwd">Angiv OSM-brugernavn og -kodeord til at overføre GPX-filer.</string>
     <string name="support_new_features">Støt nye funktioner</string>
     <string name="support_new_features_descr">Doner for at få nye funktioner i programmet.</string>
     <string name="show_ruler_level">Vis målestok</string>
@@ -391,8 +391,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
     <string name="local_openstreetmap_upload">Send ændringer til OSM</string>
     <string name="local_openstreetmap_delete">Slet ændringer</string>
-    <string name="local_openstreetmap_descr_title">Asynkron OSM redigering:</string>
-    <string name="local_openstreetmap_settings">Lokalt gemt OSM interessepunkter/noter</string>
+    <string name="local_openstreetmap_descr_title">Asynkron OSM-redigering:</string>
+    <string name="local_openstreetmap_settings">Lokalt gemt OSM -interessepunkter/-noter</string>
     <string name="local_openstreetmap_settings_descr">Vis og administrer OSM interessepunkter/noter registreret i lokal database.</string>
 
 
@@ -400,7 +400,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="live_monitoring_interval">Interval for online sporing</string>
     <string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, lon={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}.</string>
     <string name="live_monitoring_url">Webadresse for online sporing</string>
-    <string name="gpx_monitoring_disabled_warn">Log spor med GPX modul eller via indstillinger \'Tur optagelse\'.</string>
+    <string name="gpx_monitoring_disabled_warn">Log spor med GPX-modul eller via indstillinger \'Tur optagelse\'.</string>
     <string name="show_current_gpx_title">Vis aktuelt spor</string>
     <string name="free_version_message">Den gratis version af OsmAnd er begrænset til at hente %1$s kort (for at tilføje eller opdatere kort) og understøtter ikke offline Wikipedia artikler.</string>
     <string name="free_version_title">Gratisversion</string>
@@ -491,7 +491,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="filename_input">Filnavn: </string>
     <string name="file_with_name_already_exist">Der eksisterer allerede en fil med samme navn.</string>
 
-    <string name="local_index_upload_gpx_description">Send GPX-filer til OSM netværket. De vil blive brugt til at forbedre kortet.</string>
+    <string name="local_index_upload_gpx_description">Send GPX-filer til OSM-netværket. De vil blive brugt til at forbedre kortet.</string>
     <string name="local_index_items_uploaded">%1$d af %2$d emner overført.</string>
     <string name="local_index_mi_upload_gpx">Send til OSM</string>
     <string name="show_more_map_detail">Vis flere kortdetaljer</string>
@@ -676,8 +676,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="downloading_build">Henter version…</string>
     <string name="install_selected_build">"Installer OsmAnd:  {0} - {1} - {2} MB ?"</string>
     <string name="loading_builds_failed">Hentning af versionslisten for OsmAnd mislykkedes</string>
-    <string name="loading_builds">Indlæser OsmAnd versioner…</string>
-    <string name="select_build_to_install">Vælg en OsmAnd version</string>
+    <string name="loading_builds">Indlæser OsmAnd-versioner…</string>
+    <string name="select_build_to_install">Vælg en OsmAnd-version</string>
     <string name="contribution_activity">Installer version</string>
     <string name="gps_status_app_not_found">GPS-status program er ikke installeret. Søg på Play butik?</string>
     <string name="voice_is_not_available_title">Ingen talevejledning valgt</string>
@@ -810,7 +810,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="favourites_context_menu_edit">Rediger</string>
     <string name="amenity_type_emergency">Nødsituation</string>
     <string name="layer_poi">IP overlejring…</string>
-    <string name="process_navigation_service">OsmAnd navigationstjeneste</string>
+    <string name="process_navigation_service">OsmAnd-navigationstjeneste</string>
     <string name="gps_provider">GPS</string>
     <string name="int_min">min.</string>
     <string name="search_poi_filter">Filter</string>
@@ -963,13 +963,13 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="data_settings_descr">Angiv sprog, hent/genindlæs data.</string>
     <string name="data_settings">Data</string>
 
-    <string name="osm_settings">OSM redigering</string>
+    <string name="osm_settings">OSM-redigering</string>
     <string name="additional_settings">Yderligere indstillinger</string>
     <string name="save_current_track_descr">Gem aktuelle spor til SD-kort nu.</string>
     <string name="save_current_track">Gem aktuelle GPX-spor</string>
     <string name="save_track_interval">Logningsinterval under navigation</string>
     <string name="save_track_interval_descr">Vælg logningsinterval for optagelse af spor under navigation.</string>
-    <string name="save_track_to_gpx_descrp">GPX spor gemmes automatisk i \'/track\' mappen under navigation.</string>
+    <string name="save_track_to_gpx_descrp">GPX-spor gemmes automatisk i \'/track\' mappen under navigation.</string>
     <string name="save_track_to_gpx">Automatisk optagelse af spor under navigation</string>
     <string name="update_tile">Opdater kort</string>
     <string name="reload_tile">Genindlæs kortbrikker</string>
@@ -1053,7 +1053,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="monitoring_settings">Optag ture</string>
     <string name="monitoring_settings_descr">Indstil hvordan ture optages.</string>
 
-    <string name="local_openstreetmap_act_title">OSM modifikationer</string>
+    <string name="local_openstreetmap_act_title">OSM-modifikationer</string>
 
     <string name="download_using_mobile_internet">WiFi er i øjeblikket ikke tilsluttet. Skal der fortsættets med den nuværende internet-forbindelse?</string>
     <string name="cancel_navigation">Stop navigation</string>
@@ -1090,7 +1090,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 \n* Tryk på målemodul for at se flere handlinger.</string>
     <string name="delete_point">Slet punkt</string>
     <string name="local_osm_changes_backup_failed">Sikkerhedskopiering af OSM-data ændringer mislykkedes</string>
-    <string name="local_osm_changes_backup_successful">OSM-data ændringsfilen %1$s genereret</string>
+    <string name="local_osm_changes_backup_successful">OSM-ændringsfilen %1$s genereret</string>
     <string name="local_osm_changes_backup">Sikkerhedskopiering efterhånden som OSM-data ændres</string>
     <string name="intermediate_items_sort_by_distance">Sorter fra dør til dør</string>
     <string name="search_street_in_neighborhood_cities">Søg efter gade i nabolagets byer</string>
@@ -1120,9 +1120,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="route_to">Til:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">Fra:</string>
-    <string name="osb_author_dialog_password">OSM kodeord (valgfrit)</string>
+    <string name="osb_author_dialog_password">OSM-kodeord (valgfrit)</string>
 
-    <string name="osb_author_or_password_not_specified">Angiv OSM bruger og adgangskode i \'Indstillinger\'</string>
+    <string name="osb_author_or_password_not_specified">Angiv OSM-bruger og -adgangskode i \'Indstillinger\'</string>
     <string name="clear_intermediate_points">Slet mellemliggende destinationer</string>
     <string name="keep_intermediate_points">Behold mellemliggende destinationer</string>
     <string name="new_directions_point_dialog">Der er allerede mellemliggende destinationer.</string>
@@ -1178,7 +1178,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="animate_routing_route">Simuler med en beregnet rute </string>
     <string name="animate_routing_gpx">Simuler med et GPX-spor</string>
 
-    <string name="local_osm_changes_delete_all_confirm">Slet %1$d OSM ændringer?</string>
+    <string name="local_osm_changes_delete_all_confirm">Slet %1$d OSM-ændringer?</string>
 
 
     <string name="app_mode_hiking">Vandring</string>
@@ -1205,8 +1205,10 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til den ny placering…</string>
     <string name="copying_osmand_files_descr">Kopierer datafiler til ny destination (%s)…</string>
     <string name="copying_osmand_files">Kopierer datafiler…</string>
-    <string name="android_19_location_disabled">"Siden Android version 4.4  (KitKat) kan man ikke hente og opdatere kort i den tidligere lagerplacering (%s). Skift til den tilladte placering og kopiere alle OsmAnd  datafiler dertil?          
+    <string name="android_19_location_disabled">"Siden Android version 4.4  (KitKat) kan man ikke hente og opdatere kort i den tidligere lagerplacering (%s). Skift til den tilladte placering og kopiere alle OsmAnd -datafiler dertil?          
+\n
 \n Note 1: De gamle datafiler forbliver urørt. (men kan slettes manuelt). 
+\n
 \n Note 2: På den nye placering vil det ikke være muligt at dele filer mellem OsmAnd og OsmAnd+."</string>
     <string name="routing_attr_prefer_motorway_name">Foretræk motorveje</string>
     <string name="routing_attr_prefer_motorway_description">Foretræk motorveje.</string>
@@ -1289,7 +1291,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="interrupt_music_descr">Stemmemeddelelser pause, ikke bare dæmpe musikafspilning.</string>
     <string name="interrupt_music">Pause musik</string>
     <string name="share_route_as_gpx">Del rute som GPX-fil</string>
-    <string name="share_route_subject">Ruten deles via OsmAnd</string>
+    <string name="share_route_subject">Ruten delt via OsmAnd</string>
     <string name="navigation_intent_invalid">Ugyldigt format: %s</string>
     <string name="osmo_settings_uuid">Unik enheds-id</string>
     <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal.</string>
@@ -1305,9 +1307,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="keep_informing">Gentag navigationsinstruktioner</string>
     <string name="arrival_distance">Meddel ankomst</string>
     <string name="arrival_distance_descr">Hvornår skal ankomst meddeles?</string>
-    <string name="osmo_io_error">OsMo forbindelsesproblem: </string>
-    <string name="osmo_mode_on">Stop OsMo session</string>
-    <string name="osmo_mode_off">Start OsMo session</string>
+    <string name="osmo_io_error">OsMo-forbindelsesproblem:</string>
+    <string name="osmo_mode_on">Stop OsMo-session</string>
+    <string name="osmo_mode_off">Start OsMo-session</string>
 
     <string name="share_fav_subject">Favoritter delt via Osmand</string>
     <string name="use_points_as_intermediates">Beregn rute mellem punkter</string>
@@ -1330,10 +1332,10 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmo_auth_pending">Venter på autorisation…</string>
     <string name="osmo_locations_sent">Placeringer sendt %1$d (i buffer %2$d) </string>
     <string name="osmo_conn_successfull">Forbindelse oprettet: %1$s </string>
-    <string name="osmo_mode_restart">Genstart OsMo session</string>
+    <string name="osmo_mode_restart">Genstart OsMo-session</string>
     <string name="osmo_settings_debug">Fejlsøgningsinformation</string>
     <string name="osmo_group_info">Info</string>
-    <string name="osmo_group">OsMo gruppe</string>
+    <string name="osmo_group">OsMo-gruppe</string>
     <string name="osmo_group_share">For at oprette forbindelse til gruppen %2$s, angiv gruppe-id (%1$s) eller tryk på %3$s.</string>
     <string name="osmo_share_connect_device">Følg enheden permanent</string>
     <string name="osmo_share_current_session">Del den aktuelle session i browser</string>
@@ -1353,10 +1355,10 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmo_connect_to_group">Sammenkæd med gruppe</string>
     <string name="osmo_connect">Deltag</string>
     <string name="osmo_create_group">Opret gruppe</string>
-    <string name="osmo_server_operation_failed">Osmo Server operation mislykkedes</string>
+    <string name="osmo_server_operation_failed">Osmo-server operation mislykkedes</string>
     <string name="osmo_activity">OpenStreetMap Overvågning</string>
     <string name="osmo_enable_tracker">Send positioner</string>
-    <string name="osmo_control">OsMo hurtig adgang</string>
+    <string name="osmo_control">OsMo-hurtigadgang</string>
 
     <string name="import_file_favourites">Gem data som en GPX-fil eller importer rutepunkter til Favoritter?</string>
 
@@ -1373,7 +1375,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmo_edit_color">Visningsfarve</string>
     <string name="osmo_sign_in">Log på</string>
     <string name="osmo_create_groups_confirm">For at oprette grupper, skal man være registreret som bruger af OsMo.</string>
-    <string name="osmo_credentials_not_valid">OsMo legitimationsoplysninger er ikke gyldige.</string>
+    <string name="osmo_credentials_not_valid">OsMo-legitimationsoplysninger er ikke gyldige.</string>
     <string name="osmo_regenerate_login_ids_confirm">Er det sikkert at du vil forny det personlige id? Alle enheder, der er tilsluttet vil ikke være i stand til at spore dig mere.</string>
     <string name="osmo_regenerate_login_ids">Forny bruger-id</string>
     <string name="osmo_cancel_moving_target">Annuller bevægeligt mål</string>
@@ -1429,15 +1431,15 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
     <string name="sort_by_distance">Sorter efter afstand</string>
     <string name="sort_by_name">Sorter efter navn</string>
-    <string name="none_selected_gpx">Ingen GPX filer er valgt. Langt tryk for at vælge et tilgængeligt spor.</string>
+    <string name="none_selected_gpx">Ingen GPX-filer er valgt. Langt tryk for at vælge et tilgængeligt spor.</string>
     <string name="local_index_select_gpx_file">Vælg at få vist</string>
 
     <string name="no_index_file_to_download">Ingenting at hente, kontroller internetforbindelsen.</string>
     <string name="osmo_gpx_points_downloaded">OsMo punkter %1$s hentet.</string>
     <string name="osmo_auto_connect_descr">Forbind automatisk til tjenesten efter start af programmet.</string>
     <string name="osmo_auto_connect">Automatisk forbindelse</string>
-    <string name="osmo_start_service">OsMo tjeneste</string>
-    <string name="osmo_gpx_track_downloaded">OsMo spor %1$s hentet.</string>
+    <string name="osmo_start_service">OsMo-tjeneste</string>
+    <string name="osmo_gpx_track_downloaded">OsMo-spor %1$s hentet.</string>
     <string name="osmo_not_signed_in">OsMo log ind mislykkedes</string>
     <string name="osmo_group_information">Læs dette før oprettelse af en gruppe!</string>
     <string name="osmo_group_by_invite">Tilslut med invitation</string>
@@ -1469,12 +1471,12 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="lang_he">Hebræisk</string>
     <string name="forward">Frem</string>
     <string name="home">Betjeningspanel</string>
-    <string name="live_monitoring_m_descr">Send sporing til en bestemt webtjeneste, hvis GPX logning er aktiveret.</string>
+    <string name="live_monitoring_m_descr">Send sporing til en bestemt webtjeneste, hvis GPX -logning er aktiveret.</string>
     <string name="live_monitoring_m">Online sporing (GPX nødvendig)</string>
     <string name="live_monitoring_start">Start online sporing</string>
     <string name="live_monitoring_stop">Stop online sporing</string>
-    <string name="gpx_monitoring_start">Start GPX logning</string>
-    <string name="gpx_monitoring_stop">Stop GPX logning</string>
+    <string name="gpx_monitoring_start">Start GPX-logning</string>
+    <string name="gpx_monitoring_stop">Stop GPX-logning</string>
     <string name="gpx_start_new_segment">Start nyt segment</string>
     <string name="lang_fa">Persisk</string>
     <string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis ikke tilgængelig skiftes til engelsk eller lokale navne).</string>
@@ -1496,7 +1498,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="rendering_attr_alpineHiking_name">Alpin vandreskala (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Generer stier efter SAC skalaen.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Vandresymbol overlejring</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">Generer stier efter OSMC spor.</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Generer stier efter OSMC-spor.</string>
 
     <string name="osmo_invite">Inviter…</string>
     <string name="osmo_leave_confirmation_msg">Forlad gruppen %1$s?</string>
@@ -1533,9 +1535,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus-, shuttlebusruter</string>
     <string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
     <string name="save_track_interval_globally">Logningsinterval</string>
-    <string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til/fra med \'GPX logning\' på hovedskærmen.</string>
+    <string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til/fra med \'GPX-logning\' på hovedskærmen.</string>
     <string name="confirm_every_run">Spørg altid</string>
-    <string name="save_global_track_interval_descr">Vælg logningsinterval for den almindelige optagelse af spor (aktiveres via \'GPX logning\' på hovedskærmen).</string>
+    <string name="save_global_track_interval_descr">Vælg logningsinterval for den almindelige optagelse af spor (aktiveres via \'GPX-logning\' på hovedskærmen).</string>
     <string name="save_global_track_interval">Generelt logningsinterval</string>
     <string name="traffic_warning_speed_limit">Hastighedsgrænse</string>
     <string name="traffic_warning_border_control">Grænsekontrol</string>
@@ -1789,7 +1791,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="action_create">Handling: oprette</string>
     <string name="action_modify">Handling: rediger</string>
     <string name="action_delete">Handling: slet</string>
-    <string name="osm_edits">OSM redigeringer</string>
+    <string name="osm_edits">OSM-redigeringer</string>
     <string name="osmand_parking_hour">t</string>
     <string name="osmand_parking_minute">min</string>
     <string name="osmand_parking_time_left">tilbage</string>
@@ -1803,7 +1805,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="confirmation_to_clear_history">Skal historikken slettes?</string>
     <string name="local_osm_changes_upload_all_confirm">Overfør %1$d ændringer til OSM?</string>
     <string name="osmo_grop_name_length_alert">Gruppenavn skal være på mindst 3 tegn!</string>
-    <string name="osm_changes_added_to_local_edits">OSM ændringer tilføjet til lokale ændringer</string>
+    <string name="osm_changes_added_to_local_edits">OSM-ændringer tilføjet til lokale ændringer</string>
     <string name="mark_to_delete">Marker for at slette</string>
     <string name="current_route">Aktuel rute</string>
     <string name="welmode_download_maps">Administrer kort</string>
@@ -1848,8 +1850,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_logoff">Log af</string>
     <string name="rendering_value_disabled_name">Deaktiveret</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Farvelægning ifølge netværkstilhørsforhold</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Farvelægning ifølge OSMC vandresymbol</string>
-    <string name="osm_edit_context_menu_delete">Slet OSM redigering</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Farvelægning ifølge OSMC-vandresymbol</string>
+    <string name="osm_edit_context_menu_delete">Slet OSM-redigering</string>
     <string name="read_full_article">Læs hele artiklen (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
@@ -2074,9 +2076,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="lang_mk">Makedonisk</string>
     <string name="lang_fy">Vestfrisisk</string>
     <string name="lang_als">Albansk (Tosk)</string>
-    <string name="share_osm_edits_subject">OSM redigeringer deles via OsmAnd</string>
+    <string name="share_osm_edits_subject">OSM-redigeringer delt via OsmAnd</string>
     <string name="save_poi_without_poi_type_message">Gem IP uden at angive type?</string>
-    <string name="poi_context_menu_modify_osm_change">Rediger OSM ændring</string>
+    <string name="poi_context_menu_modify_osm_change">Rediger OSM-ændring</string>
     <string name="shared_string_location">Placering</string>
     <string name="context_menu_item_delete_waypoint">Slet GPX-rutepunkt?</string>
     <string name="context_menu_item_edit_waypoint">Rediger GPX-rutepunkt</string>
@@ -2243,7 +2245,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="donations">Donationer</string>
     <string name="number_of_recipients">Antal modtagere</string>
     <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, redigeringer totalt %3$s</string>
-    <string name="osm_editors_ranking">Rangering af OSM bidragsydere</string>
+    <string name="osm_editors_ranking">Rangering af OSM-bidragsydere</string>
     <string name="osm_live_subscription">OsmAnd Live-abonnement</string>
     <string name="osm_live_subscribe_btn">Tilmeld</string>
     <string name="osm_live_email_desc">Nødvendig for at at give oplysninger om bidrag.</string>
@@ -2257,13 +2259,13 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osm_live_enter_email">Angiv en gyldig e-mailadresse</string>
     <string name="osm_live_enter_user_name">Angiv offentligt navn</string>
     <string name="osm_live_thanks">Tak for at abonnere på live opdateringer!</string>
-    <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM brugere, som indsender ændringer til kortet i det pågældende område.</string>
+    <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM-brugere, som indsender ændringer til kortet i det pågældende område.</string>
     <string name="osm_live_subscription_settings">Indstillinger for abonnement</string>
     <string name="osm_live_ask_for_purchase">Køb først OsnAnd Live-abonnement</string>
 
     <string name="osm_live_header">"Abonnementet giver timebaserede opdateringer til alle kort i hele verden. 
-En del af indtægten går tilbage til OSM fællesskabet og udbetales for hvert OSM bidrag. 
-Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det på."</string>
+\nEn del af indtægten går tilbage til OSM-fællesskabet og udbetales for hvert OSM-bidrag. 
+\nHvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det på."</string>
     
     <string name="recalculate_route">Genberegn ruten</string>
     <string name="shared_string_topbar">Topbjælke</string>
@@ -2421,7 +2423,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="get_it">Få det</string>
     <string name="osm_live_payment_desc">Abonnementsafgift opkræves hver måned. Kan opsiges på Google Play når som helst.</string>
     <string name="donation_to_osm">Donation til OpenStreetMap fællesskabet</string>
-    <string name="donation_to_osm_desc">En del af donationen vil blive sendt til OSM brugere, som laver ændringer til OpenStreetMap. Prisen på abonnementet forbliver den samme.</string>
+    <string name="donation_to_osm_desc">En del af donationen vil blive sendt til OSM-brugere, som laver ændringer til OpenStreetMap. Prisen på abonnementet forbliver den samme.</string>
     <string name="osm_live_subscription_desc">Abonnement giver mulighed for opdateringer hver time, dagligt, ugentligt og ubegrænset hentning af alle kort globalt.</string>
     <string name="driving_region_australia">Australien</string>
     <string name="lang_kab">Kabylsk</string>
@@ -2477,7 +2479,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="shared_string_notifications">Meddelelser</string>
     <string name="osmo_share_location">Del</string>
     <string name="osmo_pause_location">Pause</string>
-    <string name="osmo_service_running">OsMo tjenesten kører</string>
+    <string name="osmo_service_running">OsMo-tjenesten kører</string>
     <string name="gpx_no_tracks_title">Ingen spor endnu</string>
     <string name="gpx_no_tracks_title_folder">Tilføj også spor til mappen</string>
     <string name="gpx_add_track">Tilføj spor</string>
@@ -2658,7 +2660,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="full_version_thanks">Tak for købet af den fulde version af OsmAnd!</string>
     <string name="parking_options">Parkeringsmuligheder</string>
     <string name="do_not_send_anonymous_app_usage">Send ikke anonyme brugsstatistikker</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Der indsamles oplysninger om hvilke dele af appen du åbner. Appen sender aldrig hverken din placering eller nogen form for information du indtaster eller oplysninger om områder appen viser, hvad du søger efter eller hvad du henter.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">Der indsamles oplysninger om hvilke dele af OsmAnd der åbnes. Der sendes aldrig oplysninger om placering eller nogen form for information der indtastes eller om områder der vises, hvad der søges efter eller hvad der hentes.</string>
     <string name="do_not_show_startup_messages">Vis ikke meddelelser ved opstart</string>
     <string name="do_not_show_startup_messages_desc">Undertrykker visning af rabatter &amp; særlige lokale hændelsesmeddelelser.</string>
     <string name="right_side_navigation">Højrekørsel</string>
@@ -2820,7 +2822,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="show_on_map_after_saving">Vis på kort efter at have gemt</string>
     <string name="add_route_point">Tilføj rutepunkt</string>
     <string name="add_waypoint">Tilføj rutepunkt</string>
-    <string name="save_gpx_waypoint">Gem GPX rutepunkt</string>
+    <string name="save_gpx_waypoint">Gem GPX-rutepunkt</string>
     <string name="save_route_point">Gem rutepunkt</string>
     <string name="waypoint_one">Rutepunkt 1</string>
     <string name="route_point_one">Rutepunkt 1</string>
@@ -2835,7 +2837,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="add_point_after">Tilføj punkt efter</string>
     <string name="shared_string_options">Indstillinger</string>
     <string name="measurement_tool_snap_to_road_descr">Forbinder punkterne med ruter for den valgte profil.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Du kan gemme punkterne enten som rutepunkter eller som en linje.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Gem punkterne enten som rutepunkter eller som en linje.</string>
     <string name="choose_navigation_type">Vælg navigationsprofil</string>
     <string name="add_route_points">Tilføj rutepunkter</string>
     <string name="add_line">Tilføj linje</string>
@@ -2888,7 +2890,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_sort">Sorter</string>
     <string name="coordinate_input">Koordinatindtastning</string>
     <string name="is_saved">er gemt</string>
-    <string name="marker_save_as_track_descr">Eksporter dine markører til en fil du kan angive her:</string>
+    <string name="marker_save_as_track_descr">Eksporter markører til en fil:</string>
     <string name="marker_save_as_track">Gem som spor</string>
     <string name="move_to_history">Flyt til historik</string>
     <string name="group_will_be_removed_after_restart">Gruppen vil blive fjernet efter næste genstart.</string>
@@ -2983,7 +2985,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="av_locations_selected_desc">GPX-fil med koordinaterne og data for de valgte noter.</string>
     <string name="av_locations_all_desc">GPX-fil med koordinater og data for alle noter.</string>
 	<string name="osm_recipient_stat">Redigeringer %1$s, sum %2$s mBTC</string>
-    <string name="osm_recipients_label">OSM modtagere</string>
+    <string name="osm_recipients_label">OSM-modtagere</string>
     <string name="total_donations">Samlede donationer</string>
 <string name="what_is_here">Hvad er der her:</string>
     <string name="parked_at">parkeret på</string>
