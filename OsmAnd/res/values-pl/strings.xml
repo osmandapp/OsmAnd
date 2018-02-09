@@ -2991,4 +2991,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="osm_notes">Notatki OSM</string>
     <string name="av_locations_selected_desc">Plik GPX ze współrzędnymi i danymi wybranych notatek.</string>
     <string name="av_locations_all_desc">Plik GPX ze współrzędnymi i danymi wszystkich notatek.</string>
+    <string name="modify_the_search_query">Modyfikuj zapytanie.</string>
     </resources>
