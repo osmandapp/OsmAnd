@@ -184,10 +184,16 @@ public class WaypointHelper {
 			List<LocationPointWrapper> lp = locationPoints.get(ALARMS);
 			while (kIterator < lp.size()) {
 				AlarmInfo inf = (AlarmInfo) lp.get(kIterator).point;
-				if (inf.getLocationIndex() < route.getCurrentRoute() && inf.getLastLocationIndex() != -1
-						&& inf.getLastLocationIndex() < route.getCurrentRoute()) {
+				int currentRoute = route.getCurrentRoute();
+				if (inf.getLocationIndex() < currentRoute && inf.getLastLocationIndex() != -1
+						&& inf.getLastLocationIndex() < currentRoute) {
 					// skip
 				} else {
+					if (inf.getType() == AlarmInfoType.TUNNEL && inf.getLastLocationIndex() != -1
+							&& currentRoute > inf.getLocationIndex()
+							&& currentRoute < inf.getLastLocationIndex()) {
+						inf.setFloatValue(route.getDistanceToPoint(inf.getLastLocationIndex()));
+					}
 					int d = route.getDistanceToPoint(inf.getLocationIndex());
 					if (d > LONG_ANNOUNCE_RADIUS) {
 						break;
