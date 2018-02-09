@@ -297,7 +297,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
 
     <string name="osmand_background_plugin_description">"Viser indstillinger til at aktivere sporing og navigation i baggrunden (slukket skærm)  via periodisk at vække GPS-enheden."</string>
-    <string name="osmand_accessibility_description">"Udvidelsen gør  tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter fx. justering af tale for TTS stemmerne, konfiguration af styrekryds (D-pad) skærmnavigation ved hjælp af en styrekugle til zoomknappen, eller ved hjælp af tekst-til-tale tilbagemeldinger, og som at meddele positionen automatisk."</string>
+    <string name="osmand_accessibility_description">Udvidelsen gør tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter fx justering af hastigheden for talesyntese, konfiguration af skærmnavigation med styrekryds (D-pad), brug af en styrekugle til zoomstyring, eller brug af tekst-til-tale-tilbagemeldinger, fx til at sige din position højt.</string>
 	
 	
 	<string name="osmand_rastermaps_plugin_description">Udvidelsen giver adgang til mange typer af online (såkaldte brikker eller raster) kort, fra foruddefinerede OpenStreetMap kortbrikker (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiskekort og reliefskygger osv. 
@@ -400,7 +400,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="live_monitoring_interval">Interval for online sporing</string>
     <string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, lon={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}.</string>
     <string name="live_monitoring_url">Webadresse for online sporing</string>
-    <string name="gpx_monitoring_disabled_warn">Log spor med GPX-modul eller via indstillinger \'Tur optagelse\'.</string>
+    <string name="gpx_monitoring_disabled_warn">Log spor med GPX-modul eller via \'Optag ture\' i indstillingerne.</string>
     <string name="show_current_gpx_title">Vis aktuelt spor</string>
     <string name="free_version_message">Den gratis version af OsmAnd er begrænset til at hente %1$s kort (for at tilføje eller opdatere kort) og understøtter ikke offline Wikipedia artikler.</string>
     <string name="free_version_title">Gratisversion</string>
@@ -504,30 +504,30 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_no_thanks">Nej tak</string>
     <string name="local_index_gpx_info_show">\n\nLangt tryk for valgmuligheder</string>
 	
-	<string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
+	<string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions) 
 \n 
-\n OsmAnd er et open source navigationsprogram med adgang til en lang række af globale OpenStreetMap (OSM) data. Alle kortdata (vektor eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline brug. OsmAnd tilbyder også offline og online rute funktionalitet inklusiv sving-for-sving talevejledning. 
-\n 
+\nOsmAnd er et open source-navigationsprogram med adgang til en lang række af globale OpenStreetMap (OSM)-data. Alle kortdata (vektorkort eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline- og online-rutefunktionalitet inklusive sving-for-sving-talevejledning.
+\n
 \nNogle af hovedfunktionerne: 
-\n - Komplet offline funktionalitet (gemme hentede vektor eller kortbrikker i enhedens lager) 
-\n - Kompakt offline vektorkort for hele verden er tilgængelig 
+\n - Komplet offlinefunktionalitet (gemme hentede vektorkort eller kortbrikker i enhedens lager)
+\n - Kompakte offlinevektorkort for hele verden er tilgængelige
 \n - Kort for enkelte lande eller områder kan hentes direkte fra OsmAnd 
-\n - Overlejring af flere kort lag er muligt, som f.eks. GPX eller navigationsspor, Interessepunkter (IP), favoritter, konturlinjer, Kollektivtrafik stoppesteder og flere kort med modificerebar gennemsigtighed 
-\n - Offline søgning af adresser og steder interessepunkter (IP) 
-\n - Offline ruteplanlægning for medium afstande 
-\n - Bil, cykel og fodgænger tilstand med: 
-\n - Valgfri automatisk dag/nat tilstandsskift 
-\n - Valgfri automatisk zoom efter hastighed 
-\n - Valgfri automatisk kort rotation efter kompas eller bevægelses retning 
-\n - Valgfri vognbaneassistent 
-\n - Visning af hastighedsgrænser 
-\n - Optagede og TTS (Tekst-til-stemme) stemmer 
+\n - Overlejring af flere kortlag er muligt, som fx GPX- eller navigationsspor, interessepunkter (IP), favoritter, konturlinjer, stoppesteder for kollektiv trafik og flere kort med modificerebar gennemsigtighed 
+\n - Offlinesøgning efter adresser og steder (interessepunkter, IP)
+\n - Offlineruteplanlægning for mellemlange afstande
+\n - Bil-, cykel- og fodgængertilstand med: 
+\n   - valgfri automatisk dag/nat-tilstandsskift 
+\n   - valgfri automatisk zoom efter hastighed 
+\n   - valgfri automatisk kortrotation efter kompas eller bevægelsesretning 
+\n   - valgfri vognbaneassistent 
+\n   - visning af hastighedsgrænser 
+\n   - optagede stemmer og talesyntesestemmer (tekst-til-tale)
 \n 
 \n Begrænsninger i den gratis version af OsmAnd: 
 \n - Antallet af kort der kan hentes er begrænset 
-\n - Ingen adgang Wikipedia offline interessepunkter 
+\n - Ingen adgang til Wikipedia-interessepunkter offline
 \n 
-\nOsmAnd bliver aktivt udviklet. Projektet og den videre udvikling afhænger af økonomiske bidrag til at drive udviklingen og test af nye funktioner. Overvej at købe OsmAnd+, betale for en specifik ny funktion eller lave en generel donation på osmand.net.</string>
+\nOsmAnd bliver aktivt udviklet. Projektet og den videre udvikling afhænger af økonomiske bidrag til at drive udviklingen og test af nye funktioner. Overvej at købe OsmAnd+, betale for en specifik ny funktion eller lave en generel donation på osmand.net."</string>
     
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ er et open source-navigationsprogram med adgang til en bred vifte af globale OpenStreetMap (OSM)-data. Alle kortdata (vektor eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline og online ruteplanlægningsfunktionalitet, herunder sving-for-sving-talevejledning. OsmAnd+ er den betalte programversion; ved at købe den støtter man projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer. Nogle af hovedfunktionerne: - Komplet offline-funktionalitet (gem hentede vektor- eller brikkort på enhedens hukommelsseskort) - Kompakte offline vektorkort for hele verden - Ubegrænset hentning af lande- eller områdekort direkte fra OsmAnd - Offline Wikipedia-funktioner (hent Wikipedia-interessepunkter (IP)), fantastisk til sightseeing - Overlejring af flere kortlag mulige, såsom GPX- eller navigationsspor, seværdigheder, favoritter, højdekurver, stoppesteder for kollektiv trafik, ekstra kort med brugerdefinerbar gennemsigtighed - Offline-søgning efter adresser og steder (IP) - Offline-ruteplanlægning til mediumafstande - Bil-, cykel- og fodgængertilstande med: - valgfri automatisk dag/nat-visning - valgfri hastighedsafhængig kortzoom - valgfri korttilpasning i henhold til kompas- eller bevægelsesretning - valgfri vognbanevejledning, visning af hastighedsgrænser,  optagede stemmer eller TTS-stemmer"</string>
     
@@ -969,7 +969,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="save_current_track">Gem aktuelle GPX-spor</string>
     <string name="save_track_interval">Logningsinterval under navigation</string>
     <string name="save_track_interval_descr">Vælg logningsinterval for optagelse af spor under navigation.</string>
-    <string name="save_track_to_gpx_descrp">GPX-spor gemmes automatisk i \'/track\' mappen under navigation.</string>
+    <string name="save_track_to_gpx_descrp">GPX-spor gemmes automatisk i tracks-mappen under navigation.</string>
     <string name="save_track_to_gpx">Automatisk optagelse af spor under navigation</string>
     <string name="update_tile">Opdater kort</string>
     <string name="reload_tile">Genindlæs kortbrikker</string>
@@ -1130,7 +1130,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="context_menu_item_directions_from">Rutevejledning fra</string>
     <string name="speak_title">Meddel…</string>
     <string name="speak_descr">Konfigurer til at meddele gadenavne, trafikadvarsler (tvungne stop, vejbump), fartkameraadvarsler, hastighedsgrænser.</string>
-    <string name="speak_street_names">Gadenavne (TTS)</string>
+    <string name="speak_street_names">Gadenavne (talesyntese)</string>
     <string name="announce_gpx_waypoints">GPX-rutepunkter</string>
 
 
@@ -1191,7 +1191,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="amenity_type_seamark">Sømærke</string>
 
 
-    <string name="speech_rate_descr">Angiv talehastighed for TTS.</string>
+    <string name="speech_rate_descr">Angiv talehastigheden for talesyntese.</string>
     <string name="speech_rate">Talehastighed</string>
 
     <string name="complex_route_calculation_failed">Hurtig ruteberegning mislykkedes (%s), går tilbage til langsom beregning.</string>
@@ -1200,16 +1200,14 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="guidance_preferences_descr">Indstillinger for navigation</string>
     <string name="routing_preferences_descr">Indstillinger for ruteplanlægning</string>
     <string name="app_mode_truck">Lastbil</string>
-    <string name="calculate_osmand_route_gpx">Beregn offline rute</string>
+    <string name="calculate_osmand_route_gpx">Beregn offline-rute</string>
 
     <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til den ny placering…</string>
-    <string name="copying_osmand_files_descr">Kopierer datafiler til ny destination (%s)…</string>
+    <string name="copying_osmand_files_descr">Kopierer datafiler til ny placering (%s)…</string>
     <string name="copying_osmand_files">Kopierer datafiler…</string>
-    <string name="android_19_location_disabled">"Siden Android version 4.4  (KitKat) kan man ikke hente og opdatere kort i den tidligere lagerplacering (%s). Skift til den tilladte placering og kopiere alle OsmAnd -datafiler dertil?          
-\n
-\n Note 1: De gamle datafiler forbliver urørt. (men kan slettes manuelt). 
-\n
-\n Note 2: På den nye placering vil det ikke være muligt at dele filer mellem OsmAnd og OsmAnd+."</string>
+    <string name="android_19_location_disabled">Siden Android version 4.4 (KitKat) kan man ikke hente og opdatere kort på den tidligere lagerplacering (%s). Ønsker du at skifte til den tilladte lagerplacering og kopiere alle OsmAnd-datafiler dertil?
+\n Note 1: De gamle datafiler forbliver urørte (men kan slettes manuelt).
+\n Note 2: På den nye placering vil det ikke være muligt at dele filer mellem OsmAnd og OsmAnd+.</string>
     <string name="routing_attr_prefer_motorway_name">Foretræk motorveje</string>
     <string name="routing_attr_prefer_motorway_description">Foretræk motorveje.</string>
     <string name="routing_attr_avoid_toll_name">Undgå betalingsveje</string>
@@ -1323,7 +1321,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
 
     <string name="osmo_connected_devices">Tilsluttede enheder</string>
-    <string name="osmo_groups">OsMo grupper</string>
+    <string name="osmo_groups">OsMo-grupper</string>
     <string name="osmo_auto_send_locations_descr">Start tur automatisk og send placeringer efter start af programmet.</string>
     <string name="osmo_auto_send_locations">Start tur automatisk</string>
     <string name="osmo_tracker_id">Sporings-ID</string>
@@ -1355,7 +1353,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmo_connect_to_group">Sammenkæd med gruppe</string>
     <string name="osmo_connect">Deltag</string>
     <string name="osmo_create_group">Opret gruppe</string>
-    <string name="osmo_server_operation_failed">Osmo-server operation mislykkedes</string>
+    <string name="osmo_server_operation_failed">OsMo-serveroperation mislykkedes</string>
     <string name="osmo_activity">OpenStreetMap Overvågning</string>
     <string name="osmo_enable_tracker">Send positioner</string>
     <string name="osmo_control">OsMo-hurtigadgang</string>
@@ -1471,7 +1469,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="lang_he">Hebræisk</string>
     <string name="forward">Frem</string>
     <string name="home">Betjeningspanel</string>
-    <string name="live_monitoring_m_descr">Send sporing til en bestemt webtjeneste, hvis GPX -logning er aktiveret.</string>
+    <string name="live_monitoring_m_descr">Send sporing til en bestemt webtjeneste, hvis GPX-logning er aktiveret.</string>
     <string name="live_monitoring_m">Online sporing (GPX nødvendig)</string>
     <string name="live_monitoring_start">Start online sporing</string>
     <string name="live_monitoring_stop">Stop online sporing</string>
@@ -1558,10 +1556,10 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="speed_limit_exceed">Tolerance for hastighedsgrænse</string>
     <string name="speed_limit_exceed_message">Vælg hvor meget hastighedsgrænsen skal overskrides, for at få en taleadvarsel.</string>
     <string name="osmo_device_not_found">Enheden blev ikke fundet</string>
-    <string name="osmo_no_connection_msg">Kan ikke forbinde til OsMo serveren:
-- kontroller Internetforbindelsen;
-- kontroller indstillingerne;
-- se på Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Kan ikke forbinde til OsMo-serveren:
+\n- kontroller din internetforbindelse
+\n- kontroller indstillingerne
+\n- se på vores Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">En anonym bruger kan ikke:
 - oprette grupper;
 - synkronisere grupper og enheder med serveren;
@@ -2598,13 +2596,13 @@ Repræsenterer område: %1$s x %2$s</string>
 \n 
 \n  • Nye skrifttyper dækker flere landestandarder 
 \n 
-\n  • Understøtter TTS til regionale sprogvarianter (og accenter) 
+\n  • Understøtter talesyntese for regionale sprogvarianter (og accenter) 
 \n 
 \n  • Forbedringer af synlighed på flere kortformater og Wikipedia 
 \n 
 \n  • Understøtter Open Location Code (OLC) 
 \n 
-\n  • Få vist højde-, hældnings- og hastighedsprofil for indspillede GPX-spor og beregnede ruter
+\n  • Få vist højde-, hældnings- og hastighedsprofil for indspillede GPX-spor og beregnede ruter 
 \n 
 \n  • \"Kørestils\"-indstilling og logikforbedringer i cykelruteplanlægning 
 \n 
@@ -2837,7 +2835,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="add_point_after">Tilføj punkt efter</string>
     <string name="shared_string_options">Indstillinger</string>
     <string name="measurement_tool_snap_to_road_descr">Forbinder punkterne med ruter for den valgte profil.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Gem punkterne enten som rutepunkter eller som en linje.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Du kan gemme punkterne enten som rutepunkter eller som en linje.</string>
     <string name="choose_navigation_type">Vælg navigationsprofil</string>
     <string name="add_route_points">Tilføj rutepunkter</string>
     <string name="add_line">Tilføj linje</string>
