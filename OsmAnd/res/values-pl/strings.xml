@@ -2976,4 +2976,19 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="winter_and_ski_renderer">Zima i narciarstwo</string>
     <string name="touring_view_renderer">Widok turystyczny (kontrast i szczegóły)</string>
     <string name="nautical_renderer">Żeglarstwo</string>
-</resources>
+<string name="make_as_start_point">Ustaw punkt początkowy</string>
+    <string name="shared_string_current">Obecne</string>
+    <string name="last_intermediate_dest_description">Dodaje ostatni przystanek na trasie</string>
+    <string name="first_intermediate_dest_description">Dodaje pierwszy przystanek na trasie</string>
+    <string name="show_closed_notes">Pokaż zamknięte notatki</string>
+    <string name="switch_osm_notes_visibility_desc">Pokaż/Ukryj Notatki OSM na mapie.</string>
+    <string name="gpx_file_desc">GPX - odpowiedni do eksportowania danych do JOSM i innych edytorów OSM.</string>
+    <string name="osc_file_desc">OSC - odpowiedni do eksportowania danych do OpenStreetMap.</string>
+    <string name="gpx_file">Plik GPX</string>
+    <string name="osc_file">Plik OSC</string>
+    <string name="choose_file_type">Wybierz rodzaj pliku</string>
+    <string name="all_data">Wszystkie dane</string>
+    <string name="osm_notes">Notatki OSM</string>
+    <string name="av_locations_selected_desc">Plik GPX ze współrzędnymi i danymi wybranych notatek.</string>
+    <string name="av_locations_all_desc">Plik GPX ze współrzędnymi i danymi wszystkich notatek.</string>
+    </resources>
