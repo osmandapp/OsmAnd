@@ -843,8 +843,8 @@
     <string name="get_for">%1$s ödəyib al</string>
     <string name="get_for_month">Aylıq %1$s ödəyib al</string>
     <string name="osmand_plus_banner_desc">Limitsiz xəritə endirmələri, yenilənmələri və Vikipediya qoşması.</string>
-    <string name="skip_map_downloading">Endirilən xəritələri keç</string>
-    <string name="skip_map_downloading_desc">Quraşdırılmış offlayn xəritəniz yoxdur. Siyahıdan bir xəritə seçə və ya xəritələri daha sonra Menyudan endirə bilərsiniz - %1$s.</string>
+    <string name="skip_map_downloading">Xəritələri endirməyi keç</string>
+    <string name="skip_map_downloading_desc">Quraşdırılmış offlayn xəritəniz yoxdur. Siyahıdan bir xəritə seçə və ya xəritələri daha sonra Menyu - %1$s vasitəsilə endirə bilərsiniz.</string>
     <string name="search_another_country">Başqa region seçin</string>
     <string name="location_not_found">Məkan tapılmadı</string>
     <string name="no_inet_connection_desc_map">Xəritələri endirmək üçün lazımdır.</string>
