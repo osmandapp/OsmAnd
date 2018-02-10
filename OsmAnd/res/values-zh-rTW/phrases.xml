@@ -3754,4 +3754,10 @@
 
 	<string name="poi_diameter_crown">冠頂的直徑</string>
 
-	</resources>
+	<string name="poi_socket">插座</string>
+
+<string name="poi_osmand_socket_cee_blue_yes">CEE 藍色</string>
+
+
+
+</resources>
