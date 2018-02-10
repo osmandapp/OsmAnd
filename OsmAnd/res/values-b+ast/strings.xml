@@ -1101,4 +1101,5 @@ Puntos</string>
     <string name="shared_string_one">Un</string>
     <string name="show_guide_line_descr">Amosar llinies de guia dende la to posición a la del marcador activu.</string>
     <string name="show_arrows_descr">Amosar una o dos fleches indicando la direición a los marcadores activos.</string>
+    <string name="osmand_parking_am">AM</string>
     </resources>
