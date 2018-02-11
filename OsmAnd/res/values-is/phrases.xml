@@ -3585,4 +3585,16 @@
 
 
 
-</resources>
+<string name="poi_health_specialty_orthodontics_yes">Tannbitslækningar</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Sjúkraþjálfun</string>
+	<string name="poi_health_specialty_occupational_yes">Iðjuþjálfun</string>
+	<string name="poi_health_specialty_physiatry_yes">Endurhæfingarlækningar</string>
+	<string name="poi_health_specialty_gastroenterology_yes">Meltingarfæralækningar</string>
+	<string name="poi_health_specialty_nephrology_yes">Nýrnalækningar</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">Fæðingarlækningar (eftir fæðingu)</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">Heilsutengt sérsvið: fæðingarlækningar (eftir fæðingu): nei</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">Fæðingarlækningar (meðganga)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Heilsutengt sérsvið: fæðingarlækningar (meðganga): nei</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Fæðingarlækningar (keisaraskurður)</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Heilsutengt sérsvið: fæðingarlækningar (keisaraskurður): nei</string>
+	</resources>
