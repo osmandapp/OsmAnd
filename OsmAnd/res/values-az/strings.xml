@@ -1642,7 +1642,7 @@
     <string name="favorite_delete_multiple">%1$d favoriti və %2$d favorit qrupu silmək üzrəsiniz. Əminsiniz?</string>
     <string name="downloads_left_template">%1$s endirmə qalıb</string>
     <string name="quick_action_resume_pause_navigation">Naviqasiyaya davam/fasilə</string>
-    <string name="quick_action_resume_pause_navigation_descr">Naviqasiyaya fasilə və ya davam etmək üçün bu düyməyə toxunun.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Naviqasiyaya fasilə vermək və ya davam etmək üçün bu düyməyə toxunun.</string>
     <string name="quick_action_show_navigation_finish_dialog">Naviqasiyanın bitmə dialoqunu göstər</string>
     <string name="quick_action_start_stop_navigation">Naviqasiyanı başlat/dayandır</string>
     <string name="quick_action_start_stop_navigation_descr">Naviqasiyanı başlatmaq və ya bitirmək üçün bu düyməyə toxunun.</string>
@@ -1771,7 +1771,7 @@
     <string name="shared_string_paste">Əlavə et</string>
     <string name="coordinate_input_accuracy_description">%1$d onluq rəqəm daxil etdikdən sonra avtomatik olaraq növbəti sahəyə keç.</string>
     <string name="coordinate_input_accuracy">%1$d rəqəm</string>
-    <string name="go_to_next_field">Növbəti sahəyə get</string>
+    <string name="go_to_next_field">Növbəti sahəyə keç</string>
     <string name="rename_marker">İşarəni yenidən adlandır</string>
     <string name="import_as_gpx">GPX fayl kimi idxal et</string>
     <string name="import_as_favorites">Favoritlər kimi idxal et</string>
@@ -1937,4 +1937,20 @@
     <string name="poi_context_menu_modify_osm_change">OSM dəyişikliyinə düzəliş et</string>
     <string name="quick_action_item_action">Fəaliyyət %d</string>
     <string name="quick_action_item_screen">Ekran %d</string>
+    <string name="last_intermediate_dest_description">Marşruta son dayanacaq əlavə edir</string>
+    <string name="first_intermediate_dest_description">Marşruta ilk dayanacaq əlavə edir</string>
+    <string name="subsequent_dest_description">Təyinat nöqtəsini yuxarı daşı və təyinat nöqtəsi yarat</string>
+    <string name="empty_state_av_notes">Qeydlər yaradın!</string>
+    <string name="empty_state_av_notes_desc">Widget və ya kontekst menyusunu istifadə edərək xəritədəki hər nöqtəyə səs, video və ya şəkil qeydi əlavə edin.</string>
+    <string name="import_gpx_file_description">favoritlər nöqtəsi və ya iz faylı kimi idxal edilə bilər.</string>
+    <string name="plan_route_no_markers_toast">Bu funksiyanı istifadə etmək üçün ən azı bir işarə əlavə etməlisiniz.</string>
+    <string name="osn_modify_dialog_error">İstisna hal baş verdi: qeyd dəyişdirilmədi</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Xəritə istiqamətinin hansı sürətdə “Hərəkət istiqamətində”n “Kompasa görə”yə keçməsini aşağıda seçin.</string>
+    <string name="marker_moved_to_active">Xəritə işarələri aktivə daşındı</string>
+    <string name="make_active">Aktiv et</string>
+    <string name="add_point_before">Əvvəlinə nöqtə əlavə et</string>
+    <string name="add_point_after">Sonrasına nöqtə əlavə et</string>
+    <string name="improve_coverage_mapillary">Mapillary ilə şəkil əhatə dairəni yaxşılaşdır</string>
+    <string name="mapillary_widget">Mapillary widget-i</string>
+    <string name="install_selected_build">{1} tarixli OsmAnd - {0} quraşdırmaq istəyirsiniz ({2} MB) ?</string>
     </resources>
