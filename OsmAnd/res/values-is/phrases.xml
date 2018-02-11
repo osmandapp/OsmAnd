@@ -1525,7 +1525,7 @@
 	<string name="poi_historic_period_stone_bronze_undetermined">Sögutími: steinöld / bronsöld (óráðið)</string>
 	<string name="poi_historic_period_bronze_age">Sögutími: bronsöld</string>
 	<string name="poi_historic_period_iron_age">Sögutími: járnöld</string>
-	<string name="poi_historic_period_roman_republic">Sögutími: Rómverska lýðveldið (508 f.Kr. – 27 f.Kr.)</string>
+	<string name="poi_historic_period_roman_republic">Sögutími: rómverska lýðveldið (508 f.Kr. – 27 f.Kr.)</string>
 	<string name="poi_historic_period_alexander_the_great">Sögutími: Alexander mikli</string>
 	<string name="poi_historic_stone">Sögulegur steinn</string>
 	<string name="poi_stone_type_conciliation_cross">Tegund: steinkross</string>
@@ -3474,7 +3474,7 @@
 	<string name="poi_trade">Heildsala</string>
 	<string name="poi_architecture_eclectic">Byggingastíll: eklektískur (yfirburðastíll)</string>
 	<string name="poi_architecture_new_objectivity">Byggingastíll: nýhlutlægni</string>
-	<string name="poi_historic_period_principate">Sögutími: keisaraveldi (27 f.Kr. – 284 e.Kr.)</string>
+	<string name="poi_historic_period_principate">Sögutími: keisaraveldi (principate; 27 f.Kr. – 284 e.Kr.)</string>
 	<string name="poi_historic_period_old_kingdom">Sögutími: gamla konungsveldið (2686 – 2181 f.Kr.)</string>
 	<string name="poi_historic_period_first_persian_period">Sögutími: fyrra persneska tímabilið</string>
 	<string name="poi_historic_period_second_persian_period">Sögutími: seinna persneska tímabilið</string>
@@ -3554,4 +3554,35 @@
 	<string name="poi_counselling_type_violence_yes">Ráðgjafarþjónusta (ofbeldi): já</string>
 	<string name="poi_counselling_type_violence_no">Ráðgjafarþjónusta (ofbeldi): nei</string>
 
-	</resources>
+	<string name="poi_socket">Rafmagnsinnstunga</string>
+
+<string name="poi_historic_period_new_kingdom">Sögutími: nýja konungsveldið (1550 – 1069 f.Kr.)</string>
+	<string name="poi_historic_period_middle_kingdom">Sögutími: mið-konungsveldið (2055 – 1650 f.Kr.)</string>
+	<string name="poi_historic_period_predynastic_egypt">Sögutími: egypska for-erfðatímabilið</string>
+	<string name="poi_historic_period_early_dynastic_period">Sögutími: snemm-erfðatímabilið (3100 – 2686 f.Kr.)</string>
+	<string name="poi_historic_period_first_intermediate_period">Sögutími: fyrsta millitímabilið (2181 – 2055 f.Kr.)</string>
+	<string name="poi_historic_period_second_intermediate_period">Sögutími: annað millitímabilið (1650 – 1550 f.Kr.)</string>
+	<string name="poi_historic_period_third_intermediate_period">Sögutími: þriðja millitímabilið (1069 – 664 f.Kr.)</string>
+	<string name="poi_historic_period_late_period">Sögutími: síðtímabilið (664 – 332 f.Kr.)</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Sögutími: ptólemíska egyptaland (305 – 30 f.Kr.)</string>
+	<string name="poi_historic_period_christian_egypt">Sögutími: kristna egyptaland</string>
+	<string name="poi_historic_period_byzantine_egypt">Sögutími: býsantíska egyptaland (30 f.Kr. – 641 e.Kr.)</string>
+	<string name="poi_historic_period_greek_dark_ages">Sögutími: grísku myrku aldirnar (1100 – 800 f.Kr.)</string>
+	<string name="poi_historic_period_roman_greece">Sögutími: rómverska grikkland (146 f.Kr. - 330 e.Kr.)</string>
+	<string name="poi_historic_period_roman_kingdom">Sögutími: rómverska konungsveldið (753 - 509 f.Kr.)</string>
+	<string name="poi_historic_period_dominate">Sögutími: einveldi (dominate; 285 e.Kr. – 476 e.Kr.)</string>
+	<string name="poi_historic_period_villager">Sögutími: þorpamenning (tímabil I-II, 1580 f.Kr. – 133 e.Kr.)</string>
+	<string name="poi_historic_period_urban">Sögutími: keisaraveldi (tímabil III, 133 – 374 e.Kr.)</string>
+	<string name="poi_historic_period_classical">Sögutími: klassískt (tímabil IV, 374 – 900 e.Kr.)</string>
+	<string name="poi_historic_period_imperial">Sögutími: keisaraveldi (tímabil V, 900 – 1200 e.Kr.)</string>
+
+	<string name="poi_historic_era_paleolithic">Sögutímabil: fornsteinöld (2,6 milljón ár - 10.000 ár fyrir okkar tímatal)</string>
+	<string name="poi_historic_era_mesolithic">Sögutímabil: miðsteinöld</string>
+	<string name="poi_historic_era_neolithic">Sögutímabil: nýsteinöld</string>
+	<string name="poi_historic_era_chalcolithic">Sögutímabil: koparöld (4-3 árþúsund f.Kr.)</string>
+
+	<string name="poi_osmand_socket_cee_blue_yes">CEE blátt</string>
+
+
+
+</resources>
