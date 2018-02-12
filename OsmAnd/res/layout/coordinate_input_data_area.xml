@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:background="@color/ctx_menu_bg_dark">
+
+    <!-- Latitude row: -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:id="@+id/lat_side_of_the_world_btn"
+            android:layout_width="@dimen/side_of_the_world_button_size"
+            android:layout_height="@dimen/side_of_the_world_button_size"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            android:orientation="vertical"
+            tools:background="@drawable/context_menu_controller_bg_dark">
+
+            <ImageView
+                android:id="@+id/south_side_iv"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="-12dp"
+                android:visibility="gone"
+                tools:src="@drawable/ic_action_coordinates_longitude"
+                tools:tint="@color/dashboard_blue"/>
+
+            <TextView
+                android:id="@+id/lat_side_of_the_world_tv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/dashboard_blue"
+                android:textSize="@dimen/default_list_text_size"
+                android:textStyle="bold"
+                tools:text="N"/>
+
+            <ImageView
+                android:id="@+id/north_side_iv"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="-12dp"
+                tools:src="@drawable/ic_action_coordinates_longitude"
+                tools:tint="@color/dashboard_blue"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/navigate_point_latitude"
+                android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
+                android:textSize="@dimen/default_sub_text_size"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/lat_first_input_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="xx"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    tools:maxLength="2"/>
+
+                <TextView
+                    android:id="@+id/lat_first_separator_tv"
+                    android:layout_width="@dimen/context_menu_padding_margin_large"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="°"
+                    android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
+                    android:textSize="@dimen/dialog_header_text_size"/>
+
+                <EditText
+                    android:id="@+id/lat_second_input_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="xx"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    tools:maxLength="2"/>
+
+                <TextView
+                    android:id="@+id/lat_second_separator_tv"
+                    android:layout_width="@dimen/context_menu_padding_margin_large"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="."
+                    android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
+                    android:textSize="@dimen/dialog_header_text_size"/>
+
+                <EditText
+                    android:id="@+id/lat_thirst_input_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="xxxx"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    tools:maxLength="4"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/lat_backspace_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/text_margin_small"
+            android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
+            android:layout_marginRight="@dimen/text_margin_small"
+            android:layout_marginStart="@dimen/context_menu_padding_margin_large"
+            android:padding="@dimen/content_padding_small"
+            tools:src="@drawable/ic_keyboard_backspace"/>
+
+    </LinearLayout>
+
+    <!-- Longitude row: -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_padding_small"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:id="@+id/lon_side_of_the_world_btn"
+            android:layout_width="@dimen/side_of_the_world_button_size"
+            android:layout_height="@dimen/side_of_the_world_button_size"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            tools:background="@drawable/context_menu_controller_bg_dark">
+
+            <ImageView
+                android:id="@+id/east_side_iv"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="-12dp"
+                android:layout_marginStart="-12dp"
+                android:visibility="gone"
+                tools:src="@drawable/ic_action_coordinates_latitude"
+                tools:tint="@color/dashboard_blue"/>
+
+            <TextView
+                android:id="@+id/lon_side_of_the_world_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/dashboard_blue"
+                android:textSize="@dimen/default_list_text_size"
+                android:textStyle="bold"
+                tools:text="W"/>
+
+            <ImageView
+                android:id="@+id/west_side_iv"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="-12dp"
+                android:layout_marginRight="-12dp"
+                tools:src="@drawable/ic_action_coordinates_latitude"
+                tools:tint="@color/dashboard_blue"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/navigate_point_longitude"
+                android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
+                android:textSize="@dimen/default_sub_text_size"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/lon_first_input_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="yy"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    tools:maxLength="2"/>
+
+                <TextView
+                    android:id="@+id/lon_first_separator_tv"
+                    android:layout_width="@dimen/context_menu_padding_margin_large"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="°"
+                    android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
+                    android:textSize="@dimen/dialog_header_text_size"/>
+
+                <EditText
+                    android:id="@+id/lon_second_input_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="yy"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    tools:maxLength="2"/>
+
+                <TextView
+                    android:id="@+id/lon_second_separator_tv"
+                    android:layout_width="@dimen/context_menu_padding_margin_large"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="."
+                    android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
+                    android:textSize="@dimen/dialog_header_text_size"/>
+
+                <EditText
+                    android:id="@+id/lon_thirst_input_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="yyyy"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    tools:maxLength="4"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/lon_backspace_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/text_margin_small"
+            android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
+            android:layout_marginRight="@dimen/text_margin_small"
+            android:layout_marginStart="@dimen/context_menu_padding_margin_large"
+            android:padding="@dimen/content_padding_small"
+            tools:src="@drawable/ic_keyboard_backspace"/>
+
+    </LinearLayout>
+
+    <!-- Point name row: -->
+
+    <View
+        android:id="@+id/point_name_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/content_padding"
+        android:background="@color/route_info_divider_dark"/>
+
+    <LinearLayout
+        android:id="@+id/point_name_et_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_sheet_list_item_height"
+        tools:background="@color/route_info_bottom_view_bg_dark">
+
+        <EditText
+            android:id="@+id/point_name_et"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginStart="@dimen/content_padding"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="@string/optional_point_name"
+            android:imeOptions="actionDone"/>
+
+        <ImageView
+            android:id="@+id/point_name_keyboard_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/text_margin_small"
+            android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
+            android:layout_marginRight="@dimen/text_margin_small"
+            android:layout_marginStart="@dimen/context_menu_padding_margin_large"
+            android:padding="@dimen/content_padding_small"
+            tools:src="@drawable/ic_action_keyboard"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -300,12 +300,12 @@
 	<color name="keyboard_divider_light">#e6e6e6</color>
 	<color name="keyboard_divider_dark">#2a2f33</color>
 
-	<color name="coordinate_input_status_bar_color_light">#4257c9</color>
 	<color name="coordinate_input_status_bar_color_dark">#1b224d</color>
 	<color name="coordinate_input_app_bar_color_light">#536dfe</color>
 	<color name="coordinate_input_app_bar_color_dark">#2d3980</color>
 	<color name="coordinate_input_keyboard_icon_color">#9fadfc</color>
 	<color name="coordinate_input_error_color">#ed5421</color>
+	<color name="coordinate_input_active_icon_dark">#c0c0c0</color>
 
 	<color name="color_osm_edit_create">#78cc5c</color>
 	<color name="color_osm_edit_modify">#fac403</color>
