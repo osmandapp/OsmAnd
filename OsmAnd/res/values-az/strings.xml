@@ -1444,7 +1444,7 @@
     <string name="app_mode_motorcycle">Motosiklet</string>
     <string name="local_osm_changes_delete_all_confirm">%1$d OSM dəyişikliyini silmək üzrəsiniz. Əminsiniz?</string>
     <string name="animate_routing_route_not_calculated">Zəhmət olmasa əvvəlcə marşrutu hesablayın</string>
-    <string name="route_is_too_long_v2">Bu marşrut, hesablamaq üçün çox uzun ola birər. Zəhmət olmasa 10 dəqiqə ərzində nəticə tapılmasa, ara təyinat nöqtələri əlavə edin.</string>
+    <string name="route_is_too_long_v2">Bu marşrut hesablamaq üçün çox uzun ola bilər. Zəhmət olmasa 10 dəqiqə ərzində nəticə tapılmasa, ara təyinat nöqtələri əlavə edin.</string>
     <string name="auto_zoom_close">İri plana</string>
     <string name="auto_zoom_far">Orta plana</string>
     <string name="auto_zoom_farthest">Uzaq plana</string>
@@ -1953,4 +1953,18 @@
     <string name="improve_coverage_mapillary">Mapillary ilə şəkil əhatə dairəni yaxşılaşdır</string>
     <string name="mapillary_widget">Mapillary widget-i</string>
     <string name="install_selected_build">{1} tarixli OsmAnd - {0} quraşdırmaq istəyirsiniz ({2} MB) ?</string>
+    <string name="navigate_point_olc">Açıq məkan kodu (OLC)</string>
+    <string name="navigate_point_olc_info_invalid">Yanlış OLC
+\n</string>
+    <string name="navigate_point_olc_info_short">Qısa OLC
+\nZəhmət olmasa tam kod daxil edin</string>
+    <string name="rendering_category_others">Digər xəritə xüsusiyyətləri</string>
+    <string name="map_widget_appearance_rem">Qalan elementlər</string>
+    <string name="fav_point_dublicate">Favorit nöqtə adı təkrardır</string>
+    <string name="background_service_int">GPS oyandırma intervalı</string>
+    <string name="average">Orta</string>
+    <string name="osmo_gpx_track_downloaded">OsMo izi %1$s endirildi.</string>
+    <string name="select_index_file_to_download">Heç bir şey tapılmadı. Regionunuzu tapa bilməsəniz, özünüz yarada bilərsiniz (bax: http://osmand.net).</string>
+    <string name="osb_author_or_password_not_specified">Parametrlərdə OSM istifadəçi adı və şifrəni daxil edin</string>
+    <string name="new_directions_point_dialog">Artıq müəyyənləşdirilmiş ara təyinat nöqtələriniz var.</string>
     </resources>
