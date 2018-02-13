@@ -3,14 +3,12 @@
  */
 package net.osmand.plus.myplaces;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
@@ -20,7 +18,6 @@ import android.text.style.ImageSpan;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -28,10 +25,9 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.helpers.GpxImportHelper;
+import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
-import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +49,7 @@ public class FavoritesActivity extends TabActivity {
 	public static final int  FAV_TAB = R.string.shared_string_my_favorites;
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
 	private int tabSize;
-	private GpxImportHelper gpxImportHelper;
+	private ImportHelper importHelper;
 	private String groupNameToShow;
 
 	@Override
@@ -64,7 +60,7 @@ public class FavoritesActivity extends TabActivity {
 
 		app.logEvent(this, "myplaces_open");
 
-		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), null);
+		importHelper = new ImportHelper(this, getMyApplication(), null);
 
 		//noinspection ConstantConditions
 		getSupportActionBar().setTitle(R.string.shared_string_my_places);
@@ -128,17 +124,17 @@ public class FavoritesActivity extends TabActivity {
 				if (gpxFragment!= null) {
 					gpxFragment.startImport();
 				}
-				gpxImportHelper.setGpxImportCompleteListener(new GpxImportHelper.OnGpxImportCompleteListener() {
+				importHelper.setGpxImportCompleteListener(new ImportHelper.OnGpxImportCompleteListener() {
 					@Override
 					public void onComplete(boolean success) {
 						AvailableGPXFragment gpxFragment = getGpxFragment();
 						if (gpxFragment!= null) {
 							gpxFragment.finishImport(success);
 						}
-						gpxImportHelper.setGpxImportCompleteListener(null);
+						importHelper.setGpxImportCompleteListener(null);
 					}
 				});
-				if (!gpxImportHelper.handleGpxImport(uri, false)) {
+				if (!importHelper.handleGpxImport(uri, false)) {
 					if (gpxFragment!= null) {
 						gpxFragment.finishImport(false);
 					}
@@ -147,7 +143,7 @@ public class FavoritesActivity extends TabActivity {
 		} else if (requestCode == IMPORT_FAVOURITES_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null) {
 				Uri uri = data.getData();
-				gpxImportHelper.handleFavouritesImport(uri);
+				importHelper.handleFavouritesImport(uri);
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);

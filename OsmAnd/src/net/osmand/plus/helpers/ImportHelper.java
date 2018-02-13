@@ -63,7 +63,7 @@ import java.util.zip.ZipInputStream;
 /**
  * @author Koen Rabaey
  */
-public class GpxImportHelper {
+public class ImportHelper {
 
 	public static final String KML_SUFFIX = ".kml";
 	public static final String KMZ_SUFFIX = ".kmz";
@@ -77,7 +77,7 @@ public class GpxImportHelper {
 		void onComplete(boolean success);
 	}
 
-	public GpxImportHelper(final AppCompatActivity activity, final OsmandApplication app, final OsmandMapTileView mapView) {
+	public ImportHelper(final AppCompatActivity activity, final OsmandApplication app, final OsmandMapTileView mapView) {
 		this.activity = activity;
 		this.app = app;
 		this.mapView = mapView;
@@ -651,7 +651,7 @@ public class GpxImportHelper {
 		} else {
 			ImportGpxBottomSheetDialogFragment fragment = new ImportGpxBottomSheetDialogFragment();
 			fragment.setUsedOnMap(true);
-			fragment.setGpxImportHelper(this);
+			fragment.setImportHelper(this);
 			fragment.setGpxFile(gpxFile);
 			fragment.setFileName(fileName);
 			fragment.setSave(save);
@@ -715,15 +715,15 @@ public class GpxImportHelper {
 
 		public static final String TAG = "ImportGpxBottomSheetDialogFragment";
 
-		private GpxImportHelper gpxImportHelper;
+		private ImportHelper importHelper;
 
 		private GPXFile gpxFile;
 		private String fileName;
 		private boolean save;
 		private boolean useImportDir;
 
-		public void setGpxImportHelper(GpxImportHelper gpxImportHelper) {
-			this.gpxImportHelper = gpxImportHelper;
+		public void setImportHelper(ImportHelper importHelper) {
+			this.importHelper = importHelper;
 		}
 
 		public void setGpxFile(GPXFile gpxFile) {
@@ -767,14 +767,14 @@ public class GpxImportHelper {
 			mainView.findViewById(R.id.import_as_favorites_row).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					gpxImportHelper.importFavoritesImpl(gpxFile, fileName, false);
+					importHelper.importFavoritesImpl(gpxFile, fileName, false);
 					dismiss();
 				}
 			});
 			mainView.findViewById(R.id.import_as_gpx_row).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					gpxImportHelper.handleResult(gpxFile, fileName, save, useImportDir, false);
+					importHelper.handleResult(gpxFile, fileName, save, useImportDir, false);
 					dismiss();
 				}
 			});
