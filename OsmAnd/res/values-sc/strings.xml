@@ -2955,4 +2955,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="last_intermediate_dest_description">Annanghet s\'ùrtima firmada a s\'àndala</string>
     <string name="first_intermediate_dest_description">Annanghet sa prima firmada a s\'àndala</string>
     <string name="subsequent_dest_description">Moe sa destinatzione in subra, e crea una destinatzione</string>
+    <string name="map_import_error">Errore cun s\'importatzione de sa mapa</string>
+    <string name="map_imported_successfully">Mapa importada cun sutzessu</string>
     </resources>
