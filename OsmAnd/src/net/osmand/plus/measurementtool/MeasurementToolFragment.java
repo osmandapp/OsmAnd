@@ -1119,7 +1119,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 					.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-
 							final String name = nameEt.getText().toString();
 							String fileName = name + GPX_SUFFIX;
 							if (textChanged[0]) {
@@ -1131,7 +1130,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 								}
 							}
 							saveNewGpx(dir, fileName, showOnMapToggle.isChecked(), saveType, false);
-
 						}
 					})
 					.setNegativeButton(R.string.shared_string_cancel, null);
@@ -1155,18 +1153,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 						warningTextView.setVisibility(View.VISIBLE);
 						warningTextView.setText(R.string.file_with_name_already_exists);
 						dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
-
 					} else if (editable.toString().trim().isEmpty()) {
 						warningTextView.setVisibility(View.VISIBLE);
 						warningTextView.setText(R.string.enter_the_file_name);
 						dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-
 					} else {
 						warningTextView.setVisibility(View.INVISIBLE);
 						dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
 					}
 					textChanged[0] = true;
-
 				}
 			});
 		}
@@ -1181,13 +1176,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	}
 
 	private void saveGpx(final File dir,
-						 final String fileName,
-						 final boolean showOnMap,
-						 final GPXFile gpx,
-						 final boolean openTrackActivity,
-						 final NewGpxData.ActionType actionType,
-						 final SaveType saveType,
-						 final boolean close) {
+	                     final String fileName,
+	                     final boolean showOnMap,
+	                     final GPXFile gpx,
+	                     final boolean openTrackActivity,
+	                     final NewGpxData.ActionType actionType,
+	                     final SaveType saveType,
+	                     final boolean close) {
 
 		new AsyncTask<Void, Void, String>() {
 

@@ -65,7 +65,7 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 				((TextInputLayout) textBox).setHintTextAppearance(R.style.OsmandDarkTheme_MarkerFragment);
 			} else if (textBox instanceof OsmandTextFieldBoxes) {
 				((OsmandTextFieldBoxes) textBox).activate(true);
-				((OsmandTextFieldBoxes) textBox).setPrimaryColor(getResources().getColor(R.color.primary_text_field_boxes_color));
+				((OsmandTextFieldBoxes) textBox).setPrimaryColor(ContextCompat.getColor(mapActivity,R.color.color_dialog_buttons_dark));
 			}
 		}
 		nameEditText.setText(marker.getName(mapActivity));
