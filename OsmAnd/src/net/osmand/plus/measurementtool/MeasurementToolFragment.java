@@ -1111,8 +1111,33 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 			nameEt.setText(displayedName);
 			nameEt.setSelection(displayedName.length());
-
 			final boolean[] textChanged = new boolean[1];
+
+			AlertDialog.Builder builder=new AlertDialog.Builder(mapActivity)
+					.setTitle(R.string.enter_gpx_name)
+					.setView(view)
+					.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+
+							final String name = nameEt.getText().toString();
+							String fileName = name + GPX_SUFFIX;
+							if (textChanged[0]) {
+								File fout = new File(dir, fileName);
+								int ind = 1;
+								while (fout.exists()) {
+									fileName = name + "_" + (++ind) + GPX_SUFFIX;
+									fout = new File(dir, fileName);
+								}
+							}
+							saveNewGpx(dir, fileName, showOnMapToggle.isChecked(), saveType, false);
+
+						}
+					})
+					.setNegativeButton(R.string.shared_string_cancel, null);
+				    final AlertDialog dialog=builder.create();
+                    dialog.show();
+
 			nameEt.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -1128,34 +1153,25 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				public void afterTextChanged(Editable editable) {
 					if (new File(dir, editable.toString() + GPX_SUFFIX).exists()) {
 						fileExistsTv.setVisibility(View.VISIBLE);
+						fileExistsTv.setText(R.string.file_with_name_already_exists);
+						dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+								.setEnabled(true);
+
+					} else if (editable.toString().trim().isEmpty()) {
+						fileExistsTv.setVisibility(View.VISIBLE);
+						fileExistsTv.setText(R.string.enter_the_file_name);
+						dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+								.setEnabled(false);
+
 					} else {
 						fileExistsTv.setVisibility(View.INVISIBLE);
+						dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+								.setEnabled(true);
 					}
-					textChanged[0] = true;
+						textChanged[0] = true;
+
 				}
 			});
-
-			new AlertDialog.Builder(mapActivity)
-					.setTitle(R.string.enter_gpx_name)
-					.setView(view)
-					.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							final String name = nameEt.getText().toString();
-							String fileName = name + GPX_SUFFIX;
-							if (textChanged[0]) {
-								File fout = new File(dir, fileName);
-								int ind = 1;
-								while (fout.exists()) {
-									fileName = name + "_" + (++ind) + GPX_SUFFIX;
-									fout = new File(dir, fileName);
-								}
-							}
-							saveNewGpx(dir, fileName, showOnMapToggle.isChecked(), saveType, false);
-						}
-					})
-					.setNegativeButton(R.string.shared_string_cancel, null)
-					.show();
 		}
 	}
 
