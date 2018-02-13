@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
@@ -52,7 +53,7 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 				? R.layout.markers_track_name_text_field_box
 				: R.layout.markers_track_name_edit_text;
 		contentLayout.addView(getLayoutInflater().inflate(layoutRes, contentLayout, false), 1);
-
+		View textBox = mainView.findViewById(R.id.name_text_box);
 		if (portrait) {
 			AndroidUtils.setBackground(getActivity(), mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
@@ -60,12 +61,18 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
 		if (nightMode) {
 			nameEditText.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_white));
+			if (textBox instanceof TextInputLayout) {
+				((TextInputLayout) textBox).setHintTextAppearance(R.style.OsmandDarkTheme_MarkerFragment);
+			} else if (textBox instanceof OsmandTextFieldBoxes) {
+				((OsmandTextFieldBoxes) textBox).activate(true);
+				((OsmandTextFieldBoxes) textBox).setPrimaryColor(getResources().getColor(R.color.primary_text_field_boxes_color));
+			}
 		}
 		nameEditText.setText(marker.getName(mapActivity));
 		nameEditText.requestFocus();
 		final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY);
-		View textBox = mainView.findViewById(R.id.name_text_box);
+
 		if (textBox instanceof OsmandTextFieldBoxes) {
 			((OsmandTextFieldBoxes) textBox).activate(true);
 		}

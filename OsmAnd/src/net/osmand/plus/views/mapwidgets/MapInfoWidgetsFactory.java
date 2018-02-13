@@ -1,7 +1,5 @@
 package net.osmand.plus.views.mapwidgets;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.SwitchCompat;
@@ -420,7 +418,7 @@ public class MapInfoWidgetsFactory {
 			view.updateVisibility(switchCompat, topBarSwitchVisible);
 			if (topBarSwitchVisible) {
 				switchCompat.setChecked(topBarSwitchChecked);
-				view.setTopBarBackgroundColor(switchCompat,topBarSwitchChecked);
+				view.setTopBarSwitchTrackColor(switchCompat, topBarSwitchChecked);
 
 			}
 			if (view.getShadowView() != null) {
@@ -570,13 +568,14 @@ public class MapInfoWidgetsFactory {
 			}
 			return false;
 		}
-		public void setTopBarBackgroundColor(View v,boolean active ) {
-			SwitchCompat switchCompat=(SwitchCompat)v;
-			if(active){
 
-				DrawableCompat.setTint(switchCompat.getTrackDrawable(),Color.parseColor("#c5d2e6"));
+		public void setTopBarSwitchTrackColor(View v, boolean active) {
+			SwitchCompat switchCompat = (SwitchCompat) v;
+			if (active) {
+				DrawableCompat.setTint(switchCompat.getTrackDrawable(), map.getResources().getColor(R.color.switch_track_color_measure_instruments));
 			}
 		}
+
 		private void initToolbar(TopToolbarController controller) {
 			backButton.setOnClickListener(controller.onBackButtonClickListener);
 			topBarTitleLayout.setOnClickListener(controller.onTitleClickListener);

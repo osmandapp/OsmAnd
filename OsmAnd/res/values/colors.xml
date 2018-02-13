@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="switch_track_color_measure_instruments">#c5d2e6</color>
+	<color name="primary_text_field_boxes_color">#ff8800</color>
+
 	<color name="mapillary_color">#3db878</color>
 	<color name="mapillary_color_pressed">#3a9f73</color>
 	<color name="mapillary_action_bar">#14c45d</color>
