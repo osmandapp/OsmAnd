@@ -26,7 +26,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import java.io.File;
 import java.util.Date;
 
-import static net.osmand.plus.helpers.GpxImportHelper.GPX_SUFFIX;
+import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
 
 public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
