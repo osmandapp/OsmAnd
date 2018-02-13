@@ -1967,4 +1967,8 @@
     <string name="select_index_file_to_download">Heç bir şey tapılmadı. Regionunuzu tapa bilməsəniz, özünüz yarada bilərsiniz (bax: http://osmand.net).</string>
     <string name="osb_author_or_password_not_specified">Parametrlərdə OSM istifadəçi adı və şifrəni daxil edin</string>
     <string name="new_directions_point_dialog">Artıq müəyyənləşdirilmiş ara təyinat nöqtələriniz var.</string>
+    <string name="map_import_error">Xəritə idxalı səhvi</string>
+    <string name="map_imported_successfully">Xəritə uğurla idxal edildi</string>
+    <string name="empty_state_my_tracks">İzlər əlavə et və qeyd et</string>
+    <string name="empty_state_my_tracks_desc">Baxmaq üçün izləri qeyd et və ya idxal et.</string>
     </resources>
