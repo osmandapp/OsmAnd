@@ -95,9 +95,9 @@
     <style name="OsmandLightThemeWithLightStatusBar" parent="OsmandLightTheme">
         <item name="android:statusBarColor">@color/status_bar_route_light</item>
     </style>
-    <style name="OsmandDarkTheme.MarkerFragment" >
-        <item name="android:textColorPrimary">@color/primary_text_field_boxes_color</item>
-        <item name="android:textColor">@color/primary_text_field_boxes_color</item>
+
+    <style name="Widget.Styled.DarkActionBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/color_dialog_buttons_dark</item>
     </style>
 
     <!-- Osmand themes styles -->

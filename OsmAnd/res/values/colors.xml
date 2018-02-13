@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<color name="switch_track_color_measure_instruments">#c5d2e6</color>
+	<color name="map_toolbar_switch_track_color">#c5d2e6</color>
 	<color name="mapillary_color">#3db878</color>
 	<color name="mapillary_color_pressed">#3a9f73</color>
 	<color name="mapillary_action_bar">#14c45d</color>
