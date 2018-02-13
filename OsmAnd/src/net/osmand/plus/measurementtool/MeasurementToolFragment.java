@@ -1181,13 +1181,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	}
 
 	private void saveGpx(final File dir,
-	                     final String fileName,
-	                     final boolean showOnMap,
-	                     final GPXFile gpx,
-	                     final boolean openTrackActivity,
-	                     final NewGpxData.ActionType actionType,
-	                     final SaveType saveType,
-	                     final boolean close) {
+						 final String fileName,
+						 final boolean showOnMap,
+						 final GPXFile gpx,
+						 final boolean openTrackActivity,
+						 final NewGpxData.ActionType actionType,
+						 final SaveType saveType,
+						 final boolean close) {
 
 		new AsyncTask<Void, Void, String>() {
 

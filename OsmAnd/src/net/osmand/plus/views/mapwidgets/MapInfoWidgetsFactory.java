@@ -419,7 +419,6 @@ public class MapInfoWidgetsFactory {
 			if (topBarSwitchVisible) {
 				switchCompat.setChecked(topBarSwitchChecked);
 				view.setTopBarSwitchTrackColor(switchCompat, topBarSwitchChecked);
-
 			}
 			if (view.getShadowView() != null) {
 				view.getShadowView().setVisibility(View.VISIBLE);
