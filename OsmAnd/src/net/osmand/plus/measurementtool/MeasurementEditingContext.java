@@ -312,6 +312,7 @@ public class MeasurementEditingContext {
 					WptPt pt = new WptPt();
 					pt.lat = loc.getLatitude();
 					pt.lon = loc.getLongitude();
+					pt.ele = loc.getAltitude();
 					pts.add(pt);
 				}
 				calculatedPairs++;
