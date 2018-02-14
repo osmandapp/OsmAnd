@@ -1813,7 +1813,7 @@
     <string name="osm_recipients_label">OSM qəbul edənlər</string>
     <string name="total_donations">Ümumi ianələr</string>
     <string name="winter_and_ski_renderer">Qış və xizək</string>
-    <string name="switch_start_finish">Başlanğıc və təyinat nöqtələrinin yerini dəyiş</string>
+    <string name="switch_start_finish">Başlanğıc və təyinat nöqtələrini dəyiş</string>
     <string name="shared_string_undo_all">HAMISINI QAYTAR</string>
     <string name="shared_string_undo">QAYTAR</string>
     <string name="save_poi_without_poi_type_message">POI-ni həqiqətən POI növü olmadan yadda saxlamaq istəyirsiniz?</string>
@@ -1971,4 +1971,9 @@
     <string name="map_imported_successfully">Xəritə uğurla idxal edildi</string>
     <string name="empty_state_my_tracks">İzlər əlavə et və qeyd et</string>
     <string name="empty_state_my_tracks_desc">Baxmaq üçün izləri qeyd et və ya idxal et.</string>
+    <string name="enter_the_file_name">Fayl adını daxil edin.</string>
+    <string name="release_3_0">•
+\n</string>
+    <string name="distance_indication_descr">Aktiv işarələrə qədər məsafənin necə göstəriləcəyini seçin.</string>
+    <string name="tunnel_warning">İrəlidə tunel</string>
     </resources>
