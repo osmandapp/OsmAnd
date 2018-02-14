@@ -1097,7 +1097,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			final LayoutInflater inflater = mapActivity.getLayoutInflater();
 			final View view = inflater.inflate(R.layout.save_gpx_dialog, null);
 			final EditText nameEt = (EditText) view.findViewById(R.id.gpx_name_et);
-			final TextView fileExistsTv = (TextView) view.findViewById(R.id.file_exists_text_view);
+			final TextView warningTextView = (TextView) view.findViewById(R.id.file_exists_text_view);
 			final SwitchCompat showOnMapToggle = (SwitchCompat) view.findViewById(R.id.toggle_show_on_map);
 			showOnMapToggle.setChecked(true);
 
@@ -1111,31 +1111,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 			nameEt.setText(displayedName);
 			nameEt.setSelection(displayedName.length());
-
 			final boolean[] textChanged = new boolean[1];
-			nameEt.addTextChangedListener(new TextWatcher() {
-				@Override
-				public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-				}
-
-				@Override
-				public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-				}
-
-				@Override
-				public void afterTextChanged(Editable editable) {
-					if (new File(dir, editable.toString() + GPX_SUFFIX).exists()) {
-						fileExistsTv.setVisibility(View.VISIBLE);
-					} else {
-						fileExistsTv.setVisibility(View.INVISIBLE);
-					}
-					textChanged[0] = true;
-				}
-			});
-
-			new AlertDialog.Builder(mapActivity)
+			AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity)
 					.setTitle(R.string.enter_gpx_name)
 					.setView(view)
 					.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
@@ -1154,8 +1132,38 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 							saveNewGpx(dir, fileName, showOnMapToggle.isChecked(), saveType, false);
 						}
 					})
-					.setNegativeButton(R.string.shared_string_cancel, null)
-					.show();
+					.setNegativeButton(R.string.shared_string_cancel, null);
+			final AlertDialog dialog = builder.create();
+			dialog.show();
+
+			nameEt.addTextChangedListener(new TextWatcher() {
+				@Override
+				public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+				}
+
+				@Override
+				public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+				}
+
+				@Override
+				public void afterTextChanged(Editable editable) {
+					if (new File(dir, editable.toString() + GPX_SUFFIX).exists()) {
+						warningTextView.setVisibility(View.VISIBLE);
+						warningTextView.setText(R.string.file_with_name_already_exists);
+						dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+					} else if (editable.toString().trim().isEmpty()) {
+						warningTextView.setVisibility(View.VISIBLE);
+						warningTextView.setText(R.string.enter_the_file_name);
+						dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+					} else {
+						warningTextView.setVisibility(View.INVISIBLE);
+						dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+					}
+					textChanged[0] = true;
+				}
+			});
 		}
 	}
 
@@ -1168,13 +1176,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	}
 
 	private void saveGpx(final File dir,
-						 final String fileName,
-						 final boolean showOnMap,
-						 final GPXFile gpx,
-						 final boolean openTrackActivity,
-						 final NewGpxData.ActionType actionType,
-						 final SaveType saveType,
-						 final boolean close) {
+	                     final String fileName,
+	                     final boolean showOnMap,
+	                     final GPXFile gpx,
+	                     final boolean openTrackActivity,
+	                     final NewGpxData.ActionType actionType,
+	                     final SaveType saveType,
+	                     final boolean close) {
 
 		new AsyncTask<Void, Void, String>() {
 
