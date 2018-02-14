@@ -3668,4 +3668,79 @@
 	<string name="poi_climbing_rock_granite">Тип каменю: граніт</string>
 	<string name="poi_climbing_rock_sandstone">Тип каменю: піщаник</string>
 	<string name="poi_climbing_rock_quartzite">Тип каменю: кварцит</string>
-	</resources>
+	<string name="poi_climbing_style">Стиль скелелазіння</string>
+	<string name="poi_socket">Роз\'єм</string>
+
+<string name="poi_climbing_boulder_yes">Боулдерінг: так</string>
+	<string name="poi_climbing_boulder_no">Боулдерінг: ні</string>
+	<string name="poi_climbing_toprope_yes">Мотузка з вершини: так</string>
+	<string name="poi_climbing_toprope_no">Мотузка з вершини: ні</string>
+	<string name="poi_climbing_multipitch_yes">Багатоступінчасті маршрути: так</string>
+	<string name="poi_climbing_multipitch_no">Багатоступінчасті маршрути: ні</string>
+	<string name="poi_climbing_deepwater_yes">Лазіння над водою: так</string>
+	<string name="poi_climbing_deepwater_no">Лазіння над водою: ні</string>
+
+	<string name="poi_climbing_length">Довжина сходження</string>
+	<string name="poi_climbing_length_min">Мінімальна довжина сходження</string>
+	<string name="poi_climbing_length_max">Максимальна довжина сходження</string>
+	<string name="poi_climbing_rock_gneiss">Камінь сходження: гнейс</string>
+	<string name="poi_climbing_rock_porphyry">Камінь сходження: порфір</string>
+	<string name="poi_climbing_quality_solid">Якість сходження: твердо</string>
+	<string name="poi_climbing_quality_fragile">Якість сходження: крихко</string>
+	<string name="poi_climbing_bolted_yes">Фіксовані зачепи: так</string>
+	<string name="poi_climbing_bolted_no">Фіксовані зачепи: ні</string>
+	<string name="poi_climbing_orientation_n">Орієнтація стіни: Пн</string>
+	<string name="poi_climbing_orientation_ne">Орієнтація стіни: ПнСх</string>
+	<string name="poi_climbing_orientation_e">Орієнтація стіни: Сх</string>
+	<string name="poi_climbing_orientation_se">Орієнтація стіни: ПдСх</string>
+	<string name="poi_climbing_orientation_s">Орієнтація стіни: Пд</string>
+	<string name="poi_climbing_orientation_sw">Орієнтація стіни: ПдЗх</string>
+	<string name="poi_climbing_orientation_w">Орієнтація стіни: Зх</string>
+	<string name="poi_climbing_orientation_nw">Орієнтація стіни: ПнЗх</string>
+	<string name="poi_climbing_summit_log_yes">Журнал сходжень: так</string>
+	<string name="poi_climbing_summit_log_no">Журнал сходжень: ні</string>
+	<string name="poi_climbing_routes">Маршрути сходження</string>
+
+	<string name="poi_circumference">Обхват стовбура</string>
+	<string name="poi_diameter_crown">Діаметр крони</string>
+
+	<string name="poi_meadow_agricultural">Тип: сільськогосподарський</string>
+	<string name="poi_meadow_perpetual">Тип: природний</string>
+	<string name="poi_meadow_transitional">Тип: заростаючий</string>
+	<string name="poi_meadow_pasture">Тип: пасовище</string>
+
+	<string name="poi_frozen_food">Заморожені продукти</string>
+
+	<string name="poi_agrarian">Сільськогосподарський магазин</string>
+
+	<string name="poi_shop_fireplace">Магазин камінів</string>
+
+	<string name="poi_shop_boat">"Магазин човнів "</string>
+
+	<string name="poi_cannabis">"Магазин конопель "</string>
+
+	<string name="poi_osmand_socket_cee_blue_yes">CEE блакитний</string>
+	<string name="poi_osmand_socket_cee_red_16a_yes">CEE червоний 16A</string>
+	<string name="poi_osmand_socket_cee_red_32a_yes">CEE червоний 32A</string>
+	<string name="poi_osmand_socket_cee_red_64a_yes">CEE червоний 64A</string>
+	<string name="poi_osmand_socket_cee_red_125a_yes">CEE червоний 125A</string>
+	<string name="poi_osmand_socket_type1_yes">Тип 1</string>
+	<string name="poi_osmand_socket_type1_combo_yes">Тип 1 комбінований</string>
+	<string name="poi_osmand_socket_type2_yes">Тип 2</string>
+	<string name="poi_osmand_socket_type2_combo_yes">Тип 2 комбінований</string>
+	<string name="poi_osmand_socket_type3_yes">Тип 3</string>
+	<string name="poi_osmand_socket_chademo_yes">"CHAdeMO "</string>
+	<string name="poi_osmand_socket_tesla_standard_yes">"Стандарт Тесла "</string>
+	<string name="poi_osmand_socket_tesla_supercharger_yes">Тесла Supercharger</string>
+	<string name="poi_osmand_socket_tesla_roadster_yes">Тесла Родстер</string>
+	<string name="poi_osmand_socket_nema_5_15_yes">"NEMA 5-15R "</string>
+	<string name="poi_osmand_socket_nema_5_20_yes">"NEMA 5-20 "</string>
+	<string name="poi_osmand_socket_nema_14_30_yes">"NEMA 14-30 "</string>
+	<string name="poi_osmand_socket_nema_14_50_yes">"NEMA 14-50 "</string>
+	<string name="poi_osmand_socket_schuko_yes">Щуко</string>
+	<string name="poi_osmand_socket_bs1363_yes">"BS 1363 "</string>
+	<string name="poi_osmand_socket_as3112_yes">"AS/NZS 3112 "</string>
+
+
+
+</resources>
