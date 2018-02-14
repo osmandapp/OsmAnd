@@ -96,7 +96,7 @@
         <item name="android:statusBarColor">@color/status_bar_route_light</item>
     </style>
 
-    <style name="Widget.Styled.DarkActionBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+    <style name="TextAppearance.App.DarkTextInputLayout" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/color_dialog_buttons_dark</item>
     </style>
 

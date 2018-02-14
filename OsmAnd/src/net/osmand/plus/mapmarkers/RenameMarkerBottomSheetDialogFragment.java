@@ -62,9 +62,8 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 		if (nightMode) {
 			nameEditText.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_white));
 			if (textBox instanceof TextInputLayout) {
-				((TextInputLayout) textBox).setHintTextAppearance(R.style.Widget_Styled_DarkActionBarTitle);
+				((TextInputLayout) textBox).setHintTextAppearance(R.style.TextAppearance_App_DarkTextInputLayout);
 			} else if (textBox instanceof OsmandTextFieldBoxes) {
-				((OsmandTextFieldBoxes) textBox).activate(true);
 				((OsmandTextFieldBoxes) textBox).setPrimaryColor(ContextCompat.getColor(mapActivity,R.color.color_dialog_buttons_dark));
 			}
 		}
