@@ -50,7 +50,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -92,7 +91,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private static final String NAME_LABEL = "name";
 
 	private List<MapMarker> mapMarkers = new ArrayList<>();
-	private MapMarkersHelper mapMarkersHelper;
 	private OnMapMarkersSavedListener listener;
 
 	private View mainView;
@@ -147,9 +145,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final MapActivity mapActivity = getMapActivity();
-		mapMarkersHelper = getMyApplication().getMapMarkersHelper();
-		orientationPortrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		orientationPortrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 
 		Fragment optionsFragment = getChildFragmentManager().findFragmentByTag(CoordinateInputBottomSheetDialogFragment.TAG);
 		if (optionsFragment != null) {
@@ -201,7 +197,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		View.OnClickListener backspaceOnClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(mapActivity, "backspace", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), "backspace", Toast.LENGTH_SHORT).show();
 			}
 		};
 
@@ -211,7 +207,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		latSideOfTheWorldBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(mapActivity, "lat side of the world", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), "lat side of the world", Toast.LENGTH_SHORT).show();
 			}
 		});
 		((TextView) latSideOfTheWorldBtn.findViewById(R.id.lat_side_of_the_world_tv)).setText(getString(R.string.north_abbreviation));
@@ -224,7 +220,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		lonSideOfTheWorldBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(mapActivity, "lon side of the world", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), "lon side of the world", Toast.LENGTH_SHORT).show();
 			}
 		});
 		((TextView) lonSideOfTheWorldBtn.findViewById(R.id.lon_side_of_the_world_tv)).setText(getString(R.string.west_abbreviation));
@@ -411,7 +407,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void saveMarkers() {
-		mapMarkersHelper.addMarkers(mapMarkers);
+		getMyApplication().getMapMarkersHelper().addMarkers(mapMarkers);
 		if (listener != null) {
 			listener.onMapMarkersSaved();
 		}
@@ -818,7 +814,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		@Override
 		public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 			if (convertView == null) {
-				convertView = LayoutInflater.from(getContext()).inflate(R.layout.input_coordinate_keyboard_item, parent, false);
+				convertView = LayoutInflater.from(getContext()).inflate(R.layout.coordinate_input_keyboard_item, parent, false);
 			}
 			if (!orientationPortrait) {
 				int keyboardViewHeight = mainView.findViewById(R.id.keyboard_grid_view).getMeasuredHeight();
