@@ -14,6 +14,7 @@
     <string name="south_abbreviation">S</string>
     <string name="north_abbreviation">N</string>
     <string name="optional_point_name">Optional point name</string>
+    <string name="enter_the_file_name">Enter the file name.</string>
     <string name="map_import_error">Map import error</string>
     <string name="map_imported_successfully">Map imported successfully</string>
     <string name="make_as_start_point">Make as Start Point</string>

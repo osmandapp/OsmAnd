@@ -2110,8 +2110,8 @@
     <string name="max_speed">Viteza maximă</string>
     <string name="average_speed">Viteza medie</string>
     <string name="shared_string_max">Maxim</string>
-    <string name="shared_string_start_time">Timp de pornire</string>
-    <string name="shared_string_end_time">Timp de oprire</string>
+    <string name="shared_string_start_time">Ora de pornire</string>
+    <string name="shared_string_end_time">Ora de oprire</string>
     <string name="shared_string_color">Culoare</string>
     <string name="select_gpx_folder">Selectează dosarul cu track-uri</string>
     <string name="file_can_not_be_moved">Fișierul nu poate fi mutat.</string>
@@ -2120,4 +2120,8 @@
     <string name="routing_attr_driving_style_name">Stil de conducere</string>
     <string name="shared_string_time">Timp</string>
     <string name="total_distance">Distanța totală</string>
+    <string name="points_delete_multiple_succesful">Punct(e) șterse cu succes.</string>
+    <string name="track_points_category_name">Puncte proeminente ale acestei rute</string>
+    <string name="shared_string_time_moving">Trecerea timpului</string>
+    <string name="shared_string_time_span">Interval de timp</string>
     </resources>

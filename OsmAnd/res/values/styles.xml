@@ -96,6 +96,10 @@
         <item name="android:statusBarColor">@color/status_bar_route_light</item>
     </style>
 
+    <style name="TextAppearance.App.DarkTextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/color_dialog_buttons_dark</item>
+    </style>
+
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
         <item name="android:statusBarColor">@color/status_bar_light</item>

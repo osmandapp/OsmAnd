@@ -1,6 +1,8 @@
 package net.osmand.plus.views.mapwidgets;
 
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -417,6 +419,9 @@ public class MapInfoWidgetsFactory {
 			view.updateVisibility(switchCompat, topBarSwitchVisible);
 			if (topBarSwitchVisible) {
 				switchCompat.setChecked(topBarSwitchChecked);
+				if (topBarSwitchChecked) {
+					DrawableCompat.setTint(switchCompat.getTrackDrawable(), ContextCompat.getColor(switchCompat.getContext(),R.color.map_toolbar_switch_track_color));
+				}
 			}
 			if (view.getShadowView() != null) {
 				view.getShadowView().setVisibility(View.VISIBLE);

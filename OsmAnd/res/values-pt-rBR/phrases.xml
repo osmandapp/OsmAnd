@@ -1825,8 +1825,8 @@
 	<string name="poi_shelter_type_abandoned">Tipo de abrigo: abandonado</string>
 
 	<string name="poi_internet_access_type_wlan">Wi-Fi</string>
-	<string name="poi_internet_access_type_terminal">Tipo de acesso à Internet: terminal</string>
-	<string name="poi_internet_access_type_wired">Tipo de acesso à Internet: cabo</string>
+	<string name="poi_internet_access_type_terminal">Por terminal</string>
+	<string name="poi_internet_access_type_wired">Por cabo</string>
 	<string name="poi_internet_access_type_public">Tipo de acesso à Internet: público</string>
 	<string name="poi_internet_access_type_service">Tipo de acesso à Internet: serviço</string>
 	<string name="poi_internet_access_type_no">Sem acesso à Internet</string>

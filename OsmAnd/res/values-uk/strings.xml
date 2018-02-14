@@ -263,7 +263,7 @@
   <string name="local_index_items_uploaded">%1$d з %2$d об’єктів успішно вивантажено.</string>
   <string name="local_index_mi_upload_gpx">Відправити в OSM</string>
   <string name="show_more_map_detail">Показати більше деталей</string>
-  <string name="show_more_map_detail_descr">Відображати деталі (дороги та інше) починаючи з малого масштабу.</string>
+  <string name="show_more_map_detail_descr">Відображати деякі векторні подробиці (дороги і т.п.) на малих масштабах.</string>
   <string name="favourites_delete_multiple_succesful">Точки вилучені із закладок.</string>
   <string name="favorite_delete_multiple">Ви дійсно хочете вилучити %1$d закладок та %2$d груп?</string>
   <string name="favorite_home_category">Вдома</string>
@@ -501,7 +501,7 @@
   <string name="rotate_map_none_opt">Не обертати (північ угорі)</string>
   <string name="rotate_map_to_bearing_descr">Виберіть спосіб обертання мапи.</string>
   <string name="rotate_map_to_bearing">Орієнтація мапи</string>
-  <string name="show_route">Деталі маршруту</string>
+  <string name="show_route">Подробиці маршруту</string>
   <string name="fav_imported_sucessfully">Точки закладок успішно імпортовано</string>
   <string name="fav_file_to_load_not_found">Файл GPX, що містить точки закладок, не знайдено в {0}</string>
   <string name="fav_saved_sucessfully">Закладки збережено в {0}</string>
@@ -1034,7 +1034,7 @@
     
     
     <string name="non_optimal_route_calculation">Швидка побудова маршруту (можливо неоптимальна)</string>
-	<string name="show_warnings_descr">Налаштувати попередження дорожнього руху (обмеження швидкості, вимушені зупинки, лежачі поліцейські), попередження про камери контролю швидкості та інформацію про рух по смугах.</string>
+	<string name="show_warnings_descr">Налаштування сповіщень (обмеження швидкості, вимушені зупинки, штучні нерівності, тунелі), камери швидкості, інформація про рух по смугах.</string>
 	<string name="avoid_motorway">Уникати автомагістралей</string>
 	<string name="snap_to_road_descr">Прив\'язуватися до доріг під час навігації.</string>
 	<string name="snap_to_road">Прив’язуватися до доріг</string>
@@ -1070,7 +1070,7 @@
 	<string name="support_new_features_descr">Пожертвувати, для реалізації нових можливостей в застосунку.</string>
 	<string name="email">Email</string>
 <string name="map_widget_gps_info">GPS дані</string>
-    <string name="layer_recordings">Аудіо записи</string>
+    <string name="layer_recordings">Шар записів</string>
     
 	
     <string name="osmand_play_title_30_chars">OsmAnd Мапи і Навігація</string>
@@ -1289,7 +1289,7 @@
     <string name="base_world_map">основна мапа світу</string>
 	
     
-    <string name="map_magnifier">Лупа</string>
+    <string name="map_magnifier">Масштаб</string>
     <string name="osmo_group_info">Інформація</string>
     <string name="int_days">днів</string>
     <string name="osmo_group_description">Опис</string>
@@ -1693,7 +1693,7 @@
     <string name="rendering_attr_busRoutes_name">Маршрути автобусів</string>
     <string name="rendering_category_hide">Сховати</string>
     <string name="rendering_category_routes">Маршрути</string>
-    <string name="rendering_category_details">Деталі</string>
+    <string name="rendering_category_details">Подробиці</string>
     <string name="rendering_category_transport">Транспорт</string>
     <string name="rendering_category_others">Інші властивості мапи</string>
     <string name="map_widget_appearance_rem">Залишкові елементи</string>
@@ -1792,7 +1792,7 @@
     <string name="everything_up_to_date">Всі файли оновлені</string>
     <string name="use_opengl_render">Використовувати OpenGL для візуалізації</string>
     <string name="use_opengl_render_descr">Використовувати апаратне прискорення OpenGL для візуалізації (може не працювати на деяких пристроях).</string>
-    <string name="error_avoid_specific_road">Об’їзд не знайдено</string>
+    <string name="error_avoid_specific_road">Об\'їзд не знайдений</string>
     <string name="save_track_to_gpx_globally_headline">Запис треку за вимогою</string>
 	<string name="enable_proxy_title">Увімкнути HTTP проксі-сервер</string>
 	<string name="enable_proxy_descr">Налаштування HTTP проксі-сервера для усіх мережевих запитів.</string>
@@ -1887,9 +1887,9 @@
 \nВін не потребує завантаження окремих мап, вид створюється на основі інформації зі стандартної мапи. 
 \n
 \nЦей вид можна де-активувати тут або змінити на інший, змінивши „Стиль мапи“ на потрібний в „Налаштування мапи“.</string>
-	<string name="plugin_ski_descr">Втулок забезпечує вам доступ до даних про гірськолижні траси, маршрути для бігових лиж, гірськолижні спуски, фунікулери та підйомники. Маршрути і спуски відзначені різними кольорами залежно від їх складності та зображені з використанням спеціального \"зимового\" стилю мапи, який полягає в тому, що використовуються \"снігові\" кольори зимового пейзажу. 
-\n
-\nУ разі активації цього виду, стиль мапи змінюється на „Winter and ski“, показуючи всі деталі пейзажу так, як вони виглядають взимку. Цей (зимовий) вид може бути де-активований тут, або якщо ви поміняєте „Стиль мапи“ в меню „Налаштування мапи“ на бажаний вид.</string>
+	<string name="plugin_ski_descr">Втулок забезпечує вам доступ до даних про гірськолижні траси, маршрути для бігових лиж, гірськолижні спуски, фунікулери та підйомники. Маршрути і спуски відзначені різними кольорами залежно від їх складності та зображені з використанням спеціального „зимового“ стилю мапи, який полягає в тому, що використовуються „снігові“ кольори зимового пейзажу. 
+\n 
+\nУ разі активації цього виду, стиль мапи змінюється на „Winter and ski“, показуючи усі деталі пейзажу так, як вони виглядають взимку. Цей (зимовий) вид може бути де-активований тут, або якщо ви поміняєте „Стиль мапи“ в меню „Налаштування мапи“ на бажаний вид.</string>
 	<string name="rendering_attr_hideHouseNumbers_name">Номери будинків</string>
     <string name="application_dir_change_warning3">Ви хочете, щоб OsmAnd також перемістив свої файли даних по новому призначенню?</string>
     <string name="specified_directiory_not_writeable">Не вдалося створити мапи у вказаній теці</string>
@@ -1970,7 +1970,7 @@
     <string name="read_full_article">Читати повну статтю (онлайн)</string>
     
     <string name="local_indexes_cat_wiki">Вікіпедія</string>
-    <string name="shared_string_show_details">Показати деталі</string>
+    <string name="shared_string_show_details">Показати подробиці</string>
     <string name="osm_edit_context_menu_delete">Видалити OSM-редагування</string>
     <string name="rendering_value_disabled_name">Вимкнено</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Забарвлення згідно приналежності мережі</string>
@@ -2199,7 +2199,7 @@
     <string name="rendering_attr_hideUnderground_name">Підземні обʼєкти</string>
     <string name="data_is_not_available">Дані недоступні</string>
     <string name="add_time_span">Додати часовий проміжок</string>
-    <string name="road_blocked">Дорога перекрита</string>
+    <string name="road_blocked">Дорога заблокована</string>
     <string name="shared_string_select">Вибрати</string>
     <string name="switch_start_finish">Поміняти місцями точки призначення та початку</string>
     <string name="rendering_attr_hideIcons_name">Значки POI</string>
@@ -2207,7 +2207,7 @@
     <string name="n_items_removed">Елементи видалено</string>
     <string name="shared_string_undo_all">ПОВЕРНУТИ ВСЕ</string>
     <string name="shared_string_type">Тип</string>
-    <string name="starting_point">Початкова точка</string>
+    <string name="starting_point">Відправна точка</string>
     <string name="shared_string_not_selected">Не вибрано</string>
     <string name="rec_split_clip_length">Тривалість кліпу</string>
     <string name="nm">мор.м.</string>
@@ -3130,13 +3130,7 @@
     <string name="by_date">За датою</string>
     <string name="by_type">За типом</string>
     <string name="modify_the_search_query">Змінити пошуковий запит.</string>
-    <string name="release_3_0">• Виявлення стоп-сигналів тепер враховує напрямок руху 
-\n
-\n• Новий алгоритм, що надає дійсні значення підйому/спуску для треків GPX 
-\n
-\n• Час ходьби в залежності від місцевості (підйому) (правило Нейсміта)
-\n
-\n</string>
+    <string name="release_3_0">"• "</string>
     <string name="what_is_here">Що тут:</string>
     <string name="parked_at">припаркований біля</string>
     <string name="pick_up_till">Забрати до</string>
@@ -3148,7 +3142,7 @@
     <string name="open_till">Відкрито до</string>
     <string name="will_close_at">Буде закрито в</string>
     <string name="will_open_at">Буде відкрито в</string>
-    <string name="will_open_on">Буде відкрито</string>
+    <string name="will_open_on">"Відкриється о "</string>
     <string name="additional_actions">Додаткові дії</string>
     <string name="av_locations_selected_desc">Файл GPX з координатами та даними вибраних нотаток.</string>
     <string name="av_locations_all_desc">Файл GPX з координатами та даними всіх нотаток.</string>
@@ -3159,7 +3153,42 @@
     <string name="total_donations">Всього пожертвувань</string>
     <string name="day_off_label">вих.</string>
     <string name="winter_and_ski_renderer">Зимовий/лижний</string>
-    <string name="touring_view_renderer">Туристичний (контраст і деталі)</string>
+    <string name="touring_view_renderer">Туристичний (контраст і подробиці)</string>
     <string name="nautical_renderer">Морський</string>
 
+<string name="map_import_error">Помилка імпорту мапи</string>
+    <string name="map_imported_successfully">Мапа успішна імпортована</string>
+    <string name="make_as_start_point">Зробити початковою точкою</string>
+    <string name="shared_string_current">Поточний</string>
+    <string name="last_intermediate_dest_description">Додає останню зупинку на маршруті</string>
+    <string name="first_intermediate_dest_description">Додає першу зупинку на маршруті</string>
+    <string name="subsequent_dest_description">Переміщує пункт призначення і створює проміжну зупинку</string>
+    <string name="show_closed_notes">Показати закриті нотатки</string>
+    <string name="switch_osm_notes_visibility_desc">Показати/приховати OSM-нотатки на мапі.</string>
+    <string name="gpx_file_desc">GPX — підходить для експорту в JOSM та інші OSM-редактори.</string>
+    <string name="osc_file_desc">OSC — підходить для експорту в OpenStreetMap.</string>
+    <string name="gpx_file">GPX-файл</string>
+    <string name="osc_file">OSC-файл</string>
+    <string name="choose_file_type">Виберіть тип файлу</string>
+    <string name="osm_edits_export_desc">Виберіть тип експорту: OSM-нотатки, POI чи і те і те.</string>
+    <string name="all_data">Усі дані</string>
+    <string name="osm_notes">OSM-нотатки</string>
+    <string name="will_open_tomorrow_at">"Відкриється завтра о "</string>
+    <string name="rendering_attr_hidePOILabels_name">Підписи до цікавих точок</string>
+    <string name="shared_string_without_name">Без назви</string>
+    <string name="release_2_9">• Виявлення стоп-сигналів тепер враховує напрямок руху
+\n• Новий алгоритм, що надає дійсні значення підйому/спуску для GPX-треків 
+\n• Час ходьби в залежності від місцевості (підйому) (правило Нейсміта)
+\n• Оновлення контекстного меню: вивід коли відкриється/закриється POI
+\n• Меню транспорту: винесено наверх усі доступні маршрути
+\n• Вікіпедія: додано кнопку переходу до статті, оновлено зовнішній вигляд статті
+\n• Маршрут: додано зміну початкової і кінцевої точки
+\n• Нотатки: додано сортування за типом й датою
+\n• OSM правки: вивід піктограми й назви категорії POI, відображення завершення дій
+\n• Новий екран швидкого введення координат, для швидкого створення маркерів</string>
+    <string name="lang_lo">Лаоська</string>
+    <string name="copy_location_name">Копіювати назву точки/POI</string>
+    <string name="toast_empty_name_error">Місце не має назви</string>
+    <string name="tunnel_warning">Тунель попереду</string>
+    <string name="show_tunnels">Тунелі</string>
 </resources>
