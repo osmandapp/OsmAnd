@@ -140,6 +140,7 @@
 	<color name="status_bar_route_dark">#000000</color>
 	<color name="status_bar_dim_light">#8a4e00</color>
 	<color name="status_bar_dim_dark">#13171a</color>
+	<color name="status_bar_coordinate_input_dark">#0d0f0f</color>
 
 
 	<color name="color_transparent">#0000</color>
@@ -300,7 +301,6 @@
 	<color name="keyboard_divider_light">#e6e6e6</color>
 	<color name="keyboard_divider_dark">#2a2f33</color>
 
-	<color name="coordinate_input_status_bar_color_dark">#1b224d</color>
 	<color name="coordinate_input_app_bar_color_light">#536dfe</color>
 	<color name="coordinate_input_app_bar_color_dark">#2d3980</color>
 	<color name="coordinate_input_keyboard_icon_color">#9fadfc</color>
