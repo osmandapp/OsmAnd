@@ -69,15 +69,10 @@
                         android:textColor="@color/dashboard_blue"
                         android:textSize="@dimen/default_list_text_size"
                         osmand:typeface="@string/font_roboto_regular"/>
+
                 </LinearLayout>
 
             </android.support.v7.widget.Toolbar>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"/>
 
             <include layout="@layout/coordinate_input_data_area"/>
 

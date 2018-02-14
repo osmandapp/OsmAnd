@@ -155,7 +155,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		mainView = inflater.inflate(R.layout.fragment_coordinate_input_dialog, container);
 
 		ImageButton backBtn = (ImageButton) mainView.findViewById(R.id.back_button);
-		backBtn.setImageDrawable(getActiveIcon(R.drawable.ic_arrow_back));
 		backBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -164,11 +163,16 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		});
 
-		((TextView) mainView.findViewById(R.id.toolbar_text)).setTextColor(ContextCompat.getColor(getContext(),
-				lightTheme ? R.color.color_black : R.color.color_white));
-
-		mainView.findViewById(R.id.app_bar).setBackgroundColor(ContextCompat.getColor(getContext(),
-				lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark));
+		if (orientationPortrait) {
+			backBtn.setImageDrawable(getActiveIcon(R.drawable.ic_arrow_back));
+			((TextView) mainView.findViewById(R.id.toolbar_text)).setTextColor(ContextCompat.getColor(getContext(),
+					lightTheme ? R.color.color_black : R.color.color_white));
+			mainView.findViewById(R.id.app_bar).setBackgroundColor(ContextCompat.getColor(getContext(),
+					lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark));
+		} else {
+			mainView.findViewById(R.id.app_bar).setBackgroundColor(ContextCompat.getColor(getContext(),
+					lightTheme ? R.color.actionbar_light_color : R.color.route_info_bottom_view_bg_dark));
+		}
 
 		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
 			@Override

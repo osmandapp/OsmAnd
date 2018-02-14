@@ -1,5 +1,7 @@
 package net.osmand.plus.mapmarkers.adapters;
 
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,21 +21,23 @@ import java.util.List;
 public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
 
 	private MapActivity mapActivity;
-	private boolean nightTheme;
 	private IconsCache iconsCache;
 	private List<MapMarker> mapMarkers;
+
+	private boolean nightTheme;
+	private boolean portrait;
+
 	private LatLon location;
 	private Float heading;
 	private boolean useCenter;
 	private int screenOrientation;
-	private boolean portrait;
 
-	public CoordinateInputAdapter (MapActivity mapActivity, List<MapMarker> mapMarkers) {
+	public CoordinateInputAdapter(MapActivity mapActivity, List<MapMarker> mapMarkers) {
 		this.mapActivity = mapActivity;
-		nightTheme = !mapActivity.getMyApplication().getSettings().isLightContent();
 		iconsCache = mapActivity.getMyApplication().getIconsCache();
-		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		this.mapMarkers = mapMarkers;
+		nightTheme = !mapActivity.getMyApplication().getSettings().isLightContent();
+		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 	}
 
 	public void setLocation(LatLon location) {
@@ -61,16 +65,18 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	@Override
 	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int position) {
 		final MapMarker mapMarker = getItem(position);
+
 		holder.iconDirection.setVisibility(View.VISIBLE);
 		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(mapMarker.colorIndex)));
-		holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, nightTheme ? R.color.bg_color_dark : R.color.bg_color_light));
-		holder.title.setTextColor(ContextCompat.getColor(mapActivity, nightTheme ? R.color.color_white : R.color.color_black));
-		holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, nightTheme ? R.color.actionbar_dark_color : R.color.dashboard_divider_light));
-		holder.optionsBtn.setBackgroundDrawable(mapActivity.getResources().getDrawable(nightTheme ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
+		holder.mainLayout.setBackgroundColor(getResolvedColor(nightTheme ? R.color.bg_color_dark : R.color.bg_color_light));
+		holder.title.setTextColor(getResolvedColor(nightTheme ? R.color.color_white : R.color.color_black));
+		holder.divider.setBackgroundColor(getResolvedColor(nightTheme ? R.color.actionbar_dark_color : R.color.dashboard_divider_light));
+		holder.optionsBtn.setBackgroundDrawable(ContextCompat.getDrawable(mapActivity, nightTheme
+				? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 		holder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
 		holder.iconReorder.setVisibility(View.GONE);
 		holder.numberText.setVisibility(View.VISIBLE);
-		holder.numberText.setText(Integer.toString(position + 1));
+		holder.numberText.setText(String.valueOf(position + 1));
 		holder.description.setVisibility(View.GONE);
 
 		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
@@ -78,8 +84,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 			public void onClick(View view) {
 				int position = holder.getAdapterPosition();
 				if (position != RecyclerView.NO_POSITION) {
-					MapMarker mapMarker = getItem(position);
-					mapMarkers.remove(mapMarker);
+					mapMarkers.remove(getItem(position));
 					notifyDataSetChanged();
 				}
 			}
@@ -88,6 +93,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		boolean singleItem = getItemCount() == 1;
 		boolean fistItem = position == 0;
 		boolean lastItem = position == getItemCount() - 1;
+
 		if (portrait) {
 			holder.topDivider.setVisibility(fistItem ? View.VISIBLE : View.GONE);
 			holder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
@@ -113,5 +119,10 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 
 	public MapMarker getItem(int position) {
 		return mapMarkers.get(position);
+	}
+
+	@ColorInt
+	private int getResolvedColor(@ColorRes int colorResId) {
+		return ContextCompat.getColor(mapActivity, colorResId);
 	}
 }
