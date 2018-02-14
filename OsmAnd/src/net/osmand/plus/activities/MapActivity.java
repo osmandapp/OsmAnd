@@ -89,8 +89,8 @@ import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.helpers.ExternalApiHelper;
-import net.osmand.plus.helpers.GpxImportHelper;
-import net.osmand.plus.helpers.GpxImportHelper.ImportGpxBottomSheetDialogFragment;
+import net.osmand.plus.helpers.ImportHelper;
+import net.osmand.plus.helpers.ImportHelper.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.inapp.InAppHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
@@ -189,7 +189,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private List<DialogProvider> dialogProviders = new ArrayList<>(2);
 	private StateChangedListener<ApplicationMode> applicationModeListener;
-	private GpxImportHelper gpxImportHelper;
+	private ImportHelper importHelper;
 	private WakeLockHelper wakeLockHelper;
 	private boolean intentLocation = false;
 
@@ -310,7 +310,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		addDialogProvider(mapActions);
 		OsmandPlugin.onMapActivityCreate(this);
-		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
+		importHelper = new ImportHelper(this, getMyApplication(), getMapView());
 		wakeLockHelper = new WakeLockHelper(getMyApplication());
 		if (System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
@@ -509,8 +509,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	public GpxImportHelper getGpxImportHelper() {
-		return gpxImportHelper;
+	public ImportHelper getImportHelper() {
+		return importHelper;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -697,10 +697,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					final Uri data = intent.getData();
 					final String scheme = data.getScheme();
 					if ("file".equals(scheme)) {
-						gpxImportHelper.handleFileImport(data, new File(data.getPath()).getName(), true);
+						importHelper.handleFileImport(data, new File(data.getPath()).getName(), true);
 						setIntent(null);
 					} else if ("content".equals(scheme)) {
-						gpxImportHelper.handleContentImport(data, true);
+						importHelper.handleContentImport(data, true);
 						setIntent(null);
 					} else if ("google.navigation".equals(scheme) || "osmand.navigation".equals(scheme)) {
 						parseNavigationIntent(data);

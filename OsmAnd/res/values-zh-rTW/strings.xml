@@ -3038,4 +3038,6 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="first_intermediate_dest_description">新增在路線上的第一站</string>
     <string name="subsequent_dest_description">向上移動目標，並建立目的地</string>
     <string name="make_as_start_point">作為起點</string>
+    <string name="map_import_error">地圖匯入錯誤</string>
+    <string name="map_imported_successfully">地圖已成功匯入</string>
     </resources>

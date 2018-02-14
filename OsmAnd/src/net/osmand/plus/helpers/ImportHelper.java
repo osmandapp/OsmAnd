@@ -1,5 +1,6 @@
 package net.osmand.plus.helpers;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -27,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
@@ -38,13 +41,16 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -57,7 +63,7 @@ import java.util.zip.ZipInputStream;
 /**
  * @author Koen Rabaey
  */
-public class GpxImportHelper {
+public class ImportHelper {
 
 	public static final String KML_SUFFIX = ".kml";
 	public static final String KMZ_SUFFIX = ".kmz";
@@ -71,7 +77,7 @@ public class GpxImportHelper {
 		void onComplete(boolean success);
 	}
 
-	public GpxImportHelper(final AppCompatActivity activity, final OsmandApplication app, final OsmandMapTileView mapView) {
+	public ImportHelper(final AppCompatActivity activity, final OsmandApplication app, final OsmandMapTileView mapView) {
 		this.activity = activity;
 		this.app = app;
 		this.mapView = mapView;
@@ -129,6 +135,8 @@ public class GpxImportHelper {
 			handleKmlImport(intentUri, fileName, saveFile, useImportDir);
 		} else if (fileName != null && fileName.endsWith(KMZ_SUFFIX)) {
 			handleKmzImport(intentUri, fileName, saveFile, useImportDir);
+		} else if (fileName != null && fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+			handleObfImport(intentUri, fileName);
 		} else {
 			handleFavouritesImport(intentUri, fileName, saveFile, useImportDir, false);
 		}
@@ -153,6 +161,7 @@ public class GpxImportHelper {
 		return name;
 	}
 
+	@SuppressLint("StaticFieldLeak")
 	private void handleGpxImport(final Uri gpxFile, final String fileName, final boolean save, final boolean useImportDir) {
 		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
@@ -193,6 +202,7 @@ public class GpxImportHelper {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
+	@SuppressLint("StaticFieldLeak")
 	private void handleFavouritesImport(final Uri gpxFile, final String fileName, final boolean save, final boolean useImportDir, final boolean forceImportFavourites) {
 		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
@@ -233,6 +243,7 @@ public class GpxImportHelper {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
+	@SuppressLint("StaticFieldLeak")
 	private void importFavoritesImpl(final GPXFile gpxFile, final String fileName, final boolean forceImportFavourites) {
 		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
@@ -269,6 +280,7 @@ public class GpxImportHelper {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
+	@SuppressLint("StaticFieldLeak")
 	private void handleKmzImport(final Uri kmzFile, final String name, final boolean save, final boolean useImportDir) {
 		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
@@ -324,6 +336,7 @@ public class GpxImportHelper {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
+	@SuppressLint("StaticFieldLeak")
 	private void handleKmlImport(final Uri kmlFile, final String name, final boolean save, final boolean useImportDir) {
 		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
@@ -368,6 +381,86 @@ public class GpxImportHelper {
 				handleResult(result, name, save, useImportDir, false);
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	private void handleObfImport(final Uri obfFile, final String name) {
+		new AsyncTask<Void, Void, String>() {
+
+			ProgressDialog progress;
+
+			@Override
+			protected void onPreExecute() {
+				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
+			}
+
+			@Override
+			protected String doInBackground(Void... voids) {
+				File dest = getObfDestFile(name);
+				if (dest.exists()) {
+					return app.getString(R.string.file_with_name_already_exists);
+				}
+				String message = app.getString(R.string.map_imported_successfully);
+				InputStream in = null;
+				OutputStream out = null;
+				try {
+					final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(obfFile, "r");
+					if (pFD != null) {
+						in = new FileInputStream(pFD.getFileDescriptor());
+						out = new FileOutputStream(dest);
+						Algorithms.streamCopy(in, out);
+						app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
+						app.getDownloadThread().updateLoadedFiles();
+						try {
+							pFD.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+					message = app.getString(R.string.map_import_error) + ": " + e.getMessage();
+				} catch (IOException e) {
+					e.printStackTrace();
+					message = app.getString(R.string.map_import_error) + ": " + e.getMessage();
+				} finally {
+					if (in != null) {
+						try {
+							in.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					if (out != null) {
+						try {
+							out.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+
+				return message;
+			}
+
+			@Override
+			protected void onPostExecute(String message) {
+				if (isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
+				Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+			}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	@NonNull
+	private File getObfDestFile(@NonNull String name) {
+		if (name.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
+			return app.getAppPath(IndexConstants.ROADS_INDEX_DIR + name);
+		} else if (name.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
+			return app.getAppPath(IndexConstants.WIKI_INDEX_DIR + name);
+		}
+		return app.getAppPath(name);
 	}
 
 	private boolean isActivityNotDestroyed(Activity activity) {
@@ -558,7 +651,7 @@ public class GpxImportHelper {
 		} else {
 			ImportGpxBottomSheetDialogFragment fragment = new ImportGpxBottomSheetDialogFragment();
 			fragment.setUsedOnMap(true);
-			fragment.setGpxImportHelper(this);
+			fragment.setImportHelper(this);
 			fragment.setGpxFile(gpxFile);
 			fragment.setFileName(fileName);
 			fragment.setSave(save);
@@ -622,15 +715,15 @@ public class GpxImportHelper {
 
 		public static final String TAG = "ImportGpxBottomSheetDialogFragment";
 
-		private GpxImportHelper gpxImportHelper;
+		private ImportHelper importHelper;
 
 		private GPXFile gpxFile;
 		private String fileName;
 		private boolean save;
 		private boolean useImportDir;
 
-		public void setGpxImportHelper(GpxImportHelper gpxImportHelper) {
-			this.gpxImportHelper = gpxImportHelper;
+		public void setImportHelper(ImportHelper importHelper) {
+			this.importHelper = importHelper;
 		}
 
 		public void setGpxFile(GPXFile gpxFile) {
@@ -674,14 +767,14 @@ public class GpxImportHelper {
 			mainView.findViewById(R.id.import_as_favorites_row).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					gpxImportHelper.importFavoritesImpl(gpxFile, fileName, false);
+					importHelper.importFavoritesImpl(gpxFile, fileName, false);
 					dismiss();
 				}
 			});
 			mainView.findViewById(R.id.import_as_gpx_row).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					gpxImportHelper.handleResult(gpxFile, fileName, save, useImportDir, false);
+					importHelper.handleResult(gpxFile, fileName, save, useImportDir, false);
 					dismiss();
 				}
 			});

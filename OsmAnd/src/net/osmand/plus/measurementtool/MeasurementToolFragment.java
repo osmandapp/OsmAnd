@@ -76,7 +76,7 @@ import java.util.Locale;
 
 import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
-import static net.osmand.plus.helpers.GpxImportHelper.GPX_SUFFIX;
+import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment {
 

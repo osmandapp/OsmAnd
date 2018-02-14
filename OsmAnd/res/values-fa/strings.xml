@@ -3047,4 +3047,7 @@
     <string name="last_intermediate_dest_description">آخرین توقفگاه را به مسیر اضافه می‌کند</string>
     <string name="first_intermediate_dest_description">اولین توقفگاه را به مسیر اضافه می‌کند</string>
     <string name="subsequent_dest_description">مقصد کنونی جلوتر می‌آید و مقصد جدیدی ایجاد می‌شود</string>
+    <string name="map_import_error">خطای واردکردن نقشه</string>
+    <string name="map_imported_successfully">نقشه با موفقیت وارد شد</string>
+    <string name="make_as_start_point">انتخاب به‌عنوان نقطهٔ آغازین</string>
     </resources>
