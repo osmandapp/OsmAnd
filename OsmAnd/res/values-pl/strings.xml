@@ -1741,7 +1741,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="proxy_port_title">Port proxy</string>
     <string name="plugin_description_title">Opis</string>
     <string name="plugin_install_needs_network">Zainstalowanie tej wtyczki wymaga połączenia internetowego.</string>
-    <string name="osmand_parking_overdue">Przestarzały</string>
+    <string name="osmand_parking_overdue">czas przekroczony</string>
     <string name="action_create">Utworzenie</string>
     <string name="action_modify">Zmodyfikowanie</string>
     <string name="action_delete">Usuń</string>
@@ -2609,7 +2609,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="altitude_ascent">Wzniesienia</string>
     <string name="altitude_range">Zakres wysokości</string>
     <string name="average_altitude">Średnia wysokość</string>
-    <string name="total_distance">Calkowita odległość</string>
+    <string name="total_distance">Całkowita odległość</string>
     <string name="shared_string_time">Czas</string>
     <string name="routing_attr_driving_style_name">Styl jazdy</string>
     
@@ -3002,4 +3002,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_right">Z prawej</string>
     <string name="shared_string_left">Z lewej</string>
     <string name="show_number_pad">Wyświetl klawiaturę numeryczną</string>
+    <string name="subsequent_dest_description">Przesuń cel w górę i utwórz cel</string>
+    <string name="empty_state_markers_history_desc">Na tym ekranie zostaną wyświetlone znaczniki oznaczone jako pominięte.</string>
+    <string name="mark_passed">Oznacz jako pominięty</string>
     </resources>
