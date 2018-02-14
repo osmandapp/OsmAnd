@@ -721,7 +721,7 @@ Pôr do Sol: %2$s</string>
     <string name="cancel_route">Descartar rota</string>
     <string name="cancel_navigation">Parar navegação</string>
     <string name="clear_destination">Apagar destino</string>
-    <string name="download_using_mobile_internet">Wi-Fi não está conectado no momento. Você quer usar a conexão de Internet atual para fazer a transferência?</string>
+    <string name="download_using_mobile_internet">O Wi-Fi não está conectado no momento. Você quer usar a conexão de Internet atual para baixar?</string>
     <string name="street_name">Nome da rua</string>
 	<string name="hno">Número de porta</string>
     <string name="website">Website</string>
@@ -1297,7 +1297,7 @@ Pôr do Sol: %2$s</string>
 	<string name="map_overlay_descr">Escolher mapa da camada superior.</string>
 	<string name="tile_source_already_installed">Mapa já está instalado, as configurações serão atualizadas.</string>
 	<string name="select_tile_source_to_install">Selecione os mapas (quadrículas) para instalar ou atualizar.</string>
-	<string name="internet_not_available">Uma conexão com a Internet é necessária para esta operação, mas não está disponível</string>
+	<string name="internet_not_available">Uma conexão com a Internet é necessária para esta operação, mas não está disponível.</string>
 	<string name="install_more">Instalar mais…</string>
 	<string name="level_to_switch_vector_raster_descr">Nível de zoom mínimo para usar mapas vetoriais</string>
 	<string name="level_to_switch_vector_raster">Mín. nível de zoom vetorial</string>
