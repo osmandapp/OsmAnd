@@ -76,9 +76,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	public static final String TAG = "CoordinateInputDialogFragment";
 
 	public static final String USE_OSMAND_KEYBOARD = "use_osmand_keyboard";
-	public static final String RIGHT_HAND = "right_hand";
-	public static final String GO_TO_NEXT_FIELD = "go_to_next_field";
-	public static final String ACCURACY = "accuracy";
 
 	private static final int SWITCH_TO_NEXT_INPUT_BUTTON_POSITION = 3;
 	private static final int MINUS_BUTTON_POSITION = 7;
@@ -101,9 +98,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean orientationPortrait;
 
 	private boolean useOsmandKeyboard = true;
-	private boolean rightHand = true;
-	private boolean goToNextField = true;
-	private int accuracy = 4;
 
 	private Location location;
 	private Float heading;
@@ -185,9 +179,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 				Bundle args = new Bundle();
 				args.putBoolean(USE_OSMAND_KEYBOARD, useOsmandKeyboard);
-				args.putBoolean(RIGHT_HAND, rightHand);
-				args.putBoolean(GO_TO_NEXT_FIELD, goToNextField);
-				args.putInt(ACCURACY, accuracy);
 
 				CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
 				fragment.setUsedOnMap(false);
@@ -224,6 +215,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			lonBackspaceBtn.setImageDrawable(getActiveIcon(R.drawable.ic_keyboard_backspace));
 			lonBackspaceBtn.setOnClickListener(backspaceOnClickListener);
 		} else {
+			boolean rightHand = getMyApplication().getSettings().COORDS_INPUT_USE_RIGHT_SIDE.get();
 			LinearLayout handContainer = (LinearLayout) mainView.findViewById(R.id.hand_container);
 
 			int leftLayoutResId = rightHand ? R.layout.coordinate_input_land_data_area : R.layout.coordinate_input_land_keyboard_and_list;
@@ -424,22 +416,20 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 			@Override
 			public void afterTextChanged(Editable editable) {
-				if (goToNextField) {
-					View focusedView = getDialog().getCurrentFocus();
-					if (focusedView != null && focusedView instanceof EditText) {
-						EditText focusedEditText = (EditText) focusedView;
-						String str = focusedEditText.getText().toString();
-						int currentLength = str.length();
-						if (currentLength > strLength) {
-							int pointIndex = str.indexOf(".");
-							if (pointIndex != -1) {
-								int currentAccuracy = str.substring(pointIndex + 1).length();
-								if (currentAccuracy >= accuracy) {
-									switchEditText(focusedEditText.getId(), true);
-								}
-							}
-						}
-					}
+				View focusedView = getDialog().getCurrentFocus();
+				if (focusedView != null && focusedView instanceof EditText) {
+					EditText focusedEditText = (EditText) focusedView;
+					String str = focusedEditText.getText().toString();
+					int currentLength = str.length(); // todo
+//					if (currentLength > strLength) {
+//						int pointIndex = str.indexOf(".");
+//						if (pointIndex != -1) {
+//							int currentAccuracy = str.substring(pointIndex + 1).length();
+//							if (currentAccuracy >= accuracy) {
+//								switchEditText(focusedEditText.getId(), true);
+//							}
+//						}
+//					}
 				}
 			}
 		};
@@ -578,6 +568,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	private CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener createCoordinateInputFormatChangeListener() {
 		return new CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener() {
+
 			@Override
 			public void onKeyboardChanged(boolean useOsmandKeyboard) {
 				CoordinateInputDialogFragment.this.useOsmandKeyboard = useOsmandKeyboard;
@@ -585,19 +576,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 
 			@Override
-			public void onHandChanged(boolean rightHand) {
-				CoordinateInputDialogFragment.this.rightHand = rightHand;
+			public void onHandChanged() {
 				changeHand();
 			}
 
 			@Override
-			public void onGoToNextFieldChanged(boolean goToNextField) {
-				CoordinateInputDialogFragment.this.goToNextField = goToNextField;
-			}
-
-			@Override
-			public void onAccuracyChanged(int accuracy) {
-				CoordinateInputDialogFragment.this.accuracy = accuracy;
+			public void onFormatChanged() {
+				Toast.makeText(getContext(), CoordinateInputFormats.formatToHumanString(getContext(),
+						getMyApplication().getSettings().COORDS_INPUT_FORMAT.get()), Toast.LENGTH_SHORT).show();
 			}
 		};
 	}

@@ -16,6 +16,8 @@ public class CoordinateInputFormats {
 	public static final int DD_DDDDDD = 3;
 	public static final int DD_MM_SS = 4;
 
+	public static int[] VALUES = new int[]{DD_MM_MMM, DD_MM_MMMM, DD_DDDDD, DD_DDDDDD, DD_MM_SS};
+
 	@Retention(RetentionPolicy.SOURCE)
 	@IntDef({DD_MM_MMM, DD_MM_MMMM, DD_DDDDD, DD_DDDDDD, DD_MM_SS})
 	@interface CoordinateInputFormatDef {
@@ -33,9 +35,8 @@ public class CoordinateInputFormats {
 				return ctx.getString(R.string.dd_dddddd_format);
 			case DD_MM_SS:
 				return ctx.getString(R.string.dd_mm_ss_format);
-			default:
-				return "Unknown format";
 		}
+		return "Unknown format";
 	}
 
 	public static boolean containsThirdPart(@CoordinateInputFormatDef int format) {
@@ -52,9 +53,8 @@ public class CoordinateInputFormats {
 				return 5;
 			case DD_DDDDDD:
 				return 6;
-			default:
-				return 0;
 		}
+		return 0;
 	}
 
 	public static int getThirdPartSymbolsCount(@CoordinateInputFormatDef int format) {
@@ -67,9 +67,8 @@ public class CoordinateInputFormats {
 				return 2;
 			case DD_DDDDD:
 			case DD_DDDDDD:
-			default:
-				return 0;
 		}
+		return 0;
 	}
 
 	public static String getFirstSeparator(@CoordinateInputFormatDef int format) {
@@ -81,9 +80,8 @@ public class CoordinateInputFormats {
 			case DD_DDDDD:
 			case DD_DDDDDD:
 				return ".";
-			default:
-				return "";
 		}
+		return "";
 	}
 
 	public static String getSecondSeparator(@CoordinateInputFormatDef int format) {
@@ -96,8 +94,7 @@ public class CoordinateInputFormats {
 				return "°";
 			case DD_MM_SS:
 				return "′";
-			default:
-				return "";
 		}
+		return "";
 	}
 }
