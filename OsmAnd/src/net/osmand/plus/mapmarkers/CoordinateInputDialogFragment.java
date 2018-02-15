@@ -225,6 +225,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			((FrameLayout) handContainer.findViewById(R.id.left_container)).addView(leftView, 0);
 			((FrameLayout) handContainer.findViewById(R.id.right_container)).addView(rightView, 0);
 
+			handContainer.findViewById(R.id.input_area_top_padding).setVisibility(View.VISIBLE);
+			handContainer.findViewById(R.id.point_name_top_space).setVisibility(View.VISIBLE);
 			handContainer.findViewById(R.id.right_shadow).setVisibility(rightHand ? View.VISIBLE : View.GONE);
 			handContainer.findViewById(R.id.left_shadow).setVisibility(rightHand ? View.GONE : View.VISIBLE);
 

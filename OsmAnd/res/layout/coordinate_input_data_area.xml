@@ -7,6 +7,13 @@
 	android:orientation="vertical"
 	tools:background="@color/ctx_menu_bg_dark">
 
+	<View
+		android:id="@+id/input_area_top_padding"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding"
+		android:visibility="gone"
+		tools:visibility="visible"/>
+
 	<!-- Latitude row: -->
 
 	<LinearLayout
@@ -288,6 +295,13 @@
 	</LinearLayout>
 
 	<!-- Point name row: -->
+
+	<View
+		android:id="@+id/point_name_top_space"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:visibility="gone"/>
 
 	<View
 		android:id="@+id/point_name_divider"
