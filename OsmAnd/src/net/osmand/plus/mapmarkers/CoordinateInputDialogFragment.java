@@ -39,6 +39,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -198,10 +199,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		registerMainView();
 
-		if (savedInstanceState == null && editTexts.size() > 0) {
-			editTexts.get(0).requestFocus();
-		}
-
 		return mainView;
 	}
 
@@ -228,20 +225,24 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			lonBackspaceBtn.setOnClickListener(backspaceOnClickListener);
 		} else {
 			LinearLayout handContainer = (LinearLayout) mainView.findViewById(R.id.hand_container);
+
 			int leftLayoutResId = rightHand ? R.layout.coordinate_input_land_data_area : R.layout.coordinate_input_land_keyboard_and_list;
 			int rightLayoutResId = rightHand ? R.layout.coordinate_input_land_keyboard_and_list : R.layout.coordinate_input_land_data_area;
-			View.inflate(getContext(), leftLayoutResId, handContainer);
-			View.inflate(getContext(), rightLayoutResId, handContainer);
-			mainView.findViewById(R.id.lat_backspace_btn).setVisibility(View.GONE);
-			mainView.findViewById(R.id.lon_backspace_btn).setVisibility(View.GONE);
-			mainView.findViewById(R.id.lat_end_padding).setVisibility(View.VISIBLE);
-			mainView.findViewById(R.id.lon_end_padding).setVisibility(View.VISIBLE);
-//				handContainer.findViewById(R.id.data_area).setBackgroundResource(rightHand
-//						? R.drawable.bg_contextmenu_shadow_right_light : R.drawable.bg_contextmenu_shadow_left_light);
+			View leftView = View.inflate(getContext(), leftLayoutResId, null);
+			View rightView = View.inflate(getContext(), rightLayoutResId, null);
+			((FrameLayout) handContainer.findViewById(R.id.left_container)).addView(leftView, 0);
+			((FrameLayout) handContainer.findViewById(R.id.right_container)).addView(rightView, 0);
+
+			handContainer.findViewById(R.id.right_shadow).setVisibility(rightHand ? View.VISIBLE : View.GONE);
+			handContainer.findViewById(R.id.left_shadow).setVisibility(rightHand ? View.GONE : View.VISIBLE);
+
+			handContainer.findViewById(R.id.lat_backspace_btn).setVisibility(View.GONE);
+			handContainer.findViewById(R.id.lon_backspace_btn).setVisibility(View.GONE);
+			handContainer.findViewById(R.id.lat_end_padding).setVisibility(View.VISIBLE);
+			handContainer.findViewById(R.id.lon_end_padding).setVisibility(View.VISIBLE);
 		}
 
-		addEditTexts(R.id.lat_first_input_et, R.id.lat_second_input_et, R.id.lat_thirst_input_et,
-				R.id.lon_first_input_et, R.id.lon_second_input_et, R.id.lon_thirst_input_et, R.id.point_name_et);
+		registerInputs();
 
 		View latSideOfTheWorldBtn = mainView.findViewById(R.id.lat_side_of_the_world_btn);
 		latSideOfTheWorldBtn.setBackgroundResource(lightTheme
@@ -287,8 +288,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 			}
 		});
-
-		registerInputs();
 
 		adapter = new CoordinateInputAdapter(mapActivity, mapMarkers);
 		RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.markers_recycler_view);
@@ -402,6 +401,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void addEditTexts(@IdRes int... ids) {
+		editTexts.clear();
 		for (int id : ids) {
 			editTexts.add((EditText) mainView.findViewById(id));
 		}
@@ -552,6 +552,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		};
 
+		addEditTexts(R.id.lat_first_input_et, R.id.lat_second_input_et, R.id.lat_thirst_input_et,
+				R.id.lon_first_input_et, R.id.lon_second_input_et, R.id.lon_thirst_input_et, R.id.point_name_et);
+
 		for (EditText et : editTexts) {
 			if (et.getId() != R.id.point_name_et) {
 				et.addTextChangedListener(textWatcher);
@@ -562,6 +565,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		}
 
 		changeEditTextSelections();
+
+		editTexts.get(0).requestFocus();
 	}
 
 	private void changeKeyboard() {
@@ -598,8 +603,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void changeHand() {
-		LinearLayout handContainer = (LinearLayout) mainView.findViewById(R.id.hand_container);
-		handContainer.removeAllViewsInLayout();
+		((FrameLayout) mainView.findViewById(R.id.left_container)).removeViewAt(0);
+		((FrameLayout) mainView.findViewById(R.id.right_container)).removeViewAt(0);
 		registerMainView();
 	}
 

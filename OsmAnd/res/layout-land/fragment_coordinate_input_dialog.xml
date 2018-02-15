@@ -76,6 +76,40 @@
         android:id="@+id/hand_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"/>
+        android:baselineAligned="false">
+
+        <FrameLayout
+            android:id="@+id/left_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/left_shadow"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_shadow_quick_input_left"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/right_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/right_shadow"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_shadow_quick_input_right"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
