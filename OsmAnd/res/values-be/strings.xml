@@ -3063,4 +3063,5 @@
 <string name="make_as_start_point">Зрабіць пачатковай кропкай</string>
     <string name="map_import_error">Памылка імпарту мапы</string>
     <string name="map_imported_successfully">Мапа паспяховая імпартаваная</string>
+    <string name="enter_the_file_name">Увядзіце імя файла.</string>
     </resources>
