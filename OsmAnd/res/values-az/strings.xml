@@ -278,7 +278,7 @@
     <string name="settings_privacy">Məxfilik</string>
     <string name="rendering_value__name">Standart</string>
     <string name="rendering_value_default_name">Standart</string>
-    <string name="dash_download_msg_none">Offlayn xəritələri endirmək istəyirsiniz?</string>
+    <string name="dash_download_msg_none">Oflayn xəritələri endirmək istəyirsiniz?</string>
     <string name="dash_download_msg">%1$s endirilmiş xəritəniz var</string>
     <string name="dash_download_new_one">Yeni xəritə endir</string>
     <string name="dash_download_manage">İdarə et</string>
@@ -495,7 +495,7 @@
     <string name="address_search_desc">Ünvan axtar</string>
     <string name="favourites_search_desc">Favoritləri axtar</string>
     <string name="confirm_interrupt_download">Faylın endirilməsini ləğv etmək istəyirsiniz?</string>
-    <string name="index_settings_descr">Offlayn xəritə fayllarını cihazınıza endirin və idarə edin.</string>
+    <string name="index_settings_descr">Oflayn xəritə fayllarını cihazınıza endirin və idarə edin.</string>
     <string name="send_files_to_osm">GPX faylları OSM-a göndərilsin?</string>
     <string name="gpx_tags_txt">İşarələr</string>
     <string name="gpx_description_txt">Açıqlama</string>
@@ -517,8 +517,8 @@
     <string name="arrival_distance_factor_early">Erkən</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Gec</string>
-    <string name="offline_edition">Offlayn düzəliş</string>
-    <string name="offline_edition_descr">Hər zaman offlayn düzəlişi istifadə et.</string>
+    <string name="offline_edition">Oflayn düzəliş</string>
+    <string name="offline_edition_descr">Hər zaman oflayn düzəlişi istifadə et.</string>
     <string name="local_openstreetmap_uploading">Yüklənir…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/Qeyd yükləndi</string>
     <string name="local_openstreetmap_uploadall">Hamısını yüklə</string>
@@ -538,7 +538,7 @@
     <string name="index_name_africa">Afrika</string>
     <string name="index_name_asia">Asiya</string>
     <string name="index_name_oceania">Avstraliya və Okeaniya</string>
-    <string name="amenity_type_osmwiki">Vikipediya (offlayn)</string>
+    <string name="amenity_type_osmwiki">Vikipediya (oflayn)</string>
     <string name="index_settings">Xəritə fayllarını idarə et</string>
     <string name="general_settings">Ümumi</string>
     <string name="global_app_settings">Əsas proqram parametrləri</string>
@@ -580,7 +580,7 @@
     <string name="voice_stream_music">Media/musiqi səsi</string>
     <string name="tile_source_already_installed">Xəritə artıq quraşdırılıb, parametrlər yenilənəcək.</string>
     <string name="install_more">Daha çox quraşdır…</string>
-    <string name="error_doing_search">Offlayn axtarışda səhv baş verdi.</string>
+    <string name="error_doing_search">Oflayn axtarışda səhv baş verdi.</string>
     <string name="system_locale">Sistem</string>
     <string name="preferred_locale_descr">Proqramın dilini seçin (dəyişdikdən sonra OsmAnd-ı yenidən başladın).</string>
     <string name="preferred_locale">Proqram dili</string>
@@ -651,7 +651,7 @@
     <string name="searching">Axtarılır…</string>
     <string name="searching_address">Ünvan axtarılır…</string>
     <string name="hint_search_online">Onlayn axtarış: Ev nömrəsi, küçə, şəhər</string>
-    <string name="search_offline_address">Offlayn axtarış</string>
+    <string name="search_offline_address">Oflayn axtarış</string>
     <string name="search_online_address">Onlayn axtarış</string>
     <string name="download_question">{0} - {1} endirilsin?</string>
     <string name="address">Ünvan</string>
@@ -844,7 +844,7 @@
     <string name="get_for_month">Aylıq %1$s ödəyib al</string>
     <string name="osmand_plus_banner_desc">Limitsiz xəritə endirmələri, yenilənmələri və Vikipediya qoşması.</string>
     <string name="skip_map_downloading">Xəritələri endirməyi keç</string>
-    <string name="skip_map_downloading_desc">Quraşdırılmış offlayn xəritəniz yoxdur. Siyahıdan bir xəritə seçə və ya xəritələri daha sonra Menyu - %1$s vasitəsilə endirə bilərsiniz.</string>
+    <string name="skip_map_downloading_desc">Quraşdırılmış oflayn xəritəniz yoxdur. Siyahıdan bir xəritə seçə və ya xəritələri daha sonra Menyu - %1$s vasitəsilə endirə bilərsiniz.</string>
     <string name="search_another_country">Başqa region seçin</string>
     <string name="location_not_found">Məkan tapılmadı</string>
     <string name="no_inet_connection_desc_map">Xəritələri endirmək üçün lazımdır.</string>
@@ -1028,7 +1028,7 @@
     <string name="srtm_purchase_header">Xəritədə kontur xətlərini görmək üçün Kontur Xətləri qoşmasını almaq və quraşdırmaq lazımdır</string>
     <string name="plugin_settings">Qoşmalar</string>
     <string name="srtm_paid_version_title">Kontur xətləri qoşması</string>
-    <string name="osmand_srtm_short_description_80_chars">Offlayn kontur xətləri üçün OsmAnd qoşması</string>
+    <string name="osmand_srtm_short_description_80_chars">Oflayn kontur xətləri üçün OsmAnd qoşması</string>
     <string name="dropbox_plugin_name">Dropbox qoşması</string>
     <string name="srtm_paid_version_msg">Zəhmət olmasa inkişafları dəstəkləmək üçün Marketdəki Kontur xətləri qoşmasını almaq haqda düşünün.</string>
     <string name="map_online_plugin_is_not_installed">Müxtəlif xəritə mənbələrini seçmək üçün Onlayn xəritələr qoşmasını aktivləşdirin</string>
@@ -1093,7 +1093,7 @@
     <string name="settings_direction_style_descr">Hərəkət zamanı nisbi istiqamətləri ifadə etmək üçün stil seçin.</string>
     <string name="accessibility_preferences_descr">Xüsusi imkanlarla əlaqəli seçimlər.</string>
     <string name="rendering_out_of_memory">Seçilən sahəni göstərmək üçün kifayət qədər proses yaddaşı yoxdur</string>
-    <string name="free_version_message">Bu pulsuz OsmAnd versiyası %1$s endirmə (xəritələr əlavə etmək və ya yenilmək üçün) ilə məhdudlaşır və offlayn Vikipediya məqalələrini dəstəkləmir.</string>
+    <string name="free_version_message">Bu pulsuz OsmAnd versiyası %1$s endirmə (xəritələr əlavə etmək və ya yenilmək üçün) ilə məhdudlaşır və oflayn Vikipediya məqalələrini dəstəkləmir.</string>
     <string name="index_name_other">Ümumdünya və mövzu xəritələri</string>
     <string name="index_name_wiki">Ümumdünya Vikipediya POI-ləri</string>
     <string name="shared_string_release">Buraxılış</string>
@@ -1150,13 +1150,13 @@
     <string name="update_poi_success">POI məlumatları uğurla yeniləndi ({0} obyekt yükləndi)</string>
     <string name="update_poi_error_local">Yerli POI siyahısı yeniləmə səhvi</string>
     <string name="update_poi_error_loading">Serverdən məlumatlar yüklənərkən səhv oldu</string>
-    <string name="update_poi_no_offline_poi_index">Bu ərazi üçün offlayn POI məlumatları yoxdur</string>
+    <string name="update_poi_no_offline_poi_index">Bu ərazi üçün oflayn POI məlumatları yoxdur</string>
     <string name="update_poi_is_not_available_for_zoom">Kiçik miqyas səviyyələrində POI-ləri yeniləmək mümkün deyil</string>
     <string name="search_osm_nominatim">OSM Nominatim istifadə etməklə onlayn axtarış</string>
     <string name="route_general_information">Ümumi məsafə %1$s, səyahət vaxtı %2$d s %3$d dəq.</string>
-    <string name="router_service_descr">Onlayn və ya offlayn naviqasiya xidməti seçin.</string>
+    <string name="router_service_descr">Onlayn və ya oflayn naviqasiya xidməti seçin.</string>
     <string name="router_service">Naviqasiya xidməti</string>
-    <string name="download_question_exist">{0} üçün offlayn məlumatlar artıq var ({1}). Onu yeniləmək istəyirsiniz ({2}) ?</string>
+    <string name="download_question_exist">{0} üçün oflayn məlumatlar artıq var ({1}). Onu yeniləmək istəyirsiniz ({2}) ?</string>
     <string name="downloading_list_indexes">Mövcud regionların siyahısı endirilir…</string>
     <string name="list_index_files_was_not_loaded">Regionların siyahısı osmand.net-dən alınmadı.</string>
     <string name="fav_points_edited">Favorit nöqtəyə düzəliş edildi</string>
@@ -1221,7 +1221,7 @@
     <string name="osmand_play_title_30_chars">OsmAnd Xəritələr &amp; Naviqasiya</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Xəritələr &amp; Naviqasiya</string>
     <string name="process_navigation_service">OsmAnd naviqasiya xidməti</string>
-    <string name="offline_maps_and_navigation">Offlayn Xəritələr
+    <string name="offline_maps_and_navigation">Oflayn Xəritələr 
 \n&amp; Naviqasiya</string>
     <string name="quick_action_add_navigation">Naviqasiya</string>
     <string name="storage_directory_manual">Əllə müəyyənləşdirilmiş</string>
@@ -1357,7 +1357,7 @@
     <string name="fav_imported_sucessfully">Favoritlər uğurla idxal edildi</string>
     <string name="shared_string_export">İxrac et</string>
     <string name="fav_export_confirmation">Daha əvvəl ixrac edilən favoritlər faylı artıq var. Onu əvəz etmək istəyirsiniz?</string>
-    <string name="osmand_net_previously_installed">Əvvəlki OsmAnd versiyası quraşdırılıb. Bütün offlayn məlumatlar yeni proqram tərəfindən dəstəklənəcək. Amma Favorit nöqtələr köhnə proqramda ixrac edilməli və sonra yenisinə idxal edilməlidir.</string>
+    <string name="osmand_net_previously_installed">Əvvəlki OsmAnd versiyası quraşdırılıb. Bütün oflayn məlumatlar yeni proqram tərəfindən dəstəklənəcək. Amma Favorit nöqtələr köhnə proqramda ixrac edilməli və sonra yenisinə idxal edilməlidir.</string>
     <string name="gpx_track">İz</string>
     <string name="select_gpx_folder">İz qovluğunu seçin</string>
     <string name="shared_string_tracks">İzlər</string>
@@ -1431,7 +1431,7 @@
     <string name="routing_attr_avoid_borders_description">Başqa ölkə ilə sərhəd kəsişmələrindən yayın.</string>
     <string name="routing_attr_weight_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin çəkisini təyin edin.</string>
     <string name="routing_attr_height_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin hündürlüyünü təyin edin.</string>
-    <string name="calculate_osmand_route_gpx">OsmAnd offlayn marşrut hesabla</string>
+    <string name="calculate_osmand_route_gpx">OsmAnd oflayn marşrut hesabla</string>
     <string name="app_mode_truck">Yük maşını</string>
     <string name="speech_rate_descr">TTS üçün danışıq sürəti təyin edin.</string>
     <string name="speech_rate">Danışıq sürəti</string>
@@ -1564,7 +1564,7 @@
     <string name="starting_point">Başlanğıc nöqtə</string>
     <string name="rendering_attr_horseRoutes_name">At marşrutları</string>
     <string name="show_on_start_description">“Sönülü” birbaşa xəritə ekranını başladır.</string>
-    <string name="osm_save_offline">Offlayn saxla</string>
+    <string name="osm_save_offline">Oflayn saxla</string>
     <string name="osn_add_dialog_error">Səhv baş verdi: qeyd yaradılmadı</string>
     <string name="osn_close_dialog_error">Səhv baş verdi: qeyd bağladılmadı</string>
     <string name="osb_comment_dialog_error">Səhv baş verdi: rəy əlavə edilmədi</string>
@@ -1620,7 +1620,7 @@
     <string name="navigate_point_format">Format</string>
     <string name="poi_search_desc">POI (maraq nöqtəsi) axtar</string>
     <string name="navpoint_search_desc">Koordinatlar</string>
-    <string name="offline_navigation_not_available">OsmAnd offlayn naviqasiya müvəqqəti olaraq mövcud deyil.</string>
+    <string name="offline_navigation_not_available">OsmAnd oflayn naviqasiya müvəqqəti olaraq mövcud deyil.</string>
     <string name="unknown_from_location">Başlanğıc nöqtə hələ müəyyənləşdirilməyib</string>
     <string name="local_indexes_cat_map">Standart xəritələr (vektor)</string>
     <string name="validate_gpx_upload_name_pwd">GPX fayllarını yükləmək üçün OSM istifadəçi adı və şifrəni daxil edin.</string>
@@ -1681,7 +1681,7 @@
     <string name="transport_search_again">Nəqliyyat axtarışını sıfırla</string>
     <string name="voice">Qeyd edilən səs</string>
     <string name="no_vector_map_loaded">Vektor xəritələr yüklənməyib</string>
-    <string name="vector_data">Offlayn vektor xəritələr</string>
+    <string name="vector_data">Oflayn vektor xəritələr</string>
     <string name="transport_context_menu">Dayanacaqda nəqliyyat axtar</string>
     <string name="show_route">Marşrut detalları</string>
     <string name="no_fav_to_save">Yadda saxlanacaq favorit nöqtələr yoxdur</string>
@@ -1976,4 +1976,14 @@
 \n</string>
     <string name="distance_indication_descr">Aktiv işarələrə qədər məsafənin necə göstəriləcəyini seçin.</string>
     <string name="tunnel_warning">İrəlidə tunel</string>
+    <string name="show_guide_line_descr">Mövqeyinizdən aktiv işarə məkanlarına bələdçi xətlərini göstər.</string>
+    <string name="show_guide_line">Bələdçi xətlərini göstər</string>
+    <string name="line">Xətt</string>
+    <string name="save_as_line">Xətt kimi saxla</string>
+    <string name="edit_line">Xəttə düzəliş et</string>
+    <string name="measurement_tool_save_as_new_track_descr">Nöqtələri marşrut nöqtələri kimi və ya xətt kimi saxlaya bilərsiniz.</string>
+    <string name="welcome_text">OsmAnd qlobal oflayn xəritə baxışı və qlobal oflayn naviqasiya təmin edir!</string>
+    <string name="switch_to_vector_map_to_see">Bu məkan üçün oflayn vektor xəritəsi mövcuddur.
+\n\t
+\n\tİstifadə etmək üçün “Menyu” → “Xəritəni tənzimlə” → “Xəritə mənbəyi…” → “Oflayn vektor xəritələr”-i aktivləşdirin.</string>
     </resources>
