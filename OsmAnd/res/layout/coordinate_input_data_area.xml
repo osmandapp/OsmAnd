@@ -88,27 +88,27 @@
 					android:hint="xx"
 					android:imeOptions="actionNext"
 					android:inputType="number"
-					android:maxLines="1"
-					tools:maxLength="2"/>
+					android:maxLength="2"
+					android:maxLines="1"/>
 
 				<TextView
 					android:id="@+id/lat_first_separator_tv"
 					android:layout_width="@dimen/context_menu_padding_margin_large"
 					android:layout_height="wrap_content"
 					android:gravity="center_horizontal"
-					android:text="°"
 					android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
-					android:textSize="@dimen/dialog_header_text_size"/>
+					android:textSize="@dimen/dialog_header_text_size"
+					tools:text="°"/>
 
 				<EditText
 					android:id="@+id/lat_second_input_et"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
-					android:hint="xx"
 					android:imeOptions="actionNext"
 					android:inputType="number"
 					android:maxLines="1"
+					tools:hint="xx"
 					tools:maxLength="2"/>
 
 				<TextView
@@ -116,19 +116,19 @@
 					android:layout_width="@dimen/context_menu_padding_margin_large"
 					android:layout_height="wrap_content"
 					android:gravity="center_horizontal"
-					android:text="."
 					android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
-					android:textSize="@dimen/dialog_header_text_size"/>
+					android:textSize="@dimen/dialog_header_text_size"
+					tools:text="."/>
 
 				<EditText
-					android:id="@+id/lat_thirst_input_et"
+					android:id="@+id/lat_third_input_et"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
-					android:hint="xxxx"
 					android:imeOptions="actionNext"
 					android:inputType="number"
 					android:maxLines="1"
+					tools:hint="xxxx"
 					tools:maxLength="4"/>
 			</LinearLayout>
 
@@ -229,27 +229,27 @@
 					android:hint="yy"
 					android:imeOptions="actionNext"
 					android:inputType="number"
-					android:maxLines="1"
-					tools:maxLength="2"/>
+					android:maxLength="2"
+					android:maxLines="1"/>
 
 				<TextView
 					android:id="@+id/lon_first_separator_tv"
 					android:layout_width="@dimen/context_menu_padding_margin_large"
 					android:layout_height="wrap_content"
 					android:gravity="center_horizontal"
-					android:text="°"
 					android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
-					android:textSize="@dimen/dialog_header_text_size"/>
+					android:textSize="@dimen/dialog_header_text_size"
+					tools:text="°"/>
 
 				<EditText
 					android:id="@+id/lon_second_input_et"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
-					android:hint="yy"
 					android:imeOptions="actionNext"
 					android:inputType="number"
 					android:maxLines="1"
+					tools:hint="yy"
 					tools:maxLength="2"/>
 
 				<TextView
@@ -257,19 +257,19 @@
 					android:layout_width="@dimen/context_menu_padding_margin_large"
 					android:layout_height="wrap_content"
 					android:gravity="center_horizontal"
-					android:text="."
 					android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
-					android:textSize="@dimen/dialog_header_text_size"/>
+					android:textSize="@dimen/dialog_header_text_size"
+					tools:text="."/>
 
 				<EditText
-					android:id="@+id/lon_thirst_input_et"
+					android:id="@+id/lon_third_input_et"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
-					android:hint="yyyy"
 					android:imeOptions="actionNext"
 					android:inputType="number"
 					android:maxLines="1"
+					tools:hint="yyyy"
 					tools:maxLength="4"/>
 			</LinearLayout>
 

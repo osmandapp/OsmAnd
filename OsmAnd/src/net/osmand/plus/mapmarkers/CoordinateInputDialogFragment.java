@@ -22,6 +22,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.TypedValue;
@@ -397,7 +398,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private void addEditTexts(@IdRes int... ids) {
 		editTexts.clear();
 		for (int id : ids) {
-			editTexts.add((EditText) mainView.findViewById(id));
+			View v = mainView.findViewById(id);
+			if (v != null && v instanceof EditText && v.getVisibility() == View.VISIBLE) {
+				editTexts.add((EditText) mainView.findViewById(id));
+			}
 		}
 	}
 
@@ -544,8 +548,52 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		};
 
-		addEditTexts(R.id.lat_first_input_et, R.id.lat_second_input_et, R.id.lat_thirst_input_et,
-				R.id.lon_first_input_et, R.id.lon_second_input_et, R.id.lon_thirst_input_et, R.id.point_name_et);
+		clearInputs();
+
+		int format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
+
+		String firstSeparator = CoordinateInputFormats.getFirstSeparator(format);
+		int secondPartSymbols = CoordinateInputFormats.getSecondPartSymbolsCount(format);
+
+		((TextView) mainView.findViewById(R.id.lat_first_separator_tv)).setText(firstSeparator);
+		((TextView) mainView.findViewById(R.id.lon_first_separator_tv)).setText(firstSeparator);
+
+		InputFilter[] secondInputFilters = {new InputFilter.LengthFilter(secondPartSymbols)};
+
+		EditText latSecondEt = (EditText) mainView.findViewById(R.id.lat_second_input_et);
+		EditText lonSecondEt = (EditText) mainView.findViewById(R.id.lon_second_input_et);
+		latSecondEt.setFilters(secondInputFilters);
+		lonSecondEt.setFilters(secondInputFilters);
+		latSecondEt.setHint(createHint(secondPartSymbols, 'x'));
+		lonSecondEt.setHint(createHint(secondPartSymbols, 'y'));
+
+		boolean containsThirdPart = CoordinateInputFormats.containsThirdPart(format);
+
+		int visibility = containsThirdPart ? View.VISIBLE : View.GONE;
+		mainView.findViewById(R.id.lat_second_separator_tv).setVisibility(visibility);
+		mainView.findViewById(R.id.lon_second_separator_tv).setVisibility(visibility);
+		mainView.findViewById(R.id.lat_third_input_et).setVisibility(visibility);
+		mainView.findViewById(R.id.lon_third_input_et).setVisibility(visibility);
+
+		if (containsThirdPart) {
+			String secondSeparator = CoordinateInputFormats.getSecondSeparator(format);
+			int thirdPartSymbols = CoordinateInputFormats.getThirdPartSymbolsCount(format);
+
+			((TextView) mainView.findViewById(R.id.lat_second_separator_tv)).setText(secondSeparator);
+			((TextView) mainView.findViewById(R.id.lon_second_separator_tv)).setText(secondSeparator);
+
+			InputFilter[] thirdInputFilters = {new InputFilter.LengthFilter(thirdPartSymbols)};
+
+			EditText latThirdEt = (EditText) mainView.findViewById(R.id.lat_third_input_et);
+			EditText lonThirdEt = (EditText) mainView.findViewById(R.id.lon_third_input_et);
+			latThirdEt.setFilters(thirdInputFilters);
+			lonThirdEt.setFilters(thirdInputFilters);
+			latThirdEt.setHint(createHint(thirdPartSymbols, 'x'));
+			lonThirdEt.setHint(createHint(thirdPartSymbols, 'y'));
+		}
+
+		addEditTexts(R.id.lat_first_input_et, R.id.lat_second_input_et, R.id.lat_third_input_et,
+				R.id.lon_first_input_et, R.id.lon_second_input_et, R.id.lon_third_input_et, R.id.point_name_et);
 
 		for (EditText et : editTexts) {
 			if (et.getId() != R.id.point_name_et) {
@@ -559,6 +607,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		changeEditTextSelections();
 
 		editTexts.get(0).requestFocus();
+	}
+
+	private String createHint(int symbolsCount, char symbol) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < symbolsCount; i++) {
+			sb.append(symbol);
+		}
+		return sb.toString();
 	}
 
 	private void changeKeyboard() {
@@ -584,8 +640,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 			@Override
 			public void onFormatChanged() {
-				Toast.makeText(getContext(), CoordinateInputFormats.formatToHumanString(getContext(),
-						getMyApplication().getSettings().COORDS_INPUT_FORMAT.get()), Toast.LENGTH_SHORT).show();
+				registerInputs();
 			}
 		};
 	}
