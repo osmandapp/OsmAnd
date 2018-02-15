@@ -3014,4 +3014,5 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
 <string name="make_as_start_point">Zrabić pačatkovaj kropkaj</string>
     <string name="map_import_error">Pamylka impartu mapy</string>
     <string name="map_imported_successfully">Mapa paspiachovaja impartavanaja</string>
+    <string name="enter_the_file_name">Uviadzicie imia fajła.</string>
     </resources>
