@@ -310,8 +310,14 @@ public class MenuBuilder {
 			buildTitleRow(view);
 		}
 		if (showTransportRoutes()) {
-			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false),
+			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
 					false, 0, false, null, true);
+
+			CollapsableView collapsableView= getCollapsableTransportStopRoutesView(view.getContext(), false, true);
+			if (collapsableView!= null) {
+				buildRow(view, 0, null, app.getString(R.string.transport_Nearby_Routes), 0, true, collapsableView,
+						false, 0, false, null, true);
+			}
 		}
 		buildNearestWikiRow(view);
 		if (needBuildPlainMenuItems()) {
@@ -835,29 +841,46 @@ public class MenuBuilder {
 		}
 	}
 
-	private CollapsableView getCollapsableTransportStopRoutesView(final Context context, boolean collapsed) {
+	private CollapsableView getCollapsableTransportStopRoutesView(final Context context, boolean collapsed, boolean isNearbyRoutes) {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, false);
-
+		boolean hasNearByRoutes = false;
 		for (int i = 0; i < routes.size(); i++) {
-			final TransportStopRoute r  = routes.get(i);
-			View.OnClickListener listener = new View.OnClickListener() {
-				@Override
-				public void onClick(View arg0) {
-					MapContextMenu mm = getMapActivity().getContextMenu();
-					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
-							r.getDescription(getMapActivity().getMyApplication(), false));
-					mm.show(latLon, pd, r);
-					TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
-					stopsLayer.setRoute(r);
-					int cz = r.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
-					getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
+			boolean isCurrentRouteNearby = routes.get(i).refStop != null && !routes.get(i).refStop.getName().equals(routes.get(i).stop.getName());
+			final TransportStopRoute r = routes.get(i);
+			if (isNearbyRoutes && isCurrentRouteNearby) {
+				hasNearByRoutes = true;
+				boolean showDivider = i < routes.size() - 1;
+				buildTransportRouteRow(view, r, createClickListenerForCollapsableTransportStopRoutersView(r), showDivider);
+			} else if (!isNearbyRoutes) {
+				if (isCurrentRouteNearby) {
+					continue;
 				}
-			};
-			boolean showDivider = i < routes.size() - 1;
-			buildTransportRouteRow(view, r, listener, showDivider);
+				boolean showDivider = i < routes.size() - 1;
+				buildTransportRouteRow(view, r, createClickListenerForCollapsableTransportStopRoutersView(r), showDivider);
+			}
 		}
+		if (!hasNearByRoutes && isNearbyRoutes) {
+			return null;
+		} else {
+			return new CollapsableView(view, this, collapsed);
+		}
+	}
 
-		return new CollapsableView(view, this, collapsed);
+	private View.OnClickListener createClickListenerForCollapsableTransportStopRoutersView(final TransportStopRoute r) {
+		View.OnClickListener listener = new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				MapContextMenu mm = getMapActivity().getContextMenu();
+				PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
+						r.getDescription(getMapActivity().getMyApplication(), false));
+				mm.show(latLon, pd, r);
+				TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+				stopsLayer.setRoute(r);
+				int cz = r.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
+				getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
+			}
+		};
+		return listener;
 	}
 
 	protected CollapsableView getCollapsableTextView(Context context, boolean collapsed, String text) {
