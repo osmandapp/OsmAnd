@@ -64,6 +64,7 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -843,23 +844,32 @@ public class MenuBuilder {
 
 	private CollapsableView getCollapsableTransportStopRoutesView(final Context context, boolean collapsed, boolean isNearbyRoutes) {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, false);
-		boolean hasNearByRoutes = false;
-		for (int i = 0; i < routes.size(); i++) {
-			boolean isCurrentRouteNearby = routes.get(i).refStop != null && !routes.get(i).refStop.getName().equals(routes.get(i).stop.getName());
-			final TransportStopRoute r = routes.get(i);
-			if (isNearbyRoutes && isCurrentRouteNearby) {
-				hasNearByRoutes = true;
-				boolean showDivider = i < routes.size() - 1;
-				buildTransportRouteRow(view, r, createClickListenerForCollapsableTransportStopRoutersView(r), showDivider);
-			} else if (!isNearbyRoutes) {
+		List<TransportStopRoute> localTransportStopRoutes = new ArrayList<>();
+		List<TransportStopRoute> nearbyTransportStopRoutes = new ArrayList<>();
+		if (routes != null && routes.size() > 0) {
+			for (TransportStopRoute route:routes) {
+				boolean isCurrentRouteNearby = route.refStop != null && !route.refStop.getName().equals(route.stop.getName());
 				if (isCurrentRouteNearby) {
-					continue;
+					nearbyTransportStopRoutes.add(route);
+				} else {
+					localTransportStopRoutes.add(route);
 				}
-				boolean showDivider = i < routes.size() - 1;
-				buildTransportRouteRow(view, r, createClickListenerForCollapsableTransportStopRoutersView(r), showDivider);
+			}
+			if (!isNearbyRoutes) {
+				for (int i = 0; i < localTransportStopRoutes.size(); i++) {
+					final TransportStopRoute r = localTransportStopRoutes.get(i);
+					boolean showDivider = i < localTransportStopRoutes.size() - 1;
+					buildTransportRouteRow(view, r, createClickListenerForCollapsableTransportStopRoutersView(r), showDivider);
+				}
+			} else {
+				for (int i = 0; i < nearbyTransportStopRoutes.size(); i++) {
+					final TransportStopRoute r = nearbyTransportStopRoutes.get(i);
+					boolean showDivider = i < nearbyTransportStopRoutes.size() - 1;
+					buildTransportRouteRow(view, r, createClickListenerForCollapsableTransportStopRoutersView(r), showDivider);
+				}
 			}
 		}
-		if (!hasNearByRoutes && isNearbyRoutes) {
+		if (isNearbyRoutes && nearbyTransportStopRoutes.isEmpty()) {
 			return null;
 		} else {
 			return new CollapsableView(view, this, collapsed);
