@@ -80,17 +80,17 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content">
 
-				<EditText
+				<net.osmand.plus.widgets.EditTextEx
 					android:id="@+id/lat_first_input_et"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
-					android:hint="xx"
 					android:imeOptions="actionNext"
 					android:inputType="number"
-					android:maxLength="2"
 					android:maxLines="1"
-					android:theme="@style/CoordinateInputEditText"/>
+					android:theme="@style/CoordinateInputEditText"
+					tools:hint="xx"
+					tools:maxLength="2"/>
 
 				<TextView
 					android:id="@+id/lat_first_separator_tv"
@@ -101,7 +101,7 @@
 					android:textSize="@dimen/dialog_header_text_size"
 					tools:text="°"/>
 
-				<EditText
+				<net.osmand.plus.widgets.EditTextEx
 					android:id="@+id/lat_second_input_et"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
 					android:textSize="@dimen/dialog_header_text_size"
 					tools:text="."/>
 
-				<EditText
+				<net.osmand.plus.widgets.EditTextEx
 					android:id="@+id/lat_third_input_et"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
@@ -224,17 +224,17 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content">
 
-				<EditText
+				<net.osmand.plus.widgets.EditTextEx
 					android:id="@+id/lon_first_input_et"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
-					android:hint="yy"
 					android:imeOptions="actionNext"
 					android:inputType="number"
-					android:maxLength="2"
 					android:maxLines="1"
-					android:theme="@style/CoordinateInputEditText"/>
+					android:theme="@style/CoordinateInputEditText"
+					tools:hint="yy"
+					tools:maxLength="2"/>
 
 				<TextView
 					android:id="@+id/lon_first_separator_tv"
@@ -245,7 +245,7 @@
 					android:textSize="@dimen/dialog_header_text_size"
 					tools:text="°"/>
 
-				<EditText
+				<net.osmand.plus.widgets.EditTextEx
 					android:id="@+id/lon_second_input_et"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
@@ -266,7 +266,7 @@
 					android:textSize="@dimen/dialog_header_text_size"
 					tools:text="."/>
 
-				<EditText
+				<net.osmand.plus.widgets.EditTextEx
 					android:id="@+id/lon_third_input_et"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
@@ -322,7 +322,7 @@
 		android:layout_height="@dimen/bottom_sheet_list_item_height"
 		tools:background="@color/route_info_bottom_view_bg_dark">
 
-		<EditText
+		<net.osmand.plus.widgets.EditTextEx
 			android:id="@+id/point_name_et"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"

@@ -43,6 +43,10 @@ public class CoordinateInputFormats {
 		return format == DD_MM_MMM || format == DD_MM_MMMM || format == DD_MM_SS;
 	}
 
+	public static int getFirstPartSymbolsCount(@CoordinateInputFormatDef int format) {
+		return 2;
+	}
+
 	public static int getSecondPartSymbolsCount(@CoordinateInputFormatDef int format) {
 		switch (format) {
 			case DD_MM_MMM:

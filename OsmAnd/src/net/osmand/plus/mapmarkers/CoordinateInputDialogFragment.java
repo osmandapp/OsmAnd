@@ -23,7 +23,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.TypedValue;
@@ -63,6 +62,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
+import net.osmand.plus.widgets.EditTextEx;
 import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
 
@@ -93,7 +93,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private OnMapMarkersSavedListener listener;
 
 	private View mainView;
-	private List<EditText> editTexts = new ArrayList<>();
+	private List<EditTextEx> editTexts = new ArrayList<>();
 	private CoordinateInputAdapter adapter;
 
 	private boolean lightTheme;
@@ -415,8 +415,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		editTexts.clear();
 		for (int id : ids) {
 			View v = mainView.findViewById(id);
-			if (v != null && v instanceof EditText && v.getVisibility() == View.VISIBLE) {
-				editTexts.add((EditText) mainView.findViewById(id));
+			if (v != null && v instanceof EditTextEx && v.getVisibility() == View.VISIBLE) {
+				editTexts.add((EditTextEx) mainView.findViewById(id));
 			}
 		}
 	}
@@ -439,19 +439,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public void afterTextChanged(Editable editable) {
 				View focusedView = getDialog().getCurrentFocus();
-				if (focusedView != null && focusedView instanceof EditText) {
-					EditText focusedEditText = (EditText) focusedView;
-					String str = focusedEditText.getText().toString();
-					int currentLength = str.length(); // todo
-//					if (currentLength > strLength) {
-//						int pointIndex = str.indexOf(".");
-//						if (pointIndex != -1) {
-//							int currentAccuracy = str.substring(pointIndex + 1).length();
-//							if (currentAccuracy >= accuracy) {
-//								switchEditText(focusedEditText.getId(), true);
-//							}
-//						}
-//					}
+				if (focusedView != null && focusedView instanceof EditTextEx) {
+					EditTextEx et = (EditTextEx) focusedView;
+					int currentLength = et.getText().length();
+					if (et.getMaxSymbolsCount() > 0 && currentLength > strLength && currentLength >= et.getMaxSymbolsCount()) {
+						switchEditText(et.getId(), true);
+					}
 				}
 			}
 		};
@@ -568,20 +561,17 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		int format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
 
-		String firstSeparator = CoordinateInputFormats.getFirstSeparator(format);
-		int secondPartSymbols = CoordinateInputFormats.getSecondPartSymbolsCount(format);
+		int firstPartSymbols = CoordinateInputFormats.getFirstPartSymbolsCount(format);
+		setupEditTextEx(R.id.lat_first_input_et, firstPartSymbols, true);
+		setupEditTextEx(R.id.lon_first_input_et, firstPartSymbols, false);
 
+		String firstSeparator = CoordinateInputFormats.getFirstSeparator(format);
 		((TextView) mainView.findViewById(R.id.lat_first_separator_tv)).setText(firstSeparator);
 		((TextView) mainView.findViewById(R.id.lon_first_separator_tv)).setText(firstSeparator);
 
-		InputFilter[] secondInputFilters = {new InputFilter.LengthFilter(secondPartSymbols)};
-
-		EditText latSecondEt = (EditText) mainView.findViewById(R.id.lat_second_input_et);
-		EditText lonSecondEt = (EditText) mainView.findViewById(R.id.lon_second_input_et);
-		latSecondEt.setFilters(secondInputFilters);
-		lonSecondEt.setFilters(secondInputFilters);
-		latSecondEt.setHint(createHint(secondPartSymbols, 'x'));
-		lonSecondEt.setHint(createHint(secondPartSymbols, 'y'));
+		int secondPartSymbols = CoordinateInputFormats.getSecondPartSymbolsCount(format);
+		setupEditTextEx(R.id.lat_second_input_et, secondPartSymbols, true);
+		setupEditTextEx(R.id.lon_second_input_et, secondPartSymbols, false);
 
 		boolean containsThirdPart = CoordinateInputFormats.containsThirdPart(format);
 
@@ -593,19 +583,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		if (containsThirdPart) {
 			String secondSeparator = CoordinateInputFormats.getSecondSeparator(format);
-			int thirdPartSymbols = CoordinateInputFormats.getThirdPartSymbolsCount(format);
-
 			((TextView) mainView.findViewById(R.id.lat_second_separator_tv)).setText(secondSeparator);
 			((TextView) mainView.findViewById(R.id.lon_second_separator_tv)).setText(secondSeparator);
 
-			InputFilter[] thirdInputFilters = {new InputFilter.LengthFilter(thirdPartSymbols)};
-
-			EditText latThirdEt = (EditText) mainView.findViewById(R.id.lat_third_input_et);
-			EditText lonThirdEt = (EditText) mainView.findViewById(R.id.lon_third_input_et);
-			latThirdEt.setFilters(thirdInputFilters);
-			lonThirdEt.setFilters(thirdInputFilters);
-			latThirdEt.setHint(createHint(thirdPartSymbols, 'x'));
-			lonThirdEt.setHint(createHint(thirdPartSymbols, 'y'));
+			int thirdPartSymbols = CoordinateInputFormats.getThirdPartSymbolsCount(format);
+			setupEditTextEx(R.id.lat_third_input_et, thirdPartSymbols, true);
+			setupEditTextEx(R.id.lon_third_input_et, thirdPartSymbols, false);
 		}
 
 		addEditTexts(R.id.lat_first_input_et, R.id.lat_second_input_et, R.id.lat_third_input_et,
@@ -623,6 +606,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		changeEditTextSelections();
 
 		editTexts.get(0).requestFocus();
+	}
+
+	private void setupEditTextEx(@IdRes int etId, int symbols, boolean lat) {
+		EditTextEx et = (EditTextEx) mainView.findViewById(etId);
+		et.setMaxSymbolsCount(symbols);
+		et.setHint(createHint(symbols, lat ? 'x' : 'y'));
 	}
 
 	private String createHint(int symbolsCount, char symbol) {
