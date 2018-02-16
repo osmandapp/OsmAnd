@@ -32,8 +32,9 @@
 
         <attr name="dashboard_divider" format="reference" />
 		<attr name="dashboard_button" format="reference" />
-		
-		
+
+		<attr name="coordinate_input_edit_text_normal" format="reference"/>
+
         <attr name="expandable_category_color" format="reference"/>
         <attr name="bottomToolBarColor" format="color" />
 		<attr name="downloadButtonBackground" format="reference" />

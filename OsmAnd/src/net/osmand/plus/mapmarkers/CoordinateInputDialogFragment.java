@@ -8,6 +8,7 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
@@ -131,7 +132,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if (window != null) {
 			window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 			if (!lightTheme && Build.VERSION.SDK_INT >= 21) {
-				window.setStatusBarColor(ContextCompat.getColor(ctx, R.color.status_bar_coordinate_input_dark));
+				window.setStatusBarColor(getResolvedColor(R.color.status_bar_coordinate_input_dark));
 			}
 		}
 		return dialog;
@@ -160,13 +161,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		if (orientationPortrait) {
 			backBtn.setImageDrawable(getActiveIcon(R.drawable.ic_arrow_back));
-			((TextView) mainView.findViewById(R.id.toolbar_text)).setTextColor(ContextCompat.getColor(getContext(),
-					lightTheme ? R.color.color_black : R.color.color_white));
-			mainView.findViewById(R.id.app_bar).setBackgroundColor(ContextCompat.getColor(getContext(),
-					lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark));
+			((TextView) mainView.findViewById(R.id.toolbar_text))
+					.setTextColor(getResolvedColor(lightTheme ? R.color.color_black : R.color.color_white));
+			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
 		} else {
-			mainView.findViewById(R.id.app_bar).setBackgroundColor(ContextCompat.getColor(getContext(),
-					lightTheme ? R.color.actionbar_light_color : R.color.route_info_bottom_view_bg_dark));
+			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.actionbar_light_color : R.color.route_info_bottom_view_bg_dark);
 		}
 
 		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
@@ -200,11 +199,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			return;
 		}
 
+		final Context ctx = getContext();
+
 		if (orientationPortrait) {
 			View.OnClickListener backspaceOnClickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Toast.makeText(getContext(), "backspace", Toast.LENGTH_SHORT).show();
+					Toast.makeText(ctx, "backspace", Toast.LENGTH_SHORT).show();
 				}
 			};
 
@@ -221,8 +222,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 			int leftLayoutResId = rightHand ? R.layout.coordinate_input_land_data_area : R.layout.coordinate_input_land_keyboard_and_list;
 			int rightLayoutResId = rightHand ? R.layout.coordinate_input_land_keyboard_and_list : R.layout.coordinate_input_land_data_area;
-			View leftView = View.inflate(getContext(), leftLayoutResId, null);
-			View rightView = View.inflate(getContext(), rightLayoutResId, null);
+			View leftView = View.inflate(ctx, leftLayoutResId, null);
+			View rightView = View.inflate(ctx, rightLayoutResId, null);
+			setBackgroundColor(leftView, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
 			((FrameLayout) handContainer.findViewById(R.id.left_container)).addView(leftView, 0);
 			((FrameLayout) handContainer.findViewById(R.id.right_container)).addView(rightView, 0);
 
@@ -245,7 +247,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		latSideOfTheWorldBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getContext(), "lat side of the world", Toast.LENGTH_SHORT).show();
+				Toast.makeText(ctx, "lat side of the world", Toast.LENGTH_SHORT).show();
 			}
 		});
 		((TextView) latSideOfTheWorldBtn.findViewById(R.id.lat_side_of_the_world_tv)).setText(getString(R.string.north_abbreviation));
@@ -258,17 +260,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		lonSideOfTheWorldBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getContext(), "lon side of the world", Toast.LENGTH_SHORT).show();
+				Toast.makeText(ctx, "lon side of the world", Toast.LENGTH_SHORT).show();
 			}
 		});
 		((TextView) lonSideOfTheWorldBtn.findViewById(R.id.lon_side_of_the_world_tv)).setText(getString(R.string.west_abbreviation));
 		ImageView westSideIv = lonSideOfTheWorldBtn.findViewById(R.id.west_side_iv);
 		westSideIv.setImageDrawable(getColoredIcon(R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue));
 
-		mainView.findViewById(R.id.point_name_divider).setBackgroundColor(ContextCompat
-				.getColor(getContext(), lightTheme ? R.color.route_info_divider_light : R.color.route_info_divider_dark));
-		mainView.findViewById(R.id.point_name_et_container).setBackgroundColor(ContextCompat
-				.getColor(getContext(), lightTheme ? R.color.route_info_bottom_view_bg_light : R.color.route_info_bottom_view_bg_dark));
+		setBackgroundColor(R.id.point_name_divider, lightTheme ? R.color.route_info_divider_light : R.color.route_info_divider_dark);
+		setBackgroundColor(R.id.point_name_et_container, lightTheme ? R.color.route_info_bottom_view_bg_light : R.color.route_info_bottom_view_bg_dark);
 
 		ImageView pointNameKeyboardBtn = (ImageView) mainView.findViewById(R.id.point_name_keyboard_btn);
 		pointNameKeyboardBtn.setImageDrawable(getActiveIcon(R.drawable.ic_action_keyboard));
@@ -286,7 +286,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		adapter = new CoordinateInputAdapter(mapActivity, mapMarkers);
 		RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.markers_recycler_view);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		recyclerView.setLayoutManager(new LinearLayoutManager(ctx));
 		recyclerView.setAdapter(adapter);
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
@@ -314,7 +314,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				":", "0", ".", getString(R.string.shared_string_clear)
 		};
 		final GridView keyboardGrid = (GridView) mainView.findViewById(R.id.keyboard_grid_view);
-		keyboardGrid.setBackgroundColor(ContextCompat.getColor(getContext(), lightTheme ? R.color.keyboard_divider_light : R.color.keyboard_divider_dark));
+		setBackgroundColor(keyboardGrid, lightTheme ? R.color.keyboard_divider_light : R.color.keyboard_divider_dark);
 		final KeyboardAdapter keyboardAdapter = new KeyboardAdapter(mapActivity, keyboardItems);
 		keyboardGrid.setAdapter(keyboardAdapter);
 		keyboardGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -386,6 +386,19 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			dialog.setDismissMessage(null);
 		}
 		super.onDestroyView();
+	}
+
+	@ColorInt
+	private int getResolvedColor(@ColorRes int resId) {
+		return ContextCompat.getColor(getContext(), resId);
+	}
+
+	private void setBackgroundColor(@IdRes int viewResId, @ColorRes int colorResId) {
+		setBackgroundColor(mainView.findViewById(viewResId), colorResId);
+	}
+
+	private void setBackgroundColor(View v, @ColorRes int colorResId) {
+		v.setBackgroundColor(getResolvedColor(colorResId));
 	}
 
 	private void saveMarkers() {
@@ -882,7 +895,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				if (lightTheme) {
 					keyboardItemText.setTextColor(dividerControlButton ? dividerControlColorStateList : numberColorStateList);
 				} else {
-					keyboardItemText.setTextColor(ContextCompat.getColor(getContext(), dividerControlButton
+					keyboardItemText.setTextColor(getResolvedColor(dividerControlButton
 							? R.color.keyboard_item_divider_control_color_dark : R.color.keyboard_item_text_color_dark));
 				}
 				keyboardItemImage.setVisibility(View.GONE);

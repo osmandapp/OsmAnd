@@ -64,7 +64,7 @@
                     android:textAllCaps="true"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/default_list_text_size"
-                    osmand:typeface="@string/font_roboto_regular"/>
+                    osmand:typeface="@string/font_roboto_medium"/>
 
             </LinearLayout>
 
