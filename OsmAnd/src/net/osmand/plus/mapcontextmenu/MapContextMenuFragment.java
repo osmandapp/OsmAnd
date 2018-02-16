@@ -58,9 +58,7 @@ import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.util.Algorithms;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
