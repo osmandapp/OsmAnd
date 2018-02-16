@@ -310,7 +310,7 @@ public class MenuBuilder {
 
 			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
 			if (collapsableView != null) {
-				String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_IN_METERS,app);
+				String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS,app);
 				buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
 						false, 0, false, null, true);
 			}
