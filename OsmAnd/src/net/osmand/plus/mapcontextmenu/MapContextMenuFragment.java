@@ -494,7 +494,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		GridView localTransportStopRoutesGrid = (GridView) view.findViewById(R.id.transport_stop_routes_grid);
 		GridView nearbyTransportStopRoutesGrid = (GridView) view.findViewById(R.id.transport_stop_nearby_routes_grid);
 		TextView nearbRoutesWithinTv = (TextView) view.findViewById(R.id.nearby_routes_within_text_view);
-		LinearLayout nearbyRoutesLayoutToHide = (LinearLayout) view.findViewById(R.id.nearby_routes);
+		LinearLayout nearbyRoutesLayout = (LinearLayout) view.findViewById(R.id.nearby_routes);
 
 		List<TransportStopRoute> localTransportStopRoutes = menu.getLocalTransportStopRoutes();
 		List<TransportStopRoute> nearbyTransportStopRoutes = menu.getNearbyTransportStopRoutes();
@@ -512,7 +512,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			nearbyTransportStopRoutesGrid.setAdapter(createTransportStopRouteAdapter(nearbyTransportStopRoutes));
 			nearbyTransportStopRoutesGrid.setVisibility(View.VISIBLE);
 		} else {
-			nearbyRoutesLayoutToHide.setVisibility(View.GONE);
+			nearbyRoutesLayout.setVisibility(View.GONE);
 		}
 
 		View buttonsBottomBorder = view.findViewById(R.id.buttons_bottom_border);

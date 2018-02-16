@@ -857,12 +857,12 @@ public class MenuBuilder {
 		for (int i = 0; i < routes.size(); i++) {
 			final TransportStopRoute r = routes.get(i);
 			boolean showDivider = i < routes.size() - 1;
-			buildTransportRouteRow(view, r, createClickListenerForCollapsableTransportStopRoutersView(r), showDivider);
+			buildTransportRouteRow(view, r, createTransportRoutesViewClickListener(r), showDivider);
 		}
 	}
 
-	private View.OnClickListener createClickListenerForCollapsableTransportStopRoutersView(final TransportStopRoute r) {
-		View.OnClickListener listener = new View.OnClickListener() {
+	private View.OnClickListener createTransportRoutesViewClickListener(final TransportStopRoute r) {
+		return new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				MapContextMenu mm = getMapActivity().getContextMenu();
@@ -875,7 +875,6 @@ public class MenuBuilder {
 				getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
 			}
 		};
-		return listener;
 	}
 
 	protected CollapsableView getCollapsableTextView(Context context, boolean collapsed, String text) {
