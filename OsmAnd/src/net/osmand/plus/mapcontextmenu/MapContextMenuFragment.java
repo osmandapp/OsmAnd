@@ -62,6 +62,7 @@ import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
+import java.util.Locale;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
@@ -498,7 +499,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		List<TransportStopRoute> localTransportStopRoutes = menu.getLocalTransportStopRoutes();
 		List<TransportStopRoute> nearbyTransportStopRoutes = menu.getNearbyTransportStopRoutes();
-
+		if (nightMode) {
+			nearbRoutesWithinTv.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_bottom_view_secondary_text_color_dark));
+		} else {
+			nearbRoutesWithinTv.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_nearby_routes_text_color_dark));
+		}
 		if (localTransportStopRoutes != null && localTransportStopRoutes.size() > 0) {
 			localTransportStopRoutesGrid.setAdapter(createTransportStopRouteAdapter(localTransportStopRoutes));
 			localTransportStopRoutesGrid.setVisibility(View.VISIBLE);
@@ -507,7 +512,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 		if (nearbyTransportStopRoutes != null && nearbyTransportStopRoutes.size() > 0) {
 			String nearInDistance = getMyApplication().getString(R.string.transport_nearby_routes) + " "
-					+ OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, getMyApplication());
+					+ OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, getMyApplication()).toUpperCase(Locale.ROOT) +":";
 			nearbRoutesWithinTv.setText(nearInDistance);
 			nearbyTransportStopRoutesGrid.setAdapter(createTransportStopRouteAdapter(nearbyTransportStopRoutes));
 			nearbyTransportStopRoutesGrid.setVisibility(View.VISIBLE);
