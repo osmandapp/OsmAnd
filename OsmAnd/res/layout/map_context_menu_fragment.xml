@@ -86,6 +86,7 @@
                 android:verticalSpacing="@dimen/context_menu_transport_grid_spacing"
                 android:visibility="gone"/>
             <LinearLayout
+                android:id="@+id/nearby_routes_to_hide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/context_menu_direction_margin"
