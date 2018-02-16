@@ -79,6 +79,7 @@ import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -519,6 +520,36 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public List<TransportStopRoute> getTransportStopRoutes() {
+		return null;
+	}
+
+	public List<TransportStopRoute> getLocalTransportStopRoutes() {
+		List<TransportStopRoute> allRoutes = getTransportStopRoutes();
+		if (allRoutes != null) {
+			List<TransportStopRoute> res = new ArrayList<>();
+			for (TransportStopRoute route : allRoutes) {
+				boolean isCurrentRouteNearby = route.refStop != null && !route.refStop.getName().equals(route.stop.getName());
+				if (!isCurrentRouteNearby) {
+					res.add(route);
+				}
+			}
+			return res;
+		}
+		return null;
+	}
+
+	public List<TransportStopRoute> getNearbyTransportStopRoutes() {
+		List<TransportStopRoute> allRoutes = getTransportStopRoutes();
+		if (allRoutes != null) {
+			List<TransportStopRoute> res = new ArrayList<>();
+			for (TransportStopRoute route : allRoutes) {
+				boolean isCurrentRouteNearby = route.refStop != null && !route.refStop.getName().equals(route.stop.getName());
+				if (isCurrentRouteNearby) {
+					res.add(route);
+				}
+			}
+			return res;
+		}
 		return null;
 	}
 

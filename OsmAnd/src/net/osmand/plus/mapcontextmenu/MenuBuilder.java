@@ -41,6 +41,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -313,9 +314,10 @@ public class MenuBuilder {
 			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
 					false, 0, false, null, true);
 
-			CollapsableView collapsableView= getCollapsableTransportStopRoutesView(view.getContext(), false, true);
-			if (collapsableView!= null) {
-				buildRow(view, 0, null, app.getString(R.string.transport_nearby_routes_within), 0, true, collapsableView,
+			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
+			if (collapsableView != null) {
+				String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(150, app);
+				buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
 						false, 0, false, null, true);
 			}
 		}
@@ -843,22 +845,12 @@ public class MenuBuilder {
 
 	private CollapsableView getCollapsableTransportStopRoutesView(final Context context, boolean collapsed, boolean isNearbyRoutes) {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, false);
-		List<TransportStopRoute> localTransportStopRoutes = new ArrayList<>();
-		List<TransportStopRoute> nearbyTransportStopRoutes = new ArrayList<>();
-		if (routes != null && routes.size() > 0) {
-			for (TransportStopRoute route : routes) {
-				boolean isCurrentRouteNearby = route.refStop != null && !route.refStop.getName().equals(route.stop.getName());
-				if (isCurrentRouteNearby) {
-					nearbyTransportStopRoutes.add(route);
-				} else {
-					localTransportStopRoutes.add(route);
-				}
-			}
-			if (!isNearbyRoutes) {
-				buildTransportRouteRows(view, localTransportStopRoutes);
-			} else {
-				buildTransportRouteRows(view, nearbyTransportStopRoutes);
-			}
+		List<TransportStopRoute> localTransportStopRoutes = mapContextMenu.getMenuController().getLocalTransportStopRoutes();
+		List<TransportStopRoute> nearbyTransportStopRoutes = mapContextMenu.getMenuController().getNearbyTransportStopRoutes();
+		if (!isNearbyRoutes) {
+			buildTransportRouteRows(view, localTransportStopRoutes);
+		} else {
+			buildTransportRouteRows(view, nearbyTransportStopRoutes);
 		}
 		if (isNearbyRoutes && nearbyTransportStopRoutes.isEmpty()) {
 			return null;
