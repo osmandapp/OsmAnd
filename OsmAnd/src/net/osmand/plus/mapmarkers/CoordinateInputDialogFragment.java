@@ -297,7 +297,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		});
 
 		TextView addButton = (TextView) mainView.findViewById(R.id.add_marker_button);
-		addButton.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_add_button_light_bg : R.drawable.keyboard_item_add_button_dark_bg);
+		addButton.setBackgroundResource(lightTheme ? R.drawable.route_info_go_btn_bg_light : R.drawable.route_info_go_btn_bg_dark);
 		addButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -314,7 +314,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				":", "0", ".", getString(R.string.shared_string_clear)
 		};
 		final GridView keyboardGrid = (GridView) mainView.findViewById(R.id.keyboard_grid_view);
-		setBackgroundColor(keyboardGrid, lightTheme ? R.color.keyboard_divider_light : R.color.keyboard_divider_dark);
+		int dividersColorResId = lightTheme ? R.color.keyboard_divider_light : R.color.keyboard_divider_dark;
+		setBackgroundColor(keyboardGrid, dividersColorResId);
+		setBackgroundColor(R.id.keyboard_divider, dividersColorResId);
 		final KeyboardAdapter keyboardAdapter = new KeyboardAdapter(mapActivity, keyboardItems);
 		keyboardGrid.setAdapter(keyboardAdapter);
 		keyboardGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {

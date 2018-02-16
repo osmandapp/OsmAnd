@@ -29,6 +29,8 @@
 			android:id="@+id/add_marker_button"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
+			android:layout_gravity="center_vertical"
+			android:layout_margin="@dimen/route_info_button_go_margin"
 			android:layout_weight="3"
 			android:ellipsize="end"
 			android:gravity="center"
@@ -36,12 +38,9 @@
 			android:text="@string/shared_string_add"
 			android:textAllCaps="true"
 			android:textColor="@color/keyboard_item_button_text_color"
-			android:textSize="@dimen/default_list_text_size"/>
-
-		<View
-			android:layout_width="1dp"
-			android:layout_height="match_parent"
-			android:background="?attr/keyboard_controls_divider"/>
+			android:textSize="@dimen/default_list_text_size"
+			android:textStyle="bold"
+			tools:background="@drawable/route_info_go_btn_bg_dark"/>
 
 		<ImageView
 			android:id="@+id/show_hide_keyboard_icon"
