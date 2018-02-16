@@ -2851,4 +2851,7 @@
     <string name="tunnel_warning">"Впереди тоннель "</string>
     <string name="show_tunnels">Тоннели</string>
 <string name="make_as_start_point">Сделать пунктом отправления</string>
+    <string name="enter_the_file_name">Введите имя файла.</string>
+    <string name="map_import_error">Ошибка импорта карты</string>
+    <string name="map_imported_successfully">Карта импортирована успешно</string>
     </resources>
