@@ -315,7 +315,7 @@ public class MenuBuilder {
 
 			CollapsableView collapsableView= getCollapsableTransportStopRoutesView(view.getContext(), false, true);
 			if (collapsableView!= null) {
-				buildRow(view, 0, null, app.getString(R.string.transport_Nearby_Routes), 0, true, collapsableView,
+				buildRow(view, 0, null, app.getString(R.string.transport_nearby_routes_within), 0, true, collapsableView,
 						false, 0, false, null, true);
 			}
 		}
@@ -846,7 +846,7 @@ public class MenuBuilder {
 		List<TransportStopRoute> localTransportStopRoutes = new ArrayList<>();
 		List<TransportStopRoute> nearbyTransportStopRoutes = new ArrayList<>();
 		if (routes != null && routes.size() > 0) {
-			for (TransportStopRoute route:routes) {
+			for (TransportStopRoute route : routes) {
 				boolean isCurrentRouteNearby = route.refStop != null && !route.refStop.getName().equals(route.stop.getName());
 				if (isCurrentRouteNearby) {
 					nearbyTransportStopRoutes.add(route);
@@ -855,23 +855,23 @@ public class MenuBuilder {
 				}
 			}
 			if (!isNearbyRoutes) {
-				for (int i = 0; i < localTransportStopRoutes.size(); i++) {
-					final TransportStopRoute r = localTransportStopRoutes.get(i);
-					boolean showDivider = i < localTransportStopRoutes.size() - 1;
-					buildTransportRouteRow(view, r, createClickListenerForCollapsableTransportStopRoutersView(r), showDivider);
-				}
+				buildTransportRouteRows(view, localTransportStopRoutes);
 			} else {
-				for (int i = 0; i < nearbyTransportStopRoutes.size(); i++) {
-					final TransportStopRoute r = nearbyTransportStopRoutes.get(i);
-					boolean showDivider = i < nearbyTransportStopRoutes.size() - 1;
-					buildTransportRouteRow(view, r, createClickListenerForCollapsableTransportStopRoutersView(r), showDivider);
-				}
+				buildTransportRouteRows(view, nearbyTransportStopRoutes);
 			}
 		}
 		if (isNearbyRoutes && nearbyTransportStopRoutes.isEmpty()) {
 			return null;
 		} else {
 			return new CollapsableView(view, this, collapsed);
+		}
+	}
+
+	private void buildTransportRouteRows(LinearLayout view, List<TransportStopRoute> routes) {
+		for (int i = 0; i < routes.size(); i++) {
+			final TransportStopRoute r = routes.get(i);
+			boolean showDivider = i < routes.size() - 1;
+			buildTransportRouteRow(view, r, createClickListenerForCollapsableTransportStopRoutersView(r), showDivider);
 		}
 	}
 

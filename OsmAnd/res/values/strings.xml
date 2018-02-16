@@ -9,7 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="transport_Nearby_Routes">Routes within 150 meters</string>
+    <string name="transport_nearby_routes_within">Routes within 150 meters</string>
+    <string name="transport_nearby_routes">NEAR IN 150 M:</string>
     <string name="enter_the_file_name">Enter the file name.</string>
     <string name="make_as_start_point">Make as Start Point</string>
     <string name="shared_string_current">Current</string>
