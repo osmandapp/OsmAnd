@@ -22,6 +22,7 @@
 		android:background="?attr/keyboard_controls_divider"/>
 
 	<LinearLayout
+		android:id="@+id/bottom_controls_container"
 		android:layout_width="match_parent"
 		android:layout_height="56dp">
 
@@ -30,8 +31,11 @@
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_gravity="center_vertical"
-			android:layout_margin="@dimen/route_info_button_go_margin"
-			android:layout_weight="3"
+			android:layout_marginBottom="@dimen/route_info_button_go_margin"
+			android:layout_marginLeft="@dimen/route_info_button_go_margin"
+			android:layout_marginStart="@dimen/route_info_button_go_margin"
+			android:layout_marginTop="@dimen/route_info_button_go_margin"
+			android:layout_weight="1"
 			android:ellipsize="end"
 			android:gravity="center"
 			android:maxLines="1"
@@ -44,12 +48,14 @@
 
 		<ImageView
 			android:id="@+id/show_hide_keyboard_icon"
-			android:layout_width="0dp"
+			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:layout_gravity="center_vertical"
-			android:layout_weight="1"
-			android:scaleType="center"
-			tools:src="@drawable/ic_action_arrow_down"/>
+			android:layout_margin="@dimen/route_info_button_go_margin"
+			android:background="?attr/selectableItemBackground"
+			android:paddingLeft="@dimen/coords_input_show_hide_keyboard_btn_padding"
+			android:paddingRight="@dimen/coords_input_show_hide_keyboard_btn_padding"
+			tools:src="@drawable/ic_action_keyboard_hide"/>
 
 	</LinearLayout>
 

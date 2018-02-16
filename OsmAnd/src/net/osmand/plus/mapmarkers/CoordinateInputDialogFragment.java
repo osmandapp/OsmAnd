@@ -268,7 +268,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		westSideIv.setImageDrawable(getColoredIcon(R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue));
 
 		setBackgroundColor(R.id.point_name_divider, lightTheme ? R.color.route_info_divider_light : R.color.route_info_divider_dark);
-		setBackgroundColor(R.id.point_name_et_container, lightTheme ? R.color.route_info_bottom_view_bg_light : R.color.route_info_bottom_view_bg_dark);
+		setBackgroundColor(R.id.point_name_et_container, lightTheme ? R.color.keyboard_item_control_light_bg : R.color.route_info_bottom_view_bg_dark);
 
 		ImageView pointNameKeyboardBtn = (ImageView) mainView.findViewById(R.id.point_name_keyboard_btn);
 		pointNameKeyboardBtn.setImageDrawable(getActiveIcon(R.drawable.ic_action_keyboard));
@@ -296,6 +296,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		});
 
+		setBackgroundColor(R.id.bottom_controls_container, lightTheme
+				? R.color.keyboard_item_control_light_bg : R.color.keyboard_item_control_dark_bg);
 		TextView addButton = (TextView) mainView.findViewById(R.id.add_marker_button);
 		addButton.setBackgroundResource(lightTheme ? R.drawable.route_info_go_btn_bg_light : R.drawable.route_info_go_btn_bg_dark);
 		addButton.setOnClickListener(new View.OnClickListener() {
@@ -353,8 +355,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		});
 
 		final ImageView showHideKeyboardIcon = (ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon);
-		showHideKeyboardIcon.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_add_button_light_bg : R.drawable.keyboard_item_add_button_dark_bg);
-		showHideKeyboardIcon.setImageDrawable(getColoredIcon(R.drawable.ic_action_arrow_down, R.color.keyboard_item_button_text_color));
+		showHideKeyboardIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_keyboard_hide));
 		showHideKeyboardIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -679,9 +680,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private void changeOsmandKeyboardVisibility(boolean show) {
 		int visibility = show ? View.VISIBLE : View.GONE;
 		mainView.findViewById(R.id.keyboard_grid_view).setVisibility(visibility);
-		mainView.findViewById(R.id.keyboard_divider).setVisibility(visibility);
-		((ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon)).setImageDrawable(getColoredIcon(show
-				? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up, R.color.keyboard_item_button_text_color));
+		if (orientationPortrait) {
+			mainView.findViewById(R.id.keyboard_divider).setVisibility(visibility);
+		}
+		((ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon)).setImageDrawable(getActiveIcon(show
+				? R.drawable.ic_action_keyboard_hide : R.drawable.ic_action_keyboard_show));
 	}
 
 	private void switchEditText(int currentId, boolean toNext) {
