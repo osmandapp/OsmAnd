@@ -2964,4 +2964,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="tunnel_warning">Tunela aurrean</string>
     <string name="show_tunnels">Tunelak</string>
 <string name="make_as_start_point">Bihurtu hasiera puntu</string>
+    <string name="enter_the_file_name">Idatzi fitxategiaren izena.</string>
+    <string name="map_import_error">Maparen inportazio errorea</string>
+    <string name="map_imported_successfully">Mapa ongi inportatu da</string>
     </resources>

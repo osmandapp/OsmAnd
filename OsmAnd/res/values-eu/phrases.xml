@@ -3134,4 +3134,52 @@
 	<string name="poi_generator_output_electricity_no">Irteera (elektrizitatea): ez</string>
 
 	<string name="poi_direction_n">Norabidea: iparra</string>
+	<string name="poi_socket">Hargunea</string>
+
+<string name="poi_railway_crossing">Trenbideen gurutzea</string>
+	<string name="poi_railway_level_crossing">Maila bereko gurutzea</string>
+	<string name="poi_leisure_common">Aisialdirako area komuna</string>
+	<string name="poi_farmland">Lantzeko lurrak</string>
+	<string name="poi_castle_type_stately">Gaztelu mota: Oinetxea</string>
+	<string name="poi_castle_type_defensive">Gaztelu mota: Defentsarako</string>
+	<string name="poi_castle_type_fortress">Gaztelu mota: Gotorlekua</string>
+	<string name="poi_castle_type_palace">Gaztelu mota: Palazioa</string>
+	<string name="poi_castle_type_kremlin">Gaztelu mota: Kremlin</string>
+	<string name="poi_castle_type_defensive_stately">Gaztelu mota: Defentsarako, oinetxea</string>
+	<string name="poi_castle_type_castrum">Gaztelu mota: Castrum erromatarra</string>
+	<string name="poi_castle_type_shiro">Gaztelu mota: Shiro</string>
+
+	<string name="poi_parking_garage_boxes">Itxitako garajeak</string>
+	<string name="poi_parking_carports">Aparkaleku estaliak</string>
+
+	<string name="poi_dojo">Dojo-a</string>
+
+	<string name="poi_gaelic_games">Jolas gaelikoak</string>
+	<string name="poi_water_tank">Ur-tankea</string>
+
+	<string name="poi_toilets_disposal_flush">Hondakinetaz desegiteko: Deskarga</string>
+	<string name="poi_toilets_disposal_pitlatrine">"Hondakinen eliminazioa:  Letrina"</string>
+	<string name="poi_toilets_disposal_chemical">Hondakinen eliminazioa: Kimikoa</string>
+	<string name="poi_toilets_disposal_bucket">Hondakinen eliminazioa: Kuboa</string>
+
+	<string name="poi_xmas">Gabonak</string>
+	<string name="poi_xmas_event">Gabonetako gertaera</string>
+	<string name="poi_xmas_market">Gabonetako merkatua</string>
+	<string name="poi_xmas_pyramid">Gabonetako piramidea</string>
+	<string name="poi_xmas_shop">Gabonetarako denda</string>
+	<string name="poi_xmas_shop_christmas_tree">Zuhaitz denda</string>
+	<string name="poi_xmas_tree">Gabonetako zuhaitza</string>
+	<string name="poi_xmas_day_date">Gabonak: Gertaeraren denbora-tartea</string>
+	<string name="poi_xmas_note">Gabonak: Oharra</string>
+	<string name="poi_xmas_opening_hours">Gabonak: irekiera-orduak</string>
+	<string name="poi_xmas_location">Gabonak: kokalekua</string>
+	<string name="poi_xmas_url">Gabonak: webgunea</string>
+
+	<string name="poi_public_bookcase">Liburutegi librea</string>
+	<string name="poi_public_bookcase_type_phone_box">Mota: telefono kabina</string>
+	<string name="poi_public_bookcase_type_reading_box">Mota: irakurketa-kabina</string>
+	<string name="poi_public_bookcase_type_wooden_cabinet">Mota: Egurrezko kabina</string>
+	<string name="poi_public_bookcase_type_metal_cabinet">Mota: metalezko kabina</string>
+	<string name="poi_public_bookcase_type_shelf">Mota: Apala</string>
+
 	</resources>

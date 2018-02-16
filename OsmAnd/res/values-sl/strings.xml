@@ -2999,4 +2999,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="total_donations">Skupno donacij</string>
 <string name="shared_string_without_name">Brez imena</string>
     <string name="lang_lo">Laoščina</string>
+    <string name="enter_the_file_name">Vpis imena datoteke.</string>
+    <string name="map_import_error">Uvoz zemljevida je spodletel</string>
+    <string name="map_imported_successfully">Uvoz zemljevida je uspešno končan</string>
     </resources>

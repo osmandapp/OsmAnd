@@ -2932,4 +2932,5 @@ Proporciona un código completo</string>
     <string name="make_as_start_point">Reemplazar punto de inicio</string>
     <string name="map_import_error">Error de importación del mapa</string>
     <string name="map_imported_successfully">Mapa importado correctamente</string>
+    <string name="enter_the_file_name">Ingresa el nombre del archivo.</string>
     </resources>

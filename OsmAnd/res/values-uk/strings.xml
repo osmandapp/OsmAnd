@@ -3191,4 +3191,5 @@
     <string name="toast_empty_name_error">Місце не має назви</string>
     <string name="tunnel_warning">Тунель попереду</string>
     <string name="show_tunnels">Тунелі</string>
-</resources>
+<string name="enter_the_file_name">Введіть ім\'я файлу.</string>
+    </resources>
