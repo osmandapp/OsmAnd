@@ -1,9 +1,5 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import android.view.View;
-import android.view.View.OnClickListener;
-
-import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
@@ -11,12 +7,10 @@ import net.osmand.data.TransportStop;
 import net.osmand.plus.R;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.resources.TransportIndexRepository;
 import net.osmand.plus.transport.TransportStopType;
-import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -28,7 +22,7 @@ import java.util.List;
 
 public class TransportStopController extends MenuController {
 
-	public static final int RADIUS =150;
+	public static final int SHOW_STOPS_RADIUS_IN_METERS = 150;
 
 	private TransportStop transportStop;
 	private List<TransportStopRoute> routes = new ArrayList<>();
@@ -103,7 +97,7 @@ public class TransportStopController extends MenuController {
 					addRoutes(routes, useEnglishNames, t, transportStop, transportStop, 0);
 				}
 				ArrayList<TransportStop> ls = new ArrayList<>();
-				QuadRect ll = MapUtils.calculateLatLonBbox(transportStop.getLocation().getLatitude(), transportStop.getLocation().getLongitude(), RADIUS);
+				QuadRect ll = MapUtils.calculateLatLonBbox(transportStop.getLocation().getLatitude(), transportStop.getLocation().getLongitude(), SHOW_STOPS_RADIUS_IN_METERS);
 				t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
 				for(TransportStop tstop : ls) {
 					if(tstop.getId().longValue() != transportStop.getId().longValue() || empty) {

@@ -60,7 +60,7 @@ import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.util.Algorithms;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
@@ -507,7 +507,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 		if (nearbyTransportStopRoutes != null && nearbyTransportStopRoutes.size() > 0) {
 			String nearInDistance = getMyApplication().getString(R.string.transport_nearby_routes) + " "
-					+ OsmAndFormatter.getFormattedDistance(TransportStopController.RADIUS, getMyApplication());
+					+ OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_IN_METERS, getMyApplication());
 			nearbRoutesWithinTv.setText(nearInDistance);
 			nearbyTransportStopRoutesGrid.setAdapter(createTransportStopRouteAdapter(nearbyTransportStopRoutes));
 			nearbyTransportStopRoutesGrid.setVisibility(View.VISIBLE);

@@ -798,6 +798,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 		return null;
 	}
+
 	public List<TransportStopRoute> getNearbyTransportStopRoutes() {
 		if (menuController != null) {
 			return menuController.getNearbyTransportStopRoutes();
