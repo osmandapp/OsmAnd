@@ -529,14 +529,12 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			List<TransportStopRoute> res = new ArrayList<>();
 			for (TransportStopRoute route : allRoutes) {
 				boolean isCurrentRouteNearby = route.refStop != null && !route.refStop.getName().equals(route.stop.getName());
-				if (nearby) {
-					if (isCurrentRouteNearby) {
+				if (isCurrentRouteNearby) {
+					if (nearby) {
 						res.add(route);
 					}
-				} else {
-					if (!isCurrentRouteNearby) {
-						res.add(route);
-					}
+				} else if (!nearby) {
+					res.add(route);
 				}
 			}
 			return res;
