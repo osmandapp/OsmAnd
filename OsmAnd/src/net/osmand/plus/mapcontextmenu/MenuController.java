@@ -523,14 +523,20 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return null;
 	}
 
-	public List<TransportStopRoute> getLocalTransportStopRoutes() {
+	private List<TransportStopRoute> getSubTransportStopRoutes(boolean isNearby) {
 		List<TransportStopRoute> allRoutes = getTransportStopRoutes();
 		if (allRoutes != null) {
 			List<TransportStopRoute> res = new ArrayList<>();
 			for (TransportStopRoute route : allRoutes) {
 				boolean isCurrentRouteNearby = route.refStop != null && !route.refStop.getName().equals(route.stop.getName());
-				if (!isCurrentRouteNearby) {
-					res.add(route);
+				if (isNearby) {
+					if (isCurrentRouteNearby) {
+						res.add(route);
+					}
+				} else {
+					if (!isCurrentRouteNearby) {
+						res.add(route);
+					}
 				}
 			}
 			return res;
@@ -538,19 +544,12 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return null;
 	}
 
+	public List<TransportStopRoute> getLocalTransportStopRoutes() {
+		return getSubTransportStopRoutes(false);
+	}
+
 	public List<TransportStopRoute> getNearbyTransportStopRoutes() {
-		List<TransportStopRoute> allRoutes = getTransportStopRoutes();
-		if (allRoutes != null) {
-			List<TransportStopRoute> res = new ArrayList<>();
-			for (TransportStopRoute route : allRoutes) {
-				boolean isCurrentRouteNearby = route.refStop != null && !route.refStop.getName().equals(route.stop.getName());
-				if (isCurrentRouteNearby) {
-					res.add(route);
-				}
-			}
-			return res;
-		}
-		return null;
+		return getSubTransportStopRoutes(true);
 	}
 
 	public void share(LatLon latLon, String title, String address) {

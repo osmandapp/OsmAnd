@@ -28,6 +28,8 @@ import java.util.List;
 
 public class TransportStopController extends MenuController {
 
+	public static final int RADIUS =150;
+
 	private TransportStop transportStop;
 	private List<TransportStopRoute> routes = new ArrayList<>();
 	private TransportStopType topType;
@@ -101,7 +103,7 @@ public class TransportStopController extends MenuController {
 					addRoutes(routes, useEnglishNames, t, transportStop, transportStop, 0);
 				}
 				ArrayList<TransportStop> ls = new ArrayList<>();
-				QuadRect ll = MapUtils.calculateLatLonBbox(transportStop.getLocation().getLatitude(), transportStop.getLocation().getLongitude(), 150);
+				QuadRect ll = MapUtils.calculateLatLonBbox(transportStop.getLocation().getLatitude(), transportStop.getLocation().getLongitude(), RADIUS);
 				t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
 				for(TransportStop tstop : ls) {
 					if(tstop.getId().longValue() != transportStop.getId().longValue() || empty) {

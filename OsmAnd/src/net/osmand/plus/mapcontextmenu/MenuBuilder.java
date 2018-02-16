@@ -54,6 +54,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
+import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.render.RenderingIcons;
@@ -316,7 +317,7 @@ public class MenuBuilder {
 
 			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
 			if (collapsableView != null) {
-				String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(150, app);
+				String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.RADIUS,app);
 				buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
 						false, 0, false, null, true);
 			}
@@ -845,8 +846,8 @@ public class MenuBuilder {
 
 	private CollapsableView getCollapsableTransportStopRoutesView(final Context context, boolean collapsed, boolean isNearbyRoutes) {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, false);
-		List<TransportStopRoute> localTransportStopRoutes = mapContextMenu.getMenuController().getLocalTransportStopRoutes();
-		List<TransportStopRoute> nearbyTransportStopRoutes = mapContextMenu.getMenuController().getNearbyTransportStopRoutes();
+		List<TransportStopRoute> localTransportStopRoutes = mapContextMenu.getLocalTransportStopRoutes();
+		List<TransportStopRoute> nearbyTransportStopRoutes = mapContextMenu.getNearbyTransportStopRoutes();
 		if (!isNearbyRoutes) {
 			buildTransportRouteRows(view, localTransportStopRoutes);
 		} else {

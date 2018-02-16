@@ -51,6 +51,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
+import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -495,18 +496,18 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		TextView nearbRoutesWithinTv = (TextView) view.findViewById(R.id.nearby_routes_within_text_view);
 		LinearLayout nearbyRoutesLayoutToHide = (LinearLayout) view.findViewById(R.id.nearby_routes);
 
-		List<TransportStopRoute> localTransportStopRoutes = menu.getMenuController().getLocalTransportStopRoutes();
-		List<TransportStopRoute> nearbyTransportStopRoutes = menu.getMenuController().getNearbyTransportStopRoutes();
+		List<TransportStopRoute> localTransportStopRoutes = menu.getLocalTransportStopRoutes();
+		List<TransportStopRoute> nearbyTransportStopRoutes = menu.getNearbyTransportStopRoutes();
 
-		if (localTransportStopRoutes!=null&&localTransportStopRoutes.size() > 0) {
+		if (localTransportStopRoutes != null && localTransportStopRoutes.size() > 0) {
 			localTransportStopRoutesGrid.setAdapter(createTransportStopRouteAdapter(localTransportStopRoutes));
 			localTransportStopRoutesGrid.setVisibility(View.VISIBLE);
 		} else {
 			localTransportStopRoutesGrid.setVisibility(View.GONE);
 		}
-		if (nearbyTransportStopRoutes!=null&&nearbyTransportStopRoutes.size() > 0) {
+		if (nearbyTransportStopRoutes != null && nearbyTransportStopRoutes.size() > 0) {
 			String nearInDistance = getMyApplication().getString(R.string.transport_nearby_routes) + " "
-					+ OsmAndFormatter.getFormattedDistance(150, getMyApplication());
+					+ OsmAndFormatter.getFormattedDistance(TransportStopController.RADIUS, getMyApplication());
 			nearbRoutesWithinTv.setText(nearInDistance);
 			nearbyTransportStopRoutesGrid.setAdapter(createTransportStopRouteAdapter(nearbyTransportStopRoutes));
 			nearbyTransportStopRoutesGrid.setVisibility(View.VISIBLE);

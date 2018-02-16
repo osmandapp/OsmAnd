@@ -792,6 +792,19 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return null;
 	}
 
+	public List<TransportStopRoute> getLocalTransportStopRoutes() {
+		if (menuController != null) {
+			return menuController.getLocalTransportStopRoutes();
+		}
+		return null;
+	}
+	public List<TransportStopRoute> getNearbyTransportStopRoutes() {
+		if (menuController != null) {
+			return menuController.getNearbyTransportStopRoutes();
+		}
+		return null;
+	}
+
 	public void navigateButtonPressed() {
 		if (navigateInPedestrianMode()) {
 			settings.APPLICATION_MODE.set(ApplicationMode.PEDESTRIAN);
