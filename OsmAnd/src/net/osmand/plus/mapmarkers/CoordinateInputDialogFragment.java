@@ -674,14 +674,18 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private boolean isOsmandKeyboardCurrentlyVisible() {
-		return mainView.findViewById(R.id.keyboard_grid_view).getVisibility() == View.VISIBLE;
+		return orientationPortrait
+				? mainView.findViewById(R.id.keyboard_grid_view).getVisibility() == View.VISIBLE
+				: mainView.findViewById(R.id.keyboard_layout).getVisibility() == View.VISIBLE;
 	}
 
 	private void changeOsmandKeyboardVisibility(boolean show) {
 		int visibility = show ? View.VISIBLE : View.GONE;
-		mainView.findViewById(R.id.keyboard_grid_view).setVisibility(visibility);
 		if (orientationPortrait) {
+			mainView.findViewById(R.id.keyboard_grid_view).setVisibility(visibility);
 			mainView.findViewById(R.id.keyboard_divider).setVisibility(visibility);
+		} else {
+			mainView.findViewById(R.id.keyboard_layout).setVisibility(visibility);
 		}
 		((ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon)).setImageDrawable(getActiveIcon(show
 				? R.drawable.ic_action_keyboard_hide : R.drawable.ic_action_keyboard_show));
