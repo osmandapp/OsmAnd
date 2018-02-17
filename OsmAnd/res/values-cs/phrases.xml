@@ -2433,7 +2433,7 @@
 	<string name="poi_fortification_type_sconce">Typ opevnění: sconce</string>
 	<string name="poi_fortification_type_ring_ditch">Typ opevnění: soustředné kruhové příkopy</string>
 
-	<string name="poi_pa">Pā (Maorská opevněná osada)</string>
+	<string name="poi_pa">Pā (maorská opevněná osada)</string>
 
 	<string name="poi_historic_farm">Historická farma</string>
 	<string name="poi_historic_railway_station">Historická železniční stanice</string>
@@ -3110,7 +3110,7 @@
 	<string name="poi_takeaway_filter_yes">Ano</string>
 	<string name="poi_delivery_filter_yes">Ano</string>
 	<string name="poi_outdoor_seating_filter_yes">Ano</string>
-	<string name="poi_service_bicycle_charging_yes">Nabíjení: Ano</string>
+	<string name="poi_service_bicycle_charging_yes">Nabíjení: ano</string>
 	<string name="poi_service_bicycle_charging_no">Nabíjení: ne</string>
 	<string name="poi_shower_filter_yes">Ano</string>
 	<string name="poi_social_facility_outreach">Nebytové zařízení</string>
@@ -3356,7 +3356,7 @@
 
 	<string name="poi_drink_wine_yes">Víno: ano</string>
 	<string name="poi_drink_wine_retail">Víno: prodej</string>
-	<string name="poi_drink_wine_served">Víno: podávané</string>
+	<string name="poi_drink_wine_served">Víno: rozlévané</string>
 
 	<string name="poi_energy_supplier">Kancelář dodavatele energie</string>
 
@@ -3466,7 +3466,7 @@
 
 <string name="poi_cuisine_cajun">Cajunská</string>
 	<string name="poi_boat_rental">Půjčovna lodí</string>
-	<string name="poi_boat_motorboat_rental_yes">Motorové čluny: Ano</string>
+	<string name="poi_boat_motorboat_rental_yes">Motorové čluny: ano</string>
 	<string name="poi_boat_motorboat_rental_no">Motorové čluny: ne</string>
 	<string name="poi_boat_houseboat_rental_yes">Hausbóty: ano</string>
 	<string name="poi_boat_houseboat_rental_no">Hausbóty: ne</string>
