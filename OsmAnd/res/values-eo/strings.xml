@@ -2971,4 +2971,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="make_as_start_point">Igi komenc-punkton</string>
     <string name="map_import_error">Eraro dum enporti mapon</string>
     <string name="map_imported_successfully">Mapo enportita sukcese</string>
+    <string name="enter_the_file_name">Entajpu dosier-nomon.</string>
     </resources>
