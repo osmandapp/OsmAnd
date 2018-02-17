@@ -2922,4 +2922,12 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="enter_the_file_name">Zadejte název souboru.</string>
     <string name="map_import_error">Chyba při importu mapy</string>
     <string name="map_imported_successfully">Mapa úspěšně importována</string>
-    </resources>
+    <string name="shared_string_current">Aktuální</string>
+    <string name="last_intermediate_dest_description">Přidá poslední zastávku na cestě</string>
+    <string name="first_intermediate_dest_description">Přidá první zastávku na cestě</string>
+    <string name="subsequent_dest_description">Přesunout cíl nahoru a vytvořit cíl</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) je mapová a navigační aplikace s přístupem k volným a kvalitním celosvětovým údajům z OpenStreetMap (OSM). Využívejte hlasovou a optickou navigaci, zobrazení POI (bodů zájmu), vytváření a správu GPX tras, znázornění vrstevnic a nadmořské výšky (pomocí doplňkového modulu), výběr z režimů auto, cyklista a pěší, editaci OSM a mnoho dalšího.</string>
+    <string name="toast_empty_name_error">Místo nemá žádný název</string>
+    <string name="tunnel_warning">Blíží se tunel</string>
+    <string name="show_tunnels">Tunely</string>
+</resources>
