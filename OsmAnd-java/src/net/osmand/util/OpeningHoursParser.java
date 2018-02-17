@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -291,12 +292,14 @@ public class OpeningHoursParser {
 			}
 			// start from the most specific rule
 			for (int i = rules.size() - 1; i >= 0 ; i--) {
-				OpeningHoursRule r = rules.get(i);
-				if (r.contains(cal)) {
-					boolean open = r.isOpenedForTime(cal);
-					if (!open && overlap ) {
-						continue;
-					} else {
+				boolean overlapNext = false;
+				OpeningHoursRule rule = rules.get(i);
+				if (rule.contains(cal)) {
+					if (i > 0) {
+						overlapNext = !rule.hasOverlapTimes(cal, rules.get(i - 1));
+					}
+					boolean open = rule.isOpenedForTime(cal);
+					if (open || (!overlap && !overlapNext)) {
 						return open;
 					}
 				}
@@ -411,10 +414,16 @@ public class OpeningHoursParser {
 		private String getTimeDay(Calendar cal, int limit, boolean opening, int sequenceIndex) {
 			String atTime = "";
 			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
+			OpeningHoursRule prevRule = null;
 			for (OpeningHoursRule r : rules) {
 				if (r.containsDay(cal) && r.containsMonth(cal)) {
-					atTime = r.getTime(cal, false, limit, opening);
+					if (atTime.length() > 0 && prevRule != null && !r.hasOverlapTimes(cal, prevRule)) {
+						return atTime;
+					} else {
+						atTime = r.getTime(cal, false, limit, opening);
+					}
 				}
+				prevRule = r;
 			}
 			return atTime;
 		}
@@ -451,13 +460,17 @@ public class OpeningHoursParser {
 			}
 			// start from the most specific rule
 			for (int i = rules.size() - 1; i >= 0; i--) {
-				OpeningHoursRule r = rules.get(i);
-				if (r.contains(cal)) {
-					boolean open = r.isOpenedForTime(cal);
-					if (!open && overlap) {
-						ruleClosed = r.toLocalRuleString();
+				boolean overlapNext = false;
+				OpeningHoursRule rule = rules.get(i);
+				if (rule.contains(cal)) {
+					if (i > 0) {
+						overlapNext = !rule.hasOverlapTimes(cal, rules.get(i - 1));
+					}
+					boolean open = rule.isOpenedForTime(cal);
+					if (open || (!overlap && !overlapNext)) {
+						return rule.toLocalRuleString();
 					} else {
-						return r.toLocalRuleString();
+						ruleClosed = rule.toLocalRuleString();
 					}
 				}
 			}
@@ -587,7 +600,16 @@ public class OpeningHoursParser {
 		 * @return true if the rule overlap to the next day
 		 */
 		public boolean hasOverlapTimes();
-		
+
+		/**
+		 * Check if r rule times overlap with this rule times at "cal" date.
+		 *
+		 * @param cal the date to check
+		 * @param r the rule to check
+		 * @return true if the this rule times overlap with r times
+		 */
+		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r);
+
 		/**
 		 * @param cal
 		 * @return true if rule applies for current time
@@ -1248,6 +1270,35 @@ public class OpeningHoursParser {
 			return false;
 		}
 
+		@Override
+		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r) {
+			if (off) {
+				return true;
+			}
+			if (r != null && r.contains(cal) && r instanceof BasicOpeningHourRule) {
+				BasicOpeningHourRule rule = (BasicOpeningHourRule) r;
+				if (startTimes.size() > 0 && rule.startTimes.size() > 0) {
+					return getTimesBitset().intersects(rule.getTimesBitset());
+				}
+			}
+			return false;
+		}
+
+		private BitSet getTimesBitset() {
+			BitSet openedSet = new BitSet(2 * 24 * 60);
+			for (int i = 0; i < startTimes.size(); i++) {
+				int startTime = this.startTimes.get(i);
+				int endTime = this.endTimes.get(i);
+				if (endTime == -1) {
+					endTime = 24 * 60;
+				} else if (startTime >= endTime) {
+					endTime = 24 * 60 + endTime;
+				}
+				openedSet.set(startTime, endTime);
+			}
+			return openedSet;
+		}
+
 		private int calculate(Calendar cal) {
 			int month = cal.get(Calendar.MONTH);
 			if (!months[month]) {
@@ -1310,6 +1361,11 @@ public class OpeningHoursParser {
 		
 		@Override
 		public boolean hasOverlapTimes() {
+			return false;
+		}
+
+		@Override
+		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r) {
 			return false;
 		}
 
@@ -2145,19 +2201,29 @@ public class OpeningHoursParser {
 		testOpened("27.01.2018 05:00", hours, true);
 		testOpened("28.01.2018 05:00", hours, true);
 
-		testInfo("22.01.2018 05:00", hours, "Will open at 07:00 (Restaurant)", 0);
-		testInfo("26.01.2018 00:00", hours, "Will close at 01:00 (Restaurant)", 0);
-		testInfo("22.01.2018 05:00", hours, "Will open at 07:00 (McDrive)", 1);
-		testInfo("22.01.2018 00:00", hours, "Open till 04:00 (McDrive)", 1);
-		testInfo("22.01.2018 02:00", hours, "Will close at 04:00 (McDrive)", 1);
-		testInfo("27.01.2018 02:00", hours, "Open till 24:00 (McDrive)", 1);
+		testInfo("22.01.2018 05:00", hours, "Will open at 07:00 - Restaurant", 0);
+		testInfo("26.01.2018 00:00", hours, "Will close at 01:00 - Restaurant", 0);
+		testInfo("22.01.2018 05:00", hours, "Will open at 07:00 - McDrive", 1);
+		testInfo("22.01.2018 00:00", hours, "Open till 04:00 - McDrive", 1);
+		testInfo("22.01.2018 02:00", hours, "Will close at 04:00 - McDrive", 1);
+		testInfo("27.01.2018 02:00", hours, "Open till 24:00 - McDrive", 1);
 		
 		hours = parseOpenedHours("07:00-03:00 open \"Restaurant\" || 24/7 open \"McDrive\"");
 		System.out.println(hours);
 		testOpened("22.01.2018 02:00", hours, true);
 		testOpened("22.01.2018 17:00", hours, true);
-		testInfo("22.01.2018 05:00", hours, "Will open at 07:00 (Restaurant)", 0);
-		testInfo("22.01.2018 04:00", hours, "Open 24/7 (McDrive)", 1);
+		testInfo("22.01.2018 05:00", hours, "Will open at 07:00 - Restaurant", 0);
+		testInfo("22.01.2018 04:00", hours, "Open 24/7 - McDrive", 1);
 
+		hours = parseOpenedHours("Mo-Fr 12:00-15:00, Tu-Fr 17:00-23:00, Sa 12:00-23:00, Su 14:00-23:00");
+		System.out.println(hours);
+		testOpened("16.02.2018 14:00", hours, true);
+		testOpened("16.02.2018 16:00", hours, false);
+		testOpened("16.02.2018 17:00", hours, true);
+	    testInfo("16.02.2018 9:45", hours, "Open from 12:00");
+	    testInfo("16.02.2018 12:00", hours, "Open till 15:00");
+	    testInfo("16.02.2018 14:00", hours, "Will close at 15:00");
+	    testInfo("16.02.2018 16:00", hours, "Will open at 17:00");		
+	    testInfo("16.02.2018 18:00", hours, "Open till 23:00");		
 	}
 }
