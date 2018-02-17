@@ -7,7 +7,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.BitSet;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -292,14 +291,14 @@ public class OpeningHoursParser {
 			}
 			// start from the most specific rule
 			for (int i = rules.size() - 1; i >= 0 ; i--) {
-				boolean overlapNext = false;
+				boolean checkNext = false;
 				OpeningHoursRule rule = rules.get(i);
 				if (rule.contains(cal)) {
 					if (i > 0) {
-						overlapNext = !rule.hasOverlapTimes(cal, rules.get(i - 1));
+						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1));
 					}
 					boolean open = rule.isOpenedForTime(cal);
-					if (open || (!overlap && !overlapNext)) {
+					if (open || (!overlap && !checkNext)) {
 						return open;
 					}
 				}
@@ -460,14 +459,14 @@ public class OpeningHoursParser {
 			}
 			// start from the most specific rule
 			for (int i = rules.size() - 1; i >= 0; i--) {
-				boolean overlapNext = false;
+				boolean checkNext = false;
 				OpeningHoursRule rule = rules.get(i);
 				if (rule.contains(cal)) {
 					if (i > 0) {
-						overlapNext = !rule.hasOverlapTimes(cal, rules.get(i - 1));
+						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1));
 					}
 					boolean open = rule.isOpenedForTime(cal);
-					if (open || (!overlap && !overlapNext)) {
+					if (open || (!overlap && !checkNext)) {
 						return rule.toLocalRuleString();
 					} else {
 						ruleClosed = rule.toLocalRuleString();
@@ -1260,7 +1259,7 @@ public class OpeningHoursParser {
 
 		@Override
 		public boolean hasOverlapTimes() {
-			for (int i = 0; i < startTimes.size(); i++) {
+			for (int i = 0; i < this.startTimes.size(); i++) {
 				int startTime = this.startTimes.get(i);
 				int endTime = this.endTimes.get(i);
 				if (startTime >= endTime && endTime != -1) {
@@ -1278,25 +1277,31 @@ public class OpeningHoursParser {
 			if (r != null && r.contains(cal) && r instanceof BasicOpeningHourRule) {
 				BasicOpeningHourRule rule = (BasicOpeningHourRule) r;
 				if (startTimes.size() > 0 && rule.startTimes.size() > 0) {
-					return getTimesBitset().intersects(rule.getTimesBitset());
+					for (int i = 0; i < this.startTimes.size(); i++) {
+						int startTime = this.startTimes.get(i);
+						int endTime = this.endTimes.get(i);
+						if (endTime == -1) {
+							endTime = 24 * 60;
+						} else if (startTime >= endTime) {
+							endTime = 24 * 60 + endTime;
+						}
+						for (int k = 0; k < rule.startTimes.size(); k++) {
+							int rStartTime = rule.startTimes.get(k);
+							int rEndTime = rule.endTimes.get(k);
+							if (rEndTime == -1) {
+								rEndTime = 24 * 60;
+							} else if (rStartTime >= rEndTime) {
+								rEndTime = 24 * 60 + rEndTime;
+							}
+							if ((rStartTime >= startTime && rStartTime < endTime)
+									|| (startTime >= rStartTime && startTime < rEndTime)) {
+								return true;
+							}
+						}
+					}
 				}
 			}
 			return false;
-		}
-
-		private BitSet getTimesBitset() {
-			BitSet openedSet = new BitSet(2 * 24 * 60);
-			for (int i = 0; i < startTimes.size(); i++) {
-				int startTime = this.startTimes.get(i);
-				int endTime = this.endTimes.get(i);
-				if (endTime == -1) {
-					endTime = 24 * 60;
-				} else if (startTime >= endTime) {
-					endTime = 24 * 60 + endTime;
-				}
-				openedSet.set(startTime, endTime);
-			}
-			return openedSet;
 		}
 
 		private int calculate(Calendar cal) {
