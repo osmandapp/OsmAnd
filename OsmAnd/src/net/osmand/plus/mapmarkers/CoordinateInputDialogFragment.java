@@ -512,7 +512,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 //											case R.id.longitude_edit_text:
 //												labelText = LONGITUDE_LABEL;
 //												break;
-											case R.id.name_edit_text:
+											case R.id.point_name_et:
 												labelText = NAME_LABEL;
 												break;
 											default:
@@ -698,22 +698,42 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		return res;
 	}
 
-	private void addMapMarker() { // todo
-//		final String latitude = ((EditText) mainView.findViewById(R.id.latitude_edit_text)).getText().toString();
-//		final String longitude = ((EditText) mainView.findViewById(R.id.longitude_edit_text)).getText().toString();
-//		double lat = parseCoordinate(latitude);
-//		double lon = parseCoordinate(longitude);
-//		if (lat == 0 || lon == 0) {
+	private void addMapMarker() {
+		final String latitude = getStringCoordinate(true);
+		final String longitude = getStringCoordinate(false);
+		double lat = parseCoordinate(latitude);
+		double lon = parseCoordinate(longitude);
+		if (lat == 0 || lon == 0) {
+			Toast.makeText(getContext(), "wrong input", Toast.LENGTH_SHORT).show(); // todo
 //			if (lon == 0) {
 //				((OsmandTextFieldBoxes) mainView.findViewById(R.id.latitude_box)).setError("", true);
 //			}
 //			if (lat == 0) {
 //				((OsmandTextFieldBoxes) mainView.findViewById(R.id.longitude_box)).setError("", true);
 //			}
-//		} else {
-//			String name = ((EditText) mainView.findViewById(R.id.name_edit_text)).getText().toString();
-//			addMapMarker(new LatLon(lat, lon), name);
-//		}
+		} else {
+			String name = ((EditText) mainView.findViewById(R.id.point_name_et)).getText().toString();
+			addMapMarker(new LatLon(lat, lon), name);
+		}
+	}
+
+	private String getStringCoordinate(boolean latitude) {
+		String firstPart = ((EditText) mainView.findViewById(latitude
+				? R.id.lat_first_input_et : R.id.lon_first_input_et)).getText().toString();
+		String secondPart = ((EditText) mainView.findViewById(latitude
+				? R.id.lat_second_input_et : R.id.lon_second_input_et)).getText().toString();
+		String thirdPart = ((EditText) mainView.findViewById(latitude
+				? R.id.lat_third_input_et : R.id.lon_third_input_et)).getText().toString();
+
+		int format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
+		StringBuilder res = new StringBuilder(firstPart);
+		if (!secondPart.isEmpty()) {
+			res.append(CoordinateInputFormats.getFirstSeparator(format)).append(secondPart);
+		}
+		if (!thirdPart.isEmpty()) {
+			res.append(CoordinateInputFormats.getSecondSeparator(format)).append(thirdPart);
+		}
+		return res.toString();
 	}
 
 	private double parseCoordinate(String s) {
