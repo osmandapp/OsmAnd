@@ -91,6 +91,7 @@
 					android:imeOptions="actionNext"
 					android:inputType="number"
 					android:maxLines="1"
+					android:textSize="@dimen/dialog_header_text_size"
 					android:theme="@style/CoordinateInputEditText"
 					tools:hint="xx"
 					tools:maxLength="2"/>
@@ -112,6 +113,7 @@
 					android:imeOptions="actionNext"
 					android:inputType="number"
 					android:maxLines="1"
+					android:textSize="@dimen/dialog_header_text_size"
 					android:theme="@style/CoordinateInputEditText"
 					tools:hint="xx"
 					tools:maxLength="2"/>
@@ -133,6 +135,7 @@
 					android:imeOptions="actionNext"
 					android:inputType="number"
 					android:maxLines="1"
+					android:textSize="@dimen/dialog_header_text_size"
 					android:theme="@style/CoordinateInputEditText"
 					tools:hint="xxxx"
 					tools:maxLength="4"/>
@@ -221,6 +224,7 @@
 					android:imeOptions="actionNext"
 					android:inputType="number"
 					android:maxLines="1"
+					android:textSize="@dimen/dialog_header_text_size"
 					android:theme="@style/CoordinateInputEditText"
 					tools:hint="yy"
 					tools:maxLength="2"/>
@@ -242,6 +246,7 @@
 					android:imeOptions="actionNext"
 					android:inputType="number"
 					android:maxLines="1"
+					android:textSize="@dimen/dialog_header_text_size"
 					android:theme="@style/CoordinateInputEditText"
 					tools:hint="yy"
 					tools:maxLength="2"/>
@@ -263,6 +268,7 @@
 					android:imeOptions="actionNext"
 					android:inputType="number"
 					android:maxLines="1"
+					android:textSize="@dimen/dialog_header_text_size"
 					android:theme="@style/CoordinateInputEditText"
 					tools:hint="yyyy"
 					tools:maxLength="4"/>
@@ -304,7 +310,8 @@
 			android:background="@null"
 			android:hint="@string/optional_point_name"
 			android:imeOptions="actionDone"
-			android:inputType="text"/>
+			android:inputType="text"
+			android:textSize="@dimen/dialog_header_text_size"/>
 
 		<ImageView
 			android:id="@+id/point_name_keyboard_btn"
