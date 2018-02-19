@@ -101,7 +101,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	private boolean useOsmandKeyboard = true;
 	private boolean north = true;
-	private boolean west = true;
+	private boolean east = true;
 
 	private Location location;
 	private Float heading;
@@ -386,12 +386,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			view.findViewById(R.id.south_side_iv).setVisibility(north ? View.GONE : View.VISIBLE);
 		} else {
 			if (changeSide) {
-				west = !west;
+				east = !east;
 			}
-			String text = getString(west ? R.string.west_abbreviation : R.string.east_abbreviation);
+			String text = getString(east ? R.string.east_abbreviation : R.string.west_abbreviation);
 			((TextView) view.findViewById(R.id.lon_side_of_the_world_tv)).setText(text);
-			view.findViewById(R.id.west_side_iv).setVisibility(west ? View.VISIBLE : View.GONE);
-			view.findViewById(R.id.east_side_iv).setVisibility(west ? View.GONE : View.VISIBLE);
+			view.findViewById(R.id.west_side_iv).setVisibility(east ? View.GONE : View.VISIBLE);
+			view.findViewById(R.id.east_side_iv).setVisibility(east ? View.VISIBLE : View.GONE);
 		}
 	}
 
@@ -730,7 +730,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				? R.id.lat_third_input_et : R.id.lon_third_input_et)).getText().toString();
 
 		int format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
-		StringBuilder res = new StringBuilder(firstPart);
+		StringBuilder res = new StringBuilder();
+		if ((latitude && !north) || (!latitude && !east)) {
+			res.append("-");
+		}
+		res.append(firstPart);
 		if (!secondPart.isEmpty()) {
 			res.append(CoordinateInputFormats.getFirstSeparator(format)).append(secondPart);
 		}
