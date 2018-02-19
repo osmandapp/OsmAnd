@@ -291,7 +291,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		});
 
-		mainView.findViewById(R.id.keyboard_layout).setBackgroundResource(lightTheme ? R.drawable.bg_bottom_menu_light : R.drawable.bg_bottom_menu_dark);
+		mainView.findViewById(R.id.keyboard_layout).setBackgroundResource(lightTheme ? R.drawable.bg_bottom_menu_light : R.drawable.bg_coordinate_input_keyboard_dark);
 
 		Object[] keyboardItems = new Object[]{
 				"1", "2", "3", R.drawable.ic_keyboard_next_field,
