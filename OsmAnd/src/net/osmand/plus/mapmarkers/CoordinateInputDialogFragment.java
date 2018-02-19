@@ -166,6 +166,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			((TextView) mainView.findViewById(R.id.toolbar_text))
 					.setTextColor(getResolvedColor(lightTheme ? R.color.color_black : R.color.color_white));
 			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
+			if (!lightTheme) {
+				setBackgroundColor(mainView, R.color.coordinate_input_markers_list_bg_dark);
+			}
 		} else {
 			((TextView) mainView.findViewById(R.id.toolbar_text))
 					.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.ctx_menu_title_color_dark));
@@ -228,13 +231,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			boolean rightHand = getMyApplication().getSettings().COORDS_INPUT_USE_RIGHT_SIDE.get();
 			LinearLayout handContainer = (LinearLayout) mainView.findViewById(R.id.hand_container);
 
-			int leftLayoutResId = rightHand ? R.layout.coordinate_input_land_data_area : R.layout.coordinate_input_land_keyboard_and_list;
-			int rightLayoutResId = rightHand ? R.layout.coordinate_input_land_keyboard_and_list : R.layout.coordinate_input_land_data_area;
-			View leftView = View.inflate(ctx, leftLayoutResId, null);
-			View rightView = View.inflate(ctx, rightLayoutResId, null);
-			setBackgroundColor(rightHand ? leftView : rightView, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
-			((FrameLayout) handContainer.findViewById(R.id.left_container)).addView(leftView, 0);
-			((FrameLayout) handContainer.findViewById(R.id.right_container)).addView(rightView, 0);
+			View dataAreaView = View.inflate(ctx, R.layout.coordinate_input_land_data_area, null);
+			View keyboardAndListView = View.inflate(ctx, R.layout.coordinate_input_land_keyboard_and_list, null);
+			setBackgroundColor(dataAreaView, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
+			setBackgroundColor(keyboardAndListView, lightTheme ? R.color.ctx_menu_info_view_bg_light : R.color.coordinate_input_markers_list_bg_dark);
+			((FrameLayout) handContainer.findViewById(R.id.left_container)).addView(rightHand ? dataAreaView : keyboardAndListView, 0);
+			((FrameLayout) handContainer.findViewById(R.id.right_container)).addView(rightHand ? keyboardAndListView : dataAreaView, 0);
 
 			handContainer.findViewById(R.id.input_area_top_padding).setVisibility(View.VISIBLE);
 			handContainer.findViewById(R.id.point_name_top_space).setVisibility(View.VISIBLE);

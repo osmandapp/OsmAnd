@@ -310,6 +310,7 @@
 	<color name="coordinate_input_edit_text_activated">#ff8800</color>
 	<color name="coordinate_input_edit_text_normal_light">#e6e6e6</color>
 	<color name="coordinate_input_edit_text_normal_dark">#2d3133</color>
+	<color name="coordinate_input_markers_list_bg_dark">#0b0c0d</color>
 
 	<color name="color_osm_edit_create">#78cc5c</color>
 	<color name="color_osm_edit_modify">#fac403</color>
