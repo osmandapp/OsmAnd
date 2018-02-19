@@ -1909,7 +1909,7 @@
 	<string name="poi_public_transport_platform">Biðstöð almenningssamgangna</string>
 	<string name="poi_public_transport_stop_position">Staðsetning biðstöðvar almenningssamgangna</string>
 	<string name="poi_public_transport_station">Umferðarmiðstöð</string>
-	<string name="poi_optometrist">Sjónskoðun</string>
+	<string name="poi_optometrist">Sjóntækjafræðingur</string>
 	<string name="poi_attraction">Aðdráttarafl fyrir ferðafólk</string>
 <string name="poi_denomination_coptic_orthodox">Koptísk rétttrúnaðarkirkja</string>
 	<string name="poi_club_tourism">Ferðaklúbbur</string>
@@ -3620,4 +3620,12 @@
 
 
 
-</resources>
+<string name="poi_denomination_pentecostal">Hvítasunnukirkjan</string>
+	<string name="poi_denomination_new_apostolic">Nýja postulakirkjan</string>
+	<string name="poi_denomination_episcopal">Biskupakirkjan</string>
+	<string name="poi_denomination_tibetan">Tíbetska</string>
+	<string name="poi_denomination_church_of_scotland">Skotlandskirkjan</string>
+	<string name="poi_denomination_mennonite">Mennonítar</string>
+	<string name="poi_denomination_spiritist">Spíritístar</string>
+	<string name="poi_denomination_shaktism">Shaktismi</string>
+	</resources>
