@@ -706,9 +706,9 @@
     <string name="poi_create_title">POI yarat</string>
     <string name="poi_remove_title">POI-ni sil</string>
     <string name="poi_remove_success">POI uğurla silindi</string>
-    <string name="poi_action_add">Əlavə etmə</string>
-    <string name="poi_action_change">Dəyişdirmə</string>
-    <string name="poi_action_delete">Silmə</string>
+    <string name="poi_action_add">Əlavə et</string>
+    <string name="poi_action_change">Dəyişdir</string>
+    <string name="poi_action_delete">Sil</string>
     <string name="poi_dialog_opening_hours">İş vaxtı:</string>
     <string name="poi_dialog_comment">Rəy</string>
     <string name="poi_dialog_reopen">Yenidən aç</string>
@@ -748,7 +748,7 @@
     <string name="value_downloaded_of_max">%1$.1f / %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Hamısını yenilə (%1$s MB)</string>
-    <string name="enter_country_name">Ölkə adı daxil edin</string>
+    <string name="enter_country_name">Ölkə adını daxil edin</string>
     <string name="new_version">Yeni versiya</string>
     <string name="begin_with_osmand_menu_group">OsmAnd ilə ilk addımlar</string>
     <string name="features_menu_group">Xüsusiyyətlər</string>
@@ -1205,7 +1205,7 @@
     <string name="poi_error_unexpected_template">{0} əməliyyatı zamanı gözlənilməz səhv baş verdi.</string>
     <string name="poi_error_io_error_template">{0} əməliyyatı zamanı I/O səhvi baş verdi.</string>
     <string name="poi_dialog_comment_default">POI dəyişdirmə</string>
-    <string name="poi_dialog_other_tags_message">Bütün digər işarələr saxlanılır</string>
+    <string name="poi_dialog_other_tags_message">Bütün digər işarələr qorunur</string>
     <string name="routing_settings">Naviqasiya</string>
     <string name="routing_settings_descr">Naviqasiya üçün seçimlər təyin edin.</string>
     <string name="global_settings">Ümumi parametrlər</string>
@@ -1221,7 +1221,7 @@
     <string name="osmand_play_title_30_chars">OsmAnd Xəritələr &amp; Naviqasiya</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Xəritələr &amp; Naviqasiya</string>
     <string name="process_navigation_service">OsmAnd naviqasiya xidməti</string>
-    <string name="offline_maps_and_navigation">Oflayn Xəritələr 
+    <string name="offline_maps_and_navigation">Oflayn Xəritələr
 \n&amp; Naviqasiya</string>
     <string name="quick_action_add_navigation">Naviqasiya</string>
     <string name="storage_directory_manual">Əllə müəyyənləşdirilmiş</string>
@@ -1468,7 +1468,7 @@
     <string name="plugin_distance_point_ele">yüksəklik</string>
     <string name="plugin_distance_point">Nöqtə</string>
     <string name="distance_measurement_load_gpx">Mövcud GPX-ni aç</string>
-    <string name="wait_current_task_finished">Zəhmət olmasa mövcud tapşırıq bitənə qədər gözləyin</string>
+    <string name="wait_current_task_finished">Mövcud tapşırıq bitənə qədər gözləyin</string>
     <string name="use_kalman_filter_compass">Kalman filtri istifadə et</string>
     <string name="use_magnetic_sensor">Maqnit sensoru istifadə et</string>
     <string name="available_downloads_left">Endirmək üçün %1$d fayl mövcuddur</string>
@@ -1986,4 +1986,29 @@
     <string name="switch_to_vector_map_to_see">Bu məkan üçün oflayn vektor xəritəsi mövcuddur.
 \n\t
 \n\tİstifadə etmək üçün “Menyu” → “Xəritəni tənzimlə” → “Xəritə mənbəyi…” → “Oflayn vektor xəritələr”-i aktivləşdirin.</string>
+    <string name="use_distance_measurement_help">* Nöqtəni işarələmək üçün toxunun.
+\n * Əvvəlki nöqtəni silmək üçün xəritədə toxunub saxlayın.
+\n * Açıqlamaya baxmaq və əlavə etmək üçün nöqtəyə basıb saxlayın.
+\n * Digər fəaliyyətləri görmək üçün ölçmə widget-inə toxunun.</string>
+    <string name="av_camera_pic_size">Kamera şəkil ölçüsü</string>
+    <string name="av_camera_pic_size_descr">Daxili kameranın şəkil ölçüsünü seçin.</string>
+    <string name="use_fast_recalculation">Ağıllı marşrut yenidən hesablama</string>
+    <string name="rate_this_app">Proqramı qiymətləndir</string>
+    <string name="rate_this_app_long">Google Play-də OsmAnd-a qiymət verin</string>
+    <string name="user_hates_app_get_feedback">Səbəbini bizə deyin.</string>
+    <string name="user_hates_app_get_feedback_long">Bu proqramda nəyin dəyişdirilməsini istədiyinizi bizə bildirin.</string>
+    <string name="tab_title_basic">Əsas</string>
+    <string name="tab_title_advanced">Qabaqcıl</string>
+    <string name="count_of_lines">Xətlərin sayı</string>
+    <string name="application_dir_description">Xəritə və digər məlumat fayllarını harada saxlamaq istədiyinizi seçin.</string>
+    <string name="first_usage_item_description">Xəritələri endirmək, əsas parametrləri qurmaq.</string>
+    <string name="navigation_item_description">Naviqasiya quraşdırma.</string>
+    <string name="faq_item">FAQ</string>
+    <string name="save_poi_too_many_uppercase">Adda çoxlu böyük hərflər var. Davam etmək istəyirsiniz?</string>
+    <string name="live_update">Canlı yeniləmə</string>
+    <string name="configure_screen_quick_action">Sürətli fəaliyyət</string>
+    <string name="quick_action_duplicates">Göstərilən sürətli fəaliyyət adı artıq istifadə olunur, təkrarlanmaması üçün ad %1$s olaraq dəyişdirildi.</string>
+    <string name="quick_action_duplicate">Sürətli fəaliyyət adı təkrardır</string>
+    <string name="quick_action_gpx_category_descr">Kateqoriya seçin (məcbur deyil).</string>
+    <string name="add_line">Xətt əlavə et</string>
     </resources>
