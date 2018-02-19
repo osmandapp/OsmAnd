@@ -167,6 +167,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					.setTextColor(getResolvedColor(lightTheme ? R.color.color_black : R.color.color_white));
 			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
 		} else {
+			((TextView) mainView.findViewById(R.id.toolbar_text))
+					.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.ctx_menu_title_color_dark));
 			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.actionbar_light_color : R.color.route_info_bottom_view_bg_dark);
 		}
 
