@@ -211,7 +211,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			int rightLayoutResId = rightHand ? R.layout.coordinate_input_land_keyboard_and_list : R.layout.coordinate_input_land_data_area;
 			View leftView = View.inflate(ctx, leftLayoutResId, null);
 			View rightView = View.inflate(ctx, rightLayoutResId, null);
-			setBackgroundColor(leftView, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
+			setBackgroundColor(rightHand ? leftView : rightView, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
 			((FrameLayout) handContainer.findViewById(R.id.left_container)).addView(leftView, 0);
 			((FrameLayout) handContainer.findViewById(R.id.right_container)).addView(rightView, 0);
 

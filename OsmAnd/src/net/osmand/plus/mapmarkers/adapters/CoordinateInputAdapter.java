@@ -14,7 +14,6 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.List;
 
@@ -25,7 +24,6 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	private List<MapMarker> mapMarkers;
 
 	private boolean nightTheme;
-	private boolean portrait;
 
 	private LatLon location;
 	private Float heading;
@@ -37,7 +35,6 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		iconsCache = mapActivity.getMyApplication().getIconsCache();
 		this.mapMarkers = mapMarkers;
 		nightTheme = !mapActivity.getMyApplication().getSettings().isLightContent();
-		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 	}
 
 	public void setLocation(LatLon location) {
@@ -94,10 +91,8 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		boolean fistItem = position == 0;
 		boolean lastItem = position == getItemCount() - 1;
 
-		if (portrait) {
-			holder.topDivider.setVisibility(fistItem ? View.VISIBLE : View.GONE);
-			holder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
-		}
+		holder.topDivider.setVisibility(fistItem ? View.VISIBLE : View.GONE);
+		holder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 		holder.divider.setVisibility((!singleItem && !lastItem) ? View.VISIBLE : View.GONE);
 
 		holder.title.setText(mapMarker.getName(mapActivity));
