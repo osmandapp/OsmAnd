@@ -3628,4 +3628,19 @@
 	<string name="poi_denomination_mennonite">Mennonítar</string>
 	<string name="poi_denomination_spiritist">Spíritístar</string>
 	<string name="poi_denomination_shaktism">Shaktismi</string>
+	<string name="poi_valley_balka">Daldrag (balka)</string>
+
+	<string name="poi_pump_type_beam_pump">Gerð dælu: skaftdæla</string>
+	<string name="poi_pump_type_india_mk_2_3">Gerð dælu: Indversk Mk II eða III&gt;</string>
+	<string name="poi_pump_type_gravity">Gerð dælu: Þþyngdarafl</string>
+	<string name="poi_pump_style_modern">Stíll dælu: nútímaleg</string>
+	<string name="poi_pump_style_historic">Gerð dælu: söguleg</string>
+	<string name="poi_pump_status_ok">Staða dælu: í lagi</string>
+	<string name="poi_pump_status_broken">Staða dælu: biluð</string>
+	<string name="poi_pump_status_locked">Staða dælu: læst</string>
+
+	<string name="poi_diplomatic_high_commission">Sendifulltrúi</string>
+
+	<string name="poi_fire_operator">Tilheyrir slökkviliði</string>
+
 	</resources>
