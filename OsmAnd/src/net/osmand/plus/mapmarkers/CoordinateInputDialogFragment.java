@@ -203,7 +203,26 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		final Context ctx = getContext();
 
-		if (!orientationPortrait) {
+		if (orientationPortrait) {
+			View.OnClickListener backspaceOnClickListener = new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (v.getId() == R.id.lat_backspace_btn) {
+						clearInputs(R.id.lat_first_input_et, R.id.lat_second_input_et, R.id.lat_third_input_et);
+					} else {
+						clearInputs(R.id.lon_first_input_et, R.id.lon_second_input_et, R.id.lon_third_input_et);
+					}
+				}
+			};
+
+			ImageView latBackspaceBtn = (ImageView) mainView.findViewById(R.id.lat_backspace_btn);
+			latBackspaceBtn.setImageDrawable(getActiveIcon(R.drawable.ic_keyboard_backspace, true));
+			latBackspaceBtn.setOnClickListener(backspaceOnClickListener);
+
+			ImageView lonBackspaceBtn = (ImageView) mainView.findViewById(R.id.lon_backspace_btn);
+			lonBackspaceBtn.setImageDrawable(getActiveIcon(R.drawable.ic_keyboard_backspace, true));
+			lonBackspaceBtn.setOnClickListener(backspaceOnClickListener);
+		} else {
 			boolean rightHand = getMyApplication().getSettings().COORDS_INPUT_USE_RIGHT_SIDE.get();
 			LinearLayout handContainer = (LinearLayout) mainView.findViewById(R.id.hand_container);
 
@@ -219,6 +238,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			handContainer.findViewById(R.id.point_name_top_space).setVisibility(View.VISIBLE);
 			handContainer.findViewById(R.id.right_shadow).setVisibility(rightHand ? View.VISIBLE : View.GONE);
 			handContainer.findViewById(R.id.left_shadow).setVisibility(rightHand ? View.GONE : View.VISIBLE);
+
+			handContainer.findViewById(R.id.lat_backspace_btn).setVisibility(View.GONE);
+			handContainer.findViewById(R.id.lon_backspace_btn).setVisibility(View.GONE);
+			handContainer.findViewById(R.id.lat_end_padding).setVisibility(View.VISIBLE);
+			handContainer.findViewById(R.id.lon_end_padding).setVisibility(View.VISIBLE);
 		}
 
 		registerInputs();
@@ -772,6 +796,17 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		clearInputs();
 	}
 
+	private void clearInputs(int... ids) {
+		for (int id : ids) {
+			View v = mainView.findViewById(id);
+			if (v != null && v instanceof EditText) {
+				EditText et = (EditText) v;
+				et.setText("");
+				et.clearFocus();
+			}
+		}
+	}
+
 	private void clearInputs() {
 		for (EditText et : editTexts) {
 			et.setText("");
@@ -783,7 +818,19 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private Drawable getActiveIcon(@DrawableRes int resId) {
-		return getColoredIcon(resId, lightTheme ? R.color.icon_color : R.color.coordinate_input_active_icon_dark);
+		return getActiveIcon(resId, false);
+	}
+
+	private Drawable getActiveIcon(@DrawableRes int resId, boolean createNew) {
+		@ColorRes int colorId = lightTheme ? R.color.icon_color : R.color.coordinate_input_active_icon_dark;
+		if (createNew) {
+			Drawable drawable = ContextCompat.getDrawable(getContext(), resId);
+			drawable = DrawableCompat.wrap(drawable);
+			drawable.mutate();
+			DrawableCompat.setTint(drawable, getResolvedColor(colorId));
+			return drawable;
+		}
+		return getColoredIcon(resId, colorId);
 	}
 
 	private Drawable getColoredIcon(@DrawableRes int resId, @ColorRes int colorResId) {
