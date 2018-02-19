@@ -2156,7 +2156,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
 <string name="access_no_destination">Cíl není nastaven</string>
     <string name="map_widget_magnetic_bearing">Magnetické směrování</string>
     <string name="map_widget_bearing">Relativní směrování</string>
-    <string name="access_disable_offroute_recalc">Nepřepočítávat trasu při jejím odchýlení</string>
+    <string name="access_disable_offroute_recalc">Nepřepočítávat trasu, pokud se od ní odchýlíte</string>
     <string name="access_disable_offroute_recalc_descr">Nepřepočítávat trasu automaticky, pokud se vzdálíte od naplánované cesty.</string>
     <string name="access_disable_wrong_direction_recalc">Nepřepočítávat trasu při opačném směru</string>
     <string name="access_disable_wrong_direction_recalc_descr">Nepřepočítávat trasu automaticky, když se pohybujete opačným směrem.</string>
