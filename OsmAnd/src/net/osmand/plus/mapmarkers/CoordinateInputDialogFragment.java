@@ -100,6 +100,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean orientationPortrait;
 
 	private boolean useOsmandKeyboard = true;
+	private boolean north = true;
+	private boolean west = true;
 
 	private Location location;
 	private Float heading;
@@ -221,31 +223,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		registerInputs();
 
-		View latSideOfTheWorldBtn = mainView.findViewById(R.id.lat_side_of_the_world_btn);
-		latSideOfTheWorldBtn.setBackgroundResource(lightTheme
-				? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark);
-		latSideOfTheWorldBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(ctx, "lat side of the world", Toast.LENGTH_SHORT).show();
-			}
-		});
-		((TextView) latSideOfTheWorldBtn.findViewById(R.id.lat_side_of_the_world_tv)).setText(getString(R.string.north_abbreviation));
-		ImageView northSideIv = latSideOfTheWorldBtn.findViewById(R.id.north_side_iv);
-		northSideIv.setImageDrawable(getColoredIcon(R.drawable.ic_action_coordinates_longitude, R.color.dashboard_blue));
-
-		View lonSideOfTheWorldBtn = mainView.findViewById(R.id.lon_side_of_the_world_btn);
-		lonSideOfTheWorldBtn.setBackgroundResource(lightTheme
-				? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark);
-		lonSideOfTheWorldBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(ctx, "lon side of the world", Toast.LENGTH_SHORT).show();
-			}
-		});
-		((TextView) lonSideOfTheWorldBtn.findViewById(R.id.lon_side_of_the_world_tv)).setText(getString(R.string.west_abbreviation));
-		ImageView westSideIv = lonSideOfTheWorldBtn.findViewById(R.id.west_side_iv);
-		westSideIv.setImageDrawable(getColoredIcon(R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue));
+		setupSideOfTheWorldBtns(R.id.lat_side_of_the_world_btn, R.id.lon_side_of_the_world_btn);
 
 		setBackgroundColor(R.id.point_name_divider, lightTheme ? R.color.route_info_divider_light : R.color.route_info_divider_dark);
 		setBackgroundColor(R.id.point_name_et_container, lightTheme ? R.color.keyboard_item_control_light_bg : R.color.route_info_bottom_view_bg_dark);
@@ -369,6 +347,52 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			dialog.setDismissMessage(null);
 		}
 		super.onDestroyView();
+	}
+
+	private void setupSideOfTheWorldBtns(int... ids) {
+		boolean doNotUseAnimations = getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get();
+		for (int id : ids) {
+			View sideOfTheWorldBtn = mainView.findViewById(id);
+			if (doNotUseAnimations) {
+				((LinearLayout) sideOfTheWorldBtn).setLayoutTransition(null);
+			}
+			sideOfTheWorldBtn.setBackgroundResource(lightTheme
+					? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark);
+			sideOfTheWorldBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					updateSideOfTheWorldBtn(v, true);
+				}
+			});
+
+			boolean lat = id == R.id.lat_side_of_the_world_btn;
+			Drawable icon = getColoredIcon(lat ? R.drawable.ic_action_coordinates_longitude
+					: R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue);
+			((ImageView) sideOfTheWorldBtn.findViewById(lat ? R.id.north_side_iv : R.id.west_side_iv)).setImageDrawable(icon);
+			((ImageView) sideOfTheWorldBtn.findViewById(lat ? R.id.south_side_iv : R.id.east_side_iv)).setImageDrawable(icon);
+
+			updateSideOfTheWorldBtn(sideOfTheWorldBtn, false);
+		}
+	}
+
+	private void updateSideOfTheWorldBtn(View view, boolean changeSide) {
+		if (view.getId() == R.id.lat_side_of_the_world_btn) {
+			if (changeSide) {
+				north = !north;
+			}
+			String text = getString(north ? R.string.north_abbreviation : R.string.south_abbreviation);
+			((TextView) view.findViewById(R.id.lat_side_of_the_world_tv)).setText(text);
+			view.findViewById(R.id.north_side_iv).setVisibility(north ? View.VISIBLE : View.GONE);
+			view.findViewById(R.id.south_side_iv).setVisibility(north ? View.GONE : View.VISIBLE);
+		} else {
+			if (changeSide) {
+				west = !west;
+			}
+			String text = getString(west ? R.string.west_abbreviation : R.string.east_abbreviation);
+			((TextView) view.findViewById(R.id.lon_side_of_the_world_tv)).setText(text);
+			view.findViewById(R.id.west_side_iv).setVisibility(west ? View.VISIBLE : View.GONE);
+			view.findViewById(R.id.east_side_iv).setVisibility(west ? View.GONE : View.VISIBLE);
+		}
 	}
 
 	@ColorInt
