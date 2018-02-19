@@ -2398,7 +2398,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="quick_action_add_osm_bug_descr">Klepnutím na tlačítko akce se přidá OSM poznámka na místo ve středu obrazovky.</string>
     <string name="quick_action_add_poi_descr">Klepnutím na tlačítko akce se přidá POI na místo ve středu obrazovky.</string>
     <string name="quick_action_navigation_voice_descr">Klepnutím na tlačítko akce se vypnou nebo zapnou hlasové pokyny během navigace.</string>
-    <string name="quick_action_add_parking_descr">Klepnutím na tlačítko akce se přidá parkovací místo na místo ve středu obrazovky.</string>
+    <string name="quick_action_add_parking_descr">Klepnutím na tlačítko akce se přidá parkovací místo do středu obrazovky.</string>
     <string name="favorite_empty_place_name">Místo</string>
     <string name="quick_action_duplicates">Zadaný název rychlé akce je již použit, byl změněn na %1$s z důvodu duplicity.</string>
     <string name="quick_action_duplicate">Duplicitní název rychlé akce</string>
@@ -2417,7 +2417,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="quick_action_fav_name_descr">Ponecháte-li prázdné, bude automaticky použita adresa nebo název místa.</string>
     <string name="quick_action_bug_descr">Tato zpráva bude automaticky dokončena v poli komentáře.</string>
     <string name="quick_action_bug_message">Zpráva</string>
-    <string name="quick_action_category_descr">Vyberte kategorii, kterou chcete uložit do oblíbených.</string>
+    <string name="quick_action_category_descr">Vyberte kategorii, do níž chcete položku uložit.</string>
     <string name="quick_action_gpx_category_descr">Vyberte volitelnou kategorii.</string>
     <string name="quick_action_poi_list">Seznam POI</string>
     <string name="quick_action_sh_poi_descr">Můžete přidat jednu nebo více kategorií POI pro zobrazení na mapě.</string>
