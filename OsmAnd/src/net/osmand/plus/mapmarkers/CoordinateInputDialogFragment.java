@@ -89,11 +89,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private static final String LONGITUDE_LABEL = "longitude";
 	private static final String NAME_LABEL = "name";
 
-	private List<MapMarker> mapMarkers = new ArrayList<>();
+	private final List<MapMarker> mapMarkers = new ArrayList<>();
 	private OnMapMarkersSavedListener listener;
 
 	private View mainView;
-	private List<EditTextEx> editTexts = new ArrayList<>();
+	private final List<EditTextEx> editTexts = new ArrayList<>();
 	private CoordinateInputAdapter adapter;
 
 	private boolean lightTheme;
@@ -870,10 +870,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	private class KeyboardAdapter extends ArrayAdapter<Object> {
 
-		private ColorStateList dividerControlColorStateList = AndroidUtils.createColorStateList(getContext(), false,
+		private final ColorStateList dividerControlColorStateList = AndroidUtils.createColorStateList(getContext(), false,
 				R.color.keyboard_item_divider_control_color_light, R.color.keyboard_item_divider_control_color_light_pressed,
 				0, 0);
-		private ColorStateList numberColorStateList = AndroidUtils.createColorStateList(getContext(), false,
+		private final ColorStateList numberColorStateList = AndroidUtils.createColorStateList(getContext(), false,
 				R.color.keyboard_item_text_color_light, R.color.keyboard_item_text_color_light_pressed,
 				0, 0);
 
