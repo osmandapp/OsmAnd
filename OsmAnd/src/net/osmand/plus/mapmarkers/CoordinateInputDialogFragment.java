@@ -201,22 +201,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		final Context ctx = getContext();
 
-		if (orientationPortrait) {
-			View.OnClickListener backspaceOnClickListener = new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Toast.makeText(ctx, "backspace", Toast.LENGTH_SHORT).show();
-				}
-			};
-
-			ImageView latBackspaceBtn = (ImageView) mainView.findViewById(R.id.lat_backspace_btn);
-			latBackspaceBtn.setImageDrawable(getActiveIcon(R.drawable.ic_keyboard_backspace));
-			latBackspaceBtn.setOnClickListener(backspaceOnClickListener);
-
-			ImageView lonBackspaceBtn = (ImageView) mainView.findViewById(R.id.lon_backspace_btn);
-			lonBackspaceBtn.setImageDrawable(getActiveIcon(R.drawable.ic_keyboard_backspace));
-			lonBackspaceBtn.setOnClickListener(backspaceOnClickListener);
-		} else {
+		if (!orientationPortrait) {
 			boolean rightHand = getMyApplication().getSettings().COORDS_INPUT_USE_RIGHT_SIDE.get();
 			LinearLayout handContainer = (LinearLayout) mainView.findViewById(R.id.hand_container);
 
@@ -232,11 +217,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			handContainer.findViewById(R.id.point_name_top_space).setVisibility(View.VISIBLE);
 			handContainer.findViewById(R.id.right_shadow).setVisibility(rightHand ? View.VISIBLE : View.GONE);
 			handContainer.findViewById(R.id.left_shadow).setVisibility(rightHand ? View.GONE : View.VISIBLE);
-
-			handContainer.findViewById(R.id.lat_backspace_btn).setVisibility(View.GONE);
-			handContainer.findViewById(R.id.lon_backspace_btn).setVisibility(View.GONE);
-			handContainer.findViewById(R.id.lat_end_padding).setVisibility(View.VISIBLE);
-			handContainer.findViewById(R.id.lon_end_padding).setVisibility(View.VISIBLE);
 		}
 
 		registerInputs();

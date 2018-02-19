@@ -64,6 +64,8 @@
 		<LinearLayout
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
 			android:layout_weight="1"
 			android:orientation="vertical">
 
@@ -137,23 +139,6 @@
 
 		</LinearLayout>
 
-		<ImageView
-			android:id="@+id/lat_backspace_btn"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginEnd="@dimen/text_margin_small"
-			android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
-			android:layout_marginRight="@dimen/text_margin_small"
-			android:layout_marginStart="@dimen/context_menu_padding_margin_large"
-			android:padding="@dimen/content_padding_small"
-			tools:src="@drawable/ic_keyboard_backspace"/>
-
-		<View
-			android:id="@+id/lat_end_padding"
-			android:layout_width="@dimen/content_padding"
-			android:layout_height="match_parent"
-			android:visibility="gone"/>
-
 	</LinearLayout>
 
 	<!-- Longitude row: -->
@@ -208,6 +193,8 @@
 		<LinearLayout
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
 			android:layout_weight="1"
 			android:orientation="vertical">
 
@@ -280,23 +267,6 @@
 			</LinearLayout>
 
 		</LinearLayout>
-
-		<ImageView
-			android:id="@+id/lon_backspace_btn"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginEnd="@dimen/text_margin_small"
-			android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
-			android:layout_marginRight="@dimen/text_margin_small"
-			android:layout_marginStart="@dimen/context_menu_padding_margin_large"
-			android:padding="@dimen/content_padding_small"
-			tools:src="@drawable/ic_keyboard_backspace"/>
-
-		<View
-			android:id="@+id/lon_end_padding"
-			android:layout_width="@dimen/content_padding"
-			android:layout_height="match_parent"
-			android:visibility="gone"/>
 
 	</LinearLayout>
 
