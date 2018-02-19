@@ -3449,7 +3449,7 @@
 	<string name="poi_direction_up">Směr: nahoru</string>
 	<string name="poi_direction_down">Směr: dolů</string>
 	<string name="poi_direction_entrance">Směr: vchod</string>
-	<string name="poi_direction_exit">Směr: odchod</string>
+	<string name="poi_direction_exit">Směr: východ</string>
 	<string name="poi_direction_all">Směr: všechny</string>
 
 	<string name="poi_winter_room_yes">Zimní místnost: ano</string>
