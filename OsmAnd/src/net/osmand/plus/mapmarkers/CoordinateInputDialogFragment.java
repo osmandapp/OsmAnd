@@ -644,6 +644,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		EditTextEx et = (EditTextEx) mainView.findViewById(etId);
 		et.setMaxSymbolsCount(symbols);
 		et.setHint(createHint(symbols, lat ? 'x' : 'y'));
+		((LinearLayout.LayoutParams) et.getLayoutParams()).weight = symbols;
+		et.requestLayout();
 	}
 
 	private String createHint(int symbolsCount, char symbol) {
