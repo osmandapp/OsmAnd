@@ -343,7 +343,7 @@
 			android:hint="@string/optional_point_name"
 			android:imeOptions="actionDone"
 			android:inputType="text"
-			android:textSize="@dimen/dialog_header_text_size"/>
+			android:textSize="@dimen/default_list_text_size"/>
 
 		<ImageView
 			android:id="@+id/point_name_keyboard_btn"
