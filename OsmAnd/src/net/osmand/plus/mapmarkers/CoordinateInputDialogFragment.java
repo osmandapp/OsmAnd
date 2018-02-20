@@ -221,11 +221,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			};
 
 			ImageView latBackspaceBtn = (ImageView) mainView.findViewById(R.id.lat_backspace_btn);
-			latBackspaceBtn.setImageDrawable(getActiveIcon(R.drawable.ic_keyboard_backspace, true));
+			latBackspaceBtn.setImageDrawable(getActiveIcon(R.drawable.ic_action_clear_all_fields));
 			latBackspaceBtn.setOnClickListener(backspaceOnClickListener);
 
 			ImageView lonBackspaceBtn = (ImageView) mainView.findViewById(R.id.lon_backspace_btn);
-			lonBackspaceBtn.setImageDrawable(getActiveIcon(R.drawable.ic_keyboard_backspace, true));
+			lonBackspaceBtn.setImageDrawable(getActiveIcon(R.drawable.ic_action_clear_all_fields));
 			lonBackspaceBtn.setOnClickListener(backspaceOnClickListener);
 		} else {
 			boolean rightHand = getMyApplication().getSettings().COORDS_INPUT_USE_RIGHT_SIDE.get();
@@ -257,7 +257,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		setBackgroundColor(R.id.point_name_et_container, lightTheme ? R.color.keyboard_item_control_light_bg : R.color.route_info_bottom_view_bg_dark);
 
 		ImageView pointNameKeyboardBtn = (ImageView) mainView.findViewById(R.id.point_name_keyboard_btn);
-		pointNameKeyboardBtn.setImageDrawable(getActiveIcon(R.drawable.ic_action_keyboard));
+		pointNameKeyboardBtn.setImageDrawable(getColoredIcon(R.drawable.ic_action_keyboard, R.color.icon_color));
 		pointNameKeyboardBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -824,19 +824,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private Drawable getActiveIcon(@DrawableRes int resId) {
-		return getActiveIcon(resId, false);
-	}
-
-	private Drawable getActiveIcon(@DrawableRes int resId, boolean createNew) {
-		@ColorRes int colorId = lightTheme ? R.color.icon_color : R.color.coordinate_input_active_icon_dark;
-		if (createNew) {
-			Drawable drawable = ContextCompat.getDrawable(getContext(), resId);
-			drawable = DrawableCompat.wrap(drawable);
-			drawable.mutate();
-			DrawableCompat.setTint(drawable, getResolvedColor(colorId));
-			return drawable;
-		}
-		return getColoredIcon(resId, colorId);
+		return getColoredIcon(resId, lightTheme ? R.color.icon_color : R.color.coordinate_input_active_icon_dark);
 	}
 
 	private Drawable getColoredIcon(@DrawableRes int resId, @ColorRes int colorResId) {

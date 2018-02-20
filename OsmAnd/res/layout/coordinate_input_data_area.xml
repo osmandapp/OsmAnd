@@ -149,6 +149,7 @@
 			android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
 			android:layout_marginRight="@dimen/text_margin_small"
 			android:layout_marginStart="@dimen/context_menu_padding_margin_large"
+			android:background="?attr/selectableItemBackground"
 			android:padding="@dimen/content_padding_small"
 			tools:src="@drawable/ic_keyboard_backspace"/>
 
@@ -297,6 +298,7 @@
 			android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
 			android:layout_marginRight="@dimen/text_margin_small"
 			android:layout_marginStart="@dimen/context_menu_padding_margin_large"
+			android:background="?attr/selectableItemBackground"
 			android:padding="@dimen/content_padding_small"
 			tools:src="@drawable/ic_keyboard_backspace"/>
 
