@@ -98,6 +98,12 @@
 	<string name="poi_water_place_access">Water place access</string>
 	<string name="poi_climbing_style">Climbing style</string>
 	<string name="poi_socket">Socket</string>
+	<string name="poi_socket_chademo_output">CHAdeMO output</string>
+	<string name="poi_socket_type2_output">Type 2 output</string>
+	<string name="poi_socket_type2_combo_output">Type 2 combo output</string>
+	<string name="poi_socket_type3_output">Type 3 output</string>
+	<string name="poi_socket_cee_blue_output">CEE blue output</string>
+	<string name="poi_socket_schuko_output">Schuko output</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3731,6 +3737,23 @@
 	<string name="poi_socket_bs1363_yes">BS 1363</string>
 	<string name="poi_socket_as3112_yes">AS/NZS 3112</string>
 
-
+	<string name="poi_socket_chademo_output_high">High</string>
+	<string name="poi_socket_chademo_output_medium">Medium</string>
+	<string name="poi_socket_chademo_output_low">Low</string>
+	<string name="poi_socket_type2_output_high">High</string>
+	<string name="poi_socket_type2_output_medium">Medium</string>
+	<string name="poi_socket_type2_output_low">Low</string>
+	<string name="poi_socket_type2_combo_output_high">High</string>
+	<string name="poi_socket_type2_combo_output_medium">Medium</string>
+	<string name="poi_socket_type2_combo_output_low">Low</string>
+	<string name="poi_socket_type3_output_high">High</string>
+	<string name="poi_socket_type3_output_medium">Medium</string>
+	<string name="poi_socket_type3_output_low">Low</string>
+	<string name="poi_socket_cee_blue_output_high">High</string>
+	<string name="poi_socket_cee_blue_output_medium">Medium</string>
+	<string name="poi_socket_cee_blue_output_low">Low</string>
+	<string name="poi_socket_schuko_output_high">High</string>
+	<string name="poi_socket_schuko_output_medium">Medium</string>
+	<string name="poi_socket_schuko_output_low">Low</string>
 
 </resources>
