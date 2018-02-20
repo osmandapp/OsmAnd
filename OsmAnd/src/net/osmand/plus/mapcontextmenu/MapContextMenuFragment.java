@@ -512,7 +512,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 		if (nearbyTransportStopRoutes != null && nearbyTransportStopRoutes.size() > 0) {
 			String nearInDistance = getMyApplication().getString(R.string.transport_nearby_routes) + " "
-					+ OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, getMyApplication()).toUpperCase(Locale.ROOT) +":";
+					+ OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, getMyApplication()).toUpperCase() +":";
 			nearbRoutesWithinTv.setText(nearInDistance);
 			nearbyTransportStopRoutesGrid.setAdapter(createTransportStopRouteAdapter(nearbyTransportStopRoutes));
 			nearbyTransportStopRoutesGrid.setVisibility(View.VISIBLE);
