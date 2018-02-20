@@ -1009,7 +1009,7 @@ Biltegiratzean {1} MB erabiliko dira.
   <string name="loading_poi_obj">POIa kargatzen…</string>
   <string name="auth_failed">Baimentzeak huts egin du</string>
   <string name="failed_op">huts egin du</string>
-  <string name="converting_names">Izen natibo/Ingelesak bihurtzen…</string>
+  <string name="converting_names">Izen natibo/ingelesak bihurtzen…</string>
   <string name="loading_streets_buildings">Kaleak/eraikinak kargatzen…</string>
   <string name="loading_postcodes">Posta kodeak kargatzen…</string>
   <string name="loading_streets">Kaleak kargatzen…</string>
@@ -1057,7 +1057,7 @@ Biltegiratzean {1} MB erabiliko dira.
   
   <string name="shared_string_add_to_favorites">Gehitu gogokoetara</string>
   <string name="use_english_names_descr">Hautatu tokiko izenen edo ingelesezko izenen artean.</string>
-  <string name="use_english_names">Erabili izen Ingelesak mapetan</string>
+  <string name="use_english_names">Erabili izen ingelesak mapetan</string>
   <string name="app_settings">Aplikazioaren ezarpenak</string>
   <string name="search_address">Bilatu helbidea</string>
   <string name="choose_building">Eraikina aukeratu</string>
