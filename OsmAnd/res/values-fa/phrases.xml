@@ -5,7 +5,7 @@
 
 <string name="poi_bakery">نانوایی</string>
 <string name="poi_alcohol">فروشگاه نوشیدنی‌های الکلی</string>
-<string name="poi_convenience">خواربارفروشی</string>
+<string name="poi_convenience">خواربارفروشی (سوپرمارکت)</string>
 <string name="poi_mall">مرکز خرید</string>
 <string name="poi_beverages">فروشگاه نوشیدنی</string>
 <string name="poi_butcher">قصابی</string>
@@ -15,7 +15,7 @@
 <string name="poi_seafood">فروشگاه غذاهای دریایی</string>
 <string name="poi_confectionery">شیرینی فروشی</string>
 <string name="poi_ice_cream">بستنی فروشی</string>
-<string name="poi_supermarket">سوپرمارکت</string>
+<string name="poi_supermarket">فروشگاه بزرگ</string>
 <string name="poi_tea">فروشگاه چای</string>
 <string name="poi_dairy">لبنیات فروشی</string>
 <string name="poi_vending_machine">دستگاه فروش خودکار</string>
@@ -416,7 +416,7 @@
 <string name="poi_religion_taoist">تائوئیسم</string>
 <string name="poi_monastery">صومعه</string>
 <string name="poi_historic_monastery">صومعه تاریخی</string>
-<string name="poi_wayside_cross"></string>
+<string name="poi_wayside_cross"/>
 <string name="poi_wayside_shrine">زیارتگاه بین راهی</string>
 <string name="poi_information">اطلاعات گردشگری</string>
 <string name="poi_clock">ساعت</string>
@@ -645,7 +645,7 @@
 <string name="poi_military_nuclear_explosion_site">محدوده هسته ای</string>
 
 <string name="poi_shop">مغازه</string>
-		<string name="poi_shop_food">اغذیه فروشی</string>
+		<string name="poi_shop_food">فروشگاه کوچک و فروشگاه بزرگ</string>
 	<string name="poi_fuel_avia_type">نوع جایگاه</string>
 	<string name="poi_payment_type">نوع پرداخت</string>
 	<string name="poi_payment_fuel_type">کارت سوخت</string>
@@ -678,7 +678,7 @@
 	<string name="poi_covered">سرپوشیده</string>
 	<string name="poi_bicycle_parking_type">نوع پارکینگ دوچرخه</string>
 	<string name="poi_service_car">میکانیکی</string>
-	<string name="poi_brushless">کارواش</string>
+	<string name="poi_brushless">بدون برس</string>
 	<string name="poi_self_service">سلف سرویس</string>
 	<string name="poi_subway_station_filter">ایستگاه مترو</string>
 	<string name="poi_ferry_terminal_cargo">ترمینال باربری</string>
