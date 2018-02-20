@@ -40,6 +40,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.LockableScrollView;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -50,6 +51,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
+import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -60,6 +62,7 @@ import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
+import java.util.Locale;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
@@ -489,29 +492,32 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			zoomButtonsView.setVisibility(View.GONE);
 		}
 
-		GridView transportStopRoutesGrid = (GridView) view.findViewById(R.id.transport_stop_routes_grid);
-		List<TransportStopRoute> transportStopRoutes = menu.getTransportStopRoutes();
-		if (transportStopRoutes != null && transportStopRoutes.size() > 0) {
-			final TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(getMyApplication(), transportStopRoutes, nightMode);
-			adapter.setListener(new TransportStopRouteAdapter.OnClickListener() {
-				@Override
-				public void onClick(int position) {
-					TransportStopRoute route = adapter.getItem(position);
-					if (route != null) {
-						PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
-								route.getDescription(getMapActivity().getMyApplication(), false));
-						menu.show(menu.getLatLon(), pd, route);
-						TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
-						stopsLayer.setRoute(route);
-						int cz = route.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
-						getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
-					}
-				}
-			});
-			transportStopRoutesGrid.setAdapter(adapter);
-			transportStopRoutesGrid.setVisibility(View.VISIBLE);
+		GridView localTransportStopRoutesGrid = (GridView) view.findViewById(R.id.transport_stop_routes_grid);
+		GridView nearbyTransportStopRoutesGrid = (GridView) view.findViewById(R.id.transport_stop_nearby_routes_grid);
+		TextView nearbRoutesWithinTv = (TextView) view.findViewById(R.id.nearby_routes_within_text_view);
+		LinearLayout nearbyRoutesLayout = (LinearLayout) view.findViewById(R.id.nearby_routes);
+
+		List<TransportStopRoute> localTransportStopRoutes = menu.getLocalTransportStopRoutes();
+		List<TransportStopRoute> nearbyTransportStopRoutes = menu.getNearbyTransportStopRoutes();
+		if (nightMode) {
+			nearbRoutesWithinTv.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_bottom_view_secondary_text_color_dark));
 		} else {
-			transportStopRoutesGrid.setVisibility(View.GONE);
+			nearbRoutesWithinTv.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_nearby_routes_text_color_dark));
+		}
+		if (localTransportStopRoutes != null && localTransportStopRoutes.size() > 0) {
+			localTransportStopRoutesGrid.setAdapter(createTransportStopRouteAdapter(localTransportStopRoutes));
+			localTransportStopRoutesGrid.setVisibility(View.VISIBLE);
+		} else {
+			localTransportStopRoutesGrid.setVisibility(View.GONE);
+		}
+		if (nearbyTransportStopRoutes != null && nearbyTransportStopRoutes.size() > 0) {
+			String nearInDistance = getMyApplication().getString(R.string.transport_nearby_routes) + " "
+					+ OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, getMyApplication()).toUpperCase() +":";
+			nearbRoutesWithinTv.setText(nearInDistance);
+			nearbyTransportStopRoutesGrid.setAdapter(createTransportStopRouteAdapter(nearbyTransportStopRoutes));
+			nearbyTransportStopRoutesGrid.setVisibility(View.VISIBLE);
+		} else {
+			nearbyRoutesLayout.setVisibility(View.GONE);
 		}
 
 		View buttonsBottomBorder = view.findViewById(R.id.buttons_bottom_border);
@@ -632,6 +638,26 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		created = true;
 		return view;
+	}
+
+	private TransportStopRouteAdapter createTransportStopRouteAdapter(List<TransportStopRoute> routes) {
+		final TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(getMyApplication(), routes, nightMode);
+		adapter.setListener(new TransportStopRouteAdapter.OnClickListener() {
+			@Override
+			public void onClick(int position) {
+				TransportStopRoute route = adapter.getItem(position);
+				if (route != null) {
+					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
+							route.getDescription(getMapActivity().getMyApplication(), false));
+					menu.show(menu.getLatLon(), pd, route);
+					TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+					stopsLayer.setRoute(route);
+					int cz = route.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
+					getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
+				}
+			}
+		});
+		return adapter;
 	}
 
 	private float getToolbarAlpha(int y) {

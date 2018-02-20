@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="transport_nearby_routes_within">Routes near in</string>
+    <string name="transport_nearby_routes">NEAR</string>
     <string name="enter_the_file_name">Enter the file name.</string>
     <string name="map_import_error">Map import error</string>
     <string name="map_imported_successfully">Map imported successfully</string>

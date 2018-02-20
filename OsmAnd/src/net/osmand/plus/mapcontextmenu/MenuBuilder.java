@@ -31,30 +31,25 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
+import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.widgets.TextViewEx;
@@ -310,8 +305,15 @@ public class MenuBuilder {
 			buildTitleRow(view);
 		}
 		if (showTransportRoutes()) {
-			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false),
+			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
 					false, 0, false, null, true);
+
+			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
+			if (collapsableView != null) {
+				String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS,app);
+				buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
+						false, 0, false, null, true);
+			}
 		}
 		buildNearestWikiRow(view);
 		if (needBuildPlainMenuItems()) {
@@ -835,29 +837,44 @@ public class MenuBuilder {
 		}
 	}
 
-	private CollapsableView getCollapsableTransportStopRoutesView(final Context context, boolean collapsed) {
+	private CollapsableView getCollapsableTransportStopRoutesView(final Context context, boolean collapsed, boolean isNearbyRoutes) {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, false);
-
-		for (int i = 0; i < routes.size(); i++) {
-			final TransportStopRoute r  = routes.get(i);
-			View.OnClickListener listener = new View.OnClickListener() {
-				@Override
-				public void onClick(View arg0) {
-					MapContextMenu mm = getMapActivity().getContextMenu();
-					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
-							r.getDescription(getMapActivity().getMyApplication(), false));
-					mm.show(latLon, pd, r);
-					TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
-					stopsLayer.setRoute(r);
-					int cz = r.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
-					getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
-				}
-			};
-			boolean showDivider = i < routes.size() - 1;
-			buildTransportRouteRow(view, r, listener, showDivider);
+		List<TransportStopRoute> localTransportStopRoutes = mapContextMenu.getLocalTransportStopRoutes();
+		List<TransportStopRoute> nearbyTransportStopRoutes = mapContextMenu.getNearbyTransportStopRoutes();
+		if (!isNearbyRoutes) {
+			buildTransportRouteRows(view, localTransportStopRoutes);
+		} else {
+			buildTransportRouteRows(view, nearbyTransportStopRoutes);
 		}
+		if (isNearbyRoutes && nearbyTransportStopRoutes.isEmpty()) {
+			return null;
+		} else {
+			return new CollapsableView(view, this, collapsed);
+		}
+	}
 
-		return new CollapsableView(view, this, collapsed);
+	private void buildTransportRouteRows(LinearLayout view, List<TransportStopRoute> routes) {
+		for (int i = 0; i < routes.size(); i++) {
+			final TransportStopRoute r = routes.get(i);
+			boolean showDivider = i < routes.size() - 1;
+			buildTransportRouteRow(view, r, createTransportRoutesViewClickListener(r), showDivider);
+		}
+	}
+
+	private View.OnClickListener createTransportRoutesViewClickListener(final TransportStopRoute r) {
+		return new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				MapContextMenu mm = getMapActivity().getContextMenu();
+				PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
+						r.getDescription(getMapActivity().getMyApplication(), false));
+				mm.show(latLon, pd, r);
+				TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+				stopsLayer.setRoute(r);
+				int cz = r.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
+				getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
+			}
+		};
 	}
 
 	protected CollapsableView getCollapsableTextView(Context context, boolean collapsed, String text) {
