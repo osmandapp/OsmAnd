@@ -64,13 +64,13 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
+		buildGroupFavouritesView(view);
 		if (originObject != null && originObject instanceof Amenity) {
 			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
 			builder.setLatLon(getLatLon());
 			builder.setLight(light);
 			builder.buildInternal(view);
 		}
-		buildGroupFavouritesView(view);
 	}
 
 	private void buildGroupFavouritesView(View view) {
