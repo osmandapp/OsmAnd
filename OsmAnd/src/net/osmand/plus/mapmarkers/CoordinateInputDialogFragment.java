@@ -391,11 +391,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 			});
 
+			@ColorRes int colorId = lightTheme ? R.color.dashboard_blue : R.color.ctx_menu_direction_color_dark;
 			boolean lat = id == R.id.lat_side_of_the_world_btn;
-			Drawable icon = getColoredIcon(lat ? R.drawable.ic_action_coordinates_longitude
-					: R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue);
+			Drawable icon = getColoredIcon(
+					lat ? R.drawable.ic_action_coordinates_longitude : R.drawable.ic_action_coordinates_latitude, colorId
+			);
 			((ImageView) sideOfTheWorldBtn.findViewById(lat ? R.id.north_side_iv : R.id.west_side_iv)).setImageDrawable(icon);
 			((ImageView) sideOfTheWorldBtn.findViewById(lat ? R.id.south_side_iv : R.id.east_side_iv)).setImageDrawable(icon);
+			((TextView) sideOfTheWorldBtn.findViewById(lat ? R.id.lat_side_of_the_world_tv : R.id.lon_side_of_the_world_tv))
+					.setTextColor(getResolvedColor(colorId));
 
 			updateSideOfTheWorldBtn(sideOfTheWorldBtn, false);
 		}
