@@ -2790,4 +2790,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \n - Einkahópar takmarkast við 8 einstaklinga
 \n - Ítarlega notkunarskilmála má skoða á OsMo.mobi vefsvæðinu
 \n - Ef þú þarft sértæk skilyrði - hafðu samband við aðstoðina: osmo.mobi@gmail.com"</string>
+    <string name="transport_nearby_routes_within">Leiðir nálægt eftir</string>
+    <string name="transport_nearby_routes">NÁLÆGT</string>
     </resources>
