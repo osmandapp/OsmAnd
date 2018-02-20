@@ -3643,4 +3643,30 @@
 
 	<string name="poi_fire_operator">Tilheyrir slökkviliði</string>
 
-	</resources>
+	<string name="poi_socket_chademo_output_filter">CHAdeMO úttak</string>
+	<string name="poi_socket_type2_output_filter">Type 2 úttak</string>
+	<string name="poi_socket_type2_combo_output_filter">Type 2 combo úttak</string>
+	<string name="poi_socket_type3_output_filter">Type 3 úttak</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE blátt úttak</string>
+	<string name="poi_socket_schuko_output_filter">Schuko úttak</string>
+
+<string name="poi_socket_chademo_output_high">Hár</string>
+	<string name="poi_socket_chademo_output_medium">Miðlungs</string>
+	<string name="poi_socket_chademo_output_low">Lágur</string>
+	<string name="poi_socket_type2_output_high">Hár</string>
+	<string name="poi_socket_type2_output_medium">Miðlungs</string>
+	<string name="poi_socket_type2_output_low">Lágur</string>
+	<string name="poi_socket_type2_combo_output_high">Hár</string>
+	<string name="poi_socket_type2_combo_output_medium">Miðlungs</string>
+	<string name="poi_socket_type2_combo_output_low">Lágur</string>
+	<string name="poi_socket_type3_output_high">Hár</string>
+	<string name="poi_socket_type3_output_medium">Miðlungs</string>
+	<string name="poi_socket_type3_output_low">Lágur</string>
+	<string name="poi_socket_cee_blue_output_high">Hár</string>
+	<string name="poi_socket_cee_blue_output_medium">Miðlungs</string>
+	<string name="poi_socket_cee_blue_output_low">Lágur</string>
+	<string name="poi_socket_schuko_output_high">Hár</string>
+	<string name="poi_socket_schuko_output_medium">Miðlungs</string>
+	<string name="poi_socket_schuko_output_low">Lágur</string>
+
+</resources>
