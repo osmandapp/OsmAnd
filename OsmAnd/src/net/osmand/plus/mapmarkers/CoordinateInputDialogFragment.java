@@ -95,6 +95,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private View mainView;
 	private final List<EditTextEx> editTexts = new ArrayList<>();
 	private CoordinateInputAdapter adapter;
+	private ImageView showHideKeyboardIcon;
 
 	private boolean lightTheme;
 	private boolean orientationPortrait;
@@ -225,6 +226,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			ImageView lonBackspaceBtn = (ImageView) mainView.findViewById(R.id.lon_backspace_btn);
 			lonBackspaceBtn.setImageDrawable(getActiveIcon(R.drawable.ic_action_clear_all_fields));
 			lonBackspaceBtn.setOnClickListener(backspaceOnClickListener);
+
+			showHideKeyboardIcon = (ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon);
 		} else {
 			boolean rightHand = getMyApplication().getSettings().COORDS_INPUT_USE_RIGHT_SIDE.get();
 			LinearLayout handContainer = (LinearLayout) mainView.findViewById(R.id.hand_container);
@@ -235,6 +238,16 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			setBackgroundColor(keyboardAndListView, lightTheme ? R.color.ctx_menu_info_view_bg_light : R.color.coordinate_input_markers_list_bg_dark);
 			((FrameLayout) handContainer.findViewById(R.id.left_container)).addView(rightHand ? dataAreaView : keyboardAndListView, 0);
 			((FrameLayout) handContainer.findViewById(R.id.right_container)).addView(rightHand ? keyboardAndListView : dataAreaView, 0);
+
+			if (rightHand) {
+				showHideKeyboardIcon = (ImageView) dataAreaView.findViewById(R.id.show_hide_keyboard_icon_right);
+				showHideKeyboardIcon.setVisibility(View.VISIBLE);
+				dataAreaView.findViewById(R.id.show_hide_keyboard_icon_left).setVisibility(View.GONE);
+			} else {
+				showHideKeyboardIcon = (ImageView) dataAreaView.findViewById(R.id.show_hide_keyboard_icon_left);
+				showHideKeyboardIcon.setVisibility(View.VISIBLE);
+				dataAreaView.findViewById(R.id.show_hide_keyboard_icon_right).setVisibility(View.GONE);
+			}
 
 			handContainer.findViewById(R.id.input_area_top_padding).setVisibility(View.VISIBLE);
 			handContainer.findViewById(R.id.point_name_top_space).setVisibility(View.VISIBLE);
@@ -338,7 +351,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		});
 
-		final ImageView showHideKeyboardIcon = (ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon);
 		showHideKeyboardIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_keyboard_hide));
 		showHideKeyboardIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -712,8 +724,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		} else {
 			mainView.findViewById(R.id.keyboard_layout).setVisibility(visibility);
 		}
-		((ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon)).setImageDrawable(getActiveIcon(show
-				? R.drawable.ic_action_keyboard_hide : R.drawable.ic_action_keyboard_show));
+		showHideKeyboardIcon.setImageDrawable(
+				getActiveIcon(show ? R.drawable.ic_action_keyboard_hide : R.drawable.ic_action_keyboard_show)
+		);
 	}
 
 	private void switchEditText(int currentId, boolean toNext) {

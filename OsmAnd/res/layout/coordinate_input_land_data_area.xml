@@ -26,15 +26,28 @@
 		android:layout_width="match_parent"
 		android:layout_height="56dp">
 
-		<android.support.v7.widget.AppCompatTextView
-			android:id="@+id/add_marker_button"
-			android:layout_width="0dp"
+		<ImageView
+			android:id="@+id/show_hide_keyboard_icon_left"
+			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:layout_gravity="center_vertical"
 			android:layout_marginBottom="@dimen/route_info_button_go_margin"
 			android:layout_marginLeft="@dimen/route_info_button_go_margin"
 			android:layout_marginStart="@dimen/route_info_button_go_margin"
 			android:layout_marginTop="@dimen/route_info_button_go_margin"
+			android:background="?attr/selectableItemBackground"
+			android:paddingLeft="@dimen/coords_input_show_hide_keyboard_btn_padding"
+			android:paddingRight="@dimen/coords_input_show_hide_keyboard_btn_padding"
+			android:visibility="gone"
+			tools:src="@drawable/ic_action_keyboard_hide"
+			tools:visibility="visible"/>
+
+		<android.support.v7.widget.AppCompatTextView
+			android:id="@+id/add_marker_button"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_gravity="center_vertical"
+			android:layout_margin="@dimen/route_info_button_go_margin"
 			android:layout_weight="1"
 			android:ellipsize="end"
 			android:gravity="center"
@@ -47,11 +60,14 @@
 			tools:background="@drawable/route_info_go_btn_bg_dark"/>
 
 		<ImageView
-			android:id="@+id/show_hide_keyboard_icon"
+			android:id="@+id/show_hide_keyboard_icon_right"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:layout_gravity="center_vertical"
-			android:layout_margin="@dimen/route_info_button_go_margin"
+			android:layout_marginBottom="@dimen/route_info_button_go_margin"
+			android:layout_marginEnd="@dimen/route_info_button_go_margin"
+			android:layout_marginRight="@dimen/route_info_button_go_margin"
+			android:layout_marginTop="@dimen/route_info_button_go_margin"
 			android:background="?attr/selectableItemBackground"
 			android:paddingLeft="@dimen/coords_input_show_hide_keyboard_btn_padding"
 			android:paddingRight="@dimen/coords_input_show_hide_keyboard_btn_padding"
