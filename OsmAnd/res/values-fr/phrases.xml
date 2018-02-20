@@ -3263,4 +3263,24 @@
 
 	<string name="poi_cuisine_doner">Shawarma</string>
 	<string name="poi_cuisine_gastropub">Gastropub</string>
+	<string name="poi_climbing_style">Style d\'escalade</string>
+	<string name="poi_nuclear_explosion_country">Explosion : pays</string>
+	<string name="poi_nuclear_explosion_site">Explosion : site</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Type d\'explosion : atmosphérique</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Explosion : diamètre du cratère</string>
+	<string name="poi_nuclear_explosion_warhead">Explosion : ogive</string>
+	<string name="poi_medical_system_mongolian_yes">Mongol traditionnel</string>
+	<string name="poi_medical_system_tibetan_yes">Tibétain traditionnel</string>
+	<string name="poi_health_service_nursing_yes">Service de santé : soins infirmiers : oui</string>
+	<string name="poi_health_service_nursing_no">Services de santé : soins infirmiers : non</string>
+	<string name="poi_health_service_counselling_yes">Services de santé : conseil : oui</string>
+	<string name="poi_health_service_counselling_no">Services de santé: conseil: non</string>
+	<string name="poi_health_service_examination_yes">Services de santé : examen médical : oui</string>
+	<string name="poi_health_service_examination_no">Services de santé : examen médical : non</string>
+	<string name="poi_health_service_child_care_yes">Services de santé : soin de l\'enfant : oui</string>
+	<string name="poi_health_service_child_care_no">Services de santé : soin de l\'enfant : non</string>
+	<string name="poi_health_service_prevention_yes">Services de santé : prévention : oui</string>
+	<string name="poi_health_service_prevention_no">Services de santé : prévention : non</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Services de santé : vaccination : oui</string>
+	<string name="poi_health_service_prevention_vaccination_no">Services de santé : vaccination : non</string>
 	</resources>
