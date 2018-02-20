@@ -2124,4 +2124,5 @@
     <string name="track_points_category_name">Puncte proeminente ale acestei rute</string>
     <string name="shared_string_time_moving">Trecerea timpului</string>
     <string name="shared_string_time_span">Interval de timp</string>
+    <string name="points_delete_multiple">Urmează să ștegeți %1$d punct(e). Sunteți sigur(ă)?</string>
     </resources>

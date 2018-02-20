@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="osb_author_or_password_not_specified">Моля, въведете потребителско име и парола за сайта на OSM</string>
     <string name="clear_intermediate_points">Изчистване на междинните точки</string>
     <string name="keep_intermediate_points">Запази междинните точки</string>
@@ -2158,11 +2159,11 @@
     <string name="skip_map_downloading_desc">Вие нямате инсталирана никаква офлайн карта. Можете да изберете карта от списъка или да изтеглите карти по-късно чрез Меню - %1$s.</string>
     <string name="search_another_country">Изберете друг регион</string>
     <string name="search_map">Търсене на сайта …</string>
-    <string name="first_usage_wizard_desc">Нека OsmAnd определи местоположението си и да предложи карти, за да свалите този регион.</string>
+    <string name="first_usage_wizard_desc">Нека OsmAnd определи Вашето местоположение и да Ви предложи карти за изтегляне.</string>
     <string name="location_not_found">Местоположението не е намерено</string>
-    <string name="no_inet_connection">Няма връзка с интернет</string>
+    <string name="no_inet_connection">Няма връзка с Интернет</string>
     <string name="no_inet_connection_desc_map">Задължително за изтегляне на карти.</string>
-    <string name="search_location">Търсене място …</string>
+    <string name="search_location">Търсене мястото…</string>
     <string name="storage_free_space">Свободно пространство</string>
     <string name="storage_place_description">OsmAnd за съхранение на данни (за карти, записи и т.н.): %1$s.</string>
     <string name="give_permission">даде разрешение</string>
@@ -2192,4 +2193,33 @@
     <string name="shared_string_add_photos">Добавяне на снимки</string>
     <string name="no_photos_descr">Ние нямаме снимки за това местоположение</string>
     <string name="mapillary_action_descr">Допринесе с ваши собствени снимки на улично ниво за това място чрез Mapillary.</string>
+    <string name="map_import_error">Грешка при внасянето на картата</string>
+    <string name="map_imported_successfully">Успешно внасяне на карта</string>
+    <string name="make_as_start_point">Отбележете като начало</string>
+    <string name="shared_string_current">Текущ</string>
+    <string name="show_closed_notes">Покажи затворените бележки</string>
+    <string name="gpx_file">GPX файл</string>
+    <string name="all_data">Всички данни</string>
+    <string name="osm_notes">OSM бележки</string>
+    <string name="will_open_tomorrow_at">Ще отвори утре в</string>
+    <string name="rendering_attr_hidePOILabels_name">POI етикети</string>
+    <string name="shared_string_without_name">Без име</string>
+    <string name="without_time_limit">Без ограничение във времето</string>
+    <string name="context_menu_read_full_article">Прочетете цялата статия</string>
+    <string name="context_menu_read_article">Прочетете статията</string>
+    <string name="context_menu_points_of_group">Всички точки в групата</string>
+    <string name="open_from">Отворено от</string>
+    <string name="open_till">Отворено до</string>
+    <string name="will_close_at">Ще се затвори в</string>
+    <string name="will_open_at">Ще отвори в</string>
+    <string name="will_open_on">Ще отвори в</string>
+    <string name="additional_actions">Допълнителни действия</string>
+    <string name="av_locations_selected_desc">GPX файл с координати и данни от избрани бележки.</string>
+    <string name="av_locations_all_desc">GPX файл с координати и данни от всички бележки.</string>
+    <string name="release_3_0">\\022 
+\n</string>
+    <string name="modify_the_search_query">Променете заявката за търсене.</string>
+    <string name="shared_string_actions">Действия</string>
+    <string name="shared_string_marker">Маркер</string>
+    <string name="empty_state_osm_edits">Създаване или промяна на OSM обекти</string>
     </resources>

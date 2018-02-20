@@ -2076,7 +2076,7 @@
     <string name="osm_live_subscribe_btn">اشتراک</string>
     <string name="osm_live_user_public_name">اسم جهانی</string>
     <string name="osm_live_hide_user_name">اسم من را در گزارش‌ها نشان نده</string>
-    <string name="osm_live_support_region">منطقهٔ تحتِ‌پوشش</string>
+    <string name="osm_live_support_region">منطقهٔ تحت پوشش</string>
     <string name="osm_live_month_cost">هزینهٔ ماهانه</string>
     <string name="osm_live_month_cost_desc">پرداخت ماهیانه.</string>
     <string name="osm_live_active">فعال</string>
