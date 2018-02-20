@@ -239,15 +239,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			((FrameLayout) handContainer.findViewById(R.id.left_container)).addView(rightHand ? dataAreaView : keyboardAndListView, 0);
 			((FrameLayout) handContainer.findViewById(R.id.right_container)).addView(rightHand ? keyboardAndListView : dataAreaView, 0);
 
-			if (rightHand) {
-				showHideKeyboardIcon = (ImageView) dataAreaView.findViewById(R.id.show_hide_keyboard_icon_right);
-				showHideKeyboardIcon.setVisibility(View.VISIBLE);
-				dataAreaView.findViewById(R.id.show_hide_keyboard_icon_left).setVisibility(View.GONE);
-			} else {
-				showHideKeyboardIcon = (ImageView) dataAreaView.findViewById(R.id.show_hide_keyboard_icon_left);
-				showHideKeyboardIcon.setVisibility(View.VISIBLE);
-				dataAreaView.findViewById(R.id.show_hide_keyboard_icon_right).setVisibility(View.GONE);
-			}
+			showHideKeyboardIcon = (ImageView) dataAreaView.findViewById(rightHand ? R.id.show_hide_keyboard_icon_right : R.id.show_hide_keyboard_icon_left);
+			showHideKeyboardIcon.setVisibility(View.VISIBLE);
+			dataAreaView.findViewById(rightHand ? R.id.show_hide_keyboard_icon_left : R.id.show_hide_keyboard_icon_right).setVisibility(View.GONE);
 
 			handContainer.findViewById(R.id.input_area_top_padding).setVisibility(View.VISIBLE);
 			handContainer.findViewById(R.id.point_name_top_space).setVisibility(View.VISIBLE);
