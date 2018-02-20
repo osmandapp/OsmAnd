@@ -194,6 +194,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		if (groupNameToShow != null) {
 			int position = favouritesAdapter.getGroupPosition(groupNameToShow);
 			if (position != -1) {
+				listView.expandGroup(position);
 				listView.setSelectedGroup(position);
 			}
 		}

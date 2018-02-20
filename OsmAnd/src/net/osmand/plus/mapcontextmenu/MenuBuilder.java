@@ -301,9 +301,6 @@ public class MenuBuilder {
 	public void build(View view) {
 		firstRow = true;
 		hidden = false;
-		if (showTitleIfTruncated) {
-			buildTitleRow(view);
-		}
 		if (showTransportRoutes()) {
 			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
 					false, 0, false, null, true);
@@ -315,11 +312,14 @@ public class MenuBuilder {
 						false, 0, false, null, true);
 			}
 		}
+		buildInternal(view);
+		if (showTitleIfTruncated) {
+			buildTitleRow(view);
+		}
 		buildNearestWikiRow(view);
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
 		}
-		buildInternal(view);
 		if (showOnlinePhotos) {
 			buildNearestPhotosRow(view);
 		}
