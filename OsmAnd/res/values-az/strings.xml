@@ -1025,7 +1025,7 @@
     <string name="mapillary">Mapillary</string>
     <string name="private_access_routing_req">Təyinat nöqtəniz xüsusi girişi olan ərazidə yerləşir. Bu səyahət üçün xüsusi yollara giriş icazəsi vermək istəyirsiniz?</string>
     <string name="shared_string_plugin">Qoşma</string>
-    <string name="srtm_purchase_header">Xəritədə kontur xətlərini görmək üçün Kontur Xətləri qoşmasını almaq və quraşdırmaq lazımdır</string>
+    <string name="srtm_purchase_header">Xəritədə kontur xətlərini görmək üçün Kontur xətləri qoşmasını almaq və quraşdırmaq lazımdır</string>
     <string name="plugin_settings">Qoşmalar</string>
     <string name="srtm_paid_version_title">Kontur xətləri qoşması</string>
     <string name="osmand_srtm_short_description_80_chars">Oflayn kontur xətləri üçün OsmAnd qoşması</string>
@@ -1763,7 +1763,7 @@
     <string name="appearance_on_the_map">Xəritədə görünüş</string>
     <string name="add_favourites_group_to_markers_descr">İşarələrə əlavə etmək üçün favorit kateqoriya seçin.</string>
     <string name="favourites_group">Favoritlər kateqoriyası</string>
-    <string name="empty_state_markers_active">Xəritə işarələri yaradın!</string>
+    <string name="empty_state_markers_active">Xəritə işarələri yarat!</string>
     <string name="empty_state_markers_active_desc">Yerlərə uzun və ya qısa basın, sonra bayraq düyməsinə toxunun.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="digits_quantity">Onluq rəqəmlərin sayı</string>
@@ -2011,4 +2011,20 @@
     <string name="quick_action_duplicate">Sürətli fəaliyyət adı təkrardır</string>
     <string name="quick_action_gpx_category_descr">Kateqoriya seçin (məcbur deyil).</string>
     <string name="add_line">Xətt əlavə et</string>
+    <string name="recalculate_route_to_your_location">Nəqliyyat rejimi:</string>
+    <string name="select_navigation_mode">Nəqliyyat rejimi seçin</string>
+    <string name="avoid_ferries">Bərələrdən yayın</string>
+    <string name="gps_wakeup_interval">GPS oyandırma intervalı: %s</string>
+    <string name="map_widget_monitoring">GPX qeydiyyatı</string>
+    <string name="map_widget_next_turn">Növbəti döngə</string>
+    <string name="map_widget_next_turn_small">Növbəti döngə (kiçik)</string>
+    <string name="map_widget_next_next_turn">İkinci növbəti döngə</string>
+    <string name="map_widget_mini_route">Mini marşrut xəritəsi</string>
+    <string name="bg_service_interval">Oyandırma intervalı qurun:</string>
+    <string name="continue_follow_previous_route_auto">Əvvəlki naviqasiya tamamlanmayıb. Onu davam etdirmək istəyirsiniz? (%1$s saniyə)</string>
+    <string name="route_updated_loc_found">Mövqe tapıldıqdan sonra marşrut hesablanacaq</string>
+    <string name="global_app_allocated_memory_descr">Ayrılan yaddaş %1$s MB (Android limiti %2$s MB, Dalvik %3$s MB).</string>
+    <string name="global_app_allocated_memory">Ayrılan yaddaş</string>
+    <string name="native_app_allocated_memory_descr">Proqram tərəfindən ayrılan ümumi yaddaş %1$s MB (Dalvik %2$s MB, digər %3$s MB). Proporsional yaddaş %4$s MB (Android limiti %5$s MB, Dalvik %6$s MB).</string>
+    <string name="native_app_allocated_memory">Ümumi yerli yaddaş</string>
     </resources>
