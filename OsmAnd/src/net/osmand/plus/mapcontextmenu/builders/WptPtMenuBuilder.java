@@ -47,6 +47,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
+		buildWaypointsView(view);
 		if (wpt.time > 0) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
 			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
@@ -89,7 +90,6 @@ public class WptPtMenuBuilder extends MenuBuilder {
 			});
 		}
 
-		buildWaypointsView(view);
 		buildPlainMenuItems(view);
 	}
 
