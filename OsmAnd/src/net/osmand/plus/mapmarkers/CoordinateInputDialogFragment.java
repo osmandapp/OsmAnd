@@ -960,12 +960,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					int action = event.getAction();
 					if (action == MotionEvent.ACTION_DOWN) {
 						v.setBackgroundColor(getResolvedColor(R.color.keyboard_item_bg_pressed));
-						if (listener != null) {
-							listener.onClick(v);
-						}
+						v.invalidate();
 						return true;
 					}
 					setNormalBackground(v, controlButton);
+					if (listener != null) {
+						listener.onClick(v);
+					}
 					return false;
 				}
 			});
