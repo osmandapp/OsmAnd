@@ -65,6 +65,10 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	@SuppressWarnings("deprecation")
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
+		background = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bg);
+		paintWhiteIcon = new Paint();
+		filter = new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(), R.color.primary_text_dark), PorterDuff.Mode.SRC_IN);
+		paintWhiteIcon.setColorFilter(filter);
 		this.view = view;
 		DisplayMetrics dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -186,10 +190,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
-		background = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bg);
-		paintWhiteIcon = new Paint();
-		filter = new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(), R.color.primary_text_dark), PorterDuff.Mode.SRC_IN);
-		paintWhiteIcon.setColorFilter(filter);
 		List<TransportStop> objects = null;
 		if (tb.getZoom() >= startZoomRoute) {
 			if (stopRoute != null) {
