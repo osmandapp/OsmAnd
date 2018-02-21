@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
@@ -22,6 +23,7 @@ import net.osmand.osm.edit.Way;
 import net.osmand.plus.R;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.transport.TransportStopType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -231,12 +233,74 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 				Bitmap b = stopBus;
-				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+				if (stopRoute != null) {
+					TransportStopType type = TransportStopType.findType(stopRoute.route.getType());
+					if (type != null) {
+						int map_transport_stop_bg = R.drawable.map_transport_stop_bg;
+
+						BitmapFactory.Options options = new BitmapFactory.Options();
+						options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+						Bitmap background = BitmapFactory.decodeResource(view.getResources(), map_transport_stop_bg, options);
+						Bitmap foreground = BitmapFactory.decodeResource(view.getResources(), getIconIdByTypeOfStop(type), options);
+
+						Bitmap m = overlayBitmapToCenter(background, foreground);
+						canvas.drawBitmap(m, x - m.getWidth() / 2, y - m.getHeight() / 2, paintIcon);
+
+					}
+				} else {
+					canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+				}
 			}
 		}
 
 	}
-	
+
+	public int getIconIdByTypeOfStop(TransportStopType type) {
+		int id;
+		switch (type) {
+			case BUS: id= R.drawable.mm_route_bus_ref;
+				break;
+			case FERRY: id= R.drawable.mm_route_ferry_ref;
+				break;
+			case FUNICULAR: id= R.drawable.mm_route_funicular_ref;
+				break;
+			case LIGHT_RAIL: id= R.drawable.mm_route_light_rail_ref;
+				break;
+			case MONORAIL: id= R.drawable.mm_route_monorail_ref;
+				break;
+			case RAILWAY: id= R.drawable.mm_route_railway_ref;
+				break;
+			case SHARE_TAXI: id= R.drawable.mm_route_share_taxi_ref;
+				break;
+			case TRAIN: id= R.drawable.mm_route_train_ref;
+				break;
+			case TRAM: id= R.drawable.mm_route_tram_ref;
+				break;
+			case TROLLEYBUS: id= R.drawable.mm_route_trolleybus_ref;
+				break;
+			case SUBWAY: id= R.drawable.mm_subway_station;
+				break;
+			default: id=-1;
+				break;
+		}
+		return id;
+	}
+
+	public Bitmap overlayBitmapToCenter(Bitmap bitmap1, Bitmap bitmap2) {
+		int bitmap1Width = bitmap1.getWidth();
+		int bitmap1Height = bitmap1.getHeight();
+		int bitmap2Width = bitmap2.getWidth();
+		int bitmap2Height = bitmap2.getHeight();
+
+		float marginLeft = (float) (bitmap1Width * 0.5 - bitmap2Width * 0.5);
+		float marginTop = (float) (bitmap1Height * 0.5 - bitmap2Height * 0.5);
+
+		Bitmap overlayBitmap = Bitmap.createBitmap(bitmap1Width, bitmap1Height, bitmap1.getConfig());
+		Canvas canvas = new Canvas(overlayBitmap);
+		canvas.drawBitmap(bitmap1, new Matrix(), null);
+		canvas.drawBitmap(bitmap2, marginLeft, marginTop, null);
+		return overlayBitmap;
+	}
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 	}
