@@ -95,14 +95,7 @@
 		android:layout_gravity="bottom"
 		android:orientation="vertical">
 
-		<GridView
-			android:id="@+id/keyboard_grid_view"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:horizontalSpacing="1dp"
-			android:numColumns="4"
-			android:stretchMode="columnWidth"
-			android:verticalSpacing="1dp"/>
+		<include layout="@layout/coordinate_input_keyboard"/>
 
 		<View
 			android:id="@+id/keyboard_divider"

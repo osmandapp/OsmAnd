@@ -37,10 +37,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -78,12 +76,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	public static final String USE_OSMAND_KEYBOARD = "use_osmand_keyboard";
 
-	private static final int SWITCH_TO_NEXT_INPUT_BUTTON_POSITION = 3;
-	private static final int MINUS_BUTTON_POSITION = 7;
-	private static final int BACKSPACE_BUTTON_POSITION = 11;
-	private static final int COLON_BUTTON_POSITION = 12;
-	private static final int POINT_BUTTON_POSITION = 14;
-	private static final int CLEAR_BUTTON_POSITION = 15;
 	private static final String LATITUDE_LABEL = "latitude";
 	private static final String LONGITUDE_LABEL = "longitude";
 	private static final String NAME_LABEL = "name";
@@ -301,32 +293,28 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		});
 
-		mainView.findViewById(R.id.keyboard_layout).setBackgroundResource(lightTheme ? R.drawable.bg_bottom_menu_light : R.drawable.bg_coordinate_input_keyboard_dark);
+		mainView.findViewById(R.id.keyboard_layout).setBackgroundResource(lightTheme
+				? R.drawable.bg_bottom_menu_light : R.drawable.bg_coordinate_input_keyboard_dark);
 
-		Object[] keyboardItems = new Object[]{
-				"1", "2", "3", R.drawable.ic_keyboard_next_field,
-				"4", "5", "6", "-",
-				"7", "8", "9", R.drawable.ic_keyboard_backspace,
-				":", "0", ".", getString(R.string.shared_string_clear)
-		};
-		final GridView keyboardGrid = (GridView) mainView.findViewById(R.id.keyboard_grid_view);
+		View keyboardView = mainView.findViewById(R.id.keyboard_view);
+
 		int dividersColorResId = lightTheme ? R.color.keyboard_divider_light : R.color.keyboard_divider_dark;
-		setBackgroundColor(keyboardGrid, dividersColorResId);
+		setBackgroundColor(keyboardView, dividersColorResId);
 		setBackgroundColor(R.id.keyboard_divider, dividersColorResId);
-		final KeyboardAdapter keyboardAdapter = new KeyboardAdapter(mapActivity, keyboardItems);
-		keyboardAdapter.setListener(new View.OnClickListener() {
+
+		View.OnClickListener onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				int position = keyboardGrid.getPositionForView(v);
 				if (useOsmandKeyboard) {
 					View focusedView = getDialog().getCurrentFocus();
 					if (focusedView != null && focusedView instanceof EditText) {
 						EditText focusedEditText = (EditText) focusedView;
-						switch (position) {
-							case CLEAR_BUTTON_POSITION:
+						int id = v.getId();
+						switch (id) {
+							case R.id.keyboard_item_clear:
 								focusedEditText.setText("");
 								break;
-							case BACKSPACE_BUTTON_POSITION:
+							case R.id.keyboard_item_backspace:
 								String str = focusedEditText.getText().toString();
 								if (str.length() > 0) {
 									str = str.substring(0, str.length() - 1);
@@ -336,18 +324,32 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 									switchEditText(focusedEditText.getId(), false);
 								}
 								break;
-							case SWITCH_TO_NEXT_INPUT_BUTTON_POSITION:
+							case R.id.keyboard_item_next_field:
 								switchEditText(focusedEditText.getId(), true);
 								break;
 							default:
-								focusedEditText.setText(focusedEditText.getText().toString() + keyboardAdapter.getItem(position));
+								focusedEditText.setText(focusedEditText.getText().toString() + getItemObjectById(id));
 								focusedEditText.setSelection(focusedEditText.getText().length());
 						}
 					}
 				}
 			}
-		});
-		keyboardGrid.setAdapter(keyboardAdapter);
+		};
+
+		setupKeyboardItems(keyboardView, onClickListener,
+				R.id.keyboard_item_0,
+				R.id.keyboard_item_1,
+				R.id.keyboard_item_2,
+				R.id.keyboard_item_3,
+				R.id.keyboard_item_4,
+				R.id.keyboard_item_5,
+				R.id.keyboard_item_6,
+				R.id.keyboard_item_7,
+				R.id.keyboard_item_8,
+				R.id.keyboard_item_9,
+				R.id.keyboard_item_clear,
+				R.id.keyboard_item_next_field,
+				R.id.keyboard_item_backspace);
 
 		showHideKeyboardIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_keyboard_hide));
 		showHideKeyboardIcon.setOnClickListener(new View.OnClickListener() {
@@ -361,6 +363,97 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				changeOsmandKeyboardVisibility(!isCurrentlyVisible);
 			}
 		});
+	}
+
+	private void setupKeyboardItems(View keyboardView, View.OnClickListener listener, @IdRes int... itemsIds) {
+		@DrawableRes int itemBg = lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg;
+		@DrawableRes int controlItemBg = lightTheme ? R.drawable.keyboard_item_control_light_bg : R.drawable.keyboard_item_control_dark_bg;
+
+		ColorStateList clearItemTextColorStateList = AndroidUtils.createColorStateList(getContext(),
+				R.color.keyboard_item_divider_control_color_light, R.color.keyboard_item_divider_control_color_light_pressed);
+		ColorStateList numberColorStateList = AndroidUtils.createColorStateList(getContext(),
+				R.color.keyboard_item_text_color_light, R.color.keyboard_item_text_color_light_pressed);
+
+		@ColorInt int textColorDark = getResolvedColor(R.color.keyboard_item_text_color_dark);
+
+		for (@IdRes int id : itemsIds) {
+			View itemView = keyboardView.findViewById(id);
+			Object item = getItemObjectById(id);
+			final boolean controlItem = id == R.id.keyboard_item_next_field || id == R.id.keyboard_item_backspace;
+
+			itemView.setBackgroundResource(controlItem ? controlItemBg : itemBg);
+			itemView.setOnClickListener(listener);
+
+			View itemTopSpace = itemView.findViewById(R.id.keyboard_item_top_spacing);
+			View itemBottomSpace = itemView.findViewById(R.id.keyboard_item_bottom_spacing);
+			TextView itemTv = (TextView) itemView.findViewById(R.id.keyboard_item_text);
+			ImageView itemIv = (ImageView) itemView.findViewById(R.id.keyboard_item_image);
+
+			if (item instanceof String) {
+				boolean clearItem = id == R.id.keyboard_item_clear;
+				if (clearItem) {
+					TextViewCompat.setAutoSizeTextTypeWithDefaults(itemTv, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE);
+					itemTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.default_list_text_size));
+				} else {
+					TextViewCompat.setAutoSizeTextTypeWithDefaults(itemTv, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+				}
+				if (lightTheme) {
+					itemTv.setTextColor(clearItem ? clearItemTextColorStateList : numberColorStateList);
+				} else {
+					itemTv.setTextColor(clearItem ? getResolvedColor(R.color.keyboard_item_divider_control_color_dark) : textColorDark);
+				}
+				itemTopSpace.setVisibility(View.VISIBLE);
+				itemTv.setVisibility(View.VISIBLE);
+				itemTv.setText((String) item);
+				itemIv.setVisibility(View.GONE);
+				itemBottomSpace.setVisibility(View.VISIBLE);
+			} else if (item instanceof Integer) {
+				itemTopSpace.setVisibility(View.GONE);
+				itemTv.setVisibility(View.GONE);
+				itemIv.setVisibility(View.VISIBLE);
+				itemBottomSpace.setVisibility(View.GONE);
+				Drawable icon;
+				if (lightTheme) {
+					icon = DrawableCompat.wrap(getResources().getDrawable((Integer) item));
+					DrawableCompat.setTintList(icon, numberColorStateList);
+				} else {
+					icon = getColoredIcon((Integer) item, R.color.keyboard_item_divider_control_color_dark);
+				}
+				itemIv.setImageDrawable(icon);
+			}
+		}
+	}
+
+	private Object getItemObjectById(@IdRes int id) {
+		switch (id) {
+			case R.id.keyboard_item_0:
+				return "0";
+			case R.id.keyboard_item_1:
+				return "1";
+			case R.id.keyboard_item_2:
+				return "2";
+			case R.id.keyboard_item_3:
+				return "3";
+			case R.id.keyboard_item_4:
+				return "4";
+			case R.id.keyboard_item_5:
+				return "5";
+			case R.id.keyboard_item_6:
+				return "6";
+			case R.id.keyboard_item_7:
+				return "7";
+			case R.id.keyboard_item_8:
+				return "8";
+			case R.id.keyboard_item_9:
+				return "9";
+			case R.id.keyboard_item_clear:
+				return getString(R.string.shared_string_clear);
+			case R.id.keyboard_item_next_field:
+				return R.drawable.ic_keyboard_next_field;
+			case R.id.keyboard_item_backspace:
+				return R.drawable.ic_keyboard_backspace;
+		}
+		return -1;
 	}
 
 	@Override
@@ -710,14 +803,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	private boolean isOsmandKeyboardCurrentlyVisible() {
 		return orientationPortrait
-				? mainView.findViewById(R.id.keyboard_grid_view).getVisibility() == View.VISIBLE
+				? mainView.findViewById(R.id.keyboard_view).getVisibility() == View.VISIBLE
 				: mainView.findViewById(R.id.keyboard_layout).getVisibility() == View.VISIBLE;
 	}
 
 	private void changeOsmandKeyboardVisibility(boolean show) {
 		int visibility = show ? View.VISIBLE : View.GONE;
 		if (orientationPortrait) {
-			mainView.findViewById(R.id.keyboard_grid_view).setVisibility(visibility);
+			mainView.findViewById(R.id.keyboard_view).setVisibility(visibility);
 			mainView.findViewById(R.id.keyboard_divider).setVisibility(visibility);
 		} else {
 			mainView.findViewById(R.id.keyboard_layout).setVisibility(visibility);
@@ -919,117 +1012,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			app.getLocationProvider().removeLocationListener(this);
 			app.getLocationProvider().removeCompassListener(this);
 			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
-		}
-	}
-
-	private class KeyboardAdapter extends ArrayAdapter<Object> {
-
-		private final ColorStateList dividerControlColorStateList = AndroidUtils.createColorStateList(getContext(), false,
-				R.color.keyboard_item_divider_control_color_light, R.color.keyboard_item_divider_control_color_light_pressed,
-				0, 0);
-		private final ColorStateList numberColorStateList = AndroidUtils.createColorStateList(getContext(), false,
-				R.color.keyboard_item_text_color_light, R.color.keyboard_item_text_color_light_pressed,
-				0, 0);
-
-		private View.OnClickListener listener;
-
-		public void setListener(View.OnClickListener listener) {
-			this.listener = listener;
-		}
-
-		KeyboardAdapter(@NonNull Context context, @NonNull Object[] objects) {
-			super(context, 0, objects);
-		}
-
-		@NonNull
-		@Override
-		public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-			if (convertView == null) {
-				convertView = LayoutInflater.from(getContext()).inflate(R.layout.coordinate_input_keyboard_item, parent, false);
-			}
-			if (!orientationPortrait) {
-				int keyboardViewHeight = mainView.findViewById(R.id.keyboard_grid_view).getMeasuredHeight();
-				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
-				int spaceForKeys = keyboardViewHeight - 3 * dividerHeight;
-				convertView.setMinimumHeight(spaceForKeys / 4);
-			}
-			final boolean controlButton = position == CLEAR_BUTTON_POSITION
-					|| position == MINUS_BUTTON_POSITION
-					|| position == BACKSPACE_BUTTON_POSITION
-					|| position == SWITCH_TO_NEXT_INPUT_BUTTON_POSITION;
-			setupNormalState(convertView, controlButton);
-			convertView.setOnTouchListener(new View.OnTouchListener() {
-				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					int action = event.getAction();
-					if (action == MotionEvent.ACTION_DOWN) {
-						v.setBackgroundColor(getResolvedColor(R.color.keyboard_item_bg_pressed));
-						v.setPressed(true);
-						v.invalidate();
-					} else if (action == MotionEvent.ACTION_UP) {
-						setupNormalState(v, controlButton);
-						if (listener != null) {
-							listener.onClick(v);
-						}
-					} else if (action == MotionEvent.ACTION_CANCEL) {
-						setupNormalState(v, controlButton);
-					}
-					return true;
-				}
-			});
-			View keyboardItemTopSpacing = convertView.findViewById(R.id.keyboard_item_top_spacing);
-			View keyboardItemBottomSpacing = convertView.findViewById(R.id.keyboard_item_bottom_spacing);
-			TextView keyboardItemText = (TextView) convertView.findViewById(R.id.keyboard_item_text);
-			ImageView keyboardItemImage = (ImageView) convertView.findViewById(R.id.keyboard_item_image);
-			Object item = getItem(position);
-			if (item instanceof String) {
-				if (position == CLEAR_BUTTON_POSITION) {
-					TextViewCompat.setAutoSizeTextTypeWithDefaults(keyboardItemText, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE);
-					keyboardItemText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.default_list_text_size));
-				} else {
-					TextViewCompat.setAutoSizeTextTypeWithDefaults(keyboardItemText, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
-				}
-				boolean dividerControlButton = position == CLEAR_BUTTON_POSITION
-						|| position == MINUS_BUTTON_POSITION
-						|| position == POINT_BUTTON_POSITION
-						|| position == COLON_BUTTON_POSITION;
-				if (lightTheme) {
-					keyboardItemText.setTextColor(dividerControlButton ? dividerControlColorStateList : numberColorStateList);
-				} else {
-					keyboardItemText.setTextColor(getResolvedColor(dividerControlButton
-							? R.color.keyboard_item_divider_control_color_dark : R.color.keyboard_item_text_color_dark));
-				}
-				keyboardItemImage.setVisibility(View.GONE);
-				keyboardItemTopSpacing.setVisibility(View.VISIBLE);
-				keyboardItemBottomSpacing.setVisibility(View.VISIBLE);
-				keyboardItemText.setVisibility(View.VISIBLE);
-				keyboardItemText.setText((String) getItem(position));
-			} else if (item instanceof Integer) {
-				keyboardItemTopSpacing.setVisibility(View.GONE);
-				keyboardItemBottomSpacing.setVisibility(View.GONE);
-				keyboardItemText.setVisibility(View.GONE);
-				keyboardItemImage.setVisibility(View.VISIBLE);
-				Drawable icon;
-				if (lightTheme) {
-					icon = DrawableCompat.wrap(getResources().getDrawable((Integer) item));
-					DrawableCompat.setTintList(icon, numberColorStateList);
-				} else {
-					icon = getColoredIcon((Integer) item, R.color.keyboard_item_divider_control_color_dark);
-				}
-				keyboardItemImage.setImageDrawable(icon);
-			}
-
-			return convertView;
-		}
-
-		private void setupNormalState(View view, boolean controlButton) {
-			view.setBackgroundColor(
-					controlButton
-							? getResolvedColor(lightTheme ? R.color.keyboard_item_control_light_bg : R.color.keyboard_item_control_dark_bg)
-							: getResolvedColor(lightTheme ? R.color.keyboard_item_light_bg : R.color.keyboard_item_dark_bg)
-			);
-			view.setPressed(false);
-			view.invalidate();
 		}
 	}
 

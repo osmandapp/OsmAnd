@@ -142,6 +142,10 @@ public class AndroidUtils {
 		return null;
 	}
 
+	public static ColorStateList createColorStateList(Context ctx, @ColorRes int normal, @ColorRes int pressed) {
+		return createColorStateList(ctx, false, normal, pressed, 0, 0);
+	}
+
 	public static ColorStateList createColorStateList(Context ctx, boolean night,
 													  @ColorRes int lightNormal, @ColorRes int lightPressed,
 													  @ColorRes int darkNormal, @ColorRes int darkPressed) {

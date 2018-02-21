@@ -264,4 +264,5 @@
 	<dimen name="side_of_the_world_button_size">36dp</dimen>
 
 	<dimen name="coords_input_show_hide_keyboard_btn_padding">13dp</dimen>
+	<dimen name="coords_input_keyboard_item_height">56dp</dimen>
 </resources>

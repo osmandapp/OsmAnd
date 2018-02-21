@@ -285,7 +285,7 @@
 	<color name="keyboard_item_text_color_light">#333333</color>
 	<color name="keyboard_item_text_color_light_pressed">#ffffff</color>
 	<color name="keyboard_item_text_color_dark">#cccccc</color>
-	<color name="keyboard_item_bg_pressed">#536dfe</color>
+	<color name="keyboard_item_pressed_bg">#536dfe</color>
 	<color name="keyboard_item_light_bg">#fff</color>
 	<color name="keyboard_item_dark_bg">#17191a</color>
 	<color name="keyboard_item_control_light_bg">#f2f2f2</color>
