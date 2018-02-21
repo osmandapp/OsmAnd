@@ -961,23 +961,20 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			convertView.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
-					switch (event.getAction()) {
-						case MotionEvent.ACTION_DOWN:
-							v.setBackgroundColor(getResolvedColor(R.color.keyboard_item_bg_pressed));
-							v.setPressed(true);
-							v.invalidate();
-							return true;
-						case MotionEvent.ACTION_UP:
-							setupNormalState(v, controlButton);
-							if (listener != null) {
-								listener.onClick(v);
-							}
-							return false;
-						case MotionEvent.ACTION_CANCEL:
-							setupNormalState(v, controlButton);
-							return false;
+					int action = event.getAction();
+					if (action == MotionEvent.ACTION_DOWN) {
+						v.setBackgroundColor(getResolvedColor(R.color.keyboard_item_bg_pressed));
+						v.setPressed(true);
+						v.invalidate();
+					} else if (action == MotionEvent.ACTION_UP) {
+						setupNormalState(v, controlButton);
+						if (listener != null) {
+							listener.onClick(v);
+						}
+					} else if (action == MotionEvent.ACTION_CANCEL) {
+						setupNormalState(v, controlButton);
 					}
-					return false;
+					return true;
 				}
 			});
 			View keyboardItemTopSpacing = convertView.findViewById(R.id.keyboard_item_top_spacing);
