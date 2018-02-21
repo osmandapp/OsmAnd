@@ -3008,11 +3008,11 @@
     <string name="osm_recipient_stat">Змен %1$s, сума %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-атрымальнікі</string>
     <string name="total_donations">Усяго ахвяраванняў</string>
-<string name="open_from">Адкрыта з</string>
-    <string name="open_till">Адкрыта да</string>
-    <string name="will_close_at">Закрыецца а</string>
-    <string name="will_open_at">Адкрыецца а</string>
-    <string name="will_open_on">Адкрыецца а</string>
+<string name="open_from">Адчынена з</string>
+    <string name="open_till">Адчынена да</string>
+    <string name="will_close_at">Зачыніцца а</string>
+    <string name="will_open_at">Адчыніцца а</string>
+    <string name="will_open_on">Адчыніцца а</string>
     <string name="shared_string_without_name">Без назвы</string>
     <string name="lang_lo">Лаоская</string>
     <string name="rendering_attr_hidePOILabels_name">Назвы POI</string>
