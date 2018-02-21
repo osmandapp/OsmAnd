@@ -237,56 +237,64 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 					TransportStopType type = TransportStopType.findType(stopRoute.route.getType());
 					if (type != null) {
 						int map_transport_stop_bg = R.drawable.map_transport_stop_bg;
-
 						BitmapFactory.Options options = new BitmapFactory.Options();
 						options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 						Bitmap background = BitmapFactory.decodeResource(view.getResources(), map_transport_stop_bg, options);
 						Bitmap foreground = BitmapFactory.decodeResource(view.getResources(), getIconIdByTypeOfStop(type), options);
-
 						Bitmap m = overlayBitmapToCenter(background, foreground);
 						canvas.drawBitmap(m, x - m.getWidth() / 2, y - m.getHeight() / 2, paintIcon);
-
 					}
 				} else {
 					canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
 				}
 			}
 		}
-
 	}
 
-	public int getIconIdByTypeOfStop(TransportStopType type) {
+	private int getIconIdByTypeOfStop(TransportStopType type) {
 		int id;
 		switch (type) {
-			case BUS: id= R.drawable.mm_route_bus_ref;
+			case BUS:
+				id = R.drawable.mm_route_bus_ref;
 				break;
-			case FERRY: id= R.drawable.mm_route_ferry_ref;
+			case FERRY:
+				id = R.drawable.mm_route_ferry_ref;
 				break;
-			case FUNICULAR: id= R.drawable.mm_route_funicular_ref;
+			case FUNICULAR:
+				id = R.drawable.mm_route_funicular_ref;
 				break;
-			case LIGHT_RAIL: id= R.drawable.mm_route_light_rail_ref;
+			case LIGHT_RAIL:
+				id = R.drawable.mm_route_light_rail_ref;
 				break;
-			case MONORAIL: id= R.drawable.mm_route_monorail_ref;
+			case MONORAIL:
+				id = R.drawable.mm_route_monorail_ref;
 				break;
-			case RAILWAY: id= R.drawable.mm_route_railway_ref;
+			case RAILWAY:
+				id = R.drawable.mm_route_railway_ref;
 				break;
-			case SHARE_TAXI: id= R.drawable.mm_route_share_taxi_ref;
+			case SHARE_TAXI:
+				id = R.drawable.mm_route_share_taxi_ref;
 				break;
-			case TRAIN: id= R.drawable.mm_route_train_ref;
+			case TRAIN:
+				id = R.drawable.mm_route_train_ref;
 				break;
-			case TRAM: id= R.drawable.mm_route_tram_ref;
+			case TRAM:
+				id = R.drawable.mm_route_tram_ref;
 				break;
-			case TROLLEYBUS: id= R.drawable.mm_route_trolleybus_ref;
+			case TROLLEYBUS:
+				id = R.drawable.mm_route_trolleybus_ref;
 				break;
-			case SUBWAY: id= R.drawable.mm_subway_station;
+			case SUBWAY:
+				id = R.drawable.mm_subway_station;
 				break;
-			default: id=-1;
+			default:
+				id = -1;
 				break;
 		}
 		return id;
 	}
 
-	public Bitmap overlayBitmapToCenter(Bitmap bitmap1, Bitmap bitmap2) {
+	private Bitmap overlayBitmapToCenter(Bitmap bitmap1, Bitmap bitmap2) {
 		int bitmap1Width = bitmap1.getWidth();
 		int bitmap1Height = bitmap1.getHeight();
 		int bitmap2Width = bitmap2.getWidth();
@@ -301,6 +309,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		canvas.drawBitmap(bitmap2, marginLeft, marginTop, null);
 		return overlayBitmap;
 	}
+
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 	}
