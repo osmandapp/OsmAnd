@@ -2854,4 +2854,6 @@
     <string name="enter_the_file_name">Введите имя файла.</string>
     <string name="map_import_error">Ошибка импорта карты</string>
     <string name="map_imported_successfully">Карта импортирована успешно</string>
+    <string name="transport_nearby_routes_within">Маршруты рядом с</string>
+    <string name="transport_nearby_routes">РЯДОМ</string>
     </resources>
