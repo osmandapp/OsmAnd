@@ -2609,4 +2609,13 @@
     <string name="rendering_attr_hidePOILabels_name">תוויות נ״ע</string>
     <string name="copy_location_name">העתקת שם נקודה/נ״ע</string>
     <string name="toast_empty_name_error">למיקום אין שם</string>
-</resources>
+<string name="enter_the_file_name">נא להזין את שם הקובץ.</string>
+    <string name="map_import_error">שגיאת ייבוא למפה</string>
+    <string name="map_imported_successfully">הייבוא למפה הצליח</string>
+    <string name="make_as_start_point">סימון כנקודת התחלה</string>
+    <string name="shared_string_current">נוכחית</string>
+    <string name="last_intermediate_dest_description">הוספת העצירה האחרונה לאורך הנתיב</string>
+    <string name="first_intermediate_dest_description">הוספת העצירה הראשונה בנתיב</string>
+    <string name="subsequent_dest_description">העברת היעד למעלה ויצירת יעד</string>
+    <string name="show_closed_notes">הצגת הערות סגורות</string>
+    </resources>
