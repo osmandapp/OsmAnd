@@ -3182,4 +3182,11 @@
 	<string name="poi_public_bookcase_type_metal_cabinet">Mota: metalezko kabina</string>
 	<string name="poi_public_bookcase_type_shelf">Mota: Apala</string>
 
-	</resources>
+	<string name="poi_socket_chademo_output_filter">CHAdeMO irteera</string>
+	<string name="poi_socket_type2_output_filter">2. motako irteera</string>
+	<string name="poi_socket_type2_combo_output_filter">2. mota konbinatuko irteera</string>
+	<string name="poi_socket_type3_output_filter">3. motako irteera</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE irteera urdina</string>
+	<string name="poi_socket_schuko_output_filter">Schuko irteera</string>
+
+</resources>
