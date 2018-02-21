@@ -953,20 +953,25 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					|| position == MINUS_BUTTON_POSITION
 					|| position == BACKSPACE_BUTTON_POSITION
 					|| position == SWITCH_TO_NEXT_INPUT_BUTTON_POSITION;
-			setNormalBackground(convertView, controlButton);
+			setupNormalState(convertView, controlButton);
 			convertView.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
-					int action = event.getAction();
-					if (action == MotionEvent.ACTION_DOWN) {
-						v.setBackgroundColor(getResolvedColor(R.color.keyboard_item_bg_pressed));
-						v.invalidate();
-						return true;
-					} else if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
-						setNormalBackground(v, controlButton);
-						if (listener != null) {
-							listener.onClick(v);
-						}
+					switch (event.getAction()) {
+						case MotionEvent.ACTION_DOWN:
+							v.setBackgroundColor(getResolvedColor(R.color.keyboard_item_bg_pressed));
+							v.setPressed(true);
+							v.invalidate();
+							return true;
+						case MotionEvent.ACTION_UP:
+							setupNormalState(v, controlButton);
+							if (listener != null) {
+								listener.onClick(v);
+							}
+							return false;
+						case MotionEvent.ACTION_CANCEL:
+							setupNormalState(v, controlButton);
+							return false;
 					}
 					return false;
 				}
@@ -1016,12 +1021,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			return convertView;
 		}
 
-		private void setNormalBackground(View view, boolean controlButton) {
+		private void setupNormalState(View view, boolean controlButton) {
 			view.setBackgroundColor(
 					controlButton
 							? getResolvedColor(lightTheme ? R.color.keyboard_item_control_light_bg : R.color.keyboard_item_control_dark_bg)
 							: getResolvedColor(lightTheme ? R.color.keyboard_item_light_bg : R.color.keyboard_item_dark_bg)
 			);
+			view.setPressed(false);
+			view.invalidate();
 		}
 	}
 
