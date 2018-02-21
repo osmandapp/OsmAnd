@@ -2930,4 +2930,9 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="toast_empty_name_error">Místo nemá žádný název</string>
     <string name="tunnel_warning">Blíží se tunel</string>
     <string name="show_tunnels">Tunely</string>
-</resources>
+<string name="make_as_start_point">Vytvořit jako počáteční bod</string>
+    <string name="osm_recipients_label">Příjemci OSM</string>
+    <string name="total_donations">Celkem přispěno</string>
+    <string name="day_off_label">zavřeno</string>
+    <string name="copy_location_name">Kopírovat název bodu/POI</string>
+    </resources>
