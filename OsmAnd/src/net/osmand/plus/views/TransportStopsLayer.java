@@ -4,10 +4,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -294,19 +298,22 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		return id;
 	}
 
-	private Bitmap overlayBitmapToCenter(Bitmap bitmap1, Bitmap bitmap2) {
-		int bitmap1Width = bitmap1.getWidth();
-		int bitmap1Height = bitmap1.getHeight();
-		int bitmap2Width = bitmap2.getWidth();
-		int bitmap2Height = bitmap2.getHeight();
+	private Bitmap overlayBitmapToCenter(Bitmap background, Bitmap foreground) {
+		int bitmap1Width = background.getWidth();
+		int bitmap1Height = background.getHeight();
+		int bitmap2Width = foreground.getWidth();
+		int bitmap2Height = foreground.getHeight();
 
 		float marginLeft = (float) (bitmap1Width * 0.5 - bitmap2Width * 0.5);
 		float marginTop = (float) (bitmap1Height * 0.5 - bitmap2Height * 0.5);
 
-		Bitmap overlayBitmap = Bitmap.createBitmap(bitmap1Width, bitmap1Height, bitmap1.getConfig());
+		Bitmap overlayBitmap = Bitmap.createBitmap(bitmap1Width, bitmap1Height, background.getConfig());
 		Canvas canvas = new Canvas(overlayBitmap);
-		canvas.drawBitmap(bitmap1, new Matrix(), null);
-		canvas.drawBitmap(bitmap2, marginLeft, marginTop, null);
+		Paint paint = new Paint();
+		ColorFilter filter = new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(), R.color.primary_text_dark), PorterDuff.Mode.SRC_IN);
+		paint.setColorFilter(filter);
+		canvas.drawBitmap(background, new Matrix(), null);
+		canvas.drawBitmap(foreground, marginLeft, marginTop, paint);
 		return overlayBitmap;
 	}
 
