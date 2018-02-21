@@ -3783,4 +3783,30 @@
 
 
 
+<string name="poi_socket_chademo_output_filter">CHAdeMO 輸出</string>
+	<string name="poi_socket_type2_output_filter">種類 2 輸出</string>
+	<string name="poi_socket_type2_combo_output_filter">種類 2 二合一輸出</string>
+	<string name="poi_socket_type3_output_filter">種類 3 輸出</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE 藍色輸出</string>
+	<string name="poi_socket_schuko_output_filter">Schuko 輸出</string>
+
+<string name="poi_socket_chademo_output_high">高</string>
+	<string name="poi_socket_chademo_output_medium">中</string>
+	<string name="poi_socket_chademo_output_low">低</string>
+	<string name="poi_socket_type2_output_high">高</string>
+	<string name="poi_socket_type2_output_medium">中</string>
+	<string name="poi_socket_type2_output_low">低</string>
+	<string name="poi_socket_type2_combo_output_high">高</string>
+	<string name="poi_socket_type2_combo_output_medium">中</string>
+	<string name="poi_socket_type2_combo_output_low">低</string>
+	<string name="poi_socket_type3_output_high">高</string>
+	<string name="poi_socket_type3_output_medium">中</string>
+	<string name="poi_socket_type3_output_low">低</string>
+	<string name="poi_socket_cee_blue_output_high">高</string>
+	<string name="poi_socket_cee_blue_output_medium">中</string>
+	<string name="poi_socket_cee_blue_output_low">低</string>
+	<string name="poi_socket_schuko_output_high">高</string>
+	<string name="poi_socket_schuko_output_medium">中</string>
+	<string name="poi_socket_schuko_output_low">低</string>
+
 </resources>
