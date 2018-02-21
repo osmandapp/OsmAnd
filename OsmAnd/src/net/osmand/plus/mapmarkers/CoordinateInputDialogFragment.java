@@ -126,8 +126,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		Dialog dialog = new Dialog(ctx, getTheme()) {
 			@Override
 			public void onBackPressed() {
-				saveMarkers();
-				super.onBackPressed();
+				if (isOsmandKeyboardCurrentlyVisible()) {
+					changeOsmandKeyboardVisibility(false);
+				} else {
+					saveMarkers();
+					super.onBackPressed();
+				}
 			}
 		};
 		Window window = dialog.getWindow();
