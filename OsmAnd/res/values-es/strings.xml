@@ -2865,4 +2865,9 @@ Por favor proporciona un código completo</string>
     <string name="first_intermediate_dest_description">Añade la ubicación como primer destino intermedio</string>
     <string name="subsequent_dest_description">Mueve el destino hacia arriba y crea un nuevo destino</string>
     <string name="make_as_start_point">Reemplazar punto de inicio</string>
+    <string name="transport_nearby_routes_within">Rutas cerca de</string>
+    <string name="transport_nearby_routes">CERCA</string>
+    <string name="enter_the_file_name">Ingresar nombre del archivo.</string>
+    <string name="map_import_error">Error de importación del mapa</string>
+    <string name="map_imported_successfully">Mapa importado correctamente</string>
     </resources>
