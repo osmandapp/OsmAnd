@@ -236,51 +236,19 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			for (TransportStop o : fullObjects) {
 				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-				Bitmap b = stopBus;
 				if (stopRoute != null) {
 					TransportStopType type = TransportStopType.findType(stopRoute.route.getType());
 					if (type != null) {
-						int iconId = getIconIdByTypeOfStop(type);
-						if (iconId != -1) {
-							Bitmap background = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bg);
-							Bitmap foreground = BitmapFactory.decodeResource(view.getResources(), iconId);
-							Bitmap m = overlayBitmapToCenter(background, foreground);
-							canvas.drawBitmap(m, x - m.getWidth() / 2, y - m.getHeight() / 2, paintIcon);
-						}
+						Bitmap background = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bg);
+						Bitmap foreground = BitmapFactory.decodeResource(view.getResources(), type.getSmallResId());
+						Bitmap m = overlayBitmapToCenter(background, foreground);
+						canvas.drawBitmap(m, x - m.getWidth() / 2, y - m.getHeight() / 2, paintIcon);
 					}
 				} else {
+					Bitmap b = stopBus;
 					canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
 				}
 			}
-		}
-	}
-
-	private int getIconIdByTypeOfStop(TransportStopType type) {
-		switch (type) {
-			case BUS:
-				return R.drawable.mm_route_bus_ref;
-			case FERRY:
-				return R.drawable.mm_route_ferry_ref;
-			case FUNICULAR:
-				return R.drawable.mm_route_funicular_ref;
-			case LIGHT_RAIL:
-				return R.drawable.mm_route_light_rail_ref;
-			case MONORAIL:
-				return R.drawable.mm_route_monorail_ref;
-			case RAILWAY:
-				return R.drawable.mm_route_railway_ref;
-			case SHARE_TAXI:
-				return R.drawable.mm_route_share_taxi_ref;
-			case TRAIN:
-				return R.drawable.mm_route_train_ref;
-			case TRAM:
-				return R.drawable.mm_route_tram_ref;
-			case TROLLEYBUS:
-				return R.drawable.mm_route_trolleybus_ref;
-			case SUBWAY:
-				return R.drawable.mm_subway_station;
-			default:
-				return -1;
 		}
 	}
 
@@ -289,7 +257,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		int backgroundHeight = background.getHeight();
 		int foregroundWidth = foreground.getWidth();
 		int foregroundHeight = foreground.getHeight();
-
 		float marginLeft = (float) (backgroundWidth * 0.5 - foregroundWidth * 0.5);
 		float marginTop = (float) (backgroundHeight * 0.5 - foregroundHeight * 0.5);
 
