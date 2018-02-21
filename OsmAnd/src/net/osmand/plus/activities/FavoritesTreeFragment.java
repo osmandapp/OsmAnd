@@ -192,9 +192,17 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		});
 		String groupNameToShow = ((FavoritesActivity) getActivity()).getGroupNameToShow();
 		if (groupNameToShow != null) {
-			int position = favouritesAdapter.getGroupPosition(groupNameToShow);
-			if (position != -1) {
-				listView.setSelectedGroup(position);
+			int groupPos = favouritesAdapter.getGroupPosition(groupNameToShow);
+			if (groupPos != -1) {
+				listView.expandGroup(groupPos);
+				int selection = listView.getHeaderViewsCount();
+				for (int i = 0; i < groupPos; i++) {
+					selection++; // because of group header
+					if (getGroupExpandedPreference(favouritesAdapter.getGroup(i).name).get()) {
+						selection += favouritesAdapter.getChildrenCount(i);
+					}
+				}
+				listView.setSelection(selection);
 			}
 		}
 		return view;

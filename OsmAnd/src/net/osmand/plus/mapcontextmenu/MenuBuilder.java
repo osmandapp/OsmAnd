@@ -301,19 +301,9 @@ public class MenuBuilder {
 	public void build(View view) {
 		firstRow = true;
 		hidden = false;
+		buildTopInternal(view);
 		if (showTitleIfTruncated) {
 			buildTitleRow(view);
-		}
-		if (showTransportRoutes()) {
-			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
-					false, 0, false, null, true);
-
-			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
-			if (collapsableView != null) {
-				String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS,app);
-				buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
-						false, 0, false, null, true);
-			}
 		}
 		buildNearestWikiRow(view);
 		if (needBuildPlainMenuItems()) {
@@ -446,6 +436,20 @@ public class MenuBuilder {
 	}
 
 	protected void buildInternal(View view) {
+	}
+
+	protected void buildTopInternal(View view) {
+		if (showTransportRoutes()) {
+			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
+					false, 0, false, null, true);
+
+			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
+			if (collapsableView != null) {
+				String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, app);
+				buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
+						false, 0, false, null, true);
+			}
+		}
 	}
 
 	protected void buildAfter(View view) {
