@@ -45,7 +45,10 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	private OsmandMapTileView view;
 
 	private Paint paintIcon;
+	private Paint paintWhiteIcon;
+	private ColorFilter filter;
 	private Bitmap stopBus;
+	private Bitmap background;
 	private Bitmap stopSmall;
 	private RenderingLineAttributes attrs;
 
@@ -183,6 +186,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
+		background = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bg);
+		paintWhiteIcon = new Paint();
+		filter = new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(), R.color.primary_text_dark), PorterDuff.Mode.SRC_IN);
+		paintWhiteIcon.setColorFilter(filter);
+
 		List<TransportStop> objects = null;
 		if (tb.getZoom() >= startZoomRoute) {
 			if (stopRoute != null) {
@@ -239,10 +247,9 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				if (stopRoute != null) {
 					TransportStopType type = TransportStopType.findType(stopRoute.route.getType());
 					if (type != null) {
-						Bitmap background = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bg);
 						Bitmap foreground = BitmapFactory.decodeResource(view.getResources(), type.getSmallResId());
-						Bitmap m = overlayBitmapToCenter(background, foreground);
-						canvas.drawBitmap(m, x - m.getWidth() / 2, y - m.getHeight() / 2, paintIcon);
+						canvas.drawBitmap(background, x - background.getWidth() / 2, y - background.getHeight() / 2, paintIcon);
+						canvas.drawBitmap(foreground, x - foreground.getWidth() / 2, y - foreground.getHeight() / 2, paintWhiteIcon);
 					}
 				} else {
 					Bitmap b = stopBus;

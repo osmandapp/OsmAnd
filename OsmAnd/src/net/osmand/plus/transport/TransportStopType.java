@@ -3,24 +3,24 @@ package net.osmand.plus.transport;
 import net.osmand.plus.R;
 
 public enum TransportStopType {
-	BUS(R.drawable.mx_route_bus_ref, R.drawable.mx_route_bus_ref, "routeBusColor", R.drawable.mm_route_bus_ref),
-	FERRY(R.drawable.mx_route_ferry_ref, R.drawable.mx_route_ferry_ref, "routeFerryColor", R.drawable.mm_route_ferry_ref),
-	FUNICULAR(R.drawable.mx_route_funicular_ref, R.drawable.mx_route_funicular_ref, "routeFunicularColor", R.drawable.mm_route_funicular_ref),
-	LIGHT_RAIL(R.drawable.mx_route_light_rail_ref, R.drawable.mx_route_light_rail_ref, "routeLightrailColor", R.drawable.mm_route_light_rail_ref),
-	MONORAIL(R.drawable.mx_route_monorail_ref, R.drawable.mx_route_monorail_ref, "routeLightrailColor", R.drawable.mm_route_monorail_ref),
-	RAILWAY(R.drawable.mx_route_railway_ref, R.drawable.mx_route_railway_ref, "routeTrainColor", R.drawable.mm_route_railway_ref),
-	SHARE_TAXI(R.drawable.mx_route_share_taxi_ref, R.drawable.mx_route_share_taxi_ref, "routeShareTaxiColor", R.drawable.mm_route_share_taxi_ref),
-	TRAIN(R.drawable.mx_route_train_ref, R.drawable.mx_route_train_ref, "routeTrainColor", R.drawable.mm_route_train_ref),
-	TRAM(R.drawable.mx_route_tram_ref, R.drawable.mx_railway_tram_stop, "routeTramColor", R.drawable.mx_route_tram_ref),
-	TROLLEYBUS(R.drawable.mx_route_trolleybus_ref, R.drawable.mx_route_trolleybus_ref, "routeTrolleybusColor", R.drawable.mm_route_trolleybus_ref),
-	SUBWAY(R.drawable.mx_subway_station, R.drawable.mx_subway_station, "routeTrainColor", R.drawable.mm_subway_station);
+	BUS(R.drawable.mx_route_bus_ref, R.drawable.mx_route_bus_ref, R.drawable.mm_route_bus_ref, "routeBusColor"),
+	FERRY(R.drawable.mx_route_ferry_ref, R.drawable.mx_route_ferry_ref, R.drawable.mm_route_ferry_ref, "routeFerryColor"),
+	FUNICULAR(R.drawable.mx_route_funicular_ref, R.drawable.mx_route_funicular_ref, R.drawable.mm_route_funicular_ref, "routeFunicularColor"),
+	LIGHT_RAIL(R.drawable.mx_route_light_rail_ref, R.drawable.mx_route_light_rail_ref, R.drawable.mm_route_light_rail_ref, "routeLightrailColor"),
+	MONORAIL(R.drawable.mx_route_monorail_ref, R.drawable.mx_route_monorail_ref, R.drawable.mm_route_monorail_ref, "routeLightrailColor"),
+	RAILWAY(R.drawable.mx_route_railway_ref, R.drawable.mx_route_railway_ref, R.drawable.mm_route_railway_ref, "routeTrainColor"),
+	SHARE_TAXI(R.drawable.mx_route_share_taxi_ref, R.drawable.mx_route_share_taxi_ref, R.drawable.mm_route_share_taxi_ref, "routeShareTaxiColor"),
+	TRAIN(R.drawable.mx_route_train_ref, R.drawable.mx_route_train_ref, R.drawable.mm_route_train_ref, "routeTrainColor"),
+	TRAM(R.drawable.mx_route_tram_ref, R.drawable.mx_railway_tram_stop, R.drawable.mx_route_tram_ref, "routeTramColor"),
+	TROLLEYBUS(R.drawable.mx_route_trolleybus_ref, R.drawable.mx_route_trolleybus_ref, R.drawable.mm_route_trolleybus_ref, "routeTrolleybusColor"),
+	SUBWAY(R.drawable.mx_subway_station, R.drawable.mx_subway_station, R.drawable.mm_subway_station, "routeTrainColor");
 
 	final int resId;
 	final int topResId;
 	final int smallResId;
 	final String renderAttr;
 
-	TransportStopType(int resId, int topResId, String renderAttr, int smallResId) {
+	TransportStopType(int resId, int topResId, int smallResId, String renderAttr) {
 		this.resId = resId;
 		this.topResId = topResId;
 		this.renderAttr = renderAttr;
