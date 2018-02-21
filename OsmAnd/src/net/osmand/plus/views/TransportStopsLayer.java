@@ -190,7 +190,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		paintWhiteIcon = new Paint();
 		filter = new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(), R.color.primary_text_dark), PorterDuff.Mode.SRC_IN);
 		paintWhiteIcon.setColorFilter(filter);
-
 		List<TransportStop> objects = null;
 		if (tb.getZoom() >= startZoomRoute) {
 			if (stopRoute != null) {
@@ -257,24 +256,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				}
 			}
 		}
-	}
-
-	private Bitmap overlayBitmapToCenter(Bitmap background, Bitmap foreground) {
-		int backgroundWidth = background.getWidth();
-		int backgroundHeight = background.getHeight();
-		int foregroundWidth = foreground.getWidth();
-		int foregroundHeight = foreground.getHeight();
-		float marginLeft = (float) (backgroundWidth * 0.5 - foregroundWidth * 0.5);
-		float marginTop = (float) (backgroundHeight * 0.5 - foregroundHeight * 0.5);
-
-		Bitmap overlayBitmap = Bitmap.createBitmap(backgroundWidth, backgroundHeight, background.getConfig());
-		Canvas canvas = new Canvas(overlayBitmap);
-		Paint paint = new Paint();
-		ColorFilter filter = new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(), R.color.primary_text_dark), PorterDuff.Mode.SRC_IN);
-		paint.setColorFilter(filter);
-		canvas.drawBitmap(background, new Matrix(), null);
-		canvas.drawBitmap(foreground, marginLeft, marginTop, paint);
-		return overlayBitmap;
 	}
 
 	@Override
