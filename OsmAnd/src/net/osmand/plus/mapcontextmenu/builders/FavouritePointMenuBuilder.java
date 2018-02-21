@@ -67,6 +67,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		super.buildTopInternal(view);
 		buildGroupFavouritesView(view);
 	}
+
 	@Override
 	public void buildInternal(View view) {
 		if (originObject != null && originObject instanceof Amenity) {
