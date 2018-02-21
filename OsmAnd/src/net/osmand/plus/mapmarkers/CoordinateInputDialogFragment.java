@@ -962,10 +962,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 						v.setBackgroundColor(getResolvedColor(R.color.keyboard_item_bg_pressed));
 						v.invalidate();
 						return true;
-					}
-					setNormalBackground(v, controlButton);
-					if (listener != null) {
-						listener.onClick(v);
+					} else if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+						setNormalBackground(v, controlButton);
+						if (listener != null) {
+							listener.onClick(v);
+						}
 					}
 					return false;
 				}
