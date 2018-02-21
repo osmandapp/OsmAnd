@@ -37,7 +37,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -311,15 +310,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		setBackgroundColor(keyboardGrid, dividersColorResId);
 		setBackgroundColor(R.id.keyboard_divider, dividersColorResId);
 		final KeyboardAdapter keyboardAdapter = new KeyboardAdapter(mapActivity, keyboardItems);
-		keyboardGrid.setAdapter(keyboardAdapter);
-		keyboardGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		keyboardAdapter.setListener(new View.OnClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+			public void onClick(View v) {
+				int position = keyboardGrid.getPositionForView(v);
 				if (useOsmandKeyboard) {
 					View focusedView = getDialog().getCurrentFocus();
 					if (focusedView != null && focusedView instanceof EditText) {
 						EditText focusedEditText = (EditText) focusedView;
-						switch (i) {
+						switch (position) {
 							case CLEAR_BUTTON_POSITION:
 								focusedEditText.setText("");
 								break;
@@ -337,13 +336,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 								switchEditText(focusedEditText.getId(), true);
 								break;
 							default:
-								focusedEditText.setText(focusedEditText.getText().toString() + keyboardAdapter.getItem(i));
+								focusedEditText.setText(focusedEditText.getText().toString() + keyboardAdapter.getItem(position));
 								focusedEditText.setSelection(focusedEditText.getText().length());
 						}
 					}
 				}
 			}
 		});
+		keyboardGrid.setAdapter(keyboardAdapter);
 
 		showHideKeyboardIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_keyboard_hide));
 		showHideKeyboardIcon.setOnClickListener(new View.OnClickListener() {
@@ -927,6 +927,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				R.color.keyboard_item_text_color_light, R.color.keyboard_item_text_color_light_pressed,
 				0, 0);
 
+		private View.OnClickListener listener;
+
+		public void setListener(View.OnClickListener listener) {
+			this.listener = listener;
+		}
+
 		KeyboardAdapter(@NonNull Context context, @NonNull Object[] objects) {
 			super(context, 0, objects);
 		}
@@ -943,15 +949,26 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				int spaceForKeys = keyboardViewHeight - 3 * dividerHeight;
 				convertView.setMinimumHeight(spaceForKeys / 4);
 			}
-			boolean controlButton = position == CLEAR_BUTTON_POSITION
+			final boolean controlButton = position == CLEAR_BUTTON_POSITION
 					|| position == MINUS_BUTTON_POSITION
 					|| position == BACKSPACE_BUTTON_POSITION
 					|| position == SWITCH_TO_NEXT_INPUT_BUTTON_POSITION;
-			if (controlButton) {
-				convertView.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_control_light_bg : R.drawable.keyboard_item_control_dark_bg);
-			} else {
-				convertView.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg);
-			}
+			setNormalBackground(convertView, controlButton);
+			convertView.setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					int action = event.getAction();
+					if (action == MotionEvent.ACTION_DOWN) {
+						v.setBackgroundColor(getResolvedColor(R.color.keyboard_item_bg_pressed));
+						if (listener != null) {
+							listener.onClick(v);
+						}
+						return true;
+					}
+					setNormalBackground(v, controlButton);
+					return false;
+				}
+			});
 			View keyboardItemTopSpacing = convertView.findViewById(R.id.keyboard_item_top_spacing);
 			View keyboardItemBottomSpacing = convertView.findViewById(R.id.keyboard_item_bottom_spacing);
 			TextView keyboardItemText = (TextView) convertView.findViewById(R.id.keyboard_item_text);
@@ -995,6 +1012,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 
 			return convertView;
+		}
+
+		private void setNormalBackground(View view, boolean controlButton) {
+			view.setBackgroundColor(
+					controlButton
+							? getResolvedColor(lightTheme ? R.color.keyboard_item_control_light_bg : R.color.keyboard_item_control_dark_bg)
+							: getResolvedColor(lightTheme ? R.color.keyboard_item_light_bg : R.color.keyboard_item_dark_bg)
+			);
 		}
 	}
 
