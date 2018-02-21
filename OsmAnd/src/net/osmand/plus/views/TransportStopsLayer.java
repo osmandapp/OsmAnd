@@ -240,13 +240,10 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				if (stopRoute != null) {
 					TransportStopType type = TransportStopType.findType(stopRoute.route.getType());
 					if (type != null) {
-						int map_transport_stop_bg = R.drawable.map_transport_stop_bg;
-						BitmapFactory.Options options = new BitmapFactory.Options();
-						options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 						int iconId = getIconIdByTypeOfStop(type);
 						if (iconId != -1) {
-							Bitmap background = BitmapFactory.decodeResource(view.getResources(), map_transport_stop_bg, options);
-							Bitmap foreground = BitmapFactory.decodeResource(view.getResources(), getIconIdByTypeOfStop(type), options);
+							Bitmap background = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bg);
+							Bitmap foreground = BitmapFactory.decodeResource(view.getResources(), iconId);
 							Bitmap m = overlayBitmapToCenter(background, foreground);
 							canvas.drawBitmap(m, x - m.getWidth() / 2, y - m.getHeight() / 2, paintIcon);
 						}
@@ -288,15 +285,15 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	}
 
 	private Bitmap overlayBitmapToCenter(Bitmap background, Bitmap foreground) {
-		int bitmap1Width = background.getWidth();
-		int bitmap1Height = background.getHeight();
-		int bitmap2Width = foreground.getWidth();
-		int bitmap2Height = foreground.getHeight();
+		int backgroundWidth = background.getWidth();
+		int backgroundHeight = background.getHeight();
+		int foregroundWidth = foreground.getWidth();
+		int foregroundHeight = foreground.getHeight();
 
-		float marginLeft = (float) (bitmap1Width * 0.5 - bitmap2Width * 0.5);
-		float marginTop = (float) (bitmap1Height * 0.5 - bitmap2Height * 0.5);
+		float marginLeft = (float) (backgroundWidth * 0.5 - foregroundWidth * 0.5);
+		float marginTop = (float) (backgroundHeight * 0.5 - foregroundHeight * 0.5);
 
-		Bitmap overlayBitmap = Bitmap.createBitmap(bitmap1Width, bitmap1Height, background.getConfig());
+		Bitmap overlayBitmap = Bitmap.createBitmap(backgroundWidth, backgroundHeight, background.getConfig());
 		Canvas canvas = new Canvas(overlayBitmap);
 		Paint paint = new Paint();
 		ColorFilter filter = new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(), R.color.primary_text_dark), PorterDuff.Mode.SRC_IN);
