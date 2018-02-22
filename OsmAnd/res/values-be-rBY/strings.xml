@@ -3015,4 +3015,19 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="map_import_error">Pamyłka impartu mapy</string>
     <string name="map_imported_successfully">Mapa paspiachovaja impartavanaja</string>
     <string name="enter_the_file_name">Uviadzicie imia fajła.</string>
+    <string name="enter_lon">Uviadzicie daŭhatu</string>
+    <string name="enter_lat">Uviadzicie šyratu</string>
+    <string name="enter_lat_and_lon">Uviadzicie šyratu i daŭhatu</string>
+	<string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD,DDDDDD°</string>
+	<string name="dd_ddddd_format">DD,DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM,MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM,MMM′</string>
+	<string name="east_abbreviation">U</string>
+	<string name="west_abbreviation">Z</string>
+	<string name="south_abbreviation">Pd</string>
+	<string name="north_abbreviation">Pn</string>
+	<string name="optional_point_name">Nieabaviazkovaja nazva punkta</string>
+    <string name="transport_nearby_routes_within">Maršruty pablizu z</string>
+    <string name="transport_nearby_routes">PABLIZU</string>
     </resources>
