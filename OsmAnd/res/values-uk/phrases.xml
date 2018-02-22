@@ -3743,4 +3743,30 @@
 
 
 
+<string name="poi_socket_chademo_output_filter">CHAdeMO, потужність</string>
+	<string name="poi_socket_type2_output_filter">Тип 2, потужність</string>
+	<string name="poi_socket_type2_combo_output_filter">Тип 2, комбінований, потужність</string>
+	<string name="poi_socket_type3_output_filter">Тип 3, потужність</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE блакитний, потужність</string>
+	<string name="poi_socket_schuko_output_filter">Щуко, потужність</string>
+
+<string name="poi_socket_chademo_output_high">Висока</string>
+	<string name="poi_socket_chademo_output_medium">Середня</string>
+	<string name="poi_socket_chademo_output_low">Низька</string>
+	<string name="poi_socket_type2_output_high">Висока</string>
+	<string name="poi_socket_type2_output_medium">Середня</string>
+	<string name="poi_socket_type2_output_low">Низька</string>
+	<string name="poi_socket_type2_combo_output_high">Висока</string>
+	<string name="poi_socket_type2_combo_output_medium">Середня</string>
+	<string name="poi_socket_type2_combo_output_low">Низька</string>
+	<string name="poi_socket_type3_output_high">Висока</string>
+	<string name="poi_socket_type3_output_medium">Середня</string>
+	<string name="poi_socket_type3_output_low">Низька</string>
+	<string name="poi_socket_cee_blue_output_high">Висока</string>
+	<string name="poi_socket_cee_blue_output_medium">Середня</string>
+	<string name="poi_socket_cee_blue_output_low">Низька</string>
+	<string name="poi_socket_schuko_output_high">Висока</string>
+	<string name="poi_socket_schuko_output_medium">Середня</string>
+	<string name="poi_socket_schuko_output_low">Низька</string>
+
 </resources>
