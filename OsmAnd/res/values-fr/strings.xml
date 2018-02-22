@@ -3062,7 +3062,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_without_name">Sans nom</string>
     <string name="lang_lo">Laotien</string>
     <string name="rendering_attr_hidePOILabels_name">Libellés des PI</string>
-    <string name="day_off_label">éteint</string>
+    <string name="day_off_label">fermé</string>
     <string name="winter_and_ski_renderer">Hiver et ski</string>
     <string name="touring_view_renderer">Vue grand tourisme (contrastée et détaillée)</string>
     <string name="nautical_renderer">Maritime</string>
@@ -3108,4 +3108,16 @@ représentant la zone : %1$s x %2$s</string>
     <string name="map_import_error">Erreur d\'import de la carte</string>
     <string name="map_imported_successfully">Carte importée avec succès</string>
     <string name="enter_the_file_name">Saisissez le nom du fichier.</string>
+    <string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="transport_nearby_routes">PROCHE</string>
+    <string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	<string name="east_abbreviation">E</string>
+	<string name="west_abbreviation">O</string>
+	<string name="south_abbreviation">S</string>
+	<string name="north_abbreviation">N</string>
+	<string name="optional_point_name">Nom optionnel du point</string>
+    <string name="transport_nearby_routes_within">Itinéraires à proximité de</string>
     </resources>
