@@ -829,11 +829,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private void addMapMarker() {
 		final String latitude = getStringCoordinate(true);
 		final String longitude = getStringCoordinate(false);
-		double lat = parseCoordinate(latitude);
-		double lon = parseCoordinate(longitude);
-		if (lat == 0 || lon == 0) {
-			Toast.makeText(getContext(), R.string.wrong_input, Toast.LENGTH_SHORT).show();
+		if (latitude.isEmpty() && longitude.isEmpty()) {
+			Toast.makeText(getContext(), R.string.enter_lat_and_lon, Toast.LENGTH_SHORT).show();
+		} else if (latitude.isEmpty()) {
+			Toast.makeText(getContext(), R.string.enter_lat, Toast.LENGTH_SHORT).show();
+		} else if (longitude.isEmpty()) {
+			Toast.makeText(getContext(), R.string.enter_lon, Toast.LENGTH_SHORT).show();
 		} else {
+			double lat = parseCoordinate(latitude);
+			double lon = parseCoordinate(longitude);
 			String name = ((EditText) mainView.findViewById(R.id.point_name_et)).getText().toString();
 			addMapMarker(new LatLon(lat, lon), name);
 		}
@@ -846,6 +850,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				? R.id.lat_second_input_et : R.id.lon_second_input_et)).getText().toString();
 		String thirdPart = ((EditText) mainView.findViewById(latitude
 				? R.id.lat_third_input_et : R.id.lon_third_input_et)).getText().toString();
+
+		if (firstPart.isEmpty() && secondPart.isEmpty() && thirdPart.isEmpty()) {
+			return "";
+		}
 
 		int format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
 		StringBuilder res = new StringBuilder();
