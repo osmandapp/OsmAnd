@@ -3076,4 +3076,7 @@
 	<string name="optional_point_name">Неабавязковая назва пункта</string>
     <string name="transport_nearby_routes_within">Маршруты паблізу з</string>
     <string name="transport_nearby_routes">ПАБЛІЗУ</string>
-    </resources>
+    <string name="enter_lon">Увядзіце даўгату</string>
+    <string name="enter_lat">Увядзіце шырату</string>
+    <string name="enter_lat_and_lon">Увядзіце шырату і даўгату</string>
+	</resources>
