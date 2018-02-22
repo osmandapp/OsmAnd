@@ -3140,9 +3140,9 @@
     <string name="context_menu_points_of_group">Всі пункти групи</string>
     <string name="open_from">Відкрито з</string>
     <string name="open_till">Відкрито до</string>
-    <string name="will_close_at">Буде закрито в</string>
-    <string name="will_open_at">Буде відкрито в</string>
-    <string name="will_open_on">"Відкриється о "</string>
+    <string name="will_close_at">Закриється в</string>
+    <string name="will_open_at">Відкриється о</string>
+    <string name="will_open_on">Відкриється о</string>
     <string name="additional_actions">Додаткові дії</string>
     <string name="av_locations_selected_desc">Файл GPX з координатами та даними вибраних нотаток.</string>
     <string name="av_locations_all_desc">Файл GPX з координатами та даними всіх нотаток.</string>
@@ -3173,7 +3173,7 @@
     <string name="osm_edits_export_desc">Виберіть тип експорту: OSM-нотатки, POI чи і те і те.</string>
     <string name="all_data">Усі дані</string>
     <string name="osm_notes">OSM-нотатки</string>
-    <string name="will_open_tomorrow_at">"Відкриється завтра о "</string>
+    <string name="will_open_tomorrow_at">Відкриється завтра о</string>
     <string name="rendering_attr_hidePOILabels_name">Підписи до цікавих точок</string>
     <string name="shared_string_without_name">Без назви</string>
     <string name="release_2_9">• Виявлення стоп-сигналів тепер враховує напрямок руху
@@ -3192,4 +3192,19 @@
     <string name="tunnel_warning">Тунель попереду</string>
     <string name="show_tunnels">Тунелі</string>
 <string name="enter_the_file_name">Введіть ім\'я файлу.</string>
+    <string name="enter_lon">Введіть довготу</string>
+    <string name="enter_lat">Введіть широту</string>
+    <string name="enter_lat_and_lon">Введіть широту та довготу</string>
+	<string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	<string name="east_abbreviation">Сх</string>
+	<string name="west_abbreviation">Зх</string>
+	<string name="south_abbreviation">Пд</string>
+	<string name="north_abbreviation">Пн</string>
+	<string name="optional_point_name">Необов\'язкове ім\'я точки</string>
+    <string name="transport_nearby_routes_within">Маршрути поряд з</string>
+    <string name="transport_nearby_routes">ПОРУЧ</string>
     </resources>
