@@ -191,6 +191,8 @@
         <item name="popupMenuStyle">@style/PopupMenuLight</item>
 
         <item name="keyboard_controls_divider">@color/keyboard_item_add_button_divider_light</item>
+
+        <item name="coordinate_input_edit_text_normal">@color/coordinate_input_edit_text_normal_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -292,6 +294,11 @@
         <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert.NoAnimation</item>
     </style>
 
+    <style name="CoordinateInputEditText" parent="Widget.AppCompat.EditText">
+        <item name="colorControlActivated">@color/coordinate_input_edit_text_activated</item>
+        <item name="colorControlNormal">?attr/coordinate_input_edit_text_normal</item>
+    </style>
+
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
         <item name="android:statusBarColor">@color/status_bar_dark</item>
         <item name="mapBackground">@color/map_background_color_dark</item>
@@ -369,6 +376,8 @@
         <item name="popupMenuStyle">@style/PopupMenuDark</item>
 
         <item name="keyboard_controls_divider">@color/keyboard_item_add_button_divider_dark</item>
+
+        <item name="coordinate_input_edit_text_normal">@color/coordinate_input_edit_text_normal_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

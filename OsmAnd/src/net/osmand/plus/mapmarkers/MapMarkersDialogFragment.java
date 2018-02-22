@@ -21,6 +21,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
@@ -169,6 +171,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			groupsFragment.startLocationUpdate();
 			groupsFragment.setGroupIdToOpen(groupIdToOpen);
 			viewPager.setCurrentItem(GROUPS_POSITION, false);
+			bottomNav.getMenu().findItem(R.id.action_groups).setChecked(true);
 		}
 		bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 			@Override
@@ -475,7 +478,14 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 	private void setOrderByMode(MapMarkersOrderByMode orderByMode) {
 		if (orderByMode != MapMarkersOrderByMode.CUSTOM) {
-			getMyApplication().getMapMarkersHelper().orderMarkers(orderByMode);
+			OsmandApplication app = getMyApplication();
+			MapActivity mapActivity = getMapActivity();
+
+			Location location = app.getLocationProvider().getLastKnownLocation();
+			boolean useCenter = !(mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation() && location != null);
+			LatLon loc = useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude());
+
+			app.getMapMarkersHelper().orderMarkers(orderByMode, loc);
 			activeFragment.updateAdapter();
 		}
 	}
