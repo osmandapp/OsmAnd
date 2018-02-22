@@ -2553,9 +2553,9 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="add_track_to_markers_descr">Veldu feril úr hverjum ferilpunktum verður bætt í kortamerkin. (Einungis ferlar með ferilpunktum eru taldir upp.)</string>
     <string name="open_from">Opið frá</string>
     <string name="open_till">Opið til</string>
-    <string name="will_close_at">Mun loka</string>
-    <string name="will_open_at">Mun opna</string>
-    <string name="will_open_on">Mun opna</string>
+    <string name="will_close_at">Mun loka klukkan</string>
+    <string name="will_open_at">Mun opna klukkan</string>
+    <string name="will_open_on">Mun opna klukkan</string>
     <string name="add_group_descr">Þú getur flutt hópa inn úr eftirlætum eða úr ferilpunktum í ferli.</string>
     <string name="empty_state_markers_groups_desc">Þú getur flutt inn eftirlætishópa eða ferilpunkta sem kortamerki.</string>
     <string name="shared_string_without_name">Án nafns</string>
@@ -2792,4 +2792,14 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \n - Ef þú þarft sértæk skilyrði - hafðu samband við aðstoðina: osmo.mobi@gmail.com"</string>
     <string name="transport_nearby_routes_within">Leiðir nálægt eftir</string>
     <string name="transport_nearby_routes">NÁLÆGT</string>
+    <string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	<string name="east_abbreviation">A</string>
+	<string name="west_abbreviation">V</string>
+	<string name="south_abbreviation">S</string>
+	<string name="north_abbreviation">N</string>
+	<string name="optional_point_name">Valfrjálst heiti punkts</string>
     </resources>

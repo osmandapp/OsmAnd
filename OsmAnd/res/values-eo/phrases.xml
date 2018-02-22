@@ -3761,4 +3761,30 @@
 
 
 
+<string name="poi_socket_chademo_output_filter">CHAdeMO povo</string>
+	<string name="poi_socket_type2_output_filter">tipo 2 povo</string>
+	<string name="poi_socket_type2_combo_output_filter">tipo 2 CCS povo</string>
+	<string name="poi_socket_type3_output_filter">tipo 3 povo</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE blua povo</string>
+	<string name="poi_socket_schuko_output_filter">Schuko eligo</string>
+
+<string name="poi_socket_chademo_output_high">alta</string>
+	<string name="poi_socket_chademo_output_medium">meza</string>
+	<string name="poi_socket_chademo_output_low">malalta</string>
+	<string name="poi_socket_type2_output_high">alta</string>
+	<string name="poi_socket_type2_output_medium">meza</string>
+	<string name="poi_socket_type2_output_low">malalta</string>
+	<string name="poi_socket_type2_combo_output_high">alta</string>
+	<string name="poi_socket_type2_combo_output_medium">meza</string>
+	<string name="poi_socket_type2_combo_output_low">malalta</string>
+	<string name="poi_socket_type3_output_high">alta</string>
+	<string name="poi_socket_type3_output_medium">meza</string>
+	<string name="poi_socket_type3_output_low">malalta</string>
+	<string name="poi_socket_cee_blue_output_high">alta</string>
+	<string name="poi_socket_cee_blue_output_medium">meza</string>
+	<string name="poi_socket_cee_blue_output_low">malalta</string>
+	<string name="poi_socket_schuko_output_high">alta</string>
+	<string name="poi_socket_schuko_output_medium">meza</string>
+	<string name="poi_socket_schuko_output_low">malalta</string>
+
 </resources>

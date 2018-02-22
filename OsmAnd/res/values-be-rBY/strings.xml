@@ -2353,7 +2353,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="city_type_district">Rajon</string>
     <string name="city_type_neighbourhood">Susiedstva</string>
     <string name="map_widget_search">Šukać</string>
-	<string name="shared_string_is_open_24_7">Adkryta 24/7</string>
+	<string name="shared_string_is_open_24_7">Adčyniena 24/7</string>
     <string name="storage_directory_card">Kartka pamiacі</string>
     <string name="coords_format">Farmat kaardynataŭ</string>
     <string name="coords_format_descr">Farmat dlia hieahrafičnych kaardynataŭ.</string>
@@ -2959,11 +2959,11 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="osm_recipient_stat">Zmien %1$s, suma %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-atrymaĺniki</string>
     <string name="total_donations">Usiaho achviaravanniaŭ</string>
-<string name="open_from">Adkryta z</string>
-    <string name="open_till">Adkryta da</string>
+<string name="open_from">Adčyniena z</string>
+    <string name="open_till">Adčyniena da</string>
     <string name="will_close_at">Zakryjecca a</string>
-    <string name="will_open_at">Adkryjecca a</string>
-    <string name="will_open_on">Adkryjecca a</string>
+    <string name="will_open_at">Adčynicca a</string>
+    <string name="will_open_on">Adčynicca a</string>
     <string name="shared_string_without_name">Biez nazvy</string>
     <string name="lang_lo">Łaoskaja</string>
     <string name="will_open_tomorrow_at">Adčynicca zaŭtra a</string>
