@@ -855,6 +855,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			return "";
 		}
 
+		if (firstPart.isEmpty()) {
+			firstPart = "0";
+		}
+		if (secondPart.isEmpty()) {
+			secondPart = "0";
+		}
+
 		int format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
 		StringBuilder res = new StringBuilder();
 		if ((latitude && !north) || (!latitude && !east)) {
@@ -864,7 +871,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if (!secondPart.isEmpty()) {
 			res.append(CoordinateInputFormats.getFirstSeparator(format)).append(secondPart);
 		}
-		if (!thirdPart.isEmpty()) {
+		if (!thirdPart.isEmpty() && CoordinateInputFormats.containsThirdPart(format)) {
 			res.append(CoordinateInputFormats.getSecondSeparator(format)).append(thirdPart);
 		}
 		return res.toString();
