@@ -2792,4 +2792,14 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \n - Ef þú þarft sértæk skilyrði - hafðu samband við aðstoðina: osmo.mobi@gmail.com"</string>
     <string name="transport_nearby_routes_within">Leiðir nálægt eftir</string>
     <string name="transport_nearby_routes">NÁLÆGT</string>
+    <string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	<string name="east_abbreviation">A</string>
+	<string name="west_abbreviation">V</string>
+	<string name="south_abbreviation">S</string>
+	<string name="north_abbreviation">N</string>
+	<string name="optional_point_name">Valfrjálst heiti punkts</string>
     </resources>
