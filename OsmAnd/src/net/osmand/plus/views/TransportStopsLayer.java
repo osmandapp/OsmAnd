@@ -249,7 +249,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 					TransportStopType type = TransportStopType.findType(stopRoute.route.getType());
 					if (type != null) {
 						Drawable foregroundIcon = iconsCache.getIcon(type.getSmallResId(), R.color.primary_text_dark);
-
 						float dx = x - backgroundIconHalfWidth;
 						float dy = y - backgroundIconHalfHeight;
 						int foregroundIconHalfWidth = foregroundIcon.getIntrinsicWidth() / 2;
