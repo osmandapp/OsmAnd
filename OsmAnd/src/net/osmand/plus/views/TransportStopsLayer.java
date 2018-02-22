@@ -53,8 +53,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 
 	private boolean showTransportStops;
 	private Path path;
-	private int backgroundIconWidth;
-	private int backgroundIconHeight;
 	private float backgroundIconHalfWidth;
 	private float backgroundIconHalfHeight;
 
@@ -67,8 +65,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	public void initLayer(final OsmandMapTileView view) {
 		iconsCache = mapActivity.getMyApplication().getIconsCache();
 		backgroundIcon = iconsCache.getIcon(R.drawable.map_transport_stop_bg);
-		backgroundIconWidth = backgroundIcon.getIntrinsicWidth();
-		backgroundIconHeight = backgroundIcon.getIntrinsicHeight();
+		int backgroundIconWidth = backgroundIcon.getIntrinsicWidth();
+		int backgroundIconHeight = backgroundIcon.getIntrinsicHeight();
 		backgroundIconHalfWidth = backgroundIconWidth / 2f;
 		backgroundIconHalfHeight = backgroundIconHeight / 2f;
 		backgroundIcon.setBounds(0, 0, backgroundIconWidth, backgroundIconHeight);
