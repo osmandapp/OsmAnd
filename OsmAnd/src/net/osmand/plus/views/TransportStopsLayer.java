@@ -4,15 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
@@ -52,7 +46,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	private IconsCache iconsCache;
 	private Drawable backgroundIcon;
 	private Bitmap stopBus;
-	private Bitmap background;
 	private Bitmap stopSmall;
 	private RenderingLineAttributes attrs;
 
@@ -61,6 +54,10 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 
 	private boolean showTransportStops;
 	private Path path;
+	private int backgroundIconWidth;
+	private int backgroundIconHeight;
+	private float backgroundIconHalfWidth;
+	private float backgroundIconHalfHeight;
 
 	public TransportStopsLayer(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -71,6 +68,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	public void initLayer(final OsmandMapTileView view) {
 		iconsCache = mapActivity.getMyApplication().getIconsCache();
 		backgroundIcon = iconsCache.getIcon(R.drawable.map_transport_stop_bg);
+		backgroundIconWidth = backgroundIcon.getIntrinsicWidth();
+		backgroundIconHeight = backgroundIcon.getIntrinsicHeight();
+		backgroundIconHalfWidth = backgroundIconWidth / 2f;
+		backgroundIconHalfHeight = backgroundIconHeight / 2f;
+		backgroundIcon.setBounds(0, 0, backgroundIconWidth, backgroundIconHeight);
 		this.view = view;
 		DisplayMetrics dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -127,7 +129,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			}
 		};
 	}
-	
+
 	public void getFromPoint(RotatedTileBox tb, PointF point, List<? super TransportStop> res,
 			List<TransportStop> objects) {
 		int ex = (int) point.x;
@@ -156,11 +158,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			// that's really rare case, but is much efficient than introduce synchronized block
 		}
 	}
-	
+
 	public TransportStopRoute getRoute() {
 		return stopRoute;
 	}
-	
+
 	public void setRoute(TransportStopRoute route) {
 		this.stopRoute = route;
 	}
@@ -227,7 +229,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			data.queryNewData(tb);
 			objects = data.getResults();
 		}
-		
+
 		if (objects != null) {
 			float iconSize = stopBus.getWidth() * 3 / 2.5f;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tb);
@@ -242,13 +244,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 					fullObjects.add(o);
 				}
 			}
-			Bitmap b = stopBus;
-
-			int backgroundIconWidth = backgroundIcon.getIntrinsicWidth();
-			int backgroundIconHeight = backgroundIcon.getIntrinsicHeight();
-			float backgroundIconHalfWidth = backgroundIconWidth / 2f;
-			float backgroundIconHalfHeight = backgroundIconHeight / 2f;
-			backgroundIcon.setBounds(0, 0, backgroundIconWidth, backgroundIconHeight);
 
 			for (TransportStop o : fullObjects) {
 				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
@@ -256,15 +251,17 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				if (stopRoute != null) {
 					TransportStopType type = TransportStopType.findType(stopRoute.route.getType());
 					if (type != null) {
-						Drawable foregroundIcon = iconsCache.getPaintedIcon(type.getSmallResId(), ContextCompat.getColor(mapActivity, R.color.primary_text_dark));
+						Drawable foregroundIcon = iconsCache.getIcon(type.getSmallResId(), R.color.primary_text_dark);
 
 						float dx = x - backgroundIconHalfWidth;
 						float dy = y - backgroundIconHalfHeight;
 						int foregroundIconHalfWidth = foregroundIcon.getIntrinsicWidth() / 2;
 						int foregroundIconHalfHeight = foregroundIcon.getIntrinsicHeight() / 2;
 
-						foregroundIcon.setBounds((int) backgroundIconHalfWidth - foregroundIconHalfWidth, (int) backgroundIconHalfHeight - foregroundIconHalfHeight,
-								(int) backgroundIconHalfWidth + foregroundIconHalfWidth, (int) backgroundIconHalfHeight + foregroundIconHalfHeight);
+						foregroundIcon.setBounds((int) backgroundIconHalfWidth - foregroundIconHalfWidth,
+								(int) backgroundIconHalfHeight - foregroundIconHalfHeight,
+								(int) backgroundIconHalfWidth + foregroundIconHalfWidth,
+								(int) backgroundIconHalfHeight + foregroundIconHalfHeight);
 
 						canvas.translate(dx, dy);
 						backgroundIcon.draw(canvas);
@@ -272,6 +269,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 						canvas.translate(-dx, -dy);
 					}
 				} else {
+					Bitmap b = stopBus;
 					canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
 				}
 			}
@@ -300,7 +298,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	public PointDescription getObjectName(Object o) {
 		if(o instanceof TransportStop){
 			return new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP, mapActivity.getString(R.string.transport_Stop),
-					((TransportStop)o).getName()); 
+					((TransportStop)o).getName());
 		}
 		return null;
 	}
@@ -331,7 +329,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			getFromPoint(tileBox, point, res, stopRoute.route.getForwardStops());
 		} else if (tileBox.getZoom() >= startZoom && data.getResults() != null) {
 			getFromPoint(tileBox, point, res, data.getResults());
-		} 
+		}
 	}
 
 	@Override
