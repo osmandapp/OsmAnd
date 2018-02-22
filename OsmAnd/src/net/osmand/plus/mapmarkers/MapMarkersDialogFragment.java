@@ -171,6 +171,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			groupsFragment.startLocationUpdate();
 			groupsFragment.setGroupIdToOpen(groupIdToOpen);
 			viewPager.setCurrentItem(GROUPS_POSITION, false);
+			bottomNav.getMenu().findItem(R.id.action_groups).setChecked(true);
 		}
 		bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 			@Override
