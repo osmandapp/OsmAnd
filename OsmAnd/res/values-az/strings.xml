@@ -2027,4 +2027,6 @@
     <string name="global_app_allocated_memory">Ayrılan yaddaş</string>
     <string name="native_app_allocated_memory_descr">Proqram tərəfindən ayrılan ümumi yaddaş %1$s MB (Dalvik %2$s MB, digər %3$s MB). Proporsional yaddaş %4$s MB (Android limiti %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Ümumi yerli yaddaş</string>
+    <string name="transport_nearby_routes_within">Yaxında marşrutlar</string>
+    <string name="transport_nearby_routes">YAXIN</string>
     </resources>
