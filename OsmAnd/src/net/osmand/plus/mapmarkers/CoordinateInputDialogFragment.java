@@ -76,10 +76,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	public static final String USE_OSMAND_KEYBOARD = "use_osmand_keyboard";
 
-	private static final String LATITUDE_LABEL = "latitude";
-	private static final String LONGITUDE_LABEL = "longitude";
-	private static final String NAME_LABEL = "name";
-
 	private final List<MapMarker> mapMarkers = new ArrayList<>();
 	private OnMapMarkersSavedListener listener;
 
@@ -641,22 +637,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 							public boolean onMenuItemClick(MenuItem item) {
 								switch (item.getItemId()) {
 									case R.id.action_copy:
-										String labelText;
-										switch (view.getId()) { // todo
-//											case R.id.latitude_edit_text:
-//												labelText = LATITUDE_LABEL;
-//												break;
-//											case R.id.longitude_edit_text:
-//												labelText = LONGITUDE_LABEL;
-//												break;
-											case R.id.point_name_et:
-												labelText = NAME_LABEL;
-												break;
-											default:
-												labelText = "";
-												break;
-										}
-										ClipData clip = ClipData.newPlainText(labelText, inputEditText.getText().toString());
+										ClipData clip = ClipData.newPlainText("", inputEditText.getText().toString());
 										clipboardManager.setPrimaryClip(clip);
 										return true;
 									case R.id.action_paste:
@@ -808,6 +789,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void changeOsmandKeyboardVisibility(boolean show) {
+		if (show) {
+			useOsmandKeyboard = true;
+		}
 		int visibility = show ? View.VISIBLE : View.GONE;
 		if (orientationPortrait) {
 			mainView.findViewById(R.id.keyboard_view).setVisibility(visibility);
@@ -844,13 +828,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		double lat = parseCoordinate(latitude);
 		double lon = parseCoordinate(longitude);
 		if (lat == 0 || lon == 0) {
-			Toast.makeText(getContext(), "wrong input", Toast.LENGTH_SHORT).show(); // todo
-//			if (lon == 0) {
-//				((OsmandTextFieldBoxes) mainView.findViewById(R.id.latitude_box)).setError("", true);
-//			}
-//			if (lat == 0) {
-//				((OsmandTextFieldBoxes) mainView.findViewById(R.id.longitude_box)).setError("", true);
-//			}
+			Toast.makeText(getContext(), R.string.wrong_input, Toast.LENGTH_SHORT).show();
 		} else {
 			String name = ((EditText) mainView.findViewById(R.id.point_name_et)).getText().toString();
 			addMapMarker(new LatLon(lat, lon), name);
