@@ -676,9 +676,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		int format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
 
-		int firstPartSymbols = CoordinateInputFormats.getFirstPartSymbolsCount(format);
-		setupEditTextEx(R.id.lat_first_input_et, firstPartSymbols, true);
-		setupEditTextEx(R.id.lon_first_input_et, firstPartSymbols, false);
+		setupEditTextEx(R.id.lat_first_input_et, CoordinateInputFormats.getFirstPartSymbolsCount(format, true), true);
+		setupEditTextEx(R.id.lon_first_input_et, CoordinateInputFormats.getFirstPartSymbolsCount(format, false), false);
 
 		String firstSeparator = CoordinateInputFormats.getFirstSeparator(format);
 		((TextView) mainView.findViewById(R.id.lat_first_separator_tv)).setText(firstSeparator);
