@@ -3120,4 +3120,7 @@ représentant la zone : %1$s x %2$s</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Nom optionnel du point</string>
     <string name="transport_nearby_routes_within">Itinéraires à proximité de</string>
-    </resources>
+    <string name="enter_lon">Saisissez la longitude</string>
+    <string name="enter_lat">Saisissez la latitude</string>
+    <string name="enter_lat_and_lon">Saisissez la latitude et la longitude</string>
+	</resources>
