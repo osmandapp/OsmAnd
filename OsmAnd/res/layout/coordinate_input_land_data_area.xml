@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/data_area"
+	android:layout_width="0dp"
+	android:layout_height="match_parent"
+	android:layout_weight="0.5"
+	android:orientation="vertical"
+	tools:layout_width="match_parent">
+
+	<include
+		layout="@layout/coordinate_input_data_area"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"/>
+
+	<View
+		android:id="@+id/keyboard_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/keyboard_controls_divider"/>
+
+	<LinearLayout
+		android:id="@+id/bottom_controls_container"
+		android:layout_width="match_parent"
+		android:layout_height="56dp">
+
+		<ImageView
+			android:id="@+id/show_hide_keyboard_icon_left"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_gravity="center_vertical"
+			android:layout_marginBottom="@dimen/route_info_button_go_margin"
+			android:layout_marginLeft="@dimen/route_info_button_go_margin"
+			android:layout_marginStart="@dimen/route_info_button_go_margin"
+			android:layout_marginTop="@dimen/route_info_button_go_margin"
+			android:background="?attr/selectableItemBackground"
+			android:paddingLeft="@dimen/coords_input_show_hide_keyboard_btn_padding"
+			android:paddingRight="@dimen/coords_input_show_hide_keyboard_btn_padding"
+			android:visibility="gone"
+			tools:src="@drawable/ic_action_keyboard_hide"
+			tools:visibility="visible"/>
+
+		<android.support.v7.widget.AppCompatTextView
+			android:id="@+id/add_marker_button"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_gravity="center_vertical"
+			android:layout_margin="@dimen/route_info_button_go_margin"
+			android:layout_weight="1"
+			android:ellipsize="end"
+			android:gravity="center"
+			android:maxLines="1"
+			android:text="@string/shared_string_add"
+			android:textAllCaps="true"
+			android:textColor="@color/keyboard_item_button_text_color"
+			android:textSize="@dimen/default_list_text_size"
+			android:textStyle="bold"
+			tools:background="@drawable/route_info_go_btn_bg_dark"/>
+
+		<ImageView
+			android:id="@+id/show_hide_keyboard_icon_right"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_gravity="center_vertical"
+			android:layout_marginBottom="@dimen/route_info_button_go_margin"
+			android:layout_marginEnd="@dimen/route_info_button_go_margin"
+			android:layout_marginRight="@dimen/route_info_button_go_margin"
+			android:layout_marginTop="@dimen/route_info_button_go_margin"
+			android:background="?attr/selectableItemBackground"
+			android:paddingLeft="@dimen/coords_input_show_hide_keyboard_btn_padding"
+			android:paddingRight="@dimen/coords_input_show_hide_keyboard_btn_padding"
+			tools:src="@drawable/ic_action_keyboard_hide"/>
+
+	</LinearLayout>
+
+</LinearLayout>
