@@ -2972,4 +2972,19 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="map_import_error">Eraro dum enporti mapon</string>
     <string name="map_imported_successfully">Mapo enportita sukcese</string>
     <string name="enter_the_file_name">Entajpu dosier-nomon.</string>
+    <string name="enter_lon">Entajpu longitudon</string>
+    <string name="enter_lat">Entajpu latitudon</string>
+    <string name="enter_lat_and_lon">Entajpu latitudon kaj longitudon</string>
+	<string name="dd_mm_ss_format">GG°MM′SS″</string>
+	<string name="dd_dddddd_format">GG,GGGGGG°</string>
+	<string name="dd_ddddd_format">GG,GGGGG°</string>
+	<string name="dd_mm_mmmm_format">GG°MM,MMMM′</string>
+	<string name="dd_mm_mmm_format">GG°MM.MMM′</string>
+	<string name="east_abbreviation">Or</string>
+	<string name="west_abbreviation">Ok</string>
+	<string name="south_abbreviation">S</string>
+	<string name="north_abbreviation">N</string>
+	<string name="optional_point_name">Nomo de punkto (malnepra)</string>
+    <string name="transport_nearby_routes_within">Kursoj proksime</string>
+    <string name="transport_nearby_routes">PROKSIME</string>
     </resources>
