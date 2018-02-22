@@ -126,7 +126,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			}
 		};
 	}
-
+	
 	public void getFromPoint(RotatedTileBox tb, PointF point, List<? super TransportStop> res,
 			List<TransportStop> objects) {
 		int ex = (int) point.x;
@@ -155,11 +155,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			// that's really rare case, but is much efficient than introduce synchronized block
 		}
 	}
-
+	
 	public TransportStopRoute getRoute() {
 		return stopRoute;
 	}
-
+	
 	public void setRoute(TransportStopRoute route) {
 		this.stopRoute = route;
 	}
@@ -241,7 +241,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 					fullObjects.add(o);
 				}
 			}
-
 			for (TransportStop o : fullObjects) {
 				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
@@ -271,7 +270,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			}
 		}
 	}
-
+	
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 	}
