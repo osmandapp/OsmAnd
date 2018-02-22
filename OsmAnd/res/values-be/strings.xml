@@ -3064,4 +3064,16 @@
     <string name="map_import_error">Памылка імпарту мапы</string>
     <string name="map_imported_successfully">Мапа паспяховая імпартаваная</string>
     <string name="enter_the_file_name">Увядзіце імя файла.</string>
+    <string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD,DDDDDD°</string>
+	<string name="dd_ddddd_format">DD,DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM,MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM,MMM′</string>
+	<string name="east_abbreviation">У</string>
+	<string name="west_abbreviation">З</string>
+	<string name="south_abbreviation">Пд</string>
+	<string name="north_abbreviation">Пн</string>
+	<string name="optional_point_name">Неабавязковая назва пункта</string>
+    <string name="transport_nearby_routes_within">Маршруты паблізу з</string>
+    <string name="transport_nearby_routes">ПАБЛІЗУ</string>
     </resources>
