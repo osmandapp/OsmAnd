@@ -3018,7 +3018,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 \n 
 \n • 為快速標記建立，新增了快速坐標輸入畫面 
 \n</string>
-    <string name="will_open_tomorrow_at">將在明天開幕</string>
+    <string name="will_open_tomorrow_at">會明天開幕於</string>
     <string name="copy_location_name">複製標點/POI 名稱</string>
     <string name="toast_empty_name_error">位置沒有名稱</string>
 <string name="show_closed_notes">顯示已關閉的註解</string>
