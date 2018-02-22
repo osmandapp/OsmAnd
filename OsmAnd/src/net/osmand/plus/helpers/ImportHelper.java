@@ -648,7 +648,7 @@ public class ImportHelper {
 
 		if (forceImportFavourites) {
 			importFavoritesImpl(gpxFile, fileName, true);
-		} else {
+		} else if (fileName != null) {
 			ImportGpxBottomSheetDialogFragment fragment = new ImportGpxBottomSheetDialogFragment();
 			fragment.setUsedOnMap(true);
 			fragment.setImportHelper(this);
