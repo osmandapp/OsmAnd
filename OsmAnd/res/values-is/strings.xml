@@ -2805,4 +2805,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="enter_lon">Settu inn lengdargráðu</string>
     <string name="enter_lat">Settu inn breiddargráðu</string>
     <string name="enter_lat_and_lon">Settu inn lengdar- og breiddargráðu</string>
-	</resources>
+	<string name="distance_farthest">Vegalengd: lengst fyrst</string>
+    <string name="distance_nearest">Vegalengd: nálægast fyrst</string>
+    </resources>
