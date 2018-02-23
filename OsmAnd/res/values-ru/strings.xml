@@ -2856,4 +2856,17 @@
     <string name="map_imported_successfully">Карта импортирована успешно</string>
     <string name="transport_nearby_routes_within">Маршруты рядом с</string>
     <string name="transport_nearby_routes">РЯДОМ</string>
+    <string name="enter_lon">Введите долготу</string>
+    <string name="enter_lat">Введите широту</string>
+    <string name="enter_lat_and_lon">Введите широту и долготу</string>
+	<string name="dd_mm_ss_format">ГГ°MM\'СС\"</string>
+	<string name="dd_dddddd_format">ГГ.ГГГГГГ°</string>
+	<string name="dd_ddddd_format">ГГ.ГГГГГ°</string>
+	<string name="dd_mm_mmmm_format">ГГ°ММ.ММММ′</string>
+	<string name="dd_mm_mmm_format">ГГ°ММ.МММ′</string>
+	<string name="east_abbreviation">В</string>
+	<string name="west_abbreviation">З</string>
+	<string name="south_abbreviation">Ю</string>
+	<string name="north_abbreviation">С</string>
+	<string name="optional_point_name">Необязательное имя точки</string>
     </resources>
