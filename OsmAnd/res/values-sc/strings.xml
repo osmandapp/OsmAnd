@@ -2958,4 +2958,19 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="map_import_error">Errore cun s\'importatzione de sa mapa</string>
     <string name="map_imported_successfully">Mapa importada cun sutzessu</string>
     <string name="enter_the_file_name">Inserta su nùmene de su documentu.</string>
+    <string name="enter_lon">Inserta sa longitùdine</string>
+    <string name="enter_lat">Inserta sa latitùdine</string>
+    <string name="enter_lat_and_lon">Inserta sa longitùdine e sa latitùdine</string>
+	<string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	<string name="east_abbreviation">E</string>
+	<string name="west_abbreviation">O</string>
+	<string name="south_abbreviation">S</string>
+	<string name="north_abbreviation">N</string>
+	<string name="optional_point_name">Nùmene optzionale de su puntu</string>
+    <string name="transport_nearby_routes_within">Àndalas a curtzu de</string>
+    <string name="transport_nearby_routes">A CURTZU</string>
     </resources>

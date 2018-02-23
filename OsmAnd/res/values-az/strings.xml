@@ -1834,7 +1834,7 @@
     <string name="index_name_openmaps">OpenMaps - Avropa</string>
     <string name="recording_unavailable">dəstəklənmir</string>
     <string name="close_changeset">Dəyişiklikləri bağla</string>
-    <string name="rotate_map_to_bearing">Xəritənin istiqaməti</string>
+    <string name="rotate_map_to_bearing">Xəritə istiqaməti</string>
     <string name="navigation_intent_invalid">Yanlış format: %s</string>
     <string name="show_closed_notes">Bağlı qeydləri göstər</string>
     <string name="switch_osm_notes_visibility_desc">Xəritədə OSM qeydlərini göstər/gizlət.</string>
@@ -2029,4 +2029,18 @@
     <string name="native_app_allocated_memory">Ümumi yerli yaddaş</string>
     <string name="transport_nearby_routes_within">Yaxında marşrutlar</string>
     <string name="transport_nearby_routes">YAXIN</string>
+    <string name="east_abbreviation">Ş</string>
+	<string name="west_abbreviation">Q</string>
+	<string name="south_abbreviation">C</string>
+	<string name="north_abbreviation">Şm</string>
+	<string name="lang_pms">Pyemontca</string>
+    <string name="lang_lo">Laosca</string>
+    <string name="lang_os">Osetincə</string>
+    <string name="lang_hsb">Yuxarı Sorbca</string>
+    <string name="use_kalman_filter_compass_descr">Kompasın “səs-küyünü” azaldır, lakin ətalət əlavə edir.</string>
+    <string name="use_magnetic_sensor_descr">Kompasın oxunması üçün istiqamət sensoru əvəzinə maqnit sensorunu istifadə et.</string>
+    <string name="safe_mode_description">Proqramı təhlükəsiz rejimdə işlət (Yerli kod əvəzinə daha yavaş Android istifadə edir).</string>
+    <string name="use_compass_navigation_descr">İstiqaməti başqa cür müəyyən etmək mümkün deyilsə, kompas istifadə et.</string>
+    <string name="rotate_map_to_bearing_descr">Xəritənin fırlanma üsulunu seçin.</string>
+    <string name="map_screen_orientation">Ekran istiqaməti</string>
     </resources>
