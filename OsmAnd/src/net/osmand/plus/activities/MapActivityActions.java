@@ -80,6 +80,13 @@ public class MapActivityActions implements DialogProvider {
 
 	public static final String KEY_ZOOM = "zoom";
 
+	// Constants for determining the order of items in the additional actions context menu
+	public static final int DIRECTIONS_FROM_ITEM_ORDER = 1000;
+	public static final int SEARCH_NEAR_ITEM_ORDER = 2000;
+	public static final int CHANGE_POSITION_ITEM_ORDER = 3000;
+	public static final int EDIT_GPX_WAYPOINT_ITEM_ORDER = 9000;
+	public static final int ADD_GPX_WAYPOINT_ITEM_ORDER = 9000;
+
 	private static final int DIALOG_ADD_FAVORITE = 100;
 	private static final int DIALOG_REPLACE_FAVORITE = 101;
 	private static final int DIALOG_ADD_WAYPOINT = 102;
@@ -277,12 +284,12 @@ public class MapActivityActions implements DialogProvider {
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
 				.setIcon(R.drawable.ic_action_route_direction_from_here)
-				.setPosition(0)
+				.setOrder(DIRECTIONS_FROM_ITEM_ORDER)
 				.createItem());
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.context_menu_item_search, mapActivity)
 				.setIcon(R.drawable.ic_action_search_dark)
-				.setPosition(1)
+				.setOrder(SEARCH_NEAR_ITEM_ORDER)
 				.createItem());
 
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
@@ -304,16 +311,18 @@ public class MapActivityActions implements DialogProvider {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_edit_waypoint, mapActivity)
 					.setIcon(R.drawable.ic_action_edit_dark)
-					.setPosition(getPositionForGpxAction(adapter))
+					.setOrder(EDIT_GPX_WAYPOINT_ITEM_ORDER)
 					.setListener(listener).createItem());
 		} else if (!getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles().isEmpty()
 				|| (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null)) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_add_waypoint, mapActivity)
 					.setIcon(R.drawable.ic_action_gnew_label_dark)
-					.setPosition(getPositionForGpxAction(adapter))
+					.setOrder(ADD_GPX_WAYPOINT_ITEM_ORDER)
 					.setListener(listener).createItem());
 		}
+
+		adapter.sortItemsByOrder();
 
 		final ArrayAdapter<ContextMenuItem> listAdapter =
 				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
@@ -346,17 +355,6 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 		actionsBottomSheetDialogFragment.show(mapActivity.getSupportFragmentManager(), AdditionalActionsBottomSheetDialogFragment.TAG);
-	}
-
-	private int getPositionForGpxAction(ContextMenuAdapter adapter) {
-		for (int i = 0; i < adapter.length(); i++) {
-			int titleId = adapter.getItem(i).getTitleId();
-			if (titleId == R.string.context_menu_item_add_parking_point
-					|| titleId == R.string.context_menu_item_update_map) {
-				return i;
-			}
-		}
-		return adapter.length();
 	}
 
 	public void setGPXRouteParams(GPXFile result) {

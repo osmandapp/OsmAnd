@@ -48,6 +48,11 @@ import java.util.Map;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.rastermaps";
+
+	// Constants for determining the order of items in the additional actions context menu
+	private static final int UPDATE_MAP_ITEM_ORDER = 12300;
+	private static final int DOWNLOAD_MAP_ITEM_ORDER = 12600;
+
 	private OsmandSettings settings;
 	private OsmandApplication app;
 
@@ -361,10 +366,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_update_map, mapActivity)
 					.setIcon(R.drawable.ic_action_refresh_dark)
+					.setOrder(UPDATE_MAP_ITEM_ORDER)
 					.setListener(listener).createItem());
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.shared_string_download_map, mapActivity)
 					.setIcon(R.drawable.ic_action_import)
+					.setOrder(DOWNLOAD_MAP_ITEM_ORDER)
 					.setListener(listener).createItem());
 		}
 	}

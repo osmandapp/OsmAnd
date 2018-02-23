@@ -51,6 +51,10 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public final static String PARKING_TIME = "parking_limit_time"; //$//$NON-NLS-1$
 	public final static String PARKING_START_TIME = "parking_time"; //$//$NON-NLS-1$
 	public final static String PARKING_EVENT_ADDED = "parking_event_added"; //$//$NON-NLS-1$
+
+	// Constants for determining the order of items in the additional actions context menu
+	private static final int MARK_AS_PARKING_POS_ITEM_ORDER = 10500;
+
     private LatLon parkingPosition;
     private OsmandApplication app;
 
@@ -228,6 +232,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.context_menu_item_add_parking_point, mapActivity)
 				.setIcon(R.drawable.ic_action_parking_dark)
+				.setOrder(MARK_AS_PARKING_POS_ITEM_ORDER)
 				.setListener(addListener)
 				.createItem());
 	}

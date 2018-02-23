@@ -34,6 +34,7 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -247,6 +248,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.change_markers_position, activity)
 				.setIcon(R.drawable.ic_show_on_map)
+				.setOrder(MapActivityActions.CHANGE_POSITION_ITEM_ORDER)
 				.setClickable(isObjectMoveable(o))
 				.setListener(listener)
 				.createItem());
