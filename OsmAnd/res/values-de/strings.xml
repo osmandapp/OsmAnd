@@ -2959,7 +2959,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="open_till">Geöffnet bis</string>
     <string name="will_close_at">Schließt um</string>
     <string name="will_open_at">Öffnet um</string>
-    <string name="will_open_on">Öffnet</string>
+    <string name="will_open_on">Öffnet um</string>
     <string name="additional_actions">Zusätzliche Aktionen</string>
     <string name="parked_at">geparkt um</string>
     <string name="pick_up_till">Abholung bis</string>
@@ -3010,7 +3010,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="map_import_error">Fehler beim Kartenimport</string>
     <string name="map_imported_successfully">Karte erfolgreich importiert</string>
     <string name="distance_farthest">Entfernung: entfernteste zuerst</string>
-    <string name="distance_nearest">Entfernung: nahste zuerst</string>
+    <string name="distance_nearest">Entfernung: nächstgelegene zuerst</string>
     <string name="enter_lon">Längengrad eingeben</string>
     <string name="enter_lat">Breitengrad eingeben</string>
     <string name="enter_lat_and_lon">Längen- und Breitengrad eingeben</string>
