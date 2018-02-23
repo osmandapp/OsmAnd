@@ -2987,4 +2987,6 @@ Indikas lokon:  %1$s x %2$s"</string>
 	<string name="optional_point_name">Nomo de punkto (malnepra)</string>
     <string name="transport_nearby_routes_within">Kursoj proksime</string>
     <string name="transport_nearby_routes">PROKSIME</string>
+    <string name="distance_farthest">Distanco: de plej malproksimaj</string>
+    <string name="distance_nearest">Distanco: de plej proksimaj</string>
     </resources>
