@@ -2945,4 +2945,7 @@ Proporciona un código completo</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Nombre de punto opcional</string>
-    </resources>
+    <string name="enter_lon">Ingresar longitud</string>
+    <string name="enter_lat">Ingresar latitud</string>
+    <string name="enter_lat_and_lon">Ingresar latitud y longitud</string>
+	</resources>
