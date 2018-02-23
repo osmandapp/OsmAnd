@@ -2618,4 +2618,6 @@
     <string name="first_intermediate_dest_description">הוספת העצירה הראשונה בנתיב</string>
     <string name="subsequent_dest_description">העברת היעד למעלה ויצירת יעד</string>
     <string name="show_closed_notes">הצגת הערות סגורות</string>
+    <string name="distance_farthest">מרחק: הרחוק ביותר בהתחלה</string>
+    <string name="distance_nearest">מרחק: הקרוב ביותר בהתחלה</string>
     </resources>
