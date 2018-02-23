@@ -3005,4 +3005,23 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="subsequent_dest_description">Przesuń cel w górę i utwórz cel</string>
     <string name="empty_state_markers_history_desc">Na tym ekranie zostaną wyświetlone znaczniki oznaczone jako pominięte.</string>
     <string name="mark_passed">Oznacz jako pominięty</string>
+    <string name="enter_lon">Wprowadź długość geograficzną</string>
+    <string name="enter_lat">Wprowadź szerokość geograficzną</string>
+    <string name="enter_lat_and_lon">Wprowadź szerokość i długość</string>
+	<string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	<string name="east_abbreviation">Wsch.</string>
+	<string name="west_abbreviation">Zach.</string>
+	<string name="south_abbreviation">Płd.</string>
+	<string name="north_abbreviation">Płn.</string>
+	<string name="optional_point_name">Dodatkowa nazwa punktu</string>
+    <string name="transport_nearby_routes_within">Trasy w pobliżu</string>
+    <string name="transport_nearby_routes">W POBLIŻU</string>
+    <string name="enter_the_file_name">Wprowadź nazwę pliku.</string>
+    <string name="map_import_error">Błąd importu mapy</string>
+    <string name="map_imported_successfully">Mapa zaimportowana z powodzeniem</string>
+    <string name="osm_recipient_stat">%1$s edycji, w sumie %2$s mBTC</string>
     </resources>
