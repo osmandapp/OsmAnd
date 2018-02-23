@@ -30,6 +30,7 @@ public class ContextMenuItem {
 	private final boolean clickable;
 	private final boolean skipPaintingWithoutColor;
 	private final int pos;
+	private final int order;
 	private String description;
 	private final ContextMenuAdapter.ItemClickListener itemClickListener;
 	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
@@ -49,7 +50,9 @@ public class ContextMenuItem {
 							boolean loading,
 							boolean category,
 							boolean clickable,
-							boolean skipPaintingWithoutColor, int pos,
+							boolean skipPaintingWithoutColor,
+							int pos,
+							int order,
 							String description,
 							ContextMenuAdapter.ItemClickListener itemClickListener,
 							ContextMenuAdapter.OnIntegerValueChangedListener integerListener,
@@ -70,6 +73,7 @@ public class ContextMenuItem {
 		this.clickable = clickable;
 		this.skipPaintingWithoutColor = skipPaintingWithoutColor;
 		this.pos = pos;
+		this.order = order;
 		this.description = description;
 		this.itemClickListener = itemClickListener;
 		this.integerListener = integerListener;
@@ -144,6 +148,10 @@ public class ContextMenuItem {
 
 	public int getPos() {
 		return pos;
+	}
+
+	public int getOrder() {
+		return order;
 	}
 
 	public String getDescription() {
@@ -232,6 +240,7 @@ public class ContextMenuItem {
 		private boolean mIsCategory = false;
 		private boolean mIsClickable = true;
 		private int mPosition = -1;
+		private int mOrder = -1;
 		private String mDescription = null;
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
@@ -305,6 +314,11 @@ public class ContextMenuItem {
 			return this;
 		}
 
+		public ItemBuilder setOrder(int order) {
+			mOrder = order;
+			return this;
+		}
+
 		public ItemBuilder setDescription(String description) {
 			mDescription = description;
 			return this;
@@ -352,7 +366,7 @@ public class ContextMenuItem {
 		public ContextMenuItem createItem() {
 			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mIsClickable, mSkipPaintingWithoutColor,
-					mPosition, mDescription, mItemClickListener, mIntegerListener, mProgressListener,
+					mPosition, mOrder, mDescription, mItemClickListener, mIntegerListener, mProgressListener,
 					mHideDivider, mMinHeight, mTag);
 		}
 	}

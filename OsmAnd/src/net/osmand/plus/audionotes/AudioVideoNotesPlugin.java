@@ -103,6 +103,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public static final int CAMERA_FOR_VIDEO_REQUEST_CODE = 101;
 	public static final int CAMERA_FOR_PHOTO_REQUEST_CODE = 102;
 	public static final int AUDIO_REQUEST_CODE = 103;
+
+	// Constants for determining the order of items in the additional actions context menu
+	// Values boundaries: [4000; 4999]
+	private static final int TAKE_AUDIO_NOTE_ITEM_ORDER = 4100;
+	private static final int TAKE_VIDEO_NOTE_ITEM_ORDER = 4300;
+	private static final int TAKE_PHOTO_NOTE_ITEM_ORDER = 4500;
+
 	private static Method mRegisterMediaButtonEventReceiver;
 	private static Method mUnregisterMediaButtonEventReceiver;
 	private OsmandApplication app;
@@ -661,6 +668,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_arecord, app)
 				.setIcon(R.drawable.ic_action_micro_dark)
+				.setOrder(TAKE_AUDIO_NOTE_ITEM_ORDER)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 					@Override
@@ -672,6 +680,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_vrecord, app)
 				.setIcon(R.drawable.ic_action_video_dark)
+				.setOrder(TAKE_VIDEO_NOTE_ITEM_ORDER)
 				.setListener(new ItemClickListener() {
 
 					@Override
@@ -683,6 +692,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_precord, app)
 				.setIcon(R.drawable.ic_action_photo_dark)
+				.setOrder(TAKE_PHOTO_NOTE_ITEM_ORDER)
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {

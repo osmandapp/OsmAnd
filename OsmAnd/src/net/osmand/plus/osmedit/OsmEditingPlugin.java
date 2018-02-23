@@ -48,6 +48,15 @@ import java.util.List;
 public class OsmEditingPlugin extends OsmandPlugin {
 	private static final Log LOG = PlatformUtil.getLog(OsmEditingPlugin.class);
 	private static final String ID = "osm.editing";
+
+	// Constants for determining the order of items in the additional actions context menu
+	// Values boundaries: [7000; 7999]
+	private static final int CREATE_POI_ITEM_ORDER = 7300;
+	private static final int MODIFY_POI_ITEM_ORDER = 7300;
+	private static final int MODIFY_OSM_CHANGE_ITEM_ORDER = 7300;
+	private static final int OPEN_OSM_NOTE_ITEM_ORDER = 7600;
+	private static final int MODIFY_OSM_NOTE_ITEM_ORDER = 7600;
+
 	private OsmandSettings settings;
 	private OsmandApplication app;
 	private OpenstreetmapsDbHelper dbpoi;
@@ -205,27 +214,34 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (isEditable) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify, mapActivity)
 					.setIcon(R.drawable.ic_action_edit_dark)
+					.setOrder(MODIFY_POI_ITEM_ORDER)
 					.setListener(listener)
 					.createItem());
 		} else if (selectedObj instanceof OpenstreetmapPoint && ((OpenstreetmapPoint) selectedObj).getAction() != Action.DELETE) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify_osm_change, mapActivity)
 					.setIcon(R.drawable.ic_action_edit_dark)
+					.setOrder(MODIFY_OSM_CHANGE_ITEM_ORDER)
 					.setListener(listener)
 					.createItem());
 		} else {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_create_poi, mapActivity)
 					.setIcon(R.drawable.ic_action_plus_dark)
+					.setOrder(CREATE_POI_ITEM_ORDER)
 					.setListener(listener)
 					.createItem());
 		}
 		if (selectedObj instanceof OsmNotesPoint) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_modify_note, mapActivity)
 					.setIcon(R.drawable.ic_action_edit_dark)
-					.setListener(listener).createItem());
+					.setOrder(MODIFY_OSM_NOTE_ITEM_ORDER)
+					.setListener(listener)
+					.createItem());
 		} else {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_open_note, mapActivity)
 					.setIcon(R.drawable.ic_action_bug_dark)
-					.setListener(listener).createItem());
+					.setOrder(OPEN_OSM_NOTE_ITEM_ORDER)
+					.setListener(listener)
+					.createItem());
 		}
 	}
 

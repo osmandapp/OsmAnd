@@ -30,6 +30,8 @@ import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -79,6 +81,21 @@ public class ContextMenuAdapter {
 		this.changeAppModeListener = changeAppModeListener;
 	}
 
+	public void sortItemsByOrder() {
+		Collections.sort(items, new Comparator<ContextMenuItem>() {
+			@Override
+			public int compare(ContextMenuItem item1, ContextMenuItem item2) {
+				int order1 = item1.getOrder();
+				int order2 = item2.getOrder();
+				if (order1 < order2) {
+					return -1;
+				} else if (order1 == order2) {
+					return 0;
+				}
+				return 1;
+			}
+		});
+	}
 
 	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean lightTheme) {
 		final int layoutId = DEFAULT_LAYOUT_ID;
