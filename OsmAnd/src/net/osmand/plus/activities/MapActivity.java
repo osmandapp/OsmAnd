@@ -1815,7 +1815,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(ShowQuickSearchMode mode, boolean showCategories) {
-		hideContextMenu();
+		if (mode == ShowQuickSearchMode.CURRENT) {
+			mapContextMenu.close();
+		} else {
+			hideContextMenu();
+		}
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (mode == ShowQuickSearchMode.START_POINT_SELECTION || mode == ShowQuickSearchMode.DESTINATION_SELECTION) {
 			if (fragment != null) {
