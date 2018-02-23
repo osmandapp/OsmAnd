@@ -2542,11 +2542,12 @@ Proporciona un código completo</string>
 \n • Comparte la ubicación para que tus amigos te encuentren</string>
     <string name="osmand_plus_extended_description_part6">Funciones de ciclismo y peatón • Visualización de caminos para caminar, senderismo y ciclismo,ideal para actividades al aire libre • Navegación especial y modos de visualización para bicicletas y peatones • (Opcional) Paradas de transporte público (colectivo, tranvía, tren) incluyendo nombres de líneas • (Opcional) Graba el viaje en forma local en un archivo GPX o con un servicio en línea • (Opcional) Muestra la velocidad y altitud • Mediante un complemento adicional, puedes activar la visualización de las curvas de nivel y el sombreado de colinas</string>
     <string name="osmand_plus_extended_description_part7">"Contribuye con OSM 
+\n
 \n • Informa sobre problemas de datos en el mapa 
 \n • Sube trazas GPX a OSM directamente desde la aplicación 
 \n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado) 
 \n • (Opcional) Grabación del viaje en segundo plano (mientras el dispositivo está bloqueado) 
-\n
+\n 
 \n  OsmAnd es de código abierto y se desarrolla activamente. Puedes contribuir con la aplicación al informar sobre errores, mejorar las traducciones o desarrollar nuevas funciones. El proyecto se encuentra en un estado de mejora continua gracias a todas estas formas de interacción entre el desarrollador y el usuario. El progreso del proyecto también depende de contribuciones financieras para financiar el desarrollo y pruebas de nuevas funcionalidades."</string>
     <string name="osmand_plus_extended_description_part8">Cobertura y calidad aproximada del mapa: 
 \n • Europa Occidental: **** 
@@ -2847,7 +2848,7 @@ Proporciona un código completo</string>
     <string name="looking_for_tracks_with_waypoints">Búsqueda de trazas con puntos de referencia</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta problemas del mapa (notas de OSM), y contribuye con grabaciones GPX.</string>
+    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta notas de OSM, y contribuye con grabaciones GPX.</string>
     <string name="shared_string_deleted">Borrado</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Añadido</string>
