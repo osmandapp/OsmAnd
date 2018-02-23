@@ -300,9 +300,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public boolean isObjectMoveable(Object o) {
-		if (o == null) {
-			return true;
-		} else if (selectedObjectContextMenuProvider != null
+		if (o != null && selectedObjectContextMenuProvider != null
 				&& selectedObjectContextMenuProvider instanceof ContextMenuLayer.IMoveObjectProvider) {
 			final IMoveObjectProvider l = (ContextMenuLayer.IMoveObjectProvider) selectedObjectContextMenuProvider;
 			if (l.isObjectMovable(o)) {
