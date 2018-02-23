@@ -50,7 +50,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.rastermaps";
 
 	// Constants for determining the order of items in the additional actions context menu
-	// Values boundaries: [12000; 12999]
 	private static final int UPDATE_MAP_ITEM_ORDER = 12300;
 	private static final int DOWNLOAD_MAP_ITEM_ORDER = 12600;
 

@@ -105,7 +105,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public static final int AUDIO_REQUEST_CODE = 103;
 
 	// Constants for determining the order of items in the additional actions context menu
-	// Values boundaries: [4000; 4999]
 	private static final int TAKE_AUDIO_NOTE_ITEM_ORDER = 4100;
 	private static final int TAKE_VIDEO_NOTE_ITEM_ORDER = 4300;
 	private static final int TAKE_PHOTO_NOTE_ITEM_ORDER = 4500;

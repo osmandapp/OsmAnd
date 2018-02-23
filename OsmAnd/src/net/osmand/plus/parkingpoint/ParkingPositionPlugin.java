@@ -53,7 +53,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public final static String PARKING_EVENT_ADDED = "parking_event_added"; //$//$NON-NLS-1$
 
 	// Constants for determining the order of items in the additional actions context menu
-	// Values boundaries: [10000; 10999]
 	private static final int MARK_AS_PARKING_POS_ITEM_ORDER = 10500;
 
     private LatLon parkingPosition;

@@ -81,16 +81,11 @@ public class MapActivityActions implements DialogProvider {
 	public static final String KEY_ZOOM = "zoom";
 
 	// Constants for determining the order of items in the additional actions context menu
-	// In the case of changing values boundaries for plugin, change them in the plugin too
 	public static final int DIRECTIONS_FROM_ITEM_ORDER = 1000;
 	public static final int SEARCH_NEAR_ITEM_ORDER = 2000;
 	public static final int CHANGE_POSITION_ITEM_ORDER = 3000;
-	// Orders from 4000 to 4999 are for AudioVideoNotesPlugin
-	// Orders from 7000 to 7999 are for OsmEditingPlugin
 	public static final int EDIT_GPX_WAYPOINT_ITEM_ORDER = 9000;
 	public static final int ADD_GPX_WAYPOINT_ITEM_ORDER = 9000;
-	// Orders from 10000 to 10999 are for ParkingPositionPlugin
-	// Orders from 12000 to 12999 are for OsmAndRasterMapsPlugin
 
 	private static final int DIALOG_ADD_FAVORITE = 100;
 	private static final int DIALOG_REPLACE_FAVORITE = 101;

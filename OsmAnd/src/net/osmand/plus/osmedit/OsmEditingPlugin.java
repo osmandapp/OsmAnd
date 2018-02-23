@@ -50,7 +50,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private static final String ID = "osm.editing";
 
 	// Constants for determining the order of items in the additional actions context menu
-	// Values boundaries: [7000; 7999]
 	private static final int CREATE_POI_ITEM_ORDER = 7300;
 	private static final int MODIFY_POI_ITEM_ORDER = 7300;
 	private static final int MODIFY_OSM_CHANGE_ITEM_ORDER = 7300;
