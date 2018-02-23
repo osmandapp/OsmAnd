@@ -582,8 +582,8 @@
     <string name="favourites_edit_dialog_category">Flokkur</string>
     <string name="shared_string_no_thanks">Nei, takk</string>
     <string name="shared_string_release">Útgefið</string>
-    <string name="local_index_mi_restore">virkja</string>
-    <string name="local_index_mi_backup">gera óvirk</string>
+    <string name="local_index_mi_restore">Virkja</string>
+    <string name="local_index_mi_backup">Gera óvirkt</string>
     <string name="local_indexes_cat_backup">Aftengt</string>
     <string name="search_offline_clear_search">Ný leit</string>
     <string name="tts_language_not_supported_title">Tungumálið er ekki stutt</string>
