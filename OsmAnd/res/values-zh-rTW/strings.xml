@@ -3043,4 +3043,17 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="enter_the_file_name">輸入檔案名稱。</string>
     <string name="transport_nearby_routes_within">在附近的路線</string>
     <string name="transport_nearby_routes">附近</string>
+    <string name="enter_lon">輸入經度</string>
+    <string name="enter_lat">輸入緯度</string>
+    <string name="enter_lat_and_lon">輸入緯度和經度</string>
+	<string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	<string name="east_abbreviation">東</string>
+	<string name="west_abbreviation">西</string>
+	<string name="south_abbreviation">南</string>
+	<string name="north_abbreviation">北</string>
+	<string name="optional_point_name">任意的標點名稱</string>
     </resources>
