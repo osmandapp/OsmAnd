@@ -262,7 +262,7 @@ public class DownloadFileHelper {
 		if(mb == 0) {
 			mb = 1;
 		}
-		String taskName = ctx.getString(R.string.shared_string_downloading) + " " + 
+		String taskName = ctx.getString(R.string.shared_string_downloading) + ": " +
 		//+ de.baseName /*+ " " + mb + " MB"*/;
 		FileNameTranslationHelper.getFileName(ctx, ctx.getRegions(), de.baseName);
 		
