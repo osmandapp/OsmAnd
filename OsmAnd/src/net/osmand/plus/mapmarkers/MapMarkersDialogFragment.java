@@ -25,9 +25,9 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarkersSortByDef;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.MapMarkersOrderByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -142,8 +142,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		}
 
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
-
-		setOrderByMode(getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.get());
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.map_markers_toolbar);
 		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
@@ -470,24 +468,18 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	private OrderByFragmentListener createOrderByFragmentListener() {
 		return new OrderByFragmentListener() {
 			@Override
-			public void onMapMarkersOrderByModeChanged(MapMarkersOrderByMode orderByMode) {
-				setOrderByMode(orderByMode);
+			public void onMapMarkersOrderByModeChanged(@MapMarkersSortByDef int sortByMode) {
+				OsmandApplication app = getMyApplication();
+				MapActivity mapActivity = getMapActivity();
+
+				Location location = app.getLocationProvider().getLastKnownLocation();
+				boolean useCenter = !(mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation() && location != null);
+				LatLon loc = useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude());
+
+				app.getMapMarkersHelper().sortMarkers(sortByMode, loc);
+				activeFragment.updateAdapter();
 			}
 		};
-	}
-
-	private void setOrderByMode(MapMarkersOrderByMode orderByMode) {
-		if (orderByMode != MapMarkersOrderByMode.CUSTOM) {
-			OsmandApplication app = getMyApplication();
-			MapActivity mapActivity = getMapActivity();
-
-			Location location = app.getLocationProvider().getLastKnownLocation();
-			boolean useCenter = !(mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation() && location != null);
-			LatLon loc = useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude());
-
-			app.getMapMarkersHelper().orderMarkers(orderByMode, loc);
-			activeFragment.updateAdapter();
-		}
 	}
 
 	private void hideSnackbar() {
