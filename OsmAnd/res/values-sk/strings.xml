@@ -2993,9 +2993,9 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="context_menu_points_of_group">Všetky body skupiny</string>
     <string name="open_from">Otvorené od</string>
     <string name="open_till">Otvorené do</string>
-    <string name="will_close_at">Bude zatvorené o</string>
-    <string name="will_open_at">Bude otvorené o</string>
-    <string name="will_open_on">Bude otvorené o</string>
+    <string name="will_close_at">Zatvorí o</string>
+    <string name="will_open_at">Otvorí o</string>
+    <string name="will_open_on">Otvorí o</string>
     <string name="additional_actions">Ďalšie akcie</string>
     <string name="av_locations_selected_desc">Súbor GPX so súradnicami a údajmi vybraných poznámok.</string>
     <string name="av_locations_all_desc">Súbor GPX so súradnicami a údajmi všetkých poznámok.</string>
@@ -3054,4 +3054,21 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="enter_the_file_name">Zadajte názov súboru.</string>
     <string name="map_import_error">Chyba pri importe mapy</string>
     <string name="map_imported_successfully">Mapa bola úspešne importovaná</string>
+    <string name="distance_farthest">Vzdialenosť: najvzdialenejšie najprv</string>
+    <string name="distance_nearest">Vzdialenosť: najbližšie najprv</string>
+    <string name="enter_lon">Zadajte zemepisnú dĺžku</string>
+    <string name="enter_lat">Zadajte zemepisnú šírku</string>
+    <string name="enter_lat_and_lon">Zadajte zemepisnú šírku a dĺžku</string>
+	<string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	<string name="east_abbreviation">V</string>
+	<string name="west_abbreviation">Z</string>
+	<string name="south_abbreviation">J</string>
+	<string name="north_abbreviation">S</string>
+	<string name="optional_point_name">Voliteľný názov bodu</string>
+    <string name="transport_nearby_routes_within">Trasy v blízkosti do</string>
+    <string name="transport_nearby_routes">BLÍZKO</string>
     </resources>
