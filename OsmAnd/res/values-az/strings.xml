@@ -1970,7 +1970,7 @@
     <string name="map_import_error">Xəritə idxalı səhvi</string>
     <string name="map_imported_successfully">Xəritə uğurla idxal edildi</string>
     <string name="empty_state_my_tracks">İzlər əlavə et və qeyd et</string>
-    <string name="empty_state_my_tracks_desc">Baxmaq üçün izləri qeyd et və ya idxal et.</string>
+    <string name="empty_state_my_tracks_desc">Baxmaq üçün izləri qeyd edin və ya idxal edin.</string>
     <string name="enter_the_file_name">Fayl adını daxil edin.</string>
     <string name="release_3_0">•
 \n</string>
