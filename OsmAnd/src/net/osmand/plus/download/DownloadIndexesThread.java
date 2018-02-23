@@ -119,14 +119,22 @@ public class DownloadIndexesThread {
 			}
 			StringBuilder contentText = new StringBuilder();
 			List<IndexItem> ii = getCurrentDownloadingItems();
-			for(IndexItem i : ii) {
-				if(contentText.length() > 0) {
+			for (IndexItem i : ii) {
+				if (contentText.length() > 0) {
 					contentText.append(", ");
 				}
+				if (i == currentDownloadingItem) {
+					continue;
+				}
 				contentText.append(i.getVisibleName(app, app.getRegions()));
-				contentText.append(" ").append(i.getType().getString(app));
+				if (i.getType() != null) {
+					contentText.append(" ").append(i.getType().getString(app));
+				}
 			}
-			bld.setContentTitle(msg+" "+currentDownloadingItem.getType().getString(app)).setSmallIcon(android.R.drawable.stat_sys_download)
+			if (currentDownloadingItem != null) {
+				msg += " " + currentDownloadingItem.getType().getString(app);
+			}
+			bld.setContentTitle(msg).setSmallIcon(android.R.drawable.stat_sys_download)
 					.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
 					.setContentText(contentText.toString())
 					.setContentIntent(contentPendingIntent).setOngoing(true);
