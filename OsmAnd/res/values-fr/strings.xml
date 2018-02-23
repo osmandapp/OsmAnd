@@ -3123,4 +3123,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="enter_lon">Saisissez la longitude</string>
     <string name="enter_lat">Saisissez la latitude</string>
     <string name="enter_lat_and_lon">Saisissez la latitude et la longitude</string>
-	</resources>
+	<string name="distance_farthest">Distance : plus loin en premier</string>
+    <string name="distance_nearest">Distance : plus proche en premier</string>
+    </resources>
