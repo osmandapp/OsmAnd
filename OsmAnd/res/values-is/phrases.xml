@@ -3669,4 +3669,21 @@
 	<string name="poi_socket_schuko_output_medium">Miðlungs</string>
 	<string name="poi_socket_schuko_output_low">Lágur</string>
 
-</resources>
+<string name="poi_denomination_anglican">Enska biskupakirkjan</string>
+	<string name="poi_denomination_reformed">Siðbætta (kalvíníska) kirkjan</string>
+	<string name="poi_denomination_shia">Shía</string>
+	<string name="poi_denomination_united">Sameinaða (kanadíska) kirkjan</string>
+	<string name="poi_denomination_united_reformed">Sameinaða siðbætta kirkjan</string>
+	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
+	<string name="poi_denomination_uniting">Sameinandi (ástralska) kirkjan</string>
+	<string name="poi_denomination_assemblies_of_god">Hvítasunnukirkjan \"Assemblies of god\"</string>
+	<string name="poi_denomination_nondenominational">Utan kirkjudeilda</string>
+	<string name="poi_denomination_united_methodist">Sameinaðir meþódistar</string>
+	<string name="poi_denomination_old_believers">Gamaltrúar-rétttrúnaðarkirkjan</string>
+	<string name="poi_denomination_dutch_reformed">Hollenska siðbætta kirkjan</string>
+	<string name="poi_denomination_reform">Siðbót</string>
+	<string name="poi_denomination_church_of_christ">Kristskirkjan, Vísindakirkjan</string>
+	<string name="poi_denomination_united_church_of_christ">Sameinaða kristskirkjan, Vísindakirkjan</string>
+	<string name="poi_denomination_unitarian">Únítarakirkjan</string>
+	<string name="poi_denomination_wesleyan">Wesley-meþódistar</string>
+	</resources>
