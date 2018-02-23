@@ -2973,4 +2973,6 @@ Pro praghere iscrie su còdighe intreu</string>
 	<string name="optional_point_name">Nùmene optzionale de su puntu</string>
     <string name="transport_nearby_routes_within">Àndalas a curtzu de</string>
     <string name="transport_nearby_routes">A CURTZU</string>
+    <string name="distance_farthest">"Distàntzia: in antis sos prus indedda "</string>
+    <string name="distance_nearest">Distàntzia: in antis sos prus a curtzu</string>
     </resources>
