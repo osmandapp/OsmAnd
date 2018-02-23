@@ -331,7 +331,6 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0) {
 					mapActivity.getMyApplication().getMapMarkersHelper().reorderActiveMarkersIfNeeded();
-					mapActivity.getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
 					mapActivity.refreshMap();
 					adapter.reloadData();
 					try {
