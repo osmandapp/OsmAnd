@@ -3753,4 +3753,30 @@
 
 
 
+<string name="poi_socket_chademo_output_filter">CHAdeMO-Ausgang</string>
+	<string name="poi_socket_type2_output_filter">Typ 2-Ausgang</string>
+	<string name="poi_socket_type2_combo_output_filter">Typ 2 Combo-Ausgang</string>
+	<string name="poi_socket_type3_output_filter">Typ 3-Ausgang</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE blau-Ausgang</string>
+	<string name="poi_socket_schuko_output_filter">Schuko-Ausgang</string>
+
+<string name="poi_socket_chademo_output_high">Hoch</string>
+	<string name="poi_socket_chademo_output_medium">Mittel</string>
+	<string name="poi_socket_chademo_output_low">Niedrig</string>
+	<string name="poi_socket_type2_output_high">Hoch</string>
+	<string name="poi_socket_type2_output_medium">Mittel</string>
+	<string name="poi_socket_type2_output_low">Niedrig</string>
+	<string name="poi_socket_type2_combo_output_high">Hoch</string>
+	<string name="poi_socket_type2_combo_output_medium">Mittel</string>
+	<string name="poi_socket_type2_combo_output_low">Niedrig</string>
+	<string name="poi_socket_type3_output_high">Hoch</string>
+	<string name="poi_socket_type3_output_medium">Mittel</string>
+	<string name="poi_socket_type3_output_low">Niedrig</string>
+	<string name="poi_socket_cee_blue_output_high">Hoch</string>
+	<string name="poi_socket_cee_blue_output_medium">Mittel</string>
+	<string name="poi_socket_cee_blue_output_low">Niedrig</string>
+	<string name="poi_socket_schuko_output_high">Hoch</string>
+	<string name="poi_socket_schuko_output_medium">Mittel</string>
+	<string name="poi_socket_schuko_output_low">Niedrig</string>
+
 </resources>
