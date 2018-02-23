@@ -247,7 +247,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				if (stopRoute != null) {
 					TransportStopType type = TransportStopType.findType(stopRoute.route.getType());
 					if (type != null) {
-						Bitmap foregroundIcon = RenderingIcons.getIcon(mapActivity, type.getNameDrawable(), false);
+						Bitmap foregroundIcon = RenderingIcons.getIcon(mapActivity, type.getResName(), false);
 						canvas.drawBitmap(backgroundIcon, x - backgroundIconHalfWidth, y - backgroundIconHalfHeight, paintIcon);
 						canvas.drawBitmap(foregroundIcon, x - foregroundIcon.getWidth() / 2, y - foregroundIcon.getHeight() / 2, paintWhiteIcon);
 					}

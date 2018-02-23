@@ -18,13 +18,13 @@ public enum TransportStopType {
 	final int resId;
 	final int topResId;
 	final String renderAttr;
-	final String nameDrawable;
+	final String resName;
 
-	TransportStopType(int resId, int topResId, String renderAttr, String nameDrawable) {
+	TransportStopType(int resId, int topResId, String renderAttr, String resName) {
 		this.resId = resId;
 		this.topResId = topResId;
 		this.renderAttr = renderAttr;
-		this.nameDrawable = nameDrawable;
+		this.resName = resName;
 	}
 
 	public int getResourceId() {
@@ -35,8 +35,8 @@ public enum TransportStopType {
 		return topResId;
 	}
 
-	public String getNameDrawable() {
-		return nameDrawable;
+	public String getResName() {
+		return resName;
 	}
 
 	public String getRendeAttr() {
