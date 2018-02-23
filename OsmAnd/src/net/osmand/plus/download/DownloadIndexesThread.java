@@ -126,7 +126,7 @@ public class DownloadIndexesThread {
 				contentText.append(i.getVisibleName(app, app.getRegions()));
 				contentText.append(" ").append(i.getType().getString(app));
 			}
-			bld.setContentTitle(msg).setSmallIcon(android.R.drawable.stat_sys_download)
+			bld.setContentTitle(msg+" "+currentDownloadingItem.getType().getString(app)).setSmallIcon(android.R.drawable.stat_sys_download)
 					.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
 					.setContentText(contentText.toString())
 					.setContentIntent(contentPendingIntent).setOngoing(true);
