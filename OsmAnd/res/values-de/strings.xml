@@ -2985,7 +2985,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="lang_lo">Laotisch</string>
     <string name="day_off_label">aus</string>
     <string name="winter_and_ski_renderer">Winter und Ski</string>
-    <string name="touring_view_renderer">Touring-Ansicht (Kontrast und Details)</string>
+    <string name="touring_view_renderer">Tourenansicht (Kontrast und Details)</string>
     <string name="nautical_renderer">Nautisch</string>
     <string name="copy_location_name">Punkt/POI-Name kopieren</string>
     <string name="toast_empty_name_error">Ort hat keinen Namen</string>
