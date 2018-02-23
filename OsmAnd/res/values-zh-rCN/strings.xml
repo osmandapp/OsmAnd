@@ -1529,7 +1529,7 @@
     <string name="no_overlay">无覆盖层</string>
     <string name="no_underlay">无衬底层</string>
     <string name="subscribe_email_desc">订阅我们的邮件列表可以获知应用程序折扣并获得3个地图下载！</string>
-    <string name="depth_contour_descr">地图套件包含海深等高线和点。</string>
+    <string name="depth_contour_descr">地图套件包含海深等高线和航海点。</string>
     <string name="sea_depth_thanks">感谢您购买航海等深线 ！</string>
     <string name="index_item_depth_contours_osmand_ext">航海等深线</string>
     <string name="index_item_depth_points_southern_hemisphere">南半球航海等深线</string>
@@ -2767,4 +2767,7 @@
     <string name="empty_state_my_tracks">添加并记录轨迹</string>
     <string name="empty_state_favourites">添加收藏</string>
     <string name="empty_state_favourites_desc">在地图上添加收藏地点或从文件导入。</string>
-    </resources>
+    <string name="enter_lon">输入经度</string>
+    <string name="enter_lat">输入纬度</string>
+    <string name="enter_lat_and_lon">输入纬度和经度</string>
+	</resources>
