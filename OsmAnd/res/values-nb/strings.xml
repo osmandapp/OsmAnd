@@ -522,7 +522,7 @@
     <string name="navigate_point_longitude">Lengdegrad</string>
     <string name="navigate_point_format_D">GGG,GG</string>
     <string name="navigate_point_format_DM">GGG MM,MM</string>
-    <string name="navigate_point_format_DMS">GGG MM SS.SS</string>
+    <string name="navigate_point_format_DMS">GGG MM SS,SS</string>
     <string name="search_address_top_text">Velg adresse</string>
     <string name="search_address_region">Region</string>
     <string name="search_address_city">By</string>
@@ -2752,4 +2752,9 @@
     <string name="map_import_error">Kartimportfeil</string>
     <string name="map_imported_successfully">Kart importert vellykket</string>
     <string name="make_as_start_point">Gjør til startpunkt</string>
+    <string name="distance_farthest">Avstand: lengst unna først</string>
+    <string name="distance_nearest">Avstand: nærmeste først</string>
+    <string name="optional_point_name">Valgfritt punktnavn</string>
+    <string name="transport_nearby_routes_within">Ruter i nærheten</string>
+    <string name="transport_nearby_routes">NÆR</string>
     </resources>
