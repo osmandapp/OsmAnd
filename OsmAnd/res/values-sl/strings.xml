@@ -97,7 +97,7 @@
     <string name="poi_filter_sightseeing">Turistični ogledi</string>
     <string name="poi_filter_entertainment">Zabava</string>
     <string name="show_warnings_title">Pokaži opozorila …</string>
-    <string name="show_warnings_descr">Prikaz opozoril prometa, omejitve hitrosti, hitrostnih kamer, grbin, podatki o voznih razmerah in druga opozorila.</string>
+    <string name="show_warnings_descr">Prikaz opozoril prometa, omejitve hitrosti, hitrostnih kamer, grbin, tunelov, podatki o voznih razmerah in druga opozorila.</string>
     <string name="use_compass_navigation_descr">Uporabi kompas, ko ni mogoče drugače določiti smeri.</string>
     <string name="use_compass_navigation">Uporabi kompas</string>
     <string name="avoid_motorway">Izogni se avtocestam</string>
@@ -2964,11 +2964,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
 \n • OsmAnd Live: razrešeni hrošči in posodobitve, ki so samodejno vključene v navigacijo, se objavljajo vsakih 30 minut
 \n
 \n</string>
-    <string name="release_3_0">• Zaznava znakov STOP po novem vpliva na usmerjanje vožnje 
-\n 
-\n • Z novim algoritmom so vrednosti spustov in vzponov na sledeh GPX bolj smiselne 
-\n 
-\n • Čas hoje upošteva tudi vrsto terena (vzpon) po Naismithovem pravilu
+    <string name="release_3_0">\\022 
 \n
 \n</string>
     <string name="empty_state_osm_edits_descr">Ustvari ali spremeni točke POI, ureja opombe OSM in omogoča objavljanje zabeleženih sledi GPX.</string>
@@ -3002,4 +2998,67 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="enter_the_file_name">Vpis imena datoteke.</string>
     <string name="map_import_error">Uvoz zemljevida je spodletel</string>
     <string name="map_imported_successfully">Uvoz zemljevida je uspešno končan</string>
-    </resources>
+    <string name="distance_farthest">Razdalja: najdlje najprej</string>
+    <string name="distance_nearest">Razdalja: najbližje najprej</string>
+    <string name="enter_lon">Vpišite zemljepisno širino</string>
+    <string name="enter_lat">Vpišite zemljepisno dolžino</string>
+    <string name="enter_lat_and_lon">Vpišite zemljepisno širino in dolžino</string>
+	<string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	<string name="east_abbreviation">E</string>
+	<string name="west_abbreviation">W</string>
+	<string name="south_abbreviation">S</string>
+	<string name="north_abbreviation">N</string>
+	<string name="optional_point_name">Izbirno ime točke</string>
+    <string name="transport_nearby_routes_within">Poti blizu v</string>
+    <string name="transport_nearby_routes">BLIZU</string>
+    <string name="make_as_start_point">Ustvari začetno točko</string>
+    <string name="shared_string_current">Trenutno</string>
+    <string name="last_intermediate_dest_description">Doda zadnji postanek na poti</string>
+    <string name="first_intermediate_dest_description">Doda prvi postanek na poti</string>
+    <string name="subsequent_dest_description">Premakni cilj više in ustvari nov cilj</string>
+    <string name="show_closed_notes">Pokaži zaprta sporočila</string>
+    <string name="switch_osm_notes_visibility_desc">Pokaži/Skrij sporočila na zemljevidu.</string>
+    <string name="gpx_file_desc">Zapis GPX – primeren za uvoz v program JOSM in druge urejevalnike OSM.</string>
+    <string name="osc_file_desc">Zapis OSC – primeren za uvoz v OpenStreetMap.</string>
+    <string name="gpx_file">Datoteka GPX</string>
+    <string name="osc_file">Datoteka OSC</string>
+    <string name="choose_file_type">Izbor vrste datoteke</string>
+    <string name="osm_edits_export_desc">Izbor vrste zapisa za izvoz: sporočila OSM, točke POI ali oboje.</string>
+    <string name="all_data">Vsi podatki</string>
+    <string name="osm_notes">Sporočila OSM</string>
+    <string name="will_open_tomorrow_at">Odpre se spet jutri ob</string>
+    <string name="rendering_attr_hidePOILabels_name">Oznake točk POI</string>
+    <string name="release_2_9">\\022 Posodobitev vsebinskega menija: pokaže odpiralni čas točke POI
+\n
+\n • Meni potovanja: vse poti, ki so na voljo, so na vrhu seznama
+\n
+\n • Wikipedija: dodan je gumb za odpiranje izvornega prispevka
+\n
+\n • Pot: dodana je možnost za zamenjavo začetne in končne točke z enim pritiskom
+\n
+\n • Sporočila: dodano je razvrščanje po vrsti in datumu
+\n
+\n • Urejanje OSM: pokaže ikono in ime kategorije točk POI z možnimi dejanji
+\n
+\n • Nov, hiter način dodajanja koordinat za ustvarjanje hitrih označb
+\n
+\n • Zaznavanje znakov STOP upošteva usmerjanje vožnje
+\n
+\n • Dodan je nov algoritem za prikaz vrednosti višinskih razlik sledi GPX
+\n
+\n • Pri vzponih med hojo program upošteva čas po Naismithovem pravilu
+\n
+\n</string>
+    <string name="day_off_label">zaprto</string>
+    <string name="winter_and_ski_renderer">Zimski prikaz za smučarje</string>
+    <string name="touring_view_renderer">Potovalni pogled</string>
+    <string name="nautical_renderer">Navtični prikaz</string>
+    <string name="copy_location_name">Kopiraj točko oziroma ime POI</string>
+    <string name="toast_empty_name_error">Mesto nima določenega imena</string>
+    <string name="tunnel_warning">Tunel</string>
+    <string name="show_tunnels">Tuneli</string>
+</resources>
