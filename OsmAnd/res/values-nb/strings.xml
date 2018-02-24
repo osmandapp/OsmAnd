@@ -2757,4 +2757,16 @@
     <string name="optional_point_name">Valgfritt punktnavn</string>
     <string name="transport_nearby_routes_within">Ruter i nærheten</string>
     <string name="transport_nearby_routes">NÆR</string>
-    </resources>
+    <string name="enter_lon">Oppfør lengdegrad</string>
+    <string name="enter_lat">Oppfør breddegrad</string>
+    <string name="enter_lat_and_lon">Oppfør bredde- og lengdegrad</string>
+	<string name="dd_mm_ss_format">GG°MM′SS″</string>
+	<string name="dd_dddddd_format">GG,GGGGGG°</string>
+	<string name="dd_ddddd_format">GG,GGGGG°</string>
+	<string name="dd_mm_mmmm_format">GG°MM,MMMM′</string>
+	<string name="dd_mm_mmm_format">GG°MM,MMM′</string>
+	<string name="east_abbreviation">Ø</string>
+	<string name="west_abbreviation">V</string>
+	<string name="south_abbreviation">S</string>
+	<string name="north_abbreviation">N</string>
+	</resources>
