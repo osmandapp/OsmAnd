@@ -498,7 +498,7 @@
     <string name="save_track_to_gpx">Automatyczne rejestrowanie śladu podczas nawigacji</string>
     <string name="update_tile">Uaktualnij mapę</string>
     <string name="reload_tile">Wczytaj ponownie kafelki</string>
-    <string name="open_street_map_login_descr">Wprowadza dane uwierzytelniające wymagane do wysyłania zmian na openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Wprowadza dane uwierzytelniające wymagane do wysyłania zmian na openstreetmap.org.</string>
     <string name="user_name">Nazwa użytkownika OSM</string>
     <string name="mark_point">Cel</string>
 
@@ -1168,7 +1168,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
 
 
     <string name="av_camera_focus">Typ fokusu kamery</string>
-    <string name="av_camera_focus_descr">Wybierz fokus kamery</string>
+    <string name="av_camera_focus_descr">Wybierz fokus kamery.</string>
     <string name="av_camera_focus_auto">Autofokus</string>
     <string name="av_camera_focus_hiperfocal">Fokus hiperfokalny</string>
     <string name="av_camera_focus_edof">Rozszerzona głębia ostrości (EDOF)</string>
@@ -2662,7 +2662,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_auto_zoom">Przełącz automatyczne przybliżanie</string>
     <string name="quick_action_add_first_intermediate">Dodaj pierwszy pośredni cel trasy</string>
     <string name="quick_action_auto_zoom_desc">Włącza/wyłącza automatyczne przybliżanie mapy zależne od prędkości ruchu.</string>
-    <string name="quick_action_add_destination_desc">Ustala cel trasy w położeniu na środku ekranu a poprzednio ustalony cel zamienia na ostatni cel pośredni.</string>
+    <string name="quick_action_add_destination_desc">Ustala cel trasy w położeniu na środku ekranu, a poprzednio ustalony cel zamienia na ostatni cel pośredni.</string>
     <string name="quick_action_replace_destination_desc">Zastępuje cel trasy położeniem na środku ekranu.</string>
     <string name="quick_action_add_first_intermediate_desc">Ustala pierwszy cel pośredni trasy w położeniu na środku ekranu.</string>
     <string name="type_address">Wprowadź adres</string>
@@ -2762,10 +2762,10 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="mapillary_menu_date_from">Od</string>
     <string name="wrong_user_name">Nieprawidłowa nazwa użytkownika!</string>
     <string name="mapillary_menu_title_tile_cache">Pamięć podręczna kafelków</string>
-    <string name="mapillary_menu_descr_dates">Wyświetl tylko dodane obrazy.</string>
+    <string name="mapillary_menu_descr_dates">Wyświetl tylko dodane obrazy</string>
     <string name="mapillary_menu_edit_text_hint">Proszę wprowadzić nazwę użytkownika</string>
     <string name="mapillary_menu_filter_description">Można filtrować obrazy według nazwy użytkownika lub daty. Filtry mają zastosowanie dla większych przybliżeń.</string>
-    <string name="mapillary_menu_descr_username">Wyświetla obrazy dodane przez określonego użytkownika.</string>
+    <string name="mapillary_menu_descr_username">"Wyświetla obrazy dodane przez "</string>
     <string name="store_tracks_in_monthly_directories">Ślady w miesięcznych katalogach</string>
     <string name="store_tracks_in_monthly_directories_descrp">Przechowuje zarejestrowane ślady w podkatalogach odpowiadającym miesiącom (np. 2017-01).</string>
     <string name="shared_string_reset">Wyczyść</string>
@@ -2863,8 +2863,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="order_by">Porządkowanie według:</string>
     <string name="show_guide_line">Pokaż linie przewodnie</string>
     <string name="show_arrows_on_the_map">Strzałki na mapie</string>
-    <string name="show_passed">Wyświetl datę ostatniego użycia</string>
-    <string name="hide_passed">Ukryj datę ostatniego użycia</string>
+    <string name="show_passed">Wyświetl datę</string>
+    <string name="hide_passed">Ukryj datę</string>
     <string name="coordinate_input">Wprowadź współrzędne</string>
     <string name="shared_string_markers">Znaczniki</string>
     <string name="coordinates_format">Format współrzędnych</string>
@@ -2910,7 +2910,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 	<string name="view">Wyświetl</string>
 	<string name="waypoints_added_to_map_markers">Dodano punkty pośrednie do znaczników mapy</string>
 	<string name="track_waypoints">Punkty śladu</string>
-    <string name="favourites_group">Grupa ulubionych</string>
+    <string name="favourites_group">Kategoria ulubionych</string>
     <string name="add_group">"Dodaj grupę "</string>
     <string name="add_group_descr">Dodaje grupę ulubionych miejsc lub punktów śladu.</string>
     <string name="empty_state_markers_active">Utwórz znaczniki na mapie!</string>
@@ -2941,12 +2941,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="will_open_at">Zostanie otwarty o</string>
     <string name="will_open_on">Zostanie otwarty o</string>
     <string name="additional_actions">Dodatkowe czynności</string>
-    <string name="release_3_0">• Wykrywanie znaków stop uwzględnia teraz kierunek jazdy,
-\n
-\n • nowy algorytm udostępnia bardziej precyzyjne wartości podejścia/zejścia dla śladów GPX,
-\n
-\n • czas wędrówki uwzględnia ukształtowanie terenu (reguła Naismitha).
-\n
+    <string name="release_3_0">\\022
 \n</string>
     <string name="shared_string_actions">Czynności</string>
     <string name="shared_string_marker">Znacznik</string>
@@ -2995,7 +2990,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="one_tap_active_descr">Naciśnij znacznik na mapie, by przesunąć do na górę listy aktywnych znaczników bez otwierania menu kontekstowego.</string>
     <string name="one_tap_active">Aktywacja jednym dotknięciem</string>
     <string name="show_tunnels">Tunele</string>
-<string name="import_as_gpx">Zapisz plik w formacie GPX.</string>
+<string name="import_as_gpx">Zapisz plik w formacie GPX</string>
     <string name="copy_location_name">Kopiuj nazwę punktu</string>
     <string name="toast_empty_name_error">Miejsce nie ma nazwy</string>
     <string name="tunnel_warning">Zbliżasz się do tunelu</string>
@@ -3026,4 +3021,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="osm_recipient_stat">%1$s edycji, w sumie %2$s mBTC</string>
     <string name="distance_farthest">Odległość: najpierw najdalsze</string>
     <string name="distance_nearest">Odległość: najpierw najbliższe</string>
+    <string name="day_off_label">poza</string>
     </resources>
