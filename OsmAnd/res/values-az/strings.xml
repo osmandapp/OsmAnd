@@ -2043,4 +2043,15 @@
     <string name="use_compass_navigation_descr">İstiqaməti başqa cür müəyyən etmək mümkün deyilsə, kompas istifadə et.</string>
     <string name="rotate_map_to_bearing_descr">Xəritənin fırlanma üsulunu seçin.</string>
     <string name="map_screen_orientation">Ekran istiqaməti</string>
+    <string name="distance_farthest">Məsafə: ilk ən uzaqdakı</string>
+    <string name="distance_nearest">Məsafə: ilk ən yaxındakı</string>
+    <string name="enter_lon">Uzunluq daxil edin</string>
+    <string name="enter_lat">En daxil edin</string>
+    <string name="enter_lat_and_lon">En və uzunluq daxil edin</string>
+	<string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	<string name="optional_point_name">Məcburi olmayan nöqtə adı</string>
     </resources>
