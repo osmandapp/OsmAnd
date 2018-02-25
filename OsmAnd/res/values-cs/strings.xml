@@ -2935,8 +2935,8 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="total_donations">Celkem přispěno</string>
     <string name="day_off_label">zavřeno</string>
     <string name="copy_location_name">Kopírovat název bodu/POI</string>
-    <string name="enter_lon">Zeměpisná délka</string>
-    <string name="enter_lat">Zeměpisná šířka</string>
+    <string name="enter_lon">Zadejte zeměpisnou délku</string>
+    <string name="enter_lat">Zadejte zeměpisnou šířku</string>
     <string name="enter_lat_and_lon">Zadejte zeměpisnou šířku a délku</string>
 	<string name="dd_mm_ss_format">DD°MM′SS″</string>
 	<string name="dd_dddddd_format">DD.DDDDDD°</string>
@@ -2950,4 +2950,6 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
 	<string name="optional_point_name">Volitelný název bodu</string>
     <string name="transport_nearby_routes_within">Trasy v blízkosti</string>
     <string name="transport_nearby_routes">POBLÍŽ</string>
+    <string name="distance_farthest">Vzdálenost: nejvzdálenější jako první</string>
+    <string name="distance_nearest">Vzdálenost: nejbližší jako první</string>
     </resources>
