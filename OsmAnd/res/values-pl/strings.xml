@@ -2976,7 +2976,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="last_intermediate_dest_description">Dodaje ostatni cel pośredni na trasie</string>
     <string name="first_intermediate_dest_description">Dodaje pierwszy cel pośredni na trasie</string>
     <string name="show_closed_notes">Wyświetl zamknięte uwagi</string>
-    <string name="switch_osm_notes_visibility_desc">Pokaż/Ukryj Notatki OSM na mapie.</string>
+    <string name="switch_osm_notes_visibility_desc">Przełącza wyświetlanie uwag OSM na mapie.</string>
     <string name="gpx_file_desc">GPX - odpowiedni do eksportowania danych do JOSM i innych edytorów OSM.</string>
     <string name="osc_file_desc">OSC - odpowiedni do eksportowania danych do OpenStreetMap.</string>
     <string name="gpx_file">Plik GPX</string>
@@ -3022,4 +3022,21 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="distance_farthest">Odległość: najpierw najdalsze</string>
     <string name="distance_nearest">Odległość: najpierw najbliższe</string>
     <string name="day_off_label">poza</string>
+    <string name="release_2_9">• Uaktualnione menu podręczne: wyświetlanie czasu otwarcia / zamknięcia użytecznych miejsc,
+\n
+\n • menu transportu: wszystkie dostępne trasy są teraz widoczne u góry menu,
+\n
+\n • Wikipedia: dodano przycisk otwierający publikację, uaktualniono wygląd publikacji,
+\n
+\n • trasa: dodano możliwość zamiany punktu początkowego i końcowego jednym przyciskiem,
+\n
+\n • uwagi: dodano sortowanie wg rodzaju i daty,
+\n
+\n• nowy ekran szybkiego wprowadzania współrzędnych do szybkiego tworzenia znaczników, 
+\n
+\n• wykrywanie znaków stop uwzględnia teraz kierunek jazdy,
+\n
+\n • nowy algorytm udostępnia bardziej precyzyjne wartości podejścia/zejścia dla śladów GPX,
+\n
+\n • czas wędrówki uwzględnia ukształtowanie terenu (reguła Naismitha).</string>
     </resources>
