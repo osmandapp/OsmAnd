@@ -476,7 +476,7 @@
 
 	<string name="poi_kindergarten">Parcu de giogos</string>
 	<string name="poi_company">Azienda</string>
-	<string name="poi_trade">Trading post</string>
+	<string name="poi_trade">Grossista</string>
 	<string name="poi_window_blind">Butega de ventanas tzurpas</string>
 	<string name="poi_department_store">Supermercadu</string>
 	<string name="poi_aeroway_terminal">Terminal aeroportu</string>
@@ -1271,10 +1271,10 @@
 	<string name="poi_trade_tile">Frunidura de regiolas</string>
 
 	<string name="poi_animal_shelter">Imbaru pro animales</string>
-	<string name="poi_animal_shelter_dog">Casta de imbaru: pro canes</string>
-	<string name="poi_animal_shelter_cat">Casta de imbaru: pro gatos</string>
-	<string name="poi_animal_shelter_dog_cat">Casta de imbaru: pro canes e gatos</string>
-	<string name="poi_animal_shelter_bird">Casta de imbaru: pro pugiones</string>
+	<string name="poi_animal_shelter_dog">Canes</string>
+	<string name="poi_animal_shelter_cat">Gatos</string>
+	<string name="poi_animal_shelter_dog_cat">Canes, gatos</string>
+	<string name="poi_animal_shelter_bird">Pugiones</string>
 
 	<string name="poi_generator_source_coal">Mitza de energia: carbone</string>
 	<string name="poi_generator_source_gas">Mitza de energia: gas</string>
@@ -2201,7 +2201,7 @@
 	<string name="poi_vending_ice_cream">Geladu</string>
 	<string name="poi_vending_sim_cards">Cartas SIM</string>
 
-	<string name="poi_branch">Ramu</string>
+	<string name="poi_branch">Filiale</string>
 
 	<string name="poi_memorial_war">Memoriale de gherra</string>
 	<string name="poi_memorial_plaque">Placa</string>
@@ -2369,8 +2369,8 @@
 	<string name="poi_surface_salt">Superfìtzie: sale</string>
 	<string name="poi_surface_snow">Superfìtzie: nie</string>
 
-	<string name="poi_service_bicycle_charging_yes">Càrriga pro bitzicletas: eja</string>
-	<string name="poi_service_bicycle_charging_no">Càrriga pro bitzicletas: nono</string>
+	<string name="poi_service_bicycle_charging_yes">Càrriga: eja</string>
+	<string name="poi_service_bicycle_charging_no">Càrriga: nono</string>
 	<string name="poi_bicycle_repair_station">Istatzione pro s\'acontzu a sa sola de bitzicletas</string>
 
 	<string name="poi_emergency_infrastructure">Infrastrutura de emergèntzia</string>
@@ -2483,7 +2483,7 @@
 	<string name="poi_openfire_no">Fogos non permitidos</string>
 	<string name="poi_backcountry_yes">Eja</string>
 	<string name="poi_backcountry_no">Nono</string>
-	<string name="poi_scout_yes">Campu scout: eja</string>
+	<string name="poi_scout_yes">Eja</string>
 	<string name="poi_scout_no">Campu scout: nono</string>
 	<string name="poi_group_only_yes">Grupos ebbia: eja</string>
 	<string name="poi_group_only_no">Grupos ebbia: nono</string>
@@ -2684,4 +2684,287 @@
 	<string name="poi_payment_centre">Tzentru de pagamentu</string>
 	<string name="poi_money_transfer">Tramudòngiu de dinare</string>
 
-</resources>
+<string name="poi_water_supply_type">Casta de distributzione de s\'abba</string>
+	<string name="poi_water_purification">Purificatzione de s\'abba</string>
+	<string name="poi_water_place_access">Atzessu a sa mitza de abba</string>
+	<string name="poi_climbing_style">Istile de aperrinzada</string>
+	<string name="poi_socket">Presa de currente</string>
+	<string name="poi_socket_chademo_output_filter">CHAdeMO</string>
+	<string name="poi_socket_type2_output_filter">Casta 2 (Menneke)</string>
+	<string name="poi_socket_type2_combo_output_filter">Casta 2 combo</string>
+	<string name="poi_socket_type3_output_filter">Casta 3 (SCAME)</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE blue</string>
+	<string name="poi_socket_schuko_output_filter">Schuko</string>
+
+<string name="poi_beachvolleyball">Beach volley</string>
+	<string name="poi_seamark_clearance_height">Artària màssima</string>
+	<string name="poi_seamark_clearance_height_closed">Artària màssima (serradu)</string>
+	<string name="poi_seamark_clearance_height_open">Artària màssima (abertu)</string>
+	<string name="poi_seamark_clearance_width">Largària màssima</string>
+
+	<string name="poi_animal_shelter_wildlife">Animales selvàticos</string>
+	<string name="poi_animal_shelter_horse">Caddos</string>
+	<string name="poi_animal_shelter_mammal">Mammìferos</string>
+	<string name="poi_animal_shelter_fish">Pisches</string>
+
+	<string name="poi_route_subway_ref">Metropolitana</string>
+
+	<string name="poi_bridge_ref">Referèntzia de su ponte</string>
+	<string name="poi_tunnel_ref">Referèntzia de sa galleria</string>
+
+	<string name="poi_ref">Referèntzia</string>
+
+	<string name="poi_cargo_passengers">Passegeros</string>
+	<string name="poi_cargo_vehicle">Veìculos</string>
+	<string name="poi_cargo_bicycle">Bitzicletas</string>
+	<string name="poi_cargo_container">Cuntenidores</string>
+	<string name="poi_cargo_hgv">Veìculu de trasportu</string>
+
+	<string name="poi_fitness_station">Parcu pro sa ginnàstica</string>
+
+	<string name="poi_hackerspace">Fab Lab (Hackerspace)</string>
+
+
+	<string name="poi_aerialway_length">Longària</string>
+
+	<string name="poi_health_specialty_occupational_yes">Terapia ocupatzionale</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Psichiatria infantile</string>
+	<string name="poi_health_specialty_physiatry_yes">Meighina fìsica e riabilitatzione</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Chirurgia maxillo-fatziale</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Radiologia diagnòstica</string>
+	<string name="poi_health_specialty_gastroenterology_yes">Gastroenterologia</string>
+	<string name="poi_health_specialty_dentistry_yes">Odontoiatria</string>
+	<string name="poi_health_specialty_nephrology_yes">Nefrologia (maladias de sos renes)</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Neurochirurgia</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropsichiatria</string>
+	<string name="poi_health_specialty_endocrinology_yes">Endocrinologia</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Meighina nucleare</string>
+	<string name="poi_health_specialty_pathology_yes">Anatomia patològica</string>
+	<string name="poi_health_specialty_oncology_yes">Oncologia</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">Meighina tropicale</string>
+	<string name="poi_health_specialty_tropical_medicine_no">Ispetzialidade mèiga: meighina tropicale: nono</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">Ostetrìtzia (postnatale)</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">Ispetzialidade mèiga: ostetrìtzia (postnatale): nono</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">Ostetrìtzia (prenatale)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Ispetzialidade mèiga: ostetrìtzia (prenatale): nono</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Pediatria sotziale</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Ispetzialidade mèiga: pediatria sotziale: nono</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Ostetrìtzia (trincu tzesàreu)</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Ispetzialidade mèiga: ostetrìtzia (trincu tzesàreu): nono</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">Meighina de sas dipendèntzias</string>
+	<string name="poi_health_specialty_optometry_yes">Optometria</string>
+	<string name="poi_health_specialty_clinical_pathology_yes">Patologia clìnica</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Logopedia</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Terapia manuale</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Meighina de s\'isport</string>
+	<string name="poi_health_specialty_podology_yes">Podologia</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Psichiatria adulta</string>
+	<string name="poi_health_specialty_acupuncture_yes">Agupuntura</string>
+	<string name="poi_health_specialty_homeopathy_yes">Omeopatia</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Meighina traditzionale tzinesa</string>
+	<string name="poi_health_specialty_reiki_yes">Reiki</string>
+	<string name="poi_health_specialty_herbalism_yes">Erboristeria</string>
+	<string name="poi_health_specialty_chiropractic_yes">Chiropràtica</string>
+	<string name="poi_health_specialty_naturopathy_yes">Naturopatia</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Psicologia de su profundu</string>
+	<string name="poi_health_specialty_behavior_yes">Comportamentale</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Meighina palliativa</string>
+
+	<string name="poi_fitness_centre">Tzentru pro s\'atividade fìsica</string>
+	<string name="poi_fitness">Atividade fìsica</string>
+
+	<string name="poi_billiards">Biliardu</string>
+
+	<string name="poi_microwave_oven_yes">Furnu a microondas: eja</string>
+	<string name="poi_microwave_oven_no">Furnu a microondas: nono</string>
+	<string name="poi_water_heater_yes">Caientadore pro s\'abba: eja</string>
+	<string name="poi_water_heater_no">Caientadore pro s\'abba: nono</string>
+
+	<string name="poi_parking_surface">Casta: superfìtzie</string>
+	<string name="poi_parking_garage_boxes">Garages</string>
+	<string name="poi_parking_carports">Lògias pro sas màchinas</string>
+
+	<string name="poi_dojo">Dojo</string>
+
+	<string name="poi_rc_car">Cursa de màchinas ràdio-cumandadas</string>
+	<string name="poi_squash">Squash</string>
+	<string name="poi_shuffleboard">Shuffleboard</string>
+	<string name="poi_lacrosse">Lacrosse</string>
+	<string name="poi_dolphin">Delfinu</string>
+
+	<string name="poi_forestry_compartment">Sinnale: cumpartimentu forestale</string>
+	<string name="poi_forestry_allotment">Sinnale: assinnatzione forestale</string>
+	<string name="poi_inscription_n">Iscritzione: N</string>
+	<string name="poi_inscription_nw">Iscritzione: NO</string>
+	<string name="poi_inscription_w">Iscritzione: O</string>
+	<string name="poi_inscription_sw">Iscritzione: SO</string>
+	<string name="poi_inscription_s">Iscritzione: S</string>
+	<string name="poi_inscription_se">Iscritzione: SE</string>
+	<string name="poi_inscription_e">Iscritzione: E</string>
+	<string name="poi_inscription_ne">Iscritzione: NE</string>
+
+	<string name="poi_construction_yes">In costrutzione</string>
+	<string name="poi_additional_atm_yes">Bancomat: eja</string>
+	<string name="poi_atm_no">Bancomat: nono</string>
+
+	<string name="poi_firepit">Logu pro su fogu</string>
+	<string name="poi_street_cabinet">Tzentralina</string>
+
+	<string name="poi_fair_trade_yes">Ecuànime e solidale: eja</string>
+	<string name="poi_fair_trade_no">Ecuànime e solidale: nono</string>
+	<string name="poi_fair_trade_only">Petzi produtos ecuànimos e solidales</string>
+
+
+	<string name="poi_bandy">Bandy</string>
+
+	<string name="poi_protected_area">Àrea amparada</string>
+	<string name="poi_protection_title">Tìtulu de amparadura</string>
+	<string name="poi_protection_object_historic">Ogetu de amparare: istòricu</string>
+	<string name="poi_protection_object_nature">Ogetu de amparare: natura</string>
+	<string name="poi_protection_object_habitat">Ogetu de amparare: ambiente (habitat)</string>
+	<string name="poi_protection_object_water">Ogetu de amparare: abba</string>
+
+	<string name="poi_nuclear_explosion_country">Esplosione: istadu</string>
+	<string name="poi_nuclear_explosion_site">Esplosione: situ</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Casta de esplosione: suta de terra, putzu</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Casta de esplosione: suta de terra, galleria</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Casta de esplosione: atmosfèrica</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Casta de esplosione: atmosfèrica, dae un\'aèreu</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Casta de esplosione: atmosfèrica, superfìtzie, turre</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Casta de esplosione: atmosfèrica, palloncinu</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Casta de esplosione: atmosfèrica, superfìtzie</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Casta de esplosione: atmosfèrica, superfìtzie de s\'abba, barca</string>
+	<string name="poi_nuclear_explosion_type_underground">Casta de esplosione: suta de terra</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Casta de esplosione: iscòpiu craterizadu (suta-superfìtzie pagu profunda)</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Casta de esplosione: atmosfèrica, ratzu o mìssile</string>
+	<string name="poi_nuclear_explosion_type_space">Casta de esplosione: ispàtziu (prus in artu de 80 km)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Casta de esplosione: suta de s\'abba</string>
+	<string name="poi_nuclear_explosion_date_utc">Data de s\'esplosione (UTC)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Nùmene de s\'isparu (en)</string>
+	<string name="poi_nuclear_explosion_series">Sèrie de esplosiones</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Punna de s\'esplosione: ligadu a sas armas nucleares</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Punna de s\'esplosione: efetos de sas armas</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Punna de s\'esplosione: esperimentu de seguràntzia</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Punna de s\'esplosione: chirca pro aplicatziones patzìficas</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Punna de s\'esplosione: iscièntzia fundamentale</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Punna de s\'esplosione: aplicatzione industriale, iscavu de cavidade</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Punna de s\'esplosione: aplicatzione industriale, anàlisi sìsmica sonora</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Punna de s\'esplosione: aplicatzione industriale, istimulatzione de petròliu</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Punna de s\'esplosione: aplicatzione industriale</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Punna de s\'esplosione: aplicatzione industriale, movimentu de terra</string>
+	<string name="poi_nuclear_explosion_time_utc">Ora de s\'esplosione (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Rendimentu de s\'esplosione</string>
+	<string name="poi_nuclear_explosion_hole">Istampu de s\'esplosione</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Artària de iscòpiu</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Artària de sa zona zero</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Magnitùdine de sas undas de propagatzione</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Esplosione a salve: prima detonatzione de proa</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Esplosione a salve: detonatzione de proa segunda o imbeniente</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Esplosione: diàmetru de su cratere</string>
+	<string name="poi_nuclear_explosion_warhead">Esplosione: concada</string>
+	<string name="poi_nuclear_explosion_device">Esplosione: dispositivu</string>
+
+	<string name="poi_addr_housename">Nùmene de sa dommo</string>
+
+
+	<string name="poi_plant_nursery">Vivàiu</string>
+
+	<string name="poi_compressed_air_no">Àghera cumprimida: nono</string>
+
+	<string name="poi_vacuum_cleaner_no">Aspiraprùere: nono</string>
+	<string name="poi_amenity_vacuum_cleaner">Aspiraprùere</string>
+
+	<string name="poi_sport_free_flying">Volu lìberu (isport)</string>
+
+	<string name="poi_water_tap">Funtana de abba</string>
+	<string name="poi_button_operated_yes">Ativadu cun unu butone: eja</string>
+	<string name="poi_button_operated_no">Ativadu cun unu butone: nono</string>
+
+	<string name="poi_free_flying_site_takeoff">Logu de decollu</string>
+	<string name="poi_free_flying_site_landing">Logu de aterràgiu</string>
+	<string name="poi_free_flying_site_toplanding">Logu de aterràgiu elevadu</string>
+	<string name="poi_free_flying_site_towing">Tràinu</string>
+	<string name="poi_free_flying_site_training">Allenamentu</string>
+	<string name="poi_free_flying_official_yes">Ufitziale: eja</string>
+	<string name="poi_free_flying_official_no">Ufitziale: nono</string>
+	<string name="poi_free_flying_paragliding_yes">Parapendiu</string>
+	<string name="poi_free_flying_paragliding_no">Parapendiu: nono</string>
+	<string name="poi_free_flying_hanggliding_yes">Deltaplanu</string>
+	<string name="poi_free_flying_hanggliding_no">Deltaplanu: nono</string>
+	<string name="poi_free_flying_rigid_yes">Tèteru</string>
+	<string name="poi_free_flying_rigid_no">Volu lìberu tèteru: nono</string>
+	<string name="poi_free_flying_site_orientation_n">Orientatzione de su situ de volu lìberu: N</string>
+	<string name="poi_free_flying_site_orientation_ne">Orientatzione de su situ de volu lìberu: NE</string>
+	<string name="poi_free_flying_site_orientation_e">Orientatzione de su situ de volu lìberu: E</string>
+	<string name="poi_free_flying_site_orientation_se">Orientatzione de su situ de volu lìberu: SE</string>
+	<string name="poi_free_flying_site_orientation_s">Orientatzione de su situ de volu lìberu: S</string>
+	<string name="poi_free_flying_site_orientation_sw">Orientatzione de su situ de volu lìberu: SO</string>
+	<string name="poi_free_flying_site_orientation_w">Orientatzione de su situ de volu lìberu: O</string>
+	<string name="poi_free_flying_site_orientation_nw">Orientatzione de su situ de volu lìberu: NO</string>
+	<string name="poi_free_flying_no_flight_time">Chene oràriu de volu (volu lìberu)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Diretivas pro istràngios: eja</string>
+	<string name="poi_free_flying_guest_guidelines_no">Diretivas pro istràngios: nono</string>
+
+	<string name="poi_sanitary_dump_station">Istatzione de iscàricu sanitàriu</string>
+
+	<string name="poi_medical_system_western_yes">Otzidentale</string>
+	<string name="poi_medical_system_chinese_yes">Tzinesu traditzionale</string>
+	<string name="poi_medical_system_ayurveeda_yes">Ayurveeda</string>
+	<string name="poi_medical_system_kampo_yes">Kampo</string>
+	<string name="poi_medical_system_mongolian_yes">Mòngolu traditzionale</string>
+	<string name="poi_medical_system_tibetan_yes">Tibetanu traditzionale</string>
+	<string name="poi_medical_system_sidda_yes">Siddha</string>
+	<string name="poi_medical_system_unani_yes">Unani</string>
+
+	<string name="poi_health_service_nursing_yes">Servìtziu sanitàriu: infermierìstica: eja</string>
+	<string name="poi_health_service_nursing_no">Servìtziu sanitàriu: infermierìstica: nono</string>
+	<string name="poi_health_service_counselling_yes">Servìtziu sanitàriu: consulèntzia: eja</string>
+	<string name="poi_health_service_counselling_no">Servìtziu sanitàriu: consulèntzia: nono</string>
+	<string name="poi_health_service_examination_yes">Servìtziu sanitàriu: bìsitas: eja</string>
+	<string name="poi_health_service_examination_no">Servìtziu sanitàriu: bìsitas: nono</string>
+	<string name="poi_health_service_child_care_yes">Servìtziu sanitàriu: assistèntzia pediàtrica: eja</string>
+	<string name="poi_health_service_child_care_no">Servìtziu sanitàriu: assistèntzia pediàtrica: nono</string>
+	<string name="poi_health_service_prevention_yes">Servìtziu sanitàriu: preventzione: eja</string>
+	<string name="poi_health_service_prevention_no">Servìtziu sanitàriu: preventzione: nono</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Servìtziu sanitàriu: vatzinatzione: eja</string>
+	<string name="poi_health_service_prevention_vaccination_no">Servìtziu sanitàriu: vatzinatzione: nono</string>
+	<string name="poi_health_service_support_yes">Servìtziu sanitàriu: suportu: eja</string>
+	<string name="poi_health_service_support_no">Servìtziu sanitàriu: suportu: nono</string>
+	<string name="poi_health_service_test_yes">Servìtziu sanitàriu: anàlisi: eja</string>
+	<string name="poi_health_service_test_no">Servìtziu sanitàriu: anàlisi: nono</string>
+
+	<string name="poi_health_facility_type_office">Ufìtziu mèdicu</string>
+	<string name="poi_health_facility_type_field_hospital">Casta de tzentru sanitàriu: uspidale de campu</string>
+	<string name="poi_health_facility_type_counselling_centre">Casta de tzentru sanitàriu: tzentru de consulèntzia</string>
+	<string name="poi_health_facility_type_laboratory">Casta de tzentru sanitàriu: laboratòriu</string>
+	<string name="poi_health_facility_type_therapy">Casta de tzentru sanitàriu: terapia</string>
+	<string name="poi_health_facility_type_department">Casta de tzentru sanitàriu: dipartimentu</string>
+	<string name="poi_health_facility_type_dispensary">Casta de tzentru sanitàriu: dispensàriu</string>
+	<string name="poi_health_facility_type_first_aid">Casta de tzentru sanitàriu: primu agiudu</string>
+	<string name="poi_health_facility_type_nursing_home">Casta de tzentru sanitàriu: dommo de pasu</string>
+	<string name="poi_health_facility_type_support_group_home">Casta de tzentru sanitàriu: grupu de suportu</string>
+
+	<string name="poi_suction_point">Puntu de sutzione</string>
+
+	<string name="poi_fire_hydrant_type_underground">Suta-terra</string>
+	<string name="poi_fire_hydrant_type_pillar">Pilastru</string>
+	<string name="poi_fire_hydrant_type_wall">Muru</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Kit de primu agiudu</string>
+	<string name="poi_fast_food_cafeteria">Eja</string>
+
+	<string name="poi_drink_wine_yes">Vinu: eja</string>
+	<string name="poi_motorcycle_sales_yes_used">Bèndida: eja, impreadas</string>
+	<string name="poi_animal_shelter_purpose_adoption_yes">Adotzione: eja</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Liberatzione: eja</string>
+	<string name="poi_animal_shelter_purpose_release_no">Liberatzione: nono</string>
+
+	<string name="poi_car_yes">Màchina: eja</string>
+	<string name="poi_bicycle_yes">Bitzicleta: eja</string>
+	<string name="poi_scooter_yes">Motorinu: eja</string>
+	<string name="poi_truck_yes">Càmion: eja</string>
+	<string name="poi_climbing_sport_yes">Isport: eja</string>
+	<string name="poi_climbing_trad_yes">Traditzionale: eja</string>
+	<string name="poi_climbing_ice_yes">Astra: eja</string>
+	<string name="poi_climbing_ice_no">Astra: nono</string>
+	</resources>
