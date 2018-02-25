@@ -2976,11 +2976,11 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="winter_and_ski_renderer">Zima i narciarstwo</string>
     <string name="touring_view_renderer">Widok turystyczny (kontrast i szczegóły)</string>
     <string name="nautical_renderer">Żeglarstwo</string>
-<string name="make_as_start_point">Ustaw punkt początkowy</string>
-    <string name="shared_string_current">Obecne</string>
+<string name="make_as_start_point">Ustal jako punkt początkowy</string>
+    <string name="shared_string_current">Aktualne</string>
     <string name="last_intermediate_dest_description">Dodaje ostatni cel pośredni na trasie</string>
     <string name="first_intermediate_dest_description">Dodaje pierwszy cel pośredni na trasie</string>
-    <string name="show_closed_notes">Pokaż zamknięte notatki</string>
+    <string name="show_closed_notes">Wyświetl zamknięte uwagi</string>
     <string name="switch_osm_notes_visibility_desc">Pokaż/Ukryj Notatki OSM na mapie.</string>
     <string name="gpx_file_desc">GPX - odpowiedni do eksportowania danych do JOSM i innych edytorów OSM.</string>
     <string name="osc_file_desc">OSC - odpowiedni do eksportowania danych do OpenStreetMap.</string>
@@ -3015,13 +3015,15 @@ Reprezentuje obszar: %1$s x %2$s</string>
 	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
 	<string name="east_abbreviation">Wsch.</string>
 	<string name="west_abbreviation">Zach.</string>
-	<string name="south_abbreviation">Płd.</string>
-	<string name="north_abbreviation">Płn.</string>
+	<string name="south_abbreviation">Pd.</string>
+	<string name="north_abbreviation">Pn.</string>
 	<string name="optional_point_name">Dodatkowa nazwa punktu</string>
     <string name="transport_nearby_routes_within">Trasy w pobliżu</string>
     <string name="transport_nearby_routes">W POBLIŻU</string>
-    <string name="enter_the_file_name">Wprowadź nazwę pliku.</string>
-    <string name="map_import_error">Błąd importu mapy</string>
-    <string name="map_imported_successfully">Mapa zaimportowana z powodzeniem</string>
+    <string name="enter_the_file_name">Proszę wprowadzić nazwę pliku.</string>
+    <string name="map_import_error">Błąd importowania mapy</string>
+    <string name="map_imported_successfully">Zaimportowano mapę</string>
     <string name="osm_recipient_stat">%1$s edycji, w sumie %2$s mBTC</string>
+    <string name="distance_farthest">Odległość: najpierw najdalsze</string>
+    <string name="distance_nearest">Odległość: najpierw najbliższe</string>
     </resources>
