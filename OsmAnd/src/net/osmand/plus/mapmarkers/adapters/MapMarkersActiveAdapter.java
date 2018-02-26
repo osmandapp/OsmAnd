@@ -93,8 +93,8 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		int drawableResToUpdate;
 		int markerColor = MapMarker.getColorId(marker.colorIndex);
 		LatLon markerLatLon = new LatLon(marker.getLatitude(), marker.getLongitude());
-		int displayedWidgets = mapActivity.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get();
-		if (showDirectionEnabled && pos < displayedWidgets) {
+		final boolean displayedInWidget = pos < mapActivity.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get();
+		if (showDirectionEnabled && displayedInWidget) {
 			holder.iconDirection.setVisibility(View.GONE);
 
 			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_arrow_marker_diretion, markerColor));
@@ -192,8 +192,8 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		});
 
 		DashLocationFragment.updateLocationView(useCenter, location,
-				heading, markerImageViewToUpdate, drawableResToUpdate, pos < 2 ? markerColor : 0,
-				holder.distance, markerLatLon,
+				heading, markerImageViewToUpdate, drawableResToUpdate,
+				showDirectionEnabled && displayedInWidget ? markerColor : 0, holder.distance, markerLatLon,
 				screenOrientation, mapActivity.getMyApplication(), mapActivity, true);
 	}
 
