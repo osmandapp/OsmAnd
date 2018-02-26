@@ -45,10 +45,12 @@ import net.osmand.util.Algorithms;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -451,11 +453,11 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				extractPoiAdditionals(otherAdditionalCategories, additionalsMap, excludedPoiAdditionalCategories, true);
 
 				if (additionalsMap.size() > 0) {
+					Set<String> filters = new HashSet<>(Arrays.asList(filterByName.split(" ")));
 					for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
 						for (PoiType poiType : entry.getValue()) {
 							String keyName = poiType.getKeyName().replace('_', ':').toLowerCase();
-							index = filterByName.indexOf(keyName);
-							if (index != -1) {
+							if (filters.contains(keyName)) {
 								selectedPoiAdditionals.add(keyName);
 								filterByName = filterByName.replaceAll(keyName, "");
 							}
