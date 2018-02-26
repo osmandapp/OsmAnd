@@ -10,6 +10,7 @@ import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -463,12 +464,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 							}
 						}
 					}
-					StringBuilder sb = new StringBuilder();
-					for (String s : filters) {
-						sb.append(s);
-						sb.append(" ");
-					}
-					filterByName = sb.toString();
+					filterByName = TextUtils.join(" ", filters);
 				}
 			}
 			if (filterByName.trim().length() > 0 && Algorithms.isEmpty(nameFilterText)) {
