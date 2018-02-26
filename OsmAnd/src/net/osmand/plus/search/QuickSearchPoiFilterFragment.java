@@ -51,6 +51,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -460,15 +461,30 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 							if (filters.contains(keyName)) {
 								selectedPoiAdditionals.add(keyName);
 								filters.remove(keyName);
-								filterByName = filters.toString().replaceAll("[,\\[\\]]", "");
 							}
 						}
 					}
+					filterByName = nameFromSet(filters);
 				}
 			}
 			if (filterByName.trim().length() > 0 && Algorithms.isEmpty(nameFilterText)) {
 				nameFilterText = filterByName.trim();
 			}
+		}
+	}
+
+	private String nameFromSet(Set<String> filters) {
+		Iterator<String> i = filters.iterator();
+		if (!i.hasNext()) {
+			return "";
+		}
+		StringBuilder sb = new StringBuilder();
+		for (; ; ) {
+			String s = i.next();
+			sb.append(s);
+			if (!i.hasNext())
+				return sb.toString();
+			sb.append(" ");
 		}
 	}
 
