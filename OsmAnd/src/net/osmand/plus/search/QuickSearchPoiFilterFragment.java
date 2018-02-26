@@ -10,6 +10,7 @@ import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -45,6 +46,7 @@ import net.osmand.util.Algorithms;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -451,16 +453,18 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				extractPoiAdditionals(otherAdditionalCategories, additionalsMap, excludedPoiAdditionalCategories, true);
 
 				if (additionalsMap.size() > 0) {
+					List<String> filters = new ArrayList<>(Arrays.asList(filterByName.split(" ")));
 					for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
 						for (PoiType poiType : entry.getValue()) {
 							String keyName = poiType.getKeyName().replace('_', ':').toLowerCase();
-							index = filterByName.indexOf(keyName);
+							index = filters.indexOf(keyName);
 							if (index != -1) {
 								selectedPoiAdditionals.add(keyName);
-								filterByName = filterByName.replaceAll(keyName, "");
+								filters.remove(index);
 							}
 						}
 					}
+					filterByName = TextUtils.join(" ", filters);
 				}
 			}
 			if (filterByName.trim().length() > 0 && Algorithms.isEmpty(nameFilterText)) {
