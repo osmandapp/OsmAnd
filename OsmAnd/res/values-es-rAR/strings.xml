@@ -2949,4 +2949,6 @@ Proporciona un código completo</string>
     <string name="enter_lon">Ingresar longitud</string>
     <string name="enter_lat">Ingresar latitud</string>
     <string name="enter_lat_and_lon">Ingresar latitud y longitud</string>
-	</resources>
+	<string name="distance_farthest">Distancia: más lejos primero</string>
+    <string name="distance_nearest">Distancia: más cerca primero</string>
+    </resources>
