@@ -5,10 +5,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
@@ -97,6 +101,29 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				}
 			}
 		});
+	}
+
+	protected void setupItems(@NonNull final View mainView,
+							  @NonNull @IdRes int[] itemIds,
+							  @NonNull Drawable[] icons,
+							  @NonNull String[] titles,
+							  @NonNull String[] descriptions,
+							  @NonNull View.OnClickListener onClickListener) {
+		for (int i = 0; i < itemIds.length; i++) {
+			View item = mainView.findViewById(itemIds[i]);
+			if (item != null) {
+				if (icons[i] != null) {
+					((ImageView) item.findViewById(R.id.icon)).setImageDrawable(icons[i]);
+				}
+				if (titles[i] != null) {
+					((TextView) item.findViewById(R.id.title)).setText(titles[i]);
+				}
+				if (descriptions[i] != null) {
+					((TextView) item.findViewById(R.id.description)).setText(descriptions[i]);
+				}
+				item.setOnClickListener(onClickListener);
+			}
+		}
 	}
 
 	@DrawableRes
