@@ -50,8 +50,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -454,37 +452,28 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				extractPoiAdditionals(otherAdditionalCategories, additionalsMap, excludedPoiAdditionalCategories, true);
 
 				if (additionalsMap.size() > 0) {
-					Set<String> filters = new HashSet<>(Arrays.asList(filterByName.split(" ")));
+					List<String> filters = new ArrayList<>(Arrays.asList(filterByName.split(" ")));
 					for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
 						for (PoiType poiType : entry.getValue()) {
 							String keyName = poiType.getKeyName().replace('_', ':').toLowerCase();
-							if (filters.contains(keyName)) {
+							index = filters.indexOf(keyName);
+							if (index != -1) {
 								selectedPoiAdditionals.add(keyName);
-								filters.remove(keyName);
+								filters.remove(index);
 							}
 						}
 					}
-					filterByName = nameFromSet(filters);
+					StringBuilder sb = new StringBuilder();
+					for (String s : filters) {
+						sb.append(s);
+						sb.append(" ");
+					}
+					filterByName = sb.toString();
 				}
 			}
 			if (filterByName.trim().length() > 0 && Algorithms.isEmpty(nameFilterText)) {
 				nameFilterText = filterByName.trim();
 			}
-		}
-	}
-
-	private String nameFromSet(Set<String> filters) {
-		Iterator<String> i = filters.iterator();
-		if (!i.hasNext()) {
-			return "";
-		}
-		StringBuilder sb = new StringBuilder();
-		for (; ; ) {
-			String s = i.next();
-			sb.append(s);
-			if (!i.hasNext())
-				return sb.toString();
-			sb.append(" ");
 		}
 	}
 
