@@ -3,6 +3,7 @@ package net.osmand.plus.base.bottomsheetmenu;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.view.View;
 
@@ -20,7 +21,7 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 	private int titleColorId;
 
 	public SimpleBottomSheetItem(View customView,
-								 int layoutResId,
+								 @LayoutRes int layoutResId,
 								 boolean clickable,
 								 View.OnClickListener onClickListener,
 								 int position,
