@@ -28,14 +28,14 @@
   <string name="unknown_from_location">Початкове місцезнаходження не визначено</string>
   <string name="unknown_location">Розташування ще не визначено</string>
   <string name="modify_transparency">Змінити прозорість (0 - прозорий, 255 - непрозорий)</string>
-  <string name="confirm_interrupt_download">Перервати завантаження файлу?</string>
-  <string name="first_time_msg">Дякуємо вам за використання OsmAnd. Для роботи більшості основних можливостей програми потрібні детальні мапи регіонів, які можна завантажити з Інтернету за допомогою пункту меню \'Налаштування\' → \'Управління мапами\'. Після завантаження цих мап Ви зможете здійснювати пошук за адресою, POI і зупинками громадського транспорту.</string>
-  <string name="basemap_was_selected_to_download">Базова мапа необхідна для коректної роботи програми і автоматично була вибрана для завантаження.</string>
+  <string name="confirm_interrupt_download">Перервати звантаження файлу?</string>
+  <string name="first_time_msg">Дякуємо вам за використання OsmAnd. Для роботи більшості основних можливостей програми потрібні детальні мапи регіонів, які можна звантажити з Інтернету за допомогою пункту меню „Налаштування“ → „Управління мапами\'“. Після звантаження цих мап Ви зможете переглядати мапи та здійснювати пошук за адресами, POI, зупинками громадського транспорту тощо.</string>
+  <string name="basemap_was_selected_to_download">Базова мапа необхідна для коректної роботи програми і автоматично була вибрана для звантаження.</string>
   <string name="select_index_file_to_download">Нічого не знайдено. Якщо ви не знайшли свій регіон, ви можете створити карту самостійно (див. http://osmand.net).</string>
   <string name="local_indexes_cat_tile">Онлайн та кешовані растрові мапи</string>
   <string name="local_indexes_cat_map">Стандартні мапи (векторні)</string>
   
-  <string name="index_settings_descr">Завантаження, перегляд деталей, та управління локальними мапами.</string>
+  <string name="index_settings_descr">Звантаження, перегляд подробиць та управління локальними мапами.</string>
   <string name="map_online_plugin_is_not_installed">Активуйте втулок онлайн мап, щоб мати можливість вибирати різні джерела для мап</string>
   <string name="map_online_data">Онлайн мапи (растрові)</string>
   <string name="map_online_data_descr">Використовувати онлайн мапи (кешуються на SD картці).</string>
@@ -67,7 +67,7 @@
   <string name="native_rendering">Швидкий рендеринг</string>
   
   <string name="test_voice_prompts">Тестувати голосові підказки</string>
-  <string name="switch_to_raster_map_to_see">Для поточної місцевості відсутні векторні оффлайн мапи. Ви можете завантажити їх в меню Налаштування (Управління мапами), або використовувати онлайн мапи (для цього увімкніть відповідний втулок).</string>
+  <string name="switch_to_raster_map_to_see">Для поточної місцевості відсутні векторні оффлайн-мапи. Ви можете звантажити їх через меню „Налаштування“ » „Управління мапами“ або ж використовувати онлайн-мапи (для цього увімкніть відповідний втулок).</string>
   
   <string name="send_files_to_osm">Відправити GPX файли в OSM?</string>
   <string name="gpx_visibility_txt">Видимість</string>
@@ -199,10 +199,8 @@
   
   
   
-  <string name="download_files_not_enough_space">Не вистачає місця на диску для завантаження %1$s MB (вільно: %2$s).</string>
-  <string name="download_files_question_space">Завантажити {0} файл(ів)?
- Це потребує {1} МБ.
- (На даний момент вільно {2} МБ.)</string>
+  <string name="download_files_not_enough_space">Не вистачає місця на диску для звантаження %1$s MB (вільно: %2$s).</string>
+  <string name="download_files_question_space">Звантажити {0} файл(ів)? Це потребує {1} МБ (нараз вільно {2} МБ.).</string>
   
   
   
@@ -328,7 +326,7 @@
   <string name="voice_stream_voice_call">Голосовий канал (також призупиняє музику з динаміків)</string>
   <string name="voice_stream_notification">Повідомлення аудіо</string>
   <string name="voice_stream_music">Медіа / аудіо музика</string>
-  <string name="warning_tile_layer_not_downloadable">Програма не може завантажити шар мапи %1$s, спробуйте ще раз встановити його.</string>
+  <string name="warning_tile_layer_not_downloadable">Програма не може звантажити шар мапи %1$s, спробуйте перевстановити її.</string>
   <string name="overlay_transparency_descr">Змінити прозорість мапи.</string>
   <string name="overlay_transparency">Прозорість</string>
   <string name="map_transparency_descr">Змінити прозорість основної мапи.</string>
@@ -460,7 +458,7 @@
   <string name="fast_route_mode_descr">Задіяти розрахунок найшвидшого маршруту, або ж вимкнути режим паливно-ощадного маршруту.</string>
   <string name="tiles_to_download_estimated_size">На масштабі{0} завантажувати {1} тайли ({2} MB)</string>
   <string name="shared_string_download_map">Завантажити мапу</string>
-  <string name="select_max_zoom_preload_area">Вибрати максимальний масштаб для завантаження</string>
+  <string name="select_max_zoom_preload_area">Виберіть максимальний масштаб для попереднього звантаження</string>
   <string name="maps_could_not_be_downloaded">Дана мапа не може бути завантажена</string>
   <string name="continuous_rendering">Безперервний рендеринг</string>
   <string name="continuous_rendering_descr">Відображати безперервну промальовку замість зображення повністю.</string>
@@ -567,7 +565,7 @@
   <string name="route_tu">Розверніться і рухайтесь</string>
   <string name="route_head">Рухайтесь</string>
   <string name="first_time_continue">Далі</string>
-  <string name="first_time_download">Завантажити мапи регіонів</string>
+  <string name="first_time_download">Звантажити мапи регіонів</string>
   <string name="search_poi_location">Пошук сигналу…</string>
   <string name="search_near_map">Шукати поблизу поточного центру мапи</string>
   <string name="search_nearby">Шукати поруч</string>
@@ -618,7 +616,7 @@
   <string name="search_offline_address">Оффлайн пошук</string>
   <string name="search_online_address">Інтернет</string>
   <string name="max_level_download_tile">Макс. рівень деталізації</string>
-  <string name="max_level_download_tile_descr">Виберіть максимальний рівень деталізації для завантаження з Інтернету.</string>
+  <string name="max_level_download_tile_descr">Виберіть максимальний рівень деталізації для звантаження з Інтернету.</string>
   <string name="route_general_information">Загальна відстань %1$s, час в дорозі %2$d г %3$d хв.</string>
   <string name="router_service_descr">Виберіть сервіс для прокладання маршруту.</string>
   <string name="router_service">Прокладання маршруту</string>
@@ -646,7 +644,7 @@
   <string name="opening_changeset">Відкриття пакету правок…</string>
   <string name="closing_changeset">Закриття пакету правок…</string>
   <string name="commiting_node">Збереження об’єкта…</string>
-  <string name="loading_poi_obj">Завантаження POI…</string>
+  <string name="loading_poi_obj">Звантаження POI…</string>
   <string name="auth_failed">Помилка авторизації</string>
   <string name="failed_op">помилка</string>
   <string name="converting_names">Конвертація місцевих/англійських назв…</string>
@@ -722,7 +720,7 @@
   
   
   <string name="show_gps_coordinates_text">Показати GPS координати на мапі</string>
-  <string name="use_internet_to_download_tile">Використовувати інтернет для завантаження відсутніх частин мапи</string>
+  <string name="use_internet_to_download_tile">Використовувати інтернет для звантаження відсутніх частин мапи</string>
   <string name="app_description">Навігаційна програма</string>
   <string name="shared_string_exit">Вихід</string>
   
@@ -1106,49 +1104,34 @@
 	
 	<string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions) 
 \n
-\n 
 \nOsmAnd+ — навігаційне програмне забезпечення з відкритим кодом з доступом до різноманітних картографічних даних від OpenStreetMap (OSM). Всі картографічні дані (векторні та растрові) можуть бути збережені на карті пам’яті для подальшого автономного використання. OsmAnd також пропонує можливість прокладання маршруту як оффлайн, так і використовуючи онлайн-сервіси з покроковим голосовим супроводженням. 
 \n
-\n 
 \nOsmAnd+ — це платна версія, купуючи яку ви підтримуєте проект, фінансуючи розробку нових функцій, одержуючи останні оновлення. 
 \n
-\n 
 \nКілька основних можливостей: 
 \n
-\n 
 \n - повна оффлайн функціональність (просто збережіть векторні чи растрові дані на пристрій), 
 \n
-\n 
 \n - компактна векторна мапа для усього світу, 
 \n
-\n 
 \n - необмежена кількість звантажень мап окремої країни чи областей безпосередньо у програмі, 
 \n
-\n 
 \n - можливість автономної роботи із даними Вікіпедії (звантаження POI з Вікіпедії) є чудовим для інструментом для мандрівників, 
 \n
-\n 
 \n - можливість показу додаткових даних на мапі, наприклад шар для прокладання маршруту чи шар із записом GPX-треку, з POI, закладками, ізолініями висот, громадським транспортом, додатковими мапами з можливістю налаштовування рівня прозорості, 
-\n
 \n 
 \n - автономний пошук адрес та POI, 
 \n
-\n 
 \n - прокладання маршрутів оффлайн для середнього розміру відстаней, 
 \n
-\n 
 \n - режими для пішохідної, автомобільної та велонавігації: 
 \n
-\n 
 \n   - можливість перемикання на денний/нічний режим показу, 
 \n
-\n 
 \n   - мапи відповідно до швидкості руху, 
 \n
-\n 
 \n   - можливість орієнтації мапи за компасом чи напрямком руху, 
 \n
-\n 
 \n   - показ руху по смугах та обмежень швидкості, голосове супроводження (записане чи синтезоване)"</string>
 	
 	
@@ -1166,11 +1149,11 @@
     <string name="use_kalman_filter_compass">Використовувати фільтр Калмана</string>
     <string name="other_location">Інше</string>
     <string name="files_limit">залишилось %1$d файлів</string>
-    <string name="available_downloads_left">Доступно %1$d файлів для завантаження</string>
+    <string name="available_downloads_left">Доступно %1$d файлів для звантаження</string>
     <string name="install_paid">Повна версія</string>
     <string name="cancel_navigation">Зупинити навігацію</string>
     <string name="clear_destination">Вилучити пункт призначення</string>
-    <string name="download_using_mobile_internet">Зараз Wi-Fi з’єднання відсутнє. Продовжити завантаження з поточним інтернет-з’єднанням?</string>
+    <string name="download_using_mobile_internet">Зараз Wi-Fi з’єднання відсутнє. Продовжити звантаження з поточним інтернет-з’єднанням?</string>
     <string name="monitoring_settings">Записування подорожі</string>
     
     <string name="accessibility_options">Налаштування допоміжних можливостей</string>
@@ -1179,7 +1162,7 @@
     <string name="use_magnetic_sensor">Використовувати магнітометр</string>
     <string name="monitoring_settings_descr">Налаштування запису Ваших подорожей.</string>
     
-    <string name="shared_string_downloading">Завантаження</string>
+    <string name="shared_string_downloading">Триває звантаження…</string>
 	<string name="delete_point">Вилучити точку</string>
     <string name="plugin_distance_point_time">час</string>
     <string name="plugin_distance_point_hdop">точність</string>
@@ -1408,7 +1391,7 @@
     <string name="save_as_favorites_points">Зберегти як групу закладок</string>
     <string name="select_destination_and_intermediate_points">Виберіть призначення</string>
     <string name="layer_amenity_label">Підписи до цікавих точок</string>
-    <string name="loading_smth">Завантаження %1$s…</string>
+    <string name="loading_smth">Звантажується %1$s…</string>
     <string name="map_widget_plain_time">Поточний час</string>
     <string name="gpx_wpt">Маршрутна точка</string>
     <string name="selected_gpx_info_show">"
@@ -1642,7 +1625,7 @@
 	<string name="av_camera_pic_size_descr">Оберіть розмір фото для вбудованого застосунка для фотографування.</string>
     
     
-<string name="download_additional_maps">Завантажити відсутні мапи %1$s (%2$d МБ)?</string>
+<string name="download_additional_maps">Звантажити відсутні мапи %1$s (%2$d МБ)?</string>
     <string name="shared_string_more">Ще…</string>
     <string name="rendering_value_browse_map_name">Огляд мапи</string>  
     <string name="rendering_value_car_name">Автівка</string>
@@ -1746,8 +1729,8 @@
 	<string name="device_memory">Пам’ять пристрою</string>
     <string name="plugin_ski_name">Лижні мапи</string>
     <string name="plugin_nautical_name">Морські мапи</string>
-    <string name="world_ski_missing">Для показу лижних мап, потрібно завантажити спеціалізовані мапи</string>
-    <string name="nautical_maps_missing">Для показу морських мап, потрібно завантажити спеціалізовані мапи</string>
+    <string name="world_ski_missing">Для показу лижних мап, потрібно звантажити спеціалізовані мапи</string>
+    <string name="nautical_maps_missing">Для показу морських мап, потрібно звантажити спеціалізовані мапи</string>
 	<string name="edit_group">Редагувати групу</string>
     <string name="parking_place">Місце для стоянки</string>
     <string name="remove_the_tag">ВИЛУЧИТИ ТЕҐ</string>
@@ -1777,7 +1760,7 @@
 	<string name="show_pedestrian_warnings">Пішохідні переходи</string>
     <string name="rendering_value_americanRoadAtlas_name">Атлас доріг Америки</string>
     <string name="routing_attr_no_new_routing_description">Не використовувати для побудови маршруту алгоритм представлений у версії 1.9.</string>
-    <string name="dash_download_msg_none">Ви бажаєте завантажити оффлайн мапи?</string>
+    <string name="dash_download_msg_none">Ви бажаєте звантажити оффлайн-мапи?</string>
     <string name="dash_download_msg">Завантажено %1$s мап</string>
     <string name="dash_download_new_one">Завантажити нову мапу</string>
     <string name="dash_download_manage">Керувати</string>
@@ -1785,10 +1768,10 @@
     <string name="rendering_attr_transportStops_name">Зупинки транспорту</string>
     <string name="navigate_point_zone">Зона</string>
     <string name="navigate_point_easting">Східної довготи</string>
-    <string name="download_tab_downloads">Всі завантаження</string>
+    <string name="download_tab_downloads">Усі звантаження</string>
     <string name="download_tab_updates">Оновлення</string>
     <string name="download_tab_local">Локальні</string>
-	<string name="no_internet_connection">Завантаження неможливе. Перевірте з’єднання з Інтернет.</string>
+	<string name="no_internet_connection">Звантаження неможливе. Перевірте з’єднання з Інтернет.</string>
     <string name="everything_up_to_date">Всі файли оновлені</string>
     <string name="use_opengl_render">Використовувати OpenGL для візуалізації</string>
     <string name="use_opengl_render_descr">Використовувати апаратне прискорення OpenGL для візуалізації (може не працювати на деяких пристроях).</string>
@@ -1864,7 +1847,7 @@
 	<string name="shared_string_message">Повідомлення</string>
 	<string name="agps_data_last_downloaded">Останні завантажені дані A-GPS: %1$s</string>
     <string name="confirm_usage_speed_cameras">У багатьох країнах (Німеччина, Франція, Італія та інші) використання детекторів камер контролю швидкості не дозволено законом. OsmAnd не несе ніякої відповідальності, якщо Ви порушите закон. Будь ласка, натисніть кнопку „Так“, тільки якщо ви маєте право використовувати цю функцію.</string>
-	<string name="welmode_download_maps">Завантажити мапи</string>
+	<string name="welmode_download_maps">Звантаження мап</string>
 	<string name="welcome_select_region">Щоб правильно показувати дорожні знаки та правила дорожнього руху, будь ласка, виберіть ваш регіон:</string>
 	<string name="welcome_text">OsmAnd забезпечує повністю автономний (оффлайн) перегляд мап і навігацію!</string>
 	<string name="welcome_header">Ласкаво просимо</string>
@@ -1877,15 +1860,15 @@
 	<string name="shared_string_do_not_use">Не використовувати</string>
 	<string name="shared_string_address">Адреса</string>
 	<string name="plugin_touringview_descr">Активація цього виду змінює стиль мапи OsmAnd на „Туристичну мапу“ – особливий стиль з докладною деталізацією для мандрівників та професіональних водіїв. 
-\n
+\n 
 \nЦей режим надає, на будь-якому масштабі, максимальну кількість інформації потрібну для подорожуючих (дороги, путівці, стежки та орієнтири). 
-\n
-\nВін також чітко показує всі типи доріг однозначним кольоровим кодуванням, що є корисним особливо для водіїв великих транспортних засобів.
-\n
+\n 
+\nВін також чітко показує всі типи доріг однозначним кольоровим кодуванням, що є корисним особливо для водіїв великих транспортних засобів. 
+\n 
 \nВін також має спеціальні налаштування для показу веломаршрутів та гірських туристичних маршрутів. 
-\n
-\nВін не потребує завантаження окремих мап, вид створюється на основі інформації зі стандартної мапи. 
-\n
+\n 
+\nВін не потребує звантаження окремих мап, вид створюється на основі інформації зі стандартної мапи. 
+\n 
 \nЦей вид можна де-активувати тут або змінити на інший, змінивши „Стиль мапи“ на потрібний в „Налаштування мапи“.</string>
 	<string name="plugin_ski_descr">Втулок забезпечує вам доступ до даних про гірськолижні траси, маршрути для бігових лиж, гірськолижні спуски, фунікулери та підйомники. Маршрути і спуски відзначені різними кольорами залежно від їх складності та зображені з використанням спеціального „зимового“ стилю мапи, який полягає в тому, що використовуються „снігові“ кольори зимового пейзажу. 
 \n 
@@ -1962,7 +1945,7 @@
     <string name="lang_et">Естонська</string>
     <string name="lang_ceb">Себуанська</string>
     <string name="archive_wikipedia_data">У Вас завантажені старі, несумісні дані з Вікіпедії, Ви хочете їх заархівувати?</string>
-    <string name="download_wikipedia_files">Ви хочете завантажити додаткові дані з Вікіпедії (%1$s Мб) ?</string>
+    <string name="download_wikipedia_files">Ви хочете звантажити додаткові дані з Вікіпедії (%1$s Мб)?</string>
     <string name="gps_network_not_enabled">Сервіс локації вимкнений. Бажаєте його ввімкнути?</string>
     <string name="disable_recording_once_app_killed">Запобігти самостійному логуваню</string>
     <string name="disable_recording_once_app_killed_descrp">Логування GPX буде призупинено коли додаток буде закрито (через недавні додатки). (Фоновий індикатор OsmAnd зникне з панелі сповіщень Android\'а)</string>
@@ -2126,12 +2109,12 @@
     <string name="activate_srtm_plugin">Будь ласка, увімкніть втулок SRTM</string>
     <string name="later">Пізніше</string>
     <string name="get_full_version">Повна версія</string>
-    <string name="downloads">Завантаження</string>
+    <string name="downloads">Звантаження</string>
     <string name="value_downloaded_of_max">%1$.1f з %2$.1f МБ</string>
     <string name="file_size_in_mb">%.1f МБ</string>
     <string name="update_all">Оновити все (%1$s МБ)</string>
     <string name="free_downloads_used">Використано безкоштовних завантажень</string>
-    <string name="free_downloads_used_description">Показує використані безкоштовні завантаження.</string>
+    <string name="free_downloads_used_description">Показує використані безкоштовні звантаження.</string>
 
     <string name="application_dir_description">Виберіть, де ви будете зберігати мапи та файли даних.</string>
 
@@ -2143,7 +2126,7 @@
     <string name="other_menu_group">Інше</string>
     <string name="plugins_menu_group">Втулки</string>
     <string name="first_usage_item">Перше використання</string>
-    <string name="first_usage_item_description">Як завантажити мапи, встановити основні налаштування.</string>
+    <string name="first_usage_item_description">Як звантажити мапи, встановити основні налаштування.</string>
     <string name="navigation_item_description">Налаштування навігації.</string>
     <string name="planning_trip_item">Планування подорожі</string>
     <string name="faq_item">Питання та відповіді</string>
@@ -2168,7 +2151,7 @@
     <string name="closing_at">Закриття о</string>
     <string name="number_of_rows_in_dash">Кількість рядків на панелі %1$s</string>
     <string name="recent_places">Нещодавні місця</string>
-    <string name="downloading_number_of_files">Завантаження файлу - %1$d</string>
+    <string name="downloading_number_of_files">Звантаження файлу — %1$d</string>
     <string name="show_free_version_banner">Показати банер безкоштовної версії</string>
     <string name="use_dashboard_btn">Використовувати домашню сторінку</string>
     <string name="use_drawer_btn">Використовувати меню</string>
@@ -2279,9 +2262,7 @@
     <string name="download_files_error_not_enough_space">Недостатньо пам\'яті!
  Необхідно {3} МБ тимчасової та {1} МБ постійної пам\'яті.
  На разі доступно лише {2} МБ.</string>
-    <string name="download_files_question_space_with_temp">Завантажити {0} файл(їв)?
- Це потребує {3} МБ тимчасової, {1} МБ постійної пам\'яті.
- (Наразі вільно лише {2} МБ.)</string>
+    <string name="download_files_question_space_with_temp">Звантажити {0} файл(їв)? Це потребує {3} МБ тимчасової та {1} МБ постійної пам’яті (наразі вільно лише {2} МБ.).</string>
     <string name="donations">Пожертвування</string>
     <string name="osm_live_subscribe_btn">Підписатися</string>
     <string name="osm_live_hide_user_name">Не показувати моє ім\'я у звітах</string>
@@ -2471,14 +2452,14 @@
     <string name="osm_live_banner_desc">Отримайте необмежені завантаження для мап, а також оновлення мап частіше ніж один раз на місяць: щотижня, щодня або щогодини.</string>
     <string name="osmand_plus_banner_desc">Необмежений доступ до мап, оновлень й втулка Wikipedia.</string>
     <string name="si_mi_meters">Милі, метри</string>
-    <string name="skip_map_downloading">Пропустити завантаження мап</string>
-    <string name="skip_map_downloading_desc">У вас немає завантажених мап. Ви можете вибрати мапу зі списку або завантажити її пізніше за допомогою меню — %1$s.</string>
+    <string name="skip_map_downloading">Пропустити звантаження мап</string>
+    <string name="skip_map_downloading_desc">У вас немає звантажених мап. Ви можете вибрати мапу зі списку або звантажити її пізніше за допомогою меню — %1$s.</string>
     <string name="search_another_country">Виберіть інший регіон</string>
     <string name="search_map">Пошук мапи…</string>
-    <string name="first_usage_wizard_desc">OsmAnd визначить ваше місце розташування і запропонує завантажити мапи для цієї області.</string>
+    <string name="first_usage_wizard_desc">OsmAnd визначить ваше місце розташування і запропонує звантажити мапи для цього регіону.</string>
     <string name="location_not_found">Неможливо визначити місце розташування</string>
     <string name="no_inet_connection">З’єднання з Інтернетом відсутнє</string>
-    <string name="no_inet_connection_desc_map">Потрібно завантажити мапи.</string>
+    <string name="no_inet_connection_desc_map">Необхідно звантажити мапи.</string>
     <string name="search_location">Позиціонування…</string>
     <string name="storage_free_space">Вільне місце</string>
     <string name="storage_place_description">OsmAnd буде зберігати дані (мапи, маршрути та ін.) у %1$s.</string>
@@ -2687,7 +2668,7 @@
     <string name="animate_my_location">Анімувати моє місце розташування</string>
     <string name="animate_my_location_desc">Задіяти анімацію мого місця розташування під час навігації.</string>
     <string name="do_not_show_startup_messages">Не показувати повідомлення при запуску</string>
-    <string name="subscribe_email_desc">Підпишіться на наше email-розсилання про знижки на OsmAnd та отримаєте 3 додаткові завантаження мап!</string>
+    <string name="subscribe_email_desc">Підпишіться на наше email-розсилання про знижки на OsmAnd та отримаєте 3 додаткові звантаження мап!</string>
     <string name="do_not_show_startup_messages_desc">Пригнічує відображення знижок на застосунок та спеціальні повідомлення про місцеві події.</string>
     <string name="restart_search">Шукати знову</string>
     <string name="increase_search_radius">Збільшити радіус пошуку</string>
@@ -2969,7 +2950,7 @@
     <string name="mappilary_no_internet_desc">Вам потрібен Інтернет для перегляду фотографій від Mapillary.</string>
     <string name="retry">Повторити</string>
 <string name="measurement_tool_action_bar">Перегляньте мапу і додайте точки</string>
-    <string name="measurement_tool">Виміряти відстань</string>
+    <string name="measurement_tool">Вимірювання відстані</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Додати шляхову точку в GPX</string>
     <string name="shared_string_create">Створити</string>
 <string name="none_point_error">Необхідно додати хоча б одну точку.</string>
