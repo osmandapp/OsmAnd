@@ -2949,4 +2949,19 @@ Proporciona un código completo</string>
     <string name="enter_the_file_name">Ingresa el nombre del archivo.</string>
     <string name="transport_nearby_routes_within">Rutas dentro de los</string>
     <string name="transport_nearby_routes">CERCA</string>
+    <string name="distance_farthest">Distancia: más lejos primero</string>
+    <string name="distance_nearest">Distancia: más cerca primero</string>
+    <string name="enter_lon">Ingresar longitud</string>
+    <string name="enter_lat">Ingresar latitud</string>
+    <string name="enter_lat_and_lon">Ingresar latitud y longitud</string>
+	<string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	<string name="east_abbreviation">E</string>
+	<string name="west_abbreviation">O</string>
+	<string name="south_abbreviation">S</string>
+	<string name="north_abbreviation">N</string>
+	<string name="optional_point_name">Nombre de punto opcional</string>
     </resources>
