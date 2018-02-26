@@ -10,14 +10,14 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 
 	private Drawable icon;
 	@DrawableRes
-	private int iconResId;
+	private int iconId;
 	@ColorRes
-	private int iconColorResId;
+	private int iconColorId;
 	private String title;
 	@StringRes
-	private int titleResId;
+	private int titleId;
 	@ColorRes
-	private int titleColorResId;
+	private int titleColorId;
 
 	public SimpleBottomSheetItem(View customView,
 								 int layoutResId,
@@ -25,65 +25,73 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 								 View.OnClickListener onClickListener,
 								 int position,
 								 Drawable icon,
-								 int iconResId,
-								 int iconColorResId,
+								 @DrawableRes int iconId,
+								 @ColorRes int iconColorId,
 								 String title,
-								 int titleResId,
-								 int titleColorResId) {
+								 @StringRes int titleId,
+								 @ColorRes int titleColorId) {
 		super(customView, layoutResId, clickable, onClickListener, position);
 		this.icon = icon;
-		this.iconResId = iconResId;
-		this.iconColorResId = iconColorResId;
+		this.iconId = iconId;
+		this.iconColorId = iconColorId;
 		this.title = title;
-		this.titleResId = titleResId;
-		this.titleColorResId = titleColorResId;
+		this.titleId = titleId;
+		this.titleColorId = titleColorId;
 	}
 
 	public Drawable getIcon() {
 		return icon;
 	}
 
-	public int getIconResId() {
-		return iconResId;
+	@DrawableRes
+	public int getIconId() {
+		return iconId;
 	}
 
-	public int getIconColorResId() {
-		return iconColorResId;
+	@ColorRes
+	public int getIconColorId() {
+		return iconColorId;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
-	public int getTitleResId() {
-		return titleResId;
+	@StringRes
+	public int getTitleId() {
+		return titleId;
 	}
 
-	public int getTitleColorResId() {
-		return titleColorResId;
+	@ColorRes
+	public int getTitleColorId() {
+		return titleColorId;
 	}
 
 	public static class Builder extends BaseBottomSheetItem.Builder {
 
-		private Drawable icon;
-		private int iconResId;
-		private int iconColorResId;
-		private String title;
-		private int titleResId;
-		private int titleColorResId;
+		protected Drawable icon;
+		@DrawableRes
+		protected int iconId;
+		@ColorRes
+		protected int iconColorId;
+		protected String title;
+		@StringRes
+		protected int titleId;
+		@ColorRes
+		protected int titleColorId;
 
 		public Builder setIcon(Drawable icon) {
 			this.icon = icon;
 			return this;
 		}
 
-		public Builder setIconResId(int iconResId) {
-			this.iconResId = iconResId;
+		public Builder setIconId(@DrawableRes int iconId) {
+			this.iconId = iconId;
 			return this;
 		}
 
-		public Builder setIconColorResId(int iconColorResId) {
-			this.iconColorResId = iconColorResId;
+		public Builder setIconColorId(@ColorRes int iconColorId) {
+			this.iconColorId = iconColorId;
 			return this;
 		}
 
@@ -92,28 +100,28 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 			return this;
 		}
 
-		public Builder setTitleResId(int titleResId) {
-			this.titleResId = titleResId;
+		public Builder setTitleId(@StringRes int titleId) {
+			this.titleId = titleId;
 			return this;
 		}
 
-		public Builder setTitleColorResId(int titleColorResId) {
-			this.titleColorResId = titleColorResId;
+		public Builder setTitleColorId(@ColorRes int titleColorId) {
+			this.titleColorId = titleColorId;
 			return this;
 		}
 
-		public SimpleBottomSheetItem createSimpleBottomSheetItem() {
+		public SimpleBottomSheetItem create() {
 			return new SimpleBottomSheetItem(customView,
-					layoutResId,
-					clickable,
+					layoutId,
+					disabled,
 					onClickListener,
 					position,
 					icon,
-					iconResId,
-					iconColorResId,
+					iconId,
+					iconColorId,
 					title,
-					titleResId,
-					titleColorResId);
+					titleId,
+					titleColorId);
 		}
 	}
 }

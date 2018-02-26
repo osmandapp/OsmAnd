@@ -7,19 +7,19 @@ public class BaseBottomSheetItem {
 
 	private View customView;
 	@LayoutRes
-	private int layoutResId;
-	private boolean clickable = true;
+	private int layoutId;
+	private boolean disabled;
 	private View.OnClickListener onClickListener;
 	private int position = -1;
 
 	public BaseBottomSheetItem(View customView,
-							   @LayoutRes int layoutResId,
-							   boolean clickable,
+							   @LayoutRes int layoutId,
+							   boolean disabled,
 							   View.OnClickListener onClickListener,
 							   int position) {
 		this.customView = customView;
-		this.layoutResId = layoutResId;
-		this.clickable = clickable;
+		this.layoutId = layoutId;
+		this.disabled = disabled;
 		this.onClickListener = onClickListener;
 		this.position = position;
 	}
@@ -29,12 +29,12 @@ public class BaseBottomSheetItem {
 	}
 
 	@LayoutRes
-	public int getLayoutResId() {
-		return layoutResId;
+	public int getLayoutId() {
+		return layoutId;
 	}
 
-	public boolean isClickable() {
-		return clickable;
+	public boolean isDisabled() {
+		return disabled;
 	}
 
 	public View.OnClickListener getOnClickListener() {
@@ -49,8 +49,8 @@ public class BaseBottomSheetItem {
 
 		protected View customView;
 		@LayoutRes
-		protected int layoutResId;
-		protected boolean clickable;
+		protected int layoutId;
+		protected boolean disabled;
 		protected View.OnClickListener onClickListener;
 		protected int position;
 
@@ -59,13 +59,13 @@ public class BaseBottomSheetItem {
 			return this;
 		}
 
-		public Builder setLayoutResId(@LayoutRes int layoutResId) {
-			this.layoutResId = layoutResId;
+		public Builder setLayoutId(@LayoutRes int layoutId) {
+			this.layoutId = layoutId;
 			return this;
 		}
 
-		public Builder setClickable(boolean clickable) {
-			this.clickable = clickable;
+		public Builder setDisabled(boolean disabled) {
+			this.disabled = disabled;
 			return this;
 		}
 
@@ -80,7 +80,7 @@ public class BaseBottomSheetItem {
 		}
 
 		public BaseBottomSheetItem create() {
-			return new BaseBottomSheetItem(customView, layoutResId, clickable, onClickListener, position);
+			return new BaseBottomSheetItem(customView, layoutId, disabled, onClickListener, position);
 		}
 	}
 }
