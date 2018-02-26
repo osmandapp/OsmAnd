@@ -459,7 +459,8 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 							String keyName = poiType.getKeyName().replace('_', ':').toLowerCase();
 							if (filters.contains(keyName)) {
 								selectedPoiAdditionals.add(keyName);
-								filterByName = filterByName.replaceAll(keyName, "");
+								filters.remove(keyName);
+								filterByName = filters.toString().replaceAll("[,\\[\\]]", "");
 							}
 						}
 					}
