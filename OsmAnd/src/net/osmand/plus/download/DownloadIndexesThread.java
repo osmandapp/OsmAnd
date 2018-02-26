@@ -120,11 +120,11 @@ public class DownloadIndexesThread {
 			StringBuilder contentText = new StringBuilder();
 			List<IndexItem> ii = getCurrentDownloadingItems();
 			for (IndexItem i : ii) {
-				if (contentText.length() > 0) {
-					contentText.append(", ");
-				}
 				if (i == currentDownloadingItem) {
 					continue;
+				}
+				if (contentText.length() > 0) {
+					contentText.append(", ");
 				}
 				contentText.append(i.getVisibleName(app, app.getRegions()));
 				if (i.getType() != null) {
