@@ -2,7 +2,6 @@ package net.osmand.plus.measurementtool;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -31,9 +30,8 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		this.listener = listener;
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;

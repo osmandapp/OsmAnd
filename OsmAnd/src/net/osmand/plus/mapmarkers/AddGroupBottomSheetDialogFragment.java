@@ -2,7 +2,6 @@ package net.osmand.plus.mapmarkers;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextThemeWrapper;
@@ -35,9 +34,8 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 		mapMarkersHelper = getMyApplication().getMapMarkersHelper();
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_add_group_bottom_sheet_dialog, container);
 

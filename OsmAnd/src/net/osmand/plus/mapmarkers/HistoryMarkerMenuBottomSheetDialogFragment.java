@@ -1,7 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,9 +31,8 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 		this.listener = listener;
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_history_bottom_sheet_dialog, container);

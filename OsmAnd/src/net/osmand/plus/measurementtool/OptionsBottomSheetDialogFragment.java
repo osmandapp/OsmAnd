@@ -1,7 +1,6 @@
 package net.osmand.plus.measurementtool;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.SwitchCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -33,9 +32,8 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		this.snapToRoadEnabled = snapToRoadEnabled;
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_options_bottom_sheet_dialog, null);

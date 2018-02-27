@@ -1,7 +1,6 @@
 package net.osmand.plus.audionotes;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,9 +31,8 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 		this.recording = recording;
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),

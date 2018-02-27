@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,9 +37,8 @@ public class ShareMenuFragment extends MenuBottomSheetDialogFragment implements 
 		}
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		final View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.share_menu_fragment, container);

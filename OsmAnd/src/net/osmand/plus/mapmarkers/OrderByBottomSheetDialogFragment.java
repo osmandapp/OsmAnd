@@ -2,7 +2,6 @@ package net.osmand.plus.mapmarkers;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -26,9 +25,8 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		this.listener = listener;
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),

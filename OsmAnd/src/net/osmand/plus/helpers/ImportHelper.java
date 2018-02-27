@@ -742,9 +742,8 @@ public class ImportHelper {
 			this.useImportDir = useImportDir;
 		}
 
-		@Nullable
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 			final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_import_gpx_bottom_sheet_dialog, container);

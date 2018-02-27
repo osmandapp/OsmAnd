@@ -51,9 +51,8 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		}
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final Context context = getContext();
 		final OsmandSettings settings = getMyApplication().getSettings();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;

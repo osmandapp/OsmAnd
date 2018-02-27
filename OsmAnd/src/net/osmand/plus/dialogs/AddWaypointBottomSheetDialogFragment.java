@@ -31,9 +31,8 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 	public static final String LON_KEY = "longitude";
 	public static final String POINT_DESCRIPTION_KEY = "point_description";
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		final LatLon latLon = new LatLon(args.getDouble(LAT_KEY), args.getDouble(LON_KEY));
 		final PointDescription name = PointDescription.deserializeFromString(args.getString(POINT_DESCRIPTION_KEY), latLon);
@@ -129,7 +128,7 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				.create();
 		items.add(lastIntermItem);
 
-		return inflateMainView();
+		return null;
 	}
 
 	@Override
