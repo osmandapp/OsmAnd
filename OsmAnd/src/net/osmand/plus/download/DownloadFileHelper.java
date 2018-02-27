@@ -263,9 +263,9 @@ public class DownloadFileHelper {
 			mb = 1;
 		}
 		StringBuilder taskName = new StringBuilder();
-		taskName.append(ctx.getString(R.string.shared_string_downloading)).append(": ");
-		//+ de.baseName /*+ " " + mb + " MB"*/;
-		taskName.append(FileNameTranslationHelper.getFileName(ctx, ctx.getRegions(), de.baseName));
+		taskName.append(ctx.getString(R.string.shared_string_downloading)).append(": ")
+		/*+ de.baseName + " " + mb + " MB"*/
+		.append(FileNameTranslationHelper.getFileName(ctx, ctx.getRegions(), de.baseName));
 		if (de.type != null && de.type.getString(ctx) != null) {
 			taskName.append(" ").append(de.type.getString(ctx));
 		}
