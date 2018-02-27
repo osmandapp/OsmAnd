@@ -3052,4 +3052,6 @@
     <string name="make_as_start_point">انتخاب به‌عنوان نقطهٔ آغازین</string>
     <string name="enter_the_file_name">نام فایل را بنویسید.</string>
     <string name="enter_lon">ورود عزض جغرافیایی</string>
-    </resources>
+    <string name="enter_lat">واردکردن عرض جغرافیایی</string>
+    <string name="enter_lat_and_lon">وارد کردن طول و عرض جغرافیایی</string>
+	</resources>
