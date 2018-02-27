@@ -309,6 +309,9 @@ public class MeasurementEditingContext {
 			public void onRouteCalculated(List<Location> locations) {
 				ArrayList<WptPt> pts = new ArrayList<>(locations.size());
 				for (Location loc : locations) {
+					if(!loc.hasAltitude()){
+						continue;
+					}
 					WptPt pt = new WptPt();
 					pt.lat = loc.getLatitude();
 					pt.lon = loc.getLongitude();
