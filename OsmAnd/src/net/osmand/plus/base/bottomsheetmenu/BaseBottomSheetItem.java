@@ -5,12 +5,15 @@ import android.view.View;
 
 public class BaseBottomSheetItem {
 
+	public static final int INVALID_POSITION = -1;
+	public static final int INVALID_ID = -1;
+
 	private View customView;
 	@LayoutRes
 	private int layoutId;
 	private boolean disabled;
 	private View.OnClickListener onClickListener;
-	private int position = -1;
+	private int position;
 
 	public BaseBottomSheetItem(View customView,
 							   @LayoutRes int layoutId,
@@ -49,10 +52,10 @@ public class BaseBottomSheetItem {
 
 		protected View customView;
 		@LayoutRes
-		protected int layoutId;
+		protected int layoutId = INVALID_ID;
 		protected boolean disabled;
 		protected View.OnClickListener onClickListener;
-		protected int position;
+		protected int position = INVALID_POSITION;
 
 		public Builder setCustomView(View customView) {
 			this.customView = customView;

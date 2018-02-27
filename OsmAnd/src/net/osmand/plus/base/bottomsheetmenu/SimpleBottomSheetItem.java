@@ -9,6 +9,8 @@ import android.view.View;
 
 public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 
+	public static final int CONTENT_ICON_COLOR = -1;
+
 	private Drawable icon;
 	@DrawableRes
 	private int iconId;
@@ -72,14 +74,14 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 
 		protected Drawable icon;
 		@DrawableRes
-		protected int iconId;
+		protected int iconId = INVALID_ID;
 		@ColorRes
-		protected int iconColorId;
+		protected int iconColorId = CONTENT_ICON_COLOR;
 		protected String title;
 		@StringRes
-		protected int titleId;
+		protected int titleId = INVALID_ID;
 		@ColorRes
-		protected int titleColorId;
+		protected int titleColorId = INVALID_ID;
 
 		public Builder setIcon(Drawable icon) {
 			this.icon = icon;

@@ -53,9 +53,9 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 
 		protected String description;
 		@StringRes
-		protected int descriptionId;
+		protected int descriptionId = INVALID_ID;
 		@ColorRes
-		protected int descriptionColorId;
+		protected int descriptionColorId = INVALID_ID;
 
 		public Builder setDescription(String description) {
 			this.description = description;
