@@ -3263,7 +3263,7 @@
 
 	<string name="poi_cuisine_doner">Shawarma</string>
 	<string name="poi_cuisine_gastropub">Gastropub</string>
-	<string name="poi_climbing_style">Style d\'escalade</string>
+	<string name="poi_climbing_style">Type d\'escalade</string>
 	<string name="poi_nuclear_explosion_country">Explosion : pays</string>
 	<string name="poi_nuclear_explosion_site">Explosion : site</string>
 	<string name="poi_nuclear_explosion_type_atmospheric">Type d\'explosion : atmosphérique</string>
@@ -3283,4 +3283,13 @@
 	<string name="poi_health_service_prevention_no">Services de santé : prévention : non</string>
 	<string name="poi_health_service_prevention_vaccination_yes">Services de santé : vaccination : oui</string>
 	<string name="poi_health_service_prevention_vaccination_no">Services de santé : vaccination : non</string>
+	<string name="poi_socket">Type de prise</string>
+	<string name="poi_socket_chademo_output_filter">Nombre de câbles avec prises CHAdeMO</string>
+	<string name="poi_socket_type2_output_filter">Nombre de câbles avec prises Type 2</string>
+	<string name="poi_socket_type2_combo_output_filter">Nombre de câbles avec prises Type 2 combo</string>
+	<string name="poi_socket_type3_output_filter">Nombre de câbles avec prises Type 3</string>
+	<string name="poi_socket_cee_blue_output_filter">Nombre de câbles avec prises CEE bleues</string>
+	<string name="poi_socket_schuko_output_filter">Nombre de câbles avec prises Schuko</string>
+
+<string name="poi_site_type_hut_circle">Dépression circulaire</string>
 	</resources>
