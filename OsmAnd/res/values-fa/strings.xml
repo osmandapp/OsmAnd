@@ -2251,7 +2251,7 @@
     <string name="map_marker_1st">اولین نشانهٔ نقشه</string>
     <string name="map_marker_2nd">دومین نشانهٔ نقشه</string>
     <string name="shared_string_toolbar">نوار ابزار</string>
-    <string name="shared_string_widgets">ویدجت ها</string>
+    <string name="shared_string_widgets">ویجت‌ها</string>
     <string name="add_points_to_map_markers_q">آیا همهٔ نقاط را به نشانه‌های نقشه اضافه می‌کنید؟</string>
     <string name="shared_string_add_to_map_markers">افزودن به نشانه‌های نقشه</string>
     <string name="select_map_markers">انتخاب نشانه‌های نقشه</string>
@@ -2400,7 +2400,7 @@
     <string name="lang_kn">کانادا</string>
     <string name="lang_sr_latn">صربی (لاتین)</string>
     <string name="lang_zh_hk">چینی (هنگ‌کنگ)</string>
-    <string name="route_is_too_long_v2">این مسیر خیلی طولانی است.اگر در 10 دقیقه مسیری پیدا نشد چند مقصد میانی اضافه کنید.</string>
+    <string name="route_is_too_long_v2">این مسیر خیلی طولانی است. اگر در ۱۰ دقیقه مسیری پیدا نشد چند مقصد میانی اضافه کنید.</string>
     <string name="driving_region_australia">استرالیا</string>
     <string name="add_segment_to_the_track">افزودن به مسیر GPX</string>
 <string name="shared_string_markers">نشانه‌ها</string>
@@ -2751,7 +2751,7 @@
     <string name="rendering_attr_hideProposed_name">مکان‌های در حد پیشنهاد</string>
     <string name="osm_edit_created_poi">ایجاد POI</string>
     <string name="logged_as">واردشده با عنوان %1$s</string>
-    <string name="moving_time">زمان حرکت</string>
+    <string name="moving_time">مدت حرکت</string>
     <string name="saved_at_time">در %1$s ذخیره شد</string>
     <string name="quick_action_interim_dialog">کادری برای تنظیم آن نشان بده</string>
     <string name="quick_action_add_create_items">دکمه‌هایی را اضافه کنید</string>
@@ -3051,11 +3051,11 @@
     <string name="map_imported_successfully">نقشه با موفقیت وارد شد</string>
     <string name="make_as_start_point">انتخاب به‌عنوان نقطهٔ آغازین</string>
     <string name="enter_the_file_name">نام فایل را بنویسید.</string>
-    <string name="enter_lon">ورود عزض جغرافیایی</string>
-    <string name="enter_lat">واردکردن عرض جغرافیایی</string>
-    <string name="enter_lat_and_lon">وارد کردن طول و عرض جغرافیایی</string>
+    <string name="enter_lon">ورود طول جغرافیایی</string>
+    <string name="enter_lat">ورود عرض جغرافیایی</string>
+    <string name="enter_lat_and_lon">واردکردن طول و عرض جغرافیایی</string>
 	<string name="distance_farthest">فاصله: اول دورترین</string>
-    <string name="distance_nearest">فاصله: اول نزدیکترین</string>
+    <string name="distance_nearest">فاصله: اول نزدیک‌ترین</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
 	<string name="dd_dddddd_format">DD.DDDDDD°</string>
 	<string name="dd_ddddd_format">DD.DDDDD°</string>
