@@ -288,6 +288,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		if (parkingLayer != null) {
 			MapContextMenu menu = mapActivity.getContextMenu();
 			if (menu.isVisible()) {
+				menu.hide(false);
 				menu.show(new LatLon(parkingPosition.getLatitude(), parkingPosition.getLongitude()),
 						parkingLayer.getObjectName(parkingPosition), parkingPosition);
 			}
