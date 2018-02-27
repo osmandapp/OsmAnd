@@ -3051,4 +3051,9 @@
     <string name="map_imported_successfully">نقشه با موفقیت وارد شد</string>
     <string name="make_as_start_point">انتخاب به‌عنوان نقطهٔ آغازین</string>
     <string name="enter_the_file_name">نام فایل را بنویسید.</string>
+    <string name="enter_lon">ورود عزض جغرافیایی</string>
+    <string name="enter_lat">واردکردن عرض جغرافیایی</string>
+    <string name="enter_lat_and_lon">وارد کردن طول و عرض جغرافیایی</string>
+	<string name="distance_farthest">فاصله: اول دورترین</string>
+    <string name="distance_nearest">فاصله: اول نزدیکترین</string>
     </resources>
