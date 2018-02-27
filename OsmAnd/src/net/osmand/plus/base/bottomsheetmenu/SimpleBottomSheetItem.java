@@ -15,9 +15,9 @@ import net.osmand.plus.R;
 public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 
 	private Drawable icon;
-	private String title;
+	protected String title;
 	@ColorRes
-	private int titleColorId;
+	protected int titleColorId = INVALID_ID;
 
 	public SimpleBottomSheetItem(View customView,
 								 @LayoutRes int layoutId,
@@ -31,6 +31,10 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 		this.icon = icon;
 		this.title = title;
 		this.titleColorId = titleColorId;
+	}
+
+	protected SimpleBottomSheetItem() {
+
 	}
 
 	@Override

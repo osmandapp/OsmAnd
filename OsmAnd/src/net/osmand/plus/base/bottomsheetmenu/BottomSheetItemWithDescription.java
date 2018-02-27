@@ -13,9 +13,9 @@ import net.osmand.plus.R;
 
 public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 
-	private String description;
+	protected String description;
 	@ColorRes
-	private int descriptionColorId;
+	private int descriptionColorId = INVALID_ID;
 
 	public BottomSheetItemWithDescription(View customView,
 										  @LayoutRes int layoutId,
@@ -30,6 +30,10 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 		super(customView, layoutId, clickable, onClickListener, position, icon, title, titleColorId);
 		this.description = description;
 		this.descriptionColorId = descriptionColorId;
+	}
+
+	protected BottomSheetItemWithDescription() {
+
 	}
 
 	@Override

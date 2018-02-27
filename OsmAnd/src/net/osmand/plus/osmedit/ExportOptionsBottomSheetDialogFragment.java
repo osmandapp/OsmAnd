@@ -1,17 +1,17 @@
 package net.osmand.plus.osmedit;
 
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DescriptionItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.osmedit.OsmEditsFragment.ExportTypesDef;
-import net.osmand.plus.widgets.TextViewEx;
 
 public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -30,88 +30,71 @@ public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Override
 	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.fragment_osm_export_options_bottom_sheet_dialog, container);
-
 		Bundle args = getArguments();
 		if (args != null) {
 			poiCount = args.getInt(POI_COUNT_KEY);
 			osmNotesCount = args.getInt(NOTES_COUNT_KEY);
 		}
 
-		if (nightMode) {
-			((TextViewEx) mainView.findViewById(R.id.title_text_view)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
-		}
+		items.add(new TitleItem(getString(R.string.shared_string_export)));
 
-		((ImageView) mainView.findViewById(R.id.poi_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_info_dark));
-		((ImageView) mainView.findViewById(R.id.osm_notes_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_bug_dark));
-		((ImageView) mainView.findViewById(R.id.all_data_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_folder));
+		items.add(new DescriptionItem(getString(R.string.osm_edits_export_desc)));
 
-		((TextView) mainView.findViewById(R.id.poi_count_text_view)).setText(String.valueOf(poiCount));
-		((TextView) mainView.findViewById(R.id.osm_notes_count_text_view)).setText(String.valueOf(osmNotesCount));
-		((TextView) mainView.findViewById(R.id.all_data_count_text_view)).setText(String.valueOf(poiCount + osmNotesCount));
-
-		View poiRow = mainView.findViewById(R.id.poi_row);
-		if (poiCount > 0) {
-			poiRow.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (listener != null) {
-						listener.onClick(OsmEditsFragment.EXPORT_TYPE_POI);
+		BaseBottomSheetItem poiItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(String.valueOf(poiCount))
+				.setIcon(getContentIcon(R.drawable.ic_action_info_dark))
+				.setTitle(getString(R.string.poi))
+				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
+				.setDisabled(!(poiCount > 0))
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.onClick(OsmEditsFragment.EXPORT_TYPE_POI);
+						}
+						dismiss();
 					}
-					dismiss();
-				}
-			});
-		} else {
-			disable(poiRow);
-		}
+				})
+				.create();
+		items.add(poiItem);
 
-		View osmNotesRow = mainView.findViewById(R.id.osm_notes_row);
-		if (osmNotesCount > 0) {
-			osmNotesRow.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (listener != null) {
-						listener.onClick(OsmEditsFragment.EXPORT_TYPE_NOTES);
+		BaseBottomSheetItem osmNotesItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(String.valueOf(osmNotesCount))
+				.setIcon(getContentIcon(R.drawable.ic_action_bug_dark))
+				.setTitle(getString(R.string.osm_notes))
+				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
+				.setDisabled(!(osmNotesCount > 0))
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.onClick(OsmEditsFragment.EXPORT_TYPE_NOTES);
+						}
+						dismiss();
 					}
-					dismiss();
-				}
-			});
-		} else {
-			disable(osmNotesRow);
-		}
+				})
+				.create();
+		items.add(osmNotesItem);
 
-		View allDataRow = mainView.findViewById(R.id.all_data_row);
-		if ((poiCount + osmNotesCount) > 0) {
-			allDataRow.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (listener != null) {
-						listener.onClick(OsmEditsFragment.EXPORT_TYPE_ALL);
+		BaseBottomSheetItem allDataItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(String.valueOf(poiCount + osmNotesCount))
+				.setIcon(getContentIcon(R.drawable.ic_action_folder))
+				.setTitle(getString(R.string.all_data))
+				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
+				.setDisabled(!(poiCount + osmNotesCount > 0))
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.onClick(OsmEditsFragment.EXPORT_TYPE_ALL);
+						}
+						dismiss();
 					}
-					dismiss();
-				}
-			});
-		} else {
-			disable(allDataRow);
-		}
+				})
+				.create();
+		items.add(allDataItem);
 
-		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
-
-		setupHeightAndBackground(mainView, R.id.scroll_view);
-
-		return mainView;
-	}
-
-	private void disable(View view) {
-		view.setEnabled(false);
-		view.setAlpha(.5f);
+		return null;
 	}
 
 	public interface ExportOptionsFragmentListener {

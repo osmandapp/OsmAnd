@@ -1,4 +1,4 @@
-package net.osmand.plus.base.bottomsheetmenu;
+package net.osmand.plus.base.bottomsheetmenu.simpleitems;
 
 import android.content.Context;
 import android.support.annotation.ColorRes;
@@ -10,21 +10,22 @@ import android.widget.LinearLayout;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 
-public class DividerHalfBottomSheetItem extends BaseBottomSheetItem {
+public class DividerHalfItem extends BaseBottomSheetItem {
 
 	@ColorRes
 	private int colorId;
 
-	public DividerHalfBottomSheetItem(Context context) {
+	public DividerHalfItem(Context context) {
 		setupView(context, INVALID_ID, INVALID_POSITION);
 	}
 
-	public DividerHalfBottomSheetItem(Context context, @ColorRes int colorId) {
+	public DividerHalfItem(Context context, @ColorRes int colorId) {
 		setupView(context, colorId, INVALID_POSITION);
 	}
 
-	public DividerHalfBottomSheetItem(Context context, @ColorRes int colorId, int position) {
+	public DividerHalfItem(Context context, @ColorRes int colorId, int position) {
 		setupView(context, colorId, position);
 	}
 

@@ -15,10 +15,10 @@ public class BaseBottomSheetItem {
 
 	protected View view;
 	@LayoutRes
-	private int layoutId;
+	protected int layoutId = INVALID_ID;
 	private boolean disabled;
 	private View.OnClickListener onClickListener;
-	protected int position;
+	protected int position = INVALID_POSITION;
 
 	public BaseBottomSheetItem(View view,
 							   @LayoutRes int layoutId,
@@ -32,7 +32,7 @@ public class BaseBottomSheetItem {
 		this.position = position;
 	}
 
-	BaseBottomSheetItem() {
+	protected BaseBottomSheetItem() {
 
 	}
 

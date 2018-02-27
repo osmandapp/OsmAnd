@@ -21,8 +21,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.base.bottomsheetmenu.DividerHalfBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -38,11 +38,7 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 		final PointDescription name = PointDescription.deserializeFromString(args.getString(POINT_DESCRIPTION_KEY), latLon);
 		final TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
 
-		BaseBottomSheetItem titleItem = new SimpleBottomSheetItem.Builder()
-				.setTitle(getString(R.string.new_destination_point_dialog))
-				.setLayoutId(R.layout.bottom_sheet_item_title)
-				.create();
-		items.add(titleItem);
+		items.add(new TitleItem(getString(R.string.new_destination_point_dialog)));
 
 		BaseBottomSheetItem replaceDestItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getCurrentPointName(targetPointsHelper.getPointToNavigate(), false))
@@ -79,7 +75,7 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				.create();
 		items.add(replaceStartItem);
 
-		items.add(new DividerHalfBottomSheetItem(getContext(), getCloseRowDividerColorId()));
+		items.add(new DividerHalfItem(getContext(), getCloseRowDividerColorId()));
 
 		BaseBottomSheetItem subsequentDestItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.subsequent_dest_description))
