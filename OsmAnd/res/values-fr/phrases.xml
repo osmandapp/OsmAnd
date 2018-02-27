@@ -3293,4 +3293,8 @@
 
 <string name="poi_site_type_hut_circle">Dépression circulaire</string>
 	<string name="poi_medical_system_western_yes">Occidental</string>
+	<string name="poi_socket_type2_output_high">Élevé</string>
+	<string name="poi_socket_type2_output_medium">Moyen</string>
+	<string name="poi_socket_type2_output_low">Faible</string>
+	<string name="poi_socket_type2_combo_output_high">Élevé</string>
 	</resources>
