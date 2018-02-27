@@ -3054,4 +3054,6 @@
     <string name="enter_lon">ورود عزض جغرافیایی</string>
     <string name="enter_lat">واردکردن عرض جغرافیایی</string>
     <string name="enter_lat_and_lon">وارد کردن طول و عرض جغرافیایی</string>
-	</resources>
+	<string name="distance_farthest">فاصله: اول دورترین</string>
+    <string name="distance_nearest">فاصله: اول نزدیکترین</string>
+    </resources>
