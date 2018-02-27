@@ -268,7 +268,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 					}
 					addOrRemoveParkingEvent(false);
 					setParkingPosition(mapActivity, latitude, longitude, false);
-					showContextMenuIfNeeded(mapActivity);
+					showContextMenuIfNeeded(mapActivity,true);
 					mapActivity.getMapView().refreshMap();
 				} else if (index == 2) {
 					if (wasEventPreviouslyAdded) {
@@ -284,11 +284,11 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		builder.create().show();
 	}
 
-	private void showContextMenuIfNeeded(final MapActivity mapActivity) {
+	private void showContextMenuIfNeeded(final MapActivity mapActivity, boolean animated) {
 		if (parkingLayer != null) {
 			MapContextMenu menu = mapActivity.getContextMenu();
 			if (menu.isVisible()) {
-				menu.hide(false);
+				menu.hide(animated);
 				menu.show(new LatLon(parkingPosition.getLatitude(), parkingPosition.getLongitude()),
 						parkingLayer.getObjectName(parkingPosition), parkingPosition);
 			}
@@ -389,7 +389,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				} else {
 					addOrRemoveParkingEvent(false);
 				}
-				showContextMenuIfNeeded(mapActivity);
+				showContextMenuIfNeeded(mapActivity,false);
 			}
 		});
 		setTime.create();
