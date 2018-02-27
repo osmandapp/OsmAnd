@@ -262,11 +262,14 @@ public class DownloadFileHelper {
 		if(mb == 0) {
 			mb = 1;
 		}
-		String taskName = ctx.getString(R.string.shared_string_downloading) + ": " +
+		StringBuilder taskName = new StringBuilder();
+		taskName.append(ctx.getString(R.string.shared_string_downloading)).append(": ");
 		//+ de.baseName /*+ " " + mb + " MB"*/;
-		FileNameTranslationHelper.getFileName(ctx, ctx.getRegions(), de.baseName) + " " + de.type.getString(ctx);
-		
-		progress.startTask(taskName, len / 1024);
+		taskName.append(FileNameTranslationHelper.getFileName(ctx, ctx.getRegions(), de.baseName));
+		if (de.type != null && de.type.getString(ctx) != null) {
+			taskName.append(" ").append(de.type.getString(ctx));
+		}
+		progress.startTask(taskName.toString(), len / 1024);
 		if (!de.zipStream) {
 			copyFile(de, progress, fin, len, fin, de.fileToDownload);
 		} else if(de.urlToDownload.contains(".gz")) {
