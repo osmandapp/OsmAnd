@@ -127,4 +127,8 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 	protected void setTag(Tag tag) {
 		this.tag = tag;
 	}
+
+	public Tag getTag() {
+		return tag;
+	}
 }
