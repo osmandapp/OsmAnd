@@ -4,23 +4,32 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	private static final String USED_ON_MAP_KEY = "used_on_map";
+
+	protected List<BaseBottomSheetItem> items = new ArrayList<>();
 
 	protected boolean usedOnMap = true;
 	protected boolean nightMode;
@@ -103,27 +112,46 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		});
 	}
 
-	protected void setupItems(@NonNull final View mainView,
-							  @NonNull @IdRes int[] itemIds,
-							  @NonNull Drawable[] icons,
-							  @NonNull String[] titles,
-							  @NonNull String[] descriptions,
-							  @NonNull View.OnClickListener onClickListener) {
-		for (int i = 0; i < itemIds.length; i++) {
-			View item = mainView.findViewById(itemIds[i]);
-			if (item != null) {
-				if (icons[i] != null) {
-					((ImageView) item.findViewById(R.id.icon)).setImageDrawable(icons[i]);
-				}
-				if (titles[i] != null) {
-					((TextView) item.findViewById(R.id.title)).setText(titles[i]);
-				}
-				if (descriptions[i] != null) {
-					((TextView) item.findViewById(R.id.description)).setText(descriptions[i]);
-				}
-				item.setOnClickListener(onClickListener);
-			}
+	protected View inflateMainView() {
+		OsmandApplication app = getMyApplication();
+		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+
+		View mainView = View.inflate(new ContextThemeWrapper(app, themeRes), R.layout.bottom_sheet_menu_base, null);
+		LinearLayout container = (LinearLayout) mainView.findViewById(R.id.items_container);
+
+		for (BaseBottomSheetItem item : items) {
+			item.inflate(app, container, nightMode);
 		}
+
+		int closeRowDividerColorId = getCloseRowDividerColorId();
+		if (closeRowDividerColorId != -1) {
+			mainView.findViewById(R.id.close_row_divider)
+					.setBackgroundColor(ContextCompat.getColor(getContext(), closeRowDividerColorId));
+		}
+		mainView.findViewById(R.id.close_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
+		int closeRowTextId = getCloseRowTextId();
+		if (closeRowTextId != -1) {
+			((TextView) mainView.findViewById(R.id.close_row_text)).setText(closeRowTextId);
+		}
+
+		setupHeightAndBackground(mainView, R.id.scroll_view);
+
+		return mainView;
+	}
+
+	@ColorRes
+	protected int getCloseRowDividerColorId() {
+		return -1;
+	}
+
+	@StringRes
+	protected int getCloseRowTextId() {
+		return -1;
 	}
 
 	@DrawableRes

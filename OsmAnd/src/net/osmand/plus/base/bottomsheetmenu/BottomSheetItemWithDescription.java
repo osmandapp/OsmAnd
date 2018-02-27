@@ -2,16 +2,18 @@ package net.osmand.plus.base.bottomsheetmenu;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 
 public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 
 	private String description;
-	@StringRes
-	private int descriptionId;
 	@ColorRes
 	private int descriptionColorId;
 
@@ -21,49 +23,35 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 										  View.OnClickListener onClickListener,
 										  int position,
 										  Drawable icon,
-										  @DrawableRes int iconId,
-										  @ColorRes int iconColorId,
 										  String title,
-										  @StringRes int titleId,
 										  @ColorRes int titleColorId,
 										  String description,
-										  @StringRes int descriptionId,
 										  @ColorRes int descriptionColorId) {
-		super(customView, layoutResId, clickable, onClickListener, position, icon, iconId, iconColorId, title, titleId, titleColorId);
+		super(customView, layoutResId, clickable, onClickListener, position, icon, title, titleColorId);
 		this.description = description;
-		this.descriptionId = descriptionId;
 		this.descriptionColorId = descriptionColorId;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	@StringRes
-	public int getDescriptionId() {
-		return descriptionId;
-	}
-
-	@ColorRes
-	public int getDescriptionColorId() {
-		return descriptionColorId;
+	@Override
+	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
+		super.inflate(app, container, nightMode);
+		if (description != null) {
+			TextView descriptionTv = (TextView) view.findViewById(R.id.description);
+			descriptionTv.setText(description);
+			if (descriptionColorId != INVALID_ID) {
+				descriptionTv.setTextColor(ContextCompat.getColor(app, descriptionColorId));
+			}
+		}
 	}
 
 	public static class Builder extends SimpleBottomSheetItem.Builder {
 
 		protected String description;
-		@StringRes
-		protected int descriptionId = INVALID_ID;
 		@ColorRes
 		protected int descriptionColorId = INVALID_ID;
 
 		public Builder setDescription(String description) {
 			this.description = description;
-			return this;
-		}
-
-		public Builder setDescriptionId(@StringRes int descriptionId) {
-			this.descriptionId = descriptionId;
 			return this;
 		}
 
@@ -79,13 +67,9 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 					onClickListener,
 					position,
 					icon,
-					iconId,
-					iconColorId,
 					title,
-					titleId,
 					titleColorId,
 					description,
-					descriptionId,
 					descriptionColorId);
 		}
 	}

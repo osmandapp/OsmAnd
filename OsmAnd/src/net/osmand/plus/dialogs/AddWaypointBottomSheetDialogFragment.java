@@ -7,14 +7,10 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -23,6 +19,10 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.DividerHalfBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 
 public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -39,90 +39,108 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 		final PointDescription name = PointDescription.deserializeFromString(args.getString(POINT_DESCRIPTION_KEY), latLon);
 		final TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
 
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.fragment_add_waypoint_bottom_sheet_dialog, container);
+		BaseBottomSheetItem titleItem = new SimpleBottomSheetItem.Builder()
+				.setTitle(getString(R.string.new_destination_point_dialog))
+				.setLayoutId(R.layout.bottom_sheet_item_title)
+				.create();
+		items.add(titleItem);
 
-		((TextView) mainView.findViewById(R.id.title)).setText(R.string.new_destination_point_dialog);
-
-		@IdRes int[] ids = new int[]{
-				R.id.replace_dest_row,
-				R.id.replace_start_row,
-				R.id.subsequent_dest_row,
-				R.id.first_intermediate_dest_row,
-				R.id.last_intermediate_dest_row,
-				R.id.close_row
-		};
-
-		Drawable[] icons = new Drawable[]{
-				getIcon(R.drawable.list_destination, 0),
-				getIcon(R.drawable.list_startpoint, 0),
-				getSubsequentDestIcon(),
-				getFirstIntermDestIcon(),
-				getLastIntermDistIcon(),
-				null
-		};
-
-		String[] titles = new String[]{
-				getString(R.string.replace_destination_point),
-				getString(R.string.make_as_start_point),
-				getString(R.string.keep_and_add_destination_point),
-				getString(R.string.add_as_first_destination_point),
-				getString(R.string.add_as_last_destination_point),
-				null
-		};
-
-		String[] descriptions = new String[]{
-				getCurrentPointName(targetPointsHelper.getPointToNavigate(), false),
-				getCurrentPointName(targetPointsHelper.getPointToStart(), true),
-				getString(R.string.subsequent_dest_description),
-				getString(R.string.first_intermediate_dest_description),
-				getString(R.string.last_intermediate_dest_description),
-				null
-		};
-
-		View.OnClickListener onClickListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				int id = v.getId();
-				if (id == R.id.replace_dest_row) {
-					targetPointsHelper.navigateToPoint(latLon, true, -1, name);
-				} else if (id == R.id.replace_start_row) {
-					TargetPoint start = targetPointsHelper.getPointToStart();
-					if (start != null) {
-						targetPointsHelper.navigateToPoint(new LatLon(start.getLatitude(), start.getLongitude()),
-								false, 0, start.getOriginalPointDescription());
+		BaseBottomSheetItem replaceDestItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getCurrentPointName(targetPointsHelper.getPointToNavigate(), false))
+				.setIcon(getIcon(R.drawable.list_destination, 0))
+				.setTitle(getString(R.string.replace_destination_point))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						targetPointsHelper.navigateToPoint(latLon, true, -1, name);
+						dismiss();
 					}
-					targetPointsHelper.setStartPoint(latLon, true, name);
-				} else if (id == R.id.subsequent_dest_row) {
-					targetPointsHelper.navigateToPoint(latLon, true,
-							targetPointsHelper.getIntermediatePoints().size() + 1, name);
-				} else if (id == R.id.first_intermediate_dest_row) {
-					targetPointsHelper.navigateToPoint(latLon, true, 0, name);
-				} else if (id == R.id.last_intermediate_dest_row) {
-					targetPointsHelper.navigateToPoint(latLon, true, targetPointsHelper.getIntermediatePoints().size(), name);
-				}
-				dismiss();
-			}
-		};
+				})
+				.create();
+		items.add(replaceDestItem);
 
-		setupItems(mainView, ids, icons, titles, descriptions, onClickListener);
+		BaseBottomSheetItem replaceStartItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getCurrentPointName(targetPointsHelper.getPointToStart(), true))
+				.setIcon(getIcon(R.drawable.list_startpoint, 0))
+				.setTitle(getString(R.string.make_as_start_point))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						TargetPoint start = targetPointsHelper.getPointToStart();
+						if (start != null) {
+							targetPointsHelper.navigateToPoint(new LatLon(start.getLatitude(), start.getLongitude()),
+									false, 0, start.getOriginalPointDescription());
+						}
+						targetPointsHelper.setStartPoint(latLon, true, name);
+						dismiss();
+					}
+				})
+				.create();
+		items.add(replaceStartItem);
 
-		if (nightMode) {
-			int dividerColor = ContextCompat.getColor(getContext(), R.color.route_info_bottom_view_bg_dark);
-			mainView.findViewById(R.id.current_dest_divider).setBackgroundColor(dividerColor);
-			mainView.findViewById(R.id.cancel_divider).setBackgroundColor(dividerColor);
-		}
+		items.add(new DividerHalfBottomSheetItem(getContext(), getCloseRowDividerColorId()));
 
-		setupHeightAndBackground(mainView, R.id.scroll_view);
+		BaseBottomSheetItem subsequentDestItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getString(R.string.subsequent_dest_description))
+				.setIcon(getSubsequentDestIcon())
+				.setTitle(getString(R.string.keep_and_add_destination_point))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						targetPointsHelper.navigateToPoint(latLon, true,
+								targetPointsHelper.getIntermediatePoints().size() + 1, name);
+						dismiss();
+					}
+				})
+				.create();
+		items.add(subsequentDestItem);
 
-		return mainView;
+		BaseBottomSheetItem firstIntermItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getString(R.string.first_intermediate_dest_description))
+				.setIcon(getFirstIntermDestIcon())
+				.setTitle(getString(R.string.add_as_first_destination_point))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						targetPointsHelper.navigateToPoint(latLon, true, 0, name);
+						dismiss();
+					}
+				})
+				.create();
+		items.add(firstIntermItem);
+
+		BaseBottomSheetItem lastIntermItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getString(R.string.last_intermediate_dest_description))
+				.setIcon(getLastIntermDistIcon())
+				.setTitle(getString(R.string.add_as_last_destination_point))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						targetPointsHelper.navigateToPoint(latLon, true,
+								targetPointsHelper.getIntermediatePoints().size(), name);
+						dismiss();
+					}
+				})
+				.create();
+		items.add(lastIntermItem);
+
+		return inflateMainView();
 	}
 
 	@Override
 	public void onDismiss(DialogInterface dialog) {
 		super.onDismiss(dialog);
 		closeContextMenu();
+	}
+
+	@Override
+	protected int getCloseRowDividerColorId() {
+		return nightMode ? R.color.route_info_bottom_view_bg_dark : -1;
 	}
 
 	@Override

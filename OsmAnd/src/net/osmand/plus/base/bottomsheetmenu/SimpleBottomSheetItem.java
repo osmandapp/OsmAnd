@@ -2,23 +2,20 @@ package net.osmand.plus.base.bottomsheetmenu;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 
 public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 
-	public static final int CONTENT_ICON_COLOR = -1;
-
 	private Drawable icon;
-	@DrawableRes
-	private int iconId;
-	@ColorRes
-	private int iconColorId;
 	private String title;
-	@StringRes
-	private int titleId;
 	@ColorRes
 	private int titleColorId;
 
@@ -28,58 +25,33 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 								 View.OnClickListener onClickListener,
 								 int position,
 								 Drawable icon,
-								 @DrawableRes int iconId,
-								 @ColorRes int iconColorId,
 								 String title,
-								 @StringRes int titleId,
 								 @ColorRes int titleColorId) {
 		super(customView, layoutResId, clickable, onClickListener, position);
 		this.icon = icon;
-		this.iconId = iconId;
-		this.iconColorId = iconColorId;
 		this.title = title;
-		this.titleId = titleId;
 		this.titleColorId = titleColorId;
 	}
 
-	public Drawable getIcon() {
-		return icon;
-	}
-
-	@DrawableRes
-	public int getIconId() {
-		return iconId;
-	}
-
-	@ColorRes
-	public int getIconColorId() {
-		return iconColorId;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	@StringRes
-	public int getTitleId() {
-		return titleId;
-	}
-
-	@ColorRes
-	public int getTitleColorId() {
-		return titleColorId;
+	@Override
+	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
+		super.inflate(app, container, nightMode);
+		if (icon != null) {
+			((ImageView) view.findViewById(R.id.icon)).setImageDrawable(icon);
+		}
+		if (title != null) {
+			TextView titleTv = (TextView) view.findViewById(R.id.title);
+			titleTv.setText(title);
+			if (titleColorId != INVALID_ID) {
+				titleTv.setTextColor(ContextCompat.getColor(app, titleColorId));
+			}
+		}
 	}
 
 	public static class Builder extends BaseBottomSheetItem.Builder {
 
 		protected Drawable icon;
-		@DrawableRes
-		protected int iconId = INVALID_ID;
-		@ColorRes
-		protected int iconColorId = CONTENT_ICON_COLOR;
 		protected String title;
-		@StringRes
-		protected int titleId = INVALID_ID;
 		@ColorRes
 		protected int titleColorId = INVALID_ID;
 
@@ -88,23 +60,8 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 			return this;
 		}
 
-		public Builder setIconId(@DrawableRes int iconId) {
-			this.iconId = iconId;
-			return this;
-		}
-
-		public Builder setIconColorId(@ColorRes int iconColorId) {
-			this.iconColorId = iconColorId;
-			return this;
-		}
-
 		public Builder setTitle(String title) {
 			this.title = title;
-			return this;
-		}
-
-		public Builder setTitleId(@StringRes int titleId) {
-			this.titleId = titleId;
 			return this;
 		}
 
@@ -120,10 +77,7 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 					onClickListener,
 					position,
 					icon,
-					iconId,
-					iconColorId,
 					title,
-					titleId,
 					titleColorId);
 		}
 	}

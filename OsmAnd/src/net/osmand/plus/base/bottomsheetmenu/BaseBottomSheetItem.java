@@ -1,51 +1,64 @@
 package net.osmand.plus.base.bottomsheetmenu;
 
 import android.support.annotation.LayoutRes;
+import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.ViewGroup;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 
 public class BaseBottomSheetItem {
 
 	public static final int INVALID_POSITION = -1;
 	public static final int INVALID_ID = -1;
 
-	private View customView;
+	protected View view;
 	@LayoutRes
 	private int layoutId;
 	private boolean disabled;
 	private View.OnClickListener onClickListener;
-	private int position;
+	protected int position;
 
-	public BaseBottomSheetItem(View customView,
+	public BaseBottomSheetItem(View view,
 							   @LayoutRes int layoutId,
 							   boolean disabled,
 							   View.OnClickListener onClickListener,
 							   int position) {
-		this.customView = customView;
+		this.view = view;
 		this.layoutId = layoutId;
 		this.disabled = disabled;
 		this.onClickListener = onClickListener;
 		this.position = position;
 	}
 
-	public View getCustomView() {
-		return customView;
+	BaseBottomSheetItem() {
+
 	}
 
-	@LayoutRes
-	public int getLayoutId() {
-		return layoutId;
+	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
+		View view = getView(app, nightMode);
+		if (disabled) {
+			view.setEnabled(false);
+			view.setAlpha(.5f);
+		}
+		view.setOnClickListener(onClickListener);
+		if (position != INVALID_POSITION) {
+			container.addView(view, position);
+		} else {
+			container.addView(view);
+		}
 	}
 
-	public boolean isDisabled() {
-		return disabled;
-	}
-
-	public View.OnClickListener getOnClickListener() {
-		return onClickListener;
-	}
-
-	public int getPosition() {
-		return position;
+	private View getView(OsmandApplication app, boolean nightMode) {
+		if (view != null) {
+			return view;
+		}
+		if (layoutId != INVALID_ID) {
+			final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+			return view = View.inflate(new ContextThemeWrapper(app, themeRes), layoutId, null);
+		}
+		throw new RuntimeException("BottomSheetItem must have specified view or layoutId.");
 	}
 
 	public static class Builder {
