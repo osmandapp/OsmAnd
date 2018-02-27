@@ -120,7 +120,7 @@ public class DownloadIndexesThread {
 			StringBuilder contentText = new StringBuilder();
 			List<IndexItem> ii = getCurrentDownloadingItems();
 			for (IndexItem i : ii) {
-				if (i == currentDownloadingItem) {
+				if (!isFinished && task.getTag() == i) {
 					continue;
 				}
 				if (contentText.length() > 0) {
@@ -130,9 +130,6 @@ public class DownloadIndexesThread {
 				if (i.getType() != null) {
 					contentText.append(" ").append(i.getType().getString(app));
 				}
-			}
-			if (currentDownloadingItem != null) {
-				msg += " " + currentDownloadingItem.getType().getString(app);
 			}
 			bld.setContentTitle(msg).setSmallIcon(android.R.drawable.stat_sys_download)
 					.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)

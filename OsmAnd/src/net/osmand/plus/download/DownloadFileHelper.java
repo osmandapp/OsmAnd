@@ -264,7 +264,7 @@ public class DownloadFileHelper {
 		}
 		String taskName = ctx.getString(R.string.shared_string_downloading) + ": " +
 		//+ de.baseName /*+ " " + mb + " MB"*/;
-		FileNameTranslationHelper.getFileName(ctx, ctx.getRegions(), de.baseName);
+		FileNameTranslationHelper.getFileName(ctx, ctx.getRegions(), de.baseName) + " " + de.type.getString(ctx);
 		
 		progress.startTask(taskName, len / 1024);
 		if (!de.zipStream) {
