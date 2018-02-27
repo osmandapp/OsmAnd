@@ -127,9 +127,7 @@ public class DownloadIndexesThread {
 					contentText.append(", ");
 				}
 				contentText.append(i.getVisibleName(app, app.getRegions()));
-				if (i.getType() != null) {
-					contentText.append(" ").append(i.getType().getString(app));
-				}
+				contentText.append(" ").append(i.getType().getString(app));
 			}
 			bld.setContentTitle(msg).setSmallIcon(android.R.drawable.stat_sys_download)
 					.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
