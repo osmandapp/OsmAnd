@@ -11,8 +11,7 @@
         android:id="@+id/groups_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:paddingBottom="@dimen/bottom_sheet_content_padding_small"/>
+        android:clipToPadding="false"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -35,12 +34,5 @@
         android:visibility="gone"
         osmand:typeface="@string/font_roboto_medium"
         tools:visibility="visible"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/dashboard_divider"/>
-
-    <include layout="@layout/bottom_sheet_item_cancel"/>
 
 </LinearLayout>

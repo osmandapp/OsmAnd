@@ -13,6 +13,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
 
 public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -37,7 +38,8 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 	@Override
 	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_add_group_bottom_sheet_dialog, container);
+		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
+				R.layout.fragment_marker_add_group_bottom_sheet_dialog, null);
 
 		final RecyclerView recyclerView = mainView.findViewById(R.id.groups_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -65,16 +67,9 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 		});
 		recyclerView.setAdapter(adapter);
 
-		mainView.findViewById(R.id.close_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
 
-		setupHeightAndBackground(mainView, R.id.groups_recycler_view);
-
-		return mainView;
+		return null;
 	}
 
 	@Override

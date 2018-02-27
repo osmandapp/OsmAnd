@@ -37,6 +37,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	protected boolean usedOnMap = true;
 	protected boolean nightMode;
 
+	private LinearLayout itemsContainer;
+
 	public void setUsedOnMap(boolean usedOnMap) {
 		this.usedOnMap = usedOnMap;
 	}
@@ -62,10 +64,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		View mainView = View.inflate(new ContextThemeWrapper(app, themeRes), R.layout.bottom_sheet_menu_base, null);
-		LinearLayout container = (LinearLayout) mainView.findViewById(R.id.items_container);
+		itemsContainer = (LinearLayout) mainView.findViewById(R.id.items_container);
 
 		for (BaseBottomSheetItem item : items) {
-			item.inflate(app, container, nightMode);
+			item.inflate(app, itemsContainer, nightMode);
 		}
 
 		int closeRowDividerColorId = getCloseRowDividerColorId();
@@ -104,6 +106,15 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(USED_ON_MAP_KEY, usedOnMap);
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		items.clear();
+		if (itemsContainer != null) {
+			itemsContainer.removeAllViews();
+		}
 	}
 
 	// inflater, parent and return value are temporary and will be deleted
