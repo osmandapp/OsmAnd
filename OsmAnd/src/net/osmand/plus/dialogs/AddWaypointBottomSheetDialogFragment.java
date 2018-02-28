@@ -42,6 +42,7 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 
 		BaseBottomSheetItem replaceDestItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getCurrentPointName(targetPointsHelper.getPointToNavigate(), false))
+				.setDescriptionColorId(R.color.searchbar_text_hint_light)
 				.setIcon(getIcon(R.drawable.list_destination, 0))
 				.setTitle(getString(R.string.replace_destination_point))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
@@ -57,6 +58,7 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 
 		BaseBottomSheetItem replaceStartItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getCurrentPointName(targetPointsHelper.getPointToStart(), true))
+				.setDescriptionColorId(R.color.searchbar_text_hint_light)
 				.setIcon(getIcon(R.drawable.list_startpoint, 0))
 				.setTitle(getString(R.string.make_as_start_point))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
@@ -79,6 +81,7 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 
 		BaseBottomSheetItem subsequentDestItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.subsequent_dest_description))
+				.setDescriptionColorId(R.color.searchbar_text_hint_light)
 				.setIcon(getSubsequentDestIcon())
 				.setTitle(getString(R.string.keep_and_add_destination_point))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
@@ -95,6 +98,7 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 
 		BaseBottomSheetItem firstIntermItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.first_intermediate_dest_description))
+				.setDescriptionColorId(R.color.searchbar_text_hint_light)
 				.setIcon(getFirstIntermDestIcon())
 				.setTitle(getString(R.string.add_as_first_destination_point))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
@@ -110,6 +114,7 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 
 		BaseBottomSheetItem lastIntermItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.last_intermediate_dest_description))
+				.setDescriptionColorId(R.color.searchbar_text_hint_light)
 				.setIcon(getLastIntermDistIcon())
 				.setTitle(getString(R.string.add_as_last_destination_point))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)

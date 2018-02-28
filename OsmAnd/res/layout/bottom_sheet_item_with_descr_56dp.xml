@@ -40,8 +40,7 @@
 			android:layout_height="wrap_content"
 			android:ellipsize="end"
 			android:maxLines="2"
-			android:textColor="@color/searchbar_text_hint_light"
-			android:textSize="@dimen/default_desc_text_size"
+			android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
 			tools:text="Some description"/>
 	</LinearLayout>
 
