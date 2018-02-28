@@ -2,18 +2,18 @@ package net.osmand.plus.mapmarkers;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarkersSortByDef;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -27,66 +27,101 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 	@Override
 	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.fragment_marker_order_by_bottom_sheet_dialog, container);
-
-		if (nightMode) {
-			((TextView) mainView.findViewById(R.id.order_by_title)).setTextColor(
-					ContextCompat.getColor(getContext(), R.color.ctx_menu_info_text_dark)
-			);
-		}
-
 		Drawable distanceIcon = getContentIcon(R.drawable.ic_action_markers_dark);
 		Drawable dateIcon = getContentIcon(R.drawable.ic_action_sort_by_date);
-		((ImageView) mainView.findViewById(R.id.name_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_sort_by_name));
-		((ImageView) mainView.findViewById(R.id.distance_nearest_icon)).setImageDrawable(distanceIcon);
-		((ImageView) mainView.findViewById(R.id.distance_farthest_icon)).setImageDrawable(distanceIcon);
-		((ImageView) mainView.findViewById(R.id.date_added_asc_icon)).setImageDrawable(dateIcon);
-		((ImageView) mainView.findViewById(R.id.date_added_desc_icon)).setImageDrawable(dateIcon);
 
-		((TextView) mainView.findViewById(R.id.date_added_asc_text)).setText(getString(R.string.date_added) + " (" + getString(R.string.ascendingly) + ")");
-		((TextView) mainView.findViewById(R.id.date_added_desc_text)).setText(getString(R.string.date_added) + " (" + getString(R.string.descendingly) + ")");
+		items.add(new TitleItem(getString(R.string.sort_by)));
 
-		View.OnClickListener onClickListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				int sortByMode = -1;
-				switch (v.getId()) {
-					case R.id.name_row:
-						sortByMode = MapMarkersHelper.BY_NAME;
-						break;
-					case R.id.distance_nearest_row:
-						sortByMode = MapMarkersHelper.BY_DISTANCE_ASC;
-						break;
-					case R.id.distance_farthest_row:
-						sortByMode = MapMarkersHelper.BY_DISTANCE_DESC;
-						break;
-					case R.id.date_added_asc_row:
-						sortByMode = MapMarkersHelper.BY_DATE_ADDED_ASC;
-						break;
-					case R.id.date_added_desc_row:
-						sortByMode = MapMarkersHelper.BY_DATE_ADDED_DESC;
-						break;
-				}
-				if (sortByMode != -1 && listener != null) {
-					listener.onMapMarkersOrderByModeChanged(sortByMode);
-				}
-				dismiss();
-			}
-		};
+		BaseBottomSheetItem byNameItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_sort_by_name))
+				.setTitle(getString(R.string.shared_string_name))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_NAME);
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(byNameItem);
 
-		mainView.findViewById(R.id.name_row).setOnClickListener(onClickListener);
-		mainView.findViewById(R.id.distance_nearest_row).setOnClickListener(onClickListener);
-		mainView.findViewById(R.id.distance_farthest_row).setOnClickListener(onClickListener);
-		mainView.findViewById(R.id.date_added_asc_row).setOnClickListener(onClickListener);
-		mainView.findViewById(R.id.date_added_desc_row).setOnClickListener(onClickListener);
-		mainView.findViewById(R.id.close_row).setOnClickListener(onClickListener);
+		items.add(new DividerHalfItem(getContext()));
 
-		setupHeightAndBackground(mainView, R.id.marker_order_by_scroll_view);
+		BaseBottomSheetItem distNearestItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(distanceIcon)
+				.setTitle(getString(R.string.distance_nearest))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_DISTANCE_ASC);
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(distNearestItem);
 
-		return mainView;
+		BaseBottomSheetItem distFarthestItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(distanceIcon)
+				.setTitle(getString(R.string.distance_farthest))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_DISTANCE_DESC);
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(distFarthestItem);
+
+		items.add(new DividerHalfItem(getContext()));
+
+		BaseBottomSheetItem dateAscItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(dateIcon)
+				.setTitle(getString(R.string.date_added) + " (" + getString(R.string.ascendingly) + ")")
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_DATE_ADDED_ASC);
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(dateAscItem);
+
+		BaseBottomSheetItem dateDescItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(dateIcon)
+				.setTitle(getString(R.string.date_added) + " (" + getString(R.string.descendingly) + ")")
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_DATE_ADDED_DESC);
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(dateDescItem);
+
+		return null;
+	}
+
+	@Override
+	protected int getCloseRowTextId() {
+		return R.string.shared_string_close;
 	}
 
 	interface OrderByFragmentListener {
