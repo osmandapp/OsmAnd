@@ -248,9 +248,9 @@ public class MapMarkersWidgetsFactory {
 		if (loc != null && marker.point != null) {
 			Location.distanceBetween(marker.getLatitude(), marker.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
 		}
-
-		if (customLocation) {
-			heading = 0f;
+		boolean useCenter = !(map.getMapViewTrackingUtilities().isMapLinkedToLocation() && customLocation);
+		if (useCenter) {
+			heading = -map.getMapRotate();
 		}
 
 		boolean newImage = false;
