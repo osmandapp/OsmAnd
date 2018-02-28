@@ -13,20 +13,18 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.IProgress;
@@ -39,6 +37,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DescriptionItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -744,50 +747,53 @@ public class ImportHelper {
 
 		@Override
 		public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-			final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+			items.add(new TitleItem(getString(R.string.import_file)));
 
-			final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_import_gpx_bottom_sheet_dialog, container);
-
-			if (nightMode) {
-				((TextView) mainView.findViewById(R.id.import_gpx_title)).setTextColor(ContextCompat.getColor(getActivity(), R.color.ctx_menu_info_text_dark));
-			}
-
-			((ImageView) mainView.findViewById(R.id.import_as_favorites_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_fav_dark));
-			((ImageView) mainView.findViewById(R.id.import_as_gpx_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
-
-			int nameColor = ContextCompat.getColor(getContext(), nightMode ? R.color.osmand_orange : R.color.dashboard_blue);
-			int descrColor = ContextCompat.getColor(getContext(), nightMode ? R.color.dashboard_subheader_text_dark : R.color.dashboard_subheader_text_light);
+			int nameColor = getResolvedColor(nightMode ? R.color.osmand_orange : R.color.dashboard_blue);
+			int descrColor = getResolvedColor(nightMode ? R.color.dashboard_subheader_text_dark : R.color.dashboard_subheader_text_light);
 			String descr = getString(R.string.import_gpx_file_description);
 			SpannableStringBuilder text = new SpannableStringBuilder(fileName).append(" ").append(descr);
 			text.setSpan(new ForegroundColorSpan(nameColor), 0, fileName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			text.setSpan(new ForegroundColorSpan(descrColor), fileName.length() + 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-			((TextView) mainView.findViewById(R.id.import_gpx_description)).setText(text);
 
-			mainView.findViewById(R.id.import_as_favorites_row).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					importHelper.importFavoritesImpl(gpxFile, fileName, false);
-					dismiss();
-				}
-			});
-			mainView.findViewById(R.id.import_as_gpx_row).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					importHelper.handleResult(gpxFile, fileName, save, useImportDir, false);
-					dismiss();
-				}
-			});
+			items.add(new DescriptionItem(text));
 
-			mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					dismiss();
-				}
-			});
+			BaseBottomSheetItem asFavoritesItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_fav_dark))
+					.setTitle(getString(R.string.import_as_favorites))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							importHelper.importFavoritesImpl(gpxFile, fileName, false);
+							dismiss();
+						}
+					})
+					.create();
+			items.add(asFavoritesItem);
 
-			setupHeightAndBackground(mainView, R.id.import_gpx_scroll_view);
+			items.add(new DividerHalfItem(getContext()));
 
-			return mainView;
+			BaseBottomSheetItem asGpxItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_polygom_dark))
+					.setTitle(getString(R.string.import_as_gpx))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							importHelper.handleResult(gpxFile, fileName, save, useImportDir, false);
+							dismiss();
+						}
+					})
+					.create();
+			items.add(asGpxItem);
+
+			return null;
+		}
+
+		@ColorInt
+		private int getResolvedColor(@ColorRes int colorId) {
+			return ContextCompat.getColor(getContext(), colorId);
 		}
 	}
 }

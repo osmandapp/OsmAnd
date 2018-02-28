@@ -20,6 +20,11 @@ public class DividerHalfItem extends DividerItem {
 	}
 
 	@Override
+	protected int getTopMargin(Context context) {
+		return context.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_divider_margin_top);
+	}
+
+	@Override
 	protected int getLeftMargin(Context context) {
 		return context.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_divider_margin_start);
 	}

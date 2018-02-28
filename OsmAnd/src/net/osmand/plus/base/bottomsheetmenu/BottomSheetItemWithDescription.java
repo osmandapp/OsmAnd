@@ -13,7 +13,7 @@ import net.osmand.plus.R;
 
 public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 
-	protected String description;
+	protected CharSequence description;
 	@ColorRes
 	private int descriptionColorId = INVALID_ID;
 
@@ -25,7 +25,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 										  Drawable icon,
 										  String title,
 										  @ColorRes int titleColorId,
-										  String description,
+										  CharSequence description,
 										  @ColorRes int descriptionColorId) {
 		super(customView, layoutId, clickable, onClickListener, position, icon, title, titleColorId);
 		this.description = description;
@@ -50,11 +50,11 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 
 	public static class Builder extends SimpleBottomSheetItem.Builder {
 
-		protected String description;
+		protected CharSequence description;
 		@ColorRes
 		protected int descriptionColorId = INVALID_ID;
 
-		public Builder setDescription(String description) {
+		public Builder setDescription(CharSequence description) {
 			this.description = description;
 			return this;
 		}

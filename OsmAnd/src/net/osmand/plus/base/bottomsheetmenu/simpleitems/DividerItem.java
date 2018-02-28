@@ -39,19 +39,26 @@ public class DividerItem extends BaseBottomSheetItem {
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
 		super.inflate(app, container, nightMode);
 
-		int marginTopBottom = app.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_content_padding_small);
 		int height = AndroidUtils.dpToPx(app, 1);
 
 		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
-		params.setMargins(getLeftMargin(app), marginTopBottom, 0, marginTopBottom);
+		params.setMargins(getLeftMargin(app), getTopMargin(app), 0, getBottomMargin(app));
 		params.height = height;
 
 		view.setMinimumHeight(height);
 		view.setBackgroundColor(ContextCompat.getColor(app, getBgColorId(nightMode)));
 	}
 
+	protected int getTopMargin(Context context) {
+		return context.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_content_padding_small);
+	}
+
 	protected int getLeftMargin(Context context) {
 		return 0;
+	}
+
+	protected int getBottomMargin(Context context) {
+		return context.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_content_padding_small);
 	}
 
 	@ColorRes
