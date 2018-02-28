@@ -24,23 +24,10 @@
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center_vertical"
-		android:layout_marginEnd="@dimen/content_padding"
-		android:layout_marginRight="@dimen/content_padding"
 		android:layout_weight="1"
 		android:ellipsize="end"
 		android:maxLines="1"
 		android:textAppearance="@style/TextAppearance.ListItemTitle"
 		tools:text="Title"/>
-
-	<TextView
-		android:id="@+id/description"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_vertical"
-		android:ellipsize="end"
-		android:maxLines="1"
-		android:textColor="?android:textColorSecondary"
-		android:textSize="@dimen/default_list_text_size"
-		tools:text="Description"/>
 
 </LinearLayout>

@@ -1,16 +1,18 @@
 package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
+import net.osmand.util.Algorithms;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,60 +35,69 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 
 	@Override
 	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_history_bottom_sheet_dialog, container);
-
 		Bundle arguments = getArguments();
+
 		if (arguments != null) {
 			final int pos = arguments.getInt(MARKER_POSITION);
-			String markerName = arguments.getString(MARKER_NAME);
-			int markerColorIndex = arguments.getInt(MARKER_COLOR_INDEX);
-			long markerVisitedDate = arguments.getLong(MARKER_VISITED_DATE);
-			((TextView) mainView.findViewById(R.id.map_marker_title)).setText(markerName);
-			((ImageView) mainView.findViewById(R.id.map_marker_icon)).setImageDrawable(getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(markerColorIndex)));
+			final String markerName = arguments.getString(MARKER_NAME);
+			final int markerColorIndex = arguments.getInt(MARKER_COLOR_INDEX);
+			final long markerVisitedDate = arguments.getLong(MARKER_VISITED_DATE);
+
 			Date date = new Date(markerVisitedDate);
 			String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);
-			if (month.length() > 1) {
-				month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
-			}
+			month = Algorithms.capitalizeFirstLetter(month);
 			month = month.replaceAll("\\.", "");
 			String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
-			((TextView) mainView.findViewById(R.id.map_marker_passed_info)).setText(getString(R.string.passed, month + " " + day));
 
-			mainView.findViewById(R.id.make_active_row).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if (listener != null) {
-						listener.onMakeMarkerActive(pos);
-					}
-					dismiss();
-				}
-			});
-			mainView.findViewById(R.id.delete_row).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if (listener != null) {
-						listener.onDeleteMarker(pos);
-					}
-					dismiss();
-				}
-			});
+			BaseBottomSheetItem markerItem = new BottomSheetItemWithDescription.Builder()
+					.setDescription(getString(R.string.passed, month + " " + day))
+					.setIcon(getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(markerColorIndex)))
+					.setTitle(markerName)
+					.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+					.create();
+			items.add(markerItem);
+
+			items.add(new DividerItem(getContext()));
+
+			BaseBottomSheetItem makeActiveItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_reset_to_default_dark))
+					.setTitle(getString(R.string.make_active))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (listener != null) {
+								listener.onMakeMarkerActive(pos);
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(makeActiveItem);
+
+			BaseBottomSheetItem deleteItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_delete_dark))
+					.setTitle(getString(R.string.shared_string_delete))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (listener != null) {
+								listener.onDeleteMarker(pos);
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(deleteItem);
 		}
 
-		((ImageView) mainView.findViewById(R.id.make_active_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_reset_to_default_dark));
-		((ImageView) mainView.findViewById(R.id.delete_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_delete_dark));
+		return null;
+	}
 
-		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
-
-		setupHeightAndBackground(mainView, R.id.history_marker_scroll_view);
-
-		return mainView;
+	@Override
+	protected int getCloseRowTextId() {
+		return R.string.shared_string_close;
 	}
 
 	interface HistoryMarkerMenuFragmentListener {

@@ -43,6 +43,7 @@ public class BaseBottomSheetItem {
 			view.setAlpha(.5f);
 		}
 		view.setOnClickListener(onClickListener);
+		view.setClickable(onClickListener != null);
 		if (position != INVALID_POSITION) {
 			container.addView(view, position);
 		} else {
