@@ -1,8 +1,10 @@
 package net.osmand.plus.base.bottomsheetmenu;
 
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.LayoutRes;
+import android.support.v4.widget.CompoundButtonCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -13,6 +15,7 @@ import net.osmand.plus.R;
 public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescription {
 
 	private boolean checked;
+	private ColorStateList buttonTintList;
 
 	public BottomSheetItemWithCompoundButton(View customView,
 											 @LayoutRes int layoutId,
@@ -25,7 +28,8 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 											 @ColorRes int titleColorId,
 											 CharSequence description,
 											 @ColorRes int descriptionColorId,
-											 boolean checked) {
+											 boolean checked,
+											 ColorStateList buttonTintList) {
 		super(customView,
 				layoutId,
 				tag,
@@ -38,20 +42,29 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 				description,
 				descriptionColorId);
 		this.checked = checked;
+		this.buttonTintList = buttonTintList;
 	}
 
 	@Override
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
 		super.inflate(app, container, nightMode);
-		((CompoundButton) view.findViewById(R.id.compound_button)).setChecked(checked);
+		CompoundButton compoundButton = (CompoundButton) view.findViewById(R.id.compound_button);
+		compoundButton.setChecked(checked);
+		CompoundButtonCompat.setButtonTintList(compoundButton, buttonTintList);
 	}
 
 	public static class Builder extends BottomSheetItemWithDescription.Builder {
 
 		protected boolean checked;
+		protected ColorStateList buttonTintList;
 
 		public Builder setChecked(boolean checked) {
 			this.checked = checked;
+			return this;
+		}
+
+		public Builder setButtonTintList(ColorStateList buttonTintList) {
+			this.buttonTintList = buttonTintList;
 			return this;
 		}
 
@@ -67,7 +80,8 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 					titleColorId,
 					description,
 					descriptionColorId,
-					checked);
+					checked,
+					buttonTintList);
 		}
 	}
 }
