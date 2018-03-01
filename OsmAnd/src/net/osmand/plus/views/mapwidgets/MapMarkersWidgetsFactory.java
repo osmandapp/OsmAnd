@@ -192,11 +192,11 @@ public class MapMarkersWidgetsFactory {
 		if (customLocation != null) {
 			loc = customLocation;
 		} else {
-			Location l = map.getMapViewTrackingUtilities().getMyLocation();
+			Location l = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 			if (l != null) {
 				loc = new LatLon(l.getLatitude(), l.getLongitude());
 			} else {
-				loc = null;
+				loc = map.getMapLocation();
 			}
 		}
 
