@@ -198,6 +198,8 @@ public class MapMarkersWidgetsFactory {
 				customLocation = loc;
 			} else if (l != null) {
 				loc = new LatLon(l.getLatitude(), l.getLongitude());
+			} else {
+				loc = null;
 			}
 		}
 
