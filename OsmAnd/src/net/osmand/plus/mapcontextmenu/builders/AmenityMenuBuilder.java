@@ -334,7 +334,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			String key = e.getKey();
 			String vl = e.getValue();
 
-			if (key.equals("image") || key.equals("mapillary")) {
+			if (key.equals("image") || key.equals("mapillary") || key.equals("subway_region")) {
 				continue;
 			}
 
