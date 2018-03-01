@@ -351,7 +351,7 @@
 	<string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
     <string name="edit_tilesource_successfully">A fonte da quadrícula %1$s foi salva com sucesso</string>
     <string name="speak_traffic_warnings">Moderadores de tráfego</string>
-    <string name="context_menu_item_directions_from">Direções de</string>
+    <string name="context_menu_item_directions_from">Trajeto de</string>
     <string name="app_mode_default">Explorar</string>
 	<string name="local_indexes_cat_av">Dados de Áudio/Vídeo</string>
     <string name="stop_routing_confirm">Confirma que quer parar a navegação?</string>
@@ -660,7 +660,7 @@
     <string name="clear_intermediate_points">Remover destinos intermediários</string>
     <string name="keep_intermediate_points">Manter destinos intermediários</string>
     <string name="new_directions_point_dialog">Os destinos intermediários já estão definidos.</string>
-    <string name="context_menu_item_directions_to">Direções para</string>
+    <string name="context_menu_item_directions_to">Trajeto para</string>
     <string name="route_descr_map_location">"Mapa: "</string>
     <string name="route_descr_lat_lon">Lat. %1$.3f, Lon. %2$.3f</string>
     
@@ -870,7 +870,7 @@ Pôr do Sol: %2$s</string>
 	<string name="show_point_options">Usar posição…</string>
 	<string name="only_show">Exibir rota</string>
 	<string name="follow">Iniciar navegação</string>
-	<string name="get_directions">Direções</string>
+	<string name="get_directions">Trajeto</string>
 	<string name="local_indexes_cat_srtm">Curvas de nível</string>
     <string name="index_srtm_ele">Curvas de nível</string>
     <string name="download_srtm_maps">Curvas de nível</string>
