@@ -3833,4 +3833,7 @@
 	<string name="poi_socket_schuko_output_medium">Media</string>
 	<string name="poi_socket_schuko_output_low">Baja</string>
 
+<string name="poi_flooring">Venta de pisos</string>
+	<string name="poi_pottery">Alfarería</string>
+
 </resources>
