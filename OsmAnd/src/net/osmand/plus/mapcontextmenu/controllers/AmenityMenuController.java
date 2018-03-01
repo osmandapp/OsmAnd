@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import android.graphics.drawable.Drawable;
+
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -29,6 +31,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 public class AmenityMenuController extends MenuController {
 
@@ -183,6 +186,18 @@ public class AmenityMenuController extends MenuController {
 			}
 			builder.addPlainMenuItem(resId, typeStr, false, false, null);
 		}
+	}
+
+	@Override
+	public Drawable getRightIcon() {
+		Map<String, String> addTypes = amenity.getAdditionalInfo();
+		if (addTypes != null && addTypes.containsKey("subway_region")) {
+			String region = "subway_" + addTypes.get("subway_region");
+			if (RenderingIcons.containsBigIcon(region)) {
+				return RenderingIcons.getBigIcon(getMapActivity(), region);
+			}
+		}
+		return null;
 	}
 
 	private void processTransportStop() {
