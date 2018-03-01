@@ -16,17 +16,20 @@ public class BaseBottomSheetItem {
 	protected View view;
 	@LayoutRes
 	protected int layoutId = INVALID_ID;
+	private Object tag;
 	private boolean disabled;
 	private View.OnClickListener onClickListener;
 	protected int position = INVALID_POSITION;
 
 	public BaseBottomSheetItem(View view,
 							   @LayoutRes int layoutId,
+							   Object tag,
 							   boolean disabled,
 							   View.OnClickListener onClickListener,
 							   int position) {
 		this.view = view;
 		this.layoutId = layoutId;
+		this.tag = tag;
 		this.disabled = disabled;
 		this.onClickListener = onClickListener;
 		this.position = position;
@@ -38,6 +41,9 @@ public class BaseBottomSheetItem {
 
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
 		View view = getView(app, nightMode);
+		if (tag != null) {
+			view.setTag(tag);
+		}
 		if (disabled) {
 			view.setEnabled(false);
 			view.setAlpha(.5f);
@@ -67,6 +73,7 @@ public class BaseBottomSheetItem {
 		protected View customView;
 		@LayoutRes
 		protected int layoutId = INVALID_ID;
+		protected Object tag;
 		protected boolean disabled;
 		protected View.OnClickListener onClickListener;
 		protected int position = INVALID_POSITION;
@@ -78,6 +85,11 @@ public class BaseBottomSheetItem {
 
 		public Builder setLayoutId(@LayoutRes int layoutId) {
 			this.layoutId = layoutId;
+			return this;
+		}
+
+		public Builder setTag(Object tag) {
+			this.tag = tag;
 			return this;
 		}
 
@@ -97,7 +109,7 @@ public class BaseBottomSheetItem {
 		}
 
 		public BaseBottomSheetItem create() {
-			return new BaseBottomSheetItem(customView, layoutId, disabled, onClickListener, position);
+			return new BaseBottomSheetItem(customView, layoutId, tag, disabled, onClickListener, position);
 		}
 	}
 }

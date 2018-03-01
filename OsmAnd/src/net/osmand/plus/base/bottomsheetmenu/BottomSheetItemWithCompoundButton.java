@@ -16,6 +16,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 
 	public BottomSheetItemWithCompoundButton(View customView,
 											 @LayoutRes int layoutId,
+											 Object tag,
 											 boolean disabled,
 											 View.OnClickListener onClickListener,
 											 int position,
@@ -25,7 +26,17 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 											 CharSequence description,
 											 @ColorRes int descriptionColorId,
 											 boolean checked) {
-		super(customView, layoutId, disabled, onClickListener, position, icon, title, titleColorId, description, descriptionColorId);
+		super(customView,
+				layoutId,
+				tag,
+				disabled,
+				onClickListener,
+				position,
+				icon,
+				title,
+				titleColorId,
+				description,
+				descriptionColorId);
 		this.checked = checked;
 	}
 
@@ -47,6 +58,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 		public BottomSheetItemWithCompoundButton create() {
 			return new BottomSheetItemWithCompoundButton(customView,
 					layoutId,
+					tag,
 					disabled,
 					onClickListener,
 					position,
