@@ -188,15 +188,16 @@ public class MapMarkersWidgetsFactory {
 		if (!map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
 			return;
 		}
-
 		if (customLocation != null) {
 			loc = customLocation;
 		} else {
 			Location l = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
-			if (l != null) {
-				loc = new LatLon(l.getLatitude(), l.getLongitude());
-			} else {
+			boolean useCenterOfMap = !(map.getMapViewTrackingUtilities().isMapLinkedToLocation());
+			if (useCenterOfMap) {
 				loc = map.getMapLocation();
+				customLocation = loc;
+			} else if (l != null) {
+				loc = new LatLon(l.getLatitude(), l.getLongitude());
 			}
 		}
 
