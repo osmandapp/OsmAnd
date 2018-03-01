@@ -3819,4 +3819,7 @@
 	<string name="poi_socket_schuko_output_medium">Сярэдняя</string>
 	<string name="poi_socket_schuko_output_low">Нізкая</string>
 
+<string name="poi_flooring">Крама падлогавых пакрыццяў</string>
+	<string name="poi_pottery">Гліняны посуд</string>
+
 </resources>
