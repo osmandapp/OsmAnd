@@ -31,23 +31,23 @@
 	<string name="speak_poi">Nahegelegene POI</string>
 	
 	<string name="confirm_every_run">Immer fragen</string>
-	<string name="save_global_track_interval_descr">Erfassungsintervall für die generelle Spur-Aufnahme (via Schaltfläche \'GPX-Aufnahme\' auf dem Kartenbildschirm).</string>
+	<string name="save_global_track_interval_descr">Erfassungsintervall für die generelle Track-Aufnahme (via Schaltfläche \'GPX-Aufnahme\' auf dem Kartenbildschirm).</string>
 	<string name="save_global_track_interval">Intervall für generelle Aufzeichnung</string>
 	<string name="enable_sleep_mode">GPS-Hintergrunddienst aktivieren</string>
 	<string name="sleep_mode_stop_dialog">GPS-Hintergrunddienst beenden?</string>
 	<string name="bg_service_sleep_mode_off">Hintergrunddienst\n einschalten</string>
 	<string name="bg_service_sleep_mode_on">Hintergrunddienst\n ausschalten</string>
-	<string name="background_router_service_descr">Aktiviere OsmAnd-Hintergrunddienst für Funktionalitäten bei ausgeschalteter Anzeige.</string>
+	<string name="background_router_service_descr">OsmAnd läuft im Hintergrund, um Ihre Position zu verfolgen, während der Bildschirm ausgeschaltet ist.</string>
 	<string name="background_router_service">Hintergrunddienst</string>
 	<string name="background_service_int_descr">GPS Aufwach-Intervall für den Hintergrunddienst.</string>
 	<string name="background_service_int">GPS-Aufwachintervall</string>
 	<string name="save_track_to_gpx_globally">Aufzeichnung in GPX-Datei</string>
 	<string name="save_track_to_gpx_globally_headline">GPX-Aufzeichnung bei Bedarf</string>
 	<string name="save_track_to_gpx_globally_descr">Generelle Positionserfassung kann mit der Schaltfläche \'GPX-Aufzeichnung\' direkt auf dem Kartenbildschirm aktiviert oder deaktiviert werden.</string>
-	<string name="save_current_track">Spur jetzt speichern</string>
-	<string name="save_current_track_descr">Aktuelle Spur jetzt auf SD-Karte abspeichern.</string>
-	<string name="save_track_to_gpx">Während Navigation autom. Spur aufzeichnen</string>
-	<string name="save_track_to_gpx_descrp">Während der Navigation wird automatisch eine GPX-Spur im Spuren-Ordner gespeichert.</string>
+	<string name="save_current_track">Track jetzt speichern</string>
+	<string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte speichern.</string>
+	<string name="save_track_to_gpx">Während Navigation autom. Track aufzeichnen</string>
+	<string name="save_track_to_gpx_descrp">Während der Navigation wird automatisch ein GPX-Track im Track-Ordner gespeichert.</string>
 	<string name="save_track_interval_globally">Aufzeichnungsintervall</string>
 	<string name="save_track_interval">Erfassungsintervall während Navigation</string>
 	<string name="save_track_interval_descr">Intervall zwischen zwei erfassten Punkten während Navigation.</string>
@@ -274,7 +274,7 @@
 	<string name="live_monitoring_interval_descr">Angabe des Intervalls für die Online-Aufzeichnung.</string>
 	<string name="live_monitoring_start">Online-Aufzeichnung starten</string>
 	<string name="live_monitoring_stop">Online-Aufzeichnung beenden</string>
-	<string name="show_current_gpx_title">Aktuelle Spur anzeigen</string>
+	<string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
 	<string name="free_version_message">Diese kostenlose Version von OsmAnd ist limitiert auf %1$s Downloads(Zum Hinzufügen und Aktualisieren der Karten) und unterstützt keine offline Wikipedia-Artikel.</string>
 	<string name="free_version_title">Kostenlose Version</string>
 	<string name="poi_context_menu_showdescription">Zeige POI-Beschreibung.</string>
@@ -377,7 +377,7 @@
 	<string name="search_position_map_view">Aktueller Kartenmittelpunkt</string>
 	<string name="select_search_position">Ausgangspunkt:</string>
 	<string name="context_menu_item_search">In der Nähe suchen</string>
-	<string name="shared_string_save_as_gpx">Als neue GPX-Spur speichern</string>
+	<string name="shared_string_save_as_gpx">Als neuen GPX-Track speichern</string>
 	<string name="route_successfully_saved_at">Route erfolgreich gespeichert als \'%1$s\'.</string>
 	<string name="filename_input">Dateiname:</string>
 	<string name="file_with_name_already_exist">Datei mit gleichem Namen besteht bereits.</string>
@@ -496,7 +496,7 @@
 	<string name="send_location">Standort senden</string>
 	<string name="context_menu_item_share_location">Standort mitteilen</string>
 	<string name="add_waypoint_dialog_added">GPX-Wegpunkt \'\'{0}\'\' erfolgreich hinzugefügt</string>
-	<string name="add_waypoint_dialog_title">GPX-Wegpunkt an gespeicherte GPX-Spur anfügen</string>
+	<string name="add_waypoint_dialog_title">Wegpunkt an gespeicherten GPX-Track anfügen</string>
 	<string name="context_menu_item_add_waypoint">GPX-Wegpunkt anfügen</string>
 	<string name="amenity_type_administrative">Administratives</string>
 	<string name="amenity_type_barrier">Barriere</string>
@@ -600,7 +600,7 @@
 	<string name="voice">Sprachansage</string>
 	<string name="no_vector_map_loaded">Offline-Daten wurden nicht geladen</string>
 	<string name="map_route_by_gpx">Navigation mittels GPX</string>
-	<string name="layer_gpx_layer">GPX-Spur…</string>
+	<string name="layer_gpx_layer">GPX-Track…</string>
 	<string name="error_reading_gpx">Fehler beim Lesen der GPX-Daten</string>
 	<string name="vector_data">Offline-Vektor-Karten</string>
 	<string name="transport_context_menu">Suche nach Verbindung an Haltestelle</string>
@@ -1226,7 +1226,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	
 	<string name="shared_string_remember_my_choice">Auswahl merken</string>
 	<string name="animate_routing_route_not_calculated">Zuerst die Route berechnen</string>
-	<string name="animate_routing_gpx">Simulation anhand einer GPX-Spur</string>
+	<string name="animate_routing_gpx">Simulation anhand eines GPX-Tracks</string>
 	<string name="animate_routing_route">Simulation mit berechneter Route</string>
 	<string name="app_mode_hiking">Wandern</string>
 	<string name="app_mode_motorcycle">Motorrad</string>
@@ -1273,7 +1273,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="route_preferences">Routing-Einstellungen</string>
 	<string name="route_info">Routen-Informationen</string>
 	<string name="calculate_osmand_route_without_internet">OsmAnd-Route ohne Internetverbindung berechnen</string>
-	<string name="use_displayed_track_for_navigation">Möchten Sie die angezeigte Strecke zur Navigation verwenden?</string>
+	<string name="use_displayed_track_for_navigation">Möchten Sie den angezeigten Track zur Navigation verwenden?</string>
 	<string name="keep_and_add_destination_point">Als letztes Ziel hinzufügen</string>
 	<string name="select_gpx">GPX-Datei auswählen…</string>
 	<string name="route_descr_select_destination">Ziel auswählen</string>
@@ -1313,7 +1313,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="show_zoom_buttons_navigation_descr">Zoomtasten bei Navigation anzeigen.</string>
 	<string name="show_zoom_buttons_navigation">Zoomtasten anzeigen</string>
 	<string name="no_index_file_to_download">Keine Downloads gefunden, bitte die Internet-Verbindung überprüfen!</string>
-	<string name="none_selected_gpx">Keine GPX-Datei ausgewählt. Zum Auswählen lange auf eine vorhandene Spur drücken.</string>
+	<string name="none_selected_gpx">Keine GPX-Datei ausgewählt. Zum Auswählen lange auf einen vorhandenen Track drücken.</string>
 	
 	<string name="local_index_select_gpx_file">Zum Anzeigen auswählen</string>
 	<string name="rendering_attr_hideBuildings_name">Gebäude</string>
@@ -1473,7 +1473,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungseinstellungen und des persönlichen Überwachungskanals.</string>
 	<string name="osmo_plugin_description">Diese Erweiterung bietet Teilfunktionen des. sogenannten OpenStreetMap Monitoring, siehe https://osmo.mobi 
 \n 
-\nSie können damit in Echtzeit alle Geräte einer teilnehmenden Gruppe verfolgen. Außerdem können Sie zu Ihrer Gruppe hochgeladene Punkte und Spuren ansehen. 
+\nSie können damit in Echtzeit alle Geräte einer teilnehmenden Gruppe verfolgen. Außerdem können Sie zu Ihrer Gruppe hochgeladene Punkte und Tracks ansehen. 
 \n 
 \nWenn die Gruppe monatelang nicht entfernt wurde, machen sie es konform zu den Regeln zur Gruppenerstellung von OsMo.mobi</string>
 	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
@@ -1554,7 +1554,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="osmo_auto_connect_descr">Verbindung beim App-Start automatisch aufbauen.</string>
 	<string name="osmo_auto_connect">Automatische Verbindung</string>
 	<string name="osmo_start_service">OsMo-Dienst</string>
-	<string name="osmo_gpx_track_downloaded">OsMo-Spur %1$s heruntergeladen.</string>
+	<string name="osmo_gpx_track_downloaded">OsMo-Track %1$s heruntergeladen.</string>
 	<string name="osmo_invite">Einladen…</string>
 	<string name="osmo_leave_confirmation_msg">Die Gruppe %1$s verlassen?</string>
 	<string name="osmo_cancel_moving_target">Bewegliches Ziel abwählen</string>
@@ -1562,7 +1562,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="osmo_edit_color">Darstellungsfarbe</string>
 	<string name="osmo_center_location">Auf dem Bildschirm zentrieren</string>
 
-	<string name="gpx_file_is_empty">GPX-Spur ist leer</string>
+	<string name="gpx_file_is_empty">GPX-Track ist leer</string>
 	<string name="gpx_info_waypoints">Wegpunkte: %1$s </string>
 	<string name="gpx_info_distance">Strecke: %1$s (%2$s Punkte) </string>
 	<string name="gpx_info_start_time">Startzeit: %1$tF, %1$tT </string>
@@ -1581,7 +1581,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="gpx_selection_route_points">%1$s \nRoutenpunkte %2$s</string>
 	<string name="gpx_selection_points">%1$s \nPunkte</string>
 	<string name="gpx_selection_track">%1$s 
-\nSpur %2$s</string>
+\nTrack %2$s</string>
 	
 	<string name="gpx_split_interval">Trennungsintervall</string>
 	<string name="gpx_info_subtracks">Spur-Segmente: %1$s</string>
@@ -1596,7 +1596,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="gpx_navigation">GPX-Route</string>
 	<string name="gpx_option_reverse_route">GPX-Route umkehren</string>
 	<string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
-	<string name="gpx_option_from_start_point">Gesamte Spur durchlaufen</string>
+	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
 	<string name="gpx_files_not_found">Keine GPX-Dateien gefunden in /tracks-Ordner</string>
 	<string name="gpx_file_name">GPX-Dateiname</string>
 	<string name="gpx_saved_sucessfully">GPX-Datei erfolgreich gespeichert unter {0}</string>
@@ -1615,9 +1615,9 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="waypoints">Wegpunkte</string>
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
-    <string name="record_plugin_description">Diese Erweiterung ermöglicht es, Spuren durch Drücken des GPX-Aufnahme-Steuerelements auf dem Kartenbildschirm aufzunehmen bzw. alle navigierten Routen automatisch zu protokollieren und sie als lokale GPX-Datei (oder auch online über Web-Dienste) abzuspeichern. 
-\n 
-\nAufgenommene Spuren können z. B. mit Bekannten geteilt oder als Beiträge zu OSM verwendet werden. Sportler können gespeicherte Spuren zur Überwachung ihres Trainings verwenden. Einige Basisauswertungen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, usw.. Die Aufzeichnungen können natürlich auch mit speziellen Analyse-Tools von Drittanbietern nachbearbeitet werden.</string>
+    <string name="record_plugin_description">Diese Erweiterung ermöglicht es, Tracks durch Drücken der GPX-Schaltfläche auf dem Kartenbildschirm aufzunehmen bzw. alle navigierten Routen automatisch zu protokollieren und sie als lokale GPX-Datei (oder auch online über Web-Dienste) abzuspeichern. 
+\n
+\nAufgenommene Tracks können z. B. mit Bekannten geteilt oder als Beiträge zu OSM verwendet werden. Sportler können gespeicherte Tracks zur Überwachung ihres Trainings verwenden. Einige Basisauswertungen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, usw.. Die Aufzeichnungen können natürlich auch mit speziellen Analyse-Tools von Drittanbietern nachbearbeitet werden.</string>
     <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Um Einzelheiten zu einem Eintrag zu sehen, auf einen beliebigen Eintrag drücken. Um ihn zu deaktivieren oder zu löschen, lang drücken. Derzeit auf dem Gerät vorhandene Daten (%1$s frei):</string>
 	<string name="text_size_descr">Karten-Schriftgröße festlegen.</string>
@@ -1720,7 +1720,7 @@ Mit Neuanmeldung fortfahren?</string>
     
     <string name="shared_string_my_location">Meine Position</string>
 
-    <string name="navigation_over_track">Navigation entlang der Strecke starten?</string>
+    <string name="navigation_over_track">Navigation entlang des Tracks starten?</string>
     <string name="avoid_roads_msg">Sie können eine Alternativroute einleiten, indem Sie Straßen auswählen, die vermieden werden sollen</string>
     <string name="enable_proxy_title">HTTP-Proxy aktivieren</string>
     <string name="enable_proxy_descr">HTTP-Proxy für alle Netzwerkanfragen einrichten.</string>
@@ -1745,7 +1745,7 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="nautical_maps_missing">Um See-Karten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
     <string name="get_plugin">Erwerben</string>
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
-	<string name="shared_string_currently_recording_track">Momentane Spur-Aufzeichnung</string>
+	<string name="shared_string_currently_recording_track">Momentane Track-Aufzeichnung</string>
 	<string name="back_to_map">Zurück zur Karte</string>
 	<string name="plugin_nautical_descr">Die Erweiterung bereichert OsmAnd um die zusätzliche Darstellungsmöglichkeit nautischer Karten für Bootfahrer, Segler oder andere Wassersportler. 
 \n
@@ -1841,8 +1841,8 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="drawer">Flache Liste</string>
 	<string name="shared_string_action_template">Aktion {0}</string>
 	<string name="route_points">Routenpunkte</string>
-	<string name="track_segments">Spur-Segmente</string>
-	<string name="track_points">Spur-Punkte</string>
+	<string name="track_segments">Track-Segmente</string>
+	<string name="track_points">Track-Punkte</string>
 	<string name="plugin_touringview_name">Tourenkarte</string>
 	<string name="index_name_netherlands">Europa - Niederlande</string>
 	<string name="shared_string_release">Veröffentlicht</string>
@@ -2014,7 +2014,7 @@ Lon %2$s</string>
     <string name="osmand_running_in_background">Läuft im Hintergrund</string>
     <string name="favourites_edit_dialog_title">Favoriteninformationen</string>
     <string name="simulate_your_location_stop_descr">Standort-Simulation beenden.</string>
-    <string name="simulate_your_location_descr">Simulation Ihrer Position mit einer berechneten Route oder einer aufgezeichneten GPX-Spur.</string>
+    <string name="simulate_your_location_descr">Simulation Ihrer Position mit einer berechneten Route oder einem aufgezeichneten GPX-Track.</string>
     <string name="recent_places">Letzte Orte</string>
 	<string name="saved_at_time">Erfolgreich gespeichert um: %1$s</string>
 	<string name="count_of_lines">Anzahl der Reihen</string>
@@ -2309,7 +2309,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="access_direction_haptic_feedback">Haptische Rückmeldung zur Richtung</string>
     <string name="access_direction_haptic_feedback_descr">Zielpunktrichtung durch Vibration kenntlich machen.</string>
 <string name="change_markers_position">Position der Markierung ändern</string>
-    <string name="current_track">Aktuelle Spur</string>
+    <string name="current_track">Aktueller Track</string>
     <string name="lang_es_us">Spanisch (Amerikanisch)</string>
     <string name="lang_be_by">Weißrussisch (Lateinische Schrift)</string>
     <string name="lang_kn">Kannada</string>
@@ -2445,7 +2445,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="route_calculation">Routenberechnung</string>
     <string name="gpx_no_tracks_title">Keine Spuren vorhanden</string>
     <string name="gpx_no_tracks_title_folder">Spuren können dem Ordner hinzugefügt werden</string>
-    <string name="gpx_add_track">Spur hinzufügen</string>
+    <string name="gpx_add_track">Track hinzufügen</string>
     <string name="upload_poi">POI hochladen</string>
     <string name="route_roundabout_short">Nehmen Sie die %1$d Ausfahrt</string>
     <string name="search_map_hint">Suche Stadt oder Region</string>
@@ -2548,7 +2548,7 @@ Bitte geben Sie einen vollständigen Code ein</string>
     <string name="navigate_point_olc_info_area">Gültiger vollständiger OLC
 Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="auto_split_recording_title">Aufzeichnungen bei Lücken automatisch trennen</string>
-	<string name="auto_split_recording_descr">Nach 6 min Pause neues Segment, nach 2 h neue Spur und nach Pause mit Datumsänderung neue Datei beginnen.</string>
+	<string name="auto_split_recording_descr">Nach 6 min Pause neues Segment, nach 2 h neuen Track und nach Pause mit Datumsänderung neue Datei beginnen.</string>
     <string name="navigate_point_olc">Offener Standortcode (OLC)</string>
     <string name="quick_action_page_list_descr">Drücken der Aktionstaste blättert die untere Liste durch.</string>
     <string name="release_2_6">\\022 Neue Funktion: Schnellaktionstaste 
@@ -2588,7 +2588,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="total_distance">Gesamtstrecke</string>
     <string name="routing_attr_driving_style_name">Fahrweise</string>
     
-    <string name="select_gpx_folder">Spur-Ordner wählen</string>
+    <string name="select_gpx_folder">Track-Ordner wählen</string>
     <string name="file_can_not_be_moved">Datei kann nicht verschoben werden.</string>
     <string name="shared_string_move">Verschieben</string>
     <string name="shared_string_tracks">Spuren</string>
@@ -2600,7 +2600,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_color">Farbe</string>
     <string name="max_speed">Höchstgeschwindigkeit</string>
     <string name="average_speed">Durchschnittsgeschwindigkeit</string>
-    <string name="gpx_track">Spur</string>
+    <string name="gpx_track">Track</string>
     <string name="points_delete_multiple_succesful">Punkt(e) erfolgreich gelöscht.</string>
     <string name="points_delete_multiple">Es werden %1$d Punkt(e) gelöscht. Fortfahren?</string>
     <string name="track_points_category_name">Markante Punkte auf dieser Route</string>
@@ -2630,7 +2630,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_name">Höhenschwankung auswählen</string>
     <string name="driving_region_automatic">Automatisch</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen Daten von OpenStreetMap (OSM). Erfreuen Sie sich an der akustischen und visuellen Navigation, der Betrachtung von POIs (points of interest), der Erstellung und Verwaltung von GPX-Spuren, der Visualisierung von Höhenlinien und -angaben (über ein Erweiterungsmodul), den Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Betriebsart, der Möglichkeit an OSM mitzuarbeiten und vielem mehr.</string>
-    <string name="osmand_extended_description_part2">GPS-Navigation • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg • Ihre Route wird neu berechnet, sobald Sie von ihr abweichen • Fahrspurassistent, Straßennamen und voraussichtliche Ankunftszeit helfen Ihnen auf der Strecke • Zur Erhöhung Ihrer Reisesicherheit erfolgt ein automatischer Wechsel zwischen Tag- und Nachtmodus • Sie können wählen, ob Tempolimits angezeigt werden sollen, und ob Sie bei deren Überschreitung darauf hingewiesen werden wollen • Die Kartenvergrößerung passt sich Ihrer Geschwindigkeit an • Sie können Ziele nach Adresse, Typ (z. B.: Parkplatz, Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten suchen • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich • Sie können Ihre GPX-Spuren aufzeichnen, einspielen und ihnen folgen</string>
+    <string name="osmand_extended_description_part2">GPS-Navigation • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg • Ihre Route wird neu berechnet, sobald Sie von ihr abweichen • Fahrspurassistent, Straßennamen und voraussichtliche Ankunftszeit helfen Ihnen auf der Strecke • Zur Erhöhung Ihrer Reisesicherheit erfolgt ein automatischer Wechsel zwischen Tag- und Nachtmodus • Sie können wählen, ob Tempolimits angezeigt werden sollen, und ob Sie bei deren Überschreitung darauf hingewiesen werden wollen • Die Kartenvergrößerung passt sich Ihrer Geschwindigkeit an • Sie können Ziele nach Adresse, Typ (z. B.: Parkplatz, Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten suchen • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich • Sie können Ihre GPX-Tracks aufzeichnen, einspielen und ihnen folgen</string>
     <string name="osmand_extended_description_part3">Karten • zeigen POIs (point of interests) in Ihrer Umgebung an • richten sich nach Ihrer Bewegungsrichtung (oder dem Kompass) aus • zeigen an, wo Sie sind und worauf Sie sehen • übermitteln Ihre Position, damit Ihre Freunde Sie finden können • speichern Ihre wichtigsten Orte als Favoriten • lassen Ihnen die Wahl, wie Bezeichnungen auf der Karte angezeigt werden sollen: in Englisch, Landessprache oder in phonetischer Schreibweise • stellen spezielle Online-Karten, Satellitenansichten (von Bing), verschiedene Overlays, wie GPX-Spuren zu Touren-/Routenverläufen, und zusätzliche Ebenen mit einstellbarer Transparenz dar</string>
     <string name="osmand_extended_description_part4">Ski-Sport - das OsmAnd-Skikarten-Modul ermöglicht Ihnen das Betrachten von Skirouten, deren Schwierigkeitsgrad und einiger zusätzlicher Informationen, wie die Lage von Liften und weiterer Einrichtungen.</string>
     <string name="osmand_extended_description_part5">Radfahren • Sie finden Radwege auf der Karte • Die GPS-Navigation im Fahrrad-Modus errechnet Ihre Route anhand von Radwegen • Sie können Ihre Geschwindigkeit und Höhe verfolgen • Die Möglichkeit der GPX-Aufzeichnung versetzt Sie in die Lage, Ihre Fahrt zu protokollieren und sie mit anderen zu teilen • Über ein Zusatzmodul können Sie sich Höhenlinien und das Geländerelief darstellen lassen</string>
@@ -2762,7 +2762,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n 
 \n • Lineal-Steuerelement zur Entfernungsmessung 
 \n 
-\n • GPX-Teilabschnitte mit detaillierten Informationen zur Spur 
+\n • GPX-Teilabschnitte mit detaillierten Informationen zum Track 
 \n 
 \n • Weitere Verbesserungen und Fehlerkorrekturen 
 \n 
@@ -2804,10 +2804,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="empty_state_my_tracks_desc">Spuren aufzeichnen oder importieren.</string>
     <string name="empty_state_favourites">Favoriten hinzufügen</string>
     <string name="empty_state_favourites_desc">Favoriten auf der Karte hinzufügen oder sie aus einer Datei importieren.</string>
-    <string name="import_track">Spur importieren</string>
-    <string name="import_track_desc">Die Datei %1$s enthält keine Wegpunkte, soll sie als Spur importiert werden?</string>
+    <string name="import_track">Track importieren</string>
+    <string name="import_track_desc">Die Datei %1$s enthält keine Wegpunkte, soll sie als Track importiert werden?</string>
     <string name="move_point">Punkt verschieben</string>
-    <string name="add_segment_to_the_track">Zu einer GPX-Spur hinzufügen</string>
+    <string name="add_segment_to_the_track">Zu einem GPX-Track hinzufügen</string>
 <string name="do_not_use_animations">Keine Animationen verwenden</string>
     <string name="do_not_use_animations_descr">Deaktiviert Animationen in der App.</string>
     <string name="keep_showing_on_map">Weiterhin auf der Karte anzeigen</string>
@@ -2846,7 +2846,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="coordinate_input">Koordinateneingabe</string>
     <string name="is_saved">gespeichert</string>
     <string name="marker_save_as_track_descr">Markierungen in die hier festgelegte Datei exportieren:</string>
-    <string name="marker_save_as_track">Als Spur speichern</string>
+    <string name="marker_save_as_track">Als Track speichern</string>
     <string name="move_to_history">In den Verlauf verschieben</string>
     <string name="group_will_be_removed_after_restart">Gruppe wird beim nächsten Neustart entfernt.</string>
     <string name="show_passed">Passierte anzeigen</string>
@@ -2867,7 +2867,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="marker_moved_to_active">Kartenmarkierung auf Karte verschoben</string>
     <string name="release_2_8">• Komplett überarbeitete Kartenmarkierungen mit Linien und Routenplanung 
 \n 
-\n• Entfernungsmesser bietet ausrichten auf Straße Funktion und speichern als Spur 
+\n• Entfernungsmesser bietet ausrichten auf Straße Funktion und speichern als Track 
 \n 
 \n• Bug-Fixes, neue Daten auf dem Server alle 30 Minuten, Updates implementiert in der Navigation 
 \n 
@@ -2931,7 +2931,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="go_to_next_field">Zum nächsten Feld gehen</string>
     <string name="rename_marker">Markierung umbenennen</string>
     <string name="mark_passed">Markierung passiert</string>
-    <string name="track_waypoints">Spuren-Wegpunkte</string>
+    <string name="track_waypoints">Track-Wegpunkte</string>
     <string name="modify_the_search_query">Suchanfrage verändern.</string>
     <string name="empty_state_osm_edits">Erstellen oder ändern von OSM-Objekten</string>
     <string name="empty_state_osm_edits_descr">OSM-POI erstellen oder verändern, OSM-Notizen eröffnen oder bearbeiten, und aufgezeichnete GPX-Dateien hinzufügen.</string>
@@ -2943,7 +2943,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="empty_state_av_notes">Machen Sie sich Notizen!</string>
     <string name="by_date">Nach Datum</string>
     <string name="by_type">Nach Typ</string>
-    <string name="import_gpx_file_description">kann als Favoriten-Punkte oder als Spur-Datei importiert werden.</string>
+    <string name="import_gpx_file_description">kann als Favoriten-Punkte oder als Track importiert werden.</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Bedienelement oder Kontextmenü hinzufügen.</string>
     <string name="notes_by_date">Notizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuerschaltflächen und Bedienelemente um.</string>
@@ -2968,11 +2968,11 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="av_locations_all_desc">GPX-Datei mit Koordinaten und Daten aller Notizen.</string>
     <string name="shared_string_actions">Aktionen</string>
     <string name="shared_string_marker">Markierung</string>
-    <string name="add_track_to_markers_descr">Wählen Sie eine Spur aus, um ihre Wegpunkte zu den Markierungen hinzuzufügen. (Nur Spuren mit Wegpunkten werden aufgelistet.)</string>
+    <string name="add_track_to_markers_descr">Wählen Sie einen Track aus, um dessen Wegpunkte zu den Markierungen hinzuzufügen. (Nur Tracks mit Wegpunkten werden aufgelistet.)</string>
     <string name="add_favourites_group_to_markers_descr">Wählen Sie eine Favoritenkategorie aus, die Sie den Markierungen hinzufügen möchten.</string>
-    <string name="add_group_descr">Sie können Gruppen aus Favoriten oder Spuren-Wegpunkten importieren.</string>
+    <string name="add_group_descr">Sie können Gruppen aus Favoriten oder Track-Wegpunkten importieren.</string>
     <string name="empty_state_markers_active_desc">Tippen Sie Orte lang oder kurz an, tippen Sie anschließend auf die Markierungsfahnenschaltfläche.</string>
-    <string name="empty_state_markers_groups_desc">Sie können Favoritengruppen oder Spuren-Wegpunkte als Markierungen importieren.</string>
+    <string name="empty_state_markers_groups_desc">Sie können Favoritengruppen oder Track-Wegpunkte als Markierungen importieren.</string>
     <string name="show_guide_line_descr">Hilfslinien von Ihrem Standort bis zu den aktiven Markierungspunkten anzeigen.</string>
     <string name="show_arrows_descr">Ein oder zwei Pfeile anzeigen, die die Richtung zu den aktiven Markierungen angeben.</string>
     <string name="distance_indication_descr">Wählen Sie aus, wie der Abstand zu aktiven Markierungen angezeigt werden soll.</string>
