@@ -192,7 +192,7 @@ public class AmenityMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		Map<String, String> addTypes = amenity.getAdditionalInfo();
 		if (addTypes != null && addTypes.containsKey("subway_region")) {
-			String region = "subway_" + addTypes.remove("subway_region");
+			String region = "subway_" + addTypes.get("subway_region");
 			amenity.setAdditionalInfo(addTypes);
 			if (RenderingIcons.containsBigIcon(region)) {
 				return RenderingIcons.getBigIcon(getMapActivity(), region);
