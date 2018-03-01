@@ -1470,4 +1470,6 @@
     <string name="intermediate_points_change_order">Rjad změnić</string>
     <string name="av_def_action_video">Widejo nahrać</string>
     <string name="av_def_action_audio">Awdio nahrać</string>
-    </resources>
+    <string name="network_provider">syć</string>
+    <string name="show_tunnels">Tunle</string>
+</resources>
