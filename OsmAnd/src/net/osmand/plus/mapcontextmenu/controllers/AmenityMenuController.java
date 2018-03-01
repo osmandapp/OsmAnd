@@ -194,9 +194,8 @@ public class AmenityMenuController extends MenuController {
 		if (addTypes != null) {
 			String region = addTypes.get("subway_region");
 			if (region != null) {
-				region = "subway_" + region;
+				return RenderingIcons.getBigIcon(getMapActivity(), "subway_" + region);
 			}
-			return RenderingIcons.getBigIcon(getMapActivity(), region);
 		}
 		return null;
 	}
