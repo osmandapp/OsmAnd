@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="rendering_attr_whiteWaterSports_name">Whitewater sports</string>
     <string name="distance_farthest">Distance: farthest first</string>
     <string name="distance_nearest">Distance: nearest first</string>
     <string name="enter_lon">Enter longitude</string>

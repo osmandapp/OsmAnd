@@ -1453,7 +1453,7 @@
 	<string name="poi_shoes_orthopedic">Orthopédique</string>
 
 	<string name="poi_internet_access_type_wlan">Wi-Fi</string>
-	<string name="poi_internet_access_type_terminal">Terminal</string>
+	<string name="poi_internet_access_type_terminal">Borne informatique</string>
 	<string name="poi_architecture_contemporary">Architecture : contemporaine</string>
 	<string name="poi_architecture_art_nouveau">Architecture : art nouveau</string>
 	<string name="poi_architecture_neoclassicism">Architecture : néo-classique</string>
@@ -3283,7 +3283,7 @@
 	<string name="poi_health_service_prevention_no">Services de santé : prévention : non</string>
 	<string name="poi_health_service_prevention_vaccination_yes">Services de santé : vaccination : oui</string>
 	<string name="poi_health_service_prevention_vaccination_no">Services de santé : vaccination : non</string>
-	<string name="poi_socket">Prise</string>
+	<string name="poi_socket">Type de prise</string>
 	<string name="poi_socket_chademo_output_filter">Nombre de câbles avec prises CHAdeMO</string>
 	<string name="poi_socket_type2_output_filter">Nombre de câbles avec prises Type 2</string>
 	<string name="poi_socket_type2_combo_output_filter">Nombre de câbles avec prises Type 2 combo</string>
@@ -3297,4 +3297,21 @@
 	<string name="poi_socket_type2_output_medium">Moyen</string>
 	<string name="poi_socket_type2_output_low">Faible</string>
 	<string name="poi_socket_type2_combo_output_high">Élevé</string>
+	<string name="poi_fortification_type_ring_ditch">Type de fortification : fossé circulaire</string>
+
+	<string name="poi_conveying_yes">Transport mécanisé : oui</string>
+
+	<string name="poi_forestry_compartment">Panneau : parcelle forestière</string>
+	<string name="poi_forestry_allotment">Panneau : propriété de parcelle forestière</string>
+	<string name="poi_health_facility_type_field_hospital">Type d\'établissement de santé : hôpital de campagne</string>
+	<string name="poi_health_facility_type_counselling_centre">Type d\'établissement de santé : centre de conseils</string>
+	<string name="poi_health_facility_type_laboratory">Type d\'établissement de santé : laboratoire</string>
+	<string name="poi_health_facility_type_therapy">Type d\'établissement de santé : soins</string>
+	<string name="poi_health_facility_type_dispensary">Type d\'établissement de santé : dispensaire</string>
+	<string name="poi_health_facility_type_first_aid">Type d\'établissement de santé : premiers soins</string>
+	<string name="poi_health_facility_type_nursing_home">Type d\'établissement de santé : soins infirmiers à domicile</string>
+	<string name="poi_health_facility_type_support_group_home">Type d\'établissement de santé : groupe de soutien à domicile</string>
+
+	<string name="poi_health_amenity_type_scales">Échelles publiques</string>
+
 	</resources>

@@ -556,7 +556,7 @@
 <string name="poi_dock">بارانداز</string>
 <string name="poi_toilets">سرویس بهداشتی</string>
 <string name="poi_sauna">سونا</string>
-<string name="poi_brothel"></string>
+<string name="poi_brothel"/>
 <string name="poi_mortuary">قصارخانه</string>
 <string name="poi_crematorium">کوره جسد سوزی</string>
 <string name="poi_internet_cafe">کافی نت</string>
@@ -779,4 +779,28 @@
 
 	<string name="poi_route_subway_ref">مترو</string>
 
+	<string name="poi_recycling_accepted_waste">محل دفن زباله</string>
+	<string name="poi_nudism">برهنگی</string>
+	<string name="poi_health_specialty">بهداشت</string>
+	<string name="poi_caravans">کاروان</string>
+	<string name="poi_power_supply">پست برق</string>
+	<string name="poi_medical_system">نظام پزشکی</string>
+	<string name="poi_home_visit">خانه دیدنی</string>
+	<string name="poi_dish">دیش</string>
+	<string name="poi_payment_transport_type">نوع پرداخت (حمل و نقل)</string>
+	<string name="poi_social_facility_for">گروه هدف</string>
+	<string name="poi_compressed_air_filter">کپسول هوا</string>
+	<string name="poi_vacuum_cleaner_filter">جارو برقی</string>
+	<string name="poi_cafeteria">کافه تریا</string>
+	<string name="poi_zoo_type">نوع باغ وحش</string>
+	<string name="poi_motorcycle_services">تعمیرگاه موتورسیکلت</string>
+	<string name="poi_motorcycle_type">نوع موتورسیکلت</string>
+	<string name="poi_boat_rental_type">قایق های اجاره ای</string>
+	<string name="poi_operational_status">وضعیت عملیاتی</string>
+	<string name="poi_water_supply_type">منبع آب</string>
+	<string name="poi_water_purification">تصفیه آب</string>
+	<string name="poi_emergency">اضطراری</string>
+	<string name="poi_transportation">حمل و نقل</string>
+	<string name="poi_road_obstacle">مانع جاده</string>
+	<string name="poi_filling_station">پمپ بنزین</string>
 	</resources>

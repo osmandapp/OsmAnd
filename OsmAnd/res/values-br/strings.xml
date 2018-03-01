@@ -1,5 +1,38 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="edit_filter">Embann ar sil</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="edit_filter">Embann ar sil</string>
     <string name="subcategories">Isrummadoù</string>
     <string name="selected_categories">Rummadoù diuzet</string>
     <string name="create_custom_poi">Krouiñ lec\'hioù dedenn personelaet</string>
+    <string name="distance_farthest">Hed: pellañ da gentañ</string>
+    <string name="distance_nearest">Hed: tostañ da gentañ</string>
+    <string name="enter_lon">Enankit an hedred</string>
+    <string name="enter_lat">Enankit al ledred</string>
+    <string name="enter_lat_and_lon">Enankit al ledred hag an hedred</string>
+	<string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	<string name="east_abbreviation">R</string>
+	<string name="west_abbreviation">K</string>
+	<string name="south_abbreviation">S</string>
+	<string name="north_abbreviation">N</string>
+	<string name="optional_point_name">Anv diret ar pik</string>
+    <string name="transport_nearby_routes_within">Trehentadoù e-kichen</string>
+    <string name="transport_nearby_routes">NEPELL</string>
+    <string name="enter_the_file_name">Enankit anv ar restr.</string>
+    <string name="map_import_error">Fazi en ur enporzhiañ ar gartenn</string>
+    <string name="map_imported_successfully">Kartenn enporzhiet gant berzh</string>
+    <string name="make_as_start_point">Merkañ evel lec\'h loc\'hañ</string>
+    <string name="shared_string_current">Bremanel</string>
+    <string name="last_intermediate_dest_description">Ouzhpenn a ra an arsav diwezhañ war an hent</string>
+    <string name="first_intermediate_dest_description">Ouzhpennañ a ra an arsav kentañ war an hent</string>
+    <string name="subsequent_dest_description">Pignat ha krouiñ un arvoned</string>
+    <string name="show_closed_notes">Diskouez an notennoù serret</string>
+    <string name="switch_osm_notes_visibility_desc">Diskouez/Kuzhat notennoù OSM war ar gartenn-mañ.</string>
+    <string name="gpx_file_desc">GPX - azasaet evit ezporzhiañ da JOSM pe embannerien OSM all.</string>
+    <string name="osc_file_desc">OSC - azasaet evit ezporzhiañ da OpenStreetMap.</string>
+    <string name="gpx_file">Restr GPX</string>
+    <string name="osc_file">Restr OSC</string>
+    <string name="choose_file_type">Dibabit rizh ar restr</string>
     </resources>

@@ -3756,4 +3756,7 @@
 	<string name="poi_socket_schuko_output_medium">Medium</string>
 	<string name="poi_socket_schuko_output_low">Low</string>
 
+	<string name="poi_flooring">Flooring store</string>
+	<string name="poi_pottery">Pottery</string>
+
 </resources>

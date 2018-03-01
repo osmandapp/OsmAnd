@@ -2054,4 +2054,18 @@
 	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
 	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
 	<string name="optional_point_name">Məcburi olmayan nöqtə adı</string>
+    <string name="empty_state_osm_edits_descr">OSM POI yaradın və ya dəyişdirin, OSM qeydlərini açın və ya rəy bildirin, həmçinin qeyd edilmiş GPX fayllarını göndərin.</string>
+    <string name="one_tap_active_descr">Kontekst menyusunu açmadan xəritədə bir işarəyə toxunun və onu aktiv işarələrdə üst hissəyə daşıyın.</string>
+    <string name="one_tap_active">Bir toxunuşla aktivləşmə</string>
+    <string name="empty_state_markers_history_desc">Bu ekranda keçilmiş kimi qeyd olunan işarələr görünür.</string>
+    <string name="show_arrows_descr">Aktiv işarələrin istiqamətini bildirən bir və ya iki ox göstər.</string>
+    <string name="active_markers_descr">Neçə istiqamət göstəricisinin göstəriləcəyini seçin.</string>
+    <string name="mark_passed">Keçilmiş işarələ</string>
+    <string name="round_trip">Gediş-gəliş səyahəti</string>
+    <string name="make_round_trip">Gediş-gəliş səyahət et</string>
+    <string name="shared_string_finish">Finiş</string>
+    <string name="marker_show_distance_descr">Xəritə ekranında xəritə işarələrinə məsafənin və istiqamətin necə göstəriləcəyini seçin:</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd seçilmiş profil üçün nöqtələri marşrut ilə birləşdirəcək.</string>
+    <string name="save_track_min_speed_descr">Filtr: Bir nöqtə üçün minimum qeydiyyat sürəti seçin.</string>
+    <string name="access_smart_autoannounce_descr">Yalnız hədəf nöqtəyə istiqamət dəyişilən zaman bildir.</string>
     </resources>

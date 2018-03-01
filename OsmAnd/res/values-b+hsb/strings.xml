@@ -455,7 +455,7 @@
     <string name="poi_filter_for_tourists">Za turistow</string>
     <string name="poi_filter_fuel">Bencin</string>
     <string name="show_warnings_title">Warnowanja pokazać…</string>
-    <string name="show_warnings_descr">Wobchadne warnowanja (wobmjezowanja spěšnosće, stopowe znački, prohi), informacije wo krutych błyskačach a jězbnych ćěrach.</string>
+    <string name="show_warnings_descr">Wobchadne warnowanja (wobmjezowanja spěšnosće, stopowe znački, prohi, tunle), informacije wo krutych błyskačach a jězbnych ćěrjach.</string>
     <string name="use_compass_navigation_descr">Wužiwać kompas, hdyž hinaše postajenje směra móžne njeje.</string>
     <string name="use_compass_navigation">Kompas wužiwać</string>
     <string name="avoid_motorway">Awtodróhi wobeńć</string>
@@ -1043,8 +1043,8 @@
     <string name="rendering_value_germanRoadAtlas_name">Němski dróhowy atlas</string>
     <string name="rendering_category_hide">Schować</string>
     <string name="configure_map">Napohlad karty</string>
-    <string name="context_menu_item_directions_to">Směry do</string>
-    <string name="context_menu_item_directions_from">Směry wot</string>
+    <string name="context_menu_item_directions_to">Nawigacija sem</string>
+    <string name="context_menu_item_directions_from">Nawigacija wottud</string>
     <string name="layer_hillshade">Reliefowa runina</string>
     <string name="local_indexes_cat_srtm">Wysokostne linije</string>
     <string name="index_srtm_ele">Wysokostne linije</string>
@@ -1457,4 +1457,17 @@
     <string name="osmand_parking_delete_confirm">Chceš parkowansku chorhojčku woprawdźe wotstronić?</string>
     <string name="osmand_parking_delete">Parkowansku chorhojčku wotstronić</string>
     <string name="context_menu_item_delete_parking_point">Parkowansku chorhojčku wotstronić</string>
+    <string name="gpx_file">GPX-dataja</string>
+    <string name="osc_file">OSC-dataja</string>
+    <string name="choose_file_type">Datajowy typ wubrać</string>
+    <string name="osm_notes">OSM-noticy</string>
+    <string name="will_open_tomorrow_at">Wočini jutře w</string>
+    <string name="shared_string_without_name">Bjez mjena</string>
+    <string name="shared_string_marker">Chorhojčka</string>
+    <string name="recording_photo_description">Foto %1$s %2$s</string>
+    <string name="av_def_action_picture">Foto dodać</string>
+    <string name="recording_context_menu_precord">Foto dodać</string>
+    <string name="intermediate_points_change_order">Rjad změnić</string>
+    <string name="av_def_action_video">Widejo nahrać</string>
+    <string name="av_def_action_audio">Awdio nahrać</string>
     </resources>

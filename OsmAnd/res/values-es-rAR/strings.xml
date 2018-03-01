@@ -2934,8 +2934,8 @@ Proporciona un código completo</string>
     <string name="map_import_error">Error de importación del mapa</string>
     <string name="map_imported_successfully">Mapa importado correctamente</string>
     <string name="enter_the_file_name">Ingresa el nombre del archivo.</string>
-    <string name="transport_nearby_routes_within">Rutas dentro de los</string>
-    <string name="transport_nearby_routes">CERCA</string>
+    <string name="transport_nearby_routes_within">Rutas a menos de</string>
+    <string name="transport_nearby_routes">A MENOS DE</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
 	<string name="dd_dddddd_format">DD.DDDDDD°</string>
 	<string name="dd_ddddd_format">DD.DDDDD°</string>
