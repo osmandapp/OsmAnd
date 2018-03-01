@@ -196,7 +196,7 @@ public class MapMarkersWidgetsFactory {
 			if (l != null) {
 				loc = new LatLon(l.getLatitude(), l.getLongitude());
 			} else {
-				loc = null;
+				loc = map.getMapLocation();
 			}
 		}
 
