@@ -81,10 +81,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				dismiss();
 			}
 		});
-		int closeRowTextId = getCloseRowTextId();
-		if (closeRowTextId != -1) {
-			((TextView) mainView.findViewById(R.id.close_row_text)).setText(closeRowTextId);
-		}
+		((TextView) mainView.findViewById(R.id.close_row_text)).setText(getCloseRowTextId());
 
 		setupHeightAndBackground(mainView, R.id.scroll_view);
 
@@ -175,7 +172,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	@StringRes
 	protected int getCloseRowTextId() {
-		return -1;
+		return R.string.shared_string_cancel;
 	}
 
 	@DrawableRes

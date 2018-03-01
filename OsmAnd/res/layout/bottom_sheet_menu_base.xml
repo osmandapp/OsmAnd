@@ -38,11 +38,11 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
-			android:text="@string/shared_string_cancel"
 			android:textAllCaps="true"
 			android:textColor="?attr/color_dialog_buttons"
 			android:textSize="@dimen/default_desc_text_size"
-			android:textStyle="bold"/>
+			android:textStyle="bold"
+			tools:text="@string/shared_string_cancel"/>
 
 	</FrameLayout>
 

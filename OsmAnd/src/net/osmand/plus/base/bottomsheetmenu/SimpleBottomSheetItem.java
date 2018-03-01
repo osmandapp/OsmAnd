@@ -21,13 +21,13 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 
 	public SimpleBottomSheetItem(View customView,
 								 @LayoutRes int layoutId,
-								 boolean clickable,
+								 boolean disabled,
 								 View.OnClickListener onClickListener,
 								 int position,
 								 Drawable icon,
 								 String title,
 								 @ColorRes int titleColorId) {
-		super(customView, layoutId, clickable, onClickListener, position);
+		super(customView, layoutId, disabled, onClickListener, position);
 		this.icon = icon;
 		this.title = title;
 		this.titleColorId = titleColorId;

@@ -19,7 +19,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 
 	public BottomSheetItemWithDescription(View customView,
 										  @LayoutRes int layoutId,
-										  boolean clickable,
+										  boolean disabled,
 										  View.OnClickListener onClickListener,
 										  int position,
 										  Drawable icon,
@@ -27,7 +27,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 										  @ColorRes int titleColorId,
 										  CharSequence description,
 										  @ColorRes int descriptionColorId) {
-		super(customView, layoutId, clickable, onClickListener, position, icon, title, titleColorId);
+		super(customView, layoutId, disabled, onClickListener, position, icon, title, titleColorId);
 		this.description = description;
 		this.descriptionColorId = descriptionColorId;
 	}

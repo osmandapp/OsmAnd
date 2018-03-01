@@ -1,122 +1,135 @@
 package net.osmand.plus.measurementtool;
 
 import android.os.Bundle;
-import android.support.v7.widget.SwitchCompat;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "OptionsBottomSheetDialogFragment";
+	public static final String TAG = "OptionsBottomSheetDialogFragment";
+
+	public static final String SNAP_TO_ROAD_ENABLED_KEY = "snap_to_road_enabled";
+	public static final String ADD_LINE_MODE_KEY = "add_line_mode";
 
 	private OptionsFragmentListener listener;
-	private boolean addLineMode;
-	private boolean snapToRoadEnabled;
 
 	public void setListener(OptionsFragmentListener listener) {
 		this.listener = listener;
 	}
 
-	public void setAddLineMode(boolean addLineMode) {
-		this.addLineMode = addLineMode;
-	}
+	@Override
+	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		Bundle args = getArguments();
+		boolean snapToRoadEnabled = args.getBoolean(SNAP_TO_ROAD_ENABLED_KEY);
+		boolean addLineMode = args.getBoolean(ADD_LINE_MODE_KEY);
 
-	public void setSnapToRoadEnabled(boolean snapToRoadEnabled) {
-		this.snapToRoadEnabled = snapToRoadEnabled;
+		items.add(new TitleItem(getString(R.string.shared_string_options)));
+
+		BaseBottomSheetItem snapToRoadItem = new BottomSheetItemWithCompoundButton.Builder()
+				.setChecked(snapToRoadEnabled)
+				.setDescription(getString(snapToRoadEnabled ? R.string.shared_string_enabled : R.string.shared_string_disabled))
+				.setIcon(snapToRoadEnabled
+						? getActiveIcon(R.drawable.ic_action_snap_to_road)
+						: getContentIcon(R.drawable.ic_action_snap_to_road))
+				.setTitle(getString(R.string.snap_to_road))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.snapToRoadOnCLick();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(snapToRoadItem);
+
+		items.add(new DividerHalfItem(getContext()));
+
+		if (addLineMode) {
+			BaseBottomSheetItem saveAsNewSegmentItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_polygom_dark))
+					.setTitle(getString(R.string.shared_string_save))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (listener != null) {
+								listener.addToGpxOnClick();
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(saveAsNewSegmentItem);
+		} else {
+			BaseBottomSheetItem saveAsNewTrackItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_polygom_dark))
+					.setTitle(getString(R.string.shared_string_save_as_gpx))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (listener != null) {
+								listener.saveAsNewTrackOnClick();
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(saveAsNewTrackItem);
+
+			BaseBottomSheetItem addToTrackItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_split_interval))
+					.setTitle(getString(R.string.add_segment_to_the_track))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (listener != null) {
+								listener.addToTheTrackOnClick();
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(addToTrackItem);
+		}
+
+		items.add(new DividerHalfItem(getContext()));
+
+		BaseBottomSheetItem clearAllItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_reset_to_default_dark))
+				.setTitle(getString(R.string.shared_string_clear_all))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.clearAllOnClick();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(clearAllItem);
+
+		return null;
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_options_bottom_sheet_dialog, null);
-
-		if (nightMode) {
-			((TextViewEx) mainView.findViewById(R.id.options_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
-		}
-		if (snapToRoadEnabled) {
-			mainView.findViewById(R.id.snap_to_road_enabled_text_view).setVisibility(View.VISIBLE);
-			((SwitchCompat) mainView.findViewById(R.id.snap_to_road_switch)).setChecked(true);
-		}
-		((ImageView) mainView.findViewById(R.id.snap_to_road_icon)).setImageDrawable(snapToRoadEnabled
-				? getActiveIcon(R.drawable.ic_action_snap_to_road)
-				: getContentIcon(R.drawable.ic_action_snap_to_road));
-		((ImageView) mainView.findViewById(R.id.clear_all_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_reset_to_default_dark));
-		if (!addLineMode) {
-			((ImageView) mainView.findViewById(R.id.save_as_new_track_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
-			((ImageView) mainView.findViewById(R.id.add_to_the_track_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_split_interval));
-		} else {
-			mainView.findViewById(R.id.save_as_new_track_row).setVisibility(View.GONE);
-			mainView.findViewById(R.id.add_to_the_track_row).setVisibility(View.GONE);
-			mainView.findViewById(R.id.save_as_new_segment_row).setVisibility(View.VISIBLE);
-			((ImageView) mainView.findViewById(R.id.save_as_new_segment_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
-		}
-
-		mainView.findViewById(R.id.snap_to_road_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.snapToRoadOnCLick();
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.clear_all_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.clearAllOnClick();
-				}
-				dismiss();
-			}
-		});
-		if (!addLineMode) {
-			mainView.findViewById(R.id.save_as_new_track_row).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if (listener != null) {
-						listener.saveAsNewTrackOnClick();
-					}
-					dismiss();
-				}
-			});
-			mainView.findViewById(R.id.add_to_the_track_row).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if (listener != null) {
-						listener.addToTheTrackOnClick();
-					}
-					dismiss();
-				}
-			});
-		} else {
-			mainView.findViewById(R.id.save_as_new_segment_row).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if (listener != null) {
-						listener.addToGpxOnClick();
-					}
-					dismiss();
-				}
-			});
-		}
-		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
-
-		setupHeightAndBackground(mainView, R.id.measure_options_scroll_view);
-
-		return mainView;
+	protected int getCloseRowTextId() {
+		return R.string.shared_string_close;
 	}
 
 	interface OptionsFragmentListener {
