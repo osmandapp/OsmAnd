@@ -3698,4 +3698,16 @@
 	<string name="poi_health_specialty_depth_psychology_yes">Djúpsálfræði</string>
 	<string name="poi_health_specialty_palliative_medicine_yes">Líknarmeðferð</string>
 
-	</resources>
+	<string name="poi_crossing_activation_automatic">Virkjun þverunar: sjálfvirkt</string>
+	<string name="poi_crossing_activation_local">Virkjun þverunar: á staðnum</string>
+	<string name="poi_crossing_activation_remote">Virkjun þverunar: fjarstýrt</string>
+	<string name="poi_crossing_supervision_yes">Eftirlit með þverun</string>
+	<string name="poi_crossing_supervision_no">Eftirlit með þverun: nei</string>
+	<string name="poi_crossing_supervision_attendant">Eftirlit með þverun: vörður</string>
+	<string name="poi_crossing_supervision_camera">Eftirlit með þverun: myndavél</string>
+
+	<string name="poi_cuisine_savory_pancakes">Girnilegar pönnukökur</string>
+	<string name="poi_flooring">Gólfefnabúð</string>
+	<string name="poi_pottery">Leirkeragerð</string>
+
+</resources>
