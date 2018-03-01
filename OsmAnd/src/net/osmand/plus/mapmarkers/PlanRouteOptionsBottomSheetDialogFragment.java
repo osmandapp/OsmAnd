@@ -10,8 +10,8 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.DescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
@@ -87,7 +87,7 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 
 		items.add(new DividerItem(getContext()));
 
-		items.add(new DescriptionItem(getString(R.string.sort_by)));
+		items.add(new SubtitleItem(getString(R.string.sort_by)));
 
 		BaseBottomSheetItem doorToDoorItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_sort_door_to_door))

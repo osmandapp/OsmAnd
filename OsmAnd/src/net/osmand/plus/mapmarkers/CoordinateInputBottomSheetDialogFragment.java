@@ -125,13 +125,13 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 			row.setTag(format);
 			row.setOnClickListener(formatsOnClickListener);
 
-			((ImageView) row.findViewById(R.id.icon_iv)).setImageDrawable(selectedRow
+			((ImageView) row.findViewById(R.id.icon)).setImageDrawable(selectedRow
 					? getActiveIcon(R.drawable.ic_action_coordinates_latitude) : formatIcon);
-			TextView nameTv = (TextView) row.findViewById(R.id.name_tv);
+			TextView nameTv = (TextView) row.findViewById(R.id.title);
 			nameTv.setText(CoordinateInputFormats.formatToHumanString(context, format));
 			if (selectedRow) {
 				nameTv.setTextColor(getResolvedActiveColor());
-				RadioButton rb = (RadioButton) row.findViewById(R.id.radio_button);
+				RadioButton rb = (RadioButton) row.findViewById(R.id.compound_button);
 				rb.setChecked(true);
 				CompoundButtonCompat.setButtonTintList(rb, ColorStateList.valueOf(getResolvedActiveColor()));
 			}

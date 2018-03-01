@@ -13,7 +13,7 @@
 	android:paddingStart="@dimen/content_padding">
 
 	<ImageView
-		android:id="@+id/icon_iv"
+		android:id="@+id/icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
@@ -21,7 +21,7 @@
 		tools:src="@drawable/ic_action_coordinates_latitude"/>
 
 	<TextView
-		android:id="@+id/name_tv"
+		android:id="@+id/title"
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_marginEnd="@dimen/content_padding"
@@ -33,7 +33,7 @@
 		tools:text="@string/dd_mm_mmm_format"/>
 
 	<RadioButton
-		android:id="@+id/radio_button"
+		android:id="@+id/compound_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:background="@null"
