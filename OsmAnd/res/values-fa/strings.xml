@@ -1284,7 +1284,7 @@
     
     <string name="route_descr_destination">مقصد</string>
     <string name="create_poi_link_to_osm_doc">طبقه‌بندی نقشهٔ <u>آنلاین OSM</u> همراه با تصاویر.</string>
-	<string name="app_mode_hiking">پیاده روی</string>
+	<string name="app_mode_hiking">پیاده‌روی</string>
     <string name="app_mode_motorcycle">موتورسیکلت</string>
     <string name="app_mode_boat">قایق</string>
     <string name="app_mode_aircraft">هواپیما</string>
@@ -1780,7 +1780,7 @@
 	<string name="shared_string_export">صادرکردن</string>
 	<string name="voices">پیام‌های صوتی</string>
 	<string name="local_index_description">هر موردی را لمس کنید تا توضیحات بیشتری ببینید، برای غیرفعال یا پاک‌کردن لمس کنید و نگه دارید. داده‌های فعلی روی دستگاه (%1$s آزاد):</string>
-	<string name="speed_limit_exceed_message">حداکثر محدودیت سرعت را انتخاب کنید؛ با گذشتن از این سرعت، هشدار صوتی خواهید شنید.</string>
+	<string name="speed_limit_exceed_message">محدوده حداکثر سرعت را انتخاب کنید؛ با گذشتن از این مقدار، هشدار صوتی خواهید شنید.</string>
 	<string name="fav_point_emoticons_message">نام نقطهٔ برگزیده به %1$s تغییر کرد تا ذخیره‌سازی آن به‌همراه شکلک‌ها در فایل تسهیل شود.</string>
     <string name="rendering_attr_hideHouseNumbers_name">پلاک خانه‌ها</string>
     <string name="application_dir_change_warning3">آیا فایل‌های دادهٔ OsmAnd نیز به مکان جدید کپی شود؟</string>
