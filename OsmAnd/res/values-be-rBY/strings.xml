@@ -3030,4 +3030,6 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
 	<string name="optional_point_name">Nieabaviazkovaja nazva punkta</string>
     <string name="transport_nearby_routes_within">Maršruty pablizu z</string>
     <string name="transport_nearby_routes">PABLIZU</string>
+    <string name="distance_farthest">Adliehlasć: spačatku najdaliejšaja</string>
+    <string name="distance_nearest">Adliehlasć: spačatku najbližejšaja</string>
     </resources>
