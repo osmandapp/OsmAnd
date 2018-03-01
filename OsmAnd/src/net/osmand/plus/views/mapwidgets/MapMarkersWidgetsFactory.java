@@ -253,6 +253,10 @@ public class MapMarkersWidgetsFactory {
 			heading = -map.getMapRotate();
 		}
 
+		if (customLocation) {
+			heading = 0f;
+		}
+
 		boolean newImage = false;
 		DirectionDrawable dd;
 		if (!(arrowImg.getDrawable() instanceof DirectionDrawable)) {
