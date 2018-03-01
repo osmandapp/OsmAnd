@@ -3079,4 +3079,6 @@
     <string name="enter_lon">Увядзіце даўгату</string>
     <string name="enter_lat">Увядзіце шырату</string>
     <string name="enter_lat_and_lon">Увядзіце шырату і даўгату</string>
-	</resources>
+	<string name="distance_farthest">Адлегласць: спачатку найдалейшая</string>
+    <string name="distance_nearest">Адлегласць: спачатку найбліжэйшая</string>
+    </resources>
