@@ -10,7 +10,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -85,7 +85,7 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 				.create();
 		items.add(roundTripItem);
 
-		items.add(new DividerItem(getContext()));
+		items.add(new SubtitleDividerItem(getContext()));
 
 		items.add(new SubtitleItem(getString(R.string.sort_by)));
 
