@@ -1,15 +1,16 @@
 package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DescriptionItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 public class SelectionMarkersGroupBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -23,45 +24,48 @@ public class SelectionMarkersGroupBottomSheetDialogFragment extends MenuBottomSh
 
 	@Override
 	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_add_markers_group_bottom_sheet_dialog, container);
+		items.add(new TitleItem(getString(R.string.add_group)));
 
-		if (nightMode) {
-			((TextView) mainView.findViewById(R.id.add_group_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
-		}
+		items.add(new DescriptionItem(getString(R.string.add_group_descr)));
 
-		((ImageView) mainView.findViewById(R.id.favourites_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_fav_dark));
-		((ImageView) mainView.findViewById(R.id.waypoints_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
+		BaseBottomSheetItem favoritesItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_fav_dark))
+				.setTitle(getString(R.string.favourites_group))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.favouritesOnClick();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(favoritesItem);
 
-		mainView.findViewById(R.id.favourites_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.favouritesOnClick();
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.waypoints_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.waypointsOnClick();
-				}
-				dismiss();
-			}
-		});
+		BaseBottomSheetItem waypointsItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_polygom_dark))
+				.setTitle(getString(R.string.track_waypoints))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.waypointsOnClick();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(waypointsItem);
 
-		mainView.findViewById(R.id.close_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
+		return null;
+	}
 
-		setupHeightAndBackground(mainView, R.id.add_markers_group_scroll_view);
-
-		return mainView;
+	@Override
+	protected int getCloseRowTextId() {
+		return 	R.string.shared_string_close;
 	}
 
 	interface AddMarkersGroupFragmentListener {
