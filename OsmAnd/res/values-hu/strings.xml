@@ -3009,4 +3009,44 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="toast_empty_name_error">A helységnek nincs neve</string>
     <string name="tunnel_warning">Alagút közeledik</string>
     <string name="show_tunnels">Alagutak</string>
-</resources>
+<string name="distance_farthest">Távolság: legtávolabbi először</string>
+    <string name="distance_nearest">Távolság: legközelebbi először</string>
+    <string name="enter_lon">Hosszúság megadása</string>
+    <string name="enter_lat">Szélesség megadása</string>
+    <string name="enter_lat_and_lon">Szélesség és hosszúság megadása</string>
+	<string name="dd_mm_ss_format">FF°PP′MM″</string>
+	<string name="dd_dddddd_format">FF.FFFFFF°</string>
+	<string name="dd_ddddd_format">FF.FFFFF°</string>
+	<string name="dd_mm_mmmm_format">FF°PP.PPPP′</string>
+	<string name="dd_mm_mmm_format">FF°PP.PPP′</string>
+	<string name="east_abbreviation">K</string>
+	<string name="west_abbreviation">Ny</string>
+	<string name="south_abbreviation">D</string>
+	<string name="north_abbreviation">É</string>
+	<string name="optional_point_name">Opcionális pont név</string>
+    <string name="enter_the_file_name">Add meg a fájl nevét.</string>
+    <string name="map_import_error">Térképimportálási hiba</string>
+    <string name="map_imported_successfully">Térkép sikeresen importálva</string>
+    <string name="release_2_9">• Frissített környezeti menü: megjelenik POI nyitás / zárás ideje
+\n
+\n • Tömegközlekedés menü: már az összes elérhető út megjelenik a tetején
+\n
+\n • Wikipédia: eredeti cikk megnyitása gomb, valamint frissített szócikk megjelenítés
+\n
+\n • Útvonal: kezdő és végpont megcserélése egy kattintással
+\n
+\n • Jegyzetek: már rendezhető típus és dátum szerint
+\n
+\n • OSM szerkesztések: ikon és POI kategória nevének megjelenítése, befejezett műveletek kijelzése
+\n
+\n • Új gyors koordinátabeviteli képernyő jelölők gyors létrehozásához
+\n
+\n • A stoptábláknál a tervező már figyelembe veszi a haladási irányt
+\n
+\n • Új, pontosabb algoritmus a GPX nyomvonalak emelkedő/lejtő számításánál
+\n
+\n • Emelkedőket figyelembe vevő menetidő kalkuláció (Naismith-szabály)
+\n
+\n</string>
+    <string name="osm_recipient_stat">Szerkesztések: %1$s, összeg %2$s mBTC</string>
+    </resources>
