@@ -3065,7 +3065,7 @@
 	<string name="west_abbreviation">W</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
-	<string name="optional_point_name">نام نقطه اختیاری</string>
+	<string name="optional_point_name">نام اختیاری نقطه</string>
     <string name="transport_nearby_routes_within">مسیرهای نزدیک به</string>
     <string name="transport_nearby_routes">نزدیک</string>
     </resources>
