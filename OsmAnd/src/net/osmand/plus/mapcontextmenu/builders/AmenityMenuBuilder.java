@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
@@ -290,9 +291,22 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					intent.setData(Uri.parse(text));
-					v.getContext().startActivity(intent);
+					if (textPrefix.equals("Wikipedia")) {
+						if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+							CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+									.setToolbarColor(ContextCompat.getColor(v.getContext(), !light ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
+									.build();
+							customTabsIntent.launchUrl(v.getContext(), Uri.parse(text));
+						} else {
+							Intent i = new Intent(Intent.ACTION_VIEW);
+							i.setData(Uri.parse(text));
+							v.getContext().startActivity(i);
+						}
+					} else {
+						Intent intent = new Intent(Intent.ACTION_VIEW);
+						intent.setData(Uri.parse(text));
+						v.getContext().startActivity(intent);
+					}
 				}
 			});
 		} else if (isWiki) {
