@@ -2068,4 +2068,5 @@
     <string name="measurement_tool_snap_to_road_descr">OsmAnd seçilmiş profil üçün nöqtələri marşrut ilə birləşdirəcək.</string>
     <string name="save_track_min_speed_descr">Filtr: Bir nöqtə üçün minimum qeydiyyat sürəti seçin.</string>
     <string name="access_smart_autoannounce_descr">Yalnız hədəf nöqtəyə istiqamət dəyişilən zaman bildir.</string>
+    <string name="plugin_mapillary_descr">Hər kəs üçün küçə səviyyəli şəkillər. Yerləri kəşf edin, əməkdaşlıq edin, dünyanı çəkin.</string>
     </resources>
