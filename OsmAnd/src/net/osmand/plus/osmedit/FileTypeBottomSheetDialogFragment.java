@@ -2,9 +2,7 @@ package net.osmand.plus.osmedit;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -25,7 +23,7 @@ public class FileTypeBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.choose_file_type)));
 
 		Drawable fileIcon = getContentIcon(R.drawable.ic_type_file);
@@ -65,8 +63,6 @@ public class FileTypeBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 				})
 				.create();
 		items.add(gpxItem);
-
-		return null;
 	}
 
 	public interface FileTypeFragmentListener {

@@ -2,9 +2,7 @@ package net.osmand.plus.mapmarkers;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarkersSortByDef;
@@ -26,7 +24,7 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		Drawable distanceIcon = getContentIcon(R.drawable.ic_action_markers_dark);
 		Drawable dateIcon = getContentIcon(R.drawable.ic_action_sort_by_date);
 
@@ -115,8 +113,6 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				})
 				.create();
 		items.add(dateDescItem);
-
-		return null;
 	}
 
 	@Override

@@ -1,9 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
@@ -34,7 +32,7 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle arguments = getArguments();
 
 		if (arguments != null) {
@@ -91,8 +89,6 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 					.create();
 			items.add(deleteItem);
 		}
-
-		return null;
 	}
 
 	@Override

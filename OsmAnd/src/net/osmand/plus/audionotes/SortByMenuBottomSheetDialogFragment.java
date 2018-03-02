@@ -1,9 +1,7 @@
 package net.osmand.plus.audionotes;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.NotesSortByMode;
@@ -24,7 +22,7 @@ public class SortByMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.shared_string_sort)));
 
 		BaseBottomSheetItem byTypeItem = new SimpleBottomSheetItem.Builder()
@@ -52,8 +50,6 @@ public class SortByMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 				})
 				.create();
 		items.add(byDateItem);
-
-		return null;
 	}
 
 	private void selectSortByMode(NotesSortByMode mode) {

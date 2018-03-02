@@ -746,7 +746,7 @@ public class ImportHelper {
 		}
 
 		@Override
-		public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		public void createMenuItems(Bundle savedInstanceState) {
 			items.add(new TitleItem(getString(R.string.import_file)));
 
 			int nameColor = getResolvedColor(nightMode ? R.color.osmand_orange : R.color.dashboard_blue);
@@ -787,8 +787,6 @@ public class ImportHelper {
 					})
 					.create();
 			items.add(asGpxItem);
-
-			return null;
 		}
 
 		@ColorInt

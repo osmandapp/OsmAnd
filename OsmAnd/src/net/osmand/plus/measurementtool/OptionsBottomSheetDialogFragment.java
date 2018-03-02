@@ -1,9 +1,7 @@
 package net.osmand.plus.measurementtool;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -27,7 +25,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		boolean snapToRoadEnabled = args.getBoolean(SNAP_TO_ROAD_ENABLED_KEY);
 		boolean addLineMode = args.getBoolean(ADD_LINE_MODE_KEY);
@@ -123,8 +121,6 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				})
 				.create();
 		items.add(clearAllItem);
-
-		return null;
 	}
 
 	@Override

@@ -1,9 +1,7 @@
 package net.osmand.plus.osmedit;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -29,7 +27,7 @@ public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		if (args != null) {
 			poiCount = args.getInt(POI_COUNT_KEY);
@@ -93,8 +91,6 @@ public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 				})
 				.create();
 		items.add(allDataItem);
-
-		return null;
 	}
 
 	public interface ExportOptionsFragmentListener {

@@ -8,9 +8,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -32,7 +30,7 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 	public static final String POINT_DESCRIPTION_KEY = "point_description";
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		final LatLon latLon = new LatLon(args.getDouble(LAT_KEY), args.getDouble(LON_KEY));
 		final PointDescription name = PointDescription.deserializeFromString(args.getString(POINT_DESCRIPTION_KEY), latLon);
@@ -128,8 +126,6 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				})
 				.create();
 		items.add(lastIntermItem);
-
-		return null;
 	}
 
 	@Override

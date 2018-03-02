@@ -1,9 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -23,7 +21,7 @@ public class SelectionMarkersGroupBottomSheetDialogFragment extends MenuBottomSh
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.add_group)));
 
 		items.add(new DescriptionItem(getString(R.string.add_group_descr)));
@@ -59,8 +57,6 @@ public class SelectionMarkersGroupBottomSheetDialogFragment extends MenuBottomSh
 				})
 				.create();
 		items.add(waypointsItem);
-
-		return null;
 	}
 
 	@Override

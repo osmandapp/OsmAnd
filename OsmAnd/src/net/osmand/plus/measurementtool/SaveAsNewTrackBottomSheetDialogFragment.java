@@ -3,10 +3,8 @@ package net.osmand.plus.measurementtool;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import net.osmand.plus.R;
@@ -27,7 +25,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.shared_string_save_as_gpx)));
 
 		items.add(new DescriptionItem(getString(R.string.measurement_tool_save_as_new_track_descr)));
@@ -75,8 +73,6 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 				.setOnClickListener(saveAsLineOnClickListener)
 				.create();
 		items.add(saveAsLineItem);
-
-		return null;
 	}
 
 	private View.OnClickListener saveAsLineOnClickListener = new View.OnClickListener() {

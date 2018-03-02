@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
@@ -36,7 +34,7 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.fragment_marker_add_group_bottom_sheet_dialog, null);
@@ -68,8 +66,6 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 		recyclerView.setAdapter(adapter);
 
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
-
-		return null;
 	}
 
 	@Override

@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
@@ -36,7 +34,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getDescription())
 				.setIcon(getActiveIcon(R.drawable.ic_action_measure_point))
@@ -112,8 +110,6 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 				})
 				.create();
 		items.add(addBeforeItem);
-
-		return null;
 	}
 
 	@Override

@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -51,7 +49,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		final Context context = getContext();
 		final OsmandSettings settings = getMyApplication().getSettings();
 
@@ -135,8 +133,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 					.create();
 			items.add(formatItem);
 		}
-
-		return null;
 	}
 
 	@Override

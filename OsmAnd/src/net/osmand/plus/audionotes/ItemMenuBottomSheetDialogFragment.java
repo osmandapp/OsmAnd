@@ -1,9 +1,7 @@
 package net.osmand.plus.audionotes;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.R;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
@@ -31,7 +29,7 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		if (recording != null) {
 			items.add(new TitleItem(recording.getName(getContext(), true)));
 
@@ -118,8 +116,6 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 					.create();
 			items.add(deleteItem);
 		}
-
-		return null;
 	}
 
 	@Override

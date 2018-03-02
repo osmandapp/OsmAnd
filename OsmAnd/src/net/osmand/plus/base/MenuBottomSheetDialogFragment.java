@@ -55,10 +55,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		View view = createMenuItems(inflater, parent, savedInstanceState);
-		if (view != null) {
-			return view;
-		}
+		createMenuItems(savedInstanceState);
 
 		OsmandApplication app = getMyApplication();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -115,8 +112,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		}
 	}
 
-	// inflater, parent and return value are temporary and will be deleted
-	public abstract View createMenuItems(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState);
+	public abstract void createMenuItems(Bundle savedInstanceState);
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {

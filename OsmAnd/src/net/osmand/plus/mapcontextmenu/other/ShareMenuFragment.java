@@ -1,9 +1,7 @@
 package net.osmand.plus.mapcontextmenu.other;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -28,7 +26,7 @@ public class ShareMenuFragment extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.share_menu_location)));
 
 		View.OnClickListener itemOnClickListener = new View.OnClickListener() {
@@ -49,8 +47,6 @@ public class ShareMenuFragment extends MenuBottomSheetDialogFragment {
 					.create();
 			items.add(item);
 		}
-
-		return null;
 	}
 
 	@Override

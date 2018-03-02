@@ -1,9 +1,7 @@
 package net.osmand.plus.osmedit;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -25,7 +23,7 @@ public class OsmEditOptionsBottomSheetDialogFragment extends MenuBottomSheetDial
 	}
 
 	@Override
-	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		if (args != null) {
 			final OsmPoint osmPoint = (OsmPoint) args.getSerializable(OSM_POINT);
@@ -118,8 +116,6 @@ public class OsmEditOptionsBottomSheetDialogFragment extends MenuBottomSheetDial
 					.create();
 			items.add(deleteItem);
 		}
-
-		return null;
 	}
 
 	@Override
