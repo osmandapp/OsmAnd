@@ -7,10 +7,8 @@
 	android:background="?attr/selectableItemBackground"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
-	android:paddingEnd="@dimen/content_padding_small"
 	android:paddingLeft="@dimen/content_padding"
-	android:paddingRight="@dimen/content_padding_small"
-	android:paddingStart="@dimen/content_padding">
+	android:paddingRight="@dimen/content_padding">
 
 	<ImageView
 		android:id="@+id/icon"
@@ -30,15 +28,16 @@
 		android:ellipsize="end"
 		android:maxLines="1"
 		android:textAppearance="@style/TextAppearance.ListItemTitle"
-		tools:text="@string/dd_mm_mmm_format"/>
+		tools:text="Some Title"/>
 
-	<RadioButton
+	<android.support.v7.widget.SwitchCompat
 		android:id="@+id/compound_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical|end"
 		android:background="@null"
 		android:clickable="false"
 		android:focusable="false"
-		android:saveEnabled="false"/>
+		android:focusableInTouchMode="false"/>
 
 </LinearLayout>

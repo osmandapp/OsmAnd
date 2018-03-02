@@ -150,9 +150,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 		}
 		Fragment optionsFragment = fragmentManager.findFragmentByTag(PlanRouteOptionsBottomSheetDialogFragment.TAG);
 		if (optionsFragment != null) {
-			PlanRouteOptionsBottomSheetDialogFragment fragment = (PlanRouteOptionsBottomSheetDialogFragment) optionsFragment;
-			fragment.setSelectAll(!(selectedCount == markersHelper.getMapMarkers().size() && markersHelper.isStartFromMyLocation()));
-			fragment.setListener(createOptionsFragmentListener());
+			((PlanRouteOptionsBottomSheetDialogFragment) optionsFragment).setListener(createOptionsFragmentListener());
 		}
 
 		toolbarHeight = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
@@ -722,9 +720,12 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	private void optionsOnClick() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			Bundle args = new Bundle();
+			args.putBoolean(PlanRouteOptionsBottomSheetDialogFragment.SELECT_ALL_KEY,
+					!(selectedCount == markersHelper.getMapMarkers().size() && markersHelper.isStartFromMyLocation()));
 			PlanRouteOptionsBottomSheetDialogFragment fragment = new PlanRouteOptionsBottomSheetDialogFragment();
+			fragment.setArguments(args);
 			fragment.setUsedOnMap(true);
-			fragment.setSelectAll(!(selectedCount == markersHelper.getMapMarkers().size() && markersHelper.isStartFromMyLocation()));
 			fragment.setListener(createOptionsFragmentListener());
 			fragment.show(mapActivity.getSupportFragmentManager(), PlanRouteOptionsBottomSheetDialogFragment.TAG);
 		}

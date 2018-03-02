@@ -4,22 +4,40 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	private static final String USED_ON_MAP_KEY = "used_on_map";
 
+	protected List<BaseBottomSheetItem> items = new ArrayList<>();
+
 	protected boolean usedOnMap = true;
 	protected boolean nightMode;
+
+	private LinearLayout itemsContainer;
 
 	public void setUsedOnMap(boolean usedOnMap) {
 		this.usedOnMap = usedOnMap;
@@ -32,6 +50,40 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
 		}
 		nightMode = isNightMode();
+	}
+
+	@Nullable
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+		createMenuItems(savedInstanceState);
+
+		OsmandApplication app = getMyApplication();
+		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+
+		View mainView = View.inflate(new ContextThemeWrapper(app, themeRes), R.layout.bottom_sheet_menu_base, null);
+		itemsContainer = (LinearLayout) mainView.findViewById(R.id.items_container);
+
+		for (BaseBottomSheetItem item : items) {
+			item.inflate(app, itemsContainer, nightMode);
+		}
+
+		int closeRowDividerColorId = getCloseRowDividerColorId();
+		if (closeRowDividerColorId != -1) {
+			mainView.findViewById(R.id.close_row_divider)
+					.setBackgroundColor(ContextCompat.getColor(getContext(), closeRowDividerColorId));
+		}
+		mainView.findViewById(R.id.close_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onCloseRowClickAction();
+				dismiss();
+			}
+		});
+		((TextView) mainView.findViewById(R.id.close_row_text)).setText(getCloseRowTextId());
+
+		setupHeightAndBackground(mainView, R.id.scroll_view);
+
+		return mainView;
 	}
 
 	@Override
@@ -50,6 +102,17 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(USED_ON_MAP_KEY, usedOnMap);
 	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		items.clear();
+		if (itemsContainer != null) {
+			itemsContainer.removeAllViews();
+		}
+	}
+
+	public abstract void createMenuItems(Bundle savedInstanceState);
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
@@ -97,6 +160,20 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				}
 			}
 		});
+	}
+
+	@ColorRes
+	protected int getCloseRowDividerColorId() {
+		return -1;
+	}
+
+	@StringRes
+	protected int getCloseRowTextId() {
+		return R.string.shared_string_cancel;
+	}
+
+	protected void onCloseRowClickAction() {
+
 	}
 
 	@DrawableRes

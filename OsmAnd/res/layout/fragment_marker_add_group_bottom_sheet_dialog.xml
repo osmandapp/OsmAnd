@@ -11,8 +11,7 @@
         android:id="@+id/groups_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:paddingBottom="@dimen/bottom_sheet_content_padding_small"/>
+        android:clipToPadding="false"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -35,27 +34,5 @@
         android:visibility="gone"
         osmand:typeface="@string/font_roboto_medium"
         tools:visibility="visible"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/dashboard_divider"/>
-
-    <FrameLayout
-        android:id="@+id/close_row"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_sheet_cancel_button_height"
-        android:background="?attr/selectableItemBackground">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/shared_string_cancel"
-            android:textAllCaps="true"
-            android:textColor="?attr/color_dialog_buttons"
-            android:textSize="@dimen/default_desc_text_size"
-            android:textStyle="bold"/>
-    </FrameLayout>
 
 </LinearLayout>

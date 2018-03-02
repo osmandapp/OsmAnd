@@ -1,18 +1,15 @@
 package net.osmand.plus.audionotes;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.NotesSortByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 public class SortByMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -24,39 +21,35 @@ public class SortByMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		this.listener = listener;
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+	public void createMenuItems(Bundle savedInstanceState) {
+		items.add(new TitleItem(getString(R.string.shared_string_sort)));
 
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.fragment_notes_sort_bottom_sheet_dialog, null);
+		BaseBottomSheetItem byTypeItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_groped_by_type))
+				.setTitle(getString(R.string.by_type))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						selectSortByMode(NotesSortByMode.BY_TYPE);
+					}
+				})
+				.create();
+		items.add(byTypeItem);
 
-		((ImageView) mainView.findViewById(R.id.by_type_icon)).setImageDrawable(getContentIcon(R.drawable.ic_groped_by_type));
-		((ImageView) mainView.findViewById(R.id.by_date_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_sort_by_date));
-
-		mainView.findViewById(R.id.by_type_row).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				selectSortByMode(NotesSortByMode.BY_TYPE);
-			}
-		});
-		mainView.findViewById(R.id.by_date_row).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				selectSortByMode(NotesSortByMode.BY_DATE);
-			}
-		});
-		mainView.findViewById(R.id.close_row).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
-
-		setupHeightAndBackground(mainView, R.id.scroll_view);
-
-		return mainView;
+		BaseBottomSheetItem byDateItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_sort_by_date))
+				.setTitle(getString(R.string.by_date))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						selectSortByMode(NotesSortByMode.BY_DATE);
+					}
+				})
+				.create();
+		items.add(byDateItem);
 	}
 
 	private void selectSortByMode(NotesSortByMode mode) {
