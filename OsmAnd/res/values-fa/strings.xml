@@ -1335,7 +1335,7 @@
     <string name="keep_and_add_destination_point">افزودن به‌عنوان مقصد آخر</string>
     
     <string name="calculate_osmand_route_without_internet">محاسبهٔ مسیر بدون استفاده از اینترنت</string>
-    <string name="gpx_option_calculate_first_last_segment">برای قطعهٔ ابتدایی و قطعهٔ انتهای مسیر، مسیریابی کن</string>
+    <string name="gpx_option_calculate_first_last_segment">برای قطعهٔ ابتدایی و انتهایی مسیر، مسیریابی کن</string>
     <string name="index_item_nation_addresses">نشانی‌های سراسری</string>
 	<string name="index_item_world_altitude_correction">اصلاح ارتفاع جهانی</string>
 	<string name="index_item_world_seamarks">علائم دریایی جهانی</string>
