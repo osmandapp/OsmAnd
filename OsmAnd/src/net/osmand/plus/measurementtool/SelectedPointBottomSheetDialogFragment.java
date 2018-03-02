@@ -1,20 +1,25 @@
 package net.osmand.plus.measurementtool;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
 import net.osmand.plus.measurementtool.NewGpxData.ActionType;
 import net.osmand.util.MapUtils;
 
@@ -32,114 +37,83 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Override
 	public View createMenuItems(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final MapActivity mapActivity = (MapActivity) getActivity();
-		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getDescription())
+				.setIcon(getActiveIcon(R.drawable.ic_action_measure_point))
+				.setTitle(getTitle())
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.create();
+		items.add(titleItem);
 
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_selected_menu_bottom_sheet_dialog, null);
+		items.add(new TitleDividerItem(getContext()));
 
-		((ImageView) mainView.findViewById(R.id.selected_point_icon)).setImageDrawable(getActiveIcon(R.drawable.ic_action_measure_point));
-		((ImageView) mainView.findViewById(R.id.move_point_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_move_point));
-		((ImageView) mainView.findViewById(R.id.delete_point_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
-		((ImageView) mainView.findViewById(R.id.add_point_after_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_addpoint_above));
-		((ImageView) mainView.findViewById(R.id.add_point_before_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_addpoint_below));
+		BaseBottomSheetItem moveItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_move_point))
+				.setTitle(getString(R.string.shared_string_move))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.moveOnClick();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(moveItem);
 
-		mainView.findViewById(R.id.move_point_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.moveOnClick();
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.delete_point_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.deleteOnClick();
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.add_point_after_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.addPointAfterOnClick();
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.add_point_before_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.addPointBeforeOnClick();
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.onClearSelection();
-				}
-				dismiss();
-			}
-		});
+		BaseBottomSheetItem deleteItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_remove_dark))
+				.setTitle(getString(R.string.shared_string_delete))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.deleteOnClick();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(deleteItem);
 
-		List<WptPt> points = measurementLayer.getEditingCtx().getPoints();
-		int pos = measurementLayer.getEditingCtx().getSelectedPointPosition();
-		WptPt pt = points.get(pos);
-		String pointTitle = pt.name;
-		if (!TextUtils.isEmpty(pointTitle)) {
-			((TextView) mainView.findViewById(R.id.selected_point_title)).setText(pointTitle);
-		} else {
-			NewGpxData newGpxData = measurementLayer.getEditingCtx().getNewGpxData();
-			if (newGpxData != null) {
-				ActionType actionType = measurementLayer.getEditingCtx().getNewGpxData().getActionType();
-				if (actionType == ActionType.ADD_ROUTE_POINTS) {
-					((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.route_point) + " - " + (pos + 1));
-				} else {
-					((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
-				}
-			} else {
-				((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
-			}
-		}
-		String pointDesc = pt.desc;
-		if (!TextUtils.isEmpty(pointDesc)) {
-			((TextView) mainView.findViewById(R.id.selected_point_distance)).setText(pointDesc);
-		} else {
-			if (pos < 1) {
-				((TextView) mainView.findViewById(R.id.selected_point_distance)).setText(mapActivity.getString(R.string.shared_string_control_start));
-			} else {
-				float dist = 0;
-				for (int i = 1; i <= pos; i++) {
-					dist += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon, points.get(i).lat, points.get(i).lon);
-				}
-				((TextView) mainView.findViewById(R.id.selected_point_distance)).setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
-			}
-		}
-		NewGpxData newGpxData = measurementLayer.getEditingCtx().getNewGpxData();
-		if (newGpxData != null && newGpxData.getActionType() == ActionType.EDIT_SEGMENT) {
-			double elevation = pt.ele;
-			if (!Double.isNaN(elevation)) {
-				String eleStr = (mapActivity.getString(R.string.altitude)).substring(0, 1);
-				((TextView) mainView.findViewById(R.id.selected_point_ele)).setText(eleStr + ": " + OsmAndFormatter.getFormattedAlt(elevation, mapActivity.getMyApplication()));
-			}
-			float speed = (float) pt.speed;
-			if (speed != 0) {
-				String speedStr = (mapActivity.getString(R.string.map_widget_speed)).substring(0, 1);
-				((TextView) mainView.findViewById(R.id.selected_point_speed)).setText(speedStr + ": " + OsmAndFormatter.getFormattedSpeed(speed, mapActivity.getMyApplication()));
-			}
-		}
+		items.add(new DividerHalfItem(getContext()));
 
-		setupHeightAndBackground(mainView, R.id.selected_point_options_scroll_view);
+		BaseBottomSheetItem addAfterItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_addpoint_above))
+				.setTitle(getString(R.string.add_point_after))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.addPointAfterOnClick();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(addAfterItem);
 
-		return mainView;
+		BaseBottomSheetItem addBeforeItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_addpoint_below))
+				.setTitle(getString(R.string.add_point_before))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.addPointBeforeOnClick();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(addBeforeItem);
+
+		return null;
 	}
 
 	@Override
@@ -157,6 +131,96 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 			listener.onClearSelection();
 		}
 		super.onCancel(dialog);
+	}
+
+	@Override
+	protected int getCloseRowTextId() {
+		return R.string.shared_string_close;
+	}
+
+	@Override
+	protected void onCloseRowClickAction() {
+		if (listener != null) {
+			listener.onClearSelection();
+		}
+	}
+
+	@Nullable
+	private MapActivity getMapActivity() {
+		Activity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			return (MapActivity) activity;
+		}
+		return null;
+	}
+
+	@NonNull
+	private String getTitle() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return "";
+		}
+
+		MeasurementEditingContext editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
+		int pos = editingCtx.getSelectedPointPosition();
+
+		String pointName = editingCtx.getPoints().get(pos).name;
+		if (!TextUtils.isEmpty(pointName)) {
+			return pointName;
+		}
+
+		NewGpxData newGpxData = editingCtx.getNewGpxData();
+		if (newGpxData != null && newGpxData.getActionType() == ActionType.ADD_ROUTE_POINTS) {
+			return getString(R.string.route_point) + " - " + (pos + 1);
+		}
+
+		return getString(R.string.plugin_distance_point) + " - " + (pos + 1);
+	}
+
+	@NonNull
+	private String getDescription() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return "";
+		}
+
+		StringBuilder description = new StringBuilder();
+
+		MeasurementEditingContext editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
+		int pos = editingCtx.getSelectedPointPosition();
+		List<WptPt> points = editingCtx.getPoints();
+		WptPt pt = points.get(pos);
+
+		String pointDesc = pt.desc;
+		if (!TextUtils.isEmpty(pointDesc)) {
+			description.append(pointDesc);
+		} else if (pos < 1) {
+			description.append(getString(R.string.shared_string_control_start));
+		} else {
+			float dist = 0;
+			for (int i = 1; i <= pos; i++) {
+				WptPt first = points.get(i - 1);
+				WptPt second = points.get(i);
+				dist += MapUtils.getDistance(first.lat, first.lon, second.lat, second.lon);
+			}
+			description.append(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
+		}
+
+		NewGpxData newGpxData = editingCtx.getNewGpxData();
+		if (newGpxData != null && newGpxData.getActionType() == ActionType.EDIT_SEGMENT) {
+			double elevation = pt.ele;
+			if (!Double.isNaN(elevation)) {
+				description.append("  ").append((getString(R.string.altitude)).substring(0, 1)).append(": ");
+				description.append(OsmAndFormatter.getFormattedAlt(elevation, mapActivity.getMyApplication()));
+			}
+			float speed = (float) pt.speed;
+			if (speed != 0) {
+				description.append("  ").append((getString(R.string.map_widget_speed)).substring(0, 1)).append(": ");
+				description.append(OsmAndFormatter.getFormattedSpeed(speed, mapActivity.getMyApplication()));
+			}
+		}
+
+		return description.toString();
 	}
 
 	interface SelectedPointFragmentListener {

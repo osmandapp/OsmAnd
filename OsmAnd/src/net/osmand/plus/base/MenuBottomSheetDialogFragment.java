@@ -78,6 +78,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		mainView.findViewById(R.id.close_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				onCloseRowClickAction();
 				dismiss();
 			}
 		});
@@ -173,6 +174,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	@StringRes
 	protected int getCloseRowTextId() {
 		return R.string.shared_string_cancel;
+	}
+
+	protected void onCloseRowClickAction() {
+
 	}
 
 	@DrawableRes
