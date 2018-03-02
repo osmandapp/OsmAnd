@@ -182,7 +182,7 @@ public class WikipediaDialogFragment extends DialogFragment {
 				@Override
 				public void onClick(View view) {
 					String article = "https://" + langSelected.toLowerCase() + ".wikipedia.org/wiki/" + title.replace(' ', '_');
-					showFullArticle(view.getContext(), darkMode, Uri.parse(article));
+					showFullArticle(getContext(), darkMode, Uri.parse(article));
 				}
 			});
 
