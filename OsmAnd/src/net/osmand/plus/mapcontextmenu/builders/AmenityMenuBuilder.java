@@ -291,13 +291,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (textPrefix.equals("Wikipedia")) {
-						if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-							CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-									.setToolbarColor(ContextCompat.getColor(v.getContext(), !light ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
-									.build();
-							customTabsIntent.launchUrl(v.getContext(), Uri.parse(text));
-						}
+					if (textPrefix.equals("Wikipedia") && (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH)) {
+						CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+								.setToolbarColor(ContextCompat.getColor(v.getContext(), !light ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
+								.build();
+						customTabsIntent.launchUrl(v.getContext(), Uri.parse(text));
 					} else {
 						Intent intent = new Intent(Intent.ACTION_VIEW);
 						intent.setData(Uri.parse(text));
