@@ -297,10 +297,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 									.setToolbarColor(ContextCompat.getColor(v.getContext(), !light ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
 									.build();
 							customTabsIntent.launchUrl(v.getContext(), Uri.parse(text));
-						} else {
-							Intent i = new Intent(Intent.ACTION_VIEW);
-							i.setData(Uri.parse(text));
-							v.getContext().startActivity(i);
 						}
 					} else {
 						Intent intent = new Intent(Intent.ACTION_VIEW);
