@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
@@ -181,7 +182,7 @@ public class WikipediaDialogFragment extends DialogFragment {
 				@Override
 				public void onClick(View view) {
 					String article = "https://" + langSelected.toLowerCase() + ".wikipedia.org/wiki/" + title.replace(' ', '_');
-					showFullArticle(Uri.parse(article));
+					showFullArticle(view.getContext(), darkMode, Uri.parse(article));
 				}
 			});
 
@@ -207,16 +208,16 @@ public class WikipediaDialogFragment extends DialogFragment {
 		}
 	}
 
-	private void showFullArticle(Uri uri) {
+	public static void showFullArticle(Context context, boolean nightMode, Uri uri) {
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-					.setToolbarColor(ContextCompat.getColor(getContext(), darkMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
+					.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
 					.build();
-			customTabsIntent.launchUrl(getContext(), uri);
+			customTabsIntent.launchUrl(context, uri);
 		} else {
 			Intent i = new Intent(Intent.ACTION_VIEW);
 			i.setData(uri);
-			startActivity(i);
+			context.startActivity(i);
 		}
 	}
 
