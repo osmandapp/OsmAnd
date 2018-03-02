@@ -174,7 +174,7 @@ public class WikipediaDialogFragment extends DialogFragment {
 			}
 
 			final String langSelected = lng;
-			final String title = TextUtils.isEmpty(preferredLanguage) ? amenity.getName() : amenity.getName(langSelected);
+			final String title = amenity.getName(langSelected);
 			((TextView) mainView.findViewById(R.id.title_text_view)).setText(title);
 
 			mainView.findViewById(R.id.read_full_article).setOnClickListener(new View.OnClickListener() {
