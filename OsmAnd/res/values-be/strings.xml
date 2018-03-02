@@ -3047,7 +3047,7 @@
 <string name="shared_string_current">Цяперашні</string>
     <string name="last_intermediate_dest_description">Дадае апошні прыпынак на маршруце</string>
     <string name="first_intermediate_dest_description">Дадае першы прыпынак на маршруце</string>
-    <string name="subsequent_dest_description">Перасунуць празначэнне далей і стварыць прызначэнне</string>
+    <string name="subsequent_dest_description">Перасунуць прызначэньне далей і стварыць прызначэньне</string>
     <string name="show_closed_notes">Паказаць закрытыя нататкі</string>
     <string name="switch_osm_notes_visibility_desc">Паказаць/схаваць OSM-нататкі на мапе.</string>
     <string name="gpx_file_desc">GPX падыходзіць для экспарту ў JOSM і іншыя OSM-рэдактары.</string>
@@ -3062,13 +3062,13 @@
     <string name="show_tunnels">Тунэлі</string>
 <string name="make_as_start_point">Зрабіць пачатковай кропкай</string>
     <string name="map_import_error">Памылка імпарту мапы</string>
-    <string name="map_imported_successfully">Мапа паспяховая імпартаваная</string>
+    <string name="map_imported_successfully">Мапа пасьпяховая імпартаваная</string>
     <string name="enter_the_file_name">Увядзіце імя файла.</string>
-    <string name="dd_mm_ss_format">DD°MM′SS″</string>
+    <string name="dd_mm_ss_format">DD°MM\'SS\"</string>
 	<string name="dd_dddddd_format">DD,DDDDDD°</string>
 	<string name="dd_ddddd_format">DD,DDDDD°</string>
-	<string name="dd_mm_mmmm_format">DD°MM,MMMM′</string>
-	<string name="dd_mm_mmm_format">DD°MM,MMM′</string>
+	<string name="dd_mm_mmmm_format">DD°MM,MMMM\'</string>
+	<string name="dd_mm_mmm_format">DD°MM,MMM\'</string>
 	<string name="east_abbreviation">У</string>
 	<string name="west_abbreviation">З</string>
 	<string name="south_abbreviation">Пд</string>
@@ -3079,6 +3079,6 @@
     <string name="enter_lon">Увядзіце даўгату</string>
     <string name="enter_lat">Увядзіце шырату</string>
     <string name="enter_lat_and_lon">Увядзіце шырату і даўгату</string>
-	<string name="distance_farthest">Адлегласць: спачатку найдалейшая</string>
-    <string name="distance_nearest">Адлегласць: спачатку найбліжэйшая</string>
+	<string name="distance_farthest">Адлегласьць: спачатку найдалейшая</string>
+    <string name="distance_nearest">Адлегласьць: спачатку найбліжэйшая</string>
     </resources>
