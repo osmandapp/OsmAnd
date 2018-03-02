@@ -249,7 +249,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		args.putDouble(ParkingTypeBottomSheetDialogFragment.LON_KEY, longitude);
 		FragmentManager fragmentManager=mapActivity.getSupportFragmentManager();
 		ParkingTypeBottomSheetDialogFragment fragment = new ParkingTypeBottomSheetDialogFragment();
-		fragment.setUsedOnMap(true);
 		fragment.setArguments(args);
 		fragment.show(fragmentManager, ParkingTypeBottomSheetDialogFragment.TAG);
 	}
