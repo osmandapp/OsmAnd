@@ -192,11 +192,11 @@ public class MapMarkersWidgetsFactory {
 		if (customLocation != null) {
 			loc = customLocation;
 		} else {
-			Location l = map.getMapViewTrackingUtilities().getMyLocation();
+			Location l = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 			if (l != null) {
 				loc = new LatLon(l.getLatitude(), l.getLongitude());
 			} else {
-				loc = null;
+				loc = map.getMapLocation();
 			}
 		}
 
@@ -215,8 +215,8 @@ public class MapMarkersWidgetsFactory {
 			return;
 		}
 
-		Float heading = map.getMapViewTrackingUtilities().getHeading();
-
+		boolean mapLinkedToLoc = map.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		Float heading = !mapLinkedToLoc ? 0f : map.getMapViewTrackingUtilities().getHeading();
 		MapMarker marker = markers.get(0);
 		updateUI(loc, heading, marker, arrowImg, distText, okButton, addressText, true, customLocation != null);
 

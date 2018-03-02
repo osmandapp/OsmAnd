@@ -1,20 +1,16 @@
 package net.osmand.plus.audionotes;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 
 public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -32,86 +28,94 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 		this.recording = recording;
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.fragment_notes_item_menu_bottom_sheet_dialog, null);
-
+	public void createMenuItems(Bundle savedInstanceState) {
 		if (recording != null) {
-			NumberFormat f = new DecimalFormat("#0.00000");
-			((TextView) mainView.findViewById(R.id.title_text_view))
-					.setText(recording.getName(getActivity(), true));
-			((TextView) mainView.findViewById(R.id.play_text_view))
-					.setText(recording.isPhoto() ? R.string.watch : R.string.recording_context_menu_play);
-			((TextView) mainView.findViewById(R.id.show_on_map_descr_text_view))
-					.setText(f.format(recording.getLatitude()) + ", " + f.format(recording.getLongitude()));
-			((ImageView) mainView.findViewById(R.id.play_icon))
-					.setImageDrawable(getContentIcon(recording.isPhoto() ? R.drawable.ic_action_view : R.drawable.ic_play_dark));
+			items.add(new TitleItem(recording.getName(getContext(), true)));
+
+			BaseBottomSheetItem playItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(recording.isPhoto() ? R.drawable.ic_action_view : R.drawable.ic_play_dark))
+					.setTitle(getString(recording.isPhoto() ? R.string.watch : R.string.recording_context_menu_play))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (listener != null) {
+								listener.playOnClick(recording);
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(playItem);
+
+			BaseBottomSheetItem shareItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
+					.setTitle(getString(R.string.shared_string_share))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (listener != null) {
+								listener.shareOnClick(recording);
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(shareItem);
+
+			BaseBottomSheetItem showOnMapItem = new BottomSheetItemWithDescription.Builder()
+					.setDescription(getString(R.string.route_descr_lat_lon, recording.getLatitude(), recording.getLongitude()))
+					.setIcon(getContentIcon(R.drawable.ic_show_on_map))
+					.setTitle(getString(R.string.shared_string_show_on_map))
+					.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (listener != null) {
+								listener.showOnMapOnClick(recording);
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(showOnMapItem);
+
+			items.add(new DividerHalfItem(getContext()));
+
+			BaseBottomSheetItem renameItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
+					.setTitle(getString(R.string.shared_string_rename))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (listener != null) {
+								listener.renameOnClick(recording);
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(renameItem);
+
+			BaseBottomSheetItem deleteItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_delete_dark))
+					.setTitle(getString(R.string.shared_string_delete))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (listener != null) {
+								listener.deleteOnClick(recording);
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(deleteItem);
 		}
-
-		((ImageView) mainView.findViewById(R.id.share_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_gshare_dark));
-		((ImageView) mainView.findViewById(R.id.show_on_map_icon)).setImageDrawable(getContentIcon(R.drawable.ic_show_on_map));
-		((ImageView) mainView.findViewById(R.id.rename_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_edit_dark));
-		((ImageView) mainView.findViewById(R.id.delete_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_delete_dark));
-
-		mainView.findViewById(R.id.play_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (listener != null && recording != null) {
-					listener.playOnClick(recording);
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.share_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (listener != null && recording != null) {
-					listener.shareOnClick(recording);
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.show_on_map_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (listener != null && recording != null) {
-					listener.showOnMapOnClick(recording);
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.rename_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (listener != null && recording != null) {
-					listener.renameOnClick(recording);
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.delete_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (listener != null && recording != null) {
-					listener.deleteOnClick(recording);
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.close_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
-
-		setupHeightAndBackground(mainView, R.id.scroll_view);
-
-		return mainView;
 	}
 
 	@Override
@@ -120,6 +124,11 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 			getDialog().setDismissMessage(null);
 		}
 		super.onDestroyView();
+	}
+
+	@Override
+	protected int getCloseRowTextId() {
+		return R.string.shared_string_close;
 	}
 
 	interface ItemMenuFragmentListener {

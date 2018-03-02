@@ -272,11 +272,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				Bundle args = new Bundle();
+				args.putBoolean(OptionsBottomSheetDialogFragment.SNAP_TO_ROAD_ENABLED_KEY, editingCtx.isInSnapToRoadMode());
+				args.putBoolean(OptionsBottomSheetDialogFragment.ADD_LINE_MODE_KEY, newGpxData != null);
 				OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
+				fragment.setArguments(args);
 				fragment.setUsedOnMap(true);
-				fragment.setSnapToRoadEnabled(editingCtx.isInSnapToRoadMode());
 				fragment.setListener(createOptionsFragmentListener());
-				fragment.setAddLineMode(newGpxData != null);
 				fragment.show(mapActivity.getSupportFragmentManager(), OptionsBottomSheetDialogFragment.TAG);
 			}
 		});

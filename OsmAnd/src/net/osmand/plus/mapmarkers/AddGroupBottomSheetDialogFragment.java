@@ -2,18 +2,16 @@ package net.osmand.plus.mapmarkers;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
 
 public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -35,11 +33,11 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 		mapMarkersHelper = getMyApplication().getMapMarkersHelper();
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_add_group_bottom_sheet_dialog, container);
+		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
+				R.layout.fragment_marker_add_group_bottom_sheet_dialog, null);
 
 		final RecyclerView recyclerView = mainView.findViewById(R.id.groups_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -67,16 +65,7 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 		});
 		recyclerView.setAdapter(adapter);
 
-		mainView.findViewById(R.id.close_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
-
-		setupHeightAndBackground(mainView, R.id.groups_recycler_view);
-
-		return mainView;
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
 	}
 
 	@Override

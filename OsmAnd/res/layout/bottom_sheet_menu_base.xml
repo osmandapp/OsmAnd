@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	tools:background="?attr/bg_color">
+
+	<ScrollView
+		android:id="@+id/scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<LinearLayout
+			android:id="@+id/items_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingBottom="@dimen/bottom_sheet_content_padding_small"/>
+
+	</ScrollView>
+
+	<View
+		android:id="@+id/close_row_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider"/>
+
+	<FrameLayout
+		android:id="@+id/close_row"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/bottom_sheet_cancel_button_height"
+		android:background="?attr/selectableItemBackground">
+
+		<TextView
+			android:id="@+id/close_row_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:textAllCaps="true"
+			android:textColor="?attr/color_dialog_buttons"
+			android:textSize="@dimen/default_desc_text_size"
+			android:textStyle="bold"
+			tools:text="@string/shared_string_cancel"/>
+
+	</FrameLayout>
+
+</LinearLayout>
