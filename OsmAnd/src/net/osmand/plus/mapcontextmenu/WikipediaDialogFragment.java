@@ -182,7 +182,7 @@ public class WikipediaDialogFragment extends DialogFragment {
 				@Override
 				public void onClick(View view) {
 					String article = "https://" + langSelected.toLowerCase() + ".wikipedia.org/wiki/" + title.replace(' ', '_');
-					showFullArticle(getContext(), darkMode, Uri.parse(article));
+					showFullArticle(getContext(), Uri.parse(article), darkMode);
 				}
 			});
 
@@ -208,7 +208,7 @@ public class WikipediaDialogFragment extends DialogFragment {
 		}
 	}
 
-	public static void showFullArticle(Context context, boolean nightMode, Uri uri) {
+	public static void showFullArticle(Context context, Uri uri, boolean nightMode) {
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
 					.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
