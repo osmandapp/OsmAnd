@@ -3189,4 +3189,69 @@
 	<string name="poi_map_size_city">Veľkosť mapy: mesto</string>
 	<string name="poi_map_size_region">Veľkosť mapy: región</string>
 
-</resources>
+<string name="poi_climbing_style">Lezecký štýl</string>
+	<string name="poi_socket">Zásuvka</string>
+	<string name="poi_socket_chademo_output_filter">CHAdeMO</string>
+	<string name="poi_socket_type2_output_filter">Typ 2</string>
+	<string name="poi_socket_type2_combo_output_filter">Typ 2 kombinácia</string>
+	<string name="poi_socket_type3_output_filter">Typ 3</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE blue</string>
+	<string name="poi_socket_schuko_output_filter">Schuko</string>
+
+<string name="poi_lock_basin">Plavebná komora</string>
+	<string name="poi_animal_shelter_wildlife">Divé zvieratá</string>
+	<string name="poi_animal_shelter_horse">Kone</string>
+	<string name="poi_animal_shelter_mammal">Cicavce</string>
+	<string name="poi_animal_shelter_fish">Ryby</string>
+
+	<string name="poi_information_route_marker">Značenie trasy</string>
+	<string name="poi_bridge_movable_swing">Typ pohyblivého mostu: otočný</string>
+	<string name="poi_bridge_movable_lift">Typ pohyblivého mostu: zdvíhací</string>
+	<string name="poi_bridge_movable_drawbridge">Typ pohyblivého mostu: padací</string>
+	<string name="poi_bridge_movable_submersible">Typ pohyblivého mostu: ponorný</string>
+	<string name="poi_bridge_movable_transporter">Typ pohyblivého mostu: gondolový</string>
+	<string name="poi_bridge_movable_retractable">Typ pohyblivého mostu: vysúvací</string>
+
+	<string name="poi_route_subway_ref">Metro</string>
+
+	<string name="poi_health_specialty_general_yes">Praktický lekár</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Oftalmológia</string>
+	<string name="poi_health_specialty_gynaecology_yes">Gynekológia</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Interná medicína</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ortopédia</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Otolaryngológia</string>
+	<string name="poi_health_specialty_paediatrics_yes">Pediatria</string>
+	<string name="poi_health_specialty_paediatrics_no">Zdravotná špecializácia: pediatria: nie</string>
+	<string name="poi_health_specialty_dermatology_yes">Dermatológia</string>
+	<string name="poi_health_specialty_urology_yes">Urológia</string>
+	<string name="poi_health_specialty_surgery_yes">Všeobecná chirurgia</string>
+	<string name="poi_health_specialty_radiology_yes">Rádiológia</string>
+	<string name="poi_health_specialty_psychiatry_yes">Psychiatria</string>
+	<string name="poi_health_specialty_neurology_yes">Neurológia</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Dermatovenerológia</string>
+	<string name="poi_health_specialty_cardiology_yes">Kardiológia</string>
+	<string name="poi_health_specialty_trauma_yes">Traumatológia</string>
+	<string name="poi_health_specialty_biology_yes">Klinická biológia</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Anesteziológia</string>
+	<string name="poi_health_specialty_pulmonology_yes">Respiračná medicína</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Zubná, ústna a tvárová chirurgia</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Traumatológia a urgentná medicína</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Zdravotná špecializácia: traumatológia a urgentná medicína: nie</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Plastická chirurgia</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Fyzioterapia</string>
+	<string name="poi_health_specialty_biochemistry_yes">Biochémia</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Detská psychiatria</string>
+	<string name="poi_health_specialty_physiatry_yes">Fyziatria a rehabilitácia</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Tvárová chirurgia</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Rádiológia</string>
+	<string name="poi_health_specialty_gastroenterology_yes">Gastroenterológia</string>
+	<string name="poi_health_specialty_dentistry_yes">Stomatológia</string>
+	<string name="poi_health_specialty_nephrology_yes">Nefrológia</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Neurologická chirurgia</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropsychiatria</string>
+	<string name="poi_health_specialty_endocrinology_yes">Endokrinológia</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Nukleárna medicína</string>
+	<string name="poi_health_specialty_pathology_yes">Patologická anatómia</string>
+	<string name="poi_health_specialty_oncology_yes">Onkológia</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">Tropická medicína</string>
+	</resources>
