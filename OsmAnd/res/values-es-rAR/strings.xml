@@ -2951,4 +2951,5 @@ Proporciona un código completo</string>
     <string name="enter_lat_and_lon">Ingresar latitud y longitud</string>
 	<string name="distance_farthest">Distancia: más lejos primero</string>
     <string name="distance_nearest">Distancia: más cerca primero</string>
+    <string name="rendering_attr_whiteWaterSports_name">Deportes acuáticos</string>
     </resources>
