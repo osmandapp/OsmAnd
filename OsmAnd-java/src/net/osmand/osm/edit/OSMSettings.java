@@ -76,7 +76,8 @@ public class OSMSettings {
 		ADMIN_LEVEL("admin_level"), //$NON-NLS-1$
 		PUBLIC_TRANSPORT("public_transport"), //$NON-NLS-1$
 		ENTRANCE("entrance"), //$NON-NLS-1$
-		;
+		COLOUR("colour"); //$NON-NLS-1$
+		
 		
 		private final String value;
 		private OSMTagKey(String value) {

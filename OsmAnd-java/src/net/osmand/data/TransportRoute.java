@@ -12,6 +12,7 @@ public class TransportRoute extends MapObject {
 	private String operator;
 	private String type;
 	private Integer dist = null;
+	private String color;
 	private List<Way> forwardWays;
 	
 	public TransportRoute(){
@@ -25,13 +26,15 @@ public class TransportRoute extends MapObject {
 		return forwardWays;
 	}
 	
+	public String getColor() {
+		return color;
+	}
 	
 	public void addWay(Way w) {
 		if (forwardWays == null) {
 			forwardWays = new ArrayList<>();
 		}
 		forwardWays.add(w);
-
 	}
 	
 	public String getRef() {
@@ -67,6 +70,10 @@ public class TransportRoute extends MapObject {
 	
 	public void setDistance(Integer dist) {
 		this.dist = dist;
+	}
+	
+	public void setColor(String color) {
+		this.color = color;
 	}
 	
 	public int getAvgBothDistance() {

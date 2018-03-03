@@ -29345,6 +29345,24 @@ public final class OsmandOdb {
      */
     int getDistance();
 
+    // optional uint32 color = 9;
+    /**
+     * <code>optional uint32 color = 9;</code>
+     *
+     * <pre>
+     * reference in string table
+     * </pre>
+     */
+    boolean hasColor();
+    /**
+     * <code>optional uint32 color = 9;</code>
+     *
+     * <pre>
+     * reference in string table
+     * </pre>
+     */
+    int getColor();
+
     // repeated .OsmAnd.OBF.TransportRouteStop directStops = 15;
     /**
      * <code>repeated .OsmAnd.OBF.TransportRouteStop directStops = 15;</code>
@@ -29525,24 +29543,29 @@ public final class OsmandOdb {
               distance_ = input.readUInt32();
               break;
             }
+            case 72: {
+              bitField0_ |= 0x00000080;
+              color_ = input.readUInt32();
+              break;
+            }
             case 122: {
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
                 directStops_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRouteStop>();
-                mutable_bitField0_ |= 0x00000080;
+                mutable_bitField0_ |= 0x00000100;
               }
               directStops_.add(input.readMessage(net.osmand.binary.OsmandOdb.TransportRouteStop.PARSER, extensionRegistry));
               break;
             }
             case 130: {
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
                 reverseStops_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRouteStop>();
-                mutable_bitField0_ |= 0x00000100;
+                mutable_bitField0_ |= 0x00000200;
               }
               reverseStops_.add(input.readMessage(net.osmand.binary.OsmandOdb.TransportRouteStop.PARSER, extensionRegistry));
               break;
             }
             case 138: {
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000100;
               geometry_ = input.readBytes();
               break;
             }
@@ -29554,10 +29577,10 @@ public final class OsmandOdb {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
           directStops_ = java.util.Collections.unmodifiableList(directStops_);
         }
-        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
           reverseStops_ = java.util.Collections.unmodifiableList(reverseStops_);
         }
         this.unknownFields = unknownFields.build();
@@ -29771,6 +29794,30 @@ public final class OsmandOdb {
       return distance_;
     }
 
+    // optional uint32 color = 9;
+    public static final int COLOR_FIELD_NUMBER = 9;
+    private int color_;
+    /**
+     * <code>optional uint32 color = 9;</code>
+     *
+     * <pre>
+     * reference in string table
+     * </pre>
+     */
+    public boolean hasColor() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional uint32 color = 9;</code>
+     *
+     * <pre>
+     * reference in string table
+     * </pre>
+     */
+    public int getColor() {
+      return color_;
+    }
+
     // repeated .OsmAnd.OBF.TransportRouteStop directStops = 15;
     public static final int DIRECTSTOPS_FIELD_NUMBER = 15;
     private java.util.List<net.osmand.binary.OsmandOdb.TransportRouteStop> directStops_;
@@ -29877,7 +29924,7 @@ public final class OsmandOdb {
      * </pre>
      */
     public boolean hasGeometry() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional bytes geometry = 17;</code>
@@ -29901,6 +29948,7 @@ public final class OsmandOdb {
       name_ = 0;
       nameEn_ = 0;
       distance_ = 0;
+      color_ = 0;
       directStops_ = java.util.Collections.emptyList();
       reverseStops_ = java.util.Collections.emptyList();
       geometry_ = com.google.protobuf.ByteString.EMPTY;
@@ -29954,13 +30002,16 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeUInt32(8, distance_);
       }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeUInt32(9, color_);
+      }
       for (int i = 0; i < directStops_.size(); i++) {
         output.writeMessage(15, directStops_.get(i));
       }
       for (int i = 0; i < reverseStops_.size(); i++) {
         output.writeMessage(16, reverseStops_.get(i));
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeBytes(17, geometry_);
       }
       getUnknownFields().writeTo(output);
@@ -30000,6 +30051,10 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(8, distance_);
       }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(9, color_);
+      }
       for (int i = 0; i < directStops_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(15, directStops_.get(i));
@@ -30008,7 +30063,7 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(16, reverseStops_.get(i));
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(17, geometry_);
       }
@@ -30144,20 +30199,22 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000020);
         distance_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
+        color_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
         if (directStopsBuilder_ == null) {
           directStops_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000080);
+          bitField0_ = (bitField0_ & ~0x00000100);
         } else {
           directStopsBuilder_.clear();
         }
         if (reverseStopsBuilder_ == null) {
           reverseStops_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000100);
+          bitField0_ = (bitField0_ & ~0x00000200);
         } else {
           reverseStopsBuilder_.clear();
         }
         geometry_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -30214,26 +30271,30 @@ public final class OsmandOdb {
           to_bitField0_ |= 0x00000040;
         }
         result.distance_ = distance_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.color_ = color_;
         if (directStopsBuilder_ == null) {
-          if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
             directStops_ = java.util.Collections.unmodifiableList(directStops_);
-            bitField0_ = (bitField0_ & ~0x00000080);
+            bitField0_ = (bitField0_ & ~0x00000100);
           }
           result.directStops_ = directStops_;
         } else {
           result.directStops_ = directStopsBuilder_.build();
         }
         if (reverseStopsBuilder_ == null) {
-          if (((bitField0_ & 0x00000100) == 0x00000100)) {
+          if (((bitField0_ & 0x00000200) == 0x00000200)) {
             reverseStops_ = java.util.Collections.unmodifiableList(reverseStops_);
-            bitField0_ = (bitField0_ & ~0x00000100);
+            bitField0_ = (bitField0_ & ~0x00000200);
           }
           result.reverseStops_ = reverseStops_;
         } else {
           result.reverseStops_ = reverseStopsBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000080;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000100;
         }
         result.geometry_ = geometry_;
         result.bitField0_ = to_bitField0_;
@@ -30275,11 +30336,14 @@ public final class OsmandOdb {
         if (other.hasDistance()) {
           setDistance(other.getDistance());
         }
+        if (other.hasColor()) {
+          setColor(other.getColor());
+        }
         if (directStopsBuilder_ == null) {
           if (!other.directStops_.isEmpty()) {
             if (directStops_.isEmpty()) {
               directStops_ = other.directStops_;
-              bitField0_ = (bitField0_ & ~0x00000080);
+              bitField0_ = (bitField0_ & ~0x00000100);
             } else {
               ensureDirectStopsIsMutable();
               directStops_.addAll(other.directStops_);
@@ -30292,7 +30356,7 @@ public final class OsmandOdb {
               directStopsBuilder_.dispose();
               directStopsBuilder_ = null;
               directStops_ = other.directStops_;
-              bitField0_ = (bitField0_ & ~0x00000080);
+              bitField0_ = (bitField0_ & ~0x00000100);
               directStopsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getDirectStopsFieldBuilder() : null;
@@ -30305,7 +30369,7 @@ public final class OsmandOdb {
           if (!other.reverseStops_.isEmpty()) {
             if (reverseStops_.isEmpty()) {
               reverseStops_ = other.reverseStops_;
-              bitField0_ = (bitField0_ & ~0x00000100);
+              bitField0_ = (bitField0_ & ~0x00000200);
             } else {
               ensureReverseStopsIsMutable();
               reverseStops_.addAll(other.reverseStops_);
@@ -30318,7 +30382,7 @@ public final class OsmandOdb {
               reverseStopsBuilder_.dispose();
               reverseStopsBuilder_ = null;
               reverseStops_ = other.reverseStops_;
-              bitField0_ = (bitField0_ & ~0x00000100);
+              bitField0_ = (bitField0_ & ~0x00000200);
               reverseStopsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getReverseStopsFieldBuilder() : null;
@@ -30725,13 +30789,62 @@ public final class OsmandOdb {
         return this;
       }
 
+      // optional uint32 color = 9;
+      private int color_ ;
+      /**
+       * <code>optional uint32 color = 9;</code>
+       *
+       * <pre>
+       * reference in string table
+       * </pre>
+       */
+      public boolean hasColor() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional uint32 color = 9;</code>
+       *
+       * <pre>
+       * reference in string table
+       * </pre>
+       */
+      public int getColor() {
+        return color_;
+      }
+      /**
+       * <code>optional uint32 color = 9;</code>
+       *
+       * <pre>
+       * reference in string table
+       * </pre>
+       */
+      public Builder setColor(int value) {
+        bitField0_ |= 0x00000080;
+        color_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional uint32 color = 9;</code>
+       *
+       * <pre>
+       * reference in string table
+       * </pre>
+       */
+      public Builder clearColor() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        color_ = 0;
+        onChanged();
+        return this;
+      }
+
       // repeated .OsmAnd.OBF.TransportRouteStop directStops = 15;
       private java.util.List<net.osmand.binary.OsmandOdb.TransportRouteStop> directStops_ =
         java.util.Collections.emptyList();
       private void ensureDirectStopsIsMutable() {
-        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
           directStops_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRouteStop>(directStops_);
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000100;
          }
       }
 
@@ -30880,7 +30993,7 @@ public final class OsmandOdb {
       public Builder clearDirectStops() {
         if (directStopsBuilder_ == null) {
           directStops_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000080);
+          bitField0_ = (bitField0_ & ~0x00000100);
           onChanged();
         } else {
           directStopsBuilder_.clear();
@@ -30957,7 +31070,7 @@ public final class OsmandOdb {
           directStopsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               net.osmand.binary.OsmandOdb.TransportRouteStop, net.osmand.binary.OsmandOdb.TransportRouteStop.Builder, net.osmand.binary.OsmandOdb.TransportRouteStopOrBuilder>(
                   directStops_,
-                  ((bitField0_ & 0x00000080) == 0x00000080),
+                  ((bitField0_ & 0x00000100) == 0x00000100),
                   getParentForChildren(),
                   isClean());
           directStops_ = null;
@@ -30969,9 +31082,9 @@ public final class OsmandOdb {
       private java.util.List<net.osmand.binary.OsmandOdb.TransportRouteStop> reverseStops_ =
         java.util.Collections.emptyList();
       private void ensureReverseStopsIsMutable() {
-        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
           reverseStops_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRouteStop>(reverseStops_);
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000200;
          }
       }
 
@@ -31164,7 +31277,7 @@ public final class OsmandOdb {
       public Builder clearReverseStops() {
         if (reverseStopsBuilder_ == null) {
           reverseStops_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000100);
+          bitField0_ = (bitField0_ & ~0x00000200);
           onChanged();
         } else {
           reverseStopsBuilder_.clear();
@@ -31269,7 +31382,7 @@ public final class OsmandOdb {
           reverseStopsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               net.osmand.binary.OsmandOdb.TransportRouteStop, net.osmand.binary.OsmandOdb.TransportRouteStop.Builder, net.osmand.binary.OsmandOdb.TransportRouteStopOrBuilder>(
                   reverseStops_,
-                  ((bitField0_ & 0x00000100) == 0x00000100),
+                  ((bitField0_ & 0x00000200) == 0x00000200),
                   getParentForChildren(),
                   isClean());
           reverseStops_ = null;
@@ -31290,7 +31403,7 @@ public final class OsmandOdb {
        * </pre>
        */
       public boolean hasGeometry() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
        * <code>optional bytes geometry = 17;</code>
@@ -31319,7 +31432,7 @@ public final class OsmandOdb {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000400;
         geometry_ = value;
         onChanged();
         return this;
@@ -31335,7 +31448,7 @@ public final class OsmandOdb {
        * </pre>
        */
       public Builder clearGeometry() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000400);
         geometry_ = getDefaultInstance().getGeometry();
         onChanged();
         return this;
@@ -57940,88 +58053,89 @@ public final class OsmandOdb {
       " \003(\t\022\030\n\020attributeTagIds2\030\021 \003(\r\022\030\n\020attrib" +
       "uteValues2\030\022 \003(\t\"=\n\017TransportRoutes\022*\n\006r" +
       "outes\030\006 \003(\0132\032.OsmAnd.OBF.TransportRoute\"" +
-      "\367\001\n\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003" +
+      "\206\002\n\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003" +
       " \001(\r\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004n" +
       "ame\030\006 \001(\r\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distance\030\010" +
-      " \001(\r\0223\n\013directStops\030\017 \003(\0132\036.OsmAnd.OBF.T" +
-      "ransportRouteStop\0224\n\014reverseStops\030\020 \003(\0132",
-      "\036.OsmAnd.OBF.TransportRouteStop\022\020\n\010geome" +
-      "try\030\021 \001(\014\"W\n\022TransportRouteStop\022\n\n\002id\030\001 " +
-      "\002(\022\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(" +
-      "\r\022\017\n\007name_en\030\007 \001(\r\"b\n\rTransportStop\022\n\n\002d" +
-      "x\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name\030" +
-      "\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\022\016\n\006routes\030\020 \003(\r\"\272" +
-      "\001\n\022TransportStopsTree\022\014\n\004left\030\001 \002(\021\022\r\n\005r" +
-      "ight\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022" +
-      "0\n\010subtrees\030\007 \003(\0132\036.OsmAnd.OBF.Transport" +
-      "StopsTree\022(\n\005leafs\030\010 \003(\0132\031.OsmAnd.OBF.Tr",
-      "ansportStop\022\016\n\006baseId\030\020 \001(\004\"\256\001\n\024OsmAndTr" +
-      "ansportIndex\022\014\n\004name\030\001 \001(\t\022+\n\006routes\030\003 \001" +
-      "(\0132\033.OsmAnd.OBF.TransportRoutes\022-\n\005stops" +
-      "\030\006 \001(\0132\036.OsmAnd.OBF.TransportStopsTree\022," +
-      "\n\013stringTable\030\t \002(\0132\027.OsmAnd.OBF.StringT" +
-      "able\"\312\002\n\016OsmAndPoiIndex\022\014\n\004name\030\001 \002(\t\022-\n" +
-      "\nboundaries\030\002 \002(\0132\031.OsmAnd.OBF.OsmAndTil" +
-      "eBox\0228\n\017categoriesTable\030\003 \003(\0132\037.OsmAnd.O" +
-      "BF.OsmAndCategoryTable\0221\n\tnameIndex\030\004 \001(" +
-      "\0132\036.OsmAnd.OBF.OsmAndPoiNameIndex\0226\n\rsub",
-      "typesTable\030\005 \001(\0132\037.OsmAnd.OBF.OsmAndSubt" +
-      "ypesTable\022\'\n\005boxes\030\006 \003(\0132\030.OsmAnd.OBF.Os" +
-      "mAndPoiBox\022-\n\007poiData\030\t \003(\0132\034.OsmAnd.OBF" +
-      ".OsmAndPoiBoxData\"\331\001\n\022OsmAndPoiNameIndex" +
-      "\022-\n\005table\030\003 \002(\0132\036.OsmAnd.OBF.IndexedStri" +
-      "ngTable\022C\n\004data\030\005 \003(\01325.OsmAnd.OBF.OsmAn" +
-      "dPoiNameIndex.OsmAndPoiNameIndexData\032O\n\026" +
-      "OsmAndPoiNameIndexData\0225\n\005atoms\030\003 \003(\0132&." +
-      "OsmAnd.OBF.OsmAndPoiNameIndexDataAtom\"Q\n" +
-      "\032OsmAndPoiNameIndexDataAtom\022\014\n\004zoom\030\002 \001(",
-      "\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r\022\017\n\007shiftTo\030\016 \001(\007" +
-      "\">\n\023OsmAndCategoryTable\022\020\n\010category\030\001 \002(" +
-      "\t\022\025\n\rsubcategories\030\003 \003(\t\"E\n\023OsmAndSubtyp" +
-      "esTable\022.\n\010subtypes\030\004 \003(\0132\034.OsmAnd.OBF.O" +
-      "smAndPoiSubtype\"\205\001\n\020OsmAndPoiSubtype\022\014\n\004" +
-      "name\030\001 \002(\t\022\017\n\007tagname\030\002 \001(\t\022\016\n\006isText\030\003 " +
-      "\002(\010\022\021\n\tfrequency\030\005 \001(\r\022\031\n\021subtypeValuesS" +
-      "ize\030\006 \001(\r\022\024\n\014subtypeValue\030\010 \003(\t\"\255\001\n\014OsmA" +
-      "ndPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003" +
-      "top\030\003 \002(\021\0223\n\ncategories\030\004 \001(\0132\037.OsmAnd.O",
-      "BF.OsmAndPoiCategories\022*\n\010subBoxes\030\n \003(\013" +
-      "2\030.OsmAnd.OBF.OsmAndPoiBox\022\023\n\013shiftToDat" +
-      "a\030\016 \001(\007\"@\n\023OsmAndPoiCategories\022\022\n\ncatego" +
-      "ries\030\003 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\"i\n\020Osm" +
-      "AndPoiBoxData\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t" +
-      "\n\001y\030\003 \001(\r\0221\n\007poiData\030\005 \003(\0132 .OsmAnd.OBF." +
-      "OsmAndPoiBoxDataAtom\"\360\001\n\024OsmAndPoiBoxDat" +
-      "aAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategor" +
-      "ies\030\004 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\022\014\n\004name" +
-      "\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014op",
-      "eningHours\030\n \001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030" +
-      "\014 \001(\t\022\014\n\004note\030\r \001(\t\022\026\n\016textCategories\030\016 " +
-      "\003(\r\022\022\n\ntextValues\030\017 \003(\t\"\032\n\007IdTable\022\017\n\007ro" +
-      "uteId\030\001 \003(\022\"F\n\017RestrictionData\022\014\n\004type\030\001" +
-      " \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030\004 " +
-      "\001(\005\"x\n\tRouteData\022\016\n\006points\030\001 \002(\014\022\022\n\npoin" +
-      "tTypes\030\004 \001(\014\022\022\n\npointNames\030\005 \001(\014\022\r\n\005type" +
-      "s\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013stringNames\030" +
-      "\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022\014\n\004name\030\001 \002" +
-      "(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OBF.OsmAndRou",
-      "tingIndex.RouteEncodingRule\022>\n\trootBoxes" +
-      "\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex.R" +
-      "outeDataBox\022A\n\014basemapBoxes\030\004 \003(\0132+.OsmA" +
-      "nd.OBF.OsmAndRoutingIndex.RouteDataBox\022=" +
-      "\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.OsmAndRoutin" +
-      "gIndex.RouteDataBlock\032;\n\021RouteEncodingRu" +
-      "le\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n\n\002id\030\007 \001" +
-      "(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001 \002(\021\022\r\n\005rig" +
-      "ht\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022\023\n" +
-      "\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007 \003(\0132+.OsmA",
-      "nd.OBF.OsmAndRoutingIndex.RouteDataBox\032\303" +
-      "\001\n\016RouteDataBlock\022$\n\007idTable\030\005 \001(\0132\023.Osm" +
-      "And.OBF.IdTable\022*\n\013dataObjects\030\006 \003(\0132\025.O" +
-      "smAnd.OBF.RouteData\0221\n\014restrictions\030\007 \003(" +
-      "\0132\033.OsmAnd.OBF.RestrictionData\022,\n\013string" +
-      "Table\030\010 \001(\0132\027.OsmAnd.OBF.StringTableB\036\n\021" +
-      "net.osmand.binaryB\tOsmandOdb"
+      " \001(\r\022\r\n\005color\030\t \001(\r\0223\n\013directStops\030\017 \003(\013" +
+      "2\036.OsmAnd.OBF.TransportRouteStop\0224\n\014reve",
+      "rseStops\030\020 \003(\0132\036.OsmAnd.OBF.TransportRou" +
+      "teStop\022\020\n\010geometry\030\021 \001(\014\"W\n\022TransportRou" +
+      "teStop\022\n\n\002id\030\001 \002(\022\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002" +
+      "(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\"b\n\rTra" +
+      "nsportStop\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id" +
+      "\030\005 \002(\022\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\022\016\n" +
+      "\006routes\030\020 \003(\r\"\272\001\n\022TransportStopsTree\022\014\n\004" +
+      "left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016" +
+      "\n\006bottom\030\004 \002(\021\0220\n\010subtrees\030\007 \003(\0132\036.OsmAn" +
+      "d.OBF.TransportStopsTree\022(\n\005leafs\030\010 \003(\0132",
+      "\031.OsmAnd.OBF.TransportStop\022\016\n\006baseId\030\020 \001" +
+      "(\004\"\256\001\n\024OsmAndTransportIndex\022\014\n\004name\030\001 \001(" +
+      "\t\022+\n\006routes\030\003 \001(\0132\033.OsmAnd.OBF.Transport" +
+      "Routes\022-\n\005stops\030\006 \001(\0132\036.OsmAnd.OBF.Trans" +
+      "portStopsTree\022,\n\013stringTable\030\t \002(\0132\027.Osm" +
+      "And.OBF.StringTable\"\312\002\n\016OsmAndPoiIndex\022\014" +
+      "\n\004name\030\001 \002(\t\022-\n\nboundaries\030\002 \002(\0132\031.OsmAn" +
+      "d.OBF.OsmAndTileBox\0228\n\017categoriesTable\030\003" +
+      " \003(\0132\037.OsmAnd.OBF.OsmAndCategoryTable\0221\n" +
+      "\tnameIndex\030\004 \001(\0132\036.OsmAnd.OBF.OsmAndPoiN",
+      "ameIndex\0226\n\rsubtypesTable\030\005 \001(\0132\037.OsmAnd" +
+      ".OBF.OsmAndSubtypesTable\022\'\n\005boxes\030\006 \003(\0132" +
+      "\030.OsmAnd.OBF.OsmAndPoiBox\022-\n\007poiData\030\t \003" +
+      "(\0132\034.OsmAnd.OBF.OsmAndPoiBoxData\"\331\001\n\022Osm" +
+      "AndPoiNameIndex\022-\n\005table\030\003 \002(\0132\036.OsmAnd." +
+      "OBF.IndexedStringTable\022C\n\004data\030\005 \003(\01325.O" +
+      "smAnd.OBF.OsmAndPoiNameIndex.OsmAndPoiNa" +
+      "meIndexData\032O\n\026OsmAndPoiNameIndexData\0225\n" +
+      "\005atoms\030\003 \003(\0132&.OsmAnd.OBF.OsmAndPoiNameI" +
+      "ndexDataAtom\"Q\n\032OsmAndPoiNameIndexDataAt",
+      "om\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r\022\017" +
+      "\n\007shiftTo\030\016 \001(\007\">\n\023OsmAndCategoryTable\022\020" +
+      "\n\010category\030\001 \002(\t\022\025\n\rsubcategories\030\003 \003(\t\"" +
+      "E\n\023OsmAndSubtypesTable\022.\n\010subtypes\030\004 \003(\013" +
+      "2\034.OsmAnd.OBF.OsmAndPoiSubtype\"\205\001\n\020OsmAn" +
+      "dPoiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n\007tagname\030\002 \001" +
+      "(\t\022\016\n\006isText\030\003 \002(\010\022\021\n\tfrequency\030\005 \001(\r\022\031\n" +
+      "\021subtypeValuesSize\030\006 \001(\r\022\024\n\014subtypeValue" +
+      "\030\010 \003(\t\"\255\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n" +
+      "\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\ncategories\030\004",
+      " \001(\0132\037.OsmAnd.OBF.OsmAndPoiCategories\022*\n" +
+      "\010subBoxes\030\n \003(\0132\030.OsmAnd.OBF.OsmAndPoiBo" +
+      "x\022\023\n\013shiftToData\030\016 \001(\007\"@\n\023OsmAndPoiCateg" +
+      "ories\022\022\n\ncategories\030\003 \003(\r\022\025\n\rsubcategori" +
+      "es\030\005 \003(\r\"i\n\020OsmAndPoiBoxData\022\014\n\004zoom\030\001 \001" +
+      "(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221\n\007poiData\030\005 \003(" +
+      "\0132 .OsmAnd.OBF.OsmAndPoiBoxDataAtom\"\360\001\n\024" +
+      "OsmAndPoiBoxDataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003" +
+      " \002(\021\022\022\n\ncategories\030\004 \003(\r\022\025\n\rsubcategorie" +
+      "s\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n",
+      "\002id\030\010 \001(\004\022\024\n\014openingHours\030\n \001(\t\022\014\n\004site\030" +
+      "\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r \001(\t\022\026\n\016te" +
+      "xtCategories\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\"\032" +
+      "\n\007IdTable\022\017\n\007routeId\030\001 \003(\022\"F\n\017Restrictio" +
+      "nData\022\014\n\004type\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030" +
+      "\003 \002(\005\022\013\n\003via\030\004 \001(\005\"x\n\tRouteData\022\016\n\006point" +
+      "s\030\001 \002(\014\022\022\n\npointTypes\030\004 \001(\014\022\022\n\npointName" +
+      "s\030\005 \001(\014\022\r\n\005types\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022" +
+      "\023\n\013stringNames\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIn" +
+      "dex\022\014\n\004name\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAn",
+      "d.OBF.OsmAndRoutingIndex.RouteEncodingRu" +
+      "le\022>\n\trootBoxes\030\003 \003(\0132+.OsmAnd.OBF.OsmAn" +
+      "dRoutingIndex.RouteDataBox\022A\n\014basemapBox" +
+      "es\030\004 \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex" +
+      ".RouteDataBox\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.O" +
+      "BF.OsmAndRoutingIndex.RouteDataBlock\032;\n\021" +
+      "RouteEncodingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030" +
+      "\005 \002(\t\022\n\n\002id\030\007 \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004le" +
+      "ft\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006" +
+      "bottom\030\004 \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022:\n\005box",
+      "es\030\007 \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex" +
+      ".RouteDataBox\032\303\001\n\016RouteDataBlock\022$\n\007idTa" +
+      "ble\030\005 \001(\0132\023.OsmAnd.OBF.IdTable\022*\n\013dataOb" +
+      "jects\030\006 \003(\0132\025.OsmAnd.OBF.RouteData\0221\n\014re" +
+      "strictions\030\007 \003(\0132\033.OsmAnd.OBF.Restrictio" +
+      "nData\022,\n\013stringTable\030\010 \001(\0132\027.OsmAnd.OBF." +
+      "StringTableB\036\n\021net.osmand.binaryB\tOsmand" +
+      "Odb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -58159,7 +58273,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_TransportRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportRoute_descriptor,
-              new java.lang.String[] { "Id", "Type", "Operator", "Ref", "Name", "NameEn", "Distance", "DirectStops", "ReverseStops", "Geometry", });
+              new java.lang.String[] { "Id", "Type", "Operator", "Ref", "Name", "NameEn", "Distance", "Color", "DirectStops", "ReverseStops", "Geometry", });
           internal_static_OsmAnd_OBF_TransportRouteStop_descriptor =
             getDescriptor().getMessageTypes().get(17);
           internal_static_OsmAnd_OBF_TransportRouteStop_fieldAccessorTable = new
