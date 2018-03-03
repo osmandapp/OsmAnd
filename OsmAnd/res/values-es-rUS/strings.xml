@@ -2964,4 +2964,5 @@ Proporciona un código completo</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Nombre de punto opcional</string>
+    <string name="rendering_attr_whiteWaterSports_name">Deportes acuáticos</string>
     </resources>
