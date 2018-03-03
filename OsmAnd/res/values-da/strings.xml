@@ -3058,7 +3058,7 @@ Repræsenterer område: %1$s x %2$s</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Valgfrit punktnavn</string>
-    <string name="transport_nearby_routes_within">Ruter i nærheden</string>
+    <string name="transport_nearby_routes_within">Ruter i nærheden inden for</string>
     <string name="transport_nearby_routes">NÆR</string>
     <string name="enter_the_file_name">Indtast filnavnet.</string>
     <string name="map_import_error">Fejl ved import af kort</string>
