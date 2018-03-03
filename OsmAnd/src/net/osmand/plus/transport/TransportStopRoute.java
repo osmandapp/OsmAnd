@@ -60,7 +60,7 @@ public class TransportStopRoute {
 				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
 				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
 				String color = route.getColor();
-				String typeStr = color == null || color.isEmpty() ?	type.getRendeAttr() : color;
+				String typeStr = color == null || color.isEmpty() ? type.getRendeAttr() : color;
 				if (req.searchRenderingAttribute(typeStr)) {
 					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
 				}
