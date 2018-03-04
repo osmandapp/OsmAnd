@@ -840,8 +840,8 @@
     <string name="subcategories">Altkateqoriyalar</string>
     <string name="osm_live_payment_desc">Abunə haqqı hər ay tutulacaq. Abuləliyinizi istənilən vaxt Google Play-dən ləğv edə bilərsiniz.</string>
     <string name="osm_live_subscription_desc">Abunəlik bütün qlobal xəritələr üçün saatlıq, günlük, həftəlik yenilənmələri və limitsiz endirmələri təmin edir.</string>
-    <string name="get_for">%1$s ödəyib al</string>
-    <string name="get_for_month">Aylıq %1$s ödəyib al</string>
+    <string name="get_for">%1$s-a al</string>
+    <string name="get_for_month">Aylıq %1$s-a al</string>
     <string name="osmand_plus_banner_desc">Limitsiz xəritə endirmələri, yenilənmələri və Vikipediya qoşması.</string>
     <string name="skip_map_downloading">Xəritələri endirməyi keç</string>
     <string name="skip_map_downloading_desc">Quraşdırılmış oflayn xəritəniz yoxdur. Siyahıdan bir xəritə seçə və ya xəritələri daha sonra Menyu - %1$s vasitəsilə endirə bilərsiniz.</string>
@@ -2066,7 +2066,18 @@
     <string name="shared_string_finish">Finiş</string>
     <string name="marker_show_distance_descr">Xəritə ekranında xəritə işarələrinə məsafənin və istiqamətin necə göstəriləcəyini seçin:</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd seçilmiş profil üçün nöqtələri marşrut ilə birləşdirəcək.</string>
-    <string name="save_track_min_speed_descr">Filtr: Bir nöqtə üçün minimum qeydiyyat sürəti seçin.</string>
+    <string name="save_track_min_speed_descr">Filtr: Bir nöqtənin qeydiyyatı üçün minimum sürəti seçin.</string>
     <string name="access_smart_autoannounce_descr">Yalnız hədəf nöqtəyə istiqamət dəyişilən zaman bildir.</string>
     <string name="plugin_mapillary_descr">Hər kəs üçün küçə səviyyəli şəkillər. Yerləri kəşf edin, əməkdaşlıq edin, dünyanı çəkin.</string>
+    <string name="auto_split_recording_descr">6 dəqiqə fasilədən sonra yeni seqment, 2 saat fasilədən sonra yeni iz, ya da tarix dəyişdiyində uzun fasilədən sonra yeni fayl başlat.</string>
+    <string name="show_legacy_search_desc">Menyuya köhnə axtarışı əlavə et.</string>
+    <string name="save_track_min_distance">Qeydiyyatın minimum yerdəyişməsi</string>
+    <string name="save_track_min_distance_descr">Filtr: Nöqtənin qeydiyyatı üçün son mövqedən minimum məsafəni seçin.</string>
+    <string name="save_track_precision">Qeydiyyatın minimum dəqiqliyi</string>
+    <string name="save_track_precision_descr">Filtr: Nöqtənin qeydiyyatı üçün minimum dəqiqlik seçin.</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Yol səthinin keyfiyyəti</string>
+    <string name="routing_attr_short_way_name">Yanacağa qənaətli yol</string>
+    <string name="routing_attr_short_way_description">Yanacağa qənaətli yoldan istifadə et (adətən daha qısa).</string>
+    <string name="access_direction_haptic_feedback_descr">Hədəf nöqtənin istiqamətini titrəmə ilə göstər.</string>
+    <string name="use_osm_live_routing_description">OsmAnd Live dəyişiklikləri üçün naviqasiyanı aktivləşdir.</string>
     </resources>
