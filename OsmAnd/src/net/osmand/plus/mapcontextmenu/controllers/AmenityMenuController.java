@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
