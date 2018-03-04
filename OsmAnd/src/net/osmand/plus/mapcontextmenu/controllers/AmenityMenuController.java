@@ -207,10 +207,10 @@ public class AmenityMenuController extends MenuController {
 						amenity.getLocation().getLongitude());
 
 		boolean useEnglishNames = getMapActivity().getMyApplication().getSettings().usingEnglishNames();
-
+		boolean isSubwayEntrance = amenity.getSubType().equals("subway_entrance");
+		
 		for (TransportIndexRepository t : reps) {
 			ArrayList<TransportStop> ls = new ArrayList<>();
-			boolean isSubwayEntrance = amenity.getSubType().equals("subway_entrance");
 			QuadRect ll = MapUtils.calculateLatLonBbox(amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(),
 					isSubwayEntrance ? 400 : 150);
 			t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
