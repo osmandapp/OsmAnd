@@ -2869,4 +2869,7 @@
 	<string name="south_abbreviation">Ю</string>
 	<string name="north_abbreviation">С</string>
 	<string name="optional_point_name">Необязательное имя точки</string>
+    <string name="rendering_attr_whiteWaterSports_name">Спортивные сплавы</string>
+    <string name="distance_farthest">Расстояние: сначала отдаленные</string>
+    <string name="distance_nearest">Расстояние: сначала ближайшая</string>
     </resources>
