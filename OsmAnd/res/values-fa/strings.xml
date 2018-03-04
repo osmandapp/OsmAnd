@@ -1820,7 +1820,7 @@
     <string name="shared_string_go">برو</string>
 	<string name="osmand_parking_overdue">تأخیر دارید</string>
 	<string name="general_settings_2">تنظیمات کلی</string>
-	<string name="routing_settings_2">تنظیمات جهت یابی</string>
+	<string name="routing_settings_2">تنظیمات راهبری</string>
     <string name="shared_string_do_not_use">استفاده نشود</string>
 	<string name="rendering_attr_OSMMapperAssistant_name">دستیار نقشه‌کش OSM</string>
 	<string name="osm_edits">ویرایش‌های OSM</string>
@@ -2740,7 +2740,7 @@
     <string name="passed">آخرین استفاده: %1$s</string>
     <string name="save_as_line">ذخیره‌کردن به‌عنوان خط</string>
     <string name="store_tracks_in_monthly_directories">ذخیرهٔ مسیرهای ضبط‌شده در پوشه‌های ماهانه</string>
-    <string name="store_tracks_in_monthly_directories_descrp">"مسیرهای ضبط‌شده در هر ماه را در پوشهٔ همان ماه ذخیره کن (مثلاً  2017-1)."</string>
+    <string name="store_tracks_in_monthly_directories_descrp">"مسیرهای ضبط‌شده در هر ماه را در پوشهٔ همان ماه ذخیره کن (مثلاً  ۲۰۱۷-۰۱)."</string>
     <string name="display_zoom_level">زوم نمایش: %1$s</string>
     <string name="gpx_no_tracks_title">هنوز مسیری ندارید</string>
     <string name="gpx_no_tracks_title_folder">همچنین می‌توانید مسیرها را در این پوشه قرار دهید</string>
