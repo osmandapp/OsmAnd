@@ -62,7 +62,6 @@ import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
-import java.util.Locale;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
@@ -1306,23 +1305,30 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 							}
 
 							if (menuTopViewHeight != 0) {
-								int titleHeight = line1.getLineCount() * line1.getLineHeight() + line2LineCount * line2LineHeight + menuTitleTopBottomPadding;
+								int titleHeight = line1.getLineCount() * line1.getLineHeight()
+										+ line2LineCount * line2LineHeight + menuTitleTopBottomPadding;
 								if (titleHeight < line1.getMeasuredHeight() + line2MeasuredHeight) {
 									titleHeight = line1.getMeasuredHeight() + line2MeasuredHeight;
 								}
-								newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight + titleButtonHeight + downloadButtonsHeight + titleBottomButtonHeight + titleProgressHeight;
-								dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight - (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
+								newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight
+										+ titleButtonHeight + downloadButtonsHeight
+										+ titleBottomButtonHeight + titleProgressHeight;
+								dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight
+										- (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
 							} else {
-								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight - titleButtonHeight - downloadButtonsHeight - titleBottomButtonHeight - titleProgressHeight;
+								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight
+										- titleButtonHeight - downloadButtonsHeight - titleBottomButtonHeight - titleProgressHeight;
 								menuTitleTopBottomPadding = (line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight())
 										+ (line2MeasuredHeight - line2LineCount * line2LineHeight);
+								menuButtonsHeight = view.findViewById(R.id.context_menu_bottom_buttons).getHeight()
+										+ view.findViewById(R.id.buttons_bottom_border).getHeight()
+										+ view.findViewById(R.id.context_menu_buttons).getHeight();
 							}
 						}
 						menuTopViewHeight = newMenuTopViewHeight;
 						menuTopShadowAllHeight = newMenuTopShadowAllHeight;
 						menuTitleHeight = menuTopShadowAllHeight + dy;
 						menuBottomViewHeight = view.findViewById(R.id.context_menu_bottom_view).getHeight();
-						menuButtonsHeight = view.findViewById(R.id.context_menu_bottom_buttons).getHeight() + view.findViewById(R.id.buttons_bottom_border).getHeight() + view.findViewById(R.id.context_menu_buttons).getHeight();
 
 						menuFullHeightMax = menuTitleHeight + menuBottomViewHeight;
 
@@ -1603,6 +1609,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void updateMainViewLayout(int posY) {
 		if (view != null) {
 			menuFullHeight = view.getHeight() - posY;
+			menuTopShadowAllHeight = menuTitleHeight;
 			ViewGroup.LayoutParams lp = mainView.getLayoutParams();
 			lp.height = Math.max(menuFullHeight, menuTitleHeight);
 			mainView.setLayoutParams(lp);

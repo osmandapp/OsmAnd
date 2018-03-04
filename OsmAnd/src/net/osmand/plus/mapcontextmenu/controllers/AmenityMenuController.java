@@ -207,14 +207,16 @@ public class AmenityMenuController extends MenuController {
 						amenity.getLocation().getLongitude());
 
 		boolean useEnglishNames = getMapActivity().getMyApplication().getSettings().usingEnglishNames();
-
+		boolean isSubwayEntrance = amenity.getSubType().equals("subway_entrance");
+		
 		for (TransportIndexRepository t : reps) {
 			ArrayList<TransportStop> ls = new ArrayList<>();
-			QuadRect ll = MapUtils.calculateLatLonBbox(amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 150);
+			QuadRect ll = MapUtils.calculateLatLonBbox(amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(),
+					isSubwayEntrance ? 400 : 150);
 			t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
 			for (TransportStop tstop : ls) {
 				addRoutes(useEnglishNames, t, tstop,
-						(int) MapUtils.getDistance(tstop.getLocation(), amenity.getLocation()));
+						(int) MapUtils.getDistance(tstop.getLocation(), amenity.getLocation()), isSubwayEntrance);
 			}
 		}
 		Collections.sort(routes, new Comparator<TransportStopRoute>() {
@@ -236,12 +238,15 @@ public class AmenityMenuController extends MenuController {
 		builder.setRoutes(routes);
 	}
 
-	private void addRoutes(boolean useEnglishNames, TransportIndexRepository t, TransportStop s, int dist) {
+	private void addRoutes(boolean useEnglishNames, TransportIndexRepository t, TransportStop s, int dist, boolean isSubwayEntrance) {
 		Collection<TransportRoute> rts = t.getRouteForStop(s);
 		if (rts != null) {
 			for (TransportRoute rs : rts) {
 				if (!containsRef(rs)) {
 					TransportStopType type = TransportStopType.findType(rs.getType());
+					if (isSubwayEntrance && type != TransportStopType.SUBWAY && dist > 150) {
+						continue;
+					}
 					TransportStopRoute r = new TransportStopRoute();
 					r.type = type;
 					r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
