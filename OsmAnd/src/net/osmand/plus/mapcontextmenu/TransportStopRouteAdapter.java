@@ -41,7 +41,7 @@ public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> 
 		TransportStopRoute transportStopRoute = getItem(position);
 		if (transportStopRoute != null) {
 			TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
-			transportStopRouteTextView.setText(transportStopRoute.route.getRef());
+			transportStopRouteTextView.setText(getAdjustedRouteRef(transportStopRoute.route.getRef()));
 			GradientDrawable gradientDrawableBg = (GradientDrawable) transportStopRouteTextView.getBackground();
 			gradientDrawableBg.setColor(transportStopRoute.getColor(app, nightMode));
 		}
@@ -56,6 +56,19 @@ public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> 
 		});
 
 		return convertView;
+	}
+
+	private String getAdjustedRouteRef(String ref) {
+		if (ref != null) {
+			int charPos = ref.lastIndexOf(':');
+			if (charPos != -1) {
+			    ref = ref.substring(0, charPos);
+			}
+			if (ref.length() > 4) {
+				ref = ref.substring(0, 4);
+			}
+		}
+		return ref;
 	}
 
 	public interface OnClickListener {
