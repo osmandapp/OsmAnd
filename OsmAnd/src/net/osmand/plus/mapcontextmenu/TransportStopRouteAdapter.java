@@ -58,7 +58,7 @@ public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> 
 		return convertView;
 	}
 
-	public String getTransportRefSubstring(String ref) {
+	private String getTransportRefSubstring(String ref) {
 		if (ref.contains(":")) {
 			ref = ref.substring(0, ref.lastIndexOf(':'));
 		}
