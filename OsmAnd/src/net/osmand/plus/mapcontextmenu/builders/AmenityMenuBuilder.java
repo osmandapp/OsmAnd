@@ -290,9 +290,13 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					intent.setData(Uri.parse(text));
-					v.getContext().startActivity(intent);
+					if (text.contains(".wikipedia.org/w")) {
+						WikipediaDialogFragment.showFullArticle(v.getContext(), Uri.parse(text), !light);
+					} else {
+						Intent intent = new Intent(Intent.ACTION_VIEW);
+						intent.setData(Uri.parse(text));
+						v.getContext().startActivity(intent);
+					}
 				}
 			});
 		} else if (isWiki) {

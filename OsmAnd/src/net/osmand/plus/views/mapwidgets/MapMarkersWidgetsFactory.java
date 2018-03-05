@@ -216,7 +216,10 @@ public class MapMarkersWidgetsFactory {
 		}
 
 		boolean mapLinkedToLoc = map.getMapViewTrackingUtilities().isMapLinkedToLocation();
-		Float heading = !mapLinkedToLoc ? 0f : map.getMapViewTrackingUtilities().getHeading();
+		Float heading = 0f;
+		if (mapLinkedToLoc) {
+			heading = map.getMapViewTrackingUtilities().getHeading();
+		}
 		MapMarker marker = markers.get(0);
 		updateUI(loc, heading, marker, arrowImg, distText, okButton, addressText, true, customLocation != null);
 
