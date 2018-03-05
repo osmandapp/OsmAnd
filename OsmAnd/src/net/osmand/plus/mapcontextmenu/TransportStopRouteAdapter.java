@@ -59,11 +59,13 @@ public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> 
 	}
 
 	private String getAdjustedRouteRef(String ref) {
-		if (ref.contains(":")) {
-			ref = ref.substring(0, ref.lastIndexOf(':'));
-		}
-		if (ref.length() > 4) {
-			ref = ref.substring(0, 4);
+		if (ref != null) {
+			if (ref.contains(":")) {
+				ref = ref.substring(0, ref.lastIndexOf(':'));
+			}
+			if (ref.length() > 4) {
+				ref = ref.substring(0, 4);
+			}
 		}
 		return ref;
 	}
