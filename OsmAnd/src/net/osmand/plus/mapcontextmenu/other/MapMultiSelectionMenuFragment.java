@@ -16,7 +16,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu.MenuObject;
-import net.osmand.plus.widgets.TextViewEx;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -37,6 +36,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 		menu = ((MapActivity) getActivity()).getContextMenu().getMultiSelectionMenu();
 
 		view = inflater.inflate(R.layout.menu_obj_selection_fragment, container, false);
+
 		if (menu.isLandscapeLayout()) {
 			AndroidUtils.setBackground(view.getContext(), view, !menu.isLight(),
 					R.drawable.multi_selection_menu_bg_light_land, R.drawable.multi_selection_menu_bg_dark_land);
@@ -58,15 +58,18 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 
 		runLayoutListener();
 
-		view.findViewById(R.id.divider).setBackgroundColor(ContextCompat.getColor(getContext(), menu.isLight() ? R.color.multi_selection_menu_divider_light : R.color.multi_selection_menu_divider_dark));
+		view.findViewById(R.id.divider).setBackgroundColor(ContextCompat.getColor(getContext(), menu.isLight()
+				? R.color.multi_selection_menu_divider_light : R.color.multi_selection_menu_divider_dark));
 
-		((TextView) view.findViewById(R.id.cancel_row_text)).setTextColor(ContextCompat.getColor(getContext(), menu.isLight() ? R.color.multi_selection_menu_close_btn_light : R.color.multi_selection_menu_close_btn_dark));
+		((TextView) view.findViewById(R.id.cancel_row_text)).setTextColor(ContextCompat.getColor(getContext(),
+				menu.isLight() ? R.color.multi_selection_menu_close_btn_light : R.color.multi_selection_menu_close_btn_dark));
 		view.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				dismissMenu();
 			}
 		});
+
 		return view;
 	}
 
@@ -148,7 +151,8 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 					int maxHeight = (int) (headerHeight + cancelRowHeight);
 					for (int i = 0; i < 3; i++) {
 						View childView = listAdapter.getView(0, null, (ListView) contentView.findViewById(R.id.list));
-						childView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+						childView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+								View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
 						maxHeight += childView.getMeasuredHeight();
 					}
 					int height = contentView.getHeight();
