@@ -60,8 +60,8 @@ public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> 
 
 	private String getAdjustedRouteRef(String ref) {
 		if (ref != null) {
-			int charPos=ref.lastIndexOf(':');
-			if (charPos!=-1) {
+			int charPos = ref.lastIndexOf(':');
+			if (charPos != -1) {
 				ref = ref.substring(0, charPos);
 			}
 			if (ref.length() > 4) {
