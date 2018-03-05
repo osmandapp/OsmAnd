@@ -62,7 +62,7 @@ public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> 
 		if (ref != null) {
 			int charPos = ref.lastIndexOf(':');
 			if (charPos != -1) {
-				ref = ref.substring(0, charPos);
+			    ref = ref.substring(0, charPos);
 			}
 			if (ref.length() > 4) {
 				ref = ref.substring(0, 4);
