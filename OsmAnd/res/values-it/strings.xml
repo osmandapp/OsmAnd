@@ -2835,7 +2835,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="measurement_tool_action_bar">Esplora la mappa e aggiungi punti</string>
-    <string name="measurement_tool">Distanziometro</string>
+    <string name="measurement_tool">Misura la distanza</string>
     <string name="none_point_error">Aggiungi almeno un punto.</string>
     <string name="enter_gpx_name">Nome del file GPX:</string>
     <string name="show_on_map_after_saving">Dopo averlo salvato mostralo sulla mappa</string>
@@ -3069,4 +3069,15 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="dd_ddddd_format">DD.DDDDD°</string>
 	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
 	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
-	</resources>
+	<string name="distance_farthest">Distanza: prima i più lontani</string>
+    <string name="distance_nearest">Distanza: prima i più vicini</string>
+    <string name="enter_lon">Immetti la longitudine</string>
+    <string name="enter_lat">Immetti la latitudine</string>
+    <string name="enter_lat_and_lon">Immetti latitudine e longitudine</string>
+	<string name="east_abbreviation">E</string>
+	<string name="west_abbreviation">O</string>
+	<string name="south_abbreviation">S</string>
+	<string name="north_abbreviation">N</string>
+	<string name="optional_point_name">Nome del punto facoltativo</string>
+    <string name="transport_nearby_routes_within">Percorsi vicini in</string>
+    </resources>
