@@ -38,6 +38,10 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 		}
 		final MapMultiSelectionMenu.MenuObject item = getItem(position);
 		if (item != null) {
+			if (!menu.isLandscapeLayout()) {
+				AndroidUtils.setBackground(convertView.getContext(), convertView, !menu.isLight(),
+						R.color.ctx_menu_bg_light, R.color.ctx_menu_bg_dark);
+			}
 			convertView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
