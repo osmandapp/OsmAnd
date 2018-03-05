@@ -30,7 +30,7 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						addParkingPositionByType(false);
+						addParkingPosition(false);
 					}
 				})
 				.create();
@@ -43,16 +43,17 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						addParkingPositionByType(true);
+						addParkingPosition(true);
 					}
 				})
 				.create();
 		items.add(byDateItem);
 	}
 
-	private void addParkingPositionByType(boolean limited) {
+	private void addParkingPosition(boolean limited) {
 		Bundle args = getArguments();
-		LatLon latLon = new LatLon(args.getDouble(LAT_KEY), args.getDouble(LON_KEY));
+		Double latitude = args.getDouble(LAT_KEY);
+		Double longitude = args.getDouble(LON_KEY);
 		ParkingPositionPlugin plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
 		MapActivity mapActivity = (MapActivity) getActivity();
 
@@ -61,12 +62,12 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				plugin.showDeleteEventWarning(mapActivity);
 			}
 			if (limited) {
-				plugin.setParkingPosition(mapActivity, latLon.getLatitude(), latLon.getLongitude(), true);
+				plugin.setParkingPosition(mapActivity, latitude, longitude, true);
 				plugin.showSetTimeLimitDialog(mapActivity, new Dialog(getContext()));
-				mapActivity.getMapView().refreshMap();
+				mapActivity.refreshMap();
 			} else {
 				plugin.addOrRemoveParkingEvent(false);
-				plugin.setParkingPosition(mapActivity, latLon.getLatitude(), latLon.getLongitude(), false);
+				plugin.setParkingPosition(mapActivity, latitude, longitude, false);
 				plugin.showContextMenuIfNeeded(mapActivity, true);
 				mapActivity.refreshMap();
 			}
