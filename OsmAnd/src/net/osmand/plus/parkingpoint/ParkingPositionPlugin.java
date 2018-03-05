@@ -4,6 +4,8 @@ package net.osmand.plus.parkingpoint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
 import android.text.format.Time;
@@ -242,49 +244,16 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * It allows user to choose a type of parking (time-limited or time-unlimited).
 	 */
 	public void showAddParkingDialog(final MapActivity mapActivity, final double latitude, final double longitude) {
-		final boolean wasEventPreviouslyAdded = isParkingEventAdded();
-
-		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter();
-		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder();
-
-		menuAdapter.addItem(itemBuilder.setTitleId(R.string.osmand_parking_no_lim_text, app)
-				.setIcon(R.drawable.ic_action_time_start).setTag(1).createItem());
-		menuAdapter.addItem(itemBuilder.setTitleId(R.string.osmand_parking_time_limit, app)
-				.setIcon(R.drawable.ic_action_time_span).setTag(2).createItem());
-
-		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-		boolean light = app.getSettings().isLightContent();
-		final ArrayAdapter<ContextMenuItem> listAdapter = menuAdapter.createListAdapter(mapActivity, light);
-		builder.setTitle(R.string.parking_options);
-		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, int which) {
-				ContextMenuItem item = menuAdapter.getItem(which);
-				int index = item.getTag();
-				if (index == 1) {
-					dialog.dismiss();
-					if (wasEventPreviouslyAdded) {
-						showDeleteEventWarning(mapActivity);
-					}
-					addOrRemoveParkingEvent(false);
-					setParkingPosition(mapActivity, latitude, longitude, false);
-					showContextMenuIfNeeded(mapActivity,true);
-					mapActivity.getMapView().refreshMap();
-				} else if (index == 2) {
-					if (wasEventPreviouslyAdded) {
-						showDeleteEventWarning(mapActivity);
-					}
-					setParkingPosition(mapActivity, latitude, longitude, true);
-					showSetTimeLimitDialog(mapActivity, dialog);
-					mapActivity.getMapView().refreshMap();
-				}
-			}
-		});
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.create().show();
+		Bundle args = new Bundle();
+		args.putDouble(ParkingTypeBottomSheetDialogFragment.LAT_KEY, latitude);
+		args.putDouble(ParkingTypeBottomSheetDialogFragment.LON_KEY, longitude);
+		FragmentManager fragmentManager=mapActivity.getSupportFragmentManager();
+		ParkingTypeBottomSheetDialogFragment fragment = new ParkingTypeBottomSheetDialogFragment();
+		fragment.setArguments(args);
+		fragment.show(fragmentManager, ParkingTypeBottomSheetDialogFragment.TAG);
 	}
 
-	private void showContextMenuIfNeeded(final MapActivity mapActivity, boolean animated) {
+	void showContextMenuIfNeeded(final MapActivity mapActivity, boolean animated) {
 		if (parkingLayer != null) {
 			MapContextMenu menu = mapActivity.getContextMenu();
 			if (menu.isVisible()) {
@@ -324,7 +293,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * @param mapActivity
 	 * @param choose
 	 */
-	private void showSetTimeLimitDialog(final MapActivity mapActivity, final DialogInterface choose) {
+	void showSetTimeLimitDialog(final MapActivity mapActivity, final DialogInterface choose) {
 		final View setTimeParking = mapActivity.getLayoutInflater().inflate(R.layout.parking_set_time_limit, null);
 		AlertDialog.Builder setTime = new AlertDialog.Builder(mapActivity);
 		setTime.setView(setTimeParking);
@@ -414,7 +383,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * Method shows warning, if previously the event for time-limited parking was added to Calendar app.
 	 * @param activity
 	 */
-	private void showDeleteEventWarning(final Activity activity) {
+	void showDeleteEventWarning(final Activity activity) {
 		if (isParkingEventAdded()) {
 			AlertDialog.Builder deleteEventWarning = new AlertDialog.Builder(activity);
 			deleteEventWarning.setTitle(activity.getString(R.string.osmand_parking_warning));
@@ -436,7 +405,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * @param longitude
 	 * @param isLimited
 	 */
-	private void setParkingPosition(final MapActivity mapActivity, final double latitude, final double longitude, boolean isLimited) {
+	void setParkingPosition(final MapActivity mapActivity, final double latitude, final double longitude, boolean isLimited) {
 		setParkingPosition(latitude, longitude);
 		setParkingType(isLimited);
 		setParkingStartTime(Calendar.getInstance().getTimeInMillis());
