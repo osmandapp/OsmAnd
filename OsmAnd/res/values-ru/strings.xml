@@ -246,7 +246,7 @@
     <string name="osm_editors_ranking">Рейтинг картографов OSM</string>
     <string name="show_transparency_seekbar">Отображать регулировку прозрачности</string>
     <string name="show_polygons">Отображать полигоны</string>
-    <string name="rendering_attr_showMtbRoutes_name">Отображать MTB маршруты</string>
+    <string name="rendering_attr_showMtbRoutes_name">MTB маршруты</string>
     <string name="shared_string_select">Выбрать</string>
     <string name="rendering_attr_hideIcons_name">Значки POI</string>
     <string name="rendering_attr_horseRoutes_name">Конные маршруты</string>
@@ -1577,7 +1577,7 @@
     <string name="rendering_attr_buildings15zoom_name">Здания на масштабе 15</string>
     <string name="rendering_attr_hideAccess_name">Ограничения доступа</string>
     <string name="rendering_attr_showAccess_name">Отображать ограничения доступа</string>
-    <string name="rendering_attr_showCycleRoutes_name">Отображать веломаршруты</string>
+    <string name="rendering_attr_showCycleRoutes_name">Веломаршруты</string>
     <string name="osmo_auth_error_short">Сбой авторизации</string>
     <string name="map_preferred_locale_descr">Предпочтительный язык для меток на карте (если он не доступен, то английский язык или местные названия).</string>
     <string name="map_preferred_locale">Предпочтительный язык на карте</string>
@@ -2870,6 +2870,6 @@
 	<string name="north_abbreviation">С</string>
 	<string name="optional_point_name">Необязательное имя точки</string>
     <string name="rendering_attr_whiteWaterSports_name">Спортивные сплавы</string>
-    <string name="distance_farthest">Расстояние: сначала отдаленные</string>
+    <string name="distance_farthest">Расстояние: сначала отдаленная</string>
     <string name="distance_nearest">Расстояние: сначала ближайшая</string>
     </resources>
