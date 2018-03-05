@@ -52,8 +52,8 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 
 	private void addParkingPosition(boolean limited) {
 		Bundle args = getArguments();
-		Double latitude = args.getDouble(LAT_KEY);
-		Double longitude = args.getDouble(LON_KEY);
+		double latitude = args.getDouble(LAT_KEY);
+		double longitude = args.getDouble(LON_KEY);
 		ParkingPositionPlugin plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
 		MapActivity mapActivity = (MapActivity) getActivity();
 
