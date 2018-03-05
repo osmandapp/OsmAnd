@@ -43,7 +43,7 @@ public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> 
 			TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
 			String routeNumber = transportStopRoute.route.getRef();
 			if (routeNumber.length() > 4) {
-				routeNumber = routeNumber.substring(0, Math.min(routeNumber.length(), 4));
+				routeNumber = routeNumber.substring(0, 4);
 			}
 			if (routeNumber.contains(":")) {
 				routeNumber = routeNumber.substring(0, routeNumber.lastIndexOf(':'));
