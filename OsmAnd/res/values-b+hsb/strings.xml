@@ -1472,4 +1472,8 @@
     <string name="av_def_action_audio">Awdio nahrać</string>
     <string name="network_provider">syć</string>
     <string name="show_tunnels">Tunle</string>
-</resources>
+<string name="shared_string_current">tuchwilu</string>
+    <string name="save_current_track_descr">Tuchwilnu čaru nětko na SD-karće składować.</string>
+    <string name="save_current_track">Tuchwilnu GPX-čaru składować</string>
+    <string name="map_widget_plain_time">Tuchwilny čas</string>
+    </resources>
