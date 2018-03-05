@@ -41,14 +41,7 @@ public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> 
 		TransportStopRoute transportStopRoute = getItem(position);
 		if (transportStopRoute != null) {
 			TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
-			String routeNumber = transportStopRoute.route.getRef();
-			if (routeNumber.contains(":")) {
-				routeNumber = routeNumber.substring(0, routeNumber.lastIndexOf(':'));
-			}
-			if (routeNumber.length() > 4) {
-				routeNumber = routeNumber.substring(0, 4);
-			}
-			transportStopRouteTextView.setText(routeNumber);
+			transportStopRouteTextView.setText(getTransportRefSubstring(transportStopRoute.route.getRef()));
 			GradientDrawable gradientDrawableBg = (GradientDrawable) transportStopRouteTextView.getBackground();
 			gradientDrawableBg.setColor(transportStopRoute.getColor(app, nightMode));
 		}
@@ -63,6 +56,16 @@ public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> 
 		});
 
 		return convertView;
+	}
+
+	public String getTransportRefSubstring(String ref) {
+		if (ref.contains(":")) {
+			ref = ref.substring(0, ref.lastIndexOf(':'));
+		}
+		if (ref.length() > 4) {
+			ref = ref.substring(0, 4);
+		}
+		return ref;
 	}
 
 	public interface OnClickListener {
