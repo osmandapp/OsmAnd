@@ -290,7 +290,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (text.contains("wikipedia.org")) {
+					if (text.contains(".wikipedia.org/wiki/")) {
 						WikipediaDialogFragment.showFullArticle(v.getContext(), Uri.parse(text), !light);
 					} else {
 						Intent intent = new Intent(Intent.ACTION_VIEW);
