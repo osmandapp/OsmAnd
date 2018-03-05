@@ -3529,7 +3529,7 @@
 	<string name="poi_direction_wsw">Direção: oeste-sudoeste</string>
 	<string name="poi_direction_w">Direção: oeste</string>
 	<string name="poi_direction_wnw">Direção: oeste-noroeste</string>
-	<string name="poi_direction_nw">Direcção: noroeste</string>
+	<string name="poi_direction_nw">Direção: noroeste</string>
 	<string name="poi_direction_nnw">Direção: norte-noroeste</string>
 	<string name="poi_direction_forward">Direção: para frente</string>
 	<string name="poi_direction_backward">Direção: para trás</string>
@@ -3653,4 +3653,32 @@
 	<string name="poi_socket_cee_red_125a_current">Tomada: CEE vermelha 125A: corrente</string>
 	<string name="poi_socket_cee_red_125a_output">Tomada: CEE vermelha 125A: saída</string>
 	<string name="poi_socket_type1">Tomada: Tipo 1</string>
-	</resources>
+	<string name="poi_socket">Tomada</string>
+	<string name="poi_socket_chademo_output_filter">Saída CHAdeMO</string>
+	<string name="poi_socket_type2_output_filter">Saída do tipo 2</string>
+	<string name="poi_socket_type3_output_filter">Saída do tipo 3</string>
+	<string name="poi_socket_schuko_output_filter">Saída Schuko</string>
+
+<string name="poi_socket_chademo_output_high">Alta</string>
+	<string name="poi_socket_chademo_output_medium">Média</string>
+	<string name="poi_socket_chademo_output_low">Baixa</string>
+	<string name="poi_socket_type2_output_high">Alta</string>
+	<string name="poi_socket_type2_output_medium">Média</string>
+	<string name="poi_socket_type2_output_low">Baixa</string>
+	<string name="poi_socket_type2_combo_output_high">Alta</string>
+	<string name="poi_socket_type2_combo_output_medium">Média</string>
+	<string name="poi_socket_type2_combo_output_low">Baixa</string>
+	<string name="poi_socket_type3_output_high">Alta</string>
+	<string name="poi_socket_type3_output_medium">Média</string>
+	<string name="poi_socket_type3_output_low">Baixo</string>
+	<string name="poi_socket_cee_blue_output_high">Alto</string>
+	<string name="poi_socket_cee_blue_output_medium">Média</string>
+	<string name="poi_socket_cee_blue_output_low">Baixa</string>
+	<string name="poi_socket_schuko_output_high">Alta</string>
+	<string name="poi_socket_schuko_output_medium">Média</string>
+	<string name="poi_socket_schuko_output_low">Baixa</string>
+
+	<string name="poi_flooring">Loja de revestimentos</string>
+	<string name="poi_pottery">Oleiro</string>
+
+</resources>
