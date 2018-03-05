@@ -120,10 +120,12 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 			((ObservableListView) listView).setScrollViewCallbacks(new ObservableScrollViewCallbacks() {
 
 				boolean initialScroll = true;
+				int minHeight = getResources().getDimensionPixelSize(R.dimen.multi_selection_header_height)
+						+ getResources().getDimensionPixelSize(R.dimen.list_item_height);
 
 				@Override
 				public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-					if (scrollY <= 0) {
+					if (scrollY <= minHeight) {
 						if (initialScroll) {
 							initialScroll = false;
 						} else {
