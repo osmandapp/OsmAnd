@@ -284,7 +284,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				getString(R.string.lang_af) + incompleteSuffix,
 				getString(R.string.lang_ar),
 				getString(R.string.lang_ast) + incompleteSuffix,
-				getString(R.string.lang_az) + incompleteSuffix,
+				getString(R.string.lang_az),
 				getString(R.string.lang_be),
 				getString(R.string.lang_be_by),
 				getString(R.string.lang_bg),
