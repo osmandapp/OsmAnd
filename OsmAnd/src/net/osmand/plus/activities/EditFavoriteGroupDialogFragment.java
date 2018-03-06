@@ -49,22 +49,9 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 	private FavouritesDbHelper helper;
 
 	@Override
-	public void onStart() {
-		super.onStart();
-
-		final Window window = getDialog().getWindow();
-		WindowManager.LayoutParams params = window.getAttributes();
-		params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-		params.gravity = Gravity.BOTTOM;
-		params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-		window.setAttributes(params);
-	}
-
-	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 
-		final Activity activity = getActivity();
-		app = (OsmandApplication) activity.getApplicationContext();
+		app = getMyApplication();
 		helper = app.getFavorites();
 
 		Bundle args = null;
@@ -81,10 +68,9 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 			}
 		}
 		items.add(new TitleItem(Algorithms.isEmpty(group.name) ? app.getString(R.string.shared_string_favorites) : group.name));
-		IconsCache ic = app.getIconsCache();
 
 		BaseBottomSheetItem byTypeItem = new SimpleBottomSheetItem.Builder()
-				.setIcon(ic.getThemedIcon(R.drawable.ic_action_edit_dark))
+				.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
 				.setTitle(getString(R.string.edit_name))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(new View.OnClickListener() {
@@ -121,10 +107,11 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		final View changeColorView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.change_fav_color, null);
 		((ImageView) changeColorView.findViewById(R.id.change_color_icon))
-				.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_appearance));
+				.setImageDrawable(getContentIcon(R.drawable.ic_action_appearance));
 		updateColorView(changeColorView);
 
-		BaseBottomSheetItem changeColorItem = new BaseBottomSheetItem.Builder().setCustomView(changeColorView)
+		BaseBottomSheetItem changeColorItem = new BaseBottomSheetItem.Builder()
+				.setCustomView(changeColorView)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -155,12 +142,13 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 						});
 						popup.show();
 					}
-				}).create();
+				})
+				.create();
 		items.add(changeColorItem);
 
 		BaseBottomSheetItem showOnMapItem = new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(group.visible)
-				.setIcon(ic.getThemedIcon(R.drawable.ic_map))
+				.setIcon(getContentIcon(R.drawable.ic_map))
 				.setTitle(getString(R.string.shared_string_show_on_map))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch)
 				.setOnClickListener(new View.OnClickListener() {
@@ -189,7 +177,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 
 		if (app.getSettings().USE_MAP_MARKERS.get() && group.points.size() > 0 && !groupSyncedWithMarkers) {
 			BaseBottomSheetItem addToMarkersItem = new SimpleBottomSheetItem.Builder()
-					.setIcon(ic.getThemedIcon(R.drawable.ic_action_flag_dark))
+					.setIcon(getContentIcon(R.drawable.ic_action_flag_dark))
 					.setTitle(getString(R.string.shared_string_add_to_map_markers))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(new View.OnClickListener() {
@@ -208,7 +196,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 
 		if (app.getSettings().USE_MAP_MARKERS.get() && groupSyncedWithMarkers) {
 			BaseBottomSheetItem removeFromMarkersItem = new SimpleBottomSheetItem.Builder()
-					.setIcon(ic.getThemedIcon(R.drawable.ic_action_delete_dark))
+					.setIcon(getContentIcon(R.drawable.ic_action_delete_dark))
 					.setTitle(getString(R.string.remove_from_map_markers))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(new View.OnClickListener() {
@@ -224,7 +212,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		}
 		if (group.points.size() > 0) {
 			BaseBottomSheetItem shareItem = new SimpleBottomSheetItem.Builder()
-					.setIcon(ic.getThemedIcon(R.drawable.ic_action_gshare_dark))
+					.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
 					.setTitle(getString(R.string.shared_string_share))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(new View.OnClickListener() {
