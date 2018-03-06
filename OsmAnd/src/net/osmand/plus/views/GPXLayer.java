@@ -364,10 +364,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				List<WptPt> fullObjects = new ArrayList<>();
 				@ColorInt
 				int fileColor = getFileColor(g);
+				boolean synced = isSynced(g);
 				for (WptPt o : pts) {
 					if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
 							&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right
 							&& o != contextMenuLayer.getMoveableObject()) {
+						if (synced) {
+							if (mapMarkersHelper.getMapMarker(o) == null) {
+								continue;
+							}
+						}
 						cache.add(o);
 						float x = tileBox.getPixXFromLatLon(o.lat, o.lon);
 						float y = tileBox.getPixYFromLatLon(o.lat, o.lon);
@@ -385,7 +391,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					}
 					pointFileMap.put(o, g);
 				}
-				boolean synced = isSynced(g);
 				for (WptPt o : fullObjects) {
 					float x = tileBox.getPixXFromLatLon(o.lat, o.lon);
 					float y = tileBox.getPixYFromLatLon(o.lat, o.lon);
