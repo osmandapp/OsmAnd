@@ -58,7 +58,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		}
 		items.add(new TitleItem(Algorithms.isEmpty(group.name) ? app.getString(R.string.shared_string_favorites) : group.name));
 
-		BaseBottomSheetItem byTypeItem = new SimpleBottomSheetItem.Builder()
+		BaseBottomSheetItem editNameItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
 				.setTitle(getString(R.string.edit_name))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
@@ -88,7 +88,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 					}
 				})
 				.create();
-		items.add(byTypeItem);
+		items.add(editNameItem);
 
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		final View changeColorView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
