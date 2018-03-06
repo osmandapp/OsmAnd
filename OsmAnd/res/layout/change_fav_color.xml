@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/change_color_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingRight="@dimen/list_content_padding">
+
+    <ImageView
+        android:id="@+id/change_color_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_appearance" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingBottom="6dp"
+        android:paddingLeft="@dimen/list_content_padding"
+        android:paddingTop="6dp"
+        android:text="@string/change_color"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="@dimen/default_list_text_size" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/colorImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_circle" />
+
+
+</LinearLayout>
