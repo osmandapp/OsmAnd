@@ -12,20 +12,23 @@
 
     <ImageView
         android:id="@+id/change_color_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/standard_icon_size"
+        android:layout_height="@dimen/standard_icon_size"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+        android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
         android:src="@drawable/ic_action_appearance" />
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:paddingBottom="6dp"
-        android:paddingLeft="@dimen/list_content_padding"
-        android:paddingTop="6dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="@string/change_color"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="@dimen/default_list_text_size" />
+        android:textAppearance="@style/TextAppearance.ListItemTitle" />
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/colorImage"
