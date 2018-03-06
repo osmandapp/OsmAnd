@@ -93,8 +93,8 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
-	public boolean isWaypointButtonEnabled() {
-		return marker == null;
+ 	protected Object getCorrespondingMapObject() {
+		return marker;
 	}
 
 	@Override

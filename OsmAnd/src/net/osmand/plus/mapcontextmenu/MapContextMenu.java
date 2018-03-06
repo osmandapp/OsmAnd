@@ -832,9 +832,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public void buttonWaypointPressed() {
-		if (object != null && object instanceof MapMarker) {
+		MapMarker marker = getMapMarker();
+		if (marker != null) {
 			RenameMarkerBottomSheetDialogFragment
-					.showInstance(mapActivity.getSupportFragmentManager(), (MapMarker) object);
+					.showInstance(mapActivity.getSupportFragmentManager(), marker);
 		} else if (settings.USE_MAP_MARKERS.get()) {
 			if (pointDescription.isMapMarker()) {
 				hide();
@@ -854,6 +855,18 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					getPointDescriptionForTarget());
 		}
 		close();
+	}
+
+	@Nullable
+	private MapMarker getMapMarker() {
+		Object correspondingObj = menuController.getCorrespondingMapObject();
+		if (correspondingObj != null && correspondingObj instanceof MapMarker) {
+			return (MapMarker) correspondingObj;
+		}
+		if (object != null && object instanceof MapMarker) {
+			return (MapMarker) object;
+		}
+		return null;
 	}
 
 

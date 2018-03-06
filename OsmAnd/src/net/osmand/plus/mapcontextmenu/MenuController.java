@@ -239,6 +239,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	protected abstract Object getObject();
 
+	protected Object getCorrespondingMapObject() {
+		return null;
+	}
+
 	public boolean isActive() {
 		return active;
 	}
