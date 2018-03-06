@@ -53,7 +53,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 				group = helper.getGroup(groupName);
 			}
 		}
-		if (group==null){
+		if (group == null) {
 			return;
 		}
 		items.add(new TitleItem(Algorithms.isEmpty(group.name) ? app.getString(R.string.shared_string_favorites) : group.name));
