@@ -47,9 +47,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		final OsmandApplication app = getMyApplication();
 		FavouritesDbHelper helper = app.getFavorites();
 		Bundle args = null;
-		if (savedInstanceState != null) {
-			args = savedInstanceState;
-		} else if (getArguments() != null) {
+		if (getArguments() != null) {
 			args = getArguments();
 		}
 
@@ -240,10 +238,10 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 	}
 
 	private void updateColorView(View colorView) {
-		ImageView colorImageView = colorView.findViewById(R.id.colorImage);
+		ImageView colorImageView = (ImageView) colorView.findViewById(R.id.colorImage);
 		int color = group.color == 0 ? getResources().getColor(R.color.color_favorite) : group.color;
 		if (color == 0) {
-			colorImageView.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_circle));
+			colorImageView.setImageDrawable(getContentIcon(R.drawable.ic_action_circle));
 		} else {
 			colorImageView.setImageDrawable(getMyApplication().getIconsCache().getPaintedIcon(R.drawable.ic_action_circle, color));
 		}
@@ -282,7 +280,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 				v = LayoutInflater.from(getContext()).inflate(R.layout.rendering_prop_menu_item, parent, false);
 			}
 			if (color != null) {
-				TextView textView = v.findViewById(R.id.text1);
+				TextView textView = (TextView) v.findViewById(R.id.text1);
 				textView.setText(app.getString(ColorDialogs.paletteColors[position]));
 				textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
 						app.getIconsCache().getPaintedIcon(R.drawable.ic_action_circle, color), null);
