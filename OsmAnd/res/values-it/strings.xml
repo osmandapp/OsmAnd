@@ -3080,4 +3080,10 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Nome del punto facoltativo</string>
     <string name="transport_nearby_routes_within">Percorsi vicini in</string>
+    <string name="transport_nearby_routes">VICINO</string>
+    <string name="enter_the_file_name">Immetti il nome del file.</string>
+    <string name="map_import_error">Errore importazione mappa</string>
+    <string name="map_imported_successfully">Mappa importata correttamente</string>
+    <string name="winter_and_ski_renderer">Inverno e sci</string>
+    <string name="touring_view_renderer">Vista turistica (contrasto e dettagli)</string>
     </resources>
