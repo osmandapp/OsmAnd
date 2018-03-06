@@ -125,18 +125,14 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 
 				@Override
 				public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-					if (scrollY <= minHeight) {
-						if (initialScroll) {
-							initialScroll = false;
-						} else {
-							dismissMenu();
-						}
+					if (scrollY <= minHeight && !initialScroll) {
+						dismissMenu();
 					}
 				}
 
 				@Override
 				public void onDownMotionEvent() {
-
+					initialScroll = false;
 				}
 
 				@Override
