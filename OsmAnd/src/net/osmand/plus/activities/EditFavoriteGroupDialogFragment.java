@@ -118,7 +118,6 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		items.add(byTypeItem);
 
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-
 		final View changeColorView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.change_fav_color, null);
 		((ImageView) changeColorView.findViewById(R.id.change_color_icon))
@@ -172,6 +171,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 						getMyApplication().getFavorites()
 								.editFavouriteGroup(group, group.name, group.color, visible);
 						updateParentFragment();
+						dismiss();
 					}
 				})
 				.create();
