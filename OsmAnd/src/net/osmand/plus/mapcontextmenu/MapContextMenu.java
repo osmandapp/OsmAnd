@@ -835,27 +835,23 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (object != null && object instanceof MapMarker) {
 			RenameMarkerBottomSheetDialogFragment
 					.showInstance(mapActivity.getSupportFragmentManager(), (MapMarker) object);
-		} else {
-			if (pointDescription.isDestination()) {
-				mapActivity.getMapActions().editWaypoints();
-			} else if (settings.USE_MAP_MARKERS.get()) {
-				if (pointDescription.isMapMarker()) {
-					hide();
-					MapActivity.clearPrevActivityIntent();
-					MapMarkersDialogFragment.showInstance(mapActivity);
-				} else {
-					String mapObjectName = null;
-					if (object instanceof Amenity) {
-						Amenity amenity = (Amenity) object;
-						mapObjectName = amenity.getName() + "_" + amenity.getType().getKeyName();
-					}
-					mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
-							getPointDescriptionForMarker(), mapObjectName);
-				}
+		} else if (settings.USE_MAP_MARKERS.get()) {
+			if (pointDescription.isMapMarker()) {
+				hide();
+				MapActivity.clearPrevActivityIntent();
+				MapMarkersDialogFragment.showInstance(mapActivity);
 			} else {
-				mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
-						getPointDescriptionForTarget());
+				String mapObjectName = null;
+				if (object instanceof Amenity) {
+					Amenity amenity = (Amenity) object;
+					mapObjectName = amenity.getName() + "_" + amenity.getType().getKeyName();
+				}
+				mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
+						getPointDescriptionForMarker(), mapObjectName);
 			}
+		} else {
+			mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
+					getPointDescriptionForTarget());
 		}
 		close();
 	}
