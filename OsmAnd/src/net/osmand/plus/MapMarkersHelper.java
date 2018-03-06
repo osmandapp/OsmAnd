@@ -1438,7 +1438,8 @@ public class MapMarkersHelper {
 		}
 
 		public List<MapMarker> getActiveMarkers() {
-			List<MapMarker> activeMarkers = new ArrayList<>();
+			List<MapMarker> markers = new ArrayList<>(this.markers);
+			List<MapMarker> activeMarkers = new ArrayList<>(markers.size());
 			for (MapMarker marker : markers) {
 				if (!marker.history) {
 					activeMarkers.add(marker);
