@@ -2104,4 +2104,6 @@
     <string name="delay_to_start_navigation_descr">Marşrut planlaşdırma ekranında qalmaq üçün gözləmə müddətini göstərin.</string>
     <string name="osmand_parking_overdue">vaxtı keçmiş</string>
     <string name="lock_screen_request_explanation">%1$s enerji qənaətinə görə ekranı söndürmək üçün bu icazəyə ehtiyac duyur.</string>
+    <string name="rendering_value_disabled_name">Qeyri-aktiv</string>
+    <string name="daynight_mode_auto">Günəş çıxır/batır</string>
     </resources>
