@@ -46,11 +46,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 	public void createMenuItems(Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
 		FavouritesDbHelper helper = app.getFavorites();
-		Bundle args = null;
-		if (getArguments() != null) {
-			args = getArguments();
-		}
-
+		Bundle args = getArguments();
 		if (args != null) {
 			String groupName = args.getString(GROUP_NAME_KEY);
 			if (groupName != null) {
@@ -94,9 +90,9 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		final View changeColorView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.change_fav_color, null);
-		((ImageView) changeColorView.findViewById(R.id.change_color_icon))
-				.setImageDrawable(getContentIcon(R.drawable.ic_action_appearance));
-		updateColorView(changeColorView);
+		ImageView colorIcon = ((ImageView) changeColorView.findViewById(R.id.change_color_icon));
+		colorIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_appearance));
+		updateColorView(colorIcon);
 		BaseBottomSheetItem changeColorItem = new BaseBottomSheetItem.Builder()
 				.setCustomView(changeColorView)
 				.setOnClickListener(new View.OnClickListener() {
@@ -237,8 +233,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		}
 	}
 
-	private void updateColorView(View colorView) {
-		ImageView colorImageView = (ImageView) colorView.findViewById(R.id.colorImage);
+	private void updateColorView(ImageView colorImageView) {
 		int color = group.color == 0 ? getResources().getColor(R.color.color_favorite) : group.color;
 		if (color == 0) {
 			colorImageView.setImageDrawable(getContentIcon(R.drawable.ic_action_circle));
