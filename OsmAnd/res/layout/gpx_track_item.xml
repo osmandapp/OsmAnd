@@ -21,6 +21,17 @@
         android:paddingLeft="@dimen/dialog_content_margin"
         android:gravity="center_vertical">
 
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/toggle_checkbox_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingRight="@dimen/dialog_content_margin"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false" />
+
         <CheckBox
             android:id="@+id/check_local_index"
             android:layout_width="wrap_content"
@@ -184,18 +195,6 @@
                 android:focusableInTouchMode="false"
                 android:paddingRight="@dimen/list_content_padding"
                 android:gravity="center_vertical"/>
-
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/toggle_checkbox_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:paddingRight="@dimen/dialog_content_margin"
-                android:clickable="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:visibility="gone"/>
 
         </LinearLayout>
 
