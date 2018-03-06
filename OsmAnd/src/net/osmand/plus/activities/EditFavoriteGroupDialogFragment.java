@@ -52,6 +52,9 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 			if (groupName != null) {
 				group = helper.getGroup(groupName);
 			}
+			if (group==null){
+				return;
+			}
 		}
 		items.add(new TitleItem(Algorithms.isEmpty(group.name) ? app.getString(R.string.shared_string_favorites) : group.name));
 
