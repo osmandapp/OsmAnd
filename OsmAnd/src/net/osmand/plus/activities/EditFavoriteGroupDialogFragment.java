@@ -1,6 +1,5 @@
 package net.osmand.plus.activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -14,8 +13,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -25,7 +22,6 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.OsmandApplication;
@@ -44,16 +40,12 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 	public static final String TAG = "EditFavoriteGroupDialogFragment";
 	private static final String GROUP_NAME_KEY = "group_name_key";
 
-	private OsmandApplication app;
 	private FavoriteGroup group;
-	private FavouritesDbHelper helper;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-
-		app = getMyApplication();
-		helper = app.getFavorites();
-
+		final OsmandApplication app = getMyApplication();
+		FavouritesDbHelper helper = app.getFavorites();
 		Bundle args = null;
 		if (savedInstanceState != null) {
 			args = savedInstanceState;
@@ -80,9 +72,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 						b.setTitle(R.string.favorite_group_name);
 						final EditText nameEditText = new EditText(getContext());
 						nameEditText.setText(group.name);
-						int leftPadding = AndroidUtils.dpToPx(getContext(), 24f);
-						int topPadding = AndroidUtils.dpToPx(getContext(), 4f);
-						b.setView(nameEditText, leftPadding, topPadding, leftPadding, topPadding);
+						b.setView(nameEditText);
 						b.setNegativeButton(R.string.shared_string_cancel, null);
 						b.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
 							@Override
@@ -90,7 +80,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 								String name = nameEditText.getText().toString();
 								boolean nameChanged = !Algorithms.objectEquals(group.name, name);
 								if (nameChanged) {
-									getMyApplication().getFavorites()
+									app.getFavorites()
 											.editFavouriteGroup(group, name, group.color, group.visible);
 									updateParentFragment();
 								}
@@ -109,7 +99,6 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		((ImageView) changeColorView.findViewById(R.id.change_color_icon))
 				.setImageDrawable(getContentIcon(R.drawable.ic_action_appearance));
 		updateColorView(changeColorView);
-
 		BaseBottomSheetItem changeColorItem = new BaseBottomSheetItem.Builder()
 				.setCustomView(changeColorView)
 				.setOnClickListener(new View.OnClickListener() {
@@ -119,19 +108,18 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 						popup.setAnchorView(changeColorView);
 						popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
 						popup.setModal(true);
-						popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
+						popup.setDropDownGravity(Gravity.END | Gravity.TOP);
 						popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
 						popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
 						final FavoriteColorAdapter colorAdapter = new FavoriteColorAdapter(getActivity());
 						popup.setAdapter(colorAdapter);
 						popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
 							@Override
 							public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 								Integer color = colorAdapter.getItem(position);
 								if (color != null) {
 									if (color != group.color) {
-										getMyApplication().getFavorites()
+										app.getFavorites()
 												.editFavouriteGroup(group, group.name, color, group.visible);
 										updateParentFragment();
 									}
@@ -155,8 +143,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 					@Override
 					public void onClick(View v) {
 						boolean visible = !group.visible;
-//						showOnMapItem.setChecked(visible);
-						getMyApplication().getFavorites()
+						app.getFavorites()
 								.editFavouriteGroup(group, group.name, group.color, visible);
 						updateParentFragment();
 						dismiss();
@@ -169,8 +156,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 			items.add(new DividerItem(getContext()));
 		}
 
-
-		final MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
+		final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		final MarkersSyncGroup syncGroup =
 				new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE, group.color);
 		boolean groupSyncedWithMarkers = markersHelper.isGroupSynced(syncGroup.getId());
@@ -193,7 +179,6 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 			items.add(addToMarkersItem);
 		}
 
-
 		if (app.getSettings().USE_MAP_MARKERS.get() && groupSyncedWithMarkers) {
 			BaseBottomSheetItem removeFromMarkersItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_delete_dark))
@@ -210,6 +195,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 					.create();
 			items.add(removeFromMarkersItem);
 		}
+
 		if (group.points.size() > 0) {
 			BaseBottomSheetItem shareItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
@@ -228,7 +214,6 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 					.create();
 			items.add(shareItem);
 		}
-
 	}
 
 	@Override
@@ -255,12 +240,12 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 	}
 
 	private void updateColorView(View colorView) {
-		ImageView colorImageView = (ImageView) colorView.findViewById(R.id.colorImage);
+		ImageView colorImageView = colorView.findViewById(R.id.colorImage);
 		int color = group.color == 0 ? getResources().getColor(R.color.color_favorite) : group.color;
 		if (color == 0) {
-			colorImageView.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_circle));
+			colorImageView.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_circle));
 		} else {
-			colorImageView.setImageDrawable(app.getIconsCache().getPaintedIcon(R.drawable.ic_action_circle, color));
+			colorImageView.setImageDrawable(getMyApplication().getIconsCache().getPaintedIcon(R.drawable.ic_action_circle, color));
 		}
 	}
 
@@ -274,9 +259,9 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 
 	public static class FavoriteColorAdapter extends ArrayAdapter<Integer> {
 
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
-		public FavoriteColorAdapter(Context context) {
+		FavoriteColorAdapter(Context context) {
 			super(context, R.layout.rendering_prop_menu_item);
 			this.app = (OsmandApplication) getContext().getApplicationContext();
 			init();
@@ -294,10 +279,10 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 			Integer color = getItem(position);
 			View v = convertView;
 			if (v == null) {
-				v = LayoutInflater.from(getContext()).inflate(R.layout.rendering_prop_menu_item, null);
+				v = LayoutInflater.from(getContext()).inflate(R.layout.rendering_prop_menu_item, parent, false);
 			}
 			if (color != null) {
-				TextView textView = (TextView) v.findViewById(R.id.text1);
+				TextView textView = v.findViewById(R.id.text1);
 				textView.setText(app.getString(ColorDialogs.paletteColors[position]));
 				textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
 						app.getIconsCache().getPaintedIcon(R.drawable.ic_action_circle, color), null);
