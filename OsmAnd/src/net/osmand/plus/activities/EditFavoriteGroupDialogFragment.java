@@ -30,6 +30,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.ColorDialogs;
@@ -150,7 +151,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		items.add(showOnMapItem);
 
 		if (group.points.size() > 0) {
-			items.add(new DividerItem(getContext()));
+			items.add(new DividerHalfItem(getContext()));
 		}
 
 		final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
