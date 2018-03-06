@@ -90,9 +90,9 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		final View changeColorView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.change_fav_color, null);
-		ImageView colorIcon = ((ImageView) changeColorView.findViewById(R.id.change_color_icon));
-		colorIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_appearance));
-		updateColorView(colorIcon);
+		((ImageView) changeColorView.findViewById(R.id.change_color_icon))
+				.setImageDrawable(getContentIcon(R.drawable.ic_action_appearance));
+		updateColorView((ImageView) changeColorView.findViewById(R.id.colorImage));
 		BaseBottomSheetItem changeColorItem = new BaseBottomSheetItem.Builder()
 				.setCustomView(changeColorView)
 				.setOnClickListener(new View.OnClickListener() {
