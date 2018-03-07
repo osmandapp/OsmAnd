@@ -44,6 +44,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.views.controls.DynamicListView.DragIcon;
 import net.osmand.plus.views.controls.ListDividerShape;
 import net.osmand.plus.views.controls.StableArrayAdapter;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -611,11 +612,12 @@ public class WaypointDialogHelper {
 
 		});
 
-		final ImageButton moreBtn = (ImageButton) v.findViewById(R.id.image_button);
+		final TextViewEx optionsButton = (TextViewEx) v.findViewById(R.id.text_button);
 		if (type == WaypointHelper.TARGETS) {
-			moreBtn.setVisibility(View.VISIBLE);
-			moreBtn.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_overflow_menu_white, !nightMode));
-			moreBtn.setOnClickListener(new View.OnClickListener() {
+			optionsButton.setVisibility(View.VISIBLE);
+			optionsButton.setTextColor(ContextCompat.getColor(ctx,
+					nightMode ? R.color.color_dialog_buttons_dark : R.color.color_dialog_buttons_light));
+			optionsButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					boolean hasActivePoints = false;
@@ -638,7 +640,7 @@ public class WaypointDialogHelper {
 						}
 					}
 
-					final PopupMenu optionsMenu = new PopupMenu(ctx, moreBtn);
+					final PopupMenu optionsMenu = new PopupMenu(ctx, optionsButton);
 					DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 					MenuItem item;
 					if (hasActivePoints) {
@@ -673,7 +675,7 @@ public class WaypointDialogHelper {
 				}
 			});
 		} else {
-			moreBtn.setVisibility(View.GONE);
+			optionsButton.setVisibility(View.GONE);
 		}
 
 		TextView tv = (TextView) v.findViewById(R.id.header_text);
