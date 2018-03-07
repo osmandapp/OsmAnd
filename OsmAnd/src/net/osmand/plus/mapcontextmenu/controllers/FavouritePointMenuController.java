@@ -137,9 +137,6 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
-		if (!Algorithms.isEmpty(fav.getDescription())) {
-			addPlainMenuItem(R.drawable.ic_action_note_dark, null, fav.getDescription(), true, false, null);
-		}
 		Object originObject = getBuilder().getOriginObject();
 		if (originObject != null) {
 			if (originObject instanceof Amenity) {
