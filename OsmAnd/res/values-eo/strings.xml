@@ -2990,4 +2990,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="distance_farthest">Distanco: de plej malproksimaj</string>
     <string name="distance_nearest">Distanco: de plej proksimaj</string>
     <string name="rendering_attr_whiteWaterSports_name">Rapid-akvaj sportoj</string>
+    <string name="group_deleted">Forigis grupon</string>
     </resources>
