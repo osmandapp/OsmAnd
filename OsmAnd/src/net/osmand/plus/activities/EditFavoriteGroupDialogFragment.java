@@ -107,8 +107,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 						popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
 						popup.setModal(true);
 						popup.setDropDownGravity(Gravity.END | Gravity.TOP);
-						boolean orientationPortrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-						if (orientationPortrait) {
+						if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 							popup.setVerticalOffset(AndroidUtils.dpToPx(app, 48f));
 						} else {
 							popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
