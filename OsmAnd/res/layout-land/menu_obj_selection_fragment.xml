@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
+        <com.github.ksoichiro.android.observablescrollview.ObservableListView
             android:clipToPadding="false"
             android:paddingBottom="@dimen/bottom_sheet_content_padding_small"
             android:id="@+id/list"

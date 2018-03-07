@@ -15,9 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ListView
+        <com.github.ksoichiro.android.observablescrollview.ObservableListView
             android:clipToPadding="false"
-            android:paddingBottom="@dimen/bottom_sheet_content_padding_small"
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -35,7 +34,7 @@
             android:id="@+id/cancel_row"
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_sheet_cancel_button_height"
-            android:background="?attr/selectableItemBackground">
+            android:foreground="?attr/selectableItemBackground">
 
             <TextView
                 android:id="@+id/cancel_row_text"
