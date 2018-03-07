@@ -30,6 +30,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
@@ -471,9 +472,10 @@ public class GpxUiHelper {
 
 				if (item.getSelected() == null) {
 					v.findViewById(R.id.check_item).setVisibility(View.GONE);
+					v.findViewById(R.id.check_local_index).setVisibility(View.GONE);
 				} else {
 					if (checkLayout) {
-						final AppCompatCheckBox ch = ((AppCompatCheckBox) v.findViewById(R.id.toggle_checkbox_item));
+						final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_local_index));
 						ch.setVisibility(View.VISIBLE);
 						v.findViewById(R.id.toggle_item).setVisibility(View.GONE);
 						ch.setOnCheckedChangeListener(null);
