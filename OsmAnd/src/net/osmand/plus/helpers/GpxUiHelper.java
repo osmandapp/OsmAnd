@@ -472,6 +472,7 @@ public class GpxUiHelper {
 
 				if (item.getSelected() == null) {
 					v.findViewById(R.id.check_item).setVisibility(View.GONE);
+					v.findViewById(R.id.check_local_index).setVisibility(View.GONE);
 				} else {
 					if (checkLayout) {
 						final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_local_index));
