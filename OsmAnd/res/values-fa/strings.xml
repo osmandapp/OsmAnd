@@ -3068,4 +3068,6 @@
 	<string name="optional_point_name">نام اختیاری نقطه</string>
     <string name="transport_nearby_routes_within">مسیرهای نزدیک به</string>
     <string name="transport_nearby_routes">نزدیک</string>
+    <string name="group_deleted">گروه حذف شد</string>
+    <string name="rendering_attr_whiteWaterSports_name">ورزش‌‌های آب‌های خروشان</string>
     </resources>
