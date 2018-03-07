@@ -903,9 +903,8 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 				List<LatLon> selectedLatLon = markersHelper.getSelectedMarkersLatLon();
 
 				LatLon start = startFromLoc ? new LatLon(myLoc.getLatitude(), myLoc.getLongitude()) : selectedLatLon.remove(0);
-				LatLon end = selectedLatLon.remove(selectedLatLon.size() - 1);
 
-				int[] sequence = new TspAnt().readGraph(selectedLatLon, start, end).solve();
+				int[] sequence = new TspAnt().readGraph(selectedLatLon, start, null).solve();
 
 				List<MapMarker> res = new ArrayList<>();
 				for (int i = 0; i < sequence.length; i++) {

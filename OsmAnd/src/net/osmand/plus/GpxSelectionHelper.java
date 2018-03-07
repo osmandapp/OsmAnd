@@ -17,6 +17,7 @@ import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
+import net.osmand.plus.MapMarkersHelper.OnGroupSyncedListener;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -501,7 +502,7 @@ public class GpxSelectionHelper {
 			}
 		}
 		if (syncGroup) {
-			syncGpx(gpx, true);
+			syncGpx(gpx, true, null);
 		}
 		return sf;
 	}
@@ -538,10 +539,10 @@ public class GpxSelectionHelper {
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
-		syncGpx(gpxFile, false);
+		syncGpx(gpxFile, false, null);
 	}
 
-	private void syncGpx(GPXFile gpxFile, boolean createOrDeleteGroup) {
+	public void syncGpx(GPXFile gpxFile, boolean createOrDeleteGroup, @Nullable OnGroupSyncedListener callback) {
 		File gpx = new File(gpxFile.path);
 		if (gpx.exists()) {
 			MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
@@ -556,7 +557,7 @@ public class GpxSelectionHelper {
 					mapMarkersHelper.removeMarkersSyncGroup(gpx.getAbsolutePath(), true);
 				}
 			}
-			mapMarkersHelper.syncGroupAsync(syncGroup, enabled);
+			mapMarkersHelper.syncGroupAsync(syncGroup, enabled, callback);
 		}
 	}
 

@@ -32,6 +32,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.Algorithms;
 
@@ -106,7 +107,11 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 						popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
 						popup.setModal(true);
 						popup.setDropDownGravity(Gravity.END | Gravity.TOP);
-						popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
+						if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
+							popup.setVerticalOffset(AndroidUtils.dpToPx(app, 48f));
+						} else {
+							popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
+						}
 						popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
 						final FavoriteColorAdapter colorAdapter = new FavoriteColorAdapter(getActivity());
 						popup.setAdapter(colorAdapter);
