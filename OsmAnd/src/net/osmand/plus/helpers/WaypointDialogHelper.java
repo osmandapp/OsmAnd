@@ -644,7 +644,7 @@ public class WaypointDialogHelper {
 					if (hasActivePoints) {
 						item = optionsMenu.getMenu()
 								.add(R.string.intermediate_items_sort_by_distance)
-								.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_sort_waypoint_dark));
+								.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_sort_door_to_door));
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
