@@ -2807,4 +2807,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="enter_lat_and_lon">Settu inn lengdar- og breiddargráðu</string>
 	<string name="distance_farthest">Vegalengd: lengst fyrst</string>
     <string name="distance_nearest">Vegalengd: nálægast fyrst</string>
+    <string name="group_deleted">Hópi eytt</string>
+    <string name="rendering_attr_whiteWaterSports_name">Fljótasiglingar</string>
     </resources>
