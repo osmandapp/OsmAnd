@@ -493,7 +493,7 @@ public class MapMarkersHelper {
 		syncGroupAsync(group, true, groupSyncedListener);
 	}
 
-	private void syncGroupAsync(@NonNull final MarkersSyncGroup group, final boolean enabled, @Nullable final OnGroupSyncedListener groupSyncedListener) {
+	public void syncGroupAsync(@NonNull final MarkersSyncGroup group, final boolean enabled, @Nullable final OnGroupSyncedListener groupSyncedListener) {
 		ctx.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
