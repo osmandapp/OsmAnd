@@ -2,7 +2,6 @@ package net.osmand.plus.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -33,6 +32,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.Algorithms;
 
@@ -107,8 +107,8 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 						popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
 						popup.setModal(true);
 						popup.setDropDownGravity(Gravity.END | Gravity.TOP);
-						getResources().getConfiguration();
-						if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+						boolean orientationPortrait = AndroidUiHelper.isOrientationPortrait(getActivity());
+						if (orientationPortrait) {
 							popup.setVerticalOffset(AndroidUtils.dpToPx(app, 48f));
 						} else {
 							popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
