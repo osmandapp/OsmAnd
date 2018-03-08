@@ -2861,4 +2861,5 @@
     <string name="rendering_attr_whiteWaterSports_name">Спортивные сплавы</string>
     <string name="distance_farthest">Расстояние: сначала отдаленная</string>
     <string name="distance_nearest">Расстояние: сначала ближайшая</string>
+    <string name="group_deleted">Группа удалена</string>
     </resources>
