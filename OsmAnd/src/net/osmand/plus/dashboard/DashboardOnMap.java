@@ -212,6 +212,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		this.mapActivity = ma;
 	}
 
+	public WaypointDialogHelper getWaypointDialogHelper() {
+		return waypointDialogHelper;
+	}
 
 	public void createDashboardView() {
 		baseColor = ContextCompat.getColor(mapActivity, R.color.osmand_orange) & 0x00ffffff;

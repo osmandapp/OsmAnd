@@ -1,5 +1,6 @@
 package net.osmand.plus.helpers;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -9,11 +10,11 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.PopupMenu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -38,7 +39,10 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
-import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.views.controls.DynamicListView.DragIcon;
@@ -484,7 +488,7 @@ public class WaypointDialogHelper {
 	// switch start & first intermediate point
 	private static void switchStartAndFirstIntermediate(TargetPointsHelper targetPointsHelper, Activity ctx,
 														TargetPoint start, WaypointDialogHelper helper) {
-		List<TargetPoint> intermediatePoints =  targetPointsHelper.getIntermediatePointsWithTarget();
+		List<TargetPoint> intermediatePoints = targetPointsHelper.getIntermediatePointsWithTarget();
 		TargetPoint firstIntermediate = intermediatePoints.remove(0);
 		targetPointsHelper.setStartPoint(new LatLon(firstIntermediate.getLatitude(),
 				firstIntermediate.getLongitude()), false, firstIntermediate.getPointDescription(ctx));
@@ -640,37 +644,10 @@ public class WaypointDialogHelper {
 						}
 					}
 
-					final PopupMenu optionsMenu = new PopupMenu(ctx, optionsButton);
-					DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-					MenuItem item;
 					if (hasActivePoints) {
-						item = optionsMenu.getMenu()
-								.add(R.string.intermediate_items_sort_by_distance)
-								.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_sort_door_to_door));
-						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-							@Override
-							public boolean onMenuItemClick(MenuItem item) {
-								// sort door-to-door
-								sortAllTargets(app, ctx, helper);
-								return true;
-							}
-						});
-
-						item = optionsMenu.getMenu()
-								.add(R.string.switch_start_finish)
-								.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_undo_dark));
-						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-							@Override
-							public boolean onMenuItemClick(MenuItem item) {
-								TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-								switchStartAndFinish(targetPointsHelper, targetPointsHelper.getPointToNavigate(),
-										ctx, targetPointsHelper.getPointToStart(), app, helper);
-								return true;
-							}
-						});
-					}
-					if (optionsMenu.getMenu().size() > 0) {
-						optionsMenu.show();
+						TargetOptionsBottomSheetDialogFragment fragment = new TargetOptionsBottomSheetDialogFragment();
+						fragment.setUsedOnMap(true);
+						fragment.show(ctx.getSupportFragmentManager(), TargetOptionsBottomSheetDialogFragment.TAG);
 					}
 				}
 			});
@@ -896,6 +873,7 @@ public class WaypointDialogHelper {
 		MapActivity.launchMapActivityMoveToTop(a);
 	}
 
+	@SuppressLint("StaticFieldLeak")
 	public static void sortAllTargets(final OsmandApplication app, final Activity activity,
 									  final WaypointDialogHelper helper) {
 
@@ -984,5 +962,76 @@ public class WaypointDialogHelper {
 			}
 
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public static class TargetOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+
+		public static final String TAG = "TargetOptionsBottomSheetDialogFragment";
+
+		@Override
+		public void createMenuItems(Bundle savedInstanceState) {
+			items.add(new TitleItem(getString(R.string.shared_string_options)));
+
+			BaseBottomSheetItem sortDoorToDoorItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_sort_door_to_door))
+					.setTitle(getString(R.string.intermediate_items_sort_by_distance))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							MapActivity mapActivity = getMapActivity();
+							if (mapActivity != null) {
+								WaypointDialogHelper.sortAllTargets(
+										mapActivity.getMyApplication(),
+										mapActivity,
+										mapActivity.getDashboard().getWaypointDialogHelper()
+								);
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(sortDoorToDoorItem);
+
+			BaseBottomSheetItem reorderStartAndFinishItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_sort_reverse_order))
+					.setTitle(getString(R.string.switch_start_finish))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							MapActivity mapActivity = getMapActivity();
+							if (mapActivity != null) {
+								OsmandApplication app = mapActivity.getMyApplication();
+								TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
+								WaypointDialogHelper.switchStartAndFinish(
+										targetsHelper,
+										targetsHelper.getPointToNavigate(),
+										mapActivity,
+										targetsHelper.getPointToStart(),
+										app,
+										mapActivity.getDashboard().getWaypointDialogHelper()
+								);
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(reorderStartAndFinishItem);
+		}
+
+		@Override
+		protected int getCloseRowTextId() {
+			return R.string.shared_string_close;
+		}
+
+		@Nullable
+		private MapActivity getMapActivity() {
+			Activity activity = getActivity();
+			if (activity instanceof MapActivity) {
+				return (MapActivity) activity;
+			}
+			return null;
+		}
 	}
 }
