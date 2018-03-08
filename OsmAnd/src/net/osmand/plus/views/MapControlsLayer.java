@@ -1294,11 +1294,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 		};
 	}
 
-	public void selectAddress(String name, double latitude, double longitude, boolean target) {
+	public void selectAddress(String name, double latitude, double longitude, boolean target, boolean intermediate) {
 		if (name != null) {
-			mapRouteInfoMenu.selectAddress(name, new LatLon(latitude, longitude), target);
+			mapRouteInfoMenu.selectAddress(name, new LatLon(latitude, longitude), target, intermediate);
 		} else {
-			mapRouteInfoMenu.selectAddress("", new LatLon(latitude, longitude), target);
+			mapRouteInfoMenu.selectAddress("", new LatLon(latitude, longitude), target, intermediate);
 		}
 	}
 

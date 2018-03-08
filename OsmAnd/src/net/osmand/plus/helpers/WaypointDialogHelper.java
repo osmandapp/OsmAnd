@@ -15,6 +15,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.ListPopupWindow;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -45,6 +47,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.views.controls.DynamicListView.DragIcon;
 import net.osmand.plus.views.controls.ListDividerShape;
@@ -1027,7 +1030,19 @@ public class WaypointDialogHelper {
 
 			items.add(new DividerHalfItem(getContext()));
 
-			// add waypoint item
+			final BaseBottomSheetItem[] addWaypointItem = new BaseBottomSheetItem[1];
+			addWaypointItem[0] = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_plus))
+					.setTitle(getString(R.string.add_waypoint))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							onWaypointItemClick(addWaypointItem);
+						}
+					})
+					.create();
+			items.add(addWaypointItem[0]);
 
 			BaseBottomSheetItem clearIntermediatesItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_clear_all))
@@ -1055,6 +1070,41 @@ public class WaypointDialogHelper {
 		@Override
 		protected int getCloseRowTextId() {
 			return R.string.shared_string_close;
+		}
+
+		private void onWaypointItemClick(BaseBottomSheetItem[] addWaypointItem) {
+			final MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				final MapRouteInfoMenu routeMenu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
+				final ListPopupWindow popup = new ListPopupWindow(mapActivity);
+				popup.setAnchorView(addWaypointItem[0].getView());
+				popup.setDropDownGravity(Gravity.END | Gravity.TOP);
+				popup.setVerticalOffset(AndroidUtils.dpToPx(mapActivity, 48f));
+				popup.setModal(true);
+				popup.setAdapter(routeMenu.getIntermediatesPopupAdapter(mapActivity));
+				popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						if (id == MapRouteInfoMenu.SPINNER_FAV_ID) {
+							routeMenu.selectFavorite(null, false, true);
+						} else if (id == MapRouteInfoMenu.SPINNER_MAP_ID) {
+							routeMenu.selectOnScreen(false, true);
+						} else if (id == MapRouteInfoMenu.SPINNER_ADDRESS_ID) {
+							mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.INTERMEDIATE_SELECTION, false);
+						} else if (id == MapRouteInfoMenu.SPINNER_MAP_MARKER_MORE_ID) {
+							routeMenu.selectMapMarker(-1, false, true);
+						} else if (id == MapRouteInfoMenu.SPINNER_MAP_MARKER_1_ID) {
+							routeMenu.selectMapMarker(0, false, true);
+						} else if (id == MapRouteInfoMenu.SPINNER_MAP_MARKER_2_ID) {
+							routeMenu.selectMapMarker(1, false, true);
+						}
+						popup.dismiss();
+						dismiss();
+						mapActivity.getDashboard().hideDashboard();
+					}
+				});
+				popup.show();
+			}
 		}
 
 		@Nullable

@@ -30,6 +30,7 @@ import java.util.List;
 public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = "MapMarkerSelectionFragment";
 	private static final String TARGET_KEY = "target_key";
+	private static final String INTERMEDIATE_KEY = "intermediate_key";
 
 	private LatLon loc;
 	private Float heading;
@@ -37,6 +38,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 	private boolean nightMode;
 	private int screenOrientation;
 	private boolean target;
+	private boolean intermediate;
 
 	private OnMarkerSelectListener onClickListener;
 
@@ -52,6 +54,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 		}
 		if (bundle != null) {
 			target = bundle.getBoolean(TARGET_KEY);
+			intermediate = bundle.getBoolean(INTERMEDIATE_KEY);
 		}
 
 		MapActivity mapActivity = getMapActivity();
@@ -104,7 +107,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				if (onClickListener != null) {
-					onClickListener.onSelect(position, target);
+					onClickListener.onSelect(position, target, intermediate);
 				}
 				dismiss();
 			}
@@ -116,6 +119,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(TARGET_KEY, target);
+		outState.putBoolean(INTERMEDIATE_KEY, intermediate);
 	}
 
 	private class MapMarkersListAdapter extends ArrayAdapter<MapMarker> {
@@ -140,10 +144,11 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	public static MapMarkerSelectionFragment newInstance(boolean target) {
+	public static MapMarkerSelectionFragment newInstance(boolean target, boolean intermediate) {
 		MapMarkerSelectionFragment fragment = new MapMarkerSelectionFragment();
 		Bundle args = new Bundle();
 		args.putBoolean(TARGET_KEY, target);
+		args.putBoolean(INTERMEDIATE_KEY, intermediate);
 		fragment.setArguments(args);
 		return fragment;
 	}

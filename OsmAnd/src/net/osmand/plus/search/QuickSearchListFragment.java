@@ -269,13 +269,19 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				case START_POINT: {
 					mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
 							pointDescription != null ? pointDescription.getName() : null,
-							latitude, longitude, false);
+							latitude, longitude, false, false);
 					break;
 				}
 				case DESTINATION: {
 					mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
 							pointDescription != null ? pointDescription.getName() : null,
-							latitude, longitude, true);
+							latitude, longitude, true, false);
+					break;
+				}
+				case INTERMEDIATE: {
+					mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
+							pointDescription != null ? pointDescription.getName() : null,
+							latitude, longitude, false, true);
 					break;
 				}
 			}

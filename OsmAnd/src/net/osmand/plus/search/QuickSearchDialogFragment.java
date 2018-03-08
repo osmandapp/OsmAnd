@@ -198,6 +198,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		REGULAR,
 		START_POINT,
 		DESTINATION,
+		INTERMEDIATE
 	}
 
 	@Override
@@ -365,7 +366,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						} else {
 							SearchWord word = searchPhrase.getLastSelectedWord();
 							if (word != null) {
-								if ((searchType == QuickSearchType.START_POINT || searchType == QuickSearchType.DESTINATION)
+								if ((searchType == QuickSearchType.START_POINT || searchType == QuickSearchType.DESTINATION || searchType == QuickSearchType.INTERMEDIATE)
 										&& word.getLocation() != null) {
 									if (mainSearchFragment != null) {
 										mainSearchFragment.showResult(word.getResult());
@@ -801,7 +802,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (foundPartialLocation) {
 			buttonToolbarText.setText(app.getString(R.string.advanced_coords_search).toUpperCase());
 		} else if (searchEditText.getText().length() > 0) {
-			if (searchType == QuickSearchType.START_POINT || searchType == QuickSearchType.DESTINATION) {
+			if (searchType == QuickSearchType.START_POINT || searchType == QuickSearchType.DESTINATION || searchType == QuickSearchType.INTERMEDIATE) {
 				if (word != null && word.getResult() != null) {
 					buttonToolbarText.setText(app.getString(R.string.shared_string_select).toUpperCase() + " " + word.getResult().localeName.toUpperCase());
 				} else {
@@ -1761,7 +1762,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchEditText.setSelection(txt.length());
 		SearchWord lastWord = searchUICore.getPhrase().getLastSelectedWord();
 		boolean buttonToolbarVisible = lastWord == null || searchType == QuickSearchType.REGULAR ||
-				((searchType == QuickSearchType.START_POINT || searchType == QuickSearchType.DESTINATION)
+				((searchType == QuickSearchType.START_POINT || searchType == QuickSearchType.DESTINATION || searchType == QuickSearchType.INTERMEDIATE)
 				&& ObjectType.isAddress(lastWord.getType()));
 		buttonToolbarView.setVisibility(buttonToolbarVisible ? View.VISIBLE : View.GONE);
 		updateToolbarButton();

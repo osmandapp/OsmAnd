@@ -1821,11 +1821,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			hideContextMenu();
 		}
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
-		if (mode == ShowQuickSearchMode.START_POINT_SELECTION || mode == ShowQuickSearchMode.DESTINATION_SELECTION) {
+		if (mode == ShowQuickSearchMode.START_POINT_SELECTION || mode == ShowQuickSearchMode.DESTINATION_SELECTION
+				|| mode == ShowQuickSearchMode.INTERMEDIATE_SELECTION) {
 			if (fragment != null) {
 				fragment.dismiss();
 			}
-			if (mode == ShowQuickSearchMode.START_POINT_SELECTION) {
+			if (mode == ShowQuickSearchMode.INTERMEDIATE_SELECTION) {
+				QuickSearchDialogFragment.showInstance(this, "", null,
+						QuickSearchType.INTERMEDIATE, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, null);
+			} else if (mode == ShowQuickSearchMode.START_POINT_SELECTION) {
 				QuickSearchDialogFragment.showInstance(this, "", null,
 						QuickSearchType.START_POINT, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, null);
 			} else {
@@ -1915,6 +1919,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		CURRENT,
 		START_POINT_SELECTION,
 		DESTINATION_SELECTION,
+		INTERMEDIATE_SELECTION
 	}
 
 	public InAppHelper execInAppTask(@NonNull InAppHelper.InAppRunnable runnable) {
