@@ -5,7 +5,7 @@ import net.osmand.render.RenderingRuleSearchRequest;
 
 
 public class RenderingContext {
-	static enum ShadowRenderingMode {
+	public static enum ShadowRenderingMode {
 		// int shadowRenderingMode = 0; // no shadow (minumum CPU)
 		// int shadowRenderingMode = 1; // classic shadow (the implementaton in master)
 		// int shadowRenderingMode = 2; // blur shadow (most CPU, but still reasonable)

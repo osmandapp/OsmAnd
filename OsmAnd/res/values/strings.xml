@@ -571,17 +571,6 @@
     <string name="rendering_value_bold_name">Bold</string>
     <string name="no_map_markers_found">Please add map markers via map</string>
     <string name="no_waypoints_found">No waypoints found</string>
-    <string name="osmo_group_information_desc">
-        - Creating a group please give it a name and fill in description\n
-        - From the application group are created only with Simple type, read more on the website https://osmo.mobi/g/new \n
-        - Through a website you can manage a group, to place tracks and points available all\n
-        - We do not endorse the use of the group only one user, if this is not the POI group\n
-        - Private groups are limited to 8 persons \n
-        - Detailed terms and conditions always have an on website OsMo.mobi\n
-        - If you need special conditions - please contact support: osmo.mobi@gmail.com
-    </string>
-    <string name="osmo_specify_tracker_id">Please specify ID</string>
-    <string name="osmo_no_connection_msg">Cannot connect to the server OsMo:\n- check your Internet connection;\n- check the settings;\n- check out our Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">An anonymous user cannot:\n- create groups;\n- synchronize groups and devices with the server;\n- manage groups and devices in a personal dashboard on website.</string>
     <string name="report">Report</string>
     <string name="osmo_connect_to_device_tracker_id">Tracker ID</string>

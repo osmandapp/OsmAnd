@@ -12,6 +12,7 @@ import java.util.Map;
 
 import net.osmand.NativeLibrary;
 import net.osmand.NativeLibrary.NativeSearchResult;
+import net.osmand.RenderingContext.ShadowRenderingMode;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -786,7 +787,7 @@ public class OsmandRenderer {
 				p.setShader(getShader(resId));
 			}
 			// do not check shadow color here
-			if(rc.shadowRenderingMode == 1) {
+			if(rc.shadowRenderingMode == ShadowRenderingMode.ONE_STEP.value) {
 				int shadowColor = req.getIntPropertyValue(req.ALL.R_SHADOW_COLOR);
 				if(shadowColor == 0) {
 					shadowColor = rc.shadowRenderingColor;
@@ -852,7 +853,7 @@ public class OsmandRenderer {
 
 	private void drawPolylineShadow(Canvas canvas, RenderingContext rc, Path path, int shadowColor, int shadowRadius) {
 		// blurred shadows
-		if (rc.shadowRenderingMode == 2 && shadowRadius > 0) {
+		if (rc.shadowRenderingMode == ShadowRenderingMode.BLUR_SHADOW.value && shadowRadius > 0) {
 			// simply draw shadow? difference from option 3 ?
 			// paint.setColor(shadowRadius);
 			// paint.setColor(0xffffffff);
@@ -861,7 +862,7 @@ public class OsmandRenderer {
 		}
 
 		// option shadow = 3 with solid border
-		if (rc.shadowRenderingMode == 3 && shadowRadius > 0) {
+		if (rc.shadowRenderingMode == ShadowRenderingMode.SOLID_SHADOW.value  && shadowRadius > 0) {
 			paint.clearShadowLayer();
 			paint.setStrokeWidth(paint.getStrokeWidth() + shadowRadius * 2);
 			ColorFilter cf = new PorterDuffColorFilter(shadowColor, Mode.SRC_IN);

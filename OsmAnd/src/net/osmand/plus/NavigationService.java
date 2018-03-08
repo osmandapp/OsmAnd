@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.notifications.OsmandNotification;
-import net.osmand.plus.osmo.OsMoPlugin;
 
 public class NavigationService extends Service implements LocationListener {
 
@@ -267,12 +266,6 @@ public class NavigationService extends Service implements LocationListener {
 		app.getNotificationHelper().removeNotifications();
 		if (app.getNavigationService() != null &&
 				app.getSettings().DISABLE_RECORDING_ONCE_APP_KILLED.get()) {
-			OsMoPlugin plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
-			if (plugin != null) {
-				if (plugin.getTracker().isEnabledTracker()) {
-					plugin.getTracker().disableTracker();
-				}
-			}
 			NavigationService.this.stopSelf();
 		}
 	}
