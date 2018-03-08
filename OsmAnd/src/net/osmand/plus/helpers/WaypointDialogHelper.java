@@ -42,6 +42,7 @@ import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -472,6 +473,11 @@ public class WaypointDialogHelper {
 			helper.helperCallbacks.reloadAdapter();
 		}
 		updateRouteInfoMenu(ctx);
+	}
+
+	private static void clearAllIntermediatePoints(Activity ctx, TargetPointsHelper targetPointsHelper, WaypointDialogHelper helper) {
+		targetPointsHelper.clearAllIntermediatePoints(true);
+		updateControls(ctx, helper);
 	}
 
 	private static void replaceStartWithFirstIntermediate(TargetPointsHelper targetPointsHelper, Activity ctx,
@@ -1018,6 +1024,32 @@ public class WaypointDialogHelper {
 					})
 					.create();
 			items.add(reorderStartAndFinishItem);
+
+			items.add(new DividerHalfItem(getContext()));
+
+			// add waypoint item
+
+			BaseBottomSheetItem clearIntermediatesItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_clear_all))
+					.setTitle(getString(R.string.clear_all_intermediates))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setDisabled(getMyApplication().getTargetPointsHelper().getIntermediatePoints().isEmpty())
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							MapActivity mapActivity = getMapActivity();
+							if (mapActivity != null) {
+								WaypointDialogHelper.clearAllIntermediatePoints(
+										mapActivity,
+										mapActivity.getMyApplication().getTargetPointsHelper(),
+										mapActivity.getDashboard().getWaypointDialogHelper()
+								);
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(clearIntermediatesItem);
 		}
 
 		@Override
