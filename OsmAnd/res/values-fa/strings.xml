@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OSM ناموفق بود</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OSM ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
@@ -1021,7 +1020,7 @@
 	
 	<string name="voice">صدای ضبط‌شده</string>
 	<string name="no_vector_map_loaded">نقشه‌های بُرداری بارگیری نشدند</string>
-	<string name="map_route_by_gpx">با استفاده از فایل GPX مسیریابی کن</string>
+	
 	<string name="gpx_files_not_found">هیچ فایل GPXای در پوشهٔ tracks پیدا نشد</string>
 	<string name="layer_gpx_layer">مسیر GPX…</string>
 	<string name="error_reading_gpx">خطا در خواندن دادهٔ GPX</string>
@@ -1387,19 +1386,15 @@
 	<string name="index_name_canada">شمال آمریکا - کانادا</string>
     <string name="index_name_italy">اروپا - ایتالیا</string>
     <string name="index_name_gb">اروپا - بریتانیای کبیر</string>
-    <string name="osmo_settings_uuid">شناسهٔ یکتای دستگاه</string>
-    <string name="osmo_settings_descr">تنظیمات نظارتی را پیکربندی و کانال نظارتیِ شخصی را راه‌اندازی کنید.</string>
-    <string name="osmo_plugin_description">"این افزونه امکان نظارت زندهٔ OsMo را فراهم می‌کند؛ اینجا را ببینید: https://osmo.mobi  
-\n
-\nبه‌وسیلهٔ این افزونه دستگاه‌های دیگر را ردیابی کنید و خودتان را نیز ردگیری کنید. گروه‌های ناشناس بسازید و به‌طور همزمان موقعیتتان را با هم به‌اشتراک بگذارید. 
-\n
-\nعمر گروه‌های ناشناس چند روز است و امکانات محدودی دارند بنابراین نمی‌توانید بر آن مدیریت کنید؛ اما با عضویت در وبسایت osmo.mobi و ایجاد گروه با نام کاربری خود از تمامی امکانات آن بهره‌مند می‌شوید."</string>
-    <string name="osmo_settings">OsMo</string>
+    
+    
+    
+    
    	<string name="always_center_position_on_map">موقعیت همیشه در وسط صفحه باشد</string>
     <string name="voice_pref_title">صدا</string>
     <string name="misc_pref_title">متفرقه</string>
     <string name="localization_pref_title">بومی‌سازی</string>
-    <string name="osmo_plugin_name">مونیتورینگ OSM</string>
+    
     <string name="interrupt_music_descr">هنگام اعلام پیام‌های صوتی، پخش موسیقی نگه داشته شود، نه اینکه فقط آهسته شود.</string>
 	<string name="interrupt_music">مکث موسیقی</string>
 	<string name="share_route_as_gpx">اشتراک‌گذاری مسیر در قالب فایل GPX</string>
@@ -1410,42 +1405,42 @@
 	<string name="navigation_intent_invalid">قالب نامعتبر: %s</string>
 <string name="arrival_distance">اعلام رسیدن</string>
     
-    <string name="osmo_io_error">خطا در اتصال به OSMo: </string>
-    <string name="osmo_mode_on">پایان‌دادن به نشست OSMo</string>    
-    <string name="osmo_mode_off">َشروع نشست OsMo</string>
+    
+        
+    
     <string name="arrival_distance_descr">چه‌زمانی پیام رسیدن به مقصد اعلام شود؟</string>
     <string name="shared_string_share">اشتراک‌گذاری</string>
 	<string name="share_fav_subject">نقاط برگزیده به‌وسیلهٔ OsmAnd به‌اشتراک گذاشته شد</string>
 	<string name="hours_ago">ساعت قبل</string>
     <string name="minutes_ago">دقیقه قبل</string>
     <string name="seconds_ago">ثانیه قبل</string>
-    <string name="osmo_connect_to_device_name">نام کاربری</string>
-    <string name="osmo_connect_to_device_tracker_id">شناسهٔ ردیاب</string>
-    <string name="osmo_connect_to_device">پیوند با دستگاه</string>
     
     
-    <string name="osmo_connected_devices">دستگاه‌های متصل</string>
-    <string name="osmo_groups">گروه‌های OsMo</string>
-    <string name="osmo_auto_send_locations_descr">پس از راه‌اندازی برنامه، به‌صورت خودکار سفر را شروع کن و مکان‌ها را ارسال کن.</string>
-    <string name="osmo_auto_send_locations">شروع خودکار سفر</string>
-    <string name="osmo_tracker_id">شناسهٔ ردیاب</string>
-    <string name="osmo_tracker_id_descr">برای مشاهدهٔ شناسهٔ ردیاب لمس کنید.</string>
-    <string name="osmo_session_token">شناسهٔ نشست: %1$s</string>
-    <string name="osmo_auth_pending">در انتظار اعتبارسنجی…</string>
-    <string name="osmo_locations_sent">مکان‌های ارسال‌شده %1$d (در حافظهٔ میانجی %2$d)</string>
-    <string name="osmo_conn_successfull">اتصال برقرار شد: %1$s</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <string name="use_points_as_intermediates">محاسبهٔ مسیر بین نقاط</string>
-    <string name="osmo_mode_restart">راه‌اندازی مجدد نشست OsMo</string>
-    <string name="osmo_settings_debug">اطلاعات خطایابی</string>
-    <string name="osmo_follow">دنبال‌کردن</string>
-    <string name="osmo_sign_in">ورود</string>
-    <string name="osmo_create_groups_confirm">برای ساختن گروه باید ابتدا در OsMo عضو شده باشید.</string>
-    <string name="osmo_credentials_not_valid">اطلاعات کاربری شما برای OsMo معتبر نیست.</string>
-    <string name="osmo_regenerate_login_ids">بازتولید شناسهٔ کاربر</string>
-    <string name="osmo_use_server_name">نام ثبت‌شده</string>
-    <string name="osmo_connect_to_my_nickname">نام مستعار</string>
-    <string name="osmo_user_name">کاربر</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	
 	<string name="rendering_value_pink_name">صورتی</string>
 	
@@ -1455,37 +1450,37 @@
 	
 	
 	
-    <string name="osmo_edit_device">تغییر تنظیمات کاربر</string>
+    
     <string name="osmo_edit_color">رنگ نمایش</string>
-    <string name="osmo_group_info">اطلاعات</string>
-    <string name="osmo_group">گروه OsMo</string>
-    <string name="osmo_group_share">برای اتصال به گروه %2$s، شناسهٔ گروه را مشخص کنید (%1$s) یا اینجا را لمس کنید %3$s.</string>
-    <string name="osmo_share_connect_device">اجازه بدهید تا این دستگاه را به‌صورت دائمی دنبال کند</string>
-    <string name="osmo_share_current_session">به‌اشتراک‌گذاشتن نشست جاری در مرورگر</string>
-    <string name="osmo_cancel_moving_target">لغو جابه‌جایی مقصد</string>
-    <string name="osmo_center_location">در مرکز صفحه قرار بده</string>
-    <string name="osmo_set_moving_target">تنظیم به عنوان هدف متحرک</string>
-    <string name="osmo_regenerate_login_ids_confirm">آیا دربارهٔ بازتولید شناسه‌های شخصی خود مطمئنید؟ تمام دستگاه‌های متصل، دیگر قادر به ردیابی شما نخواهند بود.</string>
-    <string name="osmo_session_not_available">نشست در دسترس نیست. لطفاً ببینید «ارسال مکان‌ها» فعال باشد.</string>
-    <string name="osmo_share_session">اشتراک‌گذاری نشست</string>
-    <string name="osmo_session_id_share">لینک نشست برای ردیابی دستگاه (%1$s)</string>
-    <string name="osmo_tracker_id_share">به‌منظور اتصال به دستگاه هدف %2$s، لینک %3$s را لمس کنید یا شناسهٔ ردیاب را وارد نمایید (%1$s)</string>
-    <string name="osmo_track_interval">بازهٔ زمانی ثبت</string>
-	<string name="osmo_track_interval_descr">بازهٔ زمانی ارسال موقعیت را مشخص کنید.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+	
     <string name="int_days">روز</string>
     <string name="osmo_connect_menu">اتصال</string>
-    <string name="osmo_expire_group">انقضا در</string>
+    
     <string name="osmo_group_description">شرح</string>
-    <string name="osmo_group_policy">خط مشی</string>
-    <string name="osmo_connect_to_group_id">ID گروه</string>
-    <string name="osmo_group_name">نام گروه</string>
-    <string name="osmo_connect_to_group">پیوند با گروه</string>
-    <string name="osmo_connect">پیوستن</string>
-    <string name="osmo_create_group">ساخت گروه</string>
-    <string name="osmo_server_operation_failed">عملیات سرور OsMo ناموفق بود</string>
-    <string name="osmo_activity">نظارت OpenStreetMap</string>
-    <string name="osmo_enable_tracker">ارسال موقعیت من</string>
-    <string name="osmo_control">دسترسی سریع OsMo</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 	<string name="import_file_favourites">داده‌ها را به‌صورت فایل GPX ذخیره می‌کنید یا نقاط بین‌راهی را به نقاط برگزیده اضافه می‌کنید؟</string>
 	
@@ -1495,10 +1490,10 @@
     <string name="shared_string_my_favorites">نقاط برگزیدهٔ من</string>
     <string name="shared_string_my_places">مکان‌های من</string>
     
-    <string name="osmo_user_joined">کاربر %1$s به گروه %2$s پیوست</string>
-    <string name="osmo_user_left">کاربر %1$s گروه %2$s را ترک کرد</string>
-    <string name="osmo_show_group_notifications">نمایش اطلاعیه‌های گروه</string>
-    <string name="osmo_show_group_notifications_descr">زمانی که کاربر به گروه می‌پیوندد یا گروه را ترک می‌کند، پیام محوشونده نشان بده.</string>
+    
+    
+    
+    
     <string name="loading_smth">بارگیری %1$s…</string>
     <string name="map_widget_plain_time">زمان جاری</string>
     <string name="gpx_wpt">نقطهٔ بین‌راهی</string>
@@ -1541,25 +1536,18 @@
     <string name="none_selected_gpx">هیچ فایل GPX انتخاب نشده است. برای انتخاب‌کردن، یکی از مسیرهای موجود را لمس کنید و نگه دارید.</string>
     
     <string name="local_index_select_gpx_file">برای نمایش انتخاب کنید</string>
-    <string name="osmo_group_by_invite">ورود با دعوت</string>
-    <string name="osmo_group_information_desc">- تمامی گروه‌ها عمومی هستند! اگر می‌خواهید به‌صورت ناشناس وارد شوید، باید دستگاه را به‌طور مستقیم از طریق شناسهٔ ردگیری متصل نمایید.
-\n - گروه‌های خصوصی محدود به ۸ نفر هستند.
-\n - اگر تا ۲ هفته حداقل ۱ نفر فعالیتی نکند، گروه حذف خواهد شد.
-\n - می‌توانید عضویت در گروه را به عضویت از طریق دعوت محدود کنید، اما برای مدیرت گروه باید از طریق بخش مدیریت اقدام کنید.
-\n - قوانین و شرایط فعالیت را در وبسایت OsMo.mobi ببینید.
-\n - اگر به امکانات خاصی نیاز دارید، لطفاً با ما تماس بگیرید: osmo.mobi@gmail.com</string>
-    <string name="osmo_group_information">لطفاً قبل از ایجاد گروه مطالعه نمایید!</string>
-    <string name="osmo_not_signed_in">ورود به OsMo ناموفق بود</string>
-    <string name="osmo_gpx_points_downloaded">نقاط OsMo %1$s دانلود شد.</string>
-    <string name="osmo_auto_connect_descr">پس از راه‌اندازی برنامه به‌صورت خودکار به سرویس متصل شو.</string>
-    <string name="osmo_auto_connect">اتصال خودکار</string>
-    <string name="osmo_start_service">سرویس OsMo</string>
-    <string name="osmo_gpx_track_downloaded">مسیر OsMo %1$s دانلود شد.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="no_index_file_to_download">فایلی برای دانلود پیدا نشد. لطفاً اتصال اینترنت را بررسی کنید.</string>
-    <string name="osmo_auth_error_short">اجازهٔ دسترسی احراز نشد</string>
-    <string name="osmo_auth_error">تأیید مجوز OsMo با خطا مواجه شد: %1$s.
-\n شاید سرویس موقتاً پایین باشد یا اینکه اعتبار ثبت‌نامتان تمام شده است.
-\n آیا می‌خواهید با ثبت‌نام جدیدی ادامه دهید؟</string>
+    
+    
     <string name="keep_navigation_service">نگه‌داشتن</string>
 	<string name="stop_navigation_service">توقف</string>
 	<string name="enable_sleep_mode">فعال‌کردن حالت پس‌زمینهٔ GPS</string>
@@ -1591,9 +1579,9 @@
     <string name="rendering_value_bicycle_name">دوچرخه</string>
     <string name="rendering_value_pedestrian_name">عابر پیاده</string>
     <string name="rendering_attr_coloredBuildings_name">رنگ‌بندی ساختمان‌ها بر اساس نوع</string>
-    <string name="osmo_invite">دعوت‌کردن…</string>
-    <string name="osmo_leave_confirmation_msg">آیا گروه %1$s را ترک می‌کنید؟</string>
-    <string name="osmo_specify_tracker_id">لطفا ID را وارد کنید</string>
+    
+    
+    
     <string name="continue_navigation">ادامهٔ راهبری</string>
     <string name="pause_navigation">مکث‌کردن در راهبری</string>
     <string name="rendering_attr_subwayMode_name">مسیرهای مترو</string>
@@ -1725,7 +1713,7 @@
     <string name="shared_string_show">نشان بده</string>
 	<string name="configure_map">پیکربندی نقشه</string>
     <string name="search_radius_proximity">کمتر از</string>
-    <string name="osmo_device_not_found">دستگاه پیدا نشد</string>
+    
     <string name="anonymous_user">کاربر ناشناس</string>
     <string name="speed_limit_exceed">آخرین حدّ سرعت</string>
 	<string name="print_route">چاپ مسیر</string>
@@ -1812,7 +1800,7 @@
     <string name="current_route">مسیر فعلی</string>
     <string name="osm_changes_added_to_local_edits">تغییرات OSM به بستهٔ تغییرات محلی اضافه شد</string>
    	<string name="mark_to_delete">برای حذف‌کردن علامت بزنید</string>
-	<string name="osmo_grop_name_length_alert">نام گروه باید حداقل ۳حرفی باشد!</string>
+	
 	<string name="local_osm_changes_upload_all_confirm">دارید %1$d تغییر را به OSM ارسال می‌کنید. مطمئن هستید؟</string>
     <string name="confirmation_to_clear_history">آیا سوابق را پاک می‌کنید؟</string>
     <string name="delay_to_start_navigation_descr">زمان انتظار برای باقی‌ماندن در صفحهٔ طراحی مسیر را مشخص کنید.</string>
@@ -1847,10 +1835,7 @@
 	<string name="free">آزاد %1$s</string>
 	<string name="rendering_value__name">پیش‌فرض</string>
     <string name="rendering_value_highContrastRoads_name">جاده‌ها با تضاد رنگی زیاد</string>
-	<string name="osmo_no_connection_msg">نمی‌توان به سرور OsMo متصل شد:
-\n- اتصال اینترنتی خود را بررسی کنید؛
-\n- تنظیمات را بررسی کنید؛
-\n- توییتر ما را بررسی کنید: https://twitter.com/OsMomobi</string>
+	
     <string name="anonymous_user_hint">کاربر ناشناس نمی‌تواند:
 \n- گروه بسازد؛
 \n- گروه‌ها و دستگاه‌ها را با سرور همگام کند؛
@@ -1907,7 +1892,7 @@
     <string name="rendering_value_disabled_name">غیرفعال</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">رنگ‌بندی براساس وابستگی شبکه</string>
     <string name="rendering_value_walkingRoutesOSMC_name">رنگ‌بندی بر اساس نماد پیاده‌گردی OSMC</string>
-    <string name="osmo_share_my_location">اشتراک‌گذاری موقعیت</string>
+    
     <string name="no_address_found">آدرسی پیدا نشد</string>
 	<string name="shared_string_near">نزدیک</string>
     <string name="shared_string_hide">نشان نده</string>
@@ -2171,9 +2156,9 @@
     <string name="route_calculation">محاسبهٔ مسیر</string>
     <string name="gpx_add_track">اضافه‌کردن مسیر از فایل</string>
     <string name="gpx_appearance">ظاهر</string>
-    <string name="osmo_share_location">اشتراک‌گذاری</string>
-    <string name="osmo_pause_location">مکث</string>
-    <string name="osmo_service_running">خدمات OSM در حال اجراست</string>
+    
+    
+    
     <string name="trip_rec_notification_settings">فعال‌کردن شروع فوری ضبط</string>
     <string name="shared_string_notifications">اعلان‌ها</string>
     <string name="shared_string_continue">ادامه</string>
@@ -2774,7 +2759,7 @@
     <string name="add_route_points">افزودن نقاط مسیر</string>
     <string name="save_route_point">ذخیره‌کردن نقطهٔ مسیر</string>
     <string name="route_point_one">نقطهٔ مسیر 1</string>
-    <string name="shared_string_navigate">مسیریابی کن</string>
+    
     <string name="animate_my_location_desc">در هنگام راهبری نقشه بتواند برای نشان‌دادن موقعیت من جابه‌جا شود.</string>
     <string name="rendering_value_fine_name">خوب</string>
     <string name="plugin_nautical_descr">این افزونه قابلیت ارائهٔ نقشه‌های دریایی را به OsmAnd اضافه می‌کند. این نقشه‌ها برای قایقرانی، بادبانی‌رانی و دیگر انواع ورزش‌های آبی مفید است. 
@@ -2932,7 +2917,7 @@
     <string name="import_file">واردکردن فایل</string>
 	<string name="tap_on_map_to_hide_interface_descr">با لمس‌کردن صفحهٔ نقشه، دکمه‌ها و ابزارک‌ها را پنهان/آشکار کنید.</string>
     <string name="tap_on_map_to_hide_interface">حالت تمام‌صفحه</string>
-    <string name="show_on_top_bar">در نوار بالا نشان بده</string>
+    
     <string name="mark_passed">از این عبور کردم</string>
     <string name="rename_marker">تغییر نام نشانه</string>
     <string name="digits_quantity">تعداد رقم‌های اعشاری</string>

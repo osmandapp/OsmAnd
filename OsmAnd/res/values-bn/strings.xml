@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="regions">অঞ্চল</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="regions">অঞ্চল</string>
     
     <string name="region_maps">অঞ্চলভিত্তিক মানচিত্র</string>
     <string name="world_maps">বিশ্ব মানচিত্র</string>

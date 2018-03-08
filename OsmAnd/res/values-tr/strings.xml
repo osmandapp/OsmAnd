@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="close_changeset">Değişiklik listesini kapat</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
 	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
@@ -900,7 +899,7 @@
 	<string name="transport_searching_transport">Ulaştırma sonuçları (hedef yok):</string>
 	<string name="transport_searching_route">Ulaşım sonuçları (hedefe {0}):</string>
 	<string name="transport_search_again">Taşıma aramasını sıfırla</string>
-	<string name="map_route_by_gpx">GPX kullanarak gez</string>
+	
 	<string name="gpx_files_not_found">GPX dosyaları /tracks dizininde bulunamadı</string>
 	<string name="error_reading_gpx">GPX verisi okunamıyor</string>
 	<string name="poi_context_menu_modify">İÇN düzenle</string>
@@ -1162,10 +1161,10 @@
     <string name="gps_network_not_enabled">Konum servisi devre dışı. Ektinleştirmek ister misiniz?</string>
     <string name="shared_string_show_details">Ayrıntıları göster</string>
     <string name="rendering_value_disabled_name">Devre dışı</string>
-    <string name="osmo_share_my_location">Konumumu paylaş</string>
+    
     <string name="rendering_attr_hideHouseNumbers_name">Ev kapı numaraları</string>
     <string name="confirm_usage_speed_cameras">Çoğu ülkelerde (Almanya, Fransa, İtalya ve diğerleri) hız kamerası uyarılarının kullanımı yasaktır. OsmAnd yasaları çiğnemeniz durumunda sorumluluk kabul etmez. Eğer bu özellik sizin için uygunsa evet\'e tıklayın.</string>
-	<string name="osmo_grop_name_length_alert">Grup ismi en az 3 karakter olmalıdır!</string>
+	
 	<string name="shared_string_go">Git</string>
 	<string name="action_create">Eylem oluştur</string>
 	<string name="action_modify">Eylem düzenle</string>
@@ -1236,7 +1235,7 @@
 	<string name="map_widget_right">Sağ panel</string>
 	<string name="map_widget_left">Sol panel</string>
 	<string name="configure_map">Haritayı yapılandır</string>
-    <string name="osmo_device_not_found">Aygıt bulunamadı</string>
+    
     <string name="speed_limit_exceed">Hız sınırı oynama payı</string>
 	<string name="traffic_warning_speed_limit">Hız sınırı</string>
     <string name="traffic_warning_stop">Dur işareti</string>
@@ -1260,7 +1259,7 @@
     <string name="rendering_value_car_name">Araba</string>
     <string name="rendering_value_bicycle_name">Bisiklet</string>
     <string name="rendering_value_pedestrian_name">Yaya</string>
-    <string name="osmo_invite">Davet et…</string>
+    
     <string name="pause_navigation">Yolbulu duraklat</string>
  	<string name="continue_navigation">Navigasyona Devam Et</string>
     <string name="local_map_names">Yerel isimler</string>
@@ -1352,8 +1351,8 @@
 	<string name="track_points">İz noktası</string>
 	<string name="record_plugin_name">Seyahat kaydetme</string>
 	<string name="record_plugin_description">"Bu eklenti harita ekranında zımbırtıya elle donunca GPX iz oluşturma ve saklama özelliğini etkinleştirir, ya da GPX izini navigasyon boyunca otomatik olarak saklayabilir.\n\nKaydedilen izler arkadaşlarınızla veya OSM katkıcılarıyla paylaşılabilir. Atletler çalışmalarını izlemek için iz kaydedebilir.  Basit iz analizi OsmAnd içinden yapılabilir, misal tur zamanı, ortalama hız vs., ve izler tabii ki daha sonra üçüncü parti araçlarla da analiz edilebilir. "</string>
-	<string name="osmo_plugin_name">OpenStreetMap İzleme</string>
-	<string name="osmo_plugin_description">"Bu eklenti OsMo adlı gelişmiş canlı izlemeyi etkinleştirir, bkz  http://osmo.mobi.\n\nBir grup içindeki bütün aygıtları gerçek zamanlı olarak izleyebilir ve birbiriyle iletişim kurabilir. Oturum izleme veya daimi izleme için çeşitli seçenekleri vardır.\n\nAnonim gruplar belirli günlerde, ve belirli özelliklerde kendiliğinden oluşturulabilir, örn. uzaktan herhangi kontrol ve yönetici olmadan. Diğer yandan, tam özellikli gruplar websitesinde oluşturulabilir ve sadece kayıtlı kullanıcılar erişebilir. "</string>
+	
+	
 	<string name="plugin_touringview_name">Harita gezinti görünümü</string>
 	<string name="lang_new">Nevar / Nepal Bhasa</string>
     <string name="favorite_category_add_new">Yeni ekle</string>
@@ -1718,19 +1717,19 @@
     <string name="lang_eu">Bask</string>
     <string name="lang_be">Belarus</string>
     <string name="lang_bs">Boşnakça</string>
-    <string name="osmo_locations_sent">"Mekanlar (tampon%2$d)%1$d gönderildi "</string>
-    <string name="osmo_conn_successfull">"Kurulan Bağlantı:%1$s "</string>
-    <string name="osmo_io_error">OsMo bağlantı sorunu:</string>
-    <string name="osmo_session_token">Oturum belirteç:%1$s</string>
-    <string name="osmo_auth_pending">Yetki bekleniyor …</string>
-    <string name="osmo_settings_uuid">Benzersiz aygıt kimliği</string>
+    
+    
+    
+    
+    
+    
     <string name="use_points_as_intermediates">Noktalar arasındaki rotayı hesaplamak</string>
-    <string name="osmo_mode_restart">Osmo oturumu yeniden başlatın</string>
-    <string name="osmo_mode_on">Osmo oturumu durdurun</string>
-    <string name="osmo_mode_off">Osmo oturumu başlatın</string>
-    <string name="osmo_settings_debug">Hata ayıklama bilgisi</string>
-    <string name="osmo_settings_descr">İzleme ayarlarını yapılandır ve kişisel izleme kanalını kur</string>
-    <string name="osmo_settings">Osmo</string>
+    
+    
+    
+    
+    
+    
     <string name="always_center_position_on_map">Konumu sürekli ortada tut</string>
     <string name="voice_pref_title">Ses</string>
     <string name="misc_pref_title">Çeşitli</string>
@@ -1738,28 +1737,28 @@
     <string name="index_item_nation_addresses">Ülke adresleri</string>
     <string name="index_item_world_altitude_correction">Dünya rakım düzeltme</string>
     <string name="index_item_world_seamarks">Dünya deniz işaretleri</string>
-    <string name="osmo_connect_to_device">Aygıtla bağlantı</string>
-    <string name="osmo_connect_to_group">Grubu ile bağlantı</string>
-    <string name="osmo_connect">Katıl</string>
-    <string name="osmo_create_group">Grup oluştur</string>
-    <string name="osmo_server_operation_failed">OSMO Sunucu işlemi başarısız oldu</string>
-    <string name="osmo_activity">OpenStreetMap İzleme</string>
-    <string name="osmo_enable_tracker">Benim pozisyonları Gönder</string>
-    <string name="osmo_control">Osmo hızlı erişim</string>
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">saatler önce</string>
     <string name="minutes_ago">Dakkika önce</string>
     <string name="seconds_ago">Saniye önce</string>
-    <string name="osmo_connected_devices">Bağlı aygıtlar</string>
-    <string name="osmo_groups">OsMo Grupları</string>
-    <string name="osmo_auto_send_locations_descr">Uygulama başlatıldığında otomatik olarak seyahati başlat ve lokasyonları gönder.</string>
-    <string name="osmo_auto_send_locations">Otomatik olarak seyahati başlat</string>
-    <string name="osmo_tracker_id">İzleyici Kimliği</string>
-    <string name="osmo_tracker_id_descr">İzleyici kimliğini incelemek için tıkla</string>
-    <string name="osmo_group_policy">Politika</string>
-    <string name="osmo_connect_to_device_tracker_id"/>
-    <string name="osmo_connect_to_device_name">Kullanıcı adı</string>
-    <string name="osmo_connect_to_group_id">Grup kimliği</string>
-    <string name="osmo_group_name">Grup ismi</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="select_destination_and_intermediate_points">Varış noktaları seçin</string>
     <string name="layer_amenity_label"/>
     <string name="loading_smth">%1$s yükleniyor …</string>
@@ -1785,48 +1784,48 @@
     <string name="gpx_selection_points">%1$s\nPoints</string>
     <string name="gpx_selection_track">%1$s\nParça%2$s</string>
     <string name="gpx_file_is_empty">GPX boş parça</string>
-    <string name="osmo_user_joined">Kullanıcı%1$s grup%2$s katıldı</string>
-    <string name="osmo_user_left">Kullanıcı%1$s sol grup%2$s</string>
-    <string name="osmo_show_group_notifications">Grup bildirimleri göster</string>
-    <string name="osmo_show_group_notifications_descr">Kullanıcı katıldı veya grubu ayrıldığında tost iletileri göster</string>
-    <string name="osmo_follow">Takip</string>
-    <string name="osmo_sign_in">Oturum aç</string>
-    <string name="osmo_create_groups_confirm">Grupları oluşturmak için size Osmo bir kayıtlı kullanıcı olmanız gerekmektedir.</string>
-    <string name="osmo_credentials_not_valid">Sizin osmo kimlik bilgileri geçerli değildir.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Kişisel kimliklerinizi yenilemek istediğinize emin misiniz? Size bağlanan tüm aygıtlar artık sizi takip edemeyecek.</string>
-    <string name="osmo_regenerate_login_ids">Kullanıcı kimliği Regenerate</string>
-    <string name="osmo_cancel_moving_target">Hareketli hedef İptal</string>
-    <string name="osmo_center_location">Ekranda Merkezi</string>
-    <string name="osmo_set_moving_target">Hareketli bir hedef olarak ayarla</string>
-    <string name="osmo_use_server_name">Kayıtlı ad</string>
-    <string name="osmo_connect_to_my_nickname">Takma ad</string>
-    <string name="osmo_user_name">Kullanıcı</string>
-    <string name="osmo_edit_device">"kullanıcı değişim  özelliklerini"</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="osmo_edit_color">Ekran rengi</string>
-    <string name="osmo_group_info">Bilgi</string>
-    <string name="osmo_group">Osmo grubu</string>
-    <string name="osmo_group_share">Grup%2$s bağlayın belirttiğiniz grup kimliği (%1$s) ya da%3$s tıklayın amacıyla.</string>
-    <string name="osmo_share_connect_device">Bu aygıtı kalıcı olarak takip et</string>
-    <string name="osmo_share_current_session">Tarayıcıda Geçerli oturumu paylaşın</string>
-    <string name="osmo_session_not_available">Mevcut değil Session, konumlarını Gönder \'olmadığını kontrol edin açıktır.</string>
-    <string name="osmo_share_session">Hisse oturumu</string>
-    <string name="osmo_session_id_share">(%1$s) aygıtını takip için oturum adresi</string>
-    <string name="osmo_tracker_id_share">%2$s hedef aygıtına bağlanmak için, %3$s bağlantısına dokunun veya iz sürücü kimliği belirtin (%1$s)</string>
-    <string name="osmo_track_interval">Günlük aralığı</string>
-    <string name="osmo_track_interval_descr">Konum verisi göndermek için zaman aralığı seçin.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="int_days">Günler</string>
     <string name="osmo_connect_menu">Bağlamak</string>
-    <string name="osmo_expire_group">İçinde sona eriyor</string>
+    
     <string name="osmo_group_description">Açıklama</string>
     <string name="rendering_attr_horseRoutes_name">At yolları</string>
-    <string name="osmo_group_by_invite">Tarafından davet girin</string>
-    <string name="osmo_group_information">Bir grup oluşturmadan önce lütfen okuyunuz!</string>
-    <string name="osmo_not_signed_in">Osmo giriş başarısız</string>
-    <string name="osmo_gpx_points_downloaded">Osmo %1$s Yüklenme işaret ediyor.</string>
-    <string name="osmo_auto_connect_descr">Otomatik olarak uygulamanın başlatılmasından sonra hizmete bağlan.</string>
-    <string name="osmo_auto_connect">Otomatik bağlanma</string>
-    <string name="osmo_start_service">Osmo hizmeti</string>
-    <string name="osmo_gpx_track_downloaded">Osmo parça %1$s indirilen.</string>
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="no_index_file_to_download">Dosyalar bulunamadı, internet bağlantınızı kontrol ediniz.</string>
     <string name="none_selected_gpx">Hiçbir GPX dosyaları seçilmedi. Amacıyla seçmek için ve mevcut yolda tutun.</string>
     <string name="local_index_select_gpx_file">Göstermek için seçin</string>
@@ -1936,10 +1935,7 @@
     <string name="rendering_category_others">Diğer harita özellikleri</string>
     <string name="map_widget_appearance_rem">Kalan unsurlar</string>
     <string name="search_radius_proximity">Yakınında</string>
-    <string name="osmo_no_connection_msg">OsMo sunucusuna OSMO bağlanılamıyor:
-\n- İnternet bağlantınızı kontrol edin;
-\n- Ayarları kontrol edin;
-\n- Twitter\'ımızı kontrol edin: https://twitter.com/OsMomobi</string>
+    
     <string name="anonymous_user_hint">Bir anonim kullanıcı şunları yapamaz:
 \n- Grupları oluşturmak;
 \n- Grupları ve aygıtları sunucu ile senkronize etmek;
@@ -1985,8 +1981,8 @@
     <string name="download_additional_maps">Eksik haritalar %1$s (%2$d MB) indirilsinmi?</string>
     <string name="rendering_value_browse_map_name">Haritaya göz at</string>
     <string name="rendering_attr_coloredBuildings_name">Binalar türüne göre renk kodu</string>
-    <string name="osmo_leave_confirmation_msg">Grup %1$s ayrılmak istiyor musunuz?</string>
-    <string name="osmo_specify_tracker_id">Lütfen belirtin</string>
+    
+    
     <string name="keep_navigation_service">Devam et</string>
     <string name="map_preferred_locale_descr">Harita üzerindeki etiketler için tercih edilen dil (eğer mevcut değilse İngilizce veya yerel adlara geçilecektir)</string>
     <string name="map_preferred_locale">Tercih edilen harita dili</string>
@@ -2007,9 +2003,9 @@
     <string name="rendering_attr_showAccess_name">Geçiş hakkındaki kısıtlamaları ve geçiş ücretlerini göster</string>
     <string name="rendering_attr_showSurfaces_name">Yol yüzeyi göster</string>
     <string name="rendering_attr_showCycleRoutes_name">Döngüsü yolları göster</string>
-    <string name="osmo_auth_error_short">Yetkilendirme başarısız oldu</string>
-    <string name="osmo_auth_error">OsMo yetkilendirme hata oluştu: %1$s.\nAşağı bir geçici olarak hizmet olabilir veya kayıt süresi.\nYeni kayıt devam etmek istiyor musunuz?</string>
-    <string name="osmo_group_information_desc">" -Bir grup oluşturma ona bir isim vermek ve açıklama doldurunuz\n- Uygulama grubundan, sadece Basit türü ile oluşturulan web sitesinde daha fazla okumak https://osmo.mobi/g/new\n  - Bir grup yönetebilecek bir web sitesi aracılığıyla, parça ve mevcut tüm noktalarını yerleştirmek için\n  - Bu POI grubu değilse Biz grubun yalnızca bir kullanıcı kullanımını uygun bulmuyorum\n  - Özel gruplar 8 kişilik sınırlıdır\n  - Detaylı şartları her zaman OsMo.mobi web sitesinde bir var\n  Eğer özel şartları gerekiyorsa - - irtibata geçiniz desteği: osmo.mobi@gmail.com "</string>
+    
+    
+    
     <string name="update">Bütün Güncellemler</string>
     <string name="only_download_over_wifi">Sadece WiFi üzerinden İndir</string>
     <string name="live_update">Canlı güncelleştirme</string>
@@ -2290,7 +2286,7 @@
     <string name="context_menu_item_modify_note">OSM notunu değiştir</string>
     <string name="make_round_trip_descr">Başlangıç noktasının bir kopyasını varış noktası olarak ekle.</string>
     <string name="make_round_trip">Gidiş-dönüş seyahat yap</string>
-    <string name="shared_string_navigate">Git</string>
+    
     <string name="coordinates_format">Koordinat biçimi</string>
     <string name="use_system_keyboard">Sistemde tanımlı klavyeyi kullan</string>
     <string name="fast_coordinates_input_descr">Koordinat giriş biçimini seç. Bunu her zaman Seçenekler\'den değiştirebilirsiniz.</string>
@@ -2335,7 +2331,7 @@
     <string name="go_to_next_field">Sonraki alana git</string>
     <string name="rename_marker">İşaretçiyi yeniden adlandır</string>
     <string name="tap_on_map_to_hide_interface">Tam ekran modu</string>
-    <string name="show_on_top_bar">Üst Menüde Görüntüle</string>
+    
     <string name="import_as_favorites">Sık kullanılanlar olarak içeri aktar</string>
     <string name="import_file">Dosyayı içe aktar</string>
 	<string name="wrong_input">Yanlış girdi</string>
@@ -2412,9 +2408,9 @@
     <string name="points_delete_multiple">%1$d nokta(lar) sileceksiniz. Emin misiniz?</string>
     <string name="wiki_around">Yakındaki Wikipedia makaleleri</string>
     <string name="route_calculation">Rota hesaplama</string>
-    <string name="osmo_share_location">Paylaş</string>
-    <string name="osmo_pause_location">Duraklat</string>
-    <string name="osmo_service_running">OsMo hizmeti çalışıyor</string>
+    
+    
+    
     <string name="shared_string_notifications">Bildirimler</string>
     <string name="shared_string_continue">Devam et</string>
     <string name="shared_string_pause">Duraklat</string>

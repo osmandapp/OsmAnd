@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Ćah</string>
     <string name="map_widget_battery">Staw baterije</string>
@@ -16,7 +15,7 @@
     <string name="access_hint_enter_description">Zapodajće wopisanje.</string>
     <string name="access_empty_list">Prózdna lisćina</string>
     <string name="access_shared_string_not_installed">Njeinstalowane</string>
-    <string name="osmo_share_my_location">Městno zdźělić</string>
+    
     <string name="shared_string_move_up">Horje</string>
     <string name="shared_string_move_down">Dele</string>
     <string name="finish_navigation">Nawigaciju zakónčić</string>
@@ -274,17 +273,17 @@
     <string name="rendering_attr_hideWoodScrubs_name">Lěsy a kěrki</string>
     <string name="rendering_attr_moreDetailed_name">Wjace detailow</string>
     <string name="rendering_attr_lessDetailed_name">Mjenje detailow</string>
-    <string name="osmo_auth_error_short">Awtorizacija njewuspěšna</string>
+    
     <string name="sort_by_name">Po mjenje sortować</string>
     <string name="gpx_info_average_speed">Přerězna spěšnosć: %1$s</string>
     <string name="gpx_info_maximum_speed">Maksimalna spěšnosć: %1$s</string>
     <string name="gpx_info_avg_altitude">Přerězna wysokosć: %1$s</string>
-    <string name="osmo_sign_in">Přizjewić</string>
-    <string name="osmo_user_name">Wužiwar</string>
+    
+    
     <string name="osmo_group_description">Wopis</string>
-    <string name="osmo_connect_to_device_name">Mjeno wužiwarja</string>
-    <string name="osmo_group_name">Mjeno skupiny</string>
-    <string name="osmo_auth_pending">Čaka na awtorizaciju…</string>
+    
+    
+    
     <string name="always_center_position_on_map">Stejišćo přeco w srjedźišću pokazać</string>
     <string name="voice_pref_title">Zwuk</string>
     <string name="misc_pref_title">Wšelake</string>
@@ -914,7 +913,7 @@
     <string name="shared_string_install">Instalować</string>
     <string name="shared_string_add_photos">Wobrazy přidać</string>
     <string name="no_photos_descr">Za tute městno fota nimamy.</string>
-    <string name="measurement_tool_speed">spěšnosć: %1$s</string>
+    
     <string name="save_as_route_point">Jako dypki na čarje składować</string>
     <string name="save_as_line">Jako liniju składować</string>
     <string name="route_point">dypk na čarje</string>
@@ -1026,7 +1025,7 @@
     <string name="gpx_no_tracks_title">Hišće nimaš gpx-čary</string>
     <string name="gpx_add_track">Gpx-čaru dodać</string>
     <string name="gpx_appearance">Napohlad</string>
-    <string name="osmo_share_location">Zdźělić</string>
+    
     <string name="shared_string_notifications">Zdźělenki</string>
     <string name="shared_string_continue">Pokročić</string>
     <string name="shared_string_paused">Přetorhnjene</string>
@@ -1053,7 +1052,7 @@
     <string name="rendering_attr_noPolygons_name">Polygony</string>
     <string name="rendering_attr_contourLines_name">Wysokostne linije pokazać</string>
     <string name="get_directions">Nawigacija</string>
-    <string name="measurement_tool_altitude">Wysokosć: %1$s</string>
+    
     <string name="add_point_before">Předchadny dypk dodać</string>
     <string name="add_point_after">Přichodny dypk dodać</string>
     <string name="quick_action_start_stop_navigation">Nawigaciju zahajić/přetorhnyć</string>
@@ -1311,7 +1310,7 @@
     <string name="shared_string_places">Městna</string>
     <string name="shared_string_search">Pytać</string>
     <string name="shared_string_message">Zdźělenka</string>
-    <string name="osmo_grop_name_length_alert">Mjeno skupiny dyrbjało měć znajmjeńša tři pismiki!</string>
+    
     <string name="osmand_parking_hour">h</string>
     <string name="osmand_parking_minute">mjeńš</string>
     <string name="osmand_parking_time_left">wyše</string>

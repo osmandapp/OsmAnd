@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_coloredBuildings_name">Farga bygningar</string>
-    <string name="osmo_invite">Inviter …</string>
-    <string name="osmo_leave_confirmation_msg">Ønskjer du å forlata gruppa %1$s?</string>
-    <string name="osmo_specify_tracker_id">Oppgje ID</string>
+    
+    
+    
     <string name="continue_navigation">Hald fram navigering</string>
     <string name="pause_navigation">Stopp navigering mellombels</string>
     <string name="rendering_attr_subwayMode_name">T-banemodus</string>
@@ -31,9 +31,9 @@
     <string name="rendering_attr_showSurfaceGrade_name">Vis vegkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Vis vegdekke</string>
     <string name="rendering_attr_showCycleRoutes_name">Vis sykkelruter</string>
-    <string name="osmo_auto_connect">Kopla til automatisk</string>
-    <string name="osmo_start_service">OsMo-teneste</string>
-    <string name="osmo_gpx_track_downloaded">OsMo-spor %1$s lasta ned.</string>
+    
+    
+    
     <string name="sort_by_distance">Sorter etter avstand</string>
     <string name="sort_by_name">Sorter etter namn</string>
     
@@ -61,10 +61,10 @@
     <string name="shared_string_my_favorites">Mine favorittar</string>
     <string name="shared_string_my_places">Mine stadar</string>
     
-    <string name="osmo_follow">Følg</string>
-    <string name="osmo_sign_in">Logg inn</string>
-    <string name="osmo_connect_to_my_nickname">Kallenamnet mitt</string>
-    <string name="osmo_user_name">Brukarnamn</string>
+    
+    
+    
+    
 	
 	<string name="rendering_value_pink_name">rosa</string>
 	
@@ -74,16 +74,16 @@
 	
 	
 	
-    <string name="osmo_edit_device">Endra brukareigenskapar</string>
+    
     <string name="osmo_edit_color">Vis fargar</string>
-    <string name="osmo_group_info">Info</string>
-    <string name="osmo_group">OsMo-gruppe</string>
-    <string name="osmo_share_session">Del økt</string>
-    <string name="osmo_track_interval">Loggeintervall</string>
+    
+    
+    
+    
 	<string name="int_days">dagar</string>
     <string name="osmo_connect_menu">Kopla til</string>
     <string name="osmo_group_description">Skildring</string>
-    <string name="osmo_connect_to_device_name">Brukar</string>
+    
     <string name="lang_zh">Kinesisk</string>
     <string name="lang_pt_br">Portugisisk (Brasil)</string>
     <string name="lang_en">Engelsk</string>

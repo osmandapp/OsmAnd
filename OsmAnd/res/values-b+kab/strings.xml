@@ -1,7 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="rendering_value_car_name">Takeṛṛust</string>
-    <string name="osmo_leave_confirmation_msg">Tebγiḍ ad teffγeḍ seg ugraw %1$s ?</string>
-    <string name="osmo_invite">Ɛarḍed …</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="rendering_value_car_name">Takeṛṛust</string>
+    
+    
     <string name="rendering_value_bicycle_name">Azlalam</string>
     <string name="rendering_value_pedestrian_name">Amsebrid</string>
     <string name="shared_string_from">sγur</string>
@@ -63,9 +62,9 @@
     <string name="rendering_attr_hideText_name">Aḍris</string>
     <string name="int_days">ussan</string>
     <string name="osmo_connect_menu">Qqen</string>
-    <string name="osmo_group_policy">Tasertit</string>
-    <string name="osmo_group_name">Isem n wegraw</string>
-    <string name="osmo_create_group">Snulfu-d agraw</string>
+    
+    
+    
     <string name="hours_ago">isragen aya</string>
     <string name="voice_pref_title">Taγuct</string>
     <string name="lang_zh">Tacinwatt</string>
@@ -218,7 +217,7 @@
 	<string name="shared_string_is_open_24_7">Taneldit 24/7</string>
     <string name="follow_us">Ḍfer aγ</string>
     <string name="access_category_choice">Fren taggayt</string>
-    <string name="osmo_groups">Agrawen n OsMo</string>
+    
     <string name="shared_string_move_up">Ali</string>
     <string name="shared_string_move_down">Ader</string>
     <string name="road_blocked">Yergel webrid</string>
@@ -300,7 +299,7 @@
 	<string name="shared_string_back">Uγal</string>
 	<string name="view">Sken</string>
 	<string name="shared_string_road">Abrid</string>
-    <string name="shared_string_navigate">Inig</string>
+    
     <string name="shared_string_finish">Fakk</string>
     <string name="shared_string_sort">Smizzwer</string>
     <string name="is_saved">yettwasekles</string>
@@ -340,8 +339,8 @@
     <string name="rendering_value_medium_w_name">D alemmas</string>
     <string name="rendering_value_low_name">Yuder</string>
     <string name="gpx_appearance">Udem</string>
-    <string name="osmo_share_location">Bḍu</string>
-    <string name="osmo_pause_location">Bedd</string>
+    
+    
     <string name="shared_string_notifications">Ilγa</string>
     <string name="shared_string_continue">Kemmel</string>
     <string name="shared_string_pause">Bedd</string>
@@ -358,8 +357,8 @@
     <string name="access_shared_string_not_installed">Ur yebdid ara</string>
     <string name="access_widget_expand">Snefli</string>
     <string name="report">Aṛabul</string>
-    <string name="osmo_connect_to_group_id"/>
-    <string name="osmo_connect">Asemlil</string>
+    
+    
     <string name="donations">Tiwsiwin</string>
     <string name="osm_live_subscribe_btn">Jerred</string>
     <string name="osm_live_active">Urmid</string>
@@ -492,12 +491,12 @@
 \n
 \nIγewwaṛen n usiti γezzifen"</string>
     <string name="gpx_selection_segment_title"/>
-    <string name="osmo_follow">Ḍfer</string>
-    <string name="osmo_sign_in">Qqen</string>
-    <string name="osmo_user_name">Amseqdac</string>
-    <string name="osmo_group_info">Talγut</string>
-    <string name="osmo_expire_group">Ad ifat di</string>
-    <string name="osmo_connect_to_device_name">Isem n useqdac</string>
+    
+    
+    
+    
+    
+    
     <string name="misc_pref_title"/>
     <string name="localization_pref_title">Asideg</string>
     <string name="lang_pt_br">Tapurtugit (Birizil)</string>

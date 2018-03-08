@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
 	<string name="debugging_and_development">OsmAnd 개발</string>
@@ -438,7 +437,7 @@
 	<string name="voice">녹음된 음성</string>
 	<string name="no_vector_map_loaded">벡터 맵을 적재하지 않았습니다</string>
 
-	<string name="map_route_by_gpx">GPX파일을 이용한 경로안내</string>
+	
 	<string name="gpx_files_not_found">GPX 파일을 /osmand/tracks 폴더에서 찾을 수 없습니다</string>
 	<string name="layer_gpx_layer">GPX 경로…</string>
 	<string name="error_reading_gpx">GPX 데이터를 읽는 도중 오류</string>
@@ -1381,11 +1380,11 @@
 	
 	
 	
-	<string name="osmo_settings_uuid">고유 장치 id</string>
-    <string name="osmo_settings_descr">모니터링 설정을 구성하고 개인 모니터링 채널을 설정</string>
-    <string name="osmo_plugin_description">"OsMosms 실시간 모니터링을 사용하도록 설정을 보여줍니다. http://osmo.mobi를 참조하세요. 다른 장치를 추적하고 추적 받을 수 있습니다. 익명 그룹을 만들고, 서로의 위치를 공유하고, 통신 할 수 있습니다. 세션 트래킹 또는 영구 트래킹을 위한 다양한 설정을 합니다. ↵\n↵\n원격 제어 및 그룹 관리자가 없는 일부 기능 때문에 익명 그룹을 제한합니다. 완전한 기능의 그룹은 웹 사이트에 생성되고 등록된 사용자만 OsMo에 액세스 할 수 있어야 합니다. "</string>
-    <string name="osmo_plugin_name">OpenStreetMap 모니터링</string>
-    <string name="osmo_settings">오스모(OsMo)</string>
+	
+    
+    
+    
+    
    	<string name="share_route_as_gpx">루트를 GPX 파일로 공유</string>
 	<string name="share_route_subject">OsmAnd를 통해 공유된 경로</string>
 	<string name="arrival_distance">도착 알림</string>
@@ -1395,57 +1394,57 @@
     <string name="keep_informing">운행 명령을 반복</string>
 	<string name="navigation_intent_invalid">잘못된 포맷 : %s</string>
 
-    <string name="osmo_io_error">"OsMo 연결 문제 : "</string>
-    <string name="osmo_mode_on">OsMo 세션 중지</string>    
-    <string name="osmo_mode_off">OsMo 세션 시작</string>
+    
+        
+    
 	<string name="share_fav_subject">OsmAnd를 통해 공유된 즐겨찾기</string>
 	<string name="hours_ago">시간 전</string>
     <string name="minutes_ago">분 전</string>
     <string name="seconds_ago">초 전</string>
-    <string name="osmo_connect_to_device_name">사용자 이름</string>
-    <string name="osmo_connect_to_device_tracker_id">트래커 ID</string>
-    <string name="osmo_connect_to_device">장치 연결</string>
     
     
-    <string name="osmo_connected_devices">연결된 장치</string>
-    <string name="osmo_groups">OsMo 그룹</string>
-    <string name="osmo_auto_send_locations_descr">자동으로 여정을 시작하고 앱 시작 후 위치를 전송</string>
-    <string name="osmo_auto_send_locations">자동으로 여정을 시작</string>
-    <string name="osmo_tracker_id">트래커 ID</string>
-    <string name="osmo_tracker_id_descr">트래커 ID를 보려면 누르십시오</string>
-    <string name="osmo_session_token">세션 토큰 : %1$s</string>
-    <string name="osmo_auth_pending">허가를 기다리는 중…</string>
-    <string name="osmo_locations_sent">위치 전송 %1$d (in buffer %2$d) </string>
-    <string name="osmo_conn_successfull">설정된 연결 : %1$s </string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <string name="use_points_as_intermediates">포인트 사이의 경로를 계산</string>
-    <string name="osmo_mode_restart">OsMo 세션 재시작</string>
-    <string name="osmo_settings_debug">디버그 정보</string>
-    <string name="osmo_group_info">정보</string>
-    <string name="osmo_group">OsMo 그룹</string>
-    <string name="osmo_group_share">%2$s 그룹에 연결하려면, 그룹 아이디(%1$s) 를 지정하세요 또는 %3$s 를 클릭하세요.</string>
-    <string name="osmo_share_connect_device">영구적으로 이 장치를 따릅니다.</string>
-    <string name="osmo_share_current_session">브라우저에서 현재의 세션을 공유하기</string>
-    <string name="osmo_session_not_available">세션을 사용할 수 없습니다 , \'위치 전송하기\' 가 켜져 있는지 확인하시기 바랍니다</string>
-    <string name="osmo_share_session">세션 공유</string>
-    <string name="osmo_session_id_share">장치를 추적하기 위한 세션 URL(%1$s)</string>
-    <string name="osmo_tracker_id_share">%2$s 대상 장치를 연결하려면, %3$s 링크를 클릭하거나 tracker id(%1$s)를 지정하세요</string>
-    <string name="osmo_track_interval">로깅 간격</string>
-	<string name="osmo_track_interval_descr">위치를 전송하도록 시간 간격을 선택</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+	
     <string name="int_days">하루</string>
     <string name="osmo_connect_menu">연결</string>
-    <string name="osmo_expire_group">만료</string>
+    
     <string name="osmo_group_description">설명</string>
-    <string name="osmo_group_policy">정책</string>
-    <string name="osmo_connect_to_group_id">그룹 ID</string>
-    <string name="osmo_group_name">그룹 이름</string>
-    <string name="osmo_connect_to_group">그룹 링크</string>
-    <string name="osmo_connect">가입하기</string>
-    <string name="osmo_create_group">그룹 만들기</string>
-    <string name="osmo_server_operation_failed">OsMo 서버 작업 실패</string>
-    <string name="osmo_activity">OpenStreetMap 모니터링</string>
-    <string name="osmo_enable_tracker">내 위치 전송하기</string>
-    <string name="osmo_control">OsMo 빠른 접근</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 	<string name="import_file_favourites">장소를 GPX 파일로 저장 할까요? 또는 즐겨찾기로 가져오기 할까요?</string>
 	
@@ -1458,26 +1457,26 @@
 	
 	
 	
-    <string name="osmo_edit_device">사용자 등록정보 변경</string>
+    
     <string name="osmo_edit_color">디스플레이 색상</string>
-    <string name="osmo_follow">따라가기</string>
-    <string name="osmo_sign_in">가입하기</string>
-    <string name="osmo_create_groups_confirm">그룹을 만들려면 OsMo의 사용자 등록이 필요합니다.</string>
-    <string name="osmo_credentials_not_valid">OsMo 자격증명이 유효하지 않습니다.</string>
-    <string name="osmo_regenerate_login_ids_confirm">개인 ID를 재발급 받으시겠습니까? 연결된 모든 장치는 더 이상 트랙을 기록할 수 없습니다.</string>
-    <string name="osmo_regenerate_login_ids">사용자 ID 재생성</string>
-    <string name="osmo_cancel_moving_target">이동 목적지 취소</string>
-    <string name="osmo_center_location">맵뷰어 중심</string>
-    <string name="osmo_set_moving_target">이동 목적지로 설정</string>
-    <string name="osmo_use_server_name">등록된 이름</string>
-    <string name="osmo_connect_to_my_nickname">닉네임</string>
-    <string name="osmo_user_name">사용자</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	
 	
-    <string name="osmo_user_joined">사용자 %1$s이(가) 그룹 %2$s에 합류합니다</string>
-    <string name="osmo_user_left">"사용자 %1$s가  그룹 %2$s에 남습니다"</string>
-    <string name="osmo_show_group_notifications">그룹 알림 표시</string>
-    <string name="osmo_show_group_notifications_descr">사용자가 그룹에 참여 또는 해체 할때 토스트 메시지를 표시</string>
+    
+    
+    
+    
     <string name="gpx_file_is_empty">GPX 경로가 비어있습니다</string>
     
     
@@ -1521,18 +1520,17 @@
     
     <string name="route_descr_destination">도착지</string>
     <string name="no_index_file_to_download">다운로드 되지 않았습니다, 인터넷 연결을 확인하세요.</string>
-    <string name="osmo_auth_error_short">인증 실패</string>
-    <string name="osmo_auth_error">OsMo 인증 오류가 발생 했습니다: %1$s.\n임시로 서비스가 다운되었거나 또는 등록 만료가 되었습니다.\n신규 등록을 진행 하시겠습니까?</string>
-    <string name="osmo_group_by_invite">메시지를 입력하세요</string>
-    <string name="osmo_group_information_desc">" -모든 그룹은 공용입니다! 익명으로 하려면 트래커 id를 통해 직접 장치를 연결 합니다.\n -개인 그룹는 8명까지 제한됩니다.\n -비활동적인 그룹이나 또는 2 주 동안 단 1 사람만  활동한 경우, 그룹는 삭제 됩니다.\n -컨트롤 그룹으로 그룹 입장을 제한할 수 있습니다. 관리 콘솔에 가는 것이 필요합니다.
-\n -그룹을 만들고 싶으면 http://osmo.mobi 에 접속하세요"</string>
-    <string name="osmo_group_information">그룹을 만들기 전에 읽어 보시기 바랍니다!</string>
-    <string name="osmo_not_signed_in">OsMo 로그인 실패</string>
-    <string name="osmo_gpx_points_downloaded">OsMo 포인트 %1$s 다운로드됨.</string>
-    <string name="osmo_auto_connect_descr">앱 시작 후 서비스에 자동으로 연결</string>
-    <string name="osmo_auto_connect">자동 연결</string>
-    <string name="osmo_start_service">OsMo 서비스</string>
-    <string name="osmo_gpx_track_downloaded">OsMo GPX 경로 %1$s 다운로드됨.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="rendering_attr_hideBuildings_name">건물 숨기기</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">비 차량 고속도로 숨기기</string>
     <string name="rendering_attr_hideText_name">텍스트 숨기기</string>
@@ -1580,9 +1578,9 @@
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMC 흔적에 따라 경로 렌더링</string>
     
 	<string name="rendering_attr_coloredBuildings_name">유형별 색상 코드 건물</string>
-    <string name="osmo_invite">초대…</string>
-    <string name="osmo_leave_confirmation_msg">그룹 %1$s를 떠나시겠습니까?</string>
-    <string name="osmo_specify_tracker_id">ID를 지정하십시오</string>
+    
+    
+    
     <string name="arrival_distance_factor_early">일찍</string>
     <string name="arrival_distance_factor_normally">일반</string>
     <string name="arrival_distance_factor_late">늦게</string>
@@ -1634,11 +1632,8 @@
     <string name="fav_point_emoticons_message">%1$s 에 즐겨찾기 포인트 이름 변경. 파일에 이모티콘과 함께 문자열을 저장할 수 없습니다.</string>
     <string name="speed_limit_exceed">속도 제한 초과 값</string>
 	<string name="speed_limit_exceed_message">음성 안내 경고를 받아야 할 속도 제한 초과 값을 선택합니다.</string>
-	<string name="osmo_device_not_found">장치를 찾을 수 없습니다</string>
-    <string name="osmo_no_connection_msg">OsMo 서비스를 사용할 수 없습니다:
-\n- 연결 확인;
-\n- 설정 확인;
-\n- 트위터를 확인하세요: https://twitter.com/OsMomobi</string>
+	
+    
     <string name="anonymous_user_hint">익명의 사용자는 아래 사항을 수행할 수 없습니다:
 \n- 그룹 생성;
 \n- 그룹 및 장치를 서버와 동기화;
@@ -1868,7 +1863,7 @@
     <string name="confirmation_to_clear_history">모든 기록을 삭제 하시겠습니까?</string>
     <string name="osm_changes_added_to_local_edits">OSM 변경 내용이 로컬 변경 내용에 추가</string>
    	<string name="mark_to_delete">표시하여 삭제</string>
-	<string name="osmo_grop_name_length_alert">그룹 이름이 적어도 3 문자 이상 이어야 합니다!</string>
+	
 	<string name="agps_info">A-GPS 정보</string>
 	<string name="shared_string_message">메세지</string>
 	<string name="agps_data_last_downloaded">최근 다운로드한 A-GPS 데이터 : %1$s</string>
@@ -1906,7 +1901,7 @@
     <string name="rendering_value_disabled_name">사용 안 함</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">루트 범위에 따라 색상변경</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC에 따라 색상변경</string>
-    <string name="osmo_share_my_location">위치 전송</string>
+    
     <string name="shared_string_logoff">로그 오프</string>
     
 	<string name="routing_attr_avoid_borders_description">타국의 국경 횡단 방지</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="about_version">Верзија:</string>
     <string name="shared_string_about">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
@@ -164,7 +163,7 @@
 	
 	<string name="voice">Снимљени глас</string>
 	<string name="no_vector_map_loaded">Векторске мапе нису учитане</string>
-	<string name="map_route_by_gpx">Навигација помоћу GPX</string>
+	
 	<string name="gpx_files_not_found">Нема GPX фајлова у фасцикли стаза</string>
 	<string name="error_reading_gpx">Грешка при читању GPX података</string>
 	
@@ -324,7 +323,7 @@
 	<string name="map_widget_left">Лева површ</string>
     <string name="shared_string_show">Прикажи</string>
 	<string name="configure_map">Подесите мапу</string>
-    <string name="osmo_device_not_found">Није пронађен уређај</string>
+    
     <string name="anonymous_user_hint">Анонимни корисник не може:
 \n- да прави групе;
 \n- да усклађује групе и уређаје са сервером;
@@ -528,7 +527,7 @@
     <string name="rendering_value_disabled_name">Онемогућено</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Бојење према врсти пута</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Бојење према ОСМЦ-у</string>
-    <string name="osmo_share_my_location">Одашиљи мој положај</string>
+    
     <string name="shared_string_logoff">Одјави се</string>
     <string name="rendering_attr_hideHouseNumbers_name">Кућни бројеви</string>
     <string name="application_dir_change_warning3">Желите ли да ОсмАндове податке умножите на ново одредиште?</string>
@@ -562,7 +561,7 @@
     <string name="current_route">Тренутна путања</string>
     <string name="osm_changes_added_to_local_edits">Измене ОСМ-а додате скупу месних измена</string>
     <string name="mark_to_delete">Означи за брисање</string>
-    <string name="osmo_grop_name_length_alert">Скупно име треба да буде са најмање 3 знака!</string>
+    
     <string name="local_recordings_delete_all_confirm">Избрисаћете %1$d белешки. Да ли сте сигурни?</string>
     <string name="local_osm_changes_upload_all_confirm">Отпремићете %1$d измена на ОСМ-и. Да ли сте сигурни?</string>
     <string name="confirmation_to_clear_history">Да ли желите да очистите записе програма?</string>
@@ -644,7 +643,7 @@
     <string name="track_points">Тачке путање</string>
     <string name="shared_string_online_maps">Карте на мрежи</string>
 	<string name="record_plugin_name">Снимци путовања</string>
-	<string name="osmo_plugin_name">Надгледање ОСМ-а</string>
+	
 	<string name="srtm_paid_version_title">Прикључак обриса линија</string>
     <string name="osmand_srtm_short_description_80_chars">Прикључак за приказ обриса линија ван мреже ОсмАнда</string>
 	<string name="srtm_plugin_name">Обрисне линије</string>
@@ -685,9 +684,9 @@
     <string name="rendering_value_browse_map_name">Прегледај карту</string>
     <string name="rendering_value_car_name">Кола</string>
     <string name="rendering_value_bicycle_name">Бицикл</string>
-    <string name="osmo_invite">Позови…</string>
-    <string name="osmo_leave_confirmation_msg">Да ли желите да напустите скупину %1$s?</string>
-    <string name="osmo_specify_tracker_id">Молим, одредите лични број</string>
+    
+    
+    
     <string name="continue_navigation">Настави навођење</string>
     <string name="pause_navigation">Застани са навођењем</string>
     <string name="keep_navigation_service">Држи</string>
@@ -708,9 +707,9 @@
     <string name="rendering_attr_showSurfaceGrade_name">Приказуј стање путева</string>
     <string name="rendering_attr_showSurfaces_name">Приказуј материјале путева</string>
     <string name="rendering_attr_showCycleRoutes_name">Приказуј бициклистичке стазе</string>
-    <string name="osmo_auth_error_short">Пријава није успела</string>
-    <string name="osmo_group_by_invite">Уђи по позиву</string>
-    <string name="osmo_group_information">Молим, прочитајте пре стварања скупа!</string>
+    
+    
+    
     <string name="gpx_wpt">Пролазна тачка</string>
     <string name="available_maps">Доступне карте</string>
     <string name="select_voice_provider">Изаберите гласовно навођење</string>
@@ -773,10 +772,10 @@
     <string name="starting_point">Почетна тачка</string>
     <string name="impassable_road">Избегавај путеве…</string>
     <string name="traffic_warning_border_control">Управљање границама</string>
-    <string name="osmo_auto_connect_descr">Самостално се повежи на услуге по покретању програма.</string>
-    <string name="osmo_auto_connect">Самоповезивање</string>
-    <string name="osmo_start_service">Услуга ОсМа</string>
-    <string name="osmo_gpx_track_downloaded">Преузета је путања ОсМа %1$s.</string>
+    
+    
+    
+    
     <string name="no_index_file_to_download">Нема пронађених преузимања, проверите везу са Интернетом.</string>
     <string name="select_index_file_to_download">Нема ничег пронађеног. Ако програм не може наћи ову област, можете то учинити сами (погледајте http://osmand.net).</string>
     <string name="local_index_select_gpx_file">Означите за приказ</string>
@@ -812,65 +811,65 @@
     <string name="gpx_selection_points">%1$s\nТачака</string>
     <string name="gpx_selection_track">%1$s\nСтаза %2$s</string>
     <string name="gpx_file_is_empty">Стаза ГПИкса је празна</string>
-    <string name="osmo_user_joined">"Корисник  %1$s се придружио скупу %2$s"</string>
-    <string name="osmo_user_left">"Корисник  %1$s је напустио скуп %2$s"</string>
-    <string name="osmo_show_group_notifications">Приказуј обавештења о скупу</string>
-    <string name="osmo_show_group_notifications_descr">Приказуј поруке када се корисник придружи или напусти скуп.</string>
-    <string name="osmo_follow">Прати</string>
-    <string name="osmo_sign_in">Упиши се</string>
-    <string name="osmo_create_groups_confirm">Да би правили скупове треба да будете пријављени корисник ОсМа.</string>
-    <string name="osmo_credentials_not_valid">Ваши подаци за ОсМо нису исправни.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Да ли сте сигурни да желите поново образовати лични број? Сви уређаји који су повезани са Вама неће моћи више да вас прате.</string>
-    <string name="osmo_regenerate_login_ids">Поново образуј лб</string>
-    <string name="osmo_cancel_moving_target">Откажи покретну мету</string>
-    <string name="osmo_center_location">Средиште екрана</string>
-    <string name="osmo_set_moving_target">Постави као покретну мету</string>
-    <string name="osmo_use_server_name">Заведено име</string>
-    <string name="osmo_connect_to_my_nickname">Надимак</string>
-    <string name="osmo_user_name">Корисник</string>
-    <string name="osmo_edit_device">Измени корисничке податке</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="osmo_edit_color">Боја приказа</string>
-    <string name="osmo_group_info">Подаци</string>
-    <string name="osmo_group">Скуп ОсМа</string>
-    <string name="osmo_share_connect_device">Стално прати овај уређај</string>
-    <string name="osmo_share_current_session">Дели тренутно заседање у прегледнику</string>
-    <string name="osmo_session_not_available">Заседање није доступно, молим, проверите да ли је укључено „слање положаја“.</string>
-    <string name="osmo_share_session">Дели заседање</string>
-    <string name="osmo_track_interval">Међувреме пријаве</string>
-    <string name="osmo_track_interval_descr">Изаберите међувреме којим ћете слати податке о положају.</string>
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="int_days">дана</string>
     <string name="osmo_connect_menu">Повежи се</string>
-    <string name="osmo_expire_group">Истиче</string>
+    
     <string name="osmo_group_description">Опис</string>
-    <string name="osmo_group_policy">Смерница</string>
-    <string name="osmo_connect_to_device_tracker_id">ЛБ пратиоца</string>
-    <string name="osmo_connect_to_device_name">Корисничко име</string>
-    <string name="osmo_connect_to_group_id">Скупни ЛБ</string>
-    <string name="osmo_group_name">Име скупа</string>
-    <string name="osmo_connect_to_device">Веза са уређајем</string>
-    <string name="osmo_connect_to_group">Веза са скупом</string>
-    <string name="osmo_connect">Придружи се</string>
-    <string name="osmo_create_group">Направи скуп</string>
-    <string name="osmo_server_operation_failed">Дејство услуге ОсМа није успело</string>
-    <string name="osmo_activity">Надзор Опенстритмапа</string>
-    <string name="osmo_enable_tracker">Шаљи мој положај</string>
-    <string name="osmo_control">Брзи приступ ОсМа</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">пре часова</string>
     <string name="minutes_ago">пре минут</string>
     <string name="seconds_ago">пре секунде</string>
-    <string name="osmo_connected_devices">Повезани уређаји</string>
-    <string name="osmo_groups">Скупови/уређаји ОсМа</string>
-    <string name="osmo_auto_send_locations_descr">Самостално отпочни праћење и шаљи положај по покретању програма.</string>
-    <string name="osmo_auto_send_locations">Самостално отпочни путовање</string>
-    <string name="osmo_tracker_id">Лични број праћења</string>
-    <string name="osmo_auth_pending">Чекам на пријаву…</string>
-    <string name="osmo_settings_uuid">Јединствени лб уређаја</string>
+    
+    
+    
+    
+    
+    
+    
     <string name="use_points_as_intermediates">Рачунај пут између тачака</string>
-    <string name="osmo_mode_restart">Поново покрени ОсМо</string>
-    <string name="osmo_mode_on">Заустави ОсМово заседање</string>
-    <string name="osmo_mode_off">Покрени ОсМово заседање</string>
-    <string name="osmo_settings_debug">Подаци о отклону грешака</string>
-    <string name="osmo_settings">ОсМо</string>
+    
+    
+    
+    
+    
     <string name="always_center_position_on_map">Увек приказуј положај у средини</string>
     <string name="voice_pref_title">Глас</string>
     <string name="misc_pref_title">Разно</string>
@@ -1120,9 +1119,9 @@
     <string name="gpx_no_tracks_title_folder">Такође, можете додати стазе у омот</string>
     <string name="gpx_add_track">Додај стазу</string>
     <string name="gpx_appearance">Приказ</string>
-    <string name="osmo_share_location">Дели</string>
-    <string name="osmo_pause_location">Застанак</string>
-    <string name="osmo_service_running">Услуга ОсМа ради</string>
+    
+    
+    
     <string name="trip_rec_notification_settings">Омогући снимање почетка кретања</string>
     <string name="trip_rec_notification_settings_desc">Приказуј обавештење које омогућава покретање снимања путовања.</string>
     <string name="shared_string_notifications">Обавештења</string>
@@ -1331,7 +1330,7 @@
     <string name="rendering_value_medium_name">Средње</string>
     <string name="rendering_value_bold_name">Дебело</string>
     <string name="report">Извештај</string>
-    <string name="osmo_tracker_id_descr">Тапните за приказ ЛБ-а пратиоца.</string>
+    
     <string name="storage_permission_restart_is_required">Апликацији је сада дозвољен упис на спољно складиште. Неопходно је да ручно поново покренете апликацију.</string>
     <string name="dist_away_from_my_location">Тражи на растојању %1$s</string>
     <string name="shared_string_move_up">Помери навише</string>
@@ -1802,13 +1801,13 @@
     <string name="live_monitoring_stop">Заустави праћење на мрежи</string>
     <string name="gpx_monitoring_start">Започни ГПИкс бележење</string>
     <string name="gpx_monitoring_stop">Заустави ГПИкс бележење</string>
-    <string name="osmo_not_signed_in">Неуспела ОсМо пријава</string>
-    <string name="osmo_gpx_points_downloaded">ОсМо тачке %1$s скинуте.</string>
+    
+    
     <string name="none_selected_gpx">Није одабрана ниједна ГПИкс датотека. Дуго тапните на неку од доступних путања да бисте је одабрали.</string>
-    <string name="osmo_session_id_share">Адреса сесије за праћење уређаја (%1$s)</string>
-    <string name="osmo_session_token">Токен сесије: %1$s</string>
-    <string name="osmo_conn_successfull">Веза успостављена: %1$s</string>
-    <string name="osmo_io_error">ОсМо проблема са везом:</string>
+    
+    
+    
+    
     <string name="lang_zh">Кинески</string>
     <string name="lang_pt_br">Португалски (бразилски)</string>
     <string name="lang_en">Енглески</string>
@@ -1931,15 +1930,8 @@
 \n • И друга побољшања и исправке грешака
 \n
 \n</string>
-    <string name="osmo_no_connection_msg">Не могу да се повежем са ОсМо сервером:
-\n- проверите интернет везу;
-\n- проверите поставке;
-\n- проверите наш Твитер: https://twitter.com/OsMomobi</string>
-    <string name="osmo_plugin_description">Овај додатак пружа делимичну функционалност OpenStreetMap Monitoring-а, види https://osmo.mobi
-\n
-\nМожете пратити све уређаје из групе уживо. Можете такође и видети све тачке и путање отпремљене у групе у којима се налазите.
-\n
-\nГрупа није уклоњена месецима, освежите је са правилима са којима се праве групе на сајту OsMo.mobi</string>
+    
+    
     <string name="poi_filter_sightseeing">Разгледање знаменитости</string>
     <string name="screen_is_locked">Притисните иконицу за закључавање да откључате екран</string>
     <string name="bg_service_interval">Подесите интервал буђења:</string>

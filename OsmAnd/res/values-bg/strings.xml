@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="osb_author_or_password_not_specified">Моля, въведете потребителско име и парола за сайта на OSM</string>
     <string name="clear_intermediate_points">Изчистване на междинните точки</string>
     <string name="keep_intermediate_points">Запази междинните точки</string>
@@ -792,7 +791,7 @@
 
     <string name="voice">Записан глас</string>
     <string name="no_vector_map_loaded">Не са заредени векторни карти</string>
-    <string name="map_route_by_gpx">Навигация по GPX</string>
+    
     <string name="gpx_files_not_found">Не са открити файлове GPX в папката за следи</string>
     <string name="layer_gpx_layer">GPX следа…</string>
     <string name="error_reading_gpx">Грешка при четене на GPX данни</string>
@@ -1233,9 +1232,9 @@
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пешеходец</string>
     <string name="rendering_attr_coloredBuildings_name">Оцветяване на сградите в зависимост от типа им</string>
-    <string name="osmo_invite">Покани…</string>
-    <string name="osmo_leave_confirmation_msg">Ще напуснете ли групата %1$s?</string>
-    <string name="osmo_specify_tracker_id">Въведете ID</string>
+    
+    
+    
     <string name="continue_navigation">Продължи навигацията</string>
     <string name="pause_navigation">Пауза на навигацията</string>
     <string name="rendering_attr_subwayMode_name">Подземен транспорт</string>
@@ -1275,15 +1274,15 @@
     <string name="rendering_attr_showSurfaceGrade_name">Покажи състоянието на пътя</string>
     <string name="rendering_attr_showSurfaces_name">Вид на пътната настилка</string>
     <string name="rendering_attr_showCycleRoutes_name">Показване велосипедни маршрути</string>
-    <string name="osmo_auth_error_short">Невалидни входни данни</string>
-    <string name="osmo_auth_error">Грешка при влизане в OsMo : %1$s.\n Възможно е, това да е временен проблем със сървъра или вашата регистрация да е изтекла.\n Искате ли нова регистрация?</string>
-    <string name="osmo_group_by_invite">Вход чрез покана</string>
-    <string name="osmo_group_information">Моля, прочетете преди да създадете нова група!</string>
-    <string name="osmo_not_signed_in">Влизането в OsMo се провали</string>
-    <string name="osmo_gpx_points_downloaded">Свалени точки от OsMo - %1$s.</string>
-    <string name="osmo_auto_connect_descr">Автоматично включване в услугата след стартиране на приложението</string>
-    <string name="osmo_auto_connect">Автоматично свързване</string>
-    <string name="osmo_start_service">OsMo услуга</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     <string name="local_index_select_gpx_file">Избери за показване</string>
     <string name="gpx_split_interval">Интервал</string>
@@ -1336,11 +1335,8 @@
 
     <string name="rendering_attr_shareTaxiRoutes_name">Линии на маршрутки</string>
     <string name="search_radius_proximity">В близост до</string>
-    <string name="osmo_device_not_found">Устройството не е намерено</string>
-    <string name="osmo_no_connection_msg">Невъзможно свързване с OsMo сървър:
-- проверете вашата интернет връзка;
-- проверете настройките;
-- намерете ни в Twitter: https://twitter.com/OsMomobi</string>
+    
+    
     <string name="specified_directiory_not_writeable">Картите не могат да бъдат създадени в посочената папка</string>
     <string name="storage_directory_external">Външно съхраняване</string>
     <string name="copying_osmand_file_failed">Копирането на файловете се провали</string>
@@ -1384,10 +1380,10 @@
 \n\nThis view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \"Настройка на картата\" as desired. "</string>
     <string name="show_railway_warnings">Покажи ЖП прелези</string>
     <string name="show_pedestrian_warnings">Покажи пешеходни пътеки</string>
-    <string name="osmo_show_group_notifications">Покажи групови известия</string>
-    <string name="osmo_show_group_notifications_descr">Показване на съобщение, когато потребител се включва или напуска групата</string>
+    
+    
     <string name="rendering_attr_streetLighting_name">Улично осветление</string>
-    <string name="osmo_activity">Наблюдение на OpenStreetMap</string>
+    
     <string name="rendering_attr_roadStyle_name">Оцветяване на пътищата</string>
     <string name="rendering_value_germanRoadAtlas_name">Германски стил</string>
     <string name="rendering_value_americanRoadAtlas_name">Американски стил</string>
@@ -1405,7 +1401,7 @@
     <string name="welcome_text">OsmAnd осигурява глобална офлайн навигация!</string>
     <string name="current_route">Текущ маршрут</string>
     <string name="mark_to_delete">Изберете за изтриване</string>
-    <string name="osmo_grop_name_length_alert">Името на групата трябва да бъде най-малко от 3 символа!</string>
+    
     <string name="local_osm_changes_upload_all_confirm">Ще да качите %1$d промени към OSM. Сигурни ли сте?</string>
     <string name="confirmation_to_clear_history">Искате ли да изчистите хронологията?</string>
     <string name="delay_to_start_navigation">Стартиране на навигацията след…</string>
@@ -1484,17 +1480,16 @@
     <string name="record_plugin_description">"Тази добавка позволява записване на изминатия път в GPX файл. Записът може да се активира чрез докосване на бутон на главния екран или автоматично при стартиране на навигацията.\n\nЗаписаните следи могат да бъдат споделяни или да се изпращат към OSM. Спортистите могат да използват записаните следи за да проследят своя напредък. Основните данни на следата можете да видите директно в OsmAnd, като междинни времена, средната скорост и т.н. По-късно можете да анализирате следите в специални приложения за целта. "</string>
     <string name="navigation_over_track">Стартиране на навигацията по маршрута?</string>
     <string name="save_track_to_gpx_globally_headline">Запис на следа при поискване</string>
-	<string name="osmo_group_information_desc">" - Всички създадени групи са публични! Ако искате да запазите анонимност, свържете устройствата директно чрез Tracker ids.\n - Частните групи са ограничени до 8 човека
-\n - In case of inactivity or only 1 person activity for 2 weeks, group will be deleted.\n - You can restrict group entrance, as only by invite, but to control group you need to go to admin console.\n - If you need to create a group, but with other conditions please contact http://osmo.mobi"</string>
+	
     <string name="gpx_info_subtracks">"Части: %1$s "</string>
 	<string name="gpx_selection_track">%1$s
 \nСледа %2$s</string>
     <string name="gpx_file_is_empty">Празен GPX файл</string>
-    <string name="osmo_connect_to_device_tracker_id">ID на трекер</string>
-    <string name="osmo_plugin_name">Мониторинг на OpenStreetMap</string>
+    
+    
     <string name="get_plugin">Вземи</string>
-    <string name="osmo_cancel_moving_target">Откажете подвижната цел</string>
-    <string name="osmo_set_moving_target">Установете като подвижна цел</string>
+    
+    
     <string name="download_tab_updates">Нови</string>
     <string name="map_update">%1$s карти са обновени</string>
     <string name="rendering_attr_pisteGrooming_name">Обработена ски писта</string>
@@ -1561,67 +1556,67 @@
 \nТочки %2$s</string>
     <string name="speed_limit_exceed_message">Изберете толеранса на ограничението на скоростта, над което ще получите гласово предупреждение.</string>
     <string name="fav_point_emoticons_message">Името на точката е променено на %1$s с цел правилното записване на низ с емотикони във файл.</string>
-    <string name="osmo_gpx_track_downloaded">OsMo следата %1$s е изтеглена.</string>
+    
     <string name="no_index_file_to_download">Списъкът за сваляне не е намерен, моля проверете Вашата интернет връзка.</string>
     <string name="gpx_selection_points">%1$s
 \nТочки</string>
-    <string name="osmo_user_joined">Потребителят %1$s се присъедини към група %2$s</string>
-    <string name="osmo_user_left">Потребителят %1$s напусна групата %2$s</string>
-    <string name="osmo_follow">Следвайте</string>
-    <string name="osmo_sign_in">Влизане</string>
-    <string name="osmo_create_groups_confirm">За да създадете групи, трябва да сте регистриран потребител на OsMo.</string>
-    <string name="osmo_credentials_not_valid">Вашите OsMo идентификационни данни не са валидни.</string>
-    <string name="osmo_center_location">Центъра на екрана</string>
-    <string name="osmo_use_server_name">Регистрирано име</string>
-    <string name="osmo_connect_to_my_nickname">Псвевдоним</string>
-    <string name="osmo_user_name">Потребител</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="rendering_value_brown_name">кафяв</string>
 
     
 
     
 
-    <string name="osmo_edit_device">Промяна на свойствата на потребителя</string>
+    
     <string name="osmo_edit_color">Цвят на показване</string>
-    <string name="osmo_group_info">Инфо</string>
-    <string name="osmo_group">OsMo група</string>
-    <string name="osmo_share_session">Споделяне на сесия</string>
+    
+    
+    
     <string name="rendering_value_disabled_name">Спрян</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Оцветяване спрямо обхвата</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Оцветяване съобразно OSMC</string>
-    <string name="osmo_share_my_location">Споделяне на мястото</string>
+    
     <string name="shared_string_logoff">Излизане</string>
     <string name="osm_changes_added_to_local_edits">Промените в OSM бяха добавени към списъка с промени</string>
     <string name="save_as_favorites_points">Запиши като група от любими места</string>
-    <string name="osmo_track_interval">Интервал за запис</string>
+    
     <string name="int_days">дни</string>
     <string name="osm_edit_context_menu_delete">Изтриване на OSM редакцията</string>
-    <string name="osmo_regenerate_login_ids">Регенериране на потребителско ID</string>
-    <string name="osmo_group_share">За да се свържете с групата %2$s, задайте ID на групата (%1$s) или докоснете %3$s.</string>
-    <string name="osmo_share_connect_device">Нека постоянно следват това устройство</string>
-    <string name="osmo_share_current_session">Споделяне на текущата сесия в браузъра</string>
-    <string name="osmo_track_interval_descr">Изберете времеви интервал за изпращане на местоположението</string>
+    
+    
+    
+    
+    
     <string name="osmo_connect_menu">Свързване</string>
-    <string name="osmo_expire_group">Изтича след</string>
+    
     <string name="osmo_group_description">Описание</string>
-    <string name="osmo_group_policy">Политика</string>
-    <string name="osmo_connect_to_device_name">Потребителско име</string>
-    <string name="osmo_connect_to_group_id">ID на група</string>
-    <string name="osmo_group_name">Име на група</string>
-    <string name="osmo_connect_to_device">Връзка с устройство</string>
-    <string name="osmo_connect_to_group">Връзка с група</string>
-    <string name="osmo_connect">Присъединяване</string>
-    <string name="osmo_create_group">Създаване на група</string>
-    <string name="osmo_server_operation_failed">Неуспешна операция на OsMo Server</string>
-    <string name="osmo_enable_tracker">Изпрати моите места</string>
-    <string name="osmo_control">OsMo бърз достъп</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">часа по-рано</string>
     <string name="minutes_ago">минути по-рано</string>
     <string name="seconds_ago">секунди по-рано</string>
-    <string name="osmo_connected_devices">Свързани устройства</string>
-    <string name="osmo_groups">OsMo групи</string>
-    <string name="osmo_session_token">Маркер за сесия: %1$s</string>
-    <string name="osmo_auth_pending">Чака за разрешение…</string>
+    
+    
+    
+    
     <string name="av_camera_pic_size_descr">Изберете размер на снимката за вградената камера</string>
     <string name="shared_string_wikipedia">Уикипедия</string>
     <string name="local_indexes_cat_wiki">Уикипедия</string>
@@ -1668,19 +1663,12 @@
     <string name="lang_ceb">Себуански</string>
     <string name="lang_ms">Малайски</string>
     <string name="lang_ht">Хаитянски</string>
-    <string name="osmo_plugin_description">"Това разширение добавя функционалност за наблюдение на OsMo в реално време, за справка: http://osmo.mobi.
-
-
-Можете да следите всички устройства от дадена група в реално време и да общувате помежду си. Разширението предлага различни възможности за проследяване по време на връзката или постоянно.
-
-
-Анонимните групи могат да бъдат създадени временно за определен брой дни и имат ограничени възможности, например без отдалечено управление и администратор. Пълноценните групи, от друга страна, могат да се създават на сайта и само регистрираните потребители имат достъп до тях.
- "</string>
+    
     <string name="plugin_nautical_descr">"Добавката обогатява приложението OsmAnd карти и навигация като създава карти за гребане, ветроходство и други водни спортове.\n\nСпециалната добавка за карти на OsmAnd добавя морски навигационни символи и диаграми за вътрешна и крайбрежна навигация. Описанието на всеки навигационен символ показва подробностите, необходими за разпознаването и значението му (категория, фигура, цвят, последователност, препратка и др.).\n\nЗа да се върнете към някой от обикновените режими на картите на OsmAnd, просто изключете добавката или сменете \"Стил на картата\" в менюто \"Настройка на картата\". "</string>
     <string name="plugin_settings">Добавки</string>
     <string name="rendering_attr_currentTrackColor_name">цвят на GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX ширина</string>
-    <string name="osmo_settings">OsMo</string>
+    
     <string name="lang_zh">Китайски</string>
     <string name="lang_en">Английски</string>
     <string name="lang_al">Албански</string>
@@ -1708,7 +1696,7 @@
     <string name="try_again">Нов опит</string>
     <string name="no_updates_available">Няма налични актуализации</string>
     <string name="restart_is_required">Приложението трябва да бъде рестартирано за да бъдат приложени всички промени.</string>
-    <string name="osmo_settings_debug">Дебъг информация</string>
+    
     <string name="voice_pref_title">Глас</string>
     <string name="always_center_position_on_map">Винаги показвай позицията в центъра</string>
     <string name="lang_pt_br">Португалски (Бразилия)</string>
@@ -1862,7 +1850,7 @@
     <string name="lang_new">Непал Бхаса</string>
     <string name="lang_gl">Галски</string>
     <string name="rendering_attr_roadStyle_description">Оцветяване на пътищата</string>
-    <string name="osmo_tracker_id">ID на трекера</string>
+    
     <string name="misc_pref_title">Разни</string>
     <string name="localization_pref_title">Локализация</string>
     <string name="index_item_nation_addresses">адреси в цялата страна</string>
@@ -1900,8 +1888,8 @@
     <string name="other_menu_group">Друго</string>
     <string name="help_us_to_improve_menu_group">Помогнете ни да подобрим OsmAnd</string>
     <string name="features_menu_group">Функции</string>
-    <string name="osmo_session_id_share">URL сесия за проследяване на устройството (%1$s)</string>
-    <string name="osmo_auto_send_locations">Автоматично стартиране на трекер сесия</string>
+    
+    
     <string name="later">По-късно</string>
     <string name="begin_with_osmand_menu_group">Първи стъпки с OsmAnd</string>
     <string name="new_version">Нова версия</string>
@@ -1927,13 +1915,13 @@
     <string name="saved_at_time">Успешно записано в: %1$s</string>
     <string name="please_specify_poi_type">Задайте тип на POI.</string>
     <string name="recent_places">Последни места</string>
-    <string name="osmo_conn_successfull">"Установена връзка: %1$s "</string>
-    <string name="osmo_io_error">"Проблем с връзката към OsMo: "</string>
-    <string name="osmo_settings_uuid">Уникално ID на устройство</string>
+    
+    
+    
     <string name="use_points_as_intermediates">Изчисляване на маршрут между точки</string>
-    <string name="osmo_mode_restart">Рестартиране на OsMo сесия</string>
-    <string name="osmo_mode_on">Спиране на OsMo сесия</string>
-    <string name="osmo_mode_off">Стартиране на OsMo сесия</string>
+    
+    
+    
     <string name="route_descr_destination">Крайна цел</string>
     <string name="rendering_attr_alpineHiking_name">Трудност по скалата на SAC</string>
     <string name="rendering_attr_alpineHiking_description">Оцветяване на пътеките по скалата на SAC</string>
@@ -1972,7 +1960,7 @@
     <string name="favourites_context_menu_add">Добавяне на любим</string>
 	<string name="plugin_ski_descr">"Тази добавка за OsmAnd показва ски писти, алпийски маршрути, кабинкови лифтове и ски лифтове. Маршрутите и пистите са оцветени съобразно тяхната трудност. Можете да ползвате специален картен стил \"Зима\", който оцветява пейзажа в съответните цветове.
 \n\nТози стил може да бъде деактивиран го отново от тук, или чрез промяна на \"Стил на картата\" в \"Настройки на картата\". "</string>
-    <string name="osmo_session_not_available">Сесията не е налична, проверете, че \"Изпращане на места\" е включено.</string>
+    
     <string name="copying_osmand_one_file_descr">Копиране на файл (%s) на новата дестинация…</string>
     <string name="copying_osmand_files_descr">Копиране на файлове с данни на OsmAnd към ново местоназначение (%s)…</string>
     <string name="calculate_osmand_route_gpx">Изчисляване OsmAnd офлайн маршрут</string>
@@ -1987,13 +1975,13 @@
     <string name="create_poi_link_to_osm_doc"><u>Онлайн OSM</u> класификация на картите с изображения</string>
     <string name="free_downloads_used_description">Показва използваните безплатни файлове за изтегляне</string>
     <string name="save_track_to_gpx_globally_descr">Записването в GPX може да бъде включвано и изключвано от основния екран</string>
-    <string name="osmo_regenerate_login_ids_confirm">Сигурни ли сте за регенериране личните ID? Всички устройства, свързани към вас, няма да могат да Ви следят.</string>
-    <string name="osmo_tracker_id_share">За да се свържете устройството %2$s, докоснете върху връзката %3$s или посочете ID на тракера (%1$s)</string>
-    <string name="osmo_locations_sent">"Изпратени места: %1$d (в буфера: %2$d) "</string>
-    <string name="osmo_settings_descr">Конфигуриране на настройките за наблюдение и настройку на личния канал</string>
+    
+    
+    
+    
     <string name="android_19_location_disabled">"След версия 4.4 (KitKat) на Android  не можете да теглите и актуализирате карти в текущата папка за съхранение (%s). Искате ли да промените на разрешените местоположението и копиране на всички OsmAnd файлове там?\n Бележка 1: Старите файлове ще останат непроменени (но могат да бъдат изтрити ръчно).\n Бележка 2: В новото местоположение за съхранение няма да може да споделяте файлове между OsmAnd и OsmAnd +."</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Оцветяване на пътеките според OSMC следите</string>
-<string name="osmo_auto_send_locations_descr">Автоматично стартиране и изпращане на данни</string>
+
     <string name="shared_string_near">Близо</string>
     <string name="shared_string_hide">Скрий</string>
     <string name="av_video_quality_low">Най-ниско качество</string>
@@ -2006,7 +1994,7 @@
     <string name="av_audio_bitrate_descr">Изберете аудио битрейт</string>
     <string name="no_address_found">Няма адрес</string>
 	<string name="looking_up_address">Търсене на адрес</string>
-    <string name="osmo_tracker_id_descr">Преглед ID на трекер.</string>
+    
     <string name="local_index_description">Докоснете върху елемент за да видите повече информация, натиснете и задръжте за да деактивирате или да изтриете. Данни в устройството (%1$s свободни):</string>
 	<string name="number_of_rows_in_dash">Брой редове %1$s</string>
 	<string name="dashboard_or_drawer_description">Можете да управлявате приложението чрез гъвкаво табло или чрез статично меню. Вашият избор може да бъде променен по-късно.</string>

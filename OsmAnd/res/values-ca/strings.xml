@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 
     <string name="show_warnings_title">Mostra alertes…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
@@ -676,7 +675,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="renderers_descr">Trieu l\'aparença de dibuixat.</string>
     <string name="transport_searching_transport">Resultats de transport (cap destí):</string>
     <string name="transport_searching_route">Resultats de transport ({0} al destí):</string>
-    <string name="map_route_by_gpx">Navega utilitzant un GPX</string>
+    
     
     
     <string name="voice_data_unavailable">Les dades de veu seleccionades no estan disponibles</string>
@@ -1175,18 +1174,14 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="localization_pref_title">Ubicació</string>
     <string name="interrupt_music_descr">Les indicacions de veu aturen la reproducció de música, no s\'hi superposen.</string>
     <string name="interrupt_music">Atura la música</string>
-    <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
-    <string name="osmo_settings_descr">Configureu els paràmetres i el canal del seguiment personal.</string>
-    <string name="osmo_plugin_description">"Aquest connector us ofereix parcialment la funcionalitat de la Monitorització OpenStreetmap, consulteu http://osmo.mobi. 
-\n 
-\nPodeu fer el seguiment de tots els dispositius que integrin un grup en temps real. També podeu consultar les fites i traces pujades en el grup on sigueu. 
-\n 
-\nEl grup fa mesos que dura, actualitzeu-lo segons les normes de creació de grups a la web  OsMo.mobi"</string>
-    <string name="osmo_plugin_name">Monitorització OpenStreetMap</string>
-    <string name="osmo_settings">OsMo</string>
-    <string name="osmo_io_error">Problema de connexió amb OSMo: </string>
-    <string name="osmo_mode_on">Atura la sessió a OsMo</string>
-    <string name="osmo_mode_off">Inicia la sessió a OsMo</string>
+    
+    
+    
+    
+    
+    
+    
+    
     
     <string name="share_route_as_gpx">Comparteix la ruta com un fitxer GPX</string>
     <string name="share_route_subject">Ruta compartida via OsmAnd</string>
@@ -1201,62 +1196,62 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="shared_string_share">Compartir</string>
     <string name="share_fav_subject">Preferits compartits via OsmAnd</string>
     <string name="use_points_as_intermediates">Calcula la ruta entre punts</string>
-    <string name="osmo_auto_send_locations_descr">Inici automàtic de la traça i de l\'enviament de les posicions tot just iniciar l\'aplicació.</string>
-    <string name="osmo_auto_send_locations">Inici automàtic de la traça</string>
-    <string name="osmo_tracker_id">Identificació del traçador</string>
-    <string name="osmo_tracker_id_descr">Premeu per veure la identificació del traçador.</string>
-    <string name="osmo_session_token">Testimoni de la sessió: %1$s</string>
-    <string name="osmo_auth_pending">S\'està esperant l\'autorització…</string>
-    <string name="osmo_locations_sent">%1$d ubicacions enviades (%2$d a la memòria intermèdia)</string>
-    <string name="osmo_conn_successfull">S\'ha establert la connexió: %1$s</string>
-    <string name="osmo_mode_restart">Reinicia la sessió a OsMo</string>
-    <string name="osmo_settings_debug">Informació de depuració</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">hores abans</string>
     <string name="minutes_ago">minuts abans</string>
     <string name="seconds_ago">segons abans</string>
-    <string name="osmo_connect_to_device_name">Nom d\'usuari</string>
-    <string name="osmo_connect_to_device_tracker_id">Identificador de la traça</string>
-    <string name="osmo_connect_to_device">Enllaça amb el dispositiu</string>
-    <string name="osmo_connected_devices">Dispositius connectats</string>
-    <string name="osmo_groups">Grups OsMo</string>
-    <string name="osmo_group_info">Informació</string>
-    <string name="osmo_group">Grup OsMo</string>
-    <string name="osmo_group_share">Per connectar amb el grup %2$s, indiqueu l\'identificador de grup (%1$s) o premeu a %3$s.</string>
-    <string name="osmo_share_connect_device">Permet el seguiment d\'aquest dispositiu permanentment</string>
-    <string name="osmo_share_current_session">Comparteix la sessió actual al navegador</string>
-    <string name="osmo_session_not_available">La sessió no és disponible. Verifiqueu que «Envia les ubicacions» està activat.</string>
-    <string name="osmo_share_session">Comparteix la sessió</string>
-    <string name="osmo_session_id_share">L\'URL de la sessió per seguir el dispositiu (%1$s)</string>
-    <string name="osmo_tracker_id_share">Per connectar al dispositiu objectiu %2$s, premeu a l\'enllaç %3$s o especifiqueu l\'identificador de seguiment (%1$s)</string>
-    <string name="osmo_track_interval">Freqüència de registre</string>
-    <string name="osmo_track_interval_descr">Seleccioneu la freqüència d\'enviament de la ubicació.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="int_days">dies</string>
     <string name="osmo_connect_menu">Connecta</string>
-    <string name="osmo_expire_group">Expira en</string>
+    
     <string name="osmo_group_description">Descripció</string>
-    <string name="osmo_group_policy">Política</string>
-    <string name="osmo_connect_to_group_id">Identificador de grup</string>
-    <string name="osmo_group_name">Nom del grup</string>
-    <string name="osmo_connect_to_group">Enllaça amb el grup</string>
-    <string name="osmo_connect">Uneix-te</string>
-    <string name="osmo_create_group">Crea un grup</string>
-    <string name="osmo_server_operation_failed">Ha fallat l\'operació del servidor OsMo</string>
-    <string name="osmo_activity">Monitorització d\'OpenStreetMap</string>
-    <string name="osmo_enable_tracker">Envia les meves ubicacions</string>
-    <string name="osmo_control">Accés ràpid a OsMo</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="import_file_favourites">Voleu desar les dades com un fitxer GPX o voleu importar les fites als Preferits?</string>
-    <string name="osmo_follow">Segueix</string>
-    <string name="osmo_sign_in">Inicia una sessió</string>
-    <string name="osmo_create_groups_confirm">Per poder crear grups cal ser un usuari registrat d\'OsMo.</string>
-    <string name="osmo_credentials_not_valid">Les vostres credencials OsMo no són vàlides.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Esteu segur de voler regenerar els identificadors personals? Tots els dispositius que teniu connectats ja no us podran seguir.</string>
-    <string name="osmo_regenerate_login_ids">Regenera l\'identificador de l\'usuari</string>
-    <string name="osmo_cancel_moving_target">Cancela el seguiment de l\'objectiu en moviment</string>
-    <string name="osmo_center_location">Centra a la pantalla</string>
-    <string name="osmo_set_moving_target">Estableix com a objectiu en moviment</string>
-    <string name="osmo_use_server_name">Nom registrat</string>
-    <string name="osmo_connect_to_my_nickname">Àlies</string>
-    <string name="osmo_user_name">Usuari</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <string name="rendering_value_pink_name">rosa</string>
     
@@ -1265,16 +1260,16 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     
     
     
-    <string name="osmo_edit_device">Canvia les propietats de l\'usuari</string>
+    
     <string name="osmo_edit_color">Mostra el color</string>
     <string name="gpx_file_is_empty">La traça GPX és buida</string>
     <string name="shared_string_my_tracks">Totes les traces</string>
     <string name="shared_string_my_favorites">Preferits</string>
     <string name="shared_string_my_places">Preferits</string>
-    <string name="osmo_user_joined">L\'usuari %1$s s\'ha unit al grup %2$s</string>
-    <string name="osmo_user_left">L\'usuari %1$s ha deixat el grup %2$s</string>
-    <string name="osmo_show_group_notifications">Mostra les notificacions de grup</string>
-    <string name="osmo_show_group_notifications_descr">Mostra missatges quan un usuari s\'uneix o deixa el grup.</string>
+    
+    
+    
+    
     <string name="gpx_info_subtracks">Segments: %1$s </string>
     <string name="gpx_info_waypoints">Fites: %1$s</string>
     <string name="gpx_info_distance">Distància: %1$s (%2$s punts) </string>
@@ -1312,27 +1307,17 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="none_selected_gpx">Cap fitxer GPX seleccionat. Per seleccionar-ne un, premeu contínuament una traça disponible.</string>
     <string name="local_index_select_gpx_file">Selecciona per mostrar</string>
     <string name="no_index_file_to_download">No s\'ha trobat cap baixada, verifiqueu la connexió a Internet.</string>
-    <string name="osmo_gpx_points_downloaded">S\'han baixat %1$s punts OsMo.</string>
-    <string name="osmo_auto_connect_descr">Connecta automàticament amb el servei desprès d\'iniciar l\'aplicació.</string>
-    <string name="osmo_auto_connect">Connexió automàtica</string>
-    <string name="osmo_start_service">Servei OsMo</string>
-    <string name="osmo_gpx_track_downloaded">S\'ha baixat la traça OsMo %1$s.</string>
-    <string name="osmo_not_signed_in">Ha fallat l\'inici de sessió OsMo</string>
-    <string name="osmo_group_by_invite">Entreu per convidar</string>
-    <string name="osmo_group_information_desc">"- En crear un grup li hauríeu de donar-li un nom i omplir una descripció 
-\n - Des de la gestió de grups només se\'n poden crear de tipus Simple, llegiu-ne més a la web  https://osmo.mobi/g/new 
-\n - Mitjançant la web es pot gestionar un grup, publicar rutes i ubicacions que tots poden accedir 
-\n - No es recolzen els grups d\'un sol usuari si no es tracta el grup d\'un PDI 
-\n - Els grups privats estan limitats fins un màxim de 8 persones. 
-\n - Els termes i condicions detallats es poden consultar sempre a la web OsMo.mobi 
-\n - Si us calen condicions especials, contacteu amb el suport: osmo.mobi@gmail.com"</string>
-    <string name="osmo_group_information">Cal que ho llegiu abans de crear un grup.</string>
-    <string name="osmo_auth_error_short">Ha fallat l\'autorització</string>
-    <string name="osmo_auth_error">S\'ha trobat un error d\'autorització OsMo: %1$s.
-
- Pot ser per una caiguda temporal del servei o bé pel venciment del vostre usuari.
-
- Voleu crear un nou usuari nou?</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="rendering_attr_hideBuildings_name">Edificis</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Vies sense circulació de vehicles</string>
     <string name="rendering_attr_hideText_name">Text</string>
@@ -1378,9 +1363,9 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="rendering_attr_alpineHiking_description">Representació dels camins segons l\'escala SAC (Club Alpí Suís).</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Superposa la simbologia de senderisme</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Representació dels camins segons les traces OSMC (símbols de colors).</string>
-    <string name="osmo_invite">Convida…</string>
-    <string name="osmo_leave_confirmation_msg">Voleu deixar el grup %1$s?</string>
-    <string name="osmo_specify_tracker_id">Especifiqueu l\'ID</string>
+    
+    
+    
     <string name="arrival_distance_factor_early">Aviat</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Tard</string>
@@ -1431,11 +1416,8 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="print_route">Imprimeix la ruta</string>
     <string name="speed_limit_exceed">Tolerància sobre el límit de velocitat</string>
     <string name="speed_limit_exceed_message">Trieu el marge de tolerància al límit de velocitat per sobre del que rebreu un avís de veu.</string>
-    <string name="osmo_device_not_found">No s\'ha trobat el dispositiu</string>
-    <string name="osmo_no_connection_msg">No s\'ha pogut connectar al servei OsMo :
-- verifiqueu la vostra connexió a Internet;
-- verifiqueu la configuració;
-- consulteu el nostre Twitter: https://twitter.com/OsMomobi</string>
+    
+    
     <string name="anonymous_user_hint">Un usuari anònim no pot:\n- crear grups;\n- sincronitzar grups i dispositius amb el servidor;\n- gestionar grups i dispositius en un tauler personal a la web.</string>
     <string name="anonymous_user">Usuari anònim</string>
     <string name="logged_as">S\'ha iniciat sessió com a %1$s</string>
@@ -1556,7 +1538,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
 \nNo cal baixar un mapa específic, aquesta vista es crea amb els nostres mapes estàndards. 
 \n 
 \nAquesta vista es pot desfer tornant a fer la mateixa selecció, o en canviar l\'«Estil del mapa» de «Configuració del mapa» a la vista que es desitgi.</string>
-    <string name="osmo_grop_name_length_alert">El nom de grup ha de tenir una mida mínima de 3 caràcters!</string>
+    
     <string name="local_osm_changes_upload_all_confirm">"Esteu a punt de pujar %1$d modificacio(ns)  a OSM. N\'esteu segur?"</string>
     <string name="confirmation_to_clear_history">Voleu esborrar l\'historial?</string>
     <string name="delay_to_start_navigation_descr">Indiqueu el temps d\'espera sense canvis per tancar la pantalla de planificació de la ruta.</string>
@@ -1646,7 +1628,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="routing_attr_height_description">Indiqueu l\'alçada del vehicle que les rutes han d\'admetre.</string>
     <string name="use_fast_recalculation">Recàlcul intel·ligent de la ruta</string>
     <string name="use_fast_recalculation_desc">En viatges llargs, només actualitzis la part inicial de la ruta.</string>
-    <string name="osmo_share_my_location">Transmet la posició</string>
+    
     <string name="shared_string_logoff">Surt</string>
     <string name="rendering_value_disabled_name">Desactivat</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Acoloreix segons el tipus de xarxa</string>
@@ -2239,9 +2221,9 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="shared_string_notifications">Notificacions</string>
     <string name="trip_rec_notification_settings">Habilita l\'enregistrament d\'inici ràpid</string>
     <string name="trip_rec_notification_settings_desc">Mostra una notificació de sistema en permetre començar l\'enregistrament de la ruta.</string>
-    <string name="osmo_share_location">Comparteix</string>
-    <string name="osmo_pause_location">Atura</string>
-    <string name="osmo_service_running">S\'està executant el servei OsmMo</string>
+    
+    
+    
     <string name="gpx_no_tracks_title">No teniu encara cap traça</string>
     <string name="gpx_no_tracks_title_folder">També podeu afegir traces a la carpeta</string>
     <string name="gpx_add_track">Afegeix traça</string>
@@ -2379,7 +2361,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
 	<string name="rendering_attr_depthContours_description">Mostra isòbates i fondàries puntuals.</string>
     <string name="rendering_attr_depthContours_name">Isòbates</string>
 	
-    <string name="routing_attr_height_relief_smoothness_factor_description">Més planes o més turons</string>
+    
     <string name="routing_attr_height_obstacles_name">Utilitza les cotes d\'elevació</string>
     <string name="routing_attr_height_obstacles_description">Utilitza les cotes d\'elevació del terreny proporcionades per SRTM, ASTER i EU-DEM.</string>
 
@@ -2551,7 +2533,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="moving_time">Temps en moviment</string>
     <string name="max_min">Màx/Mín</string>
     
-    <string name="range_min_max">Interval = Mín/Màx</string>
+    
     <string name="min_max">Mín/Màx</string>
     <string name="quick_action_resume_pause_navigation">Continua/Atura la navegació</string>
     <string name="quick_action_resume_pause_navigation_descr">Premeu aquest botó per aturar o reprendre la navegació.</string>
@@ -2574,19 +2556,19 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="measurement_tool">Mesurament de distàncies</string>
     <string name="mappilary_no_internet_desc">Necessiteu internet per veure les fotografies de Mapillary.</string>
     <string name="retry">Torneu a provar</string>
-    <string name="add_gpx_waypoint_bottom_sheet_title">Afegiu una fita gpx</string>
-    <string name="shared_string_create">Crea</string>
+    
+    
 <string name="none_point_error">Afegiu un punt si més no.</string>
     <string name="enter_gpx_name">Nom del fitxer GPX:</string>
     <string name="show_on_map_after_saving">Mostra al mapa després de desar</string>
-    <string name="add_route_point">Afegeix un punt de ruta</string>
+    
     <string name="add_waypoint">Afegeix una fita</string>
     <string name="save_gpx_waypoint">Desa la fita GPX</string>
     <string name="save_route_point">Desa el punt de ruta</string>
     <string name="waypoint_one">Fita 1</string>
     <string name="route_point_one">Punt de ruta 1</string>
-<string name="measurement_tool_altitude">Altitud: %1$s</string>
-    <string name="measurement_tool_speed">Velocitat: %1$s</string>
+
+    
     <string name="line">Línia</string>
     <string name="save_as_route_point">Desa com punts de la ruta</string>
     <string name="save_as_line">Desa com a línia</string>
@@ -2613,10 +2595,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="do_not_use_animations">Sense ús d\'animacions</string>
     <string name="do_not_use_animations_descr">Desactiva les animacions a l\'aplicació.</string>
     <string name="move_all_to_history">Mou tot a l\'historial</string>
-    <string name="build_route">Calcula la ruta</string>
+    
     <string name="show_direction">Indicació de la distància</string>
     <string name="sort_by">Ordena per</string>
-    <string name="marker_options">Opcions de marcador</string>
+    
     <string name="map_orientation_change_in_accordance_with_speed">Interval d\'orientació del mapa</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Indiqueu la velocitat mínima per sota de la que s\'utilitzarà la brúixola interna per determinar l\'orientació del mapa en comptes de la direcció del moviment.</string>
     <string name="all_markers_moved_to_history">Tots els marcadors de mapa s\'han mogut a historial</string>
@@ -2630,8 +2612,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="yesterday">Ahir</string>
     <string name="last_seven_days">Darrers 7 dies</string>
     <string name="this_year">Aquest any</string>
-    <string name="widget">Giny</string>
-    <string name="top_bar">Barra superior</string>
+    
+    
     <string name="remove_from_map_markers">Treu dels marcadors de mapa</string>
     <string name="descendingly">descendent</string>
     <string name="ascendingly">ascendent</string>
@@ -2663,7 +2645,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evita les vies amb risc de gel i els guals.</string>
     <string name="make_round_trip_descr">Afegeix una còpia de punt d\'inici com a destinació.</string>
     <string name="make_round_trip">Fes un trajecte tancat</string>
-    <string name="shared_string_navigate">Navega</string>
+    
     <string name="osn_modify_dialog_error">S\'ha produït una excepció: la nota no s\'ha modificat</string>
     <string name="osn_modify_dialog_title">Modifica nota</string>
     <string name="context_menu_item_modify_note">Modifica nota d\'OSM</string>
@@ -2692,7 +2674,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="import_file">Importa fitxer</string>
 	<string name="tap_on_map_to_hide_interface_descr">Prement el mapa canvien els botons de control i els ginys.</string>
     <string name="tap_on_map_to_hide_interface">Mode de pantalla completa</string>
-    <string name="show_on_top_bar">Mostra a la barra superior</string>
+    
     <string name="mark_passed">Marca com passat</string>
     <string name="digits_quantity">Nombre de dígits decimals</string>
     <string name="shared_string_right">Dreta</string>

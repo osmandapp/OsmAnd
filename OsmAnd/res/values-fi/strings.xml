@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="no_route">Ei reittiä</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="no_route">Ei reittiä</string>
 	<string name="delete_target_point">Poista päämäärä</string>
 	<string name="target_point">Päämäärä %1$s</string>
     <string name="intermediate_point">Välietappi %1$s</string>
@@ -795,7 +794,7 @@
 	<string name="welcome_select_region">Valitse ajoalue, jotta liikennemerkit ja -määräykset ovat oikein:</string>
 	<string name="welcome_text">OsmAnd tarjoaa maailmanlaajuisen offline karttaselailun, ja maailmanlaajuisen offline navigoinnin!</string>
 	<string name="osm_changes_added_to_local_edits">OSM muutokset lisätty paikalliseen muutosjoukkoon</string>
-   	<string name="osmo_grop_name_length_alert">Ryhmänimi pitäisi olla vähintään 3 merkkiä pitkä!</string>
+   	
 	<string name="local_osm_changes_upload_all_confirm">Olet lähettämässä %1$d muutosta(ksia) OSMiin. Oletko varma?</string>
     <string name="confirmation_to_clear_history">Haluatko tyhjentää historian?</string>
     <string name="delay_to_start_navigation_descr">Määritä odotusaika jona pysyt reittisuunnittelu näytöllä</string>
@@ -840,13 +839,8 @@ Laattakarttoja voi saada suoraan online lähteistä, tai voidaan valmistaa offli
 
 Nauhoitetut jäljet voidaan jakaa ystävillesi tai käyttää OSM osallistumisissa. Urheilijat voivat nauhoittaa jälkiä harjoittelun seuraamiseen. Jotain perus jälkianalyysejä voidaan tehdä suoraan OsmAndissa, kuten kierrosaikoja, keskimääräistä nopeutta jne., ja jälkiä voi tietysty myös myöhemmin analysoida erityisissä kolmannen osapuolen analysointi työkaluissa.
  "</string>
-	<string name="osmo_plugin_name">OsMo seuranta</string>
-	<string name="osmo_plugin_description">"Tämä lisäosa tarjoaa toiminnot OsMo kehittyneeseen live seurantaan, katso http://osmo.mobi.
-
-Voit seurata muita laitteita ja olla seurattuna. Voit spontaanisti luoda anonyymejä ryhmiä, jakaa toistenne sijainnin, ja viestitellä. Mukana tulee eri vaihtoehtoja harjoituksen seuraamiseen tai jatkuvaan seuraamiseen.
-
-Anonyymejä ryhmiä luodaan määritellyiksi päivämääriksi ja rajoitettuna määrättyihin toimintohin, toisin sanoeni ei etäohjausta eikä ryhmän pääkäyttäjää. Täysin toimivia ryhmiä, toisaalta, voi luoda verkkosivuilla ja vain rekisteröityneillä käyttäjillä on pääsy niihin.
- "</string>
+	
+	
 	<string name="srtm_paid_version_title">Korkeuskäyrät lisäosa</string>
 	<string name="osmand_srtm_short_description_80_chars">OsmAnd lisäosa offline korkeuskäyrille</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Tämä lisäosa tarjoaa sekä korkeuskäyrä päällyskerros ja (helpotus) mäkisävy tason näytettäväksi OsmAnd offline karttojen päällä. Tätä toiminnallisuutta arvostavat paljon urheilijat, retkeilijät, vuoristo seikkailijat, ja ketkä tahansa maisemien ihailusta kiinnostuneet.
@@ -922,9 +916,9 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="gpx_no_tracks_title_folder">Voit myös lisätä jälkiä hakemistoon</string>
     <string name="gpx_add_track">Lisää jälki</string>
     <string name="gpx_appearance">Ulkoasu</string>
-    <string name="osmo_share_location">Jaa</string>
-    <string name="osmo_pause_location">Keskeytä</string>
-    <string name="osmo_service_running">OsMo-palvelu on käynnissä</string>
+    
+    
+    
     <string name="trip_rec_notification_settings">Matkan tallennus (ei dataa)</string>
     <string name="trip_rec_notification_settings_desc">Näytä huomautus, josta voi aloittaa matkan mittauksen painamalla Nauhoita-näppäintä</string>
     <string name="shared_string_notifications">Huomautukset</string>
@@ -1016,13 +1010,13 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="rendering_value_medium_name">Keskipaksu</string>
     <string name="rendering_value_bold_name">Paksu</string>
     <string name="no_waypoints_found">Väyläpisteitä ei löytynyt</string>
-    <string name="osmo_specify_tracker_id">Anna ID</string>
+    
     <string name="report">Raportoi</string>
-    <string name="osmo_connect_to_group_id">Joukko-ID</string>
-    <string name="osmo_connect">Liity</string>
-    <string name="osmo_groups">OsMo-ryhmät</string>
-    <string name="osmo_connect_to_my_nickname">Lempinimi</string>
-    <string name="osmo_share_my_location">Lähetä sijainti</string>
+    
+    
+    
+    
+    
     <string name="shared_string_move_up">Siirrä ylös</string>
     <string name="shared_string_move_down">Siirrä alas</string>
     <string name="finish_navigation">Lopeta navigaatio</string>
@@ -1075,10 +1069,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="access_empty_list">Tyhjä luettelo</string>
     <string name="access_tree_list">Puurakenteinen luettelo</string>
     <string name="no_map_markers_found">Lisää karttamerkit kartalla</string>
-    <string name="osmo_no_connection_msg">Ei voida yhdistää OsMo-palvelimeen:
-- tarkista internet-yhteytesi;
-- tarkista asetukset;
-- tarkista Twitter-tilimme: https://twitter.com/OsMomobi</string>
+    
     <string name="storage_permission_restart_is_required">Nyt sovelluksella on lupa kirjoittaa ulkoiselle tallennuslaitteelle. Uudelleenkäynnistys vaaditaan.</string>
     <string name="shared_string_topbar">Yläpalkki</string>
     <string name="full_report">Koko raportti</string>
@@ -1112,7 +1103,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="map_marker">Karttamarkkeri</string>
     <string name="back_to_map">Takaisin karttaan</string>
     <string name="rendering_category_transport">Kulkuväline</string>
-    <string name="osmo_not_signed_in">OsMo:on kirjautuminen epäonnistui</string>
+    
     <string name="map_widget_magnetic_bearing">Magneettinen suunta</string>
     <string name="map_widget_bearing">Suhteellinen suunta</string>
     <string name="anonymous_user_hint">Anonyymi käyttäjä ei voi:
@@ -1387,7 +1378,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="map_widget_vector_attributes">Hahmottamisen attribuutit</string>
     <string name="map_widget_top">Tilapalkki</string>
     <string name="search_radius_proximity">Sisältäen</string>
-    <string name="osmo_device_not_found">Laitetta ei löytynyt</string>
+    
     <string name="anonymous_user">Anonyymi käyttäjä</string>
     <string name="logged_as">Sisääkirjoittautunut nimellä %1$s</string>
     <string name="speed_limit_exceed">Nopeusrajoituksen toleranssi</string>
@@ -1484,8 +1475,8 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="rendering_value_bicycle_name">Polkupyörä</string>
     <string name="rendering_value_pedestrian_name">Jalankulkija</string>
     <string name="rendering_attr_coloredBuildings_name">Värikoodaa rakennukset tyypeittäin</string>
-    <string name="osmo_invite">Kutsu…</string>
-    <string name="osmo_leave_confirmation_msg">Haluatko jättää ryhmän %1$s?</string>
+    
+    
     <string name="continue_navigation">Jatka suunnistusta</string>
     <string name="pause_navigation">Keskeytä suunnistus</string>
     <string name="keep_navigation_service">Pidä</string>
@@ -1510,14 +1501,14 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="rendering_attr_showSurfaceGrade_name">Näytä tien laatu</string>
     <string name="rendering_attr_showSurfaces_name">Näytä tien päällyste</string>
     <string name="rendering_attr_showCycleRoutes_name">Näytä pyöräreitit</string>
-    <string name="osmo_auth_error_short">Hyväksyminen epäonnistui</string>
-    <string name="osmo_group_by_invite">Pääsy kutsusta</string>
-    <string name="osmo_group_information">Ole hyvä ja lue tämä ennen ryhmän luontia!</string>
-    <string name="osmo_gpx_points_downloaded">Ladattiin %1$s OsMo pistettä.</string>
-    <string name="osmo_auto_connect_descr">Yhdistä palveluun automaattisesti sovellutuksen käynnistyksen jälkeen</string>
-    <string name="osmo_auto_connect">Yhdistä automaattisesti</string>
-    <string name="osmo_start_service">OsMo palvelu</string>
-    <string name="osmo_gpx_track_downloaded">OsMo jälki %1$s ladattiin.</string>
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="no_index_file_to_download">Latauksia ei löydy, ole hyvä ja tarkista internet-yhteytesi.</string>
     <string name="gpx_timespan">AIkajänne: %1$s</string>
     <string name="gpx_timemoving">Aika liikkeessä: %1$s</string>
@@ -1531,49 +1522,49 @@ Pisteet</string>
     <string name="gpx_selection_track">%1$s 
 Jälki %2$s</string>
     <string name="gpx_file_is_empty">GPX jälki on tyhjä/puuttuu</string>
-    <string name="osmo_user_joined">Käyttäjä %1$s liittyi ryhmään %2$s</string>
-    <string name="osmo_user_left">Käyttäjä %1$s jätti ryhmän %2$s</string>
-    <string name="osmo_show_group_notifications">Näytä ryhmän huomautukset</string>
-    <string name="osmo_follow">Seuraa</string>
-    <string name="osmo_sign_in">Sisäänkirjottaudu</string>
-    <string name="osmo_center_location">Keskitä näytölle</string>
-    <string name="osmo_use_server_name">Rekisteröity nimi</string>
-    <string name="osmo_user_name">Käyttäjä</string>
-    <string name="osmo_edit_device">Muuta käyttäjän asetuksia</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="osmo_edit_color">Näyttöväri</string>
-    <string name="osmo_group_info">Informaatio</string>
-    <string name="osmo_group">OsMo ryhmä</string>
-    <string name="osmo_share_connect_device">Anna pysyvästi seurata tätä laitetta</string>
-    <string name="osmo_track_interval">Kirjausten aikaväli</string>
-    <string name="osmo_track_interval_descr">Valitse aikaväli sijaintisi lähettämiseksi</string>
+    
+    
+    
+    
+    
     <string name="int_days">päiviä</string>
     <string name="osmo_connect_menu">Yhdistä</string>
-    <string name="osmo_expire_group">Vanhenee</string>
+    
     <string name="osmo_group_description">Kuvaus</string>
-    <string name="osmo_group_policy">Käytäntö</string>
-    <string name="osmo_connect_to_device_name">Käyttäjänimi</string>
-    <string name="osmo_group_name">Ryhmänimi</string>
-    <string name="osmo_connect_to_device">Linkkaa laitteeseen</string>
-    <string name="osmo_connect_to_group">Linkkaa ryhmään</string>
-    <string name="osmo_create_group">Luo ryhmä</string>
-    <string name="osmo_server_operation_failed">OsMo palvelimen toiminto epäonnistui</string>
-    <string name="osmo_activity">OpenStreetMap valvonta</string>
-    <string name="osmo_enable_tracker">Lähetä sijaintini</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">tuntia sitten</string>
     <string name="minutes_ago">minuuttia sitten</string>
     <string name="seconds_ago">sekuntia sitten</string>
-    <string name="osmo_connected_devices">Yhdistetyt laitteet</string>
-    <string name="osmo_auth_pending">Odottaa hyväksymistä…</string>
-    <string name="osmo_locations_sent">"Sijainteja lähetetty %1$d (puskurissa %2$d) "</string>
-    <string name="osmo_conn_successfull">"Yhteys luotiin: %1$s "</string>
-    <string name="osmo_io_error">"OsMo yhteysongelma: "</string>
-    <string name="osmo_settings_uuid">Yksilöllinen laite id</string>
+    
+    
+    
+    
+    
+    
     <string name="use_points_as_intermediates">Laske reitti pisteiden välille</string>
-    <string name="osmo_mode_restart">Käynnistä OsMo istunto uudelleen</string>
-    <string name="osmo_mode_on">Lopeta OsMo istunto</string>
-    <string name="osmo_mode_off">Käynnistä OsMo istunto</string>
-    <string name="osmo_settings_debug">Testaustiedot</string>
-    <string name="osmo_settings">OsMo</string>
+    
+    
+    
+    
+    
     <string name="voice_pref_title">Ääni</string>
     <string name="misc_pref_title">Sekalaista</string>
     <string name="localization_pref_title">Käännös</string>
@@ -1924,14 +1915,14 @@ Paina ja pidä nähdäksesi kartalla</string>
 
 Paina ja pidä nähdäksesi kartalla</string>
     <string name="gpx_info_asc_altitude">Alas/Ylös: %1$s</string>
-    <string name="osmo_show_group_notifications_descr">Näytä tervehdysviestit kun käyttäjä liittyy tai eroaa ryhmästä</string>
-    <string name="osmo_share_current_session">Jaa nykyinen istunto selaimessa</string>
-    <string name="osmo_session_not_available">Istunto ei ole käytettävissä, ole hyvä ja tarkista, onko ”Lähetä sijainnit” päällä.</string>
-    <string name="osmo_share_session">Jaa istunto</string>
-    <string name="osmo_session_id_share">Istunnon url laitteen jäljittämiseksi (%1$s)</string>
-    <string name="osmo_control">OsMon nopea kayttö</string>
-    <string name="osmo_session_token">Istunnon symboli: %1$s</string>
-    <string name="osmo_settings_descr">Konfiguroi seurannan asetukset ja aseta henkilökohtainen seurantakanava</string>
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="calculate_osmand_route_without_internet">Laske OsmAnd reitin segmentti ilman internettiä</string>
     <string name="gpx_option_calculate_first_last_segment">Laske OsmAnd reitti ensimmäiselle ja viimeiselle reitin segmentille</string>
     <string name="use_displayed_track_for_navigation">Haluatko käyttää näytettävää jälkeä suunnistuksessa?</string>
@@ -1976,26 +1967,12 @@ Paina ja pidä nähdäksesi kartalla</string>
     <string name="auto_announce_off">Keskeytä automaattiset ilmoitukset</string>
     <string name="access_direction_audio_feedback">Suunta (äänipalautteena)</string>
     <string name="access_direction_haptic_feedback">Suunta (värinäpalautteena)</string>
-    <string name="osmo_group_information_desc">"
- - Kun luot ryhmän, anna sille nimi ja täytä kuvaustieto
-
- - Sovellusryhmästä on luotu vain Vaatimaton ryhmä, lue lisää verkkosivuiltae https://osmo.mobi/g/new 
-
- - Verkkosivuilla voit hallita ryhmiä, sijoittaa jälkiä ja pisteitä kaikkien saataville
-
- - Emme kannusta käyttämään ryhmää vain yhdelle käyttäjälle jollei tämä ole POI ryhmä
-
- - Yksityisryhmät on rajoitettu 8 käyttäjälle
-
- - Yksityiskohtaiset käyttöehdot on aina saatavilla verkko-osoitteessa OsMo.mobi
-
- - Jos tarvitset erityisiä ehtoja - ole hyvä ja ota yhteyttä: osmo.mobi@gmail.com
- "</string>
-    <string name="osmo_connect_to_device_tracker_id">Jälki-ID</string>
-    <string name="osmo_auto_send_locations_descr">Aloita matka automaattisesti ja lähetä sijainnit sovellutuksen käynnistyksen jälkeen</string>
-    <string name="osmo_auto_send_locations">Aloita matka automaattisesti</string>
-    <string name="osmo_tracker_id">Jälki-ID</string>
-    <string name="osmo_tracker_id_descr">Klikkaa nähdäksesi jälki-ID:n</string>
+    
+    
+    
+    
+    
+    
     <string name="release_2_3">"
  • OSM Live. Tue kartta-avustajia ja kehittäjiä ja saa tunneittain karttapäivitykset.
 
@@ -2075,11 +2052,11 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="av_audio_bitrate">Audion bittinopeus</string>
     <string name="av_audio_bitrate_descr">Valitse audion bittinopeus</string>
     <string name="none_selected_gpx">GPX tiedostoa ei valittu. Valitaksesi paina ja pidä käytettävissä olevalla jäljellä.</string>
-    <string name="osmo_create_groups_confirm">Luodaksesi ryhmiä tulee Sinun olla OsMo\'on rekisteröitynyt käyttäjä.</string>
-    <string name="osmo_credentials_not_valid">OsMo käyttäjätietosi eivät ole oikein.</string>
-    <string name="osmo_regenerate_login_ids">Generoi uudelleen käyttäjä id:si</string>
-    <string name="osmo_cancel_moving_target">Peruuta kohteen liikuttelu</string>
-    <string name="osmo_set_moving_target">Aseta liikkuvaksi kohteeksi</string>
+    
+    
+    
+    
+    
     <string name="lang_sr_latn">Serbia (latinalaisin)</string>
     <string name="lang_zh_hk">Kiina (Hong Kong)</string>
     <string name="speech_rate_descr">Määrittele puheen nopeus TTS:lle</string>
@@ -2137,7 +2114,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="poi_context_menu_call">Näytä POIn puhelinnumero</string>
     <string name="use_high_res_maps">Korkean resoluution näyttö</string>
     <string name="no_vector_map_loaded">Vektorikarttoja ei ladattu</string>
-    <string name="map_route_by_gpx">Suunnista GPX:ää käyttäen</string>
+    
     <string name="gpx_files_not_found">GPX tiedostoja ei löytynyt jälkien hakemistosta</string>
     <string name="error_reading_gpx">Virhe luettaessa GPX dataa</string>
     <string name="vector_data">Offline vektorikartat</string>
@@ -2174,7 +2151,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="rendering_attr_depthContours_name">Korkeuskäyrät</string>
 	<string name="rendering_attr_depthContours_description">Näytä korkeuskäyrät ja -pisteet</string>
     
-    <string name="routing_attr_driving_style_description">Turvallista, nopeaa tai tasapainoista ajoa</string>
+    
     <string name="route_altitude">Reitin korkeus</string>
     <string name="altitude_descent">Lasku</string>
     <string name="altitude_ascent">Nousu</string>
@@ -2183,7 +2160,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="shared_string_time">Aika</string>
     <string name="total_distance">Kokonaisetäisyys</string>
     
-    <string name="routing_attr_height_relief_smoothness_factor_description">Enemmän tasaista vai enemmän mäkiä</string>
+    
     <string name="routing_attr_height_obstacles_name">Käytä korkeustietoja</string>
     <string name="routing_attr_height_obstacles_description">Käytä maaston korkeustietoja jotka saadaan SRTM, ASTER ja EU-DEM lähteistä</string>
 
@@ -2221,7 +2198,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="context_menu_item_modify_note">Muokkaa OSM huomautusta</string>
     <string name="make_round_trip_descr">Lisää lähtöpisteen kopio maalipisteeksi.</string>
     <string name="make_round_trip">Tee kiertoajelu</string>
-    <string name="shared_string_navigate">Navigoi</string>
+    
     <string name="shared_string_markers">Markkerit</string>
     <string name="coordinates_format">Koordinaattien muoto</string>
     <string name="use_system_keyboard">Käytä järjestelmän näppäimistöä</string>

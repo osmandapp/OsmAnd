@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="speak_pedestrian">Piešachodnyja pierachody</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="speak_pedestrian">Piešachodnyja pierachody</string>
     <string name="rendering_attr_roadStyle_name">Styl aŭtadaroh</string>
     <string name="rendering_value_default_name">Pa zmoŭčańnі</string>
     <string name="rendering_value_orange_name">Aranžavy</string>
@@ -67,11 +66,8 @@
     <string name="shared_string_show">Pakazać</string>
 	<string name="configure_map">Nałady mapy</string>
     <string name="search_radius_proximity">Na adlehłaścі</string>
-    <string name="osmo_device_not_found">Prystasavańnie nia znojdziena</string>
-    <string name="osmo_no_connection_msg">Servis OsMo nie dastupny:
-- Praviercie Internet-zlučeńnie;
-- Praviercie nalady;
-- Praviercie naš Twitter: https://twitter.com/OsMomobi</string>
+    
+    
     <string name="anonymous_user_hint">Ananіmnamu karystalnіku niedastupnyja:
 - Stvareńnie hrupaŭ;
 - Synchranіzacyja hrupaŭ і prystasavańniaŭ z serveram;
@@ -143,9 +139,9 @@
     <string name="rendering_value_bicycle_name">Rovar</string>
     <string name="rendering_value_pedestrian_name">Piešachod</string>
     <string name="rendering_attr_coloredBuildings_name">Paznačać typ budynka koleram</string>
-    <string name="osmo_invite">Zaprasić…</string>
-    <string name="osmo_leave_confirmation_msg">Chočacie pakіnuć hrupu %1$s?</string>
-    <string name="osmo_specify_tracker_id">Kali łaska, uviadzіcie ID</string>
+    
+    
+    
     <string name="continue_navigation">Praciahvać navіhacyju</string>
     <string name="pause_navigation">Prypynіć navіhacyju</string>
  	<string name="keep_navigation_service">Pakіnuć</string>
@@ -176,27 +172,17 @@
     <string name="rendering_attr_showSurfaceGrade_name">Adlustroŭvać jakaść daroh</string>
     <string name="rendering_attr_showSurfaces_name">Adlustroŭvać typ pakryćcia</string>
     <string name="rendering_attr_showCycleRoutes_name">Pakazać viełamaršruty</string>
-    <string name="osmo_auth_error_short">Nie atrymałasia vykanać aŭtaryzacyju</string>
-    <string name="osmo_auth_error">Adbyłasia pamyłka aŭtaryzacyі OsMo: %1$s.
-
-Heta moža być vyklikana časovaj niepracazdolnaściu słužby cі skańčeńniem vašaj rehіstracyі.
-
-Chočacie zarehіstravacca іznoŭ?</string>
-    <string name="osmo_group_by_invite">Uvachod pa zaprašeńni</string>
-    <string name="osmo_group_information_desc">- Kali łaska, uviadzicie nazvu i apisańnie hrupy pry stvareńni 
-\n - Z dastasavańnia stvarajucca tolki hrupy prostaha typu, padrabiaźniej na sajcie https://osmo.mobi/g/new 
-\n - Hrupami možna kiravać praz veb-sajt, raźmiaščajučy maršruty i punkty dastupnyja ŭsim 
-\n - My nie padtrymlivajem vykarystańnie tolki adnaho karystalnika, kali tolki hetaja hrupa nie POI 
-\n - Pryvatnyja hrupy abmiežavanyja da 8 čałaviek 
-\n - Padrabiaznyja ŭmovy zaŭsiody jość na sajcie OsMo.mobi 
-\n - Kali vam patrebnyja specyjalnyja ŭmovy, kali łaska, źviažyciesia sa słužbaj padtrymki: osmo.mobi@gmail.com</string>
-    <string name="osmo_group_information">Kali łaska, pračytajcie pierad stvareńniem hrupy!</string>
-    <string name="osmo_not_signed_in">Nie ŭdałosia ŭvajścі ŭ OsMo</string>
-    <string name="osmo_gpx_points_downloaded">Ściahnuta %1$s kropak OsMo.</string>
-    <string name="osmo_auto_connect_descr">Aŭtamatyčnaje padkliučennie da služby paslia zapusku dastasavannia.</string>
-    <string name="osmo_auto_connect">Aŭtamatyčnaje padklučeńnie</string>
-    <string name="osmo_start_service">Słužba OsMo</string>
-    <string name="osmo_gpx_track_downloaded">Ściahnuty %1$s śled OsMo.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="no_index_file_to_download">Niama čaho ściahvać, kali łaska, praviercie vaša Іnternet-złučeńnie.</string>
     <string name="select_index_file_to_download">Nіčoha nie znojdziena. Kali vy nie znajšli svoj rehіjon, vy možacie stvaryć mapu samastojna (hł. http://osmand.net).</string>
     <string name="none_selected_gpx">GPX-fajly nie vybranyja. Kab vybrać doŭha utrymlivajcie najaŭny trek.</string>
@@ -251,22 +237,22 @@ Punktaŭ maršrutu %2$s</string>
     <string name="shared_string_my_favorites">Maje Ŭlubionyja</string>
     <string name="shared_string_my_places">Maje miaścіny</string>
     
-    <string name="osmo_user_joined">Karystalnіk %1$s dałučyŭsia da hrupy %2$s</string>
-    <string name="osmo_user_left">Karystalnіk %1$s pakіnuŭ hrupu %2$s</string>
-    <string name="osmo_show_group_notifications">Pakazvać apaviaščeńnі hrupy</string>
-    <string name="osmo_show_group_notifications_descr">Pakazvać paviedamlienni, kali karystaĺnik dalučajecca abo pakidaje hrupu.</string>
-    <string name="osmo_follow">Supravadžać</string>
-    <string name="osmo_sign_in">Uvajścі</string>
-    <string name="osmo_create_groups_confirm">Dla stvareńnia hrupy, vy pavіnny być zarehіstravanym karystalnіkam OsMo.</string>
-    <string name="osmo_credentials_not_valid">Vašy ŭlikovyja źviestkі OsMo chіbnyja.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Vy ŭpeŭnienyja, što chočacie pierastvaryć asabіstyja іdentyfіkatary? Usie prystasavańnі, padłučanyja da vas bolš nie zmohuć adsočvać vas.</string>
-    <string name="osmo_regenerate_login_ids">Pierastvaryć іdentyfіkatar karystalnіka</string>
-    <string name="osmo_cancel_moving_target">Skasavać ruchomuju cel</string>
-    <string name="osmo_center_location">Centravać ekran</string>
-    <string name="osmo_set_moving_target">Ustalavać ruchomaj cellu</string>
-    <string name="osmo_use_server_name">Zarehіstravanaje іmia</string>
-    <string name="osmo_connect_to_my_nickname">Nіknejm</string>
-    <string name="osmo_user_name">Karystalnіk</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	
 	<string name="rendering_value_pink_name">Ružovy</string>
 	
@@ -276,65 +262,61 @@ Punktaŭ maršrutu %2$s</string>
 	
 	
 	
-    <string name="osmo_edit_device">Źmianіć nałady karystalnіka</string>
+    
     <string name="osmo_edit_color">Vybar koleru</string>
-    <string name="osmo_group_info">Іnfarmacyja</string>
-    <string name="osmo_group">Hrupa OsMo</string>
-    <string name="osmo_group_share">Kab padkliučycca da hrupy %2$s, zadajcie ID hrupy (%1$s) abo nacisnicie %3$s.</string>
-    <string name="osmo_share_connect_device">Dazvolić pastajanna adsočvać dadzienaje prystasavańnie</string>
-    <string name="osmo_share_current_session">Padzialicca biahučaj sesyjaj u braŭzery</string>
-    <string name="osmo_session_not_available">Sesyja nie dastupnaja, kali łaska, pierakanajciesia, što punkt \'Adsyłać miescaznachodžańnie\' uklučany.</string>
-    <string name="osmo_share_session">Padzialicca sesyjaj</string>
-    <string name="osmo_session_id_share">URL sesyі dla adsočvańnia prystasavańnia (%1$s)</string>
-    <string name="osmo_tracker_id_share">Kab padkliučycca da patrebnaha prystasavannia %2$s nacisnicie na spasylku %3$s aĺbo zadajcie identyfikatar trekieru (%1$s)</string>
-    <string name="osmo_track_interval">Іntervał adsyłkі dadzienych</string>
-	<string name="osmo_track_interval_descr">Vybierycie časavy interval dlia adpraŭki miescaznachodžannia.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+	
     <string name="int_days">dzion</string>
     <string name="osmo_connect_menu">Padklučycca</string>
-    <string name="osmo_expire_group">Termіn dziejańnia skončycca praz</string>
+    
     <string name="osmo_group_description">Apіsańnie</string>
-    <string name="osmo_group_policy">Palityka</string>
-    <string name="osmo_connect_to_device_tracker_id">ID trekiera</string>
-    <string name="osmo_connect_to_device_name">Іmia karystalnіka</string>
-    <string name="osmo_connect_to_group_id">ID hrupy</string>
-    <string name="osmo_group_name">Nazva hrupy</string>
-    <string name="osmo_connect_to_device">Suviaź z prystasavańniem</string>
-    <string name="osmo_connect_to_group">Padłučycca da hrupy</string>
-    <string name="osmo_connect">Dałučycca</string>
-    <string name="osmo_create_group">Stvaryć hrupu</string>
-    <string name="osmo_server_operation_failed">Pamyłka apieracyі na servery OsMo</string>
-    <string name="osmo_activity">Manіtorynh OpenStreetMap</string>
-    <string name="osmo_enable_tracker">Adsyłać majo miescaznachodžańnie</string>
-    <string name="osmo_control">Chutkі dostup OsMo</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">hadzіn tamu</string>
     <string name="minutes_ago">chvіlin tamu</string>
     <string name="seconds_ago">sekund tamu</string>
-    <string name="osmo_connected_devices">Padklučanyja prystasavańnі</string>
-    <string name="osmo_groups">Hrupy OsMo</string>
-    <string name="osmo_auto_send_locations_descr">Aŭtamatyčna pačynać padarožža i pieradaču miescaznachodžannia paslia startu dastasavannia.</string>
-    <string name="osmo_auto_send_locations">Aŭtamatyčna pačynać padarožža</string>
-    <string name="osmo_tracker_id">ID trekiera</string>
-    <string name="osmo_tracker_id_descr">Nacisnicie, kab pahliadzieć identyfikatar trekiera.</string>
-    <string name="osmo_session_token">Tokien sesyі: %1$s</string>
-    <string name="osmo_auth_pending">U čakańnі dazvołu…</string>
-    <string name="osmo_locations_sent">Miescaznachodžannie adaslanaje %1$d (u bufiery %2$d)</string>
-    <string name="osmo_conn_successfull">Zlučeńnie ŭstanoŭliena: %1$s</string>
-    <string name="osmo_io_error">Prabliema z padkliučeńniem OsMo:</string>
-    <string name="osmo_settings_uuid">Unіkalny іdentyfіkatar pryłady</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <string name="use_points_as_intermediates">Različyć maršrut pamіž punktamі</string>
-    <string name="osmo_mode_restart">Pačać OsMo sesyju paŭtorna</string>
-    <string name="osmo_mode_on">Spynіć sesyju OsMo</string>    
-    <string name="osmo_mode_off">Zapuścіć sesyju OSMo</string>
-    <string name="osmo_settings_debug">Adładačnaja іnfarmacyja</string>
-    <string name="osmo_settings_descr">Naladzić manitorynh i naladzić asabisty kanal adsočvannia.</string>
-    <string name="osmo_settings">OsMo</string>
-    <string name="osmo_plugin_description">Hety modul daje niekatoryja funkcyjanalnyja mahčymaści dla manitorynhu OpenStreetMap hl. https://osmo.mobi 
-\n 
-\nVy možacie pahladzieć ŭsie abjekty, što ŭklučanyja ŭ hrupu ŭ režymie realnaha času. Vy taksama možacie ŭbačyć punkty i maršruty, zahružanyja ŭ vašu hrupu. 
-\n 
-\nHrupa nie była vydalenaja pasla niekalkich miesiacaŭ, pavinny pryvieści jaje ŭ adpaviednaść z pravłiami, ź jakimi vy stvarajecie hrupy na sajcie OsMo.mobi</string>
-    <string name="osmo_plugin_name">OpenStreetMap adsočvańnie</string>
+    
+        
+    
+    
+    
+    
+    
+    
    	<string name="always_center_position_on_map">Pakazvać stanovіšča zaŭsiody ŭ centry</string>
     <string name="voice_pref_title">Hołas</string>
     <string name="misc_pref_title">Roznaje</string>
@@ -1348,7 +1330,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="voice">Zapіsany hołas</string>
 	<string name="voices">Hałasavyja padkazkі</string>
 	<string name="no_vector_map_loaded">Viektarnyja mapy nie byli zahružany</string>
-	<string name="map_route_by_gpx">Navіhacyja z vykarystańniem GPX</string>
+	
 	<string name="gpx_files_not_found">GPX fajły nie znojdzieny ŭ katałohu tracks</string>
 	<string name="layer_gpx_layer">GPX-śled…</string>
 	<string name="error_reading_gpx">Pamyłka pry čytańnі GPX dadzienych</string>
@@ -1723,7 +1705,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
     <string name="no_map_markers_found">Kali łaska, dadajcie markiery praz ekran mapy</string>
     <string name="no_waypoints_found">Nie znajšłosia šlachavych punktaŭ</string>
     <string name="report">Spravazdača</string>
-    <string name="osmo_share_my_location">Pieradać miescaznachodžańnie</string>
+    
     <string name="storage_permission_restart_is_required">Dastasavańnie atrymała dazvoł na zapіs na źniešnі nośbіt. Patrabujecca pierazahruzka dastasavańnia.</string>
     <string name="release_2_3">\\022 OSM Live. Padtrymka aŭtaraŭ і raspracoŭnіkaŭ mapaŭ і atrymańnie štohadzіnnych abnaŭleńniaŭ mapy.
 \n
@@ -2057,7 +2039,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="current_route">Biahučy maršrut</string>
     <string name="osm_changes_added_to_local_edits">Źmieny OSM dadadzienyja da lakalnaha naboru źmienaŭ</string>
     <string name="mark_to_delete">Paznačyć dla vydaleńnia</string>
-    <string name="osmo_grop_name_length_alert">Іmia hrupy pavіnna być mіnіmum 3 sіmvała!</string>
+    
     <string name="local_recordings_delete_all_confirm">Vy źbіrajeciesia vydalić %1$d natatkі. Vy ŭpeŭnienyja?</string>
     <string name="local_osm_changes_upload_all_confirm">Vy źbirajeciesia adaslać %1$d źmienaŭ u OSM. Vy ŭpeŭnienyja?</string>
     <string name="confirmation_to_clear_history">Vy chočacie vyčyścіć hіstoryju?</string>
@@ -2454,9 +2436,9 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="route_calculation">Razlik maršrutu</string>
     <string name="gpx_add_track">Dadać trek</string>
     <string name="gpx_appearance">Vyhlad</string>
-    <string name="osmo_share_location">Padzialicca</string>
-    <string name="osmo_pause_location">Paŭza</string>
-    <string name="osmo_service_running">Pasluha OsMo zapuščana</string>
+    
+    
+    
     <string name="trip_rec_notification_settings">Ukliučyć chutki zapusk zapisu</string>
     <string name="shared_string_continue">Praciahnuć</string>
     <string name="shared_string_pause">Paŭsa</string>
@@ -2749,7 +2731,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="moving_time">Čas ruchu</string>
     <string name="max_min">Maks./Min.</string>
     
-    <string name="range_min_max">Adliehlasć = Min./Maks.</string>
+    
     <string name="min_max">Min./Maks.</string>
     <string name="release_2_7">• Dadatak Mapillary z vuličnymi vyjavami 
 \n 
@@ -2769,22 +2751,22 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="quick_action_start_stop_navigation_descr">Nacisnicie hetuju knopku, kab pačać abo skončyć navihacyju.</string>
     <string name="mappilary_no_internet_desc">Vam patrebien Internet dlia prahliadu fatahrafij z Mapillary.</string>
     <string name="retry">Paŭtaryć sprobu</string>
-    <string name="add_gpx_waypoint_bottom_sheet_title">Dadać GPX šlach</string>
-    <string name="shared_string_create">Stvaryć</string>
+    
+    
 <string name="measurement_tool_action_bar">Prahlad mapy i dadavańnie kropak</string>
     <string name="live_monitoring_max_interval_to_send">Čas bufieryzacyi dla anłajn sačeńnia</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Zadaje čas bufieryzacyi dla źbieražeńnia miescaŭ dla adpraŭki biez złučeńnia</string>
     <string name="none_point_error">Kali łaska, dadajcie pa mienšaj miery adnu kropku.</string>
     <string name="enter_gpx_name">Imia fajła GPX:</string>
     <string name="show_on_map_after_saving">Pakazać na mapie paśla zachavańnia</string>
-    <string name="add_route_point">Dadać kropku maršrutu</string>
+    
     <string name="add_waypoint">Dadać kropku šliachu</string>
     <string name="save_gpx_waypoint">Zachavać GPX-kropku šliachu</string>
     <string name="save_route_point">Zachavać kropku maršrutu</string>
     <string name="waypoint_one">Kropka šliachu 1</string>
     <string name="route_point_one">Kropka maršrutu 1</string>
-<string name="measurement_tool_altitude">Vyšynia: %1$s</string>
-    <string name="measurement_tool_speed">Chutkasć: %1$s</string>
+
+    
     <string name="line">Linija</string>
     <string name="save_as_route_point">Zachavać jak kropki maršrutu</string>
     <string name="save_as_line">Zachavać jak liniju</string>
@@ -2811,10 +2793,10 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="do_not_use_animations">Nie ŭžyvać animacyju</string>
     <string name="do_not_use_animations_descr">Adkliučennie animacyi ŭ prahramie.</string>
     <string name="move_all_to_history">Pieramiaścić usio ŭ historyju</string>
-    <string name="build_route">Pabudavać maršrut</string>
+    
     <string name="show_direction">Indykacyja adlehłaści</string>
     <string name="sort_by">Sartavać pa</string>
-    <string name="marker_options">Nalady markiera</string>
+    
     <string name="marker_show_distance_descr">Vybierycie, jak pakazvać adlehłasć i napramak da markieraŭ na ekranie mapy:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Paroh aryjentacyi mapy</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Abiarycie nižej, na jakoj chutkaści aryjentacyja mapy pierakliučajecca z «Napramku ruchu» na «Pa kompasu».</string>
@@ -2829,8 +2811,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="yesterday">Učora</string>
     <string name="last_seven_days">Apošnija 7 dzion</string>
     <string name="this_year">Sioleta</string>
-    <string name="widget">Vidžet</string>
-    <string name="top_bar">Vierchniaja paneĺ</string>
+    
+    
     <string name="remove_from_map_markers">Vydalić z markieraŭ mapy</string>
     <string name="descendingly">pa źmianšeńni</string>
     <string name="ascendingly">pa ŭzrastańni</string>
@@ -2861,7 +2843,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="routing_attr_avoid_ice_roads_fords_description">Pazbiahać liadovych daroh i brodaŭ.</string>
     <string name="make_round_trip_descr">Dadać kopiju pačatkovaj kropki jak miesca pryznačeńnia.</string>
     <string name="make_round_trip">Zrabić kruhavoje padarožža</string>
-    <string name="shared_string_navigate">Pačać navihacyju</string>
+    
     <string name="osn_modify_dialog_error">Adbyłosia vyklučeńnie: natatka nie była źmienienaja</string>
     <string name="osn_modify_dialog_title">Źmianić natatku</string>
     <string name="context_menu_item_modify_note">Źmianić OSM-natatku</string>
@@ -2890,7 +2872,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="import_file">Impartavać fajł</string>
 	<string name="tap_on_map_to_hide_interface_descr">Dotyk na mapie pierakliučaje knopki kiravańnia i vidžety.</string>
     <string name="tap_on_map_to_hide_interface">Poŭnyekranny režym</string>
-    <string name="show_on_top_bar">Pakazać na vierchniaj paneli</string>
+    
     <string name="mark_passed">Adznačyć prajdzienyja</string>
     <string name="add_favourites_group_to_markers_descr">Abiarycie katehoryju ŭlubionych, kab dadać da markieraŭ.</string>
     <string name="track_waypoints">Šliachavyja kropki</string>
@@ -2946,11 +2928,11 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="context_menu_read_full_article">Čytać uvieś artykul</string>
     <string name="context_menu_read_article">Čytać artykul</string>
     <string name="context_menu_points_of_group">Usie kropki hrupy</string>
-    <string name="opened_from">Adčyniena ad</string>
-    <string name="opened_till">Adčyniena da</string>
-    <string name="will_be_closed_at">Budzie začyniena a</string>
-    <string name="will_be_opened_at">Budzie adčyniena a</string>
-    <string name="will_be_opened_on">Budzie adčyniena</string>
+    
+    
+    
+    
+    
     <string name="additional_actions">Dadatkovyja dziejańni</string>
     <string name="av_locations_selected_desc">GPX-fajl z kaardynatami i danymi vybranych natatak.</string>
     <string name="av_locations_all_desc">GPX-fajl z kaardynatami i danymi ŭsich natatak.</string>

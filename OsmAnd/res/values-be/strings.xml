@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="auto_zoom_none">Без аўтаматычнага маштабавання</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабавання</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштабу</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -862,7 +861,7 @@
 	
 	<string name="voice">Запісаны голас</string>
 	<string name="no_vector_map_loaded">Вектарныя мапы не былі загружаны</string>
-	<string name="map_route_by_gpx">Навігацыя з выкарыстаньнем GPX</string>
+	
 	<string name="gpx_files_not_found">GPX файлы не знойдзены ў каталогу tracks</string>
 	<string name="layer_gpx_layer">GPX-сьлед…</string>
 	<string name="error_reading_gpx">Памылка пры чытаньні GPX дадзеных</string>
@@ -1290,15 +1289,11 @@
     <string name="misc_pref_title">Рознае</string>
     <string name="localization_pref_title">Лякалізацыя</string>
     <string name="interrupt_music">Прыпыніць музыку</string>
-	<string name="osmo_settings_uuid">Унікальны ідэнтыфікатар прылады</string>
-    <string name="osmo_settings_descr">Наладзіць маніторынг і наладзіць асабісты канал адсочвання.</string>
-    <string name="osmo_plugin_description">Гэты модуль дае некаторыя функцыянальныя магчымасьці для маніторынгу OpenStreetMap гл. https://osmo.mobi 
-\n 
-\nВы можаце паглядзець ўсе аб\'екты, што ўключаныя ў групу ў рэжыме рэальнага часу. Вы таксама можаце ўбачыць пункты і маршруты, загружаныя ў вашу групу. 
-\n 
-\nГрупа не была выдаленая пасьля некалькіх месяцаў, павінны прывесьці яе ў адпаведнасьць з правіламі, зь якімі вы ствараеце групы на сайце OsMo.mobi</string>
-    <string name="osmo_plugin_name">OpenStreetMap адсочваньне</string>
-    <string name="osmo_settings">OsMo</string>
+	
+    
+    
+    
+    
    	<string name="always_center_position_on_map">Паказваць становішча заўсёды ў цэнтры</string>
     <string name="route_descr_destination">Пункт прызначэньня</string>
     <string name="interrupt_music_descr">Галасавыя падказкі прыпыняюць музыку, а не толькі прыглушаюць яе.</string>
@@ -1327,61 +1322,61 @@
 	
 	
 	
-	<string name="osmo_io_error">Праблема з падключэньнем OsMo: </string>
-    <string name="osmo_mode_on">Спыніць сэсыю OsMo</string>    
-    <string name="osmo_mode_off">Запусьціць сэсыю OSMo</string>
+	
+        
+    
     
 	<string name="share_fav_subject">Улюбёныя адасланы праз OsmAnd</string>
 	<string name="use_points_as_intermediates">Разлічыць маршрут паміж пунктамі</string>
     
-    <string name="osmo_auto_send_locations_descr">Аўтаматычна пачынаць падарожжа і перадачу месцазнаходжання пасля старту дастасавання.</string>
-    <string name="osmo_auto_send_locations">Аўтаматычна пачынаць падарожжа</string>
-    <string name="osmo_tracker_id">ID трэкера</string>
-    <string name="osmo_tracker_id_descr">Націсніце, каб паглядзець ідэнтыфікатар трэкера.</string>
-    <string name="osmo_session_token">Токен сэсыі: %1$s</string>
-    <string name="osmo_auth_pending">У чаканьні дазволу…</string>
-    <string name="osmo_locations_sent">Месцазнаходжанне адасланае %1$d (у буферы %2$d)</string>
-    <string name="osmo_conn_successfull">Злучэньне ўстаноўлена: %1$s </string>
-    <string name="osmo_mode_restart">Пачаць OsMo сэсыю паўторна</string>
-    <string name="osmo_settings_debug">Адладачная інфармацыя</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">гадзін таму</string>
     <string name="minutes_ago">хвілін таму</string>
     <string name="seconds_ago">сэкунд таму</string>
-    <string name="osmo_connect_to_device_name">Імя карыстальніка</string>
-    <string name="osmo_connect_to_device_tracker_id">ID трэкера</string>
-    <string name="osmo_connect_to_device">Сувязь з прыстасаваньнем</string>
     
     
-    <string name="osmo_connected_devices">Падключаныя прыстасаваньні</string>
-    <string name="osmo_groups">Групы OsMo</string>
-    <string name="osmo_group_info">Інфармацыя</string>
-    <string name="osmo_group">Група OsMo</string>
-    <string name="osmo_group_share">Каб падключыцца да групы %2$s, задайце ID групы (%1$s) або націсніце %3$s.</string>
-    <string name="osmo_share_connect_device">Дазволіць пастаянна адсочваць дадзенае прыстасаваньне</string>
-    <string name="osmo_share_current_session">Падзяліцца дзейнай сесіяй у браўзэры</string>
-    <string name="osmo_share_session">Падзяліцца сэсыяй</string>
-    <string name="osmo_session_id_share">URL сэсыі для адсочваньня прыстасаваньня (%1$s)</string>
-    <string name="osmo_track_interval_descr">Выберыце часавы інтэрвал для адпраўкі месцазнаходжання.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="int_days">дзён</string>
     <string name="osmo_connect_menu">Падключыцца</string>
     <string name="osmo_group_description">Апісаньне</string>
-    <string name="osmo_group_policy">Палітыка</string>
-    <string name="osmo_connect_to_group_id">ID групы</string>
-    <string name="osmo_group_name">Назва групы</string>
-    <string name="osmo_connect_to_group">Падлучыцца да групы</string>
-    <string name="osmo_connect">Далучыцца</string>
-    <string name="osmo_create_group">Стварыць групу</string>
-    <string name="osmo_server_operation_failed">Памылка аперацыі на сэрвэры OsMo</string>
-    <string name="osmo_activity">Маніторынг OpenStreetMap</string>
-    <string name="osmo_enable_tracker">Адсылаць маё месцазнаходжаньне</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 	<string name="import_file_favourites">Захаваць зьвесткі як GPX-файл або імпартаваць пункты ва Ўлюбёныя?</string>
 	
-	<string name="osmo_track_interval">Інтэрвал адсылкі дадзеных</string>
-	<string name="osmo_expire_group">Тэрмін дзеяньня скончыцца праз</string>
-    <string name="osmo_control">Хуткі доступ OsMo</string>
-    <string name="osmo_session_not_available">Сэсыя не даступная, калі ласка, пераканайцеся, што пункт \'Адсылаць месцазнаходжаньне\' уключаны.</string>
-    <string name="osmo_tracker_id_share">Каб падключыцца да патрэбнага прыстасавання %2$s націсніце на спасылку %3$s альбо задайце ідэнтыфікатар трэкеру (%1$s)</string>
+	
+	
+    
+    
+    
     
 	<string name="rendering_value_pink_name">ружовы</string>
 	
@@ -1392,25 +1387,25 @@
 	
 	
     <string name="osmo_edit_color">Выбар колеру</string>
-    <string name="osmo_edit_device">Зьмяніць налады карыстальніка</string>
-    <string name="osmo_sign_in">Увайсьці</string>
-    <string name="osmo_create_groups_confirm">Для стварэньня групы, вы павінны быць зарэгістраваным карыстальнікам OsMo.</string>
-    <string name="osmo_credentials_not_valid">Вашы ўліковыя зьвесткі OsMo хібныя.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Вы ўпэўненыя, што хочаце перастварыць асабістыя ідэнтыфікатары? Усе прыстасаваньні, падлучаныя да вас больш не змогуць адсочваць вас.</string>
-    <string name="osmo_regenerate_login_ids">Перастварыць ідэнтыфікатар карыстальніка</string>
-    <string name="osmo_use_server_name">Зарэгістраванае імя</string>
-    <string name="osmo_connect_to_my_nickname">Нікнэйм</string>
-    <string name="osmo_user_name">Карыстальнік</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	
 	
-    <string name="osmo_set_moving_target">Усталяваць рухомай цэльлю</string>
-    <string name="osmo_cancel_moving_target">Скасаваць рухомую цэль</string>
-    <string name="osmo_center_location">Цэнтраваць экран</string>
-    <string name="osmo_follow">Суправаджаць</string>
-    <string name="osmo_user_joined">Карыстальнік %1$s далучыўся да групы %2$s</string>
-    <string name="osmo_user_left">Карыстальнік %1$s пакінуў групу %2$s</string>
-    <string name="osmo_show_group_notifications">Паказваць апавяшчэньні групы</string>
-    <string name="osmo_show_group_notifications_descr">Паказваць паведамленні, калі карыстальнік далучаецца або пакідае групу.</string>
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     <string name="gpx_file_is_empty">GPX-сьлед пусты</string>
@@ -1455,27 +1450,17 @@
     
     <string name="local_index_select_gpx_file">Выбраць для паказу</string>
     <string name="no_index_file_to_download">Няма чаго сьцягваць, калі ласка, праверце ваша Інтэрнэт-злучэньне.</string>
-    <string name="osmo_not_signed_in">Не ўдалося ўвайсьці ў OsMo</string>
-    <string name="osmo_gpx_points_downloaded">Сьцягнута %1$s кропак OsMo.</string>
-    <string name="osmo_auto_connect_descr">Аўтаматычнае падключэнне да службы пасля запуску дастасавання.</string>
-    <string name="osmo_auto_connect">Аўтаматычнае падключэньне</string>
-    <string name="osmo_start_service">Служба OsMo</string>
-    <string name="osmo_gpx_track_downloaded">Сьцягнуты %1$s сьлед OsMo.</string>
-    <string name="osmo_group_by_invite">Уваход па запрашэньнi</string>
-    <string name="osmo_group_information">Калі ласка, прачытайце перад стварэньнем групы!</string>
-    <string name="osmo_group_information_desc">- Калі ласка, увядзіце назву і апісаньне групы пры стварэньні 
-\n - З дастасаваньня ствараюцца толькі групы простага тыпу, падрабязьней на сайце https://osmo.mobi/g/new 
-\n - Групамі можна кіраваць праз вэб-сайт, разьмяшчаючы маршруты і пункты даступныя ўсім 
-\n - Мы не падтрымліваем выкарыстаньне толькі аднаго карыстальніка, калі толькі гэтая група не POI 
-\n - Прыватныя групы абмежаваныя да 8 чалавек 
-\n - Падрабязныя ўмовы заўсёды ёсьць на сайце OsMo.mobi 
-\n - Калі вам патрэбныя спэцыяльныя ўмовы, калі ласка, зьвяжыцеся са службай падтрымкі: osmo.mobi@gmail.com</string>
-    <string name="osmo_auth_error_short">Не атрымалася выканаць аўтарызацыю</string>
-    <string name="osmo_auth_error">Адбылася памылка аўтарызацыі OsMo: %1$s.
-
-Гэта можа быць выклікана часовай непрацаздольнасьцю службы ці сканьчэньнем вашай рэгістрацыі.
-
-Хочаце зарэгістравацца ізноў?</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="rendering_attr_hideBuildings_name">Будынкі</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Не аўтамабільныя дарогі</string>
     <string name="rendering_attr_hideText_name">Тэкст</string>
@@ -1516,9 +1501,9 @@
 	<string name="lang_sc">Сардынская</string>
 	<string name="rendering_attr_subwayMode_name">Лініі мэтро</string>
  	<string name="rendering_attr_coloredBuildings_name">Пазначаць тып будынка колерам</string>
-    <string name="osmo_invite">Запрасiць…</string>
-    <string name="osmo_leave_confirmation_msg">Хочаце пакінуць групу %1$s?</string>
-    <string name="osmo_specify_tracker_id">Калі ласка, увядзіце ID</string>
+    
+    
+    
     <string name="continue_navigation">Працягваць навігацыю</string>
     <string name="pause_navigation">Прыпыніць навігацыю</string>
     <string name="rendering_attr_alpineHiking_name">Пешы горны турызм</string>
@@ -1579,10 +1564,10 @@
     
     
     <string name="local_index_description">Націсьніце на любы элемэнт сьпісу для прагляду больш падрабязнай інфармацыі, доўга ўтрымлівайце, каб зьмясьціць у архіў ці выдаліць. Наяўныя дадзеныя на прыстасаваньні (%1$s вольна):</string>
-	<string name="osmo_device_not_found">Прыстасаваньне ня знойдзена</string>
+	
     <string name="anonymous_user">Ананімны карыстальнік</string>
     <string name="logged_as">Вы ўвайшлі як %1$s</string>
-	<string name="osmo_no_connection_msg">Сэрвіс OsMo не даступны:\n- Праверце Інтэрнэт-злучэньне;\n- Праверце налады;\n- Праверце наш Twitter: https://twitter.com/OsMomobi</string>
+	
     <string name="anonymous_user_hint">Ананімнаму карыстальніку недаступныя:
 - Стварэньне групаў;
 - Сынхранізацыя групаў і прыстасаваньняў з сэрвэрам;
@@ -1808,7 +1793,7 @@
     <string name="plugin_ski_descr">Модуль для OsmAnd дае вам доступ да дадзеных аб гарналыжных трасах, маршрутах для бегавых лыж, альпійскіх спусках, фунікулёрах і гарналыжных пад\'ёмніках. Маршруты і спускі адзначаны рознымі колерамі ў залежнасці ад іх складанасці і намаляваныя з выкарыстаннем адмысловага «зімовага» стылю мапы, які заключаецца ў тым, што выкарыстоўваюцца «снежныя» колеры зімовага пейзажу. 
 \n 
 \nУ выпадку актывацыі гэтага віду, стыль мапы мяняецца на «Winter and ski», паказваючы ўсё дэталі пейзажу так, як яны выглядаюць зімой. Такі (зімовы) выгляд можа быць адменены альбо шляхам дэактывацыі тут, альбо калі вы памяняеце «Стыль мапы» у меню «Налада мапы» на жаданы выгляд.</string>
-	<string name="osmo_grop_name_length_alert">Імя групы павінна быць мінімум 3 сімвала!</string>
+	
 	<string name="current_route">Цяперашні маршрут</string>
     <string name="osm_changes_added_to_local_edits">Зьмены OSM дададзеныя да лякальнага набору зьменаў</string>
    	<string name="mark_to_delete">Пазначыць для выдаленьня</string>
@@ -1862,7 +1847,7 @@
 	<string name="routing_attr_height_description">Пазначце вышыню транспартнага сродку для разліку маршруту.</string>
     <string name="use_fast_recalculation">Разумны пераразьлік маршруту</string>
 	<string name="use_fast_recalculation_desc">Пераразлічваць толькі пачатак маршруту для доўгіх паездак.</string>
-<string name="osmo_share_my_location">Перадаць месцазнаходжаньне</string>
+
     <string name="shared_string_logoff">Выйсьці</string>
     <string name="rendering_value_disabled_name">Адключана</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка па пешаходнаму сімвалу OSMC</string>
@@ -2424,8 +2409,8 @@
     <string name="create_custom_poi">Стварыць уласны фільтр</string>
     <string name="custom_search">Уласны пошук</string>
     <string name="translit_names">Трансьлітарацыя назваў</string>
-    <string name="osmo_share_location">Падзяліцца</string>
-    <string name="osmo_pause_location">Прыпыніць</string>
+    
+    
     <string name="trip_rec_notification_settings">Уключыць хуткі запуск запісу</string>
     <string name="shared_string_notifications">Паведамленьні</string>
     <string name="shared_string_continue">Працягнуць</string>
@@ -2436,7 +2421,7 @@
     <string name="gpx_logging_no_data">Няма зьвестак</string>
     <string name="gpx_add_track">Дадаць сьлед</string>
     <string name="gpx_appearance">Выгляд</string>
-    <string name="osmo_service_running">OsMo запушчаны</string>
+    
     <string name="trip_rec_notification_settings_desc">Паказваць апавяшчэнне, якое дазволіць пачаць запіс падарожжа.</string>
     <string name="christmas_poi">Калядныя POI</string>
     <string name="christmas_desc_q">Паказаць калядныя POI?</string>
@@ -2593,7 +2578,7 @@
     <string name="shared_string_time">Час</string>
     <string name="total_distance">Агульная даўжыня</string>
     
-    <string name="routing_attr_height_relief_smoothness_factor_description">Больш раўнін ці больш узгоркаў</string>
+    
     <string name="routing_attr_height_obstacles_name">Выкарыстоўваць даныя вышыні</string>
     <string name="routing_attr_height_obstacles_description">Выкарыстоўваць даныя аб рэльефе зямной паверхні з SRTM, ASTER і EU-DEM.</string>
 
@@ -2798,7 +2783,7 @@
     <string name="moving_time">Час руху</string>
     <string name="max_min">Макс./Мін.</string>
     
-    <string name="range_min_max">Адлегласць = Мін./Макс.</string>
+    
     <string name="min_max">Мін./Макс.</string>
     <string name="rendering_value_translucent_pink_name">Паўпразрысты ружовы</string>
     <string name="release_2_7">\\022 Дадатак Mapillary з вулічнымі выявамі
@@ -2821,19 +2806,19 @@
     <string name="live_monitoring_max_interval_to_send_desrc">Задае час буферызацыі для зьберажэньня месцаў для адпраўкі без злучэньня</string>
     <string name="mappilary_no_internet_desc">Вам патрэбен Інтэрнэт для прагляду фатаграфій з Mapillary.</string>
     <string name="retry">Паўтарыць</string>
-    <string name="add_gpx_waypoint_bottom_sheet_title">Дадаць GPX-кропку</string>
-    <string name="shared_string_create">Стварыць</string>
+    
+    
 <string name="none_point_error">Калі ласка, дадайце па меншай меры адну кропку.</string>
     <string name="enter_gpx_name">Імя файла GPX:</string>
     <string name="show_on_map_after_saving">Паказаць на мапе пасьля захаваньня</string>
-    <string name="add_route_point">Дадаць кропку маршруту</string>
+    
     <string name="add_waypoint">Дадаць кропку шляху</string>
     <string name="save_gpx_waypoint">Захаваць GPX-кропку шляху</string>
     <string name="save_route_point">Захаваць кропку маршруту</string>
     <string name="waypoint_one">Кропка шляху 1</string>
     <string name="route_point_one">Кропка маршруту 1</string>
-<string name="measurement_tool_altitude">Вышыня: %1$s</string>
-    <string name="measurement_tool_speed">Хуткасць: %1$s</string>
+
+    
     <string name="line">Лінія</string>
     <string name="save_as_route_point">Захаваць як кропкі маршруту</string>
     <string name="save_as_line">Захаваць як лінію</string>
@@ -2860,10 +2845,10 @@
     <string name="do_not_use_animations">Не ўжываць анімацыю</string>
     <string name="do_not_use_animations_descr">Адключэнне анімацыі ў праграме.</string>
     <string name="move_all_to_history">Перамясьціць усё ў гісторыю</string>
-    <string name="build_route">Пабудаваць маршрут</string>
+    
     <string name="show_direction">Індыкацыя адлегласьці</string>
     <string name="sort_by">Сартаваць па</string>
-    <string name="marker_options">Налады маркера</string>
+    
     <string name="marker_show_distance_descr">Выберыце, як паказваць адлегласьць і напрамак да маркераў на экране мапы:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Парог арыентацыі мапы</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Абярыце ніжэй, на якой хуткасьці арыентацыя мапы пераключаецца з «Напрамку руху» на «Па компасу».</string>
@@ -2878,8 +2863,8 @@
     <string name="yesterday">Учора</string>
     <string name="last_seven_days">Апошнія 7 дзён</string>
     <string name="this_year">Сёлета</string>
-    <string name="widget">Віджэт</string>
-    <string name="top_bar">Верхняя панэль</string>
+    
+    
     <string name="remove_from_map_markers">Выдаліць з маркераў мапы</string>
     <string name="descendingly">па зьмяншэньні</string>
     <string name="ascendingly">па ўзрастаньні</string>
@@ -2910,7 +2895,7 @@
     <string name="routing_attr_avoid_ice_roads_fords_description">Пазбягаць лядовых дарог і бродаў.</string>
     <string name="make_round_trip_descr">Дадаць копію пачатковай кропкі як месца прызначэньня.</string>
     <string name="make_round_trip">Зрабіць кругавое падарожжа</string>
-    <string name="shared_string_navigate">Пачаць навігацыю</string>
+    
     <string name="osn_modify_dialog_error">Адбылося выключэньне: нататка не была зьмененая</string>
     <string name="osn_modify_dialog_title">Зьмяніць нататку</string>
     <string name="context_menu_item_modify_note">Зьмяніць OSM-нататку</string>
@@ -2939,7 +2924,7 @@
     <string name="import_file">Імпартаваць файл</string>
 	<string name="tap_on_map_to_hide_interface_descr">Дотык на мапе пераключае кнопкі кіраваньня і віджэты.</string>
     <string name="tap_on_map_to_hide_interface">Поўныэкранны рэжым</string>
-    <string name="show_on_top_bar">Паказаць на верхняй панэлі</string>
+    
     <string name="mark_passed">Адзначыць прайдзеныя</string>
     <string name="digits_quantity">Колькасьць дзесятковых лічбаў</string>
     <string name="show_number_pad">Паказаць лічбавую панэль</string>
@@ -2995,11 +2980,11 @@
     <string name="context_menu_read_full_article">Чытаць увесь артыкул</string>
     <string name="context_menu_read_article">Чытаць артыкул</string>
     <string name="context_menu_points_of_group">Усе кропкі групы</string>
-    <string name="opened_from">Адчынена ад</string>
-    <string name="opened_till">Адчынена да</string>
-    <string name="will_be_closed_at">Будзе зачынена а</string>
-    <string name="will_be_opened_at">Будзе адчынена а</string>
-    <string name="will_be_opened_on">Будзе адчынена</string>
+    
+    
+    
+    
+    
     <string name="additional_actions">Дадатковыя дзеяньні</string>
     <string name="av_locations_selected_desc">GPX-файл з каардынатамі і данымі выбраных нататак.</string>
     <string name="av_locations_all_desc">GPX-файл з каардынатамі і данымі ўсіх нататак.</string>

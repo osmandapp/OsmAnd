@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>    
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>    
 	
     <string name="local_indexes_cat_av">زانیاری دەنگ/ڤیدیۆ</string>
     <string name="stop_routing_confirm">Tu dixwazî navîgasyonê bisekinînî?</string>
@@ -124,7 +123,7 @@
     <string name="osn_modify_dialog_title">Notê biguherîne</string>
     <string name="context_menu_item_modify_note">Nota OSM\'ê biguherîne</string>
     <string name="make_round_trip_descr">Cihê destpêkê bike cihê amanc</string>
-    <string name="shared_string_navigate">Here</string>
+    
     <string name="shared_string_sort">Tesnîf bike</string>
     <string name="is_saved">hat tomarkirin.</string>
     <string name="enter_new_name">Navê nû binivîse</string>

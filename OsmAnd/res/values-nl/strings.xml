@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Rijstroken</string>
@@ -435,7 +434,7 @@ Er is nu {2} MB beschikbaar</string>
   
   <string name="voice">Opgenomen stem</string>
   <string name="no_vector_map_loaded">Geen vectorkaarten geladen</string>
-  <string name="map_route_by_gpx">Navigeer met GPX-bestand</string>
+  
   <string name="gpx_files_not_found">Geen GPX-bestanden gevonden in de tracks-map</string>
   <string name="layer_gpx_layer">GPX-track…</string>
   <string name="error_reading_gpx">Fout bij het lezen van GPX-gegevens</string>
@@ -1340,72 +1339,68 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
 	<string name="share_route_as_gpx">Deel route als GPX-bestand</string>
 	<string name="share_route_subject">Route gedeeld via OsmAnd</string>
 	<string name="navigation_intent_invalid">Ongeldig formaat: %s</string>
-<string name="osmo_settings_uuid">Uniek device-ID</string>
-    <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
-    <string name="osmo_plugin_description">Met deze plug-in kunt u real-time gevolgd worden met OpenStreetMap Monitoring, zie https://osmo.mobi. 
-\n 
-\nJe kunt alle toestellen van een groep deelnemers volgen. Er zijn mogelijkheden voor het permanent of tijdelijk volgen. 
-\n 
-\nAnonieme groepen kunnen makkelijk gemaakt worden, bestaan maar een beperkt aantal dagen en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken.</string>
-    <string name="osmo_plugin_name">OsMo (OSM monitoring)</string>
-    <string name="osmo_settings">OsMo</string>
+
+    
+    
+    
+    
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
     <string name="keep_informing_descr">Herhaal de aanwijzingen regelmatig</string>
     <string name="keep_informing">Herhaal de aanwijzingen</string>
 	<string name="arrival_distance">Aankondigen van de Bestemming</string>
     <string name="arrival_distance_descr">Wanneer melden dat de Bestemming bereikt is?</string>
-    <string name="osmo_io_error">OsMo verbindingsprobleem: </string>
-    <string name="osmo_mode_on">Stop OsMo sessie</string>    
-    <string name="osmo_mode_off">Start OsMo</string>
+    
+        
+    
     
 	<string name="share_fav_subject">Via OsmAnd gedeelde favorieten</string>
 	<string name="hours_ago">uur geleden</string>
     <string name="minutes_ago">minuten geleden</string>
     <string name="seconds_ago">seconden geleden</string>
-    <string name="osmo_connect_to_device_name">Gebruikersnaam</string>
-    <string name="osmo_connect_to_device_tracker_id">Tracker-ID</string>
-    <string name="osmo_connect_to_device">Koppelen met toestel</string>
     
     
-    <string name="osmo_connected_devices">Verbonden toestellen</string>
-    <string name="osmo_groups">OsMo Groepen</string>
-    <string name="osmo_auto_send_locations_descr">Start tracker en stuur locaties automatisch na het starten van de applicatie.</string>
-    <string name="osmo_auto_send_locations">Tracker-sessies automatisch starten</string>
-    <string name="osmo_tracker_id">Tracker-ID</string>
-    <string name="osmo_tracker_id_descr">Tik om tracker-ID te bekijken.</string>
-    <string name="osmo_session_token">Sessie-token: %1$s</string>
-    <string name="osmo_auth_pending">Wacht op autorisatie…</string>
-    <string name="osmo_locations_sent">%1$d verzonden locaties (in buffer %2$d) </string>
-    <string name="osmo_conn_successfull">Verbinding gemaakt: %1$s </string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <string name="use_points_as_intermediates">Bereken route tussen punten</string>
-    <string name="osmo_mode_restart">Herstart OsMo-sessie</string>
-    <string name="osmo_settings_debug">Debug-informatie</string>
-    <string name="osmo_group_info">Info</string>
-    <string name="osmo_group">OsMo groep</string>
-    <string name="osmo_group_share">Om je te verbinden met de groep %2$s, specificeer groep id (%1$s) of tik %3$s .</string>
-    <string name="osmo_share_connect_device">Sta toe, dat dit toestel permanent gevolgd wordt</string>
-    <string name="osmo_share_current_session">Deel de huidige sessie in de browser</string>
-    <string name="osmo_session_not_available">Sessie niet beschikbaar, controleer of \'Send locations\' aan staat.</string>
-    <string name="osmo_share_session">Deel sessie</string>
-    <string name="osmo_session_id_share">Sessie url om toestel (%1$s) te volgen</string>
-    <string name="osmo_tracker_id_share">Om je te verbinden met toestel %2$s, tik op de link %3$s of specificeer tracker id (%1$s)</string>
-    <string name="osmo_track_interval">Log interval</string>
-	<string name="osmo_track_interval_descr">Kies de interval om je positie te zenden</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+	
     <string name="int_days">dagen</string>
     <string name="osmo_connect_menu">Verbinden</string>
-    <string name="osmo_expire_group">Vervalt over</string>
+    
     <string name="osmo_group_description">Beschrijving</string>
-    <string name="osmo_group_policy">Groepsbeleid</string>
-    <string name="osmo_connect_to_group_id">Groeps-ID</string>
-    <string name="osmo_group_name">Groepsnaam</string>
-    <string name="osmo_connect_to_group">Verbind met groep</string>
-    <string name="osmo_connect">Verbinden</string>
-    <string name="osmo_create_group">Maak een nieuwe groep</string>
-    <string name="osmo_server_operation_failed">OsMo server probleem</string>
-    <string name="osmo_activity">OpenStreetMap Monitoring (OsMo)</string>
-    <string name="osmo_enable_tracker">Verstuur mijn posities</string>
-    <string name="osmo_control">OsMo snelle toegang</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 	<string name="import_file_favourites">Gegevens als GPX-bestand opslaan of importeren naar favorieten?</string>
 	
@@ -1418,26 +1413,26 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
 	
 	
 	
-    <string name="osmo_edit_device">Wijzig gebruiker-instellingen</string>
+    
     <string name="osmo_edit_color">Weergavekleur</string>
-    <string name="osmo_sign_in">Log in</string>
-    <string name="osmo_create_groups_confirm">Om nieuwe groepen te maken, moet je een geregistreerde gebruiker van OsMo zijn.</string>
-    <string name="osmo_credentials_not_valid">Je OsMo inlog-gegevens zijn onjuist.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Weet je zeker, dat je je persoonlijke id\'s wilt vernieuwen? Alle verbonden toestellen kunnen je dan niet meer volgen.</string>
-    <string name="osmo_regenerate_login_ids">Vernieuw gebruiker-ID\'s</string>
-    <string name="osmo_cancel_moving_target">Stop bewegen van het doel</string>
-    <string name="osmo_center_location">Centreer op het scherm</string>
-    <string name="osmo_set_moving_target">Stel in als bewegend doel</string>
-    <string name="osmo_use_server_name">Geregistreerde naam</string>
-    <string name="osmo_connect_to_my_nickname">Mijn Bijnaam</string>
-    <string name="osmo_user_name">Gebruikersnaam</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	
 	
-    <string name="osmo_follow">Volgen</string>
-    <string name="osmo_user_joined">Gebruiker %1$s is nu lid van groep %2$s</string>
-    <string name="osmo_user_left">Gebruiker %1$s heeft groep %2$s verlaten</string>
-    <string name="osmo_show_group_notifications">Toon groepsmeldingen</string>
-    <string name="osmo_show_group_notifications_descr">Toon meldingen als een gebruiker bij een groep komt of deze verlaat</string>
+    
+    
+    
+    
+    
     
     
     <string name="gpx_file_is_empty">GPX-track is leeg</string>
@@ -1480,27 +1475,17 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="local_index_select_gpx_file">Selecteer om te bekijken</string>
     <string name="route_descr_destination">Bestemming</string>
     <string name="no_index_file_to_download">Geen downloads gevonden: controleer de internetverbinding.</string>
-    <string name="osmo_gpx_points_downloaded">OsMo punten: %1$s opgehaald.</string>
-    <string name="osmo_auto_connect_descr">Verbind automatisch met OsMo service bij het opstarten van de applicatie</string>
-    <string name="osmo_auto_connect">Automatisch verbinding maken</string>
-    <string name="osmo_start_service">OsMo service</string>
-    <string name="osmo_gpx_track_downloaded">OsMo track: %1$s opgehaald.</string>
-    <string name="osmo_group_information_desc">- Geef een naam en omschrijving om een groep te maken 
-\n- Hier gemaakte groepen zijn van het type \'Simple\'; zie voor uitleg https://osmo.mobi/g/new 
-\n- Via de website kunnen groepen beheerd worden en paden en punten beschikbaar worden gemaakt 
-\n- Een groep is voor meerdere gebruikers, als het niet de POI-groep is 
-\n- Er kunnen maximaal 8 deelnemers in een prive-groep 
-\n- Gebruiksvoorwaarden zijn beschikbaar op de site osmo.mobi 
-\n- Als u een groep nodig heeft met andere voorwaarden, neem dan contact op met support: osmo.mobi@gmail.com</string>
-    <string name="osmo_group_information">Lees dit voordat u een groep maakt!</string>
-    <string name="osmo_not_signed_in">Kon niet inloggen op OsMo</string>
-    <string name="osmo_group_by_invite">Alleen toegang met uitnodiging</string>
-    <string name="osmo_auth_error_short">Aanmelding mislukt</string>
-    <string name="osmo_auth_error">OsMo aanmeldings fout: %1$s.
-
-Mogelijk is de service tijdelijk niet beschikbaar of is uw registratie verlopen.
-
-Wilt u verder gaan met een nieuwe registratie?</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="rendering_attr_hideBuildings_name">Gebouwen</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Voet- en fietspaden</string>
     <string name="rendering_attr_hideText_name">Tekst</string>
@@ -1548,9 +1533,9 @@ Wilt u verder gaan met een nieuwe registratie?</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Paden speciaal kleuren</string>
     
 	<string name="rendering_attr_coloredBuildings_name">Gebouwen kleuren per soort</string>
-    <string name="osmo_invite">Uitnodiging voor…</string>
-    <string name="osmo_leave_confirmation_msg">Wil je de groep %1$s verlaten?</string>
-    <string name="osmo_specify_tracker_id">Geef tracker-ID</string>
+    
+    
+    
     <string name="arrival_distance_factor_early">Vroegtijdig</string>
     <string name="arrival_distance_factor_normally">Op tijd</string>
     <string name="arrival_distance_factor_late">Laat</string>
@@ -1612,11 +1597,8 @@ Wilt u verder gaan met een nieuwe registratie?</string>
 	<string name="map_widget_left">Widgets Linker Kolom</string>
 	<string name="configure_map">Kaart-instellingen</string>
     <string name="search_radius_proximity">Binnen</string>
-    <string name="osmo_device_not_found">Apparaat niet gevonden</string>
-    <string name="osmo_no_connection_msg">OsMo service is niet bereikbaar:
-- Controleer de Internetverbinding;
-- Controleer de instellingen;
-- Kijk op Twitter: https://twitter.com/OsMomobi</string>
+    
+    
     <string name="anonymous_user_hint">een anonieme gebruiker kan niet:\n- een groep aanmaken;\n- groepen en apparaten synchroniseren met de server;\n- groepen en apparaten beheren in een eigen omgeving.</string>
     <string name="anonymous_user">Anonieme gebruiker</string>
     <string name="logged_as">Ingelogd als %1$s</string>
@@ -1852,7 +1834,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="current_route">Huidige route</string>
     <string name="osm_changes_added_to_local_edits">OSM-aanpassingen toegevoegd aan lokale changeset</string>
    	<string name="mark_to_delete">Markeer om te verwijderen</string>
-	<string name="osmo_grop_name_length_alert">De naam van een groep moet uit minstens 3 tekens bestaan!</string>
+	
 	<string name="agps_info">A-GPS info</string>
 	<string name="agps_data_last_downloaded">Laatste A-GPS data gedownload: %1$s</string>
     <string name="filter_poi_hint">Filter op naam</string>
@@ -1891,7 +1873,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="rendering_value_disabled_name">Uitgeschakeld</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Kleuren naar Wandelroute-netwerk</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Kleuren volgens OSMC-wandelsymbolen</string>
-    <string name="osmo_share_my_location">Deel huidige positie</string>
+    
     <string name="shared_string_logoff">Uitloggen</string>
     <string name="gps_network_not_enabled">Locatiedienst is niet ingeschakeld. Wil je ze aanzetten?</string>
     <string name="read_full_article">Lees volledig artikel (online)</string>
@@ -2489,9 +2471,9 @@ Er is nu {2} MB beschikbaar</string>
     <string name="gpx_no_tracks_title_folder">Je kunt ook GPX-tracks toevoegen aan de map</string>
     <string name="gpx_add_track">GPX-track toevoegen</string>
     <string name="gpx_appearance">GPX-stijl</string>
-    <string name="osmo_share_location">Delen</string>
-    <string name="osmo_pause_location">Pauzeren</string>
-    <string name="osmo_service_running">OsMo is actief</string>
+    
+    
+    
     <string name="trip_rec_notification_settings">Snelle GPX-opname activeren</string>
     <string name="trip_rec_notification_settings_desc">Toon Android-melding waarmee de GPX-opname gestart kan worden.</string>
     <string name="shared_string_notifications">Meldingen</string>
@@ -2820,10 +2802,10 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="mapillary_menu_edit_text_hint">Geef gebruikersnaam</string>
     <string name="mapillary_menu_title_username">Gebruikersnaam</string>
     <string name="move_all_to_history">Verplaats alles naar geschiedenis</string>
-    <string name="build_route">Route maken</string>
+    
     <string name="show_direction">Toon afstand</string>
     <string name="sort_by">Sorteren op</string>
-    <string name="marker_options">Opties voor Markeervlaggetjes</string>
+    
     <string name="do_not_use_animations">Geen animaties gebruiken</string>
     <string name="do_not_use_animations_descr">Zet alle animaties binnen OsmAnd uit.</string>
     <string name="keep_showing_on_map">Verder wel op de kaart blijven tonen</string>
@@ -2857,7 +2839,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="context_menu_item_modify_note">Wijzig OSM-notitie</string>
     <string name="make_round_trip_descr">Kopieer het beginpunt en voeg het toe als bestemming.</string>
     <string name="make_round_trip">Ga heen en terug</string>
-    <string name="shared_string_navigate">Navigeer</string>
+    
     <string name="shared_string_markers">Markeringen</string>
     <string name="coordinates_format">Coördinatenformaat</string>
     <string name="use_system_keyboard">Gebruik systeemtoetsenbord</string>
@@ -2958,7 +2940,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="shared_string_road">Weg</string>
     <string name="tap_on_map_to_hide_interface_descr">Een tik op de kaart verbergt/toont de bedieningsknoppen en widgets.</string>
     <string name="tap_on_map_to_hide_interface">Volledig scherm modus</string>
-    <string name="show_on_top_bar">Toon op bovenste balk</string>
+    
     <string name="mark_passed">Markering gepasseerd</string>
     <string name="import_gpx_file_description">kan geïmporteerd worden als favorieten, of als track bestand.</string>
     <string name="import_as_gpx">importeer als GPX bestand</string>
@@ -2986,11 +2968,11 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="context_menu_read_full_article">Lees het hele artikel</string>
     <string name="context_menu_read_article">Lees artikel</string>
     <string name="context_menu_points_of_group">Alle punten van de groep</string>
-    <string name="opened_from">Open van</string>
-    <string name="opened_till">Open tot</string>
-    <string name="will_be_closed_at">Sluit om</string>
-    <string name="will_be_opened_at">Gaat open om</string>
-    <string name="will_be_opened_on">Zal opengaan op</string>
+    
+    
+    
+    
+    
     <string name="additional_actions">Verdere acties</string>
     <string name="modify_the_search_query">Zoekopdracht veranderen.</string>
     <string name="shared_string_actions">Acties</string>

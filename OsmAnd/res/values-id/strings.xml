@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="address_search_desc">Mencari alamat</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="address_search_desc">Mencari alamat</string>
   <string name="navpoint_search_desc">Koordinat</string>
   <string name="transport_search_desc">Mencari transportasi</string>
   <string name="favourites_search_desc">Mencari favorit</string>
@@ -423,9 +422,9 @@
     <string name="gpx_no_tracks_title_folder">Anda juga dapat menambahkan trek ke folder</string>
     <string name="gpx_add_track">Tambah Rute</string>
     <string name="gpx_appearance">Tampilan</string>
-    <string name="osmo_share_location">Bagikan</string>
-    <string name="osmo_pause_location">Jeda</string>
-    <string name="osmo_service_running">Servis OsMo sedang berjalan</string>
+    
+    
+    
     <string name="trip_rec_notification_settings">Aktifkan rekaman mulai cepat</string>
     <string name="trip_rec_notification_settings_desc">Tampilkan pemberitahuan sistem yang memungkinkan untuk memulai perekaman perjalanan.</string>
     <string name="shared_string_notifications">Pemberitahuan</string>

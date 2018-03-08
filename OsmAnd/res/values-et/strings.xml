@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="add_opening_hours">Lisa lahioleku ajad</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="add_opening_hours">Lisa lahioleku ajad</string>
 	<string name="description">Kirjeldus</string>
 	<string name="contact_info">Kontakti info</string>
 	
@@ -11,7 +10,7 @@
     <string name="welmode_download_maps">Kaartide allalaadimine</string>
 	<string name="welcome_header">Tere tulemast</string>
     <string name="mark_to_delete">Märgi kustutamiseks</string>
-	<string name="osmo_grop_name_length_alert">Grupi nimi peab olema vähemalt 3 märki!</string>
+	
 	<string name="confirmation_to_clear_history">Kas sa soovid tühjendada ajalugu?</string>
     <string name="osmand_parking_overdue">tähtaja ületanud</string>
 	<string name="action_create">Tegevuse loomine</string>
@@ -69,7 +68,7 @@
 	<string name="shared_string_photo">Foto</string>
 	<string name="shared_string_online_maps">Online kaardid</string>
 	<string name="record_plugin_name">Reisi salvestus</string>
-	<string name="osmo_plugin_name">OpenStreetMap monitoorimine</string>
+	
 	<string name="plugin_nautical_name">Merendus kaardi vaade</string>
 	<string name="audionotes_plugin_name">Audio/video märkmed</string>
 	<string name="shared_string_accessibility">Juurdepääs</string>
@@ -141,15 +140,9 @@
     <string name="rendering_value_bold_name">Rasvane</string>
     <string name="no_map_markers_found">Palun lisa kaardi markerid kaardi abil</string>
     <string name="no_waypoints_found">Marsruudipunkte ei leitud</string>
-    <string name="osmo_group_information_desc">- Grupi loomisel määra selle nimi ja kirjeldus
-\n - Rakenduses saab luua ainult lihtsat tüüpi gruppe, loe rohkem lehelt https://osmo.mobi/g/new
-\n - Veebilehel saad hallata gruppe, asetada radasid ja huvipunkte
-\n - Me ei toeta ainult ühe kasutajaga gruppe, kui see ei ole POI grupp
-\n - Privaatgrupid on kuni 8 kasutajale
-\n - Detailsed kasutustingimused on alati saadaval lehel OsMo.mobi
-\n - Eritingimuste korral võta ühendust klienditoega: osmo.mobi@gmail.com</string>
-    <string name="osmo_specify_tracker_id">Täpsusta ID</string>
-    <string name="osmo_no_connection_msg">Ei suuda ühenduda OsMo serveriga:\n- kontrolli internetiühendust;\n- kontrolli seadeid;\n- kontrolli meie Twitteri lehte: https://twitter.com/OsMomobi</string>
+    
+    
+    
     <string name="mapillary">Mapillary</string>
     <string name="increase_search_radius">Suurenda otsingu raadiust</string>
     <string name="nothing_found">Midagi ei leitud :(</string>

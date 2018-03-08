@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
   <string name="osmand_parking_position_description_add_time">Die motor was geparkeer om:</string>
@@ -515,7 +514,7 @@
   
   <string name="voice">Stem</string>
   <string name="no_vector_map_loaded">Vektor kaarte was nie gelaai nie</string>
-  <string name="map_route_by_gpx">Navigeer deur GPX te gebruik</string>
+  
   <string name="gpx_files_not_found">GPX lêers nie gevind in /tracks adres nie</string>
   <string name="layer_gpx_layer">GPX spoor…</string>
   <string name="error_reading_gpx">Fout met lees van GPX inligting</string>
@@ -1243,11 +1242,11 @@
     <string name="shared_string_or">of</string>
 	
     
-    <string name="osmo_settings_uuid">Unieke toestel ID</string>
-    <string name="osmo_settings_descr">Sien unieke toestel registrasie kode en ander monitor spesifieke stellings </string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitering - Gevorderde Lewendige Monitering met baie features vir afstandbeheer http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OSMo (Gevorderde Lewendige Monitering)</string>
-    <string name="osmo_settings">OSMo</string>
+    
+    
+    
+    
+    
    	<string name="always_center_position_on_map">Wys posisie altyd in senter</string>
     <string name="voice_pref_title">Stem</string>
     <string name="misc_pref_title">Allerlei</string>
@@ -1274,12 +1273,12 @@
 	
 	
 	
-    <string name="osmo_edit_device">Verander gebruiker eienskappe</string>
+    
     <string name="osmo_edit_color">Vertoon kleur</string>
-    <string name="osmo_group_info">Inligting</string>
-    <string name="osmo_group">OsMo groep</string>
-    <string name="osmo_group_share">Om by groep %2$s in te skakel, spesifiseer groep id (%1$s)</string>
-    <string name="osmo_share_connect_device">Volg hierdie toestel permanent</string>
+    
+    
+    
+    
     <string name="rendering_attr_depthContours_description">Vertoon dieptelyne en punte</string>
     <string name="rendering_attr_depthContours_name">Dieptelyne</string>
 	<string name="rendering_attr_contourDensity_description">Digtheid van die hoogtelyne</string>

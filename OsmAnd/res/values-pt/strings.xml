@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -95,7 +94,7 @@
   <string name="voice">Vozes</string>
   <string name="no_vector_map_loaded">Nenhum mapa vetorial foi carregado</string>
   <string name="gpx_option_reverse_route">Caminho reverso</string>
-  <string name="map_route_by_gpx">Navegar usando GPX</string>
+  
   <string name="gpx_files_not_found">Nenhum arquivo GPX encontrado no diretório /tracks</string>
   <string name="layer_gpx_layer">Rota GPX…</string>
   <string name="error_reading_gpx">Erro na leitura de dados GPX</string>
@@ -1249,18 +1248,18 @@ Clique no widget de medição para ver mais ações.</string>
 	
     
     <string name="route_descr_destination">Destino</string>
-    <string name="osmo_sign_in">Entrar</string>
-    <string name="osmo_create_groups_confirm">Para poder criar grupos tem de ser um utilizador registado de OsMo.</string>
-    <string name="osmo_credentials_not_valid">Os seus credenciais de osmo não são válidos.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Tem a certeza que quer regenerar os identificadores pessoais ? Todos os dispositivos ligados a si não serão capazes de continuar a seguir-lo.</string>
-    <string name="osmo_regenerate_login_ids">Regenerar identificação do utilizador</string>
-    <string name="osmo_follow">Seguir</string>
-    <string name="osmo_cancel_moving_target">Cancelar destino em movimento</string>
-    <string name="osmo_center_location">Centrar no ecrã</string>
-    <string name="osmo_set_moving_target">Definir como destino em movimento</string>
-    <string name="osmo_use_server_name">Nome registado</string>
-    <string name="osmo_connect_to_my_nickname">Minha alcunha</string>
-    <string name="osmo_user_name">Utilizador</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	
 	<string name="rendering_value_pink_name">rosa</string>
 	
@@ -1270,68 +1269,66 @@ Clique no widget de medição para ver mais ações.</string>
 	
 	
 	
-    <string name="osmo_edit_device">Mudar propriedades do utilizador</string>
+    
     <string name="osmo_edit_color">Mostrar cor</string>
-    <string name="osmo_group_info">Info</string>
-    <string name="osmo_group">OsMo grupo</string>
-    <string name="osmo_group_share">Para ligar-se ao grupo %2$s, indique o id do grupo (%1$s) ou click %3$s .</string>
-    <string name="osmo_share_connect_device">Permitir seguir permanentement este dispositivo</string>
-    <string name="osmo_share_current_session">Partilhar sessão actual no browser</string>
+    
+    
+    
+    
+    
     
     <string name="guidance_preferences_descr">Preferencias de navegação</string>
     <string name="routing_preferences_descr">Preferências de rota</string>
     <string name="speech_rate_descr">Definir velocidade de fala para TTS</string>
     <string name="speech_rate">Velocidade de fala</string>
-    <string name="osmo_session_not_available">Sessão não disponível, por favor verifique que \'Envie localização\' está activo.</string>
-    <string name="osmo_share_session">Partilhar sessão</string>
-    <string name="osmo_session_id_share">Endereço da sessão para seguir aparelho (%1$s)</string>
-    <string name="osmo_track_interval">Intervalo de registo</string>
-	<string name="osmo_track_interval_descr">Escolher intervalo de tempo para enviar localização</string>
+    
+    
+    
+    
+	
     <string name="int_days">dias</string>
     <string name="osmo_connect_menu">Conectar</string>
-    <string name="osmo_expire_group">Expira em</string>
+    
     <string name="osmo_group_description">Descrição</string>
-    <string name="osmo_group_policy">Politica</string>
-    <string name="osmo_connect_to_device_tracker_id">ID do Rastreador</string>
-    <string name="osmo_connect_to_device_name">Nome do utilizador</string>
-    <string name="osmo_connect_to_group_id">Identificação do grupo</string>
-    <string name="osmo_group_name">Nome do grupo</string>
-    <string name="osmo_connect_to_device">Ligar a um dispositivo</string>
-    <string name="osmo_connect_to_group">Ligar a um grupo</string>
-    <string name="osmo_connect">Ligar</string>
-    <string name="osmo_create_group">Criar Grupo</string>
-    <string name="osmo_server_operation_failed">Operação do servidor OsMo falhou</string>
-    <string name="osmo_activity">Monitorização OpenStreetMap</string>
-    <string name="osmo_enable_tracker">Enviar minha localização</string>
-    <string name="osmo_control">Accesso rápido OsMo</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">horas atras</string>
     <string name="minutes_ago">minutos atras</string>
     <string name="seconds_ago">segundos atras</string>
-    <string name="osmo_connected_devices">aparelhos ligados</string>
-    <string name="osmo_groups">Grupos OsMo</string>
-    <string name="osmo_tracker_id_share">Para ligar o aparelho alvo %2$s, click no link %3$s ou especifique o id do tracker(%1$s)</string>
-    <string name="osmo_auto_send_locations_descr">Ao iniciar a aplicação, automaticamente gravar e enviar as localizações da viagem</string>
-    <string name="osmo_auto_send_locations">Inicie automaticamente a viagem</string>
-    <string name="osmo_tracker_id">ID de Rastreamento</string>
-    <string name="osmo_tracker_id_descr">Clique para partilhar a identificação do tracker
-	Ao usar a identificação do tracker, aparelhos ligados podem ver todos os movimentos deste aparelho ! Para desligar seleccione a opção regenerar.</string>
-    <string name="osmo_session_token">Token de sessão: %1$s</string>
-    <string name="osmo_auth_pending">Aguardando autorização…</string>
-    <string name="osmo_locations_sent">Localização enviada %1$d (in buffer %2$d) </string>
-    <string name="osmo_conn_successfull">Ligação estabelecida : %1$s </string>
-    <string name="osmo_io_error">Problema de ligação OsMo:</string>
-    <string name="osmo_settings_uuid">Identificação exclusiva do aparelho</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="use_points_as_intermediates">Calcular rota entre pontos</string>
     
-    <string name="osmo_mode_restart">Reinciar sessão OsMo</string>
-    <string name="osmo_mode_on">Parar sessão OsMo</string>    
-    <string name="osmo_mode_off">Iniciar Sessão OsMo</string>
-    <string name="osmo_settings_debug">Informação de debug</string>
-    <string name="osmo_settings_descr">Configurar as definições de monitoramento e configuração do canal de monitoração pessoal</string>
-    <string name="osmo_settings">OsMo OpenStreetMap Monitorização (beta)</string>
-    <string name="osmo_plugin_description">"Este plugin fornece a funcionalidade para OsMo (monitoramento avançado ao vivo), veja mais em http://osmo.mobi.
-\n\nVocê pode rastrear todos os dispositivos de um grupo em que participe, em tempo real, e comunicarem entre si. Tem várias opções para o rastreamento de sessão ou permanente.\n\nGrupos anónimos podem ser criados espontaneamente por um número específico de dias, e tem recursos limitados definidos, ou seja, não há controle remoto nem administrador de grupo. Por outro lado, grupos totalmente funcionais podem ser criados no website, aos quais apenas utilizadores registados podem ter acesso. "</string>
-    <string name="osmo_plugin_name">OsMo (Monitorização OSM)</string>
+    
+        
+    
+    
+    
+    
+    
+    
    	<string name="always_center_position_on_map">Centrar sempre a posição no mapa</string>
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title">Vários</string>
@@ -1405,10 +1402,10 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="shared_string_my_favorites">Meus Favoritos</string>
     <string name="shared_string_my_places">Meus locais</string>
     
-    <string name="osmo_user_joined">Usuário %1$s juntou-se ao grupo %2$s</string>
-    <string name="osmo_user_left">O usuário %1$s deixou o grupo %2$s</string>
-    <string name="osmo_show_group_notifications">Mostrar notificações de grupo</string>
-    <string name="osmo_show_group_notifications_descr">Mostrar as mensagens quando o usuário entra ou sai do grupo</string>
+    
+    
+    
+    
     <string name="lang_ca">Catalão</string>
 	<string name="lang_cs">Checo</string>
 	<string name="lang_da">Dinamarquês</string>
@@ -1611,7 +1608,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="current_route">Rota atual</string>
     <string name="osm_changes_added_to_local_edits">Mudanças no OSM adicionadas ao conjunto de alterações local</string>
    	<string name="mark_to_delete">Selecione para apagar</string>
-	<string name="osmo_grop_name_length_alert">O nome do grupo deve ter pelo menos 3 caracteres!</string>
+	
 	<string name="local_osm_changes_upload_all_confirm">Você enviará %1$d de mudanças ao OSM. Você está certo?</string>
     <string name="confirmation_to_clear_history">Você quer limpar o histórico?</string>
     <string name="delay_to_start_navigation_descr">Especifique o tempo de espera para permanecer na tela de planejamento de rota</string>
@@ -1865,7 +1862,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="rendering_value_disabled_name">Desactivado</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorir de acordo com o estilo de rota</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colorir de acordo com a OSMC</string>
-    <string name="osmo_share_my_location">Partilhar a minha posição</string>
+    
     <string name="shared_string_logoff">Sair</string>
     <string name="local_recordings_delete_all_confirm">Vai apagar %1$d nota(s). Continuar?</string>
     <string name="plugin_touringview_descr">"Esta opção muda o estilo de mapa do Osmand para a \"visão Touring \', uma visão especial de alto detalhe, para viajantes e motoristas profissionais.\n\nEsta exibição fornece, em qualquer zoom de mapa, a quantidade máxima de informação de viagem disponível no mapa (particularmente estradas, trilhas, caminhos, e marcas de orientação).\n\nTambém separa claramente todos os tipos de estradas de forma inequívoca com um código de cores, que se revela útil para a condução de veículos grandes (por exemplo).\n\nOferece opções especiais de turismo, como mostrar ciclovias ou rotas alpinas de montanha.\n\nNão é necessário fazer download dum mapa especial, a exibição é feita a partir dos mapas padrão.\n\nEssa visão pode ser revertida, basta desactiva-la, ou alterar o estilo de mapa em \'Configurar mapa\'. "</string>
@@ -1877,8 +1874,8 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="map_widget_right">Painel direito</string>
     <string name="map_widget_left">Painel esquerdo</string>
     <string name="search_radius_proximity">Na proximidade de</string>
-    <string name="osmo_device_not_found">Aparelho não encontrado</string>
-    <string name="osmo_no_connection_msg">Não é possível estabelecer ligação ao Servidor Osmo:\n- Verifique a ligação à internet;\n- Verifique as configurações;\n- Verifique o nosso Twitter: https://twitter.com/OsMomobi</string>
+    
+    
     <string name="anonymous_user_hint">Um utilizador anónimo não pode:\n- Criar grupos;\n- Sincronizar grupos e dispositivos com o servidor;\n- Gerir grupos e dispositivos num painel de controle pessoal no sitio web.</string>
     <string name="anonymous_user">Utilizador anónimo</string>
     <string name="logged_as">Ligado como %1$s</string>
@@ -1890,7 +1887,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="use_drawer_btn">Usar Menú</string>
     <string name="no_map_markers_found">Por favor, adicione os marcadores no mapa</string>
     <string name="no_waypoints_found">Não há pontos intermédios</string>
-    <string name="osmo_specify_tracker_id">Indique qual a Identidade</string>
+    
     <string name="report">Relatório</string>
     <string name="map_widget_bearing">Rumo relativo</string>
     <string name="access_disable_offroute_recalc">Não mudar a rota quando está fora do percurso</string>
@@ -2334,9 +2331,9 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="gpx_no_tracks_title_folder">Também pode adicionar percursos ao diretório</string>
     <string name="gpx_add_track">Adicionar percurso</string>
     <string name="gpx_appearance">Aparência</string>
-    <string name="osmo_share_location">Partilhar</string>
-    <string name="osmo_pause_location">Pausa</string>
-    <string name="osmo_service_running">Serviço OsMo está em funcionamento</string>
+    
+    
+    
     <string name="trip_rec_notification_settings">Gravação da viagem (sem dados)</string>
     <string name="trip_rec_notification_settings_desc">Mostrar uma notificação de sistema que permite iniciar a gravação da viagem</string>
     <string name="shared_string_notifications">Notificações</string>

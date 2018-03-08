@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
     <string name="text_size_descr">Configurar o tamaño da letra no mapa.</string>
     <string name="text_size">Tamaño da letra</string>
     <string name="traffic_warning_speed_limit">Límite de velocidade</string>
@@ -67,9 +66,9 @@ As pistas gravadas pódense compartir ou empregar colaborando con OSM. Os atleta
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">A pé</string>
     <string name="rendering_attr_coloredBuildings_name">Edificios cun código de cores segundo o seu tipo</string>
-    <string name="osmo_invite">Convidar…</string>
-    <string name="osmo_leave_confirmation_msg">Confirma que desexa deixar o grupo %1$s?</string>
-    <string name="osmo_specify_tracker_id">Indique o identificador</string>
+    
+    
+    
     <string name="continue_navigation">Continuar coa navegación</string>
     <string name="pause_navigation">Deter a navegación</string>
     <string name="rendering_attr_subwayMode_name">Rutas de metro</string>
@@ -101,21 +100,17 @@ As pistas gravadas pódense compartir ou empregar colaborando con OSM. Os atleta
     <string name="rendering_attr_showSurfaceGrade_name">Mostrar a calidade da estrada</string>
     <string name="rendering_attr_showSurfaces_name">Mostrar a superficie da estrada</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostrar as ciclovías</string>
-    <string name="osmo_auth_error_short">fallou a autorización</string>
-    <string name="osmo_auth_error">Atopouse un erro de autorización de OsMo: %1$s.
-
- Podería deberse a que o servizo non funcione temporalmente ou a que o seu rexistro teña caducado.
-
- Desexa continuar co rexistro?</string>
-    <string name="osmo_group_by_invite">Entrar por convite</string>
-    <string name="osmo_group_information_desc">" - Todos os grupos creados son públicos! Se desexa ficar no anonimato, conecte os dispositivos directamente a través de identificadores de Tracker.\n - Os grupos privados están limitados a oito persoas\n - No caso de inactividade ou de que durante dúas semanas só houbese unha persoa activa, o grupo será eliminado.\n - Pódese restrinxir a entrada no grupo, limitándoa mediante convites, mais para controlar o grupo hai que ir á consola de administración.\n - Se desexa crear un grupo mais con outras condicións, contacte con http://osmo.mobi"</string>
-    <string name="osmo_group_information">Lea isto antes de crear un grupo.</string>
-    <string name="osmo_not_signed_in">Fallou o acceso a OsMo</string>
-    <string name="osmo_gpx_points_downloaded">Puntos OsMo %1$s descargados.</string>
-    <string name="osmo_auto_connect_descr">Conectar automaticamente co servizo logo do inicio do aplicativo</string>
-    <string name="osmo_auto_connect">Conexión automática</string>
-    <string name="osmo_start_service">Servizo OsMo</string>
-    <string name="osmo_gpx_track_downloaded">Descargouse a pista %1$s de OsMo.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="no_index_file_to_download">Non foi posíbel atopar descargas; comprobe a conexión á Internet.</string>
     <string name="select_index_file_to_download">Non se atopou nada. Se non dá atopado a súa rexión, pódea crear vostede (vexa http://osmand.net).</string>
     <string name="none_selected_gpx">Non hai ningún ficheiro GPX seleccionado. Para seleccionar manteña premida unha das pistas dispoñíbeis.</string>
@@ -166,22 +161,22 @@ As pistas gravadas pódense compartir ou empregar colaborando con OSM. Os atleta
     <string name="shared_string_my_favorites">Os meus favoritos</string>
     <string name="shared_string_my_places">Os meus lugares</string>
     
-    <string name="osmo_user_joined">O usuario %1$s uniuse ao grupo %2$s</string>
-    <string name="osmo_user_left">O usuario %1$s deixou o grupo %2$s</string>
-    <string name="osmo_show_group_notifications">Mostrar as notificacións de grupo</string>
-    <string name="osmo_show_group_notifications_descr">Mostrar mensaxes de saúdo cando un usuario se suma ou deixa o grupo</string>
-    <string name="osmo_follow">Seguir</string>
-    <string name="osmo_sign_in">Acceder</string>
-    <string name="osmo_create_groups_confirm">Para poder crear grupos hai que ser usuario rexistrado de OsMo.</string>
-    <string name="osmo_credentials_not_valid">As súas credenciais de OsMo non son válidas.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Confirma que desexa xerar de novo os seus identificadores persoais? Todos os dispositivos que tivese conectados con vostede non o poderán seguir máis.</string>
-    <string name="osmo_regenerate_login_ids">Xerar de novo o identificador de usuario</string>
-    <string name="osmo_cancel_moving_target">Cancelar o destino móbil</string>
-    <string name="osmo_center_location">Centrar na pantalla</string>
-    <string name="osmo_set_moving_target">Estabelecer como destino móbil</string>
-    <string name="osmo_use_server_name">Nome rexistrado</string>
-    <string name="osmo_connect_to_my_nickname">Alcume</string>
-    <string name="osmo_user_name">Usuario</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	
 	<string name="rendering_value_pink_name">rosa</string>
 	
@@ -191,61 +186,61 @@ As pistas gravadas pódense compartir ou empregar colaborando con OSM. Os atleta
 	
 	
 	
-    <string name="osmo_edit_device">Cambiar as propiedades do usuario</string>
+    
     <string name="osmo_edit_color">Cor da pantalla</string>
-    <string name="osmo_group_info">Información</string>
-    <string name="osmo_group">Grupo de OsMo</string>
-    <string name="osmo_group_share">Para poder conectar co grupo %2$s indique o identificador do grupo (%1$s) ou prema %3$s.</string>
-    <string name="osmo_share_connect_device">Seguir este dispositivo de maneira permanente</string>
-    <string name="osmo_share_current_session">Compartir a sesión actual no navegador</string>
-    <string name="osmo_session_not_available">A sesión non está dispoñíbel; comprobe que «Enviar situacións» estea activado.</string>
-    <string name="osmo_share_session">Compartir a sesións</string>
-    <string name="osmo_session_id_share">URL da sesión para seguir o dispositivo (%1$s)</string>
-    <string name="osmo_tracker_id_share">Para poder conectar co dispositivo de destino %2$s prema na ligazón %3$s ou indique o identificador de seguimento id (%1$s)</string>
-    <string name="osmo_track_interval">Intervalo de rexistro</string>
-	<string name="osmo_track_interval_descr">Escolla o intervalo temporal para enviar a situación</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+	
     <string name="int_days">días</string>
     <string name="osmo_connect_menu">Conectar</string>
-    <string name="osmo_expire_group">Caduca en</string>
+    
     <string name="osmo_group_description">Descrición</string>
-    <string name="osmo_group_policy">Política</string>
-    <string name="osmo_connect_to_device_tracker_id">Identificador de seguimento</string>
-    <string name="osmo_connect_to_device_name">Nome de usuario</string>
-    <string name="osmo_connect_to_group_id">Identificador do grupo</string>
-    <string name="osmo_group_name">Nome do grupo</string>
-    <string name="osmo_connect_to_device">Ligar con dispositivo</string>
-    <string name="osmo_connect_to_group">Ligar con grupo</string>
-    <string name="osmo_connect">Conectar</string>
-    <string name="osmo_create_group">Crear un grupo</string>
-    <string name="osmo_server_operation_failed">Fallou a operación do servidor de OsMo</string>
-    <string name="osmo_activity">Vixilancia de OpenStreetMap</string>
-    <string name="osmo_enable_tracker">Enviar as miñas posicións</string>
-    <string name="osmo_control">Acceso rápido a OsMo</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">horas atrás</string>
     <string name="minutes_ago">minutos atrás</string>
     <string name="seconds_ago">segundos atrás</string>
-    <string name="osmo_connected_devices">Dispositivos conectados</string>
-    <string name="osmo_groups">Grupos de OsMo</string>
-    <string name="osmo_auto_send_locations_descr">Iniciar a viaxe automaticamente e enviar as situacións logo do inicio do aplicativo</string>
-    <string name="osmo_auto_send_locations">Iniciar a viaxe automaticamente</string>
-    <string name="osmo_tracker_id">Identificador de seguimento</string>
-    <string name="osmo_tracker_id_descr">Prema para ver o identificador de seguimento</string>
-    <string name="osmo_session_token">Token da sesión: %1$s</string>
-    <string name="osmo_auth_pending">A agardar pola autorización…</string>
-    <string name="osmo_locations_sent">"Situacións enviadas %1$d (en buffer %2$d) "</string>
-    <string name="osmo_conn_successfull">"Conexión estabelecida: %1$s "</string>
-    <string name="osmo_io_error">"Problema de conexión con OsMo: "</string>
-    <string name="osmo_settings_uuid">Identificador único de dispositivo</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <string name="use_points_as_intermediates">Calcular a ruta entre puntos</string>
-    <string name="osmo_mode_restart">Reiniciar a sesión de OsMo</string>
-    <string name="osmo_mode_on">Parar a sesión de OsMo</string>    
-    <string name="osmo_mode_off">Iniciar a sesión de OsMo</string>
-    <string name="osmo_settings_debug">Información de depuración</string>
-    <string name="osmo_settings_descr">Configurar as opcións de vixilancia e configurar a canle de vixilancia persoal</string>
-    <string name="osmo_settings">OsMo</string>
-    <string name="osmo_plugin_description">"Este engadido fornece a funcionalidade do que se coñece como vixilancia avanzada ao vivo de OsMo; vexa http://osmo.mobi.\n\nÉ posíbel seguir todos os dispositivos dun grupo participante ao vivo e comunicarse entre si. Vén con diversas opcións para o seguimento das sesións ou para a o seguimento permanente.\n\nOs grupos anónimos poden ser creados espontaneamente para un grupo determinado de días e están limitados nas funcionalidades: non hai control remoto nin administrador do grupo. Os grupos completamente funcionais teñen que ser creados no sitio web e só os usuarios rexistrados teñen acceso a eles. "</string>
-    <string name="osmo_plugin_name">Vixilancia de OpenStreetMap</string>
+    
+        
+    
+    
+    
+    
+    
+    
    	<string name="always_center_position_on_map">Mostrar a posición sempre no centro</string>
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title">Diversos</string>
@@ -1270,7 +1265,7 @@ Os mapas en teselas pódense obter directamente a través de recursos na rede ou
 	
 	<string name="voice">Voz gravada</string>
 	<string name="no_vector_map_loaded">Os mapas vectoriais non están cargados</string>
-	<string name="map_route_by_gpx">Navegar empregando GPX</string>
+	
 	<string name="gpx_files_not_found">Non foi posíbel atopar ficheiros GPX no cartafol de pistas</string>
 	<string name="layer_gpx_layer">Pista de GPX…</string>
 	<string name="error_reading_gpx">Produciuse un erro ao ler os datos de GPX</string>
@@ -1653,11 +1648,8 @@ Os mapas en teselas pódense obter directamente a través de recursos na rede ou
     <string name="shared_string_show">Mostrar</string>
 	<string name="configure_map">Configurar o mapa</string>
     <string name="search_radius_proximity">A unha distancia de</string>
-    <string name="osmo_device_not_found">Dispositivo non atopado</string>
-    <string name="osmo_no_connection_msg">Non é posíbel conectar co servidor de OsMo:
- - comprobe a conexión á Internet;
- - comprobe a configuración;
- - comprobe o noso Twitter: https://twitter.com/OsMomobi</string>
+    
+    
     <string name="anonymous_user_hint">Os usuarios anónimos non poden:\n - crear grupos;\n - sincronizar grupos e dispositivos co servidor;\n - xestionar grupos e dispositivos nun panel persoal da páxina web.</string>
     <string name="anonymous_user">Usuario anónimo</string>
     <string name="logged_as">Identificado como %1$s</string>
@@ -1736,7 +1728,7 @@ Os mapas en teselas pódense obter directamente a través de recursos na rede ou
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Mostrar os detalles</string>
     <string name="rendering_value_disabled_name">Desactivado</string>
-    <string name="osmo_share_my_location">Transmitir a posición</string>
+    
     <string name="rendering_attr_hideHouseNumbers_name">Números das casas</string>
     <string name="application_dir_change_warning3">Desexa que o OsmAnd copie tamén os seus ficheiros de datos ao novo destino?</string>
     <string name="specified_directiory_not_writeable">Non foi posíbel crear os mapas no directorio indicado</string>
@@ -1764,7 +1756,7 @@ Os mapas en teselas pódense obter directamente a través de recursos na rede ou
 	<string name="welcome_header">Reciba a benvida</string>
     <string name="current_route">Ruta actual</string>
     <string name="mark_to_delete">Marcar para eliminar</string>
-	<string name="osmo_grop_name_length_alert">O nome do grupo debería ter un mínimo de tres caracteres!</string>
+	
 	<string name="local_recordings_delete_all_confirm">Está a piques de eliminar %1$d notas. Confírmao?</string>
 	<string name="local_osm_changes_upload_all_confirm">Está a piques de enviar %1$d cambio(s) a OSM. Confírmao?</string>
     <string name="confirmation_to_clear_history">Desexa limpar o historial?</string>
@@ -2177,9 +2169,9 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="gpx_no_tracks_title_folder">Tamén pode engadir pistas ao cartafol</string>
     <string name="gpx_add_track">Engadir pista</string>
     <string name="gpx_appearance">Aparencia</string>
-    <string name="osmo_share_location">Compartir</string>
-    <string name="osmo_pause_location">Deter</string>
-    <string name="osmo_service_running">O servizo de OsMo está en execución</string>
+    
+    
+    
     <string name="trip_rec_notification_settings">Gravación da viaxe (sen datos)</string>
     <string name="trip_rec_notification_settings_desc">Mostrar unha notificación que permita comezar a gravar a viaxe premendo no botón Gravar</string>
     <string name="shared_string_notifications">Notificacións</string>
@@ -2557,7 +2549,7 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="context_menu_item_modify_note">Modificar nota de OSM</string>
     <string name="make_round_trip_descr">Engadir copia do punto de partida como destino.</string>
     <string name="make_round_trip">Facer viaxe de ida e volta</string>
-    <string name="shared_string_navigate">Navegar</string>
+    
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formato das coordenadas</string>
     <string name="use_system_keyboard">Empregar teclado do sistema</string>
@@ -2638,7 +2630,7 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="go_to_next_field">Ir ao campo seguinte</string>
     <string name="rename_marker">Renomear o marcador</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
-    <string name="show_on_top_bar">Mostrar na barra superior</string>
+    
     <string name="import_as_gpx">Importar como ficheiro GPX</string>
     <string name="import_as_favorites">Importar como Favoritos</string>
     <string name="import_file">Importar ficheiro</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne.</string>
 
@@ -344,7 +343,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
 
     <string name="voice">Voix enregistrée</string>
     <string name="no_vector_map_loaded">Aucune carte vectorielle n\'a été chargée</string>
-    <string name="map_route_by_gpx">Naviguer en utilisant l\'itinéraire GPX enregistré</string>
+    
     <string name="gpx_files_not_found">Aucun fichier GPX n\'a été trouvé dans le dossier de traces</string>
     <string name="layer_gpx_layer">Trace GPX…</string>
     <string name="error_reading_gpx">Erreur de lecteur des données GPX</string>
@@ -1330,29 +1329,25 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="interrupt_music">Interrompre la musique</string>
     <string name="share_route_as_gpx">Partager l\'itinéraire au format GPX</string>
     <string name="share_route_subject">Itinéraire partagé grâce à OsmAnd</string>
-    <string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
-    <string name="osmo_settings_descr">Configurer les paramètres de suivi et définir votre canal de suivi personnel.</string>
-    <string name="osmo_plugin_description">Ce greffon offre la possibilité d\'un suivi en temps-réel via OpenStreetMap Monitoring, voir http://osmo.mobi.
-\n
-\nVous pouvez suivre tous les appareils d\'un groupe en temps réel. Ce greffon permet aussi de voir les points et trajets du groupe dont vous êtes membre.
-\n
-\nLe groupe n\'a pas été supprimé après des mois, mettez le en conformité avec les règles de groupes que vous créez sur le site OsMo.mobi</string>
-    <string name="osmo_plugin_name">Suivi OpenStreetMap</string>
-    <string name="osmo_settings">OsMo</string>
+    
+    
+    
+    
+    
 
-    <string name="osmo_io_error">Problème de connexion OSMo : </string>
-    <string name="osmo_mode_on">Arrêter session OsMo</string>
-    <string name="osmo_mode_off">Démarrer la session OsMo</string>
-    <string name="osmo_mode_restart">Redémarrer la session OsMo</string>
-    <string name="osmo_settings_debug">Informations de débogage</string>
-    <string name="osmo_tracker_id">Identifiant de suivi</string>
-	<string name="osmo_tracker_id_descr">Appuyez pour afficher l\'identifiant de suivi</string>
-    <string name="osmo_session_token">Jeton de session : %1$s</string>
-    <string name="osmo_auth_pending">En attente d\'autorisation…</string>
-    <string name="osmo_locations_sent">Positions envoyées : %1$d (en attente : %2$d)</string>
-    <string name="osmo_conn_successfull">Connexion établie : %1$s </string>
-    <string name="osmo_auto_send_locations_descr">Démarrer automatiquement l\'itinéraire et envoyer les positions dès le démarrage de l\'application</string>
-    <string name="osmo_auto_send_locations">Démarrer automatiquement l\'itinéraire</string>
+    
+    
+    
+    
+    
+    
+	
+    
+    
+    
+    
+    
+    
     <string name="keep_informing_never">Manuelle (en appuyant sur la flèche)</string>
     <string name="keep_informing_descr">Répéter les instructions de navigation à intervalles réguliers.</string>
     <string name="keep_informing">Répéter les instructions de navigation</string>
@@ -1366,38 +1361,38 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="hours_ago">heures avant</string>
     <string name="minutes_ago">minutes avant</string>
     <string name="seconds_ago">secondes avant</string>
-    <string name="osmo_connect_to_device_name">Nom de l\'utilisateur</string>
-    <string name="osmo_connect_to_device">Lier à l\'appareil</string>
+    
+    
 
 
-    <string name="osmo_connected_devices">Appareils connectés</string>
-    <string name="osmo_groups">Groupes OsMo</string>
-    <string name="osmo_group_info">Info</string>
-    <string name="osmo_group">Groupe OsMo</string>
-    <string name="osmo_group_share">Pour vous connecter au groupe %2$s, veuillez spécifier l\'identifiant du groupe (%1$s) ou cliquer %3$s.</string>
-    <string name="osmo_share_connect_device">Autoriser le suivi de cet appareil de façon permanente</string>
-    <string name="osmo_share_current_session">Partager la session courante dans le navigateur</string>
-    <string name="osmo_session_not_available">Session non disponible, veuillez vérifier que \'Envoyer mes positions\' est activé.</string>
-    <string name="osmo_enable_tracker">Envoyer mes positions</string>
-    <string name="osmo_share_session">Partager la session</string>
-    <string name="osmo_session_id_share">L\'URL de la session pour suivre l\'appareil (%1$s)</string>
-    <string name="osmo_tracker_id_share">Pour vous connecter à l\'appareil %2$s, cliquez sur le lien %3$s ou indiquez l\'identifiant de suivi (%1$s)</string>
-    <string name="osmo_track_interval">Fréquence d\'enregistrement</string>
-    <string name="osmo_track_interval_descr">Choisir le délai d\'envoi de la position.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="int_days">jours</string>
     <string name="osmo_connect_menu">Connecter</string>
-    <string name="osmo_expire_group">Expire dans</string>
+    
     <string name="osmo_group_description">Description</string>
-    <string name="osmo_group_policy">Politique</string>
-    <string name="osmo_connect_to_device_tracker_id">Identifiant de suivi</string>
-    <string name="osmo_connect_to_group_id">Identifiant du groupe</string>
-    <string name="osmo_group_name">Nom du groupe</string>
-    <string name="osmo_connect_to_group">Lier au groupe</string>
-    <string name="osmo_connect">Rejoindre</string>
-    <string name="osmo_create_group">Créer un groupe</string>
-    <string name="osmo_server_operation_failed">Échec du serveur OsMo</string>
-    <string name="osmo_activity">Suivi OpenStreetMap</string>
-    <string name="osmo_control">Accès rapide OsMo</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     <string name="import_file_favourites">Enregistrer les données comme fichier GPX ou transformer les étapes en favoris ?</string>
 
@@ -1410,25 +1405,25 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     
 
 
-    <string name="osmo_edit_device">Modifier les caractéristiques de l\'utilisateur</string>
-    <string name="osmo_edit_color">Sélectionnez la couleur</string>
-    <string name="osmo_follow">Suivre</string>
-    <string name="osmo_sign_in">Se connecter</string>
-    <string name="osmo_create_groups_confirm">Pour créer des groupes, vous devez être un utilisateur enregistré d\'OsMo.</string>
-    <string name="osmo_credentials_not_valid">Vos identifiants OsMo sont incorrects.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Êtes-vous sûr de souhaiter régénérer vos identifiants personnels ? Les appareils qui vous sont connectés ne seront plus capables de vous suivre.</string>
-    <string name="osmo_regenerate_login_ids">Régénérer l\'identifiant de l\'utilisateur</string>
-    <string name="osmo_cancel_moving_target">Annuler la cible mobile</string>
-    <string name="osmo_center_location">Centrer sur l\'écran</string>
-    <string name="osmo_set_moving_target">Définir comme cible mobile</string>
-    <string name="osmo_use_server_name">Nom enregistré</string>
-    <string name="osmo_connect_to_my_nickname">Pseudo</string>
-    <string name="osmo_user_name">Utilisateur</string>
     
-    <string name="osmo_user_joined">L\'utilisateur %1$s a rejoint le groupe %2$s</string>
-    <string name="osmo_user_left">L\'utilisateur %1$s a quitté le groupe %2$s</string>
-    <string name="osmo_show_group_notifications">Montrer les notifications de groupe</string>
-    <string name="osmo_show_group_notifications_descr">Afficher des messages quand un utilisateur rejoint ou quitte le groupe.</string>
+    <string name="osmo_edit_color">Sélectionnez la couleur</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="gpx_file_is_empty">La trace GPX est vide</string>
 
     <string name="shared_string_my_tracks">Mes traces</string>
@@ -1477,33 +1472,17 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="none_selected_gpx">Aucun fichier GPX sélectionné. Pour sélectionner un fichier, pressez longuement sur une trace disponible.</string>
 
     <string name="local_index_select_gpx_file">Sélectionnez pour afficher</string>
-    <string name="osmo_group_information_desc">- Créez un groupe : donnez-lui un nom et indiquez une description
-\n
-\n- Depuis l\'application les groupes sont créés uniquement avec le type Simple, apprenez-en plus sur https://osmo.mobi/g/new
-\n
-\n- Depuis le site web vous pouvez gérer les groupes, créer des trajets et points disponibles pour les groupes
-\n
-\n- Nous ne cautionnons pas les groupes avec un seul membre, sauf s\'il s\'agit d\'un groupe Points d\'Intérêt
-\n
-\n- Les groupes privés sont limités à 8 membres
-\n
-\n- Une version plus détaillée du contrat est disponible sur le site web OsMo.mobi
-\n
-\n- Si vous souhaitez créer un groupe sous d\'autres conditions, veuillez contacter le support : osmo.mobi@gmail.com</string>
-    <string name="osmo_group_information">Veuillez lire ceci avant de créer un groupe !</string>
-    <string name="osmo_not_signed_in">L\'authentification OsMo a échoué</string>
-    <string name="osmo_gpx_points_downloaded">Points OsMo %1$s téléchargés.</string>
-    <string name="osmo_auto_connect_descr">Connexion automatique au service lors du démarrage de l\'application.</string>
-    <string name="osmo_auto_connect">Connexion automatique</string>
-    <string name="osmo_start_service">Service OsMo</string>
-    <string name="osmo_gpx_track_downloaded">Trace OsMo %1$s téléchargée.</string>
-    <string name="osmo_group_by_invite">Admission sur invitation</string>
-    <string name="osmo_auth_error_short">Échec de l\'autorisation</string>
-    <string name="osmo_auth_error">Erreur d\'autorisation OsMo : %1$s.
-
-Le service est momentanément inutilisable ou votre inscription a expiré.
-
-Voulez-vous effectuer à une nouvelle inscription ?</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="keep_navigation_service">Conserver</string>
     <string name="stop_navigation_service">Arrêter</string>
     <string name="enable_sleep_mode">Démarrer l’exécution de la tâche de fond GPS ?</string>
@@ -1542,9 +1521,9 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="lang_sr">serbe</string>
     <string name="lang_zh_cn">Chinois (simplifié)</string>
     <string name="lang_zh_tw">Chinois (traditionnel)</string>
-    <string name="osmo_invite">Inviter…</string>
-    <string name="osmo_leave_confirmation_msg">Voulez-vous quitter le groupe %1$s ?</string>
-    <string name="osmo_specify_tracker_id">Veuillez renseigner l\'identifiant</string>
+    
+    
+    
     <string name="continue_navigation">Reprendre la navigation</string>
     <string name="pause_navigation">Interrompre la navigation</string>
     <string name="rendering_attr_subwayMode_name">Lignes de métro</string>
@@ -1609,11 +1588,8 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="fav_point_emoticons_message">Le nom de votre favori a été modifié en %1$s car les émoticônes ne sont pas autorisés.</string>
     <string name="speed_limit_exceed">Marge de tolérance aux limites de vitesse</string>
     <string name="speed_limit_exceed_message">Indiquez la marge de tolérance à ajouter à la limitation de vitesse et au-dessus de laquelle vous recevrez une alerte vocale.</string>
-    <string name="osmo_device_not_found">Périphérique introuvable</string>
-    <string name="osmo_no_connection_msg">Impossible de se connecter au serveur OsMo :
-- Vérifiez votre connexion Internet;
-- Vérifiez les paramètres;
-- Vérifiez la page Twitter: https://twitter.com/OsMomobi</string>
+    
+    
     <string name="anonymous_user_hint">Un utilisateur anonyme ne peut pas :\n- Créer des groupes;\n- Synchroniser les groupes et les périphériques avec le serveur;\n- Gérer les groupes et les périphériques depuis un espace privé sur le site Web.</string>
     <string name="anonymous_user">Utilisateur anonyme</string>
     <string name="logged_as">Connecté entant que %1$s</string>
@@ -1797,7 +1773,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="confirmation_to_clear_history">Souhaitez-vous effacer l\'historique ?</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d modification(s) vont être envoyée(s) vers OSM. Confirmez-vous cet envoi ?</string>
     <string name="delay_to_start_navigation">Démarrer la navigation après</string>
-    <string name="osmo_grop_name_length_alert">Le nom d\'un groupe doit être de 3 caractères minimum !</string>
+    
     <string name="osm_changes_added_to_local_edits">Modifications OSM mémorisées localement</string>
     <string name="mark_to_delete">Marquer pour suppression</string>
     <string name="current_route">Itinéraire actuel</string>
@@ -1840,7 +1816,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="routing_attr_height_description">Précisez la hauteur du véhicule à respecter sur les routes.</string>
     <string name="use_fast_recalculation">Recalcule intelligent de l\'itinéraire</string>
     <string name="use_fast_recalculation_desc">Pour les longs trajets, recalculer uniquement le début de l\'itinéraire</string>
-    <string name="osmo_share_my_location">Partager ma position</string>
+    
     <string name="shared_string_logoff">Se déconnecter</string>
     <string name="rendering_value_disabled_name">Désactivé</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Couleur de l\'itinéraire basée sur les symboles de randonnée OSMC</string>
@@ -2450,9 +2426,9 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Activer le démarrage rapide d\'enregistrement d\'itinéraire</string>
     <string name="trip_rec_notification_settings_desc">Afficher une notification permettant d’enregistrer l\'itinéraire</string>
-    <string name="osmo_share_location">Partager</string>
-    <string name="osmo_service_running">Le service OsMo est actif</string>
-    <string name="osmo_pause_location">Mettre en pause</string>
+    
+    
+    
     <string name="gpx_no_tracks_title">Vous n\'avez pas encore d’itinéraire enregistré</string>
     <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des itinéraires enregistrés au dossier</string>
     <string name="gpx_add_track">Ajouter une trace</string>
@@ -2589,7 +2565,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_height_obstacles_description">Utiliser les données d\'altitude fournies par SRTM, ASTER et EU-DEM</string>
 
     
-    <string name="routing_attr_height_relief_smoothness_factor_name">Facteur de lissage du relief</string>
+    
     <string name="average_altitude">Altitude moyenne</string>
     <string name="total_distance">Distance totale</string>
     <string name="shared_string_time">Durée</string>
@@ -2620,9 +2596,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_slope">Pente</string>
     <string name="lang_ber">Berbère</string>
     
-    <string name="driving_style_safety">Sûre</string>
     
-    <string name="relief_smoothness_factor_plains">Plaines</string>
+    
+    
     
     <string name="relief_smoothness_factor_descr">Terrain préféré : plat ou vallonné</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Vallonné</string>
@@ -2820,8 +2796,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="retry">Essayer à nouveau</string>
 <string name="measurement_tool_action_bar">Déplacez la carte et ajoutez des points</string>
     <string name="measurement_tool">Mesurer une distance</string>
-    <string name="shared_string_create">Créer</string>
-<string name="add_gpx_waypoint_bottom_sheet_title">Ajouter un point GPX</string>
+    
+
     <string name="release_2_7">\\022 Greffon Mapillary avec les images de rue
 \n
 \n• Widget règle pour la mesure de distance
@@ -2837,13 +2813,13 @@ représentant la zone : %1$s x %2$s</string>
     <string name="enter_gpx_name">Nom du fichier GPX :</string>
     <string name="waypoint_one">Étape 1</string>
     <string name="save_route_point">Enregistrer comme point d\'itinéraire</string>
-    <string name="add_route_point">Ajouter un point à l\'itinéraire</string>
+    
     <string name="add_waypoint">Ajouter une étape</string>
     <string name="save_gpx_waypoint">Enregistrer le point GPX</string>
     <string name="live_monitoring_max_interval_to_send">Durée de mémorisation pour le suivi en ligne</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Indiquez une durée de mémorisation des positions en l\'absence de connexion</string>
-    <string name="measurement_tool_altitude">Altitude : %1$s</string>
-    <string name="measurement_tool_speed">Vitesse : %1$s</string>
+    
+    
     <string name="line">Ligne</string>
     <string name="save_as_route_point">Enregistrer comme points de passage</string>
     <string name="save_as_line">Enregistrer comme ligne</string>
@@ -2876,10 +2852,10 @@ représentant la zone : %1$s x %2$s</string>
 \n• Guidage de navigation piéton en suivant les itinéraires piétons 
 \n• Vous pouvez charger et suivre une trace GPX existante; enregistrer et partager un nouvel itinéraire GPX</string>
     <string name="move_all_to_history">Déplacer tout dans l\'historique</string>
-    <string name="build_route">Calculer l\'itinéraire</string>
+    
     <string name="show_direction">Indication de distance</string>
     <string name="sort_by">Trier par</string>
-    <string name="marker_options">Options de la marque</string>
+    
     <string name="osmand_extended_description_part8">OsmAnd est un projet open source très actif. Tout le monde peut contribuer à l\'application en signalant des bugs, en améliorant les traductions ou en développant de nouvelles fonctionnalités. Les nombreux échanges entre développeurs et utilisateurs permettent d\'améliorer régulièrement OsmAnd et les contributions financières permettent de développer de nouvelles fonctionnalités.
 \n
 \nCouverture et qualité approximative des cartes :
@@ -2926,7 +2902,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="last_seven_days">Ces 7 derniers jours</string>
     <string name="this_year">Cette année</string>
     <string name="make_active">Marquer comme actif</string>
-    <string name="top_bar">Barre supérieure</string>
+    
     <string name="remove_from_map_markers">Supprimer des marques</string>
     <string name="descendingly">Ordre décroissant</string>
     <string name="ascendingly">Ordre croissant</string>
@@ -2960,7 +2936,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Éviter les routes sur glace, les fjords</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Éviter les routes sur glace et les fjords.</string>
     <string name="make_round_trip">Faire une boucle</string>
-    <string name="shared_string_navigate">Naviguer</string>
+    
     <string name="osn_modify_dialog_error">Une erreur s\'est produite : la note n\'a pas été enregistrée</string>
     <string name="osn_modify_dialog_title">Modifier la note</string>
     <string name="context_menu_item_modify_note">Modifier la note OSM</string>
@@ -2990,7 +2966,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="import_file">Importer fichier</string>
 	<string name="tap_on_map_to_hide_interface_descr">Un appui sur la carte bascule les boutons et gadgets.</string>
     <string name="tap_on_map_to_hide_interface">Mode plein écran</string>
-    <string name="show_on_top_bar">Afficher dans la barre supérieure</string>
+    
     <string name="mark_passed">Marquer comme visité</string>
     <string name="rename_marker">Renommer la marque</string>
     <string name="digits_quantity">Nombre de chiffres décimaux</string>

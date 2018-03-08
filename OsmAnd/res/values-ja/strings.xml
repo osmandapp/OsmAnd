@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="installing_new_resources">新しいデータを展開中…</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -237,7 +236,7 @@ MB)をダウンロードしますか?</string>
      <string name="voice">記録音声</string>
      <string name="no_vector_map_loaded">ベクターマップはロードされませんでした</string>
 
-     <string name="map_route_by_gpx">GPXを使ったルート</string>
+     
      <string name="gpx_files_not_found">GPXファイルがtracksフォルダ内に見つかりません</string>
      <string name="layer_gpx_layer">GPX経路…</string>
      <string name="error_reading_gpx">GPXデータ読み込みエラー</string>
@@ -1416,29 +1415,19 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_showSurfaceGrade_name">道路の質(等級)を表示</string>
     <string name="rendering_attr_showSurfaces_name">路面を表示</string>
     <string name="rendering_attr_showCycleRoutes_name">自転車道を表示</string>
-    <string name="osmo_auth_error_short">認証の失敗</string>
-    <string name="osmo_auth_error">OsMoの認証エラーが発生しました:%1$s
-
-サーバーが一時的にダウンしているか、あなたの登録情報が失効している可能性があります。
-
-新しく登録しますか？</string>
-    <string name="osmo_group_by_invite">招待枠での認証</string>
+    
+    
+    
     <string name="stop_navigation_service">停止</string>
-	<string name="osmo_group_information_desc">"- グループを作成する際、名前とグループに関する説明を入力してください。
-\n - アプリから作成した際は簡易タイプでグループが作成されます。詳細はウェブサイトで https://osmo.mobi/g/new 
-\n - グループはウェブサイトを通じて場所、経路、地点の全てを管理できます。 
-\n - POIグループでない場合は、グループ内1人だけの管理は推奨しません。
-\n - プライベートグループは8人に制限されています。
-\n - 詳細な使用条件は以下ウェブサイトにて  https://OsMo.mobi
-\n - 特殊な使用条件の場合はサポートまでお問い合わせください: osmo.mobi@gmail.com"</string>
-    <string name="osmo_group_information">グループを作成する前に必ずお読み下さい！</string>
+	
+    
     <string name="gpx_start_new_segment">新しいセグメントの開始</string>
-    <string name="osmo_not_signed_in">OsMoログインの失敗</string>
-    <string name="osmo_gpx_points_downloaded">OsMoポイント %1$s ダウンロードしました。</string>
-    <string name="osmo_auto_connect_descr">アプリケーションの起動後、自動的にサービスに接続します</string>
-    <string name="osmo_auto_connect">自動接続</string>
-    <string name="osmo_start_service">OsMoサービス</string>
-    <string name="osmo_gpx_track_downloaded">OsMoトラック %1$s ダウンロードしました。</string>
+    
+    
+    
+    
+    
+    
     <string name="no_index_file_to_download">ダウンロードできるものが見つかりません、インターネットの接続を確認して下さい。</string>
     <string name="none_selected_gpx">GPXファイルが選択されていません。利用可能な経路をロングタップで選択してください。</string>
     
@@ -1486,22 +1475,22 @@ POIの更新は利用できません</string>
     <string name="shared_string_my_favorites">お気に入り</string>
     <string name="shared_string_my_places">お気に入り</string>
     
-    <string name="osmo_user_joined">ユーザー %1$sはグループ %2$sに参加しました</string>
-    <string name="osmo_user_left">ユーザー %1$sはグループ %2$sから離れました</string>
-    <string name="osmo_show_group_notifications">グループに関する通知を表示</string>
-    <string name="osmo_show_group_notifications_descr">ユーザーがグループに参加もしくは離れると簡易メッセージを表示します</string>
-    <string name="osmo_follow">フォロー</string>
-    <string name="osmo_sign_in">サインイン</string>
-    <string name="osmo_create_groups_confirm">グループを作成するためには、OsMoの登録ユーザである必要があります。</string>
-    <string name="osmo_credentials_not_valid">お使いのOsMoの登録情報が正しくありません。</string>
-    <string name="osmo_regenerate_login_ids_confirm">あなたの個人IDを再作成してよろしいですか？再作成した場合接続されたすべてのデバイスは、あなたを追跡することができません。</string>
-    <string name="osmo_regenerate_login_ids">ユーザーIDを再作成する</string>
-    <string name="osmo_cancel_moving_target">移動する目標をキャンセル</string>
-    <string name="osmo_center_location">画面上の中央</string>
-    <string name="osmo_set_moving_target">目標が移動すると設定する</string>
-    <string name="osmo_use_server_name">登録名</string>
-    <string name="osmo_connect_to_my_nickname">ニックネーム</string>
-    <string name="osmo_user_name">ユーザー</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	
 	<string name="rendering_value_pink_name">ピンク</string>
 	
@@ -1511,70 +1500,66 @@ POIの更新は利用できません</string>
 	
 	
 	
-    <string name="osmo_edit_device">ユーザープロパティの変更</string>
+    
     <string name="osmo_edit_color">表示色</string>
-    <string name="osmo_group_info">インフォメーション</string>
-    <string name="osmo_group">OsMoグループ</string>
-    <string name="osmo_group_share">グループ %2$sに接続するには、グループID(%1$s)を指定するか %3$sをクリックして下さい。</string>
-    <string name="osmo_share_connect_device">このデバイスをフォローしてみましょう</string>
-    <string name="osmo_share_current_session">ブラウザで現在のセッションを共有する</string>
-    <string name="osmo_session_not_available">セッションはが利用できません「送信場所」がオンになっていることを確認してください。</string>
-    <string name="osmo_share_session">セッションの共有</string>
+    
+    
+    
+    
+    
+    
+    
     <string name="rendering_attr_subwayMode_name">地下鉄路線</string>
- 	<string name="osmo_session_id_share">デバイスを追跡するためのセッションURL (%1$s)</string>
-    <string name="osmo_tracker_id_share">目的のデバイス %2$sに接続するには、リンク %3$sをクリックするかトラッカーIDを指定してください(%1$s)</string>
-    <string name="osmo_track_interval">記録間隔</string>
-	<string name="osmo_track_interval_descr">位置を送信する時間の間隔を選択します</string>
+ 	
+    
+    
+	
     <string name="int_days">日</string>
     <string name="osmo_connect_menu">接続</string>
-    <string name="osmo_expire_group">失効</string>
+    
     <string name="osmo_group_description">解説</string>
-    <string name="osmo_group_policy">ポリシー</string>
-    <string name="osmo_connect_to_device_tracker_id">トラッカーID</string>
-    <string name="osmo_connect_to_device_name">ユーザーネーム</string>
-    <string name="osmo_connect_to_group_id">グループID</string>
-    <string name="osmo_group_name">グループ名</string>
-    <string name="osmo_connect_to_device">デバイスとリンク</string>
-    <string name="osmo_connect_to_group">グループとリンク</string>
-    <string name="osmo_connect">参加</string>
-    <string name="osmo_create_group">グループの作成</string>
-    <string name="osmo_server_operation_failed">OsMoのサーバー操作に失敗しました</string>
-    <string name="osmo_activity">OpenStreetMapモニタリング</string>
-    <string name="osmo_enable_tracker">現在地点を送信</string>
-    <string name="osmo_control">OsMoクイックアクセス</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">時間前</string>
     <string name="minutes_ago">分前</string>
     <string name="seconds_ago">秒前</string>
-    <string name="osmo_connected_devices">デバイスと接続されました</string>
-    <string name="osmo_groups">OsMoグループ</string>
-    <string name="osmo_auto_send_locations_descr">アプリケーション起動後に自動的に旅行中の場所を送信します</string>
-    <string name="osmo_auto_send_locations">自動的に旅行を開始</string>
-    <string name="osmo_tracker_id">トラッカーID</string>
-    <string name="osmo_tracker_id_descr">タップでトラッカーIDを表示</string>
-    <string name="osmo_session_token">セッショントークン: %1$s</string>
-    <string name="osmo_auth_pending">認証を待っています…</string>
-    <string name="osmo_locations_sent">"位置の送信 %1$d (バッファ内 %2$d) "</string>
-    <string name="osmo_conn_successfull">"確立された接続: %1$s "</string>
-    <string name="osmo_io_error">"OsMoの接続に問題があります "</string>
-    <string name="osmo_settings_uuid">固有のデバイスID</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <string name="use_points_as_intermediates">地点間のルートを計算</string>
-    <string name="osmo_mode_restart">OsMoセッションを再起動</string>
-    <string name="osmo_mode_on">OsMoセッションの停止</string>    
-    <string name="osmo_mode_off">OsMoセッションの開始</string>
-    <string name="osmo_settings_debug">デバッグ情報</string>
-    <string name="osmo_settings_descr">モニタリングについての設定と各個のモニタリングチャンネルのセットアップします</string>
-    <string name="osmo_settings">OsMo</string>
+    
+        
+    
+    
+    
+    
     <string name="keep_informing">ナビゲーション指示の繰り返し</string>
 	<string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔を設定します</string>
     <string name="arrival_distance">目的地周辺でのアナウンスタイミング</string>
     <string name="arrival_distance_descr">目的地周辺でのアナウンスをするタイミングを設定します</string>
-    <string name="osmo_plugin_description">このプラグインはOpenStreetMapモニタリング機能の一部を提供します。 https://osmo.mobi を参照して下さい。 
-\n 
-\nあなたはグループに参加している全てのデバイスをリアルタイムで追跡することが可能です。あなたが属しているグループのアップロードされた地点や経路を見ることも出来ます。 
-\n 
-\nあなたが OsMo.mobi のウェブサイト上で規則に従い作成したグループは、数ヶ月削除されることはありません。</string>
-    <string name="osmo_plugin_name">OpenStreetMapモニタリング</string>
+    
+    
    	<string name="always_center_position_on_map">移動時、現在地を画面中央よりに表示</string>
     <string name="voice_pref_title">音声関連設定</string>
     <string name="misc_pref_title">その他の設定</string>
@@ -1596,9 +1581,9 @@ POIの更新は利用できません</string>
 	<string name="lang_be">ベラルーシ語</string>
 	<string name="lang_bs">ボスニア語</string>
 	<string name="rendering_attr_coloredBuildings_name">タイプ別に建物に着色</string>
-    <string name="osmo_invite">招待…</string>
-    <string name="osmo_leave_confirmation_msg">グループ %1$sから退出しますか？</string>
-    <string name="osmo_specify_tracker_id">IDを指定してください</string>
+    
+    
+    
     <string name="continue_navigation">ナビゲーションを継続</string>
     <string name="pause_navigation">ナビを一時停止</string>
     <string name="lang_bg">ブルガリア語</string>
@@ -1744,8 +1729,8 @@ POIの更新は利用できません</string>
     <string name="shared_string_show">表示</string>
 	<string name="configure_map">マップ設定</string>
     <string name="search_radius_proximity">以内</string>
-    <string name="osmo_device_not_found">デバイスが見つかりません</string>
-    <string name="osmo_no_connection_msg">OsMoサーバーに接続できません:↵\n- インターネット接続を確認して下さい;↵\n- 設定を確認して下さい;↵\n- 私達のTwitterをご参照下さい: https://twitter.com/OsMomobi</string>
+    
+    
     <string name="anonymous_user_hint">以下は匿名ユーザーでは使用できません:↵\n- グループ作成;↵\n- サーバを利用してのグループやデバイスの同期;↵\n- ウェブサイト上の個別ダッシュボードでのグループやデバイスの管理.</string>
     <string name="anonymous_user">匿名ユーザー</string>
     <string name="logged_as">%1$sとしてログインしました</string>
@@ -1894,7 +1879,7 @@ POIの更新は利用できません</string>
 	<string name="get_plugin">取得</string>
 <string name="osm_changes_added_to_local_edits">OSMへの変更をストレージ内変更候補に追加しました</string>
    	<string name="mark_to_delete">削除用にマーク</string>
-	<string name="osmo_grop_name_length_alert">グループ名は、少なくとも3文字以上にする必要があります！</string>
+	
 	<string name="welmode_download_maps">マップダウンロード</string>
 	<string name="welcome_select_region">交通標識や交通規制を正しく反映するために、運転地域を選択してください:</string>
 	<string name="welcome_text">OsmAndは、世界各国のオフライン地図の閲覧、そしてそれを利用したナビゲーションを提供しています！</string>
@@ -1931,7 +1916,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_copy">コピー</string>
     <string name="osm_edit_context_menu_delete">OSMの編集を削除</string>
     <string name="rendering_value_disabled_name">無効</string>
-    <string name="osmo_share_my_location">現在地の送信</string>
+    
     <string name="shared_string_logoff">ログオフ</string>
     
 	<string name="routing_attr_avoid_borders_description">国境越えを避ける</string>
@@ -2475,9 +2460,9 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="rendering_attr_contourWidth_description">等高線の幅</string>
     <string name="rendering_attr_contourWidth_name">等高線の幅</string>
     <string name="upload_poi">POIのアップロード</string>
-    <string name="osmo_share_location">共有</string>
-    <string name="osmo_pause_location">一時停止</string>
-    <string name="osmo_service_running">OsMo サービスは実行中です</string>
+    
+    
+    
     <string name="shared_string_continue">続行</string>
     <string name="shared_string_pause">一時停止</string>
     <string name="rendering_attr_contourColorScheme_description">等高線の配色</string>
@@ -3025,7 +3010,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
 	<string name="shared_string_back">戻る</string>
 	<string name="view">表示</string>
 	<string name="waypoints_added_to_map_markers">経由地点をマップマーカーとして追加</string>
-	<string name="shared_string_navigate">ナビゲート</string>
+	
     <string name="choose_navigation_type">ナビゲーションのプロファイルを選択</string>
     <string name="none_point_error">少なくとも1つのポイントを追加してください。</string>
     <string name="enter_gpx_name">GPXファイル名:</string>
@@ -3065,7 +3050,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="appearance_on_the_map">マップ画面での表示設定</string>
     <string name="add_track_to_markers_descr">マーカーとして追加する経由地点を経路データから選択してください。(経由地点を含む経路のみリストアップされます)</string>
     <string name="add_favourites_group_to_markers_descr">マーカーとして追加するお気に入りのカテゴリを選択してください。</string>
-    <string name="show_on_top_bar">画面上部のバーに表示</string>
+    
     <string name="add_group_descr">お気に入り地点や経路データ内の経由地点をまとめてインポートできます。</string>
     <string name="empty_state_markers_groups">グループでインポート</string>
     <string name="empty_state_markers_groups_desc">お気に入り地点や経路データ内の経由地点をマーカーとしてまとめて追加できます。</string>

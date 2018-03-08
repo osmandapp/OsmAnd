@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="shared_string_topbar">Supra breto</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="shared_string_topbar">Supra breto</string>
     <string name="recalculate_route">Rekalkuli kurson</string>
     <string name="donations">Donacoj</string>
     <string name="number_of_recipients">Nombro da ricevontoj</string>
@@ -344,7 +343,7 @@
     <string name="rendering_value_disabled_name">Malaktiva</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Kolorigi laŭ speco de kurs-reto</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Kolorigi laŭ OSMC piedirada simbolo</string>
-    <string name="osmo_share_my_location">Transsendi mian pozicion</string>
+    
     <string name="shared_string_logoff">Elsaluti</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numeroj de domoj</string>
     <string name="application_dir_change_warning3">Ĉu vi ankaŭ volas kopii dutumdosierojn de OsmAnd al la nova loko?</string>
@@ -441,35 +440,22 @@
     <string name="choose_osmand_theme">Etoso</string>
     <string name="choose_osmand_theme_descr">Elekti etoson de la aplikaĵo.</string>
     <string name="local_indexes_cat_srtm">Nivelkurboj</string>
-    <string name="osmo_group_information_desc">- Por krei grupon, bonvolu nomi kaj priskribi ĝin 
-\n - Per la aplikaĵo oni povas krei nur grupoj de simpla tipo, legu pli ĉe la retpaĝo https://osmo.mobi/g/new 
-\n - Per retpaĝo vi povas administri grupon, loki kursojn kaj punktojn videblajn por ĉiujn 
-\n - Ni ne rekomendas uzi gropon nur de unu persono, se tiu ne estas intereseja gropo 
-\n - Privataj grupoj estas limigitaj ĝis 8 personoj 
-\n - Detalaj kondiĉoj estas ĉiam disponeblaj ĉe retpaĝo OsMo.mobi 
-\n - Se vi bezonas specialajn kondiĉojn - bonvolu kontakti kun servantoj: osmo.mobi@gmail.com</string>
-    <string name="osmo_specify_tracker_id">Bonvolu difini identigilon</string>
-    <string name="osmo_no_connection_msg">Ne povas konekti al la servilo de OsMo:
-- kontrolu vian retkonekton;
-- kontrolu agordojn;
-- vizitu nian Twitter: https://twitter.com/OsMomobi</string>
+    
+    
+    
     <string name="anonymous_user_hint">Anonima uzanto ne povas:\n- krei grupojn;\n- samtempigi grupojn kaj aparatojn kun la servilo;\n- administri grupojn kaj aparatojn per persona stirpanelo en retejo.</string>
     <string name="report">Raportoj</string>
-    <string name="osmo_connect_to_group_id">Grupa ID</string>
-    <string name="osmo_connect_to_device_tracker_id">Kursospurila ID</string>
-    <string name="osmo_connect">Konekti</string>
-    <string name="osmo_groups">Grupoj OsMo</string>
-    <string name="osmo_auto_send_locations_descr">Aŭtomate komenci registri ekskurson kaj sendi lokojn post starto de aplikaĵo.</string>
-    <string name="osmo_auto_send_locations">Aŭtomate ekigi ekskurs-registrilon</string>
-    <string name="osmo_tracker_id">Kursospurila ID</string>
-    <string name="osmo_tracker_id_descr">Frapetu por vidi identigilon de kursospurilo.</string>
-    <string name="osmo_connect_to_my_nickname">Kaŝnomo</string>
-    <string name="osmo_plugin_name">OpenStreetMap Observado</string>
-    <string name="osmo_plugin_description">Tiu ĉi kromprogramo parte liveras eblojn de la OpenStreetMap Observado, rigardu https://osmo.mobi 
-\n 
-\nVi povas spuri ĉiujn aparatojn de partoprenanta grupo realtempe. Ankaŭ vi povas vidi interesejojn kaj kursojn alŝutitajn al la grupo al kiu vi apartenas.
-\n
-\nSe grupo ne estis forigita post monatoj, restarigi ĝin per reguloj de grup-kreado en la retejo OsMo.mobi</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="storage_permission_restart_is_required">Nun la aplikaĵo estas permesita por skribi en ekstera memorejo. Permana restarto de aplikaĵo nepras.</string>
     <string name="full_report">Plena raporto</string>
     <string name="open_street_map_login_and_pass">Uzantnomo kaj pasvorto al OpenStreetMap</string>
@@ -486,7 +472,7 @@
     <string name="current_route">Nuna kurso</string>
     <string name="osm_changes_added_to_local_edits">OSM-ŝanĝoj aldonitaj al loka ŝanĝaro</string>
     <string name="mark_to_delete">Marki por forigi</string>
-    <string name="osmo_grop_name_length_alert">Grupa nomo devas enhavi almenaŭ 3 signojn!</string>
+    
     <string name="local_recordings_delete_all_confirm">Ĉu vi certe volas forigi %1$d notojn?</string>
     <string name="local_osm_changes_upload_all_confirm">Ĉu vi certe volas alŝuti %1$d ŝanĝo(j)n al OSM?</string>
     <string name="confirmation_to_clear_history">Ĉu vi volas forviŝi la historion?</string>
@@ -626,7 +612,7 @@ Lon: %2$s</string>
     <string name="map_widget_left">Maldekstra panelo</string>
     <string name="configure_map">Agordi mapon</string>
     <string name="search_radius_proximity">En proksime de</string>
-    <string name="osmo_device_not_found">Ne trovis aparaton</string>
+    
     <string name="anonymous_user">Anonima uzanto</string>
     <string name="logged_as">Ensalutinta kiel %1$s</string>
     <string name="speed_limit_exceed">Tolerado de rapidlimo</string>
@@ -684,9 +670,9 @@ Lon: %2$s</string>
     <string name="rendering_value_car_name">Aŭto</string>
     <string name="rendering_value_bicycle_name">Biciklo</string>
     <string name="rendering_value_pedestrian_name">Piediranto</string>
-    <string name="osmo_invite">Inviti…</string>
+    
     <string name="rendering_attr_coloredBuildings_name">Kolorigi konstruaĵojn laŭspece</string>
-    <string name="osmo_leave_confirmation_msg">Ĉu vi volas forlasi grupon %1$s?</string>
+    
     <string name="continue_navigation">Pluigi navigadon</string>
     <string name="pause_navigation">Paŭzigi navigadon</string>
     <string name="keep_navigation_service">Daŭrigi</string>
@@ -714,20 +700,16 @@ Lon: %2$s</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kvalito de vojoj</string>
     <string name="rendering_attr_showSurfaces_name">Pavimo de vojoj</string>
     <string name="rendering_attr_showCycleRoutes_name">Biciklovojoj</string>
-    <string name="osmo_auth_error_short">Rajtigo malsukcesis</string>
-    <string name="osmo_auth_error">OsMo-a eraro de rajtigado okazis: %1$s.
-
- Verŝajne la servo dumtempe malfunkcias aŭ via registrado senvalidiĝis.
-
- Ĉu vi volas registri denove?</string>
-    <string name="osmo_group_information">Bonvolu legi antaŭ krei grupon!</string>
-    <string name="osmo_group_by_invite">Aniĝi per invito</string>
-    <string name="osmo_not_signed_in">Ensaluto al OsMo malsukcesis</string>
-    <string name="osmo_gpx_points_downloaded">Elŝutis %1$s OsMo-ajn punktojn.</string>
-    <string name="osmo_auto_connect">Aŭtomate konekti</string>
-    <string name="osmo_auto_connect_descr">Aŭtomate konekti kun servo post starto de la aplikaĵo.</string>
-    <string name="osmo_start_service">OsMo servo</string>
-    <string name="osmo_gpx_track_downloaded">Elŝutis %1$s OsMo-ajn kursojn.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="srtm_paid_version_title">Nivelkurba kromprogramo</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-kromprogramo por desegni nivelkurbojn eksterrete</string>
 	<string name="srtm_plugin_name">Nivelkurboj</string>
@@ -826,65 +808,65 @@ Lon: %2$s</string>
     <string name="gpx_selection_points">%1$s\nPunktoj</string>
     <string name="gpx_selection_track">%1$s\nKurso %2$s</string>
     <string name="gpx_file_is_empty">GPX-spur-dosiero estas malplena</string>
-    <string name="osmo_user_joined">Uzanto %1$s aniĝis la grupo %2$s</string>
-    <string name="osmo_user_left">Uzanto %1$s forlasis grupon %2$s</string>
-    <string name="osmo_show_group_notifications_descr">Montri atentigojn kiam uzanto aniĝas aŭ forlasas la grupon.</string>
-    <string name="osmo_follow">Sekvi</string>
-    <string name="osmo_sign_in">Registri</string>
-    <string name="osmo_create_groups_confirm">Por krei grupojn, vi devas registriĝi kiel uzanto de OsMo.</string>
-    <string name="osmo_credentials_not_valid">Viaj ensalutiloj al OsMo estas eraraj.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Ĉu vi certe volas rekrei personan identigilon? Ĉiuj aparatoj kiuj konektas al vi, ne povos plue spuri vin.</string>
-    <string name="osmo_regenerate_login_ids">Rekrei identigilon de uzanto</string>
-    <string name="osmo_cancel_moving_target">Nuligi movadan celon</string>
-    <string name="osmo_center_location">Centrigi sur la ekrano</string>
-    <string name="osmo_set_moving_target">Agordi kiel movadan celon</string>
-    <string name="osmo_user_name">Uzanto</string>
-    <string name="osmo_use_server_name">Registrita nomo</string>
-    <string name="osmo_edit_device">Ŝanĝi ecojn de uzanto</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="osmo_edit_color">Vidiga koloro</string>
-    <string name="osmo_group_info">Informoj</string>
-    <string name="osmo_group">OsMo-grupo</string>
-    <string name="osmo_group_share">Por konekti la grupon %2$s, difinu grupan identigilon aŭ premu %3$s.</string>
-    <string name="osmo_share_connect_device">Permesu por permanenta spurado de tiu ĉi aparato</string>
-    <string name="osmo_share_current_session">Kunhavigi nuntempan seancon per ret-foliumilo</string>
-    <string name="osmo_share_session">Kunhavigi seancon</string>
-    <string name="osmo_session_not_available">Seanco ne disponebla, bonvolu kontroli ĉu \'Sendi poziciojn\' estas ŝaltita.</string>
-    <string name="osmo_show_group_notifications">Montri atentigojn pri grupo</string>
-    <string name="osmo_session_id_share">Seanca retadreso por spuri aparaton (%1$s)</string>
-    <string name="osmo_tracker_id_share">Por konekti al cela aparato %2$s, premu ligilon %3$s aŭ difinu identigilon de kursospurilo (%1$s)</string>
-    <string name="osmo_track_interval">Protokolada intervalo</string>
-    <string name="osmo_track_interval_descr">Agordi oftecon de sendado de pozicio.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="int_days">tagoj</string>
     <string name="osmo_connect_menu">Konekti</string>
     <string name="osmo_group_description">Priskribo</string>
-    <string name="osmo_expire_group">Senvalidiĝos post</string>
-    <string name="osmo_group_policy">Politiko</string>
-    <string name="osmo_connect_to_device_name">Uzantnomo</string>
-    <string name="osmo_group_name">Grupnomo</string>
-    <string name="osmo_connect_to_device">Kupli kun aparato</string>
-    <string name="osmo_connect_to_group">Kupli kun grupo</string>
-    <string name="osmo_create_group">Krei grupon</string>
-    <string name="osmo_server_operation_failed">Servilo de OsMo malfunkciis</string>
-    <string name="osmo_activity">OpenStreetMap Observado</string>
-    <string name="osmo_enable_tracker">Sendi mian pozicion</string>
-    <string name="osmo_control">Rapidaliro al OsMo</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">horoj antaŭe</string>
     <string name="minutes_ago">minutoj antaŭe</string>
     <string name="seconds_ago">sekundoj antaŭe</string>
-    <string name="osmo_connected_devices">Konektitaj aparatoj</string>
-    <string name="osmo_session_token">Seanca ĵetono: %1$s</string>
-    <string name="osmo_auth_pending">Atendado je rajtigado…</string>
-    <string name="osmo_locations_sent">Pozicioj senditaj %1$d (en bufro %2$d)</string>
-    <string name="osmo_conn_successfull">Konektita: %1$s</string>
-    <string name="osmo_io_error">Problemo kun OsMo konekto:</string>
-    <string name="osmo_settings_uuid">Ununura aparata identigilo</string>
+    
+    
+    
+    
+    
+    
+    
     <string name="use_points_as_intermediates">Prikalkuli kurson inter punktojn</string>
-    <string name="osmo_mode_restart">Restartigi OsMo seancon</string>
-    <string name="osmo_mode_on">Ĉesigi OsMo seancon</string>
-    <string name="osmo_mode_off">Ekigi OsMo seancon</string>
-    <string name="osmo_settings_debug">Informoj pri senerarigo</string>
-    <string name="osmo_settings_descr">Agordi observadon kaj personan observadan kanalon.</string>
-    <string name="osmo_settings">OsMo</string>
+    
+    
+    
+    
+    
+    
     <string name="always_center_position_on_map">Ĉiam montri centrigitan pozicion</string>
     <string name="localization_pref_title">Loko</string>
     <string name="index_item_nation_addresses">adresoj tutmondaj</string>
@@ -1766,7 +1748,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="voice">Registrita voĉo</string>
     <string name="voices">Voĉaj avertoj</string>
     <string name="no_vector_map_loaded">Ne ŝargis vektorajn mapojn</string>
-    <string name="map_route_by_gpx">Navigi per GPX</string>
+    
     <string name="vector_data">Eksterretaj vektoraj mapoj</string>
     <string name="transport_context_menu">Serĉi transporton ĉe haltejo</string>
     <string name="poi_context_menu_modify">Modifi interesejon</string>
@@ -2173,53 +2155,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
 \n  - agordebla map-turniĝo laŭ direkto de movado aŭ kompaso 
 \n  - sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj"</string>
 	
-    <string name="osmand_plus_extended_description_4000_chars_v2">"
-OsmAnd Mapoj kaj Navigado - trovu ejoj sur mapo kaj difini kursojn sen interreta konekto. Elŝutu mapon de lando antaŭ vi vojaĝos tie por trovi lokojn kaj vojojn de nekonata regiono.
-
-Bazaj ebloj:
-• Detalaj mapoj de 200 landoj
-• Eksterreta navigado kun gvidata voĉo
-• Serĉi adresojn eksterrete
-• Informoj pri lokoj sur la mapo: interesaj ejoj, kafejoj, parkumejoj, vendejoj
-• Aldoni lokojn kiel ŝatatajn
-• Navigado por aŭtistoj, biciklistoj kaj piedirantoj
-
-Pliaj ebloj:
-• Montri kaj registri GPX-kursojn
-• Interesejoj de Vikipedio
-• Aldoni fotojn, aŭdajn kaj videajn notojn sur la mapo
-• Taga kaj nokta aspekto de mapo por oportuna veturado
-• Informoj pri kursoj kaj haltejoj de publika transporto
-• Piediradaj kaj biciklaj kursoj
-• Turismaj vojoj por regionoj de la tuta mondo
-• Enretaj mapoj el diversaj fontoj
-• Informoj pri pavim-kvalito de vojoj kaj strat-prilumado
-• Aldoni, redakti kaj forigi interesejojn (por redaktantoj de OpenStreetMap)
-• OsMo - perinterreta observado de aliaj aparatoj
-
-Havigu senmalfunkcian navigadilon kie ajn vi estas - en Francujo, Germanujo, Meksiko, Britujo, Hispanujo, Nederlando, Usono, Rusujo, Brazilo kaj en iu ajn alia lando.
-
-Kromprogramoj:
-• Nivelkurboj kaj nivel-ombrumo https://goo.gl/7mojP8
- Nivelkurboj kaj tavolo de nivel-ombrumo (reliefo) aldonita al baza OsmAnd mapo.
-
-• Skiada mapo https://goo.gl/pX6DxJ
- Informoj pri descendejoj, skivojoj, kablovojoj kaj skiliftoj.
-
-• Mar-navigada mapo https://goo.gl/0hEdxm
- Speciala map-aspekto por vidi mar-navigadajn markojn por enlanda kaj apudborda boatado.
-
-• Parkumeja pozicio https://goo.gl/6JxQXF
- Plifaciligas al vi marki la pozicion de via parkumata veturilo kaj montras kiom da tempo restas se parkumejo estas temp-limigita.
-
-Estu informita!
-
-Twitter: https://twitter.com/osmandapp
-Fejsbuko: https://www.facebook.com/osmandapp
-Retpaĝo: http://osmand.net
-
-Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: support@osmand.net 
- "</string>
+    
     <string name="rendering_attr_hideOverground_name">Superteraj objektoj</string>
 
     <string name="shared_string_change">Ŝanĝi</string>
@@ -2308,9 +2244,9 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="trip_rec_notification_settings">Aktivigi rapid-starton de registrado</string>
     <string name="trip_rec_notification_settings_desc">Montri sisteman sciigon kun eblo ekigi registradon de kurso.</string>
     <string name="shared_string_notifications">Sciigoj</string>
-    <string name="osmo_share_location">Kunhavigi</string>
-    <string name="osmo_service_running">OsMo-servo estas aktiva</string>
-    <string name="osmo_pause_location">Paŭzi</string>
+    
+    
+    
     <string name="gpx_no_tracks_title">Vi ankoraŭ havas neniujn spurojn</string>
     <string name="gpx_no_tracks_title_folder">Vi ankaŭ povas aldoni spurojn al la dosierujo</string>
     <string name="gpx_add_track">Aldoni spuron</string>
@@ -2447,7 +2383,7 @@ Indikas lokon:  %1$s x %2$s"</string>
 	<string name="rendering_attr_depthContours_description">Montri punktojn kaj kurbojn de profundo.</string>
     <string name="rendering_attr_depthContours_name">Maraj profundec-kurboj</string>
 	
-    <string name="routing_attr_height_relief_smoothness_factor_description">Pli da ebenejoj aŭ pli da montetoj</string>
+    
     <string name="routing_attr_height_obstacles_name">Uzi datumojn pri altitudo</string>
     <string name="routing_attr_height_obstacles_description">Uzi datumojn pri altitudo liveritajn de SRTM, ASTER kaj EU-DEM.</string>
 
@@ -2712,7 +2648,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="moving_time">Movada tempo</string>
     <string name="max_min">Maks./min.</string>
     
-    <string name="range_min_max">Variejo = min/maks</string>
+    
     <string name="min_max">Min./maks.</string>
     <string name="release_2_7">• Kromprogramo ‘Mapillary’ kun strat-nivela fotaro
 \n
@@ -2735,19 +2671,19 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="mappilary_no_internet_desc">Vi bezonas interret-konekton por vidi fotojn de Mapillary.</string>
     <string name="retry">Reprovi</string>
 <string name="measurement_tool_action_bar">Esploru mapon kaj aldonu punktojn</string>
-    <string name="add_gpx_waypoint_bottom_sheet_title">Aldoni GPX-navigadpunkton</string>
-    <string name="shared_string_create">Krei</string>
+    
+    
 <string name="none_point_error">Bonvolu aldoni almenaŭ unu punkton.</string>
     <string name="enter_gpx_name">GPX-dosiera nomo:</string>
     <string name="show_on_map_after_saving">Montri sur mapo post konservi</string>
-    <string name="add_route_point">Aldoni kurspunkton</string>
+    
     <string name="add_waypoint">Aldoni navigadpunkton</string>
     <string name="save_gpx_waypoint">Konservi GPX-navigadpunkton</string>
     <string name="save_route_point">Konservi kurspunkton</string>
     <string name="waypoint_one">Navigadpunkto 1</string>
     <string name="route_point_one">Kurspunkto 1</string>
-<string name="measurement_tool_altitude">Altitudo: %1$s</string>
-    <string name="measurement_tool_speed">Rapido: %1$s</string>
+
+    
     <string name="line">Linio</string>
     <string name="save_as_route_point">Konservi kiel kurspunktojn</string>
     <string name="save_as_line">Konservi kiel linion</string>
@@ -2774,10 +2710,10 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="do_not_use_animations">Ne uzi movbildojn</string>
     <string name="do_not_use_animations_descr">Malaktivigi animaciojn en la aplikaĵo.</string>
     <string name="move_all_to_history">Movi ĉiujn al historio</string>
-    <string name="build_route">Kalkuli kurson</string>
+    
     <string name="show_direction">Distanc-vidigo</string>
     <string name="sort_by">Ordigi laŭ</string>
-    <string name="marker_options">Agordo de marko</string>
+    
     <string name="marker_show_distance_descr">Elekti kiel vidigi distancon kaj direkton al map-markoj sur la map-ekrano:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Map-orientiĝa sojlo</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Elekti rapidon sube kiun map-orientiĝo ŝanĝiĝos el “laŭ direkto de movado” al “laŭ kompaso”.</string>
@@ -2792,8 +2728,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="yesterday">Hieraŭ</string>
     <string name="last_seven_days">Lastaj 7 tagoj</string>
     <string name="this_year">Tiu ĉi jaro</string>
-    <string name="widget">Fenestraĵo</string>
-    <string name="top_bar">Supra breto</string>
+    
+    
     <string name="remove_from_map_markers">Forigi el map-markoj</string>
     <string name="descendingly">malkreskante</string>
     <string name="ascendingly">kreskante</string>
@@ -2824,7 +2760,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="group_will_be_removed_after_restart">Grupo estos forigita post la sekva restarto de la aplikaĵo.</string>
     <string name="make_round_trip_descr">Aldoni kopion de komenc-punkto kiel celon.</string>
     <string name="make_round_trip">Fermita ekskurso</string>
-    <string name="shared_string_navigate">Navigi</string>
+    
     <string name="osn_modify_dialog_error">Eraro okazis: rimarko ne estis ŝanĝita</string>
     <string name="osn_modify_dialog_title">Redakti rimarkon</string>
     <string name="context_menu_item_modify_note">Redakti OSM-rimarkon</string>
@@ -2853,7 +2789,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="import_file">Enporti dosieron</string>
 	<string name="tap_on_map_to_hide_interface_descr">Frapetu la mapon por baskuli kontrol-butonojn kaj fenestraĵojn.</string>
     <string name="tap_on_map_to_hide_interface">Plenekrana reĝimo</string>
-    <string name="show_on_top_bar">Montri en supra breto</string>
+    
     <string name="mark_passed">Marki kiel pasigitan</string>
     <string name="rename_marker">Alinomi markon</string>
     <string name="digits_quantity">Nombro da dekumaj pozicioj</string>

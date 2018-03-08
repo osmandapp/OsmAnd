@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 <string name="nothing_found">Heç nə tapılmadı :(</string>
     <string name="restart_search">Axtarışı yenidən başlat</string>
     <string name="change_color">Rəngi dəyiş</string>
@@ -26,8 +25,8 @@
     <string name="rendering_value_low_name">Aşağı</string>
     <string name="rendering_attr_hideWaterPolygons_description">Su</string>
     <string name="rendering_attr_hideWaterPolygons_name">Suyu gizlət</string>
-    <string name="osmo_share_location">Paylaş</string>
-    <string name="osmo_pause_location">Fasilə</string>
+    
+    
     <string name="shared_string_notifications">Bildirişlər</string>
     <string name="shared_string_continue">Davam et</string>
     <string name="shared_string_pause">Fasilə</string>
@@ -75,9 +74,9 @@
     <string name="number_of_gpx_files_selected_pattern">%s GPX faylı seçildi</string>
     <string name="rendering_value_medium_name">Orta</string>
     <string name="rendering_value_bold_name">Qalın</string>
-    <string name="osmo_connect">Qoşul</string>
-    <string name="osmo_groups">OsMo qrupları</string>
-    <string name="osmo_connect_to_my_nickname">Ləqəb</string>
+    
+    
+    
     <string name="shared_string_move_up">Yuxarı daşı</string>
     <string name="shared_string_move_down">Aşağı daşı</string>
     <string name="full_report">Tam hesabat</string>
@@ -188,7 +187,7 @@
     <string name="welmode_download_maps">Xəritələri endir</string>
     <string name="welcome_header">Xoş gəlmisiniz</string>
     <string name="mark_to_delete">Silmək üçün işarələ</string>
-    <string name="osmo_grop_name_length_alert">Qrup adı ən azı 3 simvoldan ibarət olmalıdır!</string>
+    
     <string name="confirmation_to_clear_history">Tarixçəni təmizləmək istəyirsiniz?</string>
     <string name="shared_string_go">Get</string>
     <string name="osm_edits">OSM düzəlişləri</string>
@@ -296,7 +295,7 @@
     <string name="rendering_category_details">Detallar</string>
     <string name="map_widget_right">Sağ panel</string>
     <string name="map_widget_left">Sol panel</string>
-    <string name="osmo_device_not_found">Cihaz tapılmadı</string>
+    
     <string name="anonymous_user">Anonim istifadəçi</string>
     <string name="logged_as">%1$s olaraq daxil ol</string>
     <string name="text_size_descr">Xəritədəki mətn ölçüsünü seçin.</string>
@@ -320,14 +319,14 @@
     <string name="rendering_value_car_name">Avtomobil</string>
     <string name="rendering_value_bicycle_name">Velosiped</string>
     <string name="rendering_value_pedestrian_name">Piyada</string>
-    <string name="osmo_invite">Dəvət et…</string>
+    
     <string name="lang_he">İvritcə</string>
     <string name="rendering_attr_hideText_name">Mətn</string>
     <string name="rendering_attr_moreDetailed_name">Daha çox detallar</string>
     <string name="rendering_attr_lessDetailed_name">Daha az detallar</string>
-    <string name="osmo_group_information">Zəhmət olmasa qrup yaratmazdan əvvəl oxuyun!</string>
-    <string name="osmo_auto_connect">Avtomatik qoşulma</string>
-    <string name="osmo_start_service">OsMo xidməti</string>
+    
+    
+    
     <string name="no_index_file_to_download">Endirilənlər tapılmadı, internet bağlantınızı yoxlayın.</string>
     <string name="local_index_select_gpx_file">Göstərmək üçün seçin</string>
     <string name="sort_by_distance">Məsafəyə görə sırala</string>
@@ -343,25 +342,25 @@
     <string name="gpx_info_start_time">Başlama vaxtı: %1$tF, %1$tT</string>
     <string name="gpx_info_end_time">Bitmə vaxtı: %1$tF, %1$tT</string>
     <string name="gpx_info_maximum_speed">Maksimum sürət: %1$s</string>
-    <string name="osmo_user_joined">İstifadəçi %1$s %2$s qrupuna qoşuldu</string>
-    <string name="osmo_show_group_notifications">Qrup bildirişlərini göstər</string>
-    <string name="osmo_follow">İzlə</string>
-    <string name="osmo_sign_in">Daxil ol</string>
-    <string name="osmo_center_location">Ekranın mərkəzində</string>
-    <string name="osmo_user_name">İstifadəçi</string>
-    <string name="osmo_group_info">Məlumat</string>
-    <string name="osmo_group">OsMo qrupu</string>
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="int_days">gün</string>
     <string name="osmo_connect_menu">Qoşul</string>
     <string name="osmo_group_description">Açıqlama</string>
-    <string name="osmo_connect_to_device_name">İstifadəçi adı</string>
-    <string name="osmo_group_name">Qrup adı</string>
-    <string name="osmo_create_group">Qrup yarat</string>
+    
+    
+    
     <string name="hours_ago">saat əvvəl</string>
     <string name="minutes_ago">dəqiqə əvvəl</string>
     <string name="seconds_ago">saniyə əvvəl</string>
-    <string name="osmo_connected_devices">Qoşulmuş cihazlar</string>
-    <string name="osmo_settings">OsMo</string>
+    
+    
     <string name="voice_pref_title">Səs</string>
     <string name="misc_pref_title">Müxtəlif</string>
     <string name="lang_zh">Çincə</string>
@@ -829,7 +828,7 @@
     <string name="upload_poi">POI yüklə</string>
     <string name="route_calculation">Marşrut hesablanması</string>
     <string name="gpx_appearance">Görünüş</string>
-    <string name="osmo_service_running">OsMo xidməti başladılıb</string>
+    
     <string name="shared_string_paused">Fasilə verildi</string>
     <string name="shared_string_trip">Səyahət</string>
     <string name="rendering_attr_contourColorScheme_description">Kontur xətlərinin rəng sxemi</string>
@@ -877,10 +876,10 @@
     <string name="rendering_attr_showAccess_name">Giriş məhdudiyyətlərini və rüsumu göstər</string>
     <string name="rendering_attr_showSurfaceGrade_name">Yol keyfiyyətini göstər</string>
     <string name="rendering_attr_showSurfaces_name">Yol örtüyünü göstər</string>
-    <string name="osmo_auth_error_short">İcazə uğursuz oldu</string>
-    <string name="osmo_group_by_invite">Dəvətlə daxil ol</string>
-    <string name="osmo_not_signed_in">OsMo giriş uğursuz oldu</string>
-    <string name="osmo_gpx_points_downloaded">%1$s OsMo nöqtəsi endirildi.</string>
+    
+    
+    
+    
     <string name="gpx_split_interval">Bölünmə intervalı</string>
     <string name="save_as_favorites_points">Favorit qrup olaraq saxla</string>
     <string name="select_destination_and_intermediate_points">Təyinat nöqtələrini seçin</string>
@@ -895,28 +894,28 @@
     <string name="gpx_selection_point">%1$s nöqtəsi</string>
     <string name="gpx_selection_points">%1$s
 \nNöqtələr</string>
-    <string name="osmo_user_left">İstifadəçi %1$s %2$s qrupunu tərk etdi</string>
-    <string name="osmo_show_group_notifications_descr">İstifadəçi qrupa qoşulanda və ya tərk edəndə xəbərdarlıq mesajlarını göstər.</string>
-    <string name="osmo_create_groups_confirm">Qruplar yaratmaq üçün OsMo-nun qeydiyyatdan keçmiş istifadəçisi olmalısınız.</string>
-    <string name="osmo_credentials_not_valid">OsMo etimadnaməniz etibarlı deyil.</string>
-    <string name="osmo_cancel_moving_target">Hərəkətli hədəfi ləğv et</string>
-    <string name="osmo_set_moving_target">Hərəkətli hədəf kimi təyin et</string>
-    <string name="osmo_use_server_name">Qeydiyyatlı ad</string>
-    <string name="osmo_edit_device">İstifadəçi xüsusiyyətlərini dəyiş</string>
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="osmo_edit_color">Ekran rəngi</string>
-    <string name="osmo_share_current_session">Hazırkı sessiyanı brauzerdə paylaş</string>
-    <string name="osmo_session_not_available">Sessiya mövcud deyil, “Məkanı göndər”in açıq olub-olmadığını yoxlayın.</string>
-    <string name="osmo_share_session">Sessiyanı paylaş</string>
-    <string name="osmo_track_interval_descr">Mövqe məlumatlarını göndərmək üçün vaxt intervalı seçin.</string>
-    <string name="osmo_group_policy">Qaydalar</string>
-    <string name="osmo_server_operation_failed">OsMo server əməliyyatı uğursuz oldu</string>
-    <string name="osmo_enable_tracker">Mövqelərimi göndər</string>
-    <string name="osmo_control">OsMo sürətli giriş</string>
-    <string name="osmo_auth_pending">İcazə gözlənilir…</string>
-    <string name="osmo_io_error">OsMo qoşulma problemi:</string>
-    <string name="osmo_mode_restart">OsMo sessiyanı yenidən başlat</string>
-    <string name="osmo_mode_on">OsMo sessiyanı dayandır</string>
-    <string name="osmo_mode_off">OsMo sessiyanı başlat</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="always_center_position_on_map">Mövqeni hər zaman mərkəzdə göstər</string>
     <string name="index_item_world_seamarks">Dünya dəniz işarələri</string>
     <string name="lang_en_gb">İngiliscə (Birləşmiş Krallıq)</string>
@@ -963,10 +962,7 @@
     <string name="lang_als">Albanca (Tosk)</string>
     <string name="regions">Regionlar</string>
     <string name="days_behind">gün əvvəl</string>
-    <string name="osmo_no_connection_msg">OsMo serverinə qoşulmaq olmur:
-\n- internet bağlantınızı yoxlayın;
-\n- parametrləri yoxlayın;
-\n- Twitter səhifəmizi yoxlayın: https://twitter.com/OsMomobi</string>
+    
     <string name="report">Hesabat</string>
     <string name="finish_navigation">Naviqasiyanı bitir</string>
     <string name="avoid_road">Yollardan yayın</string>
@@ -1120,12 +1116,12 @@
     <string name="local_map_names">Yerli adlar</string>
     <string name="pause_navigation">Naviqasiyaya fasilə ver</string>
     <string name="continue_navigation">Naviqasiyaya davam et</string>
-    <string name="osmo_leave_confirmation_msg">%1$s qrupunu tərk etmək istəyirsiniz?</string>
+    
     <string name="keep_navigation_service">Saxla</string>
     <string name="map_preferred_locale_descr">Xəritədəki yazılar üçün üstün tutulan dil (mövcud olmadıqda, ingiliscə və ya yerli adlara keçiləcək).</string>
     <string name="map_preferred_locale">Üstün tutulan xəritə dili</string>
     <string name="rendering_attr_showCycleRoutes_name">Velosiped marşrutlarını göstər</string>
-    <string name="osmo_auto_connect_descr">Proqram başladıldıqdan sonra avtomatik olaraq xidmətə qoşul.</string>
+    
     <string name="show_zoom_buttons_navigation_descr">Naviqasiya zamanı miqyas düymələrini göstər.</string>
     <string name="show_zoom_buttons_navigation">Miqyas düymələrini göstər</string>
     <string name="hide_from_zoom_level">Miqyas səviyyəsindən gizlət</string>
@@ -1332,8 +1328,8 @@
     <string name="access_disable_offroute_recalc">Çıxanda marşrut yenidən hesablanmasın</string>
     <string name="access_disable_wrong_direction_recalc">Əks istiqamət üçün marşrut yenidən hesablanmasın</string>
     <string name="recalculate_route">Marşrutu yenidən hesabla</string>
-    <string name="osmo_auto_send_locations_descr">Proqram başladıldıqdan sonra avtomatik olaraq səyahəti başlat və məkanları göndər.</string>
-    <string name="osmo_auto_send_locations">Səyahəti avtomatik başlat</string>
+    
+    
     <string name="use_fast_recalculation_desc">Uzun səyahətlər üçün marşrutun yalnız ilk hissəsini yenidən hesabla.</string>
     <string name="planning_trip_item">Səyahət planlaşdırma</string>
     <string name="map_viewing_item">Xəritəyə baxış</string>
@@ -1382,10 +1378,10 @@
     <string name="gpx_selection_track">%1$s
 \nİz %2$s</string>
     <string name="gpx_file_is_empty">GPX iz boşdur</string>
-    <string name="osmo_regenerate_login_ids_confirm">Şəxsi İD-inizi yenidən yaratmaq istədiyinizdən əminsiniz? Qoşulduğunuz bütün cihazlar daha sizi izləyə bilməyəcək.</string>
-    <string name="osmo_regenerate_login_ids">İstifadəçi İD-ini yenidən yarat</string>
-    <string name="osmo_session_id_share">Cihazı izləmək üçün sessiya URL-si (%1$s)</string>
-    <string name="osmo_tracker_id_share">%2$s hədəf cihazına qoşulmaq üçün, %3$s linkinə toxunun və ya izləmə İD-ini təyin edin (%1$s)</string>
+    
+    
+    
+    
     <string name="use_displayed_track_for_navigation">Naviqasiya üçün göstərilən iz istifadə etmək istəyirsiniz?</string>
     <string name="distance_measurement_clear_route">Bütün nöqtələri təmizlə</string>
     <string name="clear_destination">Təyinat nöqtəsini təmizlə</string>
@@ -1402,18 +1398,18 @@
     <string name="layer_gpx_layer">GPX iz…</string>
     <string name="background_router_service_descr">Ekran sönülü olarkən mövqeyinizi izləmək üçün OsmAnd arxa fonda işləyir.</string>
     <string name="saving_gpx_tracks">GPX izlər SD kartda saxlanır…</string>
-    <string name="osmo_group_share">%2$s qrupuna qoşulmaq üçün, qrup İD-ini təyin edin (%1$s) və ya %3$s düyməsinə toxunun.</string>
-    <string name="osmo_share_connect_device">Bu cihazı daimi izləməyə icazə ver</string>
-    <string name="osmo_track_interval">Qeydiyyat intervalı</string>
-    <string name="osmo_expire_group">Başa çatır</string>
-    <string name="osmo_connect_to_device">Cihaz ilə əlaqə</string>
-    <string name="osmo_connect_to_group">Qrup ilə əlaqə</string>
-    <string name="osmo_activity">OpenStreetMap Nəzarət</string>
-    <string name="osmo_locations_sent">%1$d məkan göndərildi (buferdə %2$d)</string>
-    <string name="osmo_conn_successfull">Bağlantı yaradıldı: %1$s</string>
-    <string name="osmo_settings_uuid">Bənzərsiz cihaz İD-i</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="use_points_as_intermediates">Nöqtələr arasındakı marşrutu hesabla</string>
-    <string name="osmo_settings_descr">Nəzarət parametrlərini tənzimləyin və şəxsi nəzarət kanalını quraşdırın.</string>
+    
     <string name="localization_pref_title">Lokallaşdırma</string>
     <string name="index_item_world_bitcoin_payments">Dünya bitcoin ödənişləri</string>
     <string name="index_item_world_basemap">Dünya icmal xəritəsi</string>
@@ -1700,14 +1696,14 @@
     <string name="file_with_name_already_exists">Bu adda fayl artıq mövcuddur.</string>
     <string name="gpx_navigation">GPX marşrut</string>
     <string name="measurement_tool">Məsafəni ölç</string>
-    <string name="add_gpx_waypoint_bottom_sheet_title">GPX yol nöqtəsi əlavə et</string>
-    <string name="shared_string_create">Yarat</string>
+    
+    
 <string name="shared_string_options">Seçimlər</string>
     <string name="enter_gpx_name">GPX fayl adı:</string>
     <string name="move_all_to_history">Hamısını tarixçəyə daşı</string>
     <string name="show_direction">Məsafə göstəricisi</string>
     <string name="sort_by">Sırala</string>
-    <string name="marker_options">İşarə seçimləri</string>
+    
     <string name="exit_without_saving">Yadda saxlamadan çıxılsın?</string>
     <string name="save_as_route_point">Marşrut nöqtələri kimi saxla</string>
     <string name="route_point">Marşrut nöqtəsi</string>
@@ -1963,7 +1959,7 @@
     <string name="fav_point_dublicate">Favorit nöqtə adı təkrardır</string>
     <string name="background_service_int">GPS oyandırma intervalı</string>
     <string name="average">Orta</string>
-    <string name="osmo_gpx_track_downloaded">OsMo izi %1$s endirildi.</string>
+    
     <string name="select_index_file_to_download">Heç bir şey tapılmadı. Regionunuzu tapa bilməsəniz, özünüz yarada bilərsiniz (bax: http://osmand.net).</string>
     <string name="osb_author_or_password_not_specified">Parametrlərdə OSM istifadəçi adı və şifrəni daxil edin</string>
     <string name="new_directions_point_dialog">Artıq müəyyənləşdirilmiş ara təyinat nöqtələriniz var.</string>
@@ -2080,7 +2076,7 @@
     <string name="routing_attr_short_way_description">Yanacağa qənaətli yoldan istifadə et (adətən daha qısa).</string>
     <string name="access_direction_haptic_feedback_descr">Hədəf nöqtənin istiqamətini titrəmə ilə göstər.</string>
     <string name="use_osm_live_routing_description">OsmAnd Live dəyişiklikləri üçün naviqasiyanı aktivləşdir.</string>
-    <string name="osmo_specify_tracker_id">İD göstərin</string>
+    
     <string name="storage_permission_restart_is_required">İndi proqramın xarici yaddaşa yazmasına icazə verilir. Proqramı əlla yenidən başlatmaq tələb olunur.</string>
     <string name="storage_directory_readonly_desc">Hazırda seçilmiş məlumat saxlama qovluğu yalnız oxunandır. Qovluq müvəqqəti olaraq daxili yaddaşa keçirildi. Zəhmət olmasa, etibarlı saxlama qovluğu seçin.</string>
     <string name="osm_live_support_region">Dəstəklənən region</string>

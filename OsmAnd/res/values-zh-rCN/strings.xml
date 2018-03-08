@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="email">電子郵件</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="email">電子郵件</string>
 	<string name="poi_dialog_opening_hours">打開</string>
 	<string name="poi_dialog_comment">評論</string>
 	<string name="poi_dialog_comment_default">改變POI</string>
@@ -286,7 +285,7 @@
 	
 	
 	<string name="voice">声音</string>
-	<string name="map_route_by_gpx">导航使用GPX</string>
+	
 	<string name="gpx_files_not_found">GPX文件中找不到/曲目目录</string>
 	<string name="layer_gpx_layer">GPX轨迹…</string>
 	<string name="error_reading_gpx">GPX数据读取错误</string>
@@ -937,18 +936,18 @@
     <string name="shared_string_save_changes">保存更改</string>
     <string name="no_map_markers_found">请通过地图添加地图标记</string>
     <string name="no_waypoints_found">未发现路径点</string>
-    <string name="osmo_specify_tracker_id">请指定 ID</string>
+    
     <string name="report">报告</string>
-    <string name="osmo_connect_to_device_tracker_id">跟踪 ID</string>
-    <string name="osmo_connect_to_group_id">群组 ID</string>
-    <string name="osmo_connect">加入</string>
-    <string name="osmo_groups">OsMo 群组</string>
-    <string name="osmo_auto_send_locations">自动开始旅程</string>
-    <string name="osmo_tracker_id">跟踪 ID</string>
-    <string name="osmo_tracker_id_descr">点击查看跟踪 ID</string>
-    <string name="osmo_connect_to_my_nickname">昵称</string>
-    <string name="osmo_share_my_location">传送位置</string>
-    <string name="osmo_plugin_name">OpenStreetMap 监控</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="shared_string_move_up">上移</string>
     <string name="shared_string_move_down">下移</string>
     <string name="finish_navigation">导航完成</string>
@@ -1222,14 +1221,14 @@
     <string name="route_calculation">路线计算</string>
     <string name="gpx_no_tracks_title">您暂时没有轨迹</string>
     <string name="gpx_no_tracks_title_folder">您也可以将轨迹添加到文件夹下</string>
-    <string name="osmo_service_running">OsMo 服务正在运行</string>
+    
     <string name="shared_string_continue">继续</string>
     <string name="shared_string_pause">暂停</string>
     <string name="gpx_logging_no_data">无数据</string>
     <string name="save_track_min_speed">最低记录速度</string>
     <string name="save_track_min_speed_descr">过滤器：设置记录点的最低速度</string>
-    <string name="osmo_share_location">分享</string>
-    <string name="osmo_pause_location">暂停</string>
+    
+    
     <string name="shared_string_notifications">通知</string>
     <string name="release_2_5">\\u2022 地图上可点击的图标
 \n 
@@ -1362,8 +1361,8 @@
     <string name="map_magnifier">地图缩放</string>
     <string name="rendering_attr_showSurfaceGrade_name">显示道路质量</string>
     <string name="rendering_attr_showSurfaces_name">显示道路表面</string>
-    <string name="osmo_not_signed_in">OsMo 登录失败</string>
-    <string name="osmo_start_service">OsMo 服务</string>
+    
+    
     <string name="map_widget_left">左侧面板</string>
     <string name="map_widget_right">右侧面板</string>
     <string name="rendering_attr_showCycleRoutes_name">显示自行车路线</string>
@@ -1381,7 +1380,7 @@
     <string name="map_widget_top">状态栏</string>
     <string name="anonymous_user">匿名用户</string>
     <string name="logged_as">以 %1$s 身份登录</string>
-    <string name="osmo_device_not_found">设备未找到</string>
+    
     <string name="speed_limit_exceed">速度限制容忍程度</string>
     <string name="rendering_category_others">其它地图属性</string>
     <string name="print_route">显示路线</string>
@@ -1393,7 +1392,7 @@
     <string name="online_map">在线地图</string>
     <string name="roads_only">仅道路</string>
     <string name="device_memory">设备内存</string>
-    <string name="osmo_auth_error_short">授权失败</string>
+    
     <string name="first_usage_item">初次使用</string>
     <string name="tips_and_tricks_descr">常见问题、最近修改和其它内容</string>
     <string name="faq_item_description">常见问题</string>
@@ -1414,7 +1413,7 @@
     <string name="local_map_names">本地名称</string>
     <string name="versions_item">版本信息</string>
     <string name="shared_string_my_location">我的位置</string>
-    <string name="osmo_enable_tracker">发送我的位置</string>
+    
     <string name="select_destination_and_intermediate_points">选择目的地</string>
     <string name="route_descr_select_destination">选择目的地</string>
     <string name="wake_on_voice_descr">（如果屏幕未点亮）在接近转弯地点时点亮屏幕</string>
@@ -1697,33 +1696,14 @@
     <string name="rendering_value_thin_name">细的</string>
     <string name="rendering_value_medium_name">中等</string>
     <string name="rendering_value_bold_name">加粗</string>
-    <string name="osmo_group_information_desc">- 创建一个群组，并请给它一个名称和填写说明 
-\n
-\n - 从应用程序创建的群组只是简单的类型，在网站 https://osmo.mobi/g/new 了解更多 
-\n
-\n - 透过这个网站，您可以管理群组、地点追踪和所有可用标点 
-\n
-\n - 如果这不是 POI 群组，我们不赞同使用的群组只有一个用户 
-\n
-\n - 私人群组仅限于 8 人 
-\n
-\n - 详细的条款及条件一直在网站 OsMo.mobi 上 
-\n
-\n - 如果您需要特别的条件 - 请连络支持︰osmo.mobi@gmail.com</string>
-    <string name="osmo_no_connection_msg">无法连接到 OsMo 服务器：
-\n - 检查您的互联网连接； 
-\n- 检查设置； 
-\n- 查看我们的 Twitter：https://twitter.com/OsMomobi</string>
+    
+    
     <string name="anonymous_user_hint">匿名用户不能：
 \n- 创建群组；
 \n- 以服务器同步群组和设备；
 \n- 在网站上的个人仪表板管理群组和设备。</string>
-    <string name="osmo_auto_send_locations_descr">自动开始旅行并在应用程序启动后发送位置</string>
-    <string name="osmo_plugin_description">这个插件部分提供了 OpenStreetMap 监控功能，请参阅 http://osmo.mobi。 
-\n
-\n您可以即时追踪所有参与群组的设备。具有各种选项用于连接期间追踪或持续的追踪。您还可以查看上传到您所属群组的航点和轨迹。 
-\n
-\n经过几个月不移除该群组，使其符合您在 OsMo.mobi 网站上创建的群组规则</string>
+    
+    
     <string name="storage_permission_restart_is_required">现在应用程序允许写入外部存储。需要手动重新启动应用程序。</string>
     <string name="storage_directory_readonly_desc">当前所选的数据存储文件夹是只读的。存储文件夹暂时切换到内部存储。请选择有效的存储目录。</string>
     <string name="osm_live_region_desc">你捐款的一部分将发送给 OSM，用户将更改提交到该地区地图</string>
@@ -1830,7 +1810,7 @@
     <string name="welcome_select_region">要正确地反映您的交通标志和法规，请选择您驾驶的地区：</string>
     <string name="welcome_text">OsmAnd 提供了全球的离线地图浏览和全球的离线导航 ！</string>
     <string name="osm_changes_added_to_local_edits">OSM 更改添加到本地的变更集</string>
-    <string name="osmo_grop_name_length_alert">组名称至少应有 3 个字符 ！</string>
+    
     <string name="local_recordings_delete_all_confirm">要删除 %1$d 个注解。是否确定？</string>
     <string name="local_osm_changes_upload_all_confirm">你将要上传 %1$d 个更改到 OSM。是否确定？</string>
     <string name="delay_to_start_navigation_descr">指定等待时间以便继续留在航路规划屏幕</string>
@@ -1986,8 +1966,8 @@
     <string name="rendering_value_bicycle_name">自行车</string>
     <string name="rendering_value_pedestrian_name">行人</string>
     <string name="rendering_attr_coloredBuildings_name">用颜色区分建筑物类型</string>
-    <string name="osmo_invite">邀请…</string>
-    <string name="osmo_leave_confirmation_msg">你想要离开群组 %1$s？</string>
+    
+    
     <string name="continue_navigation">继续导航</string>
     <string name="pause_navigation">暂停导航</string>
     <string name="keep_navigation_service">保持</string>
@@ -2010,15 +1990,13 @@
     <string name="rendering_attr_lessDetailed_name">较少细节</string>
     <string name="rendering_attr_hideAccess_name">访问限制</string>
     <string name="rendering_attr_showAccess_name">显示访问限制和收费</string>
-    <string name="osmo_auth_error">OsMo 授权时遇到错误：%1$s。
-\n 这可能是服务临时当机或是您的注册已过期。
-\n 您想要继续进行新的注册吗？</string>
-    <string name="osmo_group_by_invite">通过邀请进入</string>
-    <string name="osmo_group_information">请在创建群组之前，仔细阅读！</string>
-    <string name="osmo_gpx_points_downloaded">OsMo 标点 %1$s 已下载。</string>
-    <string name="osmo_auto_connect_descr">在应用程序启动后自动连接到服务</string>
-    <string name="osmo_auto_connect">自动连接</string>
-    <string name="osmo_gpx_track_downloaded">OsMo 轨迹 %1$s 已下载。</string>
+    
+    
+    
+    
+    
+    
+    
     <string name="no_index_file_to_download">下载找不到，请检查您的互联网连接。</string>
     <string name="select_index_file_to_download">什么也没有找到。如果您无法找到您所在的地区，你可以自己制作（参考 http://osmand.net）。</string>
     <string name="none_selected_gpx">没有选定的 GPX 文件。选取并按住现有的轨迹。</string>
@@ -2058,64 +2036,64 @@
     <string name="gpx_selection_track">%1$s 
 \n轨迹 %2$s</string>
     <string name="gpx_file_is_empty">GPX 轨迹为空</string>
-    <string name="osmo_user_joined">用户 %1$s 已加入群组 %2$s</string>
-    <string name="osmo_user_left">用户 %1$s 离开了群组 %2$s</string>
-    <string name="osmo_show_group_notifications">显示群组通知</string>
-    <string name="osmo_show_group_notifications_descr">在用户加入或离开群组时显示提示消息</string>
-    <string name="osmo_follow">关注</string>
-    <string name="osmo_sign_in">登录</string>
-    <string name="osmo_create_groups_confirm">为了创建群组您需要注册成为 OsMo 的用户。</string>
-    <string name="osmo_credentials_not_valid">您的 OsMo 凭证不是有效的。</string>
-    <string name="osmo_regenerate_login_ids_confirm">你确定重新生成个人 id？所有连接到你的设备将无法再跟踪你。</string>
-    <string name="osmo_regenerate_login_ids">重新生成用户 id</string>
-    <string name="osmo_cancel_moving_target">取消移动目标</string>
-    <string name="osmo_center_location">在屏幕中心</string>
-    <string name="osmo_set_moving_target">设置为移动目标</string>
-    <string name="osmo_use_server_name">已注册的名称</string>
-    <string name="osmo_user_name">用户</string>
-    <string name="osmo_edit_device">更改用户属性</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="osmo_edit_color">显示颜色</string>
-    <string name="osmo_group_info">信息</string>
-    <string name="osmo_group">OsMo 群组</string>
-    <string name="osmo_group_share">为了连接到群组 %2$s，指定组 id (%1$s) 或点击 %3$s。</string>
-    <string name="osmo_share_connect_device">允许永久追踪此设备</string>
-    <string name="osmo_share_current_session">在浏览器中共享当前会话</string>
-    <string name="osmo_session_not_available">会话不可用，请检查“发送定位”已打开。</string>
-    <string name="osmo_share_session">共享会话</string>
-    <string name="osmo_session_id_share">用会话 url 来跟踪设备 (%1$s)</string>
-    <string name="osmo_tracker_id_share">为了连接到目标设备 %2$s，点击链接 %3$s 或指定跟踪 id (%1$s)</string>
-    <string name="osmo_track_interval">记录间隔</string>
-    <string name="osmo_track_interval_descr">选择发送定位的时间间隔</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="int_days">天</string>
     <string name="osmo_connect_menu">连接</string>
-    <string name="osmo_expire_group">截止于</string>
+    
     <string name="osmo_group_description">描述</string>
-    <string name="osmo_group_policy">政策</string>
-    <string name="osmo_connect_to_device_name">用户名称</string>
-    <string name="osmo_group_name">群组名称</string>
-    <string name="osmo_connect_to_device">与设备连接</string>
-    <string name="osmo_connect_to_group">以群组连接</string>
-    <string name="osmo_create_group">建立群组</string>
-    <string name="osmo_server_operation_failed">OsMo 服务器操作失败</string>
-    <string name="osmo_activity">正在监控 OpenStreetMap</string>
-    <string name="osmo_control">OsMo 快速进入</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">小时前</string>
     <string name="minutes_ago">分钟前</string>
     <string name="seconds_ago">秒前</string>
-    <string name="osmo_connected_devices">已连接的设备</string>
-    <string name="osmo_session_token">会话令牌: %1$s</string>
-    <string name="osmo_auth_pending">正在等待授权…</string>
-    <string name="osmo_locations_sent">位置已发送 %1$d（缓冲区 %2$d）</string>
-    <string name="osmo_conn_successfull">连接已建立: %1$s</string>
-    <string name="osmo_io_error">OsMo 连接问题：</string>
-    <string name="osmo_settings_uuid">独特的设备 id</string>
+    
+    
+    
+    
+    
+    
+    
     <string name="use_points_as_intermediates">计算两点之间的路线</string>
-    <string name="osmo_mode_restart">重新启动 OsMo 会话</string>
-    <string name="osmo_mode_on">停止 OsMo 会话</string>
-    <string name="osmo_mode_off">启动 OsMo 会话</string>
-    <string name="osmo_settings_debug">调试信息</string>
-    <string name="osmo_settings_descr">配置监视设置和安装个人监测频道</string>
-    <string name="osmo_settings">OsMo</string>
+    
+    
+    
+    
+    
+    
     <string name="always_center_position_on_map">总是在中心显示位置</string>
     <string name="misc_pref_title">杂项</string>
     <string name="localization_pref_title">本地化</string>

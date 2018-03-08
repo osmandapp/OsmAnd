@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="recording_context_menu_show">اظهر</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="recording_context_menu_show">اظهر</string>
     <string name="av_def_action_picture">التقط صورة</string>
     
     <string name="av_def_action_video">تسجيل الفيديو</string>
@@ -931,7 +930,7 @@
 	<string name="version_index_is_not_supported">اصدار المنتج غير مدعوم</string>
 	<string name="poi_error_unexpected_template">حدث خطأ غير متوقع أثناء ممارسة العمل {0}.</string>
 	<string name="show_zoom_buttons_navigation">أظهر أزرار التقريب</string>
-    <string name="osmo_settings_debug">معلومات التنقيح</string>
+    
     <string name="lang_zh">الصينية</string>
     <string name="lang_en">الإنجليزية</string>
 	<string name="lang_bs">البوسنية</string>
@@ -972,7 +971,7 @@
 	
 	
 	
-    <string name="osmo_share_current_session">شارك الجلسة الحالية في المتصفح</string>
+    
     <string name="hours_ago">ساعة</string>
     <string name="minutes_ago">دقيقة</string>
     <string name="seconds_ago">ثانية</string>
@@ -1065,7 +1064,7 @@
 	<string name="welcome_header">أهلا</string>
     <string name="current_route">الطريق الحالي</string>
     <string name="mark_to_delete">اختر للحذف</string>
-	<string name="osmo_grop_name_length_alert">اسم المجموعة ينبغي أن يكون 3 أحرف على الأقل!</string>
+	
 	<string name="confirmation_to_clear_history">هل ترغب في حذف السجل الزمني؟</string>
     <string name="shared_string_go">ذهاب</string>
 	<string name="osmand_parking_overdue">تأخر</string>
@@ -1227,7 +1226,7 @@
 	<string name="map_widget_right">اللوحة اليمنى</string>
 	<string name="map_widget_left">اللوحة اليسرى</string>
 	<string name="search_radius_proximity">ضمن</string>
-    <string name="osmo_device_not_found">لم يتم العثور على الجهاز</string>
+    
     <string name="anonymous_user">مستخدم مجهول</string>
     <string name="logged_as">سجل الدخول بـ %1$s</string>
 	<string name="speed_limit_exceed">الحد المسموح للسرعة</string>
@@ -1265,8 +1264,8 @@
     <string name="rendering_value_bicycle_name">دراجة</string>
     <string name="rendering_value_pedestrian_name">مشاة</string>
     <string name="rendering_attr_coloredBuildings_name">تلوين المباني حسب النوع</string>
-    <string name="osmo_invite">دعوة…</string>
-    <string name="osmo_specify_tracker_id">الرجاء تحديد معرف ID</string>
+    
+    
     <string name="continue_navigation">مواصلة الملاحة</string>
     <string name="pause_navigation">توقيف الملاحة مؤقتا</string>
  	<string name="keep_navigation_service">البقاء</string>
@@ -1288,7 +1287,7 @@
     <string name="rendering_attr_moreDetailed_name">مزيد من التفاصيل</string>
     <string name="rendering_attr_lessDetailed_name">تفاصيل أقل</string>
     <string name="rendering_attr_showSurfaceGrade_name">إظهار جودة الطريق</string>
-    <string name="osmo_group_by_invite">أدخل بدعوة</string>
+    
     <string name="no_index_file_to_download">لم يتم العثور على تنزيلات، الرجاء التحقق من ربطك بالإنترنت.</string>
     <string name="none_selected_gpx">لم يتم تحديد ملفات GPX. لتحديد ملف اضغط مطولا على المسار المتاح.</string>
     <string name="local_index_select_gpx_file">اختر للعرض</string>
@@ -1337,13 +1336,13 @@
 	<string name="way_alarms">تنبيهات مرورية</string>
 	<string name="save_track_to_gpx_globally_headline">تسجيل المسار حسب الطلب</string>
 	<string name="download_additional_maps">حمّل الخرائط المفقودة %1$s (%2$d MB)؟</string>
-    <string name="osmo_leave_confirmation_msg">هل ترغب في مغادرة المجموعة %1$s؟</string>
+    
     <string name="rendering_attr_hideAccess_name">قيود الدخول</string>
     <string name="rendering_attr_showAccess_name">عرض قيود الدخول</string>
     <string name="rendering_attr_showSurfaces_name">عرض سطح الطريق</string>
     <string name="rendering_attr_showCycleRoutes_name">عرض الطرق الدائرية</string>
-    <string name="osmo_group_information">من فضلك إقرأ قبل إنشاء مجموعة!</string>
-    <string name="osmo_auto_connect">اتصال تلقائي</string>
+    
+    
     <string name="delay_navigation_start">ابدأ التوجيه دروان بدوران تلقائيا</string>
     <string name="gpx_info_subtracks">مسارات فرعية: %1$s</string>
 	<string name="gpx_info_waypoints">وجهات: %1$s</string>
@@ -1368,30 +1367,30 @@
     <string name="gpx_selection_track">%1$s
 \nمسار %2$s</string>
     <string name="gpx_file_is_empty">مسار GPX فارغ</string>
-    <string name="osmo_user_joined">المستخدم %1$s التحق بالمجموعة %2$s</string>
-    <string name="osmo_user_left">المستخدم %1$s غادر المجموعة %2$s</string>
-    <string name="osmo_show_group_notifications">عرض إشعارات المجموعة</string>
-    <string name="osmo_follow">تتبع</string>
-    <string name="osmo_sign_in">تسجيل الدخول</string>
-    <string name="osmo_center_location">توسيط على الشاشة</string>
-    <string name="osmo_connect_to_my_nickname">اسمي المستعار</string>
-    <string name="osmo_user_name">مستخدم</string>
-	<string name="osmo_edit_device">تعديل خصاص المستخدم</string>
+    
+    
+    
+    
+    
+    
+    
+    
+	
     <string name="osmo_edit_color">لون العرض</string>
-    <string name="osmo_group_info">معلومات</string>
-    <string name="osmo_share_connect_device">السماح بتتبع دائم لهذا الجهاز</string>
-    <string name="osmo_track_interval">الفاصل الزمني للتسجيل</string>
+    
+    
+    
 	<string name="int_days">أيام</string>
     <string name="osmo_connect_menu">اتصال</string>
-    <string name="osmo_expire_group">تنتهي في</string>
+    
     <string name="osmo_group_description">وصف</string>
-    <string name="osmo_group_policy">سياسة</string>
-    <string name="osmo_connect_to_device_name">اسم المستخدم</string>
-    <string name="osmo_group_name">اسم المجموعة</string>
-    <string name="osmo_connect_to_device">الربط مع جهاز</string>
-    <string name="osmo_connect_to_group">الربط مع مجموعة</string>
-    <string name="osmo_connect">اتصال بـ</string>
-    <string name="osmo_create_group">إنشاء مجموعة</string>
+    
+    
+    
+    
+    
+    
+    
     <string name="use_points_as_intermediates">حساب الطريق بين النقاط</string>
     <string name="voice_pref_title">صوت</string>
     <string name="misc_pref_title">متنوع</string>
@@ -1484,7 +1483,7 @@
 	<string name="plugin_nautical_name">عرض الخرائط البحرية</string>
 	<string name="plugin_ski_name">عرض خريطة التزلج</string>
 	<string name="rendering_attr_pisteRoutes_name">منحدرات تزلج</string>
-	<string name="osmo_auth_error_short">فشل الحصول على صلاحية</string>
+	
     <string name="index_item_world_ski">خريطة التزلج العالمية</string>
     <string name="index_item_world_seamarks">خريطة العلامات البحرية العالمية</string>
 	<string name="amenity_type_transportation">نقل</string>
@@ -1497,7 +1496,7 @@
 	<string name="maps_could_not_be_downloaded">لم يمكن تحميل هذه الخريطة</string>
 	<string name="download_type_to_filter">اكتب للتصفية</string>
 	<string name="voices">المداخلات الصوتية</string>
-	<string name="map_route_by_gpx">الملاحة عن طريق GPX</string>
+	
 	<string name="gpx_files_not_found">لا يوجد أي ملف GPX في مجلد tracks</string>
 	<string name="error_reading_gpx">خطأ في قراءة بيانات GPX</string>
 	<string name="vector_data">خرائط متجهية بدون اتصال</string>
@@ -1601,7 +1600,7 @@
     <string name="no_map_markers_found">الرجاء إضافة علامات الخريطة عن طريق الخريطة</string>
     <string name="no_waypoints_found">لم يتم العثور على نقاط الطريق</string>
     <string name="report">التقرير</string>
-    <string name="osmo_groups">مجموعات أوسمو</string>
+    
     <string name="storage_permission_restart_is_required">سمح الآن للتطبيق بالكتابة على وحدة التخزين الخارجية. الرجاء إعادة تشغيله يدويا.</string>
     <string name="finish_navigation">إنهاء الملاحة</string>
     <string name="avoid_road">تجنب الطريق</string>
@@ -1676,26 +1675,19 @@
     <string name="access_autoannounce_period_descr">اقل مهلة بين الاعلانات.</string>
     <string name="access_map_linked_to_location">الخريطة مرتبطة بالموقع</string>
     <string name="rendering_value_bold_name">عريض</string>
-    <string name="osmo_group_information_desc">-إنشاء فريق الرجاء إعطائها اسماً والتعبئة في الوصف
-\n-من مجموعة التطبيق يتم إنشاؤها فقط مع نوع بسيط، اقرأ المزيد في https://osmo.mobi/g/new الموقع
-\n-من خلال موقع على شبكة الإنترنت يمكنك إدارة مجموعة، لوضع مسارات ونقاط كل المتاحة
-\n-لا نؤيد استخدام مستخدم واحد فقط في المجموعة، إذا كان هذا هو ليس مجموعة البوي
-\n-مجموعات خاصة تقتصر على 8 أشخاص
-\n-بالتفصيل شروط ودائما في موقع OsMo.mobi
-\n-إذا كنت بحاجة إلى شروط خاصة
-\n-الرجاء الاتصال بالدعم: osmo.mobi@gmail.com</string>
-    <string name="osmo_no_connection_msg">تعذر الاتصال بالخادم OsMo:\n- تحقق من اتصالك بالإنترنت\n- تحقق من الإعدادات\n- تفقد تويتر الخاص بنا : https://twitter.com/OsMomobi</string>
+    
+    
     <string name="anonymous_user_hint">مستخدم مجهول لا يمكنه :
 - إنشاء مجموعة;
 - مزامنة المجموعات والأجهزة مع السيرفر;
 - إدارة المجموعات والأجهزة من خلال لوحة تحكم خاصة على الموقع.</string>
-    <string name="osmo_auto_send_locations_descr">ابدأ الرحلة و قم بإرسال المواقع تلقائيا بعد تشغيل التطبيق.</string>
-    <string name="osmo_auto_send_locations">ابدا الرحلة تلقائيا</string>
-    <string name="osmo_connect_to_device_tracker_id">معرف المتعقب</string>
-    <string name="osmo_connect_to_group_id">معرف المجموعة</string>
-    <string name="osmo_tracker_id">هوية المتعقب</string>
-    <string name="osmo_tracker_id_descr">انقر لعرض معرف المقتفي.</string>
-    <string name="osmo_share_my_location">إرسال الموقع</string>
+    
+    
+    
+    
+    
+    
+    
     <string name="hello">تطبيق الملاحة أوسماند OSMAnd</string>
     <string name="update_poi_error_loading">حدث خطأ أثناء تحميل البيانات من السيرفر</string>
     <string name="context_menu_item_update_map_confirm">تحديث البيانات المحلية عبر الإنترنت ؟</string>
@@ -1797,11 +1789,7 @@
     <string name="map_widget_magnetic_bearing">تأثير مغناطيسي</string>
     <string name="coords_format">نمط الاحداثيات</string>
     <string name="night">ليل</string>
-    <string name="osmo_plugin_description">هذه الاضافة تتيح جزئيا وظيفة المراقبة لـ OpenStreetMap، انظر https://osmo.mobi
-\n
-\nيمكنك تعقب جميع أجهزة مجموعة مشاركة في الوقت الفعلي.يمكنك أيضا مشاهدة النقاط والمسارات التي تم رفعها في المجموعة المنضم اليها.
-\n
-\nالمجموعة لم يتم حذفها منذ أشهر، اجعلها تتماشى مع القوانين التي انشئت بها المجموعات على الموقع OsMo.mobi</string>
+    
     <string name="release_2_3">/022 OSM على المباشر. ادعم مساهمي الخرائط والمطورين وحدث الخرائط كل ساعة.
 \n
 \n • العلامات الموضعية على الخريطة. طريقة جديدة لتحديد الاماكن على الخريطة بسرعة.
@@ -1839,7 +1827,7 @@
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
     <string name="active_markers">العلامات المفعلة</string>
     <string name="map_markers">العلامات على الخريطة</string>
-    <string name="osmo_start_service">خدمة أوسمو OsMo</string>
+    
     <string name="routing_attr_avoid_borders_name">منع تخطي الحدود</string>
     <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل.</string>
     <string name="search_categories">فئات</string>
@@ -1852,12 +1840,12 @@
     <string name="av_locations_descr">ملف GPX مرفوق بملاحظات عن المواقع.</string>
     <string name="av_locations">المواقع</string>
     <string name="gps_network_not_enabled">إن خدمة تحديد المواقع ليست مفعلة. هل تريد تشغيلها ؟</string>
-    <string name="osmo_track_interval_descr">اختر الفاصل الزمني لإرسال بيانات الموقع.</string>
+    
     <string name="update_now">حدث الآن</string>
     <string name="last_map_change">آخر تغيير طرأ على الخريطة : %s</string>
     <string name="available_maps">الخرائط الموجودة</string>
     <string name="access_shared_string_navigate_up">إنتقال للأعلى</string>
-    <string name="osmo_plugin_name">OsMo للتتبع</string>
+    
     <string name="osm_user_stat">التعديلات %1$s ، الرتبة %2$s ، مجموع التعديلات %3$s</string>
     <string name="map_marker_1st">العلامة الأولى للخريطة</string>
     <string name="map_marker_2nd">العلامة الثانية للخريطة</string>
@@ -1956,17 +1944,17 @@
     <string name="proxy_host_title">وكيل البروكسي</string>
     <string name="proxy_port_title">منفذ وكيل البروكسي</string>
     <string name="proxy_port_descr">رقم منفذ البروكسي (مثلا 8118).</string>
-    <string name="osmo_not_signed_in">فشل تسجيل الدخول إلى خدمة OsMo</string>
-    <string name="osmo_auto_connect_descr">الربط بالخدمة تلقائياً بعد بدء تشغيل التطبيق.</string>
-    <string name="osmo_regenerate_login_ids">إعادة إنشاء معرف ID المستخدم</string>
+    
+    
+    
     <string name="av_video_quality_descr">حدد جودة الفيديو.</string>
     <string name="favorite_category_add_new">أضفة جديدة</string>
     <string name="shared_string_undo_all">إلغاء كلي</string>
     <string name="av_video_quality">جودة مخرج الفيديو</string>
     <string name="osm_edit_deleted_poi">حذف OSM POI</string>
-    <string name="osmo_use_server_name">الإسم المسجل</string>
-    <string name="osmo_auth_pending">في انتظار الترخيص …</string>
-    <string name="osmo_settings">OsMO</string>
+    
+    
+    
     <string name="download_wikipedia_maps">ويكيبيديا</string>
     <string name="voice_is_not_available_title">لم يتم تحديد صوت للتوجيه</string>
     <string name="fast_route_mode">أسرع طريق</string>
@@ -1978,7 +1966,7 @@
     <string name="search_poi_location">جاري البحث عن الإشارة …</string>
     <string name="access_from_map">الدخول عبر الخريطة</string>
     <string name="show_on_start">إظهار عند البدء</string>
-    <string name="osmo_enable_tracker">إرسل نقاط وضعيتي</string>
+    
     <string name="map_widget_bearing">تاثير نسبي</string>
     <string name="download_files_question_space_with_temp">تنزيل {0} ملف؟
  مساحة التخزين المستخدمة هي {3} مب مؤقتة، {1} مب دائمة.
@@ -2054,9 +2042,9 @@
     <string name="layer_osm_bugs">ملاحظات OSM (على الإنترنت)</string>
     <string name="poi_context_menu_delete">حذف ال POI</string>
     <string name="context_menu_item_search_transport">البحث عن وسائل النقل العام</string>
-    <string name="osmo_create_groups_confirm">من أجل إنشاء مجموعات يجب أن تكون مستخدما مسجلا في OsMo.</string>
-    <string name="osmo_set_moving_target">تعيين كهدف متنقل</string>
-    <string name="osmo_group">مجموعة أوسمو OsMo</string>
+    
+    
+    
     <string name="show_something_on_map">اظهر %1$s على الخريطة</string>
     <string name="release_2_4">/022 باحث نصوص جديد مجاني وكفئ
 \n
@@ -2151,30 +2139,30 @@
     <string name="proxy_host_descr">ضبط اسم مضيف البروكسي (مثال 127.0.0.1).</string>
     <string name="map_preferred_locale_descr">اللغة المفضلة للمسميات على الخريطة (إذا لم تكن متوفرة ستتحول إلى الإنجليزية أو الأسماء المحلية).</string>
     <string name="rendering_attr_hideWoodScrubs_name">خشب وشجيرات</string>
-    <string name="osmo_gpx_points_downloaded">تم تنزيل %1$s من نقاط أوسمو.</string>
-    <string name="osmo_gpx_track_downloaded">تم تنزيل %1$s من مسار OsMo.</string>
-    <string name="osmo_show_group_notifications_descr">إظهار إشعارات عند انضمام مستخدم أو تركه المجموعة.</string>
-    <string name="osmo_credentials_not_valid">معلومات OsMo الخاصة بك غير صالحة.</string>
-    <string name="osmo_regenerate_login_ids_confirm">هل أنت متأكدة من تجديد هويتك الشخصية؟ جميع الأجهزة المتصلة بحسابك لن تكون قادرة على تتبعك بعد الآن.</string>
-    <string name="osmo_cancel_moving_target">"إلغاء تحريك الهدف "</string>
-    <string name="osmo_group_share">للإتصال بالمجموعة %2$s، حدد هوبة المجموعة (%1$s) أو انقر %3$s.</string>
-    <string name="osmo_session_not_available">الحصة غير متوفرة، الرجاء التأكد من أن \'ارسال المواقع \"مفعل.</string>
-    <string name="osmo_share_session">مشاركة الحصة</string>
-    <string name="osmo_session_id_share">رابط الحصة لتتبع جهاز (%1$s)</string>
-    <string name="osmo_tracker_id_share">"من أجل توصيل الجهاز %2$s، انقر على الرابط %3$s  أو حدد هوية المتعقب (%1$s)"</string>
-    <string name="osmo_server_operation_failed">"فشلت عملية سيرفر OsMo "</string>
-    <string name="osmo_activity">مراقبة OpenStreetMap</string>
-    <string name="osmo_control">"الوصول السريع لـ OsMo "</string>
-    <string name="osmo_connected_devices">الأجهزة المتصلة</string>
-    <string name="osmo_session_token">حصة مأخوذة: %1$s</string>
-    <string name="osmo_locations_sent">المواقع المرسلة %1$d (في الانتظار %2$d )</string>
-    <string name="osmo_conn_successfull">اتصال محقق: %1$s</string>
-    <string name="osmo_io_error">مشكلة اتصال بـآوسمو:</string>
-    <string name="osmo_settings_uuid">هوية جهاز خاصة</string>
-    <string name="osmo_mode_restart">إعادة تشغيل حصة آوسمو</string>
-    <string name="osmo_mode_on">إيقاف حصة آوسمو</string>
-    <string name="osmo_mode_off">بدء حصة آوسمو</string>
-    <string name="osmo_settings_descr">ضبط إعدادات المراقبة وإعداد قناة مراقبة شخصية.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="lang_hu_formal">الهنغارية (الرسمية)</string>
     <string name="routing_attr_avoid_stairs_name">تجنب الأدراج</string>
     <string name="routing_attr_avoid_stairs_description">تجنب الأدراج.</string>
@@ -2198,11 +2186,7 @@
     <string name="missing_write_external_storage_permission">التطبيق ليس لديه إذن لاستخدام بطاقة الأس دي</string>
     <string name="save_poi_without_poi_type_message">هل تريد حقا حفظ POI بدون تحديد نوعه؟</string>
     <string name="dashboard_or_drawer_description">هناك خيار جديد لتحكم بشكل مرن بالتطبيق عبر لوحة القياس أو القائمة الثابتة. اختيارك يمكن تغييره دائما في إعدادات لوحة القياس.</string>
-    <string name="osmo_auth_error">خطأ آوسمو في التصريح: %1$s.
-
-قد يكون عطل مؤقت في الخدمة أو تسجيلك انتهى.
-
-هل تريد المتابعة بتسجيل جديد؟</string>
+    
     
     <string name="osmand_routing_experimental">ملاحة OsmAnd دون نت ميزة تجريبية وهي لا تعمل لمسافات تزيد عن 20 كيلومترا.
 
@@ -2374,15 +2358,15 @@
     <string name="shared_string_recorded">مسجل</string>
     <string name="shared_string_record">تسيجل</string>
     <string name="gpx_logging_no_data">لا توجد بيانات</string>
-    <string name="osmo_pause_location">إيقاف مؤقت</string>
-    <string name="osmo_service_running">خدمة OsMo مشغلة</string>
+    
+    
     <string name="trip_rec_notification_settings">تفعيل تسجيل بداية سريعة</string>
     <string name="trip_rec_notification_settings_desc">عرض اشعار نظامي للسماح ببدء تسجيل الرحلة.</string>
     <string name="shared_string_notifications">الإشعارات</string>
     <string name="gpx_no_tracks_title_folder">يمكنك أيضا إضافة مسارات إلى المجلد</string>
     <string name="gpx_add_track">إضافة مسار</string>
     <string name="gpx_appearance">المظهر</string>
-    <string name="osmo_share_location">مشاركة</string>
+    
     <string name="upload_poi">رفع POI</string>
     <string name="route_calculation">حساب المسار</string>
     <string name="gpx_no_tracks_title">ليس لديك مسارات بعد</string>
@@ -2724,19 +2708,19 @@
     <string name="retry">اعد المحاولة</string>
 <string name="measurement_tool_action_bar">تصفح الخريطة واضف نقاط</string>
     <string name="measurement_tool">قياس المسافة</string>
-    <string name="add_gpx_waypoint_bottom_sheet_title">إضافة إحداثية وجهة gpx</string>
-    <string name="shared_string_create">إنشاء</string>
+    
+    
 <string name="none_point_error">الرجاء إضافة نقطة واحدة على الأقل.</string>
     <string name="enter_gpx_name">اسم ملف GPX:</string>
     <string name="show_on_map_after_saving">إظهار على الخريطة بعد الحفظ</string>
-    <string name="add_route_point">إضافة نقطة مسار</string>
+    
     <string name="add_waypoint">إضافة إحداثية</string>
     <string name="save_gpx_waypoint">حفظ إحداثية GPX</string>
     <string name="save_route_point">حفظ نقطة مسار</string>
     <string name="waypoint_one">إحداثية 1</string>
     <string name="route_point_one">نقطة المسار 1</string>
-<string name="measurement_tool_altitude">الارتفاع: %1$s</string>
-    <string name="measurement_tool_speed">السرعة: %1$s</string>
+
+    
     <string name="line">خط</string>
     <string name="save_as_route_point">حفظ كنقاط مسار</string>
     <string name="save_as_line">حفظ كخط</string>
@@ -2771,10 +2755,10 @@
     <string name="yesterday">أمس</string>
     <string name="last_seven_days">آخر 7 أيام</string>
     <string name="this_year">هذه السنة</string>
-    <string name="widget">ويدجت</string>
-    <string name="top_bar">الشريط العلوي</string>
+    
+    
     <string name="move_all_to_history">نقل الكل إلى السجل الزمني</string>
-    <string name="build_route">بناء الطريق</string>
+    
     <string name="show_direction">مؤشر المسافة</string>
     <string name="sort_by">فرز حسب</string>
     <string name="do_not_use_animations">عدم استخدام الرسوم المتحركة</string>
@@ -2812,7 +2796,7 @@
     <string name="routing_attr_avoid_ice_roads_fords_description">تجنب الطرق الجليدية والمعابر.</string>
     <string name="make_round_trip_descr">إضافة نسخة نقطة البداية كوجهة.</string>
     <string name="make_round_trip">القيام برحلة ذهاب وإياب</string>
-    <string name="shared_string_navigate">تنقل</string>
+    
     <string name="osn_modify_dialog_error">حدث استثناء: لم يتم تعديل الملاحظة</string>
     <string name="osn_modify_dialog_title">تعديل ملاحظة</string>
     <string name="context_menu_item_modify_note">تعديل ملاحظة OSM</string>
@@ -2841,7 +2825,7 @@
     <string name="import_file">استيراد ملف</string>
 	<string name="tap_on_map_to_hide_interface_descr">نقرة على الخريطة ستفعل أزرار التحكم والويدجت.</string>
     <string name="tap_on_map_to_hide_interface">وضع الشاشة الكاملة</string>
-    <string name="show_on_top_bar">اظهار في الشريط العلوي</string>
+    
     <string name="mark_passed">تعيين كمتجاوَز</string>
     <string name="empty_state_osm_edits">إنشاء أو تعديل عناصر OSM</string>
     <string name="empty_state_osm_edits_descr">إنشاء أو تعديل OSM POI، فتح أو التعليق على ملاحظات OSM والمساهمة بملفات GPX مسجلة.</string>

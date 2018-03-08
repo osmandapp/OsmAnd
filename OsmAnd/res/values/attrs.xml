@@ -48,7 +48,6 @@
 		
 		<attr name="size_progress_bar" format="reference"/>
 		<attr name="dash_parking_bg" format="reference"/>
-		<attr name="osmo_header_background" format="color"/>
 		<attr name="dashboard_subheader_text_color" format="color"/>
 		<attr name="dashboard_general_button_text_color" format="color"/>
 

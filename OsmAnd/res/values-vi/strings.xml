@@ -308,7 +308,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="voice">Giọng nói</string>
 	<string name="no_vector_map_loaded">Chưa đọc được bản đồ vector</string>
 	
-	<string name="map_route_by_gpx">Tìm đường bằng tập tin GPX</string>
+	
 	<string name="gpx_files_not_found">Tập tin GPX không tìm thấy trong thư mục /track</string>
 	<string name="layer_gpx_layer">Theo dõi GPX…</string>
 	<string name="error_reading_gpx">Gặp lỗi khi đọc tập tin GPX</string>

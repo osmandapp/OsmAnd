@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="download_hillshade_maps">Տարածքի մգեցված ռելիեֆով քարտեզներ (Hillshades)</string>
     
     <string name="local_indexes_cat_av">Ձայնա/Տեսանյութեր</string>
@@ -153,7 +152,7 @@
     <string name="context_menu_item_modify_note">Ձևափոխել OSM նշումը</string>
     <string name="make_round_trip_descr">Ավելացնել սկզբնակետի պատճեն որպես նպատակակետ։</string>
     <string name="make_round_trip">Կլոր ուղևորություն</string>
-    <string name="shared_string_navigate">Նավարկել</string>
+    
     <string name="shared_string_markers">Մարկերներ</string>
     <string name="coordinates_format">Կոորդինատների ձեւաչափը</string>
     <string name="use_system_keyboard">Օգտագործել համակարգի ստեղնաշարը</string>
@@ -383,9 +382,9 @@
     <string name="gpx_no_tracks_title_folder">Դուք նաև կարող եք ավելացնել տրեկները թղթապանակ</string>
     <string name="gpx_add_track">Ավելացնել տրեկը</string>
     <string name="gpx_appearance">Տեսակ</string>
-    <string name="osmo_share_location">Կիսվել</string>
-    <string name="osmo_pause_location">Դադար</string>
-    <string name="osmo_service_running">OsMo աշխատում է</string>
+    
+    
+    
     <string name="shared_string_notifications">Ծանուցումներ</string>
     <string name="shared_string_continue">Շարունակել</string>
     <string name="shared_string_pause">Դադար</string>
@@ -522,23 +521,23 @@
     <string name="rendering_value_bold_name">Թավատառ</string>
     <string name="no_map_markers_found">Խնդրում ենք ավելացնել մարկերներ քարտեզի վրա</string>
     <string name="no_waypoints_found">Ոչ մի ճանապարհային նշան չի գտնվել</string>
-    <string name="osmo_specify_tracker_id">խնդրում եմ նշեք ID</string>
+    
     <string name="anonymous_user_hint">Անանուն օգտվողը չի կարող՝
 \n-ստեղծել խմբեր;
 \n-խմբերի և սարքերի համաժամեցում սերվերի հետ;
 \n-կառավարել խմբերը և սարքերը անձնական էջում:</string>
     <string name="report">Հաշվետվությունում</string>
-    <string name="osmo_connect_to_device_tracker_id">Տրեկերի ID</string>
-    <string name="osmo_connect_to_group_id">Խմբի ID</string>
-    <string name="osmo_connect">Միանալ</string>
-    <string name="osmo_groups">OsMo Խմբեր</string>
-    <string name="osmo_auto_send_locations_descr">Ավտոմատ սկսել ուղևորությունը և ուղարկել դիրքը հավելվածի գործարկելուց հետո:</string>
-    <string name="osmo_auto_send_locations">Ավտոմատ սկսել ուղևորությունը</string>
-    <string name="osmo_tracker_id">Տրեկերի ID</string>
-    <string name="osmo_tracker_id_descr">Սեղմեք տրեկերի ID դիտելու համար:</string>
-    <string name="osmo_connect_to_my_nickname">Մականուն</string>
-    <string name="osmo_share_my_location">Փոխանցել գտնվելու վայրը</string>
-    <string name="osmo_plugin_name">OpenStreetMap Մոնիտորինգ</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="storage_permission_restart_is_required">"Այժմ ծրագիրը իրավունք ունի մուտթագրել տվյալներ արտաքին պահեստավորման սարքի վրա։ Պահանջվում է  վերագործարկել ծրագիրը."</string>
     <string name="shared_string_move_up">Տեղափոխել վերև</string>
     <string name="shared_string_move_down">Տեղափոխել ներքև</string>
@@ -875,7 +874,7 @@
     <string name="current_route">Ընթացիկ երթուղին</string>
     <string name="osm_changes_added_to_local_edits">OSM-ի փոփոխությունները մուտքագրվել են տեղական տվյալների բազայում</string>
     <string name="mark_to_delete">Նշել ջնջելու համար</string>
-    <string name="osmo_grop_name_length_alert">Խմբի անունը պետք կազմված լինի առնվազն 3 նիշից:</string>
+    
     <string name="local_recordings_delete_all_confirm">Դուք մտադիր եք ջնջել %1$d նշումներ: Համոզված եք?</string>
     <string name="local_osm_changes_upload_all_confirm">Դուք մտադիր եք %1$d փոփոխություններ ուղարկել OSM- ին: Համոզված եք?</string>
     <string name="confirmation_to_clear_history">Ցանկանում եք մաքրել պատմությունը?</string>
@@ -1148,7 +1147,7 @@
     <string name="map_widget_left">Ձախ վահանակ</string>
     <string name="configure_map">Քարտեզի կարգավորում</string>
     <string name="search_radius_proximity">Ներսում</string>
-    <string name="osmo_device_not_found">Սարք չի հայտնաբերվել</string>
+    
     <string name="anonymous_user">Անանուն օգտվող</string>
     <string name="logged_as">Դուք մուտք եք գործել որպես %1$s</string>
     <string name="speed_limit_exceed">Արագության թույլատրելի գերազանցումը</string>
@@ -1215,8 +1214,8 @@
     <string name="rendering_value_bicycle_name">Հեծանիվ</string>
     <string name="rendering_value_pedestrian_name">Հետիոտն</string>
     <string name="rendering_attr_coloredBuildings_name">Շենքերի գունավոր նշում ըստ տիպի</string>
-    <string name="osmo_invite">Հրավիրել…</string>
-    <string name="osmo_leave_confirmation_msg">Ցանկանում եք խմբից հեռանալ %1$s?</string>
+    
+    
     <string name="continue_navigation">Շարունակել նավարկությունը</string>
     <string name="pause_navigation">Կասեցնել նավիգացիյան</string>
     <string name="keep_navigation_service">Պահել</string>
@@ -1246,15 +1245,15 @@
     <string name="rendering_attr_showSurfaceGrade_name">Ցույց տալ ճանապարհների որակը</string>
     <string name="rendering_attr_showSurfaces_name">Ցույց տալ ճանապարհների ծածկույթի տեսակը</string>
     <string name="rendering_attr_showCycleRoutes_name">Ցուցադրել հեծանիվային երթուղիները</string>
-    <string name="osmo_auth_error_short">Մուտք գործելը ձախողվեց</string>
-    <string name="osmo_group_by_invite">Մուտք գործել հրավերով</string>
-    <string name="osmo_group_information">Խումբը ստեղծելուց առաջ կարդացեք!</string>
-    <string name="osmo_not_signed_in">Չհաջողվեց մուտք գործել OsMo</string>
-    <string name="osmo_gpx_points_downloaded">"OsMo կետերի %1$s  ներբեռնված է:"</string>
-    <string name="osmo_auto_connect_descr">Ավտոմատ կերպով միանալ ծառայությանը, երբ ծրագիրը սկսվում է։</string>
-    <string name="osmo_auto_connect">Ավտոմատ միացում</string>
-    <string name="osmo_start_service">"OsMo  Ծառայություն"</string>
-    <string name="osmo_gpx_track_downloaded">OsMo track %1$s ներբեռնված է:</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="no_index_file_to_download">Ներբեռնումներ չկան, խնդրում ենք ստուգել ձեր Ինտերնետ կապը:</string>
     <string name="select_index_file_to_download">"Ոչինչ չի գտնվել: Դուք կարող եք ստեղծել քարտեզը  ինքնուրույն (տես osmand.net):"</string>
     <string name="none_selected_gpx">Ընտրված GPX ֆայլեր չկան: Ընտրելու համար երկար սխմեք հասանելի տրեկի վրա։</string>
@@ -1299,65 +1298,65 @@
     <string name="gpx_selection_track">%1$s
 \nՏրակ %2$s</string>
     <string name="gpx_file_is_empty">GPX տրեկը դատարկ է</string>
-    <string name="osmo_user_joined">Օգտագործողը %1$s միացել է խմբին %2$s</string>
-    <string name="osmo_user_left">Օգտագործող %1$s լքեց խումբը %2$s</string>
-    <string name="osmo_show_group_notifications">Ցույց տալ խմբային ծանուցումները</string>
-    <string name="osmo_show_group_notifications_descr">Ցույց տալ հաղորդագրություններ, երբ օգտվողը միանում է կամ թողնում խումբը։</string>
-    <string name="osmo_follow">Հետևել</string>
-    <string name="osmo_sign_in">Մուտք գործել</string>
-    <string name="osmo_create_groups_confirm">Խմբեր ստեղծելու համար դուք պետք է OsMo գրանցված օգտագործող լինեք։</string>
-    <string name="osmo_credentials_not_valid">Ձեր OsMo-ի հավատարմագրերը ճիշտ չեն:</string>
-    <string name="osmo_regenerate_login_ids_confirm">Համոզված եք, որ ցանկանում եք վերարտադրել ձեր անձնական ID-ն? Ձեր հետ կապված բոլոր սարքերը այլեւս ձեզ չեն հետևելու:</string>
-    <string name="osmo_regenerate_login_ids">Վերարտադրել ձեր անձնական ID-ն</string>
-    <string name="osmo_cancel_moving_target">Չեղարկել շարժվող թիրախը</string>
-    <string name="osmo_center_location">Էկրանի կենտրոնում</string>
-    <string name="osmo_set_moving_target">"Շարժվող թիրախ  է"</string>
-    <string name="osmo_use_server_name">Գրանցված անունը</string>
-    <string name="osmo_user_name">Օգտագործող</string>
-    <string name="osmo_edit_device">Փոփոխել Օգտվողի «Կարգավորում»-ները</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="osmo_edit_color">Պիտակի գույնը</string>
-    <string name="osmo_group_info">Տեղեկատվություն</string>
-    <string name="osmo_group">OsMo խումբ</string>
-    <string name="osmo_group_share">Խմբին միանալու համար %2$s, նշեք խմբի ID (%1$s) կամ սեխմեք %3$s.</string>
-    <string name="osmo_share_connect_device">Կիսեք tracker ID-ն</string>
-    <string name="osmo_share_current_session">Ներկայիս նիստը կիսեք բրաուզերում</string>
-    <string name="osmo_session_not_available">Նիստը մատչելի չէ, խնդրում ենք ստուգել, որ «ուղարկող տեղը» միացված է:</string>
-    <string name="osmo_share_session">Կիսվել այս նիստը</string>
-    <string name="osmo_session_id_share">Նիստի URL սարքի հետեւելու համար</string>
-    <string name="osmo_tracker_id_share">"Թիրախային սարքին միանալու համար %2$s, սեխմել հղման վրա %3$s կամ նշեք track ID-ն  (%1$s)"</string>
-    <string name="osmo_track_interval">Մուտքագրման ընդմիջում</string>
-    <string name="osmo_track_interval_descr">Ընտրեք ժամանակի ընդմիջումը գտնվելու վայրի տվյալները ուղղարկելու համար։</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="int_days">օրեր</string>
     <string name="osmo_connect_menu">Միացում</string>
-    <string name="osmo_expire_group">Սպառվում է</string>
+    
     <string name="osmo_group_description">Նկարագրություն</string>
-    <string name="osmo_group_policy">Կանոներ</string>
-    <string name="osmo_connect_to_device_name">Մականուն</string>
-    <string name="osmo_group_name">Խմբի անունը</string>
-    <string name="osmo_connect_to_device">Միանալ սարքին</string>
-    <string name="osmo_connect_to_group">Միանալ խմբին</string>
-    <string name="osmo_create_group">Ստեղծել Խումբ</string>
-    <string name="osmo_server_operation_failed">OsMo՝ չհաջողվեց հրամանը ճիշտ մշակել</string>
-    <string name="osmo_activity">OpenStreetMap Մոնիտորինգ</string>
-    <string name="osmo_enable_tracker">Ուղարկել իմ գտնվելու վայրը</string>
-    <string name="osmo_control">Արագ մուտք դեպի OsMo</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">ժամ առաջ</string>
     <string name="minutes_ago">րոպե առաջ</string>
     <string name="seconds_ago">վար․ առաջ</string>
-    <string name="osmo_connected_devices">Միացված սարքեր</string>
-    <string name="osmo_session_token">Token նիստ՝ %1$s</string>
-    <string name="osmo_auth_pending">Լիազորման սպասում …</string>
-    <string name="osmo_locations_sent">"Գտնվելու վայրը ուղարկվել է  %1$d (բուֆերում %2$d)"</string>
-    <string name="osmo_conn_successfull">Կապը հաստատված է՝ %1$s</string>
-    <string name="osmo_io_error">OsMo-ի միացման խնդիրը՝</string>
-    <string name="osmo_settings_uuid">Մուտքի բանալին</string>
+    
+    
+    
+    
+    
+    
+    
     <string name="use_points_as_intermediates">Հաշվեք երթուղին կետերի միջև</string>
-    <string name="osmo_mode_restart">Վերսկսել նիստը</string>
-    <string name="osmo_mode_on">Դադարեցնել նիստը</string>
-    <string name="osmo_mode_off">Սեմինարի մեկնարկ</string>
-    <string name="osmo_settings_debug">Կարգավորող տեղեկություններ</string>
-    <string name="osmo_settings_descr">Մոնիտորինգի պարամետրերի ստեղծում և անձնական մոնիտորինգի ալիք ստեղծելու համար։</string>
-    <string name="osmo_settings">ՕսՄօ(OsMo)</string>
+    
+    
+    
+    
+    
+    
     <string name="always_center_position_on_map">Ցուցադրել դիրքը էկրանի կենտրոնում</string>
     <string name="voice_pref_title">Ձայն</string>
     <string name="misc_pref_title">Այլ</string>
@@ -2134,7 +2133,7 @@
     <string name="voice">Ձայնային տվյալները (ձայնագրություն)</string>
     <string name="voices">Ձայնային տվյալներ(հրահանգներ)</string>
     <string name="no_vector_map_loaded">Վեկտորային(offline) քարտեզները ներբեռնված չեն հավելվածի մեջ</string>
-    <string name="map_route_by_gpx">Նավիգացիա ըստ GPX</string>
+    
     <string name="gpx_files_not_found">GPX ֆայլերը չեն գտնվել թղթապանակում</string>
     <string name="layer_gpx_layer">GPX տրեկ…</string>
     <string name="error_reading_gpx">GPX տվյալների ընթերցման սխալ</string>
@@ -2209,18 +2208,9 @@
     <string name="shared_string_paste">Տեղադրել</string>
     <string name="go_to_next_field">Տեղափոխվեք հաջորդ դաշտ</string>
     <string name="import_gpx_file_description">կարող են ներմուծվել որպես «Սիրելի» կետեր, կամ որպես հետևի(track) ֆայլ:</string>
-    <string name="osmo_no_connection_msg">Հնարավոր չէ միանալ OsMo-ի սերվերին`
-\n- ստուգեք ձեր ինտերնետային կապը;
-\n- ստուգեք պարամետրերը;
-\n- ստուգեք մեր Twitter-ը` https://twitter.com/OsMomobi</string>
-    <string name="osmo_plugin_description">Այս plugin մասամբ ապահովում է OpenStreetMap մոնիտորինգի գործառույթը, տես https://osmo.mobi
-\n
-\nԴուք կարող եք հետեւել իրական խմբում առկա բոլոր սարքերի հետ: Դուք կարող եք նաև տեսնել այն կետը և հետքերը, որոնք վերագրվում են այն խմբին, որը դուք պատկանում եք:
-\n
-\nԽումբը չի հանվել մի ամիս հետո, այն կհամապատասխանի OsMo.mobi կայքում տեղադրված խմբերի կանոններին</string>
-    <string name="osmo_auth_error">OsMo-ի մուտի թույլտվության սխալն առաջացավ`%1$s:
-\nԴա կարող է լինել ժամանակավոր ծառայության խափանում, կամ ձեր գրանցման ժամկետը լրացել է:
-\nՑանկանում եք շարունակել նոր գրանցումը?</string>
+    
+    
+    
     <string name="route_head">Շարժվեք ուղիղ</string>
     <string name="first_time_continue">Շարունակել</string>
     <string name="first_time_download">Ներբեռնեք մարզերի մանրամասն քարտեզները</string>
@@ -2446,13 +2436,7 @@
     <string name="show_gpx">Ցույց տալ GPX</string>
     <string name="count_of_lines">Տողերի քանակը</string>
     <string name="are_you_sure">Վստա՞հ եք?</string>
-    <string name="osmo_group_information_desc">- Խմբի ստեղծման ժամանակ խնդրում ենք տալ անուն և լրացնել նկարագրությունը
-\n - Ծրագրային խումբից ստեղծվում են միայն Simple տիպի, կարդալ ավելին https://osmo.mobi/g/new կայքում
-\n - Կայքի միջոցով դուք կարող եք կառավարել խումբը, տեղադրել track-եր և կետեր բոլորի համար
-\n - Մենք չենք ողջունում խմբի օգտագործումը միայն մեկ օգտագործողի կողմից, եթե դա POI խումբ չէ
-\n - Անձնական խմբերն սահմանափակվում են 8 հոգու համար
-\n - Մանրամասն պայմանները միշտ հասանելի են OsMo.mobi կայքում 
-\n - Եթե Ձեզ անհրաժեշտ է հատուկ պայմաններ - խնդրում աջակցության համար դիմել՝ osmo.mobi@gmail.com</string>
+    
     <string name="show_view_angle">Ցուցադրել դիտարկման ուղղությունը</string>
     <string name="map_tile_source_descr">Ընտրեք առցանց կամ պահված քարտեզի աղբյուրը:</string>
     <string name="unsaved_changes_will_be_lost">Ցանկացած չպահպնված փոփոխություն կկորցնեք: Շարունակել?</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
   
   <string name="prefs_plugins_descr">Spraudņi papildina aplikācijas iespējas un piešķir tai papildus funkcionalitāti</string>
   <string name="prefs_plugins">Spraudņi</string>
@@ -443,7 +442,7 @@
   
   <string name="voice">Ierakstīta balss</string>
   <string name="no_vector_map_loaded">Vektoru karte nav ielādēta</string>
-  <string name="map_route_by_gpx">Navigācija pēc GPX</string>
+  
   <string name="gpx_files_not_found">Treku mapē nav atrasts neviens GPX fails</string>
   <string name="layer_gpx_layer">GPX trases…</string>
   <string name="error_reading_gpx">Kļūda, nolasot GPX datus</string>
@@ -1241,76 +1240,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     
     <string name="osb_author_dialog_password">OSM parole (optionāla)</string>
 	
-	<string name="osmand_plus_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions) ir kartes un navigācijas aplikācija ar brīvi pieejamām vispasaules, augstas kvalitātes OpenStreetMap (OSM) kartēm. Visus karšu datus ir iespējams saglabāt ierīces atmiņas kartē offline (bez interneta pieslēguma) lietošanai. Ar jūsu ierīces GPS uztvērēja palīdzibu, OsmAnd piedāvā maršrutēšanu ar vizuālo un balss vadību automašīnai, velobraucējiem un gājējiem. Visas galvenās funkcijas darbojas ar vai bez interneta pieslēguma.
- 
-Dažas no galvenajām iespējām: 
-
-Navigācija:
- - Darbojas tiešsaistē (ātri) vai bezsaistē (nevajag izmantot viesabonēšanu, esot ārzemēs) -
- -  Pagrieziens-pēc-pagrieziena balss vadība (ierakstītas vai sintizētas balsis)
- - Optionāli ceļa joslu vadība, ielas nosaukumu rādīšana un aprēķinātais laiks galapunkta sasniegšanai
- - Ceļapunktu ievietošana maršrutā 
- - Automātiski pārrēķina ceļu pēc novirzīšanās no maršruta
- - Meklē vietas pēc adreses, veida (benzīntanki, kafejnīcas, viesnīcas, muzeji u.t.t.) vai pēc koordinātām
-
- Kartes skats:
- - Rāda jūsu pozīciju un virzienu uz kartes
- - Optionāli pieskaņo karti kompasam vai kustības virzienam
- - Saglabājiet izlasē izvēlētās vietas uz kartes
- - Rāda POIs (point of interests) jums apkārt
- - Iespējams attēlot tiešsaistes bilžu kartes
- - Iespējams attēlot satelīta skatu (no Bing)
- - Iespējams attēlot vairākus kartes slāņus, kā piemēram, tūrisma/navigācijas GPX ceļus un papildus kartes ar regulējamu caurspīdīgumu
- - Optionāli rāda vietu nosaukumus angliski, vietējā valodā vai fonētiski izrunātus
-
- OpenStreetMap un wikipedia vietnes:
-  - Augstas kvalitātes informācija no labākajiem visas pasaules kopīgi veidotajiem projektiem
-  - OpenStreetMap kartes pieejamas pēc valsts vai reģiona
-  - Vikipēdijas POIs un vietu apskate (nav pieejama bezmaksas versijā) 
-  - Neierobežota lejupielāde no aplikācijas par brīvu (bezmaksas versijai ierobežojums 16 kartes)
-  - Vienmēr jaunākās kartes (atjauninājumi vismaz reizi mēnesī)
-  - Kompaktas bezsaistes vektora kartes
-  - Pilnās kartes vai tikai ceļi (piemēram visa Japāna 700MB vai tikai ceļi 200MB)
-  - Tiešsaistes kartes vai saglabātas bilžu kartes
-
- Droša braukšana:
-  - Pēc izvēles automātisks dienas/nakts režīms
-  - Pēc izvēles ātruma limita rādīšana ar brīdinājumu, pārsniedzot ātrumu
-  - Pēc izvēles, no ātruma atkarīga kartes mērogošana
-  - Dalīties ar atrašanās vietu, lai jūsu draugi var jūs atrast
-
- Velobraucēji un kājāmgājēji: 
- - Kartes veidi ietver pastaigas, velobraucēju un slēpošanas celiņus, ideāli visa veida aktivitātēm
- - Maršrutēšana un kartes attēlošana īpaši vielobraucējiem un kājāmgājējiem
- - Pēc izvēles publiskā transporta pieturas vietas, ieskaitot nosaukumus
- - Pēc izvēles ceļojuma ierakstīšana gpx failā vai caur internetu
- - Pēc izvēles ātruma un augstuma attēlošana
- - Kontūrlīniju un kalnu reljefa attēlošana (ar papildus spraudni)
-
- Tieša saziņa ar OpenStreetMap:
- - Ziņošana par kartes nepilnībām - GPX ceļu nosūtīšana OSM vietnei caur aplikāciju
- - Jaunu POI izveidošana un nosūtīšana OSM
- - Pēc izvēles ceļojuma ierakstīšana fonā (kamēr ierīce ir miega režīmā)
-
-
- OsmAnd ir atvērtā koda aplikācija un nepārtraukti tiek attīstīta. Ikviens var piedalīties, ziņojot par kļūdām, uzlabojot valodu tulkojumus vai kodējot jaunas iespējas. Projekts nepārtraukti tiek uzlabots, tiešā veidā aktīvi sadarbojoties lietotājiem ar izstrādātājiem. Tāpat projekts ir atkarīgs no finansēm, kas nepieciešamas aplikācijas izstrādei, kodēšanai un jaunu funkciju testēšanai. Noperkot OsmAnd+ jūs palīdzēsiet aplikācijai kļūt pilnvērtīgākai! Jūs varat arī finansiāli atbalstot atsevišķas jaunas iespējas vai veikt ziedojumu kopīgajam projektam osmand.net interneta vietnē. 
-
-Aptuvenais kartes pārklājums un kvalitāte:
- - Rietumeiropa: ****
- - Austrumeiropa: ***
- - Krievija: ***
- - Ziemeļamerika: ***
- - Dienvidamerika: **
- - Āzija: **
- - Japāna &amp; Koreja: ***
- - Tuvie Austrumi: **
- - Āfrika **
- - Antarktīda: *
-
- Valstu saraksts, kuras tiek atbalstītas (gandrīz visa pasaule!):
- Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
- "</string>
+	
 	
     
     <string name="speech_rate_descr">TTS (runas robots) balss ātrums</string>
@@ -1414,15 +1344,11 @@ Aptuvenais kartes pārklājums un kvalitāte:
     <string name="misc_pref_title">Dažādi</string>
     <string name="localization_pref_title">Lokalizācija</string>
     
-    <string name="osmo_settings_uuid">Ierīces identifikators</string>
-    <string name="osmo_settings_descr">Konfigurēt monitoringa iestatījumus un personīgo monitoringa kanālu</string>
-    <string name="osmo_plugin_description">"Šis spraudnis nodrošina vienkāršotu OpenStreetMap monitoringu, vairāk šeit https://osmo.mobi
-\n
-\nJūs varat sekot grupas mobilajām ierīcēm reālajā laikā, kā arī redzēt savas grupas augšupielādētos punktus un trekus.
-\n
-\nReģistrētu lietotāju grupām ir pieejamas tādas papildiespējas kā grupu administrēšana un attālinātā kontrole. "</string>
-    <string name="osmo_plugin_name">OpenStreetMap monitorings</string>
-    <string name="osmo_settings">OSMo</string>
+    
+    
+    
+    
+    
    	
     
     <string name="interrupt_music">Pauzēt mūziku</string>
@@ -1435,56 +1361,56 @@ Aptuvenais kartes pārklājums un kvalitāte:
 	<string name="navigation_intent_invalid">Nepareizs formāts: %s</string>
 <string name="interrupt_music_descr">Pilnībā nopauzēt mūziku paziņojumu brīžos</string>
 	<string name="share_route_as_gpx">Koplietot maršrutu kā GPX failu</string>
-	<string name="osmo_io_error">"OsMo savienojuma problēma: "</string>
-    <string name="osmo_mode_on">Apturēt OSMo sesiju</string>    
-    <string name="osmo_mode_off">Sākt OSMo sesiju</string>
+	
+        
+    
     
     <string name="shared_string_share">Kopīgot</string>
 	<string name="share_fav_subject">Izlase kopīgota ar OsmAnd</string>
 	<string name="use_points_as_intermediates">Rēķināt maršrutu starp punktiem</string>
     
-    <string name="osmo_group_info">Informācija</string>
-    <string name="osmo_group">OsMo grupa</string>
-    <string name="osmo_group_share">Lai pievienotos grupai %2$s, norādiet grupas id (%1$s) vai spiediet %3$s.</string>
-    <string name="osmo_share_connect_device">Atļaut patstāvīgi sekot ierīcei</string>
-    <string name="osmo_share_current_session">Dalīties tekošajā sesijā pārlūkā</string>
-    <string name="osmo_session_not_available">Sesija nav pieejama, lūdzu, pārbaudiet vai \'sūtīt pozīciju\' ir ieslēgts.</string>
-    <string name="osmo_share_session">Dalīties sesijā</string>
-    <string name="osmo_session_id_share">Sesijas url ierīces izsekošanai (%1$s)</string>
-    <string name="osmo_tracker_id_share">"Lai pievienotos ierīcei %2$s, spiediet uz linka  %3$s vai norādiet trakera id (%1$s)"</string>
-    <string name="osmo_track_interval">Logošanas intervāls</string>
-	<string name="osmo_track_interval_descr">Laika intervāls lokācijas nosūtīšanai</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+	
     <string name="int_days">Dienas</string>
     <string name="osmo_connect_menu">Pieslēgties</string>
-    <string name="osmo_expire_group">Derīgs līdz</string>
+    
     <string name="osmo_group_description">Apraksts</string>
-    <string name="osmo_group_policy">Politika</string>
-    <string name="osmo_connect_to_device_tracker_id">Trekera ID</string>
-    <string name="osmo_connect_to_device_name">Ierīces nosaukums</string>
-    <string name="osmo_connect_to_group_id">Grupas ID</string>
-    <string name="osmo_group_name">Grupas nosaukums</string>
-    <string name="osmo_connect_to_device">Savienot ar ierīci</string>
-    <string name="osmo_connect_to_group">Savienot ar grupu</string>
-    <string name="osmo_connect">Pievienoties</string>
-    <string name="osmo_create_group">Izveidot grupu</string>
-    <string name="osmo_server_operation_failed">OsMO servera darbības kļūda</string>
-    <string name="osmo_activity">OSM Monitorings</string>
-    <string name="osmo_enable_tracker">Sūtīt manas atrašanās vietas</string>
-    <string name="osmo_control">OsMo ātrā piekļuve</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">stundas atpakaļ</string>
     <string name="minutes_ago">minūtes atpakaļ</string>
-    <string name="osmo_connected_devices">Savienotās ierīces</string>
-    <string name="osmo_groups">OsMo grupas</string>
-    <string name="osmo_auto_send_locations_descr">Palaižot aplikāciju, automātiski uzsākt sekošanu un sūtīt atrašanās vietas datus.</string>
-    <string name="osmo_auto_send_locations">Automātiski sākt sekošanu</string>
-    <string name="osmo_tracker_id">Trekera ID</string>
-    <string name="osmo_tracker_id_descr">Nospiediet, lai parādītu trekera ID</string>
-    <string name="osmo_session_token">Sesijas laiks: %1$s</string>
-    <string name="osmo_auth_pending">Gaida autorizāciju…</string>
-    <string name="osmo_locations_sent">Atrašanās vieta nosūtīta %1$d (buferī %2$d) </string>
-    <string name="osmo_conn_successfull">"Izveidots savienojums: %1$s "</string>
-    <string name="osmo_mode_restart">Restartēt OsMo sesiju</string>
-    <string name="osmo_settings_debug">Atkļūdošanas informācija</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 	<string name="import_file_favourites">Saglabāt datus GPX failā vai importēt izlasē?</string>
@@ -1499,26 +1425,26 @@ Aptuvenais kartes pārklājums un kvalitāte:
 	
 	
 	
-    <string name="osmo_edit_device">Mainīt lietotāja iestatījumus</string>
+    
     <string name="osmo_edit_color">Ekrāna krāsa</string>
-    <string name="osmo_sign_in">Pierakstīties</string>
-    <string name="osmo_create_groups_confirm">Lai izveidotu grupas, jums jābūt reģistrētam OsMo lietotājam.</string>
-    <string name="osmo_credentials_not_valid">Jūsu OsMo lietotāja dati nav derīgi.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Vai tiešām gribat reģenerēt personīgo id? Savienotie lietotāji vairs nevarēs jums sekot.</string>
-    <string name="osmo_regenerate_login_ids">Reģenerēt lietotāja id</string>
-    <string name="osmo_cancel_moving_target">Atcelt kustīgo mērķi</string>
-    <string name="osmo_center_location">Centrēt ekrānu</string>
-    <string name="osmo_set_moving_target">Uzstādīt kā kustīgo mērķi</string>
-    <string name="osmo_use_server_name">Reģistrētais vārds</string>
-    <string name="osmo_connect_to_my_nickname">Segvārds</string>
-    <string name="osmo_user_name">Lietotājs</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	
 	
-    <string name="osmo_follow">Sekot</string>
-    <string name="osmo_user_joined">Lietotājs %1$s pievienojās %2$s grupai</string>
-    <string name="osmo_user_left">Lietotājs %1$s pameta %2$s grupu</string>
-    <string name="osmo_show_group_notifications">Rādīt grupas ziņojumus</string>
-    <string name="osmo_show_group_notifications_descr">Rādīt paziņojumu, kad lietotājs pievienojas vai pamet grupu</string>
+    
+    
+    
+    
+    
     
     <string name="shared_string_my_tracks">Visi treki</string>
     <string name="shared_string_my_favorites">Mana izlase</string>
@@ -1565,7 +1491,7 @@ Aptuvenais kartes pārklājums un kvalitāte:
 	<string name="download_additional_maps">Lejupielādēt trūkstošās kartes %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Vēl…</string>
     <string name="lang_he">Ebreju</string>
-    <string name="osmo_auth_error_short">Autorizācija neizdevās</string>
+    
     <string name="sort_by_distance">Kārtot pēc attāluma</string>
     <string name="sort_by_name">Kārtot pēc nosaukuma</string>
     <string name="lang_al">Albāņu</string>
@@ -1588,9 +1514,9 @@ Aptuvenais kartes pārklājums un kvalitāte:
     <string name="rendering_value_bicycle_name">Velobraucējs</string>
     <string name="rendering_value_pedestrian_name">Gājējs</string>
     <string name="rendering_attr_coloredBuildings_name">Krāsas pēc apbūves tipa</string>
-    <string name="osmo_invite">Ielūgt…</string>
-    <string name="osmo_leave_confirmation_msg">Vai gribat atstāt grupu %1$s?</string>
-    <string name="osmo_specify_tracker_id">Lūdzu norādiet ID</string>
+    
+    
+    
     <string name="continue_navigation">Turpināt navigāciju</string>
     <string name="pause_navigation">Nopauzēt navigāciju</string>
     <string name="rendering_attr_subwayMode_name">Metro maršruti</string>
@@ -1619,19 +1545,15 @@ Aptuvenais kartes pārklājums un kvalitāte:
     <string name="rendering_attr_showSurfaceGrade_name">Rādīt ceļa kvalitāti</string>
     <string name="rendering_attr_showSurfaces_name">Rādīt ceļa segumu</string>
     <string name="rendering_attr_showCycleRoutes_name">Veloceliņi</string>
-    <string name="osmo_auth_error">OsMo autorizācijas kļūda: %1$s↵
-
-Iespējams īslaicīgs sakaru pārtraukums vai reģistrācijai ir iztecējis termiņš↵
-
-Vai gribat veikt jaunu reģistrāciju?</string>
-    <string name="osmo_group_by_invite">Ienākt pēc uzaicinājuma</string>
-    <string name="osmo_group_information">Lūdzu izlasiet sekojošo, pirms veidojiet jaunu grupu!</string>
-    <string name="osmo_not_signed_in">OsMo pieteikšanās neizdevās</string>
-    <string name="osmo_gpx_points_downloaded">OsMo punkti %1$s lejupielādēti.</string>
-    <string name="osmo_auto_connect_descr">Automātiski izveidot savienojumu pie aplikācijas palaišanas</string>
-    <string name="osmo_auto_connect">Pieslēgties automātiski</string>
-    <string name="osmo_start_service">OsMo serviss</string>
-    <string name="osmo_gpx_track_downloaded">OsMo ceļš %1$s lejupielādēts.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="no_index_file_to_download">Lejupielāde neizdevās, lūdzu pārbaudiet interneta savienojumu.</string>
     <string name="none_selected_gpx">Nav atzīmēti GPX faili. Lai atzīmētu, turiet nospiestu izvēlēto ierakstu.</string>
     
@@ -1698,16 +1620,13 @@ Vai gribat veikt jaunu reģistrāciju?</string>
 	<string name="map_widget_left">Kreisā puse</string>
     <string name="shared_string_show">Rādīt</string>
 	<string name="configure_map">Kartes attēlošana</string>
-    <string name="osmo_device_not_found">Ierīce nav atrasta</string>
+    
     <string name="anonymous_user">Anonīms lietotājs</string>
     <string name="anonymous_user_hint">Anonīms lietotājs nevar:
 - izveidot grupas
 - sinhronizēt grupas un ierīces ar serveri
 - pārvaldīt grupas un ierīces no sava lietotāja paneļa interneta lapā.</string>
-    <string name="osmo_no_connection_msg">Nevar pievienoties OsMo serverim:
-- pārbaudiet interneta savienojumu
-- pārbaudiet iestatījumus
-- atveriet mūsu tvīteri: https://twitter.com/OsMomobi</string>
+    
     <string name="logged_as">Pievienojies kā %1$s</string>
 	<string name="speed_limit_exceed">Ātruma tolerance</string>
 	<string name="speed_limit_exceed_message">Pārsniedzot noteikto ātrumu, saņemsiet balss brīdinājumu.</string>
@@ -1735,7 +1654,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="current_route">Pašreizējais maršruts</string>
     <string name="osm_changes_added_to_local_edits">OSM izmaiņas pievienotas lokālām izmaiņām</string>
    	<string name="mark_to_delete">Atzīmēt dzēšanai</string>
-	<string name="osmo_grop_name_length_alert">Grupas nosaukumam jābūt vismaz 3 simbolu garam!</string>
+	
 	<string name="local_osm_changes_upload_all_confirm">Jūs augšupielādēsiet %1$d izmaiņas uz OSM. Vai turpināt?</string>
     <string name="confirmation_to_clear_history">Vai nodzēst vēsturi?</string>
     <string name="delay_to_start_navigation_descr">Norādīt maršruta plānošanas uzvednes rādīšanas laiku</string>
@@ -2134,7 +2053,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="rendering_value_disabled_name">Atslēgts</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Krāsas pēc infrastruktūras veida</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Krāsas pēc OSMC simbola</string>
-    <string name="osmo_share_my_location">Sūtīt manu atrašanās vietu</string>
+    
     <string name="local_recordings_delete_all_confirm">"Vai vēlaties izdzēst  %1$d ierakstus?"</string>
     <string name="rendering_attr_pisteRoutes_name">Slēpošanas trases</string>
     <string name="rendering_attr_roadStyle_description">Stila veidi</string>
@@ -2324,15 +2243,7 @@ failu(s)?
     <string name="access_widget_expand">Paplašināt</string>
     <string name="access_shared_string_navigate_up">Uz augšu</string>
     <string name="access_sort">Sakārtot</string>
-    <string name="osmo_group_information_desc">"
- - Veidojot grupu, piešķiriet tai vārdu un aprakstu
-- No aplikācijas loga var izveidot tikai vienkāršu grupu, vairāk lasiet https://osmo.mobi/g/new interneta lapā
-- Caur interneta lapu ir iespējams organizēt grupu, kā arī pievienot visiem pieejamus trekus un punktus
-- Mēs neatbalstam vienas grupas lietošanu vienpersoniski, ja vien tā nav POI grupa
-- Privātās grupas ir ierobežotas līdz 8 personām
-- Detalizētākus noteikumus un nosacījumus lasiet OsMo.mobi interneta lapā
-- Ja jums ir īpašas prasības un vajadzības - lūdzu rakstiet uz atbalsta epastu osmo.mobi@gmail.com
- "</string>
+    
     <string name="release_2_2">" • Jauns satura-jūtīgs interfeiss, pieskaroties vietām uz kartes un citur aplikācijā
 \n
 \n • Kartes skats tiek atvērts uzreiz, ja vien nav atzīmēts \"rādīt manu izvēlni\", atverot aplikāciju
@@ -2463,9 +2374,9 @@ Un vēl...
     <string name="gpx_no_tracks_title_folder">Trekus varat pievienot arī mapei</string>
     <string name="gpx_add_track">Pievienot treku</string>
     <string name="gpx_appearance">Izskats</string>
-    <string name="osmo_share_location">Dalīties</string>
-    <string name="osmo_pause_location">Pauze</string>
-    <string name="osmo_service_running">Darbojas OsMo serviss</string>
+    
+    
+    
     <string name="trip_rec_notification_settings">Ceļa ieraksts (nav datu)</string>
     <string name="trip_rec_notification_settings_desc">Rādīt ziņojumu, kas ļauj sākt ierakstu, nospiežot ieraksta pogu</string>
     <string name="shared_string_notifications">Ziņojumi</string>
@@ -2700,18 +2611,18 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="shared_string_time">Laiks</string>
     <string name="total_distance">Maršruta garums</string>
     
-    <string name="routing_attr_height_relief_smoothness_factor_description">Līdzenāks vai kalnaināks reljefs</string>
+    
     <string name="routing_attr_height_obstacles_name">Lietot elevācijas datus</string>
     <string name="routing_attr_height_obstacles_description">Lietot apgabala elevācijas datus no SRTM, ASTER un EU-DEM.</string>
 
     
-    <string name="driving_style_balance">Balancētais</string>
+    
     
     <string name="relief_smoothness_factor_descr">Ieteicamais reljefs: līdzens vai kalnains.</string>
     <string name="shared_string_slope">Slīpums</string>
     <string name="lang_ber">Berberu</string>
     
-    <string name="relief_smoothness_factor_plains">Līdzenumi</string>
+    
     
     <string name="quick_action_osmbugs_show">Rādīt OSM piezīmes</string>
     <string name="quick_action_osmbugs_hide">Nerādīt OSM piezīmes</string>
@@ -2978,7 +2889,7 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="context_menu_item_modify_note">!abot OSM piezīmi</string>
     <string name="make_round_trip_descr">Dublēt sākuma punktu kā galamērķi.</string>
     <string name="make_round_trip">Turp un atpakaļ maršruts</string>
-    <string name="shared_string_navigate">Navigācija</string>
+    
     <string name="shared_string_markers">Marķieri</string>
     <string name="coordinates_format">Koordināšu formāts</string>
     <string name="use_system_keyboard">Lietot sistēmas klaviatūru</string>
@@ -3013,7 +2924,7 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="measurement_tool">Mērīt attālumu</string>
     <string name="tap_on_map_to_hide_interface_descr">Pieskāriens kartei pārslēdz starp pogām un logrīkiem.</string>
     <string name="tap_on_map_to_hide_interface">Pilnekrāna režīms</string>
-    <string name="show_on_top_bar">Rādīt augšējā joslā</string>
+    
     <string name="mark_passed">Atzīmēt skatītos</string>
     <string name="import_gpx_file_description">Var importēt kā izlases punktus vai kā treka (GPX) failu.</string>
     <string name="import_as_gpx">Importēt kā GPX failu</string>

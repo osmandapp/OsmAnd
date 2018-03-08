@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="distance_moving">Korrigierte Distanz</string>
     <string name="wiki_around">Wikipedia-Artikel zur Umgebung</string>
     
@@ -599,7 +598,7 @@
 	<string name="voices">Sprachansagen</string>
 	<string name="voice">Sprachansage</string>
 	<string name="no_vector_map_loaded">Offline-Daten wurden nicht geladen</string>
-	<string name="map_route_by_gpx">Navigation mittels GPX</string>
+	
 	<string name="layer_gpx_layer">GPX-Track…</string>
 	<string name="error_reading_gpx">Fehler beim Lesen der GPX-Daten</string>
 	<string name="vector_data">Offline-Vektor-Karten</string>
@@ -1392,175 +1391,90 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="lang_zh_tw">Chinesisch (traditionell)</string>
 
 	
-	<string name="osmand_plus_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugang zu den freien, weltweit verfügbaren und hoch qualitativen Daten von OpenStreetMap (OSM). Alle Kartendaten können für die Offline-Nutzung auf der Speicherkarte oder dem internen Speicher des Endgerätes gespeichert werden. Über das GPS des Endgerätes bietet OsmAnd eine Routing-Funktion mit visueller Anzeige und Sprachausgabe für KFZ, Fahrräder und Fußgänger. Alle Hauptfunktionen funktionieren sowohl online als auch offline (ohne Verbindung zum Internet). 
-
-OsmAnd+ ist die bezahlte Anwendungsversion. Durch ihren Kauf unterstützen Sie das Projekt, fördern die Entwicklung neuer Funktionen und erhalten die neusten Aktualisierungen. Vor einem Kauf können Sie die Anwendung durch Installation der kostenlosen, OsmAnd genannten Version ausprobieren. 
-
-Der Funktionsumfang beinhaltet unter anderem:
-
-Navigation:
-- funktioniert online (schnell) und offline (ohne Roaming-Gebühren im Ausland)
-- exakte Sprachausgabe (aufgenomme und synchronisierte Stimmen)
-- optionale Fahrspurführung, Anzeige der Straßennamen und der geschätzten Ankunftszeit
-- Unterstützung von Zwischenzielen auf ihrer Route
-- automatische Neuberechnung der Route, sobald von der ursprünglichen Route abgewichen wird.
-- Suche nach Orten anhand der Adresse, dem Typ (z. B. Restaurant, Hotel, Tankstelle, Museum) oder geografischen Koordinaten
-
-Kartenansicht:
-- Anzeige der Standort und der Blickrichtung auf der Karte
-- optionale Ausrichtung der Karte anhand des Kompasses oder der Bewegungsrichtung
-- Speichern der wichtigsten Orte als Favorit
-- Anzeige von POI (Point Of Interests)
-- Darstellung spezieller Online-Karten
-- Darstellung der Satelliten-Ansicht (auf Bing basierend)
-- Darstellung verschiedener Überlagerungen wie GPS-Tracks und weiterer Karten mit einstellbarer Transparenz
-- Anzeige von Ortsnamen in Englisch, der lokalen Sprache oder phonetischer Schreibweise 
-
-Verwendung von OpenStreetMap- und Wikipedia-Daten:
-- qualitativ hochwertige Informationen aus den beiden besten Gemeinschaftsprojekten der Welt
-- globale Karten von Openstreetmap, verfügbar nach Land oder Region
-- Wikipedia-POIs, praktisch bei Stadtbesichtigungen (nicht in der kostenfreien Version enthalten)
-- unlimitierter kostenloser Download direkt in der App (Download-Limit in der kostenfreien Version: 16 Karten)
-- immer aktuelle Karten (mindestens eine Aktualisierung pro Monat)
-- kompakte Offline-Vektor-Karten
-- Auswahl zwischen kompletten Karten und reinen Straßenkarten (Beispiel: Die gesamte Karte für Japan ist 700 MB, die reine Straßenkarte 200 MB groß)
-- zusätzliche Unterstützung von Online-Karten oder zwischengespeicherten Rasterkarten 
-
-Sicherheitsfunktionen:
-- optionaler automatisierter Wechsel zwischen Tag- und Nachtansicht
-- optionale Einblendung der aktuellen Geschwindigkeitsbeschränkung mit Erinnerung, falls diese überschritten wird
-- optionales geschwindigkeitsabhängiges Zoomen der Karte
-- Teilen des Standortes, damit Ihre Freunde Sie finden können
-
-Fahrrad- und Fußgängerfunktionen:
-- die Karten beinhalten Fuß, Wander- und Fahrradwege, bestens geeignet für Outdoor-Aktivitäten
-- spezielle Navigations- und Darstellungsoptionen für Radfahrer und Fußgänger
-- optionale Einblendung von Haltestellen des öffentlichen Nahverkehrs (Bus, Straßenbahn, Zug…) inkl. der Linienbezeichnungen 
-- optionale Aufzeichnung des zurückgelegten Weges als lokale GPX-Datei oder bei einem Online-Service
-- optionale Anzeige der Geschwindigkeit und aktuellen Höhe
-- Darstellung von Höhenlinien und Bergschattierungen (über zusätzliches Plugin) 
-
-Direkte OpenStreetMap-Beiträge:
-- Melden von Fehlern
-- Hochladen von GPX-Tracks zu OSM direkt aus der App
-- Hinzufügen von POIs und sie sofort oder (bei fehlender Internetverbindung) später zu OSM hochladen
-- optionales Aufzeichnen der Strecke (auch im Hintergrundmodus während das Endgerät im Ruhemodus ist) 
-
-OsmAnd ist quelloffen und wird stetig weiterentwickelt. Jeder kann seinen Beitrag dazu leisten, indem er Fehler mitteilt,  Übersetzungen verbessert oder neue Funktionen programmiert. Durch diese Formen des ständigen Austauschs zwischen Entwicklern und Anwendern bleibt das Projekt lebendig und wird kontinuierlich verbessert. Der Fortschritt des Projekts ist aber auch auf finanzielle Unterstützung angewiesen, um Entwicklung, Programmierung und Testung neuer Funktionen fördern zu können. Durch den Kauf von OsmAnd+ helfen Sie also, die App noch besser zu machen. Darüberhinaus haben Sie die Möglichkeit, für spezielle neue Funktionen oder generell für die Entwicklung auf osmand.net zu spenden. 
-
-Durchschnittliche Kartenabdeckung und -qualität:
-- Westeuropa: ****
-- Osteuropa: ***
-- Russland: ***
-- Nordamerika: ***
-- Südamerika: **
-- Asien: **
-- Japan und Korea: ***
-- mittlerer Osten: **
-- Afrika: **
-- Antarktis: * 
-
-Liste der unterstützten Länder (im Grunde weltweit!):
-Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua und Barbuda, Äquatorialguinea, Arabische Republik Sahara, Argentinien, Armenien, Aruba, Aserbaidschan, Äthiopien, Australien, Bahamas, Bahrain, Bangladesch, Barbados, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivien, Bonaire, Bosnien und Herzegowina, Botswana, Brasilien, Brunei, Bulgarien, Burkina Faso, Burundi, Chile, China, Costa Rica, Curaçao, Dänemark, Deutschland, Dominica, Dominikanische Republik, Dschibuti, Ecuador, El Salvador, Elfenbeinküste, Eritrea, Estland, Fidschi, Finnland, Frankreich, Französisch-Guayana, Französisch-Polynesien, Gabun, Gambia, Georgien, Ghana, Gibraltar, Grenada, Griechenland, Grönland, Großbritannien, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Honduras, Hong Kong, Indien, Indonesien, Isle of Man, Irak, Iran, Irland, Island, Israel, Italien, Jamaika, Japan, Jemen, Jersey, Jordanien, Jungferninseln, Kambodscha, Kamerun, Kanada, Kap Verde, Kasachstan, Katar, Kenia, Kirgistan, Kiribati, Kolumbien, Komoren, Kongo, Kroatien, Kuba, Kuwait, Laos, Lesotho, Lettland, Libanon, Liberia, Libyen, Liechtenstein, Litauen, Luxemburg, Macau, Madagaskar, Malawi, Malaysia, Malediven, Mali, Malta, Marokko, Martinique, Mauretanien, Mauritius, Mayotte, Mazedonien, Mexiko, Mikronesien, Moldau, Monaco, Mongolei, Montenegro, Montserrat, Mosambik, Myanmar, Namibia, Nauru, Nepal, Neukaledonien, Neuseeland, Nicaragua, Niederlande, Niederländische Antillen, Niger, Nigeria, Nordkorea, Norwegen, Oman, Österreich, Osttimor, Pakistan, Palau, Palästinensische Autonomiegebiete, Panama, Papua-Neuguinea, Paraquay, Peru, Philippinen, Polen, Portugal, Puerto Rico, Ruanda, Rumänien, Russland, Saint-Barthélemy, Saint Helena, Saint Helena, Ascension und Tristan da Cunha, Saint Kitts und Nevis, Saint Lucia, Saint Martin, Saint-Pierre und Miquelon, Saint Vincent und die Grenadinen, Sambia, Samoa, San Marino, Saudi Arabien, Schweden, Schweiz, Senegal, Serbien, Seychellen, Sierra Leona Singapur, Simbabwe, Slovakei, Slowenien, Somalia, Spanien, Sri Lanka, Südafrika, Sudan, Südgeorgien, Südkorea, Südsudan, Suriname, Swasiland, Syrien, Taiwan, Tadschikistan, Tansania, Thailand, Togo, Trinidad und Tobago, Tschad, Tschechische Republik, Tunesien, Türkei, Turkmenistan, Tuvalu, Uganda, Ukraine, Ungarn, Uruguay, Usbekistan, Vanuatu, Vatikan, Venezuela, Vereinigte Arabische Emirate, Vereinigte Staaten von Amerika, Vietnam, Wallis und Futuna, Weißrussland, Zentralafrikanische Republik, Zypern.
- "</string>
+	
 
 	
 	<string name="rendering_value_pink_name">Rosa</string>
 	<string name="rendering_value_brown_name">Braun</string>
 
-	<string name="osmo_settings_uuid">Geräte-ID</string>
-	<string name="osmo_settings_descr">Konfigurieren der Überwachungseinstellungen und des persönlichen Überwachungskanals.</string>
-	<string name="osmo_plugin_description">Diese Erweiterung bietet Teilfunktionen des. sogenannten OpenStreetMap Monitoring, siehe https://osmo.mobi 
-\n 
-\nSie können damit in Echtzeit alle Geräte einer teilnehmenden Gruppe verfolgen. Außerdem können Sie zu Ihrer Gruppe hochgeladene Punkte und Tracks ansehen. 
-\n 
-\nWenn die Gruppe monatelang nicht entfernt wurde, machen sie es konform zu den Regeln zur Gruppenerstellung von OsMo.mobi</string>
-	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
-	<string name="osmo_settings">OsMo</string>
-	<string name="osmo_io_error">OsMo-Verbindungsproblem:</string>
-	<string name="osmo_mode_on">OsMo-Sitzung beenden</string>
-	<string name="osmo_mode_off">OsMo-Sitzung starten</string>
-	<string name="osmo_auto_send_locations_descr">Nach App-Start automatisch Streckenaufzeichnung starten und Positionen senden.</string>
-	<string name="osmo_auto_send_locations">Automatische Streckenaufzeichnung</string>
-	<string name="osmo_tracker_id">Aufzeichnungskennung</string>
-	<string name="osmo_tracker_id_descr">Tippen, um Aufzeichnungs-ID anzuzeigen.</string>
-	<string name="osmo_session_token">Sitzungstoken: %1$s</string>
-	<string name="osmo_auth_pending">Auf Autorisierung warten…</string>
-	<string name="osmo_locations_sent">Gesendete Standorte %1$d (im Zwischenspeicher %2$d) </string>
-	<string name="osmo_conn_successfull">Verbindung erfolgreich: %1$s </string>
-	<string name="osmo_mode_restart">OsMo-Sitzung neu starten</string>
-	<string name="osmo_settings_debug">Debug-Information</string>
-	<string name="osmo_connect_to_device_name">Nutzername</string>
-	<string name="osmo_connect_to_device_tracker_id">Aufzeichnungskennung</string>
-	<string name="osmo_connect_to_device">Mit Gerät koppeln</string>
-	<string name="osmo_groups">OsMo-Gruppen</string>
-	<string name="osmo_edit_device">Nutzereigenschaften ändern</string>
-	<string name="osmo_group_info">Info</string>
-	<string name="osmo_group">OsMo-Gruppe</string>
-	<string name="osmo_group_share">Um eine Verbindung zur Gruppe %2$s herzustellen, bitte die Gruppen-ID (%1$s) angeben oder (%3$s) antippen.</string>
-	<string name="osmo_share_connect_device">Diesem Gerät permanent folgen</string>
-	<string name="osmo_share_current_session">Aktuelle Sitzung im Browser teilen</string>
-	<string name="osmo_session_not_available">Keine Sitzung vorhanden, überprüfen Sie ob \'Standort senden\' aktiv ist.</string>
-	<string name="osmo_share_session">Sitzung teilen</string>
-	<string name="osmo_session_id_share">Sitzungs-URL zur Geräteverfolgung (%1$s)</string>
-	<string name="osmo_track_interval">Aufzeichnungsintervall</string>
-	<string name="osmo_track_interval_descr">Zeitintervall zum Senden des Standortes auswählen.</string>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<string name="osmo_connect_menu">Verbinden</string>
-	<string name="osmo_expire_group">Läuft ab in</string>
+	
 	<string name="osmo_group_description">Beschreibung</string>
-	<string name="osmo_group_policy">Richtlinie</string>
-	<string name="osmo_connect_to_group_id">Gruppenkennung</string>
-	<string name="osmo_group_name">Gruppenname</string>
-	<string name="osmo_connect_to_group">Mit Gruppe verbinden</string>
-	<string name="osmo_connect">Verbinden</string>
-	<string name="osmo_create_group">Gruppe erstellen</string>
-	<string name="osmo_server_operation_failed">OsMo-Server-Vorgang fehlgeschlagen</string>
-	<string name="osmo_activity">OpenStreetMap-Überwachung</string>
-	<string name="osmo_enable_tracker">Meine Standorte senden</string>
-	<string name="osmo_control">OsMo-Schnellzugriff</string>
-	<string name="osmo_connected_devices">Verbundene Geräte</string>
-	<string name="osmo_sign_in">Anmelden</string>
-	<string name="osmo_create_groups_confirm">Um Gruppen erstellen zu können, müssen Sie ein registrierter Nutzer von OsMo sein.</string>
-	<string name="osmo_credentials_not_valid">Ihre OsMo-Anmeldedaten sind nicht gültig.</string>
-	<string name="osmo_regenerate_login_ids_confirm">Sind sie sicher, dass Sie eine neue Personenkennung erstellen möchten? Alle mit Ihnen verbundenen Geräte werden Sie nicht mehr verfolgen können.</string>
-	<string name="osmo_regenerate_login_ids">Nutzerkennung neu erstellen</string>
-	<string name="osmo_use_server_name">Registrierter Name</string>
-	<string name="osmo_connect_to_my_nickname">Nickname</string>
-	<string name="osmo_user_name">Nutzer</string>
-	<string name="osmo_follow">Folgen</string>
-	<string name="osmo_user_joined">Nutzer %1$s ist der Gruppe %2$s beigetreten</string>
-	<string name="osmo_user_left">Nutzer %1$s hat die Gruppe %2$s verlassen</string>
-	<string name="osmo_show_group_notifications">Gruppenbenachrichtigungen anzeigen</string>
-	<string name="osmo_show_group_notifications_descr">Pop-up-Meldung anzeigen, wenn ein Nutzer der Gruppe beitritt oder sie verlässt.</string>
-	<string name="osmo_tracker_id_share">Um eine Verbindung zum Gerät %2$s herzustellen, bitte den Link %3$s antippen oder die Aufzeichnungs-ID (%1$s) angeben</string>
-	<string name="osmo_auth_error_short">Anmeldung fehlgeschlagen</string>
-	<string name="osmo_auth_error">Fehler bei der OsMo-Anmeldung: %1$s.
-
-Möglicherweise ist der Dienst vorübergehend nicht erreichbar oder Ihre Anmeldung ist abgelaufen.
-
-Mit Neuanmeldung fortfahren?</string>
-	<string name="osmo_group_by_invite">Auf Einladung beitreten</string>
-	<string name="osmo_group_information_desc">- Um eine Gruppe zu erstellen, bitte Namen und Beschreibung angeben.
-\n - Die App legt nur Gruppen vom Typ \"einfache Gruppe\" an, mehr dazu auf der Website https://osmo.mobi/g/new .
-\n - Auf der Webseite kann eine Gruppe verwaltet werden, damit von allen Strecken und Punkte eingestellt werden können.
-\n - Wir lassen keine Gruppen mit nur einem Nutzer zu, wenn es keine POI-Gruppe ist
-\n - Private Gruppen sind auf 8 Personen beschränkt
-\n - Detaillierte Vertragsbedingungen sind auf der Webseite OsMo.mobi zu finden
-\n - Wenn besondere Bedürfnisse bestehen, bitte den Support kontaktieren: osmo.mobi@gmail.com</string>
-	<string name="osmo_group_information">Bitte vor dem Erstellen von Gruppen beachten!</string>
-	<string name="osmo_not_signed_in">OsMo-Anmeldung fehlgeschlagen</string>
-	<string name="osmo_gpx_points_downloaded">OsMo-Punkte %1$s heruntergeladen.</string>
-	<string name="osmo_auto_connect_descr">Verbindung beim App-Start automatisch aufbauen.</string>
-	<string name="osmo_auto_connect">Automatische Verbindung</string>
-	<string name="osmo_start_service">OsMo-Dienst</string>
-	<string name="osmo_gpx_track_downloaded">OsMo-Track %1$s heruntergeladen.</string>
-	<string name="osmo_invite">Einladen…</string>
-	<string name="osmo_leave_confirmation_msg">Die Gruppe %1$s verlassen?</string>
-	<string name="osmo_cancel_moving_target">Bewegliches Ziel abwählen</string>
-	<string name="osmo_set_moving_target">Als bewegliches Ziel bestimmen</string>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<string name="osmo_edit_color">Darstellungsfarbe</string>
-	<string name="osmo_center_location">Auf dem Bildschirm zentrieren</string>
+	
 
 	<string name="gpx_file_is_empty">GPX-Track ist leer</string>
 	<string name="gpx_info_waypoints">Wegpunkte: %1$s </string>
@@ -1603,7 +1517,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="gpx_option_calculate_first_last_segment">OsmAnd-Route für ersten und letzten Abschnitt berechnen</string>
 <string name="download_additional_maps">Fehlende Karten herunterladen: %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Mehr…</string>
-    <string name="osmo_specify_tracker_id">Bitte Kennung angeben</string>
+    
     <string name="home">Übersichtsseite</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, Oberleitungsbus-, Sammeltaxi-Linien</string>
 	<string name="record_plugin_name">Streckenaufzeichnung</string>
@@ -1628,11 +1542,8 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="print_route">Route drucken</string>
     <string name="speed_limit_exceed">Toleranz für Tempolimit</string>
 	<string name="speed_limit_exceed_message">Toleranzgrenze für Tempolimit auswählen, oberhalb derer Sie eine Sprachwarnung erhalten.</string>
-	<string name="osmo_device_not_found">Gerät wurde nicht gefunden</string>
-    <string name="osmo_no_connection_msg">Keine Verbindung zum OsMo-Server:
-- Internetverbindung prüfen;
-- Einstellungen prüfen;
-- Nach Meldungen auf Twitter schauen: https://twitter.com/OsMomobi</string>
+	
+    
     <string name="anonymous_user">Anonymer Benutzer</string>
     <string name="logged_as">Angemeldet als %1$s</string>
 	<string name="anonymous_user_hint">Anonyme Benutzer können Folgendes nicht:
@@ -1810,7 +1721,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="welcome_header">Willkommen</string>
 	<string name="current_route">Aktuelle Route</string>
 	<string name="mark_to_delete">Zum Löschen markieren</string>
-	<string name="osmo_grop_name_length_alert">Der Gruppenname sollte mindestens 3 Zeichen lang sein!</string>
+	
 	<string name="local_osm_changes_upload_all_confirm">Sie laden %1$d Änderung(en) zu OSM hoch. Fortfahren?</string>
 	<string name="confirmation_to_clear_history">Soll der Verlauf gelöscht werden?</string>
 	<string name="osmand_parking_hour">h</string>
@@ -1850,7 +1761,7 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="short_location_on_map">Lat %1$s
 Lon %2$s</string>
     <string name="shared_string_logoff">Abmelden</string>
-    <string name="osmo_share_my_location">Standort übermitteln</string>
+    
     <string name="rendering_value_disabled_name">Deaktiviert</string>
     
 	<string name="routing_attr_height_name">Höhenbeschränkung</string>
@@ -2438,9 +2349,9 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="trip_rec_notification_settings">Aufnahme-Schnellstart aktivieren</string>
     <string name="trip_rec_notification_settings_desc">Anzeige einer Systembenachrichtigung mit der die Streckenaufzeichnung gestartet werden kann.</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
-    <string name="osmo_service_running">OsMo-Dienst wird ausgeführt</string>
-    <string name="osmo_pause_location">Pause</string>
-    <string name="osmo_share_location">Teilen</string>
+    
+    
+    
     <string name="gpx_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
     <string name="gpx_no_tracks_title">Keine Tracks vorhanden</string>
@@ -2573,7 +2484,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n 
 \n und mehr…</string>
 	
-    <string name="routing_attr_height_relief_smoothness_factor_description">Ebenen oder Berge betonen.</string>
+    
     <string name="routing_attr_height_obstacles_name">Höhendaten verwenden</string>
     <string name="routing_attr_height_obstacles_description">Von SRTM, ASTER und EU-DEM bereitgestellte Geländeprofildaten verwenden.</string>
 
@@ -2608,9 +2519,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="add_new_folder">Neuen Ordner hinzufügen</string>
     <string name="shared_string_slope">Steigung</string>
     
-    <string name="relief_smoothness_factor_plains">Ebenen</string>
     
-    <string name="driving_style_speed">Geschwindigkeit</string>
+    
+    
     
     <string name="relief_smoothness_factor_descr">Bevorzugte Geländeform: flach oder bergig.</string>
     
@@ -2774,19 +2685,19 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="measurement_tool_action_bar">Erkunden Sie die Karte und fügen Sie Punkte hinzu</string>
     <string name="mappilary_no_internet_desc">Sie benötigen Internet, um Fotos von Mapillary ansehen zu können.</string>
     <string name="retry">Wiederholen</string>
-    <string name="add_gpx_waypoint_bottom_sheet_title">GPX-Wegpunkt hinzufügen</string>
-    <string name="shared_string_create">Erstellen</string>
+    
+    
 	<string name="none_point_error">Bitte mindestens einen Punkt hinzufügen.</string>
 	<string name="enter_gpx_name">GPX Dateiname:</string>
 <string name="show_on_map_after_saving">Nach dem Speichern auf der Karte anzeigen</string>
-    <string name="add_route_point">Routenpunkt hinzufügen</string>
+    
     <string name="add_waypoint">Wegpunkt hinzufügen</string>
     <string name="save_gpx_waypoint">GPX Wegpunkt speichern</string>
     <string name="save_route_point">Routenpunkt speichern</string>
     <string name="waypoint_one">Wegpunkt 1</string>
     <string name="route_point_one">Routenpunkt 1</string>
-<string name="measurement_tool_altitude">Höhe: %1$s</string>
-    <string name="measurement_tool_speed">Geschwindigkeit: %1$s</string>
+
+    
     <string name="line">Strecke</string>
     <string name="save_as_route_point">Als Routenpunkte speichern</string>
     <string name="save_as_line">Als Strecke speichern</string>
@@ -2813,10 +2724,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="keep_showing_on_map">Weiterhin auf der Karte anzeigen</string>
     <string name="exit_without_saving">Beenden ohne zu speichern?</string>
     <string name="move_all_to_history">Alles in den Verlauf verschieben</string>
-    <string name="build_route">Route erstellen</string>
+    
     <string name="show_direction">Angabe der Entfernung</string>
     <string name="sort_by">Sortieren nach</string>
-    <string name="marker_options">Marker-Optionen</string>
+    
     <string name="show_guide_line">Hilfslinien zeigen</string>
     <string name="show_arrows_on_the_map">Pfeile auf der Karte anzeigen</string>
     <string name="remove_from_map_markers">Entfernen von Kartenmarkierungen</string>
@@ -2860,7 +2771,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="context_menu_item_modify_note">OSM-Notiz ändern</string>
     <string name="make_round_trip_descr">Kopie des Startpunkts als Ziel hinzufügen.</string>
     <string name="make_round_trip">Rundreise erstellen</string>
-    <string name="shared_string_navigate">Navigieren</string>
+    
     <string name="my_location">Meine Position</string>
     <string name="shared_string_finish">Beenden</string>
     <string name="use_system_keyboard">Gerätetastatur verwenden</string>
@@ -2906,7 +2817,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 	<string name="waypoints_added_to_map_markers">Wegpunkte zu Kartenmarkierung hinzugefügt</string>
 	<string name="wrong_format">Falsches Format</string>
     <string name="tap_on_map_to_hide_interface">Vollbildmodus</string>
-    <string name="show_on_top_bar">In Titelleiste anzeigen</string>
+    
     <string name="import_as_gpx">als GPX-Datei importieren</string>
     <string name="import_as_favorites">als Favoriten importieren</string>
     <string name="import_file">Datei importieren</string>

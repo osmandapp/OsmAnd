@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="edit_filter">Embann ar sil</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="edit_filter">Embann ar sil</string>
     <string name="subcategories">Isrummadoù</string>
     <string name="selected_categories">Rummadoù diuzet</string>
     <string name="create_custom_poi">Krouiñ lec\'hioù dedenn personelaet</string>

@@ -412,9 +412,6 @@
     <string name="gpx_no_tracks_title_folder">You may also add tracks to the folder</string>
     <string name="gpx_add_track">Add track</string>
     <string name="gpx_appearance">Appearance</string>
-    <string name="osmo_share_location">Share</string>
-    <string name="osmo_pause_location">Pause</string>
-    <string name="osmo_service_running">OsMo service is running</string>
     <string name="trip_rec_notification_settings">Enable recording quick start</string>
     <string name="trip_rec_notification_settings_desc">Display a system notification allowing to start trip recording.</string>
     <string name="shared_string_notifications">Notifications</string>
@@ -573,21 +570,7 @@
     <string name="no_waypoints_found">No waypoints found</string>
     <string name="anonymous_user_hint">An anonymous user cannot:\n- create groups;\n- synchronize groups and devices with the server;\n- manage groups and devices in a personal dashboard on website.</string>
     <string name="report">Report</string>
-    <string name="osmo_connect_to_device_tracker_id">Tracker ID</string>
-    <string name="osmo_connect_to_group_id">Group ID</string>
-    <string name="osmo_connect">Join</string>
-    <string name="osmo_groups">OsMo Groups</string>
-    <string name="osmo_auto_send_locations_descr">Automatically start trip and send locations after application startup.</string>
-    <string name="osmo_auto_send_locations">Automatically start trip</string>
-    <string name="osmo_tracker_id">Tracker ID</string>
-    <string name="osmo_tracker_id_descr">Tap to view tracker ID.</string>
-    <string name="osmo_connect_to_my_nickname">Nick</string>
-    <string name="osmo_share_my_location">Transmit the location</string>
-    <string name="osmo_plugin_name">OpenStreetMap Monitoring</string>
-    <string name="osmo_plugin_description">This plugin partially provides the functionality of the OpenStreetMap Monitoring, see https://osmo.mobi
-    \n\nYou can track all devices of a participating group in real time. You can also see the point and tracks uploaded to the group to which you belong.
-    \n\nThe group has not been removed after months, bring it in line with the rules you create groups on the website OsMo.mobi
-    </string>
+    
     <string name="storage_permission_restart_is_required">Now the application is allowed to write to external storage. A manual application restart is required.</string>
     <string name="release_2_3">
 	\u2022 OSM Live. Support map contributors and developers and get hourly map updates. \n\n
@@ -930,7 +913,6 @@
     <string name="current_route">Current route</string>
     <string name="osm_changes_added_to_local_edits">OSM changes added to local changeset</string>
     <string name="mark_to_delete">Mark to delete</string>
-    <string name="osmo_grop_name_length_alert">Group name should be at least 3 characters long!</string>
     <string name="local_recordings_delete_all_confirm">You are going to delete %1$d notes. Are you sure?</string>
     <string name="local_osm_changes_upload_all_confirm">You are going to upload %1$d change(s) to OSM. Are you sure?</string>
     <string name="confirmation_to_clear_history">Do you want to clear the history?</string>
@@ -1172,7 +1154,6 @@
     <string name="map_widget_left">Left panel</string>
     <string name="configure_map">Configure map</string>
     <string name="search_radius_proximity">Within</string>
-    <string name="osmo_device_not_found">Device not found</string>
     <string name="anonymous_user">Anonymous user</string>
     <string name="logged_as">Logged in as %1$s</string>
     <string name="speed_limit_exceed">Speed limit tolerance</string>
@@ -1241,8 +1222,6 @@
     <string name="rendering_value_bicycle_name">Bicycle</string>
     <string name="rendering_value_pedestrian_name">Pedestrian</string>
     <string name="rendering_attr_coloredBuildings_name">Color-code buildings by type</string>
-    <string name="osmo_invite">Invite…</string>
-    <string name="osmo_leave_confirmation_msg">Do you want to leave group %1$s?</string>
     <string name="continue_navigation">Continue Navigation</string>
     <string name="pause_navigation">Pause Navigation</string>
     <string name="keep_navigation_service">Keep</string>
@@ -1272,18 +1251,6 @@
     <string name="rendering_attr_showSurfaceGrade_name">Show road quality</string>
     <string name="rendering_attr_showSurfaces_name">Show road surface</string>
     <string name="rendering_attr_showCycleRoutes_name">Show cycle routes</string>
-    <string name="osmo_auth_error_short">Authorization failed</string>
-    <string name="osmo_auth_error">OsMo authorization error encountered : %1$s.\n
-        It could be a temporary service down or your registration expired.\n
-        Do you want to proceed with new registration?</string>
-    <string name="osmo_group_by_invite">Enter by invite</string>
-    <string name="osmo_group_information">Please read before creating a group!</string>
-    <string name="osmo_not_signed_in">OsMo login failed</string>
-    <string name="osmo_gpx_points_downloaded">OsMo points %1$s downloaded.</string>
-    <string name="osmo_auto_connect_descr">Automatically connect to the service after application startup.</string>
-    <string name="osmo_auto_connect">Auto-connect</string>
-    <string name="osmo_start_service">OsMo service</string>
-    <string name="osmo_gpx_track_downloaded">OsMo track %1$s downloaded.</string>
     <string name="no_index_file_to_download">Downloads not found, please check your Internet connection.</string>
     <string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
     <string name="none_selected_gpx">No GPX files selected. To select one long-tap an available track.</string>
@@ -1322,65 +1289,14 @@
     <string name="gpx_selection_points">%1$s \nPoints</string>
     <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
     <string name="gpx_file_is_empty">GPX track is empty</string>
-    <string name="osmo_user_joined">User %1$s joined group %2$s</string>
-    <string name="osmo_user_left">User %1$s left group %2$s</string>
-    <string name="osmo_show_group_notifications">Show group notifications</string>
-    <string name="osmo_show_group_notifications_descr">Show toast messages when user joins or leaves the group.</string>
-    <string name="osmo_follow">Follow</string>
-    <string name="osmo_sign_in">Sign in</string>
-    <string name="osmo_create_groups_confirm">In order to create groups you need to be a registered user of OsMo.</string>
-    <string name="osmo_credentials_not_valid">Your OsMo credentials are not valid.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Are you sure about regenerating personal ids? All devices, connected to you, won\'t be able to track you any more.</string>
-    <string name="osmo_regenerate_login_ids">Regenerate user id</string>
-    <string name="osmo_cancel_moving_target">Cancel moving target</string>
-    <string name="osmo_center_location">Center on the screen</string>
-    <string name="osmo_set_moving_target">Set as moving target</string>
-    <string name="osmo_use_server_name">Registered name</string>
-    <string name="osmo_user_name">User</string>
-    <string name="osmo_edit_device">Change user properties</string>
     <string name="osmo_edit_color">Display color</string>
-    <string name="osmo_group_info">Info</string>
-    <string name="osmo_group">OsMo group</string>
-    <string name="osmo_group_share">In order to Connect to the group %2$s, specify group id (%1$s) or tap %3$s.</string>
-    <string name="osmo_share_connect_device">Let permanently follow this device</string>
-    <string name="osmo_share_current_session">Share current session in browser</string>
-    <string name="osmo_session_not_available">Session not available, please check that \'Send locations\' is on.</string>
-    <string name="osmo_share_session">Share session</string>
-    <string name="osmo_session_id_share">Session url to track device (%1$s)</string>
-    <string name="osmo_tracker_id_share">In order to Connect to the target device %2$s, tap on the link %3$s or specify tracker id (%1$s)</string>
-    <string name="osmo_track_interval">Logging interval</string>
-    <string name="osmo_track_interval_descr">Choose time interval for sending position data.</string>
-    <string name="int_days">days</string>
     <string name="osmo_connect_menu">Connect</string>
-    <string name="osmo_expire_group">Expires in</string>
     <string name="osmo_group_description">Description</string>
-    <string name="osmo_group_policy">Policy</string>
-    <string name="osmo_connect_to_device_name">User name</string>
-    <string name="osmo_group_name">Group name</string>
-    <string name="osmo_connect_to_device">Link with device</string>
-    <string name="osmo_connect_to_group">Link with group</string>
-    <string name="osmo_create_group">Create group</string>
-    <string name="osmo_server_operation_failed">OsMo Server operation failed</string>
-    <string name="osmo_activity">OpenStreetMap Monitoring</string>
-    <string name="osmo_enable_tracker">Send my positions</string>
-    <string name="osmo_control">OsMo quick access</string>
+    <string name="int_days">days</string>
     <string name="hours_ago">hours ago</string>
     <string name="minutes_ago">min ago</string>
     <string name="seconds_ago">sec ago</string>
-    <string name="osmo_connected_devices">Connected devices</string>
-    <string name="osmo_session_token">Session token: %1$s</string>
-    <string name="osmo_auth_pending">Waiting for authorization…</string>
-    <string name="osmo_locations_sent">Locations sent %1$d (in buffer %2$d) </string>
-    <string name="osmo_conn_successfull">Connection established: %1$s </string>
-    <string name="osmo_io_error">OsMo connection problem: </string>
-    <string name="osmo_settings_uuid">Unique device id</string>
     <string name="use_points_as_intermediates">Calculate route between points</string>
-    <string name="osmo_mode_restart">Restart OsMo session</string>
-    <string name="osmo_mode_on">Stop OsMo session</string>
-    <string name="osmo_mode_off">Start OsMo session</string>
-    <string name="osmo_settings_debug">Debug information</string>
-    <string name="osmo_settings_descr">Configure monitoring settings and setup personal monitoring channel.</string>
-    <string name="osmo_settings">OsMo</string>
     <string name="always_center_position_on_map">Display position always in center</string>
     <string name="voice_pref_title">Voice</string>
     <string name="misc_pref_title">Miscellaneous</string>

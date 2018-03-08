@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="lang_es_ar">ಅರ್ಜಿಂಟಿನೆಯಾದ ಸ್ಪೇನಿಷ್</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="lang_es_ar">ಅರ್ಜಿಂಟಿನೆಯಾದ ಸ್ಪೇನಿಷ್</string>
     <string name="lang_th">ಥಾಯಿ</string>
     <string name="lang_te">ತೆಲುಗು</string>
     <string name="lang_nn"/>
@@ -12,7 +11,7 @@
     <string name="shared_string_show_details">ವಿವರಣೆ ತೋರಿಸಿ</string>
     <string name="osm_edit_context_menu_delete">ಒಎಸ್ಎಂ ಸಂಪಾದನೆಯನ್ನು ಅಳಿಸು</string>
     <string name="rendering_value_disabled_name">ನಿಷ್ಕ್ರೀಯೆಗೊಳಿಸಿದೆ</string>
-    <string name="osmo_share_my_location">ನಾನಿರುವ ಸ್ಥಳವನ್ನು ಬೇರೆಯವರಿಗೆ ಕಳಿಸು</string>
+    
     <string name="shared_string_logoff">ಹೊರನಡೆ</string>
     <string name="rendering_attr_hideHouseNumbers_name">ಮನೆ ಸಂಖ್ಯಯನ್ನು ಅಡಗಿಸು</string>
     <string name="shared_string_copy">ಪ್ರತಿ</string>
@@ -108,7 +107,7 @@
 	<string name="shared_string_photo">ಛಾಯಾಚಿತ್ರ</string>
 	<string name="shared_string_online_maps">ಮಿಂಬಲೆ ನಕ್ಷೆಗಳು</string>
 	<string name="record_plugin_name">ಪ್ರಯಾಣ ದಾಖಲಿಸಿಕೊಳ್ಳುವುದು</string>
-	<string name="osmo_plugin_name">ಒಪನ್‌ಸ್ಟ್ರೀಟ್‌ಮ್ಯಾಪ್ ಪರಿವೀಕ್ಷಿಸುವಿಕೆ</string>
+	
 	<string name="plugin_nautical_name">ಹಡಗಿನ ನಕ್ಷೆ ವೀಕ್ಷಣೆ</string>
 	<string name="plugin_ski_name">ಆಕಾಶ ನಕ್ಷೆ ವೀಕ್ಷಣೆ</string>
 	<string name="audionotes_plugin_name">ದೃಶ್ಯ / ಶ್ರಾವ್ಯ ಟಿಪ್ಪಣೆಗಳು</string>
@@ -176,14 +175,14 @@
     <string name="traffic_warning_payment">ದಾಟುಸುಂಕ</string>
     <string name="traffic_warning_stop">ನಿಲುಗಡೆ ಫಲಕ</string>
     <string name="report">ವರದಿ ಮಾಡಿ</string>
-    <string name="osmo_connect">ಜೊತೆಗೂಡಿ</string>
+    
     <string name="night">ರಾತ್ರಿ</string>
     <string name="select_month_and_country">ತಿಂಗಳು ಮತ್ತು ದೇಶವನ್ನು ಆಯ್ದುಕೊಳ್ಳಿ</string>
     <string name="daily">ಪ್ರತಿದಿನ</string>
     <string name="weekly">ಪ್ರತಿವಾರ</string>
     <string name="morning">ಮುಂಜಾನೆ</string>
     <string name="no_map_markers_found">ದಯವಿಟ್ಟು ನಕ್ಷೆಯ ಮೇಲೆ ಚಿಹ್ನೆಯನ್ನು ಸೇರಿಸಿ</string>
-    <string name="osmo_groups">ಒಸ್ಮೋ ಗುಂಪುಗಳು</string>
+    
     <string name="shared_string_move_up">ಮೇಲೆ ಸರಿಸಿ</string>
     <string name="shared_string_move_down">ಕೆಳಗೆ ಸರಿಸಿ</string>
     <string name="full_report">ಪೂರ್ಣ ವರದಿ</string>

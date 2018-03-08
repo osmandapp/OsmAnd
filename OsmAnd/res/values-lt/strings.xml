@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
@@ -500,7 +499,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
 
     <string name="voice">Įrašytas balsas</string>
     <string name="no_vector_map_loaded">Vektoriniai žemėlapiai neįkelti</string>
-    <string name="map_route_by_gpx">Vykdyti navigaciją naudojant GPX</string>
+    
     <string name="gpx_files_not_found">Tracks segtuve nerasta jokių GPX failų</string>
     <string name="layer_gpx_layer">GPX maršrutas…</string>
     <string name="error_reading_gpx">Įvyko klaida skaitant GPX duomenis</string>
@@ -1061,76 +1060,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ žemėlapiai ir navigacija</string>
 
     
-    <string name="osmand_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions) yra žemėlapių ir navigacijos programa naudojanti nemokamus, visą pasaulį dengiančius, aukštos kokybės OpenStreetMap (OSM) žemėlapius. Visi žemėlapiai gali būti išsaugoti jūsų įrenginio atminties kortelėje ir naudojami be interneto ryšio. Naudodama jūsų įrenginio GPS imtuvą OsmAnd apskaičiuoja maršrutą, kelionės nuorodas teikia vizualiai ir balsu tiek automobiliui, tiek ir dviračiui bei pėsčiajam. Visas pagrindinis funkcionalumas veikia tiek su, tiek ir be interneto ryšio. 
-
-Pagrindinės funkcijos:
- 
-Navigacija
- - Naudoja internetą (greita) arba be interneto (nereikalingas joks ryšys kai jūs užsienyje) 
- - Kelionės nuorodos balsu (įrašyti arba kompiuteriniai balsai) 
- - Galima įjungti nuorodas eismo juostų laikymosi, gatvių pavadinimų rodymo, numatomo atvykimo laiko
- - Galima nurodyti tarpinius maršruto tikslus
- - Automatinis maršruto perskaičiavimas jei nukrypstate nuo maršruto
- - Ieškokite vietų pagal adresus, pagal tipus (t.y.: restoranas, viešbutis, kuro kolonėlė, muziejus), arba pagal koordinates 
-
-Žemėlapio peržiūra
- - Jūsų vietos ir orientacijos rodymas žemėlapyje
- - Galite pasirinkti žemėlapio orientavimą pagal kompasą ar jūsų judėjimo kryptį 
- - Išsaugokite svarbias vietas kaip Įsimintas
- - LV (Lankytinų vietų) aplink jus rodymas
- - Gali naudoti kitus žemėlapius lakštus tiesiogiai iš interneto
- - Gali rodyti palydovo vaizdą (iš Bing)
- - Gali rodyti įvairius papildomus sluoksnius kaip pvz. turistinius/navigacijos GPX maršrutus ar papildomus žemėlapius su keičiamu skaidrumu
- - Pasirinktinai vietų pavadinimus galima rodyti angliškai, vietine kalba arba fonetiškai 
-
-Naudokitės OpenStreetMap ir Vikipedijos informacija:
- - Kokybiška informacija iš geriausių pasaulio kolaboravimo projektų
- - Pasaulio žemėlapiai iš OpenStreeMap, atskirai šalims ar regionams
- - LV rekomendacijos iš Vikipedijos (tik mokamoje versijoje)
- - Neribotas nemokamas atsisiuntimas tiesiai iš programos (nemokamoje versijoje ribojama iki 16 žemėlapių)
- - Visada naujausi žemėlapiai (atnaujinami mažiausiai kartą per mėnesį)
- - Kompaktiški parsisiunčiami vektoriniai žemėlapiai
- - Galimybė pasirinkti pilną arba tik kelių tinklo žemėlapį (Pvz., visa Japonija užima 700MB, o kelių žemėlapis tik 200MB)
- - Taip pat palaikomi internetiniai ar laikinai išsaugoti žemėlapiai 
-
-Saugumo funkcionalumas
- - Pasirenkamas automatizuotas dienos/nakties rodinio perjungimas
- - Pasirenkamas greičio apribojimų rodymas su priminimu jei jį viršijate
- - Pasirenkamas žemėlapio mastelio pagal judėjimo greitį nustatymas
- - Dalykitės savo buvimo vieta, kad jūsų draugai galėtų jus rasti 
-
-Dviračio ar pėsčiojo funkcionalumas
- - Žemėlapiuose pateikiami takeliai, pėsčiųjų ar dviračių takai
- - Maršruto skaičiavimo režimai pėstiesiems ir dviratininkams
- - Pasirinktinai rodomos viešojo transporto (autobusų, tramvajų, traukinių) stotelės su maršrutų pavadinimais
- - Galimybė išsaugoti nukeliautą maršrutą į GPX failą ar internete
- - Pasirenkamas greičio ir aukščio rodymas
- - Kontūrinių linijų ir kalnų šešėlių (su įskiepiu) rodymas
-
-Tiesiogiai prisidėkite prie OpenStreetMap
- - Praneškite apie žemėlapių pastabas
- - Įkelkite nuvažiuotų maršrutų GPX failus tiesiogiai iš programos
- - Pridėkite LV ir iš karto įkelkite į OSM (arba galite padaryti tai ir vėliau, jei neturite interneto)
- - Pasirinktinai galima įrašyti judėjimo istoriją (kai įrenginys yra užmigdytas) 
-
-OsmAnd yra atviro kodo programa, kuri aktyviai tobulinama. Kiekvienas gali prisidėti prie programos vystymo pranešdamas apie pastabas, vertimais ar programuodamas naujas funkcijas. Šis projektas yra labai gyvas ir pastoviai vystomas įvairiapusio kūrėjų ir naudotojų bendradarbiavimo pagalba. Projekto progresas taip pat priklauso nuo finansinės paramos, kuri reikalinga naujų funkcijų vystymui, programavimui ir testavimui. Pirkdami OsmAnd+ jūs padėsite programą padaryti dar geresne! Taip pat galima finansuoti specifinį naują funkcionalumą arba tiesiog paremti projektą tiesiogiai osmand.net puslapyje.
-
-Apytikslis žemėlapių padengimas ir kokybė
- - Vakarų Europa: **** 
- - Rytų Europa: ***
- - Rusija: ***
- - Šiaurės Amerika: ***
- - Pietų Amerika: **
- - Azija: **
- - Japonija ir Korėja: ***
- - Artimieji Rytai: **
- - Afrika: **
- - Antarktida: * 
-
-Šalių žemėlapių sąrašas (praktiškai visas pasaulis!), pavadinimai angliški:
-Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
- "</string>
+    
     <string name="street_name">Gatvės pavadinimas</string>
     <string name="hno">Namo numeris</string>
 
@@ -1388,85 +1318,81 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="share_route_as_gpx">Bendrinti maršruto GPX failą</string>
     <string name="share_route_subject">Maršrutas bendrintas per OsmAnd</string>
     <string name="navigation_intent_invalid">Netinkamas formatas: %s</string>
-    <string name="osmo_settings_uuid">Unikalus įrenginio ID</string>
-    <string name="osmo_settings_descr">Konfigūruoti stebėjimo nustatymus ir nustatyti asmeninį stebėjimo kanalą.</string>
-    <string name="osmo_plugin_description">Šis įskiepis suteikia dalinį OpenStreetMap Monitoringo funkncionalumą, žiūrėkite https://osmo.mobi 
-\n
-\nJūs galite realiu laikus sekti visus įrenginius kurie registruoti atitinkamoje grupėje. Jūs taip pat galite pamatyti taškus ir kelius kurie įkeliami į grupę kuriai priklausote.
-\n
-\nGrupė po kelių mėnesių nebuvo panaikinta. Sutvarkykite ją pagal grupių kūrimui svetainėje OsMo.mobi keliamus reikalavimus</string>
-    <string name="osmo_plugin_name">OpenStreetMap Stebėjimas</string>
-    <string name="osmo_settings">OsMo</string>
+    
+    
+    
+    
+    
     <string name="keep_informing_never">Tik rankiniu būdu (spauskite rodyklę)</string>
     <string name="keep_informing_descr">Maršruto instrukcijas pakartotinai pranešinėti reguliariais intervalais.</string>
     <string name="keep_informing">Pakartoti maršruto instrukcijas</string>
     <string name="arrival_distance">Pranešimas apie atvykimą</string>
     <string name="arrival_distance_descr">Kada anksti turi būti pranešama apie atvykimą?</string>
-    <string name="osmo_io_error">OsMo prisijungimo problema:</string>
-    <string name="osmo_mode_on">Sustabdyti OsMo sesiją</string>
-    <string name="osmo_mode_off">Paleisti OsMo sesiją</string>
+    
+    
+    
 
     <string name="shared_string_share">Bendrinti</string>
     <string name="share_fav_subject">Įsimintos vietos bendrintos iš OsmAnd</string>
     <string name="use_points_as_intermediates">Apskaičiuoti maršrutą tarp taškų</string>
-    <string name="osmo_connect_to_device_name">Vartotojo vardas</string>
-    <string name="osmo_connect_to_device_tracker_id">Sekėjo ID</string>
-    <string name="osmo_connect_to_device">Sujungti su įrenginiu</string>
+    
+    
+    
 
 
-    <string name="osmo_connected_devices">Prijungti įrenginiai</string>
-    <string name="osmo_groups">OsMo Grupės</string>
-    <string name="osmo_auto_send_locations_descr">Automatiškai pradėti kelionę ir siųsti buvimo vietą paleidus programą.</string>
-    <string name="osmo_auto_send_locations">Automatiškai pradėti kelionę</string>
-    <string name="osmo_tracker_id">Sekėjo ID</string>
-    <string name="osmo_tracker_id_descr">Paspauskite norėdami peržiūrėti sekėjo ID.</string>
-    <string name="osmo_session_token">Sesijos žymė: %1$s</string>
-    <string name="osmo_auth_pending">Laukiama autorizavimo…</string>
-    <string name="osmo_locations_sent">Buvimo vieta išsiųsta %1$d (talpykloje %2$d) </string>
-    <string name="osmo_conn_successfull">Prisijungta sėkmingai: %1$s </string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-    <string name="osmo_mode_restart">Paleisti OsMo sesiją iš naujo</string>
-    <string name="osmo_settings_debug">Derinimo informacija</string>
-    <string name="osmo_group_info">Info</string>
-    <string name="osmo_group">OsMo grupė</string>
-    <string name="osmo_group_share">Norėdami prisijungti prie %2$s grupės, nurodykite grupės id (%1$s) arba paspauskite %3$s .</string>
-    <string name="osmo_share_connect_device">Leiskite šį įrenginį sekti pastoviai</string>
-    <string name="osmo_share_current_session">Dalinkitės dabartine sesija naršyklėje</string>
-    <string name="osmo_session_not_available">Sesija neprieinama. Įsitikinkite kad įjungtas \"Siųsti vietą\" nustatymas.</string>
-    <string name="osmo_share_session">Bendrinti sesiją</string>
-    <string name="osmo_session_id_share">Sesijos url įrenginio (%1$s) sekimui</string>
-    <string name="osmo_tracker_id_share">Norėdami prisijungti prie %2$s įrenginio paspauskite nuorodą %3$s arba nurodykite sekiklio id (%1$s)</string>
-    <string name="osmo_track_interval">Pozicijos išsaugojimo intervalas</string>
-    <string name="osmo_track_interval_descr">Pasirinkite laiko intervalą vietos siuntimui.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="int_days">dienos</string>
     <string name="osmo_connect_menu">Prisijungti</string>
-    <string name="osmo_expire_group">Baigs galioti už</string>
+    
     <string name="osmo_group_description">Aprašymas</string>
-    <string name="osmo_group_policy">Politika</string>
-    <string name="osmo_connect_to_group_id">Grupės ID</string>
-    <string name="osmo_group_name">Grupės pavadinimas</string>
-    <string name="osmo_connect_to_group">Prisijungti prie grupės</string>
-    <string name="osmo_connect">Prisijungti</string>
-    <string name="osmo_create_group">Sukurti grupę</string>
-    <string name="osmo_server_operation_failed">OsMo serverio veiksmas nepavyko</string>
-    <string name="osmo_activity">OpenStreetMap stebėjimas</string>
-    <string name="osmo_enable_tracker">Siųsti mano buvimo vietą</string>
-    <string name="osmo_control">OsMo greita prieiga</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     <string name="import_file_favourites">Išsaugoti duomenis GPX faile ar importuoti į įsimintas vietas?</string>
 
-    <string name="osmo_follow">Sekti</string>
-    <string name="osmo_sign_in">Prisijungti</string>
-    <string name="osmo_create_groups_confirm">Norėdami kurti grupes privalote turėti OsMo vartotojo paskyrą.</string>
-    <string name="osmo_credentials_not_valid">Jūsų OsMo prisijungimo vardas ar slaptažodis klaidingi.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Ar tikrai norite atkurti asmeninius id? Visi prie jūsų prisijungę įrenginiai nebegalės jūsų sekti.</string>
-    <string name="osmo_regenerate_login_ids">Atkurti vartotojo id</string>
-    <string name="osmo_cancel_moving_target">Atšaukti judantį taikinį</string>
-    <string name="osmo_center_location">Centruoti ekrane</string>
-    <string name="osmo_set_moving_target">Nustatyti judančiu taikiniu</string>
-    <string name="osmo_use_server_name">Registruotas vardas</string>
-    <string name="osmo_connect_to_my_nickname">Slapyvardis</string>
-    <string name="osmo_user_name">Vartotojas</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <string name="rendering_value_pink_name">rožinė</string>
     
@@ -1476,7 +1402,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     
     
 
-    <string name="osmo_edit_device">Pakeisti vartotojo nustatymus</string>
+    
     <string name="osmo_edit_color">Rodoma spalva</string>
     <string name="hours_ago">valandų senumo</string>
     <string name="minutes_ago">minučių senumo</string>
@@ -1525,36 +1451,26 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="shared_string_my_favorites">Mano mėgiami</string>
     <string name="shared_string_my_places">Mano vietos</string>
 
-    <string name="osmo_user_joined">Vartotojas %1$s prisijungė prie %2$s grupės</string>
-    <string name="osmo_user_left">Vartotojas %1$s atsijungė nuo %2$s grupės</string>
-    <string name="osmo_show_group_notifications">Rodyti grupės pranešimus</string>
-    <string name="osmo_show_group_notifications_descr">Rodyti iššokančius pranešimus vartotojui prisijungiant arba atsijungiant nuo grupės.</string>
+    
+    
+    
+    
     <string name="none_selected_gpx">Nepasirinktas joks GPX failas. Norėdami pasirinkti paspauskite ir laikykite pageidaujamą failą.</string>
 
     <string name="local_index_select_gpx_file">Pasirinkite ką atvaizduoti</string>
     <string name="route_descr_destination">Paskirties punktas</string>
     <string name="no_index_file_to_download">Nėra ką parsisiųsti. Pasitikrinkite interneto ryšį.</string>
-    <string name="osmo_gpx_points_downloaded">OsMo taškai %1$s parsiųsti.</string>
-    <string name="osmo_auto_connect_descr">Automatiškai prisijungti paleidus programą.</string>
-    <string name="osmo_auto_connect">Automatiškai jungtis</string>
-    <string name="osmo_start_service">OsMo paslauga</string>
-    <string name="osmo_gpx_track_downloaded">OsMo įrašas %1$s parsiųstas.</string>
-    <string name="osmo_group_by_invite">Prisijungti su pakvietimais</string>
-    <string name="osmo_group_information_desc">- Kurdami grupę suteikite jai pavadinimą ir užpildykite aprašymą 
-\n - Iš programėlės sukuriamos tik paprasto tipo grupės. Daugiau informacijos https://osmo.mobi/g/new 
-\n - Interneto svetainėje galite valdyti grupę, pridėti pėdsakus ar taškus kurie bus prieinami visiems 
-\n - Mes nepritariame tik vieno naudotojo grupėms jei tai ne LV grupė 
-\n - Uždaros grupės ribojamos iki 8 narių 
-\n - Detalios taisyklės visada prieinamos svetainėje OsMo.mobi 
-\n - Jei jums reikia išskirtinių sąlygų - susisiekite: osmo.mobi@gmail.com</string>
-    <string name="osmo_group_information">Perskaitykite prieš kurdami grupę!</string>
-    <string name="osmo_not_signed_in">Prisijungti prie OsMo nepavyko</string>
-    <string name="osmo_auth_error_short">Autorizavimas nepavyko</string>
-    <string name="osmo_auth_error">OsMo autorizavimo metu įvyko klaida : %1$s.
-
-Gali būti, kad paslauga laikinai neveikia arba baigėsi jūsų prisijungimo laikas.
-
-Ar norite registruotis iš naujo?</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="rendering_attr_hideBuildings_name">Pastatai</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Ne automobiliams skirti greitkeliai</string>
     <string name="rendering_attr_hideText_name">Tekstas</string>
@@ -1599,9 +1515,9 @@ Ar norite registruotis iš naujo?</string>
     <string name="rendering_attr_alpineHiking_description">Užkrauti kelius pagal SAC skalę.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Užkrauti kelius pagal OSMC pėdsakus.</string>
 
-    <string name="osmo_invite">Pakvietimas…</string>
-    <string name="osmo_leave_confirmation_msg">Ar norite atsijungti nuo grupės %1$s?</string>
-    <string name="osmo_specify_tracker_id">Prašome nurodyti ID</string>
+    
+    
+    
     <string name="arrival_distance_factor_early">Anksti</string>
     <string name="arrival_distance_factor_normally">Įprastai</string>
     <string name="arrival_distance_factor_late">Vėlai</string>
@@ -1658,8 +1574,8 @@ Ar norite registruotis iš naujo?</string>
 
     <string name="speed_limit_exceed">Greičio ribojimo viršijimo reikšmė</string>
     <string name="speed_limit_exceed_message">Pasirinkite greičio ribojimo viršijimo ribą, kurią pasiekus bus pranešta balsu.</string>
-    <string name="osmo_device_not_found">Įrenginys neaptiktas</string>
-    <string name="osmo_no_connection_msg">Nepavykp prisijungti prie OsMo serverio:\n- patikrinkite internetinį ryšį;\n- patikrinkite nustatymus;\n- patikrinkite mūsų Twitter: https://twitter.com/OsMomobi</string>
+    
+    
     <string name="anonymous_user_hint">Anoniminis vartotojas negali:\n- kurti grupių;\n- sinchronizuoti grupes bei įrenginius su serveriu;\n- valdyti grupes bei įrenginius asmeniniame valdymo skydelyje interneto svetainėje.</string>
     <string name="anonymous_user">Anonimas</string>
     <string name="logged_as">Prisijungėte kaip %1$s</string>
@@ -1798,7 +1714,7 @@ Ar norite registruotis iš naujo?</string>
     <string name="current_route">Esamas maršrutas</string>
     <string name="osm_changes_added_to_local_edits">OSM pakeitimai įtraukti į lokalius pakeitimus</string>
     <string name="mark_to_delete">Pažymėkite, jei norite ištrinti</string>
-    <string name="osmo_grop_name_length_alert">Grupės pavadinimą privalo sudaryti mažiausiai 3 simboliai!</string>
+    
     <string name="local_osm_changes_upload_all_confirm">Jūs ketinate nusiųsti %1$d pakeitimų į OSM. Ar tikrai?</string>
     <string name="confirmation_to_clear_history">Ar norite išvalyti istoriją?</string>
     <string name="delay_to_start_navigation_descr">Nurodykite maršuto planavimo ekrane delsos laiką.</string>
@@ -1881,7 +1797,7 @@ Ilguma %2$s</string>
     <string name="routing_attr_height_description">Nurodykite transporto priemonės aukštį, leidžiamą maršrutuose.</string>
     <string name="use_fast_recalculation_desc">Perskaičiuoti tik pradinę ilgos kelionės maršruto dalį.</string>
     <string name="rendering_value_disabled_name">Išjungtas</string>
-    <string name="osmo_share_my_location">Perduoti mano vietą</string>
+    
     <string name="shared_string_logoff">Atsijungti</string>
     <string name="search_poi_category_hint">Rašykite, norėdami pradėti paiešką</string>
     <string name="track_points">Maršruto taškai</string>
@@ -2451,7 +2367,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="driving_region_australia">Australija</string>
     <string name="live_update">Tiesioginiai atnaujinimai</string>
     <string name="file_name_containes_illegal_char">Failo pavadinime yra neleistinas simbolis</string>
-<string name="osmo_share_location">Dalintis</string>
+
     <string name="shared_string_notifications">Pranešimai</string>
     <string name="shared_string_continue">Tęsti</string>
     <string name="shared_string_trip">Kelionė</string>
@@ -2474,8 +2390,8 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="search_map_hint">Ieškoti miesto arba regiono</string>
     <string name="upload_poi">Įkelti POI</string>
     <string name="gpx_appearance">Išvaizda</string>
-    <string name="osmo_pause_location">Pauzė</string>
-    <string name="osmo_service_running">Veikia OsMo paslauga</string>
+    
+    
     <string name="shared_string_pause">Pauzė</string>
     <string name="lang_sr_latn">Serbų (lotynų)</string>
     <string name="lang_zh_hk">Kiniečių (Honkongas)</string>
@@ -2768,10 +2684,10 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="yesterday">Vakar</string>
     <string name="last_seven_days">Per pastarąsias 7 dienas</string>
     <string name="this_year">Šiemet</string>
-    <string name="widget">Valdiklis</string>
-    <string name="top_bar">Viršutinė juosta</string>
+    
+    
     <string name="move_all_to_history">Perkelti visus į istoriją</string>
-    <string name="build_route">Sukurti maršrutą</string>
+    
     <string name="show_direction">Atstumo nuoroda</string>
     <string name="sort_by">Rūšiuoti pagal</string>
     <string name="do_not_use_animations">Nenaudoti animacijos</string>
@@ -2814,7 +2730,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="show_map">Rodyti žemėlapį</string>
     <string name="route_is_calculated">Maršrutas apskaičiuojamas</string>
     <string name="osn_modify_dialog_title">Keisti pastabą</string>
-    <string name="shared_string_navigate">Naviguoti</string>
+    
     <string name="shared_string_markers">Žymekliai</string>
     <string name="coordinates_format">Koordinačių formatas</string>
     <string name="use_system_keyboard">Naudoti sistemos klaviatūra</string>

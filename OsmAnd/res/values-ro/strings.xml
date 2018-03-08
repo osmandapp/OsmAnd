@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
     
 	
     <string name="close_changeset">Închide setul de modificări</string>
@@ -634,7 +633,7 @@
 	
 	<string name="voice">Voce înregistrată</string>
 	<string name="no_vector_map_loaded">Hărțile vectoriale nu au fost încărcate</string>
-	<string name="map_route_by_gpx">Navigare folosind GPX</string>
+	
 	<string name="gpx_files_not_found">Nu au fost găsite fișiere GPX în directorul tracks</string>
 	<string name="layer_gpx_layer">Trasee GPX…</string>
 	<string name="error_reading_gpx">Eroare la citirea datelor GPX</string>
@@ -1217,9 +1216,9 @@
     <string name="rendering_value_bicycle_name">Bicicletă</string>
     <string name="rendering_value_pedestrian_name">Pieton</string>
     <string name="rendering_attr_coloredBuildings_name">Cladiri colorate</string>
-    <string name="osmo_invite">Invită…</string>
-    <string name="osmo_leave_confirmation_msg">Vrei să părăsești grupul %1$s?</string>
-    <string name="osmo_specify_tracker_id">Vă rugăm să specificați ID</string>
+    
+    
+    
     <string name="continue_navigation">Coninuați navigația</string>
     <string name="pause_navigation">Întrerupeți navigația</string>
     <string name="map_preferred_locale">Limba de afișare preferată</string>
@@ -1250,14 +1249,14 @@
     <string name="rendering_attr_showSurfaceGrade_name">Arată calitatea drumului</string>
     <string name="rendering_attr_showSurfaces_name">Arată suprafața drumului</string>
     <string name="rendering_attr_showCycleRoutes_name">Arată rutele pentru biciclete</string>
-    <string name="osmo_auth_error_short">Autorizare eșuată</string>
-    <string name="osmo_group_information">Vă rugăm să citiți înainte de a crea un grup!</string>
-    <string name="osmo_not_signed_in">Logare OsMo eșuată</string>
-    <string name="osmo_gpx_points_downloaded">Puncte OsMo %1$s descărcate.</string>
-    <string name="osmo_auto_connect_descr">Conectare automată la serviciu după pornirea aplicației</string>
-    <string name="osmo_auto_connect">Auto-conectare</string>
-    <string name="osmo_start_service">Serviciul OsMo</string>
-    <string name="osmo_gpx_track_downloaded">Înregistrare OsMo %1$s descărcată.</string>
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="no_index_file_to_download">Nu a fost gasit nimic de descărcat, vă rugăm să verificați conexiunea la internet.</string>
     
     <string name="local_index_select_gpx_file">Selectați pentru afișare</string>
@@ -1277,8 +1276,8 @@
     <string name="selected_gpx_info_show">\n\nȚineți apăsat pentru a vedea pe hartă</string>
     <string name="shared_string_selected">Selectat</string>
     <string name="shared_string_selected_lowercase">selectat</string>
-    <string name="osmo_auth_error">Eroare de autorizare OsMo aparută : %1$s.\nPoate fi o cadere temporară a serviciului sau înregistrarea dumneavoastră a expirat.\nDoriți sa începeți o nouă înregistrare?</string>
-    <string name="osmo_group_by_invite">Intră pe baza invitației</string>
+    
+    
     <string name="delay_navigation_start">Porniți ghidarea asistată automat</string>
     <string name="gpx_info_subtracks">"Subtrack-uri: %1$s "</string>
 	<string name="gpx_info_waypoints">"Puncte de reper: %1$s "</string>
@@ -1311,11 +1310,11 @@
     <string name="shared_string_my_favorites">Favoritele mele</string>
     <string name="shared_string_my_places">Locurile mele</string>
     
-    <string name="osmo_center_location">Centrul ecranului</string>
-    <string name="osmo_set_moving_target">Setare ca țintă în mișcare</string>
-    <string name="osmo_use_server_name">Nume înregistrat</string>
-    <string name="osmo_connect_to_my_nickname">Porecla mea</string>
-    <string name="osmo_user_name">Utilizator</string>
+    
+    
+    
+    
+    
 	
 	<string name="rendering_value_pink_name">Roz</string>
 	
@@ -1325,9 +1324,9 @@
 	
 	
 	
-    <string name="osmo_edit_device">Schimbă proprietăți utilizator</string>
+    
     <string name="osmo_edit_color">Culoare afișare</string>
-    <string name="osmo_group">Grup OsMo</string>
+    
     <string name="fav_point_dublicate">Nume puncte favorite duplicate</string>
     <string name="fav_point_dublicate_message">Am schimbat numele punctelor favorite în %1$s pentru a evita numele duplicate.</string>
     <string name="text_size_descr">Setați mărimea textului pe hartă.</string>
@@ -1397,7 +1396,7 @@
     <string name="shared_string_show">Arată</string>
 	<string name="configure_map">Configuraţi harta</string>
     <string name="search_radius_proximity">În imediata apropiere a</string>
-    <string name="osmo_device_not_found">Dispozitivul nu a fost găsit</string>
+    
     <string name="anonymous_user">Utilizator anonim</string>
     <string name="logged_as">Logat ca %1$s</string>
 	<string name="speed_limit_exceed">Toleranță limită de viteză</string>
@@ -1412,16 +1411,16 @@
     <string name="gpx_file_is_empty">Traseul Gpx este gol</string>
     
     <string name="shared_string_my_tracks">Traseele mele</string>
-    <string name="osmo_user_joined">Utilizatorul %1$s s-a alăturat grupului %2$s</string>
-    <string name="osmo_user_left">Utilizatorul %1$s a părăsit grupul %2$s</string>
-    <string name="osmo_show_group_notifications">Arată notificări ale grupului</string>
-    <string name="osmo_follow">Urmaţi</string>
-    <string name="osmo_sign_in">Conectează-te</string>
-    <string name="osmo_create_groups_confirm">Pentru a crea grupuri trebuie să fii un utilizator înregistrat de OsMo.</string>
-    <string name="osmo_credentials_not_valid">Credențialele tale osmo nu sunt valide.</string>
-    <string name="osmo_regenerate_login_ids">Regenerează id utilizator</string>
-    <string name="osmo_group_info">Info</string>
-    <string name="osmo_share_current_session">Partajează sesiunea curentă în browser</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 <string name="navigation_intent_invalid">Format invalid: %s</string>
     <string name="osb_author_dialog_password">"Parolă OSM  (opţional)"</string>
@@ -1431,34 +1430,34 @@
     <string name="rendering_attr_tramRoutes_name">Rute tramvai</string>
     <string name="enable_proxy_descr">Configurare proxy HTTP pentru toate solicitările de rețea</string>
 	<string name="proxy_host_descr">Configurează gazda proxy-ului (de ex. 127.0.0.1)</string>
-	<string name="osmo_share_session">Partajează sesiunea</string>
+	
     <string name="int_days">zile</string>
     <string name="osmo_connect_menu">Conectare</string>
-    <string name="osmo_expire_group">Expiră în</string>
+    
     <string name="osmo_group_description">Descriere</string>
-    <string name="osmo_group_policy">Politică</string>
-    <string name="osmo_connect_to_device_name">Nume utilizator</string>
-    <string name="osmo_connect_to_group_id">Id grup</string>
-    <string name="osmo_group_name">Numele grupului</string>
-    <string name="osmo_connect">Conectare la</string>
-    <string name="osmo_create_group">Crează grup</string>
-    <string name="osmo_activity">Monitorizare OpenStreetMap</string>
-    <string name="osmo_enable_tracker">Trimite locațiile mele</string>
-    <string name="osmo_control">Acces rapid OsMo</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">ore în urmă</string>
     <string name="minutes_ago">minute în urmă</string>
     <string name="seconds_ago">secunde în urmă</string>
-    <string name="osmo_connected_devices">Dispozitive conectate</string>
-    <string name="osmo_groups">Grupuri/Dispozitive OsMo</string>
-    <string name="osmo_session_token">Token sesiune: %1$s</string>
-    <string name="osmo_auth_pending">Aşteptare autorizare…</string>
-    <string name="osmo_locations_sent">"Locații trimise %1$d (în tampon %2$d) "</string>
-    <string name="osmo_conn_successfull">"Conexiune stabilită: %1$s "</string>
-    <string name="osmo_io_error">"Problemă de conexiune OsMo: "</string>
-    <string name="osmo_settings_uuid">Id unic dispozitiv</string>
-    <string name="osmo_settings_debug">Informaţii de depanare</string>
-    <string name="osmo_settings">Monitorizare OpenStreetMap</string>
-    <string name="osmo_plugin_name">OsMo (Monitorizare avansată în direct)</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
    	<string name="always_center_position_on_map">Arată întotdeauna poziția în centru</string>
     <string name="voice_pref_title">Voce</string>
     <string name="misc_pref_title">Diverse</string>
@@ -1714,7 +1713,7 @@
     <string name="rendering_value_disabled_name">Dezactivată</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorează în funcție de destinația calătoriei</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colorează în funcție de OSMC</string>
-    <string name="osmo_share_my_location">Împărtășește poziția mea</string>
+    
     <string name="shared_string_logoff">Deconectare</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ascunde numarul casei</string>
     <string name="application_dir_change_warning3">Dorești ca OsmAnd să copie de asemenea și fișierele de date la noua destinație?</string>
@@ -1747,7 +1746,7 @@
     <string name="current_route">Ruta curentă</string>
     <string name="osm_changes_added_to_local_edits">Schimbările OSM adăugate in setul de schimbări locale</string>
     <string name="mark_to_delete">Marchează pentru ștergere</string>
-    <string name="osmo_grop_name_length_alert">Numele grupului trebuie să aibă cel puțin 3 caractere!</string>
+    
     <string name="local_recordings_delete_all_confirm">Sigur dorești ștergerea notelor %1$d?</string>
     <string name="local_osm_changes_upload_all_confirm">Dorești încărcarea (upload) pe OSM a %1$d. Ești sigur?</string>
     <string name="confirmation_to_clear_history">Dorești ștergerea istoricului?</string>

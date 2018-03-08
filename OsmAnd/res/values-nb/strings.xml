@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
     <string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -371,7 +370,7 @@
 
     <string name="voice">Taleopptak</string>
     <string name="no_vector_map_loaded">Vektorkart ble ikke lastet</string>
-    <string name="map_route_by_gpx">Naviger ved bruk av GPX</string>
+    
     <string name="vector_data">Offline vektorkart</string>
 
     
@@ -696,10 +695,10 @@
     <string name="lang_hr">Kroatisk</string>
     <string name="calculate_osmand_route_without_internet">Beregn OsmAnd-rutesegment uten internett</string>
     <string name="gpx_option_calculate_first_last_segment">Beregn OsmAnd-rute for første og siste rutesegment</string>
-    <string name="osmo_settings_uuid">Unik enhets-ID</string>
-    <string name="osmo_settings_descr">Still inn overvåking og personlig overvåkingskanal.</string>
-    <string name="osmo_plugin_name">OpenStreetMap-overvåking</string>
-    <string name="osmo_settings">OsMo</string>
+    
+    
+    
+    
     <string name="map_widget_top">Statuslinje</string>
     <string name="map_preferred_locale_descr">Foretrukket språk for påskrifter på kartet (hvis ikke tilgjengelig skiftes til engelsk eller til lokale navn).</string>
     <string name="map_preferred_locale">Foretrukket språk på kart</string>
@@ -731,7 +730,7 @@
     <string name="map_widget_right">Høyre panel</string>
     <string name="map_widget_left">Venstre panel</string>
     <string name="configure_map">Kartinnstilling</string>
-    <string name="osmo_device_not_found">Enhet ikke funnet</string>
+    
     <string name="speed_limit_exceed">Toleranse for fartsgrense</string>
     <string name="text_size_descr">Sett tekststørrelsen på kartet.</string>
     <string name="text_size">Tekststørrelse</string>
@@ -882,10 +881,10 @@
     <string name="osb_comment_dialog_success">Kommentar ble vellykket lagt til</string>
     <string name="no_buildings_found">Ingen bygninger funnet.</string>
     <string name="loading_streets_buildings">Laster gater/bygninger…</string>
-    <string name="osmo_activity">OpenStreetMap-overvåking</string>
+    
     <string name="fav_point_dublicate_message">Spesifisert favorittnavn er allerede i bruk og endres til %1$s for å unngå duplisering.</string>
     <string name="gpx_selection_point">Punkt %1$s</string>
-    <string name="osmo_center_location">Sentrer på skjermen</string>
+    
     
     <string name="rendering_value_pink_name">Rosa</string>
     
@@ -895,8 +894,8 @@
     
     
 
-    <string name="osmo_group_info">Info</string>
-    <string name="osmo_track_interval">Loggingsintervall</string>
+    
+    
     <string name="osmo_group_description">Beskrivelse</string>
     <string name="use_points_as_intermediates">Beregn rute mellom punkter</string>
     <string name="lang_sr">Serbisk</string>
@@ -1013,7 +1012,7 @@
     <string name="monitoring_settings_descr">Still inn opptak av dine turer.</string>
     <string name="record_plugin_name">Turopptak</string>
     <string name="download_additional_maps">Laste ned manglende kart %1$s (%2$d MB)?</string>
-    <string name="osmo_invite">Inviter…</string>
+    
     <string name="keep_navigation_service">Hold</string>
     <string name="gps_wake_up_timer">GPS-vekkingsintervall</string>
     <string name="forward">Videre</string>
@@ -1233,7 +1232,7 @@
     <string name="agps_data_last_downloaded">A-GPS-data sist nedlastet: %1$s</string>
     <string name="welcome_text">OsmAnd gir global offline kartlesing, og global offline navigering!</string>
     <string name="current_route">Gjeldende rute</string>
-    <string name="osmo_grop_name_length_alert">Gruppenavn skal være på minst 3 tegn!</string>
+    
     <string name="shared_string_go">Start</string>
     <string name="shared_string_do_not_use">Ikke bruk</string>
     <string name="shared_string_address">Adresse</string>
@@ -1304,7 +1303,7 @@
     <string name="shared_string_show_details">Vis detaljer</string>
     <string name="osm_edit_context_menu_delete">Slett OSM-redigering</string>
     <string name="rendering_value_disabled_name">Deaktivert</string>
-    <string name="osmo_share_my_location">Send posisjonen</string>
+    
     <string name="lang_pms">Piemontesisk</string>
     <string name="lang_bn">Bengali</string>
     <string name="lang_tl">Tagalog</string>
@@ -1553,8 +1552,8 @@
 <string name="rendering_value_thin_name">Tynn</string>
     <string name="rendering_value_medium_name">Middels</string>
     <string name="rendering_value_bold_name">Fet</string>
-    <string name="osmo_connect_to_group_id">Gruppe-ID</string>
-    <string name="osmo_connect_to_my_nickname">Kallenavn</string>
+    
+    
     <string name="donations">Donasjoner</string>
     <string name="number_of_recipients">Antall mottakere</string>
     <string name="osm_live_subscribe_btn">Abonner</string>
@@ -1570,15 +1569,15 @@
     <string name="rendering_value_walkingRoutesOSMC_name">Fargelegging i henhold til OSMC-vandresymbol</string>
     <string name="proxy_pref_title">Mellomtjener</string>
     <string name="gpx_selection_number_of_points">%1$s punkter</string>
-    <string name="osmo_group_policy">Praksis</string>
-    <string name="osmo_connect_to_device_name">Brukernavn</string>
-    <string name="osmo_group_name">Gruppenavn</string>
-    <string name="osmo_connect_to_device">Lenk med enheten</string>
-    <string name="osmo_connect_to_group">Lenk med gruppe</string>
-    <string name="osmo_create_group">Opprett gruppe</string>
-    <string name="osmo_connected_devices">Tilkoblede enheter</string>
-    <string name="osmo_session_token">Øktsymbol: %1$s</string>
-    <string name="osmo_settings_debug">Feilrettingsinformasjon</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="accessibility_options">Tilgjengelighetsvalg</string>
     <string name="local_openstreetmap_act_title">OSM-endringer</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
@@ -1633,8 +1632,8 @@
     <string name="use_osm_live_routing">OsmAnd Live-navigering</string>
     <string name="access_no_destination">Reisemål er ikke angitt</string>
     <string name="access_shared_string_navigate_up">Naviger opp</string>
-    <string name="osmo_specify_tracker_id">Angi ID</string>
-    <string name="osmo_groups">OsMo-grupper</string>
+    
+    
     <string name="open_street_map_login_and_pass">OpenStreetMap innlogging og passord</string>
     <string name="osm_live_subscription">OsmAnd Live-abonnement</string>
     <string name="osm_live_hide_user_name">Ikke vis mitt navn i rapporter</string>
@@ -1657,8 +1656,8 @@
     <string name="missing_write_external_storage_permission">OsmAnd har ikke tillatelse til å bruke SD-kortet</string>
     <string name="reports_for">Rapport for</string>
     <string name="access_tree_list">Trestrukturliste</string>
-    <string name="osmo_auto_send_locations_descr">Start tur automatisk og send posisjoner etter programoppstart.</string>
-    <string name="osmo_auto_send_locations">Start tur automatisk</string>
+    
+    
     <string name="storage_permission_restart_is_required">Nå har programmet lov til å skrive til ekstern lagring. En manuell programomstart kreves.</string>
     <string name="shared_string_undo_all">Angre alle</string>
     <string name="rec_split_storage_size">Lagringsstørrelse</string>
@@ -1762,7 +1761,7 @@
     <string name="routing_attr_allow_motorway_name">Tillat motorveier</string>
     <string name="routing_attr_allow_motorway_description">Tillat motorveier.</string>
     <string name="upload_poi">Last opp interessepunkt</string>
-    <string name="osmo_share_location">Del</string>
+    
     <string name="rendering_value_high_name">Høy</string>
     <string name="rendering_value_medium_w_name">Middels</string>
     <string name="rendering_value_low_name">Lav</string>
@@ -1772,8 +1771,8 @@
     <string name="route_roundabout_short">Ta %1$d avkjørsel og fortsett</string>
     <string name="route_calculation">Ruteberegning</string>
     <string name="gpx_appearance">Utseende</string>
-    <string name="osmo_pause_location">Pause</string>
-    <string name="osmo_service_running">OsMo-tjeneste kjører</string>
+    
+    
     <string name="shared_string_notifications">Varsler</string>
     <string name="shared_string_continue">Fortsett</string>
     <string name="shared_string_pause">Pause</string>
@@ -1795,7 +1794,7 @@
     <string name="access_smart_autoannounce">Smart auto-annonsering</string>
     <string name="rendering_value_fine_name">Fin</string>
     <string name="report">Rapport</string>
-    <string name="osmo_connect">Bli med</string>
+    
     <string name="live_updates">Live-oppdateringer</string>
     <string name="av_video_quality">Videokvalitet</string>
     <string name="av_video_quality_descr">Velg videokvalitet.</string>
@@ -1822,22 +1821,22 @@
     <string name="proxy_host_title">Mellomtjenervert</string>
     <string name="proxy_host_descr">Still inn din mellomtjeners vertsnavn (f.eks. 127.0.0.1).</string>
     <string name="proxy_port_title">Mellomtjener-port</string>
-    <string name="osmo_leave_confirmation_msg">Vil du forlate gruppe %1$s?</string>
+    
     <string name="gpx_monitoring_stop">Stopp GPX-logging</string>
     <string name="gpx_start_new_segment">Start nytt segment</string>
-    <string name="osmo_auth_error_short">Godkjenning mislyktes</string>
-    <string name="osmo_group_information">Les dette før du oppretter en gruppe!</string>
-    <string name="osmo_not_signed_in">Innlogging til OsMo mislyktes</string>
-    <string name="osmo_gpx_points_downloaded">OsMo-punktene %1$s nedlastet.</string>
+    
+    
+    
+    
     <string name="no_index_file_to_download">Ingen nedlastinger funnet, sjekk din internettforbindelse.</string>
     <string name="gpx_info_subtracks">Underspor: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
     <string name="gpx_file_is_empty">GPX-spor er tomt</string>
-    <string name="osmo_user_joined">Bruker %1$s ble med i gruppe %2$s</string>
-    <string name="osmo_show_group_notifications">Vis gruppevarsler</string>
-    <string name="osmo_follow">Følg</string>
-    <string name="osmo_sign_in">Logg inn</string>
-    <string name="osmo_credentials_not_valid">Din OsMo-legitimasjon er ikke gyldig.</string>
+    
+    
+    
+    
+    
     <string name="rendering_attr_contourDensity_description">Kotetetthet</string>
     <string name="rendering_attr_contourDensity_name">Kotetetthet</string>
     <string name="rendering_attr_contourWidth_description">Kotebredde</string>
@@ -1893,9 +1892,9 @@
     <string name="access_smart_autoannounce_descr">Varsle bare når retningen til målpunktet endres.</string>
     <string name="access_autoannounce_period">Auto-annonseringsperiode</string>
     <string name="access_autoannounce_period_descr">Minste tidsintervall mellom annonseringer.</string>
-    <string name="osmo_connect_to_device_tracker_id">Sporings-ID</string>
-    <string name="osmo_tracker_id">Sporings-ID</string>
-    <string name="osmo_tracker_id_descr">Trykk for å vise sporings-ID.</string>
+    
+    
+    
     <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, redigeringer totalt %3$s</string>
     <string name="osm_editors_ranking">Rangering av OSM-bidragsytere</string>
     <string name="osm_live_email_desc">Trengs for å gi deg informasjon om bidrag.</string>
@@ -1972,49 +1971,49 @@
     <string name="live_monitoring_start">Start nettbasert sporing</string>
     <string name="live_monitoring_stop">Stopp nettbasert sporing</string>
     <string name="gpx_monitoring_start">Start GPX-logging</string>
-    <string name="osmo_group_by_invite">Tiltre ved invitasjon</string>
-    <string name="osmo_auto_connect_descr">Koble til tjenesten automatisk etter at programmet starter</string>
-    <string name="osmo_auto_connect">Automatisk tilkobling</string>
-    <string name="osmo_start_service">OsMo-tjeneste</string>
-    <string name="osmo_gpx_track_downloaded">OsMo-spor %1$s lastet ned.</string>
+    
+    
+    
+    
+    
     <string name="select_index_file_to_download">Fant ikke noe. Hvis du ikke finner din region, kan du lage den selv (se http://osmand.net).</string>
     <string name="none_selected_gpx">Ingen GPX-filer valgt. For å velge lang-trykk et tilgjengelig spor.</string>
     <string name="gpx_split_interval">Oppdelingsintervall</string>
     <string name="gpx_info_asc_altitude">Nedstigning/stigning: %1$s</string>
     <string name="gpx_timespan">Tidsrom: %1$s</string>
     <string name="gpx_timemoving">Tid i bevegelse: %1$s</string>
-    <string name="osmo_user_left">Bruker %1$s forlot gruppe %2$s</string>
-    <string name="osmo_show_group_notifications_descr">Vis oppsprettsmeldinger når brukeren blir med i eller forlater gruppen.</string>
-    <string name="osmo_create_groups_confirm">For å opprette grupper må du være en registrert bruker av OsMo.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Er du sikker på at du vil regenerere personlige ID-er? Alle enheter koblet til deg, vil ikke kunne spore deg mer.</string>
-    <string name="osmo_regenerate_login_ids">Regenerer bruker-ID</string>
-    <string name="osmo_cancel_moving_target">Avbryt bevegelig mål</string>
-    <string name="osmo_set_moving_target">Sett som bevegelig mål</string>
-    <string name="osmo_use_server_name">Registrert navn</string>
-    <string name="osmo_user_name">Bruker</string>
-    <string name="osmo_edit_device">Endre brukeregenskaper</string>
-    <string name="osmo_group">OsMo-gruppe</string>
-    <string name="osmo_group_share">For å opprette forbindelse til gruppen %2$s, angi gruppe-ID (%1$s) eller trykk %3$s.</string>
-    <string name="osmo_share_connect_device">Følg denne enheten permanent</string>
-    <string name="osmo_share_current_session">Del gjeldende økt i nettleser</string>
-    <string name="osmo_session_not_available">Økten er ikke tilgjengelig, sjekk at \'Send posisjon\' er på.</string>
-    <string name="osmo_share_session">Del økt</string>
-    <string name="osmo_session_id_share">Øktens nettadresse til å spore enhet (%1$s)</string>
-    <string name="osmo_tracker_id_share">For å opprette forbindelse til målenheten %2$s, trykk på lenken %3$s eller angi sporings-ID (%1$s)</string>
-    <string name="osmo_track_interval_descr">Velg tidsintervall for sending av posisjonsdata.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="int_days">dager</string>
     <string name="osmo_connect_menu">Koble til</string>
-    <string name="osmo_expire_group">Utløper om</string>
-    <string name="osmo_server_operation_failed">OsMo tjeneroperasjon mislyktes</string>
-    <string name="osmo_enable_tracker">Send min posisjon</string>
-    <string name="osmo_control">OsMo hurtigtilgang</string>
-    <string name="osmo_auth_pending">Venter på godkjenning…</string>
-    <string name="osmo_locations_sent">Posisjoner sendt %1$d (i buffer %2$d)</string>
-    <string name="osmo_conn_successfull">Forbindelse opprettet: %1$s</string>
-    <string name="osmo_io_error">OsMo-tilkoblingsproblem:</string>
-    <string name="osmo_mode_restart">Start OsMo-økt om igjen</string>
-    <string name="osmo_mode_on">Stopp OsMo-økt</string>
-    <string name="osmo_mode_off">Start OsMo-økt</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="routing_attr_avoid_stairs_name">Unngå trapper</string>
     <string name="routing_attr_avoid_stairs_description">Unngå trapper.</string>
     <string name="speech_rate_descr">Angi talehastigheten for TTS.</string>
@@ -2105,13 +2104,7 @@
 
  and more…
  "</string>
-    <string name="osmo_group_information_desc">"- Ved opprettelse av en gruppe, angi et navn og fyll ut beskrivelsen 
-\n- Fra programmet kan det kun opprettes en gruppe av enkel type, les mer på hjemmesiden https://osmo.mobi/g/new 
-\n- Via en hjemmeside kan administreres en gruppe, til å plassere spor og punkter tilgjengelig for alle 
-\n- Støtter ikke bruk av gruppen for kun én bruker, hvis dette ikke er IP-gruppen 
-\n- Private grupper er begrenset til 8 personer 
-\n- Detaljerte vilkår er å finne på hjemmesiden OsMo.mobi 
-\n- Bruk for  særlige vilkår - kontakt brukerstøtte: osmo.mobi@gmail.com"</string>
+    
     <string name="lang_bpy">Bishnupriya manipuri</string>
     <string name="lang_new">Nepal bhasa</string>
     <string name="lang_ceb">Cebuano</string>
@@ -2296,7 +2289,7 @@
     <string name="map_widget_ruler_control">Radiusmåler</string>
     <string name="quick_action_btn_tutorial_title">Endre knappeplassering</string>
     <string name="retry">Prøv igjen</string>
-    <string name="add_route_point">Legg til rutepunkt</string>
+    
     <string name="add_waypoint">Legg til rutepunkt</string>
     <string name="save_gpx_waypoint">Lagre GPX-rutepunkt</string>
     <string name="save_route_point">Lagre rutepunkt</string>
@@ -2313,8 +2306,8 @@
     <string name="mapillary_menu_descr_tile_cache">Last kartfliser på nytt for å se oppdaterte data.</string>
     <string name="mapillary_menu_title_tile_cache">Kartflis-hurtigbuffer</string>
     <string name="mapillary_menu_descr_dates">Vis bare bilder lagt til</string>
-    <string name="measurement_tool_altitude">Høyde: %1$s</string>
-    <string name="measurement_tool_speed">Hastighet: %1$s</string>
+    
+    
     <string name="line">Linje</string>
     <string name="save_as_route_point">Lagre som rutepunkter</string>
     <string name="save_as_line">Lagre som linje</string>
@@ -2366,10 +2359,10 @@
     <string name="shared_string_max">Maks.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Velg preferanse for høydeforskjeller</string>
     <string name="move_all_to_history">Flytt alle til historikk</string>
-    <string name="build_route">Lag rute</string>
+    
     <string name="show_direction">Avstandsangivelse</string>
     <string name="sort_by">Sorter etter</string>
-    <string name="marker_options">Markøralternativer</string>
+    
     <string name="shared_string_paused">I pausemodus</string>
     <string name="shared_string_groups">Grupper</string>
     <string name="make_active">Aktiver</string>
@@ -2416,10 +2409,7 @@
     <string name="rendering_attr_depthContours_name">Havdybdekonturer</string>
     <string name="auto_split_recording_title">Del opp opptak automatisk etter avbrudd</string>
     <string name="auto_split_recording_descr">Start nytt segment etter et avbrudd på 6 min., nytt spor etter avbrudd på 2 timer, eller ny fil etter et lengre avbrudd hvis datoen er endret.</string>
-    <string name="osmo_no_connection_msg">Kan ikke koble til OsMo-tjeneren:
-\n- sjekk din internettforbindelse;
-\n- sjekk innstillingene;
-\n- se på Twitter: https://twitter.com/OsMomobi</string>
+    
     <string name="anonymous_user_hint">En anonym bruker kan ikke:
 \n- opprette grupper;
 \n- synkronisere grupper og enheter med tjeneren;
@@ -2432,9 +2422,7 @@
     <string name="moving_time">Tid i bevegelse</string>
     <string name="max_min">Maks./min.</string>
     <string name="min_max">Min./maks.</string>
-    <string name="osmo_auth_error">Støtte på OsMo-identitetsbekreftelsesfeil: %1$s.
-\n Det kan være et tjenesten er nede for øyeblikket, eller at din registrering har utløpt.
-\n Ønsker du å fortsette med ny registrering?</string>
+    
     <string name="layer_osm_bugs">OSM-notater (på nett)</string>
     <string name="move_to_history">Flytt til historikk</string>
     <string name="group_will_be_removed_after_restart">Gruppen blir fjernet etter neste start av programmet.</string>
@@ -2554,7 +2542,7 @@
     <string name="shared_string_road">Vei</string>
     <string name="show_map">Vis kart</string>
     <string name="route_is_calculated">Rute blir beregnet</string>
-    <string name="shared_string_navigate">Naviger</string>
+    
     <string name="round_trip">Rundtur</string>
     <string name="plan_route_no_markers_toast">Du må legge til minst en markør for å bruke denne funksjonen.</string>
     <string name="make_round_trip_descr">Legg til kopi av startpunktet som reisemål.</string>
@@ -2567,7 +2555,7 @@
 	<string name="marker_show_distance_descr">Velg hvordan avstand og retning til kartmarkører på kartskjermen angis:</string>
     <string name="import_gpx_file_description">kan importeres som favorittpunkter, eller som sporfil.</string>
     <string name="tap_on_map_to_hide_interface">Fullskjermmodus</string>
-    <string name="show_on_top_bar">Vis på topplinjen</string>
+    
     <string name="appearance_on_the_map">Utseende på kartet</string>
     <string name="add_group">Legg til en gruppe</string>
     <string name="empty_state_markers_groups">Importer grupper</string>
@@ -2682,11 +2670,11 @@
     <string name="context_menu_read_full_article">Les hele artikkelen</string>
     <string name="context_menu_read_article">Les artikkel</string>
     <string name="context_menu_points_of_group">Alle punkter i gruppen</string>
-    <string name="opened_from">Åpen fra</string>
-    <string name="opened_till">Åpen til</string>
-    <string name="will_be_closed_at">Stenger</string>
-    <string name="will_be_opened_at">Åpner</string>
-    <string name="will_be_opened_on">Åpner</string>
+    
+    
+    
+    
+    
     <string name="av_locations_selected_desc">GPX-fil med de valgte notatenes koordinater og data.</string>
     <string name="av_locations_all_desc">GPX-fil med alle notaters koordinater og data.</string>
     <string name="quick_action_add_poi_descr">Trykk på handlingsknappen vil legge til et interessepunkt midt på skjermen.</string>

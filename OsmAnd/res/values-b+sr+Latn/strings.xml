@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="about_version">Verzija:</string>
     
     <string name="about_settings_descr">Verzija info, licence, članovi projekta</string>
@@ -109,9 +108,9 @@
     <string name="incremental_search_city">Traži grad inkrementalno</string>
     <string name="search_villages_and_postcodes">Pretraga sela/Poštanski kod</string>
 	
-	<string name="tip_day_night_mode">Dnevni/noćni režim</string>
 	
-	<string name="tip_navigation">Navigacija</string>
+	
+	
 	<string name="native_library_not_supported">Nativna biblioteka nije podržana na ovom uređaju .</string>
 	<string name="init_native_library">Pokretanje nativne biblioteke…</string>
 	<string name="choose_auto_follow_route">Autocentriranje mape</string>
@@ -165,7 +164,7 @@
 	
 	<string name="voice">glas</string>
 	<string name="no_vector_map_loaded">Vektorske mape nisu učitane</string>
-	<string name="map_route_by_gpx">Navigacija pomoću GPX</string>
+	
 	<string name="gpx_files_not_found">GPX datoteke se ne nalaze u direktorijumu</string>
 	<string name="error_reading_gpx">Greška pri čitanju GPX podataka</string>
 	
@@ -212,7 +211,7 @@
 	<string name="int_seconds">sekunde</string>
 	<string name="int_min">min.</string>
 	
-    <string name="tip_faq">Najčešće postavljana pitanja</string>
+    
     <string name="max_speed_none">nijedan</string>
     <string name="stop_routing_confirm">Da li ste sigurni da želite da prekinete navigaciju?</string>
     <string name="recording_context_menu_show">Prikaži</string>
@@ -242,7 +241,7 @@
     <string name="use_opengl_render">Koristi OpenGL za prikaz</string>
     <string name="use_opengl_render_descr">Koristi hardversko ubrzanje OpenGL-a za prikaz (možda ne radi na nekim uređajima)</string>
     
-    <string name="osmo_use_https">Koristi HTTPS</string>
+    
 	
 	<string name="map_update">Dostupne su nadogradnje %1$s karata</string>
 	<string name="search_for">Potraži</string>
@@ -302,7 +301,7 @@
 	<string name="trace_rendering">Podaci o otklonu grešaka prikaza</string>
 	<string name="trace_rendering_descr">Prikazuj učinak prikaza</string>
 	
-	<string name="voice_not_use">Ne koristi</string>
+	
 	
 	<string name="installing_new_resources">Raspakujem nove podatke…</string>
 	<string name="internet_connection_required_for_online_route">Izabrana je usluga navođenja preko mrežne veze, ali je mrežna veza nedostupna.</string>
@@ -325,7 +324,7 @@
 	<string name="map_widget_left">Leva površ</string>
     <string name="shared_string_show">Prikaži</string>
 	<string name="configure_map">Podesite mapu</string>
-    <string name="osmo_device_not_found">Nije pronađen uređaj</string>
+    
     <string name="anonymous_user_hint">Bezimeni korisnik ne može\n- da pravi skupove;\n- da usklađuje skupove i uređaje sa serverom;\n- da upravlja skupovima i uređajima u ličnom uredu.</string>
     <string name="anonymous_user">Bezimeni korisnik</string>
     <string name="logged_as">Prijavljen kao %1$s</string>

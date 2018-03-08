@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -232,15 +231,11 @@
 
     <string name="monitoring_settings">Registratzione biàgios</string>
     <string name="monitoring_settings_descr">Cunfigura comente registrare sos biàgios tuos.</string>
-    <string name="osmo_settings_uuid">ID ùnicu de su dispositivu</string>
-    <string name="osmo_settings_descr">Cunfigura sas impostatziones de compidada de su dispositivu e imposta su canale de compidada pessonale.</string>
-    <string name="osmo_plugin_description">Custa estensione frunit in parte sas funtzionalidades pro impreare sa compidada OpenStreetMap, bie http://osmo.mobi. 
-\n 
-\nPodes sighire sos dispositivos de unu grupu in tempus reale. Podes fintzas bìdere sos puntos e sas rastas carrigadas in su grupu in ue ses. 
-\n 
-\nSu grupu chi no est istadu iscantzelladu a pustis de carchi mese benit impostadu pro sighire sas règulas pro sa creatzione de grupos in su giassu/situ OsMo.mobi</string>
-    <string name="osmo_plugin_name">Compidada OpenStreetMap</string>
-    <string name="osmo_settings">OsMo</string>
+    
+    
+    
+    
+    
 
 
     <string name="osmand_background_plugin_description">Ammustrat sas impostatziones pro abilitare s’arrastamentu e su nàvigu in modalidade de isfundu (ischermu istudadu) pro mèdiu de ischidaduras periòdicas de su GPS.</string>
@@ -417,9 +412,9 @@
     <string name="poi_dialog_opening_hours">Aberi</string>
     <string name="poi_action_change">muda</string>
     <string name="poi_action_add">annanghe</string>
-    <string name="osmo_io_error">OsMo problema de connessione: </string>
-    <string name="osmo_mode_on">Firma sa sessione de OSMo</string>
-    <string name="osmo_mode_off">Inghitza/avia OSMo</string>
+    
+    
+    
     <string name="osmand_plus_play_title_30_chars">Mapas OsmAnd+ e Nàvigu</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd est un’aplicatzione a mitza aperta pro su nàvigu cun mapas in lìnia e chene lìnia</string>
 
@@ -460,24 +455,14 @@
     <string name="rendering_attr_showSurfaceGrade_name">Ammustra sa calidade de sas istradas</string>
     <string name="rendering_attr_showSurfaces_name">Ammustra su tipu de superfìtzie de sas istradas</string>
     <string name="rendering_attr_showCycleRoutes_name">Ammustra sas àndalas pro bitzicleta</string>
-    <string name="osmo_auth_error_short">Autorizatzione fallida</string>
-    <string name="osmo_auth_error">Errore de autorizatzione OsMo: %1$s.
-
-Diat podet èssere unu disservitziu temporaneu o sa registratzione tua est iscadia.
-
-Boles protzèdere cun una registratzione noa?</string>
-    <string name="osmo_group_by_invite">Atzèdere pro mèdiu de invitu</string>
-    <string name="osmo_group_information_desc">"- Cando ses creende unu grupu pro praghere dae·li unu nùmene e una descritzione 
-\n  - Dae s\'aplicatzione sos grupos sunt creados de Casta sèmplitze, informa·ti de prus in su giassu/situ https://osmo.mobi/g/new 
-\n  - Pro mèdiu de unu situ podes manigiare unu grupu, pro pònnere rastas e puntos disponìbiles pro totus 
-\n  - No aprovamus s\'impreu de unu grupu cun un\'impreadore ebbia, si su grupu no est cussu PDI 
-\n  - Sos grupos privados sunt limitados a 8 pessones 
-\n  - Sos tèrmines e sas conditziones a sa minuda sunt semper in su giassu/situ OsMo.mobi 
-\n  - Si tenes bisòngiu de conditziones ispetziales - pro praghere cuntata su suportu: osmo.mobi@gmail.com"</string>
-    <string name="osmo_group_information">Pro praghere leghide in antis de creare unu grupu!</string>
-    <string name="osmo_gpx_points_downloaded">Iscarrigados puntos %1$s de OsMo.</string>
-    <string name="osmo_start_service">Servìtziu OsMo</string>
-    <string name="osmo_gpx_track_downloaded">Iscarrigadas rastas %1$s de OsMo.</string>
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="no_index_file_to_download">Nudda de iscarrigare, pro praghere còmpida sa connessione ìnternet.</string>
     <string name="select_index_file_to_download">No est istadu agatadu nudda. Si no agatades sa zona vostra la podies ingendrare bois (bie http://osmand.net).</string>
     <string name="none_selected_gpx">Perunu documentu GPX ischertadu. Pro nde ischertare unu mantene incarcada una de sas rastas disponìbiles.</string>
@@ -532,22 +517,22 @@ Boles protzèdere cun una registratzione noa?</string>
     <string name="shared_string_my_favorites">Preferidos meos</string>
     <string name="shared_string_my_places">Logos meos</string>
 
-    <string name="osmo_user_joined">S’impitadore %1$s est intradu in su grupu %2$s</string>
-    <string name="osmo_user_left">S’impitadore %1$s at lassadu su grupu %2$s</string>
-    <string name="osmo_show_group_notifications">Ammustra sas notìficas de su grupu</string>
-    <string name="osmo_show_group_notifications_descr">Ammustra unu messàgiu cando s’impitadore adèridi o lassada su grupu.</string>
-    <string name="osmo_follow">Sighi</string>
-    <string name="osmo_sign_in">Autènticadi</string>
-    <string name="osmo_create_groups_confirm">Pro creare grupos est netzessàriu èssere impitadores registrados de OsMo.</string>
-    <string name="osmo_credentials_not_valid">Sas credenziales de OsMo tuas non sunt vàlidas.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Ses seguru de bòlere reingendrare sos id pessonales? Totu sos dispositivos collegaos a tie non ant a èssere prus capassios de t\'arrastare.</string>
-    <string name="osmo_regenerate_login_ids">Torra a ingendrare s’id</string>
-    <string name="osmo_cancel_moving_target">Iscantzella s’obietivu mòbile</string>
-    <string name="osmo_center_location">Tzentra in s’ischermu</string>
-    <string name="osmo_set_moving_target">Imposta comente obietivu mòbile</string>
-    <string name="osmo_use_server_name">Nùmene registrau</string>
-    <string name="osmo_connect_to_my_nickname">Zistru</string>
-    <string name="osmo_user_name">Impitadore</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <string name="rendering_value_pink_name">Rosa</string>
     
@@ -557,58 +542,58 @@ Boles protzèdere cun una registratzione noa?</string>
     
     
 
-    <string name="osmo_edit_device">Muda sas propriedades de s’impitadore</string>
+    
     <string name="osmo_edit_color">Colore visualizzau</string>
-    <string name="osmo_group_info">Informatziones</string>
-    <string name="osmo_group">Grupu OsMo</string>
-    <string name="osmo_group_share">Pro si collegare a su grupu %2$s, dislindare s’id de su grupu (%1$s) o incarcare %3$s.</string>
-    <string name="osmo_share_connect_device">Permìti de sighire permanentemente custu dispositivu</string>
-    <string name="osmo_share_current_session">Cumpartzi custa sessione in su browser</string>
-    <string name="osmo_session_not_available">Sessione non disponìbile, pro praghere controlla chi \'Imbia positziones\' siat allutu.</string>
-    <string name="osmo_share_session">Cumpartzi sessione</string>
-    <string name="osmo_session_id_share">Url de sa sessione pro arrastare su dispositivu (%1$s)</string>
-    <string name="osmo_tracker_id_share">Pro si collegare a su dispositivu disigiadu %2$s, incarcare su ligàmene %3$s o dislindare s’id de arrastamentu (%1$s)</string>
-    <string name="osmo_track_interval">Intervallu de registratzione</string>
-    <string name="osmo_track_interval_descr">Issèbera s’intervallu de tempus pro s’imbiu de sa positzione.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="int_days">dies</string>
     <string name="osmo_connect_menu">Connete</string>
-    <string name="osmo_expire_group">Iscadidi intre</string>
+    
     <string name="osmo_group_description">Descritzione</string>
-    <string name="osmo_group_policy">Règulas</string>
-    <string name="osmo_connect_to_device_tracker_id">ID de arrastamentu</string>
-    <string name="osmo_connect_to_device_name">Nùmene impitadore</string>
-    <string name="osmo_connect_to_group_id">ID grupu</string>
-    <string name="osmo_group_name">Nùmene grupu</string>
-    <string name="osmo_connect_to_device">Cullegamentu cun su dispositivu</string>
-    <string name="osmo_connect_to_group">Cullegamentu cun su grupu</string>
-    <string name="osmo_connect">Auni·ti</string>
-    <string name="osmo_create_group">Crea grupu</string>
-    <string name="osmo_server_operation_failed">Operatzione de su server Osmo fallida</string>
-    <string name="osmo_activity">Compidada OpenStreetMap</string>
-    <string name="osmo_enable_tracker">Imbia sas positziones meas</string>
-    <string name="osmo_control">Atzessu lestru ad OsMo</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">oras àchede</string>
     <string name="minutes_ago">minutos àchede</string>
     <string name="seconds_ago">secundos àchede</string>
-    <string name="osmo_connected_devices">Dispositivos cullegaos</string>
-    <string name="osmo_groups">Grupos OsMo</string>
-    <string name="osmo_auto_send_locations_descr">Incumintza automaticamente su biàgiu e imbia sas localizatziones a pustis de s\'aviu de s’aplicatzione.</string>
-    <string name="osmo_auto_send_locations">Incumintza automaticamente su biàgiu</string>
-    <string name="osmo_tracker_id">ID arrastamentu</string>
-    <string name="osmo_tracker_id_descr">Incarca pro bìdere s’ID de arrastamentu.</string>
-    <string name="osmo_session_token">Token de sa sessione: %1$s</string>
-    <string name="osmo_auth_pending">Isetende pro s’autorizatzione…</string>
-    <string name="osmo_locations_sent">Localizatziones imbiadas %1$d (in su buffer %2$d)</string>
-    <string name="osmo_conn_successfull">Connessione istabilida: %1$s</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     <string name="use_points_as_intermediates">Càlcula s’àndala intre sos puntos</string>
-    <string name="osmo_mode_restart">Reavia sa sessione OsMo</string>
-    <string name="osmo_settings_debug">Informatziones de debug</string>
+    
+    
     <string name="lang_fa">Persianu</string>
     <string name="route_descr_destination">Destinatzione</string>
-    <string name="osmo_not_signed_in">Atzessu ad OsMo fallidu</string>
-    <string name="osmo_auto_connect_descr">Connete·ti automaticamente a su servìtziu a pustis de s’allughìngiu.</string>
-    <string name="osmo_auto_connect">Connessione automàtica</string>
+    
+    
+    
     <string name="map_widget_renderer">Istile de sa mapa</string>
     <string name="layer_map_appearance">Cunfigura s’ischermu</string>
     <string name="show_lanes">Corsias</string>
@@ -856,9 +841,9 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="shared_string_save">Sarva</string>
 
     <string name="rendering_attr_coloredBuildings_name">Edifìtzios colorados pro casta</string>
-    <string name="osmo_invite">Invita…</string>
-    <string name="osmo_leave_confirmation_msg">Boles essire dae su grupu %1$s?</string>
-    <string name="osmo_specify_tracker_id">Pro praghere dislinda s’ID</string>
+    
+    
+    
     <string name="continue_navigation">Sighi cun su nàvigu</string>
     <string name="pause_navigation">Pone in pasu su nàvigu</string>
     <string name="rendering_attr_alpineHiking_name">Iscala pro s’alpinismu (SAC)</string>
@@ -1177,7 +1162,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
 
     <string name="voice">Boghe registrada</string>
     <string name="no_vector_map_loaded">Sas mapas vetoriales non sunt istadas carrigadas</string>
-    <string name="map_route_by_gpx">Àndala tramite GPX</string>
+    
     <string name="gpx_files_not_found">Perunu documentu GPX agatadu in sa cartella /tracks</string>
     <string name="layer_gpx_layer">Rasta GPX…</string>
     <string name="error_reading_gpx">Errore leghidura datos GPX</string>
@@ -1553,10 +1538,10 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="fav_point_emoticons_message">Amos cambiadu su nùmene de su preferidu tuo, ponende•li %1$s, pro fatzilitare su sarvamentu de s’istringa cun sas emòticons in unu documentu.</string>
     <string name="speed_limit_exceed_message">Ischerta s’arramponada de su lìmite de lestresa a pustis de su cale as a tènnere un’avisu vocale.</string>
     <string name="speed_limit_exceed">Arramponada de su lìmite de lestresa</string>
-    <string name="osmo_device_not_found">Dispositivu no agatau</string>
+    
     <string name="anonymous_user">Impitadore anònimu</string>
     <string name="logged_as">Identificadu comente %1$s</string>
-    <string name="osmo_no_connection_msg">Connessione a su server OsMo non disponìbile:\n- còmpida sa connessione ìnternet tua;\n- còmpida sas impostatziones;\n- abbista su Twitter nostru: https://twitter.com/OsMomobi</string>
+    
     <string name="anonymous_user_hint">Un\'impitadore anònimu non podet:\n- creare grupos;\n- sincronizare grupos e dispositivos cun su server;\n- gestire grupos e dispositivos in unu pannellu de controllu in su giassu/situ web.</string>
     <string name="rendering_category_details">Minujas</string>
     <string name="configure_map">Cunfigura sa mapa</string>
@@ -1740,7 +1725,7 @@ Lon %2$s</string>
     <string name="delay_to_start_navigation">Brinca sa pianificatzione de s\'àndala…</string>
     <string name="confirmation_to_clear_history">Cheres iscantzellare s’istòria?</string>
     <string name="local_osm_changes_upload_all_confirm">As a carrigare %1$d modìfica(s) in OSM. Seguru ses?</string>
-    <string name="osmo_grop_name_length_alert">Sa longària de su nùmene de su grupu depet èssere de a su mancu 3 caràteres!</string>
+    
     <string name="osm_changes_added_to_local_edits">Mòdificas OSM annantas a sas modìficas locales</string>
     <string name="welmode_download_maps">Iscàrriga mapas</string>
     <string name="welcome_select_region">Pro ammustrare mègius sos cartellos e sas restritziones locales tuas, pro praghere ischerta sa regione tua:</string>
@@ -1784,7 +1769,7 @@ Lon %2$s</string>
     <string name="use_fast_recalculation_desc">Pro biàgios longos, torra a calculare petzi su cantu initziale de s’àndala.</string>
     
     <string name="rendering_value_disabled_name">Disabilitadu</string>
-    <string name="osmo_share_my_location">Cumpartzi sa positzione</string>
+    
     <string name="shared_string_logoff">Essi</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloratzione a segunda de sa casta (afiliatzione) de àndala</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Coloratzione sighinde su sìmbulu pro s\'escursionismu de OSMC</string>
@@ -2388,9 +2373,9 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
 \n • Meda àteros megioramentos e errores isoltos 
 \n 
 \n e àteru…</string>
-    <string name="osmo_share_location">Cumpartzi</string>
-    <string name="osmo_pause_location">Pone in pàusa</string>
-    <string name="osmo_service_running">Su servìtziu OsMo est allutu</string>
+    
+    
+    
     <string name="trip_rec_notification_settings">Abìlita sa registratzione biàgios lestra</string>
     <string name="trip_rec_notification_settings_desc">Ammustra una notìfica chi permitit de incumintzare a registrare su biàgiu.</string>
     <string name="shared_string_notifications">Notìficas</string>
@@ -2722,19 +2707,19 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="retry">Torra a proare</string>
 <string name="measurement_tool_action_bar">Esplora sa mapa e annanghe puntos</string>
     <string name="measurement_tool">Medi una distàntzia</string>
-    <string name="add_gpx_waypoint_bottom_sheet_title">Annanghe unu puntu de coladòrgiu gpx</string>
-    <string name="shared_string_create">Crea</string>
+    
+    
 <string name="none_point_error">Pro praghere annanghe a su mancu unu puntu.</string>
     <string name="enter_gpx_name">Nùmene documentu GPX:</string>
     <string name="show_on_map_after_saving">Ammustra in sa mapa a pustis de su sarvatàgiu</string>
-    <string name="add_route_point">Annanghe unu puntu a s\'àndala</string>
+    
     <string name="add_waypoint">Annanghe unu puntu de coladòrgiu</string>
     <string name="save_gpx_waypoint">Sarva puntu de coladòrgiu GPX</string>
     <string name="save_route_point">Sarva puntu de s\'àndala</string>
     <string name="waypoint_one">Puntu de coladòrgiu 1</string>
     <string name="route_point_one">Puntu 1 de s\'àndala</string>
-<string name="measurement_tool_altitude">Artària: %1$s</string>
-    <string name="measurement_tool_speed">Lestresa: %1$s</string>
+
+    
     <string name="line">Lìnia</string>
     <string name="save_as_route_point">Sarva comente puntos de s\'àndala</string>
     <string name="save_as_line">Sarva comente lìnia</string>
@@ -2761,10 +2746,10 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="do_not_use_animations">No imprees sas animatziones</string>
     <string name="do_not_use_animations_descr">Disabilitat sas animatziones in s\'aplicatzione.</string>
     <string name="move_all_to_history">Pone totu in sa cronologia</string>
-    <string name="build_route">Càlcula s\'àndala</string>
+    
     <string name="show_direction">Indicatzione de distàntzia</string>
     <string name="sort_by">Òrdina pro</string>
-    <string name="marker_options">Optziones de sos marcadores</string>
+    
     <string name="map_orientation_change_in_accordance_with_speed">Lìmite de orientamentu de sa mapa</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Ischerta sa lestresa in suta de sa cale s\'orientamentu de sa mapa colat dae \'in sa diretzione de mòvida\' a \'bùssola\'.</string>
     <string name="all_markers_moved_to_history">Totu sos marcadores de sa mapa sunt istados archiviados in sa Cronologia</string>
@@ -2776,7 +2761,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="yesterday">Eris</string>
     <string name="last_seven_days">Ùrtimas 7 dies</string>
     <string name="this_year">Cust\'annu</string>
-    <string name="top_bar">Barra superiore</string>
+    
     <string name="remove_from_map_markers">Boga dae sos Marcadores Mapa</string>
     <string name="descendingly">in falada</string>
     <string name="ascendingly">in artiada</string>
@@ -2813,7 +2798,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="context_menu_item_modify_note">Modìfica sa nota OSM</string>
     <string name="make_round_trip_descr">Annanghe una còpia de su puntu de incumintzu comente destinatzione.</string>
     <string name="make_round_trip">Faghe unu biàgiu tzirculare</string>
-    <string name="shared_string_navigate">Nàviga</string>
+    
     <string name="shared_string_road">Istrada</string>
     <string name="show_map">Ammustra sa mapa</string>
     <string name="route_is_calculated">Àndala torrada a calculare</string>
@@ -2839,7 +2824,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="import_file">Importa documentu</string>
 	<string name="tap_on_map_to_hide_interface_descr">Un\'incarcada in sa mapa istichit sos butones e sos widgets de controllu.</string>
     <string name="tap_on_map_to_hide_interface">Modalidade a ischermu intreu</string>
-    <string name="show_on_top_bar">Ammustra in sa barra superiore</string>
+    
     <string name="mark_passed">Sinna comente coladu</string>
     <string name="digits_quantity">Nùmeru de tzifras detzimales</string>
     <string name="shared_string_right">Destra</string>

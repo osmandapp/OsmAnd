@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 
     <string name="recording_context_menu_show">Zobraziť</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
@@ -435,7 +434,7 @@
     <string name="transport_search_again">Hľadať znova prepravu</string>
     <string name="voice">Nahrávka hlasu</string>
     <string name="no_vector_map_loaded">Vektorové mapy neboli načítané</string>
-    <string name="map_route_by_gpx">Cestovať použitím GPX</string>
+    
     <string name="gpx_files_not_found">Žiadne GPX súbory neboli nájdené v priečinku stôp</string>
     <string name="layer_gpx_layer">GPX záznam…</string>
     <string name="error_reading_gpx">Chyba pri načítavaní GPX údajov</string>
@@ -1066,79 +1065,7 @@ Niektoré z hlavných funkcií:
     <string name="auto_zoom_far">Stredné priblíženie</string>
     <string name="auto_zoom_farthest">Malé priblíženie</string>
     
-    <string name="osmand_plus_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions - Automatizované navigačné pokyny) je mapová a navigačná aplikácia s prístupom ku kvalitným celosvetovým údajom z OpenStreetMap (OSM). Všetky údaje máp môžu byť uložené na pamäťovej karte vo vašom zariadení pre použitie bez prístupu na Internet (offline). Pomocou GPS vo vašom zariadení môže OsmAnd ponúknuť navigovanie vizuálnymi a hlasovými usmerneniami pre automobil, bicykel a chodca. Všetky hlavné funkcie pracujú online aj offline (bez nutnosti prístupu na Internet).
-
-OsmAnd+ je platená verzia aplikácie. Jej zakúpením podporíte projekt, nové funkcie a získate najnovšie aktualizácie máp. Aplikáciu si môžete pred zakúpením vyskúšať nainštalovaním verzie zdarma nazvanej OsmAnd.
- 
-Niektoré hlavné funkcie:
-
-Navigácia:
- - Funguje online (rýchla) alebo offline (bez poplatkov za roaming v zahraničí)
- - Hlasové navádzanie po jednotlivých zákrutách (nahraté aj syntetizované hlasy)
- - Voliteľné navádzanie v jazdných pruhoch, zobrazenie názvov ulíc a odhadovaný čas do cieľa
- - Umožňuje zadať prechodné body trasy
- - Automatické prepočítanie trasy ak sa odchýlite z trasy
- - Vyhľadávanie miest podľa adresy, typu (napr.: reštaurácie, hotely, čerpacie stanice, múzeá) alebo zemepisných súradníc
-
-Zobrazenie mapy:
- - Zobrazovanie vašej pozície a orientácie na mape
- - Možnosť zobrazenia mapy v smere pohybu podľa kompasu
- - Uloženie obľúbených miest
- - Zobrazenie POI (bodov záujmu) v okolí
- - Možnosť zobraziť špecializované podkladové mapy z Internetu
- - Možnosť zobraziť satelitné snímky (z Bing)
- - Možnosť zobraziť rôzne prekryvné vrstvy ako turistické/navigačné GPX stopy a ďalšie mapy s nastaviteľnou priehľadnosťou
- - Voliteľne môže zobraziť názvy v angličtine, lokálnom jazyku alebo foneticky
-
- Využíva údaje z OpenStreetMap a Wikipedia:
- - Informácie vysokej kvality z najlepších projektov sveta
- - Globálne mapy z OpenStreetMap dostupné podľa krajiny alebo regiónu
- - Body záujmu z Wikipedia, vhodné pre návštevu zaujímavostí
- - Neobmedzené sťahovanie, priamo z aplikácie
- - Vždy aktuálne mapy (aktualizované najmenej raz za mesiac)
- - Kompaktné vektorové offline mapy
- - Možnosť voľby medzi kompletnými mapami alebo cestnou sieťou (napr. celé Japonsko má 700 MB, cestná sieť iba 200 MB)
- - Podporuje aj podkladové dlaždice z Internetu
-
-Bezpečnostné funkcie:
- - Voliteľné automatické prepínanie medzi denným a nočným režimom
- - Voliteľné zobrazenie povolenej rýchlosti s upozornením na jej prekročenie
- - Voliteľné približovanie mapy podľa rýchlosti
- - Zdieľajte vašu polohu s priateľmi, aby vás mohli nájsť
-
-Funkcie pre cyklistov a chodcov:
- - Mapy obsahujú aj cesty pre chodcov, turistov a cyklistov - vhodné pre aktivity v prírode
- - Špeciálne režimy zobrazenia a navigácie pre chodcov a cyklistov
- - Voliteľné zobrazenie zastávok hromadnej dopravy (autobus, električka, vlak), vrátane názvov liniek
- - Voliteľné nahrávanie výletu do GPX súboru (lokálneho alebo online služby)
- - Voliteľné zobrazenie rýchlosti a nadmorskej výšky
- - Zobrazenie vrstevníc a tieňovania svahov (s doplnkovými modulmi)
-
-Priamo prispievajte do OpenStreetMap:
- - Nahlásenie chýb v mape
- - Odoslanie GPX stôp do OSM priamo z aplikácie
- - Pridanie POI a priame odoslanie do OSM (alebo neskôr, ak ste offline)
- - Voliteľné nahrávanie výletu na pozadí (keď je zariadenie v režime spánku)
-
-OsmAnd je slobodný a aktívne vyvíjaný softvér. Každý môže prispieť do aplikácie hlásením chýb, vylepšením prekladu alebo programovaním nových funkcií. Projekt je v stave sústavného vylepšovania vďaka spolupráci vývojárov a používateľov. Pokrok projektu tiež závisí od finančných príspevkov na vývoj, programovanie a testovanie nových funkcií. Kúpením OsmAnd+ (platená verzia) pomôžete aplikácii byť ešte lepšiou! Na osmand.net môžete prispieť všeobecne alebo na vývoj konkrétnej funkcie.
-
-
-Približná kvalita pokrytia:
- - Západná Európa: ****
- - Východná Európa: ***
- - Rusko: ***
- - Severná Amerika: ***
- - Južná Amerika: **
- - Ázia: **
- - Japonsko a Kórea: ***
- - Blízky Východ: **
- - Afrika: **
- - Antarktída: *
-
-Zoznam obsiahnutých krajín (prakticky celý svet!):
-Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, Argentína, Arménsko, Aruba, Austrália, Azerbajdžan, Bahamy, Bahrajn, Bangladéš, Barbados, Belgicko, Belize, Benin, Bermudy, Bhután, Bielorusko, Bolívia, Bonaire, Bosna a Hercegovina, Botswana, Brazília, Britské Panenské Ostrovy, Brunei, Bulharsko, Burkina Faso, Burundi, Curaçao, Cyprus, Čad, Česká Republika, Čierna hora, Čile, Čína, Dánsko, Dominika, Dominikánska Republika, Džibuti, Egypt, Ekvádor, El Salvador, Eritrea, Estónsko, Etiópia, Fiji, Filipíny, Fínsko, Francúzska Guiana, Francúzska Polynézia, Francúzsko, Gabon, Gambia, Ghana, Gibraltar, Grécko, Grenada, Grónsko, Gruzínsko, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Holandské Antily, Holandsko, Honduras, Hong Kong, Chorvátsko, India, Indonézia, Irak, Irán, Írsko, Island, Izrael, Jamajka, Japonsko, Jemen, Jersey, Jordánsko, Južná Afrika, Južný Sudán, Kambodža, Kamerun, Kanada, Kapverdy, Katar, Kazachstan, Keňa, Kiribati, Kolumbia, Komory, Kongo, Kostarika, Kuba, Kuvajt, Kyrgyzsko, Laos, Lesotho, Libanon, Libéria, Líbya, Lichtenštajnsko, Litva, Lotyšsko, Luxembursko, Macao, Macedónsko, Madagaskar, Maďarsko, Malajzia, Malawi, Maledivy, Mali, Malta, Maroko, Martinik, Mauretánia, Maurícius, Mayotte, Mexiko, Mikronézia, Mjanmarsko, Moldavsko, Monako, Mongolsko, Montserrat, Mozambik, Namíbia, Nauru, Nemecko, Nepál, Niger, Nigéria, Nikaragua, Nórsko, Nová Kaledónia, Nový Zéland, Omán, Ostrov Man, Pakistan, Palau, Palestínske územie, Panama, Papua Nová Guinea, Paraguaj, Peru, Pobrežie Slonoviny, Poľsko, Portoriko, Portugalsko, Rakúsko, Rovníková Guinea, Rumunsko, Rusko, Rwanda, Sadská Arábia, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Senegal, Severná a Južná Kórea, Seychely, Sierra Leone, Singapur, Slovensko, Slovinsko, Somálsko, South Georgia, Spojené Arabské Emiráty, Spojené Kráľovstvo (UK), Spojené Štáty Americké (USA), Srbsko, Srí Lanka, Stredoafrická republika, Sudán, Surinam, Swazijsko, Sýria, Španielsko, Švajčiarsko, Švédsko, Tadžikistan, Taiwan, Taliansko, Tanzánia, Thajsko, Togo, Tokelau, Tonga, Trinidad a Tobago, Tunisko, Turecko, Turkmenistan, Tuvalu, Uganda, Ukrajina, Uruguaj, Uzbekistan, Vanuatu, Vatikán, Venezuela, Vietnam, Východný Timor, Wallis a Futuna, Zambia, Západná Sahara
- "</string>
+    
     <string name="animate_routing_route_not_calculated">Prosím najprv vypočítajte trasu</string>
     <string name="animate_routing_route">Simulovať pomocou vypočítanej trasy </string>
     <string name="animate_routing_gpx">Simulovať pomocou stopy GPX</string>
@@ -1247,43 +1174,39 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="lang_tr">Turecky (Türk)</string>
     <string name="lang_vi">Vietnamsky (Việt)</string>
     <string name="lang_cy">Welšsky (Cymraeg)</string>
-    <string name="osmo_settings_uuid">Jedinečné ID zariadenia</string>
-    <string name="osmo_settings_descr">Zmeniť nastavenia monitorovania a nastaviť osobný monitorovací kanál.</string>
-    <string name="osmo_plugin_description">Tento modul poskytuje časť funkcií pokročilého sledovania naživo cez OpenStreetMap sledovanie, pozrite na http://osmo.mobi 
-\n
-\nMôžete sledovať všetky zariadenia účastníkov v skupine. Môžete tiež vidieť body a stopy odoslané do skupiny, v ktorej ste členom. 
-\n
-\nSkupiny nie sú vymazané ani po dlhej dobe. Skupiny sa vytvárajú na stránke OsMo.mobi</string>
-    <string name="osmo_plugin_name">OpenStreetMap sledovanie</string>
-    <string name="osmo_settings">OsMo</string>
+    
+    
+    
+    
+    
     <string name="keep_informing_never">Len ručne (použiť šípku)</string>
     <string name="keep_informing_descr">Opakovať navigačné pokyny v pravidelných intervaloch.</string>
     <string name="keep_informing">Opakovať navigačné pokyny</string>
     <string name="arrival_distance">Oznámenie príjazdu</string>
     <string name="arrival_distance_descr">Ako skoro má byť oznámený príjazd do cieľa?</string>
-    <string name="osmo_io_error">Problém s pripojením OsMo: </string>
-    <string name="osmo_mode_on">Zastaviť reláciu OsMo</string>
-    <string name="osmo_mode_off">Spustiť reláciu OsMo</string>
+    
+    
+    
     <string name="share_fav_subject">Obľúbené body zdieľané cez OsmAnd</string>
     <string name="use_points_as_intermediates">Vypočítať trasu medzi bodmi</string>
     <string name="hours_ago">hodín dozadu</string>
     <string name="minutes_ago">minút dozadu</string>
     <string name="seconds_ago">sekúnd dozadu</string>
-    <string name="osmo_connect_to_device_name">Meno používateľa</string>
-    <string name="osmo_connect_to_device_tracker_id">ID sledovacieho zariadenia</string>
-    <string name="osmo_connect_to_device">Spojiť so zariadením</string>
-    <string name="osmo_connected_devices">Pripojené zariadenia</string>
-    <string name="osmo_groups">Skupiny OsMo</string>
-    <string name="osmo_auto_send_locations_descr">Automaticky spustiť výlet a odosielať polohu po spustení aplikácie.</string>
-    <string name="osmo_auto_send_locations">Automaticky spustiť výlet</string>
-    <string name="osmo_tracker_id">ID sledovacieho zariadenia</string>
-    <string name="osmo_tracker_id_descr">Stlačte pre zobrazenie ID sledovacieho zariadenia.</string>
-    <string name="osmo_session_token">Token relácie: %1$s</string>
-    <string name="osmo_auth_pending">Čaká sa na autorizáciu…</string>
-    <string name="osmo_locations_sent">Odoslané polohy %1$d (v zásobníku %2$d) </string>
-    <string name="osmo_conn_successfull">Vytvorené spojenie: %1$s </string>
-    <string name="osmo_mode_restart">Reštartovať reláciu OsMo</string>
-    <string name="osmo_settings_debug">Informácie pre ladenie</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="import_file_favourites">Uložiť údaje ako súbor GPX alebo importovať body cesty do Obľúbených?</string>
     
     <string name="rendering_value_pink_name">Ružová</string>
@@ -1292,51 +1215,51 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     
     
     
-    <string name="osmo_edit_device">Zmeniť vlastnosti používateľa</string>
-    <string name="osmo_edit_color">Zobrazovaná farba</string>
-    <string name="osmo_group_info">Informácie</string>
-    <string name="osmo_group">Skupina v OsMo</string>
-    <string name="osmo_sign_in">Prihlásiť sa</string>
-    <string name="osmo_activity">OpenStreetMap sledovanie</string>
-    <string name="osmo_connect_to_group">Spojiť so skupinou</string>
-    <string name="osmo_group_name">Názov skupiny</string>
-    <string name="osmo_connect">Pripojiť k</string>
-    <string name="osmo_create_group">Vytvoriť skupinu</string>
-    <string name="osmo_server_operation_failed">Zlyhala operácia s OsMo serverom</string>
-    <string name="osmo_enable_tracker">Odosielať moje polohy</string>
-    <string name="osmo_control">Rýchly prístup k OsMo</string>
-    <string name="osmo_follow">Nasledovať</string>
     
-    <string name="osmo_connect_to_group_id">ID skupiny</string>
-    <string name="osmo_user_joined">Používateľ %1$s sa pripojil ku skupine %2$s</string>
-    <string name="osmo_user_left">Používateľ %1$s opustil skupinu %2$s</string>
-    <string name="osmo_show_group_notifications">Zobrazovať oznamy skupiny</string>
-    <string name="osmo_show_group_notifications_descr">Zobraziť správu ak sa používateľ pripojí alebo odpojí zo skupiny.</string>
+    <string name="osmo_edit_color">Zobrazovaná farba</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="gpx_file_is_empty">GPX stopa je prázdna</string>
-    <string name="osmo_create_groups_confirm">Pre vytváranie skupín musíte byť zaregistrovaným používateľom OsMo.</string>
-    <string name="osmo_credentials_not_valid">Vaše prihlasovacie údaje do OsMo nie sú správne.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Naozaj chcete znovu generovať osobné ID? Všetky pripojené zariadenia Vás už nebudú môcť sledovať.</string>
-    <string name="osmo_regenerate_login_ids">Znovu generovať používateľské ID</string>
-    <string name="osmo_cancel_moving_target">Zrušiť pohyblivý cieľ</string>
-    <string name="osmo_center_location">Na stred obrazovky</string>
-    <string name="osmo_set_moving_target">Nastaviť ako pohyblivý cieľ</string>
-    <string name="osmo_use_server_name">Registrované meno</string>
-    <string name="osmo_connect_to_my_nickname">Prezývka</string>
-    <string name="osmo_user_name">Používateľ</string>
-    <string name="osmo_group_share">Na pripojenie do skupiny %2$s, zadajte ID skupiny (%1$s) alebo stlačte %3$s.</string>
-    <string name="osmo_share_connect_device">Trvale sledovať toto zariadenie</string>
-    <string name="osmo_share_current_session">Zdieľať aktuálnu reláciu v prehliadači</string>
-    <string name="osmo_session_not_available">Relácia nie je k dispozícii, prosím skontrolujte či je \'Odosielať pozície\' zapnuté.</string>
-    <string name="osmo_share_session">Zdieľať reláciu</string>
-    <string name="osmo_session_id_share">URL relácie pre sledovanie zariadenia (%1$s)</string>
-    <string name="osmo_tracker_id_share">Pre pripojenie cieľového zariadenia %2$s stlačte linku %3$s alebo zadajte ID sledovacieho zariadenia (%1$s)</string>
-    <string name="osmo_track_interval">Interval logovania</string>
-    <string name="osmo_track_interval_descr">Vyberte časový interval odosielania údajov pozície.</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="int_days">dní</string>
     <string name="osmo_connect_menu">Pripojiť</string>
-    <string name="osmo_expire_group">Vyprší za</string>
+    
     <string name="osmo_group_description">Popis</string>
-    <string name="osmo_group_policy">Pravidlá</string>
+    
     <string name="loading_smth">Načítava sa %1$s…</string>
     <string name="map_widget_plain_time">Aktuálny čas</string>
     <string name="gpx_wpt">Prechodný bod</string>
@@ -1372,27 +1295,17 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="local_index_select_gpx_file">Vybrať na zobrazenie</string>
     <string name="route_descr_destination">Cieľ</string>
     <string name="no_index_file_to_download">Nenašlo sa nič na stiahnutie, prosím skontrolujte pripojenie na Internet.</string>
-    <string name="osmo_gpx_points_downloaded">OsMo body %1$s stiahnuté.</string>
-    <string name="osmo_auto_connect_descr">Automaticky pripojiť k zariadeniu po spustení aplikácie.</string>
-    <string name="osmo_auto_connect">Automatické pripojenie</string>
-    <string name="osmo_start_service">OsMo služba</string>
-    <string name="osmo_gpx_track_downloaded">OsMo stopa %1$s stiahnutá.</string>
-    <string name="osmo_not_signed_in">Prihlásenie k OsMo zlyhalo</string>
-    <string name="osmo_auth_error_short">Autorizácia zlyhala</string>
-    <string name="osmo_auth_error">Chyba pri autorizácii OsMo : %1$s.
-
-Možno je služba dočasne nedostupná alebo vám skončila registrácia.
-
-Chcete pokračovať v novej registrácii?</string>
-    <string name="osmo_group_by_invite">Vstúpiť pozvaním</string>
-    <string name="osmo_group_information_desc">- Keď vytvárate skupinu, zadajte jej názov a popis
-\n - Cez aplikáciu sa vytvárajú len skupiny jednoduchého typu, prečítajte si viac na stránke https://osmo.mobi/g/new 
-\n - Cez webstránku môžete skupinu spravovať, pridať stopy a body dostupné pre všetkých
-\n - Neodporúčame používať skupinu len s jedným používateľom, ak to nie je skupina POI
-\n - Súkromné skupiny sú obmedzené na 8 osôb 
-\n - Podrobné podmienky použitia sú na stránke OsMo.mobi
-\n - Ak potrebujete špeciálne podmienky - prosím kontaktuje podporu: osmo.mobi@gmail.com</string>
-    <string name="osmo_group_information">Prosím prečítajte si pred vytváraním skupiny!</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="stop_navigation_service">Zastaviť</string>
     <string name="enable_sleep_mode">Zapnúť režim GPS v pozadí</string>
     <string name="gps_wake_up_timer">Interval prebúdzania GPS</string>
@@ -1439,9 +1352,9 @@ Chcete pokračovať v novej registrácii?</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Zobraziť turistické značky</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Kresliť chodníky podľa značenia OSMC.</string>
     <string name="rendering_attr_coloredBuildings_name">Vyfarbiť budovy podľa typu</string>
-    <string name="osmo_invite">Pozvať…</string>
-    <string name="osmo_leave_confirmation_msg">Chcete opustiť skupinu %1$s?</string>
-    <string name="osmo_specify_tracker_id">Prosím zadajte ID</string>
+    
+    
+    
     <string name="arrival_distance_factor_early">Skoro</string>
     <string name="arrival_distance_factor_normally">Normálne</string>
     <string name="arrival_distance_factor_late">Neskoro</string>
@@ -1490,13 +1403,10 @@ Chcete pokračovať v novej registrácii?</string>
     <string name="print_route">Vytlačiť trasu</string>
     <string name="speed_limit_exceed">Tolerancia prekročenia povolenej rýchlosti</string>
     <string name="speed_limit_exceed_message">Zvoľte toleranciu prekročenia povolenej rýchlosti, po ktorej dostanete hlasové oznámenie.</string>
-    <string name="osmo_device_not_found">Zariadenie sa nenašlo</string>
+    
     <string name="anonymous_user">Anonymný používateľ</string>
     <string name="logged_as">Prihlásený ako %1$s</string>
-    <string name="osmo_no_connection_msg">Nedá sa pripojiť na server OsMo:
-- skontrolujte vaše pripojenie na Internet;
-- skontrolujte nastavenia;
-- pozrite na náš Twitter: https://twitter.com/OsMomobi</string>
+    
     <string name="anonymous_user_hint">Anonymný používateľ nemôže:\n- vytvárať skupiny;\n- synchronizovať skupiny a zariadenia so serverom;\n- spravovať skupiny a zariadenia na osobnej webovej stránke.</string>
     <string name="rendering_category_details">Podrobnosti</string>
     <string name="rendering_category_transport">Doprava</string>
@@ -1713,7 +1623,7 @@ Dĺžka %2$s</string>
     <string name="local_osm_changes_upload_all_confirm">Idete odoslať %1$d zmien do OSM. Ste si istí?</string>
     <string name="confirmation_to_clear_history">Chcete vymazať celú históriu?</string>
     <string name="osmand_parking_overdue">prekročený čas</string>
-    <string name="osmo_grop_name_length_alert">Názov skupiny by mal mať aspoň 3 písmená!</string>
+    
     <string name="confirm_usage_speed_cameras">Vo viacerých krajinách (ako Nemecko, Francúzsko, Taliansko) je použitie varovaní pred rýchlostnými radarmi/kamerami zakázané zákonom. OsmAnd nepreberá žiadnu zodpovednosť ak porušíte zákon. Povoľte funkciu oznamovania len ak ste na to oprávnený.</string>
     <string name="welmode_download_maps">Stiahnuť mapy</string>
     <string name="welcome_select_region">Vyberte svoj región, aby bolo možné správne nastaviť dopravné predpisy:</string>
@@ -1756,7 +1666,7 @@ Dĺžka %2$s</string>
     <string name="routing_attr_height_description">Zadajte výšku vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="use_fast_recalculation">Inteligentné prepočítanie trasy</string>
     <string name="use_fast_recalculation_desc">Pri dlhých výletoch prepočítať iba začiatočný úsek trasy.</string>
-    <string name="osmo_share_my_location">Odosielať polohu</string>
+    
     <string name="shared_string_logoff">Odhlásiť</string>
     <string name="rendering_value_disabled_name">Vypnuté</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Zafarbenie podľa príslušnosti k sieti</string>
@@ -2355,9 +2265,9 @@ Ak máte radi OsmAnd a OSM a chcete ich podporiť, toto je výborný spôsob ako
 \n • Mnohé ďalšie vylepšenia a opravy chýb 
 \n 
 \n a ďalšie…</string>
-    <string name="osmo_share_location">Zdieľať</string>
-    <string name="osmo_pause_location">Pozastaviť</string>
-    <string name="osmo_service_running">Služba OsMo beží</string>
+    
+    
+    
     <string name="gpx_no_tracks_title">Nemáte zatiaľ žiadne stopy</string>
     <string name="gpx_no_tracks_title_folder">Môžete pridať stopy do priečinka</string>
     <string name="gpx_add_track">Pridať stopu</string>
@@ -2494,7 +2404,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 	<string name="rendering_attr_depthContours_description">Zobraziť hĺbkové úrovne a body.</string>
     <string name="rendering_attr_depthContours_name">Námorné hĺbkové vrstevnice</string>
 	
-    <string name="routing_attr_height_relief_smoothness_factor_description">Viac rovín alebo viac pahorkov</string>
+    
     <string name="routing_attr_height_obstacles_name">Použiť údaje nadmorskej výšky</string>
     <string name="routing_attr_height_obstacles_description">Použiť údaje nadmorskej výšky terénu od SRTM, ASTER a EU-DEM.</string>
 
@@ -2796,7 +2706,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="moving_time">Trvanie presunu</string>
     <string name="max_min">Max/Min</string>
     
-    <string name="range_min_max">Rozsah = Min/Max</string>
+    
     <string name="quick_action_resume_pause_navigation">Pokračovať/Pozastaviť navigáciu</string>
     <string name="quick_action_resume_pause_navigation_descr">Použite toto tlačidlo pre pozastavenie alebo obnovenie navigácie.</string>
     <string name="quick_action_show_navigation_finish_dialog">Zobraziť správu o ukončení navigácie</string>
@@ -2819,19 +2729,19 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="retry">Skúsiť znova</string>
 <string name="measurement_tool_action_bar">Prezerať mapu a pridať body</string>
     <string name="measurement_tool">Merať vzdialenosť</string>
-    <string name="add_gpx_waypoint_bottom_sheet_title">Pridať prechodný bod GPX</string>
-    <string name="shared_string_create">Vytvoriť</string>
+    
+    
 <string name="none_point_error">Prosím pridajte aspoň jeden bod.</string>
     <string name="enter_gpx_name">Názov súboru GPX:</string>
     <string name="show_on_map_after_saving">Po uložení zobraziť na mape</string>
-    <string name="add_route_point">Pridať bod trasy</string>
+    
     <string name="add_waypoint">Pridať prechodný bod</string>
     <string name="save_gpx_waypoint">Uložiť prechodný bod GPX</string>
     <string name="save_route_point">Uložiť bod trasy</string>
     <string name="waypoint_one">Prechodný bod 1</string>
     <string name="route_point_one">Bod trasy 1</string>
-<string name="measurement_tool_altitude">Nadm.výška: %1$s</string>
-    <string name="measurement_tool_speed">Rýchlosť: %1$s</string>
+
+    
     <string name="line">Čiara</string>
     <string name="save_as_route_point">Uložiť ako body trasy</string>
     <string name="save_as_line">Uložiť ako čiaru</string>
@@ -2858,10 +2768,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="keep_showing_on_map">Zobrazovať ďalej na mape</string>
     <string name="exit_without_saving">Ukončiť bez uloženia?</string>
     <string name="move_all_to_history">Presunúť všetko do histórie</string>
-    <string name="build_route">Zostaviť trasu</string>
+    
     <string name="show_direction">Indikovať vzdialenosť</string>
     <string name="sort_by">Zotriediť podľa</string>
-    <string name="marker_options">Možnosti značiek</string>
+    
     <string name="map_orientation_change_in_accordance_with_speed">Citlivosť zmeny orientácie mapy</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Zvoľte pod akou rýchlosťou sa orientácia mapy zmení zo \"v smere pohybu\" na \"podľa kompasu\".</string>
     <string name="all_markers_moved_to_history">Všetky mapové značky presunuté do histórie</string>
@@ -2875,8 +2785,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="yesterday">Včera</string>
     <string name="last_seven_days">Posledných 7 dní</string>
     <string name="this_year">Tento rok</string>
-    <string name="widget">Nástroj</string>
-    <string name="top_bar">Horná lišta</string>
+    
+    
     <string name="shared_string_markers">Značky</string>
     <string name="coordinates_format">Formát súradníc</string>
     <string name="use_system_keyboard">Použiť systémovú klávesnicu</string>
@@ -2915,7 +2825,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="context_menu_item_modify_note">Upraviť OSM poznámku</string>
     <string name="make_round_trip_descr">Pridať kópiu počiatočného bodu ako cieľ.</string>
     <string name="make_round_trip">Vytvoriť okružnú trasu</string>
-    <string name="shared_string_navigate">Navigovať</string>
+    
     <string name="release_2_8">\\022 Prepracované mapové značky s vodiacimi čiarami a plánovaním trasy
 \n 
 \n • Nástroj na meranie vzdialeností má funkciu prichytenia k ceste a uloženie bodov ako stopu 
@@ -2937,7 +2847,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="import_file">Importovať súbor</string>
 	<string name="tap_on_map_to_hide_interface_descr">Ťuknutie na mapu prepne ovládacie tlačidlá a nástroje.</string>
     <string name="tap_on_map_to_hide_interface">Režim na celú obrazovku</string>
-    <string name="show_on_top_bar">Zobraziť na hornej lište</string>
+    
     <string name="mark_passed">Značka prejdená</string>
     <string name="digits_quantity">Počet desatinných miest</string>
     <string name="shared_string_right">Vpravo</string>

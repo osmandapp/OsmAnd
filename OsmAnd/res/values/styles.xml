@@ -154,7 +154,6 @@
         <item name="expandable_list_background">@color/list_item_light</item>
         <item name="size_progress_bar">@drawable/size_progressbar_light</item>
         <item name="dash_parking_bg">@drawable/dash_parking_light</item>
-        <item name="osmo_header_background">@color/osmo_header_light</item>
         <item name="dashboard_subheader_text_color">@color/dashboard_subheader_text_light</item>
         <item name="dashboard_general_button_text_color">
             @color/dashboard_general_button_text_light
@@ -347,7 +346,6 @@
         <item name="expandable_list_background">@color/list_item_dark</item>
         <item name="size_progress_bar">@drawable/size_progressbar_dark</item>
         <item name="dash_parking_bg">@drawable/dash_parking_dark</item>
-        <item name="osmo_header_background">@color/osmo_header_dark</item>
         <item name="dashboard_subheader_text_color">@color/dashboard_subheader_text_dark</item>
         <item name="dashboard_general_button_text_color">@color/dashboard_general_button_text_dark
         </item>

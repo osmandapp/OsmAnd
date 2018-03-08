@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
   <string name="left_side_navigation">მარცხენა ხელით ტარება</string>
   <string name="left_side_navigation_descr">აირჩიეთ მარცხენა მხარეს საჭის გამომყენებელი ქვეყნებისათვის</string>
   
@@ -465,7 +464,7 @@
   
   <string name="voice">ხმა</string>
   <string name="no_vector_map_loaded">ვექტორული რუკები ჩატვირთული არ იქნა</string>
-  <string name="map_route_by_gpx">ნავიგაცია GPX-ის გამოყენებით</string>
+  
   <string name="gpx_files_not_found">GPX ფაილები /tracks დასტაში ნაპოვნი არ იქნა</string>
   <string name="layer_gpx_layer">GPX მიყოლა…</string>
   <string name="error_reading_gpx">GPX მონაცემების კითხვის შეცდომა</string>
@@ -1351,11 +1350,11 @@
     <string name="without_time_limit">დროის შეზღუდვის გარეშე</string>
     <string name="context_menu_read_full_article">"მთლიანი  სტატიის წაკითხვა"</string>
     <string name="context_menu_read_article">სტატიის წაკითხვა</string>
-    <string name="opened_from">გახსნის დროა</string>
-    <string name="opened_till">დახურვის დრო</string>
-    <string name="will_be_closed_at">დახურვის დრო</string>
-    <string name="will_be_opened_at">გახსნის დრო</string>
-    <string name="will_be_opened_on">გაიხსნება</string>
+    
+    
+    
+    
+    
     <string name="additional_actions">დამატებითი მოქმედებები</string>
     <string name="modify_the_search_query">ძებნის შინაარსის შეცვლა.</string>
     <string name="shared_string_actions">მოქმედებები</string>

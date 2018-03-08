@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="city_type_district">ജില്ല</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="city_type_district">ജില്ല</string>
     <string name="city_type_neighbourhood">സമീപദേശം</string>
     <string name="map_widget_search">തെരച്ചില്‍</string>
 	<string name="app_mode_bus">ബസ്</string>
@@ -211,7 +210,7 @@
     <string name="map_mode">മാപ് രീതി</string>
     <string name="number_of_gpx_files_selected_pattern">"%s ജിപിഎക്സ് ഫയലുകള്‍ തിരഞ്ഞെടുത്തിരിക്കുന്നു "</string>
     <string name="no_waypoints_found">"വഴിത്തിരിവുകളൊന്നും കണ്ടെത്താനായില്ല "</string>
-    <string name="osmo_connect">"ചേരുക "</string>
+    
     <string name="osm_editors_ranking">ഓ എസ് എം എഡിറ്ററുഡെ റാങ്കിങ്ങ്</string>
     <string name="osm_live_month_cost_desc">ബിട്കോയിന്‍ പെയ്മെന്റ്</string>
     <string name="select_map_marker">മാപ് മാര്‍ക്കര്‍ തിരഞ്ഞെടുക്കുക</string>
@@ -284,12 +283,12 @@
     <string name="loading_smth">%1$s... വന്ന് കൊണ്ടിരിക്കുന്നു…</string>
     <string name="gpx_info_distance">"ദൂരം   %1$s (%2$s points )"</string>
     <string name="gpx_info_maximum_speed">പരമാവധി വേഗത: %1$s</string>
-    <string name="osmo_center_location">മദ്ധ്യത്തില്‍</string>
-    <string name="osmo_edit_device">ഉപയോഗ ഗുണഗണങ്ങള്‍ മാറ്റുക</string>
-    <string name="osmo_track_interval">റിക്കോഡിങ്ങിന്റെ ഇടവേള</string>
-    <string name="osmo_connect_to_device_name">ഉപയോക്തൃനാമം</string>
-    <string name="osmo_group_name">ഗ്രൂപ്പ് നാമം</string>
-    <string name="osmo_connect_to_group">"ഗ്രൂപ്പിനോട് ലിങ്ക് ചെയ്യുക "</string>
+    
+    
+    
+    
+    
+    
     <string name="hours_ago">"മണിക്കുറുകള്‍ക്ക് മുമ്പ് "</string>
     <string name="index_item_world_bitcoin_payments">ബിറ്റ്കോയിന്‍</string>
     <string name="lang_zh">"ചൈനീസ് ഭാക്ഷ "</string>
@@ -820,28 +819,12 @@
 	<string name="use_osm_live_routing">"ഓ എസ് എം  ലൈവ് നാവിഗേഷന്‍"</string>
     <string name="rendering_value_bold_name">കട്ടികൂടിയ</string>
     <string name="no_map_markers_found">"ഭൂപടത്തില്‍ നിന്നും മാപ് മാര്‍ക്കേര്‍സ് ചേര്‍ക്കുക "</string>
-    <string name="osmo_group_information_desc">"
-- ദയവായി ഇപ്പോള്‍ ഉണ്ടാക്കുന്ന ഗ്രൂപ്പിന്റെ പേര് വിവരങ്ങള്‍ നല്‍കുക
-
-- ഈ ആപ്പ്ളിക്കേഷന്‍ വഴി ലളിതമായ ഗ്രൂപ്പുകളെ  ഉണ്ടാക്കാനാകു. കൂടുതല്‍ വിവരങ്ങള്‍ https://osmo.mobi/g/new എന്ന വിലാസത്തില്‍ ലഭ്യമാണ്
-
- - ഈ വെബ്സൈറ്റ് വഴി നിങ്ങള്‍ക്ക് ഗ്രൂപ്പ് മാനേജ് ചെയ്യാനും ട്രാക്ക്, പി ഓ ഐ എന്നിവ മറ്റുള്ളവരുമായി പങ്ക് വെക്കാനും സാധിക്കും
-
-ഒറ്റ യൂസര്‍ ഉള്ള ഗ്രൂപ്പ് അനുവദനീയമല്ല, പിഓഐ ഗ്രൂപ്പ് ഒഴിച്ച് 
-
-
-
-
--സ്വകാര്യ ഗ്രൂപ്പുകളില്‍ 8 ആളുകള്‍ മാത്രം
-
-കൂടുതല്‍ വിവരങ്ങള്‍ക്ക് https://osmo.mobi/ സന്ദര്‍ശിക്കുക 
-
-നിബന്ധനകളില്‍ ഇളവുകള്‍ക്ക് ദയവായി osmo.mobi@gmail.com എന്ന വിലാസത്തില്‍ ഈ-മെയില്‍ ചെയ്യുക "</string>
-    <string name="osmo_connect_to_device_tracker_id">ട്രാക്കര്‍ ഐഡി</string>
-    <string name="osmo_tracker_id">ട്രാക്കര്‍ ഐഡി</string>
-    <string name="osmo_connect_to_my_nickname">വിളിപേര്</string>
-    <string name="osmo_share_my_location">സ്ഥാനം അയക്കുക</string>
-    <string name="osmo_plugin_name">"ഒപ്പണ്‍ സ്ട്രീറ്റ് മാപ്പ്  നിരീക്ഷിക്കുക"</string>
+    
+    
+    
+    
+    
+    
     <string name="shared_string_move_up">മുകളിലോട്ട് കയറ്റുക</string>
     <string name="shared_string_move_down">താഴോട്ട് ഇറക്കുക</string>
     <string name="finish_navigation">"വഴികാട്ടി നിര്‍ത്തുക "</string>
@@ -960,7 +943,7 @@
     <string name="rendering_category_transport">ഗതാഗത സംവിധാനം</string>
     <string name="way_alarms">ഗതാഗത മുന്നറിയിപ്പു്</string>
     <string name="monitoring_settings">സഞ്ചാരം രേഖപെടുത്തുന്നു</string>
-    <string name="osmo_activity">"ഒപ്പണ്‍ സ്ട്രീറ്റ് മാപ്പ്  നിരീക്ഷിക്കുക"</string>
+    
     <string name="install_paid">"പൂര്‍ണ്ണമായ പതുപ്പ് "</string>
     <string name="prefer_motorways">അതിവേഗപാതകള്‍ തെരഞ്ഞെടുക്കുക</string>
     <string name="prefer_in_routing_descr">അതിവേഗപാതകള്‍ തെരഞ്ഞെടുക്കുക</string>
@@ -1184,7 +1167,7 @@
     <string name="continuous_rendering">തുടര്‍ച്ചയായി വരച്ച് കാണിക്കുക</string>
     <string name="context_menu_item_search_transport">"പൊതു ഗതാഗത സംവിധാനം തെരയുക "</string>
     <string name="no_vector_map_loaded">"വെക്ടര്‍ ഭൂപടങ്ങള്‍ കയറ്റാനായില്ല "</string>
-    <string name="map_route_by_gpx">വ്ഴികാട്ടിയായ് ജി പി എക്സ് ഫയല്‍ ഉപയോഗിക്കുക</string>
+    
     <string name="no_fav_to_save">"സമ്ഭരിക്കാനായി താല്‍പര്യമുള്ള ബിന്ദുക്കളില്ല "</string>
     <string name="menu_layers">ഭൂപടപാളികള്‍</string>
     <string name="context_menu_item_search_poi">"സ്ഥലങ്ങള്‍  (POI) തിരയുക"</string>
@@ -1391,11 +1374,11 @@
     <string name="search_on_the_map_item">"ഭൂപടത്തില്‍ തിരയുന്നു "</string>
     <string name="updates_size">" പരിഷ്ക്കരണത്തിന്റെ വലിപ്പം"</string>
     <string name="select_month_and_country">മാസവും രാജ്യവും തെരഞ്ഞെടുക്കുക</string>
-    <string name="osmo_share_location">പങ്ക് വക്കുക</string>
-    <string name="osmo_pause_location">"താല്‍ക്കാലികമായി  നിര്‍ത്തുക"</string>
+    
+    
     <string name="shared_string_pause">താല്‍ക്കാലികമായുള്ള നിര്‍ത്തല്‍</string>
     <string name="show_transparency_seekbar">സീക്ക്ബാര്‍ സുതാര്യമായി കാണിക്കുക</string>
-    <string name="osmo_auth_error_short">"പ്രവേശനാനുമതി കിട്ടിയില്ല "</string>
+    
     <string name="rendering_attr_hmRendered_name">"കൂടുതല്‍  ഭൂപടവിവരങ്ങള്‍ കാണിക്കുക"</string>
     <string name="search_address_top_text">വിലാസം തെരഞ്ഞെടുക്കുക</string>
     <string name="trip_rec_notification_settings">"പെട്ടന്ന്   റിക്കോര്‍ഡ് ചെയ്യുന്നത് സജ്ജീകരിക്കുക "</string>
@@ -1415,8 +1398,8 @@
     <string name="search_my_location">എന്റെ സ്ഥാനം തെരയുക</string>
     <string name="route_stops_before">%1$s മുമ്പായ് നിര്‍ത്തുക</string>
     <string name="report">സംഭവക്കുറിപ്പ്‌</string>
-    <string name="osmo_connect_to_group_id">ഗ്രൂപ്പ് ഐഡി</string>
-    <string name="osmo_groups">ഓസ്മോ ഗ്രൂപ്പുകള്‍</string>
+    
+    
     <string name="rec_split">റിക്കോഡിങ്ങ് സ്പ്ളിറ്റ് ചെയ്യുക</string>
     <string name="rec_split_storage_size">സംഭരണ വലിപ്പം</string>
     <string name="lang_als">അല്‍ബേനിയന്‍(ടോസ്ക്)</string>
@@ -1435,7 +1418,7 @@
     <string name="remove_the_tag">"ടാഗ് ഒഴിവാക്കുക "</string>
     <string name="navigate_point_easting">കിഴക്കോട്ട്</string>
     <string name="rendering_attr_busRoutes_name">ബസ് റൂട്ടുകള്‍</string>
-    <string name="osmo_device_not_found">"ഉപകരണത്തെ  കണ്ടെത്താനായില്ല "</string>
+    
     <string name="save_global_track_interval">സാധാരണ റിക്കോഡിങ്ങിന്റെ ഇടവേള</string>
     <string name="save_track_to_gpx_globally">"ജിപിഎക്സ് ഫയലിലോട്ട്  പാത റിക്കോഡ് ചെയ്യുക"</string>
     <string name="save_current_track">ഇപ്പോഴത്തെ ജിപിഎക്സ് പാത സംഭരിക്കുക</string>
@@ -1446,25 +1429,25 @@
     <string name="rendering_attr_hideWoodScrubs_name">മരങ്ങളും കുറ്റിച്ചെടികളും</string>
     <string name="rendering_attr_buildings15zoom_name">കെട്ടിടങ്ങള്‍ സൂം 15-ല്‍</string>
     <string name="rendering_attr_hideAccess_name">പ്രവേഷന തടസം</string>
-    <string name="osmo_group_by_invite">ക്ഷണത്താലുള്ള പ്രവേശനം</string>
-    <string name="osmo_not_signed_in">"ഓസ്മോയിലെക്കുള്ള പ്രവേശനം(ലോഗിന്‍) പരാജയപ്പെട്ടു "</string>
-    <string name="osmo_gpx_points_downloaded">"ഓസ്മോ ബിന്ദുക്കള്‍ %1$s  ഡൗണ്‍ലോഡ് ചെയ്തിരിക്കുന്നു."</string>
-    <string name="osmo_gpx_track_downloaded">"ഓസ്മോ പാത %1$s  ഡൗണ്‍ലോഡ് ചെയ്തിരിക്കുന്നു."</string>
-    <string name="osmo_follow">പിന്തുടരുക</string>
-    <string name="osmo_regenerate_login_ids">യൂസര്‍ ഐഡി പുനരുജ്ജീവിപ്പിക്കുക</string>
+    
+    
+    
+    
+    
+    
     <string name="osmo_edit_color">പ്രദര്‍ശനനിറം</string>
-    <string name="osmo_group_info">വിവരം</string>
-    <string name="osmo_group">ഓസ്മോ ഗ്രൂപ്പ്</string>
+    
+    
     <string name="int_days">ദിവസങ്ങള്‍</string>
-    <string name="osmo_group_policy">നയങ്ങള്‍</string>
-    <string name="osmo_create_group">"ഗ്രൂപ്പിന്   രുപം നല്‍കുക"</string>
-    <string name="osmo_enable_tracker">എന്റെ സ്ഥാനം അയക്കുക</string>
-    <string name="osmo_control">ഓസ്മോയിലേക്ക് ദ്രുതപ്രവേശനം</string>
-    <string name="osmo_conn_successfull">%1$s മായി ബന്ധം സ്ഥാപിക്കപ്പെട്ടിരിക്കുന്നു</string>
-    <string name="osmo_io_error">"ഓസ്മോയുമായി ബന്ധപ്പെടുന്നതില്‍ തകരാര്‍: "</string>
-    <string name="osmo_mode_restart">ഓസ്മോ ഉപയോഗം നിര്‍ത്തി വീണ്ടും തുടങ്ങുക</string>
-    <string name="osmo_mode_on">ഓസ്മോ ഉപയോഗം നിര്‍ത്തുക</string>
-    <string name="osmo_mode_off">ഓസ്മോയുപയോഗിച്ച് തുടങ്ങുക</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="index_item_world_altitude_correction">"ലോക ഉയരവ്യത്യാസതിരുത്തലുകള്‍ "</string>
     <string name="index_item_world_seamarks">ലോകകടലടയാളങ്ങള്‍</string>
     <string name="index_item_world_ski">ലോക സ്കി ഭൂപടങ്ങള്‍</string>
@@ -1612,7 +1595,7 @@
     <string name="live_update">"തത്സമയ പരിഷ്കരണങ്ങള്‍ "</string>
     <string name="last_update">" അവസാന പരിഷ്ക്കരണം : %s"</string>
     <string name="last_map_change">ഭൂപടത്തിലെ അവസാന മാറ്റം: %s</string>
-    <string name="osmo_service_running">ഓസ്മോ സേവനം പ്രവൃത്തിച്ച് കൊണ്ടിരിക്കുന്നു</string>
+    
     <string name="gpx_logging_no_data">"വിവരങ്ങളൊന്നുമില്ല "</string>
     <string name="christmas_poi">ക്രിസ്മസ് താല്‍പര്യബിന്ദുക്ക</string>
     <string name="christmas_desc">ക്രിസ്മസ് - പുതുവര്‍ഷം അടുത്തെത്തിയാല്‍ , നിങ്ങള്‍ക്ക് ക്രിസ്മസ് തല്‍പര്യബിന്ദുക്കള്‍ കാണിക്കാം: ക്രിസ്മസ് ട്രീസ്, ചന്തകള്, തുടങ്ങിയവ.</string>
@@ -1620,7 +1603,7 @@
     <string name="rendering_value_dark_brown_name">ഇരുണ്ട തവിട്ടുനിറം</string>
     <string name="first_usage_greeting">ഇന്റര്‍നെറ്റ് ഇല്ലാതെ തന്നെ മാര്‍ഗദിശയും, പുതിയ സ്ഥലങ്ങളും കണ്ടെത്തുക</string>
     <string name="access_map_linked_to_location">സ്ഥാനത്തോട് ബന്ധപ്പെട്ട ഭൂപടം</string>
-    <string name="osmo_auto_send_locations">തന്നത്താന്‍ യാത്ര ആരംഭിക്കുക</string>
+    
     <string name="clear_updates_proposition_message">നിങ്ങള്‍ക്ക് ഡൗണ്‍ലോഡ് ചെയ്ത പരിഷ്കാരങ്ങള്‍ നീക്കി ആദ്യ ഭൂപടത്തിലോട്ട് തിരിച്ച് പോവാം</string>
     <string name="add_time_span">കാലയളവ് ചേര്‍ക്കുക</string>
     <string name="welcome_select_region">ട്രാഫിക് സൈനുകളും നിയമങ്ങളും ശരിയായ് പാലിക്കാന്‍ ഡ്രൈവിങ്ങ് റീജിയന്‍ തെരഞ്ഞെടുക്കുക:</string>
@@ -1646,12 +1629,12 @@
     <string name="rendering_attr_lessDetailed_name">കുറച്ച് വിവരങ്ങള്‍</string>
     <string name="gpx_wpt">പാതബിന്ദു(വേപോയിന്റ്)</string>
     <string name="gpx_file_is_empty">ജിപിഎക്സ് പാത ശൂന്യമാണ്</string>
-    <string name="osmo_user_joined">"യൂസര്‍ %1$s  %2$s ഗ്രൂപ്പില്‍ ചേര്‍ന്നു"</string>
-    <string name="osmo_user_left">"യൂസര്‍ %1$s  %2$s ഗ്രൂപ്പില്‍ നിന്നും പോയി"</string>
-    <string name="osmo_use_server_name">ഔദ്യോഗിക നാമം</string>
-    <string name="osmo_user_name">യൂസര്‍</string>
-    <string name="osmo_share_connect_device">ഈ ഉപകരണത്തെ സ്ഥിരമായി പിന്തുടരാന്‍ അനുവദിക്കുക</string>
-    <string name="osmo_settings_uuid">അനന്യമായ ഉപകരണ ഐഡി</string>
+    
+    
+    
+    
+    
+    
     <string name="index_item_nation_addresses">രാജ്യമെമ്പാടുമുള്ള വിലാസങ്ങള്‍</string>
     <string name="index_item_world_basemap">"ലോക വിഹഗ ഭൂപടം  "</string>
     <string name="use_displayed_track_for_navigation">കാണിച്ചിരിക്കുന്ന പാത വഴികാട്ടിക്കായ് ഉപയോഗിക്കണോ?</string>
@@ -1747,7 +1730,7 @@
     <string name="coordinate_input_accuracy">%1$d അക്കങ്ങള്‍</string>
     <string name="go_to_next_field">അടുത്ത കളത്തിലേക്ക് പോവു</string>
     <string name="rename_marker">"അടയാളത്തിന്റെ പേരുമാറ്റുക "</string>
-    <string name="show_on_top_bar">മേല്‍പട്ടയില്‍ കാണിക്കുക</string>
+    
     <string name="mark_passed">"പൂര്‍ണമായതായി അടയാളപ്പെടുത്തുക "</string>
     <string name="import_as_gpx">"ജിപിഎക്സ് ഫയല്‍ ആയി എടുക്കുക "</string>
     <string name="import_file">"ഫയല്‍ എടുക്കുക "</string>

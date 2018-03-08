@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -592,7 +591,7 @@
 	
 	<string name="voice">Ηχογραφημένη φωνή</string>
 	<string name="no_vector_map_loaded">Οι διανυσματικοί χάρτες δεν φορτώθηκαν</string>
-	<string name="map_route_by_gpx">Πλοήγηση χρησιμοποιώντας GPX</string>
+	
 	<string name="gpx_files_not_found">Δεν βρέθηκαν αρχεία GPX στον κατάλογο ιχνών</string>
 	<string name="layer_gpx_layer">Ίχνος GPX…</string>
 	<string name="error_reading_gpx">Σφάλμα ανάγνωσης δεδομένων GPX</string>
@@ -1204,36 +1203,36 @@
     
     <string name="gpx_selection_route_points">"%1$s\nΣημεία διαδρομής  %2$s"</string>
     <string name="gpx_selection_points">%1$s\nΣημεία</string>
-    <string name="osmo_user_joined">Ο χρήστης %1$s εντάχθηκε στην ομάδα %2$s</string>
-    <string name="osmo_user_left">Ο χρήστης %1$s εγκατέλειψε την ομάδα %2$s</string>
-    <string name="osmo_show_group_notifications">Εμφάνιση ειδοποιήσεων ομάδας</string>
-    <string name="osmo_show_group_notifications_descr">Εμφάνιση μηνυμάτων όταν ο χρήστης εντάσσεται ή εγκαταλείπει την ομάδα</string>
-    <string name="osmo_follow">\"Follow\"</string>
-    <string name="osmo_sign_in">Σύνδεση</string>
-    <string name="osmo_create_groups_confirm">Για να δημιουργήσετε ομάδες πρέπει να είστε καταχωρημένος χρήστης του OsMo.</string>
-    <string name="osmo_credentials_not_valid">Τα διαπιστευτήρια OsMo δεν είναι έγκυρα.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Είστε σίγουρος ότι θέλετε να επαναδημιουργήσετε τα προσωπικά σας στοιχεία; Όλες οι συνδεδεμένες συσκευές με εσάς δε θα μπορούν να σας εντοπίσουν πλέον.</string>
-    <string name="osmo_regenerate_login_ids">Επαναδημιουργία στοιχείων χρήστη</string>
-    <string name="osmo_cancel_moving_target">Ακύρωση μετακίνησης στόχου</string>
-    <string name="osmo_set_moving_target">Ορισμός ως κινούμενο στόχο</string>
-    <string name="osmo_use_server_name">Καταχωρημένο όνομα</string>
-    <string name="osmo_connect_to_my_nickname">Ψευδώνυμο</string>
-    <string name="osmo_user_name">Χρήστης</string>
-	<string name="osmo_edit_device">Αλλαγή ιδιοτήτων χρήστη</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+	
     <string name="osmo_edit_color">Χρώμα εμφάνισης</string>
-    <string name="osmo_group_info">Πληροφορίες</string>
-    <string name="osmo_group">Ομάδα OsMo</string>
-    <string name="osmo_group_share">Για να συνδεθείτε στην ομάδα %2$s, προσδιορίστε την ταυτότητα ομάδας (%1$s) ή πατήστε %3$s.</string>
-    <string name="osmo_share_current_session">Κοινή χρήση της τρέχουσας συνεδρίας στο πρόγραμμα περιήγησης</string>
-    <string name="osmo_session_not_available">Η συνεδρία δεν είναι διαθέσιμη. Παρακαλώ ελέγξτε ότι η \"Αποστολή τοποθεσιών\" είναι ενεργή.</string>
-    <string name="osmo_share_session">Κοινή χρήση συνεδρίας</string>
-    <string name="osmo_track_interval">Διάστημα καταγραφής</string>
+    
+    
+    
+    
+    
+    
+    
 	<string name="int_days">ημέρες</string>
     <string name="osmo_connect_menu">Σύνδεση</string>
     <string name="osmo_group_description">Περιγραφή</string>
-    <string name="osmo_auto_connect_descr">Αυτόματη σύνδεση στην υπηρεσία μετά την έναρξη της εφαρμογής</string>
-    <string name="osmo_auto_connect">Αυτόματη σύνδεση</string>
-    <string name="osmo_start_service">Υπηρεσία OsMo</string>
+    
+    
+    
     <string name="gpx_split_interval">Διάστημα διαχωρισμού</string>
     <string name="select_destination_and_intermediate_points">Επιλέξτε προορισμούς</string>
     <string name="gpx_wpt">Σημείο διαδρομής</string>
@@ -1245,18 +1244,18 @@
     <string name="gpx_selection_track">%1$s
 \nΊχνος %2$s</string>
     <string name="gpx_file_is_empty">Το ίχνος GPX είναι άδειο</string>
-    <string name="osmo_center_location">Κέντρο στην οθόνη</string>
-    <string name="osmo_track_interval_descr">Επιλέξτε το χρονικό διάστημα αποστολής της θέσης</string>
-    <string name="osmo_expire_group">Λήγει στις</string>
-    <string name="osmo_group_policy">Πολιτική</string>
-    <string name="osmo_connect_to_device_name">Όνομα χρήστη</string>
-    <string name="osmo_group_name">Όνομα ομάδας</string>
-    <string name="osmo_create_group">Δημιουργία ομάδας</string>
-    <string name="osmo_activity">Παρακολούθηση OpenStreetMap</string>
-    <string name="osmo_connected_devices">Συνδεδεμένες συσκευές</string>
-    <string name="osmo_groups">Ομάδες OsMo</string>
-    <string name="osmo_auth_pending">Αναμονή εξουσιοδότησης…</string>
-    <string name="osmo_settings_uuid">Μοναδικό αναγνωριστικό συσκευής</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="use_points_as_intermediates">Υπολογισμός διαδρομής μεταξύ σημείων</string>
     <string name="always_center_position_on_map">Εμφάνιση της θέσης πάντα στο κέντρο</string>
     <string name="voice_pref_title">Φωνή</string>
@@ -1367,10 +1366,10 @@
     <string name="rendering_attr_hideAccess_name">Περιορισμοί πρόσβασης</string>
     <string name="rendering_attr_showAccess_name">Εμφάνιση περιορισμών πρόσβασης και διοδίων</string>
     <string name="rendering_attr_showSurfaceGrade_name">Εμφάνιση ποιότητας των δρόμων</string>
-    <string name="osmo_auth_error_short">Αποτυχία εξουσιοδότησης</string>
+    
     <string name="rendering_attr_coloredBuildings_name">Έγχρωμα κτίρια κατά τύπο</string>
-    <string name="osmo_invite">Προσκαλέστε…</string>
-    <string name="osmo_leave_confirmation_msg">Θέλετε να φύγετε από την ομάδα %1$s?</string>
+    
+    
     <string name="continue_navigation">Συνέχιση της Πλοήγησης</string>
     <string name="pause_navigation">Παύση Πλοήγησης</string>
     <string name="keep_navigation_service">Διατήρηση</string>
@@ -1378,12 +1377,12 @@
 	<string name="gps_wake_up_timer">Διάστημα αφύπνισης GPS</string>
 	<string name="rendering_attr_hideNonVehicleHighways_name">Μη αμαξιτοί δρόμοι</string>
     <string name="rendering_attr_showSurfaces_name">Εμφάνιση οδοστρωμάτων</string>
-    <string name="osmo_group_by_invite">Είσοδος με πρόσκληση</string>
-    <string name="osmo_group_information">Παρακαλώ διαβάστε πριν τη δημιουργία μιας ομάδας!</string>
+    
+    
     <string name="no_index_file_to_download">Δεν βρέθηκαν λήψεις, ελέγξτε τη σύνδεση στο internet.</string>
-    <string name="osmo_mode_restart">Επανεκκίνηση της συνόδου OsMo</string>
-    <string name="osmo_mode_off">Εκκίνηση συνόδου OsMo</string>
-    <string name="osmo_settings_debug">Πληροφορίες αποσφαλμάτωσης</string>
+    
+    
+    
     <string name="lang_al">Αλβανικά</string>
 	<string name="lang_ar">Αραβικά</string>
 	<string name="lang_fa">Περσικά</string>
@@ -1405,7 +1404,7 @@
     <string name="gpx_monitoring_start">Έναρξη καταγραφής GPX</string>
 	<string name="gpx_monitoring_stop">Παύση καταγραφής GPX</string>
     <string name="gpx_start_new_segment">Έναρξη νέου τμήματος</string>
-    <string name="osmo_settings">OsMo</string>
+    
     <string name="shared_string_all">Όλα</string>
     <string name="targets">Προορισμοί</string>
     <string name="way_alarms">Προειδοποιήσεις κυκλοφορίας</string>
@@ -1429,7 +1428,7 @@
     <string name="traffic_warning_speed_camera">Κάμερα ταχύτητας</string>
     <string name="text_size_descr">Ορίστε το μέγεθος του κειμένου στο χάρτη.</string>
     <string name="text_size">Μέγεθος κειμένου</string>
-    <string name="osmo_device_not_found">Η συσκευή δεν βρέθηκε</string>
+    
     <string name="anonymous_user">Ανώνυμος χρήστης</string>
     <string name="logged_as">Συνδεδεμένος ως %1$s</string>
     <string name="impassable_road">Αποφυγή δρόμων…</string>
@@ -1566,7 +1565,7 @@
 	<string name="welcome_header">Καλώς ήλθατε</string>
     <string name="current_route">Τρέχουσα διαδρομή</string>
     <string name="mark_to_delete">Σήμανση για διαγραφή</string>
-	<string name="osmo_grop_name_length_alert">Το όνομα της ομάδας θα πρέπει να είναι τουλάχιστον 3 χαρακτήρες!</string>
+	
 	<string name="local_osm_changes_upload_all_confirm">Πρόκειται να αποστείλετε %1$d αλλαγές στο OSM. Είστε σίγουρος;</string>
     <string name="confirmation_to_clear_history">Θέλετε να καθαρίσετε το ιστορικό;</string>
     <string name="osm_edits">Επεξεργασίες OSM</string>
@@ -1575,7 +1574,7 @@
 	<string name="tips_and_tricks_descr">Συχνές ερωτήσεις, πρόσφατες αλλαγές και άλλα</string>
     <string name="shared_string_unexpected_error">Παρουσιάστηκε μη αναμενόμενο σφάλμα</string>
 	<string name="shared_string_currently_recording_track">Τρέχουσα καταγραφή ίχνους</string>
-	<string name="osmo_plugin_name">Παρακολούθηση OpenStreetMap</string>
+	
 	<string name="plugin_nautical_name">Προβολή Ναυτικού χάρτη</string>
 	<string name="rename_failed">Η μετονομασία απέτυχε.</string>
 	<string name="days_behind">ημέρες πίσω</string>
