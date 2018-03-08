@@ -21,6 +21,10 @@ public class BaseBottomSheetItem {
 	private View.OnClickListener onClickListener;
 	protected int position = INVALID_POSITION;
 
+	public View getView() {
+		return view;
+	}
+
 	public BaseBottomSheetItem(View view,
 							   @LayoutRes int layoutId,
 							   Object tag,
