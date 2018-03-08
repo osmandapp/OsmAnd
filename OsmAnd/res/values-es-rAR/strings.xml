@@ -2952,4 +2952,5 @@ Proporciona un código completo</string>
 	<string name="distance_farthest">Distancia: más lejos primero</string>
     <string name="distance_nearest">Distancia: más cerca primero</string>
     <string name="rendering_attr_whiteWaterSports_name">Deportes acuáticos</string>
+    <string name="group_deleted">Grupo borrado</string>
     </resources>
