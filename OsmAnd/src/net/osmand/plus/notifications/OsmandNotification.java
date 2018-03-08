@@ -31,7 +31,6 @@ public abstract class OsmandNotification {
 	public enum NotificationType {
 		NAVIGATION,
 		GPX,
-		OSMO,
 		GPS
 	}
 

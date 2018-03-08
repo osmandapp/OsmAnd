@@ -81,9 +81,9 @@ public class BinaryInspector {
 //					"-lang=ru",
 //					"-bbox=30.4981,50.4424,30.5195,50.4351",
 //					"-osm="+System.getProperty("maps.dir")+"/map_full_1.obf.osm",
-					System.getProperty("maps.dir")+"/diff/Bulgaria_europe_01_00.obf"
+//					System.getProperty("maps.dir")+"/diff/Bulgaria_europe_01_00.obf"
 //					System.getProperty("maps.dir")+"/diff/Diff.obf"
-//					System.getProperty("maps.dir")+"/Ukraine_kiev-city_europe_2.obf"
+					System.getProperty("maps.dir")+"/Map.obf"
 			});
 		} else {
 			in.inspector(args);

@@ -2061,7 +2061,7 @@ public class BinaryMapIndexReader {
 	private static boolean testAddressSearch = false;
 	private static boolean testAddressSearchName = false;
 	private static boolean testAddressJustifySearch = false;
-	private static boolean testPoiSearch = false;
+	private static boolean testPoiSearch = true;
 	private static boolean testPoiSearchOnPath = false;
 	private static boolean testTransportSearch = true;
 	
@@ -2227,7 +2227,7 @@ public class BinaryMapIndexReader {
 
 	private static void testPoiSearchByName(BinaryMapIndexReader reader) throws IOException {
 		println("Searching by name...");
-		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "Belar",
+		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "Art",
 				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null);
 		
 		reader.searchPoiByName(req);
@@ -2360,7 +2360,7 @@ public class BinaryMapIndexReader {
 			public boolean isCancelled() {
 				return false;
 			}
-		}, "Красноарм", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+		}, "Guy'", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 //		req.setBBoxRadius(52.276142, 4.8608723, 15000);
 		reader.searchAddressDataByName(req);
 	}

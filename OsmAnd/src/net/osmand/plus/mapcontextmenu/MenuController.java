@@ -66,8 +66,6 @@ import net.osmand.plus.osmedit.EditPOIMenuController;
 import net.osmand.plus.osmedit.OsmBugMenuController;
 import net.osmand.plus.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.osmedit.OsmPoint;
-import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
-import net.osmand.plus.osmo.OsMoMenuController;
 import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -181,8 +179,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				menuController = new HistoryMenuController(mapActivity, pointDescription, (SearchHistoryHelper.HistoryEntry) object);
 			} else if (object instanceof TargetPoint) {
 				menuController = new TargetPointMenuController(mapActivity, pointDescription, (TargetPoint) object);
-			} else if (object instanceof OsMoDevice) {
-				menuController = new OsMoMenuController(mapActivity, pointDescription, (OsMoDevice) object);
 			} else if (object instanceof Recording) {
 				menuController = new AudioVideoNoteMenuController(mapActivity, pointDescription, (Recording) object);
 			} else if (object instanceof OsmPoint) {
