@@ -2966,4 +2966,6 @@ Area honi dagokio: %1$s x %2$s</string>
 	<string name="south_abbreviation">H</string>
 	<string name="north_abbreviation">I</string>
 	<string name="optional_point_name">Aukerazko puntuaren izena</string>
+    <string name="group_deleted">Taldea ezabatuta</string>
+    <string name="rendering_attr_whiteWaterSports_name">Ur arinetako kirolak</string>
     </resources>
