@@ -598,7 +598,7 @@
 	<string name="poi_motorcycle_barrier">Motorkerékpár-akadály</string>
 	<string name="poi_block">Tömb</string>
 	<string name="poi_cattle_grid">Szarvasmarharács</string>
-	<string name="poi_full_height_turnstile">Teljes forgókapu</string>
+	<string name="poi_full_height_turnstile">Teljes magasságú forgókapu</string>
 	<string name="poi_bump_gate">Lökőkapu</string>
 	<string name="poi_general_barrier">Általános akadály</string>
 	<string name="poi_stile">Kerítésátjáró</string>
@@ -1015,7 +1015,7 @@
 	<string name="poi_access_private">Magántulajdon</string>
 	<string name="poi_access_no">Nem használható</string>
 	<string name="poi_access_destination">Csak célforgalom</string>
-	<string name="poi_access_permissive">Engedéllyel használható</string>
+	<string name="poi_access_permissive">Használata megtűrt</string>
 	<string name="poi_access_customers">Ügyfeleknek használható</string>
 	<string name="poi_access_delivery">Áruszállításra használható</string>
 	<string name="poi_access_agricultural">Mezőgazdasági célra használható</string>
@@ -1827,9 +1827,9 @@
 	<string name="poi_power_supply_yes">van</string>
 	<string name="poi_power_supply_no">Elektromos csatlakozó nincs</string>
 	<string name="poi_generator_output_electricity">Kimeneti teljesítmény</string>
-	<string name="poi_generator_output_hot_water">Kimeneti teljesítmény: forró víz</string>
-	<string name="poi_generator_output_compressed_air">Kimeneti teljesítmény: sűrített levegő</string>
-	<string name="poi_generator_output_biogas">Kimeneti teljesítmény: biogáz</string>
+	<string name="poi_generator_output_hot_water">Forró víz kimeneti teljesítménye</string>
+	<string name="poi_generator_output_compressed_air">Sűrített levegő kimeneti teljesítménye</string>
+	<string name="poi_generator_output_biogas">Biogáz kimeneti teljesítménye</string>
 	<string name="poi_office_camping">Kempingrecepció</string>
 	<string name="poi_guide">Idegenvezetői iroda</string>
 	<string name="poi_consulting">Tanácsadói iroda</string>
@@ -1886,7 +1886,7 @@
 	<string name="poi_fortification_type_hill_fort">Erődítmény típusa: hegyi földvár</string>
 	<string name="poi_fortification_type_limes">Erődítmény típusa: római limes</string>
 	<string name="poi_site_type_hut_circle">Kerek kunyhómaradvány</string>
-	<string name="poi_wheelchair_accessibility">Akadálymentes</string>
+	<string name="poi_wheelchair_accessibility">Akadálymentes-e?</string>
 	<string name="poi_theatre_genre">Műfaj</string>
 	<string name="poi_theatre_genre_philharmonic">Filharmonikus</string>
 	<string name="poi_theatre_genre_musical">Musical</string>
