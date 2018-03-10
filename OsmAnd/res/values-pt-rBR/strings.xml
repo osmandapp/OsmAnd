@@ -2782,4 +2782,6 @@ Pôr do Sol: %2$s</string>
     <string name="enter_the_file_name">Digite o nome do arquivo.</string>
     <string name="map_import_error">Erro de importação de mapa</string>
     <string name="map_imported_successfully">Mapa importado com êxito</string>
+    <string name="rendering_attr_whiteWaterSports_name">Esportes em corredeiras</string>
+    <string name="make_as_start_point">Tornar como Ponto de Partida</string>
     </resources>
