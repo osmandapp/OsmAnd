@@ -1301,7 +1301,7 @@
     <string name="osmo_user_joined">Користувач %1$s приєднався до групи %2$s</string>
     <string name="osmo_user_left">Користувач %1$s покинув групу %2$s</string>
     <string name="osmo_show_group_notifications">Показувати сповіщення групи</string>
-    <string name="osmo_show_group_notifications_descr">Показувати сповіщення, коли користувач приєднується або залишає групу.</string>
+    <string name="osmo_show_group_notifications_descr">Показувати сповіщення, коли користувач приєднується або полишає групу.</string>
     <string name="osmo_follow">Стежити</string>
     <string name="osmo_sign_in">Увійти</string>
     <string name="osmo_create_groups_confirm">Для створення групи, Ви повинні бути зареєстрованим користувачем OsMo.</string>
@@ -3190,4 +3190,6 @@
     <string name="transport_nearby_routes">ПОРУЧ</string>
     <string name="distance_farthest">Відстань: спочатку найдальше</string>
     <string name="distance_nearest">Відстань: спочатку найближче</string>
+    <string name="group_deleted">Групу було видалено</string>
+    <string name="rendering_attr_whiteWaterSports_name">Сплавний спорт</string>
     </resources>
