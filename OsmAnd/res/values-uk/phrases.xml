@@ -3769,4 +3769,9 @@
 	<string name="poi_socket_schuko_output_medium">Середня</string>
 	<string name="poi_socket_schuko_output_low">Низька</string>
 
+<string name="poi_flooring">Фабрика</string>
+	<string name="poi_pottery">Гончарство</string>
+
+	<string name="poi_whitewater_rapid_name">Назва річкових порогів</string>
+
 </resources>
