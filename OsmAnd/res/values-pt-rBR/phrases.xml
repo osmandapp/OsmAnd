@@ -3655,7 +3655,7 @@
 	<string name="poi_socket_type1">Tomada: Tipo 1</string>
 	<string name="poi_socket">Tomada</string>
 	<string name="poi_socket_chademo_output_filter">Saída CHAdeMO</string>
-	<string name="poi_socket_type2_output_filter">Saída do tipo 2</string>
+	<string name="poi_socket_type2_output_filter">Saída tipo 2</string>
 	<string name="poi_socket_type3_output_filter">Saída do tipo 3</string>
 	<string name="poi_socket_schuko_output_filter">Saída Schuko</string>
 
@@ -3680,5 +3680,111 @@
 
 	<string name="poi_flooring">Loja de revestimentos</string>
 	<string name="poi_pottery">Oleiro</string>
+
+<string name="poi_socket_type2_combo_output_filter">Saída combo tipo 2</string>
+	<string name="poi_socket_cee_blue_output_filter">Saída CEE azul</string>
+	<string name="poi_socket_type1_current">Tomada: Tipo 1: corrente</string>
+	<string name="poi_socket_type1_output">Tomada: Tipo 1: saída</string>
+	<string name="poi_socket_type1_combo">Tomada: Tipo 1 combo</string>
+	<string name="poi_socket_type1_combo_current">Tomada: Tipo 1 combo: corrente</string>
+	<string name="poi_socket_type1_combo_output">Tomada: Tipo 1 combo: saída</string>
+	<string name="poi_socket_type2">Tomada: Tipo 2</string>
+	<string name="poi_socket_type2_current">Tomada: Tipo 2: corrente</string>
+	<string name="poi_socket_type2_output">Tomada: Tipo 2: saída</string>
+	<string name="poi_socket_type2_combo">Tomada: Tipo 2 combo</string>
+	<string name="poi_socket_type2_combo_current">Tomada: Tipo 2 combo: corrente</string>
+	<string name="poi_socket_type2_combo_output">Tomada: Tipo 2 combo: saída</string>
+	<string name="poi_socket_type3">Tomada: Tipo 3</string>
+	<string name="poi_socket_type3_current">Tomada: Tipo 3: corrente</string>
+	<string name="poi_socket_type3_output">Tomada: Tipo 3: saída</string>
+	<string name="poi_socket_chademo">Tomada: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Tomada: CHAdeMO: corrente</string>
+	<string name="poi_socket_chademo_output">Tomada: CHAdeMO: saída</string>
+	<string name="poi_socket_tesla_standard">Tomada: Padrão Tesla</string>
+	<string name="poi_socket_tesla_standard_current">Tomada: Padrão Tesla: corrente</string>
+	<string name="poi_socket_tesla_standard_output">Tomada: Padrão Tesla: saída</string>
+	<string name="poi_socket_tesla_supercharger">Tomada: Tesla Supercharger</string>
+	<string name="poi_socket_tesla_supercharger_current">Tomada: Tesla Supercharger: corrente</string>
+	<string name="poi_socket_tesla_supercharger_output">Tomada: Tesla Supercharger: saída</string>
+	<string name="poi_socket_tesla_roadster">Tomada: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Tomada: Tesla Roadster: corrente</string>
+	<string name="poi_socket_tesla_roadster_output">Tomada: Tesla Roadster: saída</string>
+	<string name="poi_socket_nema_5_15">Tomada: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Tomada: NEMA 5-15R: corrente</string>
+	<string name="poi_socket_nema_5_15_output">Tomada: NEMA 5-15R: saída</string>
+	<string name="poi_socket_nema_5_20">Tomada: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Tomada: NEMA 5-20: corrente</string>
+	<string name="poi_socket_nema_5_20_output">Tomada: NEMA 5-20: saída</string>
+	<string name="poi_socket_nema_14_30">Tomada: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Tomada: NEMA 14-30: corrente</string>
+	<string name="poi_socket_nema_14_30_output">Tomada: NEMA 14-30: saída</string>
+	<string name="poi_socket_nema_14_50">Tomada: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Tomada: NEMA 14-50: corrente</string>
+	<string name="poi_socket_nema_14_50_output">Tomada: NEMA 14-50: saída</string>
+	<string name="poi_socket_schuko">Tomada: Schuko</string>
+	<string name="poi_socket_schuko_current">Tomada: Schuko: corrente</string>
+	<string name="poi_socket_schuko_output">Tomada: Schuko: saída</string>
+	<string name="poi_socket_bs1363">Tomada: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Tomada: BS 1363: corrente</string>
+	<string name="poi_socket_bs1363_output">Tomada: BS 1363: saída</string>
+	<string name="poi_socket_as3112">Tomada: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Tomada: AS/NZS 3112: corrente</string>
+	<string name="poi_socket_as3112_output">Tomada: AS/NZS 3112: saída</string>
+
+	<string name="poi_ref_post">CEP</string>
+
+	<string name="poi_climbing_sport_yes">Esporte: sim</string>
+	<string name="poi_climbing_sport_no">Esporte: não</string>
+	<string name="poi_climbing_boulder_yes">Bouldering: sim</string>
+	<string name="poi_climbing_boulder_no">Bouldering: não</string>
+	<string name="poi_climbing_toprope_yes">Top-rope: sim</string>
+	<string name="poi_climbing_toprope_no">Top-rope: não</string>
+	<string name="poi_climbing_trad_yes">Tradicional: sim</string>
+	<string name="poi_climbing_trad_no">Tradicional: não</string>
+	<string name="poi_climbing_ice_yes">Gelo: sim</string>
+	<string name="poi_climbing_ice_no">Gelo: não</string>
+	<string name="poi_climbing_mixed_yes">Misto: sim</string>
+	<string name="poi_climbing_mixed_no">Misto: não</string>
+	<string name="poi_climbing_deepwater_yes">Psicobloc: sim</string>
+	<string name="poi_climbing_deepwater_no">Psicobloc: não</string>
+
+	<string name="poi_climbing_length">Comprimento de escalada</string>
+	<string name="poi_climbing_length_min">Comprimento mín. de escalada</string>
+	<string name="poi_climbing_length_max">Comprimento máx. de escalada</string>
+	<string name="poi_climbing_rock_limestone">Rocha de escalada: calcário</string>
+	<string name="poi_climbing_rock_granite">Rocha de escalada: granito</string>
+	<string name="poi_climbing_rock_sandstone">Rocha de escalada: arenito</string>
+	<string name="poi_climbing_rock_quartzite">Rocha de escalada: quartzito</string>
+	<string name="poi_climbing_rock_gneiss">Rocha de escalada: gnaisse</string>
+	<string name="poi_climbing_rock_porphyry">Rocha de escalada: pórfiro</string>
+	<string name="poi_climbing_quality_solid">Qualidade de escalada: sólido</string>
+	<string name="poi_climbing_quality_fragile">Qualidade de escalada: frágil</string>
+	<string name="poi_climbing_bolted_yes">Âncoras fixas: sim</string>
+	<string name="poi_climbing_bolted_no">Âncoras fixas: não</string>
+	<string name="poi_climbing_orientation_n">Orientação da parede: N</string>
+	<string name="poi_climbing_orientation_ne">Orientação da parede: NL</string>
+	<string name="poi_climbing_orientation_e">Orientação da parede: L</string>
+	<string name="poi_climbing_orientation_se">Orientação da parede: SL</string>
+	<string name="poi_climbing_orientation_s">Orientação da parede: S</string>
+	<string name="poi_climbing_orientation_sw">Orientação da parede: SO</string>
+	<string name="poi_climbing_orientation_w">Orientação da parede: O</string>
+	<string name="poi_climbing_orientation_nw">Orientação da parede: NO</string>
+	<string name="poi_climbing_summit_log_yes">Registro de escalada no cume: sim</string>
+	<string name="poi_climbing_summit_log_no">Registro de escalada no cume: não</string>
+	<string name="poi_shop_boat">Loja de barcos</string>
+
+	<string name="poi_cannabis">Loja de canábis</string>
+
+	<string name="poi_socket_cee_blue_yes">CEE azul</string>
+	<string name="poi_socket_type1_yes">Tipo 1</string>
+	<string name="poi_socket_type1_combo_yes">Tipo 1 combo</string>
+	<string name="poi_socket_type2_yes">Tipo 2</string>
+	<string name="poi_socket_type2_combo_yes">Tipo 2 combo</string>
+	<string name="poi_socket_type3_yes">Tipo 3</string>
+	<string name="poi_socket_chademo_yes">CHAdeMO</string>
+	<string name="poi_socket_tesla_standard_yes">Padrão Tesla</string>
+	<string name="poi_socket_tesla_supercharger_yes">Tesla Supercharger</string>
+	<string name="poi_socket_tesla_roadster_yes">Tesla Roadster</string>
+	<string name="poi_whitewater_rapid_name">Nome das corredeiras</string>
 
 </resources>
