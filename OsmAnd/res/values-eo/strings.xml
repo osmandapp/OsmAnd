@@ -1008,7 +1008,7 @@ Lon: %2$s</string>
     <string name="driving_region">Trafika regiono</string>
     <string name="driving_region_descr">Elekti trafikan regionon: Usono, Eŭropo, Britujo, Azio kaj aliaj.</string>
     <string name="speak_title">Anoncado…</string>
-    <string name="speak_descr">Agordi anoncojn pri strataj nomoj, trafikaj avertoj (endaj haltejoj, strat-ĝiboj), rapid-kontroliloj, rapidlimoj.</string>
+    <string name="speak_descr">Agordi anoncojn pri strataj nomoj, trafikaj avertoj (devigaj haltejoj, strat-ĝiboj), rapid-kontroliloj, rapidlimoj.</string>
     <string name="speak_street_names">Nomoj de stratoj (parolsintezitaj)</string>
     <string name="speak_speed_limit">Rapidlimoj</string>
     <string name="speak_cameras">Rapid-kontroliloj</string>
@@ -1202,7 +1202,7 @@ Lon: %2$s</string>
     <string name="poi_filter_for_tourists">Por turistoj</string>
     <string name="poi_filter_fuel">Brulaĵo</string>
     <string name="show_warnings_title">Montri avertojn…</string>
-    <string name="show_warnings_descr">Agordi trafikajn avertojn (pri rapidlimoj, endaj haltejoj, strat-ĝiboj, tuneloj), avertojn pri rapid-kontroliloj kaj informojn pri koridoroj.</string>
+    <string name="show_warnings_descr">Agordi trafikajn avertojn (pri rapidlimoj, devigaj haltejoj, strat-ĝiboj, tuneloj), avertojn pri rapid-kontroliloj kaj informojn pri koridoroj.</string>
     <string name="use_compass_navigation">Uzi kompason</string>
     <string name="use_compass_navigation_descr">Uzi kompason nur kiam neniu direkto estas trovita.</string>
     <string name="avoid_motorway">Eviti aŭtovojojn</string>
