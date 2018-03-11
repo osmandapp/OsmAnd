@@ -3027,4 +3027,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 	<string name="optional_point_name">Optionaler Punktname</string>
     <string name="transport_nearby_routes_within">Routen in der Nähe</string>
     <string name="transport_nearby_routes">IN DER NÄHE</string>
+    <string name="group_deleted">Gruppe gelöscht</string>
+    <string name="rendering_attr_whiteWaterSports_name">Wildwassersportarten</string>
     </resources>
