@@ -1298,6 +1298,7 @@
     <string name="shared_string_my_places">Мої місця</string>
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     
     
@@ -1315,6 +1316,8 @@
     
     
 =======
+=======
+>>>>>>> origin/master
     <string name="osmo_user_joined">Користувач %1$s приєднався до групи %2$s</string>
     <string name="osmo_user_left">Користувач %1$s покинув групу %2$s</string>
     <string name="osmo_show_group_notifications">Показувати сповіщення групи</string>
@@ -1331,7 +1334,10 @@
     <string name="osmo_use_server_name">Зареєстроване ім’я</string>
     <string name="osmo_connect_to_my_nickname">Прізвисько</string>
     <string name="osmo_user_name">Користувач</string>
+<<<<<<< HEAD
 >>>>>>> weblate/master
+=======
+>>>>>>> origin/master
 	
 	<string name="rendering_value_pink_name">рожевий</string>
 	
