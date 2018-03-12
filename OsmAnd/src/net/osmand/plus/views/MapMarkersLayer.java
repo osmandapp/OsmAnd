@@ -49,6 +49,8 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import static net.osmand.data.PointDescription.POINT_TYPE_POI;
+
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
 
@@ -589,6 +591,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof MapMarker) {
 			return ((MapMarker) o).getPointDescription(view.getContext());
+		} else if (o instanceof Amenity) {
+			Amenity amenity = (Amenity) o;
+			if (amenities.contains(amenity)) {
+				return new PointDescription(POINT_TYPE_POI, amenity.getName());
+			}
 		}
 		return null;
 	}
