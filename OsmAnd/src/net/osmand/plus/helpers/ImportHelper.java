@@ -659,7 +659,9 @@ public class ImportHelper {
 			fragment.setFileName(fileName);
 			fragment.setSave(save);
 			fragment.setUseImportDir(useImportDir);
-			fragment.show(activity.getSupportFragmentManager(), ImportGpxBottomSheetDialogFragment.TAG);
+			activity.getSupportFragmentManager().beginTransaction()
+					.add(fragment, ImportGpxBottomSheetDialogFragment.TAG)
+					.commitAllowingStateLoss();
 		}
 	}
 
