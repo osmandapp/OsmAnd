@@ -142,14 +142,12 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 					scrollView.requestLayout();
 				}
 
+				// 8dp is the shadow height
+				boolean showTopShadow = screenHeight - statusBarHeight - mainView.getHeight() >= AndroidUtils.dpToPx(activity, 8);
 				if (AndroidUiHelper.isOrientationPortrait(activity)) {
-					mainView.setBackgroundResource(getPortraitBgResId());
+					mainView.setBackgroundResource(showTopShadow ? getPortraitBgResId() : getBgColorId());
 				} else {
-					if (screenHeight - statusBarHeight - mainView.getHeight() >= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
-						mainView.setBackgroundResource(getLandscapeTopsidesBgResId());
-					} else {
-						mainView.setBackgroundResource(getLandscapeSidesBgResId());
-					}
+					mainView.setBackgroundResource(showTopShadow ? getLandscapeTopsidesBgResId() : getLandscapeSidesBgResId());
 				}
 
 				ViewTreeObserver obs = mainView.getViewTreeObserver();
@@ -174,6 +172,11 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected void onCloseRowClickAction() {
 
+	}
+
+	@ColorRes
+	protected int getBgColorId() {
+		return nightMode ? R.color.bg_color_dark : R.color.bg_color_light;
 	}
 
 	@DrawableRes

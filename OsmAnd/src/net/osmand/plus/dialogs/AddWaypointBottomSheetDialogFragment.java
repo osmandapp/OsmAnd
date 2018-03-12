@@ -145,6 +145,11 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 	}
 
 	@Override
+	protected int getBgColorId() {
+		return nightMode ? R.color.ctx_menu_bg_dark : R.color.bg_color_light;
+	}
+
+	@Override
 	protected int getPortraitBgResId() {
 		return nightMode ? R.drawable.bg_additional_menu_dark : R.drawable.bg_bottom_menu_light;
 	}
