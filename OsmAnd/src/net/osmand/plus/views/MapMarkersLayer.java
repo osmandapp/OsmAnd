@@ -92,6 +92,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private TIntArrayList tx = new TIntArrayList();
 	private TIntArrayList ty = new TIntArrayList();
+	private List<Amenity> amenities = new ArrayList<>();
 	private Path linePath = new Path();
 
 	private LatLon fingerLocation;
@@ -512,6 +513,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
+		amenities.clear();
 		if (tileBox.getZoom() < 3 || !map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
 			return;
 		}
@@ -535,7 +537,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 								continue;
 							}
 							Amenity mapObj = getMapObjectByMarker(marker);
-							o.add(mapObj == null ? marker : mapObj);
+							if (mapObj != null) {
+								amenities.add(mapObj);
+								o.add(mapObj);
+							} else {
+								o.add(marker);
+							}
 						}
 					}
 				}
@@ -568,6 +575,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	public LatLon getObjectLocation(Object o) {
 		if (o instanceof MapMarker) {
 			return ((MapMarker) o).point;
+		} else if (o instanceof Amenity) {
+			Amenity amenity = (Amenity) o;
+			if (amenities.contains(amenity)) {
+				return amenity.getLocation();
+			}
 		}
 		return null;
 	}

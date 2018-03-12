@@ -654,12 +654,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				pointDescription = provider.getObjectName(selectedObj);
 			}
 			if (latLon == null) {
-				if (selectedObj instanceof Amenity) {
-					Amenity a = ((Amenity) selectedObj);
-					latLon = a.getLocation();
-				} else {
-					latLon = getLatLon(point, tileBox);
-				}
+				latLon = getLatLon(point, tileBox);
 			}
 			if (mInAddGpxPointMode) {
 				String title = pointDescription == null ? "" : pointDescription.getName();

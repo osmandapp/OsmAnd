@@ -117,12 +117,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 				pointDescription = contextObject.getObjectName(selectedObj);
 			}
 			if (ll == null) {
-				if (selectedObj instanceof Amenity) {
-					Amenity a = ((Amenity) selectedObj);
-					ll = a.getLocation();
-				} else {
 					ll = latLon;
-				}
 			}
 			if (pointDescription == null) {
 				pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
