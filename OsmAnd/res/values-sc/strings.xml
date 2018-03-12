@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -2962,4 +2963,5 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="distance_nearest">Distàntzia: in antis sos prus a curtzu</string>
     <string name="rendering_attr_whiteWaterSports_name">Isports de abba durche</string>
     <string name="group_deleted">Grupu iscantzelladu</string>
+    <string name="clear_all_intermediates">Iscantzella totu sos puntos de coladòrgiu</string>
     </resources>
