@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="shared_string_topbar">Supra breto</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="shared_string_topbar">Supra breto</string>
     <string name="recalculate_route">Rekalkuli kurson</string>
     <string name="donations">Donacoj</string>
     <string name="number_of_recipients">Nombro da ricevontoj</string>
@@ -2927,4 +2928,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="distance_nearest">Distanco: de plej proksimaj</string>
     <string name="rendering_attr_whiteWaterSports_name">Rapid-akvaj sportoj</string>
     <string name="group_deleted">Forigis grupon</string>
+    <string name="clear_all_intermediates">Forviŝi ĉiujn intercelojn</string>
     </resources>
