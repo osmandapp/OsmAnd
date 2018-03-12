@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="av_locations_selected_desc">Файл GPX с координатами и данными выбранных заметок.</string>
     <string name="av_locations_all_desc">Файл GPX с координатами и данными всех заметок.</string>
     <string name="favorite_empty_place_name">Место</string>
@@ -2862,4 +2863,5 @@
     <string name="distance_farthest">Расстояние: сначала отдаленная</string>
     <string name="distance_nearest">Расстояние: сначала ближайшая</string>
     <string name="group_deleted">Группа удалена</string>
+    <string name="clear_all_intermediates">Очистить все промежуточные точки</string>
     </resources>
