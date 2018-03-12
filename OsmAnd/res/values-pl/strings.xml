@@ -2585,19 +2585,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
 	<string name="rendering_attr_depthContours_description">Wyświetla kontury i punkty głębi.</string>
     <string name="rendering_attr_depthContours_name">Mapy batymetryczne</string>
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-    
     <string name="routing_attr_height_obstacles_name">Użyj danych wysokościowych</string>
-=======
-    <string name="routing_attr_height_relief_smoothness_factor_description">Więcej równin lub więcej wzgórz</string>
-    <string name="routing_attr_height_obstacles_name">Użycie danych wysokościowych</string>
->>>>>>> weblate/master
-=======
-    <string name="routing_attr_height_relief_smoothness_factor_description">Więcej równin lub więcej wzgórz</string>
-    <string name="routing_attr_height_obstacles_name">Użycie danych wysokościowych</string>
->>>>>>> origin/master
     <string name="routing_attr_height_obstacles_description">Używa danych wysokościowych dostarczanych przez SRTM, ASTER i EU-DEM.</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Więcej równin lub więcej wzgórz</string>
 
     <string name="route_altitude">Wysokość trasy</string>
     <string name="altitude_descent">Zjazdy</string>
