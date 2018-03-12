@@ -578,8 +578,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (o instanceof MapMarker) {
 			return ((MapMarker) o).point;
 		} else if (o instanceof Amenity && amenities.contains(o)) {
-			Amenity amenity = (Amenity) o;
-			return amenity.getLocation();
+			return ((Amenity) o).getLocation();
 		}
 		return null;
 	}
