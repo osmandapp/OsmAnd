@@ -81,7 +81,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		});
 		((TextView) mainView.findViewById(R.id.close_row_text)).setText(getCloseRowTextId());
 
-		setupHeightAndBackground(mainView, R.id.scroll_view);
+		setupHeightAndBackground(mainView);
 
 		return mainView;
 	}
@@ -123,7 +123,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
 	}
 
-	protected void setupHeightAndBackground(final View mainView, final int scrollViewId) {
+	protected void setupHeightAndBackground(final View mainView) {
 		final Activity activity = getActivity();
 		final int screenHeight = AndroidUtils.getScreenHeight(activity);
 		final int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
@@ -132,7 +132,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
-				final View scrollView = mainView.findViewById(scrollViewId);
+				final View scrollView = mainView.findViewById(R.id.scroll_view);
 				int scrollViewHeight = scrollView.getHeight();
 				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
 				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
