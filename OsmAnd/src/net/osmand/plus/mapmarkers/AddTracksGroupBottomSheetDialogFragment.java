@@ -152,6 +152,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 			progressBar.setVisibility(View.GONE);
 			lookingForTracksText.setVisibility(View.GONE);
 			recyclerView.setVisibility(View.VISIBLE);
+			setupHeightAndBackground(getView());
 		}
 	}
 }
