@@ -3064,4 +3064,5 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="map_imported_successfully">Mappa importata correttamente</string>
     <string name="winter_and_ski_renderer">Inverno e sci</string>
     <string name="touring_view_renderer">Vista turistica (contrasto e dettagli)</string>
+    <string name="group_deleted">Gruppo cancellato</string>
     </resources>
