@@ -106,6 +106,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean inPlanRouteMode;
 	private boolean defaultAppMode = true;
 
+	private List<Amenity> amenities = new ArrayList<>();
+
 	public MapMarkersLayer(MapActivity map) {
 		this.map = map;
 	}
@@ -515,7 +517,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (tileBox.getZoom() < 3 || !map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
 			return;
 		}
-
+		amenities.clear();
 		OsmandApplication app = map.getMyApplication();
 		int r = getDefaultRadiusPoi(tileBox);
 		boolean selectMarkerOnSingleTap = app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get();
@@ -535,7 +537,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 								continue;
 							}
 							Amenity mapObj = getMapObjectByMarker(marker);
-							o.add(mapObj == null ? marker : mapObj);
+							if (mapObj != null) {
+								amenities.add(mapObj);
+								o.add(mapObj);
+							} else {
+								o.add(marker);
+							}
 						}
 					}
 				}
@@ -568,6 +575,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	public LatLon getObjectLocation(Object o) {
 		if (o instanceof MapMarker) {
 			return ((MapMarker) o).point;
+		} else if (o instanceof Amenity && amenities.contains(o)) {
+			return ((Amenity) o).getLocation();
 		}
 		return null;
 	}
