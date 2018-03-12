@@ -2,7 +2,7 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import net.osmand.data.Amenity;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.activities.MapActivity;
@@ -12,6 +12,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuTitleController;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.OsmandMapTileView;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -117,11 +118,12 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 				pointDescription = contextObject.getObjectName(selectedObj);
 			}
 			if (ll == null) {
-					ll = latLon;
+				ll = latLon;
 			}
 			if (pointDescription == null) {
 				pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
 			}
+
 			MenuObject menuObject = new MenuObject(ll, pointDescription, selectedObj, getMapActivity());
 			objects.add(menuObject);
 
