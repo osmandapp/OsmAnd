@@ -2748,4 +2748,14 @@
     <string name="enter_lon">输入经度</string>
     <string name="enter_lat">输入纬度</string>
     <string name="enter_lat_and_lon">输入纬度和经度</string>
-	</resources>
+	<string name="distance_farthest">距离：最远优先</string>
+    <string name="distance_nearest">距离：最近优先</string>
+    <string name="east_abbreviation">东</string>
+	<string name="west_abbreviation">西</string>
+	<string name="south_abbreviation">南</string>
+	<string name="north_abbreviation">北</string>
+	<string name="enter_the_file_name">输入文件名。</string>
+    <string name="map_import_error">地图导入错误</string>
+    <string name="map_imported_successfully">地图成功导入</string>
+    <string name="shared_string_current">当前</string>
+    </resources>

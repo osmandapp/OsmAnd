@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="poi_fuel_avia_type">类型</string>
+<resources><string name="poi_fuel_avia_type"></string>
 	<string name="poi_payment_type">支付类别</string>
 	<string name="poi_clothes_type">类型</string>
 	<string name="poi_shoes_type">类型</string>

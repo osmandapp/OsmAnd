@@ -2616,4 +2616,5 @@
     <string name="show_closed_notes">הצגת הערות סגורות</string>
     <string name="distance_farthest">מרחק: הרחוק ביותר בהתחלה</string>
     <string name="distance_nearest">מרחק: הקרוב ביותר בהתחלה</string>
+    <string name="group_deleted">קבוצה נמחקה</string>
     </resources>

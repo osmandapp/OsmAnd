@@ -2017,4 +2017,60 @@
 	<string name="poi_payment_fuel_type">tankowanske karty</string>
 	<string name="poi_fire_hydrant_position">městno</string>
 	<string name="poi_fire_hydrant_water_source">wodowa žórła</string>
+	<string name="poi_car_yes">awto: haj</string>
+	<string name="poi_car_no">awto: ně</string>
+	<string name="poi_scooter_yes">motorske: haj</string>
+	<string name="poi_scooter_no">motorske: ně</string>
+	<string name="poi_truck_yes">LKW: haj</string>
+	<string name="poi_truck_no">LKW: ně</string>
+
+	<string name="poi_amperage">prudosylnosć</string>
+	<string name="poi_map_type_topo">typ karty: topografiska</string>
+	<string name="poi_map_type_street">typ karty: dróhowa</string>
+	<string name="poi_map_type_scheme">typ karty: šematiska</string>
+	<string name="poi_map_type_toposcope">typ karty: toposkop</string>
+	<string name="poi_map_size_site">wulkosć kartoweho wurězka: městno</string>
+	<string name="poi_map_size_city">wulkosć kartoweho wurězka: město</string>
+	<string name="poi_map_size_region">wulkosć kartoweho wurězka: region</string>
+
+	<string name="poi_letter_box">póstowy kašćik</string>
+	<string name="poi_post_street">dróha</string>
+	<string name="poi_post_housenumber">domowe čisło</string>
+	<string name="poi_post_flats">bydlenje</string>
+
+	<string name="poi_ref_post">póstowe čisło</string>
+
+	<string name="poi_climbing_sport_yes">sport: haj</string>
+	<string name="poi_climbing_sport_no">sport: ně</string>
+	<string name="poi_climbing_boulder_yes">boulderowanje: haj</string>
+	<string name="poi_climbing_boulder_no">boulderowanje: ně</string>
+	<string name="poi_climbing_toprope_yes">z powjazom: haj</string>
+	<string name="poi_climbing_toprope_no">z powjazom: ně</string>
+	<string name="poi_climbing_trad_yes">tradicionelnje: haj</string>
+	<string name="poi_climbing_trad_no">tradicionelnje: ně</string>
+	<string name="poi_climbing_ice_yes">lód: haj</string>
+	<string name="poi_climbing_ice_no">lód: ně</string>
+	<string name="poi_climbing_rock_limestone">krosnowanski kamjeń: wapno</string>
+	<string name="poi_climbing_rock_granite">krosnowanski kamjeń: zornowc</string>
+	<string name="poi_climbing_rock_sandstone">krosnowanski kamjeń: pěskowc</string>
+	<string name="poi_climbing_rock_quartzite">krosnowanski kamjeń: kwarcit</string>
+	<string name="poi_climbing_rock_porphyry">krosnowanski kamjeń: porfyr</string>
+	<string name="poi_climbing_bolted_yes">krute kótwicy: haj</string>
+	<string name="poi_climbing_bolted_no">krute kótwicy: ně</string>
+	<string name="poi_climbing_orientation_n">wusměrjenje skały: S</string>
+	<string name="poi_climbing_orientation_ne">wusměrjenje skały: SW</string>
+	<string name="poi_climbing_orientation_e">wusměrjenje skały: W</string>
+	<string name="poi_climbing_orientation_se">wusměrjenje skały: JW</string>
+	<string name="poi_climbing_orientation_s">wusměrjenje skały: J</string>
+	<string name="poi_climbing_orientation_sw">wusměrjenje skały: JZ</string>
+	<string name="poi_climbing_orientation_w">wusměrjenje skały: Z</string>
+	<string name="poi_climbing_orientation_nw">wusměrjenje skały: SZ</string>
+	<string name="poi_climbing_summit_log_yes">wjerškowa knižka: haj</string>
+	<string name="poi_climbing_summit_log_no">wjerškowa knižka: ně</string>
+	<string name="poi_climbing_routes">krosnowanske čary</string>
+
+	<string name="poi_shop_boat">čołmowy wobchod</string>
+
+	<string name="poi_cannabis">konopowy wobchod</string>
+
 	</resources>
