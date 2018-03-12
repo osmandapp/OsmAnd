@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -30,7 +31,7 @@
     <string name="mark_to_delete">Marcar para borrar</string>
     
     <string name="local_osm_changes_upload_all_confirm">¿Quieres subir %1$d cambio(s) a OSM?</string>
-    <string name="confirmation_to_clear_history">¿Quieres vaciar el historial?</string>
+    <string name="confirmation_to_clear_history">¿Quieres limpiar el historial?</string>
     <string name="application_dir_change_warning3">¿Quieres que OsmAnd también copie los archivos de datos al nuevo destino?</string>
     <string name="storage_directory">Almacenamiento del mapa</string>
     <string name="shared_string_places">Lugares</string>
@@ -81,8 +82,8 @@ Lon %2$s</string>
     <string name="shared_string_select_all">Marcar todo</string>
     <string name="shared_string_deselect">Desmarcar</string>
     <string name="shared_string_deselect_all">Desmarcar todo</string>
-    <string name="shared_string_clear">Borrar</string>
-    <string name="shared_string_clear_all">Borrar todo</string>
+    <string name="shared_string_clear">Limpiar</string>
+    <string name="shared_string_clear_all">Limpiar todo</string>
     <string name="shared_string_save">Guardar</string>
     <string name="shared_string_save_as_gpx">Guardar como nueva traza GPX</string>
     <string name="shared_string_rename">Renombrar</string>
@@ -653,7 +654,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="speak_cameras">Radares de velocidad</string>
     <string name="speak_traffic_warnings">Avisos de tráfico</string>
     <string name="osb_author_or_password_not_specified">Indica el usuario y contraseña de OSM en los ajustes</string>
-    <string name="clear_intermediate_points">Quitar destinos intermedios</string>
+    <string name="clear_intermediate_points">Limpiar destinos intermedios</string>
     <string name="keep_intermediate_points">Mantener destinos intermedios</string>
     <string name="new_directions_point_dialog">Ya definió destinos intermedios.</string>
     <string name="context_menu_item_directions_to">Llegar hasta aquí</string>
@@ -692,7 +693,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="distance_measurement_start_editing">Comenzar edición</string>
     <string name="distance_measurement_finish_editing">Terminar edición</string>
     <string name="distance_measurement_finish_subtrack">Iniciar subtraza nueva</string>
-    <string name="distance_measurement_clear_route">Quitar todos los puntos</string>
+    <string name="distance_measurement_clear_route">Limpiar todos los puntos</string>
     <string name="distance_measurement_load_gpx">Abrir GPX existente</string>
     <string name="wait_current_task_finished">Espere hasta que termine la tarea actual</string>
     <string name="use_kalman_filter_compass_descr">Reduce el ruido en las lecturas de la brújula pero añade inercia.</string>
@@ -705,7 +706,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="install_paid">Versión completa</string>
     <string name="cancel_route">Descartar ruta</string>
     <string name="cancel_navigation">Parar navegación</string>
-    <string name="clear_destination">Quitar destino</string>
+    <string name="clear_destination">Limpiar destino</string>
     <string name="download_using_mobile_internet">El Wi-Fi no está conectado en este momento. ¿Usar la conexión actual a Internet para descargar?</string>
     <string name="street_name">Nombre de calle</string>
     <string name="hno">Número</string>
@@ -733,7 +734,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="local_indexes_cat_srtm">Curvas de nivel</string>
     <string name="local_indexes_cat_av">Datos multimedia</string>
     <string name="stop_routing_confirm">¿Quieres parar la navegación?</string>
-    <string name="clear_dest_confirm">¿Quieres quitar el destino (y los destinos intermedios)?</string>
+    <string name="clear_dest_confirm">¿Quieres limpiar el destino (y los destinos intermedios)?</string>
     <string name="precise_routing_mode_descr">Habilita el cálculo de rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
     <string name="precise_routing_mode">Enrutado preciso (alfa)</string>
     <string name="recording_context_menu_show">Mostrar</string>
@@ -2021,7 +2022,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     
     <string name="show_map_markers_description">Activar función de marcadores del mapa.</string>
     <string name="clear_active_markers_q">¿Quieres quitar todos los marcadores activos?</string>
-    <string name="clear_markers_history_q">¿Quieres vaciar el historial de marcadores del mapa?</string>
+    <string name="clear_markers_history_q">¿Quieres limpiar el historial de marcadores del mapa?</string>
     <string name="active_markers">Marcadores activos</string>
     <string name="map_markers">Marcadores del mapa</string>
     <string name="map_marker">Marcador del mapa</string>
@@ -2938,4 +2939,5 @@ Proporciona un código completo</string>
     <string name="distance_nearest">Distancia: más cerca primero</string>
     <string name="rendering_attr_whiteWaterSports_name">Deportes acuáticos</string>
     <string name="group_deleted">Grupo borrado</string>
+    <string name="clear_all_intermediates">Limpiar todos los puntos intermedios</string>
     </resources>
