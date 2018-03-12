@@ -49,8 +49,6 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
-import static net.osmand.data.PointDescription.POINT_TYPE_POI;
-
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
 
@@ -94,7 +92,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private TIntArrayList tx = new TIntArrayList();
 	private TIntArrayList ty = new TIntArrayList();
-	private List<Amenity> amenities = new ArrayList<>();
 	private Path linePath = new Path();
 
 	private LatLon fingerLocation;
@@ -108,6 +105,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private boolean inPlanRouteMode;
 	private boolean defaultAppMode = true;
+
+	private List<Amenity> amenities = new ArrayList<>();
 
 	public MapMarkersLayer(MapActivity map) {
 		this.map = map;
@@ -515,11 +514,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
-		amenities.clear();
 		if (tileBox.getZoom() < 3 || !map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
 			return;
 		}
-
+		amenities.clear();
 		OsmandApplication app = map.getMyApplication();
 		int r = getDefaultRadiusPoi(tileBox);
 		boolean selectMarkerOnSingleTap = app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get();
