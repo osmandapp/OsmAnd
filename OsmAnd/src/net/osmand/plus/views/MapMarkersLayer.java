@@ -577,11 +577,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	public LatLon getObjectLocation(Object o) {
 		if (o instanceof MapMarker) {
 			return ((MapMarker) o).point;
-		} else if (o instanceof Amenity) {
+		} else if (o instanceof Amenity && amenities.contains(o)) {
 			Amenity amenity = (Amenity) o;
-			if (amenities.contains(amenity)) {
-				return amenity.getLocation();
-			}
+			return amenity.getLocation();
 		}
 		return null;
 	}
@@ -591,11 +589,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof MapMarker) {
 			return ((MapMarker) o).getPointDescription(view.getContext());
-		} else if (o instanceof Amenity) {
-			Amenity amenity = (Amenity) o;
-			if (amenities.contains(amenity)) {
-				return new PointDescription(POINT_TYPE_POI, amenity.getName());
-			}
 		}
 		return null;
 	}
