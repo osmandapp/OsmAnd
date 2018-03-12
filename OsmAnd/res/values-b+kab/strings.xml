@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="rendering_value_car_name">Takeṛṛust</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="rendering_value_car_name">Takeṛṛust</string>
     
     
     <string name="rendering_value_bicycle_name">Azlalam</string>
@@ -677,4 +679,5 @@
     <string name="shared_string_actions">Tigawin</string>
     <string name="parked_at">Sers deg</string>
     <string name="without_time_limit">Ulac tilist deg wakud</string>
+    <string name="group_deleted">Agraw ittwakes</string>
     </resources>
