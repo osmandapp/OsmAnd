@@ -1,20 +1,19 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -23,7 +22,6 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ValueHolder;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -39,11 +37,9 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.activities.FavoritesListFragment.FavouritesAdapter;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoDialogFragment;
 import net.osmand.plus.activities.actions.AppModeDialog;
-import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -475,25 +471,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	}
 
 	public void selectFavorite(@Nullable final View parentView, final boolean target, final boolean intermediate) {
-		final FavouritesAdapter favouritesAdapter = new FavouritesAdapter(mapActivity, mapActivity.getMyApplication()
-				.getFavorites().getVisibleFavouritePoints(), false);
-		Dialog[] dlgHolder = new Dialog[1];
-		OnItemClickListener click = getOnFavoriteClickListener(target, intermediate, favouritesAdapter, dlgHolder);
-		OnDismissListener dismissListener = null;
-		if (!intermediate && parentView != null) {
-			dismissListener = new OnDismissListener() {
-				@Override
-				public void onDismiss(DialogInterface dialog) {
-					if (target) {
-						setupToSpinner(parentView);
-					} else {
-						setupFromSpinner(parentView);
-					}
-				}
-			};
-		}
-		favouritesAdapter.updateLocation(mapActivity.getMapLocation());
-		FavoriteDialogs.showFavoritesDialog(mapActivity, favouritesAdapter, click, dismissListener, dlgHolder, true);
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		FavouritesBottomSheetMenuFragment fragment = new FavouritesBottomSheetMenuFragment();
+		Bundle args = new Bundle();
+		args.putBoolean(FavouritesBottomSheetMenuFragment.TARGET, target);
+		args.putBoolean(FavouritesBottomSheetMenuFragment.INTERMEDIATE, intermediate);
+		fragment.setArguments(args);
+		fragment.show(fragmentManager, FavouritesBottomSheetMenuFragment.TAG);
 	}
 
 	public void selectMapMarker(final int index, final boolean target, final boolean intermediate) {
@@ -523,33 +507,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private Drawable getIconOrig(int iconId) {
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		return iconsCache.getIcon(iconId, 0);
-	}
-
-	private OnItemClickListener getOnFavoriteClickListener(final boolean target,
-														   final boolean intermediate,
-														   final FavouritesAdapter favouritesAdapter,
-														   final Dialog[] dlg) {
-		return new AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				FavouritePoint fp = favouritesAdapter.getItem(position);
-				LatLon point = new LatLon(fp.getLatitude(), fp.getLongitude());
-				if (intermediate) {
-					getTargets().navigateToPoint(point, true, getTargets().getIntermediatePoints().size(), fp.getPointDescription());
-				} else if (target) {
-					getTargets().navigateToPoint(point, true, -1, fp.getPointDescription());
-				} else {
-					getTargets().setStartPoint(point, true, fp.getPointDescription());
-				}
-				if (dlg != null && dlg.length > 0 && dlg[0] != null) {
-					dlg[0].dismiss();
-				}
-				if (!intermediate) {
-					updateFromIcon();
-				}
-			}
-		};
 	}
 
 	public static int getDirectionInfo() {
@@ -889,7 +846,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		}
 	}
 
-	private TargetPointsHelper getTargets() {
+	TargetPointsHelper getTargets() {
 		return mapActivity.getMyApplication().getTargetPointsHelper();
 	}
 
