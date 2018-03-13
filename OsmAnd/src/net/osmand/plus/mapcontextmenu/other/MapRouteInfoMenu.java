@@ -338,7 +338,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					@Override
 					public void run() {
 						if (id == SPINNER_FAV_ID) {
-							selectFavorite(parentView, true, false);
+							selectFavorite(true, false);
 						} else if (id == SPINNER_MAP_ID) {
 							selectOnScreen(true, false);
 						} else if (id == SPINNER_ADDRESS_ID) {
@@ -408,7 +408,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 							}
 							updateFromIcon(parentView);
 						} else if (id == SPINNER_FAV_ID) {
-							selectFavorite(parentView, false, false);
+							selectFavorite(false, false);
 						} else if (id == SPINNER_MAP_ID) {
 							selectOnScreen(false, false);
 						} else if (id == SPINNER_ADDRESS_ID) {
@@ -470,7 +470,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		updateMenu();
 	}
 
-	public void selectFavorite(@Nullable final View parentView, final boolean target, final boolean intermediate) {
+	public void selectFavorite(final boolean target, final boolean intermediate) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		FavouritesBottomSheetMenuFragment fragment = new FavouritesBottomSheetMenuFragment();
 		Bundle args = new Bundle();

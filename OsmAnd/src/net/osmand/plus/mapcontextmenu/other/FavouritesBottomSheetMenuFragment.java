@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
@@ -32,7 +31,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 
 	public static final String TARGET = "target";
 	public static final String INTERMEDIATE = "intermediate";
-	public static final String TAG = "AddGroupBottomSheetDialogFragment";
+	public static final String TAG = "FavouritesBottomSheetMenuFragment";
 
 	private MapActivity mapActivity;
 
