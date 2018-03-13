@@ -89,6 +89,7 @@
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_desc_text_size"
                 tools:text="Amsterdam Weekend" />
+
         </LinearLayout>
 
     </LinearLayout>

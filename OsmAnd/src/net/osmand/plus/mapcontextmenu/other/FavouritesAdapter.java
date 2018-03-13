@@ -13,6 +13,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -23,9 +24,9 @@ import java.util.List;
 
 public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-	private FavouritesAdapterListener listener;
+	private View.OnClickListener listener;
 	private final Context context;
-	private final List<FavouritePoint> FavouritePoints;
+	private final List<FavouritePoint> favouritePoints;
 
 	private LatLon location;
 	private Float heading;
@@ -38,87 +39,78 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 		final TextView description;
 		final TextView distance;
 		final ImageView arrowImage;
-		final ImageView FavouriteImage;
+		final ImageView favouriteImage;
 
 		public FavouritesViewHolder(View itemView) {
 			super(itemView);
-			FavouriteImage = itemView.findViewById(R.id.favourite_icon);
-			title = itemView.findViewById(R.id.favourite_title);
-			description = itemView.findViewById(R.id.favourite_description);
-			distance = itemView.findViewById(R.id.favourite_distance);
-			arrowImage = itemView.findViewById(R.id.favourite_direction_icon);
+			favouriteImage = (ImageView) itemView.findViewById(R.id.favourite_icon);
+			title = (TextView) itemView.findViewById(R.id.favourite_title);
+			description = (TextView) itemView.findViewById(R.id.favourite_description);
+			distance = (TextView) itemView.findViewById(R.id.favourite_distance);
+			arrowImage = (ImageView) itemView.findViewById(R.id.favourite_direction_icon);
 		}
 	}
 
 	public FavouritesAdapter(Context context, List<FavouritePoint> FavouritePoints) {
-		this.FavouritePoints = FavouritePoints;
+		this.favouritePoints = FavouritePoints;
 		this.context = context;
 	}
 
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.bottom_sheet_item_favourite, viewGroup, false);
+		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.favourite_list_item, viewGroup, false);
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				if (listener != null) {
-					listener.onItemClick(view);
+					listener.onClick(view);
 				}
 			}
 		});
 		return new FavouritesViewHolder(view);
 	}
 
-
 	@Override
 	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 		if (holder instanceof FavouritesViewHolder) {
-			MapActivity mapActivity;
-			if (context instanceof MapActivity) {
-				mapActivity = (MapActivity) context;
-			} else {
-				return;
-			}
-			IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
+			OsmandApplication app = ((MapActivity) context).getMyApplication();
+			IconsCache iconsCache = app.getIconsCache();
 			FavouritesViewHolder favouritesViewHolder = (FavouritesViewHolder) holder;
 			FavouritePoint favouritePoint = getItem(position);
 			favouritesViewHolder.title.setText(favouritePoint.getName());
-			if (!favouritePoint.getCategory().equals("")) {
-				favouritesViewHolder.description.setText(favouritePoint.getCategory());
-			} else {
+
+			if (favouritePoint.getCategory().equals("")) {
 				favouritesViewHolder.description.setText(R.string.shared_string_favorites);
+			} else {
+				favouritesViewHolder.description.setText(favouritePoint.getCategory());
 			}
-			Location myloc = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+			Location myloc = app.getLocationProvider().getLastKnownLocation();
 			if (myloc == null) {
 				return;
 			}
 			float dist = (float) MapUtils.getDistance(favouritePoint.getLatitude(), favouritePoint.getLongitude(), myloc.getLatitude(), myloc.getLongitude());
 
-			favouritesViewHolder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
-			favouritesViewHolder.FavouriteImage.setImageDrawable(FavoriteImageDrawable.getOrCreate(mapActivity, favouritePoint.getColor(), false));
+			favouritesViewHolder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, app));
+			favouritesViewHolder.favouriteImage.setImageDrawable(FavoriteImageDrawable.getOrCreate(context, favouritePoint.getColor(), false));
 			favouritesViewHolder.arrowImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_direction_arrow));
 
 			DashLocationFragment.updateLocationView(useCenter, location, heading, favouritesViewHolder.arrowImage,
 					favouritesViewHolder.distance, favouritePoint.getLatitude(), favouritePoint.getLongitude(),
-					screenOrientation, mapActivity.getMyApplication(), mapActivity);
+					screenOrientation, app, context);
 		}
 	}
 
 	@Override
 	public int getItemCount() {
-		return FavouritePoints.size();
+		return favouritePoints.size();
 	}
 
 	private FavouritePoint getItem(int position) {
-		return FavouritePoints.get(position);
+		return favouritePoints.get(position);
 	}
 
-	public void setAdapterListener(FavouritesAdapterListener listener) {
+	public void setAdapterListener(View.OnClickListener listener) {
 		this.listener = listener;
-	}
-
-	public interface FavouritesAdapterListener {
-		void onItemClick(View view);
 	}
 
 	public void setScreenOrientation(int screenOrientation) {

@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.MapUtils;
 
@@ -53,7 +54,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		list = favouritesDbHelper.getVisibleFavouritePoints();
 
 		View titleView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.bottom_sheet_item_favourite_title, null);
+				R.layout.favourite_title_list_item, null);
 		View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.fragment_marker_add_group_bottom_sheet_dialog, null);
 
@@ -68,28 +69,27 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		sortText.setText(R.string.sort_by_name);
 		sort.setOnClickListener(new View.OnClickListener() {
-			                        @Override
-			                        public void onClick(View v) {
-				                        if (location == null) {
-					                        return;
-				                        }
-				                        sortFavourites(sortByDist, list);
-				                        sortText.setText(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name);
-				                        sortIconView.setImageDrawable(getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
-						                        nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light));
-				                        adapter.notifyDataSetChanged();
-			                        }
-		                        }
-		);
-		items.add(new BaseBottomSheetItem.Builder()
+			@Override
+			public void onClick(View v) {
+				if (location == null) {
+					return;
+				}
+				sortFavourites(sortByDist, list);
+				sortText.setText(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name);
+				sortIconView.setImageDrawable(getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
+						nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light));
+				adapter.notifyDataSetChanged();
+			}
+		});
+		items.add(new TitleItem.Builder()
 				.setCustomView(titleView)
 				.create());
 
-		createAdapter();
-		adapter.setAdapterListener(new FavouritesAdapter.FavouritesAdapterListener() {
+		adapter = new FavouritesAdapter(mapActivity, list);
+		adapter.setAdapterListener(new View.OnClickListener() {
 			@Override
-			public void onItemClick(View view) {
-				int position = recyclerView.getChildAdapterPosition(view);
+			public void onClick(View v) {
+				int position = recyclerView.getChildAdapterPosition(v);
 				if (position == RecyclerView.NO_POSITION) {
 					return;
 				}
@@ -156,10 +156,6 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 			routeMenu.updateFromIcon();
 		}
 		dismiss();
-	}
-
-	public void createAdapter() {
-		adapter = new FavouritesAdapter(mapActivity, list);
 	}
 
 	@Override
