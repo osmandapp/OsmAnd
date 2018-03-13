@@ -2967,4 +2967,21 @@
 	<string name="poi_climbing_trad_yes">Traditzionale: eja</string>
 	<string name="poi_climbing_ice_yes">Astra: eja</string>
 	<string name="poi_climbing_ice_no">Astra: nono</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Barile sicu</string>
+	<string name="poi_fire_hydrant_type_pond">Poju</string>
+	<string name="poi_health_amenity_type_scales">Bilàntzias pùblicas</string>
+
+	<string name="poi_health_person_type_assistant">Ruolu de su traballadore sanitàriu: assistente</string>
+	<string name="poi_health_person_type_healer">Ruolu de su traballadore sanitàriu: sanadore</string>
+	<string name="poi_health_person_type_midwife">Ruolu de su traballadore sanitàriu: mastra de partu</string>
+	<string name="poi_health_person_type_nurse">Ruolu de su traballadore sanitàriu: infermieri</string>
+	<string name="poi_health_person_type_paramedic">Ruolu de su traballadore sanitàriu: paramèigu</string>
+	<string name="poi_health_person_type_physician">Ruolu de su traballadore sanitàriu: mèigu (dutore)</string>
+	<string name="poi_health_person_type_podologist">Ruolu de su traballadore sanitàriu: podòlogu</string>
+	<string name="poi_health_person_type_psychologist">Ruolu de su traballadore sanitàriu: psicòlogu</string>
+	<string name="poi_health_person_type_therapist">Ruolu de su traballadore sanitàriu: terapèuta</string>
+	<string name="poi_health_person_type_physician_assitant">Ruolu de su traballadore sanitàriu: assitente de su mèigu</string>
+	<string name="poi_health_person_type_technician">Ruolu de su traballadore sanitàriu: tècnicu</string>
+	<string name="poi_health_person_type_witchdoctor">Ruolu de su traballadore sanitàriu: majàrgiu</string>
+
 	</resources>
