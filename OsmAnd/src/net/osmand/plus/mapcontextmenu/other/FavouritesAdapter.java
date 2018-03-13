@@ -43,10 +43,10 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 		public FavouritesViewHolder(View itemView) {
 			super(itemView);
 			FavouriteImage = itemView.findViewById(R.id.favourite_icon);
-			title = itemView.findViewById(R.id.map_marker_title);
-			description = itemView.findViewById(R.id.map_marker_description);
-			distance = itemView.findViewById(R.id.map_marker_distance);
-			arrowImage = itemView.findViewById(R.id.map_marker_direction_icon);
+			title = itemView.findViewById(R.id.favourite_title);
+			description = itemView.findViewById(R.id.favourite_description);
+			distance = itemView.findViewById(R.id.favourite_distance);
+			arrowImage = itemView.findViewById(R.id.favourite_direction_icon);
 		}
 	}
 

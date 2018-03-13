@@ -30,7 +30,7 @@
             android:layout_height="@dimen/map_marker_title_height">
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/map_marker_title"
+                android:id="@+id/favourite_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -46,7 +46,7 @@
             android:gravity="center_vertical">
 
             <ImageView
-                android:id="@+id/map_marker_direction_icon"
+                android:id="@+id/favourite_direction_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/text_margin_small"
@@ -54,7 +54,7 @@
                 tools:src="@drawable/ic_direction_arrow" />
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/map_marker_distance"
+                android:id="@+id/favourite_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -62,12 +62,12 @@
                 tools:text="213 m" />
 
             <View
-                android:id="@+id/map_marker_left_point_space"
+                android:id="@+id/favourite_left_point_space"
                 android:layout_width="@dimen/text_margin_small"
                 android:layout_height="match_parent" />
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/map_marker_point_text_view"
+                android:id="@+id/favourite_point_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="•"
@@ -76,12 +76,12 @@
                 tools:visibility="visible" />
 
             <View
-                android:id="@+id/map_marker_right_point_space"
+                android:id="@+id/favourite_right_point_space"
                 android:layout_width="@dimen/text_margin_small"
                 android:layout_height="match_parent" />
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/map_marker_description"
+                android:id="@+id/favourite_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"

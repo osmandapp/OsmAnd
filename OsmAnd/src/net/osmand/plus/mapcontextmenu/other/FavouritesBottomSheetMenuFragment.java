@@ -55,19 +55,19 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 
 		View titleView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.bottom_sheet_item_favourite_title, null);
-		TextView title = (TextView) titleView.findViewById(R.id.title);
-		title.setText(R.string.favourites);
-		final ImageView sortIconView = (ImageView) titleView.findViewById(R.id.sort_icon);
-		sortIconView.setImageDrawable(getIcon(R.drawable.ic_action_sort_by_name, nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light));
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
+		View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.fragment_marker_add_group_bottom_sheet_dialog, null);
 
-		final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.groups_recycler_view);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+		TextView title = (TextView) titleView.findViewById(R.id.title);
+		final ImageView sortIconView = (ImageView) titleView.findViewById(R.id.sort_icon);
 		final TextView sortText = (TextView) titleView.findViewById(R.id.sort_text);
-		sortText.setText(R.string.sort_by_name);
 		LinearLayout sort = (LinearLayout) titleView.findViewById(R.id.sort_by);
+		final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.groups_recycler_view);
+
+		title.setText(R.string.favourites);
+		sortIconView.setImageDrawable(getIcon(R.drawable.ic_action_sort_by_name, nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light));
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		sortText.setText(R.string.sort_by_name);
 		sort.setOnClickListener(new View.OnClickListener() {
 			                        @Override
 			                        public void onClick(View v) {
@@ -94,7 +94,6 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				if (position == RecyclerView.NO_POSITION) {
 					return;
 				}
-				Toast.makeText(getContext(), "" + position, Toast.LENGTH_LONG).show();
 				selectFavorite(list.get(position));
 			}
 		});
