@@ -2,7 +2,6 @@ package net.osmand.util;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapIndexReader;
 
 import org.apache.commons.logging.Log;
 
@@ -22,6 +21,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -173,6 +173,28 @@ public class Algorithms {
 				bld.append(CHAR_TOSPLIT);
 			}
 			return bld.toString();
+		}
+		return "";
+	}
+
+	public static List<String> decodeCollection(String s) {
+		if (isEmpty(s)) {
+			return Collections.emptyList();
+		}
+		return Arrays.asList(s.split(CHAR_TOSPLIT + ""));
+	}
+
+	public static String encodeCollection(Collection<String> collection) {
+		if (collection != null) {
+			Iterator<String> it = collection.iterator();
+			StringBuilder sb = new StringBuilder();
+			while (it.hasNext()) {
+				sb.append(it.next());
+				if (it.hasNext()) {
+					sb.append(CHAR_TOSPLIT);
+				}
+			}
+			return sb.toString();
 		}
 		return "";
 	}

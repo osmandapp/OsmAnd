@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 
 import net.osmand.IndexConstants;
@@ -10,12 +12,13 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class GPXDatabase {
 
 	private static final String DB_NAME = "gpx_database";
-	private static final int DB_VERSION = 6;
+	private static final int DB_VERSION = 7;
 	private static final String GPX_TABLE_NAME = "gpxTable";
 	private static final String GPX_COL_NAME = "fileName";
 	private static final String GPX_COL_DIR = "fileDir";
@@ -47,6 +50,8 @@ public class GPXDatabase {
 
 	private static final String GPX_COL_API_IMPORTED = "apiImported";
 
+	private static final String GPX_COL_WPT_CATEGORY_NAMES = "wptCategoryNames";
+
 	public static final int GPX_SPLIT_TYPE_NO_SPLIT = -1;
 	public static final int GPX_SPLIT_TYPE_DISTANCE = 1;
 	public static final int GPX_SPLIT_TYPE_TIME = 2;
@@ -77,7 +82,8 @@ public class GPXDatabase {
 			GPX_COL_FILE_LAST_MODIFIED_TIME + " long, " +
 			GPX_COL_SPLIT_TYPE + " int, " +
 			GPX_COL_SPLIT_INTERVAL + " double, " +
-			GPX_COL_API_IMPORTED + " int);"; // 1 = true, 0 = false
+			GPX_COL_API_IMPORTED + " int, " + // 1 = true, 0 = false
+			GPX_COL_WPT_CATEGORY_NAMES + " TEXT);";
 
 	private static final String GPX_TABLE_SELECT = "SELECT " +
 			GPX_COL_NAME + ", " +
@@ -102,7 +108,8 @@ public class GPXDatabase {
 			GPX_COL_FILE_LAST_MODIFIED_TIME + ", " +
 			GPX_COL_SPLIT_TYPE + ", " +
 			GPX_COL_SPLIT_INTERVAL + ", " +
-			GPX_COL_API_IMPORTED +
+			GPX_COL_API_IMPORTED + ", " +
+			GPX_COL_WPT_CATEGORY_NAMES +
 			" FROM " +	GPX_TABLE_NAME;
 
 	private OsmandApplication context;
@@ -244,6 +251,37 @@ public class GPXDatabase {
 					" SET " + GPX_COL_API_IMPORTED + " = ? " +
 					"WHERE " + GPX_COL_API_IMPORTED + " IS NULL", new Object[]{0});
 		}
+
+		if (oldVersion < 7) {
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_WPT_CATEGORY_NAMES + " TEXT");
+			updateWptCategoryNames();
+		}
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	private void updateWptCategoryNames() {
+		new AsyncTask<Void, Void, Void>() {
+			@Override
+			protected Void doInBackground(Void... voids) {
+				SQLiteConnection db = openConnection(false);
+				if (db != null) {
+					try {
+						for (GpxDataItem item : getItems()) {
+							GPXUtilities.GPXFile gpxFile = GPXUtilities.loadGPXFile(context, item.file);
+							String fileName = getFileName(item.file);
+							String fileDir = getFileDir(item.file);
+							db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
+											GPX_COL_WPT_CATEGORY_NAMES + " = ? " +
+											" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+									new Object[] { Algorithms.encodeCollection(gpxFile.getWaypointCategories(true)), fileName, fileDir });
+						}
+					} finally {
+						db.close();
+					}
+				}
+				return null;
+			}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private boolean updateLastModifiedTime(GpxDataItem item) {
@@ -382,11 +420,12 @@ public class GPXDatabase {
 		}
 		if (a != null) {
 			db.execSQL(
-					"INSERT INTO " + GPX_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+					"INSERT INTO " + GPX_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 					new Object[]{ fileName, fileDir, a.totalDistance, a.totalTracks, a.startTime, a.endTime,
 							a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
 							a.avgElevation, a.minElevation, a.maxElevation, a.maxSpeed, a.avgSpeed, a.points, a.wptPoints,
-							color, item.file.lastModified(), item.splitType, item.splitInterval, item.apiImported ? 1 : 0});
+							color, item.file.lastModified(), item.splitType, item.splitInterval, item.apiImported ? 1 : 0,
+							Algorithms.encodeCollection(item.analysis.wptCategoryNames)});
 		} else {
 			db.execSQL("INSERT INTO " + GPX_TABLE_NAME + "(" +
 							GPX_COL_NAME + ", " +
@@ -424,13 +463,14 @@ public class GPXDatabase {
 								GPX_COL_AVG_SPEED + " = ?, " +
 								GPX_COL_POINTS + " = ?, " +
 								GPX_COL_WPT_POINTS + " = ?, " +
-								GPX_COL_FILE_LAST_MODIFIED_TIME + " = ? " +
+								GPX_COL_FILE_LAST_MODIFIED_TIME + " = ?, " +
+								GPX_COL_WPT_CATEGORY_NAMES + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
 						new Object[]{ a.totalDistance, a.totalTracks, a.startTime, a.endTime,
 								a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp,
 								a.diffElevationDown, a.avgElevation, a.minElevation, a.maxElevation,
 								a.maxSpeed, a.avgSpeed, a.points, a.wptPoints, item.file.lastModified(),
-								fileName, fileDir });
+								Algorithms.encodeCollection(a.wptCategoryNames), fileName, fileDir });
 			} finally {
 				db.close();
 			}
@@ -463,6 +503,7 @@ public class GPXDatabase {
 		int splitType = (int)query.getInt(20);
 		double splitInterval = query.getDouble(21);
 		boolean apiImported = query.getInt(22) == 1;
+		String wptCategoryNames = query.getString(23);
 
 		GPXTrackAnalysis a = new GPXTrackAnalysis();
 		a.totalDistance = totalDistance;
@@ -482,6 +523,7 @@ public class GPXDatabase {
 		a.avgSpeed = avgSpeed;
 		a.points = points;
 		a.wptPoints = wptPoints;
+		a.wptCategoryNames = new HashSet<>(Algorithms.decodeCollection(wptCategoryNames));
 
 		File dir;
 		if (!Algorithms.isEmpty(fileDir)) {
