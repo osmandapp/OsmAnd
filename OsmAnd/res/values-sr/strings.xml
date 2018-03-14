@@ -278,7 +278,7 @@
 	<string name="basemap_missing">Основна мапа света (која покрива цео свет на малом увеличању) недостаје. Молим, преузмите World_basemap_x.obf ради употпуњавање радне средине.</string>
 	<string name="local_index_installed">Локално издање</string>
 	<string name="local_index_no_items_to_do">Нема ставки за %1$s</string>
-	<string name="local_index_descr_title">Управљајте датотекама мапа.</string>
+	<string name="local_index_descr_title">Управљајте датотекама карата.</string>
 	<string name="local_index_mi_restore">Покрени</string>
 	<string name="local_index_mi_backup">Искључи</string>
 	
@@ -1401,7 +1401,7 @@
     <string name="shared_string_install">Угради</string>
     <string name="online_photos">Слике на мрежи</string>
     <string name="shared_string_add_photos">Додај слике</string>
-    <string name="no_photos_descr">Нема слика овог положаја.</string>
+    <string name="no_photos_descr">Нема слика овог положаја.\\</string>
     <string name="mapillary_action_descr">Учествујте својим прегледима на нивоу улица овог положаја са Мапиларом.</string>
     <string name="mapillary_widget">Справица Мапилара</string>
     <string name="mapillary_widget_descr">Омогућава брзи допринос Мапилару.</string>
@@ -2218,4 +2218,36 @@
     <string name="first_usage_item">Прво коришћење</string>
     <string name="faq_item">ЧПП</string>
     <string name="faq_item_description">Често постављана питања</string>
+    <string name="group_deleted">Група избрисана</string>
+    <string name="rendering_attr_whiteWaterSports_name">Спортови на брзацима</string>
+    <string name="complex_route_calculation_failed">Брзо израчунавање пута није успело (%s), пребацујем се на споро израчунавање.</string>
+    <string name="local_index_tile_data_zooms">Скинутих зумирања: %1$s</string>
+    <string name="driving_region_descr">"Одаберите регион "</string>
+    <string name="layer_hillshade">Слој са осенченим рељефима</string>
+    <string name="native_app_allocated_memory">Укупно меморије</string>
+    <string name="osmand_parking_warning_text">Обавештење да преузмете кола је додато у Ваш календар. Остаће тамо док га ручно не избришете.</string>
+    <string name="basemap_was_selected_to_download">Основна карта је потребна да би апликација исправно радила и зато је означена за преузимање.</string>
+    <string name="index_settings_descr">Скидајте и управљајте картама ускладиштеним на Вашем уређају.</string>
+    <string name="map_online_plugin_is_not_installed">Омогућите додатак за мрежне карте да одаберете различите изворе карата</string>
+    <string name="map_online_data_descr">Користи мрежне карте (скидај и кеширај сличице на SD картицу).</string>
+    <string name="online_map_settings_descr">Подеси мрежне или кеширане изворе сличица карата.</string>
+    <string name="prefs_plugins_descr">Додаци активирају напредна подешавања и додатне функционалности.</string>
+    <string name="vector_maps_may_display_faster_on_some_devices">Векторске карте се углавном брже приказују. То не значи да ће радити добро на свим уређајима.</string>
+    <string name="play_commands_of_currently_selected_voice">Одаберите глас и пустите пример навођења да га тестирате</string>
+    <string name="native_rendering">Уграђено исцртавање</string>
+    <string name="test_voice_prompts">Тестирај гласовно навођење</string>
+    <string name="switch_to_raster_map_to_see">Нема векторских карти за овај положај. Можете скинути неку у Подешавањима (Управљање датотекама карата) или се пребаците на мрежне карте (за ово морате да омогућите додатак за мрежне карте).</string>
+    <string name="send_files_to_osm">Послати ГПИкс датотеке на ОСМ?</string>
+    <string name="auto_announce_on">Започни аутоматско најављивање</string>
+    <string name="auto_announce_off">Заустави аутоматско најављивање</string>
+    <string name="rendering_out_of_memory">Недовољно меморије да се прикаже одабрано подручје</string>
+    <string name="use_fluorescent_overlays_descr">Користи флуоресцентне боје за приказ путања и путева.</string>
+    <string name="index_name_voice">Гласовна навођења (снимљена, ограничене функционалности)</string>
+    <string name="index_name_tts_voice">Гласовна навођења (TTS, синтеза говора, преферирана)</string>
+    <string name="amenity_type_user_defined">Кориснички одређено</string>
+    <string name="fav_export_confirmation">Датотека са већ извезеним омиљеним тачкама већ постоји. Да ли желите да је препишете?</string>
+    <string name="profile_settings">Поставке специфичне за профил</string>
+    <string name="routing_settings_descr">Одаберите опције навођења.</string>
+    <string name="index_settings">Управљање датотекама карата</string>
+    <string name="general_settings_descr">Подесите приказ и опште подешавања апликације.</string>
     </resources>
