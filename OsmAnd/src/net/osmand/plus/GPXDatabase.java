@@ -12,7 +12,6 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class GPXDatabase {
@@ -273,7 +272,7 @@ public class GPXDatabase {
 							db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
 											GPX_COL_WPT_CATEGORY_NAMES + " = ? " +
 											" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-									new Object[] { Algorithms.encodeCollection(gpxFile.getWaypointCategories(true)), fileName, fileDir });
+									new Object[] { Algorithms.encodeStringSet(gpxFile.getWaypointCategories(true)), fileName, fileDir });
 						}
 					} finally {
 						db.close();
@@ -425,7 +424,7 @@ public class GPXDatabase {
 							a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
 							a.avgElevation, a.minElevation, a.maxElevation, a.maxSpeed, a.avgSpeed, a.points, a.wptPoints,
 							color, item.file.lastModified(), item.splitType, item.splitInterval, item.apiImported ? 1 : 0,
-							Algorithms.encodeCollection(item.analysis.wptCategoryNames)});
+							Algorithms.encodeStringSet(item.analysis.wptCategoryNames)});
 		} else {
 			db.execSQL("INSERT INTO " + GPX_TABLE_NAME + "(" +
 							GPX_COL_NAME + ", " +
@@ -470,7 +469,7 @@ public class GPXDatabase {
 								a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp,
 								a.diffElevationDown, a.avgElevation, a.minElevation, a.maxElevation,
 								a.maxSpeed, a.avgSpeed, a.points, a.wptPoints, item.file.lastModified(),
-								Algorithms.encodeCollection(a.wptCategoryNames), fileName, fileDir });
+								Algorithms.encodeStringSet(a.wptCategoryNames), fileName, fileDir });
 			} finally {
 				db.close();
 			}
@@ -523,7 +522,7 @@ public class GPXDatabase {
 		a.avgSpeed = avgSpeed;
 		a.points = points;
 		a.wptPoints = wptPoints;
-		a.wptCategoryNames = new HashSet<>(Algorithms.decodeCollection(wptCategoryNames));
+		a.wptCategoryNames = Algorithms.decodeStringSet(wptCategoryNames);
 
 		File dir;
 		if (!Algorithms.isEmpty(fileDir)) {

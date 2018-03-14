@@ -20,11 +20,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 
 /**
@@ -177,22 +178,18 @@ public class Algorithms {
 		return "";
 	}
 
-	public static List<String> decodeCollection(String s) {
+	public static Set<String> decodeStringSet(String s) {
 		if (isEmpty(s)) {
-			return Collections.emptyList();
+			return Collections.emptySet();
 		}
-		return Arrays.asList(s.split(CHAR_TOSPLIT + ""));
+		return new HashSet<>(Arrays.asList(s.split(CHAR_TOSPLIT + "")));
 	}
 
-	public static String encodeCollection(Collection<String> collection) {
-		if (collection != null) {
-			Iterator<String> it = collection.iterator();
+	public static String encodeStringSet(Set<String> set) {
+		if (set != null) {
 			StringBuilder sb = new StringBuilder();
-			while (it.hasNext()) {
-				sb.append(it.next());
-				if (it.hasNext()) {
-					sb.append(CHAR_TOSPLIT);
-				}
+			for (String s : set) {
+				sb.append(s).append(CHAR_TOSPLIT);
 			}
 			return sb.toString();
 		}
