@@ -1460,7 +1460,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="configure_map">Nastavení mapy</string>
     <string name="rendering_category_others">Ostatní vlastnosti mapy</string>
     <string name="map_widget_appearance_rem">Zbývající prvky</string>
-    <string name="search_radius_proximity">Uvnitř</string>
+    <string name="search_radius_proximity">V okruhu</string>
     <string name="rendering_category_routes">Trasy</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Vlakové linky</string>
     <string name="rendering_attr_tramRoutes_name">Tramvajové linky</string>
