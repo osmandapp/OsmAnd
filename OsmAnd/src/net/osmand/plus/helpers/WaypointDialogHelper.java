@@ -1086,7 +1086,7 @@ public class WaypointDialogHelper {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 						if (id == MapRouteInfoMenu.SPINNER_FAV_ID) {
-							routeMenu.selectFavorite(false, true);
+							routeMenu.selectFavorite(null,false, true);
 						} else if (id == MapRouteInfoMenu.SPINNER_MAP_ID) {
 							routeMenu.selectOnScreen(false, true);
 						} else if (id == MapRouteInfoMenu.SPINNER_ADDRESS_ID) {

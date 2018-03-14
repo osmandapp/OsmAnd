@@ -81,6 +81,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private OnDismissListener onDismissListener;
 
 	private OnMarkerSelectListener onMarkerSelectListener;
+	View.OnClickListener dismissListener;
 
 	private static final long SPINNER_MY_LOCATION_ID = 1;
 	public static final long SPINNER_FAV_ID = 2;
@@ -242,7 +243,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		ViewGroup vg = (ViewGroup) parentView.findViewById(R.id.app_modes);
 		vg.removeAllViews();
 		AppModeDialog.prepareAppModeView(mapActivity, selected, false,
-				vg, true, false,true, new View.OnClickListener() {
+				vg, true, false, true, new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						if (selected.size() > 0) {
@@ -338,7 +339,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					@Override
 					public void run() {
 						if (id == SPINNER_FAV_ID) {
-							selectFavorite(true, false);
+							selectFavorite(parentView, true, false);
 						} else if (id == SPINNER_MAP_ID) {
 							selectOnScreen(true, false);
 						} else if (id == SPINNER_ADDRESS_ID) {
@@ -408,7 +409,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 							}
 							updateFromIcon(parentView);
 						} else if (id == SPINNER_FAV_ID) {
-							selectFavorite(false, false);
+							selectFavorite(parentView, false, false);
 						} else if (id == SPINNER_MAP_ID) {
 							selectOnScreen(false, false);
 						} else if (id == SPINNER_ADDRESS_ID) {
@@ -470,7 +471,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		updateMenu();
 	}
 
-	public void selectFavorite(final boolean target, final boolean intermediate) {
+	public void selectFavorite(@Nullable final View parentView, final boolean target, final boolean intermediate) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		FavouritesBottomSheetMenuFragment fragment = new FavouritesBottomSheetMenuFragment();
 		Bundle args = new Bundle();
@@ -478,6 +479,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		args.putBoolean(FavouritesBottomSheetMenuFragment.INTERMEDIATE, intermediate);
 		fragment.setArguments(args);
 		fragment.show(fragmentManager, FavouritesBottomSheetMenuFragment.TAG);
+
+		if (target) {
+			setupToSpinner(parentView);
+		} else {
+			setupFromSpinner(parentView);
+		}
 	}
 
 	public void selectMapMarker(final int index, final boolean target, final boolean intermediate) {
@@ -846,7 +853,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		}
 	}
 
-	TargetPointsHelper getTargets() {
+	private TargetPointsHelper getTargets() {
 		return mapActivity.getMyApplication().getTargetPointsHelper();
 	}
 

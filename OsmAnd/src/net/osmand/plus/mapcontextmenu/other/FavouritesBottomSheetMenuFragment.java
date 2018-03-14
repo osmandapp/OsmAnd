@@ -1,12 +1,12 @@
 package net.osmand.plus.mapcontextmenu.other;
 
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.Location;
@@ -16,13 +16,15 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleWithButtonItem;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.MapUtils;
 
+import java.text.Collator;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -33,70 +35,71 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	public static final String TARGET = "target";
 	public static final String INTERMEDIATE = "intermediate";
 	public static final String TAG = "FavouritesBottomSheetMenuFragment";
+	private static final String BUNDLE_RECYCLER_LAYOUT = "FavouritesBottomSheetMenuFragment.recycler";
+
+	boolean target;
+	boolean intermediate;
 
 	private MapActivity mapActivity;
-
 	private Location location;
 	private Float heading;
+	private List<FavouritePoint> favouritePoints;
+	private FavouritesAdapter adapter;
+	private RecyclerView recyclerView;
 	private boolean sortByDist = false;
-
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
-	private List<FavouritePoint> list;
-	private FavouritesAdapter adapter;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
+		Bundle args = getArguments();
+		target = args.getBoolean(TARGET);
+		intermediate = args.getBoolean(INTERMEDIATE);
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		FavouritesDbHelper favouritesDbHelper = getMyApplication().getFavorites();
 		mapActivity = (MapActivity) getActivity();
-		list = favouritesDbHelper.getVisibleFavouritePoints();
+		favouritePoints = favouritesDbHelper.getVisibleFavouritePoints();
 
 		View titleView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.favourite_title_list_item, null);
-		View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.fragment_marker_add_group_bottom_sheet_dialog, null);
+				R.layout.bottom_sheet_item_title_with_button, null);
+		((TextView) titleView.findViewById(R.id.title)).setText(R.string.favourites);
+		final TextView textButton = (TextView) titleView.findViewById(R.id.text_button);
+		recyclerView = new RecyclerView(getContext());
 
-		TextView title = (TextView) titleView.findViewById(R.id.title);
-		final ImageView sortIconView = (ImageView) titleView.findViewById(R.id.sort_icon);
-		final TextView sortText = (TextView) titleView.findViewById(R.id.sort_text);
-		LinearLayout sort = (LinearLayout) titleView.findViewById(R.id.sort_by);
-		final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.groups_recycler_view);
-
-		title.setText(R.string.favourites);
-		sortIconView.setImageDrawable(getIcon(R.drawable.ic_action_sort_by_name, nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light));
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		sortText.setText(R.string.sort_by_name);
-		sort.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (location == null) {
-					return;
-				}
-				sortFavourites(sortByDist, list);
-				sortText.setText(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name);
-				sortIconView.setImageDrawable(getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
-						nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light));
-				adapter.notifyDataSetChanged();
-			}
-		});
-		items.add(new TitleItem.Builder()
-				.setCustomView(titleView)
-				.create());
+		textButton.setText(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name);
 
-		adapter = new FavouritesAdapter(mapActivity, list);
-		adapter.setAdapterListener(new View.OnClickListener() {
+		final TitleWithButtonItem title = new TitleWithButtonItem.Builder()
+				.setIcon(getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
+						nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light))
+				.setIconPosition(TitleWithButtonItem.textOnRight)
+				.setTitle(getString(R.string.favourites))
+				.setTextOnRight(getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name))
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (location == null) {
+							return;
+						}
+						sortFavourites();
+						adapter.notifyDataSetChanged();
+					}
+				})
+				.create();
+		items.add(title);
+
+		adapter = new FavouritesAdapter(mapActivity, favouritePoints);
+		adapter.setItemClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				int position = recyclerView.getChildAdapterPosition(v);
 				if (position == RecyclerView.NO_POSITION) {
 					return;
 				}
-				selectFavorite(list.get(position));
+				selectFavorite(favouritePoints.get(position));
 			}
 		});
-		recyclerView.setLayoutManager(new LinearLayoutManager(mapActivity, LinearLayoutManager.VERTICAL, false));
 		recyclerView.setAdapter(adapter);
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
@@ -106,53 +109,42 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 			}
 		});
 		items.add(new BaseBottomSheetItem.Builder().
-				setCustomView(mainView).
+				setCustomView(recyclerView).
 				create());
 	}
 
-	private void sortFavourites(boolean sortByDist, List<FavouritePoint> favourites) {
-		if (sortByDist) {
-			Collections.sort(favourites, new Comparator<FavouritePoint>() {
-				@Override
-				public int compare(FavouritePoint lhs, FavouritePoint rhs) {
-					LatLon latLon = new LatLon(location.getLatitude(), location.getLongitude());
-					double d1 = MapUtils.getDistance(latLon, lhs.getLatitude(), lhs.getLongitude());
-					double d2 = MapUtils.getDistance(latLon, rhs.getLatitude(), rhs.getLongitude());
-					if (d1 == d2) {
-						return 0;
-					} else if (d1 > d2) {
-						return 1;
-					}
-					return -1;
+	private void sortFavourites() {
+		final Collator inst = Collator.getInstance();
+		Collections.sort(favouritePoints, new Comparator<FavouritePoint>() {
+			@Override
+			public int compare(FavouritePoint lhs, FavouritePoint rhs) {
+				LatLon latLon = new LatLon(location.getLatitude(), location.getLongitude());
+				if (sortByDist) {
+					double ld = MapUtils.getDistance(latLon, lhs.getLatitude(),
+							lhs.getLongitude());
+					double rd = MapUtils.getDistance(latLon, rhs.getLatitude(),
+							rhs.getLongitude());
+					return Double.compare(ld, rd);
 				}
-			});
-			this.sortByDist = false;
-		} else {
-			Collections.sort(favourites, new Comparator<FavouritePoint>() {
-				@Override
-				public int compare(FavouritePoint lhs, FavouritePoint rhs) {
-					return lhs.getName().compareTo(rhs.getName());
-				}
-			});
-			this.sortByDist = true;
-		}
+				return inst.compare(lhs.getName(), rhs.getName());
+			}
+		});
+		sortByDist = !sortByDist;
 	}
 
-	private void selectFavorite(FavouritePoint point) {
-		Bundle args = getArguments();
-		boolean target = args.getBoolean(TARGET);
-		boolean intermediate = args.getBoolean(INTERMEDIATE);
+	void selectFavorite(FavouritePoint point) {
 		final MapRouteInfoMenu routeMenu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
+		TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
 
 		LatLon ll = new LatLon(point.getLatitude(), point.getLongitude());
 		if (intermediate) {
-			routeMenu.getTargets().navigateToPoint(ll, true, routeMenu.getTargets().getIntermediatePoints().size(), point.getPointDescription());
+			targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription());
 		} else if (target) {
-			routeMenu.getTargets().navigateToPoint(ll, true, -1, point.getPointDescription());
+			targetPointsHelper.navigateToPoint(ll, true, -1, point.getPointDescription());
 		} else {
-			routeMenu.getTargets().setStartPoint(ll, true, point.getPointDescription());
+			targetPointsHelper.setStartPoint(ll, true, point.getPointDescription());
 		}
-		if (!intermediate) {
+		if (!intermediate && getActivity() instanceof MapActivity) {
 			routeMenu.updateFromIcon();
 		}
 		dismiss();
@@ -239,5 +231,20 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 			app.getLocationProvider().removeCompassListener(this);
 			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
 		}
+	}
+
+	@Override
+	public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+		super.onViewStateRestored(savedInstanceState);
+		if (savedInstanceState != null) {
+			Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+			recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
 	}
 }
