@@ -62,10 +62,6 @@ public class BaseBottomSheetItem {
 		}
 	}
 
-	protected void updateView() {
-
-	}
-
 	private View getView(OsmandApplication app, ViewGroup parent, boolean nightMode) {
 		if (view != null) {
 			return view;
