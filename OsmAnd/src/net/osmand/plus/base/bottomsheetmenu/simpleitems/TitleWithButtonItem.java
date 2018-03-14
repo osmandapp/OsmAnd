@@ -19,20 +19,59 @@ public class TitleWithButtonItem extends SimpleBottomSheetItem {
 
 	private View.OnClickListener onClickListener;
 	private String iconPosition;
-	private Drawable textIcon;
-	private String textButton;
+	private Drawable icon;
+	private String textOnButton;
+	private TextView textButtonTV;
 
 	public TitleWithButtonItem(View.OnClickListener onClickListener,
-	                           Drawable textIcon,
+	                           Drawable icon,
 	                           String title,
-	                           String textButton,
+	                           String textOnButton,
 	                           String iconPosition) {
 		this.title = title;
 		this.layoutId = R.layout.bottom_sheet_item_title_with_button;
-		this.textIcon = textIcon;
-		this.textButton = textButton;
+		this.icon = icon;
+		this.textOnButton = textOnButton;
 		this.iconPosition = iconPosition;
 		this.onClickListener = onClickListener;
+	}
+
+	public void setButtonIcon(Drawable icon, String iconPosition) {
+		this.icon = icon;
+		if (this.icon != null) {
+			switch (iconPosition) {
+				case textOnLeft:
+					textButtonTV.setCompoundDrawablesWithIntrinsicBounds(this.icon, null, null, null);
+					break;
+				case textOnTop:
+					textButtonTV.setCompoundDrawablesWithIntrinsicBounds(null, this.icon, null, null);
+					break;
+				case textOnRight:
+					textButtonTV.setCompoundDrawablesWithIntrinsicBounds(null, null, this.icon, null);
+					break;
+				case textOnBottom:
+					textButtonTV.setCompoundDrawablesWithIntrinsicBounds(null, null, null, this.icon);
+					break;
+			}
+		}
+	}
+
+	public void setButtonText(String text) {
+		textOnButton = text;
+		textButtonTV.setText(textOnButton);
+
+	}
+
+	@Override
+	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
+		super.inflate(app, container, nightMode);
+
+		if (textOnButton != null) {
+			textButtonTV = (TextView) view.findViewById(R.id.text_button);
+			textButtonTV.setOnClickListener(onClickListener);
+			setButtonIcon(icon, iconPosition);
+			setButtonText(textOnButton);
+		}
 	}
 
 	public static class Builder extends BaseBottomSheetItem.Builder {
@@ -75,33 +114,6 @@ public class TitleWithButtonItem extends SimpleBottomSheetItem {
 					title,
 					textOnRight,
 					iconPosition);
-		}
-	}
-
-	@Override
-	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
-		super.inflate(app, container, nightMode);
-
-		if (textButton != null) {
-			TextView descriptionTv = (TextView) view.findViewById(R.id.text_button);
-			descriptionTv.setText(textButton);
-			descriptionTv.setOnClickListener(onClickListener);
-			if (textIcon != null) {
-				switch (iconPosition) {
-					case textOnLeft:
-						descriptionTv.setCompoundDrawablesWithIntrinsicBounds(textIcon, null, null, null);
-						break;
-					case textOnTop:
-						descriptionTv.setCompoundDrawablesWithIntrinsicBounds(null, textIcon, null, null);
-						break;
-					case textOnRight:
-						descriptionTv.setCompoundDrawablesWithIntrinsicBounds(null, null, textIcon, null);
-						break;
-					case textOnBottom:
-						descriptionTv.setCompoundDrawablesWithIntrinsicBounds(null, null, null, textIcon);
-						break;
-				}
-			}
 		}
 	}
 }

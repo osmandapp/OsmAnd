@@ -40,7 +40,6 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	boolean target;
 	boolean intermediate;
 
-	private MapActivity mapActivity;
 	private Location location;
 	private Float heading;
 	private List<FavouritePoint> favouritePoints;
@@ -49,28 +48,23 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private boolean sortByDist = false;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
+	private TitleWithButtonItem title;
+	private MapRouteInfoMenu routeMenu;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		target = args.getBoolean(TARGET);
 		intermediate = args.getBoolean(INTERMEDIATE);
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+//		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		FavouritesDbHelper favouritesDbHelper = getMyApplication().getFavorites();
-		mapActivity = (MapActivity) getActivity();
 		favouritePoints = favouritesDbHelper.getVisibleFavouritePoints();
-
-		View titleView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.bottom_sheet_item_title_with_button, null);
-		((TextView) titleView.findViewById(R.id.title)).setText(R.string.favourites);
-		final TextView textButton = (TextView) titleView.findViewById(R.id.text_button);
+		routeMenu = ((MapActivity) getActivity()).getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
 		recyclerView = new RecyclerView(getContext());
-
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		textButton.setText(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name);
 
-		final TitleWithButtonItem title = new TitleWithButtonItem.Builder()
+		title = new TitleWithButtonItem.Builder()
 				.setIcon(getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
 						nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light))
 				.setIconPosition(TitleWithButtonItem.textOnRight)
@@ -83,13 +77,16 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 							return;
 						}
 						sortFavourites();
+						title.setButtonIcon(getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
+								nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light), TitleWithButtonItem.textOnRight);
+						title.setButtonText(getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name));
 						adapter.notifyDataSetChanged();
 					}
 				})
 				.create();
 		items.add(title);
 
-		adapter = new FavouritesAdapter(mapActivity, favouritePoints);
+		adapter = new FavouritesAdapter(getContext(), favouritePoints);
 		adapter.setItemClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -133,7 +130,6 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	}
 
 	void selectFavorite(FavouritePoint point) {
-		final MapRouteInfoMenu routeMenu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
 		TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
 
 		LatLon ll = new LatLon(point.getLatitude(), point.getLongitude());
@@ -147,13 +143,16 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		if (!intermediate && getActivity() instanceof MapActivity) {
 			routeMenu.updateFromIcon();
 		}
+		if (routeMenu.mainView != null) {
+			routeMenu.setupSpinners(routeMenu.mainView, target, intermediate);
+		}
 		dismiss();
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		adapter.setScreenOrientation(DashLocationFragment.getScreenOrientation(mapActivity));
+		adapter.setScreenOrientation(DashLocationFragment.getScreenOrientation(getActivity()));
 		startLocationUpdate();
 	}
 
@@ -198,7 +197,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				@Override
 				public void run() {
 					if (location == null) {
-						location = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+						location = getMyApplication().getLocationProvider().getLastKnownLocation();
 					}
 					if (location == null) {
 						return;
@@ -246,5 +245,13 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
+	}
+
+	@Override
+	protected void onCloseRowClickAction() {
+		super.onCloseRowClickAction();
+		if (routeMenu.mainView != null) {
+			routeMenu.setupSpinners(routeMenu.mainView, target, intermediate);
+		}
 	}
 }

@@ -81,7 +81,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private OnDismissListener onDismissListener;
 
 	private OnMarkerSelectListener onMarkerSelectListener;
-	View.OnClickListener dismissListener;
+	View mainView;
 
 	private static final long SPINNER_MY_LOCATION_ID = 1;
 	public static final long SPINNER_FAV_ID = 2;
@@ -198,6 +198,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	}
 
 	public void updateInfo(final View main) {
+		mainView = main;
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		updateViaView(main);
 		updateFromSpinner(main);
@@ -479,13 +480,18 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		args.putBoolean(FavouritesBottomSheetMenuFragment.INTERMEDIATE, intermediate);
 		fragment.setArguments(args);
 		fragment.show(fragmentManager, FavouritesBottomSheetMenuFragment.TAG);
+	}
 
-		if (target) {
-			setupToSpinner(parentView);
-		} else {
-			setupFromSpinner(parentView);
+	public void setupSpinners(@Nullable final View parentView, final boolean target, final boolean intermediate) {
+		if (!intermediate && parentView != null) {
+			if (target) {
+				setupToSpinner(parentView);
+			} else {
+				setupFromSpinner(parentView);
+			}
 		}
 	}
+
 
 	public void selectMapMarker(final int index, final boolean target, final boolean intermediate) {
 		if (index != -1) {
