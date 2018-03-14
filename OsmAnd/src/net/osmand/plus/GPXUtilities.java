@@ -42,10 +42,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 import java.util.TimeZone;
 
@@ -286,6 +289,8 @@ public class GPXUtilities {
 
 		public int points;
 		public int wptPoints = 0;
+
+		public Set<String> wptCategoryNames;
 
 		public double metricEnd;
 		public double secondaryMetricEnd;
@@ -787,6 +792,22 @@ public class GPXUtilities {
 			return Collections.unmodifiableList(points);
 		}
 
+		public Map<String, List<WptPt>> getPointsByCategories() {
+			Map<String, List<WptPt>> res = new HashMap<>();
+			for (WptPt pt : points) {
+				String category = pt.category == null ? "" : pt.category;
+				List<WptPt> list = res.get(category);
+				if (list != null) {
+					list.add(pt);
+				} else {
+					list = new ArrayList<>();
+					list.add(pt);
+					res.put(category, list);
+				}
+			}
+			return res;
+		}
+
 		public boolean isPointsEmpty() {
 			return points.isEmpty();
 		}
@@ -868,6 +889,7 @@ public class GPXUtilities {
 		public GPXTrackAnalysis getAnalysis(long fileTimestamp) {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
 			g.wptPoints = points.size();
+			g.wptCategoryNames = getWaypointCategories(true);
 			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
 			for (int i = 0; i < tracks.size(); i++) {
 				Track subtrack = tracks.get(i);
@@ -1167,14 +1189,12 @@ public class GPXUtilities {
 			return count;
 		}
 
-		public List<String> getWaypointCategories() {
-			List<String> categories = new ArrayList<>();
+		public Set<String> getWaypointCategories(boolean withDefaultCategory) {
+			Set<String> categories = new HashSet<>();
 			for (WptPt pt : points) {
-				String category = pt.category;
-				if (!TextUtils.isEmpty(category)) {
-					if (!categories.contains(category)) {
-						categories.add(category);
-					}
+				String category = pt.category == null ? "" : pt.category;
+				if (withDefaultCategory || !TextUtils.isEmpty(category)) {
+					categories.add(category);
 				}
 			}
 			return categories;
