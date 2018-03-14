@@ -2,6 +2,7 @@ package net.osmand.plus.base.bottomsheetmenu;
 
 import android.support.annotation.LayoutRes;
 import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -44,7 +45,7 @@ public class BaseBottomSheetItem {
 	}
 
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
-		View view = getView(app, nightMode);
+		View view = getView(app, container, nightMode);
 		if (tag != null) {
 			view.setTag(tag);
 		}
@@ -61,13 +62,18 @@ public class BaseBottomSheetItem {
 		}
 	}
 
-	private View getView(OsmandApplication app, boolean nightMode) {
+	protected void updateView() {
+
+	}
+
+	private View getView(OsmandApplication app, ViewGroup parent, boolean nightMode) {
 		if (view != null) {
 			return view;
 		}
 		if (layoutId != INVALID_ID) {
 			final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-			return view = View.inflate(new ContextThemeWrapper(app, themeRes), layoutId, null);
+			return view = LayoutInflater.from(new ContextThemeWrapper(app, themeRes))
+					.inflate(layoutId, parent, false);
 		}
 		throw new RuntimeException("BottomSheetItem must have specified view or layoutId.");
 	}
