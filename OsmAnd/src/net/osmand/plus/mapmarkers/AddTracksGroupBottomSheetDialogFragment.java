@@ -124,7 +124,9 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 					processGPXFolder(gpxFile, sub);
 				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(".gpx")) {
 					GpxDataItem item = processedDataFiles.get(gpxFile);
-					if (item == null || item.getFileLastModifiedTime() != gpxFile.lastModified()) {
+					if (item == null
+							|| item.getFileLastModifiedTime() != gpxFile.lastModified()
+							|| item.getAnalysis().wptCategoryNames == null) {
 						GPXFile f = GPXUtilities.loadGPXFile(app, gpxFile);
 						GPXTrackAnalysis analysis = f.getAnalysis(gpxFile.lastModified());
 						if (item == null) {
