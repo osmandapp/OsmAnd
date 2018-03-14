@@ -1,7 +1,5 @@
 package net.osmand.plus;
 
-import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 
 import net.osmand.IndexConstants;
@@ -253,34 +251,7 @@ public class GPXDatabase {
 
 		if (oldVersion < 7) {
 			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_WPT_CATEGORY_NAMES + " TEXT");
-			updateWptCategoryNames();
 		}
-	}
-
-	@SuppressLint("StaticFieldLeak")
-	private void updateWptCategoryNames() {
-		new AsyncTask<Void, Void, Void>() {
-			@Override
-			protected Void doInBackground(Void... voids) {
-				SQLiteConnection db = openConnection(false);
-				if (db != null) {
-					try {
-						for (GpxDataItem item : getItems()) {
-							GPXUtilities.GPXFile gpxFile = GPXUtilities.loadGPXFile(context, item.file);
-							String fileName = getFileName(item.file);
-							String fileDir = getFileDir(item.file);
-							db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
-											GPX_COL_WPT_CATEGORY_NAMES + " = ? " +
-											" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-									new Object[] { Algorithms.encodeStringSet(gpxFile.getWaypointCategories(true)), fileName, fileDir });
-						}
-					} finally {
-						db.close();
-					}
-				}
-				return null;
-			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private boolean updateLastModifiedTime(GpxDataItem item) {
