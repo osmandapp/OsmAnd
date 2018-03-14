@@ -36,6 +36,8 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	public static final String INTERMEDIATE = "intermediate";
 	public static final String TAG = "FavouritesBottomSheetMenuFragment";
 	private static final String BUNDLE_RECYCLER_LAYOUT = "FavouritesBottomSheetMenuFragment.recycler";
+	private static final String IS_SORTED = "sorted";
+	private static final String SORTED_BY_TYPE = "sortedByType";
 
 	boolean target;
 	boolean intermediate;
@@ -46,6 +48,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private FavouritesAdapter adapter;
 	private RecyclerView recyclerView;
 	private boolean sortByDist = false;
+	private boolean isSorted = false;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
 	private TitleWithButtonItem title;
@@ -80,7 +83,6 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 						title.setButtonIcon(getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
 								nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light), TitleWithButtonItem.textOnRight);
 						title.setButtonText(getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name));
-						adapter.notifyDataSetChanged();
 					}
 				})
 				.create();
@@ -108,6 +110,12 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		items.add(new BaseBottomSheetItem.Builder().
 				setCustomView(recyclerView).
 				create());
+
+		if (savedInstanceState != null && savedInstanceState.getBoolean(IS_SORTED)) {
+			location = getMyApplication().getLocationProvider().getLastKnownLocation();
+			sortByDist = savedInstanceState.getBoolean(SORTED_BY_TYPE);
+			sortFavourites();
+		}
 	}
 
 	private void sortFavourites() {
@@ -127,6 +135,8 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 			}
 		});
 		sortByDist = !sortByDist;
+		isSorted = true;
+		adapter.notifyDataSetChanged();
 	}
 
 	void selectFavorite(FavouritePoint point) {
@@ -245,6 +255,8 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
+		outState.putBoolean(IS_SORTED, isSorted);
+		outState.putBoolean(SORTED_BY_TYPE, !sortByDist);
 	}
 
 	@Override
