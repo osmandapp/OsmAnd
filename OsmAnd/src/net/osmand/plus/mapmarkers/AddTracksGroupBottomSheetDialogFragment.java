@@ -126,8 +126,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 					GpxDataItem item = processedDataFiles.get(gpxFile);
 					if (item == null
 							|| item.getFileLastModifiedTime() != gpxFile.lastModified()
-							|| item.getAnalysis().wptCategoryNames == null
-							|| (item.getAnalysis().wptPoints > 0 && item.getAnalysis().wptCategoryNames.isEmpty())) {
+							|| item.getAnalysis().wptCategoryNames == null) {
 						GPXFile f = GPXUtilities.loadGPXFile(app, gpxFile);
 						GPXTrackAnalysis analysis = f.getAnalysis(gpxFile.lastModified());
 						if (item == null) {

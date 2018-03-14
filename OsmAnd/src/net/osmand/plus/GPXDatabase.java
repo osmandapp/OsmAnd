@@ -493,7 +493,9 @@ public class GPXDatabase {
 		a.avgSpeed = avgSpeed;
 		a.points = points;
 		a.wptPoints = wptPoints;
-		a.wptCategoryNames = Algorithms.decodeStringSet(wptCategoryNames);
+		if (wptCategoryNames != null) {
+			a.wptCategoryNames = Algorithms.decodeStringSet(wptCategoryNames);
+		}
 
 		File dir;
 		if (!Algorithms.isEmpty(fileDir)) {
