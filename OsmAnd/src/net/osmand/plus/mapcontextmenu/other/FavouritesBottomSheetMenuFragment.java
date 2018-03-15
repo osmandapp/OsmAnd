@@ -97,6 +97,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				compassUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE;
 			}
 		});
+
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(recyclerView)
 				.create());

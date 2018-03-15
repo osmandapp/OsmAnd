@@ -33,7 +33,6 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 	private boolean useCenter;
 	private int screenOrientation;
 
-
 	public FavouritesAdapter(Context context, List<FavouritePoint> FavouritePoints) {
 		this.favouritePoints = FavouritePoints;
 		this.context = context;
