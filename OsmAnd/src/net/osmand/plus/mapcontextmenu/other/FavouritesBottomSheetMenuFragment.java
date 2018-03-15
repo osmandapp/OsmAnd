@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -36,6 +38,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private static final String IS_SORTED = "sorted";
 	private static final String SORTED_BY_TYPE = "sortedByType";
 
+	private ProcessFavouritesTask asyncProcessor;
 	private Location location;
 	private Float heading;
 	private List<FavouritePoint> favouritePoints;
@@ -45,19 +48,11 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private boolean isSorted = false;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
-	private boolean target;
-	private boolean intermediate;
 	private BaseBottomSheetItem title;
-	private MapRouteInfoMenu routeMenu;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Bundle args = getArguments();
-		target = args.getBoolean(TARGET);
-		intermediate = args.getBoolean(INTERMEDIATE);
-
 		favouritePoints = getMyApplication().getFavorites().getVisibleFavouritePoints();
-		routeMenu = ((MapActivity) getActivity()).getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
 		recyclerView = new RecyclerView(getContext());
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -72,7 +67,8 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 						if (location == null) {
 							return;
 						}
-						sortFavourites();
+						asyncProcessor = new ProcessFavouritesTask();
+						asyncProcessor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 						((BottomSheetItemWithTitleAndButton) title).setButtonIcon(null, getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
 								nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light));
 						((BottomSheetItemWithTitleAndButton) title).setButtonText(getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name));
@@ -104,38 +100,26 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(recyclerView)
 				.create());
-
 		if (savedInstanceState != null && savedInstanceState.getBoolean(IS_SORTED)) {
 			location = getMyApplication().getLocationProvider().getLastKnownLocation();
 			sortByDist = savedInstanceState.getBoolean(SORTED_BY_TYPE);
-			sortFavourites();
+			asyncProcessor = new ProcessFavouritesTask();
+			asyncProcessor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 
-	private void sortFavourites() {
-		final Collator inst = Collator.getInstance();
-		Collections.sort(favouritePoints, new Comparator<FavouritePoint>() {
-			@Override
-			public int compare(FavouritePoint lhs, FavouritePoint rhs) {
-				LatLon latLon = new LatLon(location.getLatitude(), location.getLongitude());
-				if (sortByDist) {
-					double ld = MapUtils.getDistance(latLon, lhs.getLatitude(),
-							lhs.getLongitude());
-					double rd = MapUtils.getDistance(latLon, rhs.getLatitude(),
-							rhs.getLongitude());
-					return Double.compare(ld, rd);
-				}
-				return inst.compare(lhs.getName(), rhs.getName());
-			}
-		});
-		sortByDist = !sortByDist;
-		isSorted = true;
-		adapter.notifyDataSetChanged();
-	}
-
-	void selectFavorite(FavouritePoint point) {
+	private void selectFavorite(FavouritePoint point) {
+		Bundle args = getArguments();
+		boolean target = args.getBoolean(TARGET);
+		boolean intermediate = args.getBoolean(INTERMEDIATE);
+		Activity activity = getActivity();
+		MapRouteInfoMenu routeMenu;
+		if (activity instanceof MapActivity) {
+			routeMenu = ((MapActivity) activity).getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
+		} else {
+			return;
+		}
 		TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
-
 		LatLon ll = new LatLon(point.getLatitude(), point.getLongitude());
 		if (intermediate) {
 			targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription());
@@ -249,5 +233,59 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
 		outState.putBoolean(IS_SORTED, isSorted);
 		outState.putBoolean(SORTED_BY_TYPE, !sortByDist);
+	}
+
+	@Override
+	protected boolean useScrollableItemsContainer() {
+		return false;
+	}
+
+	public class ProcessFavouritesTask extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected void onPreExecute() {
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			sortFavourites();
+			return null;
+		}
+
+		private void sortFavourites() {
+			final Collator inst = Collator.getInstance();
+			Collections.sort(favouritePoints, new Comparator<FavouritePoint>() {
+				@Override
+				public int compare(FavouritePoint lhs, FavouritePoint rhs) {
+					LatLon latLon = new LatLon(location.getLatitude(), location.getLongitude());
+					if (sortByDist) {
+						double ld = MapUtils.getDistance(latLon, lhs.getLatitude(),
+								lhs.getLongitude());
+						double rd = MapUtils.getDistance(latLon, rhs.getLatitude(),
+								rhs.getLongitude());
+						return Double.compare(ld, rd);
+					}
+					return inst.compare(lhs.getName(), rhs.getName());
+				}
+			});
+			sortByDist = !sortByDist;
+			isSorted = true;
+		}
+
+		@Override
+		protected void onPostExecute(Void aVoid) {
+			asyncProcessor = null;
+			adapter.notifyDataSetChanged();
+
+		}
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		if (asyncProcessor != null) {
+			asyncProcessor.cancel(false);
+			asyncProcessor = null;
+		}
 	}
 }
