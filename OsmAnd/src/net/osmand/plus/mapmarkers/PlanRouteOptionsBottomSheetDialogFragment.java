@@ -121,7 +121,7 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 	}
 
 	@Override
-	protected int getCloseRowTextId() {
+	protected int getDismissButtonTextId() {
 		return R.string.shared_string_close;
 	}
 

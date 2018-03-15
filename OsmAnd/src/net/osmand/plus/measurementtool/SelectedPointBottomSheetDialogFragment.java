@@ -130,12 +130,12 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 	}
 
 	@Override
-	protected int getCloseRowTextId() {
+	protected int getDismissButtonTextId() {
 		return R.string.shared_string_close;
 	}
 
 	@Override
-	protected void onCloseRowClickAction() {
+	protected void onDismissButtonClickAction() {
 		if (listener != null) {
 			listener.onClearSelection();
 		}

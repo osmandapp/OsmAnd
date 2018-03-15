@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -30,7 +31,7 @@
     <string name="mark_to_delete">Marcar para borrar</string>
     
     <string name="local_osm_changes_upload_all_confirm">¿Quieres subir %1$d cambio(s) a OSM?</string>
-    <string name="confirmation_to_clear_history">¿Quieres vaciar el historial?</string>
+    <string name="confirmation_to_clear_history">¿Quieres limpiar el historial?</string>
     <string name="application_dir_change_warning3">¿Quieres que OsmAnd también copie los archivos de datos al nuevo destino?</string>
     <string name="storage_directory">Almacenamiento del mapa</string>
     <string name="shared_string_places">Lugares</string>
@@ -81,8 +82,8 @@ Lon %2$s</string>
     <string name="shared_string_select_all">Marcar todo</string>
     <string name="shared_string_deselect">Desmarcar</string>
     <string name="shared_string_deselect_all">Desmarcar todo</string>
-    <string name="shared_string_clear">Borrar</string>
-    <string name="shared_string_clear_all">Borrar todo</string>
+    <string name="shared_string_clear">Limpiar</string>
+    <string name="shared_string_clear_all">Limpiar todo</string>
     <string name="shared_string_save">Guardar</string>
     <string name="shared_string_save_as_gpx">Guardar como nueva traza GPX</string>
     <string name="shared_string_rename">Renombrar</string>
@@ -653,7 +654,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="speak_cameras">Radares de velocidad</string>
     <string name="speak_traffic_warnings">Avisos de tráfico</string>
     <string name="osb_author_or_password_not_specified">Indica el usuario y contraseña de OSM en los ajustes</string>
-    <string name="clear_intermediate_points">Quitar destinos intermedios</string>
+    <string name="clear_intermediate_points">Limpiar destinos intermedios</string>
     <string name="keep_intermediate_points">Mantener destinos intermedios</string>
     <string name="new_directions_point_dialog">Ya definió destinos intermedios.</string>
     <string name="context_menu_item_directions_to">Llegar hasta aquí</string>
@@ -692,7 +693,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="distance_measurement_start_editing">Comenzar edición</string>
     <string name="distance_measurement_finish_editing">Terminar edición</string>
     <string name="distance_measurement_finish_subtrack">Iniciar subtraza nueva</string>
-    <string name="distance_measurement_clear_route">Quitar todos los puntos</string>
+    <string name="distance_measurement_clear_route">Limpiar todos los puntos</string>
     <string name="distance_measurement_load_gpx">Abrir GPX existente</string>
     <string name="wait_current_task_finished">Espere hasta que termine la tarea actual</string>
     <string name="use_kalman_filter_compass_descr">Reduce el ruido en las lecturas de la brújula pero añade inercia.</string>
@@ -705,7 +706,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="install_paid">Versión completa</string>
     <string name="cancel_route">Descartar ruta</string>
     <string name="cancel_navigation">Parar navegación</string>
-    <string name="clear_destination">Quitar destino</string>
+    <string name="clear_destination">Limpiar destino</string>
     <string name="download_using_mobile_internet">El Wi-Fi no está conectado en este momento. ¿Usar la conexión actual a Internet para descargar?</string>
     <string name="street_name">Nombre de calle</string>
     <string name="hno">Número</string>
@@ -733,7 +734,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="local_indexes_cat_srtm">Curvas de nivel</string>
     <string name="local_indexes_cat_av">Datos multimedia</string>
     <string name="stop_routing_confirm">¿Quieres parar la navegación?</string>
-    <string name="clear_dest_confirm">¿Quieres quitar el destino (y los destinos intermedios)?</string>
+    <string name="clear_dest_confirm">¿Quieres limpiar el destino (y los destinos intermedios)?</string>
     <string name="precise_routing_mode_descr">Habilita el cálculo de rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
     <string name="precise_routing_mode">Enrutado preciso (alfa)</string>
     <string name="recording_context_menu_show">Mostrar</string>
@@ -838,7 +839,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="poi_filter_for_tourists">Para turistas</string>
     <string name="poi_filter_fuel">Combustible</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
-    <string name="show_warnings_descr">Configura avisos de tráfico (límites de velocidad, paradas forzosas, badenes, túneles), radares de velocidad, e información de carriles.</string>
+    <string name="show_warnings_descr">Configura avisos de tráfico (límites de velocidad, paradas forzosas, lomadas, túneles), radares de velocidad, e información de carriles.</string>
     <string name="use_compass_navigation_descr">Usa la brújula cuando no se detecta la dirección.</string>
     <string name="use_compass_navigation">Usar brújula</string>
     <string name="avoid_motorway">Evitar autopistas</string>
@@ -851,7 +852,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM), es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión, incluyendo indicaciones giro-a-giro por voz. 
-\n
+\n 
 \n Algunas de las funciones fundamentales: 
 \n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo) 
 \n - Mapas vectoriales compactos disponibles de todo el planeta 
@@ -869,40 +870,27 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
 \n Limitaciones de la versión gratuita de OsmAnd: 
 \n - Límite del número de mapas descargados 
 \n - Sin acceso a los PDI descargados de Wikipedia. 
-\n
+\n 
 \n OsmAnd está siendo desarrollado activamente. Nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en OsmAnd.net."</string>
     
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM), es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro por voz. 
-\n
 \n 
 \n OsmAnd+ es la versión de pago de la aplicación, comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones. 
-\n
 \n 
 \n Algunas de las funciones fundamentales: 
-\n
 \n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) 
-\n
 \n - Mapas mundiales vectoriales compactos disponibles 
-\n
 \n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación 
-\n
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
-\n
 \n - Búsqueda sin conexión de direcciones y lugares (PDI) 
-\n
 \n - Rutas sin conexión para distancias de rango medio 
-\n  
 \n
 \n - Modos de automóvil, bicicleta y peatón con: 
-\n
 \n  - (Opcional) Cambio automático de vista día/noche 
-\n
 \n  - (Opcional) Ampliación del mapa según la velocidad 
-\n
 \n  - (Opcional) Alineación del mapa, según brújula o dirección del movimiento 
-\n
 \n  - (Opcional) Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas"</string>
     
     <string name="filterpoi_activity">Crear filtro PDI</string>
@@ -1103,13 +1091,13 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="offline_edition_descr">Usa siempre edición sin conexión.</string>
     <string name="update_poi_does_not_change_indexes">Los cambios de PDI dentro de la aplicación, no afectan a los archivos del mapa descargados. Estos se guardan en un archivo local.</string>
     <string name="local_openstreetmap_uploading">Subiendo…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} PDI/Notas de OSM subidas</string>
+    <string name="local_openstreetmap_were_uploaded">{0} PDI/Notas de OSM subidos</string>
     <string name="local_openstreetmap_uploadall">Enviar todos</string>
     <string name="local_openstreetmap_upload">Enviar cambio a OSM</string>
     <string name="local_openstreetmap_delete">Quitar modificación</string>
     <string name="local_openstreetmap_descr_title">Edición asíncrona OSM:</string>
     <string name="local_openstreetmap_settings">PDI/Notas de OSM guardados localmente</string>
-    <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDI/notas de OSM guardados en la base de datos local.</string>
+    <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDI/notas de OSM guardadas en la base de datos local.</string>
     <string name="live_monitoring_interval_descr">Indica el intervalo de registro en vivo.</string>
     <string name="live_monitoring_interval">Intervalo de registro en vivo</string>
     <string name="live_monitoring_url_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -1906,7 +1894,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="osm_edit_commented_note">Nota de OSM comentada</string>
     <string name="osm_edit_removed_note">Nota de OSM borrada</string>
 	<string name="osm_edit_created_note">Nota de OSM creada</string>
-	<string name="osn_bug_name">Notas de OSM</string>
+	<string name="osn_bug_name">Nota de OSM</string>
 	<string name="osn_add_dialog_title">Crear nota</string>
 	<string name="osn_comment_dialog_title">Añadir comentario</string>
 	<string name="osn_reopen_dialog_title">Reabrir nota</string>
@@ -2034,7 +2022,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     
     <string name="show_map_markers_description">Activar función de marcadores del mapa.</string>
     <string name="clear_active_markers_q">¿Quieres quitar todos los marcadores activos?</string>
-    <string name="clear_markers_history_q">¿Quieres vaciar el historial de marcadores del mapa?</string>
+    <string name="clear_markers_history_q">¿Quieres limpiar el historial de marcadores del mapa?</string>
     <string name="active_markers">Marcadores activos</string>
     <string name="map_markers">Marcadores del mapa</string>
     <string name="map_marker">Marcador del mapa</string>
@@ -2196,7 +2184,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="route_stops_before">%1$s parada(s) anterior(es)</string>
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
 
-    <string name="routing_attr_short_way_name">Ruta de menor consumo (corta)</string>
+    <string name="routing_attr_short_way_name">Ruta de bajo consumo (corta)</string>
     <string name="routing_attr_short_way_description">Usa la ruta de menor consumo en combustible (usualmente la más corta).</string>
     <string name="replace_favorite_confirmation">¿Quieres reemplazar el favorito «%1$s»?</string>
     <string name="shared_string_change">Cambiar</string>
@@ -2470,9 +2458,7 @@ Proporciona un código completo</string>
     <string name="routing_attr_relief_smoothness_factor_name">Elegir la fluctuación de elevación</string>
     <string name="right_side_navigation">Conducir por la derecha</string>
     <string name="driving_region_automatic">Automático</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OpenStreetMap (OSM), en todo el mundo y de alta calidad. 
-\n 
-\n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, utiliza la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OpenStreetMap (OSM), en todo el mundo y de alta calidad. Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, utiliza la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.</string>
     <string name="osmand_extended_description_part2">"Navegación GPS 
 \n • Puedes eligir entre los modos  sin conexión (sin cargos de roaming al viajar al extranjero) o en línea (rápido) 
 \n • La guía por voz giro-a-giro lo guía a lo largo del camino (voces grabadas y sintetizadas) 
@@ -2485,7 +2471,7 @@ Proporciona un código completo</string>
 \n • Soporta puntos intermedios en el itinerario 
 \n • Puedes grabar tu viaje o subir una traza GPX y seguirla"</string>
     <string name="osmand_extended_description_part3">Mapa 
-\n • Muestra PDI (puntos de interés) cercanos
+\n • Muestra de PDI (puntos de interés) cercanos 
 \n • Ajusta el mapa a la dirección del movimiento (o brújula) 
 \n • Muestra dónde estás y hacia dónde miras 
 \n • Comparte la ubicación para que tus amigos te encuentren 
@@ -2511,7 +2497,8 @@ Proporciona un código completo</string>
 \n • Medio Oriente: ** 
 \n • África: ** 
 \n • Antártida: * 
-\n ¡Más países alrededor del globo están disponibles para descargar! Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Países bajos, Estados Unidos, Rusia, Brasil o cualquier otro.</string>
+\n ¡Más países alrededor del globo están disponibles para descargar! 
+\n Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Países bajos, Estados Unidos, Rusia, Brasil o cualquier otro.</string>
     <string name="osmand_plus_extended_description_part2">"Navegación GPS 
 \n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero) 
 \n • Guía por voz giro-a-giro (voces grabadas y sintetizadas) 
@@ -2524,7 +2511,7 @@ Proporciona un código completo</string>
 \n • Muestra tu ubicación y orientación 
 \n • (Opcional) Ajusta el mapa a la dirección del movimiento (o brújula) 
 \n • Guarda lugares importantes en Favoritos 
-\n • Muestra PDI (puntos de interés) cercanos
+\n • Muestra de PDI (puntos de interés) cercanos 
 \n • Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable 
 \n • Permite elegir como mostrar los nombres en el mapa: en inglés, local, u ortografía fonética</string>
     <string name="osmand_plus_extended_description_part4">Uso de datos de OSM y Wikipedia 
@@ -2622,7 +2609,7 @@ Proporciona un código completo</string>
     <string name="quick_action_showhide_osmbugs_title">Alternar vista de notas de OSM</string>
     <string name="quick_action_osmbugs_show">Mostrar notas de OSM</string>
     <string name="quick_action_osmbugs_hide">Ocultar notas de OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Al pulsar el botón de acción se mostrarán u ocultarán los notas de OSM en el mapa.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Al pulsar el botón de acción se mostrarán u ocultarán las notas de OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenados por distancia</string>
     <string name="search_favorites">Buscar favoritos</string>
     <string name="restart_search">Reiniciar búsqueda</string>
@@ -2659,7 +2646,7 @@ Proporciona un código completo</string>
     <string name="mapillary_menu_edit_text_hint">Escribir nombre de usuario</string>
     <string name="mapillary_menu_descr_username">Ver sólo imágenes añadidas por</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
-    <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por usuario o por fecha. Los filtros sólo aplican para los primeros acercamientos.</string>
+    <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por usuario o por fecha. Los filtros sólo aplican en los primeros acercamientos.</string>
     <string name="shared_string_reload">Recargar</string>
     <string name="mapillary_menu_descr_tile_cache">Recarga las teselas para ver la información actualizada.</string>
     <string name="mapillary_menu_title_tile_cache">Caché de teselas</string>
@@ -2846,7 +2833,7 @@ Proporciona un código completo</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta problemas del mapa (notas de OSM), y contribuye con grabaciones GPX.</string>
+    <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta notas de OSM, y contribuye con grabaciones GPX.</string>
     <string name="shared_string_deleted">Borrado</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Añadido</string>
@@ -2906,7 +2893,7 @@ Proporciona un código completo</string>
 \n
 \n • El tiempo de caminata es consciente del terreno ascendente (regla de Naismith).
 \n</string>
-    <string name="day_off_label">Cerrado (día libre)</string>
+    <string name="day_off_label">cerrado (día libre)</string>
     <string name="winter_and_ski_renderer">Invierno y esquí</string>
     <string name="touring_view_renderer">Vista de Touring (contraste y detalles)</string>
     <string name="nautical_renderer">Náutico</string>
@@ -2928,7 +2915,7 @@ Proporciona un código completo</string>
     <string name="last_intermediate_dest_description">Añade la ubicación como último destino intermedio</string>
     <string name="first_intermediate_dest_description">Añade la ubicación como primer destino intermedio</string>
     <string name="subsequent_dest_description">Mueve el destino hacia arriba y crea un nuevo destino</string>
-    <string name="make_as_start_point">Establecer como punto de inicio</string>
+    <string name="make_as_start_point">Reemplazar punto de inicio</string>
     <string name="map_import_error">Error de importación del mapa</string>
     <string name="map_imported_successfully">Mapa importado correctamente</string>
     <string name="enter_the_file_name">Ingresa el nombre del archivo.</string>
@@ -2950,4 +2937,6 @@ Proporciona un código completo</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Nombre de punto opcional</string>
     <string name="rendering_attr_whiteWaterSports_name">Deportes acuáticos</string>
+    <string name="clear_all_intermediates">Limpiar todos los puntos intermedios</string>
+    <string name="group_deleted">Grupo borrado</string>
     </resources>

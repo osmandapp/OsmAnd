@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="switch_to_raster_map_to_see">Off-line vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastavení (Stáhnout mapy), nebo se přepněte na on-line mapy (vyžaduje modul „On-line mapy“).</string>
     <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
@@ -1459,7 +1460,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="configure_map">Nastavení mapy</string>
     <string name="rendering_category_others">Ostatní vlastnosti mapy</string>
     <string name="map_widget_appearance_rem">Zbývající prvky</string>
-    <string name="search_radius_proximity">Uvnitř</string>
+    <string name="search_radius_proximity">V okruhu</string>
     <string name="rendering_category_routes">Trasy</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Vlakové linky</string>
     <string name="rendering_attr_tramRoutes_name">Tramvajové linky</string>
@@ -2839,4 +2840,5 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part7">Přispívejte přímo do OSM • Hlaste chyby v datech • Nahrávejte GPX trasy do OSM přímo z aplikace • Přidávejte body zájmu a rovnou je nahrávejte do OSM (nebo později, pokud jste zrovna offline) • Záznam trasy funguje také na pozadí (když je zařízení v režimu spánku) • OsmAnd je aktivně vyvíjený open-source software. Do aplikace může každý přispět hlášením chyb, vylepšováním překladů nebo programováním nových funkcí. Projekt je živý a neustále se vyvíjí díky této spolupráci mezi vývojáři a uživateli. Vývoj je také závislý na finančních příspěvcích pro programování a testování nových funkcí.</string>
     <string name="osmand_plus_extended_description_part8">Přibližné pokrytí a kvalita map: • Západní Evropa: **** • Východní Evropa: *** • Rusko: *** • Severní Amerika: *** • Jižní Amerika: ** • Asie: ** • Japonsko &amp; Korea: *** • Střední Východ: ** • Afrika: ** • Antarktida: * Mapy většiny států na zeměkouli jsou dostupné ke stažení! Od Afghánistánu po Zimbabwe, od Austrálie po USA, Argentinu, Brazílii, Kanadu, Francii, Německo, Mexiko, Spojené království, Španělsko, …</string>
     <string name="group_deleted">Skupina smazána</string>
+    <string name="clear_all_intermediates">Smazat všechny mezicíle</string>
     </resources>

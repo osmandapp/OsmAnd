@@ -20,11 +20,9 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionFactory;
-import net.osmand.plus.quickaction.QuickActionRegistry;
 
 import java.util.List;
+import java.util.Set;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
@@ -69,7 +67,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 
 		final FavouritesDbHelper helper = ((OsmandApplication) getActivity().getApplication()).getFavorites();
 		if (gpxFile != null) {
-			List<String> categories = gpxFile.getWaypointCategories();
+			Set<String> categories = gpxFile.getWaypointCategories(false);
 			for (final String category : categories) {
 				addCategory(ll, category, 0);
 			}

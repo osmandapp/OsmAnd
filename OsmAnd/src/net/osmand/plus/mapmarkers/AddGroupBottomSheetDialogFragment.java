@@ -77,6 +77,11 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 		super.onDestroyView();
 	}
 
+	@Override
+	protected boolean useScrollableItemsContainer() {
+		return false;
+	}
+
 	private void showProgressBar() {
 		mainView.findViewById(R.id.groups_recycler_view).setVisibility(View.GONE);
 		mainView.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);

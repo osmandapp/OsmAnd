@@ -3312,6 +3312,17 @@
 	<string name="poi_health_facility_type_nursing_home">Type d\'établissement de santé : soins infirmiers à domicile</string>
 	<string name="poi_health_facility_type_support_group_home">Type d\'établissement de santé : groupe de soutien à domicile</string>
 
-	<string name="poi_health_amenity_type_scales">Échelles publiques</string>
+	<string name="poi_health_amenity_type_scales">Balances publiques</string>
 
-	</resources>
+	<string name="poi_protection_object_historic">Objet de protection : historique</string>
+	<string name="poi_protection_object_nature">Objet de protection : nature</string>
+	<string name="poi_protection_object_habitat">Objet de protection : habitat</string>
+	<string name="poi_protection_object_water">Objet de protection : eau</string>
+
+	<string name="poi_socket_nema_14_30_yes">NEMA 14-30</string>
+	<string name="poi_socket_nema_14_50_yes">NEMA 14-50</string>
+	<string name="poi_socket_schuko_yes">Schuko</string>
+	<string name="poi_socket_bs1363_yes">BS 1363</string>
+	<string name="poi_whitewater_rapid_name">Nom des rapides</string>
+
+</resources>

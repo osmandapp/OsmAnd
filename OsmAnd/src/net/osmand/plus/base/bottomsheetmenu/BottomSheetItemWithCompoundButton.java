@@ -17,6 +17,8 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 	private boolean checked;
 	private ColorStateList buttonTintList;
 
+	private CompoundButton compoundButton;
+
 	public BottomSheetItemWithCompoundButton(View customView,
 											 @LayoutRes int layoutId,
 											 Object tag,
@@ -45,10 +47,15 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 		this.buttonTintList = buttonTintList;
 	}
 
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+		compoundButton.setChecked(checked);
+	}
+
 	@Override
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
 		super.inflate(app, container, nightMode);
-		CompoundButton compoundButton = (CompoundButton) view.findViewById(R.id.compound_button);
+		compoundButton = (CompoundButton) view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(checked);
 		CompoundButtonCompat.setButtonTintList(compoundButton, buttonTintList);
 	}
