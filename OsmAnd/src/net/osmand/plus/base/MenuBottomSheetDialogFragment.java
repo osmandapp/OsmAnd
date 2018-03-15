@@ -78,6 +78,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		if (bottomDividerColorId != -1) {
 			mainView.findViewById(R.id.bottom_row_divider).setBackgroundColor(getResolvedColor(bottomDividerColorId));
 		}
+
 		mainView.findViewById(R.id.dismiss_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -86,6 +87,24 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			}
 		});
 		((TextView) mainView.findViewById(R.id.dismiss_button_text)).setText(getDismissButtonTextId());
+
+		int rightBottomButtonTextId = getRightBottomButtonTextId();
+		if (rightBottomButtonTextId != -1) {
+			View buttonsDivider = mainView.findViewById(R.id.bottom_buttons_divider);
+			buttonsDivider.setVisibility(View.VISIBLE);
+			if (bottomDividerColorId != -1) {
+				buttonsDivider.setBackgroundColor(getResolvedColor(bottomDividerColorId));
+			}
+			View rightButton = mainView.findViewById(R.id.right_bottom_button);
+			rightButton.setVisibility(View.VISIBLE);
+			rightButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					onRightBottomButtonClick();
+				}
+			});
+			((TextView) rightButton.findViewById(R.id.right_bottom_button_text)).setText(rightBottomButtonTextId);
+		}
 
 		setupHeightAndBackground(mainView);
 
@@ -185,6 +204,15 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	protected void onDismissButtonClickAction() {
+
+	}
+
+	@StringRes
+	protected int getRightBottomButtonTextId() {
+		return -1;
+	}
+
+	protected void onRightBottomButtonClick() {
 
 	}
 
