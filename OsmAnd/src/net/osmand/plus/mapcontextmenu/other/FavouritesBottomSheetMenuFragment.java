@@ -5,14 +5,11 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.TextView;
 
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -20,7 +17,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleWithButtonItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithTitleAndButton;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.MapUtils;
 
@@ -51,7 +48,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private boolean isSorted = false;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
-	private TitleWithButtonItem title;
+	private BaseBottomSheetItem title;
 	private MapRouteInfoMenu routeMenu;
 
 	@Override
@@ -59,20 +56,17 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		Bundle args = getArguments();
 		target = args.getBoolean(TARGET);
 		intermediate = args.getBoolean(INTERMEDIATE);
-//		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
-		FavouritesDbHelper favouritesDbHelper = getMyApplication().getFavorites();
-		favouritePoints = favouritesDbHelper.getVisibleFavouritePoints();
+		favouritePoints = getMyApplication().getFavorites().getVisibleFavouritePoints();
 		routeMenu = ((MapActivity) getActivity()).getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
 		recyclerView = new RecyclerView(getContext());
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-		title = new TitleWithButtonItem.Builder()
-				.setIcon(getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
+		title = new BottomSheetItemWithTitleAndButton.Builder()
+				.setButtonIcon(null, getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
 						nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light))
-				.setIconPosition(TitleWithButtonItem.textOnRight)
+				.setButtonTitle(getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name))
 				.setTitle(getString(R.string.favourites))
-				.setTextOnRight(getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name))
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -80,11 +74,12 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 							return;
 						}
 						sortFavourites();
-						title.setButtonIcon(getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
-								nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light), TitleWithButtonItem.textOnRight);
-						title.setButtonText(getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name));
+						((BottomSheetItemWithTitleAndButton) title).setButtonIcon(null, getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
+								nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light));
+						((BottomSheetItemWithTitleAndButton) title).setButtonText(getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name));
 					}
 				})
+				.setLayoutId(R.layout.bottom_sheet_item_with_title_and_button)
 				.create();
 		items.add(title);
 
@@ -107,9 +102,9 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				compassUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE;
 			}
 		});
-		items.add(new BaseBottomSheetItem.Builder().
-				setCustomView(recyclerView).
-				create());
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(recyclerView)
+				.create());
 
 		if (savedInstanceState != null && savedInstanceState.getBoolean(IS_SORTED)) {
 			location = getMyApplication().getLocationProvider().getLastKnownLocation();
@@ -153,9 +148,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		if (!intermediate && getActivity() instanceof MapActivity) {
 			routeMenu.updateFromIcon();
 		}
-		if (routeMenu.mainView != null) {
-			routeMenu.setupSpinners(routeMenu.mainView, target, intermediate);
-		}
+		routeMenu.setupSpinners(target, intermediate);
 		dismiss();
 	}
 
@@ -262,8 +255,8 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	@Override
 	protected void onCloseRowClickAction() {
 		super.onCloseRowClickAction();
-		if (routeMenu.mainView != null) {
-			routeMenu.setupSpinners(routeMenu.mainView, target, intermediate);
-		}
+		routeMenu.setupSpinners(target, intermediate);
 	}
+
+
 }
