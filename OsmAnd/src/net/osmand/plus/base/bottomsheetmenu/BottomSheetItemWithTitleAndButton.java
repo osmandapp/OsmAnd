@@ -3,6 +3,7 @@ package net.osmand.plus.base.bottomsheetmenu;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +14,14 @@ import net.osmand.plus.R;
 
 public class BottomSheetItemWithTitleAndButton extends SimpleBottomSheetItem {
 
-	private View.OnClickListener onClickListener;
+	private View.OnClickListener onButtonClickListener;
 	private Drawable leftCompoundDrawable;
 	private Drawable rightCompoundDrawable;
-	private String ButtonTitle;
-	private TextView textButtonTV;
+	private String buttonTitle;
 	@ColorRes
 	private int buttonTextColor = INVALID_ID;
+
+	private TextView textButtonTV;
 
 	public BottomSheetItemWithTitleAndButton(View customView,
 	                                         @LayoutRes int layoutId,
@@ -27,36 +29,40 @@ public class BottomSheetItemWithTitleAndButton extends SimpleBottomSheetItem {
 	                                         boolean disabled,
 	                                         View.OnClickListener onClickListener,
 	                                         int position,
-	                                         Drawable leftCompoundDrawable,
-	                                         Drawable rightCompoundDrawable,
 	                                         Drawable icon,
 	                                         String title,
-	                                         String ButtonTitle,
 	                                         @ColorRes int titleColorId,
+	                                         String buttonTitle,
+	                                         View.OnClickListener onButtonClickListener,
+	                                         Drawable leftCompoundDrawable,
+	                                         Drawable rightCompoundDrawable,
 	                                         @ColorRes int buttonTextColor) {
-		super(customView, layoutId, tag, disabled, null, position, icon, title, titleColorId);
+		super(customView, layoutId, tag, disabled, onClickListener, position, icon, title, titleColorId);
+		this.buttonTitle = buttonTitle;
+		this.onButtonClickListener = onButtonClickListener;
 		this.leftCompoundDrawable = leftCompoundDrawable;
 		this.rightCompoundDrawable = rightCompoundDrawable;
-		this.ButtonTitle = ButtonTitle;
-		this.onClickListener = onClickListener;
 		this.buttonTextColor = buttonTextColor;
 	}
 
-	public void setButtonIcon(Drawable leftCompoundDrawable, Drawable rightCompoundDrawable) {
+	public void setButtonIcons(@Nullable Drawable leftCompoundDrawable, @Nullable Drawable rightCompoundDrawable) {
+		this.leftCompoundDrawable = leftCompoundDrawable;
+		this.rightCompoundDrawable = rightCompoundDrawable;
 		textButtonTV.setCompoundDrawablesWithIntrinsicBounds(leftCompoundDrawable, null, rightCompoundDrawable, null);
 	}
 
-	public void setButtonText(String text) {
-		textButtonTV.setText(text);
+	public void setButtonText(String buttonTitle) {
+		this.buttonTitle = buttonTitle;
+		textButtonTV.setText(buttonTitle);
 	}
 
 	@Override
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
 		super.inflate(app, container, nightMode);
 		textButtonTV = (TextView) view.findViewById(R.id.text_button);
-		textButtonTV.setOnClickListener(onClickListener);
-		setButtonIcon(leftCompoundDrawable, rightCompoundDrawable);
-		setButtonText(ButtonTitle);
+		textButtonTV.setOnClickListener(onButtonClickListener);
+		textButtonTV.setCompoundDrawablesWithIntrinsicBounds(leftCompoundDrawable, null, rightCompoundDrawable, null);
+		textButtonTV.setText(buttonTitle);
 		if (buttonTextColor != INVALID_ID) {
 			textButtonTV.setTextColor(ContextCompat.getColor(app, buttonTextColor));
 		}
@@ -64,22 +70,21 @@ public class BottomSheetItemWithTitleAndButton extends SimpleBottomSheetItem {
 
 	public static class Builder extends SimpleBottomSheetItem.Builder {
 
-		protected String title;
-		private String buttonTitle;
-		protected View.OnClickListener onClickListener;
-		private Drawable leftCompoundDrawable;
-		private Drawable rightCompoundDrawable;
+		protected String buttonTitle;
+		protected View.OnClickListener onButtonClickListener;
+		protected Drawable leftCompoundDrawable;
+		protected Drawable rightCompoundDrawable;
 		@ColorRes
 		protected int buttonTextColor = INVALID_ID;
 
-		public BottomSheetItemWithTitleAndButton.Builder setButtonIcon(Drawable leftCompoundDrawable, Drawable rightCompoundDrawable) {
+		public BottomSheetItemWithTitleAndButton.Builder setButtonIcons(Drawable leftCompoundDrawable, Drawable rightCompoundDrawable) {
 			this.leftCompoundDrawable = leftCompoundDrawable;
 			this.rightCompoundDrawable = rightCompoundDrawable;
 			return this;
 		}
 
-		public BottomSheetItemWithTitleAndButton.Builder setOnClickListener(View.OnClickListener onClickListener) {
-			this.onClickListener = onClickListener;
+		public BottomSheetItemWithTitleAndButton.Builder setonButtonClickListener(View.OnClickListener onButtonClickListener) {
+			this.onButtonClickListener = onButtonClickListener;
 			return this;
 		}
 
@@ -88,25 +93,25 @@ public class BottomSheetItemWithTitleAndButton extends SimpleBottomSheetItem {
 			return this;
 		}
 
-		public BottomSheetItemWithTitleAndButton.Builder setButtonTextColor(int buttonTextColor) {
+		public BottomSheetItemWithTitleAndButton.Builder setButtonTextColor(@ColorRes int buttonTextColor) {
 			this.buttonTextColor = buttonTextColor;
 			return this;
 		}
 
 		public BottomSheetItemWithTitleAndButton create() {
-			return new BottomSheetItemWithTitleAndButton(
-					customView,
+			return new BottomSheetItemWithTitleAndButton(customView,
 					layoutId,
 					tag,
 					disabled,
 					onClickListener,
 					position,
-					leftCompoundDrawable,
-					rightCompoundDrawable,
 					icon,
 					title,
-					buttonTitle,
 					titleColorId,
+					buttonTitle,
+					onButtonClickListener,
+					leftCompoundDrawable,
+					rightCompoundDrawable,
 					buttonTextColor);
 		}
 	}

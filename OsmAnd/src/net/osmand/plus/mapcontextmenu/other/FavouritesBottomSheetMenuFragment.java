@@ -57,11 +57,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		title = new BottomSheetItemWithTitleAndButton.Builder()
-				.setButtonIcon(null, getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
+				.setButtonIcons(null, getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
 						nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light))
 				.setButtonTitle(getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name))
-				.setTitle(getString(R.string.favourites))
-				.setOnClickListener(new View.OnClickListener() {
+				.setonButtonClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						if (location == null) {
@@ -69,11 +68,12 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 						}
 						asyncProcessor = new ProcessFavouritesTask();
 						asyncProcessor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-						((BottomSheetItemWithTitleAndButton) title).setButtonIcon(null, getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
+						((BottomSheetItemWithTitleAndButton) title).setButtonIcons(null, getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
 								nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light));
 						((BottomSheetItemWithTitleAndButton) title).setButtonText(getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name));
 					}
 				})
+				.setTitle(getString(R.string.favourites))
 				.setLayoutId(R.layout.bottom_sheet_item_with_title_and_button)
 				.create();
 		items.add(title);
