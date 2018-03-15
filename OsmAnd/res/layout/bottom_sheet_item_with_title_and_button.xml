@@ -25,7 +25,7 @@
         android:id="@+id/text_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?android:selectableItemBackground"
+        android:background="?attr/selectableItemBackground"
         android:drawablePadding="2dp"
         android:gravity="center_vertical"
         android:minHeight="@dimen/bottom_sheet_title_height"
