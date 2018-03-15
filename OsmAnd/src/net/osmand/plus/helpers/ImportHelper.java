@@ -790,10 +790,5 @@ public class ImportHelper {
 					.create();
 			items.add(asGpxItem);
 		}
-
-		@ColorInt
-		private int getResolvedColor(@ColorRes int colorId) {
-			return ContextCompat.getColor(getContext(), colorId);
-		}
 	}
 }

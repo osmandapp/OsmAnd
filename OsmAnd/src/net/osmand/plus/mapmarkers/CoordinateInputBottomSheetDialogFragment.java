@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import net.osmand.plus.OsmandSettings;
@@ -122,7 +121,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 			BaseBottomSheetItem formatItem = new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(selectedItem)
 					.setButtonTintList(selectedItem
-							? ColorStateList.valueOf(ContextCompat.getColor(context, getActiveColorId()))
+							? ColorStateList.valueOf(getResolvedColor(getActiveColorId()))
 							: null)
 					.setIcon(selectedItem ? getActiveIcon(R.drawable.ic_action_coordinates_latitude) : formatIcon)
 					.setTitle(CoordinateInputFormats.formatToHumanString(context, format))

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
@@ -69,8 +70,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 		int closeRowDividerColorId = getCloseRowDividerColorId();
 		if (closeRowDividerColorId != -1) {
-			mainView.findViewById(R.id.close_row_divider)
-					.setBackgroundColor(ContextCompat.getColor(getContext(), closeRowDividerColorId));
+			mainView.findViewById(R.id.close_row_divider).setBackgroundColor(getResolvedColor(closeRowDividerColorId));
 		}
 		mainView.findViewById(R.id.close_row).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -121,6 +121,11 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected Drawable getActiveIcon(@DrawableRes int id) {
 		return getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
+	}
+
+	@ColorInt
+	protected int getResolvedColor(@ColorRes int colorId) {
+		return ContextCompat.getColor(getContext(), colorId);
 	}
 
 	protected void setupHeightAndBackground(final View mainView) {
