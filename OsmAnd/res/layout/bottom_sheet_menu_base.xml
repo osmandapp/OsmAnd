@@ -14,13 +14,20 @@
 		android:layout_height="wrap_content">
 
 		<LinearLayout
-			android:id="@+id/items_container"
+			android:id="@+id/scrollable_items_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
 			android:paddingBottom="@dimen/bottom_sheet_content_padding_small"/>
 
 	</ScrollView>
+
+	<LinearLayout
+		android:id="@+id/non_scrollable_items_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:visibility="gone"/>
 
 	<View
 		android:id="@+id/bottom_row_divider"

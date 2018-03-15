@@ -62,7 +62,13 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		View mainView = View.inflate(new ContextThemeWrapper(app, themeRes), R.layout.bottom_sheet_menu_base, null);
-		itemsContainer = (LinearLayout) mainView.findViewById(R.id.items_container);
+		if (useScrollableItemsContainer()) {
+			itemsContainer = (LinearLayout) mainView.findViewById(R.id.scrollable_items_container);
+		} else {
+			mainView.findViewById(R.id.scroll_view).setVisibility(View.GONE);
+			itemsContainer = (LinearLayout) mainView.findViewById(R.id.non_scrollable_items_container);
+			itemsContainer.setVisibility(View.VISIBLE);
+		}
 
 		for (BaseBottomSheetItem item : items) {
 			item.inflate(app, itemsContainer, nightMode);
@@ -130,21 +136,20 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected void setupHeightAndBackground(final View mainView) {
 		final Activity activity = getActivity();
+
 		final int screenHeight = AndroidUtils.getScreenHeight(activity);
 		final int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
-		final int navBarHeight = AndroidUtils.getNavBarHeight(activity);
+		final int availableHeight = screenHeight - statusBarHeight - AndroidUtils.getNavBarHeight(activity)
+				- AndroidUtils.dpToPx(getContext(), 1) // divider height
+				- getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height); // bottom row height
 
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
-				final View scrollView = mainView.findViewById(R.id.scroll_view);
-				int scrollViewHeight = scrollView.getHeight();
-				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
-				int bottomRowHeight = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
-				int spaceForScrollView = screenHeight - statusBarHeight - navBarHeight - dividerHeight - bottomRowHeight;
-				if (scrollViewHeight > spaceForScrollView) {
-					scrollView.getLayoutParams().height = spaceForScrollView;
-					scrollView.requestLayout();
+				final View viewToAdjust = useScrollableItemsContainer() ? mainView.findViewById(R.id.scroll_view) : itemsContainer;
+				if (viewToAdjust.getHeight() > availableHeight) {
+					viewToAdjust.getLayoutParams().height = availableHeight;
+					viewToAdjust.requestLayout();
 				}
 
 				// 8dp is the shadow height
@@ -163,6 +168,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				}
 			}
 		});
+	}
+
+	protected boolean useScrollableItemsContainer() {
+		return true;
 	}
 
 	@ColorRes
