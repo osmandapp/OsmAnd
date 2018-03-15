@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 
-import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -23,6 +22,7 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.parking_options)));
+
 		BaseBottomSheetItem byTypeItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_time_start))
 				.setTitle(getString(R.string.osmand_parking_no_lim_text))
@@ -47,17 +47,18 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 					}
 				})
 				.create();
+
 		items.add(byDateItem);
 	}
 
 	private void addParkingPosition(boolean limited) {
-		Bundle args = getArguments();
-		double latitude = args.getDouble(LAT_KEY);
-		double longitude = args.getDouble(LON_KEY);
 		ParkingPositionPlugin plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
-		MapActivity mapActivity = (MapActivity) getActivity();
-
 		if (plugin != null) {
+			MapActivity mapActivity = (MapActivity) getActivity();
+			Bundle args = getArguments();
+			double latitude = args.getDouble(LAT_KEY);
+			double longitude = args.getDouble(LON_KEY);
+
 			if (plugin.isParkingEventAdded()) {
 				plugin.showDeleteEventWarning(mapActivity);
 			}

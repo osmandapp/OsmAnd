@@ -939,7 +939,7 @@ public class MapMarkersHelper {
 	}
 
 	private void updateSyncGroupDisabled(@NonNull MapMarkersGroup group, boolean disabled) {
-		List<MapMarker> groupMarkers = group.getMarkers();
+		List<MapMarker> groupMarkers = new ArrayList<>(group.getMarkers());
 		for (MapMarker marker : groupMarkers) {
 			if (marker.history) {
 				if (disabled) {
