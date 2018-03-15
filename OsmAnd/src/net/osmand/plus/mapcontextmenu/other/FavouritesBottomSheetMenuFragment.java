@@ -36,9 +36,6 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private static final String IS_SORTED = "sorted";
 	private static final String SORTED_BY_TYPE = "sortedByType";
 
-	boolean target;
-	boolean intermediate;
-
 	private Location location;
 	private Float heading;
 	private List<FavouritePoint> favouritePoints;
@@ -48,6 +45,8 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private boolean isSorted = false;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
+	private boolean target;
+	private boolean intermediate;
 	private BaseBottomSheetItem title;
 	private MapRouteInfoMenu routeMenu;
 
@@ -257,6 +256,4 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		super.onCloseRowClickAction();
 		routeMenu.setupSpinners(target, intermediate);
 	}
-
-
 }
