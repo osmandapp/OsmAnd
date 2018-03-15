@@ -19,6 +19,10 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 
 	private CompoundButton compoundButton;
 
+	public boolean isChecked() {
+		return checked;
+	}
+
 	public BottomSheetItemWithCompoundButton(View customView,
 											 @LayoutRes int layoutId,
 											 Object tag,
