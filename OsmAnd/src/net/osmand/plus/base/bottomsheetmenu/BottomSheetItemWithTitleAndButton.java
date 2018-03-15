@@ -88,6 +88,11 @@ public class BottomSheetItemWithTitleAndButton extends SimpleBottomSheetItem {
 			return this;
 		}
 
+		public BottomSheetItemWithTitleAndButton.Builder setButtonTextColor(int buttonTextColor) {
+			this.buttonTextColor = buttonTextColor;
+			return this;
+		}
+
 		public BottomSheetItemWithTitleAndButton create() {
 			return new BottomSheetItemWithTitleAndButton(
 					customView,
