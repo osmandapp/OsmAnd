@@ -48,6 +48,8 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private boolean isSorted = false;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
+	private boolean target;
+	private boolean intermediate;
 	private BaseBottomSheetItem title;
 	private MapRouteInfoMenu routeMenu;
 
