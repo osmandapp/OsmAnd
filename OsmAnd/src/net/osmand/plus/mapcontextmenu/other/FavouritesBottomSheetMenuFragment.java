@@ -36,8 +36,8 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private static final String IS_SORTED = "sorted";
 	private static final String SORTED_BY_TYPE = "sortedByType";
 
-	boolean target;
-	boolean intermediate;
+	private boolean target;
+	private boolean intermediate;
 
 	private Location location;
 	private Float heading;
@@ -251,12 +251,4 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		outState.putBoolean(IS_SORTED, isSorted);
 		outState.putBoolean(SORTED_BY_TYPE, !sortByDist);
 	}
-
-	@Override
-	protected void onCloseRowClickAction() {
-		super.onCloseRowClickAction();
-		routeMenu.setupSpinners(target, intermediate);
-	}
-
-
 }
