@@ -68,18 +68,18 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			item.inflate(app, itemsContainer, nightMode);
 		}
 
-		int closeRowDividerColorId = getCloseRowDividerColorId();
-		if (closeRowDividerColorId != -1) {
-			mainView.findViewById(R.id.close_row_divider).setBackgroundColor(getResolvedColor(closeRowDividerColorId));
+		int bottomDividerColorId = getBottomDividerColorId();
+		if (bottomDividerColorId != -1) {
+			mainView.findViewById(R.id.bottom_row_divider).setBackgroundColor(getResolvedColor(bottomDividerColorId));
 		}
-		mainView.findViewById(R.id.close_row).setOnClickListener(new View.OnClickListener() {
+		mainView.findViewById(R.id.dismiss_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				onCloseRowClickAction();
+				onDismissButtonClickAction();
 				dismiss();
 			}
 		});
-		((TextView) mainView.findViewById(R.id.close_row_text)).setText(getCloseRowTextId());
+		((TextView) mainView.findViewById(R.id.dismiss_button_text)).setText(getDismissButtonTextId());
 
 		setupHeightAndBackground(mainView);
 
@@ -140,8 +140,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				final View scrollView = mainView.findViewById(R.id.scroll_view);
 				int scrollViewHeight = scrollView.getHeight();
 				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
-				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
-				int spaceForScrollView = screenHeight - statusBarHeight - navBarHeight - dividerHeight - cancelButtonHeight;
+				int bottomRowHeight = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
+				int spaceForScrollView = screenHeight - statusBarHeight - navBarHeight - dividerHeight - bottomRowHeight;
 				if (scrollViewHeight > spaceForScrollView) {
 					scrollView.getLayoutParams().height = spaceForScrollView;
 					scrollView.requestLayout();
@@ -166,16 +166,16 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	@ColorRes
-	protected int getCloseRowDividerColorId() {
+	protected int getBottomDividerColorId() {
 		return -1;
 	}
 
 	@StringRes
-	protected int getCloseRowTextId() {
+	protected int getDismissButtonTextId() {
 		return R.string.shared_string_cancel;
 	}
 
-	protected void onCloseRowClickAction() {
+	protected void onDismissButtonClickAction() {
 
 	}
 

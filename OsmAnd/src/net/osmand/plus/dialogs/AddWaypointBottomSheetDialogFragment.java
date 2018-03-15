@@ -75,7 +75,7 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				.create();
 		items.add(replaceStartItem);
 
-		items.add(new DividerHalfItem(getContext(), getCloseRowDividerColorId()));
+		items.add(new DividerHalfItem(getContext(), getBottomDividerColorId()));
 
 		BaseBottomSheetItem subsequentDestItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.subsequent_dest_description))
@@ -135,7 +135,7 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 	}
 
 	@Override
-	protected int getCloseRowDividerColorId() {
+	protected int getBottomDividerColorId() {
 		return nightMode ? R.color.route_info_bottom_view_bg_dark : -1;
 	}
 
