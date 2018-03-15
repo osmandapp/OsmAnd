@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottom_sheet_title_height"
     android:background="?attr/selectableItemBackground"
     android:gravity="center_vertical"
-    android:minHeight="@dimen/bottom_sheet_list_item_height"
+    android:minHeight="@dimen/bottom_sheet_title_height"
     android:paddingLeft="@dimen/content_padding"
     android:paddingRight="@dimen/content_padding">
 
@@ -19,12 +20,13 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textAppearance="@style/TextAppearance.ListItemTitle"
-        osmand:typeface="@string/font_roboto_medium" />
+        osmand:typeface="@string/font_roboto_medium"
+        tools:text="Some Title" />
 
     <net.osmand.plus.widgets.TextViewEx
         android:id="@+id/text_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/bottom_sheet_title_height"
         android:background="?attr/selectableItemBackground"
         android:drawablePadding="2dp"
         android:gravity="center_vertical"
@@ -32,9 +34,10 @@
         android:paddingLeft="@dimen/content_padding"
         android:paddingRight="@dimen/content_padding"
         android:textAllCaps="true"
-        android:textAppearance="@style/TextAppearance.ListItemTitle"
         android:textColor="?attr/color_dialog_buttons"
         android:textSize="@dimen/default_desc_text_size"
-        osmand:typeface="@string/font_roboto_medium" />
+        osmand:typeface="@string/font_roboto_medium"
+        tools:drawableRight="@drawable/ic_action_sort_by_name"
+        tools:text="Some button" />
 
 </LinearLayout>
