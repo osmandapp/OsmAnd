@@ -32,6 +32,7 @@ import java.util.List;
 public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	private static final String USED_ON_MAP_KEY = "used_on_map";
+	private static final int DEFAULT_VALUE = -1;
 
 	protected List<BaseBottomSheetItem> items = new ArrayList<>();
 
@@ -75,7 +76,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		}
 
 		int bottomDividerColorId = getBottomDividerColorId();
-		if (bottomDividerColorId != -1) {
+		if (bottomDividerColorId != DEFAULT_VALUE) {
 			mainView.findViewById(R.id.bottom_row_divider).setBackgroundColor(getResolvedColor(bottomDividerColorId));
 		}
 
@@ -89,10 +90,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		((TextView) mainView.findViewById(R.id.dismiss_button_text)).setText(getDismissButtonTextId());
 
 		int rightBottomButtonTextId = getRightBottomButtonTextId();
-		if (rightBottomButtonTextId != -1) {
+		if (rightBottomButtonTextId != DEFAULT_VALUE) {
 			View buttonsDivider = mainView.findViewById(R.id.bottom_buttons_divider);
 			buttonsDivider.setVisibility(View.VISIBLE);
-			if (bottomDividerColorId != -1) {
+			if (bottomDividerColorId != DEFAULT_VALUE) {
 				buttonsDivider.setBackgroundColor(getResolvedColor(bottomDividerColorId));
 			}
 			View rightButton = mainView.findViewById(R.id.right_bottom_button);
@@ -158,17 +159,15 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 		final int screenHeight = AndroidUtils.getScreenHeight(activity);
 		final int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
-		final int availableHeight = screenHeight - statusBarHeight - AndroidUtils.getNavBarHeight(activity)
-				- AndroidUtils.dpToPx(getContext(), 1) // divider height
-				- getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height); // bottom row height
+		final int contentHeight = getContentHeight(screenHeight - statusBarHeight - AndroidUtils.getNavBarHeight(activity));
 
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
-				final View viewToAdjust = useScrollableItemsContainer() ? mainView.findViewById(R.id.scroll_view) : itemsContainer;
-				if (viewToAdjust.getHeight() > availableHeight) {
-					viewToAdjust.getLayoutParams().height = availableHeight;
-					viewToAdjust.requestLayout();
+				final View contentView = useScrollableItemsContainer() ? mainView.findViewById(R.id.scroll_view) : itemsContainer;
+				if (contentView.getHeight() > contentHeight) {
+					contentView.getLayoutParams().height = contentHeight;
+					contentView.requestLayout();
 				}
 
 				// 8dp is the shadow height
@@ -189,13 +188,28 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		});
 	}
 
+	private int getContentHeight(int availableScreenHeight) {
+		int customHeight = getCustomHeight();
+		int maxHeight = availableScreenHeight
+				- AndroidUtils.dpToPx(getContext(), 1) // divider height
+				- getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
+		if (customHeight != DEFAULT_VALUE && customHeight <= maxHeight) {
+			return customHeight;
+		}
+		return maxHeight;
+	}
+
+	protected int getCustomHeight() {
+		return DEFAULT_VALUE;
+	}
+
 	protected boolean useScrollableItemsContainer() {
 		return true;
 	}
 
 	@ColorRes
 	protected int getBottomDividerColorId() {
-		return -1;
+		return DEFAULT_VALUE;
 	}
 
 	@StringRes
@@ -209,7 +223,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	@StringRes
 	protected int getRightBottomButtonTextId() {
-		return -1;
+		return DEFAULT_VALUE;
 	}
 
 	protected void onRightBottomButtonClick() {
