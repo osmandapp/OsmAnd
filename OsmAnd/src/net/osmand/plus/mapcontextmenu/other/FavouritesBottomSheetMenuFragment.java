@@ -52,7 +52,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		favouritePoints = getMyApplication().getFavorites().getVisibleFavouritePoints();
 		recyclerView = new RecyclerView(getContext());
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+		location = getMyApplication().getLocationProvider().getLastKnownLocation();
 		title = (BottomSheetItemWithTitleAndButton) new BottomSheetItemWithTitleAndButton.Builder()
 				.setButtonIcons(null, getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
 						nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light))
@@ -60,13 +60,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				.setonButtonClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (location == null) {
-							return;
-						}
-						sortFavourites();
 						title.setButtonIcons(null, getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
 								nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light));
 						title.setButtonText(getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name));
+						sortFavourites();
 					}
 				})
 				.setTitle(getString(R.string.favourites))
@@ -98,7 +95,6 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				.setCustomView(recyclerView)
 				.create());
 		if (savedInstanceState != null && savedInstanceState.getBoolean(IS_SORTED)) {
-			location = getMyApplication().getLocationProvider().getLastKnownLocation();
 			sortByDist = savedInstanceState.getBoolean(SORTED_BY_TYPE);
 			sortFavourites();
 		}
@@ -227,38 +223,27 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		return false;
 	}
 
-	@SuppressLint("StaticFieldLeak")
 	private void sortFavourites() {
-		new AsyncTask<Void, Void, Void>() {
+		if (location == null) {
+			return;
+		}
+		final Collator inst = Collator.getInstance();
+		final LatLon latLon = new LatLon(location.getLatitude(), location.getLongitude());
+		Collections.sort(favouritePoints, new Comparator<FavouritePoint>() {
 			@Override
-			protected Void doInBackground(Void... voids) {
-				final Collator inst = Collator.getInstance();
-				Collections.sort(favouritePoints, new Comparator<FavouritePoint>() {
-					@Override
-					public int compare(FavouritePoint lhs, FavouritePoint rhs) {
-						LatLon latLon = new LatLon(location.getLatitude(), location.getLongitude());
-						if (sortByDist) {
-							double ld = MapUtils.getDistance(latLon, lhs.getLatitude(),
-									lhs.getLongitude());
-							double rd = MapUtils.getDistance(latLon, rhs.getLatitude(),
-									rhs.getLongitude());
-							return Double.compare(ld, rd);
-						}
-						return inst.compare(lhs.getName(), rhs.getName());
-					}
-				});
-				sortByDist = !sortByDist;
-				isSorted = true;
-				return null;
-			}
-
-			@Override
-			protected void onPostExecute(Void aVoid) {
-				super.onPostExecute(aVoid);
-				if (adapter != null) {
-					adapter.notifyDataSetChanged();
+			public int compare(FavouritePoint lhs, FavouritePoint rhs) {
+				if (sortByDist) {
+					double ld = MapUtils.getDistance(latLon, lhs.getLatitude(),
+							lhs.getLongitude());
+					double rd = MapUtils.getDistance(latLon, rhs.getLatitude(),
+							rhs.getLongitude());
+					return Double.compare(ld, rd);
 				}
+				return inst.compare(lhs.getName(), rhs.getName());
 			}
-		}.execute();
+		});
+		sortByDist = !sortByDist;
+		isSorted = true;
+		adapter.notifyDataSetChanged();
 	}
 }
