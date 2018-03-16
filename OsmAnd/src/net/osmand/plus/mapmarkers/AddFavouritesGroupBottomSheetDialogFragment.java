@@ -30,6 +30,6 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 		if (!group.visible) {
 			favouritesDbHelper.editFavouriteGroup(group, group.name, group.color, true);
 		}
-		addAndSyncGroup(new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE, group.color));
+		addAndSyncGroup(new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE));
 	}
 }

@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,7 +26,7 @@ import java.util.Set;
 
 public class MapMarkersDbHelper {
 
-	private static final int DB_VERSION = 12;
+	private static final int DB_VERSION = 13;
 	public static final String DB_NAME = "map_markers_db";
 
 	private static final String MARKERS_TABLE_NAME = "map_markers";
@@ -83,19 +84,22 @@ public class MapMarkersDbHelper {
 	private static final String GROUPS_COL_NAME = "group_name";
 	private static final String GROUPS_COL_TYPE = "group_type";
 	private static final String GROUPS_COL_DISABLED = "group_disabled";
+	private static final String GROUPS_COL_CATEGORIES = "group_categories";
 
 	private static final String GROUPS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 			GROUPS_TABLE_NAME + " (" +
 			GROUPS_COL_ID + " TEXT PRIMARY KEY, " +
 			GROUPS_COL_NAME + " TEXT, " +
 			GROUPS_COL_TYPE + " int, " +
-			GROUPS_COL_DISABLED + " int);"; // 1 = true, 0 = false
+			GROUPS_COL_DISABLED + " int, " + // 1 = true, 0 = false
+			GROUPS_COL_CATEGORIES + " TEXT);";
 
 	private static final String GROUPS_TABLE_SELECT = "SELECT " +
 			GROUPS_COL_ID + ", " +
 			GROUPS_COL_NAME + ", " +
 			GROUPS_COL_TYPE + ", " +
-			GROUPS_COL_DISABLED +
+			GROUPS_COL_DISABLED + ", " +
+			GROUPS_COL_CATEGORIES +
 			" FROM " + GROUPS_TABLE_NAME;
 
 	public static final String TAIL_NEXT_VALUE = "tail_next";
@@ -156,6 +160,9 @@ public class MapMarkersDbHelper {
 		if (oldVersion < 12) {
 			db.execSQL("ALTER TABLE " + MARKERS_TABLE_NAME + " ADD " + MARKERS_COL_MAP_OBJECT_NAME + " TEXT");
 		}
+		if (oldVersion < 13) {
+			db.execSQL("ALTER TABLE " + GROUPS_TABLE_NAME + " ADD " + GROUPS_COL_CATEGORIES + " TEXT");
+		}
 	}
 
 	private void saveExistingMarkersToDb() {
@@ -189,11 +196,11 @@ public class MapMarkersDbHelper {
 		}
 	}
 
-	public void addGroup(String id, String name, int type) {
+	public void addGroup(String id, String name, int type, String categories) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				db.execSQL("INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (?, ?, ?, ?)", new Object[]{id, name, type, 0});
+				db.execSQL("INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?)", new Object[]{id, name, type, 0, categories});
 			} finally {
 				db.close();
 			}
@@ -241,8 +248,9 @@ public class MapMarkersDbHelper {
 		String id = query.getString(0);
 		String name = query.getString(1);
 		int type = query.getInt(2);
+		String categories = query.getString(4);
 
-		return new MarkersSyncGroup(id, name, type);
+		return new MarkersSyncGroup(id, name, type, categories == null ? null : Algorithms.decodeStringSet(categories));
 	}
 
 	public void removeMarkersSyncGroup(String id) {
@@ -385,7 +393,7 @@ public class MapMarkersDbHelper {
 						MARKERS_COL_NEXT_KEY + ", " +
 						MARKERS_COL_DISABLED + ", " +
 						MARKERS_COL_SELECTED + ", " +
-				 		MARKERS_COL_MAP_OBJECT_NAME + ") " +
+						MARKERS_COL_MAP_OBJECT_NAME + ") " +
 						"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				new Object[]{marker.id, marker.getLatitude(), marker.getLongitude(), descr, active,
 						currentTime, visited, marker.groupName, marker.groupKey, marker.colorIndex,

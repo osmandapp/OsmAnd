@@ -160,7 +160,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 
 		final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		final MarkersSyncGroup syncGroup =
-				new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE, group.color);
+				new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE);
 		boolean groupSyncedWithMarkers = markersHelper.isGroupSynced(syncGroup.getId());
 
 		if (app.getSettings().USE_MAP_MARKERS.get() && group.points.size() > 0 && !groupSyncedWithMarkers) {

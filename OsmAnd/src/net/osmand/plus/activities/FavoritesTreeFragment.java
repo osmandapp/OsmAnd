@@ -431,7 +431,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				for (Map.Entry<String, Set<FavouritePoint>> entry : favoritesSelected.entrySet()) {
 					FavoriteGroup favGr = helper.getGroup(entry.getKey());
 					MarkersSyncGroup syncGr =
-							new MarkersSyncGroup(favGr.name, favGr.name, MarkersSyncGroup.FAVORITES_TYPE, favGr.color);
+							new MarkersSyncGroup(favGr.name, favGr.name, MarkersSyncGroup.FAVORITES_TYPE);
 					if (entry.getValue().size() == favGr.points.size()) {
 						markersHelper.addMarkersSyncGroup(syncGr);
 						markersHelper.syncGroupAsync(syncGr);

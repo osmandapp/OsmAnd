@@ -31,6 +31,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -222,20 +223,21 @@ public class MapMarkersHelper {
 		private String id;
 		private String name;
 		private int type;
-		private int color;
-
-		public MarkersSyncGroup(@NonNull String id, @NonNull String name, int type, int color) {
-			this.id = id;
-			this.name = name;
-			this.type = type;
-			this.color = color;
-		}
+		private Set<String> wptCategories;
 
 		public MarkersSyncGroup(@NonNull String id, @NonNull String name, int type) {
+			init(id, name, type, null);
+		}
+
+		public MarkersSyncGroup(@NonNull String id, @NonNull String name, int type, @Nullable Set<String> wptCategories) {
+			init(id, name, type, wptCategories);
+		}
+
+		private void init(String id, String name, int type, Set<String> wptCategories) {
 			this.id = id;
 			this.name = name;
 			this.type = type;
-			this.color = -1;
+			this.wptCategories = wptCategories;
 		}
 
 		public String getId() {
@@ -250,12 +252,15 @@ public class MapMarkersHelper {
 			return type;
 		}
 
-		public int getColor() {
-			return color;
+		public Set<String> getWptCategories() {
+			return wptCategories;
 		}
 
-		public void setColor(int color) {
-			this.color = color;
+		public String getWptCategoriesString() {
+			if (wptCategories != null) {
+				return Algorithms.encodeStringSet(wptCategories);
+			}
+			return null;
 		}
 	}
 
@@ -538,9 +543,6 @@ public class MapMarkersHelper {
 					removeActiveMarkersFromGroup(group.getId());
 					return;
 				}
-				if (group.getColor() == -1) {
-					group.setColor(favGroup.color);
-				}
 
 				for (FavouritePoint fp : favGroup.points) {
 					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName(), enabled, fp, null);
@@ -563,9 +565,7 @@ public class MapMarkersHelper {
 				}
 
 				List<WptPt> gpxPoints = new LinkedList<>(gpx.getPoints());
-				int defColor = ContextCompat.getColor(ctx, R.color.marker_red);
 				for (WptPt pt : gpxPoints) {
-					group.setColor(pt.getColor(defColor));
 					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name, enabled, null, pt);
 				}
 
@@ -908,7 +908,7 @@ public class MapMarkersHelper {
 	public void addMarkersSyncGroup(MarkersSyncGroup group) {
 		if (group != null) {
 			if (markersDbHelper.getGroup(group.getId()) == null) {
-				markersDbHelper.addGroup(group.getId(), group.getName(), group.getType());
+				markersDbHelper.addGroup(group.getId(), group.getName(), group.getType(), group.getWptCategoriesString());
 			}
 		}
 	}

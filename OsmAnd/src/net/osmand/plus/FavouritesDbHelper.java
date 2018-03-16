@@ -180,7 +180,7 @@ public class FavouritesDbHelper {
 			sortAll();
 			saveCurrentPointsIntoFile();
 		}
-		context.getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE, group.color));
+		context.getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE));
 
 		return true;
 	}
@@ -275,7 +275,7 @@ public class FavouritesDbHelper {
 		}
 		sortAll();
 		saveCurrentPointsIntoFile();
-		context.getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(category, category, MarkersSyncGroup.FAVORITES_TYPE, p.getColor()));
+		context.getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(category, category, MarkersSyncGroup.FAVORITES_TYPE));
 		return true;
 	}
 
@@ -283,7 +283,7 @@ public class FavouritesDbHelper {
 		p.setLatitude(lat);
 		p.setLongitude(lon);
 		saveCurrentPointsIntoFile();
-		context.getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(p.getCategory(), p.getCategory(), MarkersSyncGroup.FAVORITES_TYPE, p.getColor()));
+		context.getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(p.getCategory(), p.getCategory(), MarkersSyncGroup.FAVORITES_TYPE));
 		return true;
 	}
 
@@ -610,7 +610,7 @@ public class FavouritesDbHelper {
 			for (FavouritePoint p : gr.points) {
 				p.setColor(color);
 			}
-			markersHelper.syncGroupAsync(new MarkersSyncGroup(gr.name, gr.name, MarkersSyncGroup.FAVORITES_TYPE, color));
+			markersHelper.syncGroupAsync(new MarkersSyncGroup(gr.name, gr.name, MarkersSyncGroup.FAVORITES_TYPE));
 		}
 		if (group.visible != visible) {
 			FavoriteGroup gr = flatGroups.get(group.name);
@@ -618,7 +618,7 @@ public class FavouritesDbHelper {
 			for (FavouritePoint p : gr.points) {
 				p.setVisible(visible);
 			}
-			markersHelper.syncGroupAsync(new MarkersSyncGroup(gr.name, gr.name, MarkersSyncGroup.FAVORITES_TYPE, group.color));
+			markersHelper.syncGroupAsync(new MarkersSyncGroup(gr.name, gr.name, MarkersSyncGroup.FAVORITES_TYPE));
 		}
 		if (!group.name.equals(newName)) {
 			FavoriteGroup gr = flatGroups.remove(group.name);
@@ -638,7 +638,7 @@ public class FavouritesDbHelper {
 					renamedGroup.points.add(p);
 				}
 			}
-			MarkersSyncGroup syncGroup = new MarkersSyncGroup(renamedGroup.name, renamedGroup.name, MarkersSyncGroup.FAVORITES_TYPE, group.color);
+			MarkersSyncGroup syncGroup = new MarkersSyncGroup(renamedGroup.name, renamedGroup.name, MarkersSyncGroup.FAVORITES_TYPE);
 			markersHelper.addMarkersSyncGroup(syncGroup);
 			markersHelper.syncGroupAsync(syncGroup);
 		}
