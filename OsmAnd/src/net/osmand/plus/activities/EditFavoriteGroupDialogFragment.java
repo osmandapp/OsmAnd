@@ -189,7 +189,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 					.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							markersHelper.removeMarkersSyncGroup(syncGroup.getId(), true);
+							markersHelper.removeMarkersSyncGroup(syncGroup.getId());
 							dismiss();
 							MapActivity.launchMapActivityMoveToTop(getActivity());
 						}

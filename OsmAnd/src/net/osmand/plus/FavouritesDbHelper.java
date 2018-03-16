@@ -135,7 +135,7 @@ public class FavouritesDbHelper {
 				flatGroups.remove(g.name);
 				favoriteGroups.remove(g);
 				cachedFavoritePoints.removeAll(g.points);
-				context.getMapMarkersHelper().removeMarkersSyncGroup(g.name, true);
+				context.getMapMarkersHelper().removeMarkersSyncGroup(g.name);
 			}
 		}
 		saveCurrentPointsIntoFile();
@@ -352,7 +352,7 @@ public class FavouritesDbHelper {
 		if (remove) {
 			flatGroups.remove(group.name);
 			saveCurrentPointsIntoFile();
-			context.getMapMarkersHelper().removeMarkersSyncGroup(group.name, true);
+			context.getMapMarkersHelper().removeMarkersSyncGroup(group.name);
 			return true;
 		}
 		return false;
@@ -622,7 +622,7 @@ public class FavouritesDbHelper {
 		}
 		if (!group.name.equals(newName)) {
 			FavoriteGroup gr = flatGroups.remove(group.name);
-			markersHelper.removeMarkersSyncGroup(group.name, true);
+			markersHelper.removeMarkersSyncGroup(group.name);
 			gr.name = newName;
 			FavoriteGroup renamedGroup = flatGroups.get(gr.name);
 			boolean existing = renamedGroup != null;
