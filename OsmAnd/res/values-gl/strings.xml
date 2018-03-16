@@ -2718,4 +2718,11 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="empty_state_markers_history_desc">Os marcadores marcados como pasados aparecen nesta pantalla.</string>
     <string name="tap_on_map_to_hide_interface_descr">Un toque no mapa alterna entre os botóns de control e os trebellos.</string>
     <string name="mark_passed">Marcador pasado</string>
+    <string name="gpx_track">Ruta</string>
+    <string name="lang_kab">Cabila</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Cor por afiliación da rede</string>
+    <string name="average">Media</string>
+    <string name="of">%1$d de %2$d</string>
+    <string name="ascent_descent">"Subida/Descenso "</string>
+    <string name="max_min">Máx/Mín</string>
     </resources>

@@ -158,9 +158,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 		final int screenHeight = AndroidUtils.getScreenHeight(activity);
 		final int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
-		final int availableHeight = screenHeight - statusBarHeight - AndroidUtils.getNavBarHeight(activity)
-				- AndroidUtils.dpToPx(getContext(), 1) // divider height
-				- getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height); // bottom row height
+		final int availableHeight = getAvailableHeight(screenHeight, statusBarHeight);
 
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
@@ -187,6 +185,18 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				}
 			}
 		});
+	}
+
+	private int getAvailableHeight(int screenHeight, int statusBarHeight) {
+		int maxHeight = getMaximumHeight();
+		return maxHeight != -1 ? maxHeight
+				: screenHeight - statusBarHeight - AndroidUtils.getNavBarHeight(getContext())
+				- AndroidUtils.dpToPx(getContext(), 1) // divider height
+				- getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
+	}
+
+	protected int getMaximumHeight() {
+		return -1;
 	}
 
 	protected boolean useScrollableItemsContainer() {
