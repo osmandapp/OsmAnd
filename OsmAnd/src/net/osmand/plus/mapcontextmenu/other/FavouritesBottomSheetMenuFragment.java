@@ -5,10 +5,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -285,6 +285,17 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 
 	@Override
 	protected int getMaximumHeight() {
-		return (int) 300 * getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
+		final int maxHeight = AndroidUtils.dpToPx(getContext(), 300);
+		final int screenHeight = AndroidUtils.getScreenHeight(getActivity());
+		final int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
+		final int availableHeight = screenHeight - statusBarHeight - AndroidUtils.getNavBarHeight(getContext())
+				- AndroidUtils.dpToPx(getContext(), 1) // divider height
+				- getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
+
+		if (availableHeight < maxHeight) {
+			return availableHeight;
+		} else {
+			return maxHeight;
+		}
 	}
 }
