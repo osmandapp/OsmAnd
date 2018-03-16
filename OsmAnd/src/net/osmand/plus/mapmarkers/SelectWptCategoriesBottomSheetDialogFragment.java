@@ -2,13 +2,19 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -18,17 +24,25 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = "SelectWptCategoriesBottomSheetDialogFragment";
 	public static final String GPX_FILE_PATH_KEY = "gpx_file_path";
 
+	private GPXFile gpxFile;
+
+	private Set<String> selectedCategories = new HashSet<>();
+	private List<BottomSheetItemWithCompoundButton> categoryItems = new ArrayList<>();
+
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		GPXFile gpxFile = getGpxFile();
+		gpxFile = getGpxFile();
 		if (gpxFile == null) {
 			return;
 		}
@@ -46,7 +60,11 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						selectAllItem[0].setChecked(!selectAllItem[0].isChecked());
+						boolean checked = !selectAllItem[0].isChecked();
+						selectAllItem[0].setChecked(checked);
+						for (BottomSheetItemWithCompoundButton item : categoryItems) {
+							item.setChecked(checked);
+						}
 					}
 				})
 				.create();
@@ -59,8 +77,18 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		for (String category : pointsByCategories.keySet()) {
 			final BottomSheetItemWithCompoundButton[] categoryItem = new BottomSheetItemWithCompoundButton[1];
 			categoryItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+					.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+							if (isChecked) {
+								selectedCategories.add((String) categoryItem[0].getTag());
+							} else {
+								selectedCategories.remove((String) categoryItem[0].getTag());
+							}
+						}
+					})
 					.setDescription(String.valueOf(pointsByCategories.get(category).size()))
-					.setIcon(getContentIcon(R.drawable.ic_action_folder)) // todo
+					.setIcon(getContentIcon(R.drawable.ic_action_folder))
 					.setTitle(category.equals("") ? getString(R.string.waypoints) : category)
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)
 					.setTag(category)
@@ -68,11 +96,12 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 						@Override
 						public void onClick(View v) {
 							categoryItem[0].setChecked(!categoryItem[0].isChecked());
-							Toast.makeText(getContext(), (String) v.getTag(), Toast.LENGTH_SHORT).show();
+							selectAllItem[0].setChecked(isAllChecked());
 						}
 					})
 					.create();
 			items.add(categoryItem[0]);
+			categoryItems.add(categoryItem[0]);
 		}
 	}
 
@@ -83,7 +112,41 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		Toast.makeText(getContext(), "import", Toast.LENGTH_SHORT).show();
+		OsmandApplication app = getMyApplication();
+		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
+		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
+
+		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.path);
+		if (selectedGpxFile == null) {
+			gpxSelectionHelper.selectGpxFile(gpxFile, true, false, false);
+		}
+
+		MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpxFile.path,
+				AndroidUtils.trimExtension(new File(gpxFile.path).getName()),
+				MarkersSyncGroup.GPX_TYPE,
+				selectedCategories);
+
+		mapMarkersHelper.addMarkersSyncGroup(syncGroup);
+		mapMarkersHelper.syncGroupAsync(syncGroup, new MapMarkersHelper.OnGroupSyncedListener() {
+			@Override
+			public void onSyncDone() {
+				Fragment parent = getParentFragment();
+				if (parent instanceof MapMarkersGroupsFragment) {
+					((MapMarkersGroupsFragment) parent).updateAdapter();
+				}
+			}
+		});
+
+		dismiss();
+	}
+
+	private boolean isAllChecked() {
+		for (BottomSheetItemWithCompoundButton item : categoryItems) {
+			if (!item.isChecked()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private String getGpxName(GPXFile gpxFile) {

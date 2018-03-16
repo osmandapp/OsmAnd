@@ -912,6 +912,8 @@ public class MapMarkersHelper {
 		if (group != null) {
 			if (markersDbHelper.getGroup(group.getId()) == null) {
 				markersDbHelper.addGroup(group.getId(), group.getName(), group.getType(), group.getWptCategoriesString());
+			} else {
+				markersDbHelper.updateSyncGroupCategories(group.getId(), group.getWptCategoriesString());
 			}
 		}
 	}

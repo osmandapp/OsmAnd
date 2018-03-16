@@ -294,6 +294,19 @@ public class MapMarkersDbHelper {
 		}
 	}
 
+	public void updateSyncGroupCategories(String id, String categories) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				db.execSQL("UPDATE " + GROUPS_TABLE_NAME +
+						" SET " + GROUPS_COL_CATEGORIES + " = ? " +
+						"WHERE " + GROUPS_COL_ID + " = ?", new Object[]{categories, id});
+			} finally {
+				db.close();
+			}
+		}
+	}
+
 	public boolean isGroupDisabled(String id) {
 		boolean disabled = false;
 		SQLiteConnection db = openConnection(true);

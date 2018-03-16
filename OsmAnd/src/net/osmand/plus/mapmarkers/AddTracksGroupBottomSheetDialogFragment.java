@@ -76,7 +76,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		}
 	}
 
-	public static MarkersSyncGroup createMapMarkersSyncGroup(OsmandApplication app, GpxDataItem gpxDataItem) {
+	private MarkersSyncGroup createMapMarkersSyncGroup(OsmandApplication app, GpxDataItem gpxDataItem) {
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		File gpx = gpxDataItem.getFile();
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpx.getAbsolutePath());
