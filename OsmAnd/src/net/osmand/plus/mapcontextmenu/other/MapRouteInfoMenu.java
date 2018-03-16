@@ -480,7 +480,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		args.putBoolean(FavouritesBottomSheetMenuFragment.INTERMEDIATE, intermediate);
 		fragment.setArguments(args);
 		fragment.show(fragmentManager, FavouritesBottomSheetMenuFragment.TAG);
-		setupSpinners(target, intermediate);
 	}
 
 	public void setupSpinners(final boolean target, final boolean intermediate) {

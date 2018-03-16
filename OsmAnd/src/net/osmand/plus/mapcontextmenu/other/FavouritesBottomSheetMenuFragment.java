@@ -45,10 +45,18 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private boolean isSorted = false;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
+	private boolean target;
+	private boolean intermediate;
 	private BottomSheetItemWithTitleAndButton title;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
+		Bundle args = getArguments();
+		if (args != null) {
+			target = args.getBoolean(TARGET);
+			intermediate = args.getBoolean(INTERMEDIATE);
+		}
+
 		favouritePoints = getMyApplication().getFavorites().getVisibleFavouritePoints();
 		recyclerView = new RecyclerView(getContext());
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -101,9 +109,6 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	}
 
 	private void selectFavorite(FavouritePoint point) {
-		Bundle args = getArguments();
-		boolean target = args.getBoolean(TARGET);
-		boolean intermediate = args.getBoolean(INTERMEDIATE);
 		TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
 		LatLon ll = new LatLon(point.getLatitude(), point.getLongitude());
 		if (intermediate) {
@@ -113,19 +118,34 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		} else {
 			targetPointsHelper.setStartPoint(ll, true, point.getPointDescription());
 		}
+		MapRouteInfoMenu routeMenu = getMapRouteInfoMenu();
+		if (routeMenu != null) {
+			setupMapRouteInfoMenuSpinners(routeMenu);
+			updateMapRouteInfoMenuFromIcon(routeMenu);
+		}
+		dismiss();
+	}
 
+	private void setupMapRouteInfoMenuSpinners(MapRouteInfoMenu routeMenu) {
+		if (routeMenu != null) {
+			routeMenu.setupSpinners(target, intermediate);
+		}
+	}
+
+	private void updateMapRouteInfoMenuFromIcon(MapRouteInfoMenu routeMenu) {
+		if (!intermediate) {
+			routeMenu.updateFromIcon();
+		}
+	}
+
+	private MapRouteInfoMenu getMapRouteInfoMenu() {
 		Activity activity = getActivity();
 		if (activity instanceof MapActivity) {
 			MapActivity map = ((MapActivity) activity);
-			MapRouteInfoMenu routeMenu = map.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
-			routeMenu.setupSpinners(target, intermediate);
-			if (!intermediate) {
-				routeMenu.updateFromIcon();
-			}
+			return map.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
 		} else {
-			return;
+			return null;
 		}
-		dismiss();
 	}
 
 	@Override
@@ -139,6 +159,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	public void onPause() {
 		super.onPause();
 		stopLocationUpdate();
+		setupMapRouteInfoMenuSpinners(getMapRouteInfoMenu());
 	}
 
 	@Override
