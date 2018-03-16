@@ -59,12 +59,12 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 				favouritesViewHolder.description.setText(favouritePoint.getCategory());
 			}
 			Location myloc = app.getLocationProvider().getLastKnownLocation();
+			favouritesViewHolder.favouriteImage.setImageDrawable(FavoriteImageDrawable.getOrCreate(context, favouritePoint.getColor(), false));
 			if (myloc == null) {
 				return;
 			}
 			float dist = (float) MapUtils.getDistance(favouritePoint.getLatitude(), favouritePoint.getLongitude(), myloc.getLatitude(), myloc.getLongitude());
 			favouritesViewHolder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, app));
-			favouritesViewHolder.favouriteImage.setImageDrawable(FavoriteImageDrawable.getOrCreate(context, favouritePoint.getColor(), false));
 			favouritesViewHolder.arrowImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_direction_arrow));
 			DashLocationFragment.updateLocationView(useCenter, location, heading, favouritesViewHolder.arrowImage,
 					favouritesViewHolder.distance, favouritePoint.getLatitude(), favouritePoint.getLongitude(),

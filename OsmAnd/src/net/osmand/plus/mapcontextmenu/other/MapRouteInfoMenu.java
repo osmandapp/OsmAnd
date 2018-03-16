@@ -387,6 +387,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		final TargetPointsHelper targets = getTargets();
 		final Spinner fromSpinner = setupFromSpinner(parentView);
 		fromSpinner.setClickable(false);
+//		fromSpinner.setSelected(false);
+//		fromSpinner.setSelection(0, true);
 		final View fromLayout = parentView.findViewById(R.id.FromLayout);
 		fromSpinner.setOnTouchListener(new View.OnTouchListener() {
 			@Override
