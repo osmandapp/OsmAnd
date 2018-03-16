@@ -1,8 +1,7 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.AsyncTask;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -62,15 +61,13 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		location = getMyApplication().getLocationProvider().getLastKnownLocation();
 		title = (BottomSheetItemWithTitleAndButton) new BottomSheetItemWithTitleAndButton.Builder()
-				.setButtonIcons(null, getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
-						nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light))
-				.setButtonTitle(getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name))
+				.setButtonIcons(null, getIconForButton())
+				.setButtonTitle(getTextForButton())
 				.setonButtonClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						title.setButtonIcons(null, getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
-								nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light));
-						title.setButtonText(getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name));
+						title.setButtonIcons(null, getIconForButton());
+						title.setButtonText(getTextForButton());
 						sortFavourites();
 					}
 				})
@@ -106,6 +103,15 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 			sortByDist = savedInstanceState.getBoolean(SORTED_BY_TYPE);
 			sortFavourites();
 		}
+	}
+
+	private Drawable getIconForButton() {
+		return getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
+				nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light);
+	}
+
+	private String getTextForButton() {
+		return getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name);
 	}
 
 	private void selectFavorite(FavouritePoint point) {
