@@ -8,6 +8,7 @@ import android.support.v4.widget.CompoundButtonCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -16,6 +17,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 
 	private boolean checked;
 	private ColorStateList buttonTintList;
+	private OnCheckedChangeListener onCheckedChangeListener;
 
 	private CompoundButton compoundButton;
 
@@ -35,7 +37,8 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 											 CharSequence description,
 											 @ColorRes int descriptionColorId,
 											 boolean checked,
-											 ColorStateList buttonTintList) {
+											 ColorStateList buttonTintList,
+											 OnCheckedChangeListener onCheckedChangeListener) {
 		super(customView,
 				layoutId,
 				tag,
@@ -49,6 +52,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 				descriptionColorId);
 		this.checked = checked;
 		this.buttonTintList = buttonTintList;
+		this.onCheckedChangeListener = onCheckedChangeListener;
 	}
 
 	public void setChecked(boolean checked) {
@@ -62,12 +66,14 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 		compoundButton = (CompoundButton) view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(checked);
 		CompoundButtonCompat.setButtonTintList(compoundButton, buttonTintList);
+		compoundButton.setOnCheckedChangeListener(onCheckedChangeListener);
 	}
 
 	public static class Builder extends BottomSheetItemWithDescription.Builder {
 
 		protected boolean checked;
 		protected ColorStateList buttonTintList;
+		protected OnCheckedChangeListener onCheckedChangeListener;
 
 		public Builder setChecked(boolean checked) {
 			this.checked = checked;
@@ -76,6 +82,11 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 
 		public Builder setButtonTintList(ColorStateList buttonTintList) {
 			this.buttonTintList = buttonTintList;
+			return this;
+		}
+
+		public Builder setOnCheckedChangeListener(OnCheckedChangeListener onCheckedChangeListener) {
+			this.onCheckedChangeListener = onCheckedChangeListener;
 			return this;
 		}
 
@@ -92,7 +103,8 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 					description,
 					descriptionColorId,
 					checked,
-					buttonTintList);
+					buttonTintList,
+					onCheckedChangeListener);
 		}
 	}
 }
