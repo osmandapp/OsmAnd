@@ -564,9 +564,12 @@ public class MapMarkersHelper {
 					return;
 				}
 
+				boolean addAll = group.wptCategories == null || group.wptCategories.isEmpty();
 				List<WptPt> gpxPoints = new LinkedList<>(gpx.getPoints());
 				for (WptPt pt : gpxPoints) {
-					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name, enabled, null, pt);
+					if (addAll || group.wptCategories.contains(pt.category)) {
+						addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name, enabled, null, pt);
+					}
 				}
 
 				removeOldMarkersIfNeeded(dbMarkers);
