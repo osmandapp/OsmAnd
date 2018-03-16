@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
@@ -280,5 +281,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		isSorted = true;
 		adapter.notifyDataSetChanged();
 		recyclerView.getLayoutManager().scrollToPosition(0);
+	}
+
+	@Override
+	protected int getMaximumHeight() {
+		return (int) 300 * getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
 	}
 }
