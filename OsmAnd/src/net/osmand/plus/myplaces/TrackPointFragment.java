@@ -49,8 +49,6 @@ import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.activities.IntermediatePointsDialog;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
@@ -71,7 +69,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -378,7 +375,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	}
 
 	private void selectMapMarkers() {
-		enterMapMarkersMode();
+		if (getGpxDataItem() != null) {
+			addMapMarkersSyncGroup();
+		}
 	}
 
 	private void selectFavorites() {
@@ -580,60 +579,13 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	private void syncGpx(GPXFile gpxFile) {
 		File gpx = new File(gpxFile.path);
 		if (gpx.exists()) {
-			app.getMapMarkersHelper().syncGroupAsync(new MarkersSyncGroup(gpx.getAbsolutePath(),
-					AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE));
-		}
-	}
-
-	private void enterMapMarkersMode() {
-		if (getSettings().USE_MAP_MARKERS.get()) {
-			if (getGpxDataItem() != null) {
-				addMapMarkersSyncGroup();
-			}
-		} else {
-			actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
-
-				@Override
-				public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-					enableSelectionMode(true);
-					createMenuItem(menu, SELECT_MAP_MARKERS_ACTION_MODE_ID, R.string.select_destination_and_intermediate_points,
-							R.drawable.ic_action_intermediate, R.drawable.ic_action_intermediate,
-							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-					selectedItems.clear();
-					selectedGroups.clear();
-					adapter.notifyDataSetInvalidated();
-					updateSelectionMode(mode);
-					return true;
-				}
-
-				@Override
-				public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-					return false;
-				}
-
-				@Override
-				public void onDestroyActionMode(ActionMode mode) {
-					enableSelectionMode(false);
-					adapter.notifyDataSetInvalidated();
-				}
-
-				@Override
-				public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-					if (item.getItemId() == SELECT_MAP_MARKERS_ACTION_MODE_ID) {
-						mode.finish();
-						selectMapMarkersImpl();
-					}
-					return true;
-				}
-			});
+			app.getMapMarkersHelper().syncGroupAsync(MapMarkersHelper.createGroup(gpx));
 		}
 	}
 
 	private void addMapMarkersSyncGroup() {
+		final MarkersSyncGroup syncGroup = MapMarkersHelper.createGroup(getGpxDataItem().getFile());
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-		File gpx = getGpxDataItem().getFile();
-		final MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(),
-				AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
 		markersHelper.addMarkersSyncGroup(syncGroup);
 		markersHelper.syncGroupAsync(syncGroup);
 		GPXFile gpxFile = getTrackActivity().getGpx();
@@ -667,26 +619,6 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 	private void updateMenuFabVisibility(boolean visible) {
 		menuFab.setVisibility(visible ? View.VISIBLE : View.GONE);
-	}
-
-	private void selectMapMarkersImpl() {
-		if (getSelectedItemsCount() > 0) {
-			MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-			List<LatLon> points = new ArrayList<>();
-			List<PointDescription> names = new ArrayList<>();
-			for (Map.Entry<GpxDisplayItemType, Set<GpxDisplayItem>> entry : selectedItems.entrySet()) {
-				if (entry.getKey() != GpxDisplayItemType.TRACK_POINTS) {
-					for (GpxDisplayItem i : entry.getValue()) {
-						if (i.locationStart != null) {
-							points.add(new LatLon(i.locationStart.lat, i.locationStart.lon));
-							names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, i.name));
-						}
-					}
-					markersHelper.addMapMarkers(points, names, null);
-				}
-			}
-			MapActivity.launchMapActivityMoveToTop(getActivity());
-		}
 	}
 
 	private void enterFavoritesMode() {
