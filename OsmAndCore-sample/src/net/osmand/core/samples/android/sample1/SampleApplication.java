@@ -212,6 +212,24 @@ public class SampleApplication extends Application {
 			public String getTranslation(String keyName) {
 				return null;
 			}
+
+
+			@Override
+			public String getEnTranslation(AbstractPoiType type) {
+				if(type.getBaseLangType() != null) {
+					return getEnTranslation(type.getBaseLangType()) +  " (" + getLangTranslation(type.getLang()).toLowerCase() +")";
+				}
+				return getEnTranslation(type.getIconKeyName());
+			}
+
+
+			@Override
+			public String getEnTranslation(String keyName) {
+				return Algorithms.capitalizeFirstLetter(
+						keyName.replace('_', ' '));
+
+			}
+
 		});
 
 		searchUICore.initSearchUICore();
