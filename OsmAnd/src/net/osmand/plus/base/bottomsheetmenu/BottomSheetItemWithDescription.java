@@ -48,10 +48,12 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
 		super.inflate(app, container, nightMode);
 			descriptionTv = (TextView) view.findViewById(R.id.description);
+		if (descriptionTv != null) {
 			descriptionTv.setText(description);
 			if (descriptionColorId != INVALID_ID) {
 				descriptionTv.setTextColor(ContextCompat.getColor(app, descriptionColorId));
 			}
+		}
 	}
 
 	public static class Builder extends SimpleBottomSheetItem.Builder {
