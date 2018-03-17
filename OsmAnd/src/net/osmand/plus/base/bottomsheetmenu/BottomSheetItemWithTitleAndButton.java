@@ -12,7 +12,7 @@ import android.widget.TextView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
-public class BottomSheetItemWithTitleAndButton extends SimpleBottomSheetItem {
+public class BottomSheetItemWithTitleAndButton extends BottomSheetItemWithDescription {
 
 	private View.OnClickListener onButtonClickListener;
 	private Drawable leftCompoundDrawable;
@@ -32,12 +32,14 @@ public class BottomSheetItemWithTitleAndButton extends SimpleBottomSheetItem {
 	                                         Drawable icon,
 	                                         String title,
 	                                         @ColorRes int titleColorId,
+	                                         CharSequence description,
+	                                         @ColorRes int descriptionColorId,
 	                                         String buttonTitle,
 	                                         View.OnClickListener onButtonClickListener,
 	                                         Drawable leftCompoundDrawable,
 	                                         Drawable rightCompoundDrawable,
 	                                         @ColorRes int buttonTextColor) {
-		super(customView, layoutId, tag, disabled, onClickListener, position, icon, title, titleColorId);
+		super(customView, layoutId, tag, disabled, onClickListener, position, icon, title, titleColorId, description, descriptionColorId);
 		this.buttonTitle = buttonTitle;
 		this.onButtonClickListener = onButtonClickListener;
 		this.leftCompoundDrawable = leftCompoundDrawable;
@@ -68,7 +70,7 @@ public class BottomSheetItemWithTitleAndButton extends SimpleBottomSheetItem {
 		}
 	}
 
-	public static class Builder extends SimpleBottomSheetItem.Builder {
+	public static class Builder extends BottomSheetItemWithDescription.Builder {
 
 		protected String buttonTitle;
 		protected View.OnClickListener onButtonClickListener;
@@ -108,6 +110,8 @@ public class BottomSheetItemWithTitleAndButton extends SimpleBottomSheetItem {
 					icon,
 					title,
 					titleColorId,
+					description,
+					descriptionColorId,
 					buttonTitle,
 					onButtonClickListener,
 					leftCompoundDrawable,

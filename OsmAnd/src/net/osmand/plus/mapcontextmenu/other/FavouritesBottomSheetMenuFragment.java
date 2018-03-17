@@ -43,20 +43,22 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private List<FavouritePoint> favouritePoints;
 	private FavouritesAdapter adapter;
 	private RecyclerView recyclerView;
-	private boolean sortByDist = false;
+	private boolean sortByDist = true;
 	private boolean isSorted = false;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
 	private boolean target;
 	private boolean intermediate;
-	private BottomSheetItemWithTitleAndButton title;
 
 	@Override
-	public void createMenuItems(Bundle savedInstanceState) {
+	public void createMenuItems(final Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		if (args != null) {
 			target = args.getBoolean(TARGET);
 			intermediate = args.getBoolean(INTERMEDIATE);
+		}
+		if (savedInstanceState != null && savedInstanceState.getBoolean(IS_SORTED)) {
+			sortByDist = savedInstanceState.getBoolean(SORTED_BY_TYPE);
 		}
 		favouritePoints = getMyApplication().getFavorites().getVisibleFavouritePoints();
 		recyclerView = new RecyclerView(getContext());
@@ -69,25 +71,25 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 			latLon = new LatLon(location.getLatitude(), location.getLongitude());
 		}
 		adapter = new FavouritesAdapter(getContext(), favouritePoints);
-		if (savedInstanceState != null && savedInstanceState.getBoolean(IS_SORTED)) {
-			sortByDist = savedInstanceState.getBoolean(SORTED_BY_TYPE);
-			sortFavourites();
-		}
-		title = (BottomSheetItemWithTitleAndButton) new BottomSheetItemWithTitleAndButton.Builder()
+		sortFavourites();
+		final BottomSheetItemWithTitleAndButton[] title = new BottomSheetItemWithTitleAndButton[1];
+		title[0] = (BottomSheetItemWithTitleAndButton) new BottomSheetItemWithTitleAndButton.Builder()
 				.setButtonIcons(null, getIconForButton())
-				.setButtonTitle(getTextForButton())
+				.setButtonTitle(getTextForButton(sortByDist))
 				.setonButtonClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						sortFavourites();
-						title.setButtonIcons(null, getIconForButton());
-						title.setButtonText(getTextForButton());
+						title[0].setButtonIcons(null, getIconForButton());
+						title[0].setButtonText(getTextForButton(sortByDist));
+						title[0].setDescription(getTextForButton(!sortByDist));
 					}
 				})
+				.setDescription(getTextForButton(!sortByDist))
 				.setTitle(getString(R.string.favourites))
 				.setLayoutId(R.layout.bottom_sheet_item_with_title_and_button)
 				.create();
-		items.add(title);
+		items.add(title[0]);
 
 		adapter.setItemClickListener(new View.OnClickListener() {
 			@Override
@@ -114,10 +116,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 
 	private Drawable getIconForButton() {
 		return getIcon(sortByDist ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
-				nightMode ? R.color.route_info_go_btn_inking_dark : R.color.dash_search_icon_light);
+				nightMode ? R.color.multi_selection_menu_close_btn_dark : R.color.multi_selection_menu_close_btn_light);
 	}
 
-	private String getTextForButton() {
+	private String getTextForButton(boolean sortByDist) {
 		return getString(sortByDist ? R.string.sort_by_distance : R.string.sort_by_name);
 	}
 
@@ -284,18 +286,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	}
 
 	@Override
-	protected int getMaximumHeight() {
-		final int maxHeight = AndroidUtils.dpToPx(getContext(), 300);
-		final int screenHeight = AndroidUtils.getScreenHeight(getActivity());
-		final int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
-		final int availableHeight = screenHeight - statusBarHeight - AndroidUtils.getNavBarHeight(getContext())
-				- AndroidUtils.dpToPx(getContext(), 1) // divider height
-				- getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
-
-		if (availableHeight < maxHeight) {
-			return availableHeight;
-		} else {
-			return maxHeight;
-		}
+	protected int getCustomHeight() {
+		return AndroidUtils.dpToPx(getContext(), 300);
 	}
 }

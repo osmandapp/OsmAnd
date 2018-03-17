@@ -17,6 +17,8 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 	@ColorRes
 	private int descriptionColorId = INVALID_ID;
 
+	private TextView descriptionTv;
+
 	public BottomSheetItemWithDescription(View customView,
 										  @LayoutRes int layoutId,
 										  Object tag,
@@ -37,16 +39,19 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 
 	}
 
+	public void setDescription(CharSequence description) {
+		this.description = description;
+		descriptionTv.setText(description);
+	}
+
 	@Override
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
 		super.inflate(app, container, nightMode);
-		if (description != null) {
-			TextView descriptionTv = (TextView) view.findViewById(R.id.description);
+			descriptionTv = (TextView) view.findViewById(R.id.description);
 			descriptionTv.setText(description);
 			if (descriptionColorId != INVALID_ID) {
 				descriptionTv.setTextColor(ContextCompat.getColor(app, descriptionColorId));
 			}
-		}
 	}
 
 	public static class Builder extends SimpleBottomSheetItem.Builder {
