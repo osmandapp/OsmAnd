@@ -41,7 +41,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -58,7 +57,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -347,13 +345,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 					R.drawable.ic_action_plus, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark,
 					R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			if (getSettings().USE_MAP_MARKERS.get()) {
-				createMenuItem(menu, SELECT_MAP_MARKERS_ID, R.string.select_map_markers, R.drawable.ic_action_flag_dark,
-						R.drawable.ic_action_flag_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			} else {
-				createMenuItem(menu, SELECT_MAP_MARKERS_ID, R.string.select_destination_and_intermediate_points, R.drawable.ic_action_intermediate,
-						R.drawable.ic_action_intermediate, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			}
+			createMenuItem(menu, SELECT_MAP_MARKERS_ID, R.string.select_map_markers, R.drawable.ic_action_flag_dark,
+					R.drawable.ic_action_flag_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, DELETE_ID, R.string.shared_string_delete, R.drawable.ic_action_delete_dark,
 					R.drawable.ic_action_delete_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 //			createMenuItem(menu, EXPORT_ID, R.string.shared_string_export, R.drawable.ic_action_gsave_light,
@@ -383,15 +376,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				enableSelectionMode(true);
-				if (getSettings().USE_MAP_MARKERS.get()) {
-					createMenuItem(menu, SELECT_MAP_MARKERS_ACTION_MODE_ID, R.string.select_map_markers,
-							R.drawable.ic_action_flag_dark, R.drawable.ic_action_flag_dark,
-							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-				} else {
-					createMenuItem(menu, SELECT_MAP_MARKERS_ACTION_MODE_ID, R.string.select_destination_and_intermediate_points,
-							R.drawable.ic_action_intermediate, R.drawable.ic_action_intermediate,
-							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-				}
+				createMenuItem(menu, SELECT_MAP_MARKERS_ACTION_MODE_ID, R.string.select_map_markers,
+						R.drawable.ic_action_flag_dark, R.drawable.ic_action_flag_dark,
+						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				favoritesSelected.clear();
 				groupsToDelete.clear();
 				favouritesAdapter.notifyDataSetInvalidated();

@@ -185,10 +185,6 @@ public class MapMarkersWidgetsFactory {
 	}
 
 	public void updateInfo(LatLon customLocation, int zoom) {
-		if (!map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
-			return;
-		}
-
 		if (customLocation != null) {
 			loc = customLocation;
 		} else {

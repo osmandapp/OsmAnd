@@ -321,26 +321,24 @@ public class MapWidgetRegistry {
 		if (mode != ApplicationMode.DEFAULT) {
 			addControlId(map, cm, R.string.map_widget_top_text, settings.SHOW_STREET_NAME);
 		}
-		if (settings.USE_MAP_MARKERS.get()) {
-			cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, map)
-					.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map))
-					.setListener(new ContextMenuAdapter.ItemClickListener() {
-						@Override
-						public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int position, boolean isChecked, int[] viewCoordinates) {
-							DirectionIndicationDialogFragment fragment = new DirectionIndicationDialogFragment();
-							fragment.setListener(new DirectionIndicationDialogFragment.DirectionIndicationFragmentListener() {
-								@Override
-								public void onMapMarkersModeChanged(boolean showDirectionEnabled) {
-									updateMapMarkersMode(map);
-									cm.getItem(position).setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map));
-									adapter.notifyDataSetChanged();
-								}
-							});
-							fragment.show(map.getSupportFragmentManager(), DirectionIndicationDialogFragment.TAG);
-							return false;
-						}
-					}).setLayout(R.layout.list_item_text_button).createItem());
-		}
+		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, map)
+				.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map))
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int position, boolean isChecked, int[] viewCoordinates) {
+						DirectionIndicationDialogFragment fragment = new DirectionIndicationDialogFragment();
+						fragment.setListener(new DirectionIndicationDialogFragment.DirectionIndicationFragmentListener() {
+							@Override
+							public void onMapMarkersModeChanged(boolean showDirectionEnabled) {
+								updateMapMarkersMode(map);
+								cm.getItem(position).setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map));
+								adapter.notifyDataSetChanged();
+							}
+						});
+						fragment.show(map.getSupportFragmentManager(), DirectionIndicationDialogFragment.TAG);
+						return false;
+					}
+				}).setLayout(R.layout.list_item_text_button).createItem());
 	}
 
 	public void updateMapMarkersMode(MapActivity mapActivity) {
