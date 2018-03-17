@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 <string name="nothing_found">Heç nə tapılmadı :(</string>
     <string name="restart_search">Axtarışı yenidən başlat</string>
     <string name="change_color">Rəngi dəyiş</string>
@@ -1089,7 +1090,7 @@
     <string name="settings_direction_style_descr">Hərəkət zamanı nisbi istiqamətləri ifadə etmək üçün stil seçin.</string>
     <string name="accessibility_preferences_descr">Xüsusi imkanlarla əlaqəli seçimlər.</string>
     <string name="rendering_out_of_memory">Seçilən sahəni göstərmək üçün kifayət qədər proses yaddaşı yoxdur</string>
-    <string name="free_version_message">Bu pulsuz OsmAnd versiyası %1$s endirmə (xəritələr əlavə etmək və ya yenilmək üçün) ilə məhdudlaşır və oflayn Vikipediya məqalələrini dəstəkləmir.</string>
+    <string name="free_version_message">Bu pulsuz OsmAnd versiyası %1$s endirmə (xəritələr əlavə etmə və ya yenilmə) ilə məhdudlaşır və oflayn Vikipediya məqalələrini dəstəkləmir.</string>
     <string name="index_name_other">Ümumdünya və mövzu xəritələri</string>
     <string name="index_name_wiki">Ümumdünya Vikipediya POI-ləri</string>
     <string name="shared_string_release">Buraxılış</string>
@@ -2103,4 +2104,7 @@
     <string name="rendering_value_disabled_name">Qeyri-aktiv</string>
     <string name="daynight_mode_auto">Günəş çıxır/batır</string>
     <string name="group_deleted">Qrup silindi</string>
+    <string name="clear_all_intermediates">Bütün ara nöqtələri təmizlə</string>
+    <string name="av_widget_action_descr">Standart widget fəaliyyəti seçin.</string>
+    <string name="av_widget_action">Standart widget fəaliyyəti</string>
     </resources>

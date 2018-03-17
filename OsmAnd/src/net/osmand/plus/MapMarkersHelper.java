@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -58,8 +57,8 @@ public class MapMarkersHelper {
 
 	private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-	private List<MapMarker> mapMarkers = new LinkedList<>();
-	private List<MapMarker> mapMarkersHistory = new LinkedList<>();
+	private List<MapMarker> mapMarkers = new ArrayList<>();
+	private List<MapMarker> mapMarkersHistory = new ArrayList<>();
 	private List<MapMarkersGroup> mapMarkersGroups = new ArrayList<>();
 
 	private List<MapMarkerChangedListener> listeners = new ArrayList<>();
@@ -196,16 +195,6 @@ public class MapMarkersHelper {
 		public static int getColorId(int colorIndex) {
 			return (colorIndex >= 0 && colorIndex < colorsIds.length) ? colorsIds[colorIndex] : colorsIds[0];
 		}
-
-		public static int getColorIndex(Context context, int color) {
-			int[] colors = getColors(context);
-			for (int i = 0; i < colors.length; i++) {
-				if (colors[i] == color) {
-					return i;
-				}
-			}
-			return -1;
-		}
 	}
 
 	@Nullable
@@ -298,8 +287,8 @@ public class MapMarkersHelper {
 	}
 
 	private void loadMarkers() {
-		mapMarkers = new LinkedList<>();
-		mapMarkersHistory = new LinkedList<>();
+		mapMarkers = new ArrayList<>();
+		mapMarkersHistory = new ArrayList<>();
 
 		List<MapMarker> activeMarkers = markersDbHelper.getActiveMarkers();
 		addToMapMarkersList(activeMarkers);
@@ -315,13 +304,13 @@ public class MapMarkersHelper {
 	}
 
 	private void removeFromMapMarkersList(List<MapMarker> markers) {
-		List<MapMarker> copyList = new LinkedList<>(mapMarkers);
+		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
 		copyList.removeAll(markers);
 		mapMarkers = copyList;
 	}
 
 	private void removeFromMapMarkersList(MapMarker marker) {
-		List<MapMarker> copyList = new LinkedList<>(mapMarkers);
+		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
 		copyList.remove(marker);
 		mapMarkers = copyList;
 	}
@@ -331,7 +320,7 @@ public class MapMarkersHelper {
 	}
 
 	private void addToMapMarkersList(int position, MapMarker marker) {
-		List<MapMarker> copyList = new LinkedList<>(mapMarkers);
+		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
 		copyList.add(position, marker);
 		mapMarkers = copyList;
 	}
@@ -341,13 +330,13 @@ public class MapMarkersHelper {
 	}
 
 	private void addToMapMarkersList(int position, List<MapMarker> markers) {
-		List<MapMarker> copyList = new LinkedList<>(mapMarkers);
+		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
 		copyList.addAll(position, markers);
 		mapMarkers = copyList;
 	}
 
 	private void removeFromMapMarkersHistoryList(MapMarker marker) {
-		List<MapMarker> copyList = new LinkedList<>(mapMarkersHistory);
+		List<MapMarker> copyList = new ArrayList<>(mapMarkersHistory);
 		copyList.remove(marker);
 		mapMarkersHistory = copyList;
 	}
@@ -357,13 +346,13 @@ public class MapMarkersHelper {
 	}
 
 	private void addToMapMarkersHistoryList(int position, MapMarker marker) {
-		List<MapMarker> copyList = new LinkedList<>(mapMarkersHistory);
+		List<MapMarker> copyList = new ArrayList<>(mapMarkersHistory);
 		copyList.add(position, marker);
 		mapMarkersHistory = copyList;
 	}
 
 	private void addToMapMarkersHistoryList(int position, List<MapMarker> markers) {
-		List<MapMarker> copyList = new LinkedList<>(mapMarkersHistory);
+		List<MapMarker> copyList = new ArrayList<>(mapMarkersHistory);
 		copyList.addAll(position, markers);
 		mapMarkersHistory = copyList;
 	}
@@ -565,7 +554,7 @@ public class MapMarkersHelper {
 				}
 
 				boolean addAll = group.wptCategories == null || group.wptCategories.isEmpty();
-				List<WptPt> gpxPoints = new LinkedList<>(gpx.getPoints());
+				List<WptPt> gpxPoints = new ArrayList<>(gpx.getPoints());
 				for (WptPt pt : gpxPoints) {
 					if (addAll || group.wptCategories.contains(pt.category)) {
 						addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name, enabled, null, pt);
@@ -834,7 +823,7 @@ public class MapMarkersHelper {
 	}
 
 	public void addSelectedMarkersToTop(@NonNull List<MapMarker> markers) {
-		List<MapMarker> markersToRemove = new LinkedList<>();
+		List<MapMarker> markersToRemove = new ArrayList<>();
 		for (MapMarker m : mapMarkers) {
 			if (m.selected) {
 				if (!markers.contains(m)) {
@@ -894,7 +883,7 @@ public class MapMarkersHelper {
 			marker.nextKey = MapMarkersDbHelper.HISTORY_NEXT_VALUE;
 		}
 		addToMapMarkersHistoryList(mapMarkers);
-		mapMarkers = new LinkedList<>();
+		mapMarkers = new ArrayList<>();
 		sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
 		updateGroups();
 		refresh();
@@ -903,7 +892,7 @@ public class MapMarkersHelper {
 	public void removeMarkersHistory() {
 		cancelAddressRequests();
 		markersDbHelper.clearAllMarkersHistory();
-		mapMarkersHistory = new LinkedList<>();
+		mapMarkersHistory = new ArrayList<>();
 		refresh();
 		removeHistoryMarkersFromGroups();
 	}
@@ -918,12 +907,10 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void removeMarkersSyncGroup(String id, boolean removeActiveMarkers) {
+	public void removeMarkersSyncGroup(String id) {
 		if (id != null) {
 			markersDbHelper.removeMarkersSyncGroup(id);
-			if (removeActiveMarkers) {
-				removeActiveMarkersFromSyncGroup(id);
-			}
+			removeActiveMarkersFromSyncGroup(id);
 			MapMarkersGroup group = getMapMarkerGroupByKey(id);
 			if (group != null) {
 				removeFromGroupsList(group);
@@ -968,7 +955,7 @@ public class MapMarkersHelper {
 	public void removeActiveMarkersFromSyncGroup(String syncGroupId) {
 		if (syncGroupId != null) {
 			markersDbHelper.removeActiveMarkersFromSyncGroup(syncGroupId);
-			List<MapMarker> copyList = new LinkedList<>(mapMarkers);
+			List<MapMarker> copyList = new ArrayList<>(mapMarkers);
 			for (int i = 0; i < copyList.size(); i++) {
 				MapMarker marker = copyList.get(i);
 				String groupKey = marker.groupKey;
