@@ -9,7 +9,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
+import android.util.DisplayMetrics;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -58,6 +62,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import btools.routingapp.BRouterServiceConnection;
@@ -306,6 +311,17 @@ public class AppInitializer implements IProgress {
 		}
 	}
 
+	Resources getLocalizedResources(String loc) {
+		if(Build.VERSION.SDK_INT < 17) {
+			return null;
+		}
+		Locale desiredLocale = new Locale(loc);
+		Configuration conf = app.getResources().getConfiguration();
+		conf = new Configuration(conf);
+		conf.setLocale(desiredLocale);
+		Context localizedContext = app.createConfigurationContext(conf);
+		return localizedContext.getResources();
+	}
 
 	private void initPoiTypes() {
 		if(app.getAppPath("poi_types.xml").exists()) {
@@ -313,6 +329,9 @@ public class AppInitializer implements IProgress {
 		} else {
 			app.poiTypes.init();
 		}
+
+		final Resources en = getLocalizedResources("en");
+
 		app.poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
 
 
@@ -331,6 +350,33 @@ public class AppInitializer implements IProgress {
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
 						return app.getString(in);
+					}
+				} catch (Exception e) {
+					LOG.debug("No translation for "+ keyName + " " + e.getMessage());
+				}
+				return null;
+			}
+
+			@Override
+			public String getEnTranslation(AbstractPoiType type) {
+				if(type.getBaseLangType() != null) {
+					return getEnTranslation(type.getBaseLangType()) +  " (" + app.getLangTranslation(type.getLang()).toLowerCase() +")";
+				}
+				return getEnTranslation(type.getIconKeyName());
+			}
+
+
+			@Override
+			public String getEnTranslation(String keyName) {
+				if(en == null) {
+					return Algorithms.capitalizeFirstLetter(
+							keyName.replace('_', ' '));
+				}
+				try {
+					Field f = R.string.class.getField("poi_" + keyName);
+					if (f != null) {
+						Integer in = (Integer) f.get(null);
+						return en.getString(in);
 					}
 				} catch (Exception e) {
 					LOG.debug("No translation for "+ keyName + " " + e.getMessage());
