@@ -967,8 +967,8 @@
 	<string name="poi_shower">Duchas</string>
 	<string name="poi_drinking_water_yes">Sí</string>
 	<string name="poi_drinking_water_no">No</string>
-	<string name="poi_supervised_yes">Supervisado: Sí</string>
-	<string name="poi_supervised_no">Supervisado: No</string>
+	<string name="poi_supervised_yes">Supervisado: sí</string>
+	<string name="poi_supervised_no">Supervisado: no</string>
 	<string name="poi_seasonal_yes">Sí</string>
 	<string name="poi_seasonal_no">No</string>
 	<string name="poi_seasonal_dry_season">Estación seca</string>
@@ -1150,8 +1150,8 @@
 	<string name="poi_urban">Urbano</string>
 	<string name="poi_rural">Rural</string>
 	<string name="poi_seats">Asientos</string>
-	<string name="poi_backrest_yes">Respaldo: Sí</string>
-	<string name="poi_backrest_no">Respaldo: No</string>
+	<string name="poi_backrest_yes">Respaldo: sí</string>
+	<string name="poi_backrest_no">Respaldo: no</string>
 	<string name="poi_intermittent">Intermitente</string>
 	<string name="poi_deadlock">Punto muerto</string>
 	<string name="poi_generator_source_coal">Fuente de energía: Carbón</string>
@@ -1203,7 +1203,7 @@
 	<string name="poi_board_type_astronomy">Astronomía</string>
 	<string name="poi_commercial">Área de oficinas</string>
 	<string name="poi_fireplace_yes">Sí</string>
-	<string name="poi_fireplace_no">Hoguera (fuego): No</string>
+	<string name="poi_fireplace_no">Hoguera (fuego): no</string>
 	<string name="poi_covered_yes">Sí</string>
 	<string name="poi_covered_no">Al descubierto</string>
 	<string name="poi_smoking_no">No</string>
@@ -1215,9 +1215,9 @@
 	<string name="poi_toll_no">Sin peaje</string>
 	<string name="poi_toll_yes">Peaje</string>
 	<string name="poi_tactile_paving_yes">Sí</string>
-	<string name="poi_tactile_paving_no">Pavimento táctil: No</string>
+	<string name="poi_tactile_paving_no">Pavimento táctil: no</string>
 	<string name="poi_traffic_signals_sound_yes">Sí</string>
-	<string name="poi_traffic_signals_sound_no">Sonoro: No</string>
+	<string name="poi_traffic_signals_sound_no">Sonoro: no</string>
 	<string name="poi_traffic_signals_sound_walk">Sólo se permite al caminar</string>
 <string name="poi_retail">Área comercial</string>
 	<string name="poi_ford_stepping_stones">Puente de piedras</string>
@@ -1273,15 +1273,15 @@
 	<string name="poi_garden_style_japanese">Estilo de jardín: Japonés</string>
 	<string name="poi_capacity">Capacidad</string>
 	<string name="poi_capacity_disabled_yes">Sí</string>
-	<string name="poi_capacity_disabled_no">Lugares para discapacitados: No</string>
+	<string name="poi_capacity_disabled_no">Lugares para discapacitados: no</string>
 	<string name="poi_capacity_disabled">Lugares para discapacitados</string>
-	<string name="poi_capacity_women_yes">Lugares para mujeres: Sí</string>
-	<string name="poi_capacity_women_no">Lugares para mujeres: No</string>
+	<string name="poi_capacity_women_yes">Lugares para mujeres: sí</string>
+	<string name="poi_capacity_women_no">Lugares para mujeres: no</string>
 	<string name="poi_capacity_women">Lugares para mujeres</string>
 	<string name="poi_capacity_pupils">Lugares para estudiantes</string>
 	<string name="poi_capacity_teachers">Lugares para profesores</string>
-	<string name="poi_capacity_parent_yes">Lugares para padres: Sí</string>
-	<string name="poi_capacity_parent_no">Lugares para padres: No</string>
+	<string name="poi_capacity_parent_yes">Lugares para padres: sí</string>
+	<string name="poi_capacity_parent_no">Lugares para padres: no</string>
 	<string name="poi_capacity_parent">Lugares para padres</string>
 	<string name="poi_aerialway_occupancy">Capacidad de cabina/silla/coche</string>
 	<string name="poi_aerialway_capacity">Capacidad por hora</string>
@@ -1289,9 +1289,9 @@
 	<string name="poi_aerialway_bubble_yes">Burbuja</string>
 	<string name="poi_aerialway_bubble_no">Sin burbuja</string>
 	<string name="poi_aerialway_heating_yes">Sí</string>
-	<string name="poi_aerialway_heating_no">Calefacción: No</string>
+	<string name="poi_aerialway_heating_no">Calefacción: no</string>
 	<string name="poi_aerialway_bicycle_yes">Permitidas</string>
-	<string name="poi_aerialway_bicycle_no">Bicicletas: No permitidas</string>
+	<string name="poi_aerialway_bicycle_no">Bicicletas: no permitidas</string>
 	<string name="poi_aerialway_bicycle_summer">Permitidas sólo en verano</string>
 	<string name="poi_aerialway_access_entry">Sólo entrada</string>
 	<string name="poi_aerialway_access_exit">Sólo salida</string>
@@ -1315,8 +1315,8 @@
 	<string name="poi_stars_7">Estrellas: 7</string>
 	<string name="poi_rooms">Habitaciones</string>
 	<string name="poi_love_hotel">Albergue transitorio</string>
-<string name="poi_internet_access_yes">Conexión a Internet: Sí</string>
-	<string name="poi_internet_access_no">Conexión a Internet: No</string>
+<string name="poi_internet_access_yes">Conexión a Internet: sí</string>
+	<string name="poi_internet_access_no">Conexión a Internet: no</string>
 	<string name="poi_payment_coins_yes">Monedas</string>
 	<string name="poi_payment_coins_no">No acepta monedas</string>
 	<string name="poi_payment_coins_0.5">Monedas de $0.5</string>
@@ -1465,56 +1465,56 @@
 	<string name="poi_events_venue">Salón de eventos</string>
 	<string name="poi_diet_vegetarian_only">Sólo vegetariana</string>
 	<string name="poi_diet_vegetarian_yes">Vegetariana</string>
-	<string name="poi_diet_vegetarian_no">Dieta vegetariana: No</string>
+	<string name="poi_diet_vegetarian_no">Dieta vegetariana: no</string>
 	<string name="poi_diet_vegetarian_few">Vegetariana (poco)</string>
 	<string name="poi_diet_vegan_only">Sólo vegana</string>
 	<string name="poi_diet_vegan_yes">Vegana</string>
-	<string name="poi_diet_vegan_no">Dieta vegana: No</string>
+	<string name="poi_diet_vegan_no">Dieta vegana: no</string>
 	<string name="poi_diet_gluten_free_only">Sólo libre de gluten</string>
 	<string name="poi_diet_gluten_free_yes">Libre de gluten</string>
-	<string name="poi_diet_gluten_free_no">Dieta libre de gluten: No</string>
+	<string name="poi_diet_gluten_free_no">Dieta libre de gluten: no</string>
 	<string name="poi_diet_kosher_only">Sólo kosher</string>
 	<string name="poi_diet_kosher_yes">Kosher</string>
-	<string name="poi_diet_kosher_no">Dieta kosher: No</string>
+	<string name="poi_diet_kosher_no">Dieta kosher: no</string>
 	<string name="poi_diet_halal_only">Sólo halal</string>
 	<string name="poi_diet_halal_yes">Halal</string>
-	<string name="poi_diet_halal_no">Dieta halal: No</string>
+	<string name="poi_diet_halal_no">Dieta halal: no</string>
 	<string name="poi_diet_lactose_free_only">Sólo libre de lactosa</string>
 	<string name="poi_diet_lactose_free_yes">Libre de lactosa</string>
-	<string name="poi_diet_lactose_free_no">Dieta libre de lactosa: No</string>
+	<string name="poi_diet_lactose_free_no">Dieta libre de lactosa: no</string>
 	<string name="poi_diet_pescetarian_yes">Pescetariana</string>
 	<string name="poi_drive_in_yes">Sí</string>
-	<string name="poi_drive_in_no">Conducir dentro: No</string>
+	<string name="poi_drive_in_no">Conducir dentro: no</string>
 	<string name="poi_drive_through_yes">Sí</string>
-	<string name="poi_drive_through_no">Servicio en el automóvil: No</string>
+	<string name="poi_drive_through_no">Servicio en el automóvil: no</string>
 	<string name="poi_brewery_additional">Nombre de la cervecería</string>
 	<string name="poi_microbrewery_yes">Sí</string>
-	<string name="poi_microbrewery_no">Cerveza artesanal: No</string>
-	<string name="poi_takeaway_yes">Comida para llevar: Sí</string>
-	<string name="poi_takeaway_no">Comida para llevar: No</string>
+	<string name="poi_microbrewery_no">Cerveza artesanal: no</string>
+	<string name="poi_takeaway_yes">Comida para llevar: sí</string>
+	<string name="poi_takeaway_no">Comida para llevar: no</string>
 	<string name="poi_takeaway_only">Comida para llevar: Únicamente</string>
-	<string name="poi_delivery_no">Servicio a domicilio: No</string>
-	<string name="poi_delivery_yes">Servicio a domicilio: Sí</string>
+	<string name="poi_delivery_no">Servicio a domicilio: no</string>
+	<string name="poi_delivery_yes">Servicio a domicilio: sí</string>
 	<string name="poi_delivery_only">Servicio a domicilio: Únicamente</string>
 	<string name="poi_outdoor_seating_yes">Asientos exteriores: Si</string>
-	<string name="poi_outdoor_seating_no">Asientos exteriores: No</string>
+	<string name="poi_outdoor_seating_no">Asientos exteriores: no</string>
 	<string name="poi_outdoor_seating_terrace">Asientos exteriores: Terraza</string>
 	<string name="poi_outdoor_seating_sidewalk">Asientos exteriores: Vereda</string>
 	<string name="poi_outdoor_seating_pedestrian_zone">Asientos exteriores: Zona peatonal</string>
 	<string name="poi_outdoor_seating_garden">Asientos exteriores: Jardín</string>
 	<string name="poi_outdoor_seating_patio">Asientos exteriores: Patio</string>
 	<string name="poi_cocktails_yes">Sí</string>
-	<string name="poi_second_hand_yes">Artículos usados: Sí</string>
-	<string name="poi_second_hand_no">Artículos usados: No</string>
+	<string name="poi_second_hand_yes">Artículos usados: sí</string>
+	<string name="poi_second_hand_no">Artículos usados: no</string>
 	<string name="poi_second_hand_only">Artículos usados: Únicamente</string>
 	<string name="poi_service_parts">Autopartes</string>
 	<string name="poi_service_dealer">Concesionaria</string>
 	<string name="poi_service_repair">Reparación</string>
-	<string name="poi_service_repair_no">Reparación: No</string>
+	<string name="poi_service_repair_no">Reparación: no</string>
 	<string name="poi_service_electrical">Reparación de vehículos eléctricos</string>
 	<string name="poi_motorcycle_repair">Reparación de motocicletas</string>
 	<string name="poi_self_service_yes">Sí</string>
-	<string name="poi_self_service_no">Autoservicio: No</string>
+	<string name="poi_self_service_no">Autoservicio: no</string>
 	<string name="poi_automated_yes">Sí</string>
 	<string name="poi_automated_no">No automatizado</string>
 	<string name="poi_full_service_yes">Servicio completo</string>
@@ -1525,19 +1525,19 @@
 	<string name="poi_female_yes">Femenino</string>
 	<string name="poi_female_no">Mujeres: Prohibido</string>
 	<string name="poi_indoor_yes">Cubierto (interior)</string>
-	<string name="poi_indoor_no">Al aire libre: Sí</string>
+	<string name="poi_indoor_no">Al aire libre: sí</string>
 	<string name="poi_toilets_yes">Sí</string>
-	<string name="poi_toilets_no">Baños: No</string>
-	<string name="poi_toilets_wheelchair_yes">Baños para personas en sillas de rueda: Sí</string>
-	<string name="poi_toilets_wheelchair_no">Baños para personas en sillas de rueda: No</string>
+	<string name="poi_toilets_no">Baños: no</string>
+	<string name="poi_toilets_wheelchair_yes">Baños para personas en sillas de rueda: sí</string>
+	<string name="poi_toilets_wheelchair_no">Baños para personas en sillas de rueda: no</string>
 	<string name="poi_toilets_access_customers">Acceso a los baños: Clientes</string>
 	<string name="poi_toilets_access_permissive">Acceso a los baños: Permisivo</string>
 	<string name="poi_toilets_access_community">Acceso a los baños: Comunidad</string>
 	<string name="poi_toilets_access_public">Acceso a los baños: Público</string>
-	<string name="poi_diaper_yes">Cambiador de pañales: Sí</string>
-	<string name="poi_diaper_no">Cambiador de pañales: No</string>
+	<string name="poi_diaper_yes">Cambiador de pañales: sí</string>
+	<string name="poi_diaper_no">Cambiador de pañales: no</string>
 	<string name="poi_diaper_room">Habitación para cambio de pañales</string>
-<string name="poi_car_wash_no">Lavadero de automóviles: No</string>
+<string name="poi_car_wash_no">Lavadero de automóviles: no</string>
 	<string name="poi_maxstay">Estadía máxima</string>
 	<string name="poi_vending_parking_tickets">Tickets de estacionamiento</string>
 	<string name="poi_vending_cigarettes">Cigarrillos</string>
@@ -1582,7 +1582,7 @@
 	<string name="poi_memorial_obelisk">Obelisco</string>
 	<string name="poi_inscription">Inscripción</string>
 <string name="poi_brushless_yes">Sí</string>
-	<string name="poi_brushless_no">Cepillo giratorio: No</string>
+	<string name="poi_brushless_no">Cepillo giratorio: no</string>
 	<string name="poi_vending_parcel_pickup_mail_in">Estación de paquetes y correos</string>
 	<string name="poi_vending_parcel_pickup">Estación de paquetería</string>
 	<string name="poi_vending_parcel_mail_in">Estación de correos</string>
@@ -1658,9 +1658,9 @@
 	<string name="poi_cypress">Ciprés</string>
 	<string name="poi_flagpole">Asta de bandera</string>
 	<string name="poi_bench_yes">Sí</string>
-	<string name="poi_bench_no">Bancos (asientos): No</string>
-	<string name="poi_bin_yes">Cesto de basura: Sí</string>
-	<string name="poi_bin_no">Cesto de basura: No</string>
+	<string name="poi_bench_no">Bancos (asientos): no</string>
+	<string name="poi_bin_yes">Cesto de basura: sí</string>
+	<string name="poi_bin_no">Cesto de basura: no</string>
 	<string name="poi_shelter_type_public_transport">Transporte público</string>
 	<string name="poi_shelter_type_picnic_shelter">Pabellón de jardín</string>
 	<string name="poi_shelter_type_weather_shelter">Contra el clima</string>
@@ -1679,7 +1679,7 @@
 	<string name="poi_internet_access_type_wired">Cableado</string>
 	<string name="poi_internet_access_type_public">Tipo de conexión a Internet: Público</string>
 	<string name="poi_internet_access_type_service">Tipo de conexión a Internet: Servicio</string>
-	<string name="poi_internet_access_type_no">Conexión a Internet: No</string>
+	<string name="poi_internet_access_type_no">Conexión a Internet: no</string>
 <string name="poi_maxwidth">Ancho máximo</string>
 	<string name="poi_iata">Código IATA</string>
 	<string name="poi_icao">Código ICAO</string>
@@ -1750,8 +1750,8 @@
 	<string name="poi_bridge_movable_submersible">Tipo de puente móvil: Sumergible</string>
 	<string name="poi_bridge_movable_transporter">Tipo de puente móvil: Transportador</string>
 	<string name="poi_bridge_movable_retractable">Tipo de puente móvil: Retráctil</string>
-<string name="poi_lit_yes">Iluminado: Sí</string>
-	<string name="poi_lit_no">Iluminado: No</string>
+<string name="poi_lit_yes">Iluminado: sí</string>
+	<string name="poi_lit_no">Iluminado: no</string>
 	<string name="poi_surface_unpaved">Superficie: Sin pavimento</string>
 	<string name="poi_surface_paved">Superficie: Pavimento</string>
 	<string name="poi_surface_asphalt">Superficie: Asfalto</string>
@@ -1787,24 +1787,24 @@
 	<string name="poi_route_railway_ref">Ruta ferroviaria</string>
 <string name="poi_bridge_structure_simple_wooden">Estructura del puente: Madera simple</string>
 	<string name="poi_historic_yes">Objeto histórico</string>
-	<string name="poi_surveillance_yes">Vigilancia: Sí</string>
-	<string name="poi_shop_additional_yes">Con tienda: Sí</string>
+	<string name="poi_surveillance_yes">Vigilancia: sí</string>
+	<string name="poi_shop_additional_yes">Con tienda: sí</string>
 	<string name="poi_service_bicycle_retail_yes">Venta</string>
-	<string name="poi_service_bicycle_retail_no">Venden bicicletas: No</string>
+	<string name="poi_service_bicycle_retail_no">Venden bicicletas: no</string>
 	<string name="poi_service_bicycle_repair_yes">Reparación</string>
-	<string name="poi_service_bicycle_repair_no">Reparan bicicletas: No</string>
+	<string name="poi_service_bicycle_repair_no">Reparan bicicletas: no</string>
 	<string name="poi_service_bicycle_rental_yes">Alquiler</string>
-	<string name="poi_service_bicycle_rental_no">Alquilan bicicletas: No</string>
+	<string name="poi_service_bicycle_rental_no">Alquilan bicicletas: no</string>
 	<string name="poi_service_bicycle_pump_yes">Inflador de bicicletas</string>
-	<string name="poi_service_bicycle_pump_no">Inflan bicicletas: No</string>
+	<string name="poi_service_bicycle_pump_no">Inflan bicicletas: no</string>
 	<string name="poi_service_bicycle_diy_yes">Herramientas para autoreparación</string>
-	<string name="poi_service_bicycle_diy_no">Herramientas para autoreparación: No</string>
+	<string name="poi_service_bicycle_diy_no">Herramientas para autoreparación: no</string>
 	<string name="poi_service_bicycle_cleaning_yes">Limpieza</string>
-	<string name="poi_service_bicycle_cleaning_no">Limpian bicicletas: No</string>
+	<string name="poi_service_bicycle_cleaning_no">Limpian bicicletas: no</string>
 	<string name="poi_service_bicycle_chaintool_yes">Herramientas para cadenas de bicicletas</string>
-	<string name="poi_service_bicycle_chaintool_no">Herramientas para cadenas de bicicletas: No</string>
+	<string name="poi_service_bicycle_chaintool_no">Herramientas para cadenas de bicicletas: no</string>
 	<string name="poi_service_bicycle_second_hand_yes">Venta de bicicletas usadas</string>
-	<string name="poi_service_bicycle_second_hand_no">Venden bicicletas usadas: No</string>
+	<string name="poi_service_bicycle_second_hand_no">Venden bicicletas usadas: no</string>
 	<string name="poi_wildlife_hide">Observatorio de vida salvaje</string>
 	<string name="poi_training_language">Capacitación: Idioma</string>
 	<string name="poi_training_music">Capacitación: Música</string>
@@ -1847,8 +1847,8 @@
 	<string name="poi_animal_boarding_horse">Tipo de alojamiento: Ecuestre</string>
 	<string name="poi_historic_aircraft">Avión histórico</string>
 	<string name="poi_honey">Miel</string>
-	<string name="poi_elevator_yes">Ascensor: Sí</string>
-	<string name="poi_elevator_no">Ascensor: No</string>
+	<string name="poi_elevator_yes">Ascensor: sí</string>
+	<string name="poi_elevator_no">Ascensor: no</string>
 	<string name="poi_technical_monument">Monumento técnico</string>
 <string name="poi_memorial_prasat">Templo piramidal</string>
 	<string name="poi_office_camping">Oficina del campamento</string>
@@ -1955,26 +1955,26 @@
 	<string name="poi_backcountry_yes">Sí</string>
 	<string name="poi_backcountry_no">No</string>
 	<string name="poi_scout_yes">Sí</string>
-	<string name="poi_scout_no">Campamento scout: No</string>
-	<string name="poi_group_only_yes">Sólo para grupos: Sí</string>
-	<string name="poi_group_only_no">Sólo para grupos: No</string>
+	<string name="poi_scout_no">Campamento scout: no</string>
+	<string name="poi_group_only_yes">Sólo para grupos: sí</string>
+	<string name="poi_group_only_no">Sólo para grupos: no</string>
 	<string name="poi_washing_machine_yes">Sí</string>
-	<string name="poi_washing_machine_no">Lavarropas: No</string>
-	<string name="poi_shower_yes">Ducha: Sí</string>
-	<string name="poi_shower_no">Ducha: No</string>
+	<string name="poi_washing_machine_no">Lavarropas: no</string>
+	<string name="poi_shower_yes">Ducha: sí</string>
+	<string name="poi_shower_no">Ducha: no</string>
 	<string name="poi_shower_hot">Ducha: caliente</string>
 	<string name="poi_shower_outdoor">Ducha: exterior</string>
 	<string name="poi_shower_cold">Ducha: fría</string>
 	<string name="poi_shower_indoor">Ducha: interior</string>
 	<string name="poi_caravans_yes">Sí</string>
-	<string name="poi_caravans_no">Casas rodante: No</string>
-	<string name="poi_impromptu_yes">Improvisado: Sí</string>
-	<string name="poi_impromptu_no">Improvisado: No</string>
-	<string name="poi_sanitary_dump_station_yes">Estación de descarga sanitaria: Sí</string>
-	<string name="poi_sanitary_dump_station_no">Estación de descarga sanitaria: No</string>
+	<string name="poi_caravans_no">Casas rodante: no</string>
+	<string name="poi_impromptu_yes">Improvisado: sí</string>
+	<string name="poi_impromptu_no">Improvisado: no</string>
+	<string name="poi_sanitary_dump_station_yes">Estación de descarga sanitaria: sí</string>
+	<string name="poi_sanitary_dump_station_no">Estación de descarga sanitaria: no</string>
 	<string name="poi_sanitary_dump_station_customers">Estación de descarga sanitaria sólo para clientes</string>
 	<string name="poi_power_supply_yes">Sí</string>
-	<string name="poi_power_supply_no">Fuente de alimentación: No</string>
+	<string name="poi_power_supply_no">Fuente de alimentación: no</string>
 	<string name="poi_power_supply_cee_7_4">Fuente de alimentación (enchufe): CEE 7/4</string>
 	<string name="poi_power_supply_cee_7_5">Fuente de alimentación (enchufe): CEE 7/5</string>
 	<string name="poi_power_supply_nema_5_15">Fuente de alimentación (enchufe): NEMA 5-15</string>
@@ -1984,7 +1984,7 @@
 	<string name="poi_dog_no">Perros: Prohibido</string>
 <string name="poi_power_supply_cee_17_blue">Fuente de alimentación (enchufe): CEE 17 azul</string>
 	<string name="poi_refugee_yes">Servicios para refugiados</string>
-	<string name="poi_refugee_no">Servicios para refugiados: No</string>
+	<string name="poi_refugee_no">Servicios para refugiados: no</string>
 	<string name="poi_social_facility_group_home">Grupo residencial</string>
 	<string name="poi_social_facility_assisted_living">Vida asistida</string>
 	<string name="poi_social_facility_outreach">Alcance</string>
@@ -2030,18 +2030,18 @@
 	<string name="poi_blind_description">Descripción para ciegos</string>
 	<string name="poi_deaf_description">Descripción para sordos</string>
 	<string name="poi_highway_steps">Escalera</string>
-	<string name="poi_handrail_yes">Barandilla: Sí</string>
-	<string name="poi_handrail_no">Barandilla: No</string>
-	<string name="poi_ramp_yes">Rampa: Sí</string>
-	<string name="poi_ramp_no">Rampa: No</string>
-	<string name="poi_ramp_wheelchair_yes">Rampa para sillas de rueda: Sí</string>
-	<string name="poi_ramp_wheelchair_no">Rampa para sillas de rueda: No</string>
-	<string name="poi_ramp_stroller_yes">Rampa para cochecitos: Sí</string>
-	<string name="poi_ramp_stroller_no">Rampa para cochecitos: No</string>
-	<string name="poi_ramp_bicycle_yes">Rampa para bicicletas: Sí</string>
-	<string name="poi_ramp_bicycle_no">Rampa para bicicletas: No</string>
-	<string name="poi_ramp_luggage_yes">Rampa para equipajes: Sí</string>
-	<string name="poi_ramp_luggage_no">Rampa para equipajes: No</string>
+	<string name="poi_handrail_yes">Barandilla: sí</string>
+	<string name="poi_handrail_no">Barandilla: no</string>
+	<string name="poi_ramp_yes">Rampa: sí</string>
+	<string name="poi_ramp_no">Rampa: no</string>
+	<string name="poi_ramp_wheelchair_yes">Rampa para sillas de rueda: sí</string>
+	<string name="poi_ramp_wheelchair_no">Rampa para sillas de rueda: no</string>
+	<string name="poi_ramp_stroller_yes">Rampa para cochecitos: sí</string>
+	<string name="poi_ramp_stroller_no">Rampa para cochecitos: no</string>
+	<string name="poi_ramp_bicycle_yes">Rampa para bicicletas: sí</string>
+	<string name="poi_ramp_bicycle_no">Rampa para bicicletas: no</string>
+	<string name="poi_ramp_luggage_yes">Rampa para equipajes: sí</string>
+	<string name="poi_ramp_luggage_no">Rampa para equipajes: no</string>
 	<string name="poi_step_count">Cantidad de escalones</string>
 	<string name="poi_step_condition_even">Estado de los escalones: Buena</string>
 	<string name="poi_step_condition_uneven">Estado de los escalones: Mala</string>
@@ -2049,7 +2049,7 @@
 <string name="poi_cairn">Cairn</string>
 	<string name="poi_memorial_fassade_decoration">Decoración de la fachada</string>
 	<string name="poi_defibrillator">Desfibrilador</string>
-	<string name="poi_defibrillator_yes">Desfibrilador: Sí</string>
+	<string name="poi_defibrillator_yes">Desfibrilador: sí</string>
 	<string name="poi_tomb_war_grave">Tipo: Guerra</string>
 	<string name="poi_tomb_tumulus">Tipo: Túmulo</string>
 	<string name="poi_tomb_rock_cut">Tipo: Excavación en la roca</string>
@@ -2187,7 +2187,7 @@
 <string name="poi_artist_name">Artista</string>
 	<string name="poi_sculptor">Escultor</string>
 	<string name="poi_cross">Cruz</string>
-	<string name="poi_summit_cross">Cumbre a la cruz: Sí</string>
+	<string name="poi_summit_cross">Cumbre a la cruz: sí</string>
 	<string name="poi_prison_camp">Ex campo de prisioneros</string>
 	<string name="poi_concentration_camp">Tipo: Campo de concentración</string>
 	<string name="poi_pow_camp">Tipo: Prisioneros de guerra</string>
@@ -2195,11 +2195,11 @@
 	<string name="poi_concentration_camp_nazism">Tipo: Nazi</string>
 	<string name="poi_concentration_camp_gulag">Tipo: Gulag</string>
 	<string name="poi_temperature">Temperatura</string>
-	<string name="poi_bathing_yes">Bañarse: Sí</string>
-	<string name="poi_bathing_no">Bañarse: No</string>
+	<string name="poi_bathing_yes">Bañarse: sí</string>
+	<string name="poi_bathing_no">Bañarse: no</string>
 <string name="poi_traffic_calming_island">Calzada dividida</string>
 	<string name="poi_boat_storage">Guardería náutica</string>
-<string name="poi_conveying_yes">Transportadora: Sí</string>
+<string name="poi_conveying_yes">Transportadora: sí</string>
 	<string name="poi_bridge_ref">Referencia del puente</string>
 	<string name="poi_tunnel_ref">Referencia del túnel</string>
 	<string name="poi_ref">Referencia</string>
@@ -2273,7 +2273,7 @@
 	<string name="poi_craft_electronics_repair">Reparación de electrónicos</string>
 <string name="poi_fireworks">Fuegos artificiales</string>
 <string name="poi_aerialway_length">Longitud</string>
-<string name="poi_internet_access_type_yes">Conexión a Internet: Sí</string>
+<string name="poi_internet_access_type_yes">Conexión a Internet: sí</string>
 	<string name="poi_health_specialty_general_yes">Médico general</string>
 	<string name="poi_health_specialty_ophthalmology_yes">Oftalmología</string>
 	<string name="poi_health_specialty_gynaecology_yes">Ginecología</string>
@@ -2348,10 +2348,10 @@
 <string name="poi_fitness_centre">Gimnasio</string>
 	<string name="poi_fitness">Ejercicio físico</string>
 	<string name="poi_billiards">Billar</string>
-<string name="poi_microwave_oven_yes">Horno de microondas: Sí</string>
-	<string name="poi_microwave_oven_no">Horno de microondas: No</string>
-	<string name="poi_water_heater_yes">Calentador de agua: Sí</string>
-	<string name="poi_water_heater_no">Calentador de agua: No</string>
+<string name="poi_microwave_oven_yes">Horno de microondas: sí</string>
+	<string name="poi_microwave_oven_no">Horno de microondas: no</string>
+	<string name="poi_water_heater_yes">Calentador de agua: sí</string>
+	<string name="poi_water_heater_no">Calentador de agua: no</string>
 	<string name="poi_parking_surface">En superficie</string>
 	<string name="poi_parking_garage_boxes">Cochera comunitaria individual</string>
 	<string name="poi_parking_carports">Cochera abierta</string>
@@ -2383,12 +2383,12 @@
 	<string name="poi_inscription_e">Inscripción: E</string>
 	<string name="poi_inscription_ne">Inscripción: NE</string>
 	<string name="poi_construction_yes">En construcción</string>
-	<string name="poi_additional_atm_yes">Cajero automático: Sí</string>
-	<string name="poi_atm_no">Cajero automático: No</string>
+	<string name="poi_additional_atm_yes">Cajero automático: sí</string>
+	<string name="poi_atm_no">Cajero automático: no</string>
 <string name="poi_firepit">Lugar para fogata</string>
 	<string name="poi_street_cabinet">Gabinete exterior</string>
-<string name="poi_fair_trade_yes">Comercio justo: Sí</string>
-	<string name="poi_fair_trade_no">Comercio justo: No</string>
+<string name="poi_fair_trade_yes">Comercio justo: sí</string>
+	<string name="poi_fair_trade_no">Comercio justo: no</string>
 	<string name="poi_fair_trade_only">Sólo productos de comercio justo</string>
 <string name="poi_ice_hockey">Hockey sobre hielo</string>
 	<string name="poi_bandy">Bandy</string>
@@ -2441,18 +2441,18 @@
 	<string name="poi_religion">Artículos religiosos</string>
 <string name="poi_plant_nursery">Vivero (cultivo)</string>
 <string name="poi_compressed_air_yes">Sí</string>
-	<string name="poi_compressed_air_no">Compresor de aire: No</string>
+	<string name="poi_compressed_air_no">Compresor de aire: no</string>
 	<string name="poi_car_wash_yes">Sí</string>
 	<string name="poi_vacuum_cleaner_yes">Sí</string>
-	<string name="poi_vacuum_cleaner_no">Aspiradora: No</string>
+	<string name="poi_vacuum_cleaner_no">Aspiradora: no</string>
 	<string name="poi_amenity_vacuum_cleaner">Aspiradoras</string>
 
 <string name="poi_sport_free_flying">Vuelo libre (deporte)</string>
 <string name="poi_bicycle_repair_station">Estación de reparación para bicicletas</string>
 	<string name="poi_water_tap">Grifo público</string>
 
-<string name="poi_button_operated_yes">Activado por botón: Sí</string>
-	<string name="poi_button_operated_no">Activado por botón: No</string>
+<string name="poi_button_operated_yes">Activado por botón: sí</string>
+	<string name="poi_button_operated_no">Activado por botón: no</string>
 
 <string name="poi_free_flying_site_takeoff">Despegue</string>
 	<string name="poi_free_flying_site_landing">Aterrizaje</string>
@@ -2462,11 +2462,11 @@
 	<string name="poi_free_flying_official_yes">Autorizado</string>
 	<string name="poi_free_flying_official_no">No autorizado</string>
 	<string name="poi_free_flying_paragliding_yes">Parapente</string>
-	<string name="poi_free_flying_paragliding_no">Parapente: No</string>
+	<string name="poi_free_flying_paragliding_no">Parapente: no</string>
 	<string name="poi_free_flying_hanggliding_yes">Ala delta</string>
-	<string name="poi_free_flying_hanggliding_no">Ala delta: No</string>
+	<string name="poi_free_flying_hanggliding_no">Ala delta: no</string>
 	<string name="poi_free_flying_rigid_yes">Ala delta rígido</string>
-	<string name="poi_free_flying_rigid_no">Ala delta rígido: No</string>
+	<string name="poi_free_flying_rigid_no">Ala delta rígido: no</string>
 	<string name="poi_free_flying_site_orientation_n">Orientación del sitio en vuelo libre: N</string>
 	<string name="poi_free_flying_site_orientation_ne">Orientación del sitio en vuelo libre: NE</string>
 	<string name="poi_free_flying_site_orientation_e">Orientación del sitio en vuelo libre: E</string>
@@ -2476,8 +2476,8 @@
 	<string name="poi_free_flying_site_orientation_w">Orientación del sitio en vuelo libre: O</string>
 	<string name="poi_free_flying_site_orientation_nw">Orientación del sitio en vuelo libre: NO</string>
 	<string name="poi_free_flying_no_flight_time">Sin horario de vuelo (vuelo libre)</string>
-	<string name="poi_free_flying_guest_guidelines_yes">Directrices de invitado: Sí</string>
-	<string name="poi_free_flying_guest_guidelines_no">Directrices de invitado: No</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Directrices de invitado: sí</string>
+	<string name="poi_free_flying_guest_guidelines_no">Directrices de invitado: no</string>
 
 	<string name="poi_tanning_salon">Centro de bronceado (solárium)</string>
 
@@ -2552,80 +2552,80 @@
 	<string name="poi_health_person_type_technician">Rol del trabajador en salud: Técnico</string>
 	<string name="poi_health_person_type_witchdoctor">Rol del trabajador en salud: Brujo/a</string>
 
-	<string name="poi_counselling_type_addiction_yes">Asesoría (adicción): Sí</string>
-	<string name="poi_counselling_type_addiction_no">Asesoría (adicción): No</string>
-	<string name="poi_counselling_type_antenatal_yes">Asesoría (prenatal): Sí</string>
-	<string name="poi_counselling_type_antenatal_no">Asesoría (prenatal): No</string>
-	<string name="poi_counselling_type_child_guidance_yes">Asesoría (orientación infantil): Sí</string>
-	<string name="poi_counselling_type_child_guidance_no">Asesoría (orientación infantil): No</string>
-	<string name="poi_counselling_type_couple_yes">Asesoría (pareja): Sí</string>
-	<string name="poi_counselling_type_couple_no">Asesoría (pareja): No</string>
-	<string name="poi_counselling_type_crisis_yes">Asesoría (crisis): Sí</string>
-	<string name="poi_counselling_type_crisis_no">Asesoría (crisis): No</string>
-	<string name="poi_counselling_type_drugs_yes">Asesoría (drogas): Sí</string>
-	<string name="poi_counselling_type_drugs_no">Asesoría (drogas): No</string>
-	<string name="poi_counselling_type_education_yes">Asesoría (educación): Sí</string>
-	<string name="poi_counselling_type_education_no">Asesoría (educación): No</string>
-	<string name="poi_counselling_type_family_yes">Asesoría (familiar): Sí</string>
-	<string name="poi_counselling_type_family_no">Asesoría (familiar): No</string>
-	<string name="poi_counselling_type_homeless_yes">Asesoría (sin hogar): Sí</string>
-	<string name="poi_counselling_type_homeless_no">Asesoría (sin hogar): No</string>
-	<string name="poi_counselling_type_immigrant_yes">Asesoría (inmigrantes): Sí</string>
-	<string name="poi_counselling_type_immigrant_no">Asesoría (inmigrantes): No</string>
-	<string name="poi_counselling_type_marriage_yes">Asesoría (matrimonio): Sí</string>
-	<string name="poi_counselling_type_marriage_no">Asesoría (matrimonio): No</string>
-	<string name="poi_counselling_type_nutrition_yes">Asesoría (nutrición): Sí</string>
+	<string name="poi_counselling_type_addiction_yes">Asesoría (adicción): sí</string>
+	<string name="poi_counselling_type_addiction_no">Asesoría (adicción): no</string>
+	<string name="poi_counselling_type_antenatal_yes">Asesoría (prenatal): sí</string>
+	<string name="poi_counselling_type_antenatal_no">Asesoría (prenatal): no</string>
+	<string name="poi_counselling_type_child_guidance_yes">Asesoría (orientación infantil): sí</string>
+	<string name="poi_counselling_type_child_guidance_no">Asesoría (orientación infantil): no</string>
+	<string name="poi_counselling_type_couple_yes">Asesoría (pareja): sí</string>
+	<string name="poi_counselling_type_couple_no">Asesoría (pareja): no</string>
+	<string name="poi_counselling_type_crisis_yes">Asesoría (crisis): sí</string>
+	<string name="poi_counselling_type_crisis_no">Asesoría (crisis): no</string>
+	<string name="poi_counselling_type_drugs_yes">Asesoría (drogas): sí</string>
+	<string name="poi_counselling_type_drugs_no">Asesoría (drogas): no</string>
+	<string name="poi_counselling_type_education_yes">Asesoría (educación): sí</string>
+	<string name="poi_counselling_type_education_no">Asesoría (educación): no</string>
+	<string name="poi_counselling_type_family_yes">Asesoría (familiar): sí</string>
+	<string name="poi_counselling_type_family_no">Asesoría (familiar): no</string>
+	<string name="poi_counselling_type_homeless_yes">Asesoría (sin hogar): sí</string>
+	<string name="poi_counselling_type_homeless_no">Asesoría (sin hogar): no</string>
+	<string name="poi_counselling_type_immigrant_yes">Asesoría (inmigrantes): sí</string>
+	<string name="poi_counselling_type_immigrant_no">Asesoría (inmigrantes): no</string>
+	<string name="poi_counselling_type_marriage_yes">Asesoría (matrimonio): sí</string>
+	<string name="poi_counselling_type_marriage_no">Asesoría (matrimonio): no</string>
+	<string name="poi_counselling_type_nutrition_yes">Asesoría (nutrición): sí</string>
 	<string name="poi_counselling_type_nutrition_no">Asesoramiento (nutrición): No</string>
-	<string name="poi_counselling_type_rehabilitation_yes">Asesoría (rehabilitación): Sí</string>
-	<string name="poi_counselling_type_rehabilitation_no">Asesoría (rehabilitación): No</string>
-	<string name="poi_counselling_type_sexual_yes">Asesoría (sexual): Sí</string>
-	<string name="poi_counselling_type_sexual_no">Asesoría (sexual): No</string>
-	<string name="poi_counselling_type_sexual_abuse_yes">Asesoría (abuso sexual): Sí</string>
-	<string name="poi_counselling_type_sexual_abuse_no">Asesoría (abuso sexual): No</string>
-	<string name="poi_counselling_type_victim_yes">Asesoría (víctimas): Sí</string>
-	<string name="poi_counselling_type_victim_no">Asesoría (víctimas): No</string>
-	<string name="poi_counselling_type_violence_yes">Asesoría (violencia): Sí</string>
-	<string name="poi_counselling_type_violence_no">Asesoría (violencia): No</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Asesoría (rehabilitación): sí</string>
+	<string name="poi_counselling_type_rehabilitation_no">Asesoría (rehabilitación): no</string>
+	<string name="poi_counselling_type_sexual_yes">Asesoría (sexual): sí</string>
+	<string name="poi_counselling_type_sexual_no">Asesoría (sexual): no</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Asesoría (abuso sexual): sí</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Asesoría (abuso sexual): no</string>
+	<string name="poi_counselling_type_victim_yes">Asesoría (víctimas): sí</string>
+	<string name="poi_counselling_type_victim_no">Asesoría (víctimas): no</string>
+	<string name="poi_counselling_type_violence_yes">Asesoría (violencia): sí</string>
+	<string name="poi_counselling_type_violence_no">Asesoría (violencia): no</string>
 
-<string name="poi_provided_for_infant_yes">Provisto para bebés: Sí</string>
-	<string name="poi_provided_for_infant_no">Provisto para bebés: No</string>
-	<string name="poi_provided_for_toddler_yes">Provisto para niños pequeños: Sí</string>
-	<string name="poi_provided_for_toddler_no">Provisto para niños pequeños: No</string>
-	<string name="poi_provided_for_child_yes">Provisto para niños: Sí</string>
-	<string name="poi_provided_for_child_no">Provisto para niños: No</string>
-	<string name="poi_provided_for_adult_yes">Provisto para adultos: Sí</string>
-	<string name="poi_provided_for_adult_no">Provisto para adultos: No</string>
-	<string name="poi_provided_for_woman_yes">Provisto para mujeres: Sí</string>
-	<string name="poi_provided_for_woman_no">Provisto para mujeres: No</string>
-	<string name="poi_provided_for_senior_yes">Provisto para adultos mayores: Sí</string>
-	<string name="poi_provided_for_senior_no">Provisto para adultos mayores: No</string>
-	<string name="poi_provided_for_girl_yes">Provisto para chicas: Sí</string>
-	<string name="poi_provided_for_girl_no">Provisto para chicas: No</string>
-	<string name="poi_provided_for_man_yes">Provisto para hombres: Sí</string>
-	<string name="poi_provided_for_man_no">Provisto para hombres: No</string>
-	<string name="poi_provided_for_boy_yes">Provisto para chicos: Sí</string>
-	<string name="poi_provided_for_boy_no">Provisto para chicos: No</string>
+<string name="poi_provided_for_infant_yes">Provisto para bebés: sí</string>
+	<string name="poi_provided_for_infant_no">Provisto para bebés: no</string>
+	<string name="poi_provided_for_toddler_yes">Provisto para niños pequeños: sí</string>
+	<string name="poi_provided_for_toddler_no">Provisto para niños pequeños: no</string>
+	<string name="poi_provided_for_child_yes">Provisto para niños: sí</string>
+	<string name="poi_provided_for_child_no">Provisto para niños: no</string>
+	<string name="poi_provided_for_adult_yes">Provisto para adultos: sí</string>
+	<string name="poi_provided_for_adult_no">Provisto para adultos: no</string>
+	<string name="poi_provided_for_woman_yes">Provisto para mujeres: sí</string>
+	<string name="poi_provided_for_woman_no">Provisto para mujeres: no</string>
+	<string name="poi_provided_for_senior_yes">Provisto para adultos mayores: sí</string>
+	<string name="poi_provided_for_senior_no">Provisto para adultos mayores: no</string>
+	<string name="poi_provided_for_girl_yes">Provisto para chicas: sí</string>
+	<string name="poi_provided_for_girl_no">Provisto para chicas: no</string>
+	<string name="poi_provided_for_man_yes">Provisto para hombres: sí</string>
+	<string name="poi_provided_for_man_no">Provisto para hombres: no</string>
+	<string name="poi_provided_for_boy_yes">Provisto para chicos: sí</string>
+	<string name="poi_provided_for_boy_no">Provisto para chicos: no</string>
 
 	<string name="poi_capacity_beds">Capacidad (camas)</string>
 
-	<string name="poi_treat_inpatient_yes">Servicios para pacientes: Sí</string>
-	<string name="poi_treat_inpatient_no">Servicios para pacientes: No</string>
+	<string name="poi_treat_inpatient_yes">Servicios para pacientes: sí</string>
+	<string name="poi_treat_inpatient_no">Servicios para pacientes: no</string>
 	<string name="poi_treat_inpatient_only">Servicios para pacientes: Únicamente</string>
-	<string name="poi_counselling_yes">Asesoría: Sí</string>
-	<string name="poi_counselling_no">Asesoría: No</string>
-	<string name="poi_emergency_yes">Emergencias: Sí</string>
-	<string name="poi_emergency_no">Emergencias: No</string>
+	<string name="poi_counselling_yes">Asesoría: sí</string>
+	<string name="poi_counselling_no">Asesoría: no</string>
+	<string name="poi_emergency_yes">Emergencias: sí</string>
+	<string name="poi_emergency_no">Emergencias: no</string>
 	<string name="poi_home_visit_yes">Sí</string>
-	<string name="poi_home_visit_no">Visitas domiciliarias: No</string>
+	<string name="poi_home_visit_no">Visitas domiciliarias: no</string>
 
-	<string name="poi_disease_malaria_yes">Malaria: Sí</string>
-	<string name="poi_disease_malaria_no">Malaria: No</string>
-	<string name="poi_disease_ebola_yes">Ébola: Sí</string>
-	<string name="poi_disease_ebola_no">Ébola: No</string>
-	<string name="poi_disease_autism_yes">Autismo: Sí</string>
-	<string name="poi_disease_autism_no">Autismo: No</string>
-	<string name="poi_disease_aids_yes">SIDA: Sí</string>
-	<string name="poi_disease_aids_no">SIDA: No</string>
+	<string name="poi_disease_malaria_yes">Malaria: sí</string>
+	<string name="poi_disease_malaria_no">Malaria: no</string>
+	<string name="poi_disease_ebola_yes">Ébola: sí</string>
+	<string name="poi_disease_ebola_no">Ébola: no</string>
+	<string name="poi_disease_autism_yes">Autismo: sí</string>
+	<string name="poi_disease_autism_no">Autismo: no</string>
+	<string name="poi_disease_aids_yes">SIDA: sí</string>
+	<string name="poi_disease_aids_no">SIDA: no</string>
 
 	<string name="poi_office_physician">Consultorio médico</string>
 	<string name="poi_office_therapist">Oficina terapéutica</string>
@@ -2635,7 +2635,7 @@
 	<string name="poi_office_nursing_service">Servicio de enfermería</string>
 	<string name="poi_office_midwife">Oficina de partera</string>
 
-<string name="poi_counselling_type_nutrition_nfire_hydo">Asesoría (nutrición): No</string>
+<string name="poi_counselling_type_nutrition_nfire_hydo">Asesoría (nutrición): no</string>
 	<string name="poi_fire_hydrant_diameter">Diámetro del hidrante</string>
 	<string name="poi_fire_hydrant_pressure">Presión del hidrante</string>
 	<string name="poi_fire_hydrant_count">Cantidad de hidrantes</string>
@@ -2651,7 +2651,7 @@
 	<string name="poi_fire_hydrant_style_water_source_pond">Estanque</string>
 	<string name="poi_fire_hydrant_style_water_source_stream">Arroyo</string>
 	<string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
-	<string name="poi_in_service_yes">En servicio: Sí</string>
+	<string name="poi_in_service_yes">En servicio: sí</string>
 
 	<string name="poi_street_cabinet_power">Tipo de gabinete: Energía</string>
 	<string name="poi_street_cabinet_telecom">Tipo de gabinete: Telecomunicación</string>
@@ -2670,8 +2670,8 @@
 
 <string name="poi_depth">Profundidad</string>
 
-<string name="poi_salt_yes">Salado: Sí</string>
-	<string name="poi_salt_no">Salado: No</string>
+<string name="poi_salt_yes">Salado: sí</string>
+	<string name="poi_salt_no">Salado: no</string>
 	<string name="poi_wheelchair_designated">Designado</string>
 	<string name="poi_spoil_heap">Escombrera</string>
 
@@ -2681,26 +2681,26 @@
 	<string name="poi_crossing_activation_automatic">Activación del cruce: Automática</string>
 	<string name="poi_crossing_activation_local">Activación del cruce: Local</string>
 	<string name="poi_crossing_activation_remote">Activación del cruce: Remota</string>
-	<string name="poi_crossing_barrier_no">Cruce de barreras: No</string>
-	<string name="poi_crossing_barrier_yes">Cruce de barreras: Sí</string>
+	<string name="poi_crossing_barrier_no">Cruce de barreras: no</string>
+	<string name="poi_crossing_barrier_yes">Cruce de barreras: sí</string>
 	<string name="poi_crossing_barrier_full">Cruce de barreras: Completas</string>
 	<string name="poi_crossing_barrier_half">Cruce de barreras: Semi-barreras</string>
 	<string name="poi_crossing_barrier_double_half">Cruce de barreras: Semi-barreras dobles</string>
 	<string name="poi_crossing_bell_yes">Cruce acústico</string>
-	<string name="poi_crossing_bell_no">Cruce acústico: No</string>
+	<string name="poi_crossing_bell_no">Cruce acústico: no</string>
 	<string name="poi_crossing_light_yes">Cruce luminoso</string>
-	<string name="poi_crossing_light_no">Cruce luminoso: No</string>
+	<string name="poi_crossing_light_no">Cruce luminoso: no</string>
 	<string name="poi_crossing_on_demand_yes">Cruce bajo demanda</string>
-	<string name="poi_crossing_on_demand_no">Cruce bajo demanda: No</string>
+	<string name="poi_crossing_on_demand_no">Cruce bajo demanda: no</string>
 	<string name="poi_crossing_saltire_yes">Cruz de San Andrés</string>
-	<string name="poi_crossing_saltire_no">Cruz de San Andrés: No</string>
+	<string name="poi_crossing_saltire_no">Cruz de San Andrés: no</string>
 	<string name="poi_crossing_supervision_yes">Cruce supervisado</string>
-	<string name="poi_crossing_supervision_no">Cruce supervisado: No</string>
+	<string name="poi_crossing_supervision_no">Cruce supervisado: no</string>
 	<string name="poi_crossing_supervision_attendant">Cruce supervisado: Personalmente</string>
 	<string name="poi_crossing_supervision_camera">Cruce supervisado: Con cámara</string>
 
 <string name="poi_dispensing_yes">Sí</string>
-	<string name="poi_dispensing_no">Receta médica: No</string>
+	<string name="poi_dispensing_no">Receta médica: no</string>
 
 	<string name="poi_aerodrome_type_international">Internacional</string>
 	<string name="poi_aerodrome_type_regional">Regional</string>
@@ -2757,20 +2757,20 @@
 
 	<string name="poi_pumping_station">Estación de bombeo</string>
 
-	<string name="poi_display_yes">Pantalla: Sí</string>
-	<string name="poi_display_no">Pantalla: No</string>
+	<string name="poi_display_yes">Pantalla: sí</string>
+	<string name="poi_display_no">Pantalla: no</string>
 	<string name="poi_display_analog_yes">Pantalla análoga</string>
 	<string name="poi_display_digital_yes">Pantalla digital</string>
 	<string name="poi_display_sundial_yes">Reloj solar</string>
 
 	<string name="poi_barometer_yes">Barómetro</string>
-	<string name="poi_barometer_no">Barómetro: No</string>
+	<string name="poi_barometer_no">Barómetro: no</string>
 	<string name="poi_thermometer_yes">Termómetro</string>
-	<string name="poi_thermometer_no">Termómetro: No</string>
+	<string name="poi_thermometer_no">Termómetro: no</string>
 	<string name="poi_hygrometer_yes">Higrómetro</string>
-	<string name="poi_hygrometer_no">Higrómetro: No</string>
+	<string name="poi_hygrometer_no">Higrómetro: no</string>
 	<string name="poi_date_yes">Muestra la fecha</string>
-	<string name="poi_date_no">Muestra la fecha: No</string>
+	<string name="poi_date_no">Muestra la fecha: no</string>
 
 	<string name="poi_support_pole">Soporte: Poste</string>
 	<string name="poi_support_wall_mounted">Soporte: Muro</string>
@@ -2783,8 +2783,8 @@
 	<string name="poi_support_roof">Soporte: Techo</string>
 	<string name="poi_support_tower">Soporte: Torre</string>
 
-	<string name="poi_passenger_information_display_yes">Pantalla de información para pasajeros: Sí</string>
-	<string name="poi_passenger_information_display_no">Pantalla de información para pasajeros: No</string>
+	<string name="poi_passenger_information_display_yes">Pantalla de información para pasajeros: sí</string>
+	<string name="poi_passenger_information_display_no">Pantalla de información para pasajeros: no</string>
 
 <string name="poi_aquaculture">Acuicultura</string>
 	<string name="poi_aquaculture_shrimp">Acuicultura: Camarón</string>
@@ -2831,7 +2831,7 @@
 <string name="poi_shop_craft">Artículos para arte y artesanías</string>
 
 	<string name="poi_service_bicycle_charging_yes">Cargador eléctrico</string>
-	<string name="poi_service_bicycle_charging_no">Cargador eléctrico: No</string>
+	<string name="poi_service_bicycle_charging_no">Cargador eléctrico: no</string>
 
 <string name="poi_fuel_avia_type">Tipo de combustible (aviones)</string>
 	<string name="poi_payment_fuel_type">Tarjetas de combustible</string>
@@ -3163,7 +3163,7 @@
 
 <string name="poi_fast_food_cafeteria">Sí</string>
 
-	<string name="poi_drink_wine_yes">Vino: Sí</string>
+	<string name="poi_drink_wine_yes">Vino: sí</string>
 	<string name="poi_drink_wine_retail">Vino: venta</string>
 	<string name="poi_drink_wine_served">Vino: servido</string>
 
@@ -3197,19 +3197,19 @@
 	<string name="poi_motorcycle_type">Tipo de motocicleta</string>
 
 <string name="poi_motorcycle_sales_yes">Ventas</string>
-	<string name="poi_motorcycle_sales_no">Venden motocicletas: No</string>
-	<string name="poi_motorcycle_sales_yes_used">Venden motocicletas: Sí; usadas</string>
+	<string name="poi_motorcycle_sales_no">Venden motocicletas: no</string>
+	<string name="poi_motorcycle_sales_yes_used">Venden motocicletas: sí; usadas</string>
 	<string name="poi_motorcycle_sales_used">Venden motocicletas: usadas</string>
 	<string name="poi_motorcycle_rental_yes">Alquiler</string>
-	<string name="poi_motorcycle_rental_no">Alquilan motocicletas: No</string>
+	<string name="poi_motorcycle_rental_no">Alquilan motocicletas: no</string>
 	<string name="poi_motorcycle_repair_yes">Reparación</string>
-	<string name="poi_motorcycle_repair_no">Reparan motocicletas: No</string>
+	<string name="poi_motorcycle_repair_no">Reparan motocicletas: no</string>
 	<string name="poi_motorcycle_parts_yes">Repuestos para motocicletas</string>
-	<string name="poi_motorcycle_parts_no">Repuestos para motocicletas: No</string>
+	<string name="poi_motorcycle_parts_no">Repuestos para motocicletas: no</string>
 	<string name="poi_motorcycle_tyres_yes">Neumáticos</string>
-	<string name="poi_motorcycle_tyres_no">Neumáticos: No</string>
+	<string name="poi_motorcycle_tyres_no">Neumáticos: no</string>
 	<string name="poi_motorcycle_clothes_yes">Ropa de motocicleta</string>
-	<string name="poi_motorcycle_clothes_no">Ropa de motocicleta: No</string>
+	<string name="poi_motorcycle_clothes_no">Ropa de motocicleta: no</string>
 	<string name="poi_motorcycle_type_scooter">Scooter (motoneta)</string>
 	<string name="poi_motorcycle_type_sportbike">Deportiva</string>
 	<string name="poi_motorcycle_type_chopper">Chopper</string>
@@ -3218,7 +3218,7 @@
 	<string name="poi_motorcycle_type_standard">Estándar</string>
 
 <string name="poi_lock_basin">Compuerta de esclusa</string>
-	<string name="poi_generator_output_electricity_no">Salida (electricidad): No</string>
+	<string name="poi_generator_output_electricity_no">Salida (electricidad): no</string>
 
 <string name="poi_owner">Propietario</string>
 
@@ -3231,9 +3231,9 @@
 	<string name="poi_animal_shelter_fish">Peces</string>
 
 	<string name="poi_animal_shelter_purpose_adoption_yes">Adopción</string>
-	<string name="poi_animal_shelter_purpose_adoption_no">Adopción: No</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Adopción: no</string>
 	<string name="poi_animal_shelter_purpose_release_yes">Rehabilitación y liberación</string>
-	<string name="poi_animal_shelter_purpose_release_no">Rehabilitación y liberación: No</string>
+	<string name="poi_animal_shelter_purpose_release_no">Rehabilitación y liberación: no</string>
 
 	<string name="poi_spaceport">Puerto espacial</string>
 
@@ -3263,12 +3263,12 @@
 	<string name="poi_direction_exit">Dirección: Salida</string>
 	<string name="poi_direction_all">Dirección: Todas</string>
 
-<string name="poi_winter_room_yes">Refugio del invierno: Sí</string>
-	<string name="poi_winter_room_no">Refugio del invierno: No</string>
+<string name="poi_winter_room_yes">Refugio del invierno: sí</string>
+	<string name="poi_winter_room_no">Refugio del invierno: no</string>
 	<string name="poi_reservation_required">Reservación: Requerida</string>
 	<string name="poi_reservation_recommended">Reservación: Recomendada</string>
-	<string name="poi_reservation_yes">Reservación: Sí</string>
-	<string name="poi_reservation_no">Reservación: No</string>
+	<string name="poi_reservation_yes">Reservación: sí</string>
+	<string name="poi_reservation_no">Reservación: no</string>
 	<string name="poi_reservation_members_only">Reservación: Sólo miembros</string>
 
 	<string name="poi_beds">Camas</string>
@@ -3276,22 +3276,22 @@
 <string name="poi_boat_rental_type">Barcos de alquiler</string>
 
 <string name="poi_boat_rental">Alquiler de barcos</string>
-	<string name="poi_boat_motorboat_rental_yes">Lanchas de motor: Sí</string>
-	<string name="poi_boat_motorboat_rental_no">Lanchas de motor: No</string>
-	<string name="poi_boat_houseboat_rental_yes">Casas flotantes: Sí</string>
-	<string name="poi_boat_houseboat_rental_no">Casas flotantes: No</string>
-	<string name="poi_boat_pedalboat_rental_yes">Barcos a pedal: Sí</string>
-	<string name="poi_boat_pedalboat_rental_no">Barcos a pedal: No</string>
-	<string name="poi_boat_jetski_rental_yes">Motos de agua: Sí</string>
-	<string name="poi_boat_jetski_rental_no">Motos de agua: No</string>
-	<string name="poi_boat_sailboat_rental_yes">Veleros: Sí</string>
-	<string name="poi_boat_sailboat_rental_no">Veleros: No</string>
-	<string name="poi_boat_dinghy_rental_rental_yes">Botes: Sí</string>
-	<string name="poi_boat_dinghy_rental_rental_no">Botes: No</string>
-	<string name="poi_boat_kayak_rental_rental_yes">Kayaks: Sí</string>
-	<string name="poi_boat_kayak_rental_rental_no">Kayaks: No</string>
-	<string name="poi_boat_canoe_rental_rental_yes">Canoas: Sí</string>
-	<string name="poi_boat_canoe_rental_rental_no">Canoas: No</string>
+	<string name="poi_boat_motorboat_rental_yes">Lanchas de motor: sí</string>
+	<string name="poi_boat_motorboat_rental_no">Lanchas de motor: no</string>
+	<string name="poi_boat_houseboat_rental_yes">Casas flotantes: sí</string>
+	<string name="poi_boat_houseboat_rental_no">Casas flotantes: no</string>
+	<string name="poi_boat_pedalboat_rental_yes">Barcos a pedal: sí</string>
+	<string name="poi_boat_pedalboat_rental_no">Barcos a pedal: no</string>
+	<string name="poi_boat_jetski_rental_yes">Motos de agua: sí</string>
+	<string name="poi_boat_jetski_rental_no">Motos de agua: no</string>
+	<string name="poi_boat_sailboat_rental_yes">Veleros: sí</string>
+	<string name="poi_boat_sailboat_rental_no">Veleros: no</string>
+	<string name="poi_boat_dinghy_rental_rental_yes">Botes: sí</string>
+	<string name="poi_boat_dinghy_rental_rental_no">Botes: no</string>
+	<string name="poi_boat_kayak_rental_rental_yes">Kayaks: sí</string>
+	<string name="poi_boat_kayak_rental_rental_no">Kayaks: no</string>
+	<string name="poi_boat_canoe_rental_rental_yes">Canoas: sí</string>
+	<string name="poi_boat_canoe_rental_rental_no">Canoas: no</string>
 
 <string name="poi_network">Red</string>
 
@@ -3435,17 +3435,17 @@
 	<string name="poi_socket_as3112_current">Conector: AS/NZS 3112: corriente</string>
 	<string name="poi_socket_as3112_output">Conector: AS/NZS 3112: salida</string>
 
-	<string name="poi_car_yes">Automóvil: Sí</string>
-	<string name="poi_car_no">Automóvil: No</string>
-	<string name="poi_bicycle_yes">Bicicleta: Sí</string>
-	<string name="poi_bicycle_no">Bicicleta: No</string>
-	<string name="poi_scooter_yes">Motoneta (scooter): Sí</string>
-	<string name="poi_scooter_no">Motoneta (scooter): No</string>
-	<string name="poi_truck_yes">Camión: Sí</string>
-	<string name="poi_truck_no">Camión: No</string>
+	<string name="poi_car_yes">Automóvil: sí</string>
+	<string name="poi_car_no">Automóvil: no</string>
+	<string name="poi_bicycle_yes">Bicicleta: sí</string>
+	<string name="poi_bicycle_no">Bicicleta: no</string>
+	<string name="poi_scooter_yes">Motoneta (scooter): sí</string>
+	<string name="poi_scooter_no">Motoneta (scooter): no</string>
+	<string name="poi_truck_yes">Camión: sí</string>
+	<string name="poi_truck_no">Camión: no</string>
 
-	<string name="poi_parking_fee_yes">Tarifa de estacionamiento: Sí</string>
-	<string name="poi_parking_fee_no">Tarifa de estacionamiento: No</string>
+	<string name="poi_parking_fee_yes">Tarifa de estacionamiento: sí</string>
+	<string name="poi_parking_fee_no">Tarifa de estacionamiento: no</string>
 	<string name="poi_parking_fee">Tarifa de estacionamiento</string>
 
 	<string name="poi_amperage">Amperaje</string>
@@ -3477,22 +3477,22 @@
 
 <string name="poi_ref_post">Código postal</string>
 
-	<string name="poi_climbing_sport_yes">Deportiva: Sí</string>
-	<string name="poi_climbing_sport_no">Deportiva: No</string>
-	<string name="poi_climbing_boulder_yes">Escalada en bloque: Sí</string>
-	<string name="poi_climbing_boulder_no">Escalada en bloque: No</string>
-	<string name="poi_climbing_toprope_yes">Moulinette: Sí</string>
-	<string name="poi_climbing_toprope_no">Moulinette: No</string>
-	<string name="poi_climbing_trad_yes">Tradicional: Sí</string>
-	<string name="poi_climbing_trad_no">Tradicional: No</string>
-	<string name="poi_climbing_multipitch_yes">Rutas multipaso: Sí</string>
-	<string name="poi_climbing_multipitch_no">Rutas multipaso: No</string>
-	<string name="poi_climbing_ice_yes">Hielo: Sí</string>
-	<string name="poi_climbing_ice_no">Hielo: No</string>
-	<string name="poi_climbing_mixed_yes">Mixto: Sí</string>
-	<string name="poi_climbing_mixed_no">Mixto: No</string>
-	<string name="poi_climbing_deepwater_yes">Psicobloc: Sí</string>
-	<string name="poi_climbing_deepwater_no">Psicobloc: No</string>
+	<string name="poi_climbing_sport_yes">Deportiva: sí</string>
+	<string name="poi_climbing_sport_no">Deportiva: no</string>
+	<string name="poi_climbing_boulder_yes">Escalada en bloque: sí</string>
+	<string name="poi_climbing_boulder_no">Escalada en bloque: no</string>
+	<string name="poi_climbing_toprope_yes">Moulinette: sí</string>
+	<string name="poi_climbing_toprope_no">Moulinette: no</string>
+	<string name="poi_climbing_trad_yes">Tradicional: sí</string>
+	<string name="poi_climbing_trad_no">Tradicional: no</string>
+	<string name="poi_climbing_multipitch_yes">Rutas multipaso: sí</string>
+	<string name="poi_climbing_multipitch_no">Rutas multipaso: no</string>
+	<string name="poi_climbing_ice_yes">Hielo: sí</string>
+	<string name="poi_climbing_ice_no">Hielo: no</string>
+	<string name="poi_climbing_mixed_yes">Mixto: sí</string>
+	<string name="poi_climbing_mixed_no">Mixto: no</string>
+	<string name="poi_climbing_deepwater_yes">Psicobloc: sí</string>
+	<string name="poi_climbing_deepwater_no">Psicobloc: no</string>
 
 	<string name="poi_climbing_length">Longitud de escalada</string>
 	<string name="poi_climbing_length_min">Longitud mínima de escalada</string>
@@ -3505,8 +3505,8 @@
 	<string name="poi_climbing_rock_porphyry">Escalada en roca: Pórfido</string>
 	<string name="poi_climbing_quality_solid">Calidad de la escalada: Sólido</string>
 	<string name="poi_climbing_quality_fragile">Calidad de la escalada: Frágil</string>
-	<string name="poi_climbing_bolted_yes">Anclajes fijos: Sí</string>
-	<string name="poi_climbing_bolted_no">Anclajes fijos: No</string>
+	<string name="poi_climbing_bolted_yes">Anclajes fijos: sí</string>
+	<string name="poi_climbing_bolted_no">Anclajes fijos: no</string>
 	<string name="poi_climbing_orientation_n">Orientación del muro: N</string>
 	<string name="poi_climbing_orientation_ne">Orientación del muro: NE</string>
 	<string name="poi_climbing_orientation_e">Orientación del muro: E</string>
@@ -3515,8 +3515,8 @@
 	<string name="poi_climbing_orientation_sw">Orientación del muro: SO</string>
 	<string name="poi_climbing_orientation_w">Orientación del muro: O</string>
 	<string name="poi_climbing_orientation_nw">Orientación del muro: NO</string>
-	<string name="poi_climbing_summit_log_yes">Registro de la escalada en la cumbre: Sí</string>
-	<string name="poi_climbing_summit_log_no">Registro de la escalada en la cumbre: No</string>
+	<string name="poi_climbing_summit_log_yes">Registro de la escalada en la cumbre: sí</string>
+	<string name="poi_climbing_summit_log_no">Registro de la escalada en la cumbre: no</string>
 	<string name="poi_climbing_routes">Rutas de escalada</string>
 
 
