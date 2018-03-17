@@ -19,7 +19,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithTitleAndButton;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.MapUtils;
 
@@ -64,7 +64,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		recyclerView = new RecyclerView(getContext());
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		recyclerView = (RecyclerView) View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.favourites_recycleview, null);
+				R.layout.recyclerview, null);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		location = getMyApplication().getLocationProvider().getLastKnownLocation();
 		if (location != null) {
@@ -72,8 +72,8 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		}
 		adapter = new FavouritesAdapter(getContext(), favouritePoints);
 		sortFavourites();
-		final BottomSheetItemWithTitleAndButton[] title = new BottomSheetItemWithTitleAndButton[1];
-		title[0] = (BottomSheetItemWithTitleAndButton) new BottomSheetItemWithTitleAndButton.Builder()
+		final BottomSheetItemTitleWithDescrAndButton[] title = new BottomSheetItemTitleWithDescrAndButton[1];
+		title[0] = (BottomSheetItemTitleWithDescrAndButton) new BottomSheetItemTitleWithDescrAndButton.Builder()
 				.setButtonIcons(null, getIconForButton())
 				.setButtonTitle(getTextForButton(sortByDist))
 				.setonButtonClickListener(new View.OnClickListener() {
@@ -87,7 +87,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				})
 				.setDescription(getTextForButton(!sortByDist))
 				.setTitle(getString(R.string.favourites))
-				.setLayoutId(R.layout.bottom_sheet_item_with_title_and_button)
+				.setLayoutId(R.layout.bottom_sheet_item_title_with_descr_and_button)
 				.create();
 		items.add(title[0]);
 

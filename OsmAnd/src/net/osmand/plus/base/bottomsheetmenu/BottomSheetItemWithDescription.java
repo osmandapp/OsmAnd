@@ -47,7 +47,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 	@Override
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
 		super.inflate(app, container, nightMode);
-			descriptionTv = (TextView) view.findViewById(R.id.description);
+		descriptionTv = (TextView) view.findViewById(R.id.description);
 		if (descriptionTv != null) {
 			descriptionTv.setText(description);
 			if (descriptionColorId != INVALID_ID) {

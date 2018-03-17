@@ -12,7 +12,7 @@ import android.widget.TextView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
-public class BottomSheetItemWithTitleAndButton extends BottomSheetItemWithDescription {
+public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithDescription {
 
 	private View.OnClickListener onButtonClickListener;
 	private Drawable leftCompoundDrawable;
@@ -23,22 +23,22 @@ public class BottomSheetItemWithTitleAndButton extends BottomSheetItemWithDescri
 
 	private TextView textButtonTV;
 
-	public BottomSheetItemWithTitleAndButton(View customView,
-	                                         @LayoutRes int layoutId,
-	                                         Object tag,
-	                                         boolean disabled,
-	                                         View.OnClickListener onClickListener,
-	                                         int position,
-	                                         Drawable icon,
-	                                         String title,
-	                                         @ColorRes int titleColorId,
-	                                         CharSequence description,
-	                                         @ColorRes int descriptionColorId,
-	                                         String buttonTitle,
-	                                         View.OnClickListener onButtonClickListener,
-	                                         Drawable leftCompoundDrawable,
-	                                         Drawable rightCompoundDrawable,
-	                                         @ColorRes int buttonTextColor) {
+	public BottomSheetItemTitleWithDescrAndButton(View customView,
+	                                              @LayoutRes int layoutId,
+	                                              Object tag,
+	                                              boolean disabled,
+	                                              View.OnClickListener onClickListener,
+	                                              int position,
+	                                              Drawable icon,
+	                                              String title,
+	                                              @ColorRes int titleColorId,
+	                                              CharSequence description,
+	                                              @ColorRes int descriptionColorId,
+	                                              String buttonTitle,
+	                                              View.OnClickListener onButtonClickListener,
+	                                              Drawable leftCompoundDrawable,
+	                                              Drawable rightCompoundDrawable,
+	                                              @ColorRes int buttonTextColor) {
 		super(customView, layoutId, tag, disabled, onClickListener, position, icon, title, titleColorId, description, descriptionColorId);
 		this.buttonTitle = buttonTitle;
 		this.onButtonClickListener = onButtonClickListener;
@@ -79,29 +79,29 @@ public class BottomSheetItemWithTitleAndButton extends BottomSheetItemWithDescri
 		@ColorRes
 		protected int buttonTextColor = INVALID_ID;
 
-		public BottomSheetItemWithTitleAndButton.Builder setButtonIcons(Drawable leftCompoundDrawable, Drawable rightCompoundDrawable) {
+		public BottomSheetItemTitleWithDescrAndButton.Builder setButtonIcons(Drawable leftCompoundDrawable, Drawable rightCompoundDrawable) {
 			this.leftCompoundDrawable = leftCompoundDrawable;
 			this.rightCompoundDrawable = rightCompoundDrawable;
 			return this;
 		}
 
-		public BottomSheetItemWithTitleAndButton.Builder setonButtonClickListener(View.OnClickListener onButtonClickListener) {
+		public BottomSheetItemTitleWithDescrAndButton.Builder setonButtonClickListener(View.OnClickListener onButtonClickListener) {
 			this.onButtonClickListener = onButtonClickListener;
 			return this;
 		}
 
-		public BottomSheetItemWithTitleAndButton.Builder setButtonTitle(String buttonTitle) {
+		public BottomSheetItemTitleWithDescrAndButton.Builder setButtonTitle(String buttonTitle) {
 			this.buttonTitle = buttonTitle;
 			return this;
 		}
 
-		public BottomSheetItemWithTitleAndButton.Builder setButtonTextColor(@ColorRes int buttonTextColor) {
+		public BottomSheetItemTitleWithDescrAndButton.Builder setButtonTextColor(@ColorRes int buttonTextColor) {
 			this.buttonTextColor = buttonTextColor;
 			return this;
 		}
 
-		public BottomSheetItemWithTitleAndButton create() {
-			return new BottomSheetItemWithTitleAndButton(customView,
+		public BottomSheetItemTitleWithDescrAndButton create() {
+			return new BottomSheetItemTitleWithDescrAndButton(customView,
 					layoutId,
 					tag,
 					disabled,
