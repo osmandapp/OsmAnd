@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="use_transparent_map_theme">Przezroczysty styl</string>
     <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -3030,4 +3031,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="empty_state_markers_groups_desc">Możesz importować grupy z ulubionych lub tras punktów jako markery.</string>
     <string name="rendering_attr_whiteWaterSports_name">Sporty spływowe</string>
     <string name="group_deleted">Usunięto grupę</string>
+    <string name="clear_all_intermediates">Wyczyść wszystkie punkty pośrednie</string>
     </resources>
