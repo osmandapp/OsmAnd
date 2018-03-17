@@ -1905,7 +1905,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
 	<string name="osn_close_dialog_error">Error: no se cerró la nota de OSM</string>
 	<string name="shared_string_commit">Confirmar</string>
 	
-    <string name="context_menu_item_delete_waypoint">¿Quieres borrar el punto GPX de referencia?</string>
+    <string name="context_menu_item_delete_waypoint">¿Quieres borrar el punto GPX?</string>
     <string name="context_menu_item_edit_waypoint">Editar punto GPX</string>
     <string name="rendering_attr_currentTrackColor_description">Color del GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Ancho del GPX</string>
