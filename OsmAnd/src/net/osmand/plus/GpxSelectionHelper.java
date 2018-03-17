@@ -554,7 +554,7 @@ public class GpxSelectionHelper {
 				if (show && !enabled) {
 					mapMarkersHelper.addMarkersSyncGroup(syncGroup);
 				} else if (!show && mapMarkersHelper.isGroupDisabled(gpx.getAbsolutePath())) {
-					mapMarkersHelper.removeMarkersSyncGroup(gpx.getAbsolutePath(), true);
+					mapMarkersHelper.removeMarkersSyncGroup(gpx.getAbsolutePath());
 				}
 			}
 			mapMarkersHelper.syncGroupAsync(syncGroup, enabled, callback);
