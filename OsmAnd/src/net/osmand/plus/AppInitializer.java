@@ -358,6 +358,29 @@ public class AppInitializer implements IProgress {
 			}
 
 			@Override
+			public String getSynonyms(AbstractPoiType type) {
+				if(type.getBaseLangType() != null) {
+					return getSynonyms(type.getBaseLangType());
+				}
+				return getSynonyms(type.getIconKeyName());
+			}
+
+
+			@Override
+			public String getSynonyms(String keyName) {
+				try {
+					Field f = R.string.class.getField("synonyms_poi_" + keyName);
+					if (f != null) {
+						Integer in = (Integer) f.get(null);
+						return app.getString(in);
+					}
+				} catch (Exception e) {
+			//		LOG.debug("No translation for "+ keyName + " " + e.getMessage());
+				}
+				return "";
+			}
+
+			@Override
 			public String getEnTranslation(AbstractPoiType type) {
 				if(type.getBaseLangType() != null) {
 					return getEnTranslation(type.getBaseLangType()) +  " (" + app.getLangTranslation(type.getLang()).toLowerCase() +")";
