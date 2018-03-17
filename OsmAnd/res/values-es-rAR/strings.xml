@@ -2326,7 +2326,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="shared_string_action_name">Nombre de la acción</string>
     <string name="quick_action_add_marker_descr">Pulsar el botón de acción añadirá un marcador en la ubicación central de la pantalla.</string>
-    <string name="quick_action_add_gpx_descr">Pulsar el botón de acción añadirá un punto GPX de referencia en la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_gpx_descr">Pulsar el botón de acción añadirá un punto de referencia GPX en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción añadirá una nota de audio en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Pulsar el botón de acción añadirá una nota de video en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_photo_note_descr">Pulsar el botón de acción añadirá una nota fotográfica en la ubicación central de la pantalla.</string>
