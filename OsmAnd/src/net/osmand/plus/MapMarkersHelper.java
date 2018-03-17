@@ -97,8 +97,7 @@ public class MapMarkersHelper {
 		public FavouritePoint favouritePoint;
 		public String mapObjectName;
 
-		public MapMarker(LatLon point, PointDescription name, int colorIndex,
-						 boolean selected, int index) {
+		public MapMarker(LatLon point, PointDescription name, int colorIndex, boolean selected, int index) {
 			this.point = point;
 			this.pointDescription = name;
 			this.colorIndex = colorIndex;
@@ -107,8 +106,7 @@ public class MapMarkersHelper {
 		}
 
 		public PointDescription getPointDescription(Context ctx) {
-			return new PointDescription(POINT_TYPE_MAP_MARKER, ctx.getString(R.string.map_marker),
-					getOnlyName());
+			return new PointDescription(POINT_TYPE_MAP_MARKER, ctx.getString(R.string.map_marker), getOnlyName());
 		}
 
 		public String getName(Context ctx) {
@@ -159,9 +157,7 @@ public class MapMarkersHelper {
 
 			MapMarker mapMarker = (MapMarker) o;
 
-			if (colorIndex != mapMarker.colorIndex) return false;
-			return point.equals(mapMarker.point);
-
+			return colorIndex == mapMarker.colorIndex && point.equals(mapMarker.point);
 		}
 
 		@Override
@@ -239,10 +235,6 @@ public class MapMarkersHelper {
 
 		public int getType() {
 			return type;
-		}
-
-		public Set<String> getWptCategories() {
-			return wptCategories;
 		}
 
 		public String getWptCategoriesString() {
@@ -477,10 +469,6 @@ public class MapMarkersHelper {
 
 	public void syncGroupAsync(@NonNull MarkersSyncGroup group) {
 		syncGroupAsync(group, true, null);
-	}
-
-	public void syncGroupAsync(@NonNull MarkersSyncGroup group, boolean enabled) {
-		syncGroupAsync(group, enabled, null);
 	}
 
 	public void syncGroupAsync(@NonNull MarkersSyncGroup group, @Nullable OnGroupSyncedListener groupSyncedListener) {
@@ -841,7 +829,7 @@ public class MapMarkersHelper {
 		reorderActiveMarkersIfNeeded();
 	}
 
-	public List<LatLon> getActiveMarkersLatLon() {
+	private List<LatLon> getActiveMarkersLatLon() {
 		List<LatLon> list = new ArrayList<>();
 		for (MapMarker m : this.mapMarkers) {
 			list.add(m.point);
@@ -859,7 +847,7 @@ public class MapMarkersHelper {
 		return list;
 	}
 
-	public List<LatLon> getMarkersHistoryLatLon() {
+	private List<LatLon> getMarkersHistoryLatLon() {
 		List<LatLon> list = new ArrayList<>();
 		for (MapMarker m : this.mapMarkersHistory) {
 			list.add(m.point);
@@ -889,14 +877,6 @@ public class MapMarkersHelper {
 		refresh();
 	}
 
-	public void removeMarkersHistory() {
-		cancelAddressRequests();
-		markersDbHelper.clearAllMarkersHistory();
-		mapMarkersHistory = new ArrayList<>();
-		refresh();
-		removeHistoryMarkersFromGroups();
-	}
-
 	public void addMarkersSyncGroup(MarkersSyncGroup group) {
 		if (group != null) {
 			if (markersDbHelper.getGroup(group.getId()) == null) {
@@ -918,7 +898,7 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void removeDisabledGroups() {
+	private void removeDisabledGroups() {
 		markersDbHelper.removeDisabledGroups();
 	}
 
@@ -952,7 +932,7 @@ public class MapMarkersHelper {
 		refresh();
 	}
 
-	public void removeActiveMarkersFromSyncGroup(String syncGroupId) {
+	private void removeActiveMarkersFromSyncGroup(String syncGroupId) {
 		if (syncGroupId != null) {
 			markersDbHelper.removeActiveMarkersFromSyncGroup(syncGroupId);
 			List<MapMarker> copyList = new ArrayList<>(mapMarkers);
@@ -1151,19 +1131,6 @@ public class MapMarkersHelper {
 		return fout.getAbsolutePath();
 	}
 
-	private void removeHistoryMarkersFromGroups() {
-		for (MapMarkersGroup markersGroup : mapMarkersGroups) {
-			List<MapMarker> activeMarkers = new ArrayList<>();
-			for (MapMarker marker : markersGroup.getMarkers()) {
-				if (!marker.history) {
-					activeMarkers.add(marker);
-				}
-			}
-			markersGroup.setMarkers(activeMarkers);
-			updateGroup(markersGroup);
-		}
-	}
-
 	private void removeActiveMarkersFromGroup(String groupId) {
 		MapMarkersGroup group = getMapMarkerGroupByKey(groupId);
 		if (group != null) {
@@ -1199,7 +1166,6 @@ public class MapMarkersHelper {
 		} else if (historyMarkersCount > 0) {
 			showHideHistoryButton = new ShowHideHistoryButton();
 			showHideHistoryButton.setShowHistory(false);
-			showHideHistoryButton.setMarkerGroup(mapMarkersGroup);
 			mapMarkersGroup.setShowHideHistoryButton(showHideHistoryButton);
 		}
 	}
@@ -1493,7 +1459,6 @@ public class MapMarkersHelper {
 
 	public static class ShowHideHistoryButton {
 		private boolean showHistory;
-		private MapMarkersGroup group;
 
 		public boolean isShowHistory() {
 			return showHistory;
@@ -1501,14 +1466,6 @@ public class MapMarkersHelper {
 
 		public void setShowHistory(boolean showHistory) {
 			this.showHistory = showHistory;
-		}
-
-		public MapMarkersGroup getMapMarkerGroup() {
-			return group;
-		}
-
-		public void setMarkerGroup(MapMarkersGroup group) {
-			this.group = group;
 		}
 	}
 
