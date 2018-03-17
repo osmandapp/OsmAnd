@@ -614,13 +614,14 @@ public class MapMarkersHelper {
 	private void removeActiveMarkersFromSyncGroup(String syncGroupId) {
 		if (syncGroupId != null) {
 			markersDbHelper.removeActiveMarkersFromSyncGroup(syncGroupId);
+			List<MapMarker> newList = new ArrayList<>();
 			List<MapMarker> copyList = new ArrayList<>(mapMarkers);
 			for (MapMarker marker : copyList) {
 				if (marker.groupKey == null || !marker.groupKey.equals(syncGroupId)) {
-					copyList.add(marker);
+					newList.add(marker);
 				}
 			}
-			mapMarkers = copyList;
+			mapMarkers = newList;
 			reorderActiveMarkersIfNeeded();
 			refresh();
 		}
