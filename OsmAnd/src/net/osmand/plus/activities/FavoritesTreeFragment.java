@@ -424,40 +424,26 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 	private void selectMapMarkersImpl() {
 		if (getSelectedFavoritesCount() > 0) {
-			if (getSettings().USE_MAP_MARKERS.get()) {
-				MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
-				List<LatLon> points = new LinkedList<>();
-				List<PointDescription> names = new LinkedList<>();
-				for (Map.Entry<String, Set<FavouritePoint>> entry : favoritesSelected.entrySet()) {
-					FavoriteGroup favGr = helper.getGroup(entry.getKey());
-					MarkersSyncGroup syncGr =
-							new MarkersSyncGroup(favGr.name, favGr.name, MarkersSyncGroup.FAVORITES_TYPE);
-					if (entry.getValue().size() == favGr.points.size()) {
-						markersHelper.addMarkersSyncGroup(syncGr);
-						markersHelper.syncGroupAsync(syncGr);
-					} else {
-						for (FavouritePoint fp : entry.getValue()) {
-							points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
-							names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, fp.getName()));
-						}
-						markersHelper.addMapMarkers(points, names, syncGr);
-						points.clear();
-						names.clear();
+			MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
+			List<LatLon> points = new ArrayList<>();
+			List<PointDescription> names = new ArrayList<>();
+			for (Map.Entry<String, Set<FavouritePoint>> entry : favoritesSelected.entrySet()) {
+				FavoriteGroup favGr = helper.getGroup(entry.getKey());
+				MarkersSyncGroup syncGr = MapMarkersHelper.createGroup(favGr);
+				if (entry.getValue().size() == favGr.points.size()) {
+					markersHelper.addMarkersSyncGroup(syncGr);
+					markersHelper.syncGroupAsync(syncGr);
+				} else {
+					for (FavouritePoint fp : entry.getValue()) {
+						points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
+						names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, fp.getName()));
 					}
+					markersHelper.addMapMarkers(points, names, syncGr);
+					points.clear();
+					names.clear();
 				}
-				MapActivity.launchMapActivityMoveToTop(getActivity());
-			} else {
-				final TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
-				for (FavouritePoint fp : getSelectedFavorites()) {
-					targetPointsHelper.navigateToPoint(new LatLon(fp.getLatitude(), fp.getLongitude()), false,
-							targetPointsHelper.getIntermediatePoints().size() + 1,
-							new PointDescription(PointDescription.POINT_TYPE_FAVORITE, fp.getName()));
-				}
-				if (getMyApplication().getRoutingHelper().isRouteCalculated()) {
-					targetPointsHelper.updateRouteAndRefresh(true);
-				}
-				IntermediatePointsDialog.openIntermediatePointsDialog(getActivity(), getMyApplication(), true);
 			}
+			MapActivity.launchMapActivityMoveToTop(getActivity());
 		}
 	}
 

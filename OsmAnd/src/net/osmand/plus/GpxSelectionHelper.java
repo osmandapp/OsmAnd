@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
@@ -546,15 +545,15 @@ public class GpxSelectionHelper {
 		File gpx = new File(gpxFile.path);
 		if (gpx.exists()) {
 			MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
-			MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(), AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
+			MarkersSyncGroup syncGroup = MapMarkersHelper.createGroup(gpx);
 			boolean enabled = true;
 			if (createOrDeleteGroup) {
 				boolean show = getSelectedFileByPath(gpx.getAbsolutePath()) != null;
-				enabled = mapMarkersHelper.isGroupSynced(gpx.getAbsolutePath());
+				enabled = mapMarkersHelper.isGroupSynced(syncGroup.getId());
 				if (show && !enabled) {
 					mapMarkersHelper.addMarkersSyncGroup(syncGroup);
-				} else if (!show && mapMarkersHelper.isGroupDisabled(gpx.getAbsolutePath())) {
-					mapMarkersHelper.removeMarkersSyncGroup(gpx.getAbsolutePath());
+				} else if (!show && mapMarkersHelper.isGroupDisabled(syncGroup.getId())) {
+					mapMarkersHelper.removeMarkersSyncGroup(syncGroup.getId());
 				}
 			}
 			mapMarkersHelper.syncGroupAsync(syncGroup, enabled, callback);

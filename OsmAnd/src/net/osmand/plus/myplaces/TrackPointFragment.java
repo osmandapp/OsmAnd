@@ -671,36 +671,21 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 	private void selectMapMarkersImpl() {
 		if (getSelectedItemsCount() > 0) {
-			if (getSettings().USE_MAP_MARKERS.get()) {
-				MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-				List<LatLon> points = new LinkedList<>();
-				List<PointDescription> names = new LinkedList<>();
-				for (Map.Entry<GpxDisplayItemType, Set<GpxDisplayItem>> entry : selectedItems.entrySet()) {
-					if (entry.getKey() != GpxDisplayItemType.TRACK_POINTS) {
-						for (GpxDisplayItem i : entry.getValue()) {
-							if (i.locationStart != null) {
-								points.add(new LatLon(i.locationStart.lat, i.locationStart.lon));
-								names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, i.name));
-							}
+			MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+			List<LatLon> points = new ArrayList<>();
+			List<PointDescription> names = new ArrayList<>();
+			for (Map.Entry<GpxDisplayItemType, Set<GpxDisplayItem>> entry : selectedItems.entrySet()) {
+				if (entry.getKey() != GpxDisplayItemType.TRACK_POINTS) {
+					for (GpxDisplayItem i : entry.getValue()) {
+						if (i.locationStart != null) {
+							points.add(new LatLon(i.locationStart.lat, i.locationStart.lon));
+							names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, i.name));
 						}
-						markersHelper.addMapMarkers(points, names, null);
 					}
+					markersHelper.addMapMarkers(points, names, null);
 				}
-				MapActivity.launchMapActivityMoveToTop(getActivity());
-			} else {
-				final TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
-				for (GpxDisplayItem i : getSelectedItems()) {
-					if (i.locationStart != null) {
-						targetPointsHelper.navigateToPoint(new LatLon(i.locationStart.lat, i.locationStart.lon), false,
-								targetPointsHelper.getIntermediatePoints().size() + 1,
-								new PointDescription(PointDescription.POINT_TYPE_FAVORITE, i.name));
-					}
-				}
-				if (getMyApplication().getRoutingHelper().isRouteCalculated()) {
-					targetPointsHelper.updateRouteAndRefresh(true);
-				}
-				IntermediatePointsDialog.openIntermediatePointsDialog(getActivity(), getMyApplication(), true);
 			}
+			MapActivity.launchMapActivityMoveToTop(getActivity());
 		}
 	}
 

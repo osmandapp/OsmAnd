@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -232,11 +233,6 @@ public class MapMarkersHelper {
 		});
 	}
 
-	@Nullable
-	public MarkersSyncGroup getGroup(String id) {
-		return markersDbHelper.getGroup(id);
-	}
-
 	public boolean isGroupSynced(String id) {
 		return markersDbHelper.getGroup(id) != null;
 	}
@@ -273,11 +269,9 @@ public class MapMarkersHelper {
 	}
 
 	public boolean isSynced(SelectedGpxFile gpxFile) {
-		GPXFile gpx = gpxFile.getGpxFile();
-		List<WptPt> gpxPoints = gpx.getPoints();
+		List<WptPt> gpxPoints = gpxFile.getGpxFile().getPoints();
 		for (WptPt wptPt : gpxPoints) {
-			MapMarker mapMarker = getMapMarker(wptPt);
-			if (mapMarker != null) {
+			if (getMapMarker(wptPt) != null) {
 				return true;
 			}
 		}
@@ -288,6 +282,7 @@ public class MapMarkersHelper {
 		return getMapMarker(favouritePoint) != null;
 	}
 
+	@Nullable
 	public MapMarker getMapMarker(WptPt wptPt) {
 		for (MapMarker marker : mapMarkers) {
 			if (marker.wptPt == wptPt) {
@@ -297,6 +292,7 @@ public class MapMarkersHelper {
 		return null;
 	}
 
+	@Nullable
 	public MapMarker getMapMarker(FavouritePoint favouritePoint) {
 		for (MapMarker marker : mapMarkers) {
 			if (marker.favouritePoint == favouritePoint) {
@@ -879,7 +875,7 @@ public class MapMarkersHelper {
 		if (marker.groupName != null) {
 			group.setName(marker.groupName);
 			group.setGroupKey(marker.groupKey);
-			MapMarkersHelper.MarkersSyncGroup syncGroup = getGroup(marker.groupKey);
+			MarkersSyncGroup syncGroup = markersDbHelper.getGroup(marker.groupKey);
 			if (syncGroup != null) {
 				group.setType(syncGroup.getType());
 			} else {
@@ -938,7 +934,7 @@ public class MapMarkersHelper {
 					group = new MapMarkersGroup();
 					group.setName(marker.groupName);
 					group.setGroupKey(marker.groupKey);
-					MapMarkersHelper.MarkersSyncGroup syncGroup = getGroup(marker.groupKey);
+					MarkersSyncGroup syncGroup = markersDbHelper.getGroup(marker.groupKey);
 					if (syncGroup != null) {
 						group.setType(syncGroup.getType());
 					} else {
@@ -1018,6 +1014,14 @@ public class MapMarkersHelper {
 			}
 		}
 		return null;
+	}
+
+	public static MarkersSyncGroup createGroup(@NonNull FavoriteGroup favGroup) {
+		return new MarkersSyncGroup(favGroup.name, favGroup.name, MarkersSyncGroup.FAVORITES_TYPE);
+	}
+
+	public static MarkersSyncGroup createGroup(@NonNull File gpx) {
+		return new MarkersSyncGroup(gpx.getAbsolutePath(), AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
 	}
 
 	// ---------------------------------------------------------------------------------------------
