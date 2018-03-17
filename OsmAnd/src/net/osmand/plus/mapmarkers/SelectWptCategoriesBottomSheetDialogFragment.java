@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -121,10 +120,8 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 			gpxSelectionHelper.selectGpxFile(gpxFile, true, false, false);
 		}
 
-		MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpxFile.path,
-				AndroidUtils.trimExtension(new File(gpxFile.path).getName()),
-				MarkersSyncGroup.GPX_TYPE,
-				selectedCategories);
+		MarkersSyncGroup syncGroup = MapMarkersHelper.createGroup(new File(gpxFile.path));
+		syncGroup.setWptCategories(selectedCategories);
 
 		mapMarkersHelper.addMarkersSyncGroup(syncGroup);
 		mapMarkersHelper.syncGroupAsync(syncGroup, new MapMarkersHelper.OnGroupSyncedListener() {

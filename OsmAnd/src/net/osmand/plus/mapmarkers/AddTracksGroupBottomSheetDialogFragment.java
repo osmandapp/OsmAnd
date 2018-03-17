@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
@@ -18,6 +17,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -84,7 +84,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 			GPXFile res = GPXUtilities.loadGPXFile(app, gpx);
 			gpxSelectionHelper.selectGpxFile(res, true, false, false);
 		}
-		return new MarkersSyncGroup(gpx.getAbsolutePath(), AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
+		return MapMarkersHelper.createGroup(gpx);
 	}
 
 	@SuppressLint("StaticFieldLeak")

@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.adapters.FavouritesGroupsAdapter;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
 
@@ -30,6 +30,6 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 		if (!group.visible) {
 			favouritesDbHelper.editFavouriteGroup(group, group.name, group.color, true);
 		}
-		addAndSyncGroup(new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE));
+		addAndSyncGroup(MapMarkersHelper.createGroup(group));
 	}
 }
