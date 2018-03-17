@@ -3743,4 +3743,6 @@
 
 	<string name="poi_outpost">Пункт выдачи заказов</string>
 
+	<string name="poi_barbecue_grill">Мангал: есть</string>
+
 	</resources>
