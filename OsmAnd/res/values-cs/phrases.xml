@@ -3499,4 +3499,80 @@
 	<string name="poi_water_purification">Čištění vody</string>
 	<string name="poi_water_place_access">Přístup k místu s vodou</string>
 
-</resources>
+<string name="poi_climbing_style">Lezecký styl</string>
+	<string name="poi_socket">Zásuvka</string>
+	<string name="poi_socket_chademo_output_filter">CHAdeMO</string>
+	<string name="poi_socket_type2_output_filter">Typ 2</string>
+	<string name="poi_socket_type2_combo_output_filter">Typ 2 kombinovaný</string>
+	<string name="poi_socket_type3_output_filter">Typ 3</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE blue</string>
+	<string name="poi_socket_schuko_output_filter">Schuko</string>
+
+<string name="poi_lock_basin">Zdymadlo</string>
+	<string name="poi_seamark_clearance_height">Podjezdná výška</string>
+	<string name="poi_seamark_clearance_height_closed">Podjezdná výška (uzavřeno)</string>
+	<string name="poi_seamark_clearance_height_open">Podjezdná výška (otevřeno)</string>
+	<string name="poi_seamark_clearance_width">Šířka plavební dráhy</string>
+
+	<string name="poi_route_subway_ref">Metro</string>
+
+	<string name="poi_cuisine_doner">Šavarma</string>
+	<string name="poi_cuisine_beef_bowl">Gyudon</string>
+	<string name="poi_cuisine_tapas">Tapas</string>
+	<string name="poi_cuisine_heuriger">Heuriger</string>
+	<string name="poi_cuisine_buschenschank">Buschenschank</string>
+	<string name="poi_cuisine_bagel">Bagel</string>
+	<string name="poi_cuisine_soba">Soba</string>
+	<string name="poi_cuisine_deli">Delikatesy</string>
+	<string name="poi_cuisine_suki">Suki</string>
+	<string name="poi_cuisine_udon">Udon</string>
+	<string name="poi_cuisine_brasserie">Bistro</string>
+	<string name="poi_cuisine_yakitori">Yakitori</string>
+	<string name="poi_cuisine_sagardotegia">Cidrerie</string>
+	<string name="poi_cuisine_pita">Pita</string>
+	<string name="poi_cuisine_fondue">Fondue</string>
+	<string name="poi_cuisine_pastel">Pastel</string>
+	<string name="poi_cuisine_teriyaki">Terijaki</string>
+	<string name="poi_cuisine_shawarma">Šavarma</string>
+
+	<string name="poi_cuisine_tex_mex">Tex-mex</string>
+	<string name="poi_party">Party potřeby</string>
+	<string name="poi_gambling_pachinko">Pačinko</string>
+	<string name="poi_motorcycle_type_chopper">Chopper</string>
+	<string name="poi_motorcycle_type_dualsport">Dualsport</string>
+	<string name="poi_boat_jetski_rental_yes">Vodní skútry: ano</string>
+	<string name="poi_boat_jetski_rental_no">Vodní skútry: ne</string>
+	<string name="poi_gorge">Rokle</string>
+	<string name="poi_mountain_area">Horská oblast</string>
+
+	<string name="poi_surface_clay">Antuka</string>
+	<string name="poi_surface_tartan">Tartan</string>
+	<string name="poi_surface_artificial_turf">Umělý trávník</string>
+	<string name="poi_surface_decoturf">DecoTurf</string>
+	<string name="poi_surface_metal_grid">Kovový rošt</string>
+
+	<string name="poi_location_underground">Umístění: pod zemí</string>
+	<string name="poi_location_underwater">Umístění: pod vodou</string>
+	<string name="poi_location_overground">Umístění: u země</string>
+	<string name="poi_location_overhead">Umístění: nad zemí</string>
+	<string name="poi_location_roof">Umístění: na střeše</string>
+	<string name="poi_location_rooftop">Umístění: na střeše</string>
+	<string name="poi_location_outdoor">Umístění: venku</string>
+	<string name="poi_location_indoor">Umístění: uvnitř</string>
+	<string name="poi_location_platform">Umístění: námořní plošina</string>
+	<string name="poi_location_kiosk">Umístění: schránka</string>
+	<string name="poi_location_bridge">Umístění: na mostě</string>
+	<string name="poi_location_wall">Umístění: na zdi</string>
+	<string name="poi_location_entrance">Umístění: vstup</string>
+
+	<string name="poi_visibility_house">Viditelnost: z chodníku</string>
+	<string name="poi_visibility_street">Viditelnost: z ulice</string>
+	<string name="poi_visibility_area">Viditelnost: z dálky</string>
+
+	<string name="poi_operational_status_open">Otevřeno</string>
+	<string name="poi_operational_status_closed">Zavřeno</string>
+	<string name="poi_operational_status_restricted">Omezeno</string>
+	<string name="poi_operational_status_broken">Nefunkční</string>
+	<string name="poi_operational_status_needs_maintenance">Vyžaduje údržbu</string>
+
+	</resources>
