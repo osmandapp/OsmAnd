@@ -3784,4 +3784,8 @@
 
 <string name="poi_whitewater_rapid_name">Name der Stromschnellen</string>
 
+<string name="poi_outpost">Anlieferungsstelle des Geschäftes</string>
+
+	<string name="poi_barbecue_grill">Barbecue-Grill: ja</string>
+
 </resources>
