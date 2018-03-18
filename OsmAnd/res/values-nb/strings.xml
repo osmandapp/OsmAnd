@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
     <string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -2757,4 +2758,6 @@
 	<string name="west_abbreviation">V</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
-	</resources>
+	<string name="clear_all_intermediates">Slett alle mellomliggende punkter</string>
+    <string name="group_deleted">Gruppe slettet</string>
+    </resources>
