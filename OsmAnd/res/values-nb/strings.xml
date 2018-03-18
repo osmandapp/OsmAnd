@@ -2744,7 +2744,7 @@
     <string name="distance_farthest">Avstand: lengst unna først</string>
     <string name="distance_nearest">Avstand: nærmeste først</string>
     <string name="optional_point_name">Valgfritt punktnavn</string>
-    <string name="transport_nearby_routes_within">Ruter i nærheten</string>
+    <string name="transport_nearby_routes_within">Ruter i nærheten innen</string>
     <string name="transport_nearby_routes">NÆR</string>
     <string name="enter_lon">Oppfør lengdegrad</string>
     <string name="enter_lat">Oppfør breddegrad</string>
