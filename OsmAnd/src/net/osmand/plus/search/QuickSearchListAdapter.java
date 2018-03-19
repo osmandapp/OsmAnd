@@ -15,7 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.CollatorStringMatcher;
 import net.osmand.Location;
+import net.osmand.ResultMatcher;
+import net.osmand.StringMatcher;
 import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -28,12 +31,15 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
+import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
@@ -365,9 +371,19 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				AbstractPoiType abstractPoiType = (AbstractPoiType) listItem.getSearchResult().object;
 				String synonyms[] = abstractPoiType.getSynonyms().split(";");
 				String preferredLanguage = app.getLanguage();
-				if(!(synonyms[0].isEmpty())){
-					desc += " (" + synonyms[0] + ")";
-			}}
+
+				QuickSearchHelper searchHelper = app.getSearchUICore();
+				SearchUICore searchUICore = searchHelper.getCore();
+				String emm = searchUICore.getPhrase().getText(true);
+				SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(emm,
+						CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS);
+
+				for (int i = 0; i < synonyms.length; i++) {
+					if (nm.matches(synonyms[i])) {
+						desc = listItem.getTypeName() + " (" + synonyms[i] + ")";
+					}
+				}
+		}
 
 			boolean hasDesc = false;
 			if (!Algorithms.isEmpty(desc) && !desc.equals(name)) {
