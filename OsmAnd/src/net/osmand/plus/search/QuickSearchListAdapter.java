@@ -361,10 +361,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 
 			String desc = listItem.getTypeName();
-			String synonyms[];
 			if (listItem.getSearchResult().object instanceof AbstractPoiType) {
 				AbstractPoiType abstractPoiType = (AbstractPoiType) listItem.getSearchResult().object;
-				synonyms = abstractPoiType.getSynonyms().split(";");
+				String synonyms[] = abstractPoiType.getSynonyms().split(";");
 				String preferredLanguage = app.getLanguage();
 				if(!(synonyms[0].isEmpty())){
 					desc += " (" + synonyms[0] + ")";

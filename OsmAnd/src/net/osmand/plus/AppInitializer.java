@@ -362,7 +362,7 @@ public class AppInitializer implements IProgress {
 				if(type.getBaseLangType() != null) {
 					return getSynonyms(type.getBaseLangType());
 				}
-				return getSynonyms(type.getIconKeyName());
+				return "";
 			}
 
 
