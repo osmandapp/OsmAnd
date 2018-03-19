@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="shared_string_my_places">Meus locais</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="shared_string_my_places">Meus locais</string>
 	<string name="days_behind">dias atrás</string>
 	<string name="watch">Ver</string>
 	<string name="rendering_attr_pisteGrooming_name">Pista de preparação</string>
@@ -2577,8 +2578,8 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_take_photo_note">Tome nota de foto</string>
     <string name="quick_action_add_osm_bug">Adicionar Nota OSM</string>
     <string name="quick_action_navigation_voice">Ligar/desligar voz</string>
-    <string name="quick_action_navigation_voice_off">A voz está desligada</string>
-    <string name="quick_action_navigation_voice_on">A voz está ligada</string>
+    <string name="quick_action_navigation_voice_off">Voz desligada</string>
+    <string name="quick_action_navigation_voice_on">Voz ligada</string>
     <string name="quick_action_add_gpx">Adicionar ponto de passagem GPX</string>
     <string name="quick_action_add_parking">Adicionar lugar de estacionamento</string>
     <string name="quick_action_new_action">Adicionar ação</string>
