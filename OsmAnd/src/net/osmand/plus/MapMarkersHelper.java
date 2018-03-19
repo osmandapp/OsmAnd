@@ -353,7 +353,25 @@ public class MapMarkersHelper {
 			}
 		}
 
+		// TODO replace with:
+//		Iterator<MapMarker> lit = markers.iterator();
+//		while (lit.hasNext()) {
+//			MapMarker marker = lit.next();
+//			if (marker.id.equals(group.getId() + name)) {
+//				exists = true;
+//				marker.favouritePoint = favouritePoint;
+//				marker.wptPt = wptPt;
+//				if (!marker.history && !marker.point.equals(latLon)) {
+//					marker.point = latLon;
+//					updateMapMarker(marker, true);
+//				}
+//				lit.remove();
+//				break;
+//			}
+//		}
+
 		if (!exists) {
+			// TODO create method add1Marker
 			addMarkers(Collections.singletonList(latLon),
 					Collections.singletonList(new PointDescription(POINT_TYPE_MAP_MARKER, name)),
 					group,
@@ -364,12 +382,14 @@ public class MapMarkersHelper {
 		}
 	}
 
+	// TODO rename and add parameter "keepHistory" ?
 	private void removeOldMarkersIfNeeded(List<MapMarker> markers) {
 		if (!markers.isEmpty()) {
 			boolean needRefresh = false;
 			for (MapMarker marker : markers) {
 				if (!marker.history) {
 					markersDbHelper.removeMarker(marker, false);
+					// TODO make all changes in once!!!
 					removeFromMapMarkersList(marker);
 					removeMarkerFromGroup(marker);
 					needRefresh = true;
@@ -556,6 +576,7 @@ public class MapMarkersHelper {
 		refresh();
 	}
 
+	// TODO must sync group too
 	public void addMarkersSyncGroup(MarkersSyncGroup group) {
 		if (group != null) {
 			if (markersDbHelper.getGroup(group.getId()) == null) {
@@ -1024,6 +1045,7 @@ public class MapMarkersHelper {
 		return new MarkersSyncGroup(gpx.getAbsolutePath(), AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
 	}
 
+	// TODO update all 3 collections at once?
 	// ---------------------------------------------------------------------------------------------
 
 	// accessors to active markers:
@@ -1136,11 +1158,14 @@ public class MapMarkersHelper {
 			return null;
 		}
 
+		// TODO extract method from Asynctask to Helper directly
 		private void runGroupSynchronization() {
 			if (!isGroupSynced(group.getId())) {
 				return;
 			}
 
+			// TODO don't use db call
+			// create copy of list in order to delete use linkedlist?
 			List<MapMarker> dbMarkers = markersDbHelper.getMarkersFromGroup(group);
 
 			if (group.getType() == MarkersSyncGroup.FAVORITES_TYPE) {
@@ -1149,6 +1174,7 @@ public class MapMarkersHelper {
 					return;
 				}
 				if (!favGroup.visible) {
+					// TODO will be deleted
 					removeActiveMarkersFromSyncGroup(group.getId());
 					removeActiveMarkersFromGroup(group.getId());
 					return;
@@ -1158,7 +1184,7 @@ public class MapMarkersHelper {
 					addNewMarkerIfNeeded(group, dbMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName(), enabled, fp, null);
 				}
 
-				removeOldMarkersIfNeeded(dbMarkers);
+
 			} else if (group.getType() == MarkersSyncGroup.GPX_TYPE) {
 				GpxSelectionHelper gpxHelper = ctx.getSelectedGpxHelper();
 				File file = new File(group.getId());
@@ -1169,6 +1195,7 @@ public class MapMarkersHelper {
 				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(group.getId());
 				GPXFile gpx = selectedGpxFile == null ? null : selectedGpxFile.getGpxFile();
 				if (gpx == null) {
+					// TODO will be deleted
 					removeActiveMarkersFromSyncGroup(group.getId());
 					removeActiveMarkersFromGroup(group.getId());
 					return;
@@ -1182,9 +1209,9 @@ public class MapMarkersHelper {
 						addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name, enabled, null, pt);
 					}
 				}
-
-				removeOldMarkersIfNeeded(dbMarkers);
 			}
+
+			removeOldMarkersIfNeeded(dbMarkers);
 		}
 
 		@Override
@@ -1376,6 +1403,10 @@ public class MapMarkersHelper {
 
 		public int getType() {
 			return type;
+		}
+
+		public void setWptCategories(Set<String> wptCategories) {
+			this.wptCategories = wptCategories;
 		}
 
 		public String getWptCategoriesString() {
