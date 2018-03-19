@@ -581,14 +581,14 @@ public class MapMarkersDbHelper {
 		return markers;
 	}
 
-	public void removeMarker(MapMarker marker, boolean history) {
+	public void removeMarker(MapMarker marker) {
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
 				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME +
 								" WHERE " + MARKERS_COL_ID + " = ?" +
 								" AND " + MARKERS_COL_ACTIVE + " = ?",
-						new Object[]{marker.id, history ? 0 : 1});
+						new Object[]{marker.id, marker.history ? 0 : 1});
 			} finally {
 				db.close();
 			}

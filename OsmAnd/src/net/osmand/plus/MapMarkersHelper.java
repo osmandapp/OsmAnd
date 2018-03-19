@@ -393,10 +393,7 @@ public class MapMarkersHelper {
 			boolean needRefresh = false;
 			for (MapMarker marker : markers) {
 				if (!marker.history) {
-					// TODO make all changes in once!!!
-					markersDbHelper.removeMarker(marker, false);
-					removeFromMapMarkersList(marker);
-					removeMarkerFromGroup(marker);
+					removeMarker(marker, false);
 					needRefresh = true;
 				}
 			}
@@ -474,16 +471,21 @@ public class MapMarkersHelper {
 	}
 
 	public void removeMarker(MapMarker marker) {
+		removeMarker(marker, true);
+	}
+
+	private void removeMarker(MapMarker marker, boolean refresh) {
 		if (marker != null) {
-			boolean history = marker.history;
-			markersDbHelper.removeMarker(marker, history);
-			if (history) {
+			markersDbHelper.removeMarker(marker);
+			if (marker.history) {
 				removeFromMapMarkersHistoryList(marker);
 			} else {
 				removeFromMapMarkersList(marker);
 			}
 			removeMarkerFromGroup(marker);
-			refresh();
+			if (refresh) {
+				refresh();
+			}
 		}
 	}
 
