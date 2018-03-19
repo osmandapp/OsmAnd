@@ -360,7 +360,7 @@ public class AppInitializer implements IProgress {
 			@Override
 			public String getSynonyms(AbstractPoiType type) {
 				if(type.getBaseLangType() != null) {
-					return getSynonyms(type.getBaseLangType());
+					return getSynonyms(type.getIconKeyName());
 				}
 				return "";
 			}
