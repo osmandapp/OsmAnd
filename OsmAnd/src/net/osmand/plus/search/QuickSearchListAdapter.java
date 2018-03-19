@@ -370,20 +370,17 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			if (listItem.getSearchResult().object instanceof AbstractPoiType) {
 				AbstractPoiType abstractPoiType = (AbstractPoiType) listItem.getSearchResult().object;
 				String synonyms[] = abstractPoiType.getSynonyms().split(";");
-				String preferredLanguage = app.getLanguage();
-
 				QuickSearchHelper searchHelper = app.getSearchUICore();
 				SearchUICore searchUICore = searchHelper.getCore();
-				String emm = searchUICore.getPhrase().getText(true);
-				SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(emm,
-						CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS);
-
+				String searchPhrase = searchUICore.getPhrase().getText(true);
+				SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(searchPhrase,
+						CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 				for (int i = 0; i < synonyms.length; i++) {
 					if (nm.matches(synonyms[i])) {
 						desc = listItem.getTypeName() + " (" + synonyms[i] + ")";
 					}
 				}
-		}
+			}
 
 			boolean hasDesc = false;
 			if (!Algorithms.isEmpty(desc) && !desc.equals(name)) {
