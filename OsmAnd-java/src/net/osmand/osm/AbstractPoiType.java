@@ -69,6 +69,11 @@ public abstract class AbstractPoiType {
 		return registry.getTranslation(this);
 	}
 
+
+	public String getEnTranslation() {
+		return registry.getEnTranslation(this);
+	}
+
 	public String getPoiAdditionalCategoryTranslation() {
 		if (poiAdditionalCategory != null) {
 			return registry.getPoiTranslation(poiAdditionalCategory);

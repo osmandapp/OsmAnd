@@ -622,7 +622,7 @@
 	<string name="poi_pub">酒館</string>
 	<string name="poi_food_court">美食街</string>
 	<string name="poi_drinking_water">飲用水</string>
-	<string name="poi_barbecue">燒烤</string>
+	<string name="poi_barbecue">烤肉</string>
 
 	<string name="poi_craft_agricultural_engines">農用引擎</string>
 	<string name="poi_craft_basket_maker">籃筐製造商</string>
@@ -3218,7 +3218,7 @@
 	<string name="poi_cuisine_sushi">壽司</string>
 	<string name="poi_cuisine_fish_and_chips">炸魚和薯條</string>
 	<string name="poi_cuisine_seafood">海鮮</string>
-	<string name="poi_cuisine_barbecue">燒烤</string>
+	<string name="poi_cuisine_barbecue">烤肉</string>
 	<string name="poi_cuisine_noodle">麵</string>
 	<string name="poi_cuisine_donut">甜甜圈</string>
 	<string name="poi_cuisine_ramen">拉麵</string>
@@ -3815,5 +3815,7 @@
 <string name="poi_whitewater_rapid_name">激流河的名稱</string>
 
 <string name="poi_outpost">商店的送貨點</string>
+
+<string name="poi_barbecue_grill">烤肉架：是的</string>
 
 </resources>

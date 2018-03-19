@@ -616,13 +616,13 @@ public class SearchCoreFactory {
 			List<AbstractPoiType> results = new ArrayList<AbstractPoiType>() ;
 			NameStringMatcher nm = phrase.getNameStringMatcher();
 			for (PoiFilter pf : topVisibleFilters) {
-				if (!phrase.isUnknownSearchWordPresent() || nm.matches(pf.getTranslation())) {
+				if (!phrase.isUnknownSearchWordPresent() || nm.matches(pf.getTranslation()) || nm.matches(pf.getEnTranslation())) {
 					results.add(pf);
 				}
 			}
 			if (phrase.isUnknownSearchWordPresent()) {
 				for (PoiCategory c : categories) {
-					if (!results.contains(c) && nm.matches(c.getTranslation())) {
+					if (!results.contains(c) && (nm.matches(c.getTranslation()) || nm.matches(c.getEnTranslation()) ) ) {
 						results.add(c);
 					}
 				}
@@ -631,13 +631,14 @@ public class SearchCoreFactory {
 					Entry<String, PoiType> e = it.next();
 					PoiType pt = e.getValue();
 					if (pt.getCategory() != types.getOtherMapCategory()) {
-						if (!results.contains(pt) && (nm.matches(e.getKey()) || nm.matches(pt.getTranslation()))) {
+						if (!results.contains(pt) && ( nm.matches(pt.getEnTranslation()) || nm.matches(pt.getTranslation()) )) {
 							results.add(pt);
 						}
 						List<PoiType> additionals = pt.getPoiAdditionals();
 						if (additionals != null) {
 							for (PoiType a : additionals) {
-								if (!a.isReference() && !results.contains(a) && (nm.matches(a.getKeyName().replace('_', ' ')) || nm.matches(a.getTranslation()))) {
+								if (!a.isReference() && !results.contains(a) &&
+										( nm.matches(a.getEnTranslation()) || nm.matches(a.getTranslation()) )) {
 									results.add(a);
 								}
 							}

@@ -160,7 +160,6 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		}
 		llText.addView(textView);
 
-
 		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llTextViewParams.weight = 1f;
 		llTextViewParams.setMargins(0, 0, dpToPx(10f), 0);
@@ -175,7 +174,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private void buildDescription(View view) {
 		String desc = fav.getDescription();
 		if (!Algorithms.isEmpty(desc)) {
-			buildDescriptionRow(view, desc, 0, 5, true);
+			buildDescriptionRow(view, desc, 0, 0, true);
 		}
 	}
 

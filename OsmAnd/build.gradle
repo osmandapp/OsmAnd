@@ -380,7 +380,7 @@ dependencies {
 	if (analytics) {
 		compile 'com.google.firebase:firebase-core:9.8.0'
 		compile 'com.google.firebase:firebase-config:9.8.0'
-
+		implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 	}
 	// compile project(':eclipse-compile:design')
 	// compile project(':eclipse-compile:cardview')

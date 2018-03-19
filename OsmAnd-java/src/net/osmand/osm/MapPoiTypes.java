@@ -54,6 +54,9 @@ public class MapPoiTypes {
 		String getTranslation(AbstractPoiType type);
 		String getTranslation(String keyName);
 
+		String getEnTranslation(AbstractPoiType type);
+
+		String getEnTranslation(String keyName);
 	}
 
 	public static MapPoiTypes getDefaultNoInit() {
@@ -696,6 +699,16 @@ public class MapPoiTypes {
 
 	}
 
+	public String getEnTranslation(AbstractPoiType abstractPoiType) {
+		if (poiTranslator != null) {
+			String translation = poiTranslator.getEnTranslation(abstractPoiType);
+			if (!Algorithms.isEmpty(translation)) {
+				return translation;
+			}
+		}
+		return getBasePoiName(abstractPoiType);
+	}
+
 	public String getTranslation(AbstractPoiType abstractPoiType) {
 		if (poiTranslator != null) {
 			String translation = poiTranslator.getTranslation(abstractPoiType);
@@ -703,6 +716,10 @@ public class MapPoiTypes {
 				return translation;
 			}
 		}
+		return getBasePoiName(abstractPoiType);
+	}
+
+	private String getBasePoiName(AbstractPoiType abstractPoiType) {
 		String name = abstractPoiType.getKeyName();
 		if(name.startsWith("osmand_")) {
 			name = name.substring("osmand_".length());

@@ -39,6 +39,7 @@ public class OpeningHoursParser {
 		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(Locale.US);
 		monthsStr = dateFormatSymbols.getShortMonths();
 		daysStr = getTwoLettersStringArray(dateFormatSymbols.getShortWeekdays());
+		
 		dateFormatSymbols = DateFormatSymbols.getInstance();
 		localMothsStr = dateFormatSymbols.getShortMonths();
 		localDaysStr = getTwoLettersStringArray(dateFormatSymbols.getShortWeekdays());
@@ -78,8 +79,8 @@ public class OpeningHoursParser {
 		String[] newStrings = new String[strings.length];
 		for (int i = 0; i < strings.length; i++) {
 			if (strings[i] != null) {
-				if (strings[i].length() > 2) {
-					newStrings[i] = Algorithms.capitalizeFirstLetter(strings[i].substring(0, 2));
+				if (strings[i].length() > 3) {
+					newStrings[i] = Algorithms.capitalizeFirstLetter(strings[i].substring(0, 3));
 				} else {
 					newStrings[i] = Algorithms.capitalizeFirstLetter(strings[i]);
 				}
