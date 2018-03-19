@@ -19,6 +19,7 @@ import net.osmand.Location;
 import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashLocationFragment;
@@ -360,6 +361,15 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 
 			String desc = listItem.getTypeName();
+			String synonyms[];
+			if (listItem.getSearchResult().object instanceof AbstractPoiType) {
+				AbstractPoiType abstractPoiType = (AbstractPoiType) listItem.getSearchResult().object;
+				synonyms = abstractPoiType.getSynonyms().split(";");
+				String preferredLanguage = app.getLanguage();
+				if(!(synonyms[0].isEmpty())){
+					desc += " (" + synonyms[0] + ")";
+			}}
+
 			boolean hasDesc = false;
 			if (!Algorithms.isEmpty(desc) && !desc.equals(name)) {
 				subtitle.setText(desc);

@@ -1594,6 +1594,7 @@
 	<string name="poi_vending_water">Продажа воды</string>
 	<string name="poi_vending_telephone_vouchers">Телефонные карты</string>
 	<string name="poi_vending_animal_food">Еда для животных</string>
+	<string name="synonyms_poi_vending_animal_food">Корм</string>
 	<string name="poi_vending_public_transport_plans">Карты общественного транспорта</string>
 	<string name="poi_vending_drinks_sweets">Напитки и сладости</string>
 	<string name="poi_vending_vouchers">Ваучеры</string>
