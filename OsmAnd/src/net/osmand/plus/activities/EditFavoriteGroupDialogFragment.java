@@ -23,7 +23,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
+import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -158,8 +158,8 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 			items.add(new DividerHalfItem(getContext()));
 
 			final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-			final MarkersSyncGroup syncGroup = MapMarkersHelper.createGroup(group);
-			final boolean synced = markersHelper.isGroupSynced(syncGroup.getId());
+			final MapMarkersGroup markersGr = markersHelper.getOrCreateGroup(this.group);
+			final boolean synced = markersHelper.isGroupSynced(markersGr.getId());
 
 			BaseBottomSheetItem markersGroupItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(synced ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_flag_dark))
@@ -169,10 +169,9 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 						@Override
 						public void onClick(View view) {
 							if (synced) {
-								markersHelper.removeMarkersSyncGroup(syncGroup.getId());
+								markersHelper.removeMarkersGroup(markersGr);
 							} else {
-								markersHelper.addMarkersSyncGroup(syncGroup);
-								markersHelper.syncGroupAsync(syncGroup);
+								markersHelper.addAndSyncGroup(markersGr, null);
 							}
 							dismiss();
 							MapActivity.launchMapActivityMoveToTop(getActivity());
@@ -190,7 +189,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 						public void onClick(View view) {
 							FavoritesTreeFragment fragment = getFavoritesTreeFragment();
 							if (fragment != null) {
-								fragment.shareFavorites(group);
+								fragment.shareFavorites(EditFavoriteGroupDialogFragment.this.group);
 							}
 							dismiss();
 						}

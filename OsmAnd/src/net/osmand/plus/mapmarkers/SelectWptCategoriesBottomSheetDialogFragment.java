@@ -13,7 +13,7 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
+import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -117,14 +117,13 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.path);
 		if (selectedGpxFile == null) {
-			gpxSelectionHelper.selectGpxFile(gpxFile, true, false, false);
+			gpxSelectionHelper.selectGpxFile(gpxFile, true, false);
 		}
 
-		MarkersSyncGroup syncGroup = MapMarkersHelper.createGroup(new File(gpxFile.path));
-		syncGroup.setWptCategories(selectedCategories);
+		MapMarkersGroup markersGr = mapMarkersHelper.getOrCreateGroup(new File(gpxFile.path));
+		markersGr.setWptCategories(selectedCategories);
 
-		mapMarkersHelper.addMarkersSyncGroup(syncGroup);
-		mapMarkersHelper.syncGroupAsync(syncGroup, new MapMarkersHelper.OnGroupSyncedListener() {
+		mapMarkersHelper.addAndSyncGroup(markersGr, new MapMarkersHelper.OnGroupSyncedListener() {
 			@Override
 			public void onSyncDone() {
 				Fragment parent = getParentFragment();

@@ -110,15 +110,18 @@ public class FavouritesDbHelper {
 	}
 
 	private void syncWithMarkers(FavoriteGroup favGroup) {
-		context.getMapMarkersHelper().syncGroupAsync(MapMarkersHelper.createGroup(favGroup));
+		MapMarkersHelper helper = context.getMapMarkersHelper();
+		helper.syncGroupAsync(helper.getOrCreateGroup(favGroup));
 	}
 
 	private void removeFromMarkers(FavoriteGroup favGroup) {
-		context.getMapMarkersHelper().removeMarkersSyncGroup(MapMarkersHelper.createGroup(favGroup).getId());
+		MapMarkersHelper helper = context.getMapMarkersHelper();
+		helper.removeMarkersGroup(helper.getOrCreateGroup(favGroup));
 	}
 
 	private void addToMarkers(FavoriteGroup favGroup) {
-		context.getMapMarkersHelper().addMarkersSyncGroup(MapMarkersHelper.createGroup(favGroup));
+		MapMarkersHelper helper = context.getMapMarkersHelper();
+		helper.addAndSyncGroup(helper.getOrCreateGroup(favGroup), null);
 	}
 
 	private File getInternalFile() {
@@ -648,7 +651,6 @@ public class FavouritesDbHelper {
 				}
 			}
 			addToMarkers(renamedGroup);
-			syncWithMarkers(renamedGroup);
 		}
 		saveCurrentPointsIntoFile();
 	}

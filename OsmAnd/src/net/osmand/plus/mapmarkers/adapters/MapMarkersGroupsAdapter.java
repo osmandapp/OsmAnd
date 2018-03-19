@@ -137,6 +137,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				}
 			} else {
 				GroupHeader header = group.getGroupHeader();
+				// TODO fix null-header
 				items.add(header);
 				populateAdapterWithGroupMarkers(group, getItemCount());
 			}
@@ -168,7 +169,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	public int getGroupHeaderPosition(String groupId) {
 		int pos = -1;
-		MapMarkersGroup group = app.getMapMarkersHelper().getMapMarkerGroupByKey(groupId);
+		MapMarkersGroup group = app.getMapMarkersHelper().getMapMarkerGroupById(groupId);
 		if (group != null) {
 			pos = items.indexOf(group.getGroupHeader());
 		}
@@ -385,27 +386,21 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
-						group.setDisabled(!enabled);
-						app.getMapMarkersHelper().updateGroupDisabled(group, !enabled);
+						final GPXFile[] gpxFile = new GPXFile[1];
+						SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(group.getId());
+						if (selectedGpxFile != null && (gpxFile[0] = selectedGpxFile.getGpxFile()) != null) {
+							switchGpxVisibility(gpxFile[0], enabled);
+						}
+						boolean disabled = !enabled;
+						group.setDisabled(disabled);
+						app.getMapMarkersHelper().updateGroupDisabled(group, disabled);
 						updateDisplayedData();
-						if (!enabled) {
-							final GPXFile[] gpxFile = new GPXFile[1];
-							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(group.getId());
-							if (selectedGpxFile != null) {
-								gpxFile[0] = selectedGpxFile.getGpxFile();
-								if (gpxFile[0] != null) {
-									switchGpxVisibility(gpxFile[0], false);
-								}
-							}
+						if (disabled) {
 							snackbar = Snackbar.make(holder.itemView, app.getString(R.string.group_deleted), Snackbar.LENGTH_LONG)
 									.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 										@Override
 										public void onClick(View view) {
-											if (gpxFile[0] != null) {
-												switchGpxVisibility(gpxFile[0], true);
-											} else {
-												headerViewHolder.disableGroupSwitch.setChecked(true);
-											}
+											headerViewHolder.disableGroupSwitch.setChecked(true);
 										}
 									});
 							View snackBarView = snackbar.getView();
@@ -447,12 +442,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	private void switchGpxVisibility(@NonNull GPXFile gpxFile, boolean visible) {
 		GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
 		gpxHelper.selectGpxFile(gpxFile, visible, false, false);
-		gpxHelper.syncGpx(gpxFile, true, new OnGroupSyncedListener() {
-			@Override
-			public void onSyncDone() {
-				updateDisplayedData();
-			}
-		});
+//		gpxHelper.syncGpx(gpxFile, new OnGroupSyncedListener() {
+//			@Override
+//			public void onSyncDone() {
+//				updateDisplayedData();
+//			}
+//		});
 	}
 
 	public void hideSnackbar() {

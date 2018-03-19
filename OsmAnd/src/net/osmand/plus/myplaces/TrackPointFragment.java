@@ -45,7 +45,7 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
+import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -579,15 +579,15 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	private void syncGpx(GPXFile gpxFile) {
 		File gpx = new File(gpxFile.path);
 		if (gpx.exists()) {
-			app.getMapMarkersHelper().syncGroupAsync(MapMarkersHelper.createGroup(gpx));
+			MapMarkersHelper helper = app.getMapMarkersHelper();
+			helper.syncGroupAsync(helper.getOrCreateGroup(gpx));
 		}
 	}
 
 	private void addMapMarkersSyncGroup() {
-		final MarkersSyncGroup syncGroup = MapMarkersHelper.createGroup(getGpxDataItem().getFile());
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-		markersHelper.addMarkersSyncGroup(syncGroup);
-		markersHelper.syncGroupAsync(syncGroup);
+		final MapMarkersGroup markersGr = markersHelper.getOrCreateGroup(getGpxDataItem().getFile());
+		markersHelper.addAndSyncGroup(markersGr, null);
 		GPXFile gpxFile = getTrackActivity().getGpx();
 		if (gpxFile != null) {
 			app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
@@ -600,7 +600,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 					@Override
 					public void onClick(View v) {
 						Bundle args = new Bundle();
-						args.putString(MarkersSyncGroup.MARKERS_SYNC_GROUP_ID, syncGroup.getId());
+						args.putString(MapMarkersGroup.MARKERS_SYNC_GROUP_ID, markersGr.getId());
 						MapActivity.launchMapActivityMoveToTop(getTrackActivity(), MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS, args);
 					}
 				});

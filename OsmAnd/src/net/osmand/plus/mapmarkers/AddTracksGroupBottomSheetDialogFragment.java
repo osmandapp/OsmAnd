@@ -17,8 +17,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
+import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
@@ -76,15 +75,15 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		}
 	}
 
-	private MarkersSyncGroup createMapMarkersSyncGroup(OsmandApplication app, GpxDataItem gpxDataItem) {
+	private MapMarkersGroup createMapMarkersSyncGroup(OsmandApplication app, GpxDataItem gpxDataItem) {
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		File gpx = gpxDataItem.getFile();
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpx.getAbsolutePath());
 		if (selectedGpxFile == null) {
 			GPXFile res = GPXUtilities.loadGPXFile(app, gpx);
-			gpxSelectionHelper.selectGpxFile(res, true, false, false);
+			gpxSelectionHelper.selectGpxFile(res, true, false);
 		}
-		return MapMarkersHelper.createGroup(gpx);
+		return getMyApplication().getMapMarkersHelper().getOrCreateGroup(gpx);
 	}
 
 	@SuppressLint("StaticFieldLeak")
