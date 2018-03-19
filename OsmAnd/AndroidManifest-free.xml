@@ -6,6 +6,10 @@
         android:icon="@mipmap/icon_free"
 		android:label="@string/app_name_free"
         tools:replace="android:icon, android:label">
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:resource="@string/facebook_app_id"/>
+        <activity android:name="com.facebook.FacebookActivity"/>
+
         <activity
             android:name="net.osmand.plus.activities.MapActivity"
             android:theme="@style/FirstSplashScreenFree"
