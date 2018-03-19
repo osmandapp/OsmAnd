@@ -1966,6 +1966,7 @@
 	<string name="poi_vending_water">Wasserverkauf</string>
 	<string name="poi_vending_telephone_vouchers">Telefongutscheine</string>
 	<string name="poi_vending_animal_food">Tiernahrung</string>
+	<string name="synonyms_poi_vending_animal_food">Ahrung</string>
 	<string name="poi_vending_public_transport_plans">Fahrpläne</string>
 	<string name="poi_vending_drinks_sweets">Getränke und Süßigkeiten</string>
 	<string name="poi_vending_vouchers">Gutscheine</string>

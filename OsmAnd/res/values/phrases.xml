@@ -1864,6 +1864,7 @@
 	<string name="poi_vending_water">Water vending</string>
 	<string name="poi_vending_telephone_vouchers">Telephone vouchers</string>
 	<string name="poi_vending_animal_food">Animal food</string>
+	<string name="synonyms_poi_vending_animal_food">Feed</string>
 	<string name="poi_vending_public_transport_plans">Public transport plans</string>
 	<string name="poi_vending_drinks_sweets">Drinks and sweets</string>
 	<string name="poi_vending_vouchers">Vouchers</string>
