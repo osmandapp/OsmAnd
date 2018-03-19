@@ -390,7 +390,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						updateDisplayedData();
 						if (!enabled) {
 							final GPXFile[] gpxFile = new GPXFile[1];
-							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(group.getGroupKey());
+							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(group.getId());
 							if (selectedGpxFile != null) {
 								gpxFile[0] = selectedGpxFile.getGpxFile();
 								if (gpxFile[0] != null) {

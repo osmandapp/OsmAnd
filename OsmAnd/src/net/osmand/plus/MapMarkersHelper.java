@@ -599,7 +599,7 @@ public class MapMarkersHelper {
 	}
 
 	public void updateGroupDisabled(@NonNull MapMarkersGroup group, boolean disabled) {
-		String id = group.getGroupKey();
+		String id = group.getId();
 		if (id != null) {
 			markersDbHelper.updateSyncGroupDisabled(id, disabled);
 			updateSyncGroupDisabled(group, disabled);
@@ -895,7 +895,7 @@ public class MapMarkersHelper {
 		MapMarkersGroup group = new MapMarkersGroup();
 		if (marker.groupName != null) {
 			group.setName(marker.groupName);
-			group.setGroupKey(marker.groupKey);
+			group.setId(marker.groupKey);
 			MarkersSyncGroup syncGroup = markersDbHelper.getGroup(marker.groupKey);
 			if (syncGroup != null) {
 				group.setType(syncGroup.getType());
@@ -954,7 +954,7 @@ public class MapMarkersHelper {
 				if (group == null) {
 					group = new MapMarkersGroup();
 					group.setName(marker.groupName);
-					group.setGroupKey(marker.groupKey);
+					group.setId(marker.groupKey);
 					MarkersSyncGroup syncGroup = markersDbHelper.getGroup(marker.groupKey);
 					if (syncGroup != null) {
 						group.setType(syncGroup.getType());
@@ -1027,10 +1027,10 @@ public class MapMarkersHelper {
 	}
 
 	@Nullable
-	public MapMarkersGroup getMapMarkerGroupByKey(String key) {
+	public MapMarkersGroup getMapMarkerGroupByKey(String id) {
 		for (MapMarkersGroup group : mapMarkersGroups) {
-			if ((key == null && group.getGroupKey() == null)
-					|| (group.getGroupKey() != null && group.getGroupKey().equals(key))) {
+			if ((id == null && group.getId() == null)
+					|| (group.getId() != null && group.getId().equals(id))) {
 				return group;
 			}
 		}
@@ -1229,15 +1229,27 @@ public class MapMarkersHelper {
 
 	public static class MapMarkersGroup {
 
+		public static final int FAVORITES_TYPE = 0;
+		public static final int GPX_TYPE = 1;
+
+		private String id;
 		private String name;
-		private String groupKey;
 		private int type = -1;
+		private Set<String> wptCategories;
 		private long creationDate;
 		private int color;
 		private boolean disabled;
 		private List<MapMarker> markers = new ArrayList<>();
 		private GroupHeader header;
 		private ShowHideHistoryButton showHideHistoryButton;
+
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
+		}
 
 		public String getName() {
 			return name;
@@ -1247,20 +1259,16 @@ public class MapMarkersHelper {
 			this.name = name;
 		}
 
-		public String getGroupKey() {
-			return groupKey;
-		}
-
-		public void setGroupKey(String groupKey) {
-			this.groupKey = groupKey;
-		}
-
 		public int getType() {
 			return type;
 		}
 
 		public void setType(int type) {
 			this.type = type;
+		}
+
+		public void setWptCategories(Set<String> wptCategories) {
+			this.wptCategories = wptCategories;
 		}
 
 		public long getCreationDate() {
@@ -1309,6 +1317,14 @@ public class MapMarkersHelper {
 
 		public void setShowHideHistoryButton(ShowHideHistoryButton showHideHistoryButton) {
 			this.showHideHistoryButton = showHideHistoryButton;
+		}
+
+		@Nullable
+		public String getWptCategoriesString() {
+			if (wptCategories != null) {
+				return Algorithms.encodeStringSet(wptCategories);
+			}
+			return null;
 		}
 
 		public List<MapMarker> getActiveMarkers() {
