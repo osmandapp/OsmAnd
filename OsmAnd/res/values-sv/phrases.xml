@@ -524,7 +524,7 @@
 	<string name="poi_salt_pond">Saltsjö</string>
 	<string name="poi_reservoir">Reservoar</string>
 	<string name="poi_cricket_nets">Cricketnät</string>
-	<string name="poi_gasometer">Gasometer</string>
+	<string name="poi_gasometer">Gasklocka</string>
 	<string name="poi_silo">Silo</string>
 	<string name="poi_bunker_silo">Bunkersilo</string>
 	<string name="poi_storage_tank">Ackumulatortank</string>
@@ -657,7 +657,7 @@
 	<string name="poi_ice_stock">Islager</string>
 	<string name="poi_korfbal">Korfbal</string>
 	<string name="poi_sport_motor">Motorsport</string>
-	<string name="poi_sport_multi">Multi sport</string>
+	<string name="poi_sport_multi">Multisport</string>
 	<string name="poi_orienteering">Orientering</string>
 	<string name="poi_paddle_tennis">Paddel tennis</string>
 	<string name="poi_paragliding">Skärmflygning</string>
@@ -689,7 +689,7 @@
 	<string name="poi_historic_cannon">Historisk kanon</string>
 	<string name="poi_castle">Slott</string>
 	<string name="poi_city_gate">Stadsport</string>
-	<string name="poi_fort">Fort</string>
+	<string name="poi_fort">Befästning</string>
 	<string name="poi_fountain">Fontän</string>
 	<string name="poi_historic_ruins">Historiska ruiner</string>
 	<string name="poi_rune_stone">Runsten</string>
@@ -714,7 +714,7 @@
 	<string name="poi_attraction_train">Tåg (attraktion)</string>
 	<string name="poi_attraction_water_slide">Vattenrutschbana</string>
 
-	<string name="poi_lodging">Lodging</string>
+	<string name="poi_lodging">Logi</string>
 	<string name="poi_hotel">Hotell</string>
 	<string name="poi_guest_house">Gästhus</string>
 	<string name="poi_hostel">Vandrarhem</string>
@@ -741,7 +741,7 @@
 	<string name="poi_religion_jain">Jainism</string>
 	<string name="poi_religion_spiritualist">Spiritualism</string>
 	<string name="poi_religion_bahai">Bahaism</string>
-	<string name="poi_religion_scientologist">Scientologism</string>
+	<string name="poi_religion_scientologist">Scientologi</string>
 	<string name="poi_religion_pagan">Hedendom</string>
 	<string name="poi_religion_tenrikyo">Tenrikyo</string>
 	<string name="poi_religion_zoroastrian">Zoroastrism</string>
@@ -755,7 +755,7 @@
 	<string name="poi_denomination_protestant">Protestantism</string>
 	<string name="poi_denomination_methodist">Metodism</string>
 	<string name="poi_denomination_anglican">Anglikanska</string>
-	<string name="poi_denomination_presbyterian">Presbyterian</string>
+	<string name="poi_denomination_presbyterian">Presbyterianism</string>
 	<string name="poi_denomination_evangelical">Evangeliska</string>
 	<string name="poi_denomination_russian_orthodox">Rysk-ortodoxa</string>
 	<string name="poi_denomination_pentecostal">Pingstkyrkan</string>
@@ -766,7 +766,7 @@
 	<string name="poi_denomination_seventh_day_adventist">Sjundedags adventistsamfundet</string>
 	<string name="poi_denomination_new_apostolic">Nya apostoliska</string>
 	<string name="poi_denomination_church_of_england">Engelska kyrkan</string>
-	<string name="poi_denomination_episcopal">Episcopal</string>
+	<string name="poi_denomination_episcopal">Episkopal</string>
 	<string name="poi_denomination_shia">Shia</string>
 	<string name="poi_denomination_united">United</string>
 	<string name="poi_denomination_greek_catholic">Grekisk-katolska</string>
@@ -837,7 +837,7 @@
 	<string name="poi_tomb">Grav</string>
 	<string name="poi_shelter">Skydd</string>
 	<string name="poi_funicular">Bergbana</string>
-	<string name="poi_resort">Resort</string>
+	<string name="poi_resort">Semesterort</string>
 	<string name="poi_hanami">Hanami</string>
 	<string name="poi_wine_cellar">Vinkällare</string>
 	<string name="poi_craft_winery">Vingård</string>
@@ -1955,4 +1955,5 @@
 	<string name="poi_internet_access_type_wired">Trådbundet</string>
 	<string name="poi_barbecue_grill">Grill: ja</string>
 
-</resources>
+<string name="poi_buoy_safe_water">Mittledsboj</string>
+	</resources>
