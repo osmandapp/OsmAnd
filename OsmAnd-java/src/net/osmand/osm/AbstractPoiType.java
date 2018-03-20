@@ -19,6 +19,7 @@ public abstract class AbstractPoiType {
 	private String poiAdditionalCategory;
 	private List<String> excludedPoiAdditionalCategories;
 	private String synonyms;
+	private String enSynonyms;
 	private String enTranslation;
 	private String translation;
 
@@ -84,10 +85,10 @@ public abstract class AbstractPoiType {
 	}
 
 	public String getEnSynonyms() {
-		if(synonyms == null) {
-			synonyms = registry.getEnSynonyms(this);
+		if(enSynonyms == null) {
+			enSynonyms = registry.getEnSynonyms(this);
 		}
-		return synonyms;
+		return enSynonyms;
 	}
 
 	public String getEnTranslation() {
