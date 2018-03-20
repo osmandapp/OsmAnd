@@ -17,8 +17,6 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.Location;
-import net.osmand.ResultMatcher;
-import net.osmand.StringMatcher;
 import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -33,15 +31,12 @@ import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
 
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
@@ -376,18 +371,12 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					AbstractPoiType abstractPoiType = (AbstractPoiType) listItem.getSearchResult().object;
 					SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(searchPhrase,
 							CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
-					String[] syn = new String[0];
-					String synonyms = abstractPoiType.getSynonyms();
-					String enSynonyms = abstractPoiType.getEnSynonyms();
-					if (app.getLanguage().equals("en")) {
-						syn = enSynonyms.split(";");
-
-					} else if (!synonyms.equals(enSynonyms)) {
-						syn = synonyms.split(";");
-					}
-					for (String aSyn : syn) {
-						if (nm.matches(aSyn)) {
-							desc = listItem.getTypeName() + " (" + aSyn + ")";
+					String[] synonyms = abstractPoiType.getSynonyms().split(";");
+					for (String syn : synonyms) {
+						if (nm.matches(abstractPoiType.getEnTranslation())
+								|| nm.matches(abstractPoiType.getTranslation())
+								|| nm.matches(syn)) {
+							desc = listItem.getTypeName() + " (" + syn + ")";
 							break;
 						}
 					}
