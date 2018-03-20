@@ -3745,4 +3745,9 @@
 
 	<string name="poi_barbecue_grill">Мангал: есть</string>
 
+	<string name="poi_water_utility">Офис водоснабжения</string>
+	<string name="poi_energy_supplier">Офис поставщика электроэнергии</string>
+
+	<string name="synonyms_poi_fuel">Автомобильная заправка;Автозаправка;Бензоколонка;АЗС;Бензозаправка</string>
+
 	</resources>
