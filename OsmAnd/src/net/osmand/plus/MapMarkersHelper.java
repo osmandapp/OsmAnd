@@ -377,19 +377,12 @@ public class MapMarkersHelper {
 		}
 	}
 
-	// TODO rewrite?
 	public void updateGroup(MapMarkersGroup mapMarkersGroup) {
-//		if (mapMarkersGroup.getMarkers().size() == 0) {
-//			removeFromGroupsList(mapMarkersGroup);
-//			return;
-//		}
 		createHeaderAndHistoryButtonInGroup(mapMarkersGroup);
 		int historyMarkersCount = mapMarkersGroup.getHistoryMarkers().size();
 		ShowHideHistoryButton showHideHistoryButton = mapMarkersGroup.getShowHideHistoryButton();
-		if (showHideHistoryButton != null) {
-			if (historyMarkersCount == 0) {
-				mapMarkersGroup.setShowHideHistoryButton(null);
-			}
+		if (showHideHistoryButton != null && historyMarkersCount == 0) {
+			mapMarkersGroup.setShowHideHistoryButton(null);
 		} else if (historyMarkersCount > 0) {
 			showHideHistoryButton = new ShowHideHistoryButton();
 			showHideHistoryButton.setShowHistory(false);
@@ -417,6 +410,7 @@ public class MapMarkersHelper {
 				mapMarkersGroup.setId(marker.groupKey);
 				mapMarkersGroup.setName(marker.groupName);
 				mapMarkersGroup.setCreationDate(Long.MAX_VALUE);
+				mapMarkersGroup.getMarkers().add(marker);
 				addToGroupsList(mapMarkersGroup);
 				sortGroups();
 				updateGroup(mapMarkersGroup);
