@@ -373,9 +373,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 							CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 					String[] synonyms = abstractPoiType.getSynonyms().split(";");
 					for (String syn : synonyms) {
-						if (nm.matches(abstractPoiType.getEnTranslation())
-								|| nm.matches(abstractPoiType.getTranslation())
-								|| nm.matches(syn)) {
+						if ((nm.matches(abstractPoiType.getEnTranslation())
+								|| nm.matches(abstractPoiType.getTranslation()))
+								&& nm.matches(syn)) {
 							desc = listItem.getTypeName() + " (" + syn + ")";
 							break;
 						}
