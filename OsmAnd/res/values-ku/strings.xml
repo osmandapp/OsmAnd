@@ -152,4 +152,14 @@
     <string name="shared_string_right">Rast</string>
     <string name="shared_string_left">Çep</string>
     <string name="shared_string_paste">Bizeliqîne</string>
+    <string name="will_open_tomorrow_at">Wê sibê di van saetan de vekirî be</string>
+    <string name="open_from">Saetên vekirî</string>
+    <string name="open_till">Saetên vekirî</string>
+    <string name="will_close_at">Wextê girtinê</string>
+    <string name="will_open_at">Saetên vekirî</string>
+    <string name="will_open_on">Wextê vekirinê</string>
+    <string name="road_blocked">Rê astengkirî ye</string>
+    <string name="starting_point">Nuqteya destpêkê</string>
+    <string name="error_avoid_specific_road">Rêya din nehate dîtin</string>
+    <string name="day_off_label">girtî</string>
     </resources>
