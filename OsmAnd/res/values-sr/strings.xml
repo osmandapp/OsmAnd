@@ -98,7 +98,7 @@
     <string name="map_widget_audionotes">Аудио белешке</string>
     <string name="download_select_map_types">Остале мапе</string>
     <string name="download_roads_only_item">Само путеви</string>
-    <string name="download_srtm_maps">изохипсе</string>
+    <string name="download_srtm_maps">Изохипсе</string>
     <string name="rendering_attr_noAdminboundaries_name">Границе</string>
 	
 	<string name="map_widget_max_speed">Ограничење брзине</string>
@@ -642,8 +642,8 @@
     <string name="route_points">Тачке путање</string>
     <string name="track_segments">Одсечци путање</string>
     <string name="track_points">Тачке путање</string>
-    <string name="shared_string_online_maps">Карте на мрежи</string>
-	<string name="record_plugin_name">Снимци путовања</string>
+    <string name="shared_string_online_maps">Мрежне карте</string>
+	<string name="record_plugin_name">Снимање путовања</string>
 	
 	<string name="srtm_paid_version_title">Прикључак обриса линија</string>
     <string name="osmand_srtm_short_description_80_chars">Прикључак за приказ обриса линија ван мреже ОсмАнда</string>
@@ -1099,7 +1099,11 @@
     <string name="shared_string_read_more">Сазнајте више</string>
     <string name="clear_updates_proposition_message">Можете уклонити преузете надоградње и вратити се на изворну карту</string>
     <string name="shared_string_select">Означи</string>
-    <string name="osmand_rastermaps_plugin_description"/>
+    <string name="osmand_rastermaps_plugin_description">Овим додатком можете приступити различитим типовима мрежних (такозваним сличицама или растерским) карата, од предефинисаних OpenStreetMap сличица (као што је Mapnik) до сателитских слика и сојевима са уском специјализацијом, као што су метеоролошке, климатске, геолошке карте, осенчени слојеви, итд.
+\n
+\nСвака од ових мапа може бити коришћена или као главна (основна) мапа која се приказује на главном екрану, или као слој изнад или испод основне карте. Да би се слој испод боље видео, одређени елементи ОсмАнд векторских карата се по жељи лако могу сакрити преко \"Подеси карту\" менија.
+\n
+\nКарте са сличицама се могу преузете директно са разних извора на интеренета, или се могу припремити за офлајн употребу (и ручно прекопирати у ОсмАнд фасциклу са подацима), и то као SQLite база података коју може да направи велики број алата треће стране.</string>
     <string name="rendering_attr_contourDensity_description">Густина линија обриса</string>
     <string name="rendering_attr_contourDensity_name">Густина линија обриса</string>
     <string name="rendering_value_high_name">Густа</string>
@@ -1391,7 +1395,7 @@
     <string name="share_geo">положај:</string>
     <string name="lang_br">Бретонски</string>
     <string name="hillshade_menu_download_descr">Да бисте видели рељеф, потребно је да преузмете посебну карту овог подручја са сенчењем.</string>
-    <string name="hillshade_purchase_header">Да бисте видели сенчење рељефа на карти, потребно је да купите и уградите прикључак линија обриса</string>
+    <string name="hillshade_purchase_header">Да бисте видели сенчење рељефа на карти, потребно је да купите и уградите додатак за изохипсе</string>
     <string name="shared_string_plugin">Прикључак</string>
     <string name="display_zoom_level">Прриказ нивоа увеличања: %1$s</string>
     <string name="favorite_group_name">Име групе</string>
@@ -1421,8 +1425,8 @@
     <string name="sorted_by_distance">Разврстано по удаљености</string>
     <string name="search_favorites">Тражи омиљене</string>
     <string name="hide_from_zoom_level">Сакриј ниво увећања</string>
-    <string name="srtm_menu_download_descr">За приказ линија обриса на карти, треба преузети карту линије обриса ове области.</string>
-    <string name="srtm_purchase_header">За приказ линија обриса на карти, требате купити и уградити прикључак линија обриса</string>
+    <string name="srtm_menu_download_descr">Да бисте приказали изохипсе на карти, треба преузети карту изохипса за ову област.</string>
+    <string name="srtm_purchase_header">За приказ изохипса на карти, треба да купите и уградите додатак за изохипсе</string>
     <string name="srtm_color_scheme">Образац боја</string>
     <string name="show_from_zoom_level">Приказ од разине увећања</string>
     <string name="routing_attr_allow_private_name">Дозволи лични приступ</string>
@@ -1693,7 +1697,7 @@
 \n 
 \nДа би то учинили требате уградити програм Мапилар (Mapillary) из Гуглове продавнице.</string>
     <string name="subscribe_email_desc">Претплатите се на наш дописни списак за попуст и добијте још 3 преузимања карти!</string>
-    <string name="depth_contour_descr">Скуп карата које садрже обрисе дубине мора и наутичке тачке.</string>
+    <string name="depth_contour_descr">Скуп карата које садрже изохипсе дубине мора и наутичке тачке.</string>
     <string name="sea_depth_thanks">Хвала Вам на куповини обриса наутичких дубина!</string>
     <string name="index_item_depth_contours_osmand_ext">Обриси наутичких дубина</string>
     <string name="index_item_depth_points_southern_hemisphere">Наутичке дубинске тачке јужне полулопте</string>
@@ -2103,7 +2107,7 @@
     <string name="snap_to_road">Прилепи на пут</string>
     <string name="starting_point_too_far">Полазна тачка је превише далеко од најближег пута.</string>
     <string name="rendering_attr_noPolygons_name">Полигони</string>
-    <string name="rendering_attr_contourLines_name">Прикажи контурне линије</string>
+    <string name="rendering_attr_contourLines_name">Прикажи изохипсе</string>
     <string name="offline_navigation_not_available">OsmAnd навигација ван мреже је привремено недоступна.</string>
     <string name="maps_could_not_be_downloaded">Ова карта не може да се преузме</string>
     <string name="layer_gpx_layer">ГПИкс путања…</string>
@@ -2380,7 +2384,7 @@
     <string name="get_full_version">Пуна верзија</string>
     <string name="free_downloads_used">Искоришћених бесплатних преузимања</string>
     <string name="free_downloads_used_description">Прикажи број искориштених бесплатних преузимања.</string>
-    <string name="begin_with_osmand_menu_group">ПРви кораци уз ОсмАнд</string>
+    <string name="begin_with_osmand_menu_group">Први кораци уз ОсмАнд</string>
     <string name="features_menu_group">Функционалности</string>
     <string name="other_menu_group">Остало</string>
     <string name="plugins_menu_group">Додаци</string>
@@ -2461,4 +2465,71 @@
     <string name="add_segment_to_the_track">Додај у ГПИкс путању</string>
     <string name="osm_recipients_label">ОСМ примаоци</string>
     <string name="total_donations">Укупно донација</string>
+    <string name="release_2_8">\\022 Комплетно прправљени маркери на картама са вођицама и планирањем пута
+\n
+\n • Алат за мерење удаљености нуди могућност пријањања са путем и чувања тачака као путања
+\n
+\n • ОсмАнд Live: исправке грешака, свежи подаци на сервер сваких пола сата, ажурирања су убачена у навигацију
+\n
+\n</string>
+    <string name="osmand_development_plugin_description">Овај додатак приказује подежавања за развој и отклањање гррешака као што су тестирање и симулација навођења, перформанце исцртавања екрана или гласовни упити. Ова подешавања су за програмерима и нису намењена за општу употребу.</string>
+    <string name="map_preferred_locale_descr">Жељени језик за ознаке на карти (ако није доступан, користиће се енглески или локална имена).</string>
+    <string name="local_index_tile_data_name">Подаци сличице: %1$s</string>
+    <string name="use_magnetic_sensor_descr">За исчитавање компаса, користите магнетни сензор уместо оријентационог сензора.</string>
+    <string name="bg_service_sleep_mode_on">Заустави
+\n рад у позадини</string>
+    <string name="gps_wakeup_interval">Интервал буђења GPS уређаја: %s</string>
+    <string name="local_indexes_cat_tile">Мрежне и кеширене карте са сличицама</string>
+    <string name="map_online_data">Мрежне и карте са сличицама</string>
+    <string name="front">напред</string>
+    <string name="front_right">десно-напред</string>
+    <string name="right">на десно</string>
+    <string name="back_right">десно-назад</string>
+    <string name="back">назад</string>
+    <string name="back_left">лево-назад</string>
+    <string name="left">на лево</string>
+    <string name="front_left">лево-напред</string>
+    <string name="oclock">сати</string>
+    <string name="towards">према</string>
+    <string name="direction_style_sidewise">Бочно (8 сектора)</string>
+    <string name="direction_style_clockwise">У смеру казаљке на сату (12 сектора)</string>
+    <string name="settings_direction_style">Стил смера</string>
+    <string name="accessibility_preferences_descr">Опције везане за приступачност</string>
+    <string name="free_version_message">Ова бесплатна ОсмАнд верзија је ограничена на скидање %1$s карата (додавања и ажурирања карата) и не подржава Википедија чланке ван мреже.</string>
+    <string name="index_name_other">Светске и тематске мапе</string>
+    <string name="data_settings_descr">Одабери језик, преузми/поново учитај податке.</string>
+    <string name="show_view_angle">Прикажи смер гледања</string>
+    <string name="map_tile_source">Извор сличице карте</string>
+    <string name="map_source">Извор карте</string>
+    <string name="poi_error_io_error_template">Догодила се I/O грешка током извођења радње {0}.</string>
+    <string name="poi_dialog_comment_default">Тачка од интереса се мења</string>
+    <string name="av_camera_focus_descr">Одаберите начин фокуса уграђеног фотоапарата.</string>
+    <string name="av_camera_focus_continuous">Фотоапарат непрестано покушава да фокусира</string>
+    <string name="av_photo_play_sound">Пусти звук на шкљоцање</string>
+    <string name="av_camera_pic_size">Величина слике фотоапарата</string>
+    <string name="av_camera_pic_size_descr">Одаберите величину слике уграђеног фотоапарата.</string>
+    <string name="shared_string_undo">ПОНИШТИ</string>
+    <string name="offline_maps_and_navigation">Карте ван мреже
+\n&amp; Навођење</string>
+    <string name="saved_at_time">Успешно сачувано у: %1$s</string>
+    <string name="poi_deleted_localy">Тачка од интереса ће бити обрисана када отпремите Ваше измене</string>
+    <string name="downloading_number_of_files">Преузимам - %1$d фајл</string>
+    <string name="show_free_version_banner">Прикажи банер бесплатне верзије</string>
+    <string name="show_free_version_banner_description">Приказуј банер бесплатне верзије и у плаћеној верзији.</string>
+    <string name="confirm_download_roadmaps">Да ли сте сигурни да желите да скинете карту која има само путеве, иако већ имате стандардну (целу) карту?</string>
+    <string name="value_downloaded_of_max">%1$.1f од %2$.1f MB</string>
+    <string name="update_all">Ажурирај све (%1$s MB)</string>
+    <string name="poi_context_menu_modify_osm_change">Промени ОСМ измену</string>
+    <string name="last_map_change">Последња измена карте: %s</string>
+    <string name="quick_action_add_marker">Додај ознаку на карти</string>
+    <string name="quick_action_fav_name_descr">Оставите празно да се аутоматски користи адреса или име места.</string>
+    <string name="quick_action_map_overlay">Измени слој изнад карте</string>
+    <string name="quick_action_map_overlay_title">Слојеви изнад карте</string>
+    <string name="quick_action_map_overlay_action">Додај слој изнад карте</string>
+    <string name="quick_action_map_overlay_switch">Слој изнад карте је промењен на \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">Слој испод карте је промењен на \"%s\".</string>
+    <string name="quick_action_map_underlay">Измени слој испод карте</string>
+    <string name="quick_action_map_underlay_title">Слојеви испод карте</string>
+    <string name="quick_action_map_underlay_action">Додај слој испод карте</string>
+    <string name="day_off_label">искљ.</string>
     </resources>

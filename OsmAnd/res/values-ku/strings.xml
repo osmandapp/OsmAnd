@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>    
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>    
 	
     <string name="local_indexes_cat_av">زانیاری دەنگ/ڤیدیۆ</string>
     <string name="stop_routing_confirm">Tu dixwazî navîgasyonê bisekinînî?</string>
@@ -129,4 +130,26 @@
     <string name="enter_new_name">Navê nû binivîse</string>
 	<string name="shared_string_back">Paşve</string>
 	<string name="view">Dîtin</string>
-	</resources>
+	<string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	<string name="east_abbreviation">Rh</string>
+	<string name="west_abbreviation">Ra</string>
+	<string name="south_abbreviation">Bş</string>
+	<string name="north_abbreviation">Bk</string>
+	<string name="all_data">Hemû daneyan</string>
+    <string name="context_menu_read_article">"Gotarê bixwîne "</string>
+    <string name="release_3_0">\\022 
+\n
+\n</string>
+    <string name="shared_string_deleted">Jêbirî</string>
+    <string name="shared_string_edited">"Guhertî "</string>
+    <string name="shared_string_more_without_dots">Bêhtir</string>
+    <string name="shared_string_two">Du</string>
+    <string name="shared_string_one">Yek</string>
+    <string name="shared_string_right">Rast</string>
+    <string name="shared_string_left">Çep</string>
+    <string name="shared_string_paste">Bizeliqîne</string>
+    </resources>
