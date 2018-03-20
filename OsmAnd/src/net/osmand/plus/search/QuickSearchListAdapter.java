@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
@@ -369,15 +370,25 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			String desc = listItem.getTypeName();
 			if (listItem.getSearchResult().object instanceof AbstractPoiType) {
 				AbstractPoiType abstractPoiType = (AbstractPoiType) listItem.getSearchResult().object;
-				String synonyms[] = abstractPoiType.getSynonyms().split(";");
+				String synonyms = abstractPoiType.getSynonyms();
+				String enSynonyms = abstractPoiType.getEnSynonyms();
 				QuickSearchHelper searchHelper = app.getSearchUICore();
 				SearchUICore searchUICore = searchHelper.getCore();
 				String searchPhrase = searchUICore.getPhrase().getText(true);
-				SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(searchPhrase,
-						CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
-				for (int i = 0; i < synonyms.length; i++) {
-					if (nm.matches(synonyms[i])) {
-						desc = listItem.getTypeName() + " (" + synonyms[i] + ")";
+				if (!searchPhrase.isEmpty()) {
+					SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(searchPhrase,
+							CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+					String[] syn=new String[0];
+					if (app.getLanguage().equals("en")) {
+						 syn = enSynonyms.split(";");
+
+					} else if (!synonyms.equals(enSynonyms)) {
+						 syn = synonyms.split(";");
+					}
+					for (String aSyn : syn) {
+						if (nm.matches(aSyn)) {
+							desc = listItem.getTypeName() + " (" + aSyn + ")";
+						}
 					}
 				}
 			}

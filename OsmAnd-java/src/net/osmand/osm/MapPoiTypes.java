@@ -59,6 +59,8 @@ public class MapPoiTypes {
 
 		String getSynonyms(AbstractPoiType type);
 		String getSynonyms(String keyName);
+		String getEnSynonyms(AbstractPoiType type);
+		String getEnSynonyms(String keyName);
 	}
 
 	public static MapPoiTypes getDefaultNoInit() {
@@ -704,6 +706,15 @@ public class MapPoiTypes {
 	public String getSynonyms(AbstractPoiType abstractPoiType) {
 		if (poiTranslator != null) {
 			String translation = poiTranslator.getSynonyms(abstractPoiType);
+			if (!Algorithms.isEmpty(translation)) {
+				return translation;
+			}
+		}
+		return "";
+	}
+	public String getEnSynonyms(AbstractPoiType abstractPoiType) {
+		if (poiTranslator != null) {
+			String translation = poiTranslator.getEnSynonyms(abstractPoiType);
 			if (!Algorithms.isEmpty(translation)) {
 				return translation;
 			}
