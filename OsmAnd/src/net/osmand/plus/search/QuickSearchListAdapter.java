@@ -375,6 +375,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				String searchPhrase = searchUICore.getPhrase().getText(true);
 				SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(searchPhrase,
 						CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+
 				for (String syn : synonyms) {
 					if (nm.matches(abstractPoiType.getEnTranslation())) {
 						desc = listItem.getTypeName() + " (" + abstractPoiType.getEnTranslation() + ")";
