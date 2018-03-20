@@ -59,6 +59,7 @@ public class MapPoiTypes {
 
 		String getSynonyms(AbstractPoiType type);
 		String getSynonyms(String keyName);
+
 		String getEnSynonyms(AbstractPoiType type);
 		String getEnSynonyms(String keyName);
 	}
@@ -712,6 +713,7 @@ public class MapPoiTypes {
 		}
 		return "";
 	}
+
 	public String getEnSynonyms(AbstractPoiType abstractPoiType) {
 		if (poiTranslator != null) {
 			String translation = poiTranslator.getEnSynonyms(abstractPoiType);
@@ -721,6 +723,7 @@ public class MapPoiTypes {
 		}
 		return "";
 	}
+
 	public String getEnTranslation(AbstractPoiType abstractPoiType) {
 		if (poiTranslator != null) {
 			String translation = poiTranslator.getEnTranslation(abstractPoiType);

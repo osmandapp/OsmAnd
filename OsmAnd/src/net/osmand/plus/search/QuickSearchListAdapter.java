@@ -378,16 +378,17 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				if (!searchPhrase.isEmpty()) {
 					SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(searchPhrase,
 							CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
-					String[] syn=new String[0];
+					String[] syn = new String[0];
 					if (app.getLanguage().equals("en")) {
-						 syn = enSynonyms.split(";");
+						syn = enSynonyms.split(";");
 
 					} else if (!synonyms.equals(enSynonyms)) {
-						 syn = synonyms.split(";");
+						syn = synonyms.split(";");
 					}
 					for (String aSyn : syn) {
 						if (nm.matches(aSyn)) {
 							desc = listItem.getTypeName() + " (" + aSyn + ")";
+							break;
 						}
 					}
 				}
