@@ -310,6 +310,196 @@ public class MapMarkersHelper {
 		return getMapMarker(favouritePoint) != null;
 	}
 
+	public void addAndSyncGroup(@NonNull MapMarkersGroup group, @Nullable OnGroupSyncedListener listener) {
+		if (!isGroupSynced(group.getId())) {
+			markersDbHelper.addGroup(group.getId(), group.getName(), group.getType(), group.getWptCategoriesString());
+			addToGroupsList(group);
+		} else {
+			markersDbHelper.updateGroupCategories(group.getId(), group.getWptCategoriesString());
+		}
+		syncGroupAsync(group, listener);
+	}
+
+	public void removeMarkersGroup(MapMarkersGroup group) {
+		if (group != null) {
+			markersDbHelper.removeMarkersGroup(group.getId());
+			removeGroupActiveMarkers(group, false);
+			removeFromGroupsList(group);
+		}
+	}
+
+	public void updateGroupDisabled(@NonNull MapMarkersGroup group, boolean disabled) {
+		String id = group.getId();
+		if (id != null) {
+			markersDbHelper.updateGroupDisabled(id, disabled);
+			updateSyncGroupDisabled(group, disabled);
+		}
+	}
+
+	private void updateSyncGroupDisabled(@NonNull MapMarkersGroup group, boolean disabled) {
+		List<MapMarker> groupMarkers = new ArrayList<>(group.getMarkers());
+		for (MapMarker marker : groupMarkers) {
+			if (marker.history) {
+				if (disabled) {
+					removeFromMapMarkersHistoryList(marker);
+				} else {
+					addToMapMarkersHistoryList(marker);
+				}
+			} else {
+				if (disabled) {
+					removeFromMapMarkersList(marker);
+				} else {
+					addToMapMarkersList(marker);
+				}
+			}
+		}
+		reorderActiveMarkersIfNeeded();
+		sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
+		refresh();
+	}
+
+	private void removeGroupActiveMarkers(MapMarkersGroup group, boolean updateGroup) {
+		if (group != null) {
+			markersDbHelper.removeActiveMarkersFromGroup(group.getId());
+			removeFromMapMarkersList(group.getActiveMarkers());
+			if (updateGroup) {
+				group.setMarkers(group.getHistoryMarkers());
+				updateGroup(group);
+			}
+			reorderActiveMarkersIfNeeded();
+			refresh();
+		}
+	}
+
+	public void updateGroups() {
+		for (MapMarkersGroup group : mapMarkersGroups) {
+			updateGroup(group);
+		}
+	}
+
+	// TODO rewrite?
+	public void updateGroup(MapMarkersGroup mapMarkersGroup) {
+//		if (mapMarkersGroup.getMarkers().size() == 0) {
+//			removeFromGroupsList(mapMarkersGroup);
+//			return;
+//		}
+		createHeaderAndHistoryButtonInGroup(mapMarkersGroup);
+		int historyMarkersCount = mapMarkersGroup.getHistoryMarkers().size();
+		ShowHideHistoryButton showHideHistoryButton = mapMarkersGroup.getShowHideHistoryButton();
+		if (showHideHistoryButton != null) {
+			if (historyMarkersCount == 0) {
+				mapMarkersGroup.setShowHideHistoryButton(null);
+			}
+		} else if (historyMarkersCount > 0) {
+			showHideHistoryButton = new ShowHideHistoryButton();
+			showHideHistoryButton.setShowHistory(false);
+			mapMarkersGroup.setShowHideHistoryButton(showHideHistoryButton);
+		}
+	}
+
+	private void addMarkersToGroups(@NonNull List<MapMarker> markers) {
+		for (MapMarker marker : markers) {
+			addMarkerToGroup(marker);
+		}
+	}
+
+	private void addMarkerToGroup(MapMarker marker) {
+		if (marker != null) {
+			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupById(marker.groupKey);
+			if (mapMarkersGroup != null) {
+				mapMarkersGroup.getMarkers().add(marker);
+				updateGroup(mapMarkersGroup);
+				if (mapMarkersGroup.getName() == null) {
+					sortMarkers(mapMarkersGroup.getMarkers(), false, BY_DATE_ADDED_DESC);
+				}
+			} else {
+				mapMarkersGroup = new MapMarkersGroup();
+				mapMarkersGroup.setId(marker.groupKey);
+				mapMarkersGroup.setName(marker.groupName);
+				mapMarkersGroup.setCreationDate(Long.MAX_VALUE);
+				addToGroupsList(mapMarkersGroup);
+				sortGroups();
+				updateGroup(mapMarkersGroup);
+			}
+		}
+	}
+
+	private void createHeaderAndHistoryButtonInGroup(@NonNull MapMarkersGroup group) {
+		if (group.getName() != null) {
+			GroupHeader header = new GroupHeader();
+			int type = group.getType();
+			if (type != -1) {
+				header.setIconRes(type == MapMarkersGroup.FAVORITES_TYPE
+						? R.drawable.ic_action_fav_dark : R.drawable.ic_action_polygom_dark);
+			}
+			header.setGroup(group);
+			group.setGroupHeader(header);
+		}
+	}
+
+	private void removeMarkerFromGroup(MapMarker marker) {
+		if (marker != null) {
+			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupByName(marker.groupName);
+			if (mapMarkersGroup != null) {
+				mapMarkersGroup.getMarkers().remove(marker);
+				updateGroup(mapMarkersGroup);
+			}
+		}
+	}
+
+	private void sortGroups() {
+		if (mapMarkersGroups.size() > 0) {
+			Collections.sort(mapMarkersGroups, new Comparator<MapMarkersGroup>() {
+				@Override
+				public int compare(MapMarkersGroup group1, MapMarkersGroup group2) {
+					long t1 = group1.getCreationDate();
+					long t2 = group2.getCreationDate();
+					return (t1 > t2) ? -1 : ((t1 == t2) ? 0 : 1);
+				}
+			});
+		}
+	}
+
+	@Nullable
+	public MapMarkersGroup getMapMarkerGroupByName(String name) {
+		for (MapMarkersGroup group : mapMarkersGroups) {
+			if ((name == null && group.getName() == null)
+					|| (group.getName() != null && group.getName().equals(name))) {
+				return group;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public MapMarkersGroup getMapMarkerGroupById(String id) {
+		for (MapMarkersGroup group : mapMarkersGroups) {
+			if ((id == null && group.getId() == null)
+					|| (group.getId() != null && group.getId().equals(id))) {
+				return group;
+			}
+		}
+		return null;
+	}
+
+	public MapMarkersGroup getOrCreateGroup(@NonNull FavoriteGroup favGroup) {
+		MapMarkersGroup group = getMapMarkerGroupById(favGroup.name);
+		if (group == null) {
+			group = new MapMarkersGroup(favGroup.name, favGroup.name, MapMarkersGroup.FAVORITES_TYPE);
+		}
+		return group;
+	}
+
+	public MapMarkersGroup getOrCreateGroup(@NonNull File gpx) {
+		MapMarkersGroup group = getMapMarkerGroupById(gpx.getAbsolutePath());
+		if (group == null) {
+			group = new MapMarkersGroup(gpx.getAbsolutePath(),
+					AndroidUtils.trimExtension(gpx.getName()),
+					MapMarkersGroup.GPX_TYPE);
+		}
+		return group;
+	}
+
 	@Nullable
 	public MapMarker getMapMarker(WptPt wptPt) {
 		for (MapMarker marker : mapMarkers) {
@@ -583,67 +773,6 @@ public class MapMarkersHelper {
 		refresh();
 	}
 
-	public void addAndSyncGroup(@NonNull MapMarkersGroup group, @Nullable OnGroupSyncedListener listener) {
-		if (!isGroupSynced(group.getId())) {
-			markersDbHelper.addGroup(group.getId(), group.getName(), group.getType(), group.getWptCategoriesString());
-			addToGroupsList(group);
-		} else {
-			markersDbHelper.updateGroupCategories(group.getId(), group.getWptCategoriesString());
-		}
-		syncGroupAsync(group, listener);
-	}
-
-	public void removeMarkersGroup(MapMarkersGroup group) {
-		if (group != null) {
-			markersDbHelper.removeMarkersGroup(group.getId());
-			removeGroupActiveMarkers(group, false);
-			removeFromGroupsList(group);
-		}
-	}
-
-	public void updateGroupDisabled(@NonNull MapMarkersGroup group, boolean disabled) {
-		String id = group.getId();
-		if (id != null) {
-			markersDbHelper.updateGroupDisabled(id, disabled);
-			updateSyncGroupDisabled(group, disabled);
-		}
-	}
-
-	private void updateSyncGroupDisabled(@NonNull MapMarkersGroup group, boolean disabled) {
-		List<MapMarker> groupMarkers = new ArrayList<>(group.getMarkers());
-		for (MapMarker marker : groupMarkers) {
-			if (marker.history) {
-				if (disabled) {
-					removeFromMapMarkersHistoryList(marker);
-				} else {
-					addToMapMarkersHistoryList(marker);
-				}
-			} else {
-				if (disabled) {
-					removeFromMapMarkersList(marker);
-				} else {
-					addToMapMarkersList(marker);
-				}
-			}
-		}
-		reorderActiveMarkersIfNeeded();
-		sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
-		refresh();
-	}
-
-	private void removeGroupActiveMarkers(MapMarkersGroup group, boolean updateGroup) {
-		if (group != null) {
-			markersDbHelper.removeActiveMarkersFromGroup(group.getId());
-			removeFromMapMarkersList(group.getActiveMarkers());
-			if (updateGroup) {
-				group.setMarkers(group.getHistoryMarkers());
-				updateGroup(group);
-			}
-			reorderActiveMarkersIfNeeded();
-			refresh();
-		}
-	}
-
 	public void addMapMarker(@NonNull LatLon point, @Nullable PointDescription historyName) {
 		addMapMarkers(Collections.singletonList(point), Collections.singletonList(historyName), null);
 	}
@@ -811,135 +940,6 @@ public class MapMarkersHelper {
 		}
 		GPXUtilities.writeGpxFile(fout, file, ctx);
 		return fout.getAbsolutePath();
-	}
-
-	public void updateGroups() {
-		for (MapMarkersGroup group : mapMarkersGroups) {
-			updateGroup(group);
-		}
-	}
-
-	// TODO rewrite?
-	public void updateGroup(MapMarkersGroup mapMarkersGroup) {
-//		if (mapMarkersGroup.getMarkers().size() == 0) {
-//			removeFromGroupsList(mapMarkersGroup);
-//			return;
-//		}
-		createHeaderAndHistoryButtonInGroup(mapMarkersGroup);
-		int historyMarkersCount = mapMarkersGroup.getHistoryMarkers().size();
-		ShowHideHistoryButton showHideHistoryButton = mapMarkersGroup.getShowHideHistoryButton();
-		if (showHideHistoryButton != null) {
-			if (historyMarkersCount == 0) {
-				mapMarkersGroup.setShowHideHistoryButton(null);
-			}
-		} else if (historyMarkersCount > 0) {
-			showHideHistoryButton = new ShowHideHistoryButton();
-			showHideHistoryButton.setShowHistory(false);
-			mapMarkersGroup.setShowHideHistoryButton(showHideHistoryButton);
-		}
-	}
-
-	private void addMarkersToGroups(@NonNull List<MapMarker> markers) {
-		for (MapMarker marker : markers) {
-			addMarkerToGroup(marker);
-		}
-	}
-
-	private void addMarkerToGroup(MapMarker marker) {
-		if (marker != null) {
-			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupById(marker.groupKey);
-			if (mapMarkersGroup != null) {
-				mapMarkersGroup.getMarkers().add(marker);
-				updateGroup(mapMarkersGroup);
-				if (mapMarkersGroup.getName() == null) {
-					sortMarkers(mapMarkersGroup.getMarkers(), false, BY_DATE_ADDED_DESC);
-				}
-			} else {
-				mapMarkersGroup = new MapMarkersGroup();
-				mapMarkersGroup.setId(marker.groupKey);
-				mapMarkersGroup.setName(marker.groupName);
-				mapMarkersGroup.setCreationDate(Long.MAX_VALUE);
-				addToGroupsList(mapMarkersGroup);
-				sortGroups();
-				updateGroup(mapMarkersGroup);
-			}
-		}
-	}
-
-	private void createHeaderAndHistoryButtonInGroup(@NonNull MapMarkersGroup group) {
-		if (group.getName() != null) {
-			GroupHeader header = new GroupHeader();
-			int type = group.getType();
-			if (type != -1) {
-				header.setIconRes(type == MapMarkersGroup.FAVORITES_TYPE
-						? R.drawable.ic_action_fav_dark : R.drawable.ic_action_polygom_dark);
-			}
-			header.setGroup(group);
-			group.setGroupHeader(header);
-		}
-	}
-
-	private void removeMarkerFromGroup(MapMarker marker) {
-		if (marker != null) {
-			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupByName(marker.groupName);
-			if (mapMarkersGroup != null) {
-				mapMarkersGroup.getMarkers().remove(marker);
-				updateGroup(mapMarkersGroup);
-			}
-		}
-	}
-
-	private void sortGroups() {
-		if (mapMarkersGroups.size() > 0) {
-			Collections.sort(mapMarkersGroups, new Comparator<MapMarkersGroup>() {
-				@Override
-				public int compare(MapMarkersGroup group1, MapMarkersGroup group2) {
-					long t1 = group1.getCreationDate();
-					long t2 = group2.getCreationDate();
-					return (t1 > t2) ? -1 : ((t1 == t2) ? 0 : 1);
-				}
-			});
-		}
-	}
-
-	@Nullable
-	public MapMarkersGroup getMapMarkerGroupByName(String name) {
-		for (MapMarkersGroup group : mapMarkersGroups) {
-			if ((name == null && group.getName() == null)
-					|| (group.getName() != null && group.getName().equals(name))) {
-				return group;
-			}
-		}
-		return null;
-	}
-
-	@Nullable
-	public MapMarkersGroup getMapMarkerGroupById(String id) {
-		for (MapMarkersGroup group : mapMarkersGroups) {
-			if ((id == null && group.getId() == null)
-					|| (group.getId() != null && group.getId().equals(id))) {
-				return group;
-			}
-		}
-		return null;
-	}
-
-	public MapMarkersGroup getOrCreateGroup(@NonNull FavoriteGroup favGroup) {
-		MapMarkersGroup group = getMapMarkerGroupById(favGroup.name);
-		if (group == null) {
-			group = new MapMarkersGroup(favGroup.name, favGroup.name, MapMarkersGroup.FAVORITES_TYPE);
-		}
-		return group;
-	}
-
-	public MapMarkersGroup getOrCreateGroup(@NonNull File gpx) {
-		MapMarkersGroup group = getMapMarkerGroupById(gpx.getAbsolutePath());
-		if (group == null) {
-			group = new MapMarkersGroup(gpx.getAbsolutePath(),
-					AndroidUtils.trimExtension(gpx.getName()),
-					MapMarkersGroup.GPX_TYPE);
-		}
-		return group;
 	}
 
 	// TODO update all 3 collections at once?
