@@ -19,7 +19,6 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper.GroupHeader;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
-import net.osmand.plus.MapMarkersHelper.OnGroupSyncedListener;
 import net.osmand.plus.MapMarkersHelper.ShowHideHistoryButton;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -386,11 +385,13 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
 						final GPXFile[] gpxFile = new GPXFile[1];
-						SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(group.getId());
-						if (selectedGpxFile != null && (gpxFile[0] = selectedGpxFile.getGpxFile()) != null) {
-							switchGpxVisibility(gpxFile[0], enabled);
-						}
 						boolean disabled = !enabled;
+						if (disabled) {
+							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(group.getId());
+							if (selectedGpxFile != null && (gpxFile[0] = selectedGpxFile.getGpxFile()) != null) {
+								switchGpxVisibility(gpxFile[0], false);
+							}
+						}
 						group.setDisabled(disabled);
 						app.getMapMarkersHelper().updateGroupDisabled(group, disabled);
 						updateDisplayedData();
@@ -399,6 +400,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 									.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 										@Override
 										public void onClick(View view) {
+											if (gpxFile[0] != null) {
+												switchGpxVisibility(gpxFile[0], true);
+											}
 											headerViewHolder.disableGroupSwitch.setChecked(true);
 										}
 									});
