@@ -1611,14 +1611,14 @@
 	<string name="poi_cuisine_fish_and_chips">Fiskur og franskar</string>
 	<string name="poi_cuisine_seafood">Sjávarréttir</string>
 	<string name="poi_cuisine_barbecue">Kolagrill</string>
-	<string name="poi_cuisine_noodle">Núðlur</string>
+	<string name="poi_cuisine_noodle">Ramen-núðlur</string>
 	<string name="poi_cuisine_donut">Kleinuhringir</string>
 	<string name="poi_cuisine_crepe">Krepur</string>
 	<string name="poi_cuisine_breakfast">Morgunverður</string>
 	<string name="poi_cuisine_steak">Steik</string>
 	<string name="poi_cuisine_tapas">Tapas</string>
 	<string name="poi_cuisine_curry">Karrý</string>
-	<string name="poi_cuisine_grill">Grill</string>
+	<string name="poi_cuisine_grill">Grillstaður</string>
 	<string name="poi_cuisine_bagel">Beyglur</string>
 	<string name="poi_cuisine_sausage">Kryddpylsur</string>
 	<string name="poi_cuisine_cake">Kökur</string>
@@ -1646,7 +1646,7 @@
 	<string name="poi_cuisine_crepes">Krepur</string>
 	<string name="poi_cuisine_yakiniku">Yakiniku</string>
 	<string name="poi_cuisine_suki">Suki</string>
-	<string name="poi_cuisine_udon">Udon</string>
+	<string name="poi_cuisine_udon">Udon-núðlur</string>
 	<string name="poi_cuisine_brasserie">Brasserí</string>
 	<string name="poi_cuisine_yakitori">Yakitori</string>
 	<string name="poi_cuisine_meat">Kjöt</string>
@@ -3715,5 +3715,65 @@
 <string name="poi_outpost">Afhendingarstaður verslunar</string>
 
 <string name="poi_barbecue_grill">Steikingargrill: já</string>
+
+<string name="synonyms_poi_fuel">Bensínstöð;Eldsneytisáfylling;Eldsneytisafgreiðsla</string>
+
+	<string name="poi_denomination_congregational">Safnaðar (congregational)</string>
+	<string name="poi_health_specialty_podology_yes">Fótaheilsa</string>
+	<string name="poi_shuffleboard">Shuffleboard-skífuþeyting</string>
+	<string name="poi_counselling_type_child_guidance_yes">Ráðgjafarþjónusta (barnavernd): já</string>
+	<string name="poi_counselling_type_child_guidance_no">Ráðgjafarþjónusta (barnavernd): nei</string>
+	<string name="poi_counselling_type_crisis_yes">Ráðgjafarþjónusta (áföll): já</string>
+	<string name="poi_counselling_type_crisis_no">Ráðgjafarþjónusta (áföll): nei</string>
+	<string name="poi_provided_for_infant_yes">Í boði fyrir hvítvoðunga: já</string>
+	<string name="poi_provided_for_infant_no">Í boði fyrir hvítvoðunga: nei</string>
+	<string name="poi_provided_for_toddler_yes">Í boði fyrir smábörn: já</string>
+	<string name="poi_provided_for_toddler_no">Í boði fyrir smábörn: nei</string>
+	<string name="poi_provided_for_child_yes">Í boði fyrir börn: já</string>
+	<string name="poi_provided_for_child_no">Í boði fyrir börn: nei</string>
+	<string name="poi_provided_for_adult_yes">Í boði fyrir fullorðna: já</string>
+	<string name="poi_provided_for_adult_no">Í boði fyrir fullorðna: nei</string>
+	<string name="poi_provided_for_woman_yes">Í boði fyrir konur: já</string>
+	<string name="poi_provided_for_woman_no">Í boði fyrir konur: nei</string>
+	<string name="poi_provided_for_senior_yes">Í boði fyrir eldriborgara: já</string>
+	<string name="poi_provided_for_senior_no">Í boði fyrir eldriborgara: nei</string>
+	<string name="poi_provided_for_girl_yes">Í boði fyrir stúlkur: já</string>
+	<string name="poi_provided_for_girl_no">Í boði fyrir stúlkur: nei</string>
+	<string name="poi_provided_for_man_yes">Í boði fyrir karla: já</string>
+	<string name="poi_provided_for_man_no">Í boði fyrir karla: nei</string>
+	<string name="poi_provided_for_boy_yes">Í boði fyrir drengi: já</string>
+	<string name="poi_provided_for_boy_no">Í boði fyrir drengi: nei</string>
+
+	<string name="poi_treat_inpatient_yes">Þjónusta við innlögn: já</string>
+	<string name="poi_treat_inpatient_no">Þjónusta við innlögn: nei</string>
+	<string name="poi_treat_inpatient_only">Þjónusta við innlögn: eingöngu</string>
+	<string name="poi_office_therapist">Meðferðarstofa</string>
+	<string name="poi_office_healer">Græðingastofa</string>
+	<string name="poi_office_nursing_service">Hjúkrunarþjónusta</string>
+	<string name="poi_crossing_barrier_no">Slá yfir þverun: nei</string>
+	<string name="poi_crossing_barrier_yes">Slá yfir þverun</string>
+	<string name="poi_crossing_barrier_full">Slá yfir þverun: öll breidd vegarins</string>
+	<string name="poi_crossing_barrier_half">Slá yfir þverun: hálf breidd vegarins</string>
+	<string name="poi_crossing_barrier_double_half">Slá yfir þverun: tvöföld hálf breidd vegarins</string>
+	<string name="poi_crossing_bell_yes">Aðvörunarbjalla við þverun</string>
+	<string name="poi_crossing_bell_no">Aðvörunarbjalla við þverun: nei</string>
+	<string name="poi_crossing_light_yes">Umferðarljós við þverun</string>
+	<string name="poi_crossing_light_no">Umferðarljós við þverun: nei</string>
+	<string name="poi_crossing_on_demand_yes">Þverun eftir beiðni</string>
+	<string name="poi_crossing_on_demand_no">Þverun eftir beiðni: nei</string>
+	<string name="poi_crossing_saltire_yes">Aðvörunarkross við þverun</string>
+	<string name="poi_crossing_saltire_no">Aðvörunarkross við þverun: nei</string>
+	<string name="poi_cuisine_beef_bowl">Gyudon</string>
+	<string name="poi_cuisine_heuriger">Heuriger</string>
+	<string name="poi_cuisine_buschenschank">Buschenschank</string>
+	<string name="poi_cuisine_diner">Matsölustaður</string>
+	<string name="poi_cuisine_soba">Soba-núðlur</string>
+	<string name="poi_cuisine_fine_dining">Fínn veitingastaður</string>
+	<string name="poi_cuisine_tacos">Taco-vefjur</string>
+	<string name="poi_cuisine_piadina">Piadina-vefjur</string>
+	<string name="poi_cuisine_gyros">Gyros-pítur</string>
+	<string name="poi_cuisine_bubble_tea">Boba-te</string>
+	<string name="poi_cuisine_sagardotegia">Sagardotegia eplavínstaður</string>
+	<string name="poi_water_utility">Vatnsveituskrifstofa</string>
 
 </resources>
