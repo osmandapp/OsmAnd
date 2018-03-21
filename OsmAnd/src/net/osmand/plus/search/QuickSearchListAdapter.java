@@ -17,8 +17,6 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.Location;
-import net.osmand.ResultMatcher;
-import net.osmand.StringMatcher;
 import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -33,13 +31,11 @@ import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
