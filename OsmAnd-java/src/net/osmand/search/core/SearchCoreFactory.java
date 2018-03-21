@@ -1,6 +1,5 @@
 package net.osmand.search.core;
 
-import com.google.openlocationcode.OpenLocationCode;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
@@ -50,7 +49,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.set.hash.TLongHashSet;
 
 
 public class SearchCoreFactory {
@@ -613,16 +611,22 @@ public class SearchCoreFactory {
 				categories = types.getCategories(false);
 			}
 //			results.clear();
-			List<AbstractPoiType> results = new ArrayList<AbstractPoiType>() ;
+			List<AbstractPoiType> results = new ArrayList<AbstractPoiType>();
 			NameStringMatcher nm = phrase.getNameStringMatcher();
 			for (PoiFilter pf : topVisibleFilters) {
-				if (!phrase.isUnknownSearchWordPresent() || nm.matches(pf.getTranslation()) || nm.matches(pf.getEnTranslation())) {
+				if (!phrase.isUnknownSearchWordPresent()
+						|| nm.matches(pf.getTranslation())
+						|| nm.matches(pf.getEnTranslation())
+						|| nm.matches(pf.getSynonyms())) {
 					results.add(pf);
 				}
 			}
 			if (phrase.isUnknownSearchWordPresent()) {
 				for (PoiCategory c : categories) {
-					if (!results.contains(c) && (nm.matches(c.getTranslation()) || nm.matches(c.getEnTranslation()) ) ) {
+					if (!results.contains(c)
+							&& (nm.matches(c.getTranslation())
+							|| nm.matches(c.getEnTranslation())
+							|| nm.matches(c.getSynonyms()))) {
 						results.add(c);
 					}
 				}
@@ -631,14 +635,19 @@ public class SearchCoreFactory {
 					Entry<String, PoiType> e = it.next();
 					PoiType pt = e.getValue();
 					if (pt.getCategory() != types.getOtherMapCategory()) {
-						if (!results.contains(pt) && ( nm.matches(pt.getEnTranslation()) || nm.matches(pt.getTranslation()) )) {
+						if (!results.contains(pt)
+								&& (nm.matches(pt.getEnTranslation())
+								|| nm.matches(pt.getTranslation())
+								|| nm.matches(pt.getSynonyms()))) {
 							results.add(pt);
 						}
 						List<PoiType> additionals = pt.getPoiAdditionals();
 						if (additionals != null) {
 							for (PoiType a : additionals) {
-								if (!a.isReference() && !results.contains(a) &&
-										( nm.matches(a.getEnTranslation()) || nm.matches(a.getTranslation()) )) {
+								if (!a.isReference() && !results.contains(a)
+										&& (nm.matches(a.getEnTranslation())
+										|| nm.matches(a.getTranslation())
+										|| nm.matches(a.getSynonyms()))) {
 									results.add(a);
 								}
 							}

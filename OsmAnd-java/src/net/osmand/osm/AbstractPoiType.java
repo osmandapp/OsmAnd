@@ -17,7 +17,10 @@ public abstract class AbstractPoiType {
 	private AbstractPoiType baseLangType;
 	private boolean notEditableOsm;
 	private String poiAdditionalCategory;
-	private List<String> excludedPoiAdditionalCategoies;
+	private List<String> excludedPoiAdditionalCategories;
+	private String synonyms;
+	private String enTranslation;
+	private String translation;
 
 	public AbstractPoiType(String keyName, MapPoiTypes registry) {
 		this.keyName = keyName;
@@ -66,12 +69,24 @@ public abstract class AbstractPoiType {
 
 
 	public String getTranslation() {
-		return registry.getTranslation(this);
+		if(translation == null) {
+			translation = registry.getTranslation(this);
+		}
+		return translation;
 	}
 
+	public String getSynonyms() {
+		if(synonyms == null) {
+			synonyms = registry.getSynonyms(this);
+		}
+		return synonyms;
+	}
 
 	public String getEnTranslation() {
-		return registry.getEnTranslation(this);
+		if(enTranslation == null) {
+			enTranslation = registry.getEnTranslation(this);
+		}
+		return enTranslation;
 	}
 
 	public String getPoiAdditionalCategoryTranslation() {
@@ -137,14 +152,14 @@ public abstract class AbstractPoiType {
 	}
 
 	public List<String> getExcludedPoiAdditionalCategories() {
-		return excludedPoiAdditionalCategoies;
+		return excludedPoiAdditionalCategories;
 	}
 
 	public void addExcludedPoiAdditionalCategories(String[] excludedPoiAdditionalCategories) {
-		if (excludedPoiAdditionalCategoies == null) {
-			excludedPoiAdditionalCategoies = new ArrayList<>();
+		if (this.excludedPoiAdditionalCategories == null) {
+			this.excludedPoiAdditionalCategories = new ArrayList<>();
 		}
-		Collections.addAll(excludedPoiAdditionalCategoies, excludedPoiAdditionalCategories);
+		Collections.addAll(this.excludedPoiAdditionalCategories, excludedPoiAdditionalCategories);
 	}
 
 	public abstract Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes);

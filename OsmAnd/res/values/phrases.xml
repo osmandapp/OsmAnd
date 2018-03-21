@@ -919,6 +919,7 @@
 	<string name="poi_gallery">Art gallery</string>
 	<string name="poi_dance_floor">Dance floor</string>
 	<string name="poi_nightclub">Nightclub</string>
+	<string name="synonyms_poi_nightclub">Disco;Disko</string>
 	<string name="poi_stripclub">Stripclub</string>
 	<string name="poi_ski_resort">Ski resort</string>
 	<string name="poi_beach_resort">Beach resort</string>
