@@ -2,6 +2,7 @@ package net.osmand.plus.search;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -25,10 +26,13 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -523,6 +527,22 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		);
 
 		searchEditText = (EditText) view.findViewById(R.id.searchEditText);
+		searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+					searchQuery += " ";
+					searchEditText.clearFocus();
+					InputMethodManager im = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+					if (im != null) {
+						im.hideSoftInputFromWindow(searchEditText.getWindowToken(), 0);
+					}
+					runSearch();
+					return true;
+				}
+				return false;
+			}
+		});
 		searchEditText.addTextChangedListener(
 				new TextWatcher() {
 					@Override
