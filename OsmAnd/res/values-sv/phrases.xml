@@ -1956,4 +1956,463 @@
 	<string name="poi_barbecue_grill">Grill: ja</string>
 
 <string name="poi_buoy_safe_water">Mittledsboj</string>
+	<string name="synonyms_poi_fuel">Bensinstation;Bränslestation;Bränsle</string>
+
+	<string name="poi_buoy_special_purpose">Specialboj</string>
+	<string name="poi_daymark">Båk</string>
+	<string name="poi_seamark_dyke">Sjömärke vall</string>
+	<string name="poi_seamark_light">Fyr, sjömärke</string>
+	<string name="poi_seamark_light_major">Större fyr, sjömärke</string>
+	<string name="poi_seamark_light_minor">Mindre fyr, sjömärke</string>
+	<string name="poi_seamark_light_float">Flytande fyr, sjömärke</string>
+	<string name="poi_seamark_light_vessel">Fartygsljus, sjömärke</string>
+	<string name="poi_notice">Varning, sjömärke</string>
+	<string name="poi_pile">Påle</string>
+	<string name="poi_radar_transponder">Radartransponder, sjömärke</string>
+	<string name="poi_signal_station_traffic">Signalstation, trafik</string>
+	<string name="poi_signal_station_warning">Signalstation, varning</string>
+	<string name="poi_topmark">Toppmärke, sjömärke</string>
+	<string name="poi_seamark_rock">Sten, sjömärke</string>
+	<string name="poi_seamark_wreck">Vrak, sjömärke</string>
+
+	<string name="poi_seamark_clearance_height">Segelhöjd</string>
+	<string name="poi_seamark_clearance_height_closed">Segelhöjd (stängd)</string>
+	<string name="poi_seamark_clearance_height_open">Segelhöjd (öppen)</string>
+	<string name="poi_seamark_clearance_width">Segelbredd</string>
+
+	<string name="poi_bump_gate">Knuffgrind</string>
+	<string name="poi_kissing_gate">Kissing gate</string>
+	<string name="poi_sally_port">Sally port</string>
+	<string name="poi_swing_gate">Svängport</string>
+	<string name="poi_kent_carriage_gap">Kent carriage gap</string>
+	<string name="poi_route_hiking_ref_poi">Vandringsruttreferens</string>
+
+	<string name="poi_intermittent">Återkommande</string>
+
+	<string name="poi_payment_e_zpass_yes">E‑ZPass</string>
+	<string name="poi_shelter_type_lean_to">Lutande mot</string>
+	<string name="poi_shelter_type_wildlife_hide">Vildmarksgömma</string>
+	<string name="poi_shelter_type_field_shelter">Fältgömma</string>
+	<string name="poi_internet_access_type_public">Internetåtkomst: allmän</string>
+	<string name="poi_internet_access_type_service">Internetåtkomst: service</string>
+	<string name="poi_internet_access_type_no">Ingen internetåtkomst</string>
+	<string name="poi_internet_access_type_yes">Med internetåtkomst</string>
+
+	<string name="poi_maxwidth">Maximal bredd</string>
+	<string name="poi_iata">IATA-kod</string>
+	<string name="poi_icao">ICAO-kod</string>
+	<string name="poi_faa">FAA-kod</string>
+	
+	<string name="poi_artwork_type_sculpture">Konstverk: skulptur</string>
+	<string name="poi_artwork_type_statue">Konstverk: staty</string>
+	<string name="poi_artwork_type_mural">Konstverk: väggmålning</string>
+	<string name="poi_artwork_type_architecture">Konstverk: arkitektur</string>
+	<string name="poi_artwork_type_painting">Konstverk: målning</string>
+	<string name="poi_artwork_type_stone">Konstverk: sten</string>
+	<string name="poi_artwork_type_bust">Konstverk: byst</string>
+	<string name="poi_artwork_type_installation">Konstverk: installation</string>
+	<string name="poi_artwork_type_mosaic">Konstverk: mosaik</string>
+	<string name="poi_artwork_type_relief">Konstverk: relief</string>
+	<string name="poi_artwork_type_graffiti">Konstverk: graffiti</string>
+	<string name="poi_artwork_type_stele">Konstverk: stele</string>
+	<string name="poi_artwork_type_fountain">Konstverk: fontän</string>
+
+	<string name="poi_width">Bredd</string>
+
+	<string name="poi_architect_name">Arkitekt</string>
+
+	<string name="poi_architecture_modern">Arkitektur: modern</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Arkitektur: stalinistisk nyklassicism</string>
+	<string name="poi_architecture_eclectic">Arkitektur: eklektisk</string>
+	<string name="poi_architecture_new_objectivity">Arkitektur: ny objektivitet</string>
+	<string name="poi_architecture_contemporary">Arkitektur: samtida</string>
+	<string name="poi_architecture_constructivism">Arkitektur: konstruktivism</string>
+	<string name="poi_architecture_umgebinde">Arkitektur: umgebinde</string>
+	<string name="poi_architecture_timber_frame">Arkitektur: trästomme</string>
+	<string name="poi_architecture_art_nouveau">Arkitektur: art nouveau</string>
+	<string name="poi_architecture_neoclassicism">Arkitektur: nyklassicism</string>
+	<string name="poi_architecture_victorian">Arkitektur: viktoriansk</string>
+	<string name="poi_architecture_brutalism">Arkitektur: brutalism</string>
+	<string name="poi_architecture_classicism">Arkitektur: klassicism</string>
+	<string name="poi_architecture_gothic">Arkitektur: gotisk</string>
+	<string name="poi_architecture_oldrussian">Arkitektur: gammelrysk</string>
+	<string name="poi_architecture_baroque">Arkitektur: barock</string>
+	<string name="poi_architecture_postconstructivism">Arkitektur: postkonstruktivism</string>
+	<string name="poi_architecture_wilhelminian_style">Arkitektur: wilhelminsk stil</string>
+	<string name="poi_architecture_renaissance">Arkitektur: renässans</string>
+	<string name="poi_architecture_romanesque">Arkitektur: romansk</string>
+
+	<string name="poi_tunnel_waterway">Vattentunnel</string>
+	<string name="poi_tunnel_car">Vägtunnel</string>
+	<string name="poi_tunnel_pedestrian">Gångtunnel</string>
+	<string name="poi_tunnel_railway">Järnvägstunnel</string>
+	<string name="poi_bridge_car">Vägbro</string>
+	<string name="poi_bridge_pedestrian">Bro för fotgängare</string>
+	<string name="poi_bridge_bicycle">Cykelbro</string>
+	<string name="poi_bridge_railway">Järnvägsbro</string>
+	<string name="poi_bridge_waterway">Vattenvägsbro</string>
+	<string name="poi_bridge_structure_beam">Brostruktur: balkbro</string>
+	<string name="poi_bridge_structure_simple_suspension">Brostruktur: enkel upphängning</string>
+	<string name="poi_bridge_structure_suspension">Brostruktur: upphängning</string>
+	<string name="poi_bridge_structure_arch">Brostruktur: bågbro</string>
+	<string name="poi_bridge_structure_truss">Brostruktur: fackverk</string>
+	<string name="poi_bridge_structure_floating">Brostruktur: flytbro</string>
+	<string name="poi_bridge_structure_humpback">Brostruktur: knölbro</string>
+	<string name="poi_bridge_structure_cable_stayed">Brostruktur: snedkabelbro</string>
+	<string name="poi_bridge_structure_boardwalk">Brostruktur: boardwalk</string>
+	<string name="poi_bridge_structure_simple_wooden">Brostruktur: enkel trä</string>
+	<string name="poi_bridge_structure_viaduct">Brostruktur: viadukt</string>
+	<string name="poi_bridge_structure_aqueduct">Brostruktur: akvedukt</string>
+	<string name="poi_bridge_structure_log">Brostruktur: stockar</string>
+	<string name="poi_bridge_type_movable">Brostruktur: flyttbar</string>
+	<string name="poi_bridge_movable_bascule">Typ av flyttbar bro: klaffbro</string>
+	<string name="poi_bridge_movable_swing">Typ av flyttbar bro: svängbro</string>
+	<string name="poi_bridge_movable_lift">Typ av flyttbar bro: lyft</string>
+	<string name="poi_bridge_movable_drawbridge">Typ av flyttbar bro: vindbrygga</string>
+	<string name="poi_bridge_movable_submersible">Typ av flyttbar bro: sänkningsbar</string>
+	<string name="poi_bridge_movable_transporter">Typ av flyttbar bro: transportör</string>
+	<string name="poi_bridge_movable_retractable">Typ av flyttbar bro: infällbar</string>
+
+	<string name="poi_lit_yes">Upplyst: ja</string>
+	<string name="poi_lit_no">Upplyst: nej</string>
+
+	<string name="poi_surface_unpaved">Yta: obelagd</string>
+	<string name="poi_surface_paved">Yta: belagd</string>
+	<string name="poi_surface_asphalt">Yta: asfalt</string>
+	<string name="poi_surface_concrete">Yta: betong</string>
+	<string name="poi_surface_sett">Yta: gatsten</string>
+	<string name="poi_surface_cobblestone">Yta: kullersten</string>
+	<string name="poi_surface_paving_stones">Yta: gatstenar</string>
+	<string name="poi_surface_pebblestone">Yta: pebblestone</string>
+	<string name="poi_surface_stone">Yta: sten</string>
+	<string name="poi_surface_metal">Yta: metall</string>
+	<string name="poi_surface_wood">Yta: trä</string>
+	<string name="poi_surface_gravel">Yta: grus</string>
+	<string name="poi_surface_fine_gravel">Yta: fint grus</string>
+	<string name="poi_surface_compacted">Yta: packat</string>
+	<string name="poi_surface_sand">Yta: sand</string>
+	<string name="poi_surface_grass">Yta: gräs</string>
+	<string name="poi_surface_grass_paver">Yta: gräsarmering</string>
+	<string name="poi_surface_ground">Yta: mark</string>
+	<string name="poi_surface_dirt">Yta: lera</string>
+	<string name="poi_surface_mud">Yta: lera</string>
+	<string name="poi_surface_ice">Yta: is</string>
+	<string name="poi_surface_salt">Yta: salt</string>
+	<string name="poi_surface_snow">Yta: snö</string>
+
+	<string name="poi_route_bus_ref">Buss</string>
+	<string name="poi_route_share_taxi_ref">Delningstaxi</string>
+	<string name="poi_route_trolleybus_ref">Trådbuss</string>
+	<string name="poi_route_tram_ref">Spårvagn</string>
+	<string name="poi_route_train_ref">Tåg</string>
+	<string name="poi_route_light_rail_ref">Lätt järnväg</string>
+	<string name="poi_route_monorail_ref">Monorail</string>
+	<string name="poi_route_funicular_ref">Bergbana</string>
+	<string name="poi_route_ferry_ref">Färja</string>
+	<string name="poi_route_subway_ref">Tunnelbana</string>
+
+	<string name="poi_route_railway_ref">Järnvägssträcka</string>
+
+	<string name="poi_historic_yes">Historiskt objekt</string>
+	<string name="poi_surveillance_yes">Övervakning: ja</string>
+	<string name="poi_shop_additional_yes">Med butik</string>
+
+	<string name="poi_service_bicycle_retail_yes">Detaljhandel</string>
+	<string name="poi_service_bicycle_retail_no">Cykel-detaljhandel: nej</string>
+	<string name="poi_service_bicycle_repair_yes">Reparation</string>
+	<string name="poi_service_bicycle_repair_no">Cykelreparation: nej</string>
+	<string name="poi_service_bicycle_rental_yes">Uthyrning</string>
+	<string name="poi_service_bicycle_rental_no">Cykeluthyrning: nej</string>
+	<string name="poi_service_bicycle_pump_yes">Pump</string>
+	<string name="poi_service_bicycle_pump_no">Cykelpump: ingen</string>
+	<string name="poi_service_bicycle_diy_yes">Verktyg för gör-det-själv-reparationer</string>
+	<string name="poi_service_bicycle_diy_no">Cykelverktyg för gör-det-själv-reparation: nej</string>
+	<string name="poi_service_bicycle_cleaning_yes">Rengöring</string>
+	<string name="poi_service_bicycle_cleaning_no">Cykelrengöring: ingen</string>
+	<string name="poi_service_bicycle_chaintool_yes">Kedjebrytare</string>
+	<string name="poi_service_bicycle_chaintool_no">Kedjebrytare: nej</string>
+	<string name="poi_service_bicycle_second_hand_yes">Butikshandel med begagnade cyklar</string>
+	<string name="poi_service_bicycle_second_hand_no">Butikshandel med begagnade cyklar: nej</string>
+	<string name="poi_service_bicycle_charging_yes">Laddning: ja</string>
+	<string name="poi_service_bicycle_charging_no">Laddning: nej</string>
+	<string name="poi_bicycle_repair_station">Cykel-själv-reparation station</string>
+
+	<string name="poi_wildlife_hide">Plats för att observera vilda djur</string>
+
+	<string name="poi_training_language">Utbildning: språk</string>
+	<string name="poi_training_music">Utbildning: musik</string>
+	<string name="poi_training_dance">Utbildning: Dans</string>
+	<string name="poi_training_sport">Utbildning: sport</string>
+	<string name="poi_training_art">Utbildning: konst</string>
+	<string name="poi_training_cooking">Utbildning: matlagning</string>
+	<string name="poi_training_computer">Utbildning: dator</string>
+	<string name="poi_training_yoga">Utbildning: yoga</string>
+	<string name="poi_training_martial_art">Utbildning: kampsport</string>
+	<string name="poi_training_aviation">Utbildning: flygning</string>
+	<string name="poi_training_hairdressing">Utbildning: frisör</string>
+
+	<string name="poi_monument_yes">Monument</string>
+
+	<string name="poi_industrial_oil">Typ: oljeindustri</string>
+	<string name="poi_industrial_wellsite">Typ: pumpplats</string>
+	<string name="poi_industrial_factory">Typ: fabrik</string>
+	<string name="poi_industrial_gas">Typ: gasindustri</string>
+	<string name="poi_industrial_timber">Typ: timmer</string>
+	<string name="poi_industrial_refinery">Typ: raffinaderi</string>
+	<string name="poi_industrial_warehouse">Typ: lager</string>
+	<string name="poi_industrial_auto_wrecker">Typ: bilskrot</string>
+	<string name="poi_industrial_agriculture">Typ: jordbruk</string>
+	<string name="poi_industrial_brewery">Typ: bryggeri</string>
+	<string name="poi_industrial_brickyard">Typ: tegelbruk</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Typ: intermodal godsterminal</string>
+	<string name="poi_industrial_sawmill">Typ: sågverk</string>
+	<string name="poi_industrial_water_purification">Typ: vattenrening</string>
+	<string name="poi_industrial_port">Typ: hamn</string>
+	<string name="poi_industrial_depot">Typ: depot</string>
+
+	<string name="poi_note">Anteckning</string>
+	<string name="poi_watering_place">Vattningsställe</string>
+	<string name="poi_animal_boarding">Djurombordstigning</string>
+	<string name="poi_animal_boarding_dog">Ombordstigning: hund</string>
+	<string name="poi_animal_boarding_cat">Ombordstigning: katt</string>
+	<string name="poi_animal_boarding_dog_cat">Ombordstigning: hund, katt</string>
+	<string name="poi_animal_boarding_horse">Ombordstigning: häst</string>
+
+	<string name="poi_historic_aircraft">Historiskt flygplan</string>
+
+	<string name="poi_elevator_yes">Med hiss</string>
+	<string name="poi_elevator_no">Utan hiss</string>
+
+	<string name="poi_technical_monument">Tekniskt monument</string>
+
+	<string name="poi_office_camping">Campingkontor</string>
+	<string name="poi_model_aerodrome">Modellflygplats</string>
+	<string name="poi_guide">Guidekontor</string>
+	<string name="poi_quango">Quango</string>
+	<string name="poi_consulting">Konsultkontor</string>
+	<string name="poi_cooperative">Kooperativt kontor</string>
+	<string name="poi_office_forestry">Skogsbrukskontor</string>
+	<string name="poi_logistics">Logistikkontor</string>
+	<string name="poi_parish">Pastorsexpedition</string>
+	<string name="poi_publisher">Förlag</string>
+
+	<string name="poi_fuel_91ul">91UL bränsle</string>
+	<string name="poi_fuel_100ll">100LL bränsle</string>
+	<string name="poi_fuel_autogas">Autogas</string>
+	<string name="poi_fuel_jeta1">Jet A-1 bränsle</string>
+	<string name="poi_fuel_adblue">AdBlue bränsle</string>
+
+	<string name="poi_fuel_wood">Bränsle: trä</string>
+	<string name="poi_fuel_charcoal">Bränsle: träkol</string>
+	<string name="poi_fuel_coal">Bränsle: kol</string>
+
+	<string name="poi_street_lamp">Gatlykta</string>
+
+	<string name="poi_escape_lane">Nödstoppfil</string>
+
+	<string name="poi_crop_rice">Gröda: ris</string>
+	<string name="poi_crop_grass">Gröda: gräs</string>
+	<string name="poi_crop_corn">Gröda: majs</string>
+	<string name="poi_crop_cereal">Gröda: spannmål</string>
+	<string name="poi_crop_sugarcane">Gröda: sockerrör</string>
+	<string name="poi_crop_wheat">Gröda: vete</string>
+	<string name="poi_crop_soy">Gröda: soja</string>
+	<string name="poi_crop_barley">Gröda: korn</string>
+	<string name="poi_crop_vegetables">Gröda: grönsaker</string>
+	<string name="poi_crop_hop">Gröda: humle</string>
+	<string name="poi_crop_rape">Gröda: raps</string>
+	<string name="poi_crop_beet">Gröda: beta</string>
+	<string name="poi_crop_lavender">Gröda: lavendel</string>
+	<string name="poi_crop_tea">Gröda: te</string>
+	<string name="poi_crop_coffee">Gröda: kaffe</string>
+	<string name="poi_crop_poultry">Gröda: fjäderfä</string>
+	<string name="poi_crop_sunflower">Gröda: solros</string>
+	<string name="poi_crop_raspberry">Gröda: hallon</string>
+	<string name="poi_crop_tobacco">Gröda: tobak</string>
+	<string name="poi_crop_strawberry">Gröda: jordgubbe</string>
+	<string name="poi_crop_vegetables_flowers">Gröda: grönsaker, blommor</string>
+	<string name="poi_crop_cassava">Gröda: cassava</string>
+	<string name="poi_crop_cranberry">Gröda: tranbär</string>
+	<string name="poi_crop_asparagus">Gröda: sparris</string>
+	<string name="poi_crop_flowers">Gröda: blommor</string>
+
+	<string name="poi_surveillance_indoor">Övervakning: inomhus</string>
+	<string name="poi_surveillance_outdoor">Övervakning: utomhus</string>
+	<string name="poi_surveillance_public">Övervakning: offentligt</string>
+
+	<string name="poi_clothes_women">Kvinnor</string>
+	<string name="poi_clothes_underwear">Underkläder</string>
+	<string name="poi_clothes_men">Män</string>
+	<string name="poi_clothes_wedding">Bröllopsklänningar</string>
+	<string name="poi_clothes_sports">Sport</string>
+	<string name="poi_clothes_babies">Spädbarn</string>
+	<string name="poi_clothes_denim">Denim</string>
+	<string name="poi_clothes_workwear">Arbetskläder</string>
+	<string name="poi_clothes_hats">Hattar</string>
+	<string name="poi_clothes_fur">Päls</string>
+	<string name="poi_clothes_leather">Läder</string>
+	<string name="poi_clothes_costumes">Dräkter</string>
+	<string name="poi_clothes_traditional">Traditionellt</string>
+	<string name="poi_clothes_suits">Kostymer</string>
+	<string name="poi_clothes_maternity">Graviditet</string>
+	<string name="poi_clothes_vintage">Vintage</string>
+	<string name="poi_clothes_oversize">Större storlekar</string>
+	<string name="poi_clothes_schoolwear">Skola</string>
+	<string name="poi_clothes_swimwear">Badkläder</string>
+	<string name="poi_clothes_socks">Strumpor</string>
+	<string name="poi_clothes_shirts">Skjortor</string>
+	<string name="poi_clothes_dance">Dans</string>
+	<string name="poi_clothes_military">Militär</string>
+
+	<string name="poi_historic_milestone">Historisk milstolpe</string>
+
+	<string name="poi_shoes_children">Barn</string>
+	<string name="poi_shoes_women">Kvinnor</string>
+	<string name="poi_shoes_sport">Sport</string>
+	<string name="poi_shoes_men">Män</string>
+	<string name="poi_shoes_orthopedic">Ortopedisk</string>
+
+	<string name="poi_historic_manor">Historisk herrgård</string>
+	<string name="poi_castle_type_stately">Slottstyp: majestätiskt</string>
+	<string name="poi_castle_type_defensive">Slottstyp: försvar</string>
+	<string name="poi_castle_type_fortress">Slottstyp: fästning</string>
+	<string name="poi_castle_type_palace">Slottstyp: palats</string>
+	<string name="poi_castle_type_kremlin">Slottstyp: kreml</string>
+	<string name="poi_castle_type_defensive_stately">Slottstyp: försvar, majestätisk</string>
+	<string name="poi_castle_type_castrum">Slottstyp: castrum</string>
+	<string name="poi_castle_type_shiro">Slottstyp: shiro</string>
+
+	<string name="poi_massage_thai">Thailändsk</string>
+	<string name="poi_massage_sexual">Sexuell</string>
+	<string name="poi_massage_chinese">Kinesisk</string>
+	<string name="poi_massage_therapeutic">Terapeutisk</string>
+
+	<string name="poi_massage_yes">Massage</string>
+	<string name="poi_sauna_yes">Bastu</string>
+	<string name="poi_solarium_yes">Solarium-tjänster</string>
+
+	<string name="poi_tents_yes">Tillåtet</string>
+	<string name="poi_tents_no">Tält inte tillåtna</string>
+	<string name="poi_openfire_yes">Öppen eld tillåtet</string>
+	<string name="poi_openfire_no">Öppen eld inte tillåtet</string>
+	<string name="poi_backcountry_yes">Ja</string>
+	<string name="poi_backcountry_no">Nej</string>
+	<string name="poi_scout_yes">Ja</string>
+	<string name="poi_scout_no">Scoutläger: nej</string>
+	<string name="poi_group_only_yes">Endast grupp: ja</string>
+	<string name="poi_group_only_no">Endast grupp: nej</string>
+	<string name="poi_washing_machine_yes">Ja</string>
+	<string name="poi_washing_machine_no">Tvättmaskin: ingen</string>
+	<string name="poi_shower_filter_yes">Ja</string>
+	<string name="poi_shower_yes">Dusch: ja</string>
+	<string name="poi_shower_no">Dusch: nej</string>
+	<string name="poi_shower_hot">Dusch: varm</string>
+	<string name="poi_shower_outdoor">Dusch: utomhus</string>
+	<string name="poi_shower_cold">Dusch: kall</string>
+	<string name="poi_shower_indoor">Dusch: inomhus</string>
+	<string name="poi_caravans_yes">Ja</string>
+	<string name="poi_caravans_no">Husvagnar: nej</string>
+	<string name="poi_impromptu_yes">Improviserad: ja</string>
+	<string name="poi_impromptu_no">Improviserad: nej</string>
+	<string name="poi_sanitary_dump_station_yes">Tömningsstation: ja</string>
+	<string name="poi_sanitary_dump_station_no">Tömningsstation: nej</string>
+	<string name="poi_power_supply_yes">Ja</string>
+	<string name="poi_power_supply_no">Strömförsörjning: nej</string>
+	<string name="poi_power_supply_cee_17_blue">Strömförsörjning (socket): CEE 17 blå</string>
+	<string name="poi_power_supply_cee_7_4">Strömförsörjning (socket): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Strömförsörjning (socket): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Strömförsörjning (socket): NEMA 5-15</string>
+
+	<string name="poi_capacity_tents">Maximalt antal tält</string>
+	<string name="poi_capacity_caravans">Maximalt antal husvagnar</string>
+	<string name="poi_dog_yes">Hundar tillåtna</string>
+	<string name="poi_dog_no">Hundar ej tillåtna</string>
+
+	<string name="poi_refugee_yes">Bekvämligheter för flyktingar</string>
+	<string name="poi_refugee_no">Flyktingar: nej</string>
+
+	<string name="poi_social_facility_group_home">Gruppboende</string>
+	<string name="poi_social_facility_assisted_living">Hemtjänst</string>
+	<string name="poi_social_facility_food_bank">Matbank</string>
+	<string name="poi_social_facility_shelter">Tak-över-huvudet</string>
+	<string name="poi_social_facility_ambulatory_care">Ambulerande vård</string>
+	<string name="poi_social_facility_workshop">Verkstad</string>
+	<string name="poi_social_facility_day_care">Dagvård</string>
+
+	<string name="poi_social_facility_for_senior">Seniorer</string>
+	<string name="poi_social_facility_for_child">Barn</string>
+	<string name="poi_social_facility_for_orphan">Föräldralösa barn</string>
+	<string name="poi_social_facility_for_disabled">Funktionshindrade</string>
+	<string name="poi_social_facility_for_mental_health">Patienter med psykiska störningar</string>
+	<string name="poi_social_facility_for_juvenile">Ungdomar</string>
+	<string name="poi_social_facility_for_homeless">Hemlösa</string>
+	<string name="poi_social_facility_for_migrant">Invandrare</string>
+	<string name="poi_social_facility_for_underprivileged">Underprivilegierade</string>
+	<string name="poi_social_facility_for_drug_addicted">Drogmissbrukare</string>
+	<string name="poi_social_facility_for_unemployed">Arbetslösa</string>
+	<string name="poi_social_facility_for_diseased">Sjuka</string>
+	<string name="poi_social_facility_for_child_juvenile">Barn;ungdomsbrottslighet</string>
+
+	<string name="poi_theatre_genre_philharmonic">Filharmonisk</string>
+	<string name="poi_theatre_genre_musical">Musikal</string>
+	<string name="poi_theatre_genre_drama">Drama</string>
+	<string name="poi_theatre_genre_opera">Opera</string>
+	<string name="poi_theatre_genre_cabaret">Kabaré</string>
+	<string name="poi_theatre_genre_puppet">Marionett</string>
+	<string name="poi_theatre_genre_comedy">Komedi</string>
+	<string name="poi_theatre_genre_chamber_music">Kammarmusik</string>
+	<string name="poi_theatre_genre_marionette">Marionett</string>
+	<string name="poi_theatre_genre_ballet">Balett</string>
+	<string name="poi_theatre_genre_shadow_play">Skuggspel</string>
+
+	<string name="poi_bandstand">Musikpaviljong</string>
+	<string name="poi_kiln">Ugn</string>
+	<string name="poi_product_brick">Produkt: tegel</string>
+	<string name="poi_product_quicklime">Produkt: osläckt kalk</string>
+	<string name="poi_product_leather">Produkt: läder</string>
+	<string name="poi_product_lime">Produkt: kalk</string>
+	<string name="poi_product_beer">Produkt: öl</string>
+	<string name="poi_product_charcoal">Produkt: träkol</string>
+	<string name="poi_product_meat">Produkt: kött</string>
+
+	<string name="poi_wheelchair_description">Beskrivning för rullstolsburna</string>
+	<string name="poi_blind_description">Beskrivning för blinda</string>
+	<string name="poi_deaf_description">Beskrivning för döva</string>
+
+	<string name="poi_highway_steps">Trappor</string>
+	<string name="poi_handrail_yes">Handledare: ja</string>
+	<string name="poi_handrail_no">Handledare: inga</string>
+	<string name="poi_ramp_yes">Ramp: ja</string>
+	<string name="poi_ramp_no">Ramp: nej</string>
+	<string name="poi_ramp_wheelchair_yes">Ramp för rullstol: ja</string>
+	<string name="poi_ramp_wheelchair_no">Ramp för rullstol: nej</string>
+	<string name="poi_ramp_stroller_yes">Ramp (barnvagn): ja</string>
+	<string name="poi_ramp_stroller_no">Ramp (barnvagn): nej</string>
+	<string name="poi_ramp_bicycle_yes">Ramp för cyklar: ja</string>
+	<string name="poi_ramp_bicycle_no">Ramp för cykel: nej</string>
+	<string name="poi_ramp_luggage_yes">Ramp för bagage: ja</string>
+	<string name="poi_ramp_luggage_no">Ramp för bagage: nej</string>
+	<string name="poi_step_count">Steg räknas</string>
+	<string name="poi_step_condition_even">Stegvillkor: jämna</string>
+	<string name="poi_step_condition_uneven">Stegvillkor: ojämna</string>
+	<string name="poi_step_condition_rough">Trappskick: grovt</string>
+
+	<string name="poi_cairn">Röse</string>
+
+	<string name="poi_defibrillator">Defibrillator</string>
+	<string name="poi_defibrillator_yes">Defibrillator: ja</string>
+
+	<string name="poi_tomb_war_grave">Typ: krigsgrav</string>
+	<string name="poi_tomb_tumulus">Typ: gravhög</string>
+	<string name="poi_tomb_rock_cut">Typ: rock-cut</string>
+	<string name="poi_tomb_hypogeum">Typ: hypogeum</string>
+	<string name="poi_tomb_vault">Typ: valv</string>
+	<string name="poi_tomb_columbarium">Typ: kolumbarium</string>
+	<string name="poi_tomb_mausoleum">Typ: mausoleum</string>
+	<string name="poi_tomb_sarcophagus">Typ: sarkofag</string>
+	<string name="poi_tomb_crypt">Typ: krypta</string>
+	<string name="poi_tomb_pyramid">Typ: pyramid</string>
+
+	<string name="poi_historic_civilization_ancient_roman">Civilisation: det antika romerska (753 F.KR – 284 E.KR.)</string>
+	<string name="poi_historic_civilization_nuragic">Civilisation: nuragherkulturen (18 F.KR – 2 E.KR)</string>
 	</resources>
