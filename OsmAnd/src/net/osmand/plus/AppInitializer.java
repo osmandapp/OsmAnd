@@ -331,7 +331,6 @@ public class AppInitializer implements IProgress {
 		}
 
 		final Resources en = getLocalizedResources("en");
-		final Resources locRes = getLocalizedResources(app.getLanguage());
 
 		app.poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
 
@@ -373,7 +372,7 @@ public class AppInitializer implements IProgress {
 					Field f = R.string.class.getField("synonyms_poi_" + keyName);
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
-						return locRes.getString(in);
+						return app.getString(in);
 					}
 				} catch (Exception e) {
 				}
