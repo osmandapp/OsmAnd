@@ -319,7 +319,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		widgetsFactory.updateInfo(useFingerLocation ? fingerLocation : null, tileBox.getZoom());
 		OsmandSettings settings = map.getMyApplication().getSettings();
 
-		if (tileBox.getZoom() < 3 || !settings.USE_MAP_MARKERS.get()) {
+		if (tileBox.getZoom() < 3) {
 			return;
 		}
 
@@ -514,7 +514,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
-		if (tileBox.getZoom() < 3 || !map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
+		if (tileBox.getZoom() < 3) {
 			return;
 		}
 		amenities.clear();

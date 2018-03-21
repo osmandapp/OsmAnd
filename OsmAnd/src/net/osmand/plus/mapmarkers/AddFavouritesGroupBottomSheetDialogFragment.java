@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.mapmarkers.adapters.FavouritesGroupsAdapter;
+import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
 
 public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomSheetDialogFragment {
 
@@ -18,16 +18,16 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 	}
 
 	@Override
-	public MarkersSyncGroup createMapMarkersSyncGroup(int position) {
+	public GroupsAdapter createAdapter() {
+		return new FavouritesGroupsAdapter(getContext(), favouritesDbHelper.getFavoriteGroups());
+	}
+
+	@Override
+	protected void onItemClick(int position) {
 		FavoriteGroup group = favouritesDbHelper.getFavoriteGroups().get(position - 1);
 		if (!group.visible) {
 			favouritesDbHelper.editFavouriteGroup(group, group.name, group.color, true);
 		}
-		return new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE, group.color);
-	}
-
-	@Override
-	public void createAdapter() {
-		adapter = new FavouritesGroupsAdapter(getContext(), favouritesDbHelper.getFavoriteGroups());
+		addAndSyncGroup(getMyApplication().getMapMarkersHelper().getOrCreateGroup(group));
 	}
 }

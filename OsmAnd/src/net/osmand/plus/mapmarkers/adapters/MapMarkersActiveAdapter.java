@@ -237,7 +237,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		final int pos = holder.getAdapterPosition();
 		final MapMarker marker = getItem(pos);
 		mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory(marker);
-		MapMarkersHelper.MapMarkersGroup group = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkerGroupByName(marker.groupName);
+		MapMarkersHelper.MapMarkersGroup group = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkerGroupById(marker.groupKey);
 		if (group != null) {
 			mapActivity.getMyApplication().getMapMarkersHelper().updateGroup(group);
 		}
