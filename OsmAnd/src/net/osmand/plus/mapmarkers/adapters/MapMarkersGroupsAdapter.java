@@ -147,7 +147,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			ShowHideHistoryButton showHideHistoryButton = group.getShowHideHistoryButton();
 			if (!group.isDisabled()) {
 				List<Object> objectsToAdd = new ArrayList<>();
-				if (showHideHistoryButton != null && showHideHistoryButton.isShowHistory()) {
+				if (showHideHistoryButton != null && showHideHistoryButton.showHistory) {
 					objectsToAdd.addAll(group.getMarkers());
 				} else {
 					objectsToAdd.addAll(group.getActiveMarkers());
@@ -424,7 +424,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		} else if (holder instanceof MapMarkersShowHideHistoryViewHolder) {
 			final MapMarkersShowHideHistoryViewHolder showHideHistoryViewHolder = (MapMarkersShowHideHistoryViewHolder) holder;
 			final ShowHideHistoryButton showHideHistoryButton = (ShowHideHistoryButton) getItem(position);
-			final boolean showHistory = showHideHistoryButton.isShowHistory();
+			final boolean showHistory = showHideHistoryButton.showHistory;
 			if (position == getItemCount() - 1) {
 				showHideHistoryViewHolder.bottomShadow.setVisibility(View.VISIBLE);
 			} else {
@@ -434,7 +434,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			showHideHistoryViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					showHideHistoryButton.setShowHistory(!showHistory);
+					showHideHistoryButton.showHistory = !showHistory;
 					createDisplayGroups();
 					notifyDataSetChanged();
 				}

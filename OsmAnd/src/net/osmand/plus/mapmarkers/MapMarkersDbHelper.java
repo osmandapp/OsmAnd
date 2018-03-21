@@ -233,9 +233,9 @@ public class MapMarkersDbHelper {
 		boolean disabled = query.getInt(3) == 1;
 		String categories = query.getString(4);
 
-		MapMarkersGroup res = new MapMarkersGroup(id, name, type,
-				categories == null ? null : Algorithms.decodeStringSet(categories));
+		MapMarkersGroup res = new MapMarkersGroup(id, name, type);
 		res.setDisabled(disabled);
+		res.setWptCategories(categories == null ? null : Algorithms.decodeStringSet(categories));
 
 		return res;
 	}

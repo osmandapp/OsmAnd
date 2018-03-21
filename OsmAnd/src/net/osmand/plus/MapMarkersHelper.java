@@ -133,12 +133,12 @@ public class MapMarkersHelper {
 			if (group == null) {
 				if (noGroup == null) {
 					noGroup = new MapMarkersGroup();
-					noGroup.setCreationDate(Long.MAX_VALUE);
+					noGroup.creationDate = Long.MAX_VALUE;
 				}
 				noGroup.getMarkers().add(marker);
 			} else {
-				if (marker.creationDate < group.getCreationDate()) {
-					group.setCreationDate(marker.creationDate);
+				if (marker.creationDate < group.creationDate) {
+					group.creationDate = marker.creationDate;
 				}
 				group.getMarkers().add(marker);
 			}
@@ -363,7 +363,7 @@ public class MapMarkersHelper {
 			markersDbHelper.removeActiveMarkersFromGroup(group.getId());
 			removeFromMapMarkersList(group.getActiveMarkers());
 			if (updateGroup) {
-				group.setMarkers(group.getHistoryMarkers());
+				group.markers = group.getHistoryMarkers();
 				updateGroup(group);
 			}
 			reorderActiveMarkersIfNeeded();
@@ -383,12 +383,12 @@ public class MapMarkersHelper {
 		ShowHideHistoryButton showHideHistoryButton = mapMarkersGroup.getShowHideHistoryButton();
 		if (showHideHistoryButton != null) {
 			if (historyMarkersCount == 0) {
-				mapMarkersGroup.setShowHideHistoryButton(null);
+				mapMarkersGroup.showHideHistoryButton = null;
 			}
 		} else if (historyMarkersCount > 0) {
 			showHideHistoryButton = new ShowHideHistoryButton();
-			showHideHistoryButton.setShowHistory(false);
-			mapMarkersGroup.setShowHideHistoryButton(showHideHistoryButton);
+			showHideHistoryButton.showHistory = false;
+			mapMarkersGroup.showHideHistoryButton = showHideHistoryButton;
 		}
 	}
 
@@ -409,9 +409,9 @@ public class MapMarkersHelper {
 				}
 			} else {
 				mapMarkersGroup = new MapMarkersGroup();
-				mapMarkersGroup.setId(marker.groupKey);
-				mapMarkersGroup.setName(marker.groupName);
-				mapMarkersGroup.setCreationDate(Long.MAX_VALUE);
+				mapMarkersGroup.id = marker.groupKey;
+				mapMarkersGroup.name = marker.groupName;
+				mapMarkersGroup.creationDate = Long.MAX_VALUE;
 				mapMarkersGroup.getMarkers().add(marker);
 				addToGroupsList(mapMarkersGroup);
 				sortGroups();
@@ -425,11 +425,11 @@ public class MapMarkersHelper {
 			GroupHeader header = new GroupHeader();
 			int type = group.getType();
 			if (type != -1) {
-				header.setIconRes(type == MapMarkersGroup.FAVORITES_TYPE
-						? R.drawable.ic_action_fav_dark : R.drawable.ic_action_polygom_dark);
+				header.iconRes = type == MapMarkersGroup.FAVORITES_TYPE
+						? R.drawable.ic_action_fav_dark : R.drawable.ic_action_polygom_dark;
 			}
-			header.setGroup(group);
-			group.setGroupHeader(header);
+			header.group = group;
+			group.header = header;
 		}
 	}
 
@@ -448,8 +448,8 @@ public class MapMarkersHelper {
 			Collections.sort(mapMarkersGroups, new Comparator<MapMarkersGroup>() {
 				@Override
 				public int compare(MapMarkersGroup group1, MapMarkersGroup group2) {
-					long t1 = group1.getCreationDate();
-					long t2 = group2.getCreationDate();
+					long t1 = group1.creationDate;
+					long t2 = group2.creationDate;
 					return (t1 > t2) ? -1 : ((t1 == t2) ? 0 : 1);
 				}
 			});
@@ -1131,54 +1131,25 @@ public class MapMarkersHelper {
 		}
 
 		public MapMarkersGroup(@NonNull String id, @NonNull String name, int type) {
-			init(id, name, type, null);
-		}
-
-		public MapMarkersGroup(@NonNull String id, @NonNull String name, int type, @Nullable Set<String> wptCategories) {
-			init(id, name, type, wptCategories);
-		}
-
-		private void init(String id, String name, int type, Set<String> wptCategories) {
 			this.id = id;
 			this.name = name;
 			this.type = type;
-			this.wptCategories = wptCategories;
 		}
 
 		public String getId() {
 			return id;
 		}
 
-		public void setId(String id) {
-			this.id = id;
-		}
-
 		public String getName() {
 			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
 		}
 
 		public int getType() {
 			return type;
 		}
 
-		public void setType(int type) {
-			this.type = type;
-		}
-
 		public void setWptCategories(Set<String> wptCategories) {
 			this.wptCategories = wptCategories;
-		}
-
-		public long getCreationDate() {
-			return creationDate;
-		}
-
-		public void setCreationDate(long creationDate) {
-			this.creationDate = creationDate;
 		}
 
 		public boolean isDisabled() {
@@ -1193,24 +1164,12 @@ public class MapMarkersHelper {
 			return markers;
 		}
 
-		public void setMarkers(List<MapMarker> markers) {
-			this.markers = markers;
-		}
-
 		public GroupHeader getGroupHeader() {
 			return header;
 		}
 
-		public void setGroupHeader(GroupHeader header) {
-			this.header = header;
-		}
-
 		public ShowHideHistoryButton getShowHideHistoryButton() {
 			return showHideHistoryButton;
-		}
-
-		public void setShowHideHistoryButton(ShowHideHistoryButton showHideHistoryButton) {
-			this.showHideHistoryButton = showHideHistoryButton;
 		}
 
 		@Nullable
@@ -1244,15 +1203,7 @@ public class MapMarkersHelper {
 	}
 
 	public static class ShowHideHistoryButton {
-		private boolean showHistory;
-
-		public boolean isShowHistory() {
-			return showHistory;
-		}
-
-		public void setShowHistory(boolean showHistory) {
-			this.showHistory = showHistory;
-		}
+		public boolean showHistory;
 	}
 
 	public static class GroupHeader {
@@ -1263,16 +1214,8 @@ public class MapMarkersHelper {
 			return iconRes;
 		}
 
-		public void setIconRes(int iconRes) {
-			this.iconRes = iconRes;
-		}
-
 		public MapMarkersGroup getGroup() {
 			return group;
-		}
-
-		public void setGroup(MapMarkersGroup group) {
-			this.group = group;
 		}
 	}
 
