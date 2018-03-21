@@ -356,6 +356,9 @@ public class MapMarkersHelper {
 	}
 
 	public void updateGroup(MapMarkersGroup mapMarkersGroup) {
+		if (mapMarkersGroup.getId() == null || mapMarkersGroup.getName() == null) {
+			return;
+		}
 		createHeaderInGroup(mapMarkersGroup);
 		int historyMarkersCount = mapMarkersGroup.getHistoryMarkers().size();
 		ShowHideHistoryButton showHideHistoryButton = mapMarkersGroup.getShowHideHistoryButton();
@@ -399,21 +402,19 @@ public class MapMarkersHelper {
 	}
 
 	private void createHeaderInGroup(@NonNull MapMarkersGroup group) {
-		if (group.getName() != null) {
-			GroupHeader header = new GroupHeader();
-			int type = group.getType();
-			if (type != -1) {
-				header.iconRes = type == MapMarkersGroup.FAVORITES_TYPE
-						? R.drawable.ic_action_fav_dark : R.drawable.ic_action_polygom_dark;
-			}
-			header.group = group;
-			group.header = header;
+		GroupHeader header = new GroupHeader();
+		int type = group.getType();
+		if (type != -1) {
+			header.iconRes = type == MapMarkersGroup.FAVORITES_TYPE
+					? R.drawable.ic_action_fav_dark : R.drawable.ic_action_polygom_dark;
 		}
+		header.group = group;
+		group.header = header;
 	}
 
 	private void removeMarkerFromGroup(MapMarker marker) {
 		if (marker != null) {
-			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupByName(marker.groupName);
+			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupById(marker.groupKey);
 			if (mapMarkersGroup != null) {
 				mapMarkersGroup.getMarkers().remove(marker);
 				updateGroup(mapMarkersGroup);
@@ -432,17 +433,6 @@ public class MapMarkersHelper {
 				}
 			});
 		}
-	}
-
-	@Nullable
-	public MapMarkersGroup getMapMarkerGroupByName(String name) {
-		for (MapMarkersGroup group : mapMarkersGroups) {
-			if ((name == null && group.getName() == null)
-					|| (group.getName() != null && group.getName().equals(name))) {
-				return group;
-			}
-		}
-		return null;
 	}
 
 	@Nullable

@@ -8,8 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
-import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
+import net.osmand.plus.MapMarkersHelper.OnGroupSyncedListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -60,7 +60,7 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 	}
 
 	protected void addAndSyncGroup(MapMarkersGroup group) {
-		getMyApplication().getMapMarkersHelper().addAndSyncGroup(group, new MapMarkersHelper.OnGroupSyncedListener() {
+		getMyApplication().getMapMarkersHelper().addAndSyncGroup(group, new OnGroupSyncedListener() {
 			@Override
 			public void onSyncDone() {
 				Fragment parent = getParentFragment();
