@@ -184,4 +184,26 @@
     <string name="show_closed_notes">Notên girtî nîşan bide</string>
     <string name="switch_osm_notes_visibility_desc">Notên OSMê li ser nexşeyê nîşan bide/biveşêre</string>
     <string name="shared_string_added">Zêdekirî</string>
+    <string name="gpx_file_desc">GPX - ji bo eksportkirina JOSM an jî edîtorên din yên OSMê minasîb e.</string>
+    <string name="osc_file_desc">OSC - ji bo eksportkirina OpenStreetMapê minasîb e.</string>
+    <string name="gpx_file">Dosyeya GPXê</string>
+    <string name="osc_file">Dosyeya OSCê</string>
+    <string name="choose_file_type">Cureya dosyeyê bibijêre</string>
+    <string name="osm_edits_export_desc">Cureya eksportkirinê bibijêre: Notên OSMê, POI an jî her du.</string>
+    <string name="osm_notes">Notên OSMê</string>
+    <string name="rendering_attr_hidePOILabels_name">Nîşana POIyê</string>
+    <string name="shared_string_without_name">Bêyî nav</string>
+    <string name="what_is_here">Çi heye li vir:</string>
+    <string name="parked_at">parkkirî ye li</string>
+    <string name="pick_up_till">Wextê vekişînê</string>
+    <string name="without_time_limit">Bêyî sînora wextê</string>
+    <string name="context_menu_read_full_article">Temamiya gotarê bixwîne</string>
+    <string name="context_menu_points_of_group">Hemû nuqteyên komê</string>
+    <string name="additional_actions">Çalakiyên din</string>
+    <string name="av_locations_selected_desc">Dosyeya GPXê tevî koordînat û daneyên notên bijartî.</string>
+    <string name="av_locations_all_desc">Dosyeya GPXê tevî koordînat û daneyên hemû notan.</string>
+    <string name="modify_the_search_query">Pirsa xwe ya lêgerînê biguherîne.</string>
+    <string name="shared_string_actions">Çalakî</string>
+    <string name="shared_string_marker">Hêmaker</string>
+    <string name="empty_state_osm_edits">Objeyên OSMê çêke an jî biguherîne</string>
     </resources>
