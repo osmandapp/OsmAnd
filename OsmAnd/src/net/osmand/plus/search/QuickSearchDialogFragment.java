@@ -532,11 +532,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 					searchQuery += " ";
-					searchEditText.clearFocus();
-					InputMethodManager im = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-					if (im != null) {
-						im.hideSoftInputFromWindow(searchEditText.getWindowToken(), 0);
-					}
+					AndroidUtils.hideSoftKeyboard(getActivity(), searchEditText);
 					runSearch();
 					return true;
 				}
