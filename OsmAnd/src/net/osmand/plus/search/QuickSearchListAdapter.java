@@ -374,16 +374,18 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				SearchUICore searchUICore = searchHelper.getCore();
 				String searchPhrase = searchUICore.getPhrase().getText(true);
 				SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(searchPhrase,
-						CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+						CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 
-				for (String syn : synonyms) {
+				if (!nm.matches(abstractPoiType.getTranslation())) {
 					if (nm.matches(abstractPoiType.getEnTranslation())) {
 						desc = listItem.getTypeName() + " (" + abstractPoiType.getEnTranslation() + ")";
-						break;
-					}
-					if (nm.matches(syn)) {
-						desc = listItem.getTypeName() + " (" + syn + ")";
-						break;
+					} else {
+						for (String syn : synonyms) {
+							if (nm.matches(syn)) {
+								desc = listItem.getTypeName() + " (" + syn + ")";
+								break;
+							}
+						}
 					}
 				}
 			}

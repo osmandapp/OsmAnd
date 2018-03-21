@@ -84,13 +84,6 @@ public abstract class AbstractPoiType {
 		return synonyms;
 	}
 
-	public String getEnSynonyms() {
-		if(enSynonyms == null) {
-			enSynonyms = registry.getEnSynonyms(this);
-		}
-		return enSynonyms;
-	}
-
 	public String getEnTranslation() {
 
 		if(enTranslation == null) {
