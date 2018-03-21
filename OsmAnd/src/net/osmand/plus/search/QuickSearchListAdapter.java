@@ -15,10 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.CollatorStringMatcher;
 import net.osmand.Location;
 import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashLocationFragment;
@@ -27,6 +29,7 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
+import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -360,6 +363,30 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 
 			String desc = listItem.getTypeName();
+			Object searchResultObject = listItem.getSearchResult().object;
+			if (searchResultObject instanceof AbstractPoiType) {
+				AbstractPoiType abstractPoiType = (AbstractPoiType) searchResultObject;
+				String synonyms[] = abstractPoiType.getSynonyms().split(";");
+				QuickSearchHelper searchHelper = app.getSearchUICore();
+				SearchUICore searchUICore = searchHelper.getCore();
+				String searchPhrase = searchUICore.getPhrase().getText(true);
+				SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(searchPhrase,
+						CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+
+				if (!searchPhrase.isEmpty() && !nm.matches(abstractPoiType.getTranslation())) {
+					if (nm.matches(abstractPoiType.getEnTranslation())) {
+						desc = listItem.getTypeName() + " (" + abstractPoiType.getEnTranslation() + ")";
+					} else {
+						for (String syn : synonyms) {
+							if (nm.matches(syn)) {
+								desc = listItem.getTypeName() + " (" + syn + ")";
+								break;
+							}
+						}
+					}
+				}
+			}
+
 			boolean hasDesc = false;
 			if (!Algorithms.isEmpty(desc) && !desc.equals(name)) {
 				subtitle.setText(desc);
