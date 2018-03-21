@@ -137,7 +137,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				}
 			} else {
 				GroupHeader header = group.getGroupHeader();
-				// TODO fix null-header
 				items.add(header);
 				populateAdapterWithGroupMarkers(group, getItemCount());
 			}

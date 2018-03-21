@@ -378,11 +378,13 @@ public class MapMarkersHelper {
 	}
 
 	public void updateGroup(MapMarkersGroup mapMarkersGroup) {
-		createHeaderAndHistoryButtonInGroup(mapMarkersGroup);
+		createHeaderInGroup(mapMarkersGroup);
 		int historyMarkersCount = mapMarkersGroup.getHistoryMarkers().size();
 		ShowHideHistoryButton showHideHistoryButton = mapMarkersGroup.getShowHideHistoryButton();
-		if (showHideHistoryButton != null && historyMarkersCount == 0) {
-			mapMarkersGroup.setShowHideHistoryButton(null);
+		if (showHideHistoryButton != null) {
+			if (historyMarkersCount == 0) {
+				mapMarkersGroup.setShowHideHistoryButton(null);
+			}
 		} else if (historyMarkersCount > 0) {
 			showHideHistoryButton = new ShowHideHistoryButton();
 			showHideHistoryButton.setShowHistory(false);
@@ -418,7 +420,7 @@ public class MapMarkersHelper {
 		}
 	}
 
-	private void createHeaderAndHistoryButtonInGroup(@NonNull MapMarkersGroup group) {
+	private void createHeaderInGroup(@NonNull MapMarkersGroup group) {
 		if (group.getName() != null) {
 			GroupHeader header = new GroupHeader();
 			int type = group.getType();
