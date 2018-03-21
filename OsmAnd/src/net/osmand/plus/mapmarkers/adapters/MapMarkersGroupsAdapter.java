@@ -19,6 +19,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper.GroupHeader;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
+import net.osmand.plus.MapMarkersHelper.OnGroupSyncedListener;
 import net.osmand.plus.MapMarkersHelper.ShowHideHistoryButton;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -92,6 +93,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		List<MapMarkersGroup> groups = app.getMapMarkersHelper().getMapMarkersGroups();
 		for (int i = 0; i < groups.size(); i++) {
 			MapMarkersGroup group = groups.get(i);
+			if (!group.isVisible()) {
+				continue;
+			}
 			String markerGroupName = group.getName();
 			if (markerGroupName == null) {
 				int previousDateHeader = -1;
@@ -373,9 +377,13 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				if (groupName.equals("")) {
 					groupName = app.getString(R.string.shared_string_favorites);
 				}
-				headerString = groupName + " \u2014 "
-						+ group.getActiveMarkers().size()
-						+ "/" + group.getMarkers().size();
+				if (group.isDisabled()) {
+					headerString = groupName;
+				} else {
+					headerString = groupName + " \u2014 "
+							+ group.getActiveMarkers().size()
+							+ "/" + group.getMarkers().size();
+				}
 				headerViewHolder.icon.setVisibility(View.VISIBLE);
 				headerViewHolder.iconSpace.setVisibility(View.GONE);
 				headerViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), R.color.divider_color));
@@ -392,7 +400,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 								switchGpxVisibility(gpxFile[0], false);
 							}
 						}
-						group.setDisabled(disabled);
 						app.getMapMarkersHelper().updateGroupDisabled(group, disabled);
 						updateDisplayedData();
 						if (disabled) {
@@ -411,6 +418,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
 							snackbar.show();
 						}
+						app.getMapMarkersHelper().syncGroupAsync(group, new OnGroupSyncedListener() {
+							@Override
+							public void onSyncDone() {
+								updateDisplayedData();
+							}
+						});
 					}
 				};
 				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(null);
@@ -445,12 +458,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	private void switchGpxVisibility(@NonNull GPXFile gpxFile, boolean visible) {
 		GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
 		gpxHelper.selectGpxFile(gpxFile, visible, false, false);
-//		gpxHelper.syncGpx(gpxFile, new OnGroupSyncedListener() {
-//			@Override
-//			public void onSyncDone() {
-//				updateDisplayedData();
-//			}
-//		});
 	}
 
 	public void hideSnackbar() {

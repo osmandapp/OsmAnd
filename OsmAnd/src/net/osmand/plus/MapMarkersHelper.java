@@ -286,8 +286,8 @@ public class MapMarkersHelper {
 		syncGroupAsync(group, null);
 	}
 
-	private void syncGroupAsync(@NonNull final MapMarkersGroup group,
-								@Nullable final OnGroupSyncedListener listener) {
+	public void syncGroupAsync(@NonNull final MapMarkersGroup group,
+							   @Nullable final OnGroupSyncedListener listener) {
 		ctx.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
@@ -312,7 +312,7 @@ public class MapMarkersHelper {
 
 	public void addAndSyncGroup(@NonNull MapMarkersGroup group, @Nullable OnGroupSyncedListener listener) {
 		if (!isGroupSynced(group.getId())) {
-			markersDbHelper.addGroup(group.getId(), group.getName(), group.getType(), group.getWptCategoriesString());
+			markersDbHelper.addGroup(group);
 			addToGroupsList(group);
 		} else {
 			markersDbHelper.updateGroupCategories(group.getId(), group.getWptCategoriesString());
@@ -332,30 +332,8 @@ public class MapMarkersHelper {
 		String id = group.getId();
 		if (id != null) {
 			markersDbHelper.updateGroupDisabled(id, disabled);
-			updateSyncGroupDisabled(group, disabled);
+			group.disabled = disabled;
 		}
-	}
-
-	private void updateSyncGroupDisabled(@NonNull MapMarkersGroup group, boolean disabled) {
-		List<MapMarker> groupMarkers = new ArrayList<>(group.getMarkers());
-		for (MapMarker marker : groupMarkers) {
-			if (marker.history) {
-				if (disabled) {
-					removeFromMapMarkersHistoryList(marker);
-				} else {
-					addToMapMarkersHistoryList(marker);
-				}
-			} else {
-				if (disabled) {
-					removeFromMapMarkersList(marker);
-				} else {
-					addToMapMarkersList(marker);
-				}
-			}
-		}
-		reorderActiveMarkersIfNeeded();
-		sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
-		refresh();
 	}
 
 	private void removeGroupActiveMarkers(MapMarkersGroup group, boolean updateGroup) {
@@ -1058,7 +1036,8 @@ public class MapMarkersHelper {
 				if (favGroup == null) {
 					return;
 				}
-				if (!favGroup.visible) {
+				group.visible = favGroup.visible;
+				if (!group.isVisible() || group.isDisabled()) {
 					removeGroupActiveMarkers(group, true);
 					return;
 				}
@@ -1077,7 +1056,8 @@ public class MapMarkersHelper {
 
 				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(group.getId());
 				GPXFile gpx = selectedGpxFile == null ? null : selectedGpxFile.getGpxFile();
-				if (gpx == null) {
+				group.visible = gpx != null;
+				if (!group.isVisible() || group.isDisabled()) {
 					removeGroupActiveMarkers(group, true);
 					return;
 				}
@@ -1121,6 +1101,7 @@ public class MapMarkersHelper {
 		private Set<String> wptCategories;
 		private long creationDate;
 		private boolean disabled;
+		private boolean visible = true;
 		private List<MapMarker> markers = new ArrayList<>();
 		// TODO should be removed from this class:
 		private GroupHeader header;
@@ -1158,6 +1139,10 @@ public class MapMarkersHelper {
 
 		public void setDisabled(boolean disabled) {
 			this.disabled = disabled;
+		}
+
+		public boolean isVisible() {
+			return visible;
 		}
 
 		public List<MapMarker> getMarkers() {

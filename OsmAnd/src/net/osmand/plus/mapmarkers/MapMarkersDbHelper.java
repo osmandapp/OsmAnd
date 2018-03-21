@@ -195,11 +195,12 @@ public class MapMarkersDbHelper {
 		}
 	}
 
-	public void addGroup(String id, String name, int type, String categories) {
+	public void addGroup(MapMarkersGroup group) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				db.execSQL("INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?)", new Object[]{id, name, type, 0, categories});
+				db.execSQL("INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?)",
+						new Object[]{group.getId(), group.getName(), group.getType(), group.isDisabled(), group.getWptCategoriesString()});
 			} finally {
 				db.close();
 			}
