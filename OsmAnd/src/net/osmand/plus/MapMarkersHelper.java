@@ -461,6 +461,21 @@ public class MapMarkersHelper {
 		return group;
 	}
 
+	@NonNull
+	public List<MapMarkersGroup> getGroupsForDisplayedGpx() {
+		List<MapMarkersGroup> res = new ArrayList<>();
+		List<SelectedGpxFile> selectedGpxFiles = ctx.getSelectedGpxHelper().getSelectedGPXFiles();
+		for (SelectedGpxFile selected : selectedGpxFiles) {
+			MapMarkersGroup group = getOrCreateGroup(new File(selected.getGpxFile().path));
+			if (!isGroupSynced(group.getId())) {
+				group.disabled = true;
+				createHeaderInGroup(group);
+				res.add(group);
+			}
+		}
+		return res;
+	}
+
 	@Nullable
 	public MapMarker getMapMarker(WptPt wptPt) {
 		for (MapMarker marker : mapMarkers) {

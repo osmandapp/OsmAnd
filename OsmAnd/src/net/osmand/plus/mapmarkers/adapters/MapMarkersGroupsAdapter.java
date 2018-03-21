@@ -16,6 +16,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.GroupHeader;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
@@ -88,8 +89,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	private void createDisplayGroups() {
 		items = new ArrayList<>();
-		app.getMapMarkersHelper().updateGroups();
-		List<MapMarkersGroup> groups = app.getMapMarkersHelper().getMapMarkersGroups();
+		MapMarkersHelper helper = app.getMapMarkersHelper();
+		helper.updateGroups();
+		List<MapMarkersGroup> groups = new ArrayList<>(helper.getMapMarkersGroups());
+		groups.addAll(helper.getGroupsForDisplayedGpx());
 		for (int i = 0; i < groups.size(); i++) {
 			MapMarkersGroup group = groups.get(i);
 			if (!group.isVisible()) {
@@ -393,14 +396,15 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
 						final GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
-						if (disabled) {
+						if (disabled && group.getType() == MapMarkersGroup.GPX_TYPE) {
 							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(group.getId());
-							if (selectedGpxFile != null && (gpxFile[0] = selectedGpxFile.getGpxFile()) != null) {
+							if (selectedGpxFile != null) {
+								gpxFile[0] = selectedGpxFile.getGpxFile();
 								switchGpxVisibility(gpxFile[0], false);
 							}
 						}
 						app.getMapMarkersHelper().updateGroupDisabled(group, disabled);
-						updateDisplayedData();
+						app.getMapMarkersHelper().syncWithMarkers(group);
 						if (disabled) {
 							snackbar = Snackbar.make(holder.itemView, app.getString(R.string.group_deleted), Snackbar.LENGTH_LONG)
 									.setAction(R.string.shared_string_undo, new View.OnClickListener() {
@@ -409,7 +413,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 											if (gpxFile[0] != null) {
 												switchGpxVisibility(gpxFile[0], true);
 											}
-											headerViewHolder.disableGroupSwitch.setChecked(true);
+											app.getMapMarkersHelper().updateGroupDisabled(group, false);
+											app.getMapMarkersHelper().syncWithMarkers(group);
 										}
 									});
 							View snackBarView = snackbar.getView();
@@ -417,7 +422,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
 							snackbar.show();
 						}
-						app.getMapMarkersHelper().runSynchronization(group);
 					}
 				};
 				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(null);
