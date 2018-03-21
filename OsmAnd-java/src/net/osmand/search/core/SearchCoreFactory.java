@@ -623,7 +623,8 @@ public class SearchCoreFactory {
 			}
 			if (phrase.isUnknownSearchWordPresent()) {
 				for (PoiCategory c : categories) {
-					if (!results.contains(c) && (nm.matches(c.getTranslation())
+					if (!results.contains(c)
+							&& (nm.matches(c.getTranslation())
 							|| nm.matches(c.getEnTranslation())
 							|| nm.matches(c.getSynonyms()))) {
 						results.add(c);
@@ -634,19 +635,19 @@ public class SearchCoreFactory {
 					Entry<String, PoiType> e = it.next();
 					PoiType pt = e.getValue();
 					if (pt.getCategory() != types.getOtherMapCategory()) {
-						if (!results.contains(pt) && (
-								nm.matches(pt.getEnTranslation())
-										|| nm.matches(pt.getTranslation())
-										|| nm.matches(pt.getSynonyms()))) {
+						if (!results.contains(pt)
+								&& (nm.matches(pt.getEnTranslation())
+								|| nm.matches(pt.getTranslation())
+								|| nm.matches(pt.getSynonyms()))) {
 							results.add(pt);
 						}
 						List<PoiType> additionals = pt.getPoiAdditionals();
 						if (additionals != null) {
 							for (PoiType a : additionals) {
-								if (!a.isReference() && !results.contains(a) &&
-										(nm.matches(a.getEnTranslation())
-												|| nm.matches(a.getTranslation())
-												|| nm.matches(a.getSynonyms()))) {
+								if (!a.isReference() && !results.contains(a)
+										&& (nm.matches(a.getEnTranslation())
+										|| nm.matches(a.getTranslation())
+										|| nm.matches(a.getSynonyms()))) {
 									results.add(a);
 								}
 							}

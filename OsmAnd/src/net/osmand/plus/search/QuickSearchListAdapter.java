@@ -363,8 +363,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 
 			String desc = listItem.getTypeName();
-			if (listItem.getSearchResult().object instanceof AbstractPoiType) {
-				AbstractPoiType abstractPoiType = (AbstractPoiType) listItem.getSearchResult().object;
+			Object searchResultObject = listItem.getSearchResult().object;
+			if (searchResultObject instanceof AbstractPoiType) {
+				AbstractPoiType abstractPoiType = (AbstractPoiType) searchResultObject;
 				String synonyms[] = abstractPoiType.getSynonyms().split(";");
 				QuickSearchHelper searchHelper = app.getSearchUICore();
 				SearchUICore searchUICore = searchHelper.getCore();
