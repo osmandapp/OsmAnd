@@ -376,7 +376,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(searchPhrase,
 						CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 
-				if (!nm.matches(abstractPoiType.getTranslation())) {
+				if (!searchPhrase.isEmpty() && !nm.matches(abstractPoiType.getTranslation())) {
 					if (nm.matches(abstractPoiType.getEnTranslation())) {
 						desc = listItem.getTypeName() + " (" + abstractPoiType.getEnTranslation() + ")";
 					} else {

@@ -336,8 +336,9 @@ public class AppInitializer implements IProgress {
 
 			@Override
 			public String getTranslation(AbstractPoiType type) {
-				if (type.getBaseLangType() != null) {
-					return getTranslation(type.getBaseLangType()) + " (" + app.getLangTranslation(type.getLang()).toLowerCase() + ")";
+				AbstractPoiType baseLangType = type.getBaseLangType();
+				if (baseLangType != null) {
+					return getTranslation(baseLangType) + " (" + app.getLangTranslation(type.getLang()).toLowerCase() + ")";
 				}
 				return getTranslation(type.getIconKeyName());
 			}
@@ -358,8 +359,9 @@ public class AppInitializer implements IProgress {
 
 			@Override
 			public String getSynonyms(AbstractPoiType type) {
-				if (type.getBaseLangType() != null) {
-					return getSynonyms(type.getBaseLangType());
+				AbstractPoiType baseLangType = type.getBaseLangType();
+				if (baseLangType != null) {
+					return getSynonyms(baseLangType);
 				}
 				return getSynonyms(type.getIconKeyName());
 			}
@@ -373,15 +375,15 @@ public class AppInitializer implements IProgress {
 						return app.getString(in);
 					}
 				} catch (Exception e) {
-					LOG.debug("No translation for " + keyName + " " + e.getMessage());
 				}
 				return "";
 			}
 
 			@Override
 			public String getEnTranslation(AbstractPoiType type) {
-				if (type.getBaseLangType() != null) {
-					return getEnTranslation(type.getBaseLangType()) + " (" + app.getLangTranslation(type.getLang()).toLowerCase() + ")";
+				AbstractPoiType baseLangType = type.getBaseLangType();
+				if (baseLangType != null) {
+					return getEnTranslation(baseLangType) + " (" + app.getLangTranslation(type.getLang()).toLowerCase() + ")";
 				}
 				return getEnTranslation(type.getIconKeyName());
 			}
@@ -399,7 +401,6 @@ public class AppInitializer implements IProgress {
 						return en.getString(in);
 					}
 				} catch (Exception e) {
-					LOG.debug("No translation for " + keyName + " " + e.getMessage());
 				}
 				return null;
 			}

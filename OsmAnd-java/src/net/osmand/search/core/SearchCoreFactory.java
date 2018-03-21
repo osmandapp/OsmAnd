@@ -611,20 +611,21 @@ public class SearchCoreFactory {
 				categories = types.getCategories(false);
 			}
 //			results.clear();
-			List<AbstractPoiType> results = new ArrayList<AbstractPoiType>() ;
+			List<AbstractPoiType> results = new ArrayList<AbstractPoiType>();
 			NameStringMatcher nm = phrase.getNameStringMatcher();
 			for (PoiFilter pf : topVisibleFilters) {
-				if (!phrase.isUnknownSearchWordPresent() ||
-						nm.matches(pf.getTranslation()) || nm.matches(pf.getEnTranslation()) ||
-						nm.matches(pf.getSynonyms())) {
+				if (!phrase.isUnknownSearchWordPresent()
+						|| nm.matches(pf.getTranslation())
+						|| nm.matches(pf.getEnTranslation())
+						|| nm.matches(pf.getSynonyms())) {
 					results.add(pf);
 				}
 			}
 			if (phrase.isUnknownSearchWordPresent()) {
 				for (PoiCategory c : categories) {
-					if (!results.contains(c) &&
-							(nm.matches(c.getTranslation()) || nm.matches(c.getEnTranslation())
-									|| nm.matches(c.getSynonyms())) ) {
+					if (!results.contains(c) && (nm.matches(c.getTranslation())
+							|| nm.matches(c.getEnTranslation())
+							|| nm.matches(c.getSynonyms()))) {
 						results.add(c);
 					}
 				}
@@ -634,16 +635,18 @@ public class SearchCoreFactory {
 					PoiType pt = e.getValue();
 					if (pt.getCategory() != types.getOtherMapCategory()) {
 						if (!results.contains(pt) && (
-								nm.matches(pt.getEnTranslation()) || nm.matches(pt.getTranslation())
-										|| nm.matches(pt.getSynonyms()) )) {
+								nm.matches(pt.getEnTranslation())
+										|| nm.matches(pt.getTranslation())
+										|| nm.matches(pt.getSynonyms()))) {
 							results.add(pt);
 						}
 						List<PoiType> additionals = pt.getPoiAdditionals();
 						if (additionals != null) {
 							for (PoiType a : additionals) {
 								if (!a.isReference() && !results.contains(a) &&
-										( nm.matches(a.getEnTranslation()) || nm.matches(a.getTranslation())
-												|| nm.matches(a.getSynonyms()) )) {
+										(nm.matches(a.getEnTranslation())
+												|| nm.matches(a.getTranslation())
+												|| nm.matches(a.getSynonyms()))) {
 									results.add(a);
 								}
 							}
