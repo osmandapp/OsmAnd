@@ -2,14 +2,12 @@ package net.osmand.plus.mapmarkers;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
-import net.osmand.plus.MapMarkersHelper.OnGroupSyncedListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -60,21 +58,8 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 	}
 
 	protected void addAndSyncGroup(MapMarkersGroup group) {
-		getMyApplication().getMapMarkersHelper().addAndSyncGroup(group, new OnGroupSyncedListener() {
-			@Override
-			public void onSyncDone() {
-				Fragment parent = getParentFragment();
-				if (parent instanceof MapMarkersGroupsFragment) {
-					((MapMarkersGroupsFragment) parent).updateAdapter();
-				}
-				dismiss();
-			}
-		});
-	}
-
-	protected void showProgressBar() {
-		mainView.findViewById(R.id.groups_recycler_view).setVisibility(View.GONE);
-		mainView.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+		getMyApplication().getMapMarkersHelper().syncWithMarkers(group);
+		dismiss();
 	}
 
 	protected abstract GroupsAdapter createAdapter();

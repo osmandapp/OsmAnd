@@ -580,14 +580,14 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		File gpx = new File(gpxFile.path);
 		if (gpx.exists()) {
 			MapMarkersHelper helper = app.getMapMarkersHelper();
-			helper.syncGroupAsync(helper.getOrCreateGroup(gpx));
+			helper.runSynchronization(helper.getOrCreateGroup(gpx));
 		}
 	}
 
 	private void addMapMarkersSyncGroup() {
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		final MapMarkersGroup markersGr = markersHelper.getOrCreateGroup(getGpxDataItem().getFile());
-		markersHelper.addAndSyncGroup(markersGr, null);
+		markersHelper.syncWithMarkers(markersGr);
 		GPXFile gpxFile = getTrackActivity().getGpx();
 		if (gpxFile != null) {
 			app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);

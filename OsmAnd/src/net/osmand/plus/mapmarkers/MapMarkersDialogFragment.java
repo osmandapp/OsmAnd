@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarkersSortByDef;
+import net.osmand.plus.MapMarkersHelper.OnGroupSyncedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -45,7 +47,7 @@ import java.util.List;
 import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.GROUPS_MARKERS_MENU;
 import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.HISTORY_MARKERS_MENU;
 
-public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragment {
+public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragment implements OnGroupSyncedListener {
 
 	public static final String TAG = "MapMarkersDialogFragment";
 
@@ -62,6 +64,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	private Snackbar snackbar;
 	private LockableViewPager viewPager;
 	private BottomNavigationView bottomNav;
+	private ProgressBar progressBar;
 
 	private boolean lightTheme;
 	private String groupIdToOpen;
@@ -158,6 +161,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		final MapMarkersViewPagerAdapter adapter = new MapMarkersViewPagerAdapter(getChildFragmentManager());
 		viewPager.setAdapter(adapter);
 
+		progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);
+
 		bottomNav = mainView.findViewById(R.id.map_markers_bottom_navigation);
 		BottomNavigationViewHelper.disableShiftMode(bottomNav);
 		if (!lightTheme) {
@@ -204,6 +209,35 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		});
 
 		return mainView;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		getMyApplication().getMapMarkersHelper().addSyncListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		getMyApplication().getMapMarkersHelper().removeSyncListener(this);
+	}
+
+	@Override
+	public void onSyncStarted() {
+		switchProgressbarVisibility(true);
+	}
+
+	@Override
+	public void onSyncDone() {
+		updateAdapters();
+		switchProgressbarVisibility(false);
+	}
+
+	private void switchProgressbarVisibility(boolean visible) {
+		if (progressBar != null) {
+			progressBar.setVisibility(visible ? View.VISIBLE : View.GONE);
+		}
 	}
 
 	private void setupLocationUpdate(boolean activeFr, boolean groupsFr) {

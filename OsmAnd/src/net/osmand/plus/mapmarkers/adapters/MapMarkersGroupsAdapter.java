@@ -19,7 +19,6 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper.GroupHeader;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
-import net.osmand.plus.MapMarkersHelper.OnGroupSyncedListener;
 import net.osmand.plus.MapMarkersHelper.ShowHideHistoryButton;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -418,12 +417,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
 							snackbar.show();
 						}
-						app.getMapMarkersHelper().syncGroupAsync(group, new OnGroupSyncedListener() {
-							@Override
-							public void onSyncDone() {
-								updateDisplayedData();
-							}
-						});
+						app.getMapMarkersHelper().runSynchronization(group);
 					}
 				};
 				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(null);

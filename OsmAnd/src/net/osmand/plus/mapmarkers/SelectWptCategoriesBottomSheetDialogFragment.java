@@ -2,7 +2,6 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -123,15 +122,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		MapMarkersGroup markersGr = mapMarkersHelper.getOrCreateGroup(new File(gpxFile.path));
 		markersGr.setWptCategories(selectedCategories);
 
-		mapMarkersHelper.addAndSyncGroup(markersGr, new MapMarkersHelper.OnGroupSyncedListener() {
-			@Override
-			public void onSyncDone() {
-				Fragment parent = getParentFragment();
-				if (parent instanceof MapMarkersGroupsFragment) {
-					((MapMarkersGroupsFragment) parent).updateAdapter();
-				}
-			}
-		});
+		mapMarkersHelper.syncWithMarkers(markersGr);
 
 		dismiss();
 	}

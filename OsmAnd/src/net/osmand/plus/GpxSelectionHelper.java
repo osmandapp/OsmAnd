@@ -539,7 +539,7 @@ public class GpxSelectionHelper {
 		File gpx = new File(gpxFile.path);
 		if (gpx.exists()) {
 			MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
-			mapMarkersHelper.syncGroupAsync(mapMarkersHelper.getOrCreateGroup(gpx));
+			mapMarkersHelper.runSynchronization(mapMarkersHelper.getOrCreateGroup(gpx));
 		}
 	}
 

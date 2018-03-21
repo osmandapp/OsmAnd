@@ -29,6 +29,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +65,7 @@ public class MapMarkersHelper {
 	private List<MapMarkersGroup> mapMarkersGroups = new ArrayList<>();
 
 	private List<MapMarkerChangedListener> listeners = new ArrayList<>();
+	private Set<OnGroupSyncedListener> syncListeners = new HashSet<>();
 
 	private boolean startFromMyLocation;
 
@@ -162,7 +164,7 @@ public class MapMarkersHelper {
 	private void syncAllGroupsAsync() {
 		for (MapMarkersGroup gr : mapMarkersGroups) {
 			if (gr.getId() != null && gr.getName() != null) {
-				syncGroupAsync(gr);
+				runSynchronization(gr);
 			}
 		}
 	}
@@ -282,16 +284,11 @@ public class MapMarkersHelper {
 		return getMapMarkerGroupById(id) != null;
 	}
 
-	public void syncGroupAsync(@NonNull MapMarkersGroup group) {
-		syncGroupAsync(group, null);
-	}
-
-	public void syncGroupAsync(@NonNull final MapMarkersGroup group,
-							   @Nullable final OnGroupSyncedListener listener) {
+	public void runSynchronization(@NonNull final MapMarkersGroup group) {
 		ctx.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
-				new SyncGroupTask(group, listener).executeOnExecutor(executorService);
+				new SyncGroupTask(group).executeOnExecutor(executorService);
 			}
 		});
 	}
@@ -310,14 +307,14 @@ public class MapMarkersHelper {
 		return getMapMarker(favouritePoint) != null;
 	}
 
-	public void addAndSyncGroup(@NonNull MapMarkersGroup group, @Nullable OnGroupSyncedListener listener) {
+	public void syncWithMarkers(@NonNull MapMarkersGroup group) {
 		if (!isGroupSynced(group.getId())) {
 			markersDbHelper.addGroup(group);
 			addToGroupsList(group);
-		} else {
+		} else if (group.wptCategories != null) {
 			markersDbHelper.updateGroupCategories(group.getId(), group.getWptCategoriesString());
 		}
-		syncGroupAsync(group, listener);
+		runSynchronization(group);
 	}
 
 	public void removeMarkersGroup(MapMarkersGroup group) {
@@ -851,6 +848,14 @@ public class MapMarkersHelper {
 		}
 	}
 
+	public void addSyncListener(OnGroupSyncedListener listener) {
+		syncListeners.add(listener);
+	}
+
+	public void removeSyncListener(OnGroupSyncedListener listener) {
+		syncListeners.remove(listener);
+	}
+
 	public void addListener(MapMarkerChangedListener l) {
 		if (!listeners.contains(l)) {
 			listeners.add(l);
@@ -906,7 +911,6 @@ public class MapMarkersHelper {
 		return fout.getAbsolutePath();
 	}
 
-	// TODO update all 3 collections at once?
 	// ---------------------------------------------------------------------------------------------
 
 	// accessors to active markers:
@@ -994,17 +998,32 @@ public class MapMarkersHelper {
 	}
 
 	public interface OnGroupSyncedListener {
+
+		void onSyncStarted();
+
 		void onSyncDone();
 	}
 
 	private class SyncGroupTask extends AsyncTask<Void, Void, Void> {
 
 		private MapMarkersGroup group;
-		private OnGroupSyncedListener listener;
 
-		SyncGroupTask(MapMarkersGroup group, OnGroupSyncedListener listener) {
+		SyncGroupTask(MapMarkersGroup group) {
 			this.group = group;
-			this.listener = listener;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			if (!syncListeners.isEmpty()) {
+				ctx.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						for (OnGroupSyncedListener listener : syncListeners) {
+							listener.onSyncStarted();
+						}
+					}
+				});
+			}
 		}
 
 		@Override
@@ -1067,11 +1086,13 @@ public class MapMarkersHelper {
 
 		@Override
 		protected void onPostExecute(Void aVoid) {
-			if (listener != null) {
+			if (!syncListeners.isEmpty()) {
 				ctx.runInUIThread(new Runnable() {
 					@Override
 					public void run() {
-						listener.onSyncDone();
+						for (OnGroupSyncedListener listener : syncListeners) {
+							listener.onSyncDone();
+						}
 					}
 				});
 			}

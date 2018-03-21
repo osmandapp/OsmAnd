@@ -24,7 +24,6 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 
 	@Override
 	protected void onItemClick(int position) {
-		showProgressBar();
 		FavoriteGroup group = favouritesDbHelper.getFavoriteGroups().get(position - 1);
 		if (!group.visible) {
 			favouritesDbHelper.editFavouriteGroup(group, group.name, group.color, true);

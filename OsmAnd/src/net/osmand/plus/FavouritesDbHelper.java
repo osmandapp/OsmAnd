@@ -109,9 +109,9 @@ public class FavouritesDbHelper {
 		return changed;
 	}
 
-	private void syncWithMarkers(FavoriteGroup favGroup) {
+	private void runSyncWithMarkers(FavoriteGroup favGroup) {
 		MapMarkersHelper helper = context.getMapMarkersHelper();
-		helper.syncGroupAsync(helper.getOrCreateGroup(favGroup));
+		helper.runSynchronization(helper.getOrCreateGroup(favGroup));
 	}
 
 	private void removeFromMarkers(FavoriteGroup favGroup) {
@@ -121,7 +121,7 @@ public class FavouritesDbHelper {
 
 	private void addToMarkers(FavoriteGroup favGroup) {
 		MapMarkersHelper helper = context.getMapMarkersHelper();
-		helper.addAndSyncGroup(helper.getOrCreateGroup(favGroup), null);
+		helper.syncWithMarkers(helper.getOrCreateGroup(favGroup));
 	}
 
 	private File getInternalFile() {
@@ -140,7 +140,7 @@ public class FavouritesDbHelper {
 				cachedFavoritePoints.remove(p);
 			}
 			for (FavoriteGroup gr : groupsToSync) {
-				syncWithMarkers(gr);
+				runSyncWithMarkers(gr);
 			}
 		}
 		if (groupsToDelete != null) {
@@ -163,7 +163,7 @@ public class FavouritesDbHelper {
 			FavoriteGroup group = flatGroups.get(p.getCategory());
 			if (group != null) {
 				group.points.remove(p);
-				syncWithMarkers(group);
+				runSyncWithMarkers(group);
 			}
 			cachedFavoritePoints.remove(p);
 		}
@@ -193,7 +193,7 @@ public class FavouritesDbHelper {
 			sortAll();
 			saveCurrentPointsIntoFile();
 		}
-		syncWithMarkers(group);
+		runSyncWithMarkers(group);
 
 		return true;
 	}
@@ -288,7 +288,7 @@ public class FavouritesDbHelper {
 		}
 		sortAll();
 		saveCurrentPointsIntoFile();
-		syncWithMarkers(getOrCreateGroup(p, 0));
+		runSyncWithMarkers(getOrCreateGroup(p, 0));
 		return true;
 	}
 
@@ -296,7 +296,7 @@ public class FavouritesDbHelper {
 		p.setLatitude(lat);
 		p.setLongitude(lon);
 		saveCurrentPointsIntoFile();
-		syncWithMarkers(getOrCreateGroup(p, 0));
+		runSyncWithMarkers(getOrCreateGroup(p, 0));
 		return true;
 	}
 
@@ -622,7 +622,7 @@ public class FavouritesDbHelper {
 			for (FavouritePoint p : gr.points) {
 				p.setColor(color);
 			}
-			syncWithMarkers(gr);
+			runSyncWithMarkers(gr);
 		}
 		if (group.visible != visible) {
 			FavoriteGroup gr = flatGroups.get(group.name);
@@ -630,7 +630,7 @@ public class FavouritesDbHelper {
 			for (FavouritePoint p : gr.points) {
 				p.setVisible(visible);
 			}
-			syncWithMarkers(gr);
+			runSyncWithMarkers(gr);
 		}
 		if (!group.name.equals(newName)) {
 			FavoriteGroup gr = flatGroups.remove(group.name);

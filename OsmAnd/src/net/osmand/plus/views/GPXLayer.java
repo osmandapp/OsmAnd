@@ -664,7 +664,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void syncGpx(GPXFile gpxFile) {
 		File gpx = new File(gpxFile.path);
 		if (gpx.exists()) {
-			mapMarkersHelper.syncGroupAsync(view.getApplication().getMapMarkersHelper().getOrCreateGroup(gpx));
+			mapMarkersHelper.runSynchronization(view.getApplication().getMapMarkersHelper().getOrCreateGroup(gpx));
 		}
 	}
 

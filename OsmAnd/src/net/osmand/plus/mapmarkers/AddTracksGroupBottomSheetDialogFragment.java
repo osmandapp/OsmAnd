@@ -70,7 +70,6 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 			fragment.show(getParentFragment().getChildFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
 			dismiss();
 		} else {
-			showProgressBar();
 			addAndSyncGroup(createMapMarkersSyncGroup(getMyApplication(), dataItem));
 		}
 	}

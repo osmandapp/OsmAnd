@@ -180,7 +180,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		File gpx = new File(gpxFile.path);
 		if (gpx.exists()) {
 			MapMarkersHelper helper = getMyApplication().getMapMarkersHelper();
-			helper.syncGroupAsync(helper.getOrCreateGroup(gpx));
+			helper.runSynchronization(helper.getOrCreateGroup(gpx));
 		}
 	}
 
