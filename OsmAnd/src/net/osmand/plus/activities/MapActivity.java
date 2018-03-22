@@ -719,7 +719,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (intent.hasExtra(MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS)) {
 				Bundle openMapMarkersGroupsExtra = intent.getBundleExtra(MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS);
 				if (openMapMarkersGroupsExtra != null) {
-					MapMarkersDialogFragment.showInstance(this, openMapMarkersGroupsExtra.getString(MapMarkersHelper.MarkersSyncGroup.MARKERS_SYNC_GROUP_ID));
+					MapMarkersDialogFragment.showInstance(this, openMapMarkersGroupsExtra.getString(MapMarkersHelper.MapMarkersGroup.MARKERS_SYNC_GROUP_ID));
 				}
 				setIntent(null);
 			}

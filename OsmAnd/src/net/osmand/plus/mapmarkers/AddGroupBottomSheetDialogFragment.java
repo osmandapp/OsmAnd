@@ -7,8 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
-import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
+import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -18,20 +17,8 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 
 	public static final String TAG = "AddGroupBottomSheetDialogFragment";
 
-	private AddGroupListener listener;
 	protected View mainView;
 	protected GroupsAdapter adapter;
-	protected MapMarkersHelper mapMarkersHelper;
-
-	public void setListener(AddGroupListener listener) {
-		this.listener = listener;
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		mapMarkersHelper = getMyApplication().getMapMarkersHelper();
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -41,26 +28,14 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 
 		final RecyclerView recyclerView = mainView.findViewById(R.id.groups_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		createAdapter();
+		adapter = createAdapter();
 		adapter.setAdapterListener(new GroupsAdapter.GroupsAdapterListener() {
 			@Override
 			public void onItemClick(View view) {
 				int position = recyclerView.getChildAdapterPosition(view);
-				if (position == RecyclerView.NO_POSITION) {
-					return;
+				if (position != RecyclerView.NO_POSITION) {
+					AddGroupBottomSheetDialogFragment.this.onItemClick(position);
 				}
-				showProgressBar();
-				MarkersSyncGroup group = createMapMarkersSyncGroup(position);
-				mapMarkersHelper.addMarkersSyncGroup(group);
-				mapMarkersHelper.syncGroupAsync(group, new MapMarkersHelper.OnGroupSyncedListener() {
-					@Override
-					public void onSyncDone() {
-						if (listener != null) {
-							listener.onGroupAdded();
-						}
-						dismiss();
-					}
-				});
 			}
 		});
 		recyclerView.setAdapter(adapter);
@@ -82,16 +57,12 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 		return false;
 	}
 
-	private void showProgressBar() {
-		mainView.findViewById(R.id.groups_recycler_view).setVisibility(View.GONE);
-		mainView.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+	protected void addAndSyncGroup(MapMarkersGroup group) {
+		getMyApplication().getMapMarkersHelper().syncWithMarkers(group);
+		dismiss();
 	}
 
-	protected abstract void createAdapter();
+	protected abstract GroupsAdapter createAdapter();
 
-	protected abstract MarkersSyncGroup createMapMarkersSyncGroup(int position);
-
-	public interface AddGroupListener {
-		void onGroupAdded();
-	}
+	protected abstract void onItemClick(int position);
 }

@@ -69,10 +69,6 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		if (selectionMarkersGroupFragment != null) {
 			((SelectionMarkersGroupBottomSheetDialogFragment) selectionMarkersGroupFragment).setListener(createAddMarkersGroupFragmentListener());
 		}
-		Fragment addGroupFragment = getChildFragmentManager().findFragmentByTag(AddGroupBottomSheetDialogFragment.TAG);
-		if (addGroupFragment != null) {
-			((AddGroupBottomSheetDialogFragment) addGroupFragment).setListener(createAddGroupListener());
-		}
 		Fragment historyMarkerMenuFragment = getChildFragmentManager().findFragmentByTag(HistoryMarkerMenuBottomSheetDialogFragment.TAG);
 		if (historyMarkerMenuFragment != null) {
 			((HistoryMarkerMenuBottomSheetDialogFragment) historyMarkerMenuFragment).setListener(createHistoryMarkerMenuListener());
@@ -373,33 +369,21 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 	}
 
 	private void openAddGroupMenu(AddGroupBottomSheetDialogFragment fragment) {
-		fragment.setListener(createAddGroupListener());
 		fragment.setUsedOnMap(false);
 		fragment.setRetainInstance(true);
 		fragment.show(getChildFragmentManager(), AddGroupBottomSheetDialogFragment.TAG);
-	}
-
-	private AddGroupBottomSheetDialogFragment.AddGroupListener createAddGroupListener() {
-		return new AddGroupBottomSheetDialogFragment.AddGroupListener() {
-			@Override
-			public void onGroupAdded() {
-				updateAdapter();
-			}
-		};
 	}
 
 	private AddMarkersGroupFragmentListener createAddMarkersGroupFragmentListener() {
 		return new AddMarkersGroupFragmentListener() {
 			@Override
 			public void favouritesOnClick() {
-				AddFavouritesGroupBottomSheetDialogFragment fragment = new AddFavouritesGroupBottomSheetDialogFragment();
-				openAddGroupMenu(fragment);
+				openAddGroupMenu(new AddFavouritesGroupBottomSheetDialogFragment());
 			}
 
 			@Override
 			public void waypointsOnClick() {
-				AddTracksGroupBottomSheetDialogFragment fragment = new AddTracksGroupBottomSheetDialogFragment();
-				openAddGroupMenu(fragment);
+				openAddGroupMenu(new AddTracksGroupBottomSheetDialogFragment());
 			}
 		};
 	}
