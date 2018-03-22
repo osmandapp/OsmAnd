@@ -51,6 +51,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 		final BottomSheetItemWithCompoundButton[] selectAllItem = new BottomSheetItemWithCompoundButton[1];
 		selectAllItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setChecked(true)
 				.setDescription(getString(R.string.shared_string_total) + ": " + gpxFile.getPoints().size())
 				.setIcon(getContentIcon(R.drawable.ic_action_group_select_all))
 				.setTitle(getString(R.string.shared_string_select_all))
@@ -75,6 +76,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		for (String category : pointsByCategories.keySet()) {
 			final BottomSheetItemWithCompoundButton[] categoryItem = new BottomSheetItemWithCompoundButton[1];
 			categoryItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+					.setChecked(true)
 					.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -100,6 +102,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 					.create();
 			items.add(categoryItem[0]);
 			categoryItems.add(categoryItem[0]);
+			selectedCategories.add(category);
 		}
 	}
 
