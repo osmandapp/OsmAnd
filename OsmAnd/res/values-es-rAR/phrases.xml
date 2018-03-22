@@ -3842,4 +3842,9 @@
 
 <string name="poi_barbecue_grill">Parrilla de barbacoa: sí</string>
 
+<string name="synonyms_poi_fuel">Gasolinera;Estación de servicio;Estación de combustible;Servicentro</string>
+
+	<string name="synonyms_poi_nightclub">Disco;Boliche;Discoteca;Antro;Club nocturno</string>
+	<string name="poi_water_utility">Oficina de servicios de agua</string>
+
 </resources>
