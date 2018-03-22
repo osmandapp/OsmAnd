@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -109,7 +110,7 @@
     <string name="amenity_type_user_defined">Felhasználó által meghatározott</string>
     <string name="fav_export_confirmation">A kedvencekből létezik már mentés. Le szeretnéd cserélni?</string>
     <string name="profile_settings">Felhasználási módnak megfelelő beállítások</string>
-    <string name="settings_preset">Felhasználási mód</string>
+    <string name="settings_preset">Alapértelmezett profil</string>
     <string name="settings_preset_descr">Felhasználási mód kiválasztása egyedi térkép és navigációs beállításokkal.</string>
 
 
@@ -2720,7 +2721,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Jeges utak és gázlók elkerülése.</string>
     <string name="use_location">Pozíció használata</string>
     <string name="add_location_as_first_point_descr">Tökéletes útvonaltervezéshez első pontként a saját pozícióját adja meg.</string>
-    <string name="my_location">Saját pozícióm</string>
+    <string name="my_location">Saját helyzetem</string>
     <string name="shared_string_finish">Befejezés</string>
     <string name="plan_route">Útvonal tervezése</string>
     <string name="shared_string_sort">Rendezés</string>
