@@ -136,9 +136,17 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return amenity.getName(
+		String name = amenity.getName(
 				amenity.getType().isWiki() ? getPreferredMapAppLang() : getPreferredMapLang(),
 				isTransliterateNames());
+		Map<String, String> additionalInfo = amenity.getAdditionalInfo();
+		if (additionalInfo != null) {
+			String ref = additionalInfo.get("ref");
+			if (ref != null && !ref.isEmpty()) {
+				return name + " (" + ref + ")";
+			}
+		}
+		return name;
 	}
 
 	@Override
