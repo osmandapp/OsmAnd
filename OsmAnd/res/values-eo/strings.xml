@@ -2929,4 +2929,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="rendering_attr_whiteWaterSports_name">Rapid-akvaj sportoj</string>
     <string name="group_deleted">Forigis grupon</string>
     <string name="clear_all_intermediates">Forviŝi ĉiujn intercelojn</string>
+    <string name="select_waypoints_category_description">Vi povas aldoni ĉiujn navigadpunktojn de la kurso aŭ elekti disajn kategoriojn.</string>
+    <string name="shared_string_total">Tute</string>
     </resources>
