@@ -300,7 +300,8 @@ public class MapMarkersDbHelper {
 		if (db != null) {
 			try {
 				db.execSQL("DELETE FROM " + GROUPS_TABLE_NAME + " WHERE " + GROUPS_COL_DISABLED + " = ? ", new Object[]{1});
-				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME + " WHERE " + MARKERS_COL_DISABLED + " = ? ", new Object[]{1});
+				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME
+						+ " WHERE " + MARKERS_COL_DISABLED + " = ? AND " + MARKERS_COL_ACTIVE + " = ?", new Object[]{1, 1});
 			} finally {
 				db.close();
 			}
@@ -408,8 +409,8 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ? " + "AND " + MARKERS_COL_DISABLED + " = ?",
-						new String[]{String.valueOf(1), String.valueOf(0)});
+				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
+						new String[]{String.valueOf(1)});
 				if (query.moveToFirst()) {
 					do {
 						MapMarker marker = readItem(query);
@@ -567,8 +568,8 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ? " + "AND " + MARKERS_COL_DISABLED + " = ?",
-						new String[]{String.valueOf(0), String.valueOf(0)});
+				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
+						new String[]{String.valueOf(0)});
 				if (query.moveToFirst()) {
 					do {
 						markers.add(readItem(query));

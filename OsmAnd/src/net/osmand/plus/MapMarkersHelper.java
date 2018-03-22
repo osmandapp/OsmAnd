@@ -310,11 +310,21 @@ public class MapMarkersHelper {
 	public void syncWithMarkers(@NonNull MapMarkersGroup group) {
 		if (!isGroupSynced(group.getId())) {
 			markersDbHelper.addGroup(group);
+			addHistoryMarkersToGroup(group);
 			addToGroupsList(group);
 		} else if (group.wptCategories != null) {
 			markersDbHelper.updateGroupCategories(group.getId(), group.getWptCategoriesString());
 		}
 		runSynchronization(group);
+	}
+
+	private void addHistoryMarkersToGroup(@NonNull MapMarkersGroup group) {
+		List<MapMarker> historyMarkers = new ArrayList<>(mapMarkersHistory);
+		for (MapMarker m : historyMarkers) {
+			if (m.groupKey != null && group.getId() != null && m.groupKey.equals(group.getId())) {
+				group.getMarkers().add(m);
+			}
+		}
 	}
 
 	public void removeMarkersGroup(MapMarkersGroup group) {
