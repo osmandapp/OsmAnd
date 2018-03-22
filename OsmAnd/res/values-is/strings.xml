@@ -1273,7 +1273,7 @@ Sólsetur: %2$s</string>
     <string name="route_tu">Taktu U-beygju og haltu áfram</string>
     <string name="first_time_download">Sækja héruð</string>
     <string name="search_poi_location">Leita að merki …</string>
-    <string name="poi">Áhugaverður staður</string>
+    <string name="poi">Merkisstaður</string>
     <string name="show_location">Birta staðsetningu þína</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Ónettengd kort
