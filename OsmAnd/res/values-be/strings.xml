@@ -1574,7 +1574,7 @@
 - Сынхранізацыя групаў і прыстасаваньняў з сэрвэрам;
 - Кіраваньне групамі і прыстасаваньнямі ў асабістым кабінэце.</string>
     <string name="configure_map">Налады мапы</string>
-    <string name="search_radius_proximity">На адлегласьці</string>
+    <string name="search_radius_proximity">У межах</string>
     <string name="rendering_category_details">Падрабязнасьці</string>
     <string name="rendering_category_transport">Транспарт</string>
 	<string name="map_widget_top">Радок стану</string>
