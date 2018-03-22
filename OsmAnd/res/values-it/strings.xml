@@ -1830,7 +1830,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_logoff">Esci</string>
     <string name="rendering_value_disabled_name">Disabilitato</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colora per rete di appartenenza</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Colorazione in base ai simboli escursionistici OSMC</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Colore in base ai simboli escursionistici OSMC</string>
     <string name="osm_edit_context_menu_delete">Cancella la modifica di OSM</string>
     <string name="archive_wikipedia_data">Ci sono dati Wikipedia scaricati vecchi e incompatibili. Vuoi archiviarli?</string>
     <string name="download_wikipedia_files">Vuoi scaricare i dati aggiuntivi di Wikipedia (%1$s MB)?</string>
