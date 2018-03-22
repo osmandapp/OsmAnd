@@ -2487,7 +2487,7 @@
     <string name="measurement_tool_action_bar">Просмотрите карту и добавьте точки</string>
     <string name="measurement_tool">Измерить расстояние</string>
     <string name="none_point_error">Необходимо добавить хотя бы одну точку.</string>
-    <string name="mapillary_image">Отправить фотографию в Mapillary</string>
+    <string name="mapillary_image">Фотография Mapillary</string>
     <string name="improve_coverage_mapillary">Улучшить фотопокрытие через Mapillary</string>
     <string name="hide_from_zoom_level">Скрыть от шкалы приближения</string>
     <string name="release_2_2">"\\022 Новый контекстно-зависимый Графический Интерфейс для выделения локаций на карте  и других экранов

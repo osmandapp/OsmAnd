@@ -229,6 +229,27 @@ public class SampleApplication extends Application {
 						keyName.replace('_', ' '));
 
 			}
+			@Override
+			public String getSynonyms(AbstractPoiType type) {
+				AbstractPoiType baseLangType = type.getBaseLangType();
+				if (baseLangType != null) {
+					return getSynonyms(baseLangType);
+				}
+				return getSynonyms(type.getIconKeyName());
+			}
+
+			@Override
+			public String getSynonyms(String keyName) {
+				try {
+					Field f = R.string.class.getField("synonyms_poi_" + keyName);
+					if (f != null) {
+						Integer in = (Integer) f.get(null);
+						return getString(in);
+					}
+				} catch (Exception e) {
+				}
+				return "";
+			}
 
 		});
 

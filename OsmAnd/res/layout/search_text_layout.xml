@@ -14,6 +14,8 @@
         android:background="@null"
         android:gravity="center_vertical"
         android:hint="@string/search_poi_category_hint"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
         android:lines="1"
         android:singleLine="true"
         android:textColor="?attr/searchbar_text"
