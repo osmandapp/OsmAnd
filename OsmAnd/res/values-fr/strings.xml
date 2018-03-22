@@ -3105,4 +3105,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_attr_whiteWaterSports_name">Sports d\'eau douce</string>
     <string name="group_deleted">Groupe supprimé</string>
     <string name="clear_all_intermediates">Effacer toutes les étapes</string>
+    <string name="select_waypoints_category_description">Vous pouvez ajouter tous les points de la trace ou sélectionner des catégories différentes.</string>
+    <string name="shared_string_total">Total</string>
     </resources>
