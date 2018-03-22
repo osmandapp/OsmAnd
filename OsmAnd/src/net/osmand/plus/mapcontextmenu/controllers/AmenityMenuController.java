@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -136,9 +137,17 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return amenity.getName(
+		String name = amenity.getName(
 				amenity.getType().isWiki() ? getPreferredMapAppLang() : getPreferredMapLang(),
 				isTransliterateNames());
+		Map<String, String> additionalInfo = amenity.getAdditionalInfo();
+		if (additionalInfo != null) {
+			String ref = additionalInfo.get("ref");
+			if (!TextUtils.isEmpty(ref)) {
+				return name + " (" + ref + ")";
+			}
+		}
+		return name;
 	}
 
 	@Override
