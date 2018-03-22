@@ -30,7 +30,6 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
-import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
@@ -241,7 +240,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			SearchUICore searchUICore = searchHelper.getCore();
 			String textTitle = app.getString(R.string.nothing_found_in_radius) + " "
 					+ OsmAndFormatter.getFormattedDistance(searchUICore.getMinimalSearchRadius(searchUICore.getPhrase()), app);
-			((TextViewEx) view.findViewById(R.id.empty_search_title)).setText(textTitle);
+			((TextView) view.findViewById(R.id.empty_search_title)).setText(textTitle);
 			View increaseRadiusRow = view.findViewById(R.id.increase_radius_row);
 			increaseRadiusRow.setVisibility(searchMoreItem.isSearchMoreAvailable() ? View.VISIBLE : View.GONE);
 			increaseRadiusRow.setOnClickListener(new View.OnClickListener() {
