@@ -997,7 +997,7 @@
 <string name="audionotes_location_not_defined">המיקום לא מוגדר עדיין לצורכי שמירת הערות. יש לבחור ב„שימוש במיקום…” כדי להקצות הערה למיקום שצוין.</string>
     
     <string name="map_widget_audionotes">הערות קוליות</string>
-    <string name="audionotes_plugin_description">תיאור תוסף ההערות הקוליות</string>
+    <string name="audionotes_plugin_description">תוסף ההערות הקוליות/בווידאו מספק תכונה להקליט שמע או לצלם תמונות/סרטונים במהלך טיול, או באמצעות כפתור על מסך המפה או ישירות מתפריט ההקשר של כל מיקום במפה.</string>
     <string name="audionotes_plugin_name">תוסף הערות קוליות</string>
     
     <string name="osmand_srtm_short_description_80_chars">תוסף ל־OsmAnd לקווי מתאר בלתי מקוונים</string>
@@ -1110,7 +1110,7 @@
     <string name="plugin_distance_point">נקודה</string>
     <string name="gpx_file_name">קובץ שם ה־GPX</string>
     <string name="gpx_saved_sucessfully">קובץ ה־GPX נשמר בהצלחה אל {0}</string>
-    <string name="osmand_distance_planning_plugin_description">יש ליצור נתיב (או להשתמש / לשנות קובצי GPX קיימים) כדי למדוד את המרחק בין נקודות. לשמור כ־GPX, ניתן להשתמש בזה כדי לתכנן נתיב לפי GPX.</string>
+    <string name="osmand_distance_planning_plugin_description">תוסף זה מספק וידג׳ט על המסך שמאפשר ליצור נתיבים על ידי לחיצה על המפה או להשתמש או לשנות קובץ GPX קיים, לטובת תכנון טיול ומדידת את המרחק בין הנקודות. ניתן לשמור את התוצאות בקובץ GPX, בו ניתן להשתמש לאחר מכן להנחיה.</string>
     <string name="osmand_distance_planning_plugin_name">מחשבון מרחק וכלי תכנון</string>
     <string name="shared_string_do_not_show_again">לא להציג שוב</string>
     <string name="distance_measurement_start_editing">להתחיל בעריכה</string>
@@ -2637,4 +2637,10 @@
     <string name="winter_and_ski_renderer">חורף וסקי</string>
     <string name="tunnel_warning">מנהרה לפניך</string>
     <string name="show_tunnels">מנהרות</string>
-</resources>
+<string name="select_waypoints_category_description">ניתן להוסיף את כל נקודות הדרך של המסלול או לבחור בקטגוריות נפרדות.</string>
+    <string name="shared_string_total">סך הכול</string>
+    <string name="rendering_attr_whiteWaterSports_name">ספורט מים אתגרי</string>
+    <string name="delay_to_start_navigation">התחלת ניווט מונחה לאחר…</string>
+    <string name="osmand_parking_overdue">תפוגה</string>
+    <string name="nautical_renderer">ימי</string>
+    </resources>
