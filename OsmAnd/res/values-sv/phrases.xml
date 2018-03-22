@@ -2415,4 +2415,206 @@
 
 	<string name="poi_historic_civilization_ancient_roman">Civilisation: det antika romerska (753 F.KR – 284 E.KR.)</string>
 	<string name="poi_historic_civilization_nuragic">Civilisation: nuragherkulturen (18 F.KR – 2 E.KR)</string>
+	<string name="synonyms_poi_nightclub">Disco;Disko</string>
+	<string name="poi_social_facility_outreach">Uppsökande</string>
+	<string name="poi_historic_civilization_etruscan">Civilisation: etruskisk (500-talet F.Kr. - 1300-talet E.Kr.)</string>
+	<string name="poi_historic_civilization_prehistoric">Civilisation: förhistorisk</string>
+	<string name="poi_historic_civilization_ancient_greek">Civilisation: det antika grekiska</string>
+	<string name="poi_historic_civilization_roman">Civilisation: romersk</string>
+	<string name="poi_historic_civilization_byzantine">Civilisation: bysantinsk (285 f.Kr.– 1453 e.Kr.)</string>
+	<string name="poi_historic_civilization_imperial_chinese">Civilisation: kejserlig kinesisk (221 f.Kr. – 1911 e.Kr.)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilisation: det forntida Egypten (tills 332 F.Kr.)</string>
+	<string name="poi_historic_civilization_celtic">Civilisation: keltisk</string>
+	<string name="poi_historic_civilization_western_roman">Civilisation: västromersk (285–476)</string>
+	<string name="poi_historic_civilization_mycenaean">Civilisation: mykenska</string>
+	<string name="poi_historic_civilization_dacian">Civilisation: dacian</string>
+	<string name="poi_historic_civilization_hernici">Civilisation: hernici</string>
+	<string name="poi_historic_civilization_greek_egyptian">Civilisation: grekisk-egyptiska (332 F.Kr – 30 F.Kr.)</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilisation: romerska- och bysantinskegyptiska</string>
+	<string name="poi_historic_civilization_helladic">Civilisation: helladic</string>
+	<string name="poi_historic_civilization_cycladic">Civilisation: kykladisk</string>
+	<string name="poi_historic_civilization_minoan">Civilisation: minoiska</string>
+	<string name="poi_historic_civilization_tiahuanacota">Civilisation: tiahuanacota</string>
+
+	<string name="poi_animal_training">Djur-utbildning</string>
+	<string name="poi_animal_training_dog">Hund</string>
+	<string name="poi_animal_training_horse">Häst</string>
+
+	<string name="poi_horse_yes">Hästar tillåtna</string>
+	<string name="poi_horse_no">Hästar ej tillåtna</string>
+	<string name="poi_animal_yes">Djur tillåtna</string>
+	<string name="poi_animal_no">Djur ej tillåtna</string>
+
+	<string name="poi_historic_period_nuragic">Historisk tid: nuragic</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">Historisk period: stenåldern / bronsåldern (obestämd)</string>
+	<string name="poi_historic_period_bronze_age">Historisk period: bronsåldern</string>
+	<string name="poi_historic_period_principate">Historisk period: principatet (27 f.Kr.-284 E.Kr.)</string>
+	<string name="poi_historic_period_classical_greece">Historisk period: klassiska Grekland (5 – 4 f.Kr.)</string>
+	<string name="poi_historic_period_archaic_greece">Historisk period: arkaiska Grekland</string>
+	<string name="poi_historic_period_iron_age">Historisk period: järnåldern</string>
+	<string name="poi_historic_period_roman_republic">Historisk period: Romerska republiken (508 F.Kr – 27 F.Kr.)</string>
+	<string name="poi_historic_period_hellenistic_greece">Historisk period: hellenistiska Grekland</string>
+	<string name="poi_historic_period_new_kingdom">Historisk period: nya riket (1550 – 1069 f.Kr.)</string>
+	<string name="poi_historic_period_middle_kingdom">Historisk tid: mellersta riket (2055 – 1650 F.KR.)</string>
+	<string name="poi_historic_period_predynastic_egypt">Historisk period: fördynastiska Egypten</string>
+	<string name="poi_historic_period_early_dynastic_period">Historisk period: tidig dynastisk tid (3100-2686 F.kr)</string>
+	<string name="poi_historic_period_old_kingdom">Historisk period: gamla riket (2686-2181 F.kr)</string>
+	<string name="poi_historic_period_first_intermediate_period">Historisk period: första mellantiden (2181-2055 F.kr)</string>
+	<string name="poi_historic_period_second_intermediate_period">Historisk period: andra mellanliggande period (1650-1550 F.kr)</string>
+	<string name="poi_historic_period_third_intermediate_period">Historisk period: tredje mellantiden (1069 – 664 f.Kr.)</string>
+	<string name="poi_historic_period_first_persian_period">Historisk period: första persiska perioden</string>
+	<string name="poi_historic_period_late_period">Historisk period: sena perioden (664 – 332 f.Kr.)</string>
+	<string name="poi_historic_period_second_persian_period">Historisk period: andra Persiska perioden</string>
+	<string name="poi_historic_period_alexander_the_great">Historisk period: Alexander den store</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Historisk period: ptolemaiska Egypten (305 – 30 F.Kr.)</string>
+	<string name="poi_historic_period_christian_egypt">Historisk period: kristna Egypten</string>
+	<string name="poi_historic_period_byzantine_egypt">Historisk period: bysantinska Egypten (30 641 E.kr)</string>
+	<string name="poi_historic_period_persian_occupation">Historisk period: Persiska ockupationen</string>
+	<string name="poi_historic_period_greek_dark_ages">Historisk period: grekiska mörka tiden (1100 – 800 f.Kr.)</string>
+	<string name="poi_historic_period_roman_greece">Historisk period: romerska Grekland (146 f.Kr.-330 E.kr)</string>
+	<string name="poi_historic_period_roman_kingdom">Historisk period: romerska kungariket (753 f.Kr. – 509 f.Kr.)</string>
+	<string name="poi_historic_period_dominate">Historisk period: dominatet (285 AD-476 E.Kr.)</string>
+	<string name="poi_historic_period_villager">Historisk period: bybo (epok I, II, 1580 133 E.kr)</string>
+	<string name="poi_historic_period_urban">Historisk period: urban (epok III, 133 AD – 374 AD)</string>
+	<string name="poi_historic_period_classical">Historisk period: Klassisk (epok IV, 374 AD-900 E.Kr.)</string>
+	<string name="poi_historic_period_imperial">Historisk period: imperial (epok V, 900 AD-1200 E.Kr.)</string>
+
+	<string name="poi_historic_era_paleolithic">Historiska eran: paleolitiska (2,6 miljoner år – 10000 BP)</string>
+	<string name="poi_historic_era_mesolithic">Historisk epok: mesolitisk</string>
+	<string name="poi_historic_era_neolithic">Historisk epok: neolitisk</string>
+	<string name="poi_historic_era_chalcolithic">Historisk epok: kalkolitisk (4:e–3:e årtusendet F.KR.)</string>
+
+	<string name="poi_historic_stone">Historisk sten</string>
+	<string name="poi_stone_type_conciliation_cross">Typ: förlåtelsekors</string>
+	<string name="poi_stone_type_coat_of_arms">Typ: vapensköld</string>
+
+	<string name="poi_material_wood">Material: trä</string>
+	<string name="poi_material_metal">Material: metall</string>
+	<string name="poi_material_reinforced_concrete">Material: armerad betong</string>
+	<string name="poi_material_concrete">Material: betong</string>
+	<string name="poi_material_steel">Material: stål</string>
+	<string name="poi_material_stone">Material: sten</string>
+	<string name="poi_material_masonry">Material: murverk</string>
+	<string name="poi_material_brick">Material: tegel</string>
+	<string name="poi_material_plastic">Material: plast</string>
+	<string name="poi_material_sandstone">Material: sandsten</string>
+	<string name="poi_material_granite_stone">Material: granitsten</string>
+	<string name="poi_material_metal_wood">Material: metall, trä</string>
+	<string name="poi_material_glass">Material: glas</string>
+	<string name="poi_material_bronze">Material: brons</string>
+	<string name="poi_material_earth">Material: jord</string>
+	<string name="poi_material_composite">Material: komposit</string>
+	<string name="poi_material_limestone">Material: kalksten</string>
+	<string name="poi_material_marble">Material: marmor</string>
+	<string name="poi_material_aluminium">Material: aluminium</string>
+
+	<string name="poi_site_type_megalith">Megalit</string>
+	<string name="poi_site_type_tumulus">Gravhög</string>
+	<string name="poi_site_type_fortification">Berikning</string>
+	<string name="poi_site_type_settlement">Bosättning</string>
+	<string name="poi_site_type_city">Stad</string>
+	<string name="poi_site_type_hut_circle">Stugcirkel</string>
+	<string name="poi_site_type_necropolis">Nekropol</string>
+	<string name="poi_site_type_petroglyph">Hällristning</string>
+	<string name="poi_site_type_earthwork">Anläggningsarbete</string>
+	<string name="poi_megalith_type_menhir">Typ av megalit: menhir</string>
+	<string name="poi_megalith_type_dolmen">Typ av megalit: dolmen</string>
+	<string name="poi_megalith_type_nuraghe">Typ av megalit: nuraghe</string>
+	<string name="poi_megalith_type_stone_circle">Typ av megalit: stenring</string>
+	<string name="poi_megalith_type_passage_grave">Typ av megalit: gånggrift</string>
+	<string name="poi_fortification_type_hill_fort">Typ av megalit: fornborg</string>
+	<string name="poi_fortification_type_limes">Typ av megalit: kalk</string>
+	<string name="poi_fortification_type_sconce">Typ av megalit: skans</string>
+	<string name="poi_fortification_type_ring_ditch">Typ av megalit: ringdike</string>
+
+	<string name="poi_pa">PA (maori-befäst bosättning)</string>
+
+	<string name="poi_historic_farm">Historisk gård</string>
+	<string name="poi_historic_railway_station">Historisk järnvägsstation</string>
+
+	<string name="poi_historic_threshing_floor">Historisk tröskplats</string>
+	<string name="poi_historic_gallows">Historisk galge</string>
+	<string name="poi_historic_railway">Historisk järnväg</string>
+
+	<string name="poi_square">Torg</string>
+	<string name="poi_artist_name">Konstnär</string>
+	<string name="poi_sculptor">Skulptör</string>
+
+	<string name="poi_building_type_church">Byggnadstyp: kyrka</string>
+	<string name="poi_building_type_chapel">Byggnadstyp: kapell</string>
+	<string name="poi_building_type_mosque">Byggnadstyp: moské</string>
+	<string name="poi_building_type_temple">Byggnadstyp: tempel</string>
+	<string name="poi_building_type_cathedral">Byggnadstyp: domkyrka</string>
+	<string name="poi_building_type_monastery">Byggnadstyp: kloster</string>
+	<string name="poi_building_type_basilica">Byggnadstyp: basilika</string>
+	<string name="poi_building_type_synagogue">Byggnadstyp: synagoga</string>
+	<string name="poi_building_type_shrine">Byggnadstyp: helgedom</string>
+
+	<string name="poi_cross">Kors</string>
+	<string name="poi_summit_cross">Höjdpunkt: ja</string>
+
+	<string name="poi_prison_camp">Tidigare fångläger</string>
+	<string name="poi_concentration_camp">Typ: koncentrationsläger</string>
+	<string name="poi_pow_camp">Typ: läger för krigsfångar</string>
+	<string name="poi_labor_camp">Typ: arbetsläger</string>
+	<string name="poi_concentration_camp_nazism">Typ: nazistiskt</string>
+	<string name="poi_concentration_camp_gulag">Typ: gulag</string>
+
+	<string name="poi_temperature">Temperatur</string>
+	<string name="poi_bathing_yes">Bad: ja</string>
+	<string name="poi_bathing_no">Badplats: nej</string>
+
+	<string name="poi_boat_storage">Båtförvaring</string>
+
+	<string name="poi_conveying_yes">Transportör: ja</string>
+
+	<string name="poi_bridge_ref">Bro-referens</string>
+	<string name="poi_tunnel_ref">Tunnel-referens</string>
+
+	<string name="poi_ref">Referens</string>
+
+	<string name="poi_cargo_passengers">Passagerare</string>
+	<string name="poi_cargo_vehicle">Fordon</string>
+	<string name="poi_cargo_bicycle">Cyklar</string>
+	<string name="poi_cargo_container">Container</string>
+	<string name="poi_cargo_hgv">Tunga fordon</string>
+
+	<string name="poi_fitness_station">Fitness-station</string>
+
+	<string name="poi_hackerspace">Hackerspace</string>
+
+
+	<string name="poi_craft_electronics_repair">Reparation av elektronik</string>
+	<string name="poi_fireworks">Fyrverkeributik</string>
+
+	<string name="poi_aerialway_length">Längd</string>
+
+	<string name="poi_health_specialty_general_yes">Allmänläkare</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Oftalmologi</string>
+	<string name="poi_health_specialty_gynaecology_yes">Gynekologi</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Invärtesmedicin</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ortopedi</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Otolaryngologi</string>
+	<string name="poi_health_specialty_paediatrics_yes">Pediatrik</string>
+	<string name="poi_health_specialty_paediatrics_no">Hälsospecialitet: pediatrik: nej</string>
+	<string name="poi_health_specialty_dermatology_yes">Dermatologi</string>
+	<string name="poi_health_specialty_urology_yes">Urologi</string>
+	<string name="poi_health_specialty_surgery_yes">Allmänkirurgi</string>
+	<string name="poi_health_specialty_radiology_yes">Radiologi</string>
+	<string name="poi_health_specialty_psychiatry_yes">Psykiatri</string>
+	<string name="poi_health_specialty_neurology_yes">Neurologi</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Hud- och könssjukdomar</string>
+	<string name="poi_health_specialty_cardiology_yes">Kardiologi</string>
+	<string name="poi_health_specialty_trauma_yes">Traumatologi</string>
+	<string name="poi_health_specialty_biology_yes">Klinisk biologi</string>
+	<string name="poi_health_specialty_osteopathy_yes">Osteopati</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Narkos</string>
+	<string name="poi_health_specialty_pulmonology_yes">Lungmedicin</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Tand-, käk-och ansiktskirurgi</string>
+	<string name="poi_health_specialty_maternity_yes">Mödravård</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Olycksfalls- och Katastrofmedicin</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Hälsospecialitet: olycks- och akutmedicin: ingen</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Plastikkirurgi</string>
+	<string name="poi_health_specialty_orthodontics_yes">Tandreglering</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Sjukgymnastik</string>
 	</resources>
