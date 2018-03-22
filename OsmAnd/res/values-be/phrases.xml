@@ -3828,4 +3828,9 @@
 
 <string name="poi_barbecue_grill">Мангал: так</string>
 
+<string name="synonyms_poi_fuel">АЗС;Аўтазаправачная станцыя</string>
+
+	<string name="synonyms_poi_nightclub">Дыска</string>
+	<string name="poi_water_utility">Офіс водазабяспячэння</string>
+
 </resources>
