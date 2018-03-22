@@ -206,4 +206,6 @@
     <string name="shared_string_actions">Çalakî</string>
     <string name="shared_string_marker">Hêmaker</string>
     <string name="empty_state_osm_edits">Objeyên OSMê çêke an jî biguherîne</string>
+    <string name="select_waypoints_category_description">Hûn dikarin nuqteyên riyê li hemû şopan zêde bikin an jî kategoriyên cuda bibijêrin.</string>
+    <string name="shared_string_total">Yekûn</string>
     </resources>
