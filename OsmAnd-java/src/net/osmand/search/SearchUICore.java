@@ -490,6 +490,17 @@ public class SearchUICore {
 		return false;
 	}
 
+	public int getMinimalSearchRadius(SearchPhrase phrase) {
+		int radius = Integer.MAX_VALUE;
+		for (SearchCoreAPI api : apis) {
+			int apiMinimalRadius = api.getMinimalSearchRadius(phrase);
+			if (apiMinimalRadius > 0 && apiMinimalRadius < radius) {
+				radius = apiMinimalRadius;
+			}
+		}
+		return radius;
+	}
+
 	private void searchInBackground(final SearchPhrase phrase, SearchResultMatcher matcher) {
 		preparePhrase(phrase);
 		ArrayList<SearchCoreAPI> lst = new ArrayList<>(apis);

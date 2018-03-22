@@ -129,6 +129,11 @@ public class SearchCoreFactory {
 			return phrase.getRadiusLevel() < MAX_DEFAULT_SEARCH_RADIUS;
 		}
 
+		@Override
+		public int getMinimalSearchRadius(SearchPhrase phrase) {
+			return 0;
+		}
+
 		protected void subSearchApiOrPublish(SearchPhrase phrase,
 											 SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api)
 				throws IOException {
@@ -256,6 +261,11 @@ public class SearchCoreFactory {
 		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 			// case when street is not found for given city is covered by SearchStreetByCityAPI
 			return getSearchPriority(phrase) != -1 && super.isSearchMoreAvailable(phrase);
+		}
+
+		@Override
+		public int getMinimalSearchRadius(SearchPhrase phrase) {
+			return phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
 		}
 
 		@Override
@@ -575,6 +585,11 @@ public class SearchCoreFactory {
 		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 			return super.isSearchMoreAvailable(phrase) && getSearchPriority(phrase) != -1;
 		}
+
+		@Override
+		public int getMinimalSearchRadius(SearchPhrase phrase) {
+			return phrase.getRadiusSearch(BBOX_RADIUS);
+		}
 	}
 
 
@@ -700,6 +715,7 @@ public class SearchCoreFactory {
 
 
 	public static class SearchAmenityByTypeAPI extends SearchBaseAPI {
+		private static final int BBOX_RADIUS = 10000;
 
 		private MapPoiTypes types;
 
@@ -711,6 +727,11 @@ public class SearchCoreFactory {
 		@Override
 		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 			return getSearchPriority(phrase) != -1 && super.isSearchMoreAvailable(phrase);
+		}
+
+		@Override
+		public int getMinimalSearchRadius(SearchPhrase phrase) {
+			return phrase.getRadiusSearch(BBOX_RADIUS);
 		}
 
 		private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
@@ -750,7 +771,7 @@ public class SearchCoreFactory {
 					throw new UnsupportedOperationException();
 				}
 
-				QuadRect bbox = phrase.getRadiusBBoxToSearch(10000);
+				QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS);
 				List<BinaryMapIndexReader> oo = phrase.getOfflineIndexes();
 				Set<String> searchedPois = new TreeSet<>();
 				for (BinaryMapIndexReader o : oo) {
