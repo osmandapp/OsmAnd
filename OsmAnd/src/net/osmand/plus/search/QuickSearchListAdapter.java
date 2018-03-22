@@ -21,6 +21,7 @@ import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashLocationFragment;
@@ -29,6 +30,7 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
@@ -235,7 +237,11 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			boolean moreDividerVisible = emptySearchVisible && searchMoreItem.isSearchMoreAvailable();
 			view.findViewById(R.id.empty_search).setVisibility(emptySearchVisible ? View.VISIBLE : View.GONE);
 			view.findViewById(R.id.more_divider).setVisibility(moreDividerVisible ? View.VISIBLE : View.GONE);
-
+			QuickSearchHelper searchHelper = app.getSearchUICore();
+			SearchUICore searchUICore = searchHelper.getCore();
+			String textTitle = app.getString(R.string.nothing_found_in_radius) + " "
+					+ OsmAndFormatter.getFormattedDistance(searchUICore.getMinimalSearchRadius(searchUICore.getPhrase()), app);
+			((TextViewEx) view.findViewById(R.id.empty_search_title)).setText(textTitle);
 			View increaseRadiusRow = view.findViewById(R.id.increase_radius_row);
 			increaseRadiusRow.setVisibility(searchMoreItem.isSearchMoreAvailable() ? View.VISIBLE : View.GONE);
 			increaseRadiusRow.setOnClickListener(new View.OnClickListener() {
