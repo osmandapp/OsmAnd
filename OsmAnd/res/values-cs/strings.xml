@@ -2841,4 +2841,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part8">Přibližné pokrytí a kvalita map: • Západní Evropa: **** • Východní Evropa: *** • Rusko: *** • Severní Amerika: *** • Jižní Amerika: ** • Asie: ** • Japonsko &amp; Korea: *** • Střední Východ: ** • Afrika: ** • Antarktida: * Mapy většiny států na zeměkouli jsou dostupné ke stažení! Od Afghánistánu po Zimbabwe, od Austrálie po USA, Argentinu, Brazílii, Kanadu, Francii, Německo, Mexiko, Spojené království, Španělsko, …</string>
     <string name="group_deleted">Skupina smazána</string>
     <string name="clear_all_intermediates">Smazat všechny mezicíle</string>
+    <string name="select_waypoints_category_description">Můžete přidat všechny mezicíle na trase, nebo vybrat jednotlivé kategorie.</string>
+    <string name="shared_string_total">Celkem</string>
     </resources>
