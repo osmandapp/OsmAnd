@@ -2970,4 +2970,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="group_deleted">Taldea ezabatuta</string>
     <string name="rendering_attr_whiteWaterSports_name">Ur arinetako kirolak</string>
     <string name="clear_all_intermediates">Garbitu tarteko puntu guztiak</string>
+    <string name="select_waypoints_category_description">Lorratzaren bide-puntu guztiak gehitu ditzakezu, edo hainbat kategoriak hautatu.</string>
+    <string name="shared_string_total">Guztira</string>
     </resources>
