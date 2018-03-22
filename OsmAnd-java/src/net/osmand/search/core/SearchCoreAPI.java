@@ -21,4 +21,10 @@ public interface SearchCoreAPI {
 	public boolean isSearchMoreAvailable(SearchPhrase phrase);
 
 	boolean isSearchAvailable(SearchPhrase p);
+
+	/**
+	 * @param phrase
+	 * @return minimal search radius in meters
+	 */
+	int getMinimalSearchRadius(SearchPhrase phrase);
 }
