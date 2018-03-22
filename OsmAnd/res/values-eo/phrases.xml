@@ -3800,4 +3800,5 @@
 
 	<string name="poi_water_utility">Oficejo de akvokonduka firmao</string>
 
-</resources>
+<string name="synonyms_poi_nightclub">noktoklubo;dancejo;diskoteko;diskejo;noktaklubo;noktklubo</string>
+	</resources>
