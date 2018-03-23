@@ -121,7 +121,7 @@ public class FavouritesDbHelper {
 
 	private void addToMarkers(FavoriteGroup favGroup) {
 		MapMarkersHelper helper = context.getMapMarkersHelper();
-		helper.syncWithMarkers(helper.getOrCreateGroup(favGroup));
+		helper.addOrEnableGroup(helper.getOrCreateGroup(favGroup));
 	}
 
 	private File getInternalFile() {

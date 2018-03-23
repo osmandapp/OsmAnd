@@ -171,7 +171,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 							if (synced) {
 								markersHelper.removeMarkersGroup(markersGr);
 							} else {
-								markersHelper.syncWithMarkers(markersGr);
+								markersHelper.addOrEnableGroup(markersGr);
 							}
 							dismiss();
 							MapActivity.launchMapActivityMoveToTop(getActivity());

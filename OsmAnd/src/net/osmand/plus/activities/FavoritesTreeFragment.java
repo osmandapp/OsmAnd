@@ -418,7 +418,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				FavoriteGroup favGr = helper.getGroup(entry.getKey());
 				MapMarkersGroup markersGr = markersHelper.getOrCreateGroup(favGr);
 				if (entry.getValue().size() == favGr.points.size()) {
-					markersHelper.syncWithMarkers(markersGr);
+					markersHelper.addOrEnableGroup(markersGr);
 				} else {
 					for (FavouritePoint fp : entry.getValue()) {
 						points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
