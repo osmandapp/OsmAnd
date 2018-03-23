@@ -123,7 +123,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		}
 
 		MapMarkersGroup markersGr = mapMarkersHelper.getOrCreateGroup(new File(gpxFile.path));
-		markersGr.setWptCategories(selectedCategories);
+		mapMarkersHelper.updateGroupWptCategories(markersGr, selectedCategories);
 
 		mapMarkersHelper.syncWithMarkers(markersGr);
 

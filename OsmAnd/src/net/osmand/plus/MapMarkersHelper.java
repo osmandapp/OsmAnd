@@ -312,8 +312,6 @@ public class MapMarkersHelper {
 			markersDbHelper.addGroup(group);
 			addHistoryMarkersToGroup(group);
 			addToGroupsList(group);
-		} else if (group.wptCategories != null) {
-			markersDbHelper.updateGroupCategories(group.getId(), group.getWptCategoriesString());
 		}
 		runSynchronization(group);
 	}
@@ -340,6 +338,16 @@ public class MapMarkersHelper {
 		if (id != null) {
 			markersDbHelper.updateGroupDisabled(id, disabled);
 			group.disabled = disabled;
+		}
+	}
+
+	public void updateGroupWptCategories(@NonNull MapMarkersGroup group, Set<String> wptCategories) {
+		String id = group.getId();
+		if (id != null) {
+			group.wptCategories = wptCategories;
+			if (wptCategories != null && isGroupSynced(id)) {
+				markersDbHelper.updateGroupCategories(id, group.getWptCategoriesString());
+			}
 		}
 	}
 
