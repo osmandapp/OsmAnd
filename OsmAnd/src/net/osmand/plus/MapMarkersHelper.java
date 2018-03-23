@@ -282,11 +282,15 @@ public class MapMarkersHelper {
 		return getMapMarkerGroupById(id) != null;
 	}
 
-	public void runSynchronization(@NonNull final MapMarkersGroup group) {
+	public void runSynchronization(@NonNull MapMarkersGroup group) {
+		runSynchronization(group, false);
+	}
+
+	public void runSynchronization(@NonNull final MapMarkersGroup group, final boolean loadGpx) {
 		ctx.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
-				new SyncGroupTask(group).executeOnExecutor(executorService);
+				new SyncGroupTask(group, loadGpx).executeOnExecutor(executorService);
 			}
 		});
 	}
@@ -1038,9 +1042,11 @@ public class MapMarkersHelper {
 	private class SyncGroupTask extends AsyncTask<Void, Void, Void> {
 
 		private MapMarkersGroup group;
+		private boolean loadGpx;
 
-		SyncGroupTask(MapMarkersGroup group) {
+		SyncGroupTask(MapMarkersGroup group, boolean loadGpx) {
 			this.group = group;
+			this.loadGpx = loadGpx;
 		}
 
 		@Override
@@ -1094,10 +1100,15 @@ public class MapMarkersHelper {
 					return;
 				}
 
-				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(group.getId());
+				String gpxPath = group.getId();
+				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(gpxPath);
 				GPXFile gpx = selectedGpxFile == null ? null : selectedGpxFile.getGpxFile();
-				group.visible = gpx != null;
-				if (!group.isVisible() || group.isDisabled()) {
+				if (gpx == null && loadGpx) {
+					gpx = GPXUtilities.loadGPXFile(ctx, new File(gpxPath));
+					gpxHelper.selectGpxFile(gpx, true, false, false);
+				}
+				group.visible = gpx != null || group.visibleUntilRestart;
+				if (gpx == null || group.isDisabled()) {
 					removeGroupActiveMarkers(group, true);
 					return;
 				}
@@ -1144,6 +1155,7 @@ public class MapMarkersHelper {
 		private long creationDate;
 		private boolean disabled;
 		private boolean visible = true;
+		private boolean visibleUntilRestart;
 		private List<MapMarker> markers = new ArrayList<>();
 		// TODO should be removed from this class:
 		private GroupHeader header;
@@ -1185,6 +1197,10 @@ public class MapMarkersHelper {
 
 		public boolean isVisible() {
 			return visible;
+		}
+
+		public void setVisibleUntilRestart(boolean visibleUntilRestart) {
+			this.visibleUntilRestart = visibleUntilRestart;
 		}
 
 		public List<MapMarker> getMarkers() {
