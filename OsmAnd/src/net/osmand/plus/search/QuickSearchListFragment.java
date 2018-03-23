@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
@@ -98,43 +100,44 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 							|| sr.objectType == ObjectType.STREET_INTERSECTION) {
 
 						showResult(sr);
-					} else if ((sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE)
-							&& sr.file != null && sr.object instanceof City) {
-						final City c = (City) sr.object;
-						new AsyncTask<Void, Void, Void>() {
-							@Override
-							protected void onPreExecute() {
-								dialogFragment.showProgressBar();
-							}
+					} else {
+						if ((sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE)
+								&& sr.file != null && sr.object instanceof City) {
+							City c = (City) sr.object;
+							if (c.getStreets().isEmpty()) {
+								ResultMatcher resultMatcher = new ResultMatcher<Street>() {
+									boolean isCancelled = false;
 
-							@Override
-							protected Void doInBackground(Void... voids) {
+									@Override
+									public boolean publish(Street object) {
+										isCancelled = true;
+										return true;
+									}
+
+									@Override
+									public boolean isCancelled() {
+										return isCancelled;
+									}
+								};
 								try {
-									sr.file.preloadStreets(c, null);
+									sr.file.preloadStreets(c, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
+									if (c.getStreets().isEmpty()) {
+										showResult(sr);
+										return;
+									}
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
-								return null;
 							}
-
-							@Override
-							protected void onPostExecute(Void aVoid) {
-								dialogFragment.hideProgressBar();
-								if (c.getStreets().isEmpty()) {
-									showResult(sr);
-									return;
-								} else {
-									dialogFragment.completeQueryWithObject(sr);
-								}
-							}
-						}.execute();
-					} else {
+						}
 						dialogFragment.completeQueryWithObject(sr);
 					}
 				}
 			}
 		}
 	}
+
+
 
 
 	@Override
