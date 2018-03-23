@@ -127,7 +127,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 									dialogFragment.completeQueryWithObject(sr);
 								}
 							}
-						}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+						}.execute();
 					} else {
 						dialogFragment.completeQueryWithObject(sr);
 					}
