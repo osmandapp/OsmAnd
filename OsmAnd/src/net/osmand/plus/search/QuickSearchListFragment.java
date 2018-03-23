@@ -98,7 +98,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 						showResult(sr);
 					} else {
-						if ((sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE) && sr.file != null) {
+						if ((sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE)
+								&& sr.file != null && sr.object instanceof City) {
 							City c = (City) sr.object;
 							if (c.getStreets().isEmpty()) {
 								try {
@@ -108,7 +109,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 										return;
 									}
 								} catch (IOException e) {
-									dialogFragment.completeQueryWithObject(sr);
 									e.printStackTrace();
 								}
 							}
@@ -214,16 +214,11 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					FavouritePoint fav = (FavouritePoint) object;
 					pointDescription = fav.getPointDescription();
 					break;
+				case VILLAGE:
 				case CITY:
 					String cityName = searchResult.localeName;
 					String typeNameCity = QuickSearchListItem.getTypeName(app, searchResult);
 					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameCity, cityName);
-					pointDescription.setIconName("ic_action_building_number");
-					break;
-				case VILLAGE:
-					String villageName = searchResult.localeName;
-					String typeNameVillage = QuickSearchListItem.getTypeName(app, searchResult);
-					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameVillage, villageName);
 					pointDescription.setIconName("ic_action_building_number");
 					break;
 				case STREET:
