@@ -88,7 +88,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				if (item.getType() == QuickSearchListItemType.BUTTON) {
 					((QuickSearchButtonListItem) item).getOnClickListener().onClick(view);
 				} else if (item.getType() == QuickSearchListItemType.SEARCH_RESULT) {
-					final SearchResult sr = item.getSearchResult();
+					SearchResult sr = item.getSearchResult();
 
 					if (sr.objectType == ObjectType.POI
 							|| sr.objectType == ObjectType.LOCATION
