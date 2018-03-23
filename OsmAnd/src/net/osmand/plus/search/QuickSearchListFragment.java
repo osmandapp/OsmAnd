@@ -1,6 +1,5 @@
 package net.osmand.plus.search;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -105,7 +104,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 								&& sr.file != null && sr.object instanceof City) {
 							City c = (City) sr.object;
 							if (c.getStreets().isEmpty()) {
-								ResultMatcher resultMatcher = new ResultMatcher<Street>() {
+								ResultMatcher<Street> resultMatcher = new ResultMatcher<Street>() {
 									boolean isCancelled = false;
 
 									@Override
@@ -136,9 +135,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			}
 		}
 	}
-
-
-
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
