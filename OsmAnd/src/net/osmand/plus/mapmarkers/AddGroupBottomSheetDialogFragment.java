@@ -58,7 +58,7 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 	}
 
 	protected void addAndSyncGroup(MapMarkersGroup group) {
-		getMyApplication().getMapMarkersHelper().syncWithMarkers(group);
+		getMyApplication().getMapMarkersHelper().addOrEnableGroup(group);
 		dismiss();
 	}
 

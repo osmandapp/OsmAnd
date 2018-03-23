@@ -413,7 +413,11 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							}
 						}
 						if (!synced) {
-							mapMarkersHelper.syncWithMarkers(group);
+							if (mapMarkersHelper.isGroupSynced(group.getId())) {
+								mapMarkersHelper.runSynchronization(group);
+							} else {
+								mapMarkersHelper.addOrEnableGroup(group);
+							}
 						}
 
 						if (disabled) {
@@ -424,8 +428,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 											if (group.getType() == MapMarkersGroup.GPX_TYPE && gpxFile[0] != null) {
 												switchGpxVisibility(gpxFile[0], true);
 											}
-											mapMarkersHelper.updateGroupDisabled(group, false);
-											mapMarkersHelper.syncWithMarkers(group);
+											mapMarkersHelper.addOrEnableGroup(group);
 										}
 									});
 							AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);

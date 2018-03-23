@@ -309,11 +309,13 @@ public class MapMarkersHelper {
 		return getMapMarker(favouritePoint) != null;
 	}
 
-	public void syncWithMarkers(@NonNull MapMarkersGroup group) {
+	public void addOrEnableGroup(@NonNull MapMarkersGroup group) {
 		if (!isGroupSynced(group.getId())) {
 			markersDbHelper.addGroup(group);
 			addHistoryMarkersToGroup(group);
 			addToGroupsList(group);
+		} else if (group.isDisabled()) {
+			updateGroupDisabled(group, false);
 		}
 		runSynchronization(group);
 	}

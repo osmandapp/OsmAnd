@@ -587,7 +587,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	private void addMapMarkersSyncGroup() {
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		final MapMarkersGroup markersGr = markersHelper.getOrCreateGroup(getGpxDataItem().getFile());
-		markersHelper.syncWithMarkers(markersGr);
+		markersHelper.addOrEnableGroup(markersGr);
 		GPXFile gpxFile = getTrackActivity().getGpx();
 		if (gpxFile != null) {
 			app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
