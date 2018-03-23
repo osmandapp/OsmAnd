@@ -33,6 +33,7 @@ import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,7 +98,22 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 						showResult(sr);
 					} else {
-						dialogFragment.completeQueryWithObject(item.getSearchResult());
+						if ((sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE) && sr.file != null) {
+							City c = (City) sr.object;
+							if (c.getStreets().isEmpty()) {
+								try {
+									sr.file.preloadStreets(c, null);
+									if (c.getStreets().isEmpty()) {
+										showResult(sr);
+										return;
+									}
+								} catch (IOException e) {
+									dialogFragment.completeQueryWithObject(sr);
+									e.printStackTrace();
+								}
+							}
+						}
+						dialogFragment.completeQueryWithObject(sr);
 					}
 				}
 			}
@@ -202,6 +218,12 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					String cityName = searchResult.localeName;
 					String typeNameCity = QuickSearchListItem.getTypeName(app, searchResult);
 					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameCity, cityName);
+					pointDescription.setIconName("ic_action_building_number");
+					break;
+				case VILLAGE:
+					String villageName = searchResult.localeName;
+					String typeNameVillage = QuickSearchListItem.getTypeName(app, searchResult);
+					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameVillage, villageName);
 					pointDescription.setIconName("ic_action_building_number");
 					break;
 				case STREET:
