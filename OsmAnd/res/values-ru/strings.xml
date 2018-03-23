@@ -2480,7 +2480,7 @@
     <string name="distance_moving">Откорректированное расстояние</string>
     <string name="improve_coverage_install_mapillary_desc">Вы можете взять ваши собственные фотографии или серии фотографий и прикрепить их к этому месту на карте.
 \n
-\nДля этого Вам необходимо установить с Goggle Play маркета приложение Mapillary.</string>
+\nДля этого Вам необходимо установить с Google Play маркета приложение Mapillary.</string>
     <string name="route_altitude">Высота маршрута</string>
     <string name="enter_gpx_name">Имя GPX файла:</string>
     <string name="show_on_map_after_saving">Показать на карте после сохранения</string>
