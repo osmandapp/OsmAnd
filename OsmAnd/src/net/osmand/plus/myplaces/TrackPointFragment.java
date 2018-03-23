@@ -611,9 +611,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 				super.onDismissed(transientBottomBar, event);
 			}
 		});
-		View snackBarView = snackbar.getView();
-		TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
-		tv.setTextColor(ContextCompat.getColor(getContext(), R.color.color_dialog_buttons_dark));
+		AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
 		snackbar.show();
 	}
 

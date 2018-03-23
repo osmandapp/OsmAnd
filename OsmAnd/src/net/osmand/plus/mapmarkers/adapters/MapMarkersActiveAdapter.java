@@ -9,8 +9,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
@@ -184,9 +184,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 								notifyDataSetChanged();
 							}
 						});
-				View snackBarView = snackbar.getView();
-				TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
-				tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+				AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
 				snackbar.show();
 			}
 		});
@@ -252,9 +250,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 						notifyDataSetChanged();
 					}
 				});
-		View snackBarView = snackbar.getView();
-		TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
-		tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+		AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
 		snackbar.show();
 	}
 

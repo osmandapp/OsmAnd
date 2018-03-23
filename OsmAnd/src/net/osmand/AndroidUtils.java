@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -173,6 +174,12 @@ public class AndroidUtils {
 		res.addState(new int[]{android.R.attr.state_pressed}, pressed);
 		res.addState(new int[]{}, normal);
 		return res;
+	}
+
+	public static void setSnackbarTextColor(Snackbar snackbar, @ColorRes int colorId) {
+		View view = snackbar.getView();
+		TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_action);
+		tv.setTextColor(ContextCompat.getColor(view.getContext(), colorId));
 	}
 
 	@SuppressLint("NewApi")
