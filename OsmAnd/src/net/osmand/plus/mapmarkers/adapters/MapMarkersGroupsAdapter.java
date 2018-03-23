@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
@@ -328,9 +329,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 										updateDisplayedData();
 									}
 								});
-						View snackBarView = snackbar.getView();
-						TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
-						tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+						AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
 						snackbar.show();
 					}
 				}
@@ -417,9 +416,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 											app.getMapMarkersHelper().syncWithMarkers(group);
 										}
 									});
-							View snackBarView = snackbar.getView();
-							TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
-							tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+							AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
 							snackbar.show();
 						}
 					}

@@ -20,8 +20,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
@@ -206,9 +206,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 									updateAdapter();
 								}
 							});
-					View snackBarView = snackbar.getView();
-					TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
-					tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+					AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
 					snackbar.show();
 				}
 			}

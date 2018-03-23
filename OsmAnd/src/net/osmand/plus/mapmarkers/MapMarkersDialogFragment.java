@@ -19,9 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.LockableViewPager;
@@ -444,9 +444,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 									}
 								}
 							});
-					View snackBarView = snackbar.getView();
-					TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
-					tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+					AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
 					snackbar.show();
 				}
 			}
@@ -491,9 +489,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 								startActivity(intent);
 							}
 						});
-				View snackBarView = snackbar.getView();
-				TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
-				tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+				AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
 				snackbar.show();
 			}
 		};
