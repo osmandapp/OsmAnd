@@ -516,7 +516,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="loading_streets">Chargement des rues…</string>
     <string name="loading_cities">Chargement des villes…</string>
 
-    <string name="poi">Point d\'intérêt</string>
+    <string name="poi">PI</string>
     <string name="error_occurred_saving_gpx">Erreur lors de l\'enregistrement du fichier GPX</string>
     <string name="error_calculating_route">Erreur de calcul d\'itinéraire</string>
     <string name="error_calculating_route_occured">Erreur lors du calcul de l\'itinéraire</string>
@@ -1551,7 +1551,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="download_additional_maps">Télécharger les cartes manquantes %1$s (%2$d Mo) ?</string>
 
     <string name="waypoints">Itinéraire</string>
-    <string name="targets">Itinéraire</string>
+    <string name="targets">Destinations</string>
     <string name="way_alarms">Alertes de circulation</string>
     <string name="speak_favorites">Favoris à proximité</string>
     <string name="speak_poi">Points d\'intérêt à proximité</string>
