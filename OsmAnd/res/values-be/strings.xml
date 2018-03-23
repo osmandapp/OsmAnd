@@ -2629,7 +2629,7 @@
     <string name="routing_attr_driving_style_safety_name">Аддаваць перавагу завулкам</string>
     <string name="do_not_send_anonymous_app_usage">На адсылаць ананімнай статыстыкі выкарыстання</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd збірае інфармацыю аб тым, які часткі праграмы выкарыстоўваюцца вамі. Ваша месцазнаходжанне ніколі не адпраўляецца, як і ўсё, што вы ўводзіце, якія вобласці праглядаеце, што шукаеце ці спампоўваеце.</string>
-    <string name="do_not_show_startup_messages">Не паказваць паведамленні пры старце</string>
+    <string name="do_not_show_startup_messages">Не паказваць паведамленьні пры старце</string>
     <string name="do_not_show_startup_messages_desc">Заглушае адлюстраваньне паведамленьняў пра зніжкі і спецыяльную лакальную падзею.</string>
     <string name="parking_options">Опцыі паркоўкі</string>
     <string name="full_version_thanks">Дякуй вам за набыццё поўнай версіі OsmAnd!</string>
