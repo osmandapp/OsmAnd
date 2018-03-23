@@ -2843,4 +2843,5 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="clear_all_intermediates">Smazat všechny mezicíle</string>
     <string name="select_waypoints_category_description">Můžete přidat všechny mezicíle na trase, nebo vybrat jednotlivé kategorie.</string>
     <string name="shared_string_total">Celkem</string>
+    <string name="nothing_found_in_radius">Nebylo nalezeno nic v okruhu:</string>
     </resources>
