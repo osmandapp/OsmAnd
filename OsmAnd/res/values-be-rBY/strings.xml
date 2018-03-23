@@ -2398,7 +2398,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="fonts_header">Šryfty dła mapy</string>
     <string name="right_side_navigation">Pravabakavy ruch</string>
     <string name="driving_region_automatic">Aŭtamatyčna</string>
-    <string name="do_not_show_startup_messages">Nie pakazvać paviedamlieńni pry starcie</string>
+    <string name="do_not_show_startup_messages">Nie pakazvać paviedamleńni pry starcie</string>
     <string name="parking_options">Opcyi parkoŭki</string>
     <string name="full_version_thanks">Dziakuj Vam za nabyćcio poŭnaj versii OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Ŭzhorysty</string>
@@ -2551,7 +2551,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="analyze_on_map">Analizuj na mapie</string>
     <string name="do_not_send_anonymous_app_usage">Na adsylać ananimnaj statystyki vykarystannia</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd zbiraje infarmacyju ab tym, jaki častki prahramy vykarystoŭvajucca vami. Vaša miescaznachodžannie nikoli nie adpraŭliajecca, jak i ŭsio, što vy ŭvodzicie, jakija voblasci prahliadajecie, što šukajecie ci spampoŭvajecie.</string>
-    <string name="do_not_show_startup_messages_desc">Zahlušaje adliustravańnie paviedamlieńniaŭ pra znižki i spiecyjaĺnuju lakaĺnuju padzieju.</string>
+    <string name="do_not_show_startup_messages_desc">Zahlušaje adlustravańnie paviedamleńniaŭ pra znižki i spiecyjalnuju łakalnuju padzieju.</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Pahorysty</string>
     <string name="route_points_category_name">Pavaroty na maršrucie</string>
     <string name="track_points_category_name">Značnyja kropki maršruta</string>
@@ -2596,7 +2596,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="gpx_no_tracks_title">U vas jašče niama śliadoŭ</string>
     <string name="gpx_no_tracks_title_folder">Vy taksama možacie dadać śliady ŭ katalioh</string>
     <string name="trip_rec_notification_settings_desc">Pakazvać apaviaščennie, jakoje dazvolić pačać zapis padarožža.</string>
-    <string name="shared_string_notifications">Paviedamlieńni</string>
+    <string name="shared_string_notifications">Paviedamleńni</string>
     <string name="shared_string_paused">Prypynieny</string>
     <string name="release_2_5">• Ikonki na mapie, jakija moža naciskać 
 \n 
