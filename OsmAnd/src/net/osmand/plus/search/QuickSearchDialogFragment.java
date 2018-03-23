@@ -988,12 +988,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
 	}
 
-	private void showProgressBar() {
+	 void showProgressBar() {
 		updateClearButtonVisibility(false);
 		progressBar.setVisibility(View.VISIBLE);
 	}
 
-	private void hideProgressBar() {
+	 void hideProgressBar() {
 		updateClearButtonVisibility(true);
 		progressBar.setVisibility(View.GONE);
 	}

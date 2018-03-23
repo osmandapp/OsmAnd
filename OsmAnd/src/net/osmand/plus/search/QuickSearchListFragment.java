@@ -1,5 +1,6 @@
 package net.osmand.plus.search;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -86,7 +87,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				if (item.getType() == QuickSearchListItemType.BUTTON) {
 					((QuickSearchButtonListItem) item).getOnClickListener().onClick(view);
 				} else if (item.getType() == QuickSearchListItemType.SEARCH_RESULT) {
-					SearchResult sr = item.getSearchResult();
+					final SearchResult sr = item.getSearchResult();
 
 					if (sr.objectType == ObjectType.POI
 							|| sr.objectType == ObjectType.LOCATION
@@ -97,28 +98,44 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 							|| sr.objectType == ObjectType.STREET_INTERSECTION) {
 
 						showResult(sr);
-					} else {
-						if ((sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE)
-								&& sr.file != null && sr.object instanceof City) {
-							City c = (City) sr.object;
-							if (c.getStreets().isEmpty()) {
+					} else if ((sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE)
+							&& sr.file != null && sr.object instanceof City) {
+						final City c = (City) sr.object;
+						new AsyncTask<Void, Void, Void>() {
+							@Override
+							protected void onPreExecute() {
+								dialogFragment.showProgressBar();
+							}
+
+							@Override
+							protected Void doInBackground(Void... voids) {
 								try {
 									sr.file.preloadStreets(c, null);
-									if (c.getStreets().isEmpty()) {
-										showResult(sr);
-										return;
-									}
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
+								return null;
 							}
-						}
+
+							@Override
+							protected void onPostExecute(Void aVoid) {
+								dialogFragment.hideProgressBar();
+								if (c.getStreets().isEmpty()) {
+									showResult(sr);
+									return;
+								} else {
+									dialogFragment.completeQueryWithObject(sr);
+								}
+							}
+						}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					} else {
 						dialogFragment.completeQueryWithObject(sr);
 					}
 				}
 			}
 		}
 	}
+
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
