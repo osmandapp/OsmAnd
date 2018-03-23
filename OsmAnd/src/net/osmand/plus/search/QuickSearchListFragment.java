@@ -33,6 +33,7 @@ import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,7 +98,22 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 						showResult(sr);
 					} else {
-						dialogFragment.completeQueryWithObject(item.getSearchResult());
+						if ((sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE)
+								&& sr.file != null && sr.object instanceof City) {
+							City c = (City) sr.object;
+							if (c.getStreets().isEmpty()) {
+								try {
+									sr.file.preloadStreets(c, null);
+									if (c.getStreets().isEmpty()) {
+										showResult(sr);
+										return;
+									}
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							}
+						}
+						dialogFragment.completeQueryWithObject(sr);
 					}
 				}
 			}
@@ -198,6 +214,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					FavouritePoint fav = (FavouritePoint) object;
 					pointDescription = fav.getPointDescription();
 					break;
+				case VILLAGE:
 				case CITY:
 					String cityName = searchResult.localeName;
 					String typeNameCity = QuickSearchListItem.getTypeName(app, searchResult);
