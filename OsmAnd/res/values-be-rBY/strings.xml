@@ -3018,4 +3018,6 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="clear_all_intermediates">Scierci ŭsie pramiežkavyja punkty</string>
     <string name="group_deleted">Hrupa vydalienaja</string>
     <string name="rendering_attr_whiteWaterSports_name">Splaŭny sport</string>
+    <string name="select_waypoints_category_description">Vy možacie dadać usie punkty šlachu ci abrać asobnyja katehoryi.</string>
+    <string name="shared_string_total">Usiaho</string>
     </resources>
