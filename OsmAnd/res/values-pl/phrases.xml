@@ -3752,4 +3752,16 @@
 	<string name="poi_circumference">Obwód</string>
 	<string name="poi_diameter_crown">Średnica korony</string>
 
-	</resources>
+	<string name="synonyms_poi_fuel">Stacja paliw;CPN;Tanksztela</string>
+
+	<string name="synonyms_poi_nightclub">Disco;Dyskoteka;Nightclub</string>
+	<string name="poi_flooring">Sklep z podłogami</string>
+	<string name="poi_pottery">Garncarz</string>
+
+	<string name="poi_whitewater_rapid_name">Nazwa prądu rzecznego</string>
+
+	<string name="poi_outpost">Punkt odbioru towaru</string>
+
+	<string name="poi_water_utility">Biuro firmy wodociągowej</string>
+
+</resources>
