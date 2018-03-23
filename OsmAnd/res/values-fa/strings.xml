@@ -665,26 +665,26 @@
     <string name="map_widget_vector_attributes">خصوصیات رندر نقشه</string>
 	
 	
-	<string name="av_photo_play_sound_descr">تعیین کنید در زمان عکسبرداری صدای شاتر پخش شود یا خیر.</string>
+	<string name="av_photo_play_sound_descr">هنگام عکس‌برداری صدای شاتر پخش شود یا خیر.</string>
 <string name="av_camera_focus">نوع فوکوس دوربین</string>
 	<string name="av_camera_focus_descr">نوع فوکوس داخلی دوربین را انتخاب کنید.</string>
-	<string name="av_camera_focus_auto">فوکوس خودکار</string>
-	<string name="av_camera_focus_hiperfocal">فوکوس فراکانونی</string>
+	<string name="av_camera_focus_auto">خودکار</string>
+	<string name="av_camera_focus_hiperfocal">فراکانونی</string>
 	<string name="av_camera_focus_edof">عمق میدان گسترده (EDOF)</string>
-	<string name="av_camera_focus_infinity">فوکوس بر روی بینهایت تنظیم شده است</string>
-	<string name="av_camera_focus_macro">فوکوس ماکرو (از نزدیک)</string>
+	<string name="av_camera_focus_infinity">روی بینهایت تنظیم شده</string>
+	<string name="av_camera_focus_macro">حالت ماکرو (از نزدیک)</string>
 	<string name="av_camera_focus_continuous">دوربین، پیوسته وضوح را تنظیم می‌کند</string>
 	<string name="choose_intersected_street">تقاطع را انتخاب کنید</string>
 	<string name="osm_settings">ویرایش نقشهٔ OSM</string>
 	<string name="save_current_track_descr">مسیر جاری را همین الآن روی کارت حافظه ذخیره کن.</string>
 	<string name="save_current_track">ذخیرهٔ مسیر GPX جاری</string>
 	<string name="save_track_interval">بازهٔ زمانی ثبت داده‌ها در هنگام راهبری</string>
-	<string name="save_track_interval_descr">مشخص کنید در هنگام راهبری، بازهٔ زمانی ورود داده‌ها برای ضبط مسیر چقدر باشد.</string>
+	<string name="save_track_interval_descr">مشخص کنید برای ضبط مسیر در هنگام راهبری، داده‌ها با چه فاصلهٔ زمانی از هم دریافت شوند.</string>
 	<string name="save_track_to_gpx_descrp">هنگام راهبری، مسیر GPX به‌صورت خودکار ضبط می‌شود و در پوشهٔ مسیرها (tracks) ذخیره می‌گردد.</string>
 	
 	<string name="osm_settings_descr">تنظیمات لازم برای ارتباط با (OpenStreetMap.org (OSM را مشخص کنید.</string>
 	<string name="data_settings_descr">زبان را مشخص و داده‌ها را دانلود/بارگیری مجدد کنید.</string>
-	<string name="av_photo_play_sound">پخش صدا هنگام عکسبرداری</string>
+	<string name="av_photo_play_sound">پخش صدا هنگام عکس‌برداری</string>
 	<string name="intermediate_items_sort_by_distance">مرتب‌کردن از اول به آخر</string>
     <string name="local_osm_changes_backup_successful">فایل تغییر OSM با موفقیت ایجاد شد %1$s</string>
     <string name="safe_mode">حالت ایمن</string>
@@ -1609,7 +1609,7 @@
     <string name="rendering_attr_showCycleRoutes_name">نمایش مسیرهای دوچرخه</string>
     <string name="save_global_track_interval_descr">بازهٔ زمانی برای ضبط مسیر را انتخاب کنید (که از طریق ابزار ضبط جی‌پی‌ایکس روی نقشه فعال می‌شود).</string>
 	<string name="save_global_track_interval">بازهٔ زمانی ورود داده‌ها (سراسری)</string>
-	<string name="save_track_to_gpx_globally_descr">می‌توانید ثبت موقعیت در فایل GPX را با استفاده از ابزارک ضبط GPX روی صفحهٔ نقشه، خاموش یا روشن کنید.</string>
+	<string name="save_track_to_gpx_globally_descr">می‌توانید با استفاده از ابزارک ضبط GPX روی صفحهٔ نقشه، ثبت موقعیت در فایل GPX را خاموش یا روشن کنید.</string>
 	<string name="save_track_interval_globally">بازهٔ زمانی ثبت</string>
 	<string name="record_plugin_description">با این افزونه همهٔ مسیرهایتان را ضبط و در قالب فایل GPX ذخیره کنید؛ چه آن مسیرهایی که خودتان می‌روید و چه مسیرهایی که با مسیریابی خواهید پیمود. برای این منظور ابزارک ضبط جی‌پی‌ایکس را لمس کنید؛ ابزارک روی صفحهٔ نقشه قرار می‌گیرد.
 \n 
@@ -1713,7 +1713,7 @@
 	<string name="map_widget_left">چپ صفحه</string>
     <string name="shared_string_show">نشان بده</string>
 	<string name="configure_map">پیکربندی نقشه</string>
-    <string name="search_radius_proximity">کمتر از</string>
+    <string name="search_radius_proximity">تا</string>
     
     <string name="anonymous_user">کاربر ناشناس</string>
     <string name="speed_limit_exceed">آخرین حدّ سرعت</string>
@@ -2022,7 +2022,7 @@
     <string name="access_smart_autoannounce">اعلام هوشمند خودکار</string>
     <string name="access_smart_autoannounce_descr">فقط اگر جهتم از سمت نقطهٔ مقصد منحرف شد، اعلام کن.</string>
     <string name="access_autoannounce_period">بازهٔ زمانی اعلام خودکار</string>
-    <string name="access_autoannounce_period_descr">کمترین بازهٔ زمانی اعلام پیام‌ها.</string>
+    <string name="access_autoannounce_period_descr">کمترین فاصلهٔ زمانی بین اعلام پیام‌ها.</string>
     <string name="access_default_color">رنگ پیش‌فرض</string>
     <string name="access_category_choice">انتخاب دسته</string>
     <string name="access_hint_enter_name">نام</string>
