@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
@@ -393,27 +392,40 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
+						final MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 						final GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
-						if (disabled && group.getType() == MapMarkersGroup.GPX_TYPE) {
-							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(group.getId());
-							if (selectedGpxFile != null) {
-								gpxFile[0] = selectedGpxFile.getGpxFile();
-								switchGpxVisibility(gpxFile[0], false);
+						boolean synced = false;
+
+						mapMarkersHelper.updateGroupDisabled(group, disabled);
+						if (group.getType() == MapMarkersGroup.GPX_TYPE) {
+							group.setVisibleUntilRestart(disabled);
+							String gpxPath = group.getId();
+							if (disabled) {
+								SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
+								if (selectedGpxFile != null) {
+									gpxFile[0] = selectedGpxFile.getGpxFile();
+									switchGpxVisibility(gpxFile[0], false);
+								}
+							} else if (mapMarkersHelper.isGroupSynced(group.getId())) {
+								mapMarkersHelper.runSynchronization(group, true);
+								synced = true;
 							}
 						}
-						app.getMapMarkersHelper().updateGroupDisabled(group, disabled);
-						app.getMapMarkersHelper().syncWithMarkers(group);
+						if (!synced) {
+							mapMarkersHelper.syncWithMarkers(group);
+						}
+
 						if (disabled) {
-							snackbar = Snackbar.make(holder.itemView, app.getString(R.string.group_deleted), Snackbar.LENGTH_LONG)
+							snackbar = Snackbar.make(holder.itemView, app.getString(R.string.group_will_be_removed_after_restart), Snackbar.LENGTH_LONG)
 									.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 										@Override
 										public void onClick(View view) {
-											if (gpxFile[0] != null) {
+											if (group.getType() == MapMarkersGroup.GPX_TYPE && gpxFile[0] != null) {
 												switchGpxVisibility(gpxFile[0], true);
 											}
-											app.getMapMarkersHelper().updateGroupDisabled(group, false);
-											app.getMapMarkersHelper().syncWithMarkers(group);
+											mapMarkersHelper.updateGroupDisabled(group, false);
+											mapMarkersHelper.syncWithMarkers(group);
 										}
 									});
 							AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
