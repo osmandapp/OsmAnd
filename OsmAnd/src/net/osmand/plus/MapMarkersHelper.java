@@ -157,11 +157,9 @@ public class MapMarkersHelper {
 		for (MapMarkersGroup group : mapMarkersGroups) {
 			updateGroup(group);
 		}
-
-		syncAllGroupsAsync();
 	}
 
-	private void syncAllGroupsAsync() {
+	public void syncAllGroupsAsync() {
 		for (MapMarkersGroup gr : mapMarkersGroups) {
 			if (gr.getId() != null && gr.getName() != null) {
 				runSynchronization(gr);
