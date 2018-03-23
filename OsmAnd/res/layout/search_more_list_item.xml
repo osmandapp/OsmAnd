@@ -42,9 +42,9 @@
                     android:id="@+id/empty_search_title"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/nothing_found_in_radius"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="@dimen/default_list_text_size"/>
+                    android:textSize="@dimen/default_list_text_size"
+                    tools:text="@string/nothing_found_in_radius" />
 
                 <net.osmand.plus.widgets.TextViewEx
                     android:id="@+id/empty_search_description"

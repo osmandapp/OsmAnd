@@ -236,8 +236,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			boolean moreDividerVisible = emptySearchVisible && searchMoreItem.isSearchMoreAvailable();
 			view.findViewById(R.id.empty_search).setVisibility(emptySearchVisible ? View.VISIBLE : View.GONE);
 			view.findViewById(R.id.more_divider).setVisibility(moreDividerVisible ? View.VISIBLE : View.GONE);
-			QuickSearchHelper searchHelper = app.getSearchUICore();
-			SearchUICore searchUICore = searchHelper.getCore();
+			SearchUICore searchUICore = app.getSearchUICore().getCore();
 			String textTitle = app.getString(R.string.nothing_found_in_radius) + " "
 					+ OsmAndFormatter.getFormattedDistance(searchUICore.getMinimalSearchRadius(searchUICore.getPhrase()), app);
 			((TextView) view.findViewById(R.id.empty_search_title)).setText(textTitle);
