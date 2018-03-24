@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="email">電子郵件</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="email">電子郵件</string>
 	<string name="poi_dialog_opening_hours">打開</string>
 	<string name="poi_dialog_comment">評論</string>
 	<string name="poi_dialog_comment_default">改變POI</string>
@@ -2758,4 +2759,5 @@
     <string name="map_import_error">地图导入错误</string>
     <string name="map_imported_successfully">地图成功导入</string>
     <string name="shared_string_current">当前</string>
+    <string name="clear_all_intermediates">清空所有中间点</string>
     </resources>
