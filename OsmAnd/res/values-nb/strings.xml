@@ -2486,8 +2486,8 @@
     <string name="av_camera_focus_infinity">Uendelig fokus</string>
     <string name="av_camera_focus_macro">Makrofokus (nærbilde)</string>
     <string name="av_camera_focus_continuous">Kameraet prøver kontinuerlig å fokusere</string>
-    <string name="av_photo_play_sound">Spill lyd ved billedtakning</string>
-    <string name="av_photo_play_sound_descr">Velg om det skal spilles en lyd når det tas bilder.</string>
+    <string name="av_photo_play_sound">Spill av lyd ved bildetagning</string>
+    <string name="av_photo_play_sound_descr">Velg om det skal spilles av en lyd når det tas bilder.</string>
     <string name="use_fast_recalculation">Smart omberegning av rute</string>
     <string name="rate_this_app">Vurder dette programmet</string>
     <string name="rate_this_app_long">Gi OsmAnd en poengsum på Google Play</string>
