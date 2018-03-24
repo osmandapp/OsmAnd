@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="recording_context_menu_show">اظهر</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="recording_context_menu_show">اظهر</string>
     <string name="av_def_action_picture">التقط صورة</string>
     
     <string name="av_def_action_video">تسجيل الفيديو</string>
@@ -2869,7 +2870,7 @@
     <string name="parked_at">تم الرّكنُ على</string>
     <string name="add_favourites_group_to_markers_descr">إختر الفئة التي تود إضافة العلامات إليها.</string>
     <string name="favourites_group">الفئات المفضلة</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
+    <string name="empty_state_markers_history"></string>
     <string name="shared_string_two">الثاني</string>
     <string name="shared_string_one">واحد</string>
     <string name="coordinate_input_accuracy">%1$d أرقام</string>
@@ -2877,4 +2878,43 @@
     <string name="osm_recipients_label">مساهمي OSM المستفيدون</string>
     <string name="winter_and_ski_renderer">الشتاء و التزحلق</string>
     <string name="nautical_renderer">الملاحة البحرية</string>
+<string name="nothing_found_in_radius">لم نتمكن مِن العثور على أي شيء في هذا القُطر :</string>
+    <string name="select_waypoints_category_description">بإمكانك إضافة كل نقاط المسار أو إختيار فئات أخرى.</string>
+    <string name="shared_string_total">الإجمالي</string>
+    <string name="clear_all_intermediates">إزالة كافة النقاط الوسيطة</string>
+    <string name="group_deleted">تم حذف المجموعة</string>
+    <string name="rendering_attr_whiteWaterSports_name">رياضات في الماء العذب</string>
+    <string name="distance_farthest">المسافة : الأبعد أولا</string>
+    <string name="distance_nearest">المسافة : الأقرب أولا</string>
+    <string name="enter_lat_and_lon">إدخال خط الطول و دائرة العرض</string>
+	<string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	<string name="east_abbreviation">شر</string>
+	<string name="west_abbreviation">غ</string>
+	<string name="south_abbreviation">ج</string>
+	<string name="north_abbreviation">ش</string>
+	<string name="optional_point_name">الإسم الإختياري للنقطة</string>
+    <string name="transport_nearby_routes_within">المسارات القريبة مِن</string>
+    <string name="enter_the_file_name">أدخل إسم الملف.</string>
+    <string name="map_import_error">خطأ أثناء استرجاع الخريطة</string>
+    <string name="map_imported_successfully">تمت عملية استعادة الخريطة بنجاح</string>
+    <string name="make_as_start_point">تحديد كنقطة البداية</string>
+    <string name="show_closed_notes">إظهار الملاحظات المُغلَقة</string>
+    <string name="switch_osm_notes_visibility_desc">إظهار/إخفاء ملاحظات OSM على الخريطة.</string>
+    <string name="gpx_file">ملف GPX</string>
+    <string name="osc_file">ملف OSC</string>
+    <string name="choose_file_type">قم باختيار نسق الملف</string>
+    <string name="all_data">كافة البيانات</string>
+    <string name="osm_notes">ملاحظات خريطة الطريق المفتوحة</string>
+    <string name="will_open_tomorrow_at">سيفتح أبوابه غدًا على</string>
+    <string name="what_is_here">ما يوجد هنا :</string>
+    <string name="lang_lo">اللاوسية</string>
+    <string name="touring_view_renderer">نظرة السياحة الكبيرة (بالتبايُن و التفاصيل)</string>
+    <string name="copy_location_name">نسخ إسم النقطة</string>
+    <string name="toast_empty_name_error">ليس للمكان أي إسم</string>
+    <string name="tunnel_warning">على مقربة مِن نفق</string>
+    <string name="show_tunnels">الأنفاق</string>
 </resources>
