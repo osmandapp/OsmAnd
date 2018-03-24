@@ -107,7 +107,7 @@
     <string name="show_guide_line_descr">Display guide lines from your position to the active marker locations.</string>
     <string name="show_arrows_descr">Display one or two arrows indicating the direction to the active markers.</string>
     <string name="distance_indication_descr">Choose how to display the distance to active markers.</string>
-    <string name="active_markers_descr">Choose the amount of direction indicators to display.</string>
+    <string name="active_markers_descr">Choose the number of direction indicators to display.</string>
     <string name="digits_quantity">Number of decimal digits</string>
     <string name="shared_string_right">Right</string>
     <string name="shared_string_left">Left</string>
@@ -120,7 +120,7 @@
     <string name="tap_on_map_to_hide_interface_descr">A tap on the map toggles the control buttons and widgets.</string>
     <string name="tap_on_map_to_hide_interface">Full screen mode</string>
     <string name="mark_passed">Mark passed</string>
-    <string name="import_gpx_file_description">can be imported as favorite points, or as track file.</string>
+    <string name="import_gpx_file_description">can be imported as Favorites, or as track file.</string>
     <string name="import_as_gpx">Import as GPX file</string>
     <string name="import_as_favorites">Import as Favorites</string>
     <string name="import_file">Import file</string>
@@ -165,8 +165,8 @@
     <string name="show_passed">Show passed</string>
     <string name="hide_passed">Hide passed</string>
     <string name="remove_from_map_markers">Remove from map markers\'</string>
-    <string name="descendingly">▾</string>
-    <string name="ascendingly">▴</string>
+    <string name="descendingly">descending</string>
+    <string name="ascendingly">ascending</string>
     <string name="date_added">Date added</string>
     <string name="order_by">Order by:</string>
     <string name="marker_show_distance_descr">Select how to indicate distance and direction to map markers on the map screen:</string>
@@ -204,14 +204,14 @@
     <string name="measurement_tool_save_as_new_track_descr">You can save the points either as route points or as a line.</string>
     <string name="choose_navigation_type">Select navigation profile</string>
     <string name="none_point_error">Please add at least one point.</string>
-    <string name="enter_gpx_name">GPX filename:</string>
+    <string name="enter_gpx_name">GPX file name:</string>
     <string name="show_on_map_after_saving">Show on map after saving</string>
     <string name="measurement_tool_action_bar">Browse the map and add points</string>
     <string name="measurement_tool">Measure distance</string>
-    <string name="quick_action_resume_pause_navigation">⏯ navigation</string>
+    <string name="quick_action_resume_pause_navigation">Pause/resume navigation</string>
     <string name="quick_action_resume_pause_navigation_descr">Tap this button to pause or resume the navigation.</string>
     <string name="quick_action_show_navigation_finish_dialog">Show Navigation finished dialog</string>
-    <string name="quick_action_start_stop_navigation">⏺/⏹ navigation</string>
+    <string name="quick_action_start_stop_navigation">Start/stop navigation</string>
     <string name="quick_action_start_stop_navigation_descr">Tap this button to start or end the navigation.</string>
     <string name="store_tracks_in_monthly_directories">Store recorded tracks in monthly folders</string>
     <string name="store_tracks_in_monthly_directories_descrp">Store recorded tracks in sub-folders per recording month (like 2018-01).</string>
@@ -289,9 +289,9 @@
     <string name="quick_action_add_destination">Add destination</string>
     <string name="quick_action_replace_destination">Replace destination</string>
     <string name="quick_action_add_first_intermediate">Add first intermediate</string>
-    <string name="quick_action_add_destination_desc">Tap the action button to make your previous destination into an intermediary waypoint to a new destination in the centre of the screen.</string>
-    <string name="quick_action_replace_destination_desc">Center the view away from the destination and onto yourself by tapping the action button.</string>
-    <string name="quick_action_add_first_intermediate_desc">Add an intermediate waypoint before your destination in the middle of the screen by tapping the action button.</string>
+    <string name="quick_action_add_destination_desc">Tap the action button to add a destination at the screen center location. The previously set destination becomes the last intermediate destination.</string>
+    <string name="quick_action_replace_destination_desc">Tap the action button to replace the destination with the screen center location.</string>
+    <string name="quick_action_add_first_intermediate_desc">Tap the action button to add a first intermediate point at the screen center location.</string>
     <string name="no_overlay">No overlay</string>
     <string name="no_underlay">No underlay</string>
     <string name="subscribe_email_error">Error</string>
@@ -343,9 +343,9 @@
     <string name="shared_string_tracks">Tracks</string>
     <string name="routing_attr_driving_style_name">Driving style</string>
     <string name="route_altitude">Route elevation</string>
-    <string name="altitude_descent">◺</string>
-    <string name="altitude_ascent">◿</string>
-    <string name="altitude_range">◿◺◺◿</string>
+    <string name="altitude_descent">Descent</string>
+    <string name="altitude_ascent">Ascent</string>
+    <string name="altitude_range">Altitude range</string>
     <string name="average_altitude">Average altitude</string>
     <string name="shared_string_time">Time</string>
     <string name="total_distance">Total distance</string>
@@ -376,7 +376,7 @@
     <string name="release_2_8">
 	\u2022 Completely reworked map markers with guide lines and route planning\n\n
 	\u2022 Measure distance tool offering snap to road feature and saving points as track\n\n
-	\u2022 OsmAnd Live: Bugfixes, fresh data on the server every 30 minutes, updates implemented into the navigation\n\n
+	\u2022 OsmAnd Live: Bug fixes, fresh data on the server every 30 minutes, updates implemented into the navigation\n\n
 	</string>
     <string name="release_2_9">
 	\u2022 Updated the context menu: Show when the POI opens / closes\n\n
@@ -432,7 +432,7 @@
 	\u2022 New Topo Map style for cyclists and hikers\n\n
 	\u2022 Enhanced trip recording\n\n
 	\u2022 Improved navigation notifications (Android Wear)\n\n
-	\u2022 Many other improvements and bugfixes\n\n
+	\u2022 Many other improvements and bug fixes\n\n
 	and more…
     </string>
     <string name="rendering_attr_contourColorScheme_description">Contour lines color scheme</string>
@@ -443,8 +443,8 @@
     <string name="save_track_precision">Logging minimum accuracy</string>
     <string name="save_track_precision_descr">Filter: No logging unless this accuracy is reached.</string>
     <string name="christmas_poi">Christmas POI</string>
-    <string name="christmas_desc">Anticipating Yuletide and New Year holidays, you can choose to display the POI associated with Yule: Yule-trees, markets, etc.</string>
-    <string name="christmas_desc_q">Show Yuletide POI?</string>
+    <string name="christmas_desc">Anticipating Christmas and New Year holidays, you can choose to display the POI associated with Christmas: Christmas trees, markets, etc.</string>
+    <string name="christmas_desc_q">Show Christmas POI?</string>
     <string name="rendering_value_light_brown_name">Light brown</string>
     <string name="rendering_value_dark_brown_name">Dark brown</string>
     <string name="rendering_attr_contourColorScheme_name">Contour lines color scheme</string>
@@ -510,7 +510,7 @@
 	\u2022 Improved route guidance, voice prompting, and turn lane indication\n\n
 	\u2022 Improved transport layer with route rendering\n\n
 	\u2022 Added more locales and now support regional locales\n\n
-	\u2022 Many other improvements and bugfixes\n\n
+	\u2022 Many other improvements and bug fixes\n\n
 	and more…
     </string>
     <string name="dist_away_from_my_location">Search %1$s away</string>
@@ -532,7 +532,7 @@
     <string name="change_markers_position">Change marker position</string>
     <string name="move_marker_bottom_sheet_title">Move the map to change marker position</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
-    <string name="follow_us">Follow</string>
+    <string name="follow_us">Follow us</string>
     <string name="access_direction_audio_feedback">Audio directions</string>
     <string name="access_direction_audio_feedback_descr">Indicate target point direction by sound.</string>
     <string name="access_direction_haptic_feedback">Haptic directions</string>
@@ -543,9 +543,9 @@
     <string name="map_widget_magnetic_bearing">Magnetic bearing</string>
     <string name="map_widget_bearing">Relative bearing</string>
     <string name="access_disable_offroute_recalc">No route recalculation after leaving it</string>
-    <string name="access_disable_offroute_recalc_descr">Keeps the same route when you go offroad.</string>
+    <string name="access_disable_offroute_recalc_descr">No automatic route recalculation after going off route.</string>
     <string name="access_disable_wrong_direction_recalc">No route recalculation for opposite direction</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Keeps the same route when you move in the fully wrong direction.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Prevents automatic route recalculation while just moving in the opposite direction.</string>
     <string name="access_smart_autoannounce">Smart autoannounce</string>
     <string name="access_smart_autoannounce_descr">Notify only when direction to the target point changes.</string>
     <string name="access_autoannounce_period">Autoannounce period</string>
@@ -572,7 +572,7 @@
     <string name="rendering_value_bold_name">Bold</string>
     <string name="no_map_markers_found">Please add map markers via map</string>
     <string name="no_waypoints_found">No waypoints found</string>
-    <string name="anonymous_user_hint">An anonymous user cannot:\n- Create groups;\n- Sync groups and devices with the server;\n- manage groups and devices in a personal dashboard on the website.</string>
+    <string name="anonymous_user_hint">An anonymous user cannot:\n- Create groups;\n- Sync groups and devices with the server;\n- Manage groups and devices in a personal dashboard on the website.</string>
     <string name="report">Report</string>
     
     <string name="storage_permission_restart_is_required">The app is now allowed to write to external storage, but needs to be started again to do so.</string>
@@ -595,13 +595,13 @@
     <string name="recalculate_route">Recalculate route</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap username and password</string>
     <string name="donations">Donations</string>
-    <string name="number_of_recipients"># recipients</string>
+    <string name="number_of_recipients">Number of recipients</string>
     <string name="osm_user_stat">Edits %1$s, rank %2$s, total edits %3$s</string>
     <string name="osm_recipient_stat">Edits %1$s, sum %2$s mBTC</string>
     <string name="osm_editors_ranking">OSM Editors ranking</string>
     <string name="osm_live_subscription">OsmAnd Live subscription</string>
     <string name="osm_live_subscribe_btn">Subscribe</string>
-    <string name="osm_live_email_desc">For you info about contributions.</string>
+    <string name="osm_live_email_desc">For your info about contributions.</string>
     <string name="osm_live_user_public_name">Public Name</string>
     <string name="osm_live_hide_user_name">Do not show my name in reports</string>
     <string name="osm_live_support_region">Support region</string>
@@ -701,7 +701,7 @@
     <string name="av_audio_bitrate">Audio bitrate</string>
     <string name="av_audio_bitrate_descr">Select audio bitrate.</string>
     <string name="please_specify_poi_type_only_from_list">Please specify the correct POI type or skip it.</string>
-    <string name="access_from_map_description">When the menu button is clicked it launches the dashboard rather than the menu</string>
+    <string name="access_from_map_description">Menu button launches the dashboard rather than the menu</string>
     <string name="access_from_map">Access from map</string>
     <string name="show_on_start_description">\'Off\' directly launches the map screen.</string>
     <string name="show_on_start">Show on start</string>
@@ -1422,7 +1422,7 @@
     <string name="animate_routing_route_not_calculated">Please calculate the route first</string>
     <string name="animate_routing_route">Simulate using calculated route </string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
-    <string name="route_is_too_long_v2">Please add intermediate destinations if no path is found for this complex route within 10 mins.</string>
+    <string name="route_is_too_long_v2">Please add intermediate destinations if no path is found for this long route within 10 mins.</string>
     <string name="auto_zoom_none">No auto zoom</string>
     <string name="auto_zoom_close">To close-up</string>
     <string name="auto_zoom_far">To mid-range</string>
@@ -1663,7 +1663,7 @@
     <string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
 
-		OsmAnd is a libre software navigation app with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.
+		OsmAnd is an open source software navigation app with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.
 
 		Some of the core features:
 		- Complete offline functionality (store downloaded vector or tile maps in the device storage)
@@ -1678,9 +1678,9 @@
 		-  Map alignment according to compass or direction of motion
 		-  Lane guidance, speed limit display, recorded and TTS voices
 
-		Limitations of this gratis version of OsmAnd:
+		Limitations of this free version of OsmAnd:
 		- Number of map downloads limited
-		- No offlineaccess to Wikipedia POIs
+		- No offline access to Wikipedia POIs
 
 		OsmAnd is actively being developed and our project and its continued progress relies on financial contributions for development and testing of new functionality. Please consider buying OsmAnd+, or funding specific new features or making a general donation on https://osmand.net.
 	</string>
@@ -1759,7 +1759,7 @@
     <string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Automated Navigation Directions)
 
-		OsmAnd+ is a libre software navigation app with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline use. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.
+		OsmAnd+ is an open source software navigation app with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline use. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.
 
 		OsmAnd+ is the paid app version, by buying it you support the project, fund the development of new features, and receive the latest updates.
 
@@ -1835,7 +1835,7 @@
         • Upload GPX tracks to OSM directly from the app
         • Add POIs and directly upload them to OSM (or later if offline)
         • Optional trip recording also in background mode (while device is in sleep mode)
-        OsmAnd is libre software in active development. Everyone can contribute to the app by reporting bugs, improving translations or coding new features or user interaction. The project progress also relies on financial contributions for coding and testing new functionality.
+        OsmAnd is open-source software in active development. Everyone can contribute to the app by reporting bugs, improving translations or coding new features or user interaction. The project progress also relies on financial contributions for coding and testing new functionality.
     </string>
     <string name="osmand_plus_extended_description_part8">
         Approximate map coverage and quality:
@@ -2064,8 +2064,8 @@
     <string name="live_monitoring_max_interval_to_send_desrc">Specify a time buffer to keep locations to send without connection</string>
     <string name="gpx_monitoring_disabled_warn">Log track using GPX widget or via \'Trip recording\' settings.</string>
     <string name="show_current_gpx_title">Show current track</string>
-    <string name="free_version_message">This gratis OsmAnd version is limited to %1$s map downloads (to add or update maps) and does not support offline Wikipedia articles.</string>
-    <string name="free_version_title">Gratis version</string>
+    <string name="free_version_message">This free OsmAnd version is limited to %1$s map downloads (to add or update maps) and does not support offline Wikipedia articles.</string>
+    <string name="free_version_title">Free version</string>
     <string name="poi_context_menu_showdescription">Show POI description.</string>
     <string name="index_name_north_america">North America</string>
     <string name="index_name_netherlands">Europe - Netherlands</string>
@@ -2643,7 +2643,7 @@
     <string name="roads">Roads</string>
     <string name="downloading_number_of_files">Downloading - %1$d file</string>
     <string name="show_free_version_banner">Show free version banner</string>
-    <string name="show_free_version_banner_description">Display the gratis version banner even in the paid version.</string>
+    <string name="show_free_version_banner_description">Display the free version banner even in the paid version.</string>
     <string name="buy">Buy</string>
     <string name="activate_seamarks_plugin">Please activate \'Seamarks\' plugin</string>
     <string name="activate_srtm_plugin">Please activate \'SRTM\' plugin</string>
@@ -2654,8 +2654,8 @@
     <string name="value_downloaded_of_max">%1$.1f of %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Update all (%1$s MB)</string>
-    <string name="free_downloads_used">Gratis downloads used</string>
-    <string name="free_downloads_used_description">Displays the amount of gratis downloads left.</string>
+    <string name="free_downloads_used">Free downloads used</string>
+    <string name="free_downloads_used_description">Displays the amount of free downloads left.</string>
     <string name="application_dir_description">Choose where you want to store maps and other data files.</string>
     <string name="enter_country_name">Enter country name</string>
     <string name="new_version">New version</string>
@@ -2686,7 +2686,7 @@
     <string name="dashboard_or_drawer_title">Dashboard or menu control</string>
     <string name="dashboard_or_drawer_description">A choice is offered to primarily control the app via the flexible dashboard or a static menu. Your choice can always be changed in the dashboard settings.</string>
     <string name="update">Update</string>
-    <string name="only_download_over_wifi">Only download over Wi-Fi</string>
+    <string name="only_download_over_wifi">Only download over WiFi</string>
     <string name="live_update">Live update</string>
     <string name="update_now">Update now</string>
     <string name="missing_write_external_storage_permission">OsmAnd lacks permission to use the memory card</string>
@@ -2703,7 +2703,7 @@
     <string name="number_of_contributors">Number of contributors</string>
     <string name="number_of_edits">Number of edits</string>
     <string name="reports_for">Report for</string>
-    <string name="file_name_containes_illegal_char">Filename contains illegal character</string>
+    <string name="file_name_containes_illegal_char">File name contains illegal character</string>
     <string name="configure_screen_quick_action">Quick action</string>
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Screen %d</string>
