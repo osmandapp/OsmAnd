@@ -1930,7 +1930,7 @@
     <string name="shared_string_commit">Send inn</string>
 
     <string name="share_osm_edits_subject">OSM-redigeringer delt via OsmAnd</string>
-    <string name="whats_new">Hva er nytt i</string>
+    <string name="whats_new">Nyheter i</string>
     <string name="si_nm_h">Nautisk mil i timen (knop)</string>
     <string name="simulate_your_location_stop_descr">Stopp simulering av din posisjon.</string>
     <string name="simulate_your_location_descr">Simuler din posisjon ved bruk av en beregnet rute eller et GPX-spor som er tatt opp.</string>
@@ -2069,42 +2069,34 @@
     <string name="rendering_attr_noAdminboundaries_description">Undertrykk visning av regionale grenser (administrasjonsnivåer 5-9).</string>
     <string name="close_changeset">Lukk endringssett</string>
     <string name="zxing_barcode_scanner_not_found">Programmet ZXing strekkodeskanner er ikke installert. Vil du søke på Google Play?</string>
-    <string name="release_2_5">"
- • Klikkbare ikoner på kartet
-
-
- • Kraftig POI-filtersøk: Søk f.eks etter restauranter etter type kjøkken, eller campingsteder med gitte tjenestetilbud
-
- • Nytt topologisk kart for syklister og turgåere
-
- • Forbedret opptak av turer
-
- • Forbedrede navigasjonsmerknader (Android Wear)
-
-
- • Mange andre forbedringer og feilrettinger
-
-
- med mer…
- "</string>
-    <string name="release_2_4">"
- • Nytt og veldig kraftig fritekstsøk
-
- • Lydsystem i bil / høytalertelefonintegrasjon via Blåtann
-
- • Forbedret veivisning, stemmehjelp og filanvisning
-
- • Improved transport layer with route rendering
-
-
- • Added more locales and now support regional locales
-
-
- • Many other improvements and bug fixes
-
-
- and more…
- "</string>
+    <string name="release_2_5">"• Klikkbare ikoner på kartet
+\n
+\n • Kraftig POI-filtersøk: Søk f.eks etter restauranter etter type kjøkken, eller campingsteder med gitte tjenestetilbud
+\n
+\n • Nytt topologisk kart for syklister og turgåere
+\n
+\n • Forbedret opptak av turer
+\n
+\n • Forbedrede navigasjonsmerknader (Android Wear)
+\n
+\n • Mange andre forbedringer og feilrettinger
+\n
+\n med mer…
+\n "</string>
+    <string name="release_2_4">"•\\022 Nytt og veldig kraftig fritekstsøk
+\n
+\n • Lydsystem i bil / høytalertelefonintegrasjon via Blåtann
+\n
+\n • Forbedret veivisning, stemmehjelp og filanvisning
+\n
+\n • Improved transport layer with route rendering
+\n
+\n • Added more locales and now support regional locales
+\n
+\n • Many other improvements and bug fixes
+\n
+\n and more…
+\n "</string>
     
     <string name="lang_bpy">Bishnupriya manipuri</string>
     <string name="lang_new">Nepal bhasa</string>
@@ -2760,4 +2752,14 @@
 	<string name="north_abbreviation">N</string>
 	<string name="clear_all_intermediates">Slett alle mellomliggende punkter</string>
     <string name="group_deleted">Gruppe slettet</string>
+    <string name="shared_string_total">Totalt</string>
+    <string name="osm_recipient_stat">redigeringer %1$s, tilsammen %2$s mBTC</string>
+    <string name="save_track_to_gpx_globally_descr">Generell posisjonslogging til GPX-fil kan skrus av eller på ved bruk av GPX-loggingsminiprogrammet på kartskjermen.</string>
+    <string name="osmand_extended_description_part4">Skikjørings-OsmAnd-skikarttillegget lar deg se skiløyper med vanskelighetsgrad og ytterligere informasjon, som hvor heisene og andre fasiliteter finnes.</string>
+    <string name="osmand_extended_description_part5">Sykling • Du kan finne sykkelstier på kartet • GPS-navigasjon i sykkelmodus bygger din rute ved bruk av sykkelstier • Du kan se din fart og antall høydemeter • GPX-opptak lar deg ta opp din tur og dele den • Via et ytterligere tillegg kan du vise koter og relieffskyggelag</string>
+    <string name="osmand_extended_description_part7">Bidra til OSM • Rapporter datafeil • Last opp GPX-spor direkte fra programmet • Legg til interessepunkter og last dem opp til OSM (eller senere hvis du er frakoblet)</string>
+    <string name="osmand_plus_extended_description_part8">"Anslått kartdekning og kvalitet:   • Vesteuropa: **** • Østeuropa: *** • Russland: *** • Nordamerika: *** • Søramerika: ** • Asia: ** • Japan og Korea: *** • Mellomøsten: ** • Afrika: ** • Antarktis: * De fleste landene i verden kan lastes ned! Fra Afghanistan til Zimbabwe, fra Australia til USA. Argentina, Brasil, Canada, Frankrike, Tyskland, Mexico, Storbritannia, Spania, …"</string>
+    <string name="rendering_attr_noPolygons_description">Gjør alt som finnes på landareal på kartet transparent.</string>
+    <string name="search_offline_geo_error">Kunne ikke tolke geo-hensikt \"%s\".</string>
+    <string name="foot">fot</string>
     </resources>
