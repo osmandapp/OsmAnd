@@ -323,7 +323,7 @@
 	<string name="poi_lawyer">Advogado</string>
 	<string name="poi_recycling">Reciclagem</string>
 	<string name="poi_landfill">Aterro sanitário</string>
-	<string name="poi_waste_disposal">Ponto de entrega de lixo</string>
+	<string name="poi_waste_disposal">Descarte de lixo</string>
 	<string name="poi_waste_basket">Lixeira</string>
 
 	<string name="poi_industrial">Área industrial</string>
@@ -1316,7 +1316,7 @@
 	<string name="poi_traffic_signals_sound_no">Não</string>
 	<string name="poi_traffic_signals_sound_walk">Só quando permitido atravessar</string>
 
-<string name="poi_ford_stepping_stones">Pedra de passagem em rio</string>
+<string name="poi_ford_stepping_stones">Pedras de passagem</string>
 	<string name="poi_toll_hgv_yes">Pedágio para veículos pesados</string>
 	<string name="poi_rescue_station">Estação de resgate</string>
 
@@ -3786,5 +3786,28 @@
 	<string name="poi_socket_tesla_supercharger_yes">Tesla Supercharger</string>
 	<string name="poi_socket_tesla_roadster_yes">Tesla Roadster</string>
 	<string name="poi_whitewater_rapid_name">Nome das corredeiras</string>
+
+<string name="synonyms_poi_fuel">Posto de abastecimento;Posto de gasolina;Bomba de gasolina</string>
+
+	<string name="synonyms_poi_nightclub">Casa noturna;Boate</string>
+	<string name="poi_climbing_multipitch_yes">Rotas multi-pitch: sim</string>
+	<string name="poi_climbing_multipitch_no">Rotas multi-pitch: não</string>
+	<string name="poi_socket_cee_red_16a_yes">CEE vermelha 16A</string>
+	<string name="poi_socket_cee_red_32a_yes">CEE vermelha 32A</string>
+	<string name="poi_socket_cee_red_64a_yes">CEE vermelha 64A</string>
+	<string name="poi_socket_cee_red_125a_yes">CEE vermelha 125A</string>
+	<string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
+	<string name="poi_socket_nema_14_30_yes">NEMA 14-30</string>
+	<string name="poi_socket_nema_14_50_yes">NEMA 14-50</string>
+	<string name="poi_socket_schuko_yes">Schuko</string>
+	<string name="poi_socket_bs1363_yes">BS 1363</string>
+	<string name="poi_socket_as3112_yes">AS/NZS 3112</string>
+
+	<string name="poi_outpost">Ponto de entrega da loja</string>
+
+	<string name="poi_barbecue_grill">Grelha de churrasco: sim</string>
+
+	<string name="poi_water_utility">Companhia de água</string>
 
 </resources>
