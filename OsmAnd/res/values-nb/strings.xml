@@ -2759,7 +2759,7 @@
     <string name="osmand_extended_description_part5">Sykling • Du kan finne sykkelstier på kartet • GPS-navigering i sykkelmodus lager ruten din ved hjelp av sykkelstier • Du kan se hastigheten din og antall høydemeter • GPX-opptaksalternativet lar deg ta opp turen og dele den • Via ekstra tillegg kan du aktivere visning av koter og relieffskygger</string>
     <string name="osmand_extended_description_part7">Bidra til OSM • Rapporter datafeil • Last opp GPX-spor direkte fra programmet • Legg til interessepunkter og last dem opp til OSM (eller senere hvis du er frakoblet)</string>
     <string name="osmand_plus_extended_description_part8">Omtrentlig kartdekning og kvalitet: • Vesteuropa: **** • Østeuropa: *** • Russland: *** • Nordamerika: *** • Søramerika: ** • Asia: ** • Japan &amp; Korea: *** • Midtøsten: ** • Afrika: ** • Antarktis: * De fleste landene i verden kan lastes ned! Fra Afghanistan til Zimbabwe, fra Australia til USA. Argentina, Brasil, Canada, Frankrike, Tyskland, Mexico, Storbritannia, Spania, …</string>
-    <string name="rendering_attr_noPolygons_description">Gjør alle landarealelementer på kartet gjennomsiktig.</string>
+    <string name="rendering_attr_noPolygons_description">Gjør alle landarealelementer på kartet gjennomsiktige.</string>
     <string name="search_offline_geo_error">Kunne ikke tolke geo-hensikt \"%s\".</string>
     <string name="foot">ft</string>
     <string name="nothing_found_in_radius">Ingenting ble funnet i radiusen:</string>
