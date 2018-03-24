@@ -2111,7 +2111,7 @@
 \n * Langt trykk på kartet for å slette forrige punkt.
 \n * Langt trykk på et punkt for å vise og legge til beskrivelse.
 \n * Trykk på målemodulen for å se flere handlinger.</string>
-    <string name="screen_is_locked">Trykk på låseikonet for å låse opp skjermen</string>
+    <string name="screen_is_locked">Trykk på låsikonet for å låse opp skjermen</string>
     <string name="select_animate_speedup">Velg hastighet på rutesimulering</string>
     <string name="global_app_allocated_memory_descr">Tildelt minne %1$s MB (Android-grense %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Tildelt minne</string>
@@ -2753,13 +2753,15 @@
 	<string name="clear_all_intermediates">Slett alle mellomliggende punkter</string>
     <string name="group_deleted">Gruppe slettet</string>
     <string name="shared_string_total">Totalt</string>
-    <string name="osm_recipient_stat">redigeringer %1$s, tilsammen %2$s mBTC</string>
+    <string name="osm_recipient_stat">Redigeringer %1$s, tilsammen %2$s mBTC</string>
     <string name="save_track_to_gpx_globally_descr">Generell posisjonslogging til GPX-fil kan skrus av eller på ved bruk av GPX-loggingsminiprogrammet på kartskjermen.</string>
-    <string name="osmand_extended_description_part4">Skikjørings-OsmAnd-skikarttillegget lar deg se skiløyper med vanskelighetsgrad og ytterligere informasjon, som hvor heisene og andre fasiliteter finnes.</string>
-    <string name="osmand_extended_description_part5">Sykling • Du kan finne sykkelstier på kartet • GPS-navigasjon i sykkelmodus bygger din rute ved bruk av sykkelstier • Du kan se din fart og antall høydemeter • GPX-opptak lar deg ta opp din tur og dele den • Via et ytterligere tillegg kan du vise koter og relieffskyggelag</string>
+    <string name="osmand_extended_description_part4">Ski - OsmAnd-skikarttillegget gjør det mulig å se skiløyper med vanskelighetsgrad og ytterligere informasjon, som hvor heisene og andre fasiliteter finnes.</string>
+    <string name="osmand_extended_description_part5">Sykling • Du kan finne sykkelstier på kartet • GPS-navigering i sykkelmodus lager ruten din ved hjelp av sykkelstier • Du kan se hastigheten din og antall høydemeter • GPX-opptaksalternativet lar deg ta opp turen og dele den • Via ekstra tillegg kan du aktivere visning av koter og relieffskygger</string>
     <string name="osmand_extended_description_part7">Bidra til OSM • Rapporter datafeil • Last opp GPX-spor direkte fra programmet • Legg til interessepunkter og last dem opp til OSM (eller senere hvis du er frakoblet)</string>
-    <string name="osmand_plus_extended_description_part8">"Anslått kartdekning og kvalitet:   • Vesteuropa: **** • Østeuropa: *** • Russland: *** • Nordamerika: *** • Søramerika: ** • Asia: ** • Japan og Korea: *** • Mellomøsten: ** • Afrika: ** • Antarktis: * De fleste landene i verden kan lastes ned! Fra Afghanistan til Zimbabwe, fra Australia til USA. Argentina, Brasil, Canada, Frankrike, Tyskland, Mexico, Storbritannia, Spania, …"</string>
-    <string name="rendering_attr_noPolygons_description">Gjør alt som finnes på landareal på kartet transparent.</string>
+    <string name="osmand_plus_extended_description_part8">Omtrentlig kartdekning og kvalitet: • Vesteuropa: **** • Østeuropa: *** • Russland: *** • Nordamerika: *** • Søramerika: ** • Asia: ** • Japan &amp; Korea: *** • Midtøsten: ** • Afrika: ** • Antarktis: * De fleste landene i verden kan lastes ned! Fra Afghanistan til Zimbabwe, fra Australia til USA. Argentina, Brasil, Canada, Frankrike, Tyskland, Mexico, Storbritannia, Spania, …</string>
+    <string name="rendering_attr_noPolygons_description">Gjør alle landarealelementer på kartet gjennomsiktig.</string>
     <string name="search_offline_geo_error">Kunne ikke tolke geo-hensikt \"%s\".</string>
-    <string name="foot">fot</string>
+    <string name="foot">ft</string>
+    <string name="nothing_found_in_radius">Ingenting ble funnet i radiusen:</string>
+    <string name="select_waypoints_category_description">Du kan legge til alle sporets rutepunkter, eller velg separate kategorier.</string>
     </resources>
