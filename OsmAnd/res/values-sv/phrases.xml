@@ -1917,12 +1917,12 @@
 	<string name="poi_wetland_marsh">Kärr</string>
 	<string name="poi_wetland_reedbed">Vassrugg</string>
 	<string name="poi_wetland_swamp">Träsk</string>
-	<string name="poi_wetland_saltern">Saltern</string>
+	<string name="poi_wetland_saltern">Saltdamm</string>
 	<string name="poi_wetland_tidalflat">Tidvattenplatta</string>
 	<string name="poi_wetland_saltmarsh">saltträsk</string>
 	<string name="poi_wetland_mangrove">Mangrove</string>
 	<string name="poi_wetland_string_bog">Strängmyr</string>
-	<string name="poi_wetland_fen">Fen</string>
+	<string name="poi_wetland_fen">Kärr</string>
 	<string name="poi_wetland_palsa_bog">Palsmyr</string>
 	<string name="poi_wetland_mud">Lera</string>
 
@@ -2617,4 +2617,254 @@
 	<string name="poi_health_specialty_plastic_surgery_yes">Plastikkirurgi</string>
 	<string name="poi_health_specialty_orthodontics_yes">Tandreglering</string>
 	<string name="poi_health_specialty_physiotherapy_yes">Sjukgymnastik</string>
+	<string name="poi_health_specialty_biochemistry_yes">Biologisk kemi</string>
+	<string name="poi_health_specialty_occupational_yes">Arbetsterapi</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Barn-och ungdomspsykiatri</string>
+	<string name="poi_health_specialty_physiatry_yes">Fysikalisk medicin och rehabilitering</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Käk-och ansiktskirurgi</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Diagnostisk radiologi</string>
+	<string name="poi_health_specialty_gastroenterology_yes">Gastroenterologi</string>
+	<string name="poi_health_specialty_dentistry_yes">Tandvård</string>
+	<string name="poi_health_specialty_nephrology_yes">Nefrologi (njursjukdomar)</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Neurokirurgi</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropsykiatri</string>
+	<string name="poi_health_specialty_endocrinology_yes">Endokrinologi</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Nukleärmedicin</string>
+	<string name="poi_health_specialty_pathology_yes">Patologisk anatomi</string>
+	<string name="poi_health_specialty_oncology_yes">Onkologi</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">Tropisk medicin</string>
+	<string name="poi_health_specialty_tropical_medicine_no">Hälsospecialitet: tropisk medicin: nej</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">Obstetrik (postnatal)</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">Hälsospecialitet: obstetrik (postnatal): nej</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">Obstetrik (antenatal)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Hälsopecialitet: obstetrik (antenatal): nej</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Social- och ungdomsmedicin</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Hälsospecialitet: social-och ungdomsmedicin: nej</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Obstetrik (kejsarsnitt)</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Hälsospecialitet: obstetrik (kejsarsnitt): nej</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">Beroendemedicin</string>
+	<string name="poi_health_specialty_optometry_yes">Optometri</string>
+	<string name="poi_health_specialty_clinical_pathology_yes">Klinisk patologi</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Talterapi</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Manuell terapi</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Idrottsmedicin</string>
+	<string name="poi_health_specialty_podology_yes">Podiatri</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Vuxenpsykiatri</string>
+	<string name="poi_health_specialty_acupuncture_yes">Akupunktur</string>
+	<string name="poi_health_specialty_homeopathy_yes">Homeopati</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Traditionell kinesisk medicin</string>
+	<string name="poi_health_specialty_reiki_yes">Reiki</string>
+	<string name="poi_health_specialty_herbalism_yes">Herbalism</string>
+	<string name="poi_health_specialty_chiropractic_yes">Kiropraktik</string>
+	<string name="poi_health_specialty_naturopathy_yes">Naturopatisk medicin</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Djuppsykologi</string>
+	<string name="poi_health_specialty_behavior_yes">Beteende</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Palliativ medicin</string>
+
+	<string name="poi_building_type_pyramid">Byggnadstyp: pyramid</string>
+
+	<string name="poi_fitness_centre">Gym</string>
+	<string name="poi_fitness">Fitness</string>
+
+	<string name="poi_billiards">Biljard</string>
+
+	<string name="poi_microwave_oven_yes">Mikrovågsugn: ja</string>
+	<string name="poi_microwave_oven_no">Mikrovågsugn: nej</string>
+	<string name="poi_water_heater_yes">Varmvattenberedare: ja</string>
+	<string name="poi_water_heater_no">Varmvattenberedare: ingen</string>
+
+	<string name="poi_parking_surface">Typ: yta</string>
+	<string name="poi_parking_garage_boxes">Garage</string>
+	<string name="poi_parking_carports">Carportar</string>
+
+	<string name="poi_dojo">Dojo</string>
+
+	<string name="poi_gaelic_games">Gaeliska spel</string>
+	<string name="poi_running">Löpning</string>
+	<string name="poi_netball">Netball</string>
+	<string name="poi_karting">Karting</string>
+	<string name="poi_badminton">Badminton</string>
+	<string name="poi_judo">Judo</string>
+	<string name="poi_disc_golf">Discgolf</string>
+	<string name="poi_futsal">Futsal</string>
+	<string name="poi_rc_car">Radiostyrd bilracing</string>
+	<string name="poi_squash">Squash</string>
+	<string name="poi_shuffleboard">Shuffleboard</string>
+	<string name="poi_lacrosse">Lacrosse</string>
+	<string name="poi_boxing">Boxning</string>
+
+	<string name="poi_official_name">Officiellt namn</string>
+
+	<string name="poi_dyke">Dyke</string>
+	<string name="poi_dolphin">Delfin</string>
+
+	<string name="poi_forestry_compartment">Skylt: skogsbruk</string>
+	<string name="poi_forestry_allotment">Skylt: skogsbrukslotter</string>
+	<string name="poi_inscription_n">Inskription: N</string>
+	<string name="poi_inscription_nw">Inskription: NV</string>
+	<string name="poi_inscription_w">Inskription: V</string>
+	<string name="poi_inscription_sw">Inskription: SV</string>
+	<string name="poi_inscription_s">Inskription: S</string>
+	<string name="poi_inscription_se">Inskription: SÖ</string>
+	<string name="poi_inscription_e">Inskription: Ö</string>
+	<string name="poi_inscription_ne">Inskription: NÖ</string>
+
+	<string name="poi_construction_yes">Under konstruktion</string>
+	<string name="poi_additional_atm_yes">Bankomat: ja</string>
+	<string name="poi_atm_no">Bankomat: Nej</string>
+
+	<string name="poi_firepit">Eldgrop</string>
+	<string name="poi_street_cabinet">Gatuskåp</string>
+
+	<string name="poi_fair_trade_yes">Rättvis handel: ja</string>
+	<string name="poi_fair_trade_no">Rättvis handel: nej</string>
+	<string name="poi_fair_trade_only">Endast rättvisemärkta produkter</string>
+
+
+	<string name="poi_bandy">Bandy</string>
+
+	<string name="poi_protected_area">Skyddat område</string>
+	<string name="poi_protection_title">Skyddsinställning</string>
+	<string name="poi_protection_object_historic">Skyddsobjektet: historisk</string>
+	<string name="poi_protection_object_nature">Skyddsobjekt: natur</string>
+	<string name="poi_protection_object_habitat">Skyddsobjekt: livsmiljö</string>
+	<string name="poi_protection_object_water">Skyddsobjekt: vatten</string>
+
+	<string name="poi_nuclear_explosion_country">Explosion: land</string>
+	<string name="poi_nuclear_explosion_site">Kärnvapenexplosionplats</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">"Explosionstyp: underjord, schakcft "</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Explosionstyp: underjord, tunnel</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Explosionstyp: atmosfärisk</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Explosionstyp: atmosfärisk, airdrop</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Explosionstyp: atmosfärisk, yta, torn</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Explosionstyp: atmosfärisk, ballong</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Explosionstyp: atmosfärisk, yta</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Explosionstyp: atmosfärisk, vattenyta, pråm</string>
+	<string name="poi_nuclear_explosion_type_underground">Explosionstyp: underjord</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Explosiontyp: kratrar</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Explosionstyp: atmosfärisk, raket eller missil</string>
+	<string name="poi_nuclear_explosion_type_space">Explosionstyp: rymden (höjd över 80 km)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Explosionstyp: undervatten</string>
+	<string name="poi_nuclear_explosion_date_utc">Explosionsdatum (UTC)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Salvnamn (en)</string>
+	<string name="poi_nuclear_explosion_series">Explosion-serien</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Explosionssyfte: kärnvapenrelaterat</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Explosionssyfte: vapeneffekt</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Explosionssyfte: säkerhetsexperiment</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Explosionssyfte: forskning för fredliga tillämpningar</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Explosionssyfte: fundamental vetenskap</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Explosionssyfte: industriell användning, hålighetsutgrävning</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Explosionssyfte: industriell användning, seismisk lyssning</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Explosionssyfte: industriell användning, oljestimulering</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Explosionssyfte: industriell användning</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Explosionssyfte: industriell användning, jordhantering</string>
+	<string name="poi_nuclear_explosion_time_utc">Explosions-tid (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Explosionsavkastning</string>
+	<string name="poi_nuclear_explosion_hole">Explosionshål</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Explosionshöjd</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Nollnivå-punkt</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Kroppsvågsmagnitud</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">"Explosionssalva:  första detonationen av ett salvtest"</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">"Explosionssalva:  andra eller senare detonation av ett salvtest"</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Explosionssalva: kraterdiameter</string>
+	<string name="poi_nuclear_explosion_warhead">Explosion: stridsspets</string>
+	<string name="poi_nuclear_explosion_device">Explosion: enhet</string>
+
+	<string name="poi_addr_housename">Husnamn</string>
+
+
+	<string name="poi_plant_nursery">Plantskola</string>
+
+	<string name="poi_compressed_air_yes">JA</string>
+	<string name="poi_compressed_air_no">Tryckluft: nej</string>
+
+	<string name="poi_car_wash_yes">Ja</string>
+
+	<string name="poi_vacuum_cleaner_yes">Ja</string>
+	<string name="poi_vacuum_cleaner_no">Dammsugare: nej</string>
+	<string name="poi_amenity_vacuum_cleaner">Dammsugare</string>
+
+	<string name="poi_sport_free_flying">Freeflying (sport)</string>
+
+	<string name="poi_water_tap">Vattenkran</string>
+	<string name="poi_button_operated_yes">Knappdriven: ja</string>
+	<string name="poi_button_operated_no">Knappdriven: nej</string>
+
+	<string name="poi_free_flying_site_takeoff">Start</string>
+	<string name="poi_free_flying_site_landing">Landning</string>
+	<string name="poi_free_flying_site_toplanding">Toplanding</string>
+	<string name="poi_free_flying_site_towing">Bogsering</string>
+	<string name="poi_free_flying_site_training">Utbildning</string>
+	<string name="poi_free_flying_official_yes">Officiellt: ja</string>
+	<string name="poi_free_flying_official_no">Officiellt: nej</string>
+	<string name="poi_free_flying_paragliding_yes">Skärmflygning</string>
+	<string name="poi_free_flying_paragliding_no">Skärmflygning: nej</string>
+	<string name="poi_free_flying_hanggliding_yes">Hanggliding</string>
+	<string name="poi_free_flying_hanggliding_no">Hanggliding: nej</string>
+	<string name="poi_free_flying_rigid_yes">Stelt</string>
+	<string name="poi_free_flying_rigid_no">Gratis flygande styv: ingen</string>
+	<string name="poi_free_flying_site_orientation_n">Frittflygandeorientering: N</string>
+	<string name="poi_free_flying_site_orientation_ne">Frittflygandeorientering: NÖ</string>
+	<string name="poi_free_flying_site_orientation_e">Frittflygandeorientering: Ö</string>
+	<string name="poi_free_flying_site_orientation_se">Frittflygandeorientering: SÖ</string>
+	<string name="poi_free_flying_site_orientation_s">Frittflygandeorientering: S</string>
+	<string name="poi_free_flying_site_orientation_sw">Frittflygandeorientering: SV</string>
+	<string name="poi_free_flying_site_orientation_w">Frittflygandeorientering: V</string>
+	<string name="poi_free_flying_site_orientation_nw">Frittflygandeorientering: NV</string>
+	<string name="poi_free_flying_no_flight_time">Ingen flygtid (gratis flygande)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Gästriktlinjer: ja</string>
+	<string name="poi_free_flying_guest_guidelines_no">Gästriktlinjer: nej</string>
+
+	<string name="poi_tanning_salon">Solarium</string>
+
+	<string name="poi_sanitary_dump_station">Tömningsstation</string>
+
+	<string name="poi_medical_system_western_yes">Västerländsk</string>
+	<string name="poi_medical_system_chinese_yes">Kinesisk (traditionell)</string>
+	<string name="poi_medical_system_ayurveeda_yes">Ayurveeda</string>
+	<string name="poi_medical_system_kampo_yes">Kampo</string>
+	<string name="poi_medical_system_mongolian_yes">Mongolisk (traditionell)</string>
+	<string name="poi_medical_system_tibetan_yes">Traditionell tibetansk</string>
+	<string name="poi_medical_system_sidda_yes">Sidda</string>
+	<string name="poi_medical_system_unani_yes">Unani</string>
+
+	<string name="poi_health_service_nursing_yes">Hälsovård: Omvårdnad: Ja</string>
+	<string name="poi_health_service_nursing_no">Hälsovård: Omvårdnad: ingen</string>
+	<string name="poi_health_service_counselling_yes">Hälsovård: rådgivning: Ja</string>
+	<string name="poi_health_service_counselling_no">Hälsovård: Rådgivning: Nej</string>
+	<string name="poi_health_service_examination_yes">Hälsovård: undersökning: Ja</string>
+	<string name="poi_health_service_examination_no">Hälsovård: undersökning: nej</string>
+	<string name="poi_health_service_child_care_yes">Hälsovård: barnomsorg: ja</string>
+	<string name="poi_health_service_child_care_no">Hälsovård: barnomsorg: nej</string>
+	<string name="poi_health_service_prevention_yes">Hälsovård: förebyggande: ja</string>
+	<string name="poi_health_service_prevention_no">Hälsovård: förebyggande: nej</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Hälsovård: vaccination: ja</string>
+	<string name="poi_health_service_prevention_vaccination_no">Hälsovård: vaccination: nej</string>
+	<string name="poi_health_service_support_yes">Hälsovård: stöd: ja</string>
+	<string name="poi_health_service_support_no">Hälsovård: stöd: nej</string>
+	<string name="poi_health_service_test_yes">Hälsovård: testa: ja</string>
+	<string name="poi_health_service_test_no">Hälsovård: testa: nej</string>
+
+	<string name="poi_health_facility_type_office">Läkarmottagning</string>
+	<string name="poi_health_facility_type_field_hospital">Hälso-och anläggningstyp: fältsjukhus</string>
+	<string name="poi_health_facility_type_counselling_centre">Hälso-och anläggningstyp: rådgivningscenter</string>
+	<string name="poi_health_facility_type_laboratory">Hälso-och anläggningstyp: laboratorium</string>
+	<string name="poi_health_facility_type_therapy">Hälso-och anläggningstyp: terapi</string>
+	<string name="poi_health_facility_type_department">Hälso-och anläggningstyp: institution</string>
+	<string name="poi_health_facility_type_dispensary">Hälso-och anläggningstyp: sjukstuga</string>
+	<string name="poi_health_facility_type_first_aid">Hälso-och anläggningstyp: första hjälpen</string>
+	<string name="poi_health_facility_type_nursing_home">Hälso-och anläggningstyp: vårdhem</string>
+	<string name="poi_health_facility_type_support_group_home">Hälso-och anläggningstyp: stödgruppshem</string>
+
+	<string name="poi_suction_point">Sugpunkt</string>
+
+	<string name="poi_fire_hydrant_type_underground">Underjord</string>
+	<string name="poi_fire_hydrant_type_pillar">Pelare</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Torr fat</string>
+	<string name="poi_fire_hydrant_type_pond">Damm</string>
+	<string name="poi_fire_hydrant_type_wall">Vägg</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Första hjälpen-kit</string>
+	<string name="poi_health_amenity_type_scales">Offentlig skala</string>
+
 	</resources>
