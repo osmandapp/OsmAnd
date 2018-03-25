@@ -2237,15 +2237,15 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="access_disable_wrong_direction_recalc">Non cambiare s\'àndala si sa diretzione est isballiada</string>
     <string name="access_disable_wrong_direction_recalc_descr">Èvitat su ricàlculu automàticu de s\'àndala si ti ses moende in sa diretzione isballiada.</string>
     <string name="access_smart_autoannounce">Annùntziu automàticu intelligente</string>
-    <string name="access_smart_autoannounce_descr">Notìfica petzi cando sa diretzione cara a sa destinatzione est cambiada.</string>
+    <string name="access_smart_autoannounce_descr">Notìfica petzi cando sa diretzione cara a sa destinatzione cambiat.</string>
     <string name="access_autoannounce_period">Intervallu de annùntziu automàticu</string>
     <string name="access_autoannounce_period_descr">Tempus mìnimu intre sos annùntzios.</string>
     <string name="map_widget_battery">Livellu bateria</string>
     <string name="move_marker_bottom_sheet_title">Move sa mapa pro mudare sa positzione de su marcadore</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
-    <string name="access_direction_audio_feedback">Reatzione sonora de diretzione</string>
+    <string name="access_direction_audio_feedback">Diretziones sonoras</string>
     <string name="access_direction_audio_feedback_descr">Indicat sa diretzione de destinatzione cun unu sonu.</string>
-    <string name="access_direction_haptic_feedback">Reatzione àptica de diretzione</string>
+    <string name="access_direction_haptic_feedback">Diretziones àpticas</string>
     <string name="access_direction_haptic_feedback_descr">Indicat sa diretzione de destinatzione cun sa vibratzione.</string>
     <string name="lang_hu_formal">Ungheresu (formale)</string>
     <string name="current_track">Rasta atuale</string>
@@ -2299,7 +2299,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="osmand_plus_banner_desc">Iscarrigamentos de mapas e agiornamentos illimitados, e s\'estensione Wikipedia.</string>
     <string name="si_mi_meters">Mìglios/metros</string>
     <string name="skip_map_downloading">Brinca s\'iscarrigamentu de sas mapas</string>
-    <string name="skip_map_downloading_desc">Non tenes mapas non in lìnia installadas. Podes isseberare una mapa dae sa lista o iscarrigare mapas prus a tardu pro mèdiu de Menù - %1$s.</string>
+    <string name="skip_map_downloading_desc">Non tenes mapas non in lìnia installadas. Podes isseberare una mapa dae sa lista o iscarrigare mapas prus a tardu pro mèdiu de \'Menù - %1$s\'.</string>
     <string name="search_another_country">Issèbera un\'àtera regione</string>
     <string name="search_map">Chirchende sas mapas…</string>
     <string name="first_usage_wizard_desc">Lassa agatare sa positzione tua a OsmAnd e faghe·ti impositare sas mapas de iscarrigare pro cussa regione.</string>
@@ -2312,7 +2312,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="give_permission">Dae su permissu</string>
     <string name="allow_access_location">Dae su permissu pro s\'atzessu a sa positzione</string>
     <string name="search_my_location">Agata sa positzione mea</string>
-    <string name="no_update_info_desc">Non chircare pro agiornamentos a versiones noas o pro ofertas promotzionales pro OsmAnd.</string>
+    <string name="no_update_info_desc">Non chircare versiones noas o ofertas promotzionales pro OsmAnd.</string>
     <string name="no_update_info">No ammustres sos agiornamentos</string>
     <string name="update_all_maps_now">Cheres agiornare totu sas mapas como?</string>
     <string name="clear_tile_data">Iscantzella totu sos tasseddos</string>
@@ -2349,7 +2349,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="gpx_logging_no_data">Datu perunu</string>
     <string name="rendering_attr_contourColorScheme_description">Ischema de colores de sas lìnias de livellu</string>
     <string name="save_track_min_speed">Lestresa mìnima pro sa registratzione</string>
-    <string name="save_track_min_speed_descr">Filtru: Issèbera sa lestresa mìnima pro registrare unu puntu.</string>
+    <string name="save_track_min_speed_descr">Filtru: Peruna registratzione de puntos in suta de custa lestresa.</string>
     <string name="save_track_min_distance">Rilevamentu de movimentu mìnimu pro sa registratzione</string>
     <string name="save_track_min_distance_descr">Filtru: Issèbera sa distàntzia mìnima dae s\'ùrtima positzione pro registrare unu puntu.</string>
     <string name="save_track_precision">Pretzisione mìnima de registratzione</string>
@@ -2492,26 +2492,45 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="auto_split_recording_title">Iscroba automaticamente sas registratziones</string>
 	<string name="auto_split_recording_descr">Incumintza unu segmentu nou a pustis de una pàusa de 6 minutos, una rasta noa a pustis de 2 oras o unu documentu nou si sa pàusa est istada prus longa e sa data est cambiada.</string>
     <string name="quick_action_page_list_descr">Incarchende su butone pro s\'atzione as a cùrrere pro sa lista in suta.</string>
-    <string name="release_2_6">"\\u2022 Funtzionalidae noa: Butone pro sas atziones lestras
+    <string name="release_2_6">"\\u2022 Funtzionalidae noa: Butone pro sas atziones lestras 
 \n 
+\n
 \n • Megioramentu de sa risposta de s\'ichermu a sos incarcos 
+\n
 \n 
+\n
 \n • Caràteres noos pro sa mapa, chi ant a permìtere de tènnere prus limbas 
+\n
 \n 
+\n
 \n • Suportu TTS pro variantes regionales de sas limbas 
+\n
 \n 
-\n • Megioramentos a sa visibilidade pro meda istiles de sa mapa e pro wikipedia 
+\n
+\n • Megioramentos a sa visibilidade pro meda istiles de sa mapa e pro Wikipedia 
+\n
 \n 
+\n
 \n • Suportu pro su \"Còdighe Abertu pro sa Positzione\" (Open Location Code  - OLC) 
+\n
 \n 
+\n
 \n • Visualizatzione basilare pro sos profilos de s\'artària, de sa pendèntzia e de lestresa pro sas rastas GPX registradas e sas àndalas calculadas 
+\n
 \n 
-\n • Impostatzione \"Istile de ghia\" emegioramentos lògicos in su càlculu de sas àndalas pro bitzicletas 
+\n
+\n • Impostatzione \"Istile de ghia\" e megioramentos lògicos in su càlculu de sas àndalas pro bitzicletas 
+\n
 \n 
+\n
 \n • Impostatziones pro s\'impreu de sos datos de s\'artària pro su càlculu de sas àndalas pro bitzicletas 
+\n
 \n 
+\n
 \n • Meda àteros megioramentos e curretziones de errores 
+\n
 \n 
+\n
 \n e àteru…"</string>
 	<string name="rendering_attr_depthContours_name">Lìnias nàuticas de profondidade</string>
 	<string name="rendering_attr_depthContours_description">Ammustra sas lìnias de profondidade.</string>
@@ -2538,8 +2557,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_time_moving">Tempus in movimentu</string>
     <string name="shared_string_time_span">Intervallu de tempus</string>
     <string name="shared_string_max">Màssimu</string>
-    <string name="shared_string_start_time">Ora de incumintzu</string>
-    <string name="shared_string_end_time">Ora de fine</string>
+    <string name="shared_string_start_time">Tzucada</string>
+    <string name="shared_string_end_time">Arrivu</string>
     <string name="shared_string_color">Colore</string>
     <string name="gpx_track">Rasta</string>
     <string name="points_delete_multiple_succesful">Puntu/os iscantzelladu/os.</string>
@@ -2557,11 +2576,11 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="routing_attr_driving_style_balance_name">Bilantziadu</string>
     <string name="routing_attr_driving_style_safety_name">Privilègia sas istradas segundàrias</string>
     <string name="routing_attr_relief_smoothness_factor_name">Ischerta su valore de variatzione de s\'artària</string>
-    <string name="full_version_thanks">Gràtzias pro àere comporadu sa versione intrea de OsmAnd!</string>
+    <string name="full_version_thanks">Gràtzias pro àere comporadu sa versione a pagamentu de OsmAnd.</string>
     <string name="do_not_send_anonymous_app_usage">No imbies informatziones anònimas a pitzu de s\'impreu de s\'aplicatzione</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd imbiat informatziones generales a pitzu de sas partes de s\'aplicatzione impreadas. Non retzimus perunu datu de geolocalizatzione, chi pertochet datos insertados dae s\'impreadore o a pitzu de sas àreas chi bides, chircas o iscàrrigas.</string>
     <string name="do_not_show_startup_messages">No ammustres messàgios a s\'alluìngiu</string>
-    <string name="do_not_show_startup_messages_desc">Istudat s\'ammustradura de sos iscontos pro sas aplicatziones e sos messàgios a pitzu de sos eventos locales.</string>
+    <string name="do_not_show_startup_messages_desc">No ammustres sos iscontos pro sas aplicatziones e sos messàgios a pitzu de sos eventos locales.</string>
     <string name="parking_options">Issèberos pro sos parchègios</string>
     <string name="right_side_navigation">Ghia a destra</string>
     <string name="driving_region_automatic">Automàtica</string>
@@ -2592,15 +2611,15 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="quick_action_add_destination">Annanghe una destinatzione</string>
     <string name="quick_action_replace_destination">Muda sa destinatzione</string>
     <string name="quick_action_add_first_intermediate">Annanghe su primu puntu de coladòrgiu</string>
-    <string name="quick_action_add_destination_desc">Incarchende su butone as a annànghere una destinatzione in sa positzione in su tzentru de sa mapa. S\'ùrtima destinatzione impostada in antis at a divènnere s\'ùrtimu puntu de coladòrgiu.</string>
-    <string name="quick_action_replace_destination_desc">Incarchende su butone as a mudare sa destinatzione cun sa positzione in su tzentru de sa mapa.</string>
-    <string name="quick_action_add_first_intermediate_desc">Incarchende su butone as a annànghere unu puntu de coladòrgiu in sa positzione in su tzentru de sa mapa.</string>
+    <string name="quick_action_add_destination_desc">Incarca su butone pro annànghere una destinatzione in sa positzione in su tzentru de sa mapa. S\'ùrtima destinatzione impostada in antis at a divènnere s\'ùrtimu puntu de coladòrgiu.</string>
+    <string name="quick_action_replace_destination_desc">Incarca su butone pro mudare sa destinatzione cun sa positzione in su tzentru de sa mapa.</string>
+    <string name="quick_action_add_first_intermediate_desc">Incarca su butone pro annànghere unu puntu de coladòrgiu in sa positzione in su tzentru de sa mapa.</string>
     <string name="no_overlay">Perunu istratu superiore</string>
     <string name="no_underlay">Perunu istratu inferiore</string>
     <string name="subscribe_email_error">Errore</string>
-    <string name="subscribe_email_desc">Iscrie·ti a sa listra de posta eletrònica nostra a pitzu de sos iscontos pro s\'aplicatzione e as a tènnere 3 iscarrigamentos de mapas in prus!</string>
-    <string name="depth_contour_descr">Grupu de mapas chi cuntenint sas curvas e sos puntos de livellu de profondidade marinos.</string>
-    <string name="sea_depth_thanks">Gràtzias pro àere comporadu sas curvas de livellu nàuticas!</string>
+    <string name="subscribe_email_desc">Iscrie·ti a sa lista de posta eletrònica nostra a pitzu de sos iscontos pro s\'aplicatzione e as a tènnere 3 iscarrigamentos de mapas in prus!</string>
+    <string name="depth_contour_descr">Mapas de sas curvas e de sos puntos de livellu de profondidade marinos.</string>
+    <string name="sea_depth_thanks">Gràtzias pro àere comporadu sas curvas de livellu nàuticas</string>
     <string name="index_item_depth_contours_osmand_ext">Curvas de livellu nàuticas</string>
     <string name="index_item_depth_points_southern_hemisphere">Puntos suta de su livellu de su mare in s\'emisferu australe</string>
     <string name="index_item_depth_points_northern_hemisphere">Puntos suta de su livellu de su mare in s\'emisferu boreale</string>
@@ -2628,12 +2647,12 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="show_from_zoom_level">Ammustra dae su livellu de ismanniamentu</string>
     <string name="routing_attr_allow_private_name">Permiti sos atzessos privados</string>
     <string name="routing_attr_allow_private_description">Permiti s\'atzessu a sas àreas privadas.</string>
-    <string name="hillshade_menu_download_descr">Pro bìdere sas umbraduras de sos rilievos in sa mapa depes iscarrigare sa mapa de sas umbraduras de custa regione.</string>
-    <string name="hillshade_purchase_header">Pro bìdere sas umbraduras de sos rilievos in sa mapa depes comporare e installare s\'estensione Curvas de Livellu</string>
+    <string name="hillshade_menu_download_descr">Iscàrriga sa mapa \'Umbraduras de sos rilievos\' pro bìdere sas umbraduras de custa regione.</string>
+    <string name="hillshade_purchase_header">Installa s\'estensione \'Curvas de Livellu\' pro las ammustrare in sa mapa</string>
     <string name="hide_from_zoom_level">Cua dae su livellu de ismanniamentu</string>
-    <string name="srtm_menu_download_descr">Pro bìdere sas lìnias de livellu in sa mapa depes iscarrigare sa mapa de sas curvas de livellu de custa regione.</string>
+    <string name="srtm_menu_download_descr">Iscàrriga sa mapa \'Curvas de livellu\' pro l\'impreare in custa regione.</string>
     <string name="shared_string_plugin">Estensione</string>
-    <string name="srtm_purchase_header">Pro bìdere sas curvas de livellu in sa mapa depes comporare e installare s\'estensione Curvas de Livellu</string>
+    <string name="srtm_purchase_header">Pro bìdere sas curvas de livellu in sa mapa depes comporare e installare s\'estensione \'Curvas de Livellu\'</string>
     <string name="search_favorites">Chirca preferidos</string>
     <string name="sorted_by_distance">Ordinados pro distàntzia</string>
     <string name="quick_action_showhide_osmbugs_title">Ammustra/cua sas notas OSM</string>
@@ -2642,12 +2661,12 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="quick_action_showhide_osmbugs_descr">Incarchende su butone pro s\'atzione as a cuare o ammustrare sas notas OSM in sa mapa.</string>
     <string name="restart_search">Torra a incumintzare sa chirca</string>
     <string name="increase_search_radius">Ismànnia su raju de chirca</string>
-    <string name="nothing_found">Nudda de agatadu :(</string>
+    <string name="nothing_found">Nudda de agatadu</string>
     <string name="nothing_found_descr">Muda sos critèrios de chirca o a ismànnia su raju de chirca.</string>
     <string name="private_access_routing_req">Sa destinatzione tua est positzionada in un\'àrea cun atzessu privadu. Boles abilitare s\'atzessu a sas istradas privadas pro custu biàgiu?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Widget pro Mapillary</string>
-    <string name="mapillary_widget_descr">Ti permitit de contribuire in manera lestra e fàtzile a Mapillary.</string>
+    <string name="mapillary_widget_descr">Permitit de contribuire in manera lestra e fàtzile a Mapillary.</string>
     <string name="mapillary_descr">Fotografias a livellu de sas istradas in lìnia pro totus. Iscoberi logos, agiuda, catura su mundu.</string>
     <string name="shared_string_add_photos">Annanghe fotografias</string>
     <string name="mapillary_action_descr">Contribui cun sas vistas tuas a livellu de s\'istrada pro mèdiu de Mapillary.</string>
@@ -2657,9 +2676,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="open_mapillary">Aberi Mapillary</string>
     <string name="shared_string_install">Installa</string>
     <string name="improve_coverage_mapillary">Megiora sa cobertura fotogràfica cun Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Podes fàghere sas fotografias tuas (una sola o una sèrie) e las podes annànghere a custa positzione de sa mapa.
-\n
-\nPro lu fàghere depes installare s\'aplicatzione Mapillary dae Google Play.</string>
+    <string name="improve_coverage_install_mapillary_desc">Installa Mapillary pro annànghere una o prus fotografias a custa positzione de sa mapa.</string>
     <string name="mapillary_image">Immàgine de Mapillary</string>
     <string name="distance_moving">Distàntzia curreta</string>
     <string name="shared_string_permissions">Autorizatziones</string>
@@ -2669,7 +2686,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_reload">Torra a carrigare</string>
     <string name="mapillary_menu_descr_tile_cache">Torra a carrigare sos tasseddos pro bìdere datos agiornados.</string>
     <string name="mapillary_menu_title_tile_cache">Cache de sos tasseddos</string>
-    <string name="wrong_user_name">Nùmene impreadore isballiadu!</string>
+    <string name="wrong_user_name">Nùmene impreadore isballiadu</string>
     <string name="shared_string_to">A</string>
     <string name="mapillary_menu_date_from">Dae</string>
     <string name="mapillary_menu_descr_dates">Abbista petzi sas immàgines annantas</string>
@@ -2680,7 +2697,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="mapillary_menu_filter_description">Podes filtrare sas immàgines pro impreadore o data. Sos filtros s\'aplicat a pustis de ismanniamentu.</string>
     <string name="shared_string_reset">Reimposta</string>
     <string name="store_tracks_in_monthly_directories">Sarva sas rastas registradas in cartellas diferentes pro cada mese</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Sarva sas rastas registradas in suta-cartellas diferentes pro mese de registratzione (es. 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Sarva sas rastas registradas in suta-cartellas diferentes pro mese de registratzione (es. 2018-01).</string>
     <string name="of">%1$d de %2$d</string>
     <string name="moving_time">Tempus in movimentu</string>
     <string name="max_min">Mass/Min</string>
@@ -2697,7 +2714,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="rendering_value_translucent_pink_name">Rosa translùtzidu</string>
     <string name="average">Mèdiu</string>
     <string name="ascent_descent">Ascendente/Discendente</string>
-    <string name="quick_action_resume_pause_navigation">Faghe sighire/Pone in pàusa su nàvigu</string>
+    <string name="quick_action_resume_pause_navigation">Pone in pàusa/faghe sighire su nàvigu</string>
     <string name="quick_action_resume_pause_navigation_descr">Incarca custu butone pro pònnere in pàusa o fàghere sighire su nàvigu.</string>
     <string name="quick_action_show_navigation_finish_dialog">Ammustra sa ventana pro sa fine de su nàvigu</string>
     <string name="quick_action_start_stop_navigation">Incumintza/Acaba su nàvigu</string>
@@ -2744,7 +2761,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="add_segment_to_the_track">Annanghe a una rasta GPX</string>
 <string name="keep_showing_on_map">Sighi a l\'ammustrare in sa mapa</string>
     <string name="exit_without_saving">Essire chene sarvare?</string>
-    <string name="do_not_use_animations">No imprees sas animatziones</string>
+    <string name="do_not_use_animations">Peruna animatzione</string>
     <string name="do_not_use_animations_descr">Disabilitat sas animatziones in s\'aplicatzione.</string>
     <string name="move_all_to_history">Pone totu in sa cronologia</string>
     
@@ -2752,7 +2769,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="sort_by">Òrdina pro</string>
     
     <string name="map_orientation_change_in_accordance_with_speed">Lìmite de orientamentu de sa mapa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Ischerta sa lestresa in suta de sa cale s\'orientamentu de sa mapa colat dae \'in sa diretzione de mòvida\' a \'bùssola\'.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Ischerta inoghe in suta sa lestresa cun sa cale sa mapa colat dae \'In sa diretzione de mòvida\' a \'Bùssola\'.</string>
     <string name="all_markers_moved_to_history">Totu sos marcadores de sa mapa sunt istados archiviados in sa Cronologia</string>
     <string name="marker_moved_to_history">Marcadore mapa postu in sa Cronologia</string>
     <string name="marker_moved_to_active">Marcadore mapa postu in sos ativos</string>
@@ -2778,7 +2795,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formadu de sas coordinatas</string>
     <string name="use_system_keyboard">Imprea su tecladu de sistema</string>
-    <string name="fast_coordinates_input_descr">Issèbera su formadu de sas coordinatas. L\'as a pòdere semper cambiare dae sas Optziones.</string>
+    <string name="fast_coordinates_input_descr">Issèbera su formadu de sas coordinatas. L\'as a pòdere semper cambiare dae sas \'Optziones\'.</string>
     <string name="fast_coordinates_input">Insertada lestra de sas coordinatas</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Istransi sas istradas de astra, sos bados</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Istransi sas istradas de astra e sos bados.</string>
@@ -2802,7 +2819,7 @@ Pro praghere iscrie su còdighe intreu</string>
     
     <string name="shared_string_road">Istrada</string>
     <string name="show_map">Ammustra sa mapa</string>
-    <string name="route_is_calculated">Àndala torrada a calculare</string>
+    <string name="route_is_calculated">Àndala calculada</string>
     <string name="round_trip">Àndala tzirculare</string>
     <string name="plan_route_no_markers_toast">Depes annànghere a su mancu unu marcadore pro impreare custa funtzionalidade.</string>
     <string name="release_2_8">\\022 Marcadores de mapa noos cun lìnias de ghia e càlculu de s\'àndala 
@@ -2834,17 +2851,17 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_paste">Incolla</string>
     <string name="coordinate_input_accuracy_description">Cola automaticamente a su campu imbeniente a pustis de àere iscritu %1$d tzifras detzimales.</string>
     <string name="coordinate_input_accuracy">%1$d tzifras</string>
-    <string name="go_to_next_field">Cola a su campu imbeniente</string>
+    <string name="go_to_next_field">Campu imbeniente</string>
     <string name="rename_marker">Torra a numenare su marcadore</string>
     <string name="appearance_on_the_map">Visualizatzione in sa mapa</string>
-    <string name="add_track_to_markers_descr">Issèbera una rasta pro annànghere sos puntos de coladòrgiu suos a sos marcadores (petzi sas rastas cun puntos de coladòrgiu sunt allistadas)</string>
+    <string name="add_track_to_markers_descr">Sos puntos de coladòrgiu podent èssere annantos a sos marcadores ischertende una de sas rastas chi los tenet.</string>
     <string name="add_favourites_group_to_markers_descr">Issèbera una categoria de preferidos pro l\'annànghere a sos marcadores.</string>
     <string name="track_waypoints">Puntos de coladòrgiu</string>
     <string name="favourites_group">Categoria de preferidos</string>
     <string name="add_group">Annanghe unu grupu</string>
     <string name="add_group_descr">Podes importare unu grupu de preferidos o puntos de coladòrgiu de una rasta.</string>
     <string name="empty_state_markers_active">Crea marcadores in sa mapa!</string>
-    <string name="empty_state_markers_active_desc">Marca logos in sa mapa cun un\'incarcu curtzu o longu e, a pustis, incarchende su butone cun sa bandera de sos marcadores.</string>
+    <string name="empty_state_markers_active_desc">Marca logos in sa mapa cun un\'incarcu curtzu o longu in \"Logos\" e, a pustis, incarchende su butone cun sa bandera de sos marcadores.</string>
     <string name="empty_state_markers_groups">Importa grupos</string>
     <string name="empty_state_markers_groups_desc">Podes importare grupos de preferidos o puntos de coladòrgiu de una rasta comente marcadores.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
@@ -2854,7 +2871,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="show_guide_line_descr">Ammustra lìnias ghia dae sa positzione tua a sos marcadores ativos.</string>
     <string name="show_arrows_descr">Ammustra una o duas fritzas chi indicant sa diretzione cara a sos marcadores ativos.</string>
     <string name="distance_indication_descr">Issèbera comente ammustrare sa distàntzia cun sos marcadores ativos.</string>
-    <string name="active_markers_descr">Issèbera cantos indicadores de diretzione cheres ammustrare.</string>
+    <string name="active_markers_descr">Issèbera su nùmeru de indicadores de diretzione de ammustrare.</string>
     <string name="shared_string_more_without_dots">Àteru</string>
     <string name="looking_for_tracks_with_waypoints">Chirchende rastas cun puntos de coladòrgiu</string>
     <string name="empty_state_osm_edits">Crea o modìfica ogetos OSM</string>
@@ -2942,7 +2959,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="first_intermediate_dest_description">Annanghet sa prima firmada a s\'àndala</string>
     <string name="subsequent_dest_description">Moe sa destinatzione in subra, e crea una destinatzione</string>
     <string name="map_import_error">Errore cun s\'importatzione de sa mapa</string>
-    <string name="map_imported_successfully">Mapa importada cun sutzessu</string>
+    <string name="map_imported_successfully">Mapa importada</string>
     <string name="enter_the_file_name">Inserta su nùmene de su documentu.</string>
     <string name="enter_lon">Inserta sa longitùdine</string>
     <string name="enter_lat">Inserta sa latitùdine</string>
@@ -2964,4 +2981,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="rendering_attr_whiteWaterSports_name">Isports de abba durche</string>
     <string name="group_deleted">Grupu iscantzelladu</string>
     <string name="clear_all_intermediates">Iscantzella totu sos puntos de coladòrgiu</string>
+    <string name="nothing_found_in_radius">Nudda de agatadu intre su raju de chirca</string>
+    <string name="select_waypoints_category_description">Podes annànghere totu sos puntos de sa rasta, o isseberare categorias separadas.</string>
+    <string name="shared_string_total">Totale</string>
     </resources>
