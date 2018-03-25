@@ -1213,7 +1213,7 @@ Pôr do Sol: %2$s</string>
 	<string name="poi_query_by_name_matches_categories">Encontradas várias categorias de POI que correspondem à consulta:</string>
 	<string name="data_to_search_poi_not_available">Não existem dados locais para pesquisa de POI.</string>
 	<string name="poi_filter_by_name">Pesquisar por nome</string>
-	<string name="old_poi_file_should_be_deleted">O arquivo POI \'%1$s\' é repetido e pode ser apagado.</string>
+	<string name="old_poi_file_should_be_deleted">O arquivo POI \'%1$s\' é repetido e pode ser excluído.</string>
 	<string name="update_poi_file_not_found">Não foi encontrado e não pôde ser criado o arquivo local para salvar as mudanças de POI.</string>
 	<string name="button_upgrade_osmandplus">Alterar para OsmAnd+</string>
 	<string name="map_version_changed_info">Servidor contém arquivos de mapa incompatíveis com sua versão atual do Osmand. Para baixar e usá-los, por favor atualize o Osmand para a versão mais recente.</string>
@@ -1233,7 +1233,7 @@ Pôr do Sol: %2$s</string>
 	<string name="local_index_mi_upload_gpx">Enviar para OSM</string>
 	<string name="show_more_map_detail">Mostrar mais detalhes do mapa</string>
 	<string name="show_more_map_detail_descr">Mostrar detalhes do mapa vetorial (estradas, etc.) quando em zoom mais distante</string>
-	<string name="favourites_delete_multiple_succesful">Ponto(s) favorito(s) apagado(s).</string>
+	<string name="favourites_delete_multiple_succesful">Ponto(s) favorito(s) excluído(s).</string>
 	<string name="favorite_delete_multiple">Você apagará %1$d favorito(s) e %2$d grupo(s) favorito(s). Continuar?</string>
 	<string name="favorite_friends_category">Amigos</string>
 	<string name="favorite_places_category">Lugares</string>
@@ -1246,7 +1246,7 @@ Pôr do Sol: %2$s</string>
 	<string name="shared_string_release">Lançado</string>
 	<string name="local_index_installed">Versão local</string>
 	<string name="local_index_items_backuped">%1$d de %2$d item(s) desativado(s).</string>
-	<string name="local_index_items_deleted">%1$d de %2$d item(s) apagado(s).</string>
+	<string name="local_index_items_deleted">%1$d de %2$d item(s) excluído(s).</string>
 	<string name="local_index_items_restored">%1$d de %2$d item(s) ativado(s).</string>
 	<string name="local_index_no_items_to_do">Sem itens para %1$s</string>
 	<string name="local_index_mi_restore">Ativar</string>
@@ -1605,7 +1605,7 @@ Pôr do Sol: %2$s</string>
 	<string name="favourites_context_menu_edit">Modificar favorito</string>
 	<string name="favourites_context_menu_delete">Apagar favorito</string>
 	<string name="favourites_remove_dialog_msg">Apagar ponto favorito \'%s\'?</string>
-	<string name="favourites_remove_dialog_success">Ponto favorito {0} apagado.</string>
+	<string name="favourites_remove_dialog_success">Ponto favorito {0} excluído.</string>
 	
 	
 	
@@ -1626,7 +1626,7 @@ Pôr do Sol: %2$s</string>
 	<string name="poi_error_poi_not_found">Nó não pode ser encontrado ou POI não é um único nó</string>
 	<string name="poi_remove_confirm_template">Apagar {0} (inserir comentário)?</string>
 	<string name="poi_remove_title">Apagar POI</string>
-	<string name="poi_remove_success">POI apagado</string>
+	<string name="poi_remove_success">POI excluído</string>
 	<string name="poi_action_add">adicionar</string>
 	<string name="poi_action_change">modificar</string>
 	<string name="poi_action_succeded_template">Ação {0} bem sucedida.</string>
@@ -1641,7 +1641,7 @@ Pôr do Sol: %2$s</string>
 	<string name="filter_current_poiButton">Filtro</string>
 	<string name="edit_filter_save_as_menu_item">Salvar como</string>
 	<string name="edit_filter_delete_dialog_title">Apagar filtro selecionado?</string>
-	<string name="edit_filter_delete_message">Filtro {0} foi apagado</string>
+	<string name="edit_filter_delete_message">Filtro {0} foi excluído</string>
 	<string name="edit_filter_create_message">Filtro {0} foi criado</string>
 	<string name="email">e-mail</string>
 	<string name="av_camera_focus">Tipo de foco da câmera</string>
@@ -1786,7 +1786,7 @@ Pôr do Sol: %2$s</string>
 	<string name="favourites">Favoritos</string>
 <string name="poi_action_delete">apagar</string>
 	<string name="saved_at_time">Salvo com sucesso em: %1$s</string>
-<string name="poi_deleted_localy">POI será apagado quando você enviar suas alterações</string>
+<string name="poi_deleted_localy">POI será excluído quando você enviar suas alterações</string>
 	<string name="show_gpx">Mostrar GPX</string>
     <string name="show_on_start">Mostrar no início</string>
 	<string name="count_of_lines">Número de linhas</string>
@@ -1825,11 +1825,11 @@ Pôr do Sol: %2$s</string>
     <string name="access_from_map_description">O botão menu abre o painel de controle, não o menu.</string>
     <string name="osm_save_offline">Salvar offline</string>
     <string name="osm_edit_modified_poi">POI no OSM modificado</string>
-    <string name="osm_edit_deleted_poi">POI no OSM apagado</string>
+    <string name="osm_edit_deleted_poi">POI no OSM excluído</string>
     <string name="context_menu_item_open_note">Abrir nota no OSM</string>
     <string name="osm_edit_reopened_note">Nota no OSM reaberta</string>
     <string name="osm_edit_commented_note">Nota no OSM comentada</string>
-    <string name="osm_edit_removed_note">Nota no OSM apagada</string>
+    <string name="osm_edit_removed_note">Nota no OSM excluído</string>
 	<string name="osm_edit_created_note">Nota no OSM criada</string>
 	<string name="osn_bug_name">Nota no OSM</string>
 	<string name="osn_add_dialog_title">Criar nota</string>
@@ -2289,7 +2289,7 @@ Pôr do Sol: %2$s</string>
     <string name="modify_the_search_query">Modificar a consulta de pesquisa.</string>
     <string name="empty_state_osm_edits">Criar ou modificar objetos OSM</string>
     <string name="empty_state_osm_edits_descr">Criar ou modificar POI do OSM, abrir ou comentar sobre Notas do OSM, e contribuir com arquivos GPX gravados.</string>
-    <string name="shared_string_deleted">Apagado</string>
+    <string name="shared_string_deleted">Excluído</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Adicionado</string>
     <string name="marker_activated">Marcador %s foi ativado.</string>
@@ -2781,4 +2781,8 @@ Pôr do Sol: %2$s</string>
     <string name="map_imported_successfully">Mapa importado com êxito</string>
     <string name="rendering_attr_whiteWaterSports_name">Esportes em corredeiras</string>
     <string name="make_as_start_point">Tornar como Ponto de Partida</string>
+    <string name="select_waypoints_category_description">Você pode adicionar todos os pontos da trilha, ou selecione categorias separadas.</string>
+    <string name="shared_string_total">Total</string>
+    <string name="clear_all_intermediates">Limpar todos os pontos intermédios</string>
+    <string name="group_deleted">Grupo excluído</string>
     </resources>
