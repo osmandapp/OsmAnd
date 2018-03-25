@@ -327,24 +327,9 @@ public class GeocodingUtilities {
 					//bld.connectionPoint = b.getLocation();
 					bld.connectionPoint = new LatLon(plat, plon);
 					streetBuildings.add(bld);
-					if (!Algorithms.isEmpty(b.getName2())) {
-						int fi = Algorithms.extractFirstIntegerNumber(b.getName());
-						int si = Algorithms.extractFirstIntegerNumber(b.getName2());
-						if (si != 0 && fi != 0) {
-							int num = (int) (fi + (si - fi) * coeff);
-							BuildingInterpolation type = b.getInterpolationType();
-							if (type == BuildingInterpolation.EVEN || type == BuildingInterpolation.ODD) {
-								if (num % 2 == (type == BuildingInterpolation.EVEN ? 1 : 0)) {
-									num--;
-								}
-							} else if (b.getInterpolationInterval() > 0) {
-								int intv = b.getInterpolationInterval();
-								if ((num - fi) % intv != 0) {
-									num = ((num - fi) / intv) * intv + fi;
-								}
-							}
-							bld.buildingInterpolation = num + "";
-						}
+					String nm = b.getInterpolationName(coeff);
+					if(!Algorithms.isEmpty(nm)) {
+						bld.buildingInterpolation = nm;
 					}
 				}
 
