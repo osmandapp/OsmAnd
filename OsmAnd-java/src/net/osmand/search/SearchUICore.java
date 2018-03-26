@@ -42,6 +42,7 @@ public class SearchUICore {
 
 	private static final int TIMEOUT_BETWEEN_CHARS = 700;
 	private static final int TIMEOUT_BEFORE_SEARCH = 50;
+	private static final int TIMEOUT_BEFORE_FILTER = 20;
 	private static final Log LOG = PlatformUtil.getLog(SearchUICore.class);
 	private SearchPhrase phrase;
 	private SearchResultCollection  currentSearchResult;
@@ -364,14 +365,19 @@ public class SearchUICore {
 		searchSettings = settings;
 	}
 
-	private List<SearchResult> filterCurrentResults(List<SearchResult> rr, SearchPhrase phrase) {
+	private void filterCurrentResults(SearchPhrase phrase, ResultMatcher<SearchResult> matcher) {
+		if (matcher == null) {
+			return;
+		}
 		List<SearchResult> l = currentSearchResult.searchResults;
 		for (SearchResult r : l) {
 			if (filterOneResult(r, phrase)) {
-				rr.add(r);
+				matcher.publish(r);
+			}
+			if (matcher.isCancelled()) {
+				return;
 			}
 		}
-		return rr;
 	}
 
 	private boolean filterOneResult(SearchResult object, SearchPhrase phrase) {
@@ -401,14 +407,6 @@ public class SearchUICore {
 		if (debugMode) {
 			LOG.info("Prepare search <" + phrase + ">");
 		}
-		SearchResultCollection quickRes = new SearchResultCollection(phrase);
-		if (debugMode) {
-			LOG.info("Filtering current data <" + phrase + "> Results=" + currentSearchResult.searchResults.size());
-		}
-		filterCurrentResults(quickRes.searchResults, phrase);
-		if (debugMode) {
-			LOG.info("Current data filtered <" + phrase + "> Results=" + quickRes.searchResults.size());
-		}
 		singleThreadedExecutor.submit(new Runnable() {
 
 			@Override
@@ -417,7 +415,7 @@ public class SearchUICore {
 					if (onSearchStart != null) {
 						onSearchStart.run();
 					}
-					SearchResultMatcher rm = new SearchResultMatcher(matcher, phrase, request, requestNumber, totalLimit);
+					final SearchResultMatcher rm = new SearchResultMatcher(matcher, phrase, request, requestNumber, totalLimit);
 					if (debugMode) {
 						LOG.info("Starting search <" + phrase.toString() + ">");
 					}
@@ -425,11 +423,13 @@ public class SearchUICore {
 					if (debugMode) {
 						LOG.info("Search started <" + phrase.toString() + ">");
 					}
-					if (TIMEOUT_BETWEEN_CHARS > 0 && delayedExecution) {
+					if (delayedExecution) {
 						long startTime = System.currentTimeMillis();
 						if (debugMode) {
 							LOG.info("Wait for next char <" + phrase.toString() + ">");
 						}
+
+						boolean filtered = false;
 						while (System.currentTimeMillis() - startTime <= TIMEOUT_BETWEEN_CHARS) {
 							if (rm.isCancelled()) {
 								if (debugMode) {
@@ -437,9 +437,36 @@ public class SearchUICore {
 								}
 								return;
 							}
-							Thread.sleep(TIMEOUT_BEFORE_SEARCH);
+							Thread.sleep(TIMEOUT_BEFORE_FILTER);
+
+							if (!filtered) {
+								final SearchResultCollection quickRes = new SearchResultCollection(phrase);
+								if (debugMode) {
+									LOG.info("Filtering current data <" + phrase + "> Results=" + currentSearchResult.searchResults.size());
+								}
+								filterCurrentResults(phrase, new ResultMatcher<SearchResult>() {
+									@Override
+									public boolean publish(SearchResult object) {
+										quickRes.searchResults.add(object);
+										return true;
+									}
+
+									@Override
+									public boolean isCancelled() {
+										return rm.isCancelled();
+									}
+								});
+								if (debugMode) {
+									LOG.info("Current data filtered <" + phrase + "> Results=" + quickRes.searchResults.size());
+								}
+								if (!rm.isCancelled()) {
+									currentSearchResult = quickRes;
+									rm.filterFinished(phrase);
+								}
+								filtered = true;
+							}
 						}
-					} else if (TIMEOUT_BEFORE_SEARCH > 0) {
+					} else {
 						Thread.sleep(TIMEOUT_BEFORE_SEARCH);
 					}
 					if (rm.isCancelled()) {
@@ -477,7 +504,7 @@ public class SearchUICore {
 				}
 			}
 		});
-		return quickRes;
+		return null;
 	}
 
 
@@ -594,6 +621,14 @@ public class SearchUICore {
 			if (matcher != null) {
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.SEARCH_STARTED;
+				matcher.publish(sr);
+			}
+		}
+
+		public void filterFinished(SearchPhrase phrase) {
+			if (matcher != null) {
+				SearchResult sr = new SearchResult(phrase);
+				sr.objectType = ObjectType.FILTER_FINISHED;
 				matcher.publish(sr);
 			}
 		}
