@@ -1530,7 +1530,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void runCoreSearchInternal(String text, boolean showQuickResult, boolean searchMore,
 									   final SearchResultListener resultListener) {
-		SearchResultCollection c = searchUICore.search(text, showQuickResult, new ResultMatcher<SearchResult>() {
+		searchUICore.search(text, showQuickResult, new ResultMatcher<SearchResult>() {
 			SearchResultCollection regionResultCollection = null;
 			SearchCoreAPI regionResultApi = null;
 			List<SearchResult> results = new ArrayList<>();
@@ -1580,6 +1580,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							}
 						});
 						break;
+					case FILTER_FINISHED:
+						if (resultListener != null) {
+							app.runInUIThread(new Runnable() {
+								@Override
+								public void run() {
+									resultListener.publish(searchUICore.getCurrentSearchResult(), false);
+								}
+							});
+						}
+						break;
 					case SEARCH_API_FINISHED:
 						final SearchCoreAPI searchApi = (SearchCoreAPI) object.object;
 						final List<SearchResult> apiResults;
@@ -1626,9 +1636,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			if (!showQuickResult) {
 				updateSearchResult(null, false);
 			}
-		}
-		if (showQuickResult) {
-			updateSearchResult(c, false);
 		}
 	}
 
