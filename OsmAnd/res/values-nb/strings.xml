@@ -2290,7 +2290,7 @@
     <string name="route_point_one">Rutepunkt 1</string>
 <string name="none_point_error">Legg til minst et punkt.</string>
     <string name="enter_gpx_name">GPX-filnavn:</string>
-    <string name="quick_action_resume_pause_navigation">Navigering: gjenoppta/sett på pause</string>
+    <string name="quick_action_resume_pause_navigation">Navigering: sett på pause/gjenoppta</string>
     <string name="quick_action_resume_pause_navigation_descr">Trykk på denne knappen for å sette på pause eller gjenoppta navigeringen.</string>
     <string name="right_side_navigation">Høyrekjøring</string>
     <string name="quick_action_start_stop_navigation_descr">Trykk på denne knappen for å starte eller avslutte navigeringen.</string>
@@ -2334,9 +2334,9 @@
     <string name="online_photos">Nettbaserte bilder</string>
     <string name="shared_string_add_photos">Legg til bilder</string>
     <string name="no_photos_descr">Vi har ingen bilder fra dette stedet.</string>
-    <string name="mapillary_action_descr">Bidra med dine egne gatenivåvisninger av dette stedet via Mapillary.</string>
+    <string name="mapillary_action_descr">Bidra med egne gatenivåvisninger av dette stedet via Mapillary.</string>
     <string name="mapillary_widget">Mapillary-miniprogram</string>
-    <string name="mapillary_widget_descr">Lar deg bidra raskt til Mapillary.</string>
+    <string name="mapillary_widget_descr">Gir mulighet for raske bidrag til Mapillary.</string>
     <string name="mapillary_descr">Nettbaserte bilder på gatenivå for alle. Oppdag steder, samarbeid, fang inn verden.</string>
     <string name="mapillary">Mapillary</string>
     <string name="nautical_maps">Sjøkart</string>
@@ -2386,9 +2386,7 @@
     <string name="shared_string_list">Liste</string>
     <string name="passed">Sist brukt: %1$s</string>
     <string name="mapillary_menu_filter_description">Du kan filtrere bilder etter innsender eller etter dato. Filtere gjelder kun for høyere zoomnivåer.</string>
-    <string name="improve_coverage_install_mapillary_desc">Du kan ta dine egne bilder eller bildeserier og legge dem til denne kartposisjonen.
-\n
-\nFor å gjøre dette må du installere Mapillary-appen fra Google Play Store.</string>
+    <string name="improve_coverage_install_mapillary_desc">Installer Mapillary for å legge til et eller flere bilder til denne kartposisjonen.</string>
     <string name="plugin_mapillary_descr">Foto på gatenivå for alle. Oppdag plasser, samarbeid, fang inn verden.</string>
     <string name="quick_action_showhide_osmbugs_title">Vis/skjul OSM-notater</string>
     <string name="quick_action_osmbugs_show">Vis OSM-notater</string>
@@ -2418,7 +2416,7 @@
     
     <string name="layer_osm_bugs">OSM-notater (på nett)</string>
     <string name="move_to_history">Flytt til historikk</string>
-    <string name="group_will_be_removed_after_restart">Gruppen blir fjernet etter neste start av programmet.</string>
+    <string name="group_will_be_removed_after_restart">Gruppen vil være borte neste gang du starter programmet.</string>
     <string name="show_guide_line">Vis hjelpelinjer</string>
     <string name="show_arrows_on_the_map">Vis piler på kartet</string>
     <string name="show_passed">Vis passerte</string>
@@ -2429,7 +2427,7 @@
     <string name="date_added">Dato lagt til</string>
     <string name="order_by">Sorter etter:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartorienteringsterskel</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Velg ved hvilken hastighet kartorienteringen skifter fra \'I bevegelsesretning\' til \'Ifølge kompass\'.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Velg hastighet for skifte av kartorientering fra \'Bevegelsesretning\' til \'Kompassretning\' nedenfor.</string>
     <string name="srtm_purchase_header">For å se koter på kartet, må du kjøpe og installere programtillegget for koter</string>
     <string name="native_app_allocated_memory">Totalt innebygget minne</string>
     <string name="starting_point_too_far">Startpunkt for langt fra nærmeste vei.</string>
@@ -2526,8 +2524,8 @@
     <string name="quick_action_fav_name_descr">La stå tomt for å automatisk bruke adressen eller stedsnavnet.</string>
     <string name="quick_action_bug_descr">Denne meldingen vil bli auto-fullført i kommentarfeltet.</string>
     <string name="mappilary_no_internet_desc">Du trenger internett for å vise bilder fra Mapillary.</string>
-    <string name="hillshade_menu_download_descr">For å se relieffskygger på kartet, må du laste ned relieffskyggeoverleggskartet for denne regionen.</string>
-    <string name="hillshade_purchase_header">For å se relieffskygger på kartet, må du kjøpe og installere programtillegget for koter</string>
+    <string name="hillshade_menu_download_descr">Last ned relieffskyggeoverleggskartet for å se relieffskygger for denne regionen.</string>
+    <string name="hillshade_purchase_header">Installer programtillegget for koter for å vise relieffskygger på kartet</string>
     <string name="enter_new_name">Oppfør nytt navn</string>
 	<string name="shared_string_back">Tilbake</string>
 	<string name="waypoints_added_to_map_markers">Rutepunkter lagt til kartmarkører</string>
@@ -2540,7 +2538,7 @@
     <string name="plan_route_no_markers_toast">Du må legge til minst en markør for å bruke denne funksjonen.</string>
     <string name="make_round_trip_descr">Legg til kopi av startpunktet som reisemål.</string>
     <string name="make_round_trip">Gjør rundtur</string>
-    <string name="srtm_menu_download_descr">For å vise koter på kartet, må du laste ned kotekartet for denne regionen.</string>
+    <string name="srtm_menu_download_descr">Last ned kotekart for denne regionen.</string>
     <string name="view">Vis</string>
 	<string name="import_as_gpx">Importer som GPX-fil</string>
     <string name="import_as_favorites">Importer som Favoritter</string>
@@ -2556,7 +2554,7 @@
     <string name="shared_string_one">Én</string>
     <string name="favourites_group">Favoritterkategori</string>
     <string name="empty_state_markers_active">Opprett kartmarkører!</string>
-    <string name="empty_state_markers_active_desc">Lang eller kort-trykk steder, deretter trykk markørflaggknappen.</string>
+    <string name="empty_state_markers_active_desc">Lang- eller korttrykk \'Steder\', deretter trykk markørflaggknappen.</string>
     <string name="empty_state_markers_history_desc">Markører markert som passert vises på denne skjermen.</string>
     <string name="digits_quantity">Antall desimaler</string>
     <string name="shared_string_right">Høyre</string>
@@ -2595,7 +2593,7 @@
     <string name="show_guide_line_descr">Vis hjelpelinjer fra din posisjon til de aktive markørplasseringene.</string>
     <string name="show_arrows_descr">Vis en eller to piler som indikerer retningen til de aktive markørene.</string>
     <string name="distance_indication_descr">Velg hvordan avstanden til aktive markører skal vises.</string>
-    <string name="active_markers_descr">Velg hvor mange retningsindikatorer som vises.</string>
+    <string name="active_markers_descr">Velg antall retningsindikatorer som skal vises.</string>
     <string name="tap_on_map_to_hide_interface_descr">Et trykk på kartet skjuler/viser kontrollknappene og miniprogrammene.</string>
     <string name="release_3_0">\\022 
 \n
@@ -2644,7 +2642,7 @@
     <string name="quick_action_page_list_descr">Trykk på handlingsknappen vil bla gjennom listen nedenfor.</string>
     <string name="quick_action_empty_param_error">Parameterne kan ikke være tomme</string>
     <string name="quick_action_btn_tutorial_descr">Lang-trykk og dra knappen for å endre dens posisjon på skjermen.</string>
-    <string name="add_track_to_markers_descr">Velg et spor for å legge til dets rutepunkter til markørene. (Kun spor med rutepunkter er listet opp.)</string>
+    <string name="add_track_to_markers_descr">Rutepunkter kan legges til i markører ved å velge et av disse sporene som inneholder rutepunkter.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="depth_contour_descr">Kartsett som inneholder havdybdekoter og nautiske punkter.</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samler inn informasjon om hvilke deler av programmet du åpner. Plasseringen din blir aldri sendt, ei heller noe du måtte skrive inn i programmet eller detaljer om områder som vises, søkes etter, eller lastes ned.</string>
@@ -2762,7 +2760,7 @@
     <string name="rendering_attr_noPolygons_description">Gjør alle landarealelementer på kartet gjennomsiktige.</string>
     <string name="search_offline_geo_error">Kunne ikke tolke geo-hensikt \"%s\".</string>
     <string name="foot">ft</string>
-    <string name="nothing_found_in_radius">Ingenting ble funnet i radiusen:</string>
+    <string name="nothing_found_in_radius">Ingenting funnet innen radiusen:</string>
     <string name="select_waypoints_category_description">Du kan legge til alle sporets rutepunkter, eller velg separate kategorier.</string>
     <string name="rendering_attr_whiteWaterSports_name">Rafting</string>
     </resources>
