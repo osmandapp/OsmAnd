@@ -467,7 +467,7 @@
     <string name="opening_hours">Åpningstider</string>
     <string name="poi">Interessepunkt</string>
     <string name="additional_settings">Tilleggsinnstillinger</string>
-    <string name="save_current_track_descr">Lagre gjeldende spor til SD nå.</string>
+    <string name="save_current_track_descr">Lagre gjeldende spor til minnekort nå.</string>
     <string name="save_current_track">Lagre gjeldende GPX-spor</string>
     <string name="save_track_interval">Loggeintervall under navigering</string>
     <string name="save_track_interval_descr">Velg loggingsintervall for opptak av spor under navigering.</string>
@@ -701,7 +701,7 @@
     
     
     <string name="map_widget_top">Statuslinje</string>
-    <string name="map_preferred_locale_descr">Foretrukket språk for påskrifter på kartet (hvis ikke tilgjengelig skiftes til engelsk eller til lokale navn).</string>
+    <string name="map_preferred_locale_descr">Foretrukket språk for påskrifter på kartet (hvis utilgjengelig, brukes engelsk eller lokale navn).</string>
     <string name="map_preferred_locale">Foretrukket språk på kart</string>
     <string name="home">Dashbord</string>
     <string name="rendering_attr_showCycleRoutes_name">Vis sykkelruter</string>
@@ -972,8 +972,8 @@
     <string name="loading_data">Laster data…</string>
 	
 	<string name="srtm_plugin_description">Dette programtillegget gir både et lag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. (Merk at koter og/eller relieff-data er separate tilleggsnedlastinger tilgjengelige etter aktivering av programtillegget.) 
-\n
-\nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
+\n 
+\nDe globale dataene (mellom 70° nord og 70° sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
 
     <string name="first_time_msg">Takk for at du bruker OsmAnd. For mange funksjoner i dette programmet trenger du noen regionale offline-data som du kan laste ned via \'Innstillinger\' → \'Karthåndtering\'. Etterpå vil du være i stand til å se kart, finne adresser, lete etter interessepunkter og finne offentlig transport.</string>
 
@@ -988,11 +988,11 @@
     <string name="coordinates">Koordinater</string>
     <string name="download_tab_downloads">Alle nedlastinger</string>
     <string name="download_tab_updates">Oppdateringer</string>
-    <string name="no_internet_connection">Ikke mulig å laste ned, kontroller internettforbindelsen.</string>
+    <string name="no_internet_connection">Ikke i stand til å laste ned, kontroller internettforbindelsen.</string>
     <string name="shared_string_dismiss">Avvis</string>
     <string name="everything_up_to_date">Alle filer er oppdaterte</string>
     <string name="use_opengl_render">Bruk OpenGL-opptegning</string>
-    <string name="use_opengl_render_descr">Bruk maskinvareakselerert OpenGL-opptegning (virker kanskje ikke på enkelte enheter).</string>
+    <string name="use_opengl_render_descr">Bruk maskinvareakselerert OpenGL-opptegning (kan bruke mer batteri, eller ikke virke på veldig gamle enheter).</string>
     <string name="map_locale">Språk på kart</string>
     <string name="rendering_attr_transportStops_name">Stoppesteder</string>
     <string name="navigate_point_zone">Sone</string>
@@ -1127,10 +1127,10 @@
     <string name="audionotes_plugin_name">Audio/video-notater</string>
     <string name="osm_settings">OSM-redigering</string>
 	<string name="osmand_srtm_long_description_1000_chars">Dette programtillegget gir både et lag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. 
-\n
-\nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
+\n 
+\nDe globale dataene (mellom 70° nord og 70° sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="plugin_ski_name">Skikartvisning</string>
-    <string name="osmand_accessibility_description">Dette programtillegget gjør enhetens tilgjengelighetsfunksjoner tilgjengelige direkte i OsmAnd. Det muliggjør f.eks justering av talehastigheten for TTS-tale, innstilling av styrekors-skjermnavigering ved hjelp av en styrekule for zoomkontroll, eller bruke tekst-til-tale-tilbakemelding, f.eks auto-annonsering av din posisjon.</string>
+    <string name="osmand_accessibility_description">Dette programtillegget gjør enhetens tilgjengelighetsfunksjoner tilgjengelige direkte i OsmAnd. Det muliggjør f.eks justering av talehastigheten for TTS-tale, innstilling av styrekors-skjermnavigering ved hjelp av en styrekule for zoomkontroll, eller tekst-til-tale-tilbakemelding, f.eks auto-annonsering av din posisjon.</string>
     <string name="rename_failed">Navneendring feilet.</string>
 
 
@@ -1192,7 +1192,7 @@
     <string name="shared_string_map">Kart</string>
     <string name="shared_string_favorite">Favoritt</string>
     <string name="shared_string_favorites">Favoritter</string>
-    <string name="shared_string_add_to_favorites">Legg til i favoritter</string>
+    <string name="shared_string_add_to_favorites">Legg til i \'Mine favoritter\'</string>
     <string name="shared_string_my_location">Min posisjon</string>
     <string name="shared_string_my_places">Mine steder</string>
     <string name="shared_string_my_favorites">Mine favoritter</string>
@@ -1231,7 +1231,7 @@
     <string name="agps_info">A-GPS-info</string>
     <string name="shared_string_message">Melding</string>
     <string name="agps_data_last_downloaded">A-GPS-data sist nedlastet: %1$s</string>
-    <string name="welcome_text">OsmAnd gir global offline kartlesing, og global offline navigering!</string>
+    <string name="welcome_text">OsmAnd tilbyr global nettfrakoblet kartlesing og navigering.</string>
     <string name="current_route">Gjeldende rute</string>
     
     <string name="shared_string_go">Start</string>
@@ -1323,11 +1323,11 @@
     <string name="lang_os">Ossetisk</string>
     <string name="lang_eo">Esperanto</string>
     <string name="lang_es_ar">Spansk (Argentina)</string>
-    <string name="lang_nb">Norsk (bokmål)</string>
+    <string name="lang_nb">Norsk bokmål</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_th">Thai</string>
     <string name="lang_te">Telugu</string>
-    <string name="lang_nn">Norsk (nynorsk)</string>
+    <string name="lang_nn">Norsk nynorsk</string>
     <string name="lang_ms">Malayisk</string>
     <string name="lang_ht">Haitisk</string>
     <string name="lang_gl">Galisisk</string>
@@ -1349,7 +1349,7 @@
     <string name="rendering_value_translucent_blue_name">Gjennomskinnelig blå</string>
     <string name="rendering_value_purple_name">Lilla</string>
     <string name="rendering_value_translucent_purple_name">Gjennomskinnelig lilla</string>
-    <string name="restart_is_required">For å fullt ut bruke endringene er en manuell omstart av programmet nødvendig.</string>
+    <string name="restart_is_required">Start programmet på nytt manuelt for å bruke alle endringer.</string>
     <string name="plugin_touringview_name">Turkartvisning</string>
     <string name="rendering_value__name">Standard</string>
     <string name="rendering_value_highContrastRoads_name">Veier med høy kontrast</string>
@@ -1370,7 +1370,7 @@
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Offline-kart\n&amp; navigering</string>
     <string name="routing_attr_avoid_shuttle_train_name">Unngå pendeltog</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Unngå pendeltog</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Unngå bruk av pendeltog</string>
     <string name="srtm_plugin_disabled">Koter deaktivert</string>
     <string name="favorite_category_add_new">Legg til ny</string>
     <string name="favorite_category_select">Velg kategori</string>
@@ -1388,7 +1388,7 @@
     <string name="show_gpx">Vis GPX</string>
     <string name="roads">Veier</string>
     <string name="favourites_context_menu_add">Legg til favoritt</string>
-    <string name="favorite_category_dublicate_message">Spesifisert kategorinavn finnes allerede. Bruk et annet navn.</string>
+    <string name="favorite_category_dublicate_message">Bruk et kategorinavn som ikke finnes allerede.</string>
     <string name="favorite_category_name">Kategorinavn</string>
     <string name="favorite_category_add_new_title">Legg til ny kategori</string>
     <string name="regions">Regioner</string>
@@ -1398,7 +1398,7 @@
     <string name="share_menu_location">Del posisjon</string>
     <string name="shared_string_send">Send</string>
     <string name="map_downloaded">Kart lastet ned</string>
-    <string name="map_downloaded_descr">Kartet over %1$s er lastet ned og kan nå brukes.</string>
+    <string name="map_downloaded_descr">Det nedlastede kartet over %1$s kan nå brukes.</string>
     <string name="go_to_map">Vis kartet</string>
     <string name="downloads">Nedlastinger</string>
     <string name="value_downloaded_of_max">%1$.1f av %2$.1f MB</string>
@@ -1407,7 +1407,7 @@
     <string name="free_downloads_used">Gratis nedlastinger brukt</string>
     <string name="application_dir_description">Velg hvor du vil lagre kart og andre datafiler.</string>
     <string name="enter_country_name">Oppgi navn på land</string>
-    <string name="world_map_download_descr">Basiskart verden (som dekker hele verden ved lav zoom) mangler eller er utdatert. Vurder å laste det ned for en global oversikt.</string>
+    <string name="world_map_download_descr">Basiskart verden (som dekker hele verden ved lavt zoomnivå) mangler eller er utdatert. Vurder å laste det ned for en global oversikt.</string>
     <string name="shared_string_qr_code">QR-kode</string>
     <string name="basemap_was_selected_to_download">Basiskart er nødvendig for at programmet skal fungere riktig og ble valgt for å laste ned.</string>
     <string name="get_full_version">Fullversjon</string>
@@ -1936,7 +1936,7 @@
     <string name="simulate_your_location_descr">Simuler din posisjon ved bruk av en beregnet rute eller et GPX-spor som er tatt opp.</string>
     <string name="av_locations_descr">GPX-fil med plasseringsnotater.</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-farge</string>
-    <string name="archive_wikipedia_data">Du har gammel, inkompatibel Wikipediadata nedlastet. Ønsker du å arkivere den?</string>
+    <string name="archive_wikipedia_data">Du har gammel, inkompatibel Wikipediadata. Vil du arkivere det?</string>
     <string name="download_wikipedia_files">Ønsker du å laste ned ytterligere data fra Wikipedia (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Posisjonstjeneste er ikke aktivert. Vil du slå den på?</string>
     <string name="disable_recording_once_app_killed">Forhindre uavhengig logging</string>
