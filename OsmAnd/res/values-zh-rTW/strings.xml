@@ -138,9 +138,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">停車地點</string>
-    <string name="osmand_parking_plugin_description">停車位置外掛元件，讓您記得您的車停在哪和還剩多少停車時間（如果有時間限制）。
-
-在地圖螢幕上，位置和時間這兩者均可見於 OsmAnd 儀表板的小工具。警報可以增加到 Android 的日曆作為提醒。</string>
+    <string name="osmand_parking_plugin_description">停車位置外掛元件，讓您記錄您的車停在哪和還剩多少停車時間（如果有時間限制）。 在地圖螢幕上，位置和時間這兩者均可見於 OsmAnd 儀表板的小工具。警報可以增加到 Android 的日曆作為提醒。</string>
     <string name="osmand_parking_plugin_name">停車地點</string>
     <string name="context_menu_item_add_parking_point">標記為停車位置</string>
     <string name="context_menu_item_delete_parking_point">刪除停車標記</string>
@@ -179,7 +177,7 @@
     <string name="confirm_interrupt_download">您要取消下載中的檔案嗎？</string>
     <string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些地區的離線資料，您可以透過\'設定\' -&gt; \'管理地圖檔案\'來下載。之後您可瀏覽地圖、位置的地址、查看興趣點以及尋找大眾運輸工具。</string>
     <string name="basemap_was_selected_to_download">底圖為某些特別的應用功能必需使用的，並且預設為下載。</string>
-    <string name="select_index_file_to_download">找不到任何資料。如果您不能在您的區域找到，您可以自行製作(參考http://osmand.net)。</string>
+    <string name="select_index_file_to_download">找不到任何資料。如果您不能在您的區域找到，您可以自行製作(參閱 https://osmand.net)。</string>
     <string name="local_indexes_cat_tile">線上和快取地圖圖磚</string>
     <string name="local_indexes_cat_map">標準地圖(向量地圖)</string>
 
@@ -197,7 +195,7 @@
 \n 
 \n地圖圖磚可以直接透過線上資料來源獲得，或者可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料檔案夾中） 作為一個 SQLite 資料庫，可以透過各種的第三方地圖編制工具產生。</string>
     <string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在背景模式下(螢幕關閉)顯示設定，以啟用追蹤與導航。</string>
-    <string name="osmand_accessibility_description">這個外掛元件，讓裝置在 OsmAnd 可以便利的直接用無障礙功能，例如調整 TTS 語音的語音速率、組態螢幕導航方位、使用軌跡球為縮放控制，或使用文字轉語音的回應，如自動告知您的位置。</string>
+    <string name="osmand_accessibility_description">這個外掛元件，讓裝置在 OsmAnd 可以便利的直接用無障礙功能，例如調整 TTS 語音的語音速率、組態螢幕導航方位、使用軌跡球作為縮放控制，或文字轉語音的回應，例如自動告知您的位置。</string>
 
 
     <string name="osmand_development_plugin_description">這個外掛元件顯示開發與除錯功能的設定，如測試或模擬路線、著色演算效能或語音提示。這些設定適用于開發人員，普通使用者並不需要。</string>
@@ -520,7 +518,7 @@
     <string name="indexing_map">地圖索引…</string>
     <string name="indexing_poi">POI 索引…</string>
     <string name="indexing_transport">交通索引…</string>
-    <string name="shared_string_io_error">存取發生錯誤</string>
+    <string name="shared_string_io_error">I/O 發生錯誤</string>
     <string name="km">公里</string>
     <string name="km_h">公里/小時</string>
     <string name="m">公尺</string>
@@ -772,7 +770,7 @@
 
     <string name="osm_settings">OSM 編輯</string>
     <string name="additional_settings">額外設定</string>
-    <string name="save_current_track_descr">現在就將目前的軌跡存到 SD 卡。</string>
+    <string name="save_current_track_descr">現在就將目前的軌跡存到記憶卡。</string>
     <string name="save_current_track">儲存目前的 GPX 軌跡</string>
     <string name="save_track_interval">在導航期間的記錄間隔</string>
     <string name="save_track_interval_descr">在整個導航期間，為軌跡錄製選取記錄間隔。</string>
@@ -972,7 +970,7 @@
     <string name="av_video_format_descr">選擇視訊輸出格式。</string>
     <string name="av_video_format">視訊輸出格式</string>
 
-    <string name="search_street_in_neighborhood_cities">在附近一帶的城市查尋街道</string>
+    <string name="search_street_in_neighborhood_cities">在附近的城市查尋街道</string>
     <string name="av_settings_descr">組態音訊和視訊設定。</string>
     <string name="av_settings">音訊/視訊設定 </string>
     <string name="recording_error">在錄製時發生錯誤</string>
@@ -1047,12 +1045,12 @@
     <string name="layer_recordings">記錄層</string>
     <string name="intermediate_items_sort_return">在目前的位置到達目的地之間的路途上，沿路的中轉地點已採取了最佳化排列。</string>
     <string name="osmand_srtm_long_description_1000_chars">這個外掛元件同時提供了等高線上層和（地貌）地形陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和對起伏的地理構成感興趣的任何人。 
-\n
-\n全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。</string>
+\n 
+\n全球圖資（在北緯 70 ° 至南緯 70 ° 之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。</string>
     <string name="audionotes_location_not_defined">以位置去關聯的附註尚未下定義。\"使用位置 …\"，把註解分配給指定的位置。</string>
     <string name="srtm_plugin_description">這個外掛元件同時提供了等高線上層和（地貌）地形陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和對起伏的地理構成感興趣的任何人。（請注意，等高線和地貌資料是各自獨立的，在外掛元件啟用後可以追加下載。） 
 \n 
-\n全球圖資（在 70 度以北和 70 度以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。</string>
+\n全球圖資（在 70 ° 以北和 70 ° 以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。</string>
 
 
     <string name="index_name_openmaps">OpenMaps EU</string>
@@ -1072,7 +1070,7 @@
     <string name="av_photo_play_sound">快門音效</string>
     <string name="av_photo_play_sound_descr">選擇在按下快門拍照時，是否發出音效。</string>
 
-    <string name="osb_author_or_password_not_specified">請在設定裡指定 OSM 的使用者名稱和密碼</string>
+    <string name="osb_author_or_password_not_specified">請在「設定」裡指定 OSM 的使用者名稱和密碼</string>
     <string name="clear_intermediate_points">清除中轉地點</string>
     <string name="keep_intermediate_points">保留中轉地點</string>
     <string name="new_directions_point_dialog">您已經有中轉地點設定。</string>
@@ -1109,7 +1107,7 @@
     <string name="local_index_tile_data_maxzoom">最大縮放比：%1$s</string>
     <string name="local_index_tile_data_minzoom">最小縮放比：%1$s</string>
     <string name="local_index_tile_data_name">地圖圖磚資料：%1$s</string>
-    <string name="edit_tilesource_successfully">地圖圖磚來源%1$s成功儲存</string>
+    <string name="edit_tilesource_successfully">地圖圖磚來源 %1$s 已儲存</string>
     <string name="edit_tilesource_elliptic_tile">橢圓麥卡托投影</string>
     <string name="edit_tilesource_maxzoom">最大縮放比</string>
     <string name="edit_tilesource_minzoom">最小縮放比</string>
@@ -1146,7 +1144,7 @@
     <string name="app_mode_aircraft">飛行器</string>
     <string name="map_widget_map_rendering">地圖著色演算</string>
     <string name="app_modes_choose_descr">在應用程式中選擇已有的使用設定檔。</string>
-    <string name="app_modes_choose">應用設定檔</string>
+    <string name="app_modes_choose">應用程式設定檔</string>
     <string name="amenity_type_seamark">航線標識</string>
 
 
@@ -1154,7 +1152,7 @@
     <string name="speech_rate">語速</string>
 
     <string name="complex_route_calculation_failed">快速路徑演算失敗 (%s)，退回到慢速演算。</string>
-    <string name="disable_complex_routing_descr">汽車導航時，停用兩階段路線。</string>
+    <string name="disable_complex_routing_descr">為汽車導航時，停用兩階段路線。</string>
     <string name="disable_complex_routing">停用複雜的路線</string>
     <string name="guidance_preferences_descr">導航偏好</string>
     <string name="routing_preferences_descr">路線偏好</string>
@@ -1163,7 +1161,7 @@
     <string name="copying_osmand_one_file_descr">複製檔案 (%s) 到新的目的地…</string>
     <string name="copying_osmand_files_descr">複製 OsmAnd 資料檔到新的目的地 (%s)…</string>
     <string name="copying_osmand_files">複製 OsmAnd 資料檔案…</string>
-    <string name="calculate_osmand_route_gpx">OsmAnd 預估離線路線</string>
+    <string name="calculate_osmand_route_gpx">離線的 OsmAnd 路線計算</string>
     <string name="android_19_location_disabled">由於 Android 4.4 (KitKat) 版本，您無法下載和更新地圖於之前的存儲檔案夾 (%s)。您是否想變更到允許的存儲位置並複製所有的 OsmAnd 檔案到那裡？
 \n注意 1：您舊的檔案將保持不變（但可以手動刪除）。
 \n注意 2：在新的存儲位置，它不可能在 OsmAnd 和 OsmAnd+ 兩者之間共用檔案。</string>
@@ -1188,8 +1186,8 @@
     <string name="route_preferences">優先路線</string>
     <string name="route_info">路線資訊</string>
     <string name="keep_and_add_destination_point">增加為隨後的目的地</string>
-    <string name="use_displayed_track_for_navigation">您是否要將顯示軌跡使用於導航？</string>
-    <string name="calculate_osmand_route_without_internet">OsmAnd 預計的路段沒有網際網路</string>
+    <string name="use_displayed_track_for_navigation">您想使用顯示的軌跡用於導航嗎？</string>
+    <string name="calculate_osmand_route_without_internet">離線計算的 OsmAnd 路段</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd 預估最初和最後路段的路線</string>
 
     <string name="lang_en">英文</string>
@@ -1345,7 +1343,7 @@
     
     
     
-    <string name="gpx_file_is_empty">GPX 軌跡是空的</string>
+    <string name="gpx_file_is_empty">空的 GPX 軌跡</string>
     <string name="gpx_info_distance">距離：%1$s (%2$s 個標點) </string>
     <string name="gpx_info_start_time">開始時間：%1$tF,  %1$tT </string>
     <string name="gpx_info_end_time">結束時間：%1$tF,  %1$tT </string>
@@ -1387,7 +1385,7 @@
 
     <string name="local_index_select_gpx_file">選取要顯示的</string>
     <string name="route_descr_destination">目的地</string>
-    <string name="no_index_file_to_download">下載未找到，請檢查您的網路連線。</string>
+    <string name="no_index_file_to_download">下載未找到，請檢查您連線的網路。</string>
     
     
     
@@ -1412,7 +1410,7 @@
     <string name="rendering_attr_showSurfaces_name">顯示路面</string>
 
     <string name="rendering_attr_showCycleRoutes_name">顯示自行車路線</string>
-    <string name="map_preferred_locale">地圖上優先的語言</string>
+    <string name="map_preferred_locale">偏好的地圖語言</string>
     <string name="local_map_names">當地的名稱</string>
     <string name="lang_sw">斯瓦希里</string>
     <string name="lang_he">希伯來</string>
@@ -1425,7 +1423,7 @@
     <string name="gpx_monitoring_stop">停止 GPX 記錄</string>
     <string name="gpx_start_new_segment">開始新區段</string>
     <string name="lang_fa">波斯</string>
-    <string name="map_preferred_locale_descr">在地圖標簽上優先的語言(如果優先的語言無法使用，將會切換成英文或當地名稱)。</string>
+    <string name="map_preferred_locale_descr">在地圖上對標簽偏好的語言(如果無法使用，將使用英文或當地名稱)。</string>
     <string name="live_monitoring_m_descr">如果已啟用了 GPX 記錄，傳送軌跡資料到指定的 web 服務。</string>
     <string name="keep_navigation_service">保持</string>
     <string name="stop_navigation_service">中止</string>
@@ -1542,8 +1540,8 @@
     <string name="error_avoid_specific_road">沒發現支道</string>
     <string name="everything_up_to_date">全部都是最新的檔案</string>
     <string name="use_opengl_render">使用 OpenGL 著色演算</string>
-    <string name="use_opengl_render_descr">使用硬體加速 OpenGL 著色演算（可能在某些裝置上無法工作）。</string>
-    <string name="no_internet_connection">不能下載，請檢查您的網路連線。</string>
+    <string name="use_opengl_render_descr">使用硬體加速 OpenGL 著色演算（可能會使用更多的電量，或不適用於非常舊的裝置)。</string>
+    <string name="no_internet_connection">無法下載，請檢查您的網路連線。</string>
     <string name="download_tab_downloads">全部下載</string>
     <string name="download_tab_updates">可更新</string>
     <string name="download_tab_local">本機</string>
@@ -1576,7 +1574,7 @@
 
     <string name="rendering_attr_streetLighting_name">街道照明</string>
     <string name="proxy_pref_title">代理伺服器</string>
-    <string name="proxy_pref_descr">指定網際網路代理伺服器。</string>
+    <string name="proxy_pref_descr">指定代理伺服器。</string>
     <string name="settings_privacy">隱私</string>
     <string name="enable_proxy_title">啟用 HTTP 代理伺服器</string>
     <string name="enable_proxy_descr">對所有的網路請求組態 HTTP 代理伺服器。</string>
@@ -1678,8 +1676,8 @@
     <string name="shared_string_refresh">重整</string>
     <string name="shared_string_download">下載</string>
     <string name="shared_string_downloading">正在下載</string>
-    <string name="shared_string_download_successful">下載成功</string>
-    <string name="shared_string_unexpected_error">發生意外錯誤</string>
+    <string name="shared_string_download_successful">已下載</string>
+    <string name="shared_string_unexpected_error">意外的錯誤</string>
     <string name="shared_string_action_template">動作 {0}</string>
     <string name="shared_string_close">關閉</string>
     <string name="shared_string_exit">離開</string>
@@ -1689,7 +1687,7 @@
     <string name="shared_string_more_actions">更多的動作</string>
     <string name="shared_string_map">地圖</string>
     <string name="shared_string_favorites">我的收藏</string>
-    <string name="shared_string_add_to_favorites">加到我的收藏</string>
+    <string name="shared_string_add_to_favorites">加到「我的收藏」</string>
     <string name="shared_string_my_location">我的位置</string>
     <string name="shared_string_my_places">我的地點</string>
     <string name="shared_string_my_favorites">我的收藏</string>
@@ -1732,9 +1730,9 @@
     <string name="current_route">目前的路線</string>
     <string name="welmode_download_maps">下載地圖</string>
     <string name="welcome_select_region">為了正確的反映您所在地的交通號誌和規則，請選擇您的駕駛區域：</string>
-    <string name="welcome_text">OsmAnd 提供全球離線地圖瀏覽和全球離線導航！</string>
+    <string name="welcome_text">OsmAnd 提供全球離線地圖瀏覽和離線導航。</string>
     <string name="welcome_header">歡迎</string>
-    <string name="confirm_usage_speed_cameras">在許多國家（德國、法國、義大利和其它）法律上不容許使用測速照相警示。如果您違反了法律，OsmAnd 並不承擔任何的責任。請只在您有資格使用此功能時，才點下 \"是\" 。</string>
+    <string name="confirm_usage_speed_cameras">在許多國家（德國、法國、義大利和其它）使用測速照相警示是非法的。如果您違反了法律，OsmAnd 並不承擔任何的責任。請只在您有資格使用此功能時，才點下「是」。</string>
     <string name="agps_info">A-GPS 資訊</string>
     <string name="agps_data_last_downloaded">A-GPS 資料上次下載：%1$s</string>
     <string name="shared_string_message">訊息</string>
@@ -1757,7 +1755,7 @@
     <string name="copying_osmand_file_failed">複製檔案時失敗</string>
     <string name="storage_directory_external">外部存儲器</string>
     <string name="storage_directory_multiuser">多使用者存儲器</string>
-    <string name="storage_directory_internal_app">內部應用程式記憶體</string>
+    <string name="storage_directory_internal_app">內部程式記憶體</string>
     <string name="storage_directory_manual">手動指定</string>
     <string name="storage_directory_default">內部記憶體</string>
     <string name="storage_directory">地圖存儲</string>
@@ -1782,15 +1780,15 @@
     <string name="download_wikipedia_maps">維基百科</string>
     <string name="shared_string_import2osmand">匯入到 OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">您要刪除 %1$d 的註解。您確定嗎？</string>
-    <string name="gps_network_not_enabled">未啟用位置服務。您想要開啟它嗎？</string>
+    <string name="gps_network_not_enabled">未啟用位置服務，您想要開啟它嗎？</string>
     <string name="disable_recording_once_app_killed">預防單獨的日誌記錄</string>
     <string name="disable_recording_once_app_killed_descrp">當應用程式被停止，將暫停 GPX 日誌記錄 (藉由新的應用程式)。(OsmAnd 背景標示，從通知列消失。)</string>
-    <string name="archive_wikipedia_data">您已下載有，舊的且不相容的維基百科資料。您想要將其存檔嗎？</string>
+    <string name="archive_wikipedia_data">您已有舊的且不相容的維基百科資料，您想要將其存檔嗎？</string>
     <string name="download_wikipedia_files">您想要下載所增加的維基百科資料 (%1$s MB) 嗎？</string>
     <string name="lang_vo">沃拉普克語</string>
     <string name="lang_th">泰語</string>
     <string name="lang_te">泰盧固語</string>
-    <string name="lang_nn">新挪威語(耐諾斯克)</string>
+    <string name="lang_nn">挪威耐諾斯克語</string>
     <string name="lang_new">尼瓦爾 / 尼泊爾語</string>
     <string name="lang_ms">馬來西亞</string>
     <string name="lang_ht">海地</string>
@@ -1798,7 +1796,7 @@
     <string name="lang_et">愛沙尼亞語</string>
     <string name="lang_ceb">宿霧語</string>
     <string name="lang_es_ar">西班牙語（阿根廷）</string>
-    <string name="lang_nb">挪威（布克莫爾語）</string>
+    <string name="lang_nb">挪威布克莫爾語</string>
     <string name="light_theme">明亮</string>
     <string name="dark_theme">暗色</string>
     <string name="lang_pms">皮埃蒙特語</string>
@@ -1819,7 +1817,7 @@
     <string name="lang_lb">盧森堡語</string>
     <string name="lang_os">奧塞提亞語</string>
     <string name="lang_eo">世界語</string>
-    <string name="restart_is_required">為了徹底套用所變更的，必需以手動重新啟動應用程式。</string>
+    <string name="restart_is_required">手動重新啟動應用程式以套用所有變更。</string>
     <string name="rendering_attr_currentTrackColor_name">GPX 的顏色</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX 的寬度</string>
     <string name="rendering_value_red_name">紅色</string>
@@ -1863,7 +1861,7 @@
     <string name="offline_maps_and_navigation">離線地圖\n和導航</string>
     <string name="commit_poi">提交 POI</string>
     <string name="routing_attr_avoid_shuttle_train_name">避開穿梭頻繁的鐵路</string>
-    <string name="routing_attr_avoid_shuttle_train_description">避開穿梭頻繁的鐵路</string>
+    <string name="routing_attr_avoid_shuttle_train_description">避開往返頻繁的鐵路</string>
     <string name="plugin_settings">外掛元件</string>
     <string name="tab_title_basic">基本</string>
     <string name="tab_title_advanced">展開</string>
@@ -1935,7 +1933,7 @@
     <string name="world_maps">世界地圖</string>
 
     <string name="downloads">下載</string>
-    <string name="favorite_category_dublicate_message">已有指定的類別名稱。請使用不同的名稱。</string>
+    <string name="favorite_category_dublicate_message">請使用原本沒有的類別名稱。</string>
     <string name="favorite_category_name">類別名稱</string>
     <string name="favorite_category_add_new_title">增加新的類別</string>
     <string name="confirm_download_roadmaps">您確定要下載只有道路的地圖，即使您已經擁有標準(完整的)地圖？</string>
@@ -1957,7 +1955,7 @@
     <string name="go_to_map">顯示地圖</string>
     <string name="shared_string_qr_code">QR 碼</string>
     <string name="enter_country_name">輸入國家/地區名稱</string>
-    <string name="world_map_download_descr">全球底圖 (小比例尺涵蓋全世界) 丟失或過時。請考量後下載全球概貌。</string>
+    <string name="world_map_download_descr">全球底圖 (以低縮放級別涵蓋全世界) 遺漏或過時。請考量下載以作為全球概貌。</string>
     <string name="new_version">新版本</string>
     <string name="begin_with_osmand_menu_group">跟 OsmAnd 的第一步</string>
     <string name="features_menu_group">功能</string>
@@ -2049,7 +2047,7 @@
     
     <string name="dashboard_or_drawer_title">儀表板或選單控制</string>
     <string name="dashboard_or_drawer_description">還有一種新的選擇，透過具彈性的儀表板或固定的選單優先控制應用程式。在儀表板中也可以更改您的選擇。</string>
-    <string name="access_from_map_description">選單按鈕啟動儀表板，而非選單。</string>
+    <string name="access_from_map_description">選單按鈕是啟動儀表板，而不是選單</string>
     <string name="access_from_map">從地圖進入</string>
     <string name="use_dashboard_btn">使用儀表板</string>
     <string name="use_drawer_btn">使用地圖</string>
@@ -2634,7 +2632,7 @@
     <string name="change_color">更改顏色</string>
     <string name="edit_name">編輯名稱</string>
     <string name="save_poi_too_many_uppercase">名稱中包含太多的大寫字母。您想要繼續嗎？</string>
-    <string name="route_is_too_long_v2">這條路線可能太長，無法估算。如果在10分鐘內沒有結果，請增加中轉節點。</string>
+    <string name="route_is_too_long_v2">如果在十分鐘內沒有沒有找到路線，請增加中轉地點。</string>
     <string name="display_zoom_level">顯示縮放級別：%1$s</string>
     <string name="srtm_color_scheme">色調配置</string>
     <string name="show_from_zoom_level">由縮放級別來顯示</string>
