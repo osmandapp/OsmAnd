@@ -438,13 +438,8 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		if (!MenuItemCompat.isActionViewExpanded(mi)) {
 			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark,
 					R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_NEVER);
-			if (getSettings().USE_MAP_MARKERS.get()) {
-				createMenuItem(menu, SELECT_MAP_MARKERS_ID, R.string.shared_string_add_to_map_markers, R.drawable.ic_action_flag_dark,
-						R.drawable.ic_action_flag_dark, MenuItemCompat.SHOW_AS_ACTION_NEVER);
-			} else {
-				createMenuItem(menu, SELECT_MAP_MARKERS_ID, R.string.select_destination_and_intermediate_points, R.drawable.ic_action_intermediate,
-						R.drawable.ic_action_intermediate, MenuItemCompat.SHOW_AS_ACTION_NEVER);
-			}
+			createMenuItem(menu, SELECT_MAP_MARKERS_ID, R.string.shared_string_add_to_map_markers, R.drawable.ic_action_flag_dark,
+					R.drawable.ic_action_flag_dark, MenuItemCompat.SHOW_AS_ACTION_NEVER);
 			createMenuItem(menu, SELECT_FAVORITES_ID, R.string.shared_string_add_to_favorites, R.drawable.ic_action_fav_dark,
 					R.drawable.ic_action_fav_dark, MenuItemCompat.SHOW_AS_ACTION_NEVER);
 			createMenuItem(menu, DELETE_ID, R.string.shared_string_delete, R.drawable.ic_action_delete_dark,

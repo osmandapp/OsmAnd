@@ -753,8 +753,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (menuController != null) {
 			return menuController.getWaypointActionStringId();
 		}
-		return settings.USE_MAP_MARKERS.get()
-				? R.string.shared_string_add_to_map_markers : R.string.context_menu_item_destination_point;
+		return R.string.shared_string_add_to_map_markers;
 	}
 
 	public boolean isButtonWaypointEnabled() {
@@ -771,8 +770,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			waypointActionIconId = menuController.getWaypointActionIconId();
 		} else {
 			favActionIconId = R.drawable.map_action_fav_dark;
-			waypointActionIconId = settings.USE_MAP_MARKERS.get()
-					? R.drawable.map_action_flag_dark : R.drawable.map_action_waypoint;
+			waypointActionIconId = R.drawable.map_action_flag_dark;
 		}
 	}
 

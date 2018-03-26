@@ -434,13 +434,11 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public int getWaypointActionIconId() {
-		return getMapActivity().getMyApplication().getSettings().USE_MAP_MARKERS.get()
-				? R.drawable.map_action_flag_dark : R.drawable.map_action_waypoint;
+		return R.drawable.map_action_flag_dark;
 	}
 
 	public int getWaypointActionStringId() {
-		return getMapActivity().getMyApplication().getSettings().USE_MAP_MARKERS.get()
-				? R.string.shared_string_add_to_map_markers : R.string.context_menu_item_destination_point;
+		return R.string.shared_string_add_to_map_markers;
 	}
 
 	public boolean isWaypointButtonEnabled() {

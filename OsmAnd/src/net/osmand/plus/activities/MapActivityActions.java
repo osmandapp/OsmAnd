@@ -340,8 +340,7 @@ public class MapActivityActions implements DialogProvider {
 					mapActivity.showQuickSearch(latitude, longitude);
 				} else if (standardId == R.string.context_menu_item_directions_from) {
 					mapActivity.getContextMenu().hide();
-					if (settings.USE_MAP_MARKERS.get()
-							&& getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
+					if (getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
 						setFirstMapMarkerAsTarget();
 					}
 					if (!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
@@ -630,31 +629,18 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).createItem());
-		if (settings.USE_MAP_MARKERS.get()) {
-			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.map_markers, mapActivity)
-					.setIcon(R.drawable.ic_action_flag_dark)
-					.setListener(new ContextMenuAdapter.ItemClickListener() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-							app.logEvent(mapActivity, "drawer_markers_open");
-							MapActivity.clearPrevActivityIntent();
-							MapMarkersDialogFragment.showInstance(mapActivity);
-							return true;
-						}
-					}).createItem());
-		} else {
-			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.waypoints, mapActivity)
-					.setIcon(R.drawable.ic_action_intermediate)
-					.setListener(new ContextMenuAdapter.ItemClickListener() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-							app.logEvent(mapActivity, "drawer_waypoints_open");
-							MapActivity.clearPrevActivityIntent();
-							mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS, viewCoordinates);
-							return false;
-						}
-					}).createItem());
-		}
+
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.map_markers, mapActivity)
+				.setIcon(R.drawable.ic_action_flag_dark)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+						app.logEvent(mapActivity, "drawer_markers_open");
+						MapActivity.clearPrevActivityIntent();
+						MapMarkersDialogFragment.showInstance(mapActivity);
+						return true;
+					}
+				}).createItem());
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_my_places, mapActivity)
 				.setIcon(R.drawable.ic_action_fav_dark)
