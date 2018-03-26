@@ -103,30 +103,9 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 						if ((sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE)
 								&& sr.file != null && sr.object instanceof City) {
 							City c = (City) sr.object;
-							if (c.getStreets().isEmpty()) {
-								ResultMatcher<Street> resultMatcher = new ResultMatcher<Street>() {
-									boolean isCancelled = false;
-
-									@Override
-									public boolean publish(Street object) {
-										isCancelled = true;
-										return true;
-									}
-
-									@Override
-									public boolean isCancelled() {
-										return isCancelled;
-									}
-								};
-								try {
-									sr.file.preloadStreets(c, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
-									if (c.getStreets().isEmpty()) {
-										showResult(sr);
-										return;
-									}
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
+							if (isCityEmpty(c, sr)) {
+								showResult(sr);
+								return;
 							}
 						}
 						dialogFragment.completeQueryWithObject(sr);
@@ -134,6 +113,37 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				}
 			}
 		}
+	}
+
+	public boolean isCityEmpty(City c, SearchResult sr) {
+		if (c.getStreets().isEmpty()) {
+			ResultMatcher<Street> resultMatcher = new ResultMatcher<Street>() {
+				boolean isCancelled = false;
+
+				@Override
+				public boolean publish(Street object) {
+					isCancelled = true;
+					return true;
+				}
+
+				@Override
+				public boolean isCancelled() {
+					return isCancelled;
+				}
+			};
+			try {
+				sr.file.preloadStreets(c, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
+				if (c.getStreets().isEmpty()) {
+					return true;
+				} else {
+					c.unregisterStreet(c.getStreets().get(0));
+					return false;
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
 	}
 
 	@Override
