@@ -3751,4 +3751,7 @@
 
 	<string name="synonyms_poi_fuel">Автомобильная заправка;Автозаправка;Бензоколонка;АЗС;Бензозаправка</string>
 
+	<string name="poi_amusement_arcade">Игровой зал</string>
+	<string name="poi_adult_gaming_centre">Игровой зал для взрослых</string>
+
 	</resources>
