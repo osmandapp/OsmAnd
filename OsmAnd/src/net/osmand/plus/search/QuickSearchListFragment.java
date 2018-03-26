@@ -116,6 +116,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	}
 
 	public boolean isCityEmpty(City c, SearchResult sr) {
+		final boolean isEmpty[] = new boolean[1];
+		isEmpty[0] = true;
 		if (c.getStreets().isEmpty()) {
 			ResultMatcher<Street> resultMatcher = new ResultMatcher<Street>() {
 				boolean isCancelled = false;
@@ -123,7 +125,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				@Override
 				public boolean publish(Street object) {
 					isCancelled = true;
-					return true;
+					isEmpty[0] = false;
+					return false;
 				}
 
 				@Override
@@ -133,17 +136,13 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			};
 			try {
 				sr.file.preloadStreets(c, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
-				if (c.getStreets().isEmpty()) {
-					return true;
-				} else {
-					c.unregisterStreet(c.getStreets().get(0));
-					return false;
-				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		} else {
+			isEmpty[0] = false;
 		}
-		return false;
+		return isEmpty[0];
 	}
 
 	@Override
