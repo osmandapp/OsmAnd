@@ -2538,7 +2538,7 @@
     <string name="plan_route_no_markers_toast">Du må legge til minst en markør for å bruke denne funksjonen.</string>
     <string name="make_round_trip_descr">Legg til kopi av startpunktet som reisemål.</string>
     <string name="make_round_trip">Gjør rundtur</string>
-    <string name="srtm_menu_download_descr">Last ned kotekart for denne regionen.</string>
+    <string name="srtm_menu_download_descr">Last ned kotekartet for denne regionen.</string>
     <string name="view">Vis</string>
 	<string name="import_as_gpx">Importer som GPX-fil</string>
     <string name="import_as_favorites">Importer som Favoritter</string>
