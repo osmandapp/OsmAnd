@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="shared_string_my_places">Meus locais</string>
+<resources><string name="shared_string_my_places">Meus lugares</string>
 	<string name="days_behind">dias atrás</string>
 	<string name="watch">Ver</string>
 	<string name="rendering_attr_pisteGrooming_name">Pista de preparação</string>
@@ -374,7 +374,7 @@
     <string name="pause_navigation">Pausar navegação</string>
  	<string name="keep_navigation_service">Manter</string>
 	<string name="gps_wake_up_timer">Intervalo para ativar GPS</string>
-	<string name="map_preferred_locale_descr">Idioma preferido para os rótulos no mapa (se não estiver disponível, mudará para nomes locais ou inglês)</string>
+	<string name="map_preferred_locale_descr">Idioma preferido para os rótulos no mapa (se indisponível, será usado o inglês ou nomes locais).</string>
     <string name="map_preferred_locale">Idioma preferido do mapa</string>
     <string name="local_map_names">Nomes locais</string>
     <string name="lang_sw">Suaíli</string>
@@ -1487,7 +1487,7 @@ Pôr do Sol: %2$s</string>
 	<string name="update_poi_no_offline_poi_index">Não há dados de POI off-line para esta região</string>
 	<string name="update_poi_is_not_available_for_zoom">Atualização de POIs não está disponível para níveis de zoom afastados</string>
 	<string name="context_menu_item_update_poi">Atualizar POI</string>
-	<string name="context_menu_item_update_map_confirm">Atualizar dados locais através da Internet?</string>
+	<string name="context_menu_item_update_map_confirm">Atualizar dados locais da Internet?</string>
 	<string name="search_history_city">Cidade: {0}</string>
 	<string name="search_history_street">Rua: {0}, {1}</string>
 	<string name="search_history_int_streets">Interseção: {0} x {1} em {2}</string>
@@ -1782,7 +1782,7 @@ Pôr do Sol: %2$s</string>
 
 	<string name="please_specify_poi_type">Por favor, especifique tipo de POI.</string>
 <string name="working_days">Dias úteis</string>
-	<string name="recent_places">Locais recentes</string>
+	<string name="recent_places">Lugares recentes</string>
 	<string name="favourites">Favoritos</string>
 <string name="poi_action_delete">apagar</string>
 	<string name="saved_at_time">Salvo com sucesso em: %1$s</string>
@@ -2205,19 +2205,17 @@ Pôr do Sol: %2$s</string>
     <string name="mapillary_menu_title_username">Nome de usuário</string>
     <string name="mapillary_menu_filter_description">Você pode filtrar imagens por quem submeteu ou por data. Os filtros só se aplicam para ampliação bem próxima.</string>
     <string name="shared_string_permissions">Permissões</string>
-    <string name="import_gpx_failed_descr">O OsmAnd não pode importar o arquivo. Favor verificar se o OsmAnd tem permissão para ler arquivo de sua localização.</string>
+    <string name="import_gpx_failed_descr">O OsmAnd não pôde importar o arquivo. Favor verificar se o OsmAnd tem permissão para ler arquivo de sua localização.</string>
     <string name="distance_moving">Distância corrigida</string>
     <string name="mapillary_image">Imagem do Mapillary</string>
     <string name="open_mapillary">Abrir o Mapillary</string>
     <string name="shared_string_install">Instalar</string>
     <string name="improve_coverage_mapillary">Melhorar a cobertura fotográfica com Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Você pode tirar suas próprias fotos ou séries de fotos e anexá-las a esta localização do mapa. 
-\n 
-\nPara isso você precisa instalar o aplicativo Mapillary da Google Play Store.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instale Mapillary para adicionar uma ou mais fotos para este local do mapa.</string>
     <string name="online_photos">Fotos on-line</string>
     <string name="shared_string_add_photos">Adicionar fotos</string>
     <string name="no_photos_descr">Não temos fotos para este local.</string>
-    <string name="mapillary_action_descr">Contribuir com suas próprias vistas da rua deste local através do Mapillary.</string>
+    <string name="mapillary_action_descr">Contribuir com suas próprias vistas de rua deste local através do Mapillary.</string>
     <string name="mapillary_widget">Ferramenta Mapillary</string>
     <string name="mapillary_widget_descr">Permite que você contribua rapidamente ao Mapillary.</string>
     <string name="mapillary_descr">Fotos ao nível da rua, online, para todos. Descobrir lugares, colaborar, capturar o mundo.</string>
@@ -2276,7 +2274,7 @@ Pôr do Sol: %2$s</string>
     <string name="show_map">Exibir mapa</string>
     <string name="route_is_calculated">Rota calculada</string>
     <string name="do_not_show_startup_messages">Não exibir mensagens ao iniciar</string>
-    <string name="do_not_show_startup_messages_desc">Suprime a exibição de descontos do aplicativo e mensagens de eventos locais especiais.</string>
+    <string name="do_not_show_startup_messages_desc">Não exiba mensagens de promoções do aplicativo e eventos locais especiais.</string>
     <string name="shared_string_record">Registro</string>
     <string name="save_track_min_speed">Velocidade mínima para registro</string>
     <string name="save_track_precision">Precisão mínima para registro</string>
@@ -2302,14 +2300,14 @@ Pôr do Sol: %2$s</string>
     <string name="looking_for_tracks_with_waypoints">Procurando trilhas com pontos de passagem</string>
     <string name="shared_string_more_without_dots">Mais</string>
     <string name="appearance_on_the_map">Aparência no mapa</string>
-    <string name="add_track_to_markers_descr">Selecione uma trilha para adicionar os seus pontos de passagem aos marcadores. (Somente trilhas com pontos de passagem são listadas.)</string>
+    <string name="add_track_to_markers_descr">Pontos de passagem podem ser adicionados a marcadores selecionando uma dessas trilhas que os tem.</string>
     <string name="add_favourites_group_to_markers_descr">Selecione uma categoria favorita para adicionar aos marcadores.</string>
     <string name="track_waypoints">Pontos de passagem de trilhas</string>
     <string name="favourites_group">Categoria favoritos</string>
     <string name="add_group">Adicionar um grupo</string>
     <string name="add_group_descr">Você pode importar grupos dos favoritos ou pontos de passagem de trilhas.</string>
     <string name="empty_state_markers_active">Crie marcadores de mapa!</string>
-    <string name="empty_state_markers_active_desc">Toque longo ou rápido nos lugares, e em seguida toque no botão de bandeira.</string>
+    <string name="empty_state_markers_active_desc">Toque longo ou rápido em \'Lugares\', e em seguida toque no botão de bandeira.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
     <string name="empty_state_markers_groups_desc">Você pode importar grupos de favoritos ou pontos de passagem de trilhas como marcadores.</string>
     <string name="empty_state_markers_history_desc">Marcadores marcados como visitados aparecerão nesta tela.</string>
@@ -2318,7 +2316,7 @@ Pôr do Sol: %2$s</string>
     <string name="show_guide_line_descr">Exibir as linhas de guia desde a sua posição até os locais dos marcadores ativos.</string>
     <string name="show_arrows_descr">Exibir uma ou duas setas indicando a direção para os marcadores ativos.</string>
     <string name="distance_indication_descr">Escolher como exibir a distância para os marcadores ativos.</string>
-    <string name="active_markers_descr">Escolher quantos indicadores de mudança de direção são exibidos.</string>
+    <string name="active_markers_descr">Escolha o número de indicadores de direção a exibir.</string>
     <string name="digits_quantity">Número de casas decimais</string>
     <string name="shared_string_right">Direita</string>
     <string name="shared_string_left">Esqueda</string>
@@ -2326,7 +2324,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_paste">Colar</string>
     <string name="coordinate_input_accuracy_description">Alternar automaticamente para o próximo campo depois de entrar %1$d casas decimais.</string>
     <string name="coordinate_input_accuracy">%1$d dígitos</string>
-    <string name="go_to_next_field">Ir para o próximo campo</string>
+    <string name="go_to_next_field">Próximo campo</string>
     <string name="rename_marker">Renomear marcador</string>
     <string name="tap_on_map_to_hide_interface_descr">Um toque no mapa mostra/oculta os botões de controle e widgets.</string>
     <string name="tap_on_map_to_hide_interface">Modo tela cheia</string>
@@ -2505,11 +2503,11 @@ Pôr do Sol: %2$s</string>
     <string name="context_menu_read_full_article">Leia o artigo completo</string>
     <string name="context_menu_read_article">Leia o artigo</string>
     <string name="context_menu_points_of_group">Todos os pontos do grupo</string>
-    <string name="open_from">Aberto a partir de</string>
+    <string name="open_from">Aberto a partir das</string>
     <string name="open_till">Aberto até</string>
     <string name="will_close_at">Fechará às</string>
     <string name="will_open_at">Abrirá às</string>
-    <string name="will_open_on">Abrirá às</string>
+    <string name="will_open_on">Abrirá aos/às</string>
     <string name="additional_actions">Ações adicionais</string>
     <string name="av_locations_selected_desc">Arquivo GPX com coordenadas e dados das notas selecionadas.</string>
     <string name="shared_string_actions">Ações</string>
@@ -2592,11 +2590,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_favorites_name_preset">Nome do preset</string>
     <string name="quick_action_add_marker_descr">Tocar no botão de ação adicionará um marcador de mapa no local do centro da tela.</string>
     <string name="quick_action_add_parking_descr">Tocar no botão de ação adicionará um lugar de estacionamento no local do centro da tela.</string>
-    <string name="release_3_0">\\022 Detecção de sinais \"PARE\" agora considera a direção de condução 
-\n 
-\n • Novo algoritmo fornecendo valores de subida/descida significativa para trilhas GPX 
-\n 
-\n • Tempo de caminhada leva em conta terrenos em aclive (Regra de Naismith)
+    <string name="release_3_0">\\022 
 \n
 \n</string>
     <string name="route_points_category_name">Converte como visitado nesta rota</string>
@@ -2778,11 +2772,13 @@ Pôr do Sol: %2$s</string>
     <string name="transport_nearby_routes">PERTO DE</string>
     <string name="enter_the_file_name">Digite o nome do arquivo.</string>
     <string name="map_import_error">Erro de importação de mapa</string>
-    <string name="map_imported_successfully">Mapa importado com êxito</string>
+    <string name="map_imported_successfully">Mapa importado</string>
     <string name="rendering_attr_whiteWaterSports_name">Esportes em corredeiras</string>
-    <string name="make_as_start_point">Tornar como Ponto de Partida</string>
+    <string name="make_as_start_point">Converter em ponto de partida</string>
     <string name="select_waypoints_category_description">Você pode adicionar todos os pontos da trilha, ou selecione categorias separadas.</string>
     <string name="shared_string_total">Total</string>
     <string name="clear_all_intermediates">Limpar todos os pontos intermédios</string>
     <string name="group_deleted">Grupo excluído</string>
+    <string name="nothing_found_in_radius">Nada encontrado dentro do raio:</string>
+    <string name="osmand_extended_description_part1">OsmAnd (sigla em inglês de Direções de Navegação Automatizada do OSM) é um aplicativo de mapa e navegação com acesso a dados livres, mundiais e de alta qualidade do OpenStreetMap (OSM). Poderá usar o navegador visual e por voz, exibir POIs (pontos de interesse), criar e gerenciar trilhas GPX, usar (através de plugin) curvas de nível e dados de altitude, escolher entre os modos motorista, ciclista e pedestre, editar o OSM e muito mais.</string>
     </resources>
