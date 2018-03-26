@@ -1043,7 +1043,6 @@ public class SearchCoreFactory {
 							|| !phrase.isSearchTypeAllowed(ObjectType.HOUSE)) {
 						continue;
 					}
-
 					res.localeName = b.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.otherNames = b.getAllNames(true);
 					res.object = b;
@@ -1055,6 +1054,7 @@ public class SearchCoreFactory {
 					res.objectType = ObjectType.HOUSE;
 					if(interpolation) {
 						res.location = b.getLocation(b.interpolation(lw));
+						res.localeName = lw;
 					} else {
 						res.location = b.getLocation();
 					}

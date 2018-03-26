@@ -119,7 +119,11 @@ public class GeocodingUtilities {
 		public String toString() {
 			StringBuilder bld = new StringBuilder();
 			if (building != null) {
-				bld.append(building.getName());
+				if(buildingInterpolation != null) {
+					bld.append(buildingInterpolation);
+				} else {
+					bld.append(building.getName());
+				}
 			}
 			if (street != null) {
 				bld.append(" str. ").append(street.getName()).append(" city ").append(city.getName());
@@ -320,26 +324,12 @@ public class GeocodingUtilities {
 				if (MapUtils.getDistance(road.searchPoint, plat, plon) < DISTANCE_BUILDING_PROXIMITY) {
 					GeocodingResult bld = new GeocodingResult(street);
 					bld.building = b;
-					bld.connectionPoint = b.getLocation();
+					//bld.connectionPoint = b.getLocation();
+					bld.connectionPoint = new LatLon(plat, plon);
 					streetBuildings.add(bld);
-					if (!Algorithms.isEmpty(b.getName2())) {
-						int fi = Algorithms.extractFirstIntegerNumber(b.getName());
-						int si = Algorithms.extractFirstIntegerNumber(b.getName2());
-						if (si != 0 && fi != 0) {
-							int num = (int) (fi + (si - fi) * coeff);
-							BuildingInterpolation type = b.getInterpolationType();
-							if (type == BuildingInterpolation.EVEN || type == BuildingInterpolation.ODD) {
-								if (num % 2 == (type == BuildingInterpolation.EVEN ? 1 : 0)) {
-									num--;
-								}
-							} else if (b.getInterpolationInterval() > 0) {
-								int intv = b.getInterpolationInterval();
-								if ((num - fi) % intv != 0) {
-									num = ((num - fi) / intv) * intv + fi;
-								}
-							}
-							bld.buildingInterpolation = num + "";
-						}
+					String nm = b.getInterpolationName(coeff);
+					if(!Algorithms.isEmpty(nm)) {
+						bld.buildingInterpolation = nm;
 					}
 				}
 
