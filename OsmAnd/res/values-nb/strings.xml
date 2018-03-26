@@ -1441,7 +1441,7 @@
     <string name="feedback">Tilbakemelding</string>
     <string name="map_legend">Kartforklaring</string>
     <string name="please_specify_poi_type_only_from_list">Spesifiser korrekt interessepunkttype eller hopp over.</string>
-    <string name="access_from_map_description">Menyknapp viser dashbord i stedet for menyen.</string>
+    <string name="access_from_map_description">Menyknapp viser dashbord i stedet for menyen</string>
     <string name="access_from_map">Tilgang fra kart</string>
     <string name="show_on_start">Vis ved start</string>
     <string name="copied_to_clipboard">Kopiert til utklippstavle</string>
