@@ -701,7 +701,7 @@
     
     
     <string name="map_widget_top">Statuslinje</string>
-    <string name="map_preferred_locale_descr">Foretrukket språk for påskrifter på kartet (hvis utilgjengelig, brukes engelsk eller lokale navn).</string>
+    <string name="map_preferred_locale_descr">Foretrukket språk for påskrifter på kartet (hvis utilgjengelig brukes engelsk eller lokale navn).</string>
     <string name="map_preferred_locale">Foretrukket språk på kart</string>
     <string name="home">Dashbord</string>
     <string name="rendering_attr_showCycleRoutes_name">Vis sykkelruter</string>
