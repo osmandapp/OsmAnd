@@ -671,6 +671,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 					return false;
 				}
 				switch (object.objectType) {
+					case SEARCH_STARTED:
+					case SEARCH_FINISHED:
+					case FILTER_FINISHED:
+						break;
+
 					case SEARCH_API_FINISHED:
 						final SearchCoreAPI searchApi = (SearchCoreAPI) object.object;
 						final List<SearchResult> apiResults;
