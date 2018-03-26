@@ -62,6 +62,7 @@ import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.wikivoyage.WikivoyageExploreDialogFragment;
 import net.osmand.router.GeneralRouter;
 
 import org.apache.commons.logging.Log;
@@ -770,6 +771,17 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
 						MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager());
+						return true;
+					}
+				}).createItem());
+
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_travel, mapActivity)
+				.setIcon(R.drawable.ic_action_track_16)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+						MapActivity.clearPrevActivityIntent();
+						WikivoyageExploreDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 						return true;
 					}
 				}).createItem());
