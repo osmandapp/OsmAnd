@@ -657,7 +657,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 	}
 
 	private void runCoreSearchInternal(String text, boolean updateResult, boolean searchMore) {
-		SearchResultCollection c = searchUICore.search(text, updateResult, new ResultMatcher<SearchResult>() {
+		searchUICore.search(text, updateResult, new ResultMatcher<SearchResult>() {
 			SearchResultCollection regionResultCollection = null;
 			SearchCoreAPI regionResultApi = null;
 			List<SearchResult> results = new ArrayList<>();
@@ -673,7 +673,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 				switch (object.objectType) {
 					case SEARCH_STARTED:
 					case SEARCH_FINISHED:
+						break;
 					case FILTER_FINISHED:
+						app.runInUIThread(new Runnable() {
+							@Override
+							public void run() {
+								updateSearchResult(searchUICore.getCurrentSearchResult(), false);
+							}
+						});
 						break;
 
 					case SEARCH_API_FINISHED:
@@ -721,9 +728,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 			if (!updateResult) {
 				updateSearchResult(null, false);
 			}
-		}
-		if (updateResult) {
-			updateSearchResult(c, false);
 		}
 	}
 
