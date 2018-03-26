@@ -1441,7 +1441,7 @@
     <string name="feedback">Tilbakemelding</string>
     <string name="map_legend">Kartforklaring</string>
     <string name="please_specify_poi_type_only_from_list">Spesifiser korrekt interessepunkttype eller hopp over.</string>
-    <string name="access_from_map_description">Menyknapp viser dashbord, ikke meny.</string>
+    <string name="access_from_map_description">Menyknapp viser dashbord i stedet for menyen.</string>
     <string name="access_from_map">Tilgang fra kart</string>
     <string name="show_on_start">Vis ved start</string>
     <string name="copied_to_clipboard">Kopiert til utklippstavle</string>
@@ -1527,17 +1527,17 @@
     <string name="recalculate_route">Beregn rute på nytt</string>
     <string name="no_map_markers_found">Legg til kartmarkører via kart</string>
     <string name="no_waypoints_found">Ingen rutepunkter funnet</string>
-    <string name="shared_string_move_up">Flytt opp</string>
-    <string name="shared_string_move_down">Flytt ned</string>
+    <string name="shared_string_move_up">Flytt ↑</string>
+    <string name="shared_string_move_down">Flytt ↓</string>
     <string name="finish_navigation">Avslutt navigering</string>
     <string name="avoid_road">Unngå vei</string>
     <string name="storage_directory_shared">Delt minne</string>
     <string name="full_report">Fullstendig rapport</string>
     <string name="shared_string_widgets">Moduler</string>
-    <string name="consider_turning_polygons_off">Det anbefales å slå av opptegning av polygoner.</string>
+    <string name="consider_turning_polygons_off">Det anbefales å slå av polygonopptegning.</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="select_month_and_country">Velg måned og land</string>
-    <string name="storage_directory_readonly_desc">Den valgte datalagringsmappe er skrivebeskyttet. Lagringsmappen har midlertidig skiftet til internminnet. Velg en gyldig lagringsmappe.</string>
+    <string name="storage_directory_readonly_desc">Skiftet til internminnet siden den valgte datalagringsmappen er skrivebeskyttet. Velg en skrivbar lagringsmappe.</string>
     <string name="shared_string_reverse_order">Snu rekkefølgen</string>
     <string name="rendering_attr_hideUnderground_name">Objekter under bakken</string>
     <string name="item_removed">Element fjernet</string>
@@ -1563,8 +1563,8 @@
     <string name="osm_live_month_cost_desc">Månedlig betaling.</string>
     <string name="osm_live_active">Aktiv</string>
     <string name="osm_live_not_active">Inaktiv</string>
-    <string name="osm_live_enter_email">Oppgi en gyldig e-postadresse</string>
-    <string name="osm_live_enter_user_name">Skriv inn offentlig navn</string>
+    <string name="osm_live_enter_email">Oppfør en gyldig e-postadresse</string>
+    <string name="osm_live_enter_user_name">Oppfør offentlig navn</string>
     <string name="osm_live_subscription_settings">Abonnementsinnstillinger</string>
     <string name="shared_string_logoff">Logg av</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Fargelegging i henhold til OSMC-vandresymbol</string>
@@ -1613,7 +1613,7 @@
     <string name="morning">Morgen</string>
     <string name="night">Natt</string>
     <string name="map_widget_battery">Batterinivå</string>
-    <string name="move_marker_bottom_sheet_title">Beveg kartet for å endre markørens posisjon</string>
+    <string name="move_marker_bottom_sheet_title">Beveg kartet for å endre markørposisjon</string>
     <!-- string name="lat_lon_pattern">Br: %1$.5f Le: %2$.5f</string -->
     <string name="access_default_color">Standardfarge</string>
     <string name="access_category_choice">Velg kategori</string>
@@ -1635,10 +1635,10 @@
     <string name="access_shared_string_navigate_up">Naviger opp</string>
     
     
-    <string name="open_street_map_login_and_pass">OpenStreetMap innlogging og passord</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap brukernavn og passord</string>
     <string name="osm_live_subscription">OsmAnd Live-abonnement</string>
     <string name="osm_live_hide_user_name">Ikke vis mitt navn i rapporter</string>
-    <string name="osm_live_ask_for_purchase">Kjøp først OsmAnd Live-abonnement</string>
+    <string name="osm_live_ask_for_purchase">Kjøp først et OsmAnd Live-abonnement</string>
 
     <string name="osm_edit_deleted_poi">Slettet OSM-interessepunkt</string>
     <string name="shared_string_trip_recording">Turopptak</string>
@@ -1659,7 +1659,7 @@
     <string name="access_tree_list">Trestrukturliste</string>
     
     
-    <string name="storage_permission_restart_is_required">Nå har programmet lov til å skrive til ekstern lagring. En manuell programomstart kreves.</string>
+    <string name="storage_permission_restart_is_required">Programmet har nå lov til å skrive til ekstern lagring, men programomstart kreves.</string>
     <string name="shared_string_undo_all">Angre alle</string>
     <string name="rec_split_storage_size">Lagringsstørrelse</string>
     <string name="no_location_permission">OsmAnd har ingen tillatelse til å få tilgang til posisjonsdata.</string>
@@ -1668,7 +1668,7 @@
     <string name="shared_string_hide">Skjul</string>
     <string name="av_video_quality_low">Laveste kvalitet</string>
     <string name="av_video_quality_high">Høyeste kvalitet</string>
-    <string name="change_markers_position">Endre markørens posisjon</string>
+    <string name="change_markers_position">Endre markørposisjon</string>
     <string name="show_transparency_seekbar">Vis glidebryterlinje for gjennomsiktighet</string>
     <string name="lang_hu_formal">Ungarsk (formell)</string>
     <string name="lang_be_by">Hviterussisk (Latin)</string>
@@ -1738,7 +1738,7 @@
     <string name="search_my_location">Finn min posisjon</string>
     <string name="search_map">Kartsøking…</string>
     <string name="driving_region_australia">Australia</string>
-    <string name="no_update_info">Ikke vis oppdateringer</string>
+    <string name="no_update_info">Ikke vis nye versjoner</string>
     <string name="shared_string_filters">Filtre</string>
     <string name="apply_filters">Bruk filtre</string>
     <string name="save_filter">Lagre filter</string>
@@ -1865,31 +1865,31 @@
 \n - Ingen tilgang til frakoblede interessepunkter fra Wikipedia
 \n
 \nOsmAnd utvikles aktivt, og prosjektet vårt avhenger av finansielle bidrag for å drive utviklingen og å teste ny funksjonalitet. Overvei å kjøpe OsmAnd+ eller støtte spesifikke nye funksjoner eller bidra med en generell donasjon på osmand.net.</string>
-	<string name="upload_osm_note_description">Du kan laste opp ditt OSM-notat anonymt eller bruke din profil hos OpenStreetmap.org.</string>
-    <string name="gpx_no_tracks_title">Du har ingen spor enda</string>
+	<string name="upload_osm_note_description">Du kan laste opp ditt OSM-notat anonymt eller ved å bruke din profil hos OpenStreetmap.org.</string>
+    <string name="gpx_no_tracks_title">Du har ingen spor ennå</string>
     <string name="gpx_no_tracks_title_folder">Legg til spor i mappen</string>
     <string name="gpx_add_track">Legg til spor</string>
     <string name="trip_rec_notification_settings">Aktiver hurtigstart av opptak</string>
     <string name="trip_rec_notification_settings_desc">Vis et systemvarsel slik at du kan starte turopptak.</string>
     <string name="save_track_min_speed">Minimumshastighet for logging</string>
-    <string name="save_track_min_speed_descr">Filter: Still inn minimumshastighet for at et punkt skal logges.</string>
+    <string name="save_track_min_speed_descr">Filter: Ingen logging av punkter under denne hastigheten.</string>
     <string name="save_track_min_distance">Minsteavstand for logging</string>
-    <string name="save_track_min_distance_descr">Filter: Angi minste avstand fra siste posisjon for at et punkt skal logges.</string>
+    <string name="save_track_min_distance_descr">Filter: Angi minste avstand for å logge et nytt punkt.</string>
     <string name="save_track_precision">Minimumsnøyaktighet for logging</string>
-    <string name="save_track_precision_descr">Filter: Angi minimumsnøyaktighet for at et punkt skal logges.</string>
+    <string name="save_track_precision_descr">Filter: Ingen logging med mindre denne nøyaktigheten er nådd.</string>
     <string name="christmas_desc">I anledning jul og nyttår kan du velge å vise interessepunkter knyttet til julen: juletrær, markeder, etc.</string>
     <string name="translit_name_if_miss">Transkriber hvis %1$s navn mangler</string>
     <string name="translit_names">Transkriber navn</string>
     <string name="get_for_month">Få for %1$s måned</string>
     <string name="osm_live_banner_desc">Få ubegrensede kartnedlastinger, og kartoppdateringer mer enn en gang i måneden: Ukentlig, daglig eller hver time.</string>
-    <string name="access_direction_audio_feedback">Retningstilbakemelding med lyd</string>
+    <string name="access_direction_audio_feedback">Lydbaserte anvisninger</string>
     <string name="access_direction_audio_feedback_descr">Indiker retning til målpunkt med lyd.</string>
-    <string name="access_direction_haptic_feedback">Retningstilbakemelding med vibrasjon</string>
+    <string name="access_direction_haptic_feedback">Anvisninger med vibrasjon</string>
     <string name="access_direction_haptic_feedback_descr">Indiker retning til målpunkt med vibrasjon.</string>
     <string name="use_osm_live_routing_description">Aktiver navigering for OsmAnd Live-endringer.</string>
     <string name="map_widget_magnetic_bearing">Magnetisk peiling</string>
     <string name="map_widget_bearing">Relativ peiling</string>
-    <string name="access_disable_offroute_recalc_descr">Forhindre automatisk ny ruteberegning etter at du har forlatt ruten.</string>
+    <string name="access_disable_offroute_recalc_descr">Ingen automatisk ny ruteberegning etter å ha forlatt ruten.</string>
     <string name="access_smart_autoannounce_descr">Varsle bare når retningen til målpunktet endres.</string>
     <string name="access_autoannounce_period">Auto-annonseringsperiode</string>
     <string name="access_autoannounce_period_descr">Minste tidsintervall mellom annonseringer.</string>
@@ -2132,8 +2132,8 @@
     <string name="route_roundabout">Rundkjøring: Ta avkjøring %1$d og fortsett</string>
     <string name="support_new_features">Støtt nye funksjoner</string>
     <string name="max_speed">Maksimumshastighet</string>
-    <string name="shared_string_start_time">Starttid</string>
-    <string name="shared_string_end_time">Sluttid</string>
+    <string name="shared_string_start_time">Avreise</string>
+    <string name="shared_string_end_time">Ankomst</string>
     <string name="shared_string_color">Farge</string>
     <string name="file_can_not_be_moved">Filen kan ikke flyttes.</string>
     <string name="shared_string_move">Flytt</string>
@@ -2601,14 +2601,14 @@
     <string name="mark_passed">Marker som passert</string>
     <string name="osn_modify_dialog_error">Unntak oppstod: Notat ble ikke endret</string>
     <string name="quick_action_auto_zoom_desc">Trykk på handlingsknappen vil slå av/på automatisk kartzoom i henhold til din hastighet.</string>
-    <string name="quick_action_add_destination_desc">Trykk på handlingsknappen vil legge til et mål midt på skjermen. Det tidligere angitte målet blir det siste mellomliggende målet.</string>
-    <string name="quick_action_replace_destination_desc">Trykk på handlingsknappen vil erstatte målet med posisjonen midt på skjermen.</string>
-    <string name="quick_action_add_first_intermediate_desc">Trykk på handlingsknappen vil legge til et første mellomliggende punkt midt på skjermen.</string>
+    <string name="quick_action_add_destination_desc">Trykk på handlingsknappen for å legge til et mål midt på skjermen. Det tidligere angitte målet blir det siste mellomliggende målet.</string>
+    <string name="quick_action_replace_destination_desc">Trykk på handlingsknappen for å erstatte målet med posisjonen midt på skjermen.</string>
+    <string name="quick_action_add_first_intermediate_desc">Trykk på handlingsknappen for å legge til et første mellomliggende punkt midt på skjermen.</string>
     <string name="subscribe_email_desc">Abonner på vår e-postliste om programrabatter og få tre kartnedlastinger til!</string>
     <string name="index_item_depth_points_southern_hemisphere">Havdybdepunkter for sørlige halvkule</string>
     <string name="index_item_depth_points_northern_hemisphere">Havdybdepunkter for nordlige halvkule</string>
     <string name="download_files_error_not_enough_space">Ikke nok plass! Lagringsplass som trengs er {3} MB midlertidig, {1} MB permanent. Tilgjengelig plass er kun {2} MB.</string>
-    <string name="download_files_question_space_with_temp">Laste ned {0} fil(er)? Brukt lagringsplass er {3} MB midlertidig, {1} MB permanent. (Tilgjengelig plass er {2} MB.)</string>
+    <string name="download_files_question_space_with_temp">Laste ned {0} fil(er)? Brukt lagringsplass er {3} MB midlertidig, {1} MB permanent. ({2} MB plass tilgjengelig.)</string>
     <string name="simulate_initial_startup_descr">Setter flagget som indikerer første programoppstart, alle andre innstillinger forblir uendret.</string>
     <string name="local_osm_changes_backup_successful">OSM-endringsfil opprettet uten problem %1$s</string>
     <string name="dropbox_plugin_description">Dropbox-tillegget lar deg synkronisere spor og lyd/video-notater med din Dropbox-konto.</string>
@@ -2644,11 +2644,11 @@
     <string name="quick_action_btn_tutorial_descr">Lang-trykk og dra knappen for å endre dens posisjon på skjermen.</string>
     <string name="add_track_to_markers_descr">Rutepunkter kan legges til i markører ved å velge et av disse sporene som inneholder rutepunkter.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
-    <string name="depth_contour_descr">Kartsett som inneholder havdybdekoter og nautiske punkter.</string>
+    <string name="depth_contour_descr">Kart for havdybdekoter og nautiske punkter.</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samler inn informasjon om hvilke deler av programmet du åpner. Plasseringen din blir aldri sendt, ei heller noe du måtte skrive inn i programmet eller detaljer om områder som vises, søkes etter, eller lastes ned.</string>
     <string name="do_not_show_startup_messages_desc">Skrur av visning av programrabatter og spesielle lokale hendelsesmeldinger.</string>
     <string name="routing_attr_driving_style_safety_name">Foretrekk sideveier</string>
-    <string name="osm_live_header">Dette abonnementet gir oppdateringer hver time av alle kart over hele verden. Deler av inntekten går tilbake til OSM-fellesskapet og utbetales for hvert OSM-bidrag. Hvis du liker OsmAnd og OSM og vil støtte dem, er dette den perfekte måten å gjøre det på.</string>
+    <string name="osm_live_header">Dette abonnementet gir oppdateringer hver time av alle kart over hele verden. Deler av inntekten går tilbake til OSM-fellesskapet og utbetales for hvert OSM-bidrag. Hvis du liker OsmAnd og OSM og vil støtte og bli hjulpet av dem, er dette den perfekte måten å gjøre det på.</string>
     <string name="m_s">m/s</string>
     <string name="lang_ber">Berbisk</string>
     <string name="additional_actions">Flere handlinger</string>
