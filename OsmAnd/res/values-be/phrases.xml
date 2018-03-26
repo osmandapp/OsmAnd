@@ -3833,4 +3833,7 @@
 	<string name="synonyms_poi_nightclub">Дыска</string>
 	<string name="poi_water_utility">Офіс водазабяспячэння</string>
 
+<string name="poi_amusement_arcade">Гульнявая зала</string>
+	<string name="poi_adult_gaming_centre">Гульнявы цэнтр для дарослых</string>
+
 </resources>
