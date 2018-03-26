@@ -376,6 +376,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				String groupName = group.getName();
 				if (groupName.equals("")) {
 					groupName = app.getString(R.string.shared_string_favorites);
+				} else if (group.getType() == MapMarkersGroup.GPX_TYPE) {
+					groupName = groupName.replace(".gpx", "").replace("/", " ").replace("_", " ");
 				}
 				if (group.isDisabled()) {
 					headerString = groupName;
