@@ -326,9 +326,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 								hideDashboard();
 								if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT) {
 									mapActivity.getMapActions().stopNavigationWithoutConfirm();
-									if (getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
-										getMyApplication().getTargetPointsHelper().removeAllWayPoints(false, true);
-									}
+									getMyApplication().getTargetPointsHelper().removeAllWayPoints(false, true);
 									mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
 								}
 							}

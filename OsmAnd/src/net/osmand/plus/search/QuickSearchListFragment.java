@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
@@ -101,16 +103,9 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 						if ((sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE)
 								&& sr.file != null && sr.object instanceof City) {
 							City c = (City) sr.object;
-							if (c.getStreets().isEmpty()) {
-								try {
-									sr.file.preloadStreets(c, null);
-									if (c.getStreets().isEmpty()) {
-										showResult(sr);
-										return;
-									}
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
+							if (isCityEmpty(c, sr)) {
+								showResult(sr);
+								return;
 							}
 						}
 						dialogFragment.completeQueryWithObject(sr);
@@ -118,6 +113,36 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				}
 			}
 		}
+	}
+
+	public boolean isCityEmpty(City c, SearchResult sr) {
+		final boolean isEmpty[] = new boolean[1];
+		isEmpty[0] = true;
+		if (c.getStreets().isEmpty()) {
+			ResultMatcher<Street> resultMatcher = new ResultMatcher<Street>() {
+				boolean isCancelled = false;
+
+				@Override
+				public boolean publish(Street object) {
+					isCancelled = true;
+					isEmpty[0] = false;
+					return false;
+				}
+
+				@Override
+				public boolean isCancelled() {
+					return isCancelled;
+				}
+			};
+			try {
+				sr.file.preloadStreets(c, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			isEmpty[0] = false;
+		}
+		return isEmpty[0];
 	}
 
 	@Override

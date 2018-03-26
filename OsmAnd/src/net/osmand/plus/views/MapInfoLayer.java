@@ -168,17 +168,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget time = ric.createTimeControl(map);
 		registerSideWidget(time, new TimeControlWidgetState(app), "time", false, 15);
 
-		if (settings.USE_MAP_MARKERS.get()) {
-			TextInfoWidget marker = mwf.createMapMarkerControl(map, true);
-			registerSideWidget(marker, R.drawable.ic_action_flag_dark, R.string.map_marker_1st, "map_marker_1st", false, 16);
-			TextInfoWidget bearing = ric.createBearingControl(map);
-			registerSideWidget(bearing, new BearingWidgetState(app), "bearing", false, 17);
-			TextInfoWidget marker2nd = mwf.createMapMarkerControl(map, false);
-			registerSideWidget(marker2nd, R.drawable.ic_action_flag_dark, R.string.map_marker_2nd, "map_marker_2nd", false, 18);
-		} else {
-			TextInfoWidget bearing = ric.createBearingControl(map);
-			registerSideWidget(bearing, new BearingWidgetState(app), "bearing", false, 17);
-		}
+		TextInfoWidget marker = mwf.createMapMarkerControl(map, true);
+		registerSideWidget(marker, R.drawable.ic_action_flag_dark, R.string.map_marker_1st, "map_marker_1st", false, 16);
+		TextInfoWidget bearing = ric.createBearingControl(map);
+		registerSideWidget(bearing, new BearingWidgetState(app), "bearing", false, 17);
+		TextInfoWidget marker2nd = mwf.createMapMarkerControl(map, false);
+		registerSideWidget(marker2nd, R.drawable.ic_action_flag_dark, R.string.map_marker_2nd, "map_marker_2nd", false, 18);
 
 		TextInfoWidget speed = ric.createSpeedControl(map);
 		registerSideWidget(speed, R.drawable.ic_action_speed, R.string.map_widget_speed, "speed", false, 20);

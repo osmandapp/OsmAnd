@@ -157,8 +157,7 @@ public class OsmandApplication extends MultiDexApplication {
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = osmandSettings.getInternalAppPath();
 		}
-		osmandSettings.USE_MAP_MARKERS.set(true);
-		
+
 		checkPreferredLocale();
 		appInitializer.onCreateApplication();
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
@@ -478,9 +477,7 @@ public class OsmandApplication extends MultiDexApplication {
 		routingHelper.setRoutePlanningMode(false);
 		osmandSettings.LAST_ROUTING_APPLICATION_MODE = osmandSettings.APPLICATION_MODE.get();
 		osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
-		if (osmandSettings.USE_MAP_MARKERS.get()) {
-			targetPointsHelper.removeAllWayPoints(false, false);
-		}
+		targetPointsHelper.removeAllWayPoints(false, false);
 	}
 
 	private void fullExit() {

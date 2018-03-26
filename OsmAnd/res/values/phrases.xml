@@ -3770,4 +3770,7 @@
 
 	<string name="poi_water_utility">Water utility office</string>
 
+	<string name="poi_amusement_arcade">Amusement arcade</string>
+	<string name="poi_adult_gaming_centre">Adult gaming centre</string>
+
 </resources>

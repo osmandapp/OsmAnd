@@ -291,8 +291,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (settings.FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()
 				&& !app.getRoutingHelper().isRouteBeingCalculated()) {
 			FailSafeFuntions.restoreRoutingMode(this);
-		} else if (app.getSettings().USE_MAP_MARKERS.get()
-				&& !app.getRoutingHelper().isRoutePlanningMode()
+		} else if (!app.getRoutingHelper().isRoutePlanningMode()
 				&& !settings.FOLLOW_THE_ROUTE.get()
 				&& app.getTargetPointsHelper().getAllPoints().size() > 0) {
 			app.getRoutingHelper().clearCurrentRoute(null, new ArrayList<LatLon>());
