@@ -3766,4 +3766,70 @@
 	<string name="poi_cannabis">Tienda de cannabis</string>
 
 
+<string name="poi_socket">Socket</string>
+	<string name="poi_socket_chademo_output_filter">Salida CHAdeMO</string>
+	<string name="poi_socket_type2_output_filter">Salida tipo 2</string>
+	<string name="poi_socket_type2_combo_output_filter">Salida combinada tipo 2</string>
+	<string name="poi_socket_type3_output_filter">Salida tipo 3</string>
+	<string name="poi_socket_cee_blue_output_filter">Salida CEE azul</string>
+	<string name="poi_socket_schuko_output_filter">Salida schuko</string>
+
+<string name="synonyms_poi_fuel">Gasolinera; Estación de servicio</string>
+
+	<string name="synonyms_poi_nightclub">Disco;Disko</string>
+	<string name="poi_socket_cee_blue_yes">CEE azul</string>
+	<string name="poi_socket_cee_red_16a_yes">CEE rojo 16A</string>
+	<string name="poi_socket_cee_red_32a_yes">CEE rojo 32A</string>
+	<string name="poi_socket_cee_red_64a_yes">CEE rojo 64A</string>
+	<string name="poi_socket_cee_red_125a_yes">CEE rojo 125A</string>
+	<string name="poi_socket_type1_yes">Tipo 1</string>
+	<string name="poi_socket_type1_combo_yes">Tipo 1 combinado</string>
+	<string name="poi_socket_type2_yes">Tipo 2</string>
+	<string name="poi_socket_type2_combo_yes">Tipo 2 combinado</string>
+	<string name="poi_socket_type3_yes">Tipo 3</string>
+	<string name="poi_socket_chademo_yes">CHAdeMO</string>
+	<string name="poi_socket_tesla_standard_yes">Tesla estándar</string>
+	<string name="poi_socket_tesla_supercharger_yes">Tesla Supercharger</string>
+	<string name="poi_socket_tesla_roadster_yes">Tesla Roadster</string>
+	<string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
+	<string name="poi_socket_nema_14_30_yes">NEMA 14-30</string>
+	<string name="poi_socket_nema_14_50_yes">NEMA 14-50</string>
+	<string name="poi_socket_schuko_yes">Schuko</string>
+	<string name="poi_socket_bs1363_yes">BS 1363</string>
+	<string name="poi_socket_as3112_yes">AS/NZS 3112</string>
+
+	<string name="poi_socket_chademo_output_high">Alta</string>
+	<string name="poi_socket_chademo_output_medium">Media</string>
+	<string name="poi_socket_chademo_output_low">Baja</string>
+	<string name="poi_socket_type2_output_high">Alta</string>
+	<string name="poi_socket_type2_output_medium">Media</string>
+	<string name="poi_socket_type2_output_low">Baja</string>
+	<string name="poi_socket_type2_combo_output_high">Alta</string>
+	<string name="poi_socket_type2_combo_output_medium">Media</string>
+	<string name="poi_socket_type2_combo_output_low">Baja</string>
+	<string name="poi_socket_type3_output_high">Alta</string>
+	<string name="poi_socket_type3_output_medium">Media</string>
+	<string name="poi_socket_type3_output_low">Baja</string>
+	<string name="poi_socket_cee_blue_output_high">Alta</string>
+	<string name="poi_socket_cee_blue_output_medium">Media</string>
+	<string name="poi_socket_cee_blue_output_low">Baja</string>
+	<string name="poi_socket_schuko_output_high">Alta</string>
+	<string name="poi_socket_schuko_output_medium">Media</string>
+	<string name="poi_socket_schuko_output_low">Baja</string>
+
+	<string name="poi_flooring">Tienda de suelos</string>
+	<string name="poi_pottery">Alfarería</string>
+
+	<string name="poi_whitewater_rapid_name">Nombre de los rápidos del río</string>
+
+	<string name="poi_outpost">Punto de entrega de la tienda</string>
+
+	<string name="poi_barbecue_grill">Parrilla de barbacoa: sí</string>
+
+	<string name="poi_water_utility">Oficina de servicio de agua</string>
+
+	<string name="poi_amusement_arcade">Salón recreativo</string>
+	<string name="poi_adult_gaming_centre">Centro de juego para adultos</string>
+
 </resources>
