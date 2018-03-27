@@ -2490,8 +2490,8 @@
 	<string name="poi_health_specialty_pulmonology_yes">Especialidade médica: pneumologia</string>
 	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Especialidade médica: cirurgia dental, oral e maxilofacial</string>
 	<string name="poi_health_specialty_maternity_yes">Especialidade médica: maternidade</string>
-	<string name="poi_health_specialty_emergency_medicine_yes">Especialidade médica: emergência e urgência</string>
-	<string name="poi_health_specialty_emergency_medicine_no">Especialidade médica: sem emergência e urgência</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Emergência e urgência</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Sem emergência e urgência</string>
 	<string name="poi_health_specialty_plastic_surgery_yes">Especialidade médica: cirurgia plástica</string>
 	<string name="poi_health_specialty_orthodontics_yes">Especialidade médica: ortodontia</string>
 	<string name="poi_health_specialty_physiotherapy_yes">Especialidade médica: psicoterapia</string>
@@ -3026,8 +3026,8 @@
 	<string name="poi_treat_inpatient_only">Serviços de internamento: somente</string>
 	<string name="poi_counselling_yes">Aconselhamento: sim</string>
 	<string name="poi_counselling_no">Aconselhamento: não</string>
-	<string name="poi_emergency_yes">Emergência: sim</string>
-	<string name="poi_emergency_no">Emergência: não</string>
+	<string name="poi_emergency_yes">sim</string>
+	<string name="poi_emergency_no">não</string>
 	<string name="poi_home_visit_yes">Sim</string>
 	<string name="poi_home_visit_no">Visita domiciliar: não</string>
 
