@@ -584,7 +584,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	}
 
 	private void addMapMarkersSyncGroup() {
-		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+		final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		final MapMarkersGroup markersGr = markersHelper.getOrCreateGroup(getGpxDataItem().getFile());
 		final boolean synced = markersHelper.isGroupSynced(markersGr.getId());
 		if (synced) {
@@ -602,12 +602,17 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		updateMenuFabVisibility(false);
 		Snackbar snackbar = Snackbar.make(mainView, getResources().getString(synced?R.string.waypoints_removed_from_map_markers:R.string.waypoints_added_to_map_markers),
 				Snackbar.LENGTH_LONG)
-				.setAction(getResources().getString(R.string.view), new View.OnClickListener() {
+				.setAction(synced?getResources().getString(R.string.shared_string_undo):getResources().getString(R.string.view), new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						Bundle args = new Bundle();
-						args.putString(MapMarkersGroup.MARKERS_SYNC_GROUP_ID, markersGr.getId());
-						MapActivity.launchMapActivityMoveToTop(getTrackActivity(), MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS, args);
+						if (synced) {
+							markersHelper.addOrEnableGroup(markersGr);
+							getActionBarActivity().invalidateOptionsMenu();
+						} else {
+							Bundle args = new Bundle();
+							args.putString(MapMarkersGroup.MARKERS_SYNC_GROUP_ID, markersGr.getId());
+							MapActivity.launchMapActivityMoveToTop(getTrackActivity(), MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS, args);
+						}
 					}
 				});
 		snackbar.addCallback(new Snackbar.Callback() {
