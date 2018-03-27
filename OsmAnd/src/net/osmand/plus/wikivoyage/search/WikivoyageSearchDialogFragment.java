@@ -17,18 +17,23 @@ import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
+import net.osmand.plus.wikivoyage.data.WikivoyageDbHelper;
 
 public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment {
 
 	public static final String TAG = "WikivoyageSearchDialogFragment";
 
-	private SearchRecyclerViewAdapter adapter;
+	private WikivoyageDbHelper dbHelper;
 
+	private SearchRecyclerViewAdapter adapter;
 	private EditText searchEt;
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		dbHelper = getMyApplication().getWikivoyageDbHelper();
+
 		final View mainView = inflater.inflate(R.layout.fragment_wikivoyage_search_dialog, container);
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
@@ -63,15 +68,24 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment {
 		});
 
 		adapter = new SearchRecyclerViewAdapter();
-		RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
+		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);
+		adapter.setOnItemClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				int pos = rv.getChildAdapterPosition(v);
+				if (pos != RecyclerView.NO_POSITION) {
+					WikivoyageArticle article = dbHelper.getArticle(adapter.getItem(pos));
+				}
+			}
+		});
 
 		return mainView;
 	}
 
 	private void runSearch() {
-		adapter.setItems(getMyApplication().getWikivoyageDbHelper().search((searchEt).getText().toString()));
+		adapter.setItems(dbHelper.search((searchEt).getText().toString()));
 	}
 
 	public static boolean showInstance(FragmentManager fm) {

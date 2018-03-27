@@ -16,16 +16,17 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 
 	private List<SearchResult> items = new ArrayList<>();
 
+	private View.OnClickListener onItemClickListener;
+
+	public void setOnItemClickListener(View.OnClickListener onItemClickListener) {
+		this.onItemClickListener = onItemClickListener;
+	}
+
 	@Override
 	public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
 		View itemView = LayoutInflater.from(viewGroup.getContext())
 				.inflate(R.layout.wikivoyage_search_list_item, viewGroup, false);
-		itemView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-			}
-		});
+		itemView.setOnClickListener(onItemClickListener);
 		return new ViewHolder(itemView);
 	}
 
@@ -41,6 +42,10 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 	@Override
 	public int getItemCount() {
 		return items.size();
+	}
+
+	public SearchResult getItem(int pos) {
+		return items.get(pos);
 	}
 
 	public void setItems(List<SearchResult> items) {

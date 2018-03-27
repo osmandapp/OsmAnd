@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage.data;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import net.osmand.IndexConstants;
@@ -18,7 +19,7 @@ public class WikivoyageDbHelper {
 	private static final String ARTICLES_TABLE_NAME = "wikivoyage_articles";
 	private static final String ARTICLES_COL_ID = "article_id";
 	private static final String ARTICLES_COL_TITLE = "title";
-	private static final String ARTICLES_COL_CONTENT = "content_gzblob";
+	private static final String ARTICLES_COL_CONTENT = "content_gz";
 	private static final String ARTICLES_COL_IS_PART_OF = "is_part_of";
 	private static final String ARTICLES_COL_LAT = "lat";
 	private static final String ARTICLES_COL_LON = "lon";
@@ -61,6 +62,7 @@ public class WikivoyageDbHelper {
 		this.application = application;
 	}
 
+	@NonNull
 	public List<SearchResult> search(String searchQuery) {
 		List<SearchResult> res = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
@@ -82,18 +84,60 @@ public class WikivoyageDbHelper {
 	}
 
 	@Nullable
+	public WikivoyageArticle getArticle(SearchResult searchResult) {
+		WikivoyageArticle res = null;
+		SQLiteConnection conn = openConnection();
+		if (conn != null) {
+			try {
+				SQLiteCursor cursor = conn.rawQuery(ARTICLES_TABLE_SELECT + " WHERE " +
+								ARTICLES_COL_CITY_ID + " = ? AND " +
+								ARTICLES_COL_TITLE + " = ? AND " +
+								ARTICLES_COL_LANG + " = ?",
+						new String[]{String.valueOf(searchResult.cityId), searchResult.articleTitle, searchResult.lang});
+				if (cursor.moveToFirst()) {
+					res = readArticle(cursor);
+				}
+				cursor.close();
+			} finally {
+				conn.close();
+			}
+		}
+		return res;
+	}
+
+	@Nullable
 	private SQLiteConnection openConnection() {
 		String path = getDbFile(application).getAbsolutePath();
 		return application.getSQLiteAPI().openByAbsolutePath(path, true);
 	}
 
-	private SearchResult readSearchResult(SQLiteCursor query) {
+	@NonNull
+	private SearchResult readSearchResult(SQLiteCursor cursor) {
 		SearchResult res = new SearchResult();
 
-		res.searchTerm = query.getString(0);
-		res.cityId = query.getLong(1);
-		res.articleTitle = query.getString(2);
-		res.lang = query.getString(3);
+		res.searchTerm = cursor.getString(0);
+		res.cityId = cursor.getLong(1);
+		res.articleTitle = cursor.getString(2);
+		res.lang = cursor.getString(3);
+
+		return res;
+	}
+
+	@NonNull
+	private WikivoyageArticle readArticle(SQLiteCursor cursor) {
+		WikivoyageArticle res = new WikivoyageArticle();
+
+		res.id = cursor.getString(0);
+		res.title = cursor.getString(1);
+		byte[] contentBlob = cursor.getBlob(2);
+		res.isPartOf = cursor.getString(3);
+		res.lat = cursor.getDouble(4);
+		res.lon = cursor.getDouble(5);
+		res.imageTitle = cursor.getString(6);
+		byte[] gpxFileBlob = cursor.getBlob(7);
+		res.cityId = cursor.getLong(8);
+		res.originalId = cursor.getLong(9);
+		res.lang = cursor.getString(10);
 
 		return res;
 	}
@@ -102,6 +146,7 @@ public class WikivoyageDbHelper {
 		return getDbFile(app).exists();
 	}
 
+	@NonNull
 	private static File getDbFile(OsmandApplication app) {
 		return app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR + DB_NAME);
 	}
