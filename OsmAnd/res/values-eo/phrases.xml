@@ -3801,4 +3801,7 @@
 	<string name="poi_water_utility">Oficejo de akvokonduka firmao</string>
 
 <string name="synonyms_poi_nightclub">noktoklubo;dancejo;diskoteko;diskejo;noktaklubo;noktklubo</string>
-	</resources>
+	<string name="poi_amusement_arcade">Salono de ludoj</string>
+	<string name="poi_adult_gaming_centre">Hazard-ludejo</string>
+
+</resources>
