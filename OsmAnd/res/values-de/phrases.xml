@@ -719,7 +719,7 @@
 	<string name="poi_military_landuse">Militärgebiet</string>
 	<string name="poi_forest">Forstwald</string>
 	<string name="poi_reservoir">Reservoir</string>
-	<string name="poi_general_tourist_attraction_yes">Allgemeine Attraktion</string>
+	<string name="poi_general_tourist_attraction_yes">Allgemeine Sehenswürdigkeit</string>
 	<string name="poi_fuel_svo">Bio-Kraftstoff</string>
 	<string name="poi_training">Übungsgelände</string>
 	<string name="poi_quarter">Quartier</string>
@@ -737,7 +737,7 @@
 	<string name="poi_charity">Sozialkaufhaus</string>
 	<string name="poi_cabin">Hütte</string>
 	<string name="poi_lean_to">Unterstand</string>
-	<string name="poi_wilderness_hut">Wildnishütte</string>
+	<string name="poi_wilderness_hut">Schutzhütte</string>
 	<string name="poi_wiki_lang_zh">Chinesisches Wiki</string>
 
 <string name="poi_wiki_lang_tr">Türkisches Wiki</string>
@@ -822,7 +822,7 @@
 	<string name="poi_garden_furniture">Gartenmöbelladen</string>
 	<string name="poi_leather">Ledergeschäft</string>
 	<string name="poi_music">Musikgeschäft</string>
-	<string name="poi_scuba_diving_shop">Gerätetauchbedarf</string>
+	<string name="poi_scuba_diving_shop">Taucherbedarf</string>
 	<string name="poi_tyres">Reifengeschäft</string>
 	<string name="poi_watches">Uhrengeschäft</string>
 	<string name="poi_swimming_pool_shop">Poolzubehörgeschäft</string>
@@ -842,7 +842,7 @@
 
 	<string name="poi_crane">Kran</string>
 	<string name="poi_country">Land</string>
-	<string name="poi_tourism_attraction">Touristische Attraktion</string>
+	<string name="poi_tourism_attraction">Sehenswürdigkeit</string>
 	<string name="poi_lodging">Unterkunft</string>
 	<string name="poi_religious">Heilige Stätte</string>
 	<string name="poi_hanami">Kirschblütenfest</string>
@@ -924,7 +924,7 @@
 	<string name="poi_recycling_wood">Altholz</string>
 	<string name="poi_recycling_books">Bücher</string>
 	<string name="poi_recycling_shoes">Schuhe</string>
-	<string name="poi_recycling_organic">Kompost</string>
+	<string name="poi_recycling_organic">Bio-müll</string>
 	<string name="poi_recycling_beverage_cartons">Getränkekartons</string>
 	<string name="poi_recycling_garden_waste">Gartenabfälle</string>
 	<string name="poi_recycling_low_energy_bulbs">Energiesparlampen</string>

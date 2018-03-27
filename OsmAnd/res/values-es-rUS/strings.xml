@@ -1320,7 +1320,7 @@ Lon %2$s</string>
     <string name="km">km</string>
     <string name="km_h">km/h</string>
     <string name="m">m</string>
-    <string name="old_map_index_is_not_supported">No se soporta el formato «{0}» de datos obsoletos</string>
+    <string name="old_map_index_is_not_supported">Formato de datos «{0}» del mapa, obsoleto e incompatible</string>
     <string name="poi_filter_closest_poi">PDI más cercanos</string>
     <string name="poi_filter_custom_filter">Filtro propio</string>
     <string name="poi_filter_namefinder">NameFinder en línea</string>
@@ -1329,10 +1329,12 @@ Lon %2$s</string>
     <string name="version_index_is_not_supported">No se soporta la versión «{0}» de índices</string>
     
     
-    <string name="osmand_routing_experimental">La navegación sin conexión OsmAnd es una característica experimental y no funciona para distancias mayores a 20 km.\n\nEl servicio de navegación se cambia temporalmente al servicio en línea CloudMade.</string>
+    <string name="osmand_routing_experimental">La navegación sin conexión OsmAnd es una característica experimental y no funciona para distancias mayores a 20 km.
+\n
+\nLa navegación cambió temporalmente al servicio en línea CloudMade.</string>
     <string name="specified_dir_doesnt_exist">No se puede encontrar la carpeta indicada.</string>
-    <string name="osmand_net_previously_installed">Una versión anterior de OsmAnd está instalada. Todos los datos descargados están soportados por la nueva aplicación. Pero los Favoritos deben exportarse desde la aplicación antigua y luego, importarse en la nueva.</string>
-    <string name="build_installed">Compilación {0} correctamente instalada ({1}).</string>
+    <string name="osmand_net_previously_installed">Todos los datos sin conexión en la versión vieja de OsmAnd son compatibles con la nueva versión, pero los puntos favoritos deben exportarse desde la versión vieja y luego, importarse en la nueva.</string>
+    <string name="build_installed">Compilación {0} instalada ({1}).</string>
     <string name="downloading_build">Descargando compilación…</string>
     <string name="install_selected_build">¿Desea instalar OsmAnd - {0} de {1} {2} MB ?</string>
     <string name="loading_builds_failed">Fallo recuperando la lista de compilaciones OsmAnd</string>
@@ -1345,7 +1347,7 @@ Lon %2$s</string>
     <string name="daynight_mode_night">Noche</string>
     <string name="daynight_mode_auto">Alba/ocaso</string>
     <string name="daynight_mode_sensor">Sensor de luz</string>
-    <string name="daynight_descr">Elige la regla de cambio del modo día/noche.</string>
+    <string name="daynight_descr">Elige el motivo de cambio entre el modo nocturno y diurno.</string>
     <string name="daynight">Modo día/noche</string>
     <string name="download_files_question">¿Descargar {0} archivo(s) ({1} MB)?</string>
     <string name="items_were_selected">{0} elemento(s) seleccionado(s)</string>
@@ -1361,7 +1363,7 @@ Lon %2$s</string>
     <string name="rendering_exception">Ocurrió un error al visualizar el área elegida</string>
     <string name="show_point_options">Usar ubicación…</string>
     <string name="renderer_load_sucess">Visualización cargada</string>
-    <string name="renderer_load_exception">Error: No se cargó la visualización</string>
+    <string name="renderer_load_exception">Excepción ocurrida: Visualización no cargada</string>
     <string name="renderers">Visualización vectorial</string>
     <string name="renderers_descr">Elige el aspecto de visualización de los mapas vectoriales.</string>
     <string name="poi_context_menu_website">Mostrar sitio web del PDI</string>
@@ -1385,22 +1387,22 @@ Lon %2$s</string>
     
     <string name="poi_context_menu_modify">Modificar PDI</string>
     <string name="poi_context_menu_delete">Borrar PDI</string>
-    <string name="rotate_map_compass_opt">Según la brújula</string>
-    <string name="rotate_map_bearing_opt">En dirección al movimiento</string>
-    <string name="rotate_map_none_opt">No rotar (norte arriba)</string>
+    <string name="rotate_map_compass_opt">Dirección de la brújula</string>
+    <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
+    <string name="rotate_map_none_opt">No rotar (norte siempre arriba)</string>
     <string name="rotate_map_to_bearing_descr">Elige la alineación del mapa.</string>
     <string name="rotate_map_to_bearing">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
-    <string name="fav_imported_sucessfully">Favoritos importados correctamente</string>
-    <string name="import_file_favourites">¿Guardar datos en un archivo GPX o importar puntos de referencia a Favoritos?</string>
-    <string name="fav_file_to_load_not_found">El archivo GPX de favoritos no se encontró en {0}</string>
-    <string name="fav_saved_sucessfully">Los puntos favoritos se guardaron correctamente en {0}</string>
+    <string name="fav_imported_sucessfully">Favoritos importados</string>
+    <string name="import_file_favourites">¿Guardar datos en un archivo GPX o importar puntos de referencia a «Favoritos»?</string>
+    <string name="fav_file_to_load_not_found">Archivo GPX de favoritos, no encontrado en {0}</string>
+    <string name="fav_saved_sucessfully">Favoritos guardados en {0}</string>
     <string name="no_fav_to_save">Sin puntos favoritos que guardar</string>
     <string name="share_fav_subject">Favoritos compartidos a través de OsmAnd</string>
     <string name="error_occurred_loading_gpx">Ocurrió un error al cargar el GPX</string>
     <string name="send_report">Enviar informe</string>
-    <string name="none_region_found">Sin datos descargados para las regiones en la tarjeta SD. Descarga las regiones de Internet.</string>
-    <string name="poi_namefinder_query_empty">Ingresa la consulta para buscar el PDI</string>
+    <string name="none_region_found">Sin datos descargados para las regiones en la tarjeta de memoria. Descarga las regiones desde Internet.</string>
+    <string name="poi_namefinder_query_empty">Escribir para encontrar un PDI</string>
     <string name="any_poi">Cualquiera</string>
     
     <string name="thanks_yandex_traffic">Gracias a Yandex por la información de tráfico.</string>
@@ -1437,9 +1439,10 @@ Lon %2$s</string>
     <string name="voice_data_not_supported">Versión no soportada de datos de voz</string>
     <string name="voice_data_corrupted">El dato de voz indicado está corrupto</string>
     <string name="voice_data_unavailable">Dato de voz elegido, no disponible</string>
-    <string name="sd_unmounted">No se puede acceder a la tarjeta SD.\nNo puedes ver mapas ni encontrar cosas.</string>
-    <string name="sd_mounted_ro">La tarjeta SD está en modo sólo lectura.
-\nSolamente puedes ver el mapa precargado y no puedes descargar de Internet.</string>
+    <string name="sd_unmounted">Tarjeta de memoria inaccesible.
+\nNo podrás ver mapas ni encontrar cosas.</string>
+    <string name="sd_mounted_ro">Tarjeta de memoria en sólo lectura. 
+\nSólo se puede ver el mapa precargado y no se puede descargar desde Internet.</string>
     <string name="unzipping_file">Descomprimiendo archivo…</string>
     <string name="route_tr">Gira a la derecha en</string>
     <string name="route_tshr">Gira fuerte a la derecha en</string>
@@ -1475,14 +1478,14 @@ Lon %2$s</string>
     <string name="transport">Transporte</string>
     <string name="show_transport_over_map_description">Muestra las paradas de transporte público en el mapa.</string>
     <string name="show_transport_over_map">Mostrar paradas de transporte</string>
-    <string name="hello">Aplicación de navegación OsmAnd</string>
-    <string name="update_poi_success">Datos de PDI correctamente actualizados (cargados {0})</string>
+    <string name="hello">OsmAnd, aplicación de navegación</string>
+    <string name="update_poi_success">Datos de PDI actualizados ({0} cargados)</string>
     <string name="update_poi_error_local">Error al actualizar lista de PDI locales</string>
     <string name="update_poi_error_loading">Error durante la descarga de datos del servidor</string>
     <string name="update_poi_no_offline_poi_index">Sin datos de PDI disponibles para esta área</string>
     <string name="update_poi_is_not_available_for_zoom">La actualización de PDI no está disponible para niveles de ampliación pequeños</string>
     <string name="context_menu_item_update_poi">Actualizar PDI</string>
-    <string name="context_menu_item_update_map_confirm">¿Actualizar datos locales vía Internet?</string>
+    <string name="context_menu_item_update_map_confirm">¿Actualizar datos locales desde Internet?</string>
     <string name="search_history_city">Ciudad: {0}</string>
     <string name="search_history_street">Calle: {0}, {1}</string>
     <string name="search_history_int_streets">Intersección: {0} x {1} en {2}</string>
@@ -1498,16 +1501,16 @@ Lon %2$s</string>
     <string name="search_offline_address">Búsqueda sin conexión</string>
     <string name="search_online_address">Búsqueda en línea</string>
     <string name="max_level_download_tile">Máxima ampliación en línea</string>
-    <string name="max_level_download_tile_descr">Indica el nivel de ampliación máxima para descargar teselas de mapas en línea.</string>
+    <string name="max_level_download_tile_descr">No buscar en las teselas de mapas en línea para niveles de ampliación más allá de esto.</string>
     <string name="route_general_information">Distancia total %1$s, tiempo de viaje %2$d h %3$d min.</string>
     <string name="router_service_descr">Elige un servicio de navegación con o sin conexión.</string>
     <string name="router_service">Servicio de navegación</string>
-    <string name="sd_dir_not_accessible">¡No se puede acceder a la carpeta de almacenamiento en la tarjeta SD!</string>
+    <string name="sd_dir_not_accessible">¡Carpeta de almacenamiento de datos en la tarjeta de memoria inaccesible!</string>
     <string name="download_question">¿Descargar {0} - {1} ?</string>
-    <string name="download_question_exist">Ya existen datos descargados ({1}) para {0}. ¿Desea actualizarlos ({2}) ?</string>
+    <string name="download_question_exist">Ya existen datos descargados ({1}) para {0}. ¿Desea actualizarlos ({2})?</string>
     <string name="address">Dirección</string>
     <string name="downloading_list_indexes">Descargando lista de regiones disponibles…</string>
-    <string name="list_index_files_was_not_loaded">La lista de regiones no se descargó de OsmAnd.net.</string>
+    <string name="list_index_files_was_not_loaded">La lista de regiones no se descargó de https://osmand.net.</string>
     <string name="fav_points_edited">Se editó el punto favorito</string>
     <string name="fav_points_not_exist">Sin puntos favoritos</string>
     <string name="update_existing">Reemplazar</string>
@@ -1534,7 +1537,7 @@ Lon %2$s</string>
     <string name="empty_route_calculated">Error: La ruta calculada está vacía</string>
     <string name="new_route_calculated_dist">Nueva ruta calculada, distancia</string>
     <string name="arrived_at_destination">Has llegado al destino</string>
-    <string name="invalid_locations">¡Las coordenadas son inválidas!</string>
+    <string name="invalid_locations">Coordenadas inválidas</string>
     <string name="go_back_to_osmand">Volver al mapa OsmAnd</string>
     <string name="loading_data">Cargando datos…</string>
     <string name="reading_indexes">Leyendo datos locales…</string>
@@ -1550,8 +1553,8 @@ Lon %2$s</string>
     <string name="update_tile">Actualizar mapa</string>
     <string name="reload_tile">Recargar tesela</string>
     <string name="mark_point">Objetivo</string>
-    <string name="use_english_names_descr">Elige entre nombres nativos o en inglés.</string>
-    <string name="use_english_names">Usar nombres ingleses en los mapas</string>
+    <string name="use_english_names_descr">Elige entre nombres locales o en inglés.</string>
+    <string name="use_english_names">Usar nombres en inglés en los mapas</string>
     <string name="app_settings">Ajustes de aplicación</string>
     <string name="search_address">Buscar dirección</string>
     <string name="choose_building">Elige el edificio</string>
@@ -1569,7 +1572,7 @@ Lon %2$s</string>
     <string name="use_internet">Usar Internet</string>
     <string name="show_location">Mostrar tu ubicación</string>
     <string name="show_gps_coordinates_text">Mostrar coordenadas GPS en el mapa</string>
-    <string name="use_internet_to_download_tile">Usa Internet para descargar las teselas faltantes</string>
+    <string name="use_internet_to_download_tile">Descargar las teselas de mapa faltantes</string>
     <string name="app_description">Aplicación de navegación</string>
     <string name="search_button">Búsqueda rápida</string>
     <string name="search_activity">Buscar</string>
@@ -1604,11 +1607,11 @@ Lon %2$s</string>
     <string name="context_menu_item_create_poi">Crear PDI</string>
     <string name="add_favorite_dialog_top_text">Ingresa nombre de favorito</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorito</string>
-    <string name="add_favorite_dialog_favourite_added_template">El punto favorito «{0}» se añadió correctamente.</string>
+    <string name="add_favorite_dialog_favourite_added_template">Punto favorito «{0}» añadido.</string>
     <string name="favourites_context_menu_edit">Editar favorito</string>
     <string name="favourites_context_menu_delete">Borrar favorito</string>
     <string name="favourites_remove_dialog_msg">¿Quieres borrar el favorito «%s»?</string>
-    <string name="favourites_remove_dialog_success">El punto favorito {0} se borró correctamente.</string>
+    <string name="favourites_remove_dialog_success">Punto favorito {0} borrado.</string>
     
     
     
@@ -1630,12 +1633,12 @@ Lon %2$s</string>
     <string name="poi_error_poi_not_found">No se encontró el nodo, o el PDI se compone de varios nodos, lo cuál todavía no está soportado.</string>
     <string name="poi_remove_confirm_template">Borrarás {0} (añadir comentario). ¿Continuar?</string>
     <string name="poi_remove_title">Borrar PDI</string>
-    <string name="poi_remove_success">PDI borrado correctamente</string>
+    <string name="poi_remove_success">PDI borrado</string>
     <string name="poi_action_add">añadir</string>
     <string name="poi_action_change">cambiar</string>
-    <string name="poi_action_succeded_template">Acción {0} se completó correctamente.</string>
-    <string name="poi_error_unexpected_template">Error inesperado durante la acción {0}.</string>
-    <string name="poi_error_io_error_template">Error de entrada/salida durante la acción {0}.</string>
+    <string name="poi_action_succeded_template">Acción {0} completada.</string>
+    <string name="poi_error_unexpected_template">Error inesperado al realizar la acción {0}.</string>
+    <string name="poi_error_io_error_template">Error de E/S al realizar la acción {0}.</string>
     <string name="poi_error_info_not_loaded">No se cargó la información del nodo</string>
     <string name="poi_dialog_opening_hours">Abierto</string>
     <string name="poi_dialog_comment">Comentar</string>
@@ -1662,7 +1665,7 @@ Lon %2$s</string>
     <string name="av_camera_pic_size_descr">Elige el tamaño interno de la fotografía.</string>
     <string name="navigation_intent_invalid">Formato inválido: %s</string>
     <string name="plugin_description_title">Descripción</string>
-    <string name="plugin_install_needs_network">Necesitas una conexión a Internet para instalar este complemento.</string>
+    <string name="plugin_install_needs_network">Es necesaria una conexión a Internet para instalar este complemento.</string>
     <string name="get_plugin">Obtener</string>
     
     <string name="routing_attr_avoid_borders_description">Evita cruzar fronteras con otro país.</string>
@@ -1748,11 +1751,11 @@ Lon %2$s</string>
     <string name="download_live_updates">Actualizaciones en vivo</string>
     <string name="failed_to_upload">Subida fallida</string>
     <string name="delete_change">Borrar cambio</string>
-    <string name="successfully_uploaded_pattern">Subido correctamente {0}/{1}</string>
+    <string name="successfully_uploaded_pattern">Subido {0}/{1}</string>
     <string name="try_again">Prueba de nuevo</string>
     <string name="error_message_pattern">Error: {0}</string>
     <string name="no_updates_available">Sin actualizaciones disponibles</string>
-    <string name="we_really_care_about_your_opinion">Nos interesa mucho y es importante oír tu opinión.</string>
+    <string name="we_really_care_about_your_opinion">Nos interesa su opinión y sus comentarios son importante para nosotros.</string>
     <string name="rendering_value_boldOutline_name">Borde remarcado</string>
     <string name="traffic_warning_hazard">Advertencia de peligro</string>
     <string name="dahboard_options_dialog_title">Configurar panel</string>
@@ -1784,7 +1787,7 @@ Lon %2$s</string>
     <string name="recent_places">Lugares recientes</string>
     <string name="favourites">Favoritos</string>
     <string name="poi_action_delete">borrar</string>
-    <string name="saved_at_time">Guardado exitosamente como: %1$s</string>
+    <string name="saved_at_time">Ahora, guardado como: %1$s</string>
     <string name="poi_deleted_localy">El PDI se eliminará una vez subido los cambios</string>
     <string name="show_gpx">Mostrar GPX</string>
     <string name="count_of_lines">Número de líneas</string>
@@ -1821,9 +1824,9 @@ Lon %2$s</string>
     <string name="show_free_version_banner_description">Muestra el anuncio de la versión gratuita, incluso en la versión de pago.</string>
     <string name="downloading_number_of_files">Descargando - %1$d archivo/s</string>
     <string name="hillshade_layer_disabled">Capa de sombreado desactivada</string>
-    <string name="buy">COMPRAR</string>
-    <string name="activate_seamarks_plugin">Activa el complemento náutico</string>
-    <string name="activate_srtm_plugin">Activa el complemento SRTM</string>
+    <string name="buy">Comprar</string>
+    <string name="activate_seamarks_plugin">Activa el complemento «Vista náutica»</string>
+    <string name="activate_srtm_plugin">Activa el complemento de «SRTM»</string>
     <string name="later">Luego</string>
     <string name="get_full_version">Versión completa</string>
     <string name="regions">Regiones</string>
@@ -1833,12 +1836,12 @@ Lon %2$s</string>
     <string name="favorite_category_dublicate_message">Utiliza un nombre de categoría que no exista ya.</string>
     <string name="favorite_category_name">Nombre de categoría</string>
     <string name="favorite_category_add_new_title">Añadir nueva categoría</string>
-    <string name="confirm_download_roadmaps">¿Descargar el mapa vial, aunque ya tengas el mapa estándar (completo)?</string>
+    <string name="confirm_download_roadmaps">El mapa de sólo carreteras es innecesario, ya que tiene el mapa estándar (completo). ¿Descargar de todos modos?</string>
     <string name="value_downloaded_of_max">%1$.1f de %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Actualizar todo (%1$s MB)</string>
     <string name="free_downloads_used">Descargas gratis usadas</string>
-    <string name="free_downloads_used_description">Muestra las descargas gratis utilizadas.</string>
+    <string name="free_downloads_used_description">Muestra la cantidad de descargas gratuitas faltantes.</string>
     <string name="simulate_initial_startup_descr">Muestra la pantalla del primer arranque y mantiene los demás ajustes sin cambios.</string>
     <string name="simulate_initial_startup">Simular el arranque inicial</string>
     <string name="share_geo">geo:</string>
@@ -1855,7 +1858,7 @@ Lon %2$s</string>
     <string name="new_version">Nueva versión</string>
     <string name="begin_with_osmand_menu_group">Primeros pasos con OsmAnd</string>
     <string name="features_menu_group">Características</string>
-    <string name="help_us_to_improve_menu_group">Ayúdanos a mejorar OsmAnd</string>
+    <string name="help_us_to_improve_menu_group">Ayudar a mejorar OsmAnd</string>
     <string name="other_menu_group">Otros</string>
     <string name="plugins_menu_group">Complementos</string>
     <string name="first_usage_item">Primer uso</string>
@@ -1870,7 +1873,7 @@ Lon %2$s</string>
     <string name="techical_articles_item">Artículos técnicos</string>
     <string name="versions_item">Versiones</string>
     <string name="feedback">Encuesta</string>
-    <string name="contact_us">Contáctenos</string>
+    <string name="contact_us">Contacto</string>
     <string name="osm_edit_created_poi">PDI de OSM creado</string>
     
     <string name="map_legend">Leyenda del mapa</string>
@@ -1885,7 +1888,7 @@ Lon %2$s</string>
     <string name="lang_mk">Macedonio</string>
     <string name="lang_fy">Frisón</string>
     <string name="lang_als">Albano (Tosk)</string>
-    <string name="save_poi_without_poi_type_message">¿Quieres guardar el punto de interés sin especificar el tipo?</string>
+    <string name="save_poi_without_poi_type_message">¿Quieres guardar el PDI sin especificar el tipo?</string>
     <string name="shared_string_location">Ubicación</string>
     <string name="poi_context_menu_modify_osm_change">Modificar cambio OSM</string>
     <string name="osm_edit_modified_poi">PDI de OSM modificado</string>
@@ -1936,7 +1939,7 @@ Lon %2$s</string>
     <string name="use_dashboard_btn">Usar panel de control</string>
     <string name="use_drawer_btn">Usar menú</string>
     <string name="dashboard_or_drawer_title">Panel de control o menú de control</string>
-    <string name="dashboard_or_drawer_description">Nueva opción para controlar principalmente la aplicación a través del panel de control flexible o un menú estático. Puedes cambiar esto luego, en los ajustes del panel.</string>
+    <string name="dashboard_or_drawer_description">Se ofrece la opción de controlar la aplicación principalmente a través del panel de control flexible o de un menú estático. Se puede cambiar esto luego, en los ajustes del panel.</string>
     <string name="access_from_map_description">El botón del menú, muestra el panel de control en lugar del menú</string>
     <string name="access_from_map">Acceso desde el mapa</string>
     <string name="please_specify_poi_type_only_from_list">Indica el tipo de PDI correcto u omítelo.</string>
@@ -1962,7 +1965,7 @@ Lon %2$s</string>
     <string name="update_now">Actualizar</string>
 <string name="route_distance">Distancia:</string>
     <string name="route_duration">Duración:</string>
-    <string name="missing_write_external_storage_permission">La aplicación no tiene permiso para usar la tarjeta SD</string>
+    <string name="missing_write_external_storage_permission">OsmAnd no tiene permiso para usar la tarjeta de memoria</string>
 <string name="no_location_permission">La aplicación no tiene permiso de acceso a los datos de ubicación.</string>
     <string name="no_camera_permission">La aplicación no tiene permiso de acceso a la cámara.</string>
     <string name="no_microphone_permission">La aplicación no tiene permiso de acceso al micrófono.</string>
@@ -2304,9 +2307,9 @@ Lon %2$s</string>
     <string name="quick_action_add_poi">Añadir PDI</string>
     <string name="quick_action_map_style">Cambiar estilo del mapa</string>
     <string name="quick_action_map_style_switch">El estilo del mapa se cambió para «%s».</string>
-    <string name="quick_action_take_audio_note">Grabar nota de audio</string>
-    <string name="quick_action_take_video_note">Grabar nota de video</string>
-    <string name="quick_action_take_photo_note">Tomar nota fotográfica</string>
+    <string name="quick_action_take_audio_note">Nueva nota de audio</string>
+    <string name="quick_action_take_video_note">Nueva nota de video</string>
+    <string name="quick_action_take_photo_note">Nueva nota fotográfica</string>
     <string name="quick_action_add_osm_bug">Añadir nota de OSM</string>
     <string name="quick_action_navigation_voice">Alternar activación de voz</string>
     <string name="quick_action_navigation_voice_off">Voz desactivada</string>
@@ -2323,17 +2326,17 @@ Lon %2$s</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="shared_string_action_name">Nombre de la acción</string>
     <string name="quick_action_add_marker_descr">Pulsar el botón de acción añadirá un marcador en la ubicación central de la pantalla.</string>
-    <string name="quick_action_add_gpx_descr">Pulsar el botón de acción añadirá un punto de referencia GPX en la ubicación central de la pantalla.</string>
-    <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción añadirá una nota de audio en la ubicación central de la pantalla.</string>
-    <string name="quick_action_take_video_note_descr">Pulsar el botón de acción añadirá una nota de video en la ubicación central de la pantalla.</string>
-    <string name="quick_action_take_photo_note_descr">Pulsar el botón de acción añadirá una nota fotográfica en la ubicación central de la pantalla.</string>
-    <string name="quick_action_add_osm_bug_descr">Pulsar el botón de acción añadirá una nota de OSM, en la ubicación central de la pantalla.</string>
-    <string name="quick_action_add_poi_descr">Pulsar el botón de acción añadirá un PDI en la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_gpx_descr">Pulsar el botón de acción añadirá un punto de referencia GPX en el centro de la pantalla.</string>
+    <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción añadirá una nota de audio en el centro de la pantalla.</string>
+    <string name="quick_action_take_video_note_descr">Pulsar el botón de acción añadirá una nota de video en el centro de la pantalla.</string>
+    <string name="quick_action_take_photo_note_descr">Pulsar el botón de acción añadirá una nota fotográfica en el centro de la pantalla.</string>
+    <string name="quick_action_add_osm_bug_descr">Pulsar el botón de acción añadirá una nota de OSM en el centro de la pantalla.</string>
+    <string name="quick_action_add_poi_descr">Pulsar el botón de acción añadirá un PDI en el centro de la pantalla.</string>
     <string name="quick_action_navigation_voice_descr">Pulsar el botón de acción desactivará o activará las indicaciones por voz durante la navegación.</string>
-    <string name="quick_action_add_parking_descr">Pulsar el botón de acción añadirá un lugar de estacionamiento en la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_parking_descr">Pulsar el botón de acción añadirá un lugar de estacionamiento en el centro de la pantalla.</string>
     <string name="favorite_autofill_toast_text">" se guardó como "</string>
     <string name="favorite_empty_place_name">Lugar</string>
-    <string name="quick_action_duplicates">El nombre de la acción rápida ya existe y se cambió a «%1$s» para evitar duplicados.</string>
+    <string name="quick_action_duplicates">El nombre de la acción rápida ya existe, cambiado a «%1$s» para evitar duplicados.</string>
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Pulsar el botón de acción mostrará u ocultará los favoritos en el mapa.</string>
     <string name="quick_action_showhide_poi_descr">Pulsar el botón de acción mostrará u ocultará los PDI en el mapa.</string>
@@ -2678,7 +2681,7 @@ Proporciona un código completo</string>
     <string name="quick_action_start_stop_navigation_descr">Pulsa este botón para iniciar o parar la navegación.</string>
     <string name="live_monitoring_max_interval_to_send">Tiempo del búfer para el seguimiento en línea</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especifica el tiempo que el búfer mantendrá los lugares para enviar sin conexión</string>
-    <string name="mappilary_no_internet_desc">Debes tener conexión a Internet para ver fotos de Mapillary.</string>
+    <string name="mappilary_no_internet_desc">Necesitas estar conectado a Internet para ver fotos de Mapillary.</string>
     <string name="retry">Reintentar</string>
 <string name="measurement_tool_action_bar">Navega por el mapa y añade puntos</string>
     <string name="measurement_tool">Medir distancia</string>

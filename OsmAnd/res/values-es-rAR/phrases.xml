@@ -3847,4 +3847,7 @@
 	<string name="synonyms_poi_nightclub">Disco;Boliche;Discoteca;Antro;Club nocturno</string>
 	<string name="poi_water_utility">Oficina de servicios de agua</string>
 
+<string name="poi_amusement_arcade">Sala de juegos</string>
+	<string name="poi_adult_gaming_centre">Centro de juegos para adultos</string>
+
 </resources>

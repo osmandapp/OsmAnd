@@ -396,10 +396,11 @@ public class WaypointDialogHelper {
 			remove.setVisibility(View.GONE);
 			move.setVisibility(View.GONE);
 		} else {
-			boolean notFlatTargets = point.type == WaypointHelper.TARGETS && !flat;
+			boolean targets = point.type == WaypointHelper.TARGETS;
+			boolean notFlatTargets = targets && !flat;
 			boolean startPoint = notFlatTargets && ((TargetPoint) point.point).start;
 			final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-			boolean canRemove = !targetPointsHelper.getIntermediatePoints().isEmpty();
+			boolean canRemove = !targets || !targetPointsHelper.getIntermediatePoints().isEmpty();
 			int iconResId = nightMode ? R.color.marker_circle_button_color_dark : R.color.ctx_menu_title_color_dark;
 
 			remove.setVisibility(View.VISIBLE);

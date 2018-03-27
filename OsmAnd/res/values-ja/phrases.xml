@@ -174,7 +174,7 @@
 	<string name="poi_toll_booth">料金所(Toll booth)</string>
 	<string name="poi_radiotechnics">電器屋(Radiotechnics store)</string>
 	<string name="poi_atv">四輪バイク販売店(Quad store)</string>
-	<string name="poi_border_control">出入国管理(Border control)</string>
+	<string name="poi_border_control">国境検問所(Border control)</string>
 	<string name="poi_traffic_calming_bump">減速帯(Bump)</string>
 	<string name="poi_traffic_calming_hump">減速帯(Hump)</string>
 	<string name="poi_traffic_calming_cushion">減速帯(Cushion)</string>
