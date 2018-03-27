@@ -65,8 +65,8 @@ public class WikivoyageDbHelper {
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			try {
-				String dbQuery = SEARCH_TABLE_SELECT + " WHERE " + SEARCH_COL_SEARCH_TERM + " LIKE " + "'%" + searchQuery + "%'";
-				SQLiteCursor cursor = conn.rawQuery(dbQuery, null);
+				String dbQuery = SEARCH_TABLE_SELECT + " WHERE " + SEARCH_COL_SEARCH_TERM + " LIKE ?";
+				SQLiteCursor cursor = conn.rawQuery(dbQuery, new String[]{"%" + searchQuery + "%"});
 				if (cursor.moveToFirst()) {
 					do {
 						res.add(readSearchResult(cursor));
