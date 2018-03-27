@@ -155,8 +155,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private FloatingActionButton lineFab;
 	private View lineTextLayout;
 	private View overlayView;
-	private IconPopupMenu iconGeneralPopupMenu;
-	private IconPopupMenu iconAltitudePopupMenu;
+	private IconPopupMenu generalPopupMenu;
+	private IconPopupMenu altitudePopupMenu;
 	private ListPopupWindow splitListPopupWindow;
 	private ListPopupWindow colorListPopupWindow;
 
@@ -411,8 +411,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	public void onPause() {
 		super.onPause();
 		updateEnable = false;
-		if (iconGeneralPopupMenu != null) {
-			iconGeneralPopupMenu.dismiss();
+		if (generalPopupMenu != null) {
+			generalPopupMenu.dismiss();
 		}
 		if (splitListPopupWindow != null) {
 			splitListPopupWindow.dismiss();
@@ -420,8 +420,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		if (colorListPopupWindow != null) {
 			colorListPopupWindow.dismiss();
 		}
-		if (iconAltitudePopupMenu != null) {
-			iconAltitudePopupMenu.dismiss();
+		if (altitudePopupMenu != null) {
+			altitudePopupMenu.dismiss();
 		}
 	}
 
@@ -1369,12 +1369,12 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								view.findViewById(R.id.overflow_menu).setOnClickListener(new View.OnClickListener() {
 									@Override
 									public void onClick(View view) {
-										iconGeneralPopupMenu = new IconPopupMenu(getTrackActivity(), view.findViewById(R.id.overflow_menu));
-										Menu menu = iconGeneralPopupMenu.getMenu();
-										iconGeneralPopupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
+										generalPopupMenu = new IconPopupMenu(getTrackActivity(), view.findViewById(R.id.overflow_menu));
+										Menu menu = generalPopupMenu.getMenu();
+										generalPopupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
 										menu.findItem(R.id.action_edit).setIcon(ic.getThemedIcon(R.drawable.ic_action_edit_dark));
 										menu.findItem(R.id.action_delete).setIcon(ic.getThemedIcon(R.drawable.ic_action_remove_dark));
-										iconGeneralPopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
+										generalPopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 											@Override
 											public boolean onMenuItemClick(MenuItem item) {
 												switch (item.getItemId()) {
@@ -1406,7 +1406,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 												return false;
 											}
 										});
-										iconGeneralPopupMenu.show();
+										generalPopupMenu.show();
 									}
 								});
 							} else {
@@ -1472,12 +1472,12 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								view.findViewById(R.id.overflow_menu).setOnClickListener(new View.OnClickListener() {
 									@Override
 									public void onClick(View view) {
-										iconAltitudePopupMenu = new IconPopupMenu(getTrackActivity(), view.findViewById(R.id.overflow_menu));
-										Menu menu = iconAltitudePopupMenu.getMenu();
-										iconAltitudePopupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
+										altitudePopupMenu = new IconPopupMenu(getTrackActivity(), view.findViewById(R.id.overflow_menu));
+										Menu menu = altitudePopupMenu.getMenu();
+										altitudePopupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
 										menu.findItem(R.id.action_edit).setIcon(ic.getThemedIcon(R.drawable.ic_action_edit_dark));
 										menu.findItem(R.id.action_delete).setIcon(ic.getThemedIcon(R.drawable.ic_action_remove_dark));
-										iconAltitudePopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
+										altitudePopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 											@Override
 											public boolean onMenuItemClick(MenuItem item) {
 												switch (item.getItemId()) {
@@ -1500,7 +1500,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 												return false;
 											}
 										});
-										iconAltitudePopupMenu.show();
+										altitudePopupMenu.show();
 									}
 								});
 							} else {
