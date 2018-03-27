@@ -155,6 +155,10 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private FloatingActionButton lineFab;
 	private View lineTextLayout;
 	private View overlayView;
+	private IconPopupMenu iconGeneralPopupMenu;
+	private IconPopupMenu iconAltitudePopupMenu;
+	private ListPopupWindow splitListPopupWindow;
+	private ListPopupWindow colorListPopupWindow;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -407,6 +411,18 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	public void onPause() {
 		super.onPause();
 		updateEnable = false;
+		if (iconGeneralPopupMenu != null) {
+			iconGeneralPopupMenu.dismiss();
+		}
+		if (splitListPopupWindow != null) {
+			splitListPopupWindow.dismiss();
+		}
+		if (colorListPopupWindow != null) {
+			colorListPopupWindow.dismiss();
+		}
+		if (iconAltitudePopupMenu != null) {
+			iconAltitudePopupMenu.dismiss();
+		}
 	}
 
 	private void updateHeader() {
@@ -472,17 +488,17 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		colorView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final ListPopupWindow popup = new ListPopupWindow(getActivity());
-				popup.setAnchorView(colorView);
-				popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
-				popup.setModal(true);
-				popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
-				popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
-				popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
+				colorListPopupWindow = new ListPopupWindow(getActivity());
+				colorListPopupWindow.setAnchorView(colorView);
+				colorListPopupWindow.setContentWidth(AndroidUtils.dpToPx(app, 200f));
+				colorListPopupWindow.setModal(true);
+				colorListPopupWindow.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
+				colorListPopupWindow.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
+				colorListPopupWindow.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
 				final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(getActivity(),
 						getGpx().getColor(0), GpxAppearanceAdapterType.TRACK_COLOR);
-				popup.setAdapter(gpxApprAdapter);
-				popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+				colorListPopupWindow.setAdapter(gpxApprAdapter);
+				colorListPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -507,11 +523,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								refreshTrackBitmap();
 							}
 						}
-						popup.dismiss();
+						colorListPopupWindow.dismiss();
 						updateColorView(colorView);
 					}
 				});
-				popup.show();
+				colorListPopupWindow.show();
 			}
 		});
 
@@ -579,16 +595,16 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 				splitIntervalView.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						final ListPopupWindow popup = new ListPopupWindow(getActivity());
-						popup.setAnchorView(splitIntervalView);
-						popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
-						popup.setModal(true);
-						popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
-						popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
-						popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
-						popup.setAdapter(new ArrayAdapter<>(getTrackActivity(),
+						splitListPopupWindow = new ListPopupWindow(getActivity());
+						splitListPopupWindow.setAnchorView(splitIntervalView);
+						splitListPopupWindow.setContentWidth(AndroidUtils.dpToPx(app, 200f));
+						splitListPopupWindow.setModal(true);
+						splitListPopupWindow.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
+						splitListPopupWindow.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
+						splitListPopupWindow.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
+						splitListPopupWindow.setAdapter(new ArrayAdapter<>(getTrackActivity(),
 								R.layout.popup_list_text_item, options));
-						popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+						splitListPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 							@Override
 							public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -601,11 +617,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 										updateSplitInDatabase();
 									}
 								}
-								popup.dismiss();
+								splitListPopupWindow.dismiss();
 								updateSplitIntervalView(splitIntervalView);
 							}
 						});
-						popup.show();
+						splitListPopupWindow.show();
 					}
 				});
 				splitIntervalView.setVisibility(View.VISIBLE);
@@ -1353,12 +1369,12 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								view.findViewById(R.id.overflow_menu).setOnClickListener(new View.OnClickListener() {
 									@Override
 									public void onClick(View view) {
-										IconPopupMenu popupMenu = new IconPopupMenu(getTrackActivity(), view.findViewById(R.id.overflow_menu));
-										Menu menu = popupMenu.getMenu();
-										popupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
+										iconGeneralPopupMenu = new IconPopupMenu(getTrackActivity(), view.findViewById(R.id.overflow_menu));
+										Menu menu = iconGeneralPopupMenu.getMenu();
+										iconGeneralPopupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
 										menu.findItem(R.id.action_edit).setIcon(ic.getThemedIcon(R.drawable.ic_action_edit_dark));
 										menu.findItem(R.id.action_delete).setIcon(ic.getThemedIcon(R.drawable.ic_action_remove_dark));
-										popupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
+										iconGeneralPopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 											@Override
 											public boolean onMenuItemClick(MenuItem item) {
 												switch (item.getItemId()) {
@@ -1390,7 +1406,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 												return false;
 											}
 										});
-										popupMenu.show();
+										iconGeneralPopupMenu.show();
 									}
 								});
 							} else {
@@ -1456,12 +1472,12 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								view.findViewById(R.id.overflow_menu).setOnClickListener(new View.OnClickListener() {
 									@Override
 									public void onClick(View view) {
-										IconPopupMenu popupMenu = new IconPopupMenu(getTrackActivity(), view.findViewById(R.id.overflow_menu));
-										Menu menu = popupMenu.getMenu();
-										popupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
+										iconAltitudePopupMenu = new IconPopupMenu(getTrackActivity(), view.findViewById(R.id.overflow_menu));
+										Menu menu = iconAltitudePopupMenu.getMenu();
+										iconAltitudePopupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
 										menu.findItem(R.id.action_edit).setIcon(ic.getThemedIcon(R.drawable.ic_action_edit_dark));
 										menu.findItem(R.id.action_delete).setIcon(ic.getThemedIcon(R.drawable.ic_action_remove_dark));
-										popupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
+										iconAltitudePopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 											@Override
 											public boolean onMenuItemClick(MenuItem item) {
 												switch (item.getItemId()) {
@@ -1484,7 +1500,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 												return false;
 											}
 										});
-										popupMenu.show();
+										iconAltitudePopupMenu.show();
 									}
 								});
 							} else {

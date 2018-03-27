@@ -104,11 +104,24 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	private View lineTextLayout;
 	private View overlayView;
 	private View mainView;
+	private PopupMenu popupItemMenu;
+	private Menu optionsMenu;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.app = getMyApplication();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (popupItemMenu != null) {
+			popupItemMenu.dismiss();
+		}
+		if (optionsMenu != null) {
+			optionsMenu.close();
+		}
 	}
 
 	@Override
@@ -445,6 +458,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			createMenuItem(menu, DELETE_ID, R.string.shared_string_delete, R.drawable.ic_action_delete_dark,
 					R.drawable.ic_action_delete_dark, MenuItemCompat.SHOW_AS_ACTION_NEVER);
 		}
+		this.optionsMenu = menu;
 	}
 
 	public void showProgressBar() {
@@ -919,10 +933,10 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 					@Override
 					public void onClick(View v) {
 						IconsCache iconsCache = getMyApplication().getIconsCache();
-						final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
-						DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+						popupItemMenu = new PopupMenu(getActivity(), v);
+						DirectionsDialogs.setupPopUpMenuIcon(popupItemMenu);
 
-						MenuItem menuItem = optionsMenu.getMenu().add(R.string.shared_string_edit).setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
+						MenuItem menuItem = popupItemMenu.getMenu().add(R.string.shared_string_edit).setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
 						menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem mItem) {
@@ -942,7 +956,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 								return true;
 							}
 						});
-						optionsMenu.show();
+						popupItemMenu.show();
 					}
 				});
 				int groupColor = gpxItem.group.getColor();
