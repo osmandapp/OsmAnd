@@ -7,6 +7,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,7 +83,7 @@ public class WikivoyageDbHelper {
 
 	@Nullable
 	private SQLiteConnection openConnection() {
-		String path = application.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR + DB_NAME).getAbsolutePath();
+		String path = getDbFile(application).getAbsolutePath();
 		return application.getSQLiteAPI().openByAbsolutePath(path, true);
 	}
 
@@ -95,6 +96,14 @@ public class WikivoyageDbHelper {
 		res.lang = query.getString(3);
 
 		return res;
+	}
+
+	public static boolean isDbFileExists(OsmandApplication app) {
+		return getDbFile(app).exists();
+	}
+
+	private static File getDbFile(OsmandApplication app) {
+		return app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR + DB_NAME);
 	}
 
 	public static class SearchResult {
