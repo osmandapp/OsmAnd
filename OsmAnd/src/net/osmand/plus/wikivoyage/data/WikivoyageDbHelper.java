@@ -105,28 +105,4 @@ public class WikivoyageDbHelper {
 	private static File getDbFile(OsmandApplication app) {
 		return app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR + DB_NAME);
 	}
-
-	public static class SearchResult {
-
-		private String searchTerm;
-		private long cityId;
-		private String articleTitle;
-		private String lang;
-
-		public String getSearchTerm() {
-			return searchTerm;
-		}
-
-		public long getCityId() {
-			return cityId;
-		}
-
-		public String getArticleTitle() {
-			return articleTitle;
-		}
-
-		public String getLang() {
-			return lang;
-		}
-	}
 }
