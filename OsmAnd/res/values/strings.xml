@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="shared_string_travel">Travel</string>
     <string name="waypoints_removed_from_map_markers">Waypoints removed from map markers</string>
     <string name="nothing_found_in_radius">Nothing found within the radius:</string>
     <string name="select_waypoints_category_description">You can add all of the track\'s waypoints, or select separate categories.</string>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<android.support.v7.widget.Toolbar
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dashboard_map_toolbar"
+		android:minHeight="@dimen/dashboard_map_toolbar"
+		android:theme="?attr/toolbar_theme"
+		osmand:contentInsetLeft="54dp"
+		osmand:contentInsetStart="54dp">
+
+	</android.support.v7.widget.Toolbar>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<TextView
+			android:id="@+id/content_text_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"/>
+
+	</ScrollView>
+
+</LinearLayout>

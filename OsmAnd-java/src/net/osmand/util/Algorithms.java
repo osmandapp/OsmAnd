@@ -6,6 +6,7 @@ import net.osmand.PlatformUtil;
 import org.apache.commons.logging.Log;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.Closeable;
 import java.io.EOFException;
 import java.io.File;
@@ -26,6 +27,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.zip.GZIPInputStream;
 
 
 /**
@@ -450,6 +452,18 @@ public class Algorithms {
 			}
 		}
 		return responseBody;
+	}
+
+	public static String gzipToString(byte[] gzip) throws IOException {
+		GZIPInputStream gzipIs = new GZIPInputStream(new ByteArrayInputStream(gzip));
+		BufferedReader br = new BufferedReader(new InputStreamReader(gzipIs, "UTF-8"));
+		StringBuilder sb = new StringBuilder();
+		String s;
+		while ((s = br.readLine()) != null) {
+			sb.append(s);
+		}
+		br.close();
+		return sb.toString();
 	}
 
 	public static boolean removeAllFiles(File f) {
