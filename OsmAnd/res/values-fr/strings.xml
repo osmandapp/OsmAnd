@@ -2392,7 +2392,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="translit_names">Transcrire les noms</string>
     <string name="rendering_value_light_brown_name">Marron clair</string>
     <string name="rendering_value_dark_brown_name">Marron foncé</string>
-    <string name="search_hint">Saisissez une ville, une adresse ou un nom de point d\'intérêt</string>
+    <string name="search_hint">Saisissez une ville, une adresse ou un nom de PI</string>
     <string name="rendering_attr_contourColorScheme_name">Couleurs des courbes de niveau</string>
     <string name="rendering_attr_surfaceIntegrity_name">État de la route</string>
     <string name="christmas_poi">Points d\'intérêt de Noël</string>
@@ -2581,8 +2581,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="file_can_not_be_moved">Impossible de déplacer le fichier.</string>
     <string name="shared_string_move">Déplacer</string>
     <string name="shared_string_max">Max</string>
-    <string name="shared_string_start_time">Heure de début</string>
-    <string name="shared_string_end_time">Heure de fin</string>
+    <string name="shared_string_start_time">Départ</string>
+    <string name="shared_string_end_time">Arrivée</string>
     <string name="shared_string_color">Couleur</string>
     <string name="max_speed">Vitesse maximale</string>
     <string name="average_speed">Vitesse moyenne</string>
@@ -2601,7 +2601,7 @@ représentant la zone : %1$s x %2$s</string>
     
     
     
-    <string name="relief_smoothness_factor_descr">Terrain préféré : Plat ou Vallonné</string>
+    <string name="relief_smoothness_factor_descr">Terrain préféré : Plat ou Vallonné.</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Vallonné</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Moins vallonné</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plat</string>
