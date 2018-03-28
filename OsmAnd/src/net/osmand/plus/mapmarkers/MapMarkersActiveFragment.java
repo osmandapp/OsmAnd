@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -126,7 +127,11 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 
 		final View emptyView = mainView.findViewById(R.id.empty_view);
 		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
-		emptyImageView.setImageResource(mapActivity.getMyApplication().getSettings().isLightContent() ? R.drawable.ic_empty_state_marker_list_day : R.drawable.ic_empty_state_marker_list_night);
+		if (Build.VERSION.SDK_INT >= 18) {
+			emptyImageView.setImageResource(mapActivity.getMyApplication().getSettings().isLightContent() ? R.drawable.ic_empty_state_marker_list_day : R.drawable.ic_empty_state_marker_list_night);
+		} else {
+			emptyImageView.setVisibility(View.INVISIBLE);
+		}
 		recyclerView.setEmptyView(emptyView);
 		recyclerView.setAdapter(adapter);
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

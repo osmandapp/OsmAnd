@@ -30,7 +30,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		items.add(new DescriptionItem(getString(R.string.measurement_tool_save_as_new_track_descr)));
 
-		if (Build.VERSION.SDK_INT >= 17) {
+		if (Build.VERSION.SDK_INT >= 18) {
 			final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 			View imagesRow = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 					R.layout.fragment_save_as_new_track_images_row, null);
