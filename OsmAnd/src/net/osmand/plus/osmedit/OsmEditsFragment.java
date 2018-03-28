@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
@@ -140,9 +141,11 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
 		emptyStub.setLayoutResource(R.layout.empty_state_osm_edits);
 		emptyView = emptyStub.inflate();
-		int icRes = getMyApplication().getSettings().isLightContent()
-				? R.drawable.ic_empty_state_osm_edits_day : R.drawable.ic_empty_state_osm_edits_night;
-		((ImageView) emptyView.findViewById(R.id.empty_state_image_view)).setImageResource(icRes);
+		if (Build.VERSION.SDK_INT >= 18) {
+			int icRes = getMyApplication().getSettings().isLightContent()
+					? R.drawable.ic_empty_state_osm_edits_day : R.drawable.ic_empty_state_osm_edits_night;
+			((ImageView) emptyView.findViewById(R.id.empty_state_image_view)).setImageResource(icRes);
+		}
 		emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
 				.isLightContent() ? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
 

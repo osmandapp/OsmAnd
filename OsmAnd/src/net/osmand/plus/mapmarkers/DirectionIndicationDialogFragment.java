@@ -223,36 +223,36 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	private void updateHelpImage() {
-		OsmandSettings settings = getSettings();
-		int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
-		LinkedList<Drawable> imgList = new LinkedList<>();
-		imgList.add(getDeviceImg());
-		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get()) {
-			imgList.add(getGuideLineOneImg());
-			if (count == 2) {
-				imgList.add(getGuideLineTwoImg());
-			}
-		}
-		if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
-			imgList.add(getArrowOneImg());
-			if (count == 2) {
-				imgList.add(getArrowTwoImg());
-			}
-		}
-		if (settings.MARKERS_DISTANCE_INDICATION_ENABLED.get()) {
-			if (settings.MAP_MARKERS_MODE.get().isWidgets()) {
-				imgList.add(getWidget1Img());
+		if (Build.VERSION.SDK_INT >= 18) {
+			OsmandSettings settings = getSettings();
+			int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
+			LinkedList<Drawable> imgList = new LinkedList<>();
+			imgList.add(getDeviceImg());
+			if (settings.SHOW_LINES_TO_FIRST_MARKERS.get()) {
+				imgList.add(getGuideLineOneImg());
 				if (count == 2) {
-					imgList.add(getWidget2Img());
-				}
-			} else {
-				imgList.add(getTopBar1Img());
-				if (count == 2) {
-					imgList.add(getTopBar2Img());
+					imgList.add(getGuideLineTwoImg());
 				}
 			}
-		}
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+			if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
+				imgList.add(getArrowOneImg());
+				if (count == 2) {
+					imgList.add(getArrowTwoImg());
+				}
+			}
+			if (settings.MARKERS_DISTANCE_INDICATION_ENABLED.get()) {
+				if (settings.MAP_MARKERS_MODE.get().isWidgets()) {
+					imgList.add(getWidget1Img());
+					if (count == 2) {
+						imgList.add(getWidget2Img());
+					}
+				} else {
+					imgList.add(getTopBar1Img());
+					if (count == 2) {
+						imgList.add(getTopBar2Img());
+					}
+				}
+			}
 			((ImageView) mainView.findViewById(R.id.action_bar_image))
 					.setImageDrawable(new LayerDrawable(imgList.toArray(new Drawable[imgList.size()])));
 		}

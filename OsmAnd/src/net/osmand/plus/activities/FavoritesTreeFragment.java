@@ -8,6 +8,7 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -161,8 +162,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			listView.addFooterView(footerView);
 		}
 		View emptyView = view.findViewById(android.R.id.empty);
-		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
-		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_favorites_day : R.drawable.ic_empty_state_favorites_night);
+		if (Build.VERSION.SDK_INT >= 18) {
+			ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
+			emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_favorites_day : R.drawable.ic_empty_state_favorites_night);
+		}
 		Button importButton = (Button) emptyView.findViewById(R.id.import_button);
 		importButton.setOnClickListener(new View.OnClickListener() {
 			@Override
