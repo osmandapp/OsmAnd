@@ -5,7 +5,7 @@
     <string name="auto_zoom_farthest">Драбней</string>
     <string name="map_magnifier">Лупа мапы</string>
     <string name="base_world_map">Асноўная мапа сьвету</string>
-    <string name="about_version">Вэрсія:</string>
+    <string name="about_version">Версія:</string>
     <string name="shared_string_about">Аб праграме</string>
     <string name="about_settings_descr">Вэрсія, ліцэнзіі, удзельнікі праекту</string>
     
@@ -16,7 +16,7 @@
     <string name="local_index_tile_data_maxzoom">Максымальнае павелічэньне: %1$s</string>
     <string name="local_index_tile_data_minzoom">Мінімальнае павелічэньне: %1$s</string>
     <string name="local_index_tile_data_name">Зьвесткі фрагмэнту: %1$s</string>
-    <string name="edit_tilesource_successfully">Крыніца фрагмэнтаў мапы %1$s пасьпяхова захаваная</string>
+    <string name="edit_tilesource_successfully">Крыніца фрагментаў мапы «%1$s» захаваная</string>
     <string name="edit_tilesource_elliptic_tile">Эліптычны меркатар</string>
     <string name="edit_tilesource_maxzoom">Максімальнае павелічэньне</string>
     <string name="edit_tilesource_expiration_time">Тэрмін дзеяньня (у хвілінах)</string>
@@ -42,7 +42,7 @@
     <string name="speak_cameras">Камеры хуткасці</string>
 	<string name="speak_traffic_warnings">Перасцярогі руху</string>
     
-    <string name="osb_author_or_password_not_specified">Калі ласка, пазначце карыстальніка OSM і ягоны пароль у наладах</string>
+    <string name="osb_author_or_password_not_specified">Калі ласка, пазначце карыстальніка OSM і ягоны пароль у «Наладах»</string>
     <string name="clear_intermediate_points">Ачысьціць прамежкавыя пункты прызначэньня</string>
     <string name="keep_intermediate_points">Захаваць прамежкавыя пункты прызначэньня</string>
     <string name="new_directions_point_dialog">У вас ужо ёсьць набор прамежкавых пунктаў прызначэньня.</string>
@@ -64,9 +64,9 @@
     <string name="please_select_address">Абярыце спачатку горад ці вуліцу</string>
     
     <string name="search_street_in_neighborhood_cities">Пошук вуліцы ў суседніх гарадах</string>
-    <string name="intermediate_items_sort_return">Прамежкавыя пункты прызначэньня адсартаваныя аптымальным чынам ад цяпрашняга становішча да месца прызначэньня.</string>
+    <string name="intermediate_items_sort_return">Аптымальны парадак прамежкавых пунктаў прызначэння па шляху да месца прызначэння.</string>
     <string name="intermediate_items_sort_by_distance">Упарадкаваць ад дзьвярэй да дзьвярэй</string>
-    <string name="local_osm_changes_backup_successful">Файл зьмен OSM пасьпяхова створаны ў %1$s</string>
+    <string name="local_osm_changes_backup_successful">Файл OSM-змен створаны ў %1$s</string>
     <string name="local_osm_changes_backup_failed">Збой рэзервовага капіяваньня файлу зьмен OSM</string>
     <string name="local_osm_changes_backup">Рэзервовае капіяваньне файлу зьмен OSM</string>
     <string name="delete_point">Выдаліць кропку</string>
@@ -76,7 +76,7 @@
     <string name="plugin_distance_point_ele">вышыня</string>
     <string name="plugin_distance_point">Пункт</string>
     <string name="gpx_file_name">Назва GPX файлу</string>
-    <string name="gpx_saved_sucessfully">GPX файл пасьпяхова захаваны ў {0}</string>
+    <string name="gpx_saved_sucessfully">GPX-файл захаваны ў {0}</string>
     <string name="osmand_distance_planning_plugin_description">Модуль дадае віджэт на экран мапы, які дазваляе ствараць маршруты, націснуўшы на мапе, а таксама выкарыстоўваць ці зьмяняць наяўныя файлы GPX, планаваць паездку і вымяраць адлегласьць паміж пунктамі. Вынікі могуць быць захаваны ў выглядзе файла GPX, які пасля можа быць выкарыстаны для навігацыі.</string>
     <string name="osmand_distance_planning_plugin_name">Прылада для разьліку адлегласьцей й плянаваньня</string>
     <string name="use_distance_measurement_help">* Націсніце, каб адзначыць пункт.
@@ -96,12 +96,12 @@
     <string name="use_magnetic_sensor">Выкарыстоўваць магнітомэтр</string>
     <string name="other_location">Іншае</string>
     <string name="files_limit">засталося %1$d файлаў</string>
-    <string name="available_downloads_left">Даступна %1$d файлаў для сьцягваньня</string>
+    <string name="available_downloads_left">Засталося %1$d файлаў для спампоўвання</string>
     <string name="install_paid">Поўная вэрсія</string>
     <string name="cancel_route">Скасаваць маршрут</string>
     <string name="cancel_navigation">Спыніць навігацыю</string>
     <string name="clear_destination">Сьцерці месца прызначэньня</string>
-    <string name="download_using_mobile_internet">Зараз WiFi не падлучаны. Хочаце працягнуць сьцягваньне з дзейным падключэньнем да Інтэрнэту?</string>
+    <string name="download_using_mobile_internet">Зараз WiFi не падлучаны. Хочаце працягнуць спамапоўванне з дзейным падключэннем да Інтэрнэту?</string>
     <string name="street_name">Назва вуліцы</string>
 	<string name="hno">Нумар дома</string>
     <string name="website">Вэб-сайт</string>
@@ -111,9 +111,9 @@
     <string name="monitoring_settings_descr">Налады запісу вашых падарожжаў.</string>
     
     
-    <string name="osmand_background_plugin_description">Паказвае налады ўключэньня запісу сьледу і навігацыі ў фонавым рэжыме (экран выключаны) праз пэрыядычнае абуджэньне GPS прыймача.</string>
+    <string name="osmand_background_plugin_description">Паказвае налады ўключэньня адсочвання і навігацыі ў фонавым рэжыме праз перыядычнае абуджэнне GPS-прыймача (з адключаным экранам).</string>
     <string name="contribution_activity">Усталяваньне версіі</string>
-    <string name="choose_osmand_theme_descr">Абраць выгляд дастасавання.</string>
+    <string name="choose_osmand_theme_descr">Абраць, як выглядае прыкладанне.</string>
     <string name="choose_osmand_theme">Выгляд</string>
     <string name="accessibility_options">Налады даступнасьці</string>
     <string name="select_address_activity">Абраць адрас</string>
@@ -140,17 +140,17 @@
     <string name="local_indexes_cat_av">Аўдыё/відэа зьвесткі</string>
     <string name="stop_routing_confirm">Сапраўды спыніць навігацыю?</string>
     <string name="clear_dest_confirm">Сапраўды сьцерці месца прызначэньня (і прамежкавыя пункты прызначэньня)?</string>
-    <string name="precise_routing_mode_descr">Дазволіць дакладную навігацыю каб шукаць шлях без памылак. Усё яшчэ абмежавана адлегласцю і павольная.</string>
+    <string name="precise_routing_mode_descr">Разлічыць дакладныя маршруты без памылак. Усё яшчэ абмежавана адлегласцю і павольная.</string>
     <string name="precise_routing_mode">Дакладны маршрут (эксп.)</string>
     <string name="recording_context_menu_show">Паказаць</string>
     <string name="recording_photo_description">Фота %1$s %2$s</string>
     <string name="av_def_action_picture">Сфатаграфаваць</string>
     <string name="recording_context_menu_precord">Сфатаграфаваць</string>
-    <string name="dropbox_plugin_description">Модуль Dropbox дазваляе вам сынхранізаваць трэкі і аўдыё/відэа-натакi з вашым Dropbox-акаўнтам.</string>
+    <string name="dropbox_plugin_description">Модуль Dropbox дазваляе вам сінхранізаваць трэкі і аўдыё/відэа-натакi з вашым Dropbox-контам.</string>
     <string name="dropbox_plugin_name">Модуль Dropbox</string>
     
     <string name="intermediate_points_change_order">Зьмяніць парадак</string>
-    <string name="srtm_paid_version_msg">Калі ласка, падумайце пра набыцьцё модуля Ізалініі вышынь у Play Store для падтрымкі далейшай распрацоўкі.</string>
+    <string name="srtm_paid_version_msg">Калі ласка, падумайце пра набыццё дадатку «Contour lines» для падтрымкі далейшай распрацоўкі.</string>
     <string name="srtm_paid_version_title">Модуль Ізалініі вышынь</string>
     <string name="av_def_action_choose">Выбар па запыце</string>
     <string name="av_def_action_video">Запіс відэа</string>
@@ -161,7 +161,7 @@
     <string name="av_video_format">Фармат відэа</string>
     <string name="av_use_external_recorder_descr">Выкарыстоўваць сістэмную праграму для запісу відэа.</string>
     <string name="av_use_external_recorder">Выкарыстоўваць сістэмны рэкордэр</string>
-    <string name="av_use_external_camera_descr">Выкарыстоўваць сістэмнае дастасаванне для фота.</string>
+    <string name="av_use_external_camera_descr">Выкарыстоўваць сістэмнае прыкладанне для фота.</string>
     <string name="av_use_external_camera">Выкарыстоўваць праграму камеры</string>
     <string name="av_settings_descr">Настроіць параметры аўдыё і відэа.</string>
     <string name="av_settings">Налады аўдыё і відэа </string>
@@ -209,13 +209,13 @@
     <string name="search_villages_and_postcodes">Дадатковы пошук вёсак і паштовага індэкса</string>
 	<string name="rendering_attr_showRoadMaps_description">Абярыце калі паказваць дарожныя мапы:</string>
 	<string name="rendering_attr_showRoadMaps_name">Мапы толькі дарог</string>
-    <string name="safe_mode_description">Працаваць у бясьпечным рэжыме (трохі павольней але бяз свойскіх бібліятэк).</string>
+    <string name="safe_mode_description">Працаваць у бяспечным рэжыме (трохі павольней але без свойскіх бібліятэк).</string>
     <string name="safe_mode">Бясьпечны рэжым</string>
-    <string name="native_library_not_running">Дастасаваньне працуе ў бясьпечным рэжыме (адключыць яго ў наладах).</string>
+    <string name="native_library_not_running">Прыкладанне працуе ў бяспечным рэжыме (адключыць яго ў «Наладах»).</string>
     <string name="background_service_is_enabled_question">Фонавы рэжым OsmAnd па-ранейшаму працуе. Хочаце спыніць яго?</string>
     
     <string name="close_changeset">Зачыніць мноства зьмен</string>
-	<string name="zxing_barcode_scanner_not_found">Дастасаваньне ZXing Barcode Scanner не ўстаноўлена. Шукаць у Google Play?</string>
+	<string name="zxing_barcode_scanner_not_found">Прыкладанне «ZXing Barcode Scanner» не ўстаноўленае. Шукаць у Google Play?</string>
 	<string name="rendering_attr_roadColors_description">Выберыце схему колераў дарог:</string>
 	<string name="rendering_attr_roadColors_name">Схема колераў дарог</string>
     <string name="map_widget_show_destination_arrow">Паказваць напрамак да месца прызначэньня</string>
@@ -258,7 +258,7 @@
 	<string name="use_compass_navigation_descr">Выкарыстоўваць компас калі інакш немагчыма вызначыць напрамак.</string>
 	<string name="use_compass_navigation">Выкарыстоўваць компас</string>
 	<string name="avoid_motorway">Пазьбягаць аўтамагістраляў</string>
-	<string name="auto_zoom_map_descr">Аўтаматычна памяншаць/павялічваць мапу згодна вашай хуткасці (калі мапа сінхранізуецца з дзейным становішчам).</string>
+	<string name="auto_zoom_map_descr">Узровень павелічэння згодна вашай хуткасці (калі мапа сінхранізуецца з дзейным становішчам).</string>
 	<string name="auto_zoom_map">Аўтаматычнае памяншэнне/павелічэнне</string>
 	<string name="snap_to_road_descr">Прывязвацца да дарог падчас навігацыі.</string>
 	<string name="snap_to_road">Прывязвацца да дарог</string>
@@ -436,7 +436,7 @@
 	<string name="confirm_interrupt_download">Скасаваць cьцягваньне файлу?</string>
 	<string name="first_time_msg">Дзякуй за карыстаньне OsmAnd. Каб карыстацца ўсімі магчымасьцямі дастасаваньня, вам патрэбныя некаторыя пазасеціўныя зьвесткі для вашага рэгіёну. Іх можна cьцягнуць праз \'Налады\' → \'Кіраваць файламі мапаў\'. Пасьля гэтага вы зможаце глядзець мапу, шукаць адрасы, бачыць POI і грамадзкі транспарт.</string>    
 	<string name="basemap_was_selected_to_download">Базавая мапа неабходная для карэктнай працы дастасаваньня і аўтаматычна была абраная для cьцягваньня.</string>
-	<string name="select_index_file_to_download">Нічога не знойдзена. Калі вы не знайшлі свой рэгіён, вы можаце стварыць мапу самастойна (гл. http://osmand.net).</string>
+	<string name="select_index_file_to_download">Нічога не знойдзена. Калі вы не знайшлі свой рэгіён, вы можаце стварыць мапу самастойна (гл. https://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Сеціўныя і кэшаваныя растравыя мапы</string>
 	<string name="local_indexes_cat_map">Стандартныя мапы (вэктарныя)</string>
 	<string name="index_settings_descr">Сцягванне і кіраванне файламі мапаў, што захоўваюцца на вашым прыстасаванні.</string>
@@ -1045,7 +1045,7 @@
 	
 	<string name="osm_settings">Рэдагаваньне OSM</string>
 	<string name="additional_settings">Дадатковыя налады</string>
-	<string name="save_current_track_descr">Захаваць гэты трэк на SD зараз.</string>
+	<string name="save_current_track_descr">Захаваць гэты трэк на картку памяці зараз.</string>
 	<string name="save_current_track">Захаваць актыўны GPX-трэк</string>
 	<string name="save_track_interval">Інтэрвал захоўваньня падчас навігацыі</string>
 	<string name="save_track_interval_descr">Пазначыць інтэрвал захоўвання пунктаў следу падчас навігацыі.</string>
@@ -1221,9 +1221,9 @@
 	<string name="index_name_canada">Паўночная Амэрыка - Канада</string>
     <string name="index_name_italy">Эўропа - Італія</string>
     <string name="index_name_gb">Эўропа - Вялікабрытанія</string>
-    <string name="calculate_osmand_route_without_internet">Разлічыць адрэзак маршруту OsmAnd без Інтэрнэту</string>
+    <string name="calculate_osmand_route_without_internet">Аўтаномны разлік адрэзак маршруту OsmAnd</string>
     <string name="gpx_option_calculate_first_last_segment">Разлічыць маршрут OsmAnd для першага і апошняга ўчастка маршруту</string>
-    <string name="use_displayed_track_for_navigation">Ці хочаце вы выкарыстоўваць адлюстраваны сьлед для навігацыі?</string>
+    <string name="use_displayed_track_for_navigation">Ці хочаце вы выкарыстаць паказаны след для навігацыі?</string>
     <string name="route_info">Інфармацыя пра маршрут</string>
     <string name="routing_attr_prefer_motorway_name">Аддаваць перавагу аўтамагістралям</string>
 	
@@ -1260,18 +1260,18 @@
     <string name="routing_attr_prefer_motorway_description">Аддаваць перавагу аўтамагістралям.</string>
 	<string name="animate_routing_route">Імітацыя з выкарыстаньнем разлічанага маршруту </string>
     <string name="animate_routing_gpx">Імітацыя з выкарыстаньнем GPX-сьледу</string>
-    <string name="app_modes_choose">Профілі дастасаваньня</string>
+    <string name="app_modes_choose">Профілі прыкладання</string>
 	<string name="index_item_world_altitude_correction">Глябальная карэкцыя вышыні</string>
 	<string name="index_item_world_seamarks">Навігацыйныя знакі ўсяго сьвету</string>
 	<string name="index_item_world_bitcoin_payments">Bitcoin плацяжы ўсяго сьвету</string>
 	<string name="keep_and_add_destination_point">Дадаць наступным пунктам прызначэньня</string>
     <string name="route_descr_select_destination">Выбраць месца прызначэньня</string>
     <string name="route_preferences">Настройкі маршрута</string>
-    <string name="calculate_osmand_route_gpx">Разьлічыць пазасеціўны маршрут OsmAnd</string>
+    <string name="calculate_osmand_route_gpx">Аўтаномны разлік маршруту ў OsmAnd</string>
     <string name="guidance_preferences_descr">Навігацыйныя настройкі</string>
     <string name="routing_preferences_descr">Настройкі маршрутызацыі</string>
     <string name="complex_route_calculation_failed">Хуткі разлік маршруту ня ўдаўся (%s), пераход на марудны разлік.</string>
-    <string name="disable_complex_routing_descr">Адключэнне дзьвюх фазнай маршрутызацыі для аўтамабільнай навігацыі.</string>
+    <string name="disable_complex_routing_descr">Адключэнне дзвюхфазнай маршрутызацыі для аўтамабільнай навігацыі.</string>
     <string name="amenity_type_seamark">Навігацыйны знак</string>
     <string name="app_mode_hiking">Пешы турызм</string>
     <string name="app_mode_boat">Човен</string>
@@ -1407,7 +1407,7 @@
     
     
     
-    <string name="gpx_file_is_empty">GPX-сьлед пусты</string>
+    <string name="gpx_file_is_empty">Пусты GPX-след</string>
     
     <string name="gpx_info_waypoints">Адзначаных пунктаў: %1$s </string>
 	<string name="gpx_info_distance">Даўжыня: %1$s (%2$s кропак) </string>
@@ -1448,7 +1448,7 @@
     <string name="none_selected_gpx">GPX-файлы не выбраныя. Каб выбраць доўга утрымлівайце наяўны трэк.</string>
     
     <string name="local_index_select_gpx_file">Выбраць для паказу</string>
-    <string name="no_index_file_to_download">Няма чаго сьцягваць, калі ласка, праверце ваша Інтэрнэт-злучэньне.</string>
+    <string name="no_index_file_to_download">Спампоўка не знойдзеная. Калі ласка, праверце ваша злучэнне з Інтэрнэтам.</string>
     
     
     
@@ -1481,7 +1481,7 @@
 	<string name="gpx_start_new_segment">Пачаць новы адрэзак</string>
     <string name="lang_fa">Пэрсыдзкая</string>
 	<string name="sleep_mode_stop_dialog">Спыніць фонавы рэжым GPS?</string>
-	<string name="map_preferred_locale_descr">Пажаданая мова надпісаў на мапе (калі не даступна, то будуць выкарыстны ангельскія ці мясцовыя назвы).</string>
+	<string name="map_preferred_locale_descr">Пажаданая мова надпісаў на мапе (калі не даступная, то будуць выкарыстны ангельскія ці мясцовыя назвы).</string>
     <string name="map_preferred_locale">Пажаданая мова мапы</string>
     <string name="local_map_names">Мясцовыя назвы</string>
     <string name="forward">Наперад</string>
@@ -1604,7 +1604,7 @@
 	<string name="coordinates">Каардынаты</string>
 	<string name="error_avoid_specific_road">Аб\'езд не знойдзены</string>
     <string name="use_opengl_render">Выкарыстоўваць OpenGL</string>
-    <string name="use_opengl_render_descr">Выкарыстоўваць апаратнае паскарэнне OpenGL (можа не працаваць на некаторых прыстасаваннях).</string>
+    <string name="use_opengl_render_descr">Выкарыстоўваць апаратнае паскарэнне OpenGL (можа спажываць больш энергіі ці не працаваць на вельмі старых прыладах).</string>
     <string name="everything_up_to_date">Усе файлы ў актуальным стане</string>
     <string name="no_internet_connection">Немагчыма спампаваць. Калі ласка, праверце ваша Інтэрнэт-злучэньне.</string>
     <string name="download_tab_downloads">Даступныя</string>
@@ -2707,7 +2707,7 @@
     <string name="srtm_menu_download_descr">Спампаваць мапу «Contour Line» для выкарыстання ў гэтым рэгіёне.</string>
     <string name="show_from_zoom_level">Паказваць ад узроўню маштабавання</string>
     <string name="display_zoom_level">Узровень маштабавання паказу: %1$s</string>
-    <string name="route_is_too_long_v2">Гэты маршрут, магчыма, занадта вялікі для разьліку. Калі ласка, дадайце прамежкавыя пункты, калі разьлік не завяршыўся цягам 10 хвілін.</string>
+    <string name="route_is_too_long_v2">Калі ласка, дадайце прамежкавыя пункты, калі разлік не завяршыўся цягам 10 хвілін.</string>
     <string name="osmand_extended_description_part4">Лыжня 
 \nOsmAnd-дадатак лыжных мап дазваляе бачыць лыжныя трасы з узроўнем складанасці і некаторай дадатковай інфармацыяй, як размяшчэнне пад\'ёмнікаў і іншых аб\'ектаў.</string>
     <string name="save_poi_too_many_uppercase">Назва змяшчае занадта шмат вялікіх літар. Вы хочаце прадоўжыць?</string>
@@ -3065,4 +3065,6 @@
     <string name="select_waypoints_category_description">Вы можаце дадаць усе пункты шляху ці абраць асобныя катэгорыі.</string>
     <string name="shared_string_total">Усяго</string>
     <string name="nothing_found_in_radius">Нічога не знойдзена ў радыусе:</string>
+    <string name="shared_string_travel">Падарожжа</string>
+    <string name="waypoints_removed_from_map_markers">Шляхавыя кропкі выдаленыя з маркераў мапы</string>
     </resources>
