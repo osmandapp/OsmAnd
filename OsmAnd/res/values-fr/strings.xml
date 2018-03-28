@@ -2325,7 +2325,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="show_something_on_map">Afficher %1$s sur la carte</string>
     <string name="route_stops_before">%1$s arrêts avant</string>
     <string name="coords_search">Recherche par coordonnées</string>
-    <string name="advanced_coords_search">Recherche avancée de coordonnées</string>
+    <string name="advanced_coords_search">Recherche avancée PAcoordonnées</string>
     <string name="dist_away_from_my_location">Recherche %1$s autour</string>
     <string name="release_2_4">"\\022 Nouveau moteur de recherche pour les lieux permettant la saisie d\'un texte libre 
 \n 
@@ -2348,7 +2348,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="routing_attr_short_way_name">Trajet économe en carburant</string>
     <string name="routing_attr_short_way_description">Suivre un trajet économe en carburant (habituellement plus court)</string>
     <string name="no_update_info_desc">Ne pas vérifier les mises à jour ni les offres promotionnelles OsmAnd.</string>
-    <string name="no_update_info">Ne pas afficher les mises à jour</string>
+    <string name="no_update_info">Ne pas afficher les nouvelles versions</string>
     <string name="skip_map_downloading">Ignorer le téléchargement des cartes</string>
     <string name="skip_map_downloading_desc">Aucune carte hors-ligne n\'est installée. Vous pouvez sélectionner une carte dans la liste ou télécharger ultérieurement une carte depuis le menu « %1$s ».</string>
     <string name="search_another_country">Sélectionner une autre région</string>
