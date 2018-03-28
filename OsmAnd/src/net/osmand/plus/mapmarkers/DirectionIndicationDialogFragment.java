@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -251,8 +252,10 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				}
 			}
 		}
-		((ImageView) mainView.findViewById(R.id.action_bar_image))
-				.setImageDrawable(new LayerDrawable(imgList.toArray(new Drawable[imgList.size()])));
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+			((ImageView) mainView.findViewById(R.id.action_bar_image))
+					.setImageDrawable(new LayerDrawable(imgList.toArray(new Drawable[imgList.size()])));
+		}
 	}
 
 	private Drawable getTopBar2Img() {
