@@ -3060,4 +3060,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="group_deleted">Gruppen slettet</string>
     <string name="rendering_attr_whiteWaterSports_name">Rafting</string>
     <string name="waypoints_removed_from_map_markers">Rutepunkter fjernet fra kortmarkører</string>
+    <string name="shared_string_travel">Rejse</string>
     </resources>
