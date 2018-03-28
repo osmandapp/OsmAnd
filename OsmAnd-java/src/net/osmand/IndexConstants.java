@@ -54,12 +54,13 @@ public class IndexConstants {
 	public static final String SRTM_INDEX_DIR = "srtm/"; //$NON-NLS-1$
 	public static final String ROADS_INDEX_DIR = "roads/"; //$NON-NLS-1$
 	public static final String WIKI_INDEX_DIR = "wiki/"; //$NON-NLS-1$
+	public static final String WIKIVOYAGE_INDEX_DIR = "wikivoyage/";
 	public static final String AV_INDEX_DIR = "avnotes/"; //$NON-NLS-1$
 	public static final String FONT_INDEX_DIR = "fonts/"; //$NON-NLS-1$
 	public static final String VOICE_INDEX_DIR = "voice/"; //$NON-NLS-1$
 	public static final String RENDERERS_DIR = "rendering/"; //$NON-NLS-1$
 	public static final String ROUTING_XML_FILE= "routing.xml";
-	
+
 	
 	public static final String SQLITE_EXT = ".sqlitedb"; //$NON-NLS-1$
 	public static final String TEMP_SOURCE_TO_LOAD = "temp";

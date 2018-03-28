@@ -62,6 +62,8 @@ import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.wikivoyage.WikivoyageExploreDialogFragment;
+import net.osmand.plus.wikivoyage.data.WikivoyageDbHelper;
 import net.osmand.router.GeneralRouter;
 
 import org.apache.commons.logging.Log;
@@ -760,6 +762,19 @@ public class MapActivityActions implements DialogProvider {
 							intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 							mapActivity.startActivity(intent);
 							return false;
+						}
+					}).createItem());
+		}
+
+		if (WikivoyageDbHelper.isDbFileExists(app)) {
+			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_travel, mapActivity)
+					.setIcon(R.drawable.ic_action_travel)
+					.setListener(new ItemClickListener() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+							MapActivity.clearPrevActivityIntent();
+							WikivoyageExploreDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
+							return true;
 						}
 					}).createItem());
 		}
