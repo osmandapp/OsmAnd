@@ -55,7 +55,7 @@ public class WikivoyageSearchHelper {
 
 		void onSearchStarted();
 
-		void onSearchFinished(@Nullable List<SearchResult> results, boolean lastTask);
+		void onSearchFinished(@Nullable List<SearchResult> results);
 	}
 
 	private class SearchAsyncTask extends AsyncTask<Void, Void, List<SearchResult>> {
@@ -95,7 +95,7 @@ public class WikivoyageSearchHelper {
 		protected void onPostExecute(List<SearchResult> results) {
 			super.onPostExecute(results);
 			for (SearchListener listener : listeners) {
-				listener.onSearchFinished(results, workQueue.isEmpty());
+				listener.onSearchFinished(results);
 			}
 		}
 	}

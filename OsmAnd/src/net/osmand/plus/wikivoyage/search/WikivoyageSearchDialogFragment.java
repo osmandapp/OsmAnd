@@ -138,11 +138,9 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 	}
 
 	@Override
-	public void onSearchFinished(@Nullable List<SearchResult> results, boolean lastTask) {
+	public void onSearchFinished(@Nullable List<SearchResult> results) {
 		adapter.setItems(results);
-		if (lastTask) {
-			switchProgressBarVisibility(false);
-		}
+		switchProgressBarVisibility(false);
 	}
 
 	private void switchProgressBarVisibility(boolean show) {
