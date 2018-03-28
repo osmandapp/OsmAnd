@@ -130,7 +130,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		if (Build.VERSION.SDK_INT >= 18) {
 			emptyImageView.setImageResource(mapActivity.getMyApplication().getSettings().isLightContent() ? R.drawable.ic_empty_state_marker_list_day : R.drawable.ic_empty_state_marker_list_night);
 		} else {
-			emptyImageView.setVisibility(View.GONE);
+			emptyImageView.setVisibility(View.INVISIBLE);
 		}
 		recyclerView.setEmptyView(emptyView);
 		recyclerView.setAdapter(adapter);

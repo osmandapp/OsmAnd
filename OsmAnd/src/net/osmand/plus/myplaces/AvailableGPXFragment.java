@@ -336,7 +336,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (Build.VERSION.SDK_INT >= 18) {
 			emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_trip_day : R.drawable.ic_empty_state_trip_night);
 		} else {
-			emptyImageView.setVisibility(View.GONE);
+			emptyImageView.setVisibility(View.INVISIBLE);
 		}
 		Button importButton = (Button) emptyView.findViewById(R.id.import_button);
 		importButton.setOnClickListener(new View.OnClickListener() {

@@ -207,7 +207,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 		if (Build.VERSION.SDK_INT >= 18) {
 			emptyImageView.setImageResource(night ? R.drawable.ic_empty_state_marker_history_night : R.drawable.ic_empty_state_marker_history_day);
 		} else {
-			emptyImageView.setVisibility(View.GONE);
+			emptyImageView.setVisibility(View.INVISIBLE);
 		}
 		recyclerView.setEmptyView(emptyView);
 		recyclerView.setAdapter(adapter);

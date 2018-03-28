@@ -108,7 +108,7 @@ public class NotesFragment extends OsmAndListFragment {
 					? R.drawable.ic_empty_state_av_notes_day : R.drawable.ic_empty_state_av_notes_night;
 			emptyImageView.setImageResource(icRes);
 		} else {
-			emptyImageView.setVisibility(View.GONE);
+			emptyImageView.setVisibility(View.INVISIBLE);
 		}
 		return view;
 	}

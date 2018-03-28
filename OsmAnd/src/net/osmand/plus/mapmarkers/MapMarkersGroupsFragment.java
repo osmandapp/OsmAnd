@@ -308,7 +308,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		if (Build.VERSION.SDK_INT >= 18) {
 			emptyImageView.setImageResource(night ? R.drawable.ic_empty_state_marker_group_night : R.drawable.ic_empty_state_marker_group_day);
 		} else {
-			emptyImageView.setVisibility(View.GONE);
+			emptyImageView.setVisibility(View.INVISIBLE);
 		}
 		recyclerView.setEmptyView(emptyView);
 		recyclerView.setAdapter(adapter);

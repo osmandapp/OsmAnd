@@ -149,7 +149,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 					? R.drawable.ic_empty_state_osm_edits_day : R.drawable.ic_empty_state_osm_edits_night;
 			emptyImageView.setImageResource(icRes);
 		} else {
-			emptyImageView.setVisibility(View.GONE);
+			emptyImageView.setVisibility(View.INVISIBLE);
 		}
 		FragmentManager fm = getChildFragmentManager();
 		Fragment optionsFragment = fm.findFragmentByTag(OsmEditOptionsBottomSheetDialogFragment.TAG);
