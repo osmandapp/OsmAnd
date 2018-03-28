@@ -1457,8 +1457,8 @@
 	<string name="poi_aerialway_occupancy">Kabinen-, Gondel-, Sesselkapazität</string>
 	<string name="poi_aerialway_capacity">Kapazität pro Stunde</string>
 	<string name="poi_aerialway_duration">durchschnittliche Fahrzeit, Minuten</string>
-	<string name="poi_aerialway_bubble_yes">Blase</string>
-	<string name="poi_aerialway_bubble_no">Keine Blase</string>
+	<string name="poi_aerialway_bubble_yes">mit Überdachung</string>
+	<string name="poi_aerialway_bubble_no">Ohne Überdachung</string>
 	<string name="poi_aerialway_heating_yes">ja</string>
 	<string name="poi_aerialway_heating_no">keine Heizung</string>
 	<string name="poi_aerialway_bicycle_yes">Erlaubt</string>
@@ -1972,7 +1972,7 @@
 	<string name="poi_vending_dvd">DVD</string>
 	<string name="poi_vending_candles">Kerzen</string>
 	<string name="poi_vending_toys">Spielzeug</string>
-	<string name="poi_vending_ice_cream">Eiscream</string>
+	<string name="poi_vending_ice_cream">Eiskrem</string>
 	<string name="poi_vending_sim_cards">SIM Karten</string>
 
 	<string name="poi_branch">Niederlassung</string>
@@ -2002,7 +2002,7 @@
 	<string name="poi_resource_coal">Kohle</string>
 	<string name="poi_resource_copper">Kupfer</string>
 	<string name="poi_resource_diamond">Diamant</string>
-	<string name="poi_resource_dimension_stone">Dimensionsstein</string>
+	<string name="poi_resource_dimension_stone">Werkstein</string>
 	<string name="poi_resource_gravel">Kies</string>
 	<string name="poi_resource_gypsum">Gips</string>
 	<string name="poi_resource_iron_ore">Eisenerz</string>
@@ -2042,7 +2042,7 @@
 	<string name="poi_shelter_type_tent">Unterstand-Typ: Zelt</string>
 	<string name="poi_shelter_type_abandoned">Unterstand-Typ: verlassen</string>
 
-	<string name="poi_memorial_prasat">Prasat</string>
+	<string name="poi_memorial_prasat">Tempelturm</string>
 
 	<string name="poi_resource_barite">Baryt</string>
 	<string name="poi_wetland_string_bog">Strangmoor</string>
@@ -2198,16 +2198,16 @@
 
 	<string name="poi_watering_place">Trog</string>
 	<string name="poi_animal_boarding">Tierbeförderung</string>
-	<string name="poi_animal_boarding_dog">Beförderungstype: Hund</string>
-	<string name="poi_animal_boarding_cat">Beförderungstype: Katze</string>
-	<string name="poi_animal_boarding_dog_cat">Beförderungstype: Hund, Katze</string>
-	<string name="poi_animal_boarding_horse">Beförderungstype: Pferd</string>
+	<string name="poi_animal_boarding_dog">Beförderungstyp: Hund</string>
+	<string name="poi_animal_boarding_cat">Beförderungstyp: Katze</string>
+	<string name="poi_animal_boarding_dog_cat">Beförderungstyp: Hund, Katze</string>
+	<string name="poi_animal_boarding_horse">Beförderungstyp: Pferd</string>
 
 	<string name="poi_honey">Honiggeschäft</string>
 
 	<string name="poi_technical_monument">technisches Denkmal</string>
 
-	<string name="poi_office_camping">Camping Büro</string>
+	<string name="poi_office_camping">Camping-Büro</string>
 	<string name="poi_model_aerodrome">Modellflugplatz</string>
 	<string name="poi_guide">Fremdenführerbüro</string>
 	<string name="poi_quango">Mittlerorganisation</string>
@@ -2295,7 +2295,7 @@
 	<string name="poi_social_facility_for_underprivileged">Benachteiligte</string>
 	<string name="poi_social_facility_for_drug_addicted">Drogenabhängige</string>
 	<string name="poi_social_facility_for_diseased">Kranke</string>
-	<string name="poi_social_facility_for_child_juvenile">Kinder; Jugendliche</string>
+	<string name="poi_social_facility_for_child_juvenile">Kinder und Jugendliche</string>
 
 	<string name="poi_theatre_genre_philharmonic">Philharmonie</string>
 	<string name="poi_theatre_genre_puppet">Marionette</string>
@@ -2670,7 +2670,7 @@
 	<string name="poi_free_flying_guest_guidelines_yes">Gästerichtlinien: ja</string>
 	<string name="poi_free_flying_guest_guidelines_no">Gästerichtlinien: nein</string>
 
-	<string name="poi_protection_title">Schutztitel</string>
+	<string name="poi_protection_title">Schutzgebietstyp</string>
 	<string name="poi_sanitary_dump_station">Sanitäre Entsorgungsstation</string>
 
 <string name="poi_medical_system_western_yes">Westliche</string>
