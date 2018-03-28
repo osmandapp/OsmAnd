@@ -2,7 +2,12 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher;
 import net.osmand.IndexConstants;
+import net.osmand.OsmAndCollator;
+import net.osmand.PlatformUtil;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -13,6 +18,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -62,12 +69,15 @@ public class WikivoyageDbHelper {
 
 	private final OsmandApplication application;
 
+	private Collator collator;
+
 	public WikivoyageDbHelper(OsmandApplication application) {
 		this.application = application;
+		collator = OsmAndCollator.primaryCollator();
 	}
 
 	@NonNull
-	public Collection<WikivoyageSearchResult> search(String searchQuery) {
+	public Collection<WikivoyageSearchResult> search(final String searchQuery) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
@@ -84,7 +94,29 @@ public class WikivoyageDbHelper {
 				conn.close();
 			}
 		}
-		return groupSearchResultsByCityId(res);
+		List<WikivoyageSearchResult> list = new ArrayList(groupSearchResultsByCityId(res));
+		
+		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
+
+			@Override
+			public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
+				boolean c1 = CollatorStringMatcher.cmatches(collator, searchQuery, o1.articleTitle.get(0),  
+						StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+				boolean c2 = CollatorStringMatcher.cmatches(collator, searchQuery, o2.articleTitle.get(0),  
+						StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+				if(c1 == c2) {
+					return collator.compare(o1.articleTitle.get(0), o2.articleTitle.get(0)); 
+				}
+				if(c1) {
+					return -1;
+				} else if(c2) {
+					return 1;
+				}
+				return 0;
+			}
+		});
+		
+		return list;
 	}
 
 	private Collection<WikivoyageSearchResult> groupSearchResultsByCityId(List<WikivoyageSearchResult> res) {
