@@ -163,7 +163,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		}
 		View emptyView = view.findViewById(android.R.id.empty);
 		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
-		if (Build.VERSION.SDK_INT >= 28) {
+		if (Build.VERSION.SDK_INT >= 18) {
 			emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_favorites_day : R.drawable.ic_empty_state_favorites_night);
 		} else {
 			emptyImageView.setVisibility(View.GONE);
