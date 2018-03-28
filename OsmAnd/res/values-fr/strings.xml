@@ -2932,7 +2932,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_markers">Marques</string>
     <string name="coordinates_format">Format des coordonnées</string>
     <string name="use_system_keyboard">Utiliser le clavier système</string>
-    <string name="fast_coordinates_input_descr">Définissez le format des coordonnées (ce format est modifiable plus tard dans Options).</string>
+    <string name="fast_coordinates_input_descr">Définissez le format des coordonnées (ce format est modifiable plus tard dans \'Options\').</string>
     <string name="fast_coordinates_input">Saisie rapide des coordonnées</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Éviter les routes sur glace, les fjords</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Éviter les routes sur glace et les fjords.</string>
@@ -2944,7 +2944,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="make_round_trip_descr">Copie le point de départ en tant que destination.</string>
     <string name="rendering_value_darkyellow_name">Jaune foncé</string>
     <string name="show_map">Afficher la carte</string>
-    <string name="route_is_calculated">L\'itinéraire a été calculé</string>
+    <string name="route_is_calculated">Itinéraire calculé</string>
     <string name="round_trip">Boucle</string>
     <string name="plan_route_no_markers_toast">Vous devez ajouter au minimum une marque pour utiliser cette fonction.</string>
     <string name="shared_string_road">Route</string>
@@ -2961,7 +2961,7 @@ représentant la zone : %1$s x %2$s</string>
 	<string name="shared_string_back">Précédent</string>
 	<string name="view">Afficher</string>
 	<string name="waypoints_added_to_map_markers">Étapes ajoutées comme marques</string>
-	<string name="import_gpx_file_description">peut être importé comme Favoris ou comme Itinéraire.</string>
+	<string name="import_gpx_file_description">peut être importé comme Favoris ou comme Fichier d\'itinéraire.</string>
     <string name="import_as_gpx">Importer comme fichier GPX</string>
     <string name="import_as_favorites">Importer comme Favoris</string>
     <string name="import_file">Importer fichier</string>
@@ -2977,7 +2977,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_paste">Coller</string>
     <string name="coordinate_input_accuracy_description">Passer automatiquement au champ suivant après avoir saisi %1$d chiffres après la virgule.</string>
     <string name="coordinate_input_accuracy">%1$d chiffres</string>
-    <string name="go_to_next_field">Aller au champ suivant</string>
+    <string name="go_to_next_field">Champ suivant</string>
     <string name="appearance_on_the_map">Apparence sur la carte</string>
     <string name="add_track_to_markers_descr">Sélectionnez une trace afin d\'ajouter ses points de passage comme marques (seules les traces avec points de passage figurent dans la liste).</string>
     <string name="add_favourites_group_to_markers_descr">Sélectionnez une catégorie de favoris à ajouter aux marques.</string>
@@ -3108,4 +3108,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="select_waypoints_category_description">Vous pouvez ajouter tous les points de la trace ou sélectionner des catégories différentes.</string>
     <string name="shared_string_total">Total</string>
     <string name="nothing_found_in_radius">Rien n\'a été trouvé dans le rayon :</string>
+    <string name="waypoints_removed_from_map_markers">Étape retirée des marques</string>
     </resources>
