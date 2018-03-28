@@ -1,13 +1,17 @@
 package net.osmand.plus.wikivoyage.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SearchResult {
 
-	String searchTerm;
+	List<String> searchTerm = new ArrayList<>();
 	long cityId;
-	String articleTitle;
-	String lang;
+	List<String> articleTitle = new ArrayList<>();
+	List<String> langs = new ArrayList<>();
+	
 
-	public String getSearchTerm() {
+	public List<String> getSearchTerm() {
 		return searchTerm;
 	}
 
@@ -15,11 +19,11 @@ public class SearchResult {
 		return cityId;
 	}
 
-	public String getArticleTitle() {
+	public List<String> getArticleTitle() {
 		return articleTitle;
 	}
 
-	public String getLang() {
-		return lang;
+	public List<String> getLang() {
+		return langs;
 	}
 }

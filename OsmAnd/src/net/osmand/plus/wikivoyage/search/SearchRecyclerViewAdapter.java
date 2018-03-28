@@ -37,7 +37,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 		viewHolder.searchTerm.setText(item.getSearchTerm());
 		viewHolder.cityId.setText(String.valueOf(item.getCityId()));
 		viewHolder.articleTitle.setText(item.getArticleTitle());
-		viewHolder.lang.setText(item.getLang());
+		viewHolder.lang.setText(item.getLang().toString());
 	}
 
 	@Override

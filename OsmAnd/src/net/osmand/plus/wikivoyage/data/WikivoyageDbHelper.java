@@ -86,16 +86,15 @@ public class WikivoyageDbHelper {
 	}
 
 	@Nullable
-	public WikivoyageArticle getArticle(SearchResult searchResult) {
+	public WikivoyageArticle getArticle(long cityId, String lang) {
 		WikivoyageArticle res = null;
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			try {
 				SQLiteCursor cursor = conn.rawQuery(ARTICLES_TABLE_SELECT + " WHERE " +
 								ARTICLES_COL_CITY_ID + " = ? AND " +
-								ARTICLES_COL_TITLE + " = ? AND " +
 								ARTICLES_COL_LANG + " = ?",
-						new String[]{String.valueOf(searchResult.cityId), searchResult.articleTitle, searchResult.lang});
+						new String[]{String.valueOf(cityId), lang});
 				if (cursor.moveToFirst()) {
 					res = readArticle(cursor);
 				}
@@ -117,11 +116,10 @@ public class WikivoyageDbHelper {
 	private SearchResult readSearchResult(SQLiteCursor cursor) {
 		SearchResult res = new SearchResult();
 
-		res.searchTerm = cursor.getString(0);
+		res.searchTerm.add(cursor.getString(0));
 		res.cityId = cursor.getLong(1);
-		res.articleTitle = cursor.getString(2);
-		res.lang = cursor.getString(3);
-
+		res.articleTitle.add(cursor.getString(2));
+		res.langs.add(cursor.getString(3));
 		return res;
 	}
 
