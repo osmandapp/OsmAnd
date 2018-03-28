@@ -2961,12 +2961,12 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="last_intermediate_dest_description">Pridá poslednú zastávku na ceste</string>
     <string name="first_intermediate_dest_description">Pridá prvú zastávku na ceste</string>
     <string name="subsequent_dest_description">Posunúť cieľ nahor a vytvoriť cieľ</string>
-    <string name="make_as_start_point">Vytvoriť ako východzí bod</string>
+    <string name="make_as_start_point">Nastaviť toto ako východzí bod</string>
     <string name="enter_the_file_name">Zadajte názov súboru.</string>
     <string name="map_import_error">Chyba pri importe mapy</string>
-    <string name="map_imported_successfully">Mapa bola úspešne importovaná</string>
-    <string name="distance_farthest">Vzdialenosť: najvzdialenejšie najprv</string>
-    <string name="distance_nearest">Vzdialenosť: najbližšie najprv</string>
+    <string name="map_imported_successfully">Mapa bola importovaná</string>
+    <string name="distance_farthest">Vzdialenosť: Najvzdialenejšie najprv</string>
+    <string name="distance_nearest">Vzdialenosť: Najbližšie najprv</string>
     <string name="enter_lon">Zadajte zemepisnú dĺžku</string>
     <string name="enter_lat">Zadajte zemepisnú šírku</string>
     <string name="enter_lat_and_lon">Zadajte zemepisnú šírku a dĺžku</string>
@@ -2988,5 +2988,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="nothing_found_in_radius">V danej vzdialenosti sa nič nenašlo:</string>
     <string name="select_waypoints_category_description">Môžete pridať všetky body trasy alebo vybrať jednotlivé kategórie.</string>
     <string name="shared_string_total">Spolu</string>
-    <string name="clear_all_intermediates">Zmazať všetky medziciele</string>
+    <string name="clear_all_intermediates">Zmazať všetky prechodné body</string>
+    <string name="shared_string_travel">Jazda</string>
     </resources>
