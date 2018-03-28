@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage.search;
 
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,8 +49,12 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 		return items.get(pos);
 	}
 
-	public void setItems(List<SearchResult> items) {
-		this.items = items;
+	public void setItems(@Nullable List<SearchResult> items) {
+		if (items == null) {
+			this.items.clear();
+		} else {
+			this.items = items;
+		}
 		notifyDataSetChanged();
 	}
 
