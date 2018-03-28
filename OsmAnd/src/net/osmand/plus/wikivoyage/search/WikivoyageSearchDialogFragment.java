@@ -6,35 +6,47 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageArticleDialogFragment;
-import net.osmand.plus.wikivoyage.data.WikivoyageDbHelper;
+import net.osmand.plus.wikivoyage.data.SearchResult;
 
-public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment {
+import java.util.List;
+
+public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment implements WikivoyageSearchCore.SearchListener {
 
 	public static final String TAG = "WikivoyageSearchDialogFragment";
 
-	private WikivoyageDbHelper dbHelper;
+	private WikivoyageSearchCore searchCore;
+	private String searchQuery = "";
 
 	private SearchRecyclerViewAdapter adapter;
+
 	private EditText searchEt;
+	private ImageButton clearIb;
+	private ProgressBar progressBar;
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		dbHelper = getMyApplication().getWikivoyageDbHelper();
+		final OsmandApplication app = getMyApplication();
+		searchCore = new WikivoyageSearchCore(app);
+		final boolean nightMode = !app.getSettings().isLightContent();
+		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
-		final View mainView = inflater.inflate(R.layout.fragment_wikivoyage_search_dialog, container);
+		final View mainView = LayoutInflater.from(new ContextThemeWrapper(app, themeRes))
+				.inflate(R.layout.fragment_wikivoyage_search_dialog, container, false);
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(getContentIcon(R.drawable.ic_arrow_back));
@@ -46,24 +58,40 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		searchEt = (EditText) toolbar.findViewById(R.id.search_edit_text);
-		searchEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+		searchEt = (EditText) toolbar.findViewById(R.id.searchEditText);
+		searchEt.setHint(R.string.shared_string_search);
+		searchEt.addTextChangedListener(new TextWatcher() {
 			@Override
-			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-					runSearch();
-					return true;
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				String newQuery = s.toString();
+				if (newQuery.isEmpty()) {
+					searchCore.cancelSearch();
+					adapter.setItems(null);
+				} else if (!searchQuery.equalsIgnoreCase(newQuery)) {
+					searchQuery = newQuery;
+					searchCore.search(searchQuery);
 				}
-				return false;
 			}
 		});
 
-		ImageButton searchBtn = (ImageButton) mainView.findViewById(R.id.search_button);
-		searchBtn.setImageDrawable(getContentIcon(R.drawable.ic_action_search_dark));
-		searchBtn.setOnClickListener(new View.OnClickListener() {
+		progressBar = (ProgressBar) toolbar.findViewById(R.id.searchProgressBar);
+
+		clearIb = (ImageButton) toolbar.findViewById(R.id.clearButton);
+		clearIb.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
+		clearIb.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View view) {
-				runSearch();
+			public void onClick(View v) {
+				searchEt.setText("");
 			}
 		});
 
@@ -84,8 +112,41 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment {
 		return mainView;
 	}
 
-	private void runSearch() {
-		adapter.setItems(dbHelper.search((searchEt).getText().toString()));
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (searchCore != null) {
+			searchCore.registerListener(this);
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (searchCore != null) {
+			searchCore.unregisterListener(this);
+			searchCore.cancelSearch();
+		}
+	}
+
+	@Override
+	public void onSearchStarted() {
+		switchProgressBarVisibility(true);
+	}
+
+	@Override
+	public void onSearchFinished(@Nullable List<SearchResult> results, boolean lastTask, boolean cancelled) {
+		if (!cancelled) {
+			adapter.setItems(results);
+		}
+		if (lastTask) {
+			switchProgressBarVisibility(false);
+		}
+	}
+
+	private void switchProgressBarVisibility(boolean show) {
+		progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+		clearIb.setVisibility(show ? View.GONE : View.VISIBLE);
 	}
 
 	public static boolean showInstance(FragmentManager fm) {
