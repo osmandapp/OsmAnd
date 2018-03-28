@@ -934,7 +934,7 @@ Ferill %2$s</string>
     <string name="gpx_navigation">GPX-leið</string>
     <string name="file_with_name_already_exist">Skrá með sama heiti er þegar til.</string>
     <string name="local_index_mi_upload_gpx">Senda til OSM</string>
-    <string name="basemap_missing">Grunnkort af heiminum (sem þekur alla jörðina í minni aðdrætti) vantar. Íhugaðu að hlaða inn World_basemap_x.obf til að fá hnattræna yfirsýn.</string>
+    <string name="basemap_missing">Sæktu grunnkort af heiminum til að fá hnattræna yfirsýn á alla jörðina í minni aðdrætti.</string>
     <string name="local_index_descr_title">Sýsla með kortaskrár.</string>
     <string name="local_index_mi_reload">Endurhlaða af minniskorti</string>
     <string name="local_index_map_data">Kortagögn</string>
@@ -1352,7 +1352,7 @@ og leiðsögn</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkort birtast að öllum líkindum hraðar. Virkar hugsanlega ekki vel á sumum tækjum.</string>
     <string name="play_commands_of_currently_selected_voice">Veldu rödd og prófaðu hana með því að spila raddskipanir</string>
     <string name="send_files_to_osm">Senda GPX-skrár til OSM?</string>
-    <string name="validate_gpx_upload_name_pwd">Tilgreindu OSM-notandanafn og lykilorð til að geta sent inn GPX-skrár.</string>
+    <string name="validate_gpx_upload_name_pwd">Tilgreindu OSM-notandanafnið þitt og lykilorð til að geta sent inn GPX-skrár.</string>
     <string name="support_new_features">Styðja við nýja eiginleika</string>
     <string name="amenity_type_osmwiki">Wikipedia (ónettengt)</string>
     <string name="fav_export_confirmation">Skrá með áður útfluttum eftirlætum er þegar fyrirliggjandi. Viltu skipta henni út?</string>
@@ -1377,9 +1377,9 @@ og leiðsögn</string>
     <string name="button_upgrade_osmandplus">Uppfæra OsmAnd+</string>
     <string name="search_position_current_location_search">Leita að staðsetningu…</string>
     <string name="search_position_current_location_found">Staðsetning mín (fannst)</string>
-    <string name="route_successfully_saved_at">Tókst að vista leið sem \'%1$s\'.</string>
-    <string name="local_index_upload_gpx_description">Senda GPX-skrár inn til OSM-samfélagsins. Þær verða notaðar til að gera landakortin betri.</string>
-    <string name="local_index_items_uploaded">%1$d af %2$d atriði/atriðum tókst að senda inn.</string>
+    <string name="route_successfully_saved_at">Leið vistuð sem \'%1$s\'.</string>
+    <string name="local_index_upload_gpx_description">Senda GPX-skrár inn til OSM-samfélagsins, til að gera landakortin betri.</string>
+    <string name="local_index_items_uploaded">%1$d af %2$d atriði/atriðum voru send inn.</string>
     <string name="vector_data_missing">Sækja (ónettengd) gögn til að geta notað kort án nettengingar.</string>
     <string name="local_index_installed">Útgáfa á tækinu</string>
     <string name="local_index_items_backuped">%1$d af %2$d atriði/atriðum voru gerð óvirk.</string>
@@ -1391,7 +1391,7 @@ og leiðsögn</string>
     <string name="warning_tile_layer_not_downloadable">Forritið getur ekki hlaðið niður kortalaginu %1$s, prófaðu að setja það aftur upp.</string>
     <string name="tile_source_already_installed">Kortið er þegar uppsett, stillingar verða uppfærðar.</string>
     <string name="select_tile_source_to_install">Veldu (tígla)kort til að setja inn eða uppfæra.</string>
-    <string name="internet_not_available">Internettengingar er krafist við þessa aðgerð, en hún er hinsvegar ekki tiltæk.</string>
+    <string name="internet_not_available">Get ekki framkvæmt þessa aðgerð án internettengingar.</string>
     <string name="error_doing_search">Villa kom upp í ónettengdri leit.</string>
     <string name="preferred_locale_descr">Veldu tungumál til birtingar í forriti (endurræstu OsmAnd eftir breytingar).</string>
     <string name="reading_cached_tiles">Les kortatígla úr biðminni…</string>
@@ -1449,9 +1449,9 @@ og leiðsögn</string>
     <string name="no_map_markers_found">Bættu við kortamerkjum á kortinu</string>
     
     <string name="anonymous_user_hint">Nafnlaus notandi getur ekki:
-- búið til hópa;
-- samstillt hópa og tæki við vefþjón;
-- sýslað með hópa og tæki á eigin stjórnborði á vefsvæðinu.</string>
+\n- búið til hópa;
+\n- samstillt hópa og tæki við vefþjón;
+\n- sýslað með hópa og tæki á eigin stjórnborði á vefsvæðinu.</string>
     
     
     
@@ -1472,7 +1472,7 @@ og leiðsögn</string>
     <string name="clear_active_markers_q">Viltu fjarlægja öll virk kortamerki?</string>
     <string name="clear_markers_history_q">Viltu í alvörunni hreinsa breytingaskrána fyrir kortamerki?</string>
     <string name="active_markers">Virk kortamerki</string>
-    <string name="consider_turning_polygons_off">Það er ráðlagt að slökkva á myndgerð marghyrninga.</string>
+    <string name="consider_turning_polygons_off">Það er ráðlagt að slökkva á myndgerð með marghyrningum.</string>
     <string name="rendering_attr_showMtbRoutes_name">Sýna MTB-leiðir</string>
     <string name="switch_start_finish">Snúa við upphafsstað og áfangastað</string>
     <string name="rendering_attr_hideIcons_name">Táknmyndir merkisstaða</string>
@@ -1809,8 +1809,8 @@ Punktar</string>
     <string name="av_use_external_camera">Nota myndavélarforritið</string>
     <string name="layer_recordings">Upptaka á lagi</string>
     <string name="local_openstreetmap_were_uploaded">{0} merkisstaðir/minnispunktar voru sendir inn</string>
-    <string name="local_openstreetmap_settings">Merkisstaðir/minnispunktar sem vistaðir eru á tæki</string>
-    <string name="local_openstreetmap_settings_descr">Birta og sýsla með merkisstaði/minnispunkta sem skráðir eru í staðværum gagnagrunni.</string>
+    <string name="local_openstreetmap_settings">Merkisstaðir/minnispunktar vistaðir á tæki</string>
+    <string name="local_openstreetmap_settings_descr">Birta og sýsla með OSM-merkisstaði/minnispunkta sem skráðir eru í gagnagrunni á tækinu.</string>
     <string name="index_name_tts_voice">Raddskipanir (TTS-raddgerfill, forgangur)</string>
     <string name="local_indexes_cat_tts">Raddskipanir (TTS)</string>
     <string name="ttsvoice">TTS-rödd</string>
@@ -1820,7 +1820,7 @@ Punktar</string>
     <string name="gpx_option_reverse_route">Snúa við stefnu GPX</string>
     <string name="choose_audio_stream">Frálag raddleiðsagnar</string>
     <string name="voice_stream_music">Hljóð margmiðlun/tónlist</string>
-    <string name="level_to_switch_vector_raster_descr">Lágmarks aðdráttarstig við notkun vektorkorta.</string>
+    <string name="level_to_switch_vector_raster_descr">Nota rastakort fyrir allt undir þessu aðdráttarstigi.</string>
     <string name="level_to_switch_vector_raster">Lágm. aðdráttur vektora</string>
     <string name="create_poi_link_to_osm_doc"><u>Nettengd OSM</u> kortaflokkun með myndum.</string>
     <string name="poi_filter_namefinder">Nettengd NafnaLeit</string>
@@ -1862,7 +1862,7 @@ Punktar</string>
     <string name="rendering_attr_roadColors_description">Veldu litastef fyrir vegi:</string>
     <string name="rendering_attr_roadColors_name">Litastef fyrir vegi</string>
     <string name="map_widget_view_direction">Sjónarhorn</string>
-    <string name="accessibility_default">Samkvæmt almennum stillingum kerfis</string>
+    <string name="accessibility_default">Samkvæmt almennum stillingum Android-kerfisins</string>
     <string name="direction_style_sidewise">Til hliðar (8 geirar)</string>
     <string name="direction_style_clockwise">Réttsælis (12 geirar)</string>
     <string name="settings_direction_style">Stíll stefnu</string>
@@ -1991,9 +1991,7 @@ Punktar</string>
     <string name="download_files_error_not_enough_space">Ekki nægilegt geymslupláss!
  Nauðsynlegt geymslupláss er {3} MB tímabundið, {1} MB fast.
  Tiltækt pláss er einungis {2} MB.</string>
-    <string name="download_files_question_space_with_temp">Sækja {0} skrá(r)?
- Nauðsynlegt geymslupláss er {3} MB tímabundið, {1} MB fast.
- (Tiltækt pláss er einungis {2} MB.)</string>
+    <string name="download_files_question_space_with_temp">Sækja {0} skrá(r)? Nauðsynlegt geymslupláss er {3} MB tímabundið, {1} MB fast. (Tiltækt pláss er {2} MB.)</string>
     <string name="download_files_question_space">Sækja {0} skrá(r)?
  Notað geymslupláss er {1} MB.
  (Tiltækt pláss er {2} MB.)</string>
@@ -2030,7 +2028,7 @@ Punktar</string>
     <string name="version_settings_descr">Sækja náttfara (nightly builds).</string>
     <string name="version_settings">Útgáfusamsetningar</string>
     <string name="navigate_point_olc">Opna staðsetningarkóða</string>
-    <string name="build_installed">Tókst að setja útgáfusamsetningu {0} inn ({1}).</string>
+    <string name="build_installed">Útgáfusamsetning {0} var sett upp ({1}).</string>
     <string name="downloading_build">Sæki útgáfusamsetningu…</string>
     <string name="loading_builds_failed">Mistókst að ná í lista yfir útgáfusamsetningar OsmAnd</string>
     <string name="loading_builds">Hleð inn OsmAnd útgáfusamsetningum…</string>
@@ -2070,10 +2068,10 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="available_downloads_left">%1$d skrár á eftir að sækja</string>
     <string name="contribution_activity">Setja inn útgáfu</string>
     <string name="local_index_description">Bankaðu á eitthvað atriði til að sjá nánari upplýsingar, ýttu og haltu niðri til að gera óvirkt eða eyða því. Núverandi gögn á tækinu (%1$s laust):</string>
-    <string name="first_time_msg">Takk fyrir að nota OsmAnd. Til að nota marga eiginleika þessa forrits þarftu að sækja ýmis ónettengd svæðisbundin gögn, hægt er að gera það með því að fara í \'Stillingar\' → \'Sýsla með kortaskrár\'. Þegar því er lokið geturðu skoðað kort, staðsett heimilisföng, flett upp merkisstöðum og fundið almenningssamgöngur.</string>
+    <string name="first_time_msg">Takk fyrir að nota OsmAnd. Nú þarftu að sækja ýmis ónettengd svæðisbundin gögn, hægt er að gera það með því að fara í \'Stillingar\' → \'Sýsla með kortaskrár\'. Þegar því er lokið geturðu skoðað kort, staðsett heimilisföng, flett upp merkisstöðum og fundið almenningssamgöngur.</string>
     <string name="map_online_plugin_is_not_installed">Virkjaðu viðbótina fyrir ónettengd kort til að velja önnur kortaupptök</string>
     <string name="switch_to_raster_map_to_see">Ekkert ónettengt vektorkort er til fyrir þessa staðsetningu. Þú getur sótt slík kort í \'Stillingar\' → \'Sýsla með kortaskrár\', nú eða skipt yfir í nettengd kort (virkja þarf viðbótina fyrir ónettengd kort svo þetta virki).</string>
-    <string name="support_new_features_descr">Styrkja til að fá nýja eiginleika þróaða fyrir forritið.</string>
+    <string name="support_new_features_descr">Styrktu verkefnið til að fá nýja eiginleika þróaða fyrir forritið.</string>
     <string name="settings_direction_style_descr">Veldu stíl til framsetningar á afstæðum stefnum á meðan verið er á ferð.</string>
     <string name="accessibility_preferences_descr">Kjörstillingar sem tengjast aðgengi.</string>
     <string name="use_fluorescent_overlays">Flúrlitaðar þekjur</string>
@@ -2086,7 +2084,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="old_poi_file_should_be_deleted">Gagnaskrá merkisstaðarins \'%1$s\' er úrelt og má því eyða.</string>
     <string name="update_poi_file_not_found">Staðvær skrá til að halda utan um breytingar á merkisstöðum fannst ekki og var ekki hægt að útbúa hana.</string>
     <string name="show_more_map_detail_descr">Sýna fleiri smáatriði á vektorkorti (vegi o.þ.h.) við minni aðdrátt.</string>
-    <string name="favorite_delete_multiple">Þú ert að fara að eyða %1$d eftirlæti/eftirlætum og %2$d eftirlætahóp/um. Ertu viss?</string>
+    <string name="favorite_delete_multiple">Þú ert að fara að eyða %1$d eftirlætum og %2$d eftirlætahópum. Ertu viss?</string>
     <string name="internet_connection_required_for_online_route">Nettengd leiðsagnarþjónusta er valin, en engin nettenging er tiltæk.</string>
     <string name="tts_language_not_supported">Valið tungumál er ekki stutt af Android TTS (text-to-speech) talherminum. Viltu athuga með annan TTS-talhermi á markaðnum? Annars verður forstillt TTS-tungumál notað.</string>
     <string name="tts_missing_language_data">Viltu fara á markaðinn og sækja valið tungumál?</string>
@@ -2184,7 +2182,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="access_smart_autoannounce">Snjallar sjálfvirkar tilkynningar</string>
     <string name="access_autoannounce_period">Tímabil sjálfvirka tilkynninga</string>
     <string name="access_autoannounce_period_descr">Lágmarkstími á milli tilkynninga.</string>
-    <string name="osm_live_thanks">Takk fyrir að vera áskrifandi að síuppfærslum!</string>
+    <string name="osm_live_thanks">Takk fyrir að vera áskrifandi að síuppfærslum</string>
     <string name="delay_to_start_navigation">Hefja beygju-fyrir-beygju leiðsögn eftir…</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-viðbót fyrir hæðarlínur án nettengingar</string>
     
@@ -2255,9 +2253,9 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="access_direction_audio_feedback_descr">Gefa stefnu að markpunkti til kynna með hljóði.</string>
     <string name="access_direction_haptic_feedback">Stefna tilkynnt með titringi</string>
     <string name="access_direction_haptic_feedback_descr">Gefa stefnu að markpunkti til kynna með titringi.</string>
-    <string name="access_disable_offroute_recalc_descr">Kemur í veg fyrir að leið sé endurreiknuð þegar farið er út af stefnu.</string>
+    <string name="access_disable_offroute_recalc_descr">Ekki sjálfvirkur endurreikningur leiðar þegar farið er út af stefnu.</string>
     <string name="access_disable_wrong_direction_recalc_descr">Kemur í veg fyrir að leið sé endurreiknuð þegar aðeins stefnt er í öfuga átt.</string>
-    <string name="access_smart_autoannounce_descr">Einungis tilkynna þegar stefnu á markpunkt er breytt.</string>
+    <string name="access_smart_autoannounce_descr">Einungis tilkynna þegar stefna á markpunkt breytist.</string>
     <string name="routing_attr_no_new_routing_name">Engar v1.9 leiðareglur</string>
     <string name="routing_attr_no_new_routing_description">Ekki nota leiðareglur sem komu til sögunnar í útgáfu 1.9.</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Leiðir deilileigubíla</string>
@@ -2520,7 +2518,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="archive_wikipedia_data">Þú ert með gömul ósamhæfð Wikipedia-gögn. Viltu setja þau í safnskrá?</string>
     <string name="confirm_usage_speed_cameras">Í mörgum löndum (Þýskalandi, Frakklandi, Ítalíu og fleirum) er notkun aðvarana vegna hraðamyndavéla ólögleg. OsmAnd tekur ekki neina ábyrgð á því ef þú brýtur lög. Ekki samþykkja þetta nema þú hafir leyfi til að nota þennan eiginleika.</string>
     <string name="welcome_select_region">Til að rétt sé farið með umferðarmerki og umferðarreglur, skaltu velja svæðið þar sem þú ert að aka:</string>
-    <string name="welcome_text">OsmAnd gefur kost á ónettengdum kortum og ónettengdri leiðsögn um víða veröld.</string>
+    <string name="welcome_text">OsmAnd gefur kost á ónettengdum kortum og ónettengdri leiðsögn um víða veröld!</string>
     <string name="osm_changes_added_to_local_edits">OSM-breytingum var bætt í staðvært breytingasett</string>
     <string name="delay_to_start_navigation_descr">Tilgreindu biðtímann sem leiðavalsskjárinn á að haldast opinn.</string>
     <string name="osmand_distance_planning_plugin_description">Þessi viðbót kemur með viðmótsshluta á kortaskjáinn sem gerir kleift að útbúa ferla með því einu að banka á kortið, eða nota eða breyta fyrirliggjandi GPX-skrám, í þeim tilgangi að skipuleggja ferðir og mæla vegalengdir milli tveggja punkta. Niðurstöðurnar má vista sem GPX-skrá sem hægt er að nota síðar við leiðsögn.</string>
@@ -2605,7 +2603,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="save_global_track_interval_descr">Veldu millibil skráninga í almenna leiðarskráningu (virkjað með viðmótshlutanum fyrir GPX-skráningu á kortinu).</string>
     <string name="will_open_tomorrow_at">Mun opna á morgun kl.</string>
     <string name="animate_my_location_desc">Virkja hreyfingu við hliðrun staðsetningar minnar á meðan leiðsögn stendur.</string>
-    <string name="storage_permission_restart_is_required">Núna hefur forritið heimild til að skrifa í ytri gagnageymslur. Það þarf að endurræsa forritið handvirkt.</string>
+    <string name="storage_permission_restart_is_required">Núna hefur forritið heimild til að skrifa í ytri gagnageymslur, en það þarf að endurræsa forritið handvirkt til að geta nýtt sér það.</string>
     <string name="show_transparency_seekbar">Birta gegnsæis-sleða</string>
     <string name="gpx_file">GPX-skrá</string>
     <string name="osc_file">OSC-skrá</string>
@@ -2725,7 +2723,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \n • Margar endurbætur í samhengisvalmynd korta á borð við samhengisháða uppflettingu heimilisfanga.
 \n
 \n og fleira…</string>
-    <string name="osm_live_header">Þessi áskrift virkjar uppfærslur á klukkustundar fresti fyrir öll kort um allan heim. Hluti innkomunnar fer til OSM-samfélagsins og er greitt fyrir hvert framlag til OSM. Ef þér líkar við OsmAnd og OSM og vilt styðja við verkefnið, þá er þetta kjörin leið til að sýna slíkan stuðning.</string>
+    <string name="osm_live_header">Þessi áskrift virkjar uppfærslur á klukkustundar fresti fyrir öll kort um allan heim. Hluti innkomunnar fer til OSM-samfélagsins og er greitt fyrir hvert framlag til OSM. Ef þér líkar við OsmAnd og OSM og vilt styðja við verkefnið og fá stuðning frá þeim, þá er þetta kjörin leið.</string>
     <string name="disable_recording_once_app_killed_descrp">Mun setja GPX-skráningu í bið þegar forritið er drepið (slökkt á því í gegnum nýleg forrit skjáinn - bakgrunnsvísir OsmAnd hverfur þar með úr tilkynningastiku Android-kerfisins.)</string>
     <string name="fav_point_emoticons_message">Nafni eftirlætispunktsins hefur evrið breytt í %1$s til að auðvelda rétta vistun strengsins ásamt tjáningartáknum yfir í skrá.</string>
     <string name="save_track_to_gpx_globally_descr">Hægt er að kveikja og slökkva á almennri skráningu staðsetninga í GPX-skrá með viðmótshlutanum fyrir GPX-skráningu á kortaskjánum.</string>
