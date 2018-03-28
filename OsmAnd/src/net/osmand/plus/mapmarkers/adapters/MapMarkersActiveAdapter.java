@@ -160,6 +160,9 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 			String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
 			descr = month + " " + day;
 		}
+		if (marker.wptPt != null && marker.wptPt.category != null) {
+			descr = marker.wptPt.category + ", " + descr;
+		}
 		holder.description.setText(descr);
 
 		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
