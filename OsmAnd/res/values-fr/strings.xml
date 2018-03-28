@@ -2613,7 +2613,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="parking_options">Choix de stationnement</string>
     <string name="do_not_send_anonymous_app_usage">N\'envoyer aucune information d\'usage sur les applications (même anonymes)</string>
     <string name="do_not_show_startup_messages">N\'afficher aucun message au démarrage</string>
-    <string name="do_not_show_startup_messages_desc">Ne pas afficher les messages promotionnels et les annonces locales</string>
+    <string name="do_not_show_startup_messages_desc">Ne pas afficher les messages promotionnels et les annonces locales.</string>
     <string name="right_side_navigation">Conduite à droite</string>
     <string name="driving_region_automatic">Automatique</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collecte des informations sur les écrans affichés lors de l\'utilisation de l\'application. Votre position n\'est jamais collectée, ni aucune des données saisies par l\'utilisateur dans l\'application comme les zones affichées, les recherches ou les téléchargements réalisés.</string>
