@@ -52,8 +52,8 @@
     
     
     
-    <string name="shared_string_move_up">Færa upp</string>
-    <string name="shared_string_move_down">Færa niður</string>
+    <string name="shared_string_move_up">Færa ↑</string>
+    <string name="shared_string_move_down">Færa ↓</string>
     <string name="storage_directory_shared">Samnýtt minni</string>
     <string name="recalculate_route">Endurreikna leið</string>
     <string name="donations">Gjafir</string>
@@ -225,7 +225,7 @@
     <string name="shared_string_delete">Eyða</string>
     <string name="shared_string_delete_all">Eyða öllum</string>
     <string name="shared_string_share">Deila</string>
-    <string name="shared_string_apply">Staðfesta</string>
+    <string name="shared_string_apply">Virkja</string>
     <string name="shared_string_control_start">Upphaf</string>
     <string name="shared_string_control_stop">Stöðva</string>
     <string name="shared_string_import">Flytja inn</string>
@@ -249,7 +249,7 @@
     <string name="shared_string_favorites">Eftirlæti</string>
     <string name="shared_string_address">Heimilisfang</string>
     <string name="shared_string_add">Bæta við</string>
-    <string name="shared_string_add_to_favorites">Bæta í Eftirlæti</string>
+    <string name="shared_string_add_to_favorites">Bæta í \'Eftirlæti\'</string>
     <string name="shared_string_my_location">Staðsetning mín</string>
     <string name="shared_string_my_places">Staðirnir mínir</string>
     <string name="shared_string_my_favorites">Eftirlætin mín</string>
@@ -659,9 +659,9 @@
     <string name="search_button">Leita</string>
     <string name="search_activity">Leita</string>
     <string name="search_POI_level_btn">Finna fleira</string>
-    <string name="app_mode_car">Bíll</string>
-    <string name="app_mode_bicycle">Reiðhjól</string>
-    <string name="app_mode_pedestrian">Fótgangandi</string>
+    <string name="app_mode_car">Akstur</string>
+    <string name="app_mode_bicycle">Hjólreiðar</string>
+    <string name="app_mode_pedestrian">Gangandi</string>
     <string name="position_on_map_center">Miðjað</string>
     <string name="position_on_map_bottom">Neðst</string>
     <string name="navigate_point_latitude">Breiddargráða</string>
@@ -694,7 +694,7 @@
     <string name="failed_to_upload">Gat ekki sent inn</string>
     <string name="try_again">Reyndu aftur</string>
     <string name="error_message_pattern">Villa: {0}</string>
-    <string name="shared_string_undo">AFTURKALLA</string>
+    <string name="shared_string_undo">Afturkalla</string>
     <string name="shared_string_skip">Sleppa</string>
     <string name="tab_title_basic">Einfalt</string>
     <string name="tab_title_advanced">Nánar</string>
@@ -709,7 +709,7 @@
     <string name="count_of_lines">Fjöldi lína</string>
     <string name="are_you_sure">Ertu viss?</string>
     <string name="roads">Vegir</string>
-    <string name="buy">KAUPA</string>
+    <string name="buy">Kaupa</string>
     <string name="later">Seinna</string>
     <string name="downloads">Sótt gögn</string>
     <string name="value_downloaded_of_max">%1$.1f af %2$.1f MB</string>
@@ -760,7 +760,7 @@
     <string name="search_location">Leita að stað…</string>
     <string name="storage_place_description">Gagnageymsla OsmAnd (fyrir kort, ferla, o.s.frv.): %1$s.</string>
     <string name="give_permission">Gefa heimild</string>
-    <string name="no_update_info">Ekki sýna uppfærslur</string>
+    <string name="no_update_info">Ekki sýna nýjar útgáfur</string>
     <string name="get_started">Komast í gang</string>
     <string name="back_to_search">Til baka í leit</string>
     <string name="show_something_on_map">Birta %1$s á korti</string>
@@ -792,7 +792,7 @@
     <string name="road_blocked">Vegur er lokaður</string>
     <string name="item_removed">atriði fjarlægt</string>
     <string name="n_items_removed">atriði fjarlægð</string>
-    <string name="shared_string_undo_all">AFTURKALLA ALLT</string>
+    <string name="shared_string_undo_all">Afturkalla allt</string>
     <string name="starting_point">Upphafspunktur</string>
     <string name="live_updates">Síuppfærslur</string>
     <string name="available_maps">Tiltæk kort</string>
@@ -894,7 +894,7 @@
     <string name="gpx_info_subtracks">Undirferlar: %1$s</string>
     <string name="gpx_selection_track">%1$s 
 Ferill %2$s</string>
-    <string name="gpx_file_is_empty">GPX-ferill er tómur</string>
+    <string name="gpx_file_is_empty">Tómur GPX-ferill</string>
     <string name="base_world_map">Grunnkort af heiminum</string>
     <string name="local_index_tile_data_expire">Rennur út (mínútur): %1$s</string>
     <string name="edit_tilesource_expiration_time">Rennur út (mínútur)</string>
@@ -1019,7 +1019,7 @@ Ferill %2$s</string>
     <string name="loading_streets">Hleð inn götum…</string>
     <string name="loading_cities">Hleð inn borgum…</string>
     <string name="arrived_at_destination">Þú hefur náð á áfangastað</string>
-    <string name="invalid_locations">Hnitin eru ógild!</string>
+    <string name="invalid_locations">Hnitin eru ógild</string>
     <string name="go_back_to_osmand">Fara aftur á OsmAnd-kort</string>
     <string name="reading_indexes">Les gögn á tækinu…</string>
     <string name="saving_gpx_tracks">Vista GPX-ferla á SD-kort…</string>
@@ -1056,12 +1056,12 @@ Ferill %2$s</string>
     <string name="user_hates_app_get_feedback">Segðu okkur hvers vegna.</string>
     <string name="user_hates_app_get_feedback_long">Segðu okkur endilega hverju þú myndir vilja breyta í þessu forriti.</string>
     <string name="delete_change">Eyða breytingu</string>
-    <string name="successfully_uploaded_pattern">Tókst að senda inn {0}/{1}</string>
+    <string name="successfully_uploaded_pattern">Sendai inn {0}/{1}</string>
     <string name="dahboard_options_dialog_title">Stilla stjórnborð</string>
 
     <string name="contact_info">Upplýsingar um tengilið</string>
     <string name="recent_places">Nýlegir staðir</string>
-    <string name="saved_at_time">Tókst að vista í: %1$s</string>
+    <string name="saved_at_time">Núna vistað í: %1$s</string>
     <string name="show_gpx">Birta GPX</string>
     <string name="unsaved_changes_will_be_lost">Allar óvistaðar breytingar munu tapast. Halda áfram?</string>
     <string name="downloading_number_of_files">Sæki - %1$d skrá</string>
@@ -1073,7 +1073,7 @@ Ferill %2$s</string>
     <string name="map_legend">Kortaskýring</string>
     <string name="dashboard_or_drawer_title">Stjórnborð eða valmyndastýring</string>
     <string name="only_download_over_wifi">Einungis hlaða niður yfir WiFi-net</string>
-    <string name="missing_write_external_storage_permission">Forritið hefur ekki heimildir til að nota SD-kortið</string>
+    <string name="missing_write_external_storage_permission">OsmAnd hefur ekki heimildir til að nota SD-kortið</string>
     <string name="last_map_change">Síðasta breyting á korti: %s</string>
     <string name="select_month_and_country">Veldu mánuð og land</string>
     <string name="number_of_contributors">Fjöldi þátttakenda</string>
@@ -1216,7 +1216,7 @@ Sólsetur: %2$s</string>
     <string name="skip_map_downloading">Sleppa því að ná í kort</string>
     <string name="rendering_attr_hideOverground_name">Hlutir á yfirborði</string>
     
-    <string name="open_street_map_login_and_pass">Innskráning og lykilorð á OpenStreetMap</string>
+    <string name="open_street_map_login_and_pass">Notandanafn og lykilorð á OpenStreetMap</string>
     <string name="map_markers">Kortamerki</string>
     <string name="map_marker">Kortamerki</string>
     <string name="map_downloaded">Náð í kort</string>
@@ -1283,7 +1283,7 @@ og leiðsögn</string>
     <string name="search_another_country">Velja annað svæði</string>
     <string name="search_map">Leita á kortum…</string>
     <string name="first_usage_wizard_desc">Leyfðu OsmAnd að finna út staðsetninguna þína og stinga upp á kortum fyrir það svæði til að sækja.</string>
-    <string name="allow_access_location">Leyfa aðgang að staðsetningunni þinni</string>
+    <string name="allow_access_location">Leyfa aðgang að staðsetningu</string>
     <string name="search_my_location">Finna staðsetningu mína</string>
     <string name="update_all_maps_now">Viltu uppfæra öll kort núna?</string>
     <string name="clear_tile_data">Hreinsa alla tígla</string>
@@ -1754,7 +1754,7 @@ Punktar</string>
     <string name="Closest_Amenities">Næsta aðstaða</string>
     <string name="navigate_point_top_text">Settu inn breiddar- &amp; lengdargráður á völdu sniði (D - gráður, M - mínútur, S - sekúndur)</string>
     <string name="search_address_street_option">Þvergata</string>
-    <string name="poi_action_succeded_template">Tókst að ljúka {0} aðgerðinni.</string>
+    <string name="poi_action_succeded_template">Aðgerðinni {0} er lokið.</string>
     <string name="poi_error_unexpected_template">Óvænt villa kom upp við að framkvæma aðgerð {0}.</string>
     <string name="poi_error_io_error_template">I/O-villa kom upp við að framkvæma aðgerð {0}.</string>
     <string name="av_camera_focus">Tegund myndavélarfókus</string>
@@ -1774,7 +1774,7 @@ Punktar</string>
     <string name="show_free_version_banner">Birta borða frjálsu útgáfunnar</string>
     <string name="show_free_version_banner_description">Jafnvel þótt þú hafir keypt forritið, geturðu samt séð borða frjálsu útgáfunnar.</string>
     <string name="free_downloads_used">Frjáls niðurhöl notuð</string>
-    <string name="free_downloads_used_description">Sýnir hvaða frjálsu niðurhöl eru notuð.</string>
+    <string name="free_downloads_used_description">Sýnir hve mikið er eftir af frjálsu niðurhali.</string>
 
     <string name="application_dir_description">Veldu hvar þú ætlar að geyma kort og aðrar gagnaskrár.</string>
 
@@ -1891,9 +1891,9 @@ Punktar</string>
     <string name="quick_action_add_poi">Bæta við merkisstað</string>
     <string name="quick_action_map_style">Breyta stíl korts</string>
     <string name="quick_action_map_style_switch">Stíl kortsins var breytt yfir í \"%s\".</string>
-    <string name="quick_action_take_audio_note">Taka minnispunkt sem hljóðupptöku</string>
-    <string name="quick_action_take_video_note">Taka minnispunkt sem myndskeið</string>
-    <string name="quick_action_take_photo_note">Taka minnispunkt sem ljósmynd</string>
+    <string name="quick_action_take_audio_note">Nýr hljóðupptöku-minnispunktur</string>
+    <string name="quick_action_take_video_note">Nýr myndskeiðs-minnispunktur</string>
+    <string name="quick_action_take_photo_note">Nýr ljósmynda-minnispunktur</string>
     <string name="quick_action_add_osm_bug">Bæta við OSM-minnispunkti</string>
     <string name="quick_action_navigation_voice">Tal af/á</string>
     <string name="quick_action_navigation_voice_off">Slökkt á tali</string>
@@ -1950,17 +1950,17 @@ Punktar</string>
     <string name="do_not_show_startup_messages">Ekki birta skilaboð í ræsingu</string>
     <string name="do_not_show_startup_messages_desc">Lokar á skilaboð um afslætti og sérstaka viðburði í grenndinni.</string>
     <string name="parking_options">Valkostir bílastæða</string>
-    <string name="full_version_thanks">Takk fyrir að kaupa fulla útgáfu OsmAnd!</string>
+    <string name="full_version_thanks">Takk fyrir að kaupa fulla útgáfu OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Hæðótt</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Minna hæðótt</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Flatt</string>
     <string name="routing_attr_driving_style_speed_name">Styttri leiðir</string>
     <string name="routing_attr_driving_style_balance_name">Jafnvægi</string>
     <string name="routing_attr_driving_style_safety_name">Velja frekar hjáleiðir</string>
-    <string name="relief_smoothness_factor_descr">Forgangur landslags: slétt eða hæðótt.</string>
+    <string name="relief_smoothness_factor_descr">Kjörið landslag: slétt eða hæðótt.</string>
     <string name="shared_string_slope">Brekka</string>
     <string name="add_new_folder">Bæta við nýrri möppu</string>
-    <string name="points_delete_multiple_succesful">Punkti/punktum var eytt.</string>
+    <string name="points_delete_multiple_succesful">Punkti/punktum eytt.</string>
     <string name="points_delete_multiple">Þú ert að fara að eyða %1$d punktum. Ertu viss?</string>
     <string name="track_points_category_name">Mikilvægir punktar á þessari leið</string>
     <string name="gpx_track">Ferill</string>
@@ -2135,7 +2135,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="no_overlay">Engin þekja (yfirlag)</string>
     <string name="no_underlay">Ekkert undirlag</string>
     <string name="subscribe_email_error">Villa</string>
-    <string name="sea_depth_thanks">Takk fyrir að kaupa sjódýptarlínur!</string>
+    <string name="sea_depth_thanks">Takk fyrir að kaupa sjódýptarlínur</string>
     <string name="index_item_depth_contours_osmand_ext">Dýptarlínur sjávar</string>
     <string name="index_item_depth_points_southern_hemisphere">Sjódýptarpunktar á suðurhveli</string>
     <string name="index_item_depth_points_northern_hemisphere">Sjódýptarpunktar á norðurhveli</string>
@@ -2150,8 +2150,8 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_add_photos">Bæta við ljósmyndum</string>
     <string name="restart_search">Byrja leit aftur</string>
     <string name="increase_search_radius">Auka radíus leitar</string>
-    <string name="nothing_found">Ekkert fannst :(</string>
-    <string name="quick_action_showhide_osmbugs_title">Birta/fela OSM-minnispunkta</string>
+    <string name="nothing_found">Ekkert fannst</string>
+    <string name="quick_action_showhide_osmbugs_title">Víxla OSM-minnispunktum af/á</string>
     <string name="quick_action_osmbugs_show">Birta OSM-minnispunkta</string>
     <string name="quick_action_osmbugs_hide">Fela OSM-minnispunkta</string>
     <string name="sorted_by_distance">Raðað eftir vegalengd</string>
@@ -2222,7 +2222,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_reload">Endurnýja</string>
     <string name="mapillary_menu_descr_tile_cache">Endurlesa kortaflísar til að sjá uppfærð gögn.</string>
     <string name="mapillary_menu_title_tile_cache">Tiglaskyndiminni</string>
-    <string name="wrong_user_name">Rangt notandanafn!</string>
+    <string name="wrong_user_name">Rangt notandanafn</string>
     <string name="shared_string_to">Til</string>
     <string name="mapillary_menu_date_from">Frá</string>
     <string name="mapillary_menu_descr_dates">Skoða myndir sem bætt hefur verið inn</string>
@@ -2239,13 +2239,13 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="mapillary_widget_descr">Gerir þér kleift að bæta kerfið á einfaldan hátt með Mapillary.</string>
     <string name="mapillary_descr">Götumyndir af netinu fyrir alla. Uppgötvaðu staði, útvíkkaðu heiminn og vertu með í samstarfinu.</string>
     <string name="plugin_mapillary_descr">Götumyndir fyrir alla. Uppgötvaðu staði, útvíkkaðu heiminn og vertu með í samstarfinu.</string>
-    <string name="hillshade_menu_download_descr">Til að sjá hæðarskyggingar á kortinu, þarftu að sækja hæðaskyggingakortið af þessu svæði.</string>
-    <string name="hillshade_purchase_header">Til að sjá hæðarskyggingar á kortinu, þarftu að kaupa og setja inn hæðaskyggingaviðbótina</string>
-    <string name="srtm_menu_download_descr">Til að sjá hæðarlínur á kortinu, þarftu að sækja hæðarlínukortið af þessu svæði.</string>
+    <string name="hillshade_menu_download_descr">Til að sjá hæðaskyggingar á kortinu, þarftu að sækja hæðaskyggingakortið af þessu svæði.</string>
+    <string name="hillshade_purchase_header">Til að sjá hæðarskyggingar á kortinu, þarftu að setja inn hæðaskyggingaviðbótina</string>
+    <string name="srtm_menu_download_descr">Sæktu hæðarlínukortið af þessu svæði.</string>
     <string name="srtm_purchase_header">Til að sjá hæðarlínur á kortinu, þarftu að kaupa og setja inn hæðarlínuviðbótina</string>
     <string name="show_from_zoom_level">Birta frá aðdráttarstigi</string>
     <string name="subscribe_email_desc">Gerstu áskrifandi að póstlistanum um forritaafslætti og fáðu ókeypis 3 niðurhöl á kortum til viðbótar!</string>
-    <string name="depth_contour_descr">Sett af kortum með dýptarlínum og dýptarpunktum sjávar.</string>
+    <string name="depth_contour_descr">Kort með dýptarlínum og dýptarpunktum sjávar.</string>
     <string name="auto_split_recording_descr">Hefja nýjan bút eftir 6 mínútna bil, hefja nýjan feril eftir 2 klst bil, eða nýja skrá eftir lengra bil ef dagsetning hefur breyst.</string>
     <string name="save_track_min_speed_descr">Sía: Stilltu lágmarkshraða þar sem punktur er tekinn í skráningu.</string>
     <string name="save_track_min_distance_descr">Sía: Stilltu lágmarksfjarlægð frá síðustu staðsetningu þar sem punktur er tekinn í skráningu.</string>
@@ -2296,7 +2296,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="show_number_pad">Birta talnaborð</string>
     <string name="shared_string_paste">Líma</string>
     <string name="coordinate_input_accuracy">%1$d tölustafir</string>
-    <string name="go_to_next_field">Fara í næsta gagnasvið</string>
+    <string name="go_to_next_field">Næsta gagnasvið</string>
     <string name="rename_marker">Endurnefna kortamerki</string>
     <string name="tap_on_map_to_hide_interface">Skjáfyllihamur</string>
     
@@ -2356,7 +2356,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="move_all_to_history">Flytja allt í aðgerðaferil</string>
     <string name="show_direction">Fjarlægðarvísir</string>
     <string name="sort_by">Raða eftir</string>
-    <string name="do_not_use_animations">Ekki nota hreyfingar</string>
+    <string name="do_not_use_animations">Engar hreyfingar</string>
     <string name="do_not_use_animations_descr">Gerir hreyfivísbendingar í forritinu óvirkar.</string>
     <string name="keep_showing_on_map">Halda áfram að birta á korti</string>
     <string name="exit_without_saving">Loka án þess að vista?</string>
@@ -2509,7 +2509,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="audionotes_plugin_description">Viðbótin fyrir hljóð/myndskeiðs-minnispunkta virkjar eiginleikann til að taka upp minnispunkta með hljóði/ljósmyndum/myndskeiðum á meðan ferðalagi stendur, annað hvort með því að nota hnapp á kortaskjánum eða beint í samhengisvalmynd fyrir hvaða staðsetningu sem er á kortinu.</string>
     <string name="osmand_parking_plugin_description">Viðbótin fyrir staðsetningu bílastæðis gerir þér kleift að muna hvar bílnum þínum var lagt og hve langur tími er til stefnu áður en stöðumælir rennur út (ef um tímamörk er að ræða). 
 \nBæði staðurinn og tíminn eru sýnileg á stjórnborði OsmAnd rétt eins og í sérstökum viðmótshluta kortaskjásins. Hægt er að bæta áminningu inn í Android dagatalið.</string>
-    <string name="empty_state_markers_active_desc">Ýta og halda eða stutt bank á staði, banka síðan á hnappinn í merkiflagginu.</string>
+    <string name="empty_state_markers_active_desc">Ýta og halda eða stutt bank á \'Staðir\', banka síðan á hnappinn í merkiflagginu.</string>
     <string name="tap_on_map_to_hide_interface_descr">Bank á kortið víxlar stjórnhnöppum og viðmótshlutum af eða á.</string>
     <string name="fast_coordinates_input_descr">Veldu inntakssnið hnita. Þú getur alltaf breytt því í stillingunum.</string>
     <string name="quick_action_resume_pause_navigation_descr">Bankaðu á þennan hnapp til að setja leiðsögn í bið eða halda áfram með hana.</string>
@@ -2577,7 +2577,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="use_osm_live_routing_description">Virkja leiðsögn fyrir breytingar í OsmAnd Live.</string>
     
     <string name="storage_directory_readonly_desc">Sú mappa sem er valin undir geymslugögn er einungis lesanleg. Geymslumappan er því tímabundið sett í innra minnið. Veldu endilega gilda geymslumöppu.</string>
-    <string name="osm_live_email_desc">Nauðsynlegt til að geta gefið þér upplýsingar um framlög.</string>
+    <string name="osm_live_email_desc">Nauðsynlegt til að geta gefið upplýsingar um framlög.</string>
     <string name="osm_live_region_desc">Hluti styrktarfjárhæðarinnar verður sendur til OSM-notendanna sem senda inn breytingar á kortinu á þessu svæði.</string>
     <string name="osm_live_ask_for_purchase">Kauptu fyrst áskrift að OsmAnd Live</string>
     <string name="clear_updates_proposition_message">Þú getur fjarlægt sóttar uppfærslur að snúið aftur í upprunalega útgáfu kortsins</string>
@@ -2790,12 +2790,12 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="enter_lon">Settu inn lengdargráðu</string>
     <string name="enter_lat">Settu inn breiddargráðu</string>
     <string name="enter_lat_and_lon">Settu inn lengdar- og breiddargráðu</string>
-	<string name="distance_farthest">Vegalengd: lengst fyrst</string>
+	<string name="distance_farthest">Vegalengd: lengst í burtu fyrst</string>
     <string name="distance_nearest">Vegalengd: nálægast fyrst</string>
     <string name="group_deleted">Hópi eytt</string>
     <string name="rendering_attr_whiteWaterSports_name">Fljótasiglingar</string>
     <string name="clear_all_intermediates">Hreinsa út alla milliáfanga</string>
     <string name="select_waypoints_category_description">Þú getur bætt við öllum punktum ferilsins, eða valið aðskilda flokka.</string>
     <string name="shared_string_total">Alls</string>
-    <string name="nothing_found_in_radius">Við fundum ekkert innan radíusins:</string>
+    <string name="nothing_found_in_radius">Ekkert fannst innan radíusins:</string>
     </resources>

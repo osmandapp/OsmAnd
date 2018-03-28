@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Ćah</string>
     <string name="map_widget_battery">Staw baterije</string>
@@ -23,7 +24,7 @@
     <string name="storage_directory_shared">Zhromadny skład</string>
     <string name="full_report">Dospołna rozprawa</string>
     <string name="recalculate_route">Čaru znowa wobličić</string>
-    <string name="open_street_map_login_and_pass">OpenStreetMap konto a hesło</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap wužiwarske mjeno a hesło</string>
     <string name="donations">Dary</string>
     <string name="osm_live_subscribe_btn">Abonować</string>
     <string name="osm_live_user_public_name">Zjawne mjeno</string>
@@ -77,13 +78,13 @@
     <string name="osn_bug_name">OSM-notica</string>
     <string name="osn_comment_dialog_title">Komentar přidać</string>
     <string name="osn_close_dialog_title">Noticu začinić</string>
-    <string name="osn_close_dialog_success">Notica je so wuspěšnje začiniła</string>
+    <string name="osn_close_dialog_success">Notica je so začiniła</string>
     <string name="osn_close_dialog_error">Zmylk: notica njeje so začiniła</string>
     <string name="osb_author_dialog_password">OSM-hesło (opcionalnje)</string>
     <string name="osb_comment_dialog_message">Powěsć</string>
     <string name="osb_comment_dialog_author">Mjeno awtora</string>
     <string name="osb_comment_dialog_error">Zmylk: komentar njeje so přidał</string>
-    <string name="osb_comment_dialog_success">Komentar je so wuspěšnje přidał</string>
+    <string name="osb_comment_dialog_success">Komentar je so přidał</string>
 
     <string name="context_menu_item_delete_waypoint">GPX-dypk wotstronić?</string>
     <string name="context_menu_item_edit_waypoint">GPX-dypk wobdźěłać</string>
@@ -103,11 +104,11 @@
     <string name="world_map_download_descr">Zakładna karta swěta pobrachuje abo njeje aktualna. Prošu sćehńće ju za globalny přehlad.</string>
     <string name="shared_string_qr_code">QR-kod</string>
     <string name="map_downloaded">Karta sćehnjena</string>
-    <string name="map_downloaded_descr">Karta %1$s je so sćahnyła, móžeće ju nětko wužiwać.</string>
-    <string name="go_to_map">Na kartu hladać</string>
+    <string name="map_downloaded_descr">Móžeš sćehnjenu kartu %1$s nětko wužiwać.</string>
+    <string name="go_to_map">Kartu pokazać</string>
     <string name="share_menu_location">Městno zdźělić</string>
     <string name="shared_string_send">Pósłać</string>
-    <string name="favorite_category_dublicate_message">Kategorija pod tutym mjenom hižo eksistuje. Prošu wužiwajće hinaše mjeno.</string>
+    <string name="favorite_category_dublicate_message">Prošu wužiwaj mjeno za kategoriju, kotrež hišće njeeksistuje.</string>
     <string name="favorite_category_name">Mjeno kategorije</string>
     <string name="favorite_category_add_new_title">Nowu kategoriju dodać</string>
     <string name="regions">Regiony</string>
@@ -155,7 +156,7 @@
     <string name="rendering_value_purple_name">fiałkojte</string>
     <string name="rendering_value_brown_name">brune</string>
     <string name="rendering_value_translucent_purple_name">transparentne fijałkojte</string>
-    <string name="restart_is_required">Prošu startujće aplikaciju znowa, zo bychu so wšitke změny pokazali.</string>
+    <string name="restart_is_required">Startuj aplikaciju znowa, zo bychu so wšitke změny pokazali.</string>
     <string name="light_theme">Swětłe</string>
     <string name="dark_theme">Ćmowe</string>
     <string name="lang_pms">piemontšćina</string>
@@ -181,7 +182,7 @@
     <string name="lang_vo">Volapük</string>
     <string name="lang_th">thailandšćina</string>
     <string name="lang_te">Telugu</string>
-    <string name="lang_nn">norwegšćina (Nynorsk)</string>
+    <string name="lang_nn">norwegski Nynorsk</string>
     <string name="lang_new">Newar / Nepal Bhasa</string>
     <string name="lang_ms">malajišćina</string>
     <string name="lang_ht">haitišćina</string>
@@ -262,7 +263,7 @@
     <string name="rendering_value_pedestrian_name">Pěši</string>
     <string name="continue_navigation">Z nawigaciju pokročować</string>
     <string name="pause_navigation">Nawigaciju na chwilu přetorhnyć</string>
-    <string name="map_preferred_locale_descr">Najlubša rěč za mjena na karće (njeje-li k dispoziciji, pokazaja so lokalne mjena).</string>
+    <string name="map_preferred_locale_descr">Najlubša rěč za mjena na karće (njeje-li k dispoziciji, pokazaja so jendźelske abo lokalne mjena).</string>
     <string name="map_preferred_locale">Najlubša rěč za kartu</string>
     <string name="local_map_names">Lokalne mjena</string>
     <string name="lang_sw">Suahelšćina</string>
@@ -367,7 +368,7 @@
     <string name="app_mode_motorcycle">Motorske</string>
     <string name="app_mode_aircraft">Lětadło</string>
     <string name="base_world_map">Zakładna karta swěta</string>
-    <string name="about_version">Wersija :</string>
+    <string name="about_version">Wersija:</string>
     <string name="local_index_tile_data_maxzoom">Maksimalny zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimalny zoom: %1$s</string>
     <string name="driving_region_descr">Wubjerće region jězdźenja: Europa, Azija, Zjednoćene staty abo druhe.</string>
@@ -411,11 +412,11 @@
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_wikipedia_maps">Wikipedija</string>
     <string name="recording_error">Při nahrawanju je zmylk wustupił</string>
-    <string name="safe_mode_description">Aplikacija běži w zawěsćenym modusu (za pomałše wersije Androida).</string>
+    <string name="safe_mode_description">App běži w zawěsćenym modusu (za pomałše wersije Androida).</string>
     <string name="safe_mode">Zawěsćeny modus</string>
-    <string name="native_library_not_running">Aplikacija běži w zawěsćenym modusu (hodźi so w nastajenjach wupinyć).</string>
+    <string name="native_library_not_running">App běži w zawěsćenym modusu (hodźi so w nastajenjach wupinyć).</string>
     <string name="close_changeset">Začinić sadźbu změnow</string>
-    <string name="zxing_barcode_scanner_not_found">Aplikacija ZXing Barcode Scanner njeje instalowana. Chceće ju pytać pola Google Play?</string>
+    <string name="zxing_barcode_scanner_not_found">App \'ZXing Barcode Scanner\' njeje instalowana. Chceće ju pytać pola Google Play?</string>
     <string name="rendering_attr_roadColors_description">Wubjerće barbowu šemu za dróhi:</string>
     <string name="rendering_attr_roadColors_name">Barbowa šema dróhow</string>
     <string name="map_widget_show_destination_arrow">Pokazaj směr do cila</string>
@@ -905,7 +906,7 @@
     <string name="coords_format_descr">Format za geografiske koordinaty.</string>
 <string name="mapillary">Mapillary</string>
     <string name="shared_string_reload">wobnowić</string>
-    <string name="wrong_user_name">Wopačne wužiwarske mjeno!</string>
+    <string name="wrong_user_name">Wopačne wužiwarske mjeno</string>
     <string name="mapillary_menu_date_from">Wot</string>
     <string name="mapillary_menu_title_dates">Datum</string>
     <string name="mapillary_menu_edit_text_hint">Wužiwarske mjeno zapodać</string>
@@ -926,7 +927,7 @@
     <string name="show_on_map_after_saving">Po składowanju na karće pokazać</string>
     <string name="measurement_tool_action_bar">Kartu wobhladać a dypki dodać</string>
     <string name="measurement_tool">Zdalenosć měrić</string>
-    <string name="quick_action_resume_pause_navigation">Nawigaciju znowa startować/přetorhnyć</string>
+    <string name="quick_action_resume_pause_navigation">Nawigaciju přetorhnyć/znowa startować</string>
     <string name="shared_string_to">Do</string>
     <string name="mapillary_menu_descr_dates">Jenož přidate wobrazy pokazać</string>
     <string name="mapillary_menu_descr_username">Jenož wobrazy wužiwarja</string>
@@ -935,24 +936,22 @@
     <string name="distance_moving">Zdalenosć skorigowana</string>
     <string name="mapillary_image">Wobraz z Mapillary</string>
     <string name="open_mapillary">Mapillary wočinić</string>
-    <string name="improve_coverage_install_mapillary_desc">Móžeš swójske wobrazy abo seriju wobrazow wzać a z tutym městnom zwjazać
-\n
-\nZa to dyrbiš instalować aplikaciju Mapillary z Google Play.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instaluj Mapillary, zo by swójske wobrazy abo seriju wobrazow z tutym městnom zwjazał(a).</string>
     <string name="online_photos">Fota online</string>
     <string name="mapillary_widget">Asistent Mapillary</string>
     <string name="private_access_routing_req">Twój cil leži w priwatnej kónčinje. Chceš dowolić za tutu jězbu přistup k priwatnym pućam?</string>
     <string name="restart_search">Pytanje wospjetować</string>
     <string name="increase_search_radius">Pytanski radius powjetšić</string>
-    <string name="nothing_found">Žadyn pytanski wuslědk :(</string>
+    <string name="nothing_found">Žadyn pytanski wuslědk</string>
     <string name="nothing_found_descr">Změń pytanske zapřijeće abo powjetš pytanski radius.</string>
     <string name="quick_action_showhide_osmbugs_title">OSM-noticy pokazać/schować</string>
     <string name="quick_action_osmbugs_show">OSM-noticy pokazać</string>
     <string name="quick_action_osmbugs_hide">OSM-noticy schować</string>
     <string name="sorted_by_distance">Sortěrowane po zdalenosći</string>
     <string name="search_favorites">Fawority pytać</string>
-    <string name="hillshade_menu_download_descr">Dyrbiš reliefowu kartu tutoho regiona sćahnyć, zo by so relief na karće pokazał.</string>
-    <string name="hillshade_purchase_header">Dyrbiš plugin \"Contour Lines\" kupić a instalować, zo by so relief na karće pokazał</string>
-    <string name="srtm_menu_download_descr">Dyrbiš wysokostne linije za tutón region sćahnyć, zo bychu so wysokostne linije na karće pokazali.</string>
+    <string name="hillshade_menu_download_descr">Sćehń reliefowu kartu tutoho regiona, zo by so relief na karće pokazał.</string>
+    <string name="hillshade_purchase_header">Instaluj plugin \"Contour Lines\", zo by so relief na karće pokazał</string>
+    <string name="srtm_menu_download_descr">Sćehń wysokostne linije za tutón region, zo bychu so wysokostne linije na karće pokazali.</string>
     <string name="shared_string_plugin">Plugin</string>
     <string name="srtm_purchase_header">Dyrbiš plugin \"Contour Lines\" kupić a instalować, zo bychu so wysokostne linije pokazali na karće</string>
     <string name="srtm_color_scheme">Barbny šema</string>
@@ -983,20 +982,20 @@
     <string name="right_side_navigation">Jězdźenje naprawo</string>
     <string name="driving_region_automatic">Awtomatisce</string>
     <string name="parking_options">Opcije parkowanja</string>
-    <string name="full_version_thanks">Dźakujemy so za kup dospołneje wersije OsmAnd!</string>
+    <string name="full_version_thanks">Dźakujemy so za kup dospołneje wersije OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Hórkate</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Mjenje hórkate</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Płone</string>
     <string name="routing_attr_driving_style_speed_name">Krótše čary</string>
     <string name="add_new_folder">Nowy rjadowak dodać</string>
-    <string name="points_delete_multiple_succesful">Dypki su so wuspěšnje wotstronili.</string>
+    <string name="points_delete_multiple_succesful">Dypki su so wotstronili.</string>
     <string name="points_delete_multiple">Chceš wotstronić %1$d dypk(i). Sy sej wěsty/a?</string>
     <string name="gpx_track">Čara</string>
     <string name="max_speed">maks. spěšnosć</string>
     <string name="average_speed">přerěznu spěšnosć</string>
     <string name="shared_string_max">maks.</string>
-    <string name="shared_string_start_time">startowanski čas</string>
-    <string name="shared_string_end_time">kónčny čas</string>
+    <string name="shared_string_start_time">wotjězd</string>
+    <string name="shared_string_end_time">přichad</string>
     <string name="shared_string_color">Barba</string>
     <string name="select_gpx_folder">Rjadowak za čary wubrać</string>
     <string name="file_can_not_be_moved">Dataja njehodźi so přesunyć.</string>
@@ -1018,11 +1017,11 @@
     <string name="rendering_attr_hideWaterPolygons_name">Wodu schować</string>
     <string name="routing_attr_allow_motorway_name">Awtodróhi dowolić</string>
     <string name="routing_attr_allow_motorway_description">Awtodróhi dowolić.</string>
-    <string name="upload_osm_note_description">Móžeš swoju OSM-noticu anonymnje nahrać abo wužić swój profil na OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Móžeš swoju OSM-noticu anonymnje nahrać abo přez swój profil na OpenStreetMap.org.</string>
     <string name="wiki_around">zapiski Wikipedije w bliskosći</string>
     <string name="search_map_hint">Město abo region pytać</string>
     <string name="route_calculation">Wobličenje čary</string>
-    <string name="gpx_no_tracks_title">Hišće nimaš gpx-čary</string>
+    <string name="gpx_no_tracks_title">Hišće žane gpx-čary nimaš</string>
     <string name="gpx_add_track">Gpx-čaru dodać</string>
     <string name="gpx_appearance">Napohlad</string>
     
@@ -1191,7 +1190,7 @@
     <string name="this_year">lětsa</string>
     <string name="move_all_to_history">wšě do archiwa přesunyć</string>
     <string name="sort_by">Sortěrować po</string>
-    <string name="do_not_use_animations">Žane animacije wužiwać</string>
+    <string name="do_not_use_animations">Žane animacije</string>
     <string name="keep_showing_on_map">Dale na karće pokazać</string>
     <string name="exit_without_saving">Bjez składowanja wopušćić?</string>
     <string name="line">Linija</string>
@@ -1271,7 +1270,7 @@
     <string name="use_system_keyboard">Systemowu tastaturu wužiwać</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Lodowe puće a brody wobeńć</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Lodowe puće a brody wobeńć.</string>
-    <string name="add_location_as_first_point_descr">Twoje stejišćo jako prěni dypk zapodać, zo by čaru planował(a).</string>
+    <string name="add_location_as_first_point_descr">Twoje stejišćo jako startowy dypk zapodać, zo by perfektnu čaru planował(a).</string>
     <string name="shared_string_finish">Wotzamknyć</string>
     <string name="plan_route">Čaru planować</string>
     <string name="coordinate_input">Koordinaty zapodać</string>
@@ -1281,7 +1280,7 @@
     <string name="new_filter">Nowy filter</string>
     <string name="osmand_plus_banner_desc">Njewobmjezowane sćehnjenje kartow, aktualizacijow a zapiski Wikipedije.</string>
     <string name="search_my_location">Moje stejišćo namakać</string>
-    <string name="no_update_info">Aktualizacije njepokazać</string>
+    <string name="no_update_info">Nowe wersije njepokazać</string>
     <string name="update_all_maps_now">Chceš nětko aktualizować wšitke karty?</string>
     <string name="replace_favorite_confirmation">Sy sej wěsty/a, zo chceš narunać faworit %1$s?</string>
     <string name="coords_search">Pytanje za koordinatami</string>
@@ -1294,7 +1293,7 @@
     <string name="city_type_neighbourhood">štwórć</string>
     <string name="map_widget_search">Pytać</string>
     <string name="osn_add_dialog_title">Noticu wutworić</string>
-    <string name="osn_add_dialog_success">Notica je so wuspěšnje wutworiła</string>
+    <string name="osn_add_dialog_success">Notica je so wutworiła</string>
     <string name="osn_add_dialog_error">Zmylk je so stał: notica njeje so wutworiła</string>
     <string name="rendering_value_darkyellow_name">ćmowožołte</string>
     <string name="lang_hsb">hornjoserbšćina</string>
@@ -1359,7 +1358,7 @@
     <string name="empty_state_markers_groups_desc">Móžeš faworitowe skupiny abo pućne dypki jako markěrowanja importować.</string>
     <string name="show_number_pad">Ličbny blok pokazać</string>
     <string name="shared_string_paste">Zasadźić</string>
-    <string name="go_to_next_field">K přichodnemu polu hić</string>
+    <string name="go_to_next_field">Přichodne polo</string>
     <string name="tap_on_map_to_hide_interface">połna wobrazowka</string>
     <string name="wrong_input">Wopačne zapodaće</string>
 	<string name="waypoints_added_to_map_markers">Pućne dypki su so přidali ke chorhojčkam</string>
@@ -1395,7 +1394,7 @@
     <string name="location_not_found">Stejišćo njebu namakane</string>
     <string name="no_inet_connection">Žadyn zwisk z internetom</string>
     <string name="no_inet_connection_desc_map">Trěbny za sćehnjenje kartow.</string>
-    <string name="search_location">Pytam stejišćo…</string>
+    <string name="search_location">Pytam za stejišćom…</string>
     <string name="storage_free_space">Swobodny skład</string>
     <string name="give_permission">Dowolić</string>
     <string name="allow_access_location">Přistup k stejišću dowolić</string>
@@ -1437,9 +1436,9 @@
     <string name="shared_string_refresh">Ponowić</string>
     <string name="shared_string_download">Sćahnyć</string>
     <string name="shared_string_downloading">Sćahnu</string>
-    <string name="shared_string_download_successful">Daty wuspěšnje sćehnjene</string>
-    <string name="shared_string_io_error">Zmylk so stał</string>
-    <string name="shared_string_unexpected_error">Njewočakowany zmylk je so stał</string>
+    <string name="shared_string_download_successful">Daty sćehnjene</string>
+    <string name="shared_string_io_error">Zmylk</string>
+    <string name="shared_string_unexpected_error">Njewočakowany zmylk</string>
     <string name="shared_string_action_template">Akcija {0}</string>
     <string name="shared_string_exit">Skónčić</string>
     <string name="shared_string_add_to_favorites">Jako faworit składować</string>

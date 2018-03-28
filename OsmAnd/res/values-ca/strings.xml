@@ -2516,7 +2516,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_reload">Actualitza</string>
     <string name="mapillary_menu_descr_tile_cache">Actualitzeu les tessel·les per veure les dades més recents.</string>
     <string name="mapillary_menu_title_tile_cache">Memòria cau de tessel·les</string>
-    <string name="wrong_user_name">Nom d\'usuari incorrecte!</string>
+    <string name="wrong_user_name">Nom d\'usuari incorrecte</string>
     <string name="shared_string_to">Fins</string>
     <string name="mapillary_menu_date_from">Des de</string>
     <string name="mapillary_menu_descr_dates">Mostra només les imatges afegides</string>
@@ -2527,7 +2527,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="mapillary_menu_filter_description">Podeu filtrar per remitent o per data. El filtres només s\'apliquen en apropar-se.</string>
     <string name="shared_string_reset">Restableix</string>
     <string name="store_tracks_in_monthly_directories">Emmagatzema les traces enregistrades en carpetes mensuals</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Emmagatzema les traces enregistrades en sub-carpetes segons el mes d\'enregistrament (tipus 01-2017).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Emmagatzema les traces enregistrades en sub-carpetes segons el mes d\'enregistrament (tipus 2018-01).</string>
     <string name="average">Mitjana</string>
     <string name="of">%1$d de %2$d</string>
     <string name="ascent_descent">Ascens/Descens</string>
@@ -2536,7 +2536,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     
     
     <string name="min_max">Mín/Màx</string>
-    <string name="quick_action_resume_pause_navigation">Continua/Atura la navegació</string>
+    <string name="quick_action_resume_pause_navigation">Atura/continua la navegació</string>
     <string name="quick_action_resume_pause_navigation_descr">Premeu aquest botó per aturar o reprendre la navegació.</string>
     <string name="quick_action_show_navigation_finish_dialog">Mostra el diàleg de finalització de la navegació</string>
     <string name="quick_action_start_stop_navigation">Inicia/atura la navegació</string>
@@ -2593,7 +2593,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="add_segment_to_the_track">Afegeix a una traça GPX</string>
 <string name="keep_showing_on_map">Continua mostrant al mapa</string>
     <string name="exit_without_saving">Voleu sortir sense desar?</string>
-    <string name="do_not_use_animations">Sense ús d\'animacions</string>
+    <string name="do_not_use_animations">Sense animacions</string>
     <string name="do_not_use_animations_descr">Desactiva les animacions a l\'aplicació.</string>
     <string name="move_all_to_history">Mou tot a l\'historial</string>
     
@@ -2601,7 +2601,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="sort_by">Ordena per</string>
     
     <string name="map_orientation_change_in_accordance_with_speed">Interval d\'orientació del mapa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Indiqueu la velocitat mínima per sota de la que s\'utilitzarà la brúixola interna per determinar l\'orientació del mapa en comptes de la direcció del moviment.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Indiqueu la velocitat mínima per deixar l\'orientació segons la direcció del moviment i seguir la brúixola interna.</string>
     <string name="all_markers_moved_to_history">Tots els marcadors de mapa s\'han mogut a historial</string>
     <string name="marker_moved_to_history">El marcador de mapa s\'ha mogut a historial</string>
     <string name="marker_moved_to_active">El marcador de mapa ara està actiu</string>
@@ -2626,7 +2626,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="show_passed">Mostra ja passat</string>
     <string name="hide_passed">Amaga ja passat</string>
     <string name="use_location">Utilitza la ubicació</string>
-    <string name="add_location_as_first_point_descr">Afegeix la vostra ubicació com el primer punt per planificar la ruta perfecta.</string>
+    <string name="add_location_as_first_point_descr">Afegiu la vostra ubicació com punt inicial per planificar la ruta perfecta.</string>
     <string name="my_location">La vostra posició</string>
     <string name="shared_string_finish">Finalitza</string>
     <string name="shared_string_sort">Ordena</string>
@@ -2636,11 +2636,11 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="marker_save_as_track">Desa com una traça</string>
     <string name="move_to_history">Mou a l\'historial</string>
     <string name="plan_route">Planifica la ruta</string>
-    <string name="group_will_be_removed_after_restart">S\'esborrarà el grup un cop es reiniciï l\'aplicació.</string>
+    <string name="group_will_be_removed_after_restart">S\'esborrarà el grup el proper cop que inicieu l\'aplicació.</string>
     <string name="shared_string_markers">Marcadors</string>
     <string name="coordinates_format">Format de coordenades</string>
     <string name="use_system_keyboard">Utilitza el teclat del sistema</string>
-    <string name="fast_coordinates_input_descr">Trieu el format d\'entrada de coordenades. Sempre podeu canviar-lo dins les opcions.</string>
+    <string name="fast_coordinates_input_descr">Trieu el format d\'entrada de coordenades. Sempre podeu canviar-lo prement \'Opcions\'.</string>
     <string name="fast_coordinates_input">Entrada ràpida de coordenades</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evita les vies amb risc de gel, guals</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evita les vies amb risc de gel i els guals.</string>
@@ -2669,7 +2669,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
 	<string name="shared_string_back">Enrere</string>
 	<string name="view">Visualització</string>
 	<string name="waypoints_added_to_map_markers">Fites afegides als marcadors</string>
-	<string name="import_gpx_file_description">es poden importar individualment com Preferits o junts com una traça.</string>
+	<string name="import_gpx_file_description">es poden importar com Preferits o com una traça.</string>
     <string name="import_as_gpx">Importa com un arxiu GPX</string>
     <string name="import_as_favorites">Importa com punts Preferits</string>
     <string name="import_file">Importa fitxer</string>
@@ -2684,17 +2684,17 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_paste">Enganxa</string>
     <string name="coordinate_input_accuracy_description">Canvia automàticament al següent camp després d\'introduir %1$d dígits decimals.</string>
     <string name="coordinate_input_accuracy">%1$d dígits</string>
-    <string name="go_to_next_field">Vés al camp següent</string>
+    <string name="go_to_next_field">Camp següent</string>
     <string name="rename_marker">Reanomena el marcador</string>
     <string name="appearance_on_the_map">Aparença al mapa</string>
-    <string name="add_track_to_markers_descr">Seleccioneu una traça per afegir les seves fites als marcadors. (Només es llisten les traces amb fites).</string>
+    <string name="add_track_to_markers_descr">Les fites es poden desar com marcadors si seleccioneu alguna de les traces que les continguin.</string>
     <string name="add_favourites_group_to_markers_descr">Seleccioneu una categoria preferida per afegir-la als marcadors.</string>
     <string name="track_waypoints">Fites de la traça</string>
     <string name="favourites_group">Categoria de preferits</string>
     <string name="add_group">Afegeix un grup</string>
     <string name="add_group_descr">Podeu importar grups des de preferits o des de fites d\'una traça.</string>
     <string name="empty_state_markers_active">Creeu marcadors de mapa!</string>
-    <string name="empty_state_markers_active_desc">Premeu més o menys temps sobre els llocs i després el botó tipus bandera del marcador.</string>
+    <string name="empty_state_markers_active_desc">Premeu molt o poc temps a \'Llocs\' i després el botó seleccionador.</string>
     <string name="empty_state_markers_groups">Importa grups</string>
     <string name="empty_state_markers_groups_desc">Podeu importar com marcadors a grups de preferits o a fites de la traça.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
@@ -2791,10 +2791,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n• Durada del senderisme considerant el perfil del terreny (ascens) (estimació Naismith)
 \n
 \n"</string>
-    <string name="make_as_start_point">Converteix-lo a Punt inicial</string>
+    <string name="make_as_start_point">Agafa aquest com a punt inicial</string>
     <string name="rendering_attr_whiteWaterSports_name">Esports d\'aigües braves</string>
-    <string name="distance_farthest">Distància: el més llunyà primer</string>
-    <string name="distance_nearest">Distància: el més proper primer</string>
+    <string name="distance_farthest">Distància: Primer el més llunyà</string>
+    <string name="distance_nearest">Distància: Primer el més proper</string>
     <string name="enter_lon">Introduïu la longitud</string>
     <string name="enter_lat">Introduïu la latitud</string>
     <string name="enter_lat_and_lon">Introduïu la latitud i la longitud</string>
@@ -2812,9 +2812,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="transport_nearby_routes">A PROP</string>
     <string name="enter_the_file_name">Introduïu el nom del fitxer.</string>
     <string name="map_import_error">Error d\'importació del mapa</string>
-    <string name="map_imported_successfully">Mapa importat correctament</string>
+    <string name="map_imported_successfully">S\'ha importat el mapa</string>
     <string name="clear_all_intermediates">Esborra tots els punts intermedis</string>
     <string name="group_deleted">S\'ha esborrat el grup</string>
     <string name="select_waypoints_category_description">Podeu agrupar les fites de totes les traces, o seleccionar categories concretes.</string>
     <string name="shared_string_total">Total</string>
+    <string name="nothing_found_in_radius">No s\'ha trobat res dins el radi:</string>
     </resources>

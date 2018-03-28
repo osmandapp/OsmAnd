@@ -1608,7 +1608,7 @@
     <string name="poi_error_io_error_template">I/O-feil under utførelse av handlingen {0}.</string>
     <string name="user_hates_app_get_feedback">Fortell oss hvorfor.</string>
     <string name="failed_to_upload">Klarte ikke å laste opp</string>
-    <string name="buy">KJØP</string>
+    <string name="buy">Kjøp</string>
     <string name="faq_item">Ofte stilte spørsmål</string>
     <string name="number_of_edits">Antall endringer</string>
     <string name="number_of_contributors">Antall bidragsytere</string>
@@ -1789,7 +1789,7 @@
     <string name="si_mi_meters">Engelske mil/meter</string>
     <string name="give_permission">Gi tillatelse</string>
     <string name="allow_access_location">Tillat adgang til sted</string>
-    <string name="no_update_info_desc">Ikke se etter oppdateringer om nye versjoner eller rabatter relatert til OsmAnd.</string>
+    <string name="no_update_info_desc">Ikke se etter nye versjoner eller rabatter relatert til OsmAnd.</string>
     <string name="shared_string_change">Endre</string>
     <string name="access_disable_offroute_recalc">Ingen ny beregning etter å ha forlatt ruten</string>
     <string name="access_disable_wrong_direction_recalc">Ingen ny ruteberegning ved motsatt retning</string>
@@ -1815,7 +1815,7 @@
     <string name="shared_string_selected">Valgt</string>
     <string name="shared_string_selected_lowercase">valgt(e)</string>
     <string name="remove_the_tag">FJERN MERKELAPPEN</string>
-    <string name="version_settings_descr">Last ned utviklerversjoner</string>
+    <string name="version_settings_descr">Last ned nattlige utviklerversjoner.</string>
     <string name="version_settings">Byggversjoner</string>
     <string name="proxy_pref_descr">Spesifiser en mellomtjener.</string>
     <string name="logged_as">Innlogget som %1$s</string>
@@ -2046,7 +2046,7 @@
     <string name="av_widget_action">Standard miniprogram-handling</string>
     <string name="av_video_format_descr">Velg videoformat.</string>
     <string name="av_video_format">Videoformat</string>
-    <string name="av_use_external_recorder_descr">Bruk systemopptaker for video</string>
+    <string name="av_use_external_recorder_descr">Bruk systemopptaker for video.</string>
     <string name="av_use_external_recorder">Bruk systemopptaker</string>
     <string name="av_use_external_camera_descr">Bruk systemprogrammet til foto.</string>
     <string name="av_use_external_camera">Bruk kameraprogram</string>
@@ -2128,7 +2128,7 @@
     <string name="osmand_parking_time_limit">Tidsbegrenset parkering</string>
     <string name="osmand_parking_time_no_limit">Fri parkering</string>
     <string name="osmand_parking_position_description">Hvor du har parkert. %1$s</string>
-    <string name="osmand_parking_position_description_add">Hvor bilen skal hentes fra:</string>
+    <string name="osmand_parking_position_description_add">Avhent kjøretøy:</string>
     <string name="osmand_parking_position_name">Parkeringsplass</string>
     <string name="context_menu_item_add_parking_point">Marker som parkeringsplass</string>
     <string name="route_roundabout">Rundkjøring: Ta avkjøring %1$d og fortsett</string>
@@ -2345,7 +2345,7 @@
     <string name="restore_purchases">Gjenopprett kjøp</string>
     <string name="do_not_send_anonymous_app_usage">Ikke send anonym bruksstatistikk</string>
     <string name="parking_options">Parkeringsalternativer</string>
-    <string name="full_version_thanks">Takk for at du kjøpte fullversjonen av OsmAnd!</string>
+    <string name="full_version_thanks">Takk for at du kjøpte den betalte versjonen av OsmAnd.</string>
     <string name="routing_attr_driving_style_speed_name">Kortere ruter</string>
     <string name="routing_attr_driving_style_balance_name">Balansert</string>
     <string name="track_points_category_name">Fremtredende punkter på denne ruten</string>
@@ -2438,12 +2438,12 @@
     <string name="osmand_parking_am">AM</string>
     <string name="play_commands_of_currently_selected_voice">Velg en stemme og test ved å avspille talemeldinger</string>
     <string name="test_voice_prompts">Test talemeldinger</string>
-    <string name="validate_gpx_upload_name_pwd">Angi OSM-brukernavn og passord for å laste opp GPX-filer.</string>
-    <string name="support_new_features_descr">Doner for å se nye funksjoner implementert i programmet</string>
+    <string name="validate_gpx_upload_name_pwd">Angi ditt OSM-brukernavn og passord for å laste opp GPX-filer.</string>
+    <string name="support_new_features_descr">Doner for å se nye funksjoner implementert i programmet.</string>
     <string name="local_openstreetmap_uploadall">Last opp alle</string>
     <string name="local_openstreetmap_upload">Last opp modifisering til OSM</string>
     <string name="local_openstreetmap_descr_title">Asynkron OSM-redigering:</string>
-    <string name="live_monitoring_interval_descr">Oppgi nettbasert sporingsintervall</string>
+    <string name="live_monitoring_interval_descr">Oppgi den nettbaserte sporingsintervallen.</string>
     <string name="live_monitoring_interval">Nettbasert sporingsintervall</string>
     <string name="live_monitoring_url">Nettadresse for nettbasert sporing</string>
     <string name="live_monitoring_max_interval_to_send">Tidsbuffer for nettbasert sporing</string>
@@ -2451,7 +2451,7 @@
     <string name="shared_string_others">Andre</string>
     <string name="trace_rendering">Opptegningfeilsøkingsinfo</string>
     <string name="trace_rendering_descr">Vis opptegningsytelsen.</string>
-    <string name="tts_missing_language_data">Ingen data for valgt språk installert. Vil du gå til markedet for å installere det?</string>
+    <string name="tts_missing_language_data">Vil du gå til markedet for å laste ned valgt språk?</string>
     <string name="gpx_option_reverse_route">Snu GPX-retning</string>
     <string name="gpx_option_from_start_point">Passer langs hele sporet</string>
     <string name="warning_tile_layer_not_downloadable">Programmet kan ikke laste ned kartlaget %1$s, prøv å installere det på nytt.</string>
@@ -2462,7 +2462,7 @@
     <string name="select_build_to_install">Velg en OsmAnd-byggversjon å installere</string>
     <string name="gps_status_app_not_found">GPS-statusprogram er ikke installert. Søke i marked?</string>
     <string name="continuous_rendering">Kontinuerlig opptegning</string>
-    <string name="continuous_rendering_descr">Vis kontinuerlig opptegning istedenfor hele bildet på én gang</string>
+    <string name="continuous_rendering_descr">Vis kontinuerlig opptegning istedenfor hele bildet på én gang.</string>
     <string name="rendering_exception">Feil oppstod under opptegning av valgt område</string>
     <string name="renderer_load_sucess">Kartgenerator lastet</string>
     <string name="error_reading_gpx">Feil ved lesing av GPX-data</string>
@@ -2612,11 +2612,11 @@
     <string name="download_files_error_not_enough_space">Ikke nok plass! Lagringsplass som trengs er {3} MB midlertidig, {1} MB permanent. Tilgjengelig plass er kun {2} MB.</string>
     <string name="download_files_question_space_with_temp">Laste ned {0} fil(er)? Brukt lagringsplass er {3} MB midlertidig, {1} MB permanent. ({2} MB plass tilgjengelig.)</string>
     <string name="simulate_initial_startup_descr">Setter flagget som indikerer første programoppstart, alle andre innstillinger forblir uendret.</string>
-    <string name="local_osm_changes_backup_successful">OSM-endringsfil opprettet uten problem %1$s</string>
+    <string name="local_osm_changes_backup_successful">OSM-endringsfil opprettet %1$s</string>
     <string name="dropbox_plugin_description">Dropbox-tillegget lar deg synkronisere spor og lyd/video-notater med din Dropbox-konto.</string>
     <string name="local_openstreetmap_were_uploaded">{0} interessepunkter/notater opplastet</string>
     <string name="local_openstreetmap_settings">Lokalt lagrede OSM-interessepunkter/notater</string>
-    <string name="local_openstreetmap_settings_descr">Vis og behandle OSM-interessepunkter/notater i lokal database.</string>
+    <string name="local_openstreetmap_settings_descr">Vis og behandle OSM-interessepunkter/notater i databasen på enheten.</string>
     <string name="gpx_monitoring_disabled_warn">Logg spor ved bruk av GPX-miniprogram eller via \"Turopptak\"-innstillinger.</string>
     <string name="native_library_not_supported">Innebygd bibliotek støttes ikke på denne enheten.</string>
     <string name="init_native_library">Igangsetter innebygget bibliotek…</string>
@@ -2637,7 +2637,7 @@
     <string name="opening_changeset">Åpner endringssett…</string>
     <string name="closing_changeset">Lukker endringssett…</string>
     <string name="downloading_number_of_files">Laster ned - %1$d fil</string>
-    <string name="activate_seamarks_plugin">Aktiver sjømerketillegget</string>
+    <string name="activate_seamarks_plugin">Aktiver \"sjømerke\"-tillegget</string>
     <string name="save_poi_too_many_uppercase">Navnet inneholder for mange store bokstaver. Vil du fortsette?</string>
     <string name="quick_action_add_poi">Legg til interessepunkt</string>
     <string name="quick_action_showhide_poi_descr">Trykk på handlingsknappen vil vise eller skjule interessepunkter på kartet.</string>
@@ -2648,7 +2648,7 @@
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="depth_contour_descr">Kart for havdybdekoter og nautiske punkter.</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samler inn informasjon om hvilke deler av programmet du åpner. Plasseringen din blir aldri sendt, ei heller noe du måtte skrive inn i programmet eller detaljer om områder som vises, søkes etter, eller lastes ned.</string>
-    <string name="do_not_show_startup_messages_desc">Skrur av visning av programrabatter og spesielle lokale hendelsesmeldinger.</string>
+    <string name="do_not_show_startup_messages_desc">Ikke vis programrabatter og spesielle lokale hendelsesmeldinger.</string>
     <string name="routing_attr_driving_style_safety_name">Foretrekk sideveier</string>
     <string name="osm_live_header">Dette abonnementet gir oppdateringer hver time av alle kart over hele verden. Deler av inntekten går tilbake til OSM-fellesskapet og utbetales for hvert OSM-bidrag. Hvis du liker OsmAnd og OSM og vil støtte og bli hjulpet av dem, er dette den perfekte måten å gjøre det på.</string>
     <string name="m_s">m/s</string>
