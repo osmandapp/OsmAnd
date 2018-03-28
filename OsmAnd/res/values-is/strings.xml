@@ -2798,4 +2798,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="select_waypoints_category_description">Þú getur bætt við öllum punktum ferilsins, eða valið aðskilda flokka.</string>
     <string name="shared_string_total">Alls</string>
     <string name="nothing_found_in_radius">Ekkert fannst innan radíusins:</string>
+    <string name="waypoints_removed_from_map_markers">Punktar fjarlægðir úr kortamerkjum</string>
     </resources>
