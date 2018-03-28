@@ -75,13 +75,15 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 			@Override
 			public void afterTextChanged(Editable s) {
 				String newQuery = s.toString();
-				if (newQuery.isEmpty()) {
-					searchHelper.cancelSearch();
-					switchProgressBarVisibility(false);
-					adapter.setItems(null);
-				} else if (!searchQuery.equalsIgnoreCase(newQuery)) {
+				if (!searchQuery.equalsIgnoreCase(newQuery)) {
 					searchQuery = newQuery;
-					searchHelper.search(searchQuery);
+					if (searchQuery.isEmpty()) {
+						searchHelper.cancelSearch();
+						switchProgressBarVisibility(false);
+						adapter.setItems(null);
+					} else {
+						searchHelper.search(searchQuery);
+					}
 				}
 			}
 		});
