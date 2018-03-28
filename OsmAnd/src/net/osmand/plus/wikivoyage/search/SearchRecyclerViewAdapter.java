@@ -6,16 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import net.osmand.plus.R;
-import net.osmand.plus.wikivoyage.data.SearchResult;
+import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecyclerViewAdapter.ViewHolder> {
 
-	private List<SearchResult> items = new ArrayList<>();
+	private List<WikivoyageSearchResult> items = new ArrayList<>();
 
 	private View.OnClickListener onItemClickListener;
 
@@ -33,7 +33,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 
 	@Override
 	public void onBindViewHolder(ViewHolder viewHolder, int i) {
-		SearchResult item = items.get(i);
+		WikivoyageSearchResult item = items.get(i);
 		// FIXME
 		viewHolder.searchTerm.setText(item.getSearchTerm().toString());
 		viewHolder.cityId.setText(String.valueOf(item.getCityId()));
@@ -46,15 +46,15 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 		return items.size();
 	}
 
-	public SearchResult getItem(int pos) {
+	public WikivoyageSearchResult getItem(int pos) {
 		return items.get(pos);
 	}
 
-	public void setItems(@Nullable List<SearchResult> items) {
+	public void setItems(@Nullable Collection<WikivoyageSearchResult> items) {
 		if (items == null) {
 			this.items.clear();
 		} else {
-			this.items = items;
+			this.items = new ArrayList<>(items);
 		}
 		notifyDataSetChanged();
 	}

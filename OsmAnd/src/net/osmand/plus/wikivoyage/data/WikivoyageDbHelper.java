@@ -2,17 +2,19 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class WikivoyageDbHelper {
 
@@ -65,13 +67,13 @@ public class WikivoyageDbHelper {
 	}
 
 	@NonNull
-	public List<SearchResult> search(String searchQuery) {
-		List<SearchResult> res = new ArrayList<>();
+	public Collection<WikivoyageSearchResult> search(String searchQuery) {
+		List<WikivoyageSearchResult> res = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			try {
 				String dbQuery = SEARCH_TABLE_SELECT + " WHERE " + SEARCH_COL_SEARCH_TERM + " LIKE ?";
-				SQLiteCursor cursor = conn.rawQuery(dbQuery, new String[]{"%" + searchQuery + "%"});
+				SQLiteCursor cursor = conn.rawQuery(dbQuery, new String[] { searchQuery + "%" });
 				if (cursor.moveToFirst()) {
 					do {
 						res.add(readSearchResult(cursor));
@@ -82,7 +84,34 @@ public class WikivoyageDbHelper {
 				conn.close();
 			}
 		}
-		return res;
+		return groupSearchResultsByCityId(res);
+	}
+
+	private Collection<WikivoyageSearchResult> groupSearchResultsByCityId(List<WikivoyageSearchResult> res) {
+		String baseLng = application.getLanguage();
+		TLongObjectHashMap<WikivoyageSearchResult> wikivoyage = new TLongObjectHashMap<WikivoyageSearchResult>();
+		for(WikivoyageSearchResult rs: res) {
+			WikivoyageSearchResult prev = wikivoyage.get(rs.cityId);
+			if(prev != null) {
+				int insInd = prev.langs.size();
+				if(rs.getLang().get(0).equals(baseLng)) {
+					insInd = 0;
+				} else if(rs.getLang().get(0).equals("en")) {
+					if(!prev.getLang().get(0).equals(baseLng)) {
+						insInd = 0;
+					} else {
+						insInd = 1;
+					}
+				}
+				prev.articleTitle.add(insInd, rs.articleTitle.get(0));
+				prev.langs.add(insInd, rs.langs.get(0));
+				prev.searchTerm.add(insInd, rs.searchTerm.get(0));
+			} else {
+				wikivoyage.put(rs.cityId, rs);
+			}
+		}
+		return wikivoyage.valueCollection();
+		
 	}
 
 	@Nullable
@@ -113,8 +142,8 @@ public class WikivoyageDbHelper {
 	}
 
 	@NonNull
-	private SearchResult readSearchResult(SQLiteCursor cursor) {
-		SearchResult res = new SearchResult();
+	private WikivoyageSearchResult readSearchResult(SQLiteCursor cursor) {
+		WikivoyageSearchResult res = new WikivoyageSearchResult();
 
 		res.searchTerm.add(cursor.getString(0));
 		res.cityId = cursor.getLong(1);

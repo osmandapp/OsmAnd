@@ -3,7 +3,7 @@ package net.osmand.plus.wikivoyage.data;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchResult {
+public class WikivoyageSearchResult {
 
 	List<String> searchTerm = new ArrayList<>();
 	long cityId;
