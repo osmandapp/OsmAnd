@@ -162,9 +162,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			listView.addFooterView(footerView);
 		}
 		View emptyView = view.findViewById(android.R.id.empty);
-		if (Build.VERSION.SDK_INT >= 18) {
-			ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
+		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
+		if (Build.VERSION.SDK_INT >= 28) {
 			emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_favorites_day : R.drawable.ic_empty_state_favorites_night);
+		} else {
+			emptyImageView.setVisibility(View.GONE);
 		}
 		Button importButton = (Button) emptyView.findViewById(R.id.import_button);
 		importButton.setOnClickListener(new View.OnClickListener() {

@@ -96,16 +96,19 @@ public class NotesFragment extends OsmAndListFragment {
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
+		ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
+		emptyStub.setLayoutResource(R.layout.empty_state_av_notes);
+		emptyView = emptyStub.inflate();
+		emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
+				.isLightContent() ? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
+		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 
 		if (Build.VERSION.SDK_INT >= 18) {
-			ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
-			emptyStub.setLayoutResource(R.layout.empty_state_av_notes);
-			emptyView = emptyStub.inflate();
 			int icRes = getMyApplication().getSettings().isLightContent()
 					? R.drawable.ic_empty_state_av_notes_day : R.drawable.ic_empty_state_av_notes_night;
-			((ImageView) emptyView.findViewById(R.id.empty_state_image_view)).setImageResource(icRes);
-			emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
-					.isLightContent() ? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
+			emptyImageView.setImageResource(icRes);
+		} else {
+			emptyImageView.setVisibility(View.GONE);
 		}
 		return view;
 	}

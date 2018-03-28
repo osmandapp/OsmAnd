@@ -304,9 +304,11 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				openAddGroupMenu();
 			}
 		});
+		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 		if (Build.VERSION.SDK_INT >= 18) {
-			ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 			emptyImageView.setImageResource(night ? R.drawable.ic_empty_state_marker_group_night : R.drawable.ic_empty_state_marker_group_day);
+		} else {
+			emptyImageView.setVisibility(View.GONE);
 		}
 		recyclerView.setEmptyView(emptyView);
 		recyclerView.setAdapter(adapter);

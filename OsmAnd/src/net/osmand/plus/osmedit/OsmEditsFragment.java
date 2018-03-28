@@ -141,14 +141,16 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
 		emptyStub.setLayoutResource(R.layout.empty_state_osm_edits);
 		emptyView = emptyStub.inflate();
+		emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
+				.isLightContent() ? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
+		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
 		if (Build.VERSION.SDK_INT >= 18) {
 			int icRes = getMyApplication().getSettings().isLightContent()
 					? R.drawable.ic_empty_state_osm_edits_day : R.drawable.ic_empty_state_osm_edits_night;
-			((ImageView) emptyView.findViewById(R.id.empty_state_image_view)).setImageResource(icRes);
+			emptyImageView.setImageResource(icRes);
+		} else {
+			emptyImageView.setVisibility(View.GONE);
 		}
-		emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
-				.isLightContent() ? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
-
 		FragmentManager fm = getChildFragmentManager();
 		Fragment optionsFragment = fm.findFragmentByTag(OsmEditOptionsBottomSheetDialogFragment.TAG);
 		if (optionsFragment != null) {

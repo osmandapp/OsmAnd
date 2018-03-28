@@ -126,9 +126,11 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		});
 
 		final View emptyView = mainView.findViewById(R.id.empty_view);
+		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 		if (Build.VERSION.SDK_INT >= 18) {
-			ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 			emptyImageView.setImageResource(mapActivity.getMyApplication().getSettings().isLightContent() ? R.drawable.ic_empty_state_marker_list_day : R.drawable.ic_empty_state_marker_list_night);
+		} else {
+			emptyImageView.setVisibility(View.GONE);
 		}
 		recyclerView.setEmptyView(emptyView);
 		recyclerView.setAdapter(adapter);

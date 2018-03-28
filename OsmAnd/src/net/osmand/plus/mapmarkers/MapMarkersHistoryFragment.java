@@ -203,9 +203,11 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 			}
 		});
 		final View emptyView = mainView.findViewById(R.id.empty_view);
+		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 		if (Build.VERSION.SDK_INT >= 18) {
-			ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 			emptyImageView.setImageResource(night ? R.drawable.ic_empty_state_marker_history_night : R.drawable.ic_empty_state_marker_history_day);
+		} else {
+			emptyImageView.setVisibility(View.GONE);
 		}
 		recyclerView.setEmptyView(emptyView);
 		recyclerView.setAdapter(adapter);
