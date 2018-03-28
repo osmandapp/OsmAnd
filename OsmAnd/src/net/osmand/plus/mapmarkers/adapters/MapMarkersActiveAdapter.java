@@ -18,6 +18,7 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.util.Algorithms;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -160,7 +161,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 			String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
 			descr = month + " " + day;
 		}
-		if (marker.wptPt != null && marker.wptPt.category != null) {
+		if (marker.wptPt != null && !Algorithms.isEmpty(marker.wptPt.category)) {
 			descr = marker.wptPt.category + ", " + descr;
 		}
 		holder.description.setText(descr);
