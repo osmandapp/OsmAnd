@@ -34,9 +34,10 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 	@Override
 	public void onBindViewHolder(ViewHolder viewHolder, int i) {
 		SearchResult item = items.get(i);
-		viewHolder.searchTerm.setText(item.getSearchTerm());
+		// FIXME
+		viewHolder.searchTerm.setText(item.getSearchTerm().toString());
 		viewHolder.cityId.setText(String.valueOf(item.getCityId()));
-		viewHolder.articleTitle.setText(item.getArticleTitle());
+		viewHolder.articleTitle.setText(item.getArticleTitle().toString());
 		viewHolder.lang.setText(item.getLang().toString());
 	}
 

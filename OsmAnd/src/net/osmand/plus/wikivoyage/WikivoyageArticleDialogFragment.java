@@ -42,7 +42,8 @@ public class WikivoyageArticleDialogFragment extends BaseOsmAndDialogFragment {
 		});
 
 		TextView contentTv = (TextView) mainView.findViewById(R.id.content_text_view);
-		WikivoyageArticle article = getMyApplication().getWikivoyageDbHelper().getArticle(searchResult);
+		WikivoyageArticle article = getMyApplication().getWikivoyageDbHelper().getArticle(searchResult.getCityId(), 
+				searchResult.getLang().get(0));
 		contentTv.setText(new SpannableString(Html.fromHtml(article.getContent())));
 
 		return mainView;
