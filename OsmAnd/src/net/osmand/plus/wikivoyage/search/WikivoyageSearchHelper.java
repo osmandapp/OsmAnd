@@ -13,7 +13,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class WikivoyageSearchCore {
+public class WikivoyageSearchHelper {
 
 	private static final int TIMEOUT_BETWEEN_CHARS = 700;
 	private static final int SLEEP_TIME = 50;
@@ -26,7 +26,7 @@ public class WikivoyageSearchCore {
 	private OsmandApplication application;
 	private Set<SearchListener> listeners = new HashSet<>();
 
-	WikivoyageSearchCore(OsmandApplication application) {
+	WikivoyageSearchHelper(OsmandApplication application) {
 		this.application = application;
 	}
 

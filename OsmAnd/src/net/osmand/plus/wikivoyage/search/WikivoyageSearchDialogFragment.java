@@ -21,14 +21,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.SearchResult;
+import net.osmand.plus.wikivoyage.search.WikivoyageSearchHelper.SearchListener;
 
 import java.util.List;
 
-public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment implements WikivoyageSearchCore.SearchListener {
+public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment implements SearchListener {
 
 	public static final String TAG = "WikivoyageSearchDialogFragment";
 
-	private WikivoyageSearchCore searchCore;
+	private WikivoyageSearchHelper searchHelper;
 	private String searchQuery = "";
 
 	private SearchRecyclerViewAdapter adapter;
@@ -41,7 +42,7 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
-		searchCore = new WikivoyageSearchCore(app);
+		searchHelper = new WikivoyageSearchHelper(app);
 		final boolean nightMode = !app.getSettings().isLightContent();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
@@ -75,12 +76,12 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 			public void afterTextChanged(Editable s) {
 				String newQuery = s.toString();
 				if (newQuery.isEmpty()) {
-					searchCore.cancelSearch();
+					searchHelper.cancelSearch();
 					switchProgressBarVisibility(false);
 					adapter.setItems(null);
 				} else if (!searchQuery.equalsIgnoreCase(newQuery)) {
 					searchQuery = newQuery;
-					searchCore.search(searchQuery);
+					searchHelper.search(searchQuery);
 				}
 			}
 		});
@@ -116,8 +117,8 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (searchCore != null) {
-			searchCore.registerListener(this);
+		if (searchHelper != null) {
+			searchHelper.registerListener(this);
 		}
 		searchEt.requestFocus();
 	}
@@ -125,9 +126,9 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (searchCore != null) {
-			searchCore.unregisterListener(this);
-			searchCore.cancelSearch();
+		if (searchHelper != null) {
+			searchHelper.unregisterListener(this);
+			searchHelper.cancelSearch();
 		}
 	}
 
