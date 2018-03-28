@@ -69,6 +69,7 @@
                 android:orientation="vertical">
 
                 <FrameLayout
+                    android:id="@+id/action_bar_image_container"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/action_bar_image_height"
                     android:background="?attr/actionModeBackground">
