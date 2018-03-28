@@ -376,7 +376,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 	private void selectMapMarkers() {
 		if (getGpxDataItem() != null) {
-			addMapMarkersSyncGroup();
+			addOrRemoveMapMarkersSyncGroup();
 		}
 	}
 
@@ -583,7 +583,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private void addMapMarkersSyncGroup() {
+	private void addOrRemoveMapMarkersSyncGroup() {
 		final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		final MapMarkersGroup markersGr = markersHelper.getOrCreateGroup(getGpxDataItem().getFile());
 		final boolean synced = markersHelper.isGroupSynced(markersGr.getId());
@@ -600,9 +600,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		hideTransparentOverlay();
 		closeMenu();
 		updateMenuFabVisibility(false);
-		Snackbar snackbar = Snackbar.make(mainView, getResources().getString(synced?R.string.waypoints_removed_from_map_markers:R.string.waypoints_added_to_map_markers),
+		Snackbar snackbar = Snackbar.make(mainView, synced ? R.string.waypoints_removed_from_map_markers : R.string.waypoints_added_to_map_markers,
 				Snackbar.LENGTH_LONG)
-				.setAction(synced?getResources().getString(R.string.shared_string_undo):getResources().getString(R.string.view), new View.OnClickListener() {
+				.setAction(synced ? R.string.shared_string_undo : R.string.view, new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						if (synced) {
