@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
+import net.osmand.plus.wikivoyage.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.WikivoyageDbHelper;
 
 public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment {
@@ -76,7 +76,7 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment {
 			public void onClick(View v) {
 				int pos = rv.getChildAdapterPosition(v);
 				if (pos != RecyclerView.NO_POSITION) {
-					WikivoyageArticle article = dbHelper.getArticle(adapter.getItem(pos));
+					WikivoyageArticleDialogFragment.showInstance(getFragmentManager(), adapter.getItem(pos));
 				}
 			}
 		});

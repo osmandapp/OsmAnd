@@ -7,8 +7,10 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -129,7 +131,11 @@ public class WikivoyageDbHelper {
 
 		res.id = cursor.getString(0);
 		res.title = cursor.getString(1);
-		byte[] contentBlob = cursor.getBlob(2);
+		try {
+			res.content = Algorithms.gzipToString(cursor.getBlob(2));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		res.isPartOf = cursor.getString(3);
 		res.lat = cursor.getDouble(4);
 		res.lon = cursor.getDouble(5);
