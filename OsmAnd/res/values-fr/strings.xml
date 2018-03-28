@@ -2613,7 +2613,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="parking_options">Choix de stationnement</string>
     <string name="do_not_send_anonymous_app_usage">N\'envoyer aucune information d\'usage sur les applications (même anonymes)</string>
     <string name="do_not_show_startup_messages">N\'afficher aucun message au démarrage</string>
-    <string name="do_not_show_startup_messages_desc">Retire les messages promotionnels et les annonces locales</string>
+    <string name="do_not_show_startup_messages_desc">Ne pas afficher les messages promotionnels et les annonces locales</string>
     <string name="right_side_navigation">Conduite à droite</string>
     <string name="driving_region_automatic">Automatique</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collecte des informations sur les écrans affichés lors de l\'utilisation de l\'application. Votre position n\'est jamais collectée, ni aucune des données saisies par l\'utilisateur dans l\'application comme les zones affichées, les recherches ou les téléchargements réalisés.</string>
@@ -2635,7 +2635,7 @@ représentant la zone : %1$s x %2$s</string>
 \n • Afrique : ** (2) 
 \n • Antarctique : * (1) 
 \n La grande majorité des pays sont couverts de l\'Afghanistan au Zimbabwe, téléchargez les cartes dont vous avez besoin !</string>
-    <string name="fonts_header">Polices pour les textes de la carte</string>
+    <string name="fonts_header">Polices de caractères sur la carte</string>
     <string name="osmand_plus_extended_description_part5">Fonctions liées à la sécurité
 \n • Bascule automatique en mode jour / nuit (option)
 \n • Affichage des limitations de vitesse avec rappels en cas de dépassement (option)
@@ -3109,4 +3109,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_total">Total</string>
     <string name="nothing_found_in_radius">Rien n\'a été trouvé dans le rayon :</string>
     <string name="waypoints_removed_from_map_markers">Étape retirée des marques</string>
+    <string name="shared_string_travel">Voyage</string>
     </resources>
