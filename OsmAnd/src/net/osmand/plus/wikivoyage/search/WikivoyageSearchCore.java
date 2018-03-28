@@ -55,7 +55,7 @@ public class WikivoyageSearchCore {
 
 		void onSearchStarted();
 
-		void onSearchFinished(@Nullable List<SearchResult> results, boolean lastTask, boolean cancelled);
+		void onSearchFinished(@Nullable List<SearchResult> results, boolean lastTask);
 	}
 
 	private class SearchAsyncTask extends AsyncTask<Void, Void, List<SearchResult>> {
@@ -94,9 +94,8 @@ public class WikivoyageSearchCore {
 		@Override
 		protected void onPostExecute(List<SearchResult> results) {
 			super.onPostExecute(results);
-			boolean cancelled = isCancelled();
 			for (SearchListener listener : listeners) {
-				listener.onSearchFinished(results, workQueue.isEmpty(), cancelled);
+				listener.onSearchFinished(results, workQueue.isEmpty());
 			}
 		}
 	}

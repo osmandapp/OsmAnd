@@ -76,6 +76,7 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 				String newQuery = s.toString();
 				if (newQuery.isEmpty()) {
 					searchCore.cancelSearch();
+					switchProgressBarVisibility(false);
 					adapter.setItems(null);
 				} else if (!searchQuery.equalsIgnoreCase(newQuery)) {
 					searchQuery = newQuery;
@@ -118,6 +119,7 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 		if (searchCore != null) {
 			searchCore.registerListener(this);
 		}
+		searchEt.requestFocus();
 	}
 
 	@Override
@@ -135,10 +137,8 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 	}
 
 	@Override
-	public void onSearchFinished(@Nullable List<SearchResult> results, boolean lastTask, boolean cancelled) {
-		if (!cancelled) {
-			adapter.setItems(results);
-		}
+	public void onSearchFinished(@Nullable List<SearchResult> results, boolean lastTask) {
+		adapter.setItems(results);
 		if (lastTask) {
 			switchProgressBarVisibility(false);
 		}
