@@ -2481,7 +2481,7 @@
     <string name="navigate_point_olc_info_invalid">無效的 OLC
 </string>
     <string name="quick_action_navigation_voice_descr">輕點動作按鈕將會停用或啟用導航期間的語音導引。</string>
-    <string name="quick_action_add_parking_descr">輕點動作按鈕將會在螢幕中心的位置增加一個停車場所。</string>
+    <string name="quick_action_add_parking_descr">輕點動作按鈕將會在螢幕中間增加一個停車位置。</string>
     <string name="quick_action_duplicates">指定的快速動作名稱已在使用中，已更改為 %1$s 以避免重複。</string>
     <string name="quick_action_duplicate">快速動作的名稱重複</string>
     <string name="quick_action_showhide_favorites_descr">輕點動作按鈕將會在地圖上顯示或隱藏我的收藏標點。</string>
@@ -2974,4 +2974,6 @@
     <string name="select_waypoints_category_description">您可以增加所有軌跡的航點，或選擇個別的類別。</string>
     <string name="shared_string_total">總計</string>
     <string name="nothing_found_in_radius">在半徑內沒找到任何東西：</string>
+    <string name="shared_string_travel">旅行</string>
+    <string name="waypoints_removed_from_map_markers">已從地圖標記移除航點</string>
     </resources>
