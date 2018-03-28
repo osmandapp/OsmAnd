@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Carriles</string>
@@ -1623,7 +1624,7 @@ Lon %2$s</string>
     <string name="shared_string_manage">Gestionar</string>
     <string name="shared_string_edit">Editar</string>
     <string name="shared_string_places">Lugares</string>
-    <string name="shared_string_search">Buscar cerca</string>
+    <string name="shared_string_search">Buscar</string>
     <string name="filter_poi_hint">Filtrar por nombre</string>
     <string name="search_poi_category_hint">Escribe para buscar en todos</string>
     <string name="index_name_netherlands">Europa - Países Bajos</string>
@@ -2852,4 +2853,6 @@ Por favor proporciona un código completo</string>
     <string name="enter_the_file_name">Ingresar nombre del archivo.</string>
     <string name="map_import_error">Error de importación del mapa</string>
     <string name="map_imported_successfully">Mapa importado correctamente</string>
+    <string name="shared_string_total">Total</string>
+    <string name="clear_all_intermediates">Quitar todos los puntos intermedios</string>
     </resources>
