@@ -1,7 +1,11 @@
 gradle
 gradlew
 gradlew.bat
- 
+
+
+aarDependencies 
+libs/android*.jar
+libs/com.*.jar
 valgrind/
 bin/
 dist/

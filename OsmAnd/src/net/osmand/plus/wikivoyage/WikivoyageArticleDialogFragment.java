@@ -13,16 +13,16 @@ import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.wikivoyage.data.SearchResult;
+import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 
 public class WikivoyageArticleDialogFragment extends BaseOsmAndDialogFragment {
 
 	public static final String TAG = "WikivoyageArticleDialogFragment";
 
-	private SearchResult searchResult;
+	private WikivoyageSearchResult searchResult;
 
-	public void setSearchResult(SearchResult searchResult) {
+	public void setSearchResult(WikivoyageSearchResult searchResult) {
 		this.searchResult = searchResult;
 	}
 
@@ -42,13 +42,14 @@ public class WikivoyageArticleDialogFragment extends BaseOsmAndDialogFragment {
 		});
 
 		TextView contentTv = (TextView) mainView.findViewById(R.id.content_text_view);
-		WikivoyageArticle article = getMyApplication().getWikivoyageDbHelper().getArticle(searchResult);
+		WikivoyageArticle article = getMyApplication().getWikivoyageDbHelper().getArticle(searchResult.getCityId(), 
+				searchResult.getLang().get(0));
 		contentTv.setText(new SpannableString(Html.fromHtml(article.getContent())));
 
 		return mainView;
 	}
 
-	public static boolean showInstance(FragmentManager fm, SearchResult searchResult) {
+	public static boolean showInstance(FragmentManager fm, WikivoyageSearchResult searchResult) {
 		try {
 			WikivoyageArticleDialogFragment fragment = new WikivoyageArticleDialogFragment();
 			fragment.setSearchResult(searchResult);
