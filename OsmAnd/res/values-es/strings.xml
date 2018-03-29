@@ -881,7 +881,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="index_srtm_ele">Curvas de nivel</string>
     <string name="srtm_plugin_description">Este complemento proporciona una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje. (Por favor ten en cuenta que las curvas de nivel o datos de relieve están separados, hay descargas adicionales después de activar el complemento). 
 \n 
-\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar Shuffle) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).</string>
+\nLos datos globales (entre 70º norte y 70º sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar Shuffle) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).</string>
     <string name="srtm_plugin_name">Curvas de nivel</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
@@ -889,8 +889,8 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="audionotes_plugin_name">Notas audio/vídeo</string>
     <string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para curvas de nivel sin conexión</string>
     <string name="osmand_srtm_long_description_1000_chars">Este complemento proporciona una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje. 
-\n
-\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).</string>
+\n 
+\nLos datos globales (entre 70º norte y 70º sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
     <string name="audionotes_location_not_defined">La ubicación para asociar con la nota no está definida todavía. Utiliza la opción «Utilizar ubicación…» para asignar una nota a la ubicación especificada.</string>
     <string name="map_widget_audionotes">Notas de audio</string>
@@ -2443,15 +2443,15 @@ Por favor proporciona un código completo</string>
     <string name="quick_action_add_destination">Añadir destino</string>
     <string name="quick_action_replace_destination">Sustituir destino</string>
     <string name="quick_action_add_first_intermediate">Añadir primer intermedio</string>
-    <string name="quick_action_add_destination_desc">Pulsar el botón de acción añadirá un destino en el centro de la pantalla. Previamente, establece el destino a añadir como último destino intermedio.</string>
-    <string name="quick_action_replace_destination_desc">Pulsar el botón de acción sustituirá el destino con la ubicación en el centro de la pantalla.</string>
-    <string name="quick_action_add_first_intermediate_desc">Pulsar el botón de acción añadirá un primer punto intermedio en la ubicación en el centro de la pantalla.</string>
+    <string name="quick_action_add_destination_desc">Pulsa el botón de acción para añadir un destino en el centro de la pantalla. El destino previamente fijado se convierte en el último destino intermedio.</string>
+    <string name="quick_action_replace_destination_desc">Pulsa el botón de acción para sustituir el destino con la ubicación en el centro de la pantalla.</string>
+    <string name="quick_action_add_first_intermediate_desc">Pulsa el botón de acción para añadir un primer punto intermedio en la ubicación en el centro de la pantalla.</string>
     <string name="no_overlay">Sin superposición</string>
     <string name="no_underlay">Sin subyacente</string>
     <string name="subscribe_email_error">Error</string>
     <string name="subscribe_email_desc">¡Suscríbete a nuestra lista de correo electrónico sobre descuentos de la aplicación y obtén 3 descargas de mapa adicionales!</string>
-    <string name="depth_contour_descr">Conjunto de mapas que contienen las curvas de nivel de los fondos marinos.</string>
-    <string name="sea_depth_thanks">¡Gracias por adquirir las curvas de profundidad náuticas!</string>
+    <string name="depth_contour_descr">Curvas de nivel de los fondos marinos y mapas de puntos náuticos.</string>
+    <string name="sea_depth_thanks">Gracias por adquirir las curvas de profundidad náuticas</string>
     <string name="index_item_depth_contours_osmand_ext">Curvas de profundidad náuticas</string>
     <string name="index_item_depth_points_southern_hemisphere">Curvas de profundidad náuticas del hemisferio sur</string>
     <string name="index_item_depth_points_northern_hemisphere">Curvas de profundidad náuticas del hemisferio norte</string>
@@ -2475,7 +2475,7 @@ Por favor proporciona un código completo</string>
     <string name="change_color">Cambiar color</string>
     <string name="edit_name">Editar nombre</string>
     <string name="animate_my_location">Animar mi ubicación</string>
-    <string name="animate_my_location_desc">Activa la ubicación panorámica animada del mapa durante la navegación.</string>
+    <string name="animate_my_location_desc">Activa el desplazamiento animado del mapa de \'Mi ubicación\' durante la navegación.</string>
     <string name="shared_string_overview">Resumen</string>
     <string name="osmand_plus_extended_description_part2">"Navegación
 \n
@@ -2524,9 +2524,9 @@ Por favor proporciona un código completo</string>
 \n • Antártida: * 
 \n ¡La mayoría de países alrededor del globo están disponibles para descargar! Desde Afganistán a Zimbabue, desde Australia a Estados Unidos. Argentina, Brasil, Canadá, Francia, Alemania, México, Reino Unido, España, …</string>
     <string name="save_poi_too_many_uppercase">El nombre contiene demasiadas letras capitales. ¿Continuar?</string>
-    <string name="srtm_menu_download_descr">Para ver las curvas de nivel en el mapa, necesitas descargar el mapa de curvas de nivel de esta región.</string>
+    <string name="srtm_menu_download_descr">Descargar el mapa \'Curvas de nivel\' para usarlas en esta región.</string>
     <string name="shared_string_plugin">Complemento</string>
-    <string name="srtm_purchase_header">Para ver las curvas de nivel en el mapa, necesitas comprar e instalar el complemento «Curvas de nivel»</string>
+    <string name="srtm_purchase_header">Para ver las curvas de nivel en el mapa, necesitas comprar e instalar el complemento \'Curvas de nivel\'</string>
     <string name="srtm_color_scheme">Esquema de color</string>
     <string name="show_from_zoom_level">Mostrar desde el nivel de zoom</string>
     <string name="routing_attr_allow_private_name">Permitir acceso privado</string>
@@ -2542,10 +2542,10 @@ Por favor proporciona un código completo</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de zoom</string>
     <string name="restart_search">Reiniciar búsqueda</string>
     <string name="increase_search_radius">Aumentar radio de búsqueda</string>
-    <string name="nothing_found">Nada encontrado :(</string>
+    <string name="nothing_found">Nada encontrado</string>
     <string name="nothing_found_descr">Intenta cambiar el criterio de búsqueda o aumentar el radio de búsqueda.</string>
-    <string name="hillshade_menu_download_descr">Para ver el sombreado del relieve en el mapa, necesitas descargar la superposición del sombreado de esta región.</string>
-    <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, necesitas comprar e instalar el complemento «Curvas de nivel»</string>
+    <string name="hillshade_menu_download_descr">Descarga el mapa \'Sombreado\' para mostrar el sombreado de montañas de esta región.</string>
+    <string name="hillshade_purchase_header">Instala el complemento \'Curvas de nivel\' para mostrarlas en el mapa</string>
     <string name="private_access_routing_req">Tu destino se ubica en un área de acceso privado. ¿Quieres permitir el acceso a las carreteras privadas en este viaje?</string>
     <string name="mapillary_widget">Control de Mapillary</string>
     <string name="mapillary_descr">Fotos a pie de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
@@ -2558,21 +2558,19 @@ Por favor proporciona un código completo</string>
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="shared_string_install">Instalar</string>
     <string name="improve_coverage_mapillary">Mejorar la cobertura de fotos con Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Puedes hacer tus propias fotos o serie de fotos y añadirlas a esta ubicación del mapa. 
-\n 
-\nPara ello debes instalar la aplicación de Mapillary desde Google Play.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instala Mapillary para agregar una o más fotos a este lugar en el mapa.</string>
     <string name="online_photos">Fotos en línea</string>
     <string name="mapillary_image">Imagen de Mapillary</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">OsmAnd no puede importar el archivo. Comprueba si OsmAnd tiene permiso para leer el archivo en esa ubicación.</string>
     <string name="distance_moving">Distancia corregida</string>
     <string name="store_tracks_in_monthly_directories">Guardar las trazas grabadas en carpetas mensuales</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Guarda las trazas grabadas en subcarpetas por mes de grabación (como 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Guarda las trazas grabadas en subcarpetas por mes de grabación (como 2018-01).</string>
     <string name="shared_string_reset">Restablecer</string>
     <string name="shared_string_reload">Recargar</string>
     <string name="mapillary_menu_descr_tile_cache">Recargar teselas para ver la información actualizada.</string>
     <string name="mapillary_menu_title_tile_cache">Caché de teselas</string>
-    <string name="wrong_user_name">¡Nombre de usuario incorrecto!</string>
+    <string name="wrong_user_name">Nombre de usuario incorrecto</string>
     <string name="shared_string_to">Hasta</string>
     <string name="mapillary_menu_date_from">Desde</string>
     <string name="mapillary_menu_descr_dates">Ver sólo imágenes añadidas</string>
@@ -2580,7 +2578,7 @@ Por favor proporciona un código completo</string>
     <string name="mapillary_menu_edit_text_hint">Escribir nombre de usuario</string>
     <string name="mapillary_menu_descr_username">Ver sólo imágenes añadidas por</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
-    <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por usuario o por fecha. Los filtros aplican para los primeros acercamientos.</string>
+    <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por usuario o por fecha. Los filtros sólo aplican para vistas de cerca.</string>
     
     <string name="map_widget_ruler_control">Regla radial</string>
     <string name="average">Promedio</string>
@@ -2599,7 +2597,7 @@ Por favor proporciona un código completo</string>
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Rosa translúcido</string>
-    <string name="quick_action_resume_pause_navigation">Reanudar/pausar navegación</string>
+    <string name="quick_action_resume_pause_navigation">Pausar/reanudar navegación</string>
     <string name="quick_action_resume_pause_navigation_descr">Pulsa este botón para pausar o reanudar la navegación.</string>
     <string name="quick_action_show_navigation_finish_dialog">Mostrar diálogo de navegación finalizada</string>
     <string name="quick_action_start_stop_navigation">Iniciar/parar navegación</string>
@@ -2619,7 +2617,7 @@ Por favor proporciona un código completo</string>
     <string name="save_route_point">Guardar punto de ruta</string>
     <string name="route_point_one">Punto de ruta 1</string>
 <string name="waypoint_one">Punto de ruta 1</string>
-    <string name="do_not_use_animations">No usar animaciones</string>
+    <string name="do_not_use_animations">Sin animaciones</string>
     <string name="do_not_use_animations_descr">Desactiva las animaciones en la aplicación.</string>
     <string name="keep_showing_on_map">Mantener en el mapa</string>
     <string name="exit_without_saving">¿Salir sin guardar?</string>
@@ -2651,7 +2649,7 @@ Por favor proporciona un código completo</string>
     
     <string name="marker_show_distance_descr">Elige cómo se indica la distancia y la dirección a los marcadores del mapa en la pantalla del mapa:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Umbral de orientación del mapa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Elije la velocidad a partir de la cual la orientación del mapa cambia de «Dirección del movimiento» a «Brújula».</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Elije la velocidad a la que cambiar la orientación del mapa de \'Dirección del movimiento\' a \'Brújula\'.</string>
     <string name="all_markers_moved_to_history">Todos los marcadores del mapa movidos al historial</string>
     <string name="marker_moved_to_history">Marcador del mapa movido al historial</string>
     <string name="marker_moved_to_active">Marcador del mapa movido a los activos</string>
