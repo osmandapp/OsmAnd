@@ -1944,7 +1944,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">全部更新 (%1$s MB)</string>
     <string name="free_downloads_used">免費下載使用</string>
-    <string name="free_downloads_used_description">顯示已使用的免費下載。</string>
+    <string name="free_downloads_used_description">顯示剩餘的免費下載數量。</string>
     <string name="simulate_initial_startup_descr">設定標誌指示第一次應用程式啟動，而保持著所有其它設定不變。</string>
     <string name="simulate_initial_startup">模擬第一次應用程式啟動</string>
     <string name="share_geo">地理：</string>
@@ -1962,7 +1962,7 @@
     <string name="new_version">新版本</string>
     <string name="begin_with_osmand_menu_group">跟 OsmAnd 的第一步</string>
     <string name="features_menu_group">功能</string>
-    <string name="help_us_to_improve_menu_group">幫助我們改進 OsmAnd</string>
+    <string name="help_us_to_improve_menu_group">幫忙改進 OsmAnd</string>
     <string name="other_menu_group">其它</string>
     <string name="plugins_menu_group">外掛元件</string>
     <string name="first_usage_item">首次使用</string>
@@ -1980,7 +1980,7 @@
     <string name="techical_articles_item">技術文章</string>
     <string name="versions_item">版本</string>
     <string name="feedback">投票</string>
-    <string name="contact_us">聯絡我們</string>
+    <string name="contact_us">聯絡</string>
     <string name="osm_edit_created_poi">建立 OSM 的 POI</string>
     
     <string name="map_legend">地圖圖例</string>
@@ -1998,7 +1998,7 @@
     <string name="lang_fy">菲士蘭</string>
     <string name="lang_als">阿爾巴尼亞 (Tosk)</string>
     <string name="share_osm_edits_subject">透過 OsmAnd 共用以編輯 OSM</string>
-    <string name="save_poi_without_poi_type_message">您真的想要儲存 POI 成為沒有類型的 POI 嗎？</string>
+    <string name="save_poi_without_poi_type_message">您真的想要儲存沒有類型的 POI 嗎？</string>
     <string name="shared_string_location">位置</string>
     <string name="poi_context_menu_modify_osm_change">修改 OSM 的變更</string>
     <string name="context_menu_item_delete_waypoint">要刪除 GPX 的航點嗎？</string>
@@ -2049,7 +2049,7 @@
     
     
     <string name="dashboard_or_drawer_title">儀表板或選單控制</string>
-    <string name="dashboard_or_drawer_description">還有一種新的選擇，透過具彈性的儀表板或固定的選單優先控制應用程式。在儀表板中也可以更改您的選擇。</string>
+    <string name="dashboard_or_drawer_description">提供的選擇，主要是透過具彈性的儀表板或固定的選單來控制應用程式，您也可以隨時在儀表板設定中更改您的選擇。</string>
     <string name="access_from_map_description">選單按鈕是啟動儀表板，而不是選單</string>
     <string name="access_from_map">從地圖進入</string>
     <string name="use_dashboard_btn">使用儀表板</string>
@@ -2077,7 +2077,7 @@
 <string name="update_now">立即更新</string>
 <string name="route_distance">距離：</string>
     <string name="route_duration">時間：</string>
-    <string name="missing_write_external_storage_permission">應用程式無權限使用 SD 卡</string>
+    <string name="missing_write_external_storage_permission">OsmAnd 缺少權限使用記憶卡</string>
 <string name="no_location_permission">應用程式沒有權限存取所在位置資料。</string>
     <string name="no_camera_permission">應用程式沒有權限存取相機。</string>
     <string name="no_microphone_permission">應用程式沒有權限存取麥克風。</string>
@@ -2415,8 +2415,8 @@
     <string name="quick_action_add_poi">增加 POI</string>
     <string name="quick_action_map_style">更改地圖樣式</string>
     <string name="quick_action_map_style_switch">地圖樣式已經更改為 \"%s\"。</string>
-    <string name="quick_action_take_audio_note">錄取音訊註解</string>
-    <string name="quick_action_take_video_note">錄取視訊註解</string>
+    <string name="quick_action_take_audio_note">新增音訊註解</string>
+    <string name="quick_action_take_video_note">新增視訊註解</string>
     <string name="quick_action_take_photo_note">新增照片註解</string>
     <string name="quick_action_add_osm_bug">增加 OSM 的註解</string>
     <string name="quick_action_navigation_voice">聲音開/關</string>
