@@ -629,12 +629,6 @@ public class GpxUiHelper {
 			descTextView.setText(spannableDesc);
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
 				footerView.findViewById(R.id.button).setVisibility(View.GONE);
-				footerView.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-
-					}
-				});
 			} else {
 				footerView.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -643,7 +637,7 @@ public class GpxUiHelper {
 					}
 				});
 			}
-			dlg.getListView().addFooterView(footerView);
+			dlg.getListView().addFooterView(footerView, null, false);
 		}
 		dlg.getListView().setOnItemClickListener(new OnItemClickListener() {
 			@Override
