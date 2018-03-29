@@ -781,7 +781,7 @@
     <string name="mark_point">目的地</string>
 
 
-    <string name="use_english_names_descr">在本地語言或英語名稱之間選擇。</string>
+    <string name="use_english_names_descr">選擇當地語言或英文名稱。</string>
     <string name="use_english_names">在地圖上使用英文名稱</string>
     <string name="app_settings">應用程式設定</string>
     <string name="search_address">地址查詢</string>
@@ -797,12 +797,12 @@
     <string name="map_tile_source_descr">選擇線上或快取地圖圖磚來源。</string>
     <string name="map_tile_source">地圖圖磚來源</string>
     <string name="map_source">地圖來源</string>
-    <string name="use_internet">使用網路</string>
+    <string name="use_internet">使用網際網路</string>
     <string name="show_location">顯示您的位置</string>
 
 
-    <string name="show_gps_coordinates_text">在地圖上顯示 GPS 狀態</string>
-    <string name="use_internet_to_download_tile">使用網路下載缺失的地圖圖磚</string>
+    <string name="show_gps_coordinates_text">在地圖上顯示 GPS 座標</string>
+    <string name="use_internet_to_download_tile">下載缺失的地圖圖磚</string>
     <string name="app_description">導航應用程式</string>
     <string name="search_button">搜尋</string>
     <string name="search_activity">搜尋</string>
@@ -815,9 +815,9 @@
     <string name="choose_intersected_street">選擇交叉路口</string>
     <string name="Closest_Amenities">最近的設施</string>
     <string name="app_mode_default">瀏覽地圖</string>
-    <string name="app_mode_car">汽車</string>
+    <string name="app_mode_car">駕駛</string>
     <string name="app_mode_bicycle">自行車</string>
-    <string name="app_mode_pedestrian">步行</string>
+    <string name="app_mode_pedestrian">走路</string>
     <string name="position_on_map_center">中間</string>
     <string name="position_on_map_bottom">下方</string>
     <string name="navigate_point_top_text">輸入緯度和經度格式(D - 度, M - 分, S - 秒)</string>
@@ -845,11 +845,11 @@
     <string name="shared_string_no">否</string>
     <string name="add_favorite_dialog_top_text">輸入我的收藏名稱</string>
     <string name="add_favorite_dialog_default_favourite_name">我的收藏</string>
-    <string name="add_favorite_dialog_favourite_added_template">我的收藏標點 \'\'{0}\'\' 新增成功。</string>
+    <string name="add_favorite_dialog_favourite_added_template">我的收藏標點 \'\'{0}\'\' 已新增。</string>
     <string name="favourites_context_menu_edit">編輯我的收藏</string>
     <string name="favourites_context_menu_delete">刪除我的收藏</string>
     <string name="favourites_remove_dialog_msg">刪除我的收藏標點 \'%s\'？</string>
-    <string name="favourites_remove_dialog_success">我的收藏標點 {0} 刪除成功。</string>
+    <string name="favourites_remove_dialog_success">我的收藏標點 {0} 已刪除。</string>
     
     
     
@@ -2470,22 +2470,22 @@
     <string name="dialog_add_action_title">增加動作</string>
     <string name="quick_actions_delete">刪除動作</string>
     <string name="quick_actions_delete_text">您確定要刪除動作 \"%s\" 嗎？</string>
-    <string name="quick_action_add_marker_descr">輕點動作按鈕將會在螢幕中心的位置增加一個地圖記號。</string>
-    <string name="quick_action_add_gpx_descr">輕點動作按鈕將會在螢幕中間增加一個 GPX 航點。</string>
-    <string name="quick_action_take_audio_note_descr">輕點動作按鈕將會在螢幕中間增加一個音訊注解。</string>
-    <string name="quick_action_take_video_note_descr">輕點動作按鈕將會在螢幕中間增加一個視訊注解。</string>
-    <string name="quick_action_take_photo_note_descr">輕點動作按鈕將會在螢幕中間增加一個照片注解。</string>
-    <string name="quick_action_add_osm_bug_descr">輕點動作按鈕將會在螢幕中間增加一個 OSM 註解。</string>
-    <string name="quick_action_add_poi_descr">輕點動作按鈕將會在螢幕中間增加一個 POI。</string>
+    <string name="quick_action_add_marker_descr">輕點這個動作按鈕將會在螢幕中央的位置增加一個地圖記號。</string>
+    <string name="quick_action_add_gpx_descr">輕點這個動作按鈕將會在螢幕中間增加一個 GPX 航點。</string>
+    <string name="quick_action_take_audio_note_descr">輕點這個動作按鈕將會在螢幕中間增加一個音訊注解。</string>
+    <string name="quick_action_take_video_note_descr">輕點這個動作按鈕將會在螢幕中間增加一個視訊注解。</string>
+    <string name="quick_action_take_photo_note_descr">輕點這個動作按鈕將會在螢幕中間增加一個照片注解。</string>
+    <string name="quick_action_add_osm_bug_descr">輕點這個動作按鈕將會在螢幕中間增加一個 OSM 註解。</string>
+    <string name="quick_action_add_poi_descr">輕點這個動作按鈕將會在螢幕中間增加一個 POI。</string>
     <string name="navigate_point_olc">打開位置編碼(OLC)</string>
     <string name="navigate_point_olc_info_invalid">無效的 OLC
 </string>
-    <string name="quick_action_navigation_voice_descr">輕點動作按鈕將會停用或啟用導航期間的語音導引。</string>
-    <string name="quick_action_add_parking_descr">輕點動作按鈕將會在螢幕中間增加一個停車位置。</string>
+    <string name="quick_action_navigation_voice_descr">輕點這個動作按鈕將會停用或啟用導航期間的語音導引。</string>
+    <string name="quick_action_add_parking_descr">輕點這個動作按鈕將會在螢幕中間增加一個停車位置。</string>
     <string name="quick_action_duplicates">指定的快速動作名稱已在使用中，已更改為 %1$s 以避免重複。</string>
     <string name="quick_action_duplicate">快速動作的名稱重複</string>
-    <string name="quick_action_showhide_favorites_descr">輕點動作按鈕將會在地圖上顯示或隱藏我的收藏標點。</string>
-    <string name="quick_action_showhide_poi_descr">輕點動作按鈕將會在地圖上顯示或隱藏 POI。</string>
+    <string name="quick_action_showhide_favorites_descr">輕點這個動作按鈕將會在地圖上顯示或隱藏我的收藏標點。</string>
+    <string name="quick_action_showhide_poi_descr">輕點這個動作按鈕將會在地圖上顯示或隱藏 POI。</string>
     <string name="quick_action_map_overlay_switch">地圖上圖層已更改為 \"%s\"。</string>
     <string name="quick_action_map_underlay_switch">地圖底層已更改為 \"%s\"。</string>
     <string name="shared_string_action_name">動作名稱</string>
@@ -2493,7 +2493,7 @@
 請提供完整的編碼</string>
     <string name="navigate_point_olc_info_area">有效完整的 OLC
 代表區域：%1$s x %2$s</string>
-    <string name="quick_action_page_list_descr">輕點動作按鈕會直達下面的清單。</string>
+    <string name="quick_action_page_list_descr">輕點這個動作按鈕會直達下面的清單。</string>
     <string name="auto_split_recording_title">自動分割錄製之後的間隙</string>
 	<string name="auto_split_recording_descr">如果日期已更改，開始新區段在6分鐘後的間隔，新軌跡在2小時後的間隔，或新檔案在更長的間隔之後。</string>
     <string name="release_2_6">"\\u2022 新功能：快速動作按鈕 
