@@ -131,7 +131,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="favorite_delete_multiple">Borrará %1$d favorito(s) y %2$d grupo(s) de favoritos. ¿Está seguro?</string>
     <string name="favorite_home_category">Inicio</string>
     <string name="favorite_friends_category">Amigos</string>
-    <string name="favorite_places_category">Lugares</string>
+    <string name="favorite_places_category">Sitios</string>
     <string name="shared_string_others">Otros</string>
     <string name="shared_string_name">Nombre</string>
     <string name="favourites_edit_dialog_category">Categoría</string>
@@ -799,39 +799,29 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="map_widget_vector_attributes">Atributos de dibujado</string>
     <string name="map_widget_renderer">Estilo del mapa</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada), es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos del mapa (vectoriales y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de navegación con y sin conexión, incluyendo indicaciones giro-a-giro mediante voz. 
-\n 
-\nAlgunas de las características fundamentales: 
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada), es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos del mapa (vectoriales y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. También se ofrece funcionalidad de navegación con y sin conexión, incluyendo indicaciones giro-a-giro mediante voz. Algunas de las características fundamentales: 
 \n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) 
 \n - Mapas vectoriales compactos disponibles de todo el planeta 
 \n - Descarga de mapas por país o región directamente desde la aplicación 
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, puntos de interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
-\n - Búsqueda sin conexión de direcciones y lugares (PDIs) 
+\n - Búsqueda sin conexión de direcciones y sitios (PDIs) 
 \n - Navegación sin conexión para distancias medianas. 
-\n - Modos automóvil, bicicleta y peatón con: \t- opción de cambio automático de vista diurna/nocturna \t- opción de zoom en función de la velocidad \t- opción de alineamiento del mapa según la brújula o la dirección de movimiento \t- opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y TTS 
-\n 
+\n - Modos automóvil, bicicleta y peatón con opción de: \t- cambio automático de vista diurna/nocturna \t- zoom en función de la velocidad \t- alineamiento del mapa según la brújula o la dirección de movimiento \t- indicación de carriles, visualización de límite de velocidad, voces grabadas y TTS 
 \nLimitaciones de la versión gratuita de OsmAnd: 
-\n - Limitado el número de mapas descargados 
-\n - Sin acceso a los PDIs descargados de Wikipedia 
-\n 
-\nOsmAnd está siendo desarrollado activamente y nuestro proyecto y su desarrollo adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considere comprar OsmAnd+, financiar nuevas características concretas o hacer una donación general en osmand.net.</string>
+\n - Limitado el número de descargas de mapas 
+\n - Sin acceso a descargas de Wikipedia de los PDIs
+\nOsmAnd está siendo desarrollado activamente y nuestro proyecto y su desarrollo continuo se basa en contribuciones económicas para el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considere comprar OsmAnd+, financiar nuevas características concretas o hacer una donación general en https://osmand.net.</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions), es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz. 
-\n 
-\n OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas características y recibe las últimas actualizaciones. 
-\n 
-\n Algunas de las características fundamentales: 
+    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions), es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. También ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz. 
+\nOsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas características y recibe las últimas actualizaciones. 
+\nAlgunas de las características fundamentales: 
 \n - Funcionalidad completa sin conexión (almacena los mapas de vectores y teselas descargados en el almacenamiento del dispositivo) 
 \n - Mapas de vectores compactos disponibles de todo el planeta 
 \n - Descarga ilimitada de mapas de país o región directamente desde la aplicación 
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
-\n - Búsqueda sin conexión de direcciones y lugares (PDIs) 
+\n - Búsqueda sin conexión de direcciones y sitios (PDIs) 
 \n - Rutas sin conexión para medias distancias. 
-\n - Modos de coche, bicicleta, y peatón con: 
-\n - Cambio automático opcional de vista diurna/nocturna
-\n - Zoom del mapa opcional en función de la velocidad
-\n - Orientación del mapa opcional a la brújula o a la dirección de movimiento
-\n - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales</string>
+\n - Modos de coche, bicicleta, y peatón con opción de: - Cambio automático de vista diurna/nocturna  - Zoom del mapa en función de la velocidad  - Orientación del mapa a la brújula o a la dirección de movimiento  - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas"</string>
     <string name="avoid_motorway">Evitar autopistas</string>
     <string name="snap_to_road_descr">Ajusta la ubicación a las carreteras durante la navegación.</string>
     <string name="snap_to_road">Ajustar a carreteras</string>
@@ -1623,7 +1613,7 @@ Lon %2$s</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Asistente mapeador OSM</string>
     <string name="shared_string_manage">Gestionar</string>
     <string name="shared_string_edit">Editar</string>
-    <string name="shared_string_places">Lugares</string>
+    <string name="shared_string_places">Sitios</string>
     <string name="shared_string_search">Buscar</string>
     <string name="filter_poi_hint">Filtrar por nombre</string>
     <string name="search_poi_category_hint">Escribe para buscar en todos</string>
@@ -1756,7 +1746,7 @@ Lon %2$s</string>
     <string name="number_of_rows_in_dash">Número de filas en el panel %1$s</string>
     <string name="please_specify_poi_type">Especifica tipo de PDI.</string>
     <string name="working_days">Días laborales</string>
-    <string name="recent_places">Lugares recientes</string>
+    <string name="recent_places">Sitios recientes</string>
     <string name="favourites">Favoritos</string>
     <string name="poi_action_delete">borrar</string>
     <string name="saved_at_time">Guardado exitosamente en: %1$s</string>
@@ -2434,7 +2424,7 @@ Por favor proporciona un código completo</string>
     <string name="restore_purchases">Restaurar compras</string>
     <string name="fonts_header">Fuentes para mapa</string>
     <string name="osmand_extended_description_part2">"Navegación GPS • Puedes elegir modo entre desconectado (sin cargos de roaming cuando estás en el extranjero) o conectado (más rápido) • La guía de voz correo a giro te indica a lo largo del camino (voces grabadas y sintetizadas) • La ruta se reconstruye cada vez que te apartes de ella • La indicación de carril, los nombres de las calles, y el tiempo estimado de llegada ayudará a lo largo de la vía • Para hacer tu viaje más seguro,  el modo día/noche cambia automáticamente • Puedes elegir mostrar los límites de velocidad, y recibir recordatorios si se superan • El zoom del mapa se ajusta a tu velocidad • Puedes buscar destinos por dirección, por tipo (por ejemplo: aparcamiento, restaurante, hotel, gasolinera, museo), o mediante coordenadas geográficas • Admite puntos intermedios en el itinerario • Puedes grabar tu propia pista  GPX o subir una, y seguirla"</string>
-    <string name="osmand_extended_description_part3">Mapa • Muestra PDIs (puntos de interés) a tu alrededor • Ajusta el mapa hacia la dirección del movimiento (o a la brújula) • Muestra dónde estás y hacia dónde estás mirando • Comparte tu ubicación para que tus amigos puedan encontrarte • Mantiene tus lugares más importantes en Favoritos • Te permite elegir cómo se muestran los nombres en el mapa: en inglés, local, o con ortografía fonética • Muestra teselas especializadas en línea, vista de satélite (de Bing), diferentes superposiciones como pistas GPX y capas adicionales con transparencia personalizable</string>
+    <string name="osmand_extended_description_part3">Mapa • Muestra PDIs (puntos de interés) a tu alrededor • Ajusta el mapa hacia la dirección del movimiento (o a la brújula) • Muestra dónde estás y hacia dónde estás mirando • Comparte tu ubicación para que tus amigos puedan encontrarte • Mantiene tus lugares más importantes en \'Favoritos\' • Te permite elegir cómo se muestran los nombres en el mapa: en inglés, local, o con ortografía fonética • Muestra teselas especializadas en línea, vista de satélite (de Bing), diferentes superposiciones como pistas GPX y capas adicionales con transparencia personalizable</string>
     <string name="osmand_extended_description_part4">Esquí El complemento de OsmAnd de mapas de esquí te permite ver las pistas de esquí con el nivel de complejidad y alguna información adicional, como la ubicación de los ascensores y otras instalaciones.</string>
     <string name="osmand_extended_description_part5">Ciclismo 
 \n • Puedes encontrar vías ciclistas en el mapa 
@@ -2487,19 +2477,20 @@ Por favor proporciona un código completo</string>
     <string name="animate_my_location">Animar mi ubicación</string>
     <string name="animate_my_location_desc">Activa la ubicación panorámica animada del mapa durante la navegación.</string>
     <string name="shared_string_overview">Resumen</string>
-    <string name="osmand_plus_extended_description_part2">"Navegación GPS 
+    <string name="osmand_plus_extended_description_part2">"Navegación
+\n
 \n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero) 
 \n • Guía por voz giro-a-giro (voces grabadas y sintetizadas) 
-\n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino 
+\n • Guía de carriles, nombres de calles y tiempo estimado al destino opcionales
 \n • Soporta puntos intermedios en el itinerario 
-\n • La ruta se recalcula al salirse de la misma  
-\n • Puedes buscar destinos por dirección, tipo (p.e.: estacionamientos, restaurantes, hoteles, estaciones de servicio, museos), o por coordenada geográfica"</string>
+\n • Recálculo automático de la ruta al salirse de la misma  
+\n • Búsqueda de sitios por dirección, por tipo (p.e.: estacionamientos, restaurantes, hoteles, estaciones de servicio, museos), o por coordenadas geográficas"</string>
     <string name="osmand_plus_extended_description_part3">Mapa 
 \n • Muestra tu ubicación y orientación 
-\n • (Opcional) Ajusta el mapa a la dirección del movimiento (o brújula) 
-\n • Guarda lugares importantes en Favoritos 
+\n • Opcionalmente ajusta el mapa a la dirección del movimiento o a la brújula
+\n • Guarda tus sitios importantes como Favoritos 
 \n • Muestra PDIs (puntos de interés) cerca de ti 
-\n • Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable 
+\n • Muestra teselas especializadas en línea, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable 
 \n • Permite elegir como mostrar los nombres en el mapa: en inglés, local, u ortografía fonética</string>
     <string name="osmand_plus_extended_description_part4">Uso de datos de OSM y Wikipedia 
 \n • Información de alta calidad del mejor proyecto colaborativo del mundo 
@@ -2698,7 +2689,7 @@ Por favor proporciona un código completo</string>
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formato de coordenada</string>
     <string name="use_system_keyboard">Usar el teclado del sistema</string>
-    <string name="fast_coordinates_input_descr">Elige el formato de entrada de coordenadas. Siempre puedes cambiarlo pulsando en Ajustes.</string>
+    <string name="fast_coordinates_input_descr">Elige el formato de entrada de coordenadas. Siempre puedes cambiarlo pulsando en \'Ajustes\'.</string>
     <string name="fast_coordinates_input">Entrada rápida de coordenadas</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evitar carreteras de hielo, vados</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evita carreteras de hielo y vados.</string>
@@ -2752,7 +2743,7 @@ Por favor proporciona un código completo</string>
     <string name="add_group">Añadir grupo</string>
     <string name="add_group_descr">Puedes importar grupos desde favoritos o desde puntos de ruta de traza.</string>
     <string name="empty_state_markers_active">¡Crea marcadores de mapa!</string>
-    <string name="empty_state_markers_active_desc">Pulsa en lugares en el mapa y luego pulsa en el botón de bandera del marcador.</string>
+    <string name="empty_state_markers_active_desc">Pulsa en \'Sitios\' y luego pulsa en el botón de bandera del marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
     <string name="empty_state_markers_groups_desc">Puedes importar grupos de favoritos o puntos de ruta de traza como marcadores.</string>
     <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
