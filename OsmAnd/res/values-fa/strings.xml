@@ -1810,7 +1810,7 @@
 	<string name="osmand_parking_overdue">تأخیر دارید</string>
 	<string name="general_settings_2">تنظیمات کلی</string>
 	<string name="routing_settings_2">تنظیمات راهبری</string>
-    <string name="shared_string_do_not_use">استفاده نشود</string>
+    <string name="shared_string_do_not_use">‍‍استفاده نشود</string>
 	<string name="rendering_attr_OSMMapperAssistant_name">دستیار نقشه‌کش OSM</string>
 	<string name="osm_edits">ویرایش‌های OSM</string>
 	<string name="parking_place_limited">حداکثر زمان پارک تا</string>
@@ -2303,7 +2303,7 @@
     <string name="whats_new">امکانات جدید در</string>
     <string name="shared_string_update">به‌روزرسانی</string>
     <string name="shared_string_upload">آپلود</string>
-    <string name="world_map_download_descr">نقشه کلی جهان (که سرتاسر جهان را با زوم کم پوشش می‌دهد) وجود ندارد یا منقضی شده است. لطفاً برای داشتن نمای کلی جهان آن را دانلود کنید.</string>
+    <string name="world_map_download_descr">نقشه کلی جهان (که سرتاسر جهان را با زوم کم پوشش می‌دهد) وجود ندارد یا منقضی شده است. لطفاً برای داشتن نمایی کلی از جهان آن را دانلود کنید.</string>
     <string name="shared_string_qr_code">کد QR</string>
     <string name="map_downloaded">نقشه دانلود شد</string>
     <string name="map_downloaded_descr">نقشهٔ %1$s دانلود شد و حالا می‌توانید از آن استفاده کنید.</string>
