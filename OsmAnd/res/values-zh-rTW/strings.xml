@@ -1849,11 +1849,11 @@
     <string name="download_live_updates">即時更新</string>
     <string name="failed_to_upload">上載失敗</string>
     <string name="delete_change">刪除更改</string>
-    <string name="successfully_uploaded_pattern">已成功上載 {0} / {1}</string>
+    <string name="successfully_uploaded_pattern">已上載 {0} / {1}</string>
     <string name="try_again">再試一次</string>
     <string name="error_message_pattern">錯誤：{0}</string>
     <string name="no_updates_available">沒可用的更新</string>
-    <string name="we_really_care_about_your_opinion">我們很在乎您的意見，並且聽到您的反映對我們來說是很重要的。</string>
+    <string name="we_really_care_about_your_opinion">我們很在乎您的意見，並且您的反映對我們來說很重要。</string>
     <string name="rendering_value_boldOutline_name">粗框體</string>
     <string name="traffic_warning_hazard">危險</string>
     <string name="dahboard_options_dialog_title">組態儀表板</string>
@@ -1886,7 +1886,7 @@
     <string name="working_days">工作日</string>
     <string name="recent_places">最近的地點</string>
     <string name="favourites">我的收藏</string>
-    <string name="saved_at_time">已順利的儲存於：%1$s</string>
+    <string name="saved_at_time">現在已儲存於：%1$s</string>
     <string name="poi_deleted_localy">一旦您上傳您的變更，POI 會被刪除</string>
     <string name="show_gpx">顯示 GPX</string>
     <string name="count_of_lines">計算行數</string>
@@ -1926,8 +1926,8 @@
     <string name="downloading_number_of_files">正在下載 - %1$d 檔案</string>
     <string name="buy">購買</string>
     <string name="hillshade_layer_disabled">地形陰影圖層停用</string>
-    <string name="activate_seamarks_plugin">請啟動航線標識外掛元件</string>
-    <string name="activate_srtm_plugin">請啟動 SRTM 外掛元件</string>
+    <string name="activate_seamarks_plugin">請啟動「航線標識」外掛元件</string>
+    <string name="activate_srtm_plugin">請啟動「SRTM」外掛元件</string>
     <string name="later">隨後</string>
     <string name="get_full_version">完整版</string>
     <string name="regions">地區</string>
@@ -2616,7 +2616,7 @@
     <string name="osmand_extended_description_part4">滑雪 OsmAnd 滑雪地圖外掛元件，使您能夠看到滑雪道與複雜程度和一些附加的資訊，如滑雪纜車和其它設施的位置。</string>
     <string name="osmand_extended_description_part6">步行、登山健行、市區旅遊 • 地圖顯示您的步行和登山健行路徑 • 維基百科以您喜好的語言在市區旅遊中可以告訴您很多事 • 大眾運輸停靠站（公共汽車、電車、火車），包括路線名稱，有助於在新的城市裡導航 • GPS 導航在行人模式下，使用步行路徑構建您的路線 • 您可以上傳並且跟隨 GPX 路線或著記錄和分享您自己的路線</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) 是一個地圖和導航應用程式，可以免費存取全球性且高品質的OpenStreetMap（OSM）圖資。享有語音和視覺的導航、檢視 POI（興趣點）、建立和管理 GPX 軌跡、使用視覺化的等高線和海拔資訊，能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。 OsmAnd + 是付費應用程式版本。透過購買，您支援了該專案，資助新功能的開發並收到最新的更新。一些主要特點：</string>
-    <string name="quick_action_auto_zoom_desc">輕點這個動作按鈕開/關將會根據您的速度自動縮放地圖。</string>
+    <string name="quick_action_auto_zoom_desc">輕點這個動作按鈕的開啟/關閉將會根據您的速度自動縮放地圖。</string>
     <string name="shared_string_overview">概要</string>
     <string name="quick_action_replace_destination_desc">輕點動作按鈕把目的地，放回到螢幕的中央位置。</string>
     <string name="quick_action_add_first_intermediate_desc">輕點動作按鈕以在螢幕中央位置增加第一個中轉點。</string>
