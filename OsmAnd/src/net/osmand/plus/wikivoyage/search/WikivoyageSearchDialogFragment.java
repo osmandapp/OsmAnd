@@ -131,18 +131,26 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 	public void onPause() {
 		super.onPause();
 		paused = true;
-		searchHelper.unregisterListener(this);
+		searchHelper.unregisterListener();
 	}
 
 	@Override
 	public void onSearchStarted() {
-		switchProgressBarVisibility(true);
+		getMyApplication().runInUIThread(new Runnable() {
+			public void run() {
+				switchProgressBarVisibility(true);
+			}
+		});
 	}
 
 	@Override
-	public void onSearchFinished(@Nullable List<WikivoyageSearchResult> results) {
-		adapter.setItems(results);
-		switchProgressBarVisibility(false);
+	public void onSearchFinished(@Nullable final List<WikivoyageSearchResult> results) {
+		getMyApplication().runInUIThread(new Runnable() {
+			public void run() {
+				adapter.setItems(results);
+				switchProgressBarVisibility(false);
+			}
+		});
 	}
 
 	private void cancelSearch() {
