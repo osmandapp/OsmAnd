@@ -182,7 +182,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		});
 
 		registerMainView();
-//		changeKeyboard(getMyApplication().getSettings().COORDS_USE_OSMAND_KEYBOARD.get());
 		return mainView;
 	}
 
@@ -351,7 +350,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				boolean isCurrentlyVisible = isOsmandKeyboardCurrentlyVisible();
 				if (!isCurrentlyVisible && !useOsmandKeyboard) {
 					changeKeyboard(true);
-					getMyApplication().getSettings().COORDS_USE_OSMAND_KEYBOARD.set(true);
 				} else {
 					changeOsmandKeyboardVisibility(!isCurrentlyVisible);
 				}
