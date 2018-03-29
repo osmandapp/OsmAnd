@@ -871,8 +871,8 @@
 	<string name="osb_comment_dialog_message">Nachricht</string>
 	<string name="osb_comment_dialog_author">Autor</string>
 
-	<string name="osb_comment_dialog_success">Kommentar wurde erfolgreich hinzugefügt</string>
-	<string name="osb_comment_dialog_error">Fehler aufgetreten: Kommentar wurde nicht hinzugefügt</string>
+	<string name="osb_comment_dialog_success">Kommentar hinzugefügt</string>
+	<string name="osb_comment_dialog_error">Ausnahme aufgetreten: Kommentar wurde nicht hinzugefügt</string>
 	
 	<string name="poi_edit_title">POI bearbeiten</string>
 	<string name="poi_create_title">POI erstellen</string>
@@ -1704,7 +1704,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="copying_osmand_file_failed">Das Kopieren der Dateien ist fehlgeschlagen!</string>
 	<string name="storage_directory_external">Externer Speicher</string>
 	<string name="storage_directory_multiuser">Mehrbenutzer-Speicher</string>
-	<string name="storage_directory_internal_app">Interner Anwendungsspeicher</string>
+	<string name="storage_directory_internal_app">Interner App-speicher</string>
 	<string name="storage_directory_manual">Manuell spezifiziert</string>
 	<string name="storage_directory_default">Interner Speicher</string>
 	<string name="storage_directory">Kartenspeicher</string>
@@ -1717,7 +1717,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="shared_string_show_description">Beschreibung anzeigen.</string>
 	<string name="shared_string_message">Nachricht</string>
 	<string name="agps_data_last_downloaded">A-GPS-Daten zuletzt heruntergeladen: %1$s</string>
-	<string name="confirm_usage_speed_cameras">In vielen Ländern (Deutschland, Frankreich, Italien und andere) ist die Verwendung von Blitzerwarnern gesetzlich nicht erlaubt. OsmAnd übernimmt keine Verantwortung im Fall von Gesetzesübertretungen. Klicken Sie nur auf Ja, wenn Sie zur Verwendung dieser Funktion berechtigt sind.</string>
+	<string name="confirm_usage_speed_cameras">In vielen Ländern (Deutschland, Frankreich, Italien und andere) ist die Verwendung von Blitzerwarnern gesetzlich nicht erlaubt. OsmAnd übernimmt keine Verantwortung im Fall von Gesetzesübertretungen. Klicken Sie nur auf \'Ja\', wenn Sie zur Verwendung dieser Funktion berechtigt sind.</string>
 	<string name="welmode_download_maps">Kartenverwaltung</string>
 	<string name="welcome_header">Willkommen</string>
 	<string name="current_route">Aktuelle Route</string>
@@ -1745,7 +1745,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="shared_string_photo">Foto</string>
 	<string name="shared_string_places">Orte</string>
 	<string name="welcome_select_region">Zur korrekten Wiedergabe von Verkehrszeichen und -regeln, bitte Region wählen:</string>
-	<string name="welcome_text">OsmAnd bietet globale Offline-Karten und globale Offline-Navigation!</string>
+	<string name="welcome_text">OsmAnd bietet globale Offline-Karten und Offline-Navigation!</string>
 	<string name="waypoint_visit_before">Vorher besuchen</string>
 	<string name="action_create">Aktion erstellen</string>
 	<string name="action_modify">Aktion ändern</string>
@@ -1805,8 +1805,8 @@ Lon %2$s</string>
     <string name="lang_lb">Luxemburgisch</string>
     <string name="lang_os">Ossetisch</string>
     <string name="lang_eo">Esperanto</string>
-    <string name="lang_nb">Norwegisch (Buchsprache)</string>
-    <string name="lang_nn">Norwegisch (Neunorwegisch)</string>
+    <string name="lang_nb">Norwegisch Buchsprache</string>
+    <string name="lang_nn">Norwegisch Neunorwegisch</string>
     <string name="rendering_value_default13_name">Standard (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Standard (transparentes Cyan)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX-Farbe</string>
@@ -1828,7 +1828,7 @@ Lon %2$s</string>
     <string name="rendering_value_translucent_blue_name">Transparentes Blau</string>
     <string name="rendering_value_purple_name">Lila</string>
     <string name="rendering_value_translucent_purple_name">Transparentes Lila</string>
-    <string name="restart_is_required">Zum Abschluss der Änderung ist ein manueller Neustart der Anwendung erforderlich.</string>
+    <string name="restart_is_required">Die App manuell neu starten um alle Änderungen umzusetzen.</string>
     <string name="lang_bpy">Bishnupriya</string>
     <string name="lang_nv">Navajo</string>
     <string name="lang_vo">Volapük</string>
@@ -1896,7 +1896,7 @@ Lon %2$s</string>
     <string name="shared_string_upload">Hochladen</string>
     <string name="shared_string_qr_code">QR-Code</string>
     <string name="map_downloaded">Karte heruntergeladen</string>
-    <string name="map_downloaded_descr">Die Karte von %1$s wurde heruntergeladen und kann nun benutzt werden.</string>
+    <string name="map_downloaded_descr">Sie können die heruntergelade Karte %1$s nun benutzen.</string>
     <string name="go_to_map">Karte anzeigen</string>
     <string name="lang_nds">Plattdeutsch</string>
     <string name="lang_mk">Mazedonisch</string>
@@ -1904,13 +1904,13 @@ Lon %2$s</string>
     <string name="whats_new">Neuerungen in</string>
     <string name="osm_edit_created_poi">OSM-POI erstellt</string>
     
-    <string name="world_map_download_descr">Die Basis-Weltkarte (Abdeckung der ganzen Welt bei kleinen Zoomstufen) ist nicht vorhanden oder veraltet. Prüfen Sie, ob Sie sie für den groben Überblick herunterladen möchten.</string>
+    <string name="world_map_download_descr">Die Basis-Weltkarte (Abdeckung der ganzen Welt bei kleinen Vergrößerungsstufen) ist nicht vorhanden oder veraltet. Prüfen Sie, ob Sie sie für den groben Überblick herunterladen möchten.</string>
     <string name="simulate_initial_startup_descr">Setzt das Flag zum erstmaligen App-Start. Alle anderen Einstellungen bleiben unverändert.</string>
     <string name="simulate_initial_startup">Ersten App-Start simulieren</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Standort teilen</string>
     <string name="shared_string_send">Senden</string>
-    <string name="favorite_category_dublicate_message">Der eingegebene Kategoriename existiert bereits. Bitte einen anderen Namen benutzen.</string>
+    <string name="favorite_category_dublicate_message">Bitte einen noch nicht existierenden Kategorienamen verwenden.</string>
     <string name="favorite_category_name">Kategoriename</string>
     <string name="favorite_category_add_new_title">Neue Kategorie hinzufügen</string>
     <string name="srtm_plugin_disabled">Höhenlinien deaktiviert</string>
@@ -1923,7 +1923,7 @@ Lon %2$s</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">Streckenaufzeichnung</string>
-    <string name="osmand_running_in_background">Läuft im Hintergrund</string>
+    <string name="osmand_running_in_background">Im Hintergrund laufen lassen</string>
     <string name="favourites_edit_dialog_title">Favoriteninformationen</string>
     <string name="simulate_your_location_stop_descr">Standort-Simulation beenden.</string>
     <string name="simulate_your_location_descr">Simulation Ihrer Position mit einer berechneten Route oder einem aufgezeichneten GPX-Track.</string>
@@ -1954,7 +1954,7 @@ Lon %2$s</string>
     <string name="feedback">Bewertung</string>
     <string name="contact_us">Kontakt</string>
     <string name="map_legend">Kartenlegende</string>
-    <string name="access_from_map_description">Menütaste startet die Übersichtsseite, nicht das Menü.</string>
+    <string name="access_from_map_description">Menütaste startet die Übersichtsseite, nicht das Menü</string>
     <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht.</string>
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
     <string name="release_2_2">\\022 Neue kontextbezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten 
@@ -1987,10 +1987,10 @@ Lon %2$s</string>
 	<string name="osn_comment_dialog_title">Kommentar hinzufügen</string>
 	<string name="osn_reopen_dialog_title">Notiz wieder öffnen</string>
 	<string name="osn_close_dialog_title">Notiz schließen</string>
-	<string name="osn_add_dialog_success">Notiz erfolgreich erstellt</string>
-	<string name="osn_add_dialog_error">Fehler aufgetreten: Notiz wurde nicht erstellt</string>
-	<string name="osn_close_dialog_success">Notiz wurde erfolgreich geschlossen</string>
-	<string name="osn_close_dialog_error">Fehler aufgetreten: Notiz wurde nicht geschlossen</string>
+	<string name="osn_add_dialog_success">Notiz erstellt</string>
+	<string name="osn_add_dialog_error">Fehler: Notiz wurde nicht erstellt</string>
+	<string name="osn_close_dialog_success">Notiz wurde geschlossen</string>
+	<string name="osn_close_dialog_error">Ausnahme aufgetreten: Notiz wurde nicht geschlossen</string>
 	<string name="context_menu_item_delete_waypoint">GPX-Wegpunkt löschen?</string>
     <string name="context_menu_item_edit_waypoint">GPX-Wegpunkt bearbeiten</string>
     <string name="lang_fy">Westfriesisch</string>
