@@ -523,7 +523,7 @@
 	<string name="indexing_map">Indiziere Karte…</string>
 	<string name="indexing_poi">Indiziere POI…</string>
 	<string name="indexing_transport">Indiziere ÖPNV…</string>
-	<string name="shared_string_io_error">I/O Fehler aufgetreten</string>
+	<string name="shared_string_io_error">I/O Fehler</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
@@ -737,7 +737,7 @@
 	<string name="download_question">Herunterladen {0} - {1}?</string>
 	<string name="download_question_exist">Offline Daten für {0} existieren schon ({1}). Wollen Sie die überschreiben ({2})?</string>
 	<string name="address">Adresse</string>
-	<string name="shared_string_download_successful">Daten erfolgreich heruntergeladen</string>
+	<string name="shared_string_download_successful">Heruntergeladen</string>
 	
 	<string name="downloading_list_indexes">Die Liste der verfügbaren Regionen wird geladen…</string>
 	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.net nicht geladen.</string>
@@ -1738,14 +1738,14 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="shared_string_deselect">Abwählen</string>
 	<string name="shared_string_do_not_use">Nicht benutzen</string>
 	<string name="shared_string_deselect_all">Alle abwählen</string>
-	<string name="shared_string_unexpected_error">Ein unerwarteter Fehler ist aufgetreten!</string>
+	<string name="shared_string_unexpected_error">Unerwarteter Fehler</string>
 	<string name="shared_string_collapse">Einklappen</string>
 	<string name="shared_string_address">Adresse</string>
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>
 	<string name="shared_string_places">Orte</string>
 	<string name="welcome_select_region">Zur korrekten Wiedergabe von Verkehrszeichen und -regeln, bitte Region wählen:</string>
-	<string name="welcome_text">OsmAnd bietet globale Offline-Karten und Offline-Navigation!</string>
+	<string name="welcome_text">OsmAnd bietet globale Offline-Karten und Offline-Navigation.</string>
 	<string name="waypoint_visit_before">Vorher besuchen</string>
 	<string name="action_create">Aktion erstellen</string>
 	<string name="action_modify">Aktion ändern</string>
