@@ -1485,7 +1485,7 @@
     
 	<string name="import_file_favourites">داده‌ها را به‌صورت فایل GPX ذخیره می‌کنید یا نقاط بین‌راهی را به نقاط برگزیده اضافه می‌کنید؟</string>
 	
-	<string name="gpx_file_is_empty">مسیر GPX خالی است</string>
+	<string name="gpx_file_is_empty">مسیر GPX خالی</string>
     
     <string name="shared_string_my_tracks">مسیرهای من</string>
     <string name="shared_string_my_favorites">نقاط برگزیدهٔ من</string>
