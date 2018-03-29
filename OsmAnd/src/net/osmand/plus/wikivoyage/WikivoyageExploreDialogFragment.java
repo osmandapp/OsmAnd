@@ -5,39 +5,24 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
 
-public class WikivoyageExploreDialogFragment extends BaseOsmAndDialogFragment {
+public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragment {
 
 	public static final String TAG = "WikivoyageExploreDialogFragment";
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
-		final int themeRes = isNightMode(false) ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		final View mainView = inflate(R.layout.fragment_wikivoyage_explore_dialog, container);
 
-		final View mainView = LayoutInflater.from(new ContextThemeWrapper(app, themeRes))
-				.inflate(R.layout.fragment_wikivoyage_explore_dialog, container, false);
-
-		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getContentIcon(R.drawable.ic_arrow_back));
-		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
 
 		((ImageView) mainView.findViewById(R.id.search_icon))
 				.setImageDrawable(getContentIcon(R.drawable.ic_action_search_dark));

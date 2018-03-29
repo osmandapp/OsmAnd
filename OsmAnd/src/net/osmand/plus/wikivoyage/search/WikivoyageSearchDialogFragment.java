@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +17,14 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import net.osmand.ResultMatcher;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageArticleDialogFragment;
+import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
 import java.util.List;
 
-public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment {
+public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment {
 
 	public static final String TAG = "WikivoyageSearchDialogFragment";
 
@@ -45,22 +43,12 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
-		searchHelper = new WikivoyageSearchHelper(app);
-		final int themeRes = isNightMode(false) ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		searchHelper = new WikivoyageSearchHelper(getMyApplication());
 
-		final View mainView = LayoutInflater.from(new ContextThemeWrapper(app, themeRes))
-				.inflate(R.layout.fragment_wikivoyage_search_dialog, container, false);
+		final View mainView = inflate(R.layout.fragment_wikivoyage_search_dialog, container);
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getContentIcon(R.drawable.ic_arrow_back));
-		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		setupToolbar(toolbar);
 
 		searchEt = (EditText) toolbar.findViewById(R.id.searchEditText);
 		searchEt.setHint(R.string.shared_string_search);
