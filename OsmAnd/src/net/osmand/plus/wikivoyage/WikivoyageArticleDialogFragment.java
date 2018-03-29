@@ -1,15 +1,25 @@
 package net.osmand.plus.wikivoyage;
 
+import android.app.Dialog;
+import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.webkit.WebView;
+import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
@@ -19,22 +29,132 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	public static final String TAG = "WikivoyageArticleDialogFragment";
 
 	private static final String SEARCH_RESULT_KEY = "search_result_key";
+	private static final String SELECTED_LANG_KEY = "selected_lang_key";
+
+	private WikivoyageSearchResult searchResult;
+	private String selectedLang;
+
+	private TextView selectedLangTv;
+	private WebView contentWebView;
+
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		Dialog dialog = super.onCreateDialog(savedInstanceState);
+		if (Build.VERSION.SDK_INT >= 21) {
+			Window window = dialog.getWindow();
+			if (window != null) {
+				window.setStatusBarColor(getResolvedColor(nightMode
+						? R.color.status_bar_wikivoyage_dark
+						: R.color.status_bar_wikivoyage_light));
+				if (!nightMode) {
+					AndroidUtils.setLightStatusBarFlag(window.getDecorView());
+				}
+			}
+		}
+		return dialog;
+	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		if (savedInstanceState != null) {
+			selectedLang = savedInstanceState.getString(SELECTED_LANG_KEY);
+		}
+
 		final View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container);
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
 
-		WikivoyageSearchResult searchResult = (WikivoyageSearchResult) getArguments().getParcelable(SEARCH_RESULT_KEY);
-		WikivoyageArticle article = getMyApplication().getWikivoyageDbHelper()
-				.getArticle(searchResult.getCityId(), searchResult.getLang().get(0));
+		ColorStateList selectedLangColorStateList = AndroidUtils.createColorStateList(
+				getContext(), nightMode,
+				R.color.icon_color, R.color.wikivoyage_active_light,
+				R.color.icon_color, R.color.wikivoyage_active_dark
+		);
 
-		WebView contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
-		contentWebView.loadData(article.getContent(), "text/html", "UTF-8");
+		selectedLangTv = (TextView) mainView.findViewById(R.id.select_language_text_view);
+		selectedLangTv.setTextColor(selectedLangColorStateList);
+		selectedLangTv.setCompoundDrawablesWithIntrinsicBounds(getSelectedLangIcon(), null, null, null);
+		selectedLangTv.setBackgroundResource(nightMode
+				? R.drawable.wikipedia_select_lang_bg_dark_n : R.drawable.wikipedia_select_lang_bg_light_n);
+		selectedLangTv.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showPopupLangMenu(v);
+			}
+		});
+
+		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
 
 		return mainView;
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		populateArticle();
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(SELECTED_LANG_KEY, selectedLang);
+	}
+
+	private void showPopupLangMenu(View view) {
+		if (searchResult == null) {
+			return;
+		}
+
+		final PopupMenu popup = new PopupMenu(view.getContext(), view, Gravity.END);
+		for (final String lang : searchResult.getLang()) {
+			MenuItem item = popup.getMenu().add(lang);
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					if (!selectedLang.equals(lang)) {
+						selectedLang = lang;
+						populateArticle();
+					}
+					return true;
+				}
+			});
+		}
+
+		popup.show();
+	}
+
+	private void populateArticle() {
+		if (searchResult == null) {
+			Bundle args = getArguments();
+			if (args != null) {
+				searchResult = (WikivoyageSearchResult) args.getParcelable(SEARCH_RESULT_KEY);
+			}
+		}
+		if (searchResult == null) {
+			return;
+		}
+		if (selectedLang == null) {
+			selectedLang = searchResult.getLang().get(0);
+		}
+
+		selectedLangTv.setText(selectedLang);
+
+		WikivoyageArticle article = getMyApplication().getWikivoyageDbHelper()
+				.getArticle(searchResult.getCityId(), selectedLang);
+		if (article == null) {
+			return;
+		}
+
+		contentWebView.loadData(article.getContent(), "text/html", "UTF-8");
+	}
+
+	private Drawable getSelectedLangIcon() {
+		Drawable normal = getContentIcon(R.drawable.ic_action_map_language);
+		if (Build.VERSION.SDK_INT >= 21) {
+			Drawable active = getActiveIcon(R.drawable.ic_action_map_language);
+			return AndroidUtils.createStateListDrawable(normal, active);
+		}
+		return normal;
 	}
 
 	public static boolean showInstance(FragmentManager fm, WikivoyageSearchResult searchResult) {

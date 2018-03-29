@@ -64,6 +64,9 @@
         <attr name="secondary_icon_color" format="color"/>
         <attr name="primary_icon_color" format="color"/>
         <attr name="light_icon_color" format="color"/>
+
+		<attr name="wikivoyage_bg" format="reference"/>
+		<attr name="wikivoyage_app_bar" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
