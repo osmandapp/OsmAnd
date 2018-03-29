@@ -2855,4 +2855,8 @@ Por favor proporciona un código completo</string>
     <string name="map_imported_successfully">Mapa importado correctamente</string>
     <string name="shared_string_total">Total</string>
     <string name="clear_all_intermediates">Quitar todos los puntos intermedios</string>
+    <string name="shared_string_travel">Viaje</string>
+    <string name="waypoints_removed_from_map_markers">Puntos intermedios eliminados de los marcadores del mapa</string>
+    <string name="nothing_found_in_radius">Nada encontrado dentro del radio:</string>
+    <string name="select_waypoints_category_description">Puede añadir todos los puntos de ruta de la traza o seleccionar categorías separadas.</string>
     </resources>
