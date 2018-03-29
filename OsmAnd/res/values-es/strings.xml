@@ -2125,7 +2125,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="coords_search">Búsqueda de coordenadas</string>
     <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
     <string name="back_to_search">Volver a buscar</string>
-    <string name="confirmation_to_delete_history_items">¿Quieres quitar del historial los elementos seleccionados?</string>
+    <string name="confirmation_to_delete_history_items">¿Quieres quitar de \'Historial\' los elementos seleccionados?</string>
     <string name="show_something_on_map">Mostrar %1$s en el mapa</string>
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
     <string name="release_2_4">"• Nueva y muy poderosa búsqueda por texto libre 
@@ -2151,7 +2151,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="shared_string_change">Cambiar</string>
     <string name="get_started">Empieza</string>
     <string name="skip_map_downloading">Saltar descarga de mapas</string>
-    <string name="skip_map_downloading_desc">No tienes un mapa descargado instalado. Puedes elegir uno de la lista o descargarlo más tarde vía Menú - %1$s.</string>
+    <string name="skip_map_downloading_desc">No tienes un mapa descargado instalado. Puedes elegir uno de la lista o descargarlo más tarde vía \'Menú - %1$s\'.</string>
     <string name="search_another_country">Selecciona otra región</string>
     <string name="search_map">Buscando mapas…</string>
     <string name="first_usage_wizard_desc">Deja que OsmAnd determine tu ubicación y sugiera mapas que descargar para esa región.</string>
@@ -2161,12 +2161,12 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="search_location">Búscando ubicación…</string>
     <string name="storage_free_space">Espacio libre</string>
     <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, trazas, etc.): %1$s.</string>
-    <string name="give_permission">Dar permiso</string>
+    <string name="give_permission">Otorgar permiso</string>
     <string name="allow_access_location">Permitir acceso a la ubicación</string>
     <string name="first_usage_greeting">Obtén indicaciones y descubre nuevos lugares sin conexión a Internet</string>
     <string name="search_my_location">Encontrar mi ubicación</string>
-    <string name="no_update_info_desc">Omite la búsqueda de nuevas actualizaciones o descuentos relacionados con OsmAnd.</string>
-    <string name="no_update_info">No mostrar actualizaciones</string>
+    <string name="no_update_info_desc">No comprueba nuevas actualizaciones o descuentos relacionados con OsmAnd.</string>
+    <string name="no_update_info">No mostrar nuevas versiones</string>
     <string name="osm_live_payment_desc">Se aplicará un cargo mensual por suscripción. Puedes cancelar tu suscripción en Google Play en cualquier momento.</string>
     <string name="donation_to_osm">Donación a la comunidad de OpenStreetMap</string>
     <string name="donation_to_osm_desc">Parte de tu donación se enviará a los usuarios de OSM que realizaron cambios a OpenStreetMaps. El coste de la suscripción se mantiene.</string>
@@ -2220,11 +2220,11 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="shared_string_record">Grabar</string>
     <string name="rendering_attr_contourColorScheme_description">Esquema de color de las curvas de nivel</string>
     <string name="save_track_min_speed">Velocidad mínima para registro</string>
-    <string name="save_track_min_speed_descr">Filtro: Establece la velocidad mínima para que un punto se registre.</string>
+    <string name="save_track_min_speed_descr">Filtro: No registrar puntos por debajo de esta velocidad.</string>
     <string name="save_track_min_distance">Registro de desplazamiento mínimo</string>
-    <string name="save_track_min_distance_descr">Filtro: Establece la distancia mínima desde la última ubicación para que un punto se registre.</string>
+    <string name="save_track_min_distance_descr">Filtro: Establece la distancia mínima desde un punto para registrar uno nuevo.</string>
     <string name="save_track_precision">Precisión mínima para registro</string>
-    <string name="save_track_precision_descr">Filtro: Establece la precisión mínima de un punto para que se registre.</string>
+    <string name="save_track_precision_descr">Filtro: No registrar hasta que se alcance esta precisión.</string>
     <string name="christmas_poi">PDI de Navidades</string>
     <string name="christmas_desc">Anticipando las vacaciones de Navidad y Año nuevo, puedes optar por mostrar el PDI asociado a las Navidades: árboles de Navidad, mercados, etc..</string>
     <string name="christmas_desc_q">¿Mostrar PDI de Navidades?</string>
@@ -2334,25 +2334,36 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
 	<string name="shared_string_action_name">Nombre de acción</string>
 <string name="release_2_6">"• Nueva función: Botón de acción rápida 
 \n
+\n 
 \n • Mejorada la respuesta de gestos táctiles (p.e. desplazamiento y acercamiento simultáneos) 
 \n
+\n 
 \n • El nuevo tipo de letra del mapa abarca más regiones 
 \n
+\n 
 \n • Soporte TTS para variantes regionales de idiomas (y acentos) 
 \n
+\n 
 \n • Mejorada la visibilidad en varios estilos de mapas y Wikipedia 
 \n
+\n 
 \n • Soporte para «Código  de Ubicación Abierto» (Open Location Code) 
 \n
+\n 
 \n • Visualización del perfil de elevación, pendiente y velocidad para las trazas GPX grabadas y la ruta calculada 
 \n
 \n 
-\n • Opción «Estilo de conducción» y mejoras lógicas en el cálculo de rutas para bicicleta 
+\n 
 \n
-\n • Opciones para usar los datos de altitud en el cálculo de rutas para bicicleta 
+\n • Parámetro «Estilo de conducción» y mejoras lógicas en el cálculo de rutas para bicicleta 
 \n
+\n 
+\n • Ajustes de datos de altitud para las rutas en bicicleta 
+\n
+\n 
 \n • Varias otras mejoras y corrección de errores 
 \n
+\n 
 \n y más…"</string>
 	<string name="select_gpx_folder">Seleccionar carpeta de traza</string>
     <string name="file_can_not_be_moved">No se puede mover el archivo.</string>
@@ -2388,7 +2399,7 @@ Por favor proporciona un código completo</string>
     <string name="quick_action_map_underlay_switch">El mapa subyacente se ha cambiado a «%s».</string>
     <string name="shared_string_slope">Pendiente</string>
     <string name="add_new_folder">Añadir nueva carpeta</string>
-    <string name="points_delete_multiple_succesful">Punto(s) eliminados con éxito.</string>
+    <string name="points_delete_multiple_succesful">Punto(s) eliminado(s).</string>
     <string name="points_delete_multiple">¿Seguro que quiere borrar %1$d punto(s)?</string>
     <string name="route_points_category_name">Giros a pasar en esta ruta</string>
     <string name="track_points_category_name">Puntos destacados en esta ruta</string>
@@ -2398,8 +2409,8 @@ Por favor proporciona un código completo</string>
     <string name="shared_string_time_moving">Tiempo moviéndose</string>
     <string name="shared_string_time_span">Lapso de tiempo</string>
     <string name="shared_string_max">Máx</string>
-    <string name="shared_string_start_time">Hora de inicio</string>
-    <string name="shared_string_end_time">Hora de fin</string>
+    <string name="shared_string_start_time">Salida</string>
+    <string name="shared_string_end_time">Llegada</string>
     <string name="shared_string_color">Color</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Empinado</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Poco empinado</string>
@@ -2411,10 +2422,10 @@ Por favor proporciona un código completo</string>
     <string name="lang_ber">Bereber</string>
     <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recopila información acerca de las secciones que abres en la aplicación. No recopilamos datos de ubicación, ingresos en la aplicación o datos relacionados con las áreas que visualizas, buscas o descargas.</string>
-    <string name="do_not_show_startup_messages">No mostrar los mensajes en el inicio</string>
-    <string name="do_not_show_startup_messages_desc">Oculta los descuentos de la aplicación y los mensajes especiales de eventos locales.</string>
+    <string name="do_not_show_startup_messages">No mostrar mensajes en el inicio</string>
+    <string name="do_not_show_startup_messages_desc">No mostrar descuentos de la aplicación y los mensajes de eventos locales especiales.</string>
     <string name="parking_options">Opciones de aparcamiento</string>
-    <string name="full_version_thanks">¡Gracias por comprar la versión completa de OsmAnd!</string>
+    <string name="full_version_thanks">Gracias por comprar la versión de pago de OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Seleccionar la fluctuación de elevación</string>
     <string name="right_side_navigation">Conducción por la derecha</string>
     <string name="driving_region_automatic">Automático</string>
@@ -2450,11 +2461,11 @@ Por favor proporciona un código completo</string>
     <string name="no_underlay">Sin subyacente</string>
     <string name="subscribe_email_error">Error</string>
     <string name="subscribe_email_desc">¡Suscríbete a nuestra lista de correo electrónico sobre descuentos de la aplicación y obtén 3 descargas de mapa adicionales!</string>
-    <string name="depth_contour_descr">Curvas de nivel de los fondos marinos y mapas de puntos náuticos.</string>
+    <string name="depth_contour_descr">Curvas de profundidad y mapas de puntos náuticos.</string>
     <string name="sea_depth_thanks">Gracias por adquirir las curvas de profundidad náuticas</string>
     <string name="index_item_depth_contours_osmand_ext">Curvas de profundidad náuticas</string>
-    <string name="index_item_depth_points_southern_hemisphere">Curvas de profundidad náuticas del hemisferio sur</string>
-    <string name="index_item_depth_points_northern_hemisphere">Curvas de profundidad náuticas del hemisferio norte</string>
+    <string name="index_item_depth_points_southern_hemisphere">Puntos de profundidad náuticos del hemisferio sur</string>
+    <string name="index_item_depth_points_northern_hemisphere">Puntos de profundidad náuticos del hemisferio norte</string>
     <string name="download_depth_countours">Curvas de profundidad náuticas</string>
     <string name="nautical_maps">Mapas náuticos</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres, de ámbito mundial y de alta calidad de OpenStreetMap (OSM). Disfruta de la navegación por voz y óptica, visualización de puntos de interés (PDI), creación y gestión de trazas GPX, uso de la visualización de las curvas de nivel y de la información de altitud, elección entre modos conducción, ciclista y peatonal, edición de OSM y mucho más.
