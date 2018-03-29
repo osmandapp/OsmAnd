@@ -741,7 +741,7 @@
 	
 	<string name="downloading_list_indexes">Die Liste der verfügbaren Regionen wird geladen…</string>
 	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.net nicht geladen.</string>
-	<string name="select_index_file_to_download">Suche war erfolglos. Karten für nicht vorhandene Regionen können selbst erstellt werden, siehe http://osmand.net.</string>
+	<string name="select_index_file_to_download">Suche war erfolglos. Karten für nicht vorhandene Regionen können selbst erstellt werden, siehe https://osmand.net.</string>
 	
 	<string name="fav_points_edited">Favorit wurde bearbeitet</string>
 	<string name="fav_points_not_exist">Keine Favoriten vorhanden</string>
@@ -1236,8 +1236,8 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="local_osm_changes_delete_all_confirm">Sie löschen %1$d OSM-Änderung(en). Fortfahren?</string>
 	<string name="shared_string_delete_all">Alle löschen</string>
 	<string name="amenity_type_seamark">Schifffahrtsobjekte</string>
-	<string name="app_modes_choose_descr">Auswahl der Nutzungsprofile, die in der Anwendung angezeigt werden sollen.</string>
-	<string name="app_modes_choose">Anwendungsprofile</string>
+	<string name="app_modes_choose_descr">Auswahl der Nutzungsprofile, die in der App angezeigt werden sollen.</string>
+	<string name="app_modes_choose">App-profile</string>
 	<string name="routing_attr_prefer_motorway_name">Autobahnen bevorzugen</string>
 	<string name="routing_attr_prefer_motorway_description">Autobahnen bevorzugen.</string>
 	
@@ -1259,20 +1259,20 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="copying_osmand_one_file_descr">Datei (%s) wird an den neuen Speicherort kopiert…</string>
 	<string name="copying_osmand_files_descr">OsmAnd-Dateien werden zum neuen Speicherort (%s) kopiert…</string>
 	<string name="copying_osmand_files">OsmAnd-Dateien werden kopiert…</string>
-	<string name="calculate_osmand_route_gpx">OsmAnd-Offline-Route berechnen</string>
+	<string name="calculate_osmand_route_gpx">OsmAnd-Route offline berechnen</string>
 	<string name="app_mode_truck">LKW</string>
 	<string name="guidance_preferences_descr">Navigationseinstellungen</string>
 	<string name="routing_preferences_descr">Einstellungen für Routenberechnung</string>
 	<string name="speech_rate_descr">Sprachgeschwindigkeit der TTS-Ausgabe bestimmen.</string>
 	<string name="speech_rate">Sprachgeschwindigkeit</string>
 	<string name="complex_route_calculation_failed">Schnelle Routenberechnung fehlgeschlagen (%s), Rückfall auf langsame Berechnung.</string>
-	<string name="disable_complex_routing_descr">Zwei-Phasen-Routing für Autonavigation deaktivieren.</string>
+	<string name="disable_complex_routing_descr">Zwei-Phasen-Routing für Fahrzeugnavigation deaktivieren.</string>
 	<string name="disable_complex_routing">Komplexes Routing deaktivieren</string>
 	<string name="shared_string_select_on_map">Auf Karte auswählen</string>
 	<string name="shared_string_favorite">Favorit</string>
 	<string name="route_preferences">Routing-Einstellungen</string>
 	<string name="route_info">Routen-Informationen</string>
-	<string name="calculate_osmand_route_without_internet">OsmAnd-Route ohne Internetverbindung berechnen</string>
+	<string name="calculate_osmand_route_without_internet">OsmAnd-Routenteil offline berechnen</string>
 	<string name="use_displayed_track_for_navigation">Möchten Sie den angezeigten Track zur Navigation verwenden?</string>
 	<string name="keep_and_add_destination_point">Als letztes Ziel hinzufügen</string>
 	<string name="select_gpx">GPX-Datei auswählen…</string>
@@ -1312,7 +1312,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	
 	<string name="show_zoom_buttons_navigation_descr">Zoomtasten bei Navigation anzeigen.</string>
 	<string name="show_zoom_buttons_navigation">Zoomtasten anzeigen</string>
-	<string name="no_index_file_to_download">Keine Downloads gefunden, bitte die Internet-Verbindung überprüfen!</string>
+	<string name="no_index_file_to_download">Keine Downloads gefunden, bitte die Internet-Verbindung überprüfen.</string>
 	<string name="none_selected_gpx">Keine GPX-Datei ausgewählt. Zum Auswählen lange auf einen vorhandenen Track drücken.</string>
 	
 	<string name="local_index_select_gpx_file">Zum Anzeigen auswählen</string>
@@ -2270,7 +2270,7 @@ Derzeit sind nur {2} MB verfügbar.</string>
     <string name="get_started">Erste Schritte</string>
     <string name="update_all_maps_now">Wollen Sie jetzt alle Karten aktualisieren?</string>
     <string name="clear_tile_data">Alle Kartenkacheln löschen</string>
-    <string name="skip_map_downloading_desc">Es sind keine Offline-Karten installiert. Sie können jetzt eine Karte auswählen oder später Karten über Menü - %1$s herunterladen.</string>
+    <string name="skip_map_downloading_desc">Es sind keine Offline-Karten installiert. Sie können jetzt eine Karte auswählen oder später Karten über \'Menü - %1$s\' herunterladen.</string>
     <string name="search_another_country">Eine andere Region auswählen</string>
     <string name="search_map">Karten werden gesucht …</string>
     <string name="first_usage_wizard_desc">Lassen Sie OsmAnd Ihren Standort bestimmen und für diese Region Karten zum Herunterladen vorschlagen.</string>

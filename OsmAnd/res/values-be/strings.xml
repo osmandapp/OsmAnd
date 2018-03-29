@@ -338,7 +338,7 @@
 	<string name="bg_service_sleep_mode_on">Спынiць\n фонавы рэжым</string>
 	<string name="gps_wakeup_interval">Iнтэрвал абуджэньня GPS: %s</string>
 	<string name="int_continuosly">Безперапынны</string>
-	<string name="screen_is_locked">Для разблакоўкі экрана дакраніцеся да значка блакаваньня</string>
+	<string name="screen_is_locked">Націсніце значок блакавання каб разблакаваць экран</string>
 	<string name="map_widget_top_text">Назва вуліцы</string>
 	<string name="map_widget_config">Сканфігураваць экран</string>
 	<string name="map_widget_back_to_loc">Дзе я</string>
@@ -365,8 +365,8 @@
 	<string name="show_cameras">Камеры хуткасці</string>
 	<string name="show_traffic_warnings">Абмежаванні руху</string>
 	<string name="avoid_toll_roads">Пазьбягаць платныя дарогі</string>
-	<string name="continue_follow_previous_route_auto">Папярэдняя навігацыя не была скончаная. Працягваць кіравацца ёю? (%1$s сэкундаў)</string>
-	<string name="route_updated_loc_found">Маршрут будзе разлічвацца як толькі вызначыцца становішча</string>
+	<string name="continue_follow_previous_route_auto">Працягнуць прытрымлівацца папярэдняй нескончанай навігацыі? (%1$s сэкундаў)</string>
+	<string name="route_updated_loc_found">Чаканне пазіцыі для разліку маршруту</string>
 	<string name="osmand_parking_hours">Гадзін</string>
 	<string name="osmand_parking_minutes">Хвiлiн</string>
 	<string name="osmand_parking_position_description_add_time">Аўтамабіль прыпаркаваны ў</string>
@@ -382,8 +382,8 @@
 	<string name="shared_location">Агульныя месцы</string>
 	<string name="osmand_parking_event">Забраць машыну са стаянкі</string>
 	<string name="osmand_parking_warning">Папярэджаньне</string>
-	<string name="osmand_parking_warning_text">Напамін аб абмежаваньні часу паркоўкі аўтамабіля ўжо дададзены ў каляндар. Вам будзе неабходна яго выдаліць ўручную.</string>    
-	<string name="osmand_parking_time_limit_title">Задайце абмежаваньне часу стаянкі</string>
+	<string name="osmand_parking_warning_text">Напамін аб абмежаванні часу паркоўкі аўтамабіля ўжо дададзены ў каляндар. Вам будзе неабходна яго выдаліць ўручную.</string>    
+	<string name="osmand_parking_time_limit_title">Задайце абмежаванне часу стаянкі</string>
 	<string name="osmand_parking_delete_confirm">Вы хочаце выдаліць маркер прыпаркаванага аўтамабіля?</string>
 	<string name="osmand_parking_delete">Выдаліць маркер стаянкі</string>
 	<string name="osmand_parking_choose_type">Выберыце тып паркоўкі</string>
@@ -393,7 +393,7 @@
 	<string name="osmand_parking_time_limit">Час стаянкі абмежаваны</string>
 	<string name="osmand_parking_time_no_limit">Час стаянкі неабмежаваны</string>
 	<string name="osmand_parking_position_description">Становішча вашага прыпаркаванага аўтамабіля. %1$s</string>
-	<string name="osmand_parking_position_description_add">Забраць аўтамабіль у:</string>
+	<string name="osmand_parking_position_description_add">Забраць аўтамабіль а:</string>
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Месца стаянкі</string>
@@ -407,7 +407,7 @@
 	<string name="gpxup_private">Прыватны</string>
 	<string name="asap">Як мага хутчэй</string>
 	
-	<string name="route_roundabout">Кругавы рух: %1$d зьезд</string>
+	<string name="route_roundabout">Кругавы рух: %1$d з\'езд</string>
 	<string name="route_kl">Трымайцеся левага боку</string>
 	<string name="route_kr">Трымайцеся правага боку</string>
 	<string name="rendering_attr_noPolygons_description">Адлюстроўваць толькі контуры, без залівання.</string>
@@ -435,14 +435,14 @@
 	<string name="modify_transparency">Зьмяніць празрыстасьць (0 - празрысты, 255 - непразрысты)</string>
 	<string name="confirm_interrupt_download">Скасаваць cьцягваньне файлу?</string>
 	<string name="first_time_msg">Дзякуй за карыстаньне OsmAnd. Каб карыстацца ўсімі магчымасьцямі дастасаваньня, вам патрэбныя некаторыя пазасеціўныя зьвесткі для вашага рэгіёну. Іх можна cьцягнуць праз \'Налады\' → \'Кіраваць файламі мапаў\'. Пасьля гэтага вы зможаце глядзець мапу, шукаць адрасы, бачыць POI і грамадзкі транспарт.</string>    
-	<string name="basemap_was_selected_to_download">Базавая мапа неабходная для карэктнай працы дастасаваньня і аўтаматычна была абраная для cьцягваньня.</string>
+	<string name="basemap_was_selected_to_download">Базавая мапа абраная для спампоўкі, бо неабходная для карэктнай працы.</string>
 	<string name="select_index_file_to_download">Нічога не знойдзена. Калі вы не знайшлі свой рэгіён, вы можаце стварыць мапу самастойна (гл. https://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Сеціўныя і кэшаваныя растравыя мапы</string>
 	<string name="local_indexes_cat_map">Стандартныя мапы (вэктарныя)</string>
 	<string name="index_settings_descr">Сцягванне і кіраванне файламі мапаў, што захоўваюцца на вашым прыстасаванні.</string>
-	<string name="map_online_plugin_is_not_installed">Актывуйце модуль анлайн мапаў, каб выбіраць розныя крыніцы для мапаў</string>
+	<string name="map_online_plugin_is_not_installed">Актывуйце модуль «Анлайн мапаў», каб выбіраць розныя крыніцы для мапаў</string>
 	<string name="map_online_data">Сеціўныя і растравыя мапы</string>
-	<string name="map_online_data_descr">Карыстацца сеціўнымі мапамі (cцягнуць і захоўваць фрагменты на картцы SD).</string>
+	<string name="map_online_data_descr">Карыстацца сеціўнымі мапамі (cцягнуць і захоўваць фрагменты на картцы памяці).</string>
 	<string name="shared_string_online_maps">Сеціўныя мапы</string>
 	<string name="online_map_settings_descr">Наладзьце крыніцы сеціўных або кэшаваных растравых мапаў.</string>
 	
@@ -478,14 +478,14 @@
 	<string name="validate_gpx_upload_name_pwd">Калі ласка, пазначце імя і пароль карыстальніка OSM, каб адсылаць GPX-файлы.</string>
     	<string name="default_buttons_support">Падтрымка</string>
 	<string name="support_new_features">Падтрымка новых уласьцівасьцяў</string>
-	<string name="support_new_features_descr">Ахвяраваць, каб убачыць новыя магчымасці, рэалізаваныя ў дастасаванні.</string>
+	<string name="support_new_features_descr">Ахвяраваць, каб убачыць новыя магчымасці, рэалізаваныя ў прыкладанні.</string>
 	<string name="show_ruler_level">Паказваць маштаб</string>	
 	<string name="info_button">Інфармацыя</string>
 	<string name="back_to_location">Вярнуцца да становішча</string>
 	
 	<string name="accessibility_mode">Рэжым даступнасьці</string>
-	<string name="accessibility_mode_descr">Уключыць уласцівасьці даступнасці.</string>
-	<string name="accessibility_default">Паводле глябальных наладаў сыстэмы</string>
+	<string name="accessibility_mode_descr">Уключае функцыі для карыстальнікаў з абмежаваннямі.</string>
+	<string name="accessibility_default">Паводле сістэмных наладаў Андроіда</string>
 	<string name="backToMenu">Назад да меню</string>
 	<string name="zoomOut">Аддаліць</string>
 	<string name="zoomIn">Наблізіць</string>
@@ -536,16 +536,16 @@
 	<string name="offline_edition">Аўтаномнае рэдагаваньне</string>
 	<string name="offline_edition_descr">Заўсёды выкарыстоўваць аўтаномнае рэдагаванне.</string>
 	
-	<string name="update_poi_does_not_change_indexes">Зьмены POI у дастасаваньні не ўплываюць на cьцягнутыя файлы мапаў, зьмены захоўваюцца толькі ў лякальныя файлы.</string>
-	<string name="local_openstreetmap_uploading">Перадача …</string>
+	<string name="update_poi_does_not_change_indexes">Змены POI у прыкладанні не паўплываюць на cпампаваныя файлы мапаў, змены захоўваюцца як файлы на вашай наладзе.</string>
+	<string name="local_openstreetmap_uploading">Перадача…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} POI/Нататкі былі адасланы</string>
 	<string name="local_openstreetmap_uploadall">Адаслаць усё</string>
 	
 	<string name="local_openstreetmap_upload">Адаслаць зьмены ў OSM</string>
 	<string name="local_openstreetmap_delete">Выдаліць зьмены</string>
 	<string name="local_openstreetmap_descr_title">Асінхроннае рэдагаваньне OSM:</string>
-	<string name="local_openstreetmap_settings">Лякальна захаваныя OSM POI/Нататкі</string>
-	<string name="local_openstreetmap_settings_descr">Паказаць і кіраваць OSM POI/Нататкамі ў лякальнай базе даных.</string>
+	<string name="local_openstreetmap_settings">OSM POI/нататкі захаваныя на прыладзе</string>
+	<string name="local_openstreetmap_settings_descr">Паказаць і кіраваць OSM POI/нататкамі ў базе даных на прыладзе.</string>
 	
 	
 	<string name="live_monitoring_interval_descr">Задайце інтэрвал сеткавага сачэння.</string>
@@ -582,7 +582,7 @@
 	<string name="global_settings">Агульныя налады</string>
 	<string name="index_settings">Кіраваць файламі мапаў</string>
 	<string name="general_settings">Агульныя</string>
-	<string name="general_settings_descr">Налады экрану і агульныя налады дастасавання.</string>
+	<string name="general_settings_descr">Налады экрану і агульныя налады прыкладання.</string>
 	<string name="global_app_settings">Агульныя налады праграмы</string>
 	<string name="user_name">Ваша імя карыстальніка OSM</string>
 	<string name="open_street_map_login_descr">Патрэбна для прадстаўлення ў openstreetmap.org.</string>
@@ -649,17 +649,17 @@
 	<string name="search_position_map_view">Цяперашні цэнтр мапы</string>
 	<string name="select_search_position">Пачатак:</string>
 	<string name="context_menu_item_search">Шукаць навокал</string>
-	<string name="route_successfully_saved_at">Маршрут пасьпяхова захаваны як \'%1$s\'.</string>
+	<string name="route_successfully_saved_at">Маршрут захаваны як \'%1$s\'.</string>
 	<string name="filename_input">Імя файла: </string>
 	<string name="file_with_name_already_exist">Файл з такой назвай ужо існуе.</string>
 	
-	<string name="local_index_upload_gpx_description">Адаслаць GPX-файлы на сервер OSM. Яны будуць выкарыстаныя для паляпшэння мапы.</string>
-	<string name="local_index_items_uploaded">%1$d з %2$d аб\'ектаў пасьпяхова адасланыя.</string>
+	<string name="local_index_upload_gpx_description">Адаслаць GPX-файлы ў OSM-супальнасць для паляпшэння мап.</string>
+	<string name="local_index_items_uploaded">%1$d з %2$d аб\'ектаў адасланыя.</string>
 	<string name="local_index_mi_upload_gpx">Адаслаць у OSM</string>
 	<string name="show_more_map_detail">Паказаць больш дэталей мапы</string>
 	<string name="show_more_map_detail_descr">Паказаць некаторыя дэталі вектарнай мапы (дарогі і іншыя) на меншым маштабе.</string>
-	<string name="favourites_delete_multiple_succesful">Улюбёныя пункты пасьпяхова выдаленыя.</string>
-	<string name="favorite_delete_multiple">Вы зьбіраецеся выдаліць %1$d упадабаныя і %2$d групы. Вы ўпэўненыя ?</string>
+	<string name="favourites_delete_multiple_succesful">Улюбёныя пункты выдаленыя.</string>
+	<string name="favorite_delete_multiple">Вы збіраецеся выдаліць %1$d улюблёных і %2$d груп. Вы ўпэўненыя?</string>
 	<string name="favorite_home_category">Дом</string>
 	<string name="favorite_friends_category">Сябры</string>
 	<string name="favorite_places_category">Месцы</string>
@@ -2304,7 +2304,7 @@
     <string name="use_osm_live_routing">Навігацыя OsmAnd Live</string>
     <string name="access_no_destination">Пункт прызначэння не зададзены</string>
     <string name="follow_us">Сачыце за намі</string>
-    <string name="access_direction_audio_feedback">Гукавая індыкацыя кірунку</string>
+    <string name="access_direction_audio_feedback">Гукавая напрамкі</string>
     <string name="access_direction_audio_feedback_descr">Індыцыраваць гукам кірунак на мэтавы пункт.</string>
     <string name="access_direction_haptic_feedback">Тактыльныя напрамкі</string>
     <string name="access_direction_haptic_feedback_descr">Індыцыраваць вібрацыяй кірунак на мэтавы пункт.</string>
@@ -2724,7 +2724,7 @@
 \n • GPS-навігацыя ў роварным рэжыме будуе маршрут выкарыстоўваючы роварныя шляхі 
 \n • Вы можаце бачыць вашу хуткасць і вышыню над узроўнем мора 
 \n • Опцыя GPX-запісу дазваляе вам запісваць ваша падарожжа і дзяліцца ім 
-\n • Праз дадатак вы можаце ўключыць адлюстраванне контурных ліній і зацямненне рэльефу</string>
+\n • Праз дадатак вы можаце ўключыць адлюстраванне гарызанталяў і зацямненне рэльефу</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Віджэт Mapillary</string>
     <string name="mapillary_widget_descr">Дазваляе хуткі ўнёсак ў Mapillary.</string>
