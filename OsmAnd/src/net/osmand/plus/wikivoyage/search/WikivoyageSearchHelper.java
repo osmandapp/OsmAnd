@@ -6,9 +6,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -20,18 +18,18 @@ public class WikivoyageSearchHelper {
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private OsmandApplication application;
-	private Set<SearchListener> listeners = new HashSet<>();
+	private SearchListener listener;
 
 	WikivoyageSearchHelper(OsmandApplication application) {
 		this.application = application;
 	}
 
 	public void registerListener(SearchListener listener) {
-		listeners.add(listener);
+		this.listener = listener;
 	}
 
-	public void unregisterListener(SearchListener listener) {
-		listeners.remove(listener);
+	public void unregisterListener() {
+		this.listener = null;
 	}
 
 	public void search(final String query, final ResultMatcher<WikivoyageSearchResult> rm) {
@@ -39,14 +37,9 @@ public class WikivoyageSearchHelper {
 			@Override
 			public void run() {
 				try {
-					application.runInUIThread(new Runnable() {
-						@Override
-						public void run() {
-							for (SearchListener listener : listeners) {
-								listener.onSearchStarted();
-							}
-						}
-					});
+					if (listener != null) {
+						listener.onSearchStarted();
+					}
 
 					rm.publish(null);
 
@@ -60,14 +53,9 @@ public class WikivoyageSearchHelper {
 
 					final List<WikivoyageSearchResult> results = application.getWikivoyageDbHelper().search(query);
 
-					application.runInUIThread(new Runnable() {
-						@Override
-						public void run() {
-							for (SearchListener listener : listeners) {
-								listener.onSearchFinished(results);
-							}
-						}
-					});
+					if (listener != null) {
+						listener.onSearchFinished(results);
+					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
