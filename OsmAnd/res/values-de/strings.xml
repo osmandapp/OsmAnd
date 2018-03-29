@@ -1547,10 +1547,10 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     
     <string name="anonymous_user">Anonymer Benutzer</string>
     <string name="logged_as">Angemeldet als %1$s</string>
-	<string name="anonymous_user_hint">Anonyme Benutzer können Folgendes nicht:
-- Gruppen erstellen;
-- Gruppen und Geräte mit dem Server synchronisieren;
-- Gruppen und Geräte im Privatbereich auf der Webseite verwalten.</string>
+	<string name="anonymous_user_hint">Anonyme Benutzer können folgendes nicht: 
+\n- Gruppen erstellen; 
+\n- Gruppen und Geräte mit dem Server synchronisieren; 
+\n- Gruppen und Geräte im Privatbereich auf der Webseite verwalten.</string>
     <string name="rendering_category_routes">Routen</string>
     <string name="rendering_category_details">Details</string>
     <string name="rendering_category_transport">ÖPNV-Linien</string>
@@ -2080,7 +2080,7 @@ Lon %2$s</string>
 <string name="select_month_and_country">Monat und Land auswählen</string>
 <string name="shared_string_type">Typ</string>
     <string name="starting_point">Startpunkt</string>
-    <string name="shared_string_undo_all">ALLES RÜCKGÄNGIG MACHEN</string>
+    <string name="shared_string_undo_all">Alles rückgängig machen</string>
     <string name="rendering_attr_hideIcons_name">POI Symbole</string>
     <string name="switch_start_finish">Start und Ziel tauschen</string>
 <string name="number_of_edits">Anzahl der Bearbeitungen</string>
@@ -2141,21 +2141,19 @@ Derzeit sind nur {2} MB verfügbar.</string>
     <string name="osm_live_month_cost_desc">Monatliche Zahlung.</string>
     <string name="osm_live_active">Aktiv</string>
     <string name="osm_live_not_active">Inaktiv</string>
-    <string name="osm_live_enter_email">Bitte gültige E-Mail-Adresse eingeben</string>
+    <string name="osm_live_enter_email">Bitte eine gültige E-Mail-Adresse eingeben</string>
     <string name="osm_live_enter_user_name">Bitte einen öffentlichen Namen eingeben</string>
-    <string name="osm_live_thanks">Vielen Dank für Ihr Abonnement von Live Aktualisierungen!</string>
+    <string name="osm_live_thanks">Vielen Dank für Ihr Abonnement von Live Aktualisierungen</string>
     <string name="osm_live_subscription_settings">Abonnementeinstellungen</string>
     <string name="osm_live_ask_for_purchase">Bitte kaufen Sie zuerst ein OsmAnd-Live-Abonnement</string>
 
     <string name="osm_live_region_desc">Teile Ihrer Spende werden an OSM-Mitwirkende weitergegeben, die diese Region bearbeiten.</string>
-    <string name="osm_live_header">Dieses Abonnement schaltet stündliche Updates für die gesamten weltweiten Karten frei. 
-Ein Teil dieser Einnahmen geht zurück an die OSM-Gemeinschaft, eine Auszahlung erfolgt je nach Anzahl der Beiträge zu den OSM-Daten. 
-Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekte Möglichkeit.</string>
+    <string name="osm_live_header">Dieses Abonnement schaltet stündliche Updates für die gesamten weltweiten Karten frei. Ein Teil dieser Einnahmen geht zurück an die OSM-Gemeinschaft, eine Auszahlung erfolgt je nach Anzahl der Beiträge zu den OSM-Daten. Wenn Sie OsmAnd und OSM lieben und unterstützen wollen und selbst unterstützt werden wollen, so ist dies die perfekte Möglichkeit.</string>
     
     <string name="shared_string_topbar">Obere Leiste</string>
     <string name="finish_navigation">Navigation beenden</string>
     <string name="avoid_road">Straßen vermeiden</string>
-    <string name="storage_directory_readonly_desc">Der momentan gewählte Speicherort ist schreibgeschützt. Es wurde vorübergehend zum internen Speicher gewechselt. Bitte einen gültigen Speicherort wählen.</string>
+    <string name="storage_directory_readonly_desc">Es wurde vorübergehend zum internen Speicher gewechselt, da der momentan gewählte Speicherort schreibgeschützt ist. Bitte einen gültigen Speicherort wählen.</string>
     <string name="storage_directory_shared">Gemeinsamer Speicher</string>
     <string name="release_2_3">\\022 OSM Live. Unterstütze Karten-Mitwirkende und Entwickler und erhalte stündliche Karten Aktualisierungen.
 \n
@@ -2169,13 +2167,13 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
 \n
 \n und mehr…</string>
     <string name="full_report">Vollständiger Bericht</string>
-    <string name="open_street_map_login_and_pass">OpenStreetMap-Zugang und Passwort</string>
-    <string name="osm_live_email_desc">Wird benötigt, um Ihnen Informationen zu Beiträgen bereitstellen zu können.</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap-Benutzername und -Passwort</string>
+    <string name="osm_live_email_desc">Informationen zu Beiträgen.</string>
     <string name="osm_live_support_region">Unterstützte Region</string>
     <string name="report">Bericht</string>
-    <string name="storage_permission_restart_is_required">Die Anwendung darf nun auf den externen Speicher schreiben. Ein manueller Neustart der Anwendung ist nötig.</string>
-    <string name="shared_string_move_up">Nach oben verschieben</string>
-    <string name="shared_string_move_down">Nach unten verschieben</string>
+    <string name="storage_permission_restart_is_required">Die App darf nun auf den externen Speicher schreiben, dazu ist aber ein manueller Neustart nötig.</string>
+    <string name="shared_string_move_up">Verschieben ↑</string>
+    <string name="shared_string_move_down">Verschieben ↓</string>
     <string name="file_name_containes_illegal_char">Dateiname beinhaltet nicht erlaubte Zeichen</string>
 <string name="no_waypoints_found">Keine Wegpunkte gefunden</string>
     <string name="no_map_markers_found">Bitte Kartenmarkierungen über die Karte hinzufügen</string>
@@ -2200,7 +2198,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="access_shared_string_navigate_up">Nach oben navigieren</string>
     <string name="access_sort">Sortieren</string>
     <string name="access_disable_offroute_recalc">Keine Neuberechnung nach Verlassen der Route</string>
-    <string name="access_disable_offroute_recalc_descr">Verhindert automatische Neuberechnung der Route nach dem verlassen der geplanten Route.</string>
+    <string name="access_disable_offroute_recalc_descr">Keine automatische Neuberechnung der Route nach dem Verlassen der geplanten Route.</string>
     <string name="access_disable_wrong_direction_recalc">Keine Neuberechnung bei falscher Fahrtrichtung</string>
     <string name="access_disable_wrong_direction_recalc_descr">Keine automatische Neuberechnung der Route bei Bewegung in entgegengesetzter Richtung.</string>
     <string name="access_smart_autoannounce">Intelligente automatische Ansage</string>
@@ -2216,9 +2214,9 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="follow_us">Folge uns</string>
     <string name="use_osm_live_routing_description">Navigation für OsmAnd-Live-Änderungen aktivieren.</string>
-	<string name="access_direction_audio_feedback">Akustische Rückmeldung zur Richtung</string>
+	<string name="access_direction_audio_feedback">Akustische Richtungsangaben</string>
     <string name="access_direction_audio_feedback_descr">Zielpunktrichtung durch Ton kenntlich machen.</string>
-    <string name="access_direction_haptic_feedback">Haptische Rückmeldung zur Richtung</string>
+    <string name="access_direction_haptic_feedback">Haptische Richtungsangaben</string>
     <string name="access_direction_haptic_feedback_descr">Zielpunktrichtung durch Vibration kenntlich machen.</string>
 <string name="change_markers_position">Position der Markierung ändern</string>
     <string name="current_track">Aktueller Track</string>
@@ -2272,7 +2270,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="get_started">Erste Schritte</string>
     <string name="update_all_maps_now">Wollen Sie jetzt alle Karten aktualisieren?</string>
     <string name="clear_tile_data">Alle Kartenkacheln löschen</string>
-    <string name="skip_map_downloading_desc">Es sind keine Offline-Karten installiert. Sie können jetzt eine Karte auswählen oder später Karten über “Menü - %1$s“ herunterladen.</string>
+    <string name="skip_map_downloading_desc">Es sind keine Offline-Karten installiert. Sie können jetzt eine Karte auswählen oder später Karten über Menü - %1$s herunterladen.</string>
     <string name="search_another_country">Eine andere Region auswählen</string>
     <string name="search_map">Karten werden gesucht …</string>
     <string name="first_usage_wizard_desc">Lassen Sie OsmAnd Ihren Standort bestimmen und für diese Region Karten zum Herunterladen vorschlagen.</string>
@@ -2324,9 +2322,9 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="save_track_min_speed">Mindestgeschwindigkeit für Erfassung</string>
     <string name="save_track_min_speed_descr">Filter: Mindestgeschwindigkeit, ab der Punkte aufgezeichnet werden.</string>
     <string name="save_track_min_distance">Mindestentfernung für Erfassung</string>
-    <string name="save_track_min_distance_descr">Filter: Wählen Sie die Mindestentfernung von der letzten Position, ab der ein neuer Punkt aufgezeichnet wird.</string>
+    <string name="save_track_min_distance_descr">Filter: Mindestentfernung von der letzten Position, ab der ein neuer Punkt aufgezeichnet wird.</string>
     <string name="save_track_precision">Mindestgenauigkeit für Erfassung</string>
-    <string name="save_track_precision_descr">Filter: Legen Sie die Mindestgenauigkeit für die Aufzeichnung eines Punktes fest.</string>
+    <string name="save_track_precision_descr">Filter: Mindestgenauigkeit für die Aufzeichnung eines Punktes.</string>
     <string name="rendering_attr_contourColorScheme_description">Farbschema für Höhenlinien</string>
     <string name="shared_string_continue">Fortsetzen</string>
     <string name="shared_string_pause">Pause</string>
