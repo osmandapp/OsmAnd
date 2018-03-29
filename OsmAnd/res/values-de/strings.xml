@@ -2124,7 +2124,7 @@ Derzeit sind nur {2} MB verfügbar.</string>
  (Derzeit sind {2} MB verfügbar.)</string>
     <string name="select_map_marker">Kartenmarkierung auswählen</string>
     <string name="map_markers_other">Andere Markierungen</string>
-    <string name="upload_osm_note_description">Sie können Ihre OSM-Notizen anonym hochladen oder Ihr OpenStreetMap.org-Profil nutzen.</string>
+    <string name="upload_osm_note_description">"Sie können Ihre OSM-Notizen anonym  oder mittels Ihres OpenStreetMap.org-Profils hochladen."</string>
     <string name="upload_osm_note">OSM-Notiz hochladen</string>
     <string name="upload_anonymously">Anonym hochladen</string>
 <string name="show_transparency_seekbar">Transparenz-Schieber anzeigen</string>
@@ -2355,7 +2355,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     
     <string name="gpx_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
-    <string name="gpx_no_tracks_title">Keine Tracks vorhanden</string>
+    <string name="gpx_no_tracks_title">Sie haben noch keine Tracks</string>
     <string name="gpx_no_tracks_title_folder">Tracks können dem Ordner hinzugefügt werden</string>
     <string name="gpx_add_track">Track hinzufügen</string>
     <string name="upload_poi">POI hochladen</string>
@@ -2507,13 +2507,13 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_time_moving">Zeit in Bewegung</string>
     <string name="shared_string_time_span">Dauer</string>
     <string name="shared_string_max">Max</string>
-    <string name="shared_string_start_time">Anfangszeit</string>
-    <string name="shared_string_end_time">Endzeit</string>
+    <string name="shared_string_start_time">Abreise</string>
+    <string name="shared_string_end_time">Ankunft</string>
     <string name="shared_string_color">Farbe</string>
     <string name="max_speed">Höchstgeschwindigkeit</string>
     <string name="average_speed">Durchschnittsgeschwindigkeit</string>
     <string name="gpx_track">Spur</string>
-    <string name="points_delete_multiple_succesful">Punkt(e) erfolgreich gelöscht.</string>
+    <string name="points_delete_multiple_succesful">Punkt(e) gelöscht.</string>
     <string name="points_delete_multiple">Es werden %1$d Punkt(e) gelöscht. Fortfahren?</string>
     <string name="track_points_category_name">Markante Punkte auf dieser Route</string>
     <string name="route_points_category_name">Richtungsänderungen entlang dieser Route</string>
@@ -2530,9 +2530,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="do_not_send_anonymous_app_usage">Keine anonymen App-Nutzungsdaten versenden</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd sammelt Informationen über durch Sie geöffnete App-Teile. Es wird niemals Ihre Position noch irgendeine Ihrer App-Eingaben oder Einzelheiten zu den von Ihnen betrachteten, gesuchten oder heruntergeladenen Gebieten versandt.</string>
     <string name="do_not_show_startup_messages">Keine Meldungen beim App-Start einblenden</string>
-    <string name="do_not_show_startup_messages_desc">Unterdrückt Meldungen zu App-Sonderangeboten und besonderen lokalen Ereignissen.</string>
+    <string name="do_not_show_startup_messages_desc">Keine Meldungen zu App-Sonderangeboten und besonderen lokalen Ereignissen anzeigen.</string>
     <string name="parking_options">Parkmöglichkeiten</string>
-    <string name="full_version_thanks">Vielen Dank, dass Sie die Vollversion von OsmAnd erworben haben!</string>
+    <string name="full_version_thanks">Vielen Dank, dass Sie die bezahlte Version von OsmAnd erworben haben.</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Bergig</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Weniger bergig</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Flach</string>
@@ -2551,7 +2551,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="osmand_extended_description_part8">OsmAnd ist quelloffen und wird stetig weiterentwickelt. Jeder kann durch Meldung von Fehlern, Verbesserung der Übersetzung oder Programmierung neuer Funktionen an der Anwendung mitarbeiten. Durch all diese Formen der Zusammenarbeit zwischen Entwickler und Anwender wird eine lebendige, kontinuierliche Verbesserung des Projekts gewährleistet. Darüberhinaus ist der Fortschritt des Projekts auch auf finanzielle Mitbeteiligung angewiesen, um die Programmierung und Testung neuer Funktionen fördern zu können. 
 \nUngefähre Kartenabdeckung und -qualität: • Westeuropa: **** • Osteuropa: *** • Russland: *** • Nordamerika: *** • Südamerika: ** • Asien: ** • Japan &amp; Korea: *** • Mittlerer Osten: ** • Afrika: ** • Antarktis: * - Die meisten Länder rund um den Globus stehen zum Herunterladen bereit! Holen Sie sich eine verlässliche Navigation für Ihr Land - sei es in Frankreich, Deutschland, Mexiko, Großbritannien, Spanien, den Niederlanden, den USA, Russland, Brasilien oder wo auch immer.</string>
     <string name="restore_purchases">Käufe wiederherstellen</string>
-    <string name="fonts_header">Schriftarten für Karten</string>
+    <string name="fonts_header">Kartenschriftarten</string>
     <string name="osmand_plus_extended_description_part1">"OsmAnd+ (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugriff auf die kostenlosen, weltweit verfügbaren und qualitativ hochwertigen Daten von OpenStreetMap (OSM). Genießen Sie die akustische und visuelle Navigation, die Betrachtung von POIs (points of interest), die Erstellung und Bearbeitung von  GPX-Tracks, die Visualisierung von Höhenlinien und -angaben, die Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Modus, die Möglichkeit der Mitarbeit an OSM und vieles mehr. OsmAnd+ ist die Kaufversion. Durch ihren Erwerb, unterstützen Sie das Projekt, fördern die Entwicklung neuer Funktionen und erhalten die neusten Aktualisierungen. Einige der Hauptmerkmale:"</string>
     <string name="osmand_plus_extended_description_part2">Navigation • funktioniert online (schnell) oder offline (ohne Roaming-Gebühren im Ausland) • akustische Schritt-für-Schritt-Wegführung (mit aufgenommenen oder synthetischen Stimmen) • optional mit Fahrspurassistent, Straßennamenanzeige und geschätzter Ankunftszeit • unterstützt Zwischenstopps entlang der Reiseroute • automatische Routenneuberechnung, sobald Sie von ihr abweichen • Ortssuche nach Adresse, Typ (z. B.: Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten</string>
     <string name="osmand_plus_extended_description_part4">OSM- und Wikipedia-Datennutzung • Qualitativ hochwertige Informationen aus den besten Gemeinschaftsprojekten der Welt • OSM-Daten stehen pro Land oder Region zur Verfügung • Wikipedia-POIs, großartig bei Besichtigungen • Unbegrenzte, kostenlose Downloads, direkt aus der App • Kompakte Offline-Vektorkarten, mindestens einmal pro Monat aktualisiert • Auswahl zwischen vollständigen Daten zu einer Region bzw. einfachen Daten zum Straßennetz (Beispiel: Japan insgesamt benötigt 700 MB, das Straßennetz nur 200 MB)</string>
@@ -2573,8 +2573,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_add_first_intermediate_desc">Drücken der Aktionstaste fügt die zum Bildschirmmittelpunkt gehörende Position als ersten Zwischenstopp ein.</string>
     <string name="subscribe_email_error">Fehler</string>
     <string name="subscribe_email_desc">Tragen Sie sich in unsere Mail-Liste zu App-Angeboten ein, und erhalten Sie dafür 3 zusätzliche Karten-Downloads!</string>
-    <string name="depth_contour_descr">Kartensatz, der die Meeresbodenkonturlinien und nautischen Punkte enthält.</string>
-    <string name="sea_depth_thanks">Vielen Dank, dass Sie die Meerestiefenkonturen erworben haben!</string>
+    <string name="depth_contour_descr">Karten für Meeresbodenkonturlinien und nautische Punkte.</string>
+    <string name="sea_depth_thanks">Vielen Dank, dass Sie die Meerestiefenkonturen erworben haben</string>
     <string name="index_item_depth_contours_osmand_ext">Nautische Tiefenkonturen</string>
     <string name="index_item_depth_points_southern_hemisphere">Nautische Meerestiefen der Südhalbkugel</string>
     <string name="index_item_depth_points_northern_hemisphere">Nautische Meerestiefen der Nordhalbkugel</string>
@@ -2599,7 +2599,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="change_color">Farbe ändern</string>
     <string name="edit_name">Namen ändern</string>
     <string name="animate_my_location">Meine Position animieren</string>
-    <string name="animate_my_location_desc">Animation meiner Position während der Navigation aktivieren.</string>
+    <string name="animate_my_location_desc">Animation beim Schwenken meiner Position während der Navigation aktivieren.</string>
     <string name="route_is_too_long_v2">Diese Route könnte zu lang sein, um berechnet zu werden. Bitte fügen Sie Zwischenziele hinzu, wenn innerhalb von 10 Minuten kein Ergebnis gefunden wird.</string>
     <string name="save_poi_too_many_uppercase">Der Name enthält zu viele Großbuchstaben. Möchten Sie den Vorgang fortsetzen?</string>
     <string name="display_zoom_level">Darstellung ab Zoomstufe: %1$s</string>
@@ -2614,7 +2614,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="search_favorites">Favoriten suchen</string>
     <string name="hillshade_menu_download_descr">Das Geländerelief-Overlay zu dieser Region herunterladen, um das Geländeprofil zu schattieren.</string>
     <string name="shared_string_plugin">Erweiterung</string>
-    <string name="srtm_purchase_header">Um Höhenlinien auf der Karte zu sehen, müssen Sie die Höhenlinien-Erweiterung erwerben und installieren.</string>
+    <string name="srtm_purchase_header">Um Höhenlinien auf der Karte zu sehen, müssen Sie die Höhenlinien-Erweiterung erwerben und installieren</string>
     <string name="srtm_menu_download_descr">Laden Sie die Höhenlinienkarte zu dieser Region herunter.</string>
     <string name="hillshade_purchase_header">Installieren Sie die Höhenlinien-Erweiterung, um sie auf der Karte anzuzeigen</string>
     <string name="private_access_routing_req">Ihr Ziel liegt in einem Gebiet mit Privatzugang. Möchten Sie für diese Reise den Zutritt über Privatwege zulassen?</string>
@@ -2777,9 +2777,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="marker_moved_to_active">Kartenmarkierung auf Karte verschoben</string>
     <string name="release_2_8">• Komplett überarbeitete Kartenmarkierungen mit Linien und Routenplanung 
 \n 
-\n• Entfernungsmesser bietet ausrichten auf Straße Funktion und speichern als Track 
+\n• Entfernungsmesser leistet Ausrichten auf Straße und Speichern als Track 
 \n 
-\n• Bug-Fixes, neue Daten auf dem Server alle 30 Minuten, Updates implementiert in der Navigation 
+\n• Fehlerkorrekturen, alle 30 Minuten neue Daten auf dem Server, Aktualisierungen in der Navigation implementiert
 \n 
 \n</string>
 	<string name="release_2_9">• Erkennung von Stoppschildern jetzt nach Fahrtrichtung 
