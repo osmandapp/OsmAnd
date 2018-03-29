@@ -1,7 +1,5 @@
 package net.osmand.plus.wikivoyage.search;
 
-import android.support.annotation.Nullable;
-
 import net.osmand.ResultMatcher;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
@@ -9,6 +7,7 @@ import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class WikivoyageSearchHelper {
 
@@ -18,55 +17,44 @@ public class WikivoyageSearchHelper {
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private OsmandApplication application;
-	private SearchListener listener;
+	private AtomicInteger requestNumber = new AtomicInteger();
 
 	WikivoyageSearchHelper(OsmandApplication application) {
 		this.application = application;
 	}
 
-	public void registerListener(SearchListener listener) {
-		this.listener = listener;
-	}
+	public void search(final String query, final ResultMatcher<List<WikivoyageSearchResult>> rm) {
+		final int req = requestNumber.incrementAndGet();
 
-	public void unregisterListener() {
-		this.listener = null;
-	}
-
-	public void search(final String query, final ResultMatcher<WikivoyageSearchResult> rm) {
 		singleThreadExecutor.submit(new Runnable() {
+
+			final int request = req;
+
 			@Override
 			public void run() {
 				try {
-					if (listener != null) {
-						listener.onSearchStarted();
-					}
-
-					rm.publish(null);
-
 					long startTime = System.currentTimeMillis();
 					while (System.currentTimeMillis() - startTime <= TIMEOUT_BETWEEN_CHARS) {
-						if (rm.isCancelled()) {
+						if (isCancelled()) {
 							return;
 						}
 						Thread.sleep(SLEEP_TIME);
 					}
 
-					final List<WikivoyageSearchResult> results = application.getWikivoyageDbHelper().search(query);
-
-					if (listener != null) {
-						listener.onSearchFinished(results);
+					if (!isCancelled()) {
+						List<WikivoyageSearchResult> results = application.getWikivoyageDbHelper().search(query);
+						if (!isCancelled()) {
+							rm.publish(results);
+						}
 					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
+
+			private boolean isCancelled() {
+				return requestNumber.get() != request || rm.isCancelled();
+			}
 		});
-	}
-
-	public interface SearchListener {
-
-		void onSearchStarted();
-
-		void onSearchFinished(@Nullable List<WikivoyageSearchResult> results);
 	}
 }

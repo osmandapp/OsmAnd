@@ -22,11 +22,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
-import net.osmand.plus.wikivoyage.search.WikivoyageSearchHelper.SearchListener;
 
 import java.util.List;
 
-public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment implements SearchListener {
+public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment {
 
 	public static final String TAG = "WikivoyageSearchDialogFragment";
 
@@ -34,7 +33,7 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 	private String searchQuery = "";
 
 	private boolean paused;
-	private boolean cancelPrev;
+	private boolean cancelled;
 
 	private SearchRecyclerViewAdapter adapter;
 
@@ -123,7 +122,6 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 	public void onResume() {
 		super.onResume();
 		paused = false;
-		searchHelper.registerListener(this);
 		searchEt.requestFocus();
 	}
 
@@ -131,47 +129,35 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 	public void onPause() {
 		super.onPause();
 		paused = true;
-		searchHelper.unregisterListener();
-	}
-
-	@Override
-	public void onSearchStarted() {
-		getMyApplication().runInUIThread(new Runnable() {
-			public void run() {
-				switchProgressBarVisibility(true);
-			}
-		});
-	}
-
-	@Override
-	public void onSearchFinished(@Nullable final List<WikivoyageSearchResult> results) {
-		getMyApplication().runInUIThread(new Runnable() {
-			public void run() {
-				adapter.setItems(results);
-				switchProgressBarVisibility(false);
-			}
-		});
 	}
 
 	private void cancelSearch() {
-		cancelPrev = true;
+		cancelled = true;
 		if (!paused) {
 			switchProgressBarVisibility(false);
 		}
 	}
 
 	private void runSearch() {
-		cancelPrev = true;
-		searchHelper.search(searchQuery, new ResultMatcher<WikivoyageSearchResult>() {
+		switchProgressBarVisibility(true);
+		cancelled = false;
+		searchHelper.search(searchQuery, new ResultMatcher<List<WikivoyageSearchResult>>() {
 			@Override
-			public boolean publish(WikivoyageSearchResult object) {
-				cancelPrev = false;
+			public boolean publish(final List<WikivoyageSearchResult> results) {
+				getMyApplication().runInUIThread(new Runnable() {
+					public void run() {
+						if (!isCancelled()) {
+							adapter.setItems(results);
+							switchProgressBarVisibility(false);
+						}
+					}
+				});
 				return true;
 			}
 
 			@Override
 			public boolean isCancelled() {
-				return paused || cancelPrev;
+				return paused || cancelled;
 			}
 		});
 	}
