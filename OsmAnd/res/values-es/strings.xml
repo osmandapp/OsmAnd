@@ -2856,7 +2856,18 @@ Por favor proporciona un código completo</string>
     <string name="shared_string_total">Total</string>
     <string name="clear_all_intermediates">Quitar todos los puntos intermedios</string>
     <string name="shared_string_travel">Viaje</string>
-    <string name="waypoints_removed_from_map_markers">Puntos intermedios eliminados de los marcadores del mapa</string>
+    <string name="waypoints_removed_from_map_markers">Puntos de ruta eliminados de los marcadores del mapa</string>
     <string name="nothing_found_in_radius">Nada encontrado dentro del radio:</string>
-    <string name="select_waypoints_category_description">Puede añadir todos los puntos de ruta de la traza o seleccionar categorías separadas.</string>
-    </resources>
+    <string name="select_waypoints_category_description">Puedes añadir todos los puntos de ruta de la traza o seleccionar categorías separadas.</string>
+    <string name="group_deleted">Grupo eliminado</string>
+    <string name="rendering_attr_whiteWaterSports_name">Deportes de aguas bravas</string>
+    <string name="distance_farthest">Distancia: Primero el más lejano</string>
+    <string name="distance_nearest">Distancia: Primero el más cercano</string>
+    <string name="enter_lon">Introduce la longitud</string>
+    <string name="enter_lat">Introduce la latitud</string>
+    <string name="enter_lat_and_lon">Introduce latitud y longitud</string>
+	<string name="dd_mm_ss_format">GG°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">GG°MM.MMMM′</string>
+	</resources>
