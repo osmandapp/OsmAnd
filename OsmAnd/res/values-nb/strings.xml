@@ -2765,4 +2765,10 @@
     <string name="nothing_found_in_radius">Ingenting funnet innen radiusen:</string>
     <string name="select_waypoints_category_description">Du kan legge til alle sporets rutepunkter, eller velg separate kategorier.</string>
     <string name="rendering_attr_whiteWaterSports_name">Rafting</string>
+    <string name="poi_error_info_not_loaded">Info om noden ble ikke innlastet</string>
+    <string name="poi_dialog_other_tags_message">Alle andre etiketter beholdes</string>
+    <string name="we_really_care_about_your_opinion">Vi bryr oss om deg og din tilbakemelding til oss.</string>
+    <string name="number_of_rows_in_dash">Antall rader %1$s</string>
+    <string name="show_free_version_banner">Vis gratisversjonsbanner</string>
+    <string name="show_free_version_banner_description">Vis gratisversjonsbanneret selv i den betalte versjonen.</string>
     </resources>
