@@ -1,6 +1,7 @@
 package net.osmand.plus.wikivoyage.search;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -43,11 +44,10 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment {
 
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
 		searchHelper = new WikivoyageSearchHelper(app);
-		final boolean nightMode = !app.getSettings().isLightContent();
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		final int themeRes = isNightMode(false) ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = LayoutInflater.from(new ContextThemeWrapper(app, themeRes))
 				.inflate(R.layout.fragment_wikivoyage_search_dialog, container, false);
