@@ -270,6 +270,14 @@ public class AndroidUtils {
 		}
 	}
 
+	public static void setLightStatusBarFlag(View view) {
+		if (Build.VERSION.SDK_INT >= 23) {
+			int flags = view.getSystemUiVisibility();
+			flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+			view.setSystemUiVisibility(flags);
+		}
+	}
+
 	public static int getNavBarHeight(Context ctx) {
 		if (!hasNavBar(ctx)) {
 			return 0;

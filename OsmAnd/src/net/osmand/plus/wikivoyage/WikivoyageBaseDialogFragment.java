@@ -2,8 +2,12 @@ package net.osmand.plus.wikivoyage;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -26,6 +30,15 @@ public class WikivoyageBaseDialogFragment extends BaseOsmAndDialogFragment {
 	@Override
 	protected Drawable getContentIcon(int id) {
 		return getIcon(id, R.color.icon_color);
+	}
+
+	protected Drawable getActiveIcon(@DrawableRes int iconId) {
+		return getIcon(iconId, nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light);
+	}
+
+	@ColorInt
+	protected int getResolvedColor(@ColorRes int colorId) {
+		return ContextCompat.getColor(getContext(), colorId);
 	}
 
 	protected View inflate(@LayoutRes int layoutId, @Nullable ViewGroup container) {
