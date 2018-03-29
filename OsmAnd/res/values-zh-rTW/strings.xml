@@ -654,7 +654,8 @@
     <string name="voice_data_unavailable">選定的語音不能使用</string>
 
     <string name="sd_unmounted">SD卡無法存取。\n您將無法看到地圖或找地點。</string>
-    <string name="sd_mounted_ro">SD 卡是唯讀模式。\n您只能看預載的地圖且無法由網路下載。</string>
+    <string name="sd_mounted_ro">記憶卡是唯讀模式。
+\n您只能看預載的地圖且無法由網路下載。</string>
     <string name="unzipping_file">解壓縮檔案…</string>
     <string name="route_tr">右轉後直行</string>
     <string name="route_tshr">向右急轉後直行</string>
@@ -691,8 +692,8 @@
     <string name="shared_string_ok">確定</string>
     <string name="show_transport_over_map_description">在地圖上顯示公車站牌。</string>
     <string name="show_transport_over_map">顯示公車站牌</string>
-    <string name="hello">OsmAnd 導航軟體</string>
-    <string name="update_poi_success">成功更新 POI (下載{0}個)</string>
+    <string name="hello">OsmAnd 導航應用程式</string>
+    <string name="update_poi_success">已更新 POI 資料((已載入{0}個)</string>
     <string name="update_poi_error_local">更新裝置端的 POI 清單錯誤</string>
     <string name="update_poi_error_loading">由伺服器載入資料時發生錯誤</string>
     <string name="update_poi_no_offline_poi_index">該地區無可用的離線 POI 資料</string>
@@ -845,7 +846,7 @@
     <string name="shared_string_no">否</string>
     <string name="add_favorite_dialog_top_text">輸入我的收藏名稱</string>
     <string name="add_favorite_dialog_default_favourite_name">我的收藏</string>
-    <string name="add_favorite_dialog_favourite_added_template">我的收藏標點 \'\'{0}\'\' 已新增。</string>
+    <string name="add_favorite_dialog_favourite_added_template">我的收藏標點「{0}」已新增。</string>
     <string name="favourites_context_menu_edit">編輯我的收藏</string>
     <string name="favourites_context_menu_delete">刪除我的收藏</string>
     <string name="favourites_remove_dialog_msg">刪除我的收藏標點 \'%s\'？</string>
@@ -870,12 +871,12 @@
     <string name="poi_error_poi_not_found">找不到節點或便利設施組成的一些節點，哪些尚不支援。</string>
     <string name="poi_remove_confirm_template">刪除 {0} (輸入評論)？</string>
     <string name="poi_remove_title">刪除 POI</string>
-    <string name="poi_remove_success">POI 已刪除成功</string>
+    <string name="poi_remove_success">POI 已刪除</string>
     <string name="poi_action_add">新增</string>
     <string name="poi_action_change">更改</string>
-    <string name="poi_action_succeded_template">動作 {0} 成功完成。</string>
-    <string name="poi_error_unexpected_template">在進行 {0} 動作時發生意外錯誤。</string>
-    <string name="poi_error_io_error_template">當執行 {0} 動作時發生 I/O 錯誤。</string>
+    <string name="poi_action_succeded_template">動作 {0} 已完成。</string>
+    <string name="poi_error_unexpected_template">在進行 {0} 動作時出現意外錯誤。</string>
+    <string name="poi_error_io_error_template">當執行 {0} 動作時出現 I/O 錯誤。</string>
     <string name="poi_error_info_not_loaded">節點的資訊未載入</string>
     <string name="poi_dialog_opening_hours">營業</string>
     <string name="poi_dialog_comment">評論</string>
@@ -1600,7 +1601,7 @@
     <string name="edit_group">編輯群組</string>
     <string name="shared_string_enable">啟用</string>
     <string name="shared_string_disable">停用</string>
-    <string name="plugin_install_needs_network">您需要連接網際網路來安裝這個外掛程式。</string>
+    <string name="plugin_install_needs_network">您需要連接到網際網路來安裝這個外掛程式。</string>
     <string name="get_plugin">取得</string>
     <string name="plugin_ski_name">檢視滑雪地圖</string>
     <string name="plugin_nautical_name">檢視航海地圖</string>
