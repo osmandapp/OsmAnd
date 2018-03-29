@@ -110,7 +110,7 @@
     <string name="show_traffic_warnings">交通狀況警示</string>
     <string name="avoid_toll_roads">避開收費道路</string>
     <string name="continue_follow_previous_route_auto">要繼續先前未完成的導航嗎？(%1$s 秒)</string>
-    <string name="route_updated_loc_found">一旦找到定位時，導航路線將重新規劃</string>
+    <string name="route_updated_loc_found">等待位置以規劃路線</string>
     <string name="osmand_parking_hours">小時</string>
     <string name="osmand_parking_minutes">分鐘</string>
     <string name="osmand_parking_position_description_add_time">把車子停在</string>
@@ -369,7 +369,7 @@
     <string name="old_poi_file_should_be_deleted">該 POI 資料檔 \'%1$s\' 是多餘的，且可刪除。</string>
     <string name="update_poi_file_not_found">在裝置端檔案，找不到要維護的 POI 的變更，且無法建立該檔。</string>
     <string name="button_upgrade_osmandplus">升級為 OsmAnd+</string>
-    <string name="map_version_changed_info">伺服器現有的地圖與您目前的程式版本不相容，請先更新成最新的版本再下載使用它們。</string>
+    <string name="map_version_changed_info">下載新版本的應用程式以便能夠使用新的地圖檔案。</string>
     <string name="poi_filter_nominatim">線上 Nominatim</string>
     <string name="search_position_current_location_search">位置查尋中…</string>
     <string name="search_position_current_location_found">我的位置 (找到)</string>
@@ -380,17 +380,17 @@
     
     <string name="search_position_map_view">目前的地圖中心</string>
     <string name="select_search_position">起點：</string>
-    <string name="context_menu_item_search">查尋這附近</string>
-    <string name="route_successfully_saved_at">導航路線成功存成\'%1$s\'。</string>
+    <string name="context_menu_item_search">在附近查尋</string>
+    <string name="route_successfully_saved_at">路線已存為「%1$s」。</string>
     <string name="filename_input">檔案名稱：</string>
     <string name="file_with_name_already_exist">已有同檔名存在。</string>
-    <string name="local_index_upload_gpx_description">上傳 GPX 到 OSM 社群，這些將有助於改善地圖。</string>
-    <string name="local_index_items_uploaded">%2$d 項中的 %1$d 項已上傳成功。</string>
+    <string name="local_index_upload_gpx_description">上傳 GPX 檔案到 OSM 社群以改進地圖。</string>
+    <string name="local_index_items_uploaded">已上傳 %2$d 項中的 %1$d 項。</string>
     <string name="local_index_mi_upload_gpx">傳送到 OSM</string>
     <string name="show_more_map_detail">顯示更多的地圖細節</string>
-    <string name="show_more_map_detail_descr">在放大地圖時已顯示部份向量地圖細節(道路等)。</string>
-    <string name="favourites_delete_multiple_succesful">我的收藏標點已刪除成功。</string>
-    <string name="favorite_delete_multiple">您將刪除 %1$d 個我的收藏與 %2$d 我的收藏群組，您確定？</string>
+    <string name="show_more_map_detail_descr">已在較低的縮放級別，顯示部份向量地圖的細節(道路等)。</string>
+    <string name="favourites_delete_multiple_succesful">我的收藏標點已刪除。</string>
+    <string name="favorite_delete_multiple">您將刪除 %1$d 個我的收藏與 %2$d 我的收藏群組，您確定嗎？</string>
     <string name="favorite_home_category">住家</string>
     <string name="favorite_friends_category">朋友</string>
     <string name="favorite_places_category">地點</string>
@@ -398,23 +398,23 @@
     <string name="shared_string_name">名稱</string>
     <string name="favourites_edit_dialog_category">類別</string>
     <string name="shared_string_no_thanks">不需要，謝謝</string>
-    <string name="basemap_missing">缺少全球底圖(在縮小時顯示，含蓋全球範圍)。請為全球概貌下載 World_basemap_x.obf。</string>
-    <string name="vector_data_missing">裝置端(\'離線\')的 SD 卡上找不到資料。欲使用離線地圖請去下載。</string>
+    <string name="basemap_missing">下載基本的全球地圖，以低縮放級別獲得含蓋全球的全景。</string>
+    <string name="vector_data_missing">下載(「離線」)資料以便使用離線地圖。</string>
     <string name="local_index_gpx_info_show">"
 \n
 \n長按選項"</string>
 
 
     <string name="local_index_installed">本機版本</string>
-    <string name="local_index_items_backuped">%2$d 項中的 %1$d 項已順利停用。</string>
-    <string name="local_index_items_deleted">%2$d 項中的 %1$d 項已順利刪除。</string>
-    <string name="local_index_items_restored">%2$d 項中的 %1$d 項已順利啟動。</string>
+    <string name="local_index_items_backuped">已停用 %2$d 項中的 %1$d 項。</string>
+    <string name="local_index_items_deleted">已刪除 %2$d 項中的 %1$d 項。</string>
+    <string name="local_index_items_restored">已啟動 %2$d 項中的 %1$d 項。</string>
     <string name="local_index_action_do">您即將要 %1$s %2$s 個項目，要繼續嗎？</string>
     <string name="local_index_descr_title">管理地圖檔案。</string>
     <string name="local_index_mi_restore">啟用</string>
     <string name="local_index_mi_backup">停用</string>
 
-    <string name="local_index_mi_reload">由 SD 卡重新載入</string>
+    <string name="local_index_mi_reload">從記憶卡重新載入</string>
     <string name="local_index_poi_data">POI 資料</string>
     <string name="local_index_address_data">地址資料</string>
     <string name="local_index_transport_data">公共交通資料</string>
@@ -2417,7 +2417,7 @@
     <string name="quick_action_map_style_switch">地圖樣式已經更改為 \"%s\"。</string>
     <string name="quick_action_take_audio_note">錄取音訊註解</string>
     <string name="quick_action_take_video_note">錄取視訊註解</string>
-    <string name="quick_action_take_photo_note">拍攝註解</string>
+    <string name="quick_action_take_photo_note">新增照片註解</string>
     <string name="quick_action_add_osm_bug">增加 OSM 的註解</string>
     <string name="quick_action_navigation_voice">聲音開/關</string>
     <string name="quick_action_navigation_voice_off">聲音為關閉</string>
@@ -2471,12 +2471,12 @@
     <string name="quick_actions_delete">刪除動作</string>
     <string name="quick_actions_delete_text">您確定要刪除動作 \"%s\" 嗎？</string>
     <string name="quick_action_add_marker_descr">輕點動作按鈕將會在螢幕中心的位置增加一個地圖記號。</string>
-    <string name="quick_action_add_gpx_descr">輕點動作按鈕將會在螢幕中心的位置增加一個 GPX 航點。</string>
-    <string name="quick_action_take_audio_note_descr">輕點動作按鈕將會在螢幕中心的位置增加一個音訊注解。</string>
-    <string name="quick_action_take_video_note_descr">輕點動作按鈕將會在螢幕中心的位置增加一個視訊注解。</string>
-    <string name="quick_action_take_photo_note_descr">輕點動作按鈕將會在螢幕中心的位置增加一個照片注解。</string>
-    <string name="quick_action_add_osm_bug_descr">輕點動作按鈕將會在螢幕中心的位置增加一個 OSM 註解。</string>
-    <string name="quick_action_add_poi_descr">輕點動作按鈕將會在螢幕中心的位置增加一個 POI。</string>
+    <string name="quick_action_add_gpx_descr">輕點動作按鈕將會在螢幕中間增加一個 GPX 航點。</string>
+    <string name="quick_action_take_audio_note_descr">輕點動作按鈕將會在螢幕中間增加一個音訊注解。</string>
+    <string name="quick_action_take_video_note_descr">輕點動作按鈕將會在螢幕中間增加一個視訊注解。</string>
+    <string name="quick_action_take_photo_note_descr">輕點動作按鈕將會在螢幕中間增加一個照片注解。</string>
+    <string name="quick_action_add_osm_bug_descr">輕點動作按鈕將會在螢幕中間增加一個 OSM 註解。</string>
+    <string name="quick_action_add_poi_descr">輕點動作按鈕將會在螢幕中間增加一個 POI。</string>
     <string name="navigate_point_olc">打開位置編碼(OLC)</string>
     <string name="navigate_point_olc_info_invalid">無效的 OLC
 </string>
