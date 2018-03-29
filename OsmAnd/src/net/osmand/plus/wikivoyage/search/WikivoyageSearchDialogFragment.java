@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -22,7 +23,6 @@ import net.osmand.plus.wikivoyage.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchHelper.SearchListener;
 
-import java.util.Collection;
 import java.util.List;
 
 public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment implements SearchListener {
@@ -140,7 +140,7 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 	}
 
 	@Override
-	public void onSearchFinished(@Nullable Collection<WikivoyageSearchResult> results) {
+	public void onSearchFinished(@Nullable List<WikivoyageSearchResult> results) {
 		adapter.setItems(results);
 		switchProgressBarVisibility(false);
 	}

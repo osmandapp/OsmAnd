@@ -6,11 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecyclerViewAdapter.ViewHolder> {
@@ -50,11 +50,11 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 		return items.get(pos);
 	}
 
-	public void setItems(@Nullable Collection<WikivoyageSearchResult> items) {
+	public void setItems(@Nullable List<WikivoyageSearchResult> items) {
 		if (items == null) {
 			this.items.clear();
 		} else {
-			this.items = new ArrayList<>(items);
+			this.items = items;
 		}
 		notifyDataSetChanged();
 	}

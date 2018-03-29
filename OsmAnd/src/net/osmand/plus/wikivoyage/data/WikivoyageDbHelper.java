@@ -2,17 +2,16 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
-import net.osmand.PlatformUtil;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
-import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +20,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
+
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class WikivoyageDbHelper {
 
@@ -77,13 +77,13 @@ public class WikivoyageDbHelper {
 	}
 
 	@NonNull
-	public Collection<WikivoyageSearchResult> search(final String searchQuery) {
+	public List<WikivoyageSearchResult> search(final String searchQuery) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			try {
 				String dbQuery = SEARCH_TABLE_SELECT + " WHERE " + SEARCH_COL_SEARCH_TERM + " LIKE ?";
-				SQLiteCursor cursor = conn.rawQuery(dbQuery, new String[] { searchQuery + "%" });
+				SQLiteCursor cursor = conn.rawQuery(dbQuery, new String[]{searchQuery + "%"});
 				if (cursor.moveToFirst()) {
 					do {
 						res.add(readSearchResult(cursor));
@@ -94,42 +94,41 @@ public class WikivoyageDbHelper {
 				conn.close();
 			}
 		}
-		List<WikivoyageSearchResult> list = new ArrayList(groupSearchResultsByCityId(res));
-		
-		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
 
+		List<WikivoyageSearchResult> list = new ArrayList<>(groupSearchResultsByCityId(res));
+
+		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
 			@Override
 			public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
-				boolean c1 = CollatorStringMatcher.cmatches(collator, searchQuery, o1.articleTitle.get(0),  
+				boolean c1 = CollatorStringMatcher.cmatches(collator, searchQuery, o1.articleTitle.get(0),
 						StringMatcherMode.CHECK_ONLY_STARTS_WITH);
-				boolean c2 = CollatorStringMatcher.cmatches(collator, searchQuery, o2.articleTitle.get(0),  
+				boolean c2 = CollatorStringMatcher.cmatches(collator, searchQuery, o2.articleTitle.get(0),
 						StringMatcherMode.CHECK_ONLY_STARTS_WITH);
-				if(c1 == c2) {
-					return collator.compare(o1.articleTitle.get(0), o2.articleTitle.get(0)); 
-				}
-				if(c1) {
+				if (c1 == c2) {
+					return collator.compare(o1.articleTitle.get(0), o2.articleTitle.get(0));
+				} else if (c1) {
 					return -1;
-				} else if(c2) {
+				} else if (c2) {
 					return 1;
 				}
 				return 0;
 			}
 		});
-		
+
 		return list;
 	}
 
 	private Collection<WikivoyageSearchResult> groupSearchResultsByCityId(List<WikivoyageSearchResult> res) {
 		String baseLng = application.getLanguage();
-		TLongObjectHashMap<WikivoyageSearchResult> wikivoyage = new TLongObjectHashMap<WikivoyageSearchResult>();
-		for(WikivoyageSearchResult rs: res) {
+		TLongObjectHashMap<WikivoyageSearchResult> wikivoyage = new TLongObjectHashMap<>();
+		for (WikivoyageSearchResult rs : res) {
 			WikivoyageSearchResult prev = wikivoyage.get(rs.cityId);
-			if(prev != null) {
+			if (prev != null) {
 				int insInd = prev.langs.size();
-				if(rs.getLang().get(0).equals(baseLng)) {
+				if (rs.getLang().get(0).equals(baseLng)) {
 					insInd = 0;
-				} else if(rs.getLang().get(0).equals("en")) {
-					if(!prev.getLang().get(0).equals(baseLng)) {
+				} else if (rs.getLang().get(0).equals("en")) {
+					if (!prev.getLang().get(0).equals(baseLng)) {
 						insInd = 0;
 					} else {
 						insInd = 1;
@@ -143,7 +142,6 @@ public class WikivoyageDbHelper {
 			}
 		}
 		return wikivoyage.valueCollection();
-		
 	}
 
 	@Nullable
@@ -181,6 +179,7 @@ public class WikivoyageDbHelper {
 		res.cityId = cursor.getLong(1);
 		res.articleTitle.add(cursor.getString(2));
 		res.langs.add(cursor.getString(3));
+
 		return res;
 	}
 

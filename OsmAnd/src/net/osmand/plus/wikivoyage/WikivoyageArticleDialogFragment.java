@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
+import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
 public class WikivoyageArticleDialogFragment extends BaseOsmAndDialogFragment {
 
@@ -42,7 +42,7 @@ public class WikivoyageArticleDialogFragment extends BaseOsmAndDialogFragment {
 		});
 
 		TextView contentTv = (TextView) mainView.findViewById(R.id.content_text_view);
-		WikivoyageArticle article = getMyApplication().getWikivoyageDbHelper().getArticle(searchResult.getCityId(), 
+		WikivoyageArticle article = getMyApplication().getWikivoyageDbHelper().getArticle(searchResult.getCityId(),
 				searchResult.getLang().get(0));
 		contentTv.setText(new SpannableString(Html.fromHtml(article.getContent())));
 
