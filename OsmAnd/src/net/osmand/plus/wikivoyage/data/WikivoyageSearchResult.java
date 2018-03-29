@@ -9,7 +9,6 @@ public class WikivoyageSearchResult {
 	long cityId;
 	List<String> articleTitle = new ArrayList<>();
 	List<String> langs = new ArrayList<>();
-	
 
 	public List<String> getSearchTerm() {
 		return searchTerm;

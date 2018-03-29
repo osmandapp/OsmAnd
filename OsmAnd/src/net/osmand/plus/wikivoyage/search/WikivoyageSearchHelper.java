@@ -2,11 +2,12 @@ package net.osmand.plus.wikivoyage.search;
 
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
-import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -20,7 +21,7 @@ public class WikivoyageSearchHelper {
 	private LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
 	private ThreadPoolExecutor singleThreadExecutor =
 			new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS, workQueue);
-	private AsyncTask<Void, Void, Collection<WikivoyageSearchResult>> currentTask;
+	private AsyncTask<Void, Void, List<WikivoyageSearchResult>> currentTask;
 
 	private OsmandApplication application;
 	private Set<SearchListener> listeners = new HashSet<>();
@@ -54,10 +55,10 @@ public class WikivoyageSearchHelper {
 
 		void onSearchStarted();
 
-		void onSearchFinished(@Nullable Collection<WikivoyageSearchResult> results);
+		void onSearchFinished(@Nullable List<WikivoyageSearchResult> results);
 	}
 
-	private class SearchAsyncTask extends AsyncTask<Void, Void, Collection<WikivoyageSearchResult>> {
+	private class SearchAsyncTask extends AsyncTask<Void, Void, List<WikivoyageSearchResult>> {
 
 		private String query;
 
@@ -74,7 +75,7 @@ public class WikivoyageSearchHelper {
 		}
 
 		@Override
-		protected Collection<WikivoyageSearchResult> doInBackground(Void... voids) {
+		protected List<WikivoyageSearchResult> doInBackground(Void... voids) {
 			long startTime = System.currentTimeMillis();
 			while (System.currentTimeMillis() - startTime <= TIMEOUT_BETWEEN_CHARS) {
 				if (isCancelled()) {
@@ -91,7 +92,7 @@ public class WikivoyageSearchHelper {
 		}
 
 		@Override
-		protected void onPostExecute(Collection<WikivoyageSearchResult> results) {
+		protected void onPostExecute(List<WikivoyageSearchResult> results) {
 			super.onPostExecute(results);
 			for (SearchListener listener : listeners) {
 				listener.onSearchFinished(results);
