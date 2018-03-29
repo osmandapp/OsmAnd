@@ -2867,7 +2867,7 @@ Por favor proporciona un código completo</string>
     <string name="enter_lat">Introduce la latitud</string>
     <string name="enter_lat_and_lon">Introduce latitud y longitud</string>
 	<string name="dd_mm_ss_format">GG°MM′SS″</string>
-	<string name="dd_dddddd_format">DD.DDDDDD°</string>
-	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_dddddd_format">GG.GGGGGG°</string>
+	<string name="dd_ddddd_format">GG.GGGGG°</string>
 	<string name="dd_mm_mmmm_format">GG°MM.MMMM′</string>
 	</resources>
