@@ -2612,32 +2612,30 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_showhide_osmbugs_descr">Drücken der Aktionstaste blendet OSM-Notizen auf der Karte ein oder aus.</string>
     <string name="sorted_by_distance">Nach Entfernung sortiert</string>
     <string name="search_favorites">Favoriten suchen</string>
-    <string name="hillshade_menu_download_descr">Um die Geländeprofilschattierung auf der Karte zu sehen, müssen Sie das Geländerelief-Overlay zu dieser Region herunterladen.</string>
+    <string name="hillshade_menu_download_descr">Das Geländerelief-Overlay zu dieser Region herunterladen, um das Geländeprofil zu schattieren.</string>
     <string name="shared_string_plugin">Erweiterung</string>
     <string name="srtm_purchase_header">Um Höhenlinien auf der Karte zu sehen, müssen Sie die Höhenlinien-Erweiterung erwerben und installieren.</string>
     <string name="srtm_menu_download_descr">Um Höhenlinien auf der Karte zu sehen, müssen Sie die Höhenlinienkarte zu dieser Region herunterladen.</string>
-    <string name="hillshade_purchase_header">Um die Schattierung des Geländeprofils auf der Karte zu sehen, müssen Sie die Höhenlinien-Erweiterung erwerben und installieren.</string>
+    <string name="hillshade_purchase_header">Installieren Sie die Höhenlinien-Erweiterung, um sie auf der Karte anzuzeigen.</string>
     <string name="private_access_routing_req">Ihr Ziel liegt in einem Gebiet mit Privatzugang. Möchten Sie für diese Reise den Zutritt über Privatwege zulassen?</string>
     <string name="restart_search">Suche wiederholen</string>
     <string name="increase_search_radius">Suchradius vergrößern</string>
-    <string name="nothing_found">Kein Suchergebnis :(</string>
+    <string name="nothing_found">Kein Suchergebnis</string>
     <string name="nothing_found_descr">Bitte Suchkriterien ändern oder Suchradius vergrößern.</string>
     <string name="hide_from_zoom_level">Ausblenden ab Zoomstufe</string>
     <string name="show_from_zoom_level">Darstellen ab Zoomstufe</string>
     <string name="shared_string_add_photos">Fotos hinzufügen</string>
     <string name="mapillary_widget">Mapillary-Steuerelement</string>
-    <string name="mapillary_widget_descr">Ermöglicht einen schnellen Zugriff auf Mapillary.</string>
+    <string name="mapillary_widget_descr">Ermöglicht schnell zu Mapillary beizutragen.</string>
     <string name="mapillary_descr">Fotos von der Straße aus dem Netz für jeden. Orte entdecken, mitwirken und die Welt in Bildern festhalten.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="mapillary_action_descr">Mit Mapillary eigene Bilder von diesem Ort hinzufügen.</string>
+    <string name="mapillary_action_descr">Mit Mapillary eigene Bilder dieses Orts auf Strassenniveau beitragen.</string>
     <string name="shared_string_install">Installieren</string>
     <string name="online_photos">Online-Fotos</string>
     <string name="no_photos_descr">Es gibt keine Fotos von diesem Ort.</string>
     <string name="plugin_mapillary_descr">Fotos von der Straße für jedermann. Plätze entdecken, mitwirken, die Welt im Bild festhalten.</string>
     <string name="improve_coverage_mapillary">Verbessern Sie die Bildberichterstattung mit Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Machen Sie Ihr eigenes Foto oder eine Fotoserie und fügen Sie sie dieser Kartenposition hinzu. 
-\n 
-\nHierfür müssen Sie die App „Mapillary“ von Google Play installieren.</string>
+    <string name="improve_coverage_install_mapillary_desc">Installieren Sie die App „Mapillary“, um dieser Kartenposition eines oder mehrere Fotos hinzuzufügen.</string>
     <string name="open_mapillary">Mapillary öffnen</string>
     <string name="mapillary_image">Mapillary-Foto</string>
     <string name="shared_string_permissions">Berechtigungen</string>
@@ -2663,7 +2661,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="map_widget_ruler_control">Zirkel</string>
     <string name="of">%1$d von %2$d</string>
     <string name="moving_time">Zeit in Bewegung</string>
-    <string name="mapillary_menu_filter_description">Sie können Bilder nach Übermittler oder Datum filtern. Filter gelten nur für nahe Zoomstufen.</string>
+    <string name="mapillary_menu_filter_description">Sie können Bilder nach Übermittler oder Datum filtern. Filter gelten nur für hohe Vergrößerungsstufen.</string>
     <string name="min_max">min/max</string>
     <string name="quick_action_resume_pause_navigation_descr">Drücken Sie diese Taste, um die Navigation zu pausieren oder fortzusetzen.</string>
     <string name="quick_action_show_navigation_finish_dialog">Dialog bei Navigationsende anzeigen</string>
