@@ -17,15 +17,9 @@
 
 	</android.support.v7.widget.Toolbar>
 
-	<ScrollView
+	<WebView
+		android:id="@+id/content_web_view"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
-
-		<TextView
-			android:id="@+id/content_text_view"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"/>
-
-	</ScrollView>
+		android:layout_height="match_parent"/>
 
 </LinearLayout>

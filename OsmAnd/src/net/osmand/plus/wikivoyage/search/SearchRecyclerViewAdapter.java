@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage.search;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,8 +24,9 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 		this.onItemClickListener = onItemClickListener;
 	}
 
+	@NonNull
 	@Override
-	public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+	public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 		View itemView = LayoutInflater.from(viewGroup.getContext())
 				.inflate(R.layout.wikivoyage_search_list_item, viewGroup, false);
 		itemView.setOnClickListener(onItemClickListener);
@@ -32,7 +34,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 	}
 
 	@Override
-	public void onBindViewHolder(ViewHolder viewHolder, int i) {
+	public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 		WikivoyageSearchResult item = items.get(i);
 		// FIXME
 		viewHolder.searchTerm.setText(item.getSearchTerm().toString());

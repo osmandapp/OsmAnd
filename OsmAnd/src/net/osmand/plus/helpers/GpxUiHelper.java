@@ -637,7 +637,7 @@ public class GpxUiHelper {
 					}
 				});
 			}
-			dlg.getListView().addFooterView(footerView);
+			dlg.getListView().addFooterView(footerView, null, false);
 		}
 		dlg.getListView().setOnItemClickListener(new OnItemClickListener() {
 			@Override
