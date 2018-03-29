@@ -2615,8 +2615,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="hillshade_menu_download_descr">Das Geländerelief-Overlay zu dieser Region herunterladen, um das Geländeprofil zu schattieren.</string>
     <string name="shared_string_plugin">Erweiterung</string>
     <string name="srtm_purchase_header">Um Höhenlinien auf der Karte zu sehen, müssen Sie die Höhenlinien-Erweiterung erwerben und installieren.</string>
-    <string name="srtm_menu_download_descr">Um Höhenlinien auf der Karte zu sehen, müssen Sie die Höhenlinienkarte zu dieser Region herunterladen.</string>
-    <string name="hillshade_purchase_header">Installieren Sie die Höhenlinien-Erweiterung, um sie auf der Karte anzuzeigen.</string>
+    <string name="srtm_menu_download_descr">Laden Sie die Höhenlinienkarte zu dieser Region herunter.</string>
+    <string name="hillshade_purchase_header">Installieren Sie die Höhenlinien-Erweiterung, um sie auf der Karte anzuzeigen</string>
     <string name="private_access_routing_req">Ihr Ziel liegt in einem Gebiet mit Privatzugang. Möchten Sie für diese Reise den Zutritt über Privatwege zulassen?</string>
     <string name="restart_search">Suche wiederholen</string>
     <string name="increase_search_radius">Suchradius vergrößern</string>
