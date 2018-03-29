@@ -1,27 +1,23 @@
 package net.osmand.plus.wikivoyage.search;
 
-import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 
+import net.osmand.ResultMatcher;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class WikivoyageSearchHelper {
 
 	private static final int TIMEOUT_BETWEEN_CHARS = 700;
 	private static final int SLEEP_TIME = 50;
 
-	private LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
-	private ThreadPoolExecutor singleThreadExecutor =
-			new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS, workQueue);
-	private AsyncTask<Void, Void, List<WikivoyageSearchResult>> currentTask;
+	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private OsmandApplication application;
 	private Set<SearchListener> listeners = new HashSet<>();
@@ -38,17 +34,45 @@ public class WikivoyageSearchHelper {
 		listeners.remove(listener);
 	}
 
-	public void cancelSearch() {
-		workQueue.clear();
-		if (currentTask != null) {
-			currentTask.cancel(true);
-		}
-	}
+	public void search(final String query, final ResultMatcher<WikivoyageSearchResult> rm) {
+		singleThreadExecutor.submit(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					application.runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							for (SearchListener listener : listeners) {
+								listener.onSearchStarted();
+							}
+						}
+					});
 
-	public void search(String query) {
-		cancelSearch();
-		currentTask = new SearchAsyncTask(query);
-		currentTask.executeOnExecutor(singleThreadExecutor);
+					rm.publish(null);
+
+					long startTime = System.currentTimeMillis();
+					while (System.currentTimeMillis() - startTime <= TIMEOUT_BETWEEN_CHARS) {
+						if (rm.isCancelled()) {
+							return;
+						}
+						Thread.sleep(SLEEP_TIME);
+					}
+
+					final List<WikivoyageSearchResult> results = application.getWikivoyageDbHelper().search(query);
+
+					application.runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							for (SearchListener listener : listeners) {
+								listener.onSearchFinished(results);
+							}
+						}
+					});
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	public interface SearchListener {
@@ -56,47 +80,5 @@ public class WikivoyageSearchHelper {
 		void onSearchStarted();
 
 		void onSearchFinished(@Nullable List<WikivoyageSearchResult> results);
-	}
-
-	private class SearchAsyncTask extends AsyncTask<Void, Void, List<WikivoyageSearchResult>> {
-
-		private String query;
-
-		SearchAsyncTask(String query) {
-			this.query = query;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			for (SearchListener listener : listeners) {
-				listener.onSearchStarted();
-			}
-		}
-
-		@Override
-		protected List<WikivoyageSearchResult> doInBackground(Void... voids) {
-			long startTime = System.currentTimeMillis();
-			while (System.currentTimeMillis() - startTime <= TIMEOUT_BETWEEN_CHARS) {
-				if (isCancelled()) {
-					return null;
-				}
-				try {
-					Thread.sleep(SLEEP_TIME);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-
-			return application.getWikivoyageDbHelper().search(query);
-		}
-
-		@Override
-		protected void onPostExecute(List<WikivoyageSearchResult> results) {
-			super.onPostExecute(results);
-			for (SearchListener listener : listeners) {
-				listener.onSearchFinished(results);
-			}
-		}
 	}
 }

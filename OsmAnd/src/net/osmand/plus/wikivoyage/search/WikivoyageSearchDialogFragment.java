@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
+import net.osmand.ResultMatcher;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -31,6 +32,9 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 
 	private WikivoyageSearchHelper searchHelper;
 	private String searchQuery = "";
+
+	private boolean paused;
+	private boolean cancelPrev;
 
 	private SearchRecyclerViewAdapter adapter;
 
@@ -78,11 +82,10 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 				if (!searchQuery.equalsIgnoreCase(newQuery)) {
 					searchQuery = newQuery;
 					if (searchQuery.isEmpty()) {
-						searchHelper.cancelSearch();
-						switchProgressBarVisibility(false);
+						cancelSearch();
 						adapter.setItems(null);
 					} else {
-						searchHelper.search(searchQuery);
+						runSearch();
 					}
 				}
 			}
@@ -119,19 +122,16 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (searchHelper != null) {
-			searchHelper.registerListener(this);
-		}
+		paused = false;
+		searchHelper.registerListener(this);
 		searchEt.requestFocus();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (searchHelper != null) {
-			searchHelper.unregisterListener(this);
-			searchHelper.cancelSearch();
-		}
+		paused = true;
+		searchHelper.unregisterListener(this);
 	}
 
 	@Override
@@ -143,6 +143,29 @@ public class WikivoyageSearchDialogFragment extends BaseOsmAndDialogFragment imp
 	public void onSearchFinished(@Nullable List<WikivoyageSearchResult> results) {
 		adapter.setItems(results);
 		switchProgressBarVisibility(false);
+	}
+
+	private void cancelSearch() {
+		cancelPrev = true;
+		if (!paused) {
+			switchProgressBarVisibility(false);
+		}
+	}
+
+	private void runSearch() {
+		cancelPrev = true;
+		searchHelper.search(searchQuery, new ResultMatcher<WikivoyageSearchResult>() {
+			@Override
+			public boolean publish(WikivoyageSearchResult object) {
+				cancelPrev = false;
+				return true;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return paused || cancelPrev;
+			}
+		});
 	}
 
 	private void switchProgressBarVisibility(boolean show) {
