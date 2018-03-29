@@ -2771,4 +2771,7 @@
     <string name="number_of_rows_in_dash">Antall rader %1$s</string>
     <string name="show_free_version_banner">Vis gratisversjonsbanner</string>
     <string name="show_free_version_banner_description">Vis gratisversjonsbanneret selv i den betalte versjonen.</string>
+    <string name="commiting_node">Overfører knutepunkt…</string>
+    <string name="previous_run_crashed">Den siste kjøringen av OsmAnd kræsjet. Loggfilen finnes i {0}. Rapporter hendelsen og legg ved loggfilen.</string>
+    <string name="poi_error_poi_not_found">Knutepunktet ble ikke funnet, eller så består fasilitetene av flere knutepunkter som ikke er støttet enda.</string>
     </resources>
