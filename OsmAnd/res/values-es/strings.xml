@@ -2696,9 +2696,9 @@ Por favor proporciona un código completo</string>
     <string name="move_to_history">Mover al historial</string>
     <string name="group_will_be_removed_after_restart">El grupo se quitará al reiniciar la aplicación.</string>
     <string name="shared_string_markers">Marcadores</string>
-    <string name="coordinates_format">Formato de coordenadas</string>
+    <string name="coordinates_format">Formato de coordenada</string>
     <string name="use_system_keyboard">Usar el teclado del sistema</string>
-    <string name="fast_coordinates_input_descr">Elige el formato de entrada de coordenadas. Siempre puedes cambiarlo pulsando en Ajustes.</string>
+    <string name="fast_coordinates_input_descr">Elige el formato de entrada de coordenadas. Siempre puedes cambiarlo pulsando en \'Ajustes\'.</string>
     <string name="fast_coordinates_input">Entrada rápida de coordenadas</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evitar carreteras de hielo, vados</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evita carreteras de hielo y vados.</string>
@@ -2731,7 +2731,7 @@ Por favor proporciona un código completo</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     
     <string name="mark_passed">Descartar marcador</string>
-    <string name="import_gpx_file_description">puede importarse como puntos Favoritos, o como un archivo de traza.</string>
+    <string name="import_gpx_file_description">puede importarse como Favoritos, o como un archivo de traza.</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
     <string name="import_as_favorites">Importar como Favoritos</string>
     <string name="import_file">Importar archivo</string>
@@ -2742,10 +2742,10 @@ Por favor proporciona un código completo</string>
     <string name="shared_string_paste">Pegar</string>
     <string name="coordinate_input_accuracy_description">Cambia automáticamente al campo siguiente después de escribir %1$d dígitos decimales.</string>
     <string name="coordinate_input_accuracy">%1$d dígitos</string>
-    <string name="go_to_next_field">Ir al campo siguiente</string>
+    <string name="go_to_next_field">Siguiente campo</string>
     <string name="rename_marker">Renombrar marcador</string>
     <string name="appearance_on_the_map">Apariencia en el mapa</string>
-    <string name="add_track_to_markers_descr">Selecciona una traza para añadir sus puntos de ruta a los marcadores. (Sólo se muestran las trazas con puntos de ruta)</string>
+    <string name="add_track_to_markers_descr">Los puntos de ruta se pueden añadir a los marcadores seleccionando una de estas trazas que los tiene.</string>
     <string name="add_favourites_group_to_markers_descr">Selecciona un grupo de favoritos para añadirlos a marcadores.</string>
     <string name="track_waypoints">Puntos de ruta de traza</string>
     <string name="favourites_group">Categoría Favoritos</string>
@@ -2847,12 +2847,12 @@ Por favor proporciona un código completo</string>
     <string name="last_intermediate_dest_description">Añade la ubicación como último destino intermedio</string>
     <string name="first_intermediate_dest_description">Añade la ubicación como primer destino intermedio</string>
     <string name="subsequent_dest_description">Mueve el destino hacia arriba y crea un nuevo destino</string>
-    <string name="make_as_start_point">Reemplazar punto de inicio</string>
+    <string name="make_as_start_point">Poner este punto de inicio</string>
     <string name="transport_nearby_routes_within">Rutas a menos de</string>
     <string name="transport_nearby_routes">A MENOS DE</string>
     <string name="enter_the_file_name">Ingresar nombre del archivo.</string>
     <string name="map_import_error">Error de importación del mapa</string>
-    <string name="map_imported_successfully">Mapa importado correctamente</string>
+    <string name="map_imported_successfully">Mapa importado</string>
     <string name="shared_string_total">Total</string>
     <string name="clear_all_intermediates">Quitar todos los puntos intermedios</string>
     <string name="shared_string_travel">Viaje</string>
@@ -2870,4 +2870,10 @@ Por favor proporciona un código completo</string>
 	<string name="dd_dddddd_format">GG.GGGGGG°</string>
 	<string name="dd_ddddd_format">GG.GGGGG°</string>
 	<string name="dd_mm_mmmm_format">GG°MM.MMMM′</string>
-	</resources>
+	<string name="dd_mm_mmm_format">GG°MM.MMM′</string>
+	<string name="east_abbreviation">E</string>
+	<string name="west_abbreviation">O</string>
+	<string name="south_abbreviation">S</string>
+	<string name="north_abbreviation">N</string>
+	<string name="optional_point_name">Nombre de punto opcional</string>
+    </resources>
