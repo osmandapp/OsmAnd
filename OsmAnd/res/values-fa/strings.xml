@@ -3058,4 +3058,5 @@
     <string name="select_waypoints_category_description">می‌توانید همهٔ نقاط بین‌راهی مسیر را یکباره اضافه کنید یا اینکه دسته‌های مختلفی انتخاب کنید.</string>
     <string name="shared_string_total">کل</string>
     <string name="nothing_found_in_radius">تا این شعاع چیزی پیدا نشد:</string>
+    <string name="waypoints_removed_from_map_markers">نقاط بین‌راهی از نشانه‌های نقشه حذف شد.</string>
     </resources>
