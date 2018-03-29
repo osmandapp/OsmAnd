@@ -2774,4 +2774,12 @@
     <string name="commiting_node">Overfører knutepunkt…</string>
     <string name="previous_run_crashed">Den siste kjøringen av OsmAnd kræsjet. Loggfilen finnes i {0}. Rapporter hendelsen og legg ved loggfilen.</string>
     <string name="poi_error_poi_not_found">Knutepunktet ble ikke funnet, eller så består fasilitetene av flere knutepunkter som ikke er støttet enda.</string>
+    <string name="android_19_location_disabled">Siden Android versjon 4.4 (KitKat) kan du ikke laste ned og oppdatere kart til den tidligere lagringsmappen (%s). Ønsker du å endre tillatt lagringsplassering og kopiere alle OsmAnd-filer dit?
+\n</string>
+    <string name="osmand_background_plugin_description">Vis innstillinger for å skru på sporing og navigasjon i bakgrunnsmodus ved å periodisk vekke opp GPS-enheten (med skjermen av).</string>
+    <string name="native_app_allocated_memory_descr">Totalt innebygd minne tilelt programmet %1$s MB (Dalvik %2$s MB, annet %3$s MB). Proposjonalt minne %4$s MB (Android-grense %5$s MB, Dalvik %6$s MB).</string>
+    <string name="send_location_email_pattern">For å se plassering, bruk nettadressen %1$s eller Android-hensiktslenken %2$s</string>
+    <string name="poi_filter_namefinder">Nettbasert navnesøk</string>
+    <string name="version_index_is_big_for_memory">Indeksen \"{0}\" fikk ikke plass i minnet</string>
+    <string name="version_index_is_not_supported">Versjonen av indeksen \"{0}\" støttes ikke</string>
     </resources>
