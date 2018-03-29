@@ -37,7 +37,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-			useOsmandKeyboard = getMyApplication().getSettings().COORDS_USE_OSMAND_KEYBOARD.get();
+		useOsmandKeyboard = getMyApplication().getSettings().COORDS_INPUT_USE_OSMAND_KEYBOARD.get();
 	}
 
 	@Override
@@ -56,9 +56,9 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 					@Override
 					public void onClick(View v) {
 						if (listener != null) {
+							settings.COORDS_INPUT_USE_OSMAND_KEYBOARD.set(!useOsmandKeyboard);
 							listener.onKeyboardChanged(!useOsmandKeyboard);
 						}
-						settings.COORDS_USE_OSMAND_KEYBOARD.set(!useOsmandKeyboard);
 						dismiss();
 					}
 				})

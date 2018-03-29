@@ -453,7 +453,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		super.onResume();
 		adapter.setScreenOrientation(DashLocationFragment.getScreenOrientation(getActivity()));
 		startLocationUpdate();
-		changeKeyboard(getMyApplication().getSettings().COORDS_USE_OSMAND_KEYBOARD.get());
+		changeKeyboard(getMyApplication().getSettings().COORDS_INPUT_USE_OSMAND_KEYBOARD.get());
 	}
 
 	@Override
