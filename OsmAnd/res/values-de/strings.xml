@@ -45,7 +45,7 @@
 	<string name="save_track_to_gpx_globally_headline">GPX-Aufzeichnung bei Bedarf</string>
 	<string name="save_track_to_gpx_globally_descr">Generelle Positionserfassung kann mit der Schaltfläche \'GPX-Aufzeichnung\' direkt auf dem Kartenbildschirm aktiviert oder deaktiviert werden.</string>
 	<string name="save_current_track">Track jetzt speichern</string>
-	<string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte speichern.</string>
+	<string name="save_current_track_descr">Aktuellen Track jetzt auf Speicherkarte speichern.</string>
 	<string name="save_track_to_gpx">Während Navigation autom. Track aufzeichnen</string>
 	<string name="save_track_to_gpx_descrp">Während der Navigation wird automatisch ein GPX-Track im Track-Ordner gespeichert.</string>
 	<string name="save_track_interval_globally">Aufzeichnungsintervall</string>
@@ -1589,8 +1589,8 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="shared_string_dismiss">Verwerfen</string>
     <string name="everything_up_to_date">Alle Daten aktuell</string>
     <string name="use_opengl_render">OpenGL-Rendering verwenden</string>
-    <string name="use_opengl_render_descr">Hardware beschleunigtes OpenGL-Rendering verwenden (Funktioniert nicht auf allen Geräten).</string>
-    <string name="no_internet_connection">Herunterladen nicht möglich. Bitte die Internet-Verbindung prüfen!</string>
+    <string name="use_opengl_render_descr">Hardware beschleunigtes OpenGL-Rendering verwenden (könnte mehr Akkuleistung verbrauchen und nicht auf allen Geräten funktionieren).</string>
+    <string name="no_internet_connection">Herunterladen nicht möglich. Bitte die Internet-Verbindung prüfen.</string>
     <string name="download_tab_downloads">Alle Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
