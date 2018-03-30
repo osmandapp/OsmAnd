@@ -448,7 +448,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		super.onResume();
 		adapter.setScreenOrientation(DashLocationFragment.getScreenOrientation(getActivity()));
 		startLocationUpdate();
-		editTexts.get(0).requestFocus();
 	}
 
 	@Override
