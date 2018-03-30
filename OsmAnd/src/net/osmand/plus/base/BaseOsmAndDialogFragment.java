@@ -61,4 +61,11 @@ public class BaseOsmAndDialogFragment extends DialogFragment {
 	protected OsmandSettings getSettings() {
 		return getMyApplication().getSettings();
 	}
+
+	protected boolean isNightMode(boolean usedOnMap) {
+		if (usedOnMap) {
+			return getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		}
+		return !getSettings().isLightContent();
+	}
 }

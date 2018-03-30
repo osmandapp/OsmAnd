@@ -3068,4 +3068,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="group_deleted">Gruppo cancellato</string>
     <string name="clear_all_intermediates">Cancella tutti i punti intermedi</string>
     <string name="osm_recipients_label">Riceventi OSM</string>
+    <string name="waypoints_removed_from_map_markers">Punti intermedi rimossi dai marcatori della mappa</string>
+    <string name="nothing_found_in_radius">Nulla è stato trovato nel raggio :</string>
+    <string name="shared_string_total">Totale</string>
     </resources>

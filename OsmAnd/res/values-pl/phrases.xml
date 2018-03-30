@@ -3764,4 +3764,15 @@
 
 	<string name="poi_water_utility">Biuro firmy wodociągowej</string>
 
+<string name="poi_climbing_orientation_n">Orientacja ściany: północ</string>
+	<string name="poi_climbing_orientation_ne">Orientacja ściany: północny wschód</string>
+	<string name="poi_climbing_orientation_e">Orientacja ściany: wschód</string>
+	<string name="poi_climbing_orientation_se">Orientacja ściany: południowy wschód</string>
+	<string name="poi_climbing_orientation_s">Orientacja ściany: południe</string>
+	<string name="poi_climbing_orientation_sw">Orientacja ściany: południowy zachód</string>
+	<string name="poi_climbing_orientation_w">Orientacja ściany: zachód</string>
+	<string name="poi_climbing_orientation_nw">Orientacja ściany: północny zachód</string>
+	<string name="poi_amusement_arcade">Salon gier</string>
+	<string name="poi_adult_gaming_centre">Salon gier hazardowych</string>
+
 </resources>

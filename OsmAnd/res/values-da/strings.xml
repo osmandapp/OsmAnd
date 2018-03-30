@@ -579,7 +579,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="tts_language_not_supported_title">Sproget er ikke understøttet</string>
     <string name="tts_language_not_supported">Det valgte sprog er ikke understøttet af den installerede Android TTS (tekst-til-tale)-motor. Søg på Google Play efter en anden TTS-motor? Ellers vil standard TTS-sprog blive brugt.</string>
     <string name="tts_missing_language_data_title">Manglende data</string>
-    <string name="tts_missing_language_data">Der er ikke installeret data for det valgte sprog. Gå til Google Play for at installere?</string>
+    <string name="tts_missing_language_data">Gå til Google Play for at hente de valgte sprog??</string>
     <string name="gpx_option_reverse_route">Omvend GPX-retning</string>
     <string name="gpx_option_destination_point">Brug aktuel destination</string>
     <string name="gpx_option_from_start_point">Passere langs hele sporet</string>
@@ -1549,10 +1549,10 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="speed_limit_exceed_message">Vælg hvor meget hastighedsgrænsen skal overskrides, for at få en taleadvarsel.</string>
     
     
-    <string name="anonymous_user_hint">En anonym bruger kan ikke:
-- oprette grupper;
-- synkronisere grupper og enheder med serveren;
-- administrere grupper og enheder på et personligt betjeningspanel på hjemmesiden.</string>
+    <string name="anonymous_user_hint">En anonym bruger kan ikke: 
+\n- Oprette grupper; 
+\n- Synkronisere grupper og enheder med serveren; 
+\n- Administrere grupper og enheder på et personligt betjeningspanel på hjemmesiden.</string>
     <string name="anonymous_user">Anonym bruger</string>
     <string name="logged_as">Logget ind som %1$s</string>
     <string name="configure_map">Konfigurer kort</string>
@@ -2235,7 +2235,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osm_editors_ranking">Rangering af OSM-bidragsydere</string>
     <string name="osm_live_subscription">OsmAnd Live-abonnement</string>
     <string name="osm_live_subscribe_btn">Tilmeld</string>
-    <string name="osm_live_email_desc">Nødvendig for at at give oplysninger om bidrag.</string>
+    <string name="osm_live_email_desc">For at at give oplysninger om bidrag.</string>
     <string name="osm_live_user_public_name">Offentligt navn</string>
     <string name="osm_live_hide_user_name">Vis ikke navn i rapporter</string>
     <string name="osm_live_support_region">Understøttet område</string>
@@ -2593,9 +2593,9 @@ Repræsenterer område: %1$s x %2$s</string>
 \n 
 \n  • Få vist højde-, hældnings- og hastighedsprofil for indspillede GPX-spor og beregnede ruter 
 \n 
-\n  • \"Kørestils\"-indstilling og logikforbedringer i cykelruteplanlægning 
+\n  • \"Kørestils\"-indstilling og logikforbedringer for cykelruteplanlægning 
 \n 
-\n  • Indstillinger for brug af højdedata i cykelruteplanlægning 
+\n • Højdedata indstillinger for cykelruteplanlægning 
 \n 
 \n  • Adskillige andre forbedringer og fejlrettelser 
 \n 
@@ -2723,7 +2723,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="srtm_menu_download_descr">Hent \'Højdekurve\' kort til brug i området.</string>
     <string name="shared_string_plugin">Udvidelse</string>
     <string name="srtm_purchase_header">For at se højdekurver på kortet, køb og installer \'Højdekurve\' udvidelsen</string>
-    <string name="hillshade_menu_download_descr">For at se reliefskygger på kortet, skal kort med reliefoverlejring for området hentes.</string>
+    <string name="hillshade_menu_download_descr">"Hent \'Reliefoverlejring\' kort med reliefskygger  for området."</string>
     <string name="hillshade_purchase_header">Installer \'Højdekurve\' udvidelsen for at vise dem på kortet</string>
     <string name="hide_from_zoom_level">Skjul fra zoom-niveau</string>
     <string name="sorted_by_distance">Sorteret efter afstand</string>
@@ -2851,7 +2851,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="this_year">I år</string>
     
     <string name="map_orientation_change_in_accordance_with_speed">Tærskel for kortorientering</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Vælg nedenfor ved hvilken hastighed kortorienteringen skifter fra \'Bevægelsesretning\' til \'Kompas\'.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Vælg hastighed for skift af kortorientering fra \'Bevægelsesretning\' til \'Kompasretning\' nedenfor.</string>
     <string name="all_markers_moved_to_history">Alle kortmarkører flyttet til historik</string>
     <string name="marker_moved_to_history">Kortmarkør flyttet til historik</string>
     <string name="marker_moved_to_active">Kortmarkør flyttet til aktiv</string>
@@ -3060,4 +3060,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="group_deleted">Gruppen slettet</string>
     <string name="rendering_attr_whiteWaterSports_name">Rafting</string>
     <string name="waypoints_removed_from_map_markers">Rutepunkter fjernet fra kortmarkører</string>
+    <string name="shared_string_travel">Rejse</string>
     </resources>

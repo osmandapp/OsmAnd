@@ -1,5 +1,7 @@
 package net.osmand.plus.wikivoyage.search;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,14 +9,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.wikivoyage.data.SearchResult;
+import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecyclerViewAdapter.ViewHolder> {
 
-	private List<SearchResult> items = new ArrayList<>();
+	private List<WikivoyageSearchResult> items = new ArrayList<>();
 
 	private View.OnClickListener onItemClickListener;
 
@@ -22,8 +24,9 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 		this.onItemClickListener = onItemClickListener;
 	}
 
+	@NonNull
 	@Override
-	public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+	public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 		View itemView = LayoutInflater.from(viewGroup.getContext())
 				.inflate(R.layout.wikivoyage_search_list_item, viewGroup, false);
 		itemView.setOnClickListener(onItemClickListener);
@@ -31,12 +34,13 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 	}
 
 	@Override
-	public void onBindViewHolder(ViewHolder viewHolder, int i) {
-		SearchResult item = items.get(i);
-		viewHolder.searchTerm.setText(item.getSearchTerm());
+	public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+		WikivoyageSearchResult item = items.get(i);
+		// FIXME
+		viewHolder.searchTerm.setText(item.getSearchTerm().toString());
 		viewHolder.cityId.setText(String.valueOf(item.getCityId()));
-		viewHolder.articleTitle.setText(item.getArticleTitle());
-		viewHolder.lang.setText(item.getLang());
+		viewHolder.articleTitle.setText(item.getArticleTitle().toString());
+		viewHolder.lang.setText(item.getLang().toString());
 	}
 
 	@Override
@@ -44,12 +48,16 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 		return items.size();
 	}
 
-	public SearchResult getItem(int pos) {
+	public WikivoyageSearchResult getItem(int pos) {
 		return items.get(pos);
 	}
 
-	public void setItems(List<SearchResult> items) {
-		this.items = items;
+	public void setItems(@Nullable List<WikivoyageSearchResult> items) {
+		if (items == null) {
+			this.items.clear();
+		} else {
+			this.items = items;
+		}
 		notifyDataSetChanged();
 	}
 
