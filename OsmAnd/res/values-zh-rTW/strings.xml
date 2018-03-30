@@ -466,7 +466,7 @@
     <string name="level_to_switch_vector_raster">最小向量縮放比級別</string>
 
 
-    <string name="error_doing_search">離線查尋發生錯誤。</string>
+    <string name="error_doing_search">在離線查尋時錯誤。</string>
     <string name="search_offline_geo_error">無法解析地理含義 \'%s\'。</string>
     <string name="search_osm_offline">查尋地理位置</string>
     <string name="system_locale">系統</string>
@@ -487,10 +487,10 @@
     <string name="mile">哩</string>
     <string name="send_location_way_choose_title">分享位置方式</string>
     <string name="send_location_sms_pattern">位置：%1$s\n%2$s</string>
-    <string name="send_location_email_pattern">查看追蹤位置，以網頁瀏覽器連結 %1$s 或用 Andriod intent 連結 %2$s</string>
+    <string name="send_location_email_pattern">查看跟隨位置，以網頁連結 %1$s 或用 Android intent 連結 %2$s</string>
     <string name="send_location">傳送位置</string>
     <string name="context_menu_item_share_location">分享位置</string>
-    <string name="add_waypoint_dialog_added">GPX 航點 \'\'{0}\'\' 已成功加入</string>
+    <string name="add_waypoint_dialog_added">GPX 航點 \'\'{0}\'\' 已增加</string>
     <string name="add_waypoint_dialog_title">增加航點到已錄製的 GPX 軌跡</string>
     <string name="context_menu_item_add_waypoint">增加 GPX 航點</string>
     <string name="amenity_type_administrative">行政機關</string>
@@ -522,7 +522,7 @@
     <string name="km">公里</string>
     <string name="km_h">公里/小時</string>
     <string name="m">公尺</string>
-    <string name="old_map_index_is_not_supported">舊地圖格式 \'\'{0}\'\' 已不支援</string>
+    <string name="old_map_index_is_not_supported">舊地圖資料格式 \'\'{0}\'\'，已不支援</string>
     <string name="poi_filter_closest_poi">最近的 POI</string>
     <string name="poi_filter_custom_filter">自訂篩選</string>
     <string name="poi_filter_namefinder">線上名稱尋找</string>
@@ -531,12 +531,14 @@
     <string name="version_index_is_not_supported">這版本的 \'\'{0}\'\' 索引不支援</string>
     
     
-    <string name="osmand_routing_experimental">OsmAnd 離線導航是個實驗性的功能，它不能運作超過 20 公里的距離。\n\n導航服務暫時切為線上的 CloudMade。</string>
+    <string name="osmand_routing_experimental">OsmAnd 離線導航是個實驗性的功能，它不適用於 20 公里以上的長距離。
+\n
+\n導航暫時切換為線上的 CloudMade 服務。</string>
     <string name="specified_dir_doesnt_exist">找不到指定的資料夾。</string>
     <string name="application_dir">資料存儲器資料夾</string>
 
     <string name="osmand_net_previously_installed">有前一版的 OsmAnd 存在，所有的離線資料將被新版引用。但我的收藏內的標點須以舊版程式匯出後再用新版程式匯入。</string>
-    <string name="build_installed">編譯 {0} 成功安裝({1})。</string>
+    <string name="build_installed">編譯 {0} 已安裝({1})。</string>
     <string name="downloading_build">正在下載編譯…</string>
     <string name="install_selected_build">您要安裝 OsmAnd - {0} 之中的 {1} {2} MB？</string>
     <string name="loading_builds_failed">檢索 OsmAnd 編譯列表失敗</string>
@@ -1317,7 +1319,7 @@
     
     
 
-    <string name="import_file_favourites">資料儲存為 GPX 檔案或匯入航點到我的收藏？</string>
+    <string name="import_file_favourites">將資料儲存為 GPX 檔案或將航點匯入到「我的收藏」？</string>
 
     
     <string name="rendering_value_pink_name">粉紅色</string>
