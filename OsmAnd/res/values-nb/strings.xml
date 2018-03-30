@@ -1793,7 +1793,7 @@
     <string name="shared_string_change">Endre</string>
     <string name="access_disable_offroute_recalc">Ingen ny beregning etter å ha forlatt ruten</string>
     <string name="access_disable_wrong_direction_recalc">Ingen ny ruteberegning ved motsatt retning</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Ingen ny ruteberegning ved bare bevegelse i motsatt retning.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Ingen ny ruteberegning ved bare bevegelse i den motsatte retningen.</string>
     <string name="access_smart_autoannounce">Smart auto-annonsering</string>
     <string name="rendering_value_fine_name">Fin</string>
     <string name="report">Rapport</string>
