@@ -193,8 +193,11 @@
 
         <item name="coordinate_input_edit_text_normal">@color/coordinate_input_edit_text_normal_light</item>
 
-        <item name="wikivoyage_bg">@color/wikivoyage_bg_light</item>
-        <item name="wikivoyage_app_bar">@color/wikivoyage_app_bar_light</item>
+        <item name="wikivoyage_bg_color">@color/wikivoyage_bg_light</item>
+        <item name="wikivoyage_card_bg_color">@color/wikivoyage_card_bg_light</item>
+        <item name="wikivoyage_app_bar_color">@color/wikivoyage_app_bar_light</item>
+        <item name="wikivoyage_app_bar_text_color">@color/wikivoyage_app_bar_text_light</item>
+        <item name="wikivoyage_active_color">@color/wikivoyage_active_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -380,8 +383,11 @@
 
         <item name="coordinate_input_edit_text_normal">@color/coordinate_input_edit_text_normal_dark</item>
 
-        <item name="wikivoyage_bg">@color/wikivoyage_bg_dark</item>
-        <item name="wikivoyage_app_bar">@color/wikivoyage_app_bar_dark</item>
+        <item name="wikivoyage_bg_color">@color/wikivoyage_bg_dark</item>
+        <item name="wikivoyage_card_bg_color">@color/wikivoyage_card_bg_dark</item>
+        <item name="wikivoyage_app_bar_color">@color/wikivoyage_app_bar_dark</item>
+        <item name="wikivoyage_app_bar_text_color">@color/wikivoyage_app_bar_text_dark</item>
+        <item name="wikivoyage_active_color">@color/wikivoyage_active_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

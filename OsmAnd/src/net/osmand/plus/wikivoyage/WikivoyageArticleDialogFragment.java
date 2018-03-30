@@ -1,6 +1,5 @@
 package net.osmand.plus.wikivoyage;
 
-import android.app.Dialog;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -15,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -47,22 +45,6 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 	private TextView selectedLangTv;
 	private WebView contentWebView;
-
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme_LightStatusBar;
-		Dialog dialog = new Dialog(getContext(), themeId);
-		if (Build.VERSION.SDK_INT >= 21) {
-			Window window = dialog.getWindow();
-			if (window != null) {
-				window.setStatusBarColor(getResolvedColor(nightMode
-						? R.color.status_bar_wikivoyage_dark
-						: R.color.status_bar_wikivoyage_light));
-			}
-		}
-		return dialog;
-	}
 
 	@Nullable
 	@Override
@@ -107,6 +89,11 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(SELECTED_LANG_KEY, selectedLang);
+	}
+
+	@Override
+	protected int getStatusBarColor() {
+		return nightMode ? R.color.status_bar_wikivoyage_article_dark : R.color.status_bar_wikivoyage_article_light;
 	}
 
 	private void showPopupLangMenu(View view) {

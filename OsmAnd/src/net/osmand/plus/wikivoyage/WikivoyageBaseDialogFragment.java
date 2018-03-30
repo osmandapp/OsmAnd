@@ -1,11 +1,14 @@
 package net.osmand.plus.wikivoyage;
 
+import android.app.Dialog;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +16,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -27,6 +31,20 @@ public class WikivoyageBaseDialogFragment extends BaseOsmAndDialogFragment {
 		nightMode = isNightMode(false);
 	}
 
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme_LightStatusBar;
+		Dialog dialog = new Dialog(getContext(), themeId);
+		if (Build.VERSION.SDK_INT >= 21) {
+			Window window = dialog.getWindow();
+			if (window != null) {
+				window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
+			}
+		}
+		return dialog;
+	}
+
 	@Override
 	protected Drawable getContentIcon(int id) {
 		return getIcon(id, R.color.icon_color);
@@ -34,6 +52,11 @@ public class WikivoyageBaseDialogFragment extends BaseOsmAndDialogFragment {
 
 	protected Drawable getActiveIcon(@DrawableRes int iconId) {
 		return getIcon(iconId, nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light);
+	}
+
+	@ColorRes
+	protected int getStatusBarColor() {
+		return nightMode ? R.color.status_bar_wikivoyage_dark : R.color.status_bar_wikivoyage_light;
 	}
 
 	@ColorInt
