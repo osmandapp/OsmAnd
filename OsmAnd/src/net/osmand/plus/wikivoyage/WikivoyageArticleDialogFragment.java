@@ -40,16 +40,14 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		Dialog dialog = super.onCreateDialog(savedInstanceState);
+		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme_LightStatusBar;
+		Dialog dialog = new Dialog(getContext(), themeId);
 		if (Build.VERSION.SDK_INT >= 21) {
 			Window window = dialog.getWindow();
 			if (window != null) {
 				window.setStatusBarColor(getResolvedColor(nightMode
 						? R.color.status_bar_wikivoyage_dark
 						: R.color.status_bar_wikivoyage_light));
-				if (!nightMode) {
-					AndroidUtils.setLightStatusBarFlag(window.getDecorView());
-				}
 			}
 		}
 		return dialog;
