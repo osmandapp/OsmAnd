@@ -192,6 +192,9 @@
         <item name="keyboard_controls_divider">@color/keyboard_item_add_button_divider_light</item>
 
         <item name="coordinate_input_edit_text_normal">@color/coordinate_input_edit_text_normal_light</item>
+
+        <item name="wikivoyage_bg">@color/wikivoyage_bg_light</item>
+        <item name="wikivoyage_app_bar">@color/wikivoyage_app_bar_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -376,6 +379,9 @@
         <item name="keyboard_controls_divider">@color/keyboard_item_add_button_divider_dark</item>
 
         <item name="coordinate_input_edit_text_normal">@color/coordinate_input_edit_text_normal_dark</item>
+
+        <item name="wikivoyage_bg">@color/wikivoyage_bg_dark</item>
+        <item name="wikivoyage_app_bar">@color/wikivoyage_app_bar_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
@@ -533,6 +539,10 @@
     <style name="TextAppearance.ContextMenuSubtitle" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">?android:textColorSecondary</item>
         <item name="android:textSize">@dimen/default_desc_text_size</item>
+    </style>
+
+    <style name="OsmandLightTheme.LightStatusBar" parent="OsmandLightTheme">
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="XmasDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">

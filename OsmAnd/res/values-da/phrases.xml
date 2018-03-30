@@ -3865,7 +3865,7 @@
 <string name="poi_flooring">Gulvbutik</string>
 	<string name="poi_pottery">Keramik</string>
 
-<string name="synonyms_poi_fuel">Tankstation;Benzinstation;Servicestation;Tankstation</string>
+<string name="synonyms_poi_fuel">Tankstation;Benzintank;Servicestation</string>
 
 	<string name="synonyms_poi_nightclub">Diskotek;Disko</string>
 	<string name="poi_whitewater_rapid_name">Strømfaldets navn</string>

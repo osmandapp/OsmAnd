@@ -1164,9 +1164,9 @@ Lon %2$s</string>
     <string name="general_settings">General</string>
     <string name="general_settings_descr">Configura la pantalla y ajustes globales de la aplicación.</string>
     <string name="global_app_settings">Ajustes globales de la aplicación</string>
-    <string name="user_name">Tu usuario de OSM</string>
+    <string name="user_name">Usuario de OSM</string>
     <string name="open_street_map_login_descr">Necesario para envíos a openstreetmap.org.</string>
-    <string name="user_password">Tu contraseña de OSM</string>
+    <string name="user_password">Contraseña de OSM</string>
     
     <string name="osmand_service">Modo reposo</string>
     <string name="osmand_service_descr">Ejecutar OsmAnd en segundo plano, mientras la pantalla este apagada.</string>
@@ -1620,9 +1620,9 @@ Lon %2$s</string>
     <string name="navigate_point_top_text">Ingresa Latitud y Longitud en el formato elegido (D - grados, M - minutos, S - segundos)</string>
     <string name="navigate_point_latitude">Latitud</string>
     <string name="navigate_point_longitude">Longitud</string>
-    <string name="navigate_point_format_D">DDD.DD</string>
-    <string name="navigate_point_format_DM">DDD MM.MM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+    <string name="navigate_point_format_D">GGG.GG</string>
+    <string name="navigate_point_format_DM">GGG MM.MM</string>
+    <string name="navigate_point_format_DMS">GGG MM SS.SS</string>
     <string name="search_address_top_text">Elegir dirección</string>
     <string name="search_address_region">Región</string>
     <string name="search_address_city">Ciudad</string>
@@ -2866,7 +2866,7 @@ Proporciona un código completo</string>
     <string name="shared_string_paste">Pegar</string>
     <string name="coordinate_input_accuracy_description">Cambiar automáticamente al campo siguiente al ingresar %1$d dígitos decimales.</string>
     <string name="coordinate_input_accuracy">%1$d dígitos</string>
-    <string name="go_to_next_field">Campo siguiente</string>
+    <string name="go_to_next_field">Siguiente campo</string>
     <string name="add_track_to_markers_descr">Los puntos de referencia pueden añadirse a los marcadores eligiendo una de estas trazas.</string>
     <string name="add_favourites_group_to_markers_descr">Elige una categoría de favoritos para añadir a los marcadores.</string>
     <string name="track_waypoints">Puntos de referencia de la traza</string>
@@ -2977,11 +2977,11 @@ Proporciona un código completo</string>
     <string name="enter_the_file_name">Ingresa el nombre del archivo.</string>
     <string name="transport_nearby_routes_within">Rutas a menos de</string>
     <string name="transport_nearby_routes">A MENOS DE</string>
-    <string name="dd_mm_ss_format">DD°MM′SS″</string>
-	<string name="dd_dddddd_format">DD.DDDDDD°</string>
-	<string name="dd_ddddd_format">DD.DDDDD°</string>
-	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
-	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+    <string name="dd_mm_ss_format">GG°MM′SS″</string>
+	<string name="dd_dddddd_format">GG.GGGGGG°</string>
+	<string name="dd_ddddd_format">GG.GGGGG°</string>
+	<string name="dd_mm_mmmm_format">GG°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">GG°MM.MMM′</string>
 	<string name="east_abbreviation">E</string>
 	<string name="west_abbreviation">O</string>
 	<string name="south_abbreviation">S</string>

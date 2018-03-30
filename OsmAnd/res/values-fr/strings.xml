@@ -2278,7 +2278,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="access_smart_autoannounce_descr">Annoncer uniquement lorsque la direction de la destination est modifiée</string>
     <string name="access_autoannounce_period">Fréquence des annonces</string>
     <string name="access_autoannounce_period_descr">Durée minimum entre deux annonces</string>
-    <string name="access_no_destination">La destination n\'est pas définie</string>
+    <string name="access_no_destination">Aucune destination définie</string>
     <string name="map_widget_magnetic_bearing">Cap magnétique</string>
     <string name="map_widget_bearing">Cap relatif</string>
     <string name="access_disable_offroute_recalc">Ne pas recalculer l\'itinéraire après l\'avoir quitté</string>
@@ -2325,7 +2325,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="show_something_on_map">Afficher %1$s sur la carte</string>
     <string name="route_stops_before">%1$s arrêts avant</string>
     <string name="coords_search">Recherche par coordonnées</string>
-    <string name="advanced_coords_search">Recherche avancée PAcoordonnées</string>
+    <string name="advanced_coords_search">Recherche avancée par coordonnées</string>
     <string name="dist_away_from_my_location">Recherche %1$s autour</string>
     <string name="release_2_4">"\\022 Nouveau moteur de recherche pour les lieux permettant la saisie d\'un texte libre 
 \n 

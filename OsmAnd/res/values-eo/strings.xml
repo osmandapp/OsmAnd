@@ -1819,7 +1819,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="background_service_int_descr">Agordi intervalon por fona reĝimo.</string>
     <string name="background_router_service">Lanĉi OsmAnd fone</string>
     <string name="background_router_service_descr">Lanĉi OsmAnd en fona reĝimo por spuri vian pozicion dum malŝaltita ekrano.</string>
-    <string name="off_router_service_no_gps_available">La fona navigad-servo postulas pozicitrovan servon aktivigitan.</string>
+    <string name="off_router_service_no_gps_available">La fona navigad-servo postulas aktivigi pozicitrovan servon.</string>
     <string name="hide_poi_filter">Kaŝi filtrilon</string>
     <string name="show_poi_filter">Montri filtrilon</string>
     <string name="search_poi_filter">Filtri</string>
@@ -2748,7 +2748,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Eviti glaci-vojojn, travadejojn</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Eviti glaciajn vojojn kaj travadejojn.</string>
     <string name="use_location">Uzi pozicion</string>
-    <string name="add_location_as_first_point_descr">Aldoni vian pozicion kiel unuan punkton por plani idealan kurson.</string>
+    <string name="add_location_as_first_point_descr">Aldonu vian pozicion kiel komencan punkton por plani idealan kurson.</string>
     <string name="my_location">Mia pozicio</string>
     <string name="shared_string_finish">Fini</string>
     <string name="plan_route">Plani kurson</string>
@@ -2762,7 +2762,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="make_round_trip_descr">Aldoni kopion de komenc-punkto kiel celon.</string>
     <string name="make_round_trip">Fermita ekskurso</string>
     
-    <string name="osn_modify_dialog_error">Eraro okazis: rimarko ne estis ŝanĝita</string>
+    <string name="osn_modify_dialog_error">Eraro okazis: la rimarko ne estis ŝanĝita</string>
     <string name="osn_modify_dialog_title">Redakti rimarkon</string>
     <string name="context_menu_item_modify_note">Redakti OSM-rimarkon</string>
     <string name="release_2_8">• Tute refaritaj map-markoj kun gvid-linioj kaj planado de vojaĝo
@@ -2775,7 +2775,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="rendering_value_darkyellow_name">Flava malhela</string>
     <string name="shared_string_road">Vojo</string>
     <string name="show_map">Montri mapon</string>
-    <string name="route_is_calculated">Kurso estas kalkulata</string>
+    <string name="route_is_calculated">Kalkulis kurson</string>
     <string name="round_trip">Fermita ekskurso</string>
     <string name="plan_route_no_markers_toast">Vi devas aldoni almenaŭ unu markon por uzi tiun ĉi eblon.</string>
     <string name="wrong_format">Malĝusta formo</string>
@@ -2800,16 +2800,16 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_paste">Englui</string>
     <string name="coordinate_input_accuracy_description">Aŭtomate baskuli al la sekva kampo post entajpi %1$d dekumajn ciferojn.</string>
     <string name="coordinate_input_accuracy">%1$d ciferoj</string>
-    <string name="go_to_next_field">Iri al la sekva kampo</string>
+    <string name="go_to_next_field">Sekva kampo</string>
     <string name="appearance_on_the_map">Aspekto sur la mapo</string>
-    <string name="add_track_to_markers_descr">Elektu kurson por aldoni ĝiajn navigadpunktojn al map-markoj. (Nur kursoj kun navigadpunktoj vidiĝas.)</string>
+    <string name="add_track_to_markers_descr">Oni povas aldoni navigadpunktojn al map-markoj per elekti iun kurson enhavantan ilin.</string>
     <string name="add_favourites_group_to_markers_descr">Elektu grupon de ŝatataj por aldoni al map-markoj.</string>
     <string name="track_waypoints">Navigadpunktoj de kurso</string>
     <string name="favourites_group">Kategorio de ŝatataj</string>
     <string name="add_group">Aldoni grupon</string>
     <string name="add_group_descr">Vi povas enporti grupon el ŝatataj aŭ navigadpunktoj de kurso.</string>
     <string name="empty_state_markers_active">Krei map-markoj!</string>
-    <string name="empty_state_markers_active_desc">Frapetu aŭ frapetadu ejojn kaj poste frapetu la butonon de flago.</string>
+    <string name="empty_state_markers_active_desc">Frapetu aŭ frapetadu ejon kaj sekve frapetu la butonon de flago.</string>
     <string name="empty_state_markers_groups">Enporti grupojn</string>
     <string name="empty_state_markers_groups_desc">Vi povas enporti grupojn de ŝatataj aŭ kurs-navigadpunktojn kiel map-markojn.</string>
     <string name="empty_state_markers_history_desc">Markoj markitaj kiel pasigitajn montriĝos sur tiu ĉi ekrano.</string>
@@ -2932,4 +2932,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="select_waypoints_category_description">Vi povas aldoni ĉiujn navigadpunktojn de la kurso aŭ elekti disajn kategoriojn.</string>
     <string name="shared_string_total">Tute</string>
     <string name="nothing_found_in_radius">Ne trovis ion ajn en la radiuso de</string>
+    <string name="shared_string_travel">Vojaĝo</string>
+    <string name="waypoints_removed_from_map_markers">Forigis navigadpunktojn el map-markoj</string>
     </resources>
