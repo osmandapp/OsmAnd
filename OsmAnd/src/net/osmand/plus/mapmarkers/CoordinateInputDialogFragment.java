@@ -89,6 +89,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean orientationPortrait;
 
 	private boolean isSoftKeyboardShown = true;
+	private boolean useTwoDigitsLongtitude;
 	private boolean north = true;
 	private boolean east = true;
 
@@ -106,7 +107,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		super.onCreate(savedInstanceState);
 		lightTheme = getMyApplication().getSettings().isLightContent();
 		setStyle(STYLE_NO_FRAME, lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
-		isSoftKeyboardShown = !getMyApplication().getSettings().COORDS_INPUT_USE_OSMAND_KEYBOARD.get();
+		useTwoDigitsLongtitude = getMyApplication().getSettings().COORDS_INPUT_TWO_DIGITS_LONGTITUDE.get();
 	}
 
 	@NonNull
@@ -363,28 +364,29 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public void onClick(View view) {
 				boolean isCurrentlyVisible = isOsmandKeyboardCurrentlyVisible();
-				if (isOsmandKeyboardOn()&&!isSoftKeyboardShown) {
+				if (isOsmandKeyboardOn() && !isSoftKeyboardShown) {
 					changeOsmandKeyboardVisibility(!isCurrentlyVisible);
-				}else {
-				final View focusedView = getDialog().getCurrentFocus();
-				if (focusedView != null) {
-					if (isSoftKeyboardShown) {
-						isSoftKeyboardShown = false;
-						AndroidUtils.hideSoftKeyboard(getActivity(), focusedView);
-					} else {
-						new Handler().postDelayed(new Runnable() {
-							@Override
-							public void run() {
-								isSoftKeyboardShown = true;
-								AndroidUtils.showSoftKeyboard(focusedView);
-							}
-						}, 200);
+				} else {
+					final View focusedView = getDialog().getCurrentFocus();
+					if (focusedView != null) {
+						if (isSoftKeyboardShown) {
+							isSoftKeyboardShown = false;
+							AndroidUtils.hideSoftKeyboard(getActivity(), focusedView);
+						} else {
+							new Handler().postDelayed(new Runnable() {
+								@Override
+								public void run() {
+									isSoftKeyboardShown = true;
+									AndroidUtils.showSoftKeyboard(focusedView);
+								}
+							}, 200);
+						}
+						changeEditTextSelections();
 					}
-					changeEditTextSelections();
-				}}
+				}
 			}
 		});
-}
+	}
 
 	private void setupKeyboardItems(View keyboardView, View.OnClickListener listener, @IdRes int... itemsIds) {
 		@DrawableRes int itemBg = lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg;
@@ -489,6 +491,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				new Handler().postDelayed(new Runnable() {
 					@Override
 					public void run() {
+						isSoftKeyboardShown = true;
 						AndroidUtils.showSoftKeyboard(focusedView);
 					}
 				}, 200);
@@ -716,8 +719,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		int format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
 
-		setupEditTextEx(R.id.lat_first_input_et, CoordinateInputFormats.getFirstPartSymbolsCount(format, true), true);
-		setupEditTextEx(R.id.lon_first_input_et, CoordinateInputFormats.getFirstPartSymbolsCount(format, false), false);
+		setupEditTextEx(R.id.lat_first_input_et, CoordinateInputFormats.getFirstPartSymbolsCount(format, true, useTwoDigitsLongtitude), true);
+		setupEditTextEx(R.id.lon_first_input_et, CoordinateInputFormats.getFirstPartSymbolsCount(format, false, useTwoDigitsLongtitude), false);
 
 		String firstSeparator = CoordinateInputFormats.getFirstSeparator(format);
 		((TextView) mainView.findViewById(R.id.lat_first_separator_tv)).setText(firstSeparator);
@@ -811,6 +814,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		return new CoordinateInputFormatChangeListener() {
 
 			@Override
+			public void onTwoDigitsLongtitudeChanged() {
+				changeTwoDigitsLongtitude();
+			}
+
+			@Override
 			public void onKeyboardChanged() {
 				changeKeyboard();
 			}
@@ -830,6 +838,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private void changeHand() {
 		((FrameLayout) mainView.findViewById(R.id.left_container)).removeViewAt(0);
 		((FrameLayout) mainView.findViewById(R.id.right_container)).removeViewAt(0);
+		registerMainView();
+	}
+
+	private void changeTwoDigitsLongtitude() {
+		editTexts.get(3).setMaxSymbolsCount(getMyApplication().getSettings().COORDS_INPUT_TWO_DIGITS_LONGTITUDE.get() ? 2 : 3);
+		((LinearLayout)mainView.findViewById(R.id.longitude_row)).removeView(editTexts.get(3));
+//		editTexts.get(3).invalidate();
 		registerMainView();
 	}
 

@@ -55,6 +55,26 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 				.create();
 		items.add(useSystemKeyboardItem);
 
+		boolean useTwoDigitsLogtitude = settings.COORDS_INPUT_TWO_DIGITS_LONGTITUDE.get();
+		BaseBottomSheetItem twoDigitsLongtitudeItem = new BottomSheetItemWithCompoundButton.Builder()
+				.setChecked(useTwoDigitsLogtitude)
+				.setIcon(getContentIcon(R.drawable.ic_action_next_field_stroke))
+				.setTitle(getString(R.string.use_two_digits_longitude))
+				.setLayoutId(R.layout.bottom_sheet_item_with_switch)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							OsmandSettings.CommonPreference<Boolean> pref = settings.COORDS_INPUT_TWO_DIGITS_LONGTITUDE;
+							pref.set(!pref.get());
+							listener.onTwoDigitsLongtitudeChanged();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(twoDigitsLongtitudeItem);
+
 		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
 			boolean rightHand = settings.COORDS_INPUT_USE_RIGHT_SIDE.get();
 
@@ -129,6 +149,8 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	}
 
 	interface CoordinateInputFormatChangeListener {
+
+		void onTwoDigitsLongtitudeChanged();
 
 		void onKeyboardChanged();
 
