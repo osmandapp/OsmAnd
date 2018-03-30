@@ -4,13 +4,35 @@ body {
 }
 
 h2 {
-    color: #ff8800;
+    font-size: 3em;
+    letter-spacing: 0.05em;
+    color: #727272;
+    font-family: serif;
+}
+
+h3 {
+  font-size: 2em;
+  font-family: sans-serif;
+  padding-top: 5%;
+}
+
+p {
+  font-family: sans-serif;
+  font-size: 1em;
+  line-height: 4em;
 }
 
 img {
     width: 100%;
 }
 
-thumbcaption {
+.thumb-tright, .thumbinner {
+    width: 100%;
+}
+
+.thumbcaption {
+    width: 100%;
+    font-size: 1em;
+    color: #727272;
     font-style: italic;
 }
