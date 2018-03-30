@@ -31,11 +31,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	}
 
 	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
-
-	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		final Context context = getContext();
 		final OsmandSettings settings = getMyApplication().getSettings();
