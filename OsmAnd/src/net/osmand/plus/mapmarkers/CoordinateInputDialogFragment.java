@@ -54,6 +54,7 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -347,6 +348,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			public void onClick(View view) {
 				boolean isCurrentlyVisible = isOsmandKeyboardCurrentlyVisible();
 				if (!isCurrentlyVisible && !useOsmandKeyboard) {
+					OsmandSettings.OsmandPreference<Boolean> pref = getMyApplication().getSettings().COORDS_INPUT_USE_OSMAND_KEYBOARD;
+					pref.set(!pref.get());
 					changeKeyboard();
 				} else {
 					changeOsmandKeyboardVisibility(!isCurrentlyVisible);
