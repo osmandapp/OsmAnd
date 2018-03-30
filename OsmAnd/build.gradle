@@ -47,12 +47,12 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 14
+		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 15
 		targetSdkVersion 23
 		versionCode 300
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		multiDexEnabled true
-		versionName "2.9.0"
+		versionName "3.0.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
@@ -384,13 +384,13 @@ repositories {
 }
 
 def analytics = (System.getenv("APP_FEATURES") && System.getenv("APP_FEATURES").contains("+play_market") && 
-	System.getenv("PACKAGE_TO_BUILT").equals("net.osmand") ) || System.getenv("USE_FIREBASE")
+	["net.osmand", "net.osmand.dev"].contains(System.getenv("PACKAGE_TO_BUILT")) ) || System.getenv("USE_FIREBASE")
 dependencies {
 	compile project(path: ':OsmAnd-java', configuration: 'android')
 	if (analytics) {
-		compile 'com.google.firebase:firebase-core:9.8.0'
-		compile 'com.google.firebase:firebase-config:9.8.0'
-		implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+		compile 'com.google.firebase:firebase-core:12.0.1'
+		compile 'com.google.firebase:firebase-config:12.0.1'
+		compile 'com.facebook.android:facebook-android-sdk:[4,5)'	
 	}
 	compile 'com.android.support:multidex:1.0.1'
 	compile 'com.android.support:gridlayout-v7:27.1.0'
@@ -399,7 +399,7 @@ dependencies {
 	compile 'com.android.support:design:27.1.0'
 	compile 'com.android.support:customtabs:27.1.0'
 	compile fileTree(include:  ['bsh-core-2.0b4.jar', 'bzip2-20090327.jar', 'gnu-trove-osmand.jar', 'gson-2.5.jar', 'icu4j-49_1_patched.jar', 'jts-core-1.14.0.jar', 'junidecode-0.1.jar', 'simple-logging.jar', 'tuprolog.jar'], dir: 'libs')
-	
+
 	legacyCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
