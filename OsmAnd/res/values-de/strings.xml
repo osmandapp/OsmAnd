@@ -609,13 +609,13 @@
 
 	<string name="poi_context_menu_modify">Bearbeite POI</string>
 	<string name="poi_context_menu_delete">Lösche POI</string>
-	<string name="rotate_map_compass_opt">Kompassrichtung</string>
+	<string name="rotate_map_compass_opt">Nach Kompass</string>
 	<string name="rotate_map_bearing_opt">Nach Bewegungsrichtung</string>
-	<string name="rotate_map_none_opt">Keine Rotation (Norden ist oben)</string>
+	<string name="rotate_map_none_opt">Keine Rotation (Norden ist immer oben)</string>
 	<string name="rotate_map_to_bearing_descr">Art der Kartenausrichtung wählen.</string>
 	<string name="rotate_map_to_bearing">Kartenrotation</string>
 	<string name="show_route">Routendetails</string>
-	<string name="fav_imported_sucessfully">Favoriten erfolgreich importiert</string>
+	<string name="fav_imported_sucessfully">Favoriten importiert</string>
 	<string name="fav_file_to_load_not_found">GPX-Datei mit den Favoriten nicht gefunden unter {0}</string>
 	<string name="fav_saved_sucessfully">Favoriten erfolgreich unter {0} gespeichert</string>
 	<string name="no_fav_to_save">Keine Favoriten zu speichern</string>
