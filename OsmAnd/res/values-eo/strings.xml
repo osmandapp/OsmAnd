@@ -2594,14 +2594,14 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_plugin">Kromprogramo</string>
     <string name="srtm_purchase_header">Por vidi nivelkurbojn sur la mapo, vi devas aĉeti kaj instali la kromprogramon ‘Nivelkurboj</string>
     <string name="hillshade_menu_download_descr">Elŝutu la mapon “nivel-ombrumoj” por vidigi reliefon por tiu ĉi regiono.</string>
-    <string name="hillshade_purchase_header">Por vidi nivel-ombrumon sub la mapo, vi devas aĉeti kaj instali kromprogramon ‘Nivelkurboj</string>
+    <string name="hillshade_purchase_header">Instalu la kromprogramon “nivelkurboj” por vidigi ilin sur la mapo.</string>
     <string name="hide_from_zoom_level">Kaŝi de skal-nivelo</string>
     <string name="sorted_by_distance">Ordigitaj laŭ distanco</string>
     <string name="search_favorites">Serĉi en ŝatataj</string>
     <string name="quick_action_showhide_osmbugs_title">Montri/kaŝi OSM-rimarkojn</string>
     <string name="quick_action_osmbugs_show">Montri OSM-rimarkojn</string>
     <string name="quick_action_osmbugs_hide">Kaŝi OSM-rimarkojn</string>
-    <string name="quick_action_showhide_osmbugs_descr">Premado sur la ag-butono montros aŭ kaŝos OSM-rimarkojn sur la mapo.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Premu tiun ĉi ag-butonon por montri aŭ kaŝi OSM-rimarkojn sur la mapo.</string>
     <string name="restart_search">Rekomenci serĉon</string>
     <string name="increase_search_radius">Pliigi serĉan radiuson</string>
     <string name="nothing_found">Trovis nenion</string>
@@ -2932,4 +2932,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="nothing_found_in_radius">Ne trovis ion ajn en la radiuso de</string>
     <string name="shared_string_travel">Vojaĝo</string>
     <string name="waypoints_removed_from_map_markers">Forigis navigadpunktojn el map-markoj</string>
+    <string name="use_two_digits_longitude">Uzi du ciferojn da longitudo</string>
     </resources>
