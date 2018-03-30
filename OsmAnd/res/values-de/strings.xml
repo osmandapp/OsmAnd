@@ -255,7 +255,7 @@
 	<string name="use_fluorescent_overlays_descr">Fluoreszierende Anzeige von Tracks und Routen.</string>
 	<string name="offline_edition">Offline-Bearbeitung</string>
 	<string name="offline_edition_descr">Immer Offline-Bearbeitung verwenden.</string>
-	<string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb von OsmAnd beeinflusst nicht die Offline-Karten, sondern wird in einer eigenen Datei gespeichert.</string>
+	<string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb von OsmAnd beeinflusst nicht die heruntergeladenen Offline-Karten, sondern wird in einer Datei auf Ihrem Gerät gespeichert.</string>
 	<string name="local_openstreetmap_uploading">Hochladen…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} POI/Notizen wurden hochgeladen</string>
 	<string name="local_openstreetmap_uploadall">Alle hochladen</string>
@@ -440,7 +440,7 @@
 	<string name="tts_language_not_supported_title">Sprache nicht unterstützt</string>
 	<string name="tts_language_not_supported">Die gewählte Sprache wird von der installierten Android-TTS-Engine nicht unterstützt. Soll im Market nach einer anderen TTS-Engine gesucht werden? Andernfalls wird die voreingestellte Standard-Sprache verwendet.</string>
 	<string name="tts_missing_language_data_title">Fehlendes Sprachpaket</string>
-	<string name="tts_missing_language_data">Es ist kein Sprachpaket für die gewählte Sprache installiert. Soll aus dem Market eines installiert werden?</string>
+	<string name="tts_missing_language_data">Soll die gewählte Sprache aus dem Market installiert werden?</string>
 	<string name="switch_to_vector_map_to_see">Eine Offline-Vektor-Karte ist für diesen Ort vorhanden.
 		\n\t
 		\n\tZur Verwendung aktivieren: \'Menu\' → \'Karte konfigurieren\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
@@ -546,7 +546,7 @@
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
 	<string name="application_dir">Datenordner</string>
 	
-	<string name="osmand_net_previously_installed">Eine Vorversion von OsmAnd ist installiert. Alle Offline-Daten werden weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert und anschließend in die neue Version importiert werden.</string>
+	<string name="osmand_net_previously_installed">Alle Offline-Daten der älteren App werden in der neuen weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert und anschließend in die neue Version importiert werden.</string>
 	<string name="build_installed">Build {0} installiert ({1}).</string>
 	<string name="downloading_build">Lade Build…</string>
 	<string name="install_selected_build">Möchten Sie OsmAnd ({0} von {1} {2} MB) installieren?</string>
@@ -579,7 +579,7 @@
 	<string name="continuous_rendering_descr">Wähle zwischen kontinuierlichem Kartenaufbau oder Bilddarstellung auf einmal.</string>
 	<string name="rendering_exception">Fehler aufgetreten beim Rendern des gewählten Gebietes</string>
 	<string name="show_point_options">Standort verwenden…</string>
-	<string name="renderer_load_sucess">Renderer erfolgreich geladen</string>
+	<string name="renderer_load_sucess">Renderer geladen</string>
 	<string name="renderer_load_exception">Fehler aufgetreten: Renderer wurde nicht geladen</string>
 	<string name="renderers">Vektor-Renderer</string>
 	<string name="renderers_descr">Wähle Anzeigemodus für Offline-Vektor-Karten.</string>
@@ -609,7 +609,7 @@
 
 	<string name="poi_context_menu_modify">Bearbeite POI</string>
 	<string name="poi_context_menu_delete">Lösche POI</string>
-	<string name="rotate_map_compass_opt">Nach Kompass</string>
+	<string name="rotate_map_compass_opt">Kompassrichtung</string>
 	<string name="rotate_map_bearing_opt">Nach Bewegungsrichtung</string>
 	<string name="rotate_map_none_opt">Keine Rotation (Norden ist oben)</string>
 	<string name="rotate_map_to_bearing_descr">Art der Kartenausrichtung wählen.</string>
@@ -2545,14 +2545,14 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="osmand_extended_description_part2">GPS-Navigation • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg • Ihre Route wird neu berechnet, sobald Sie von ihr abweichen • Fahrspurassistent, Straßennamen und voraussichtliche Ankunftszeit helfen Ihnen auf der Strecke • Zur Erhöhung Ihrer Reisesicherheit erfolgt ein automatischer Wechsel zwischen Tag- und Nachtmodus • Sie können wählen, ob Tempolimits angezeigt werden sollen, und ob Sie bei deren Überschreitung darauf hingewiesen werden wollen • Die Kartenvergrößerung passt sich Ihrer Geschwindigkeit an • Sie können Ziele nach Adresse, Typ (z. B.: Parkplatz, Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten suchen • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich • Sie können Ihre GPX-Tracks aufzeichnen, einspielen und ihnen folgen</string>
     <string name="osmand_extended_description_part3">Karten • zeigen POIs (point of interests) in Ihrer Umgebung an • richten sich nach Ihrer Bewegungsrichtung (oder dem Kompass) aus • zeigen an, wo Sie sind und worauf Sie sehen • übermitteln Ihre Position, damit Ihre Freunde Sie finden können • speichern Ihre wichtigsten Orte als Favoriten • lassen Ihnen die Wahl, wie Bezeichnungen auf der Karte angezeigt werden sollen: in Englisch, Landessprache oder in phonetischer Schreibweise • stellen spezielle Online-Karten, Satellitenansichten (von Bing), verschiedene Overlays, wie GPX-Tracks zu Touren-/Routenverläufen, und zusätzliche Ebenen mit einstellbarer Transparenz dar</string>
     <string name="osmand_extended_description_part4">Ski-Sport - das OsmAnd-Skikarten-Modul ermöglicht Ihnen das Betrachten von Skirouten, deren Schwierigkeitsgrad und einiger zusätzlicher Informationen, wie die Lage von Liften und weiterer Einrichtungen.</string>
-    <string name="osmand_extended_description_part5">Radfahren • Sie finden Radwege auf der Karte • Die GPS-Navigation im Fahrrad-Modus errechnet Ihre Route anhand von Radwegen • Sie können Ihre Geschwindigkeit und Höhe verfolgen • Die Möglichkeit der GPX-Aufzeichnung versetzt Sie in die Lage, Ihre Fahrt zu protokollieren und sie mit anderen zu teilen • Über ein Zusatzmodul können Sie sich Höhenlinien und das Geländerelief darstellen lassen</string>
+    <string name="osmand_extended_description_part5">Radfahren • Sie finden Radwege auf der Karte • Die GPS-Navigation im Fahrrad-Modus errechnet Ihre Route anhand von Radwegen • Sie können Ihre Geschwindigkeit und Höhe verfolgen • Die Möglichkeit der GPX-Aufzeichnung versetzt Sie in die Lage, Ihre Fahrt zu protokollieren und sie mit anderen zu teilen • Über ein Zusatzmodul können Sie Höhenlinien und das Geländerelief einschalten</string>
     <string name="osmand_extended_description_part6">Laufen, Wandern, Stadtbesichtigung • Die Karte zeigt Ihnen Fuß- und Wanderwege an • Wikipedia, in der von Ihnen gewünschten Sprache, kann Ihnen eine Menge bei einer Stadtbesichtigung erzählen • Haltestellen öffentlicher Verkehrsmittel (Bus, Tram, Bahn), inklusive der Linienbezeichnungen, helfen Ihnen dabei, sich in einer neuen Stadt zurechtzufinden • Die GPS-Navigation im Fußgänger-Modus berechnet Ihre Route anhand von Fußwegen • Sie können GPX-Routen einspielen und ihnen folgen oder eigene aufzeichnen und mit anderen teilen</string>
     <string name="osmand_extended_description_part7">OSM-Mitarbeit • Melden Sie falsche Daten • Übertragen Sie direkt aus der App GPX-Tracks an OSM • Ergänzen Sie POIs und leiten Sie sie direkt (oder, falls Sie keine Netzverbindung haben, später) an OSM weiter</string>
     <string name="osmand_extended_description_part8">OsmAnd ist quelloffen und wird stetig weiterentwickelt. Jeder kann durch Meldung von Fehlern, Verbesserung der Übersetzung oder Programmierung neuer Funktionen an der Anwendung mitarbeiten. Durch all diese Formen der Zusammenarbeit zwischen Entwickler und Anwender wird eine lebendige, kontinuierliche Verbesserung des Projekts gewährleistet. Darüberhinaus ist der Fortschritt des Projekts auch auf finanzielle Mitbeteiligung angewiesen, um die Programmierung und Testung neuer Funktionen fördern zu können. 
 \nUngefähre Kartenabdeckung und -qualität: • Westeuropa: **** • Osteuropa: *** • Russland: *** • Nordamerika: *** • Südamerika: ** • Asien: ** • Japan &amp; Korea: *** • Mittlerer Osten: ** • Afrika: ** • Antarktis: * - Die meisten Länder rund um den Globus stehen zum Herunterladen bereit! Holen Sie sich eine verlässliche Navigation für Ihr Land - sei es in Frankreich, Deutschland, Mexiko, Großbritannien, Spanien, den Niederlanden, den USA, Russland, Brasilien oder wo auch immer.</string>
     <string name="restore_purchases">Käufe wiederherstellen</string>
     <string name="fonts_header">Kartenschriftarten</string>
-    <string name="osmand_plus_extended_description_part1">"OsmAnd+ (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugriff auf die kostenlosen, weltweit verfügbaren und qualitativ hochwertigen Daten von OpenStreetMap (OSM). Genießen Sie die akustische und visuelle Navigation, die Betrachtung von POIs (points of interest), die Erstellung und Bearbeitung von  GPX-Tracks, die Visualisierung von Höhenlinien und -angaben, die Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Modus, die Möglichkeit der Mitarbeit an OSM und vieles mehr. OsmAnd+ ist die Kaufversion. Durch ihren Erwerb, unterstützen Sie das Projekt, fördern die Entwicklung neuer Funktionen und erhalten die neusten Aktualisierungen. Einige der Hauptmerkmale:"</string>
+    <string name="osmand_plus_extended_description_part1">"OsmAnd+ (OSM Automated Navigation Directions) ist eine Karten- und Navigationsapp mit Zugriff auf die kostenlosen, weltweit verfügbaren und qualitativ hochwertigen Daten von OpenStreetMap (OSM). Genießen Sie die akustische und visuelle Navigation, die Betrachtung von POIs (points of interest), die Erstellung und Bearbeitung von  GPX-Tracks, die Visualisierung von Höhenlinien und -angaben, die Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Modus, die Möglichkeit der Mitarbeit an OSM und vieles mehr. OsmAnd+ ist die Kaufversion. Durch ihren Erwerb, unterstützen Sie das Projekt, fördern die Entwicklung neuer Funktionen und erhalten die neusten Aktualisierungen. Einige der Hauptmerkmale:"</string>
     <string name="osmand_plus_extended_description_part2">Navigation • funktioniert online (schnell) oder offline (ohne Roaming-Gebühren im Ausland) • akustische Schritt-für-Schritt-Wegführung (mit aufgenommenen oder synthetischen Stimmen) • optional mit Fahrspurassistent, Straßennamenanzeige und geschätzter Ankunftszeit • unterstützt Zwischenstopps entlang der Reiseroute • automatische Routenneuberechnung, sobald Sie von ihr abweichen • Ortssuche nach Adresse, Typ (z. B.: Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten</string>
     <string name="osmand_plus_extended_description_part4">OSM- und Wikipedia-Datennutzung • Qualitativ hochwertige Informationen aus den besten Gemeinschaftsprojekten der Welt • OSM-Daten stehen pro Land oder Region zur Verfügung • Wikipedia-POIs, großartig bei Besichtigungen • Unbegrenzte, kostenlose Downloads, direkt aus der App • Kompakte Offline-Vektorkarten, mindestens einmal pro Monat aktualisiert • Auswahl zwischen vollständigen Daten zu einer Region bzw. einfachen Daten zum Straßennetz (Beispiel: Japan insgesamt benötigt 700 MB, das Straßennetz nur 200 MB davon)</string>
     <string name="osmand_plus_extended_description_part5">Sicherheitsfunktionen • Optionales automatisches Umschalten der Tag-/Nachtansicht • Optionale Tempolimit-Anzeige, mit Warnung bei Überschreitung • Optionale geschwindigkeitsabhängige Vergrößerung • Positionsübermittlung, damit Freunde Sie finden können</string>
@@ -2945,4 +2945,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="nothing_found_in_radius">Nichts gefunden innerhalb des Umkreises:</string>
     <string name="select_waypoints_category_description">Sie können alle Wegpunkte des Tracks hinzufügen oder einzelne Kategorien auswählen.</string>
     <string name="shared_string_total">Total</string>
+    <string name="use_two_digits_longitude">Zweistelligen Längengrad verwenden</string>
     </resources>
