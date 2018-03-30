@@ -2511,17 +2511,17 @@
     <string name="quick_action_edit_action">Rediger handling</string>
     <string name="quick_actions_delete">Slett handling</string>
     <string name="quick_favorites_name_preset">Navneforvalg</string>
-    <string name="quick_action_add_marker_descr">Å trykke på handlingsknappen vil legge til en kartmarkør i midten av skjermen.</string>
+    <string name="quick_action_add_marker_descr">Trykk på denne handlingsknappen vil legge til en kartmarkør i skjermsenteret.</string>
     <string name="quick_action_add_gpx_descr">Å trykke på handlingsknappen vil legge til et GPX-rutepunkt i midten av skjermen.</string>
     <string name="quick_action_take_audio_note_descr">Å trykke på handlingsknappen vil legge til et lydnotat i midten av skjermen.</string>
     <string name="quick_action_take_video_note_descr">Å trykke på handlingsknappen vil legge til et videonotat i midten av skjermen.</string>
     <string name="quick_action_take_photo_note_descr">Å trykke på handlingsknappen vil legge til et bildenotat i midten av skjermen.</string>
     <string name="quick_action_add_osm_bug_descr">Å trykke på handlingsknappen vil legge til et OSM-notat i midten av skjermen.</string>
-    <string name="quick_action_navigation_voice_descr">Trykk på handlingsknappen vil slå av eller på taleveiledning under navigering.</string>
+    <string name="quick_action_navigation_voice_descr">Trykk på denne handlingsknappen vil slå av eller på taleveiledning under navigering.</string>
     <string name="quick_action_add_parking_descr">Å trykke på handlingsknappen vil legge til en parkeringsplass i midten av skjermen.</string>
     <string name="quick_action_interim_dialog">Vis en midlertidig dialog</string>
     <string name="favorite_autofill_toast_text">" er lagret i "</string>
-    <string name="quick_action_showhide_favorites_descr">Trykk på handlingsknappen vil vise eller skjule favorittpunktene på kartet.</string>
+    <string name="quick_action_showhide_favorites_descr">Trykk på denne handlingsknappen vil vise eller skjule favorittpunktene på kartet.</string>
     <string name="quick_action_add_create_items">Opprett elementer</string>
     <string name="quick_action_fav_name_descr">La stå tomt for å automatisk bruke adressen eller stedsnavnet.</string>
     <string name="quick_action_bug_descr">Denne meldingen vil bli auto-fullført i kommentarfeltet.</string>
@@ -2640,8 +2640,8 @@
     <string name="activate_seamarks_plugin">Aktiver \"sjømerke\"-tillegget</string>
     <string name="save_poi_too_many_uppercase">Navnet inneholder for mange store bokstaver. Vil du fortsette?</string>
     <string name="quick_action_add_poi">Legg til interessepunkt</string>
-    <string name="quick_action_showhide_poi_descr">Trykk på handlingsknappen vil vise eller skjule interessepunkter på kartet.</string>
-    <string name="quick_action_page_list_descr">Trykk på handlingsknappen vil bla gjennom listen nedenfor.</string>
+    <string name="quick_action_showhide_poi_descr">Trykk på denne handlingsknappen vil vise eller skjule interessepunkter på kartet.</string>
+    <string name="quick_action_page_list_descr">Trykk på denne handlingsknappen vil bla gjennom listen nedenfor.</string>
     <string name="quick_action_empty_param_error">Parameterne kan ikke være tomme</string>
     <string name="quick_action_btn_tutorial_descr">Lang-trykk og dra knappen for å endre dens posisjon på skjermen.</string>
     <string name="add_track_to_markers_descr">Rutepunkter kan legges til i markører ved å velge et av disse sporene.</string>
@@ -2670,7 +2670,7 @@
     
     <string name="av_locations_selected_desc">GPX-fil med de valgte notatenes koordinater og data.</string>
     <string name="av_locations_all_desc">GPX-fil med alle notaters koordinater og data.</string>
-    <string name="quick_action_add_poi_descr">Trykk på handlingsknappen vil legge til et interessepunkt i midten av skjermen.</string>
+    <string name="quick_action_add_poi_descr">Trykk på denne handlingsknappen vil legge til et interessepunkt i midten av skjermen.</string>
     <string name="open_from">Åpen fra</string>
     <string name="open_till">Åpen til</string>
     <string name="will_close_at">Stenger</string>
@@ -2767,13 +2767,13 @@
     <string name="rendering_attr_whiteWaterSports_name">Rafting</string>
     <string name="poi_error_info_not_loaded">Info om knutepunktet ble ikke innlastet</string>
     <string name="poi_dialog_other_tags_message">Alle andre etiketter beholdes</string>
-    <string name="we_really_care_about_your_opinion">Vi bryr oss om deg og din tilbakemelding til oss.</string>
+    <string name="we_really_care_about_your_opinion">Vi bryr oss om din mening og din tilbakemelding er viktig.</string>
     <string name="number_of_rows_in_dash">Antall rader %1$s</string>
     <string name="show_free_version_banner">Vis gratisversjonsbanner</string>
     <string name="show_free_version_banner_description">Vis gratisversjonsbanneret selv i den betalte versjonen.</string>
     <string name="commiting_node">Overfører knutepunkt…</string>
     <string name="previous_run_crashed">Den siste kjøringen av OsmAnd kræsjet. Loggfilen finnes i {0}. Rapporter hendelsen og legg ved loggfilen.</string>
-    <string name="poi_error_poi_not_found">Knutepunktet ble ikke funnet, eller så består fasiliteten av flere knutepunkter som ikke er støttet enda.</string>
+    <string name="poi_error_poi_not_found">Knutepunktet ble ikke funnet, eller så består fasiliteten av flere knutepunkter som ikke støttes ennå.</string>
     <string name="android_19_location_disabled">Siden Android versjon 4.4 (KitKat) kan du ikke laste ned og oppdatere kart til den tidligere lagringsmappen (%s). Ønsker du å endre tillatt lagringsplassering og kopiere alle OsmAnd-filer dit? 
 \n Merknad 1: Dine gamle filer vil forbli urørt (men kan slettes manuelt.)
 \n Merknad 2: På den nye lagringsplassen er det ikke mulig å dele filer mellom OsmAnd og OsmAnd+.</string>
@@ -2785,4 +2785,5 @@
     <string name="version_index_is_not_supported">Versjonen av indeksen \"{0}\" støttes ikke</string>
     <string name="osmand_parking_plugin_description">Parkeringsplass-tillegget lar deg registrere hvor bilen din er parkert og hvor mye parkeringstid som gjenstår (hvis det er en tidsbegrensning).
 \nBåde parkeringsplass og tid er synlige på dashbordet i OsmAnd såvel som i et miniprogram på kartskjermen. En alarm kan legges til Android-kalenderen som en påminnelse.</string>
+    <string name="dashboard_or_drawer_description">En valgmulighet tilbys om å primært styre programmet via det fleksible dashbordet eller en statisk meny. Ditt valg kan alltid endres i dashbordinnstillingene.</string>
     </resources>
