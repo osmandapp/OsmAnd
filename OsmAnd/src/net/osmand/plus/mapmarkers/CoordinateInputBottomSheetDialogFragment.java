@@ -47,8 +47,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 					@Override
 					public void onClick(View v) {
 						if (listener != null) {
-							OsmandSettings.OsmandPreference<Boolean> pref = settings.COORDS_INPUT_USE_OSMAND_KEYBOARD;
-							pref.set(!pref.get());
 							listener.onKeyboardChanged();
 						}
 						dismiss();

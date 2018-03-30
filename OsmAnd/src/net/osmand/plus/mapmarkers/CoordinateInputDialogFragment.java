@@ -248,7 +248,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public void onClick(View view) {
 				if (isOsmandKeyboardOn()) {
-					changeOsmandKeyboardSetting();
 					changeKeyboard();
 				}
 			}
@@ -345,7 +344,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			public void onClick(View view) {
 				boolean isCurrentlyVisible = isOsmandKeyboardCurrentlyVisible();
 				if (!isCurrentlyVisible && !isOsmandKeyboardOn()) {
-					changeOsmandKeyboardSetting();
 					changeKeyboard();
 				} else {
 					changeOsmandKeyboardVisibility(!isCurrentlyVisible);
@@ -450,7 +448,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		super.onResume();
 		adapter.setScreenOrientation(DashLocationFragment.getScreenOrientation(getActivity()));
 		startLocationUpdate();
-		changeKeyboard();
+		editTexts.get(0).requestFocus();
 	}
 
 	@Override
@@ -745,6 +743,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void changeKeyboard() {
+		changeOsmandKeyboardSetting();
 		boolean useOsmandKeyboard = isOsmandKeyboardOn();
 		changeOsmandKeyboardVisibility(useOsmandKeyboard);
 		final View focusedView = getDialog().getCurrentFocus();
