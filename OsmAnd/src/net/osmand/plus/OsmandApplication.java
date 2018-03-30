@@ -18,12 +18,12 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
@@ -168,6 +168,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 		InAppHelper.initialize(this);
 		initRemoteConfig();
+		printFirebasetoken();
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();
@@ -888,6 +889,22 @@ public class OsmandApplication extends MultiDexApplication {
 				Map<String, Object> defaults = new HashMap<>();
 				defaults.put(SHOW_PLUS_VERSION_INAPP_PARAM, Boolean.TRUE);
 				log.invoke(inst, defaults);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void printFirebasetoken() {
+		try {
+			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+				Class<?> cl = Class.forName("com.google.firebase.iid.FirebaseInstanceId");
+				Method mm = cl.getMethod("getInstance");
+				Object inst = mm.invoke(null);
+				Method getToken = cl.getMethod("getToken");
+				String firebaseToken = (String) getToken.invoke(inst);
+				LOG.info("Fbase token: " + firebaseToken);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
