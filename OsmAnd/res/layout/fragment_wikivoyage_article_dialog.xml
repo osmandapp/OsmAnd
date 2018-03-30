@@ -5,14 +5,14 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="?attr/wikivoyage_bg"
+	android:background="?attr/wikivoyage_bg_color"
 	android:orientation="vertical">
 
 	<android.support.v7.widget.Toolbar
 		android:id="@+id/toolbar"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/toolbar_height"
-		android:background="?attr/wikivoyage_app_bar"
+		android:background="?attr/wikivoyage_app_bar_color"
 		android:gravity="center_vertical"
 		android:minHeight="@dimen/toolbar_height"
 		osmand:contentInsetLeft="54dp"
@@ -41,10 +41,10 @@
 				android:textAllCaps="true"
 				android:textSize="@dimen/default_desc_text_size"
 				osmand:typeface="@string/font_roboto_medium"
-				tools:background="?attr/ctx_menu_controller_bg"
+				tools:background="@drawable/wikipedia_select_lang_bg_dark_n"
 				tools:drawableLeft="@drawable/ic_action_map_language"
 				tools:text="En"
-				tools:textColor="?attr/ctx_menu_controller_text_color"/>
+				tools:textColor="?attr/wikivoyage_active_color"/>
 
 		</LinearLayout>
 
