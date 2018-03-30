@@ -88,6 +88,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean lightTheme;
 	private boolean orientationPortrait;
 
+	private boolean isSoftKeyboardShown = true;
 	private boolean north = true;
 	private boolean east = true;
 
@@ -105,6 +106,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		super.onCreate(savedInstanceState);
 		lightTheme = getMyApplication().getSettings().isLightContent();
 		setStyle(STYLE_NO_FRAME, lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+		isSoftKeyboardShown = !getMyApplication().getSettings().COORDS_INPUT_USE_OSMAND_KEYBOARD.get();
 	}
 
 	@NonNull
@@ -247,12 +249,30 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		pointNameKeyboardBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (isOsmandKeyboardOn()) {
-					changeKeyboard();
+				if (isOsmandKeyboardCurrentlyVisible()) {
+					changeOsmandKeyboardVisibility(false);
+				}
+				editTexts.get(6).requestFocus();
+				final View focusedView = getDialog().getCurrentFocus();
+				if (focusedView != null) {
+					new Handler().postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							isSoftKeyboardShown = true;
+							AndroidUtils.showSoftKeyboard(focusedView);
+						}
+					}, 200);
 				}
 			}
 		});
-
+		editTexts.get(6).setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (!hasFocus && isOsmandKeyboardOn() && isOsmandKeyboardCurrentlyVisible()) {
+					AndroidUtils.hideSoftKeyboard(getActivity(), v);
+				}
+			}
+		});
 		adapter = new CoordinateInputAdapter(mapActivity, mapMarkers);
 		RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.markers_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(ctx));
@@ -343,14 +363,28 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public void onClick(View view) {
 				boolean isCurrentlyVisible = isOsmandKeyboardCurrentlyVisible();
-				if (!isCurrentlyVisible && !isOsmandKeyboardOn()) {
-					changeKeyboard();
-				} else {
+				if (isOsmandKeyboardOn()&&!isSoftKeyboardShown) {
 					changeOsmandKeyboardVisibility(!isCurrentlyVisible);
-				}
+				}else {
+				final View focusedView = getDialog().getCurrentFocus();
+				if (focusedView != null) {
+					if (isSoftKeyboardShown) {
+						isSoftKeyboardShown = false;
+						AndroidUtils.hideSoftKeyboard(getActivity(), focusedView);
+					} else {
+						new Handler().postDelayed(new Runnable() {
+							@Override
+							public void run() {
+								isSoftKeyboardShown = true;
+								AndroidUtils.showSoftKeyboard(focusedView);
+							}
+						}, 200);
+					}
+					changeEditTextSelections();
+				}}
 			}
 		});
-	}
+}
 
 	private void setupKeyboardItems(View keyboardView, View.OnClickListener listener, @IdRes int... itemsIds) {
 		@DrawableRes int itemBg = lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg;
@@ -448,6 +482,18 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		super.onResume();
 		adapter.setScreenOrientation(DashLocationFragment.getScreenOrientation(getActivity()));
 		startLocationUpdate();
+
+		final View focusedView = getDialog().getCurrentFocus();
+		if (focusedView != null) {
+			if (!isOsmandKeyboardOn()) {
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						AndroidUtils.showSoftKeyboard(focusedView);
+					}
+				}, 200);
+			}
+		}
 	}
 
 	@Override
@@ -742,6 +788,26 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void changeKeyboard() {
+		changeOsmandKeyboardSetting();
+		boolean useOsmandKeyboard = isOsmandKeyboardOn();
+		changeOsmandKeyboardVisibility(useOsmandKeyboard);
+		final View focusedView = getDialog().getCurrentFocus();
+		if (focusedView != null) {
+			if (useOsmandKeyboard) {
+				AndroidUtils.hideSoftKeyboard(getActivity(), focusedView);
+			} else {
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						AndroidUtils.showSoftKeyboard(focusedView);
+					}
+				}, 200);
+			}
+		}
+		changeEditTextSelections();
+	}
+
+	private void changeSoftKeyboardVisibility() {
 		changeOsmandKeyboardSetting();
 		boolean useOsmandKeyboard = isOsmandKeyboardOn();
 		changeOsmandKeyboardVisibility(useOsmandKeyboard);
