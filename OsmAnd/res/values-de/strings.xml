@@ -617,14 +617,14 @@
 	<string name="show_route">Routendetails</string>
 	<string name="fav_imported_sucessfully">Favoriten importiert</string>
 	<string name="fav_file_to_load_not_found">GPX-Datei mit den Favoriten nicht gefunden unter {0}</string>
-	<string name="fav_saved_sucessfully">Favoriten erfolgreich unter {0} gespeichert</string>
+	<string name="fav_saved_sucessfully">Favoriten unter {0} gespeichert</string>
 	<string name="no_fav_to_save">Keine Favoriten zu speichern</string>
 	<string name="shared_string_import">Import</string>
 	
 	<string name="error_occurred_loading_gpx">Fehler beim GPX-Laden</string>
 	<string name="send_report">Bericht senden</string>
-	<string name="none_region_found">Keine Offline-Daten auf der SD-Karte gefunden. Bitte versuchen Sie, die Region über das Internet zu laden.</string>
-	<string name="poi_namefinder_query_empty">Suchbegriff eingeben</string>
+	<string name="none_region_found">Keine Offline-Daten auf der Speicherkarte gefunden. Bitte versuchen Sie, die Region über das Internet zu laden.</string>
+	<string name="poi_namefinder_query_empty">POI Suchbegriff eingeben</string>
 	<string name="any_poi">Alles</string>
 	
 	<string name="thanks_yandex_traffic">Danke an Yandex für die Überlassung von Verkehrsinformationen.</string>
@@ -666,8 +666,9 @@
 	<string name="voice_data_corrupted">Sprachpaket ist defekt</string>
 	<string name="voice_data_unavailable">Das gewählte Sprachpaket ist nicht verfügbar</string>
 	
-	<string name="sd_unmounted">Die SD-Karte ist nicht verfügbar. \nKarte lässt sich nicht darstellen.</string>
-	<string name="sd_mounted_ro">Die SD-Karte befindet sich im Nur-Lesen-Modus.
+	<string name="sd_unmounted">Die Speicherkarte ist nicht verfügbar.
+\nKarte lässt sich nicht darstellen.</string>
+	<string name="sd_mounted_ro">Die Speicherkarte befindet sich im Nur-Lesen-Modus. 
 \nSie können nur vorgeladene Karten sehen. Der Internetdownload ist deaktiviert.</string>
 	<string name="unzipping_file">Datei wird entpackt…</string>
 	<string name="route_tr">rechts abbiegen, dann</string>
@@ -706,14 +707,14 @@
 	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">ÖPNV-Haltestellen auf der Karte anzeigen.</string>
 	<string name="show_transport_over_map">Haltestellen anzeigen</string>
-	<string name="hello">Navigationsanwendung OsmAnd</string>
-	<string name="update_poi_success">POI-Daten wurden erfolgreich aktualisiert ({0} wurden geladen)</string>
+	<string name="hello">OsmAnd Navigationsapp</string>
+	<string name="update_poi_success">POI-Daten wurden aktualisiert ({0} wurden geladen)</string>
 	<string name="update_poi_error_local">Fehler beim aktualisieren der Offline-Daten</string>
 	<string name="update_poi_error_loading">Fehler beim Herunterladen der Daten vom Server</string>
 	<string name="update_poi_no_offline_poi_index">Für dieses Gebiet sind keine POI gespeichert</string>
 	<string name="update_poi_is_not_available_for_zoom">Aktualisierung von POI ist für kleine Zoomeinstellungen nicht verfügbar</string>
 	<string name="context_menu_item_update_poi">POI aktualisieren</string>
-	<string name="context_menu_item_update_map_confirm">Wollen Sie die Daten via Internet aktualisieren?</string>
+	<string name="context_menu_item_update_map_confirm">Wollen Sie die Daten über das Internet aktualisieren?</string>
 	<string name="search_history_city">Ort: {0}</string>
 	<string name="search_history_street">Straße: {0}, {1}</string>
 	<string name="search_history_int_streets">Querstraße: {0} x {1} in {2}</string>
@@ -735,14 +736,14 @@
 	<string name="route_general_information">Gesamtentfernung %1$s, Reisezeit %2$d h %3$d min.</string>
 	<string name="router_service_descr">Online- oder Offline-Dienst zur Routenberechnung wählen.</string>
 	<string name="router_service">Navigationsdienst</string>
-	<string name="sd_dir_not_accessible">Auf den Daten-Ordner auf der SD-Karte kann nicht zugegriffen werden!</string>
+	<string name="sd_dir_not_accessible">Auf den Daten-Ordner auf der Speicherkarte kann nicht zugegriffen werden!</string>
 	<string name="download_question">Herunterladen {0} - {1}?</string>
 	<string name="download_question_exist">Offline Daten für {0} existieren schon ({1}). Wollen Sie die überschreiben ({2})?</string>
 	<string name="address">Adresse</string>
 	<string name="shared_string_download_successful">Heruntergeladen</string>
 	
 	<string name="downloading_list_indexes">Die Liste der verfügbaren Regionen wird geladen…</string>
-	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.net nicht geladen.</string>
+	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von https://osmand.net nicht geladen.</string>
 	<string name="select_index_file_to_download">Suche war erfolglos. Karten für nicht vorhandene Regionen können selbst erstellt werden, siehe https://osmand.net.</string>
 	
 	<string name="fav_points_edited">Favorit wurde bearbeitet</string>
@@ -774,7 +775,7 @@
 	<string name="empty_route_calculated">Fehler: Die berechnete Route ist leer</string>
 	<string name="new_route_calculated_dist">Route neu berechnet, Entfernung</string>
 	<string name="arrived_at_destination">Sie haben Ihr Ziel erreicht</string>
-	<string name="invalid_locations">Koordinaten sind ungültig!</string>
+	<string name="invalid_locations">Koordinaten sind ungültig</string>
 	<string name="go_back_to_osmand">Zurück zu OsmAnd</string>
 	<string name="shared_string_close">Schließen</string>
 	<string name="loading_data">Daten werden geladen…</string>
@@ -799,7 +800,7 @@
 	<string name="shared_string_add_to_favorites">Als \'Meine Favoriten\' speichern</string>
 	<string name="use_english_names_descr">Englische oder einheimische Namen in der Karte verwenden.</string>
 	<string name="use_english_names">Englische Namen</string>
-	<string name="app_settings">Anwendungseinstellungen</string>
+	<string name="app_settings">App-einstellungen</string>
 	<string name="search_address">Adresse suchen</string>
 	<string name="choose_building">Hausnummer wählen</string>
 	<string name="choose_street">Straße wählen</string>
@@ -818,8 +819,8 @@
 	<string name="show_location">Standort anzeigen</string>
 
 	<string name="show_gps_coordinates_text">GPS-Koordinaten auf der Karte anzeigen</string>
-	<string name="use_internet_to_download_tile">Fehlende Kartenteile aus dem Internet nachladen</string>
-	<string name="app_description">Navigationsanwendung OsmAnd</string>
+	<string name="use_internet_to_download_tile">Fehlende Kartenkacheln herunterladen</string>
+	<string name="app_description">Navigationsapp</string>
 	<string name="shared_string_exit">Beenden</string>
 
 	<string name="search_button">Suche</string>
@@ -864,11 +865,11 @@
 	<string name="shared_string_no">Nein</string>
 	<string name="add_favorite_dialog_top_text">Geben Sie diesem Punkt einen Namen</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorit</string>
-	<string name="add_favorite_dialog_favourite_added_template">Favorit Punkt \'\'{0}\'\' wurde erfolgreich hinzugefügt.</string>
+	<string name="add_favorite_dialog_favourite_added_template">Favorit Punkt \'\'{0}\'\' wurde hinzugefügt.</string>
 	<string name="favourites_context_menu_edit">Favorit bearbeiten</string>
 	<string name="favourites_context_menu_delete">Favorit löschen</string>
 	<string name="favourites_remove_dialog_msg">Wollen Sie den Favoritenpunkt \'%s\' wirklich löschen?</string>
-	<string name="favourites_remove_dialog_success">Der Punkt {0} wurde erfolgreich gelöscht.</string>
+	<string name="favourites_remove_dialog_success">Der Punkt {0} wurde gelöscht.</string>
 	
 	<string name="osb_comment_dialog_message">Nachricht</string>
 	<string name="osb_comment_dialog_author">Autor</string>
@@ -882,10 +883,10 @@
 	<string name="poi_remove_confirm_template">Sicher löschen: {0} (Kommentar eingeben)?</string>
 	<string name="poi_remove_title">POI löschen</string>
 	<string name="shared_string_delete">Löschen</string>
-	<string name="poi_remove_success">POI wurde erfolgreich gelöscht</string>
+	<string name="poi_remove_success">POI wurde gelöscht</string>
 	<string name="poi_action_add">hinzufügen</string>
 	<string name="poi_action_change">ändern</string>
-	<string name="poi_action_succeded_template">Aktion {0} erfolgreich abgeschlossen.</string>
+	<string name="poi_action_succeded_template">Aktion {0} abgeschlossen.</string>
 	<string name="poi_error_unexpected_template">Unerwarteter Fehler beim Ausführen von {0} aufgetreten.</string>
 	<string name="poi_error_io_error_template">I/O Fehler bei Aktion {0}.</string>
 	<string name="poi_error_info_not_loaded">Informationen über den Knoten wurden nicht geladen</string>
@@ -1848,9 +1849,9 @@ Lon %2$s</string>
 
 	<string name="no_updates_available">Keine Aktualisierungen verfügbar</string>
     <string name="download_live_updates">Live-Aktualisierungen</string>
-	<string name="we_really_care_about_your_opinion">Ihre Meinung ist uns sehr viel wert, Rückmeldungen sind uns wichtig.</string>
+	<string name="we_really_care_about_your_opinion">Ihre Meinung ist uns sehr viel wert und Rückmeldungen sind uns wichtig.</string>
 	<string name="failed_to_upload">Hochladen ist fehlgeschlagen</string>
-	<string name="successfully_uploaded_pattern">Erfolgreich hochgeladen {0}/{1}</string>
+	<string name="successfully_uploaded_pattern">Hochgeladen {0}/{1}</string>
 	<string name="try_again">Erneut versuchen</string>
 	<string name="error_message_pattern">Fehler: {0}</string>
 	<string name="dahboard_options_dialog_title">Übersichtsseite konfigurieren</string>
@@ -1930,7 +1931,7 @@ Lon %2$s</string>
     <string name="simulate_your_location_stop_descr">Standort-Simulation beenden.</string>
     <string name="simulate_your_location_descr">Simulation Ihrer Position mit einer berechneten Route oder einem aufgezeichneten GPX-Track.</string>
     <string name="recent_places">Letzte Orte</string>
-	<string name="saved_at_time">Erfolgreich gespeichert um: %1$s</string>
+	<string name="saved_at_time">Gespeichert um: %1$s</string>
 	<string name="count_of_lines">Anzahl der Reihen</string>
 	<string name="buy">Erwerben</string>
     <string name="later">Später</string>
@@ -1939,7 +1940,7 @@ Lon %2$s</string>
     <string name="new_version">Neue Version</string>
     <string name="begin_with_osmand_menu_group">Erste Schritte in OsmAnd</string>
     <string name="features_menu_group">Merkmale</string>
-    <string name="help_us_to_improve_menu_group">Hilf uns, OsmAnd weiter zu verbessern</string>
+    <string name="help_us_to_improve_menu_group">Helfen, OsmAnd weiter zu verbessern</string>
     <string name="other_menu_group">Weitere</string>
     <string name="plugins_menu_group">Erweiterungen</string>
     <string name="first_usage_item">Erste Benutzung</string>
@@ -2014,7 +2015,7 @@ Lon %2$s</string>
     <string name="update_all">Alles aktualisieren (%1$s MB)</string>
     <string name="free_downloads_used">Verbrauchte freie Downloads</string>
     <string name="enter_country_name">Name des Landes eingeben</string>
-    <string name="save_poi_without_poi_type_message">Möchten Sie den POI wirklich ohne POI-Typ speichern?</string>
+    <string name="save_poi_without_poi_type_message">Möchten Sie den POI wirklich ohne Typ speichern?</string>
     <string name="poi_context_menu_modify_osm_change">OSM-Änderung bearbeiten</string>
     <string name="use_dashboard_btn">Übersichtsseite verwenden</string>
     <string name="use_drawer_btn">Menü verwenden</string>
@@ -2027,7 +2028,7 @@ Lon %2$s</string>
     <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ angeben oder überspringen.</string>
     <string name="share_osm_edits_subject">OSM-Bearbeitung mit OsmAnd geteilt</string>
     <string name="av_locations_descr">GPX-Datei mit Notizen.</string>
-    <string name="free_downloads_used_description">Anzeige der genutzten freien Downloads.</string>
+    <string name="free_downloads_used_description">Anzeige der verbliebenen freien Downloads.</string>
 
     <string name="shared_string_location">Standort</string>
     <string name="hillshade_layer_disabled">Relief deaktiviert</string>
@@ -2050,7 +2051,7 @@ Lon %2$s</string>
 <string name="update_now">Jetzt aktualisieren</string>
 <string name="route_distance">Entfernung:</string>
     <string name="route_duration">Dauer:</string>
-    <string name="missing_write_external_storage_permission">App hat keine Berechtigung zur Verwendung der SD-Karte</string>
+    <string name="missing_write_external_storage_permission">OsmAnd hat keine Berechtigung zur Verwendung der Speicherkarte</string>
 <string name="no_location_permission">Die App hat keine Berechtigung, auf Standortdaten zuzugreifen.</string>
     <string name="no_camera_permission">Die App hat keine Berechtigung, auf die Kamera zuzugreifen.</string>
     <string name="no_microphone_permission">Die App hat keine Berechtigung, auf das Mikrofon zuzugreifen.</string>
@@ -2383,9 +2384,9 @@ Derzeit sind nur {2} MB verfügbar.</string>
     <string name="quick_action_add_poi">POI hinzufügen</string>
     <string name="quick_action_map_style">Kartendarstellung ändern</string>
     <string name="quick_action_map_style_switch">Kartendarstellung wurde zu “%s“ gewechselt.</string>
-    <string name="quick_action_take_audio_note">Audio-Notiz aufnehmen</string>
-    <string name="quick_action_take_video_note">Video-Notiz aufnehmen</string>
-    <string name="quick_action_take_photo_note">Foto-Notiz aufnehmen</string>
+    <string name="quick_action_take_audio_note">Neue Audio-Notiz</string>
+    <string name="quick_action_take_video_note">Neue Video-Notiz</string>
+    <string name="quick_action_take_photo_note">Neue Foto-Notiz</string>
     <string name="quick_action_add_osm_bug">OSM-Notiz hinzufügen</string>
     <string name="quick_action_navigation_voice">Sprachausgabe Ein/Aus</string>
     <string name="quick_action_navigation_voice_off">Sprachausgabe ist aus</string>
@@ -2401,12 +2402,12 @@ Derzeit sind nur {2} MB verfügbar.</string>
     <string name="quick_favorites_show_favorites_dialog">Favoriten Dialog anzeigen</string>
     <string name="quick_favorites_name_preset">Name Voreinstellen</string>
     <string name="shared_string_action_name">Aktionsname</string>
-    <string name="quick_action_add_marker_descr">Drücken der Aktionstaste fügt einen Kartenmarker am Bildschirmmittelpunkt ein.</string>
+    <string name="quick_action_add_marker_descr">Drücken dieser Aktionstaste fügt einen Kartenmarker am Bildschirmmittelpunkt ein.</string>
     <string name="favorite_empty_place_name">Ort</string>
     <string name="quick_action_showhide_favorites_title">Favoriten ein-/ausblenden</string>
-    <string name="quick_action_take_audio_note_descr">Drücken der Aktionstaste fügt eine Audio-Notiz am Bildschirmmittelpunkt ein.</string>
-    <string name="quick_action_take_video_note_descr">Drücken der Aktionstaste fügt eine Video-Notiz am Bildschirmmittelpunkt ein.</string>
-    <string name="quick_action_take_photo_note_descr">Drücken der Aktionstaste fügt ein Foto am Bildschirmmittelpunkt ein.</string>
+    <string name="quick_action_take_audio_note_descr">Drücken dieser Aktionstaste fügt eine Audio-Notiz am Bildschirmmittelpunkt ein.</string>
+    <string name="quick_action_take_video_note_descr">Drücken dieser Aktionstaste fügt eine Video-Notiz am Bildschirmmittelpunkt ein.</string>
+    <string name="quick_action_take_photo_note_descr">Drücken dieser Aktionstaste fügt ein Foto am Bildschirmmittelpunkt ein.</string>
     <string name="quick_action_showhide_poi_title">POI ein-/ausblenden</string>
     <string name="quick_action_poi_show">%1$s anzeigen</string>
     <string name="quick_action_poi_hide">%1$s ausblenden</string>
@@ -2437,7 +2438,7 @@ Derzeit sind nur {2} MB verfügbar.</string>
     <string name="quick_action_gpx_category_descr">Wählen Sie eine beliebige Kategorie.</string>
     <string name="configure_screen_quick_action">Schnellaktion</string>
 
-    <string name="quick_action_add_gpx_descr">Drücken der Aktionstaste fügt einen GPX-Wegpunkt am Bildschirmmittelpunkt ein.</string>
+    <string name="quick_action_add_gpx_descr">Drücken dieser Aktionstaste fügt einen GPX-Wegpunkt am Bildschirmmittelpunkt ein.</string>
     <string name="quick_action_add_osm_bug_descr">Drücken der Aktionstaste fügt eine OSM-Notiz am Bildschirmmittelpunkt ein.</string>
     <string name="quick_action_add_poi_descr">Drücken der Aktionstaste fügt einen POI am Bildschirmmittelpunkt ein.</string>
     <string name="quick_action_navigation_voice_descr">Drücken der Aktionstaste deaktiviert oder aktiviert die Sprachansagen bei der Navigation.</string>
