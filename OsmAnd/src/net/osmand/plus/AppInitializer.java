@@ -609,7 +609,6 @@ public class AppInitializer implements IProgress {
 			app.mapMarkersHelper.syncAllGroupsAsync();
 			app.searchUICore.initSearchUICore();
 			
-			/// Log.i("Firebase token", com.google.firebase.iid.FirebaseInstanceId.getInstance().getToken());
 			checkLiveUpdatesAlerts();
 			
 		} catch (RuntimeException e) {
