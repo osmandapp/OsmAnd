@@ -1734,7 +1734,7 @@ Punktar</string>
     <string name="update_poi_error_loading">Villa við að hlaða inn gögnum frá vefþjóni</string>
     <string name="update_poi_is_not_available_for_zoom">Uppfærsla merkisstaða er ekki fáanleg fyrir lág aðdráttarstig</string>
     <string name="search_osm_nominatim">Leit á netinu með OSM Nominatim</string>
-    <string name="max_level_download_tile_descr">Veldu hámarks aðdráttarstig til að sækja kortatígla á netið.</string>
+    <string name="max_level_download_tile_descr">Ekki sækja kortatígla á netið fyrir aðdráttarstig sem eru hærri en þetta.</string>
     <string name="download_question_exist">Ónettengd gögn fyrir {0} eru þegar til staðar ({1}). Viltu uppfæra þau ({2})?</string>
     <string name="list_index_files_was_not_loaded">Listinn yfir svæði fékkst ekki frá https://osmand.net.</string>
     <string name="opening_changeset">Opna breytingasett…</string>
@@ -2070,7 +2070,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="local_index_description">Bankaðu á eitthvað atriði til að sjá nánari upplýsingar, ýttu og haltu niðri til að gera óvirkt eða eyða því. Núverandi gögn á tækinu (%1$s laust):</string>
     <string name="first_time_msg">Takk fyrir að nota OsmAnd. Nú þarftu að sækja ýmis ónettengd svæðisbundin gögn, hægt er að gera það með því að fara í \'Stillingar\' → \'Sýsla með kortaskrár\'. Þegar því er lokið geturðu skoðað kort, staðsett heimilisföng, flett upp merkisstöðum og fundið almenningssamgöngur.</string>
     <string name="map_online_plugin_is_not_installed">Virkjaðu viðbótina fyrir ónettengd kort til að velja önnur kortaupptök</string>
-    <string name="switch_to_raster_map_to_see">Ekkert ónettengt vektorkort er til fyrir þessa staðsetningu. Þú getur sótt slík kort í \'Stillingar\' → \'Sýsla með kortaskrár\', nú eða skipt yfir í nettengd kort (virkja þarf viðbótina fyrir ónettengd kort svo þetta virki).</string>
+    <string name="switch_to_raster_map_to_see">Ekkert ónettengt vektorkort er til fyrir þessa staðsetningu. Þú getur sótt slík kort í \'Stillingar\' → \'Sýsla með kortaskrár\', nú eða skipt yfir í viðbótina fyrir ónettengd kort.</string>
     <string name="support_new_features_descr">Styrktu verkefnið til að fá nýja eiginleika þróaða fyrir forritið.</string>
     <string name="settings_direction_style_descr">Veldu stíl til framsetningar á afstæðum stefnum á meðan verið er á ferð.</string>
     <string name="accessibility_preferences_descr">Kjörstillingar sem tengjast aðgengi.</string>
@@ -2229,9 +2229,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="mapillary_menu_title_username">Notandanafn</string>
     <string name="mapillary_menu_filter_description">Þú getur síað myndir eftir sendanda eða dagsetningu. Síum er aðeins beitt í miklum aðdrætti.</string>
     <string name="shared_string_reset">Frumstilla</string>
-    <string name="improve_coverage_install_mapillary_desc">Þú getur tekið þínar eigin myndir eða myndarunur og sett þær inn á þessa staðsetningu á kortinu.
-\n
-\nTil að gera þetta þarftu að ná í Mapillary-forritið úr Google Play safninu.</string>
+    <string name="improve_coverage_install_mapillary_desc">Settu upp Mapillary til að setja myndir eða myndarunur inn á þessa staðsetningu á kortinu.</string>
     <string name="mapillary_action_descr">Legðu þitt af mörkum með þínum eigin götumyndum frá þessari staðsetningu í gegnum Mapillary.</string>
     <string name="mapillary_widget_descr">Gerir kleift að bæta kerfið á einfaldan hátt með Mapillary.</string>
     <string name="mapillary_descr">Götumyndir af netinu fyrir alla. Uppgötvaðu staði, útvíkkaðu heiminn og vertu með í samstarfinu.</string>
@@ -2244,7 +2242,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="subscribe_email_desc">Gerstu áskrifandi að póstlistanum um forritaafslætti og fáðu ókeypis 3 niðurhöl á kortum til viðbótar!</string>
     <string name="depth_contour_descr">Kort með dýptarlínum og dýptarpunktum sjávar.</string>
     <string name="auto_split_recording_descr">Hefja nýjan bút eftir 6 mínútna bil, hefja nýjan feril eftir 2 klst bil, eða nýja skrá eftir lengra bil ef dagsetning hefur breyst.</string>
-    <string name="save_track_min_speed_descr">Sía: Stilltu lágmarkshraða þar sem punktur er tekinn í skráningu.</string>
+    <string name="save_track_min_speed_descr">Sía: Engin skráning punkta fyrir neðan þennan hraða.</string>
     <string name="save_track_min_distance_descr">Sía: Stilltu lágmarksfjarlægð frá síðustu staðsetningu þar sem punktur er tekinn í skráningu.</string>
     <string name="save_track_precision_descr">Sía: Stilltu lágmarksnákvæmni punkts til að hann sé tekinn í skráningu.</string>
     <string name="christmas_desc">Til að undirbúa jóla- og árámótahátíðir, geturðu valið að birta árstíðabundna merkisstaði: jólatré, jólamarkaði, flugeldasölur, o.fl.</string>
@@ -2254,7 +2252,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="access_direction_haptic_feedback">Stefna tilkynnt með titringi</string>
     <string name="access_direction_haptic_feedback_descr">Gefa stefnu að markpunkti til kynna með titringi.</string>
     <string name="access_disable_offroute_recalc_descr">Ekki sjálfvirkur endurreikningur leiðar þegar farið er út af stefnu.</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Kemur í veg fyrir að leið sé endurreiknuð þegar aðeins stefnt er í öfuga átt.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Ekki endurreikna leið þegar aðeins er stefnt í öfuga átt.</string>
     <string name="access_smart_autoannounce_descr">Einungis tilkynna þegar stefna á markpunkt breytist.</string>
     <string name="routing_attr_no_new_routing_name">Engar v1.9 leiðareglur</string>
     <string name="routing_attr_no_new_routing_description">Ekki nota leiðareglur sem komu til sögunnar í útgáfu 1.9.</string>
@@ -2414,7 +2412,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="complex_route_calculation_failed">Hraður leiðarútreikningur mistókst (%s), nota til vara hægari útreikning.</string>
     <string name="quick_action_fav_name_descr">Skildu þetta eftir autt til að nota heimilisfangið eða staðarheiti.</string>
     <string name="quick_action_sh_poi_descr">Þú getur bætt við einum eða fleiri flokkum merkisstaða til að birta á kortinu.</string>
-    <string name="quick_action_page_list_descr">Bank á aðgerðahnappinn mun fletta í gegnum listann hér fyrir neðan.</string>
+    <string name="quick_action_page_list_descr">Ef ýtt er á þennan aðgerðahnapp verður flett í gegnum listann hér fyrir neðan.</string>
     <string name="empty_state_my_tracks_desc">Skrá eða flytja inn ferla til skoðunar.</string>
     <string name="download_using_mobile_internet">Í augnablikinu er þráðlaust Wi-Fi net ekki tengt. Viltu nota núverandi internettengingu undir niðurhal?</string>
     <string name="srtm_paid_version_msg">Íhugaðu að kaupa viðbótina fyrir hæðarlínur á markaðnum til að styðja við áframhaldandi þróun forritsins.</string>
@@ -2428,20 +2426,20 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="rendering_attr_contourLines_description">Birta frá aðdráttarstigi (krefst hæðarlínugagna):</string>
     <string name="live_monitoring_max_interval_to_send">Tímabiðminni fyrir rakningu með netstuðningi</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Skilgreindu tímabiðminni þar sem geymdar eru staðsetningar sem á að senda án tengingar</string>
-    <string name="map_version_changed_info">Þjónninn inniheldur kortaskrár sem ekki eru samhæfanlegar þinni útgáfu forritsins. Til að sækja þær og nota, ættirðu að uppfæra forritið í nýrri útgáfu.</string>
+    <string name="map_version_changed_info">Þú ættir að sækja og uppfæra forritið til að geta notað nýju kortaskrárnar.</string>
     <string name="amenity_type_geocache">GPS-ratleikur (geocache)</string>
-    <string name="quick_action_add_marker_descr">Bank á aðgerðahnappinn mun bæta kortamerki á miðju skjásins.</string>
-    <string name="quick_action_add_gpx_descr">Bank á aðgerðahnappinn mun bæta GPX-ferilpunkti á miðju skjásins.</string>
-    <string name="quick_action_take_audio_note_descr">Bank á aðgerðahnappinn mun bæta hljóðupptöku-minnispunkti á miðju skjásins.</string>
-    <string name="quick_action_take_video_note_descr">Bank á aðgerðahnappinn mun bæta myndskeiðs-minnispunkti á miðju skjásins.</string>
-    <string name="quick_action_take_photo_note_descr">Bank á aðgerðahnappinn mun bæta ljósmyndar-minnispunkti á miðju skjásins.</string>
-    <string name="quick_action_add_osm_bug_descr">Bank á aðgerðahnappinn mun bæta OSM-minnispunkti á miðju skjásins.</string>
-    <string name="quick_action_add_poi_descr">Bank á aðgerðahnappinn mun bæta merkisstað á miðju skjásins.</string>
-    <string name="quick_action_navigation_voice_descr">Bank á aðgerðahnappinn mun gera raddleiðsögn virka eða óvirka á meðan leiðsögn stendur.</string>
-    <string name="quick_action_add_parking_descr">Bank á aðgerðahnappinn mun bæta staðsetningu bílastæðis á miðju skjásins.</string>
+    <string name="quick_action_add_marker_descr">Ef ýtt er á þennan aðgerðahnapp verður kortamerki bætt á miðju skjásins.</string>
+    <string name="quick_action_add_gpx_descr">Ef ýtt er á þennan aðgerðahnapp verður GPX-ferilpunkti bætt á miðju skjásins.</string>
+    <string name="quick_action_take_audio_note_descr">Ef ýtt er á þennan aðgerðahnapp verður hljóðupptöku-minnispunkti bætt á miðju skjásins.</string>
+    <string name="quick_action_take_video_note_descr">Ef ýtt er á þennan aðgerðahnapp verður myndskeiðs-minnispunkti bætt á miðju skjásins.</string>
+    <string name="quick_action_take_photo_note_descr">Ef ýtt er á þennan aðgerðahnapp verður ljósmyndar-minnispunkti bætt á miðju skjásins.</string>
+    <string name="quick_action_add_osm_bug_descr">Ef ýtt er á þennan aðgerðahnapp verður OSM-minnispunkti bætt á miðju skjásins.</string>
+    <string name="quick_action_add_poi_descr">Ef ýtt er á þennan aðgerðahnapp verður merkisstað bætt á miðju skjásins.</string>
+    <string name="quick_action_navigation_voice_descr">Ef ýtt er á þennan aðgerðahnapp verður raddleiðsögn virkjuð eða gerð óvirk á meðan leiðsögn stendur.</string>
+    <string name="quick_action_add_parking_descr">Ef ýtt er á þennan aðgerðahnapp verður staðsetningu bílastæðis bætt á miðju skjásins.</string>
     <string name="quick_action_duplicates">Nafnið á uppgefinni flýtiaðgerð er nú þegar í notkun, var breytt í %1$s til að koma í veg fyrir tvítekningu.</string>
-    <string name="quick_action_showhide_favorites_descr">Bank á aðgerðahnappinn mun birta eða fela eftirlætisstaði á kortinu.</string>
-    <string name="quick_action_showhide_poi_descr">Bank á aðgerðahnappinn mun birta eða fela merkisstaði á kortinu.</string>
+    <string name="quick_action_showhide_favorites_descr">Ef ýtt er á þennan aðgerðahnapp mun það birta eða fela eftirlætisstaði á kortinu.</string>
+    <string name="quick_action_showhide_poi_descr">Ef ýtt er á þennan aðgerðahnapp mun það birta eða fela merkisstaði á kortinu.</string>
     <string name="quick_action_bug_descr">Þessi skilaboð verða sjálfkláruð í athuasemdareitnum.</string>
     <string name="quick_action_btn_tutorial_descr">Ýttu og haltu og dragðu hnappinn til á skjánum til að breyta staðsetningu hans.</string>
     <string name="new_filter_desc">Settu inn heiti fyrir nýju síuna, þessu verður bætt við á Flokkar-flipann þinn.</string>
@@ -2510,11 +2508,11 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="tap_on_map_to_hide_interface_descr">Bank á kortið víxlar stjórnhnöppum og viðmótshlutum af eða á.</string>
     <string name="fast_coordinates_input_descr">Veldu inntakssnið hnita. Þú getur alltaf breytt því í stillingunum.</string>
     <string name="quick_action_resume_pause_navigation_descr">Bankaðu á þennan hnapp til að setja leiðsögn í bið eða halda áfram með hana.</string>
-    <string name="quick_action_showhide_osmbugs_descr">Bank á aðgerðahnappinn mun birta eða fela OSM-athugasemdir á kortinu.</string>
-    <string name="quick_action_auto_zoom_desc">Bank á aðgerðahnappinn mun kveikja/slökkva á sjálfvirkum aðdrætti miðað við hraða þinn.</string>
-    <string name="quick_action_add_destination_desc">Bank á aðgerðahnappinn mun bæta áfangastað á miðju skjásins. Fyrri áfangastaður mun verða að síðasta milliáfangastað.</string>
-    <string name="quick_action_replace_destination_desc">Bank á aðgerðahnappinn mun skipta áfangastað út fyrir staðsetninguna á miðju skjásins.</string>
-    <string name="quick_action_add_first_intermediate_desc">Bank á aðgerðahnappinn mun bæta inn punkti fyrir fyrsta milliáfanga á miðju skjásins.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Ef ýtt er á þennan aðgerðahnapp verða OSM-athugasemdir birtar eða faldar á kortinu.</string>
+    <string name="quick_action_auto_zoom_desc">Ef ýtt er á þennan aðgerðahnapp verður kveikt/slökkt á sjálfvirkum aðdrætti miðað við hraða þinn.</string>
+    <string name="quick_action_add_destination_desc">Ef ýtt er á þennan aðgerðahnapp verður áfangastað bætt á miðju skjásins. Fyrri áfangastaður mun verða að síðasta milliáfangastað.</string>
+    <string name="quick_action_replace_destination_desc">Ef ýtt er á þennan aðgerðahnapp verður skipt út áfangastað fyrir staðsetninguna á miðju skjásins.</string>
+    <string name="quick_action_add_first_intermediate_desc">Ef ýtt er á þennan aðgerðahnapp verður bætt inn punkti fyrir fyrsta milliáfanga á miðju skjásins.</string>
     <string name="archive_wikipedia_data">Þú ert með gömul ósamhæfð Wikipedia-gögn. Viltu setja þau í safnskrá?</string>
     <string name="confirm_usage_speed_cameras">Í mörgum löndum (Þýskalandi, Frakklandi, Ítalíu og fleirum) er notkun aðvarana vegna hraðamyndavéla ólögleg. OsmAnd tekur ekki neina ábyrgð á því ef þú brýtur lög. Ekki samþykkja þetta nema þú hafir leyfi til að nota þennan eiginleika.</string>
     <string name="welcome_select_region">Til að rétt sé farið með umferðarmerki og umferðarreglur, skaltu velja svæðið þar sem þú ert að aka:</string>
@@ -2544,7 +2542,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="empty_state_osm_edits_descr">Búðu til eða breyttu merkisstöðum í OSM (POI), opnaðu eða gerðu athugasemdir í OSM og sendu inn skráða ferla í GPX-skrám.</string>
     <string name="one_tap_active_descr">Bankaðu á merki á kortinu til að færa það efst í virk kortamerki án þess að opna samhengisvalmyndina.</string>
     <string name="empty_state_av_notes_desc">Bættu minnispunkti með hljóði, ljósmynd eða myndskeiði á hvern punkt á kortinu, með hjálp viðmótshluta eða samhengisvalmyndar.</string>
-    <string name="add_track_to_markers_descr">Veldu feril úr hverjum ferilpunktum verður bætt í kortamerkin. (Einungis ferlar með ferilpunktum eru taldir upp.)</string>
+    <string name="add_track_to_markers_descr">Hægt er að bæta ferilpunktum í kortamerki með því að velja einn af þessum ferlum.</string>
     <string name="open_from">Opið frá</string>
     <string name="open_till">Opið til</string>
     <string name="will_close_at">Mun loka klukkan</string>
