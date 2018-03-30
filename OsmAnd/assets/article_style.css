@@ -4,7 +4,7 @@ body {
 }
 
 h2 {
-    font-size: 3em;
+    font-size: 2em;
     letter-spacing: 0.05em;
     color: #727272;
     font-family: serif;
@@ -16,15 +16,30 @@ h3 {
   padding-top: 5%;
 }
 
-p {
+p, li {
   font-family: sans-serif;
   font-size: 1em;
-  line-height: 4em;
+  line-height: 1em;
 }
 
 img {
     width: 100%;
 }
+
+a {
+  color: #237bff;
+  text-decoration-color: #a3c8ff;
+}
+
+.external-free {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
 
 .thumb-tright, .thumbinner {
     width: 100%;
