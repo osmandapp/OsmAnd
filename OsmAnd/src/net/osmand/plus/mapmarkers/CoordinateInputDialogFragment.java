@@ -54,6 +54,7 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -76,8 +77,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	public static final String TAG = "CoordinateInputDialogFragment";
 
-	public static final String USE_OSMAND_KEYBOARD = "use_osmand_keyboard";
-
 	private final List<MapMarker> mapMarkers = new ArrayList<>();
 	private OnMapMarkersSavedListener listener;
 
@@ -89,7 +88,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean lightTheme;
 	private boolean orientationPortrait;
 
-	private boolean useOsmandKeyboard = true;
 	private boolean north = true;
 	private boolean east = true;
 
@@ -170,12 +168,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Bundle args = new Bundle();
-				args.putBoolean(USE_OSMAND_KEYBOARD, useOsmandKeyboard);
-
 				CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
 				fragment.setUsedOnMap(false);
-				fragment.setArguments(args);
 				fragment.setListener(createCoordinateInputFormatChangeListener());
 				fragment.show(getChildFragmentManager(), CoordinateInputBottomSheetDialogFragment.TAG);
 			}
@@ -253,8 +247,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		pointNameKeyboardBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (useOsmandKeyboard) {
-					changeKeyboard(false);
+				if (isOsmandKeyboardOn()) {
+					changeKeyboard();
 				}
 			}
 		});
@@ -294,7 +288,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		View.OnClickListener onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (useOsmandKeyboard) {
+				if (isOsmandKeyboardOn()) {
 					View focusedView = getDialog().getCurrentFocus();
 					if (focusedView != null && focusedView instanceof EditText) {
 						EditText focusedEditText = (EditText) focusedView;
@@ -340,7 +334,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				R.id.keyboard_item_next_field,
 				R.id.keyboard_item_backspace);
 
-		if (!useOsmandKeyboard && isOsmandKeyboardCurrentlyVisible()) {
+		if (!isOsmandKeyboardOn() && isOsmandKeyboardCurrentlyVisible()) {
 			changeOsmandKeyboardVisibility(false);
 		}
 
@@ -349,8 +343,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public void onClick(View view) {
 				boolean isCurrentlyVisible = isOsmandKeyboardCurrentlyVisible();
-				if (!isCurrentlyVisible && !useOsmandKeyboard) {
-					changeKeyboard(true);
+				if (!isCurrentlyVisible && !isOsmandKeyboardOn()) {
+					changeKeyboard();
 				} else {
 					changeOsmandKeyboardVisibility(!isCurrentlyVisible);
 				}
@@ -589,7 +583,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		View.OnTouchListener inputEditTextOnTouchListener = new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View view, MotionEvent motionEvent) {
-				if (useOsmandKeyboard) {
+				if (isOsmandKeyboardOn()) {
 					if (!isOsmandKeyboardCurrentlyVisible()) {
 						changeOsmandKeyboardVisibility(true);
 					}
@@ -615,7 +609,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		View.OnLongClickListener inputEditTextOnLongClickListener = new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(final View view) {
-				if (useOsmandKeyboard) {
+				if (isOsmandKeyboardOn()) {
 					final EditText inputEditText = (EditText) view;
 					PopupMenu popupMenu = new PopupMenu(getContext(), inputEditText);
 					Menu menu = popupMenu.getMenu();
@@ -738,8 +732,18 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		return sb.toString();
 	}
 
-	private void changeKeyboard(boolean useOsmandKeyboard) {
-		this.useOsmandKeyboard = useOsmandKeyboard;
+	private boolean isOsmandKeyboardOn() {
+		return getMyApplication().getSettings().COORDS_INPUT_USE_OSMAND_KEYBOARD.get();
+	}
+
+	private void changeOsmandKeyboardSetting() {
+		OsmandSettings.OsmandPreference<Boolean> pref = getMyApplication().getSettings().COORDS_INPUT_USE_OSMAND_KEYBOARD;
+		pref.set(!pref.get());
+	}
+
+	private void changeKeyboard() {
+		changeOsmandKeyboardSetting();
+		boolean useOsmandKeyboard = isOsmandKeyboardOn();
 		changeOsmandKeyboardVisibility(useOsmandKeyboard);
 		final View focusedView = getDialog().getCurrentFocus();
 		if (focusedView != null) {
@@ -761,8 +765,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		return new CoordinateInputFormatChangeListener() {
 
 			@Override
-			public void onKeyboardChanged(boolean useOsmandKeyboard) {
-				changeKeyboard(useOsmandKeyboard);
+			public void onKeyboardChanged() {
+				changeKeyboard();
 			}
 
 			@Override
