@@ -4,6 +4,7 @@
 
     <application
         android:icon="@mipmap/icon_free"
+        android:label="@string/app_name_free"
         tools:replace="android:icon">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
