@@ -807,26 +807,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		changeEditTextSelections();
 	}
 
-	private void changeSoftKeyboardVisibility() {
-		changeOsmandKeyboardSetting();
-		boolean useOsmandKeyboard = isOsmandKeyboardOn();
-		changeOsmandKeyboardVisibility(useOsmandKeyboard);
-		final View focusedView = getDialog().getCurrentFocus();
-		if (focusedView != null) {
-			if (useOsmandKeyboard) {
-				AndroidUtils.hideSoftKeyboard(getActivity(), focusedView);
-			} else {
-				new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						AndroidUtils.showSoftKeyboard(focusedView);
-					}
-				}, 200);
-			}
-		}
-		changeEditTextSelections();
-	}
-
 	private CoordinateInputFormatChangeListener createCoordinateInputFormatChangeListener() {
 		return new CoordinateInputFormatChangeListener() {
 
