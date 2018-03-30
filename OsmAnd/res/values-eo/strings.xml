@@ -2593,7 +2593,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="srtm_menu_download_descr">Por vidi nivelkurbojn sur la mapo, vi devas elŝuti nivelkurban mapon de tiu ĉi regiono.</string>
     <string name="shared_string_plugin">Kromprogramo</string>
     <string name="srtm_purchase_header">Por vidi nivelkurbojn sur la mapo, vi devas aĉeti kaj instali la kromprogramon ‘Nivelkurboj</string>
-    <string name="hillshade_menu_download_descr">Por vidi nivel-ombrumon sub la mapo, vi devas elŝuti nivel-ombruman mapon de tiu ĉi regiono.</string>
+    <string name="hillshade_menu_download_descr">Elŝutu la mapon “nivel-ombrumoj” por vidigi reliefon por tiu ĉi regiono.</string>
     <string name="hillshade_purchase_header">Por vidi nivel-ombrumon sub la mapo, vi devas aĉeti kaj instali kromprogramon ‘Nivelkurboj</string>
     <string name="hide_from_zoom_level">Kaŝi de skal-nivelo</string>
     <string name="sorted_by_distance">Ordigitaj laŭ distanco</string>
@@ -2604,23 +2604,21 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="quick_action_showhide_osmbugs_descr">Premado sur la ag-butono montros aŭ kaŝos OSM-rimarkojn sur la mapo.</string>
     <string name="restart_search">Rekomenci serĉon</string>
     <string name="increase_search_radius">Pliigi serĉan radiuson</string>
-    <string name="nothing_found">Trovis nenion :(</string>
+    <string name="nothing_found">Trovis nenion</string>
     <string name="nothing_found_descr">Bonvolu provi ŝanĝi serĉpeton aŭ pliigi radiuson de serĉo.</string>
     <string name="private_access_routing_req">Via celloko troviĝas en privata tereno. Ĉu vi volas permesi aliron al privataj vojoj por tiu ĉi kurso?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary-fenestraĵo</string>
-    <string name="mapillary_widget_descr">Ebligas al vi rapide kontribui al Mapillary.</string>
+    <string name="mapillary_widget_descr">Ebligas rapide kontribui al Mapillary.</string>
     <string name="mapillary_descr">Enretaj strat-nivelaj fotoj por ĉiuj. Esplori lokojn, kunlabori kaj foti la mondon.</string>
     <string name="shared_string_add_photos">Aldoni fotojn</string>
-    <string name="mapillary_action_descr">Kontribui per viaj strat-nivelaj vidaĵoj de tiu ĉi loko per Mapillary.</string>
+    <string name="mapillary_action_descr">Kontribui viajn strat-nivelajn vidaĵojn de tiu ĉi loko per Mapillary.</string>
     <string name="plugin_mapillary_descr">Strat-nivelaj fotoj por ĉiuj. Esplori lokojn, kunlabori kaj foti la mondon.</string>
     <string name="online_photos">Enretaj fotoj</string>
     <string name="no_photos_descr">Ni ne havas fotojn pri tiu ĉi loko.</string>
     <string name="shared_string_install">Instali</string>
     <string name="improve_coverage_mapillary">Pliigi fotan atingon de Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Vi povas fari viajn proprajn fotojn aŭ seriojn da fotoj kaj aldoni ilin al tiu ĉi map-loko.
-\n
-\nPor fari tion, vi devas instali aplikaĵon Mapillary el Google Play.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instalu Mapillary por aldoni unu aŭ pli fotojn al tiu ĉi loko sur la mapo.</string>
     <string name="open_mapillary">Malfermi Mapillary</string>
     <string name="mapillary_image">Mapillary-foto</string>
     <string name="distance_moving">Korektita distanco</string>
@@ -2631,7 +2629,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_reload">Reŝargi</string>
     <string name="mapillary_menu_descr_tile_cache">Reŝargi kahelojn por ĝisdatigi datumojn.</string>
     <string name="mapillary_menu_title_tile_cache">Kahela memoro</string>
-    <string name="wrong_user_name">Erara uzantnomo!</string>
+    <string name="wrong_user_name">Erara uzantnomo</string>
     <string name="shared_string_to">Al</string>
     <string name="mapillary_menu_date_from">El</string>
     <string name="mapillary_menu_descr_dates">Montri nur aldonitajn bildojn</string>
@@ -2642,7 +2640,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="mapillary_menu_filter_description">Vi povas filtri bildojn laŭ alŝutinto aŭ laŭ dato. Filtriloj aplikiĝas nur je pligrandigo.</string>
     <string name="shared_string_reset">Reagordi</string>
     <string name="store_tracks_in_monthly_directories">Konservi registritajn spurojn en monataj dosierujoj</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Konservi registritajn spurojn en dosierujoj por registrita monato (kiel 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Konservi registritajn spurojn en dosierujoj por registrita monato (kiel 2018-01).</string>
     <string name="average">Mezumo</string>
     <string name="of">%1$d el %2$d</string>
     <string name="ascent_descent">Supreniroj/malsupreniroj</string>
@@ -2661,7 +2659,7 @@ Indikas lokon:  %1$s x %2$s"</string>
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Rozkolora diafana</string>
-    <string name="quick_action_resume_pause_navigation">Daŭrigi/paŭzigi navigadon</string>
+    <string name="quick_action_resume_pause_navigation">Paŭzigi/daŭrigi navigadon</string>
     <string name="quick_action_resume_pause_navigation_descr">Premu tiun ĉi butonon por paŭzigi aŭ reaktivigi navigadon.</string>
     <string name="quick_action_show_navigation_finish_dialog">Montri fenestron de navigada fino</string>
     <string name="quick_action_start_stop_navigation">Ekigi/ĉesigi navigadon</string>
@@ -2708,7 +2706,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="add_segment_to_the_track">Aldoni al GPX-spuro</string>
 <string name="keep_showing_on_map">Daŭre montri sur mapo</string>
     <string name="exit_without_saving">Ĉu eliri sen konservi?</string>
-    <string name="do_not_use_animations">Ne uzi movbildojn</string>
+    <string name="do_not_use_animations">Sen movbildoj</string>
     <string name="do_not_use_animations_descr">Malaktivigi animaciojn en la aplikaĵo.</string>
     <string name="move_all_to_history">Movi ĉiujn al historio</string>
     
@@ -2758,7 +2756,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="marker_save_as_track_descr">Elporti map-markojn al dosiero difinita tie ĉi:</string>
     <string name="marker_save_as_track">Konservi kiel kurson</string>
     <string name="move_to_history">Movi al historio</string>
-    <string name="group_will_be_removed_after_restart">Grupo estos forigita post la sekva restarto de la aplikaĵo.</string>
+    <string name="group_will_be_removed_after_restart">La grupo estos forigita post la sekva restarto de la aplikaĵo.</string>
     <string name="make_round_trip_descr">Aldoni kopion de komenc-punkto kiel celon.</string>
     <string name="make_round_trip">Fermita ekskurso</string>
     
