@@ -82,21 +82,21 @@ public class WikivoyageDbHelper {
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			try {
-				String dbQuery = SEARCH_TABLE_SELECT + " WHERE " + SEARCH_COL_SEARCH_TERM + " LIKE ?";
+				String dbQuery = SEARCH_TABLE_SELECT + " WHERE " + SEARCH_COL_CITY_ID +
+						" IN (SELECT " + SEARCH_COL_CITY_ID + " FROM " + SEARCH_TABLE_NAME +
+						" WHERE " + SEARCH_COL_SEARCH_TERM + " LIKE ?)";
 				SQLiteCursor cursor = conn.rawQuery(dbQuery, new String[]{searchQuery + "%"});
 				if (cursor.moveToFirst()) {
 					do {
 						res.add(readSearchResult(cursor));
 					} while (cursor.moveToNext());
 				}
-				cursor.close();
 			} finally {
 				conn.close();
 			}
 		}
 
 		List<WikivoyageSearchResult> list = new ArrayList<>(groupSearchResultsByCityId(res));
-
 		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
 			@Override
 			public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {

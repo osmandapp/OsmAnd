@@ -1,0 +1,53 @@
+body {
+    display: block;
+    margin: 5%;
+}
+
+h2 {
+    font-size: 2em;
+    letter-spacing: 0.05em;
+    color: #727272;
+    font-family: serif;
+}
+
+h3 {
+  font-size: 2em;
+  font-family: sans-serif;
+  padding-top: 5%;
+}
+
+p, li {
+  font-family: sans-serif;
+  font-size: 1em;
+  line-height: 1em;
+}
+
+img {
+    width: 100%;
+}
+
+a {
+  color: #237bff;
+  text-decoration-color: #a3c8ff;
+}
+
+.external-free {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+
+.thumb-tright, .thumbinner {
+    width: 100%;
+}
+
+.thumbcaption {
+    width: 100%;
+    font-size: 1em;
+    color: #727272;
+    font-style: italic;
+}

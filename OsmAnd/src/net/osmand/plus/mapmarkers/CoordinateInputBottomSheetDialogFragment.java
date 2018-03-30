@@ -20,31 +20,14 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.CoordinateInputFormatDef;
 
-import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.USE_OSMAND_KEYBOARD;
-
 public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public final static String TAG = "CoordinateInputBottomSheetDialogFragment";
 
 	private CoordinateInputFormatChangeListener listener;
 
-	private boolean useOsmandKeyboard;
-
 	public void setListener(CoordinateInputFormatChangeListener listener) {
 		this.listener = listener;
-	}
-
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		if (savedInstanceState == null) {
-			Bundle args = getArguments();
-			if (args != null) {
-				useOsmandKeyboard = args.getBoolean(USE_OSMAND_KEYBOARD);
-			}
-		} else {
-			useOsmandKeyboard = savedInstanceState.getBoolean(USE_OSMAND_KEYBOARD);
-		}
 	}
 
 	@Override
@@ -53,6 +36,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		final OsmandSettings settings = getMyApplication().getSettings();
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
+		boolean useOsmandKeyboard = settings.COORDS_INPUT_USE_OSMAND_KEYBOARD.get();
 
 		BaseBottomSheetItem useSystemKeyboardItem = new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(!useOsmandKeyboard)
@@ -63,7 +47,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 					@Override
 					public void onClick(View v) {
 						if (listener != null) {
-							listener.onKeyboardChanged(!useOsmandKeyboard);
+							listener.onKeyboardChanged();
 						}
 						dismiss();
 					}
@@ -135,12 +119,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		outState.putBoolean(USE_OSMAND_KEYBOARD, useOsmandKeyboard);
-		super.onSaveInstanceState(outState);
-	}
-
-	@Override
 	protected int getDismissButtonTextId() {
 		return R.string.shared_string_close;
 	}
@@ -152,7 +130,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 
 	interface CoordinateInputFormatChangeListener {
 
-		void onKeyboardChanged(boolean useOsmandKeyboard);
+		void onKeyboardChanged();
 
 		void onHandChanged();
 
