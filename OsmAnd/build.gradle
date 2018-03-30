@@ -19,7 +19,8 @@ apply plugin: 'com.github.ksoichiro.eclipse.aar'
 // Less important
 
 // Configure eclipse-aar plugin
-def analytics = !System.getenv("APP_FEATURES") || System.getenv("APP_FEATURES").contains("+play_market")
+def analytics = (!System.getenv("APP_FEATURES") || System.getenv("APP_FEATURES").contains("+play_market")) &&
+		getGradle().getStartParameter().getTaskRequests().toString().contains("Free")
 
 eclipseAar {
     // See "Configurations" for details
@@ -385,20 +386,14 @@ repositories {
 	}
 }
 
-// project.logger.warn("Analytics enabled for free version: $analytics")
+project.logger.warn("Analytics enabled for free version: $analytics")
 dependencies {
 	compile project(path: ':OsmAnd-java', configuration: 'android')
 	if (analytics) {
-		def analyticsDependencies = [
-			'com.google.firebase:firebase-core:12.0.1',
-			'com.google.firebase:firebase-iid:12.0.1',
-			'com.google.firebase:firebase-config:12.0.1',
-			'com.facebook.android:facebook-android-sdk:[4,5)'	
-		]
-		freeCompile(analyticsDependencies)
-		freedevCompile(analyticsDependencies)
-		freeresCompile(analyticsDependencies)
-
+		compile 'com.google.firebase:firebase-core:12.0.1'
+		compile 'com.google.firebase:firebase-iid:12.0.1'
+		compile 'com.google.firebase:firebase-config:12.0.1'
+		compile 'com.facebook.android:facebook-android-sdk:[4,5)'	
 	}
 	compile 'com.android.support:multidex:1.0.1'
 	compile 'com.android.support:gridlayout-v7:27.1.0'
