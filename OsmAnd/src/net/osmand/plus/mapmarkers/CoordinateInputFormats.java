@@ -43,8 +43,12 @@ public class CoordinateInputFormats {
 		return format == DD_MM_MMM || format == DD_MM_MMMM || format == DD_MM_SS;
 	}
 
-	public static int getFirstPartSymbolsCount(@CoordinateInputFormatDef int format, boolean latitude) {
-		return latitude ? 2 : 3;
+	public static int getFirstPartSymbolsCount(@CoordinateInputFormatDef int format, boolean latitude, boolean isTwoDigitsLongtitute) {
+		if (latitude) {
+			return 2;
+		} else {
+			return isTwoDigitsLongtitute ? 2 : 3;
+		}
 	}
 
 	public static int getSecondPartSymbolsCount(@CoordinateInputFormatDef int format) {
