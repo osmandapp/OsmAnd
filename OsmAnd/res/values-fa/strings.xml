@@ -2016,9 +2016,9 @@
     <string name="map_widget_magnetic_bearing">سمت مغناطیسی</string>
     <string name="map_widget_bearing">سمت نسبی</string>
     <string name="access_disable_offroute_recalc">با خارج‌شدن از مسیر، مسیر تازه‌ای پیدا نکن</string>
-    <string name="access_disable_offroute_recalc_descr">هنگامی که از مسیر خارج شوید، برنامه به‌صورت خودکار مسیریابی تازه‌ای انجام نمی‌دهد.</string>
+    <string name="access_disable_offroute_recalc_descr">اگر از مسیر خارج شوید مسیریابی تازه‌ای انجام نمی‌شود.</string>
     <string name="access_disable_wrong_direction_recalc">با حرکت خلاف جهت، مسیر تازه پیدا نکن</string>
-    <string name="access_disable_wrong_direction_recalc_descr">وقتی در خلاف جهت مسیر حرکت می‌کنید، به‌صورت خودکار مسیریابی مجدد نمی‌کند.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">هنگام حرکت در خلاف جهت مسیر، مسیریابی مجدد نمی‌کند.</string>
     <string name="access_smart_autoannounce">اعلام هوشمند خودکار</string>
     <string name="access_smart_autoannounce_descr">فقط اگر جهتم از سمت نقطهٔ مقصد منحرف شد، اعلام کن.</string>
     <string name="access_autoannounce_period">بازهٔ زمانی اعلام خودکار</string>
@@ -2934,7 +2934,7 @@
     <string name="distance_indication_descr">مشخص کنید که مسافت شما تا نشانه‌های فعال چگونه نشان داده شود.</string>
     <string name="active_markers_descr">مشخص کنید چند پیکانِ جهت‌نما نشان داده شود.</string>
     <string name="appearance_on_the_map">ظاهر بر روی نقشه</string>
-    <string name="add_track_to_markers_descr">مسیری را انتخاب کنید تا نقاط بین‌راهیِ آن به نشانه‌ها اضافه شود. (فقط مسیرهای دارای نقطهٔ بین‌راهی فهرست شده‌اند.)</string>
+    <string name="add_track_to_markers_descr">مسیری را انتخاب کنید تا نقاط بین‌راهیِ آن به نشانه‌ها اضافه شود.</string>
     <string name="add_favourites_group_to_markers_descr">یک گروه از نقاط برگزیده را انتخاب کنید تا به نشانه‌ها اضافه شود.</string>
     <string name="track_waypoints">نقاط بین‌راهی مسیر</string>
     <string name="favourites_group">گروه نقاط برگزیده</string>
