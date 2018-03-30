@@ -2590,9 +2590,9 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="display_zoom_level">Vidigi de skal-nivelo: %1$s</string>
     <string name="route_is_too_long_v2">Tiu ĉi kurso povas esti tro longa por kalkuli. Bonvolu aldoni intercelojn, se neniu rezulto estos trovita post 10 minutoj.</string>
     <string name="save_poi_too_many_uppercase">Nomo enhavas tro multe da grandaj literoj? Ĉu vi volas pluigi?</string>
-    <string name="srtm_menu_download_descr">Por vidi nivelkurbojn sur la mapo, vi devas elŝuti nivelkurban mapon de tiu ĉi regiono.</string>
+    <string name="srtm_menu_download_descr">Elŝutu la mapon “nivelkurboj” por vidigi nivelkurbojn por tiu ĉi regiono.</string>
     <string name="shared_string_plugin">Kromprogramo</string>
-    <string name="srtm_purchase_header">Por vidi nivelkurbojn sur la mapo, vi devas aĉeti kaj instali la kromprogramon ‘Nivelkurboj</string>
+    <string name="srtm_purchase_header">Por vidigi nivelkurbojn sur la mapo, vi devas aĉeti kaj instali la kromprogramon “nivelkurboj”.</string>
     <string name="hillshade_menu_download_descr">Elŝutu la mapon “nivel-ombrumoj” por vidigi reliefon por tiu ĉi regiono.</string>
     <string name="hillshade_purchase_header">Instalu la kromprogramon “nivelkurboj” por vidigi ilin sur la mapo.</string>
     <string name="hide_from_zoom_level">Kaŝi de skal-nivelo</string>
