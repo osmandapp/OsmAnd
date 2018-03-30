@@ -2786,4 +2786,6 @@
     <string name="osmand_parking_plugin_description">Parkeringsplass-tillegget lar deg registrere hvor bilen din er parkert og hvor mye parkeringstid som gjenstår (hvis det er en tidsbegrensning).
 \nBåde parkeringsplass og tid er synlige på dashbordet i OsmAnd såvel som i et miniprogram på kartskjermen. En alarm kan legges til Android-kalenderen som en påminnelse.</string>
     <string name="dashboard_or_drawer_description">En valgmulighet tilbys om å primært styre programmet via det fleksible dashbordet eller en statisk meny. Ditt valg kan alltid endres i dashbordinnstillingene.</string>
+    <string name="shared_string_travel">Reise</string>
+    <string name="waypoints_removed_from_map_markers">Rutepunkter fjernet fra kartmarkører</string>
     </resources>
