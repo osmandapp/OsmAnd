@@ -1793,7 +1793,7 @@
     <string name="shared_string_change">Endre</string>
     <string name="access_disable_offroute_recalc">Ingen ny beregning etter å ha forlatt ruten</string>
     <string name="access_disable_wrong_direction_recalc">Ingen ny ruteberegning ved motsatt retning</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Forhindre automatisk ny ruteberegning ved bevegelse i motsatt retning.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Ingen ny ruteberegning ved bare bevegelse i motsatt retning.</string>
     <string name="access_smart_autoannounce">Smart auto-annonsering</string>
     <string name="rendering_value_fine_name">Fin</string>
     <string name="report">Rapport</string>
@@ -1891,7 +1891,7 @@
     <string name="use_osm_live_routing_description">Aktiver navigering for OsmAnd Live-endringer.</string>
     <string name="map_widget_magnetic_bearing">Magnetisk peiling</string>
     <string name="map_widget_bearing">Relativ peiling</string>
-    <string name="access_disable_offroute_recalc_descr">Ingen automatisk ny ruteberegning etter å ha forlatt ruten.</string>
+    <string name="access_disable_offroute_recalc_descr">Ingen ny ruteberegning etter å ha forlatt ruten.</string>
     <string name="access_smart_autoannounce_descr">Varsle bare når retningen til målpunktet endres.</string>
     <string name="access_autoannounce_period">Auto-annonseringsperiode</string>
     <string name="access_autoannounce_period_descr">Minste tidsintervall mellom annonseringer.</string>
@@ -2345,7 +2345,7 @@
     <string name="restore_purchases">Gjenopprett kjøp</string>
     <string name="do_not_send_anonymous_app_usage">Ikke send anonym bruksstatistikk</string>
     <string name="parking_options">Parkeringsalternativer</string>
-    <string name="full_version_thanks">Takk for at du kjøpte den betalte versjonen av OsmAnd.</string>
+    <string name="full_version_thanks">Takk for at du kjøpte betalingsversjonen av OsmAnd.</string>
     <string name="routing_attr_driving_style_speed_name">Kortere ruter</string>
     <string name="routing_attr_driving_style_balance_name">Balansert</string>
     <string name="track_points_category_name">Fremtredende punkter på denne ruten</string>
@@ -2605,7 +2605,7 @@
     <string name="quick_action_auto_zoom_desc">Trykk på denne handlingsknappen vil slå av/på automatisk kartzoom i henhold til hastigheten din.</string>
     <string name="quick_action_add_destination_desc">Trykk på denne handlingsknappen vil gjøre skjermsenteret rutemålet, ethvert tidligere valgt mål blir det siste mellomliggende målet.</string>
     <string name="quick_action_replace_destination_desc">Trykk på denne handlingsknappen vil gjøre skjermsenteret det nye rutemålet, og erstatter det tidligere valgte målet (hvis noe).</string>
-    <string name="quick_action_add_first_intermediate_desc">Trykk på handlingsknappen for å legge til et første mellomliggende punkt midt på skjermen.</string>
+    <string name="quick_action_add_first_intermediate_desc">Trykk på denne handlingsknappen vil gjøre skjermsenteret til det første mellomliggende målet.</string>
     <string name="subscribe_email_desc">Abonner på vår e-postliste om programrabatter og få tre kartnedlastinger til!</string>
     <string name="index_item_depth_points_southern_hemisphere">Havdybdepunkter for sørlige halvkule</string>
     <string name="index_item_depth_points_northern_hemisphere">Havdybdepunkter for nordlige halvkule</string>
