@@ -2594,7 +2594,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_plugin">Kromprogramo</string>
     <string name="srtm_purchase_header">Por vidi nivelkurbojn sur la mapo, vi devas aĉeti kaj instali la kromprogramon ‘Nivelkurboj</string>
     <string name="hillshade_menu_download_descr">Elŝutu la mapon “nivel-ombrumoj” por vidigi reliefon por tiu ĉi regiono.</string>
-    <string name="hillshade_purchase_header">Instalu la kromprogramon “nivelkurboj” por vidigi ilin sur la mapo</string>
+    <string name="hillshade_purchase_header">Instalu la kromprogramon “nivelkurboj” por vidigi ilin sur la mapo.</string>
     <string name="hide_from_zoom_level">Kaŝi de skal-nivelo</string>
     <string name="sorted_by_distance">Ordigitaj laŭ distanco</string>
     <string name="search_favorites">Serĉi en ŝatataj</string>
