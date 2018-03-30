@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class WikivoyageDbHelper {
@@ -78,18 +79,22 @@ public class WikivoyageDbHelper {
 
 	@NonNull
 	public List<WikivoyageSearchResult> search(final String searchQuery) {
+		TLongArrayList cityIds = getCityIdsBySearchTerm(searchQuery);
+
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			try {
-				String dbQuery = SEARCH_TABLE_SELECT + " WHERE " + SEARCH_COL_SEARCH_TERM + " LIKE ?";
-				SQLiteCursor cursor = conn.rawQuery(dbQuery, new String[]{searchQuery + "%"});
-				if (cursor.moveToFirst()) {
-					do {
-						res.add(readSearchResult(cursor));
-					} while (cursor.moveToNext());
+				for (int i = 0; i < cityIds.size(); i++) {
+					String dbQuery = SEARCH_TABLE_SELECT + " WHERE " + SEARCH_COL_CITY_ID + " = ?";
+					SQLiteCursor cursor = conn.rawQuery(dbQuery, new String[]{String.valueOf(cityIds.get(0))});
+					if (cursor.moveToFirst()) {
+						do {
+							res.add(readSearchResult(cursor));
+						} while (cursor.moveToNext());
+					}
+					cursor.close();
 				}
-				cursor.close();
 			} finally {
 				conn.close();
 			}
@@ -116,6 +121,27 @@ public class WikivoyageDbHelper {
 		});
 
 		return list;
+	}
+
+	private TLongArrayList getCityIdsBySearchTerm(String searchTerm) {
+		TLongArrayList res = new TLongArrayList();
+		SQLiteConnection conn = openConnection();
+		if (conn != null) {
+			try {
+				String query = "SELECT DISTINCT " + SEARCH_COL_CITY_ID + " FROM " + SEARCH_TABLE_NAME +
+						" WHERE " + SEARCH_COL_SEARCH_TERM + " LIKE ?";
+				SQLiteCursor cursor = conn.rawQuery(query, new String[]{searchTerm + "%"});
+				if (cursor.moveToFirst()) {
+					do {
+						res.add(cursor.getLong(0));
+					} while (cursor.moveToNext());
+				}
+				cursor.close();
+			} finally {
+				conn.close();
+			}
+		}
+		return res;
 	}
 
 	private Collection<WikivoyageSearchResult> groupSearchResultsByCityId(List<WikivoyageSearchResult> res) {
