@@ -543,14 +543,14 @@
     <string name="loading_builds">正在載入 OsmAnd 編譯…</string>
     <string name="select_build_to_install">選擇 OsmAnd 編譯安裝</string>
     <string name="contribution_activity">安裝的版本</string>
-    <string name="gps_status_app_not_found">沒安裝 GPS 狀態應用程式，到 Play 商場找嗎？</string>
+    <string name="gps_status_app_not_found">沒安裝 GPS 狀態應用程式，要到商場搜尋嗎？</string>
     <string name="voice_is_not_available_msg">語音導航無法使用時。請到\'設定\'→ \'一般設定\' → \'語音導航\'，選取或下載提示語音包。</string>
     <string name="voice_is_not_available_title">未選定語音導航</string>
     <string name="daynight_mode_day">日間</string>
     <string name="daynight_mode_night">夜間</string>
     <string name="daynight_mode_auto">日出/日落</string>
     <string name="daynight_mode_sensor">光感器</string>
-    <string name="daynight_descr">選擇日/夜間模式切換規則。</string>
+    <string name="daynight_descr">選擇在夜/日間模式之間切換原則。</string>
     <string name="daynight">日/夜間模式</string>
     <string name="download_files_question">下載{0}個檔({1} MB)？</string>
     <string name="items_were_selected">已選{0}項</string>
@@ -567,8 +567,8 @@
     <string name="continuous_rendering_descr">顯示連續著色演算代替立即圖像。</string>
     <string name="rendering_exception">在演算已選擇的地區時發生錯誤</string>
     <string name="show_point_options">使用位置 …</string>
-    <string name="renderer_load_sucess">著色演算器已成功載入</string>
-    <string name="renderer_load_exception">發生異常：著色演算器未載入</string>
+    <string name="renderer_load_sucess">著色演算器已載入</string>
+    <string name="renderer_load_exception">發生異常：著色演算器未能載入</string>
     <string name="renderers">向量著色演算器</string>
     <string name="renderers_descr">選擇著色演算外觀。</string>
     <string name="poi_context_menu_website">顯示 POI 網站</string>
@@ -597,20 +597,20 @@
     
     <string name="poi_context_menu_modify">修改 POI</string>
     <string name="poi_context_menu_delete">刪除 POI</string>
-    <string name="rotate_map_compass_opt">依羅盤旋轉</string>
-    <string name="rotate_map_bearing_opt">行進方向朝上</string>
-    <string name="rotate_map_none_opt">不旋轉(正北朝上)</string>
+    <string name="rotate_map_compass_opt">羅盤方向</string>
+    <string name="rotate_map_bearing_opt">行進方向</string>
+    <string name="rotate_map_none_opt">不旋轉(正北永遠朝上)</string>
     <string name="rotate_map_to_bearing_descr">選擇地圖畫面對準方式。</string>
     <string name="rotate_map_to_bearing">地圖方位</string>
     <string name="show_route">導航路線資訊</string>
-    <string name="fav_imported_sucessfully">我的收藏匯入成功</string>
-    <string name="fav_file_to_load_not_found">在 {0} 裡未找到含有我的收藏的 GPX 檔案</string>
-    <string name="fav_saved_sucessfully">我的收藏成功的存到 {0}</string>
+    <string name="fav_imported_sucessfully">我的收藏已匯入</string>
+    <string name="fav_file_to_load_not_found">在 {0} 裡未找到包括我的收藏的 GPX 檔案</string>
+    <string name="fav_saved_sucessfully">我的收藏已存到 {0}</string>
     <string name="no_fav_to_save">沒有我的收藏標點要儲存</string>
     <string name="error_occurred_loading_gpx">在載入 GPX 時發生錯誤</string>
     <string name="send_report">傳送報告</string>
-    <string name="none_region_found">在 SD 卡上沒有該地區離線資料。由網路下載資料。</string>
-    <string name="poi_namefinder_query_empty">輸入查尋條件以查尋 POI</string>
+    <string name="none_region_found">在記憶卡上沒有該地區的離線資料，從網路下載資料。</string>
+    <string name="poi_namefinder_query_empty">輸入以查尋 POI</string>
     <string name="any_poi">任何</string>
     
     <string name="thanks_yandex_traffic">感謝 Yandex 提供的交通資訊。</string>
@@ -653,7 +653,8 @@
     <string name="voice_data_corrupted">指定的語音已損毀</string>
     <string name="voice_data_unavailable">選定的語音不能使用</string>
 
-    <string name="sd_unmounted">SD卡無法存取。\n您將無法看到地圖或找地點。</string>
+    <string name="sd_unmounted">記憶卡卡無法存取。
+\n您將無法看到地圖或查尋地點。</string>
     <string name="sd_mounted_ro">記憶卡是唯讀模式。
 \n您只能看預載的地圖且無法由網路下載。</string>
     <string name="unzipping_file">解壓縮檔案…</string>
@@ -693,13 +694,13 @@
     <string name="show_transport_over_map_description">在地圖上顯示公車站牌。</string>
     <string name="show_transport_over_map">顯示公車站牌</string>
     <string name="hello">OsmAnd 導航應用程式</string>
-    <string name="update_poi_success">已更新 POI 資料((已載入{0}個)</string>
+    <string name="update_poi_success">已更新 POI 資料(已載入{0}個)</string>
     <string name="update_poi_error_local">更新裝置端的 POI 清單錯誤</string>
     <string name="update_poi_error_loading">由伺服器載入資料時發生錯誤</string>
     <string name="update_poi_no_offline_poi_index">該地區無可用的離線 POI 資料</string>
     <string name="update_poi_is_not_available_for_zoom">更新的興趣點無法用於小的縮放級別</string>
     <string name="context_menu_item_update_poi">更新 POI</string>
-    <string name="context_menu_item_update_map_confirm">透過網路更新裝置端的資料？</string>
+    <string name="context_menu_item_update_map_confirm">要從網路更新裝置端的資料嗎？</string>
     <string name="search_history_city">縣市：{0}</string>
     <string name="search_history_street">道路：{0}, {1}</string>
     <string name="search_history_int_streets">交叉路口：{0} x {1} 在{2}</string>
@@ -715,16 +716,16 @@
     <string name="search_offline_address">離線查尋</string>
     <string name="search_online_address">線上查尋</string>
     <string name="max_level_download_tile">線上最大縮放比</string>
-    <string name="max_level_download_tile_descr">指定要在線上下載的地圖圖磚之最大縮放級別。</string>
+    <string name="max_level_download_tile_descr">不要瀏覽超出此範圍縮放級別的線上地圖圖磚。</string>
     <string name="route_general_information">總距離 %1$s，行駛時間 %2$d 小時 %3$d 分。</string>
     <string name="router_service_descr">選擇線上或是離線的導航服務。</string>
     <string name="router_service">導航服務</string>
-    <string name="sd_dir_not_accessible">在 SD 卡上的存儲資料夾無法存取！</string>
+    <string name="sd_dir_not_accessible">該資料在記憶卡上的存儲資料夾無法存取！</string>
     <string name="download_question">下載 {0} - {1}？</string>
-    <string name="download_question_exist">離線資料 {0}已存在 ({1})。您要更新 ({2})嗎 ?</string>
+    <string name="download_question_exist">離線資料 {0} 已存在 ({1})。您要更新 ({2}) 嗎？</string>
     <string name="address">地址</string>
     <string name="downloading_list_indexes">正在下載可用的地區清單…</string>
-    <string name="list_index_files_was_not_loaded">無法由 osmand.net 取得地區列表。</string>
+    <string name="list_index_files_was_not_loaded">無法由 https://osmand.net 取得地區列表。</string>
 
     <string name="fav_points_edited">我的收藏標點已被更改</string>
     <string name="fav_points_not_exist">沒有我的收藏標點存在</string>
@@ -754,7 +755,7 @@
     <string name="empty_route_calculated">錯誤：計算路線是空的</string>
     <string name="new_route_calculated_dist">重新計算路程，距離有</string>
     <string name="arrived_at_destination">您已經抵達目的地</string>
-    <string name="invalid_locations">座標無效！</string>
+    <string name="invalid_locations">座標的無效</string>
     <string name="go_back_to_osmand">返回 OsmAnd 地圖</string>
     <string name="loading_data">正在載入資料…</string>
     <string name="reading_indexes">讀取裝置端資料中…</string>
