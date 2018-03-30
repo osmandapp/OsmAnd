@@ -1,0 +1,16 @@
+body {
+    display: block;
+    margin: 5%;
+}
+
+h2 {
+    color: #ff8800;
+}
+
+img {
+    width: 100%;
+}
+
+thumbcaption {
+    font-style: italic;
+}
