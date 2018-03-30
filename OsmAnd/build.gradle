@@ -95,6 +95,9 @@ android {
 		freedev {
 			manifest.srcFile "AndroidManifest-freedev.xml"
 		}
+		freecustom {
+			manifest.srcFile "AndroidManifest-freecustom.xml"
+		}
 
 		legacy {
 			jniLibs.srcDirs = ["libgnustl"]
@@ -146,6 +149,10 @@ android {
 			dimension "version"
 			applicationId "net.osmand"
 			resConfig "en"
+		}
+		freecustom {
+			dimension "version"
+			applicationId "net.osmand.freecustom"
 		}
 		full {
 			dimension "version"
