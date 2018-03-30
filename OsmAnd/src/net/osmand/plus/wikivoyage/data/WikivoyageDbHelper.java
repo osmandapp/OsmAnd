@@ -11,6 +11,7 @@ import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.util.Algorithms;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -82,7 +83,7 @@ public class WikivoyageDbHelper {
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			try {
-				String dbQuery = SEARCH_TABLE_SELECT + " WHERE " + SEARCH_COL_SEARCH_TERM + " LIKE ?";
+				String dbQuery = SEARCH_TABLE_SELECT + " WHERE city_id IN (select city_id from wikivoyage_search where search_term like ?)";
 				SQLiteCursor cursor = conn.rawQuery(dbQuery, new String[] { searchQuery + "%" });
 				if (cursor.moveToFirst()) {
 					do {
@@ -94,7 +95,7 @@ public class WikivoyageDbHelper {
 				conn.close();
 			}
 		}
-		List<WikivoyageSearchResult> list = new ArrayList(groupSearchResultsByCityId(res));
+		List<WikivoyageSearchResult> list = new ArrayList<>(groupSearchResultsByCityId(res));
 		
 		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
 
