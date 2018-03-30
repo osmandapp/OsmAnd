@@ -87,7 +87,7 @@ public class WikivoyageDbHelper {
 			try {
 				for (int i = 0; i < cityIds.size(); i++) {
 					String dbQuery = SEARCH_TABLE_SELECT + " WHERE " + SEARCH_COL_CITY_ID + " = ?";
-					SQLiteCursor cursor = conn.rawQuery(dbQuery, new String[]{String.valueOf(cityIds.get(0))});
+					SQLiteCursor cursor = conn.rawQuery(dbQuery, new String[]{String.valueOf(cityIds.get(i))});
 					if (cursor.moveToFirst()) {
 						do {
 							res.add(readSearchResult(cursor));
