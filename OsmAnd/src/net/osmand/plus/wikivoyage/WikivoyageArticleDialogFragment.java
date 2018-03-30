@@ -20,9 +20,12 @@ import android.webkit.WebView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
+
+import java.io.File;
 
 public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragment {
 
@@ -34,7 +37,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private static final String HEADER_INNER = "<html><head>\n" +
 			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
 			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
-			"<link href=\"file:///android_asset/article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
+			"<link href=\"article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
 			"</head><body>\n" +
 			"<div class=\"main\">\n";
 	private static final String FOOTER_INNER = "</div></body></html>";
@@ -152,9 +155,19 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		}
 
 		String content = HEADER_INNER + article.getContent() + FOOTER_INNER;
-		contentWebView.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
+		contentWebView.loadDataWithBaseURL(getBaseUrl(), content, "text/html", "UTF-8", null);
 	}
 
+	@NonNull
+	private String getBaseUrl() {
+		File wikivoyageDir = getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
+		if (new File(wikivoyageDir, "article_style.css").exists()) {
+			return "file://" + wikivoyageDir.getAbsolutePath() + "/";
+		}
+		return "file:///android_asset/";
+	}
+
+	@NonNull
 	private Drawable getSelectedLangIcon() {
 		Drawable normal = getContentIcon(R.drawable.ic_action_map_language);
 		if (Build.VERSION.SDK_INT >= 21) {
