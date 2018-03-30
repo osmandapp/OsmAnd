@@ -89,7 +89,7 @@
 	<string name="poi_filter_food_shop">فروشگاه مواد غذایی</string>
 	<string name="poi_filter_for_tourists">مناسب توریست‌ها</string>
 	<string name="poi_filter_fuel">جایگاه سوخت</string>
-	<string name="auto_zoom_map_descr">زوم خودکار بر اساس سرعت خودرو (همزمان که نقشه موقعیت فعلی را نشان می‌دهد).</string>
+	<string name="auto_zoom_map_descr">تنظیم درجهٔ زوم بر اساس سرعت خودرو (همزمان که نقشه موقعیت فعلی را نشان می‌دهد).</string>
 	<string name="recalculate_route_to_your_location">شیوهٔ رفت‌وآمد:</string>
 	<string name="select_navigation_mode">شیوهٔ رفت‌وآمد را انتخاب کنید</string>
 	<string name="day_night_info">اطلاعات روز/شب</string>
@@ -594,7 +594,7 @@
 	<string name="prefer_motorways">ترجیح‌دادن آزادراه‌ها</string>
 	<string name="prefer_in_routing_descr">آزادراه‌ها را ترجیح می‌دهم.</string>
     <string name="local_indexes_cat_srtm">منحنی‌های تراز</string>
-    <string name="precise_routing_mode_descr">این را فعال کنید تا مسیرها دقیق و بدون اشکال محاسبه شوند. البته این حالت محدودیت مسافت دارد و کُند است.</string>
+    <string name="precise_routing_mode_descr">محاسبهٔ مسیرهایی دقیق و بدون اشکال. البته این حالت محدودیت مسافت دارد و کُند است.</string>
     <string name="recording_context_menu_show">نشان بده</string>
     <string name="av_def_action_picture">عکس‌گرفتن</string>
     <string name="recording_context_menu_precord">یادداشت عکسی</string>
@@ -655,7 +655,7 @@
 	
 	<string name="settings_preset">پروفایل پیش‌فرض</string>
 	<string name="settings_preset_descr">نمای نقشه و تنظیمات راهبری برای هر پروفایل جداگانه ذخیره می‌شود. پروفایل پیش‌فرض خود را اینجا تنظیم کنید.</string>
-    <string name="osmand_background_plugin_description">تنظیمات مربوط به فعال‌سازی ردگیری و راهبری در حالت پس‌زمینه (صفحه خاموش) را نشان می‌دهد که با ارسال بیدارباش‌های متناوب به جی‌پی‌اس دستگاه این کار را انجام می‌دهد.</string>
+    <string name="osmand_background_plugin_description">تنظیمات مربوط به فعال‌سازی ردگیری و راهبری در حالت پس‌زمینه را نشان می‌دهد که با ارسال پیام‌های بیدارباش متناوب به جی‌پی‌اس دستگاه این کار را انجام می‌دهد.</string>
     <string name="av_def_action_choose">انتخاب برحسب تقاضا</string>
     <string name="audionotes_location_not_defined">مکانی برای یادداشت‌گذاری تعیین نشده است.
 \nمکانی را مشخص و از طریق منوی زمینه اقدام کنید.</string>
@@ -2018,7 +2018,7 @@
     <string name="access_disable_offroute_recalc">با خارج‌شدن از مسیر، مسیر تازه‌ای پیدا نکن</string>
     <string name="access_disable_offroute_recalc_descr">اگر از مسیر خارج شوید مسیریابی تازه‌ای انجام نمی‌شود.</string>
     <string name="access_disable_wrong_direction_recalc">با حرکت خلاف جهت، مسیر تازه پیدا نکن</string>
-    <string name="access_disable_wrong_direction_recalc_descr">هنگام حرکت در خلاف جهت مسیر، مسیریابی مجدد نمی‌کند.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">با حرکت در خلاف جهت مسیر، مسیریابی مجدد نمی‌کند.</string>
     <string name="access_smart_autoannounce">اعلام هوشمند خودکار</string>
     <string name="access_smart_autoannounce_descr">فقط اگر جهتم از سمت نقطهٔ مقصد منحرف شد، اعلام کن.</string>
     <string name="access_autoannounce_period">بازهٔ زمانی اعلام خودکار</string>
