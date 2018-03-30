@@ -31,6 +31,14 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private static final String SEARCH_RESULT_KEY = "search_result_key";
 	private static final String SELECTED_LANG_KEY = "selected_lang_key";
 
+	private static final String HEADER_INNER = "<html><head>\n" +
+			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
+			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
+			"<link href=\"file:///android_asset/article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
+			"</head><body>\n" +
+			"<div class=\"main\">\n";
+	private static final String FOOTER_INNER = "</div></body></html>";
+
 	private WikivoyageSearchResult searchResult;
 	private String selectedLang;
 
@@ -143,7 +151,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			return;
 		}
 
-		contentWebView.loadData(article.getContent(), "text/html", "UTF-8");
+		String content = HEADER_INNER + article.getContent() + FOOTER_INNER;
+		contentWebView.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
 	}
 
 	private Drawable getSelectedLangIcon() {
