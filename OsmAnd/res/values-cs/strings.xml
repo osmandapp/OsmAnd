@@ -2443,7 +2443,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="right_side_navigation">Jízda po pravé straně</string>
     <string name="driving_region_automatic">Automaticky</string>
     <string name="restore_purchases">Obnovit nákupy</string>
-    <string name="fonts_header">Písma pro mapu</string>
+    <string name="fonts_header">Mapová písma</string>
     <string name="type_address">Zadejte adresu</string>
     <string name="type_city_town">Zadejte město</string>
     <string name="type_postcode">Zadejte směrovací číslo</string>
@@ -2451,7 +2451,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="select_city">Zvolte město</string>
     <string name="select_postcode">Zvolte směrovací číslo</string>
     <string name="quick_action_auto_zoom">Automatické přiblížení mapy</string>
-    <string name="quick_action_auto_zoom_desc">Stisknutím akčního tlačítka zapnete/vypnete automatické přibližování mapy v závislosti na vaší rychlosti.</string>
+    <string name="quick_action_auto_zoom_desc">Stisknutím tohoto akčního tlačítka zapnete/vypnete automatické přibližování mapy v závislosti na vaší rychlosti.</string>
     <string name="quick_action_auto_zoom_on">Zapnout automatické přiblížení mapy</string>
     <string name="quick_action_auto_zoom_off">Vypnout automatické přiblížení mapy</string>
     <string name="quick_action_add_destination">Přidat cíl</string>
@@ -2459,15 +2459,15 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="quick_action_add_first_intermediate">Přidat první mezicíl</string>
     <string name="quick_action_osmbugs_show">Zobrazit OSM poznámky</string>
     <string name="quick_action_osmbugs_hide">Skrýt OSM poznámky</string>
-    <string name="quick_action_showhide_osmbugs_descr">Tlačítkem akce zobrazíte nebo skryjete OSM poznámky na mapě.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Klepnutím na toto tlačítko zobrazíte nebo skryjete OSM poznámky na mapě.</string>
     <string name="sorted_by_distance">Seřazeno podle vzdálenosti</string>
     <string name="search_favorites">Vyhledávání oblíbených</string>
-    <string name="hillshade_menu_download_descr">Pro zobrazení stínování budete muset stáhnout mapu stínování kopců tohoto regionu.</string>
-    <string name="hillshade_purchase_header">Chcete-li na mapě vidět stínování, musíte koupit a nainstalovat modul Vrstevnice</string>
+    <string name="hillshade_menu_download_descr">Stáhnout mapu stínování kopců tohoto regionu.</string>
+    <string name="hillshade_purchase_header">Nainstalovat modul Vrstevnic pro jejich zobrazení na mapě</string>
     <string name="hide_from_zoom_level">Skrýt od úrovně přiblížení</string>
-    <string name="srtm_menu_download_descr">Pro zobrazení vrstevnic budete muset stáhnout mapu vrstevnic tohoto regionu.</string>
+    <string name="srtm_menu_download_descr">Stáhnout mapu vrstevnic tohoto regionu.</string>
     <string name="shared_string_plugin">Modul</string>
-    <string name="srtm_purchase_header">Chcete-li na mapě vidět vrstevnice, musíte koupit a nainstalovat modul Vrstevnice</string>
+    <string name="srtm_purchase_header">Chcete-li na mapě vidět vrstevnice, musíte koupit a nainstalovat modul \'Vrstevnice\'</string>
     <string name="srtm_color_scheme">Barevné schéma</string>
     <string name="show_from_zoom_level">Zobrazit od úrovně přiblížení</string>
     <string name="routing_attr_allow_private_name">Povolit soukromý přístup</string>
@@ -2488,8 +2488,8 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="no_underlay">Bez podkladové vrstvy</string>
     <string name="subscribe_email_error">Chyba</string>
     <string name="subscribe_email_desc">Přihlaste se k odběru novinek o slevách aplikace a získejte 3 další mapy ke stažení!</string>
-    <string name="depth_contour_descr">Sada map obsahující hloubkové vrstevnice a body v moři.</string>
-    <string name="sea_depth_thanks">Děkujeme vám za nákup námořních hloubkových vrstevnic!</string>
+    <string name="depth_contour_descr">Hloubkové vrstevnice a mapové body v moři.</string>
+    <string name="sea_depth_thanks">Děkujeme vám za nákup námořních hloubkových vrstevnic</string>
     <string name="index_item_depth_contours_osmand_ext">Námořní hloubkové vrstevnice</string>
     <string name="index_item_depth_points_southern_hemisphere">Námořní hloubkové body jižní polokoule</string>
     <string name="index_item_depth_points_northern_hemisphere">Námořní hloubkové body severní polokoule</string>
@@ -2504,9 +2504,9 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="private_access_routing_req">Váš cíl se nachází v oblasti se soukromým přístupem. Chcete povolit přístup k soukromým silnicím pro tuto cestu?</string>
     <string name="restart_search">Spustit hledání znovu</string>
     <string name="increase_search_radius">Zvětšit okruh hledání</string>
-    <string name="nothing_found">Nic nalezeno :(</string>
+    <string name="nothing_found">Nic nalezeno</string>
     <string name="nothing_found_descr">Změňte vyhledávací dotaz nebo zvětšete okruh hledání.</string>
-    <string name="quick_action_showhide_osmbugs_title">Zobrazit/skrýt poznámky OSM</string>
+    <string name="quick_action_showhide_osmbugs_title">Přepnout zobrazení poznámek OSM</string>
     <string name="shared_string_permissions">Oprávnění</string>
     <string name="import_gpx_failed_descr">OsmAnd nemůže naimportovat soubor. Prosím zkontrolujte, zda má oprávnění číst soubor z tohoto umístění.</string>
     <string name="distance_moving">Vzdálenost opravená</string>
@@ -2514,13 +2514,11 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="open_mapillary">Otevřít Mapillary</string>
     <string name="shared_string_install">Instalovat</string>
     <string name="improve_coverage_mapillary">Zlepšit pokrytí fotografií s Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Můžete pořídit své vlastní fotografie nebo série fotografií a připojit je k tomuto místu na mapě. 
-\n 
-\nK tomu budete muset nainstalovat aplikaci Mapillary z obchodu Google Play.</string>
+    <string name="improve_coverage_install_mapillary_desc">Nainstalujte Mapillary a přidejte jednu nebo více fotografií na toto místo v mapě.</string>
     <string name="online_photos">On-line fotografie</string>
     <string name="shared_string_add_photos">Přidat fotografie</string>
     <string name="no_photos_descr">Nemáme fotografie pro toto umístění.</string>
-    <string name="mapillary_action_descr">Přispějte vlastními pohledy na toto místo přes Mapillary z úrovně ulice.</string>
+    <string name="mapillary_action_descr">Přispějte vlastním pohledem na toto místo přes Mapillary z úrovně ulice.</string>
     <string name="mapillary_widget_descr">Umožňuje rychle přispět do Mapillary.</string>
     <string name="mapillary_descr">On-line fotografie z ulic pro každého. Objevte místa, spolupracujte, zachyťte svět.</string>
     <string name="plugin_mapillary_descr">Fotografie z ulic pro každého. Objevte místa, spolupracujte, zachyťte svět.</string>
@@ -2531,7 +2529,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_reload">Znovu načíst</string>
     <string name="mapillary_menu_descr_tile_cache">Znovu načíst dlaždice pro zobrazení aktuálních dat.</string>
     <string name="mapillary_menu_title_tile_cache">Vyrovnávací paměť dlaždic</string>
-    <string name="wrong_user_name">Nesprávné uživatelské jméno!</string>
+    <string name="wrong_user_name">Nesprávné uživatelské jméno</string>
     <string name="shared_string_to">Do</string>
     <string name="mapillary_menu_date_from">Od</string>
     <string name="mapillary_menu_descr_dates">Zobrazit pouze přidané obrázky</string>
@@ -2541,7 +2539,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="mapillary_menu_title_username">Uživatelské jméno</string>
     <string name="mapillary_menu_filter_description">Můžete filtrovat snímky podle odesílatele nebo podle datumu. Filtry se použijí pouze pro detailní přiblížení.</string>
     <string name="store_tracks_in_monthly_directories">Ukládat zaznamenané trasy v adresářích po měsících</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Ukládat zaznamenané trasy v podadresářích podle měsíce záznamu (např. 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Ukládat zaznamenané trasy v podadresářích podle měsíce záznamu (např. 2018-01).</string>
     <string name="average">Průměr</string>
     <string name="of">%1$d z %2$d</string>
     <string name="ascent_descent">Stoupání/Klesání</string>
@@ -2549,7 +2547,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="max_min">Max/Min</string>
     
     <string name="min_max">Min/Max</string>
-    <string name="quick_action_resume_pause_navigation">Pokračovat/pozastavit navigaci</string>
+    <string name="quick_action_resume_pause_navigation">Pozastavit/pokračovat v navigaci</string>
     <string name="quick_action_resume_pause_navigation_descr">Stiskněte toto tlačítko na pozastavení, nebo pokračování navigace.</string>
     <string name="quick_action_show_navigation_finish_dialog">Zobrazit zprávu o ukončení navigace</string>
     <string name="quick_action_start_stop_navigation">Spustit/ukončit navigaci</string>
@@ -2607,7 +2605,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="show_direction">Indikace vzdálenosti</string>
     <string name="sort_by">Seřadit podle</string>
     
-    <string name="do_not_use_animations">Nepoužívat animace</string>
+    <string name="do_not_use_animations">Bez animací</string>
     <string name="do_not_use_animations_descr">Zakáže animace v aplikaci.</string>
     <string name="keep_showing_on_map">Stále zobrazovat na mapě</string>
     <string name="exit_without_saving">Ukončit bez uložení?</string>
@@ -2627,7 +2625,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     
     
     <string name="use_location">Použít umístění</string>
-    <string name="add_location_as_first_point_descr">Přidat svou polohu jako první bod do plánu ideální trasy.</string>
+    <string name="add_location_as_first_point_descr">Přidat svou polohu jako startovní bod do plánu ideální trasy.</string>
     <string name="my_location">Moje poloha</string>
     <string name="shared_string_finish">Dokončit</string>
     <string name="plan_route">Naplánovat trasu</string>
@@ -2648,20 +2646,20 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_markers">Značky</string>
     <string name="coordinates_format">Formát souřadnic</string>
     <string name="use_system_keyboard">Použít systémovou klávesnici</string>
-    <string name="fast_coordinates_input_descr">Zvolte formát souřadnicového vstupu. Můžete ho kdykoli změnit klepnutím na Možnosti.</string>
+    <string name="fast_coordinates_input_descr">Zvolte formát souřadnicového vstupu. Můžete ho kdykoli změnit klepnutím na \'Možnosti\'.</string>
     <string name="fast_coordinates_input">Rychlé vložení souřadnic</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Vyhnout se ledovým cestám, brodům</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Vyhnout se ledovým cestám a brodům.</string>
     <string name="show_passed">Zobrazit prošlé</string>
     <string name="hide_passed">Skrýt prošlé</string>
     <string name="marker_show_distance_descr">Vyberte, jak ukazovat vzdálenost a směr k mapovým značkám na obrazovce mapy:</string>
-    <string name="osn_modify_dialog_error">Došlo k výjimce: poznámka nebyla změněna</string>
+    <string name="osn_modify_dialog_error">Došlo k výjimce: Poznámka nebyla změněna</string>
     <string name="osn_modify_dialog_title">Upravit poznámku</string>
     <string name="context_menu_item_modify_note">Upravit poznámku OSM</string>
     <string name="make_round_trip_descr">Přidat kopii počátečního bodu jako cíl.</string>
     <string name="make_round_trip">Vytvořit okružní trasu</string>
     
-    <string name="import_gpx_file_description">může být importováno jako Oblíbené body nebo trasa.</string>
+    <string name="import_gpx_file_description">může být importováno jako Oblíbené, nebo trasa.</string>
     <string name="import_as_gpx">Importovat jako soubor GPX</string>
     <string name="import_as_favorites">Importovat jako Oblíbené</string>
     <string name="import_file">Importovat soubor</string>
@@ -2673,7 +2671,7 @@ Zobrazená oblast: %1$s x %2$s</string>
 	<string name="wrong_format">Chybný formát</string>
     <string name="shared_string_road">Cesta</string>
     <string name="show_map">Zobrazit mapu</string>
-    <string name="route_is_calculated">Trasa je vypočítaná</string>
+    <string name="route_is_calculated">Trasa vypočítána</string>
     <string name="round_trip">Okružní trasa</string>
     <string name="plan_route_no_markers_toast">Pro použití této funkce musíte přidat alespoň jednu značku .</string>
     <string name="release_2_8">\\022 Zcela přepracované mapové značky s vodítky a plánováním trasy 
@@ -2703,7 +2701,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Zobrazit vodicí čáry od vaší polohy k aktivním značkám.</string>
     <string name="show_arrows_descr">Zobrazit jednu nebo dvě šipky označující směr k aktivním značkám.</string>
     <string name="distance_indication_descr">Zvolte způsob zobrazení vzdálenosti k aktivním značkám.</string>
-    <string name="active_markers_descr">Zvolte, kolik ukazatelů směru bude zobrazeno.</string>
+    <string name="active_markers_descr">Zvolte počet ukazatelů směru k zobrazení.</string>
     <string name="digits_quantity">Počet desetinných míst</string>
     <string name="shared_string_right">Vpravo</string>
     <string name="shared_string_left">Vlevo</string>
@@ -2711,7 +2709,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_paste">Vložit</string>
     <string name="coordinate_input_accuracy_description">Automaticky přepnout na další pole po zadání %1$d desetinných míst.</string>
     <string name="coordinate_input_accuracy">%1$d číslic</string>
-    <string name="go_to_next_field">Přejít na další pole</string>
+    <string name="go_to_next_field">Další pole</string>
     <string name="rename_marker">Přejmenovat značku</string>
     <string name="tap_on_map_to_hide_interface_descr">Klepnutí na mapu přepne ovládací tlačítka a nástroje.</string>
     <string name="tap_on_map_to_hide_interface">Režim celé obrazovky</string>
@@ -2728,7 +2726,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="notes_by_date">Poznámky podle datumu</string>
     <string name="by_date">Podle datumu</string>
     <string name="by_type">Podle typu</string>
-    <string name="empty_state_markers_active_desc">Klepnutím nebo přidržením označte místa, pak klepněte na tlačítko značky s vlajkou.</string>
+    <string name="empty_state_markers_active_desc">Klepnutím nebo přidržením označte \'Místa\', pak klepněte na tlačítko značky s vlajkou.</string>
     <string name="modify_the_search_query">Upravit vyhledávací dotaz.</string>
     <string name="one_tap_active">Jedním klepnutím aktivní</string>
     <string name="release_3_0">\\022
@@ -2792,7 +2790,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="osm_notes">OSM poznámky</string>
     <string name="enter_the_file_name">Zadejte název souboru.</string>
     <string name="map_import_error">Chyba při importu mapy</string>
-    <string name="map_imported_successfully">Mapa úspěšně importována</string>
+    <string name="map_imported_successfully">Mapa byla importována</string>
     <string name="shared_string_current">Aktuální</string>
     <string name="last_intermediate_dest_description">Přidá poslední zastávku na cestě</string>
     <string name="first_intermediate_dest_description">Přidá první zastávku na cestě</string>
@@ -2801,7 +2799,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="toast_empty_name_error">Místo nemá žádný název</string>
     <string name="tunnel_warning">Blíží se tunel</string>
     <string name="show_tunnels">Tunely</string>
-<string name="make_as_start_point">Vytvořit jako počáteční bod</string>
+<string name="make_as_start_point">Nastavit toto jako počáteční bod</string>
     <string name="osm_recipients_label">Příjemci OSM</string>
     <string name="total_donations">Celkem přispěno</string>
     <string name="day_off_label">zavřeno</string>
@@ -2821,8 +2819,8 @@ Zobrazená oblast: %1$s x %2$s</string>
 	<string name="optional_point_name">Volitelný název bodu</string>
     <string name="transport_nearby_routes_within">Trasy v okruhu</string>
     <string name="transport_nearby_routes">POBLÍŽ</string>
-    <string name="distance_farthest">Vzdálenost: nejvzdálenější jako první</string>
-    <string name="distance_nearest">Vzdálenost: nejbližší jako první</string>
+    <string name="distance_farthest">Vzdálenost: Nejvzdálenější jako první</string>
+    <string name="distance_nearest">Vzdálenost: Nejbližší jako první</string>
     <string name="rendering_attr_whiteWaterSports_name">Divoká voda</string>
     <string name="osmand_extended_description_part2">GPS navigace • Můžete si vybrat mezi offline režimem (bez roamingových poplatků v zahraničí) a online režimem (rychlejší) • Hlasová navigace vás povede krok za krokem vaší cestou (nahraný nebo syntetizovaný hlas) • Při každém odchýlení se trasa přepočítá • Pomůže vám navádění do jízdních pruhů, zobrazení názvů ulic a předpokládaný čas příjezdu • Pro větší bezpečí se aplikace automaticky přepíná mezi denním a nočním režimem • Můžete si zapnout zobrazování rychlostních limitů a upozornění při jejich překročení • Přiblížení mapy se přizpůsobí rychlosti pohybu • Můžete hledat cíle podle adresy, typu (např. parkoviště, restaurace, hotel, čerpací stanice, muzeum) či podle geografických souřadnic • Do svého itineráře můžete přidávat mezicíle • Můžete si zaznamenat nebo nahrát GPX trasu a následovat ji</string>
     <string name="osmand_extended_description_part3">Mapa • Zobrazuje POI (body zájmu) ve vašem okolí • Mapa se otáčí podle směru vašeho pohybu (nebo podle kompasu) • Ukazuje, kde jste a kterým směrem se díváte • Svoji polohu můžete sdílet se svými přáteli • Důležitá místa si můžete uložit do složky Moje místa • Můžete si vybrat, jak se na mapě budou zobrazovat názvy: v angličtině, v místním jazyce nebo ve fonetickém přepisu • Zobrazuje specializované online dlaždice, satelitní mapy (z Bingu), různé překryvné informace jako navigační GPX trasy a další vrstvy s volitelnou průhledností</string>
