@@ -114,6 +114,7 @@ repositories {
             artifact "ivy/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
         }
     }
+    jcenter()
 }
 
 dependencies {
@@ -123,6 +124,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:27.1.0'
     compile 'com.android.support:design:27.1.0'
     compile 'commons-logging:commons-logging-api:1.1'
+    compile 'com.moparisthebest:junidecode:0.1.1'
 
     compile fileTree(include:  ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
 
