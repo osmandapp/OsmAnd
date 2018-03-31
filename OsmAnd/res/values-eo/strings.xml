@@ -2565,7 +2565,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="subscribe_email_error">Eraro</string>
     <string name="subscribe_email_desc">Abonu nian dissendoliston pri rabatoj de aplikaĵo kaj havigu 3 pliajn map-elŝutojn!</string>
     <string name="quick_action_auto_zoom">Aŭtomata map-skalado ek/for</string>
-    <string name="quick_action_auto_zoom_desc">Premado sur la ag-butono aŭtomate aktivigos/malaktivigos map-skaladon laŭ via rapido.</string>
+    <string name="quick_action_auto_zoom_desc">Premado sur tiu ĉi ag-butono aŭtomate aktivigos/malaktivigos map-skaladon laŭ via rapido.</string>
     <string name="quick_action_auto_zoom_on">Aktivigi aŭtomatan map-skaladon</string>
     <string name="quick_action_auto_zoom_off">Malaktivigi aŭtomatan map-skaladon</string>
     <string name="shared_string_paused">Paŭzigita</string>
@@ -2578,8 +2578,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="select_street">Elekti straton</string>
     <string name="shared_string_in_name">en %1$s</string>
     <string name="shared_string_overview">Sumigo</string>
-    <string name="animate_my_location">Eksterpoli mian pozicion</string>
-    <string name="animate_my_location_desc">Movbildigi mian pozicion dum navigado.</string>
+    <string name="animate_my_location">Movbildi mian pozicion</string>
+    <string name="animate_my_location_desc">Aktivigi animitan pligrandigadon de mapo al mia pozicio dum navigado.</string>
     <string name="favorite_group_name">Grupa nomo</string>
     <string name="change_color">Ŝanĝi koloron</string>
     <string name="edit_name">Redakti nomon</string>
@@ -2820,7 +2820,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="looking_for_tracks_with_waypoints">Serĉado de kursoj kun navigadpunktoj</string>
     <string name="shared_string_more_without_dots">Pli</string>
     <string name="empty_state_osm_edits">Krei aŭ redakti OSM-objektojn</string>
-    <string name="empty_state_osm_edits_descr">Krei aŭ redakti OSM-punktojn, krei aŭ komenti OSM-rimarkojn kaj kontribui per registritaj GPX-kursoj.</string>
+    <string name="empty_state_osm_edits_descr">Kreu aŭ redaktu OSM-punktojn, kreu aŭ komentu OSM-rimarkojn kaj kontribuu per registritaj GPX-spuroj.</string>
     <string name="shared_string_deleted">Forigita</string>
     <string name="shared_string_edited">Redaktita</string>
     <string name="shared_string_added">Aldonita</string>
