@@ -2667,7 +2667,7 @@ Proporciona un código completo</string>
     <string name="quick_action_showhide_osmbugs_title">Alternar notas de OSM</string>
     <string name="quick_action_osmbugs_show">Mostrar notas de OSM</string>
     <string name="quick_action_osmbugs_hide">Ocultar notas de OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Al pulsar el botón de acción se mostrarán u ocultarán las notas de OSM en el mapa.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Al pulsar este botón de acción se mostrarán u ocultarán las notas de OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenados por distancia</string>
     <string name="search_favorites">Buscar favoritos</string>
     <string name="restart_search">Reiniciar búsqueda</string>
@@ -3000,4 +3000,5 @@ Proporciona un código completo</string>
     <string name="nothing_found_in_radius">Nada encontrado dentro del radio:</string>
     <string name="shared_string_travel">Viajes</string>
     <string name="waypoints_removed_from_map_markers">Puntos de referencia borrados de los marcadores del mapa</string>
+    <string name="use_two_digits_longitude">Usar longitud de dos dígitos</string>
     </resources>
