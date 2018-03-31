@@ -157,14 +157,15 @@ public class BinaryMapDataObject {
 	
 	public int getSimpleLayer(){
 		if(mapIndex != null) {
-			for (int i = 0; i < additionalTypes.length; i++) {
-				if (mapIndex.positiveLayers.contains(additionalTypes[i])) {
-					return 1;
-				} else if (mapIndex.negativeLayers.contains(additionalTypes[i])) {
-					return -1;
+			if (additionalTypes != null) {
+				for (int i = 0; i < additionalTypes.length; i++) {
+					if (mapIndex.positiveLayers.contains(additionalTypes[i])) {
+						return 1;
+					} else if (mapIndex.negativeLayers.contains(additionalTypes[i])) {
+						return -1;
+					}
 				}
 			}
-			
 		}
 		return 0;
 	}

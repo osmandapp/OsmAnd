@@ -73,6 +73,10 @@
         <item name="android:textColor">?attr/contextMenuButtonColor</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
+    
+    <style name="FirstSplashScreenCustom" parent="OsmandLightTheme.NoActionbar">
+        <item name="android:windowBackground">@drawable/first_splash_screen_free</item>
+    </style>
 
     <style name="FirstSplashScreenPlus" parent="OsmandLightTheme.NoActionbar">
         <item name="android:windowBackground">@drawable/first_splash_screen_plus</item>

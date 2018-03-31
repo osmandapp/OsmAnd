@@ -4,24 +4,22 @@
 
     <application
         android:icon="@mipmap/icon_free"
-		android:label="@string/app_name_free"
-        tools:replace="android:icon, android:label">
-
+        android:label="@string/app_name_free"
+        tools:replace="android:icon">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:resource="@string/facebook_app_id"/>
         <activity
             android:name="net.osmand.plus.activities.MapActivity"
-            android:theme="@style/FirstSplashScreenFree"
+            android:theme="@style/FirstSplashScreenCustom"
             tools:replace="android:theme"/>
         <service
             android:name="net.osmand.plus.NavigationService"
-            tools:replace="android:process"
-            android:process="net.osmand"/>
-
+            android:process="net.osmand.freecustom"
+            tools:replace="android:process"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
-            tools:replace="android:authorities"
-            android:authorities="net.osmand.fileprovider"/>
+            android:authorities="net.osmand.freecustom.fileprovider"
+            tools:replace="android:authorities"/>
     </application>
 </manifest> 

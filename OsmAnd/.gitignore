@@ -6,6 +6,11 @@ gradlew.bat
 aarDependencies 
 libs/android*.jar
 libs/com.*.jar
+libs/org.*.jar
+libs/commons-logging-commons-logging-api-1.1.jar
+libs/fr.univ-valenciennes-bzip2-1.0.jar
+libs/it.unibo.alice.tuprolog-tuprolog-3.2.1.jar
+
 valgrind/
 bin/
 dist/
