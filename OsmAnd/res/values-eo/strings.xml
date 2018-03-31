@@ -16,14 +16,12 @@
     <string name="osm_live_not_active">Malaktiva</string>
     <string name="osm_live_enter_email">Bonvolu entajpi ĝustan retpoŝtadreson</string>
     <string name="osm_live_enter_user_name">Bonvolu entajpi publikan nomon</string>
-    <string name="osm_live_thanks">Dankon al ci por aboni aŭtomatajn ĝisdatigojn!</string>
+    <string name="osm_live_thanks">Dankon al ci por aboni tujajn map-ĝisdatigojn!</string>
     <string name="osm_live_region_desc">Parto de viaj donacoj estos sendita al OSM-uzantoj, kiuj sendas ŝanĝojn al mapoj de tiu regiono.</string>
     <string name="osm_live_subscription_settings">Abonaj agordoj</string>
     <string name="osm_live_ask_for_purchase">Bonvolu unue aĉeti abonon al OsmAnd-Live</string>
 
-    <string name="osm_live_header">Tiu ĉi abono aktivigas ĉiuhorajn ĝisdatigojn por ĉiuj mapoj en la mondo.
- Parto de enspezo revenos al la OSM-komunumo kaj estos pagita por iu ajn kontribuaĵo al OSM.
- Se vi ŝategas OsmAnd kaj OSM kaj vi volas subteni ilin, tio ĉi estas la plej bona kielo.</string>
+    <string name="osm_live_header">Tiu ĉi abono aktivigas ĉiuhorajn ĝisdatigojn por ĉiuj mapoj en la mondo. Parto de enspezo revenos al la OSM-komunumo kaj estos pagita por iu ajn kontribuaĵo al OSM. Se vi ŝategas OsmAnd kaj OSM kaj vi volas subteni ilin kaj estas subtenata de ili, tio ĉi estas la plej bona kielo.</string>
     
     <string name="select_map_marker">Elekti map-markon</string>
     <string name="map_markers_other">Aliaj markoj</string>
@@ -39,9 +37,7 @@
     <string name="download_files_error_not_enough_space">Mankas spaco!
  Bezonas spacon {3} MB provizore kaj {1} MB daŭre.
  Estas nur {2} MB disponebla spaco.</string>
-    <string name="download_files_question_space_with_temp">Ĉu vere elŝuti {0} dosiero(j)n?
- Bezonas spacon {3} MB provizore kaj {1} MB daŭre.
- (Estas {2} MB disponebla spaco.)</string>
+    <string name="download_files_question_space_with_temp">Ĉu vere elŝuti {0} dosiero(j)n? Bezonas spacon {3} MB provizore kaj {1} MB daŭre. (Estas {2} MB da disponebla spaco.)</string>
     <string name="download_files_question_space">Ĉu vere elŝuti {0} dosiero(j)n?
  Bezonas spacon {1} MB daŭre.
  (Estas {2} MB disponebla spaco.)</string>
@@ -79,7 +75,7 @@
     <string name="rendering_attr_hideIcons_name">Piktogramoj de interesejoj</string>
     <string name="item_removed">Elemento forigita</string>
     <string name="n_items_removed">elementoj forigitaj</string>
-    <string name="shared_string_undo_all">MALFARI ĈIUJN</string>
+    <string name="shared_string_undo_all">Malfari ĉiujn</string>
     <string name="starting_point">Komencpunkto</string>
     <string name="shared_string_not_selected">Neelektita</string>
     <string name="shared_string_type">Speco</string>
@@ -114,7 +110,7 @@
     <string name="av_audio_bitrate">Sona bitrapido</string>
     <string name="av_audio_bitrate_descr">Elekti bitrapidon de sondosiero.</string>
     <string name="please_specify_poi_type_only_from_list">Bonvolu difini ĝustan specon de interesejo aŭ transsalti tion ĉi.</string>
-    <string name="access_from_map_description">Menu-butono lanĉas stirpanelon, ne menuon.</string>
+    <string name="access_from_map_description">Menu-butono lanĉas stirpanelon, ne menuon</string>
     <string name="access_from_map">Aligi el mapo</string>
     <string name="show_on_start_description">‘Ek-butono rekte lanĉas map-ekranon.</string>
     <string name="copied_to_clipboard">Enpoŝigita</string>
@@ -149,15 +145,15 @@
     <string name="osn_comment_dialog_title">Aldoni komenton</string>
     <string name="osn_reopen_dialog_title">Remalfermi rimarkon</string>
     <string name="osn_close_dialog_title">Fermi rimarkon</string>
-    <string name="osn_add_dialog_success">Rimarko kreita sukcese</string>
+    <string name="osn_add_dialog_success">Kreis rimarkon</string>
     <string name="osn_add_dialog_error">Eraro okazis: rimarko ne kreita</string>
-    <string name="osn_close_dialog_success">Rimarko redaktita sukcese</string>
-    <string name="osn_close_dialog_error">Eraro okazis: ne povas redakti rimarkon</string>
+    <string name="osn_close_dialog_success">Fermis rimarkon</string>
+    <string name="osn_close_dialog_error">Eraro okazis: ne povas fermi rimarkon</string>
     <string name="osb_author_dialog_password">OSM-a pasvorto (malnepra)</string>
     <string name="osb_comment_dialog_message">Mesaĝo</string>
     <string name="osb_comment_dialog_author">Aŭtora nomo</string>
     <string name="osb_comment_dialog_error">Eraro okazis: ne povas aldoni komenton</string>
-    <string name="osb_comment_dialog_success">Komento aldonita sukcese</string>
+    <string name="osb_comment_dialog_success">Aldonis komenton</string>
     <string name="shared_string_commit">Enmeti</string>
 
     <string name="context_menu_item_delete_waypoint">Ĉu forigi GPX-navigadpunkton?</string>
@@ -178,14 +174,14 @@
     <string name="rendering_attr_hideProposed_name">Proponitaj objektoj</string>
     <string name="share_menu_location">Kunhavigi lokon</string>
     <string name="shared_string_send">Sendi</string>
-    <string name="world_map_download_descr">Monda bazmapo (kiu kovras tutan mondon ĉe etaj skaloj) mankas aŭ estas neĝisdata. Bonvolu konsideri elŝuti ĝin por havi vidon al tuta mondo.</string>
+    <string name="world_map_download_descr">Monda bazmapo (kiu kovras tutan mondon ĉe etaj skaloj) mankas aŭ estas neĝisdata. Bonvolu konsideri elŝuti ĝin por havi vidon al la tuta mondo.</string>
     <string name="map_downloaded">Mapo elŝutita</string>
-    <string name="map_downloaded_descr">Mapo de %1$s estas elŝutita, vi nun povas uzi ĝin.</string>
+    <string name="map_downloaded_descr">Nun vi povas uzi elŝutatan mapon de %1$s.</string>
     <string name="go_to_map">Montri mapon</string>
     <string name="simulate_initial_startup_descr">Agordi flagon, kiu indikas unuan starton de aplikaĵo, sed ne ŝanĝas aliajn agordojn.</string>
     <string name="simulate_initial_startup">Simuli unuan starton de aplikaĵo</string>
     <string name="favorite_category_name">Kategoria nomo</string>
-    <string name="favorite_category_dublicate_message">Difina nomo de kategorio jam ekzistas. Bonvolu elekti alian nomon.</string>
+    <string name="favorite_category_dublicate_message">Bonvolu uzi nomon de kategorio, kiu jam ne ekzistas.</string>
     <string name="favorite_category_add_new_title">Aldoni novan kategorion</string>
     <string name="regions">Regionoj</string>
     <string name="region_maps">Regionaj mapoj</string>
@@ -265,7 +261,7 @@
     <string name="min_km">min/km</string>
     <string name="shared_string_trip_recording">Registrado de kurso</string>
     <string name="shared_string_navigation">Navigi</string>
-    <string name="osmand_running_in_background">Laboranta fone</string>
+    <string name="osmand_running_in_background">Labori fone</string>
     <string name="gps_wake_up_timer">Vek-intervalo de GPS</string>
     <string name="favourites_edit_dialog_title">Ŝatataj informoj</string>
     <string name="simulate_your_location_stop_descr">Ĉesigi simuladon de pozicio.</string>
@@ -304,7 +300,7 @@
     <string name="rendering_value_pink_name">Rozkolora</string>
     <string name="rendering_value_brown_name">Bruna</string>
     <string name="rendering_value_translucent_purple_name">Violkolora diafana</string>
-    <string name="restart_is_required">Por tute apliki ŝanĝojn, vi devas permane restartigi aplikaĵon.</string>
+    <string name="restart_is_required">Permane restartigu la aplikaĵon por apliki ĉiujn ŝanĝojn.</string>
     <string name="light_theme">Hela</string>
     <string name="dark_theme">Malhela</string>
     <string name="lang_pms">Piemonta</string>
@@ -322,10 +318,10 @@
     <string name="lang_ml">Malajala</string>
     <string name="lang_lb">Luksemburga</string>
     <string name="lang_os">Oseta</string>
-    <string name="lang_nb">Norvega (Bokmål)</string>
+    <string name="lang_nb">Norvega Bokmål</string>
     <string name="lang_th">Taja</string>
     <string name="lang_te">Telegua</string>
-    <string name="lang_nn">Norvega (Nynorsk)</string>
+    <string name="lang_nn">Norvega Nynorsk</string>
     <string name="lang_new">Nepala</string>
     <string name="lang_ms">Malaja</string>
     <string name="lang_ht">Haitia kreola</string>
@@ -333,9 +329,9 @@
     <string name="lang_et">Estona</string>
     <string name="lang_ceb">Cebua</string>
     <string name="shared_string_import2osmand">Enporti al OsmAnd</string>
-    <string name="archive_wikipedia_data">Vi havas malnovajn malkongruajn Vikipediajn datumojn elŝutitajn. Ĉu vi volas arĥivigi ilin?</string>
+    <string name="archive_wikipedia_data">Vi havas malnovajn malkongruajn Vikipediajn datumojn. Ĉu vi volas arĥivigi ilin?</string>
     <string name="download_wikipedia_files">Ĉu vi volas elŝuti aldonajn Vikipediajn datumojn (%1$s MB) ?</string>
-    <string name="gps_network_not_enabled">Pozici-trova servo estas malaktiva. Ĉu vi volas aktivigi ĝin?</string>
+    <string name="gps_network_not_enabled">Pozicitrova servo estas malaktiva. Ĉu vi volas aktivigi ĝin?</string>
     <string name="disable_recording_once_app_killed">Preventi de aŭtomata protokolado</string>
     <string name="disable_recording_once_app_killed_descrp">Paŭzigi GPX-protokolado je halto de aplikaĵo (per lastaj aplikaĵoj). (Fona piktogramo de OsmAnd malaperas de Androida sciiga breto.)</string>
     <string name="read_full_article">Legi tutan artikolon (enrete)</string>
@@ -470,9 +466,9 @@
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-mapiga helpilo</string>
     <string name="shared_string_manage">Administri</string>
     <string name="agps_data_last_downloaded">Lasta elŝuto de A-GPS datumoj: %1$s</string>
-    <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo kaj aliaj) uzado de sciigoj pri rapid-kontroliloj estas kontraŭleĝa. Aŭtoroj de OsmAnd ne respondumos, se vi rompos leĝon. Bonvolu elekti ‘jes’ nur tiam kiam vi havas rajton por uzi tiun ĉi funkcion.</string>
+    <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo kaj aliaj) uzado de sciigoj pri rapid-kontroliloj estas kontraŭleĝa. OsmAnd ne respondumos, se vi rompos leĝon. Bonvolu elekti “jes” nur se vi estas permesata por uzi tiun ĉi eblon.</string>
     <string name="welcome_select_region">Por korekte prezenti trafiksignojn kaj regulojn, bonvolu elekti vian trafikan regionon:</string>
-    <string name="welcome_text">OsmAnd ebligas uzi tutmondajn mapojn kaj navigadon eksterrete!</string>
+    <string name="welcome_text">OsmAnd ebligas uzi tutmondajn mapojn kaj navigadon eksterrete.</string>
     <string name="current_route">Nuna kurso</string>
     <string name="osm_changes_added_to_local_edits">OSM-ŝanĝoj aldonitaj al loka ŝanĝaro</string>
     <string name="mark_to_delete">Marki por forigi</string>
