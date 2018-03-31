@@ -2634,7 +2634,7 @@ Proporciona un código completo</string>
     <string name="quick_action_replace_destination">Reemplazar destino</string>
     <string name="quick_action_add_first_intermediate">Añadir primer destino intermedio</string>
     <string name="quick_action_add_destination_desc">Pulsar el botón de acción para añadir un destino en el centro de la pantalla. Establecer previamente el destino a añadir como último destino intermedio.</string>
-    <string name="quick_action_replace_destination_desc">Pulsar el botón de acción para reemplazar el destino con la ubicación central de la pantalla.</string>
+    <string name="quick_action_replace_destination_desc">Pulsar este botón de acción, añadirá el destino de ruta en el centro de la pantalla. Cualquier destino previamente elegido, se moverá como último destino intermedio.</string>
     <string name="quick_action_add_first_intermediate_desc">Pulsar el botón de acción para añadir un primer punto intermedio en el centro de la pantalla.</string>
     <string name="shared_string_paused">Pausado</string>
     <string name="type_city_town">Escribe la ciudad o pueblo</string>
@@ -2667,7 +2667,7 @@ Proporciona un código completo</string>
     <string name="quick_action_showhide_osmbugs_title">Alternar notas de OSM</string>
     <string name="quick_action_osmbugs_show">Mostrar notas de OSM</string>
     <string name="quick_action_osmbugs_hide">Ocultar notas de OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Al pulsar este botón de acción se mostrarán u ocultarán las notas de OSM en el mapa.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Pulsar este botón de acción, mostrará u ocultará las notas de OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenados por distancia</string>
     <string name="search_favorites">Buscar favoritos</string>
     <string name="restart_search">Reiniciar búsqueda</string>
