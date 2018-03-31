@@ -292,7 +292,7 @@
     <string name="quick_action_add_destination">Add destination</string>
     <string name="quick_action_replace_destination">Replace destination</string>
     <string name="quick_action_add_first_intermediate">Add first intermediate</string>
-    <string name="quick_action_add_destination_desc">Tapping this action button will make the screen center the route destination, any previuosly selected destination will become the last intermediate destination.</string>
+    <string name="quick_action_add_destination_desc">Tapping this action button will make the screen center the route destination, any previously selected destination will become the last intermediate destination.</string>
     <string name="quick_action_replace_destination_desc">Tapping this action button will make the screen center the new route destination, replacing the previously selected destination (if any).</string>
     <string name="quick_action_add_first_intermediate_desc">Tapping this action button will make the screen center the first intermediate destination.</string>
     <string name="no_overlay">No overlay</string>
