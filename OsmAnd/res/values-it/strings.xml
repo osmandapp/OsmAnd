@@ -2871,9 +2871,9 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="ascendingly">ascendente</string>
     <string name="date_added">Data aggiunta</string>
     <string name="order_by">Ordina per:</string>
-    <string name="coordinates_format">Formato coordinate</string>
+    <string name="coordinates_format">Formato coordinata</string>
     <string name="use_system_keyboard">Utilizza la tastiera di sistema</string>
-    <string name="fast_coordinates_input_descr">Scegli il formato di immissione delle coordinate. Puoi sempre cambiarlo tappando su Opzioni.</string>
+    <string name="fast_coordinates_input_descr">Scegli il formato di immissione delle coordinate. Puoi sempre cambiarlo tappando su \'Opzioni.\'</string>
     <string name="fast_coordinates_input">Immissione rapida delle coordinate</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evita strade di ghiaccio e guadi</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evita strade di ghiaccio e guadi.</string>
@@ -2914,7 +2914,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
 <string name="osn_modify_dialog_error">Si è verificato un errore: la nota non è stata modificata</string>
     <string name="shared_string_road">Strada</string>
     <string name="show_map">Mostra la mappa</string>
-    <string name="route_is_calculated">Il percorso è calcolato</string>
+    <string name="route_is_calculated">Percorso calcolato</string>
     <string name="round_trip">Percorso circolare</string>
     <string name="plan_route_no_markers_toast">Devi aggiungere almeno un marcatore per utilizzare questa funzionalità.</string>
     <string name="wrong_input">Dati immessi errati</string>
@@ -2938,16 +2938,16 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="tap_on_map_to_hide_interface">Modalità a schermo intero</string>
     
     <string name="mark_passed">Marcatore superato</string>
-    <string name="import_gpx_file_description">può essere importato come Luogo Preferito oppure come file traccia.</string>
+    <string name="import_gpx_file_description">può essere importato come Preferito oppure come file traccia.</string>
     <string name="appearance_on_the_map">Visualizzazione nella mappa</string>
-    <string name="add_track_to_markers_descr">Scegli una traccia per aggiungerne i punti intermedi ai marcatori. (Saranno elencate solo tracce con punti intermedi.)</string>
+    <string name="add_track_to_markers_descr">I punti intermedi possono essere aggiunti ai marcatori selezionando una traccia che ne contiene.</string>
     <string name="add_favourites_group_to_markers_descr">Scegli una categoria di luoghi preferiti da aggiungere ai marcatori.</string>
     <string name="track_waypoints">Punti intermedi della traccia</string>
     <string name="favourites_group">Categoria di luoghi preferiti</string>
     <string name="add_group">Aggiungi un gruppo</string>
     <string name="add_group_descr">Puoi importare un gruppo dai preferiti o i punti intermedi di una traccia.</string>
     <string name="empty_state_markers_active">Crea i marcatori della mappa!</string>
-    <string name="empty_state_markers_active_desc">Tap lungo o breve nel luogo, poi tappa il pulsante bandiera del marcatore.</string>
+    <string name="empty_state_markers_active_desc">Tap lungo o breve su \'Luoghi\', poi tappa il pulsante bandiera del marcatore.</string>
     <string name="empty_state_markers_groups">Importa gruppi</string>
     <string name="empty_state_markers_groups_desc">Puoi importare, come marcatori, gruppi di luoghi preferiti o punti intermedi di tracce.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
@@ -2965,7 +2965,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_paste">Incolla</string>
     <string name="coordinate_input_accuracy_description">Spostati automaticamente nel campo successivo dopo l\'immissione di %1$d cifre decimali.</string>
     <string name="coordinate_input_accuracy">%1$d cifre</string>
-    <string name="go_to_next_field">Vai al campo successivo</string>
+    <string name="go_to_next_field">Campo successivo</string>
     <string name="rename_marker">Rinomina il marcatore</string>
     <string name="looking_for_tracks_with_waypoints">Cerco tracce con punti intermedi</string>
     <string name="shared_string_more_without_dots">Altro</string>
@@ -3023,7 +3023,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="copy_location_name">Copia il nome del punto/PDI</string>
     <string name="will_open_tomorrow_at">Aprirà domani alle</string>
     <string name="toast_empty_name_error">Il luogo non ha nome</string>
-<string name="make_as_start_point">Usalo come Punto di Partenza</string>
+<string name="make_as_start_point">Usalo come punto di partenza</string>
     <string name="shared_string_current">Attuale</string>
     <string name="last_intermediate_dest_description">Aggiungi l\'ultima fermata lungo il percorso</string>
     <string name="first_intermediate_dest_description">Aggiungi la prima fermata del percorso</string>
@@ -3035,7 +3035,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="gpx_file">File GPX</string>
     <string name="osc_file">File OSC</string>
     <string name="choose_file_type">Scelgi il tipo di file</string>
-    <string name="osm_edits_export_desc">Scegli il tipo di file da esportare: note OSM, PDI, o entrambi.</string>
+    <string name="osm_edits_export_desc">Scegli il tipo da esportare: note OSM, PDI, o entrambi.</string>
     <string name="all_data">Tutti i dati</string>
     <string name="osm_notes">Note OSM</string>
     <string name="total_donations">Donazioni totali</string>
@@ -3062,13 +3062,16 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="transport_nearby_routes">VICINO</string>
     <string name="enter_the_file_name">Immetti il nome del file.</string>
     <string name="map_import_error">Errore importazione mappa</string>
-    <string name="map_imported_successfully">Mappa importata correttamente</string>
+    <string name="map_imported_successfully">Mappa importata</string>
     <string name="winter_and_ski_renderer">Inverno e sci</string>
     <string name="touring_view_renderer">Vista turistica (contrasto e dettagli)</string>
     <string name="group_deleted">Gruppo cancellato</string>
     <string name="clear_all_intermediates">Cancella tutti i punti intermedi</string>
     <string name="osm_recipients_label">Riceventi OSM</string>
     <string name="waypoints_removed_from_map_markers">Punti intermedi rimossi dai marcatori della mappa</string>
-    <string name="nothing_found_in_radius">Nulla è stato trovato nel raggio :</string>
+    <string name="nothing_found_in_radius">Nulla è stato trovato nel raggio:</string>
     <string name="shared_string_total">Totale</string>
+    <string name="use_two_digits_longitude">"Usa  due cifre per la longitudine"</string>
+    <string name="shared_string_travel">Viaggio</string>
+    <string name="select_waypoints_category_description">Puoi aggiungere tutti i punti intermedi delle tracce o per categorie separate.</string>
     </resources>
