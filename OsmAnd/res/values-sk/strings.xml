@@ -2990,4 +2990,5 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_total">Spolu</string>
     <string name="clear_all_intermediates">Zmazať všetky prechodné body</string>
     <string name="shared_string_travel">Jazda</string>
+    <string name="use_two_digits_longitude">Použiť 2 číslice pre dĺžku</string>
     </resources>
