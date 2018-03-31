@@ -508,7 +508,7 @@ Lon: %2$s</string>
     <string name="shared_string_action_template">Agado {0}</string>
     <string name="shared_string_show_on_map">Montri en mapo</string>
     <string name="shared_string_collapse">Maletendi</string>
-    <string name="shared_string_add_to_favorites">Aldoni al ŝatataj</string>
+    <string name="shared_string_add_to_favorites">Aldoni al “ŝatataj”</string>
     <string name="shared_string_my_location">Mia pozicio</string>
     <string name="shared_string_my_favorites">Miaj ŝatataj</string>
     <string name="shared_string_currently_recording_track">Aktuale registrata spuro</string>
@@ -516,7 +516,7 @@ Lon: %2$s</string>
     <string name="track_segments">Kurs-sekcioj</string>
     <string name="track_points">Punktoj de kurso</string>
     <string name="shared_string_online_maps">Enretaj mapoj</string>
-	<string name="rename_failed">Alinomado malsukcesis.</string>
+	<string name="rename_failed">Fiaskis ŝanĝi nomon.</string>
     <string name="days_behind">tagoj antaŭ</string>
     <string name="back_to_map">Reen mapen</string>
     <string name="share_note">Kunhavigi noton</string>
@@ -715,10 +715,10 @@ Lon: %2$s</string>
 	<string name="srtm_plugin_name">Nivelkurboj</string>
 	<string name="osmand_srtm_long_description_1000_chars">Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivel-ombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj kaj ĉiuj scivolaj en reliefa strukturo de tero. 
 \n 
-\nLa mondaj datumoj (inter 70-a norda kaj 70-a suda grado de latitudo) estas bazitaj sur mezuroj de SRTM (Shuttle Radar Topography Mission) kaj de ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).</string>
+\nLa mondaj datumoj (inter 70° N kaj 70° S) estas bazitaj sur mezuroj de SRTM (Shuttle Radar Topography Mission) kaj de ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).</string>
     <string name="srtm_plugin_description">Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivel-ombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj, kaj ĉiuj scivolaj en reliefa strukturo de tero. (Bonvolu rimarki, ke datumoj de nivelkurboj kaj nivel-ombrumo estas elŝuteblaj aparte post instalado de kromprogramo.) 
 \n 
-\nLa mondaj datumoj (inter 70-a norda kaj 70-a suda grado de latitudo) estas bazitaj sur mezuroj de la SRTM (Shuttle Radar Topography Mission) kaj de la ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).</string>
+\nLa mondaj datumoj (inter 70° N kaj 70° S) estas bazitaj sur mezuroj de la SRTM (Shuttle Radar Topography Mission) kaj de la ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).</string>
     <string name="no_index_file_to_download">Elŝutoj ne trovitaj, bonvolu kontroli vian retkonekton.</string>
     <string name="select_index_file_to_download">Trovis nenion. Se vi ne povas trovi vian regionon, vi povas fari ĝin mem (rigardu http://osmand.net).</string>
     <string name="none_selected_gpx">Neniu GPX-dosiero elektita. Por elekti premtenu disponeblan kurson.</string>
@@ -1647,11 +1647,9 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
 \n 
 \nAktivigo de tiu ĉi map-vido ŝanĝas map-aspekton al ‘vintro kaj skiado’, montranta ĉiun terenon kovritan de neĝo. La vidon oni povas malaktivigi, per malaktivigi la kromprogramon tie ĉi, aŭ per ŝanĝi de ‘map-aspekto’ en la menuo ‘agordi mapon.</string>
     <string name="osmand_parking_plugin_name">Parkumeja pozicio</string>
-	<string name="osmand_parking_plugin_description">Tiu ĉi kromprogramo plifaciligas al vi memori kie via aŭto estas parkumata kaj kiom da parkumeja tempo restas (se ĝi estas limigita).
-
-Kaj la loko kaj tempo estas montrataj en la OsmAnd-a stirpanelo, kaj sur la fenestraĵo sur la mapekrano. Memorigo povas esti aldonita al la Androida kalendaro.</string>
+	<string name="osmand_parking_plugin_description">Tiu ĉi kromprogramo plifaciligas al vi registri kie via aŭto estas parkumata kaj kiom da parkumeja tempo restas (se ĝi estas limigita). Ambaŭ loko kaj tempo estas montrataj en la stirpanelo de OsmAnd kaj sur la fenestraĵo sur la mapekrano. Memorigo povas esti aldonita al la Androida kalendaro.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulilo de distanco kaj planilo</string>
-    <string name="osmand_distance_planning_plugin_description">Tiu ĉi kromprogramo liveras mapekranan fenestraĵon por krei kursojn tuŝante sur la mapo, aŭ por uzi aŭ modifi ekzistajn GPX-dosierojn por plani ekskurson aŭ mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX-dosieroj, kiuj oni povas estonte uzi por gvidado.</string>
+    <string name="osmand_distance_planning_plugin_description">Tiu ĉi kromprogramo liveras mapekranan fenestraĵon por krei kursojn – per tuŝi sur la mapo aŭ per uzi aŭ modifi ekzistajn GPX-dosierojn – kaj por por plani vojaĝon kaj mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX-dosierojn, kiujn oni povas estonte uzi por gvidado.</string>
     <string name="osm_settings">OSM-redaktilo</string>
     <string name="osm_editing_plugin_description">Per tiu ĉi kromprogramo OsmAnd povas esti uzata por kontribui al OSM per krei aŭ redakti OSM-interesejojn, per raporti aŭ komenti OSM-rimarkojn, per aldoni registritajn GPX-dosierojn. OSM estas komunuma, tutmonda, publika map-projekto. Por detaloj, legu: https://openstreetmap.org. Aktiva kontribuado estas laŭdinda, kaj vi povas kontribui senpere per OsmAnd, se vi entajpos viajn OSM-ajn ensalutilojn en la aplikaĵo.</string>
     <string name="debugging_and_development">OsmAnd-programistilo</string>
