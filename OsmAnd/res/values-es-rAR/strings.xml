@@ -945,7 +945,7 @@ Lon %2$s</string>
     <string name="bg_service_sleep_mode_on">Parar\n servicio en segundo plano</string>
     <string name="gps_wakeup_interval">Intervalo de activación del GPS: %s</string>
     <string name="int_continuosly">Continuamente</string>
-    <string name="screen_is_locked">Pulsa el icono del candado para desbloquear la pantalla</string>
+    <string name="screen_is_locked">Pulsar el icono del candado para desbloquear la pantalla</string>
     <string name="map_widget_top_text">Nombre de calle</string>
     <string name="map_widget_config">Configurar pantalla</string>
     <string name="map_widget_back_to_loc">Dónde estoy</string>
@@ -2302,7 +2302,7 @@ Lon %2$s</string>
     
     
     
-    <string name="gpx_no_tracks_title">Aún sin trazas</string>
+    <string name="gpx_no_tracks_title">Sin trazas aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir trazas a la carpeta</string>
     <string name="gpx_add_track">Añadir traza</string>
     <string name="gpx_appearance">Aspecto</string>
@@ -2580,7 +2580,6 @@ Proporciona un código completo</string>
     <string name="osmand_plus_extended_description_part6">Funciones de ciclismo y peatón • Visualización de caminos para caminar, senderismo y ciclismo,ideal para actividades al aire libre • Navegación especial y modos de visualización para bicicletas y peatones • (Opcional) Paradas de transporte público (colectivo, tranvía, tren) incluyendo nombres de líneas • (Opcional) Graba el viaje en forma local en un archivo GPX o con un servicio en línea • (Opcional) Muestra la velocidad y altitud • Mediante un complemento adicional, puedes activar la visualización de las curvas de nivel y el sombreado de colinas</string>
     <string name="osmand_plus_extended_description_part7">"Contribuye con OSM 
 \n
-\n 
 \n • Informa sobre problemas de datos en el mapa 
 \n
 \n • Sube trazas GPX a OSM directamente desde la aplicación 
