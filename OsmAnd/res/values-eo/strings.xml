@@ -468,7 +468,7 @@
     <string name="agps_data_last_downloaded">Lasta elŝuto de A-GPS datumoj: %1$s</string>
     <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo kaj aliaj) uzado de sciigoj pri rapid-kontroliloj estas kontraŭleĝa. OsmAnd ne respondumos, se vi rompos leĝon. Bonvolu elekti “jes” nur se vi estas permesata por uzi tiun ĉi eblon.</string>
     <string name="welcome_select_region">Por korekte prezenti trafiksignojn kaj regulojn, bonvolu elekti vian trafikan regionon:</string>
-    <string name="welcome_text">OsmAnd ebligas uzi tutmondajn mapojn kaj navigadon eksterrete.</string>
+    <string name="welcome_text">OsmAnd ebligas uzi tutmondajn mapojn kaj navigadon sen interreta konekto.</string>
     <string name="current_route">Nuna kurso</string>
     <string name="osm_changes_added_to_local_edits">OSM-ŝanĝoj aldonitaj al loka ŝanĝaro</string>
     <string name="mark_to_delete">Marki por forigi</string>
@@ -502,7 +502,7 @@ Lon: %2$s</string>
     <string name="shared_string_do_not_show_again">Ne montri plue</string>
     <string name="shared_string_remember_my_choice">Memori mian elekton</string>
     <string name="shared_string_refresh">Aktualigi</string>
-    <string name="shared_string_download_successful">Elŝutado sukcesis</string>
+    <string name="shared_string_download_successful">Elŝutis</string>
     <string name="shared_string_io_error">En/eliga eraro okazis</string>
     <string name="shared_string_unexpected_error">Neatendita eraro okazis</string>
     <string name="shared_string_action_template">Agado {0}</string>
