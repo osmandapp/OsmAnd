@@ -2622,10 +2622,10 @@
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) 是一個地圖和導航應用程式，可以免費存取全球性且高品質的OpenStreetMap（OSM）圖資。享有語音和視覺的導航、檢視 POI（興趣點）、建立和管理 GPX 軌跡、使用視覺化的等高線和海拔資訊，能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。 OsmAnd + 是付費應用程式版本。透過購買，您支援了該專案，資助新功能的開發並收到最新的更新。一些主要特點：</string>
     <string name="quick_action_auto_zoom_desc">輕點這個動作按鈕的開啟/關閉將會根據您的速度自動縮放地圖。</string>
     <string name="shared_string_overview">概要</string>
-    <string name="quick_action_replace_destination_desc">輕點動作按鈕把目的地，放回到螢幕的中央位置。</string>
+    <string name="quick_action_replace_destination_desc">輕點此動作按鈕，會在螢幕中央新增路線的目的地，替換先前所選擇的目的地(如果有的話)。</string>
     <string name="quick_action_add_first_intermediate_desc">輕點動作按鈕以在螢幕中央位置增加第一個中轉點。</string>
     <string name="depth_contour_descr">海洋等深線和航海標點地圖。</string>
-    <string name="quick_action_add_destination_desc">輕點此動作按鈕，以在螢幕中央位置增加一個路線的目的地，任何之前所選擇的目的地，將成為最後的中轉目的地。</string>
+    <string name="quick_action_add_destination_desc">輕點此動作按鈕，會在螢幕中央位置做出路線的目的地，任何之前所選擇的目的地，將成為最後的中轉目的地。</string>
     <string name="subscribe_email_desc">訂閱我們有關應用程式折扣的郵寄名單並獲得三次以上的地圖下載！</string>
     <string name="animate_my_location">動畫我的位置</string>
     <string name="animate_my_location_desc">在導航「我的位置」時啟用動畫地圖搖攝。</string>
