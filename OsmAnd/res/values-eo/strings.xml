@@ -7,7 +7,7 @@
     <string name="osm_editors_ranking">Ranglisto de OSM-redaktantoj</string>
     <string name="osm_live_subscription">Abono al OsmAnd-Live</string>
     <string name="osm_live_subscribe_btn">Ekaboni</string>
-    <string name="osm_live_email_desc">Ni bezonas tion por liveri al vi informojn pri kontribuaĵoj.</string>
+    <string name="osm_live_email_desc">Por informoj pri viaj kontribuoj.</string>
     <string name="osm_live_user_public_name">Publika nomo</string>
     <string name="osm_live_hide_user_name">Ne montri mian nomon en raportoj</string>
     <string name="osm_live_support_region">Subteni regionon</string>
@@ -211,11 +211,11 @@
     <string name="index_name_asia">Azio</string>
     <string name="index_name_oceania">Aŭstralio kaj Oceanio</string>
     <string name="index_name_other">Mondaj kaj temaj mapoj</string>
-    <string name="shared_string_move_up">Movi supren</string>
-    <string name="shared_string_move_down">Movi suben</string>
+    <string name="shared_string_move_up">Movi ↑</string>
+    <string name="shared_string_move_down">Movi ↓</string>
     <string name="finish_navigation">Fini navigadon</string>
     <string name="avoid_road">Eviti vojon</string>
-    <string name="storage_directory_readonly_desc">Nuntempe elektita datum-konservada dosierujo estas nurlega. La konservada dosierujo estas provizore agordita en interna memorejo. Bonvolu elekti ĝustan konservadan dosierujon.</string>
+    <string name="storage_directory_readonly_desc">Baskulis al interna konservejo, ĉar la elektita dosierujo por konservi datumojn estas nurlega. Bonvolu elekti skribeblan dosierujon.</string>
     <string name="storage_directory_shared">Komuna memoro</string>
     <string name="osm_live_month_cost_desc">Monata elspezo.</string>
     <string name="map_marker_1st">Unua map-marko</string>
@@ -444,7 +444,10 @@
     
     
     
-    <string name="anonymous_user_hint">Anonima uzanto ne povas:\n- krei grupojn;\n- samtempigi grupojn kaj aparatojn kun la servilo;\n- administri grupojn kaj aparatojn per persona stirpanelo en retejo.</string>
+    <string name="anonymous_user_hint">Anonima uzanto ne povas:
+\n- krei grupojn;
+\n- samtempigi grupojn kaj aparatojn kun la servilo;
+\n- administri grupojn kaj aparatojn per persona stirpanelo en la retejo.</string>
     <string name="report">Raportoj</string>
     
     
@@ -457,7 +460,7 @@
     
     
     
-    <string name="storage_permission_restart_is_required">Nun la aplikaĵo estas permesita por skribi en ekstera memorejo. Permana restarto de aplikaĵo nepras.</string>
+    <string name="storage_permission_restart_is_required">Nun la aplikaĵo estas permesita por skribi en ekstera memorejo, sed permana restarto de aplikaĵo nepras.</string>
     <string name="full_report">Plena raporto</string>
     <string name="open_street_map_login_and_pass">Uzantnomo kaj pasvorto al OpenStreetMap</string>
     <string name="application_dir">Datum-konservada dosierujo</string>
@@ -2130,7 +2133,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
 \n 
 \n kaj pli…</string>
     <string name="dist_away_from_my_location">Serĉi %1$s for</string>
-    <string name="confirmation_to_delete_history_items">Ĉu vi volas forigi elektitajn elementojn el historio?</string>
+    <string name="confirmation_to_delete_history_items">Ĉu vi volas forigi elektitajn elementojn el “historio”?</string>
     <string name="back_to_search">Reveni al serĉo</string>
     <string name="coords_search">Koordinat-serĉo</string>
     <string name="advanced_coords_search">Detala koordinat-serĉo</string>
