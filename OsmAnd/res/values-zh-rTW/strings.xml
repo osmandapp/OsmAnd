@@ -13,16 +13,16 @@
     <string name="target_point">目的地 %1$s</string>
     <string name="intermediate_point">中轉地點 %1$s</string>
 
-    <string name="context_menu_item_last_intermediate_point">增為最後一個的中轉地點</string>
+    <string name="context_menu_item_last_intermediate_point">增加為最後一個中轉地點</string>
     <string name="context_menu_item_first_intermediate_point">增加為第一個中轉地點</string>
-    <string name="add_as_last_destination_point">增加為最後一個的中轉地點</string>
+    <string name="add_as_last_destination_point">增加為最後一個中轉地點</string>
     <string name="add_as_first_destination_point">增加為第一個中轉地點</string>
     <string name="replace_destination_point">替換目的地</string>
     <string name="new_destination_point_dialog">您已經設定了一個目的地：</string>
     <string name="target_points">目的地</string>
     <string name="intermediate_point_too_far">中轉地點 %1$s 離最近的道路太遠。</string>
     <string name="arrived_at_intermediate_point">您已經抵達您的中轉地點</string>
-    <string name="context_menu_item_intermediate_point">增加為中轉地點</string>
+    <string name="context_menu_item_intermediate_point">新增為中轉地點</string>
     <string name="map_widget_intermediate_distance">中轉地點</string>
     <string name="ending_point_too_far">結束標點離最近的道路太遠。</string>
     <string name="add_tag">增加旗標</string>
@@ -2625,7 +2625,7 @@
     <string name="quick_action_replace_destination_desc">輕點此動作按鈕，會在螢幕中央新增路線的目的地，替換先前所選擇的目的地(如果有的話)。</string>
     <string name="quick_action_add_first_intermediate_desc">輕點此動作按鈕，會在螢幕中央做出第一個中轉地點。</string>
     <string name="depth_contour_descr">海洋等深線和航海標點地圖。</string>
-    <string name="quick_action_add_destination_desc">輕點此動作按鈕，會在螢幕中央做出路線的目的地，任何之前所選擇的目的地，將成為最後的中轉目的地。</string>
+    <string name="quick_action_add_destination_desc">輕點此動作按鈕，會在螢幕中央做出路線的目的地，任何之前所選擇的目的地，將成為最後的中轉地點。</string>
     <string name="subscribe_email_desc">訂閱我們有關應用程式折扣的郵寄名單並獲得三次以上的地圖下載！</string>
     <string name="animate_my_location">動畫我的位置</string>
     <string name="animate_my_location_desc">在導航「我的位置」時啟用動畫地圖搖攝。</string>
