@@ -2147,7 +2147,7 @@ Lon %2$s</string>
     <string name="access_shared_string_navigate_up">Subir</string>
     <string name="access_sort">Ordenar</string>
     <string name="access_disable_offroute_recalc">No recalcular la ruta, al salirme de la misma</string>
-    <string name="access_disable_offroute_recalc_descr">Sin recálculo automático de la ruta, al alejarse de la misma.</string>
+    <string name="access_disable_offroute_recalc_descr">No recalcular la ruta, al alejarse de la misma.</string>
     <string name="access_disable_wrong_direction_recalc">No recalcular la ruta para una dirección opuesta</string>
     <string name="access_disable_wrong_direction_recalc_descr">Previene el recálculo automático de ruta, al moverse en dirección opuesta.</string>
     <string name="access_smart_autoannounce">Aviso automático inteligente</string>
@@ -2362,13 +2362,13 @@ Lon %2$s</string>
     <string name="quick_action_add_osm_bug_descr">Pulsar este botón de acción, añadirá una nota de OSM en el centro de la pantalla.</string>
     <string name="quick_action_add_poi_descr">Pulsar este botón de acción, añadirá un PDI en el centro de la pantalla.</string>
     <string name="quick_action_navigation_voice_descr">Pulsar este botón de acción, des/activará las indicaciones por voz durante la navegación.</string>
-    <string name="quick_action_add_parking_descr">Pulsar este botón de acción, añadirá un lugar de estacionamiento en el centro de la pantalla.</string>
+    <string name="quick_action_add_parking_descr">Pulsar este botón de acción, añadirá la ubicación del estacionamiento en el centro de la pantalla.</string>
     <string name="favorite_autofill_toast_text">" se guardó como "</string>
     <string name="favorite_empty_place_name">Lugar</string>
     <string name="quick_action_duplicates">El nombre de la acción rápida ya existe, cambiado a «%1$s» para evitar duplicados.</string>
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
-    <string name="quick_action_showhide_favorites_descr">Pulsar el botón de acción mostrará u ocultará los favoritos en el mapa.</string>
-    <string name="quick_action_showhide_poi_descr">Pulsar el botón de acción mostrará u ocultará los PDI en el mapa.</string>
+    <string name="quick_action_showhide_favorites_descr">Pulsar este botón de acción, mostrará u ocultará los favoritos en el mapa.</string>
+    <string name="quick_action_showhide_poi_descr">Pulsar este botón de acción, mostrará u ocultará los PDI en el mapa.</string>
     <string name="quick_action_showhide_favorites_title">Alternar vista de favoritos</string>
     <string name="quick_action_favorites_show">Mostrar Favoritos</string>
     <string name="quick_action_favorites_hide">Ocultar Favoritos</string>
@@ -2411,7 +2411,7 @@ Lon %2$s</string>
 Proporciona un código completo</string>
     <string name="navigate_point_olc_info_area">OLC completo y válido.
 \nÁrea representada: %1$s x %2$s</string>
-    <string name="quick_action_page_list_descr">Pulsar el botón de acción mostrará la siguiente lista.</string>
+    <string name="quick_action_page_list_descr">Pulsar este botón de acción, mostrará la siguiente lista.</string>
     <string name="auto_split_recording_title">División automática de grabaciones en intervalos</string>
 	<string name="auto_split_recording_descr">Iniciar nuevo segmento en el lapso de 6 min, nueva traza en el lapso de 2 h, o nuevo archivo en el lapso más largo si la fecha se cambió.</string>
     <string name="release_2_6">• Nueva función: Botón de acción rápida 
