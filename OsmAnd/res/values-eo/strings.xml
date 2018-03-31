@@ -2044,7 +2044,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="show_free_version_banner">Montri reklamaĵon de senpaga versio</string>
     <string name="show_free_version_banner_description">Montri reklamaĵon de senpaga versio, eĉ se vi havas pagan version.</string>
     <string name="activate_seamarks_plugin">Bonvolu aktivigi Lumturojn kromprogramon</string>
-    <string name="activate_srtm_plugin">Bonvolu aktivigi SRTM kromprogramon</string>
+    <string name="activate_srtm_plugin">Bonvolu aktivigi la kromprogramon “nivelkurboj”</string>
     <string name="later">Poste</string>
     <string name="get_full_version">Plena versio</string>
     <string name="downloads">Elŝutoj</string>
@@ -2167,7 +2167,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="clear_tile_data">Forviŝi ĉiujn kahelojn</string>
     <string name="update_all_maps_now">Ĉu vi volas ĝisdatigi ĉiujn mapojn nun?</string>
     <string name="skip_map_downloading">Transsalti elŝuton de mapoj</string>
-    <string name="skip_map_downloading_desc">Vi havas neniun eksterretan mapon instalitan. Vi povus elekti iun el la listo aŭ elŝuti mapojn poste per la menuo - %1$s.</string>
+    <string name="skip_map_downloading_desc">Vi havas neniun eksterretan mapon instalitan. Vi povus elekti iun el la listo aŭ elŝuti mapojn poste per “menuo - %1$s”.</string>
     <string name="search_another_country">Elekti alian regionon</string>
     <string name="search_map">Serĉado de mapoj…</string>
     <string name="first_usage_wizard_desc">Bonvolu permesi al OsmAnd trovi vian pozicion por sugesti elŝuti mapojn de tiu regiono.</string>
@@ -2179,9 +2179,9 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="storage_place_description">Datum-memorejo de OsmAnd (por mapoj, kursoj, ktp.): %1$s.</string>
     <string name="give_permission">Permesi</string>
     <string name="allow_access_location">Permesi aliron al pozicio</string>
-    <string name="first_usage_greeting">Navigi kaj esplori novajn lokojn sen Interreta konekto</string>
+    <string name="first_usage_greeting">Navigi kaj esplori novajn lokojn sen interreta konekto</string>
     <string name="search_my_location">Trovi mian pozicion</string>
-    <string name="no_update_info">Ne montri ĝisdatigojn</string>
+    <string name="no_update_info">Ne montri novajn versiojn</string>
     <string name="no_update_info_desc">Ne serĉi pri novaj versioj aŭ OsmAnd-rilataj rabatoj.</string>
     <string name="get_it">Havigi ĝin</string>
     <string name="get_for">Havigi ĝin por %1$s</string>
@@ -2215,7 +2215,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="rendering_attr_surfaceIntegrity_name">Kohero de vojpavimo</string>
     <string name="rendering_attr_contourColorScheme_description">Kolor-skemo de nivelkurboj</string>
     <string name="save_track_min_speed">Minimuma rapido por registrado</string>
-    <string name="save_track_min_speed_descr">Filtrilo: elekti minimuman rapidon por punkto esti registrita.</string>
+    <string name="save_track_min_speed_descr">Filtrilo: ne registri punktojn sube tiu ĉi rapido.</string>
     <string name="save_track_min_distance">Minimuma delokiĝo por registri</string>
     <string name="save_track_min_distance_descr">Filtrilo: elekti minimuman distancon por punkto esti registrita.</string>
     <string name="save_track_precision">Minimuma akurateco de registrado</string>
@@ -2404,14 +2404,14 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_time_moving">Tempo de movado</string>
     <string name="shared_string_time_span">Tempa variejo</string>
     <string name="shared_string_max">Maks.</string>
-    <string name="shared_string_start_time">Komenca tempo</string>
-    <string name="shared_string_end_time">Fina tempo</string>
+    <string name="shared_string_start_time">Forveturo</string>
+    <string name="shared_string_end_time">Alveno</string>
     <string name="shared_string_color">Koloro</string>
     <string name="average_speed">Mezuma rapido</string>
     <string name="max_speed">Maksimuma rapido</string>
     <string name="gpx_track">Spuro</string>
     <string name="add_new_folder">Aldoni novan dosierujon</string>
-    <string name="points_delete_multiple_succesful">Sukcese forigis punkto(j)n.</string>
+    <string name="points_delete_multiple_succesful">Forigis punkto(j)n.</string>
     <string name="points_delete_multiple">%1$d punkto(j) estos forigitaj. Ĉu pluigi?</string>
     <string name="route_points_category_name">Turniĝoj sur tiu ĉi kurso</string>
     <string name="track_points_category_name">Gravaj punktoj sur tiu ĉi kurso</string>
@@ -2861,25 +2861,25 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="lang_lo">Laŭa</string>
     <string name="will_open_tomorrow_at">Estos malfermita morgaŭ je</string>
     <string name="rendering_attr_hidePOILabels_name">Etikedoj de interesejoj</string>
-    <string name="release_2_9">• Ekkonado de STOP-signoj nun konsideras direkton de veturo
+    <string name="release_2_9">• Plibonigita kunteksta menuo: montras kiam interesejoj (mal)fermiĝas
 \n
+\n• Transporta menuo: ĉiuj disponeblaj kursoj nun montriĝas ĉe supre 
+\n
+\n• Vikipedio: aldonis butonon por malfermi la originalan artikolon, plibonigita vidigo de artikoloj 
+\n
+\n• Kurso: aldonis eblon por interŝanĝi komencan punkton per fina je unu frapeto 
+\n
+\n• Notoj: aldonis ordigadon laŭ tipo aŭ dato 
+\n 
+\n• OSM-redaktoj: montras piktogramon kaj nomon de kategorion de interesejo, montras faritajn agojn 
+\n 
+\n• Nova rapida ekrano por enigi koordinatojn por rapide krei map-markojn 
+\n
+\n• Ekkonado de STOP-signoj nun konsideras direkton de veturo 
+\n 
 \n• Nova algoritmo liveranta sencplenajn valoroj de supreniro/malsupreniro por GPX-spuroj 
 \n 
 \n• Marŝada tempo konsideras profilon de tereno (regulo de Naismith)
-\n
-\n• Plibonigita kunteksta menuo: montras kiam interesejoj (mal)fermiĝas
-\n
-\n• Transporta menuo: ĉiuj disponeblaj kursoj nun montriĝas ĉe supre
-\n
-\n• Vikipedio: aldonis butonon por malfermi la originalan artikolon, plibonigita vidigo de artikoloj
-\n
-\n• Kurso: aldonis eblon por interŝanĝi komencan punkton per fina je unu frapeto
-\n
-\n• Notoj: aldonis ordigadon laŭ tipo aŭ dato
-\n
-\n• OSM-redaktoj: montras piktogramon kaj nomon de kategorion de interesejo, montras faritajn agojn
-\n
-\n• Nova rapida ekrano por enigi koordinatojn por rapide krei map-markojn
 \n</string>
     <string name="day_off_label">fermita</string>
     <string name="winter_and_ski_renderer">Vintro kaj skiado</string>
