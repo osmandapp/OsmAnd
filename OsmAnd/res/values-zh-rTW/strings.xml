@@ -433,9 +433,9 @@
 
 
     <string name="installing_new_resources">安裝新資料…</string>
-    <string name="internet_connection_required_for_online_route">選用線上導航服務，但是無可用的網路連線。</string>
-    <string name="tts_language_not_supported_title">該語言未支援</string>
-    <string name="tts_language_not_supported">選用的語言 Android TTS 引擎未支援，您要到 Play 商場找其它引擎嗎？否則使用之前設定的語言。</string>
+    <string name="internet_connection_required_for_online_route">選用線上導航服務，但是您沒有連接到網際網路。</string>
+    <string name="tts_language_not_supported_title">未支援的語言</string>
+    <string name="tts_language_not_supported">選用的語言 Android TTS 引擎未支援，您要到商場找其它引擎嗎？否則使用預設的 TTS 語言。</string>
     <string name="tts_missing_language_data_title">資料遺失</string>
     <string name="tts_missing_language_data">您選的語言未安裝，您要轉到 Play 商場安裝嗎？</string>
     <string name="gpx_option_reverse_route">反轉 GPX 方向</string>
@@ -447,22 +447,22 @@
     <string name="voice_stream_voice_call">通話音訊 (也會中斷汽車 BT 音響)</string>
     <string name="voice_stream_notification">通知音訊</string>
     <string name="voice_stream_music">多媒體/音樂音訊</string>
-    <string name="warning_tile_layer_not_downloadable">無法下載 %1$s 圖層，請嘗試重新安裝。</string>
+    <string name="warning_tile_layer_not_downloadable">應用程式無法下載 %1$s 圖層，請嘗試重新安裝。</string>
     <string name="overlay_transparency_descr">修改上圖層的透明度。</string>
     <string name="overlay_transparency">上圖層透明度</string>
     <string name="map_transparency_descr">修改底圖的透明度。</string>
     <string name="map_transparency">底圖透明度</string>
-    <string name="layer_underlay">下層地圖…</string>
+    <string name="layer_underlay">底層地圖…</string>
     <string name="map_underlay">下層地圖</string>
-    <string name="map_underlay_descr">選擇下層地圖。</string>
+    <string name="map_underlay_descr">選擇底層地圖。</string>
     <string name="layer_overlay">上層地圖…</string>
     <string name="map_overlay">上層地圖</string>
     <string name="map_overlay_descr">選擇上層地圖。</string>
-    <string name="tile_source_already_installed">地圖已安裝，設定將被更新。</string>
+    <string name="tile_source_already_installed">地圖已安裝，「設定」將被更新。</string>
     <string name="select_tile_source_to_install">選擇要安裝或更新的(圖磚)地圖。</string>
     <string name="internet_not_available">此操作無法使用，因為需要網路連線。</string>
     <string name="install_more">安裝更多…</string>
-    <string name="level_to_switch_vector_raster_descr">向量地圖使用最小的縮放比級別。</string>
+    <string name="level_to_switch_vector_raster_descr">任何超出此縮放級別的，使用點陣圖。</string>
     <string name="level_to_switch_vector_raster">最小向量縮放比級別</string>
 
 
@@ -2234,9 +2234,9 @@
     <string name="access_sort">分類</string>
     <string name="access_shared_string_navigate_up">往上</string>
     <string name="access_disable_offroute_recalc">當離開道路後，不要重算路線</string>
-    <string name="access_disable_offroute_recalc_descr">當離開路線後，不要自動重算路線。</string>
+    <string name="access_disable_offroute_recalc_descr">當離開路線後，不要重算路線。</string>
     <string name="access_disable_wrong_direction_recalc">對相反的方向不要重算路線</string>
-    <string name="access_disable_wrong_direction_recalc_descr">只是短暫朝相反的方向移動，防止自動重算路線。</string>
+    <string name="access_disable_wrong_direction_recalc_descr">只是朝相反的方向移動，不要重算路線。</string>
     <string name="access_smart_autoannounce">智慧自動播報</string>
     <string name="access_smart_autoannounce_descr">只在目標點的方向被更改時才通知。</string>
     <string name="access_autoannounce_period">自動播報期間</string>
@@ -2249,7 +2249,7 @@
     <string name="follow_us">追蹤我們</string>
     <string name="access_direction_audio_feedback">音訊方向</string>
     <string name="access_direction_audio_feedback_descr">用聲音指示目標點方向。</string>
-    <string name="access_direction_haptic_feedback">方向觸感反饋</string>
+    <string name="access_direction_haptic_feedback">觸覺指引</string>
     <string name="access_direction_haptic_feedback_descr">由振動指示目標點方向。</string>
     <string name="move_marker_bottom_sheet_title">移動地圖到要變更標記的位置</string>
     <!-- string name="lat_lon_pattern">緯度：%1$.5f 經度：%2$.5f</string -->
@@ -2317,7 +2317,7 @@
     <string name="storage_free_space">可用空間</string>
     <string name="storage_place_description">OsmAnd 資料存儲 (給地圖、軌跡等)：%1$s。</string>
     <string name="give_permission">授予權限</string>
-    <string name="allow_access_location">允許進入位置</string>
+    <string name="allow_access_location">允許位置的存取</string>
     <string name="first_usage_greeting">在沒有連線到網際網路的情況下，取得指引與探索新地點</string>
     <string name="search_my_location">尋找我的位置</string>
     <string name="no_update_info">不要顯示新版本</string>
@@ -2625,7 +2625,7 @@
     <string name="quick_action_replace_destination_desc">輕點動作按鈕把目的地，放回到螢幕的中央位置。</string>
     <string name="quick_action_add_first_intermediate_desc">輕點動作按鈕以在螢幕中央位置增加第一個中轉點。</string>
     <string name="depth_contour_descr">海洋等深線和航海標點地圖。</string>
-    <string name="quick_action_add_destination_desc">輕點動作按鈕以在螢幕中央位置增加一個目的地。先前設定之目的地成為最後的中轉目的地。</string>
+    <string name="quick_action_add_destination_desc">輕點此動作按鈕，以在螢幕中央位置增加一個路線的目的地，任何之前所選擇的目的地，將成為最後的中轉目的地。</string>
     <string name="subscribe_email_desc">訂閱我們有關應用程式折扣的郵寄名單並獲得三次以上的地圖下載！</string>
     <string name="animate_my_location">動畫我的位置</string>
     <string name="animate_my_location_desc">在導航「我的位置」時啟用動畫地圖搖攝。</string>
@@ -2980,4 +2980,5 @@
     <string name="nothing_found_in_radius">在半徑內沒找到任何東西：</string>
     <string name="shared_string_travel">旅行</string>
     <string name="waypoints_removed_from_map_markers">已從地圖標記移除航點</string>
+    <string name="use_two_digits_longitude">使用兩位數的經度</string>
     </resources>
