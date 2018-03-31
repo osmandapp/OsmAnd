@@ -6,7 +6,7 @@
     <string name="private_access_routing_req">Ваш пункт назначения находится на частной территории. Вы хотите разрешить доступ к частным дорогам для этой поездки?</string>
     <string name="restart_search">Искать снова</string>
     <string name="increase_search_radius">Увеличить радиус поиска</string>
-    <string name="nothing_found">Ничего не найдено :(</string>
+    <string name="nothing_found">Ничего не найдено</string>
     <string name="nothing_found_descr">Изменить запрос или увеличить радиус поиска.</string>
     <string name="quick_action_showhide_osmbugs_title">Показать/скрыть заметки OSM</string>
     <string name="quick_action_osmbugs_show">Показать заметки OSM</string>
@@ -2442,9 +2442,9 @@
     <string name="quick_action_start_stop_navigation">Запуск/остановка навигации</string>
     <string name="quick_action_start_stop_navigation_descr">Нажмите эту кнопку, чтобы начать или остановить навигацию.</string>
     <string name="store_tracks_in_monthly_directories">Сохранять записанные треки в папках помесячно</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Сохранять записанные треки в подпапках с записью месяца (например, 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Сохранять записанные треки в подпапках с записью месяца (например, 2018-01).</string>
     <string name="mapillary_menu_title_tile_cache">Кэш тайлов</string>
-    <string name="wrong_user_name">Неверное имя пользователя!</string>
+    <string name="wrong_user_name">Неверное имя пользователя</string>
     <string name="mapillary_menu_descr_dates">Просмотр только добавленных фотографий</string>
     <string name="mapillary_menu_title_dates">Дата</string>
     <string name="mapillary_menu_descr_username">Просмотр только фотографий, добавленных</string>
@@ -2468,7 +2468,7 @@
     <string name="moving_time">Время в движении</string>
     <string name="max_min">Макс/Мин</string>
     <string name="min_max">Мин/Макс</string>
-    <string name="quick_action_resume_pause_navigation">Возобновить/приостановить навигацию</string>
+    <string name="quick_action_resume_pause_navigation">Пауза/возобновление навигации</string>
     <string name="mapillary_menu_descr_tile_cache">Перезагрузка тайлов для отображения актуальных данных.</string>
     <string name="mapillary_menu_edit_text_hint">Введите имя пользователя</string>
     <string name="shared_string_reset">Сбросить</string>
@@ -2478,9 +2478,7 @@
     <string name="mapillary_menu_filter_description">Вы можете фильтровать фотографии по отправителю или по дате. Фильтры применяются только для больших масштабов.</string>
     <string name="import_gpx_failed_descr">OsmAnd не удается импортировать файл. Проверьте имеет ли OsmAnd разрешение на чтение файла из его местоположения.</string>
     <string name="distance_moving">Откорректированное расстояние</string>
-    <string name="improve_coverage_install_mapillary_desc">Вы можете взять ваши собственные фотографии или серии фотографий и прикрепить их к этому месту на карте.
-\n
-\nДля этого Вам необходимо установить с Google Play маркета приложение Mapillary.</string>
+    <string name="improve_coverage_install_mapillary_desc">Установите Mapillary, чтобы добавить одну или несколько фотографий к этому месту на карте.</string>
     <string name="route_altitude">Высота маршрута</string>
     <string name="enter_gpx_name">Имя GPX файла:</string>
     <string name="show_on_map_after_saving">Показать на карте после сохранения</string>
@@ -2512,7 +2510,7 @@
     <string name="move_all_to_history">Переместить все в историю</string>
     <string name="sort_by">Сортировать по</string>
     
-    <string name="do_not_use_animations">Не использовать анимацию</string>
+    <string name="do_not_use_animations">Без анимации</string>
     <string name="do_not_use_animations_descr">Отключение анимации в приложении.</string>
     <string name="exit_without_saving">Выйти без сохранения?</string>
     <string name="save_as_route_point">Сохранить как точки маршрута</string>
@@ -2538,7 +2536,7 @@
     <string name="coordinate_input">Ввод координат</string>
     <string name="marker_save_as_track">Сохранить как трек</string>
     <string name="move_to_history">Переместить в историю</string>
-    <string name="group_will_be_removed_after_restart">Группа будет удалена после следующего перезапуска приложения.</string>
+    <string name="group_will_be_removed_after_restart">Группа будет отключена при следующем запуске приложения.</string>
     <string name="show_arrows_on_the_map">Показывать стрелки на карте</string>
     <string name="descendingly">по убыванию</string>
     <string name="ascendingly">по возрастанию</string>
@@ -2635,12 +2633,12 @@
     <string name="show_guide_line_descr">Отображать направляющие линии от вашего местоположения до активных маркеров.</string>
     <string name="show_arrows_descr">Отображать одну или две стрелки, указывающие направление на активные маркеры.</string>
     <string name="distance_indication_descr">Выберите способ отображения расстояния до активных маркеров.</string>
-    <string name="active_markers_descr">Выберите сколько отображать индикаторов направления.</string>
+    <string name="active_markers_descr">Выберите количество индикаторов направления для отображения.</string>
     <string name="digits_quantity">Количество десятичных цифр</string>
     <string name="shared_string_paste">Вставить</string>
     <string name="coordinate_input_accuracy_description">Автопереход на следующее поле после ввода %1$d цифр после десятичной точки.</string>
     <string name="coordinate_input_accuracy">%1$d цифр</string>
-    <string name="go_to_next_field">Перейти к следующему полю</string>
+    <string name="go_to_next_field">Следующее поле</string>
     <string name="rename_marker">Переименовать маркер</string>
     <string name="tap_on_map_to_hide_interface">Полноэкранный режим</string>
     <string name="mark_passed">Отметить пройденным</string>
@@ -2663,7 +2661,7 @@
 	<string name="waypoints_added_to_map_markers">Путевые точки добавлены в маркеры карты</string>
 	<string name="route_is_calculated">Маршрут рассчитан</string>
     <string name="round_trip">Путешествие</string>
-    <string name="add_location_as_first_point_descr">Добавить ваше местоположение как первую точку при планировании маршрута.</string>
+    <string name="add_location_as_first_point_descr">Добавить ваше местоположение как точку старта при планировании маршрута.</string>
     <string name="is_saved">сохранено</string>
     <string name="show_passed">Показывать пройденные</string>
     <string name="hide_passed">Скрыть пройденные</string>
