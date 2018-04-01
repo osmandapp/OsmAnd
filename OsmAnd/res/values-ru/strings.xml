@@ -346,7 +346,7 @@
     <string name="safe_mode_description">Запустить приложение в безопасном режиме (замедляет работу приложения, используя только Android функции).</string>
     <string name="safe_mode">Безопасный режим</string>
     <string name="native_library_not_running">Приложение запущено в безопасном режиме (отключите в Настройках).</string>
-    <string name="background_service_is_enabled_question">Фоновый режим все еще запущен. Вы хотите прервать его тоже?</string>
+    <string name="background_service_is_enabled_question">OsmAnd все еще работает в фоновом режиме. Вы хотите его остановить?</string>
     <string name="close_changeset">Закрыть changeset</string>
     <string name="zxing_barcode_scanner_not_found">Приложение ZXing Barcode Scanner не найдено. Искать в Google Play?</string>
     <string name="non_optimal_route_calculation">Быстрое построение маршрута (возможно неоптимально)</string>
@@ -432,7 +432,7 @@
     <string name="index_name_tts_voice">Голосовые данные (TTS)</string>
     <string name="amenity_type_osmwiki">Википедия (локально)</string>
     <string name="amenity_type_user_defined">Пользовательские</string>
-    <string name="fav_export_confirmation">Файл с избранными уже существует. Вы хотите его заменить?</string>
+    <string name="fav_export_confirmation">Файл, содержащий ранее экспортированное избранное, уже существует. Вы хотите его заменить?</string>
     <string name="profile_settings">Настройка профиля</string>
     <string name="settings_preset">Профиль по умолчанию</string>
     <string name="settings_preset_descr">Выберите профиль работы приложения (в каждом профиле настройки хранятся отдельно).</string>
@@ -776,7 +776,7 @@
     <string name="update_poi_no_offline_poi_index">В данной области нет локальных POI</string>
     <string name="update_poi_is_not_available_for_zoom">Обновление POI не доступно на мелких масштабах</string>
     <string name="context_menu_item_update_poi">Обновить POI</string>
-    <string name="context_menu_item_update_map_confirm">Вы действительно хотите обновить локальные данные, загрузив их из Интернета?</string>
+    <string name="context_menu_item_update_map_confirm">Вы хотите обновить локальные данные из интернета?</string>
     <string name="search_history_city">Город:\n {0}</string>
     <string name="search_history_street">Улица:\n {0}, {1}</string>
     <string name="search_history_int_streets">Пересечение улиц: {0} x {1} в {2}</string>
@@ -797,7 +797,7 @@
     <string name="router_service_descr">Выберите онлайн или оффлайн сервис для прокладки маршрута.</string>
     <string name="router_service">Прокладка маршрута</string>
     <string name="sd_dir_not_accessible">Каталог для хранения данных на SD-карте не доступна!</string>
-    <string name="download_question">Вы хотите загрузить {0} - {1} ?</string>
+    <string name="download_question">Загрузить {0} - {1} ?</string>
     <string name="download_question_exist">Локальная карта для {0} уже существует ({1}). Хотите ее обновить ({2}) ?</string>
     <string name="address">Адрес</string>
     <string name="shared_string_download_successful">Загрузка завершена успешно</string>
@@ -941,7 +941,7 @@
     <string name="poi_edit_title">Редактирование POI</string>
     <string name="poi_create_title">Добавление POI</string>
     <string name="poi_error_poi_not_found">Узел не найден или объект состоит из нескольких узлов, что не поддерживается.</string>
-    <string name="poi_remove_confirm_template">Вы действительно хотите удалить {0}?</string>
+    <string name="poi_remove_confirm_template">Удалить {0} (введите комментарий)?</string>
     <string name="poi_remove_title">Удаление POI</string>
     <string name="poi_remove_success">POI успешно удалена</string>
     <string name="poi_action_add">добавления</string>
@@ -1201,7 +1201,7 @@
     <string name="clear_dest_confirm">Вы уверены, что хотите удалить пункт назначения (и промежуточные пункты)?</string>
     <string name="precise_routing_mode">Точный маршрут (alpha)</string>
     <string name="support_new_features_descr">Пожертвуйте, чтобы увидеть новые опции реализованными в приложении.</string>
-    <string name="precise_routing_mode_descr">Включите, для расчета точных маршрутов без затруднений. Все еще ограниченн расстоянием и медленный.</string>
+    <string name="precise_routing_mode_descr">Расчитывайте точные маршруты без затруднений. Имеются ограничения на расстояние и быстродействие.</string>
     <string name="download_hillshade_maps">Затенение рельефа</string>
     <string name="av_use_external_camera_descr">Использовать системное приложение для фото.</string>
     <string name="av_use_external_camera">Использовать приложение Камера</string>
@@ -1452,7 +1452,7 @@
     <string name="keep_informing_descr">Повторять навигационные инструкции с регулярными интервалами.</string>
     <string name="keep_informing">Повторять навигационные инструкции</string>
     <string name="arrival_distance">Объявление прибытия</string>
-    <string name="arrival_distance_descr">Как скоро вы хотите объявить о прибытии?</string>
+    <string name="arrival_distance_descr">Как скоро следует сообщать о прибытии?</string>
     
     <string name="share_fav_subject">Избранные точки расшаренные через OsmAnd</string>
     <string name="use_points_as_intermediates">Рассчитать маршрут между точками</string>
@@ -1924,7 +1924,7 @@
     <string name="read_full_article">Читать полный текст статьи (онлайн)</string>
     <string name="shared_string_import2osmand">Импорт в OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Вы собираетесь удалить %1$d заметок. Вы уверены?</string>
-    <string name="gps_network_not_enabled">Служба определения координат не включена. Вы хотите включить ее?</string>
+    <string name="gps_network_not_enabled">Служба определения местоположения отключена. Включить?</string>
     <string name="disable_recording_once_app_killed_descrp">При завершении приложения (через последние приложения) запись GPX будет поставлена на паузу. (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
     <string name="download_wikipedia_files">Хотите загрузить дополнительные данные Википедии (%1$s Мб) ?</string>
     <string name="lang_es_ar">Испанский (аргентинский)</string>
@@ -1982,7 +1982,7 @@
     <string name="do_you_like_osmand">Нравится ли вам приложение?</string>
     <string name="rate_this_app">Оценить приложение</string>
     <string name="rate_this_app_long">Пожалуйста, дайте оценку OsmAnd на Google Play</string>
-    <string name="user_hates_app_get_feedback_long">Пожалуйста скажите нам что вы хотите изменить в этом приложении.</string>
+    <string name="user_hates_app_get_feedback_long">Сообщите нам что вы хотите изменить в этом приложении.</string>
     <string name="rendering_attr_currentTrackColor_name">Цвет трека GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">Толщина трека GPX</string>
     <string name="no_updates_available">Нет доступных обновлений</string>
@@ -2067,7 +2067,7 @@
     <string name="downloads">Загрузки</string>
     <string name="show_free_version_banner">Показывать баннер бесплатной версии</string>
     <string name="show_free_version_banner_description">Показывать баннер бесплатной версии даже в платной версии.</string>
-    <string name="confirm_download_roadmaps">Вы уверены, что хотите скачать карту автодорог, хотя у вас уже есть стандартная (полная) карта?</string>
+    <string name="confirm_download_roadmaps">В карте дорог не необходимости, так как у вас уже есть стандартная (полная) карта. Загрузить в любом случае?</string>
     <string name="value_downloaded_of_max">%1$.1f из %2$.1f Мб</string>
     <string name="file_size_in_mb">%.1f МБ</string>
     <string name="update_all">Обновить все (%1$s МБ)</string>
@@ -2436,7 +2436,7 @@
     <string name="mapillary_descr">Уличные онлайн фотографии для всех. Открывайте для себя места, сотрудничайте, снимайте мир.</string>
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Уличные фотографии для всех. Открывайте для себя места, сотрудничайте, снимайте мир.</string>
-    <string name="save_poi_too_many_uppercase">Название содержит слишком много заглавных букв. Вы действительно хотите продолжить?</string>
+    <string name="save_poi_too_many_uppercase">Название содержит слишком много заглавных букв. Вы хотите продолжить?</string>
     <string name="quick_action_resume_pause_navigation_descr">Нажмите эту кнопку, чтобы приостановить или возобновить навигацию.</string>
     <string name="quick_action_show_navigation_finish_dialog">Показывать диалог завершения навигации</string>
     <string name="quick_action_start_stop_navigation">Запуск/остановка навигации</string>
