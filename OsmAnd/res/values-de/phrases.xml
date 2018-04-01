@@ -3791,4 +3791,7 @@
 <string name="synonyms_poi_fuel">Tankstelle;Tankanlage;Tankstation</string>
 
 	<string name="synonyms_poi_nightclub">Disco;Disko;Diskothek</string>
-	</resources>
+	<string name="poi_amusement_arcade">Spielhalle</string>
+	<string name="poi_adult_gaming_centre">Spielkasino für Erwachsene</string>
+
+</resources>
