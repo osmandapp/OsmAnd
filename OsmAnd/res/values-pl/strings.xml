@@ -2065,7 +2065,7 @@ Długość %2$s</string>
     <string name="contact_us">Kontakt</string>
     <string name="map_legend">Legenda mapy</string>
     <string name="save_poi_without_poi_type_message">Zapisać użyteczne miejsce bez określonego rodzaju?</string>
-    <string name="access_from_map_description">Wyświetla kokpit zamiast menu.</string>
+    <string name="access_from_map_description">Przycisk menu uruchamia kokpit zamiast menu.</string>
     <string name="access_from_map">Dostęp z mapy</string>
     <string name="copied_to_clipboard">Skopiowane do schowka</string>
     <string name="release_2_2">\\u2022 Nowe menu kontekstowe, przystosowane do wybierania lokacji na mapie oraz na innych ekranach
@@ -2295,12 +2295,12 @@ Długość %2$s</string>
     <string name="rendering_value_bold_name">Gruby</string>
     <string name="access_no_destination">Nie ustalono celu</string>
     <string name="access_disable_offroute_recalc">Utrzymywanie trasy po zboczeniu z niej</string>
-    <string name="access_disable_offroute_recalc_descr">Brak automatycznego przeliczania trasy po zjechaniu z trasy.</string>
+    <string name="access_disable_offroute_recalc_descr">Brak ponownego przeliczania trasy po zjechaniu z trasy.</string>
     <string name="map_widget_magnetic_bearing">Orientacja magnetyczna</string>
     <string name="map_widget_bearing">Orientacja względna</string>
     <string name="access_disable_wrong_direction_recalc">Utrzymywanie trasy po obraniu niewłaściwego kierunku</string>
     <string name="use_osm_live_routing_description">Włącza nawigację dla bieżących aktualizacji mapy.</string>
-	<string name="access_disable_wrong_direction_recalc_descr">Zapobiega automatycznemu wyznaczaniu nowej trasy podczas poruszania się w niewłaściwym kierunku.</string>
+	<string name="access_disable_wrong_direction_recalc_descr">Brak ponownego wyznaczania nowej trasy podczas poruszania się w niewłaściwym kierunku.</string>
     <string name="map_widget_battery">Stan akumulatora</string>
     <string name="access_direction_audio_feedback_descr">Wskazuje kierunek do celu używając dźwięku.</string>
     <string name="access_direction_audio_feedback">Polecenia dźwiękowe</string>
@@ -2415,13 +2415,13 @@ Długość %2$s</string>
     <string name="rendering_attr_contourColorScheme_name">Zestaw kolorów poziomic</string>
     <string name="rendering_attr_surfaceIntegrity_name">Spójność nawierzchni dróg</string>
     <string name="christmas_poi">Bożonarodzeniowe miejsca</string>
-    <string name="save_track_min_speed_descr">Filtr: minimalna prędkość ruchu, aby zarejestrować punkt.</string>
+    <string name="save_track_min_speed_descr">Filtr: Brak rejestrowania punktów poniżej tej prędkości.</string>
     <string name="rendering_attr_contourColorScheme_description">Zestaw kolorów poziomic</string>
     <string name="save_track_min_speed">Minimalna prędkość rejestrowania</string>
     <string name="save_track_min_distance">Filtr: minimalna zmiana położenia, aby zarejestrować punkt</string>
     <string name="save_track_min_distance_descr">Filtr: ustaw minimalną odległość od poprzedniego punktu do rejestracji.</string>
     <string name="save_track_precision">Minimalna dokładność rejestrowania</string>
-    <string name="save_track_precision_descr">Filtr: rejestruje położenie po osiągnięciu zadanej dokładności.</string>
+    <string name="save_track_precision_descr">Filtr: Brak rejestrowania, jeśli ta dokładność nie została osiągnięta.</string>
     <string name="christmas_desc">Oczekując Świąt Bożego Narodzenia i Nowego Roku, możesz włączyć wyświetlanie użytecznych miejsc związanych ze Świętami: choinki, jarmarki, itp.</string>
     <string name="christmas_desc_q">Wyświetlać świąteczne miejsca?</string>
     <string name="shared_string_continue">Kontynuuj</string>
@@ -2646,10 +2646,10 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_auto_zoom_off">Wyłącz automatyczne przybliżanie mapy</string>
     <string name="quick_action_auto_zoom">Przełącz automatyczne przybliżanie</string>
     <string name="quick_action_add_first_intermediate">Dodaj pierwszy pośredni cel trasy</string>
-    <string name="quick_action_auto_zoom_desc">Włącza/wyłącza automatyczne przybliżanie mapy zależne od prędkości ruchu.</string>
-    <string name="quick_action_add_destination_desc">Ustala cel trasy w położeniu na środku ekranu, a poprzednio ustalony cel zamienia na ostatni cel pośredni.</string>
-    <string name="quick_action_replace_destination_desc">Zastępuje cel trasy położeniem na środku ekranu.</string>
-    <string name="quick_action_add_first_intermediate_desc">Ustala pierwszy cel pośredni trasy w położeniu na środku ekranu.</string>
+    <string name="quick_action_auto_zoom_desc">Naciśnięcie przycisku włącza/wyłącza automatyczne przybliżanie mapy zależne od prędkości ruchu.</string>
+    <string name="quick_action_add_destination_desc">Naciśnięcie przycisku ustali cel trasy w położeniu na środku ekranu, a poprzednio ustalony cel zamieni na ostatni cel pośredni.</string>
+    <string name="quick_action_replace_destination_desc">Naciśnięcie przycisku ustali nowy cel podróży w położeniu na środku ekranu, zastępując poprzednio wybrany cel (jeśli jest).</string>
+    <string name="quick_action_add_first_intermediate_desc">Naciśnięcie przycisku ustali pierwszy cel pośredni trasy w położeniu na środku ekranu.</string>
     <string name="type_address">Wprowadź adres</string>
     <string name="type_city_town">Wprowadź miasto</string>
     <string name="type_postcode">Wprowadź kod pocztowy</string>
@@ -2712,7 +2712,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n
 \nJest możliwe pobranie map większości krajów na świecie! Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada, Francja, Niemcy, Polska, Meksyk, Wielka Brytania, Hiszpania…</string>
     <string name="sorted_by_distance">Posortowane wg odległości</string>
-    <string name="quick_action_showhide_osmbugs_descr">Przełącza wyświetlanie uwag OSM na mapie.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Naciśnięcie przycisku wyświetla lub ukrywa uwago OSM na mapie.</string>
     <string name="restart_search">Rozpocznij ponownie wyszukiwanie</string>
     <string name="increase_search_radius">Zwiększ promień wyszukiwania</string>
     <string name="nothing_found">Nic nie odnaleziono</string>
@@ -2851,7 +2851,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="coordinate_input">Wprowadź współrzędne</string>
     <string name="shared_string_markers">Znaczniki</string>
     <string name="coordinates_format">Format współrzędnych</string>
-    <string name="fast_coordinates_input_descr">Proszę wybrać format współrzędnych. Zawsze można go zmienić za pomocą opcji.</string>
+    <string name="fast_coordinates_input_descr">Proszę wybrać format współrzędnych. Zawsze można go zmienić za naciskając \"Opcje\".</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Omijanie lodowych dróg i brodów</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Omija lodowe drogi i brody.</string>
     <string name="use_location">Użyj położenia</string>
@@ -3034,4 +3034,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_total">Łącznie</string>
     <string name="shared_string_travel">Podróż</string>
     <string name="waypoints_removed_from_map_markers">Punkty trasy usunięte z znaczników mapy</string>
+    <string name="use_two_digits_longitude">Używaj dwóch cyfr długości geograficznej</string>
     </resources>
