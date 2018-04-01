@@ -393,6 +393,7 @@ dependencies {
 	compile project(path: ':OsmAnd-java', configuration: 'android')
 	if (analytics) {
 		compile 'com.google.firebase:firebase-core:12.0.1'
+		compile 'com.google.firebase:firebase-messaging:12.0.1'
 		compile 'com.google.firebase:firebase-iid:12.0.1'
 		compile 'com.google.firebase:firebase-config:12.0.1'
 		compile 'com.facebook.android:facebook-android-sdk:[4,5)'	
