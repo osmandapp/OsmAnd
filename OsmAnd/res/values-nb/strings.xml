@@ -2644,7 +2644,7 @@
     <string name="quick_action_page_list_descr">Trykk på denne handlingsknappen vil bla gjennom listen nedenfor.</string>
     <string name="quick_action_empty_param_error">Parameterne kan ikke være tomme</string>
     <string name="quick_action_btn_tutorial_descr">Lang-trykk og dra knappen for å endre dens posisjon på skjermen.</string>
-    <string name="add_track_to_markers_descr">Rutepunkter kan legges til i markører ved å velge et av disse sporene.</string>
+    <string name="add_track_to_markers_descr">Rutepunkter kan legges til i markører ved å velge et av disse sporene (som har rutepunkter).</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="depth_contour_descr">Kart for havdybdekoter og nautiske punkter.</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samler inn informasjon om hvilke deler av programmet du åpner. Plasseringen din blir aldri sendt, ei heller noe du måtte skrive inn i programmet eller detaljer om områder som vises, søkes etter, eller lastes ned.</string>
@@ -2788,4 +2788,5 @@
     <string name="dashboard_or_drawer_description">En valgmulighet tilbys om å primært styre programmet via det fleksible dashbordet eller en statisk meny. Ditt valg kan alltid endres i dashbordinnstillingene.</string>
     <string name="shared_string_travel">Reise</string>
     <string name="waypoints_removed_from_map_markers">Rutepunkter fjernet fra kartmarkører</string>
+    <string name="use_two_digits_longitude">Bruk tosifret lengdegrad</string>
     </resources>
