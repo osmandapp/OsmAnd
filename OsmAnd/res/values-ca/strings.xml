@@ -2388,7 +2388,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="max_speed">Velocitat màxima</string>
     <string name="average_speed">Velocitat mitjana</string>
     <string name="gpx_track">Pista</string>
-    <string name="points_delete_multiple_succesful">El(s) punt(s) s\'ha(n) esborrat correctament.</string>
+    <string name="points_delete_multiple_succesful">El(s) punt(s) s\'ha(n) esborrat</string>
     <string name="points_delete_multiple">Esteu eliminant %1$d punt(s). Ho confirmeu?</string>
     <string name="route_points_category_name">Canvis de direcció a la ruta</string>
     <string name="track_points_category_name">Punts destacables en aquesta ruta</string>
@@ -2401,9 +2401,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_speed_name">Les rutes més curtes</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrat</string>
     <string name="routing_attr_driving_style_safety_name">Amb preferència per pistes</string>
-    <string name="relief_smoothness_factor_descr">Predilecció del terreny: pla o aturonat.</string>
+    <string name="relief_smoothness_factor_descr">Predilecció del terreny: Pla o aturonat.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Indiqueu la variació d\'alçat</string>
-    <string name="full_version_thanks">Us agraïm la compra de la versió de pagament d\'OsmAnd!</string>
+    <string name="full_version_thanks">Us agraïm la compra de la versió de pagament d\'OsmAnd.</string>
     <string name="do_not_send_anonymous_app_usage">No enviïs anònimament les estadístiques d\'ús de l\'aplicació</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recull informació respecte com utilitzeu l\'aplicació. No s\'envia mai la vostra localització, tampoc les entrades que feu ni els detalls de les zones que consulteu, cerqueu o baixeu.</string>
     <string name="do_not_show_startup_messages">No mostris missatges en engegar</string>
