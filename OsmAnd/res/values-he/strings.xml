@@ -296,8 +296,8 @@
 	<string name="local_openstreetmap_upload">שליחת השינויים ל־OSM</string>
 	<string name="local_openstreetmap_delete">מחיקת השינוי</string>
 	<string name="local_openstreetmap_descr_title">עריכה בלתי מתואמת של OSM:</string>
-	<string name="local_openstreetmap_settings">נ״ע/הערות של OSM שנשמרו מקומית</string>
-	<string name="local_openstreetmap_settings_descr">הצגה וניהול של נ״ע/הערות שנרשמו במסד הנתונים המקומי.</string>
+	<string name="local_openstreetmap_settings">נ״ע/הערות של OSM נשמרו בהתקן</string>
+	<string name="local_openstreetmap_settings_descr">הצגה וניהול של נ״ע/הערות שנשמרו במסד נתונים בהתקן.</string>
 	
 	
 	<string name="live_monitoring_interval_descr">נא לציין את ההפסקות בין דיווחי מעקב חי.</string>
@@ -327,7 +327,7 @@
 	<string name="index_name_tts_voice">חבילות קריינות (טקסט לדיבור, מועדף)</string>
 	<string name="amenity_type_osmwiki">וקיפדיה (בלתי מקוונת)</string>
 	<string name="amenity_type_user_defined">בהגדרת המשתמש</string>
-	<string name="fav_export_confirmation">קיים קובץ עם מועדפים שיוצאו בעבר. האם ברצונך להחליפו?</string>
+	<string name="fav_export_confirmation">כבר קיים קובץ עם מועדפים שיוצאו בעבר. להחליפו?</string>
 	<string name="profile_settings">הגדרות יעודיות לפרופיל</string>
 	<string name="settings_preset">פרופיל בררת מחדל</string>
 	<string name="settings_preset_descr">הגדרות תצוגת המפה והניווט נשמרות לפי פרופיל שימוש. ניתן להגדיר את פרופיל בררת המחדל שלך דרך כאן.</string>
@@ -336,7 +336,7 @@
 	<string name="global_settings">הגדרות כלליות</string>
 	<string name="index_settings">ניהול קובצי מפה</string>
 	<string name="general_settings">כללי</string>
-	<string name="general_settings_descr">הגדרת תצוגה ותצורה נפוצה עבור היישום.</string>
+	<string name="general_settings_descr">הגדרת תצוגה ותצורה נפוצה עבור היישומון.</string>
 	<string name="global_app_settings">הגדרות יישומים כלליות</string>
 	<string name="user_name">שם המשתמש שלך ב־OSM</string>
 	<string name="open_street_map_login_descr">נדרש לטובת שליחת נתונים אל openstreetmap.org.</string>
@@ -387,7 +387,7 @@
 	<string name="old_poi_file_should_be_deleted">קובץ נתוני הנ״ע \'%1$s\' אינו נחוץ עוד וניתן למחוק אותו.</string>
 	<string name="update_poi_file_not_found">קובץ מקומי לתחזוקת שינויי נ״ע לא נמצא ולא ניתן ליצור אותו.</string>
 	<string name="button_upgrade_osmandplus">שדרוג OsmAnd+‎</string>
-	<string name="map_version_changed_info">השרת מכיל קובצי מפה שאינם תואמים לגרסה הנוכחית של היישום שלך. כדי להוריד ולהשתמש בהם עליך לשדרג את היישום לגרסה עדכנית יותר.</string>
+	<string name="map_version_changed_info">יש להוריד את הגרסה החדשה של היישומון כדי לאפשר את השימוש בקובצי מפות חדשים.</string>
 	<string name="shared_string_rename">שינוי שם</string>
 	
 	<string name="poi_filter_nominatim">חיפוש שם מקוון (Nominatim)</string>
@@ -653,15 +653,15 @@
 	<string name="rotate_map_to_bearing">יישור המפה</string>
 	<string name="show_route">פרטי המסלול</string>
 	<string name="fav_imported_sucessfully">המועדפים יובאו בהצלחה</string>
-	<string name="fav_file_to_load_not_found">קובץ ה־GPX המכיל את המועדפים לא נמצא תחת {0}</string>
-	<string name="fav_saved_sucessfully">המועדפים נשמרו בהצלחה אל {0}</string>
+	<string name="fav_file_to_load_not_found">קובץ ה־GPX המכיל מועדפים לא נמצא תחת {0}</string>
+	<string name="fav_saved_sucessfully">המועדפים נשמרו אל {0}</string>
 	<string name="no_fav_to_save">אין נקודות מועדפות לשמירה</string>
 	<string name="shared_string_import">יבוא</string>
 	
 	<string name="error_occurred_loading_gpx">אירעה שגיאה במהלך טעינת ה־GPX</string>
 	<string name="send_report">שליחת דיווח</string>
-	<string name="none_region_found">לא נמצאו נתונים בלתי מקוונים לאזורים בכרטיס ה־SD. יש להוריד אזורים מהאינטרנט.</string>
-	<string name="poi_namefinder_query_empty">יש להזין שאילתת חיפוש כדי למצוא נ״ע</string>
+	<string name="none_region_found">לא נמצאו נתונים בלתי מקוונים לאזורים בכרטיס הזיכרון. יש להוריד אזורים מהאינטרנט.</string>
+	<string name="poi_namefinder_query_empty">יש להקליד כדי למצוא נ״ע</string>
 	<string name="any_poi">כלשהי</string>
 	
 	<string name="thanks_yandex_traffic">תודות ל־Yandex על דיווחי התנועה.</string>
@@ -687,7 +687,7 @@
 	<string name="shared_string_ok">אישור</string>
 	<string name="show_transport_over_map_description">הצגת תחנות תחבורה ציבורית במפה.</string>
 	<string name="show_transport_over_map">הצגת תחנות תחבורה</string>
-	<string name="hello">יישום הניווט OsmAnd</string>
+	<string name="hello">יישומון הניווט OsmAnd</string>
 	<string name="layer_poi">שכבת נ״ע…</string>
 	<string name="layer_map">מקור המפה…</string>
 	<string name="menu_layers">הגדרת תצוגה</string>
@@ -695,7 +695,7 @@
 	
 	<string name="use_trackball_descr">יש להשתמש בכדור מעקב כדי להזיז את המפה.</string>
 	<string name="where_am_i">איפה אני?</string>
-	<string name="update_poi_success">נתוני הנ״ע עודכנו בהצלחה ({0} נטענו)</string>
+	<string name="update_poi_success">נתוני הנ״ע עודכנו ({0} נטענו)</string>
 	<string name="use_trackball">שימוש בכדור המעקב</string>
 	<string name="process_navigation_service">שירות הניווט של OsmAnd</string>
 	<string name="network_provider">רשת</string>
@@ -709,7 +709,7 @@
 	<string name="update_poi_no_offline_poi_index">לא נמצאו נתוני נ״ע בלתי מקוונים עבור אזור זה</string>
 	<string name="update_poi_is_not_available_for_zoom">עדכון נ״ע אינו זמין עבור רמות תקריב קטנות</string>
 	<string name="context_menu_item_update_poi">עדכון נ״ע</string>
-	<string name="context_menu_item_update_map_confirm">האם לעדכן את הנתונים המקומיים שלך מהאינטרנט?</string>
+	<string name="context_menu_item_update_map_confirm">לעדכן את הנתונים המקומיים שלך מהאינטרנט?</string>
 	<string name="search_history_city">עיר:\n {0}</string>
 	<string name="background_service_provider_descr">נא לבחור את ספק המיקום שמשמש להפעלה במצב רקע.</string>
 	<string name="background_service_provider">ספק מיקום</string>
@@ -727,8 +727,10 @@
 	<string name="voice_data_not_supported">גרסת נתוני הקול אינה נתמכת</string>
 	<string name="voice_data_corrupted">נתוני הקול שצוינו פגומים</string>
 	<string name="voice_data_unavailable">נתוני הקול שצוינו אינם זמינים</string>
-	<string name="sd_unmounted">כרטיס ה־SD אינו נגיש.\nלא תהיה לך אפשרות לצפות במפות או לחפש דברים.</string>
-	<string name="sd_mounted_ro">כרטיס ה־SD שלך הוא לקריאה בלבד.\nניתן לצפות אך ורק במפות שנטענו מראש ולא ניתן להוריד מהאינטרנט.</string>
+	<string name="sd_unmounted">כרטיס הזיכרון אינו נגיש.
+\nלא תהיה לך אפשרות לצפות במפות או לחפש דברים.</string>
+	<string name="sd_mounted_ro">כרטיס הזיכרון שלך הוא לקריאה בלבד.
+\nניתן לצפות אך ורק במפות שנטענו מראש ולא ניתן להוריד מהאינטרנט.</string>
 	<string name="unzipping_file">הקובץ נפרס…</string>
 	<string name="route_tr">לפנות ימינה ולהמשיך</string>
 	<string name="route_tshr">לפנות ימינה בחדות ולהמשיך</string>
@@ -768,7 +770,7 @@
 	<string name="route_general_information">סך כל המרחק: %1$s, זמן הנסיעה: %2$d שע׳ %3$d דק׳.</string>
 	<string name="router_service_descr">בחירה בשירות ניווט מקוון או בלתי מקוון.</string>
 	<string name="router_service">שירות ניווט</string>
-	<string name="sd_dir_not_accessible">תיקיית אחסון הנתונים בכרטיס ה־SD אינה נגישה!</string>
+	<string name="sd_dir_not_accessible">תיקיית אחסון הנתונים בכרטיס הזיכרון אינה נגישה!</string>
 	<string name="download_question">האם להוריד {0} - {1} ?</string>
 	<string name="download_question_exist">הנתונים הבלתי מקוונים עבור {0} כבר קיימים ({1}). האם לעדכן אותם ({2}) ?</string>
 	<string name="address">כתובת</string>
@@ -777,7 +779,7 @@
 	
 	
 	<string name="downloading_list_indexes">רשימת האזורים הזמינה מתקבלת…</string>
-	<string name="list_index_files_was_not_loaded">רשימת האזורים לא התקבלה מ־osmand.net.</string>
+	<string name="list_index_files_was_not_loaded">רשימת האזורים לא התקבלה מ־https://osmand.net.</string>
 	
 	<string name="fav_points_edited">הנקודה המועדפת נערכה</string>
 	<string name="fav_points_not_exist">לא קיימות נקודות מועדפות</string>
@@ -810,7 +812,7 @@
 	<string name="empty_route_calculated">שגיאה: המסלול שחושב ריק</string>					
 	<string name="new_route_calculated_dist">המסלול החדש חושב, מרחק</string>
 	<string name="arrived_at_destination">הגעת ליעדך</string>
-	<string name="invalid_locations">הקואורדינטות שגויות!</string>
+	<string name="invalid_locations">נקודות ציון שגויות</string>
 	<string name="go_back_to_osmand">חזרה למפה של OsmAnd</string>
 	<string name="shared_string_close">סגירה</string>
 	<string name="loading_data">הנתונים נטענים…</string>
@@ -846,7 +848,7 @@
 	<string name="shared_string_add_to_favorites">הוספה למועדפים</string>
 	<string name="use_english_names_descr">בחירה בין שמות מקומיים ללועזיים.</string>
 	<string name="use_english_names">שימוש בשמות באנגלית במפה</string>
-	<string name="app_settings">הגדרות היישום</string>
+	<string name="app_settings">הגדרות היישומון</string>
 	<string name="search_address">חיפוש אחר כתובת</string>
 	<string name="choose_building">נא לבחור בבניין</string>
 	<string name="choose_street">נא לבחור ברחוב</string>
@@ -864,9 +866,9 @@
 	<string name="show_location">הצגת המיקום שלך</string>
 	
 	
-	<string name="show_gps_coordinates_text">הצגת קואורדינטות איכון במפה</string>
-	<string name="use_internet_to_download_tile">להשתמש באינטרנט כדי להוריד את אריחי המפה החסרים</string>
-	<string name="app_description">יישום ניווט</string>
+	<string name="show_gps_coordinates_text">הצגת נקודות ציון של ה־GPS במפה</string>
+	<string name="use_internet_to_download_tile">הורדת אריחי המפה החסרים</string>
+	<string name="app_description">יישומון ניווט</string>
 	<string name="shared_string_exit">יציאה</string>
 	
 	
@@ -882,9 +884,9 @@
 	<string name="choose_intersected_street">נא לבחור רחוב חוצה</string>
 	<string name="Closest_Amenities">נותני שירות קרובים</string>
 	<string name="app_mode_default">עיון במפה</string>
-	<string name="app_mode_car">רכב</string>
-	<string name="app_mode_bicycle">אופניים</string>
-	<string name="app_mode_pedestrian">הליכה ברגל</string>
+	<string name="app_mode_car">נהיגה</string>
+	<string name="app_mode_bicycle">רכיבת אופניים</string>
+	<string name="app_mode_pedestrian">הליכה</string>
 	<string name="position_on_map_center">מרכז</string>
 	<string name="position_on_map_bottom">תחתון</string>
 	<string name="navigate_point_top_text">נא להזין רוחב ואורך במבנה הנבחר (D - מעלות, M - דקות, S - שניות)</string>
@@ -912,11 +914,11 @@
 	<string name="shared_string_add">הוספה</string>
 	<string name="add_favorite_dialog_top_text">נא להזין שם למועדף</string>
 	<string name="add_favorite_dialog_default_favourite_name">מועדף</string>
-	<string name="add_favorite_dialog_favourite_added_template">הנקודה המועדפת „{0}“ נוספה בהצלחה.</string>
+	<string name="add_favorite_dialog_favourite_added_template">הנקודה המועדפת „{0}“ נוספה.</string>
 	<string name="favourites_context_menu_edit">עריכת המועדף</string>
 	<string name="favourites_context_menu_delete">מחיקת המועדף</string>
 	<string name="favourites_remove_dialog_msg">להסיר את הנקודה המועדפת ‚%s‘?</string>
-	<string name="favourites_remove_dialog_success">הנקודה המועדפת {0} הוסרה בהצלחה.</string>
+	<string name="favourites_remove_dialog_success">הנקודה המועדפת {0} הוסרה.</string>
 	
 	
 	
@@ -938,10 +940,10 @@
 	<string name="poi_remove_confirm_template">האם למחוק את {0} (להזין הערה)?</string>
 	<string name="poi_remove_title">מחיקת נ״ע</string>
 	<string name="shared_string_delete">מחיקה</string>
-	<string name="poi_remove_success">נ״ע נמחקה בהצלחה</string>
+	<string name="poi_remove_success">נ״ע נמחקה</string>
 	<string name="poi_action_add">הוספה</string>
 	<string name="poi_action_change">שינוי</string>
-	<string name="poi_action_succeded_template">הפעולה {0} הושלמה בהצלחה.</string>
+	<string name="poi_action_succeded_template">הפעולה {0} הושלמה.</string>
 	<string name="poi_error_unexpected_template">אירעה שגיאה בלתי צפויה בעת ביצוע הפעולה {0}.</string>
 	<string name="poi_error_io_error_template">אירעה שגיאת קלט/פלט בעת ביצוע הפעולה {0}.</string>
 	<string name="poi_error_info_not_loaded">המידע על המפרק לא נטען</string>
@@ -1820,7 +1822,7 @@
     <string name="quick_action_map_style_switch">סגנון המפה הוחלף בהצלחה בסגנון „%s”.</string>
     <string name="quick_action_take_audio_note">הערת שמע חדשה</string>
     <string name="quick_action_take_video_note">הערת וידאו חדשה</string>
-    <string name="quick_action_take_photo_note">הערת תמונה תמונה</string>
+    <string name="quick_action_take_photo_note">הערת תמונה חדשה</string>
     <string name="quick_action_add_osm_bug">הוספת הערת OSM</string>
     <string name="quick_action_navigation_voice">הנחייה קולית כבויה/פעילה</string>
     <string name="quick_action_navigation_voice_off">הנחייה קולית כבויה</string>
@@ -1835,14 +1837,14 @@
     <string name="quick_actions_delete_text">למחוק את הפעולה „%s”?</string>
     <string name="quick_favorites_show_favorites_dialog">הצגת דו־שיח מועדפים</string>
     <string name="quick_favorites_name_preset">ערכת שמות</string>
-    <string name="quick_action_add_marker_descr">נגיעה בכפתור הפעולה תוסיף סמן מפה במיקום מרכזי במסך.</string>
-    <string name="quick_action_add_gpx_descr">נגיעה בכפתור הפעולה תוסיף נקודת דרך GPX במיקום מרכזי במסך.</string>
-    <string name="quick_action_take_audio_note_descr">נגיעה בכפתור הפעולה תוסיף הערת שמע במיקום מרכזי במסך.</string>
-    <string name="quick_action_take_video_note_descr">נגיעה בכפתור הפעולה תוסיף הערת וידאו במיקום מרכזי במסך.</string>
+    <string name="quick_action_add_marker_descr">נגיעה בכפתור פעולה זה תוסיף סמן מפה במיקום מרכזי במסך.</string>
+    <string name="quick_action_add_gpx_descr">נגיעה בכפתור פעולה זה תוסיף נקודת דרך GPX במרכז המסך.</string>
+    <string name="quick_action_take_audio_note_descr">נגיעה בכפתור פעולה זה תוסיף הערת שמע במרכז המסך.</string>
+    <string name="quick_action_take_video_note_descr">נגיעה בכפתור פעולה זה תוסיף הערת וידאו במרכז המסך.</string>
     <string name="quick_action_take_photo_note_descr">נגיעה בכפתור פעולה זה תוסיף הערת תמונה במרכז המסך.</string>
     <string name="quick_action_add_osm_bug_descr">נגיעה בכפתור פעולה זה תוסיף הערת OSM במרכז המסך.</string>
     <string name="quick_action_add_poi_descr">נגיעה בכפתור פעולה זה תוסיף נקודת עניין במרכז המסך.</string>
-    <string name="quick_action_navigation_voice_descr">נגיעה בכפתור הפעולה ישבית או יפעיל הנחייה קולית במהלך ניווט.</string>
+    <string name="quick_action_navigation_voice_descr">נגיעה בכפתור פעולה זה תשבית או תפעיל הנחייה קולית במהלך ניווט.</string>
     <string name="quick_action_add_parking_descr">נגיעה בכפתור פעולה זה תוסיף מקום חנייה במרכז המסך.</string>
     <string name="favorite_empty_place_name">מיקום</string>
     <string name="quick_action_showhide_favorites_descr">נגיעה בכפתור פעולה זה תציג או תסתיר את הנקודות המועדפות במפה.</string>
@@ -2376,14 +2378,14 @@
     <string name="use_fast_recalculation">חישוב חכם לנתיב מחדש</string>
     <string name="use_fast_recalculation_desc">לטיולים ארוכים, יש לחשב מחדש רק את החלק ההתחלתי של הנתיב.</string>
     <string name="do_you_like_osmand">OsmAnd נושא חן בעיניך?</string>
-    <string name="we_really_care_about_your_opinion">אכפת לנו מהדעה שלך וחשוב לנו לשמוע ממך.</string>
+    <string name="we_really_care_about_your_opinion">אכפת לנו מהדעה שלך והמשוב שלך חשוב לנו.</string>
     <string name="rate_this_app">דירוג היישומון הזה</string>
     <string name="rate_this_app_long">נא לדרג את OsmAnd ב־Google Play</string>
     <string name="user_hates_app_get_feedback">נשמח לשמוע למה.</string>
     <string name="user_hates_app_get_feedback_long">נא לספר לנו מה היית רוצה לשנות ביישומון הזה.</string>
     <string name="failed_to_upload">ההעלאה נכשלה</string>
     <string name="delete_change">מחיקת השינוי</string>
-    <string name="successfully_uploaded_pattern">הועלו בהצלחה {0}/{1}</string>
+    <string name="successfully_uploaded_pattern">הועלו {0}/{1}</string>
     <string name="try_again">ניסיון חוזר</string>
     <string name="error_message_pattern">שגיאה: {0}</string>
     <string name="dahboard_options_dialog_title">הגדרת לוח הבקרה</string>
