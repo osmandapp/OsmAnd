@@ -387,7 +387,7 @@
 	<string name="old_poi_file_should_be_deleted">קובץ נתוני הנ״ע \'%1$s\' אינו נחוץ עוד וניתן למחוק אותו.</string>
 	<string name="update_poi_file_not_found">קובץ מקומי לתחזוקת שינויי נ״ע לא נמצא ולא ניתן ליצור אותו.</string>
 	<string name="button_upgrade_osmandplus">שדרוג OsmAnd+‎</string>
-	<string name="map_version_changed_info">יש להוריד את הגרסה החדשה של היישומון כדי לאפשר את השימוש בקובצי מפות חדשים.</string>
+	<string name="map_version_changed_info">יש להוריד את הגרסה החדשה של היישומון כדי לאפשר את השימוש בקובצי המפות החדשים.</string>
 	<string name="shared_string_rename">שינוי שם</string>
 	
 	<string name="poi_filter_nominatim">חיפוש שם מקוון (Nominatim)</string>
@@ -400,21 +400,21 @@
 	
 	<string name="search_position_map_view">מרכז המפה הנוכחי</string>
 	<string name="select_search_position">מקור:</string>
-	<string name="context_menu_item_search">חיפוש באזור הזה</string>
+	<string name="context_menu_item_search">חיפוש בסביבת מקום</string>
 	
 	<string name="shared_string_save_as_gpx">שמירה כמסלול GPX חדש</string>
-	<string name="route_successfully_saved_at">המסלול נשמר בהצלחה בתור \'%1$s\'.</string>
+	<string name="route_successfully_saved_at">המסלול נשמר בתור ‚%1$s’.</string>
 	<string name="filename_input">שם הקובץ:</string>
 	<string name="file_with_name_already_exist">כבר קיים קובץ השם הזה.</string>
 	<string name="shared_string_save">שמירה</string>
 	
-	<string name="local_index_upload_gpx_description">שליחת קובצי GPX לקהילת OSM. אלו ישמשו לשיפור המפות.</string>
-	<string name="local_index_items_uploaded">%1$d מתוך %2$d פריטים נשלחו בהצלחה.</string>
+	<string name="local_index_upload_gpx_description">מומלץ לשלוח קובצי GPX לקהילת OSM, לטובת שיפור המפות.</string>
+	<string name="local_index_items_uploaded">%1$d מתוך %2$d פריטים נשלחו.</string>
 	<string name="local_index_mi_upload_gpx">שליחה ל־OSM</string>
 	<string name="show_more_map_detail">הצגת יותר פרטים במפה</string>
 	<string name="show_more_map_detail_descr">הצגת חלק מהפרטים במפה בווקטורים (דרכים וכו׳) ברמות תקריב נמוכות.</string>
-	<string name="favourites_delete_multiple_succesful">הנקודה או הנקודות המועדפות נמחקו בהצלחה.</string>
-	<string name="favorite_delete_multiple">פעולה זו תמחק %1$d מועדפים ו־%2$d קבוצות. האם להמשיך?</string>
+	<string name="favourites_delete_multiple_succesful">הנקודות המועדפות נמחקו.</string>
+	<string name="favorite_delete_multiple">פעולה זו תמחק %1$d מועדפים ו־%2$d קבוצות. להמשיך?</string>
 	<string name="favorite_home_category">בית</string>
 	<string name="favorite_friends_category">חברים</string>
 	<string name="favorite_places_category">מקומות</string>
