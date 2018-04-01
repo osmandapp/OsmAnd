@@ -2065,7 +2065,7 @@ Długość %2$s</string>
     <string name="contact_us">Kontakt</string>
     <string name="map_legend">Legenda mapy</string>
     <string name="save_poi_without_poi_type_message">Zapisać użyteczne miejsce bez określonego rodzaju?</string>
-    <string name="access_from_map_description">Przycisk menu uruchamia kokpit zamiast menu.</string>
+    <string name="access_from_map_description">Przycisk menu uruchamia kokpit zamiast menu</string>
     <string name="access_from_map">Dostęp z mapy</string>
     <string name="copied_to_clipboard">Skopiowane do schowka</string>
     <string name="release_2_2">\\u2022 Nowe menu kontekstowe, przystosowane do wybierania lokacji na mapie oraz na innych ekranach
@@ -2518,11 +2518,11 @@ Długość %2$s</string>
     <string name="quick_action_add_marker_descr">Naciśnięcie przycisku doda znacznik mapy na środku ekranu.</string>
     <string name="quick_action_add_gpx_descr">Naciśnięcie przycisku akcji doda punkt pośredni GPX na środku ekranu.</string>
     <string name="quick_action_take_audio_note_descr">Naciśnięcie przycisku doda notatkę dźwiękową na środku ekranu.</string>
-    <string name="quick_action_take_video_note_descr">Naciśnięcie przycisku czynności doda notatkę filmową na środku ekranu.</string>
+    <string name="quick_action_take_video_note_descr">Naciśnięcie przycisku doda notatkę filmową na środku ekranu.</string>
     <string name="quick_action_take_photo_note_descr">Naciśnięcie przycisku doda notatkę fotograficzną na środku ekranu.</string>
     <string name="quick_action_add_osm_bug_descr">Naciśnięcie przycisku doda uwagę OSM na środku ekranu.</string>
     <string name="quick_action_add_poi_descr">Naciśnięcie przycisku doda użyteczne miejsce na środku ekranu.</string>
-    <string name="quick_action_navigation_voice_descr">Naciśnięcie przycisku akcji włączy lub wyłączy podpowiedzi głosowe podczas nawigacji.</string>
+    <string name="quick_action_navigation_voice_descr">Naciśnięcie przycisku włączy lub wyłączy podpowiedzi głosowe podczas nawigacji.</string>
     <string name="quick_action_add_parking_descr">Naciśnięcie przycisku doda położenie parkowania na środku ekranu.</string>
     <string name="favorite_autofill_toast_text">" został zapisany do "</string>
     <string name="quick_action_duplicates">Określona nazwa szybkiej czynności jest już użyta i zmieniono ją na %1$s, aby uniknąć powielenia.</string>
