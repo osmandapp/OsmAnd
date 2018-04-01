@@ -703,7 +703,7 @@
 	<string name="poi_pawnbroker">Casa de penhores</string>
 	<string name="poi_bureau_de_change">Casa de câmbio</string>
 	<string name="poi_accountant">Contador</string>
-	<string name="poi_bitcoin_yes">Pagamento em moeda eletrônica</string>
+	<string name="poi_bitcoin_yes">Pagamento em Bitcoin</string>
 
 	<string name="poi_cave_entrance">Entrada de caverna</string>
 	<string name="poi_peak">Cume</string>
@@ -937,7 +937,7 @@
 		<string name="poi_hiking_routes">Rotas de caminhada</string>
 		<string name="poi_access_private">Acesso privado</string>
 	<string name="poi_access_no">Acesso proibido</string>
-	<string name="poi_access_destination">Acesso de destino</string>
+	<string name="poi_access_destination">Acesso para trânsito local</string>
 	<string name="poi_access_permissive">Acesso autorizado</string>
 	<string name="poi_access_customers">Acesso para cliente</string>
 	<string name="poi_access_delivery">Acesso para entrega</string>
@@ -1039,8 +1039,8 @@
 	<string name="poi_recycling_centre">Centro de reciclagem</string>
 	<string name="poi_recycling_hardcore">Entulho (concreto)</string>
 	<string name="poi_crossing_traffic_signals">Com semáforos</string>
-	<string name="poi_crossing_uncontrolled">Sem controle</string>
-	<string name="poi_crossing_unmarked">Desmarcado</string>
+	<string name="poi_crossing_uncontrolled">Sem controle de tráfego</string>
+	<string name="poi_crossing_unmarked">Não sinalizado</string>
 
 	<string name="poi_mill_pond">Lagoa do moinho</string>
 	<string name="twitter">Twitter</string>
