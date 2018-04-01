@@ -755,9 +755,9 @@
 	<string name="map_orientation_default">بر اساس دستگاه</string>
 	<string name="rotate_map_to_bearing">جهت نقشه</string>
 	<string name="map_screen_orientation">جهت صفحه</string>
-	<string name="tts_language_not_supported_title">زبان پشتیبانی نمی‌شود</string>
+	<string name="tts_language_not_supported_title">این زبان پشتیبانی نمی‌شود</string>
 	<string name="tts_language_not_supported">موتور تبدیل متن به گفتار (TTS) که روی دستگاهتان نصب است از زبان انتخاب‌شده پشتیبانی نمی‌کند. آیا می‌خواهید در فروشگاه اندروید دنبال موتور TTS دیگری بگردید؟ اگر نه، زبان پیش‌فرض استفاده خواهد شد.</string>
-	<string name="tts_missing_language_data">برای زبان انتخاب‌شده هیچ داده‌ای نصب نشده است. آیا برای نصب به فروشگاه می‌روید؟</string>
+	<string name="tts_missing_language_data">آیا برای دانلود زبان انتخاب‌شده به فروشگاه می‌روید؟</string>
 	<string name="preferred_locale_descr">زبان برنامه را انتخاب کنید (بعد از تغییر، برنامه را مجدداً راه‌اندازی کنید).</string>
 	<string name="preferred_locale">زبان برنامه</string>
 	<string name="rotate_map_none_opt">بدون چرخش (بالا به‌طرف شمال است)</string>
@@ -801,13 +801,13 @@
 	<string name="show_more_map_detail_descr">برخی جزئیات نقشهٔ بُرداری (جاده‌ها و...) را در زوم‌های کمتر نشان می‌دهد.</string>
 	<string name="favourites_delete_multiple_succesful">نقطه‌های برگزیده حذف شد.</string>
 	<string name="favorite_delete_multiple">دارید %1$d نقطهٔ برگزیده و %2$d گروه را پاک می‌کنید. آیا مطمئن هستید؟</string>
-	<string name="basemap_missing">نقشه پایهٔ جهان را دانلود کنید تا با امکان بزرگ‌نمایی اندک نمایی از سراسر جهان داشته باشید.</string>
+	<string name="basemap_missing">نقشه پایهٔ جهان را دانلود کنید تا نمایی از سراسر جهان با امکان بزرگ‌نمایی اندک داشته باشید.</string>
 	<string name="local_index_installed">نسخهٔ محلی</string>
 	
 	
 	
 	<string name="installing_new_resources">بازکردن داده‌های جدید…</string>
-	<string name="internet_connection_required_for_online_route">یکی از سرویس‌های مسیریابی آنلاین انتخاب شده است اما اتصال اینترنتی وجود ندارد.</string>
+	<string name="internet_connection_required_for_online_route">یکی از سرویس‌های مسیریابی آنلاین را انتخاب کرده‌اید اما به اینترنت متصل نیستید.</string>
 	<string name="tts_missing_language_data_title">داده‌ها وجود ندارد</string>
 	<string name="gpx_option_reverse_route">معکوس‌کردن مسیر GPX</string>
 	<string name="gpx_option_destination_point">از مقصد جاری استفاده کن</string>
@@ -825,9 +825,9 @@
 	<string name="map_overlay">نقشهٔ رویی</string>
 	<string name="map_overlay_descr">نقشهٔ رویی را انتخاب کنید.</string>
 	<string name="tile_source_already_installed">نقشه قبلاً نصب شده است، تنظیمات به‌روز خواهد شد.</string>
-	<string name="internet_not_available">برای این عملیات ارتباط اینترنتی لازم است ولی اکنون وجود ندارد.</string>
+	<string name="internet_not_available">برای انجام این عملیات باید به اینترنت وصل باشید.</string>
 	<string name="install_more">نصب بیشتر…</string>
-	<string name="level_to_switch_vector_raster_descr">کمترین زوم برای استفاده از نقشه‌های بُرداری.</string>
+	<string name="level_to_switch_vector_raster_descr">در زوم‌های فراتر از این سطح، از نقشه‌های رَستر استفاده کن</string>
 	
 	<string name="error_doing_search">در هنگام جست‌وجوی آفلاین خطایی رخ داد.</string>
 	
@@ -1154,7 +1154,7 @@
 	<string name="map_version_changed_info">برای اینکه بتوانید از نقشه‌های جدید استفاده کنید، نسخهٔ تازهٔ برنامه را دانلود کنید.</string>
 	<string name="poi_filter_nominatim">جست‌وجوی آنلاین با Nominatim</string>
 	
-	<string name="vector_data_missing">داده‌های آفلاین نقشه روی کارت حافظه وجود ندارد. لطفاً برای استفاده از نقشه‌های آفلاین، آن را دانلود کنید.</string>
+	<string name="vector_data_missing">برای استفاده از نقشه‌های آفلاین، داده‌های «آفلاین» را دانلود کنید.</string>
 	<string name="local_index_gpx_info_show">"
 \n
 \nبرای دسترسی به گزینه‌ها چند لحظه انگشت خود را روی نمایشگر نگه دارید"</string>
