@@ -1131,7 +1131,7 @@
 	<string name="native_rendering">رندر بومی</string>
 	
 	<string name="accessibility_mode">حالت دسترسی آسان</string>
-	<string name="accessibility_mode_descr">امکانات موردنیاز برای کاربران معلول را فعال می‌کند.</string>
+	<string name="accessibility_mode_descr">امکانات موردنیاز برای کاربران مبتلا به نارسایی جسمی را فعال می‌کند.</string>
 	<string name="direction_style_sidewise">جهت‌ها (۸سویه)</string>
 	<string name="zoom_by_trackball_descr">میزان بزرگ‌نمایی نقشه را با حرکت افقی گوی مکان‌نما تغییر دهید.</string>
 	<string name="zoom_by_trackball">استفاده از گوی مکان‌نما برای کنترل بزرگ‌نمایی</string>
