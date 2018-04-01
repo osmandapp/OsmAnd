@@ -801,7 +801,7 @@
 	<string name="show_more_map_detail_descr">برخی جزئیات نقشهٔ بُرداری (جاده‌ها و...) را در زوم‌های کمتر نشان می‌دهد.</string>
 	<string name="favourites_delete_multiple_succesful">نقطه‌های برگزیده حذف شد.</string>
 	<string name="favorite_delete_multiple">دارید %1$d نقطهٔ برگزیده و %2$d گروه را پاک می‌کنید. آیا مطمئن هستید؟</string>
-	<string name="basemap_missing">نقشه پایهٔ جهان را دانلود کنید تا با امکان بزرگ‌نمایی اندکن مایی از سراسر جهان داشته باشید.</string>
+	<string name="basemap_missing">نقشه پایهٔ جهان را دانلود کنید تا با امکان بزرگ‌نمایی اندک نمایی از سراسر جهان داشته باشید.</string>
 	<string name="local_index_installed">نسخهٔ محلی</string>
 	
 	
