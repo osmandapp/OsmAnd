@@ -1010,10 +1010,10 @@ Lon %2$s</string>
     <string name="local_indexes_cat_tile">Mapas de teselas en línea y en caché</string>
     <string name="local_indexes_cat_map">Mapas descargados (vectores)</string>
     <string name="index_settings_descr">Descarga y gestiona mapas sin conexión almacenados en tu dispositivo.</string>
-    <string name="map_online_plugin_is_not_installed">Activa el complemento «Mapas en línea», para elegir diferentes orígenes de mapas</string>
+    <string name="map_online_plugin_is_not_installed">Activa el complemento «Mapas en línea», para elegir diferentes fuentes de mapas</string>
     <string name="map_online_data">Mapas en línea y teselas</string>
     <string name="map_online_data_descr">Usa mapas en línea (descarga y guarda teselas en la tarjeta de memoria).</string>
-    <string name="online_map_settings_descr">Configura fuentes de mapas en línea o teselas guardadas.</string>
+    <string name="online_map_settings_descr">Configura las fuentes de teselas de mapas en línea o en caché.</string>
     <string name="plugins_screen">Complementos</string>
     <string name="prefs_plugins_descr">Los complementos activan ajustes avanzados y funcionalidades adicionales.</string>
     <string name="prefs_plugins">Complementos</string>
@@ -1159,7 +1159,7 @@ Lon %2$s</string>
     <string name="auto_follow_location_enabled">Centrado automático del mapa activado.</string>
     <string name="pref_vector_rendering">Opciones específicas de dibujo vectorial</string>
     <string name="pref_overlay">Superpuesta / subyacente</string>
-    <string name="pref_raster_map">Ajustes de fuente del mapa</string>
+    <string name="pref_raster_map">Ajustes de la fuente del mapa</string>
     <string name="pref_vector_map">Ajustes del mapa vectorial</string>
     <string name="delete_confirmation_msg">Borrarás «%1$s». ¿Continuar?</string>
     <string name="city_type_suburb">Suburbio</string>
@@ -1411,7 +1411,7 @@ Lon %2$s</string>
     <string name="layer_osm_bugs">Notas de OSM (en línea)</string>
     
     <string name="layer_poi">Superposición de PDI…</string>
-    <string name="layer_map">Fuente de mapas…</string>
+    <string name="layer_map">Fuente del mapa…</string>
     <string name="menu_layers">Capas de mapas</string>
     <string name="context_menu_item_search_poi">Buscar PDI</string>
     <string name="use_trackball_descr">Usa la rueda de desplazamiento para mover el mapa.</string>
@@ -1566,9 +1566,9 @@ Lon %2$s</string>
     <string name="map_view_3d">Visión 3D del mapa</string>
     <string name="show_poi_over_map_description">Muestra la última superposición de PDI elegida en el mapa.</string>
     <string name="show_poi_over_map">Mostrar superposición de PDI</string>
-    <string name="map_tile_source_descr">Elige la fuente de mapas en línea o teselas guardadas.</string>
-    <string name="map_tile_source">Fuente de teselas de mapa</string>
-    <string name="map_source">Fuente de mapa</string>
+    <string name="map_tile_source_descr">Elige el origen de las teselas de mapas en línea o en caché.</string>
+    <string name="map_tile_source">Fuente de teselas del mapa</string>
+    <string name="map_source">Fuente del mapa</string>
     <string name="use_internet">Usar Internet</string>
     <string name="show_location">Mostrar tu ubicación</string>
     <string name="show_gps_coordinates_text">Mostrar coordenadas GPS en el mapa</string>
@@ -2350,13 +2350,13 @@ Lon %2$s</string>
     <string name="quick_action_add_create_items">Crear elementos</string>
     <string name="quick_action_add_configure_map">Configurar mapa</string>
     <string name="quick_action_add_navigation">Navegación</string>
-    <string name="quick_action_fav_name_descr">Deja el campo vacío, para usar automáticamente la dirección o el nombre del lugar.</string>
+    <string name="quick_action_fav_name_descr">Dejar el campo vacío para usar automáticamente la dirección o el nombre del lugar.</string>
     <string name="quick_action_bug_descr">Este mensaje será rellenado automáticamente en el campo del comentario.</string>
     <string name="quick_action_bug_message">Mensaje</string>
-    <string name="quick_action_category_descr">Marca la categoría en la que deseas guardar el favorito.</string>
+    <string name="quick_action_category_descr">Marcar la categoría en la que deseas guardar el favorito.</string>
     <string name="quick_action_gpx_category_descr">Elige una categoría opcional.</string>
     <string name="quick_action_poi_list">Lista de PDI</string>
-    <string name="quick_action_sh_poi_descr">Puedes añadir una o más categorías PDI para mostrar en el mapa.</string>
+    <string name="quick_action_sh_poi_descr">Puedes añadir una o más categorías de PDI a mostrar en el mapa.</string>
     <string name="quick_action_map_style_action">Añadir un estilo de mapa</string>
     <string name="quick_action_empty_param_error">Los parámetros no deben estar vacíos</string>
     <string name="quick_action_map_styles">Estilos de mapa</string>
@@ -2436,7 +2436,7 @@ Proporciona un código completo</string>
     <string name="average_speed">Velocidad media</string>
     <string name="gpx_track">Traza</string>
     <string name="points_delete_multiple_succesful">Punto(s) borrados.</string>
-    <string name="points_delete_multiple">¿Seguro que quieres borrar %1$d punto(s)?</string>
+    <string name="points_delete_multiple">Borrarás %1$d punto(s). ¿Continuar?</string>
     <string name="route_points_category_name">Giros a pasar en esta ruta</string>
     <string name="track_points_category_name">Puntos destacados en esta ruta</string>
     <string name="add_new_folder">Añadir nueva carpeta</string>
@@ -2537,7 +2537,7 @@ Proporciona un código completo</string>
 \n • Sube trazas GPX a OSM directamente desde la aplicación 
 \n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado) 
 \n • (Opcional) Grabación del viaje en segundo plano (mientras el dispositivo está bloqueado) 
-\n 
+\n
 \n  OsmAnd es un software de código abierto y se desarrolla activamente. Puedes contribuir con la aplicación al informar sobre errores, mejorar las traducciones, desarrollar nuevas funciones o la interacción del usuario. El progreso del proyecto también depende de contribuciones financieras para desarrollar y probar nuevas funcionalidades."</string>
     <string name="osmand_plus_extended_description_part8">Cobertura y calidad aproximada del mapa: 
 \n • Europa Occidental: **** 
@@ -2675,10 +2675,10 @@ Proporciona un código completo</string>
 \n</string>
     <string name="rendering_value_translucent_pink_name">Rosa translúcido</string>
     <string name="quick_action_resume_pause_navigation">Pausar/reanudar navegación</string>
-    <string name="quick_action_resume_pause_navigation_descr">Pulsa este botón para pausar o reanudar la navegación.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Pulsar este botón de acción, pausará o reanudará la navegación.</string>
     <string name="quick_action_show_navigation_finish_dialog">Mostrar diálogo de fin de navegación</string>
     <string name="quick_action_start_stop_navigation">Iniciar/parar navegación</string>
-    <string name="quick_action_start_stop_navigation_descr">Pulsa este botón para iniciar o parar la navegación.</string>
+    <string name="quick_action_start_stop_navigation_descr">Pulsar este botón de acción, iniciará o parará la navegación.</string>
     <string name="live_monitoring_max_interval_to_send">Tiempo del búfer para el seguimiento en línea</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especifica el tiempo que el búfer mantendrá los lugares para enviar sin conexión</string>
     <string name="mappilary_no_internet_desc">Necesitas estar conectado a Internet para ver fotos de Mapillary.</string>
