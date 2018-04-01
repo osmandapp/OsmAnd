@@ -1548,7 +1548,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="installing_new_resources">Elpakado de novaj datumoj…</string>
     <string name="internet_connection_required_for_online_route">Servo de enreta navigado estas elektita, sed vi ne estas konektita al la interreto.</string>
     <string name="tts_language_not_supported_title">Lingvo ne subtenata</string>
-    <string name="tts_language_not_supported">La elektita lingvo ne estas subtenata per instalita Androida parolsintezilo. Ĉu vi volas serĉi alian parolsintezilon en la Market? Aliokaze la aktuale uzata lingvo estos elektita.</string>
+    <string name="tts_language_not_supported">La elektita lingvo ne estas subtenata per instalita Androida parolsintezilo. Ĉu vi volas serĉi alian parolsintezilon en la vendejo? Aliokaze la aktuale uzata lingvo estos elektita.</string>
     <string name="tts_missing_language_data_title">Mankas datumoj</string>
     <string name="tts_missing_language_data">Ĉu vi volas malfermi Market-on por elŝuti la elektitan lingvon?</string>
     <string name="gpx_option_reverse_route">Inversigi direkton de GPX</string>
