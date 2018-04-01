@@ -2608,7 +2608,7 @@
     <string name="toast_empty_name_error">למיקום אין שם</string>
 <string name="enter_the_file_name">נא להזין את שם הקובץ.</string>
     <string name="map_import_error">שגיאת ייבוא למפה</string>
-    <string name="map_imported_successfully">הייבוא למפה הצליח</string>
+    <string name="map_imported_successfully">המפה ייובאה</string>
     <string name="make_as_start_point">סימון כנקודת התחלה</string>
     <string name="shared_string_current">נוכחית</string>
     <string name="last_intermediate_dest_description">הוספת העצירה האחרונה לאורך הנתיב</string>
@@ -2643,4 +2643,7 @@
     <string name="delay_to_start_navigation">התחלת ניווט מונחה לאחר…</string>
     <string name="osmand_parking_overdue">תפוגה</string>
     <string name="nautical_renderer">ימי</string>
+    <string name="use_two_digits_longitude">שתי ספרות לציון קו אורך</string>
+    <string name="shared_string_travel">מסע</string>
+    <string name="nothing_found_in_radius">לא נמצא דבר ברדיוס של:</string>
     </resources>
