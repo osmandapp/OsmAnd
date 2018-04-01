@@ -176,7 +176,7 @@
 	<string name="confirm_interrupt_download">آیا دانلود فایل را متوقف می‌کنید؟</string>
 	<string name="local_indexes_cat_map">نقشه‌های استاندارد (بُرداری)</string>
 	<string name="index_settings_descr">نقشه‌های آفلاین را دانلود کنید و آن‌ها را روی گوشی خود مدیریت کنید.</string>
-	<string name="map_online_plugin_is_not_installed">افزونهٔ نقشه‌های آنلاین را فعال کنید تا منابع مختلفی را برای نقشه انتخاب کنید</string>
+	<string name="map_online_plugin_is_not_installed">افزونهٔ «نقشه‌های آنلاین» را فعال کنید تا منابع مختلفی را برای نقشه انتخاب کنید</string>
 	
 	<string name="local_osm_changes_backup">پشتیبان‌گیری به‌عنوان تغییر OSM</string>
     <string name="delete_point">حذف نقطه</string>
@@ -711,7 +711,7 @@
 	<string name="gpxup_trackable">قابل‌ردگیری</string>
 	<string name="gpxup_identifiable">قابل‌شناسایی</string>
 	<string name="navigate_point_format">قالب</string>
-	<string name="basemap_was_selected_to_download">نقشهٔ پایه جهت عملکرد صحیح برنامه لازم است و برای دانلود علامت‌گذاری شد.</string>
+	<string name="basemap_was_selected_to_download">نقشهٔ پایه انتخاب شد که دانلود شود تا برنامه راه بیفتد.</string>
 	<string name="select_index_file_to_download">چیزی پیدا نشد. اگر نمی‌توانید منطقهٔ خود را پیدا کنید، خودتان آن را بسازید (https://osmand.net را ببینید).</string>
 	<string name="local_indexes_cat_tile">نقشه‌های آنلاین و کاشی‌های ذخیره‌شده</string>
 	<string name="map_online_data">نقشه‌ها و کاشی‌های آنلاین</string>
@@ -721,7 +721,7 @@
 	
 	<string name="vector_maps_may_display_faster_on_some_devices">نقشه‌های بُرداری معمولاً زودتر نمایش داده می‌شوند. شاید روی برخی دستگاه‌ها خوب کار نکند.</string>
 	<string name="test_voice_prompts">امتحان‌کردن پیام‌های صوتی</string>    
-	<string name="switch_to_raster_map_to_see">برای این مکان هیچ نقشهٔ بُرداری آفلاینی وجود ندارد. نقشهٔ موردنظرتان را از قسمت تنظیمات (مدیریت فایل‌های نقشه) دانلود کنید یا اینکه از نقشه‌های آنلاین استفاده کنید (برای این کار افزونهٔ نقشه‌های آنلاین را فعال کنید).</string>
+	<string name="switch_to_raster_map_to_see">برای این مکان هیچ نقشهٔ بُرداری آفلاینی وجود ندارد. نقشهٔ موردنظرتان را از قسمت تنظیمات (مدیریت فایل‌های نقشه) دانلود کنید یا اینکه افزونهٔ «نقشه‌های آنلاین» را انتخاب کنید.</string>
 	<string name="no_info">بدون اطلاعات</string>
 	<string name="direction_style_clockwise">ساعت‌سو (۱۲سویه)</string>
 	<string name="settings_direction_style">شیوهٔ بیان جهت</string>
@@ -1131,7 +1131,7 @@
 	<string name="native_rendering">رندر بومی</string>
 	
 	<string name="accessibility_mode">حالت دسترسی آسان</string>
-	<string name="accessibility_mode_descr">امکانات دسترسی آسان را فعال می‌کند.</string>
+	<string name="accessibility_mode_descr">امکانات موردنیاز برای کاربران معلول را فعال می‌کند.</string>
 	<string name="direction_style_sidewise">جهت‌ها (۸سویه)</string>
 	<string name="zoom_by_trackball_descr">میزان بزرگ‌نمایی نقشه را با حرکت افقی گوی مکان‌نما تغییر دهید.</string>
 	<string name="zoom_by_trackball">استفاده از گوی مکان‌نما برای کنترل بزرگ‌نمایی</string>
