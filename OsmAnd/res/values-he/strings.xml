@@ -1802,7 +1802,7 @@
     <string name="update">עדכון</string>
     <string name="only_download_over_wifi">הורדה רק באמצעות אינטרנט אלחוטי</string>
     <string name="live_update">עדכון חי</string>
-    <string name="missing_write_external_storage_permission">ל־OsmAnd אין הרשאות להשתמש בכרטיס הזיכרון</string>
+    <string name="missing_write_external_storage_permission">ל־OsmAnd חסרות הרשאות לשימוש בכרטיס הזיכרון</string>
     <string name="last_update">עדכון אחרון: %s</string>
     <string name="last_map_change">שינוי אחרון במפה: %s</string>
     <string name="hourly">שעתי</string>
@@ -1818,9 +1818,9 @@
     <string name="quick_action_add_poi">הוספת נקודת עניין</string>
     <string name="quick_action_map_style">שינוי סגנון מפה</string>
     <string name="quick_action_map_style_switch">סגנון המפה הוחלף בהצלחה בסגנון „%s”.</string>
-    <string name="quick_action_take_audio_note">הקלטת הערת שמע</string>
-    <string name="quick_action_take_video_note">הקלטת הערת וידאו</string>
-    <string name="quick_action_take_photo_note">צילום הערת תמונה</string>
+    <string name="quick_action_take_audio_note">הערת שמע חדשה</string>
+    <string name="quick_action_take_video_note">הערת וידאו חדשה</string>
+    <string name="quick_action_take_photo_note">הערת תמונה תמונה</string>
     <string name="quick_action_add_osm_bug">הוספת הערת OSM</string>
     <string name="quick_action_navigation_voice">הנחייה קולית כבויה/פעילה</string>
     <string name="quick_action_navigation_voice_off">הנחייה קולית כבויה</string>
