@@ -2789,4 +2789,7 @@
     <string name="shared_string_travel">Reise</string>
     <string name="waypoints_removed_from_map_markers">Rutepunkter fjernet fra kartmarkører</string>
     <string name="use_two_digits_longitude">Bruk tosifret lengdegrad</string>
+    <string name="yard">yd</string>
+    <string name="mile_per_hour">mph</string>
+    <string name="mile">mi</string>
     </resources>
