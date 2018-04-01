@@ -437,7 +437,7 @@
     <string name="tts_language_not_supported_title">未支援的語言</string>
     <string name="tts_language_not_supported">選用的語言 Android TTS 引擎未支援，您要到商場找其它引擎嗎？否則使用預設的 TTS 語言。</string>
     <string name="tts_missing_language_data_title">資料遺失</string>
-    <string name="tts_missing_language_data">您選的語言未安裝，您要轉到 Play 商場安裝嗎？</string>
+    <string name="tts_missing_language_data">您要轉到商場下載所選擇的語言嗎？</string>
     <string name="gpx_option_reverse_route">反轉 GPX 方向</string>
     <string name="gpx_option_destination_point">使用目前的目的地</string>
     <string name="gpx_option_from_start_point">沿著整條軌跡往前</string>
@@ -460,7 +460,7 @@
     <string name="map_overlay_descr">選擇上層地圖。</string>
     <string name="tile_source_already_installed">地圖已安裝，「設定」將被更新。</string>
     <string name="select_tile_source_to_install">選擇要安裝或更新的(圖磚)地圖。</string>
-    <string name="internet_not_available">此操作無法使用，因為需要網路連線。</string>
+    <string name="internet_not_available">如果沒有連接到網際網路，無法執行運作。</string>
     <string name="install_more">安裝更多…</string>
     <string name="level_to_switch_vector_raster_descr">任何超出此縮放級別的，使用點陣圖。</string>
     <string name="level_to_switch_vector_raster">最小向量縮放比級別</string>
@@ -537,7 +537,7 @@
     <string name="specified_dir_doesnt_exist">找不到指定的資料夾。</string>
     <string name="application_dir">資料存儲器資料夾</string>
 
-    <string name="osmand_net_previously_installed">有前一版的 OsmAnd 存在，所有的離線資料將被新版引用。但我的收藏內的標點須以舊版程式匯出後再用新版程式匯入。</string>
+    <string name="osmand_net_previously_installed">舊版應用程式安裝的所有離線資料，在新版都會受到支援，但我的收藏內的標點須以舊版程式匯出後再用新版程式匯入。</string>
     <string name="build_installed">編譯 {0} 已安裝({1})。</string>
     <string name="downloading_build">正在下載編譯…</string>
     <string name="install_selected_build">您要安裝 OsmAnd - {0} 之中的 {1} {2} MB？</string>
