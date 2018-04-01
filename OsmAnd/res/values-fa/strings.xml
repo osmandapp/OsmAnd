@@ -733,7 +733,7 @@
 	<string name="offline_edition_descr">ویرایش‌ها را همیشه آفلاین انجام می‌دهم.</string>
 	<string name="local_openstreetmap_uploading">در حال آپلود…</string>
 	<string name="local_openstreetmap_were_uploaded">تعداد {0} یادداشت/POI آپلود شد</string>
-	<string name="update_poi_does_not_change_indexes">تغییراتی که به‌وسیلهٔ برنامه روی POIها انجام می‌دهید روی نقشه‌های دانلود‌شده تأثیری ندارد. تغییرات روی فایل محلی دیگری ذخیره می‌شود.</string>
+	<string name="update_poi_does_not_change_indexes">تغییراتی که به‌وسیلهٔ برنامه روی POIها انجام می‌دهید روی نقشه‌های دانلود‌شده تأثیری ندارد. تغییرات روی فایل دیگری در دستگاه ذخیره می‌شود.</string>
 	<string name="show_current_gpx_title">نمایش مسیر جاری</string>
 	<string name="fav_export_confirmation">قبلاً از نقاط برگزیده یک خروجی تهیه کرده‌اید و فایلش وجود دارد. آیا خروجی جدید را جایگزین آن می‌کنید؟</string>
 	
@@ -791,17 +791,17 @@
 	<string name="button_upgrade_osmandplus">ارتقا به OsmAnd+‎</string>
 	
 	<string name="shared_string_save_as_gpx">ذخیره‌کردن به‌صورت مسیر GPX جدید</string>
-	<string name="route_successfully_saved_at">مسیر با موفقیت در \'%1$s\' ذخیره شد.</string>
+	<string name="route_successfully_saved_at">مسیر در \'%1$s\' ذخیره شد.</string>
 	<string name="search_position_map_view">مرکز نقشهٔ جاری</string>
 	<string name="select_search_position">مبدأ:</string>
 	<string name="context_menu_item_search">جست‌وجوکردن این اطراف</string>
-	<string name="local_index_upload_gpx_description">فایل GPX را در سایت OSM آپلود کنید تا برای بهبود و توسعهٔ نقشه از آن استفاده شود.</string>
-	<string name="local_index_items_uploaded">%1$d مورد از %2$d مورد با موفقیت آپلود شد.</string>
+	<string name="local_index_upload_gpx_description">فایل‌های GPX را در سایت OSM آپلود کنید تا برای بهبود نقشه از آن‌ها استفاده شود.</string>
+	<string name="local_index_items_uploaded">%1$d مورد از %2$d مورد آپلود شد.</string>
 	<string name="local_index_mi_upload_gpx">ارسال به OSM</string>
-	<string name="show_more_map_detail_descr">برخی جزئیات نقشهٔ بُرداری را در زوم‌های پایین‌تر نشان می‌دهد (جاده‌ها و...).</string>
-	<string name="favourites_delete_multiple_succesful">نقطه(های) برگزیده حذف شد.</string>
+	<string name="show_more_map_detail_descr">برخی جزئیات نقشهٔ بُرداری (جاده‌ها و...) را در زوم‌های کمتر نشان می‌دهد.</string>
+	<string name="favourites_delete_multiple_succesful">نقطه‌های برگزیده حذف شد.</string>
 	<string name="favorite_delete_multiple">دارید %1$d نقطهٔ برگزیده و %2$d گروه را پاک می‌کنید. آیا مطمئن هستید؟</string>
-	<string name="basemap_missing">نقشه پایهٔ جهان (که تمام دنیا را در زوم‌های پایین پوشش می‌دهد) پیدا نشد. برای داشتن نمای جهانی لطفاً فایل World_basemap_x.obf را دانلود کنید.</string>
+	<string name="basemap_missing">نقشه پایهٔ جهان را دانلود کنید تا با امکان بزرگ‌نمایی اندکن مایی از سراسر جهان داشته باشید.</string>
 	<string name="local_index_installed">نسخهٔ محلی</string>
 	
 	
@@ -1051,8 +1051,8 @@
 	<string name="first_time_msg">از شما به‌خاطر استفاده از OsmAnd متشکریم. برای بیشتر امکانات این برنامه به داده‌های آفلاین منطقه‌ای نیاز دارید که می‌توانید آن‌ها را از طریق «تنظیمات» ← «مدیریت فایل‌های نقشه» دانلود کنید. سپس قادر خواهید بود نقشه‌ها را نگاه کنید، نشانی‌ها را پیدا کنید، مکان‌ها را جست‌وجو کنید و مسیرهای حمل‌ونقل عمومی را بیابید.</string>    
 	<string name="rendering_out_of_memory">برای نشان‌دادن ناحیهٔ انتخابی حافظهٔ اجرایی کافی وجود ندارد</string>
 	<string name="use_fluorescent_overlays">لایه‌های شب‌نما</string>
-	<string name="local_openstreetmap_settings">یادداشت‌ها/POIهای ذخیره‌شدهٔ محلی</string>
-	<string name="local_openstreetmap_settings_descr">مشاهده و مدیریت POIها/یادداشت‌هایی که در پایگاه دادهٔ محلی ذخیره شده‌اند.</string>
+	<string name="local_openstreetmap_settings">یادداشت‌ها/POIها روی دستگاه ذخیره شد</string>
+	<string name="local_openstreetmap_settings_descr">مشاهده و مدیریت POIها/یادداشت‌هایی که در پایگاه داده روی دستگاه ذخیره شده‌اند.</string>
 	
 	
 	<string name="live_monitoring_interval_descr">بازهٔ زمانی ردیابی آنلاین را مشخص کنید.</string>
@@ -1151,7 +1151,7 @@
 	
 	
 	<string name="update_poi_file_not_found">فایل محلی برای نگهداری تغییرات POI وجود ندارد و قابل‌ایجاد نیست.</string>
-	<string name="map_version_changed_info">فایل‌های نقشهٔ موجود در سایت با نسخهٔ فعلی نرم‌افزار سازگار نیست. لطفاً برای دانلود و استفاده از نقشه‌ها، نرم‌افزار را به نسخهٔ جدیدتر ارتقا دهید.</string>
+	<string name="map_version_changed_info">برای اینکه بتوانید از نقشه‌های جدید استفاده کنید، نسخهٔ تازهٔ برنامه را دانلود کنید.</string>
 	<string name="poi_filter_nominatim">جست‌وجوی آنلاین با Nominatim</string>
 	
 	<string name="vector_data_missing">داده‌های آفلاین نقشه روی کارت حافظه وجود ندارد. لطفاً برای استفاده از نقشه‌های آفلاین، آن را دانلود کنید.</string>
