@@ -2382,13 +2382,13 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_time_moving">Temps en moviment</string>
     <string name="shared_string_time_span">Lapse temporal</string>
     <string name="shared_string_max">Màx.</string>
-    <string name="shared_string_start_time">Hora inicial</string>
-    <string name="shared_string_end_time">Hora final</string>
+    <string name="shared_string_start_time">Sortida</string>
+    <string name="shared_string_end_time">Arribada</string>
     <string name="shared_string_color">Color</string>
     <string name="max_speed">Velocitat màxima</string>
     <string name="average_speed">Velocitat mitjana</string>
     <string name="gpx_track">Pista</string>
-    <string name="points_delete_multiple_succesful">El(s) punt(s) s\'ha(n) esborrat</string>
+    <string name="points_delete_multiple_succesful">El(s) punt(s) s\'ha(n) esborrat.</string>
     <string name="points_delete_multiple">Esteu eliminant %1$d punt(s). Ho confirmeu?</string>
     <string name="route_points_category_name">Canvis de direcció a la ruta</string>
     <string name="track_points_category_name">Punts destacables en aquesta ruta</string>
