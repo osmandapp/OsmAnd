@@ -1522,8 +1522,8 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="vector_data_missing">Elŝutu eksterretajn datumojn por uzi mapojn senkonekte.</string>
     <string name="shared_string_release">Eldonita je</string>
     <string name="local_index_installed">Loka versio</string>
-    <string name="local_index_items_backuped">Malaktivigis %1$d el %2$d ero(j)n.</string>
-    <string name="local_index_items_deleted">Forigis %1$d el %2$d ero(j)n.</string>
+    <string name="local_index_items_backuped">Malaktivigis %1$d el %2$d elemento(j)n.</string>
+    <string name="local_index_items_deleted">Forigis %1$d el %2$d elemento(j)n.</string>
     <string name="local_index_items_restored">Sukcese aktivigis %1$d el %2$d ero(j)n.</string>
     <string name="local_index_no_items_to_do">Neniu elemento por %1$s</string>
     <string name="local_index_action_do">Ĉu vi volas %1$s %2$s elemento(j)n?</string>
