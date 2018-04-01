@@ -1550,7 +1550,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="tts_language_not_supported_title">Lingvo ne subtenata</string>
     <string name="tts_language_not_supported">La elektita lingvo ne estas subtenata per instalita Androida parolsintezilo. Ĉu vi volas serĉi alian parolsintezilon en la vendejo? Aliokaze la aktuale uzata lingvo estos elektita.</string>
     <string name="tts_missing_language_data_title">Mankas datumoj</string>
-    <string name="tts_missing_language_data">Ĉu vi volas malfermi Market-on por elŝuti la elektitan lingvon?</string>
+    <string name="tts_missing_language_data">"Ĉu vi volas malfermi vendejon  por elŝuti la elektitan lingvon?"</string>
     <string name="gpx_option_reverse_route">Inversigi direkton de GPX</string>
     <string name="gpx_option_destination_point">Uzi aktualan celon</string>
     <string name="gpx_option_from_start_point">Iri laŭ tuta kurso</string>
@@ -1595,7 +1595,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="daynight_mode_auto">Sunleviĝa/sunsubira</string>
     <string name="daynight_mode_sensor">Lum-sentilo</string>
     <string name="daynight">Taga/nokta reĝimo</string>
-    <string name="daynight_descr">Elekti kiam ŝalti tagan/noktan reĝimon.</string>
+    <string name="daynight_descr">Difini kriterion kiam baskuli inter nokta kaj taga reĝimoj.</string>
     <string name="download_files_question">Ĉu elŝuti {0} dosiero(j)n ({1} MB)?</string>
     <string name="filter_existing_indexes">Elŝutitaj</string>
     <string name="shared_string_download_map">Elŝuti mapon</string>
