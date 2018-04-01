@@ -1085,7 +1085,7 @@ Lon: %2$s</string>
     <string name="dropbox_plugin_description">La kromprogramo Dropbox ebligas al vi samtempigi kursojn kaj sonajn/videajn notojn kun via konto ĉe Dropbox.</string>
     <string name="dropbox_plugin_name">Dropbox kromprogramo</string>
     <string name="intermediate_points_change_order">Ŝanĝi ordon</string>
-    <string name="srtm_paid_version_msg">Bonvolu konsideri aĉeti la kromprogramon “nivelkurboj” en la Market por subteni ĝian pluan evoluigon.</string>
+    <string name="srtm_paid_version_msg">Bonvolu konsideri aĉeti la kromprogramon “nivelkurboj” en la vendejo por subteni ĝian pluan evoluigon.</string>
     <string name="av_def_action_choose">Elekti laŭvole</string>
     <string name="av_def_action_video">Registri videon</string>
     <string name="av_def_action_audio">Registri sonon</string>
@@ -1524,13 +1524,13 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="local_index_installed">Loka versio</string>
     <string name="local_index_items_backuped">Malaktivigis %1$d el %2$d elemento(j)n.</string>
     <string name="local_index_items_deleted">Forigis %1$d el %2$d elemento(j)n.</string>
-    <string name="local_index_items_restored">Sukcese aktivigis %1$d el %2$d ero(j)n.</string>
+    <string name="local_index_items_restored">Aktivigis %1$d el %2$d elemento(j)n.</string>
     <string name="local_index_no_items_to_do">Neniu elemento por %1$s</string>
     <string name="local_index_action_do">Ĉu vi volas %1$s %2$s elemento(j)n?</string>
     <string name="local_index_descr_title">Administri map-dosierojn.</string>
     <string name="local_index_mi_restore">Aktivigi</string>
     <string name="local_index_mi_backup">Malaktivigi</string>
-    <string name="local_index_mi_reload">Reŝargi de memorkarto</string>
+    <string name="local_index_mi_reload">Reŝargi el memorkarto</string>
     <string name="local_index_poi_data">Interesej-datumoj</string>
     <string name="local_index_address_data">Adres-datumoj</string>
     <string name="local_index_transport_data">Transport-publik-datumoj</string>
@@ -1546,11 +1546,11 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="trace_rendering">Senerarigaj informoj pri bildigado</string>
     <string name="trace_rendering_descr">Montri informojn pri efikeco de bildigado.</string>
     <string name="installing_new_resources">Elpakado de novaj datumoj…</string>
-    <string name="internet_connection_required_for_online_route">Servo de enreta navigado estas elektita, sed vi ne estas konektita al Interreto.</string>
+    <string name="internet_connection_required_for_online_route">Servo de enreta navigado estas elektita, sed vi ne estas konektita al la interreto.</string>
     <string name="tts_language_not_supported_title">Lingvo ne subtenata</string>
     <string name="tts_language_not_supported">La elektita lingvo ne estas subtenata per instalita Androida parolsintezilo. Ĉu vi volas serĉi alian parolsintezilon en la Market? Aliokaze la aktuale uzata lingvo estos elektita.</string>
     <string name="tts_missing_language_data_title">Mankas datumoj</string>
-    <string name="tts_missing_language_data">Neniuj datumoj instalitaj por la elektita lingvo. Ĉu vi volas malfermi Market-on por instali?</string>
+    <string name="tts_missing_language_data">Ĉu vi volas malfermi Market-on por elŝuti la elektitan lingvon?</string>
     <string name="gpx_option_reverse_route">Inversigi direkton de GPX</string>
     <string name="gpx_option_destination_point">Uzi aktualan celon</string>
     <string name="gpx_option_from_start_point">Iri laŭ tuta kurso</string>
@@ -1561,7 +1561,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="choose_audio_stream_descr">Elekti laŭtparolilon por ludi gvidadan voĉon.</string>
     <string name="voice_stream_notification">Sciiga aŭd-kanalo</string>
     <string name="voice_stream_music">Aŭdvidaĵa/muzika kanalo</string>
-    <string name="warning_tile_layer_not_downloadable">Programo ne povas elŝuti map-tavolon %1$s, bonvolu provi reinstali ĝin.</string>
+    <string name="warning_tile_layer_not_downloadable">La aplikaĵo ne povas elŝuti map-tavolon %1$s, bonvolu provi reinstali ĝin.</string>
     <string name="overlay_transparency_descr">Modifi diafanecon de surtavolo.</string>
     <string name="overlay_transparency">Tavola diafaneco</string>
     <string name="map_transparency">Bazmapa diafaneco</string>
@@ -1574,7 +1574,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="map_overlay_descr">Elekti surtavolan mapon.</string>
     <string name="tile_source_already_installed">Mapo estas jam instalita, agordoj estos ĝisdatigitaj.</string>
     <string name="select_tile_source_to_install">Elekti (kahelajn) mapojn por instali aŭ ĝisdatigi.</string>
-    <string name="internet_not_available">Interreta konekto estas bezonata por tio, sed ne estas disponebla.</string>
+    <string name="internet_not_available">Ne povas fari tion ĉi sen interreta konekto.</string>
     <string name="install_more">Instali pli…</string>
     <string name="lang_es_us">Hispana (Amerika)</string>
     <string name="lang_be_by">Belorusa (latina)</string>
@@ -1655,7 +1655,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="debugging_and_development">OsmAnd-programistilo</string>
     <string name="osmand_development_plugin_description">Montras agordojn por programado kaj senerarigado kiel testado aŭ simulado de kurso, efikeco de ekran-bildigado, aŭ voĉaj sciigoj. Tiuj ĉi agordoj taŭgas por programistoj kaj ne estas bezonataj por norma uzanto.</string>
     <string name="lang_en_gb">Angla (Brita)</string>
-    <string name="level_to_switch_vector_raster_descr">Minimuma skal-nivelo por uzi ĉe vektoraj mapoj.</string>
+    <string name="level_to_switch_vector_raster_descr">Uzi kahelajn mapojn de tiu ĉi pligrandigo.</string>
     <string name="level_to_switch_vector_raster">Minimuma vektora skal-nivelo</string>
     <string name="create_poi_link_to_osm_doc"><u>Enreta OSM</u> map-klasigo kun bildoj.</string>
     <string name="error_doing_search">Eraro okazis dum eksterreta serĉado.</string>
@@ -1676,7 +1676,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="send_location_email_pattern">Por vidi lokon, malfermu ret-foliumilan ligilon %1$s aŭ Androidan ligilon %2$s</string>
     <string name="send_location">Sendi lokon</string>
     <string name="context_menu_item_share_location">Kunhavigi lokon</string>
-    <string name="add_waypoint_dialog_added">GPX-navigadpunkto \"{0}\" aldonita sukcese</string>
+    <string name="add_waypoint_dialog_added">Aldonis GPX-navigadpunkton “{0}”</string>
     <string name="add_waypoint_dialog_title">Aldoni navigadpunkton al registrita GPX-spuro</string>
     <string name="context_menu_item_add_waypoint">Aldoni GPX-navigadpunkton</string>
     <string name="amenity_type_landuse">Utilkampo</string>
@@ -1698,7 +1698,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="km">km</string>
     <string name="km_h">km/h</string>
     <string name="m">m</string>
-    <string name="old_map_index_is_not_supported">Neaktuala formo de map-datumoj \"{0}\" ne estas subtenata</string>
+    <string name="old_map_index_is_not_supported">Neaktuala formo de map-datumoj “{0}” ne estas estas subtenata</string>
     <string name="poi_filter_custom_filter">Propra filtrilo</string>
     <string name="poi_filter_namefinder">Serĉi nomojn enrete</string>
     <string name="reading_cached_tiles">Ŝargado de konservitaj kaheloj…</string>
@@ -1707,13 +1707,13 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     
     
     <string name="osmand_routing_experimental">OsmAnd eksterreta navigado estas testa eblo kaj ĝi ne funkcias por distancoj pli grandaj ol 20 km.
-
-Provizore estas uzata enreta servo CloudMade.</string>
+\n
+\nProvizore enŝaltis enretan servon CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Ne povis trovi la elektitan dosierujon.</string>
 
 
-    <string name="osmand_net_previously_installed">Antaŭa versio de OsmAnd estas instalita. Ĉiuj eksterretaj datumoj estos subtenataj de la nova aplikaĵo. Tamen viaj ŝatataj punktoj povas esti elportitaj per la malnova versio, kaj poste estu enportitaj al la nova.</string>
-    <string name="build_installed">Kompilaĵo {0} instalita sukcese ({1}).</string>
+    <string name="osmand_net_previously_installed">Ĉiuj eksterretaj datumoj de la malnova versio estos subtenataj per la nova versio de la aplikaĵo, sed viaj ŝatataj punktoj devas esti elportitaj per la malnova versio kaj sekve enportitaj al la nova.</string>
+    <string name="build_installed">Instalis kompilaĵon {0} ({1}).</string>
     <string name="downloading_build">Elŝutado de kompilaĵo…</string>
     <string name="install_selected_build">Ĉu vi volas instali OsmAnd - {0} de {1} {2} MB?</string>
     <string name="loading_builds_failed">Elŝutado de listo de OsmAnd kompilaĵoj malsukcesis</string>
