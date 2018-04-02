@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -165,10 +166,8 @@ public class OsmandApplication extends MultiDexApplication {
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
-
 		InAppHelper.initialize(this);
-		initRemoteConfig();
-		printFirebasetoken();
+		initExternalLibs();
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();
@@ -878,6 +877,31 @@ public class OsmandApplication extends MultiDexApplication {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public void initExternalLibs() {
+		initRemoteConfig();
+		printFirebasetoken();
+		initFBEvents();
+	}
+	
+	public void initFBEvents() {
+		try {
+			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+				Class<?> cls = Class.forName("com.facebook.FacebookSdk");
+				Method ms = cls.getMethod("sdkInitialize", Context.class);
+				ms.invoke(null, getApplicationContext());
+				Class<?> cl = Class.forName("com.facebook.appevents.AppEventsLogger");
+				Method mm = cl.getMethod("activateApp", Application.class);
+				mm.invoke(null, this);
+				Method mu = cl.getMethod("getUserID");
+				String uid = (String) mu.invoke(null);
+				LOG.info("FB token: " + uid);
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage(), e);
+		}
+	}
 
 	public void initRemoteConfig() {
 		try {
@@ -891,7 +915,7 @@ public class OsmandApplication extends MultiDexApplication {
 				log.invoke(inst, defaults);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage(), e);
 		}
 	}
 	
@@ -907,7 +931,7 @@ public class OsmandApplication extends MultiDexApplication {
 				LOG.info("Fbase token: " + firebaseToken);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage(), e);
 		}
 	}
 

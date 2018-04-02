@@ -6,17 +6,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecyclerViewAdapter.ViewHolder> {
+public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-	private List<WikivoyageSearchResult> items = new ArrayList<>();
+	private static final int HEADER_TYPE = 0;
+	private static final int ITEM_TYPE = 1;
+
+	private OsmandApplication app;
+	private IconsCache iconsCache;
+
+	private List<Object> items = new ArrayList<>();
 
 	private View.OnClickListener onItemClickListener;
 
@@ -24,23 +33,51 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 		this.onItemClickListener = onItemClickListener;
 	}
 
+	SearchRecyclerViewAdapter(OsmandApplication app) {
+		this.app = app;
+		this.iconsCache = app.getIconsCache();
+	}
+
 	@NonNull
 	@Override
-	public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-		View itemView = LayoutInflater.from(viewGroup.getContext())
-				.inflate(R.layout.wikivoyage_search_list_item, viewGroup, false);
+	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+		boolean header = viewType == HEADER_TYPE;
+		int layoutId = header ? R.layout.wikivoyage_search_list_header : R.layout.wikivoyage_search_list_item;
+		View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(layoutId, viewGroup, false);
+		if (header) {
+			return new HeaderVH(itemView);
+		}
 		itemView.setOnClickListener(onItemClickListener);
-		return new ViewHolder(itemView);
+		return new ItemVH(itemView);
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-		WikivoyageSearchResult item = items.get(i);
-		// FIXME
-		viewHolder.searchTerm.setText(item.getSearchTerm().toString());
-		viewHolder.cityId.setText(String.valueOf(item.getCityId()));
-		viewHolder.articleTitle.setText(item.getArticleTitle().toString());
-		viewHolder.lang.setText(item.getLang().toString());
+	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int pos) {
+		if (viewHolder instanceof HeaderVH) {
+			((HeaderVH) viewHolder).title.setText((String) getItem(pos));
+		} else {
+			ItemVH holder = (ItemVH) viewHolder;
+			boolean lastItem = pos == getItemCount() - 1;
+
+			WikivoyageSearchResult item = (WikivoyageSearchResult) getItem(pos);
+			holder.icon.setImageDrawable(
+					iconsCache.getIcon(R.drawable.ic_action_placeholder_city, R.color.icon_color)
+			);
+			holder.title.setText(item.getArticleTitles().get(0));
+			holder.leftDescr.setText(item.getIsPartOf());
+			holder.rightDescr.setText(item.getFirstLangsString());
+			holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);
+			holder.shadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
+		}
+	}
+
+	@Override
+	public int getItemViewType(int position) {
+		Object item = getItem(position);
+		if (item instanceof String) {
+			return HEADER_TYPE;
+		}
+		return ITEM_TYPE;
 	}
 
 	@Override
@@ -48,32 +85,46 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 		return items.size();
 	}
 
-	public WikivoyageSearchResult getItem(int pos) {
+	public Object getItem(int pos) {
 		return items.get(pos);
 	}
 
 	public void setItems(@Nullable List<WikivoyageSearchResult> items) {
-		if (items == null) {
-			this.items.clear();
-		} else {
-			this.items = items;
+		this.items.clear();
+		if (items != null && !items.isEmpty()) {
+			this.items.add(app.getString(R.string.shared_string_result));
+			this.items.addAll(items);
 		}
 		notifyDataSetChanged();
 	}
 
-	static class ViewHolder extends RecyclerView.ViewHolder {
+	static class HeaderVH extends RecyclerView.ViewHolder {
 
-		final TextView searchTerm;
-		final TextView cityId;
-		final TextView articleTitle;
-		final TextView lang;
+		final TextView title;
 
-		public ViewHolder(View itemView) {
+		public HeaderVH(View itemView) {
 			super(itemView);
-			searchTerm = (TextView) itemView.findViewById(R.id.search_term);
-			cityId = (TextView) itemView.findViewById(R.id.city_id);
-			articleTitle = (TextView) itemView.findViewById(R.id.article_title);
-			lang = (TextView) itemView.findViewById(R.id.lang);
+			title = (TextView) itemView.findViewById(R.id.title);
+		}
+	}
+
+	static class ItemVH extends RecyclerView.ViewHolder {
+
+		final ImageView icon;
+		final TextView title;
+		final TextView leftDescr;
+		final TextView rightDescr;
+		final View divider;
+		final View shadow;
+
+		public ItemVH(View itemView) {
+			super(itemView);
+			icon = (ImageView) itemView.findViewById(R.id.icon);
+			title = (TextView) itemView.findViewById(R.id.title);
+			leftDescr = (TextView) itemView.findViewById(R.id.left_description);
+			rightDescr = (TextView) itemView.findViewById(R.id.right_description);
+			divider = itemView.findViewById(R.id.divider);
+			shadow = itemView.findViewById(R.id.shadow);
 		}
 	}
 }

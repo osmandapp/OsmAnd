@@ -67,6 +67,7 @@
 
 		<attr name="wikivoyage_bg_color" format="reference"/>
 		<attr name="wikivoyage_card_bg_color" format="reference"/>
+		<attr name="wikivoyage_card_divider_color" format="reference"/>
 		<attr name="wikivoyage_app_bar_color" format="reference"/>
 		<attr name="wikivoyage_app_bar_text_color" format="reference"/>
 		<attr name="wikivoyage_active_color" format="reference"/>

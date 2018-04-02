@@ -8,7 +8,7 @@
         tools:replace="android:icon">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:resource="@string/facebook_app_id"/>
+            android:value="fb131313131043971"/>
         <activity
             android:name="net.osmand.plus.activities.MapActivity"
             android:theme="@style/FirstSplashScreenCustom"

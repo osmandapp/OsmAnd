@@ -102,7 +102,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		}
 
 		final PopupMenu popup = new PopupMenu(view.getContext(), view, Gravity.END);
-		for (final String lang : searchResult.getLang()) {
+		for (final String lang : searchResult.getLangs()) {
 			MenuItem item = popup.getMenu().add(lang);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
@@ -130,7 +130,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			return;
 		}
 		if (selectedLang == null) {
-			selectedLang = searchResult.getLang().get(0);
+			selectedLang = searchResult.getLangs().get(0);
 		}
 
 		selectedLangTv.setText(selectedLang);
