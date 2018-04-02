@@ -9,7 +9,7 @@
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:resource="@string/facebook_app_id"/>
+            android:resource="@string/facebook_dev_app_id"/>
         <activity
             android:name="net.osmand.plus.activities.MapActivity"
             android:theme="@style/FirstSplashScreenFree"

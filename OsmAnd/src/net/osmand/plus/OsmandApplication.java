@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -165,10 +166,8 @@ public class OsmandApplication extends MultiDexApplication {
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
-
 		InAppHelper.initialize(this);
-		initRemoteConfig();
-		printFirebasetoken();
+		initExternalLibs();
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();
@@ -873,6 +872,25 @@ public class OsmandApplication extends MultiDexApplication {
 				Object inst = mm.invoke(null, ctx == null ? this : ctx);
 				Method log = cl.getMethod("logEvent", String.class, Bundle.class);
 				log.invoke(inst, event, new Bundle());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void initExternalLibs() {
+		initRemoteConfig();
+		printFirebasetoken();
+		initFBEvents();
+	}
+	
+	public void initFBEvents() {
+		try {
+			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+				Class<?> cl = Class.forName("com.facebook.appevents.AppEventsLogger");
+				Method mm = cl.getMethod("activateApp", Application.class);
+				mm.invoke(null, this);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
