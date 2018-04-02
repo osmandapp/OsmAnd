@@ -3061,4 +3061,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="rendering_attr_whiteWaterSports_name">Rafting</string>
     <string name="waypoints_removed_from_map_markers">Rutepunkter fjernet fra kortmarkører</string>
     <string name="shared_string_travel">Rejse</string>
+    <string name="shared_string_result">Resultat</string>
+    <string name="use_two_digits_longitude">Brug tocifret længdegrad</string>
     </resources>
