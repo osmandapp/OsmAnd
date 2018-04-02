@@ -888,12 +888,18 @@ public class OsmandApplication extends MultiDexApplication {
 	public void initFBEvents() {
 		try {
 			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+				Class<?> cls = Class.forName("com.facebook.FacebookSdk");
+				Method ms = cls.getMethod("sdkInitialize", Context.class);
+				ms.invoke(null, getApplicationContext());
 				Class<?> cl = Class.forName("com.facebook.appevents.AppEventsLogger");
 				Method mm = cl.getMethod("activateApp", Application.class);
 				mm.invoke(null, this);
+				Method mu = cl.getMethod("getUserID");
+				String uid = (String) mu.invoke(null);
+				LOG.info("FB token: " + uid);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage(), e);
 		}
 	}
 
@@ -909,7 +915,7 @@ public class OsmandApplication extends MultiDexApplication {
 				log.invoke(inst, defaults);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage(), e);
 		}
 	}
 	
@@ -925,7 +931,7 @@ public class OsmandApplication extends MultiDexApplication {
 				LOG.info("Fbase token: " + firebaseToken);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage(), e);
 		}
 	}
 
