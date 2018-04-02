@@ -89,9 +89,8 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 	}
 
 	public void setItems(@Nullable List<WikivoyageSearchResult> items) {
-		if (items == null || items.isEmpty()) {
-			this.items.clear();
-		} else {
+		this.items.clear();
+		if (items != null && !items.isEmpty()) {
 			this.items.add(app.getString(R.string.shared_string_result));
 			this.items.addAll(items);
 		}
