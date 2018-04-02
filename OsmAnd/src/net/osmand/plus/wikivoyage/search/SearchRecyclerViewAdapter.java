@@ -17,11 +17,15 @@ import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecyclerViewAdapter.ViewHolder> {
+public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+	private static final int HEADER_TYPE = 0;
+	private static final int ITEM_TYPE = 1;
+
+	private OsmandApplication app;
 	private IconsCache iconsCache;
 
-	private List<WikivoyageSearchResult> items = new ArrayList<>();
+	private List<Object> items = new ArrayList<>();
 
 	private View.OnClickListener onItemClickListener;
 
@@ -30,28 +34,49 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 	}
 
 	SearchRecyclerViewAdapter(OsmandApplication app) {
+		this.app = app;
 		this.iconsCache = app.getIconsCache();
 	}
 
 	@NonNull
 	@Override
-	public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-		View itemView = LayoutInflater.from(viewGroup.getContext())
-				.inflate(R.layout.wikivoyage_search_list_item, viewGroup, false);
+	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+		boolean header = viewType == HEADER_TYPE;
+		int layoutId = header ? R.layout.wikivoyage_search_list_header : R.layout.wikivoyage_search_list_item;
+		View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(layoutId, viewGroup, false);
+		if (header) {
+			return new HeaderVH(itemView);
+		}
 		itemView.setOnClickListener(onItemClickListener);
-		return new ViewHolder(itemView);
+		return new ItemVH(itemView);
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull ViewHolder holder, int pos) {
-		boolean lastItem = pos == getItemCount() - 1;
+	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int pos) {
+		if (viewHolder instanceof HeaderVH) {
+			((HeaderVH) viewHolder).title.setText((String) getItem(pos));
+		} else {
+			ItemVH holder = (ItemVH) viewHolder;
+			boolean lastItem = pos == getItemCount() - 1;
 
-		WikivoyageSearchResult item = items.get(pos);
-		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_placeholder_city, R.color.icon_color));
-		holder.title.setText(item.getArticleTitle().toString());
-		holder.description.setText(item.getLang().toString());
-		holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);
-		holder.shadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
+			WikivoyageSearchResult item = (WikivoyageSearchResult) getItem(pos);
+			holder.icon.setImageDrawable(
+					iconsCache.getIcon(R.drawable.ic_action_placeholder_city, R.color.icon_color)
+			);
+			holder.title.setText(item.getArticleTitle().toString());
+			holder.description.setText(item.getLang().toString());
+			holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);
+			holder.shadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
+		}
+	}
+
+	@Override
+	public int getItemViewType(int position) {
+		Object item = getItem(position);
+		if (item instanceof String) {
+			return HEADER_TYPE;
+		}
+		return ITEM_TYPE;
 	}
 
 	@Override
@@ -59,20 +84,31 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 		return items.size();
 	}
 
-	public WikivoyageSearchResult getItem(int pos) {
+	public Object getItem(int pos) {
 		return items.get(pos);
 	}
 
 	public void setItems(@Nullable List<WikivoyageSearchResult> items) {
-		if (items == null) {
+		if (items == null || items.isEmpty()) {
 			this.items.clear();
 		} else {
-			this.items = items;
+			this.items.add(app.getString(R.string.shared_string_result));
+			this.items.addAll(items);
 		}
 		notifyDataSetChanged();
 	}
 
-	static class ViewHolder extends RecyclerView.ViewHolder {
+	static class HeaderVH extends RecyclerView.ViewHolder {
+
+		final TextView title;
+
+		public HeaderVH(View itemView) {
+			super(itemView);
+			title = (TextView) itemView.findViewById(R.id.title);
+		}
+	}
+
+	static class ItemVH extends RecyclerView.ViewHolder {
 
 		final ImageView icon;
 		final TextView title;
@@ -80,7 +116,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 		final View divider;
 		final View shadow;
 
-		public ViewHolder(View itemView) {
+		public ItemVH(View itemView) {
 			super(itemView);
 			icon = (ImageView) itemView.findViewById(R.id.icon);
 			title = (TextView) itemView.findViewById(R.id.title);

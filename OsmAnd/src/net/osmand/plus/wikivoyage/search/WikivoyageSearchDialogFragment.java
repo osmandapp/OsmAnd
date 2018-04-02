@@ -98,7 +98,11 @@ public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment
 			public void onClick(View v) {
 				int pos = rv.getChildAdapterPosition(v);
 				if (pos != RecyclerView.NO_POSITION) {
-					WikivoyageArticleDialogFragment.showInstance(getFragmentManager(), adapter.getItem(pos));
+					Object item = adapter.getItem(pos);
+					if (item instanceof WikivoyageSearchResult) {
+						WikivoyageArticleDialogFragment.showInstance(getFragmentManager(),
+								(WikivoyageSearchResult) item);
+					}
 				}
 			}
 		});

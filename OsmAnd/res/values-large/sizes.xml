@@ -193,4 +193,6 @@
 	<dimen name="coords_input_show_hide_keyboard_btn_padding">19dp</dimen>
 
 	<dimen name="toolbar_height">84dp</dimen>
+
+	<dimen name="wikivoyage_search_list_header_height">54dp</dimen>
 </resources>
