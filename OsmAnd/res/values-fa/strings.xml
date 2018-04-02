@@ -628,8 +628,8 @@
 	<string name="error_calculating_route">خطا در محاسبهٔ مسیر</string>
 	<string name="hint_search_online">جست‌وجوی آنلاین: شهر، خیابان، پلاک</string>
 	<string name="context_menu_item_update_poi">به‌روزرسانی POI</string>
-	<string name="sd_unmounted">حافظهٔ جانبی در دسترس نیست.
-\nقادر به دیدن نقشه یا پیداکردن جزئیات نخواهید بود.</string>
+	<string name="sd_unmounted">کارت حافظه در دسترس نیست. 
+\nقادر به دیدن نقشه یا یافتن جزئیات نخواهید بود.</string>
 	<string name="route_tr">به راست بپیچید و بروید</string>
 	<string name="route_tshr">کاملاً به راست بپیچید و بروید</string>
 	<string name="route_tl">به چپ بپیچید و بروید</string>
@@ -983,7 +983,7 @@
 	<string name="error_occurred_loading_gpx">هنگام بارگیری GPX خطایی رخ داد</string>
 	<string name="send_report">ارسال گزارش</string>
 	<string name="none_region_found">روی کارت حافظه دادهٔ آفلاینی برای مناطق پیدا نشد. مناطق را از اینترنت دانلود کنید.</string>
-	<string name="poi_namefinder_query_empty">"بنویسید تا یک "</string>
+	<string name="poi_namefinder_query_empty">بنویسید تا یک POI را پیدا کنید</string>
 	<string name="any_poi">هرچه</string>
 	
 	<string name="thanks_yandex_traffic">اطلاعات ترافیک به‌واسطهٔ Yandex فراهم آمده است.</string>
@@ -994,7 +994,7 @@
 	
 	<string name="shared_string_refresh">تازه‌سازی</string>
 	<string name="items_were_selected">{0} مورد انتخاب شد</string>
-	<string name="daynight_descr">تغییر وضعیت به حالت روز/شب بر چه اساسی انجام شود؟</string>
+	<string name="daynight_descr">تغییر وضعیت به حالت روز/شب بر چه اساسی انجام شود.</string>
 	<string name="install_selected_build">آیا OsmAnd - {0}‎ به‌تاریخ {1} را نصب می‌کنید؟ ({2} مگابایت)</string>
 	<string name="loading_builds_failed">بازیابی لیست ساخت‌های OsmAnd ناموفق بود</string>
 	<string name="loading_builds">بارگیری ساخت‌های OsmAnd…</string>
@@ -2514,20 +2514,20 @@
     <string name="quick_actions_delete">حذف عملیات</string>
     <string name="quick_actions_delete_text">آیا برای حذف‌کردن عملیات «%s» مطمئن هستید؟</string>
     <string name="quick_favorites_show_favorites_dialog">کادر نقاط برگزیده را نشان بده</string>
-    <string name="quick_action_add_marker_descr">با لمس دکمهٔ عملیاتی یک نشانه در مرکز صفحه ایجاد می‌شود.</string>
-    <string name="quick_action_take_audio_note_descr">با لمس دکمهٔ عملیاتی یک یادداشت صوتی در مرکز صفحه ایجاد می‌شود.</string>
-    <string name="quick_action_take_video_note_descr">با لمس دکمهٔ عملیاتی یک یادداشت ویدئویی در مرکز صفحه ایجاد می‌شود.</string>
-    <string name="quick_action_take_photo_note_descr">با لمس دکمهٔ عملیاتی یک یادداشت تصویری در مرکز صفحه ایجاد می‌شود.</string>
-    <string name="quick_action_add_osm_bug_descr">با لمس دکمهٔ عملیاتی یک توضیح ویرایشی OSM در مرکز صفحه ایجاد می‌شود.</string>
-    <string name="quick_action_add_poi_descr">با لمس دکمهٔ عملیاتی یک مکان POI در مرکز صفحه ایجاد می‌شود.</string>
-    <string name="quick_action_navigation_voice_descr">با لمس دکمهٔ عملیاتی در حین راهبری، راهنمای صوتی فعال یا غیرفعال می‌شود.</string>
-    <string name="quick_action_add_parking_descr">با لمس دکمهٔ عملیاتی یک جای پارک در مرکز صفحه علامت‌گذاری می‌شود.</string>
+    <string name="quick_action_add_marker_descr">با لمس این دکمهٔ عملیاتی یک نشانه در مرکز صفحه ایجاد می‌شود.</string>
+    <string name="quick_action_take_audio_note_descr">با لمس این دکمهٔ عملیاتی یک یادداشت صوتی در مرکز صفحه ایجاد می‌شود.</string>
+    <string name="quick_action_take_video_note_descr">با لمس این دکمهٔ عملیاتی یک یادداشت ویدئویی در مرکز صفحه ایجاد می‌شود.</string>
+    <string name="quick_action_take_photo_note_descr">با لمس این دکمهٔ عملیاتی یک یادداشت تصویری در مرکز صفحه ایجاد می‌شود.</string>
+    <string name="quick_action_add_osm_bug_descr">با لمس این دکمهٔ عملیاتی یک توضیح ویرایشی OSM در مرکز صفحه ایجاد می‌شود.</string>
+    <string name="quick_action_add_poi_descr">با لمس این دکمهٔ عملیاتی یک مکان POI در مرکز صفحه ایجاد می‌شود.</string>
+    <string name="quick_action_navigation_voice_descr">با لمس این دکمهٔ عملیاتی در حین راهبری، راهنمای صوتی فعال یا غیرفعال می‌شود.</string>
+    <string name="quick_action_add_parking_descr">با لمس این دکمهٔ عملیاتی یک جای پارک در مرکز صفحه علامت‌گذاری می‌شود.</string>
     <string name="favorite_autofill_toast_text">" اینجا ذخیره شد: "</string>
     <string name="favorite_empty_place_name">مکان</string>
     <string name="quick_action_duplicates">نام عملیات فوری موردنظر قبلاً استفاده شده است. برای جلوگیری از تکرار، به «%1$s» تغییر کرد.</string>
     <string name="quick_action_duplicate">نام تکراری برای عملیات فوری</string>
-    <string name="quick_action_showhide_favorites_descr">با لمس دکمهٔ عملیاتی، نقاط برگزیده روی نقشه پنهان/آشکار می‌شوند.</string>
-    <string name="quick_action_showhide_poi_descr">با لمس دکمهٔ عملیاتی، POIها روی نقشه پنهان/آشکار می‌شوند.</string>
+    <string name="quick_action_showhide_favorites_descr">با لمس این دکمهٔ عملیاتی، نقاط برگزیده روی نقشه پنهان/آشکار می‌شوند.</string>
+    <string name="quick_action_showhide_poi_descr">با لمس این دکمهٔ عملیاتی، POIها روی نقشه پنهان/آشکار می‌شوند.</string>
     <string name="quick_action_showhide_favorites_title">آشکار/پنهان‌کردن نقاط برگزیده</string>
     <string name="quick_action_favorites_show">نشان‌دادن نقاط برگزیده</string>
     <string name="quick_action_favorites_hide">مخفی‌کردن نقاط برگزیده</string>
@@ -2561,7 +2561,7 @@
     <string name="quick_action_btn_tutorial_title">تغییردادن جای دکمه</string>
     <string name="quick_action_btn_tutorial_descr">دکمه را لمس کنید و نگه دارید تا جای آن را روی صفحه عوض کنید.</string>
     <string name="shared_string_action_name">نام عملیات</string>
-    <string name="mappilary_no_internet_desc">برای اینکه تصاویر مَپیلاری را ببینید به اینترنت نیاز دارید.</string>
+    <string name="mappilary_no_internet_desc">برای اینکه تصاویر مَپیلاری را ببینید به اینترنت وصل شوید.</string>
     <string name="retry">تلاش مجدد</string>
     <string name="add_line">افزودن خط</string>
     <string name="empty_state_favourites">افزودن نقاط برگزیده</string>
@@ -2739,7 +2739,7 @@
     <string name="saved_at_time">در %1$s ذخیره شد</string>
     <string name="quick_action_interim_dialog">کادری برای تنظیم آن نشان بده</string>
     <string name="quick_action_add_create_items">دکمه‌هایی را اضافه کنید</string>
-    <string name="quick_action_page_list_descr">با هر بار لمس دکمهٔ عملیاتی، یکی از موارد موجود در لیست زیر را فعال می‌کنید.</string>
+    <string name="quick_action_page_list_descr">با هر بار لمس این دکمهٔ عملیاتی، یکی از موارد موجود در لیست زیر را فعال می‌کنید.</string>
     <string name="quick_action_map_style_action">افزودن یک سبک نقشه</string>
     <string name="empty_state_my_tracks">مسیرها را اضافه کنید یا ضبط کنید</string>
     <string name="empty_state_my_tracks_desc">برای مشاهده مسیری را وارد کنید یا ضبط کنید.</string>
@@ -2789,7 +2789,7 @@
     <string name="rendering_value_darkyellow_name">زرد تیره</string>
     <string name="quick_action_add_gpx">افزودن نقطهٔ بین‌راهی GPX</string>
     <string name="quick_favorites_name_preset">پیش‌تنظیم نام</string>
-    <string name="quick_action_add_gpx_descr">با لمس دکمهٔ عملیاتی یک نقطهٔ بین‌راهی GPX در مرکز صفحه ایجاد می‌شود.</string>
+    <string name="quick_action_add_gpx_descr">با لمس این دکمهٔ عملیاتی یک نقطهٔ بین‌راهی GPX در مرکز صفحه ایجاد می‌شود.</string>
     <string name="add_waypoint">افزودن نقطهٔ بین‌راهی</string>
     <string name="save_gpx_waypoint">ذخیره‌کردن نقطهٔ بین‌راهی GPX</string>
     <string name="waypoint_one">نقطهٔ بین‌راهی ۱</string>
