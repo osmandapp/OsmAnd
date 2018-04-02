@@ -847,11 +847,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		return new CoordinateInputFormatChangeListener() {
 
 			@Override
-			public void onTwoDigitsLongtitudeChanged() {
-				registerInputs();
-			}
-
-			@Override
 			public void onKeyboardChanged() {
 				changeKeyboard();
 			}
@@ -862,7 +857,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 
 			@Override
-			public void onFormatChanged() {
+			public void onInputSettingsChanged() {
 				registerInputs();
 			}
 		};
