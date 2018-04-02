@@ -1171,7 +1171,7 @@
     <string name="av_audio_bitrate">קצב סיביות להקלטת שמע</string>
     <string name="av_audio_bitrate_descr">בחירת קצב הסיביות לשמע.</string>
     <string name="please_specify_poi_type_only_from_list">נא לבחור את נקודת העניין הנכונה מהרשימה או לדלג.</string>
-    <string name="access_from_map_description">כפתור התפריט מציג את לוח המחוונים במקום את התפריט.</string>
+    <string name="access_from_map_description">כפתור התפריט מציג את לוח המחוונים במקום את התפריט</string>
     <string name="access_from_map">גישה מתצוגת המפה</string>
     <string name="show_on_start_description">במצב כבוי תוצג המפה מיד עם הכניסה ליישום.</string>
     <string name="show_on_start">תצוגה בכניסה ליישום</string>
