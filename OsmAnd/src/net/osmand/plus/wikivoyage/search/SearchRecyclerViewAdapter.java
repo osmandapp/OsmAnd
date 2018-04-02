@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.search;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +66,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 					iconsCache.getIcon(R.drawable.ic_action_placeholder_city, R.color.icon_color)
 			);
 			holder.title.setText(item.getArticleTitles().get(0));
-			holder.description.setText(item.getLangs().get(0));
+			holder.description.setText(createItemDescription(item));
 			holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);
 			holder.shadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 		}
@@ -95,6 +97,15 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 			this.items.addAll(items);
 		}
 		notifyDataSetChanged();
+	}
+
+	private String createItemDescription(WikivoyageSearchResult item) {
+		String isPartOf = item.getIsPartOf();
+		StringBuilder res = new StringBuilder(Algorithms.capitalizeFirstLetter(item.getLangs().get(0)));
+		if (!TextUtils.isEmpty(isPartOf)) {
+			res.append(" \u2014 ").append(isPartOf);
+		}
+		return res.toString();
 	}
 
 	static class HeaderVH extends RecyclerView.ViewHolder {

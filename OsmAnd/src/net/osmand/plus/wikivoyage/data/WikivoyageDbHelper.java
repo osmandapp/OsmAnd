@@ -60,12 +60,20 @@ public class WikivoyageDbHelper {
 	private static final String SEARCH_COL_ARTICLE_TITLE = "article_title";
 	private static final String SEARCH_COL_LANG = "lang";
 
-	private static final String SEARCH_TABLE_SELECT = "SELECT " +
+	private static final String SEARCH_QUERY = "SELECT " +
 			SEARCH_COL_SEARCH_TERM + ", " +
-			SEARCH_COL_CITY_ID + ", " +
+			SEARCH_TABLE_NAME + "." + SEARCH_COL_CITY_ID + ", " +
 			SEARCH_COL_ARTICLE_TITLE + ", " +
-			SEARCH_COL_LANG +
-			" FROM " + SEARCH_TABLE_NAME;
+			SEARCH_TABLE_NAME + "." + SEARCH_COL_LANG + ", " +
+			ARTICLES_COL_IS_PART_OF +
+			" FROM " + SEARCH_TABLE_NAME +
+			" JOIN " + ARTICLES_TABLE_NAME +
+			" ON " + SEARCH_TABLE_NAME + "." + SEARCH_COL_ARTICLE_TITLE + " = " + ARTICLES_TABLE_NAME + "." + ARTICLES_COL_TITLE +
+			" AND " + SEARCH_TABLE_NAME + "." + SEARCH_COL_LANG + " = " + ARTICLES_TABLE_NAME + "." + ARTICLES_COL_LANG +
+			" WHERE " + SEARCH_TABLE_NAME + "." + SEARCH_COL_CITY_ID +
+			" IN (SELECT " + SEARCH_TABLE_NAME + "." + SEARCH_COL_CITY_ID +
+			" FROM " + SEARCH_TABLE_NAME +
+			" WHERE " + SEARCH_COL_SEARCH_TERM + " LIKE ?)";
 
 	private final OsmandApplication application;
 
@@ -82,10 +90,7 @@ public class WikivoyageDbHelper {
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			try {
-				String dbQuery = SEARCH_TABLE_SELECT + " WHERE " + SEARCH_COL_CITY_ID +
-						" IN (SELECT " + SEARCH_COL_CITY_ID + " FROM " + SEARCH_TABLE_NAME +
-						" WHERE " + SEARCH_COL_SEARCH_TERM + " LIKE ?)";
-				SQLiteCursor cursor = conn.rawQuery(dbQuery, new String[]{searchQuery + "%"});
+				SQLiteCursor cursor = conn.rawQuery(SEARCH_QUERY, new String[]{searchQuery + "%"});
 				if (cursor.moveToFirst()) {
 					do {
 						res.add(readSearchResult(cursor));
@@ -179,6 +184,7 @@ public class WikivoyageDbHelper {
 		res.cityId = cursor.getLong(1);
 		res.articleTitles.add(cursor.getString(2));
 		res.langs.add(cursor.getString(3));
+		res.isPartOf = cursor.getString(4);
 
 		return res;
 	}
