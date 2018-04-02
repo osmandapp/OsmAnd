@@ -8,9 +8,9 @@ import java.util.List;
 
 public class WikivoyageSearchResult implements Parcelable {
 
-	List<String> searchTerm = new ArrayList<>();
+	List<String> searchTerms = new ArrayList<>();
 	long cityId;
-	List<String> articleTitle = new ArrayList<>();
+	List<String> articleTitles = new ArrayList<>();
 	List<String> langs = new ArrayList<>();
 
 	WikivoyageSearchResult() {
@@ -18,25 +18,25 @@ public class WikivoyageSearchResult implements Parcelable {
 	}
 
 	private WikivoyageSearchResult(Parcel in) {
-		searchTerm = in.createStringArrayList();
+		searchTerms = in.createStringArrayList();
 		cityId = in.readLong();
-		articleTitle = in.createStringArrayList();
+		articleTitles = in.createStringArrayList();
 		langs = in.createStringArrayList();
 	}
 
-	public List<String> getSearchTerm() {
-		return searchTerm;
+	public List<String> getSearchTerms() {
+		return searchTerms;
 	}
 
 	public long getCityId() {
 		return cityId;
 	}
 
-	public List<String> getArticleTitle() {
-		return articleTitle;
+	public List<String> getArticleTitles() {
+		return articleTitles;
 	}
 
-	public List<String> getLang() {
+	public List<String> getLangs() {
 		return langs;
 	}
 
@@ -47,9 +47,9 @@ public class WikivoyageSearchResult implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeStringList(searchTerm);
+		dest.writeStringList(searchTerms);
 		dest.writeLong(cityId);
-		dest.writeStringList(articleTitle);
+		dest.writeStringList(articleTitles);
 		dest.writeStringList(langs);
 	}
 

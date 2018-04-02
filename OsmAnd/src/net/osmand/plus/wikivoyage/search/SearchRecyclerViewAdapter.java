@@ -63,8 +63,8 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 			holder.icon.setImageDrawable(
 					iconsCache.getIcon(R.drawable.ic_action_placeholder_city, R.color.icon_color)
 			);
-			holder.title.setText(item.getArticleTitle().get(0));
-			holder.description.setText(item.getLang().get(0));
+			holder.title.setText(item.getArticleTitles().get(0));
+			holder.description.setText(item.getLangs().get(0));
 			holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);
 			holder.shadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 		}

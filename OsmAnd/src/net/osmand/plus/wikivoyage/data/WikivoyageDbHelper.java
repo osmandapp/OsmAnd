@@ -100,12 +100,12 @@ public class WikivoyageDbHelper {
 		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
 			@Override
 			public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
-				boolean c1 = CollatorStringMatcher.cmatches(collator, searchQuery, o1.articleTitle.get(0),
+				boolean c1 = CollatorStringMatcher.cmatches(collator, searchQuery, o1.articleTitles.get(0),
 						StringMatcherMode.CHECK_ONLY_STARTS_WITH);
-				boolean c2 = CollatorStringMatcher.cmatches(collator, searchQuery, o2.articleTitle.get(0),
+				boolean c2 = CollatorStringMatcher.cmatches(collator, searchQuery, o2.articleTitles.get(0),
 						StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 				if (c1 == c2) {
-					return collator.compare(o1.articleTitle.get(0), o2.articleTitle.get(0));
+					return collator.compare(o1.articleTitles.get(0), o2.articleTitles.get(0));
 				} else if (c1) {
 					return -1;
 				} else if (c2) {
@@ -125,18 +125,18 @@ public class WikivoyageDbHelper {
 			WikivoyageSearchResult prev = wikivoyage.get(rs.cityId);
 			if (prev != null) {
 				int insInd = prev.langs.size();
-				if (rs.getLang().get(0).equals(baseLng)) {
+				if (rs.langs.get(0).equals(baseLng)) {
 					insInd = 0;
-				} else if (rs.getLang().get(0).equals("en")) {
-					if (!prev.getLang().get(0).equals(baseLng)) {
+				} else if (rs.langs.get(0).equals("en")) {
+					if (!prev.langs.get(0).equals(baseLng)) {
 						insInd = 0;
 					} else {
 						insInd = 1;
 					}
 				}
-				prev.articleTitle.add(insInd, rs.articleTitle.get(0));
+				prev.articleTitles.add(insInd, rs.articleTitles.get(0));
 				prev.langs.add(insInd, rs.langs.get(0));
-				prev.searchTerm.add(insInd, rs.searchTerm.get(0));
+				prev.searchTerms.add(insInd, rs.searchTerms.get(0));
 			} else {
 				wikivoyage.put(rs.cityId, rs);
 			}
@@ -175,9 +175,9 @@ public class WikivoyageDbHelper {
 	private WikivoyageSearchResult readSearchResult(SQLiteCursor cursor) {
 		WikivoyageSearchResult res = new WikivoyageSearchResult();
 
-		res.searchTerm.add(cursor.getString(0));
+		res.searchTerms.add(cursor.getString(0));
 		res.cityId = cursor.getLong(1);
-		res.articleTitle.add(cursor.getString(2));
+		res.articleTitles.add(cursor.getString(2));
 		res.langs.add(cursor.getString(3));
 
 		return res;
