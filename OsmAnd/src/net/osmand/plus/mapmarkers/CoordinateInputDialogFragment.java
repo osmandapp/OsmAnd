@@ -775,6 +775,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				R.id.lon_first_input_et, R.id.lon_second_input_et, R.id.lon_third_input_et, R.id.point_name_et);
 
 		for (EditText et : editTexts) {
+			if (et.getId() == R.id.lon_first_input_et) {
+				((LinearLayout.LayoutParams) et.getLayoutParams()).weight = editTexts.get(0).getMaxSymbolsCount();
+				et.requestLayout();
+			}
 			if (et.getId() != R.id.point_name_et) {
 				et.addTextChangedListener(textWatcher);
 			}else {
