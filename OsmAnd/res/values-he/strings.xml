@@ -1187,7 +1187,7 @@
     <string name="shared_string_pause">הפסקה</string>
     <string name="map_markers_other">סמנים אחרים</string>
     <string name="gpx_add_track">הוספת מסלול</string>
-    <string name="gpx_no_tracks_title">עוד אין לך מסלולים</string>
+    <string name="gpx_no_tracks_title">עדיין אין לך מסלולים</string>
     <string name="rendering_value_dark_brown_name">חום כהה</string>
     <string name="rendering_value_light_brown_name">חום בהיר</string>
     <string name="morning">בוקר</string>
@@ -2659,4 +2659,7 @@
     <string name="track_points_category_name">נקודות משמעותיות בנתיב הזה</string>
     <string name="shared_string_time_span">מסגרת זמן</string>
     <string name="upload_osm_note_description">ניתן להעלות את הערות ה־OSM שלך באופן אנונימי או על ידי שימוש בפרופיל שלך ב־OpenStreetMap.org.</string>
+    <string name="trip_rec_notification_settings_desc">הצגת התרעת מערכת שמאפשרת לך להתחיל הקלטת טיול.</string>
+    <string name="shared_string_paused">הופסקה</string>
+    <string name="shared_string_recorded">הוקלט</string>
     </resources>
