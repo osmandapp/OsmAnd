@@ -6,8 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
@@ -16,12 +19,18 @@ import java.util.List;
 
 public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecyclerViewAdapter.ViewHolder> {
 
+	private IconsCache iconsCache;
+
 	private List<WikivoyageSearchResult> items = new ArrayList<>();
 
 	private View.OnClickListener onItemClickListener;
 
 	public void setOnItemClickListener(View.OnClickListener onItemClickListener) {
 		this.onItemClickListener = onItemClickListener;
+	}
+
+	SearchRecyclerViewAdapter(OsmandApplication app) {
+		this.iconsCache = app.getIconsCache();
 	}
 
 	@NonNull
@@ -34,13 +43,14 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-		WikivoyageSearchResult item = items.get(i);
-		// FIXME
-		viewHolder.searchTerm.setText(item.getSearchTerm().toString());
-		viewHolder.cityId.setText(String.valueOf(item.getCityId()));
-		viewHolder.articleTitle.setText(item.getArticleTitle().toString());
-		viewHolder.lang.setText(item.getLang().toString());
+	public void onBindViewHolder(@NonNull ViewHolder holder, int pos) {
+		boolean lastItem = pos == getItemCount() - 1;
+
+		WikivoyageSearchResult item = items.get(pos);
+		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_placeholder_city, R.color.icon_color));
+		holder.title.setText(item.getArticleTitle().toString());
+		holder.description.setText(item.getLang().toString());
+		holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);
 	}
 
 	@Override
@@ -63,17 +73,17 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 
 	static class ViewHolder extends RecyclerView.ViewHolder {
 
-		final TextView searchTerm;
-		final TextView cityId;
-		final TextView articleTitle;
-		final TextView lang;
+		final ImageView icon;
+		final TextView title;
+		final TextView description;
+		final View divider;
 
 		public ViewHolder(View itemView) {
 			super(itemView);
-			searchTerm = (TextView) itemView.findViewById(R.id.search_term);
-			cityId = (TextView) itemView.findViewById(R.id.city_id);
-			articleTitle = (TextView) itemView.findViewById(R.id.article_title);
-			lang = (TextView) itemView.findViewById(R.id.lang);
+			icon = (ImageView) itemView.findViewById(R.id.icon);
+			title = (TextView) itemView.findViewById(R.id.title);
+			description = (TextView) itemView.findViewById(R.id.description);
+			divider = itemView.findViewById(R.id.divider);
 		}
 	}
 }

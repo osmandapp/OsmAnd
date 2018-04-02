@@ -89,7 +89,7 @@ public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment
 			}
 		});
 
-		adapter = new SearchRecyclerViewAdapter();
+		adapter = new SearchRecyclerViewAdapter(getMyApplication());
 		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);
