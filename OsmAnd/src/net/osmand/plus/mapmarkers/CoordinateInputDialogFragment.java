@@ -630,9 +630,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				if (focusedView != null && focusedView instanceof EditTextEx) {
 					EditTextEx et = (EditTextEx) focusedView;
 					int currentLength = et.getText().length();
-					String lonFirstInput;
 					if (et.getId() == R.id.lon_first_input_et) {
-						lonFirstInput = editable.toString();
+						String lonFirstInput = et.getText().toString();
 						if (currentLength == 2) {
 							if (lonFirstInput.charAt(0) != '1' && lonFirstInput.charAt(0) != '0') {
 								switchEditText(et.getId(), true);
