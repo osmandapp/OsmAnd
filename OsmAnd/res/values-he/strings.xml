@@ -2658,4 +2658,5 @@
     <string name="parked_at">מיקום החנייה</string>
     <string name="track_points_category_name">נקודות משמעותיות בנתיב הזה</string>
     <string name="shared_string_time_span">מסגרת זמן</string>
+    <string name="upload_osm_note_description">ניתן להעלות את הערות ה־OSM שלך באופן אנונימי או על ידי שימוש בפרופיל שלך ב־OpenStreetMap.org.</string>
     </resources>
