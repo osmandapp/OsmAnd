@@ -15,10 +15,10 @@
     <string name="sorted_by_distance">Отсортировано по расстоянию</string>
     <string name="search_favorites">Поиск в избранных</string>
     <string name="hillshade_menu_download_descr">Для того, чтобы отобразить затенение рельефа, вам нужно загрузить специальную карту для этой области.</string>
-    <string name="hillshade_purchase_header">Для того, чтобы отобразить затенение рельефа, вам нужно приобрести и установить плагин \"Contour Lines\"</string>
+    <string name="hillshade_purchase_header">Установите плагин «Линии высот», чтобы показать их на карте</string>
     <string name="srtm_menu_download_descr">Для того, чтобы отобразить линии контуров рельефа, вам нужно загрузить специальную карту для этой области.</string>
     <string name="shared_string_plugin">Плагин</string>
-    <string name="srtm_purchase_header">Для того, чтобы отобразить линии контуров рельефа, вам нужно приобрести и установить плагин \"Contour Lines\"</string>
+    <string name="srtm_purchase_header">Для того, чтобы отобразить линии контуров рельефа, вам нужно приобрести и установить плагин \"Линии высот\"</string>
     <string name="srtm_color_scheme">Цветовая схема</string>
     <string name="show_from_zoom_level">Отображать с масштаба</string>
     <string name="animate_my_location">Анимация моего положения</string>
@@ -2841,7 +2841,7 @@
 <string name="make_as_start_point">Сделать пунктом отправления</string>
     <string name="enter_the_file_name">Введите имя файла.</string>
     <string name="map_import_error">Ошибка импорта карты</string>
-    <string name="map_imported_successfully">Карта импортирована успешно</string>
+    <string name="map_imported_successfully">Карта импортирована</string>
     <string name="transport_nearby_routes_within">Маршруты рядом с</string>
     <string name="transport_nearby_routes">РЯДОМ</string>
     <string name="enter_lon">Введите долготу</string>
@@ -2868,4 +2868,5 @@
     <string name="nothing_found_in_radius">Ничего не найдено в радиусе:</string>
     <string name="select_waypoints_category_description">Вы можете добавить все путевые точки трека, или выбрать отдельные категории.</string>
     <string name="shared_string_total">Всего</string>
+    <string name="shared_string_result">Результат</string>
     </resources>
