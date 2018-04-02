@@ -3,7 +3,6 @@ package net.osmand.plus.wikivoyage.search;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +64,8 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 					iconsCache.getIcon(R.drawable.ic_action_placeholder_city, R.color.icon_color)
 			);
 			holder.title.setText(item.getArticleTitles().get(0));
-			holder.description.setText(createItemDescription(item));
+			holder.leftDescr.setText(item.getIsPartOf());
+			holder.rightDescr.setText(item.getFirstLangsString());
 			holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);
 			holder.shadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 		}
@@ -99,15 +98,6 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 		notifyDataSetChanged();
 	}
 
-	private String createItemDescription(WikivoyageSearchResult item) {
-		String isPartOf = item.getIsPartOf();
-		StringBuilder res = new StringBuilder(Algorithms.capitalizeFirstLetter(item.getLangs().get(0)));
-		if (!TextUtils.isEmpty(isPartOf)) {
-			res.append(" \u2014 ").append(isPartOf);
-		}
-		return res.toString();
-	}
-
 	static class HeaderVH extends RecyclerView.ViewHolder {
 
 		final TextView title;
@@ -122,7 +112,8 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
 		final ImageView icon;
 		final TextView title;
-		final TextView description;
+		final TextView leftDescr;
+		final TextView rightDescr;
 		final View divider;
 		final View shadow;
 
@@ -130,7 +121,8 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 			super(itemView);
 			icon = (ImageView) itemView.findViewById(R.id.icon);
 			title = (TextView) itemView.findViewById(R.id.title);
-			description = (TextView) itemView.findViewById(R.id.description);
+			leftDescr = (TextView) itemView.findViewById(R.id.left_description);
+			rightDescr = (TextView) itemView.findViewById(R.id.right_description);
 			divider = itemView.findViewById(R.id.divider);
 			shadow = itemView.findViewById(R.id.shadow);
 		}

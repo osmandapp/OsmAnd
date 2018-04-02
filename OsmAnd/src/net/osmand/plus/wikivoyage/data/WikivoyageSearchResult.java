@@ -3,10 +3,14 @@ package net.osmand.plus.wikivoyage.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import net.osmand.util.Algorithms;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class WikivoyageSearchResult implements Parcelable {
+
+	private static final int SHOW_LANGS = 3;
 
 	List<String> searchTerms = new ArrayList<>();
 	long cityId;
@@ -44,6 +48,18 @@ public class WikivoyageSearchResult implements Parcelable {
 
 	public String getIsPartOf() {
 		return isPartOf;
+	}
+
+	public String getFirstLangsString() {
+		StringBuilder res = new StringBuilder();
+		int limit = Math.min(SHOW_LANGS, langs.size());
+		for (int i = 0; i < limit; i++) {
+			res.append(Algorithms.capitalizeFirstLetter(langs.get(i)));
+			if (i != limit - 1) {
+				res.append(", ");
+			}
+		}
+		return res.toString();
 	}
 
 	@Override
