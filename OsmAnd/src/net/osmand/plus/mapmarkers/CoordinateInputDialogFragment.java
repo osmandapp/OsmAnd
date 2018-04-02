@@ -253,7 +253,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				if (isOsmandKeyboardCurrentlyVisible()) {
 					changeOsmandKeyboardVisibility(false);
 				}
-				editTexts.get(6).requestFocus();
+				for (EditText et : editTexts) {
+					if (et.getId() == R.id.point_name_et) {
+						et.requestFocus();
+					}
+				}
 				final View focusedView = getDialog().getCurrentFocus();
 				if (focusedView != null) {
 					new Handler().postDelayed(new Runnable() {
@@ -774,8 +778,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		for (EditText et : editTexts) {
 			if (et.getId() != R.id.point_name_et) {
 				et.addTextChangedListener(textWatcher);
-			}
-			if (et.getId() == R.id.point_name_et) {
+			}else {
 				et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 					@Override
 					public void onFocusChange(View v, boolean hasFocus) {
