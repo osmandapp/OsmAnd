@@ -51,6 +51,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 		holder.title.setText(item.getArticleTitle().toString());
 		holder.description.setText(item.getLang().toString());
 		holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);
+		holder.shadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 	}
 
 	@Override
@@ -77,6 +78,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 		final TextView title;
 		final TextView description;
 		final View divider;
+		final View shadow;
 
 		public ViewHolder(View itemView) {
 			super(itemView);
@@ -84,6 +86,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
 			title = (TextView) itemView.findViewById(R.id.title);
 			description = (TextView) itemView.findViewById(R.id.description);
 			divider = itemView.findViewById(R.id.divider);
+			shadow = itemView.findViewById(R.id.shadow);
 		}
 	}
 }
