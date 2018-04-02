@@ -1171,7 +1171,7 @@
     <string name="av_audio_bitrate">קצב סיביות להקלטת שמע</string>
     <string name="av_audio_bitrate_descr">בחירת קצב הסיביות לשמע.</string>
     <string name="please_specify_poi_type_only_from_list">נא לבחור את נקודת העניין הנכונה מהרשימה או לדלג.</string>
-    <string name="access_from_map_description">כפתור התפריט מציג את לוח המחוונים ולא את התפריט.</string>
+    <string name="access_from_map_description">כפתור התפריט מציג את לוח המחוונים במקום את התפריט.</string>
     <string name="access_from_map">גישה מתצוגת המפה</string>
     <string name="show_on_start_description">במצב כבוי תוצג המפה מיד עם הכניסה ליישום.</string>
     <string name="show_on_start">תצוגה בכניסה ליישום</string>
@@ -1208,7 +1208,7 @@
     <string name="osm_live_active">פעיל</string>
     <string name="osm_live_not_active">לא פעיל</string>
     <string name="osm_live_enter_email">נא להזין כתובת דוא״ל חוקית</string>
-    <string name="osm_live_enter_user_name">נא להזין שם פומבי</string>
+    <string name="osm_live_enter_user_name">נא להקליד שם פומבי</string>
     <string name="osm_live_month_cost_desc">תשלום חודשי.</string>
     <string name="store_tracks_in_monthly_directories">אחסון המסלולים המוקלטים בתיקיות לפי חודש</string>
     <string name="shared_string_reset">איפוס</string>
@@ -2032,17 +2032,17 @@
     <string name="shared_string_topbar">סרגל עליון</string>
     <string name="full_report">דוח מלא</string>
     <string name="recalculate_route">חישוב המסלול מחדש</string>
-    <string name="open_street_map_login_and_pass">שם וססמה ב־OpenStreetMap</string>
+    <string name="open_street_map_login_and_pass">שם משתמש וססמה ב־OpenStreetMap</string>
     <string name="donations">תרומות</string>
     <string name="number_of_recipients">מספר הנמענים</string>
     <string name="osm_editors_ranking">דירוגי עורכים ב־OSM</string>
     <string name="osm_live_subscribe_btn">עריכת מינוי</string>
-    <string name="osm_live_email_desc">נדרש לצורך שליחת עדכונים על תרומות.</string>
+    <string name="osm_live_email_desc">למידע שלך על התרומות שלך.</string>
     <string name="osm_live_user_public_name">שם ציבורי</string>
     <string name="osm_live_hide_user_name">לא להציג את השם שלי בדוחות</string>
     <string name="osm_live_support_region">אזור תמיכה</string>
     <string name="osm_live_month_cost">עלות חודשית</string>
-    <string name="osm_live_thanks">תודה לך על המינוי לעדכונים חיים!</string>
+    <string name="osm_live_thanks">תודה לך על שנרשמת לעדכונים חיים</string>
     <string name="osm_live_region_desc">חלק מהתרומות שלך תישלחנה למשתמשי OSM שעורכים שינויים במפה באזור הזה.</string>
     <string name="osm_live_subscription_settings">הגדרות מינוי</string>
     <string name="select_map_marker">בחירת סמן מפה</string>
@@ -2253,7 +2253,7 @@
     <string name="current_track">מסלול נוכחי</string>
     <string name="map_widget_battery">עצמת הסוללה</string>
     <string name="change_markers_position">החלפת מיקום הסמן</string>
-    <string name="access_disable_wrong_direction_recalc_descr">מניעת חישוב נתיב אוטומטי בזמן תנועה בכיוון הנגדי.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">לא לחשב נתיב אוטומטי בזמן תנועה בכיוון הנגדי.</string>
     <string name="access_smart_autoannounce">הכרזה אוטומטית חכמה</string>
     <string name="access_default_color">צבע בררת מחדל</string>
     <string name="access_category_choice">בחירת קטגוריה</string>
@@ -2549,9 +2549,9 @@
     <string name="storage_place_description">אחסון נתונים של OsmAnd (למפות, מסלולים וכו׳): %1$s.</string>
     <string name="move_marker_bottom_sheet_title">יש להזיז את המפה כדי לשנות את מיקום הסמן</string>
     <string name="follow_us">לעקוב אחרינו</string>
-    <string name="access_direction_audio_feedback">הנחיות קוליות</string>
+    <string name="access_direction_audio_feedback">חיווי כיוון קולי</string>
     <string name="access_disable_wrong_direction_recalc">אין חישוב מסלול מחדש לכיוון ההפוך</string>
-    <string name="access_smart_autoannounce_descr">יש להודיע רק כאשר הכיוון ליעד משתנה.</string>
+    <string name="access_smart_autoannounce_descr">יש להודיע רק כאשר הכיוון לנקודת היעד משתנה.</string>
     <string name="access_autoannounce_period">טווח הכרזה אוטומטית</string>
     <string name="access_autoannounce_period_descr">מרווח הזמן המזערי בין הכרזות.</string>
     <string name="rendering_value_fine_name">עדין</string>
@@ -2560,10 +2560,10 @@
     <string name="rendering_value_bold_name">מודגש</string>
     
     
-    <string name="anonymous_user_hint">משתמש אלמוני לא יכול:
-\n- ליצור קבוצות;
-\n- לסנכרן קבוצות והתקנים עם השרת;
-\n- לנהל קבוצות והתקנים בלוח בקרה אישי בשרת.</string>
+    <string name="anonymous_user_hint">משתמש אלמוני לא יכול: 
+\n- ליצור קבוצות; 
+\n- לסנכרן קבוצות והתקנים עם השרת; 
+\n- לנהל קבוצות והתקנים בלוח בקרה אישי באתר.</string>
     <string name="report">דיווח</string>
     
     
@@ -2572,13 +2572,13 @@
     
     
     
-    <string name="storage_permission_restart_is_required">כעת יש ליישומון הרשאות לכתוב לאחסון חיצוני. נדרשת הפעלת היישומון מחדש באופן ידני.</string>
-    <string name="shared_string_move_up">הזזה למעלה</string>
-    <string name="shared_string_move_down">הזזה למטה</string>
+    <string name="storage_permission_restart_is_required">ליישומון אין אפשרות לכתוב לאחסון חיצוני, יש להפעיל מחדש כדי לאפשר זאת.</string>
+    <string name="shared_string_move_up">הזזה ↑</string>
+    <string name="shared_string_move_down">הזזה ↓</string>
     <string name="osm_user_stat">עריכות %1$s, דירוג %2$s, סך כל העריכות %3$s</string>
     <string name="osm_recipient_stat">עריכות %1$s, סכום %2$s mBTC</string>
     <string name="osm_live_subscription">מינוי ל־OsmAnd חי</string>
-    <string name="osm_live_ask_for_purchase">נא לרכוש מינוי ל־OsmAnd תחילה</string>
+    <string name="osm_live_ask_for_purchase">נא לרכוש מינוי ל־OsmAnd חי תחילה</string>
     <string name="gpx_info_asc_altitude">עלייה/ירידה: %1$s</string>
     
     <string name="routing_attr_prefer_motorway_name">העדפת כבישים סלולים</string>
@@ -2672,4 +2672,15 @@
     <string name="rendering_attr_contourColorScheme_name">ערכת הצבעים של קווי המתאר</string>
     <string name="rendering_attr_surfaceIntegrity_name">איכות משטח הדרך</string>
     <string name="search_hint">נא להקליד עיר, כתובת, שם נקודת עניין</string>
+    <string name="access_direction_haptic_feedback">חיווי כיוון ברטט</string>
+    <string name="access_direction_haptic_feedback_descr">ציון כיוון נקודת היעד באמצעות רטט.</string>
+    <string name="use_osm_live_routing_description">הפעלת ניווט עבור השינויים החיים ב־OsmAnd.</string>
+    <string name="storage_directory_readonly_desc">בוצעה העברה לזיכרון הפנימי כיוון שתיקיית אחסון הנתונים הנבחרת היא לקריאה בלבד. נא לבחור תיקיית אחסון עם הרשאות כתיבה.</string>
+    <string name="show_transparency_seekbar">הצגת סרגל כוונון שקיפות</string>
+    <string name="upload_osm_note">שליחת הערת OSM</string>
+    <string name="map_marker_1st">סמן המפה הראשון</string>
+    <string name="map_marker_2nd">סמן מפה שני</string>
+    <string name="shared_string_toolbar">סרגל כלים</string>
+    <string name="add_time_span">הוספת טווח זמן</string>
+    <string name="rendering_attr_horseRoutes_name">נתיבי סוסים</string>
     </resources>
