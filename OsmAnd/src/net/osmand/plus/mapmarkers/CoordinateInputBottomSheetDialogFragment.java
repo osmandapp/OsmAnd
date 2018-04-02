@@ -5,7 +5,6 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
-import android.support.annotation.Nullable;
 import android.view.View;
 
 import net.osmand.plus.OsmandSettings;
@@ -67,7 +66,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 						if (listener != null) {
 							OsmandSettings.CommonPreference<Boolean> pref = settings.COORDS_INPUT_TWO_DIGITS_LONGTITUDE;
 							pref.set(!pref.get());
-							listener.onTwoDigitsLongtitudeChanged();
+							listener.onInputSettingsChanged();
 						}
 						dismiss();
 					}
@@ -113,7 +112,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 				int format = (int) v.getTag();
 				settings.COORDS_INPUT_FORMAT.set(format);
 				if (listener != null) {
-					listener.onFormatChanged();
+					listener.onInputSettingsChanged();
 				}
 				dismiss();
 			}
@@ -150,12 +149,10 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 
 	interface CoordinateInputFormatChangeListener {
 
-		void onTwoDigitsLongtitudeChanged();
-
 		void onKeyboardChanged();
 
 		void onHandChanged();
 
-		void onFormatChanged();
+		void onInputSettingsChanged();
 	}
 }
