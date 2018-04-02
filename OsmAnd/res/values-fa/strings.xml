@@ -760,9 +760,9 @@
 	<string name="tts_missing_language_data">آیا برای دانلود زبان انتخاب‌شده به فروشگاه می‌روید؟</string>
 	<string name="preferred_locale_descr">زبان برنامه را انتخاب کنید (بعد از تغییر، برنامه را مجدداً راه‌اندازی کنید).</string>
 	<string name="preferred_locale">زبان برنامه</string>
-	<string name="rotate_map_none_opt">بدون چرخش (بالا به‌طرف شمال است)</string>
-	<string name="rotate_map_compass_opt">در جهت قطب‌نما</string>
-	<string name="rotate_map_bearing_opt">در جهت حرکت</string>
+	<string name="rotate_map_none_opt">بدون چرخش (بالا به‌طرف شمال)</string>
+	<string name="rotate_map_compass_opt">جهت قطب‌نما</string>
+	<string name="rotate_map_bearing_opt">جهت حرکت</string>
 	<string name="amenity_type_user_defined">تعریف کاربر</string>
 	<string name="profile_settings">تنظیمات هر پروفایل</string>
 	<string name="osmand_service">حالت پس‌زمینه</string>
@@ -974,16 +974,16 @@
 	<string name="background_service_wait_int_descr">حداکثر زمان انتظار برای هر بار ثابت‌شدن موقعیت در پس‌زمینه را مشخص کنید.</string>
 	<string name="background_service_wait_int">حداکثر زمان انتظار برای ثابت‌شدن</string>
 	
-	<string name="fav_imported_sucessfully">نقاط برگزیده با موفقیت وارد شد</string>
+	<string name="fav_imported_sucessfully">نقاط برگزیده وارد شد</string>
 	<string name="fav_file_to_load_not_found">فایل GPX حاوی نقاط برگزیده در {0} پیدا نشد</string>
-	<string name="fav_saved_sucessfully">نقاط برگزیده با موفقیت در {0} ذخیره شد</string>
+	<string name="fav_saved_sucessfully">نقاط برگزیده در {0} ذخیره شد</string>
 	<string name="no_fav_to_save">هیچ نقطهٔ برگزیده‌ای برای ذخیره‌کردن وجود ندارد</string>
 	<string name="shared_string_import">واردکردن</string>
 	
 	<string name="error_occurred_loading_gpx">هنگام بارگیری GPX خطایی رخ داد</string>
 	<string name="send_report">ارسال گزارش</string>
-	<string name="none_region_found">دادهٔ آفلاینی برای مناطق روی کارت SD پیدا نشد. مناطق را از اینترنت دانلود کنید.</string>
-	<string name="poi_namefinder_query_empty">عبارت جست‌وجو را برای پیداکردن POI وارد کنید</string>
+	<string name="none_region_found">روی کارت حافظه دادهٔ آفلاینی برای مناطق پیدا نشد. مناطق را از اینترنت دانلود کنید.</string>
+	<string name="poi_namefinder_query_empty">"بنویسید تا یک "</string>
 	<string name="any_poi">هرچه</string>
 	
 	<string name="thanks_yandex_traffic">اطلاعات ترافیک به‌واسطهٔ Yandex فراهم آمده است.</string>
@@ -1193,8 +1193,8 @@
 	<string name="send_location_email_pattern">برای مشاهدهٔ مکان، پیوند اینترنتی %1$s یا پیوند اندرویدی %2$s را باز کنید</string>
 	<string name="amenity_type_geocache">Geocache</string>
 	<string name="continuous_rendering_descr">به‌جای نمایش یکبارهٔ تصویر از رندرینگ مستمر استفاده کن.</string>
-	<string name="renderer_load_sucess">رندرکننده با موفقیت بارگیری شد</string>
-	<string name="renderer_load_exception">خطایی رخ داد: رندرکننده بارگیری نشد</string>
+	<string name="renderer_load_sucess">رندرکننده بارگذاری شد</string>
+	<string name="renderer_load_exception">خطایی رخ داد: رندرکننده بارگذاری نشد</string>
 	<string name="renderers">رندرکنندهٔ بُرداری</string>
 	<string name="renderers_descr">شکل‌وشمایل رندر را انتخاب نمایید.</string>
 	<string name="download_type_to_filter">فیلتر</string>
@@ -1483,7 +1483,7 @@
     
     
     
-	<string name="import_file_favourites">داده‌ها را به‌صورت فایل GPX ذخیره می‌کنید یا نقاط بین‌راهی را به نقاط برگزیده اضافه می‌کنید؟</string>
+	<string name="import_file_favourites">آیا داده‌ها را به‌صورت فایل GPX ذخیره می‌کنید یا نقاط بین‌راهی را به نقاط برگزیده وارد می‌کنید؟</string>
 	
 	<string name="gpx_file_is_empty">مسیر GPX خالی</string>
     
