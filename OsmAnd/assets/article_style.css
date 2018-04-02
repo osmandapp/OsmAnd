@@ -1,5 +1,6 @@
 body {
     max-width: 100% !important;
+    /* overflow-x: hidden; hide scroll bar */
     display: block;
     margin-top: 7%;
     margin-bottom: 0;
@@ -10,9 +11,10 @@ body {
 
 h2 {
     font-size: 2em;
-    color: #727272;
+    color: #454545;
     font-family: serif;
-    font-weight: normal;
+    font-weight: bold;
+    word-wrap: break-word;
 }
 
 h3 {
@@ -20,6 +22,7 @@ h3 {
   font-size: 1.5em;
   font-family: sans-serif;
   padding-top: 5%;
+  word-wrap: break-word;
 }
 
 p {
@@ -30,8 +33,13 @@ p {
 
 li {
   font-family: sans-serif;
-  font-size: 1em;
-  line-height: 250%;
+  line-height: 1.6em;
+}
+
+ul {
+  font-size: 1.1em;
+  padding-top: 3%;
+  padding-bottom: 3%;
 }
 
 
@@ -42,19 +50,29 @@ img {
 a {
   color: #237bff;
   text-decoration-color: #a3c8ff;
+  word-wrap: break-word;
 }
 
-a.external-free {
+external-free {
   word-wrap: break-word;
-  background-color: #f2f2f2;
+  background-color: #black;
 }
+
+pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+
 
 
 .thumb-tright, .thumbinner {
     width: 100% !important;
 }
 
-.thumbcaption {
+.thumbnailcaption {
     padding-top: 3%;
     width: 100%;
     font-size: 1.1em;
