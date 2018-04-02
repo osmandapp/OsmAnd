@@ -994,7 +994,7 @@
 	
 	<string name="shared_string_refresh">تازه‌سازی</string>
 	<string name="items_were_selected">{0} مورد انتخاب شد</string>
-	<string name="daynight_descr">قاعدهٔ تغییر وضعیت برای حالت روز/شب را انتخاب کنید.</string>
+	<string name="daynight_descr">تغییر وضعیت به حالت روز/شب بر چه اساسی انجام شود؟</string>
 	<string name="install_selected_build">آیا OsmAnd - {0}‎ به‌تاریخ {1} را نصب می‌کنید؟ ({2} مگابایت)</string>
 	<string name="loading_builds_failed">بازیابی لیست ساخت‌های OsmAnd ناموفق بود</string>
 	<string name="loading_builds">بارگیری ساخت‌های OsmAnd…</string>
@@ -1034,15 +1034,15 @@
 	<string name="version_index_is_not_supported">نسخهٔ نمایهٔ «{0}» پشتیبانی نمی‌شود</string>
 	
 	
-	<string name="osmand_routing_experimental">مسیریابی آفلاین OsmAnd یک ویژگی آزمایشی است که برای مسیرهای بیش از ۲۰ کیلومتر کارآیی ندارد.
-\n
-\nسرویس مسیریابی موقتاْ به سرویس آنلاین CloudMade تغییر کرد.</string>
+	<string name="osmand_routing_experimental">مسیریابی آفلاین در OsmAnd یک ویژگی آزمایشی است که برای مسیرهای طولانی‌تر از حدود ۲۰ کیلومتر کارآیی ندارد. 
+\n 
+\nمسیریابی موقتاْ با سرویس آنلاین CloudMade انجام می‌شود.</string>
 	<string name="specified_dir_doesnt_exist">پوشهٔ موردنظر پیدا نشد.</string>
 	
 	<string name="osmand_net_previously_installed">یک نسخهٔ قدیمی از OsmAnd نصب است. همهٔ داده‌های آفلاین در این نسخهٔ جدید هم پشتیبانی می‌شوند. اما باید نقاط برگزیده را ابتدا با نسخهٔ قبلی صادر کنید و سپس در این نسخه وارد کنید.</string>
-	<string name="build_installed">ساخت {0} با موفقیت نصب شد ({1}).</string>
+	<string name="build_installed">ساختِ {0} نصب شد ({1}).</string>
 	<string name="km_h">km/h</string>
-	<string name="old_map_index_is_not_supported">قالب دادهٔ «{0}» ازرده‌خارج است و پشتیبانی نمی‌شود</string>
+	<string name="old_map_index_is_not_supported">قالب دادهٔ «{0}» برای نقشه، ازرده‌خارج است و پشتیبانی نمی‌شود</string>
 	<string name="context_menu_item_add_waypoint">افزودن نقطهٔ بین‌راهی GPX</string>
 	<string name="mile_per_hour">mph</string>
 	
@@ -1190,7 +1190,7 @@
 	
 	
 	
-	<string name="send_location_email_pattern">برای مشاهدهٔ مکان، لینک %1$s (مرورگر) یا لینک %2$s (اندروید) را ببینید</string>
+	<string name="send_location_email_pattern">برای مشاهدهٔ مکان، پیوند اینترنتی %1$s یا پیوند اندرویدی %2$s را باز کنید</string>
 	<string name="amenity_type_geocache">Geocache</string>
 	<string name="continuous_rendering_descr">به‌جای نمایش یکبارهٔ تصویر از رندرینگ مستمر استفاده کن.</string>
 	<string name="renderer_load_sucess">رندرکننده با موفقیت بارگیری شد</string>
