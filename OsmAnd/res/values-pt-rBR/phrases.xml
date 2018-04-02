@@ -1367,7 +1367,7 @@
 	<string name="poi_piste_difficulty_freeride">Freeride</string>
 	<string name="poi_piste_grooming_classic">Clássica</string>
 	<string name="poi_piste_grooming_classic_skating">Clássica+patinagem</string>
-	<string name="poi_piste_grooming_backcountry">Pista de preparação: interior</string>
+	<string name="poi_piste_grooming_backcountry">freeride</string>
 	<string name="poi_route_train_ref">Trem</string>
 	<string name="poi_garden_type_residential">Jardim residencial</string>
 	<string name="poi_garden_type_community">Jardim comunitário</string>
@@ -1702,7 +1702,7 @@
 	<string name="poi_vending_sim_cards">Cartão SIM</string>
 
 	<string name="poi_memorial_war">Memorial de guerra</string>
-	<string name="poi_memorial_plaque">Placa ornamental</string>
+	<string name="poi_memorial_plaque">Placa comemorativa</string>
 	<string name="poi_memorial_statue">Estátua</string>
 	<string name="poi_memorial_stone">Pedra</string>
 	<string name="poi_memorial_stele">Estela</string>
@@ -1789,10 +1789,10 @@
 	<string name="poi_shelter_type_public_transport">Transporte público</string>
 	<string name="poi_shelter_type_picnic_shelter">Tipo de abrigo: abrigo de piquenique</string>
 	<string name="poi_shelter_type_weather_shelter">Tipo de abrigo: abrigo do tempo</string>
-	<string name="poi_piste_grooming_scooter">Pista de preparação: scooter</string>
-	<string name="poi_piste_grooming_skating">Pista de preparação: skating</string>
+	<string name="poi_piste_grooming_scooter">Scooter</string>
+	<string name="poi_piste_grooming_skating">Skating</string>
 	<string name="poi_piste_grooming_no">Não</string>
-	<string name="poi_piste_grooming_mogul">Pista de preparação: mogul</string>
+	<string name="poi_piste_grooming_mogul">Mogul</string>
 
 	<string name="poi_aerialway_bubble_yes">Bolha</string>
 	<string name="poi_aerialway_bubble_no">Sem bolha</string>
