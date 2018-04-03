@@ -676,16 +676,16 @@
 	
 	
 	<string name="local_index_installed">Лякальная вэрсія</string>
-	<string name="local_index_items_backuped">%1$d з %2$d аб\'ектаў пасьпяхова дэактываваныя.</string>
-	<string name="local_index_items_deleted">%1$d з %2$d аб\'ектаў пасьпяхова выдаленыя.</string>
-	<string name="local_index_items_restored">%1$d з %2$d аб\'ектаў пасьпяхова актываваныя.</string>
+	<string name="local_index_items_backuped">%1$d з %2$d аб\'ектаў дэактываваныя.</string>
+	<string name="local_index_items_deleted">%1$d з %2$d аб\'ектаў выдаленыя.</string>
+	<string name="local_index_items_restored">%1$d з %2$d аб\'ектаў актываваныя.</string>
 	<string name="local_index_no_items_to_do">Няма аб\'ектаў да %1$s</string>
 	<string name="local_index_action_do">Вы зьбіраецеся %1$s %2$s аб\'ектаў. Працягнуць?</string>
 	<string name="local_index_descr_title">Кіраваць файламі мапаў.</string>
 	<string name="local_index_mi_restore">Актываваць</string>
 	<string name="local_index_mi_backup">Дэактываваць</string>
 	
-	<string name="local_index_mi_reload">Перачытаць з карткі SD</string>
+	<string name="local_index_mi_reload">Перачытаць з карткі памяці</string>
 	<string name="local_index_poi_data">Зьвесткі POI</string>
 	<string name="local_index_address_data">Адрас</string>
 	<string name="local_index_transport_data">Зьвесткi грамадзкага транспарту</string>
@@ -706,9 +706,9 @@
 	
 	
 	<string name="installing_new_resources">Распакоўваюцца новыя дадзеныя…</string>
-	<string name="internet_connection_required_for_online_route">Абраны навігацыйны анлайн-сэрвіс, але няма злучэньня з Інтэрнэтам.</string>
+	<string name="internet_connection_required_for_online_route">Абраны сеткавы навігацыйны сэрвіс, але вы не злучаныя з Інтэрнэтам.</string>
 	<string name="tts_language_not_supported_title">Мова не падтрымліваецца</string>
-	<string name="tts_language_not_supported">Абраная мова не падтрымліваецца устаноўленым Android TTS (пераўтварэньне тэксту ў гук). Вы хочаце пашукаць іншы TTS? Калі не, то будзе выкарыстоўвацца другая ўстаноўленая мова TTS.</string>
+	<string name="tts_language_not_supported">Абраная мова не падтрымліваецца устаноўленым Android TTS (пераўтварэньне тэксту ў гук). Вы хочаце пашукаць іншы TTS у Краме? Калі не, то будзе выкарыстоўвацца другая ўстаноўленая мова TTS.</string>
 	<string name="tts_missing_language_data_title">Адсутнічаюць дадзеныя</string>
 	<string name="tts_missing_language_data">Няма ўсталяваных дадзеных для абранай мовы. Вы хочаце пайсьці на Google Play, каб усталяваць?</string>
 	<string name="gpx_option_reverse_route">Развярнуць кірунак GPX</string>
@@ -720,7 +720,7 @@
 	<string name="voice_stream_voice_call">Канал телефанаваньня (таксама спыняе музыку з дынамікаў)</string>
 	<string name="voice_stream_notification">Канал апавяшчэньня</string>
 	<string name="voice_stream_music">Мэдыя/музычны канал</string>
-	<string name="warning_tile_layer_not_downloadable">Дастасаваньне не можа сьцягнуць слой мапы %1$s, паспрабуйце пераўсталяваць яе.</string>
+	<string name="warning_tile_layer_not_downloadable">Прыкладанне не можа спампаваць слой мапы %1$s. Калі ласка, паспрабуйце пераўсталяваць яго.</string>
 	<string name="overlay_transparency_descr">Змяніць празрыстасьць накладзенага слою.</string>
 	<string name="overlay_transparency">Празрыстасьць накладаньня</string>
 	<string name="map_transparency_descr">Змяніць празрыстасць асноўнай мапы.</string>
@@ -731,7 +731,7 @@
 	<string name="layer_overlay">Мапа пакрыцьця…</string>
 	<string name="map_overlay">Мапа для накладаньня</string>
 	<string name="map_overlay_descr">Абраць мапу для накладання.</string>
-	<string name="tile_source_already_installed">Мапа ўжо ўсталяваная, налады будуць абноўленыя.</string>
+	<string name="tile_source_already_installed">Мапа ўжо ўсталяваная, «Налады» будуць абноўленыя.</string>
 	<string name="select_tile_source_to_install">Выберыце (растравыя) мапы для ўсталёўкі або абнаўлення.</string>
 	<string name="internet_not_available">Патрабуецца падключэнне да Інтэрнэту для выканання аперацыі, але яго няма.</string>
 	<string name="install_more">Усталяваць яшчэ…</string>
@@ -2292,9 +2292,9 @@
     <string name="access_shared_string_navigate_up">Перайсьці ўверх</string>
     <string name="access_sort">Сартаваць</string>
     <string name="access_disable_offroute_recalc">Не пералічваць маршрут пасля пакідання яго</string>
-    <string name="access_disable_offroute_recalc_descr">Без аўтаматычнага пераліку маршруту пасля таго, як вы зыдзеце з яго.</string>
+    <string name="access_disable_offroute_recalc_descr">Без пераліку маршруту пасля таго, як вы зыдзеце з яго.</string>
     <string name="access_disable_wrong_direction_recalc">Не пералічваць маршрут пры зваротным кірунку руху</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Прадухіляе аўтаматычны пералік маршруту падчас зваротнага кірунку руху.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Без пераліку маршруту падчас зваротнага кірунку руху.</string>
     <string name="access_smart_autoannounce">Інтэлектуальнае аўтаабвяшчэньне</string>
     <string name="access_smart_autoannounce_descr">Папярэджваць толькі пры змене кірунку на мэтавы пункт.</string>
     <string name="access_autoannounce_period">Пэрыяд аўтаабвяшчэньняў</string>
@@ -2647,7 +2647,7 @@
     <string name="type_address">Увядзіце адрас</string>
     <string name="type_city_town">Увядзіце горад</string>
     <string name="type_postcode">Увядзіце паштовы індэкс</string>
-    <string name="quick_action_auto_zoom_desc">Націск на кнопку ўключыць/адключыць аўтамаштабаванне мапы ў залежнасці ад хуткасці.</string>
+    <string name="quick_action_auto_zoom_desc">Націск на гэтую кнопку ўключыць/адключыць аўтамаштабаванне мапы ў залежнасці ад хуткасці.</string>
     <string name="quick_action_add_destination_desc">Націск на кнопку дадасць пункт прызначэння па цэнтры экрана. Папярэдні пункт прызначэння стане апошняй прамежкавай кропкай.</string>
     <string name="quick_action_replace_destination_desc">Націск на кнопку заменіць пункт прызначэння па цэнтры экрана.</string>
     <string name="quick_action_add_first_intermediate_desc">Націск на кнопку дадасць першы прамежкавы пункт па цэнтры экрана.</string>
@@ -2693,7 +2693,7 @@
     <string name="quick_action_showhide_osmbugs_title">Паказаць/схаваць OSM-нататкі</string>
     <string name="quick_action_osmbugs_show">Паказаць OSM-нататкі</string>
     <string name="quick_action_osmbugs_hide">Схаваць OSM-нататкі</string>
-    <string name="quick_action_showhide_osmbugs_descr">Націск на кнопку дзеяньня пакажа/схавае OSM-нататкі на мапе.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Націск на гэтую кнопку дзеяння пакажа/схавае OSM-нататкі на мапе.</string>
     <string name="sorted_by_distance">Адсартавана па адлегласці</string>
     <string name="search_favorites">Пошук улюбёных</string>
     <string name="shared_string_plugin">Дадатак</string>
@@ -3067,4 +3067,6 @@
     <string name="nothing_found_in_radius">Нічога не знойдзена ў радыусе:</string>
     <string name="shared_string_travel">Падарожжа</string>
     <string name="waypoints_removed_from_map_markers">Шляхавыя кропкі выдаленыя з маркераў мапы</string>
+    <string name="shared_string_result">Вынік</string>
+    <string name="use_two_digits_longitude">Выкарыстаць дзве лічбы даўгаты</string>
     </resources>
