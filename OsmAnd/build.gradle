@@ -414,6 +414,8 @@ dependencies {
     compile 'com.moparisthebest:junidecode:0.1.1'
     compile 'org.immutables:gson:2.5.0'
     compile 'com.vividsolutions:jts-core:1.14.0'
+
+	compile 'com.squareup.picasso:picasso:2.71828'
 // size restrictions
 // compile 'com.ibm.icu:icu4j:50.1' 
 // compile 'net.sf.trove4j:trove4j:3.0.3'
