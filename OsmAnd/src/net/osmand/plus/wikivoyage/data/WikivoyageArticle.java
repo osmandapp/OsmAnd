@@ -24,6 +24,7 @@ public class WikivoyageArticle {
 	long cityId;
 	long originalId;
 	String lang;
+	String aggregatedPartOf;
 
 	public String getId() {
 		return id;
@@ -67,6 +68,10 @@ public class WikivoyageArticle {
 
 	public String getLang() {
 		return lang;
+	}
+
+	public String getAggregatedPartOf() {
+		return aggregatedPartOf;
 	}
 
 	@NonNull
