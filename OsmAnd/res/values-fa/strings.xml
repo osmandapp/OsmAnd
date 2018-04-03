@@ -229,8 +229,8 @@
 	<string name="poi_action_add">افزودن</string>
 	<string name="poi_action_change">تغییردادن</string>
 	<string name="poi_action_succeded_template">عملیات {0} انجام شد.</string>
-	<string name="poi_error_unexpected_template">خطای غیرمنتظره در حین انجام {0} اتفاق افتاد.</string>
-	<string name="poi_error_io_error_template">خطای I/O در حین انجام {0} اتفاق افتاد.</string>
+	<string name="poi_error_unexpected_template">خطای غیرمنتظره در حین انجام عملیات {0}.</string>
+	<string name="poi_error_io_error_template">خطای I/O در حین انجام عملیات {0}.</string>
 	<string name="poi_error_info_not_loaded">اطلاعات نقطه بارگیری نشد</string>
 	
 	<string name="osb_comment_dialog_message">پیام</string>
@@ -290,7 +290,7 @@
 	
 	
 	<string name="show_gps_coordinates_text">مختصات GPS را روی نقشه نمایش بده</string>
-	<string name="use_internet_to_download_tile">کاشی‌های ناموجود با استفاده از اینترنت دانلود شود.</string>
+	<string name="use_internet_to_download_tile">دانلود کاشی‌های ناموجود نقشه</string>
 	<string name="app_description">برنامهٔ راهبری</string>
 	<string name="shared_string_exit">خروج</string>
 	
@@ -302,9 +302,9 @@
 	<string name="search_POI_level_btn">بیشتر پیدا کن</string>
 	<string name="choose_available_region">ناحیه را از لیست انتخاب کنید</string>
 	<string name="app_mode_default">مرور نقشه</string>
-	<string name="app_mode_car">خودرو</string>
-	<string name="app_mode_bicycle">دوچرخه</string>
-	<string name="app_mode_pedestrian">پیاده</string>
+	<string name="app_mode_car">رانندگی</string>
+	<string name="app_mode_bicycle">دوچرخه‌سواری</string>
+	<string name="app_mode_pedestrian">پیاده‌روی</string>
 	<string name="position_on_map_center">مرکز</string>
 	<string name="position_on_map_bottom">پایین</string>
 	<string name="navigate_point_top_text">عرض و طول جغرافیایی را در قالب انتخاب‌شده وارد کنید ( D - درجه، M - دقیقه، S - ثانیه)</string>
@@ -1759,7 +1759,7 @@
     <string name="fav_point_dublicate_message">این نام نقطهٔ برگزیده قبلاً استفاده شده است، جهت جلوگیری از نوشتن نام تکراری آن را به %1$s تغییر دادیم.</string>
     <string name="proxy_port_descr">شمارهٔ پورت پروکسی را تنظیم کنید (مثلاً 8118).</string>
 	<string name="proxy_host_descr">نام میزبان پروکسی را تنظیم کنید (مثلاً 127.0.0.1).</string>
-	<string name="plugin_install_needs_network">برای نصب این افزونه به اتصال اینترنت نیاز دارید.</string>
+	<string name="plugin_install_needs_network">برای نصب این افزونه به اینترنت وصل شوید.</string>
 	
 	<string name="plugin_description_title">توضیحات</string>
 	<string name="shared_string_disable">غیرفعال‌کردن</string>
@@ -2404,7 +2404,7 @@
     <string name="use_fast_recalculation">محاسبهٔ مجدد هوشمند</string>
     <string name="use_fast_recalculation_desc">برای سفرهای طولانی فقط بخش ابتدایی مسیر را محاسبه می‌کند.</string>
     <string name="do_you_like_osmand">آیا از OsmAnd راضی هستید؟</string>
-    <string name="we_really_care_about_your_opinion">به تصمیم شما احترام می‌گذاریم و امیدواریم روزی شما را دوباره ببینیم.</string>
+    <string name="we_really_care_about_your_opinion">به عقیده‌تان احترام می‌گذاریم و دیدگاه شما برایمان مهم است.</string>
     <string name="rate_this_app">به این برنامه امتیاز بدهید</string>
     <string name="rate_this_app_long">لطفاً در فروشگاه Play به OsmAnd امتیاز بدهید</string>
     <string name="user_hates_app_get_feedback">لطفاً علتش به ما بگویید.</string>
