@@ -65,6 +65,7 @@
         android:layout_height="match_parent">
 
         <FrameLayout
+            android:id="@+id/action_bar_image_container"
             android:layout_width="@dimen/action_bar_image_width_land"
             android:layout_height="match_parent"
             android:background="?attr/actionModeBackground"
