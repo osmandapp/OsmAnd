@@ -141,7 +141,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			return;
 		}
 
-		String content = HEADER_INNER + article.getContent() + FOOTER_INNER;
+		String content = HEADER_INNER +"<h1>"+article.getTitle()+"</h1>"+ article.getContent() + FOOTER_INNER;
 		contentWebView.loadDataWithBaseURL(getBaseUrl(), content, "text/html", "UTF-8", null);
 	}
 
