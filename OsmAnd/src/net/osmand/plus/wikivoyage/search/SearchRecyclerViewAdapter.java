@@ -1,7 +1,10 @@
 package net.osmand.plus.wikivoyage.search;
 
+import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.plus.IconsCache;
+import com.squareup.picasso.Picasso;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.widgets.tools.CropCircleTransformation;
+import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
 import java.util.ArrayList;
@@ -23,7 +29,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 	private static final int ITEM_TYPE = 1;
 
 	private OsmandApplication app;
-	private IconsCache iconsCache;
+	private LayerDrawable placeholder;
 
 	private List<Object> items = new ArrayList<>();
 
@@ -35,7 +41,11 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
 	SearchRecyclerViewAdapter(OsmandApplication app) {
 		this.app = app;
-		this.iconsCache = app.getIconsCache();
+		placeholder = (LayerDrawable) ContextCompat.getDrawable(app, R.drawable.wikivoyage_search_placeholder);
+		if (Build.VERSION.SDK_INT < 21 && placeholder != null) {
+			placeholder.setDrawableByLayerId(R.id.placeholder_icon,
+					app.getIconsCache().getIcon(R.drawable.ic_action_placeholder_city, R.color.icon_color));
+		}
 	}
 
 	@NonNull
@@ -60,9 +70,11 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 			boolean lastItem = pos == getItemCount() - 1;
 
 			WikivoyageSearchResult item = (WikivoyageSearchResult) getItem(pos);
-			holder.icon.setImageDrawable(
-					iconsCache.getIcon(R.drawable.ic_action_placeholder_city, R.color.icon_color)
-			);
+			Picasso.get()
+					.load(WikivoyageArticle.getThumbImageUrl(item.getImageTitle()))
+					.transform(new CropCircleTransformation())
+					.placeholder(placeholder)
+					.into(holder.icon);
 			holder.title.setText(item.getArticleTitles().get(0));
 			holder.leftDescr.setText(item.getIsPartOf());
 			holder.rightDescr.setText(item.getFirstLangsString());
@@ -102,7 +114,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
 		final TextView title;
 
-		public HeaderVH(View itemView) {
+		HeaderVH(View itemView) {
 			super(itemView);
 			title = (TextView) itemView.findViewById(R.id.title);
 		}
@@ -117,7 +129,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 		final View divider;
 		final View shadow;
 
-		public ItemVH(View itemView) {
+		ItemVH(View itemView) {
 			super(itemView);
 			icon = (ImageView) itemView.findViewById(R.id.icon);
 			title = (TextView) itemView.findViewById(R.id.title);
