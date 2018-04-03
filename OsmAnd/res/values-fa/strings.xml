@@ -917,7 +917,7 @@
 	<string name="router_service">سرویس مسیریابی</string>
 	<string name="sd_dir_not_accessible">پوشهٔ ذخیره‌سازی روی کارت حافظه قابل‌دسترسی نیست!</string>
 	<string name="router_service_descr">یکی از سرویس‌های مسیریابی آنلاین یا آفلاین را انتخاب کنید.</string>
-	<string name="max_level_download_tile_descr">حداکثر زوم را برای دانلود کاشی‌های آنلاین نقشه انتخاب کنید.</string>
+	<string name="max_level_download_tile_descr">کاشی‌های آنلاین نقشه برای زوم‌های بیشتر از این مقدار بارگیری نشوند.</string>
 	<string name="search_osm_nominatim">جست‌وجوی آنلاین با استفاده از OSM Nominatim</string>
 	<string name="uploading">در حال آپلود…</string>
 	<string name="uploading_data">در حال آپلود داده‌ها…</string>
@@ -931,7 +931,7 @@
 	<string name="update_poi_error_loading">بروز خطا در هنگام بارگیری داده از سرور</string>
 	<string name="update_poi_no_offline_poi_index">برای این ناحیه هیچ POIای به‌صورت آفلاین موجود نیست</string>
 	<string name="hello">برنامهٔ راهبری OsmAnd</string>
-	<string name="update_poi_success">داده‌های POI با موفقیت به‌روز شد ({0} مورد بارگیری شد)</string>
+	<string name="update_poi_success">داده‌های POI به‌روز شد ({0} مورد بارگیری شد)</string>
 	<string name="update_poi_error_local">خطا در هنگام به‌روزرسانی لیست POI محلی</string>
 	<string name="shared_string_ok">خُب</string>
 	<string name="transport">حمل‌ونقل</string>
@@ -954,8 +954,8 @@
 	<string name="voice_data_not_supported">این نسخه از دادهٔ صوتی پشتیبانی نمی‌شود</string>
 	<string name="voice_data_corrupted">دادهٔ صوتی انتخاب‌شده خراب است</string>
 	<string name="voice_data_unavailable">دادهٔ صوتی انتخاب‌شده موجود نیست</string>
-	<string name="sd_mounted_ro">کارت SD در حالت فقط‌خواندنی است.
-\nتنها می‌توانید نقشه‌های ازپیش‌بارگیری‌شده را ببینید و نمی‌توانید از اینترنت دانلود کنید.</string>
+	<string name="sd_mounted_ro">کارت حافظه در حالت فقط‌خواندنی است. 
+\nتنها می‌توانید نقشه‌های ازپیش‌بارگیری‌شده را ببینید و همچنین نمی‌توانید از اینترنت دانلود کنید.</string>
 	<string name="process_navigation_service">سرویس راهبری OsmAnd</string>
 	<string name="background_service_int_descr">بازهٔ بیدارباش سرویس پس‌زمینه را تنظیم کنید.</string>
 	<string name="background_service_int">بازهٔ زمانی بیدارباش GPS</string>
@@ -1039,7 +1039,7 @@
 \nمسیریابی موقتاْ با سرویس آنلاین CloudMade انجام می‌شود.</string>
 	<string name="specified_dir_doesnt_exist">پوشهٔ موردنظر پیدا نشد.</string>
 	
-	<string name="osmand_net_previously_installed">یک نسخهٔ قدیمی از OsmAnd نصب است. همهٔ داده‌های آفلاین در این نسخهٔ جدید هم پشتیبانی می‌شوند. اما باید نقاط برگزیده را ابتدا با نسخهٔ قبلی صادر کنید و سپس در این نسخه وارد کنید.</string>
+	<string name="osmand_net_previously_installed">همهٔ داده‌های آفلاین از نسخهٔ قدیمی در نسخهٔ جدید هم پشتیبانی می‌شوند، به‌جز نقاط برگزیده که باید از آن‌ها خروجی بگیرید و در نسخهٔ جدید وارد کنید.</string>
 	<string name="build_installed">ساختِ {0} نصب شد ({1}).</string>
 	<string name="km_h">km/h</string>
 	<string name="old_map_index_is_not_supported">قالب دادهٔ «{0}» برای نقشه، ازرده‌خارج است و پشتیبانی نمی‌شود</string>
@@ -1048,7 +1048,7 @@
 	
 	
 	
-	<string name="first_time_msg">متشکریم که از OsmAnd استفاده می‌کنید. برای استفادهٔ آفلاین، داده‌های منطقه‌ای را از طریق «تنظیمات» ← «مدیریت فایل‌های نقشه» دانلود کنید. سپس می‌توانید نقشه‌ها را ببینید، نشانی‌ها را بیابید، مکان‌ها را جست‌وجو کنید، مسیرهای حمل‌ونقل عمومی را بیابید و... .</string>    
+	<string name="first_time_msg">متشکریم که از OsmAnd استفاده می‌کنید. برای استفادهٔ آفلاین، داده‌های منطقه‌ای را از طریق «تنظیمات» ← «مدیریت فایل‌های نقشه» دانلود کنید. سپس می‌توانید نقشه‌ها را ببینید، نشانی‌ها را پیدا کنید، مکان‌ها را جست‌وجو کنید، مسیرهای حمل‌ونقل عمومی را بیابید و... .</string>    
 	<string name="rendering_out_of_memory">برای نشان‌دادن ناحیهٔ انتخابی حافظهٔ اجرایی کافی وجود ندارد</string>
 	<string name="use_fluorescent_overlays">لایه‌های شب‌نما</string>
 	<string name="local_openstreetmap_settings">یادداشت‌ها/POIها روی دستگاه ذخیره شد</string>
