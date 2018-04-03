@@ -22,6 +22,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 
@@ -140,8 +141,13 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		if (article == null) {
 			return;
 		}
+
 		String articleTitle = "<h1>" + article.getTitle() + "</h1>";
-		String content = HEADER_INNER + articleTitle + article.getContent() + FOOTER_INNER;
+		String articleTitleImage = "";
+		if (!Algorithms.isEmpty(article.getImageTitle())) {
+			articleTitleImage = "<img src=\"" + WikivoyageArticle.getImageUrl(article.getImageTitle()) + "\"/>";
+		}
+		String content = HEADER_INNER + articleTitleImage + articleTitle + article.getContent() + FOOTER_INNER;
 		contentWebView.loadDataWithBaseURL(getBaseUrl(), content, "text/html", "UTF-8", null);
 	}
 
