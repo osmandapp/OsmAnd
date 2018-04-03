@@ -407,6 +407,7 @@ dependencies {
 	compile fileTree(include:  ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
 
 	compile 'commons-logging:commons-logging-api:1.1'
+	compile 'commons-codec:commons-codec:1.11'
     compile 'it.unibo.alice.tuprolog:tuprolog:3.2.1'
     compile 'org.beanshell:bsh-core:2.0b4'
     compile 'fr.univ-valenciennes:bzip2:1.0'
