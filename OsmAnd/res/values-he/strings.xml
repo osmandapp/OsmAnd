@@ -2685,7 +2685,7 @@
     <string name="rendering_attr_horseRoutes_name">נתיבי סוסים</string>
     <string name="shared_string_result">תוצאה</string>
     <string name="waypoints_removed_from_map_markers">נקודות הדרך הוסרו מסמני המפה</string>
-    <string name="osm_edit_modified_poi">שינוי נקודת עניין ב־OSM</string>
+    <string name="osm_edit_modified_poi">נקודת עניין ב־OSM נערכה</string>
     <string name="osm_edit_deleted_poi">נמחקה נקודת עניין ב־OSM</string>
     <string name="context_menu_item_open_note">פתיחת הערת OSM</string>
     <string name="osm_edit_reopened_note">הערת OSM נפתחה מחדש</string>
