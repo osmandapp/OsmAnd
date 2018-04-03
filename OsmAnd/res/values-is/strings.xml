@@ -2795,4 +2795,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="nothing_found_in_radius">Ekkert fannst innan radíusins:</string>
     <string name="waypoints_removed_from_map_markers">Punktar fjarlægðir úr kortamerkjum</string>
     <string name="shared_string_travel">Ferðalög</string>
+    <string name="shared_string_result">Niðurstaða</string>
+    <string name="use_two_digits_longitude">Notaðu tveggja-stafa lengdargráður</string>
     </resources>
