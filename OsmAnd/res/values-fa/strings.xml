@@ -289,7 +289,7 @@
 	<string name="show_location">نشان‌دادن موقعیت شما</string>
 	
 	
-	<string name="show_gps_coordinates_text">مختصات GPS را روی نقشه نمایش بده</string>
+	<string name="show_gps_coordinates_text">مختصات GPS را روی نقشه نشان بده</string>
 	<string name="use_internet_to_download_tile">دانلود کاشی‌های ناموجود نقشه</string>
 	<string name="app_description">برنامهٔ راهبری</string>
 	<string name="shared_string_exit">خروج</string>
