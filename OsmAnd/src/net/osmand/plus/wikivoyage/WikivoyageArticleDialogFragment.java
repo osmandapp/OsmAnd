@@ -22,6 +22,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 
@@ -36,8 +37,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
 			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
 			"<link href=\"article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
-			"</head><body>\n" +
-			"<div class=\"main\">\n";
+			"</head><body>";
 	private static final String FOOTER_INNER = "</div></body></html>";
 
 	private WikivoyageSearchResult searchResult;
@@ -140,9 +140,22 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		if (article == null) {
 			return;
 		}
-		String articleTitle = "<h1>" + article.getTitle() + "</h1>";
-		String content = HEADER_INNER + articleTitle + article.getContent() + FOOTER_INNER;
-		contentWebView.loadDataWithBaseURL(getBaseUrl(), content, "text/html", "UTF-8", null);
+
+		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(article), "text/html", "UTF-8", null);
+	}
+
+	private String createHtmlContent(WikivoyageArticle article) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(HEADER_INNER);
+		String articleTitle = article.getImageTitle();
+		if (!Algorithms.isEmpty(articleTitle)) {
+			stringBuilder.append("<img class=\"title-image\" src=\"").append(WikivoyageArticle.getImageUrl(articleTitle)).append("\"/>");
+		}
+		stringBuilder.append("<div class=\"main\">\n");
+		stringBuilder.append("<h1>").append(article.getTitle()).append("</h1>");
+		stringBuilder.append(article.getContent()).append(FOOTER_INNER);
+
+		return stringBuilder.toString();
 	}
 
 	@NonNull
