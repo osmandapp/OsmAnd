@@ -65,7 +65,8 @@ public class WikivoyageDbHelper {
 			SEARCH_TABLE_NAME + "." + SEARCH_COL_CITY_ID + ", " +
 			SEARCH_COL_ARTICLE_TITLE + ", " +
 			SEARCH_TABLE_NAME + "." + SEARCH_COL_LANG + ", " +
-			ARTICLES_COL_IS_PART_OF +
+			ARTICLES_COL_IS_PART_OF + ", " +
+			ARTICLES_COL_IMAGE_TITLE +
 			" FROM " + SEARCH_TABLE_NAME +
 			" JOIN " + ARTICLES_TABLE_NAME +
 			" ON " + SEARCH_TABLE_NAME + "." + SEARCH_COL_ARTICLE_TITLE + " = " + ARTICLES_TABLE_NAME + "." + ARTICLES_COL_TITLE +
@@ -185,6 +186,7 @@ public class WikivoyageDbHelper {
 		res.articleTitles.add(cursor.getString(2));
 		res.langs.add(cursor.getString(3));
 		res.isPartOf = cursor.getString(4);
+		res.imageTitle = cursor.getString(5);
 
 		return res;
 	}

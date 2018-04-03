@@ -17,6 +17,7 @@ public class WikivoyageSearchResult implements Parcelable {
 	List<String> articleTitles = new ArrayList<>();
 	List<String> langs = new ArrayList<>();
 	String isPartOf;
+	String imageTitle;
 
 	WikivoyageSearchResult() {
 
@@ -28,6 +29,7 @@ public class WikivoyageSearchResult implements Parcelable {
 		articleTitles = in.createStringArrayList();
 		langs = in.createStringArrayList();
 		isPartOf = in.readString();
+		imageTitle = in.readString();
 	}
 
 	public List<String> getSearchTerms() {
@@ -48,6 +50,10 @@ public class WikivoyageSearchResult implements Parcelable {
 
 	public String getIsPartOf() {
 		return isPartOf;
+	}
+
+	public String getImageTitle() {
+		return imageTitle;
 	}
 
 	public String getFirstLangsString() {
@@ -74,6 +80,7 @@ public class WikivoyageSearchResult implements Parcelable {
 		dest.writeStringList(articleTitles);
 		dest.writeStringList(langs);
 		dest.writeString(isPartOf);
+		dest.writeString(imageTitle);
 	}
 
 	public static final Creator<WikivoyageSearchResult> CREATOR = new Creator<WikivoyageSearchResult>() {
