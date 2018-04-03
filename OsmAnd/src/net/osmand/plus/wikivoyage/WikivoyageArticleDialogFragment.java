@@ -147,8 +147,9 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private String createHtmlContent(WikivoyageArticle article) {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(HEADER_INNER);
-		if (!Algorithms.isEmpty(article.getImageTitle())) {
-			stringBuilder.append("<img class=\"title-image\" src=\"").append(WikivoyageArticle.getImageUrl(article.getImageTitle())).append("\"/>");
+		String articleTitle = article.getImageTitle();
+		if (!Algorithms.isEmpty(articleTitle)) {
+			stringBuilder.append("<img class=\"title-image\" src=\"").append(WikivoyageArticle.getImageUrl(articleTitle)).append("\"/>");
 		}
 		stringBuilder.append("<div class=\"main\">\n");
 		stringBuilder.append("<h1>").append(article.getTitle()).append("</h1>");
