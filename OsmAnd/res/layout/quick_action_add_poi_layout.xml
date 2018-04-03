@@ -121,7 +121,6 @@
             <!--android:src="@drawable/bg_shadow_list_top"/>-->
 
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
