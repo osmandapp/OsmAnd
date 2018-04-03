@@ -2773,7 +2773,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="show_arrows_on_the_map">Na zemljevidu pokaži puščice</string>
     <string name="show_passed">Pokaži dosežene</string>
     <string name="hide_passed">Skrij dosežene</string>
-    <string name="remove_from_map_markers">Odstrani iz seznama Oznak zemljevida</string>
+    <string name="remove_from_map_markers">Odstrani iz seznama oznak zemljevida</string>
     <string name="descendingly">padajoče</string>
     <string name="ascendingly">naraščajoče</string>
     <string name="date_added">Datum dodajanja</string>
