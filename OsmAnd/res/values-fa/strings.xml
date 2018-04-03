@@ -319,7 +319,7 @@
 	<string name="empty_route_calculated">خطا: مسیر محاسبه‌شده تُهی است</string>					
 	<string name="new_route_calculated_dist">مسیر جدید؛ مسافت</string>
 	<string name="arrived_at_destination">به مقصد خود رسیدید</string>
-	<string name="invalid_locations">مختصات معتبر نیست!</string>
+	<string name="invalid_locations">مختصات نامعتبر</string>
 	<string name="go_back_to_osmand">به نقشهٔ OsmAnd برگرد</string>
 	<string name="shared_string_close">بستن</string>
 	<string name="loading_data">بارگیری اطلاعات…</string>
@@ -911,11 +911,11 @@
 	<string name="auth_failed">اجازهٔ دسترسی احراز نشد</string>
 	<string name="closing_changeset">در حال بستن بستهٔ تغییرات…</string>
 	<string name="opening_changeset">بازکردن بستهٔ تغییرات…</string>
-	<string name="list_index_files_was_not_loaded">لیست منطقه‌ها از osmand.net بازیابی نشد.</string>
+	<string name="list_index_files_was_not_loaded">لیست منطقه‌ها از https://osmand.net بازیابی نشد.</string>
 	<string name="downloading_list_indexes">در حال دانلود لیست مناطق موجود…</string>
 	<string name="download_question_exist">داده‌های آفلاین برای {0} از قبل وجود دارد ({1}). آیا آن را به‌روز می‌کنید ({2})؟</string>
 	<string name="router_service">سرویس مسیریابی</string>
-	<string name="sd_dir_not_accessible">پوشهٔ ذخیره‌سازی روی کارت SD قابل‌دسترسی نیست!</string>
+	<string name="sd_dir_not_accessible">پوشهٔ ذخیره‌سازی روی کارت حافظه قابل‌دسترسی نیست!</string>
 	<string name="router_service_descr">یکی از سرویس‌های مسیریابی آنلاین یا آفلاین را انتخاب کنید.</string>
 	<string name="max_level_download_tile_descr">حداکثر زوم را برای دانلود کاشی‌های آنلاین نقشه انتخاب کنید.</string>
 	<string name="search_osm_nominatim">جست‌وجوی آنلاین با استفاده از OSM Nominatim</string>
@@ -1048,7 +1048,7 @@
 	
 	
 	
-	<string name="first_time_msg">از شما به‌خاطر استفاده از OsmAnd متشکریم. برای بیشتر امکانات این برنامه به داده‌های آفلاین منطقه‌ای نیاز دارید که می‌توانید آن‌ها را از طریق «تنظیمات» ← «مدیریت فایل‌های نقشه» دانلود کنید. سپس قادر خواهید بود نقشه‌ها را نگاه کنید، نشانی‌ها را پیدا کنید، مکان‌ها را جست‌وجو کنید و مسیرهای حمل‌ونقل عمومی را بیابید.</string>    
+	<string name="first_time_msg">متشکریم که از OsmAnd استفاده می‌کنید. برای استفادهٔ آفلاین، داده‌های منطقه‌ای را از طریق «تنظیمات» ← «مدیریت فایل‌های نقشه» دانلود کنید. سپس می‌توانید نقشه‌ها را ببینید، نشانی‌ها را پیدا کنید، مکان‌ها را جست‌وجو کنید، مسیرهای حمل‌ونقل عمومی را بیابید و... .</string>    
 	<string name="rendering_out_of_memory">برای نشان‌دادن ناحیهٔ انتخابی حافظهٔ اجرایی کافی وجود ندارد</string>
 	<string name="use_fluorescent_overlays">لایه‌های شب‌نما</string>
 	<string name="local_openstreetmap_settings">یادداشت‌ها/POIها روی دستگاه ذخیره شد</string>
@@ -3061,4 +3061,5 @@
     <string name="waypoints_removed_from_map_markers">نقاط بین‌راهی از نشانه‌های نقشه حذف شد</string>
     <string name="shared_string_travel">سفر</string>
     <string name="shared_string_result">نتیجه</string>
+    <string name="use_two_digits_longitude">استفاده از طول جغرافیایی دورقمی</string>
     </resources>
