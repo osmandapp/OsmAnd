@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -22,7 +23,6 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
-import net.osmand.util.Algorithms;
 
 import java.io.File;
 
@@ -144,18 +144,21 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(article), "text/html", "UTF-8", null);
 	}
 
-	private String createHtmlContent(WikivoyageArticle article) {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(HEADER_INNER);
-		String articleTitle = article.getImageTitle();
-		if (!Algorithms.isEmpty(articleTitle)) {
-			stringBuilder.append("<img class=\"title-image\" src=\"").append(WikivoyageArticle.getImageUrl(articleTitle)).append("\"/>");
-		}
-		stringBuilder.append("<div class=\"main\">\n");
-		stringBuilder.append("<h1>").append(article.getTitle()).append("</h1>");
-		stringBuilder.append(article.getContent()).append(FOOTER_INNER);
+	@NonNull
+	private String createHtmlContent(@NonNull WikivoyageArticle article) {
+		StringBuilder sb = new StringBuilder(HEADER_INNER);
 
-		return stringBuilder.toString();
+		String articleTitle = article.getImageTitle();
+		if (!TextUtils.isEmpty(articleTitle)) {
+			String url = WikivoyageArticle.getImageUrl(articleTitle);
+			sb.append("<img class=\"title-image\" src=\"").append(url).append("\"/>");
+		}
+		sb.append("<div class=\"main\">\n");
+		sb.append("<h1>").append(article.getTitle()).append("</h1>");
+		sb.append(article.getContent());
+		sb.append(FOOTER_INNER);
+
+		return sb.toString();
 	}
 
 	@NonNull
