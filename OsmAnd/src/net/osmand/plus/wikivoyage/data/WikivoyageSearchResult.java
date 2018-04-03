@@ -1,14 +1,11 @@
 package net.osmand.plus.wikivoyage.data;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WikivoyageSearchResult implements Parcelable {
+public class WikivoyageSearchResult {
 
 	private static final int SHOW_LANGS = 3;
 
@@ -18,19 +15,6 @@ public class WikivoyageSearchResult implements Parcelable {
 	List<String> langs = new ArrayList<>();
 	String isPartOf;
 	String imageTitle;
-
-	WikivoyageSearchResult() {
-
-	}
-
-	private WikivoyageSearchResult(Parcel in) {
-		searchTerms = in.createStringArrayList();
-		cityId = in.readLong();
-		articleTitles = in.createStringArrayList();
-		langs = in.createStringArrayList();
-		isPartOf = in.readString();
-		imageTitle = in.readString();
-	}
 
 	public List<String> getSearchTerms() {
 		return searchTerms;
@@ -67,31 +51,4 @@ public class WikivoyageSearchResult implements Parcelable {
 		}
 		return res.toString();
 	}
-
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeStringList(searchTerms);
-		dest.writeLong(cityId);
-		dest.writeStringList(articleTitles);
-		dest.writeStringList(langs);
-		dest.writeString(isPartOf);
-		dest.writeString(imageTitle);
-	}
-
-	public static final Creator<WikivoyageSearchResult> CREATOR = new Creator<WikivoyageSearchResult>() {
-		@Override
-		public WikivoyageSearchResult createFromParcel(Parcel in) {
-			return new WikivoyageSearchResult(in);
-		}
-
-		@Override
-		public WikivoyageSearchResult[] newArray(int size) {
-			return new WikivoyageSearchResult[size];
-		}
-	};
 }

@@ -22,15 +22,18 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
-import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragment {
 
 	public static final String TAG = "WikivoyageArticleDialogFragment";
 
-	private static final String SEARCH_RESULT_KEY = "search_result_key";
+	private static final long NO_VALUE = -1;
+
+	private static final String CITY_ID_KEY = "city_id_key";
+	private static final String LANGS_KEY = "langs_key";
 	private static final String SELECTED_LANG_KEY = "selected_lang_key";
 
 	private static final String HEADER_INNER = "<html><head>\n" +
@@ -40,7 +43,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			"</head><body>";
 	private static final String FOOTER_INNER = "</div></body></html>";
 
-	private WikivoyageSearchResult searchResult;
+	private long cityId = NO_VALUE;
+	private ArrayList<String> langs;
 	private String selectedLang;
 
 	private TextView selectedLangTv;
@@ -97,12 +101,12 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	}
 
 	private void showPopupLangMenu(View view) {
-		if (searchResult == null) {
+		if (langs == null) {
 			return;
 		}
 
 		final PopupMenu popup = new PopupMenu(view.getContext(), view, Gravity.END);
-		for (final String lang : searchResult.getLangs()) {
+		for (final String lang : langs) {
 			MenuItem item = popup.getMenu().add(lang);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
@@ -120,23 +124,24 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	}
 
 	private void populateArticle() {
-		if (searchResult == null) {
+		if (cityId == NO_VALUE || langs == null) {
 			Bundle args = getArguments();
 			if (args != null) {
-				searchResult = (WikivoyageSearchResult) args.getParcelable(SEARCH_RESULT_KEY);
+				cityId = args.getLong(CITY_ID_KEY);
+				langs = args.getStringArrayList(LANGS_KEY);
 			}
 		}
-		if (searchResult == null) {
+		if (cityId == NO_VALUE || langs == null || langs.isEmpty()) {
 			return;
 		}
 		if (selectedLang == null) {
-			selectedLang = searchResult.getLangs().get(0);
+			selectedLang = langs.get(0);
 		}
 
 		selectedLangTv.setText(selectedLang);
 
 		WikivoyageArticle article = getMyApplication().getWikivoyageDbHelper()
-				.getArticle(searchResult.getCityId(), selectedLang);
+				.getArticle(cityId, selectedLang);
 		if (article == null) {
 			return;
 		}
@@ -180,10 +185,11 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		return normal;
 	}
 
-	public static boolean showInstance(FragmentManager fm, WikivoyageSearchResult searchResult) {
+	public static boolean showInstance(FragmentManager fm, long cityId, ArrayList<String> langs) {
 		try {
 			Bundle args = new Bundle();
-			args.putParcelable(SEARCH_RESULT_KEY, searchResult);
+			args.putLong(CITY_ID_KEY, cityId);
+			args.putStringArrayList(LANGS_KEY, langs);
 			WikivoyageArticleDialogFragment fragment = new WikivoyageArticleDialogFragment();
 			fragment.setArguments(args);
 			fragment.show(fm, TAG);
