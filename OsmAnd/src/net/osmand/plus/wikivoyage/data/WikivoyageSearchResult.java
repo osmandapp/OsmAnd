@@ -9,16 +9,11 @@ public class WikivoyageSearchResult {
 
 	private static final int SHOW_LANGS = 3;
 
-	List<String> searchTerms = new ArrayList<>();
 	long cityId;
 	List<String> articleTitles = new ArrayList<>();
 	List<String> langs = new ArrayList<>();
 	String isPartOf;
 	String imageTitle;
-
-	public List<String> getSearchTerms() {
-		return searchTerms;
-	}
 
 	public long getCityId() {
 		return cityId;
