@@ -1244,7 +1244,7 @@
     <string name="targets">Təyinat nöqtələri</string>
     <string name="map_downloaded_descr">Artıq endirilən %1$s xəritəsini istifadə edə bilərsiniz.</string>
     <string name="go_to_map">Xəritəni göstər</string>
-    <string name="favorite_category_dublicate_message">Göstərilən kateqoriya adı artıq mövcuddur. Fərqli ad istifadə edin.</string>
+    <string name="favorite_category_dublicate_message">Zəhmət olmasa, artıq mövcud olmayan kateqoriya adı stifadə edin.</string>
     <string name="region_maps">Region xəritələri</string>
     <string name="srtm_plugin_disabled">Kontur xətləri sönülüdür</string>
     <string name="default_speed_system_descr">Sürət vahidi təyin edin.</string>
@@ -1323,7 +1323,7 @@
     <string name="first_usage_wizard_desc">OsmAnd-a məkanınızı müəyyənləşdirmək və həmin region üçün xəritə endirməsi təklif etmək icazəsi verin.</string>
     <string name="give_permission">İcazə ver</string>
     <string name="first_usage_greeting">İnternet bağlantısı olmadan istiqamətlər alın və yeni yerlər kəşf edin</string>
-    <string name="no_update_info_desc">Versiya yeniləmələrini və ya OsmAnd ilə bağlı endirimləri yoxlama.</string>
+    <string name="no_update_info_desc">Yeni versiyaları və ya OsmAnd ilə bağlı endirimləri yoxlama.</string>
     <string name="access_disable_offroute_recalc">Çıxanda marşrut yenidən hesablanmasın</string>
     <string name="access_disable_wrong_direction_recalc">Əks istiqamət üçün marşrut yenidən hesablanmasın</string>
     <string name="recalculate_route">Marşrutu yenidən hesabla</string>
@@ -2076,8 +2076,8 @@
     <string name="access_direction_haptic_feedback_descr">Hədəf nöqtənin istiqamətini titrəmə ilə göstər.</string>
     <string name="use_osm_live_routing_description">OsmAnd Live dəyişiklikləri üçün naviqasiyanı aktivləşdir.</string>
     
-    <string name="storage_permission_restart_is_required">İndi proqramın xarici yaddaşa yazmasına icazə verilir. Proqramı əlla yenidən başlatmaq tələb olunur.</string>
-    <string name="storage_directory_readonly_desc">Hazırda seçilmiş məlumat saxlama qovluğu yalnız oxunandır. Qovluq müvəqqəti olaraq daxili yaddaşa keçirildi. Zəhmət olmasa, etibarlı saxlama qovluğu seçin.</string>
+    <string name="storage_permission_restart_is_required">İndi proqramın xarici yaddaşa yazmasına icazə verilir, lakin bunun üçün yenidən başlatmaq lazımdır.</string>
+    <string name="storage_directory_readonly_desc">Seçilmiş məlumat saxlama qovluğu yalnız oxunan olduğundan daxili yaddaşa keçildi. Zəhmət olmasa, yazıla bilən saxlama qovluğu seçin.</string>
     <string name="osm_live_support_region">Dəstəklənən region</string>
     <string name="osm_live_month_cost">Aylıq qiymət</string>
     <string name="osm_live_month_cost_desc">Aylıq ödəniş.</string>
