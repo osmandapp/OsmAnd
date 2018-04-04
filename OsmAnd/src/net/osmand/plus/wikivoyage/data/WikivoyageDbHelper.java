@@ -2,6 +2,7 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -61,8 +62,6 @@ public class WikivoyageDbHelper {
 	private static final String SEARCH_COL_ARTICLE_TITLE = "article_title";
 	private static final String SEARCH_COL_LANG = "lang";
 
-;
-
 	private final OsmandApplication application;
 
 	private Collator collator;
@@ -76,29 +75,28 @@ public class WikivoyageDbHelper {
 	public List<WikivoyageSearchResult> search(final String searchQuery) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
-		String[] queries= searchQuery.replace('_', ' ').replace('/', ' ').split(" " );
+		String[] queries = searchQuery.replace('_', ' ').replace('/', ' ').split(" ");
 		if (conn != null) {
 			try {
-				List<String> params = new ArrayList<String>();
-				String query = "SELECT  distinct wa.city_id, wa.title, wa.lang, wa.is_part_of, wa.image_title " + 
+				List<String> params = new ArrayList<>();
+				String query = "SELECT  distinct wa.city_id, wa.title, wa.lang, wa.is_part_of, wa.image_title " +
 						"FROM wikivoyage_articles wa WHERE wa.city_id in " +
-						 " (SELECT city_id FROM wikivoyage_search WHERE search_term LIKE";
-				for(int i = 0; i < queries.length; i++) {
-					if(queries[i].trim().length() > 0) {
-						if(params.size() > 5) {
+						" (SELECT city_id FROM wikivoyage_search WHERE search_term LIKE";
+				for (String q : queries) {
+					if (q.trim().length() > 0) {
+						if (params.size() > 5) {
 							// don't explode the query search much
 							break;
 						}
-						if(params.size() > 0) {
+						if (params.size() > 0) {
 							query += " AND city_id IN (SELECT city_id FROM wikivoyage_search WHERE search_term LIKE ?) ";
 						} else {
-							query += "?";	
+							query += "?";
 						}
-						params.add(queries[i].trim() +"%");
-						
+						params.add(q.trim() + "%");
 					}
 				}
-				query +=") ";
+				query += ") ";
 				if (params.size() > 0) {
 					SQLiteCursor cursor = conn.rawQuery(query, params.toArray(new String[params.size()]));
 					if (cursor.moveToFirst()) {
