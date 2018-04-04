@@ -62,8 +62,7 @@ public class WikivoyageDbHelper {
 	private static final String SEARCH_COL_ARTICLE_TITLE = "article_title";
 	private static final String SEARCH_COL_LANG = "lang";
 
-	private static final String SEARCH_QUERY = "SELECT " +
-			SEARCH_COL_SEARCH_TERM + ", " +
+	private static final String SEARCH_QUERY = "SELECT DISTINCT " +
 			SEARCH_TABLE_NAME + "." + SEARCH_COL_CITY_ID + ", " +
 			SEARCH_COL_ARTICLE_TITLE + ", " +
 			SEARCH_TABLE_NAME + "." + SEARCH_COL_LANG + ", " +
@@ -144,7 +143,6 @@ public class WikivoyageDbHelper {
 				}
 				prev.articleTitles.add(insInd, rs.articleTitles.get(0));
 				prev.langs.add(insInd, rs.langs.get(0));
-				prev.searchTerms.add(insInd, rs.searchTerms.get(0));
 			} else {
 				wikivoyage.put(rs.cityId, rs);
 			}
@@ -183,12 +181,11 @@ public class WikivoyageDbHelper {
 	private WikivoyageSearchResult readSearchResult(SQLiteCursor cursor) {
 		WikivoyageSearchResult res = new WikivoyageSearchResult();
 
-		res.searchTerms.add(cursor.getString(0));
-		res.cityId = cursor.getLong(1);
-		res.articleTitles.add(cursor.getString(2));
-		res.langs.add(cursor.getString(3));
-		res.isPartOf = cursor.getString(4);
-		res.imageTitle = cursor.getString(5);
+		res.cityId = cursor.getLong(0);
+		res.articleTitles.add(cursor.getString(1));
+		res.langs.add(cursor.getString(2));
+		res.isPartOf = cursor.getString(3);
+		res.imageTitle = cursor.getString(4);
 
 		return res;
 	}
