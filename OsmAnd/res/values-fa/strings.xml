@@ -566,7 +566,7 @@
 	<string name="zxing_barcode_scanner_not_found">برنامهٔ اسکنر بارکد ZXing نصب نشده است. در گوگل‌پلی جست‌وجو می‌کنید؟</string>
 	<string name="rendering_attr_roadColors_description">یکی از رنگ‌بندی‌های راه را انتخاب کنید:</string>
 	<string name="rendering_attr_roadColors_name">رنگ‌بندی راه</string>
-    <string name="enable_plugin_monitoring_services">افزونهٔ ضبط مسیر را فعال کنید تا بتوانید از سرویس‌های ثبت مکان استفاده کنید (ضبط GPX، ردگیری آنلاین)</string>
+    <string name="enable_plugin_monitoring_services">افزونهٔ «ضبط سفر» را فعال کنید تا بتوانید از سرویس‌های ثبت مکان استفاده کنید (ضبط GPX، ردگیری آنلاین)</string>
     <string name="non_optimal_route_calculation">برای مسافت‌های طولانی شاید بهینه‌ترین مسیر محاسبه نشود</string>
 	<string name="gps_not_available">لطفاً GPS را از طریق تنظیمات فعال کنید</string>
     <string name="map_widget_monitoring_services">خدمات ثبت و ضبط</string>
@@ -586,7 +586,7 @@
 	<string name="osmand_distance_planning_plugin_name">محاسبه‌گر مسافت و ابزار طرح‌ریزی سفر</string>
     <string name="distance_measurement_finish_subtrack">شروع‌کردن یک زیرمسیر جدید</string>
     <string name="use_kalman_filter_compass_descr">اغتشاشات قطب‌نما را کاهش می‌دهد اما اینرسی را بیشتر می‌کند.</string>
-    <string name="monitoring_settings">ضبط مسیر</string>
+    <string name="monitoring_settings">ضبط سفر</string>
     <string name="monitoring_settings_descr">چگونگی ضبط سفرتان را تنظیم کنید.</string>
     
     <string name="shared_string_more_actions">عملیات‌های بیشتر</string>
@@ -680,7 +680,7 @@
 	<string name="save_current_track">ذخیرهٔ مسیر GPX جاری</string>
 	<string name="save_track_interval">بازهٔ زمانی ثبت داده‌ها در هنگام راهبری</string>
 	<string name="save_track_interval_descr">مشخص کنید برای ضبط مسیر در هنگام راهبری، داده‌ها با چه فاصلهٔ زمانی از هم دریافت شوند.</string>
-	<string name="save_track_to_gpx_descrp">هنگام راهبری، مسیر GPX به‌صورت خودکار ضبط می‌شود و در پوشهٔ مسیرها (tracks) ذخیره می‌گردد.</string>
+	<string name="save_track_to_gpx_descrp">هنگام راهبری، مسیر GPX به‌صورت خودکار ضبط و در پوشهٔ مسیرها (tracks) ذخیره می‌شود.</string>
 	
 	<string name="osm_settings_descr">تنظیمات لازم برای ارتباط با (OpenStreetMap.org (OSM را مشخص کنید.</string>
 	<string name="data_settings_descr">زبان را مشخص و داده‌ها را دانلود/بارگیری مجدد کنید.</string>
@@ -761,8 +761,8 @@
 	<string name="preferred_locale_descr">زبان برنامه را انتخاب کنید (بعد از تغییر، برنامه را مجدداً راه‌اندازی کنید).</string>
 	<string name="preferred_locale">زبان برنامه</string>
 	<string name="rotate_map_none_opt">بدون چرخش (بالا به‌طرف شمال)</string>
-	<string name="rotate_map_compass_opt">جهت قطب‌نما</string>
-	<string name="rotate_map_bearing_opt">جهت حرکت</string>
+	<string name="rotate_map_compass_opt">در جهت قطب‌نما</string>
+	<string name="rotate_map_bearing_opt">در جهت حرکت</string>
 	<string name="amenity_type_user_defined">تعریف کاربر</string>
 	<string name="profile_settings">تنظیمات هر پروفایل</string>
 	<string name="osmand_service">حالت پس‌زمینه</string>
@@ -894,7 +894,7 @@
 	<string name="rendering_attr_noPolygons_name">چندضلعی‌ها</string>
 	<string name="rendering_attr_appMode_name">حالت رندرکردن</string>
 	<string name="rendering_attr_appMode_description">بهینه‌سازی نقشه برای</string>
-	<string name="rendering_attr_contourLines_description">نشان‌دادن از سطح زوم (نیازمند داده‌های منحنی‌های تراز):</string>
+	<string name="rendering_attr_contourLines_description">از این زوم نمایان شود (نیازمند داده‌های منحنی تراز):</string>
 	<string name="rendering_attr_contourLines_name">نشان‌دادن منحنی‌های تراز</string>
 	<string name="rendering_attr_hmRendered_description">جزئیات نقشه را افزایش دهید.</string>
 	<string name="local_index_routing_data">داده‌های مسیریابی</string>
@@ -1051,7 +1051,7 @@
 	<string name="first_time_msg">متشکریم که از OsmAnd استفاده می‌کنید. برای استفادهٔ آفلاین، داده‌های منطقه‌ای را از طریق «تنظیمات» ← «مدیریت فایل‌های نقشه» دانلود کنید. سپس می‌توانید نقشه‌ها را ببینید، نشانی‌ها را پیدا کنید، مکان‌ها را جست‌وجو کنید، مسیرهای حمل‌ونقل عمومی را بیابید و... .</string>    
 	<string name="rendering_out_of_memory">برای نشان‌دادن ناحیهٔ انتخابی حافظهٔ اجرایی کافی وجود ندارد</string>
 	<string name="use_fluorescent_overlays">لایه‌های شب‌نما</string>
-	<string name="local_openstreetmap_settings">یادداشت‌ها/POIها روی دستگاه ذخیره شد</string>
+	<string name="local_openstreetmap_settings">یادداشت‌ها/POIهای ذخیره‌شده روی دستگاه</string>
 	<string name="local_openstreetmap_settings_descr">مشاهده و مدیریت POIها/یادداشت‌هایی که در پایگاه داده روی دستگاه ذخیره شده‌اند.</string>
 	
 	
@@ -1195,7 +1195,7 @@
 	<string name="continuous_rendering_descr">به‌جای نمایش یکبارهٔ تصویر از رندرینگ مستمر استفاده کن.</string>
 	<string name="renderer_load_sucess">رندرکننده بارگذاری شد</string>
 	<string name="renderer_load_exception">خطایی رخ داد: رندرکننده بارگذاری نشد</string>
-	<string name="renderers">رندرکنندهٔ بُرداری</string>
+	<string name="renderers">رسم‌کنندهٔ بُرداری</string>
 	<string name="renderers_descr">شکل‌وشمایل رندر را انتخاب نمایید.</string>
 	<string name="download_type_to_filter">فیلتر</string>
 	<string name="transport_context_menu">جست‌وجوی وسیلهٔ حمل‌ونقل در ایستگاه</string>
@@ -1291,7 +1291,7 @@
     <string name="amenity_type_seamark">علامت دریایی</string>
     <string name="app_modes_choose_descr">پروفایل‌هایی را که لازم دارید از اینجا انتخاب کنید تا در برنامه ببینیدشان.</string>
     <string name="app_modes_choose">پروفایل‌های برنامه</string>
-	<string name="map_widget_map_rendering">رندرینگ نقشه</string>
+	<string name="map_widget_map_rendering">رسم نقشه</string>
     
     <string name="routing_preferences_descr">تنظیمات مسیریابی</string>
     <string name="speech_rate_descr">سرعت گفتار موتور صوتی را مشخص کنید.</string>
@@ -1810,7 +1810,7 @@
 	<string name="osmand_parking_overdue">تأخیر دارید</string>
 	<string name="general_settings_2">تنظیمات کلی</string>
 	<string name="routing_settings_2">تنظیمات راهبری</string>
-    <string name="shared_string_do_not_use">‍‍استفاده نشود</string>
+    <string name="shared_string_do_not_use">استفاده نشود</string>
 	<string name="rendering_attr_OSMMapperAssistant_name">دستیار نقشه‌کش OSM</string>
 	<string name="osm_edits">ویرایش‌های OSM</string>
 	<string name="parking_place_limited">حداکثر زمان پارک تا</string>
@@ -2091,7 +2091,7 @@
     <string name="restore_purchases">بازیابی خریدها</string>
     <string name="fonts_header">فونت‌های نقشه</string>
     <string name="right_side_navigation">رانندگی با فرمان سمت راست</string>
-    <string name="driving_region_automatic">اتوماتیک</string>
+    <string name="driving_region_automatic">خودکار</string>
     <string name="do_not_show_startup_messages">هنگام شروع برنامه پیام‌ها را نشان نده</string>
     <string name="parking_options">تنظیمات پارکینگ</string>
     <string name="full_version_thanks">سپاسگزاریم که نسخهٔ پولی OsmAnd را خریدید.</string>
@@ -2572,7 +2572,7 @@
     <string name="coordinates_format">قالب مختصات</string>
     <string name="use_system_keyboard">استفاده از صفحه‌کلید سیستم</string>
     <string name="fast_coordinates_input_descr">قالب مختصات ورودی را انتخاب کنید. هر زمان که بخواهید از طریق تنظیمات قابل‌تغییر است.</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">اجتناب از از گُدارها و راه‌های یخی</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">اجتناب از گُدارها و راه‌های یخی</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">از راه‌های یخی و گُدارها اجتناب شود.</string>
     <string name="use_location">استفاده از موقعیت</string>
     <string name="add_location_as_first_point_descr">برای طراحی یک مسیر کامل موقعیتتان را به‌عنوان نقطهٔ شروع اضافه کنید.</string>
@@ -2642,13 +2642,13 @@
     <string name="quick_action_osmbugs_hide">پنهان‌کردن توضیحات ویرایشی</string>
     <string name="quick_action_showhide_osmbugs_descr">با لمس این دکمهٔ عملیاتی، توضیحات ویرایشی OSM را روی نقشه آشکار یا پنهان کنید.</string>
     <string name="sorted_by_distance">مرتب‌شده بر اساس مسافت</string>
-    <string name="search_favorites">جست‌وجوی نقاط برگزیده</string>
+    <string name="search_favorites">جست‌وجو در نقاط برگزیده</string>
     <string name="hillshade_menu_download_descr">نقشهٔ تپه‌سایه را برای این منطقه دانلود کنید تا سایه‌تپهٔ پستی‌وبلندی‌ها را ببینید.</string>
     <string name="hillshade_purchase_header">افزونهٔ منحنی‌های تراز را نصب کنید تا آن‌ها را روی نقشه ببینید</string>
     <string name="hide_from_zoom_level">از این زوم پنهان شود</string>
     <string name="srtm_menu_download_descr">نقشهٔ منحنی تراز این منطقه را دانلود کنید تا منحنی‌های تراز را روی نقشه ببینید.</string>
     <string name="shared_string_plugin">افزونه</string>
-    <string name="srtm_purchase_header">برای دیدن منحنی‌ها تراز روی نقشه باید افزونهٔ منحنی‌های تراز را بخرید و نصب کنید</string>
+    <string name="srtm_purchase_header">برای اینکه منحنی‌های تراز را روی نقشه ببینید باید افزونهٔ «منحنی‌های تراز» را بخرید و نصب کنید</string>
     <string name="srtm_color_scheme">رنگ‌بندی</string>
     <string name="show_from_zoom_level">از این زوم آشکار شود</string>
     <string name="routing_attr_allow_private_name">مجازشمردن دسترسی خصوصی</string>
@@ -2688,7 +2688,7 @@
     <string name="find_parking">پیداکردن پارکینگ</string>
     <string name="add_time_span">افزودن بازهٔ زمانی</string>
     <string name="shared_string_undo_all">خنثی‌کردن همه</string>
-    <string name="auto_split_recording_title">بخش‌بندی خودکار ضبط‌ها پس از وقفه</string>
+    <string name="auto_split_recording_title">بخش‌بندی خودکار مسیر پس از وقفه</string>
     <string name="save_track_min_distance">کمترین جابه‌جایی برای ثبت</string>
     <string name="translit_names">نویسه‌گردانی نام‌ها</string>
     <string name="rec_split_clip_length">مدت کلیپ</string>
@@ -2724,10 +2724,10 @@
     <string name="passed">آخرین استفاده: %1$s</string>
     <string name="save_as_line">ذخیره‌کردن به‌عنوان خط</string>
     <string name="store_tracks_in_monthly_directories">ذخیرهٔ مسیرهای ضبط‌شده در پوشه‌های ماهانه</string>
-    <string name="store_tracks_in_monthly_directories_descrp">"مسیرهای ضبط‌شده در هر ماه را در پوشهٔ همان ماه ذخیره کن (مثلاً  ۲۰۱۸-۰۱)."</string>
+    <string name="store_tracks_in_monthly_directories_descrp">"مسیرهای ضبط‌شده در هر ماه را در پوشهٔ همان ماه ذخیره کن (مثلاً  ‎۲۰۱۸-۰۱)."</string>
     <string name="display_zoom_level">زوم نمایش: %1$s</string>
     <string name="gpx_no_tracks_title">هنوز مسیری ندارید</string>
-    <string name="gpx_no_tracks_title_folder">همچنین می‌توانید مسیرها را در این پوشه قرار دهید</string>
+    <string name="gpx_no_tracks_title_folder">می‌توانید مسیرها را در این پوشه نیز قرار دهید</string>
     <string name="rec_split_title">استفاده از تقسیمگر ضبط‌کننده</string>
     <string name="context_menu_item_open_note">ایجاد توضیح ویرایشی OSM</string>
     <string name="osm_edit_reopened_note">توضیح ویرایشی بازگشوده</string>
