@@ -13,23 +13,23 @@ import java.util.List;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
-public class WikivoyageSearchHistoryHelper {
+public class WikivoyageLocalDataHelper {
 
-	private static WikivoyageSearchHistoryHelper instance;
+	private static WikivoyageLocalDataHelper instance;
 
-	private WikivoyageSearchHistoryDbHelper dbHelper;
+	private WikivoyageLocalDataDbHelper dbHelper;
 
 	private TLongObjectHashMap<WikivoyageSearchHistoryItem> historyMap = new TLongObjectHashMap<>();
 	private List<WikivoyageSearchHistoryItem> historyItems;
 
-	private WikivoyageSearchHistoryHelper(OsmandApplication app) {
-		dbHelper = new WikivoyageSearchHistoryDbHelper(app);
+	private WikivoyageLocalDataHelper(OsmandApplication app) {
+		dbHelper = new WikivoyageLocalDataDbHelper(app);
 		loadHistory();
 	}
 
-	public static WikivoyageSearchHistoryHelper getInstance(OsmandApplication app) {
+	public static WikivoyageLocalDataHelper getInstance(OsmandApplication app) {
 		if (instance == null) {
-			instance = new WikivoyageSearchHistoryHelper(app);
+			instance = new WikivoyageLocalDataHelper(app);
 		}
 		return instance;
 	}
@@ -54,11 +54,11 @@ public class WikivoyageSearchHistoryHelper {
 		item.isPartOf = isPartOf;
 		item.lastAccessed = System.currentTimeMillis();
 		if (newItem) {
-			dbHelper.add(item);
+			dbHelper.addHistoryItem(item);
 			historyItems.add(item);
 			historyMap.put(item.cityId, item);
 		} else {
-			dbHelper.update(item);
+			dbHelper.updateHistoryItem(item);
 		}
 		sortHistory();
 	}
@@ -85,12 +85,12 @@ public class WikivoyageSearchHistoryHelper {
 		});
 	}
 
-	private static class WikivoyageSearchHistoryDbHelper {
+	private static class WikivoyageLocalDataDbHelper {
 
 		private static final int DB_VERSION = 1;
-		private static final String DB_NAME = "wikivoyage_search_history";
+		private static final String DB_NAME = "wikivoyage_local_data";
 
-		private static final String HISTORY_TABLE_NAME = "history_recents";
+		private static final String HISTORY_TABLE_NAME = "wikivoyage_search_history";
 		private static final String HISTORY_COL_CITY_ID = "city_id";
 		private static final String HISTORY_COL_ARTICLE_TITLE = "article_title";
 		private static final String HISTORY_COL_LANG = "lang";
@@ -115,7 +115,7 @@ public class WikivoyageSearchHistoryHelper {
 
 		private final OsmandApplication context;
 
-		private WikivoyageSearchHistoryDbHelper(OsmandApplication context) {
+		private WikivoyageLocalDataDbHelper(OsmandApplication context) {
 			this.context = context;
 		}
 
@@ -156,7 +156,7 @@ public class WikivoyageSearchHistoryHelper {
 					SQLiteCursor cursor = conn.rawQuery(HISTORY_TABLE_SELECT, null);
 					if (cursor.moveToFirst()) {
 						do {
-							res.add(readItem(cursor));
+							res.add(readHistoryItem(cursor));
 						} while (cursor.moveToNext());
 					}
 				} finally {
@@ -166,7 +166,7 @@ public class WikivoyageSearchHistoryHelper {
 			return res;
 		}
 
-		void add(WikivoyageSearchHistoryItem item) {
+		void addHistoryItem(WikivoyageSearchHistoryItem item) {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
@@ -178,7 +178,7 @@ public class WikivoyageSearchHistoryHelper {
 			}
 		}
 
-		void update(WikivoyageSearchHistoryItem item) {
+		void updateHistoryItem(WikivoyageSearchHistoryItem item) {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
@@ -195,7 +195,7 @@ public class WikivoyageSearchHistoryHelper {
 			}
 		}
 
-		private WikivoyageSearchHistoryItem readItem(SQLiteCursor cursor) {
+		private WikivoyageSearchHistoryItem readHistoryItem(SQLiteCursor cursor) {
 			WikivoyageSearchHistoryItem res = new WikivoyageSearchHistoryItem();
 
 			res.cityId = cursor.getLong(0);
