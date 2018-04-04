@@ -17,7 +17,7 @@
 
 		<bitmap
 			android:gravity="center"
-			android:src="@drawable/ic_action_placeholder_city"
+			android:src="@drawable/ic_action_history"
 			android:tint="@color/icon_color"/>
 	</item>
 </layer-list>

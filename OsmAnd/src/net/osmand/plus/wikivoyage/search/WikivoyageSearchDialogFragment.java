@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
+import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
 import java.util.ArrayList;
@@ -71,7 +73,7 @@ public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment
 					searchQuery = newQuery;
 					if (searchQuery.isEmpty()) {
 						cancelSearch();
-						adapter.setItems(null);
+						setAdapterItems(null);
 					} else {
 						runSearch();
 					}
@@ -117,6 +119,9 @@ public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment
 		super.onResume();
 		paused = false;
 		searchEt.requestFocus();
+		if (TextUtils.isEmpty(searchQuery)) {
+			setAdapterItems(null);
+		}
 	}
 
 	@Override
@@ -132,6 +137,15 @@ public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment
 		}
 	}
 
+	private void setAdapterItems(@Nullable List<WikivoyageSearchResult> items) {
+		if (items == null || items.isEmpty()) {
+			adapter.setHistoryItems(WikivoyageLocalDataHelper
+					.getInstance(getMyApplication()).getAllHistory());
+		} else {
+			adapter.setItems(items);
+		}
+	}
+
 	private void runSearch() {
 		switchProgressBarVisibility(true);
 		cancelled = false;
@@ -141,7 +155,7 @@ public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment
 				getMyApplication().runInUIThread(new Runnable() {
 					public void run() {
 						if (!isCancelled()) {
-							adapter.setItems(results);
+							setAdapterItems(results);
 							switchProgressBarVisibility(false);
 						}
 					}

@@ -22,6 +22,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
+import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -145,6 +146,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		if (article == null) {
 			return;
 		}
+
+		WikivoyageLocalDataHelper.getInstance(getMyApplication()).addToHistory(article);
 
 		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(article), "text/html", "UTF-8", null);
 	}
