@@ -38,6 +38,10 @@ public class WikivoyageSearchHistoryHelper {
 		return new ArrayList<>(historyItems);
 	}
 
+	public void addToHistory(WikivoyageArticle article) {
+		addToHistory(article.getCityId(), article.getTitle(), article.getLang(), article.getIsPartOf());
+	}
+
 	public void addToHistory(long cityId, String title, String lang, String isPartOf) {
 		WikivoyageSearchHistoryItem item = historyMap.get(cityId);
 		boolean newItem = item == null;
@@ -52,6 +56,7 @@ public class WikivoyageSearchHistoryHelper {
 		if (newItem) {
 			dbHelper.add(item);
 			historyItems.add(item);
+			historyMap.put(item.cityId, item);
 		} else {
 			dbHelper.update(item);
 		}
