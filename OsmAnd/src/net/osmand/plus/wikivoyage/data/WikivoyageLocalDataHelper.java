@@ -19,12 +19,11 @@ public class WikivoyageLocalDataHelper {
 
 	private WikivoyageLocalDataDbHelper dbHelper;
 
-	private TLongObjectHashMap<WikivoyageSearchHistoryItem> historyMap = new TLongObjectHashMap<>();
-	private List<WikivoyageSearchHistoryItem> historyItems;
+	private TLongObjectHashMap<WikivoyageSearchHistoryItem> historyMap;
 
 	private WikivoyageLocalDataHelper(OsmandApplication app) {
 		dbHelper = new WikivoyageLocalDataDbHelper(app);
-		loadHistory();
+		historyMap = dbHelper.getAllHistoryMap();
 	}
 
 	public static WikivoyageLocalDataHelper getInstance(OsmandApplication app) {
@@ -35,7 +34,19 @@ public class WikivoyageLocalDataHelper {
 	}
 
 	public List<WikivoyageSearchHistoryItem> getAllHistory() {
-		return new ArrayList<>(historyItems);
+		List<WikivoyageSearchHistoryItem> res = new ArrayList<>(historyMap.valueCollection());
+		Collections.sort(res, new Comparator<WikivoyageSearchHistoryItem>() {
+			@Override
+			public int compare(WikivoyageSearchHistoryItem item1, WikivoyageSearchHistoryItem item2) {
+				if (item1.lastAccessed > item2.lastAccessed) {
+					return -1;
+				} else if (item1.lastAccessed == item2.lastAccessed) {
+					return 0;
+				}
+				return 1;
+			}
+		});
+		return res;
 	}
 
 	public void addToHistory(WikivoyageArticle article) {
@@ -55,34 +66,10 @@ public class WikivoyageLocalDataHelper {
 		item.lastAccessed = System.currentTimeMillis();
 		if (newItem) {
 			dbHelper.addHistoryItem(item);
-			historyItems.add(item);
 			historyMap.put(item.cityId, item);
 		} else {
 			dbHelper.updateHistoryItem(item);
 		}
-		sortHistory();
-	}
-
-	private void loadHistory() {
-		historyItems = dbHelper.getAllHistory();
-		sortHistory();
-		for (WikivoyageSearchHistoryItem item : historyItems) {
-			historyMap.put(item.cityId, item);
-		}
-	}
-
-	private void sortHistory() {
-		Collections.sort(historyItems, new Comparator<WikivoyageSearchHistoryItem>() {
-			@Override
-			public int compare(WikivoyageSearchHistoryItem item1, WikivoyageSearchHistoryItem item2) {
-				if (item1.lastAccessed > item2.lastAccessed) {
-					return -1;
-				} else if (item1.lastAccessed == item2.lastAccessed) {
-					return 0;
-				}
-				return 1;
-			}
-		});
 	}
 
 	private static class WikivoyageLocalDataDbHelper {
@@ -148,15 +135,16 @@ public class WikivoyageLocalDataHelper {
 		}
 
 		@NonNull
-		List<WikivoyageSearchHistoryItem> getAllHistory() {
-			List<WikivoyageSearchHistoryItem> res = new ArrayList<>();
+		TLongObjectHashMap<WikivoyageSearchHistoryItem> getAllHistoryMap() {
+			TLongObjectHashMap<WikivoyageSearchHistoryItem> res = new TLongObjectHashMap<>();
 			SQLiteConnection conn = openConnection(true);
 			if (conn != null) {
 				try {
 					SQLiteCursor cursor = conn.rawQuery(HISTORY_TABLE_SELECT, null);
 					if (cursor.moveToFirst()) {
 						do {
-							res.add(readHistoryItem(cursor));
+							WikivoyageSearchHistoryItem item = readHistoryItem(cursor);
+							res.put(item.cityId, item);
 						} while (cursor.moveToNext());
 					}
 				} finally {
