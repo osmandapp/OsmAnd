@@ -23,8 +23,9 @@ body {
     width: 100%;
     height: 20%;
     background: center;
-    background-size: 100%;
+    background-size: auto 100%;
     background-repeat: no-repeat;
+    background-color: yellow;
 }
 
 h2 {
