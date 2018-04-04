@@ -22,6 +22,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
+import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
 			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
 			"<link href=\"article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
-			"</head><body>";
+			"</head><body>\n";
 	private static final String FOOTER_INNER = "</div></body></html>";
 
 	private long cityId = NO_VALUE;
@@ -146,6 +147,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			return;
 		}
 
+		WikivoyageLocalDataHelper.getInstance(getMyApplication()).addToHistory(article);
+
 		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(article), "text/html", "UTF-8", null);
 	}
 
@@ -155,8 +158,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 		String articleTitle = article.getImageTitle();
 		if (!TextUtils.isEmpty(articleTitle)) {
-			String url = WikivoyageArticle.getImageUrl(articleTitle);
-			sb.append("<img class=\"title-image\" src=\"").append(url).append("\"/>");
+			String url = WikivoyageArticle.getImageUrl(articleTitle, false);
+			sb.append("<div class=\"title-image\" style=\"background-image: url(").append(url).append(")\"></div>");
 		}
 		sb.append("<div class=\"main\">\n");
 		sb.append("<h1>").append(article.getTitle()).append("</h1>");

@@ -18,7 +18,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
+import net.osmand.plus.wikivoyage.data.WikivoyageSearchHistoryItem;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,9 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 	private static final int ITEM_TYPE = 1;
 
 	private OsmandApplication app;
+
 	private LayerDrawable placeholder;
+	private LayerDrawable historyPlaceholder;
 
 	private List<Object> items = new ArrayList<>();
 
@@ -41,11 +45,8 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
 	SearchRecyclerViewAdapter(OsmandApplication app) {
 		this.app = app;
-		placeholder = (LayerDrawable) ContextCompat.getDrawable(app, R.drawable.wikivoyage_search_placeholder);
-		if (Build.VERSION.SDK_INT < 21 && placeholder != null) {
-			placeholder.setDrawableByLayerId(R.id.placeholder_icon,
-					app.getIconsCache().getIcon(R.drawable.ic_action_placeholder_city, R.color.icon_color));
-		}
+		placeholder = getPlaceholder(false);
+		historyPlaceholder = getPlaceholder(true);
 	}
 
 	@NonNull
@@ -69,15 +70,24 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 			ItemVH holder = (ItemVH) viewHolder;
 			boolean lastItem = pos == getItemCount() - 1;
 
-			WikivoyageSearchResult item = (WikivoyageSearchResult) getItem(pos);
-			Picasso.get()
-					.load(WikivoyageArticle.getThumbImageUrl(item.getImageTitle()))
-					.transform(new CropCircleTransformation())
-					.placeholder(placeholder)
-					.into(holder.icon);
-			holder.title.setText(item.getArticleTitles().get(0));
-			holder.leftDescr.setText(item.getIsPartOf());
-			holder.rightDescr.setText(item.getFirstLangsString());
+			Object item = getItem(pos);
+			if (item instanceof WikivoyageSearchResult) {
+				WikivoyageSearchResult searchRes = (WikivoyageSearchResult) item;
+				Picasso.get()
+						.load(WikivoyageArticle.getImageUrl(searchRes.getImageTitle(), true))
+						.transform(new CropCircleTransformation())
+						.placeholder(placeholder)
+						.into(holder.icon);
+				holder.title.setText(searchRes.getArticleTitles().get(0));
+				holder.leftDescr.setText(searchRes.getIsPartOf());
+				holder.rightDescr.setText(searchRes.getFirstLangsString());
+			} else {
+				WikivoyageSearchHistoryItem historyItem = (WikivoyageSearchHistoryItem) item;
+				holder.icon.setImageDrawable(historyPlaceholder);
+				holder.title.setText(historyItem.getArticleTitle());
+				holder.leftDescr.setText(historyItem.getIsPartOf());
+				holder.rightDescr.setText(Algorithms.capitalizeFirstLetter(historyItem.getLang()));
+			}
 			holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);
 			holder.shadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 		}
@@ -101,6 +111,15 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 		return items.get(pos);
 	}
 
+	public void setHistoryItems(@Nullable List<WikivoyageSearchHistoryItem> historyItems) {
+		this.items.clear();
+		if (historyItems != null && !historyItems.isEmpty()) {
+			this.items.add(app.getString(R.string.shared_string_history));
+			this.items.addAll(historyItems);
+		}
+		notifyDataSetChanged();
+	}
+
 	public void setItems(@Nullable List<WikivoyageSearchResult> items) {
 		this.items.clear();
 		if (items != null && !items.isEmpty()) {
@@ -108,6 +127,21 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 			this.items.addAll(items);
 		}
 		notifyDataSetChanged();
+	}
+
+	private LayerDrawable getPlaceholder(boolean history) {
+		LayerDrawable res = (LayerDrawable) ContextCompat.getDrawable(
+				app, history
+						? R.drawable.wikivoyage_search_history_placeholder
+						: R.drawable.wikivoyage_search_placeholder
+		);
+		if (Build.VERSION.SDK_INT < 21 && res != null) {
+			res.setDrawableByLayerId(R.id.placeholder_icon, app.getIconsCache().getIcon(
+					history ? R.drawable.ic_action_history : R.drawable.ic_action_placeholder_city,
+					R.color.icon_color
+			));
+		}
+		return res;
 	}
 
 	static class HeaderVH extends RecyclerView.ViewHolder {

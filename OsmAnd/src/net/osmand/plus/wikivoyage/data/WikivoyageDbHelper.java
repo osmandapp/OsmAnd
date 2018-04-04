@@ -62,22 +62,6 @@ public class WikivoyageDbHelper {
 	private static final String SEARCH_COL_ARTICLE_TITLE = "article_title";
 	private static final String SEARCH_COL_LANG = "lang";
 
-	private static final String SEARCH_QUERY = "SELECT " +
-			SEARCH_COL_SEARCH_TERM + ", " +
-			SEARCH_TABLE_NAME + "." + SEARCH_COL_CITY_ID + ", " +
-			SEARCH_COL_ARTICLE_TITLE + ", " +
-			SEARCH_TABLE_NAME + "." + SEARCH_COL_LANG + ", " +
-			ARTICLES_COL_IS_PART_OF + ", " +
-			ARTICLES_COL_IMAGE_TITLE +
-			" FROM " + SEARCH_TABLE_NAME +
-			" JOIN " + ARTICLES_TABLE_NAME +
-			" ON " + SEARCH_TABLE_NAME + "." + SEARCH_COL_ARTICLE_TITLE + " = " + ARTICLES_TABLE_NAME + "." + ARTICLES_COL_TITLE +
-			" AND " + SEARCH_TABLE_NAME + "." + SEARCH_COL_LANG + " = " + ARTICLES_TABLE_NAME + "." + ARTICLES_COL_LANG +
-			" WHERE " + SEARCH_TABLE_NAME + "." + SEARCH_COL_CITY_ID +
-			" IN (SELECT " + SEARCH_TABLE_NAME + "." + SEARCH_COL_CITY_ID +
-			" FROM " + SEARCH_TABLE_NAME +
-			" WHERE " + SEARCH_COL_SEARCH_TERM + " LIKE ?)";
-
 	private final OsmandApplication application;
 
 	private Collator collator;
@@ -91,13 +75,41 @@ public class WikivoyageDbHelper {
 	public List<WikivoyageSearchResult> search(final String searchQuery) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
+		String[] queries = searchQuery.replace('_', ' ').replace('/', ' ').split(" ");
 		if (conn != null) {
 			try {
-				SQLiteCursor cursor = conn.rawQuery(SEARCH_QUERY, new String[]{searchQuery + "%"});
-				if (cursor.moveToFirst()) {
-					do {
-						res.add(readSearchResult(cursor));
-					} while (cursor.moveToNext());
+				List<String> params = new ArrayList<>();
+				String query = "SELECT  distinct wa.city_id, wa.title, wa.lang, wa.is_part_of, wa.image_title " +
+						"FROM wikivoyage_articles wa WHERE wa.city_id in " +
+						" (SELECT city_id FROM wikivoyage_search WHERE search_term LIKE";
+				for (String q : queries) {
+					if (q.trim().length() > 0) {
+						if (params.size() > 5) {
+							// don't explode the query search much
+							break;
+						}
+						if (params.size() > 0) {
+							query += " AND city_id IN (SELECT city_id FROM wikivoyage_search WHERE search_term LIKE ?) ";
+						} else {
+							query += "?";
+						}
+						params.add(q.trim() + "%");
+					}
+				}
+				query += ") ";
+				if (params.size() > 0) {
+					SQLiteCursor cursor = conn.rawQuery(query, params.toArray(new String[params.size()]));
+					if (cursor.moveToFirst()) {
+						do {
+							WikivoyageSearchResult rs = new WikivoyageSearchResult();
+							rs.cityId = cursor.getLong(0);
+							rs.articleTitles.add(cursor.getString(1));
+							rs.langs.add(cursor.getString(2));
+							rs.isPartOf = cursor.getString(3);
+							rs.imageTitle = cursor.getString(4);
+							res.add(rs);
+						} while (cursor.moveToNext());
+					}
 				}
 			} finally {
 				conn.close();
@@ -105,6 +117,12 @@ public class WikivoyageDbHelper {
 		}
 
 		List<WikivoyageSearchResult> list = new ArrayList<>(groupSearchResultsByCityId(res));
+		sortSearchResults(searchQuery, list);
+
+		return list;
+	}
+
+	private void sortSearchResults(final String searchQuery, List<WikivoyageSearchResult> list) {
 		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
 			@Override
 			public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
@@ -122,8 +140,6 @@ public class WikivoyageDbHelper {
 				return 0;
 			}
 		});
-
-		return list;
 	}
 
 	private Collection<WikivoyageSearchResult> groupSearchResultsByCityId(List<WikivoyageSearchResult> res) {
@@ -144,7 +160,6 @@ public class WikivoyageDbHelper {
 				}
 				prev.articleTitles.add(insInd, rs.articleTitles.get(0));
 				prev.langs.add(insInd, rs.langs.get(0));
-				prev.searchTerms.add(insInd, rs.searchTerms.get(0));
 			} else {
 				wikivoyage.put(rs.cityId, rs);
 			}
@@ -177,20 +192,6 @@ public class WikivoyageDbHelper {
 	private SQLiteConnection openConnection() {
 		String path = getDbFile(application).getAbsolutePath();
 		return application.getSQLiteAPI().openByAbsolutePath(path, true);
-	}
-
-	@NonNull
-	private WikivoyageSearchResult readSearchResult(SQLiteCursor cursor) {
-		WikivoyageSearchResult res = new WikivoyageSearchResult();
-
-		res.searchTerms.add(cursor.getString(0));
-		res.cityId = cursor.getLong(1);
-		res.articleTitles.add(cursor.getString(2));
-		res.langs.add(cursor.getString(3));
-		res.isPartOf = cursor.getString(4);
-		res.imageTitle = cursor.getString(5);
-
-		return res;
 	}
 
 	@NonNull
