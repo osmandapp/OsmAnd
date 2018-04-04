@@ -2540,7 +2540,7 @@
     <string name="shared_string_total">Укупно</string>
     <string name="clear_all_intermediates">Очисти све пролазне тачке</string>
     <string name="transport_nearby_routes">БЛИЗУ</string>
-    <string name="speech_rate_descr">Одаберите бртзину изговора синтетичког TTS гласа</string>
+    <string name="speech_rate_descr">Одаберите брзину изговора синтетичког TTS гласа.</string>
     <string name="local_osm_changes_backup">Прави резервну копију како се OSM мења</string>
     <string name="osmand_service">Позадински режим</string>
     <string name="osmand_service_descr">ОсмАнд ће радити у позадини док је екран искључен.</string>
