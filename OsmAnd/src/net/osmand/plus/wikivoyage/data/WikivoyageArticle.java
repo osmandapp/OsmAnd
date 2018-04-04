@@ -12,6 +12,7 @@ public class WikivoyageArticle {
 
 	private static final String IMAGE_ROOT_URL = "https://upload.wikimedia.org/wikipedia/commons/";
 	private static final String THUMB_PREFIX = "320px-";
+	private static final String REGULAR_PREFIX = "800px-";
 
 	String id;
 	String title;
@@ -75,15 +76,10 @@ public class WikivoyageArticle {
 	}
 
 	@NonNull
-	public static String getThumbImageUrl(@NonNull String imageTitle) {
+	public static String getImageUrl(@NonNull String imageTitle, boolean thumbnail) {
 		String[] hash = getHash(imageTitle);
-		return IMAGE_ROOT_URL + "thumb/" + hash[0] + "/" + hash[1] + "/" + imageTitle + "/" + THUMB_PREFIX + imageTitle;
-	}
-
-	@NonNull
-	public static String getImageUrl(@NonNull String imageTitle) {
-		String[] hash = getHash(imageTitle);
-		return IMAGE_ROOT_URL + hash[0] + "/" + hash[1] + "/" + imageTitle;
+		String prefix = thumbnail ? THUMB_PREFIX : REGULAR_PREFIX;
+		return IMAGE_ROOT_URL + "thumb/" + hash[0] + "/" + hash[1] + "/" + imageTitle + "/" + prefix + imageTitle;
 	}
 
 	@Size(2)

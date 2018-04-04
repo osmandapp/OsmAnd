@@ -158,7 +158,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 		String articleTitle = article.getImageTitle();
 		if (!TextUtils.isEmpty(articleTitle)) {
-			String url = WikivoyageArticle.getImageUrl(articleTitle);
+			String url = WikivoyageArticle.getImageUrl(articleTitle, false);
 			sb.append("<div class=\"title-image\" style=\"background-image: url(").append(url).append(")\"></div>");
 		}
 		sb.append("<div class=\"main\">\n");

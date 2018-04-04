@@ -74,7 +74,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 			if (item instanceof WikivoyageSearchResult) {
 				WikivoyageSearchResult searchRes = (WikivoyageSearchResult) item;
 				Picasso.get()
-						.load(WikivoyageArticle.getThumbImageUrl(searchRes.getImageTitle()))
+						.load(WikivoyageArticle.getImageUrl(searchRes.getImageTitle(), true))
 						.transform(new CropCircleTransformation())
 						.placeholder(placeholder)
 						.into(holder.icon);
