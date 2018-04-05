@@ -3870,4 +3870,7 @@
 	<string name="poi_service_vehicle_alignment_yes">Alineación</string>
 	<string name="poi_service_vehicle_transmission_repair_yes">Reparación de la transmisión</string>
 	<string name="poi_service_vehicle_motor_yes">Motor</string>
-	</resources>
+	<string name="poi_service_vehicle_insurance_yes">Aseguradora</string>
+	<string name="poi_service_vehicle_tyres_yes">Neumáticos</string>
+
+</resources>
