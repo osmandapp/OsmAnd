@@ -761,7 +761,7 @@ public class MapActivityActions implements DialogProvider {
 							Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
 							intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 							mapActivity.startActivity(intent);
-							return false;
+							return true;
 						}
 					}).createItem());
 		}
