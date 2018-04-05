@@ -22,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
+import net.osmand.plus.wikivoyage.data.WikivoyageSearchHistoryItem;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
 import java.util.ArrayList;
@@ -106,6 +107,16 @@ public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment
 						WikivoyageSearchResult res = (WikivoyageSearchResult) item;
 						WikivoyageArticleDialogFragment.showInstance(getFragmentManager(),
 								res.getCityId(), new ArrayList<>(res.getLangs()));
+					} else if (item instanceof WikivoyageSearchHistoryItem) {
+						WikivoyageSearchHistoryItem historyItem = (WikivoyageSearchHistoryItem) item;
+						ArrayList<String> langs = getMyApplication().getWikivoyageDbHelper()
+								.getArticleLangs(historyItem.getCityId());
+						boolean selectedLangExists = langs.remove(historyItem.getLang());
+						if (selectedLangExists) {
+							langs.add(0, historyItem.getLang());
+						}
+						WikivoyageArticleDialogFragment.showInstance(getFragmentManager(),
+								historyItem.getCityId(), langs);
 					}
 				}
 			}
