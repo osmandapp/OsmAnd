@@ -2876,4 +2876,5 @@ Por favor proporciona un código completo</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Nombre de punto opcional</string>
+    <string name="shared_string_result">Resultado</string>
     </resources>
