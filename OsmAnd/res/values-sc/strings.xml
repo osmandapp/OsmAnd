@@ -2605,13 +2605,13 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_visible">Visìbile</string>
     <string name="analyze_on_map">Analiza in sa mapa</string>
     <string name="quick_action_auto_zoom">Ismanniamentu atomàticu mapa allutu/istudadu</string>
-    <string name="quick_action_auto_zoom_desc">Incarchende su butone as a istudare o allùghere s\'ismanniamentu mapa chi sighit sa lestresa tua.</string>
+    <string name="quick_action_auto_zoom_desc">Incarchende custu butone as a istudare o allùghere s\'ismanniamentu mapa chi sighit sa lestresa tua.</string>
     <string name="quick_action_auto_zoom_on">Abìlita s\'ismanniamentu automàticu mapa</string>
     <string name="quick_action_auto_zoom_off">Disabìlita s\'ismanniamentu automàticu mapa</string>
     <string name="quick_action_add_destination">Annanghe una destinatzione</string>
     <string name="quick_action_replace_destination">Muda sa destinatzione</string>
     <string name="quick_action_add_first_intermediate">Annanghe su primu puntu de coladòrgiu</string>
-    <string name="quick_action_add_destination_desc">Incarca su butone pro annànghere una destinatzione in sa positzione in su tzentru de sa mapa. S\'ùrtima destinatzione impostada in antis at a divènnere s\'ùrtimu puntu de coladòrgiu.</string>
+    <string name="quick_action_add_destination_desc">Incarchende custu butone de atzione as a fàghere sa positzione in su tzentru de sa mapa sa destinatzione de s\'àndala, e s\'ùrtima destinatzione impostada in antis at a divènnere s\'ùrtimu puntu de coladòrgiu.</string>
     <string name="quick_action_replace_destination_desc">Incarca su butone pro mudare sa destinatzione cun sa positzione in su tzentru de sa mapa.</string>
     <string name="quick_action_add_first_intermediate_desc">Incarca su butone pro annànghere unu puntu de coladòrgiu in sa positzione in su tzentru de sa mapa.</string>
     <string name="no_overlay">Perunu istratu superiore</string>
@@ -2658,7 +2658,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="quick_action_showhide_osmbugs_title">Ammustra/cua sas notas OSM</string>
     <string name="quick_action_osmbugs_show">Ammustra sas notas OSM</string>
     <string name="quick_action_osmbugs_hide">Cua sas notas OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Incarchende su butone pro s\'atzione as a cuare o ammustrare sas notas OSM in sa mapa.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Incarchende custu butone pro s\'atzione as a cuare o ammustrare sas notas OSM in sa mapa.</string>
     <string name="restart_search">Torra a incumintzare sa chirca</string>
     <string name="increase_search_radius">Ismànnia su raju de chirca</string>
     <string name="nothing_found">Nudda de agatadu</string>
@@ -2953,7 +2953,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="osm_notes">Notas OSM</string>
     <string name="tunnel_warning">Galleria a curtzu</string>
     <string name="show_tunnels">Gallerias</string>
-<string name="make_as_start_point">Pone comente Puntu de incumintzu</string>
+<string name="make_as_start_point">Pone·lu comente Puntu de incumintzu</string>
     <string name="shared_string_current">Atuale</string>
     <string name="last_intermediate_dest_description">Annanghet s\'ùrtima firmada a s\'àndala</string>
     <string name="first_intermediate_dest_description">Annanghet sa prima firmada a s\'àndala</string>
