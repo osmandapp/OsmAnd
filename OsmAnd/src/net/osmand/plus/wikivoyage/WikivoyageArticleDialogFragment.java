@@ -23,6 +23,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -139,7 +140,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			selectedLang = langs.get(0);
 		}
 
-		selectedLangTv.setText(selectedLang);
+		selectedLangTv.setText(Algorithms.capitalizeFirstLetter(selectedLang));
 
 		WikivoyageArticle article = getMyApplication().getWikivoyageDbHelper()
 				.getArticle(cityId, selectedLang);
