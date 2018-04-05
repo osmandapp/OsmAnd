@@ -2397,7 +2397,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="legacy_search">Chirca betza</string>
     <string name="show_legacy_search">Ammustra sa chirca betza</string>
     <string name="show_legacy_search_desc">Annanghe sa chirca betza a sa lista.</string>
-    <string name="rendering_attr_contourWidth_description">Ispessore curvas de livellu</string>
+    <string name="rendering_attr_contourWidth_description">Grussesa curvas de livellu</string>
     <string name="rendering_attr_contourWidth_name">Ispessore curvas de livellu</string>
     <string name="rendering_attr_hideWaterPolygons_description">Abba</string>
     <string name="rendering_attr_contourDensity_description">Densidade de curvas de livellu</string>
@@ -2611,9 +2611,9 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="quick_action_add_destination">Annanghe una destinatzione</string>
     <string name="quick_action_replace_destination">Muda sa destinatzione</string>
     <string name="quick_action_add_first_intermediate">Annanghe su primu puntu de coladòrgiu</string>
-    <string name="quick_action_add_destination_desc">Incarchende custu butone de atzione as a fàghere sa positzione in su tzentru de sa mapa sa destinatzione de s\'àndala, e s\'ùrtima destinatzione impostada in antis at a divènnere s\'ùrtimu puntu de coladòrgiu.</string>
-    <string name="quick_action_replace_destination_desc">Incarca su butone pro mudare sa destinatzione cun sa positzione in su tzentru de sa mapa.</string>
-    <string name="quick_action_add_first_intermediate_desc">Incarca su butone pro annànghere unu puntu de coladòrgiu in sa positzione in su tzentru de sa mapa.</string>
+    <string name="quick_action_add_destination_desc">Incarchende custu butone de atzione as a fàghere divènnere sa positzione in su tzentru de sa mapa sa destinatzione de s\'àndala, e s\'ùrtima destinatzione impostada in antis at a divènnere s\'ùrtimu puntu de coladòrgiu.</string>
+    <string name="quick_action_replace_destination_desc">Incarchende custu butone de atzione as a fàghere divènnere sa positzione in su tzentru de sa mapa sa destinatzione de s\'àndala, sostituende sa destinatzione imbeniente (si nde tenias una).</string>
+    <string name="quick_action_add_first_intermediate_desc">Incarchende custu butone de atzione as a fàghere divènnere sa positzione in su tzentru de sa mapa sa destinatzione de s\'àndala.</string>
     <string name="no_overlay">Perunu istratu superiore</string>
     <string name="no_underlay">Perunu istratu inferiore</string>
     <string name="subscribe_email_error">Errore</string>
