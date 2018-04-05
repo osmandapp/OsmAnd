@@ -1680,7 +1680,7 @@ Nyttjat utrymme är {1} MB.
     <string name="shared_string_rename">Byt namn</string>
     <string name="shared_string_delete">Ta bort</string>
     <string name="shared_string_delete_all">Ta bort alla</string>
-    <string name="shared_string_share">Dela ut</string>
+    <string name="shared_string_share">Dela</string>
     <string name="shared_string_add">Lägg till</string>
     <string name="shared_string_apply">Verkställ</string>
     <string name="shared_string_control_start">Starta</string>
@@ -2935,4 +2935,5 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="quick_action_showhide_favorites_descr">Knackning på åtgärdsknappen visar eller döljer Favoriter på kartan.</string>
     <string name="quick_action_showhide_poi_descr">Knackning på åtgärdsknappen visar eller döljer Intressepunkter på kartan.</string>
     <string name="quick_action_fav_name_descr">Lämna tomt för att automatiskt använda adressen eller platsens namn.</string>
-    </resources>
+    <string name="show_tunnels">Tunnlar</string>
+</resources>
