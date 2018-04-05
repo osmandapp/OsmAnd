@@ -1,4 +1,4 @@
-package net.osmand.plus.wikivoyage;
+package net.osmand.plus.wikivoyage.explore;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.R;
+import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
 
 import java.util.ArrayList;

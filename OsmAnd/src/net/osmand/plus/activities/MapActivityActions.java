@@ -62,7 +62,7 @@ import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.wikivoyage.WikivoyageExploreDialogFragment;
+import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
 import net.osmand.plus.wikivoyage.data.WikivoyageDbHelper;
 import net.osmand.router.GeneralRouter;
 

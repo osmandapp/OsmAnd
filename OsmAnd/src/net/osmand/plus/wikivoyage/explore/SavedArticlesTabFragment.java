@@ -1,4 +1,4 @@
-package net.osmand.plus.wikivoyage;
+package net.osmand.plus.wikivoyage.explore;
 
 import net.osmand.plus.base.BaseOsmAndFragment;
 
