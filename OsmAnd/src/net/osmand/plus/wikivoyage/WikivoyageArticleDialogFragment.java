@@ -62,7 +62,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
 
-		ColorStateList selectedLangColorStateList = AndroidUtils.createColorStateList(
+		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
 				R.color.icon_color, R.color.wikivoyage_active_light,
 				R.color.icon_color, R.color.wikivoyage_active_dark
