@@ -15,6 +15,8 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class WikivoyageLocalDataHelper {
 
+	private static final int HISTORY_ITEMS_LIMIT = 300;
+
 	private static WikivoyageLocalDataHelper instance;
 
 	private WikivoyageLocalDataDbHelper dbHelper;
@@ -69,6 +71,12 @@ public class WikivoyageLocalDataHelper {
 			historyMap.put(item.cityId, item);
 		} else {
 			dbHelper.updateHistoryItem(item);
+		}
+		if (historyMap.size() > HISTORY_ITEMS_LIMIT) {
+			List<WikivoyageSearchHistoryItem> allHistory = getAllHistory();
+			WikivoyageSearchHistoryItem lastItem = allHistory.get(allHistory.size() - 1);
+			dbHelper.removeHistoryItem(lastItem);
+			historyMap.remove(lastItem.cityId);
 		}
 	}
 
@@ -177,6 +185,18 @@ public class WikivoyageLocalDataHelper {
 									HISTORY_COL_LAST_ACCESSED + " = ? " +
 									"WHERE " + HISTORY_COL_CITY_ID + " = ?",
 							new Object[]{item.articleTitle, item.lang, item.isPartOf, item.lastAccessed, item.cityId});
+				} finally {
+					conn.close();
+				}
+			}
+		}
+
+		void removeHistoryItem(WikivoyageSearchHistoryItem item) {
+			SQLiteConnection conn = openConnection(false);
+			if (conn != null) {
+				try {
+					conn.execSQL("DELETE FROM " + HISTORY_TABLE_NAME + " WHERE " + HISTORY_COL_CITY_ID + " = ?",
+							new Object[]{item.cityId});
 				} finally {
 					conn.close();
 				}
