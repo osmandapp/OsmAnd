@@ -2183,9 +2183,9 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="shared_string_widgets">Widgets</string>
     <string name="recalculate_route">Torra a calculare s’àndala</string>
     <string name="shared_string_topbar">Barra in pitzu</string>
-    <string name="storage_permission_restart_is_required">Como s\'aplicatzione est autorizada a iscrìere in sa memòria esterna. Pro aplicare custa modìfica, depet èssere torrada a allùere manualmente.</string>
-    <string name="shared_string_move_up">Moe prus in artu</string>
-    <string name="shared_string_move_down">Moe prus in bassu</string>
+    <string name="storage_permission_restart_is_required">Como s\'aplicatzione est autorizada a iscrìere in sa memòria esterna, ma depet èssere torrada a allùghere manualmente pro aplicare custa modìfica.</string>
+    <string name="shared_string_move_up">Moe ↑</string>
+    <string name="shared_string_move_down">Moe ↓</string>
     <string name="finish_navigation">Concrui su nàvigu</string>
     <string name="avoid_road">Istransi s\'istrada</string>
     <string name="storage_directory_shared">Memòria cumpartzida</string>
@@ -2233,9 +2233,9 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="map_widget_magnetic_bearing">Bùssola magnètica</string>
     <string name="map_widget_bearing">Bùssola relativa</string>
     <string name="access_disable_offroute_recalc">Non torrare a calculare s\'àndala si ses essidu dae s\'istrada</string>
-    <string name="access_disable_offroute_recalc_descr">Èvitat su ricàlculu automàticu de s\'àndala cando nde ses essidu.</string>
+    <string name="access_disable_offroute_recalc_descr">Perunu ricàlculu automàticu de s\'àndala cando nde ses essidu.</string>
     <string name="access_disable_wrong_direction_recalc">Non cambiare s\'àndala si sa diretzione est isballiada</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Èvitat su ricàlculu automàticu de s\'àndala si ti ses moende in sa diretzione isballiada.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Perunu ricàlculu automàticu de s\'àndala si ti ses moende in sa diretzione isballiada.</string>
     <string name="access_smart_autoannounce">Annùntziu automàticu intelligente</string>
     <string name="access_smart_autoannounce_descr">Notìfica petzi cando sa diretzione cara a sa destinatzione cambiat.</string>
     <string name="access_autoannounce_period">Intervallu de annùntziu automàticu</string>
@@ -2313,7 +2313,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="allow_access_location">Dae su permissu pro s\'atzessu a sa positzione</string>
     <string name="search_my_location">Agata sa positzione mea</string>
     <string name="no_update_info_desc">Non chircare versiones noas o ofertas promotzionales pro OsmAnd.</string>
-    <string name="no_update_info">No ammustres sos agiornamentos</string>
+    <string name="no_update_info">No ammustres versiones noas</string>
     <string name="update_all_maps_now">Cheres agiornare totu sas mapas como?</string>
     <string name="clear_tile_data">Iscantzella totu sos tasseddos</string>
     <string name="first_usage_greeting">Retzi indicatziones e iscoberi logos noos chene una connessione a ìnternet</string>
@@ -2351,9 +2351,9 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="save_track_min_speed">Lestresa mìnima pro sa registratzione</string>
     <string name="save_track_min_speed_descr">Filtru: Peruna registratzione de puntos in suta de custa lestresa.</string>
     <string name="save_track_min_distance">Rilevamentu de movimentu mìnimu pro sa registratzione</string>
-    <string name="save_track_min_distance_descr">Filtru: Issèbera sa distàntzia mìnima dae s\'ùrtima positzione pro registrare unu puntu.</string>
+    <string name="save_track_min_distance_descr">Filtru: Issèbera sa distàntzia mìnima dae unu puntu pro nde registrare un\'àteru.</string>
     <string name="save_track_precision">Pretzisione mìnima de registratzione</string>
-    <string name="save_track_precision_descr">Filtru: Issèbera sa pretzisione mìnima pro sa registratzione.</string>
+    <string name="save_track_precision_descr">Filtru: Peruna registratzione si custa pretzisione no est istada retzida.</string>
     <string name="christmas_poi">PDI de Nadale</string>
     <string name="christmas_desc">Antitzipende sas vacàntzias de Nadale (Pasca de Nadale e sa Prima die de s\'annu) est possìbile isseberare de visualizare sos PDI assotziados a sa Pasca de Nadale: s\'àrbore de Nadale, sos mercados, etz.</string>
     <string name="christmas_desc_q">Ammustrare sos PDI de Nadale?</string>
