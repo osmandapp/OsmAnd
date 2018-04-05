@@ -2435,7 +2435,7 @@
 	<string name="poi_traffic_signals_sound">聲音</string>
 	<string name="poi_highway_crossing_type">類型</string>
 	<string name="poi_tactile_paving">導盲磚</string>
-	<string name="poi_service_car">服務</string>
+	<string name="poi_service_general">服務</string>
 	<string name="poi_brushless">無刷</string>
 	<string name="poi_self_service">自助服務</string>
 	<string name="poi_automated">自動化</string>

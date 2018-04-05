@@ -3058,7 +3058,7 @@
 	<string name="poi_traffic_signals_sound">Sygnał dźwiękowy</string>
 	<string name="poi_highway_crossing_type">Typ</string>
 	<string name="poi_tactile_paving">Wypustki dla niewidomych</string>
-	<string name="poi_service_car">Usługa</string>
+	<string name="poi_service_general">Usługa</string>
 	<string name="poi_brushless">Bezszczotkowa</string>
 	<string name="poi_self_service">Samoobsługa</string>
 	<string name="poi_automated">Automatyczna</string>

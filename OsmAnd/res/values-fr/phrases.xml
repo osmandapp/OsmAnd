@@ -2148,7 +2148,7 @@
 	<string name="poi_fire_hydrant_water_source">Source de l\'eau</string>
 	<string name="poi_payment_toll_type">Type de paiement</string>
 	<string name="poi_highway_crossing_type">Type</string>
-	<string name="poi_service_car">Service</string>
+	<string name="poi_service_general">Service</string>
 	<string name="poi_self_service">Libre service</string>
 	<string name="poi_automated">Automatisé</string>
 	<string name="poi_parking_type">Type</string>

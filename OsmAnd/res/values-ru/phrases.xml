@@ -150,7 +150,7 @@
 
 	<string name="poi_car_repair">Автосервис</string>
 
-	<string name="poi_service_car">Услуги</string>
+	<string name="poi_service_general">Услуги</string>
 	<string name="poi_service_tyres">Шиномонтаж</string>
 	<string name="poi_vehicle_inspection">Пункт техосмотра</string>
 	<string name="poi_car_wash">Автомойка</string>
@@ -3753,5 +3753,28 @@
 
 	<string name="poi_amusement_arcade">Игровой зал</string>
 	<string name="poi_adult_gaming_centre">Игровой зал для взрослых</string>
+
+	<string name="poi_service_car">Автоуслуги</string>
+
+	<string name="poi_service_vehicle_tyres_yes">Шиномонтаж</string>
+	<string name="poi_service_vehicle_car_repair_yes">Ремонт</string>
+	<string name="poi_service_vehicle_oil_change_yes">Замена масла</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Продажа подержанных автомобилей</string>
+	<string name="poi_service_vehicle_brakes_yes">Тормоза</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Продажа новых автомобилей</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Диагностика</string>
+	<string name="poi_service_vehicle_car_parts_yes">Запчасти</string>
+	<string name="poi_service_vehicle_batteries_yes">Аккумуляторы</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Кондиционеры</string>
+	<string name="poi_service_vehicle_body_repair_yes">Кузовной ремонт</string>
+	<string name="poi_service_vehicle_electrical_yes">Электрика</string>
+	<string name="poi_service_vehicle_wheels_yes">Колёса</string>
+	<string name="poi_service_vehicle_glass_yes">Стекло</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Ремонт грузовиков</string>
+	<string name="poi_service_vehicle_muffler_yes">Глушитель</string>
+	<string name="poi_service_vehicle_alignment_yes">Развал-схождение</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Ремонт трансмиссии</string>
+	<string name="poi_service_vehicle_motor_yes">Двигатель</string>
+	<string name="poi_service_vehicle_insurance_yes">Страхование</string>
 
 	</resources>

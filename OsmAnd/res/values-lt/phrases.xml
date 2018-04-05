@@ -123,7 +123,7 @@
 	<string name="poi_fire_hydrant_water_source">Vandens šaltinis</string>
 	<string name="poi_payment_toll_type">Mokėjimo tipas</string>
 	<string name="poi_highway_crossing_type">Tipas</string>
-	<string name="poi_service_car">Paslauga</string>
+	<string name="poi_service_general">Paslauga</string>
 	<string name="poi_self_service">Savitarna</string>
 	<string name="poi_automated">Automatizuotas</string>
 	<string name="poi_parking_type">Tipas</string>

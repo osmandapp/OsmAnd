@@ -1848,7 +1848,7 @@
 
 	<string name="poi_vending_parking_tickets">駐車場のチケット</string>
 	<string name="poi_parking_surface">駐車場舗装種別</string>
-	<string name="poi_service_car">提供可能サービス(Service)</string>
+	<string name="poi_service_general">提供可能サービス(Service)</string>
 	<string name="poi_cafeteria">カフェテリア・セルフ形式</string>
 
 <string name="poi_fast_food_cafeteria">肯定</string>
