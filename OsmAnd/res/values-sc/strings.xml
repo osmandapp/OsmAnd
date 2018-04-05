@@ -2981,7 +2981,12 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="rendering_attr_whiteWaterSports_name">Isports de abba durche</string>
     <string name="group_deleted">Grupu iscantzelladu</string>
     <string name="clear_all_intermediates">Iscantzella totu sos puntos de coladòrgiu</string>
-    <string name="nothing_found_in_radius">Nudda de agatadu intre su raju de chirca</string>
+    <string name="nothing_found_in_radius">Nudda de agatadu intre su raju de chirca:</string>
     <string name="select_waypoints_category_description">Podes annànghere totu sos puntos de sa rasta, o isseberare categorias separadas.</string>
     <string name="shared_string_total">Totale</string>
+    <string name="saved_articles">Artìculos sarvados</string>
+    <string name="shared_string_explore">Esplora</string>
+    <string name="shared_string_result">Risultadu</string>
+    <string name="shared_string_travel">Biàgiu</string>
+    <string name="waypoints_removed_from_map_markers">Puntos de coladòrgiu bogados dae sos marcadores de sa mapa</string>
     </resources>
