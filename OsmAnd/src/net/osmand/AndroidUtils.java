@@ -161,7 +161,7 @@ public class AndroidUtils {
 		);
 	}
 
-	public static StateListDrawable createStateListDrawable(Drawable normal, Drawable pressed) {
+	public static StateListDrawable createPressedStateListDrawable(Drawable normal, Drawable pressed) {
 		StateListDrawable res = new StateListDrawable();
 		res.addState(new int[]{android.R.attr.state_pressed}, pressed);
 		res.addState(new int[]{}, normal);

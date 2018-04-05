@@ -183,7 +183,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		Drawable normal = getContentIcon(R.drawable.ic_action_map_language);
 		if (Build.VERSION.SDK_INT >= 21) {
 			Drawable active = getActiveIcon(R.drawable.ic_action_map_language);
-			return AndroidUtils.createStateListDrawable(normal, active);
+			return AndroidUtils.createPressedStateListDrawable(normal, active);
 		}
 		return normal;
 	}
