@@ -1,8 +1,10 @@
 package net.osmand.plus.wikivoyage;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
 
@@ -34,7 +37,18 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 			}
 		});
 
+		ColorStateList navColorStateList = createBottomNavColorStateList();
+		BottomNavigationView bottomNav = (BottomNavigationView) mainView.findViewById(R.id.bottom_navigation);
+		bottomNav.setItemIconTintList(navColorStateList);
+		bottomNav.setItemTextColor(navColorStateList);
+
 		return mainView;
+	}
+
+	private ColorStateList createBottomNavColorStateList() {
+		return AndroidUtils.createCheckedColorStateList(getContext(), nightMode,
+				R.color.icon_color, R.color.wikivoyage_active_light,
+				R.color.icon_color, R.color.wikivoyage_active_dark);
 	}
 
 	public static boolean showInstance(FragmentManager fm) {
