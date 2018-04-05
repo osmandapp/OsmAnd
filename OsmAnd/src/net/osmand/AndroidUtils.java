@@ -13,7 +13,6 @@ import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
@@ -160,13 +159,6 @@ public class AndroidUtils {
 						ContextCompat.getColor(ctx, night ? darkNormal : lightNormal)
 				}
 		);
-	}
-
-	public static StateListDrawable createStateListDrawable(Context ctx, boolean night,
-															@DrawableRes int lightNormal, @DrawableRes int lightPressed,
-															@DrawableRes int darkNormal, @DrawableRes int darkPressed) {
-		return createStateListDrawable(ContextCompat.getDrawable(ctx, night ? darkNormal : lightNormal),
-				ContextCompat.getDrawable(ctx, night ? darkPressed : lightPressed));
 	}
 
 	public static StateListDrawable createStateListDrawable(Drawable normal, Drawable pressed) {
