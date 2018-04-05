@@ -2139,7 +2139,7 @@
     <string name="old_poi_file_should_be_deleted">The POI data file \'%1$s\' is redundant and can be deleted.</string>
     <string name="update_poi_file_not_found">Local file to maintain POI changes not found and could not be created.</string>
     <string name="button_upgrade_osmandplus">Upgrade OsmAnd+</string>
-    <string name="map_version_changed_info">Dowload the new version of the app to be able to use the new map files.</string>
+    <string name="map_version_changed_info">Download the new version of the app to be able to use the new map files.</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
     <string name="search_position_current_location_search">Searching position…</string>
     <string name="search_position_current_location_found">My Position (found)</string>
