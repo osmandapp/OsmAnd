@@ -1511,7 +1511,7 @@
 	<string name="poi_traffic_signals_sound">Geluidssignaal</string>
 	<string name="poi_highway_crossing_type">Soort</string>
 	<string name="poi_tactile_paving">Blindengeleidestrook</string>
-	<string name="poi_service_car">Service</string>
+	<string name="poi_service_general">Service</string>
 	<string name="poi_brushless">Borstelloos</string>
 	<string name="poi_self_service">Zelfbediening</string>
 	<string name="poi_automated">Automaat</string>

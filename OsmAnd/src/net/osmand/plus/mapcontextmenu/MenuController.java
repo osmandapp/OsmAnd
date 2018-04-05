@@ -690,7 +690,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		}
 
 		private StateListDrawable getStateListDrawable(@DrawableRes int iconResId) {
-			return AndroidUtils.createStateListDrawable(getNormalIcon(iconResId), getPressedIcon(iconResId));
+			return AndroidUtils.createPressedStateListDrawable(getNormalIcon(iconResId), getPressedIcon(iconResId));
 		}
 
 		public abstract void buttonPressed();

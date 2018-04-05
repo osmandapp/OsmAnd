@@ -3034,7 +3034,7 @@
 	<string name="poi_traffic_signals_sound">Sono</string>
 	<string name="poi_highway_crossing_type">Speco</string>
 	<string name="poi_tactile_paving">Reliefo por blinduloj</string>
-	<string name="poi_service_car">Servo</string>
+	<string name="poi_service_general">Servo</string>
 	<string name="poi_brushless">Senbrosa</string>
 	<string name="poi_self_service">Memservado</string>
 	<string name="poi_automated">Aŭtomatiĝa</string>

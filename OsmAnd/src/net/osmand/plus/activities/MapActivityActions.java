@@ -62,7 +62,7 @@ import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.wikivoyage.WikivoyageExploreDialogFragment;
+import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
 import net.osmand.plus.wikivoyage.data.WikivoyageDbHelper;
 import net.osmand.router.GeneralRouter;
 
@@ -761,7 +761,7 @@ public class MapActivityActions implements DialogProvider {
 							Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
 							intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 							mapActivity.startActivity(intent);
-							return false;
+							return true;
 						}
 					}).createItem());
 		}

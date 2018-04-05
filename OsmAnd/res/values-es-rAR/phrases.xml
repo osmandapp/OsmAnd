@@ -3084,7 +3084,7 @@
 	<string name="poi_traffic_signals_sound">Sonoro</string>
 	<string name="poi_highway_crossing_type">Tipo de cruce</string>
 	<string name="poi_tactile_paving">Pavimento táctil</string>
-	<string name="poi_service_car">Servicio para el automóvil</string>
+	<string name="poi_service_general">Servicio para el automóvil</string>
 	<string name="poi_self_service">Autoservicio</string>
 	<string name="poi_automated">Automatizado</string>
 	<string name="poi_parking_type">Tipo de estacionamiento</string>

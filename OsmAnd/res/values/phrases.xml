@@ -18,7 +18,7 @@
 	<string name="poi_traffic_signals_sound">Sound</string>
 	<string name="poi_highway_crossing_type">Type</string>
 	<string name="poi_tactile_paving">Tactile paving</string>
-	<string name="poi_service_car">Service</string>
+	<string name="poi_service_general">Service</string>
 	<string name="poi_brushless">Brushless</string>
 	<string name="poi_self_service">Self service</string>
 	<string name="poi_automated">Automated</string>
@@ -104,6 +104,7 @@
 	<string name="poi_socket_type3_output_filter">Type 3 output</string>
 	<string name="poi_socket_cee_blue_output_filter">CEE blue output</string>
 	<string name="poi_socket_schuko_output_filter">Schuko output</string>
+	<string name="poi_service_car">Car service</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3772,5 +3773,26 @@
 
 	<string name="poi_amusement_arcade">Amusement arcade</string>
 	<string name="poi_adult_gaming_centre">Adult gaming centre</string>
+
+	<string name="poi_service_vehicle_car_repair_yes">Car repair</string>
+	<string name="poi_service_vehicle_oil_change_yes">Oil change</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Used car sales</string>
+	<string name="poi_service_vehicle_brakes_yes">Brakes</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">New car sales</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnostics</string>
+	<string name="poi_service_vehicle_car_parts_yes">Car parts</string>
+	<string name="poi_service_vehicle_batteries_yes">Batteries</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Air conditioning</string>
+	<string name="poi_service_vehicle_body_repair_yes">Body repair</string>
+	<string name="poi_service_vehicle_electrical_yes">Electrical</string>
+	<string name="poi_service_vehicle_wheels_yes">Wheels</string>
+	<string name="poi_service_vehicle_glass_yes">Glass</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Truck repair</string>
+	<string name="poi_service_vehicle_muffler_yes">Muffler</string>
+	<string name="poi_service_vehicle_alignment_yes">Alignment</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Transmission repair</string>
+	<string name="poi_service_vehicle_motor_yes">Motor</string>
+	<string name="poi_service_vehicle_insurance_yes">Insurance</string>
+	<string name="poi_service_vehicle_tyres_yes">Tyres</string>
 
 </resources>

@@ -952,7 +952,7 @@ public class MenuBuilder {
 		int paddingSides = dpToPx(10f);
 		button.setPadding(paddingSides, paddingSides, paddingSides, paddingSides);
 		if (!selected) {
-			ColorStateList buttonColorStateList = AndroidUtils.createColorStateList(context, !light,
+			ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(context, !light,
 					R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
 					R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 			button.setTextColor(buttonColorStateList);

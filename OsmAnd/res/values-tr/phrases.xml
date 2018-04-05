@@ -1065,7 +1065,7 @@
 	<string name="poi_traffic_signals_sound">Ses</string>
 	<string name="poi_highway_crossing_type">Tür</string>
 	<string name="poi_tactile_paving">Parke kaldırım</string>
-	<string name="poi_service_car">Hizmet</string>
+	<string name="poi_service_general">Hizmet</string>
 	<string name="poi_brushless">Fırçasız</string>
 	<string name="poi_self_service">Kendin yap</string>
 	<string name="poi_automated">Kendiliğinden</string>

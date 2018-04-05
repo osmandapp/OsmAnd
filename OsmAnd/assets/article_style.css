@@ -81,14 +81,14 @@ li {
 }
 
 .toc {
-  font-size: 1.1em;
+    font-size: 1.1em;
 }
 
 .mw-headline {
-  font-family: sans-serif;
-  font-size: 1.1em;
-  line-height: 1.6em;
-  font-weight: bold;
+    font-family: sans-serif;
+    font-size: 1.1em;
+    line-height: 1.6em;
+    font-weight: bold;
 }
 
 img {
@@ -103,7 +103,7 @@ a {
 
 external-free {
     word-wrap: break-word;
-    background-color: #black;
+    background-color: black;
 }
 
 pre {
@@ -113,8 +113,6 @@ pre {
     white-space: -o-pre-wrap;
     word-wrap: break-word;
 }
-
-
 
 .thumb-tright, .thumbinner {
     width: 100% !important;

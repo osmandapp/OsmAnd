@@ -1264,7 +1264,7 @@
 	<string name="poi_payment_toll_type">Ordainketa mota</string>
 	<string name="poi_traffic_signals_sound">Soinua</string>
 	<string name="poi_highway_crossing_type">Mota</string>
-	<string name="poi_service_car">Zerbitzua</string>
+	<string name="poi_service_general">Zerbitzua</string>
 	<string name="poi_brushless">Eskuila gabekoa</string>
 	<string name="poi_self_service">Autozerbitzua</string>
 	<string name="poi_automated">Automatizatua</string>

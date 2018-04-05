@@ -13,7 +13,6 @@ import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
@@ -143,35 +142,50 @@ public class AndroidUtils {
 		return null;
 	}
 
-	public static ColorStateList createColorStateList(Context ctx, @ColorRes int normal, @ColorRes int pressed) {
-		return createColorStateList(ctx, false, normal, pressed, 0, 0);
+	public static ColorStateList createCheckedColorStateList(Context ctx, boolean night,
+															 @ColorRes int lightNormal, @ColorRes int lightChecked,
+															 @ColorRes int darkNormal, @ColorRes int darkChecked) {
+		return createColorStateList(ctx, night, android.R.attr.state_checked,
+				lightNormal, lightChecked, darkNormal, darkChecked);
 	}
 
-	public static ColorStateList createColorStateList(Context ctx, boolean night,
-													  @ColorRes int lightNormal, @ColorRes int lightPressed,
-													  @ColorRes int darkNormal, @ColorRes int darkPressed) {
+	public static ColorStateList createPressedColorStateList(Context ctx, @ColorRes int normal, @ColorRes int pressed) {
+		return createPressedColorStateList(ctx, false, normal, pressed, 0, 0);
+	}
+
+	public static ColorStateList createPressedColorStateList(Context ctx, boolean night,
+															 @ColorRes int lightNormal, @ColorRes int lightPressed,
+															 @ColorRes int darkNormal, @ColorRes int darkPressed) {
+		return createColorStateList(ctx, night, android.R.attr.state_pressed,
+				lightNormal, lightPressed, darkNormal, darkPressed);
+	}
+
+	private static ColorStateList createColorStateList(Context ctx, boolean night, int state,
+													   @ColorRes int lightNormal, @ColorRes int lightState,
+													   @ColorRes int darkNormal, @ColorRes int darkState) {
 		return new ColorStateList(
 				new int[][]{
-						new int[]{android.R.attr.state_pressed},
+						new int[]{state},
 						new int[]{}
 				},
 				new int[]{
-						ContextCompat.getColor(ctx, night ? darkPressed : lightPressed),
+						ContextCompat.getColor(ctx, night ? darkState : lightState),
 						ContextCompat.getColor(ctx, night ? darkNormal : lightNormal)
 				}
 		);
 	}
 
-	public static StateListDrawable createStateListDrawable(Context ctx, boolean night,
-															@DrawableRes int lightNormal, @DrawableRes int lightPressed,
-															@DrawableRes int darkNormal, @DrawableRes int darkPressed) {
-		return createStateListDrawable(ContextCompat.getDrawable(ctx, night ? darkNormal : lightNormal),
-				ContextCompat.getDrawable(ctx, night ? darkPressed : lightPressed));
+	public static StateListDrawable createCheckedStateListDrawable(Drawable normal, Drawable checked) {
+		return createStateListDrawable(normal, checked, android.R.attr.state_checked);
 	}
 
-	public static StateListDrawable createStateListDrawable(Drawable normal, Drawable pressed) {
+	public static StateListDrawable createPressedStateListDrawable(Drawable normal, Drawable pressed) {
+		return createStateListDrawable(normal, pressed, android.R.attr.state_pressed);
+	}
+
+	private static StateListDrawable createStateListDrawable(Drawable normal, Drawable stateDrawable, int state) {
 		StateListDrawable res = new StateListDrawable();
-		res.addState(new int[]{android.R.attr.state_pressed}, pressed);
+		res.addState(new int[]{state}, stateDrawable);
 		res.addState(new int[]{}, normal);
 		return res;
 	}

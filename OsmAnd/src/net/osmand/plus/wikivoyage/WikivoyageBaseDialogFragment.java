@@ -36,9 +36,12 @@ public class WikivoyageBaseDialogFragment extends BaseOsmAndDialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme_LightStatusBar;
 		Dialog dialog = new Dialog(getContext(), themeId);
-		if (Build.VERSION.SDK_INT >= 21) {
-			Window window = dialog.getWindow();
-			if (window != null) {
+		Window window = dialog.getWindow();
+		if (window != null) {
+			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
+			}
+			if (Build.VERSION.SDK_INT >= 21) {
 				window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
 			}
 		}

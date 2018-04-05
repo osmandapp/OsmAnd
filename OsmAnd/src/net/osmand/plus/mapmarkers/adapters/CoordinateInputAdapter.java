@@ -120,7 +120,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 
 	private Drawable getRemoveBtnBgSelector() {
 		if (nightTheme) {
-			return AndroidUtils.createStateListDrawable(
+			return AndroidUtils.createPressedStateListDrawable(
 					getColoredIcon(R.drawable.marker_circle_background_dark_n_with_inset, R.color.keyboard_item_control_dark_bg),
 					ContextCompat.getDrawable(mapActivity, R.drawable.marker_circle_background_p_with_inset)
 			);

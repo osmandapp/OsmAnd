@@ -407,9 +407,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		@DrawableRes int itemBg = lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg;
 		@DrawableRes int controlItemBg = lightTheme ? R.drawable.keyboard_item_control_light_bg : R.drawable.keyboard_item_control_dark_bg;
 
-		ColorStateList clearItemTextColorStateList = AndroidUtils.createColorStateList(getContext(),
+		ColorStateList clearItemTextColorStateList = AndroidUtils.createPressedColorStateList(getContext(),
 				R.color.keyboard_item_divider_control_color_light, R.color.keyboard_item_divider_control_color_light_pressed);
-		ColorStateList numberColorStateList = AndroidUtils.createColorStateList(getContext(),
+		ColorStateList numberColorStateList = AndroidUtils.createPressedColorStateList(getContext(),
 				R.color.keyboard_item_text_color_light, R.color.keyboard_item_text_color_light_pressed);
 
 		@ColorInt int textColorDark = getResolvedColor(R.color.keyboard_item_text_color_dark);

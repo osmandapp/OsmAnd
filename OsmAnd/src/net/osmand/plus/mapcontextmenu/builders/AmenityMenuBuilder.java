@@ -235,7 +235,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			button.setTextSize(14);
 			int paddingSides = dpToPx(10f);
 			button.setPadding(paddingSides, 0, paddingSides, 0);
-			ColorStateList buttonColorStateList = AndroidUtils.createColorStateList(view.getContext(), !light,
+			ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(view.getContext(), !light,
 					R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
 					R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 			button.setTextColor(buttonColorStateList);
@@ -255,7 +255,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			Drawable pressed = app.getIconsCache().getIcon(R.drawable.ic_action_read_text,
 					light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p);
 			button.setCompoundDrawablesWithIntrinsicBounds(Build.VERSION.SDK_INT >= 21
-					? AndroidUtils.createStateListDrawable(normal, pressed) : normal, null, null, null);
+					? AndroidUtils.createPressedStateListDrawable(normal, pressed) : normal, null, null, null);
 			button.setCompoundDrawablePadding(dpToPx(8f));
 			llText.addView(button);
 		}

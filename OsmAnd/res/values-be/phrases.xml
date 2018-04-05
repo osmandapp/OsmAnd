@@ -3076,7 +3076,7 @@
 	<string name="poi_traffic_signals_sound">Гукавы сігнал</string>
 	<string name="poi_highway_crossing_type">Тып</string>
 	<string name="poi_tactile_paving">Тактыльнае пакрыцьцё</string>
-	<string name="poi_service_car">Паслугі</string>
+	<string name="poi_service_general">Паслугі</string>
 	<string name="poi_brushless">Безкантактная</string>
 	<string name="poi_self_service">Самаабслугоўваньне</string>
 	<string name="poi_parking_type">Тып</string>

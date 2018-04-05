@@ -23,6 +23,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
 
-		ColorStateList selectedLangColorStateList = AndroidUtils.createColorStateList(
+		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
 				R.color.icon_color, R.color.wikivoyage_active_light,
 				R.color.icon_color, R.color.wikivoyage_active_dark
@@ -139,7 +140,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			selectedLang = langs.get(0);
 		}
 
-		selectedLangTv.setText(selectedLang);
+		selectedLangTv.setText(Algorithms.capitalizeFirstLetter(selectedLang));
 
 		WikivoyageArticle article = getMyApplication().getWikivoyageDbHelper()
 				.getArticle(cityId, selectedLang);
@@ -183,7 +184,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		Drawable normal = getContentIcon(R.drawable.ic_action_map_language);
 		if (Build.VERSION.SDK_INT >= 21) {
 			Drawable active = getActiveIcon(R.drawable.ic_action_map_language);
-			return AndroidUtils.createStateListDrawable(normal, active);
+			return AndroidUtils.createPressedStateListDrawable(normal, active);
 		}
 		return normal;
 	}

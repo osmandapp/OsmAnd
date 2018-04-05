@@ -103,7 +103,7 @@ public class WikipediaDialogFragment extends DialogFragment {
 		TextView titleTextView = (TextView) mainView.findViewById(R.id.title_text_view);
 		titleTextView.setTextColor(toolbarTextColor);
 
-		ColorStateList buttonColorStateList = AndroidUtils.createColorStateList(getContext(), darkMode,
+		ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(getContext(), darkMode,
 				R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
 				R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 

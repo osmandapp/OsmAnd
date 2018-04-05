@@ -28,7 +28,7 @@
 	<string name="poi_payment_toll_type">Ödəniş növü</string>
 	<string name="poi_traffic_signals_sound">Səs</string>
 	<string name="poi_highway_crossing_type">Növ</string>
-	<string name="poi_service_car">Xidmət</string>
+	<string name="poi_service_general">Xidmət</string>
 	<string name="poi_self_service">Özünəxidmət</string>
 	<string name="poi_automated">Avtomatlaşdırılmış</string>
 	<string name="poi_parking_type">Növ</string>

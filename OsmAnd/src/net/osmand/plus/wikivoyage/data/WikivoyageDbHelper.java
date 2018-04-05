@@ -71,6 +71,12 @@ public class WikivoyageDbHelper {
 		collator = OsmAndCollator.primaryCollator();
 	}
 
+	@Nullable
+	private SQLiteConnection openConnection() {
+		String path = getDbFile(application).getAbsolutePath();
+		return application.getSQLiteAPI().openByAbsolutePath(path, true);
+	}
+
 	@NonNull
 	public List<WikivoyageSearchResult> search(final String searchQuery) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
@@ -188,10 +194,38 @@ public class WikivoyageDbHelper {
 		return res;
 	}
 
-	@Nullable
-	private SQLiteConnection openConnection() {
-		String path = getDbFile(application).getAbsolutePath();
-		return application.getSQLiteAPI().openByAbsolutePath(path, true);
+	@NonNull
+	public ArrayList<String> getArticleLangs(long cityId) {
+		ArrayList<String> res = new ArrayList<>();
+		SQLiteConnection conn = openConnection();
+		if (conn != null) {
+			try {
+				SQLiteCursor cursor = conn.rawQuery("SELECT " + ARTICLES_COL_LANG +
+								" FROM " + ARTICLES_TABLE_NAME +
+								" WHERE " + ARTICLES_COL_CITY_ID + " = ?",
+						new String[]{String.valueOf(cityId)});
+				if (cursor.moveToFirst()) {
+					String baseLang = application.getLanguage();
+					do {
+						String lang = cursor.getString(0);
+						if (lang.equals(baseLang)) {
+							res.add(0, lang);
+						} else if (lang.equals("en")) {
+							if (res.size() > 0 && res.get(0).equals(baseLang)) {
+								res.add(1, lang);
+							} else {
+								res.add(0, lang);
+							}
+						} else {
+							res.add(lang);
+						}
+					} while (cursor.moveToNext());
+				}
+			} finally {
+				conn.close();
+			}
+		}
+		return res;
 	}
 
 	@NonNull

@@ -15,7 +15,7 @@
 	<string name="poi_traffic_signals_sound">Skaņa</string>
 	<string name="poi_highway_crossing_type">Veids</string>
 	<string name="poi_tactile_paving">Taktīlais segums (īpaša reljefaina josla)</string>
-	<string name="poi_service_car">Serviss</string>
+	<string name="poi_service_general">Serviss</string>
 	<string name="poi_brushless">Bezkontaktu</string>
 	<string name="poi_self_service">Pašapkalpošanās</string>
 	<string name="poi_automated">Automatizētie</string>

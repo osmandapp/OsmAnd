@@ -70,7 +70,7 @@ public class MapMarkerMenuController extends MenuController {
 				: R.color.ctx_menu_controller_button_text_color_dark_p;
 		int icPressed = isLight() ? R.color.ctx_menu_controller_button_text_color_light_n
 				: R.color.ctx_menu_controller_button_bg_color_dark_p;
-		return AndroidUtils.createStateListDrawable(createPassedIcon(getPassedIconBgNormalColorId(), 0),
+		return AndroidUtils.createPressedStateListDrawable(createPassedIcon(getPassedIconBgNormalColorId(), 0),
 				createPassedIcon(bgPressed, icPressed));
 	}
 
@@ -89,7 +89,7 @@ public class MapMarkerMenuController extends MenuController {
 		int bgPressed = isLight() ? R.color.ctx_menu_controller_button_text_color_light_p
 				: R.color.ctx_menu_controller_button_text_color_dark_p;
 		int icPressed = isLight() ? R.color.osmand_orange : R.color.route_info_go_btn_bg_dark_p;
-		return AndroidUtils.createStateListDrawable(createShowOnTopbarIcon(getDeviceTopNormalColorId(), R.color.dashboard_blue),
+		return AndroidUtils.createPressedStateListDrawable(createShowOnTopbarIcon(getDeviceTopNormalColorId(), R.color.dashboard_blue),
 				createShowOnTopbarIcon(bgPressed, icPressed));
 	}
 
