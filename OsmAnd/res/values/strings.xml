@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="saved_articles">Saved articles</string>
+    <string name="shared_string_explore">Explore</string>
     <string name="shared_string_result">Result</string>
     <string name="use_two_digits_longitude">Use two digits longitude</string>
     <string name="shared_string_travel">Travel</string>
