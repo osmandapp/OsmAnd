@@ -38,7 +38,7 @@ public class WikivoyageBaseDialogFragment extends BaseOsmAndDialogFragment {
 		Dialog dialog = new Dialog(getContext(), themeId);
 		Window window = dialog.getWindow();
 		if (window != null) {
-			if (!getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
 			if (Build.VERSION.SDK_INT >= 21) {
