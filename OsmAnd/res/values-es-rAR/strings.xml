@@ -2995,4 +2995,6 @@ Proporciona un código completo</string>
     <string name="waypoints_removed_from_map_markers">Puntos de referencia borrados de los marcadores del mapa</string>
     <string name="use_two_digits_longitude">Usar longitud de dos dígitos</string>
     <string name="shared_string_result">Resultado</string>
+    <string name="saved_articles">Artículos guardados</string>
+    <string name="shared_string_explore">Explorar</string>
     </resources>
