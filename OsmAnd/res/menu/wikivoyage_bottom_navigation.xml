@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item
 		android:id="@+id/action_explore"
-		android:icon="@drawable/ic_action_explore_part1"
+		android:icon="@drawable/ic_action_explore"
 		android:title="@string/shared_string_explore"/>
 
 	<item
