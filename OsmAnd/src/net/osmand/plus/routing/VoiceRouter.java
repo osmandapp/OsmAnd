@@ -349,6 +349,14 @@ public class VoiceRouter {
 					p.attention(type+"").play();
 				}
 			}
+		} else if (type == AlarmInfoType.TUNNEL) {
+			if (router.getSettings().SPEAK_TUNNELS.get()) {
+				CommandBuilder p = getNewCommandPlayerToPlay();
+				if (p != null) {
+					notifyOnVoiceMessage();
+					p.attention(type+"").play();
+				}
+			}
 		} else {
 			if (router.getSettings().SPEAK_TRAFFIC_WARNINGS.get()) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
