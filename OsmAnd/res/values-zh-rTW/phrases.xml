@@ -3830,6 +3830,6 @@
 
 <string name="poi_service_vehicle_car_repair_yes">汽車維修廠</string>
 	<string name="poi_service_vehicle_oil_change_yes">更換機油</string>
-	<string name="poi_service_vehicle_used_car_sales_yes">二手車商</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">二手車銷售商</string>
 	<string name="poi_service_vehicle_brakes_yes">刹車</string>
 	</resources>
