@@ -37,7 +37,7 @@
 				android:layout_marginTop="@dimen/content_padding_small"
 				android:drawablePadding="@dimen/context_menu_padding_margin_small"
 				android:gravity="center_vertical"
-				android:letterSpacing="0.01"
+				android:letterSpacing="@dimen/text_button_letter_spacing"
 				android:padding="@dimen/context_menu_padding_margin_tiny"
 				android:textSize="@dimen/default_desc_text_size"
 				osmand:typeface="@string/font_roboto_medium"

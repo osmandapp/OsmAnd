@@ -48,7 +48,7 @@
 					android:background="?attr/selectableItemBackground"
 					android:ellipsize="end"
 					android:gravity="center_vertical"
-					android:letterSpacing="0.01"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxLines="1"
 					android:paddingLeft="16dp"
 					android:paddingRight="16dp"
