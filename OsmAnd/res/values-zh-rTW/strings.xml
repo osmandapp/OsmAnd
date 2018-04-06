@@ -369,7 +369,7 @@
     <string name="old_poi_file_should_be_deleted">該 POI 資料檔 \'%1$s\' 是多餘的，且可刪除。</string>
     <string name="update_poi_file_not_found">在裝置端檔案，找不到要維護的 POI 的變更，且無法建立該檔。</string>
     <string name="button_upgrade_osmandplus">升級為 OsmAnd+</string>
-    <string name="map_version_changed_info">下載新版本的應用程式以便能夠使用新的地圖檔案。</string>
+    <string name="map_version_changed_info">下載新版本的應用程式，以便能夠使用新的地圖檔案。</string>
     <string name="poi_filter_nominatim">線上 Nominatim</string>
     <string name="search_position_current_location_search">位置查尋中…</string>
     <string name="search_position_current_location_found">我的位置 (找到)</string>
@@ -2982,4 +2982,6 @@
     <string name="waypoints_removed_from_map_markers">已從地圖標記移除航點</string>
     <string name="use_two_digits_longitude">使用兩位數的經度</string>
     <string name="shared_string_result">結果</string>
+    <string name="saved_articles">已儲存的文章</string>
+    <string name="shared_string_explore">探索</string>
     </resources>
