@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:background="?attr/wikivoyage_bg_color"
-	android:orientation="vertical">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/wikivoyage_bg_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/wikivoyage_bg_color"
+        android:orientation="vertical">
 
 	<android.support.v7.widget.Toolbar
 		android:id="@+id/toolbar"
@@ -56,3 +60,92 @@
 		android:layout_height="match_parent"/>
 
 </LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/bottom_bar"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/bottom_sheet_cancel_button_height"
+		android:layout_gravity="bottom|center_horizontal"
+		android:background="@color/ctx_menu_card_btn_light"
+		android:orientation="vertical">
+
+		<View
+			android:id="@+id/bottom_row_divider"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/dashboard_divider" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="horizontal">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/contents_button"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_vertical"
+				android:layout_marginLeft="@dimen/bottom_sheet_content_padding_small"
+				android:layout_marginStart="@dimen/bottom_sheet_content_padding_small"
+				android:background="?attr/selectableItemBackground"
+				android:drawablePadding="@dimen/bottom_sheet_content_padding_small"
+				android:ellipsize="end"
+				android:gravity="center_vertical"
+				android:letterSpacing="@dimen/text_button_letter_spacing"
+				android:maxLines="1"
+				android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
+				android:paddingLeft="@dimen/bottom_sheet_content_padding_small"
+				android:paddingRight="@dimen/bottom_sheet_content_padding_small"
+				android:paddingTop="@dimen/context_menu_padding_margin_tiny"
+				android:text="@string/article_contents_title"
+				android:textColor="?attr/wikivoyage_active_color"
+				android:textSize="@dimen/default_desc_text_size"
+				osmand:typeface="@string/font_roboto_medium"
+				tools:drawableLeft="@drawable/ic_action_list_header"
+				tools:drawableTint="?attr/wikivoyage_active_color"
+				tools:ignore="UnusedAttribute" />
+
+			<View
+				android:id="@+id/bottom_buttons_divider"
+				android:layout_width="1dp"
+				android:layout_height="match_parent"
+				android:background="?attr/dashboard_divider"
+				android:visibility="visible" />
+
+			<FrameLayout
+				android:id="@+id/save_button"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="?attr/selectableItemBackground" >
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/save_text_button"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_gravity="center_vertical|end"
+					android:layout_marginEnd="@dimen/bottom_sheet_content_padding_small"
+					android:layout_marginRight="@dimen/bottom_sheet_content_padding_small"
+					android:drawablePadding="@dimen/bottom_sheet_content_padding_small"
+					android:ellipsize="end"
+					android:gravity="center_vertical"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:maxLines="1"
+					android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
+					android:paddingLeft="@dimen/bottom_sheet_content_padding_small"
+					android:paddingRight="@dimen/bottom_sheet_content_padding_small"
+					android:paddingTop="@dimen/context_menu_padding_margin_tiny"
+					android:text="@string/shared_string_save"
+					android:textColor="?attr/wikivoyage_active_color"
+					android:textSize="@dimen/default_desc_text_size"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:drawableRight="@drawable/ic_action_read_later_fill"
+					tools:drawableTint="?attr/wikivoyage_active_color"
+					tools:ignore="UnusedAttribute" />
+
+			</FrameLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</FrameLayout>

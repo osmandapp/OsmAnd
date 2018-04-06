@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -21,9 +22,11 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.util.Algorithms;
+import net.osmand.plus.wikivoyage.data.WikivoyageArticleContentsBottomSheetDialogFragment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -42,15 +45,18 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
 			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
 			"<link href=\"article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
-			"</head><body>\n";
+			"</head><body>\n" + "<script>" + "function scrollAnchor(id) {" +
+			"window.location.hash = id;}</script>";
 	private static final String FOOTER_INNER = "</div></body></html>";
 
 	private long cityId = NO_VALUE;
 	private ArrayList<String> langs;
 	private String selectedLang;
+	private String contentsJson;
 
 	private TextView selectedLangTv;
 	private WebView contentWebView;
+	private WikivoyageArticleDialogFragment thiss;
 
 	@Nullable
 	@Override
@@ -58,7 +64,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		if (savedInstanceState != null) {
 			selectedLang = savedInstanceState.getString(SELECTED_LANG_KEY);
 		}
-
+		thiss = this;
 		final View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container);
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
@@ -81,6 +87,36 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			}
 		});
 
+		final View buttomBar = mainView.findViewById(R.id.bottom_bar);
+
+		buttomBar.setBackgroundColor(getResolvedColor(isNightMode(false) ? R.color.status_bar_wikivoyage_article_dark : R.color.ctx_menu_card_btn_light));
+
+		TextViewEx contentsButton = mainView.findViewById(R.id.contents_button);
+		TextViewEx saveButton = (TextViewEx) mainView.findViewById(R.id.save_text_button);
+
+		saveButton.setCompoundDrawablesWithIntrinsicBounds(null,
+				null, getMyApplication().getIconsCache()
+						.getIcon(R.drawable.ic_action_read_later, isNightMode(false) ?
+								R.color.wikivoyage_active_dark : R.color.ctx_menu_bottom_buttons_text_color_light), null);
+
+		contentsButton.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_list_header,
+				isNightMode(false) ? R.color.wikivoyage_active_dark : R.color.ctx_menu_bottom_buttons_text_color_light),
+				null, null, null);
+
+		contentsButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentManager fm = getActivity().getSupportFragmentManager();
+				Bundle args = new Bundle();
+				args.putString("CONTENTS_JSON", contentsJson);
+				WikivoyageArticleContentsBottomSheetDialogFragment fragment = new WikivoyageArticleContentsBottomSheetDialogFragment();
+				fragment.setUsedOnMap(false);
+				fragment.setArguments(args);
+				fragment.setTargetFragment(thiss, 0);
+				fragment.show(fm, WikivoyageArticleContentsBottomSheetDialogFragment.TAG);
+			}
+		});
+
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
 
 		return mainView;
@@ -95,6 +131,15 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(SELECTED_LANG_KEY, selectedLang);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 0) {
+			String link = data.getStringExtra("test");
+			moveAnchor(link);
+		}
 	}
 
 	@Override
@@ -147,10 +192,15 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		if (article == null) {
 			return;
 		}
-
+		contentsJson = article.getContentsJson();
 		WikivoyageLocalDataHelper.getInstance(getMyApplication()).addToHistory(article);
 
+		contentWebView.getSettings().setJavaScriptEnabled(true);
 		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(article), "text/html", "UTF-8", null);
+	}
+
+	public void moveAnchor(String id) {
+		contentWebView.loadUrl("javascript:scrollAnchor(\"" + id + "\")");
 	}
 
 	@NonNull
