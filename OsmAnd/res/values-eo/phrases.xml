@@ -3804,4 +3804,16 @@
 	<string name="poi_amusement_arcade">Salono de ludoj</string>
 	<string name="poi_adult_gaming_centre">Salono de hazardaj ludoj</string>
 
-</resources>
+<string name="poi_service_car">Riparejo de aŭtoj</string>
+
+<string name="poi_service_vehicle_car_repair_yes">riparo de aŭtoj</string>
+	<string name="poi_service_vehicle_oil_change_yes">ŝanĝo de oleo</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">vendado de uzitaj aŭtoj</string>
+	<string name="poi_service_vehicle_brakes_yes">bremsoj</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">vendado de novaj aŭtoj</string>
+	<string name="poi_service_vehicle_diagnostics_yes">kontrolo</string>
+	<string name="poi_service_vehicle_car_parts_yes">aŭt-partoj</string>
+	<string name="poi_service_vehicle_batteries_yes">akumulatoroj</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">klimatiziloj</string>
+	<string name="poi_service_vehicle_body_repair_yes">riparo de karoserio</string>
+	</resources>
