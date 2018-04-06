@@ -278,6 +278,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (9.6)  Attention, toll booth", builder(p).attention("TOLL_BOOTH"));
 		addButton(ll, "\u25BA (9.7)  Attention, stop sign", builder(p).attention("STOP"));
 		addButton(ll, "\u25BA (9.8)  Attention, pedestrian crosswalk", builder(p).attention("PEDESTRIAN"));
+		addButton(ll, "\u25BA (9.9)  Attention, tunnel", builder(p).attention("TUNNEL"));
 
 		addButton(ll, "Other prompts:", builder(p));
 		addButton(ll, "\u25BA (10.1) GPS signal lost", builder(p).gpsLocationLost());
