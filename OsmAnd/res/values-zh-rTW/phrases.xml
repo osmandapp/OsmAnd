@@ -3831,11 +3831,22 @@
 <string name="poi_service_vehicle_car_repair_yes">汽車維修廠</string>
 	<string name="poi_service_vehicle_oil_change_yes">更換機油</string>
 	<string name="poi_service_vehicle_used_car_sales_yes">二手車銷售</string>
-	<string name="poi_service_vehicle_brakes_yes">刹車</string>
+	<string name="poi_service_vehicle_brakes_yes">煞車</string>
 	<string name="poi_service_vehicle_new_car_sales_yes">新車銷售</string>
-	<string name="poi_service_vehicle_diagnostics_yes">診修</string>
+	<string name="poi_service_vehicle_diagnostics_yes">診斷</string>
 	<string name="poi_service_vehicle_car_parts_yes">汽車配件</string>
 	<string name="poi_service_vehicle_batteries_yes">電池</string>
 	<string name="poi_service_vehicle_air_conditioning_yes">空調</string>
 	<string name="poi_service_vehicle_body_repair_yes">車身維修</string>
-	</resources>
+	<string name="poi_service_vehicle_electrical_yes">電氣</string>
+	<string name="poi_service_vehicle_wheels_yes">車輪</string>
+	<string name="poi_service_vehicle_glass_yes">玻璃</string>
+	<string name="poi_service_vehicle_truck_repair_yes">卡車維修</string>
+	<string name="poi_service_vehicle_muffler_yes">消音器</string>
+	<string name="poi_service_vehicle_alignment_yes">四輪定位</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">變速器維修</string>
+	<string name="poi_service_vehicle_motor_yes">馬達</string>
+	<string name="poi_service_vehicle_insurance_yes">保險</string>
+	<string name="poi_service_vehicle_tyres_yes">輪胎</string>
+
+</resources>
