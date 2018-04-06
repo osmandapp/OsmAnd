@@ -555,7 +555,7 @@
     <string name="search_position_current_location_found">Mövqeyim (tapıldı)</string>
     <string name="search_position_address">Ünvan…</string>
     <string name="search_position_favorites">Favoritlər…</string>
-    <string name="context_menu_item_search">Yaxınlıqla axtar</string>
+    <string name="context_menu_item_search">Yaxınlıqda axtar</string>
     <string name="filename_input">Fayl adı:</string>
     <string name="local_index_mi_upload_gpx">OSM-a göndər</string>
     <string name="show_more_map_detail">Digər xəritə detallarını göstər</string>
@@ -1292,10 +1292,10 @@
     <string name="avoid_in_routing_title">Yayın…</string>
     <string name="map_widget_distance">Təyinat nöqtəsi</string>
     <string name="quick_action_add_first_intermediate">Birinci aralığı əlavə et</string>
-    <string name="quick_action_add_destination_desc">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində bir təyinat nöqtəsi əlavə ediləcək. Əvvəl seçilmiş təyinat nöqtəsi son ara təyinat nöqtəsi olacaq.</string>
-    <string name="quick_action_replace_destination_desc">Fəaliyyət düyməsinə toxunulduqda təyinat nöqtəsi ekranın mərkəzi ilə əvəzlənəcək.</string>
-    <string name="quick_action_add_first_intermediate_desc">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində birinci aralıq nöqtə əlavə ediləcək.</string>
-    <string name="do_not_show_startup_messages_desc">Proqram endirimləri və xüsusi yerli hadisələr haqda mesajları göstərir.</string>
+    <string name="quick_action_add_destination_desc">Bu fəaliyyət düyməsinə toxunulduqda ekranın mərkəzi təyinat nöqtəsi olacaq, əvvəl seçilmiş hər hansı təyinat nöqtəsi son ara təyinat nöqtəsi olacaq.</string>
+    <string name="quick_action_replace_destination_desc">Bu fəaliyyət düyməsinə toxunulduqda ekranın mərkəzi yeni təyinat nöqtəsi olacaq, əvvəl seçilmiş təyinat nöqtəsini (əgər varsa) əvəzləyəcək.</string>
+    <string name="quick_action_add_first_intermediate_desc">Bu fəaliyyət düyməsinə toxunulduqda ekranın mərkəzi birinci aralıq təyinat nöqtəsi olacaq.</string>
+    <string name="do_not_show_startup_messages_desc">Proqram endirimləri və xüsusi yerli hadisə mesajları göstərmə.</string>
     <string name="translit_name_if_miss">%1$s ad yoxdursa, başqa dildə yazılsın</string>
     <string name="route_preferences">Marşrut seçimləri</string>
     <string name="routing_preferences_descr">Marşrutlama seçimləri</string>
@@ -1356,7 +1356,7 @@
     <string name="gpx_track">İz</string>
     <string name="select_gpx_folder">İz qovluğunu seçin</string>
     <string name="shared_string_tracks">İzlər</string>
-    <string name="gpx_no_tracks_title">Sizin hələ izləriniz yoxdur</string>
+    <string name="gpx_no_tracks_title">Hələ hər hansı izləriniz yoxdur</string>
     <string name="gpx_no_tracks_title_folder">Qovluğa izlər əlavə edə də bilərsiniz</string>
     <string name="gpx_add_track">İz əlavə et</string>
     <string name="storage_place_description">OsmAnd-ın məlumat saxlama yeri (xəritələr, izlər və s.): %1$s.</string>
@@ -1787,7 +1787,7 @@
     <string name="is_saved">yadda saxlandı</string>
     <string name="marker_save_as_track_descr">İşarələri burada göstərə biləcəyiniz fayla ixrac edin:</string>
     <string name="move_to_history">Tarixçəyə daşı</string>
-    <string name="group_will_be_removed_after_restart">Proqram yenidən başladıldıqdan sonra qrup silinəcək.</string>
+    <string name="group_will_be_removed_after_restart">Proqramı növbəti dəfə başlatdığınızda qrup yox olacaq.</string>
     <string name="show_arrows_on_the_map">Xəritədə oxları göstər</string>
     <string name="remove_from_map_markers">Xəritə işarələrindən sil</string>
     <string name="descendingly">azalan</string>
@@ -1940,7 +1940,7 @@
     <string name="import_gpx_file_description">favoritlər kimi və ya iz faylı kimi idxal edilə bilər.</string>
     <string name="plan_route_no_markers_toast">Bu funksiyanı istifadə etmək üçün ən azı bir işarə əlavə etməlisiniz.</string>
     <string name="osn_modify_dialog_error">İstisna hal baş verdi: Qeyd dəyişdirilmədi</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Xəritə istiqamətinin hansı sürətdə “Hərəkət istiqamətində”n “Kompasa görə”yə keçməsini aşağıda seçin.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Xəritə istiqamətinin “Hərəkət istiqaməti”ndən “Kompas istiqaməti”nə keçmə sürətini seçin.</string>
     <string name="marker_moved_to_active">Xəritə işarələri aktivə daşındı</string>
     <string name="make_active">Aktiv et</string>
     <string name="add_point_before">Əvvəlinə nöqtə əlavə et</string>
@@ -2061,7 +2061,7 @@
     <string name="shared_string_finish">Finiş</string>
     <string name="marker_show_distance_descr">Xəritə ekranında xəritə işarələrinə məsafənin və istiqamətin necə göstəriləcəyini seçin:</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd seçilmiş profil üçün nöqtələri marşrut ilə birləşdirəcək.</string>
-    <string name="save_track_min_speed_descr">Filtr: Bir nöqtənin qeydiyyatı üçün minimum sürəti seçin.</string>
+    <string name="save_track_min_speed_descr">Filtr: Bu sürətdən aşağıda nöqtələri qeyd etmə.</string>
     <string name="access_smart_autoannounce_descr">Yalnız hədəf nöqtəyə istiqamət dəyişilən zaman bildir.</string>
     <string name="plugin_mapillary_descr">Hər kəs üçün küçə səviyyəli şəkillər. Yerləri kəşf edin, əməkdaşlıq edin, dünyanı çəkin.</string>
     <string name="auto_split_recording_descr">6 dəqiqə fasilədən sonra yeni seqment, 2 saat fasilədən sonra yeni iz, ya da tarix dəyişdiyində uzun fasilədən sonra yeni fayl başlat.</string>
