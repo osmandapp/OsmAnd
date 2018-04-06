@@ -219,6 +219,8 @@ public class WaypointHelper {
 			app.getSettings().SPEAK_TRAFFIC_WARNINGS.setModeValue(appMode, enable);
 			app.getSettings().SHOW_PEDESTRIAN.setModeValue(appMode, enable);
 			app.getSettings().SPEAK_PEDESTRIAN.setModeValue(appMode, enable);
+			app.getSettings().SHOW_TUNNELS.setModeValue(appMode, enable);
+			app.getSettings().SPEAK_TUNNELS.setModeValue(appMode, enable);
 			//But do not implicitly change speed_cam settings here because of legal restrictions in some countries, so Nav settings must prevail
 		} else if (type == POI) {
 			app.getSettings().SHOW_NEARBY_POI.setModeValue(appMode, enable);
