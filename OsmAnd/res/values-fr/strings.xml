@@ -1266,7 +1266,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="shared_string_favorite">Favori</string>
     <string name="route_preferences">Préférences d\'itinéraire</string>
     <string name="route_info">Informations sur l\'itinéraire</string>
-    <string name="keep_and_add_destination_point">Ajouter comme destination finale</string>
+    <string name="keep_and_add_destination_point">Ajouter comme destination suivante</string>
     <string name="use_displayed_track_for_navigation">Souhaitez-vous suivre la trace affichée à l\'écran ?</string>
 
     <string name="gpx_option_calculate_first_last_segment">Calculer un itinéraire OsmAnd pour le début et la fin de l\'itinéraire</string>
@@ -3077,11 +3077,11 @@ représentant la zone : %1$s x %2$s</string>
     <string name="osm_notes">Notes OSM</string>
     <string name="tunnel_warning">En approche d\'un tunnel</string>
     <string name="show_tunnels">Tunnels</string>
-<string name="shared_string_current">Courant</string>
+<string name="shared_string_current">Actuel</string>
     <string name="last_intermediate_dest_description">Ajoute comme dernière étape à l\'itinéraire</string>
     <string name="first_intermediate_dest_description">Ajoute comme première étape à l\'itinéraire</string>
     <string name="subsequent_dest_description">Monter et créer comme destination</string>
-    <string name="make_as_start_point">Marquer comme Point de départ</string>
+    <string name="make_as_start_point">Utiliser comme Point de départ</string>
     <string name="map_import_error">Erreur d\'import de la carte</string>
     <string name="map_imported_successfully">Carte importée</string>
     <string name="enter_the_file_name">Saisissez le nom du fichier.</string>
@@ -3111,4 +3111,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="waypoints_removed_from_map_markers">Étape retirée des marques</string>
     <string name="shared_string_travel">Voyage</string>
     <string name="shared_string_result">Résultat</string>
+    <string name="saved_articles">Articles enregistrés</string>
+    <string name="shared_string_explore">Explorer</string>
+    <string name="use_two_digits_longitude">Utiliser une longitude à 2 chiffres</string>
     </resources>
