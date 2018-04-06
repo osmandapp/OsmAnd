@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.LockableViewPager;
@@ -40,8 +41,10 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
 
+		int searchColorId = nightMode ? R.color.icon_color : R.color.ctx_menu_title_color_dark;
+		((TextView) mainView.findViewById(R.id.search_hint)).setTextColor(getResolvedColor(searchColorId));
 		((ImageView) mainView.findViewById(R.id.search_icon))
-				.setImageDrawable(getContentIcon(R.drawable.ic_action_search_dark));
+				.setImageDrawable(getIcon(R.drawable.ic_action_search_dark, searchColorId));
 
 		mainView.findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
 			@Override

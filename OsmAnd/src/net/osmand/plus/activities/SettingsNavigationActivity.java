@@ -636,11 +636,12 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		} else if (preference == speakAlarms) {
 			AlertDialog dlg = showBooleanSettings(new String[] { getString(R.string.speak_street_names),
 					getString(R.string.speak_traffic_warnings), getString(R.string.speak_pedestrian),
-					getString(R.string.speak_speed_limit), getString(R.string.speak_cameras),
+					getString(R.string.speak_speed_limit), getString(R.string.speak_cameras), getString(R.string.show_tunnels),
 					getString(R.string.announce_gpx_waypoints), getString(R.string.speak_favorites),
 					getString(R.string.speak_poi) }, new OsmandPreference[] { settings.SPEAK_STREET_NAMES,
 					settings.SPEAK_TRAFFIC_WARNINGS, settings.SPEAK_PEDESTRIAN, settings.SPEAK_SPEED_LIMIT,
-					settings.SPEAK_SPEED_CAMERA, settings.ANNOUNCE_WPT, settings.ANNOUNCE_NEARBY_FAVORITES,
+					settings.SPEAK_SPEED_CAMERA, settings.SPEAK_TUNNELS,
+					settings.ANNOUNCE_WPT, settings.ANNOUNCE_NEARBY_FAVORITES,
 					settings.ANNOUNCE_NEARBY_POI }, preference.getTitle());
 			final boolean initialSpeedCam = settings.SPEAK_SPEED_CAMERA.get();
 			final boolean initialFavorites = settings.ANNOUNCE_NEARBY_FAVORITES.get();
