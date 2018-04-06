@@ -3114,4 +3114,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="saved_articles">Articles enregistrés</string>
     <string name="shared_string_explore">Explorer</string>
     <string name="use_two_digits_longitude">Utiliser une longitude à 2 chiffres</string>
+    <string name="wikivoyage_search_hint">Rechercher : Pays, Ville, Département</string>
+    <string name="shared_string_read">Lu</string>
     </resources>
