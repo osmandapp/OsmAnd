@@ -204,6 +204,7 @@ public class WikivoyageLocalDataHelper {
 
 		private void onCreate(SQLiteConnection conn) {
 			conn.execSQL(HISTORY_TABLE_CREATE);
+			conn.execSQL(BOOKMARKS_TABLE_CREATE);
 		}
 
 		@SuppressWarnings("unused")
