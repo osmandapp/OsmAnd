@@ -2727,7 +2727,7 @@
     <string name="store_tracks_in_monthly_directories_descrp">"مسیرهای ضبط‌شده در هر ماه را در پوشهٔ همان ماه ذخیره کن (مثلاً  ‎۲۰۱۸-۰۱)."</string>
     <string name="display_zoom_level">زوم نمایش: %1$s</string>
     <string name="gpx_no_tracks_title">هنوز مسیری ندارید</string>
-    <string name="gpx_no_tracks_title_folder">می‌توانید مسیرها را در این پوشه نیز قرار دهید</string>
+    <string name="gpx_no_tracks_title_folder">همچنین می‌توانید مسیرهایتان را در این پوشه قرار دهید</string>
     <string name="rec_split_title">استفاده از تقسیمگر ضبط‌کننده</string>
     <string name="context_menu_item_open_note">ایجاد توضیح ویرایشی OSM</string>
     <string name="osm_edit_reopened_note">توضیح ویرایشی بازگشوده</string>
