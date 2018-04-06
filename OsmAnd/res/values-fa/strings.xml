@@ -1151,7 +1151,7 @@
 	
 	
 	<string name="update_poi_file_not_found">فایل محلی برای نگهداری تغییرات POI وجود ندارد و قابل‌ایجاد نیست.</string>
-	<string name="map_version_changed_info">برای اینکه بتوانید از نقشه‌های جدید استفاده کنید، نسخهٔ تازهٔ برنامه را دانلود کنید.</string>
+	<string name="map_version_changed_info">برای استفاده از فایل‌های جدید نقشه نسخهٔ جدید برنامه را دانلود کنید.</string>
 	<string name="poi_filter_nominatim">جست‌وجوی آنلاین با Nominatim</string>
 	
 	<string name="vector_data_missing">برای استفاده از نقشه‌های آفلاین، داده‌های «آفلاین» را دانلود کنید.</string>
@@ -2227,7 +2227,7 @@
 \n 
 \n  و…"</string>
     <string name="osm_live_ask_for_purchase">لطفاً ابتدا اشتراک به‌روزرسانی پویا (OsmAnd Live) را بخرید</string>
-    <string name="osm_live_header">با این اشتراک می‌توانید نقشه‌های سرتاسر جهان را به‌صورت ساعتی به‌روز کنید. بخشی از درآمد حاصله به جامعهٔ OSM برمی‌گردد‌‌ و صرف همکاری‌ها با OSM می‌شود. اگر دوستدار OSM و OsmAnd هستید و مایلید از آن‌ها پشتیبانی کنید و از خدمات پشتیبانی آن‌ها بهره‌مند شوید، بهترین راه همین تهیهٔ اشتراک است.</string>
+    <string name="osm_live_header">با خرید این اشتراک نقشه‌های سراسر جهان را به‌صورت ساعتی به‌روز کنید. بخشی از درآمد حاصله به جامعهٔ OSM برمی‌گردد‌‌ و صرف همکاری‌ها با OSM می‌شود. اگر دوستدار OSM و OsmAnd هستید و مایلید حامی آن‌ها باشید و از خدمات پشتیبانی‌شان بهره‌مند شوید، بهترین راه همین تهیهٔ اشتراک است.</string>
     <string name="select_map_marker">نشانهٔ نقشه را انتخاب کنید</string>
     <string name="map_markers_other">نشانه‌های دیگر</string>
     <string name="upload_anonymously">آپلود به‌صورت ناشناس</string>
@@ -3062,4 +3062,5 @@
     <string name="shared_string_travel">سفر</string>
     <string name="shared_string_result">نتیجه</string>
     <string name="use_two_digits_longitude">استفاده از طول جغرافیایی دورقمی</string>
+    <string name="saved_articles">مقاله‌های ذخیره‌شده</string>
     </resources>
