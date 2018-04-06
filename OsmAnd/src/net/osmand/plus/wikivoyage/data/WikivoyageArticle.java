@@ -1,7 +1,9 @@
 package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.Size;
+import android.text.Html;
 
 import net.osmand.plus.GPXUtilities.GPXFile;
 
@@ -13,6 +15,8 @@ public class WikivoyageArticle {
 	private static final String IMAGE_ROOT_URL = "https://upload.wikimedia.org/wikipedia/commons/";
 	private static final String THUMB_PREFIX = "320px-";
 	private static final String REGULAR_PREFIX = "800px-";
+
+	private static final int PARTIAL_CONTENT_PHRASES = 3;
 
 	String id;
 	String title;
@@ -78,6 +82,35 @@ public class WikivoyageArticle {
 
 	public String getAggregatedPartOf() {
 		return aggregatedPartOf;
+	}
+
+	@Nullable
+	public String getPartialContent() {
+		if (content == null) {
+			return null;
+		}
+
+		int firstParagraphStart = content.indexOf("<p>");
+		int firstParagraphEnd = content.indexOf("</p>");
+		if (firstParagraphStart == -1 || firstParagraphEnd == -1) {
+			return null;
+		}
+
+		// 4 is the length of </p> tag
+		String firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + 4);
+		String firstParagraphText = Html.fromHtml(firstParagraphHtml).toString();
+		String[] phrases = firstParagraphText.split("\\. ");
+
+		StringBuilder res = new StringBuilder();
+		int limit = Math.min(phrases.length, PARTIAL_CONTENT_PHRASES);
+		for (int i = 0; i < limit; i++) {
+			res.append(phrases[i]).append(".");
+			if (i < limit - 1) {
+				res.append(" ");
+			}
+		}
+
+		return res.toString();
 	}
 
 	@NonNull

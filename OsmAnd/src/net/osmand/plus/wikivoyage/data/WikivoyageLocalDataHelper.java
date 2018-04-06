@@ -1,6 +1,7 @@
 package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
@@ -22,10 +23,12 @@ public class WikivoyageLocalDataHelper {
 	private WikivoyageLocalDataDbHelper dbHelper;
 
 	private TLongObjectHashMap<WikivoyageSearchHistoryItem> historyMap;
+	private List<WikivoyageArticle> savedArticles;
 
 	private WikivoyageLocalDataHelper(OsmandApplication app) {
 		dbHelper = new WikivoyageLocalDataDbHelper(app);
 		historyMap = dbHelper.getAllHistoryMap();
+		savedArticles = dbHelper.getSavedArticles();
 	}
 
 	public static WikivoyageLocalDataHelper getInstance(OsmandApplication app) {
@@ -51,7 +54,7 @@ public class WikivoyageLocalDataHelper {
 		return res;
 	}
 
-	public void addToHistory(WikivoyageArticle article) {
+	public void addToHistory(@NonNull WikivoyageArticle article) {
 		addToHistory(article.getCityId(), article.getTitle(), article.getLang(), article.getIsPartOf());
 	}
 
@@ -80,9 +83,49 @@ public class WikivoyageLocalDataHelper {
 		}
 	}
 
+	public List<WikivoyageArticle> getSavedArticles() {
+		return new ArrayList<>(savedArticles);
+	}
+
+	public void addArticleToSaved(@NonNull WikivoyageArticle article) {
+		if (!isArticleSaved(article)) {
+			WikivoyageArticle saved = new WikivoyageArticle();
+			saved.cityId = article.cityId;
+			saved.title = article.title;
+			saved.lang = article.lang;
+			saved.aggregatedPartOf = article.aggregatedPartOf;
+			saved.imageTitle = article.imageTitle;
+			saved.content = article.getPartialContent();
+			savedArticles.add(saved);
+			dbHelper.addSavedArticle(saved);
+		}
+	}
+
+	public void removeArticleFromSaved(@NonNull WikivoyageArticle article) {
+		WikivoyageArticle savedArticle = getArticle(article.cityId, article.lang);
+		if (savedArticle != null) {
+			savedArticles.remove(savedArticle);
+			dbHelper.removeSavedArticle(savedArticle);
+		}
+	}
+
+	public boolean isArticleSaved(@NonNull WikivoyageArticle article) {
+		return getArticle(article.cityId, article.lang) != null;
+	}
+
+	@Nullable
+	private WikivoyageArticle getArticle(long cityId, String lang) {
+		for (WikivoyageArticle article : savedArticles) {
+			if (article.cityId == cityId && article.lang != null && article.lang.equals(lang)) {
+				return article;
+			}
+		}
+		return null;
+	}
+
 	private static class WikivoyageLocalDataDbHelper {
 
-		private static final int DB_VERSION = 1;
+		private static final int DB_VERSION = 2;
 		private static final String DB_NAME = "wikivoyage_local_data";
 
 		private static final String HISTORY_TABLE_NAME = "wikivoyage_search_history";
@@ -108,9 +151,35 @@ public class WikivoyageLocalDataHelper {
 				HISTORY_COL_LAST_ACCESSED +
 				" FROM " + HISTORY_TABLE_NAME;
 
+		private static final String BOOKMARKS_TABLE_NAME = "wikivoyage_saved_articles";
+		private static final String BOOKMARKS_COL_CITY_ID = "city_id";
+		private static final String BOOKMARKS_COL_ARTICLE_TITLE = "article_title";
+		private static final String BOOKMARKS_COL_LANG = "lang";
+		private static final String BOOKMARKS_COL_IS_PART_OF = "is_part_of";
+		private static final String BOOKMARKS_COL_IMAGE_TITLE = "image_title";
+		private static final String BOOKMARKS_COL_PARTIAL_CONTENT = "partial_content";
+
+		private static final String BOOKMARKS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
+				BOOKMARKS_TABLE_NAME + " (" +
+				BOOKMARKS_COL_CITY_ID + " long, " +
+				BOOKMARKS_COL_ARTICLE_TITLE + " TEXT, " +
+				BOOKMARKS_COL_LANG + " TEXT, " +
+				BOOKMARKS_COL_IS_PART_OF + " TEXT, " +
+				BOOKMARKS_COL_IMAGE_TITLE + " TEXT, " +
+				BOOKMARKS_COL_PARTIAL_CONTENT + " TEXT);";
+
+		private static final String BOOKMARKS_TABLE_SELECT = "SELECT " +
+				BOOKMARKS_COL_CITY_ID + ", " +
+				BOOKMARKS_COL_ARTICLE_TITLE + ", " +
+				BOOKMARKS_COL_LANG + ", " +
+				BOOKMARKS_COL_IS_PART_OF + ", " +
+				BOOKMARKS_COL_IMAGE_TITLE + ", " +
+				BOOKMARKS_COL_PARTIAL_CONTENT +
+				" FROM " + BOOKMARKS_TABLE_NAME;
+
 		private final OsmandApplication context;
 
-		private WikivoyageLocalDataDbHelper(OsmandApplication context) {
+		WikivoyageLocalDataDbHelper(OsmandApplication context) {
 			this.context = context;
 		}
 
@@ -139,7 +208,9 @@ public class WikivoyageLocalDataHelper {
 
 		@SuppressWarnings("unused")
 		private void onUpgrade(SQLiteConnection conn, int oldVersion, int newVersion) {
-
+			if (oldVersion < 2) {
+				conn.execSQL(BOOKMARKS_TABLE_CREATE);
+			}
 		}
 
 		@NonNull
@@ -203,6 +274,52 @@ public class WikivoyageLocalDataHelper {
 			}
 		}
 
+		@NonNull
+		List<WikivoyageArticle> getSavedArticles() {
+			List<WikivoyageArticle> res = new ArrayList<>();
+			SQLiteConnection conn = openConnection(true);
+			if (conn != null) {
+				try {
+					SQLiteCursor cursor = conn.rawQuery(BOOKMARKS_TABLE_SELECT, null);
+					if (cursor.moveToFirst()) {
+						do {
+							res.add(readSavedArticle(cursor));
+						} while (cursor.moveToNext());
+					}
+				} finally {
+					conn.close();
+				}
+			}
+			return res;
+		}
+
+		void addSavedArticle(WikivoyageArticle article) {
+			SQLiteConnection conn = openConnection(false);
+			if (conn != null) {
+				try {
+					conn.execSQL("INSERT INTO " + BOOKMARKS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)",
+							new Object[]{article.cityId, article.title, article.lang,
+									article.aggregatedPartOf, article.imageTitle, article.content});
+				} finally {
+					conn.close();
+				}
+			}
+		}
+
+		void removeSavedArticle(WikivoyageArticle article) {
+			SQLiteConnection conn = openConnection(false);
+			if (conn != null) {
+				try {
+					conn.execSQL("DELETE FROM " + BOOKMARKS_TABLE_NAME +
+									" WHERE " + BOOKMARKS_COL_CITY_ID + " = ?" +
+									" AND " + BOOKMARKS_COL_LANG + " = ?",
+							new Object[]{article.cityId, article.lang});
+				} finally {
+					conn.close();
+				}
+			}
+		}
+
 		private WikivoyageSearchHistoryItem readHistoryItem(SQLiteCursor cursor) {
 			WikivoyageSearchHistoryItem res = new WikivoyageSearchHistoryItem();
 
@@ -211,6 +328,19 @@ public class WikivoyageLocalDataHelper {
 			res.lang = cursor.getString(2);
 			res.isPartOf = cursor.getString(3);
 			res.lastAccessed = cursor.getLong(4);
+
+			return res;
+		}
+
+		private WikivoyageArticle readSavedArticle(SQLiteCursor cursor) {
+			WikivoyageArticle res = new WikivoyageArticle();
+
+			res.cityId = cursor.getLong(0);
+			res.title = cursor.getString(1);
+			res.lang = cursor.getString(2);
+			res.aggregatedPartOf = cursor.getString(3);
+			res.imageTitle = cursor.getString(4);
+			res.content = cursor.getString(5);
 
 			return res;
 		}
