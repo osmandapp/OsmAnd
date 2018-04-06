@@ -2426,7 +2426,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="rendering_attr_contourLines_description">Birta frá aðdráttarstigi (krefst hæðarlínugagna):</string>
     <string name="live_monitoring_max_interval_to_send">Tímabiðminni fyrir rakningu með netstuðningi</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Skilgreindu tímabiðminni þar sem geymdar eru staðsetningar sem á að senda án tengingar</string>
-    <string name="map_version_changed_info">Þú ættir að sækja og uppfæra forritið til að geta notað nýju kortaskrárnar.</string>
+    <string name="map_version_changed_info">Þú ættir að sækja nýja útgáfu og uppfæra forritið til að geta notað nýju kortaskrárnar.</string>
     <string name="amenity_type_geocache">GPS-ratleikur (geocache)</string>
     <string name="quick_action_add_marker_descr">Ef ýtt er á þennan aðgerðahnapp verður kortamerki bætt á miðju skjásins.</string>
     <string name="quick_action_add_gpx_descr">Ef ýtt er á þennan aðgerðahnapp verður GPX-ferilpunkti bætt á miðju skjásins.</string>
@@ -2797,4 +2797,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_travel">Ferðalög</string>
     <string name="shared_string_result">Niðurstaða</string>
     <string name="use_two_digits_longitude">Notaðu tveggja-stafa lengdargráður</string>
+    <string name="saved_articles">Vistaðar greinar</string>
     </resources>
