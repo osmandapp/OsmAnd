@@ -39,6 +39,7 @@ public class WikivoyageDbHelper {
 	private static final String ARTICLES_COL_CITY_ID = "city_id";
 	private static final String ARTICLES_COL_ORIGINAL_ID = "original_id";
 	private static final String ARTICLES_COL_LANG = "lang";
+	private static final String ARTICLES_COL_CONTENTS_JSON = "contents_json";
 	private static final String ARTICLES_COL_AGGREGATED_PART_OF = "aggregated_part_of";
 
 	private static final String ARTICLES_TABLE_SELECT = "SELECT " +
@@ -53,6 +54,7 @@ public class WikivoyageDbHelper {
 			ARTICLES_COL_CITY_ID + ", " +
 			ARTICLES_COL_ORIGINAL_ID + ", " +
 			ARTICLES_COL_LANG + ", " +
+			ARTICLES_COL_CONTENTS_JSON + ", " +
 			ARTICLES_COL_AGGREGATED_PART_OF +
 			" FROM " + ARTICLES_TABLE_NAME;
 
@@ -247,7 +249,8 @@ public class WikivoyageDbHelper {
 		res.cityId = cursor.getLong(8);
 		res.originalId = cursor.getLong(9);
 		res.lang = cursor.getString(10);
-		res.aggregatedPartOf = cursor.getString(11);
+		res.contentsJson = cursor.getString(11);
+		res.aggregatedPartOf = cursor.getString(12);
 
 		return res;
 	}
