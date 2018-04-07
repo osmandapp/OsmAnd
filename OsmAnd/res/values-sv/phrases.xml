@@ -2871,4 +2871,8 @@
 	<string name="poi_health_person_type_healer">Roll av hälso-och sjukvårdspersonal: healer</string>
 	<string name="poi_health_person_type_midwife">Roll av hälso-och sjukvårdspersonal: barnmorska</string>
 	<string name="poi_health_person_type_nurse">Roll av hälso-och sjukvårdspersonal: sjuksköterska</string>
+	<string name="poi_service_car">Bilservice</string>
+
+<string name="poi_health_person_type_paramedic">Roll av hälso-och sjukvårdspersonal: sjukvårdare</string>
+	<string name="poi_health_person_type_physician">Roll för hälso-och sjukvårdspersonal: läkare</string>
 	</resources>
