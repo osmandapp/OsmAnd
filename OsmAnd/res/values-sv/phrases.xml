@@ -2873,6 +2873,19 @@
 	<string name="poi_health_person_type_nurse">Roll av hälso-och sjukvårdspersonal: sjuksköterska</string>
 	<string name="poi_service_car">Bilservice</string>
 
-<string name="poi_health_person_type_paramedic">Roll av hälso-och sjukvårdspersonal: sjukvårdare</string>
-	<string name="poi_health_person_type_physician">Roll för hälso-och sjukvårdspersonal: läkare</string>
+<string name="poi_health_person_type_paramedic">Roll av hälso- och sjukvårdspersonal: sjukvårdare</string>
+	<string name="poi_health_person_type_physician">Roll för hälso- och sjukvårdspersonal: läkare</string>
+	<string name="poi_health_person_type_podologist">Roll av hälso- och sjukvårdspersonal: fotvårdsspecialist</string>
+	<string name="poi_health_person_type_psychologist">Roll för hälso- och sjukvårdspersonal: psykolog</string>
+	<string name="poi_health_person_type_therapist">Roll för hälso- och sjukvårdspersonal: terapeut</string>
+	<string name="poi_health_person_type_physician_assitant">Roll för hälso- och sjukvårdspersonal: läkarassistent</string>
+	<string name="poi_health_person_type_technician">Roll för hälso- och sjukvårdspersonal: tekniker</string>
+	<string name="poi_health_person_type_witchdoctor">Roll för hälso- och sjukvårdspersonal: witchdoctor</string>
+
+	<string name="poi_counselling_type_addiction_yes">Rådgivning (missbruk): Ja</string>
+	<string name="poi_counselling_type_addiction_no">Rådgivning (missbruk): ingen</string>
+	<string name="poi_counselling_type_antenatal_yes">Rådgivning (mödravårdscentralen): Ja</string>
+	<string name="poi_counselling_type_antenatal_no">Rådgivning (mödravårdscentralen): ingen</string>
+	<string name="poi_counselling_type_child_guidance_yes">Rådgivning (barnvägledning): Ja</string>
+	<string name="poi_counselling_type_child_guidance_no">Rådgivning (barnvägledning): ingen</string>
 	</resources>
