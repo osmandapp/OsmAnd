@@ -3035,4 +3035,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_travel">Podróż</string>
     <string name="waypoints_removed_from_map_markers">Punkty trasy usunięte z znaczników mapy</string>
     <string name="use_two_digits_longitude">Używaj dwóch cyfr długości geograficznej</string>
+    <string name="wikivoyage_search_hint">Wyszukiwanie: Kraj, Miasto, Prowincja</string>
+    <string name="shared_string_read">Czytaj</string>
+    <string name="saved_articles">Zapisane artykuły</string>
+    <string name="shared_string_explore">Przeglądaj</string>
+    <string name="shared_string_result">Wyniki</string>
     </resources>
