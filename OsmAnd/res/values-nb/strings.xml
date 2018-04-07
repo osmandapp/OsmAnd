@@ -2793,4 +2793,29 @@
     <string name="mile_per_hour">mph</string>
     <string name="mile">mi</string>
     <string name="shared_string_result">Resultat</string>
+    <string name="wikivoyage_search_hint">Søk: Land, By, Region</string>
+    <string name="shared_string_read">Les</string>
+    <string name="saved_articles">Lagrede artikler</string>
+    <string name="shared_string_explore">Utforsk</string>
+    <string name="release_2_6">\\022 Ny funksjon: Hurtighandlingsknapp
+\n
+\n • Forbedret respons på pekeskjermsgester (f.eks. sammenhengende dragning og forstørrelse)
+\n
+\n • Nye kartskrifter som har støtte i flere lokaler
+\n
+\n • Støtte for TTT for )
+\n
+\n • Visibility enhancements in several map styles and Wikipedia
+\n
+\n • Support Open Location Code (OLC)
+\n
+\n • Display elevation, slope, and speed profile for recorded GPX tracks and calculated routes
+\n
+\n • \"Driving style\" setting and logic improvements for bicycle routing
+\n
+\n • Altitude data settings for bicycle routing
+\n
+\n • Several other improvements and bug fixes
+\n
+\n and more…</string>
     </resources>
