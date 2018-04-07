@@ -2959,5 +2959,10 @@
 
 	<string name="poi_office_physician">Läkarmottagning</string>
 	<string name="poi_office_therapist">Terapeutmottagning</string>
-	<string name="poi_office_podologist">Fotvårdsspecialist</string>
+	<string name="poi_office_podologist">Fotvårdsspecialistmottagning</string>
+	<string name="poi_office_healer">Healerkontor</string>
+	<string name="poi_office_psychologist">Psykologmottagning</string>
+	<string name="poi_office_nursing_service">Omvårdnad</string>
+	<string name="poi_office_midwife">Barnmorskemottagning</string>
+
 	</resources>
