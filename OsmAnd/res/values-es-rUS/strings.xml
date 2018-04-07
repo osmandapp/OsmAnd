@@ -2951,4 +2951,6 @@ Proporciona un código completo</string>
     <string name="shared_string_result">Resultado</string>
     <string name="saved_articles">Artículos guardados</string>
     <string name="shared_string_explore">Explorar</string>
+    <string name="wikivoyage_search_hint">Buscar: País, Ciudad, Provincia</string>
+    <string name="shared_string_read">Leer</string>
     </resources>
