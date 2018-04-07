@@ -2883,9 +2883,81 @@
 	<string name="poi_health_person_type_witchdoctor">Roll för hälso- och sjukvårdspersonal: witchdoctor</string>
 
 	<string name="poi_counselling_type_addiction_yes">Rådgivning (missbruk): Ja</string>
-	<string name="poi_counselling_type_addiction_no">Rådgivning (missbruk): ingen</string>
+	<string name="poi_counselling_type_addiction_no">Rådgivning (missbruk): nej</string>
 	<string name="poi_counselling_type_antenatal_yes">Rådgivning (mödravårdscentralen): Ja</string>
-	<string name="poi_counselling_type_antenatal_no">Rådgivning (mödravårdscentralen): ingen</string>
+	<string name="poi_counselling_type_antenatal_no">Rådgivning (mödravårdscentralen): Nej</string>
 	<string name="poi_counselling_type_child_guidance_yes">Rådgivning (barnvägledning): Ja</string>
-	<string name="poi_counselling_type_child_guidance_no">Rådgivning (barnvägledning): ingen</string>
+	<string name="poi_counselling_type_child_guidance_no">Rådgivning (barnvägledning): Nej</string>
+	<string name="poi_counselling_type_couple_yes">Rådgivning (par): Ja</string>
+	<string name="poi_counselling_type_couple_no">Rådgivning (par): Nej</string>
+	<string name="poi_counselling_type_crisis_yes">Rådgivning (kris): Ja</string>
+	<string name="poi_counselling_type_crisis_no">Rådgivning (kris): Nej</string>
+	<string name="poi_counselling_type_drugs_yes">Rådgivning (droger): Ja</string>
+	<string name="poi_counselling_type_drugs_no">Rådgivning (droger): Nej</string>
+	<string name="poi_counselling_type_education_yes">Rådgivning (utbildning): Ja</string>
+	<string name="poi_counselling_type_education_no">Rådgivning (utbildning): Nej</string>
+	<string name="poi_counselling_type_family_yes">Rådgivning (familj): Ja</string>
+	<string name="poi_counselling_type_family_no">Rådgivning (familj): Nej</string>
+	<string name="poi_counselling_type_homeless_yes">Rådgivning (hemlösa): Ja</string>
+	<string name="poi_counselling_type_homeless_no">Rådgivning (hemlösa): Nej</string>
+	<string name="poi_counselling_type_immigrant_yes">Rådgivning (invandrare): Ja</string>
+	<string name="poi_counselling_type_immigrant_no">Rådgivning (invandrare): Nej</string>
+	<string name="poi_counselling_type_marriage_yes">Rådgivning (äktenskap): Ja</string>
+	<string name="poi_counselling_type_marriage_no">Rådgivning (äktenskap): Nej</string>
+	<string name="poi_counselling_type_nutrition_yes">Rådgivning (näring): Ja</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Rådgivning (näring): Nej</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Rådgivning (rehabilitering): Ja</string>
+	<string name="poi_counselling_type_rehabilitation_no">Rådgivning (rehabilitering): Nej</string>
+	<string name="poi_counselling_type_sexual_yes">Rådgivning (sexuell): Ja</string>
+	<string name="poi_counselling_type_sexual_no">Rådgivning (sexuell): Nej</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Rådgivning (sexuella övergrepp): Ja</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Rådgivning (sexuella övergrepp): Nej</string>
+	<string name="poi_counselling_type_victim_yes">Rådgivning (offer): Ja</string>
+	<string name="poi_counselling_type_victim_no">Rådgivning (offer): Nej</string>
+	<string name="poi_counselling_type_violence_yes">Rådgivning (våld): Ja</string>
+	<string name="poi_counselling_type_violence_no">Rådgivning (våld): Nej</string>
+
+	<string name="poi_provided_for_infant_yes">För spädbarn: Ja</string>
+	<string name="poi_provided_for_infant_no">För spädbarn: nej</string>
+	<string name="poi_provided_for_toddler_yes">För småbarn: Ja</string>
+	<string name="poi_provided_for_toddler_no">För småbarn: Nej</string>
+	<string name="poi_provided_for_child_yes">För barn: ja</string>
+	<string name="poi_provided_for_child_no">För barn: nej</string>
+	<string name="poi_provided_for_adult_yes">För vuxna: Ja</string>
+	<string name="poi_provided_for_adult_no">För vuxna: Nej</string>
+	<string name="poi_provided_for_woman_yes">För kvinnor: Ja</string>
+	<string name="poi_provided_for_woman_no">För kvinnor: Nej</string>
+	<string name="poi_provided_for_senior_yes">För seniorer: Ja</string>
+	<string name="poi_provided_for_senior_no">För seniorer: Nej</string>
+	<string name="poi_provided_for_girl_yes">För flickor: Ja</string>
+	<string name="poi_provided_for_girl_no">För flickor: Nej</string>
+	<string name="poi_provided_for_man_yes">För män: Ja</string>
+	<string name="poi_provided_for_man_no">För män: Nej</string>
+	<string name="poi_provided_for_boy_yes">För pojkar: Ja</string>
+	<string name="poi_provided_for_boy_no">För pojkar: Nej</string>
+
+	<string name="poi_capacity_beds">Kapacitet (sängar)</string>
+
+	<string name="poi_treat_inpatient_yes">Slutenvårdstjänster: ja</string>
+	<string name="poi_treat_inpatient_no">Slutenvårdstjänster: nej</string>
+	<string name="poi_treat_inpatient_only">Slutenvårdstjänster: endast</string>
+	<string name="poi_counselling_yes">Rådgivning: Ja</string>
+	<string name="poi_counselling_no">Rådgivning: nej</string>
+	<string name="poi_emergency_yes">Nödsituation: ja</string>
+	<string name="poi_emergency_no">Nödsituation: nej</string>
+	<string name="poi_home_visit_yes">Ja</string>
+	<string name="poi_home_visit_no">Hembesök: nej</string>
+
+	<string name="poi_disease_malaria_yes">Malaria: ja</string>
+	<string name="poi_disease_malaria_no">Malaria: nej</string>
+	<string name="poi_disease_ebola_yes">Ebola: ja</string>
+	<string name="poi_disease_ebola_no">Ebola: nej</string>
+	<string name="poi_disease_autism_yes">Autism: ja</string>
+	<string name="poi_disease_autism_no">Autism: nej</string>
+	<string name="poi_disease_aids_yes">AIDS: ja</string>
+	<string name="poi_disease_aids_no">AIDS: nej</string>
+
+	<string name="poi_office_physician">Läkarmottagning</string>
+	<string name="poi_office_therapist">Terapeutmottagning</string>
+	<string name="poi_office_podologist">Fotvårdsspecialist</string>
 	</resources>
