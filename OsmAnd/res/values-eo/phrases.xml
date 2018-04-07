@@ -3816,6 +3816,15 @@
 	<string name="poi_service_vehicle_batteries_yes">akumulatoroj</string>
 	<string name="poi_service_vehicle_air_conditioning_yes">klimatiziloj</string>
 	<string name="poi_service_vehicle_body_repair_yes">karoserio</string>
-	<string name="poi_service_vehicle_electrical_yes">riparo de elektraĵo</string>
-	<string name="poi_service_vehicle_wheels_yes">riparo de radoj</string>
-	</resources>
+	<string name="poi_service_vehicle_electrical_yes">elektraĵo</string>
+	<string name="poi_service_vehicle_wheels_yes">radoj</string>
+	<string name="poi_service_vehicle_glass_yes">fenestroj</string>
+	<string name="poi_service_vehicle_truck_repair_yes">riparo de kamionoj</string>
+	<string name="poi_service_vehicle_muffler_yes">malbruigilo</string>
+	<string name="poi_service_vehicle_alignment_yes">alĝustigo</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">rapidumskatolo</string>
+	<string name="poi_service_vehicle_motor_yes">motoro</string>
+	<string name="poi_service_vehicle_insurance_yes">asekuroj</string>
+	<string name="poi_service_vehicle_tyres_yes">aerbendoj</string>
+
+</resources>
