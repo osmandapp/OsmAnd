@@ -2984,4 +2984,6 @@
     <string name="shared_string_result">結果</string>
     <string name="saved_articles">已儲存的文章</string>
     <string name="shared_string_explore">探索</string>
+    <string name="wikivoyage_search_hint">搜尋：國家、城市、地區</string>
+    <string name="shared_string_read">讀取</string>
     </resources>
