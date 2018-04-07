@@ -2803,19 +2803,20 @@
 \n
 \n • Nye kartskrifter som har støtte i flere lokaler
 \n
-\n • Støtte for TTT for )
+\n • Støtte for TTT (TTS) for lokale språkvarianter (og dialekter)
 \n
-\n • Visibility enhancements in several map styles and Wikipedia
+\n • Synlighetsforedringer i flere kartstiler og for Wikipedia
 \n
-\n • Support Open Location Code (OLC)
+\n • Støtte for Åpen Plasseringskode (OLC)
 \n
-\n • Display elevation, slope, and speed profile for recorded GPX tracks and calculated routes
+\n • Vis høyde, variasjon, og hastighetsprofil for innsamlet GPX-spor og kalkulerte ruter
 \n
-\n • \"Driving style\" setting and logic improvements for bicycle routing
+\n • \"Kjørestil\"-innstilling og logiske forbedringer for sykkelveivising
 \n
-\n • Altitude data settings for bicycle routing
+\n • Høydedatainnstillinger for sykkelveivising
 \n
-\n • Several other improvements and bug fixes
+\n • Flere andre forbedringer og andre rettede feil
 \n
-\n and more…</string>
+\n med mer…</string>
+    <string name="confirm_usage_speed_cameras">"I mange land (Tyskland, Frankrike, Italia, og andre) er bruk av "</string>
     </resources>
