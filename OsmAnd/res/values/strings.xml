@@ -2291,7 +2291,7 @@
     <string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
     <string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for longer distances than about 20 km.\n\nNavigation temporarily switched to online CloudMade service.</string>
     <string name="specified_dir_doesnt_exist">Can not find the specified folder.</string>
-    <string name="osmand_net_previously_installed">All offline data will in the old installed app will be supported by the new one, but favorite points has to be exported in the old app and then imported in the new one.</string>
+    <string name="osmand_net_previously_installed">All offline data in the old installed app will be supported by the new one, but favorite points must be exported from the old app and then imported in the new one.</string>
     <string name="build_installed">Build {0} was installed ({1}).</string>
     <string name="downloading_build">Downloading build…</string>
     <string name="install_selected_build">Do you want to install OsmAnd - {0} of {1} {2} MB ?</string>
