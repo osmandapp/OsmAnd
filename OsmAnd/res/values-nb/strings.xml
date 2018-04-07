@@ -2071,34 +2071,32 @@
     <string name="rendering_attr_noAdminboundaries_description">Undertrykk visning av regionale grenser (administrasjonsnivåer 5-9).</string>
     <string name="close_changeset">Lukk endringssett</string>
     <string name="zxing_barcode_scanner_not_found">Programmet ZXing strekkodeskanner er ikke installert. Vil du søke på Google Play?</string>
-    <string name="release_2_5">"• Klikkbare ikoner på kartet
-\n
-\n • Kraftig POI-filtersøk: Søk f.eks etter restauranter etter type kjøkken, eller campingsteder med gitte tjenestetilbud
-\n
-\n • Nytt topologisk kart for syklister og turgåere
-\n
-\n • Forbedret opptak av turer
-\n
-\n • Forbedrede navigasjonsmerknader (Android Wear)
-\n
+    <string name="release_2_5">"• Klikkbare ikoner på kartet 
+\n 
+\n • Kraftig POI-filtersøk: Søk f.eks etter restauranter etter type kjøkken, eller campingsteder med gitte tjenestetilbud 
+\n 
+\n • Nytt topologisk kart for syklister og turgåere 
+\n 
+\n • Forbedret opptak av turer 
+\n 
+\n • Forbedrede navigasjonsmerknader (Android Wear) 
+\n 
+\n • Mange andre forbedringer og feilrettinger 
+\n 
+\n med mer… "</string>
+    <string name="release_2_4">•\\022 Nytt og veldig kraftig fritekstsøk 
+\n 
+\n • Lydsystem i bil / høytalertelefonintegrasjon via Blåtann 
+\n 
+\n • Forbedret veivisning, stemmehjelp og filanvisning 
+\n 
+\n • Forbedret transportlag med rutetegning
+\n 
+\n • Flere lokaler er lagt til, og det er nå støtte for regionale språk 
+\n 
 \n • Mange andre forbedringer og feilrettinger
-\n
-\n med mer…
-\n "</string>
-    <string name="release_2_4">"•\\022 Nytt og veldig kraftig fritekstsøk
-\n
-\n • Lydsystem i bil / høytalertelefonintegrasjon via Blåtann
-\n
-\n • Forbedret veivisning, stemmehjelp og filanvisning
-\n
-\n • Improved transport layer with route rendering
-\n
-\n • Added more locales and now support regional locales
-\n
-\n • Many other improvements and bug fixes
-\n
-\n and more…
-\n "</string>
+\n 
+\n med mer…</string>
     
     <string name="lang_bpy">Bishnupriya manipuri</string>
     <string name="lang_new">Nepal bhasa</string>
@@ -2818,5 +2816,6 @@
 \n • Flere andre forbedringer og andre rettede feil
 \n
 \n med mer…</string>
-    <string name="confirm_usage_speed_cameras">"I mange land (Tyskland, Frankrike, Italia, og andre) er bruk av "</string>
+    <string name="confirm_usage_speed_cameras">I mange land (Tyskland, Frankrike, Italia, og andre) er bruk av fotoboksvarsling ulovlig. OsmAnd påtar seg ikke noe ansvar hvis du bryter loven. Trykk \"Ja\" kun hvis du har myndighet til å bruke denne funksjonen.</string>
+    <string name="osmand_net_previously_installed">All frakoblet data fra det gamle programmet vil bli støttet i det nye, men favorittpunkter må eksporteres fra det gamle til det nye.</string>
     </resources>
