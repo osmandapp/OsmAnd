@@ -1020,8 +1020,8 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="map_widget_intermediate_distance">Zwischenziel</string>
 	<string name="ending_point_too_far">Endpunkt zu weit von der nächsten Straße entfernt.</string>
 	<string name="intermediate_point_too_far">Zwischenziel %1$s ist zu weit von der nächsten Straße entfernt.</string>
-	<string name="context_menu_item_last_intermediate_point">Als letztes Zwischenziel setzen</string>
-	<string name="context_menu_item_first_intermediate_point">Als erstes Zwischenziel setzen</string>
+	<string name="context_menu_item_last_intermediate_point">Als letztes Zwischenziel einfügen</string>
+	<string name="context_menu_item_first_intermediate_point">Als erstes Zwischenziel einfügen</string>
 	<string name="target_point">Ziel %1$s</string>
 	<string name="target_points">Ziele</string>
 	<string name="add_as_first_destination_point">Als erstes Zwischenziel einfügen</string>
@@ -1277,7 +1277,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="route_info">Routen-Informationen</string>
 	<string name="calculate_osmand_route_without_internet">OsmAnd-Routenteil offline berechnen</string>
 	<string name="use_displayed_track_for_navigation">Möchten Sie den angezeigten Track zur Navigation verwenden?</string>
-	<string name="keep_and_add_destination_point">Als letztes Ziel hinzufügen</string>
+	<string name="keep_and_add_destination_point">Als weiteres Ziel hinzufügen</string>
 	<string name="select_gpx">GPX-Datei auswählen…</string>
 	<string name="route_descr_select_destination">Ziel auswählen</string>
 	<string name="interrupt_music_descr">Musikwiedergabe während Sprachansagen pausieren (nicht nur dämpfen).</string>
