@@ -3815,5 +3815,7 @@
 	<string name="poi_service_vehicle_car_parts_yes">aŭt-partoj</string>
 	<string name="poi_service_vehicle_batteries_yes">akumulatoroj</string>
 	<string name="poi_service_vehicle_air_conditioning_yes">klimatiziloj</string>
-	<string name="poi_service_vehicle_body_repair_yes">riparo de karoserio</string>
+	<string name="poi_service_vehicle_body_repair_yes">karoserio</string>
+	<string name="poi_service_vehicle_electrical_yes">riparo de elektraĵo</string>
+	<string name="poi_service_vehicle_wheels_yes">riparo de radoj</string>
 	</resources>
