@@ -2071,7 +2071,7 @@
     <string name="rendering_attr_noAdminboundaries_description">Undertrykk visning av regionale grenser (administrasjonsnivåer 5-9).</string>
     <string name="close_changeset">Lukk endringssett</string>
     <string name="zxing_barcode_scanner_not_found">Programmet ZXing strekkodeskanner er ikke installert. Vil du søke på Google Play?</string>
-    <string name="release_2_5">"• Klikkbare ikoner på kartet 
+    <string name="release_2_5">• Klikkbare ikoner på kartet 
 \n 
 \n • Kraftig POI-filtersøk: Søk f.eks etter restauranter etter type kjøkken, eller campingsteder med gitte tjenestetilbud 
 \n 
@@ -2083,7 +2083,7 @@
 \n 
 \n • Mange andre forbedringer og feilrettinger 
 \n 
-\n med mer… "</string>
+\n med mer…</string>
     <string name="release_2_4">•\\022 Nytt og veldig kraftig fritekstsøk 
 \n 
 \n • Lydsystem i bil / høytalertelefonintegrasjon via Blåtann 
