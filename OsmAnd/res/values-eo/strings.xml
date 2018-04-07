@@ -2932,4 +2932,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="waypoints_removed_from_map_markers">Forigis navigadpunktojn el map-markoj</string>
     <string name="use_two_digits_longitude">Uzi du ciferojn da longitudo</string>
     <string name="shared_string_result">Rezulto</string>
+    <string name="wikivoyage_search_hint">Serĉi landon, provincon, urbon</string>
+    <string name="shared_string_read">Legi</string>
+    <string name="saved_articles">Konservitaj artikoloj</string>
+    <string name="shared_string_explore">Esplori</string>
     </resources>
