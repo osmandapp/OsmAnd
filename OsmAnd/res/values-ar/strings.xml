@@ -2870,7 +2870,7 @@
     <string name="parked_at">تم الرّكنُ على</string>
     <string name="add_favourites_group_to_markers_descr">إختر الفئة التي تود إضافة العلامات إليها.</string>
     <string name="favourites_group">الفئات المفضلة</string>
-    <string name="empty_state_markers_history"></string>
+    <string name="empty_state_markers_history"/>
     <string name="shared_string_two">الثاني</string>
     <string name="shared_string_one">واحد</string>
     <string name="coordinate_input_accuracy">%1$d أرقام</string>
@@ -2917,4 +2917,5 @@
     <string name="toast_empty_name_error">ليس للمكان أي إسم</string>
     <string name="tunnel_warning">على مقربة مِن نفق</string>
     <string name="show_tunnels">الأنفاق</string>
-</resources>
+<string name="wikivoyage_search_hint">البحث : بلد أو مدينة أو منطقة</string>
+    </resources>
