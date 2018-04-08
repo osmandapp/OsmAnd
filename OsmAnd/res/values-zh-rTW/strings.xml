@@ -537,7 +537,7 @@
     <string name="specified_dir_doesnt_exist">找不到指定的資料夾。</string>
     <string name="application_dir">資料存儲器資料夾</string>
 
-    <string name="osmand_net_previously_installed">舊版應用程式安裝的所有離線資料，在新版都會受到支援，但我的收藏內的標點須以舊版程式匯出後再用新版程式匯入。</string>
+    <string name="osmand_net_previously_installed">舊版應用程式所安裝的所有離線資料，在新版都會受到支援，但我的收藏內的標點，必須從舊版程式匯出，然後再匯入新版程式。</string>
     <string name="build_installed">編譯 {0} 已安裝({1})。</string>
     <string name="downloading_build">正在下載編譯…</string>
     <string name="install_selected_build">您要安裝 OsmAnd - {0} 之中的 {1} {2} MB？</string>
