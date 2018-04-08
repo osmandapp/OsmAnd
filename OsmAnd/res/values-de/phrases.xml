@@ -3794,6 +3794,28 @@
 	<string name="poi_amusement_arcade">Spielhalle</string>
 	<string name="poi_adult_gaming_centre">Spielkasino für Erwachsene</string>
 
-<string name="poi_water_utility">Wasserversorgungsbüro</string>
+<string name="poi_water_utility">Büro der Wasserversorgung</string>
 
-	</resources>
+	<string name="poi_service_car">Dienstleistung</string>
+
+<string name="poi_service_vehicle_car_repair_yes">Autowerkstatt</string>
+	<string name="poi_service_vehicle_oil_change_yes">Ölwechsel</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Gebrauchtwagenverkauf</string>
+	<string name="poi_service_vehicle_brakes_yes">Bremsen</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Neuwagenverkauf</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnosen</string>
+	<string name="poi_service_vehicle_car_parts_yes">Autoteile</string>
+	<string name="poi_service_vehicle_batteries_yes">Batterien</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Klimatisierung</string>
+	<string name="poi_service_vehicle_body_repair_yes">Karosserie-Reparatur</string>
+	<string name="poi_service_vehicle_electrical_yes">Elektronik</string>
+	<string name="poi_service_vehicle_wheels_yes">Räder</string>
+	<string name="poi_service_vehicle_glass_yes">Glas</string>
+	<string name="poi_service_vehicle_truck_repair_yes">LKW-Reparatur</string>
+	<string name="poi_service_vehicle_alignment_yes">Ausrichtung</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Getriebe-Reparatur</string>
+	<string name="poi_service_vehicle_motor_yes">Motor</string>
+	<string name="poi_service_vehicle_insurance_yes">Versicherung</string>
+	<string name="poi_service_vehicle_tyres_yes">Reifen</string>
+
+</resources>
