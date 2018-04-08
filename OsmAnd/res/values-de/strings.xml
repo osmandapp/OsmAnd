@@ -364,7 +364,7 @@
 	<string name="old_poi_file_should_be_deleted">Die POI-Datei \'%1$s\' wird nicht mehr benötigt und kann gelöscht werden.</string>
 	<string name="update_poi_file_not_found">Lokale Datei für POI-Änderungen nicht gefunden und konnte nicht erstellt werden.</string>
 	<string name="button_upgrade_osmandplus">OsmAnd+ aktualisieren</string>
-	<string name="map_version_changed_info">Der Server enthält Karten die mit ihrer derzeitigen Anwendungsversion nicht kompatibel sind. Um sie zu laden und zu verwenden, aktualisieren Sie bitte auf die neueste Version.</string>
+	<string name="map_version_changed_info">Laden Sie die neue Version der App herunter, um die neuen Kartendateien nutzen zu können.</string>
 	<string name="shared_string_rename">Umbenennen</string>
 	
 	<string name="poi_filter_nominatim">Online-Nominatim</string>
@@ -467,7 +467,7 @@
 	<string name="internet_not_available">Kann Vorgang ohne Internetverbindung nicht abschließen.</string>
 	<string name="install_more">Weitere installieren…</string>
 
-	<string name="level_to_switch_vector_raster_descr">Niedrigste Zoomstufe mit der Vektorkarten (statt Kacheln) verwendet werden sollen.</string>
+	<string name="level_to_switch_vector_raster_descr">Verwenden Sie Rasterkarten für alles, was über diese Ebene hinausgeht.</string>
 	<string name="level_to_switch_vector_raster">Min. Vektor-Zoomstufe</string>
 	
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Klassifizierung mit Bildern.</string>
@@ -681,7 +681,7 @@
 	<string name="route_head">Geradeaus</string>
 	<string name="first_time_continue">Weiter</string>
 	<string name="first_time_download">Offline-Daten herunterladen</string>
-	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Für viele Funktionen dieser Anwendung sind Offline-Daten zu einer Region nötig, die Sie über \'Einstellungen\' → \'Kartenverwaltung\' herunterladen können. Erst danach sind Sie in der Lage, Landkarten anzusehen, Adressen, POIs und öffentliche Verkehrsmittel zu finden.</string>
+	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Laden Sie regionale Daten für die Offline-Verwendung über \'Einstellungen\' → \'Kartenverwaltung\' herunter, um Landkarten anzusehen, Adressen, POIs und öffentliche Verkehrsmittel zu finden.</string>
 	<string name="search_poi_location">Warte auf Signal…</string>
 	<string name="search_near_map">Suche in der Nähe</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>
@@ -2010,7 +2010,7 @@ Lon %2$s</string>
     <string name="activate_seamarks_plugin">Bitte das Seekarten-Modul aktivieren</string>
     <string name="activate_srtm_plugin">Bitte das SRTM-Modul aktivieren</string>
     <string name="get_full_version">Vollversion</string>
-    <string name="confirm_download_roadmaps">Soll wirklich die reine Straßenkarte heruntergeladen werden, obwohl bereits die vollständige Standardkarte vorhanden ist?</string>
+    <string name="confirm_download_roadmaps">Die reine Straßenkarte wird nicht benötigt, da Sie die Standardkarte haben. Trotzdem herunterladen?</string>
     <string name="value_downloaded_of_max">%1$.1f von %2$.1f MB</string>
     <string name="update_all">Alles aktualisieren (%1$s MB)</string>
     <string name="free_downloads_used">Verbrauchte freie Downloads</string>
@@ -2947,4 +2947,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="select_waypoints_category_description">Sie können alle Wegpunkte des Tracks hinzufügen oder einzelne Kategorien auswählen.</string>
     <string name="shared_string_total">Total</string>
     <string name="use_two_digits_longitude">Zweistelligen Längengrad verwenden</string>
+    <string name="wikivoyage_search_hint">Suche: Land, Stadt, Provinz</string>
+    <string name="shared_string_read">Lesen</string>
+    <string name="saved_articles">Gespeicherte Artikel</string>
+    <string name="shared_string_explore">Durchsuchen</string>
+    <string name="shared_string_result">Ergebnis</string>
     </resources>
