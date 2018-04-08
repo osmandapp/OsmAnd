@@ -534,7 +534,7 @@
 	<string name="send_location_email_pattern">כדי לצפות במיקום יש לעקוב אחר הקישור %1$s או אחר הקישור הייעודי ל־Android‏ %2$s</string>
 	<string name="send_location">שליחת המיקום</string>
 	<string name="context_menu_item_share_location">שיתוף המיקום</string>
-	<string name="add_waypoint_dialog_added">נקודת הציון „{0}“ נוספה ל־GPX</string>
+	<string name="add_waypoint_dialog_added">נקודת הציון „{0}” נוספה ל־GPX</string>
 	<string name="add_waypoint_dialog_title">הוספת נקודת ציון לדרך GPX מוקלטת</string>
 	<string name="context_menu_item_add_waypoint">הוספת נקודת ציון ל־GPX</string>
 	<string name="amenity_type_administrative">מנהלית</string>
@@ -566,7 +566,7 @@
 	<string name="km">ק״מ</string>
 	<string name="km_h">קמ״ש</string>
 	<string name="m">מ׳</string>
-	<string name="old_map_index_is_not_supported">תבנית נתוני המפה שנזנחה „{0}“ אינה נתמכת</string>
+	<string name="old_map_index_is_not_supported">תבנית נתוני המפה שנזנחה „{0}” אינה נתמכת</string>
 	<string name="poi_filter_closest_poi">נ״ע הקרובות ביותר</string>
 	<string name="poi_filter_custom_filter">מסנן מותאם אישית</string>
 	<string name="poi_filter_namefinder">מחפש שמות מקוון</string>
@@ -578,12 +578,14 @@
     <string name="native_library_not_running">היישום פועל כעת במצב בטוח (ניתן להשבית זאת ב‚הגדרות’).</string>
     <string name="background_service_is_enabled_question">שירות הרקע של OsmAnd עדיין פעיל. לבטל גם אותו?</string>
     
-    <string name="osmand_routing_experimental">ניווט בלתי מקוון ב־OsmAnd הנו תכונה ניסיונית ואינה פועלת למרחקים של למעלה מ־20 ק״מ.\n\nשירות הניווט הוחלף זמנית ל־CloudMade.</string>
+    <string name="osmand_routing_experimental">ניווט בלתי מקוון ב־OsmAnd הנו תכונה ניסיונית שאינה פועלת למרחקים של למעלה מ־20 ק״מ.
+\n
+\nהניווט הוחלף זמנית לשירות CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">לא ניתן למצוא את התיקייה שצוינה.</string>
 	<string name="application_dir">תיקיית אחסון הנתונים</string>
 	
 	<string name="osmand_net_previously_installed">מותקנת גרסה קודמת של OsmAnd. כל הנתונים הבלתי מקוונים יתמכו על ידי היישום החדש. אך את הנקודות המועדפות יש לייצא ביישום הישן ולייבא לאחר מכן ליישום החדש.</string>
-	<string name="build_installed">הבנייה {0} הותקנה בהצלחה ({1}).</string>
+	<string name="build_installed">הבנייה {0} הותקנה ({1}).</string>
 	
 	<string name="downloading_build">הבנייה מתקבלת…</string>
 	<string name="install_selected_build">האם ברצונך להתקין את OsmAnd‏ - {0} מתוך {1}‏ {2} מ״ב ?</string>
@@ -591,14 +593,14 @@
 	<string name="loading_builds">הבניות של OsmAnd נטענות…</string>
 	<string name="select_build_to_install">יש לבחור את אחת הבניות של OsmAnd להתקנה</string>
 	<string name="contribution_activity">התקנת הגרסה</string>
-	<string name="gps_status_app_not_found">יישום מצב רכיב האיכון לא מותקן. לחפש בחנות?</string>
+	<string name="gps_status_app_not_found">יישומון מצב ה־GPS לא מותקן. לחפש בחנות?</string>
 	<string name="voice_is_not_available_msg">אין קריינות זמינה. נא לגשת ל‚הגדרות’ ← ‚כללי’ ← ‚קריינות’ ולבחור או להוריד חבילת קריינות.</string>
 	<string name="voice_is_not_available_title">לא נבחר ניווט קולי</string>
 	<string name="daynight_mode_day">יום</string>
 	<string name="daynight_mode_night">לילה</string>
 	<string name="daynight_mode_auto">זריחה/שקיעה</string>
 	<string name="daynight_mode_sensor">חיישן אור</string>
-	<string name="daynight_descr">נא לבחור כלל להחלפה בין מצבי יום/לילה.</string>
+	<string name="daynight_descr">נא לבחור כלל להחלפה בין מצבי לילה ויום.</string>
 	<string name="daynight">מצב יום/לילה</string>
 	<string name="download_files_question">האם להוריד {0} קבצים ({1} מ״ב)?</string>
 	<string name="items_were_selected">נבחרו {0} פריטים</string>
@@ -616,7 +618,7 @@
 	<string name="continuous_rendering_descr">הצגת עיבוד תמונה רציף במקום תמונה אחת בכל פעם.</string>
 	<string name="rendering_exception">אירעה שגיאה בעת עיבוד האיזור הנבחר</string>
 	<string name="show_point_options">שימוש במיקום…</string>
-	<string name="renderer_load_sucess">תכונת העיבוד נטענה בהצלחה</string>
+	<string name="renderer_load_sucess">תכונת העיבוד נטענה</string>
 	<string name="renderer_load_exception">אירעה חריגה: תכונת העיבוד לא נטענה</string>
 	<string name="renderers">תכונת עיבוד וקטורים</string>
 	<string name="renderers_descr">נא לבחור את הופעת תכונת העיבוד.</string>
@@ -646,13 +648,13 @@
 	
 	<string name="poi_context_menu_modify">שינוי נ״ע</string>
 	<string name="poi_context_menu_delete">מחיקת נ״ע</string>
-	<string name="rotate_map_compass_opt">למצפן</string>
-	<string name="rotate_map_bearing_opt">לכיוון התנועה</string>
-	<string name="rotate_map_none_opt">לא לסובב (הצפון למעלה)</string>
+	<string name="rotate_map_compass_opt">כיוון מצפן</string>
+	<string name="rotate_map_bearing_opt">כיוון התנועה</string>
+	<string name="rotate_map_none_opt">לא לסובב (הצפון תמיד למעלה)</string>
 	<string name="rotate_map_to_bearing_descr">יש לבחור את יישור מסך המפה.</string>
 	<string name="rotate_map_to_bearing">יישור המפה</string>
 	<string name="show_route">פרטי המסלול</string>
-	<string name="fav_imported_sucessfully">המועדפים יובאו בהצלחה</string>
+	<string name="fav_imported_sucessfully">המועדפים יובאו</string>
 	<string name="fav_file_to_load_not_found">קובץ ה־GPX המכיל מועדפים לא נמצא תחת {0}</string>
 	<string name="fav_saved_sucessfully">המועדפים נשמרו אל {0}</string>
 	<string name="no_fav_to_save">אין נקודות מועדפות לשמירה</string>
@@ -766,7 +768,7 @@
 	<string name="search_offline_address">בלתי מקוון</string>
 	<string name="search_online_address">אינטרנט</string>
 	<string name="max_level_download_tile">תקריב מרבי מקוון</string>
-	<string name="max_level_download_tile_descr">נא לבחור את רמת התקריב המרבית להורדת אריחי מפה מקוונים.</string>
+	<string name="max_level_download_tile_descr">לא לעיין באריחי מפה מקוונים לרמות תקריב שהן מעבר לרמה זו.</string>
 	<string name="route_general_information">סך כל המרחק: %1$s, זמן הנסיעה: %2$d שע׳ %3$d דק׳.</string>
 	<string name="router_service_descr">בחירה בשירות ניווט מקוון או בלתי מקוון.</string>
 	<string name="router_service">שירות ניווט</string>
@@ -2497,9 +2499,9 @@
     <string name="keep_informing_descr">הכרזה מחודשת של הנחיות הניווט במרווחי זמן קבועים.</string>
     <string name="keep_informing">חזרה על הנחיות הניווט</string>
     <string name="shared_string_others">אחרים</string>
-    <string name="import_file_favourites">לשמור את הנתונים כקובץ GPX ולייבא את נקודות הדרך למועדפים?</string>
+    <string name="import_file_favourites">לשמור את הנתונים כקובץ GPX או לייבא את נקודות הדרך ל‚מועדפים’?</string>
     <string name="share_fav_subject">מועדפים משותפים דרך OsmAnd</string>
-    <string name="dashboard_or_drawer_description">ישנה בחירה חדשה לשלוט ביישומון באופן עיקרי באמצעות לוח המחוונים הגמיש או התפריט הסטטי. ניתן לשנות את בחירתך בהגדרות לוח המחוונים.</string>
+    <string name="dashboard_or_drawer_description">ניתנת אפשרות לשלוט ביישומון באופן עיקרי באמצעות לוח המחוונים הגמיש או תפריט סטטי. ניתן לשנות את בחירתך בהגדרות לוח המחוונים.</string>
     <string name="what_is_here">מה יש כאן:</string>
     <string name="pick_up_till">איסוף עד</string>
     <string name="without_time_limit">ללא הגבלת זמן</string>
@@ -2700,4 +2702,5 @@
     <string name="access_disable_offroute_recalc_descr">אין אפשרות לחישוב המסלול מחדש לאחר חריגה מהמסלול.</string>
     <string name="download_files_error_not_enough_space">אין מספיק מקום! שטח האחסון הנדרש הוא {3} מ״ב באופן זמני, {1} מ״ב באופן קבוע. השטח הזמין הוא {2} מ״ב בלבד.</string>
     <string name="fav_point_dublicate">שם נקודה מועדפת כפול</string>
+    <string name="shared_string_read">נקרא</string>
     </resources>
