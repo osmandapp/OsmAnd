@@ -173,7 +173,7 @@
 	<string name="gpxup_private">פרטי</string>
 	<string name="asap">דחוף</string>
 	
-	<string name="route_roundabout">כיכר : לצאת ביציאה ה%1$d ולהמשיך</string>
+	<string name="route_roundabout">כיכר : לצאת ביציאה מס׳ %1$d ולהמשיך</string>
 	<string name="route_kl">להיצמד לשמאל ולהמשיך</string>
 	<string name="route_kr">להיצמד לימין ולהמשיך</string>
 	<string name="rendering_attr_noPolygons_description">הפיכת כל תכונות הקרקע במפה לשקופות.</string>
@@ -187,15 +187,15 @@
 	<string name="local_index_routing_data">נתוני המסלול</string>
 	<string name="navigate_point_format">עיצוב</string>
 	<string name="first_time_msg">תודה לך על השימוש ב־OsmAnd. עבור תכונות רבות של יישום זה יש צורך בנתונים אזוריים בלתי מקוונים אותם ניתן להוריד דרך \'הגדרות\' -&gt; \'נתונים בלתי מקוונים\'. לאחר מכן יתאפשר לך לצפות במקום, לאתר כתובות, לחפש נקודות עניין ולמצוא תחבורה ציבורית.</string>    
-	<string name="basemap_was_selected_to_download">נדרשת מפת בסיס לצורך התפקוד התקין של התכנה ונבחרה אחת כזאת להורדה.</string>
+	<string name="basemap_was_selected_to_download">מפת הבסיס נבחרה להורדה לטובת הפעולה התקינה של היישומון.</string>
 	<string name="select_index_file_to_download">לא נמצא כלום. אם האזור שלך לא נמצא, ניתן ליצור אותו בעצמך (לפרטים https://osmand.net).</string>
 	<string name="local_indexes_cat_tile">אריחי מפה מקוונים ושמורים</string>
 	<string name="local_indexes_cat_map">מפות רגילות (וקטור)</string>
 	
 	<string name="index_settings_descr">הורדה וניהול של מפות בלתי מקוונות שמאוחסנות בהתקן שלך.</string>
-	<string name="map_online_plugin_is_not_installed">ניתן להפעיל את תוסף המפות המקוונות כדי לבחור במקורות שונים למפה</string>
+	<string name="map_online_plugin_is_not_installed">ניתן להפעיל את תוסף ה‚מפות המקוונות’ כדי לבחור במקורות שונים למפה</string>
 	<string name="map_online_data">מפות מקוונות ואריחים</string>
-	<string name="map_online_data_descr">שימוש במפות מקוונות (הורדה ואחסון אריחי המפה בכרטיס ה־SD).</string>
+	<string name="map_online_data_descr">שימוש במפות מקוונות (הורדה ואחסון אריחי המפה בכרטיס הזיכרון).</string>
 	<string name="shared_string_online_maps">מפות מקוונות</string>
 	<string name="online_map_settings_descr">הגדרת מקורות אריחי מפה מקוונים או שמורים.</string>
 	
@@ -218,7 +218,7 @@
 	<string name="debugging_and_development">פיתוח OsmAnd</string>
 	<string name="native_rendering">עיבוד תמונה טבעי</string>
 	<string name="test_voice_prompts">בדיקת ההכרזות הקוליות</string>    
-	<string name="switch_to_raster_map_to_see">אין מפה וקטורית בלתי מקוונת לאזור זה. ניתן להוריד אחת בהגדרות (נתונים בלתי מקוונים) או לעבור למפות מקוונות.</string>
+	<string name="switch_to_raster_map_to_see">אין מפה וקטורית בלתי מקוונת לאזור זה. ניתן להוריד אחת ב‚הגדרות’ (‚ניהול קובצי מפה’) או לעבור ל‚מפות מקוונות’.</string>
 	
 	<string name="send_files_to_osm">האם לשלוח את קובצי ה־GPX ל־OSM?</string>
 	<string name="gpx_visibility_txt">הופעה</string>
@@ -236,7 +236,7 @@
 	<string name="accessibility_mode_descr">הפעלת תכונות הנגישות.</string>
 	<string name="shared_string_on">פעיל</string>
 	<string name="shared_string_off">כבוי</string>
-	<string name="accessibility_default">בהתאם להגדרות המערכת הכלליות</string>
+	<string name="accessibility_default">בהתאם להגדרות המערכת של Android</string>
 	<string name="backToMenu">חזרה לתפריט</string>
 	<string name="zoomOut">התרחקות</string>
 	<string name="zoomIn">התקרבות</string>
@@ -423,7 +423,7 @@
 	<string name="favourites_edit_dialog_category">קטגוריה</string>
 	<string name="shared_string_no_thanks">לא, תודה</string>
 	<string name="basemap_missing">מפת העולם הבסיסית (המכסה את כל העולם ברמות תקריב נמוכות) חסרה. כדאי לשקול להוריד את World_basemap_x.obf לקבלת סקירה גלובלית.</string>
-	<string name="vector_data_missing">נתונים מקומיים („בלתי מקוונים”) חסרים בכרטיס ה־SD. נא לשקול להוריד אותם כדי להשתמש במפות באופן בלתי מקוון.</string>
+	<string name="vector_data_missing">הורדת נתונים (‚בלתי מקוונים’) כדי להשתמש במפות באופן בלתי מקוון.</string>
 	<string name="local_index_gpx_info_show">"
 \n
 \nיש ללחוץ לחיצה ארוכה כדי להגיע לאפשרויות"</string>
@@ -431,16 +431,16 @@
 	
 	
 	<string name="local_index_installed">גרסה מקומית</string>
-	<string name="local_index_items_backuped">%1$d מתוך %2$d פריטים נוטרלו בהצלחה.</string>
-	<string name="local_index_items_deleted">%1$d מתוך %2$d פריטים נמחקו בהצלחה.</string>
-	<string name="local_index_items_restored">%1$d מתוך %2$d פריטים הופעלו בהצלחה.</string>
+	<string name="local_index_items_backuped">%1$d מתוך %2$d פריטים הושבתו.</string>
+	<string name="local_index_items_deleted">%1$d מתוך %2$d פריטים נמחקו.</string>
+	<string name="local_index_items_restored">%1$d מתוך %2$d פריטים הופעלו.</string>
 	<string name="local_index_no_items_to_do">אין פריטים ל%1$s</string>
 	<string name="local_index_action_do">פעולה זו תגרום ל%1$s של %2$s פריטים. להמשיך?</string>
 	<string name="local_index_descr_title">ניהול קובצי מפה.</string>
 	<string name="local_index_mi_restore">הפעלה</string>
 	<string name="local_index_mi_backup">נטרול</string>
 	
-	<string name="local_index_mi_reload">טעינה מחדש מכרטיס ה־SD</string>
+	<string name="local_index_mi_reload">טעינה מחדש מכרטיס הזיכרון</string>
 	<string name="shared_string_download">הורדה</string>
 	
 	<string name="local_index_poi_data">נתוני נ״ע</string>
@@ -463,11 +463,11 @@
 	
 	
 	<string name="installing_new_resources">הנתונים החדשים נפרסים…</string>
-	<string name="internet_connection_required_for_online_route">נבחר שירות ניווט מקוון אך אין חיבור זמין לאינטרנט.</string>
-	<string name="tts_language_not_supported_title">השפה אינה נתמכת</string>
-	<string name="tts_language_not_supported">השפה הנבחרת אינה נתמכת על ידי המנגנון הממיר טקסט לדיבור. האם ברצונך לגשת לחנות כדי לחפש אחר מנגנון המרה אחר? בכל מצב אחר ייעשה שימוש בשפות הקיימות.</string>
+	<string name="internet_connection_required_for_online_route">נבחר שירות ניווט מקוון אך אין לך חיבור זמין לאינטרנט.</string>
+	<string name="tts_language_not_supported_title">שפה בלתי נתמכת</string>
+	<string name="tts_language_not_supported">השפה הנבחרת אינה נתמכת על ידי המנגנון הממיר טקסט לדיבור. לגשת לחנות כדי לחפש אחר מנגנון המרה אחר? בכל מצב אחר ייעשה שימוש בשפות הקיימות.</string>
 	<string name="tts_missing_language_data_title">חסרים נתונים</string>
-	<string name="tts_missing_language_data">לא מותקנים נתונים עבור השפה הנבחרת. האם ברצונך לגשת לחנות כדי להתקין?</string>
+	<string name="tts_missing_language_data">לגשת לחנות להוריד את השפה הנבחרת?</string>
 	<string name="gpx_option_reverse_route">היפוך כיוון ה־GPX</string>
 	<string name="gpx_option_destination_point">שימוש ביעד הנוכחי</string>
 	<string name="gpx_option_from_start_point">לעבור לאורך דרך שלמה</string>
@@ -478,7 +478,7 @@
 	<string name="voice_stream_voice_call">שמע שיחה (גם כדי להפריע לרמקולי ה־BT של האוטו)</string>
 	<string name="voice_stream_notification">שמע להתרעה</string>
 	<string name="voice_stream_music">שמע למוזיקה/מדיה</string>
-	<string name="warning_tile_layer_not_downloadable">היישום לא יכול להוריד את שכבת המפה %1$s, נא לנסות להתקין אותה מחדש.</string>
+	<string name="warning_tile_layer_not_downloadable">ליישומון אין אפשרות להוריד את שכבת המפה %1$s, נא לנסות להתקין אותו מחדש.</string>
 	<string name="overlay_transparency_descr">שינוי שקיפות שכבת העל.</string>
 	<string name="overlay_transparency">שקיפות שכבת העל</string>
 	<string name="map_transparency_descr">שינוי שקיפות מפת הבסיס.</string>
@@ -490,9 +490,9 @@
 	<string name="shared_string_none">ללא</string>
 	<string name="map_overlay">מפה עליונה</string>
 	<string name="map_overlay_descr">נא לבחור במפה עליונה.</string>
-	<string name="tile_source_already_installed">המפה כבר מותקנת, ההגדרות יעודכנו.</string>
+	<string name="tile_source_already_installed">המפה כבר מותקנת, ה‚הגדרות’ יעודכנו.</string>
 	<string name="select_tile_source_to_install">יש לבחור ב(אריחי) מפה להתקנה או עדכון.</string>
-	<string name="internet_not_available">החיבור הנדרש לאינטרנט לצורך ביצוע הפעולה אינו זמין.</string>
+	<string name="internet_not_available">לא ניתן לבצע את הפעולה ללא חיבור לאינטרנט.</string>
 	<string name="install_more">התקנת עוד…</string>
 	<string name="level_to_switch_vector_raster_descr">רמת התקריב המזערית לשימוש במפות וקטוריות.</string>
 	<string name="level_to_switch_vector_raster">תקריב מזערי לווקטורים</string>
@@ -500,7 +500,7 @@
 	
 	
 	
-	<string name="create_poi_link_to_osm_doc">סיווג מפה לפי <u>OSM מקוון</u> עם תמונות.</string><string name="error_doing_search">אירעה שגיאה בחיפוש הבלתי מקוון.</string>
+	<string name="create_poi_link_to_osm_doc">סיווג מפה לפי <u>OSM מקוון</u> עם תמונות.</string><string name="error_doing_search">שגיאה בחיפוש הבלתי מקוון.</string>
 	<string name="search_offline_geo_error">לא ניתן לנתח את הפריט הגאוגרפי ‚%s’.</string>
 	<string name="search_osm_offline">חיפוש כתובת באמצעות המפה הבלתי מקוונת</string>
 	<string name="system_locale">מערכת</string>
@@ -531,10 +531,10 @@
 	<string name="mile">מייל</string>
 	<string name="send_location_way_choose_title">שיתוף המיקום באמצעות</string>
 	<string name="send_location_sms_pattern">מיקום: %1$s\n%2$s</string>
-	<string name="send_location_email_pattern">כדי לצפות במיקום יש לעקוב אחר קישור הדפדפן %1$s או אחר הקישור הייעודי לאנדרויד %2$s</string>
+	<string name="send_location_email_pattern">כדי לצפות במיקום יש לעקוב אחר הקישור %1$s או אחר הקישור הייעודי ל־Android‏ %2$s</string>
 	<string name="send_location">שליחת המיקום</string>
 	<string name="context_menu_item_share_location">שיתוף המיקום</string>
-	<string name="add_waypoint_dialog_added">נקודות הציון „{0}“ נוספה בהצלחה</string>
+	<string name="add_waypoint_dialog_added">נקודת הציון „{0}“ נוספה ל־GPX</string>
 	<string name="add_waypoint_dialog_title">הוספת נקודת ציון לדרך GPX מוקלטת</string>
 	<string name="context_menu_item_add_waypoint">הוספת נקודת ציון ל־GPX</string>
 	<string name="amenity_type_administrative">מנהלית</string>
@@ -1052,7 +1052,7 @@
     <string name="precise_routing_mode">ניתוב מדויק (אלפא)</string>
     <string name="local_indexes_cat_av">נתוני שמע/וידאו</string>
     
-    <string name="support_new_features_descr">ניתן לתרום כדי לגלות תכונות חדשות שהוטמעו ביישום.</string>
+    <string name="support_new_features_descr">ניתן לתרום כדי לגלות תכונות חדשות שהוטמעו ביישומון.</string>
 	
     <string name="download_hillshade_maps">צל מדומה</string>
     
