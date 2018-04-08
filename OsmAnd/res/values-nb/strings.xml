@@ -2818,4 +2818,5 @@
 \n med mer…</string>
     <string name="confirm_usage_speed_cameras">I mange land (Tyskland, Frankrike, Italia og andre) er bruk av fotoboksvarsling ulovlig. OsmAnd påtar seg ikke noe ansvar hvis du bryter loven. Trykk \'Ja\' kun hvis du er berettiget til å bruke denne funksjonen.</string>
     <string name="osmand_net_previously_installed">Alle nettfrakoblede data i det gamle programmet vil bli støttet i det nye, men favorittpunkter må eksporteres fra det gamle programmet og så importeres i det nye.</string>
+    <string name="min_km">min/km</string>
     </resources>
