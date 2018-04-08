@@ -2007,7 +2007,7 @@
     <string name="osn_comment_dialog_title">הוספת הערה</string>
     <string name="osn_reopen_dialog_title">פתיחת הערה מחדש</string>
     <string name="osn_close_dialog_title">סגירת הערה</string>
-    <string name="osn_add_dialog_success">ההערה נוצרה בהצלחה</string>
+    <string name="osn_add_dialog_success">נוצרה הערה</string>
     <string name="osn_add_dialog_error">אירעה שגיאה: ההערה לא נוצרה</string>
     <string name="marker_show_distance_descr">נא לבחור כיצד לציין את המרחק והכיוון לסמני המפה במסך המפה:</string>
     <string name="map_orientation_change_in_accordance_with_speed">סף כיווניות מפה</string>
@@ -2047,7 +2047,7 @@
     <string name="osm_live_subscription_settings">הגדרות מינוי</string>
     <string name="select_map_marker">בחירת סמן מפה</string>
     <string name="upload_anonymously">העלאה אלמונית</string>
-    <string name="osn_close_dialog_success">ההערה נסגרה בהצלחה</string>
+    <string name="osn_close_dialog_success">ההערה נסגרה</string>
     <string name="osn_close_dialog_error">אירעה שגיאה: ההערה לא נסגרה</string>
     <string name="osb_author_dialog_password">ססמה ל־OSM (רשות)</string>
     <string name="shared_string_commit">הגשה</string>
@@ -2693,4 +2693,10 @@
     <string name="min_mile">דק׳/מ׳</string>
     <string name="min_km">דק׳/ק״מ</string>
     <string name="lang_lo">לאו</string>
+    <string name="wikivoyage_search_hint">חיפוש: מדינה, עיר, מחוז</string>
+    <string name="saved_articles">מאמרים שנשמרו</string>
+    <string name="shared_string_explore">סיור</string>
+    <string name="access_disable_offroute_recalc">אין אפשרות לחישוב מסלול מחדש לאחר עזיבת המסלול</string>
+    <string name="access_disable_offroute_recalc_descr">אין אפשרות לחישוב המסלול מחדש לאחר חריגה מהמסלול.</string>
+    <string name="download_files_error_not_enough_space">אין מספיק מקום! שטח האחסון הנדרש הוא {3} מ״ב באופן זמני, {1} מ״ב באופן קבוע. השטח הזמין הוא {2} מ״ב בלבד.</string>
     </resources>
