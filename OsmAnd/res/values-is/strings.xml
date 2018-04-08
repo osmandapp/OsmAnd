@@ -1825,7 +1825,7 @@ Punktar</string>
     <string name="create_poi_link_to_osm_doc"><u>Nettengd OSM</u> kortaflokkun með myndum.</string>
     <string name="poi_filter_namefinder">Nettengd NafnaLeit</string>
     <string name="version_index_is_big_for_memory">Vísirinn \'\'{0}\'\' passaði ekki í minni</string>
-    <string name="osmand_net_previously_installed">Fyrri útgáfa OsmAnd er uppsett. Öll ónettengd gögn verða studd af nýju útgáfunni. Hinsvegar ætti að flytja út eftirlætispunkta í eldri útgáfunni og flytja aftur inn í nýju útgáfunni.</string>
+    <string name="osmand_net_previously_installed">Öll ónettengd gögn verða studd af nýju útgáfunni. Hinsvegar ætti að flytja út eftirlætispunkta út úr eldri útgáfunni og flytja aftur inn í nýju útgáfunni.</string>
     <string name="voice_is_not_available_msg">Engin raddleiðsögn er tiltæk, farðu í \'Stillingar\' → \'Almennt\' → \'Raddleiðsögn\' og veldu eða náðu í pakka með raddskipunum.</string>
     <string name="renderer_load_sucess">Það tókst að hlaða myndgerðarforritinu inn</string>
     <string name="renderer_load_exception">Frávik kom upp: ekki tókst að hlaða myndgerðarforritinu inn</string>
