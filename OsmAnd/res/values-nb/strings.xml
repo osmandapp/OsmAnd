@@ -2601,7 +2601,7 @@
     <string name="mark_passed">Marker som passert</string>
     <string name="osn_modify_dialog_error">Unntak oppstod: Notatet ble ikke endret</string>
     <string name="quick_action_auto_zoom_desc">Trykk på denne handlingsknappen vil slå av/på automatisk kartzoom i henhold til hastigheten din.</string>
-    <string name="quick_action_add_destination_desc">Trykk på denne handlingsknappen vil gjøre skjermsenteret rutemålet, ethvert tidligere valgt mål blir det siste mellomliggende målet.</string>
+    <string name="quick_action_add_destination_desc">Å trykke på denne handlingsknappen vil gjøre skjermsenteret til rutemål, ethvert tidligere valgt mål blir det siste mellomliggende målet.</string>
     <string name="quick_action_replace_destination_desc">Trykk på denne handlingsknappen vil gjøre skjermsenteret det nye rutemålet, og erstatter det tidligere valgte målet (hvis noe).</string>
     <string name="quick_action_add_first_intermediate_desc">Trykk på denne handlingsknappen vil gjøre skjermsenteret til det første mellomliggende målet.</string>
     <string name="subscribe_email_desc">Abonner på vår e-postliste om programrabatter og få tre kartnedlastinger til!</string>
