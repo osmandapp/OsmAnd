@@ -1963,7 +1963,7 @@
     <string name="skip_map_downloading">صرف‌نظر از دانلود نقشه‌ها</string>
     <string name="skip_map_downloading_desc">شما نقشه‌های آفلاین را نصب نکرده‌اید. نقشه‌ای را از لیست انتخاب کنید یا اینکه بعداً از طریق منو ← %1$s، آن را دانلود کنید.</string>
     <string name="search_another_country">منطقهٔ دیگری را انتخاب کنید</string>
-    <string name="search_map">جست‌وجوی نقشه…</string>
+    <string name="search_map">جست‌وجوی نقشه‌ها…</string>
     <string name="first_usage_wizard_desc">اجازه دهید برنامه موقعیت شما را پیدا کند تا نقشهٔ آنجا را دانلود کنید.</string>
     <string name="location_not_found">موقعیت پیدا نشد</string>
     <string name="no_inet_connection">اتصال اینترنت برقرار نیست</string>
@@ -2546,15 +2546,15 @@
     <string name="quick_action_sh_poi_descr">می‌توانید یکی یا چند تا از دسته‌بندی‌های POI را اضافه کنید تا روی نقشه نشان داده شوند.</string>
     <string name="quick_action_empty_param_error">پارامترها نباید خالی باشند</string>
     <string name="quick_action_map_styles">سبک‌های نقشه</string>
-    <string name="quick_action_map_overlay">تغییردادن لایهٔ رویی نقشه</string>
+    <string name="quick_action_map_overlay">تغییر لایهٔ رویی نقشه</string>
     <string name="quick_action_map_overlay_title">لایه‌های رویی نقشه</string>
     <string name="quick_action_map_overlay_action">افزودن لایهٔ رویی</string>
     <string name="quick_action_map_overlay_switch">لایهٔ رویی نقشه به «%s» تغییر کرد.</string>
     <string name="quick_action_map_underlay_switch">لایهٔ زیری نقشه به «%s» تغییر کرد.</string>
-    <string name="quick_action_map_underlay">تغییردادن لایهٔ زیری نقشه</string>
+    <string name="quick_action_map_underlay">تغییر لایهٔ زیری نقشه</string>
     <string name="quick_action_map_underlay_title">لایه‌های زیری نقشه</string>
     <string name="quick_action_map_underlay_action">افزودن لایهٔ زیری</string>
-    <string name="quick_action_map_source">تغییردادن منبع نقشه</string>
+    <string name="quick_action_map_source">تغییر منبع نقشه</string>
     <string name="quick_action_map_source_title">منابع نقشه</string>
     <string name="quick_action_map_source_action">افزودن منبع نقشه</string>
     <string name="quick_action_map_source_switch">منبع نقشه به «%s» تغییر کرد.</string>
@@ -3063,4 +3063,7 @@
     <string name="shared_string_result">نتیجه</string>
     <string name="use_two_digits_longitude">استفاده از طول جغرافیایی دورقمی</string>
     <string name="saved_articles">مقاله‌های ذخیره‌شده</string>
+    <string name="wikivoyage_search_hint">جست‌وجو: کشور، استان، شهرستان</string>
+    <string name="shared_string_read">مطالعه</string>
+    <string name="shared_string_explore">کاوش</string>
     </resources>
