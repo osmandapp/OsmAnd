@@ -3836,4 +3836,27 @@
 <string name="poi_amusement_arcade">Гульнявая зала</string>
 	<string name="poi_adult_gaming_centre">Гульнявы цэнтр для дарослых</string>
 
+<string name="poi_service_car">Аўтасэрвіс</string>
+
+<string name="poi_service_vehicle_car_repair_yes">Аўтамайстэрня</string>
+	<string name="poi_service_vehicle_oil_change_yes">Змена алівы</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Продаж патрыманых аўтамабіляў</string>
+	<string name="poi_service_vehicle_brakes_yes">Тармазы</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Продаж новых аўтамабіляў</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Дыягностыка</string>
+	<string name="poi_service_vehicle_car_parts_yes">Запчасткі</string>
+	<string name="poi_service_vehicle_batteries_yes">Акумулятары</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Кандыцыянеры</string>
+	<string name="poi_service_vehicle_body_repair_yes">Кузаўны рамонт</string>
+	<string name="poi_service_vehicle_electrical_yes">Электрыка</string>
+	<string name="poi_service_vehicle_wheels_yes">Колы</string>
+	<string name="poi_service_vehicle_glass_yes">Шкло</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Рамонт грузавых аўтамабіляў</string>
+	<string name="poi_service_vehicle_muffler_yes">Глушыцель</string>
+	<string name="poi_service_vehicle_alignment_yes">Цэнтроўка</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Рамонт трансмісіі</string>
+	<string name="poi_service_vehicle_motor_yes">Рухавік</string>
+	<string name="poi_service_vehicle_insurance_yes">Страхоўка</string>
+	<string name="poi_service_vehicle_tyres_yes">Шыны</string>
+
 </resources>
