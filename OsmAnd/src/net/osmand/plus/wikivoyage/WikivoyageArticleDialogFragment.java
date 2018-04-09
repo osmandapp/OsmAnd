@@ -57,6 +57,11 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		if (savedInstanceState != null) {
 			selectedLang = savedInstanceState.getString(SELECTED_LANG_KEY);
+		} else {
+			Bundle args = getArguments();
+			if (args != null) {
+				selectedLang = args.getString(SELECTED_LANG_KEY);
+			}
 		}
 
 		final View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container);
@@ -190,10 +195,17 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	}
 
 	public static boolean showInstance(FragmentManager fm, long cityId, ArrayList<String> langs) {
+		return showInstance(fm, cityId, langs, null);
+	}
+
+	public static boolean showInstance(FragmentManager fm, long cityId, ArrayList<String> langs, @Nullable String selectedLang) {
 		try {
 			Bundle args = new Bundle();
 			args.putLong(CITY_ID_KEY, cityId);
 			args.putStringArrayList(LANGS_KEY, langs);
+			if (langs.contains(selectedLang)) {
+				args.putString(SELECTED_LANG_KEY, selectedLang);
+			}
 			WikivoyageArticleDialogFragment fragment = new WikivoyageArticleDialogFragment();
 			fragment.setArguments(args);
 			fragment.show(fm, TAG);
