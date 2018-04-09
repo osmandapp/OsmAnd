@@ -2900,7 +2900,7 @@
     <string name="transport_nearby_routes_within">المسارات القريبة مِن</string>
     <string name="enter_the_file_name">أدخل إسم الملف.</string>
     <string name="map_import_error">خطأ أثناء استرجاع الخريطة</string>
-    <string name="map_imported_successfully">تمت عملية استعادة الخريطة بنجاح</string>
+    <string name="map_imported_successfully">تمت عملية استيراد الخريطة</string>
     <string name="make_as_start_point">تحديد كنقطة البداية</string>
     <string name="show_closed_notes">إظهار الملاحظات المُغلَقة</string>
     <string name="switch_osm_notes_visibility_desc">إظهار/إخفاء ملاحظات OSM على الخريطة.</string>
@@ -2918,4 +2918,11 @@
     <string name="tunnel_warning">على مقربة مِن نفق</string>
     <string name="show_tunnels">الأنفاق</string>
 <string name="wikivoyage_search_hint">البحث : بلد أو مدينة أو منطقة</string>
+    <string name="shared_string_explore">إكتشف</string>
+    <string name="shared_string_result">النتيجة</string>
+    <string name="shared_string_travel">السفر</string>
+    <string name="enter_lon">إدخال خط الطول</string>
+    <string name="enter_lat">إدخال دائرة العرض</string>
+    <string name="transport_nearby_routes">بالقُرب مِن</string>
+    <string name="shared_string_current">الحالي</string>
     </resources>
