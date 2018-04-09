@@ -111,12 +111,8 @@ public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment
 						WikivoyageSearchHistoryItem historyItem = (WikivoyageSearchHistoryItem) item;
 						ArrayList<String> langs = getMyApplication().getWikivoyageDbHelper()
 								.getArticleLangs(historyItem.getCityId());
-						boolean selectedLangExists = langs.remove(historyItem.getLang());
-						if (selectedLangExists) {
-							langs.add(0, historyItem.getLang());
-						}
 						WikivoyageArticleDialogFragment.showInstance(getFragmentManager(),
-								historyItem.getCityId(), langs);
+								historyItem.getCityId(), langs, historyItem.getLang());
 					}
 				}
 			}
