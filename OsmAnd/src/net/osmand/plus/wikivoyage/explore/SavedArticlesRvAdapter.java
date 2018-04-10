@@ -32,7 +32,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	private final Drawable readIcon;
 	private final Drawable deleteIcon;
 
-	public SavedArticlesRvAdapter(OsmandApplication app) {
+	SavedArticlesRvAdapter(OsmandApplication app) {
 		this.app = app;
 		List<WikivoyageArticle> savedArticles = WikivoyageLocalDataHelper.getInstance(app).getSavedArticles();
 		if (!savedArticles.isEmpty()) {

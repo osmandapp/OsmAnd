@@ -157,9 +157,8 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 								 boolean isLastChild, View convertView, ViewGroup parent) {
 			String childText = (String) getChild(groupPosition, childPosition);
 			if (convertView == null) {
-				LayoutInflater infalInflater = (LayoutInflater) this.context
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				convertView = infalInflater.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
+				convertView = LayoutInflater.from(context)
+						.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
 			TextView txtListChild = (TextView) convertView.findViewById(R.id.item_label);
 			txtListChild.setText(childText);
@@ -197,9 +196,8 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 								 View convertView, ViewGroup parent) {
 			String headerTitle = (String) getGroup(groupPosition);
 			if (convertView == null) {
-				LayoutInflater infalInflater = (LayoutInflater) this.context
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				convertView = infalInflater.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
+				convertView = LayoutInflater.from(context)
+						.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
 			TextView lblListHeader = (TextView) convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(headerTitle);
