@@ -25,6 +25,12 @@ public class WikivoyageLocalDataHelper {
 	private TLongObjectHashMap<WikivoyageSearchHistoryItem> historyMap;
 	private List<WikivoyageArticle> savedArticles;
 
+	private Listener listener;
+
+	public void setListener(Listener listener) {
+		this.listener = listener;
+	}
+
 	private WikivoyageLocalDataHelper(OsmandApplication app) {
 		dbHelper = new WikivoyageLocalDataDbHelper(app);
 		historyMap = dbHelper.getAllHistoryMap();
@@ -99,6 +105,7 @@ public class WikivoyageLocalDataHelper {
 			saved.content = article.getPartialContent();
 			savedArticles.add(saved);
 			dbHelper.addSavedArticle(saved);
+			notifySavedUpdated();
 		}
 	}
 
@@ -107,11 +114,18 @@ public class WikivoyageLocalDataHelper {
 		if (savedArticle != null) {
 			savedArticles.remove(savedArticle);
 			dbHelper.removeSavedArticle(savedArticle);
+			notifySavedUpdated();
 		}
 	}
 
 	public boolean isArticleSaved(@NonNull WikivoyageArticle article) {
 		return getArticle(article.cityId, article.lang) != null;
+	}
+
+	private void notifySavedUpdated() {
+		if (listener != null) {
+			listener.savedArticlesUpdated();
+		}
 	}
 
 	@Nullable
@@ -122,6 +136,11 @@ public class WikivoyageLocalDataHelper {
 			}
 		}
 		return null;
+	}
+
+	public interface Listener {
+
+		void savedArticlesUpdated();
 	}
 
 	private static class WikivoyageLocalDataDbHelper {

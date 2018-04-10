@@ -34,11 +34,6 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 	SavedArticlesRvAdapter(OsmandApplication app) {
 		this.app = app;
-		List<WikivoyageArticle> savedArticles = WikivoyageLocalDataHelper.getInstance(app).getSavedArticles();
-		if (!savedArticles.isEmpty()) {
-			items.add(app.getString(R.string.saved_articles));
-			items.addAll(savedArticles);
-		}
 		int colorId = app.getSettings().isLightContent()
 				? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
 		IconsCache ic = app.getIconsCache();
@@ -96,6 +91,16 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		return items.get(position);
 	}
 
+	@NonNull
+	public List<Object> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Object> items) {
+		this.items.clear();
+		this.items.addAll(items);
+	}
+
 	static class HeaderVH extends RecyclerView.ViewHolder {
 
 		final TextView title;
@@ -149,8 +154,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 				public void onClick(View view) {
 					Object item = getItemByPosition();
 					if (item != null && item instanceof WikivoyageArticle) {
-						WikivoyageArticle article = (WikivoyageArticle) item;
-						Toast.makeText(app, "delete: " + article.getTitle(), Toast.LENGTH_SHORT).show();
+						WikivoyageLocalDataHelper.getInstance(app).removeArticleFromSaved((WikivoyageArticle) item);
 					}
 				}
 			});
