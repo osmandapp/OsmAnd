@@ -146,7 +146,8 @@
 	<color name="status_bar_wikivoyage_dark">#101112</color>
 	<color name="status_bar_wikivoyage_article_light">#f2f2f2</color>
 	<color name="status_bar_wikivoyage_article_dark">#222526</color>
-	<color name="bottom_bar_wikivoyage_light">#f5f5f5</color>
+	<color name="bottom_bar_wikivoyage_bg_light">#f5f5f5</color>
+	<color name="bottom_bar_wikivoyage_bg_dark">#222526</color>
 
 
 	<color name="color_transparent">#0000</color>
@@ -394,14 +395,16 @@
 	<color name="wikivoyage_card_bg_light">#ffffff</color>
 	<color name="wikivoyage_card_bg_dark">#222526</color>
 	<color name="wikivoyage_card_divider_light">#f0f0f0</color>
-	<color name="wikivoyage_bottom_bar_divider_light">#e3e3e3</color>
 	<color name="wikivoyage_card_divider_dark">#2d3133</color>
-	<color name="wikivoyage_bottom_bar_divider_dark">#2d3133</color>
 	<color name="wikivoyage_active_light">#237bff</color>
 	<color name="wikivoyage_active_dark">#d28521</color>
 	<color name="wikivoyage_app_bar_light">#f2f2f2</color>
 	<color name="wikivoyage_app_bar_dark">#222526</color>
 	<color name="wikivoyage_app_bar_text_light">#454545</color>
 	<color name="wikivoyage_app_bar_text_dark">#ababab</color>
+	<color name="wikivoyage_contents_icon_dark">#d28521</color>
+	<color name="wikivoyage_contents_icon_light">#536dfe</color>
+	<color name="wikivoyage_bottom_bar_divider_light">#e3e3e3</color>
+	<color name="wikivoyage_bottom_bar_divider_dark">#2d3133</color>
 
 </resources>

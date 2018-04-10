@@ -158,7 +158,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			}
 			TextView txtListChild = (TextView) convertView.findViewById(R.id.item_label);
 			txtListChild.setText(childText);
-			txtListChild.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light));
+			txtListChild.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_contents_icon_dark : R.color.wikivoyage_contents_icon_light));
 			txtListChild.setCompoundDrawablesWithIntrinsicBounds(itemChildIcon, null, null, null);
 
 			return convertView;
@@ -199,7 +199,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			}
 			TextView lblListHeader = (TextView) convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(headerTitle);
-			lblListHeader.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light));
+			lblListHeader.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_contents_icon_dark : R.color.wikivoyage_contents_icon_light));
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 
 			return convertView;
