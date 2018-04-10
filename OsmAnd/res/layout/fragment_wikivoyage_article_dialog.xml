@@ -127,13 +127,13 @@
 				android:paddingLeft="@dimen/bottom_sheet_content_padding_small"
 				android:paddingRight="@dimen/bottom_sheet_content_padding_small"
 				android:paddingTop="@dimen/context_menu_padding_margin_tiny"
-				android:text="@string/shared_string_save"
 				android:textColor="?attr/wikivoyage_active_color"
 				android:textSize="@dimen/default_desc_text_size"
 				osmand:typeface="@string/font_roboto_medium"
 				tools:drawableRight="@drawable/ic_action_read_later_fill"
 				tools:drawableTint="?attr/wikivoyage_active_color"
-				tools:ignore="UnusedAttribute"/>
+				tools:ignore="UnusedAttribute"
+				tools:text="Save"/>
 
 		</LinearLayout>
 

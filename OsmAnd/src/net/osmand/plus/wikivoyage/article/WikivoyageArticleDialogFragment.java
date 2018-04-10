@@ -52,7 +52,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private long cityId = NO_VALUE;
 	private ArrayList<String> langs;
 	private String selectedLang;
-	private String contentsJson;
+	private WikivoyageArticle article;
 
 	private TextView selectedLangTv;
 	private WebView contentWebView;
@@ -99,17 +99,22 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		contentsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				FragmentManager fm = getFragmentManager();
+				if (article == null || fm == null) {
+					return;
+				}
 				Bundle args = new Bundle();
-				args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, contentsJson);
+				args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, article.getContentsJson());
 				WikivoyageArticleContentsFragment fragment = new WikivoyageArticleContentsFragment();
 				fragment.setUsedOnMap(false);
 				fragment.setArguments(args);
 				fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, 0);
-				fragment.show(getFragmentManager(), WikivoyageArticleContentsFragment.TAG);
+				fragment.show(fm, WikivoyageArticleContentsFragment.TAG);
 			}
 		});
 
 		TextView saveBtn = (TextView) mainView.findViewById(R.id.save_button);
+		saveBtn.setText(getString(R.string.shared_string_save));
 		saveBtn.setCompoundDrawablesWithIntrinsicBounds(
 				null, null, getActiveIcon(R.drawable.ic_action_read_later), null
 		);
@@ -183,17 +188,14 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			selectedLang = langs.get(0);
 		}
 
-		selectedLangTv.setText(Algorithms.capitalizeFirstLetter(selectedLang));
-
-		WikivoyageArticle article = getMyApplication().getWikivoyageDbHelper()
-				.getArticle(cityId, selectedLang);
+		article = getMyApplication().getWikivoyageDbHelper().getArticle(cityId, selectedLang);
 		if (article == null) {
 			return;
 		}
 
-		contentsJson = article.getContentsJson();
 		WikivoyageLocalDataHelper.getInstance(getMyApplication()).addToHistory(article);
 
+		selectedLangTv.setText(Algorithms.capitalizeFirstLetter(selectedLang));
 		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(article), "text/html", "UTF-8", null);
 	}
 
