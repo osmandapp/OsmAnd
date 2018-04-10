@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-class ContentsJsonParser {
+public class ContentsJsonParser {
 
 	@Nullable
-	static ContentsContainer parseJsonContents(String contentsJson) {
+	public static ContentsContainer parseJsonContents(String contentsJson) {
 		LinkedHashMap<String, String> map = new LinkedHashMap<>();
 		ArrayList<String> listDataHeader = new ArrayList<>();
 		LinkedHashMap<String, List<String>> listDataChild = new LinkedHashMap<>();
@@ -54,7 +54,7 @@ class ContentsJsonParser {
 		return new ContentsContainer(map, listDataHeader, listDataChild);
 	}
 
-	static class ContentsContainer {
+	public static class ContentsContainer {
 
 		public LinkedHashMap<String, String> map;
 		public ArrayList<String> listDataHeader;

@@ -1,4 +1,4 @@
-package net.osmand.plus.wikivoyage.data;
+package net.osmand.plus.wikivoyage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +21,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.wikivoyage.data.ContentsJsonParser;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -45,7 +46,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		} else {
 			return;
 		}
-		ContentsJsonParser.ContentsContainer contentsContainer = ContentsJsonParser.parseJsonContents(contentsJson, getContext());
+		ContentsJsonParser.ContentsContainer contentsContainer = ContentsJsonParser.parseJsonContents(contentsJson);
 		if (contentsContainer == null) {
 			return;
 		}
@@ -69,7 +70,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
-			                            int groupPosition, int childPosition, long id) {
+										int groupPosition, int childPosition, long id) {
 				link = map.get(listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition));
 				sendResult(0);
 				dismiss();
@@ -126,7 +127,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		private Drawable itemChildIcon;
 
 		public ExpandableListAdapter(Context context, List<String> listDataHeader,
-		                             LinkedHashMap<String, List<String>> listChildData) {
+									 LinkedHashMap<String, List<String>> listChildData) {
 			this.context = context;
 			this.listDataHeader = listDataHeader;
 			this.listDataChild = listChildData;
@@ -149,7 +150,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 		@Override
 		public View getChildView(int groupPosition, final int childPosition,
-		                         boolean isLastChild, View convertView, ViewGroup parent) {
+								 boolean isLastChild, View convertView, ViewGroup parent) {
 			String childText = (String) getChild(groupPosition, childPosition);
 			if (convertView == null) {
 				LayoutInflater infalInflater = (LayoutInflater) this.context
@@ -190,7 +191,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 		@Override
 		public View getGroupView(int groupPosition, boolean isExpanded,
-		                         View convertView, ViewGroup parent) {
+								 View convertView, ViewGroup parent) {
 			String headerTitle = (String) getGroup(groupPosition);
 			if (convertView == null) {
 				LayoutInflater infalInflater = (LayoutInflater) this.context

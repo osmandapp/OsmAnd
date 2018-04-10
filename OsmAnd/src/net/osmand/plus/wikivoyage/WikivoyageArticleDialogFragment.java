@@ -24,7 +24,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
-import net.osmand.plus.wikivoyage.data.WikivoyageArticleContentsFragment;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.util.Algorithms;
 
