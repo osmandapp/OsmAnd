@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
@@ -22,7 +23,6 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
-import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticleContentsFragment;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
@@ -57,6 +57,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private TextView selectedLangTv;
 	private WebView contentWebView;
 
+	@SuppressLint("SetJavaScriptEnabled")
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				selectedLang = args.getString(SELECTED_LANG_KEY);
 			}
 		}
+
 		final View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container);
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
@@ -90,30 +92,30 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			}
 		});
 
-		TextViewEx contentsButton = (TextViewEx) mainView.findViewById(R.id.contents_button);
-		TextViewEx saveButton = (TextViewEx) mainView.findViewById(R.id.save_button);
-
-		saveButton.setCompoundDrawablesWithIntrinsicBounds(
-				null, null, getActiveIcon(R.drawable.ic_action_read_later), null);
-
-		contentsButton.setCompoundDrawablesWithIntrinsicBounds(
-				getActiveIcon(R.drawable.ic_action_list_header), null, null, null);
-
-		contentsButton.setOnClickListener(new View.OnClickListener() {
+		TextView contentsBtn = (TextView) mainView.findViewById(R.id.contents_button);
+		contentsBtn.setCompoundDrawablesWithIntrinsicBounds(
+				getActiveIcon(R.drawable.ic_action_list_header), null, null, null
+		);
+		contentsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentManager fm = getActivity().getSupportFragmentManager();
 				Bundle args = new Bundle();
 				args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, contentsJson);
 				WikivoyageArticleContentsFragment fragment = new WikivoyageArticleContentsFragment();
 				fragment.setUsedOnMap(false);
 				fragment.setArguments(args);
 				fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, 0);
-				fragment.show(fm, WikivoyageArticleContentsFragment.TAG);
+				fragment.show(getChildFragmentManager(), WikivoyageArticleContentsFragment.TAG);
 			}
 		});
 
+		TextView saveBtn = (TextView) mainView.findViewById(R.id.save_button);
+		saveBtn.setCompoundDrawablesWithIntrinsicBounds(
+				null, null, getActiveIcon(R.drawable.ic_action_read_later), null
+		);
+
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
+		contentWebView.getSettings().setJavaScriptEnabled(true);
 
 		return mainView;
 	}
@@ -188,14 +190,14 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		if (article == null) {
 			return;
 		}
+
 		contentsJson = article.getContentsJson();
 		WikivoyageLocalDataHelper.getInstance(getMyApplication()).addToHistory(article);
 
-		contentWebView.getSettings().setJavaScriptEnabled(true);
 		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(article), "text/html", "UTF-8", null);
 	}
 
-	public void moveToAnchor(String id) {
+	private void moveToAnchor(String id) {
 		contentWebView.loadUrl("javascript:scrollAnchor(\"" + id + "\")");
 	}
 
