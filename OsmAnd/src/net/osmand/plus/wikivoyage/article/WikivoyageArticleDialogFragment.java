@@ -1,4 +1,4 @@
-package net.osmand.plus.wikivoyage;
+package net.osmand.plus.wikivoyage.article;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -23,6 +23,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
+import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.util.Algorithms;

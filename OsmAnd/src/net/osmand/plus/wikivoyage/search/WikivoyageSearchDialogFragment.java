@@ -19,7 +19,7 @@ import android.widget.ProgressBar;
 
 import net.osmand.ResultMatcher;
 import net.osmand.plus.R;
-import net.osmand.plus.wikivoyage.WikivoyageArticleDialogFragment;
+import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchHistoryItem;
