@@ -146,6 +146,7 @@
 	<color name="status_bar_wikivoyage_dark">#101112</color>
 	<color name="status_bar_wikivoyage_article_light">#f2f2f2</color>
 	<color name="status_bar_wikivoyage_article_dark">#222526</color>
+	<color name="bottom_bar_wikivoyage_article_light">#f5f5f5</color>
 
 
 	<color name="color_transparent">#0000</color>

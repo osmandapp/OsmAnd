@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -93,7 +92,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 		final View buttonBar = mainView.findViewById(R.id.bottom_bar);
 
-		buttonBar.setBackgroundColor(getResolvedColor(nightMode ? R.color.status_bar_wikivoyage_article_dark : R.color.ctx_menu_card_btn_light));
+		buttonBar.setBackgroundColor(getResolvedColor(nightMode ? R.color.status_bar_wikivoyage_article_dark : R.color.bottom_bar_wikivoyage_article_light));
 
 		TextViewEx contentsButton = (TextViewEx) mainView.findViewById(R.id.contents_button);
 		TextViewEx saveButton = (TextViewEx) mainView.findViewById(R.id.save_button);
