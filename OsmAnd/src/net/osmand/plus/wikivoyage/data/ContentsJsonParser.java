@@ -1,6 +1,6 @@
 package net.osmand.plus.wikivoyage.data;
 
-import android.content.Context;
+import android.support.annotation.Nullable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-
 class ContentsJsonParser {
 
-	 static ContentsContainer parseJsonContents(String contentsJson, Context context) {
-		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
-		ArrayList<String> listDataHeader = new ArrayList<String>();
-		LinkedHashMap<String, List<String>> listDataChild = new LinkedHashMap<String, List<String>>();
+	@Nullable
+	static ContentsContainer parseJsonContents(String contentsJson) {
+		LinkedHashMap<String, String> map = new LinkedHashMap<>();
+		ArrayList<String> listDataHeader = new ArrayList<>();
+		LinkedHashMap<String, List<String>> listDataChild = new LinkedHashMap<>();
 
-		JSONObject reader = null;
+		JSONObject reader;
 		try {
 			reader = new JSONObject(contentsJson);
 		} catch (JSONException e) {
@@ -38,11 +38,11 @@ class ContentsJsonParser {
 
 				if (level == 2) {
 					listDataHeader.add(reader.names().getString(i));
-					secondLevel = new ArrayList<String>();
+					secondLevel = new ArrayList<>();
 				}
 				if (level == 3) {
 					if (secondLevel == null) {
-						secondLevel = new ArrayList<String>();
+						secondLevel = new ArrayList<>();
 					}
 					secondLevel.add(reader.names().getString(i));
 					listDataChild.put(listDataHeader.get(listDataHeader.size() - 1), secondLevel);
@@ -60,12 +60,12 @@ class ContentsJsonParser {
 		public ArrayList<String> listDataHeader;
 		public LinkedHashMap<String, List<String>> listDataChild;
 
-		public ContentsContainer(LinkedHashMap<String, String> map, ArrayList<String> listDataHeader,
-		                         LinkedHashMap<String, List<String>> listChildData) {
+		ContentsContainer(LinkedHashMap<String, String> map,
+						  ArrayList<String> listDataHeader,
+						  LinkedHashMap<String, List<String>> listChildData) {
 			this.map = map;
 			this.listDataHeader = listDataHeader;
 			this.listDataChild = listChildData;
 		}
-
 	}
 }
