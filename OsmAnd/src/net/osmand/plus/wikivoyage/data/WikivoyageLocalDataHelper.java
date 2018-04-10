@@ -83,6 +83,7 @@ public class WikivoyageLocalDataHelper {
 		}
 	}
 
+	@NonNull
 	public List<WikivoyageArticle> getSavedArticles() {
 		return new ArrayList<>(savedArticles);
 	}
