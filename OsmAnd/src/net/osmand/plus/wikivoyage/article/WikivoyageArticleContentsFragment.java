@@ -47,6 +47,10 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		}
 
 		String contentsJson = args.getString(CONTENTS_JSON_KEY);
+		if (contentsJson == null) {
+			return;
+		}
+
 		ContentsContainer contentsContainer = ContentsJsonParser.parseJsonContents(contentsJson);
 		if (contentsContainer == null) {
 			return;
