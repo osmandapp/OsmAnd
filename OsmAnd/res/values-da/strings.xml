@@ -3063,4 +3063,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_travel">Rejse</string>
     <string name="shared_string_result">Resultat</string>
     <string name="use_two_digits_longitude">Brug tocifret længdegrad</string>
+    <string name="wikivoyage_search_hint">Søg: land, by, region</string>
+    <string name="shared_string_read">Læs</string>
+    <string name="saved_articles">Gemte artikler</string>
+    <string name="shared_string_explore">Udforsk</string>
     </resources>

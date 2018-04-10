@@ -2294,7 +2294,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="quick_action_add_favorite">Aldoni ŝatatan ejon</string>
     <string name="dialog_add_action_title">Aldoni agon</string>
     <string name="quick_actions_delete">Forigi agon</string>
-    <string name="quick_actions_delete_text">Ĉu vi certe volas forigi agon \"%s\"?</string>
+    <string name="quick_actions_delete_text">Ĉu vi certe volas forigi la agon “%s”?</string>
     <string name="quick_favorites_show_favorites_dialog">Montri fenestron de ŝatataj ejoj</string>
     <string name="quick_favorites_name_preset">Nomo</string>
     <string name="quick_action_add_marker_descr">Frapetu tiun ĉi ag-butonon por aldoni map-markon al la ekrana centro.</string>
@@ -2932,4 +2932,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="waypoints_removed_from_map_markers">Forigis navigadpunktojn el map-markoj</string>
     <string name="use_two_digits_longitude">Uzi du ciferojn da longitudo</string>
     <string name="shared_string_result">Rezulto</string>
+    <string name="wikivoyage_search_hint">Serĉi landon, provincon, urbon</string>
+    <string name="shared_string_read">Legi</string>
+    <string name="saved_articles">Konservitaj artikoloj</string>
+    <string name="shared_string_explore">Esplori</string>
     </resources>

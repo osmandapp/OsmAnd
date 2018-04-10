@@ -3879,4 +3879,16 @@
 <string name="poi_amusement_arcade">Spillehal</string>
 	<string name="poi_adult_gaming_centre">Spillecenter for voksne</string>
 
+<string name="poi_service_car">Bilservice</string>
+
+<string name="poi_service_vehicle_oil_change_yes">Olieskift</string>
+	<string name="poi_service_vehicle_brakes_yes">Bremser</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnosticering</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Aircondition</string>
+	<string name="poi_service_vehicle_wheels_yes">Hjul</string>
+	<string name="poi_service_vehicle_glass_yes">glas</string>
+	<string name="poi_service_vehicle_motor_yes">Motor</string>
+	<string name="poi_service_vehicle_insurance_yes">Forsikring</string>
+	<string name="poi_service_vehicle_tyres_yes">Dæk</string>
+
 </resources>

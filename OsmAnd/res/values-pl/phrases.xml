@@ -3775,4 +3775,26 @@
 	<string name="poi_amusement_arcade">Salon gier</string>
 	<string name="poi_adult_gaming_centre">Salon gier hazardowych</string>
 
+<string name="poi_service_car">Serwis samochodowy</string>
+
+<string name="poi_service_vehicle_car_repair_yes">Naprawa samochodów</string>
+	<string name="poi_service_vehicle_oil_change_yes">Wymiana oleju</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Sprzedaż używanych samochodów</string>
+	<string name="poi_service_vehicle_brakes_yes">Hamulce</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Sprzedaż nowych samochodów</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnostyka</string>
+	<string name="poi_service_vehicle_car_parts_yes">Części samochodowe</string>
+	<string name="poi_service_vehicle_batteries_yes">Akumulatory</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Klimatyzacja</string>
+	<string name="poi_service_vehicle_body_repair_yes">Naprawa nadwozia</string>
+	<string name="poi_service_vehicle_electrical_yes">Pojazdy elektryczne</string>
+	<string name="poi_service_vehicle_wheels_yes">Koła</string>
+	<string name="poi_service_vehicle_glass_yes">Szyby</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Naprawa ciężarówek</string>
+	<string name="poi_service_vehicle_muffler_yes">Tłumik</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Naprawa skrzyni biegów</string>
+	<string name="poi_service_vehicle_motor_yes">Silnik</string>
+	<string name="poi_service_vehicle_insurance_yes">Ubezpieczenia</string>
+	<string name="poi_service_vehicle_tyres_yes">Opony</string>
+
 </resources>

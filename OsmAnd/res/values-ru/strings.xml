@@ -2869,4 +2869,5 @@
     <string name="select_waypoints_category_description">Вы можете добавить все путевые точки трека, или выбрать отдельные категории.</string>
     <string name="shared_string_total">Всего</string>
     <string name="shared_string_result">Результат</string>
+    <string name="wikivoyage_search_hint">Поиск: страна, город, провинция</string>
     </resources>

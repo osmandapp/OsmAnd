@@ -2071,34 +2071,32 @@
     <string name="rendering_attr_noAdminboundaries_description">Undertrykk visning av regionale grenser (administrasjonsnivåer 5-9).</string>
     <string name="close_changeset">Lukk endringssett</string>
     <string name="zxing_barcode_scanner_not_found">Programmet ZXing strekkodeskanner er ikke installert. Vil du søke på Google Play?</string>
-    <string name="release_2_5">"• Klikkbare ikoner på kartet
-\n
-\n • Kraftig POI-filtersøk: Søk f.eks etter restauranter etter type kjøkken, eller campingsteder med gitte tjenestetilbud
-\n
-\n • Nytt topologisk kart for syklister og turgåere
-\n
-\n • Forbedret opptak av turer
-\n
-\n • Forbedrede navigasjonsmerknader (Android Wear)
-\n
+    <string name="release_2_5">• Klikkbare ikoner på kartet 
+\n 
+\n • Kraftig POI-filtersøk: Søk f.eks etter restauranter etter type kjøkken, eller campingsteder med gitte tjenestetilbud 
+\n 
+\n • Nytt topologisk kart for syklister og turgåere 
+\n 
+\n • Forbedret opptak av turer 
+\n 
+\n • Forbedrede navigasjonsmerknader (Android Wear) 
+\n 
+\n • Mange andre forbedringer og feilrettinger 
+\n 
+\n med mer…</string>
+    <string name="release_2_4">•\\022 Nytt og veldig kraftig fritekstsøk 
+\n 
+\n • Lydsystem i bil / høytalertelefonintegrasjon via Blåtann 
+\n 
+\n • Forbedret veivisning, stemmehjelp og filanvisning 
+\n 
+\n • Forbedret transportlag med rutetegning
+\n 
+\n • Flere lokaler er lagt til, og det er nå støtte for regionale språk 
+\n 
 \n • Mange andre forbedringer og feilrettinger
-\n
-\n med mer…
-\n "</string>
-    <string name="release_2_4">"•\\022 Nytt og veldig kraftig fritekstsøk
-\n
-\n • Lydsystem i bil / høytalertelefonintegrasjon via Blåtann
-\n
-\n • Forbedret veivisning, stemmehjelp og filanvisning
-\n
-\n • Improved transport layer with route rendering
-\n
-\n • Added more locales and now support regional locales
-\n
-\n • Many other improvements and bug fixes
-\n
-\n and more…
-\n "</string>
+\n 
+\n med mer…</string>
     
     <string name="lang_bpy">Bishnupriya manipuri</string>
     <string name="lang_new">Nepal bhasa</string>
@@ -2603,7 +2601,7 @@
     <string name="mark_passed">Marker som passert</string>
     <string name="osn_modify_dialog_error">Unntak oppstod: Notatet ble ikke endret</string>
     <string name="quick_action_auto_zoom_desc">Trykk på denne handlingsknappen vil slå av/på automatisk kartzoom i henhold til hastigheten din.</string>
-    <string name="quick_action_add_destination_desc">Trykk på denne handlingsknappen vil gjøre skjermsenteret rutemålet, ethvert tidligere valgt mål blir det siste mellomliggende målet.</string>
+    <string name="quick_action_add_destination_desc">Å trykke på denne handlingsknappen vil gjøre skjermsenteret til rutemål, ethvert tidligere valgt mål blir det siste mellomliggende målet.</string>
     <string name="quick_action_replace_destination_desc">Trykk på denne handlingsknappen vil gjøre skjermsenteret det nye rutemålet, og erstatter det tidligere valgte målet (hvis noe).</string>
     <string name="quick_action_add_first_intermediate_desc">Trykk på denne handlingsknappen vil gjøre skjermsenteret til det første mellomliggende målet.</string>
     <string name="subscribe_email_desc">Abonner på vår e-postliste om programrabatter og få tre kartnedlastinger til!</string>
@@ -2793,4 +2791,32 @@
     <string name="mile_per_hour">mph</string>
     <string name="mile">mi</string>
     <string name="shared_string_result">Resultat</string>
+    <string name="wikivoyage_search_hint">Søk: Land, By, Region</string>
+    <string name="shared_string_read">Les</string>
+    <string name="saved_articles">Lagrede artikler</string>
+    <string name="shared_string_explore">Utforsk</string>
+    <string name="release_2_6">\\022 Ny funksjon: Hurtighandlingsknapp
+\n
+\n • Forbedret respons på pekeskjermsgester (f.eks. sammenhengende dragning og forstørrelse)
+\n
+\n • Nye kartskrifter som har støtte i flere lokaler
+\n
+\n • Støtte for TTT (TTS) for lokale språkvarianter (og dialekter)
+\n
+\n • Synlighetsforedringer i flere kartstiler og for Wikipedia
+\n
+\n • Støtte for Åpen Plasseringskode (OLC)
+\n
+\n • Vis høyde, variasjon, og hastighetsprofil for innsamlet GPX-spor og kalkulerte ruter
+\n
+\n • \"Kjørestil\"-innstilling og logiske forbedringer for sykkelveivising
+\n
+\n • Høydedatainnstillinger for sykkelveivising
+\n
+\n • Flere andre forbedringer og andre rettede feil
+\n
+\n med mer…</string>
+    <string name="confirm_usage_speed_cameras">I mange land (Tyskland, Frankrike, Italia og andre) er bruk av fotoboksvarsling ulovlig. OsmAnd påtar seg ikke noe ansvar hvis du bryter loven. Trykk \'Ja\' kun hvis du er berettiget til å bruke denne funksjonen.</string>
+    <string name="osmand_net_previously_installed">Alle nettfrakoblede data i det gamle programmet vil bli støttet i det nye, men favorittpunkter må eksporteres fra det gamle programmet og så importeres i det nye.</string>
+    <string name="min_km">min/km</string>
     </resources>

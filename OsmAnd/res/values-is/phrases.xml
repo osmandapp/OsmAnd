@@ -3785,7 +3785,7 @@
 <string name="poi_service_vehicle_car_repair_yes">Bílaviðgerðir</string>
 	<string name="poi_service_vehicle_oil_change_yes">Olíuskipti</string>
 	<string name="poi_service_vehicle_used_car_sales_yes">Sala á notuðum bílum</string>
-	<string name="poi_service_vehicle_brakes_yes">Bremsur</string>
+	<string name="poi_service_vehicle_brakes_yes">Hemlaviðgerðir</string>
 	<string name="poi_service_vehicle_new_car_sales_yes">Sala á nýjum bílum</string>
 	<string name="poi_service_vehicle_diagnostics_yes">Bilanagreining</string>
 	<string name="poi_service_vehicle_car_parts_yes">Bílavarahlutir</string>
@@ -3793,13 +3793,13 @@
 	<string name="poi_service_vehicle_air_conditioning_yes">Loftkæling</string>
 	<string name="poi_service_vehicle_body_repair_yes">Boddýviðgerðir</string>
 	<string name="poi_service_vehicle_electrical_yes">Rafkerfi</string>
-	<string name="poi_service_vehicle_wheels_yes">Hjólbarðar</string>
-	<string name="poi_service_vehicle_glass_yes">Gler</string>
+	<string name="poi_service_vehicle_wheels_yes">Hjólastillingar</string>
+	<string name="poi_service_vehicle_glass_yes">Glerviðgerðir</string>
 	<string name="poi_service_vehicle_truck_repair_yes">Vörubílaviðgerðir</string>
 	<string name="poi_service_vehicle_muffler_yes">Hljóðkútar</string>
 	<string name="poi_service_vehicle_alignment_yes">Jafnvægisstillingar</string>
 	<string name="poi_service_vehicle_transmission_repair_yes">Gírkassaviðgerðir</string>
-	<string name="poi_service_vehicle_motor_yes">Vélarviðgerðir</string>
+	<string name="poi_service_vehicle_motor_yes">Vélaviðgerðir</string>
 	<string name="poi_service_vehicle_insurance_yes">Tryggingar</string>
 	<string name="poi_service_vehicle_tyres_yes">Hjólbarðar</string>
 

@@ -2936,4 +2936,12 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="quick_action_showhide_poi_descr">Knackning på åtgärdsknappen visar eller döljer Intressepunkter på kartan.</string>
     <string name="quick_action_fav_name_descr">Lämna tomt för att automatiskt använda adressen eller platsens namn.</string>
     <string name="show_tunnels">Tunnlar</string>
-</resources>
+<string name="wikivoyage_search_hint">Sök: Land, Stad, Region</string>
+    <string name="shared_string_read">Läs</string>
+    <string name="saved_articles">Sparade artiklar</string>
+    <string name="shared_string_explore">Utforska</string>
+    <string name="shared_string_result">Resultat</string>
+    <string name="use_two_digits_longitude">Använd två siffror longitud</string>
+    <string name="shared_string_travel">Resor</string>
+    <string name="waypoints_removed_from_map_markers">Waypoints tas bort från kartmarkörer</string>
+    </resources>
