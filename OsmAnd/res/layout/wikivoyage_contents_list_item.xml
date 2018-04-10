@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bottom_sheet_list_item_height"
+    android:background="?attr/expandable_list_item_background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/item_label"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/bottom_sheet_list_item_height"
+        android:layout_gravity="center_vertical"
+        android:drawablePadding="@dimen/showAllButtonMarginRight"
+        android:gravity="center"
+        android:paddingLeft="@dimen/showAllButtonMarginRight"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/default_list_text_size"
+        tools:drawableStart="@drawable/ic_action_list_sort"
+        tools:text="@string/shared_string_contents"
+        tools:textStyle="bold" />
+
+</LinearLayout>

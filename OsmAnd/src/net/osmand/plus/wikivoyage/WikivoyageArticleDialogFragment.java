@@ -1,5 +1,7 @@
 package net.osmand.plus.wikivoyage;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -42,16 +44,19 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
 			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
 			"<link href=\"article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
-			"</head><body>\n";
+			"</head><body>\n" + "<script>" + "function scrollAnchor(id) {" +
+			"window.location.hash = id;}</script>";
 	private static final String FOOTER_INNER = "</div></body></html>";
 
 	private long cityId = NO_VALUE;
 	private ArrayList<String> langs;
 	private String selectedLang;
+	private String contentsJson;
 
 	private TextView selectedLangTv;
 	private WebView contentWebView;
 
+	@SuppressLint("SetJavaScriptEnabled")
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -86,7 +91,30 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			}
 		});
 
+		TextView contentsBtn = (TextView) mainView.findViewById(R.id.contents_button);
+		contentsBtn.setCompoundDrawablesWithIntrinsicBounds(
+				getActiveIcon(R.drawable.ic_action_list_header), null, null, null
+		);
+		contentsBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Bundle args = new Bundle();
+				args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, contentsJson);
+				WikivoyageArticleContentsFragment fragment = new WikivoyageArticleContentsFragment();
+				fragment.setUsedOnMap(false);
+				fragment.setArguments(args);
+				fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, 0);
+				fragment.show(getFragmentManager(), WikivoyageArticleContentsFragment.TAG);
+			}
+		});
+
+		TextView saveBtn = (TextView) mainView.findViewById(R.id.save_button);
+		saveBtn.setCompoundDrawablesWithIntrinsicBounds(
+				null, null, getActiveIcon(R.drawable.ic_action_read_later), null
+		);
+
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
+		contentWebView.getSettings().setJavaScriptEnabled(true);
 
 		return mainView;
 	}
@@ -100,6 +128,15 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(SELECTED_LANG_KEY, selectedLang);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == WikivoyageArticleContentsFragment.REQUEST_LINK_CODE) {
+			String link = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENTS_LINK_KEY);
+			moveToAnchor(link);
+		}
 	}
 
 	@Override
@@ -153,9 +190,14 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			return;
 		}
 
+		contentsJson = article.getContentsJson();
 		WikivoyageLocalDataHelper.getInstance(getMyApplication()).addToHistory(article);
 
 		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(article), "text/html", "UTF-8", null);
+	}
+
+	private void moveToAnchor(String id) {
+		contentWebView.loadUrl("javascript:scrollAnchor(\"" + id + "\")");
 	}
 
 	@NonNull

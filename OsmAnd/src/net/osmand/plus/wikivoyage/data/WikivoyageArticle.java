@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.Size;
 import android.text.Html;
+import android.text.TextUtils;
 
 import net.osmand.plus.GPXUtilities.GPXFile;
 
@@ -98,19 +99,38 @@ public class WikivoyageArticle {
 
 		// 4 is the length of </p> tag
 		String firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + 4);
-		String firstParagraphText = Html.fromHtml(firstParagraphHtml).toString();
+		String firstParagraphText = Html.fromHtml(firstParagraphHtml).toString().trim();
 		String[] phrases = firstParagraphText.split("\\. ");
 
 		StringBuilder res = new StringBuilder();
 		int limit = Math.min(phrases.length, PARTIAL_CONTENT_PHRASES);
 		for (int i = 0; i < limit; i++) {
-			res.append(phrases[i]).append(".");
+			res.append(phrases[i]);
 			if (i < limit - 1) {
-				res.append(" ");
+				res.append(". ");
 			}
 		}
 
 		return res.toString();
+	}
+
+	@Nullable
+	public String getGeoDescription() {
+		if (TextUtils.isEmpty(aggregatedPartOf)) {
+			return null;
+		}
+
+		String[] parts = aggregatedPartOf.split(",");
+		if (parts.length > 0) {
+			StringBuilder res = new StringBuilder();
+			res.append(parts[parts.length - 1]);
+			if (parts.length > 1) {
+				res.append(" \u2022 ").append(parts[0]);
+			}
+			return res.toString();
+		}
+
+		return null;
 	}
 
 	@NonNull
