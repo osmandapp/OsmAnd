@@ -2,8 +2,10 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +26,12 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "WikivoyageArticleContentsBottomSheetDialogFragment";
-	public final static String CONTENTS_JSON = "contents_json";
-	public final static String CONTENTS_LINK = "contents_link";
-
+	public final static String TAG = "WikivoyageArticleContentsFragment";
+	public final static String CONTENTS_JSON_KEY = "contents_json";
+	public final static String CONTENTS_LINK_KEY = "contents_link";
+	public final static int REQUEST_LINK_CODE = 0;
 
 	private LinkedHashMap<String, String> map;
 	private String link;
@@ -39,7 +41,7 @@ public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBott
 		Bundle args = getArguments();
 		String contentsJson;
 		if (args != null) {
-			contentsJson = args.getString(CONTENTS_JSON);
+			contentsJson = args.getString(CONTENTS_JSON_KEY);
 		} else {
 			return;
 		}
@@ -58,8 +60,7 @@ public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBott
 		ExpandableListAdapter listAdapter = new ExpandableListAdapter(getContext(), listDataHeader, listDataChild);
 
 		expListView.setAdapter(listAdapter);
-		expListView.setChildDivider(getResources().getDrawable(R.color.color_transparent));
-
+		expListView.setChildDivider(ContextCompat.getDrawable(getContext(), R.color.color_transparent));
 		expListView.setLayoutParams(new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.MATCH_PARENT));
@@ -101,13 +102,13 @@ public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBott
 		items.add(favoritesItem);
 	}
 
-	private void sendResult(int REQUEST_CODE) {
+	private void sendResult(int requestLinkCode) {
 		Intent intent = new Intent();
-		intent.putExtra(CONTENTS_LINK, link);
+		intent.putExtra(CONTENTS_LINK_KEY, link);
 		Fragment fragment = getTargetFragment();
 		if (fragment != null) {
 			fragment.onActivityResult(
-					getTargetRequestCode(), REQUEST_CODE, intent);
+					getTargetRequestCode(), requestLinkCode, intent);
 		}
 	}
 
@@ -121,12 +122,19 @@ public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBott
 		private Context context;
 		private List<String> listDataHeader;
 		private LinkedHashMap<String, List<String>> listDataChild;
+		private Drawable itemGroupIcon;
+		private Drawable itemChildIcon;
 
 		public ExpandableListAdapter(Context context, List<String> listDataHeader,
 		                             LinkedHashMap<String, List<String>> listChildData) {
 			this.context = context;
 			this.listDataHeader = listDataHeader;
 			this.listDataChild = listChildData;
+
+			itemGroupIcon = getIcon(R.drawable.ic_action_contents,
+					isNightMode() ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light);
+			itemChildIcon = getIcon(R.drawable.ic_action_list_bullet,
+					isNightMode() ? R.color.route_info_unchecked_mode_icon_color : R.color.ctx_menu_nearby_routes_text_color_dark);
 		}
 
 		@Override
@@ -151,9 +159,7 @@ public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBott
 			TextView txtListChild = (TextView) convertView.findViewById(R.id.item_label);
 			txtListChild.setText(childText);
 			txtListChild.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light));
-			txtListChild.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_list_bullet,
-					isNightMode() ? R.color.route_info_unchecked_mode_icon_color : R.color.ctx_menu_nearby_routes_text_color_dark),
-					null, null, null);
+			txtListChild.setCompoundDrawablesWithIntrinsicBounds(itemChildIcon, null, null, null);
 
 			return convertView;
 		}
@@ -194,9 +200,7 @@ public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBott
 			TextView lblListHeader = (TextView) convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(headerTitle);
 			lblListHeader.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light));
-			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_contents,
-					isNightMode() ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light),
-					null, null, null);
+			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 
 			return convertView;
 		}
