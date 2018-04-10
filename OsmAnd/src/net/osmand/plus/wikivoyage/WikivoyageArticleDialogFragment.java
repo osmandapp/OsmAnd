@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -56,7 +57,6 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 	private TextView selectedLangTv;
 	private WebView contentWebView;
-	private WikivoyageArticleDialogFragment thiss;
 
 	@Nullable
 	@Override
@@ -69,7 +69,6 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				selectedLang = args.getString(SELECTED_LANG_KEY);
 			}
 		}
-		thiss = this;
 		final View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container);
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
@@ -92,20 +91,19 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			}
 		});
 
-		final View buttomBar = mainView.findViewById(R.id.bottom_bar);
+		final View buttonBar = mainView.findViewById(R.id.bottom_bar);
 
-		buttomBar.setBackgroundColor(getResolvedColor(isNightMode(false) ? R.color.status_bar_wikivoyage_article_dark : R.color.ctx_menu_card_btn_light));
+		buttonBar.setBackgroundColor(getResolvedColor(nightMode ? R.color.status_bar_wikivoyage_article_dark : R.color.ctx_menu_card_btn_light));
 
-		TextViewEx contentsButton = mainView.findViewById(R.id.contents_button);
-		TextViewEx saveButton = (TextViewEx) mainView.findViewById(R.id.save_text_button);
+		TextViewEx contentsButton = (TextViewEx) mainView.findViewById(R.id.contents_button);
+		TextViewEx saveButton = (TextViewEx) mainView.findViewById(R.id.save_button);
 
 		saveButton.setCompoundDrawablesWithIntrinsicBounds(null,
-				null, getMyApplication().getIconsCache()
-						.getIcon(R.drawable.ic_action_read_later, isNightMode(false) ?
-								R.color.wikivoyage_active_dark : R.color.ctx_menu_bottom_buttons_text_color_light), null);
+				null, getIcon(R.drawable.ic_action_read_later, nightMode ?
+						R.color.wikivoyage_active_dark : R.color.ctx_menu_bottom_buttons_text_color_light), null);
 
 		contentsButton.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_list_header,
-				isNightMode(false) ? R.color.wikivoyage_active_dark : R.color.ctx_menu_bottom_buttons_text_color_light),
+				nightMode ? R.color.wikivoyage_active_dark : R.color.ctx_menu_bottom_buttons_text_color_light),
 				null, null, null);
 
 		contentsButton.setOnClickListener(new View.OnClickListener() {
@@ -113,11 +111,11 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			public void onClick(View v) {
 				FragmentManager fm = getActivity().getSupportFragmentManager();
 				Bundle args = new Bundle();
-				args.putString("CONTENTS_JSON", contentsJson);
+				args.putString(WikivoyageArticleContentsBottomSheetDialogFragment.CONTENTS_JSON, contentsJson);
 				WikivoyageArticleContentsBottomSheetDialogFragment fragment = new WikivoyageArticleContentsBottomSheetDialogFragment();
 				fragment.setUsedOnMap(false);
 				fragment.setArguments(args);
-				fragment.setTargetFragment(thiss, 0);
+				fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, 0);
 				fragment.show(fm, WikivoyageArticleContentsBottomSheetDialogFragment.TAG);
 			}
 		});
@@ -142,7 +140,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == 0) {
-			String link = data.getStringExtra("test");
+			String link = data.getStringExtra(WikivoyageArticleContentsBottomSheetDialogFragment.CONTENTS_LINK);
 			moveAnchor(link);
 		}
 	}

@@ -3,26 +3,22 @@ package net.osmand.plus.wikivoyage.data;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import net.osmand.plus.OsmandApplication;
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -31,64 +27,43 @@ import java.util.List;
 public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public final static String TAG = "WikivoyageArticleContentsBottomSheetDialogFragment";
+	public final static String CONTENTS_JSON = "contents_json";
+	public final static String CONTENTS_LINK = "contents_link";
+
+
 	private LinkedHashMap<String, String> map;
 	private String link;
-	private OsmandApplication app;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		String contentsJson;
 		if (args != null) {
-			contentsJson = args.getString("CONTENTS_JSON");
+			contentsJson = args.getString(CONTENTS_JSON);
 		} else {
 			return;
 		}
-		app = getMyApplication();
-		final ArrayList<String> listDataHeader = new ArrayList<String>();
-		final LinkedHashMap<String, List<String>> listDataChild = new LinkedHashMap<String, List<String>>();
-
-		map = new LinkedHashMap<>();
-		JSONObject reader = null;
-		try {
-			reader = new JSONObject(contentsJson);
-		} catch (JSONException e) {
-			e.printStackTrace();
+		ContentsJsonParser.ContentsContainer contentsContainer = ContentsJsonParser.parseJsonContents(contentsJson, getContext());
+		if (contentsContainer == null) {
 			return;
 		}
-		List<String> secondLevel = null;
-		JSONArray jArray = reader.names();
-		for (int i = 0; i < jArray.length(); i++) {
-			try {
-				JSONArray contacts = reader.getJSONArray(reader.names().getString(i));
-				String link = contacts.getString(1);
+		final ArrayList<String> listDataHeader = contentsContainer.listDataHeader;
+		final LinkedHashMap<String, List<String>> listDataChild = contentsContainer.listDataChild;
 
-				map.put(reader.names().getString(i), link);
+		map = contentsContainer.map;
 
-				int level = contacts.getInt(0);
+		items.add(new TitleItem(getString(R.string.shared_string_contents)));
 
-				if (level == 2) {
-					listDataHeader.add(reader.names().getString(i));
-					secondLevel = new ArrayList<String>();
-				}
-				if (level == 3) {
-					if (secondLevel == null) {
-						secondLevel = new ArrayList<String>();
-					}
-					secondLevel.add(reader.names().getString(i));
-					listDataChild.put(listDataHeader.get(listDataHeader.size() - 1), secondLevel);
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
-
-		items.add(new TitleItem(getString(R.string.article_contents_title)));
-		LayoutInflater li = LayoutInflater.from(getContext());
-		View view = li.inflate(R.layout.wikivoyage_contents_expandablelistview, null);
-		ExpandableListView expListView = view.findViewById(R.id.expandableListView);
-
+		ExpandableListView expListView = new ExpandableListView(getContext());
 		ExpandableListAdapter listAdapter = new ExpandableListAdapter(getContext(), listDataHeader, listDataChild);
+
+		expListView.setAdapter(listAdapter);
+		expListView.setChildDivider(getResources().getDrawable(R.color.color_transparent));
+
+		expListView.setLayoutParams(new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.MATCH_PARENT));
+
 		expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
 			@Override
@@ -100,17 +75,13 @@ public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBott
 				return false;
 			}
 		});
-		DisplayMetrics diaplayMetrics;
-		int width;
-		diaplayMetrics = new DisplayMetrics();
-		getActivity().getWindowManager().getDefaultDisplay().getMetrics(diaplayMetrics);
-		width = diaplayMetrics.widthPixels;
+
+		int width = AndroidUtils.getScreenWidth(getActivity());
 		if (android.os.Build.VERSION.SDK_INT < 18) {
-			expListView.setIndicatorBounds(width - ((int) (50 * getResources().getDisplayMetrics().density + 0.5f)), width - ((int) (10 * getResources().getDisplayMetrics().density + 0.5f)));
+			expListView.setIndicatorBounds(width - (AndroidUtils.dpToPx(getContext(), 50)), width - (AndroidUtils.dpToPx(getContext(), 10)));
 		} else {
-			expListView.setIndicatorBoundsRelative(width - ((int) (50 * getResources().getDisplayMetrics().density + 0.5f)), width - ((int) (10 * getResources().getDisplayMetrics().density + 0.5f)));
+			expListView.setIndicatorBoundsRelative(width - (AndroidUtils.dpToPx(getContext(), 50)), width - (AndroidUtils.dpToPx(getContext(), 10)));
 		}
-		expListView.setIndicatorBounds(200, 50);
 		expListView.setOnGroupClickListener(new OnGroupClickListener() {
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
@@ -122,19 +93,22 @@ public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBott
 				return false;
 			}
 		});
-		expListView.setAdapter(listAdapter);
+		LinearLayout container = new LinearLayout(getContext());
+		container.addView(expListView);
 		BaseBottomSheetItem favoritesItem = new SimpleBottomSheetItem.Builder()
-				.setCustomView(view)
+				.setCustomView(container)
 				.create();
 		items.add(favoritesItem);
-
 	}
 
 	private void sendResult(int REQUEST_CODE) {
 		Intent intent = new Intent();
-		intent.putExtra("test", link);
-		getTargetFragment().onActivityResult(
-				getTargetRequestCode(), REQUEST_CODE, intent);
+		intent.putExtra(CONTENTS_LINK, link);
+		Fragment fragment = getTargetFragment();
+		if (fragment != null) {
+			fragment.onActivityResult(
+					getTargetRequestCode(), REQUEST_CODE, intent);
+		}
 	}
 
 	@Override
@@ -142,23 +116,22 @@ public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBott
 		return false;
 	}
 
-	class ExpandableListAdapter extends BaseExpandableListAdapter {
+	class ExpandableListAdapter extends OsmandBaseExpandableListAdapter {
 
-		private Context _context;
-		private List<String> _listDataHeader;
-		private LinkedHashMap<String, List<String>> _listDataChild;
+		private Context context;
+		private List<String> listDataHeader;
+		private LinkedHashMap<String, List<String>> listDataChild;
 
 		public ExpandableListAdapter(Context context, List<String> listDataHeader,
 		                             LinkedHashMap<String, List<String>> listChildData) {
-			this._context = context;
-			this._listDataHeader = listDataHeader;
-			this._listDataChild = listChildData;
+			this.context = context;
+			this.listDataHeader = listDataHeader;
+			this.listDataChild = listChildData;
 		}
 
 		@Override
 		public Object getChild(int groupPosition, int childPosititon) {
-			return this._listDataChild.get(this._listDataHeader.get(groupPosition))
-					.get(childPosititon);
+			return this.listDataChild.get(this.listDataHeader.get(groupPosition)).get(childPosititon);
 		}
 
 		@Override
@@ -169,22 +142,17 @@ public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBott
 		@Override
 		public View getChildView(int groupPosition, final int childPosition,
 		                         boolean isLastChild, View convertView, ViewGroup parent) {
-
-			final String childText = (String) getChild(groupPosition, childPosition);
-
+			String childText = (String) getChild(groupPosition, childPosition);
 			if (convertView == null) {
-				LayoutInflater infalInflater = (LayoutInflater) this._context
+				LayoutInflater infalInflater = (LayoutInflater) this.context
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				convertView = infalInflater.inflate(R.layout.wikivoyage_contents_group_list_item, null);
+				convertView = infalInflater.inflate(R.layout.wikivoyage_contents_list_item, null);
 			}
-
-			TextView txtListChild = (TextView) convertView.findViewById(R.id.group_label);
-
+			TextView txtListChild = (TextView) convertView.findViewById(R.id.item_label);
 			txtListChild.setText(childText);
 			txtListChild.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light));
-			txtListChild.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache()
-							.getIcon(R.drawable.ic_action_list_bullet, isNightMode() ?
-									R.color.route_info_unchecked_mode_icon_color : R.color.ctx_menu_nearby_routes_text_color_dark),
+			txtListChild.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_list_bullet,
+					isNightMode() ? R.color.route_info_unchecked_mode_icon_color : R.color.ctx_menu_nearby_routes_text_color_dark),
 					null, null, null);
 
 			return convertView;
@@ -192,8 +160,8 @@ public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBott
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
-			if (this._listDataChild.get(this._listDataHeader.get(groupPosition)) != null) {
-				return this._listDataChild.get(this._listDataHeader.get(groupPosition)).size();
+			if (this.listDataChild.get(this.listDataHeader.get(groupPosition)) != null) {
+				return this.listDataChild.get(this.listDataHeader.get(groupPosition)).size();
 			} else {
 				return 0;
 			}
@@ -201,12 +169,12 @@ public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBott
 
 		@Override
 		public Object getGroup(int groupPosition) {
-			return this._listDataHeader.get(groupPosition);
+			return this.listDataHeader.get(groupPosition);
 		}
 
 		@Override
 		public int getGroupCount() {
-			return this._listDataHeader.size();
+			return this.listDataHeader.size();
 		}
 
 		@Override
@@ -219,17 +187,15 @@ public class WikivoyageArticleContentsBottomSheetDialogFragment extends MenuBott
 		                         View convertView, ViewGroup parent) {
 			String headerTitle = (String) getGroup(groupPosition);
 			if (convertView == null) {
-				LayoutInflater infalInflater = (LayoutInflater) this._context
+				LayoutInflater infalInflater = (LayoutInflater) this.context
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				convertView = infalInflater.inflate(R.layout.wikivoyage_contents_group_list_item, null);
+				convertView = infalInflater.inflate(R.layout.wikivoyage_contents_list_item, null);
 			}
-
-			TextView lblListHeader = (TextView) convertView.findViewById(R.id.group_label);
+			TextView lblListHeader = (TextView) convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(headerTitle);
 			lblListHeader.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light));
-			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache()
-							.getIcon(R.drawable.ic_action_list_sort, isNightMode() ?
-									R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light),
+			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_contents,
+					isNightMode() ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light),
 					null, null, null);
 
 			return convertView;
