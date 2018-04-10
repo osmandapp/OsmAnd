@@ -2819,4 +2819,29 @@
     <string name="confirm_usage_speed_cameras">I mange land (Tyskland, Frankrike, Italia og andre) er bruk av fotoboksvarsling ulovlig. OsmAnd påtar seg ikke noe ansvar hvis du bryter loven. Trykk \'Ja\' kun hvis du er berettiget til å bruke denne funksjonen.</string>
     <string name="osmand_net_previously_installed">Alle nettfrakoblede data i det gamle programmet vil bli støttet i det nye, men favorittpunkter må eksporteres fra det gamle programmet og så importeres i det nye.</string>
     <string name="min_km">min/km</string>
+    <string name="shared_string_contents">Innhold</string>
+    <string name="release_2_7">\\022 Mapillary-programtillegg med bilder på gatenivå
+\n
+\n • Tomstokk-miniprogram for avstandsmåling
+\n
+\n • GPX med mellomtider for detaljert informasjon om ditt spor
+\n
+\n • Andre forbedringer og feilrettinger
+\n
+\n</string>
+    <string name="release_2_8">\\022 Fullstendig omarbeidede kartmarkører med veivisningslinjer og ruteplanlegging
+\n
+\n • Distansemålingsverktøy som tilbyr festing til vei og lagring av punkter som spor
+\n
+\n • OsmAnd Live: Feilrettinger, fresk data fra tjeneren hver halvtime, oppdateringer innarbeidet inn i navigasjonen
+\n
+\n</string>
+    <string name="share_geo">geo:</string>
+    <string name="nm">sm</string>
+    <string name="nm_h">sm/t</string>
+    <string name="min_mile">min/engelsk mil</string>
+    <string name="poi_filter_nominatim">Nettbasert Nominatim</string>
+    <string name="osmand_routing_experimental">Frakoblet OsmAnd-navigasjon er en eksperimentell funksjon, og fungerer ikke for distanser lenger enn omtrent 20 km.
+\n
+\nNavigasjon midlertidig byttet til nettbasert CloudMade-tjeneste.</string>
     </resources>
