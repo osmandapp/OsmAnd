@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.Size;
 import android.text.Html;
+import android.text.TextUtils;
 
 import net.osmand.plus.GPXUtilities.GPXFile;
 
@@ -111,6 +112,25 @@ public class WikivoyageArticle {
 		}
 
 		return res.toString();
+	}
+
+	@Nullable
+	public String getGeoDescription() {
+		if (TextUtils.isEmpty(aggregatedPartOf)) {
+			return null;
+		}
+
+		String[] parts = aggregatedPartOf.split(",");
+		if (parts.length > 0) {
+			StringBuilder res = new StringBuilder();
+			res.append(parts[parts.length - 1]);
+			if (parts.length > 1) {
+				res.append(" \u2022 ").append(parts[0]);
+			}
+			return res.toString();
+		}
+
+		return null;
 	}
 
 	@NonNull

@@ -68,7 +68,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 			holder.title.setText(article.getTitle());
 			holder.content.setText(article.getContent());
-			holder.partOf.setText(article.getAggregatedPartOf()); // todo
+			holder.partOf.setText(article.getGeoDescription());
 			holder.icon.setVisibility(View.GONE); // todo
 			holder.leftButton.setText(app.getString(R.string.shared_string_read));
 			holder.leftButton.setCompoundDrawablesWithIntrinsicBounds(readIcon, null, null, null);
