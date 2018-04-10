@@ -104,7 +104,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				fragment.setUsedOnMap(false);
 				fragment.setArguments(args);
 				fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, 0);
-				fragment.show(getChildFragmentManager(), WikivoyageArticleContentsFragment.TAG);
+				fragment.show(getFragmentManager(), WikivoyageArticleContentsFragment.TAG);
 			}
 		});
 
