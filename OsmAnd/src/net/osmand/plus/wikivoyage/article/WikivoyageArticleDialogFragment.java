@@ -1,4 +1,4 @@
-package net.osmand.plus.wikivoyage;
+package net.osmand.plus.wikivoyage.article;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -23,6 +23,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
+import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.util.Algorithms;
@@ -51,9 +52,10 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private long cityId = NO_VALUE;
 	private ArrayList<String> langs;
 	private String selectedLang;
-	private String contentsJson;
+	private WikivoyageArticle article;
 
 	private TextView selectedLangTv;
+	private TextView saveBtn;
 	private WebView contentWebView;
 
 	@SuppressLint("SetJavaScriptEnabled")
@@ -98,20 +100,21 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		contentsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				FragmentManager fm = getFragmentManager();
+				if (article == null || fm == null) {
+					return;
+				}
 				Bundle args = new Bundle();
-				args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, contentsJson);
+				args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, article.getContentsJson());
 				WikivoyageArticleContentsFragment fragment = new WikivoyageArticleContentsFragment();
 				fragment.setUsedOnMap(false);
 				fragment.setArguments(args);
 				fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, 0);
-				fragment.show(getFragmentManager(), WikivoyageArticleContentsFragment.TAG);
+				fragment.show(fm, WikivoyageArticleContentsFragment.TAG);
 			}
 		});
 
-		TextView saveBtn = (TextView) mainView.findViewById(R.id.save_button);
-		saveBtn.setCompoundDrawablesWithIntrinsicBounds(
-				null, null, getActiveIcon(R.drawable.ic_action_read_later), null
-		);
+		saveBtn = (TextView) mainView.findViewById(R.id.save_button);
 
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
 		contentWebView.getSettings().setJavaScriptEnabled(true);
@@ -142,6 +145,29 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	@Override
 	protected int getStatusBarColor() {
 		return nightMode ? R.color.status_bar_wikivoyage_article_dark : R.color.status_bar_wikivoyage_article_light;
+	}
+
+	private void updateSaveButton() {
+		if (article != null) {
+			final WikivoyageLocalDataHelper helper = WikivoyageLocalDataHelper.getInstance(getMyApplication());
+			final boolean saved = helper.isArticleSaved(article);
+			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
+			saveBtn.setText(getString(saved ? R.string.shared_string_delete : R.string.shared_string_save));
+			saveBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
+			saveBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (article != null) {
+						if (saved) {
+							helper.removeArticleFromSaved(article);
+						} else {
+							helper.addArticleToSaved(article);
+						}
+						updateSaveButton();
+					}
+				}
+			});
+		}
 	}
 
 	private void showPopupLangMenu(View view) {
@@ -182,17 +208,15 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			selectedLang = langs.get(0);
 		}
 
-		selectedLangTv.setText(Algorithms.capitalizeFirstLetter(selectedLang));
-
-		WikivoyageArticle article = getMyApplication().getWikivoyageDbHelper()
-				.getArticle(cityId, selectedLang);
+		article = getMyApplication().getWikivoyageDbHelper().getArticle(cityId, selectedLang);
 		if (article == null) {
 			return;
 		}
 
-		contentsJson = article.getContentsJson();
 		WikivoyageLocalDataHelper.getInstance(getMyApplication()).addToHistory(article);
 
+		updateSaveButton();
+		selectedLangTv.setText(Algorithms.capitalizeFirstLetter(selectedLang));
 		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(article), "text/html", "UTF-8", null);
 	}
 
