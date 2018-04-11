@@ -183,7 +183,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 		};
 		if (info.getType() == LocalIndexType.MAP_DATA || info.getType() == LocalIndexType.SRTM_DATA ||
-				info.getType() == LocalIndexType.WIKI_DATA) {
+				info.getType() == LocalIndexType.WIKI_DATA ) {
 			if (!info.isBackupedData()) {
 				adapter.addItem(new ContextMenuItem.ItemBuilder()
 						.setTitleId(R.string.local_index_mi_backup, getContext())
@@ -444,6 +444,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					parent = getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR);
 				} else if (i.getOriginalType() == LocalIndexType.WIKI_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.WIKI_INDEX_DIR);
+				} else if (i.getOriginalType() == LocalIndexType.TRAVEL_DATA) {
+					parent = getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
 				} else if (i.getOriginalType() == LocalIndexType.TTS_VOICE_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
 				} else if (i.getOriginalType() == LocalIndexType.VOICE_DATA) {
