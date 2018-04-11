@@ -1485,7 +1485,7 @@
     <string name="rename_marker">שינוי שם סמן</string>
     <string name="tap_on_map_to_hide_interface_descr">נגיעה במפה מחליפה את תצוגת הכפתורים והווידג׳טים.</string>
     <string name="appearance_on_the_map">הופעה על המפה</string>
-    <string name="add_track_to_markers_descr">נא לבחור נקודות דרך במסלול שאותן OsmAnd יצרף לסמנים. (המסלולים המוצגים הם בעלי נקודות דרך בלבד.)</string>
+    <string name="add_track_to_markers_descr">ניתן להוסיף נקודות דרך לסמנים על ידי בחירת אחד המסלולים שבו יש אותם.</string>
     <string name="add_favourites_group_to_markers_descr">נא לבחור קטגוריה מועדפת להוספה לסמנים.</string>
     <string name="track_waypoints">נקודות דרך במסלול</string>
     <string name="favourites_group">קטגוריית מועדפים</string>
@@ -1932,7 +1932,7 @@
     <string name="hillshade_menu_download_descr">כדי לצפות בהצללת תבליט של המפה, עליך להוריד את שכבת ההצללה של האזור הזה.</string>
     <string name="hillshade_purchase_header">כדי לצפות בהצללת תבליט של המפה, עליך לרכוש ולהתקין את תוסף קווי המתאר (Contour Lines)</string>
     <string name="hide_from_zoom_level">הסתרה החל מרמת תקריב</string>
-    <string name="srtm_menu_download_descr">כדי לצפות בקווי מתאר במפה, עליך להוריד את מפת קווי המתאר של האזור הזה.</string>
+    <string name="srtm_menu_download_descr">נא להוריד את מפת ‚קווי המתאר’ של האזור הזה.</string>
     <string name="shared_string_plugin">תוסף</string>
     <string name="srtm_purchase_header">כדי לצפות בקווי מתאר במפה, עליך לרכוש ולהתקין את תוסף קווי המתאר (Contour Lines)</string>
     <string name="srtm_color_scheme">ערכת צבעים</string>
@@ -2196,7 +2196,7 @@
     <string name="by_date">לפי תאריך</string>
     <string name="by_type">לפי סוג</string>
     <string name="subscribe_email_desc">ניתן להירשם לרשימת הדיוור שלנו כדי לקבל הנחות על היישומון ולקבל עוד 3 הורדות של מפות בחינם!</string>
-    <string name="depth_contour_descr">ערכות של מפות שמכילות קווי מתאר של עומק הים ונקודות ימיות.</string>
+    <string name="depth_contour_descr">מפות קווי מתאר של עומק הים ונקודות ימיות.</string>
     <string name="sea_depth_thanks">תודה לך על רכישת קווי המתאר של עומק הים</string>
     <string name="index_item_depth_contours_osmand_ext">קווי מתאר של עומק הים</string>
     <string name="download_depth_countours">קווי מתאר של עומק הים</string>
@@ -2492,7 +2492,7 @@
 \n
 \n</string>
     <string name="one_tap_active">הפעלה בנגיעה אחת</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">נא לבחור להלן באיזו מהירות כיוון המפה יתחלף ממצב ‚לפי כיוון התנועה’ למצב ‚לפי מצפן’.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">נא לבחור באיזו מהירות כיוון המפה יתחלף ממצב ‚כיוון התנועה’ למצב ‚כיוון מצפן’ להלן.</string>
     <string name="index_item_depth_points_southern_hemisphere">נקודות עומק ימיות בחצי הכדור הדרומי</string>
     <string name="index_item_depth_points_northern_hemisphere">נקודות עומק ימיות בחצי הכדור הצפוני</string>
     <string name="do_not_send_anonymous_app_usage_desc">ב־OsmAnd נאסף מידע על אילו חלקים ביישומון משמשים אותך. המיקום שלך אף פעם לא נשלח, גם לא הקלט שלך ביישומון או פרטים על אזורים בהם צפית, חיפשת או הורדת.</string>
@@ -2598,7 +2598,7 @@
     <string name="share_geo">גאו:</string>
     <string name="osm_edits">עריכות ב־OSM</string>
     <string name="osmand_parking_hour">שע</string>
-    <string name="navigate_point_olc">פתיחת קוד מיקום</string>
+    <string name="navigate_point_olc">קוד מיקום פתוח</string>
     <string name="osm_recipients_label">נמעני OSM</string>
     <string name="total_donations">סך כל התרומות</string>
 <string name="access_direction_audio_feedback_descr">ציון כיוון נקודת היעד עם צליל.</string>
@@ -2703,4 +2703,14 @@
     <string name="download_files_error_not_enough_space">אין מספיק מקום! שטח האחסון הנדרש הוא {3} מ״ב באופן זמני, {1} מ״ב באופן קבוע. השטח הזמין הוא {2} מ״ב בלבד.</string>
     <string name="fav_point_dublicate">שם נקודה מועדפת כפול</string>
     <string name="shared_string_read">נקרא</string>
+    <string name="shared_string_contents">תכנים</string>
+    <string name="transport_nearby_routes">בסביבה</string>
+    <string name="navigate_point_olc_info_invalid">קוד מיקום פתוח שגוי
+\n</string>
+    <string name="navigate_point_olc_info_short">קוד מיקום פתוח קצר
+\nנא לספק קוד מלא</string>
+    <string name="navigate_point_olc_info_area">קוד מיקום פתוח תקני
+\nייצוג המקום: %1$s × %2$s</string>
+    <string name="navigate_point_northing">הצפנה</string>
+    <string name="navigate_point_easting">הזרחה</string>
     </resources>
