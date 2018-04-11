@@ -140,6 +140,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra)
 					|| item.getType() == DownloadActivityType.ROADS_FILE
 					|| item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+					|| item.getType() == DownloadActivityType.WIKIVOYAGE_FILE
 					|| item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
 					|| item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				outdated = true;
@@ -268,6 +269,10 @@ public class DownloadResources extends DownloadResourceGroup {
 		DownloadResourceGroup nauticalMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.NAUTICAL_MAPS_GROUP);
 		DownloadResourceGroup nauticalMapsScreen = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_MAPS);
 		DownloadResourceGroup nauticalMaps = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_MAPS_HEADER);
+		
+		DownloadResourceGroup wikivoyageMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.TRAVEL_GROUP);
+		DownloadResourceGroup wikivoyageMapsScreen = new DownloadResourceGroup(wikivoyageMapsGroup, DownloadResourceGroupType.WIKIVOYAGE_MAPS);
+		DownloadResourceGroup wikivoyageMaps = new DownloadResourceGroup(wikivoyageMapsGroup, DownloadResourceGroupType.WIKIVOYAGE_HEADER);
 
 		Map<WorldRegion, List<IndexItem> > groupByRegion = new LinkedHashMap<WorldRegion, List<IndexItem>>();
 		OsmandRegions regs = app.getRegions();
@@ -288,6 +293,10 @@ public class DownloadResources extends DownloadResourceGroup {
 				if (app.getSettings().DEPTH_CONTOURS_PURCHASED.get() || nauticalMaps.size() == 0) {
 					nauticalMaps.addItem(ii);
 				}
+				continue;
+			}
+			if(ii.getType() == DownloadActivityType.WIKIVOYAGE_FILE) {
+				wikivoyageMaps.addItem(ii);
 				continue;
 			}
 			String basename = ii.getBasename().toLowerCase();
@@ -354,6 +363,10 @@ public class DownloadResources extends DownloadResourceGroup {
 		nauticalMapsGroup.addGroup(nauticalMapsScreen);
 		addGroup(nauticalMapsGroup);
 
+		wikivoyageMapsScreen.addGroup(wikivoyageMaps);
+		wikivoyageMapsGroup.addGroup(wikivoyageMapsScreen);
+		addGroup(wikivoyageMapsGroup);
+
 		if (otherMaps.size() > 0) {
 			addGroup(otherMapsGroup);
 		}
@@ -365,6 +378,8 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 		otherGroup.addGroup(voiceScreenTTS);
 		otherGroup.addGroup(voiceScreenRec);
+		
+		
 		if (fonts.getIndividualResources() != null) {
 			otherGroup.addGroup(fontScreen);
 		}

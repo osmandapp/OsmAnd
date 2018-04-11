@@ -45,6 +45,8 @@ public class DownloadActivityType {
 			new DownloadActivityType(R.string.download_hillshade_maps, R.drawable.ic_action_hillshade_dark, "hillshade", 50);
 	public static final DownloadActivityType WIKIPEDIA_FILE =
 			new DownloadActivityType(R.string.download_wikipedia_maps, R.drawable.ic_plugin_wikipedia, "wikimap", 60);
+	public static final DownloadActivityType WIKIVOYAGE_FILE =
+			new DownloadActivityType(R.string.shared_string_wikivoyage, R.drawable.ic_plugin_wikipedia, "wikivoyage", 65);
 	public static final DownloadActivityType LIVE_UPDATES_FILE =
 			new DownloadActivityType(R.string.download_live_updates, "live_updates", 70);
 	private final int stringResource;
@@ -121,6 +123,8 @@ public class DownloadActivityType {
 		} else if (WIKIPEDIA_FILE == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT_ZIP,
 					IndexConstants.BINARY_MAP_VERSION));
+		} else if (WIKIVOYAGE_FILE == this) {
+			return fileName.endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT);	
 		} else if (SRTM_COUNTRY_FILE == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP,
 					IndexConstants.BINARY_MAP_VERSION));
@@ -148,6 +152,8 @@ public class DownloadActivityType {
 			return ctx.getAppPath(IndexConstants.SRTM_INDEX_DIR);
 		} else if (WIKIPEDIA_FILE == this) {
 			return ctx.getAppPath(IndexConstants.WIKI_INDEX_DIR);
+		} else if (WIKIVOYAGE_FILE == this) {
+			return ctx.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
 		} else if (LIVE_UPDATES_FILE == this) {
 			return ctx.getAppPath(IndexConstants.LIVE_INDEX_DIR);
 		} else if (HILLSHADE_FILE == this) {
@@ -159,7 +165,7 @@ public class DownloadActivityType {
 	}
 	
 	public boolean isZipStream(OsmandApplication ctx, IndexItem indexItem) {
-		return HILLSHADE_FILE != this;
+		return HILLSHADE_FILE != this && WIKIVOYAGE_FILE != this;
 	}
 	
 	public boolean isZipFolder(OsmandApplication ctx, IndexItem indexItem) {
@@ -193,6 +199,8 @@ public class DownloadActivityType {
 			return IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
 		} else if (WIKIPEDIA_FILE == this) {
 			return IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
+		} else if (WIKIVOYAGE_FILE == this) {
+			return IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT;
 		} else if (LIVE_UPDATES_FILE == this) {
 			return BINARY_MAP_INDEX_EXT;
 		} else if (HILLSHADE_FILE == this) {
@@ -212,6 +220,8 @@ public class DownloadActivityType {
 			return "&srtmcountry=yes";
 		} else if (this == WIKIPEDIA_FILE) {
 			return "&wiki=yes";
+		} else if (this == WIKIVOYAGE_FILE) {
+			return "&wikivoyage=yes";
 		} else if (this == HILLSHADE_FILE) {
 			return "&hillshade=yes";
 		} else if (this == FONT_FILE) {
@@ -269,6 +279,8 @@ public class DownloadActivityType {
 			return ctx.getString(R.string.download_srtm_maps);
 		} else if (this == WIKIPEDIA_FILE) {
 			return ctx.getString(R.string.shared_string_wikipedia);
+		} else if (this == WIKIVOYAGE_FILE) {
+			return ctx.getString(R.string.shared_string_wikivoyage);
 		} else if (this == ROADS_FILE) {
 			return ctx.getString(R.string.download_roads_only_item);
 		} else if (this == DEPTH_CONTOUR_FILE) {
@@ -356,6 +368,10 @@ public class DownloadActivityType {
 			if (this == WIKIPEDIA_FILE) {
 				return baseNameWithoutVersion + IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
 			}
+			if (this == WIKIVOYAGE_FILE) {
+				return baseNameWithoutVersion + IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT;
+			}
+			
 			if (this == ROADS_FILE) {
 				return baseNameWithoutVersion + IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
 			}

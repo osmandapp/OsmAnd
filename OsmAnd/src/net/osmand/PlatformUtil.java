@@ -114,9 +114,9 @@ public class PlatformUtil {
 
 		@Override
 		public boolean isDebugEnabled() {
-			// For debur purposes always true
-			return android.util.Log.isLoggable(TAG, android.util.Log.DEBUG);
-//			return true;
+			// For debug purposes always true
+			// return android.util.Log.isLoggable(TAG, android.util.Log.DEBUG);
+			return true;
 		}
 
 		@Override
