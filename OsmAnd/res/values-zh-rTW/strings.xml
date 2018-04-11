@@ -2987,4 +2987,5 @@
     <string name="wikivoyage_search_hint">搜尋：國家、城市、地區</string>
     <string name="shared_string_read">讀取</string>
     <string name="shared_string_contents">內容</string>
+    <string name="article_removed">已移除文章</string>
     </resources>
