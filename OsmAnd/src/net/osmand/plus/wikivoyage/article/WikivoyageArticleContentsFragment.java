@@ -77,7 +77,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
-			                            int groupPosition, int childPosition, long id) {
+										int groupPosition, int childPosition, long id) {
 				link = map.get(listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition));
 				sendResult();
 				dismiss();
@@ -125,7 +125,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		private Drawable itemChildIcon;
 
 		ExpandableListAdapter(Context context, List<String> listDataHeader,
-		                      LinkedHashMap<String, List<String>> listChildData) {
+							  LinkedHashMap<String, List<String>> listChildData) {
 			this.context = context;
 			this.listDataHeader = listDataHeader;
 			this.listDataChild = listChildData;
@@ -161,6 +161,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 					? R.color.wikivoyage_contents_parent_icon_dark
 					: R.color.wikivoyage_contents_parent_icon_light));
 			txtListChild.setCompoundDrawablesWithIntrinsicBounds(itemChildIcon, null, null, null);
+
 			convertView.findViewById(R.id.upper_row_divider).setVisibility(View.GONE);
 			convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
 			txtListChild.setTypeface(null);
@@ -207,6 +208,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			lblListHeader.setText(headerTitle);
 			lblListHeader.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
+
 			lblListHeader.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
