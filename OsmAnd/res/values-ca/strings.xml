@@ -2338,7 +2338,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Prement el botó d\'acció es mostra la pàgina següent seguint la llista.</string>
     <string name="auto_split_recording_title">Divisió automàtica de les gravacions un cop aturades</string>
 	<string name="auto_split_recording_descr">Comença un nou segment desprès de 6 min d\'interrupció, una traça nova si es superen les 2 hores o un nou fitxer si encara dura més i ha canviat la data.</string>
-    <string name="release_2_6">\\u2022 Nova opció: botó d\'acció ràpida
+    <string name="release_2_6">\\u2022 Nova opció: botó d\'acció ràpida 
 \n 
 \n • Resposta millorada a les indicacions de la pantalla tàctil (p.e. gir de la pantalla i ampliació alhora) 
 \n 
@@ -2354,7 +2354,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n 
 \n • Configuració del \"estil de conducció\" i millores lògiques en el càlcul de rutes per bicicleta. 
 \n 
-\n • Configuració per utilitzar les dades d\'elevació en el càlcul de rutes per bicicleta. 
+\n • Configuració de les dades d\'elevació en el càlcul de rutes per bicicleta. 
 \n 
 \n • Altres millores i correccions d\'errors 
 \n 
@@ -2464,7 +2464,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part7">"Col·laboreu directament amb OSM • Notifiqueu errors en les dades • Pugeu traces GPX directament a OSM des de l\'aplicació • Afegiu PDIs i pugeu-los OSM (o feu-ho més tard si no esteu connectats) • Registre opcional del trajecte,  també en segon pla (mentre el dispositiu està bloquejat) OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'aplicació informant d\'errors, millorant les traduccions o programant noves característiques. El projecte està en plena efervescència i millora contínua per aquestes vies de desenvolupament i interacció amb l\'usuari. L\'avenç del projecte també es basa en les aportacions econòmiques i la col·laboració en les proves de noves funcionalitats."</string>
     <string name="shared_string_overview">Visió general</string>
     <string name="animate_my_location">Situa la meva posició amb una animació</string>
-    <string name="animate_my_location_desc">Activa l\'animació de la meva posició durant la navegació.</string>
+    <string name="animate_my_location_desc">Activa el desplaçament animat del mapa de \'La meva posició\' durant la navegació.</string>
     <string name="favorite_group_name">Nom del grup</string>
     <string name="change_color">Canvia el color</string>
     <string name="edit_name">Edita el nom</string>
@@ -2652,8 +2652,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n 
 \n • Eina de mesura de distàncies amb capacitat per resseguir les vies i desar els punts com una traça 
 \n 
-\n • OsmAnd Live: correcció d\'errors, actualització de dades al servidor cada 30 minuts, implementació d\'actualitzacions durant la navegació
-\n
+\n • OsmAnd Live: Correcció d\'errors, actualització de dades al servidor cada 30 minuts, implementació d\'actualitzacions durant la navegació 
+\n 
 \n</string>
     <string name="rendering_value_darkyellow_name">Groc fosc</string>
     <string name="show_map">Mostra el mapa</string>
@@ -2819,4 +2819,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="use_two_digits_longitude">Longitud amb dos dígits</string>
     <string name="shared_string_travel">Viatge</string>
     <string name="waypoints_removed_from_map_markers">Fites eliminades dels marcadors de mapa</string>
+    <string name="wikivoyage_search_hint">Cerca: País, Ciutat, Província</string>
+    <string name="shared_string_read">Llegit</string>
+    <string name="saved_articles">Articles desats</string>
+    <string name="shared_string_explore">Explora</string>
+    <string name="shared_string_contents">Continguts</string>
+    <string name="shared_string_result">Resultat</string>
     </resources>
