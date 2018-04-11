@@ -103,10 +103,17 @@
 
 		</FrameLayout>
 
-		<net.osmand.plus.LockableViewPager
-			android:id="@+id/view_pager"
+		<!-- Coordinator layout is needed in order to display the snackbar above the bottom navigation -->
+		<android.support.design.widget.CoordinatorLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"/>
+			android:layout_height="wrap_content">
+
+			<net.osmand.plus.LockableViewPager
+				android:id="@+id/view_pager"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"/>
+
+		</android.support.design.widget.CoordinatorLayout>
 
 	</LinearLayout>
 

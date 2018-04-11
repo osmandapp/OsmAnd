@@ -109,6 +109,14 @@ public class WikivoyageLocalDataHelper {
 		}
 	}
 
+	public void restoreSavedArticle(@NonNull WikivoyageArticle article) {
+		if (!isArticleSaved(article)) {
+			savedArticles.add(article);
+			dbHelper.addSavedArticle(article);
+			notifySavedUpdated();
+		}
+	}
+
 	public void removeArticleFromSaved(@NonNull WikivoyageArticle article) {
 		WikivoyageArticle savedArticle = getArticle(article.cityId, article.lang);
 		if (savedArticle != null) {
