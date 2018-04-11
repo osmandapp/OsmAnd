@@ -3068,4 +3068,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="saved_articles">Gemte artikler</string>
     <string name="shared_string_explore">Udforsk</string>
     <string name="shared_string_contents">Indhold</string>
+    <string name="article_removed">Artikel fjernet</string>
     </resources>
