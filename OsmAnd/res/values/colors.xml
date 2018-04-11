@@ -400,8 +400,10 @@
 	<color name="wikivoyage_app_bar_dark">#222526</color>
 	<color name="wikivoyage_app_bar_text_light">#454545</color>
 	<color name="wikivoyage_app_bar_text_dark">#ababab</color>
-	<color name="wikivoyage_contents_icon_light">#536dfe</color>
-	<color name="wikivoyage_contents_icon_dark">#d28521</color>
+	<color name="wikivoyage_contents_parent_icon_light">#536dfe</color>
+	<color name="wikivoyage_contents_parent_icon_dark">#d28521</color>
+	<color name="wikivoyage_contents_child_icon_light">#bfbfbf</color>
+	<color name="wikivoyage_contents_child_icon_dark">#727272</color>
 	<color name="wikivoyage_bottom_bar_bg_light">#f5f5f5</color>
 	<color name="wikivoyage_bottom_bar_bg_dark">#222526</color>
 	<color name="wikivoyage_bottom_bar_divider_light">#e3e3e3</color>

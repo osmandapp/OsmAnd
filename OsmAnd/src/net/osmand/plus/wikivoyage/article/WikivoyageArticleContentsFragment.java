@@ -119,6 +119,16 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 	}
 
 	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_close;
+	}
+
+	@Override
+	protected int getBgColorId() {
+		return nightMode ? R.color.wikivoyage_bottom_bar_bg_dark : R.color.bg_color_light;
+	}
+
+	@Override
 	protected boolean useScrollableItemsContainer() {
 		return false;
 	}
@@ -139,11 +149,11 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			this.listDataHeader = listDataHeader;
 			this.listDataChild = listChildData;
 
-			itemGroupIcon = getIcon(R.drawable.ic_action_contents, nightMode
-					? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light);
+			itemGroupIcon = getIcon(R.drawable.ic_action_list_header, nightMode
+					? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light);
 			itemChildIcon = getIcon(R.drawable.ic_action_list_bullet, nightMode
-					? R.color.route_info_unchecked_mode_icon_color
-					: R.color.ctx_menu_nearby_routes_text_color_dark);
+					? R.color.wikivoyage_contents_child_icon_dark
+					: R.color.wikivoyage_contents_child_icon_light);
 		}
 
 		@Override
@@ -167,8 +177,8 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			TextView txtListChild = (TextView) convertView.findViewById(R.id.item_label);
 			txtListChild.setText(childText);
 			txtListChild.setTextColor(getResolvedColor(nightMode
-					? R.color.wikivoyage_contents_icon_dark
-					: R.color.wikivoyage_contents_icon_light));
+					? R.color.wikivoyage_contents_parent_icon_dark
+					: R.color.wikivoyage_contents_parent_icon_light));
 			txtListChild.setCompoundDrawablesWithIntrinsicBounds(itemChildIcon, null, null, null);
 
 			return convertView;
@@ -205,7 +215,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			}
 			TextView lblListHeader = (TextView) convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(headerTitle);
-			lblListHeader.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_contents_icon_dark : R.color.wikivoyage_contents_icon_light));
+			lblListHeader.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 
 			return convertView;
