@@ -60,8 +60,10 @@
 					android:layout_gravity="center_vertical"
 					android:layout_marginLeft="@dimen/content_padding"
 					android:layout_marginStart="@dimen/content_padding"
+					android:visibility="gone"
 					tools:ignore="ContentDescription"
-					tools:src="@drawable/ic_empty_state_marker_history_night"/>
+					tools:src="@drawable/ic_empty_state_marker_history_night"
+					tools:visibility="visible"/>
 
 			</LinearLayout>
 
