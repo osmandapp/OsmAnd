@@ -55,8 +55,8 @@
 
 				<ImageView
 					android:id="@+id/icon"
-					android:layout_width="@dimen/wikivoyage_saved_article_icon_size"
-					android:layout_height="@dimen/wikivoyage_saved_article_icon_size"
+					android:layout_width="@dimen/wikivoyage_article_card_icon_size"
+					android:layout_height="@dimen/wikivoyage_article_card_icon_size"
 					android:layout_gravity="center_vertical"
 					android:layout_marginLeft="@dimen/content_padding"
 					android:layout_marginStart="@dimen/content_padding"
