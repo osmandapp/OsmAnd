@@ -3821,4 +3821,6 @@
 <string name="poi_service_vehicle_muffler_yes">Schalldämpfer</string>
 	<string name="poi_climbing_adventure">Kletterabenteuer</string>
 
-</resources>
+<string name="poi_aerialway_zip_line">Seilrutsche</string>
+
+	</resources>
