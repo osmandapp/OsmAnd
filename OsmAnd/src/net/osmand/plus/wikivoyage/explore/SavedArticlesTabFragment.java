@@ -122,12 +122,19 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Wiki
 			if (oldItem instanceof String && newItem instanceof String) {
 				return false;
 			} else if (oldItem instanceof WikivoyageArticle && newItem instanceof WikivoyageArticle) {
+				if (newItemPosition == newItems.size() - 1 && lastItemChanged()) {
+					return false;
+				}
 				WikivoyageArticle oldArticle = (WikivoyageArticle) oldItem;
 				WikivoyageArticle newArticle = (WikivoyageArticle) newItem;
 				return oldArticle.getCityId() == newArticle.getCityId()
 						&& oldArticle.getLang().equals(newArticle.getLang());
 			}
 			return false;
+		}
+
+		private boolean lastItemChanged() {
+			return newItems.get(newItems.size() - 1) != oldItems.get(oldItems.size() - 1);
 		}
 	}
 }
