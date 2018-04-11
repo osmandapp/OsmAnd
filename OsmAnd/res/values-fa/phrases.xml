@@ -13,7 +13,7 @@
 <string name="poi_farm">فروشگاه محصولات دامی</string>
 <string name="poi_greengrocer">سبزی فروشی</string>
 <string name="poi_seafood">فروشگاه غذاهای دریایی</string>
-<string name="poi_confectionery">شیرینی فروشی</string>
+<string name="poi_confectionery">شیرینی و آجیل فروشی</string>
 <string name="poi_ice_cream">بستنی فروشی</string>
 <string name="poi_supermarket">فروشگاه بزرگ</string>
 <string name="poi_tea">فروشگاه چای</string>
@@ -849,4 +849,10 @@
 	<string name="poi_games">بازی‌ها</string>
 	<string name="poi_video_games">بازی‌های ویدیویی</string>
 	<string name="poi_weapons">فروشگاه اسلحه</string>
+	<string name="poi_perfumery">عطر فروشی</string>
+	<string name="poi_spices">عطاری</string>
+	<string name="poi_honey">عسل فروشی</string>
+	<string name="poi_religion">کالای مذهبی</string>
+
+	<string name="poi_level">طبقه</string>
 	</resources>
