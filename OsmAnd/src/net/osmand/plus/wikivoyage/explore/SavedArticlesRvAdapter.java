@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
@@ -29,8 +28,14 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 	private final List<Object> items = new ArrayList<>();
 
+	private Listener listener;
+
 	private final Drawable readIcon;
 	private final Drawable deleteIcon;
+
+	public void setListener(Listener listener) {
+		this.listener = listener;
+	}
 
 	SavedArticlesRvAdapter(OsmandApplication app) {
 		this.app = app;
@@ -140,8 +145,9 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 				public void onClick(View view) {
 					Object item = getItemByPosition();
 					if (item != null && item instanceof WikivoyageArticle) {
-						WikivoyageArticle article = (WikivoyageArticle) item;
-						Toast.makeText(app, "read: " + article.getTitle(), Toast.LENGTH_SHORT).show();
+						if (listener != null) {
+							listener.openArticle((WikivoyageArticle) item);
+						}
 					}
 				}
 			};
@@ -168,5 +174,9 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			}
 			return null;
 		}
+	}
+
+	interface Listener {
+		void openArticle(WikivoyageArticle article);
 	}
 }
