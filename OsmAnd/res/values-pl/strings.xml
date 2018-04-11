@@ -3040,4 +3040,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="saved_articles">Zapisane artykuły</string>
     <string name="shared_string_explore">Przeglądaj</string>
     <string name="shared_string_result">Wyniki</string>
+    <string name="article_removed">Artykuł usunięty</string>
+    <string name="shared_string_contents">Spis treści</string>
     </resources>
