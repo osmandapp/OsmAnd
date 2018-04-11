@@ -204,7 +204,7 @@ public class DownloadOsmandIndexesHelper {
 						DownloadActivityType tp = DownloadActivityType.getIndexType(parser.getAttributeValue(null, "type"));
 						if (tp != null) {
 							IndexItem it = tp.parseIndexItem(ctx, parser);
-							if(it != null && !it.getFileName().contains("_wiki")) {
+							if(it != null) {
 								result.add(it);
 							}
 						} else if ("osmand_regions".equals(parser.getName())) {

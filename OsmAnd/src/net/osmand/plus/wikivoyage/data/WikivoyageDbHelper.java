@@ -2,7 +2,6 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -65,18 +64,56 @@ public class WikivoyageDbHelper {
 	private static final String SEARCH_COL_LANG = "lang";
 
 	private final OsmandApplication application;
-
+	private SQLiteConnection connection = null;
+	private File selectedTravelBook = null;
+	private List<File> existingTravelBooks = new ArrayList<File>();
 	private Collator collator;
 
 	public WikivoyageDbHelper(OsmandApplication application) {
 		this.application = application;
 		collator = OsmAndCollator.primaryCollator();
+		initTravelBooks();
+	}
+
+	public void initTravelBooks() {
+		File[] possibleFiles = application.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
+		String travelBook = application.getSettings().SELECTED_TRAVEL_BOOK.get();
+		if (possibleFiles != null) {
+			for (File f : possibleFiles) {
+				if (f.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
+					existingTravelBooks.add(f);
+					if (selectedTravelBook == null) {
+						selectedTravelBook = f;
+					} else if (Algorithms.objectEquals(travelBook, f.getName())) {
+						selectedTravelBook = f;
+					}
+				}
+			}
+		}
+	}
+	
+	public File getSelectedTravelBook() {
+		return selectedTravelBook;
+	}
+	
+	public List<File> getExistingTravelBooks() {
+		return existingTravelBooks;
 	}
 
 	@Nullable
 	private SQLiteConnection openConnection() {
-		String path = getDbFile(application).getAbsolutePath();
-		return application.getSQLiteAPI().openByAbsolutePath(path, true);
+		if(connection == null && selectedTravelBook != null) {
+			application.getSettings().SELECTED_TRAVEL_BOOK.set(selectedTravelBook.getName());
+			connection = application.getSQLiteAPI().openByAbsolutePath(selectedTravelBook.getAbsolutePath(), true);
+		}
+		return connection;
+	}
+	
+	public void closeConnection() {
+		if(connection != null) {
+			connection.close();
+			connection = null;
+		}
 	}
 
 	@NonNull
@@ -255,12 +292,8 @@ public class WikivoyageDbHelper {
 		return res;
 	}
 
-	public static boolean isDbFileExists(OsmandApplication app) {
-		return getDbFile(app).exists();
+	public boolean isDbFileExists() {
+		return selectedTravelBook != null;
 	}
 
-	@NonNull
-	private static File getDbFile(OsmandApplication app) {
-		return app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR + DB_NAME);
-	}
 }

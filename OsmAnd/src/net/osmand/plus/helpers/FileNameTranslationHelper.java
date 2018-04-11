@@ -220,6 +220,8 @@ public class FileNameTranslationHelper {
 		} else if (basename.equals(DownloadResources.WORLD_SEAMARKS_KEY) || 
 				basename.equals(DownloadResources.WORLD_SEAMARKS_OLD_KEY)) {
 			return ctx.getString(R.string.index_item_world_seamarks);
+		} else if (basename.equals("world_wikivoyage")) {
+			return ctx.getString(R.string.index_item_world_wikivoyage);
 		} else if (basename.equals("depth_contours_osmand_ext")) {
 			return ctx.getString(R.string.index_item_depth_contours_osmand_ext);
 		} else if (basename.equals("depth_points_southern_hemisphere_osmand_ext")) {
