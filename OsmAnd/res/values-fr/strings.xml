@@ -297,14 +297,14 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="loading_builds">Chargement des versions disponibles…</string>
     <string name="select_build_to_install">Sélectionnez la version d\'OsmAnd à installer</string>
     <string name="contribution_activity">Fonction spéciale pour la version des contributeurs</string>
-    <string name="gps_status_app_not_found">L\'application GPS sélectionnée n\'est pas installée. Souhaitez-vous l\'installer depuis la boutique ?</string>
+    <string name="gps_status_app_not_found">L\'application GPS Status n\'est pas installée. Souhaitez-vous l\'installer ?</string>
     <string name="voice_is_not_available_msg">Aucun guidage vocal disponible. Allez dans \'Paramètres\' → \'Général\' → \'Guidage vocal\' puis sélectionnez ou téléchargez des voix.</string>
     <string name="voice_is_not_available_title">Aucune donnée vocale n\'est spécifiée</string>
     <string name="daynight_mode_day">Jour</string>
     <string name="daynight_mode_night">Nuit</string>
     <string name="daynight_mode_auto">Lever / coucher du soleil</string>
     <string name="daynight_mode_sensor">Détecter la luminosité</string>
-    <string name="daynight_descr">Sélectionnez les règles de bascule entre les modes jour / nuit</string>
+    <string name="daynight_descr">Sélectionnez les règles de bascule entre les modes jour / nuit.</string>
     <string name="daynight">Mode jour / nuit</string>
     <string name="download_files_question">Voulez-vous télécharger {0} fichier(s) ({1} MB) ?</string>
     <string name="items_were_selected">{0} objet(s) sont sélectionnés</string>
@@ -322,8 +322,8 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="continuous_rendering_descr">Affichage continu plutôt qu\'image par image</string>
     <string name="rendering_exception">Erreur lors de l\'affichage de la zone sélectionnée</string>
     <string name="rendering_out_of_memory">Mémoire insuffisante pour afficher la zone sélectionnée</string>
-    <string name="show_point_options">Utiliser ce point</string>
-    <string name="renderer_load_sucess">Moteur de rendu chargé avec succès</string>
+    <string name="show_point_options">Utiliser ce point…</string>
+    <string name="renderer_load_sucess">Moteur de rendu chargé</string>
     <string name="renderer_load_exception">Erreur : le moteur de rendu n\'est pas chargé</string>
     <string name="renderers">Affichage vectoriel</string>
     <string name="renderers_descr">Sélectionnez le style d\'affichage</string>
@@ -356,20 +356,20 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="poi_context_menu_delete">Supprimer point d\'intérêt</string>
     <string name="rotate_map_compass_opt">D\'après la boussole</string>
     <string name="rotate_map_bearing_opt">Dans la direction du déplacement</string>
-    <string name="rotate_map_none_opt">Aucune rotation (nord vers le haut)</string>
+    <string name="rotate_map_none_opt">Aucune rotation (nord toujours en haut)</string>
     <string name="rotate_map_to_bearing_descr">Sélectionnez le type d\'orientation pour la carte</string>
     <string name="rotate_map_to_bearing">Orientation de la carte</string>
     <string name="show_route">Itinéraire détaillé</string>
-    <string name="fav_imported_sucessfully">Importation des favoris réussie</string>
+    <string name="fav_imported_sucessfully">Favoris importés</string>
     <string name="fav_file_to_load_not_found">Le fichier GPX contenant les favoris est introuvable dans {0}</string>
-    <string name="fav_saved_sucessfully">Enregistrement des favoris réussi vers {0}</string>
+    <string name="fav_saved_sucessfully">Favoris enregistrés dans {0}</string>
     <string name="no_fav_to_save">Aucun point favori à enregistrer</string>
     <string name="shared_string_import">Importer</string>
 
     <string name="error_occurred_loading_gpx">Erreur lors du chargement du fichier GPX</string>
     <string name="send_report">Envoyer le rapport</string>
-    <string name="none_region_found">Aucune région trouvée sur la carte SD. Essayez d\'en télécharger une d\'internet.</string>
-    <string name="poi_namefinder_query_empty">Paramètres de recherche pour trouver le point d\'intérêt</string>
+    <string name="none_region_found">Aucune région sur la carte mémoire. Merci de télécharger une carte.</string>
+    <string name="poi_namefinder_query_empty">Saisissez votre recherche de point d\'intérêt</string>
     <string name="any_poi">Tout</string>
     
     <string name="thanks_yandex_traffic">Merci à Yandex de fournir des informations sur le trafic.</string>
@@ -413,10 +413,10 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="voice_data_corrupted">Données vocales corrompues</string>
     <string name="voice_data_unavailable">Données vocales inaccessibles</string>
   
-  <string name="sd_unmounted">La carte SD est inaccessible.
-\nIl vous sera donc impossible de trouver et voir quoi que ce soit.</string>
-  <string name="sd_mounted_ro">La carte SD est en lecture seule.
-\nVous ne pourrez pas en télécharger d\'internet, seules les cartes présentes seront accessibles.</string>
+  <string name="sd_unmounted">La carte mémoire est inaccessible.
+\nVous ne pourrez donc pas afficher de carte.</string>
+  <string name="sd_mounted_ro">La carte mémoire est en lecture seule.
+\nSeules les cartes déjà installées seront accessibles.</string>
     <string name="unzipping_file">Décompression du fichier…</string>
     <string name="route_tr">Tournez à droite et continuez</string>
     <string name="route_tshr">Tournez franchement à droite et continuez</string>
@@ -455,7 +455,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="show_transport_over_map_description">Afficher les arrêts de transport publics sur la carte</string>
     <string name="show_transport_over_map">Afficher les arrêts de transports publics</string>
     <string name="hello">Application de navigation OsmAnd</string>
-    <string name="update_poi_success">Mise à jour des points d\'intérêt réussie ({0} ont été chargés)</string>
+    <string name="update_poi_success">Mise à jour des points d\'intérêt ({0} ont été actualisés)</string>
     <string name="update_poi_error_local">Erreur de mise à jour des index locaux</string>
     <string name="update_poi_error_loading">Erreur lors du chargement des données du serveur</string>
     <string name="update_poi_no_offline_poi_index">Il n\'y a pas de données hors-ligne pour cette région</string>
@@ -483,16 +483,16 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="route_general_information">Distance totale : %1$s, Durée estimée : %2$d h %3$d min.</string>
     <string name="router_service_descr">Sélectionnez un service de navigation, hors-ligne ou en ligne</string>
     <string name="router_service">Service de navigation</string>
-    <string name="sd_dir_not_accessible">Le dossier contenant les données sur la carte SD est inaccessible !</string>
+    <string name="sd_dir_not_accessible">Le dossier contenant les données sur la carte mémoire est inaccessible !</string>
     <string name="download_question">Voulez-vous télécharger {0} - {1} ?</string>
-    <string name="download_question_exist">les données pour {0} existent déjà ({1}). Voulez-vous les mettre à jour ({2}) ?</string>
+    <string name="download_question_exist">Les données pour {0} existent déjà ({1}). Voulez-vous les mettre à jour ({2}) ?</string>
     <string name="address">Adresse</string>
     <string name="shared_string_download_successful">Téléchargement terminé</string>
 
 
     <string name="downloading_list_indexes">Téléchargement de la liste des régions disponibles…</string>
-    <string name="list_index_files_was_not_loaded">Les fichiers d\'index ne sont pas d\'osmand.net.</string>
-    <string name="select_index_file_to_download">Aucun résultat. Si vous ne trouvez pas votre région, vous pouvez la créer vous-même (voir sur http://osmand.net).</string>
+    <string name="list_index_files_was_not_loaded">La liste des régions n\'a pu être récupérée depuis https://osmand.net.</string>
+    <string name="select_index_file_to_download">Aucun résultat. Si vous ne trouvez pas votre région, vous pouvez la créer (voir sur https://osmand.net).</string>
 
     <string name="fav_points_edited">Le favori a été modifié</string>
     <string name="fav_points_not_exist">Il n\'existe aucun favori</string>
@@ -556,7 +556,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
 
 
     <string name="shared_string_add_to_favorites">Ajouter aux favoris</string>
-    <string name="use_english_names_descr">Afficher sur la carte les noms locaux ou les noms anglais</string>
+    <string name="use_english_names_descr">Afficher sur la carte les noms locaux ou les noms anglais.</string>
     <string name="use_english_names">Utiliser les noms anglais</string>
     <string name="app_settings">Paramètres de l\'application</string>
     <string name="search_address">Chercher adresse</string>
@@ -572,7 +572,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="map_tile_source_descr">Sélectionnez la source des cartes dites tuiles (en ligne ou en cache).</string>
     <string name="map_tile_source">Carte en ligne (tuiles)</string>
     <string name="map_source">Source cartographique</string>
-    <string name="use_internet">Utiliser internet</string>
+    <string name="use_internet">Utiliser Internet</string>
     <string name="show_location">Afficher votre position</string>
 
 
@@ -626,7 +626,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="favourites_context_menu_edit">Modifier le favori</string>
     <string name="favourites_context_menu_delete">Supprimer le favori</string>
     <string name="favourites_remove_dialog_msg">Voulez-vous vraiment supprimer le favori \'%s\' ?</string>
-    <string name="favourites_remove_dialog_success">Suppression du favori \'{0}\' réussie.</string>
+    <string name="favourites_remove_dialog_success">Favori {0} supprimé.</string>
     
     
     
@@ -648,10 +648,10 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="poi_remove_confirm_template">Voulez-vous vraiment supprimer {0} (inscrire commentaire) ?</string>
     <string name="poi_remove_title">Supprimer le point d\'intérêt</string>
     <string name="shared_string_delete">Supprimer</string>
-    <string name="poi_remove_success">Point d\'intérêt supprimé avec succès</string>
+    <string name="poi_remove_success">Point d\'intérêt supprimé</string>
     <string name="poi_action_add">ajouter</string>
     <string name="poi_action_change">modifier</string>
-    <string name="poi_action_succeded_template">Action {0} réussie.</string>
+    <string name="poi_action_succeded_template">Action {0} terminée.</string>
     <string name="poi_error_unexpected_template">Erreur lors de l\'action {0}.</string>
     <string name="poi_error_io_error_template">Erreur d\'entrée/sortie lors de l\'action {0}.</string>
     <string name="poi_error_info_not_loaded">Les informations sur l\'objet n\'ont pas étés chargés</string>
@@ -892,7 +892,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
 
 
     <string name="gps_wakeup_interval">Intervalle d\'activation du GPS: %s</string>
-    <string name="email">courriel</string>
+    <string name="email">e-mail</string>
     
     <string name="map_widget_vector_attributes">Attributs de rendu</string>
     <string name="select_navigation_mode">Sélectionnez le mode de transport</string>
@@ -1395,7 +1395,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     
     
 
-    <string name="import_file_favourites">Enregistrer les données comme fichier GPX ou transformer les étapes en favoris ?</string>
+    <string name="import_file_favourites">Enregistrer les données comme fichier GPX ou transformer les étapes en Favoris ?</string>
 
     
     <string name="rendering_value_pink_name">Rose</string>
@@ -1425,7 +1425,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     
     
     
-    <string name="gpx_file_is_empty">La trace GPX est vide</string>
+    <string name="gpx_file_is_empty">Vider la trace GPX</string>
 
     <string name="shared_string_my_tracks">Mes traces</string>
     <string name="shared_string_my_favorites">Mes favoris</string>
@@ -1991,7 +1991,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Tout mettre à jour (%1$s MB)</string>
     <string name="free_downloads_used">Téléchargements gratuits effectués</string>
-    <string name="free_downloads_used_description">Affiche le nombre de téléchargements gratuits déjà effectués</string>
+    <string name="free_downloads_used_description">Affiche le nombre de téléchargements gratuits restants.</string>
 
 
     <string name="share_geo">geo :</string>
@@ -2124,7 +2124,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="update_now">Mettre à jour maintenant</string>
 <string name="route_distance">Distance :</string>
     <string name="route_duration">Durée :</string>
-    <string name="missing_write_external_storage_permission">L\'application n\'est pas autorisée à utiliser la carte SD</string>
+    <string name="missing_write_external_storage_permission">L\'application n\'est pas autorisée à utiliser la carte mémoire</string>
 <string name="no_location_permission">L\'application n\'est pas autorisée à utiliser les données de positionnement.</string>
     <string name="no_camera_permission">L\'application n\'est pas autorisée à utiliser l\'appareil photo.</string>
     <string name="no_microphone_permission">L\'application n\'est pas autorisée à utiliser le microphone.</string>
@@ -2465,9 +2465,9 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_add_poi">Ajouter un point d\'intérêt</string>
     <string name="quick_action_map_style">Modifier le style de carte</string>
     <string name="quick_action_map_style_switch">Le style de carte est maintenant \"%s\".</string>
-    <string name="quick_action_take_audio_note">Créer une note sonore</string>
-    <string name="quick_action_take_video_note">Créer une note vidéo</string>
-    <string name="quick_action_take_photo_note">Créer une note photo</string>
+    <string name="quick_action_take_audio_note">Nouvelle note sonore</string>
+    <string name="quick_action_take_video_note">Nouvelle note vidéo</string>
+    <string name="quick_action_take_photo_note">Nouvelle note photo</string>
     <string name="quick_action_add_osm_bug">Ajouter une note OSM</string>
     <string name="quick_action_navigation_voice">Voix Active / Inactive</string>
     <string name="quick_action_navigation_voice_off">La voix est désactivée</string>
@@ -2485,7 +2485,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="shared_string_action_name">Nom de l\'action</string>
     <string name="favorite_autofill_toast_text">" a été enregistré vers "</string>
     <string name="favorite_empty_place_name">Emplacement</string>
-    <string name="quick_action_duplicates">Ce nom existe déjà, l\'action rapide a été renommée en %1$s pour éviter les doublons.</string>
+    <string name="quick_action_duplicates">Ce nom existe déjà, l\'action rapide a été renommée en %1$s.</string>
     <string name="quick_action_duplicate">Nom d\'action rapide en double</string>
     <string name="quick_action_showhide_favorites_title">Afficher / Masquer les favoris</string>
     <string name="quick_action_favorites_show">Afficher les favoris</string>
@@ -2517,17 +2517,17 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_map_source_switch">La source de la carte a été modifiée pour \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Déplacer le bouton</string>
     <string name="quick_action_btn_tutorial_descr">Appui long pour déplacer le bouton sur l\'écran</string>
-<string name="quick_action_add_marker_descr">Appuyez sur le bouton d\'action pour ajouter une marque au centre de la carte.</string>
-    <string name="quick_action_add_gpx_descr">Un appui sur le bouton d\'action ajoutera une étape GPX au centre de la carte.</string>
-    <string name="quick_action_take_audio_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Audio au centre de la carte.</string>
-    <string name="quick_action_take_video_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Vidéo au centre de la carte.</string>
-    <string name="quick_action_take_photo_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Photo au centre de la carte.</string>
-    <string name="quick_action_add_osm_bug_descr">Appuyez sur le bouton d\'action pour ajouter une note OSM au centre de la carte.</string>
-    <string name="quick_action_add_poi_descr">Appuyez sur le bouton d\'action pour ajouter un point d\'intérêt au centre de la carte.</string>
-    <string name="quick_action_navigation_voice_descr">Appuyez sur le bouton pour activer ou désactiver le Guidage vocal pendant la navigation.</string>
-    <string name="quick_action_add_parking_descr">Appuyez sur le bouton pour ajouter un emplacement de stationnement au centre de la carte.</string>
-    <string name="quick_action_showhide_favorites_descr">Appuyez sur le bouton pour afficher ou masquer les favoris sur la carte.</string>
-    <string name="quick_action_showhide_poi_descr">Appuyez sur le bouton pour afficher ou masquer les points d\'intérêt sur la carte.</string>
+<string name="quick_action_add_marker_descr">Un appui sur ce bouton d\'action ajoutera une marque au centre de la carte.</string>
+    <string name="quick_action_add_gpx_descr">Un appui sur ce bouton d\'action ajoutera une étape GPX au centre de la carte.</string>
+    <string name="quick_action_take_audio_note_descr">Un appui sur ce bouton d\'action ajoutera une note Audio au centre de la carte.</string>
+    <string name="quick_action_take_video_note_descr">Un appui sur ce bouton d\'action ajoutera une note Vidéo au centre de la carte.</string>
+    <string name="quick_action_take_photo_note_descr">Un appui sur ce bouton d\'action ajoutera une note Photo au centre de la carte.</string>
+    <string name="quick_action_add_osm_bug_descr">Un appui sur ce bouton d\'action ajoutera une note OSM au centre de la carte.</string>
+    <string name="quick_action_add_poi_descr">Un appui sur ce bouton d\'action ajoutera un point d\'intérêt au centre de la carte.</string>
+    <string name="quick_action_navigation_voice_descr">Un appui sur ce bouton activera ou désactivera le Guidage vocal pendant la navigation.</string>
+    <string name="quick_action_add_parking_descr">Un appui sur ce bouton ajoutera un emplacement de stationnement au centre de la carte.</string>
+    <string name="quick_action_showhide_favorites_descr">Un appui sur ce bouton affichera ou masquera les favoris sur la carte.</string>
+    <string name="quick_action_showhide_poi_descr">Un appui sur ce bouton affichera ou masquera les points d\'intérêt sur la carte.</string>
     <string name="quick_action_interim_dialog">Afficher une fenêtre intermédiaire</string>
     <string name="quick_action_add_create_items">Créer des éléments</string>
     <string name="quick_action_bug_descr">Ce texte sera renseigné automatiquement dans la zone de commentaire.</string>
@@ -2542,7 +2542,7 @@ Merci d\'indiquer un code long</string>
 représentant la zone : %1$s x %2$s</string>
     <string name="auto_split_recording_title">Découper automatiquement les enregistrements</string>
 	<string name="auto_split_recording_descr">Débuter un nouveau segment après une interruption de 6 min, une nouvelle trace après 2 h ou un nouveau fichier en cas de changement de date.</string>
-    <string name="quick_action_page_list_descr">Appuyez sur le bouton d\'action pour faire défiler la liste ci-dessous.</string>
+    <string name="quick_action_page_list_descr">Un appui sur ce bouton d\'action fera défiler la liste ci-dessous.</string>
     <string name="release_2_6">\\022 Nouvelle fonctionnalité : Bouton d\'action rapide 
 \n 
 \n • Réponses plus rapides aux gestes sur l\'écran 
@@ -2793,7 +2793,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="quick_action_show_navigation_finish_dialog">Afficher la fenêtre de fin de navigation</string>
     <string name="quick_action_start_stop_navigation">Démarrer / Arrêter la Navigation</string>
     <string name="quick_action_start_stop_navigation_descr">Appuyez sur ce bouton pour démarrer la navigation ou l\'arrêter lorsqu\'elle est en cours.</string>
-    <string name="mappilary_no_internet_desc">Vous devez être connecté à Internet pour afficher les photos Mapillary</string>
+    <string name="mappilary_no_internet_desc">Vous devez être connectés à Internet pour afficher les photos Mapillary.</string>
     <string name="retry">Essayer à nouveau</string>
 <string name="measurement_tool_action_bar">Déplacez la carte et ajoutez des points</string>
     <string name="measurement_tool">Mesurer une distance</string>
@@ -3116,4 +3116,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="use_two_digits_longitude">Utiliser une longitude à 2 chiffres</string>
     <string name="wikivoyage_search_hint">Rechercher : Pays, Ville, Département</string>
     <string name="shared_string_read">Lu</string>
+    <string name="article_removed">Article supprimé</string>
+    <string name="shared_string_contents">Contenus</string>
     </resources>
