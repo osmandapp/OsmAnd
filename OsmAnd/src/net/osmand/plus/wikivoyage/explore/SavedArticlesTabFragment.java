@@ -58,8 +58,9 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Wiki
 	public void savedArticlesUpdated() {
 		List<Object> newItems = getItems();
 		SavedArticlesDiffCallback diffCallback = new SavedArticlesDiffCallback(adapter.getItems(), newItems);
+		DiffUtil.DiffResult diffRes = DiffUtil.calculateDiff(diffCallback);
 		adapter.setItems(newItems);
-		DiffUtil.calculateDiff(diffCallback).dispatchUpdatesTo(adapter);
+		diffRes.dispatchUpdatesTo(adapter);
 	}
 
 	private List<Object> getItems() {
