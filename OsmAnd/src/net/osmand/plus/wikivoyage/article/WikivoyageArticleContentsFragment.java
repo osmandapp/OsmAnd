@@ -153,7 +153,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			String childText = (String) getChild(groupPosition, childPosition);
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context)
-						.inflate(R.layout.wikivoyage_contents_child_list_item, parent, false);
+						.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
 			TextView txtListChild = (TextView) convertView.findViewById(R.id.item_label);
 			txtListChild.setText(childText);
@@ -161,7 +161,9 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 					? R.color.wikivoyage_contents_parent_icon_dark
 					: R.color.wikivoyage_contents_parent_icon_light));
 			txtListChild.setCompoundDrawablesWithIntrinsicBounds(itemChildIcon, null, null, null);
-
+			convertView.findViewById(R.id.upper_row_divider).setVisibility(View.GONE);
+			convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
+			txtListChild.setTypeface(null);
 			if (childPosition == listDataChild.get(listDataHeader.get(groupPosition)).size() - 1) {
 				convertView.setPadding(0, 0, 0, AndroidUtils.dpToPx(getContext(),7));
 			} else {
@@ -198,7 +200,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			String headerTitle = (String) getGroup(groupPosition);
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context)
-						.inflate(R.layout.wikivoyage_contents_group_list_item, parent, false);
+						.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
 			boolean light = getMyApplication().getSettings().isLightContent();
 			TextView lblListHeader = (TextView) convertView.findViewById(R.id.item_label);
