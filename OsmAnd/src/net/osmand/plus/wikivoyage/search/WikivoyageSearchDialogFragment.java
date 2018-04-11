@@ -18,9 +18,10 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import net.osmand.ResultMatcher;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
+import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchHistoryItem;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
@@ -47,7 +48,8 @@ public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		searchHelper = new WikivoyageSearchHelper(getMyApplication());
+		final OsmandApplication app = getMyApplication();
+		searchHelper = new WikivoyageSearchHelper(app);
 
 		final View mainView = inflate(R.layout.fragment_wikivoyage_search_dialog, container);
 
@@ -93,7 +95,7 @@ public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment
 			}
 		});
 
-		adapter = new SearchRecyclerViewAdapter(getMyApplication());
+		adapter = new SearchRecyclerViewAdapter(app);
 		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);
@@ -101,18 +103,17 @@ public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment
 			@Override
 			public void onClick(View v) {
 				int pos = rv.getChildAdapterPosition(v);
-				if (pos != RecyclerView.NO_POSITION) {
+				FragmentManager fm = getFragmentManager();
+				if (pos != RecyclerView.NO_POSITION && fm != null) {
 					Object item = adapter.getItem(pos);
 					if (item instanceof WikivoyageSearchResult) {
 						WikivoyageSearchResult res = (WikivoyageSearchResult) item;
-						WikivoyageArticleDialogFragment.showInstance(getFragmentManager(),
-								res.getCityId(), new ArrayList<>(res.getLangs()));
+						WikivoyageArticleDialogFragment
+								.showInstance(fm, res.getCityId(), new ArrayList<>(res.getLangs()));
 					} else if (item instanceof WikivoyageSearchHistoryItem) {
 						WikivoyageSearchHistoryItem historyItem = (WikivoyageSearchHistoryItem) item;
-						ArrayList<String> langs = getMyApplication().getWikivoyageDbHelper()
-								.getArticleLangs(historyItem.getCityId());
-						WikivoyageArticleDialogFragment.showInstance(getFragmentManager(),
-								historyItem.getCityId(), langs, historyItem.getLang());
+						WikivoyageArticleDialogFragment
+								.showInstance(app, fm, historyItem.getCityId(), historyItem.getLang());
 					}
 				}
 			}

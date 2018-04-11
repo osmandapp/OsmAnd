@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
@@ -260,11 +261,24 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		return normal;
 	}
 
-	public static boolean showInstance(FragmentManager fm, long cityId, ArrayList<String> langs) {
+	public static boolean showInstance(@NonNull OsmandApplication app,
+									   @NonNull FragmentManager fm,
+									   long cityId,
+									   @Nullable String selectedLang) {
+		ArrayList<String> langs = app.getWikivoyageDbHelper().getArticleLangs(cityId);
+		return showInstance(fm, cityId, langs, selectedLang);
+	}
+
+	public static boolean showInstance(@NonNull FragmentManager fm,
+									   long cityId,
+									   @NonNull ArrayList<String> langs) {
 		return showInstance(fm, cityId, langs, null);
 	}
 
-	public static boolean showInstance(FragmentManager fm, long cityId, ArrayList<String> langs, @Nullable String selectedLang) {
+	public static boolean showInstance(@NonNull FragmentManager fm,
+									   long cityId,
+									   @NonNull ArrayList<String> langs,
+									   @Nullable String selectedLang) {
 		try {
 			Bundle args = new Bundle();
 			args.putLong(CITY_ID_KEY, cityId);
