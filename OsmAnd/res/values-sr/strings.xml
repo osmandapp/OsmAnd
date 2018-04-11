@@ -1509,7 +1509,7 @@
     <string name="shared_string_right">Десно</string>
     <string name="shared_string_left">Лево</string>
     <string name="coordinate_input_accuracy">%1$d цифара</string>
-    <string name="go_to_next_field">Иди на следеће поље</string>
+    <string name="go_to_next_field">Следеће поље</string>
     <string name="tap_on_map_to_hide_interface">Режим преко целог екрана</string>
     <string name="traffic_warning_payment">Наплата путарине</string>
     <string name="daynight_mode_day">Дан</string>
@@ -1568,7 +1568,7 @@
     <string name="show_guide_line_descr">Приказуј вођице од свог положаја до положаја активне ознаке.</string>
     <string name="show_arrows_descr">Приказуј једну или две стрелице које показују правац активних ознака.</string>
     <string name="distance_indication_descr">Изаберите начин приказа растојања до активних ознака.</string>
-    <string name="active_markers_descr">Изаберите колико индикатора праваца се приказују.</string>
+    <string name="active_markers_descr">Изаберите број индикатора праваца који ће се приказивати.</string>
     <string name="digits_quantity">Број децималних бројки</string>
     <string name="show_number_pad">Приказуј бројчану ставку</string>
     <string name="shared_string_paste">Налепи</string>
@@ -1588,7 +1588,7 @@
 	<string name="wrong_format">Погрешан облик</string>
     <string name="shared_string_road">Пут</string>
     <string name="show_map">Прикажи карту</string>
-    <string name="route_is_calculated">Пут је срачунат</string>
+    <string name="route_is_calculated">Пут срачунат</string>
     <string name="round_trip">Повратно путовање</string>
     <string name="plan_route_no_markers_toast">Морате додати најмање једну ознаку за коришћење ове могућности.</string>
     <string name="osn_modify_dialog_error">Десила се грешка: белешка није измењена</string>
@@ -1596,9 +1596,9 @@
     <string name="context_menu_item_modify_note">Измените белешку ОСМ-а</string>
     <string name="make_round_trip_descr">Додајте умножак почетне тачке као одредиште.</string>
     <string name="shared_string_markers">Ознаке</string>
-    <string name="coordinates_format">Облик координата</string>
+    <string name="coordinates_format">Облик координате</string>
     <string name="use_system_keyboard">Користи системску тастатуру</string>
-    <string name="fast_coordinates_input_descr">Изаберите облик уноса координата. Можете увек да га промените тапкањем на Опције.</string>
+    <string name="fast_coordinates_input_descr">Изаберите облик уноса координата. Можете увек да га промените тапкањем на \"Опције\".</string>
     <string name="fast_coordinates_input">Брзи унос координата</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Избегавај путеве са поледицама, плићаке</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Избегавајте путеве са поледицама и плићаке.</string>
@@ -1620,7 +1620,7 @@
     <string name="empty_state_markers_groups_desc">Можете увести омиљене групе или пролазне тачке путања као ознаке.</string>
     <string name="empty_state_markers_history_desc">Ознаке означене као пређене ће се појавити на екрану.</string>
     <string name="make_round_trip">Направи повратно путовање</string>
-    <string name="group_will_be_removed_after_restart">Групе ће бити уклоњене после следећег покретања програма.</string>
+    <string name="group_will_be_removed_after_restart">Група ће нестати после следећег покретања програма.</string>
     <string name="show_guide_line">Прикажи вођице</string>
     <string name="show_arrows_on_the_map">Приказуј стрелице на карти</string>
     <string name="show_passed">Прикажи пређене</string>
@@ -1628,7 +1628,7 @@
     <string name="remove_from_map_markers">Уклони из ознака карти</string>
     <string name="date_added">Дан је додан</string>
     <string name="marker_show_distance_descr">Изаберите како указати на растојање и правац ка ознакама карте на приказу карте:</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Изаберите испод којом брзином ће усмерење карте прећи из „у правцу кретања“ на „компас“.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Испод изаберите којом брзином ће усмерење карте прећи из „у правцу кретања“ на „компас“.</string>
     <string name="all_markers_moved_to_history">Све ознаке карте су премештене у историју</string>
     <string name="marker_moved_to_history">Ознаке карте су премештене у историју</string>
     <string name="marker_moved_to_active">Ознака карте је премештена у активне</string>
@@ -1643,8 +1643,8 @@
     <string name="move_all_to_history">Све премести у историју</string>
     <string name="show_direction">Приказ удаљености</string>
     <string name="sort_by">Распореди по</string>
-    <string name="do_not_use_animations">Не користи оживљавање</string>
-    <string name="do_not_use_animations_descr">Онемогућава оживљавање у програму.</string>
+    <string name="do_not_use_animations">Без анимација</string>
+    <string name="do_not_use_animations_descr">Онемогућава анимације у апликацији.</string>
     <string name="keep_showing_on_map">Приказуј на карти</string>
     <string name="exit_without_saving">Изађи пре чувања?</string>
     <string name="line">Линија</string>
@@ -1669,7 +1669,7 @@
     <string name="will_open_tomorrow_at">Биће отворено сутра у</string>
     <string name="rendering_attr_hidePOILabels_name">Ознаке тачака од интереса</string>
     <string name="shared_string_without_name">Без имена</string>
-    <string name="empty_state_markers_active_desc">Дуго или кратко притисните на место, онда притисните заставицу кад се појави.</string>
+    <string name="empty_state_markers_active_desc">Дуго или кратко притисните на \"Места\", онда притисните заставицу кад се појави.</string>
     <string name="map_orientation_change_in_accordance_with_speed">Задршка усмерења карте</string>
     <string name="quick_action_start_stop_navigation_descr">Тупните на ово дугме за почетак или завршетак навођења.</string>
     <string name="store_tracks_in_monthly_directories">Сачувај снимљене путање у месечним фасциклама</string>
@@ -1749,7 +1749,7 @@
     <string name="rendering_category_routes">Путеви</string>
     <string name="quick_action_add_gpx">Додај ГПИкс пролазну тачку</string>
     <string name="quick_action_edit_action">Уреди акцију</string>
-    <string name="make_as_start_point">Означи као почетну тачку</string>
+    <string name="make_as_start_point">Означи ову тачку као почетну</string>
     <string name="shared_string_current">Тренутна</string>
     <string name="last_intermediate_dest_description">Додај као последње стајање на путу</string>
     <string name="first_intermediate_dest_description">Додај прво стајање на путу</string>
@@ -2100,7 +2100,7 @@
 	<string name="optional_point_name">Опционо име тачке</string>
     <string name="enter_the_file_name">Унесите име датотеке.</string>
     <string name="map_import_error">Грешка при увожењу карте</string>
-    <string name="map_imported_successfully">Карта успешно увезена</string>
+    <string name="map_imported_successfully">Карта увезена</string>
     <string name="download_using_mobile_internet">Бежична мрежа тренутно није доступна. Да ли желите да искористите тренутну интернет везу за преузимање?</string>
     <string name="auto_zoom_map">Аутоматско зумирање карте</string>
     <string name="snap_to_road_descr">Прилепи позицију за путеве приликом навођења.</string>
@@ -2536,7 +2536,7 @@
     <string name="use_dashboard_btn">Користи командну таблу</string>
     <string name="dashboard_or_drawer_title">Командна табла или менији</string>
     <string name="dashboard_or_drawer_description">Сада постоји нови избор да ли желите да контролиште апликацију преко менија или преко командне табле. Ваш избор увек можете променити у подешавањима командне табле.</string>
-    <string name="nothing_found_in_radius">Нисмо нашли ништа у пречнику:</string>
+    <string name="nothing_found_in_radius">Није нађено ништа у пречнику:</string>
     <string name="shared_string_total">Укупно</string>
     <string name="clear_all_intermediates">Очисти све пролазне тачке</string>
     <string name="transport_nearby_routes">БЛИЗУ</string>
