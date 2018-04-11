@@ -3799,4 +3799,8 @@
 
 	<string name="poi_climbing_adventure">Climbing adventure</string>
 
+	<string name="poi_via_ferrata">Via ferrata</string>
+	<string name="poi_cable_number">Cable number</string>
+	<string name="poi_via_ferrata_scale">Difficulty</string>
+
 </resources>
