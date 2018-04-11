@@ -1137,7 +1137,7 @@
 	<string name="poi_landfill_waste_nuclear">Resíduos nucleares</string>
 	<string name="poi_brownfield">Terreno abandonado</string>
 	<string name="poi_greenfield">Terreno virgem</string>
-	<string name="poi_start_date">Data de início</string>
+	<string name="poi_start_date">Data de início/Inauguração</string>
 	<string name="poi_wheelchair_yes">Sim</string>
 
 	<string name="poi_bunker_silo">Silo trincheira</string>
@@ -3810,4 +3810,13 @@
 
 	<string name="poi_water_utility">Companhia de água</string>
 
-</resources>
+<string name="poi_service_car">Serviços automotivos</string>
+
+<string name="poi_amusement_arcade">Fliperama</string>
+	<string name="poi_adult_gaming_centre">Centro de jogos para adultos</string>
+
+	<string name="poi_service_vehicle_car_repair_yes">Reparos automotivos</string>
+	<string name="poi_service_vehicle_oil_change_yes">Troca de óleo</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Venda de carros usados</string>
+	<string name="poi_service_vehicle_brakes_yes">Freios</string>
+	</resources>
