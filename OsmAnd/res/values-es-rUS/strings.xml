@@ -2953,4 +2953,6 @@ Proporciona un código completo</string>
     <string name="shared_string_explore">Explorar</string>
     <string name="wikivoyage_search_hint">Buscar: País, Ciudad, Provincia</string>
     <string name="shared_string_read">Leer</string>
+    <string name="article_removed">Artículo borrado</string>
+    <string name="shared_string_contents">Contenido</string>
     </resources>
