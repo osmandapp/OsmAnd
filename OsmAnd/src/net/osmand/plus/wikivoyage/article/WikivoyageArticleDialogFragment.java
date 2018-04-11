@@ -96,7 +96,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 		TextView contentsBtn = (TextView) mainView.findViewById(R.id.contents_button);
 		contentsBtn.setCompoundDrawablesWithIntrinsicBounds(
-				getActiveIcon(R.drawable.ic_action_list_header), null, null, null
+				getActiveIcon(R.drawable.ic_action_contents), null, null, null
 		);
 		contentsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override

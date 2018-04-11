@@ -11,10 +11,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
 import net.osmand.AndroidUtils;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 
@@ -68,10 +72,23 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			WikivoyageArticle article = (WikivoyageArticle) getItem(position);
 			boolean lastItem = position == getItemCount() - 1;
 
+			Picasso.get()
+					.load(WikivoyageArticle.getImageUrl(article.getImageTitle(), false))
+					.transform(new CropCircleTransformation())
+					.into(holder.icon, new Callback() {
+						@Override
+						public void onSuccess() {
+							holder.icon.setVisibility(View.VISIBLE);
+						}
+
+						@Override
+						public void onError(Exception e) {
+							holder.icon.setVisibility(View.GONE);
+						}
+					});
 			holder.title.setText(article.getTitle());
 			holder.content.setText(article.getContent());
 			holder.partOf.setText(article.getGeoDescription());
-			holder.icon.setVisibility(View.GONE); // todo
 			holder.leftButton.setText(app.getString(R.string.shared_string_read));
 			holder.leftButton.setCompoundDrawablesWithIntrinsicBounds(readIcon, null, null, null);
 			holder.rightButton.setText(app.getString(R.string.shared_string_delete));
