@@ -2,6 +2,7 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -23,8 +24,6 @@ import java.util.List;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class WikivoyageDbHelper {
-
-	private static final String DB_NAME = "wikivoyage.sqlite";
 
 	private static final String ARTICLES_TABLE_NAME = "wikivoyage_articles";
 	private static final String ARTICLES_COL_ID = "article_id";
@@ -66,7 +65,7 @@ public class WikivoyageDbHelper {
 	private final OsmandApplication application;
 	private SQLiteConnection connection = null;
 	private File selectedTravelBook = null;
-	private List<File> existingTravelBooks = new ArrayList<File>();
+	private List<File> existingTravelBooks = new ArrayList<>();
 	private Collator collator;
 
 	public WikivoyageDbHelper(OsmandApplication application) {
@@ -91,26 +90,26 @@ public class WikivoyageDbHelper {
 			}
 		}
 	}
-	
+
 	public File getSelectedTravelBook() {
 		return selectedTravelBook;
 	}
-	
+
 	public List<File> getExistingTravelBooks() {
 		return existingTravelBooks;
 	}
 
 	@Nullable
 	private SQLiteConnection openConnection() {
-		if(connection == null && selectedTravelBook != null) {
+		if (connection == null && selectedTravelBook != null) {
 			application.getSettings().SELECTED_TRAVEL_BOOK.set(selectedTravelBook.getName());
 			connection = application.getSQLiteAPI().openByAbsolutePath(selectedTravelBook.getAbsolutePath(), true);
 		}
 		return connection;
 	}
-	
+
 	public void closeConnection() {
-		if(connection != null) {
+		if (connection != null) {
 			connection.close();
 			connection = null;
 		}
@@ -215,7 +214,7 @@ public class WikivoyageDbHelper {
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			SQLiteCursor cursor = conn.rawQuery(ARTICLES_TABLE_SELECT + " WHERE " + ARTICLES_COL_CITY_ID + " = ? AND "
-					+ ARTICLES_COL_LANG + " = ?", new String[] { String.valueOf(cityId), lang });
+					+ ARTICLES_COL_LANG + " = ?", new String[]{String.valueOf(cityId), lang});
 			if (cursor.moveToFirst()) {
 				res = readArticle(cursor);
 			}
@@ -230,7 +229,7 @@ public class WikivoyageDbHelper {
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			SQLiteCursor cursor = conn.rawQuery("SELECT " + ARTICLES_COL_LANG + " FROM " + ARTICLES_TABLE_NAME
-					+ " WHERE " + ARTICLES_COL_CITY_ID + " = ?", new String[] { String.valueOf(cityId) });
+					+ " WHERE " + ARTICLES_COL_CITY_ID + " = ?", new String[]{String.valueOf(cityId)});
 			if (cursor.moveToFirst()) {
 				String baseLang = application.getLanguage();
 				do {
@@ -278,9 +277,4 @@ public class WikivoyageDbHelper {
 
 		return res;
 	}
-
-	public boolean isDbFileExists() {
-		return selectedTravelBook != null;
-	}
-
 }
