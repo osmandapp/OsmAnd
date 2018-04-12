@@ -399,6 +399,10 @@ public class DownloadActivityType {
 		if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length());
 		}
+		if (indexItem.getType() == WIKIVOYAGE_FILE &&
+				fileName.endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
+			return fileName.substring(0, fileName.length() - IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT.length());
+		}
 		if (this == VOICE_FILE) {
 			int l = fileName.lastIndexOf('_');
 			if (l == -1) {
