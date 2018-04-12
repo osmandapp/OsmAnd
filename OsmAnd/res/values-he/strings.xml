@@ -2713,4 +2713,6 @@
 \nייצוג המקום: %1$s × %2$s</string>
     <string name="navigate_point_northing">הצפנה</string>
     <string name="navigate_point_easting">הזרחה</string>
+    <string name="download_maps_travel">מפות טיולים</string>
+    <string name="shared_string_wikivoyage">ויקימסע</string>
     </resources>
