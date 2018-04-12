@@ -31,7 +31,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	private static final int HEADER_TYPE = 0;
 	private static final int ITEM_TYPE = 1;
 
-	private static final boolean USE_ALTERNATIVE_CARD = true;
+	private static final boolean USE_ALTERNATIVE_CARD = false;
 
 	private final OsmandApplication app;
 
