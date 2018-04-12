@@ -10,11 +10,15 @@ public class IndexConstants {
 	public final static int VOICE_VERSION = 0; //supported download versions
 	public final static int TTSVOICE_VERSION = 1; //supported download versions
 	
+	public static final String SQLITE_EXT = ".sqlitedb"; //$NON-NLS-1$
+	public static final String TEMP_SOURCE_TO_LOAD = "temp";
+	
 	public static final String POI_INDEX_EXT = ".poi.odb"; //$NON-NLS-1$
 	
 	public static final String BINARY_MAP_INDEX_EXT = ".obf"; //$NON-NLS-1$
 	public static final String BINARY_MAP_INDEX_EXT_ZIP = ".obf.zip"; //$NON-NLS-1$
 	
+	public static final String BINARY_WIKIVOYAGE_MAP_INDEX_EXT = ".sqlite"; //$NON-NLS-1$
 	public static final String BINARY_WIKI_MAP_INDEX_EXT = ".wiki.obf"; //$NON-NLS-1$
 	public static final String BINARY_WIKI_MAP_INDEX_EXT_ZIP = ".wiki.obf.zip"; //$NON-NLS-1$
 	public static final String BINARY_ROAD_MAP_INDEX_EXT = ".road.obf"; //$NON-NLS-1$
@@ -54,7 +58,7 @@ public class IndexConstants {
 	public static final String SRTM_INDEX_DIR = "srtm/"; //$NON-NLS-1$
 	public static final String ROADS_INDEX_DIR = "roads/"; //$NON-NLS-1$
 	public static final String WIKI_INDEX_DIR = "wiki/"; //$NON-NLS-1$
-	public static final String WIKIVOYAGE_INDEX_DIR = "wikivoyage/";
+	public static final String WIKIVOYAGE_INDEX_DIR = "travel/";
 	public static final String AV_INDEX_DIR = "avnotes/"; //$NON-NLS-1$
 	public static final String FONT_INDEX_DIR = "fonts/"; //$NON-NLS-1$
 	public static final String VOICE_INDEX_DIR = "voice/"; //$NON-NLS-1$
@@ -62,8 +66,7 @@ public class IndexConstants {
 	public static final String ROUTING_XML_FILE= "routing.xml";
 
 	
-	public static final String SQLITE_EXT = ".sqlitedb"; //$NON-NLS-1$
-	public static final String TEMP_SOURCE_TO_LOAD = "temp";
+	
 	
 	
 }

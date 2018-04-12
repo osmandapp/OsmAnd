@@ -195,5 +195,6 @@
 	<dimen name="toolbar_height">84dp</dimen>
 
 	<dimen name="wikivoyage_search_list_header_height">54dp</dimen>
-	<dimen name="wikivoyage_saved_article_icon_size">120dp</dimen>
+	<dimen name="wikivoyage_article_card_icon_size">120dp</dimen>
+	<dimen name="wikivoyage_article_card_alternative_icon_height">60dp</dimen>
 </resources>

@@ -405,6 +405,8 @@ public class ItemViewHolder {
 						tp = LocalIndexType.SRTM_DATA;
 					} else if (indexItem.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
 						tp = LocalIndexType.MAP_DATA;
+					} else if (indexItem.getType() == DownloadActivityType.WIKIVOYAGE_FILE) {
+						tp = LocalIndexType.MAP_DATA;
 					} else if (indexItem.getType() == DownloadActivityType.FONT_FILE) {
 						tp = LocalIndexType.FONT_DATA;
 					} else if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {

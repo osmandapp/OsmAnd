@@ -2997,6 +2997,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> FOLLOW_THE_ROUTE = new BooleanPreference("follow_to_route", false).makeGlobal();
 	public final OsmandPreference<String> FOLLOW_THE_GPX_ROUTE = new StringPreference("follow_gpx", null).makeGlobal();
+	
+	public final OsmandPreference<String> SELECTED_TRAVEL_BOOK = new StringPreference("selected_travel_book", "").makeGlobal();
 
 	public final ListStringPreference TRANSPORT_DEFAULT_SETTINGS =
 			(ListStringPreference) new ListStringPreference("transport_default_settings", "transportStops", ",").makeProfile();

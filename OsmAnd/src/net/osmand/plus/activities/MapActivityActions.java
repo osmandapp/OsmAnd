@@ -766,18 +766,17 @@ public class MapActivityActions implements DialogProvider {
 					}).createItem());
 		}
 
-		if (WikivoyageDbHelper.isDbFileExists(app)) {
-			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_travel, mapActivity)
-					.setIcon(R.drawable.ic_action_travel)
-					.setListener(new ItemClickListener() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-							MapActivity.clearPrevActivityIntent();
-							WikivoyageExploreDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
-							return true;
-						}
-					}).createItem());
-		}
+		optionsMenuHelper.addItem(new ItemBuilder().setTitle(getString(R.string.shared_string_travel) + " (Beta)")
+				.setIcon(R.drawable.ic_action_travel)
+				.setListener(new ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+						getMyApplication().getWikivoyageDbHelper().initTravelBooks();
+						MapActivity.clearPrevActivityIntent();
+						WikivoyageExploreDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
+						return true;
+					}
+				}).createItem());
 
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.measurement_tool, mapActivity)
 				.setIcon(R.drawable.ic_action_ruler)

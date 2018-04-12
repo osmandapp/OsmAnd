@@ -537,6 +537,8 @@ public class MapDataMenuController extends MenuController {
 				parent = app.getAppPath(IndexConstants.SRTM_INDEX_DIR);
 			} else if (i.getOriginalType() == LocalIndexType.WIKI_DATA) {
 				parent = app.getAppPath(IndexConstants.WIKI_INDEX_DIR);
+			} else if (i.getOriginalType() == LocalIndexType.TRAVEL_DATA) {
+				parent = app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
 			} else if (i.getOriginalType() == LocalIndexType.TTS_VOICE_DATA) {
 				parent = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
 			} else if (i.getOriginalType() == LocalIndexType.VOICE_DATA) {
@@ -561,6 +563,8 @@ public class MapDataMenuController extends MenuController {
 				return DownloadActivityType.SRTM_COUNTRY_FILE;
 			} else if (localIndexInfo.getOriginalType() == LocalIndexType.WIKI_DATA) {
 				return DownloadActivityType.WIKIPEDIA_FILE;
+			} else if (localIndexInfo.getOriginalType() == LocalIndexType.TRAVEL_DATA) {
+				return DownloadActivityType.WIKIVOYAGE_FILE;
 			} else if (localIndexInfo.getOriginalType() == LocalIndexType.TTS_VOICE_DATA
 					|| localIndexInfo.getOriginalType() == LocalIndexType.VOICE_DATA) {
 				return DownloadActivityType.VOICE_FILE;

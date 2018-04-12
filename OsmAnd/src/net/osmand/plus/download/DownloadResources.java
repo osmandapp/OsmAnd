@@ -1,6 +1,7 @@
 package net.osmand.plus.download;
 
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
@@ -22,6 +23,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+
 public class DownloadResources extends DownloadResourceGroup {
 	public boolean isDownloadedFromInternet = false;
 	public boolean downloadFromInternetFailed = false;
@@ -36,6 +39,8 @@ public class DownloadResources extends DownloadResourceGroup {
 	public static final String WORLD_SEAMARKS_NAME = "World_seamarks";
 	public static final String WORLD_SEAMARKS_OLD_KEY = "world_seamarks_basemap";
 	public static final String WORLD_SEAMARKS_OLD_NAME = "World_seamarks_basemap";
+	private static final Log LOG = PlatformUtil.getLog(DownloadResources.class);
+
 	
 	
 	public DownloadResources(OsmandApplication app) {
@@ -98,9 +103,13 @@ public class DownloadResources extends DownloadResourceGroup {
 		java.text.DateFormat dateFormat = app.getResourceManager().getDateFormat();
 		Map<String, String> indexActivatedFileNames = app.getResourceManager().getIndexFileNames();
 		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexActivatedFileNames);
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT, 
+				indexActivatedFileNames);
 		Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
 		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.TILES_INDEX_DIR), IndexConstants.SQLITE_EXT,
+				indexFileNames);
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT, 
 				indexFileNames);
 		app.getResourceManager().getBackupIndexes(indexFileNames);
 		this.indexFileNames = indexFileNames;
@@ -140,6 +149,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra)
 					|| item.getType() == DownloadActivityType.ROADS_FILE
 					|| item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+					|| item.getType() == DownloadActivityType.WIKIVOYAGE_FILE
 					|| item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
 					|| item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				outdated = true;
@@ -268,6 +278,10 @@ public class DownloadResources extends DownloadResourceGroup {
 		DownloadResourceGroup nauticalMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.NAUTICAL_MAPS_GROUP);
 		DownloadResourceGroup nauticalMapsScreen = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_MAPS);
 		DownloadResourceGroup nauticalMaps = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_MAPS_HEADER);
+		
+		DownloadResourceGroup wikivoyageMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.TRAVEL_GROUP);
+		DownloadResourceGroup wikivoyageMapsScreen = new DownloadResourceGroup(wikivoyageMapsGroup, DownloadResourceGroupType.WIKIVOYAGE_MAPS);
+		DownloadResourceGroup wikivoyageMaps = new DownloadResourceGroup(wikivoyageMapsGroup, DownloadResourceGroupType.WIKIVOYAGE_HEADER);
 
 		Map<WorldRegion, List<IndexItem> > groupByRegion = new LinkedHashMap<WorldRegion, List<IndexItem>>();
 		OsmandRegions regs = app.getRegions();
@@ -288,6 +302,10 @@ public class DownloadResources extends DownloadResourceGroup {
 				if (app.getSettings().DEPTH_CONTOURS_PURCHASED.get() || nauticalMaps.size() == 0) {
 					nauticalMaps.addItem(ii);
 				}
+				continue;
+			}
+			if(ii.getType() == DownloadActivityType.WIKIVOYAGE_FILE) {
+				wikivoyageMaps.addItem(ii);
 				continue;
 			}
 			String basename = ii.getBasename().toLowerCase();
@@ -354,6 +372,10 @@ public class DownloadResources extends DownloadResourceGroup {
 		nauticalMapsGroup.addGroup(nauticalMapsScreen);
 		addGroup(nauticalMapsGroup);
 
+		wikivoyageMapsScreen.addGroup(wikivoyageMaps);
+		wikivoyageMapsGroup.addGroup(wikivoyageMapsScreen);
+		addGroup(wikivoyageMapsGroup);
+
 		if (otherMaps.size() > 0) {
 			addGroup(otherMapsGroup);
 		}
@@ -365,6 +387,8 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 		otherGroup.addGroup(voiceScreenTTS);
 		otherGroup.addGroup(voiceScreenRec);
+		
+		
 		if (fonts.getIndividualResources() != null) {
 			otherGroup.addGroup(fontScreen);
 		}
