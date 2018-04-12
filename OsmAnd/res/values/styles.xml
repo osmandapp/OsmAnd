@@ -205,6 +205,7 @@
         <item name="wikivoyage_active_color">@color/wikivoyage_active_light</item>
         <item name="wikivoyage_bottom_bar_bg_color">@color/wikivoyage_bottom_bar_bg_light</item>
         <item name="wikivoyage_bottom_bar_divider_color">@color/wikivoyage_bottom_bar_divider_light</item>
+        <item name="wikivoyage_secondary_btn_bg_color">@color/wikivoyage_secondary_btn_bg_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -398,6 +399,7 @@
         <item name="wikivoyage_active_color">@color/wikivoyage_active_dark</item>
         <item name="wikivoyage_bottom_bar_bg_color">@color/wikivoyage_bottom_bar_bg_dark</item>
         <item name="wikivoyage_bottom_bar_divider_color">@color/wikivoyage_bottom_bar_divider_dark</item>
+        <item name="wikivoyage_secondary_btn_bg_color">@color/wikivoyage_secondary_btn_bg_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
