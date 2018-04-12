@@ -10,10 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -34,6 +34,8 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 	public static final String CONTENTS_LINK_KEY = "contents_link";
 
 	public static final int REQUEST_LINK_CODE = 0;
+
+	private ExpandableListView expListView;
 
 	private LinkedHashMap<String, String> map;
 	private String link;
@@ -62,7 +64,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 		items.add(new TitleItem(getString(R.string.shared_string_contents)));
 
-		ExpandableListView expListView = new ExpandableListView(getContext());
+		expListView = new ExpandableListView(getContext());
 		ExpandableListAdapter listAdapter = new ExpandableListAdapter(getContext(), listDataHeader, listDataChild);
 
 		expListView.setAdapter(listAdapter);
@@ -79,6 +81,15 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			public boolean onChildClick(ExpandableListView parent, View v,
 										int groupPosition, int childPosition, long id) {
 				link = map.get(listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition));
+				sendResult();
+				dismiss();
+				return false;
+			}
+		});
+		expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+			@Override
+			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+				link = map.get(listDataHeader.get(groupPosition));
 				sendResult();
 				dismiss();
 				return false;
@@ -163,12 +174,11 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			txtListChild.setCompoundDrawablesWithIntrinsicBounds(itemChildIcon, null, null, null);
 
 			convertView.findViewById(R.id.upper_row_divider).setVisibility(View.GONE);
-			convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
 			txtListChild.setTypeface(null);
 			if (childPosition == listDataChild.get(listDataHeader.get(groupPosition)).size() - 1) {
-				convertView.setPadding(0, 0, 0, AndroidUtils.dpToPx(getContext(),7));
+				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.VISIBLE);
 			} else {
-				convertView.setPadding(0, 0, 0, 0);
+				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
 			}
 
 			return convertView;
@@ -196,8 +206,8 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		}
 
 		@Override
-		public View getGroupView(final int groupPosition, boolean isExpanded,
-								 View convertView, ViewGroup parent) {
+		public View getGroupView(final int groupPosition, final boolean isExpanded,
+		                         View convertView, ViewGroup parent) {
 			String headerTitle = (String) getGroup(groupPosition);
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context)
@@ -209,17 +219,22 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			lblListHeader.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 
-			lblListHeader.setOnClickListener(new View.OnClickListener() {
+			adjustIndicator(getMyApplication(), groupPosition, isExpanded, convertView, light);
+			ImageView indicator = (ImageView) convertView.findViewById(R.id.explist_indicator);
+			indicator.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					link = map.get(listDataHeader.get(groupPosition));
-					sendResult();
-					dismiss();
+					if(isExpanded){
+						expListView.collapseGroup(groupPosition);
+					} else {
+						expListView.expandGroup(groupPosition);
+					}
 				}
 			});
-			adjustIndicator(getMyApplication(), groupPosition, isExpanded, convertView, light);
 			if (isExpanded) {
 				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
+			} else {
+				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.VISIBLE);
 			}
 			return convertView;
 		}

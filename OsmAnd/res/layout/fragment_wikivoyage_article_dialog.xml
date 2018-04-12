@@ -69,17 +69,6 @@
 		android:layout_gravity="bottom|center_horizontal"
 		android:orientation="vertical">
 
-		<ImageView
-			android:layout_width="match_parent"
-			android:layout_height="10dp"
-			android:background="@drawable/bg_contextmenu_shadow_top_light" />
-
-		<View
-			android:id="@+id/bottom_row_divider"
-			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:background="?attr/wikivoyage_bottom_bar_divider_color"/>
-
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/bottom_sheet_cancel_button_height"
