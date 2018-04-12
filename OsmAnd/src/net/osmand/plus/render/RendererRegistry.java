@@ -43,6 +43,7 @@ public class RendererRegistry {
 	public final static String MAPNIK_RENDER = "Mapnik";  //$NON-NLS-1$
 	public final static String OFFROAD_RENDER = "Offroad";  //$NON-NLS-1$
 	public final static String LIGHTRS_RENDER = "LightRS";  //$NON-NLS-1$
+	public final static String UNIRS_RENDER = "UniRS";  //$NON-NLS-1$
 
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;
@@ -67,6 +68,7 @@ public class RendererRegistry {
 		internalRenderers.put(TOPO_RENDER, "topo" + ".render.xml");
 		internalRenderers.put(MAPNIK_RENDER, "mapnik" + ".render.xml");
 		internalRenderers.put(LIGHTRS_RENDER, "LightRS" + ".render.xml");
+		internalRenderers.put(UNIRS_RENDER, "UniRS" + ".render.xml");
 		internalRenderers.put(NAUTICAL_RENDER, "nautical" + ".render.xml");
 		internalRenderers.put(WINTER_SKI_RENDER, "skimap" + ".render.xml");
 		internalRenderers.put(OFFROAD_RENDER, "offroad" + ".render.xml");
