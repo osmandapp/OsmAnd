@@ -71,6 +71,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		Drawable transparent = ContextCompat.getDrawable(getContext(), R.color.color_transparent);
 		expListView.setDivider(transparent);
 		expListView.setGroupIndicator(transparent);
+		expListView.setSelector(transparent);
 		expListView.setLayoutParams(new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.MATCH_PARENT)
