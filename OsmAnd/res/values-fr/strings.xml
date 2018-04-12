@@ -3118,4 +3118,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_read">Lu</string>
     <string name="article_removed">Article supprimé</string>
     <string name="shared_string_contents">Contenus</string>
+    <string name="download_maps_travel">Cartes</string>
+    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="index_item_world_wikivoyage">Articles mondiaux Wikivoyage</string>
     </resources>
