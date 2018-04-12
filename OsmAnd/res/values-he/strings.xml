@@ -2715,4 +2715,18 @@
     <string name="navigate_point_easting">הזרחה</string>
     <string name="download_maps_travel">מפות טיולים</string>
     <string name="shared_string_wikivoyage">ויקימסע</string>
+    <string name="article_removed">המאמר הוסר</string>
+    <string name="fav_point_emoticons_message">שם הנקודה המועדפת השתנה לביטוי %1$s כדי להתאים כראוי לשמירת המחרוזת עם הרגשונים לקובץ.</string>
+    <string name="save_track_interval_globally">הפרשי רישום</string>
+    <string name="rendering_attr_hideWoodScrubs_name">עצים וצמחיה נמוכה</string>
+    <string name="gpx_wpt">נקודת דרך</string>
+    <string name="delay_navigation_start">התחלת הנחייה לפי פניות אוטומטית</string>
+    <string name="gpx_timespan">טווח זמן: %1$s</string>
+    <string name="index_item_world_seamarks">נקודות ציון ימיות</string>
+    <string name="app_modes_choose_descr">נא לבחור את פרופילי השימוש שיופיעו ביישומון.</string>
+    <string name="base_world_map">מפת בסיס עולמית</string>
+    <string name="map_widget_fps_info">פרטי ניפוי שגיאות לתמונות לשנייה</string>
+    <string name="osmand_plus_extended_description_part5">תכונות בטיחות • החלפה אוטומטית בין מצבי יום/לילה לבחירתך • הצגת מגבלת מהירות כרשות, עם תזכורת במקרה של חריגה • תקריב תלוי מהירות • שיתוף המיקום שלך כדי שחברים יוכלו למצוא אותך</string>
+    <string name="osmand_plus_extended_description_part6">תכונות אופניים והולכי רגל • הצגת נתיבי הליכה ברגל, טיפוס הרים ואופניים, נהדר לפעילויות חוץ • מצבי ניווט ותצוגה מיוחדים לאופניים ולהולכי רגל • תחנות תחבורה ציבורית כרשות (אוטובוס, רכבת, רכבת קלה) לרבות שם הקו • הקלטת מסע לקובץ GPX מקומי או שירות מקוון • הצגה של מהירות וגובה כרשות • הצגת קווי מתאר והצללות (דרך תוסף חיצוני)</string>
+    <string name="touring_view_renderer">תצוגת טיול (ניגודיות ופרטים)</string>
     </resources>
