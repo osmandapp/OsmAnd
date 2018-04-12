@@ -94,8 +94,6 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			}
 		});
 
-		View contents = (View) mainView.findViewById(R.id.bottom_bar);
-		AndroidUtils.setBackground(getContext(), contents, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		TextView contentsBtn = (TextView) mainView.findViewById(R.id.contents_button);
 		contentsBtn.setCompoundDrawablesWithIntrinsicBounds(
 				getActiveIcon(R.drawable.ic_action_contents), null, null, null
