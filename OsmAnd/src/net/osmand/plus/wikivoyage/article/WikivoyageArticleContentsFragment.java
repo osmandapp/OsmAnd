@@ -10,11 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -35,6 +34,8 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 	public static final String CONTENTS_LINK_KEY = "contents_link";
 
 	public static final int REQUEST_LINK_CODE = 0;
+
+	private ExpandableListView expListView;
 
 	private LinkedHashMap<String, String> map;
 	private String link;
@@ -63,11 +64,14 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 		items.add(new TitleItem(getString(R.string.shared_string_contents)));
 
-		ExpandableListView expListView = new ExpandableListView(getContext());
+		expListView = new ExpandableListView(getContext());
 		ExpandableListAdapter listAdapter = new ExpandableListAdapter(getContext(), listDataHeader, listDataChild);
 
 		expListView.setAdapter(listAdapter);
-		expListView.setChildDivider(ContextCompat.getDrawable(getContext(), R.color.color_transparent));
+		Drawable transparent = ContextCompat.getDrawable(getContext(), R.color.color_transparent);
+		expListView.setDivider(transparent);
+		expListView.setGroupIndicator(transparent);
+		expListView.setSelector(transparent);
 		expListView.setLayoutParams(new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.MATCH_PARENT)
@@ -83,23 +87,12 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 				return false;
 			}
 		});
-
-		int width = AndroidUtils.getScreenWidth(getActivity());
-		if (android.os.Build.VERSION.SDK_INT < 18) {
-			expListView.setIndicatorBounds(width - (AndroidUtils.dpToPx(getContext(), 50)),
-					width - (AndroidUtils.dpToPx(getContext(), 10)));
-		} else {
-			expListView.setIndicatorBoundsRelative(width - (AndroidUtils.dpToPx(getContext(), 50)),
-					width - (AndroidUtils.dpToPx(getContext(), 10)));
-		}
-		expListView.setOnGroupClickListener(new OnGroupClickListener() {
+		expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 				link = map.get(listDataHeader.get(groupPosition));
 				sendResult();
-				if (listDataChild.get(listDataHeader.get(groupPosition)) == null) {
-					dismiss();
-				}
+				dismiss();
 				return false;
 			}
 		});
@@ -158,7 +151,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 		@Override
 		public Object getChild(int groupPosition, int childPosititon) {
-			return this.listDataChild.get(this.listDataHeader.get(groupPosition)).get(childPosititon);
+			return listDataChild.get(listDataHeader.get(groupPosition)).get(childPosititon);
 		}
 
 		@Override
@@ -180,6 +173,14 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 					? R.color.wikivoyage_contents_parent_icon_dark
 					: R.color.wikivoyage_contents_parent_icon_light));
 			txtListChild.setCompoundDrawablesWithIntrinsicBounds(itemChildIcon, null, null, null);
+
+			convertView.findViewById(R.id.upper_row_divider).setVisibility(View.GONE);
+			txtListChild.setTypeface(null);
+			if (childPosition == listDataChild.get(listDataHeader.get(groupPosition)).size() - 1) {
+				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.VISIBLE);
+			} else {
+				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
+			}
 
 			return convertView;
 		}
@@ -206,18 +207,36 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		}
 
 		@Override
-		public View getGroupView(int groupPosition, boolean isExpanded,
-								 View convertView, ViewGroup parent) {
+		public View getGroupView(final int groupPosition, final boolean isExpanded,
+		                         View convertView, ViewGroup parent) {
 			String headerTitle = (String) getGroup(groupPosition);
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context)
 						.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
+			boolean light = getMyApplication().getSettings().isLightContent();
 			TextView lblListHeader = (TextView) convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(headerTitle);
 			lblListHeader.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 
+			adjustIndicator(getMyApplication(), groupPosition, isExpanded, convertView, light);
+			ImageView indicator = (ImageView) convertView.findViewById(R.id.explist_indicator);
+			indicator.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if(isExpanded){
+						expListView.collapseGroup(groupPosition);
+					} else {
+						expListView.expandGroup(groupPosition);
+					}
+				}
+			});
+			if (isExpanded) {
+				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
+			} else {
+				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.VISIBLE);
+			}
 			return convertView;
 		}
 
