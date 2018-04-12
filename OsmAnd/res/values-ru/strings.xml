@@ -120,7 +120,7 @@
     <string name="quick_action_duplicates">Указанное имя для быстрого действия уже используется. Действие будет сохранено как %1$s чтобы избежать дублирования.</string>
     <string name="quick_action_duplicate">Обнаружен дубликат имени</string>
     <string name="quick_action_showhide_favorites_descr">Нажатие на кнопку действия приведет к отображению/скрытию избранных точек с карты.</string>
-    <string name="quick_action_showhide_poi_descr">Нажатие на кнопку действия приведет к отображению/скрытию POI с карты.</string>
+    <string name="quick_action_showhide_poi_descr">Нажатие на эту кнопку действия приведет к отображению/скрытию POI с карты.</string>
     <string name="quick_action_showhide_favorites_title">Показать/скрыть избранные</string>
     <string name="quick_action_add_category">Добавить категорию</string>
     <string name="quick_action_add_create_items">Действия</string>
@@ -130,7 +130,7 @@
     <string name="quick_action_gpx_category_descr">Выберите категорию (опционально).</string>
     <string name="quick_action_poi_list">Список категорий</string>
     <string name="quick_action_sh_poi_descr">Вы можете добавить одну или несколько категорий POI для отображения на карте.</string>
-    <string name="quick_action_page_list_descr">Нажатие на кнопку быстрого действия позволит циклически переключать элементы данного списка.</string>
+    <string name="quick_action_page_list_descr">Нажатие на эту кнопку действия позволит циклически переключать элементы данного списка.</string>
     <string name="quick_action_empty_param_error">Параметры не должны быть пустыми</string>
     <string name="quick_action_map_overlay">Сменить карту покрытия</string>
     <string name="quick_action_map_overlay_title">Карты покрытия</string>
@@ -2873,4 +2873,9 @@
     <string name="shared_string_read">Чтение</string>
     <string name="saved_articles">Сохраненные статьи</string>
     <string name="shared_string_contents">Содержимое</string>
+    <string name="download_maps_travel">Карты путешествий</string>
+    <string name="shared_string_wikivoyage">Викигид</string>
+    <string name="article_removed">Статья удалена</string>
+    <string name="shared_string_explore">Исследовать</string>
+    <string name="index_item_world_wikivoyage">Всемирные статьи Викигида</string>
     </resources>
