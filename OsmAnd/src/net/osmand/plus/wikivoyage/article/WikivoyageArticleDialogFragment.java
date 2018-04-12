@@ -120,6 +120,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
 		contentWebView.getSettings().setJavaScriptEnabled(true);
 		contentWebView.getSettings().setLoadsImagesAutomatically(getSettings().SHOW_WEBVIEW_IMAGES.get());
+
 		return mainView;
 	}
 

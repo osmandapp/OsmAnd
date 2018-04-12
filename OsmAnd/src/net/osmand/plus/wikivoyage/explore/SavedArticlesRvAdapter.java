@@ -78,7 +78,8 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			boolean lastItem = position == getItemCount() - 1;
 
 			Picasso.get()
-					.load(WikivoyageArticle.getImageUrl(article.getImageTitle(), false))
+					.load(app.getSettings().SHOW_WEBVIEW_IMAGES.get() ?
+							WikivoyageArticle.getImageUrl(article.getImageTitle(), false) : null)
 					.transform(USE_ALTERNATIVE_CARD ? new CropRectTransformation() : new CropCircleTransformation())
 					.into(holder.icon, new Callback() {
 						@Override
