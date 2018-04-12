@@ -34,15 +34,15 @@
 			tools:drawableStart="@drawable/ic_action_list_header"
 			tools:text="@string/shared_string_contents" />
 
-        <ImageView
-            android:id="@+id/explist_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-	        android:paddingLeft="@dimen/list_content_padding"
-	        android:paddingRight="@dimen/list_content_padding"
-            android:scaleType="center"
-	        tools:src="@drawable/ic_action_arrow_up"/>
+		<ImageView
+			android:id="@+id/explist_indicator"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_gravity="end"
+			android:paddingLeft="@dimen/list_content_padding"
+			android:paddingRight="@dimen/list_content_padding"
+			android:scaleType="center"
+			tools:src="@drawable/ic_action_arrow_up" />
 
 	</LinearLayout>
 
