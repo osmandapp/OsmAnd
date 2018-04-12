@@ -60,6 +60,11 @@ public class WikivoyageLocalDataHelper {
 		return res;
 	}
 
+	public void clearHistory() {
+		historyMap.clear();
+		dbHelper.clearAllHistory();
+	}
+
 	public void addToHistory(@NonNull WikivoyageArticle article) {
 		addToHistory(article.getCityId(), article.getTitle(), article.getLang(), article.getIsPartOf());
 	}
@@ -153,7 +158,7 @@ public class WikivoyageLocalDataHelper {
 
 	private static class WikivoyageLocalDataDbHelper {
 
-		private static final int DB_VERSION = 2;
+		private static final int DB_VERSION = 3;
 		private static final String DB_NAME = "wikivoyage_local_data";
 
 		private static final String HISTORY_TABLE_NAME = "wikivoyage_search_history";
@@ -162,6 +167,7 @@ public class WikivoyageLocalDataHelper {
 		private static final String HISTORY_COL_LANG = "lang";
 		private static final String HISTORY_COL_IS_PART_OF = "is_part_of";
 		private static final String HISTORY_COL_LAST_ACCESSED = "last_accessed";
+		private static final String HISTORY_COL_TRAVEL_BOOK = "travel_book";
 
 		private static final String HISTORY_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 				HISTORY_TABLE_NAME + " (" +
@@ -169,7 +175,8 @@ public class WikivoyageLocalDataHelper {
 				HISTORY_COL_ARTICLE_TITLE + " TEXT, " +
 				HISTORY_COL_LANG + " TEXT, " +
 				HISTORY_COL_IS_PART_OF + " TEXT, " +
-				HISTORY_COL_LAST_ACCESSED + " long);";
+				HISTORY_COL_LAST_ACCESSED + " long, " +
+				HISTORY_COL_TRAVEL_BOOK + " TEXT);";
 
 		private static final String HISTORY_TABLE_SELECT = "SELECT " +
 				HISTORY_COL_CITY_ID + ", " +
@@ -186,6 +193,7 @@ public class WikivoyageLocalDataHelper {
 		private static final String BOOKMARKS_COL_IS_PART_OF = "is_part_of";
 		private static final String BOOKMARKS_COL_IMAGE_TITLE = "image_title";
 		private static final String BOOKMARKS_COL_PARTIAL_CONTENT = "partial_content";
+		private static final String BOOKMARKS_COL_TRAVEL_BOOK = "travel_book";
 
 		private static final String BOOKMARKS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 				BOOKMARKS_TABLE_NAME + " (" +
@@ -194,7 +202,8 @@ public class WikivoyageLocalDataHelper {
 				BOOKMARKS_COL_LANG + " TEXT, " +
 				BOOKMARKS_COL_IS_PART_OF + " TEXT, " +
 				BOOKMARKS_COL_IMAGE_TITLE + " TEXT, " +
-				BOOKMARKS_COL_PARTIAL_CONTENT + " TEXT);";
+				BOOKMARKS_COL_PARTIAL_CONTENT + " TEXT, " +
+				BOOKMARKS_COL_TRAVEL_BOOK + " TEXT);";
 
 		private static final String BOOKMARKS_TABLE_SELECT = "SELECT " +
 				BOOKMARKS_COL_CITY_ID + ", " +
@@ -240,6 +249,13 @@ public class WikivoyageLocalDataHelper {
 			if (oldVersion < 2) {
 				conn.execSQL(BOOKMARKS_TABLE_CREATE);
 			}
+			if (oldVersion < 3) {
+				conn.execSQL("ALTER TABLE " + HISTORY_TABLE_NAME + " ADD " + HISTORY_COL_TRAVEL_BOOK + " TEXT");
+				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_TRAVEL_BOOK + " TEXT");
+				Object[] args = new Object[]{context.getWikivoyageDbHelper().getSelectedTravelBook().getName()};
+				conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TRAVEL_BOOK + " = ?", args);
+				conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME + " SET " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?", args);
+			}
 		}
 
 		@NonNull
@@ -248,7 +264,9 @@ public class WikivoyageLocalDataHelper {
 			SQLiteConnection conn = openConnection(true);
 			if (conn != null) {
 				try {
-					SQLiteCursor cursor = conn.rawQuery(HISTORY_TABLE_SELECT, null);
+					String query = HISTORY_TABLE_SELECT + " WHERE " + HISTORY_COL_TRAVEL_BOOK + " = ?";
+					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
+					SQLiteCursor cursor = conn.rawQuery(query, new String[]{travelBook});
 					if (cursor.moveToFirst()) {
 						do {
 							WikivoyageSearchHistoryItem item = readHistoryItem(cursor);
@@ -266,8 +284,10 @@ public class WikivoyageLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					conn.execSQL("INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?)",
-							new Object[]{item.cityId, item.articleTitle, item.lang, item.isPartOf, item.lastAccessed});
+					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
+					conn.execSQL("INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)",
+							new Object[]{item.cityId, item.articleTitle, item.lang,
+									item.isPartOf, item.lastAccessed, travelBook});
 				} finally {
 					conn.close();
 				}
@@ -278,13 +298,16 @@ public class WikivoyageLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
+					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
 					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " +
 									HISTORY_COL_ARTICLE_TITLE + " = ?, " +
 									HISTORY_COL_LANG + " = ?, " +
 									HISTORY_COL_IS_PART_OF + " = ?, " +
 									HISTORY_COL_LAST_ACCESSED + " = ? " +
-									"WHERE " + HISTORY_COL_CITY_ID + " = ?",
-							new Object[]{item.articleTitle, item.lang, item.isPartOf, item.lastAccessed, item.cityId});
+									"WHERE " + HISTORY_COL_CITY_ID + " = ? " +
+									"AND " + HISTORY_COL_TRAVEL_BOOK + " = ?",
+							new Object[]{item.articleTitle, item.lang, item.isPartOf,
+									item.lastAccessed, item.cityId, travelBook});
 				} finally {
 					conn.close();
 				}
@@ -295,8 +318,25 @@ public class WikivoyageLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					conn.execSQL("DELETE FROM " + HISTORY_TABLE_NAME + " WHERE " + HISTORY_COL_CITY_ID + " = ?",
-							new Object[]{item.cityId});
+					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
+					conn.execSQL("DELETE FROM " + HISTORY_TABLE_NAME +
+									" WHERE " + HISTORY_COL_CITY_ID + " = ?" +
+									" AND " + HISTORY_COL_TRAVEL_BOOK + " = ?",
+							new Object[]{item.cityId, travelBook});
+				} finally {
+					conn.close();
+				}
+			}
+		}
+
+		void clearAllHistory() {
+			SQLiteConnection conn = openConnection(false);
+			if (conn != null) {
+				try {
+					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
+					conn.execSQL("DELETE FROM " + HISTORY_TABLE_NAME +
+									" WHERE " + HISTORY_COL_TRAVEL_BOOK + " = ?",
+							new Object[]{travelBook});
 				} finally {
 					conn.close();
 				}
@@ -309,7 +349,9 @@ public class WikivoyageLocalDataHelper {
 			SQLiteConnection conn = openConnection(true);
 			if (conn != null) {
 				try {
-					SQLiteCursor cursor = conn.rawQuery(BOOKMARKS_TABLE_SELECT, null);
+					String query = BOOKMARKS_TABLE_SELECT + " WHERE " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
+					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
+					SQLiteCursor cursor = conn.rawQuery(query, new String[]{travelBook});
 					if (cursor.moveToFirst()) {
 						do {
 							res.add(readSavedArticle(cursor));
@@ -326,9 +368,10 @@ public class WikivoyageLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					conn.execSQL("INSERT INTO " + BOOKMARKS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)",
+					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
+					conn.execSQL("INSERT INTO " + BOOKMARKS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)",
 							new Object[]{article.cityId, article.title, article.lang,
-									article.aggregatedPartOf, article.imageTitle, article.content});
+									article.aggregatedPartOf, article.imageTitle, article.content, travelBook});
 				} finally {
 					conn.close();
 				}
@@ -339,10 +382,12 @@ public class WikivoyageLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
+					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
 					conn.execSQL("DELETE FROM " + BOOKMARKS_TABLE_NAME +
 									" WHERE " + BOOKMARKS_COL_CITY_ID + " = ?" +
-									" AND " + BOOKMARKS_COL_LANG + " = ?",
-							new Object[]{article.cityId, article.lang});
+									" AND " + BOOKMARKS_COL_LANG + " = ?" +
+									" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?",
+							new Object[]{article.cityId, article.lang, travelBook});
 				} finally {
 					conn.close();
 				}
