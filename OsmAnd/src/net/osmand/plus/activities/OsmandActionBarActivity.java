@@ -17,7 +17,7 @@ public class OsmandActionBarActivity extends AppCompatActivity {
 
     //should be called after set content view
     protected void setupHomeButton(){
-        Drawable back = ((OsmandApplication)getApplication()).getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        Drawable back = ((OsmandApplication)getApplication()).getIconsCache().getIcon(R.drawable.ic_arrow_back);
         back.setColorFilter(ContextCompat.getColor(this, R.color.color_white), PorterDuff.Mode.MULTIPLY);
         final ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {

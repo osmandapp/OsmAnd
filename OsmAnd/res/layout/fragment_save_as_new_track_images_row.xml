@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/bottom_sheet_content_margin"
+		android:baselineAligned="false">
+
+		<RelativeLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/bottom_sheet_content_margin_small"
+			android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+			android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
+			android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+			android:layout_weight="1">
+
+			<ImageView
+				android:id="@+id/route_point_image"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				android:adjustViewBounds="true"
+				android:foreground="?attr/selectableItemBackground"
+				tools:src="@drawable/img_help_trip_route_points_night"/>
+
+			<TextView
+				android:id="@+id/route_point_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignLeft="@id/route_point_image"
+				android:layout_alignStart="@id/route_point_image"
+				android:layout_marginLeft="@dimen/bottom_sheet_image_text_margin_start"
+				android:layout_marginStart="@dimen/bottom_sheet_image_text_margin_start"
+				android:layout_marginTop="@dimen/bottom_sheet_content_margin_small"
+				android:text="@string/route_point"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_split_segments_sub"/>
+		</RelativeLayout>
+
+		<RelativeLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
+			android:layout_marginLeft="@dimen/bottom_sheet_content_margin_small"
+			android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+			android:layout_marginStart="@dimen/bottom_sheet_content_margin_small"
+			android:layout_weight="1">
+
+			<ImageView
+				android:id="@+id/line_image"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				android:adjustViewBounds="true"
+				android:foreground="?attr/selectableItemBackground"
+				tools:src="@drawable/img_help_trip_track_night"/>
+
+			<TextView
+				android:id="@+id/line_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignLeft="@id/line_image"
+				android:layout_alignStart="@id/line_image"
+				android:layout_marginLeft="@dimen/bottom_sheet_image_text_margin_start"
+				android:layout_marginStart="@dimen/bottom_sheet_image_text_margin_start"
+				android:layout_marginTop="@dimen/bottom_sheet_content_margin_small"
+				android:text="@string/line"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_split_segments_sub"/>
+		</RelativeLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

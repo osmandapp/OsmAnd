@@ -27,6 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
             android:orientation="vertical">
 
             <TextView
@@ -79,9 +81,15 @@
         <Button
             android:id="@+id/rightButton"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="33dp"
+            android:minWidth="40dp"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:background="@drawable/buy_btn_background_light"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="4dp"
+            android:layout_marginLeft="@dimen/dashFavIconMargin"
+            android:layout_marginRight="8dp"
+            android:textColor="@color/buy_button_color"
             android:text="@string/buy"
             android:visibility="gone"/>
 

@@ -1,17 +1,5 @@
 package net.osmand.plus.download;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -23,6 +11,18 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class DownloadFileHelper {
 	
@@ -205,7 +205,7 @@ public class DownloadFileHelper {
 		try {
 			final List<InputStream> downloadInputStreams = new ArrayList<InputStream>();
 			URL url = new URL(de.urlToDownload); //$NON-NLS-1$
-			log.debug("Url downloading " + de.urlToDownload);
+			log.info("Url downloading " + de.urlToDownload);
 			downloadInputStreams.add(getInputStreamToDownload(url, forceWifi));
 			de.fileToDownload = de.targetFile;
 			if(!de.unzipFolder) {
@@ -213,7 +213,11 @@ public class DownloadFileHelper {
 			}
 			unzipFile(de, progress, downloadInputStreams);
 			if(!de.targetFile.getAbsolutePath().equals(de.fileToDownload.getAbsolutePath())){
-				Algorithms.removeAllFiles(de.targetFile);
+				boolean successfull = Algorithms.removeAllFiles(de.targetFile);
+				if (successfull) {
+					ctx.getResourceManager().closeFile(de.targetFile.getName());
+				}
+				
 				boolean renamed = de.fileToDownload.renameTo(de.targetFile);
 				if(!renamed) {
 					showWarningCallback.showWarning(ctx.getString(R.string.shared_string_io_error) + ": old file can't be deleted");
@@ -224,7 +228,6 @@ public class DownloadFileHelper {
 				copyVoiceConfig(de);
 			}
 			toReIndex.add(de.targetFile);
-			showWarningCallback.showWarning(ctx.getString(R.string.shared_string_download_successful));
 			return true;
 		} catch (IOException e) {
 			log.error("Exception ocurred", e); //$NON-NLS-1$
@@ -259,11 +262,14 @@ public class DownloadFileHelper {
 		if(mb == 0) {
 			mb = 1;
 		}
-		String taskName = ctx.getString(R.string.shared_string_downloading) + " " + 
+		StringBuilder taskName = new StringBuilder();
+		taskName.append(ctx.getString(R.string.shared_string_downloading)).append(": ");
 		//+ de.baseName /*+ " " + mb + " MB"*/;
-		FileNameTranslationHelper.getFileName(ctx, ctx.getRegions(), de.baseName);
-		
-		progress.startTask(taskName, len / 1024);
+		taskName.append(FileNameTranslationHelper.getFileName(ctx, ctx.getRegions(), de.baseName));
+		if (de.type != null) {
+			taskName.append(" ").append(de.type.getString(ctx));
+		}
+		progress.startTask(taskName.toString(), len / 1024);
 		if (!de.zipStream) {
 			copyFile(de, progress, fin, len, fin, de.fileToDownload);
 		} else if(de.urlToDownload.contains(".gz")) {

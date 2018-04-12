@@ -21,7 +21,6 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.HelpActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
@@ -31,6 +30,8 @@ import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -80,6 +81,21 @@ public class ContextMenuAdapter {
 		this.changeAppModeListener = changeAppModeListener;
 	}
 
+	public void sortItemsByOrder() {
+		Collections.sort(items, new Comparator<ContextMenuItem>() {
+			@Override
+			public int compare(ContextMenuItem item1, ContextMenuItem item2) {
+				int order1 = item1.getOrder();
+				int order2 = item2.getOrder();
+				if (order1 < order2) {
+					return -1;
+				} else if (order1 == order2) {
+					return 0;
+				}
+				return 1;
+			}
+		});
+	}
 
 	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean lightTheme) {
 		final int layoutId = DEFAULT_LAYOUT_ID;
@@ -115,7 +131,7 @@ public class ContextMenuAdapter {
 		public boolean isEnabled(int position) {
 			final ContextMenuItem item = getItem(position);
 			if (item != null) {
-				return !item.isCategory() && item.getLayout() != R.layout.drawer_divider;
+				return !item.isCategory() && item.isClickable() && item.getLayout() != R.layout.drawer_divider;
 			}
 			return true;
 		}
@@ -222,7 +238,12 @@ public class ContextMenuAdapter {
 			int secondaryDrawable = item.getSecondaryIcon();
 			if (secondaryDrawable != ContextMenuItem.INVALID_ID) {
 				@ColorRes
-				int colorRes = lightTheme ? R.color.icon_color_light : R.color.dialog_inactive_text_color_dark;
+				int colorRes;
+				if (secondaryDrawable == R.drawable.ic_action_additional_option) {
+					colorRes = lightTheme ? R.color.icon_color_light : R.color.dialog_inactive_text_color_dark;
+				} else {
+					colorRes = lightTheme ? R.color.icon_color : R.color.color_white;
+				}
 				Drawable drawable = mIconsCache.getIcon(item.getSecondaryIcon(), colorRes);
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.secondary_icon);
 				imageView.setImageDrawable(drawable);
@@ -248,7 +269,7 @@ public class ContextMenuAdapter {
 							ItemClickListener ca = item.getItemClickListener();
 							item.setSelected(isChecked);
 							if (ca != null) {
-								ca.onContextMenuClick(la, item.getTitleId(), position, isChecked);
+								ca.onContextMenuClick(la, item.getTitleId(), position, isChecked, null);
 							}
 						}
 					};
@@ -287,19 +308,27 @@ public class ContextMenuAdapter {
 				}
 			}
 
-			if (convertView.findViewById(R.id.ProgressBar) != null) {
-				ProgressBar bar = (ProgressBar) convertView.findViewById(R.id.ProgressBar);
+			View progressBar = convertView.findViewById(R.id.ProgressBar);
+			if (progressBar != null) {
+				ProgressBar bar = (ProgressBar) progressBar;
 				if (item.isLoading()) {
+					int progress = item.getProgress();
+					if (progress == ContextMenuItem.INVALID_ID) {
+						bar.setIndeterminate(true);
+					} else {
+						bar.setIndeterminate(false);
+						bar.setProgress(progress);
+					}
 					bar.setVisibility(View.VISIBLE);
 				} else {
-					bar.setVisibility(View.INVISIBLE);
+					bar.setVisibility(View.GONE);
 				}
 			}
 
 			View descriptionTextView = convertView.findViewById(R.id.description);
 			if (descriptionTextView != null) {
 				String itemDescr = item.getDescription();
-				if (itemDescr != null) {
+				if (itemDescr != null && (progressBar == null || !item.isLoading())) {
 					((TextView) descriptionTextView).setText(itemDescr);
 					descriptionTextView.setVisibility(View.VISIBLE);
 				} else {
@@ -322,13 +351,30 @@ public class ContextMenuAdapter {
 				convertView.setClickable(false);
 			}
 
+			if (!item.isClickable()) {
+				convertView.setFocusable(false);
+				convertView.setClickable(false);
+			}
+
 			return convertView;
 		}
 	}
 
 	public interface ItemClickListener {
 		//boolean return type needed to desribe if drawer needed to be close or not
-		boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked);
+		boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
+								   int itemId,
+								   int position,
+								   boolean isChecked,
+								   int[] viewCoordinates);
+	}
+
+	public interface ProgressListener {
+		boolean onProgressChanged(Object progressObject,
+								  int progress,
+								  ArrayAdapter<ContextMenuItem> adapter,
+								  int itemId,
+								  int position);
 	}
 
 	public interface OnIntegerValueChangedListener {
@@ -344,7 +390,7 @@ public class ContextMenuAdapter {
 				btn.setChecked(!btn.isChecked());
 				return false;
 			} else {
-				return onContextMenuClick(adapter, itemId, position, false);
+				return onContextMenuClick(adapter, itemId, position, false, null);
 			}
 		}
 	}

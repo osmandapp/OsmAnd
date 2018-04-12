@@ -1,11 +1,9 @@
 package net.osmand.util;
 
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadPoint;
@@ -302,9 +300,9 @@ public class MapUtils {
 	}
 
 	// Examples
-//	System.out.println(buildShortOsmUrl(51.51829d, 0.07347d, 16)); // http://osm.org/go/0EEQsyfu
-//	System.out.println(buildShortOsmUrl(52.30103d, 4.862927d, 18)); // http://osm.org/go/0E4_JiVhs
-//	System.out.println(buildShortOsmUrl(40.59d, -115.213d, 9)); // http://osm.org/go/TelHTB--
+//	System.out.println(buildShortOsmUrl(51.51829d, 0.07347d, 16)); // https://osm.org/go/0EEQsyfu
+//	System.out.println(buildShortOsmUrl(52.30103d, 4.862927d, 18)); // https://osm.org/go/0E4_JiVhs
+//	System.out.println(buildShortOsmUrl(40.59d, -115.213d, 9)); // https://osm.org/go/TelHTB--
 	public static String buildShortOsmUrl(double latitude, double longitude, int zoom) {
 		return BASE_SHORT_OSM_URL + createShortLinkString(latitude, longitude, zoom) + "?m";
 	}
@@ -465,10 +463,18 @@ public class MapUtils {
 		int mod1 = y1 % div;
 		int div2 = y2 / div;
 		int mod2 = y2 % div;
-		double h1 = coefficientsY[div1] + mod1 / (double)div *
-				(coefficientsY[div1 + 1] - coefficientsY[div1]);
-		double h2 = coefficientsY[div2] + mod2 / (double)div *
-				(coefficientsY[div2 + 1] - coefficientsY[div2]);
+		double h1 ;
+		if(div1 + 1 >= coefficientsY.length) {
+			h1 = coefficientsY[div1] + mod1 / (double) div * (coefficientsY[div1] - coefficientsY[div1 - 1]);
+		} else {
+			h1 = coefficientsY[div1] + mod1 / (double) div * (coefficientsY[div1 + 1] - coefficientsY[div1]);
+		}
+		double h2 ;
+		if(div2 + 1 >= coefficientsY.length) {
+			h2 = coefficientsY[div2] + mod2 / (double) div * (coefficientsY[div2] - coefficientsY[div2 - 1]);
+		} else {
+			h2 = coefficientsY[div2] + mod2 / (double) div * (coefficientsY[div2 + 1] - coefficientsY[div2]);
+		}
 		double res = h1 - h2;
 		return res;
 	}
@@ -586,7 +592,21 @@ public class MapUtils {
 		return rect;
 	}
 
-	
+	public static float getInterpolatedY(float x1, float y1, float x2, float y2, float x) {
+
+		float a = y1 - y2;
+		float b = x2 - x1;
+
+		float d = -a * b;
+		if (d != 0) {
+			float c1 = y2 * x1 - x2 * y1;
+			float c2 = x * (y2 - y1);
+
+			return (a * (c1 - c2)) / d;
+		} else {
+			return y1;
+		}
+	}
 }
 
 

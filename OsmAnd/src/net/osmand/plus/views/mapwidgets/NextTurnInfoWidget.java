@@ -1,13 +1,5 @@
 package net.osmand.plus.views.mapwidgets;
 
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
-import net.osmand.plus.views.TurnPathHelper;
-import net.osmand.router.TurnType;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -22,7 +14,16 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
+import android.support.annotation.NonNull;
 import android.text.TextPaint;
+
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.TurnPathHelper;
+import net.osmand.router.TurnType;
 
 
 
@@ -185,7 +186,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		}
 
 		@Override
-		public void draw(Canvas canvas) {
+		public void draw(@NonNull Canvas canvas) {
 			/// small indent
 			// canvas.translate(0, 3 * scaleCoefficient);
 			canvas.drawPath(pathForTurnOutlay, paintBlack);
@@ -222,7 +223,8 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		public boolean setTurnType(TurnType turnType) {
 			if(turnType != this.turnType) {
 				this.turnType = turnType;
-				TurnPathHelper.calcTurnPath(pathForTurn, pathForTurnOutlay, turnType, null, centerText, mini);
+				TurnPathHelper.calcTurnPath(pathForTurn, pathForTurnOutlay, turnType, null,
+						centerText, mini, false, true, false);
 				onBoundsChange(getBounds());
 				return true;
 			}

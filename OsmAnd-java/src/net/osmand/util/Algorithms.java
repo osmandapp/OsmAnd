@@ -6,6 +6,7 @@ import net.osmand.PlatformUtil;
 import org.apache.commons.logging.Log;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.Closeable;
 import java.io.EOFException;
 import java.io.File;
@@ -20,10 +21,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.zip.GZIPInputStream;
 
 
 /**
@@ -113,28 +117,38 @@ public class Algorithms {
 				return -simplifyFileName(o1.getName()).compareTo(simplifyFileName(o2.getName()));
 			}
 
-			public String simplifyFileName(String fn) {
-				String lc = fn.toLowerCase();
-				if (lc.contains(".")) {
-					lc = lc.substring(0, lc.indexOf("."));
-				}
-				if (lc.endsWith("_2")) {
-					lc = lc.substring(0, lc.length() - "_2".length());
-				}
-				boolean hasTimestampEnd = false;
-				for (int i = 0; i < lc.length(); i++) {
-					if (lc.charAt(i) >= '0' && lc.charAt(i) <= '9') {
-						hasTimestampEnd = true;
-						break;
-					}
-				}
-				if (!hasTimestampEnd) {
-					lc += "_00_00_00";
-				}
-				return lc;
-			}
 		};
 	}
+
+    private static String simplifyFileName(String fn) {
+        String lc = fn.toLowerCase();
+        if (lc.contains(".")) {
+            lc = lc.substring(0, lc.indexOf("."));
+        }
+        if (lc.endsWith("_2")) {
+            lc = lc.substring(0, lc.length() - "_2".length());
+        }
+        boolean hasTimestampEnd = false;
+        for (int i = 0; i < lc.length(); i++) {
+            if (lc.charAt(i) >= '0' && lc.charAt(i) <= '9') {
+                hasTimestampEnd = true;
+                break;
+            }
+        }
+        if (!hasTimestampEnd) {
+            lc += "_00_00_00";
+        }
+        return lc;
+    }
+
+    public static Comparator<String> getStringVersionComparator() {
+        return new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return -simplifyFileName(o1).compareTo(simplifyFileName(o2));
+            }
+        };
+    }
 
 	private static final char CHAR_TOSPLIT = 0x01;
 
@@ -162,6 +176,24 @@ public class Algorithms {
 				bld.append(CHAR_TOSPLIT);
 			}
 			return bld.toString();
+		}
+		return "";
+	}
+
+	public static Set<String> decodeStringSet(String s) {
+		if (isEmpty(s)) {
+			return Collections.emptySet();
+		}
+		return new HashSet<>(Arrays.asList(s.split(CHAR_TOSPLIT + "")));
+	}
+
+	public static String encodeStringSet(Set<String> set) {
+		if (set != null) {
+			StringBuilder sb = new StringBuilder();
+			for (String s : set) {
+				sb.append(s).append(CHAR_TOSPLIT);
+			}
+			return sb.toString();
 		}
 		return "";
 	}
@@ -420,6 +452,18 @@ public class Algorithms {
 			}
 		}
 		return responseBody;
+	}
+
+	public static String gzipToString(byte[] gzip) throws IOException {
+		GZIPInputStream gzipIs = new GZIPInputStream(new ByteArrayInputStream(gzip));
+		BufferedReader br = new BufferedReader(new InputStreamReader(gzipIs, "UTF-8"));
+		StringBuilder sb = new StringBuilder();
+		String s;
+		while ((s = br.readLine()) != null) {
+			sb.append(s);
+		}
+		br.close();
+		return sb.toString();
 	}
 
 	public static boolean removeAllFiles(File f) {

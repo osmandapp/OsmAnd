@@ -47,6 +47,19 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 		return cache;
 	}
 
+	public boolean updateOsmBug(long id, String text) {
+		SQLiteDatabase db = getWritableDatabase();
+		if (db != null) {
+			db.execSQL("UPDATE " + OSMBUGS_TABLE_NAME +
+							" SET " + OSMBUGS_COL_TEXT + " = ? " +
+							"WHERE " + OSMBUGS_COL_ID + " = ?", new Object[]{text, id});
+			checkOsmbugsPoints(db);
+			db.close();
+			return true;
+		}
+		return false;
+	}
+
 	public boolean addOsmbugs(OsmNotesPoint p) {
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null) {

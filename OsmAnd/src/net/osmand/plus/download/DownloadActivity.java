@@ -3,6 +3,7 @@ package net.osmand.plus.download;
 import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.Space;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -35,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.IProgress;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.LatLon;
@@ -56,6 +59,7 @@ import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.FreeVersionDialogFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppHelper;
 import net.osmand.plus.inapp.InAppHelper.InAppListener;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
@@ -74,6 +78,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import static net.osmand.plus.OsmandApplication.SHOW_PLUS_VERSION_INAPP_PARAM;
 
 public class DownloadActivity extends AbstractDownloadActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, InAppListener {
@@ -98,6 +106,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public static final String UPDATES_TAB = "updates";
 	public static final MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 	public static final MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
+	public static final MessageFormat formatKb = new MessageFormat("{0, number,##.#} kB", Locale.US);
 	private static boolean SUGGESTED_TO_DOWNLOAD_BASEMAP = false;
 
 	private BannerAndDownloadFreeVersion visibleBanner;
@@ -110,12 +119,15 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	private DownloadIndexesThread downloadThread;
 	protected WorldRegion downloadItem;
 	protected String downloadTargetFileName;
+
 	private InAppHelper inAppHelper;
 
 	private boolean srtmDisabled;
 	private boolean srtmNeedsInstallation;
 	private boolean nauticalPluginDisabled;
 	private boolean freeVersion;
+
+	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -179,14 +191,13 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			}
 		});
 		viewPager.setCurrentItem(currentTab);
-		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this, true);
 
+		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this, true);
 		if (shouldShowFreeVersionBanner(getMyApplication())) {
-			inAppHelper = new InAppHelper(getMyApplication(), true);
-			inAppHelper.addListener(this);
 			visibleBanner.setUpdatingPrices(true);
-			inAppHelper.start(true);
 		}
+
+		startInAppHelper();
 
 		final Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {
@@ -197,10 +208,64 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// Pass on the activity result to the helper for handling
+		if (inAppHelper == null || !inAppHelper.onActivityResultHandled(requestCode, resultCode, data)) {
+			// not handled, so handle it ourselves (here's where you'd
+			// perform any handling of activity results not related to in-app
+			// billing...
+			super.onActivityResult(requestCode, resultCode, data);
+		}
+	}
+
+	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		stopInAppHelper();
+	}
+
+	public void startInAppHelper() {
+		stopInAppHelper();
+
+		if (Version.isGooglePlayEnabled(getMyApplication())) {
+			inAppHelper = new InAppHelper(getMyApplication(), true);
+			inAppHelper.addListener(this);
+			inAppHelper.start(false);
+		}
+	}
+
+	public void stopInAppHelper() {
 		if (inAppHelper != null) {
 			inAppHelper.removeListener(this);
+			inAppHelper.stop();
+		}
+	}
+
+	public void purchaseFullVersion() {
+		OsmandApplication app = getMyApplication();
+		if (Version.isFreeVersion(app)) {
+			if (app.getRemoteBoolean(SHOW_PLUS_VERSION_INAPP_PARAM, true)) {
+				if (inAppHelper != null) {
+					app.logEvent(this, "in_app_purchase_redirect");
+					inAppHelper.purchaseFullVersion(this);
+				}
+			} else {
+				app.logEvent(this, "paid_version_redirect");
+				Intent intent = new Intent(Intent.ACTION_VIEW,
+						Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
+				try {
+					startActivity(intent);
+				} catch (ActivityNotFoundException e) {
+					LOG.error("ActivityNotFoundException", e);
+				}
+			}
+		}
+	}
+
+	public void purchaseDepthContours() {
+		if (inAppHelper != null) {
+			getMyApplication().logEvent(this, "depth_contours_purchase_redirect");
+			inAppHelper.purchaseDepthContours(this);
 		}
 	}
 
@@ -271,6 +336,29 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			downloadItem = null;
 			downloadTargetFileName = null;
 		}
+		if (!Algorithms.isEmpty(downloadTargetFileName)) {
+			File f = new File(downloadTargetFileName);
+			if (f.exists()) {
+				String fileName = f.getName();
+				if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) {
+					AlertDialog.Builder bld = new AlertDialog.Builder(this);
+					bld.setMessage(R.string.restart_is_required);
+					bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							android.os.Process.killProcess(android.os.Process.myPid());
+						}
+					});
+					bld.setNegativeButton(R.string.shared_string_cancel, null);
+					bld.show();
+				} else if (fileName.startsWith(FileNameTranslationHelper.SEA_DEPTH)) {
+					getMyApplication().getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
+				}
+			}
+			downloadItem = null;
+			downloadTargetFileName = null;
+		}
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f instanceof DownloadEvents && f.isAdded()) {
@@ -282,23 +370,54 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	@Override
 	public void onError(String error) {
 		visibleBanner.setUpdatingPrices(false);
+		for (WeakReference<Fragment> ref : fragSet) {
+			Fragment f = ref.get();
+			if (f instanceof InAppListener && f.isAdded()) {
+				((InAppListener) f).onError(error);
+			}
+		}
 	}
 
 	@Override
 	public void onGetItems() {
 		visibleBanner.setUpdatingPrices(false);
+		for (WeakReference<Fragment> ref : fragSet) {
+			Fragment f = ref.get();
+			if (f instanceof InAppListener && f.isAdded()) {
+				((InAppListener) f).onGetItems();
+			}
+		}
 	}
 
 	@Override
 	public void onItemPurchased(String sku) {
+		visibleBanner.setUpdatingPrices(false);
+		for (WeakReference<Fragment> ref : fragSet) {
+			Fragment f = ref.get();
+			if (f instanceof InAppListener && f.isAdded()) {
+				((InAppListener) f).onItemPurchased(sku);
+			}
+		}
 	}
 
 	@Override
 	public void showProgress() {
+		for (WeakReference<Fragment> ref : fragSet) {
+			Fragment f = ref.get();
+			if (f instanceof InAppListener && f.isAdded()) {
+				((InAppListener) f).showProgress();
+			}
+		}
 	}
 
 	@Override
 	public void dismissProgress() {
+		for (WeakReference<Fragment> ref : fragSet) {
+			Fragment f = ref.get();
+			if (f instanceof InAppListener && f.isAdded()) {
+				((InAppListener) f).dismissProgress();
+			}
+		}
 	}
 
 	@Override
@@ -332,6 +451,10 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		downloadHasFinished();
 	}
 
+	public void updateBanner() {
+		visibleBanner.updateBannerInProgress();
+	}
+
 	private int getCurrentTab() {
 		return viewPager.getCurrentItem();
 	}
@@ -346,8 +469,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		return Math.max(downloadsLeft, 0) > 0;
 	}
 
-	private static boolean shouldShowFreeVersionBanner(OsmandApplication application) {
-		return (Version.isFreeVersion(application) && !application.getSettings().LIVE_UPDATES_PURCHASED.get())
+	public static boolean shouldShowFreeVersionBanner(OsmandApplication application) {
+		return (Version.isFreeVersion(application) && !application.getSettings().LIVE_UPDATES_PURCHASED.get()
+				&& !application.getSettings().FULL_VERSION_PURCHASED.get())
 				|| application.getSettings().SHOULD_SHOW_FREE_VERSION_BANNER.get();
 	}
 	
@@ -380,8 +504,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 					collapseBanner();
 				} else {
 					ctx.getMyApplication().logEvent(ctx, "click_free_dialog");
-					new FreeVersionDialogFragment().show(ctx.getSupportFragmentManager(), "dialog");
-					// expandBanner();
+					new FreeVersionDialogFragment().show(ctx.getSupportFragmentManager(), FreeVersionDialogFragment.TAG);
 				}
 			}
 		};
@@ -437,13 +560,17 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			fullVersionButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					ctx.getMyApplication().logEvent(ctx, "click_buy_plus");
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(
-							ctx.getMyApplication()) + "net.osmand.plus"));
-					try {
-						ctx.startActivity(intent);
-					} catch (ActivityNotFoundException e) {
-						LOG.error("ActivityNotFoundException", e);
+					OsmandApplication app = ctx.getMyApplication();
+					if (app.getRemoteBoolean(SHOW_PLUS_VERSION_INAPP_PARAM, true)) {
+						app.logEvent(ctx, "in_app_purchase_redirect_from_banner");
+					} else {
+						app.logEvent(ctx, "paid_version_redirect_from_banner");
+					}
+					ctx.purchaseFullVersion();
+					DialogFragment f = (DialogFragment) ctx.getSupportFragmentManager()
+							.findFragmentByTag(FreeVersionDialogFragment.TAG);
+					if (f != null) {
+						f.dismiss();
 					}
 				}
 			});
@@ -489,6 +616,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		public void updateFreeVersionBanner() {
 			if (!shouldShowFreeVersionBanner(ctx.getMyApplication())) {
+				if (freeVersionBanner.getVisibility() == View.VISIBLE) {
+					freeVersionBanner.setVisibility(View.GONE);
+				}
 				return;
 			}
 			setMinimizedFreeVersionBanner(false);
@@ -502,8 +632,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				freeVersionBanner.findViewById(R.id.bannerTopLayout).setOnClickListener(onCollapseListener);
 			}
 
-			if (InAppHelper.hasPrices() || !updatingPrices) {
-				if (!InAppHelper.hasPrices()) {
+			if (InAppHelper.hasPrices(ctx.getMyApplication()) || !updatingPrices) {
+				if (!InAppHelper.hasPrices(ctx.getMyApplication())) {
 					fullVersionButton.setText(ctx.getString(R.string.get_for, ctx.getString(R.string.full_version_price)));
 					osmLiveButton.setText(ctx.getString(R.string.get_for_month, ctx.getString(R.string.osm_live_default_price)));
 				} else {
@@ -658,7 +788,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				newDownloadIndexes();
 			}
 		};
-		task.execute();
+		task.executeOnExecutor(singleThreadExecutor);
 	}
 
 	

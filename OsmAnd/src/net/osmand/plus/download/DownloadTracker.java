@@ -1,5 +1,14 @@
 package net.osmand.plus.download;
 
+import android.os.Build;
+
+import net.osmand.PlatformUtil;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.Version;
+
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -10,15 +19,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
-
-import net.osmand.PlatformUtil;
-import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.Version;
-
-import org.apache.commons.logging.Log;
-
-import android.os.Build;
 
 public class DownloadTracker {
 	private static final Log log = PlatformUtil.getLog(DownloadTracker.class);
@@ -49,7 +49,7 @@ public class DownloadTracker {
 			Map<String, String> customVariables = getCustomVars(a);
 			parameters.put("AnalyticsVersion", analyticsVersion);
 			parameters.put("utmn", randomNumber());
-			parameters.put("utmhn", "http://app.osmand.net");
+			parameters.put("utmhn", "https://app.osmand.net");
 			parameters.put("utmni", "1");
 			parameters.put("utmt", "event");
 

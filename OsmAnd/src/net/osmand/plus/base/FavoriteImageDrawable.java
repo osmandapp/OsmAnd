@@ -25,14 +25,20 @@ public class FavoriteImageDrawable extends Drawable {
 	private Paint paintBackground;
 	private Bitmap favIcon;
 	private Bitmap favBackground;
+	private Bitmap syncedStroke;
+	private Bitmap syncedColor;
+	private Bitmap syncedShadow;
+	private Bitmap syncedIcon;
 	private Resources resources;
 	private boolean withShadow;
+	private boolean synced;
 	private Paint paintOuter;
 	private Paint paintInnerCircle;
 	private Drawable listDrawable;
 
-	public FavoriteImageDrawable(Context ctx, int color, boolean withShadow) {
+	public FavoriteImageDrawable(Context ctx, int color, boolean withShadow, boolean synced) {
 		this.withShadow = withShadow;
+		this.synced = synced;
 		this.resources = ctx.getResources();
 		this.color = color;
 		paintBackground = new Paint();
@@ -41,6 +47,10 @@ public class FavoriteImageDrawable extends Drawable {
 		paintIcon = new Paint();
 		favIcon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_favorite);
 		favBackground = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_white_favorite_shield);
+		syncedStroke = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_shield_marker_point_stroke);
+		syncedColor = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_shield_marker_point_color);
+		syncedShadow = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_shield_marker_point_shadow);
+		syncedIcon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_marker_point_14dp);
 		listDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_action_fav_dark, null).mutate();
 
 		paintOuter = new Paint();
@@ -58,7 +68,7 @@ public class FavoriteImageDrawable extends Drawable {
 	protected void onBoundsChange(Rect bounds) {
 		super.onBoundsChange(bounds);
 		
-		if (!withShadow) {
+		if (!withShadow && !synced) {
 			Rect bs = new Rect(bounds);
 			 //bs.inset((int) (4 * density), (int) (4 * density));
 			bs.inset(bs.width() / 4, bs.height() / 4);
@@ -68,12 +78,12 @@ public class FavoriteImageDrawable extends Drawable {
 
 	@Override
 	public int getIntrinsicHeight() {
-		return favBackground.getHeight();
+		return synced ? syncedShadow.getHeight() : favBackground.getHeight();
 	}
 
 	@Override
 	public int getIntrinsicWidth() {
-		return favBackground.getWidth();
+		return synced ? syncedShadow.getWidth() : favBackground.getWidth();
 	}
 
 	public int getColor() {
@@ -87,7 +97,12 @@ public class FavoriteImageDrawable extends Drawable {
 	@Override
 	public void draw(Canvas canvas) {
 		Rect bs = getBounds();
-		if(withShadow) {
+		if (synced) {
+			canvas.drawBitmap(syncedShadow, bs.exactCenterX() - syncedShadow.getWidth() / 2f, bs.exactCenterY() - syncedShadow.getHeight() / 2f, paintBackground);
+			canvas.drawBitmap(syncedColor, bs.exactCenterX() - syncedColor.getWidth() / 2f, bs.exactCenterY() - syncedColor.getHeight() / 2f, paintBackground);
+			canvas.drawBitmap(syncedStroke, bs.exactCenterX() - syncedStroke.getWidth() / 2f, bs.exactCenterY() - syncedStroke.getHeight() / 2f, paintBackground);
+			canvas.drawBitmap(syncedIcon, bs.exactCenterX() - syncedIcon.getWidth() / 2f, bs.exactCenterY() - syncedIcon.getHeight() / 2f, paintIcon);
+		} else if (withShadow) {
 			canvas.drawBitmap(favBackground, bs.exactCenterX() - favBackground.getWidth() / 2f, bs.exactCenterY() - favBackground.getHeight() / 2f, paintBackground);
 			canvas.drawBitmap(favIcon, bs.exactCenterX() - favIcon.getWidth() / 2f, bs.exactCenterY() - favIcon.getHeight() / 2f, paintIcon);
 		} else {
@@ -133,15 +148,23 @@ public class FavoriteImageDrawable extends Drawable {
 
 	private static TreeMap<Integer, FavoriteImageDrawable> cache = new TreeMap<>();
 
-	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow) {
+	private static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, boolean synced) {
 		color = color | 0xff000000;
-		int hash = (color << 2) + (withShadow ? 1 : 0);
+		int hash = (color << 2) + (withShadow ? 1 : 0) + (synced ? 3 : 0);
 		FavoriteImageDrawable drawable = cache.get(hash);
 		if (drawable == null) {
-			drawable = new FavoriteImageDrawable(a, color, withShadow);
+			drawable = new FavoriteImageDrawable(a, color, withShadow, synced);
 			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
 			cache.put(hash, drawable);
 		}
 		return drawable;
+	}
+
+	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow) {
+		return getOrCreate(a, color, withShadow, false);
+	}
+
+	public static FavoriteImageDrawable getOrCreateSyncedIcon(Context a, int color) {
+		return getOrCreate(a, color, false, true);
 	}
 }

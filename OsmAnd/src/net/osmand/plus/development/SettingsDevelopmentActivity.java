@@ -51,17 +51,16 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.USE_FAST_RECALCULATION,
 				R.string.use_fast_recalculation, R.string.use_fast_recalculation_desc));
 
-
-		cat.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS,
-				R.string.use_magnetic_sensor,
-				R.string.use_magnetic_sensor_descr));
-
 		final CheckBoxPreference openGlRender = createCheckBoxPreference(settings.USE_OPENGL_RENDER, R.string.use_opengl_render,R.string.use_opengl_render_descr);
 		cat.addPreference(openGlRender);
 
 		cat.addPreference(createCheckBoxPreference(settings.USE_OSM_LIVE_FOR_ROUTING,
 				R.string.use_osm_live_routing,
 				R.string.use_osm_live_routing_description));
+
+		cat.addPreference(createCheckBoxPreference(settings.ANIMATE_MY_LOCATION,
+				R.string.animate_my_location,
+				R.string.animate_my_location_desc));
 
 		final Preference firstRunPreference = new Preference(this);
 		firstRunPreference.setTitle(R.string.simulate_initial_startup);
@@ -72,6 +71,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			public boolean onPreferenceClick(Preference preference) {
 				getMyApplication().getAppInitializer().resetFirstTimeRun();
 				getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.set(false);
+				getMyApplication().getSettings().MAPILLARY_FIRST_DIALOG_SHOWN.set(false);
+				getMyApplication().getSettings().WEBGL_SUPPORTED.set(true);
+				getMyApplication().getSettings().METRIC_SYSTEM_CHANGED_MANUALLY.set(false);
 				getMyApplication().showToastMessage(R.string.shared_string_ok);
 				return true;
 			}
@@ -223,7 +225,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		modes.remove(ApplicationMode.DEFAULT);
 		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>(ApplicationMode.values(settings));
 		selected.remove(ApplicationMode.DEFAULT);
-		View v = AppModeDialog.prepareAppModeView(this, modes, selected, null, false, false, false,
+		View v = AppModeDialog.prepareAppModeView(this, modes, selected, null, false, true, false,
 				new View.OnClickListener() {
 
 					@Override

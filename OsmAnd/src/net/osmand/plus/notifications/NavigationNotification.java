@@ -64,7 +64,7 @@ public class NavigationNotification extends OsmandNotification {
 				RoutingHelper routingHelper = app.getRoutingHelper();
 				routingHelper.setRoutePlanningMode(true);
 				routingHelper.setFollowingMode(false);
-				routingHelper.setPauseNaviation(true);
+				routingHelper.setPauseNavigation(true);
 			}
 		}, new IntentFilter(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION));
 
@@ -99,23 +99,31 @@ public class NavigationNotification extends OsmandNotification {
 
 	@Override
 	public boolean isActive() {
-		return isEnabled();
+		NavigationService service = app.getNavigationService();
+		return isEnabled()
+				&& service != null
+				&& (service.getUsedBy() & USED_BY_NAVIGATION) != 0;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		NavigationService service = app.getNavigationService();
-		return service != null && (service.getUsedBy() & USED_BY_NAVIGATION) != 0;
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		return routingHelper.isFollowingMode()
+				|| (routingHelper.isRoutePlanningMode() && routingHelper.isPauseNavigation());
 	}
 
 	@Override
 	public Builder buildNotification(boolean wearable) {
+		if (!isEnabled()) {
+			return null;
+		}
 		NavigationService service = app.getNavigationService();
 		String notificationTitle;
 		StringBuilder notificationText = new StringBuilder();
 		color = 0;
 		icon = R.drawable.ic_action_start_navigation;
 		turnBitmap = null;
+		ongoing = true;
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		boolean followingMode = routingHelper.isFollowingMode() || app.getLocationProvider().getLocationSimulation().isRouteAnimating();
 		if (service != null && (service.getUsedBy() & USED_BY_NAVIGATION) != 0) {
@@ -197,6 +205,10 @@ public class NavigationNotification extends OsmandNotification {
 				}
 			}
 
+		} else if (routingHelper.isRoutePlanningMode() && routingHelper.isPauseNavigation()) {
+			ongoing = false;
+			notificationTitle = app.getString(R.string.shared_string_navigation);
+			notificationText.append(app.getString(R.string.shared_string_paused));
 		} else {
 			return null;
 		}
@@ -218,8 +230,8 @@ public class NavigationNotification extends OsmandNotification {
 					PendingIntent.FLAG_UPDATE_CURRENT);
 			notificationBuilder.addAction(R.drawable.ic_pause,
 					app.getString(R.string.shared_string_pause), pausePendingIntent);
-		} else {
-			Intent resumeIntent = new Intent(OSMAND_STOP_NAVIGATION_SERVICE_ACTION);
+		} else if (routingHelper.isRouteCalculated() && routingHelper.isPauseNavigation()) {
+			Intent resumeIntent = new Intent(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION);
 			PendingIntent resumePendingIntent = PendingIntent.getBroadcast(app, 0, resumeIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
 			notificationBuilder.addAction(R.drawable.ic_play_dark,

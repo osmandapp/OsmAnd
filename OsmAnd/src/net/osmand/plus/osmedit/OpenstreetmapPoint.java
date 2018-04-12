@@ -2,6 +2,7 @@ package net.osmand.plus.osmedit;
 
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
+import net.osmand.util.Algorithms;
 
 public class OpenstreetmapPoint extends OsmPoint {
 	private static final long serialVersionUID = 729654300829771467L;
@@ -26,7 +27,8 @@ public class OpenstreetmapPoint extends OsmPoint {
 	public String getType() {
 		String type = "amenity";
 		for (String k : entity.getTagKeySet()) {
-			if (!OSMTagKey.NAME.getValue().equals(k) && !OSMTagKey.OPENING_HOURS.getValue().equals(k)) {
+			if (!OSMTagKey.NAME.getValue().equals(k) && !OSMTagKey.OPENING_HOURS.getValue().equals(k) && 
+					!k.startsWith(EditPoiData.REMOVE_TAG_PREFIX)) {
 				type = k;
 				break;
 			}
@@ -35,6 +37,9 @@ public class OpenstreetmapPoint extends OsmPoint {
 	}
 
 	public String getSubtype() {
+		if(Algorithms.isEmpty(getType())) {
+			return "";
+		}
 		return entity.getTag(this.getType());
 	}
 

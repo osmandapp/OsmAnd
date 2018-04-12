@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
@@ -47,6 +48,11 @@ import java.util.Map;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.rastermaps";
+
+	// Constants for determining the order of items in the additional actions context menu
+	private static final int UPDATE_MAP_ITEM_ORDER = 12300;
+	private static final int DOWNLOAD_MAP_ITEM_ORDER = 12600;
+
 	private OsmandSettings settings;
 	private OsmandApplication app;
 
@@ -161,7 +167,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (!force && exMapPref.get() != null) {
 			mapPref.set(exMapPref.get());
 			if (callback != null) {
-				callback.onMapSelected();
+				callback.onMapSelected(false);
 			}
 			updateMapLayers(mapView, mapPref, layers);
 			return;
@@ -192,7 +198,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 									mapPref.set(template.getName());
 									exMapPref.set(template.getName());
 									if (callback != null) {
-										callback.onMapSelected();
+										callback.onMapSelected(false);
 									}
 									updateMapLayers(mapView, mapPref, layers);
 								} else {
@@ -214,7 +220,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					mapPref.set(keys.get(which));
 					exMapPref.set(keys.get(which));
 					if (callback != null) {
-						callback.onMapSelected();
+						callback.onMapSelected(false);
 					}
 					updateMapLayers(mapView, mapPref, layers);
 				}
@@ -227,7 +233,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					@Override
 					public void onDismiss(DialogInterface dialog) {
 						if (callback != null) {
-							callback.onMapSelected();
+							callback.onMapSelected(true);
 						}
 					}
 				});
@@ -241,25 +247,26 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+				int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
 				if (itemId == R.string.layer_overlay) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.OVERLAY_MAP);
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.OVERLAY_MAP, viewCoordinates);
 					return false;
 				} else if (itemId == R.string.layer_underlay) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.UNDERLAY_MAP);
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.UNDERLAY_MAP, viewCoordinates);
 					return false;
 				}
 				return true;
 			}
 
 			@Override
-			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked) {
+			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
 				final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 				switch (itemId) {
 					case R.string.layer_overlay:
 						toggleUnderlayState(mapActivity, RasterMapType.OVERLAY,
 								new OnMapSelectedCallback() {
 									@Override
-									public void onMapSelected() {
+									public void onMapSelected(boolean canceled) {
 										ContextMenuItem item = adapter.getItem(pos);
 
 										String overlayMapDescr = settings.MAP_OVERLAY.get();
@@ -275,10 +282,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 								});
 						return false;
 					case R.string.layer_underlay:
-						toggleUnderlayState(mapActivity, RasterMapType.UNDERLAY, new
-								OnMapSelectedCallback() {
+						toggleUnderlayState(mapActivity, RasterMapType.UNDERLAY,
+								new OnMapSelectedCallback() {
 									@Override
-									public void onMapSelected() {
+									public void onMapSelected(boolean canceled) {
 										ContextMenuItem item = adapter.getItem(pos);
 
 										String underlayMapDescr = settings.MAP_UNDERLAY.get();
@@ -346,7 +353,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (mapView.getMainLayer() instanceof MapTileLayer) {
 			ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
-				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked, int[] viewCoordinates) {
 					if (resId == R.string.context_menu_item_update_map) {
 						mapActivity.getMapActions().reloadTile(mapView.getZoom(), latitude, longitude);
 					} else if (resId == R.string.shared_string_download_map) {
@@ -359,10 +366,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_update_map, mapActivity)
 					.setIcon(R.drawable.ic_action_refresh_dark)
+					.setOrder(UPDATE_MAP_ITEM_ORDER)
 					.setListener(listener).createItem());
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.shared_string_download_map, mapActivity)
 					.setIcon(R.drawable.ic_action_import)
+					.setOrder(DOWNLOAD_MAP_ITEM_ORDER)
 					.setListener(listener).createItem());
 		}
 	}
@@ -436,7 +445,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				builder.show();
 			}
 		};
-		t.execute();
+		t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public static void defineNewEditLayer(final Activity activity, final ResultMatcher<TileSourceTemplate> resultMatcher) {
@@ -578,7 +587,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (map != null) {
 			mapTypePreference.set(null);
 			if (callback != null) {
-				callback.onMapSelected();
+				callback.onMapSelected(false);
 			}
 			updateMapLayers(mapView, null, mapLayers);
 		} else {
@@ -592,6 +601,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	public interface OnMapSelectedCallback {
-		void onMapSelected();
+		void onMapSelected(boolean canceled);
 	}
 }

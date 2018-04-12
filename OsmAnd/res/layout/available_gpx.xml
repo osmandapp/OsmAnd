@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:layout_width="match_parent"
-			  android:layout_height="match_parent"
-			  android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="?attr/ctx_menu_info_view_bg"
+              android:orientation="vertical">
 
  	<ExpandableListView
 		android:id="@android:id/list"
@@ -16,5 +17,8 @@
         android:dividerHeight="0dp"
         android:drawSelectorOnTop="false"
 		android:groupIndicator="@android:color/transparent"/>
+
+	<include layout="@layout/empty_state_my_tracks"
+		android:id="@android:id/empty"/>
 
 </LinearLayout>

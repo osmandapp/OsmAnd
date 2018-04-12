@@ -35,15 +35,6 @@ public class NativeOsmandLibrary extends NativeLibrary {
 					try {
 						log.debug("Loading native gnustl_shared..."); //$NON-NLS-1$
 						System.loadLibrary("gnustl_shared");
-						if (android.os.Build.VERSION.SDK_INT >= 8) {
-							log.debug("Loading jnigraphics, since Android >= 2.2 ..."); //$NON-NLS-1$
-							try {
-								System.loadLibrary("jnigraphics");
-							} catch( UnsatisfiedLinkError e ) {
-								// handle "Shared library already opened" error
-								log.debug("Failed to load jnigraphics: " + e); //$NON-NLS-1$
-							}
-						}
 						log.debug("Loading native libraries..."); //$NON-NLS-1$
                         System.loadLibrary("osmand");
 						log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$

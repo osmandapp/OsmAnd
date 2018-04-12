@@ -1,12 +1,9 @@
 package net.osmand.plus;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.List;
+import android.database.sqlite.SQLiteDiskIOException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.Toast;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -20,11 +17,15 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.text.MessageFormat;
+import java.util.Arrays;
+import java.util.List;
+
 import bsh.Interpreter;
-import android.database.sqlite.SQLiteDiskIOException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.widget.Toast;
 
 
 public class SQLiteTileSource implements ITileSource {
@@ -416,7 +417,7 @@ public class SQLiteTileSource implements ITileSource {
 	
 
 	@Override
-	public void clearTiles(String path) {
+	public void deleteTiles(String path) {
 		SQLiteConnection db = getDatabase();
 		if (db == null || db.isReadOnly() || onlyReadonlyAvailable) {
 			return;

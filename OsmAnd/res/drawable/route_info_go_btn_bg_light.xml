@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/route_info_go_btn_bg_light_p" android:state_pressed="true"/>
+    <item android:drawable="@drawable/route_info_go_btn_bg_light_n"/>
+</selector>

@@ -11,6 +11,7 @@ import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsActivity;
@@ -64,14 +65,15 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	// TODO: We could actually remove v102 support, I am done updating all existing 35 TTS voices to v103. Hardy, July 2016
 	private static final Log log = PlatformUtil.getLog(TTSCommandPlayerImpl.class);
 	private static TextToSpeech mTts;
-	private static String ttsVoiceName = "";
+	private static String ttsVoiceStatus = "";
+	private static String ttsVoiceUsed = "";
 	private Context mTtsContext;
 	private HashMap<String, String> params = new HashMap<String, String>();
 	private VoiceRouter vrt;
 
-	public TTSCommandPlayerImpl(Activity ctx, VoiceRouter vrt, String voiceProvider)
+	public TTSCommandPlayerImpl(Activity ctx, ApplicationMode applicationMode, VoiceRouter vrt, String voiceProvider)
 			throws CommandPlayerException {
-		super((OsmandApplication) ctx.getApplicationContext(), voiceProvider, CONFIG_FILE, TTS_VOICE_VERSION);
+		super((OsmandApplication) ctx.getApplicationContext(), applicationMode, voiceProvider, CONFIG_FILE, TTS_VOICE_VERSION);
 		this.vrt = vrt;
 		if (Algorithms.isEmpty(language)) {
 			throw new CommandPlayerException(
@@ -82,7 +84,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			cSpeechRate = app.getSettings().SPEECH_RATE.get();
 		}
 		initializeEngine(app, ctx);
-		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_STREAM_GUIDANCE.get().toString());
+		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_STREAM_GUIDANCE
+				.getModeValue(getApplicationMode()).toString());
 	}
 	
 	
@@ -111,7 +114,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			if (ttsRequests++ == 0) {
 				requestAudioFocus();
 				// Delay first prompt of each batch to allow BT SCO connection being established
-				if (ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+				if (ctx.getSettings().AUDIO_STREAM_GUIDANCE.getModeValue(getApplicationMode()) == 0) {
 					ttsRequests++;
 					if (android.os.Build.VERSION.SDK_INT < 21) {
 						params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
@@ -162,7 +165,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 		if (mTts == null) {
 			mTtsContext = ctx;
-			ttsVoiceName = "";
+			ttsVoiceStatus = "";
+			ttsVoiceUsed = "";
 			ttsRequests = 0;
 			final float speechRate = cSpeechRate;
 
@@ -183,7 +187,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 				@Override
 				public void onInit(int status) {
 					if (status != TextToSpeech.SUCCESS) {
-						ttsVoiceName = "NO INIT SUCCESS";
+						ttsVoiceStatus = "NO INIT SUCCESS";
 						internalClear();
 					} else if (mTts != null) {
 						speechAllowed = true;
@@ -199,20 +203,25 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 										act);
 									builder.show();
 								}
-								ttsVoiceName = newLocale.getDisplayName() + ": LANG_MISSING_DATA";
-								ttsVoiceName = ttsVoiceName + "\n\n" + getVoiceUsed();
+								ttsVoiceStatus = newLocale.getDisplayName() + ": LANG_MISSING_DATA";
+								ttsVoiceUsed = getVoiceUsed();
 								break;
 							case TextToSpeech.LANG_AVAILABLE:
-								ttsVoiceName = newLocale.getDisplayName() + ": LANG_AVAILABLE";
+								ttsVoiceStatus = newLocale.getDisplayName() + ": LANG_AVAILABLE";
 							case TextToSpeech.LANG_COUNTRY_AVAILABLE:
-								ttsVoiceName = "".equals(ttsVoiceName) ? newLocale.getDisplayName() + ": LANG_COUNTRY_AVAILABLE" : ttsVoiceName;
+								ttsVoiceStatus = "".equals(ttsVoiceStatus) ? newLocale.getDisplayName() + ": LANG_COUNTRY_AVAILABLE" : ttsVoiceStatus;
 							case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
-								mTts.setLanguage(newLocale);
+								try {
+									mTts.setLanguage(newLocale);
+								} catch(Exception e) {
+									e.printStackTrace();
+									mTts.setLanguage(Locale.getDefault());
+								}
 								if(speechRate != 1) {
 									mTts.setSpeechRate(speechRate);
 								}
-								ttsVoiceName = "".equals(ttsVoiceName) ? newLocale.getDisplayName() + ": LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceName;
-								ttsVoiceName = ttsVoiceName + "\n\n" + getVoiceUsed();
+								ttsVoiceStatus = "".equals(ttsVoiceStatus) ? newLocale.getDisplayName() + ": LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceStatus;
+								ttsVoiceUsed = getVoiceUsed();
 								break;
 							case TextToSpeech.LANG_NOT_SUPPORTED:
 								//maybe weird, but I didn't want to introduce parameter in around 5 methods just to do this if condition
@@ -227,8 +236,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 											act);
 									builder.show();
 								}
-								ttsVoiceName = newLocale.getDisplayName() + ": LANG_NOT_SUPPORTED";
-								ttsVoiceName = ttsVoiceName + "\n\n" + getVoiceUsed();
+								ttsVoiceStatus = newLocale.getDisplayName() + ": LANG_NOT_SUPPORTED";
+								ttsVoiceUsed = getVoiceUsed();
 								break;
 						}
 					}
@@ -242,15 +251,15 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					try {
 						if (android.os.Build.VERSION.SDK_INT >= 21) {
 							if (mTts.getVoice() != null) {
-								return mTts.getVoice().toString();
+								return mTts.getVoice().toString() + " (API " + android.os.Build.VERSION.SDK_INT + ")";
 							}
 						} else {
-							return mTts.getLanguage() + " (Voice details not reported in API<21)";
+							return mTts.getLanguage() + " (API " + android.os.Build.VERSION.SDK_INT + " only reports language)";
 						}
 					} catch (RuntimeException e) {
 						// mTts.getVoice() might throw NPE
 					}
-					return "";
+					return "-";
 				}
 			});
 			mTts.setOnUtteranceCompletedListener(new OnUtteranceCompletedListener() {
@@ -268,8 +277,12 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 	}
 
-	public static String getTtsVoiceName() {
-		return ttsVoiceName;
+	public static String getTtsVoiceStatus() {
+		return ttsVoiceStatus;
+	}
+
+	public static String getTtsVoiceUsed() {
+		return ttsVoiceUsed;
 	}
 
 	private AlertDialog.Builder createAlertDialog(int titleResID, int messageResID,
@@ -292,7 +305,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 		abandonAudioFocus();
 		mTtsContext = null;
-		ttsVoiceName = "";
+		ttsVoiceStatus = "";
+		ttsVoiceUsed = "";
 	}
 	
 	@Override

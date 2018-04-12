@@ -464,7 +464,7 @@
   
   <string name="voice">ხმა</string>
   <string name="no_vector_map_loaded">ვექტორული რუკები ჩატვირთული არ იქნა</string>
-  <string name="map_route_by_gpx">ნავიგაცია GPX-ის გამოყენებით</string>
+  
   <string name="gpx_files_not_found">GPX ფაილები /tracks დასტაში ნაპოვნი არ იქნა</string>
   <string name="layer_gpx_layer">GPX მიყოლა…</string>
   <string name="error_reading_gpx">GPX მონაცემების კითხვის შეცდომა</string>
@@ -1066,8 +1066,7 @@
     
     <string name="shared_string_and">და</string>
     <string name="shared_string_or">ან</string>
-	<string name="route_is_too_long">შესაძლებელია გზა მეტისმეტად გრძელია OsmAnd გათიშული მთვლელისათვის.
-	გათიშული გზის შესაძლო მაქსიმალური სიგრძეა 200კმ. გთხოვთ ჩაამატოთ შუალედური წერტილები.</string>
+	
 	<string name="auto_zoom_none">ავტომატური გადიდების გათიშვა</string>
 	<string name="auto_zoom_close">გასადიდებლად</string>
 	<string name="auto_zoom_far">საშუალო დისტანციამდე</string>
@@ -1287,4 +1286,81 @@
     <string name="access_direction_audio_feedback">მიმართულებების აუდიოკარნახი</string>
     <string name="use_osm_live_routing">OSM ცოცხალი ნავიგაცია</string>
     <string name="access_no_destination">დანიშნულება მითითებული არაა</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">ველები</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">მეტი ველები</string>
+    <string name="routing_attr_driving_style_speed_name">სიჩქარე</string>
+    <string name="routing_attr_driving_style_balance_name">ბალანსი</string>
+    <string name="routing_attr_driving_style_safety_name">უსაფრთხოება</string>
+    <string name="relief_smoothness_factor_descr">პრიორიტეტის ველების ან ბორცვებისთვის მინიჭება</string>
+    <string name="shared_string_slope">დაქანება</string>
+    <string name="add_new_folder">ახალი დასტის დამატება</string>
+    <string name="points_delete_multiple_succesful">წერტილები წარმატებით წაიშალა.</string>
+    <string name="points_delete_multiple">დარწმუნებული ბრძანდებით, რომ აპირებთ წაშალოთ %1$d წერტილ(ებ)ი?</string>
+    <string name="track_points_category_name">ამ გზის მნიშვნელოვანი წერტილები</string>
+    <string name="gpx_track">მიდევნება</string>
+    <string name="max_speed">მაქს. სიჩქარე</string>
+    <string name="average_speed">საშუალო სიჩქარე</string>
+    <string name="shared_string_time_span">დროის შუალედი</string>
+    <string name="shared_string_max">მაქს</string>
+    <string name="shared_string_start_time">საწყისი დრო</string>
+    <string name="shared_string_end_time">დამთავრების დრო</string>
+    <string name="shared_string_color">ფერი</string>
+    <string name="select_gpx_folder">აირჩეთ მიდევნების დასტა</string>
+    <string name="file_can_not_be_moved">ფაილის გადაადგილება შეუძლებელია.</string>
+    <string name="shared_string_move">გადატანა</string>
+    <string name="shared_string_tracks">ბილიკები</string>
+    <string name="routing_attr_driving_style_name">მართვის სტილი</string>
+    <string name="route_altitude">გზის სიმაღლე</string>
+    <string name="altitude_descent">დაშვება</string>
+    <string name="altitude_ascent">ასვლა</string>
+    <string name="altitude_range">სიმაღლის შუალედი</string>
+    <string name="average_altitude">საშუალო სიმაღლე</string>
+    <string name="shared_string_time">დრო</string>
+    <string name="total_distance">ჯამური მანძილი</string>
+    <string name="routing_attr_relief_smoothness_factor_name">რელიეფის სირბილის ფაქტორი</string>
+    <string name="routing_attr_height_obstacles_name">სიმაღლის მონაცემების გამოყენება</string>
+    <string name="rendering_attr_depthContours_description">სიღრმის წერტილებისა და კონტურების ჩვენება</string>
+    <string name="rendering_attr_depthContours_name">სიღრმის კონტურები</string>
+	<string name="distance_moving">დაშორება შესწორებულია</string>
+    <string name="shared_string_install">ჩადგმა</string>
+    <string name="shared_string_add_photos">ფოტოების დამატება</string>
+    <string name="no_photos_descr">მოცემული ლოკაციისთვის ფოტოები არ არსებობს</string>
+    <string name="restart_search">თავიდან ძებნა</string>
+    <string name="increase_search_radius">ძებნის რადიუსის გაზრდა</string>
+    <string name="nothing_found">ვერაფერი ვიპოვეთ :(</string>
+    <string name="sorted_by_distance">დალაგებულია დაშორების მიხედვით</string>
+    <string name="search_favorites">რჩეულებში ძებნა</string>
+    <string name="favorite_group_name">ჯგუფის სახელი</string>
+    <string name="change_color">ფერის შეცვლა</string>
+    <string name="edit_name">სახელის შეცვლა</string>
+    <string name="shared_string_overview">მიმოხილვა</string>
+    <string name="select_street">ქუჩის არჩევა</string>
+    <string name="type_address">ჩაწერეთ მისამართი</string>
+    <string name="type_city_town">ჩაწერეთ ქალაქი</string>
+    <string name="type_postcode">ჩაწერეთ საფოსტო კოდი</string>
+    <string name="nearest_cities">უახლოესი ქალაქები</string>
+    <string name="select_city">აირჩიეთ ქალაქი</string>
+    <string name="select_postcode">აირჩიეთ საფოსტო კოდი</string>
+    <string name="quick_action_add_destination">დანიშნულების წერტილის დამატება</string>
+    <string name="quick_action_replace_destination">დანიშნულების წერტილის შეცვლა</string>
+    <string name="subscribe_email_error">შეცდომა</string>
+    <string name="fonts_header">რუკის ფონტები</string>
+    <string name="parked_at">პარკირების ადგილი</string>
+    <string name="pick_up_till">გაყვანის დრო</string>
+    <string name="without_time_limit">დროის შეზღუდვის გარეშე</string>
+    <string name="context_menu_read_full_article">"მთლიანი  სტატიის წაკითხვა"</string>
+    <string name="context_menu_read_article">სტატიის წაკითხვა</string>
+    
+    
+    
+    
+    
+    <string name="additional_actions">დამატებითი მოქმედებები</string>
+    <string name="modify_the_search_query">ძებნის შინაარსის შეცვლა.</string>
+    <string name="shared_string_actions">მოქმედებები</string>
+    <string name="shared_string_marker">სანიშნი</string>
+    <string name="shared_string_deleted">წაშლილია</string>
+    <string name="shared_string_edited">ჩასწორებულია</string>
+    <string name="shared_string_added">დამატებულია</string>
+    <string name="shared_string_action_name">მოქმედების სახელი</string>
     </resources>

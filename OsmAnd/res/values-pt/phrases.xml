@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Loja</string>
-		<string name="poi_shop_food">Mercearia</string>
+		<string name="poi_shop_food">Mercearia e supermercado</string>
 	<string name="poi_emergency">Emergência</string>
 	<string name="poi_transportation">Meios de Transporte</string>
 		<string name="poi_road_obstacle">Obstáculo na via</string>
@@ -243,8 +243,12 @@
 	<string name="poi_fuel_biogas">Biogás</string>
 	<string name="poi_fuel_lh2">Hidrogénio líquido</string>
 	<string name="poi_fuel_electricity">Electricidade</string>
-	<string name="poi_charging_station">Posto de carregamento</string>
+	<string name="poi_electricity_combined_charging">Posto de carregamento</string>
 	<string name="poi_vehicle_ramp">Rampa de veículo</string>
 	<string name="poi_compressed_air">Ar comprimido</string>
 	<string name="poi_parking">Estacionamento</string>
+	<string name="poi_fuel_type">Tipo de combustível</string>
+	<string name="poi_payment_type">Forma de pagamento</string>
+	<string name="poi_additional_type">Adicional</string>
+	<string name="poi_internet_access_type">Tipo de acesso à Internet</string>
 	</resources>

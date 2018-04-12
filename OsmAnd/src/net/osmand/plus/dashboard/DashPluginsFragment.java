@@ -81,11 +81,11 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 
 	private void initPlugins() {
-		List<OsmandPlugin> notActivePlugins = OsmandPlugin.getNotEnabledPlugins();
+		List<OsmandPlugin> notActivePlugins = OsmandPlugin.getNotEnabledVisiblePlugins();
 		Collections.shuffle(notActivePlugins);
 		plugins = new ArrayList<OsmandPlugin>();
 		Iterator<OsmandPlugin> nit = notActivePlugins.iterator();
-		Iterator<OsmandPlugin> it = OsmandPlugin.getEnabledPlugins().iterator();
+		Iterator<OsmandPlugin> it = OsmandPlugin.getEnabledVisiblePlugins().iterator();
 		addPluginsToLimit(nit, 1);
 		addPluginsToLimit(it, 5);
 		addPluginsToLimit(nit, 5);

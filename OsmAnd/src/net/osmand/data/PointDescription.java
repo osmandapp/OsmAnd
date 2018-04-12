@@ -24,6 +24,7 @@ public class PointDescription {
 
 	public static final String POINT_TYPE_FAVORITE = "favorite";
 	public static final String POINT_TYPE_WPT = "wpt";
+	public static final String POINT_TYPE_RTE = "rte";
 	public static final String POINT_TYPE_POI = "poi";
 	public static final String POINT_TYPE_ADDRESS = "address";
 	public static final String POINT_TYPE_OSM_NOTE= "osm_note";
@@ -44,6 +45,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_BLOCKED_ROAD = "blocked_road";
 	public static final String POINT_TYPE_TRANSPORT_ROUTE = "transport_route";
 	public static final String POINT_TYPE_TRANSPORT_STOP = "transport_stop";
+	public static final String POINT_TYPE_MAPILLARY_IMAGE = "mapillary_image";
 
 
 	public static final PointDescription LOCATION_POINT = new PointDescription(POINT_TYPE_LOCATION, "");
@@ -71,14 +73,6 @@ public class PointDescription {
 		}
 	}
 	
-	public void setLat(double lat) {
-		this.lat = lat;
-	}
-	
-	public void setLon(double lon) {
-		this.lon = lon;
-	}
-
 	public void setTypeName(String typeName){
 		this.typeName = typeName;
 	}
@@ -158,12 +152,17 @@ public class PointDescription {
 			return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.easting) + " "
 					+ ((long) pnt.northing);
 		} else if (f == PointDescription.OLC_FORMAT) {
-			return getLocationOlcName(lat, lon);
+			try {
+				return getLocationOlcName(lat, lon);
+			} catch (RuntimeException e) {
+				e.printStackTrace();
+				return "0, 0";
+			}
 		} else {
 			try {
 				return ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, LocationConvert.convert(lat, f),
 						LocationConvert.convert(lon, f));
-			} catch(RuntimeException e) {
+			} catch (RuntimeException e) {
 				e.printStackTrace();
 				return ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, 0, 0); 
 			}
@@ -178,11 +177,16 @@ public class PointDescription {
 			return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.easting) + " "
 					+ ((long) pnt.northing);
 		} else if (f == PointDescription.OLC_FORMAT) {
-			return getLocationOlcName(lat, lon);
+			try {
+				return getLocationOlcName(lat, lon);
+			} catch (RuntimeException e) {
+				e.printStackTrace();
+				return "0, 0";
+			}
 		} else {
 			try {
 				return LocationConvert.convert(lat, f) + ", " + LocationConvert.convert(lon, f);
-			} catch(RuntimeException e) {
+			} catch (RuntimeException e) {
 				e.printStackTrace();
 				return "0, 0";
 			}
@@ -207,6 +211,10 @@ public class PointDescription {
 	
 	public boolean isWpt() {
 		return POINT_TYPE_WPT.equals(type);
+	}
+
+	public boolean isRte() {
+		return POINT_TYPE_RTE.equals(type);
 	}
 	
 	public boolean isPoi() {
@@ -337,8 +345,8 @@ public class PointDescription {
 			pd = new PointDescription(POINT_TYPE_LOCATION, "");
 		}
 		if(pd.isLocation() && l != null) {
-			pd.setLat(l.getLatitude());
-			pd.setLon(l.getLongitude());
+			pd.lat = l.getLatitude();
+			pd.lon = l.getLongitude();
 		}
 		return pd;
 	}

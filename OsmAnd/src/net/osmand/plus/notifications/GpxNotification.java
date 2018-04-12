@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.app.NotificationCompat.BigTextStyle;
 import android.support.v4.app.NotificationCompat.Builder;
-import android.support.v7.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat;
 
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
@@ -26,7 +26,8 @@ public class GpxNotification extends OsmandNotification {
 	public final static String OSMAND_STOP_GPX_SERVICE_ACTION = "OSMAND_STOP_GPX_SERVICE_ACTION";
 	public final static String GROUP_NAME = "GPX";
 
-	private boolean wasDismissed;
+	private boolean wasNoDataDismissed;
+	private boolean lastBuiltNoData;
 
 	public GpxNotification(OsmandApplication app) {
 		super(app, GROUP_NAME);
@@ -41,6 +42,9 @@ public class GpxNotification extends OsmandNotification {
 				final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.saveCurrentTrack();
+					if (!app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+						plugin.stopRecording();
+					}
 				}
 			}
 		}, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION));
@@ -95,7 +99,9 @@ public class GpxNotification extends OsmandNotification {
 
 	@Override
 	public void onNotificationDismissed() {
-		wasDismissed = true;
+		if (!wasNoDataDismissed) {
+			wasNoDataDismissed = lastBuiltNoData;
+		}
 	}
 
 	@Override
@@ -108,28 +114,30 @@ public class GpxNotification extends OsmandNotification {
 		color = 0;
 		icon = R.drawable.ic_action_polygom_dark;
 		boolean isGpxRecording = app.getSavingTrackHelper().getIsRecording();
-		float recordedDistane = app.getSavingTrackHelper().getDistance();
+		float recordedDistance = app.getSavingTrackHelper().getDistance();
 		ongoing = true;
+        lastBuiltNoData = false;
 		if (isGpxRecording) {
 			color = app.getResources().getColor(R.color.osmand_orange);
 			notificationTitle = app.getString(R.string.shared_string_trip) + " • "
 					+ Algorithms.formatDuration((int) (app.getSavingTrackHelper().getDuration() / 1000), true);
 			notificationText = app.getString(R.string.shared_string_recorded)
-					+ ": " + OsmAndFormatter.getFormattedDistance(recordedDistane, app);
+					+ ": " + OsmAndFormatter.getFormattedDistance(recordedDistance, app);
 		} else {
-			if (recordedDistane > 0) {
-				notificationTitle = app.getString(R.string.shared_string_pause) + " • "
+			if (recordedDistance > 0) {
+				notificationTitle = app.getString(R.string.shared_string_paused) + " • "
 						+ Algorithms.formatDuration((int) (app.getSavingTrackHelper().getDuration() / 1000), true);
 				notificationText = app.getString(R.string.shared_string_recorded)
-						+ ": " + OsmAndFormatter.getFormattedDistance(recordedDistane, app);
+						+ ": " + OsmAndFormatter.getFormattedDistance(recordedDistance, app);
 			} else {
 				ongoing = false;
 				notificationTitle = app.getString(R.string.shared_string_trip_recording);
 				notificationText = app.getString(R.string.gpx_logging_no_data);
+				lastBuiltNoData = true;
 			}
 		}
 
-		if ((wasDismissed || !app.getSettings().SHOW_TRIP_REC_NOTIFICATION.get()) && !ongoing) {
+		if ((wasNoDataDismissed || !app.getSettings().SHOW_TRIP_REC_NOTIFICATION.get()) && !ongoing) {
 			return null;
 		}
 
@@ -147,8 +155,8 @@ public class GpxNotification extends OsmandNotification {
 			if (app.getSavingTrackHelper().getDistance() > 0) {
 				notificationBuilder.addAction(R.drawable.ic_pause,
 						app.getString(R.string.shared_string_pause), stopPendingIntent);
-				notificationBuilder.addAction(R.drawable.ic_action_save, app.getString(R.string.shared_string_save),
-						savePendingIntent);
+				notificationBuilder.addAction(R.drawable.ic_action_save,
+						app.getString(R.string.shared_string_save), savePendingIntent);
 			} else {
 				notificationBuilder.addAction(R.drawable.ic_action_rec_stop,
 						app.getString(R.string.shared_string_control_stop), stopPendingIntent);
@@ -157,11 +165,11 @@ public class GpxNotification extends OsmandNotification {
 			Intent startIntent = new Intent(OSMAND_START_GPX_SERVICE_ACTION);
 			PendingIntent startPendingIntent = PendingIntent.getBroadcast(app, 0, startIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
-			if (recordedDistane > 0) {
+			if (recordedDistance > 0) {
 				notificationBuilder.addAction(R.drawable.ic_action_rec_start,
 						app.getString(R.string.shared_string_continue), startPendingIntent);
-				notificationBuilder.addAction(R.drawable.ic_action_save, app.getString(R.string.shared_string_save),
-						savePendingIntent);
+				notificationBuilder.addAction(R.drawable.ic_action_save,
+						app.getString(R.string.shared_string_save), savePendingIntent);
 			} else {
 				notificationBuilder.addAction(R.drawable.ic_action_rec_start,
 						app.getString(R.string.shared_string_record), startPendingIntent);

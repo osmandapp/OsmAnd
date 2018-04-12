@@ -97,7 +97,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			searchText = "";
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -349,7 +349,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					CityItem item = (CityItem) obj;
 					viewHolder.bindIndexItem(item);
 					if (item.getIndexItem() == null) {
-						new IndexItemResolverTask(viewHolder, item).execute();
+						new IndexItemResolverTask(viewHolder, item).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 					}
 				}
 			} else {
@@ -394,7 +394,12 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			@Override
 			protected IndexItem doInBackground(Void... params) {
 				Amenity amenity = cityItem.getAmenity();
-				BinaryMapDataObject o = osmandRegions.findBinaryMapDataObject(amenity.getLocation());
+				BinaryMapDataObject o = null;
+				try {
+					o = osmandRegions.findBinaryMapDataObject(amenity.getLocation());
+				} catch (IOException e) {
+					// ignore
+				}
 				if (o != null) {
 					String selectedFullName = osmandRegions.getFullName(o);
 					WorldRegion downloadRegion = osmandRegions.getRegionData(selectedFullName);
@@ -473,7 +478,8 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 				// process other maps & voice prompts
 				if (group.getType() == DownloadResourceGroupType.OTHER_MAPS_HEADER
 						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_REC
-						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_TTS) {
+						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_TTS
+						|| group.getType() == DownloadResourceGroupType.FONTS_HEADER) {
 					if (group.getIndividualResources() != null) {
 						for (IndexItem item : group.getIndividualResources()) {
 							name = item.getVisibleName(ctx, osmandRegions, false).toLowerCase();

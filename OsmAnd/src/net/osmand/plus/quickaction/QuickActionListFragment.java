@@ -108,9 +108,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
     private void setUpToolbar(View view) {
         Toolbar  toolbar = (Toolbar) view.findViewById(R.id.custom_toolbar);
-        Drawable back    = getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        Drawable back    = getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back);
         back.setColorFilter(ContextCompat.getColor(getContext(), R.color.color_white), PorterDuff.Mode.MULTIPLY);
         toolbar.setNavigationIcon(back);
+        toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,7 +138,17 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         quickActionRegistry.setUpdatesListener(null);
     }
 
-    private MapActivity getMapActivity() {
+	@Override
+	protected boolean isFullScreenAllowed() {
+		return false;
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		return getSettings().isLightContent() ? R.color.status_bar_light : R.color.status_bar_dark;
+	}
+
+	private MapActivity getMapActivity() {
         return (MapActivity) getActivity();
     }
 
@@ -251,7 +262,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         }
 
         public void deleteItem(int position) {
-            if (position == -1)
+            if (position == -1 || position >= itemsList.size())
                 return;
 
             itemsList.remove(position);

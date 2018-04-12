@@ -1,18 +1,19 @@
 package net.osmand.plus.voice;
 
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import android.media.MediaPlayer;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.VoiceRouter;
 
 import org.apache.commons.logging.Log;
 
-import android.media.MediaPlayer;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 /**
@@ -34,10 +35,10 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	private VoiceRouter vrt;
 
 	
-	public MediaCommandPlayerImpl(OsmandApplication ctx, VoiceRouter vrt, String voiceProvider)
+	public MediaCommandPlayerImpl(OsmandApplication ctx, ApplicationMode applicationMode, VoiceRouter vrt, String voiceProvider)
 		throws CommandPlayerException
 	{
-		super(ctx, voiceProvider, CONFIG_FILE, MEDIA_VOICE_VERSION);
+		super(ctx, applicationMode, voiceProvider, CONFIG_FILE, MEDIA_VOICE_VERSION);
 		this.vrt = vrt;
 	}
 	
@@ -83,7 +84,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		if (mediaPlayer == null) {
 			requestAudioFocus();
 			// Delay first prompt of each batch to allow BT SCO connection being established
-			if (ctx != null && ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+			if (ctx != null && ctx.getSettings().AUDIO_STREAM_GUIDANCE.getModeValue(getApplicationMode()) == 0) {
 				try {
 					log.debug("Delaying MediaCommandPlayer for BT SCO");
 					Thread.sleep(ctx.getSettings().BT_SCO_DELAY.get());

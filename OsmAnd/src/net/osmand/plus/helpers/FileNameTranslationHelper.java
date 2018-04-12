@@ -1,11 +1,11 @@
 package net.osmand.plus.helpers;
 
 import android.content.Context;
-
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.R;
+import net.osmand.plus.download.DownloadResources;
 
 import org.apache.commons.logging.Log;
 
@@ -19,13 +19,16 @@ public class FileNameTranslationHelper {
 	private static final Log LOG = PlatformUtil.getLog(FileNameTranslationHelper.class);
 	public static final String WIKI_NAME = "_wiki";
 	public static final String HILL_SHADE = "Hillshade_";
+	public static final String SEA_DEPTH = "Depth_";
 
 	public static String getFileName(Context ctx, OsmandRegions regions, String fileName) {
 		String basename = getBasename(fileName);
 		if (basename.endsWith(WIKI_NAME)) { //wiki files
-			return getWikiName(ctx,basename);
+			return getWikiName(ctx, basename);
 		} else if (fileName.endsWith("tts")) { //tts files
 			return getVoiceName(ctx, fileName);
+		} else if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) { //otf files
+			return getFontName(ctx, basename);
 		} else if (fileName.startsWith(HILL_SHADE)){
 			return getHillShadeName(ctx, regions, basename);
 		} else if (fileName.length() == 2) { //voice recorded files
@@ -75,9 +78,9 @@ public class FileNameTranslationHelper {
 		return  wikiName + " " + ctx.getString(R.string.amenity_type_osmwiki);
 	}
 
-	public static String getVoiceName(Context ctx, String basename) {
+	public static String getVoiceName(Context ctx, String fileName) {
 		try {
-			String nm = basename.replace('-', '_').replace(' ', '_');
+			String nm = fileName.replace('-', '_').replace(' ', '_');
 			if (nm.endsWith("_tts") || nm.endsWith("-tts")) {
 				nm = nm.substring(0, nm.length() - 4);
 			}
@@ -89,7 +92,11 @@ public class FileNameTranslationHelper {
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		return basename;
+		return fileName;
+	}
+
+	public static String getFontName(Context ctx, String basename) {
+		return basename.replace('-', ' ').replace('_', ' ');
 	}
 
 	private static String getBasename(String fileName) {
@@ -210,8 +217,17 @@ public class FileNameTranslationHelper {
 			return ctx.getString(R.string.index_item_world_basemap);
 		} else if (basename.equals("world_bitcoin_payments")) {
 			return ctx.getString(R.string.index_item_world_bitcoin_payments);
-		} else if (basename.equals("world_seamarks_basemap")) {
+		} else if (basename.equals(DownloadResources.WORLD_SEAMARKS_KEY) || 
+				basename.equals(DownloadResources.WORLD_SEAMARKS_OLD_KEY)) {
 			return ctx.getString(R.string.index_item_world_seamarks);
+		} else if (basename.equals("world_wikivoyage")) {
+			return ctx.getString(R.string.index_item_world_wikivoyage);
+		} else if (basename.equals("depth_contours_osmand_ext")) {
+			return ctx.getString(R.string.index_item_depth_contours_osmand_ext);
+		} else if (basename.equals("depth_points_southern_hemisphere_osmand_ext")) {
+			return ctx.getString(R.string.index_item_depth_points_southern_hemisphere);
+		} else if (basename.equals("depth_points_northern_hemisphere_osmand_ext")) {
+			return ctx.getString(R.string.index_item_depth_points_northern_hemisphere);
 		}
 		return null;
 	}

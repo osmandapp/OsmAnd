@@ -3,8 +3,15 @@
           xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:icon="@drawable/icon_free"
+        android:icon="@mipmap/icon_nightly"
         tools:replace="android:icon">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="fb792288460976727"/>
+        <activity
+            android:name="net.osmand.plus.activities.MapActivity"
+            android:theme="@style/FirstSplashScreenFreeDev"
+            tools:replace="android:theme"/>
         <service
             android:name="net.osmand.plus.NavigationService"
             android:process="net.osmand.dev"

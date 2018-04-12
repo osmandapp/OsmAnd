@@ -128,7 +128,7 @@
 	<string name="poi_vehicle_inspection">Пункт тэхагляду</string>
 	<string name="poi_car_wash">Аўтамыйка</string>
 	<string name="poi_fuel">Запраўка</string>
-	<string name="poi_charging_station">Зарадная станцыя</string>
+	<string name="poi_electricity_combined_charging">Зарадная станцыя</string>
 	<string name="poi_vehicle_ramp">Рамонтная эстакада/яма</string>
 	<string name="poi_compressed_air">Кампрэсар для падпампоўкі шын</string>
 	<string name="poi_parking">Паркоўка</string>
@@ -526,8 +526,8 @@
 	<string name="poi_craft_sweep">Камінар</string>
 	<string name="poi_craft_tailor">Атэлье</string>
 	<string name="poi_craft_tiler">Пліткавыя працы</string>
-	<string name="poi_craft_tinsmith">Бляхар, лудзільшчык</string>
-	<string name="poi_craft_upholsterer">Драпавальшчык, абіўка мэблі</string>
+	<string name="poi_craft_tinsmith">Бляхар, лудзільнік</string>
+	<string name="poi_craft_upholsterer">Драпавальнік, абіўка мэблі</string>
 	<string name="poi_craft_watchmaker">Гадзіннікавы майстар</string>
 	<string name="poi_craft_window_construction">Выраб вокнаў</string>
 
@@ -961,10 +961,10 @@
 	<string name="poi_fax">Факс</string>
 	<string name="facebook">Фэйсбук</string>
 	<string name="poi_mobile">Сотавы тэлефон</string>
-	<string name="poi_animal_shelter_dog">Тып прытулку: для сабак</string>
-	<string name="poi_animal_shelter_cat">Тып прытулку: для котак</string>
-	<string name="poi_animal_shelter_dog_cat">Тып прытулку: для сабак і котак</string>
-	<string name="poi_animal_shelter_bird">Тып прытулку: для птушак</string>
+	<string name="poi_animal_shelter_dog">Сабакі</string>
+	<string name="poi_animal_shelter_cat">Каты</string>
+	<string name="poi_animal_shelter_dog_cat">Сабакі, каты</string>
+	<string name="poi_animal_shelter_bird">Птушкі</string>
 
 <string name="poi_shower">Душ</string>
 	<string name="poi_recycling_centre">Пункт прыёму</string>
@@ -1430,7 +1430,7 @@
 	<string name="poi_tunnel_pedestrian">Тунэль для пешаходаў</string>
 	<string name="poi_tunnel_railway">Чыгуначны тунэль</string>
 	<string name="poi_bridge_car">Аўтамабільны мост</string>
-	<string name="poi_craft_electronics">Рамонт электронікі</string>
+	<string name="poi_craft_electronics_repair">Рамонт электронікі</string>
 
 <string name="poi_mini_roundabout">Міні кругавы рух</string>
 	<string name="poi_railway_crossing">Чыгуначны пераход</string>
@@ -1695,7 +1695,7 @@
 	<string name="poi_payment_gift_card_no">Падарункавыя карткі не прымаюцца</string>
 	<string name="poi_payment_golden_crown_yes">Залатая Карона</string>
 	<string name="poi_payment_golden_crown_no">Карткі Залатая Карона не прымаюцца</string>
-	<string name="poi_payment_pro100_yes">"ПРО100 "</string>
+	<string name="poi_payment_pro100_yes">ПРО100</string>
 	<string name="poi_payment_pro100_no">Карткі ПРО100 не прымаюцца</string>
 	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">Карткі Union Card не прымаюцца</string>
@@ -1733,7 +1733,7 @@
 	<string name="poi_drive_through_yes">Так</string>
 	<string name="poi_drive_through_no">Кліенты, што сядзяць у аўтамабілі, не абслугоўваюцца</string>
 
-	<string name="poi_brewery_additional">Бровар пастаўшчык</string>
+	<string name="poi_brewery_additional">Назва бровару</string>
 	<string name="poi_microbrewery_yes">Уласны бровар</string>
 	<string name="poi_microbrewery_no">Няма ўласнага бровара</string>
 
@@ -2133,7 +2133,7 @@
 	<string name="poi_openfire_no">Развядзеньне адкрытага агню забаронена</string>
 	<string name="poi_backcountry_yes">Так</string>
 	<string name="poi_backcountry_no">Не</string>
-	<string name="poi_scout_yes">Лягер скаўтаў</string>
+	<string name="poi_scout_yes">так</string>
 	<string name="poi_scout_no">Лягер скаўтаў: не</string>
 	<string name="poi_group_only_yes">Даступна толькі для груп: так</string>
 	<string name="poi_group_only_no">Даступна толькі для груп: не</string>
@@ -2296,7 +2296,7 @@
 	<string name="poi_historic_period_old_kingdom">Гістарычны пэрыяд: старажытнае царства (2686 – 2181 г. да н.э.)</string>
 	<string name="poi_historic_period_first_intermediate_period">Гістарычны пэрыяд: першы пераходны пэрыяд (2181 – 2055 г. да н.э.)</string>
 	<string name="poi_historic_period_second_intermediate_period">Гістарычны пэрыяд: другі пераходны пэрыяд (1650 – 1550 г. да н.э.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Гістарычны пэрыяд: трэці пераходны пэрыяд (1069 – 664 г. да н.э.) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Гістарычны пэрыяд: трэці пераходны пэрыяд (1069 – 664 г. да н.э.)</string>
 	<string name="poi_historic_period_first_persian_period">Гістарычны пэрыяд: першы пэрсідзкі пэрыяд</string>
 	<string name="poi_historic_period_late_period">Гістарычны пэрыяд: позняе царства (664 – 332 г. да н.э.)</string>
 	<string name="poi_historic_period_second_persian_period">Гістарычны пэрыяд: другі пэрсідскі пэрыяд</string>
@@ -2749,7 +2749,7 @@
 	<string name="poi_health_facility_type_nursing_home">Тып мэдустановы: хоспіс</string>
 	<string name="poi_health_facility_type_support_group_home">Тып мэдустановы: сустрэчы груп падтрымкі</string>
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Спэцыялізацыя: паліятыўная дапамога</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Паліятыўная дапамога</string>
 
 	<string name="poi_suction_point">Пункт пампаваньня вады</string>
 
@@ -2776,8 +2776,8 @@
 
 	<string name="poi_counselling_type_addiction_yes">Кансультацыя алка/нарказалежных: так</string>
 	<string name="poi_counselling_type_addiction_no">Кансультацыя алка/нарказалежных: не</string>
-	<string name="poi_counselling_type_antenatal_yes">Кансультацыя для будучых маці: так</string>
-	<string name="poi_counselling_type_antenatal_no">Кансультацыя для будучых маці: не</string>
+	<string name="poi_counselling_type_antenatal_yes">Кансультацыя для цяжарных: так</string>
+	<string name="poi_counselling_type_antenatal_no">Кансультацыя для цяжарных: не</string>
 	<string name="poi_counselling_type_child_guidance_yes">Кансультацыя па дзіцячым выхаваньні: так</string>
 	<string name="poi_counselling_type_child_guidance_no">Кансультацыя па дзіцячым выхаваньні: не</string>
 	<string name="poi_counselling_type_couple_yes">Кансультацыя для пар: так</string>
@@ -2860,10 +2860,10 @@
 	<string name="poi_fire_hydrant_pressure">Ціск вады ў гідранце</string>
 	<string name="poi_fire_hydrant_count">Колькасьць гідрантаў</string>
 	<string name="poi_fire_hydrant_flow_capacity">Прапускная здольнасьць гідранта</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Разьмяшчэньне гідранта: ходнік</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Разьмяшчэньне гідранта: паркоўка</string>
-	<string name="poi_fire_hydrant_position_street">Разьмяшчэньне гідранта: вуліца</string>
-	<string name="poi_fire_hydrant_position_underground">Разьмяшчэньне гідранта: падземны</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Ходнік</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Паркоўка</string>
+	<string name="poi_fire_hydrant_position_street">Вуліца</string>
+	<string name="poi_fire_hydrant_position_underground">Падземны</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Асноўная</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Сажалка</string>
 	<string name="poi_fire_hydrant_style_water_source_stream">Струмень</string>
@@ -2943,9 +2943,9 @@
 	<string name="poi_payment_troika_no">Карткі Тройка не прымаюцца</string>
 
 	<string name="poi_telescope">Тэлескоп</string>
-	<string name="poi_telescope_type_optical">Тэлескоп: аптычны</string>
-	<string name="poi_telescope_type_radio">Тэлескоп: радыё</string>
-	<string name="poi_telescope_type_gamma">Тэлескоп: гама</string>
+	<string name="poi_telescope_type_optical">Аптычны</string>
+	<string name="poi_telescope_type_radio">Радыё</string>
+	<string name="poi_telescope_type_gamma">Гама</string>
 	<string name="poi_telescope_diameter">Дыямэтар</string>
 	<string name="poi_telescope_spectrum">Спэктр</string>
 	<string name="poi_telescope_usage_education">Прызначэньне: адукацыя</string>
@@ -3011,9 +3011,9 @@
 	<string name="poi_mdf">Галоўны крос</string>
 	<string name="poi_min_age">Мінімальны ўзрост</string>
 
-	<string name="poi_organic_yes">Біяпрадукты: ёсьць</string>
-	<string name="poi_organic_no">Біяпрадукты: адсутнічаюць</string>
-	<string name="poi_organic_only">Толькі біяпрадукты</string>
+	<string name="poi_organic_yes">Так</string>
+	<string name="poi_organic_no">Не</string>
+	<string name="poi_organic_only">Толькі</string>
 
 	<string name="poi_traffic_mirror">Дарожнае люстэрка</string>
 
@@ -3042,7 +3042,7 @@
 
 	<string name="poi_seamark_dyke">Вадзяны знак: насып</string>
 	<string name="poi_content_wastewater">Зьмесьціва: сьцёкі</string>
-	<string name="poi_fire_hydrant_position_green">Разьмяшчэньне гідранта: трава</string>
+	<string name="poi_fire_hydrant_position_green">Трава</string>
 	<string name="poi_wiki_link">Вікіпэдыя</string>
 
 <string name="poi_toilets_disposal_chemical">Утылізацыя адыходаў: хімічная</string>
@@ -3057,12 +3057,12 @@
 <string name="poi_denomination_uniting">Яднаючая Царква ў Аўстраліі</string>
 	<string name="poi_denomination_reform">Рэфармісцкі юдаізм</string>
 	<string name="poi_memorial_koshinto">Кашынта</string>
-	<string name="poi_service_bicycle_charging_no">Зарадка электравеласіпедаў: не</string>
+	<string name="poi_service_bicycle_charging_no">Зарадка: не</string>
 
-<string name="poi_service_bicycle_charging_yes">Зарадка электравеласіпедаў: ёсць</string>
+<string name="poi_service_bicycle_charging_yes">Зарадка: ёсць</string>
 	<string name="poi_shop_craft">Тавары для рукадзельля</string>
 
-	<string name="poi_fuel_avia_type">Від паліва</string>
+	<string name="poi_fuel_avia_type">Тып авіяцыйнага паліва</string>
 	<string name="poi_payment_fuel_type">Паліўныя карткі</string>
 	<string name="poi_internet_access_type">Тып доступу ў Інтэрнэт</string>
 	<string name="poi_vending_type">У продажы</string>
@@ -3076,7 +3076,7 @@
 	<string name="poi_traffic_signals_sound">Гукавы сігнал</string>
 	<string name="poi_highway_crossing_type">Тып</string>
 	<string name="poi_tactile_paving">Тактыльнае пакрыцьцё</string>
-	<string name="poi_service_car">Паслугі</string>
+	<string name="poi_service_general">Паслугі</string>
 	<string name="poi_brushless">Безкантактная</string>
 	<string name="poi_self_service">Самаабслугоўваньне</string>
 	<string name="poi_parking_type">Тып</string>
@@ -3378,7 +3378,7 @@
 
 <string name="poi_fire_hydrant_type_dry_barrel">Наземны сухі</string>
 	<string name="poi_counselling_type_nutrition_nfire_hydo">Кансультацыя па пытаньнях харчаваньня: не</string>
-	<string name="poi_fire_hydrant_position_lane">Разьмяшчэньне гідранта: паласа руху</string>
+	<string name="poi_fire_hydrant_position_lane">Паласа руху</string>
 	<string name="poi_fire_hydrant_style_wsh">Дызайн гідранта: wsh</string>
 	<string name="poi_cuisine_buschenschank">Buschenschank (вытанчаныя аўстрыйскія віны)</string>
 	<string name="poi_cuisine_fine_dining">Эксклюзіўныя стравы</string>
@@ -3394,6 +3394,477 @@
 	<string name="poi_drink_wine_retail">Віно: продаж</string>
 	<string name="poi_drink_wine_served">Віно: дэгустацыя</string>
 
-<string name="poi_energy_supplier">Офіс пастаўшчыка энергіі</string>
+<string name="poi_energy_supplier">Офіс пастаўніка энергіі</string>
+
+<string name="poi_electronics_repair_computer">Рамонт электронікі: кампутары</string>
+	<string name="poi_electronics_repair_appliance">Рамонт электронікі: бытавая тэхніка</string>
+	<string name="poi_electronics_repair_phone">Рамонт электронікі: тэлефоны</string>
+	<string name="poi_electronics_repair_tv">Рамонт электронікі: тэлевізары</string>
+
+<string name="poi_resort_kids_camp">Дзіцячы лагер</string>
+	<string name="poi_music_school">Музычная школа</string>
+	<string name="poi_language_school">Школа моў</string>
+
+<string name="poi_life_ring">Выратавальнае кола</string>
+
+<string name="poi_zoo_type">Тып</string>
+
+<string name="poi_zoo_petting_zoo">Кантакны заапарк</string>
+	<string name="poi_zoo_wildlife_park">Парк дзікай прыроды</string>
+	<string name="poi_zoo_enclosure">Клеткі</string>
+	<string name="poi_zoo_safari_park">Сафары-парк</string>
+	<string name="poi_zoo_birds">Птушкі</string>
+	<string name="poi_zoo_aviary">Вальер для птушак</string>
+	<string name="poi_zoo_falconry">Сакалінае паляванне</string>
+	<string name="poi_zoo_reptile">Рэптыліі</string>
+
+<string name="poi_stands">Трыбуны</string>
+
+<string name="poi_motorcycle_services">Паслугі</string>
+	<string name="poi_motorcycle_type">Тып матацыклаў</string>
+
+<string name="poi_motorcycle_sales_yes">Продаж</string>
+	<string name="poi_motorcycle_sales_no">Продаж: не</string>
+	<string name="poi_motorcycle_sales_yes_used">Продаж: так; ужывалыя</string>
+	<string name="poi_motorcycle_sales_used">Продаж: ужывалыя</string>
+	<string name="poi_motorcycle_rental_yes">Арэнда</string>
+	<string name="poi_motorcycle_rental_no">Арэнда: не</string>
+	<string name="poi_motorcycle_repair_yes">Рамонт</string>
+	<string name="poi_motorcycle_repair_no">Рамонт: не</string>
+	<string name="poi_motorcycle_parts_yes">Запчасткі</string>
+	<string name="poi_motorcycle_parts_no">Запчасткі: не</string>
+	<string name="poi_motorcycle_tyres_yes">Шыны</string>
+	<string name="poi_motorcycle_tyres_no">Шыны: не</string>
+	<string name="poi_motorcycle_clothes_yes">Матацыклетная адзежа</string>
+	<string name="poi_motorcycle_clothes_no">Матацыклетная адзежа: не</string>
+	<string name="poi_motorcycle_type_scooter">Скутэр</string>
+	<string name="poi_motorcycle_type_sportbike">Спартыўныя</string>
+	<string name="poi_motorcycle_type_chopper">Чоперы</string>
+	<string name="poi_motorcycle_type_offroad">Пазадарожныя</string>
+	<string name="poi_motorcycle_type_dualsport">Двайнога прызначэння</string>
+	<string name="poi_motorcycle_type_standard">Класічныя</string>
+
+<string name="poi_lock_basin">Запорны басейн</string>
+	<string name="poi_generator_output_electricity_no">Выхад (электрычнасць): не</string>
+
+	<string name="poi_owner">Уладальнік</string>
+
+<string name="poi_animal_shelter_type">Прымаюцца жывёлы</string>
+	<string name="poi_animal_shelter_purpose">Мэта</string>
+
+<string name="poi_animal_shelter_wildlife">Звяры</string>
+	<string name="poi_animal_shelter_horse">Коні</string>
+	<string name="poi_animal_shelter_mammal">Сысуны</string>
+	<string name="poi_animal_shelter_fish">Рыбы</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Апека: так</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Апека: не</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Выпуск: так</string>
+	<string name="poi_animal_shelter_purpose_release_no">Выпуск: не</string>
+
+	<string name="poi_spaceport">Касмадром</string>
+
+<string name="poi_direction_n">Напрамак: поўнач</string>
+	<string name="poi_direction_nne">Напрамак: паўночна-паўночны ўсход</string>
+	<string name="poi_direction_ne">Напрамак: паўночны ўсход</string>
+	<string name="poi_direction_ene">Напрамак: усходне-паўночны ўсход</string>
+	<string name="poi_direction_e">Напрамак: усход</string>
+	<string name="poi_direction_ese">Напрамак: усходне-паўднёвы ўсход</string>
+	<string name="poi_direction_se">Напрамак: паўднёвы ўсход</string>
+	<string name="poi_direction_sse">Напрамак: паўднёва-паўднёвы ўсход</string>
+	<string name="poi_direction_s">Напрамак: поўдзень</string>
+	<string name="poi_direction_ssw">Напрамак: паўднёва-паўднёвы захад</string>
+	<string name="poi_direction_sw">Напрамак: паўднёвы захад</string>
+	<string name="poi_direction_wsw">Напрамак: заходне-паўднёвы захад</string>
+	<string name="poi_direction_w">Напрамак: захад</string>
+	<string name="poi_direction_wnw">Напрамак: заходне-паўночны захад</string>
+	<string name="poi_direction_nw">Напрамак: паўночны захад</string>
+	<string name="poi_direction_nnw">Напрамак: паўночна-паўночны захад</string>
+	<string name="poi_direction_forward">Напрамак: уперад</string>
+	<string name="poi_direction_backward">Напрамак: назад</string>
+	<string name="poi_direction_clockwise">Напрамак: па гадзіннікавай стрэлцы</string>
+	<string name="poi_direction_anticlockwise">Напрамак: супраць гадзіннікавай стрэлцы</string>
+	<string name="poi_direction_up">Напрамак: уверх</string>
+	<string name="poi_direction_down">Напрамак: уніз</string>
+	<string name="poi_direction_entrance">Напрамак: уваход</string>
+	<string name="poi_direction_exit">Напрамак: выхад</string>
+	<string name="poi_direction_all">Напрамак: на ўсе бакі</string>
+
+<string name="poi_winter_room_yes">Зімні пакой: так</string>
+	<string name="poi_winter_room_no">Зімні пакой: не</string>
+	<string name="poi_reservation_required">Замова: патрабуецца</string>
+	<string name="poi_reservation_recommended">Замова: рэкамендуецца</string>
+	<string name="poi_reservation_yes">Замова: так</string>
+	<string name="poi_reservation_no">Замова: не</string>
+	<string name="poi_reservation_members_only">Замова: толькі для чальцоў</string>
+
+	<string name="poi_beds">Ложкі</string>
+
+<string name="poi_boat_rental_type">Арэндныя лодкі</string>
+
+<string name="poi_boat_rental">Пракат лодак</string>
+	<string name="poi_boat_motorboat_rental_yes">Маторныя лодкі: так</string>
+	<string name="poi_boat_motorboat_rental_no">Маторныя лодкі: не</string>
+	<string name="poi_boat_houseboat_rental_yes">Плывучыя дамы: так</string>
+	<string name="poi_boat_houseboat_rental_no">Плывучыя дамы: не</string>
+	<string name="poi_boat_pedalboat_rental_yes">Педальныя лодкі: так</string>
+	<string name="poi_boat_pedalboat_rental_no">Педальныя лодкі: не</string>
+	<string name="poi_boat_jetski_rental_yes">Гідрацыклы: так</string>
+	<string name="poi_boat_jetski_rental_no">Гідрацыклы: не</string>
+	<string name="poi_boat_sailboat_rental_yes">Ветразнікі: так</string>
+	<string name="poi_boat_sailboat_rental_no">Ветразнікі: не</string>
+	<string name="poi_boat_dinghy_rental_rental_yes">Шлюпкі: так</string>
+	<string name="poi_boat_dinghy_rental_rental_no">Шлюркі: не</string>
+	<string name="poi_boat_kayak_rental_rental_yes">Каякі: так</string>
+	<string name="poi_boat_kayak_rental_rental_no">Каякі: не</string>
+	<string name="poi_boat_canoe_rental_rental_yes">Каноэ: так</string>
+	<string name="poi_boat_canoe_rental_rental_no">Каноэ: не</string>
+
+<string name="poi_network">Сетка</string>
+
+<string name="poi_government_archive">Архіў</string>
+	<string name="poi_government_ministry">Міністэрства</string>
+	<string name="poi_government_public_service">Дзяржаўная служба</string>
+	<string name="poi_government_social_security">Сацыяльная абарона</string>
+	<string name="poi_government_social_services">Сацыяльныя службы</string>
+	<string name="poi_government_treasury">Казначэйства</string>
+	<string name="poi_government_transportation">Транспартная ўстанова</string>
+	<string name="poi_government_legislative">Заканадаўчая ўстанова</string>
+
+<string name="poi_seamark_clearance_height">Габарытная вышыня</string>
+	<string name="poi_seamark_clearance_height_closed">Габарытная вышыня (закрытая)</string>
+	<string name="poi_seamark_clearance_height_open">Габарытная вышыня (адкрытая)</string>
+	<string name="poi_seamark_clearance_width">Габарытная шырыня</string>
+
+	<string name="poi_vhf">VHF-канал</string>
+
+<string name="poi_gorge">Цясніна</string>
+	<string name="poi_couloir">Кулуар</string>
+	<string name="poi_mountain_area">Горная вобласць</string>
+
+	<string name="poi_surface_clay">Гліна</string>
+	<string name="poi_surface_tartan">Тартан</string>
+	<string name="poi_surface_artificial_turf">Штучная трава</string>
+	<string name="poi_surface_decoturf">Дэкараратыўны дзёран</string>
+	<string name="poi_surface_metal_grid">Металічная сетка</string>
+
+<string name="poi_location_underground">Знаходжанне: пад зямлёй</string>
+	<string name="poi_location_underwater">Знаходжанне: пад вадой</string>
+	<string name="poi_location_overground">Знаходжанне: над зямлёй</string>
+	<string name="poi_location_overhead">Знаходжанне: зверху</string>
+	<string name="poi_location_roof">Знаходжанне: дах</string>
+	<string name="poi_location_rooftop">Знаходжанне: на даху</string>
+	<string name="poi_location_outdoor">Знаходжанне: на адкрытым паветры</string>
+	<string name="poi_location_indoor">Знаходжанне: у памяшканні</string>
+	<string name="poi_location_platform">Знаходжанне: на пратформе</string>
+	<string name="poi_location_kiosk">Знаходжанне: шапік</string>
+	<string name="poi_location_bridge">Знаходжанне: на мосце</string>
+	<string name="poi_location_wall">Знаходжанне: на сцяне</string>
+	<string name="poi_location_entrance">Знаходжанне: каля ўвахода</string>
+
+	<string name="poi_visibility_house">Бачнасць: дом</string>
+	<string name="poi_visibility_street">Бачнасць: вуліца</string>
+	<string name="poi_visibility_area">Бачнасць: плошча</string>
+
+<string name="poi_operational_status">Працоўны стан</string>
+	<string name="poi_water_supply_type">Тып водазабеспячэння</string>
+	<string name="poi_water_purification">Ачыстка вады</string>
+	<string name="poi_water_place_access">Доступ да водазабеспячэння</string>
+
+<string name="poi_operational_status_open">Адчынена</string>
+	<string name="poi_operational_status_closed">Зачынена</string>
+	<string name="poi_operational_status_restricted">Абмежавана</string>
+	<string name="poi_operational_status_broken">Зломана</string>
+	<string name="poi_operational_status_needs_maintenance">Патрабуе абслугоўвання</string>
+
+	<string name="poi_water_place_durability_durable">Трываласць вадасцёку: трывалы</string>
+	<string name="poi_water_place_durability_emergency">Трываласць вадасцёку: надзвычайнае карыстанне</string>
+
+	<string name="poi_water_purification_none">Няма</string>
+	<string name="poi_water_purification_chlorine">Хлараванне</string>
+	<string name="poi_water_purification_reverse_osmosis">Зваротны осмас</string>
+	<string name="poi_water_purification_aquatabs">Aquatabs</string>
+
+	<string name="poi_water_supply_water_well">Калодзеж</string>
+	<string name="poi_water_supply_pipeline">Трубаправод</string>
+	<string name="poi_water_supply_running_water">Праточная вада</string>
+	<string name="poi_water_supply_pump">Помпа</string>
+	<string name="poi_water_supply_borehole">Свідравіна</string>
+	<string name="poi_water_supply_water_trucking">Дастаўка вады</string>
+	<string name="poi_water_supply_water_tank">Рэзервуар для вады</string>
+	<string name="poi_water_supply_bottled_water">Вада ў бутэльках</string>
+
+	<string name="poi_water_place_access_community">Абшчына</string>
+	<string name="poi_water_place_access_family">Сям\'я</string>
+	<string name="poi_water_place_access_multifamilies">Некалькі сямей</string>
+
+<string name="poi_socket_cee_blue">Раздым: CEE blue</string>
+	<string name="poi_socket_cee_blue_current">Раздым: CEE blue: ток</string>
+	<string name="poi_socket_cee_blue_output">Раздым: CEE blue: магутнасць</string>
+	<string name="poi_socket_cee_red_16a">Раздым: CEE red 16А</string>
+	<string name="poi_socket_cee_red_16a_current">Раздым: CEE red 16А: ток</string>
+	<string name="poi_socket_cee_red_16a_output">Раздым: CEE red 16А: магутнасць</string>
+	<string name="poi_socket_cee_red_32a">Раздым: CEE red 32А</string>
+	<string name="poi_socket_cee_red_32a_current">Раздым: CEE red 32А: ток</string>
+	<string name="poi_socket_cee_red_32a_output">Раздым: CEE red 32А: магутнасць</string>
+	<string name="poi_socket_cee_red_64a">Раздым: CEE red 64А</string>
+	<string name="poi_socket_cee_red_64a_current">Раздым: CEE red 64А: ток</string>
+	<string name="poi_socket_cee_red_64a_output">Раздым: CEE red 64А: магутнасць</string>
+	<string name="poi_socket_cee_red_125a">Раздым: CEE red 125А</string>
+	<string name="poi_socket_cee_red_125a_current">Раздым: CEE red 125А: ток</string>
+	<string name="poi_socket_cee_red_125a_output">Раздым: CEE red 125А: магутнасць</string>
+	<string name="poi_socket_type1">Раздым: Type 1</string>
+	<string name="poi_socket_type1_current">Раздым: Type 1: ток</string>
+	<string name="poi_socket_type1_output">Раздым: Type 1: магутнасць</string>
+	<string name="poi_socket_type1_combo">Раздым: Type 1 combo</string>
+	<string name="poi_socket_type1_combo_current">Раздым: Type 1 combo: ток</string>
+	<string name="poi_socket_type1_combo_output">Раздым: Type 1 combo: магутнасць</string>
+	<string name="poi_socket_type2">Раздым: Type 2</string>
+	<string name="poi_socket_type2_current">Раздым: Type 2: ток</string>
+	<string name="poi_socket_type2_output">Раздым: Type 2: магутнасць</string>
+	<string name="poi_socket_type2_combo">Раздым: Type 2 combo</string>
+	<string name="poi_socket_type2_combo_current">Раздым: Type 2 combo: ток</string>
+	<string name="poi_socket_type2_combo_output">Раздым: Type 2 combo: магутнасць</string>
+	<string name="poi_socket_type3">Раздым: Type 3</string>
+	<string name="poi_socket_type3_current">Раздым: Type 3: ток</string>
+	<string name="poi_socket_type3_output">Раздым: Type 3: магутнасць</string>
+	<string name="poi_socket_chademo">Раздым: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Раздым: CHAdeMO: ток</string>
+	<string name="poi_socket_chademo_output">Раздым: CHAdeMO: магутнасць</string>
+	<string name="poi_socket_tesla_standard">Раздым: Tesla standard</string>
+	<string name="poi_socket_tesla_standard_current">Раздым: Tesla standard: ток</string>
+	<string name="poi_socket_tesla_standard_output">Раздым: Tesla standard: магутнасць</string>
+	<string name="poi_socket_tesla_supercharger">Раздым: Tesla Supercharger</string>
+	<string name="poi_socket_tesla_supercharger_current">Раздым: Tesla Supercharger: ток</string>
+	<string name="poi_socket_tesla_supercharger_output">Раздым: Tesla Supercharger: магутнасць</string>
+	<string name="poi_socket_tesla_roadster">Раздым: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Раздым: Tesla Roadster: ток</string>
+	<string name="poi_socket_tesla_roadster_output">Раздым: Tesla Roadster: магутнасць</string>
+	<string name="poi_socket_nema_5_15">Раздым: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Раздым: NEMA 5-15R: ток</string>
+	<string name="poi_socket_nema_5_15_output">Раздым: NEMA 5-15R: магутнасць</string>
+	<string name="poi_socket_nema_5_20">Раздым: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Раздым: NEMA 5-20: ток</string>
+	<string name="poi_socket_nema_5_20_output">Раздым: NEMA 5-20: магутнасць</string>
+	<string name="poi_socket_nema_14_30">Раздым: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Раздым: NEMA 14-30: ток</string>
+	<string name="poi_socket_nema_14_30_output">Раздым: NEMA 14-30: магутнасць</string>
+	<string name="poi_socket_nema_14_50">Раздым: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Раздым: NEMA 14-50: ток</string>
+	<string name="poi_socket_nema_14_50_output">Раздым: NEMA 14-50: магутнасць</string>
+	<string name="poi_socket_schuko">Раздым: Schuko</string>
+	<string name="poi_socket_schuko_current">Раздым: Schuko: ток</string>
+	<string name="poi_socket_schuko_output">Раздым: Schuko: магутнасць</string>
+	<string name="poi_socket_bs1363">Раздым: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Раздым: BS 1363: ток</string>
+	<string name="poi_socket_bs1363_output">Раздым: BS 1363: магутнасць</string>
+	<string name="poi_socket_as3112">Раздым: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Раздым: AS/NZS 3112: ток</string>
+	<string name="poi_socket_as3112_output">Раздым: AS/NZS 3112: магутнасць</string>
+
+	<string name="poi_car_yes">Аўтамабіль: так</string>
+	<string name="poi_car_no">Аўтамабіль: не</string>
+	<string name="poi_bicycle_yes">Ровар: так</string>
+	<string name="poi_bicycle_no">Ровар: не</string>
+	<string name="poi_scooter_yes">Скутэр: так</string>
+	<string name="poi_scooter_no">Скутэр: не</string>
+	<string name="poi_truck_yes">Грузавік: так</string>
+	<string name="poi_truck_no">Грузавік: не</string>
+
+	<string name="poi_parking_fee_yes">Аплата за паркоўку: так</string>
+	<string name="poi_parking_fee_no">Аплата за паркоўку: не</string>
+	<string name="poi_parking_fee">Аплата за паркоўку</string>
+
+	<string name="poi_amperage">Сіла току</string>
+	<string name="poi_charging_station_output">Магутнасць зараднай станцыі</string>
+
+<string name="poi_map_type_topo">Тып мапы: тапаграфічная</string>
+	<string name="poi_map_type_street">Тып мапы: вулічная сетка</string>
+	<string name="poi_map_type_scheme">Тып мапы: схематычная</string>
+	<string name="poi_map_type_toposcope">Тып мапы: панарама</string>
+	<string name="poi_map_size_site">Памер мапы: лакальная</string>
+	<string name="poi_map_size_city">Памер мапы: горад</string>
+	<string name="poi_map_size_region">Памер мапы: рэгіён</string>
+
+<string name="poi_charging_station_filter">Зарадная станцыя</string>
+
+<string name="poi_depot">Дэпо</string>
+
+<string name="poi_letter_box">Паштовая скрыня</string>
+	<string name="poi_post_street">Вуліца</string>
+	<string name="poi_post_housenumber">Нумар дома</string>
+	<string name="poi_post_flats">Кватэра</string>
+
+	<string name="poi_payment_centre">Плацёжны цэнтр</string>
+	<string name="poi_money_transfer">Грашовы перавод</string>
+
+<string name="poi_route_subway_ref">Метро</string>
+
+	<string name="poi_climbing_style">Стыль скалалажання</string>
+
+<string name="poi_ref_post">Паштовы індэкс</string>
+
+	<string name="poi_climbing_sport_yes">Спартыўны: так</string>
+	<string name="poi_climbing_sport_no">Спартыўны: не</string>
+	<string name="poi_climbing_boulder_yes">Боулдэрынг: так</string>
+	<string name="poi_climbing_boulder_no">Боулдэрынг: не</string>
+	<string name="poi_climbing_toprope_yes">Вяроўка з вяршыні: так</string>
+	<string name="poi_climbing_toprope_no">Вяроўка з вяршыні: не</string>
+	<string name="poi_climbing_trad_yes">Традыцыйны: так</string>
+	<string name="poi_climbing_trad_no">Традыцыйны: не</string>
+	<string name="poi_climbing_multipitch_yes">Мультыпітч: так</string>
+	<string name="poi_climbing_multipitch_no">Мультыпітч: так</string>
+	<string name="poi_climbing_ice_yes">Ледзяны: так</string>
+	<string name="poi_climbing_ice_no">Ледзяны: не</string>
+	<string name="poi_climbing_mixed_yes">Змешаны: так</string>
+	<string name="poi_climbing_mixed_no">Змешаны: не</string>
+	<string name="poi_climbing_deepwater_yes">Лажанне над вадой: так</string>
+	<string name="poi_climbing_deepwater_no">Лажанне над вадой: не</string>
+
+<string name="poi_climbing_length">Вышыня пад\'ёму</string>
+	<string name="poi_climbing_length_min">Вышыня пад\'ёму (мін)</string>
+	<string name="poi_climbing_length_max">Вышыня пад\'ёму (макс)</string>
+	<string name="poi_climbing_rock_limestone">Тып каменя: вапняк</string>
+	<string name="poi_climbing_rock_granite">Тып каменя: граніт</string>
+	<string name="poi_climbing_rock_sandstone">Тып каменя: пяшчанік</string>
+	<string name="poi_climbing_rock_quartzite">Тып каменя: кварцыт</string>
+	<string name="poi_climbing_rock_gneiss">Тып каменя: гнейс</string>
+	<string name="poi_climbing_rock_porphyry">Тып каменя: парфір</string>
+	<string name="poi_climbing_quality_solid">Надзейнасць паверхні: цвёрдая</string>
+	<string name="poi_climbing_quality_fragile">Надзейнасць паверхні: крохкая</string>
+	<string name="poi_climbing_bolted_yes">Зафіксаваныя зачэпы: так</string>
+	<string name="poi_climbing_bolted_no">Зафіксаваныя зачэпы: не</string>
+	<string name="poi_climbing_orientation_n">Арыентацыя сцяны: поўнач</string>
+	<string name="poi_climbing_orientation_ne">Арыентацыя сцяны: паўночны ўсход</string>
+	<string name="poi_climbing_orientation_e">Арыентацыя сцяны: усход</string>
+	<string name="poi_climbing_orientation_se">Арыентацыя сцяны: паўднёвы ўсход</string>
+	<string name="poi_climbing_orientation_s">Арыентацыя сцяны: поўдзень</string>
+	<string name="poi_climbing_orientation_sw">Арыентацыя сцяны: паўднёвы захад</string>
+	<string name="poi_climbing_orientation_w">Арыентацыя сцяны: захад</string>
+	<string name="poi_climbing_orientation_nw">Арыентацыя сцяны: паўночны захад</string>
+	<string name="poi_climbing_summit_log_yes">Журнал узыходжанняў: так</string>
+	<string name="poi_climbing_summit_log_no">Журнал узыходжанняў: не</string>
+	<string name="poi_climbing_routes">Маршруты ўзыходжання</string>
+
+
+<string name="poi_circumference">Акружнасць ствала</string>
+	<string name="poi_diameter_crown">Дыяметр кроны</string>
+
+	<string name="poi_meadow_agricultural">Тып: сельскагаспадарчы</string>
+	<string name="poi_meadow_perpetual">Тып: прыродны</string>
+	<string name="poi_meadow_transitional">Тып: зарастаючы</string>
+	<string name="poi_meadow_pasture">Тып: выган</string>
+
+	<string name="poi_frozen_food">Замарожаныя прадукты</string>
+
+	<string name="poi_agrarian">Сельскагаспадарчая крама</string>
+
+
+<string name="poi_shop_fireplace">Крама камінаў</string>
+
+<string name="poi_shop_boat">Крама лодак</string>
+
+	<string name="poi_cannabis">Крама канопляў</string>
+
+
+	<string name="poi_socket">Раздым</string>
+
+<string name="poi_socket_cee_blue_yes">CEE блакітны</string>
+	<string name="poi_socket_cee_red_16a_yes">CEE чырвоны 16A</string>
+	<string name="poi_socket_cee_red_32a_yes">CEE чырвоны 32A</string>
+	<string name="poi_socket_cee_red_64a_yes">CEE чырвоны 64A</string>
+	<string name="poi_socket_cee_red_125a_yes">CEE чырвоны 125A</string>
+	<string name="poi_socket_type1_yes">Type 1</string>
+	<string name="poi_socket_type1_combo_yes">Type 1 камбінаваны</string>
+	<string name="poi_socket_type2_yes">Type 2</string>
+	<string name="poi_socket_type2_combo_yes">Type 2 камбінаваны</string>
+	<string name="poi_socket_type3_yes">Type 3</string>
+	<string name="poi_socket_chademo_yes">CHAdeMO</string>
+	<string name="poi_socket_tesla_standard_yes">Tesla standard</string>
+	<string name="poi_socket_tesla_supercharger_yes">Tesla Supercharger</string>
+	<string name="poi_socket_tesla_roadster_yes">Tesla Roadster</string>
+	<string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
+	<string name="poi_socket_nema_14_30_yes">NEMA 14-30</string>
+	<string name="poi_socket_nema_14_50_yes">NEMA 14-50</string>
+	<string name="poi_socket_schuko_yes">Schuko</string>
+	<string name="poi_socket_bs1363_yes">BS 1363</string>
+	<string name="poi_socket_as3112_yes">AS/NZS 3112</string>
+
+
+
+<string name="poi_socket_chademo_output_filter">CHAdeMO, магутнасць</string>
+	<string name="poi_socket_type2_output_filter">Type 2, магутнасць</string>
+	<string name="poi_socket_type2_combo_output_filter">Type 2 камбінаваны, магутнасць</string>
+	<string name="poi_socket_type3_output_filter">Type 3, магутнасць</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE сіні, магутнасць</string>
+	<string name="poi_socket_schuko_output_filter">Schuko, магутнасць</string>
+
+<string name="poi_socket_chademo_output_high">Высокая</string>
+	<string name="poi_socket_chademo_output_medium">Сярэдняя</string>
+	<string name="poi_socket_chademo_output_low">Нізкая</string>
+	<string name="poi_socket_type2_output_high">Высокая</string>
+	<string name="poi_socket_type2_output_medium">Сярэдняя</string>
+	<string name="poi_socket_type2_output_low">Нізкая</string>
+	<string name="poi_socket_type2_combo_output_high">Высокая</string>
+	<string name="poi_socket_type2_combo_output_medium">Сярэдняя</string>
+	<string name="poi_socket_type2_combo_output_low">Нізкая</string>
+	<string name="poi_socket_type3_output_high">Высокая</string>
+	<string name="poi_socket_type3_output_medium">Сярэдняя</string>
+	<string name="poi_socket_type3_output_low">Нізкая</string>
+	<string name="poi_socket_cee_blue_output_high">Высокая</string>
+	<string name="poi_socket_cee_blue_output_medium">Сярэдняя</string>
+	<string name="poi_socket_cee_blue_output_low">Нізкая</string>
+	<string name="poi_socket_schuko_output_high">Высокая</string>
+	<string name="poi_socket_schuko_output_medium">Сярэдняя</string>
+	<string name="poi_socket_schuko_output_low">Нізкая</string>
+
+<string name="poi_flooring">Крама падлогавых пакрыццяў</string>
+	<string name="poi_pottery">Гліняны посуд</string>
+
+<string name="poi_whitewater_rapid_name">Назва рачных парогаў</string>
+
+	<string name="poi_outpost">Пункт дастаўкі замоў</string>
+
+<string name="poi_barbecue_grill">Мангал: так</string>
+
+<string name="synonyms_poi_fuel">АЗС;Аўтазаправачная станцыя</string>
+
+	<string name="synonyms_poi_nightclub">Дыска</string>
+	<string name="poi_water_utility">Офіс водазабяспячэння</string>
+
+<string name="poi_amusement_arcade">Гульнявая зала</string>
+	<string name="poi_adult_gaming_centre">Гульнявы цэнтр для дарослых</string>
+
+<string name="poi_service_car">Аўтасэрвіс</string>
+
+<string name="poi_service_vehicle_car_repair_yes">Аўтамайстэрня</string>
+	<string name="poi_service_vehicle_oil_change_yes">Змена алівы</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Продаж патрыманых аўтамабіляў</string>
+	<string name="poi_service_vehicle_brakes_yes">Тармазы</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Продаж новых аўтамабіляў</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Дыягностыка</string>
+	<string name="poi_service_vehicle_car_parts_yes">Запчасткі</string>
+	<string name="poi_service_vehicle_batteries_yes">Акумулятары</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Кандыцыянеры</string>
+	<string name="poi_service_vehicle_body_repair_yes">Кузаўны рамонт</string>
+	<string name="poi_service_vehicle_electrical_yes">Электрыка</string>
+	<string name="poi_service_vehicle_wheels_yes">Колы</string>
+	<string name="poi_service_vehicle_glass_yes">Шкло</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Рамонт грузавых аўтамабіляў</string>
+	<string name="poi_service_vehicle_muffler_yes">Глушыцель</string>
+	<string name="poi_service_vehicle_alignment_yes">Цэнтроўка</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Рамонт трансмісіі</string>
+	<string name="poi_service_vehicle_motor_yes">Рухавік</string>
+	<string name="poi_service_vehicle_insurance_yes">Страхоўка</string>
+	<string name="poi_service_vehicle_tyres_yes">Шыны</string>
+
+<string name="poi_aerialway_zip_line">Зіплайн</string>
+
+	<string name="poi_climbing_adventure">Прыгоды са скалалажаннем</string>
+
+	<string name="poi_via_ferrata">Віа ферата</string>
+	<string name="poi_cable_number">Колькасць тросаў</string>
+	<string name="poi_via_ferrata_scale">Складанасць</string>
 
 </resources>

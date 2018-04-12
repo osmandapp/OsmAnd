@@ -79,13 +79,26 @@
 
             <TextView
                 android:id="@+id/waypoint_desc_text"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@color/secondary_text_dark"
+                android:textSize="@dimen/default_sub_text_size"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/date_group_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="6dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_sub_text_size"/>
 
         </LinearLayout>

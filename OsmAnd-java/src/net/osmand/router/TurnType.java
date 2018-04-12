@@ -357,6 +357,18 @@ public class TurnType {
 	public static boolean isSlightTurn(int type) {
 		return type == TSLL || type == TSLR || type == C || type == KL || type == KR;
 	}
+	
+	public static boolean hasAnySlightTurnLane(int type) {
+		return TurnType.isSlightTurn(TurnType.getPrimaryTurn(type))
+				|| TurnType.isSlightTurn(TurnType.getSecondaryTurn(type))
+				|| TurnType.isSlightTurn(TurnType.getTertiaryTurn(type));
+	}
+	
+	public static boolean hasAnyTurnLane(int type, int turn) {
+		return TurnType.getPrimaryTurn(type) == turn
+				|| TurnType.getSecondaryTurn(type) == turn
+				|| TurnType.getTertiaryTurn(type) == turn;
+	}
 
 	public static void collectTurnTypes(int lane, TIntHashSet set) {
 		int pt = TurnType.getPrimaryTurn(lane);
@@ -399,6 +411,34 @@ public class TurnType {
 		default:
 			return 0;
 		}
+	}
+
+	public static int convertType(String lane) {
+		int turn;
+		if (lane.equals("none") || lane.equals("through")) {
+			turn = TurnType.C;
+		} else if (lane.equals("slight_right") || 
+				lane.equals("merge_to_right")) {
+			turn = TurnType.TSLR;
+		} else if (lane.equals("slight_left") || 
+				lane.equals("merge_to_left")) {
+			turn = TurnType.TSLL;
+		} else if (lane.equals("right")) {
+			turn = TurnType.TR;
+		} else if (lane.equals("left")) {
+			turn = TurnType.TL;
+		} else if (lane.equals("sharp_right")) {
+			turn = TurnType.TSHR;
+		} else if (lane.equals("sharp_left")) {
+			turn = TurnType.TSHL;
+		} else if (lane.equals("reverse")) {
+			turn = TurnType.TU;
+		} else {
+			// Unknown string
+			turn = TurnType.C;
+//			continue;
+		}
+		return turn;
 	}
 
 	

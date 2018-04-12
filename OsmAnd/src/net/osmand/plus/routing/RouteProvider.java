@@ -1,25 +1,9 @@
 package net.osmand.plus.routing;
 
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.net.MalformedURLException;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.FactoryConfigurationError;
-import javax.xml.parsers.ParserConfigurationException;
+import android.content.Context;
+import android.os.Build;
+import android.os.Bundle;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -56,22 +40,36 @@ import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 import net.osmand.util.GeoPolylineParserUtil;
+import net.osmand.util.MapUtils;
 
-import org.json.JSONObject;
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.FactoryConfigurationError;
+import javax.xml.parsers.ParserConfigurationException;
+
 import btools.routingapp.IBRouterService;
 
 
@@ -240,8 +238,8 @@ public class RouteProvider {
 			calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
 			useIntermediatePointsRTE = builder.useIntermediatePointsRTE;
 			builder.calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
-			if (!file.points.isEmpty()) {
-				wpt = new ArrayList<LocationPoint>(file.points);
+			if (!file.isPointsEmpty()) {
+				wpt = new ArrayList<LocationPoint>(file.getPoints());
 			}
 			if (file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)) {
 				directions =  parseOsmAndGPXRoute(points, file, OSMAND_ROUTER.equals(file.author), builder.leftSide, 10);
@@ -730,6 +728,8 @@ public class RouteProvider {
 			p = GeneralRouterProfile.PEDESTRIAN;
 		} else if(params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)){
 			p = GeneralRouterProfile.CAR;
+		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BOAT)) {
+			p = GeneralRouterProfile.BOAT;
 		} else {
 			return null;
 		}
@@ -743,7 +743,7 @@ public class RouteProvider {
 				Boolean bool = !settings.FAST_ROUTE_MODE.getModeValue(params.mode);
 				vl = bool ? "true" : null;
 			} else if(pr.getType() == RoutingParameterType.BOOLEAN) {
-				CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(key);
+				CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(key, pr.getDefaultBoolean());
 				Boolean bool = pref.getModeValue(params.mode);
 				vl = bool ? "true" : null;
 			} else {
@@ -752,6 +752,9 @@ public class RouteProvider {
 			if(vl != null && vl.length() > 0) {
 				paramsR.put(key, vl);
 			}
+		}
+		if (params.inSnapToRoadMode) {
+			paramsR.put(GeneralRouter.ALLOW_PRIVATE, "true");
 		}
 		float mb = (1 << 20);
 		Runtime rt = Runtime.getRuntime();
@@ -829,7 +832,7 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult applicationModeNotSupported(RouteCalculationParams params) {
-		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanStringCtx(params.ctx)+ "'is not supported.");
+		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanStringCtx(params.ctx)+ "' is not supported.");
 	}
 
 	private RouteCalculationResult interrupted() {
@@ -844,7 +847,7 @@ public class RouteProvider {
 			boolean leftSide, float defSpeed) {
 		List<RouteDirectionInfo> directions = null;
 		if (!osmandRouter) {
-			for (WptPt pt : gpxFile.points) {
+			for (WptPt pt : gpxFile.getPoints()) {
 				res.add(createLocation(pt));
 			}
 		} else {
@@ -971,72 +974,6 @@ public class RouteProvider {
 		return directions;
 	}
 
-	protected RouteCalculationResult findORSRoute(RouteCalculationParams params) throws MalformedURLException, IOException, ParserConfigurationException, FactoryConfigurationError,
-			SAXException {
-		List<Location> res = new ArrayList<Location>();
-
-		String rpref = "Fastest";
-		if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
-			rpref = "Pedestrian";
-		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
-			rpref = "Bicycle";
-			// } else if (ApplicationMode.LOWTRAFFIC == mode) {
-			// rpref = "BicycleSafety";
-			// } else if (ApplicationMode.RACEBIKE == mode) {
-			// rpref = "BicycleRacer";
-			// } else if (ApplicationMode.TOURBIKE == mode) {
-			// rpref = "BicycleRoute";
-			// } else if (ApplicationMode.MTBIKE == mode) {
-			// rpref = "BicycleMTB";
-		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
-			if (!params.fast) {
-				rpref = "Shortest";
-			}
-		} else {
-			return applicationModeNotSupported(params);
-		}
-
-		StringBuilder request = new StringBuilder();
-		request.append("http://openls.geog.uni-heidelberg.de/osm/eu/routing?").append("start=").append(params.start.getLongitude()).append(',')
-				.append(params.start.getLatitude()).append("&end=").append(params.end.getLongitude()).append(',').append(params.end.getLatitude())
-				.append("&preference=").append(rpref);
-		// TODO if we would get instructions from the service, we could use this language setting
-		// .append("&language=").append(Locale.getDefault().getLanguage());
-
-		log.info("URL route " + request);
-		URLConnection connection = NetworkUtils.getHttpURLConnection(request.toString());
-		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
-
-		DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		Document doc = dom.parse(new InputSource(new InputStreamReader(connection.getInputStream())));
-		NodeList list = doc.getElementsByTagName("xls:RouteGeometry"); //$NON-NLS-1$
-		for (int i = 0; i < list.getLength(); i++) {
-			NodeList poslist = ((Element) list.item(i)).getElementsByTagName("gml:pos"); //$NON-NLS-1$
-			for (int j = 0; j < poslist.getLength(); j++) {
-				String text = poslist.item(j).getFirstChild().getNodeValue();
-				int s = text.indexOf(' ');
-				try {
-					double lon = Double.parseDouble(text.substring(0, s));
-					double lat = Double.parseDouble(text.substring(s + 1));
-					Location l = new Location("router"); //$NON-NLS-1$
-					l.setLatitude(lat);
-					l.setLongitude(lon);
-					res.add(l);
-				} catch (NumberFormatException nfe) {
-				}
-			}
-		}
-		if (list.getLength() == 0) {
-			if (doc.getChildNodes().getLength() == 1) {
-				Node item = doc.getChildNodes().item(0);
-				return new RouteCalculationResult(item.getNodeValue());
-
-			}
-		}
-		params.intermediates = null;
-		return new RouteCalculationResult(res, null, params, null, true);
-	}
-
 	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute, OsmandApplication ctx) {	
 		TargetPointsHelper helper = ctx.getTargetPointsHelper();
 		int currentRoute = srcRoute.currentRoute;
@@ -1091,7 +1028,8 @@ public class RouteProvider {
 		for (int i = cDirInfo; i < directionInfo.size(); i++) {
 			RouteDirectionInfo dirInfo = directionInfo.get(i);
 			if (dirInfo.routePointOffset - routePointOffsetAdjusted >= cRoute) {
-				if (dirInfo.getTurnType() != null && !dirInfo.getTurnType().isSkipToSpeak()) {
+				if (dirInfo.getTurnType() != null && !dirInfo.getTurnType().isSkipToSpeak() &&
+						dirInfo.routePointOffset - routePointOffsetAdjusted < routeNodes.size()) {
 					Location loc = routeNodes.get(dirInfo.routePointOffset - routePointOffsetAdjusted);
 					WptPt pt = new WptPt();
 					pt.lat = loc.getLatitude();
@@ -1156,7 +1094,7 @@ public class RouteProvider {
 				}
 				pt.desc = pt.name;
 			}
-			gpx.points.add(pt);
+			gpx.addPoint(pt);
 		}
 	return gpx;
 	}
@@ -1252,7 +1190,7 @@ public class RouteProvider {
 		bpars.putDoubleArray("lons", lons);
 		bpars.putString("fast", params.fast ? "1" : "0");
 		bpars.putString("v", mode);
-		bpars.putString("trackFormat", "kml");
+		bpars.putString("trackFormat", "gpx");
 
 		OsmandApplication ctx = (OsmandApplication) params.ctx;
 		List<Location> res = new ArrayList<Location>();
@@ -1262,45 +1200,27 @@ public class RouteProvider {
 			return new RouteCalculationResult("BRouter service is not available");
 		}
 		try {
-			String kmlMessage = brouterService.getTrackFromParams(bpars);
-			if (kmlMessage == null)
-				kmlMessage = "no result from brouter";
-			if (!kmlMessage.startsWith("<")) {
-				return new RouteCalculationResult(kmlMessage);
+			String gpxMessage = brouterService.getTrackFromParams(bpars);
+			if (gpxMessage == null)
+				gpxMessage = "no result from brouter";
+			if (!gpxMessage.startsWith("<")) {
+				return new RouteCalculationResult(gpxMessage);
 			}
 
-			DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			Document doc = dom.parse(new InputSource(new StringReader(kmlMessage)));
-			NodeList list = doc.getElementsByTagName("coordinates"); //$NON-NLS-1$
-			for (int i = 0; i < list.getLength(); i++) {
-				Node item = list.item(i);
-				String str = item.getFirstChild().getNodeValue();
-				if (str == null) {
-					continue;
-				}
-				int st = 0;
-				int next = 0;
-				while ((next = str.indexOf('\n', st)) != -1) {
-					String coordinate = str.substring(st, next + 1);
-					int s = coordinate.indexOf(',');
-					if (s != -1) {
-						try {
-							double lon = Double.parseDouble(coordinate.substring(0, s));
-							double lat = Double.parseDouble(coordinate.substring(s + 1));
-							Location l = new Location("router"); //$NON-NLS-1$
-							l.setLatitude(lat);
-							l.setLongitude(lon);
-							res.add(l);
-						} catch (NumberFormatException e) {
+			GPXFile gpxFile = GPXUtilities.loadGPXFile(
+					ctx, new ByteArrayInputStream(gpxMessage.getBytes("UTF-8")));
+
+			for (Track track : gpxFile.tracks) {
+				for (TrkSegment ts : track.segments) {
+					for (WptPt p : ts.points) {
+						Location l = new Location("router"); //$NON-NLS-1$
+						l.setLatitude(p.lat);
+						l.setLongitude(p.lon);
+						if (p.ele != Double.NaN) {
+							l.setAltitude(p.ele);
 						}
+						res.add(l);
 					}
-					st = next + 1;
-				}
-			}
-			if (list.getLength() == 0) {
-				if (doc.getChildNodes().getLength() == 1) {
-					Node item = doc.getChildNodes().item(0);
-					return new RouteCalculationResult(item.getNodeValue());
 				}
 			}
 		} catch (Exception e) {

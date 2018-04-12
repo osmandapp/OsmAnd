@@ -254,7 +254,7 @@
 	<string name="poi_fuel_biogas">غاز حيوي</string>
 	<string name="poi_fuel_lh2">هيدروجين سائل</string>
 	<string name="poi_fuel_electricity">كهرباء</string>
-	<string name="poi_charging_station">محطة شحن</string>
+	<string name="poi_electricity_combined_charging">محطة شحن</string>
 	<string name="poi_compressed_air">هواء مضغوط</string>
 	<string name="poi_garages">كراجات</string>
 
@@ -374,7 +374,7 @@
 	<string name="poi_newspaper">مكتب جرائد</string>
 	<string name="poi_architect">مكتب مهندس معماري</string>
 	<string name="poi_advertising_agency">وكالة إعلانات</string>
-	<string name="poi_educational_institution">مؤسسة تعليمية</string>
+	<string name="poi_educational_institution">مؤسسة تربوية</string>
 	<string name="poi_studio">ستوديو</string>
 	<string name="poi_office_religion">مكتب شؤون دينية</string>
 	<string name="poi_association">مكتب منظمة</string>
@@ -463,7 +463,7 @@
 	<string name="poi_payment_toll_type">طريقة الدفع</string>
 	<string name="poi_traffic_signals_sound">الصوت</string>
 	<string name="poi_highway_crossing_type">نوع</string>
-	<string name="poi_service_car">خدمة</string>
+	<string name="poi_service_general">خدمة</string>
 	<string name="poi_self_service">خدمة ذاتية</string>
 	<string name="poi_parking_type">نوع</string>
 	<string name="poi_subway_station_filter">محطة مترو الإنفاق</string>
@@ -497,7 +497,7 @@
 	<string name="poi_caravans">البيوت المتنقلة</string>
 	<string name="poi_power_supply">الإمداد بالطاقة</string>
 	<string name="poi_medical_system">النظام الطبي</string>
-	<string name="poi_fuel_avia_type">نوع</string>
+	<string name="poi_fuel_avia_type">نوع البنزين (avia)</string>
 	<string name="poi_additional_type">إضافي</string>
 	<string name="poi_vending_type">نوع البيع</string>
 	<string name="poi_clothes_type">نوع</string>
@@ -529,7 +529,7 @@
 	<string name="poi_dish">صحن</string>
 	<string name="poi_payment_transport_type">نوع الدفع (نقل)</string>
 	<string name="poi_social_facility_type">نوع</string>
-	<string name="poi_fuel_type">نوع</string>
+	<string name="poi_fuel_type">نوع الوقود</string>
 	<string name="poi_drive_in">سق في</string>
 	<string name="poi_drive_through">سق عبر</string>
 	<string name="poi_social_facility_for">الفئة المستهدفة</string>
@@ -734,7 +734,7 @@
 	<string name="poi_e_cigarette">متجر السجائر الإلكترونية</string>
 
 	<string name="poi_sewing">متجر البضائع الجافة</string>
-	<string name="poi_traffic_calming_choker">قلادة</string>
+	<string name="poi_traffic_calming_choker">سلسلة كبح السرعة</string>
 	<string name="poi_traffic_calming_island">مكان وقوف المارة</string>
 	<string name="poi_fuel_cng">غاز طبيعي مضغوط</string>
 	<string name="poi_fuel_svo">زيت نباتي</string>
@@ -1509,4 +1509,117 @@
 
 
 	<string name="poi_protected_area">منطقة محمية</string>
-	</resources>
+	<string name="poi_cafeteria">مقهى</string>
+
+<string name="poi_motorcycle_services">الخدمات</string>
+	<string name="poi_motorcycle_type">نوع الدراجة النارية</string>
+
+<string name="poi_motorcycle_type_standard">موحد</string>
+
+<string name="poi_zoo_type">نوع</string>
+	<string name="poi_aerialway_station">محطة Aerialway</string>
+	<string name="poi_aerialway_chair_lift">رافعة بالكرسي</string>
+	<string name="poi_aerialway_t_bar">رافعة T</string>
+	<string name="poi_aerialway_j_bar">رافعة J</string>
+	<string name="poi_ses_station">محطة SES</string>
+	<string name="poi_aerialway_platter">رافعة متزحلقين</string>
+	<string name="poi_aerialway_mixed_lift">رافعة مختلطة</string>
+	<string name="poi_aerialway_drag_lift">رافعة سحب</string>
+	<string name="poi_aerialway_rope_tow">رافعة بجر الحبل</string>
+	<string name="poi_water_well">بئر</string>
+	<string name="poi_standpipe">صنبور</string>
+	<string name="poi_lock_gate">قفل البوابة</string>
+	<string name="poi_weir">سدّ غاطس</string>
+	<string name="poi_breakwater">حائل الأمواج</string>
+	<string name="poi_groyne">حاجز كشف الانجراف والتعرية</string>
+
+	<string name="poi_power_cable_distribution_cabinet">خزانة توزيع الأسلاك</string>
+	<string name="poi_power_pole">عمود كهربائي</string>
+
+	<string name="poi_bell_tower">برج جرس</string>
+	<string name="poi_telephone_exchange">بدالة الخدمات الهاتفية</string>
+
+	<string name="poi_recycling_cork">فلين</string>
+	<string name="poi_recycling_styrofoam">الستايروفوم</string>
+	<string name="poi_recycling_polyester">بوليستر</string>
+	<string name="poi_recycling_plasterboard">لوح جصي</string>
+	<string name="poi_recycling_fridge_and_freezer">ثلاجة ومجمد</string>
+	<string name="poi_recycling_furniture">أثاث</string>
+	<string name="poi_waste_disposal">صرف القمامة</string>
+	<string name="poi_landuse_railway">منطقة سكك حديدية</string>
+	<string name="poi_retail">بيع أراضي بالتجزئة</string>
+
+	<string name="poi_quarry">مقلع</string>
+	<string name="poi_orchard">بستان</string>
+	<string name="poi_basin">حوض</string>
+
+	<string name="poi_pier">رصيف بحري</string>
+	<string name="poi_crane">رافعة</string>
+	<string name="poi_construction">بناء</string>
+	<string name="poi_direction_all">الاتجاه: الكل</string>
+
+<string name="poi_direction_exit">الاتجاه: مخرج</string>
+	<string name="poi_piste_grooming">تعبيد الطريق الثلجي</string>
+	<string name="poi_animal_shelter_type">الحيوانات مسموح بها</string>
+	<string name="poi_animal_shelter_purpose">الغرض</string>
+
+<string name="poi_direction_entrance">الوجهة: مدخل</string>
+	<string name="poi_boat_rental_type">قوارب مستأجرة</string>
+
+<string name="poi_petroleum_well">بئر نفط</string>
+	<string name="poi_cricket_nets">شبكات الكريكيت</string>
+	<string name="poi_college">كلية</string>
+	<string name="poi_social_facility">مرفق اجتماعي</string>
+	<string name="poi_quarter">ربع</string>
+	<string name="poi_locality">موضع</string>
+	<string name="poi_nursing_home">دار تمريض</string>
+	<string name="poi_audiologist">اختصاصي السمع</string>
+	<string name="poi_occupational_therapist">أخصائي العلاج الوظيفي</string>
+	<string name="poi_optometrist">طبيب العيون</string>
+	<string name="poi_bookmaker">ناشر</string>
+	<string name="poi_golf_course">ملعب غولف</string>
+	<string name="poi_ice_rink">حلبة تزلج</string>
+	<string name="poi_running_track">مسار جري</string>
+	<string name="poi_raceway">مضمار سباق</string>
+	<string name="poi_archery">الرماية</string>
+	<string name="poi_turning_circle">دائرة دوران</string>
+	<string name="poi_waterway_turning_point">نقطة دوران في مجرى مائي</string>
+	<string name="poi_forest">غابة محمية</string>
+	<string name="poi_brownfield">أرض صناعية سابقة</string>
+	<string name="poi_greenfield">حقل أخضر</string>
+	<string name="poi_works">يعمل</string>
+	<string name="poi_mineshaft">منجم تعدين</string>
+	<string name="poi_adit">ممر منجم</string>
+	<string name="poi_gasometer">مقياس الغاز</string>
+	<string name="poi_silo">صومعة</string>
+	<string name="poi_bailiff">مأمور</string>
+	<string name="poi_baby_hatch">حافظة رضيع</string>
+	<string name="poi_9pin">بولينج 9 دبابيس</string>
+	<string name="poi_10pin">بولينج 10 دبابيس</string>
+	<string name="poi_boules">الكرة الحديدية</string>
+	<string name="poi_cycling">ركوب الدراجات</string>
+	<string name="poi_field_hockey">حقل هوكي</string>
+	<string name="poi_golf">غولف</string>
+	<string name="poi_korfbal">كرة السلة الهولندية</string>
+	<string name="poi_racquet">المضرب</string>
+	<string name="poi_roller_skating">تزحلق بالعجلات</string>
+	<string name="poi_shooting">الرماية</string>
+	<string name="poi_surfing">ركوب الأمواج</string>
+	<string name="poi_artwork">عمل فني</string>
+	<string name="poi_battlefield">ميدان معركة</string>
+	<string name="poi_water_supply_type">نوع إمدادات المياه</string>
+	<string name="poi_water_purification">تنقية المياه</string>
+	<string name="poi_survey_point">نقطة دراسة استقصائية</string>
+	<string name="poi_parking_fee">رسوم الموقف</string>
+
+	<string name="poi_map_type_street">نوع الخريطة: شارع</string>
+	<string name="poi_charging_station_filter">محطة شحن</string>
+
+	<string name="poi_post_street">شارع</string>
+	<string name="poi_post_housenumber">رقم المنزل</string>
+	<string name="poi_post_flats">شقة</string>
+
+	<string name="poi_payment_centre">مركز الدفع</string>
+	<string name="poi_money_transfer">تحويل أموال</string>
+
+</resources>

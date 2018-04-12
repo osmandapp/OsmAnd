@@ -1,7 +1,14 @@
 package net.osmand.plus.views;
 
 
-import java.lang.reflect.Field;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -9,6 +16,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -26,14 +34,8 @@ import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.LanesControl;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.RulerWidget;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.TimeControlWidgetState;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
+
+import java.lang.reflect.Field;
 
 public class MapInfoLayer extends OsmandMapLayer {
 	private final MapActivity map;
@@ -54,6 +56,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private DrawSettings drawSettings;
 	private TopTextView streetNameView;
 	private TopToolbarView topToolbarView;
+
+	private TrackChartPoints trackChartPoints;
 
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
@@ -78,14 +82,23 @@ public class MapInfoLayer extends OsmandMapLayer {
 		expand = (ImageButton) map.findViewById(R.id.map_collapse_button);
 		// update and create controls
 		registerAllControls();
+		map.getMyApplication().getAidlApi().registerWidgetControls(map);
 		
 		recreateControls();
 	}
 	
-	public void registerSideWidget(TextInfoWidget widget, int drawableMenu,
+	public MapWidgetRegInfo registerSideWidget(TextInfoWidget widget, int drawableMenu,
 			int messageId, String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, messageId, key, left, priorityOrder);
 		updateReg(calculateTextState(), reg);
+		return reg;
+	}
+
+	public MapWidgetRegInfo registerSideWidget(TextInfoWidget widget, int drawableMenu,
+								   String message, String key, boolean left, int priorityOrder) {
+		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, message, key, left, priorityOrder);
+		updateReg(calculateTextState(), reg);
+		return reg;
 	}
 
 	public void registerSideWidget(TextInfoWidget widget, WidgetState widgetState, String key, boolean left, int priorityOrder) {
@@ -114,7 +127,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public TopToolbarController getTopToolbarController(TopToolbarControllerType type) {
-		return topToolbarView.getController(type);
+		return topToolbarView == null ? null : topToolbarView.getController(type);
 	}
 
 	public void registerAllControls(){
@@ -155,17 +168,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget time = ric.createTimeControl(map);
 		registerSideWidget(time, new TimeControlWidgetState(app), "time", false, 15);
 
-		if (settings.USE_MAP_MARKERS.get()) {
-			TextInfoWidget marker = mwf.createMapMarkerControl(map, true);
-			registerSideWidget(marker, R.drawable.ic_action_flag_dark, R.string.map_marker_1st, "map_marker_1st", false, 16);
-			TextInfoWidget bearing = ric.createBearingControl(map);
-			registerSideWidget(bearing, new BearingWidgetState(app), "bearing", false, 17);
-			TextInfoWidget marker2nd = mwf.createMapMarkerControl(map, false);
-			registerSideWidget(marker2nd, R.drawable.ic_action_flag_dark, R.string.map_marker_2nd, "map_marker_2nd", false, 18);
-		} else {
-			TextInfoWidget bearing = ric.createBearingControl(map);
-			registerSideWidget(bearing, new BearingWidgetState(app), "bearing", false, 17);
-		}
+		TextInfoWidget marker = mwf.createMapMarkerControl(map, true);
+		registerSideWidget(marker, R.drawable.ic_action_flag_dark, R.string.map_marker_1st, "map_marker_1st", false, 16);
+		TextInfoWidget bearing = ric.createBearingControl(map);
+		registerSideWidget(bearing, new BearingWidgetState(app), "bearing", false, 17);
+		TextInfoWidget marker2nd = mwf.createMapMarkerControl(map, false);
+		registerSideWidget(marker2nd, R.drawable.ic_action_flag_dark, R.string.map_marker_2nd, "map_marker_2nd", false, 18);
 
 		TextInfoWidget speed = ric.createSpeedControl(map);
 		registerSideWidget(speed, R.drawable.ic_action_speed, R.string.map_widget_speed, "speed", false, 20);
@@ -180,6 +188,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		registerSideWidget(plainTime, R.drawable.ic_action_time, R.string.map_widget_plain_time, "plain_time", false, 41);
 		TextInfoWidget battery = ric.createBatteryControl(map);
 		registerSideWidget(battery, R.drawable.ic_action_battery, R.string.map_widget_battery, "battery", false, 42);
+		TextInfoWidget ruler = mic.createRulerControl(map);
+		registerSideWidget(ruler, R.drawable.ic_action_ruler_circle, R.string.map_widget_ruler_control, "ruler", false, 43);
 	}
 
 	public void recreateControls() {
@@ -205,7 +215,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		});
 	}
-	
+
+	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
+		this.trackChartPoints = trackChartPoints;
+		routeLayer.setTrackChartPoints(trackChartPoints);
+	}
+
 	private static class TextState {
 		boolean textBold ;
 		boolean night;

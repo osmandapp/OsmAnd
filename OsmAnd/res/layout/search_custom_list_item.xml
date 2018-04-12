@@ -3,32 +3,44 @@
               xmlns:osmand="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:minHeight="60dp"
-              android:orientation="horizontal"
-              android:paddingBottom="8dp"
-              android:paddingLeft="16dp"
-              android:paddingRight="16dp"
-              android:paddingTop="8dp">
+              android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/imageView"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginRight="16dp"
-        android:scaleType="centerInside"
-        android:tint="?attr/color_dialog_buttons"
-        android:src="@drawable/ic_action_search_dark"/>
-
-    <net.osmand.plus.widgets.TextViewEx
-        android:id="@+id/title"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:textColor="?attr/color_dialog_buttons"
-        android:textSize="@dimen/default_sub_text_size"
-        osmand:textAllCapsCompat="true"
-        osmand:typeface="@string/font_roboto_medium"
-        android:text="@string/custom_search"/>
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp"
+        android:minHeight="60dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="16dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_action_search_dark"/>
+
+        <net.osmand.plus.widgets.TextViewEx
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="?attr/color_dialog_buttons"
+            android:textSize="@dimen/default_sub_text_size"
+            osmand:typeface="@string/font_roboto_medium"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="56dp"
+        android:background="?attr/dashboard_divider"
+        android:visibility="gone"/>
 
 </LinearLayout>

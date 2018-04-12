@@ -3,6 +3,7 @@ package net.osmand.plus.inapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import net.osmand.AndroidNetworkUtils;
@@ -36,14 +37,20 @@ public class InAppHelper {
 	boolean mDebugLog = false;
 
 	private static boolean mSubscribedToLiveUpdates = false;
+	private static boolean mFullVersionPurchased = false;
+	private static boolean mDepthContoursPurchased = false;
 	private static String mLiveUpdatesPrice;
 	private static long lastValidationCheckTime;
 	private static String mFullVersionPrice;
+	private static String mDepthContoursPrice;
 
-	private static final String SKU_FULL_VERSION_PRICE = "osmand_full_version_price";
+	public static final String SKU_FULL_VERSION_PRICE = "osmand_full_version_price";
 	private static final String SKU_LIVE_UPDATES_FULL = "osm_live_subscription_2";
 	private static final String SKU_LIVE_UPDATES_FREE = "osm_free_live_subscription_2";
-	private static String SKU_LIVE_UPDATES;
+	private static final String SKU_DEPTH_CONTOURS_FULL = "net.osmand.seadepth_plus";
+	private static final String SKU_DEPTH_CONTOURS_FREE = "net.osmand.seadepth";
+	public static String SKU_LIVE_UPDATES;
+	public static String SKU_DEPTH_CONTOURS;
 
 	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
 	// (arbitrary) request code for the purchase flow
@@ -55,9 +62,29 @@ public class InAppHelper {
 	private boolean isDeveloperVersion = false;
 	private boolean forceRequestInventory = false;
 	private String token = "";
+	private boolean inventoryRequesting = false;
+	private boolean stopRequested = false;
 
 	private OsmandApplication ctx;
 	private List<InAppListener> listeners = new ArrayList<>();
+
+	/* base64EncodedPublicKey should be YOUR APPLICATION'S PUBLIC KEY
+ 	 * (that you got from the Google Play developer console). This is not your
+ 	 * developer public key, it's the *app-specific* public key.
+ 	 *
+ 	 * Instead of just storing the entire literal string here embedded in the
+ 	 * program,  construct the key at runtime from pieces or
+ 	 * use bit manipulation (for example, XOR with some other string) to hide
+ 	 * the actual key.  The key itself is not secret information, but we don't
+ 	 * want to make it easy for an attacker to replace the public key with one
+ 	 * of their own and then fake messages from the server.
+ 	 */
+	private static final String BASE64_ENCODED_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgk8cEx" +
+			"UO4mfEwWFLkQnX1Tkzehr4SnXLXcm2Osxs5FTJPEgyTckTh0POKVMrxeGLn0KoTY2NTgp1U/inp" +
+			"wccWisPhVPEmw9bAVvWsOkzlyg1kv03fJdnAXRBSqDDPV6X8Z3MtkPVqZkupBsxyIllEILKHK06" +
+			"OCw49JLTsMR3oTRifGzma79I71X0spw0fM+cIRlkS2tsXN8GPbdkJwHofZKPOXS51pgC1zU8uWX" +
+			"I+ftJO46a1XkNh1dO2anUiQ8P/H4yOTqnMsXF7biyYuiwjXPOcy0OMhEHi54Dq6Mr3u5ZALOAkc" +
+			"YTjh1H/ZgqIHy5ZluahINuDE76qdLYMXrDMQIDAQAB";
 
 	public interface InAppListener {
 		void onError(String error);
@@ -71,6 +98,10 @@ public class InAppHelper {
 		void dismissProgress();
 	}
 
+	public interface InAppRunnable {
+		void run(InAppHelper helper);
+	}
+
 	public String getToken() {
 		return token;
 	}
@@ -79,8 +110,20 @@ public class InAppHelper {
 		return mSubscribedToLiveUpdates;
 	}
 
+	public static boolean isFullVersionPurchased() {
+		return mFullVersionPurchased;
+	}
+
+	public static boolean isDepthContoursPurchased() {
+		return mDepthContoursPurchased;
+	}
+
 	public static String getLiveUpdatesPrice() {
 		return mLiveUpdatesPrice;
+	}
+
+	public static String getDepthContoursPrice() {
+		return mDepthContoursPrice;
 	}
 
 	public static String getFullVersionPrice() {
@@ -91,13 +134,12 @@ public class InAppHelper {
 		return SKU_LIVE_UPDATES;
 	}
 
-	public static boolean hasPrices() {
-		return !Algorithms.isEmpty(mLiveUpdatesPrice) && !Algorithms.isEmpty(mFullVersionPrice);
+	public static boolean hasPrices(OsmandApplication app) {
+		return !Algorithms.isEmpty(mLiveUpdatesPrice)
+				&& (!Version.isFreeVersion(app) || !Algorithms.isEmpty(mFullVersionPrice));
 	}
 
-	public InAppHelper(OsmandApplication ctx, boolean forceRequestInventory) {
-		this.ctx = ctx;
-		this.forceRequestInventory = forceRequestInventory;
+	public static void initialize(OsmandApplication ctx) {
 		if (SKU_LIVE_UPDATES == null) {
 			if (Version.isFreeVersion(ctx)) {
 				SKU_LIVE_UPDATES = SKU_LIVE_UPDATES_FREE;
@@ -105,36 +147,52 @@ public class InAppHelper {
 				SKU_LIVE_UPDATES = SKU_LIVE_UPDATES_FULL;
 			}
 		}
-		isDeveloperVersion = Version.isDeveloperVersion(ctx);
-		if (isDeveloperVersion) {
-			mSubscribedToLiveUpdates = true;
-			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
+		if (SKU_DEPTH_CONTOURS == null) {
+			if (Version.isFreeVersion(ctx)) {
+				SKU_DEPTH_CONTOURS = SKU_DEPTH_CONTOURS_FREE;
+			} else {
+				SKU_DEPTH_CONTOURS = SKU_DEPTH_CONTOURS_FULL;
+			}
 		}
 	}
 
-	public void start(final boolean stopAfterResult) {
-		this.stopAfterResult = stopAfterResult;
-		/* base64EncodedPublicKey should be YOUR APPLICATION'S PUBLIC KEY
-		 * (that you got from the Google Play developer console). This is not your
-         * developer public key, it's the *app-specific* public key.
-         *
-         * Instead of just storing the entire literal string here embedded in the
-         * program,  construct the key at runtime from pieces or
-         * use bit manipulation (for example, XOR with some other string) to hide
-         * the actual key.  The key itself is not secret information, but we don't
-         * want to make it easy for an attacker to replace the public key with one
-         * of their own and then fake messages from the server.
-         */
-		String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgk8cEx" +
-				"UO4mfEwWFLkQnX1Tkzehr4SnXLXcm2Osxs5FTJPEgyTckTh0POKVMrxeGLn0KoTY2NTgp1U/inp" +
-				"wccWisPhVPEmw9bAVvWsOkzlyg1kv03fJdnAXRBSqDDPV6X8Z3MtkPVqZkupBsxyIllEILKHK06" +
-				"OCw49JLTsMR3oTRifGzma79I71X0spw0fM+cIRlkS2tsXN8GPbdkJwHofZKPOXS51pgC1zU8uWX" +
-				"I+ftJO46a1XkNh1dO2anUiQ8P/H4yOTqnMsXF7biyYuiwjXPOcy0OMhEHi54Dq6Mr3u5ZALOAkc" +
-				"YTjh1H/ZgqIHy5ZluahINuDE76qdLYMXrDMQIDAQAB";
+	public InAppHelper(OsmandApplication ctx, boolean forceRequestInventory) {
+		this.ctx = ctx;
+		this.forceRequestInventory = forceRequestInventory;
+
+		isDeveloperVersion = Version.isDeveloperVersion(ctx);
+		if (isDeveloperVersion) {
+			mSubscribedToLiveUpdates = true;
+			mFullVersionPurchased = true;
+			mDepthContoursPurchased = true;
+			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
+			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+			ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
+		}
+	}
+
+	public static boolean isInAppIntentoryRead() {
+		return lastValidationCheckTime != 0;
+	}
+
+	public static boolean isPurchased(OsmandApplication ctx, String inAppSku) {
+		OsmandSettings settings = ctx.getSettings();
+		if (inAppSku.equals(SKU_FULL_VERSION_PRICE)) {
+			return settings.FULL_VERSION_PURCHASED.get();
+		} else if (inAppSku.equals(SKU_LIVE_UPDATES_FULL) || inAppSku.equals(SKU_LIVE_UPDATES_FREE)) {
+			return settings.LIVE_UPDATES_PURCHASED.get();
+		} else if (inAppSku.equals(SKU_DEPTH_CONTOURS_FULL) || inAppSku.equals(SKU_DEPTH_CONTOURS_FREE)) {
+			return settings.DEPTH_CONTOURS_PURCHASED.get();
+		}
+		return false;
+	}
+
+	public void exec(final @NonNull InAppRunnable runnable) {
+		this.stopAfterResult = true;
 
 		// Create the helper, passing it our context and the public key to verify signatures with
 		logDebug("Creating InAppHelper.");
-		mHelper = new IabHelper(ctx, base64EncodedPublicKey);
+		mHelper = new IabHelper(ctx, BASE64_ENCODED_PUBLIC_KEY);
 
 		// enable debug logging (for a production application, you should set this to false).
 		mHelper.enableDebugLogging(false);
@@ -142,59 +200,118 @@ public class InAppHelper {
 		// Start setup. This is asynchronous and the specified listener
 		// will be called once setup completes.
 		logDebug("Starting setup.");
-		mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-			public void onIabSetupFinished(IabResult result) {
-				logDebug("Setup finished.");
+		try {
+			mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+				public void onIabSetupFinished(IabResult result) {
+					logDebug("Setup finished.");
 
-				if (!result.isSuccess()) {
-					// Oh noes, there was a problem.
-					complain("Problem setting up in-app billing: " + result);
-					notifyError(result.getMessage());
-					if (stopAfterResult) {
-						stop();
+					if (!result.isSuccess()) {
+						// Oh noes, there was a problem.
+						//complain("Problem setting up in-app billing: " + result);
+						notifyError(result.getMessage());
+						if (stopAfterResult) {
+							stop();
+						}
+						return;
 					}
-					return;
+
+					// Have we been disposed of in the meantime? If so, quit.
+					if (mHelper == null) return;
+
+					runnable.run(InAppHelper.this);
 				}
-
-				// Have we been disposed of in the meantime? If so, quit.
-				if (mHelper == null) return;
-
-				// IAB is fully set up. Now, let's get an inventory of stuff we own if needed.
-				if (forceRequestInventory || (!isDeveloperVersion &&
-						(!mSubscribedToLiveUpdates
-								|| !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get()
-								|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC))) {
-
-					logDebug("Setup successful. Querying inventory.");
-					List<String> skus = new ArrayList<>();
-					skus.add(SKU_LIVE_UPDATES);
-					if (forceRequestInventory) {
-						skus.add(SKU_FULL_VERSION_PRICE);
-					}
-					mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
-				} else {
-					notifyDismissProgress();
-					if (stopAfterResult) {
-						stop();
-					}
-				}
+			});
+		} catch (Exception e) {
+			logError("exec Error", e);
+			if (stopAfterResult) {
+				stop();
 			}
-		});
+		}
+	}
+
+	public void start(final boolean stopAfterResult) {
+		this.stopAfterResult = stopAfterResult;
+
+		// Create the helper, passing it our context and the public key to verify signatures with
+		logDebug("Creating InAppHelper.");
+		mHelper = new IabHelper(ctx, BASE64_ENCODED_PUBLIC_KEY);
+
+		// enable debug logging (for a production application, you should set this to false).
+		mHelper.enableDebugLogging(false);
+
+		// Start setup. This is asynchronous and the specified listener
+		// will be called once setup completes.
+		logDebug("Starting setup.");
+		try {
+			mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+				public void onIabSetupFinished(IabResult result) {
+					logDebug("Setup finished.");
+
+					if (!result.isSuccess()) {
+						// Oh noes, there was a problem.
+						//complain("Problem setting up in-app billing: " + result);
+						notifyError(result.getMessage());
+						if (stopAfterResult) {
+							stop();
+						}
+						return;
+					}
+
+					// Have we been disposed of in the meantime? If so, quit.
+					if (mHelper == null) return;
+
+					// IAB is fully set up. Now, let's get an inventory of stuff we own if needed.
+					if (forceRequestInventory || (!isDeveloperVersion &&
+							(!mSubscribedToLiveUpdates
+									|| !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get()
+									|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC))) {
+
+						logDebug("Setup successful. Querying inventory.");
+						List<String> skus = new ArrayList<>();
+						skus.add(SKU_LIVE_UPDATES);
+						skus.add(SKU_DEPTH_CONTOURS);
+						skus.add(SKU_FULL_VERSION_PRICE);
+						try {
+							inventoryRequesting = true;
+							mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
+						} catch (Exception e) {
+							inventoryRequesting = false;
+							logError("queryInventoryAsync Error", e);
+							notifyDismissProgress();
+							if (stopAfterResult) {
+								stop();
+							}
+						}
+					} else {
+						notifyDismissProgress();
+						if (stopAfterResult) {
+							stop();
+						}
+					}
+				}
+			});
+		} catch (Exception e) {
+			logError("start Error", e);
+			if (stopAfterResult) {
+				stop();
+			}
+		}
 	}
 
 	// Listener that's called when we finish querying the items and subscriptions we own
 	private QueryInventoryFinishedListener mGotInventoryListener = new QueryInventoryFinishedListener() {
 		public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
 			logDebug("Query inventory finished.");
+			inventoryRequesting = false;
 
 			// Have we been disposed of in the meantime? If so, quit.
 			if (mHelper == null) return;
 
 			// Is it a failure?
-			if (result.isFailure()) {
-				complain("Failed to query inventory: " + result);
+			if (result.isFailure() || stopRequested) {
+				logError("Failed to query inventory: " + result);
 				notifyError(result.getMessage());
-				if (stopAfterResult) {
+				if (stopAfterResult || stopRequested) {
 					stop();
 				}
 				return;
@@ -214,6 +331,19 @@ public class InAppHelper {
 			if (mSubscribedToLiveUpdates) {
 				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 			}
+
+			Purchase fullVersionPurchase = inventory.getPurchase(SKU_FULL_VERSION_PRICE);
+			mFullVersionPurchased = isDeveloperVersion || (fullVersionPurchase != null && fullVersionPurchase.getPurchaseState() == 0);
+			if (mFullVersionPurchased) {
+				ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+			}
+
+			Purchase depthContoursPurchase = inventory.getPurchase(SKU_DEPTH_CONTOURS);
+			mDepthContoursPurchased = isDeveloperVersion || (depthContoursPurchase != null && depthContoursPurchase.getPurchaseState() == 0);
+			if (mDepthContoursPurchased) {
+				ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
+			}
+
 			lastValidationCheckTime = System.currentTimeMillis();
 			logDebug("User " + (mSubscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
 					+ " live updates purchased.");
@@ -223,14 +353,21 @@ public class InAppHelper {
 				mLiveUpdatesPrice = liveUpdatesDetails.getPrice();
 			}
 
+			if (inventory.hasDetails(SKU_DEPTH_CONTOURS)) {
+				SkuDetails depthContoursDetails = inventory.getSkuDetails(SKU_DEPTH_CONTOURS);
+				mDepthContoursPrice = depthContoursDetails.getPrice();
+			}
+
 			if (inventory.hasDetails(SKU_FULL_VERSION_PRICE)) {
 				SkuDetails fullPriceDetails = inventory.getSkuDetails(SKU_FULL_VERSION_PRICE);
 				mFullVersionPrice = fullPriceDetails.getPrice();
 			}
 
+			OsmandSettings settings = ctx.getSettings();
+			settings.INAPPS_READ.set(true);
+
 			boolean needSendToken = false;
 			if (!isDeveloperVersion && liveUpdatesPurchase != null) {
-				OsmandSettings settings = ctx.getSettings();
 				if ((Algorithms.isEmpty(settings.BILLING_USER_ID.get()) || Algorithms.isEmpty(settings.BILLING_USER_TOKEN.get()))
 						&& !Algorithms.isEmpty(liveUpdatesPurchase.getDeveloperPayload())) {
 					String payload = liveUpdatesPurchase.getDeveloperPayload();
@@ -255,7 +392,7 @@ public class InAppHelper {
 				public void onResult(String result) {
 					notifyDismissProgress();
 					notifyGetItems();
-					if (stopAfterResult) {
+					if (stopAfterResult || stopRequested) {
 						stop();
 					}
 					logDebug("Initial inapp query finished");
@@ -270,11 +407,69 @@ public class InAppHelper {
 		}
 	};
 
+	public void purchaseFullVersion(final Activity activity) {
+		if (mHelper == null) {
+			//complain("In-app hepler is not initialized!");
+			notifyError("In-app hepler is not initialized!");
+			if (stopAfterResult) {
+				stop();
+			}
+			return;
+		}
+
+		logDebug("Launching purchase flow for full version");
+		if (mHelper != null) {
+			try {
+				mHelper.launchPurchaseFlow(activity,
+						SKU_FULL_VERSION_PRICE, RC_REQUEST, mPurchaseFinishedListener);
+			} catch (Exception e) {
+				complain("Cannot launch full version purchase!");
+				logError("purchaseFullVersion Error", e);
+				if (stopAfterResult) {
+					stop();
+				}
+			}
+		}
+	}
+
+	public void purchaseDepthContours(final Activity activity) {
+		if (mHelper == null) {
+			//complain("In-app hepler is not initialized!");
+			notifyError("In-app hepler is not initialized!");
+			if (stopAfterResult) {
+				stop();
+			}
+			return;
+		}
+
+		logDebug("Launching purchase flow for sea depth contours");
+		if (mHelper != null) {
+			try {
+				mHelper.launchPurchaseFlow(activity,
+						SKU_DEPTH_CONTOURS, RC_REQUEST, mPurchaseFinishedListener);
+			} catch (Exception e) {
+				complain("Cannot launch depth contours purchase!");
+				logError("purchaseDepthContours Error", e);
+				if (stopAfterResult) {
+					stop();
+				}
+			}
+		}
+	}
+
 	public void purchaseLiveUpdates(final Activity activity, final String email, final String userName,
 									final String countryDownloadName, final boolean hideUserName) {
-		if (!mHelper.subscriptionsSupported()) {
-			complain("Subscriptions not supported on your device yet. Sorry!");
-			notifyError("Subscriptions not supported on your device yet. Sorry!");
+		try {
+			if (mHelper == null || !mHelper.subscriptionsSupported()) {
+				complain("Subscriptions not supported on your device yet. Sorry!");
+				notifyError("Subscriptions not supported on your device yet. Sorry!");
+				if (stopAfterResult) {
+					stop();
+				}
+				return;
+			}
+		} catch (Exception e) {
+			logError("purchaseLiveUpdates Error", e);
 			if (stopAfterResult) {
 				stop();
 			}
@@ -346,9 +541,16 @@ public class InAppHelper {
 					logDebug("Launching purchase flow for live updates subscription for userId=" + userId);
 					String payload = userId + " " + token;
 					if (mHelper != null) {
-						mHelper.launchPurchaseFlow(activity,
-								SKU_LIVE_UPDATES, IabHelper.ITEM_TYPE_SUBS,
-								RC_REQUEST, mPurchaseFinishedListener, payload);
+						try {
+							mHelper.launchPurchaseFlow(activity,
+									SKU_LIVE_UPDATES, IabHelper.ITEM_TYPE_SUBS,
+									RC_REQUEST, mPurchaseFinishedListener, payload);
+						} catch (Exception e) {
+							logError("launchPurchaseFlow Error", e);
+							if (stopAfterResult) {
+								stop();
+							}
+						}
 					}
 				} else {
 					notifyError("Empty userId");
@@ -357,7 +559,7 @@ public class InAppHelper {
 					}
 				}
 			}
-		}.execute((Void) null);
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public boolean onActivityResultHandled(int requestCode, int resultCode, Intent data) {
@@ -420,6 +622,33 @@ public class InAppHelper {
 					}
 				});
 			}
+			if (purchase.getSku().equals(SKU_FULL_VERSION_PRICE)) {
+				// bought full version
+				logDebug("Full version purchased.");
+				showToast(ctx.getString(R.string.full_version_thanks));
+				mFullVersionPurchased = true;
+				ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+
+				notifyDismissProgress();
+				notifyItemPurchased(SKU_FULL_VERSION_PRICE);
+				if (stopAfterResult) {
+					stop();
+				}
+			}
+			if (purchase.getSku().equals(SKU_DEPTH_CONTOURS)) {
+				// bought sea depth contours
+				logDebug("Sea depth contours purchased.");
+				showToast(ctx.getString(R.string.sea_depth_thanks));
+				mDepthContoursPurchased = true;
+				ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
+				ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
+
+				notifyDismissProgress();
+				notifyItemPurchased(SKU_DEPTH_CONTOURS);
+				if (stopAfterResult) {
+					stop();
+				}
+			}
 		}
 	};
 
@@ -427,8 +656,13 @@ public class InAppHelper {
 	public void stop() {
 		logDebug("Destroying helper.");
 		if (mHelper != null) {
-			mHelper.dispose();
-			mHelper = null;
+			if (!inventoryRequesting) {
+				stopRequested = false;
+				mHelper.dispose();
+				mHelper = null;
+			} else {
+				stopRequested = true;
+			}
 		}
 	}
 
@@ -552,15 +786,15 @@ public class InAppHelper {
 		ctx.showToastMessage(message);
 	}
 
-	void logDebug(String msg) {
+	private void logDebug(String msg) {
 		if (mDebugLog) Log.d(TAG, msg);
 	}
 
-	void logError(String msg) {
+	private void logError(String msg) {
 		Log.e(TAG, msg);
 	}
 
-	void logError(String msg, Throwable e) {
+	private void logError(String msg, Throwable e) {
 		Log.e(TAG, "Error: " + msg, e);
 	}
 

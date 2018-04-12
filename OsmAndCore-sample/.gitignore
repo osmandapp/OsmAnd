@@ -2,6 +2,10 @@
 /.idea
 *.iml
 
+aarDependencies
+libs/android*.jar
+libs/com.*.jar
+libs/net.osmand-*.jar
 gradlew
 gradle
 gradlew.bat

@@ -449,6 +449,13 @@ public class TargetPointsHelper {
 		updateRouteAndRefresh(updateRoute);
 	}
 
+	public void clearAllIntermediatePoints(boolean updateRoute) {
+		cancelAllIntermediatePointsAddressRequests();
+		settings.clearIntermediatePoints();
+		intermediatePoints.clear();
+		readFromSettings();
+		updateRouteAndRefresh(updateRoute);
+	}
 
 	public void reorderAllTargetPoints(List<TargetPoint> point, boolean updateRoute) {
 		cancelTargetPointAddressRequest();
@@ -474,11 +481,13 @@ public class TargetPointsHelper {
 
 
 	public boolean hasTooLongDistanceToNavigate() {
-		if(settings.ROUTER_SERVICE.get() != RouteService.OSMAND) {
+		if(settings.ROUTER_SERVICE.getModeValue(routingHelper.getAppMode()) != RouteService.OSMAND) {
 			return false;
 		}
 		Location current = routingHelper.getLastProjection();
-		double dist = 400000;
+        double dist = 400000;
+        if (ApplicationMode.BICYCLE.isDerivedRoutingFrom(routingHelper.getAppMode())
+                && settings.getCustomRoutingBooleanProperty("height_obstacles", false).getModeValue(routingHelper.getAppMode())) { dist = 50000; }
 		List<TargetPoint> list = getIntermediatePointsWithTarget();
 		if(!list.isEmpty()) {
 			if(current != null && MapUtils.getDistance(list.get(0).point, current.getLatitude(), current.getLongitude()) > dist) {

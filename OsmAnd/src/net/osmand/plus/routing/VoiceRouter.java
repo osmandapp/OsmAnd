@@ -175,7 +175,7 @@ public class VoiceRouter {
 		}
 
 		// Trigger close prompts earlier if delayed for BT SCO connection establishment
-		if ((settings.AUDIO_STREAM_GUIDANCE.get() == 0) && !AbstractPrologCommandPlayer.btScoStatus) {
+		if ((settings.AUDIO_STREAM_GUIDANCE.getModeValue(router.getAppMode()) == 0) && !AbstractPrologCommandPlayer.btScoStatus) {
 			btScoDelayDistance = currentSpeed * (double) settings.BT_SCO_DELAY.get() / 1000;
 		}
 
@@ -349,6 +349,14 @@ public class VoiceRouter {
 					p.attention(type+"").play();
 				}
 			}
+		} else if (type == AlarmInfoType.TUNNEL) {
+			if (router.getSettings().SPEAK_TUNNELS.get()) {
+				CommandBuilder p = getNewCommandPlayerToPlay();
+				if (p != null) {
+					notifyOnVoiceMessage();
+					p.attention(type+"").play();
+				}
+			}
 		} else {
 			if (router.getSettings().SPEAK_TRAFFIC_WARNINGS.get()) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
@@ -420,7 +428,7 @@ public class VoiceRouter {
 
 		NextDirectionInfo nextInfo = router.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
 		RouteSegmentResult currentSegment = router.getCurrentSegmentResult();
-		if (nextInfo.directionInfo == null) {
+		if (nextInfo == null || nextInfo.directionInfo == null) {
 			return;
 		}
 		int dist = nextInfo.distanceTo;
@@ -618,18 +626,19 @@ public class VoiceRouter {
 		return empty;
 	}
 
-	public String getSpeakablePointName(String pn) {
-		// Replace characters which may produce unwanted tts sounds:
+	public static String getSpeakablePointName(String pn) {
+		// Replace characters which may produce unwanted TTS sounds:
 		if (pn != null) {
 			pn = pn.replace('-', ' ');
 			pn = pn.replace(':', ' ');
 			pn = pn.replace(";", ", "); // Trailing blank prevents punctuation being pronounced. Replace by comma for better intonation.
 			pn = pn.replace("/", ", "); // Slash is actually pronounced by many TTS engines, ceeating an awkward voice prompt, better replace by comma.
-			if ((player != null) && (!"de".equals(player.getLanguage()))) {
-				pn = pn.replace("\u00df", "ss"); // Helps non-German tts voices to pronounce German Strasse (=street)
+			if ((player != null) && (!player.getLanguage().equals("de"))) {
+				pn = pn.replace("\u00df", "ss"); // Helps non-German TTS voices to pronounce German Straße (=street)
 			}
-			if ((player != null) && ("en".startsWith(player.getLanguage()))) {
-				pn = pn.replace("SR", "S R");    // Avoid SR (as for State Route or Strada Regionale) be pronounced as "Senior" in English tts voice
+			if ((player != null) && (player.getLanguage().startsWith("en"))) {
+				pn = pn.replace("SR", "S R");    // Avoid SR (as for State Route or Strada Regionale) be pronounced as "Senior" in English TTS voice
+				pn = pn.replace("Dr.", "Dr ");   // Avoid pause many English TTS voices introduce after period
 			}
 		}
 		return pn;

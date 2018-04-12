@@ -274,6 +274,9 @@ public class BinaryMapTransportReaderAdapter {
 			case OsmandOdb.TransportRoute.OPERATOR_FIELD_NUMBER:
 				dataObject.setOperator(regStr(stringTable)); //$NON-NLS-1$
 				break;
+			case OsmandOdb.TransportRoute.COLOR_FIELD_NUMBER:
+				dataObject.setColor(regStr(stringTable));
+				break;
 			case OsmandOdb.TransportRoute.GEOMETRY_FIELD_NUMBER:
 				int sizeL = codedIS.readRawVarint32();
 				int pold = codedIS.pushLimit(sizeL);
@@ -372,9 +375,11 @@ public class BinaryMapTransportReaderAdapter {
 		if(dataObject.getName().length() > 0 && dataObject.getName("en").length() == 0){
 			dataObject.setEnName(Junidecode.unidecode(dataObject.getName()));
 		}
-		
 		if(dataObject.getOperator().length() > 0){
 			dataObject.setOperator(stringTable.get(dataObject.getOperator().charAt(0)));
+		}
+		if(dataObject.getColor() != null && dataObject.getColor().length() > 0){
+			dataObject.setColor(stringTable.get(dataObject.getColor().charAt(0)));
 		}
 		if(dataObject.getType().length() > 0){
 			dataObject.setType(stringTable.get(dataObject.getType().charAt(0)));

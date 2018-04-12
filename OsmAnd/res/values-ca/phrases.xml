@@ -89,7 +89,7 @@
 	<string name="poi_ses_station">Estació de protecció civil</string>
 	<string name="poi_ford">Gual</string>
 	<string name="poi_lift_gate">Tanca llevadissa</string>
-	<string name="poi_border_control">Punt de control duaner</string>
+	<string name="poi_border_control">Control de fronteres</string>
 	<string name="poi_traffic_calming_bump">Banda reductora</string>
 	<string name="poi_traffic_calming_hump">Ressalt</string>
 	<string name="poi_traffic_calming_cushion">Coixí berlinès</string>
@@ -315,7 +315,7 @@
 	<string name="poi_car_repair">Taller de reparació de cotxes</string>
 	<string name="poi_car_wash">Neteja de cotxes</string>
 	<string name="poi_fuel">Benzinera</string>
-	<string name="poi_charging_station">Estació de recàrrega</string>
+	<string name="poi_electricity_combined_charging">Estació de recàrrega</string>
 	<string name="poi_seamark_wreck">Restes de naufragi, senyal marítim</string>
 
 	<string name="poi_radio_station">Emissor de ràdio, senyal marítim</string>
@@ -956,10 +956,10 @@
 	<string name="poi_fax">Fax</string>
 	<string name="facebook">Facebook</string>
 	<string name="poi_mobile">Mòbil</string>
-	<string name="poi_animal_shelter_dog">Tipus de refugi: per gossos</string>
-	<string name="poi_animal_shelter_cat">Tipus de refugi: per gats</string>
-	<string name="poi_animal_shelter_dog_cat">Tipus de refugi: per gossos i gats</string>
-	<string name="poi_animal_shelter_bird">Tipus de refugi: per ocells</string>
+	<string name="poi_animal_shelter_dog">Gossos</string>
+	<string name="poi_animal_shelter_cat">Gats</string>
+	<string name="poi_animal_shelter_dog_cat">Gossos i gats</string>
+	<string name="poi_animal_shelter_bird">Ocells</string>
 
 <string name="poi_recycling_centre">Deixalleria</string>
 	<string name="poi_recycling_container">Contenidor</string>
@@ -1400,7 +1400,7 @@
 
 <string name="poi_cairn">Pila de pedres</string>
 
-	<string name="poi_memorial_fassade_decoration">Memorial per decoració de façana</string>
+	<string name="poi_memorial_fassade_decoration">Decoració de la façana</string>
 	<string name="poi_defibrillator">Desfibril·lador</string>
 	<string name="poi_defibrillator_yes">Desfibril·lador: sí</string>
 
@@ -1409,7 +1409,7 @@
 	<string name="poi_tomb_rock_cut">Tipus: excavació a la roca</string>
 	<string name="poi_tomb_hypogeum">Tipus: subterrani</string>
 	<string name="poi_tomb_vault">Tipus: volta</string>
-	<string name="poi_trees_nectorine">Nectariner</string>
+	<string name="poi_trees_nectorine">Nectarina</string>
 	<string name="poi_trees_mango">Mango</string>
 	<string name="poi_trees_date">Data</string>
 	<string name="poi_trees_coffea">Café</string>
@@ -1702,7 +1702,7 @@
 	<string name="poi_payment_token_no">No s\'accepta Tokens</string>
 	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">No s\'accepten targes Golden Crown</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">No s\'accepten targes PRO100</string>
 	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">No s\'accepta Union Card</string>
@@ -1962,7 +1962,7 @@
 
 	<string name="poi_tents_yes">Permès</string>
 	<string name="poi_tents_no">No es permet l\'acampada</string>
-	<string name="poi_scout_yes">Camp escolta: sí</string>
+	<string name="poi_scout_yes">Sí</string>
 	<string name="poi_scout_no">Camp escolta: no</string>
 	<string name="poi_group_only_yes">Només per grups: sí</string>
 	<string name="poi_group_only_no">Només per grups: no</string>
@@ -2188,7 +2188,7 @@
 	<string name="poi_health_facility_type_first_aid">Tipus de centre sanitari: primers auxilis</string>
 	<string name="poi_health_facility_type_laboratory">Tipus de centre sanitari: laboratori</string>
 	<string name="poi_health_facility_type_therapy">Tipus de centre sanitari: teràpies</string>
-	<string name="poi_health_specialty_palliative_medicine_yes">Tipus d\'equipament sanitari: medicina pal·liativa</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Medicina pal·liativa</string>
 
 	<string name="poi_suction_point">Punt d\'aspiració</string>
 
@@ -2206,7 +2206,7 @@
 	<string name="poi_disease_aids_yes">SIDA: sí</string>
 	<string name="poi_disease_aids_no">SIDA: no</string>
 
-	<string name="poi_fire_hydrant_position_underground">Localització de l\'hidrant: soterrat</string>
+	<string name="poi_fire_hydrant_position_underground">Soterrat</string>
 	<string name="poi_street_cabinet_telecom">Tipus d\'armari: telecomunicacions</string>
 	<string name="poi_street_cabinet_power">Tipus d\'armari: electricitat</string>
 	<string name="poi_street_cabinet_cable_tv">Tipus d\'armari: tv per cable</string>
@@ -2254,9 +2254,9 @@
 	<string name="poi_traffic_calming_island">Illot de tràfic</string>
 	<string name="poi_min_age">Edat mínima</string>
 
-	<string name="poi_organic_yes">Menjar orgànic: sí</string>
-	<string name="poi_organic_no">Menjar orgànic: no</string>
-	<string name="poi_organic_only">Només menjar orgànic</string>
+	<string name="poi_organic_yes">Sí</string>
+	<string name="poi_organic_no">No</string>
+	<string name="poi_organic_only">Exclusivament</string>
 
 	<string name="poi_diplomatic_consulate">Consolat</string>
 	<string name="poi_diplomatic_consulate_general">Consolat general</string>
@@ -2289,8 +2289,8 @@
 
 	<string name="poi_hygrometer_yes">Higròmetre</string>
 	<string name="poi_hygrometer_no">Higròmetre: no</string>
-	<string name="poi_fuel_type">Tipus</string>
-	<string name="poi_fuel_avia_type">Tipus</string>
+	<string name="poi_fuel_type">Tipus de combustible</string>
+	<string name="poi_fuel_avia_type">Tipus de combustible (avia)</string>
 	<string name="poi_payment_type">Tipus de pagament</string>
 	<string name="poi_payment_fuel_type">Targetes per carburants</string>
 	<string name="poi_additional_type">Addicional</string>
@@ -2304,7 +2304,7 @@
 	<string name="poi_payment_toll_type">Tipus de pagament</string>
 	<string name="poi_traffic_signals_sound">So</string>
 	<string name="poi_highway_crossing_type">Tipus</string>
-	<string name="poi_service_car">Servei</string>
+	<string name="poi_service_general">Servei</string>
 	<string name="poi_self_service">Autoservei</string>
 	<string name="poi_automated">Automatitzat</string>
 	<string name="poi_parking_type">Tipus</string>
@@ -2457,7 +2457,7 @@
 	<string name="poi_historic_period_middle_kingdom">Període històric: imperi mitjà d\'Egipte (2055 - 1650 aC)</string>
 	<string name="poi_historic_period_predynastic_egypt">Període històric: Egipte predinàstic</string>
 	<string name="poi_historic_period_early_dynastic_period">Període històric: període arcaic (3100 - 2866 aC)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Període històric: tercer període intermedi (1069 - 664 aC) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Període històric: tercer període intermedi (1069 - 664 aC)</string>
 	<string name="poi_historic_period_dominate">Període històric: dominat (285 dC - 476 dC)</string>
 	<string name="poi_site_type_earthwork">Treball de terra</string>
 	<string name="poi_site_type_settlement">Assentament</string>
@@ -2579,7 +2579,7 @@
 	<string name="poi_xmas_market">Mercat nadalenc</string>
 	<string name="poi_xmas_pyramid">Piràmide nadalenca</string>
 	<string name="poi_xmas_shop">Subministraments nadalencs</string>
-	<string name="poi_xmas_shop_christmas_tree">Venda d\'abres</string>
+	<string name="poi_xmas_shop_christmas_tree">Venda d\'arbres</string>
 	<string name="poi_xmas_tree">Arbre nadalenc</string>
 	<string name="poi_xmas_day_date">Nadal: període per l\'esdeveniment</string>
 	<string name="poi_xmas_note">Nadal: nota</string>
@@ -2735,11 +2735,11 @@
 	<string name="poi_fire_hydrant_pressure">Pressió de l\'hidrant</string>
 	<string name="poi_fire_hydrant_count">Nombre d\'hidrants</string>
 	<string name="poi_fire_hydrant_flow_capacity">Cabal màxim de l\'hidrant</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Localització de l\'hidrant: vorera</string>
-	<string name="poi_fire_hydrant_position_green">Localització de l\'hidrant: gespa</string>
-	<string name="poi_fire_hydrant_position_lane">Localització de l\'hidrant: carril</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Localització de l\'hidrant: aparcament</string>
-	<string name="poi_fire_hydrant_position_street">Localització de l\'hidrant: carrer</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Vorera</string>
+	<string name="poi_fire_hydrant_position_green">Gespa</string>
+	<string name="poi_fire_hydrant_position_lane">Carril</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Aparcament</string>
+	<string name="poi_fire_hydrant_position_street">Carrer</string>
 	<string name="poi_cafeteria">Cafeteria</string>
 
 <string name="poi_aerialway_length">Llargària</string>
@@ -2934,4 +2934,205 @@
 	<string name="poi_industrial_depot">Tipus: cotxera</string>
 
 	<string name="poi_quango">ONG quasi autònoma</string>
+	<string name="poi_free_flying_hanggliding_no">Ala delta: no</string>
+	<string name="poi_free_flying_paragliding_yes">Parapent</string>
+	<string name="poi_free_flying_paragliding_no">Parapent: no</string>
+	<string name="poi_free_flying_hanggliding_yes">Ala delta</string>
+	<string name="poi_free_flying_site_toplanding">Pista elevada</string>
+	<string name="poi_wetland_bog">Torbera</string>
+	<string name="poi_wetland_marsh">Aiguamoll</string>
+	<string name="poi_wetland_reedbed">Canyar</string>
+	<string name="poi_wetland_swamp">Pantà</string>
+	<string name="poi_wetland_saltern">Salina</string>
+	<string name="poi_wetland_tidalflat">Plana de marea</string>
+	<string name="poi_wetland_saltmarsh">Aiguamoll de sal</string>
+	<string name="poi_wetland_mangrove">Manglar</string>
+	<string name="poi_cuisine_fried_food">Fregitel·la</string>
+	<string name="poi_cuisine_hotdog">Frankfurt</string>
+	<string name="poi_cuisine_salad">Amanida</string>
+	<string name="poi_cuisine_frozen_yogurt">Iogurt gelat</string>
+	<string name="poi_cuisine_couscous">Cuscús</string>
+	<string name="poi_cuisine_fried_chicken">Pollastre fregit</string>
+	<string name="poi_cuisine_dessert">Postres</string>
+	<string name="poi_cuisine_canteen">Cantina</string>
+	<string name="poi_cuisine_tacos">Tacos</string>
+	<string name="poi_cuisine_piadina">Piadina</string>
+	<string name="poi_cuisine_smoothie">Batut de fruites</string>
+	<string name="poi_cuisine_souvlaki">Suvlaki</string>
+	<string name="poi_treat_inpatient_yes">Serveis pels ingressats: sí</string>
+	<string name="poi_treat_inpatient_no">Serveis pels ingressats: no</string>
+	<string name="poi_treat_inpatient_only">Serveis pels ingressats: exclusivament</string>
+	<string name="poi_counselling_yes">Assessorament: sí</string>
+	<string name="poi_counselling_no">Assessorament: no</string>
+	<string name="poi_office_physician">Consulta fisioterapeuta</string>
+	<string name="poi_office_therapist">Consulta terapeuta</string>
+	<string name="poi_office_podologist">Consulta podòleg</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Artèria</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Estany</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Riu</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
+	<string name="poi_in_service_yes">En servei: sí</string>
+
+	<string name="poi_aerodrome_type_international">Internacional</string>
+	<string name="poi_aerodrome_type_regional">Regional</string>
+	<string name="poi_aerodrome_type_public">Públic</string>
+	<string name="poi_aerodrome_type_military">Militar</string>
+	<string name="poi_aerodrome_type_military_public">Militar/públic</string>
+	<string name="poi_aerodrome_type_private">Privat</string>
+
+	<string name="poi_nuclear_explosion_device">Explosió: dispositiu</string>
+
+	<string name="poi_addr_housename">Nom de la casa</string>
+
+
+	<string name="poi_social_facility_for_child">Infants</string>
+	<string name="poi_social_facility_for_orphan">Orfes</string>
+	<string name="poi_social_facility_for_disabled">Discapacitats</string>
+	<string name="poi_social_facility_for_mental_health">Pacients amb trastorns mentals</string>
+	<string name="poi_social_facility_for_juvenile">Joves</string>
+	<string name="poi_social_facility_for_homeless">Indigents</string>
+	<string name="poi_social_facility_for_migrant">Immigrants</string>
+	<string name="poi_social_facility_for_underprivileged">Desafavorits</string>
+	<string name="poi_social_facility_for_drug_addicted">Addictes a les drogues</string>
+	<string name="poi_social_facility_for_unemployed">Aturats</string>
+	<string name="poi_social_facility_for_diseased">Malalts</string>
+	<string name="poi_social_facility_for_child_juvenile">Infants; joves</string>
+
+	<string name="poi_theatre_genre_philharmonic">Filharmònica</string>
+	<string name="poi_theatre_genre_musical">Musical</string>
+	<string name="poi_theatre_genre_drama">Drama</string>
+	<string name="poi_theatre_genre_opera">Òpera</string>
+	<string name="poi_theatre_genre_cabaret">Cabaret</string>
+	<string name="poi_theatre_genre_puppet">Putxinel·lis</string>
+	<string name="poi_theatre_genre_comedy">Comèdia</string>
+	<string name="poi_theatre_genre_chamber_music">Música de cambra</string>
+	<string name="poi_theatre_genre_marionette">Titelles</string>
+	<string name="poi_theatre_genre_ballet">Ballet</string>
+	<string name="poi_theatre_genre_shadow_play">Ombres xineses</string>
+
+	<string name="poi_historic_manor">Casal històric</string>
+	<string name="poi_backcountry_yes">Sí</string>
+	<string name="poi_backcountry_no">No</string>
+	<string name="poi_material_composite">Material: compòsit</string>
+	<string name="poi_material_limestone">Material: pedra calcària</string>
+	<string name="poi_fortification_type_hill_fort">Tipus de fortificació: castre</string>
+	<string name="poi_fortification_type_ring_ditch">Fortificació tipus: anell de rasa</string>
+
+	<string name="poi_craft_electronics_repair">Reparació electrònica</string>
+	<string name="poi_fireworks">Focs artificials</string>
+
+	<string name="poi_health_specialty_pathology_yes">Anatomia patològica</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Sociologia pediàtrica</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Especialitat mèdica: sense sociologia pediàtrica</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Obstetrícia (cesàries)</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Especialitat mèdica: sense obstetrícia (cesàries)</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">Medicina de l\'addicció</string>
+	<string name="poi_health_specialty_optometry_yes">Optometria</string>
+	<string name="poi_health_specialty_clinical_pathology_yes">Patologia clínica</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Logopèdia</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Teràpia manual</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Medicina esportiva</string>
+	<string name="poi_health_specialty_podology_yes">Podologia</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Psiquiatria per adults</string>
+	<string name="poi_pump_type_gravity">Tipus de bombament: gravitacional</string>
+	<string name="poi_pump_style_modern">Estil del bombament: modern</string>
+	<string name="poi_pump_style_historic">Estil del bombament: antic</string>
+	<string name="poi_pump_status_ok">Estat del bombament: operatiu</string>
+	<string name="poi_pump_status_broken">Estat del bombament: trencat</string>
+	<string name="poi_pump_status_locked">Estat del bombament: bloquejat</string>
+
+	<string name="poi_payment_troika_yes">Troika</string>
+	<string name="poi_payment_troika_no">La tarja Troika no s\'accepta</string>
+
+	<string name="poi_telescope">Telescopi</string>
+	<string name="poi_telescope_type_optical">Òptic</string>
+	<string name="poi_telescope_type_radio">Radiotelescopi</string>
+	<string name="poi_telescope_type_gamma">Raigs gamma</string>
+	<string name="poi_health_service_nursing_yes">Servei mèdic: infermeria: sí</string>
+	<string name="poi_health_service_nursing_no">Servei mèdic: infermeria: no</string>
+	<string name="poi_health_service_counselling_yes">Servei mèdic: assesorament: sí</string>
+	<string name="poi_health_service_counselling_no">Servei mèdic: assessorament: no</string>
+	<string name="poi_health_service_examination_yes">Servei mèdic: reconeixements: sí</string>
+	<string name="poi_health_service_examination_no">Servei mèdic: reconeixements: no</string>
+	<string name="poi_health_service_child_care_yes">Servei mèdic: atenció infantil: sí</string>
+	<string name="poi_health_service_child_care_no">Servei mèdic: atenció infantil: no</string>
+	<string name="poi_health_service_prevention_yes">Servei mèdic: prevenció: sí</string>
+	<string name="poi_health_service_prevention_no">Servei mèdic: prevenció: no</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Servei mèdic: vacunacions: sí</string>
+	<string name="poi_health_service_prevention_vaccination_no">Servei mèdic: vacunacions: no</string>
+	<string name="poi_health_facility_type_support_group_home">Tipus de centre sanitari: punt de trobada teràpia de grup</string>
+
+	<string name="poi_fire_hydrant_type_pillar">Pilar</string>
+	<string name="poi_fire_hydrant_type_pond">Bassa</string>
+	<string name="poi_fire_hydrant_type_wall">Paret</string>
+
+	<string name="poi_health_person_type_healer">Funció de treballador sanitari: terapeuta</string>
+	<string name="poi_health_person_type_midwife">Funció de treballador sanitari: llevador</string>
+	<string name="poi_health_person_type_nurse">Funció de treballador sanitari: infermer</string>
+	<string name="poi_health_person_type_paramedic">Funció de treballador sanitari: paramèdic</string>
+	<string name="poi_health_person_type_physician">Funció de treballador sanitari: metge</string>
+	<string name="poi_health_person_type_podologist">Funció de treballador sanitari: podòleg</string>
+	<string name="poi_health_person_type_psychologist">Funció de treballador sanitari: psicòleg</string>
+	<string name="poi_health_person_type_therapist">Funció de treballador sanitari: terapeuta</string>
+	<string name="poi_health_person_type_physician_assitant">Funció de treballador sanitari: ajudant de metge</string>
+	<string name="poi_health_person_type_technician">Funció de treballador sanitari: tècnic</string>
+	<string name="poi_health_person_type_witchdoctor">Funció de treballador sanitari: curandero</string>
+
+	<string name="poi_social_facility_day_care">Assistència diurna</string>
+
+	<string name="poi_social_facility_for_senior">Gent gran</string>
+	<string name="poi_bandstand">Quiosc</string>
+	<string name="poi_kiln">Forn</string>
+	<string name="poi_product_brick">Producte: maons</string>
+	<string name="poi_product_quicklime">Producte: calç viva</string>
+	<string name="poi_product_lime">Producte: calç</string>
+	<string name="poi_support_pole">Subjecció: asta</string>
+	<string name="poi_support_wall_mounted">Subjecció: paret</string>
+	<string name="poi_support_tree">Subjecció: arbre</string>
+	<string name="poi_support_pedestal">Subjecció: pedestal</string>
+	<string name="poi_support_ground">Subjecció: sòl</string>
+	<string name="poi_support_suspended">Subjecció: en suspensió</string>
+	<string name="poi_support_tower">Subjecció: torre</string>
+
+	<string name="poi_zoo_type">Tipus</string>
+
+<string name="poi_zoo_petting_zoo">Zoo infantil</string>
+	<string name="poi_cuisine_meat">Carns</string>
+	<string name="poi_cuisine_chocolate">Xocolata</string>
+	<string name="poi_cuisine_wine">Vi</string>
+	<string name="poi_cuisine_brunch">Esmorzar-dinar</string>
+	<string name="poi_cuisine_pita">Pites</string>
+	<string name="poi_motorcycle_services">Serveis</string>
+	<string name="poi_motorcycle_type">Tipus de moto</string>
+
+<string name="poi_cuisine_curry">Curri</string>
+	<string name="poi_animal_shelter_type">Animals admesos</string>
+	<string name="poi_animal_shelter_purpose">Finalitat</string>
+
+<string name="poi_historic_civilization_hernici">Civilització: hèrnica</string>
+	<string name="poi_historic_period_principate">Període històric: principat (27 aC - 284 dC)</string>
+	<string name="poi_cuisine_baguette">Baguets</string>
+	<string name="poi_cuisine_pastel">Pastissos</string>
+	<string name="poi_historic_era_paleolithic">Període històric: paleolític (2,6 milions d\'anys - 10000 aC)</string>
+	<string name="poi_historic_era_mesolithic">Període històric: mesolític</string>
+	<string name="poi_historic_stone">Roca històrica</string>
+	<string name="poi_stone_type_coat_of_arms">Tipus: Escut d\'armes</string>
+
+	<string name="poi_boat_rental_type">Lloguer d\'embarcacions</string>
+
+<string name="poi_microwave_oven_yes">Forn microones: sí</string>
+	<string name="poi_microwave_oven_no">Forn microones: no</string>
+	<string name="poi_water_heater_yes">Escalfador d\'aigua: sí</string>
+	<string name="poi_water_heater_no">Escalfador d\'aigua: no</string>
+
+	<string name="poi_operational_status">Estat operacional</string>
+	<string name="poi_water_supply_type">Tipus de subministrament d\'aigua</string>
+	<string name="poi_water_purification">Depuració d\'aigües</string>
+	<string name="poi_water_place_access">Accés del lloc aquàtic</string>
+
+<string name="poi_seamark_clearance_height">Altura màxima</string>
+	<string name="poi_seamark_clearance_height_closed">Altura màxima (tancat)</string>
+	<string name="poi_seamark_clearance_height_open">Altura màxima (obert)</string>
+	<string name="poi_seamark_clearance_width">Amplada màxima</string>
+
 	</resources>

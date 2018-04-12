@@ -31,6 +31,21 @@ public class PlatformUtil {
 			this.fullName = name;
 			this.name = fullName.substring(fullName.lastIndexOf('.') + 1);
 		}
+
+		@Override
+		public void trace(Object message) {
+			if(isTraceEnabled()){
+				android.util.Log.d(TAG, name + " " + message); //$NON-NLS-1$
+			}
+		}
+
+		@Override
+		public void trace(Object message, Throwable t) {
+			if(isTraceEnabled()){
+				android.util.Log.d(TAG, name + " " + message, t); //$NON-NLS-1$
+			}
+		}
+
 		@Override
 		public void debug(Object message) {
 			if(isDebugEnabled()){
@@ -113,6 +128,11 @@ public class PlatformUtil {
 		@Override
 		public boolean isWarnEnabled() {
 			return android.util.Log.isLoggable(TAG, android.util.Log.WARN);
+		}
+
+		@Override
+		public boolean isTraceEnabled() {
+			return android.util.Log.isLoggable(TAG, android.util.Log.VERBOSE);
 		}
 
 		@Override

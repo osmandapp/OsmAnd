@@ -225,7 +225,7 @@
 	<string name="poi_fuel_biogas">ബയൊഗ്യാസ്</string>
 	<string name="poi_fuel_lh2">ദ്രവീകൃത ഹൈഡ്റജന്‍</string>
 	<string name="poi_fuel_electricity">വൈദ്യുതി (ഇന് ധനം)</string>
-	<string name="poi_charging_station">ചാര്‍ജിങ്ങ് സ്ടേഷന്‍</string>
+	<string name="poi_electricity_combined_charging">ചാര്‍ജിങ്ങ് സ്ടേഷന്‍</string>
 	<string name="poi_vehicle_ramp">വാഹന റാംപ്</string>
 	<string name="poi_compressed_air">എയര്‍</string>
 	<string name="poi_parking">പാര്‍ക്കിങ്ങ്</string>
@@ -861,7 +861,7 @@
 	<string name="poi_traffic_signals_sound">ശബ്ദമുണ്ടാക്കുന്ന ട്രാ‌ഫിക് സിഗ്നല്‍</string>
 	<string name="poi_highway_crossing_type">തരം [ക്രോ‌സിങ്ങ്]</string>
 	<string name="poi_tactile_paving">ടാക്ടൈല്‍ പേവിങ്ങോട് കൂടിയത്</string>
-	<string name="poi_service_car">സെര്‍വീസ്</string>
+	<string name="poi_service_general">സെര്‍വീസ്</string>
 	<string name="poi_self_service">സ്വയംസേവനം</string>
 	<string name="poi_automated">ഓട്ടോ‌മാറ്റിക്</string>
 	<string name="poi_parking_type">തരം</string>
@@ -2293,7 +2293,7 @@
 
 	<string name="poi_wiki_lang_ta">"തമിഴ് വിക്കി "</string>
 	<string name="poi_wiki_lang_ur">"ഉറുദു വിക്കി "</string>
-	<string name="poi_craft_electronics">ഇലെക്ട്രോണിക് റിപെയര്‍</string>
+	<string name="poi_craft_electronics_repair">ഇലെക്ട്രോണിക് റിപെയര്‍</string>
 	<string name="poi_fireworks">പടക്ക കട</string>
 
 	<string name="poi_aerialway_length">ദൂരം</string>

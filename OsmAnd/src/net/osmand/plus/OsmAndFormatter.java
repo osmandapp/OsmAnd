@@ -45,7 +45,7 @@ public class OsmAndFormatter {
 		}
 	}
 
-	public static String getFormattedDurationShort(int seconds, OsmandApplication ctx) {
+	public static String getFormattedDurationShort(int seconds) {
 		int hours = seconds / (60 * 60);
 		int minutes = (seconds / 60) % 60;
 		int sec = seconds % 60;
@@ -117,6 +117,15 @@ public class OsmAndFormatter {
 		} else {
 			return fixed2.format(((float) meters) / mainUnitInMeters) + " " + ctx.getString(mainUnitStr);
 		}
+	}
+
+	public static String getFormattedAlarmInfoDistance(OsmandApplication app, float meters) {
+		boolean kmAndMeters = app.getSettings().METRIC_SYSTEM.get() == MetricsConstants.KILOMETERS_AND_METERS;
+		int mainUnitStr = kmAndMeters ? R.string.km : R.string.mile;
+		float mainUnitInMeters = kmAndMeters ? METERS_IN_KILOMETER : METERS_IN_ONE_MILE;
+		DecimalFormat df = new DecimalFormat("#.#");
+
+		return df.format(meters / mainUnitInMeters) + " " + app.getString(mainUnitStr);
 	}
 	
 	public static String getFormattedDistance(float meters, OsmandApplication ctx) {

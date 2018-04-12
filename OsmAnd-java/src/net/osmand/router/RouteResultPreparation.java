@@ -25,6 +25,7 @@ import net.osmand.osm.MapRenderingTypes;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
+import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -108,6 +109,9 @@ public class RouteResultPreparation {
 	}
 
 	private void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
+		//for Naismith
+		boolean usePedestrianHeight = ((((GeneralRouter) ctx.getRouter()).getProfile() == GeneralRouterProfile.PEDESTRIAN) && ((GeneralRouter) ctx.getRouter()).getHeightObstacles());
+
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
@@ -125,6 +129,15 @@ public class RouteResultPreparation {
 			boolean plus = rr.getStartPointIndex() < rr.getEndPointIndex();
 			int next;
 			double distance = 0;
+
+			//for Naismith
+			float prevHeight = -99999.0f;
+			float[] heightDistanceArray = null;
+			if (usePedestrianHeight) {
+				road.calculateHeightArray();
+				heightDistanceArray = road.heightDistanceArray;
+			}
+
 			for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
 				next = plus ? j + 1 : j - 1;
 				double d = measuredDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
@@ -134,9 +147,24 @@ public class RouteResultPreparation {
 				if (obstacle < 0) {
 					obstacle = 0;
 				}
-				distOnRoadToPass += d / speed + obstacle;
+				distOnRoadToPass += d / speed + obstacle;  //this is time in seconds
 
+				//for Naismith
+				if (usePedestrianHeight) {
+					int heightIndex = 2 * j + 1;
+					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length) {
+						float height = heightDistanceArray[heightIndex];
+						if (prevHeight != -99999.0f) {
+							float heightDiff = height - prevHeight;
+							if (heightDiff > 0) {  //ascent only
+								distOnRoadToPass += heightDiff * 6.0f;  //Naismith's rule: add 1 hour per every 600m of ascent
+							}
+						}
+					prevHeight = height;
+					}
+				}
 			}
+
 			// last point turn time can be added
 			// if(i + 1 < result.size()) { distOnRoadToPass += ctx.getRouter().calculateTurnTime(); }
 			rr.setSegmentTime((float) distOnRoadToPass);
@@ -427,9 +455,9 @@ public class RouteResultPreparation {
 								serializer.endTag("","desc");
 								lastHeight = h;
 							} else if(lastHeight != -180){
-								serializer.startTag("","ele");
-								serializer.text(lastHeight +"");
-								serializer.endTag("","ele");
+//								serializer.startTag("","ele");
+//								serializer.text(lastHeight +"");
+//								serializer.endTag("","ele");
 							}
 							serializer.endTag("", "trkpt");
 							prev = l;
@@ -705,21 +733,37 @@ public class RouteResultPreparation {
 					active.activeStartIndex = active.activeStartIndex + target.activeStartIndex;
 					changed = true;
 				} else {
-					// cause the next-turn goes forward exclude left most and right most lane
-					if(active.activeStartIndex == 0) {
-						active.activeStartIndex ++;
-						active.activeLen--;
+					int straightActiveLen = 0;
+					int straightActiveBegin = -1;
+					for(int i = active.activeStartIndex; i <= active.activeEndIndex; i++) {
+						if(TurnType.hasAnyTurnLane(active.originalLanes[i], TurnType.C)) {
+							straightActiveLen++;
+							if(straightActiveBegin == -1) {
+								straightActiveBegin = i;
+							}
+						}
 					}
-					if(active.activeEndIndex == active.originalLanes.length - 1) {
-						active.activeEndIndex --;
-						active.activeLen--;
+					if(straightActiveLen == target.activeLen) {
+						active.activeStartIndex = straightActiveBegin;
+						active.activeEndIndex = straightActiveBegin + target.activeLen - 1;
+						changed = true;
+					} else {
+						// cause the next-turn goes forward exclude left most and right most lane
+						if (active.activeStartIndex == 0) {
+							active.activeStartIndex++;
+							active.activeLen--;
+						}
+						if (active.activeEndIndex == active.originalLanes.length - 1) {
+							active.activeEndIndex--;
+							active.activeLen--;
+						}
+						float ratio = (active.activeLen - target.activeLen) / 2f;
+						if (ratio > 0) {
+							active.activeEndIndex = (int) Math.ceil(active.activeEndIndex - ratio);
+							active.activeStartIndex = (int) Math.floor(active.activeStartIndex + ratio);
+						}
+						changed = true;
 					}
-					float ratio = (active.activeLen - target.activeLen) / 2f;
-					if(ratio > 0) {
-						active.activeEndIndex = (int) Math.ceil(active.activeEndIndex - ratio);
-						active.activeStartIndex = (int) Math.floor(active.activeStartIndex + ratio);
-					}
-					changed = true;
 				}
 			}
 		}
@@ -1042,8 +1086,17 @@ public class RouteResultPreparation {
 			String[] splitLaneOptions = turnLanes.split("\\|", -1);
 			int activeBeginIndex = findActiveIndex(rawLanes, splitLaneOptions, rs.leftLanes, true, 
 					rs.leftLanesInfo, rs.roadsOnLeft, rs.addRoadsOnLeft);
+			
+			if(!rs.keepLeft && activeBeginIndex != -1 && 
+					splitLaneOptions.length > 0 && !splitLaneOptions[splitLaneOptions.length - 1].contains(";")) {
+				activeBeginIndex = Math.max(activeBeginIndex, 1);
+			}
 			int activeEndIndex = findActiveIndex(rawLanes, splitLaneOptions, rs.rightLanes, false, 
 					rs.rightLanesInfo, rs.roadsOnRight, rs.addRoadsOnRight);
+			if(!rs.keepRight && activeEndIndex != -1  && 
+					splitLaneOptions.length > 0 && !splitLaneOptions[0].contains(";") ) {
+				activeEndIndex = Math.min(activeEndIndex, rawLanes.length - 1);
+			}
 			if (activeBeginIndex == -1 || activeEndIndex == -1 || activeBeginIndex > activeEndIndex) {
 				// something went wrong
 				return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
@@ -1099,7 +1152,7 @@ public class RouteResultPreparation {
 			List<int[]> lanesInfo, int roads, int addRoads) {
 		int activeStartIndex = -1;
 		boolean lookupSlightTurn = addRoads > 0;
-		Set<String> addedTurns = new TreeSet<String>();
+		TIntHashSet addedTurns = new TIntHashSet();
 		// if we have information increase number of roads per each turn direction
 		int diffTurnRoads = roads;
 		int increaseTurnRoads = 0;
@@ -1116,25 +1169,18 @@ public class RouteResultPreparation {
 		for (int i = 0; i < rawLanes.length; i++) {
 			int ind = left ? i : (rawLanes.length - i - 1);
 			if (!lookupSlightTurn ||
-					TurnType.isSlightTurn(TurnType.getPrimaryTurn(rawLanes[ind]))
-					|| TurnType.isSlightTurn(TurnType.getSecondaryTurn(rawLanes[ind]))) {
+					TurnType.hasAnySlightTurnLane(rawLanes[ind])) {
 				String[] laneTurns = splitLaneOptions[ind].split(";");
 				int cnt = 0;
 				for(String lTurn : laneTurns) {
-					boolean added = addedTurns.add(lTurn);
+					boolean added = addedTurns.add(TurnType.convertType(lTurn));
 					if(added) {
 						cnt++;
 						diffTurnRoads --;
 					}
 				}
-//				int cnt = countOccurrences(splitLaneOptions[ind], ';') + 1;
-//				if(cnt > 1) {
-//					// sometimes slight right turn goes to the road with 2 lanes 
-//					// the better situation to group all the lanes and 
-//					// when ';' we know for sure the lane combines 2 group
-//					roads --;
-//				}
 				lanes -= cnt;
+				//lanes--;
 				// we already found slight turn others are turn in different direction
 				lookupSlightTurn = false;
 			}
@@ -1168,7 +1214,7 @@ public class RouteResultPreparation {
 			double mpi = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), attached.getBearingBegin()));
 			int rsSpeakPriority = highwaySpeakPriority(attached.getObject().getHighway());
 			int lanes = countLanesMinOne(attached);
-			int[] turnLanes = parseTurnLanes(attached.getObject(), attached.getBearingBegin());
+			int[] turnLanes = parseTurnLanes(attached.getObject(), attached.getBearingBegin() * Math.PI / 180);
 			boolean smallStraightVariation = mpi < TURN_DEGREE_MIN;
 			boolean smallTargetVariation = Math.abs(ex) < TURN_DEGREE_MIN;
 			boolean attachedOnTheRight = ex >= 0;
@@ -1343,31 +1389,7 @@ public class RouteResultPreparation {
 			String[] laneOptions = splitLaneOptions[i].split(";");
 			boolean isTertiaryTurn = false;
 			for (int j = 0; j < laneOptions.length; j++) {
-				int turn;
-				if (laneOptions[j].equals("none") || laneOptions[j].equals("through")) {
-					turn = TurnType.C;
-					
-				} else if (laneOptions[j].equals("slight_right") || 
-						laneOptions[j].equals("merge_to_right")) {
-					turn = TurnType.TSLR;
-				} else if (laneOptions[j].equals("slight_left") || 
-						laneOptions[j].equals("merge_to_left")) {
-					turn = TurnType.TSLL;
-				} else if (laneOptions[j].equals("right")) {
-					turn = TurnType.TR;
-				} else if (laneOptions[j].equals("left")) {
-					turn = TurnType.TL;
-				} else if (laneOptions[j].equals("sharp_right")) {
-					turn = TurnType.TSHR;
-				} else if (laneOptions[j].equals("sharp_left")) {
-					turn = TurnType.TSHL;
-				} else if (laneOptions[j].equals("reverse")) {
-					turn = TurnType.TU;
-				} else {
-					// Unknown string
-					turn = TurnType.C;
-//					continue;
-				}
+				int turn = TurnType.convertType(laneOptions[j]);
 
 				final int primary = TurnType.getPrimaryTurn(lanes[i]);
 				if (primary == 0) {
@@ -1435,16 +1457,16 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		// remove all non-slight turns
-		if(possibleTurns.size() > 1) {
-			TIntIterator it = possibleTurns.iterator();
-			while(it.hasNext()) {
-				int nxt = it.next();
-				if(!TurnType.isSlightTurn(nxt)) {
-					it.remove();
-				}
-			}
-		}
+		// remove all non-slight turns // TEST don't pass 
+//		if(possibleTurns.size() > 1) {
+//			TIntIterator it = possibleTurns.iterator();
+//			while(it.hasNext()) {
+//				int nxt = it.next();
+//				if(!TurnType.isSlightTurn(nxt)) {
+//					it.remove();
+//				}
+//			}
+//		}
 		int infer = 0;
 		if (possibleTurns.size() == 1) {
 			infer = possibleTurns.iterator().next();

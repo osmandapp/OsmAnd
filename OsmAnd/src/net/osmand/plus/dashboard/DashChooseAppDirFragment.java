@@ -336,7 +336,7 @@ public class DashChooseAppDirFragment {
 							updateView();
 						}
 					};
-					task.execute();
+					task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
 			});
 			confirmBtn.setOnClickListener(getConfirmListener());
@@ -375,7 +375,7 @@ public class DashChooseAppDirFragment {
 		protected void successCallback() {}
 
 		protected void reloadData() {
-			new ReloadData(activity, getMyApplication()).execute((Void) null);
+			new ReloadData(activity, getMyApplication()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 		}
 
 		public OsmandApplication getMyApplication() {

@@ -57,7 +57,7 @@ public class NauticalActivity extends Activity {
 					public void onClick(View v) {
 						String appName = OSMAND_COMPONENT;
 						logEvent(NauticalActivity.this, "open_play_store_" + appName);
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + appName));
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appName));
 						try {
 							//stopService(intent);
 							startActivity(intent);

@@ -31,7 +31,8 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String AVOID_MOTORWAY = "avoid_motorway";
 	public static final String AVOID_UNPAVED = "avoid_unpaved";
 	public static final String PREFER_MOTORWAYS = "prefer_motorway";
-	
+	public static final String ALLOW_PRIVATE = "allow_private";
+
 	private final RouteAttributeContext[] objectAttributes;
 	public final Map<String, String> attributes;
 	private final Map<String, RoutingParameter> parameters; 
@@ -41,7 +42,8 @@ public class GeneralRouter implements VehicleRouter {
 	private final ArrayList<Object> ruleToValue;
 	private boolean shortestRoute;
 	private boolean heightObstacles;
-	
+	private boolean allowPrivate;
+
 	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer,Integer>>();
 	
 	// cached values
@@ -55,6 +57,7 @@ public class GeneralRouter implements VehicleRouter {
 	private float maxDefaultSpeed = 10;
 	
 	private TLongHashSet impassableRoads;
+	private GeneralRouterProfile profile;
 	
 	
 	public enum RouteDataObjectAttribute {
@@ -84,7 +87,8 @@ public class GeneralRouter implements VehicleRouter {
 	public enum GeneralRouterProfile {
 		CAR,
 		PEDESTRIAN,
-		BICYCLE
+		BICYCLE,
+		BOAT
 	}
 
 	
@@ -95,6 +99,7 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	public GeneralRouter(GeneralRouterProfile profile, Map<String, String> attributes) {
+		this.profile = profile;
 		this.attributes = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = attributes.entrySet().iterator();
 		while(e.hasNext()){
@@ -113,6 +118,7 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	public GeneralRouter(GeneralRouter parent, Map<String, String> params) {
+		this.profile = parent.profile;
 		this.attributes = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = parent.attributes.entrySet().iterator();
 		while (e.hasNext()) {
@@ -130,12 +136,21 @@ public class GeneralRouter implements VehicleRouter {
 		for (int i = 0; i < objectAttributes.length; i++) {
 			objectAttributes[i] = new RouteAttributeContext(parent.objectAttributes[i], params);
 		}
+		allowPrivate = params.containsKey(ALLOW_PRIVATE) && parseSilentBoolean(params.get(ALLOW_PRIVATE), false) ;
 		shortestRoute = params.containsKey(USE_SHORTEST_WAY) && parseSilentBoolean(params.get(USE_SHORTEST_WAY), false);
 		heightObstacles = params.containsKey(USE_HEIGHT_OBSTACLES) && parseSilentBoolean(params.get(USE_HEIGHT_OBSTACLES), false); 
 		if(shortestRoute) {
 			maxDefaultSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxDefaultSpeed);
 		}
 
+	}
+	
+	public GeneralRouterProfile getProfile() {
+		return profile;
+	}
+
+	public boolean getHeightObstacles() {
+		return heightObstacles;
 	}
 
 	public Map<String, RoutingParameter> getParameters() {
@@ -164,12 +179,14 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 
-	public void registerBooleanParameter(String id, String name, String description) {
+	public void registerBooleanParameter(String id, String group, String name, String description, boolean defaultValue) {
 		RoutingParameter rp = new RoutingParameter();
+		rp.group = group;
 		rp.name = name;
 		rp.description = description;
 		rp.id = id;
 		rp.type = RoutingParameterType.BOOLEAN;
+		rp.defaultBoolean = defaultValue;
 		parameters.put(rp.id, rp);
 		
 	}
@@ -193,7 +210,11 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		return res >= 0;
 	}
-	
+
+	public boolean isAllowPrivate() {
+		return allowPrivate;
+	}
+
 	public long[] getImpassableRoadIds() {
 		if(impassableRoads == null) {
 			return new long[0];
@@ -435,16 +456,21 @@ public class GeneralRouter implements VehicleRouter {
 	
 	public static class RoutingParameter {
 		private String id;
+		private String group;
 		private String name;
 		private String description;
 		private RoutingParameterType type;
 		private Object[] possibleValues;
 		private String[] possibleValueDescriptions;
+		private boolean defaultBoolean;
 		
 		public String getId() {
 			return id;
 		}
-		
+
+		public String getGroup() {
+			return group;
+		}
 		public String getName() {
 			return name;
 		}
@@ -457,9 +483,11 @@ public class GeneralRouter implements VehicleRouter {
 		public String[] getPossibleValueDescriptions() {
 			return possibleValueDescriptions;
 		}
-		
 		public Object[] getPossibleValues() {
 			return possibleValues;
+		}
+		public boolean getDefaultBoolean() {
+			return defaultBoolean;
 		}
 	}
 	
@@ -663,7 +691,7 @@ public class GeneralRouter implements VehicleRouter {
 			if (value instanceof String && value.toString().startsWith("$")) {
 				BitSet mask = tagRuleMask.get(value.toString().substring(1));
 				if (mask != null && mask.intersects(types)) {
-					BitSet findBit = new BitSet(mask.size());
+					BitSet findBit = new BitSet(mask.length());
 					findBit.or(mask);
 					findBit.and(types);
 					int v = findBit.nextSetBit(0);
@@ -744,16 +772,16 @@ public class GeneralRouter implements VehicleRouter {
 		
 		public void printRule(PrintStream out) {
 			out.print(" Select " + selectValue  + " if ");
-			for(int k = 0; k < filterTypes.size(); k++) {
+			for(int k = 0; k < filterTypes.length(); k++) {
 				if(filterTypes.get(k)) {
 					String key = universalRulesById.get(k);
 					out.print(key + " ");
 				}
 			}
-			if(filterNotTypes.size() > 0) {
+			if(filterNotTypes.length() > 0) {
 				out.print(" ifnot ");
 			}
-			for(int k = 0; k < filterNotTypes.size(); k++) {
+			for(int k = 0; k < filterNotTypes.length(); k++) {
 				if(filterNotTypes.get(k)) {
 					String key = universalRulesById.get(k);
 					out.print(key + " ");
@@ -826,7 +854,7 @@ public class GeneralRouter implements VehicleRouter {
 			if (selectValue instanceof String && selectValue.toString().startsWith("$")) {
 				BitSet mask = tagRuleMask.get(selectValue.toString().substring(1));
 				if (mask != null && mask.intersects(types)) {
-					BitSet findBit = new BitSet(mask.size());
+					BitSet findBit = new BitSet(mask.length());
 					findBit.or(mask);
 					findBit.and(types);
 					int value = findBit.nextSetBit(0);

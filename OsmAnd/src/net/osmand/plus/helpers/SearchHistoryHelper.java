@@ -39,11 +39,11 @@ public class SearchHistoryHelper {
 		5, 60, 60 * 24, 5 * 60 * 24, 10 * 60 * 24, 30 * 60 * 24 
 	};
 	
-	private static Comparator<HistoryEntry> historyEntryComparator = new Comparator<HistoryEntry>() {
-
+	private static class HistoryEntryComparator implements Comparator<HistoryEntry> {
+		long time = System.currentTimeMillis();
+		
 		@Override
 		public int compare(HistoryEntry lhs, HistoryEntry rhs) {
-			long time = System.currentTimeMillis();
 			double l = lhs.getRank(time);
 			double r = rhs.getRank(time);
 			return -Double.compare(l, r);
@@ -200,7 +200,7 @@ public class SearchHistoryHelper {
 		HistoryItemDBHelper helper = new HistoryItemDBHelper();
 		if (loadedEntries == null) {
 			loadedEntries = helper.getEntries();
-			Collections.sort(loadedEntries, historyEntryComparator);
+			Collections.sort(loadedEntries, new HistoryEntryComparator());
 			for(HistoryEntry he : loadedEntries) {
 				mp.put(he.getName(), he);
 			}
@@ -236,7 +236,7 @@ public class SearchHistoryHelper {
 			model.markAsAccessed(System.currentTimeMillis());
 			helper.add(model);
 		}
-		Collections.sort(loadedEntries, historyEntryComparator);
+		Collections.sort(loadedEntries, new HistoryEntryComparator());
 		if(loadedEntries.size() > HISTORY_LIMIT){
 			if(helper.remove(loadedEntries.get(loadedEntries.size() - 1))){
 				loadedEntries.remove(loadedEntries.size() - 1);

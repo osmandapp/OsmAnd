@@ -20,13 +20,13 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 /**
- * reference : http://wiki.openstreetmap.org/wiki/Map_Features
+ * reference : https://wiki.openstreetmap.org/wiki/Map_Features
  */
 public abstract class MapRenderingTypes {
 
 	private static final Log log = PlatformUtil.getLog(MapRenderingTypes.class);
 	public static final String[] langs = new String[] { "af", "als", "ar", "az", "be", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb",
-		"hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "ko", "ku", "la", "lb", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "os", "pl", "pms", "pt", "ro", "ru", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh" };
+		"hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "os", "pl", "pms", "pt", "ro", "ru", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh" };
 	
 	
 	public final static byte RESTRICTION_NO_RIGHT_TURN = 1;
@@ -274,7 +274,8 @@ public abstract class MapRenderingTypes {
 			String v = parser.getAttributeValue("", "nameTags");
 			if (v != null) {
 				String[] names = v.split(",");
-				rtype.names = new MapRulType[names.length];
+				rtype.names = new MapRulType[names.length * (langs.length + 1)];
+				int j = 0;
 				for (int i = 0; i < names.length; i++) {
 					String tagName = names[i];
 					if (rtype.namePrefix.length() > 0) {
@@ -282,7 +283,12 @@ public abstract class MapRenderingTypes {
 					}
 					MapRulType mt = MapRulType.createText(tagName);
 					mt = registerRuleType(mt);
-					rtype.names[i] = mt;
+					rtype.names[j++] = mt;
+					for(String lng : langs) {
+						mt = MapRulType.createText(tagName + ":" + lng);
+						mt = registerRuleType(mt);
+						rtype.names[j++] = mt;	
+					}
 				}
 			}
 		}
@@ -300,6 +306,7 @@ public abstract class MapRenderingTypes {
 				rt.id = mapRulType.id;
 				if(rt.isMain()) {
 					mapRulType.main = true;
+					mapRulType.order = rt.order;
 					if(rt.minzoom != 0) {
 						mapRulType.minzoom = Math.max(rt.minzoom, mapRulType.minzoom);
 					}
@@ -357,6 +364,7 @@ public abstract class MapRenderingTypes {
 	protected static class TagValuePattern {
 		protected String tag;
 		protected String value;
+		protected String tagPrefix;
 		protected int substrSt = 0;
 		protected int substrEnd = 0;
 		protected TagValuePattern(String t, String v) {

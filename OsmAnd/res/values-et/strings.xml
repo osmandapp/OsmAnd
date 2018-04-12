@@ -10,7 +10,7 @@
     <string name="welmode_download_maps">Kaartide allalaadimine</string>
 	<string name="welcome_header">Tere tulemast</string>
     <string name="mark_to_delete">Märgi kustutamiseks</string>
-	<string name="osmo_grop_name_length_alert">Grupi nimi peab olema vähemalt 3 märki!</string>
+	
 	<string name="confirmation_to_clear_history">Kas sa soovid tühjendada ajalugu?</string>
     <string name="osmand_parking_overdue">tähtaja ületanud</string>
 	<string name="action_create">Tegevuse loomine</string>
@@ -49,7 +49,7 @@
 	<string name="shared_string_download">Laealla</string>
 	<string name="shared_string_downloading">Allalaadimine</string>
 	<string name="shared_string_download_successful">Allalaadimine õnnestus</string>
-	<string name="shared_string_close">Sule</string>
+	<string name="shared_string_close">Sulge</string>
 	<string name="shared_string_exit">Välju</string>
 	<string name="shared_string_show">Näita</string>
 	<string name="shared_string_show_all">Näita kõik</string>
@@ -68,7 +68,7 @@
 	<string name="shared_string_photo">Foto</string>
 	<string name="shared_string_online_maps">Online kaardid</string>
 	<string name="record_plugin_name">Reisi salvestus</string>
-	<string name="osmo_plugin_name">OpenStreetMap monitoorimine</string>
+	
 	<string name="plugin_nautical_name">Merendus kaardi vaade</string>
 	<string name="audionotes_plugin_name">Audio/video märkmed</string>
 	<string name="shared_string_accessibility">Juurdepääs</string>
@@ -80,10 +80,10 @@
 	<string name="online_map">Online kaart</string>
 	<string name="roads_only">Ainult teed</string>
     <string name="rendering_attr_pisteRoutes_name">Suusarajad</string>
-	<string name="free">"Vaba %1$s "</string>
+	<string name="free">Vaba %1$s</string>
 	<string name="device_memory">Seadme mälu</string>
     <string name="edit_group">Grupi muutmine</string>
-    <string name="parking_place">Parkimise asukohad</string>
+    <string name="parking_place">Parkimiskoht</string>
     <string name="gps_status">GPS staatus</string>
     <string name="rendering_attr_streetLighting_name">Tänava valgustus</string>
     <string name="app_mode_bus">Buss</string>
@@ -94,36 +94,36 @@
     <!-- string name="lat_lon_pattern">Laius: %1$.5f pikkus: %2$.5f</string -->
     <string name="follow_us">Järgi meid</string>
     <string name="access_direction_audio_feedback">Suunamise tagasiside heliga</string>
-    <string name="access_direction_audio_feedback_descr">Näita sihtpunkti suunda heliga</string>
+    <string name="access_direction_audio_feedback_descr">Näita sihtpunkti suunda heliga.</string>
     <string name="access_direction_haptic_feedback">Suunamise tagasiside kompides</string>
-    <string name="access_direction_haptic_feedback_descr">Näita sihtpunkti suunda vibratsiooniga</string>
+    <string name="access_direction_haptic_feedback_descr">Näita sihtpunkti suunda vibratsiooniga.</string>
     <string name="shared_string_from">alates</string>
     <string name="city_type_district">Linnaosa</string>
-    <string name="city_type_neighbourhood">Ümbruskond</string>
+    <string name="city_type_neighbourhood">Naabruskond</string>
     <string name="map_widget_search">Otsi</string>
 	<string name="shared_string_is_open_24_7">Avatud 24/7</string>
     <string name="storage_directory_card">Mälukaart</string>
     <string name="coords_format">Koordinaatide formaat</string>
-    <string name="coords_format_descr">Geograafiliste koordinaatide formaat</string>
+    <string name="coords_format_descr">Geograafiliste koordinaatide vorming.</string>
   	<string name="current_track">Praegune teekond</string>
-    <string name="use_osm_live_routing_description">Aktiveeri OSM Live navigeerimine (beeta)</string>
-	<string name="use_osm_live_routing">OSM reaalajas navigeerimine</string>
+    <string name="use_osm_live_routing_description">Aktiveeri OsmAnd Live muutuste navigeerimine.</string>
+	<string name="use_osm_live_routing">OsmAnd Live navigeerimine</string>
     <string name="access_no_destination">Sihtkoht pole määratud</string>
-    <string name="map_widget_magnetic_bearing">Magnetlaager</string>
+    <string name="map_widget_magnetic_bearing">Asimuut</string>
     <string name="map_widget_bearing">Suhteline kurss</string>
-    <string name="access_disable_offroute_recalc">Ära muuda teekonda, kui oled teekonnast väljas</string>
-    <string name="access_disable_offroute_recalc_descr">Väldi teekonna ümber arvutamist, kui oled õigelt teelt eemal</string>
-    <string name="access_disable_wrong_direction_recalc">Ära muuda teekonda vale suuna korral</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Väldi automaatset teekonna ümberarvutamist, kui liigud vales suunas</string>
+    <string name="access_disable_offroute_recalc">Ära otsi uut marsruuti, kui eelmiselt lahkuti</string>
+    <string name="access_disable_offroute_recalc_descr">Väldib automaatset uue marsruudi otsimist, kui eelmiselt marsruudilt lahkuti.</string>
+    <string name="access_disable_wrong_direction_recalc">Ära otsi vastassuuna jaoks uut marsruuti</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Väldib automaatset uue marsruudi otsimist kui liigutakse vastassuunas.</string>
     <string name="access_smart_autoannounce">Nutikas teavitamine</string>
-    <string name="access_smart_autoannounce_descr">Teavita ainult juhul, kui suund sihtkoha poole muutub</string>
+    <string name="access_smart_autoannounce_descr">Teavita ainult juhul, kui suund sihtkoha poole muutub.</string>
     <string name="access_autoannounce_period">Automaatse teavituse periood</string>
-    <string name="access_autoannounce_period_descr">Minimaalne ajaintervall teavituste vahel</string>
+    <string name="access_autoannounce_period_descr">Minimaalne ajaintervall teavituste vahel.</string>
     <string name="access_default_color">Vaikevärv</string>
     <string name="access_category_choice">Vali kategooria</string>
     <string name="access_hint_enter_name">Sisesta nimi</string>
     <string name="access_hint_enter_category">Sisesta kategooria</string>
-    <string name="access_hint_enter_description">Sisesta kirjeldus</string>
+    <string name="access_hint_enter_description">Sisesta kirjeldus.</string>
     <string name="access_map_linked_to_location">Kaart on asukohaga lingitud</string>
     <string name="access_collapsed_list">Kitsendatud nimekiri</string>
     <string name="access_expanded_list">Laiendatud nimekiri</string>
@@ -140,7 +140,35 @@
     <string name="rendering_value_bold_name">Rasvane</string>
     <string name="no_map_markers_found">Palun lisa kaardi markerid kaardi abil</string>
     <string name="no_waypoints_found">Marsruudipunkte ei leitud</string>
-    <string name="osmo_group_information_desc">" - Grupi loomisel määra selle nimi ja kirjeldus\n - Rakenduses saab luua ainult lihtsat tüüpi gruppe, loe rohkem lehelt https://osmo.mobi/g/new\n - Veebilehel saad hallata gruppe, asetada radasid ja huvipunkte\n - Me ei toeta ainult ühe kasutajaga gruppe, kui see ei ole POI grupp\n - Privaatgrupid on kuni 8 kasutajale\n - Detailsed kasutustingimused on alati saadaval lehel OsMo.mobi\n - Eritingimuste korral võta ühendust klienditoega: osmo.mobi@gmail.com "</string>
-    <string name="osmo_specify_tracker_id">Täpsusta ID</string>
-    <string name="osmo_no_connection_msg">Ei suuda ühenduda OsMo serveriga:\n- kontrolli internetiühendust;\n- kontrolli seadeid;\n- kontrolli meie Twitteri lehte: https://twitter.com/OsMomobi</string>
+    
+    
+    
+    <string name="mapillary">Mapillary</string>
+    <string name="increase_search_radius">Suurenda otsingu raadiust</string>
+    <string name="nothing_found">Midagi ei leitud :(</string>
+    <string name="nothing_found_descr">Muuda otsingu päringut või suurenda otsingu raadiust.</string>
+    
+    <string name="shared_string_permissions">Load</string>
+    <string name="import_gpx_failed_descr">OsmAnd ei saa faili importida. Palun veendu, et OsmAnd\'il on õigus lugeda faili selle asukohast.</string>
+    <string name="distance_moving">Kaugus parandatud</string>
+    <string name="mapillary_image">Mapillary pilt</string>
+    <string name="open_mapillary">Ava Mapillary</string>
+    <string name="shared_string_install">Paigalda</string>
+    <string name="online_photos">Veebi fotod</string>
+    <string name="shared_string_add_photos">Lisa fotosid</string>
+    <string name="mapillary_widget">Mapillary vidin</string>
+    <string name="shared_string_reset">Lähtesta</string>
+    <string name="shared_string_reload">Laadi uuesti</string>
+    <string name="wrong_user_name">Vale kasutajanimi!</string>
+    <string name="mapillary_menu_title_dates">Kuupäev</string>
+    <string name="mapillary_menu_edit_text_hint">Sisesta kasutajatunnus</string>
+    <string name="mapillary_menu_title_username">Kasutajatunnus</string>
+    <string name="improve_coverage_install_mapillary_desc">Sa võid lisada oma fotod või foto seeriad siia asukohta.
+\n
+\nSelleks, paigalda Mapillary rakendus Google Play veebipoest.</string>
+    <string name="no_photos_descr">Sellest asukohast meil fotosid ei ole.</string>
+    <string name="restart_search">Taaskäivita otsing</string>
+    <string name="quick_action_showhide_osmbugs_title">Näita/peida OSM Notes</string>
+    <string name="quick_action_osmbugs_show">Näita OSM Notes</string>
+    <string name="quick_action_osmbugs_hide">Peida OSM Notes</string>
     </resources>

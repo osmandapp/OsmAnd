@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.notifications.OsmandNotification;
-import net.osmand.plus.osmo.OsMoPlugin;
 
 public class NavigationService extends Service implements LocationListener {
 
@@ -33,7 +32,6 @@ public class NavigationService extends Service implements LocationListener {
 	public static int USED_BY_NAVIGATION = 1;
 	public static int USED_BY_GPX = 2;
 	public static int USED_BY_LIVE = 4;
-	public static int USED_BY_WAKE_UP = 8;
 	public final static String USAGE_INTENT = "SERVICE_USED_BY";
 	public final static String USAGE_OFF_INTERVAL = "SERVICE_OFF_INTERVAL";
 
@@ -101,9 +99,23 @@ public class NavigationService extends Service implements LocationListener {
 			final Intent serviceIntent = new Intent(ctx, NavigationService.class);
 			ctx.stopService(serviceIntent);
 		} else {
-			NotificationHelper helper = ((OsmandApplication) getApplication()).getNotificationHelper();
-			helper.updateTopNotification();
-			helper.refreshNotifications();
+			// Issue #3604
+			final OsmandApplication app = (OsmandApplication) getApplication();
+			if ((usedBy == 2) && !(app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get() < 30000) && (serviceOffInterval == 0)) {
+				serviceOffInterval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
+				// From onStartCommand:
+				serviceError = serviceOffInterval / 5;
+				serviceError = Math.min(serviceError, 12 * 60 * 1000);
+				serviceError = Math.max(serviceError, 30 * 1000);
+				serviceError = Math.min(serviceError, serviceOffInterval);
+				app.setNavigationService(this);
+				AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+				pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, OnNavigationServiceAlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
+				alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent);
+			}
+
+			app.getNotificationHelper().updateTopNotification();
+			app.getNotificationHelper().refreshNotifications();
 		}
 	}
 
@@ -254,12 +266,6 @@ public class NavigationService extends Service implements LocationListener {
 		app.getNotificationHelper().removeNotifications();
 		if (app.getNavigationService() != null &&
 				app.getSettings().DISABLE_RECORDING_ONCE_APP_KILLED.get()) {
-			OsMoPlugin plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
-			if (plugin != null) {
-				if (plugin.getTracker().isEnabledTracker()) {
-					plugin.getTracker().disableTracker();
-				}
-			}
 			NavigationService.this.stopSelf();
 		}
 	}

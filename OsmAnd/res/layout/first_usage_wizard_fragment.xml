@@ -530,7 +530,6 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="14dp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -539,6 +538,7 @@
                                 android:orientation="horizontal">
 
                                 <LinearLayout
+                                    android:layout_marginTop="14dp"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -570,7 +570,6 @@
                                     style="@style/Widget.AppCompat.ActionButton"
                                     android:layout_width="44dp"
                                     android:layout_height="60dp"
-                                    android:layout_marginTop="-14dp"
                                     android:contentDescription="@string/shared_string_cancel"
                                     android:src="@drawable/ic_action_refresh_dark"
                                     android:tint="@color/map_widget_blue"
@@ -648,7 +647,6 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="14dp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -657,6 +655,7 @@
                                 android:orientation="horizontal">
 
                                 <LinearLayout
+                                    android:layout_marginTop="14dp"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -688,7 +687,6 @@
                                     style="@style/Widget.AppCompat.ActionButton"
                                     android:layout_width="44dp"
                                     android:layout_height="60dp"
-                                    android:layout_marginTop="-14dp"
                                     android:contentDescription="@string/shared_string_cancel"
                                     android:src="@drawable/ic_action_refresh_dark"
                                     android:tint="@color/map_widget_blue"

@@ -124,7 +124,7 @@
         <string name="poi_vehicle_inspection">Bilsyn</string>
         <string name="poi_car_wash">Bilvask</string>
         <string name="poi_fuel">Tankstation</string>
-        <string name="poi_charging_station">Ladestation</string>
+        <string name="poi_electricity_combined_charging">Ladestation</string>
         <string name="poi_vehicle_ramp">Kørerampe</string>
         <string name="poi_compressed_air">Trykluft</string>
         <string name="poi_parking">Parkering</string>
@@ -132,7 +132,7 @@
         <string name="poi_parking_entrance">Indgang til parkering</string>
         <string name="poi_garages">Garage</string>
 
-        <string name="poi_public_transport_platform">Stoppested</string>
+        <string name="poi_public_transport_platform">Offentligt stoppested</string>
         <string name="poi_public_transport_platform_bus">Busstoppested</string>
         <string name="poi_public_transport_platform_trolleybus">Trolleybus stoppested</string>
         <string name="poi_bus_stop">Busstoppested</string>
@@ -968,10 +968,10 @@
 	<string name="poi_fax">Fax</string>
 	<string name="facebook">Facebook</string>
 	<string name="poi_mobile">Mobiltelefon</string>
-	<string name="poi_animal_shelter_dog">Internat: hund</string>
-	<string name="poi_animal_shelter_cat">Internat: kat</string>
-	<string name="poi_animal_shelter_dog_cat">Internat: hund, kat</string>
-	<string name="poi_animal_shelter_bird">Internat: fugl</string>
+	<string name="poi_animal_shelter_dog">Hunde</string>
+	<string name="poi_animal_shelter_cat">Katte</string>
+	<string name="poi_animal_shelter_dog_cat">Hunde, katte</string>
+	<string name="poi_animal_shelter_bird">Fugle</string>
 
 <string name="poi_shower">Bruser</string>
 	<string name="poi_recycling_centre">Genbrugsplads</string>
@@ -1073,7 +1073,7 @@
 <string name="poi_military_office">Militærkontor</string>
 	<string name="poi_notary">Notar</string>
 	<string name="poi_political_party">Partikontor</string>
-	<string name="poi_tax_advisor">Skatterådgvliningskontor</string>
+	<string name="poi_tax_advisor">Skatterådgivningskontor</string>
 
 	<string name="poi_office_religion">Kontor for trossamfund</string>
 	<string name="poi_association">Foreningskontor</string>
@@ -1577,7 +1577,7 @@
 	<string name="poi_payment_gift_card_no">Gavekort accepteres ikke</string>
 	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">Golden Crown kort accepteres ikke</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">PRO100 kort accepteres ikke</string>
 	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">Union kort accepteres ikke</string>
@@ -1830,7 +1830,7 @@
 	<string name="poi_shelter_type_wildlife_hide">Vildtskjul</string>
 	<string name="poi_shelter_type_rock_shelter">Klippehule</string>
 	<string name="poi_shelter_type_sun_shelter">Solafskærming</string>
-	<string name="poi_shelter_type_field_shelter">Dyreshelter</string>
+	<string name="poi_shelter_type_field_shelter">Friluftsshelter</string>
 	<string name="poi_shelter_type_tent">Sheltertype: telt</string>
 	<string name="poi_shelter_type_abandoned">Sheltertype: forladt</string>
 
@@ -1908,7 +1908,7 @@
 	<string name="poi_bridge_structure_aqueduct">Brokonstruktion: akvædukt</string>
 	<string name="poi_bridge_structure_log">Brokonstruktion: træstamme</string>
 	<string name="poi_bridge_type_movable">Brotype: bevægelig</string>
-	<string name="poi_bridge_movable_bascule">Bevægeligbro: klapbro</string>
+	<string name="poi_bridge_movable_bascule">Bevægelig bro: klapbro</string>
 	<string name="poi_bridge_movable_swing">Bevægeligbro: drejebro</string>
 	<string name="poi_bridge_movable_lift">Bevægeligbro: løftebro</string>
 	<string name="poi_bridge_movable_drawbridge">Bevægeligbro: vindebro</string>
@@ -2146,7 +2146,7 @@
 	<string name="poi_openfire_no">Åben ild ikke tilladt</string>
 	<string name="poi_backcountry_yes">Ja</string>
 	<string name="poi_backcountry_no">Nej</string>
-	<string name="poi_scout_yes">Spejderlejr: ja</string>
+	<string name="poi_scout_yes">Ja</string>
 	<string name="poi_scout_no">Spejderlejr: nej</string>
 	<string name="poi_group_only_yes">Kun grupper: ja</string>
 	<string name="poi_group_only_no">Kun grupper: nej</string>
@@ -2250,7 +2250,7 @@
 
 <string name="poi_cairn">Varde</string>
 
-<string name="poi_memorial_fassade_decoration">Fassade dekoration</string>
+<string name="poi_memorial_fassade_decoration">Facade dekoration</string>
 	<string name="poi_defibrillator">Hjertestarter</string>
 	<string name="poi_defibrillator_yes">Hjertestarter: Ja</string>
 
@@ -2311,7 +2311,7 @@
 	<string name="poi_historic_period_old_kingdom">Historiskperiode: det gamle Kongerige (2686 - 2181 f.Kr.)</string>
 	<string name="poi_historic_period_first_intermediate_period">Historiskperiode: første mellemliggende periode (2181- 2055 f.Kr.)</string>
 	<string name="poi_historic_period_second_intermediate_period">Historiskperiode: anden mellemliggende periode (1650 – 1550 f.Kr.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Historiskperiode: tredje mellemliggende periode (1069 - 664 f.Kr.) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Historiskperiode: tredje mellemliggende periode (1069 - 664 f.Kr.)</string>
 	<string name="poi_historic_period_first_persian_period">Historiskperiode: første persiske periode</string>
 	<string name="poi_historic_period_late_period">Historiskperiode: sene periode (664 - 332 f.Kr.)</string>
 	<string name="poi_historic_period_second_persian_period">Historiskperiode: anden Persiske periode</string>
@@ -2326,7 +2326,7 @@
 	<string name="poi_historic_period_dominate">Historiskperiode: Dominatet (285 e.Kr. – 476 e.Kr)</string>
 	<string name="poi_historic_period_villager">Historiskperiode: landsbyboere (epoke I, II, 1580 f.Kr. - 133 e.Kr.)</string>
 	<string name="poi_historic_period_urban">Historiskperiode: bymæssig (epoke III, 133 e.Kr. - 374 e.Kr.)</string>
-	<string name="poi_historic_period_classical">Historiskperiode: klassisk (epoke IV, 374 e.Kr. - 900 e.Kr.)</string>
+	<string name="poi_historic_period_classical">Historisk periode: klassisk (epoke IV, 374 e.Kr. - 900 e.Kr.)</string>
 	<string name="poi_historic_period_imperial">Historiskperiode: imperial (epoke V, 900 e.Kr. - 1200 e.Kr.)</string>
 
 <string name="poi_tourism_yes">Turistmæssigt objekt</string>
@@ -2508,7 +2508,7 @@
 	<string name="poi_wiki_lang_mn">Mongolsk wiki</string>
 	<string name="poi_wiki_lang_nap">Napolitansk wiki</string>
 
-<string name="poi_craft_electronics">Reparation af elektronik</string>
+<string name="poi_craft_electronics_repair">Reparation af elektronik</string>
 
 <string name="poi_fireworks">Fyrværkeri butik</string>
 
@@ -2794,7 +2794,7 @@
 	<string name="poi_health_facility_type_nursing_home">Sundhedsfacilitetstype: plejehjem</string>
 	<string name="poi_health_facility_type_support_group_home">Sundhedsfacilitetstype: bofællesskab</string>
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Sundhedsspeciale: palliativ medicin</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Palliativ medicin</string>
 
 <string name="poi_suction_point">Sugepunkt</string>
 
@@ -2908,12 +2908,12 @@
 	<string name="poi_fire_hydrant_pressure">Brandhanetryk</string>
 	<string name="poi_fire_hydrant_count">Brandhaneantal</string>
 	<string name="poi_fire_hydrant_flow_capacity">Brandhaneflowkapacitet</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Brandhaneplacering: fortov</string>
-	<string name="poi_fire_hydrant_position_green">Brandhaneplacering: græsplæne</string>
-	<string name="poi_fire_hydrant_position_lane">Brandhaneplacering: vognbane</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Brandhaneplacering: parkeringsplads</string>
-	<string name="poi_fire_hydrant_position_street">Brandhaneplacering: gaden</string>
-	<string name="poi_fire_hydrant_position_underground">Brandhaneplacering: under jorden</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Fortov</string>
+	<string name="poi_fire_hydrant_position_green">Græs</string>
+	<string name="poi_fire_hydrant_position_lane">Kørebane</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Parkeringsplads</string>
+	<string name="poi_fire_hydrant_position_street">Gaden</string>
+	<string name="poi_fire_hydrant_position_underground">Under jorden</string>
 	<string name="poi_fire_hydrant_style_wsh">Brandhanetype: wsh</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Primær</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Dam</string>
@@ -2996,9 +2996,9 @@
 	<string name="poi_payment_troika_no">Troika kort accepteres ikke</string>
 
 <string name="poi_telescope">Teleskop</string>
-	<string name="poi_telescope_type_optical">Teleskop: optisk</string>
-	<string name="poi_telescope_type_radio">Teleskop: radio</string>
-	<string name="poi_telescope_type_gamma">Teleskop: gamma</string>
+	<string name="poi_telescope_type_optical">Optisk</string>
+	<string name="poi_telescope_type_radio">Radio</string>
+	<string name="poi_telescope_type_gamma">Gamma</string>
 	<string name="poi_telescope_diameter">Diameter</string>
 	<string name="poi_telescope_spectrum">Spektrum</string>
 	<string name="poi_telescope_usage_education">Anvendelse: uddannelse</string>
@@ -3064,9 +3064,9 @@
 	<string name="poi_mdf">Hovedkrydsfelt (MDF)</string>
 	<string name="poi_min_age">Minimumsalder</string>
 
-	<string name="poi_organic_yes">Økologiske fødevarer: ja</string>
-	<string name="poi_organic_no">Økologiske fødevarer: nej</string>
-	<string name="poi_organic_only">Kun økologiske fødevarer</string>
+	<string name="poi_organic_yes">Ja</string>
+	<string name="poi_organic_no">Nej</string>
+	<string name="poi_organic_only">Udelukkende</string>
 
 	<string name="poi_traffic_mirror">Trafikspejl</string>
 
@@ -3093,19 +3093,19 @@
 
 	<string name="poi_spices">Kryddeributik</string>
 
-<string name="poi_fuel_type">Type</string>
+<string name="poi_fuel_type">Brændstoftype</string>
 	<string name="poi_payment_type">Betalingstype</string>
 	<string name="poi_additional_type">Yderligere</string>
-<string name="poi_service_bicycle_charging_yes">Cykel opladning: ja</string>
-	<string name="poi_service_bicycle_charging_no">Cykel opladning: nej</string>
+<string name="poi_service_bicycle_charging_yes">Opladning: ja</string>
+	<string name="poi_service_bicycle_charging_no">Opladning: nej</string>
 
 <string name="poi_shop_craft">Kunst og håndværk tilbehørsbutik</string>
 
-	<string name="poi_fuel_avia_type">Type</string>
+	<string name="poi_fuel_avia_type">Brændstoftype (avia)</string>
 	<string name="poi_payment_fuel_type">Benzinkort</string>
-	<string name="poi_internet_access_type">Internet adgangstype</string>
+	<string name="poi_internet_access_type">Internetadgangstype</string>
 	<string name="poi_vending_type">Automattype</string>
-	<string name="poi_bicycle_service">Cykelservice</string>
+	<string name="poi_bicycle_service">Cykelsmed</string>
 	<string name="poi_clothes_type">Type</string>
 	<string name="poi_shoes_type">Type</string>
 	<string name="poi_fire_hydrant_type">Type</string>
@@ -3115,7 +3115,7 @@
 	<string name="poi_traffic_signals_sound">Lyd</string>
 	<string name="poi_highway_crossing_type">Type</string>
 	<string name="poi_tactile_paving">Taktil brolægning</string>
-	<string name="poi_service_car">Service</string>
+	<string name="poi_service_general">Service</string>
 	<string name="poi_brushless">Børsteløs</string>
 	<string name="poi_self_service">Selvbetjening</string>
 	<string name="poi_automated">Automatiseret</string>
@@ -3418,7 +3418,7 @@
 	<string name="poi_animal_keeping">Husdyrhold</string>
 	<string name="poi_animal_keeping_horse">Husdyrhold: hest</string>
 	<string name="poi_animal_keeping_sheep">Husdyrhold: får</string>
-	<string name="poi_animal_keeping_type_paddock">Type: fold</string>
+	<string name="poi_animal_keeping_type_paddock">Type: hestefold</string>
 	<string name="poi_animal_keeping_type_open_stable">Type: åben stald</string>
 
 <string name="poi_tower_construction_lattice">Konstruktion: gitter</string>
@@ -3440,5 +3440,463 @@
 	<string name="poi_drink_wine_served">Vin: serveres</string>
 
 <string name="poi_energy_supplier">Energileverandør-kontor</string>
+
+<string name="poi_electronics_repair_computer">Elektronikreparation: computere</string>
+	<string name="poi_electronics_repair_appliance">Elektronikreparation: husholdningsapparater</string>
+	<string name="poi_electronics_repair_phone">Elektronikreparation: telefon</string>
+	<string name="poi_electronics_repair_tv">Elektronikreparation: tv</string>
+
+<string name="poi_resort_kids_camp">Børneferielejr</string>
+	<string name="poi_music_school">Musikskole</string>
+	<string name="poi_language_school">Sprogskole</string>
+
+<string name="poi_life_ring">Redningskrans</string>
+
+<string name="poi_zoo_type">Type</string>
+
+<string name="poi_zoo_petting_zoo">Børnezoo</string>
+	<string name="poi_zoo_enclosure">Indhegning</string>
+	<string name="poi_zoo_safari_park">Safaripark</string>
+	<string name="poi_zoo_birds">Fugle</string>
+	<string name="poi_zoo_aviary">Voliere</string>
+	<string name="poi_zoo_falconry">Falkoneri</string>
+	<string name="poi_zoo_reptile">Krybdyr</string>
+
+<string name="poi_zoo_wildlife_park">Dyrepark</string>
+	<string name="poi_stands">Stande</string>
+
+<string name="poi_motorcycle_services">Service</string>
+	<string name="poi_motorcycle_type">Motorcykeltype</string>
+
+<string name="poi_motorcycle_sales_yes">Salg</string>
+	<string name="poi_motorcycle_sales_no">Salg: nej</string>
+	<string name="poi_motorcycle_sales_yes_used">Salg: ja; brugt</string>
+	<string name="poi_motorcycle_sales_used">Salg: brugt</string>
+	<string name="poi_motorcycle_rental_yes">Udlejning</string>
+	<string name="poi_motorcycle_rental_no">Udlejning: nej</string>
+	<string name="poi_motorcycle_repair_yes">Reparation</string>
+	<string name="poi_motorcycle_repair_no">Reparation: nej</string>
+	<string name="poi_motorcycle_parts_yes">Reservedele</string>
+	<string name="poi_motorcycle_parts_no">Reservedele: nej</string>
+	<string name="poi_motorcycle_tyres_yes">Dæk</string>
+	<string name="poi_motorcycle_tyres_no">Dæk: nej</string>
+	<string name="poi_motorcycle_clothes_yes">Motorcykelbeklædning</string>
+	<string name="poi_motorcycle_clothes_no">Motorcykelbeklædning: nej</string>
+	<string name="poi_motorcycle_type_scooter">Scooter</string>
+	<string name="poi_motorcycle_type_sportbike">Sportsbike</string>
+	<string name="poi_motorcycle_type_chopper">Chopper</string>
+	<string name="poi_motorcycle_type_offroad">Offroad</string>
+	<string name="poi_motorcycle_type_dualsport">Enduro</string>
+	<string name="poi_motorcycle_type_standard">Standard</string>
+
+<string name="poi_lock_basin">Slusebassin</string>
+	<string name="poi_generator_output_electricity_no">Produktion (elektricitet): nej</string>
+
+<string name="poi_owner">Ejer</string>
+
+<string name="poi_animal_shelter_type">Dyr accepteres</string>
+	<string name="poi_animal_shelter_purpose">Formål</string>
+
+<string name="poi_animal_shelter_wildlife">Vilde dyr</string>
+	<string name="poi_animal_shelter_horse">Heste</string>
+	<string name="poi_animal_shelter_mammal">Pattedyr</string>
+	<string name="poi_animal_shelter_fish">Fisk</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Adoption: ja</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Adoption: nej</string>
+	<string name="poi_animal_shelter_purpose_release_no">Frigivelse: nej</string>
+
+	<string name="poi_spaceport">Rumhavn</string>
+
+<string name="poi_animal_shelter_purpose_release_yes">Frigivelse: ja</string>
+	<string name="poi_direction_n">Retning: nord</string>
+	<string name="poi_direction_nne">Retning: nord-nordøst</string>
+	<string name="poi_direction_ne">Retning: nordøst</string>
+	<string name="poi_direction_ene">Retning: øst-nordøst</string>
+	<string name="poi_direction_e">Retning: øst</string>
+	<string name="poi_direction_ese">Retning: øst-sydøst</string>
+	<string name="poi_direction_se">Retning: sydøst</string>
+	<string name="poi_direction_sse">Retning: syd-sydøst</string>
+	<string name="poi_direction_s">Retning: syd</string>
+	<string name="poi_direction_ssw">Retning: syd-sydvest</string>
+	<string name="poi_direction_sw">Retning: sydvest</string>
+	<string name="poi_direction_wsw">Retning: vest-sydvest</string>
+	<string name="poi_direction_w">Retning: vest</string>
+	<string name="poi_direction_wnw">Retning: vest-nordvest</string>
+	<string name="poi_direction_nw">Retning: nordvest</string>
+	<string name="poi_direction_nnw">Retning: nord-nordvest</string>
+	<string name="poi_direction_forward">Retning: fremad</string>
+	<string name="poi_direction_backward">Retning: bagud</string>
+	<string name="poi_direction_clockwise">Retning: med uret</string>
+	<string name="poi_direction_anticlockwise">Retning: mod uret</string>
+	<string name="poi_direction_up">Retning: op</string>
+	<string name="poi_direction_down">Retning: ned</string>
+	<string name="poi_direction_entrance">Retning: indgang</string>
+	<string name="poi_direction_exit">Retning: udgang</string>
+	<string name="poi_direction_all">Retning: alle</string>
+
+<string name="poi_winter_room_yes">Vinterværelse: ja</string>
+	<string name="poi_winter_room_no">Vinterværelse: nej</string>
+	<string name="poi_reservation_required">Reservation: påkrævet</string>
+	<string name="poi_reservation_recommended">Reservation: anbefalet</string>
+	<string name="poi_reservation_yes">Reservation: ja</string>
+	<string name="poi_reservation_no">Reservation: nej</string>
+	<string name="poi_reservation_members_only">Reservation: kun for medlemmer</string>
+
+	<string name="poi_beds">Senge</string>
+
+<string name="poi_boat_rental_type">Udlejningsbåde</string>
+
+<string name="poi_boat_rental">Bådudlejning</string>
+	<string name="poi_boat_motorboat_rental_yes">Motorbåde: ja</string>
+	<string name="poi_boat_motorboat_rental_no">Motorbåde: nej</string>
+	<string name="poi_boat_houseboat_rental_yes">Husbåde: ja</string>
+	<string name="poi_boat_houseboat_rental_no">Husbåde: nej</string>
+	<string name="poi_boat_pedalboat_rental_yes">Pedalbåde: ja</string>
+	<string name="poi_boat_pedalboat_rental_no">Pedalbåde: nej</string>
+	<string name="poi_boat_jetski_rental_yes">Vandscooter: ja</string>
+	<string name="poi_boat_jetski_rental_no">Vandscooter: nej</string>
+	<string name="poi_boat_sailboat_rental_yes">Sejlbåde: ja</string>
+	<string name="poi_boat_sailboat_rental_no">Sejlbåde: nej</string>
+	<string name="poi_boat_dinghy_rental_rental_yes">Jolle: ja</string>
+	<string name="poi_boat_dinghy_rental_rental_no">Jolle: nej</string>
+	<string name="poi_boat_kayak_rental_rental_yes">Kajakker: ja</string>
+	<string name="poi_boat_kayak_rental_rental_no">Kajakker: nej</string>
+	<string name="poi_boat_canoe_rental_rental_yes">Kano: ja</string>
+	<string name="poi_boat_canoe_rental_rental_no">Kano: nej</string>
+
+<string name="poi_network">Netværk</string>
+
+<string name="poi_government_archive">Arkiv</string>
+	<string name="poi_government_ministry">Ministerie</string>
+	<string name="poi_government_public_service">Offentlig service</string>
+	<string name="poi_government_social_security">Sociale ydelser</string>
+	<string name="poi_government_social_services">Sociale ydelser</string>
+	<string name="poi_government_treasury">Finansministeriet</string>
+	<string name="poi_government_transportation">Transport/motorregister</string>
+	<string name="poi_government_legislative">Lovgivende institution</string>
+
+<string name="poi_seamark_clearance_height">Sejlhøjde</string>
+	<string name="poi_seamark_clearance_height_closed">Sejlhøjde (lukket)</string>
+	<string name="poi_seamark_clearance_height_open">Sejlhøjde (åben)</string>
+	<string name="poi_seamark_clearance_width">Sejlvidde</string>
+
+	<string name="poi_vhf">VHF kanal</string>
+
+<string name="poi_gorge">Kløft</string>
+	<string name="poi_couloir">Couloir</string>
+	<string name="poi_mountain_area">Bjergområde</string>
+
+	<string name="poi_surface_clay">Grus</string>
+	<string name="poi_surface_tartan">Tartan</string>
+	<string name="poi_surface_artificial_turf">Kunstgræs</string>
+	<string name="poi_surface_decoturf">DecoTurf</string>
+	<string name="poi_surface_metal_grid">Metalgitter</string>
+
+<string name="poi_location_underground">Beliggenhed: under jorden</string>
+	<string name="poi_location_underwater">Beliggenhed: under vandet</string>
+	<string name="poi_location_overground">Beliggenhed: over jorden</string>
+	<string name="poi_location_overhead">Beliggenhed: over hovedhøjde</string>
+	<string name="poi_location_roof">Beliggenhed: tag</string>
+	<string name="poi_location_rooftop">Beliggenhed: på taget</string>
+	<string name="poi_location_outdoor">Placering: udendørs</string>
+	<string name="poi_location_indoor">Beliggenhed: indendørs</string>
+	<string name="poi_location_platform">Beliggenhed: platform</string>
+	<string name="poi_location_kiosk">Beliggenhed: præfabrikeret kabinet</string>
+	<string name="poi_location_bridge">Beliggenhed: bro</string>
+	<string name="poi_location_wall">Beliggenhed: væg</string>
+	<string name="poi_location_entrance">Beliggenhed: indgang</string>
+
+	<string name="poi_visibility_house">Synlighed: hus</string>
+	<string name="poi_visibility_street">Synlighed: gaden</string>
+	<string name="poi_visibility_area">Synlighed: område</string>
+
+<string name="poi_operational_status">Driftsstatus</string>
+	<string name="poi_water_supply_type">Vandforsyningstype</string>
+	<string name="poi_water_purification">Vandrensning</string>
+	<string name="poi_water_place_access">Adgang til vandforsyning</string>
+
+<string name="poi_operational_status_open">Åben</string>
+	<string name="poi_operational_status_closed">Lukket</string>
+	<string name="poi_operational_status_restricted">Begrænset</string>
+	<string name="poi_operational_status_broken">I stykker</string>
+	<string name="poi_operational_status_needs_maintenance">Behøver vedligeholdelse</string>
+
+	<string name="poi_water_place_durability_durable">Holdbarhed af vandkilde: holdbar</string>
+	<string name="poi_water_place_durability_emergency">Holdbarhed af vandkilde: nødsituation</string>
+
+	<string name="poi_water_purification_none">Ingen</string>
+	<string name="poi_water_purification_chlorine">Klor</string>
+	<string name="poi_water_purification_reverse_osmosis">Omvendt osmose</string>
+	<string name="poi_water_purification_aquatabs">Aquatabs</string>
+
+	<string name="poi_water_supply_water_well">Vandbrønd</string>
+	<string name="poi_water_supply_pipeline">Rørledning</string>
+	<string name="poi_water_supply_running_water">Rindende vand</string>
+	<string name="poi_water_supply_pump">Pumpe</string>
+	<string name="poi_water_supply_borehole">Boring</string>
+	<string name="poi_water_supply_water_trucking">Vand med lastbil</string>
+	<string name="poi_water_supply_water_tank">Vandtank</string>
+	<string name="poi_water_supply_bottled_water">Flaskevand</string>
+
+	<string name="poi_water_place_access_community">Fællesskab</string>
+	<string name="poi_water_place_access_family">Familie</string>
+	<string name="poi_water_place_access_multifamilies">Flere familier</string>
+
+<string name="poi_socket_cee_blue">Stikkontakt: CEE blå</string>
+	<string name="poi_socket_cee_blue_current">Stikkontakt: CEE blå: strøm</string>
+	<string name="poi_socket_cee_blue_output">Stikkontakt: CEE blå: udgang</string>
+	<string name="poi_socket_cee_red_16a">Stikkontakt: CEE rød 16A</string>
+	<string name="poi_socket_cee_red_16a_current">Stikkontakt: CEE rød 16A: strøm</string>
+	<string name="poi_socket_cee_red_16a_output">Stikkontakt: CEE rød 16A: udgang</string>
+	<string name="poi_socket_cee_red_32a">Stikkontakt: CEE rød 32A</string>
+	<string name="poi_socket_cee_red_32a_current">Stikkontakt: CEE rød 32A: strøm</string>
+	<string name="poi_socket_cee_red_32a_output">Stikkontakt: CEE rød 32A: udgang</string>
+	<string name="poi_socket_cee_red_64a">Stikkontakt: CEE rød 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Stikkontakt: CEE rød 64A: strøm</string>
+	<string name="poi_socket_cee_red_64a_output">Stikkontakt: CEE rød 64A: udgang</string>
+	<string name="poi_socket_cee_red_125a">Stikkontakt: CEE rød 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Stikkontakt: CEE rød 125A: strøm</string>
+	<string name="poi_socket_cee_red_125a_output">Stikkontakt: CEE rød 125A: udgang</string>
+	<string name="poi_socket_type1">Stikkontakt: Type 1</string>
+	<string name="poi_socket_type1_current">Stikkontakt: Type 1: strøm</string>
+	<string name="poi_socket_type1_output">Stikkontakt: Type 1: udgang</string>
+	<string name="poi_socket_type1_combo">Stikkontakt: Type 1 combo</string>
+	<string name="poi_socket_type1_combo_current">Stikkontakt: Type 1 combo: strøm</string>
+	<string name="poi_socket_type1_combo_output">Stikkontakt: Type 1 combo: udgang</string>
+	<string name="poi_socket_type2">Stikkontakt: Type 2</string>
+	<string name="poi_socket_type2_current">Stikkontakt: Type 2: strøm</string>
+	<string name="poi_socket_type2_output">Stikkontakt: Type 2: udgang</string>
+	<string name="poi_socket_type2_combo">Stikkontakt: Type 2 combo</string>
+	<string name="poi_socket_type2_combo_current">Stikkontakt: Type 2 combo: strøm</string>
+	<string name="poi_socket_type2_combo_output">Stikkontakt: Type 2 combo: udgang</string>
+	<string name="poi_socket_type3">Stikkontakt: Type 3</string>
+	<string name="poi_socket_type3_current">Stikkontakt: Type 3: strøm</string>
+	<string name="poi_socket_type3_output">Stikkontakt: Type 3: udgang</string>
+	<string name="poi_socket_chademo">Stikkontakt: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Stikkontakt: CHAdeMO: strøm</string>
+	<string name="poi_socket_chademo_output">Stikkontakt: CHAdeMO: udgang</string>
+	<string name="poi_socket_tesla_standard">Stikkontakt: Tesla standard</string>
+	<string name="poi_socket_tesla_standard_current">Stikkontakt: Tesla standard: strøm</string>
+	<string name="poi_socket_tesla_standard_output">Stikkontakt: Tesla standard: udgang</string>
+	<string name="poi_socket_tesla_supercharger">Stikkontakt: Tesla Supercharger</string>
+	<string name="poi_socket_tesla_supercharger_current">Stikkontakt: Tesla Supercharger: strøm</string>
+	<string name="poi_socket_tesla_supercharger_output">Stikkontakt: Tesla Supercharger: udgang</string>
+	<string name="poi_socket_tesla_roadster">Stikkontakt: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Stikkontakt: Tesla Roadster: strøm</string>
+	<string name="poi_socket_tesla_roadster_output">Stikkontakt: Tesla Roadster: udgang</string>
+	<string name="poi_socket_nema_5_15">Stikkontakt: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Stikkontakt: NEMA 5-15R: strøm</string>
+	<string name="poi_socket_nema_5_15_output">Stikkontakt: NEMA 5-15R: udgang</string>
+	<string name="poi_socket_nema_5_20">Stikkontakt: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Stikkontakt: NEMA 5-20: strøm</string>
+	<string name="poi_socket_nema_5_20_output">Stikkontakt: NEMA 5-20: udgang</string>
+	<string name="poi_socket_nema_14_30">Stikkontakt: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Stikkontakt: NEMA 14-30: strøm</string>
+	<string name="poi_socket_nema_14_30_output">Stikkontakt: NEMA 14-30: udgang</string>
+	<string name="poi_socket_nema_14_50">Stikkontakt: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Stikkontakt: NEMA 14-50: strøm</string>
+	<string name="poi_socket_nema_14_50_output">Stikkontakt: NEMA 14-50: udgang</string>
+	<string name="poi_socket_schuko">Stikkontakt: Schuko</string>
+	<string name="poi_socket_schuko_current">Stikkontakt: Schuko: strøm</string>
+	<string name="poi_socket_schuko_output">Stikkontakt: Schuko: udgang</string>
+	<string name="poi_socket_bs1363">Stikkontakt: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Stikkontakt: BS 1363: strøm</string>
+	<string name="poi_socket_bs1363_output">Stikkontakt: BS 1363: udgang</string>
+	<string name="poi_socket_as3112">Stikkontakt: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Stikkontakt: AS/NZS 3112: strøm</string>
+	<string name="poi_socket_as3112_output">Stikkontakt: AS/NZS 3112: udgang</string>
+
+	<string name="poi_car_yes">Bil: ja</string>
+	<string name="poi_car_no">Bil: nej</string>
+	<string name="poi_bicycle_yes">Cykel: ja</string>
+	<string name="poi_bicycle_no">Cykel: nej</string>
+	<string name="poi_scooter_yes">Scooter: ja</string>
+	<string name="poi_scooter_no">Scooter: nej</string>
+	<string name="poi_truck_yes">Lastbil: ja</string>
+	<string name="poi_truck_no">Lastbil: nej</string>
+
+	<string name="poi_parking_fee_yes">Parkeringsafgift: ja</string>
+	<string name="poi_parking_fee_no">Parkeringsafgift: nej</string>
+	<string name="poi_parking_fee">Parkeringsafgift</string>
+
+	<string name="poi_amperage">Strømstyrke</string>
+	<string name="poi_charging_station_output">Ladestation udgang</string>
+
+<string name="poi_map_type_topo">Korttype: topografisk</string>
+	<string name="poi_map_type_street">Korttype: gadekort</string>
+	<string name="poi_map_type_scheme">Korttype: skematisk</string>
+	<string name="poi_map_type_toposcope">Korttype: panoramakort</string>
+	<string name="poi_map_size_site">Kortdækning: sted</string>
+	<string name="poi_map_size_city">Kortdækning: by</string>
+	<string name="poi_map_size_region">Kortdækning: region</string>
+
+<string name="poi_charging_station_filter">Ladestation</string>
+
+<string name="poi_depot">Depot</string>
+
+<string name="poi_letter_box">Brevkasse</string>
+	<string name="poi_post_street">Gade</string>
+	<string name="poi_post_housenumber">Husnummer</string>
+	<string name="poi_post_flats">Lejlighed</string>
+
+<string name="poi_payment_centre">Betalingscenter</string>
+	<string name="poi_money_transfer">Pengeoverførsel</string>
+
+<string name="poi_route_subway_ref">Metro</string>
+
+	<string name="poi_climbing_style">Klatrestil</string>
+
+<string name="poi_ref_post">Postnummer</string>
+
+	<string name="poi_climbing_sport_yes">Sport: ja</string>
+	<string name="poi_climbing_sport_no">Sport: nej</string>
+	<string name="poi_climbing_boulder_yes">Bouldering: ja</string>
+	<string name="poi_climbing_boulder_no">Bouldering: nej</string>
+	<string name="poi_climbing_toprope_yes">Toprope: ja</string>
+	<string name="poi_climbing_toprope_no">Toprope: nej</string>
+	<string name="poi_climbing_trad_yes">Traditionel: ja</string>
+	<string name="poi_climbing_trad_no">Traditionel: nej</string>
+	<string name="poi_climbing_multipitch_yes">Multi-pitch ruter: ja</string>
+	<string name="poi_climbing_multipitch_no">Multi-pitch ruter: nej</string>
+	<string name="poi_climbing_ice_yes">Is: ja</string>
+	<string name="poi_climbing_ice_no">Is: nej</string>
+	<string name="poi_climbing_mixed_yes">Blandet: ja</string>
+	<string name="poi_climbing_mixed_no">Blandet: nej</string>
+	<string name="poi_climbing_deepwater_yes">Deep-water soloing (psicobloc): ja</string>
+	<string name="poi_climbing_deepwater_no">Deep-water soloing (psicobloc): nej</string>
+
+	<string name="poi_climbing_length">Klatrelængde</string>
+	<string name="poi_climbing_length_min">Klatrelængde min</string>
+	<string name="poi_climbing_length_max">Klatrelængde max</string>
+	<string name="poi_climbing_rock_limestone">Klatresten: kalksten</string>
+	<string name="poi_climbing_rock_granite">Klatresten: granit</string>
+	<string name="poi_climbing_rock_sandstone">Klatresten: sandsten</string>
+	<string name="poi_climbing_rock_quartzite">Klatresten: kvartsit</string>
+	<string name="poi_climbing_rock_gneiss">Klatresten: gnejs</string>
+	<string name="poi_climbing_rock_porphyry">Klatresten: porfyr</string>
+	<string name="poi_climbing_quality_solid">Klatringskvalitet: solid</string>
+	<string name="poi_climbing_quality_fragile">Klatringskvalitet: skrøbelig</string>
+	<string name="poi_climbing_bolted_yes">Faste ankre: ja</string>
+	<string name="poi_climbing_bolted_no">Faste ankre: nej</string>
+	<string name="poi_climbing_orientation_n">Orientering af væg: N</string>
+	<string name="poi_climbing_orientation_ne">Orientering af væg: NØ</string>
+	<string name="poi_climbing_orientation_e">Orientering af væg: Ø</string>
+	<string name="poi_climbing_orientation_se">Orientering af væg: SØ</string>
+	<string name="poi_climbing_orientation_s">Orientering af væg: S</string>
+	<string name="poi_climbing_orientation_sw">Orientering af væg: SV</string>
+	<string name="poi_climbing_orientation_w">Orientering af væg: V</string>
+	<string name="poi_climbing_orientation_nw">Orientering af væg: NV</string>
+	<string name="poi_climbing_summit_log_yes">Klatring-bjergtop log: ja</string>
+	<string name="poi_climbing_summit_log_no">Klatring-bjergtop log: nej</string>
+	<string name="poi_climbing_routes">Klatreruter</string>
+
+
+<string name="poi_circumference">Omkreds</string>
+	<string name="poi_diameter_crown">Kronens diameter</string>
+
+	<string name="poi_meadow_agricultural">Type: landbrug</string>
+	<string name="poi_meadow_perpetual">Type: permanent</string>
+	<string name="poi_meadow_transitional">Type: midlertidig</string>
+	<string name="poi_meadow_pasture">Type: græsgang</string>
+
+	<string name="poi_frozen_food">Frosne fødevarer</string>
+
+
+<string name="poi_agrarian">Gårdbutik</string>
+
+
+<string name="poi_shop_fireplace">Pejsebutik</string>
+
+<string name="poi_shop_boat">Bådforretning</string>
+
+	<string name="poi_cannabis">Cannabisbutik</string>
+
+
+<string name="poi_socket">Stikkontakt</string>
+	<string name="poi_socket_chademo_output_filter">CHAdeMO-udgang</string>
+	<string name="poi_socket_type2_output_filter">Type 2-udgang</string>
+	<string name="poi_socket_type2_combo_output_filter">Type 2-combo-udgang</string>
+	<string name="poi_socket_type3_output_filter">Type 3-udgang</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE blå udgang</string>
+	<string name="poi_socket_schuko_output_filter">Schuko-udgang</string>
+
+<string name="poi_socket_cee_blue_yes">CEE blå</string>
+	<string name="poi_socket_cee_red_16a_yes">CEE rød 16A</string>
+	<string name="poi_socket_cee_red_32a_yes">CEE rød 32A</string>
+	<string name="poi_socket_cee_red_64a_yes">CEE rød 64A</string>
+	<string name="poi_socket_cee_red_125a_yes">CEE rød 125A</string>
+	<string name="poi_socket_type1_yes">Type 1</string>
+	<string name="poi_socket_type1_combo_yes">Type 1 combo</string>
+	<string name="poi_socket_type2_yes">Type 2</string>
+	<string name="poi_socket_type2_combo_yes">Type 2-combo</string>
+	<string name="poi_socket_type3_yes">Type 3</string>
+	<string name="poi_socket_chademo_yes">CHAdeMO</string>
+	<string name="poi_socket_tesla_standard_yes">Tesla standard</string>
+	<string name="poi_socket_tesla_supercharger_yes">Tesla Supercharger</string>
+	<string name="poi_socket_tesla_roadster_yes">Tesla Roadster</string>
+	<string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
+	<string name="poi_socket_nema_14_30_yes">NEMA 14-30</string>
+	<string name="poi_socket_nema_14_50_yes">NEMA 14-50</string>
+	<string name="poi_socket_schuko_yes">Schuko</string>
+	<string name="poi_socket_bs1363_yes">BS 1363</string>
+	<string name="poi_socket_as3112_yes">AS/NZS 3112</string>
+
+	<string name="poi_socket_chademo_output_high">Høj</string>
+	<string name="poi_socket_chademo_output_medium">Mellem</string>
+	<string name="poi_socket_chademo_output_low">Lav</string>
+	<string name="poi_socket_type2_output_high">Høj</string>
+	<string name="poi_socket_type2_output_medium">Mellem</string>
+	<string name="poi_socket_type2_output_low">Lav</string>
+	<string name="poi_socket_type2_combo_output_high">Høj</string>
+	<string name="poi_socket_type2_combo_output_medium">Mellem</string>
+	<string name="poi_socket_type2_combo_output_low">Lav</string>
+	<string name="poi_socket_type3_output_high">Høj</string>
+	<string name="poi_socket_type3_output_medium">Mellem</string>
+	<string name="poi_socket_type3_output_low">Lav</string>
+	<string name="poi_socket_cee_blue_output_high">Høj</string>
+	<string name="poi_socket_cee_blue_output_medium">Mellem</string>
+	<string name="poi_socket_cee_blue_output_low">Lav</string>
+	<string name="poi_socket_schuko_output_high">Høj</string>
+	<string name="poi_socket_schuko_output_medium">Mellem</string>
+	<string name="poi_socket_schuko_output_low">Lav</string>
+
+<string name="poi_flooring">Gulvbutik</string>
+	<string name="poi_pottery">Keramik</string>
+
+<string name="synonyms_poi_fuel">Tankstation;Benzintank;Servicestation</string>
+
+	<string name="synonyms_poi_nightclub">Diskotek;Disko;Disco</string>
+	<string name="poi_whitewater_rapid_name">Strømfaldets navn</string>
+
+	<string name="poi_outpost">Butikkens leveringssted</string>
+
+	<string name="poi_barbecue_grill">Barbecue grill: ja</string>
+
+	<string name="poi_water_utility">Vandværkskontor</string>
+
+<string name="poi_amusement_arcade">Spillehal</string>
+	<string name="poi_adult_gaming_centre">Spillecenter for voksne</string>
+
+<string name="poi_service_car">Bilservice</string>
+
+<string name="poi_service_vehicle_oil_change_yes">Olieskift</string>
+	<string name="poi_service_vehicle_brakes_yes">Bremser</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnosticering</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Aircondition</string>
+	<string name="poi_service_vehicle_wheels_yes">Hjul</string>
+	<string name="poi_service_vehicle_glass_yes">glas</string>
+	<string name="poi_service_vehicle_motor_yes">Motor</string>
+	<string name="poi_service_vehicle_insurance_yes">Forsikring</string>
+	<string name="poi_service_vehicle_tyres_yes">Dæk</string>
+
+<string name="poi_aerialway_zip_line">Zipline</string>
+
+	<string name="poi_climbing_adventure">Klatre eventyr</string>
+
+<string name="poi_via_ferrata">Via ferrata</string>
+	<string name="poi_cable_number">Kabelnummer</string>
+	<string name="poi_via_ferrata_scale">Sværhedsgrad</string>
 
 </resources>

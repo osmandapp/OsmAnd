@@ -10,4 +10,8 @@
 
     <dimen name="quick_action_widget_height_big">200dp</dimen>
     <dimen name="quick_action_widget_height_small">100dp</dimen>
+
+    <dimen name="context_img_card_width">280dp</dimen>
+    <dimen name="context_img_card_height">160dp</dimen>
+
 </resources>

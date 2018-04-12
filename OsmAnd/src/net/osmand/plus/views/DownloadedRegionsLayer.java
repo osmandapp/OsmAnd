@@ -11,9 +11,9 @@ import android.graphics.PointF;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -410,7 +410,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	// IContextMenuProvider
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects, boolean unknownLocation) {
 		boolean isMenuVisible = false;
 		if (view.getContext() instanceof MapActivity) {
 			MapActivity mapActivity = (MapActivity) view.getContext();
@@ -455,6 +455,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public boolean isObjectClickable(Object o) {
+		return false;
+	}
+
+	@Override
+	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
 		return false;
 	}
 

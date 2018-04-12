@@ -1,10 +1,15 @@
 package net.osmand.plus.download.ui;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -14,10 +19,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidUtils;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -30,13 +39,23 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.inapp.InAppHelper;
+import net.osmand.plus.inapp.InAppHelper.InAppListener;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class DownloadResourceGroupFragment extends DialogFragment implements DownloadEvents, OnChildClickListener {
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class DownloadResourceGroupFragment extends DialogFragment implements DownloadEvents,
+		InAppListener, OnChildClickListener {
 	public static final int RELOAD_ID = 0;
 	public static final int SEARCH_ID = 1;
 	public static final String TAG = "RegionDialogFragment";
@@ -50,6 +69,8 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	private DownloadActivity activity;
 	private Toolbar toolbar;
 	private View searchView;
+	private View restorePurchasesView;
+	private View subscribeEmailView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -80,7 +101,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		activity.getAccessibilityAssistant().registerPage(view, DownloadActivity.DOWNLOAD_TAB_NUMBER);
 
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -100,14 +121,55 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			banner = null;
 			view.findViewById(R.id.freeVersionBanner).setVisibility(View.GONE);
 		}
-
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
+		addSubscribeEmailRow();
 		addSearchRow();
+		addRestorePurchasesRow();
 		listView.setOnChildClickListener(this);
 		listAdapter = new DownloadResourceGroupAdapter(activity);
 		listView.setAdapter(listAdapter);
 
 		return view;
+	}
+
+	private void addSubscribeEmailRow() {
+		if (DownloadActivity.shouldShowFreeVersionBanner(activity.getMyApplication())
+				&& !getMyApplication().getSettings().EMAIL_SUBSCRIBED.get()) {
+			subscribeEmailView = activity.getLayoutInflater().inflate(R.layout.subscribe_email_header, null, false);
+			subscribeEmailView.findViewById(R.id.subscribe_btn).setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					subscribe();
+				}
+			});
+			listView.addHeaderView(subscribeEmailView);
+			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
+			if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()
+					|| DownloadActivity.isDownlodingPermitted(activity.getMyApplication().getSettings())) {
+				subscribeEmailView.findViewById(R.id.container).setVisibility(View.GONE);
+			}
+		}
+	}
+
+	private void addRestorePurchasesRow() {
+		if (!openAsDialog() && !InAppHelper.isInAppIntentoryRead()) {
+			restorePurchasesView = activity.getLayoutInflater().inflate(R.layout.restore_purchases_list_footer, null);
+			((ImageView) restorePurchasesView.findViewById(R.id.icon)).setImageDrawable(
+					getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
+			restorePurchasesView.findViewById(R.id.button).setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					restorePurchasesView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+					activity.startInAppHelper();
+				}
+			});
+			listView.addFooterView(restorePurchasesView);
+			listView.setFooterDividersEnabled(false);
+			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
+			if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()) {
+				restorePurchasesView.findViewById(R.id.container).setVisibility(View.GONE);
+			}
+		}
 	}
 
 	private void addSearchRow() {
@@ -124,20 +186,173 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 				}
 			});
 			listView.addHeaderView(searchView);
-			listView.setHeaderDividersEnabled(false);
+			listView.setHeaderDividersEnabled(true);
 			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
 			if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()) {
-				title.setVisibility(View.GONE);
+				searchView.findViewById(R.id.title).setVisibility(View.GONE);
+				listView.setHeaderDividersEnabled(false);
 			}
 		}
 	}
 
 	private void updateSearchView() {
+		IndexItem worldBaseMapItem = null;
 		if (searchView != null && searchView.findViewById(R.id.title).getVisibility() == View.GONE) {
-			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
+			worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
 			if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
 				searchView.findViewById(R.id.title).setVisibility(View.VISIBLE);
+				listView.setHeaderDividersEnabled(true);
 			}
+		}
+		if (restorePurchasesView != null && restorePurchasesView.findViewById(R.id.container).getVisibility() == View.GONE
+				&& !InAppHelper.isInAppIntentoryRead()) {
+			if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
+				restorePurchasesView.findViewById(R.id.container).setVisibility(View.VISIBLE);
+			}
+		}
+	}
+
+	private void updateSubscribeEmailView() {
+		if (subscribeEmailView != null && subscribeEmailView.findViewById(R.id.container).getVisibility() == View.GONE
+				&& !DownloadActivity.isDownlodingPermitted(getMyApplication().getSettings())
+				&& !getMyApplication().getSettings().EMAIL_SUBSCRIBED.get()) {
+			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
+			if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
+				subscribeEmailView.findViewById(R.id.container).setVisibility(View.VISIBLE);
+			}
+		}
+	}
+
+	private void hideSubscribeEmailView() {
+		if (subscribeEmailView != null && subscribeEmailView.findViewById(R.id.container).getVisibility() == View.VISIBLE) {
+			subscribeEmailView.findViewById(R.id.container).setVisibility(View.GONE);
+		}
+	}
+
+	private void subscribe() {
+		AlertDialog.Builder b = new AlertDialog.Builder(activity);
+		b.setTitle(R.string.shared_string_email_address);
+		final EditText editText = new EditText(activity);
+		int leftPadding = AndroidUtils.dpToPx(activity, 24f);
+		int topPadding = AndroidUtils.dpToPx(activity, 4f);
+		b.setView(editText, leftPadding, topPadding, leftPadding, topPadding);
+		b.setPositiveButton(R.string.shared_string_ok, null);
+		b.setNegativeButton(R.string.shared_string_cancel, null);
+		final AlertDialog alertDialog = b.create();
+		alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+			@Override
+			public void onShow(DialogInterface dialog) {
+				alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
+						new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								String email = editText.getText().toString();
+								if (Algorithms.isEmpty(email) || !AndroidUtils.isValidEmail(email)) {
+									getMyApplication().showToastMessage(getString(R.string.osm_live_enter_email));
+									return;
+								}
+								doSubscribe(email);
+								alertDialog.dismiss();
+							}
+						});
+			}
+		});
+		alertDialog.show();
+	}
+
+	private void doSubscribe(final String email) {
+		new AsyncTask<Void, Void, String>() {
+
+			ProgressDialog dlg;
+
+			@Override
+			protected void onPreExecute() {
+				dlg = new ProgressDialog(getActivity());
+				dlg.setTitle("");
+				dlg.setMessage(getString(R.string.wait_current_task_finished));
+				dlg.setCancelable(false);
+				dlg.show();
+			}
+
+			@Override
+			protected String doInBackground(Void... params) {
+				try {
+					Map<String, String> parameters = new HashMap<>();
+					parameters.put("aid", Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.ANDROID_ID));
+					parameters.put("email", email);
+
+					return AndroidNetworkUtils.sendRequest(getMyApplication(),
+							"http://download.osmand.net/subscription/register_email.php",
+							parameters, "Subscribing email...", true, true);
+
+				} catch (Exception e) {
+					return null;
+				}
+			}
+
+			@Override
+			protected void onPostExecute(String response) {
+				if (dlg != null) {
+					dlg.dismiss();
+					dlg = null;
+				}
+				OsmandApplication app = getMyApplication();
+				if (response == null) {
+					app.showShortToastMessage(activity.getString(R.string.shared_string_unexpected_error));
+				} else {
+					try {
+						JSONObject obj = new JSONObject(response);
+						String responseEmail = obj.getString("email");
+						if (!email.equalsIgnoreCase(responseEmail)) {
+							app.showShortToastMessage(activity.getString(R.string.shared_string_unexpected_error));
+						} else {
+							int newDownloads = app.getSettings().NUMBER_OF_FREE_DOWNLOADS.get().intValue() - 3;
+							if(newDownloads < 0) {
+								newDownloads = 0;
+							} else if(newDownloads > DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - 3) {
+								newDownloads = DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - 3;
+							}
+							app.getSettings().NUMBER_OF_FREE_DOWNLOADS.set(newDownloads);
+							app.getSettings().EMAIL_SUBSCRIBED.set(true);
+							hideSubscribeEmailView();
+							activity.updateBanner();
+						}
+					} catch (JSONException e) {
+						String message = "JSON parsing error: "
+								+ (e.getMessage() == null ? "unknown" : e.getMessage());
+						app.showShortToastMessage(MessageFormat.format(
+								activity.getString(R.string.error_message_pattern), message));
+					}
+				}
+			}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+	}
+
+	@Override
+	public void onError(String error) {
+	}
+
+	@Override
+	public void onGetItems() {
+		if (restorePurchasesView != null && restorePurchasesView.findViewById(R.id.container).getVisibility() == View.VISIBLE) {
+			restorePurchasesView.findViewById(R.id.container).setVisibility(View.GONE);
+		}
+	}
+
+	@Override
+	public void onItemPurchased(String sku) {
+		getMyApplication().getDownloadThread().runReloadIndexFilesSilent();
+		//reloadData();
+	}
+
+	@Override
+	public void showProgress() {
+	}
+
+	@Override
+	public void dismissProgress() {
+		if (restorePurchasesView != null && restorePurchasesView.findViewById(R.id.container).getVisibility() == View.VISIBLE) {
+			restorePurchasesView.findViewById(R.id.progressBar).setVisibility(View.GONE);
 		}
 	}
 
@@ -169,6 +384,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		if (!openAsDialog()) {
 			updateSearchView();
 		}
+		updateSubscribeEmailView();
 		DownloadResources indexes = activity.getDownloadThread().getIndexes();
 		group = indexes.getGroupById(groupId);
 		if (group != null) {
@@ -194,7 +410,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 
 	@Override
 	public void newDownloadIndexes() {
-		if(banner != null) {
+		if (banner != null) {
 			banner.updateBannerInProgress();
 		}
 		reloadData();
@@ -202,15 +418,20 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 
 	@Override
 	public void downloadHasFinished() {
-		if(banner != null) {
+		if (banner != null) {
 			banner.updateBannerInProgress();
+		}
+		if (subscribeEmailView != null
+				&& !DownloadActivity.isDownlodingPermitted(activity.getMyApplication().getSettings())
+				&& !getMyApplication().getSettings().EMAIL_SUBSCRIBED.get()) {
+			subscribeEmailView.findViewById(R.id.container).setVisibility(View.VISIBLE);
 		}
 		listAdapter.notifyDataSetChanged();
 	}
 
 	@Override
 	public void downloadInProgress() {
-		if(banner != null) {
+		if (banner != null) {
 			banner.updateBannerInProgress();
 		}
 		listAdapter.notifyDataSetChanged();
@@ -308,6 +529,8 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			if (group.getType() == DownloadResourceGroupType.VOICE_REC
 					|| group.getType() == DownloadResourceGroupType.VOICE_TTS) {
 				iconLeft = ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_volume_up);
+			} else if (group.getType() == DownloadResourceGroupType.FONTS) {
+				iconLeft = ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_map_language);
 			} else {
 				IconsCache cache = ctx.getMyApplication().getIconsCache();
 				if (isParentWorld(group) || isParentWorld(group.getParentGroup())) {

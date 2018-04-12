@@ -38,6 +38,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -46,8 +47,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	public static final int REQUEST_LOCATION_PERMISSION = 100;
 
-	private static final String SIMULATED_PROVIDER = "OsmAnd";
-
+	public static final String SIMULATED_PROVIDER = "OsmAnd";
 
 	public interface OsmAndLocationListener {
 		void updateLocation(net.osmand.Location location);
@@ -69,6 +69,15 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final int GPS_TIMEOUT_REQUEST = 0;
 	private static final int GPS_DIST_REQUEST = 0;
 	private static final int NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS = 12000;
+
+	private static final long STALE_LOCATION_TIMEOUT = 1000 * 60 * 5; // 5 minutes
+	private static final long STALE_LOCATION_TIMEOUT_FOR_UI = 1000 * 60 * 15; // 15 minutes
+
+	private static final int REQUESTS_BEFORE_CHECK_LOCATION = 100;
+	private int locationRequestsCounter;
+	private int staleLocationRequestsCounter;
+
+	private net.osmand.Location cachedLocation;
 
 	private long lastTimeGPSLocationFixed = 0;
 	private boolean gpsSignalLost;
@@ -494,8 +503,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private float calcGeoMagneticCorrection(float val) {
-		if (previousCorrectionValue == 360 && getLastKnownLocation() != null) {
-			net.osmand.Location l = getLastKnownLocation();
+		net.osmand.Location l = getLastKnownLocation();
+		if (previousCorrectionValue == 360 && l != null) {
 			GeomagneticField gf = new GeomagneticField((float) l.getLatitude(), (float) l.getLongitude(), (float) l.getAltitude(),
 					System.currentTimeMillis());
 			previousCorrectionValue = gf.getDeclination();
@@ -850,8 +859,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return currentPositionHelper.getLastKnownRouteSegment(getLastKnownLocation());
 	}
 	
-	public boolean getRouteSegment(net.osmand.Location loc, ResultMatcher<RouteDataObject> result) {
-		return currentPositionHelper.getRouteSegment(loc, result);
+	public boolean getRouteSegment(net.osmand.Location loc, @Nullable ApplicationMode appMode,
+								   ResultMatcher<RouteDataObject> result) {
+		return currentPositionHelper.getRouteSegment(loc, appMode, result);
 	}
 	
 	public boolean getGeocodingResult(net.osmand.Location loc, ResultMatcher<GeocodingResult> result) {
@@ -859,7 +869,36 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public net.osmand.Location getLastKnownLocation() {
+		net.osmand.Location location = this.location;
+		if (location != null && locationRequestsCounter == 0
+				&& System.currentTimeMillis() - location.getTime() > STALE_LOCATION_TIMEOUT) {
+			location = null;
+		}
+		if (locationRequestsCounter == REQUESTS_BEFORE_CHECK_LOCATION) {
+			locationRequestsCounter = 0;
+		} else {
+			locationRequestsCounter++;
+		}
 		return location;
+	}
+
+	@Nullable
+	public net.osmand.Location getLastStaleKnownLocation() {
+		net.osmand.Location newLoc = getLastKnownLocation();
+		if (newLoc == null) {
+			if (staleLocationRequestsCounter == 0 && cachedLocation != null
+					&& System.currentTimeMillis() - cachedLocation.getTime() > STALE_LOCATION_TIMEOUT_FOR_UI) {
+				cachedLocation = null;
+			}
+		} else {
+			cachedLocation = newLoc;
+		}
+		if (staleLocationRequestsCounter == REQUESTS_BEFORE_CHECK_LOCATION) {
+			staleLocationRequestsCounter = 0;
+		} else {
+			staleLocationRequestsCounter++;
+		}
+		return cachedLocation;
 	}
 
 

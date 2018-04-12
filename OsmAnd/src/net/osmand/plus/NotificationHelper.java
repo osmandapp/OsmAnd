@@ -2,11 +2,10 @@ package net.osmand.plus;
 
 import android.app.Notification;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v4.app.NotificationManagerCompat;
 
-import net.osmand.plus.notifications.GpsWakeUpNotification;
 import net.osmand.plus.notifications.GpxNotification;
 import net.osmand.plus.notifications.NavigationNotification;
-import net.osmand.plus.notifications.OsMoNotification;
 import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 
@@ -19,8 +18,6 @@ public class NotificationHelper {
 
 	private NavigationNotification navigationNotification;
 	private GpxNotification gpxNotification;
-	private OsMoNotification osMoNotification;
-	private GpsWakeUpNotification gpsWakeUpNotification;
 	private List<OsmandNotification> all = new ArrayList<>();
 
 	public NotificationHelper(OsmandApplication app) {
@@ -31,12 +28,8 @@ public class NotificationHelper {
 	private void init() {
 		navigationNotification = new NavigationNotification(app);
 		gpxNotification = new GpxNotification(app);
-		osMoNotification = new OsMoNotification(app);
-		gpsWakeUpNotification = new GpsWakeUpNotification(app);
 		all.add(navigationNotification);
 		all.add(gpxNotification);
-		all.add(osMoNotification);
-		all.add(gpsWakeUpNotification);
 	}
 
 	public Notification buildTopNotification() {
@@ -56,10 +49,6 @@ public class NotificationHelper {
 			notification = navigationNotification;
 		} else if (gpxNotification.isEnabled() && gpxNotification.isActive()) {
 			notification = gpxNotification;
-		} else if (gpsWakeUpNotification.isEnabled()) {
-			notification = gpsWakeUpNotification;
-		} else if (osMoNotification.isEnabled() && osMoNotification.isActive()) {
-			notification = osMoNotification;
 		}
 		return notification;
 	}
@@ -76,11 +65,11 @@ public class NotificationHelper {
 	}
 
 	public void showNotifications() {
-		boolean navNotificationVisible = navigationNotification.showNotification();
-		gpxNotification.showNotification();
-		osMoNotification.showNotification();
-		if (!navNotificationVisible && !gpxNotification.isActive()) {
-			gpsWakeUpNotification.showNotification();
+		if (!hasAnyTopNotification()) {
+			removeTopNotification();
+		}
+		for (OsmandNotification notification : all) {
+			notification.showNotification();
 		}
 	}
 
@@ -102,15 +91,27 @@ public class NotificationHelper {
 		}
 	}
 
-	public void refreshNotifications() {
-		boolean navNotificationVisible = navigationNotification.refreshNotification();
-		gpxNotification.refreshNotification();
-		osMoNotification.refreshNotification();
-		if (!navNotificationVisible && !gpxNotification.isActive()) {
-			gpsWakeUpNotification.refreshNotification();
-		} else {
-			gpsWakeUpNotification.removeNotification();
+	public boolean hasAnyTopNotification() {
+		for (OsmandNotification notification : all) {
+			if (notification.isTop()) {
+				return true;
+			}
 		}
+		return false;
+	}
+
+	public void refreshNotifications() {
+		if (!hasAnyTopNotification()) {
+			removeTopNotification();
+		}
+		for (OsmandNotification notification : all) {
+			notification.refreshNotification();
+		}
+	}
+
+	public void removeTopNotification() {
+		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
+		notificationManager.cancel(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID);
 	}
 
 	public void removeNotification(NotificationType notificationType) {

@@ -89,7 +89,7 @@
                         android:layout_height="56dp"
                         android:paddingRight="16dp"
                         android:scaleType="center"
-                        android:src="@drawable/ic_sdcard"
+                        android:src="@drawable/ic_action_phone"
                         tools:background="@color/color_warning"/>
 
                     <LinearLayout
@@ -140,7 +140,7 @@
                         android:layout_height="56dp"
                         android:paddingRight="16dp"
                         android:scaleType="center"
-                        android:src="@drawable/ic_sdcard"
+                        android:src="@drawable/ic_action_phone"
                         tools:background="@color/color_warning"/>
 
                     <LinearLayout

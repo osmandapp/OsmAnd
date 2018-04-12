@@ -1,5 +1,13 @@
 package net.osmand.map;
 
+import net.osmand.PlatformUtil;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -18,15 +26,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.PlatformUtil;
-import net.osmand.osm.io.NetworkUtils;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
-
 import bsh.Interpreter;
 
 
@@ -35,6 +34,22 @@ public class TileSourceManager {
 	public static final String RULE_BEANSHELL = "beanshell";
 	public static final String RULE_YANDEX_TRAFFIC = "yandex_traffic";
 	private static final String RULE_WMS = "wms_tile";
+
+	private static final TileSourceTemplate MAPNIK_SOURCE =
+			new TileSourceTemplate("OsmAnd (online tiles)", "http://tile.osmand.net/hd/{0}/{1}/{2}.png", ".png", 19, 1, 512, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+	private static final TileSourceTemplate CYCLE_MAP_SOURCE =
+			new TileSourceTemplate("CycleMap", "https://b.tile.thunderforest.com/cycle/{0}/{1}/{2}.png?apikey=a778ae1a212641d38f46dc11f20ac116", ".png", 16, 1, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$ http://b.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png
+	private static final TileSourceTemplate MAPILLARY_RASTER_SOURCE =
+			new TileSourceTemplate("Mapillary (raster tiles)", "https://d6a1v2w10ny40.cloudfront.net/v0.1/{0}/{1}/{2}.png", ".png", 13, 0, 256, 16, 32000);
+	private static final TileSourceTemplate MAPILLARY_VECTOR_SOURCE =
+			new TileSourceTemplate("Mapillary (vector tiles)", "https://d25uarhxywzl1j.cloudfront.net/v0.1/{0}/{1}/{2}.mvt", ".mvt", 21, 14, 256, 16, 3200);
+
+	static {
+		MAPILLARY_RASTER_SOURCE.setExpirationTimeMinutes(60 * 24);
+		MAPILLARY_RASTER_SOURCE.setHidden(true);
+		MAPILLARY_VECTOR_SOURCE.setExpirationTimeMinutes(60 * 24);
+		MAPILLARY_VECTOR_SOURCE.setHidden(true);
+	}
 
 	public static class TileSourceTemplate implements ITileSource, Cloneable {
 		private int maxZoom;
@@ -49,7 +64,8 @@ public class TileSourceManager {
 		private int expirationTimeMillis = -1;
 		private boolean ellipticYTile;
 		private String rule;
-		
+		private boolean hidden; // if hidden in configure map settings, for example mapillary sources
+
 		private boolean isRuleAcceptable = true;
 
 		public TileSourceTemplate(String name, String urlToLoad, String ext, int maxZoom, int minZoom, int tileSize, int bitDensity,
@@ -79,8 +95,15 @@ public class TileSourceManager {
 		public void setMaxZoom(int maxZoom) {
 			this.maxZoom = maxZoom;
 		}
-		
-		
+
+		public boolean isHidden() {
+			return hidden;
+		}
+
+		public void setHidden(boolean hidden) {
+			this.hidden = hidden;
+		}
+
 		public void setName(String name) {
 			this.name = name;
 		}
@@ -254,7 +277,7 @@ public class TileSourceManager {
 		
 		
 		@Override
-		public void clearTiles(String path) {
+		public void deleteTiles(String path) {
 			File pf = new File(path);
 			File[] list = pf.listFiles();
 			if(list != null) {
@@ -413,18 +436,26 @@ public class TileSourceManager {
 		java.util.List<TileSourceTemplate> list = new ArrayList<TileSourceTemplate>();
 		list.add(getMapnikSource());
 		list.add(getCycleMapSource());
+		list.add(getMapillaryRasterSource());
+		list.add(getMapillaryVectorSource());
 		return list;
-
 	}
 
 	public static TileSourceTemplate getMapnikSource(){
-		return new TileSourceTemplate("OsmAnd (online tiles)", "http://tile.osmand.net/hd/{0}/{1}/{2}.png", ".png", 19, 1, 512, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		return MAPNIK_SOURCE;
 	}
 
 	public static TileSourceTemplate getCycleMapSource(){
-		return new TileSourceTemplate("CycleMap", "http://b.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png", ".png", 16, 1, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		return CYCLE_MAP_SOURCE;
 	}
 
+	public static TileSourceTemplate getMapillaryRasterSource() {
+		return MAPILLARY_RASTER_SOURCE;
+	}
+
+	public static TileSourceTemplate getMapillaryVectorSource() {
+		return MAPILLARY_VECTOR_SOURCE;
+	}
 
 	public static List<TileSourceTemplate> downloadTileSourceTemplates(String versionAsUrl) {
 		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();

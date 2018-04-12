@@ -1,11 +1,9 @@
 package net.osmand.plus.views.mapwidgets;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,16 +17,15 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.MapMarkersMode;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapQuickActionLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.IconPopupMenu;
 
 import java.util.Collections;
@@ -159,6 +156,23 @@ public class MapWidgetRegistry {
 		return ii;
 	}
 
+	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget,
+													   @DrawableRes int drawableMenu,
+													   String message,
+													   String key, boolean left, int priorityOrder) {
+		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, drawableMenu,
+				message, priorityOrder, left);
+		processVisibleModes(key, ii);
+		if (widget != null) {
+			widget.setContentTitle(message);
+		}
+		if (left) {
+			this.leftWidgetSet.add(ii);
+		} else {
+			this.rightWidgetSet.add(ii);
+		}
+		return ii;
+	}
 
 	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget,
 													   @DrawableRes int drawableMenu,
@@ -218,11 +232,15 @@ public class MapWidgetRegistry {
 	public boolean isVisible(String key) {
 		ApplicationMode mode = settings.APPLICATION_MODE.get();
 		Set<String> elements = visibleElementsFromSettings.get(mode);
-		return elements != null && elements.contains(key);
+		return elements != null && (elements.contains(key) || elements.contains(COLLAPSED_PREFIX + key));
 	}
 
-	private void setVisibility(MapWidgetRegInfo m, boolean visible, boolean collapsed) {
+	public void setVisibility(MapWidgetRegInfo m, boolean visible, boolean collapsed) {
 		ApplicationMode mode = settings.APPLICATION_MODE.get();
+		setVisibility(mode, m, visible, collapsed);
+	}
+
+	public void setVisibility(ApplicationMode mode, MapWidgetRegInfo m, boolean visible, boolean collapsed) {
 		defineDefaultSettingsElement(mode);
 		// clear everything
 		this.visibleElementsFromSettings.get(mode).remove(m.key);
@@ -290,8 +308,7 @@ public class MapWidgetRegistry {
 	}
 
 	private void resetDefaultAppearance(ApplicationMode appMode) {
-//		settings.SHOW_RULER.resetToDefault();		
-		settings.SHOW_DESTINATION_ARROW.resetToDefault();
+//		settings.SHOW_RULER.resetToDefault();
 		settings.TRANSPARENT_MAP_THEME.resetToDefault();
 		settings.SHOW_STREET_NAME.resetToDefault();
 		settings.CENTER_POSITION_ON_MAP.resetToDefault();
@@ -299,51 +316,47 @@ public class MapWidgetRegistry {
 	}
 
 	public void addControlsAppearance(final MapActivity map, final ContextMenuAdapter cm, ApplicationMode mode) {
-		addControlId(map, cm, R.string.map_widget_show_destination_arrow, settings.SHOW_DESTINATION_ARROW);
 		addControlId(map, cm, R.string.map_widget_transparent, settings.TRANSPARENT_MAP_THEME);
 		addControlId(map, cm, R.string.always_center_position_on_map, settings.CENTER_POSITION_ON_MAP);
 		if (mode != ApplicationMode.DEFAULT) {
 			addControlId(map, cm, R.string.map_widget_top_text, settings.SHOW_STREET_NAME);
 		}
-		if (settings.USE_MAP_MARKERS.get()) {
-			cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, map)
-					.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map))
-					.setListener(new ContextMenuAdapter.ItemClickListener() {
-						@Override
-						public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad,
-														  int itemId, final int pos, boolean isChecked) {
-							final OsmandMapTileView view = map.getMapView();
-							AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
-							bld.setTitle(R.string.map_markers);
-							final String[] items = new String[MapMarkersMode.values().length];
-							for (int i = 0; i < items.length; i++) {
-								items[i] = MapMarkersMode.values()[i].toHumanString(map);
+		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, map)
+				.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map))
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int position, boolean isChecked, int[] viewCoordinates) {
+						DirectionIndicationDialogFragment fragment = new DirectionIndicationDialogFragment();
+						fragment.setListener(new DirectionIndicationDialogFragment.DirectionIndicationFragmentListener() {
+							@Override
+							public void onMapMarkersModeChanged(boolean showDirectionEnabled) {
+								updateMapMarkersMode(map);
+								cm.getItem(position).setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map));
+								adapter.notifyDataSetChanged();
 							}
-							int i = settings.MAP_MARKERS_MODE.get().ordinal();
-							bld.setSingleChoiceItems(items, i, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									settings.MAP_MARKERS_MODE.set(MapMarkersMode.values()[which]);
-									for (MapWidgetRegInfo info : rightWidgetSet) {
-										if ("map_marker_1st".equals(info.key) || "map_marker_2nd".equals(info.key)) {
-											setVisibility(info, settings.MAP_MARKERS_MODE.get().isWidgets(), false);
-										}
-									}
-									MapInfoLayer mil = map.getMapLayers().getMapInfoLayer();
-									if (mil != null) {
-										mil.recreateControls();
-									}
-									map.refreshMap();
-									dialog.dismiss();
-									cm.getItem(pos).setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map));
-									ad.notifyDataSetChanged();
-								}
-							});
-							bld.show();
-							return false;
-						}
-					}).setLayout(R.layout.list_item_text_button).createItem());
+						});
+						fragment.show(map.getSupportFragmentManager(), DirectionIndicationDialogFragment.TAG);
+						return false;
+					}
+				}).setLayout(R.layout.list_item_text_button).createItem());
+	}
+
+	public void updateMapMarkersMode(MapActivity mapActivity) {
+		for (MapWidgetRegInfo info : rightWidgetSet) {
+			if ("map_marker_1st".equals(info.key)) {
+				setVisibility(info, settings.MAP_MARKERS_MODE.get().isWidgets()
+						&& settings.MARKERS_DISTANCE_INDICATION_ENABLED.get(), false);
+			} else if ("map_marker_2nd".equals(info.key)) {
+				setVisibility(info, settings.MAP_MARKERS_MODE.get().isWidgets()
+						&& settings.MARKERS_DISTANCE_INDICATION_ENABLED.get()
+						&& settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 2, false);
+			}
 		}
+		MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+		if (mil != null) {
+			mil.recreateControls();
+		}
+		mapActivity.refreshMap();
 	}
 
 	private void addControlId(final MapActivity map, ContextMenuAdapter cm,
@@ -375,6 +388,9 @@ public class MapWidgetRegistry {
 	}
 
 	public String getText(Context ctx, final ApplicationMode mode, final MapWidgetRegInfo r) {
+		if (r.getMessage() != null) {
+			return (r.visibleCollapsed(mode) ? " + " : "  ") + r.getMessage();
+		}
 		return (r.visibleCollapsed(mode) ? " + " : "  ") + ctx.getString(r.getMessageId());
 	}
 
@@ -400,7 +416,7 @@ public class MapWidgetRegistry {
 				.setSecondaryIcon( R.drawable.ic_action_additional_option)
 				.setListener(new ContextMenuAdapter.OnRowItemClick() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
 						setVisibility(adapter, position, isChecked);
 						return false;
 					}
@@ -447,7 +463,7 @@ public class MapWidgetRegistry {
 
 			final boolean selected = r.visibleCollapsed(mode) || r.visible(mode);
 			final String desc = mapActivity.getString(R.string.shared_string_collapse);
-			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(r.getMessageId(), mapActivity)
+			ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
 					.setIcon(r.getDrawableMenu())
 					.setSelected(selected)
 					.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
@@ -519,7 +535,11 @@ public class MapWidgetRegistry {
 																}
 																ContextMenuItem item = adapter.getItem(pos);
 																item.setIcon(r.getDrawableMenu());
-																item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
+																if (r.getMessage() != null) {
+																	item.setTitle(r.getMessage());
+																} else {
+																	item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
+																}
 																adapter.notifyDataSetChanged();
 																return true;
 															}
@@ -535,7 +555,7 @@ public class MapWidgetRegistry {
 
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a,
-														  int itemId, int pos, boolean isChecked) {
+														  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 							setVisibility(a, pos, isChecked, false);
 							return false;
 						}
@@ -555,7 +575,13 @@ public class MapWidgetRegistry {
 							item.setDescription(visible && collapsed ? desc : null);
 							adapter.notifyDataSetChanged();
 						}
-					}).createItem());
+					});
+			if (r.getMessage() != null) {
+				itemBuilder.setTitle(r.getMessage());
+			} else {
+				itemBuilder.setTitleId(r.getMessageId(), mapActivity);
+			}
+			contextMenuAdapter.addItem(itemBuilder.createItem());
 		}
 	}
 
@@ -566,6 +592,7 @@ public class MapWidgetRegistry {
 		private int drawableMenu;
 		@StringRes
 		private int messageId;
+		private String message;
 		private WidgetState widgetState;
 		public final String key;
 		public final boolean left;
@@ -580,6 +607,16 @@ public class MapWidgetRegistry {
 			this.widget = widget;
 			this.drawableMenu = drawableMenu;
 			this.messageId = messageId;
+			this.priorityOrder = priorityOrder;
+			this.left = left;
+		}
+
+		public MapWidgetRegInfo(String key, TextInfoWidget widget, @DrawableRes int drawableMenu,
+								String message, int priorityOrder, boolean left) {
+			this.key = key;
+			this.widget = widget;
+			this.drawableMenu = drawableMenu;
+			this.message = message;
 			this.priorityOrder = priorityOrder;
 			this.left = left;
 		}
@@ -599,6 +636,10 @@ public class MapWidgetRegistry {
 			} else {
 				return drawableMenu;
 			}
+		}
+
+		public String getMessage() {
+			return message;
 		}
 
 		public int getMessageId() {
@@ -667,6 +708,9 @@ public class MapWidgetRegistry {
 
 		@Override
 		public int hashCode() {
+			if (getMessage() != null) {
+				return getMessage().hashCode();
+			}
 			return getMessageId();
 		}
 
@@ -680,16 +724,27 @@ public class MapWidgetRegistry {
 				return false;
 			}
 			MapWidgetRegInfo other = (MapWidgetRegInfo) obj;
+			if (getMessageId() == 0 && other.getMessageId() == 0) {
+				return key.equals(other.key);
+			}
 			return getMessageId() == other.getMessageId();
 		}
 
 		@Override
 		public int compareTo(@NonNull MapWidgetRegInfo another) {
-			if (getMessageId() == another.getMessageId()) {
+			if (getMessageId() == 0 && another.getMessageId() == 0) {
+				if (key.equals(another.key)) {
+					return 0;
+				}
+			} else if (getMessageId() == another.getMessageId()) {
 				return 0;
 			}
 			if (priorityOrder == another.priorityOrder) {
-				return getMessageId() - another.getMessageId();
+				if (getMessageId() == 0 && another.getMessageId() == 0) {
+					return key.compareTo(key);
+				} else {
+					return getMessageId() - another.getMessageId();
+				}
 			}
 			return priorityOrder - another.priorityOrder;
 		}
@@ -723,7 +778,7 @@ public class MapWidgetRegistry {
 
 		@Override
 		public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a,
-										  int itemId, int pos, boolean isChecked) {
+										  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 			pref.set(!pref.get());
 			map.updateApplicationModeSettings();
 			a.notifyDataSetChanged();

@@ -2,6 +2,7 @@ package net.osmand.plus.download.ui;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StatFs;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.IProgress;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -24,6 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadIndexesThread;
 
 import java.io.File;
 
@@ -103,7 +106,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		View deviceStorageRow = view.findViewById(R.id.deviceMemoryRow);
 		deviceStorageRow.setOnClickListener(deviceMemoryOnClickListener);
 		ImageView deviceStorageImageView = (ImageView) view.findViewById(R.id.deviceMemoryImageView);
-		deviceStorageImageView.setImageDrawable(getContentIcon(R.drawable.ic_sdcard));
+		deviceStorageImageView.setImageDrawable(getContentIcon(R.drawable.ic_action_phone));
 		TextView deviceStorageDescription = (TextView) view.findViewById(R.id.deviceMemoryDescription);
 		deviceStorageDescription.setText(deviceStorageName);
 		deviceStorageDescription.setText(getFreeSpace(deviceStorage));
@@ -112,7 +115,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		if (hasExternalStoragePermission && sharedStorage != null) {
 			sharedMemoryRow.setOnClickListener(sharedMemoryOnClickListener);
 			ImageView sharedMemoryImageView = (ImageView) view.findViewById(R.id.sharedMemoryImageView);
-			sharedMemoryImageView.setImageDrawable(getContentIcon(R.drawable.ic_sdcard));
+			sharedMemoryImageView.setImageDrawable(getContentIcon(R.drawable.ic_action_phone));
 			TextView sharedMemoryDescription = (TextView) view.findViewById(R.id.sharedMemoryDescription);
 			sharedMemoryDescription.setText(getFreeSpace(sharedStorage));
 		} else {
@@ -196,11 +199,22 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		return sz;
 	}
 
+	private void checkAssets() {
+		getMyApplication().getResourceManager().checkAssets(IProgress.EMPTY_PROGRESS, true);
+	}
+
+	private void updateDownloadIndexes() {
+		DownloadIndexesThread downloadIndexesThread = getMyApplication().getDownloadThread();
+		downloadIndexesThread.runReloadIndexFilesSilent();
+	}
+
 	private View.OnClickListener deviceMemoryOnClickListener =
 			new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					saveFilesLocation(deviceStorageType, deviceStorage, getActivity());
+					checkAssets();
+					updateDownloadIndexes();
 					isInterestedInFirstTime = false;
 					dismiss();
 				}
@@ -211,6 +225,8 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 				@Override
 				public void onClick(View v) {
 					saveFilesLocation(sharedStorageType, sharedStorage, getActivity());
+					checkAssets();
+					updateDownloadIndexes();
 					isInterestedInFirstTime = false;
 					dismiss();
 				}
@@ -221,6 +237,8 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 				@Override
 				public void onClick(View v) {
 					boolean res = saveFilesLocation(cardStorageType, cardStorage, getActivity());
+					checkAssets();
+					updateDownloadIndexes();
 					isInterestedInFirstTime = false;
 					if (res) {
 						dismiss();
@@ -242,7 +260,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 	}
 
 	private void reloadData() {
-		new DashChooseAppDirFragment.ReloadData(getActivity(), getMyApplication()).execute((Void) null);
+		new DashChooseAppDirFragment.ReloadData(getActivity(), getMyApplication()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public static void showInstance(FragmentManager fragmentManager, boolean storageReadOnly) {
@@ -250,6 +268,8 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		Bundle args = new Bundle();
 		args.putBoolean(STORAGE_READOLNY_KEY, storageReadOnly);
 		f.setArguments(args);
-		f.show(fragmentManager, DataStoragePlaceDialogFragment.TAG);
+		fragmentManager.beginTransaction()
+				.add(f, DataStoragePlaceDialogFragment.TAG)
+				.commitAllowingStateLoss();
 	}
 }

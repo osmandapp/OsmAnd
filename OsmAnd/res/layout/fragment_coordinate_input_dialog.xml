@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<android.support.design.widget.AppBarLayout
+			android:id="@+id/app_bar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			tools:background="@color/route_info_bg_dark">
+
+			<android.support.v7.widget.Toolbar
+				android:id="@+id/coordinate_input_toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/dashboard_map_toolbar"
+				osmand:contentInsetEnd="0dp"
+				osmand:contentInsetLeft="4dp"
+				osmand:contentInsetRight="0dp"
+				osmand:contentInsetStart="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:gravity="center_vertical">
+
+					<ImageButton
+						android:id="@+id/back_button"
+						style="@style/Widget.AppCompat.ActionButton"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="16dp"
+						android:layout_marginRight="16dp"
+						tools:src="@drawable/ic_arrow_back"/>
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/toolbar_text"
+						android:layout_width="0dp"
+						android:layout_height="match_parent"
+						android:layout_weight="1"
+						android:ellipsize="end"
+						android:gravity="center_vertical"
+						android:maxLines="1"
+						android:text="@string/coordinates"
+						android:textSize="@dimen/dialog_header_text_size"
+						osmand:typeface="@string/font_roboto_medium"
+						tools:textColor="@color/color_white"/>
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/options_button"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:background="?attr/selectableItemBackground"
+						android:ellipsize="end"
+						android:gravity="center_vertical"
+						android:maxLines="1"
+						android:paddingLeft="16dp"
+						android:paddingRight="16dp"
+						android:text="@string/shared_string_options"
+						android:textAllCaps="true"
+						android:textColor="@color/dashboard_blue"
+						android:textSize="@dimen/default_list_text_size"
+						osmand:typeface="@string/font_roboto_medium"/>
+
+				</LinearLayout>
+
+			</android.support.v7.widget.Toolbar>
+
+			<include layout="@layout/coordinate_input_data_area"/>
+
+		</android.support.design.widget.AppBarLayout>
+
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/markers_recycler_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:paddingBottom="72dp"
+			android:paddingTop="16dp"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/keyboard_layout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:orientation="vertical">
+
+		<include layout="@layout/coordinate_input_keyboard"/>
+
+		<View
+			android:id="@+id/keyboard_divider"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			tools:background="@color/keyboard_divider_dark"/>
+
+		<LinearLayout
+			android:id="@+id/bottom_controls_container"
+			android:layout_width="match_parent"
+			android:layout_height="56dp">
+
+			<android.support.v7.widget.AppCompatTextView
+				android:id="@+id/add_marker_button"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_vertical"
+				android:layout_marginBottom="@dimen/route_info_button_go_margin"
+				android:layout_marginLeft="@dimen/route_info_button_go_margin"
+				android:layout_marginStart="@dimen/route_info_button_go_margin"
+				android:layout_marginTop="@dimen/route_info_button_go_margin"
+				android:layout_weight="3"
+				android:ellipsize="end"
+				android:gravity="center"
+				android:maxLines="1"
+				android:text="@string/shared_string_add"
+				android:textAllCaps="true"
+				android:textColor="@color/keyboard_item_button_text_color"
+				android:textSize="@dimen/default_list_text_size"
+				android:textStyle="bold"
+				tools:background="@drawable/route_info_go_btn_bg_dark"/>
+
+			<ImageView
+				android:id="@+id/show_hide_keyboard_icon"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_vertical"
+				android:layout_margin="@dimen/route_info_button_go_margin"
+				android:layout_weight="1"
+				android:background="?attr/selectableItemBackground"
+				android:scaleType="center"
+				tools:src="@drawable/ic_action_keyboard_hide"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</FrameLayout>

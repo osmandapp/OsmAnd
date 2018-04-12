@@ -28,6 +28,7 @@
 
             <ImageButton
                 android:id="@+id/btnPrev"
+                android:contentDescription="@string/shared_string_previous"
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -45,6 +46,7 @@
 
             <ImageButton
                 android:id="@+id/btnNext"
+                android:contentDescription="@string/shared_string_next"
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

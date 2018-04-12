@@ -1,16 +1,20 @@
 package net.osmand.plus.osmedit;
 
+import android.support.annotation.Nullable;
+
 import net.osmand.data.Amenity;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 
+import java.util.Set;
+
 public interface OpenstreetmapUtil {
 	
-	public EntityInfo getEntityInfo(long id);
+	EntityInfo getEntityInfo(long id);
 	
-	public Node commitNodeImpl(OsmPoint.Action action, Node n, EntityInfo info, String comment, boolean closeChangeSet);
+	Node commitNodeImpl(OsmPoint.Action action, Node n, EntityInfo info, String comment, boolean closeChangeSet, @Nullable Set<String> changedTags);
 	
-	public void closeChangeSet();
+	void closeChangeSet();
 	
-	public Node loadNode(Amenity n);
+	Node loadNode(Amenity n);
 }

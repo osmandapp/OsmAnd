@@ -21,7 +21,7 @@ public class ImpassibleRoadsMenuController extends MenuController {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.route = route;
 		final OsmandApplication app = mapActivity.getMyApplication();
-		rightTitleButtonController = new TitleButtonController() {
+		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
 				app.getAvoidSpecificRoads().removeImpassableRoad(
@@ -33,8 +33,8 @@ public class ImpassibleRoadsMenuController extends MenuController {
 				getMapActivity().getContextMenu().close();
 			}
 		};
-		rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_remove);
-		rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_remove);
+		leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class ImpassibleRoadsMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return ContextCompat.getDrawable(getMapActivity(), R.drawable.map_pin_avoid_road);
 	}
 }

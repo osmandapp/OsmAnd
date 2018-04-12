@@ -114,7 +114,7 @@ public class DownloadValidationManager {
 		double szChange = ((double) szChangeLong) / (1 << 20);
 		double szMaxTemp = szChange + ((double) szMaxTempLong) / (1 << 20);
 
-		// get availabile space
+		// get available space
 		double asz = downloadThread.getAvailableSpace();
 		if (asz != -1 && asz > 0 && (szMaxTemp > asz)) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -154,7 +154,8 @@ public class DownloadValidationManager {
 	}
 
 	protected void downloadFilesCheck_1_FreeVersion(FragmentActivity context, IndexItem[] items) {
-		if (Version.isFreeVersion(getMyApplication()) && !app.getSettings().LIVE_UPDATES_PURCHASED.get()) {
+		if (Version.isFreeVersion(getMyApplication()) && !app.getSettings().LIVE_UPDATES_PURCHASED.get()
+				&& !app.getSettings().FULL_VERSION_PURCHASED.get()) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
 				if (context instanceof FragmentActivity) {
@@ -223,8 +224,7 @@ public class DownloadValidationManager {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(Intent.ACTION_VIEW,
-								Uri.parse(Version.marketPrefix(getMyApplication())
-										+ "net.osmand.plus"));
+								Uri.parse(Version.getUrlWithUtmRef(getMyApplication(), "net.osmand.plus")));
 						try {
 							startActivity(intent);
 						} catch (ActivityNotFoundException e) {

@@ -1,6 +1,5 @@
 package net.osmand.plus.monitoring;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,17 +9,19 @@ import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
-import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -32,30 +33,59 @@ public class LiveMonitoringHelper  {
 	protected Context ctx;
 	private OsmandSettings settings;
 	private long lastTimeUpdated;
-	private final static Log log = PlatformUtil.getLog(LiveMonitoringHelper.class); 
+	private LatLon lastPoint;
+	private final static Log log = PlatformUtil.getLog(LiveMonitoringHelper.class);
+	private ConcurrentLinkedQueue<LiveMonitoringData> queue;
+	private boolean started = false;
 
 	public LiveMonitoringHelper(Context ctx){
 		this.ctx = ctx;
 		settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
+		queue = new ConcurrentLinkedQueue<>();
 	}
 	
 	public boolean isLiveMonitoringEnabled(){
 		return settings.LIVE_MONITORING.get() && (settings.SAVE_TRACK_TO_GPX.get() || settings.SAVE_GLOBAL_TRACK_TO_GPX.get());
 	}
-	
+
 	public void updateLocation(net.osmand.Location location) {
+		boolean record = false;
+		long locationTime = System.currentTimeMillis();
 		if (OsmAndLocationProvider.isPointAccurateForRouting(location) && isLiveMonitoringEnabled()
 				&& OsmAndLocationProvider.isNotSimulatedLocation(location)
 				&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
-			long locationTime = System.currentTimeMillis();
 			if (locationTime - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {
-				LiveMonitoringData data = new LiveMonitoringData((float)location.getLatitude(), (float)location.getLongitude(),
-						(float)location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime);
-				new LiveSender().execute(data);
-				lastTimeUpdated = locationTime;
+				record = true;
+			}
+			float minDistance = settings.SAVE_TRACK_MIN_DISTANCE.get();
+			if(minDistance > 0 && lastPoint != null && MapUtils.getDistance(lastPoint, location.getLatitude(), location.getLongitude()) < 
+					minDistance) {
+				record = false;
+			}
+			float precision = settings.SAVE_TRACK_PRECISION.get();
+			if(precision > 0 && (!location.hasAccuracy() || location.getAccuracy() > precision)) {
+				record = false;
+			}
+			float minSpeed = settings.SAVE_TRACK_MIN_SPEED.get();
+			if(minSpeed > 0 && (!location.hasSpeed() || location.getSpeed() < minSpeed)) {
+				record = false;
 			}
 		}
-		
+		if (isLiveMonitoringEnabled()) {
+			if (!started) {
+				new LiveSender().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, queue);
+				started = true;
+			}
+		} else {
+			started = false;
+		}
+		if(record) {
+			LiveMonitoringData data = new LiveMonitoringData((float)location.getLatitude(), (float)location.getLongitude(),
+					(float)location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime);
+			queue.add(data);
+			lastPoint = new LatLon(location.getLatitude(), location.getLongitude());
+			lastTimeUpdated = locationTime;
+		}
 	}
 	
 	
@@ -81,16 +111,24 @@ public class LiveMonitoringHelper  {
 		
 	}
 	
-	private class LiveSender extends AsyncTask<LiveMonitoringData, Void, Void> {
+	private class LiveSender extends AsyncTask<ConcurrentLinkedQueue<LiveMonitoringData>, Void, Void> {
 
 		@Override
-		protected Void doInBackground(LiveMonitoringData... params) {
-			for(LiveMonitoringData d : params){
-				sendData(d);
+		protected Void doInBackground(ConcurrentLinkedQueue<LiveMonitoringData>... concurrentLinkedQueues) {
+			while (isLiveMonitoringEnabled()) {
+				for (ConcurrentLinkedQueue queue : concurrentLinkedQueues) {
+					if (!queue.isEmpty()) {
+						LiveMonitoringData data = (LiveMonitoringData) queue.peek();
+						if (!(System.currentTimeMillis() - data.time > settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND.get())) {
+							sendData(data);
+						} else {
+							queue.poll();
+						}
+					}
+				}
 			}
 			return null;
 		}
-		
 	}
 
 	public void sendData(LiveMonitoringData data) {
@@ -144,7 +182,7 @@ public class LiveMonitoringHelper  {
 			urlConnection.setReadTimeout(15000);
 
 			// allow certificates where hostnames doesn't match CN
-			if (url.getProtocol() == "https") {
+			if (url.getProtocol().equals("https")) {
 				((HttpsURLConnection) urlConnection).setHostnameVerifier(
 						new HostnameVerifier() {
 							public boolean verify(String host, SSLSession session) {
@@ -155,12 +193,13 @@ public class LiveMonitoringHelper  {
 
 			log.info("Monitor " + uri);
 
-			if (urlConnection.getResponseCode() != 200) {
+			if (urlConnection.getResponseCode()/100 != 2) {
 
 				String msg = urlConnection.getResponseCode() + " : " + //$NON-NLS-1$//$NON-NLS-2$
 						urlConnection.getResponseMessage();
 				log.error("Error sending monitor request: " +  msg);
 			} else {
+				queue.poll();
 				InputStream is = urlConnection.getInputStream();
 				StringBuilder responseBody = new StringBuilder();
 				if (is != null) {

@@ -1,116 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/package_delivered_layout"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/view_transparent_selection"
-    android:id="@+id/package_delivered_layout"
-    android:minHeight="50dp"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:minHeight="50dp">
+
+    <ImageView
+        android:id="@+id/info_move"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:clickable="false"
+        android:contentDescription="@string/shared_string_more"
+        android:focusable="false"
+        android:paddingLeft="12dp"
+        android:paddingStart="12dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_flat_list_dark"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
     <ImageView
         android:id="@+id/waypoint_icon"
-        android:src="@drawable/ic_action_fav_dark"
-        android:layout_height="25dp"
         android:layout_width="56dp"
-        android:layout_gravity="center_vertical" />
+        android:layout_height="25dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_action_fav_dark"/>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:gravity="center"
-        android:layout_gravity="center_vertical"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/waypoint_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:ellipsize="end"
             android:layout_gravity="center_vertical"
-            android:textSize="@dimen/default_list_text_size" />
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textSize="@dimen/default_list_text_size"
+            tools:text="Some waypoint text"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="2dp">
 
             <TextView
                 android:id="@+id/waypoint_dist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:textColor="@color/color_myloc_distance"
                 android:maxLines="1"
-                android:textSize="@dimen/default_sub_text_size"/>
+                android:textColor="@color/color_myloc_distance"
+                android:textSize="@dimen/default_sub_text_size"
+                tools:text="12 km"/>
 
             <TextView
                 android:id="@+id/waypoint_deviation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:textColor="@color/secondary_text_dark"
                 android:layout_marginLeft="6dp"
+                android:layout_marginStart="6dp"
                 android:drawablePadding="2dp"
                 android:maxLines="1"
-                android:textSize="@dimen/default_sub_text_size"/>
+                android:textColor="@color/secondary_text_dark"
+                android:textSize="@dimen/default_sub_text_size"
+                tools:text="Intermediate point "/>
 
             <TextView
                 android:id="@+id/waypoint_desc_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:ellipsize="end"
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textColor="@color/secondary_text_dark"
-                android:textSize="@dimen/default_sub_text_size" />
+                android:textSize="@dimen/default_sub_text_size"
+                tools:text="some description"/>
 
         </LinearLayout>
-
 
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/all_points"
+        style="@style/Widget.AppCompat.ActionButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:contentDescription="@string/shared_string_more"
         android:layout_gravity="center_vertical"
+        android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
-        android:visibility="gone"
+        android:contentDescription="@string/shared_string_more"
         android:focusable="false"
         android:scaleType="center"
-        style="@style/Widget.AppCompat.ActionButton"
-        android:src="@drawable/map_overflow_menu_white" />
+        android:src="@drawable/map_overflow_menu_white"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
     <ImageButton
         android:id="@+id/info_close"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:contentDescription="@string/shared_string_delete"
-        android:layout_gravity="center_vertical"
-        android:layout_marginRight="2dp"
         style="@style/Widget.AppCompat.ActionButton"
-        android:focusable="false"
-        android:scaleType="center"
-        android:src="@drawable/ic_action_remove_dark" />
-
-    <ImageView
-        android:id="@+id/info_move"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:contentDescription="@string/shared_string_more"
         android:layout_gravity="center_vertical"
+        android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
+        android:contentDescription="@string/shared_string_delete"
         android:focusable="false"
-        android:clickable="false"
         android:scaleType="center"
-        android:src="@drawable/ic_flat_list_dark"
-        android:visibility="gone"/>
+        android:src="@drawable/ic_action_remove_dark"/>
 
 </LinearLayout>

@@ -34,15 +34,25 @@ public class DownloadResourceGroup {
 		SRTM_HEADER(R.string.download_srtm_maps),
 		HILLSHADE_HEADER(R.string.download_hillshade_maps),
 		OTHER_MAPS_HEADER(R.string.download_select_map_types),
+		WIKIVOYAGE_HEADER(R.string.shared_string_wikivoyage),
+		
+		NAUTICAL_MAPS_HEADER(R.string.nautical_maps),
 		// headers with voice items
 		VOICE_HEADER_TTS(R.string.index_name_tts_voice),
 		VOICE_HEADER_REC(R.string.index_name_voice),
+		// headers with font items
+		FONTS_HEADER(R.string.fonts_header),
 		// headers with resources
+		NAUTICAL_MAPS_GROUP(R.string.nautical_maps),
+		TRAVEL_GROUP(R.string.download_maps_travel),
 		OTHER_MAPS_GROUP(R.string.download_select_map_types),
-		VOICE_GROUP(R.string.voices),
+		OTHER_GROUP(R.string.other_menu_group),
 		SUBREGIONS(R.string.regions),
 		// screen items
+		NAUTICAL_MAPS(R.string.nautical_maps),
+		WIKIVOYAGE_MAPS(R.string.download_maps_travel),
 		VOICE_TTS(R.string.index_name_tts_voice),
+		FONTS(R.string.fonts_header),
 		VOICE_REC(R.string.index_name_voice),
 		OTHER_MAPS(R.string.download_select_map_types),
 		WORLD(-1),
@@ -56,7 +66,7 @@ public class DownloadResourceGroup {
 
 		public boolean isScreen() {
 			return this == WORLD || this == REGION || this == VOICE_TTS
-					|| this == VOICE_REC || this == OTHER_MAPS;
+					|| this == VOICE_REC || this == OTHER_MAPS || this == FONTS || this == NAUTICAL_MAPS || this == WIKIVOYAGE_MAPS;
 		}
 
 		public String getDefaultId() {
@@ -68,18 +78,22 @@ public class DownloadResourceGroup {
 		}
 
 		public boolean containsIndexItem() {
-			return isHeader() && this != SUBREGIONS && this != VOICE_GROUP && this != OTHER_MAPS_GROUP;
+			return isHeader() && this != SUBREGIONS && this != OTHER_GROUP && this != OTHER_MAPS_GROUP
+					&& this != NAUTICAL_MAPS_GROUP && this != TRAVEL_GROUP;
 		}
 
 		public boolean isHeader() {
 			return this == VOICE_HEADER_REC || this == VOICE_HEADER_TTS || this == SUBREGIONS
-					|| this == WORLD_MAPS || this == REGION_MAPS || this == VOICE_GROUP
+					|| this == WORLD_MAPS || this == REGION_MAPS || this == OTHER_GROUP   
 					|| this == HILLSHADE_HEADER || this == SRTM_HEADER
-					|| this == OTHER_MAPS_HEADER || this == OTHER_MAPS_GROUP;
+					|| this == OTHER_MAPS_HEADER || this == OTHER_MAPS_GROUP
+					|| this == FONTS_HEADER 
+					|| this == NAUTICAL_MAPS_HEADER || this == NAUTICAL_MAPS_GROUP
+					|| this == WIKIVOYAGE_HEADER || this == TRAVEL_GROUP;
 		}
 
 		public static String getVoiceTTSId() {
-			return "#" + VOICE_GROUP.name().toLowerCase() + "#" + VOICE_TTS.name().toLowerCase();
+			return "#" + OTHER_GROUP.name().toLowerCase() + "#" + VOICE_TTS.name().toLowerCase();
 		}
 	}
 	

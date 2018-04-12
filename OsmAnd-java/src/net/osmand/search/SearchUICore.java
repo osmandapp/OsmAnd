@@ -7,7 +7,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.osm.AbstractPoiType;
+import net.osmand.data.Street;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -41,23 +40,26 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class SearchUICore {
 
-	private static final int TIMEOUT_BETWEEN_CHARS = 200;
-	private static final Log LOG = PlatformUtil.getLog(SearchUICore.class); 
+	private static final int TIMEOUT_BETWEEN_CHARS = 700;
+	private static final int TIMEOUT_BEFORE_SEARCH = 50;
+	private static final int TIMEOUT_BEFORE_FILTER = 20;
+	private static final Log LOG = PlatformUtil.getLog(SearchUICore.class);
 	private SearchPhrase phrase;
 	private SearchResultCollection  currentSearchResult;
-	
+
 	private ThreadPoolExecutor singleThreadedExecutor;
 	private LinkedBlockingQueue<Runnable> taskQueue;
 	private Runnable onSearchStart = null;
 	private Runnable onResultsComplete = null;
 	private AtomicInteger requestNumber = new AtomicInteger();
 	private int totalLimit = -1; // -1 unlimited - not used
-	
+
 	List<SearchCoreAPI> apis = new ArrayList<>();
 	private SearchSettings searchSettings;
 	private MapPoiTypes poiTypes;
-	
-	
+
+	private static boolean debugMode = false;
+
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this.poiTypes = poiTypes;
 		taskQueue = new LinkedBlockingQueue<Runnable>();
@@ -67,71 +69,80 @@ public class SearchUICore {
 		currentSearchResult = new SearchResultCollection(phrase);
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
 	}
-	
+
+	public static void setDebugMode(boolean debugMode) {
+		SearchUICore.debugMode = debugMode;
+	}
+
+	public static boolean isDebugMode() {
+		return debugMode;
+	}
+
 	public static class SearchResultCollection {
 		private List<SearchResult> searchResults;
 		private SearchPhrase phrase;
 		private static final int DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;
-		
+
 		public SearchResultCollection(SearchPhrase phrase) {
 			searchResults = new ArrayList<>();
 			this.phrase = phrase;
 		}
-		
+
 		public SearchResultCollection combineWithCollection(SearchResultCollection collection, boolean resort, boolean removeDuplicates) {
 			SearchResultCollection src = new SearchResultCollection(phrase);
 			src.addSearchResults(searchResults, false, false);
 			src.addSearchResults(collection.searchResults, resort, removeDuplicates);
 			return src;
 		}
-		 
-		
-		
+
 		public SearchResultCollection addSearchResults(List<SearchResult> sr, boolean resortAll, boolean removeDuplicates) {
-			if(resortAll) {
+			if (SearchUICore.isDebugMode()) {
+				LOG.info("Add search results resortAll=" + (resortAll ? "true" : "false") + " removeDuplicates=" + (removeDuplicates ? "true" : "false") + " Results=" + sr.size() + " Current results=" + this.searchResults.size());
+			}
+			if (resortAll) {
 				this.searchResults.addAll(sr);
 				sortSearchResults();
-				if(removeDuplicates) {
+				if (removeDuplicates) {
 					filterSearchDuplicateResults();
 				}
 			} else {
-				if(!removeDuplicates) {
+				if (!removeDuplicates) {
 					this.searchResults.addAll(sr);
 				} else {
 					ArrayList<SearchResult> addedResults = new ArrayList<>(sr);
 					SearchResultComparator cmp = new SearchResultComparator(phrase);
 					Collections.sort(addedResults, cmp);
 					filterSearchDuplicateResults(addedResults);
-					int i = 0; 
+					int i = 0;
 					int j = 0;
-					while(j < addedResults.size()) {
+					while (j < addedResults.size()) {
 						SearchResult addedResult = addedResults.get(j);
-						if(i >= searchResults.size()) {
+						if (i >= searchResults.size()) {
 							int k = 0;
 							boolean same = false;
-							while(searchResults.size() > k && k < DEPTH_TO_CHECK_SAME_SEARCH_RESULTS) {
-								if(sameSearchResult(addedResult, searchResults.get(searchResults.size() - k - 1))) {
+							while (searchResults.size() > k && k < DEPTH_TO_CHECK_SAME_SEARCH_RESULTS) {
+								if (sameSearchResult(addedResult, searchResults.get(searchResults.size() - k - 1))) {
 									same = true;
 									break;
 								}
 								k++;
 							}
-							if(!same) {
+							if (!same) {
 								searchResults.add(addedResult);
 							}
 							j++;
 							continue;
 						}
 						SearchResult existingResult = searchResults.get(i);
-						if(sameSearchResult(addedResult, existingResult)) {
+						if (sameSearchResult(addedResult, existingResult)) {
 							j++;
 							continue;
 						}
 						int compare = cmp.compare(existingResult, addedResult);
-						if(compare == 0) {
+						if (compare == 0) {
 							// existingResult == addedResult
 							j++;
-						} else if(compare > 0) {
+						} else if (compare > 0) {
 							// existingResult > addedResult
 							this.searchResults.add(addedResults.get(j));
 							j++;
@@ -140,61 +151,80 @@ public class SearchUICore {
 							i++;
 						}
 					}
-					
 				}
+			}
+			if (SearchUICore.isDebugMode()) {
+				LOG.info("Search results added. Current results=" + this.searchResults.size());
 			}
 			return this;
 		}
-		
+
 		public List<SearchResult> getCurrentSearchResults() {
 			return Collections.unmodifiableList(searchResults);
 		}
-		
+
 		public SearchPhrase getPhrase() {
 			return phrase;
 		}
 
 		public void sortSearchResults() {
-			Collections.sort(searchResults, new SearchResultComparator(phrase));			
+			if (debugMode) {
+				LOG.info("Sorting search results <" + phrase + "> Results=" + searchResults.size());
+			}
+			Collections.sort(searchResults, new SearchResultComparator(phrase));
+			if (debugMode) {
+				LOG.info("Search results sorted <" + phrase + ">");
+			}
 		}
 
 		public void filterSearchDuplicateResults() {
+			if (debugMode) {
+				LOG.info("Filter duplicate results <" + phrase + "> Results=" + searchResults.size());
+			}
 			filterSearchDuplicateResults(searchResults);
+			if (debugMode) {
+				LOG.info("Duplicate results filtered <" + phrase + "> Results=" + searchResults.size());
+			}
 		}
-		
+
 		private void filterSearchDuplicateResults(List<SearchResult> lst) {
 			ListIterator<SearchResult> it = lst.listIterator();
 			LinkedList<SearchResult> lstUnique = new LinkedList<SearchResult>();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				SearchResult r = it.next();
 				boolean same = false;
-				for(SearchResult rs : lstUnique) {
+				for (SearchResult rs : lstUnique) {
 					same = sameSearchResult(rs, r);
-					if(same) {
+					if (same) {
 						break;
 					}
 				}
-				if(same) {
+				if (same) {
 					it.remove();
 				} else {
 					lstUnique.add(r);
-					if(lstUnique.size() > DEPTH_TO_CHECK_SAME_SEARCH_RESULTS) {
+					if (lstUnique.size() > DEPTH_TO_CHECK_SAME_SEARCH_RESULTS) {
 						lstUnique.remove(0);
 					}
 				}
-			}			
+			}
 		}
-		
-		
-		
+
 		public boolean sameSearchResult(SearchResult r1, SearchResult r2) {
-			if(r1.location != null && r2.location != null) {
+			if (r1.location != null && r2.location != null) {
+				if (r1.objectType == r2.objectType) {
+					if (r1.objectType == ObjectType.STREET) {
+						Street st1 = (Street) r1.object;
+						Street st2 = (Street) r2.object;
+						return st1.getLocation().equals(st2.getLocation());
+					}
+				} 
 				Amenity a1 = null;
-				if(r1.object instanceof Amenity) {
+				if (r1.object instanceof Amenity) {
 					a1 = (Amenity) r1.object;
 				}
 				Amenity a2 = null;
-				if(r2.object instanceof Amenity) {
+				if (r2.object instanceof Amenity) {
 					a2 = (Amenity) r2.object;
 				}
 				if (r1.localeName.equals(r2.localeName)) {
@@ -205,6 +235,9 @@ public class SearchUICore {
 						String type2 = a2.getType().getKeyName();
 						String subType1 = a1.getSubType();
 						String subType2 = a2.getSubType();
+						if(a1.getId().longValue() == a2.getId().longValue() && (subType1.equals("building") || subType2.equals("building"))) {
+							return true;
+						}
 						if (!type1.equals(type2)) {
 							return false;
 						}
@@ -216,7 +249,7 @@ public class SearchUICore {
 								similarityRadius = 50000;
 							}
 						}
-					} else if(ObjectType.isAddress(r1.objectType) && ObjectType.isAddress(r2.objectType)) {
+					} else if (ObjectType.isAddress(r1.objectType) && ObjectType.isAddress(r2.objectType)) {
 						similarityRadius = 100;
 					}
 					return MapUtils.getDistance(r1.location, r2.location) < similarityRadius;
@@ -227,54 +260,59 @@ public class SearchUICore {
 			return false;
 		}
 	}
-	
+
 	public void setPoiTypes(MapPoiTypes poiTypes) {
 		this.poiTypes = poiTypes;
 	}
-	
+
 	public int getTotalLimit() {
 		return totalLimit;
 	}
-	
+
 	public void setTotalLimit(int totalLimit) {
 		this.totalLimit = totalLimit;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public <T> T getApiByClass(Class<T> cl) {
-		for(SearchCoreAPI a : apis) {
-			if(cl.isInstance(a)) {
+		for (SearchCoreAPI a : apis) {
+			if (cl.isInstance(a)) {
 				return (T) a;
 			}
 		}
 		return null;
 	}
-	
+
 	public <T extends SearchCoreAPI> SearchResultCollection shallowSearch(Class<T> cl,
-			String text, final ResultMatcher<SearchResult> matcher) throws IOException {
+																		  String text, final ResultMatcher<SearchResult> matcher) throws IOException {
 		T api = getApiByClass(cl);
-		if(api != null) {
+		if (api != null) {
+			if (debugMode) {
+				LOG.info("Start shallow search <" + phrase + "> API=<" + api + ">");
+			}
 			SearchPhrase sphrase = this.phrase.generateNewPhrase(text, searchSettings);
 			preparePhrase(sphrase);
 			AtomicInteger ai = new AtomicInteger();
-			SearchResultMatcher rm = new SearchResultMatcher(matcher, ai.get(), ai, totalLimit);
+			SearchResultMatcher rm = new SearchResultMatcher(matcher, sphrase, ai.get(), ai, totalLimit);
 			api.search(sphrase, rm);
-			
+
 			SearchResultCollection collection = new SearchResultCollection(
 					sphrase);
 			collection.addSearchResults(rm.getRequestResults(), true, true);
-			LOG.info(">> Shallow Search phrase " + phrase + " " + rm.getRequestResults().size());
+			if (debugMode) {
+				LOG.info("Finish shallow search <" + sphrase + "> Results=" + rm.getRequestResults().size());
+			}
 			return collection;
 		}
 		return null;
 	}
-	
+
 	public void init() {
 		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI());
 		apis.add(new SearchCoreFactory.SearchAmenityTypesAPI(poiTypes));
 		apis.add(new SearchCoreFactory.SearchAmenityByTypeAPI(poiTypes));
 		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
-		SearchBuildingAndIntersectionsByStreetAPI streetsApi = 
+		SearchBuildingAndIntersectionsByStreetAPI streetsApi =
 				new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
 		apis.add(streetsApi);
 		SearchStreetByCityAPI cityApi = new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
@@ -283,30 +321,30 @@ public class SearchUICore {
 	}
 
 	public void clearCustomSearchPoiFilters() {
-		for(SearchCoreAPI capi : apis) {
-			if(capi instanceof SearchAmenityTypesAPI) {
+		for (SearchCoreAPI capi : apis) {
+			if (capi instanceof SearchAmenityTypesAPI) {
 				((SearchAmenityTypesAPI) capi).clearCustomFilters();
 			}
 		}
 	}
 
 	public void addCustomSearchPoiFilter(CustomSearchPoiFilter poiFilter, int priority) {
-		for(SearchCoreAPI capi : apis) {
-			if(capi instanceof SearchAmenityTypesAPI) {
+		for (SearchCoreAPI capi : apis) {
+			if (capi instanceof SearchAmenityTypesAPI) {
 				((SearchAmenityTypesAPI) capi).addCustomFilter(poiFilter, priority);
 			}
 		}
 	}
-	
+
 	public void registerAPI(SearchCoreAPI api) {
 		apis.add(api);
 	}
-	
-	
+
+
 	public SearchResultCollection getCurrentSearchResult() {
 		return currentSearchResult;
 	}
-	
+
 	public SearchPhrase getPhrase() {
 		return phrase;
 	}
@@ -326,27 +364,32 @@ public class SearchUICore {
 	public void updateSettings(SearchSettings settings) {
 		searchSettings = settings;
 	}
-	
-	private List<SearchResult> filterCurrentResults(List<SearchResult> rr, SearchPhrase phrase) {
+
+	private void filterCurrentResults(SearchPhrase phrase, ResultMatcher<SearchResult> matcher) {
+		if (matcher == null) {
+			return;
+		}
 		List<SearchResult> l = currentSearchResult.searchResults;
-		for(SearchResult r : l) {
-			if(filterOneResult(r, phrase)) {
-				rr.add(r);
+		for (SearchResult r : l) {
+			if (filterOneResult(r, phrase)) {
+				matcher.publish(r);
+			}
+			if (matcher.isCancelled()) {
+				return;
 			}
 		}
-		return rr;
 	}
-	
+
 	private boolean filterOneResult(SearchResult object, SearchPhrase phrase) {
 		NameStringMatcher nameStringMatcher = phrase.getNameStringMatcher();
-		return nameStringMatcher.matches(object.localeName) || nameStringMatcher.matches(object.otherNames); 
+		return nameStringMatcher.matches(object.localeName) || nameStringMatcher.matches(object.otherNames);
 	}
 
 	public boolean selectSearchResult(SearchResult r) {
 		this.phrase = this.phrase.selectWord(r);
 		return true;
 	}
-	
+
 	public SearchPhrase resetPhrase() {
 		this.phrase = this.phrase.generateNewPhrase("", searchSettings);
 		return this.phrase;
@@ -357,13 +400,13 @@ public class SearchUICore {
 		return this.phrase;
 	}
 
-	public SearchResultCollection search(final String text, final ResultMatcher<SearchResult> matcher) {
+	public SearchResultCollection search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
 		final int request = requestNumber.incrementAndGet();
 		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		this.phrase = phrase;
-		SearchResultCollection quickRes = new SearchResultCollection(phrase);
-		filterCurrentResults(quickRes.searchResults, phrase);
-		LOG.info("> Search phrase " + phrase + " " + quickRes.searchResults.size());
+		if (debugMode) {
+			LOG.info("Prepare search <" + phrase + ">");
+		}
 		singleThreadedExecutor.submit(new Runnable() {
 
 			@Override
@@ -372,44 +415,117 @@ public class SearchUICore {
 					if (onSearchStart != null) {
 						onSearchStart.run();
 					}
-					SearchResultMatcher rm = new SearchResultMatcher(matcher, request, requestNumber, totalLimit);
-					if(TIMEOUT_BETWEEN_CHARS > 0) { 
-						Thread.sleep(TIMEOUT_BETWEEN_CHARS);
+					final SearchResultMatcher rm = new SearchResultMatcher(matcher, phrase, request, requestNumber, totalLimit);
+					if (debugMode) {
+						LOG.info("Starting search <" + phrase.toString() + ">");
 					}
-					if(rm.isCancelled()) {
+					rm.searchStarted(phrase);
+					if (debugMode) {
+						LOG.info("Search started <" + phrase.toString() + ">");
+					}
+					if (delayedExecution) {
+						long startTime = System.currentTimeMillis();
+						if (debugMode) {
+							LOG.info("Wait for next char <" + phrase.toString() + ">");
+						}
+
+						boolean filtered = false;
+						while (System.currentTimeMillis() - startTime <= TIMEOUT_BETWEEN_CHARS) {
+							if (rm.isCancelled()) {
+								if (debugMode) {
+									LOG.info("Search cancelled <" + phrase + ">");
+								}
+								return;
+							}
+							Thread.sleep(TIMEOUT_BEFORE_FILTER);
+
+							if (!filtered) {
+								final SearchResultCollection quickRes = new SearchResultCollection(phrase);
+								if (debugMode) {
+									LOG.info("Filtering current data <" + phrase + "> Results=" + currentSearchResult.searchResults.size());
+								}
+								filterCurrentResults(phrase, new ResultMatcher<SearchResult>() {
+									@Override
+									public boolean publish(SearchResult object) {
+										quickRes.searchResults.add(object);
+										return true;
+									}
+
+									@Override
+									public boolean isCancelled() {
+										return rm.isCancelled();
+									}
+								});
+								if (debugMode) {
+									LOG.info("Current data filtered <" + phrase + "> Results=" + quickRes.searchResults.size());
+								}
+								if (!rm.isCancelled()) {
+									currentSearchResult = quickRes;
+									rm.filterFinished(phrase);
+								}
+								filtered = true;
+							}
+						}
+					} else {
+						Thread.sleep(TIMEOUT_BEFORE_SEARCH);
+					}
+					if (rm.isCancelled()) {
+						if (debugMode) {
+							LOG.info("Search cancelled <" + phrase + ">");
+						}
 						return;
 					}
 					searchInBackground(phrase, rm);
 					if (!rm.isCancelled()) {
-						
 						SearchResultCollection collection = new SearchResultCollection(
 								phrase);
+						if (debugMode) {
+							LOG.info("Processing search results <" + phrase + ">");
+						}
 						collection.addSearchResults(rm.getRequestResults(), true, true);
-						LOG.info(">> Search phrase " + phrase + " " + rm.getRequestResults().size());
+						if (debugMode) {
+							LOG.info("Finishing search <" + phrase + "> Results=" + rm.getRequestResults().size());
+						}
 						currentSearchResult = collection;
+						rm.searchFinished(phrase);
 						if (onResultsComplete != null) {
 							onResultsComplete.run();
+						}
+						if (debugMode) {
+							LOG.info("Search finished <" + phrase + "> Results=" + rm.getRequestResults().size());
+						}
+					} else {
+						if (debugMode) {
+							LOG.info("Search cancelled <" + phrase + ">");
 						}
 					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-
 			}
-
-			
 		});
-		return quickRes;
+		return null;
 	}
-	
-	
+
+
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
-		for(SearchCoreAPI api : apis) {
-			if(api.getSearchPriority(phrase) >= 0 && api.isSearchMoreAvailable(phrase)) {
+		for (SearchCoreAPI api : apis) {
+			if (api.getSearchPriority(phrase) >= 0 && api.isSearchMoreAvailable(phrase)) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	public int getMinimalSearchRadius(SearchPhrase phrase) {
+		int radius = Integer.MAX_VALUE;
+		for (SearchCoreAPI api : apis) {
+			int apiMinimalRadius = api.getMinimalSearchRadius(phrase);
+			if (apiMinimalRadius > 0 && apiMinimalRadius < radius) {
+				radius = apiMinimalRadius;
+			}
+		}
+		return radius;
 	}
 
 	private void searchInBackground(final SearchPhrase phrase, SearchResultMatcher matcher) {
@@ -423,17 +539,25 @@ public class SearchUICore {
 						o2.getSearchPriority(phrase));
 			}
 		});
-		for(SearchCoreAPI api : lst) {
-			if(matcher.isCancelled()) {
+		for (SearchCoreAPI api : lst) {
+			if (matcher.isCancelled()) {
 				break;
 			}
-			if(api.getSearchPriority(phrase) == -1) {
+			if (!api.isSearchAvailable(phrase) || api.getSearchPriority(phrase) == -1) {
 				continue;
 			}
 			try {
+				if (debugMode) {
+					LOG.info("Run API search <" + phrase + "> API=<" + api + ">");
+				}
 				api.search(phrase, matcher);
-				
+				if (debugMode) {
+					LOG.info("API search finishing <" + phrase + "> API=<" + api + ">");
+				}
 				matcher.apiSearchFinished(api, phrase);
+				if (debugMode) {
+					LOG.info("API search done <" + phrase + "> API=<" + api + ">");
+				}
 			} catch (Throwable e) {
 				e.printStackTrace();
 				LOG.error(e.getMessage(), e);
@@ -442,17 +566,23 @@ public class SearchUICore {
 	}
 
 	private void preparePhrase(final SearchPhrase phrase) {
+		if (debugMode) {
+			LOG.info("Preparing search phrase <" + phrase + ">");
+		}
 		for (SearchWord sw : phrase.getWords()) {
-			if(sw.getResult() != null && sw.getResult().file != null) {
+			if (sw.getResult() != null && sw.getResult().file != null) {
 				phrase.selectFile(sw.getResult().file);
 			}
 		}
 		phrase.sortFiles();
+		if (debugMode) {
+			LOG.info("Search phrase prepared <" + phrase + ">");
+		}
 	}
-	
-	
-	
-	
+
+
+
+
 	public static class SearchResultMatcher implements  ResultMatcher<SearchResult>{
 		private final List<SearchResult> requestResults = new ArrayList<>();
 		private final ResultMatcher<SearchResult> matcher;
@@ -461,32 +591,58 @@ public class SearchUICore {
 		private SearchResult parentSearchResult;
 		private final AtomicInteger requestNumber;
 		int count = 0;
-		
-		
-		public SearchResultMatcher(ResultMatcher<SearchResult> matcher, int request, 
-				AtomicInteger requestNumber, int totalLimit) {
+		private SearchPhrase phrase;
+
+
+		public SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchPhrase phrase, int request,
+								   AtomicInteger requestNumber, int totalLimit) {
 			this.matcher = matcher;
+			this.phrase = phrase;
 			this.request = request;
 			this.requestNumber = requestNumber;
 			this.totalLimit = totalLimit;
 		}
-		
+
 		public SearchResult setParentSearchResult(SearchResult parentSearchResult) {
 			SearchResult prev = this.parentSearchResult;
 			this.parentSearchResult = parentSearchResult;
 			return prev;
 		}
-		
+
 		public List<SearchResult> getRequestResults() {
 			return requestResults;
 		}
-		
+
 		public int getCount() {
 			return requestResults.size();
 		}
-		
+
+		public void searchStarted(SearchPhrase phrase) {
+			if (matcher != null) {
+				SearchResult sr = new SearchResult(phrase);
+				sr.objectType = ObjectType.SEARCH_STARTED;
+				matcher.publish(sr);
+			}
+		}
+
+		public void filterFinished(SearchPhrase phrase) {
+			if (matcher != null) {
+				SearchResult sr = new SearchResult(phrase);
+				sr.objectType = ObjectType.FILTER_FINISHED;
+				matcher.publish(sr);
+			}
+		}
+
+		public void searchFinished(SearchPhrase phrase) {
+			if (matcher != null) {
+				SearchResult sr = new SearchResult(phrase);
+				sr.objectType = ObjectType.SEARCH_FINISHED;
+				matcher.publish(sr);
+			}
+		}
+
 		public void apiSearchFinished(SearchCoreAPI api, SearchPhrase phrase) {
-			if(matcher != null) {
+			if (matcher != null) {
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.SEARCH_API_FINISHED;
 				sr.object = api;
@@ -494,7 +650,7 @@ public class SearchUICore {
 				matcher.publish(sr);
 			}
 		}
-		
+
 		public void apiSearchRegionFinished(SearchCoreAPI api, BinaryMapIndexReader region, SearchPhrase phrase) {
 			if(matcher != null) {
 				SearchResult sr = new SearchResult(phrase);
@@ -503,16 +659,31 @@ public class SearchUICore {
 				sr.parentSearchResult = parentSearchResult;
 				sr.file = region;
 				matcher.publish(sr);
+				if (debugMode) {
+					LOG.info("API region search done <" + phrase + "> API=<" + api + "> Region=<" + region.getFile().getName() + ">");
+				}
 			}
 		}
-		
+
 		@Override
 		public boolean publish(SearchResult object) {
-			if(matcher == null || matcher.publish(object)) {
+			if (phrase != null && object.otherNames != null && !phrase.getNameStringMatcher().matches(object.localeName)) {
+				for (String s : object.otherNames) {
+					if (phrase.getNameStringMatcher().matches(s)) {
+						object.alternateName = s;
+						break;
+					}
+				}
+			}
+			if (Algorithms.isEmpty(object.localeName) && object.alternateName != null) {
+				object.localeName = object.alternateName;
+				object.alternateName = null;
+			}
+			if (matcher == null || matcher.publish(object)) {
 				count++;
 				object.parentSearchResult = parentSearchResult;
-				if(totalLimit == -1 || count < totalLimit) {
-					requestResults.add(object);	
+				if (totalLimit == -1 || count < totalLimit) {
+					requestResults.add(object);
 				}
 				return true;
 			}
@@ -522,38 +693,42 @@ public class SearchUICore {
 		public boolean isCancelled() {
 			boolean cancelled = request != requestNumber.get();
 			return cancelled || (matcher != null && matcher.isCancelled());
-		}		
+		}
 	}
-	
+
 	public static class SearchResultComparator implements Comparator<SearchResult> {
 		private SearchPhrase sp;
 		private Collator collator;
 		private LatLon loc;
-		
+		private boolean sortByName;
+
 		public SearchResultComparator(SearchPhrase sp) {
 			this.sp = sp;
 			this.collator = sp.getCollator();
 			loc = sp.getLastTokenLocation();
+			sortByName = sp.isSortByName();
 		}
 
 		@Override
 		public int compare(SearchResult o1, SearchResult o2) {
-			if(o1.getFoundWordCount() != o2.getFoundWordCount()) {
+			if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
 				return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
 			}
-			double s1 = o1.getSearchDistance(loc);
-			double s2 = o2.getSearchDistance(loc);
-			int cmp = Double.compare(s1, s2);
-			if(cmp != 0) {
-				return cmp;
+			if (!sortByName) {
+				double s1 = o1.getSearchDistance(loc);
+				double s2 = o2.getSearchDistance(loc);
+				int cmp = Double.compare(s1, s2);
+				if (cmp != 0) {
+					return cmp;
+				}
 			}
 			int st1 = Algorithms.extractFirstIntegerNumber(o1.localeName);
 			int st2 = Algorithms.extractFirstIntegerNumber(o2.localeName);
-			if(st1 != st2) {
+			if (st1 != st2) {
 				return Algorithms.compare(st1, st2);
 			}
-			cmp = collator.compare(o1.localeName, o2.localeName);
-			if(cmp != 0) {
+			int cmp = collator.compare(o1.localeName, o2.localeName);
+			if (cmp != 0) {
 				return cmp;
 			}
 			if (o1.object instanceof Amenity && o2.object instanceof Amenity) {
@@ -565,19 +740,19 @@ public class SearchUICore {
 				String subType1 = a1.getSubType();
 				String subType2 = a2.getSubType();
 				cmp = collator.compare(type1, type2);
-				if(cmp != 0) {
+				if (cmp != 0) {
 					return cmp;
 				}
 				cmp = collator.compare(subType1, subType2);
-				if(cmp != 0) {
+				if (cmp != 0) {
 					return cmp;
 				}
 			}
 
-			s1 = o1.getSearchDistance(loc, 1);
-			s2 = o2.getSearchDistance(loc, 1);
+			double s1 = o1.getSearchDistance(loc, 1);
+			double s2 = o2.getSearchDistance(loc, 1);
 			return Double.compare(s1, s2);
 		}
-		
+
 	}
 }

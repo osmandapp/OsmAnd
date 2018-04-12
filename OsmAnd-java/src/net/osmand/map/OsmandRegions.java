@@ -1,6 +1,7 @@
 package net.osmand.map;
 
 
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
@@ -92,7 +93,7 @@ public class OsmandRegions {
 	}
 
 
-	public void prepareFile(String fileName) throws IOException {
+	public BinaryMapIndexReader prepareFile(String fileName) throws IOException {
 		reader = new BinaryMapIndexReader(new RandomAccessFile(fileName, "r"), new File(fileName));
 //		final Collator clt = OsmAndCollator.primaryCollator();
 		final Map<String, String> parentRelations = new LinkedHashMap<String, String>();
@@ -137,6 +138,7 @@ public class OsmandRegions {
 			}
 		}
 		structureWorldRegions(new ArrayList<WorldRegion>(fullNamesToRegionData.values()));
+		return reader;
 	}
 
 	public boolean containsCountry(String name) {
@@ -370,6 +372,8 @@ public class OsmandRegions {
 		sr.log = false;
 		if (reader != null) {
 			reader.searchMapIndex(sr);
+		} else {
+			throw new IOException("Reader == null");
 		}
 		return result;
 	}
@@ -662,9 +666,11 @@ public class OsmandRegions {
 			}
 		}
 		Comparator<WorldRegion> nameComparator = new Comparator<WorldRegion>() {
+			final net.osmand.Collator collator = OsmAndCollator.primaryCollator();
+
 			@Override
 			public int compare(WorldRegion w1, WorldRegion w2) {
-				return w1.getLocaleName().compareTo(w2.getLocaleName());
+				return collator.compare(w1.getLocaleName(), w2.getLocaleName());
 			}
 		};
 		sortSubregions(world, nameComparator);
@@ -689,16 +695,16 @@ public class OsmandRegions {
 		}
 	}
 
-	public BinaryMapDataObject findBinaryMapDataObject(LatLon latLon) {
+	public BinaryMapDataObject findBinaryMapDataObject(LatLon latLon) throws IOException {
 		int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
 		int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
 
 		BinaryMapDataObject res = null;
-		List<BinaryMapDataObject> mapDataObjects = null;
+		List<BinaryMapDataObject> mapDataObjects;
 		try {
 			mapDataObjects = queryBbox(point31x, point31x, point31y, point31y);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new IOException("Error while calling queryBbox");
 		}
 
 		if (mapDataObjects != null) {

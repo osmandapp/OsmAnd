@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -397,7 +399,7 @@ public class BinaryMapIndexReader {
 		}
 		return "";
 	}
-	
+
 	public String getRegionName() {
 		List<String> rg = getRegionNames();
 		if (rg.size() == 0) {
@@ -405,7 +407,28 @@ public class BinaryMapIndexReader {
 		}
 		String ls = rg.get(0);
 		if (ls.lastIndexOf('_') != -1) {
-			return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
+			if (ls.matches("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+\\.obf")) {
+				Pattern osmDiffDateEnding = Pattern.compile("_([0-9]+_){2}[0-9]+\\.obf");
+				Matcher m = osmDiffDateEnding.matcher(ls);
+				if (m.find()) {
+					ls = ls.substring(0, m.start());
+					if (ls.lastIndexOf('_') != -1) {
+						return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
+					} else {
+						return ls;
+					}
+					
+				}
+			} else {
+				if (ls.contains(".")) {
+					ls = ls.substring(0, ls.indexOf("."));
+				}
+				if (ls.endsWith("_2")) {
+					ls = ls.substring(0, ls.length() - "_2".length());
+				}
+				return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
+			}
+
 		}
 		return ls;
 	}
@@ -1735,6 +1758,9 @@ public class BinaryMapIndexReader {
 		public TIntHashSet positiveLayers = new TIntHashSet(2);
 		public TIntHashSet negativeLayers = new TIntHashSet(2);
 
+		// to speed up comparision
+		private MapIndex referenceMapIndex;
+
 		public Integer getRule(String t, String v) {
 			Map<String, Integer> m = encodingRules.get(t);
 			if (m != null) {
@@ -1742,6 +1768,7 @@ public class BinaryMapIndexReader {
 			}
 			return null;
 		}
+		
 
 		public LatLon getCenterLatLon() {
 			if(roots.size() == 0) {
@@ -1760,9 +1787,17 @@ public class BinaryMapIndexReader {
 		public TagValuePair decodeType(int type) {
 			return decodingRules.get(type);
 		}
+		
+		public Integer getRule(TagValuePair tv) {
+			Map<String, Integer> m = encodingRules.get(tv.tag);
+			if (m != null) {
+				return m.get(tv.value);
+			}
+			return null;
+		}
 
 		public void finishInitializingTags() {
-			int free = decodingRules.size() * 2 + 1;
+			int free = decodingRules.size();
 			coastlineBrokenEncodingType = free++;
 			initMapEncodingRule(0, coastlineBrokenEncodingType, "natural", "coastline_broken");
 			if (landEncodingType == -1) {
@@ -1823,6 +1858,70 @@ public class BinaryMapIndexReader {
 
 		public int getFieldNumber() {
 			return OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER;
+		}
+
+		public BinaryMapDataObject adoptMapObject(BinaryMapDataObject o) {
+			if(o.mapIndex == this || o.mapIndex == referenceMapIndex) {
+				return o;
+			}
+			if(encodingRules.isEmpty()) {
+				encodingRules.putAll(o.mapIndex.encodingRules);
+				decodingRules.putAll(o.mapIndex.decodingRules);
+				referenceMapIndex = o.mapIndex;
+				return o;
+			}
+			TIntArrayList types = new TIntArrayList();
+			TIntArrayList additionalTypes = new TIntArrayList();
+			if (o.types != null) {
+				for (int i = 0; i < o.types.length; i++) {
+					TagValuePair tp = o.mapIndex.decodeType(o.types[i]);
+					Integer r = getRule(tp);
+					if(r != null) {
+						types.add(r);
+					} else {
+						int nid = decodingRules.size() + 1;
+						initMapEncodingRule(tp.additionalAttribute, nid, tp.tag, tp.value);
+						types.add(nid);
+					}
+				}
+			}
+			if (o.additionalTypes != null) {
+				for (int i = 0; i < o.additionalTypes.length; i++) {
+					TagValuePair tp = o.mapIndex.decodeType(o.additionalTypes[i]);
+					Integer r = getRule(tp);
+					if(r != null) {
+						additionalTypes.add(r);
+					} else {
+						int nid = decodingRules.size() + 1;
+						initMapEncodingRule(tp.additionalAttribute, nid, tp.tag, tp.value);
+						additionalTypes.add(nid);
+					}
+				}
+			}
+				
+			BinaryMapDataObject bm = 
+					new BinaryMapDataObject(o.id, o.coordinates, o.polygonInnerCoordinates, o.objectType, o.area, 
+							types.toArray(), additionalTypes.isEmpty() ? null : additionalTypes.toArray());
+			if (o.namesOrder != null) {
+				bm.objectNames = new TIntObjectHashMap<>();
+				bm.namesOrder = new TIntArrayList();
+				for (int i = 0; i < o.namesOrder.size(); i++) {
+					int nameType = o.namesOrder.get(i);
+					String name = o.objectNames.get(nameType);
+					TagValuePair tp = o.mapIndex.decodeType(nameType);
+					Integer r = getRule(tp);
+					if(r != null) {
+						bm.namesOrder.add(r);
+						bm.objectNames.put(r, name);
+					} else {
+						int nid = decodingRules.size() + 1;
+						initMapEncodingRule(tp.additionalAttribute, nid, tp.tag, tp.value);
+						additionalTypes.add(nid);
+						bm.objectNames.put(nid, name);
+					}
+				}
+			}
+			return bm;
 		}
 	}
 
@@ -1906,6 +2005,11 @@ public class BinaryMapIndexReader {
 		}
 
 		private List<MapTree> trees = null;
+
+
+		public MapZooms.MapZoomPair getMapZoom() {
+			return new MapZooms.MapZoomPair(minZoom, maxZoom);
+		}
 	}
 
 	private static class MapTree {
@@ -1957,7 +2061,7 @@ public class BinaryMapIndexReader {
 	private static boolean testAddressSearch = false;
 	private static boolean testAddressSearchName = false;
 	private static boolean testAddressJustifySearch = false;
-	private static boolean testPoiSearch = false;
+	private static boolean testPoiSearch = true;
 	private static boolean testPoiSearchOnPath = false;
 	private static boolean testTransportSearch = true;
 	
@@ -2123,7 +2227,7 @@ public class BinaryMapIndexReader {
 
 	private static void testPoiSearchByName(BinaryMapIndexReader reader) throws IOException {
 		println("Searching by name...");
-		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "Belar",
+		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "Art",
 				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null);
 		
 		reader.searchPoiByName(req);
@@ -2256,7 +2360,7 @@ public class BinaryMapIndexReader {
 			public boolean isCancelled() {
 				return false;
 			}
-		}, "Красноарм", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+		}, "Guy'", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 //		req.setBBoxRadius(52.276142, 4.8608723, 15000);
 		reader.searchAddressDataByName(req);
 	}

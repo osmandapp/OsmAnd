@@ -1,5 +1,23 @@
 package net.osmand.plus.render;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import net.osmand.IProgress;
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,18 +28,6 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
-
-import net.osmand.IProgress;
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.render.RenderingRulesStorage;
-import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 
 public class RendererRegistry {
@@ -35,6 +41,9 @@ public class RendererRegistry {
 	public final static String NAUTICAL_RENDER = "Nautical";  //$NON-NLS-1$
 	public final static String TOPO_RENDER = "Topo";  //$NON-NLS-1$
 	public final static String MAPNIK_RENDER = "Mapnik";  //$NON-NLS-1$
+	public final static String OFFROAD_RENDER = "Offroad";  //$NON-NLS-1$
+	public final static String LIGHTRS_RENDER = "LightRS";  //$NON-NLS-1$
+	public final static String UNIRS_RENDER = "UniRS";  //$NON-NLS-1$
 
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;
@@ -56,12 +65,13 @@ public class RendererRegistry {
 		this.app = app;
 		internalRenderers.put(DEFAULT_RENDER, DEFAULT_RENDER_FILE_PATH);
 		internalRenderers.put(TOURING_VIEW, "Touring-view_(more-contrast-and-details)" +".render.xml");
-		internalRenderers.put("UniRS", "UniRS" + ".render.xml");
-		internalRenderers.put("LightRS", "LightRS" + ".render.xml");
-		internalRenderers.put(NAUTICAL_RENDER, "nautical" + ".render.xml");
-		internalRenderers.put(WINTER_SKI_RENDER, "skimap" + ".render.xml");
 		internalRenderers.put(TOPO_RENDER, "topo" + ".render.xml");
 		internalRenderers.put(MAPNIK_RENDER, "mapnik" + ".render.xml");
+		internalRenderers.put(LIGHTRS_RENDER, "LightRS" + ".render.xml");
+		internalRenderers.put(UNIRS_RENDER, "UniRS" + ".render.xml");
+		internalRenderers.put(NAUTICAL_RENDER, "nautical" + ".render.xml");
+		internalRenderers.put(WINTER_SKI_RENDER, "skimap" + ".render.xml");
+		internalRenderers.put(OFFROAD_RENDER, "offroad" + ".render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {
@@ -241,6 +251,19 @@ public class RendererRegistry {
 		return names;
 	}
 
+	@Nullable
+	public static String getTranslatedRendererName(@NonNull Context ctx, @NonNull String key) {
+		switch (key) {
+			case TOURING_VIEW:
+				return ctx.getString(R.string.touring_view_renderer);
+			case WINTER_SKI_RENDER:
+				return ctx.getString(R.string.winter_and_ski_renderer);
+			case NAUTICAL_RENDER:
+				return ctx.getString(R.string.nautical_renderer);
+		}
+		return null;
+	}
+
 	public RenderingRulesStorage getCurrentSelectedRenderer() {
 		if(currentSelectedRender == null){
 			return defaultRender();
@@ -259,4 +282,16 @@ public class RendererRegistry {
     public IRendererLoadedEventListener getRendererLoadedEventListener() {
         return rendererLoadedEventListener;
     }
+
+	public RenderingRuleProperty getCustomRenderingRuleProperty(String attrName) {
+		RenderingRulesStorage renderer = getCurrentSelectedRenderer();
+		if (renderer != null) {
+			for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
+				if (p.getAttrName().equals(attrName)) {
+					return p;
+				}
+			}
+		}
+		return null;
+	}
 }

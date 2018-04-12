@@ -103,6 +103,7 @@ public abstract class Entity implements Serializable {
 
 	// lazy initializing
 	private Map<String, String> tags = null;
+	private Set<String> changedTags;
 	private final long id;
 	private boolean dataLoaded;
 	private int modify;
@@ -120,9 +121,17 @@ public abstract class Entity implements Serializable {
 	public Entity(Entity copy, long id) {
 		this.id = id;
 		for (String t : copy.getTagKeySet()) {
-			putTag(t, copy.getTag(t));
+			putTagNoLC(t, copy.getTag(t));
 		}
 		this.dataLoaded = copy.dataLoaded;
+	}
+
+	public Set<String> getChangedTags() {
+		return changedTags;
+	}
+
+	public void setChangedTags(Set<String> changedTags) {
+		this.changedTags = changedTags;
 	}
 
 	public int getModify() {
@@ -153,10 +162,14 @@ public abstract class Entity implements Serializable {
 	}
 
 	public String putTag(String key, String value) {
+		return putTagNoLC(key.toLowerCase(), value);
+	}
+	
+	public String putTagNoLC(String key, String value) {
 		if (tags == null) {
 			tags = new LinkedHashMap<String, String>();
 		}
-		return tags.put(key.toLowerCase(), value);
+		return tags.put(key, value);
 	}
 
 	public void replaceTags(Map<String, String> toPut) {

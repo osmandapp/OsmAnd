@@ -115,7 +115,7 @@ public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 					return;
 				case USER_LIKES_APP:
 					settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.LIKED);
-					Uri uri = Uri.parse(Version.marketPrefix(getMyApplication()) + getActivity().getPackageName());
+					Uri uri = Uri.parse(Version.getUrlWithUtmRef(getMyApplication(), getActivity().getPackageName()));
 					Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
 					startActivity(goToMarket);
 					break;

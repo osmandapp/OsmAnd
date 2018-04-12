@@ -23,13 +23,12 @@
             android:background="#70000000"
             android:orientation="vertical">
 
-            <include layout="@layout/dashboard_toolbar"/>
-
             <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
                 android:id="@+id/main_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
+                android:layout_marginTop="@dimen/dashboard_map_toolbar"
                 android:fadeScrollbars="true">
 
                 <LinearLayout
@@ -50,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
+                android:layout_marginTop="@dimen/dashboard_map_toolbar"
                 android:visibility="gone">
 
                 <net.osmand.plus.views.controls.DynamicListView
@@ -89,5 +89,9 @@
                 android:visibility="gone"/>
         </FrameLayout>
     </LinearLayout>
+
+    <include layout="@layout/dashboard_toolbar"
+             android:layout_height="@dimen/dashboard_map_toolbar"
+             android:layout_width="@dimen/dashboard_land_width"/>
 
 </FrameLayout>

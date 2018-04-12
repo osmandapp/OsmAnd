@@ -103,7 +103,9 @@ public class Building extends MapObject {
 	
 
 	public float interpolation(String hno) {
-		if(getInterpolationType() != null || getInterpolationInterval() > 0 || super.getName().contains("-")) {
+		if(getInterpolationType() != null || getInterpolationInterval() > 0 
+				//|| checkNameAsInterpolation() // disable due to situation in NL #4284 
+				) {
 			int num = Algorithms.extractFirstIntegerNumber(hno);
 			String fname = super.getName();
 			int numB = Algorithms.extractFirstIntegerNumber(fname);
@@ -139,6 +141,21 @@ public class Building extends MapObject {
 		}
 		return -1;
 	}
+	
+	protected boolean checkNameAsInterpolation() {
+		String nm = super.getName();
+		boolean interpolation = nm.contains("-");
+		if(interpolation) {
+			for(int i = 0; i < nm.length(); i++) {
+				if(!(nm.charAt(i) >= '0' && nm.charAt(i) <= '9') && nm.charAt(i) != '-') {
+					interpolation = false;
+					break;
+				}
+			}
+		}
+		return interpolation;
+	}
+
 	public boolean belongsToInterpolation(String hno) {
 		return interpolation(hno) >= 0;
 	}
@@ -174,6 +191,29 @@ public class Building extends MapObject {
 			return Algorithms.stringsEqual(((MapObject) o).getName(), getName());
 		}
 		return res;
+	}
+
+	public String getInterpolationName(double coeff) {
+		if (!Algorithms.isEmpty(getName2())) {
+			int fi = Algorithms.extractFirstIntegerNumber(getName());
+			int si = Algorithms.extractFirstIntegerNumber(getName2());
+			if (si != 0 && fi != 0) {
+				int num = (int) (fi + (si - fi) * coeff);
+				BuildingInterpolation type = getInterpolationType();
+				if (type == BuildingInterpolation.EVEN || type == BuildingInterpolation.ODD) {
+					if (num % 2 == (type == BuildingInterpolation.EVEN ? 1 : 0)) {
+						num--;
+					}
+				} else if (getInterpolationInterval() > 0) {
+					int intv = getInterpolationInterval();
+					if ((num - fi) % intv != 0) {
+						num = ((num - fi) / intv) * intv + fi;
+					}
+				}
+				return num + "";
+			}
+		}
+		return "";
 	}
 
 }

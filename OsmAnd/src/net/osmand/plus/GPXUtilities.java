@@ -6,13 +6,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.ColorInt;
+import android.text.TextUtils;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
 import net.osmand.util.Algorithms;
 
@@ -39,12 +39,16 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 import java.util.TimeZone;
 
@@ -52,8 +56,11 @@ public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
 
 	private final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
+	private final static String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; //$NON-NLS-1$
 
 	private final static NumberFormat latLonFormat = new DecimalFormat("0.00#####", new DecimalFormatSymbols(
+			new Locale("EN", "US")));
+	private final static NumberFormat decimalFormat = new DecimalFormat("#.###", new DecimalFormatSymbols(
 			new Locale("EN", "US")));
 
 	public static class GPXExtensions {
@@ -84,7 +91,7 @@ public class GPXUtilities {
 
 		public Map<String, String> getExtensionsToWrite() {
 			if (extensions == null) {
-				extensions = new LinkedHashMap<String, String>();
+				extensions = new LinkedHashMap<>();
 			}
 			return extensions;
 		}
@@ -92,13 +99,19 @@ public class GPXUtilities {
 	}
 
 	public static class Elevation {
-		public double distance, elevation;
+		public float distance;
+		public int time;
+		public float elevation;
 	}
 	public static class Speed {
-		public double distance, speed;
+		public float distance;
+		public int time;
+		public float speed;
 	}
 
 	public static class WptPt extends GPXExtensions implements LocationPoint {
+		public boolean firstPoint = false;
+		public boolean lastPoint = false;
 		public double lat;
 		public double lon;
 		public String name = null;
@@ -119,26 +132,24 @@ public class GPXUtilities {
 		public WptPt() {
 		}
 
-//		public WptPt(WptPt toCopy) {
-//			this.lat = toCopy.lat;
-//			this.lon = toCopy.lon;
-//			if (toCopy.name != null) {
-//				this.name = new String(toCopy.name);
-//			}
-//			if (toCopy.link != null) {
-//				this.link = new String(toCopy.link);
-//			}
-//			if (toCopy.category != null) {
-//				this.category = new String(toCopy.category);
-//			}
-//			this.time = toCopy.time;
-//			this.ele = toCopy.ele;
-//			this.speed = toCopy.speed;
-//			this.hdop = toCopy.hdop;
-//			this.deleted = toCopy.deleted;
-//			this.colourARGB = toCopy.colourARGB;
-//			this.distance = toCopy.distance;
-//		}
+		public WptPt(WptPt wptPt) {
+			this.lat = wptPt.lat;
+			this.lon = wptPt.lon;
+			this.name = wptPt.name;
+			this.link = wptPt.link;
+
+			this.category = wptPt.category;
+			this.desc = wptPt.desc;
+			this.comment = wptPt.comment;
+
+			this.time = wptPt.time;
+			this.ele = wptPt.ele;
+			this.speed = wptPt.speed;
+			this.hdop = wptPt.hdop;
+			this.deleted = wptPt.deleted;
+			this.colourARGB = wptPt.colourARGB;
+			this.distance = wptPt.distance;
+		}
 
 		public void setDistance(double dist) {
 			distance = dist;
@@ -212,8 +223,9 @@ public class GPXUtilities {
 	}
 
 	public static class TrkSegment extends GPXExtensions {
-		public List<WptPt> points = new ArrayList<WptPt>();
-		private OsmandMapTileView view;
+		public boolean generalSegment = false;
+
+		public List<WptPt> points = new ArrayList<>();
 
 		public List<Renderable.RenderableSegment> renders = new ArrayList<>();
 
@@ -226,7 +238,7 @@ public class GPXUtilities {
 		}
 
 		private List<GPXTrackAnalysis> split(SplitMetric metric, SplitMetric secondaryMetric, double metricLimit) {
-			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
+			List<SplitSegment> splitSegments = new ArrayList<>();
 			splitSegment(metric, secondaryMetric, metricLimit, splitSegments, this);
 			return convert(splitSegments);
 		}
@@ -241,14 +253,15 @@ public class GPXUtilities {
 	public static class Track extends GPXExtensions {
 		public String name = null;
 		public String desc = null;
-		public List<TrkSegment> segments = new ArrayList<TrkSegment>();
+		public List<TrkSegment> segments = new ArrayList<>();
+		public boolean generalTrack = false;
 
 	}
 
 	public static class Route extends GPXExtensions {
 		public String name = null;
 		public String desc = null;
-		public List<WptPt> points = new ArrayList<WptPt>();
+		public List<WptPt> points = new ArrayList<>();
 
 	}
 
@@ -270,16 +283,24 @@ public class GPXUtilities {
 		public double minElevation = 99999;
 		public double maxElevation = -100;
 
+		public float minSpeed = Float.MAX_VALUE;
 		public float maxSpeed = 0;
 		public float avgSpeed;
 
 		public int points;
 		public int wptPoints = 0;
 
+		public Set<String> wptCategoryNames;
+
 		public double metricEnd;
 		public double secondaryMetricEnd;
 		public WptPt locationStart;
 		public WptPt locationEnd;
+
+		public double left = 0;
+		public double right = 0;
+		public double top = 0;
+		public double bottom = 0;
 
 		public boolean isTimeSpecified() {
 			return startTime != Long.MAX_VALUE && startTime != 0;
@@ -293,8 +314,20 @@ public class GPXUtilities {
 			return maxElevation != -100;
 		}
 
+		public boolean hasSpeedInTrack() {
+			return hasSpeedInTrack;
+		}
+
+		public boolean isBoundsCalculated() {
+			return left !=0 && right != 0 && top != 0 && bottom != 0;
+		}
+
 		public List<Elevation> elevationData;
 		public List<Speed> speedData;
+
+		public boolean hasElevationData;
+		public boolean hasSpeedData;
+		public boolean hasSpeedInTrack = false;
 
 		public boolean isSpeedSpecified() {
 			return avgSpeed > 0;
@@ -308,14 +341,18 @@ public class GPXUtilities {
 		public GPXTrackAnalysis prepareInformation(long filestamp, SplitSegment... splitSegments) {
 			float[] calculations = new float[1];
 
+			long startTimeOfSingleSegment = 0;
+			long endTimeOfSingleSegment = 0;
+
 			float totalElevation = 0;
 			int elevationPoints = 0;
 			int speedCount = 0;
+			int timeDiff = 0;
 			double totalSpeedSum = 0;
 			points = 0;
 
-			double channelThresMin = 5;            // Minimum oscillation amplitude considered as noise for Up/Down analysis
-			double channelThres = channelThresMin; // Actual oscillation amplitude considered as noise, try depedency on current hdop/getAccuracy
+			double channelThresMin = 10;           // Minimum oscillation amplitude considered as relevant or as above noise for accumulated Ascent/Descent analysis
+			double channelThres = channelThresMin; // Actual oscillation amplitude considered as above noise (dynamic channel adjustment, accomodates depedency on current VDOP/getAccuracy if desired)
 			double channelBase;
 			double channelTop;
 			double channelBottom;
@@ -330,8 +367,9 @@ public class GPXUtilities {
 				channelBase = 99999;
 				channelTop = channelBase;
 				channelBottom = channelBase;
-				channelThres = channelThresMin;
+				//channelThres = channelThresMin; //only for dynamic channel adjustment
 
+				float segmentDistance = 0f;
 				metricEnd += s.metricEnd;
 				secondaryMetricEnd += s.secondaryMetricEnd;
 				points += numberOfPoints;
@@ -345,8 +383,34 @@ public class GPXUtilities {
 					}
 					long time = point.time;
 					if (time != 0) {
+						if (s.metricEnd == 0) {
+							if (s.segment.generalSegment) {
+								if (point.firstPoint) {
+									startTimeOfSingleSegment = time;
+								} else if (point.lastPoint) {
+									endTimeOfSingleSegment = time;
+								}
+								if (startTimeOfSingleSegment != 0 && endTimeOfSingleSegment != 0) {
+									timeSpan += endTimeOfSingleSegment - startTimeOfSingleSegment;
+									startTimeOfSingleSegment = 0;
+									endTimeOfSingleSegment = 0;
+								}
+							}
+						}
 						startTime = Math.min(startTime, time);
 						endTime = Math.max(endTime, time);
+					}
+
+					if (left == 0 && right == 0) {
+						left = point.getLongitude();
+						right = point.getLongitude();
+						top = point.getLatitude();
+						bottom = point.getLatitude();
+					} else {
+						left = Math.min(left, point.getLongitude());
+						right = Math.max(right, point.getLongitude());
+						top = Math.max(top, point.getLatitude());
+						bottom = Math.min(bottom, point.getLatitude());
 					}
 
 					double elevation = point.ele;
@@ -357,62 +421,79 @@ public class GPXUtilities {
 						minElevation = Math.min(elevation, minElevation);
 						maxElevation = Math.max(elevation, maxElevation);
 
-						elevation1.elevation = elevation;
+						elevation1.elevation = (float) elevation;
 					} else {
-						elevation1.elevation = 0;
+						elevation1.elevation = Float.NaN;
 					}
 
 					float speed = (float) point.speed;
-					Speed speed1 = new Speed();
 					if (speed > 0) {
-						totalSpeedSum += speed;
-						maxSpeed = Math.max(speed, maxSpeed);
-						speedCount++;
-
-						speed1.speed = speed;
-					} else {
-						speed1.speed = 0;
+						hasSpeedInTrack = true;
 					}
 
-					// Trend channel approach for elevation gain/loss, Hardy 2015-09-22
-					// Self-adjusting turnarund threshold added for testing 2015-09-25: Current rule is now: "All up/down trends of amplitude <X are ignored to smooth the noise, where X is the maximum observed DOP value of any point which contributed to the current trend (but at least 5 m as the minimum noise threshold)".
-					if (!Double.isNaN(point.ele)) {
+					// Trend channel analysis for elevation gain/loss, Hardy 2015-09-22, LPF filtering added 2017-10-26:
+					// - Detect the consecutive elevation trend channels: Only use the net elevation changes of each trend channel (i.e. between the turnarounds) to accumulate the Ascent/Descent values.
+					// - Perform the channel evaluation on Low Pass Filter (LPF) smoothed ele data instead of on the raw ele data
+					// Parameters:
+					// - channelThresMin (in meters): defines the channel turnaround detection, i.e. oscillations smaller than this are ignored as irrelevant or noise.
+					// - smoothWindow (number of points): is the LPF window
+					// NOW REMOVED, as no relevant examples found: Dynamic channel adjustment: To suppress unreliable measurement points, could relax the turnaround detection from the constant channelThresMin to channelThres which is e.g. based on the maximum VDOP of any point which contributed to the current trend. (Good assumption is VDOP=2*HDOP, which accounts for invisibility of lower hemisphere satellites.)
+
+					// LPF smooting of ele data, usually smooth over odd number of values like 5
+					final int smoothWindow = 5;
+					double eleSmoothed = Double.NaN;
+					int j2 = 0;
+					for (int j1 = - smoothWindow + 1; j1 <= 0; j1++) {
+						if ((j + j1 >= 0) && !Double.isNaN(s.get(j + j1).ele)) {
+							j2++;
+							if (!Double.isNaN(eleSmoothed)) {
+								eleSmoothed = eleSmoothed + s.get(j + j1).ele;
+							} else {
+								eleSmoothed = s.get(j + j1).ele;
+							}
+						}
+					}
+					if (!Double.isNaN(eleSmoothed)) {
+						eleSmoothed = eleSmoothed / j2;
+					}
+
+					if (!Double.isNaN(eleSmoothed)) {
 						// Init channel
 						if (channelBase == 99999) {
-							channelBase = point.ele;
+							channelBase = eleSmoothed;
 							channelTop = channelBase;
 							channelBottom = channelBase;
-							channelThres = channelThresMin;
+							//channelThres = channelThresMin; //only for dynamic channel adjustment
 						}
 						// Channel maintenance
-						if (point.ele > channelTop) {
-							channelTop = point.ele;
-							if (!Double.isNaN(point.hdop)) {
-								channelThres = Math.max(channelThres, 2.0 * point.hdop);  //Use empirical 2*getAccuracy(vertical), this better serves very flat tracks or high dop tracks
-							}
-						} else if (point.ele < channelBottom) {
-							channelBottom = point.ele;
-							if (!Double.isNaN(point.hdop)) {
-								channelThres = Math.max(channelThres, 2.0 * point.hdop);
-							}
+						if (eleSmoothed > channelTop) {
+							channelTop = eleSmoothed;
+							//if (!Double.isNaN(point.hdop)) {
+							//	channelThres = Math.max(channelThres, 2.0 * point.hdop); //only for dynamic channel adjustment
+							//}
+						} else if (eleSmoothed < channelBottom) {
+							channelBottom = eleSmoothed;
+							//if (!Double.isNaN(point.hdop)) {
+							//	channelThres = Math.max(channelThres, 2.0 * point.hdop); //only for dynamic channel adjustment
+							//}
 						}
 						// Turnaround (breakout) detection
-						if ((point.ele <= (channelTop - channelThres)) && (climb == true)) {
+						if ((eleSmoothed <= (channelTop - channelThres)) && (climb == true)) {
 							if ((channelTop - channelBase) >= channelThres) {
 								diffElevationUp += channelTop - channelBase;
 							}
 							channelBase = channelTop;
-							channelBottom = point.ele;
+							channelBottom = eleSmoothed;
 							climb = false;
-							channelThres = channelThresMin;
-						} else if ((point.ele >= (channelBottom + channelThres)) && (climb == false)) {
+							//channelThres = channelThresMin; //only for dynamic channel adjustment
+						} else if ((eleSmoothed >= (channelBottom + channelThres)) && (climb == false)) {
 							if ((channelBase - channelBottom) >= channelThres) {
 								diffElevationDown += channelBase - channelBottom;
 							}
 							channelBase = channelBottom;
-							channelTop = point.ele;
+							channelTop = eleSmoothed;
 							climb = true;
-							channelThres = channelThresMin;
+							//channelThres = channelThresMin; //only for dynamic channel adjustment
 						}
 						// End detection without breakout
 						if (j == (numberOfPoints - 1)) {
@@ -443,6 +524,14 @@ public class GPXUtilities {
 						// a little more exact, also seems slightly faster:
 						net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
 						totalDistance += calculations[0];
+						segmentDistance += calculations[0];
+						point.distance = segmentDistance;
+						timeDiff = (int)((point.time - prev.time) / 1000);
+
+						//Last resort: Derive speed values from displacement if track does not originally contain speed
+						if (!hasSpeedInTrack && speed == 0 && timeDiff > 0) {
+							speed = calculations[0] / timeDiff;
+						}
 
 						// Motion detection:
 						//   speed > 0  uses GPS chipset's motion detection
@@ -451,19 +540,41 @@ public class GPXUtilities {
 							timeMoving = timeMoving + (point.time - prev.time);
 							totalDistanceMoving += calculations[0];
 						}
+
 						//Next few lines for Issue 3222 heuristic testing only
 						//	if (speed > 0 && point.time != 0 && prev.time != 0) {
 						//		timeMoving0 = timeMoving0 + (point.time - prev.time);
 						//		totalDistanceMoving0 += calculations[0];
 						//	}
-
 					}
 
+					elevation1.time = timeDiff;
 					elevation1.distance = (j > 0) ? calculations[0] : 0;
 					elevationData.add(elevation1);
+					if (!hasElevationData && !Float.isNaN(elevation1.elevation) && totalDistance > 0) {
+						hasElevationData = true;
+					}
+
+					minSpeed = Math.min(speed, minSpeed);
+					if (speed > 0) {
+						totalSpeedSum += speed;
+						maxSpeed = Math.max(speed, maxSpeed);
+						speedCount++;
+					}
+
+					Speed speed1 = new Speed();
+					speed1.speed = speed;
+					speed1.time = timeDiff;
 					speed1.distance = elevation1.distance;
 					speedData.add(speed1);
+					if (!hasSpeedData && speed1.speed > 0 && totalDistance > 0) {
+						hasSpeedData = true;
+					}
 				}
+			}
+			if (totalDistance < 0) {
+				hasElevationData = false;
+				hasSpeedData = false;
 			}
 			if (!isTimeSpecified()) {
 				startTime = filestamp;
@@ -473,7 +584,9 @@ public class GPXUtilities {
 			// OUTPUT:
 			// 1. Total distance, Start time, End time
 			// 2. Time span
-			timeSpan = endTime - startTime;
+			if (timeSpan == 0) {
+				timeSpan = endTime - startTime;
+			}
 
 			// 3. Time moving, if any
 			// 4. Elevation, eleUp, eleDown, if recorded
@@ -652,7 +765,7 @@ public class GPXUtilities {
 	}
 
 	private static List<GPXTrackAnalysis> convert(List<SplitSegment> splitSegments) {
-		List<GPXTrackAnalysis> ls = new ArrayList<GPXUtilities.GPXTrackAnalysis>();
+		List<GPXTrackAnalysis> ls = new ArrayList<>();
 		for (SplitSegment s : splitSegments) {
 			GPXTrackAnalysis a = new GPXTrackAnalysis();
 			a.prepareInformation(0, s);
@@ -663,30 +776,129 @@ public class GPXUtilities {
 
 	public static class GPXFile extends GPXExtensions {
 		public String author;
-		public List<Track> tracks = new ArrayList<Track>();
-		public List<WptPt> points = new ArrayList<WptPt>();
-		public List<Route> routes = new ArrayList<Route>();
+		public List<Track> tracks = new ArrayList<>();
+		private List<WptPt> points = new ArrayList<>();
+		public List<Route> routes = new ArrayList<>();
 
 		public String warning = null;
 		public String path = "";
 		public boolean showCurrentTrack;
 		public long modifiedTime = 0;
 
+		private Track generalTrack;
+		private TrkSegment generalSegment;
+
+		public List<WptPt> getPoints() {
+			return Collections.unmodifiableList(points);
+		}
+
+		public Map<String, List<WptPt>> getPointsByCategories() {
+			Map<String, List<WptPt>> res = new HashMap<>();
+			for (WptPt pt : points) {
+				String category = pt.category == null ? "" : pt.category;
+				List<WptPt> list = res.get(category);
+				if (list != null) {
+					list.add(pt);
+				} else {
+					list = new ArrayList<>();
+					list.add(pt);
+					res.put(category, list);
+				}
+			}
+			return res;
+		}
+
+		public boolean isPointsEmpty() {
+			return points.isEmpty();
+		}
+
+		int getPointsSize() {
+			return points.size();
+		}
+
+		boolean containsPoint(WptPt point) {
+			return points.contains(point);
+		}
+
+		void clearPoints() {
+			points.clear();
+			modifiedTime = System.currentTimeMillis();
+		}
+
+		public void addPoint(WptPt point) {
+			points.add(point);
+			modifiedTime = System.currentTimeMillis();
+		}
+
+		void addPoints(Collection<? extends WptPt> collection) {
+			points.addAll(collection);
+			modifiedTime = System.currentTimeMillis();
+		}
+
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);
 		}
 
+		public void addGeneralTrack() {
+			Track generalTrack = getGeneralTrack();
+			if (generalTrack != null && !tracks.contains(generalTrack)) {
+				tracks.add(0, generalTrack);
+			}
+		}
+
+		public Track getGeneralTrack() {
+			TrkSegment generalSegment = getGeneralSegment();
+			if (generalTrack == null && generalSegment != null) {
+				Track track = new Track();
+				track.segments = new ArrayList<>();
+				track.segments.add(generalSegment);
+				generalTrack = track;
+				track.generalTrack = true;
+			}
+			return generalTrack;
+		}
+
+		public TrkSegment getGeneralSegment() {
+			if (generalSegment == null && getNonEmptySegmentsCount() > 1) {
+				buildGeneralSegment();
+			}
+			return generalSegment;
+		}
+
+		private void buildGeneralSegment() {
+			TrkSegment segment = new TrkSegment();
+			for (Track track : tracks) {
+				for (TrkSegment s : track.segments) {
+					if (s.points.size() > 0) {
+						List<WptPt> waypoints = new ArrayList<>(s.points.size());
+						for (WptPt wptPt : s.points) {
+							waypoints.add(new WptPt(wptPt));
+						}
+						waypoints.get(0).firstPoint = true;
+						waypoints.get(waypoints.size() - 1).lastPoint = true;
+						segment.points.addAll(waypoints);
+					}
+				}
+			}
+			if (segment.points.size() > 0) {
+				segment.generalSegment = true;
+				generalSegment = segment;
+			}
+		}
 
 		public GPXTrackAnalysis getAnalysis(long fileTimestamp) {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
 			g.wptPoints = points.size();
+			g.wptCategoryNames = getWaypointCategories(true);
 			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
 			for (int i = 0; i < tracks.size(); i++) {
 				Track subtrack = tracks.get(i);
 				for (TrkSegment segment : subtrack.segments) {
-					g.totalTracks++;
-					if (segment.points.size() > 1) {
-						splitSegments.add(new SplitSegment(segment));
+					if (!segment.generalSegment) {
+						g.totalTracks++;
+						if (segment.points.size() > 1) {
+							splitSegments.add(new SplitSegment(segment));
+						}
 					}
 				}
 			}
@@ -694,6 +906,14 @@ public class GPXUtilities {
 			return g;
 		}
 
+		public List<WptPt> getRoutePoints() {
+			List<WptPt> points = new ArrayList<>();
+			for (int i = 0; i < routes.size(); i++) {
+				Route rt = routes.get(i);
+				points.addAll(rt.points);
+			}
+			return points;
+		}
 
 		public boolean hasRtePt() {
 			for (Route r : routes) {
@@ -731,9 +951,90 @@ public class GPXUtilities {
 			}
 
 			points.add(pt);
+
 			modifiedTime = System.currentTimeMillis();
 
 			return pt;
+		}
+
+		public WptPt addRtePt(double lat, double lon, long time, String description, String name, String category, int color) {
+			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
+			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
+			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
+			pt.name = name;
+			pt.category = category;
+			pt.desc = description;
+			if (color != 0) {
+				pt.setColor(color);
+			}
+
+			if (routes.size() == 0) {
+				routes.add(new Route());
+			}
+			Route currentRoute = routes.get(routes.size() - 1);
+			currentRoute.points.add(pt);
+
+			modifiedTime = System.currentTimeMillis();
+
+			return pt;
+		}
+
+		public void addTrkSegment(List<WptPt> points) {
+			removeGeneralTrackIfExists();
+
+			TrkSegment segment = new TrkSegment();
+			segment.points.addAll(points);
+
+			if (tracks.size() == 0) {
+				tracks.add(new Track());
+			}
+			Track lastTrack = tracks.get(tracks.size() - 1);
+			lastTrack.segments.add(segment);
+
+			modifiedTime = System.currentTimeMillis();
+		}
+
+		public boolean replaceSegment(TrkSegment oldSegment, TrkSegment newSegment) {
+			removeGeneralTrackIfExists();
+
+			for (int i = 0; i < tracks.size(); i++) {
+				Track currentTrack = tracks.get(i);
+				for (int j = 0; j < currentTrack.segments.size(); j++) {
+					int segmentIndex = currentTrack.segments.indexOf(oldSegment);
+					if (segmentIndex != -1) {
+						currentTrack.segments.remove(segmentIndex);
+						currentTrack.segments.add(segmentIndex, newSegment);
+						addGeneralTrack();
+						modifiedTime = System.currentTimeMillis();
+						return true;
+					}
+				}
+			}
+
+			addGeneralTrack();
+			return false;
+		}
+
+		public void addRoutePoints(List<WptPt> points) {
+			if (routes.size() == 0) {
+				Route route = new Route();
+				routes.add(route);
+			}
+
+			Route lastRoute = routes.get(routes.size() - 1);
+
+			lastRoute.points.addAll(points);
+
+			modifiedTime = System.currentTimeMillis();
+		}
+
+		public void replaceRoutePoints(List<WptPt> points) {
+			routes.clear();
+			routes.add(new Route());
+			Route currentRoute = routes.get(routes.size() - 1);
+			currentRoute.points.addAll(points);
+
+			modifiedTime = System.currentTimeMillis();
 		}
 
 		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category, int color) {
@@ -756,6 +1057,31 @@ public class GPXUtilities {
 				points.set(index, pt);
 			}
 			modifiedTime = System.currentTimeMillis();
+		}
+
+		private void removeGeneralTrackIfExists() {
+			if (generalTrack != null) {
+				tracks.remove(generalTrack);
+				this.generalTrack = null;
+				this.generalSegment = null;
+			}
+		}
+
+		public boolean removeTrkSegment(TrkSegment segment) {
+			removeGeneralTrackIfExists();
+
+			for (int i = 0; i < tracks.size(); i++) {
+				Track currentTrack = tracks.get(i);
+				for (int j = 0; j < currentTrack.segments.size(); j++) {
+					if (currentTrack.segments.remove(segment)) {
+						addGeneralTrack();
+						modifiedTime = System.currentTimeMillis();
+						return true;
+					}
+				}
+			}
+			addGeneralTrack();
+			return false;
 		}
 
 		public boolean deleteWptPt(WptPt pt) {
@@ -794,7 +1120,7 @@ public class GPXUtilities {
 			for (Track t : tracks) {
 				int trackColor = t.getColor(getColor(0));
 				for (TrkSegment ts : t.segments) {
-					if (ts.points.size() > 0) {
+					if (!ts.generalSegment && ts.points.size() > 0) {
 						TrkSegment sgmt = new TrkSegment();
 						tpoints.add(sgmt);
 						sgmt.points.addAll(ts.points);
@@ -851,7 +1177,28 @@ public class GPXUtilities {
 			return points.isEmpty() && routes.isEmpty();
 		}
 
+		public int getNonEmptySegmentsCount() {
+			int count = 0;
+			for (Track t : tracks) {
+				for (TrkSegment s : t.segments) {
+					if (s.points.size() > 0) {
+						count++;
+					}
+				}
+			}
+			return count;
+		}
 
+		public Set<String> getWaypointCategories(boolean withDefaultCategory) {
+			Set<String> categories = new HashSet<>();
+			for (WptPt pt : points) {
+				String category = pt.category == null ? "" : pt.category;
+				if (withDefaultCategory || !TextUtils.isEmpty(category)) {
+					categories.add(category);
+				}
+			}
+			return categories;
+		}
 	}
 
     public static String asString(GPXFile file, OsmandApplication ctx) {
@@ -900,20 +1247,22 @@ public class GPXUtilities {
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
 
 			for (Track track : file.tracks) {
-				serializer.startTag(null, "trk"); //$NON-NLS-1$
-				writeNotNullText(serializer, "name", track.name);
-				writeNotNullText(serializer, "desc", track.desc);
-				for (TrkSegment segment : track.segments) {
-					serializer.startTag(null, "trkseg"); //$NON-NLS-1$
-					for (WptPt p : segment.points) {
-						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
-						writeWpt(format, serializer, p);
-						serializer.endTag(null, "trkpt"); //$NON-NLS-1$
+				if (!track.generalTrack) {
+					serializer.startTag(null, "trk"); //$NON-NLS-1$
+					writeNotNullText(serializer, "name", track.name);
+					writeNotNullText(serializer, "desc", track.desc);
+					for (TrkSegment segment : track.segments) {
+						serializer.startTag(null, "trkseg"); //$NON-NLS-1$
+						for (WptPt p : segment.points) {
+							serializer.startTag(null, "trkpt"); //$NON-NLS-1$
+							writeWpt(format, serializer, p);
+							serializer.endTag(null, "trkpt"); //$NON-NLS-1$
+						}
+						serializer.endTag(null, "trkseg"); //$NON-NLS-1$
 					}
-					serializer.endTag(null, "trkseg"); //$NON-NLS-1$
+					writeExtensions(serializer, track);
+					serializer.endTag(null, "trk"); //$NON-NLS-1$
 				}
-				writeExtensions(serializer, track);
-				serializer.endTag(null, "trk"); //$NON-NLS-1$
 			}
 
 			for (Route track : file.routes) {
@@ -972,7 +1321,7 @@ public class GPXUtilities {
 		serializer.attribute(null, "lon", latLonFormat.format(p.lon)); //$NON-NLS-1$ //$NON-NLS-2$
 
 		if (!Double.isNaN(p.ele)) {
-			writeNotNullText(serializer, "ele", (float) p.ele + "");
+			writeNotNullText(serializer, "ele", decimalFormat.format(p.ele));
 		}
 		if (p.time != 0) {
 			writeNotNullText(serializer, "time", format.format(new Date(p.time)));
@@ -989,17 +1338,17 @@ public class GPXUtilities {
 			writeNotNullText(serializer, "cmt", p.comment);
 		}
 		if (!Double.isNaN(p.hdop)) {
-			writeNotNullText(serializer, "hdop", p.hdop + "");
+			writeNotNullText(serializer, "hdop", decimalFormat.format(p.hdop));
 		}
 		if (p.speed > 0) {
-			p.getExtensionsToWrite().put("speed", p.speed + "");
+			p.getExtensionsToWrite().put("speed", decimalFormat.format(p.speed));
 		}
 		writeExtensions(serializer, p);
 	}
 
 	public static class GPXFileResult {
 		public ArrayList<List<Location>> locations = new ArrayList<List<Location>>();
-		public ArrayList<WptPt> wayPoints = new ArrayList<WptPt>();
+		public ArrayList<WptPt> wayPoints = new ArrayList<>();
 		// special case for cloudmate gpx : they discourage common schema
 		// by using waypoint as track points and rtept are not very close to real way
 		// such as wpt. However they provide additional information into gpx.
@@ -1067,6 +1416,8 @@ public class GPXUtilities {
 		GPXFile res = new GPXFile();
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		SimpleDateFormat formatMillis = new SimpleDateFormat(GPX_TIME_FORMAT_MILLIS, Locale.US);
+		formatMillis.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(getUTF8Reader(f)); //$NON-NLS-1$
@@ -1142,6 +1493,26 @@ public class GPXUtilities {
 								((TrkSegment) parse).points.add(wptPt);
 								parserState.push(wptPt);
 							}
+							if (parser.getName().equals("csvattributes")) {
+								String segmentPoints = readText(parser, "csvattributes");
+								String[] pointsArr = segmentPoints.split("\n");
+								for (int i = 0; i < pointsArr.length; i++) {
+									String[] pointAttrs = pointsArr[i].split(",");
+									try {
+										int arrLength = pointsArr.length;
+										if (arrLength > 1) {
+											WptPt wptPt = new WptPt();
+											wptPt.lon = Double.parseDouble(pointAttrs[0]);
+											wptPt.lat = Double.parseDouble(pointAttrs[1]);
+											((TrkSegment) parse).points.add(wptPt);
+											if (arrLength > 2) {
+												wptPt.ele = Double.parseDouble(pointAttrs[2]);
+											}
+										}
+									} catch (NumberFormatException e) {
+									}
+								}
+							}
 							// main object to parse
 						} else if (parse instanceof WptPt) {
 							if (parser.getName().equals("name")) {
@@ -1186,7 +1557,12 @@ public class GPXUtilities {
 								if (text != null) {
 									try {
 										((WptPt) parse).time = format.parse(text).getTime();
-									} catch (ParseException e) {
+									} catch (ParseException e1) {
+										try {
+											((WptPt) parse).time = formatMillis.parse(text).getTime();
+										} catch (ParseException e2) {
+
+										}
 									}
 								}
 							}

@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 mainClassName = "net.osmand.util.GeoPointParserUtil"
-
+compileJava.options.encoding = 'UTF-8'
 
 tasks.withType(JavaCompile) {
 	sourceCompatibility = "1.7"

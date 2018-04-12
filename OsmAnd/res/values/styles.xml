@@ -73,12 +73,45 @@
         <item name="android:textColor">?attr/contextMenuButtonColor</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
+    
+    <style name="FirstSplashScreenCustom" parent="OsmandLightTheme.NoActionbar">
+        <item name="android:windowBackground">@drawable/first_splash_screen_free</item>
+    </style>
+
+    <style name="FirstSplashScreenPlus" parent="OsmandLightTheme.NoActionbar">
+        <item name="android:windowBackground">@drawable/first_splash_screen_plus</item>
+    </style>
+
+    <style name="FirstSplashScreenFree" parent="OsmandLightTheme.NoActionbar">
+        <item name="android:windowBackground">@drawable/first_splash_screen_free</item>
+    </style>
+
+    <style name="FirstSplashScreenFreeDev" parent="OsmandLightTheme.NoActionbar">
+        <item name="android:windowBackground">@drawable/first_splash_screen_free_dev</item>
+    </style>
+
+    <style name="OsmandTextFieldBoxes" parent="OsmandDarkTheme">
+        <item name="android:textColorTertiary">@color/white_50_transparent</item>
+        <item name="primaryColor">@color/white_50_transparent</item>
+        <item name="errorColor">@color/coordinate_input_error_color</item>
+    </style>
+
+    <style name="OsmandLightThemeWithLightStatusBar" parent="OsmandLightTheme">
+        <item name="android:statusBarColor">@color/status_bar_route_light</item>
+    </style>
+
+    <style name="TextAppearance.App.DarkTextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/color_dialog_buttons_dark</item>
+    </style>
 
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
+        <item name="android:statusBarColor">@color/status_bar_light</item>
+        <item name="mapBackground">@color/map_background_color_light</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_light</item>
         <item name="routeParameterTitleColor">@color/color_myloc_distance</item>
         <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_light</item>
+        <item name="ctx_menu_card_btn">@color/ctx_menu_card_btn_light</item>
         <item name="searchbar_text">@color/searchbar_text_light</item>
         <item name="searchbar_text_hint">@color/searchbar_text_hint_light</item>
         <item name="list_divider">@color/list_divider_dark</item>
@@ -95,7 +128,9 @@
         <item name="actionModeBackground">@color/actionbar_light_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="bg_color">@color/bg_color_light</item>
+        <item name="btn_round_border">@drawable/btn_round_border_light</item>
         <item name="bg_card">@drawable/bg_card_light</item>
+        <item name="context_menu_card">@drawable/context_menu_card_light</item>
         <item name="bg_map_context_menu">@drawable/bg_map_context_menu_light</item>
         <item name="bottom_menu_view_bg">@drawable/bg_bottom_menu_light</item>
         <item name="left_menu_view_bg">@drawable/bg_left_menu_light</item>
@@ -104,6 +139,9 @@
         <item name="divider_color">@color/divider_color</item>
         <item name="dashboard_button">@drawable/dashboard_button_light</item>
         <item name="ctx_menu_info_view_bg">@color/ctx_menu_info_view_bg_light</item>
+        <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_light</item>
+        <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_light</item>
+        <item name="ctx_menu_divider">@color/ctx_menu_buttons_divider_light</item>
         <item name="search_background">@color/search_background_dark</item>
         <item name="actionModeCloseDrawable">@drawable/ic_action_mode_back</item>
         <item name="actionModeStyle">@style/WhiteActionMode</item>
@@ -120,7 +158,6 @@
         <item name="expandable_list_background">@color/list_item_light</item>
         <item name="size_progress_bar">@drawable/size_progressbar_light</item>
         <item name="dash_parking_bg">@drawable/dash_parking_light</item>
-        <item name="osmo_header_background">@color/osmo_header_light</item>
         <item name="dashboard_subheader_text_color">@color/dashboard_subheader_text_light</item>
         <item name="dashboard_general_button_text_color">
             @color/dashboard_general_button_text_light
@@ -155,6 +192,20 @@
         <item name="color_dialog_buttons">@color/color_dialog_buttons_light</item>
 
         <item name="popupMenuStyle">@style/PopupMenuLight</item>
+
+        <item name="keyboard_controls_divider">@color/keyboard_item_add_button_divider_light</item>
+
+        <item name="coordinate_input_edit_text_normal">@color/coordinate_input_edit_text_normal_light</item>
+
+        <item name="wikivoyage_bg_color">@color/wikivoyage_bg_light</item>
+        <item name="wikivoyage_card_bg_color">@color/wikivoyage_card_bg_light</item>
+        <item name="wikivoyage_card_divider_color">@color/wikivoyage_card_divider_light</item>
+        <item name="wikivoyage_app_bar_color">@color/wikivoyage_app_bar_light</item>
+        <item name="wikivoyage_app_bar_text_color">@color/wikivoyage_app_bar_text_light</item>
+        <item name="wikivoyage_active_color">@color/wikivoyage_active_light</item>
+        <item name="wikivoyage_bottom_bar_bg_color">@color/wikivoyage_bottom_bar_bg_light</item>
+        <item name="wikivoyage_bottom_bar_divider_color">@color/wikivoyage_bottom_bar_divider_light</item>
+        <item name="wikivoyage_secondary_btn_bg_color">@color/wikivoyage_secondary_btn_bg_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -224,6 +275,7 @@
     </style>
 
     <style name="OsmandLightTheme.BottomSheet">
+        <item name="android:statusBarColor">@color/color_transparent</item>
         <item name="android:dialogTheme">@style/BottomSheet.Dialog</item>
         <item name="android:windowBackground">@color/color_transparent</item>
         <item name="android:backgroundDimAmount">0.3</item>
@@ -231,6 +283,7 @@
     </style>
 
     <style name="OsmandDarkTheme.BottomSheet">
+        <item name="android:statusBarColor">@color/color_transparent</item>
         <item name="android:dialogTheme">@style/BottomSheet.Dialog</item>
         <item name="android:windowBackground">@color/color_transparent</item>
         <item name="android:backgroundDimAmount">0.3</item>
@@ -246,10 +299,26 @@
         <item name="android:textColorSecondary">@color/color_white</item>
     </style>
 
+    <style name="OsmandDarkTheme.NoAnimation">
+        <item name="alertDialogTheme">@style/Theme.AppCompat.Dialog.Alert.NoAnimation</item>
+    </style>
+
+    <style name="OsmandLightTheme.NoAnimation">
+        <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert.NoAnimation</item>
+    </style>
+
+    <style name="CoordinateInputEditText" parent="Widget.AppCompat.EditText">
+        <item name="colorControlActivated">@color/coordinate_input_edit_text_activated</item>
+        <item name="colorControlNormal">?attr/coordinate_input_edit_text_normal</item>
+    </style>
+
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
+        <item name="android:statusBarColor">@color/status_bar_dark</item>
+        <item name="mapBackground">@color/map_background_color_dark</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_dark</item>
         <item name="routeParameterTitleColor">@color/osmand_orange</item>
         <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_dark</item>
+        <item name="ctx_menu_card_btn">@color/ctx_menu_card_btn_dark</item>
         <item name="searchbar_text">@color/searchbar_text_dark</item>
         <item name="searchbar_text_hint">@color/searchbar_text_hint_dark</item>
         <item name="list_divider">@color/list_divider_light</item>
@@ -265,7 +334,9 @@
         <item name="actionModeBackground">@color/actionbar_dark_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="bg_color">@color/bg_color_dark</item>
+        <item name="btn_round_border">@drawable/btn_round_border_dark</item>
         <item name="bg_card">@drawable/bg_card_dark</item>
+        <item name="context_menu_card">@drawable/context_menu_card_dark</item>
         <item name="bg_map_context_menu">@drawable/bg_map_context_menu_dark</item>
         <item name="bottom_menu_view_bg">@drawable/bg_bottom_menu_dark</item>
         <item name="left_menu_view_bg">@drawable/bg_left_menu_dark</item>
@@ -274,6 +345,9 @@
         <item name="divider_color">@color/dashboard_divider_dark</item>
         <item name="dashboard_button">@drawable/dashboard_button_dark</item>
         <item name="ctx_menu_info_view_bg">@color/ctx_menu_info_view_bg_dark</item>
+        <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_dark</item>
+        <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_dark</item>
+        <item name="ctx_menu_divider">@color/ctx_menu_buttons_divider_dark</item>
         <item name="search_background">@color/color_white</item>
         <item name="switch_ex_background">@drawable/switch_ex_background_dark</item>
         <item name="switch_ex_text_color">@color/switch_ex_button_text_dark</item>
@@ -286,7 +360,6 @@
         <item name="expandable_list_background">@color/list_item_dark</item>
         <item name="size_progress_bar">@drawable/size_progressbar_dark</item>
         <item name="dash_parking_bg">@drawable/dash_parking_dark</item>
-        <item name="osmo_header_background">@color/osmo_header_dark</item>
         <item name="dashboard_subheader_text_color">@color/dashboard_subheader_text_dark</item>
         <item name="dashboard_general_button_text_color">@color/dashboard_general_button_text_dark
         </item>
@@ -313,10 +386,32 @@
         <item name="color_dialog_buttons">@color/color_dialog_buttons_dark</item>
 
         <item name="popupMenuStyle">@style/PopupMenuDark</item>
+
+        <item name="keyboard_controls_divider">@color/keyboard_item_add_button_divider_dark</item>
+
+        <item name="coordinate_input_edit_text_normal">@color/coordinate_input_edit_text_normal_dark</item>
+
+        <item name="wikivoyage_bg_color">@color/wikivoyage_bg_dark</item>
+        <item name="wikivoyage_card_bg_color">@color/wikivoyage_card_bg_dark</item>
+        <item name="wikivoyage_card_divider_color">@color/wikivoyage_card_divider_dark</item>
+        <item name="wikivoyage_app_bar_color">@color/wikivoyage_app_bar_dark</item>
+        <item name="wikivoyage_app_bar_text_color">@color/wikivoyage_app_bar_text_dark</item>
+        <item name="wikivoyage_active_color">@color/wikivoyage_active_dark</item>
+        <item name="wikivoyage_bottom_bar_bg_color">@color/wikivoyage_bottom_bar_bg_dark</item>
+        <item name="wikivoyage_bottom_bar_divider_color">@color/wikivoyage_bottom_bar_divider_dark</item>
+        <item name="wikivoyage_secondary_btn_bg_color">@color/wikivoyage_secondary_btn_bg_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
         <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="Theme.AppCompat.Dialog.Alert.NoAnimation">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="Theme.AppCompat.Light.Dialog.Alert.NoAnimation">
+        <item name="android:windowAnimationStyle">@null</item>
     </style>
 
     <!-- Standard action bar override -->
@@ -329,18 +424,22 @@
     <style name="Widget.Styled.ActionBarLight" parent="Widget.AppCompat.Light.ActionBar.Solid">
         <item name="background">@color/actionbar_light_color</item>
         <item name="android:background">@color/actionbar_light_color</item>
-        <item name="titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
-        <item name="subtitleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+        <item name="titleTextStyle">@style/Widget.Styled.LightActionBarTitle</item>
+        <item name="subtitleTextStyle">@style/Widget.Styled.LightActionBarSubtitle</item>
         <item name="actionBarWidgetTheme">@style/Theme.AppCompat</item>
 
-        <item name="android:titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
-        <item name="android:subtitleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+        <item name="android:titleTextStyle">@style/Widget.Styled.LightActionBarTitle</item>
+        <item name="android:subtitleTextStyle">@style/Widget.Styled.LightActionBarSubtitle</item>
         <item name="android:actionBarWidgetTheme">@style/Theme.AppCompat</item>
         <item name="elevation">0dp</item>
     </style>
 
-    <style name="Widget.Styled.LightActionBarHeader" parent="@android:style/TextAppearance">
+    <style name="Widget.Styled.LightActionBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="Widget.Styled.LightActionBarSubtitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/white_80_transparent</item>
     </style>
 
     <style name="WhiteActionMode" parent="@style/Widget.AppCompat.ActionMode">
@@ -354,50 +453,60 @@
 
     <!-- Dialog popup -->
     <style name="Animations"/>
+
+    <style name="Animations.NoAnimation">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
+    </style>
     <!-- PopDownMenu -->
     <style name="Animations.PopDownMenu"/>
 
     <style name="Animations.PopDownMenu.Left">
-        <item name="@android:windowEnterAnimation">@anim/grow_from_topleft_to_bottomright</item>
-        <item name="@android:windowExitAnimation">@anim/shrink_from_bottomright_to_topleft</item>
+        <item name="android:windowEnterAnimation">@anim/grow_from_topleft_to_bottomright</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_bottomright_to_topleft</item>
     </style>
 
     <style name="Animations.PopDownMenu.Right">
-        <item name="@android:windowEnterAnimation">@anim/grow_from_topright_to_bottomleft</item>
-        <item name="@android:windowExitAnimation">@anim/shrink_from_bottomleft_to_topright</item>
+        <item name="android:windowEnterAnimation">@anim/grow_from_topright_to_bottomleft</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_bottomleft_to_topright</item>
     </style>
 
     <style name="Animations.PopDownMenu.Center">
-        <item name="@android:windowEnterAnimation">@anim/grow_from_top</item>
-        <item name="@android:windowExitAnimation">@anim/shrink_from_bottom</item>
+        <item name="android:windowEnterAnimation">@anim/grow_from_top</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_bottom</item>
     </style>
 
     <!-- PopUpMenu -->
     <style name="Animations.PopUpMenu"/>
 
     <style name="Animations.PopUpMenu.Fade">
-        <item name="@android:windowEnterAnimation">@anim/popup_show</item>
-        <item name="@android:windowExitAnimation">@anim/popup_hide</item>
+        <item name="android:windowEnterAnimation">@anim/popup_show</item>
+        <item name="android:windowExitAnimation">@anim/popup_hide</item>
     </style>
 
     <style name="Animations.PopUpMenu.Left">
-        <item name="@android:windowEnterAnimation">@anim/grow_from_bottomleft_to_topright</item>
-        <item name="@android:windowExitAnimation">@anim/shrink_from_topright_to_bottomleft</item>
+        <item name="android:windowEnterAnimation">@anim/grow_from_bottomleft_to_topright</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_topright_to_bottomleft</item>
     </style>
 
     <style name="Animations.PopUpMenu.Right">
-        <item name="@android:windowEnterAnimation">@anim/grow_from_bottomright_to_topleft</item>
-        <item name="@android:windowExitAnimation">@anim/shrink_from_topleft_to_bottomright</item>
+        <item name="android:windowEnterAnimation">@anim/grow_from_bottomright_to_topleft</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_topleft_to_bottomright</item>
     </style>
 
     <style name="Animations.PopUpMenu.Center">
-        <item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
-        <item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
+        <item name="android:windowEnterAnimation">@anim/grow_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_top</item>
     </style>
 
     <style name="Animations.PopUpMenu.Bottom">
-        <item name="@android:windowEnterAnimation">@anim/slide_in_bottom</item>
-        <item name="@android:windowExitAnimation">@anim/slide_out_bottom</item>
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+    <style name="Animations.Alpha">
+        <item name="android:windowEnterAnimation">@anim/alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/alpha_out</item>
     </style>
 
     <style name="create_poi_text_field">
@@ -441,13 +550,17 @@
     <style name="TextAppearance.ContextMenuTitle" parent="TextAppearance.AppCompat">
         <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:textSize">@dimen/default_list_text_size_large</item>
-        <item name="android:maxLines">6</item>
+        <item name="android:maxLines">3</item>
         <item name="android:ellipsize">end</item>
     </style>
 
     <style name="TextAppearance.ContextMenuSubtitle" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">?android:textColorSecondary</item>
         <item name="android:textSize">@dimen/default_desc_text_size</item>
+    </style>
+
+    <style name="OsmandLightTheme.LightStatusBar" parent="OsmandLightTheme">
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="XmasDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -461,6 +574,7 @@
 
         <item name="secondary_icon_color">@color/icon_color_light</item>
         <item name="primary_icon_color">@color/icon_color</item>
+        <item name="bg_color">@color/bg_color_light</item>
     </style>
 
     <style name="Dialog90Dark" parent="Base.Theme.AppCompat.Dialog">
@@ -470,6 +584,7 @@
 
         <item name="secondary_icon_color">@color/dialog_inactive_text_color_dark</item>
         <item name="primary_icon_color">@color/color_white</item>
+        <item name="bg_color">@color/bg_color_dark</item>
     </style>
 
     <style name="WhiteControls" parent="Theme.AppCompat.Light.DarkActionBar">

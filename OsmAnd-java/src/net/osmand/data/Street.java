@@ -86,5 +86,4 @@ public class Street extends MapObject {
 		}
 		return nm;
 	}
-
 }

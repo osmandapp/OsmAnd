@@ -73,6 +73,7 @@ public class OsmBaseStorage {
 	protected InputStream streamForProgress;
 	protected List<IOsmStorageFilter> filters = new ArrayList<IOsmStorageFilter>();
 	protected boolean supressWarnings = true;
+	protected boolean convertTagsToLC = true;
 	protected boolean parseEntityInfo;
 	
 	
@@ -122,6 +123,10 @@ public class OsmBaseStorage {
 	public synchronized void parseOSM(InputStream stream, IProgress progress) throws IOException, XmlPullParserException {
 		parseOSM(stream, progress, null, true);
 		
+	}
+	
+	public void setConvertTagsToLC(boolean convertTagsToLC) {
+		this.convertTagsToLC = convertTagsToLC;
 	}
 	
 	public boolean isSupressWarnings() {
@@ -200,8 +205,10 @@ public class OsmBaseStorage {
 			if (ELEM_NODE.equals(name)) {
 				currentParsedEntity = new Node(parseDouble(parser, ATTR_LAT, 0), parseDouble(parser, ATTR_LON, 0),
 						parseId(parser, ATTR_ID, -1));
+				currentParsedEntity.setVersion(parseVersion(parser));
 			} else if (ELEM_WAY.equals(name)) {
 				currentParsedEntity = new Way(parseId(parser, ATTR_ID, -1));
+				currentParsedEntity.setVersion(parseVersion(parser));
 			} else if (ELEM_RELATION.equals(name)) {
 				currentParsedEntity = new Relation(parseId(parser, ATTR_ID, -1));
 			} else {
@@ -223,7 +230,11 @@ public class OsmBaseStorage {
 			if (ELEM_TAG.equals(name)) {
 				String key = parser.getAttributeValue("",ATTR_K);
 				if(key != null){
-					currentParsedEntity.putTag(key, parser.getAttributeValue("",ATTR_V));
+					if(convertTagsToLC) {
+						currentParsedEntity.putTag(key, parser.getAttributeValue("",ATTR_V));
+					} else {
+						currentParsedEntity.putTagNoLC(key, parser.getAttributeValue("",ATTR_V));
+					}
 				}
 			} else if (ELEM_ND.equals(name)) {
 				Long id = parseId(parser, ATTR_REF, -1);
@@ -247,6 +258,13 @@ public class OsmBaseStorage {
 		}
 	}
 	
+	private int parseVersion(XmlPullParser parser) {
+		if (parser.getAttributeName(parser.getAttributeCount() - 1).equals(ATTR_VERSION)) {
+			return Integer.valueOf(parser.getAttributeValue(parser.getAttributeCount() - 1));
+		}
+		return 0;
+	}
+
 	public void endElement(XmlPullParser parser, String name) {
 		EntityType type = null;
 		if (ELEM_NODE.equals(name)){

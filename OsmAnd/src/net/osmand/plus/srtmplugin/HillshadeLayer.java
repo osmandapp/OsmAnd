@@ -11,12 +11,14 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.views.OsmandMapLayer;
 
 import org.apache.commons.logging.Log;
 
@@ -24,6 +26,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.AsyncTask;
 
 public class HillshadeLayer extends MapTileLayer {
@@ -32,15 +35,28 @@ public class HillshadeLayer extends MapTileLayer {
 	private Map<String, SQLiteTileSource> resources = new LinkedHashMap<String, SQLiteTileSource>(); 
 	private final static String HILLSHADE_CACHE = "hillshade.cache";
 	private int ZOOM_BOUNDARY = 15;
-	
+	private final static int MAX_TRANSPARENCY_ZOOM = 17;
+	private final static int DEFAULT_ALPHA = 100;
+	private final static int MAX_TRANSPARENCY_ALPHA = 20;
+
 	private QuadTree<String> indexedResources = new QuadTree<String>(new QuadRect(0, 0, 1 << (ZOOM_BOUNDARY+1), 1 << (ZOOM_BOUNDARY+1)), 8, 0.55f);
 
 	public HillshadeLayer(MapActivity activity, SRTMPlugin srtmPlugin) {
 		super(false);
 		final OsmandApplication app = activity.getMyApplication();
 		indexHillshadeFiles(app);
-		setAlpha(100);
+		setAlpha(DEFAULT_ALPHA);
 		setMap(createTileSource(activity));
+	}
+
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+		if (tileBox.getZoom() >= MAX_TRANSPARENCY_ZOOM) {
+			setAlpha(MAX_TRANSPARENCY_ALPHA);
+		} else {
+			setAlpha(DEFAULT_ALPHA);
+		}
+		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 	}
 
 	private void indexHillshadeFiles(final OsmandApplication app ) {

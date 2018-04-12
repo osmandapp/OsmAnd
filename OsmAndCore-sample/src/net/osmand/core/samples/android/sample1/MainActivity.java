@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.PointF;
@@ -341,38 +342,39 @@ public class MainActivity extends AppCompatActivity implements SampleLocationLis
 	public void initMapMarkers() {
 
 		// Create my location marker
-		Drawable myLocationDrawable = OsmandResources.getDrawable("map_pedestrian_location");
 		myMarkersCollection = new MapMarkersCollection();
-		myLocationMarker = new MapMarkerBuilder()
-				.setMarkerId(MARKER_ID_MY_LOCATION)
-				.setIsAccuracyCircleSupported(true)
-				.setAccuracyCircleBaseColor(new FColorRGB(32/255f, 173/255f, 229/255f))
-				.setBaseOrder(-206000)
-				.setIsHidden(true)
-				//.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(0), SwigUtilities.createSkBitmapARGB888With(
-				//		myLocationDrawable.getIntrinsicWidth(), myLocationDrawable.getIntrinsicHeight(),
-				//		SampleUtils.getDrawableAsByteArray(myLocationDrawable)))
-				.setPinIcon(SwigUtilities.createSkBitmapARGB888With(
-						myLocationDrawable.getIntrinsicWidth(), myLocationDrawable.getIntrinsicHeight(),
-						SampleUtils.getDrawableAsByteArray(myLocationDrawable)))
-				.buildAndAddToCollection(myMarkersCollection);
+		MapMarkerBuilder myLocMarkerBuilder = new MapMarkerBuilder();
+		myLocMarkerBuilder.setMarkerId(MARKER_ID_MY_LOCATION);
+		myLocMarkerBuilder.setIsAccuracyCircleSupported(true);
+		myLocMarkerBuilder.setAccuracyCircleBaseColor(new FColorRGB(32/255f, 173/255f, 229/255f));
+		myLocMarkerBuilder.setBaseOrder(-206000);
+		myLocMarkerBuilder.setIsHidden(true);
+		Bitmap myLocationBitmap = OsmandResources.getBitmap("map_pedestrian_location");
+		if (myLocationBitmap != null) {
+			myLocMarkerBuilder.setPinIcon(SwigUtilities.createSkBitmapARGB888With(
+					myLocationBitmap.getWidth(), myLocationBitmap.getHeight(),
+					SampleUtils.getBitmapAsByteArray(myLocationBitmap)));
+		}
+		myLocationMarker = myLocMarkerBuilder.buildAndAddToCollection(myMarkersCollection);
 
 		mapView.addSymbolsProvider(myMarkersCollection);
 
 		// Create context pin marker
-		Drawable pinDrawable = OsmandResources.getDrawable("map_pin_context_menu");
 		contextPinMarkersCollection = new MapMarkersCollection();
-		contextPinMarker = new MapMarkerBuilder()
-				.setMarkerId(MARKER_ID_CONTEXT_PIN)
-				.setIsAccuracyCircleSupported(false)
-				.setBaseOrder(-210000)
-				.setIsHidden(true)
-				.setPinIcon(SwigUtilities.createSkBitmapARGB888With(
-						pinDrawable.getIntrinsicWidth(), pinDrawable.getIntrinsicHeight(),
-						SampleUtils.getDrawableAsByteArray(pinDrawable)))
-				.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
-				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
-				.buildAndAddToCollection(contextPinMarkersCollection);
+		MapMarkerBuilder contextMarkerBuilder = new MapMarkerBuilder();
+		contextMarkerBuilder.setMarkerId(MARKER_ID_CONTEXT_PIN);
+		contextMarkerBuilder.setIsAccuracyCircleSupported(false);
+		contextMarkerBuilder.setBaseOrder(-210000);
+		contextMarkerBuilder.setIsHidden(true);
+		Bitmap pinBitmap = OsmandResources.getBitmap("map_pin_context_menu");
+		if (pinBitmap != null) {
+			contextMarkerBuilder.setPinIcon(SwigUtilities.createSkBitmapARGB888With(
+					pinBitmap.getWidth(), pinBitmap.getHeight(),
+					SampleUtils.getBitmapAsByteArray(pinBitmap)));
+			contextMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top);
+			contextMarkerBuilder.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
+		}
+		contextPinMarker = contextMarkerBuilder.buildAndAddToCollection(contextPinMarkersCollection);
 
 		mapView.addSymbolsProvider(contextPinMarkersCollection);
 	}

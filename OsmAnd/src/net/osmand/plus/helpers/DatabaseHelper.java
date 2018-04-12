@@ -23,10 +23,10 @@ public class DatabaseHelper {
     private OsmandApplication app;
 
     public static class HistoryDownloadEntry {
-        long count;
+    	int count;
         String name;
 
-        public HistoryDownloadEntry(String name, long count){
+        public HistoryDownloadEntry(String name, int count){
             this.count = count;
             this.name = name;
 
@@ -36,7 +36,7 @@ public class DatabaseHelper {
             return name;
         }
 
-        public long getCount() {
+        public int getCount() {
             return count;
         }
     }
@@ -50,7 +50,7 @@ public class DatabaseHelper {
         if (conn.getVersion() == 0 || DB_VERSION != conn.getVersion()) {
             if (readonly) {
                 conn.close();
-                conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, true);
+                conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
             }
             if (conn.getVersion() == 0) {
                 conn.setVersion(DB_VERSION);
@@ -131,9 +131,9 @@ public class DatabaseHelper {
         return false;
     }
 
-    public long getCount(String name, int type) {
+    public int getCount(String name, int type) {
         SQLiteAPI.SQLiteConnection db = openConnection(true);
-        long count = 0;
+        int count = 0;
         if(db != null){
             try {
                 SQLiteAPI.SQLiteCursor query;

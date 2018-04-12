@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,18 +19,21 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
@@ -42,7 +46,9 @@ import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.inapp.InAppHelper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
+import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.render.RendererRegistry;
@@ -50,7 +56,9 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.plus.wikivoyage.data.WikivoyageDbHelper;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.search.SearchUICore;
 import net.osmand.util.Algorithms;
 
 import java.io.BufferedWriter;
@@ -72,7 +80,7 @@ public class OsmandApplication extends MultiDexApplication {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
-	public static final String SHOW_PLUS_VERSION_PARAM = "show_plus_version";
+	public static final String SHOW_PLUS_VERSION_INAPP_PARAM = "show_plus_version_inapp";
 
 	final AppInitializer appInitializer = new AppInitializer(this);
 	OsmandSettings osmandSettings = null;
@@ -83,7 +91,9 @@ public class OsmandApplication extends MultiDexApplication {
 	Handler uiHandler;
 
 	NavigationService navigationService;
-	
+
+	OsmandAidlApi aidlApi;
+
 	// start variables
 	ResourceManager resourceManager;
 	OsmAndLocationProvider locationProvider;
@@ -101,6 +111,7 @@ public class OsmandApplication extends MultiDexApplication {
 	LiveMonitoringHelper liveMonitoringHelper;
 	TargetPointsHelper targetPointsHelper;
 	MapMarkersHelper mapMarkersHelper;
+	MapMarkersDbHelper mapMarkersDbHelper;
 	WaypointHelper waypointHelper;
 	DownloadIndexesThread downloadIndexesThread;
 	AvoidSpecificRoads avoidSpecificRoads;
@@ -108,6 +119,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OsmandRegions regions;
 	GeocodingLookupService geocodingLookupService;
 	QuickSearchHelper searchUICore;
+	WikivoyageDbHelper wikivoyageDbHelper;
 
 	RoutingConfiguration.Builder defaultRoutingConfig;
 	private Locale preferredLocale = null;
@@ -122,7 +134,7 @@ public class OsmandApplication extends MultiDexApplication {
 	@Override
 	public void onCreate() {
 		long timeToStart = System.currentTimeMillis();
-		if (Version.getAppName(this).equals("OsmAnd~")) {
+		if (Version.isDeveloperVersion(this)) {
 			if (android.os.Build.VERSION.SDK_INT >= 9) {
 				try {
 					Class.forName("net.osmand.plus.base.EnableStrictMode").newInstance();
@@ -148,19 +160,21 @@ public class OsmandApplication extends MultiDexApplication {
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = osmandSettings.getInternalAppPath();
 		}
-		
+
 		checkPreferredLocale();
 		appInitializer.onCreateApplication();
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
-
-		initRemoteConfig();
+		InAppHelper.initialize(this);
+		initExternalLibs();
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();
 		OsmandPlugin.initPlugins(this);
 		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
+
+		SearchUICore.setDebugMode(OsmandPlugin.isDevelopment());
 	}
 
 	public boolean isExternalStorageDirectoryReadOnly() {
@@ -191,7 +205,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 			protected void onPostExecute(Void result) {
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 	
 	public IconsCache getIconsCache() {
@@ -378,11 +392,16 @@ public class OsmandApplication extends MultiDexApplication {
 		return searchUICore;
 	}
 
+	public WikivoyageDbHelper getWikivoyageDbHelper() {
+		return wikivoyageDbHelper;
+	}
+
 	public CommandPlayer getPlayer() {
 		return player;
 	}
 
-	public void initVoiceCommandPlayer(final Activity uiContext, boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force) {
+	public void initVoiceCommandPlayer(final Activity uiContext, ApplicationMode applicationMode,
+									   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force) {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
@@ -424,6 +443,12 @@ public class OsmandApplication extends MultiDexApplication {
 						}
 					}
 				});
+				builder.setNeutralButton(R.string.shared_string_do_not_use, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						osmandSettings.VOICE_PROVIDER.set(OsmandSettings.VOICE_PROVIDER_NOT_USE);
+					}
+				});
 
 				builder.setView(view);
 				builder.show();
@@ -431,7 +456,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 		} else {
 			if (player == null || !Algorithms.objectEquals(voiceProvider, player.getCurrentVoice()) || force) {
-				appInitializer.initVoiceDataInDifferentThread(uiContext, voiceProvider, run, showDialog);
+				appInitializer.initVoiceDataInDifferentThread(uiContext, applicationMode, voiceProvider, run, showDialog);
 			}
 		}
 
@@ -445,6 +470,10 @@ public class OsmandApplication extends MultiDexApplication {
 		this.navigationService = navigationService;
 	}
 
+	public OsmandAidlApi getAidlApi() {
+		return aidlApi;
+	}
+
 	public void stopNavigation() {
 		if (locationProvider.getLocationSimulation().isRouteAnimating()) {
 			locationProvider.getLocationSimulation().stop();
@@ -454,9 +483,7 @@ public class OsmandApplication extends MultiDexApplication {
 		routingHelper.setRoutePlanningMode(false);
 		osmandSettings.LAST_ROUTING_APPLICATION_MODE = osmandSettings.APPLICATION_MODE.get();
 		osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
-		if (osmandSettings.USE_MAP_MARKERS.get()) {
-			targetPointsHelper.removeAllWayPoints(false, false);
-		}
+		targetPointsHelper.removeAllWayPoints(false, false);
 	}
 
 	private void fullExit() {
@@ -524,7 +551,13 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startApplication() {
-		Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
+		UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+		if (!(uncaughtExceptionHandler instanceof DefaultExceptionHandler)) {
+			Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
+		}
+		if (NetworkUtils.getProxy() == null && osmandSettings.ENABLE_PROXY.get()) {
+			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
+		}
 		appInitializer.startApplication();
 	}
 
@@ -572,7 +605,11 @@ public class OsmandApplication extends MultiDexApplication {
 				}
 				if (routingHelper.isFollowingMode()) {
 					AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-					mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
+					if (Build.VERSION.SDK_INT >= 19) {
+						mgr.setExact(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
+					} else {
+						mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
+					}
 					System.exit(2);
 				}
 				defaultHandler.uncaughtException(thread, ex);
@@ -591,6 +628,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public MapMarkersHelper getMapMarkersHelper() {
 		return mapMarkersHelper;
+	}
+
+	public MapMarkersDbHelper getMapMarkersDbHelper() {
+		return mapMarkersDbHelper;
 	}
 
 	public void showShortToastMessage(final int msgId, final Object... args) {
@@ -672,10 +713,19 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void applyTheme(Context c) {
 		int t = R.style.OsmandDarkTheme;
+		boolean doNotUseAnimations = osmandSettings.DO_NOT_USE_ANIMATIONS.get();
 		if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME) {
-			t = R.style.OsmandDarkTheme;
+			if (doNotUseAnimations) {
+				t = R.style.OsmandDarkTheme_NoAnimation;
+			} else {
+				t = R.style.OsmandDarkTheme;
+			}
 		} else if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME) {
-			t = R.style.OsmandLightTheme;
+			if (doNotUseAnimations) {
+				t = R.style.OsmandLightTheme_NoAnimation;
+			} else {
+				t = R.style.OsmandLightTheme;
+			}
 		}
 		setLanguage(c);
 		c.setTheme(t);
@@ -718,7 +768,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return lang;
 	}
 	
-	public RoutingConfiguration.Builder getDefaultRoutingConfig() {
+	public synchronized RoutingConfiguration.Builder getDefaultRoutingConfig() {
 		if(defaultRoutingConfig == null) {
 			defaultRoutingConfig = appInitializer.getLazyDefaultRoutingConfig();
 		}
@@ -789,10 +839,34 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 		return l;
 	}
+
+	public void setupDrivingRegion(WorldRegion reg) {
+		OsmandSettings.DrivingRegion drg = null;
+		WorldRegion.RegionParams params = reg.getParams();
+		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
+		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
+		OsmandSettings.MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ?
+				OsmandSettings.MetricsConstants.MILES_AND_FEET : OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS;
+		OsmandSettings.MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ?
+				OsmandSettings.MetricsConstants.MILES_AND_METERS : OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS;
+		for (OsmandSettings.DrivingRegion r : OsmandSettings.DrivingRegion.values()) {
+			if (r.americanSigns == americanSigns && r.leftHandDriving == leftHand &&
+					(r.defMetrics == mc1 || r.defMetrics == mc2)) {
+				drg = r;
+				break;
+			}
+		}
+		if (drg != null) {
+			osmandSettings.DRIVING_REGION.set(drg);
+		}
+	}
 	
 	public void logEvent(Activity ctx, String event) {
 		try {
-			if(Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) { 
+			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)
+					&& !osmandSettings.DO_NOT_SEND_ANONYMOUS_APP_USAGE.get()
+					&& !osmandSettings.FULL_VERSION_PURCHASED.get()
+					&& !osmandSettings.LIVE_UPDATES_PURCHASED.get()) {
 				Class<?> cl = Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
 				Method mm = cl.getMethod("getInstance", Context.class);
 				Object inst = mm.invoke(null, ctx == null ? this : ctx);
@@ -803,20 +877,61 @@ public class OsmandApplication extends MultiDexApplication {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public void initExternalLibs() {
+		initRemoteConfig();
+		printFirebasetoken();
+		initFBEvents();
+	}
+	
+	public void initFBEvents() {
+		try {
+			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+				Class<?> cls = Class.forName("com.facebook.FacebookSdk");
+				Method ms = cls.getMethod("sdkInitialize", Context.class);
+				ms.invoke(null, getApplicationContext());
+				Class<?> cl = Class.forName("com.facebook.appevents.AppEventsLogger");
+				Method mm = cl.getMethod("activateApp", Application.class);
+				mm.invoke(null, this);
+				Method mu = cl.getMethod("getUserID");
+				String uid = (String) mu.invoke(null);
+				LOG.info("FB token: " + uid);
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage(), e);
+		}
+	}
 
 	public void initRemoteConfig() {
 		try {
-			if(Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
 				Class<?> cl = Class.forName("com.google.firebase.remoteconfig.FirebaseRemoteConfig");
 				Method mm = cl.getMethod("getInstance");
 				Object inst = mm.invoke(null);
 				Method log = cl.getMethod("setDefaults", Map.class);
 				Map<String, Object> defaults = new HashMap<>();
-				defaults.put(SHOW_PLUS_VERSION_PARAM, Boolean.FALSE);
+				defaults.put(SHOW_PLUS_VERSION_INAPP_PARAM, Boolean.TRUE);
 				log.invoke(inst, defaults);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage(), e);
+		}
+	}
+	
+	
+	public void printFirebasetoken() {
+		try {
+			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+				Class<?> cl = Class.forName("com.google.firebase.iid.FirebaseInstanceId");
+				Method mm = cl.getMethod("getInstance");
+				Object inst = mm.invoke(null);
+				Method getToken = cl.getMethod("getToken");
+				String firebaseToken = (String) getToken.invoke(inst);
+				LOG.info("Fbase token: " + firebaseToken);
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage(), e);
 		}
 	}
 
@@ -836,7 +951,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void activateFetchedRemoteParams() {
 		try {
-			if(Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
 				Class<?> cl = Class.forName("com.google.firebase.remoteconfig.FirebaseRemoteConfig");
 				Method mm = cl.getMethod("getInstance");
 				Object inst = mm.invoke(null);
@@ -850,7 +965,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean getRemoteBoolean(String key, boolean defaultValue) {
 		try {
-			if(Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
 				Class<?> cl = Class.forName("com.google.firebase.remoteconfig.FirebaseRemoteConfig");
 				Method mm = cl.getMethod("getInstance");
 				Object inst = mm.invoke(null);

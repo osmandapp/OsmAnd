@@ -188,12 +188,17 @@ public class Postcode {
 		if (isCountryKnown(country)) {
 			String replacement = rules.get(country).get(1);
 			Matcher matcher = getMatcher(postcode, country);
-			result = matcher.replaceAll(replacement);
-			if (!result.equals(postcode)) {
-				log.info("Normalize " + country + "'s postcode: " + postcode + " -> " + result);
-			}
-			if (!matcher.matches()) {
-				log.info("Not matches " + country + "'s postcode regex: " + postcode);
+			if (matcher != null) {
+				String res = matcher.replaceAll(replacement);
+				if (res != null) {
+					result = res.replaceAll("null", "");
+					if (!result.equals(postcode)) {
+						log.info("Normalize " + country + "'s postcode: " + postcode + " -> " + result);
+					}
+					if (!matcher.matches()) {
+						log.info("Not matches " + country + "'s postcode regex: " + postcode);
+					}
+				}
 			}
 		}
 		return result;

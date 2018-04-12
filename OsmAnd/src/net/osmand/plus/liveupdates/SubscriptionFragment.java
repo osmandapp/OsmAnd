@@ -214,7 +214,8 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 			saveChangesButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (applySettings(userNameEdit.getText().toString().trim(),
+					InAppHelper helper = getInAppHelper();
+					if (helper != null && applySettings(userNameEdit.getText().toString().trim(),
 							emailEdit.getText().toString().trim(), hideUserNameCheckbox.isChecked())) {
 
 						final Map<String, String> parameters = new HashMap<>();
@@ -223,7 +224,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 						parameters.put("email", settings.BILLING_USER_EMAIL.get());
 						parameters.put("cemail", prevEmail);
 						parameters.put("userid", settings.BILLING_USER_ID.get());
-						parameters.put("token", getInAppHelper().getToken());
+						parameters.put("token", helper.getToken());
 
 						showProgress();
 

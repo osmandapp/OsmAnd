@@ -285,9 +285,9 @@ public class ExternalApiHelper {
 						if (API_CMD_RECORD_AUDIO.equals(cmd)) {
 							plugin.recordAudio(lat, lon, mapActivity);
 						} else if (API_CMD_RECORD_VIDEO.equals(cmd)) {
-							plugin.recordVideo(lat, lon, mapActivity);
+							plugin.recordVideo(lat, lon, mapActivity, false);
 						} else if (API_CMD_RECORD_PHOTO.equals(cmd)) {
-							plugin.takePhoto(lat, lon, mapActivity, true);
+							plugin.takePhoto(lat, lon, mapActivity, true, false);
 						}
 					}
 

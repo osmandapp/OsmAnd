@@ -1,30 +1,29 @@
 package net.osmand.plus.views.mapwidgets;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.AlertDialog;
-import android.util.DisplayMetrics;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
-import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.LatLon;
 import net.osmand.plus.CurrentPositionHelper;
-import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.RulerMode;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
@@ -33,13 +32,15 @@ import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.RulerControlLayer;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -48,7 +49,9 @@ public class MapInfoWidgetsFactory {
 	public enum TopToolbarControllerType {
 		QUICK_SEARCH,
 		CONTEXT_MENU,
+		TRACK_DETAILS,
 		DISCOUNT,
+		MEASUREMENT_TOOL
 	}
 
 	public TextInfoWidget createAltitudeControl(final MapActivity map) {
@@ -109,67 +112,103 @@ public class MapInfoWidgetsFactory {
 		gpsInfoControl.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (app.getNavigationService() != null) {
-					AlertDialog.Builder dlg = new AlertDialog.Builder(map);
-					dlg.setTitle(app.getString(R.string.sleep_mode_stop_dialog));
-
-					//Show currently active wake-up interval
-					int soi = app.getNavigationService().getServiceOffInterval();
-					if (soi == 0) {
-						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + app.getString(R.string.int_continuosly));
-					} else if (soi <= 90000) {
-						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + Integer.toString(soi / 1000) + " " + app.getString(R.string.int_seconds));
-					} else {
-						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + Integer.toString(soi / 1000 / 60) + " " + app.getString(R.string.int_min));
-					}
-
-					dlg.setPositiveButton(app.getString(R.string.keep_navigation_service), null);
-					dlg.setNegativeButton(app.getString(R.string.stop_navigation_service), new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialogInterface, int i) {
-							Intent serviceIntent = new Intent(app, NavigationService.class);
-							app.stopService(serviceIntent);
-						}
-					});
-					dlg.show();
-
-				} else {
-					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
-					vs.value = 0;
-					final AlertDialog[] dlgshow = new AlertDialog[1];
-					AlertDialog.Builder dlg = new AlertDialog.Builder(map);
-					dlg.setTitle(app.getString(R.string.enable_sleep_mode));
-					WindowManager mgr = (WindowManager) map.getSystemService(Context.WINDOW_SERVICE);
-					DisplayMetrics dm = new DisplayMetrics();
-					mgr.getDefaultDisplay().getMetrics(dm);
-					LinearLayout ll = OsmandMonitoringPlugin.createIntervalChooseLayout(map,
-							app.getString(R.string.gps_wake_up_timer) + " : %s",
-							OsmandMonitoringPlugin.SECONDS,
-							OsmandMonitoringPlugin.MINUTES,
-							null, vs, dm);
-					if (Version.isGpsStatusEnabled(app)) {
-						dlg.setNeutralButton(R.string.gps_status, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								new StartGPSStatus(map).run();
-							}
-						});
-					}
-					dlg.setView(ll);
-					dlg.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							app.startNavigationService(NavigationService.USED_BY_WAKE_UP, vs.value);
-						}
-					});
-					dlg.setNegativeButton(R.string.shared_string_cancel, null);
-					dlgshow[0] = dlg.show();
-
-				}
-
+				new StartGPSStatus(map).run();
 			}
 		});
 		return gpsInfoControl;
+	}
+
+	public TextInfoWidget createRulerControl(final MapActivity map) {
+		final String title = "—";
+		final TextInfoWidget rulerControl = new TextInfoWidget(map) {
+			RulerControlLayer rulerLayer = map.getMapLayers().getRulerControlLayer();
+			LatLon cacheFirstTouchPoint = new LatLon(0, 0);
+			LatLon cacheSecondTouchPoint = new LatLon(0, 0);
+			LatLon cacheSingleTouchPoint = new LatLon(0, 0);
+			boolean fingerAndLocDistWasShown;
+
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
+				OsmandMapTileView view = map.getMapView();
+				Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
+
+				if (rulerLayer.isShowDistBetweenFingerAndLocation() && currentLoc != null) {
+					if (!cacheSingleTouchPoint.equals(rulerLayer.getTouchPointLatLon())) {
+						cacheSingleTouchPoint = rulerLayer.getTouchPointLatLon();
+						setDistanceText(cacheSingleTouchPoint.getLatitude(), cacheSingleTouchPoint.getLongitude(),
+								currentLoc.getLatitude(), currentLoc.getLongitude());
+						fingerAndLocDistWasShown = true;
+					}
+				} else if (rulerLayer.isShowTwoFingersDistance()) {
+					if (!cacheFirstTouchPoint.equals(view.getFirstTouchPointLatLon()) ||
+							!cacheSecondTouchPoint.equals(view.getSecondTouchPointLatLon()) ||
+							fingerAndLocDistWasShown) {
+						cacheFirstTouchPoint = view.getFirstTouchPointLatLon();
+						cacheSecondTouchPoint = view.getSecondTouchPointLatLon();
+						setDistanceText(cacheFirstTouchPoint.getLatitude(), cacheFirstTouchPoint.getLongitude(),
+								cacheSecondTouchPoint.getLatitude(), cacheSecondTouchPoint.getLongitude());
+						fingerAndLocDistWasShown = false;
+					}
+				} else {
+					LatLon centerLoc = map.getMapLocation();
+
+					if (currentLoc != null && centerLoc != null) {
+						if (map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+							setDistanceText(0);
+						} else {
+							setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
+									centerLoc.getLatitude(), centerLoc.getLongitude());
+						}
+					} else {
+						setText(title, null);
+					}
+				}
+				return true;
+			}
+
+			private void setDistanceText(float dist) {
+				calculateAndSetText(dist);
+			}
+
+			private void setDistanceText(double firstLat, double firstLon, double secondLat, double secondLon) {
+				float dist = (float) MapUtils.getDistance(firstLat, firstLon, secondLat, secondLon);
+				calculateAndSetText(dist);
+			}
+
+			private void calculateAndSetText(float dist) {
+				String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
+				int ls = distance.lastIndexOf(' ');
+				setText(distance.substring(0, ls), distance.substring(ls + 1));
+			}
+		};
+
+		rulerControl.setText(title, null);
+		setRulerControlIcon(rulerControl, map.getMyApplication().getSettings().RULER_MODE.get());
+		rulerControl.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				final RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
+				RulerMode newMode = RulerMode.FIRST;
+				if (mode == RulerMode.FIRST) {
+					newMode = RulerMode.SECOND;
+				} else if (mode == RulerMode.SECOND) {
+					newMode = RulerMode.EMPTY;
+				}
+				setRulerControlIcon(rulerControl, newMode);
+				map.getMyApplication().getSettings().RULER_MODE.set(newMode);
+				map.refreshMap();
+			}
+		});
+
+		return rulerControl;
+	}
+
+	private void setRulerControlIcon(TextInfoWidget rulerControl, RulerMode mode) {
+		if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
+			rulerControl.setIcons(R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night);
+		} else {
+			rulerControl.setIcons(R.drawable.widget_hidden_day, R.drawable.widget_hidden_night);
+		}
 	}
 
 	public static class TopToolbarController {
@@ -180,8 +219,8 @@ public class MapInfoWidgetsFactory {
 		int bgLightLandId = R.drawable.btn_round;
 		int bgDarkLandId = R.drawable.btn_round_night;
 
-		int backBtnIconLightId = R.drawable.abc_ic_ab_back_mtrl_am_alpha;
-		int backBtnIconDarkId = R.drawable.abc_ic_ab_back_mtrl_am_alpha;
+		int backBtnIconLightId = R.drawable.ic_arrow_back;
+		int backBtnIconDarkId = R.drawable.ic_arrow_back;
 		int backBtnIconClrLightId = R.color.icon_color;
 		int backBtnIconClrDarkId = 0;
 
@@ -189,6 +228,17 @@ public class MapInfoWidgetsFactory {
 		int closeBtnIconDarkId = R.drawable.ic_action_remove_dark;
 		int closeBtnIconClrLightId = R.color.icon_color;
 		int closeBtnIconClrDarkId = 0;
+		boolean closeBtnVisible = true;
+
+		int refreshBtnIconLightId = R.drawable.ic_action_refresh_dark;
+		int refreshBtnIconDarkId = R.drawable.ic_action_refresh_dark;
+		int refreshBtnIconClrLightId = R.color.icon_color;
+		int refreshBtnIconClrDarkId = 0;
+
+		boolean refreshBtnVisible = false;
+		boolean saveViewVisible = false;
+		protected boolean topBarSwitchVisible = false;
+		protected boolean topBarSwitchChecked = false;
 
 		int titleTextClrLightId = R.color.primary_text_light;
 		int titleTextClrDarkId = R.color.primary_text_dark;
@@ -202,10 +252,18 @@ public class MapInfoWidgetsFactory {
 		String title = "";
 		String description = null;
 
+		int saveViewTextId = -1;
+
 		OnClickListener onBackButtonClickListener;
 		OnClickListener onTitleClickListener;
 		OnClickListener onCloseButtonClickListener;
+		OnClickListener onRefreshButtonClickListener;
+		OnClickListener onSaveViewClickListener;
+		OnCheckedChangeListener onSwitchCheckedChangeListener;
 
+		Runnable onCloseToolbarListener;
+
+		View bottomView = null;
 
 		public TopToolbarController(TopToolbarControllerType type) {
 			this.type = type;
@@ -217,6 +275,14 @@ public class MapInfoWidgetsFactory {
 
 		public void setTitle(String title) {
 			this.title = title;
+		}
+
+		public String getTitle() {
+			return title;
+		}
+
+		public void setBottomView(View bottomView) {
+			this.bottomView = bottomView;
 		}
 
 		public void setSingleLineTitle(boolean singleLineTitle) {
@@ -254,6 +320,40 @@ public class MapInfoWidgetsFactory {
 			this.closeBtnIconClrDarkId = closeBtnIconClrDarkId;
 		}
 
+		public void setRefreshBtnIconIds(int refreshBtnIconLightId, int refreshBtnIconDarkId) {
+			this.refreshBtnIconLightId = refreshBtnIconLightId;
+			this.refreshBtnIconDarkId = refreshBtnIconDarkId;
+		}
+
+		public void setRefreshBtnIconClrIds(int refreshBtnIconClrLightId, int refreshBtnIconClrDarkId) {
+			this.refreshBtnIconClrLightId = refreshBtnIconClrLightId;
+			this.refreshBtnIconClrDarkId = refreshBtnIconClrDarkId;
+		}
+
+		public void setCloseBtnVisible(boolean closeBtnVisible) {
+			this.closeBtnVisible = closeBtnVisible;
+		}
+
+		public void setRefreshBtnVisible(boolean visible) {
+			this.refreshBtnVisible = visible;
+		}
+
+		public void setSaveViewVisible(boolean visible) {
+			this.saveViewVisible = visible;
+		}
+
+		public void setSaveViewTextId(int id) {
+			this.saveViewTextId = id;
+		}
+
+		public void setTopBarSwitchVisible(boolean visible) {
+			this.topBarSwitchVisible = visible;
+		}
+
+		public void setTopBarSwitchChecked(boolean checked) {
+			this.topBarSwitchChecked = checked;
+		}
+
 		public void setTitleTextClrIds(int titleTextClrLightId, int titleTextClrDarkId) {
 			this.titleTextClrLightId = titleTextClrLightId;
 			this.titleTextClrDarkId = titleTextClrDarkId;
@@ -276,9 +376,27 @@ public class MapInfoWidgetsFactory {
 			this.onCloseButtonClickListener = onCloseButtonClickListener;
 		}
 
+		public void setOnSaveViewClickListener(OnClickListener onSaveViewClickListener) {
+			this.onSaveViewClickListener = onSaveViewClickListener;
+		}
+
+		public void setOnSwitchCheckedChangeListener(OnCheckedChangeListener onSwitchCheckedChangeListener) {
+			this.onSwitchCheckedChangeListener = onSwitchCheckedChangeListener;
+		}
+
+		public void setOnRefreshButtonClickListener(OnClickListener onRefreshButtonClickListener) {
+			this.onRefreshButtonClickListener = onRefreshButtonClickListener;
+		}
+
+		public void setOnCloseToolbarListener(Runnable onCloseToolbarListener) {
+			this.onCloseToolbarListener = onCloseToolbarListener;
+		}
+
 		public void updateToolbar(TopToolbarView view) {
 			TextView titleView = view.getTitleView();
 			TextView descrView = view.getDescrView();
+			LinearLayout bottomViewLayout = view.getBottomViewLayout();
+			SwitchCompat switchCompat = view.getTopBarSwitch();
 			if (title != null) {
 				titleView.setText(title);
 				view.updateVisibility(titleView, true);
@@ -291,6 +409,23 @@ public class MapInfoWidgetsFactory {
 			} else {
 				view.updateVisibility(descrView, false);
 			}
+			if (bottomView != null) {
+				bottomViewLayout.removeAllViews();
+				bottomViewLayout.addView(bottomView);
+				view.updateVisibility(bottomViewLayout, true);
+			} else {
+				view.updateVisibility(bottomViewLayout, false);
+			}
+			view.updateVisibility(switchCompat, topBarSwitchVisible);
+			if (topBarSwitchVisible) {
+				switchCompat.setChecked(topBarSwitchChecked);
+				if (topBarSwitchChecked) {
+					DrawableCompat.setTint(switchCompat.getTrackDrawable(), ContextCompat.getColor(switchCompat.getContext(),R.color.map_toolbar_switch_track_color));
+				}
+			}
+			if (view.getShadowView() != null) {
+				view.getShadowView().setVisibility(View.VISIBLE);
+			}
 		}
 	}
 
@@ -300,11 +435,16 @@ public class MapInfoWidgetsFactory {
 		private TopToolbarController defaultController = new TopToolbarController(TopToolbarControllerType.CONTEXT_MENU);
 		private View topbar;
 		private View topBarLayout;
+		private View topBarBottomView;
 		private View topBarTitleLayout;
 		private ImageButton backButton;
 		private TextView titleView;
 		private TextView descrView;
+		private ImageButton refreshButton;
 		private ImageButton closeButton;
+		private TextView saveView;
+		private SwitchCompat topBarSwitch;
+		private View shadowView;
 		private boolean nightMode;
 
 		public TopToolbarView(final MapActivity map) {
@@ -312,11 +452,16 @@ public class MapInfoWidgetsFactory {
 
 			topbar = map.findViewById(R.id.widget_top_bar);
 			topBarLayout = map.findViewById(R.id.widget_top_bar_layout);
+			topBarBottomView = map.findViewById(R.id.widget_top_bar_bottom_view);
 			topBarTitleLayout = map.findViewById(R.id.widget_top_bar_title_layout);
 			backButton = (ImageButton) map.findViewById(R.id.widget_top_bar_back_button);
+			refreshButton = (ImageButton) map.findViewById(R.id.widget_top_bar_refresh_button);
 			closeButton = (ImageButton) map.findViewById(R.id.widget_top_bar_close_button);
 			titleView = (TextView) map.findViewById(R.id.widget_top_bar_title);
+			saveView = (TextView) map.findViewById(R.id.widget_top_bar_save);
 			descrView = (TextView) map.findViewById(R.id.widget_top_bar_description);
+			topBarSwitch = (SwitchCompat) map.findViewById(R.id.widget_top_bar_switch);
+			shadowView = map.findViewById(R.id.widget_top_bar_shadow);
 			updateVisibility(false);
 		}
 
@@ -340,12 +485,32 @@ public class MapInfoWidgetsFactory {
 			return titleView;
 		}
 
+		public LinearLayout getBottomViewLayout() {
+			return (LinearLayout) topBarBottomView;
+		}
+
 		public TextView getDescrView() {
 			return descrView;
 		}
 
 		public ImageButton getCloseButton() {
 			return closeButton;
+		}
+
+		public TextView getSaveView() {
+			return saveView;
+		}
+
+		public SwitchCompat getTopBarSwitch() {
+			return topBarSwitch;
+		}
+
+		public ImageButton getRefreshButton() {
+			return refreshButton;
+		}
+
+		public View getShadowView() {
+			return shadowView;
 		}
 
 		public TopToolbarController getTopController() {
@@ -369,6 +534,9 @@ public class MapInfoWidgetsFactory {
 			for (Iterator ctrlIter = controllers.iterator(); ctrlIter.hasNext(); ) {
 				TopToolbarController ctrl = (TopToolbarController) ctrlIter.next();
 				if (ctrl.getType() == controller.getType()) {
+					if (controller.onCloseToolbarListener != null) {
+						controller.onCloseToolbarListener.run();
+					}
 					ctrlIter.remove();
 				}
 			}
@@ -378,6 +546,9 @@ public class MapInfoWidgetsFactory {
 		}
 
 		public void removeController(TopToolbarController controller) {
+			if (controller.onCloseToolbarListener != null) {
+				controller.onCloseToolbarListener.run();
+			}
 			controllers.remove(controller);
 			updateColors();
 			updateInfo();
@@ -404,6 +575,9 @@ public class MapInfoWidgetsFactory {
 			backButton.setOnClickListener(controller.onBackButtonClickListener);
 			topBarTitleLayout.setOnClickListener(controller.onTitleClickListener);
 			closeButton.setOnClickListener(controller.onCloseButtonClickListener);
+			refreshButton.setOnClickListener(controller.onRefreshButtonClickListener);
+			saveView.setOnClickListener(controller.onSaveViewClickListener);
+			topBarSwitch.setOnCheckedChangeListener(controller.onSwitchCheckedChangeListener);
 		}
 
 		public void updateInfo() {
@@ -415,7 +589,7 @@ public class MapInfoWidgetsFactory {
 				initToolbar(defaultController);
 				defaultController.updateToolbar(this);
 			}
-			updateVisibility(controller != null);
+			updateVisibility(controller != null && (!map.getContextMenu().isVisible() || controller.getType() == TopToolbarControllerType.CONTEXT_MENU));
 		}
 
 		public void updateColors(TopToolbarController controller) {
@@ -433,10 +607,16 @@ public class MapInfoWidgetsFactory {
 				} else {
 					closeButton.setImageDrawable(app.getIconsCache().getIcon(controller.closeBtnIconDarkId, controller.closeBtnIconClrDarkId));
 				}
+				if (controller.refreshBtnIconDarkId == 0) {
+					refreshButton.setImageDrawable(null);
+				} else {
+					refreshButton.setImageDrawable(app.getIconsCache().getIcon(controller.refreshBtnIconDarkId, controller.refreshBtnIconClrDarkId));
+				}
 				int titleColor = map.getResources().getColor(controller.titleTextClrDarkId);
 				int descrColor = map.getResources().getColor(controller.descrTextClrDarkId);
 				titleView.setTextColor(titleColor);
 				descrView.setTextColor(descrColor);
+				saveView.setTextColor(titleColor);
 			} else {
 				topBarLayout.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? controller.bgLightId : controller.bgLightLandId);
 				if (controller.backBtnIconLightId == 0) {
@@ -449,15 +629,47 @@ public class MapInfoWidgetsFactory {
 				} else {
 					closeButton.setImageDrawable(app.getIconsCache().getIcon(controller.closeBtnIconLightId, controller.closeBtnIconClrLightId));
 				}
+				if (controller.refreshBtnIconLightId == 0) {
+					refreshButton.setImageDrawable(null);
+				} else {
+					refreshButton.setImageDrawable(app.getIconsCache().getIcon(controller.refreshBtnIconLightId, controller.refreshBtnIconClrLightId));
+				}
 				int titleColor = map.getResources().getColor(controller.titleTextClrLightId);
 				int descrColor = map.getResources().getColor(controller.descrTextClrLightId);
 				titleView.setTextColor(titleColor);
 				descrView.setTextColor(descrColor);
+				saveView.setTextColor(titleColor);
 			}
 			if (controller.singleLineTitle) {
 				titleView.setSingleLine(true);
 			} else {
 				titleView.setSingleLine(false);
+			}
+
+			if (controller.closeBtnVisible) {
+				if (closeButton.getVisibility() == View.GONE) {
+					closeButton.setVisibility(View.VISIBLE);
+				}
+			} else if (closeButton.getVisibility() == View.VISIBLE) {
+				closeButton.setVisibility(View.GONE);
+			}
+			if (controller.refreshBtnVisible) {
+				if (refreshButton.getVisibility() == View.GONE) {
+					refreshButton.setVisibility(View.VISIBLE);
+				}
+			} else if (refreshButton.getVisibility() == View.VISIBLE) {
+				refreshButton.setVisibility(View.GONE);
+			}
+			if (controller.saveViewVisible) {
+				if (controller.saveViewTextId != -1) {
+					saveView.setText(map.getString(controller.saveViewTextId));
+					saveView.setContentDescription(map.getString(controller.saveViewTextId));
+				}
+				if (saveView.getVisibility() == View.GONE) {
+					saveView.setVisibility(View.VISIBLE);
+				}
+			} else if (saveView.getVisibility() == View.VISIBLE) {
+				saveView.setVisibility(View.GONE);
 			}
 		}
 
@@ -509,7 +721,11 @@ public class MapInfoWidgetsFactory {
 		}
 
 		public boolean updateVisibility(boolean visible) {
-			return updateVisibility(topBar, visible);
+			boolean res = updateVisibility(topBar, visible);
+			if (res) {
+				map.updateStatusBarColor();
+			}
+			return res;
 		}
 
 		public boolean updateVisibility(View v, boolean visible) {
@@ -553,7 +769,7 @@ public class MapInfoWidgetsFactory {
 						if (text == null) {
 							text = "";
 						} else {
-							if(type[0] == null){
+							if (type[0] == null) {
 								showMarker = true;
 							} else {
 								turnDrawable.setColor(R.color.nav_arrow);
@@ -583,19 +799,21 @@ public class MapInfoWidgetsFactory {
 					settings.SHOW_STREET_NAME.get()) {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment();
 				if (rt != null) {
+					Location lastKnownLocation = locationProvider.getLastKnownLocation();
 					text = RoutingHelper.formatStreetName(
-							rt.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()), 
-							rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())),
-							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())), 
-									"»");
-				} 
+							rt.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()),
+							rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
+							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
+							"»");
+				}
 				if (text == null) {
 					text = "";
 				} else {
-					if(!Algorithms.isEmpty(text) && locationProvider.getLastKnownLocation() != null) {
-						double dist = 
-								CurrentPositionHelper.getOrthogonalDistance(rt, locationProvider.getLastKnownLocation());
-						if(dist < 50) {
+					Location lastKnownLocation = locationProvider.getLastKnownLocation();
+					if (!Algorithms.isEmpty(text) && lastKnownLocation != null) {
+						double dist =
+								CurrentPositionHelper.getOrthogonalDistance(rt, lastKnownLocation);
+						if (dist < 50) {
 							showMarker = true;
 						} else {
 							text = map.getResources().getString(R.string.shared_string_near) + " " + text;
@@ -603,7 +821,7 @@ public class MapInfoWidgetsFactory {
 					}
 				}
 			}
-			if (map.isTopToolbarActive()) {
+			if (map.isTopToolbarActive() || !map.getContextMenu().shouldShowTopControls()) {
 				updateVisibility(false);
 			} else if (!showNextTurn && updateWaypoint()) {
 				updateVisibility(true);
@@ -669,7 +887,7 @@ public class MapInfoWidgetsFactory {
 					all.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							map.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
+							map.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS, AndroidUtils.getCenterViewCoordinates(view));
 						}
 					});
 					remove.setOnClickListener(new OnClickListener() {

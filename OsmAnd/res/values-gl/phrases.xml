@@ -1079,7 +1079,7 @@
 	<string name="poi_traffic_signals_sound">Son</string>
 	<string name="poi_highway_crossing_type">Tipo</string>
 	<string name="poi_tactile_paving">Pavimentación táctil</string>
-	<string name="poi_service_car">Servizo</string>
+	<string name="poi_service_general">Servizo</string>
 	<string name="poi_self_service">Auto-servizo</string>
 	<string name="poi_automated">Automatizado</string>
 	<string name="poi_parking_type">Tipo</string>
@@ -1428,4 +1428,6 @@
 	<string name="poi_payment_sms_yes">Pagamentos por SMS</string>
 	<string name="poi_payment_sms_no">Non acepta pagamentos por SMS</string>
 	<string name="poi_payment_ov_chipkaart_yes">OV-Chipkaart</string>
+	<string name="poi_cafeteria">Cafetaría</string>
+	<string name="poi_zoo_type">Tipo</string>
 	</resources>

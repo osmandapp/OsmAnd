@@ -3,6 +3,8 @@ package net.osmand.plus;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import android.content.pm.PackageInfo;
+import 	android.content.pm.PackageManager;
 
 public class Version {
 	
@@ -10,8 +12,8 @@ public class Version {
 	private final String appName;
 	private final static String FREE_VERSION_NAME = "net.osmand";
 	private final static String FREE_DEV_VERSION_NAME = "net.osmand.dev";
-	private final static String SHERPAFY_VERSION_NAME = "net.osmand.sherpafy";
-	
+	private final static String FREE_CUSTOM_VERSION_NAME = "net.osmand.freecustom";
+	private final static String UTM_REF = "&referrer=utm_source%3Dosmand";
 	
 	public static boolean isGpsStatusEnabled(OsmandApplication ctx) {
 		return isGooglePlayEnabled(ctx) && !isBlackberry(ctx);
@@ -24,14 +26,27 @@ public class Version {
 	public static boolean isMarketEnabled(OsmandApplication ctx) {
 		return isGooglePlayEnabled(ctx) || isAmazonEnabled(ctx);
 	}
+
+	public static boolean isGooglePlayInstalled(OsmandApplication ctx) {
+		try {
+			ctx.getPackageManager().getPackageInfo("com.android.vending", 0);
+		} catch (PackageManager.NameNotFoundException e) {
+			return false;
+		}
+		return true;
+	}
 	
 	public static String marketPrefix(OsmandApplication ctx) {
 		if (isAmazonEnabled(ctx)) {
 			return "amzn://apps/android?p=";
-		} else if (isGooglePlayEnabled(ctx)) {
-			return "market://search?q=pname:";
+		} else if (isGooglePlayEnabled(ctx) && isGooglePlayInstalled(ctx)) {
+			return "market://details?id=";
 		} 
-		return "http://osmand.net/apps?id="; 
+		return "https://osmand.net/apps?id=";
+	}
+
+	public static String getUrlWithUtmRef(OsmandApplication ctx, String appName) {
+		return marketPrefix(ctx) + appName + UTM_REF;
 	}
 	
 	private static boolean isAmazonEnabled(OsmandApplication ctx) {
@@ -42,12 +57,18 @@ public class Version {
 		return ctx.getString(R.string.versionFeatures).contains("+play_market");
 	}
 	
-	public static boolean isSherpafy(OsmandApplication ctx) {
-		return ctx.getPackageName().equals(SHERPAFY_VERSION_NAME);
-	}
 	
 	private Version(OsmandApplication ctx) {
-		appVersion = ctx.getString(R.string.app_version);
+		String appVersion = "";
+		int versionCode = -1;
+		try {
+			PackageInfo packageInfo = ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0);
+			appVersion = packageInfo.versionName;  //Version suffix  ctx.getString(R.string.app_version_suffix)  already appended in build.gradle
+			versionCode = packageInfo.versionCode;
+		} catch (PackageManager.NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		this.appVersion = appVersion;
 		appName = ctx.getString(R.string.app_name);
 	}
 
@@ -92,12 +113,20 @@ public class Version {
 	}
 	
 	public static boolean isFreeVersion(OsmandApplication ctx){
-		return ctx.getPackageName().equals(FREE_VERSION_NAME) || ctx.getPackageName().equals(FREE_DEV_VERSION_NAME);
-		
+		return ctx.getPackageName().equals(FREE_VERSION_NAME) || 
+				ctx.getPackageName().equals(FREE_DEV_VERSION_NAME) ||
+				ctx.getPackageName().equals(FREE_CUSTOM_VERSION_NAME)
+				;
+	}
+
+	public static boolean isPaidVersion(OsmandApplication ctx) {
+		return !isFreeVersion(ctx)
+				|| ctx.getSettings().FULL_VERSION_PURCHASED.get()
+				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
 	}
 	
 	public static boolean isDeveloperVersion(OsmandApplication ctx){
-		return getAppName(ctx).contains("~");
+		return getAppName(ctx).contains("~") || ctx.getPackageName().equals(FREE_DEV_VERSION_NAME);
 	}
 	
 	public static String getVersionForTracker(OsmandApplication ctx) {

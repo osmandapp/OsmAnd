@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            osmand:layout_scrollFlags="scroll|enterAlways"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            osmand:contentInsetLeft="0dp"
+            osmand:contentInsetStart="0dp"
+            osmand:contentInsetRight="0dp"
+            osmand:contentInsetEnd="0dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dashboard_map_toolbar"
+                    android:gravity="center_vertical">
+
+                    <ImageButton
+                        android:id="@+id/back_button"
+                        style="@style/Widget.AppCompat.ActionButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:src="@drawable/ic_arrow_back"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/select_language_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/content_padding_small"
+                        android:layout_marginTop="@dimen/content_padding_small"
+                        android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
+                        android:layout_marginRight="@dimen/context_menu_padding_margin_small"
+                        tools:background="?attr/ctx_menu_controller_bg"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/context_menu_padding_margin_tiny"
+                        android:textAllCaps="true"
+                        tools:textColor="?attr/ctx_menu_controller_text_color"
+                        android:textSize="@dimen/default_desc_text_size"
+                        osmand:typeface="@string/font_roboto_medium"
+                        tools:text="RU"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/title_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/content_padding"
+                    android:paddingRight="@dimen/content_padding"
+                    android:paddingTop="@dimen/list_header_padding"
+                    android:paddingBottom="@dimen/list_header_padding"
+                    android:textSize="@dimen/map_button_text_size"
+                    tools:text="Title"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        osmand:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/content_padding"/>
+    </android.support.v4.widget.NestedScrollView>
+
+    <net.osmand.plus.widgets.TextViewEx
+        osmand:typeface="@string/font_roboto_medium"
+        android:layout_margin="@dimen/content_padding"
+        android:id="@+id/read_full_article"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:background="@drawable/bt_round_long_night"
+        android:text="@string/read_full_article"
+        android:gravity="center_vertical"
+        android:textAllCaps="true"
+        tools:textColor="?attr/ctx_menu_controller_text_color"/>
+
+</android.support.design.widget.CoordinatorLayout>

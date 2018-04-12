@@ -9,7 +9,6 @@ import android.support.v7.app.AlertDialog;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -27,6 +26,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 		this.mRecording = recording;
 		mPlugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 		mIsFileAvailable = mRecording.getFile().exists();
+		builder.setShowTitleIfTruncated(false);
 
 		if (mIsFileAvailable) {
 			leftTitleButtonController = new TitleButtonController() {
@@ -62,7 +62,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 				}
 			};
 			rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
-			rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+			rightTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
 		}
 
 		updateData();
@@ -86,7 +86,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		if (mRecording.isPhoto()) {
 			return getIcon(R.drawable.ic_action_photo_dark, R.color.audio_video_icon_color);
 		} else if (mRecording.isAudio()) {
@@ -136,7 +136,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 		if (!mRecording.isPhoto()) {
 			if (mPlugin.isPlaying(mRecording)) {
 				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_control_stop);
-				leftTitleButtonController.leftIconId = R.drawable.ic_action_rec_stop;
+				leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_rec_stop, true);
 				int pos = mPlugin.getPlayingPosition();
 				String durationStr;
 				if (pos == -1) {
@@ -149,19 +149,19 @@ public class AudioVideoNoteMenuController extends MenuController {
 				rightTitleButtonController.visible = false;
 			} else {
 				leftTitleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_play);
-				leftTitleButtonController.leftIconId = R.drawable.ic_play_dark;
+				leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_play_dark, true);
 				String durationStr = mRecording.getPlainDuration(accessibilityEnabled);
 				leftTitleButtonController.needRightText = true;
 				leftTitleButtonController.rightTextCaption = "— " + durationStr;
 			}
 		} else {
 			leftTitleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_show);
-			leftTitleButtonController.leftIconId = R.drawable.ic_action_view;
+			leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_view, true);
 		}
 	}
 
 	@Override
-	public void share(LatLon latLon, String title) {
+	public void share(LatLon latLon, String title, String address) {
 		if (mIsFileAvailable) {
 			String path = mRecording.getFile().getAbsolutePath();
 			MediaScannerConnection.scanFile(getMapActivity(), new String[]{path},
@@ -184,7 +184,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 						}
 					});
 		} else {
-			super.share(latLon, title);
+			super.share(latLon, title, "");
 		}
 	}
 }

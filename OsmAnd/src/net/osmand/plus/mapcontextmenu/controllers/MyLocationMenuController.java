@@ -8,6 +8,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 
 public class MyLocationMenuController  extends MenuController {
 
@@ -41,7 +42,7 @@ public class MyLocationMenuController  extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		ApplicationMode appMode = getMapActivity().getMyApplication().getSettings().getApplicationMode();
 		return getMapActivity().getResources().getDrawable(appMode.getResourceLocationDay());
 	}

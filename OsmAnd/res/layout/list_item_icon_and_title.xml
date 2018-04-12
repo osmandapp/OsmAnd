@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bottom_sheet_list_item_height"
+    android:background="?attr/selectableItemBackground"
+    android:minHeight="@dimen/bottom_sheet_list_item_height"
+    android:paddingEnd="@dimen/content_padding"
+    android:paddingLeft="@dimen/content_padding"
+    android:paddingRight="@dimen/content_padding"
+    android:paddingStart="@dimen/content_padding">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+        android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+        tools:src="@drawable/ic_action_car_dark"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/icon"
+        android:layout_toRightOf="@id/icon"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.ListItemTitle"
+        tools:text="@string/rendering_value_car_name"/>
+</RelativeLayout>

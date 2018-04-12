@@ -2,16 +2,16 @@ package net.osmand.plus.parkingpoint;
 
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
 import android.text.format.Time;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -53,6 +53,10 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public final static String PARKING_TIME = "parking_limit_time"; //$//$NON-NLS-1$
 	public final static String PARKING_START_TIME = "parking_time"; //$//$NON-NLS-1$
 	public final static String PARKING_EVENT_ADDED = "parking_event_added"; //$//$NON-NLS-1$
+
+	// Constants for determining the order of items in the additional actions context menu
+	private static final int MARK_AS_PARKING_POS_ITEM_ORDER = 10500;
+
     private LatLon parkingPosition;
     private OsmandApplication app;
 
@@ -220,7 +224,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		ItemClickListener addListener = new ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId,
-					int pos, boolean isChecked) {
+					int pos, boolean isChecked, int[] viewCoordinates) {
 				if (resId == R.string.context_menu_item_add_parking_point) {
 					showAddParkingDialog(mapActivity, latitude, longitude);
 				}
@@ -230,6 +234,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.context_menu_item_add_parking_point, mapActivity)
 				.setIcon(R.drawable.ic_action_parking_dark)
+				.setOrder(MARK_AS_PARKING_POS_ITEM_ORDER)
 				.setListener(addListener)
 				.createItem());
 	}
@@ -239,49 +244,20 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * It allows user to choose a type of parking (time-limited or time-unlimited).
 	 */
 	public void showAddParkingDialog(final MapActivity mapActivity, final double latitude, final double longitude) {
-		final boolean wasEventPreviouslyAdded = isParkingEventAdded();
-		final View addParking = mapActivity.getLayoutInflater().inflate(R.layout.parking_set_type, null);
-		final Dialog choose = new Dialog(mapActivity);
-		choose.setContentView(addParking);
-		choose.setCancelable(true);
-		choose.setTitle(mapActivity.getString(R.string.osmand_parking_choose_type));		
-		
-		ImageButton limitButton = (ImageButton) addParking.findViewById(R.id.parking_lim_button);
-		limitButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (wasEventPreviouslyAdded) {
-					showDeleteEventWarning(mapActivity);
-				}
-				setParkingPosition(mapActivity, latitude, longitude, true);
-				showSetTimeLimitDialog(mapActivity, choose);
-				mapActivity.getMapView().refreshMap();
-			}
-		});
-
-		ImageButton noLimitButton = (ImageButton) addParking.findViewById(R.id.parking_no_lim_button);
-		noLimitButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				choose.dismiss();
-				if (wasEventPreviouslyAdded) {
-					showDeleteEventWarning(mapActivity);
-				}
-				addOrRemoveParkingEvent(false);
-				setParkingPosition(mapActivity, latitude, longitude, false);
-				showContextMenuIfNeeded(mapActivity);
-				mapActivity.getMapView().refreshMap();
-			}
-		});
-
-		choose.show();
-
+		Bundle args = new Bundle();
+		args.putDouble(ParkingTypeBottomSheetDialogFragment.LAT_KEY, latitude);
+		args.putDouble(ParkingTypeBottomSheetDialogFragment.LON_KEY, longitude);
+		FragmentManager fragmentManager=mapActivity.getSupportFragmentManager();
+		ParkingTypeBottomSheetDialogFragment fragment = new ParkingTypeBottomSheetDialogFragment();
+		fragment.setArguments(args);
+		fragment.show(fragmentManager, ParkingTypeBottomSheetDialogFragment.TAG);
 	}
 
-	private void showContextMenuIfNeeded(final MapActivity mapActivity) {
+	void showContextMenuIfNeeded(final MapActivity mapActivity, boolean animated) {
 		if (parkingLayer != null) {
 			MapContextMenu menu = mapActivity.getContextMenu();
 			if (menu.isVisible()) {
+				menu.hide(animated);
 				menu.show(new LatLon(parkingPosition.getLatitude(), parkingPosition.getLongitude()),
 						parkingLayer.getObjectName(parkingPosition), parkingPosition);
 			}
@@ -315,9 +291,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * The dialog has option to add a notification to Calendar app. 
 	 * Anyway the time-limit can be seen from parking point description.
 	 * @param mapActivity
-	 * @param choose 
+	 * @param choose
 	 */
-	private void showSetTimeLimitDialog(final MapActivity mapActivity, final Dialog choose) {
+	void showSetTimeLimitDialog(final MapActivity mapActivity, final DialogInterface choose) {
 		final View setTimeParking = mapActivity.getLayoutInflater().inflate(R.layout.parking_set_time_limit, null);
 		AlertDialog.Builder setTime = new AlertDialog.Builder(mapActivity);
 		setTime.setView(setTimeParking);
@@ -382,7 +358,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				} else {
 					addOrRemoveParkingEvent(false);
 				}
-				showContextMenuIfNeeded(mapActivity);
+				showContextMenuIfNeeded(mapActivity,false);
 			}
 		});
 		setTime.create();
@@ -407,7 +383,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * Method shows warning, if previously the event for time-limited parking was added to Calendar app.
 	 * @param activity
 	 */
-	private void showDeleteEventWarning(final Activity activity) {
+	void showDeleteEventWarning(final Activity activity) {
 		if (isParkingEventAdded()) {
 			AlertDialog.Builder deleteEventWarning = new AlertDialog.Builder(activity);
 			deleteEventWarning.setTitle(activity.getString(R.string.osmand_parking_warning));
@@ -429,7 +405,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * @param longitude
 	 * @param isLimited
 	 */
-	private void setParkingPosition(final MapActivity mapActivity, final double latitude, final double longitude, boolean isLimited) {
+	void setParkingPosition(final MapActivity mapActivity, final double latitude, final double longitude, boolean isLimited) {
 		setParkingPosition(latitude, longitude);
 		setParkingType(isLimited);
 		setParkingStartTime(Calendar.getInstance().getTimeInMillis());
@@ -579,9 +555,32 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		return timeStringBuilder.toString();
 	}
 
+	public String getParkingTitle(Activity ctx) {
+		StringBuilder title = new StringBuilder();
+		if (getParkingType()) {
+			title.append(ctx.getString(R.string.pick_up_till)).append(" ");
+			long endTime = getParkingTime();
+			title.append(getFormattedTime(endTime, ctx));
+		} else {
+			title.append(ctx.getString(R.string.osmand_parking_position_name));
+		}
+		return title.toString();
+	}
+
 	public String getParkingStartDesc(Activity ctx) {
-		return ctx.getString(R.string.osmand_parking_position_description_add_time)
-				+ " " + getFormattedTime(getStartParkingTime(), ctx);
+		StringBuilder parkingStartDesc = new StringBuilder();
+		String startTime = getFormattedTime(getStartParkingTime(), ctx);
+		if (getParkingType()) {
+			parkingStartDesc.append(ctx.getString(R.string.osmand_parking_position_name));
+			parkingStartDesc.append(", ");
+			parkingStartDesc.append(ctx.getString(R.string.parked_at));
+			parkingStartDesc.append(" ").append(startTime);
+		} else {
+			parkingStartDesc.append(ctx.getString(R.string.osmand_parking_position_description_add_time));
+			parkingStartDesc.append(" ");
+			parkingStartDesc.append(startTime);
+		}
+		return parkingStartDesc.toString();
 	}
 
 	public String getParkingLeftDesc(Activity ctx) {
@@ -596,6 +595,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			} else {
 				descr.append(ctx.getString(R.string.osmand_parking_time_left));
 			}
+		} else {
+			descr.append(ctx.getString(R.string.without_time_limit));
 		}
 		return descr.toString();
 	}

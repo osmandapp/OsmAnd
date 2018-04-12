@@ -1,6 +1,7 @@
 package net.osmand.plus.activities.actions;
 
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import java.util.Set;
 public class AppModeDialog {
 
 	public static View prepareAppModeView(Activity a, final Set<ApplicationMode> selected, boolean showDefault,
-			ViewGroup parent, final boolean singleSelection, boolean useMapTheme, final View.OnClickListener onClickListener) {
+			ViewGroup parent, final boolean singleSelection, boolean useListBg, boolean useMapTheme, final View.OnClickListener onClickListener) {
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));
 		if(!showDefault) {
@@ -30,7 +31,7 @@ public class AppModeDialog {
 		if (showDefault || (settings.getApplicationMode() != ApplicationMode.DEFAULT && !singleSelection)) {
 			selected.add(settings.getApplicationMode());
 		}
-		return prepareAppModeView(a, values, selected, parent, singleSelection, false, useMapTheme, onClickListener);
+		return prepareAppModeView(a, values, selected, parent, singleSelection, useListBg, useMapTheme, onClickListener);
 	}
 
 	//special method for drawer menu
@@ -44,19 +45,18 @@ public class AppModeDialog {
 	}
 	
 	public static View prepareAppModeView(Activity a, final List<ApplicationMode> values , final Set<ApplicationMode> selected, 
-				ViewGroup parent, final boolean singleSelection, boolean drawer, boolean useMapTheme, final View.OnClickListener onClickListener) {
+				ViewGroup parent, final boolean singleSelection, boolean useListBg, boolean useMapTheme, final View.OnClickListener onClickListener) {
 		View ll = a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
-		if (useMapTheme) {
-			AndroidUtils.setListItemBackground(a, ll,
-					((OsmandApplication) a.getApplication()).getDaynightHelper().isNightModeForMapControls());
+		boolean nightMode = isNightMode(((OsmandApplication) a.getApplication()), useMapTheme);
+		if (useListBg) {
+			AndroidUtils.setListItemBackground(a, ll, nightMode);
 		} else {
-			AndroidUtils.setListItemBackground(a, ll,
-					!((OsmandApplication) a.getApplication()).getSettings().isLightContent());
+			ll.setBackgroundColor(ContextCompat.getColor(a, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
 		}
 		final View[] buttons = new View[values.size()];
 		int k = 0;
 		for(ApplicationMode ma : values) {
-			buttons[k++] = createToggle(a.getLayoutInflater(), (OsmandApplication) a.getApplication(), (LinearLayout) ll.findViewById(R.id.app_modes_content), ma);
+			buttons[k++] = createToggle(a.getLayoutInflater(), (OsmandApplication) a.getApplication(), (LinearLayout) ll.findViewById(R.id.app_modes_content), ma, useMapTheme);
 		}
 		for (int i = 0; i < buttons.length; i++) {
 			updateButtonState((OsmandApplication) a.getApplication(), values, selected, onClickListener, buttons, i,
@@ -74,15 +74,15 @@ public class AppModeDialog {
 			final ApplicationMode mode = visible.get(i);
 			final boolean checked = selected.contains(mode);
 			ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
+			boolean nightMode = isNightMode(ctx, useMapTheme);
 			if (checked) {
-				iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), R.color.osmand_orange));
+				iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), nightMode ? R.color.route_info_checked_mode_icon_color_dark : R.color.route_info_checked_mode_icon_color_light));
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_checked)));
 				tb.findViewById(R.id.selection).setVisibility(View.VISIBLE);
 			} else {
 				if (useMapTheme) {
-					boolean nightMode = ctx.getDaynightHelper().isNightModeForMapControls();
-					iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), !nightMode));
-					AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
+					iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), R.color.route_info_unchecked_mode_icon_color));
+					iv.setBackgroundResource(AndroidUtils.resolveAttribute(ctx, android.R.attr.selectableItemBackground));
 				} else {
 					iv.setImageDrawable(ctx.getIconsCache().getThemedIcon(mode.getSmallIconDark()));
 				}
@@ -118,17 +118,27 @@ public class AppModeDialog {
 	}
 
 
-	static private View createToggle(LayoutInflater layoutInflater, OsmandApplication ctx, LinearLayout layout, ApplicationMode mode){
-		int metricsX = (int) ctx.getResources().getDimension(R.dimen.map_mode_button_width);
-		int metricsY = (int) ctx.getResources().getDimension(R.dimen.map_mode_button_width);
+	static private View createToggle(LayoutInflater layoutInflater, OsmandApplication ctx, LinearLayout layout, ApplicationMode mode, boolean useMapTheme){
+		int metricsX = (int) ctx.getResources().getDimension(R.dimen.route_info_modes_height);
+		int metricsY = (int) ctx.getResources().getDimension(R.dimen.route_info_modes_height);
 		View tb = layoutInflater.inflate(R.layout.mode_view, null);
 		ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
-		iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), R.color.osmand_orange));
+		iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), isNightMode(ctx, useMapTheme) ? R.color.route_info_checked_mode_icon_color_dark : R.color.route_info_checked_mode_icon_color_light));
 		iv.setContentDescription(mode.toHumanString(ctx));
 //		tb.setCompoundDrawablesWithIntrinsicBounds(null, ctx.getIconsCache().getIcon(mode.getIconId(), R.color.app_mode_icon_color), null, null);
 		LayoutParams lp = new LinearLayout.LayoutParams(metricsX, metricsY);
 //		lp.setMargins(left, 0, 0, 0);
 		layout.addView(tb, lp);
 		return tb;
+	}
+
+	private static boolean isNightMode(OsmandApplication ctx, boolean useMapTheme) {
+		boolean nightMode;
+		if (useMapTheme) {
+			nightMode = ctx.getDaynightHelper().isNightModeForMapControls();
+		} else {
+			nightMode = !ctx.getSettings().isLightContent();
+		}
+		return nightMode;
 	}
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/context_img_card_width"
+    android:layout_height="@dimen/context_img_card_height"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:background="?attr/bg_color"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="2dp"
+        android:maxLines="4"
+        android:gravity="center"
+        android:ellipsize="end"
+        tools:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/default_list_text_size"
+        android:text="@string/mapillary_action_descr"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/blue_button_drawable"
+        app:backgroundTint="@color/mapillary_color"
+        android:layout_gravity="bottom|center_horizontal"
+        android:drawableLeft="@drawable/ic_action_mapillary"
+        android:drawableStart="@drawable/ic_action_mapillary"
+        android:drawablePadding="8dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="14dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/color_white"
+        android:text="@string/shared_string_add_photos"/>
+
+    <View
+        android:id="@+id/card_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="?attr/context_menu_card"/>
+
+</FrameLayout>

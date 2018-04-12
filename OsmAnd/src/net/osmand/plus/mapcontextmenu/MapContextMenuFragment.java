@@ -3,80 +3,102 @@ package net.osmand.plus.mapcontextmenu;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
+import android.view.View.OnLayoutChangeListener;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.OverScroller;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.LockableScrollView;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
+import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.TransportStopsLayer;
+import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.util.Algorithms;
+
+import java.util.List;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
-public class MapContextMenuFragment extends Fragment implements DownloadEvents {
+public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents {
 	public static final String TAG = "MapContextMenuFragment";
 
-	public static final float FAB_PADDING_TOP_DP = 4f;
+	public static final float ZOOM_PADDING_TOP_DP = 4f;
 	public static final float MARKER_PADDING_DP = 20f;
 	public static final float MARKER_PADDING_X_DP = 50f;
-	public static final float SKIP_HALF_SCREEN_STATE_KOEF = .21f;
-	public static final int ZOOM_IN_STANDARD = 16;
+	public static final int ZOOM_IN_STANDARD = 17;
+
+	public static final int CURRENT_Y_UNDEFINED = Integer.MAX_VALUE;
 
 	private View view;
-	private View mainView;
-	ImageView fabView;
+	private InterceptorLinearLayout mainView;
+
+	private View toolbarContainer;
+	private View toolbarView;
+	private View toolbarBackButton;
+	private TextView toolbarTextView;
+	private View topButtonContainer;
+	private LockableScrollView menuScrollView;
+
+	private View zoomButtonsView;
+	private ImageButton zoomInButtonView;
+	private ImageButton zoomOutButtonView;
 
 	private MapContextMenu menu;
-	private TitleButtonController leftTitleButtonController;
-	private TitleButtonController rightTitleButtonController;
-	private TitleButtonController topRightTitleButtonController;
-	private TitleButtonController leftDownloadButtonController;
-	private TitleButtonController rightDownloadButtonController;
-	private TitleProgressController titleProgressController;
+	private OnLayoutChangeListener containerLayoutListener;
 
 	private int menuTopViewHeight;
-	private int menuTopShadowHeight;
 	private int menuTopShadowAllHeight;
 	private int menuTitleHeight;
 	private int menuBottomViewHeight;
+	private int menuButtonsHeight;
 	private int menuFullHeight;
 	private int menuFullHeightMax;
 	private int menuTopViewHeightExcludingTitle;
@@ -84,13 +106,19 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	private int screenHeight;
 	private int viewHeight;
+	private int zoomButtonsHeight;
 
-	private int fabPaddingTopPx;
 	private int markerPaddingPx;
 	private int markerPaddingXPx;
+	private int topScreenPosY;
+	private int bottomToolbarPosY;
+	private int minHalfY;
+	private int shadowHeight;
+	private int zoomPaddingTop;
 
 	private OsmandMapTileView map;
 	private LatLon mapCenter;
+	private int mapZoom;
 	private int origMarkerX;
 	private int origMarkerY;
 	private boolean customMapCenter;
@@ -101,39 +129,54 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private boolean wasDrawerDisabled;
 	private boolean zoomIn;
 
-	private float skipHalfScreenStateLimit;
-
 	private int screenOrientation;
+	private boolean created;
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
-		screenHeight = AndroidUtils.getScreenHeight(getActivity());
-		skipHalfScreenStateLimit = screenHeight * SKIP_HALF_SCREEN_STATE_KOEF;
-
-		viewHeight = screenHeight - AndroidUtils.getStatusBarHeight(getMapActivity());
-
-		fabPaddingTopPx = dpToPx(FAB_PADDING_TOP_DP);
-		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
-		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
+		processScreenHeight(container);
 
 		menu = getMapActivity().getContextMenu();
+
+		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
+		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
+		shadowHeight = dpToPx(SHADOW_HEIGHT_TOP_DP);
+		topScreenPosY = addStatusBarHeightIfNeeded(-shadowHeight);
+		bottomToolbarPosY = addStatusBarHeightIfNeeded(getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar));
+		minHalfY = viewHeight - (int) (viewHeight * menu.getHalfScreenMaxHeightKoef());
+		zoomPaddingTop = dpToPx(ZOOM_PADDING_TOP_DP);
+
 		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
 		if (!menu.isActive()) {
 			return view;
 		}
+		AndroidUtils.addStatusBarPadding21v(getMapActivity(), view);
+
 		nightMode = menu.isNightMode();
 		mainView = view.findViewById(R.id.context_menu_main);
 
-		leftTitleButtonController = menu.getLeftTitleButtonController();
-		rightTitleButtonController = menu.getRightTitleButtonController();
-		topRightTitleButtonController = menu.getTopRightTitleButtonController();
+		toolbarContainer = view.findViewById(R.id.context_menu_toolbar_container);
+		toolbarView = view.findViewById(R.id.context_menu_toolbar);
+		toolbarBackButton = view.findViewById(R.id.context_menu_toolbar_back);
+		toolbarTextView = (TextView) view.findViewById(R.id.context_menu_toolbar_text);
+		updateVisibility(toolbarContainer, 0);
+		toolbarBackButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				openMenuHeaderOnly();
+			}
+		});
 
-		leftDownloadButtonController = menu.getLeftDownloadButtonController();
-		rightDownloadButtonController = menu.getRightDownloadButtonController();
-		titleProgressController = menu.getTitleProgressController();
+		topButtonContainer = view.findViewById(R.id.context_menu_top_button_container);
+		view.findViewById(R.id.context_menu_top_back).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				openMenuHeaderOnly();
+			}
+		});
+		updateVisibility(topButtonContainer, 0);
 
 		map = getMapActivity().getMapView();
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
@@ -150,76 +193,83 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			origMarkerX = box.getCenterPixelX();
 			origMarkerY = box.getCenterPixelY();
 		}
-
-		IconsCache iconsCache = getMyApplication().getIconsCache();
+		mapZoom = menu.getMapZoom();
+		if (mapZoom == 0) {
+			mapZoom = map.getZoom();
+		}
 
 		// Left title button
-		final Button leftTitleButton = (Button) view.findViewById(R.id.title_button);
-		if (leftTitleButtonController != null) {
-			leftTitleButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
+		final View leftTitleButtonView = view.findViewById(R.id.title_button_view);
+		leftTitleButtonView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				TitleButtonController leftTitleButtonController = menu.getLeftTitleButtonController();
+				if (leftTitleButtonController != null) {
 					leftTitleButtonController.buttonPressed();
 				}
-			});
-		}
+			}
+		});
 
 		// Right title button
-		final Button rightTitleButton = (Button) view.findViewById(R.id.title_button_right);
-		if (rightTitleButtonController != null) {
-			rightTitleButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
+		final View rightTitleButtonView = view.findViewById(R.id.title_button_right_view);
+		rightTitleButtonView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				TitleButtonController rightTitleButtonController = menu.getRightTitleButtonController();
+				if (rightTitleButtonController != null) {
 					rightTitleButtonController.buttonPressed();
 				}
-			});
-		}
+			}
+		});
 
 		// Left download button
-		final Button leftDownloadButton = (Button) view.findViewById(R.id.download_button_left);
-		if (leftDownloadButtonController != null) {
-			leftDownloadButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
+		final View leftDownloadButtonView = view.findViewById(R.id.download_button_left_view);
+		leftDownloadButtonView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				TitleButtonController leftDownloadButtonController = menu.getLeftDownloadButtonController();
+				if (leftDownloadButtonController != null) {
 					leftDownloadButtonController.buttonPressed();
 				}
-			});
-		}
+			}
+		});
 
 		// Right download button
-		final Button rightDownloadButton = (Button) view.findViewById(R.id.download_button_right);
-		if (rightDownloadButtonController != null) {
-			rightDownloadButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
+		final View rightDownloadButtonView = (View) view.findViewById(R.id.download_button_right_view);
+		rightDownloadButtonView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				TitleButtonController rightDownloadButtonController = menu.getRightDownloadButtonController();
+				if (rightDownloadButtonController != null) {
 					rightDownloadButtonController.buttonPressed();
 				}
-			});
-		}
+			}
+		});
 
-		// Top Right title button
-		final Button topRightTitleButton = (Button) view.findViewById(R.id.title_button_top_right);
-		if (topRightTitleButtonController != null) {
-			topRightTitleButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					topRightTitleButtonController.buttonPressed();
+		// Bottom title button
+		final View bottomTitleButtonView = view.findViewById(R.id.title_button_bottom_view);
+		bottomTitleButtonView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				TitleButtonController bottomTitleButtonController = menu.getBottomTitleButtonController();
+				if (bottomTitleButtonController != null) {
+					bottomTitleButtonController.buttonPressed();
 				}
-			});
-		}
+			}
+		});
 
 		// Progress bar
-		if (titleProgressController != null) {
-			final ImageView progressButton = (ImageView) view.findViewById(R.id.progressButton);
-			progressButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
-					!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-			progressButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
+		final ImageView progressButton = (ImageView) view.findViewById(R.id.progressButton);
+		progressButton.setImageDrawable(getIcon(R.drawable.ic_action_remove_dark, R.color.ctx_menu_buttons_icon_color));
+		progressButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				TitleProgressController titleProgressController = menu.getTitleProgressController();
+				if (titleProgressController != null) {
 					titleProgressController.buttonPressed();
 				}
-			});
-		}
+			}
+		});
 
 		menu.updateData();
 		updateButtonsAndProgress();
@@ -238,344 +288,673 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		runLayoutListener();
 
 		final GestureDetector singleTapDetector = new GestureDetector(view.getContext(), new SingleTapConfirm());
+		final GestureDetector swipeDetector = new GestureDetector(view.getContext(), new HorizontalSwipeConfirm(true));
 
 		final View.OnTouchListener slideTouchListener = new View.OnTouchListener() {
 			private float dy;
 			private float dyMain;
-			private VelocityTracker velocity;
+			private float mDownY;
+
+			private int minimumVelocity;
+			private int maximumVelocity;
+			private VelocityTracker velocityTracker;
+			private OverScroller scroller;
+
 			private boolean slidingUp;
 			private boolean slidingDown;
 
-			private float velocityY;
-			private float maxVelocityY;
-
 			private boolean hasMoved;
+
+			{
+				scroller = new OverScroller(getContext());
+				final ViewConfiguration configuration = ViewConfiguration.get(getContext());
+				minimumVelocity = configuration.getScaledMinimumFlingVelocity();
+				maximumVelocity = configuration.getScaledMaximumFlingVelocity();
+			}
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 
-				if (singleTapDetector.onTouchEvent(event)) {
-					moving = false;
-					int posY = getViewY();
-					if (!centered) {
-						if (!zoomIn && menu.supportZoomIn()) {
-							LatLon centerLatLon = map.getCurrentRotatedTileBox().getCenterLatLon();
-							if (centerLatLon.equals(menu.getLatLon())) {
-								zoomIn = true;
-							}
-						}
-						centerMarkerLocation();
-					} else if (!zoomIn && menu.supportZoomIn()) {
-						int fZoom = getZoom();
-						zoomIn = true;
-						if (fZoom < ZOOM_IN_STANDARD) {
-							AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
-							thread.startZooming(ZOOM_IN_STANDARD,
-									map.getZoomFractionalPart(), true);
-						}
-					}
-					if (hasMoved) {
-						applyPosY(posY, false, false, 0, 0);
-					}
-					openMenuHalfScreen();
-					return true;
-				}
+				if (!hasMoved && event.getY() <= menuTopViewHeight) {
+					if (singleTapDetector.onTouchEvent(event)) {
+						moving = false;
+						openMenuHalfScreen();
 
+						recycleVelocityTracker();
+						return true;
+					}
+				}
 				if (menu.isLandscapeLayout()) {
-					return true;
+					if (swipeDetector.onTouchEvent(event)) {
+						menu.close();
+
+						recycleVelocityTracker();
+						return true;
+					}
 				}
 
 				switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
 						hasMoved = false;
+						mDownY = event.getRawY();
 						dy = event.getY();
 						dyMain = getViewY();
-						velocity = VelocityTracker.obtain();
-						velocityY = 0;
-						maxVelocityY = 0;
-						velocity.addMovement(event);
-						moving = true;
+
+						initOrResetVelocityTracker();
+						velocityTracker.addMovement(event);
 						break;
 
 					case MotionEvent.ACTION_MOVE:
+						if (Math.abs(event.getRawY() - mDownY) > mainView.getTouchSlop()) {
+							moving = true;
+						}
 						if (moving) {
 							hasMoved = true;
 							float y = event.getY();
 							float newY = getViewY() + (y - dy);
+							if (menu.isLandscapeLayout() && newY > topScreenPosY) {
+								newY = topScreenPosY;
+							}
 							setViewY((int) newY, false, false);
 
 							menuFullHeight = view.getHeight() - (int) newY + 10;
-							if (!oldAndroid()) {
-								ViewGroup.LayoutParams lp = mainView.getLayoutParams();
-								lp.height = Math.max(menuFullHeight, menuTitleHeight);
-								mainView.setLayoutParams(lp);
-								mainView.requestLayout();
-							}
+							ViewGroup.LayoutParams lp = mainView.getLayoutParams();
+							lp.height = Math.max(menuFullHeight, menuTitleHeight);
+							mainView.setLayoutParams(lp);
+							mainView.requestLayout();
 
-							velocity.addMovement(event);
-							velocity.computeCurrentVelocity(1000);
-							velocityY = Math.abs(velocity.getYVelocity());
-							if (velocityY > maxVelocityY)
-								maxVelocityY = velocityY;
+							float newEventY = newY - (dyMain - dy);
+							MotionEvent ev = MotionEvent.obtain(event.getDownTime(), event.getEventTime(), event.getAction(),
+									event.getX(), newEventY, event.getMetaState());
+
+							initVelocityTrackerIfNotExists();
+							velocityTracker.addMovement(ev);
+
+							updateToolbar();
+							updateTopButton();
 						}
 
 						break;
 
 					case MotionEvent.ACTION_UP:
-					case MotionEvent.ACTION_CANCEL:
 						if (moving) {
 							moving = false;
+							hasMoved = false;
 							int currentY = getViewY();
 
-							slidingUp = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) < -50;
-							slidingDown = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) > 50;
+							final VelocityTracker velocityTracker = this.velocityTracker;
+							velocityTracker.computeCurrentVelocity(1000, maximumVelocity);
+							int initialVelocity = (int) velocityTracker.getYVelocity();
 
-							velocity.recycle();
+							if ((Math.abs(initialVelocity) > minimumVelocity)) {
 
-							boolean skipHalfScreenState = Math.abs(currentY - dyMain) > skipHalfScreenStateLimit;
-							changeMenuState(currentY, skipHalfScreenState, slidingUp, slidingDown);
+								scroller.abortAnimation();
+								scroller.fling(0, currentY, 0, initialVelocity, 0, 0,
+										Math.min(viewHeight - menuFullHeightMax, getFullScreenTopPosY()),
+										screenHeight,
+										0, 0);
+								currentY = scroller.getFinalY();
+								scroller.abortAnimation();
+
+								slidingUp = initialVelocity < -2000;
+								slidingDown = initialVelocity > 2000;
+							} else {
+								slidingUp = false;
+								slidingDown = false;
+							}
+
+							changeMenuState(currentY, slidingUp, slidingDown);
 						}
+						recycleVelocityTracker();
+						break;
+					case MotionEvent.ACTION_CANCEL:
+						moving = false;
+						hasMoved = false;
+						recycleVelocityTracker();
 						break;
 
 				}
 				return true;
 			}
+
+			private void initOrResetVelocityTracker() {
+				if (velocityTracker == null) {
+					velocityTracker = VelocityTracker.obtain();
+				} else {
+					velocityTracker.clear();
+				}
+			}
+
+			private void initVelocityTrackerIfNotExists() {
+				if (velocityTracker == null) {
+					velocityTracker = VelocityTracker.obtain();
+					velocityTracker.clear();
+				}
+			}
+
+			private void recycleVelocityTracker() {
+				if (velocityTracker != null) {
+					velocityTracker.recycle();
+					velocityTracker = null;
+				}
+			}
+
 		};
 
-		View topView = view.findViewById(R.id.context_menu_top_view);
-		topView.setOnTouchListener(slideTouchListener);
-		View topShadowView = view.findViewById(R.id.context_menu_top_shadow);
-		topShadowView.setOnTouchListener(slideTouchListener);
 		View topShadowAllView = view.findViewById(R.id.context_menu_top_shadow_all);
 		AndroidUtils.setBackground(getMapActivity(), topShadowAllView, nightMode, R.drawable.bg_map_context_menu_light,
 				R.drawable.bg_map_context_menu_dark);
-		topShadowAllView.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getY() <= dpToPx(SHADOW_HEIGHT_TOP_DP) || event.getAction() != MotionEvent.ACTION_DOWN)
-					return slideTouchListener.onTouch(v, event);
-				else
-					return false;
-			}
-		});
+
+		((InterceptorLinearLayout) mainView).setListener(slideTouchListener);
+		mainView.setOnTouchListener(slideTouchListener);
 
 		buildHeader();
 
-		AndroidUtils.setTextPrimaryColor(getMapActivity(),
-				(TextView) view.findViewById(R.id.context_menu_line1), nightMode);
+		((TextView) view.findViewById(R.id.context_menu_line1)).setTextColor(ContextCompat.getColor(getContext(),
+				nightMode ? R.color.ctx_menu_title_color_dark : R.color.ctx_menu_title_color_light));
 		View menuLine2 = view.findViewById(R.id.context_menu_line2);
 		if (menuLine2 != null) {
-			AndroidUtils.setTextSecondaryColor(getMapActivity(), (TextView) menuLine2, nightMode);
+			((TextView) menuLine2).setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_subtitle_color));
 		}
-		((Button) view.findViewById(R.id.title_button_top_right))
-				.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue) : getResources().getColor(R.color.osmand_orange));
-		AndroidUtils.setTextSecondaryColor(getMapActivity(),
-				(TextView) view.findViewById(R.id.distance), nightMode);
+		((TextView) view.findViewById(R.id.distance)).setTextColor(ContextCompat.getColor(getContext(),
+				nightMode ? R.color.ctx_menu_direction_color_dark : R.color.ctx_menu_direction_color_light));
 
-		((Button) view.findViewById(R.id.title_button))
-				.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue) : getResources().getColor(R.color.osmand_orange));
 		AndroidUtils.setTextSecondaryColor(getMapActivity(),
 				(TextView) view.findViewById(R.id.title_button_right_text), nightMode);
-		((Button) view.findViewById(R.id.title_button_right))
-				.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue) : getResources().getColor(R.color.osmand_orange));
 
 		AndroidUtils.setTextSecondaryColor(getMapActivity(),
 				(TextView) view.findViewById(R.id.progressTitle), nightMode);
 
-		// FAB
-		fabView = (ImageView) view.findViewById(R.id.context_menu_fab_view);
-		if (menu.fabVisible()) {
-			fabView.setImageDrawable(iconsCache.getIcon(menu.getFabIconId(), 0));
-			if (menu.isLandscapeLayout()) {
-				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) fabView.getLayoutParams();
-				params.setMargins(0, 0, dpToPx(28f), 0);
-				fabView.setLayoutParams(params);
-			}
-			fabView.setOnClickListener(new View.OnClickListener() {
+		// Zoom buttons
+		zoomButtonsView = view.findViewById(R.id.context_menu_zoom_buttons);
+		zoomInButtonView = (ImageButton) view.findViewById(R.id.context_menu_zoom_in_button);
+		zoomOutButtonView = (ImageButton) view.findViewById(R.id.context_menu_zoom_out_button);
+		if (menu.zoomButtonsVisible()) {
+			updateImageButton(zoomInButtonView, R.drawable.map_zoom_in, R.drawable.map_zoom_in_night,
+					R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
+			updateImageButton(zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
+					R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
+			zoomInButtonView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					menu.fabPressed();
+					menu.zoomInPressed();
 				}
 			});
+			zoomOutButtonView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					menu.zoomOutPressed();
+				}
+			});
+			zoomButtonsView.setVisibility(View.VISIBLE);
 		} else {
-			fabView.setVisibility(View.GONE);
+			zoomButtonsView.setVisibility(View.GONE);
 		}
 
+		GridView localTransportStopRoutesGrid = (GridView) view.findViewById(R.id.transport_stop_routes_grid);
+		GridView nearbyTransportStopRoutesGrid = (GridView) view.findViewById(R.id.transport_stop_nearby_routes_grid);
+		TextView nearbRoutesWithinTv = (TextView) view.findViewById(R.id.nearby_routes_within_text_view);
+		LinearLayout nearbyRoutesLayout = (LinearLayout) view.findViewById(R.id.nearby_routes);
+
+		List<TransportStopRoute> localTransportStopRoutes = menu.getLocalTransportStopRoutes();
+		List<TransportStopRoute> nearbyTransportStopRoutes = menu.getNearbyTransportStopRoutes();
+		if (nightMode) {
+			nearbRoutesWithinTv.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_bottom_view_secondary_text_color_dark));
+		} else {
+			nearbRoutesWithinTv.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_nearby_routes_text_color_dark));
+		}
+		if (localTransportStopRoutes != null && localTransportStopRoutes.size() > 0) {
+			localTransportStopRoutesGrid.setAdapter(createTransportStopRouteAdapter(localTransportStopRoutes));
+			localTransportStopRoutesGrid.setVisibility(View.VISIBLE);
+		} else {
+			localTransportStopRoutesGrid.setVisibility(View.GONE);
+		}
+		if (nearbyTransportStopRoutes != null && nearbyTransportStopRoutes.size() > 0) {
+			String nearInDistance = getMyApplication().getString(R.string.transport_nearby_routes) + " "
+					+ OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, getMyApplication()).toUpperCase() +":";
+			nearbRoutesWithinTv.setText(nearInDistance);
+			nearbyTransportStopRoutesGrid.setAdapter(createTransportStopRouteAdapter(nearbyTransportStopRoutes));
+			nearbyTransportStopRoutesGrid.setVisibility(View.VISIBLE);
+		} else {
+			nearbyRoutesLayout.setVisibility(View.GONE);
+		}
+
+		View buttonsBottomBorder = view.findViewById(R.id.buttons_bottom_border);
 		View buttonsTopBorder = view.findViewById(R.id.buttons_top_border);
-		AndroidUtils.setBackground(getMapActivity(), buttonsTopBorder, nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+		buttonsBottomBorder.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
+		buttonsTopBorder.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
+		View buttons = view.findViewById(R.id.context_menu_buttons);
+		buttons.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
 		if (!menu.buttonsVisible()) {
-			View buttons = view.findViewById(R.id.context_menu_buttons);
 			buttonsTopBorder.setVisibility(View.GONE);
 			buttons.setVisibility(View.GONE);
 		}
-
-		AndroidUtils.setBackground(getMapActivity(), mainView.findViewById(R.id.divider_hor_1), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
-		AndroidUtils.setBackground(getMapActivity(), mainView.findViewById(R.id.divider_hor_2), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
-		AndroidUtils.setBackground(getMapActivity(), mainView.findViewById(R.id.divider_hor_3), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+		View bottomButtons = view.findViewById(R.id.context_menu_bottom_buttons);
+		bottomButtons.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
+		if (!menu.navigateButtonVisible()) {
+			bottomButtons.findViewById(R.id.context_menu_directions_button).setVisibility(View.GONE);
+		}
 
 		// Action buttons
-		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
-		buttonFavorite.setImageDrawable(iconsCache.getIcon(menu.getFavActionIconId(),
-				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonFavorite, nightMode);
-		buttonFavorite.setContentDescription(getString(menu.getFavActionStringId()));
-		buttonFavorite.setOnClickListener(new View.OnClickListener() {
+		final ImageView imageFavorite = (ImageView) view.findViewById(R.id.context_menu_fav_image_view);
+		imageFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(),
+				R.color.ctx_menu_buttons_icon_color));
+		imageFavorite.setContentDescription(getString(menu.getFavActionStringId()));
+		((TextView) view.findViewById(R.id.context_menu_fav_text_view)).setText(menu.getFavActionStringId());
+		View favView = view.findViewById(R.id.context_menu_fav_view);
+		favView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				menu.buttonFavoritePressed();
 			}
 		});
 
-		final ImageButton buttonWaypoint = (ImageButton) view.findViewById(R.id.context_menu_route_button);
-		if (getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
-			buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_flag_dark,
-					!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-			buttonWaypoint.setContentDescription(getString(R.string.shared_string_add_to_map_markers));
+		final ImageView imageWaypoint = (ImageView) view.findViewById(R.id.context_menu_route_image_view);
+		imageWaypoint.setImageDrawable(getIcon(menu.getWaypointActionIconId(),
+				R.color.ctx_menu_buttons_icon_color));
+		imageWaypoint.setContentDescription(getString(menu.getWaypointActionStringId()));
+		View waypointView = view.findViewById(R.id.context_menu_route_view);
+		if (menu.isButtonWaypointEnabled()) {
+			waypointView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					menu.buttonWaypointPressed();
+				}
+			});
 		} else {
-			buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_waypoint,
-					!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-			buttonWaypoint.setContentDescription(getString(R.string.context_menu_item_destination_point));
+			deactivate(waypointView);
 		}
-		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonWaypoint, nightMode);
-		buttonWaypoint.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				menu.buttonWaypointPressed();
-			}
-		});
 
-		final ImageButton buttonShare = (ImageButton) view.findViewById(R.id.context_menu_share_button);
-		buttonShare.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_gshare_dark,
-				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonShare, nightMode);
-		buttonShare.setOnClickListener(new View.OnClickListener() {
+		final ImageView imageShare = (ImageView) view.findViewById(R.id.context_menu_share_image_view);
+		imageShare.setImageDrawable(getIcon(R.drawable.map_action_gshare_dark,
+				R.color.ctx_menu_buttons_icon_color));
+		View shareView = view.findViewById(R.id.context_menu_share_view);
+		shareView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				menu.buttonSharePressed();
 			}
 		});
 
-		final ImageButton buttonMore = (ImageButton) view.findViewById(R.id.context_menu_more_button);
-		buttonMore.setImageDrawable(iconsCache.getIcon(R.drawable.map_overflow_menu_white,
-				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonMore, nightMode);
-		buttonMore.setOnClickListener(new View.OnClickListener() {
+		final ImageView imageMore = (ImageView) view.findViewById(R.id.context_menu_more_image_view);
+		imageMore.setImageDrawable(getIcon(R.drawable.map_overflow_menu_white,
+				R.color.ctx_menu_buttons_icon_color));
+		View moreView = view.findViewById(R.id.context_menu_more_view);
+		moreView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				menu.buttonMorePressed();
 			}
 		});
 
+		//Bottom buttons
+		int bottomButtonsColor = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
+		TextView detailsButton = (TextView) view.findViewById(R.id.context_menu_details_button);
+		detailsButton.setTextColor(ContextCompat.getColor(getContext(), bottomButtonsColor));
+		detailsButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				openMenuHalfScreen();
+			}
+		});
+		TextView directionsButton = (TextView) view.findViewById(R.id.context_menu_directions_button);
+		int iconResId = R.drawable.map_directions;
+		if (menu.navigateInPedestrianMode()) {
+			iconResId = R.drawable.map_action_pedestrian_dark;
+		}
+		Drawable drawable = getIcon(iconResId, bottomButtonsColor);
+		directionsButton.setTextColor(ContextCompat.getColor(getContext(), bottomButtonsColor));
+		directionsButton.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+		directionsButton.setCompoundDrawablePadding(dpToPx(8));
+		directionsButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				menu.navigateButtonPressed();
+			}
+		});
+
 		buildBottomView();
 
-		view.findViewById(R.id.context_menu_bottom_scroll).setBackgroundColor(nightMode ?
-				getResources().getColor(R.color.ctx_menu_info_view_bg_dark) : getResources().getColor(R.color.ctx_menu_info_view_bg_light));
-		view.findViewById(R.id.context_menu_bottom_view).setBackgroundColor(nightMode ?
-				getResources().getColor(R.color.ctx_menu_info_view_bg_dark) : getResources().getColor(R.color.ctx_menu_info_view_bg_light));
+		LockableScrollView bottomScrollView = (LockableScrollView) view.findViewById(R.id.context_menu_bottom_scroll);
+		bottomScrollView.setScrollingEnabled(false);
+		bottomScrollView.setBackgroundColor(getResources()
+				.getColor(nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
+		view.findViewById(R.id.context_menu_bottom_view).setBackgroundColor(getResources()
+				.getColor(nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
 
 		//getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
 
+		containerLayoutListener = new OnLayoutChangeListener() {
+			@Override
+			public void onLayoutChange(View view, int left, int top, int right, int bottom,
+									   int oldLeft, int oldTop, int oldRight, int oldBottom) {
+				if (bottom != oldBottom) {
+					processScreenHeight(view.getParent());
+					runLayoutListener();
+				}
+			}
+		};
+
+		created = true;
 		return view;
 	}
 
+	private TransportStopRouteAdapter createTransportStopRouteAdapter(List<TransportStopRoute> routes) {
+		final TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(getMyApplication(), routes, nightMode);
+		adapter.setListener(new TransportStopRouteAdapter.OnClickListener() {
+			@Override
+			public void onClick(int position) {
+				TransportStopRoute route = adapter.getItem(position);
+				if (route != null) {
+					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
+							route.getDescription(getMapActivity().getMyApplication(), false));
+					menu.show(menu.getLatLon(), pd, route);
+					TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+					stopsLayer.setRoute(route);
+					int cz = route.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
+					getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
+				}
+			}
+		});
+		return adapter;
+	}
+
+	private float getToolbarAlpha(int y) {
+		float a = 0;
+		if (menu != null && !menu.isLandscapeLayout()) {
+			if (y < bottomToolbarPosY) {
+				a = 1f - (y - topScreenPosY) * (1f / (bottomToolbarPosY - topScreenPosY));
+			}
+			if (a < 0) {
+				a = 0;
+			} else if (a > 1) {
+				a = 1;
+			}
+		}
+		return a;
+	}
+
+	private void updateToolbar() {
+		float a = getToolbarAlpha(getViewY());
+		updateVisibility(toolbarContainer, a);
+	}
+
+	private float getTopButtonAlpha(int y) {
+		float a = 0;
+		if (menu != null && !menu.isLandscapeLayout() && !menu.hasActiveToolbar()) {
+			int headerTopY = getHeaderOnlyTopY();
+			if (y < headerTopY) {
+				a = 1f - (y - minHalfY) * (1f / (headerTopY - minHalfY));
+			}
+			if (a < 0) {
+				a = 0;
+			} else if (a > 1) {
+				a = 1;
+			}
+		}
+		return a;
+	}
+
+	private void updateTopButton() {
+		float a = getTopButtonAlpha(getViewY());
+		updateVisibility(topButtonContainer, a);
+	}
+
+	private void updateVisibility(View v, float alpha) {
+		boolean visible = alpha > 0;
+		v.setAlpha(alpha);
+		if (visible && v.getVisibility() != View.VISIBLE) {
+			v.setVisibility(View.VISIBLE);
+		} else  if (!visible && v.getVisibility() == View.VISIBLE) {
+			v.setVisibility(View.INVISIBLE);
+		}
+	}
+
+	private void updateVisibility(View v, boolean visible) {
+		if (visible && v.getVisibility() != View.VISIBLE) {
+			v.setVisibility(View.VISIBLE);
+		} else  if (!visible && v.getVisibility() == View.VISIBLE) {
+			v.setVisibility(View.INVISIBLE);
+		}
+	}
+
+	private void toggleDetailsHideButton() {
+		int menuState = menu.getCurrentMenuState();
+		final boolean showShowHideButton = menuState == MenuState.HALF_SCREEN || (!menu.isLandscapeLayout() && menuState == MenuState.FULL_SCREEN);
+		TextView detailsButton = (TextView) view.findViewById(R.id.context_menu_details_button);
+		detailsButton.setText(showShowHideButton ? R.string.shared_string_collapse : R.string.description);
+		detailsButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (showShowHideButton) {
+					openMenuHeaderOnly();
+				} else {
+					openMenuHalfScreen();
+				}
+			}
+		});
+	}
+
+	private void deactivate(View view) {
+		view.setEnabled(false);
+		view.setAlpha(0.5f);
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		if (menu != null && (menu.getCurrentMenuState() == MenuState.FULL_SCREEN || menu.isLandscapeLayout())) {
+			return nightMode ? R.color.status_bar_dark : R.color.status_bar_route_light;
+		}
+		return -1;
+	}
+
+	private void updateImageButton(ImageButton button, int iconLightId, int iconDarkId, int bgLightId, int bgDarkId, boolean night) {
+		button.setImageDrawable(getMapActivity().getMyApplication().getIconsCache().getIcon(night ? iconDarkId : iconLightId));
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			button.setBackground(getMapActivity().getResources().getDrawable(night ? bgDarkId : bgLightId,
+					getMapActivity().getTheme()));
+		} else {
+			button.setBackgroundDrawable(getMapActivity().getResources().getDrawable(night ? bgDarkId : bgLightId));
+		}
+	}
+
+	private void processScreenHeight(ViewParent parent) {
+		View container = (View) parent;
+		screenHeight = container.getHeight() + AndroidUtils.getStatusBarHeight(getActivity());
+		viewHeight = screenHeight - AndroidUtils.getStatusBarHeight(getMapActivity());
+	}
+
 	public void openMenuFullScreen() {
-		changeMenuState(getViewY(), true, true, false);
+		changeMenuState(getMenuStatePosY(MenuState.FULL_SCREEN), false, false);
+	}
+
+	public void openMenuHeaderOnly() {
+		if (!menu.isLandscapeLayout()) {
+			changeMenuState(getMenuStatePosY(MenuState.HEADER_ONLY), false, false);
+		}
 	}
 
 	public void openMenuHalfScreen() {
-		int oldMenuState = menu.getCurrentMenuState();
-		if (oldMenuState == MenuState.HEADER_ONLY) {
-			changeMenuState(getViewY(), false, true, false);
-		} else if (oldMenuState == MenuState.FULL_SCREEN && !menu.isLandscapeLayout()) {
-			changeMenuState(getViewY(), false, false, true);
+		if (!menu.isLandscapeLayout()) {
+			changeMenuState(getMenuStatePosY(MenuState.HALF_SCREEN), false, false);
 		}
 	}
 
-	private void changeMenuState(int currentY, boolean skipHalfScreenState,
-								 boolean slidingUp, boolean slidingDown) {
+	private void changeMenuState(int currentY, boolean slidingUp, boolean slidingDown) {
 		boolean needCloseMenu = false;
 
-		int oldMenuState = menu.getCurrentMenuState();
-		if (menuBottomViewHeight > 0 && slidingUp) {
-			menu.slideUp();
-			if (skipHalfScreenState) {
-				menu.slideUp();
+		int currentMenuState = menu.getCurrentMenuState();
+		if (!menu.isLandscapeLayout()) {
+			int headerDist = Math.abs(currentY - getMenuStatePosY(MenuState.HEADER_ONLY));
+			int halfDist = Math.abs(currentY - getMenuStatePosY(MenuState.HALF_SCREEN));
+			int fullDist = Math.abs(currentY - getMenuStatePosY(MenuState.FULL_SCREEN));
+			int newState;
+			if (headerDist < halfDist && headerDist < fullDist) {
+				newState = MenuState.HEADER_ONLY;
+			} else if (halfDist < headerDist && halfDist < fullDist) {
+				newState = MenuState.HALF_SCREEN;
+			} else {
+				newState = MenuState.FULL_SCREEN;
 			}
-		} else if (slidingDown) {
-			needCloseMenu = !menu.slideDown();
-			if (!needCloseMenu && skipHalfScreenState) {
-				menu.slideDown();
+
+			if (slidingDown && currentMenuState == MenuState.FULL_SCREEN && getViewY() < getFullScreenTopPosY()) {
+				slidingDown = false;
+				newState = MenuState.FULL_SCREEN;
+			}
+			if (menuBottomViewHeight > 0 && slidingUp) {
+				while (menu.getCurrentMenuState() != newState) {
+					if (!menu.slideUp()) {
+						break;
+					}
+				}
+			} else if (slidingDown) {
+				if (currentMenuState == MenuState.HEADER_ONLY) {
+					needCloseMenu = true;
+				} else {
+					while (menu.getCurrentMenuState() != newState) {
+						if (!menu.slideDown()) {
+							needCloseMenu = true;
+							break;
+						}
+					}
+				}
+			} else {
+				if (currentMenuState < newState) {
+					while (menu.getCurrentMenuState() != newState) {
+						if (!menu.slideUp()) {
+							break;
+						}
+					}
+				} else {
+					while (menu.getCurrentMenuState() != newState) {
+						if (!menu.slideDown()) {
+							break;
+						}
+					}
+				}
 			}
 		}
 		int newMenuState = menu.getCurrentMenuState();
-		boolean needMapAdjust = oldMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
+		boolean needMapAdjust = currentMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
 
-		if (newMenuState != oldMenuState) {
-			doBeforeMenuStateChange(oldMenuState, newMenuState);
+		if (newMenuState != currentMenuState) {
+			restoreCustomMapRatio();
+			menu.updateControlsVisibility(true);
+			doBeforeMenuStateChange(currentMenuState, newMenuState);
+			toggleDetailsHideButton();
 		}
 
-		applyPosY(currentY, needCloseMenu, needMapAdjust, oldMenuState, newMenuState);
+		applyPosY(currentY, needCloseMenu, needMapAdjust, currentMenuState, newMenuState, 0);
+	}
+
+	private void restoreCustomMapRatio() {
+		if (map != null && map.hasCustomMapRatio()) {
+			map.restoreMapRatio();
+		}
+	}
+
+	private void setCustomMapRatio() {
+		LatLon latLon = menu.getLatLon();
+		RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
+		float px = tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+		float py = tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+		float ratioX = px / tb.getPixWidth();
+		float ratioY = py / tb.getPixHeight();
+		map.setCustomMapRatio(ratioX, ratioY);
+		map.setLatLon(latLon.getLatitude(), latLon.getLongitude());
+	}
+
+	public void doZoomIn() {
+		if (map.isZooming() && map.hasCustomMapRatio()) {
+			getMapActivity().changeZoom(2, System.currentTimeMillis());
+		} else {
+			if (!map.hasCustomMapRatio()) {
+				setCustomMapRatio();
+			}
+			getMapActivity().changeZoom(1, System.currentTimeMillis());
+		}
+	}
+
+	public void doZoomOut() {
+		if (!map.hasCustomMapRatio()) {
+			setCustomMapRatio();
+		}
+		getMapActivity().changeZoom(-1, System.currentTimeMillis());
 	}
 
 	private void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
-						   final int previousMenuState, final int newMenuState) {
-		final int posY = getPosY(needCloseMenu);
-		if (currentY != posY) {
-			if (posY < currentY) {
+						   final int previousMenuState, final int newMenuState, int dZoom) {
+		final int posY = getPosY(currentY, needCloseMenu, previousMenuState);
+		if (getViewY() != posY || dZoom != 0) {
+			if (posY < getViewY()) {
 				updateMainViewLayout(posY);
 			}
 
-			if (!oldAndroid()) {
-				mainView.animate().y(posY)
-						.setDuration(200)
-						.setInterpolator(new DecelerateInterpolator())
-						.setListener(new AnimatorListenerAdapter() {
+			final float topButtonAlpha = getTopButtonAlpha(posY);
+			if (topButtonAlpha > 0) {
+				updateVisibility(topButtonContainer, true);
+			}
+			topButtonContainer.animate().alpha(topButtonAlpha)
+					.setDuration(200)
+					.setInterpolator(new DecelerateInterpolator())
+					.setListener(new AnimatorListenerAdapter() {
+						@Override
+						public void onAnimationEnd(Animator animation) {
+							updateVisibility(topButtonContainer, topButtonAlpha);
+						}
+					})
+					.start();
 
-							boolean canceled = false;
+			final float toolbarAlpha = getToolbarAlpha(posY);
+			if (toolbarAlpha > 0) {
+				updateVisibility(toolbarContainer, true);
+			}
+			toolbarContainer.animate().alpha(toolbarAlpha)
+					.setDuration(200)
+					.setInterpolator(new DecelerateInterpolator())
+					.setListener(new AnimatorListenerAdapter() {
+						@Override
+						public void onAnimationEnd(Animator animation) {
+							updateVisibility(toolbarContainer, toolbarAlpha);
+						}
+					})
+					.start();
 
-							@Override
-							public void onAnimationCancel(Animator animation) {
-								canceled = true;
-							}
+			mainView.animate().y(posY)
+					.setDuration(200)
+					.setInterpolator(new DecelerateInterpolator())
+					.setListener(new AnimatorListenerAdapter() {
 
-							@Override
-							public void onAnimationEnd(Animator animation) {
-								if (!canceled) {
-									if (needCloseMenu) {
-										menu.close();
-									} else {
-										updateMainViewLayout(posY);
-										if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
-											doAfterMenuStateChange(previousMenuState, newMenuState);
-										}
+						boolean canceled = false;
+
+						@Override
+						public void onAnimationCancel(Animator animation) {
+							canceled = true;
+						}
+
+						@Override
+						public void onAnimationEnd(Animator animation) {
+							if (!canceled) {
+								if (needCloseMenu) {
+									menu.close();
+								} else {
+									updateMainViewLayout(posY);
+									if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
+										doAfterMenuStateChange(previousMenuState, newMenuState);
 									}
 								}
 							}
-						})
-						.start();
+						}
+					})
+					.start();
 
-				fabView.animate().y(getFabY(posY))
-						.setDuration(200)
-						.setInterpolator(new DecelerateInterpolator())
-						.start();
+			zoomButtonsView.animate().y(getZoomButtonsY(posY))
+					.setDuration(200)
+					.setInterpolator(new DecelerateInterpolator())
+					.start();
 
-				if (needMapAdjust) {
-					adjustMapPosition(posY, true, centered);
-				}
-			} else {
-				setViewY(posY, false, needMapAdjust);
-				if (needCloseMenu) {
-					menu.close();
-				} else {
-					updateMainViewLayout(posY);
-					if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
-						doAfterMenuStateChange(previousMenuState, newMenuState);
-					}
-				}
+			if (needMapAdjust) {
+				adjustMapPosition(posY, true, centered, dZoom);
 			}
 		}
 	}
@@ -589,169 +968,199 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		origMarkerY = box.getCenterPixelY();
 	}
 
-	private void updateButtonsAndProgress() {
-		// Title buttons
-		boolean showTitleButtonsContainer = (leftTitleButtonController != null || rightTitleButtonController != null);
-		final View titleButtonsContainer = view.findViewById(R.id.title_button_container);
-		titleButtonsContainer.setVisibility(showTitleButtonsContainer ? View.VISIBLE : View.GONE);
+	private void enableDisableButtons(View buttonView, TextView button, boolean enabled) {
+		if (enabled) {
+			ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(getContext(), nightMode,
+					R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
+					R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 
-		// Left title button
-		final Button leftTitleButton = (Button) view.findViewById(R.id.title_button);
-		final TextView titleButtonRightText = (TextView) view.findViewById(R.id.title_button_right_text);
-		if (leftTitleButtonController != null) {
-			leftTitleButton.setText(leftTitleButtonController.caption);
-			leftTitleButton.setVisibility(leftTitleButtonController.visible ? View.VISIBLE : View.GONE);
+			buttonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
+			button.setTextColor(buttonColorStateList);
+		} else {
+			buttonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_disabled_bg_dark : R.drawable.context_menu_controller_disabled_bg_light);
+			button.setTextColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_controller_disabled_text_color_dark : R.color.ctx_menu_controller_disabled_text_color_light));
+		}
+		button.setEnabled(enabled);
+	}
 
-			Drawable leftIcon = leftTitleButtonController.getLeftIcon();
-			if (leftIcon != null) {
-				leftTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-				leftTitleButton.setCompoundDrawablePadding(dpToPx(4f));
-			}
+	public void updateButtonsAndProgress() {
+		if (view != null) {
+			TitleButtonController leftTitleButtonController = menu.getLeftTitleButtonController();
+			TitleButtonController rightTitleButtonController = menu.getRightTitleButtonController();
+			TitleButtonController bottomTitleButtonController = menu.getBottomTitleButtonController();
+			TitleButtonController leftDownloadButtonController = menu.getLeftDownloadButtonController();
+			TitleButtonController rightDownloadButtonController = menu.getRightDownloadButtonController();
+			TitleProgressController titleProgressController = menu.getTitleProgressController();
 
-			if (leftTitleButtonController.needRightText) {
-				titleButtonRightText.setText(leftTitleButtonController.rightTextCaption);
-				titleButtonRightText.setVisibility(View.VISIBLE);
+			// Title buttons
+			boolean showTitleButtonsContainer = (leftTitleButtonController != null || rightTitleButtonController != null);
+			final View titleButtonsContainer = view.findViewById(R.id.title_button_container);
+			titleButtonsContainer.setVisibility(showTitleButtonsContainer ? View.VISIBLE : View.GONE);
+
+			// Left title button
+			final View leftTitleButtonView = view.findViewById(R.id.title_button_view);
+			final TextView leftTitleButton = (TextView) view.findViewById(R.id.title_button);
+			final TextView titleButtonRightText = (TextView) view.findViewById(R.id.title_button_right_text);
+			if (leftTitleButtonController != null) {
+				enableDisableButtons(leftTitleButtonView, leftTitleButton, leftTitleButtonController.enabled);
+				leftTitleButton.setText(leftTitleButtonController.caption);
+				if (leftTitleButtonController.visible) {
+					leftTitleButtonView.setVisibility(View.VISIBLE);
+					Drawable leftIcon = leftTitleButtonController.getLeftIcon();
+					Drawable rightIcon = leftTitleButtonController.getRightIcon();
+					leftTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
+					leftTitleButton.setCompoundDrawablePadding(dpToPx(8f));
+					((LinearLayout) leftTitleButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
+
+					if (leftTitleButtonController.needRightText) {
+						titleButtonRightText.setText(leftTitleButtonController.rightTextCaption);
+						titleButtonRightText.setVisibility(View.VISIBLE);
+					} else {
+						titleButtonRightText.setVisibility(View.GONE);
+					}
+				} else {
+					leftTitleButtonView.setVisibility(View.INVISIBLE);
+				}
 			} else {
+				leftTitleButtonView.setVisibility(View.INVISIBLE);
 				titleButtonRightText.setVisibility(View.GONE);
 			}
-		} else {
-			leftTitleButton.setVisibility(View.GONE);
-			titleButtonRightText.setVisibility(View.GONE);
-		}
 
-		// Right title button
-		final Button rightTitleButton = (Button) view.findViewById(R.id.title_button_right);
-		if (rightTitleButtonController != null) {
-			rightTitleButton.setText(rightTitleButtonController.caption);
-			rightTitleButton.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.GONE);
+			// Right title button
+			final View rightTitleButtonView = view.findViewById(R.id.title_button_right_view);
+			final TextView rightTitleButton = (TextView) view.findViewById(R.id.title_button_right);
+			if (rightTitleButtonController != null) {
+				enableDisableButtons(rightTitleButtonView, rightTitleButton, rightTitleButtonController.enabled);
+				rightTitleButton.setText(rightTitleButtonController.caption);
+				rightTitleButtonView.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
-			Drawable leftIcon = rightTitleButtonController.getLeftIcon();
-			rightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-			rightTitleButton.setCompoundDrawablePadding(dpToPx(4f));
-		} else {
-			rightTitleButton.setVisibility(View.GONE);
-		}
+				Drawable leftIcon = rightTitleButtonController.getLeftIcon();
+				Drawable rightIcon = rightTitleButtonController.getRightIcon();
+				rightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
+				rightTitleButton.setCompoundDrawablePadding(dpToPx(8f));
+				((LinearLayout) rightTitleButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
+			} else {
+				rightTitleButtonView.setVisibility(View.INVISIBLE);
+			}
 
-		// Top Right title button
-		final Button topRightTitleButton = (Button) view.findViewById(R.id.title_button_top_right);
-		if (topRightTitleButtonController != null) {
-			topRightTitleButton.setText(topRightTitleButtonController.caption);
-			topRightTitleButton.setVisibility(topRightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
+			// Bottom title button
+			final View bottomTitleButtonView = view.findViewById(R.id.title_button_bottom_view);
+			final TextView bottomTitleButton = (TextView) view.findViewById(R.id.title_button_bottom);
+			if (bottomTitleButtonController != null) {
+				enableDisableButtons(bottomTitleButtonView, bottomTitleButton, bottomTitleButtonController.enabled);
+				bottomTitleButton.setText(bottomTitleButtonController.caption);
+				bottomTitleButtonView.setVisibility(bottomTitleButtonController.visible ? View.VISIBLE : View.GONE);
 
-			Drawable leftIcon = topRightTitleButtonController.getLeftIcon();
-			topRightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-			topRightTitleButton.setCompoundDrawablePadding(dpToPx(4f));
-		} else {
-			topRightTitleButton.setVisibility(View.GONE);
-		}
+				Drawable leftIcon = bottomTitleButtonController.getLeftIcon();
+				Drawable rightIcon = bottomTitleButtonController.getRightIcon();
+				bottomTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
+				bottomTitleButton.setCompoundDrawablePadding(dpToPx(8f));
+				((LinearLayout) bottomTitleButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
+			} else {
+				bottomTitleButtonView.setVisibility(View.GONE);
+			}
 
-		// Download buttons
-		boolean showDownloadButtonsContainer =
-				((leftDownloadButtonController != null && leftDownloadButtonController.visible)
-						|| (rightDownloadButtonController != null && rightDownloadButtonController.visible))
-				&& (titleProgressController == null || !titleProgressController.visible);
-		final View downloadButtonsContainer = view.findViewById(R.id.download_buttons_container);
-		downloadButtonsContainer.setVisibility(showDownloadButtonsContainer ? View.VISIBLE : View.GONE);
+			// Download buttons
+			boolean showDownloadButtonsContainer =
+					((leftDownloadButtonController != null && leftDownloadButtonController.visible)
+							|| (rightDownloadButtonController != null && rightDownloadButtonController.visible))
+							&& (titleProgressController == null || !titleProgressController.visible);
+			final View downloadButtonsContainer = view.findViewById(R.id.download_buttons_container);
+			downloadButtonsContainer.setVisibility(showDownloadButtonsContainer ? View.VISIBLE : View.GONE);
 
-		if (showDownloadButtonsContainer) {
-			view.findViewById(R.id.download_buttons_top_border).setVisibility(showTitleButtonsContainer ? View.VISIBLE : View.INVISIBLE);
-			if (showTitleButtonsContainer) {
-				LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) downloadButtonsContainer.getLayoutParams();
-				if (ll.topMargin != 0) {
-					ll.setMargins(0, 0, 0, 0);
+			// Left download button
+			final View leftDownloadButtonView = view.findViewById(R.id.download_button_left_view);
+			final TextView leftDownloadButton = (TextView) view.findViewById(R.id.download_button_left);
+			if (leftDownloadButtonController != null) {
+				enableDisableButtons(leftDownloadButtonView, leftDownloadButton, leftDownloadButtonController.enabled);
+				leftDownloadButton.setText(leftDownloadButtonController.caption);
+				leftDownloadButtonView.setVisibility(leftDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
+
+				Drawable leftIcon = leftDownloadButtonController.getLeftIcon();
+				Drawable rightIcon = leftDownloadButtonController.getRightIcon();
+				leftDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
+				leftDownloadButton.setCompoundDrawablePadding(dpToPx(8f));
+				((LinearLayout) leftDownloadButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
+			} else {
+				leftDownloadButtonView.setVisibility(View.INVISIBLE);
+			}
+
+			// Right download button
+			final View rightDownloadButtonView = view.findViewById(R.id.download_button_right_view);
+			final TextView rightDownloadButton = (TextView) view.findViewById(R.id.download_button_right);
+			if (rightDownloadButtonController != null) {
+				enableDisableButtons(rightDownloadButtonView, rightDownloadButton, rightDownloadButtonController.enabled);
+				rightDownloadButton.setText(rightDownloadButtonController.caption);
+				rightDownloadButtonView.setVisibility(rightDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
+
+				Drawable leftIcon = rightDownloadButtonController.getLeftIcon();
+				Drawable rightIcon = rightDownloadButtonController.getRightIcon();
+				rightDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
+				rightDownloadButton.setCompoundDrawablePadding(dpToPx(8f));
+				((LinearLayout) rightDownloadButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
+			} else {
+				rightDownloadButtonView.setVisibility(View.INVISIBLE);
+			}
+
+			// Progress bar
+			final View titleProgressContainer = view.findViewById(R.id.title_progress_container);
+			if (titleProgressController != null) {
+				titleProgressContainer.setVisibility(titleProgressController.visible ? View.VISIBLE : View.GONE);
+				if (titleProgressController.visible && showTitleButtonsContainer) {
+					LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) titleProgressContainer.getLayoutParams();
+					if (ll.topMargin != 0) {
+						ll.setMargins(0, 0, 0, 0);
+					}
 				}
+
+				final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+				final TextView progressTitle = (TextView) view.findViewById(R.id.progressTitle);
+				progressTitle.setText(titleProgressController.caption);
+				progressBar.setIndeterminate(titleProgressController.indeterminate);
+				progressBar.setProgress(titleProgressController.progress);
+				progressBar.setVisibility(titleProgressController.progressVisible ? View.VISIBLE : View.GONE);
+
+				final ImageView progressButton = (ImageView) view.findViewById(R.id.progressButton);
+				progressButton.setVisibility(titleProgressController.buttonVisible ? View.VISIBLE : View.GONE);
+			} else {
+				titleProgressContainer.setVisibility(View.GONE);
 			}
-		}
-
-		// Left download button
-		final Button leftDownloadButton = (Button) view.findViewById(R.id.download_button_left);
-		if (leftDownloadButtonController != null) {
-			leftDownloadButton.setText(leftDownloadButtonController.caption);
-			leftDownloadButton.setVisibility(leftDownloadButtonController.visible ? View.VISIBLE : View.GONE);
-
-			Drawable leftIcon = leftDownloadButtonController.getLeftIcon();
-			if (leftIcon != null) {
-				leftDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-				leftDownloadButton.setCompoundDrawablePadding(dpToPx(4f));
-			}
-		} else {
-			leftDownloadButton.setVisibility(View.GONE);
-		}
-
-		// Right download button
-		final Button rightDownloadButton = (Button) view.findViewById(R.id.download_button_right);
-		if (rightDownloadButtonController != null) {
-			rightDownloadButton.setText(rightDownloadButtonController.caption);
-			rightDownloadButton.setVisibility(rightDownloadButtonController.visible ? View.VISIBLE : View.GONE);
-
-			Drawable leftIcon = rightDownloadButtonController.getLeftIcon();
-			rightDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-			rightDownloadButton.setCompoundDrawablePadding(dpToPx(4f));
-		} else {
-			rightDownloadButton.setVisibility(View.GONE);
-		}
-
-		// Progress bar
-		final View titleProgressContainer = view.findViewById(R.id.title_progress_container);
-		if (titleProgressController != null) {
-			titleProgressContainer.setVisibility(titleProgressController.visible ? View.VISIBLE : View.GONE);
-			if (titleProgressController.visible && showTitleButtonsContainer) {
-				LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) titleProgressContainer.getLayoutParams();
-				if (ll.topMargin != 0) {
-					ll.setMargins(0, 0, 0, 0);
-				}
-			}
-
-			final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-			final TextView progressTitle = (TextView) view.findViewById(R.id.progressTitle);
-			progressTitle.setText(titleProgressController.caption);
-			progressBar.setIndeterminate(titleProgressController.indeterminate);
-			progressBar.setProgress(titleProgressController.progress);
-
-			final ImageView progressButton = (ImageView) view.findViewById(R.id.progressButton);
-			progressButton.setVisibility(titleProgressController.buttonVisible ? View.VISIBLE : View.GONE);
-		} else {
-			titleProgressContainer.setVisibility(View.GONE);
 		}
 	}
 
 	private void buildHeader() {
-		IconsCache iconsCache = getMyApplication().getIconsCache();
-
-		final View iconLayout = view.findViewById(R.id.context_menu_icon_layout);
-		final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
-		Drawable icon = menu.getLeftIcon();
-		int iconId = menu.getLeftIconId();
-		if (icon != null) {
-			iconView.setImageDrawable(icon);
-			iconLayout.setVisibility(View.VISIBLE);
-		} else if (iconId != 0) {
-			iconView.setImageDrawable(iconsCache.getIcon(iconId,
-					!nightMode ? R.color.osmand_orange : R.color.osmand_orange_dark));
-			iconLayout.setVisibility(View.VISIBLE);
-		} else {
-			iconLayout.setVisibility(View.GONE);
+		OsmandApplication app = getMyApplication();
+		if (app != null && view != null) {
+			final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
+			Drawable icon = menu.getRightIcon();
+			int iconId = menu.getRightIconId();
+			if (icon != null) {
+				iconView.setImageDrawable(icon);
+				iconView.setVisibility(View.VISIBLE);
+			} else if (iconId != 0) {
+				iconView.setImageDrawable(getIcon(iconId,
+						!nightMode ? R.color.osmand_orange : R.color.osmand_orange_dark));
+				iconView.setVisibility(View.VISIBLE);
+			} else {
+				iconView.setVisibility(View.GONE);
+			}
+			setAddressLocation();
 		}
-		setAddressLocation();
 	}
 
 	private void buildBottomView() {
-		View bottomView = view.findViewById(R.id.context_menu_bottom_view);
-		if (menu.isExtended()) {
-			bottomView.setOnTouchListener(new View.OnTouchListener() {
-				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					return true;
-				}
-			});
-			menu.build(bottomView);
+		if (view != null) {
+			View bottomView = view.findViewById(R.id.context_menu_bottom_view);
+			if (menu.isExtended()) {
+				menu.build(bottomView);
+			}
 		}
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!menu.isActive()) {
+		if (!menu.isActive() || MapRouteInfoMenu.isVisible()) {
 			dismissMenu();
 			return;
 		}
@@ -762,14 +1171,30 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		if (!wasDrawerDisabled) {
 			getMapActivity().disableDrawer();
 		}
+		ViewParent parent = view.getParent();
+		if (parent != null && containerLayoutListener != null) {
+			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
+		}
+		menu.updateControlsVisibility(true);
+		menu.onFragmentResume();
+		getMapActivity().getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 	}
 
 	@Override
 	public void onPause() {
-		getMapActivity().getMapViewTrackingUtilities().setContextMenu(null);
-		getMapActivity().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
-		if (!wasDrawerDisabled) {
-			getMapActivity().enableDrawer();
+		restoreCustomMapRatio();
+
+		if (view != null) {
+			ViewParent parent = view.getParent();
+			if (parent != null && containerLayoutListener != null) {
+				((View) parent).removeOnLayoutChangeListener(containerLayoutListener);
+			}
+			getMapActivity().getMapViewTrackingUtilities().setContextMenu(null);
+			getMapActivity().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+			if (!wasDrawerDisabled) {
+				getMapActivity().enableDrawer();
+			}
+			menu.updateControlsVisibility(false);
 		}
 		super.onPause();
 	}
@@ -777,106 +1202,158 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		if (mapCenter != null) {
-			map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		if (!menu.isActive()) {
+			if (mapCenter != null) {
+				if (mapZoom == 0) {
+					mapZoom = map.getZoom();
+				}
+				//map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+				//map.setIntZoom(mapZoom);
+				AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
+				thread.startMoving(mapCenter.getLatitude(), mapCenter.getLongitude(), mapZoom, true);
+			}
 		}
 		menu.setMapCenter(null);
 		menu.setMapZoom(0);
-		//getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
 	}
 
-	public void rebuildMenu() {
-		IconsCache iconsCache = getMyApplication().getIconsCache();
-		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
-		buttonFavorite.setImageDrawable(iconsCache.getIcon(menu.getFavActionIconId(),
-				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-		buttonFavorite.setContentDescription(getString(menu.getFavActionStringId()));
+	public void rebuildMenu(boolean centered) {
+		OsmandApplication app = getMyApplication();
+		if (app != null && view != null) {
+			final ImageView buttonFavorite = (ImageView) view.findViewById(R.id.context_menu_fav_image_view);
+			buttonFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(), R.color.ctx_menu_buttons_icon_color));
+			String favActionString = getString(menu.getFavActionStringId());
+			buttonFavorite.setContentDescription(favActionString);
+			((TextView) view.findViewById(R.id.context_menu_fav_text_view)).setText(favActionString);
 
-		buildHeader();
+			buildHeader();
 
-		LinearLayout bottomLayout = (LinearLayout) view.findViewById(R.id.context_menu_bottom_view);
-		bottomLayout.removeAllViews();
-		buildBottomView();
+			LinearLayout bottomLayout = (LinearLayout) view.findViewById(R.id.context_menu_bottom_view);
+			bottomLayout.removeAllViews();
+			buildBottomView();
 
-		runLayoutListener();
+			if (centered) {
+				this.initLayout = true;
+				this.centered = true;
+			}
+			updateButtonsAndProgress();
+			runLayoutListener();
+		}
 	}
 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	private void runLayoutListener() {
-		ViewTreeObserver vto = view.getViewTreeObserver();
-		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+		if (view != null) {
+			ViewTreeObserver vto = view.getViewTreeObserver();
+			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
-			@Override
-			public void onGlobalLayout() {
+				@Override
+				public void onGlobalLayout() {
 
-				ViewTreeObserver obs = view.getViewTreeObserver();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
-
-				if (getActivity() == null) {
-					return;
-				}
-
-				int newMenuTopViewHeight = view.findViewById(R.id.context_menu_top_view).getHeight();
-				menuTopShadowHeight = view.findViewById(R.id.context_menu_top_shadow).getHeight();
-				int newMenuTopShadowAllHeight = view.findViewById(R.id.context_menu_top_shadow_all).getHeight();
-				menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
-
-				int dy = 0;
-				if (!menu.isLandscapeLayout()) {
-					TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
-					TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-					int line2LineCount = 0;
-					int line2LineHeight = 0;
-					int line2MeasuredHeight = 0;
-					if (line2 != null) {
-						line2LineCount = line2.getLineCount();
-						line2LineHeight = line2.getLineHeight();
-						line2MeasuredHeight = line2.getMeasuredHeight();
-					}
-					if (menuTopViewHeight != 0) {
-						int titleHeight = line1.getLineCount() * line1.getLineHeight() + line2LineCount * line2LineHeight + menuTitleTopBottomPadding;
-						if (titleHeight < line1.getMeasuredHeight() + line2MeasuredHeight) {
-							titleHeight = line1.getMeasuredHeight() + line2MeasuredHeight;
+					if (view != null) {
+						ViewTreeObserver obs = view.getViewTreeObserver();
+						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+							obs.removeOnGlobalLayoutListener(this);
+						} else {
+							obs.removeGlobalOnLayoutListener(this);
 						}
-						newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight;
-						dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight - (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
-					} else {
-						menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight;
-						menuTitleTopBottomPadding = (line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight())
-								+ (line2MeasuredHeight - line2LineCount * line2LineHeight);
+
+						if (getActivity() == null) {
+							return;
+						}
+
+						int newMenuTopViewHeight = view.findViewById(R.id.context_menu_top_view).getHeight();
+						int newMenuTopShadowAllHeight = view.findViewById(R.id.context_menu_top_shadow_all).getHeight();
+						menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
+						zoomButtonsHeight = zoomButtonsView.getHeight();
+
+						int dy = 0;
+						if (!menu.isLandscapeLayout()) {
+							TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
+							TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
+							int line2LineCount = 0;
+							int line2LineHeight = 0;
+							int line2MeasuredHeight = 0;
+							if (line2 != null) {
+								line2LineCount = line2.getLineCount();
+								line2LineHeight = line2.getLineHeight();
+								line2MeasuredHeight = line2.getMeasuredHeight();
+							}
+
+							int titleButtonHeight = 0;
+							View titleButtonContainer = view.findViewById(R.id.title_button_container);
+							if (titleButtonContainer.getVisibility() == View.VISIBLE) {
+								titleButtonHeight = titleButtonContainer.getMeasuredHeight();
+							}
+
+							int downloadButtonsHeight = 0;
+							View downloadButtonsContainer = view.findViewById(R.id.download_buttons_container);
+							if (downloadButtonsContainer.getVisibility() == View.VISIBLE) {
+								downloadButtonsHeight = downloadButtonsContainer.getMeasuredHeight();
+							}
+
+							int titleBottomButtonHeight = 0;
+							View titleBottomButtonContainer = view.findViewById(R.id.title_bottom_button_container);
+							if (titleBottomButtonContainer.getVisibility() == View.VISIBLE) {
+								titleBottomButtonHeight = titleBottomButtonContainer.getMeasuredHeight();
+							}
+
+							int titleProgressHeight = 0;
+							View titleProgressContainer = view.findViewById(R.id.title_progress_container);
+							if (titleProgressContainer.getVisibility() == View.VISIBLE) {
+								titleProgressHeight = titleProgressContainer.getMeasuredHeight();
+							}
+
+							if (menuTopViewHeight != 0) {
+								int titleHeight = line1.getLineCount() * line1.getLineHeight()
+										+ line2LineCount * line2LineHeight + menuTitleTopBottomPadding;
+								if (titleHeight < line1.getMeasuredHeight() + line2MeasuredHeight) {
+									titleHeight = line1.getMeasuredHeight() + line2MeasuredHeight;
+								}
+								newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight
+										+ titleButtonHeight + downloadButtonsHeight
+										+ titleBottomButtonHeight + titleProgressHeight;
+								dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight
+										- (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
+							} else {
+								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight
+										- titleButtonHeight - downloadButtonsHeight - titleBottomButtonHeight - titleProgressHeight;
+								menuTitleTopBottomPadding = (line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight())
+										+ (line2MeasuredHeight - line2LineCount * line2LineHeight);
+								menuButtonsHeight = view.findViewById(R.id.context_menu_bottom_buttons).getHeight()
+										+ view.findViewById(R.id.buttons_bottom_border).getHeight()
+										+ view.findViewById(R.id.context_menu_buttons).getHeight();
+							}
+						}
+						menuTopViewHeight = newMenuTopViewHeight;
+						menuTopShadowAllHeight = newMenuTopShadowAllHeight;
+						menuTitleHeight = menuTopShadowAllHeight + dy;
+						menuBottomViewHeight = view.findViewById(R.id.context_menu_bottom_view).getHeight();
+
+						menuFullHeightMax = menuTitleHeight + menuBottomViewHeight;
+
+						if (origMarkerX == 0 && origMarkerY == 0) {
+							origMarkerX = view.getWidth() / 2;
+							origMarkerY = view.getHeight() / 2;
+						}
+
+						if (initLayout && centered) {
+							centerMarkerLocation();
+						}
+						if (!moving) {
+							doLayoutMenu();
+						}
+						initLayout = false;
 					}
 				}
-				menuTopViewHeight = newMenuTopViewHeight;
-				menuTopShadowAllHeight = newMenuTopShadowAllHeight;
-				menuTitleHeight = menuTopShadowHeight + menuTopShadowAllHeight + dy;
-				menuBottomViewHeight = view.findViewById(R.id.context_menu_bottom_view).getHeight();
 
-				menuFullHeightMax = menuTitleHeight + menuBottomViewHeight;
-
-				if (origMarkerX == 0 && origMarkerY == 0) {
-					origMarkerX = view.getWidth() / 2;
-					origMarkerY = view.getHeight() / 2;
-				}
-
-				if (initLayout && centered) {
-					centerMarkerLocation();
-				}
-				if (!moving) {
-					doLayoutMenu();
-				}
-				initLayout = false;
-			}
-
-		});
+			});
+		}
 	}
 
 	public void centerMarkerLocation() {
 		centered = true;
-		showOnMap(menu.getLatLon(), true, true, false);
+		showOnMap(menu.getLatLon(), true, true, false, getZoom());
 	}
 
 	private int getZoom() {
@@ -892,80 +1369,122 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		return zoom;
 	}
 
-	private void showOnMap(LatLon latLon, boolean updateCoords, boolean needMove, boolean alreadyAdjusted) {
-		AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
-		int fZoom = getZoom();
+	private LatLon calculateCenterLatLon(LatLon latLon, int zoom, boolean updateOrigXY) {
 		double flat = latLon.getLatitude();
 		double flon = latLon.getLongitude();
 
 		RotatedTileBox cp = map.getCurrentRotatedTileBox().copy();
 		cp.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
 		cp.setLatLonCenter(flat, flon);
-		cp.setZoom(fZoom);
+		cp.setZoom(zoom);
 		flat = cp.getLatFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
 		flon = cp.getLonFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
 
-		if (updateCoords) {
-			mapCenter = new LatLon(flat, flon);
-			menu.setMapCenter(mapCenter);
+		if (updateOrigXY) {
 			origMarkerX = cp.getCenterPixelX();
 			origMarkerY = cp.getCenterPixelY();
 		}
+		return new LatLon(flat, flon);
+	}
+
+	private void showOnMap(LatLon latLon, boolean updateCoords, boolean needMove, boolean alreadyAdjusted, int zoom) {
+		AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
+		LatLon calcLatLon = calculateCenterLatLon(latLon, zoom, updateCoords);
+		if (updateCoords) {
+			mapCenter = calcLatLon;
+			menu.setMapCenter(mapCenter);
+		}
 
 		if (!alreadyAdjusted) {
-			LatLon adjustedLatLon = getAdjustedMarkerLocation(getPosY(), new LatLon(flat, flon), true, fZoom);
-			flat = adjustedLatLon.getLatitude();
-			flon = adjustedLatLon.getLongitude();
+			calcLatLon = getAdjustedMarkerLocation(getPosY(), calcLatLon, true, zoom);
 		}
 
 		if (needMove) {
-			thread.startMoving(flat, flon, fZoom, true);
+			thread.startMoving(calcLatLon.getLatitude(), calcLatLon.getLongitude(), zoom, true);
 		}
 	}
 
 	private void setAddressLocation() {
-		// Text line 1
-		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
-		line1.setText(menu.getTitleStr());
+		if (view != null) {
+			// Text line 1
+			TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
+			line1.setText(menu.getTitleStr());
+			toolbarTextView.setText(menu.getTitleStr());
 
-		// Text line 2
-		LinearLayout line2layout = (LinearLayout) view.findViewById(R.id.context_menu_line2_layout);
-		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		if (menu.hasCustomAddressLine()) {
-			line2layout.removeAllViews();
-			menu.buildCustomAddressLine(line2layout);
-		} else {
-			String typeStr = menu.getTypeStr();
-			String streetStr = menu.getStreetStr();
-			StringBuilder line2Str = new StringBuilder();
-			if (!Algorithms.isEmpty(typeStr)) {
-				line2Str.append(typeStr);
-				Drawable icon = menu.getTypeIcon();
-				line2.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-				line2.setCompoundDrawablePadding(dpToPx(5f));
-			}
-			if (!Algorithms.isEmpty(streetStr) && !menu.displayStreetNameInTitle()) {
-				if (line2Str.length() > 0) {
-					line2Str.append(": ");
+			// Text line 2
+			LinearLayout line2layout = (LinearLayout) view.findViewById(R.id.context_menu_line2_layout);
+			TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
+			if (menu.hasCustomAddressLine()) {
+				line2layout.removeAllViews();
+				menu.buildCustomAddressLine(line2layout);
+			} else {
+				String typeStr = menu.getTypeStr();
+				String streetStr = menu.getStreetStr();
+				StringBuilder line2Str = new StringBuilder();
+				if (!Algorithms.isEmpty(typeStr)) {
+					line2Str.append(typeStr);
+					Drawable icon = menu.getTypeIcon();
+					line2.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+					line2.setCompoundDrawablePadding(dpToPx(5f));
 				}
-				line2Str.append(streetStr);
+				if (!Algorithms.isEmpty(streetStr) && !menu.displayStreetNameInTitle()) {
+					if (line2Str.length() > 0) {
+						line2Str.append(": ");
+					}
+					line2Str.append(streetStr);
+				}
+				if (!TextUtils.isEmpty(line2Str)) {
+					line2.setText(line2Str.toString());
+					line2.setVisibility(View.VISIBLE);
+				} else {
+					line2.setVisibility(View.GONE);
+				}
 			}
-			line2.setText(line2Str.toString());
-		}
 
+			TextView line3 = (TextView) view.findViewById(R.id.context_menu_line3);
+			String subtypeStr = menu.getSubtypeStr();
+			if (TextUtils.isEmpty(subtypeStr)) {
+				line3.setVisibility(View.GONE);
+			} else {
+				line3.setVisibility(View.VISIBLE);
+				line3.setText(subtypeStr);
+				Drawable icon = menu.getSubtypeIcon();
+				line3.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+				line3.setCompoundDrawablePadding(dpToPx(5f));
+			}
+
+			ImageView additionalInfoImageView = (ImageView) view.findViewById(R.id.additional_info_image_view);
+			TextView additionalInfoTextView = (TextView) view.findViewById(R.id.additional_info_text_view);
+			CharSequence additionalInfoStr = menu.getAdditionalInfo();
+			boolean showAdditionalImage = false;
+			if (!TextUtils.isEmpty(additionalInfoStr)) {
+				int colorId = menu.getAdditionalInfoColor();
+				int additionalInfoIconRes = menu.getAdditionalInfoIconRes();
+				if (colorId != 0) {
+					additionalInfoTextView.setTextColor(ContextCompat.getColor(getContext(), colorId));
+					if (additionalInfoIconRes != 0) {
+						Drawable additionalIcon = getIcon(additionalInfoIconRes, colorId);
+						additionalInfoImageView.setImageDrawable(additionalIcon);
+						showAdditionalImage = true;
+					}
+				}
+				additionalInfoTextView.setText(additionalInfoStr);
+				additionalInfoTextView.setVisibility(View.VISIBLE);
+			} else {
+				additionalInfoTextView.setVisibility(View.GONE);
+			}
+			additionalInfoImageView.setVisibility(showAdditionalImage ? View.VISIBLE : View.GONE);
+		}
 		updateCompassVisibility();
 	}
 
 	private void updateCompassVisibility() {
-		View compassView = view.findViewById(R.id.compass_layout);
-		Location ll = getMyApplication().getLocationProvider().getLastKnownLocation();
-		boolean gpsFixed = ll != null && System.currentTimeMillis() - ll.getTime() < 1000 * 60 * 60 * 20;
-		if (gpsFixed && menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
-			updateDistanceDirection();
-			compassView.setVisibility(View.VISIBLE);
-		} else {
-			if (!menu.displayDistanceDirection()) {
-				compassView.setVisibility(View.GONE);
+		OsmandApplication app = getMyApplication();
+		if (app != null && view != null) {
+			View compassView = view.findViewById(R.id.compass_layout);
+			if (menu.getMyLocation() != null && menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
+				updateDistanceDirection();
+				compassView.setVisibility(View.VISIBLE);
 			} else {
 				compassView.setVisibility(View.INVISIBLE);
 			}
@@ -973,54 +1492,124 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	private void updateDistanceDirection() {
-		TextView distanceText = (TextView) view.findViewById(R.id.distance);
-		ImageView direction = (ImageView) view.findViewById(R.id.direction);
+		OsmandApplication app = getMyApplication();
+		FragmentActivity activity = getActivity();
+		if (app != null && activity != null && view != null) {
+			TextView distanceText = (TextView) view.findViewById(R.id.distance);
+			ImageView direction = (ImageView) view.findViewById(R.id.direction);
+			float myHeading = menu.getHeading() == null ? 0f : menu.getHeading();
+			int color = menu.isCachedMyLocation() ? R.color.icon_color : 0;
+			DashLocationFragment.updateLocationView(false, menu.getMyLocation(), myHeading, direction, color, distanceText,
+					color, menu.getLatLon().getLatitude(), menu.getLatLon().getLongitude(), screenOrientation, app, activity);
+		}
+	}
 
-		float myHeading = menu.getHeading() == null ? 0f : menu.getHeading();
-		DashLocationFragment.updateLocationView(false, menu.getMyLocation(), myHeading, direction, distanceText,
-				menu.getLatLon().getLatitude(), menu.getLatLon().getLongitude(), screenOrientation, getMyApplication(), getActivity());
+	private void updateZoomButtonsVisibility(int menuState) {
+		boolean zoomButtonsVisible = menu.zoomButtonsVisible() && menuState == MenuState.HEADER_ONLY;
+		if (zoomButtonsVisible) {
+			if (zoomButtonsView.getVisibility() != View.VISIBLE) {
+				zoomButtonsView.setVisibility(View.VISIBLE);
+			}
+		} else {
+			if (zoomButtonsView.getVisibility() == View.VISIBLE) {
+				zoomButtonsView.setVisibility(View.INVISIBLE);
+			}
+		}
+	}
+
+	private int getHeaderOnlyTopY() {
+		return viewHeight - menuTitleHeight;
+	}
+
+	private int getFullScreenTopPosY() {
+		return -menuTitleHeight + menuButtonsHeight + bottomToolbarPosY;
+	}
+
+	private int getMenuStatePosY(int menuState) {
+		if (menu.isLandscapeLayout()) {
+			return topScreenPosY;
+		}
+		switch (menuState) {
+			case MenuState.HEADER_ONLY:
+				return getHeaderOnlyTopY();
+			case MenuState.HALF_SCREEN:
+				return minHalfY;
+			case MenuState.FULL_SCREEN:
+				return getFullScreenTopPosY();
+			default:
+				return 0;
+		}
 	}
 
 	private int getPosY() {
-		return getPosY(false);
+		return getPosY(CURRENT_Y_UNDEFINED, false);
 	}
 
-	private int getPosY(boolean needCloseMenu) {
+	private int getPosY(final int currentY, boolean needCloseMenu) {
+		return getPosY(currentY, needCloseMenu, 0);
+	}
+
+	private int getPosY(final int currentY, boolean needCloseMenu, int previousState) {
 		if (needCloseMenu) {
 			return screenHeight;
 		}
 
 		int destinationState;
-		int minHalfY;
 		if (menu.isExtended()) {
 			destinationState = menu.getCurrentMenuState();
-			minHalfY = viewHeight - (int) (viewHeight * menu.getHalfScreenMaxHeightKoef());
 		} else {
 			destinationState = MenuState.HEADER_ONLY;
-			minHalfY = viewHeight;
 		}
+
+		updateZoomButtonsVisibility(destinationState);
 
 		int posY = 0;
 		switch (destinationState) {
 			case MenuState.HEADER_ONLY:
-				posY = viewHeight - menuTitleHeight;
+				posY = getMenuStatePosY(MenuState.HEADER_ONLY);
 				break;
 			case MenuState.HALF_SCREEN:
-				posY = viewHeight - menuFullHeightMax;
-				posY = Math.max(posY, minHalfY);
+				posY = getMenuStatePosY(MenuState.HALF_SCREEN);
 				break;
 			case MenuState.FULL_SCREEN:
-				posY = -menuTopShadowHeight - dpToPx(SHADOW_HEIGHT_TOP_DP);
+				if (currentY != CURRENT_Y_UNDEFINED) {
+					int maxPosY = viewHeight - menuFullHeightMax;
+					int minPosY = getMenuStatePosY(MenuState.FULL_SCREEN);
+					if (maxPosY > minPosY) {
+						maxPosY = minPosY;
+					}
+					if (currentY > minPosY || previousState != MenuState.FULL_SCREEN) {
+						posY = minPosY;
+					} else if (currentY < maxPosY) {
+						posY = maxPosY;
+					} else {
+						posY = currentY;
+					}
+				} else {
+					posY = getMenuStatePosY(MenuState.FULL_SCREEN);
+				}
 				break;
 			default:
 				break;
 		}
+		if (!menu.isLandscapeLayout()) {
+			getMapActivity().updateStatusBarColor();
+		}
 		return posY;
 	}
 
+	private int addStatusBarHeightIfNeeded(int res) {
+		if (Build.VERSION.SDK_INT >= 21) {
+			// One pixel is needed to fill a thin gap between the status bar and the fragment.
+			return res + AndroidUtils.getStatusBarHeight(getActivity()) - 1;
+		}
+		return res;
+	}
+
 	private void updateMainViewLayout(int posY) {
-		menuFullHeight = view.getHeight() - posY;
-		if (!oldAndroid()) {
+		if (view != null) {
+			menuFullHeight = view.getHeight() - posY;
+			menuTopShadowAllHeight = menuTitleHeight;
 			ViewGroup.LayoutParams lp = mainView.getLayoutParams();
 			lp.height = Math.max(menuFullHeight, menuTitleHeight);
 			mainView.setLayoutParams(lp);
@@ -1029,41 +1618,37 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	private int getViewY() {
-		if (!oldAndroid()) {
-			return (int) mainView.getY();
-		} else {
-			return mainView.getPaddingTop();
-		}
+		return (int) mainView.getY();
 	}
 
 	private void setViewY(int y, boolean animated, boolean adjustMapPos) {
-		if (!oldAndroid()) {
-			mainView.setY(y);
-			fabView.setY(getFabY(y));
-		} else {
-			mainView.setPadding(0, y, 0, 0);
-			fabView.setPadding(0, getFabY(y), 0, 0);
-		}
+		mainView.setY(y);
+		zoomButtonsView.setY(getZoomButtonsY(y));
 		if (!customMapCenter) {
 			if (adjustMapPos) {
-				adjustMapPosition(y, animated, centered);
+				adjustMapPosition(y, animated, centered, 0);
 			}
 		} else {
 			customMapCenter = false;
 		}
 	}
 
-	private void adjustMapPosition(int y, boolean animated, boolean center) {
+	private void adjustMapPosition(int y, boolean animated, boolean center, int dZoom) {
 		map.getAnimatedDraggingThread().stopAnimatingSync();
-		LatLon latlon = getAdjustedMarkerLocation(y, menu.getLatLon(), center, getZoom());
+		int zoom = getZoom() + dZoom;
+		LatLon latlon = getAdjustedMarkerLocation(y, menu.getLatLon(), center, zoom);
 
-		if (map.getLatitude() == latlon.getLatitude() && map.getLongitude() == latlon.getLongitude()) {
+		if (map.hasCustomMapRatio()
+				|| (map.getLatitude() == latlon.getLatitude() && map.getLongitude() == latlon.getLongitude() && dZoom == 0)) {
 			return;
 		}
 
 		if (animated) {
-			showOnMap(latlon, false, true, true);
+			showOnMap(latlon, false, true, true, zoom);
 		} else {
+			if (dZoom != 0) {
+				map.setIntZoom(zoom);
+			}
 			map.setLatLon(latlon.getLatitude(), latlon.getLongitude());
 		}
 	}
@@ -1074,8 +1659,13 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
 		box.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
 		box.setZoom(zoom);
-		int markerMapCenterX = (int) box.getPixXFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
-		int markerMapCenterY = (int) box.getPixYFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		boolean hasMapCenter = mapCenter != null;
+		int markerMapCenterX = 0;
+		int markerMapCenterY = 0;
+		if (hasMapCenter) {
+			markerMapCenterX = (int) box.getPixXFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+			markerMapCenterY = (int) box.getPixYFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		}
 		float cpyOrig = box.getCenterPixelPoint().y;
 
 		box.setCenterLocation(0.5f, 0.5f);
@@ -1092,7 +1682,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		float origMarkerY = this.origMarkerY + cpyDelta;
 
 		LatLon latlon;
-		if (center) {
+		if (center || !hasMapCenter) {
 			latlon = reqMarkerLocation;
 		} else {
 			latlon = box.getLatLonFromPixel(markerMapCenterX, markerMapCenterY);
@@ -1126,20 +1716,12 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		return latlon;
 	}
 
-	private int getFabY(int y) {
-		int fabY = y + fabPaddingTopPx;
-		if (fabY < fabPaddingTopPx) {
-			fabY = fabPaddingTopPx;
-		}
-		return fabY;
-	}
-
-	private boolean oldAndroid() {
-		return (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH);
+	private int getZoomButtonsY(int y) {
+		return y - zoomButtonsHeight - shadowHeight - zoomPaddingTop;
 	}
 
 	private void doLayoutMenu() {
-		final int posY = getPosY();
+		final int posY = getPosY(getViewY(), false, menu.getCurrentMenuState());
 		setViewY(posY, true, !initLayout || !centered);
 		updateMainViewLayout(posY);
 	}
@@ -1154,20 +1736,26 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		}
 	}
 
+	public void updateLayout() {
+		runLayoutListener();
+	}
+
 	public void refreshTitle() {
 		setAddressLocation();
 		runLayoutListener();
 	}
 
 	public void setFragmentVisibility(boolean visible) {
-		if (visible) {
-			view.setVisibility(View.VISIBLE);
-			if (mapCenter != null) {
-				map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		if (view != null) {
+			if (visible) {
+				view.setVisibility(View.VISIBLE);
+				if (mapCenter != null) {
+					map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+				}
+				adjustMapPosition(getPosY(), true, false, 0);
+			} else {
+				view.setVisibility(View.GONE);
 			}
-			adjustMapPosition(getPosY(), true, false);
-		} else {
-			view.setVisibility(View.GONE);
 		}
 	}
 
@@ -1186,12 +1774,16 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				return false;
 			}
 
-			int slideInAnim = R.anim.slide_in_bottom;
-			int slideOutAnim = R.anim.slide_out_bottom;
+			int slideInAnim = 0;
+			int slideOutAnim = 0;
+			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				slideInAnim = R.anim.slide_in_bottom;
+				slideOutAnim = R.anim.slide_out_bottom;
 
-			if (menu.isExtended()) {
-				slideInAnim = menu.getSlideInAnimation();
-				slideOutAnim = menu.getSlideOutAnimation();
+				if (menu.isExtended()) {
+					slideInAnim = menu.getSlideInAnimation();
+					slideOutAnim = menu.getSlideOutAnimation();
+				}
 			}
 
 			MapContextMenuFragment fragment = new MapContextMenuFragment();
@@ -1223,7 +1815,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public void downloadHasFinished() {
 		updateOnDownload();
 		if (menu != null && menu.isVisible() && menu.isMapDownloaded()) {
-			rebuildMenu();
+			rebuildMenu(false);
 		}
 	}
 
@@ -1234,15 +1826,17 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			boolean progressVisible = menu.getTitleProgressController() != null && menu.getTitleProgressController().visible;
 			updateButtonsAndProgress();
 			if (wasProgressVisible != progressVisible) {
-				runLayoutListener();
+				refreshTitle();
 			}
 		}
 	}
 
 	public void updateMenu() {
-		menu.updateData();
-		updateButtonsAndProgress();
-		runLayoutListener();
+		if (created) {
+			menu.updateData();
+			updateButtonsAndProgress();
+			refreshTitle();
+		}
 	}
 
 	private MapActivity getMapActivity() {
@@ -1263,6 +1857,15 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	private void doBeforeMenuStateChange(int previousState, int newState) {
+		if (newState == MenuState.HALF_SCREEN) {
+			centered = true;
+			if (!zoomIn && menu.supportZoomIn()) {
+				if (getZoom() < ZOOM_IN_STANDARD) {
+					zoomIn = true;
+				}
+			}
+			calculateCenterLatLon(menu.getLatLon(), getZoom(), true);
+		}
 	}
 
 	private void doAfterMenuStateChange(int previousState, int newState) {

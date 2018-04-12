@@ -406,7 +406,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	protected void profileDialog() {
 		AlertDialog.Builder b = new AlertDialog.Builder(this);
 		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-		View v = AppModeDialog.prepareAppModeView(this, selected, false, null, true, false,
+		View v = AppModeDialog.prepareAppModeView(this, selected, false, null, true, true, false,
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {

@@ -22,14 +22,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.OsmandMapTileView;
 
 public class StartGPSStatus extends OsmAndAction {
 
 	public enum GpsStatusApps {
+		GPC_CONNECTED("GPS Connected", "org.bruxo.gpsconnected", "", ""),
 		GPS_STATUS("GPS Status & Toolbox", "com.eclipsim.gpsstatus2", "", "com.eclipsim.gpsstatus2.GPSStatus"),
 		GPS_TEST("GPS Test", "com.chartcross.gpstest", "com.chartcross.gpstestplus", ""),
 		INVIU_GPS("inViu GPS-details ", "de.enaikoon.android.inviu.gpsdetails", "", ""),
@@ -105,11 +106,14 @@ public class StartGPSStatus extends OsmAndAction {
 		builder.setTitle(R.string.gps_status);
 		LinearLayout ll = new LinearLayout(activity);
 		final ListView lv = new ListView(activity);
-		lv.setPadding(7, 3, 7, 0);
+		final int dp24 = AndroidUtils.dpToPx(mapActivity, 24f);
+		final int dp12 = AndroidUtils.dpToPx(mapActivity, 12f);
+		final int dp8 = AndroidUtils.dpToPx(mapActivity, 8f);
+		lv.setPadding(0, dp8, 0, dp8);
 		final CheckBox cb = new CheckBox(activity);
 		cb.setText(R.string.shared_string_remember_my_choice);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		lp.setMargins(7, 10, 7, 0);
+		lp.setMargins(dp24, dp8, dp8, dp24);
 		cb.setLayoutParams(lp);
 		
 		final int layout = R.layout.list_menu_item_native;
@@ -118,6 +122,7 @@ public class StartGPSStatus extends OsmAndAction {
 			public View getView(int position, View convertView, ViewGroup parent) {
 				View v = mapActivity.getLayoutInflater().inflate(layout, null);
 	            TextView tv = (TextView)v.findViewById(R.id.title);
+				tv.setPadding(dp12, 0, dp24, 0);
 	            tv.setText(getItem(position).stringRes);		
 	            v.findViewById(R.id.toggle_item).setVisibility(View.INVISIBLE);
 				return v;
@@ -172,7 +177,7 @@ public class StartGPSStatus extends OsmAndAction {
 				builder.setPositiveButton(mapActivity.getString(R.string.shared_string_yes), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(getMyApplication()) + g.appName));
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.getUrlWithUtmRef(getMyApplication(), g.appName)));
 						try {
 							mapActivity.startActivity(intent);
 						} catch (ActivityNotFoundException e) {

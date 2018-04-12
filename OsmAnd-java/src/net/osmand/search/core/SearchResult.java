@@ -19,6 +19,7 @@ public class SearchResult {
 	public String wordsSpan ;
 	public SearchResult parentSearchResult;
 	public Collection<String> otherWordsMatch = null;
+	public boolean firstUnknownWordMatches = true;
 	
 	
 	
@@ -27,10 +28,17 @@ public class SearchResult {
 	}
 	
 	public int getFoundWordCount() {
-		if(otherWordsMatch != null) {
-			return otherWordsMatch.size() + 1;
+		int inc = 0;
+		if(firstUnknownWordMatches) {
+			inc = 1;
 		}
-		return 1;
+		if(otherWordsMatch != null) {
+			inc += otherWordsMatch.size();
+		}
+		if(parentSearchResult != null) {
+			inc += parentSearchResult.getFoundWordCount();
+		}
+		return inc;
 	}
 
 	public double getSearchDistance(LatLon location) {
@@ -52,6 +60,7 @@ public class SearchResult {
 	public LatLon location;
 	public int preferredZoom = 15;
 	public String localeName;
+	public String alternateName;
 	
 	public Collection<String> otherNames;
 	

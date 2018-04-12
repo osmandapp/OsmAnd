@@ -50,7 +50,7 @@
 	<string name="poi_payment_toll_type">Maksutapa</string>
 	<string name="poi_traffic_signals_sound">Ääni</string>
 	<string name="poi_highway_crossing_type">Tapa</string>
-	<string name="poi_service_car">Palvelu</string>
+	<string name="poi_service_general">Palvelu</string>
 	<string name="poi_self_service">Itsepalvelu</string>
 	<string name="poi_automated">Automatisoitu</string>
 	<string name="poi_parking_type">Tyyppi</string>
@@ -240,7 +240,7 @@
 	<string name="poi_fuel_e85">E85</string>
 	<string name="poi_fuel_biogas">Biokaasu</string>
 	<string name="poi_waterway_fuel">Huoltoasema veneille</string>
-	<string name="poi_charging_station">Latausasema</string>
+	<string name="poi_electricity_combined_charging">Latausasema</string>
 	<string name="poi_compressed_air">Paineilma</string>
 	<string name="poi_parking">Pysäköinti</string>
 	<string name="poi_motorcycle_parking">Moottoripyöräpysäköinti</string>

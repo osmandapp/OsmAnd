@@ -6,35 +6,6 @@
               android:layout_gravity="bottom"
               android:orientation="vertical">
 
-<!--
-    <net.osmand.plus.quickaction.QuickActionsWidget
-        android:id="@+id/quick_action_widget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
-
-    <FrameLayout
-        android:id="@+id/map_quick_actions_button_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="8dp"
-        android:animateLayoutChanges="true">
-
-        <ImageButton
-            android:id="@+id/map_quick_actions_button"
-            android:layout_width="@dimen/map_button_size"
-            android:layout_height="@dimen/map_button_size"
-            android:background="@drawable/btn_circle_blue"
-            android:contentDescription="@string/zoomIn"
-            android:layout_gravity="bottom|right"
-            android:visibility="gone"
-            tools:visibility="visible"
-            tools:src="@drawable/ic_action_test_light"/>
-
-    </FrameLayout>
--->
-
     <LinearLayout
         android:id="@+id/bottom_controls_container"
         android:layout_width="match_parent"
@@ -72,6 +43,17 @@
                     android:textSize="@dimen/map_alarm_text_size"
                     android:textStyle="bold"
                     tools:text="60"/>
+
+                <TextView
+                    android:id="@+id/map_alarm_warning_text_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="@dimen/map_alarm_bottom_text_margin"
+                    android:textSize="@dimen/map_alarm_bottom_text_size"
+                    android:textStyle="bold"
+                    tools:text="1.2 km"
+                    tools:textColor="@color/color_black"/>
             </FrameLayout>
 
             <TextView
@@ -122,6 +104,15 @@
                         android:layout_marginLeft="@dimen/map_button_spacing_land"
                         android:background="@drawable/btn_round"
                         android:contentDescription="@string/layer_route"
+                        tools:src="@drawable/ic_action_test_light"/>
+
+                    <ImageButton
+                        android:id="@+id/snap_to_road_image_button"
+                        android:layout_width="@dimen/map_button_size"
+                        android:layout_height="@dimen/map_button_size"
+                        android:layout_gravity="bottom"
+                        android:background="@drawable/btn_circle"
+                        android:visibility="gone"
                         tools:src="@drawable/ic_action_test_light"/>
                 </LinearLayout>
             </LinearLayout>
@@ -285,9 +276,21 @@
 
     <include
         layout="@layout/move_marker_bottom_sheet"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
         tools:visibility="visible"/>
+
+    <include
+        layout="@layout/add_gpx_point_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        tools:visibility="visible"/>
+
+    <FrameLayout
+        android:id="@+id/bottomFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

@@ -16,8 +16,8 @@ import android.os.Build;
 import android.os.StatFs;
 import android.support.annotation.UiThread;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.NotificationCompat;
-import android.support.v7.app.NotificationCompat.Builder;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat.Builder;
 import android.view.View;
 import android.widget.Toast;
 import net.osmand.IndexConstants;
@@ -25,10 +25,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings.DrivingRegion;
-import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
@@ -121,11 +119,15 @@ public class DownloadIndexesThread {
 			}
 			StringBuilder contentText = new StringBuilder();
 			List<IndexItem> ii = getCurrentDownloadingItems();
-			for(IndexItem i : ii) {
-				if(contentText.length() > 0) {
+			for (IndexItem i : ii) {
+				if (!isFinished && task.getTag() == i) {
+					continue;
+				}
+				if (contentText.length() > 0) {
 					contentText.append(", ");
 				}
 				contentText.append(i.getVisibleName(app, app.getRegions()));
+				contentText.append(" ").append(i.getType().getString(app));
 			}
 			bld.setContentTitle(msg).setSmallIcon(android.R.drawable.stat_sys_download)
 					.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
@@ -154,27 +156,15 @@ public class DownloadIndexesThread {
 		}
 		updateNotification();
 	}
-	
+
 	public void initSettingsFirstMap(WorldRegion reg) {
-		if(app.getSettings().FIRST_MAP_IS_DOWNLOADED.get() || reg == null) {
+		if (app.getSettings().FIRST_MAP_IS_DOWNLOADED.get() || reg == null) {
 			return;
 		}
 		app.getSettings().FIRST_MAP_IS_DOWNLOADED.set(true);
-		DrivingRegion drg = null;
 		RegionParams params = reg.getParams();
-		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
-		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
-		MetricsConstants mc = "miles".equals(params.getRegionMetric()) ?
-				MetricsConstants.MILES_AND_FEET : MetricsConstants.KILOMETERS_AND_METERS;
-		for (DrivingRegion r : DrivingRegion.values()) {
-			if (r.americanSigns == americanSigns && r.leftHandDriving == leftHand &&
-					r.defMetrics == mc) {
-				drg = r;
-				break;
-			}
-		}
-		if (drg != null) {
-			app.getSettings().DRIVING_REGION.set(drg);
+		if (!app.getSettings().DRIVING_REGION_AUTOMATIC.get()) {
+			app.setupDrivingRegion(reg);
 		}
 		String lang = params.getRegionLang();
 		if (lang != null) {
@@ -336,11 +326,7 @@ public class DownloadIndexesThread {
 
 	@SuppressWarnings("unchecked")
 	private <P> void execute(BasicProgressAsyncTask<?, P, ?, ?> task, P... indexItems) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, indexItems);
-		} else {
-			task.execute(indexItems);
-		}
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, indexItems);
 	}
 
 
@@ -395,7 +381,7 @@ public class DownloadIndexesThread {
 			builder.setPositiveButton(R.string.button_upgrade_osmandplus, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:net.osmand.plus"));
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
 					try {
 						ctx.startActivity(intent);
 					} catch (ActivityNotFoundException e) {
@@ -443,7 +429,7 @@ public class DownloadIndexesThread {
 				if (o instanceof IndexItem) {
 					IndexItem item = (IndexItem) o;
 					String name = item.getBasename();
-					long count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
+					int count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
 					item.setDownloaded(true);
 					DatabaseHelper.HistoryDownloadEntry entry = new DatabaseHelper.HistoryDownloadEntry(name, count);
 					if (count == 1) {
@@ -454,11 +440,8 @@ public class DownloadIndexesThread {
 				} else if (o instanceof String) {
 					String message = (String) o;
 					// ctx.getString(R.string.shared_string_io_error) +": Interrupted";
-					if (!message.toLowerCase().contains("interrupted")) {
-						if (uiActivity == null ||
-								!message.equals(app.getString(R.string.shared_string_download_successful))) {
-							app.showToastMessage(message);
-						}
+					if (!message.toLowerCase().contains("interrupted") && !message.equals(app.getString(R.string.shared_string_download_successful))) {
+						app.showToastMessage(message);
 					}
 				}
 			}
@@ -529,6 +512,11 @@ public class DownloadIndexesThread {
 							if (DownloadActivityType.isCountedInDownloads(item)) {
 								downloads.set(downloads.get() + 1);
 							}
+							if(item.getBasename().toLowerCase().equals(DownloadResources.WORLD_SEAMARKS_KEY)) {
+								File oldFile = new File(app.getAppPath(IndexConstants.MAPS_PATH), DownloadResources.WORLD_SEAMARKS_OLD_NAME + 
+										IndexConstants.BINARY_MAP_INDEX_EXT); 
+								Algorithms.removeAllFiles(oldFile);
+							}
 							File bf = item.getBackupFile(app);
 							if (bf.exists()) {
 								Algorithms.removeAllFiles(bf);
@@ -541,7 +529,7 @@ public class DownloadIndexesThread {
 							}
 							filesToReindex.clear();
 							// slow down but let update all button work properly
-							indexes.updateFilesToUpdate();;
+							indexes.updateFilesToUpdate();
 						}
 					}
 				} finally {
@@ -574,8 +562,11 @@ public class DownloadIndexesThread {
 		}
 		
 		private boolean validateNotExceedsFreeLimit(IndexItem item) {
-			boolean exceed = Version.isFreeVersion(app) && !app.getSettings().LIVE_UPDATES_PURCHASED.get() &&
-					DownloadActivityType.isCountedInDownloads(item) && downloads.get() >= DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
+			boolean exceed = Version.isFreeVersion(app)
+					&& !app.getSettings().LIVE_UPDATES_PURCHASED.get()
+					&& !app.getSettings().FULL_VERSION_PURCHASED.get()
+					&& DownloadActivityType.isCountedInDownloads(item)
+					&& downloads.get() >= DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 			if(exceed) {
 				String breakDownloadMessage = app.getString(R.string.free_version_message,
 						DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
@@ -596,6 +587,7 @@ public class DownloadIndexesThread {
 			}
 			List<String> warnings = new ArrayList<String>();
 			manager.indexVoiceFiles(this);
+			manager.indexFontFiles(this);
 			if (vectorMapsToReindex) {
 				warnings = manager.indexingMaps(this);
 			}

@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="test/libs/gson-2.6.2.jar"/>
 	<classpathentry kind="lib" path="test/libs/hamcrest-core-1.3.jar"/>
 	<classpathentry kind="lib" path="test/libs/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="libs/jts-core-1.14.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

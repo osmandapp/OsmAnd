@@ -214,8 +214,11 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 			if (!data.isInEdit()) {
 				String openingHoursString = openingHours.toString();
 				if (!TextUtils.isEmpty(openingHoursString)) {
-					data.putTag(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(),
-							openingHoursString);
+					if(openingHours.getOriginal() == null ||
+							!OpeningHoursParser.parseOpenedHoursHandleErrors(openingHours.getOriginal()).toString().equals(openingHoursString)) {
+						data.putTag(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(),
+								openingHoursString);
+					}
 				} else {
 					data.removeTag(OSMSettings.OSMTagKey.OPENING_HOURS.getValue());
 				}

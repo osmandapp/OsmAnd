@@ -22,40 +22,40 @@ public class ApplicationMode {
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian");
 	 */
 	public static final ApplicationMode DEFAULT = create(R.string.app_mode_default, "default").speed(1.5f, 5).arrivalDistance(90).defLocation().
-			icon(R.drawable.ic_browse_map, R.drawable.ic_world_globe_dark).reg();
+			icon(R.drawable.map_world_globe_dark, R.drawable.ic_world_globe_dark).reg();
 
 	public static final ApplicationMode CAR = create(R.string.app_mode_car, "car").speed(15.3f, 35).carLocation().
-			icon(R.drawable.ic_car, R.drawable.ic_action_car_dark).reg();
+			icon(R.drawable.map_action_car_dark, R.drawable.ic_action_car_dark).reg();
 
 	public static final ApplicationMode BICYCLE = create(R.string.app_mode_bicycle, "bicycle").speed(5.5f, 15).arrivalDistance(60).bicycleLocation().
-			icon(R.drawable.ic_bicycle, R.drawable.ic_action_bicycle_dark).reg();
+			icon(R.drawable.map_action_bicycle_dark, R.drawable.ic_action_bicycle_dark).reg();
 
 	public static final ApplicationMode PEDESTRIAN = create(R.string.app_mode_pedestrian, "pedestrian").speed(1.5f, 5).arrivalDistance(45).
-			icon(R.drawable.ic_pedestrian, R.drawable.ic_action_pedestrian_dark).reg();
+			icon(R.drawable.map_action_pedestrian_dark, R.drawable.ic_action_pedestrian_dark).reg();
 
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
-			icon(R.drawable.ic_aircraft, R.drawable.ic_action_aircraft).reg();
+			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).reg();
 
 	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().
-			icon(R.drawable.ic_sail_boat, R.drawable.ic_action_sail_boat_dark).reg();
+			icon(R.drawable.map_action_sail_boat_dark, R.drawable.ic_action_sail_boat_dark).reg();
 
 	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
-			icon(R.drawable.ic_trekking, R.drawable.ic_action_trekking_dark).reg();
+			icon(R.drawable.map_action_trekking_dark, R.drawable.ic_action_trekking_dark).reg();
 
 	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).
 			carLocation().parent(CAR).
-			icon(R.drawable.ic_motorcycle, R.drawable.ic_action_motorcycle_dark).reg();
+			icon(R.drawable.map_action_motorcycle_dark, R.drawable.ic_action_motorcycle_dark).reg();
 
 	public static final ApplicationMode TRUCK = create(R.string.app_mode_truck, "truck").speed(15.3f, 40).
 			carLocation().parent(CAR).
-			icon(R.drawable.ic_truck, R.drawable.ic_action_truck_dark).reg();
+			icon(R.drawable.map_action_truck_dark, R.drawable.ic_action_truck_dark).reg();
 
 	public static final ApplicationMode BUS = create(R.string.app_mode_bus, "bus").speed(15.3f, 40).
 			carLocation().parent(CAR).
-			icon(R.drawable.ic_action_bus2, R.drawable.ic_action_bus_dark).reg();
+			icon(R.drawable.map_action_bus_dark, R.drawable.ic_action_bus_dark).reg();
 
 	public static final ApplicationMode TRAIN = create(R.string.app_mode_train, "train").speed(25f, 40).
-			carLocation().icon(R.drawable.ic_action_train, R.drawable.ic_action_train).reg();
+			carLocation().icon(R.drawable.map_action_train, R.drawable.ic_action_train).reg();
 
 	static {
 		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, AIRCRAFT, BUS, TRAIN};
@@ -110,8 +110,8 @@ public class ApplicationMode {
 			return applicationMode;
 		}
 
-		public ApplicationModeBuilder icon(int bigIcon, int smallIconDark) {
-			applicationMode.iconId = bigIcon;
+		public ApplicationModeBuilder icon(int mapIcon, int smallIconDark) {
+			applicationMode.mapIconId = mapIcon;
 			applicationMode.smallIconDark = smallIconDark;
 			return this;
 		}
@@ -119,8 +119,12 @@ public class ApplicationMode {
 		public ApplicationModeBuilder carLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_car_bearing;
 			applicationMode.bearingIconNight = R.drawable.map_car_bearing_night;
+			applicationMode.headingIconDay = R.drawable.map_car_location_view_angle;
+			applicationMode.headingIconNight = R.drawable.map_car_location_view_angle_night;
 			applicationMode.locationIconDay = R.drawable.map_car_location;
 			applicationMode.locationIconNight = R.drawable.map_car_location_night;
+			applicationMode.locationIconDayLost = R.drawable.map_car_location_lost;
+			applicationMode.locationIconNightLost = R.drawable.map_car_location_lost_night;
 			return this;
 		}
 
@@ -132,16 +136,24 @@ public class ApplicationMode {
 		public ApplicationModeBuilder bicycleLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_bicycle_bearing;
 			applicationMode.bearingIconNight = R.drawable.map_bicycle_bearing_night;
+			applicationMode.headingIconDay = R.drawable.map_bicycle_location_view_angle;
+			applicationMode.headingIconNight = R.drawable.map_bicycle_location_view_angle_night;
 			applicationMode.locationIconDay = R.drawable.map_bicycle_location;
 			applicationMode.locationIconNight = R.drawable.map_bicycle_location_night;
+			applicationMode.locationIconDayLost = R.drawable.map_bicycle_location_lost;
+			applicationMode.locationIconNightLost = R.drawable.map_bicycle_location_lost_night;
 			return this;
 		}
 
 		public ApplicationModeBuilder defLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_pedestrian_bearing;
 			applicationMode.bearingIconNight = R.drawable.map_pedestrian_bearing_night;
+			applicationMode.headingIconDay = R.drawable.map_default_location_view_angle;
+			applicationMode.headingIconNight = R.drawable.map_default_location_view_angle_night;
 			applicationMode.locationIconDay = R.drawable.map_pedestrian_location;
 			applicationMode.locationIconNight = R.drawable.map_pedestrian_location_night;
+			applicationMode.locationIconDayLost = R.drawable.map_pedestrian_location_lost;
+			applicationMode.locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
 			return this;
 		}
 
@@ -281,6 +293,14 @@ public class ApplicationMode {
 		return bearingIconNight;
 	}
 
+	public int getResourceHeadingDay() {
+		return headingIconDay;
+	}
+
+	public int getResourceHeadingNight() {
+		return headingIconNight;
+	}
+
 	public int getResourceLocationDay() {
 		return locationIconDay;
 	}
@@ -290,12 +310,20 @@ public class ApplicationMode {
 		return locationIconNight;
 	}
 
+	public int getResourceLocationDayLost() {
+		return locationIconDayLost;
+	}
+
+	public int getResourceLocationNightLost() {
+		return locationIconNightLost;
+	}
+
 	public String getStringKey() {
 		return stringKey;
 	}
 
-	public int getIconId() {
-		return iconId;
+	public int getMapIconId() {
+		return mapIconId;
 	}
 
 	public int getStringResource() {
@@ -339,14 +367,18 @@ public class ApplicationMode {
 	private final String stringKey;
 
 	private ApplicationMode parent;
-	private int iconId = R.drawable.ic_browse_map;
+	private int mapIconId = R.drawable.map_world_globe_dark;
 	private int smallIconDark = R.drawable.ic_world_globe_dark;
 	private float defaultSpeed = 10f;
 	private int minDistanceForTurn = 50;
 	private int arrivalDistance = 90;
 	private int bearingIconDay = R.drawable.map_pedestrian_bearing;
 	private int bearingIconNight = R.drawable.map_pedestrian_bearing_night;
+	private int headingIconDay = R.drawable.map_pedestrian_location_view_angle;
+	private int headingIconNight = R.drawable.map_pedestrian_location_view_angle_night;
 	private int locationIconDay = R.drawable.map_pedestrian_location;
 	private int locationIconNight = R.drawable.map_pedestrian_location_night;
+	private int locationIconDayLost = R.drawable.map_pedestrian_location_lost;
+	private int locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
 	private static StateChangedListener<String> listener;
 }

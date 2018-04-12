@@ -8,12 +8,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.util.Algorithms;
 
 public class ParkingPositionMenuController extends MenuController {
 
 	private ParkingPositionPlugin plugin;
-	private String parkingDescription = "";
+	private String parkingStartDescription = "";
+	private String parkingLeftDescription = "";
+	private String parkingTitle = "";
 
 	public ParkingPositionMenuController(MapActivity mapActivity, PointDescription pointDescription) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
@@ -30,17 +31,13 @@ public class ParkingPositionMenuController extends MenuController {
 			}
 		};
 		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
-		leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+		leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
 	}
 
 	private void buildParkingDescription(MapActivity mapActivity) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(plugin.getParkingStartDesc(mapActivity));
-		String leftDesc = plugin.getParkingLeftDesc(mapActivity);
-		if (!Algorithms.isEmpty(leftDesc)) {
-			sb.append("\n").append(leftDesc);
-		}
-		parkingDescription = sb.toString();
+		parkingStartDescription = plugin.getParkingStartDesc(mapActivity);
+		parkingLeftDescription = plugin.getParkingLeftDesc(mapActivity);
+		parkingTitle = plugin.getParkingTitle(mapActivity);
 	}
 
 	@Override
@@ -62,7 +59,32 @@ public class ParkingPositionMenuController extends MenuController {
 
 	@Override
 	public boolean needTypeStr() {
-		return !Algorithms.isEmpty(parkingDescription);
+		return true;
+	}
+
+	@Override
+	public int getAdditionalInfoIconRes() {
+		return R.drawable.ic_action_opening_hour_16;
+	}
+
+	@Override
+	public CharSequence getAdditionalInfoStr() {
+		return parkingLeftDescription;
+	}
+
+	@Override
+	public int getAdditionalInfoColorId() {
+		return plugin.getParkingType() ? R.color.ctx_menu_amenity_closed_text_color : R.color.icon_color;
+	}
+
+	@Override
+	public String getNameStr() {
+		return parkingTitle;
+	}
+
+	@Override
+	public boolean navigateInPedestrianMode() {
+		return true;
 	}
 
 	@Override
@@ -71,13 +93,13 @@ public class ParkingPositionMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return getIcon(R.drawable.ic_action_parking_dark, R.color.map_widget_blue);
 	}
 
 	@Override
 	public String getTypeStr() {
-		return parkingDescription;
+		return parkingStartDescription;
 	}
 
 	@Override

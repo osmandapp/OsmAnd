@@ -20,6 +20,8 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -80,6 +82,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			return;
 		} else {
 			mainView.setVisibility(View.VISIBLE);
+			sortItemsDescending(notes);
 		}
 
 		LinearLayout notesLayout = (LinearLayout) mainView.findViewById(R.id.items);
@@ -113,6 +116,23 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			});
 			notesLayout.addView(view);
 		}
+	}
+
+	private void sortItemsDescending(List<AudioVideoNotesPlugin.Recording> items) {
+		Collections.sort(items, new Comparator<AudioVideoNotesPlugin.Recording>() {
+			@Override
+			public int compare(AudioVideoNotesPlugin.Recording first, AudioVideoNotesPlugin.Recording second) {
+				long firstTime = first.getLastModified();
+				long secondTime = second.getLastModified();
+				if (firstTime < secondTime) {
+					return 1;
+				} else if (firstTime == secondTime) {
+					return 0;
+				} else {
+					return -1;
+				}
+			}
+		});
 	}
 
 	public static Drawable getNoteView(final AudioVideoNotesPlugin.Recording recording, View view,

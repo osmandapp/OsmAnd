@@ -73,6 +73,7 @@
             android:background="?attr/selectableItemBackground"
             android:scaleType="centerInside"
             android:tint="?attr/secondary_icon_color"
+            android:contentDescription="@string/action_delete"
             android:src="@drawable/ic_action_remove_dark"/>
 
     </LinearLayout>

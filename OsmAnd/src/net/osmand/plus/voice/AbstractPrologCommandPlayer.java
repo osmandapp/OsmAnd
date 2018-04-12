@@ -65,12 +65,15 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	protected String language = "";
 	protected int streamType;
 	private static int currentVersion;
+	private ApplicationMode applicationMode;
 
 
-	protected AbstractPrologCommandPlayer(OsmandApplication ctx, String voiceProvider, String configFile, int[] sortedVoiceVersions)
+	protected AbstractPrologCommandPlayer(OsmandApplication ctx, ApplicationMode applicationMode,
+										  String voiceProvider, String configFile, int[] sortedVoiceVersions)
 			throws CommandPlayerException {
 		this.ctx = ctx;
 		this.sortedVoiceVersions = sortedVoiceVersions;
+		this.applicationMode = applicationMode;
 		long time = System.currentTimeMillis();
 		try {
 			this.ctx = ctx;
@@ -82,12 +85,16 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		if (log.isInfoEnabled()) {
 			log.info("Initializing prolog system : " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 		}
-		this.streamType = ctx.getSettings().AUDIO_STREAM_GUIDANCE.get();
+		this.streamType = ctx.getSettings().AUDIO_STREAM_GUIDANCE.getModeValue(applicationMode);
 		init(voiceProvider, ctx.getSettings(), configFile);
 		final Term langVal = solveSimplePredicate("language");
 		if (langVal instanceof Struct) {
 			language = ((Struct) langVal).getName();
 		}
+	}
+
+	public ApplicationMode getApplicationMode() {
+		return applicationMode;
 	}
 
 	public String getLanguage() {
@@ -104,7 +111,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		NotificationCompat.Builder notificationBuilder =
 				new NotificationCompat.Builder(ctx)
 						.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-						.setSmallIcon(R.drawable.icon)
+						.setSmallIcon(R.mipmap.icon)
 						.setContentTitle(ctx.getString(R.string.app_name))
 						.setContentText(message)
 						.setGroup(WEAR_ALERT);
@@ -277,9 +284,9 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 			mAudioFocusHelper = getAudioFocus();
 		}
 		if (mAudioFocusHelper != null && ctx != null) {
-			boolean audioFocusGranted = mAudioFocusHelper.requestFocus(ctx, streamType);
+			boolean audioFocusGranted = mAudioFocusHelper.requestFocus(ctx, applicationMode, streamType);
 			// If AudioManager.STREAM_VOICE_CALL try using BT SCO:
-			if (audioFocusGranted && ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+			if (audioFocusGranted && ctx.getSettings().AUDIO_STREAM_GUIDANCE.getModeValue(applicationMode) == 0) {
 				toggleBtSco(true);
 			}
 		}
@@ -296,11 +303,11 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	
 	protected synchronized void abandonAudioFocus() {
 		log.debug("abandonAudioFocus");
-		if ((ctx != null && ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) || (btScoStatus == true)) {
+		if ((ctx != null && ctx.getSettings().AUDIO_STREAM_GUIDANCE.getModeValue(applicationMode) == 0) || (btScoStatus == true)) {
 			toggleBtSco(false);
 		}
 		if (ctx != null && mAudioFocusHelper != null) {
-			mAudioFocusHelper.abandonFocus(ctx, streamType);
+			mAudioFocusHelper.abandonFocus(ctx, applicationMode, streamType);
 		}
 		mAudioFocusHelper = null;
 	}
@@ -319,7 +326,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 			try {
 				AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
 				if (mAudioManager == null || !mAudioManager.isBluetoothScoAvailableOffCall()) {
-					  btScoInit = "BT SCO available:   NO";
+					  btScoInit = "Reported not available.";
 					return false;
 				}
 				mAudioManager.setMode(0);
@@ -330,10 +337,10 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 			} catch (Exception e) {
 				System.out.println("Exception starting BT SCO " + e.getMessage() );
 				btScoStatus = false;
-					  btScoInit = "BT SCO available:   YES\nBT SCO initializes: NO\n(" + e.getMessage() + ")";
+					  btScoInit = "Available, but not initializad.\n(" + e.getMessage() + ")";
 				return false;
 			}
-					  btScoInit = "BT SCO available:   YES\nBT SCO initializes: YES";
+					  btScoInit = "Available, initialized OK.";
 			return true;
 		} else {
 			AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);

@@ -1,6 +1,19 @@
 package net.osmand.search.core;
 
+import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.StringMatcher;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.CommonWords;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,18 +24,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
-
-import net.osmand.Collator;
-import net.osmand.CollatorStringMatcher;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.OsmAndCollator;
-import net.osmand.StringMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.data.LatLon;
-import net.osmand.data.QuadRect;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 //immutable object
 public class SearchPhrase {
@@ -44,26 +45,68 @@ public class SearchPhrase {
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private Collator clt;
 	
-	private static Set<String> conjunctionsThe = new TreeSet<>();
-	private static Set<String> conjunctionsAnd = new TreeSet<>();
+	private static Set<String> conjunctions = new TreeSet<>();
 	static {
 		// the
-		conjunctionsThe.add("the");
-		conjunctionsThe.add("der");
-		conjunctionsThe.add("den");
-		conjunctionsThe.add("die");
-		conjunctionsThe.add("das");
-		conjunctionsThe.add("la");
-		conjunctionsThe.add("le");
-		conjunctionsThe.add("el");
-		conjunctionsThe.add("il");
+		conjunctions.add("the");
+		conjunctions.add("der");
+		conjunctions.add("den");
+		conjunctions.add("die");
+		conjunctions.add("das");
+		conjunctions.add("la");
+		conjunctions.add("le");
+		conjunctions.add("el");
+		conjunctions.add("il");
 		// and
-		conjunctionsAnd .add("and");
-		conjunctionsAnd .add("und");
-		conjunctionsAnd .add("en");
-		conjunctionsAnd .add("et");
-		conjunctionsAnd .add("y");
-		conjunctionsAnd .add("и");
+		conjunctions.add("and");
+		conjunctions.add("und");
+		conjunctions.add("en");
+		conjunctions.add("et");
+		conjunctions.add("y");
+		conjunctions.add("и");
+		// short 
+		conjunctions.add("f");
+		conjunctions.add("u");
+		conjunctions.add("jl.");
+		conjunctions.add("j");
+		conjunctions.add("sk");
+		conjunctions.add("w");
+		conjunctions.add("a.");
+		conjunctions.add("of");
+		conjunctions.add("k");
+		conjunctions.add("r");
+		conjunctions.add("h");
+		conjunctions.add("mc");
+		conjunctions.add("sw");
+		conjunctions.add("g");
+		conjunctions.add("v");
+		conjunctions.add("m");
+		conjunctions.add("c.");
+		conjunctions.add("r.");
+		conjunctions.add("ct");
+		conjunctions.add("e.");
+		conjunctions.add("dr.");
+		conjunctions.add("j.");		
+		conjunctions.add("in");
+		conjunctions.add("al");
+		conjunctions.add("út");
+		conjunctions.add("per");
+		conjunctions.add("ne");
+		conjunctions.add("p");
+		conjunctions.add("et");
+		conjunctions.add("s.");
+		conjunctions.add("f.");
+		conjunctions.add("t");
+		conjunctions.add("fe");
+		conjunctions.add("à");
+		conjunctions.add("i");
+		conjunctions.add("c");
+		conjunctions.add("le");
+		conjunctions.add("s");
+		conjunctions.add("av.");
+		conjunctions.add("den");
+		conjunctions.add("dr");
+		conjunctions.add("y");
 	}
 	
 	
@@ -112,7 +155,7 @@ public class SearchPhrase {
 			boolean first = true;
 			for (int i = 0; i < ws.length ; i++) {
 				String wd = ws[i].trim();
-				if (wd.length() > 0 && !conjunctionsThe.contains(wd.toLowerCase())) {
+				if (wd.length() > 0 && !conjunctions.contains(wd.toLowerCase())) {
 					if (first) {
 						sp.unknownSearchWordTrim = wd;
 						first = false;
@@ -288,7 +331,40 @@ public class SearchPhrase {
 	public int getRadiusLevel() {
 		return settings.getRadiusLevel();
 	}
-	
+
+	public ObjectType[] getSearchTypes() {
+		return settings == null ? null : settings.getSearchTypes();
+	}
+
+	public boolean isCustomSearch() {
+		return getSearchTypes() != null;
+	}
+
+	public boolean hasCustomSearchType(ObjectType type) {
+		return settings.hasCustomSearchType(type);
+	}
+
+	public boolean isSearchTypeAllowed(ObjectType searchType) {
+		if (getSearchTypes() == null) {
+			return true;
+		} else {
+			for (ObjectType type : getSearchTypes()) {
+				if (type == searchType) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+
+	public boolean isEmptyQueryAllowed() {
+		return settings.isEmptyQueryAllowed();
+	}
+
+	public boolean isSortByName() {
+		return settings.isSortByName();
+	}
+
 	public SearchPhrase selectWord(SearchResult res) {
 		return selectWord(res, null, false);
 	}
@@ -334,16 +410,29 @@ public class SearchPhrase {
 		}
 		return false;
 	}
-	
+
+	public ObjectType getExclusiveSearchType() {
+		SearchWord lastWord = getLastSelectedWord();
+		if (lastWord != null) {
+			return ObjectType.getExclusiveSearchType(lastWord.getType());
+		}
+		return null;
+	}
+
 	public NameStringMatcher getNameStringMatcher() {
 		if(sm != null) {
 			return sm;
 		}
-		sm = new NameStringMatcher(unknownSearchWordTrim, 
-				(lastUnknownSearchWordComplete ?  
+		sm = getNameStringMatcher(unknownSearchWordTrim, lastUnknownSearchWordComplete);
+		return sm;
+	}
+	
+	
+	public NameStringMatcher getNameStringMatcher(String word, boolean complete) {
+		return new NameStringMatcher(word, 
+				(complete ?  
 					StringMatcherMode.CHECK_EQUALS_FROM_SPACE : 
 					StringMatcherMode.CHECK_STARTS_FROM_SPACE));
-		return sm;
 	}
 	
 	public boolean hasObjectType(ObjectType p) {
@@ -405,15 +494,13 @@ public class SearchPhrase {
 	public boolean isEmpty() {
 		return words.isEmpty() && unknownSearchPhrase.isEmpty();
 	}
-	
-	
+
 	public SearchWord getLastSelectedWord() {
 		if(words.isEmpty()) {
 			return null;
 		}
 		return words.get(words.size() - 1);
 	}
-
 	
 	public LatLon getWordLocation() {
 		for(int i = words.size() - 1; i >= 0; i--) {
@@ -436,7 +523,6 @@ public class SearchPhrase {
 		return settings.getOriginalLocation();
 	}
 
-
 	public void selectFile(BinaryMapIndexReader object) {
 		if(indexes == null) {
 			indexes = new ArrayList<>();
@@ -446,41 +532,78 @@ public class SearchPhrase {
 		}
 	}
 
-	public void sortFiles() {
-		if(indexes == null) {
-			indexes = new ArrayList<>(getOfflineIndexes());
-		}
-		final LatLon ll = getLastTokenLocation();
-		if(ll != null) {
-			Collections.sort(indexes, new Comparator<BinaryMapIndexReader>() {
-				Map<BinaryMapIndexReader, LatLon> locations = new HashMap<>();
+    public void sortFiles() {
+        if (indexes == null) {
+            indexes = new ArrayList<>(getOfflineIndexes());
+        }
+        Map<String, List<BinaryMapIndexReader>> diffsByRegion = getDiffsByRegion();
+        final LatLon ll = getLastTokenLocation();
+        if (ll != null) {
+            Collections.sort(indexes, new Comparator<BinaryMapIndexReader>() {
+                Map<BinaryMapIndexReader, LatLon> locations = new HashMap<>();
 
-				@Override
-				public int compare(BinaryMapIndexReader o1, BinaryMapIndexReader o2) {
- 					LatLon rc1 = getLocation(o1);
-					LatLon rc2 = getLocation(o2);
-					double d1 = rc1 == null ? 10000000d : MapUtils.getDistance(rc1, ll);
-					double d2 = rc2 == null ? 10000000d : MapUtils.getDistance(rc2, ll);
-					return Double.compare(d1, d2);
-				}
+                @Override
+                public int compare(BinaryMapIndexReader o1, BinaryMapIndexReader o2) {
+                    LatLon rc1 = o1 == null ? null : getLocation(o1);
+                    LatLon rc2 = o2 == null ? null : getLocation(o2);
+                    double d1 = rc1 == null ? 10000000d : MapUtils.getDistance(rc1, ll);
+                    double d2 = rc2 == null ? 10000000d : MapUtils.getDistance(rc2, ll);
+                    return Double.compare(d1, d2);
+                }
 
-				private LatLon getLocation(BinaryMapIndexReader o1) {
-					if(locations.containsKey(o1)) {
-						return locations.get(o1);
-					}
-					LatLon rc1 = null;
-					if(o1.containsMapData()) {
-						rc1 = o1.getMapIndexes().get(0).getCenterLatLon();
-					} else {
-						rc1 = o1.getRegionCenter();
-					}
-					locations.put(o1, rc1);
-					return rc1;
-				}
-			});
-		}
-	}
-	
+                private LatLon getLocation(BinaryMapIndexReader o1) {
+                    if (locations.containsKey(o1)) {
+                        return locations.get(o1);
+                    }
+                    LatLon rc1 = null;
+                    if (o1.containsMapData()) {
+                        rc1 = o1.getMapIndexes().get(0).getCenterLatLon();
+                    } else {
+                        rc1 = o1.getRegionCenter();
+                    }
+                    locations.put(o1, rc1);
+                    return rc1;
+                }
+            });
+            if (!diffsByRegion.isEmpty()) {
+                List<BinaryMapIndexReader> finalSort = new ArrayList<>();
+                for (int i = 0; i < indexes.size(); i++) {
+                    BinaryMapIndexReader currFile = indexes.get(i);
+                    if (diffsByRegion.get(currFile.getRegionName()) != null) {
+                        finalSort.addAll(diffsByRegion.get(currFile.getRegionName()));
+                        finalSort.add(currFile);
+                    } else {
+                        finalSort.add(currFile);
+                    }
+                }
+                indexes.clear();
+                indexes.addAll(finalSort);
+            }
+        }
+    }
+
+    private Map<String, List<BinaryMapIndexReader>> getDiffsByRegion() {
+        Map<String, List<BinaryMapIndexReader>> result = new HashMap<>();
+        Iterator<BinaryMapIndexReader> it = indexes.iterator();
+        while (it.hasNext()) {
+            BinaryMapIndexReader r = it.next();
+            if(r == null || r.getFile() == null) {
+            	continue;
+            }
+            String filename = r.getFile().getName();
+            if (filename.matches("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+\\.obf")) {
+                String currRegionName = r.getRegionName();
+                if (result.containsKey(currRegionName)) {
+                    result.get(currRegionName).add(r);
+                } else {
+                    result.put(currRegionName, new ArrayList<>(Arrays.asList(r)));
+                }
+                it.remove();
+            }
+        }
+        return result;
+    }
+
 	public static class NameStringMatcher implements StringMatcher {
 
 		private CollatorStringMatcher sm;
@@ -529,9 +652,69 @@ public class SearchPhrase {
 				}
 			}
 		}
+		if(!sr.firstUnknownWordMatches) {
+			sr.firstUnknownWordMatches = localeName.equals(getUnknownSearchWord()) ||
+					getNameStringMatcher().matches(localeName) || 
+					getNameStringMatcher().matches(otherNames);	
+		}
+		
 	}
 	public int getRadiusSearch(int meters) {
 		return (1 << (getRadiusLevel() - 1)) * meters;
+	}
+
+	public static int icompare(int x, int y) {
+        return (x < y) ? -1 : ((x == y) ? 0 : 1);
+    }
+	
+	public String getUnknownWordToSearchBuilding() {
+		List<String> unknownSearchWords = getUnknownSearchWords();
+		if(unknownSearchWords.size() > 0 && Algorithms.extractFirstIntegerNumber(getUnknownSearchWord()) == 0) {
+			for(String wrd : unknownSearchWords) {
+				if(Algorithms.extractFirstIntegerNumber(wrd) != 0) {
+					return wrd;
+				}
+			}
+		}
+		return getUnknownSearchWord();
+	}
+	
+	public String getUnknownWordToSearch() {
+		List<String> unknownSearchWords = getUnknownSearchWords();
+		
+		String wordToSearch = getUnknownSearchWord();
+		if (unknownSearchWords.size() > 0) {
+			List<String> searchWords = new ArrayList<>(unknownSearchWords);
+			searchWords.add(0, getUnknownSearchWord());
+			Collections.sort(searchWords, new Comparator<String>() {
+
+				private int lengthWithoutNumbers(String s) {
+					int len = 0;
+					for(int k = 0; k < s.length(); k++) {
+						if(s.charAt(k) >= '0' && s.charAt(k) <= '9') {
+							
+						} else {
+							len++;
+						}
+					}
+					return len;
+				}
+				
+				@Override
+				public int compare(String o1, String o2) {
+					int i1 = CommonWords.getCommonSearch(o1.toLowerCase());
+					int i2 = CommonWords.getCommonSearch(o2.toLowerCase());
+					if (i1 != i2) {
+						return icompare(i1, i2);
+					}
+					// compare length without numbers to not include house numbers
+					return -icompare(lengthWithoutNumbers(o1), lengthWithoutNumbers(o2));
+				}
+			});						
+			wordToSearch = searchWords.get(0);
+		}
+
+		return wordToSearch;
 	}
 
 	

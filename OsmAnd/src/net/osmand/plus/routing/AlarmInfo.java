@@ -18,7 +18,8 @@ public class AlarmInfo implements LocationPoint {
 		STOP(7, R.string.traffic_warning_stop),
 		PEDESTRIAN(8, R.string.traffic_warning_pedestrian),
 		HAZARD(9, R.string.traffic_warning_hazard),
-		MAXIMUM(10, R.string.traffic_warning);
+		MAXIMUM(10, R.string.traffic_warning),
+		TUNNEL(8, R.string.tunnel_warning);
 		
 		private int priority;
 		private int string;
@@ -40,7 +41,9 @@ public class AlarmInfo implements LocationPoint {
 	
 	private AlarmInfoType type;
 	protected final int locationIndex;
+	private int lastLocationIndex = -1;
 	private int intValue;
+	private float floatValue;
 	private double latitude;
 	private double longitude;
 	
@@ -52,6 +55,14 @@ public class AlarmInfo implements LocationPoint {
 	
 	public AlarmInfoType getType() {
 		return type;
+	}
+
+	public float getFloatValue() {
+		return floatValue;
+	}
+
+	public void setFloatValue(float floatValue) {
+		this.floatValue = floatValue;
 	}
 	
 	@Override
@@ -71,11 +82,19 @@ public class AlarmInfo implements LocationPoint {
 	public int getLocationIndex() {
 		return locationIndex;
 	}
-	
+
+	public int getLastLocationIndex() {
+		return lastLocationIndex;
+	}
+
+	public void setLastLocationIndex(int lastLocationIndex) {
+		this.lastLocationIndex = lastLocationIndex;
+	}
+
 	public void setIntValue(int intValue) {
 		this.intValue = intValue;
 	}
-	
+
 	public static AlarmInfo createSpeedLimit(int speed, Location loc){
 		AlarmInfo info = new AlarmInfo(AlarmInfoType.SPEED_LIMIT, 0);
 		info.setLatLon(loc.getLatitude(), loc.getLongitude());
@@ -126,6 +145,9 @@ public class AlarmInfo implements LocationPoint {
 			return type.getPriority();
 		}
 		if (type == AlarmInfoType.SPEED_CAMERA && (time < 15 || distance < 150)) {
+			return type.getPriority();
+		}
+		if (type == AlarmInfoType.TOLL_BOOTH && (time < 30 || distance < 500)) {
 			return type.getPriority();
 		}
 		// 2nd level

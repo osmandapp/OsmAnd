@@ -3,7 +3,11 @@ package net.osmand.core.samples.android.sample1;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 
 import java.util.HashMap;
@@ -50,15 +54,18 @@ public class OsmandResources {
 		}
 	}
 
+	@Nullable
 	public static Resources getOsmandResources() {
 		return osmandResources;
 	}
 
-	public static String getString(String id) {
+	@Nullable
+	public static String getString(@NonNull String id) {
 		return getStringInternal(resolveStringId(id));
 	}
 
-	public static String getString(String id, Object... formatArgs) {
+	@Nullable
+	public static String getString(@NonNull String id, @NonNull Object... formatArgs) {
 		int resolvedId = resolveStringId(id);
 		if (resolvedId != 0) {
 			return osmandResources.getString(resolvedId, formatArgs);
@@ -66,18 +73,31 @@ public class OsmandResources {
 		return null;
 	}
 
-	public static Drawable getDrawable(String id) {
+	@Nullable
+	public static Drawable getDrawable(@NonNull String id) {
 		return getDrawableInternal(resolveDrawableId(id));
 	}
 
-	public static Drawable getBigDrawable(String id) {
+	@Nullable
+	public static Drawable getBigDrawable(@NonNull String id) {
 		return getDrawableInternal(resolveDrawableId(BIG_ICON_PREFIX + id));
 	}
 
+	@Nullable
 	public static Drawable getDrawable(int id) {
 		return getDrawableInternal(id);
 	}
 
+	@Nullable
+	public static Bitmap getBitmap(@NonNull String id) {
+		int resId = resolveDrawableId(id);
+		if (osmandResources != null && resId != 0) {
+			return BitmapFactory.decodeResource(osmandResources, resId);
+		}
+		return null;
+	}
+
+	@Nullable
 	public static Drawable getDrawableNonCached(int id) {
 		if (osmandResources != null && id != 0) {
 			Drawable d = osmandResources.getDrawable(id);
@@ -90,14 +110,15 @@ public class OsmandResources {
 		return null;
 	}
 
-	public static int getDrawableId(String id) {
+	public static int getDrawableId(@NonNull String id) {
 		return resolveDrawableId(id);
 	}
 
-	public static int getBigDrawableId(String id) {
+	public static int getBigDrawableId(@NonNull String id) {
 		return resolveDrawableId(BIG_ICON_PREFIX + id);
 	}
 
+	@Nullable
 	private static Drawable getDrawableInternal(int resId) {
 		if (osmandResources != null && resId != 0) {
 			long hash = getResIdHash(resId);
@@ -115,6 +136,7 @@ public class OsmandResources {
 		return null;
 	}
 
+	@Nullable
 	private static String getStringInternal(int resId) {
 		if (osmandResources != null && resId != 0) {
 			long hash = getResIdHash(resId);
@@ -128,7 +150,7 @@ public class OsmandResources {
 		return null;
 	}
 
-	private static int resolveStringId(String id) {
+	private static int resolveStringId(@NonNull String id) {
 		if (osmandResources != null) {
 			Integer resolvedId = stringIds.get(id);
 			if (resolvedId == null) {
@@ -140,7 +162,7 @@ public class OsmandResources {
 		return 0;
 	}
 
-	private static int resolveDrawableId(String id) {
+	private static int resolveDrawableId(@NonNull String id) {
 		if (osmandResources != null) {
 			Integer resolvedId = drawableIds.get(id);
 			if (resolvedId == null) {

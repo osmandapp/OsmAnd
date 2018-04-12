@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="8dp"/>
+
+	<include layout="@layout/card_top_divider"/>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/wikivoyage_search_list_header_height"
+		android:background="?attr/wikivoyage_card_bg_color"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding">
+
+		<TextView
+			android:id="@+id/title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding"
+			android:ellipsize="end"
+			android:maxLines="1"
+			tools:text="Search results"/>
+
+	</FrameLayout>
+
+</LinearLayout>

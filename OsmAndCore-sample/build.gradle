@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     dexOptions {
         jumboMode true
@@ -38,28 +38,36 @@ android {
         }
     }
 
+    flavorDimensions "abi"
+
     productFlavors {
         x86 {
+            dimension "abi"
             ndk {
                 abiFilter "x86"
             }
         }
         mips {
+            dimension "abi"
             ndk {
                 abiFilter "mips"
             }
         }
         armv7 {
+            dimension "abi"
             ndk {
                 abiFilter "armeabi-v7a"
             }
         }
         armv5 {
+            dimension "abi"
             ndk {
                 abiFilter "armeabi"
             }
         }
-        fat
+        fat {
+            dimension "abi"
+        }
     }
 
     buildTypes {
@@ -106,13 +114,20 @@ repositories {
             artifact "ivy/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
         }
     }
+    jcenter()
 }
 
 dependencies {
     compile project(path: ':OsmAnd-java', configuration: 'android')
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.android.support:design:23.3.0'
-    compile fileTree(dir: "libs", include: ["*.jar"])
+
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.android.support:appcompat-v7:27.1.0'
+    compile 'com.android.support:design:27.1.0'
+    compile 'commons-logging:commons-logging-api:1.1'
+    compile 'com.moparisthebest:junidecode:0.1.1'
+
+    compile fileTree(include:  ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
+
     compile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
     debugCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
     nativeDebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"

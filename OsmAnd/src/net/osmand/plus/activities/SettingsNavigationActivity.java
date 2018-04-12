@@ -3,17 +3,30 @@ package net.osmand.plus.activities;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import net.osmand.IndexConstants;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DeviceAdminRecv;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -22,23 +35,34 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.OsmandSettings.SpeedConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
+import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SettingsNavigationActivity extends SettingsBaseActivity {
 
+	public static final String MORE_VALUE = "MORE_VALUE";
+
 	private Preference avoidRouting;
 	private Preference preferRouting;
+	private Preference reliefFactorRouting;
+	private Preference autoZoom;
 	private Preference showAlarms;
 	private Preference speakAlarms;
 	private ListPreference routerServicePreference;
-	private ListPreference autoZoomMapPreference;
 	private ListPreference speedLimitExceed;
 	
 	private ComponentName mDeviceAdmin;
@@ -46,7 +70,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	
 	private List<RoutingParameter> avoidParameters = new ArrayList<RoutingParameter>();
 	private List<RoutingParameter> preferParameters = new ArrayList<RoutingParameter>();
-	public static final String INTENT_SKIP_DIALOG = "INTENT_SKIP_DIALOG"; 
+	private List<RoutingParameter> reliefFactorParameters = new ArrayList<RoutingParameter>();
+	public static final String INTENT_SKIP_DIALOG = "INTENT_SKIP_DIALOG";
 	
 	public SettingsNavigationActivity() {
 		super(true);
@@ -120,13 +145,10 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		}
 		registerListPreference(settings.AUTO_FOLLOW_ROUTE, screen, entries, intValues);
 
-		entries = new String[AutoZoomMap.values().length];
-		for(int i=0; i<entries.length; i++){
-			entries[i] = getString(AutoZoomMap.values()[i].name);
-		}
-		registerListPreference(settings.AUTO_ZOOM_MAP, screen, entries, AutoZoomMap.values());
-		
-        //keep informing option:
+		autoZoom = screen.findPreference("auto_zoom_map_on_off");
+		autoZoom.setOnPreferenceClickListener(this);
+
+		//keep informing option:
         Integer[] keepInformingValues = new Integer[]{0, 1, 2, 3, 5, 7, 10, 15, 20, 25, 30};
         String[] keepInformingNames = new String[keepInformingValues.length];
         keepInformingNames[0] = getString(R.string.keep_informing_never);
@@ -155,10 +177,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		registerListPreference(settings.WAKE_ON_VOICE_INT, screen, screenPowerSaveNames, screenPowerSaveValues);
         
 //         registerBooleanPreference(settings.SHOW_ZOOM_BUTTONS_NAVIGATION, screen);
-
-		autoZoomMapPreference = (ListPreference) screen.findPreference(settings.AUTO_ZOOM_MAP.getId());
-		autoZoomMapPreference.setOnPreferenceChangeListener(this);
-
 		
 		showAlarms = (Preference) screen.findPreference("show_routing_alarms");
 		showAlarms.setOnPreferenceClickListener(this);
@@ -176,20 +194,22 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		registerListPreference(settings.ARRIVAL_DISTANCE_FACTOR, screen, arrivalNames, arrivalValues);
 
 		//array size should be equal!
-		Float[] speedLimitsKm = new Float[]{0f, 5f, 7f, 10f, 15f, 20f};
-		Float[] speedLimitsMiles = new Float[]{0f, 3f, 5f, 7f, 10f, 15f};
+		Float[] speedLimitsKm = new Float[]{-10f, -7f,-5f, 0f, 5f, 7f, 10f, 15f, 20f};
+		Float[] speedLimitsMiles = new Float[]{-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
 		if (settings.METRIC_SYSTEM.get() == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
 			String[] speedNames = new String[speedLimitsKm.length];
 			for (int i =0; i<speedLimitsKm.length;i++){
 				speedNames[i] = speedLimitsKm[i] + " " + getString(R.string.km_h);
 			}
 			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsKm);
+			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS, screen, speedNames, speedLimitsKm);
 		} else {
 			String[] speedNames = new String[speedLimitsKm.length];
 			for (int i =0; i<speedNames.length;i++){
 				speedNames[i] = speedLimitsMiles[i] + " " + getString(R.string.mile_per_hour);
 			}
 			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsKm);
+			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS, screen, speedNames, speedLimitsKm);
 		}
 
 		PreferenceCategory category = (PreferenceCategory) screen.findPreference("guidance_preferences");
@@ -217,8 +237,74 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		} else {
 			profileDialog();
 		}
+
+		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));
 	}
-	
+
+	private void reloadVoiceListPreference(PreferenceScreen screen) {
+		String[] entries;
+		String[] entrieValues;
+		Set<String> voiceFiles = getVoiceFiles();
+		entries = new String[voiceFiles.size() + 2];
+		entrieValues = new String[voiceFiles.size() + 2];
+		int k = 0;
+		// entries[k++] = getString(R.string.shared_string_none);
+		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
+		entries[k++] = getString(R.string.shared_string_do_not_use);
+		for (String s : voiceFiles) {
+			entries[k] = (s.contains("tts") ? getString(R.string.ttsvoice) + " " : "") +
+					FileNameTranslationHelper.getVoiceName(this, s);
+			entrieValues[k] = s;
+			k++;
+		}
+		entrieValues[k] = MORE_VALUE;
+		entries[k] = getString(R.string.install_more);
+		registerListPreference(settings.VOICE_PROVIDER, screen, entries, entrieValues);
+	}
+
+
+	private Set<String> getVoiceFiles() {
+		// read available voice data
+		File extStorage = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
+		Set<String> setFiles = new LinkedHashSet<String>();
+		if (extStorage.exists()) {
+			for (File f : extStorage.listFiles()) {
+				if (f.isDirectory()) {
+					setFiles.add(f.getName());
+				}
+			}
+		}
+		return setFiles;
+	}
+
+	private void addVoicePrefs(PreferenceGroup cat) {
+		if (!Version.isBlackberry((OsmandApplication) getApplication())) {
+			ListPreference lp = createListPreference(
+					settings.AUDIO_STREAM_GUIDANCE,
+					new String[]{getString(R.string.voice_stream_music), getString(R.string.voice_stream_notification),
+							getString(R.string.voice_stream_voice_call)}, new Integer[]{AudioManager.STREAM_MUSIC,
+							AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL}, R.string.choose_audio_stream,
+					R.string.choose_audio_stream_descr);
+			final Preference.OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
+			lp.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+				@Override
+				public boolean onPreferenceChange(Preference preference, Object newValue) {
+					prev.onPreferenceChange(preference, newValue);
+					CommandPlayer player = getMyApplication().getPlayer();
+					if (player != null) {
+						player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
+					}
+					// Sync DEFAULT value with CAR value, as we have other way to set it for now
+					settings.AUDIO_STREAM_GUIDANCE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_STREAM_GUIDANCE.getModeValue(ApplicationMode.CAR));
+					return true;
+				}
+			});
+			cat.addPreference(lp);
+			cat.addPreference(createCheckBoxPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music,
+					R.string.interrupt_music_descr));
+		}
+	}
 
 	private void prepareRoutingPrefs(PreferenceScreen screen) {
 		PreferenceCategory cat = (PreferenceCategory) screen.findPreference("routing_preferences");
@@ -238,12 +324,15 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				List<RoutingParameter> others = new ArrayList<GeneralRouter.RoutingParameter>();
 				for(Map.Entry<String, RoutingParameter> e : parameters.entrySet()) {
 					String param = e.getKey();
-					if(param.startsWith("avoid_")) {
-						avoidParameters.add(e.getValue());
-					} else if(param.startsWith("prefer_")) {
-						preferParameters.add(e.getValue());
-					} else if(!param.equals("short_way")) {
-						others.add(e.getValue());
+					RoutingParameter routingParameter = e.getValue();
+					if (param.startsWith("avoid_")) {
+						avoidParameters.add(routingParameter);
+					} else if (param.startsWith("prefer_")) {
+						preferParameters.add(routingParameter);
+					} else if ("relief_smoothness_factor".equals(routingParameter.getGroup())) {
+						reliefFactorParameters.add(routingParameter);
+					} else if (!param.equals("short_way") && !"driving_style".equals(routingParameter.getGroup())) {
+						others.add(routingParameter);
 					}
 				}
 				if (avoidParameters.size() > 0) {
@@ -260,10 +349,18 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					preferRouting.setOnPreferenceClickListener(this);
 					cat.addPreference(preferRouting);
 				}
+				if (reliefFactorParameters.size() > 0) {
+					reliefFactorRouting = new Preference(this);
+					reliefFactorRouting.setTitle(SettingsBaseActivity.getRoutingStringPropertyName(this, reliefFactorParameters.get(0).getGroup(),
+							Algorithms.capitalizeFirstLetterAndLowercase(reliefFactorParameters.get(0).getGroup().replace('_', ' '))));
+					reliefFactorRouting.setSummary(R.string.relief_smoothness_factor_descr);
+					reliefFactorRouting.setOnPreferenceClickListener(this);
+					cat.addPreference(reliefFactorRouting);
+				}
 				for(RoutingParameter p : others) {
 					Preference basePref;
 					if(p.getType() == RoutingParameterType.BOOLEAN) {
-						basePref = createCheckBoxPreference(settings.getCustomRoutingBooleanProperty(p.getId()));
+						basePref = createCheckBoxPreference(settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean()));
 					} else {
 						Object[] vls = p.getPossibleValues();
 						String[] svlss = new String[vls.length];
@@ -293,10 +390,36 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		}
 	}
 
+	public String getRoutinParameterTitle(Context context, RoutingParameter routingParameter) {
+		return SettingsBaseActivity.getRoutingStringPropertyName(context, routingParameter.getId(),
+				routingParameter.getName());
+	}
+
+	public boolean isRoutingParameterSelected(OsmandSettings settings, ApplicationMode am, RoutingParameter routingParameter) {
+		final OsmandSettings.CommonPreference<Boolean> property =
+				settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
+		if(am != null) {
+			return property.getModeValue(am);
+		} else {
+			return property.get();
+		}
+	}
+
+	public void setRoutingParameterSelected(OsmandSettings settings, ApplicationMode am, RoutingParameter routingParameter, boolean isChecked) {
+		final OsmandSettings.CommonPreference<Boolean> property =
+				settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
+		if(am != null) {
+			property.setModeValue(am, isChecked);
+		} else {
+			property.set(isChecked);
+		}
+	}
+
 
 	private void clearParameters() {
 		preferParameters.clear();
 		avoidParameters.clear();
+		reliefFactorParameters.clear();
 	}
 
 
@@ -308,12 +431,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		return router;
 	}
 
-
-	
-
-
 	public void updateAllSettings() {	
 		prepareRoutingPrefs(getPreferenceScreen());
+		reloadVoiceListPreference(getPreferenceScreen());
 		super.updateAllSettings();
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + settings.ROUTER_SERVICE.get() + "]");
 	}
@@ -321,6 +441,20 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String id = preference.getKey();
+		if (id.equals(settings.VOICE_PROVIDER.getId())) {
+			if (MORE_VALUE.equals(newValue)) {
+				// listPref.set(oldValue); // revert the change..
+				final Intent intent = new Intent(this, DownloadActivity.class);
+				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
+				intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
+				startActivity(intent);
+			} else {
+				super.onPreferenceChange(preference, newValue);
+				getMyApplication().initVoiceCommandPlayer(
+						this, settings.APPLICATION_MODE.get(), false, null, true, false);
+			}
+			return true;
+		}
 		super.onPreferenceChange(preference, newValue);
 		if (id.equals(settings.ROUTER_SERVICE.getId())) {
 			routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  ["
@@ -346,29 +480,168 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference == avoidRouting || preference == preferRouting) {
-			List<RoutingParameter> prms = preference == avoidRouting ? avoidParameters : preferParameters; 
+			List<RoutingParameter> prms = preference == avoidRouting ? avoidParameters : preferParameters;
 			String[] vals = new String[prms.size()];
 			OsmandPreference[] bls = new OsmandPreference[prms.size()];
-			for(int i = 0; i < prms.size(); i++) {
-				RoutingParameter p =  prms.get(i);
+			for (int i = 0; i < prms.size(); i++) {
+				RoutingParameter p = prms.get(i);
 				vals[i] = SettingsBaseActivity.getRoutingStringPropertyName(this, p.getId(), p.getName());
-				bls[i] = settings.getCustomRoutingBooleanProperty(p.getId());
+				bls[i] = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 			}
 			showBooleanSettings(vals, bls, preference.getTitle());
 			return true;
+		} else if (preference == autoZoom) {
+			final ApplicationMode am = settings.getApplicationMode();
+			final ContextMenuAdapter adapter = new ContextMenuAdapter();
+			int i = 0;
+			int selectedIndex = -1;
+			adapter.addItem(ContextMenuItem.createBuilder(getString(R.string.auto_zoom_none))
+					.setSelected(false).createItem());
+			if (!settings.AUTO_ZOOM_MAP.get()) {
+				selectedIndex = 0;
+			}
+			i++;
+			for (AutoZoomMap autoZoomMap : AutoZoomMap.values()) {
+				adapter.addItem(ContextMenuItem.createBuilder(getString(autoZoomMap.name))
+						.setSelected(false).createItem());
+				if (selectedIndex == -1 && settings.AUTO_ZOOM_MAP_SCALE.get() == autoZoomMap) {
+					selectedIndex = i;
+				}
+				i++;
+			}
+			if (selectedIndex == -1) {
+				selectedIndex = 0;
+			}
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			final int layout = R.layout.list_menu_item_native_singlechoice;
+
+			final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, layout, R.id.text1,
+					adapter.getItemNames()) {
+				@NonNull
+				@Override
+				public View getView(final int position, View convertView, ViewGroup parent) {
+					// User super class to create the View
+					View v = convertView;
+					if (v == null) {
+						v = SettingsNavigationActivity.this.getLayoutInflater().inflate(layout, null);
+					}
+					final ContextMenuItem item = adapter.getItem(position);
+					TextView tv = (TextView) v.findViewById(R.id.text1);
+					tv.setText(item.getTitle());
+					tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
+
+					return v;
+				}
+			};
+
+			final int[] selectedPosition = {selectedIndex};
+			builder.setSingleChoiceItems(listAdapter, selectedIndex, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int position) {
+					selectedPosition[0] = position;
+				}
+			});
+			builder.setTitle(R.string.auto_zoom_map)
+					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+
+							int position = selectedPosition[0];
+							if (position == 0) {
+								settings.AUTO_ZOOM_MAP.set(false);
+							} else {
+								settings.AUTO_ZOOM_MAP.set(true);
+								settings.AUTO_ZOOM_MAP_SCALE.set(AutoZoomMap.values()[position -1]);
+							}
+						}
+					})
+					.setNegativeButton(R.string.shared_string_cancel, null);
+
+			builder.create().show();
+			return true;
+		} else if (preference == reliefFactorRouting) {
+			final ApplicationMode am = settings.getApplicationMode();
+			final ContextMenuAdapter adapter = new ContextMenuAdapter();
+			int i = 0;
+			int selectedIndex = -1;
+			for (RoutingParameter p : reliefFactorParameters) {
+				adapter.addItem(ContextMenuItem.createBuilder(getRoutinParameterTitle(this, p))
+						.setSelected(false).createItem());
+				if (isRoutingParameterSelected(settings, am, p)) {
+					selectedIndex = i;
+				}
+				i++;
+			}
+			if (selectedIndex == -1) {
+				selectedIndex = 0;
+			}
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			final int layout = R.layout.list_menu_item_native_singlechoice;
+
+			final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, layout, R.id.text1,
+					adapter.getItemNames()) {
+				@NonNull
+				@Override
+				public View getView(final int position, View convertView, ViewGroup parent) {
+					// User super class to create the View
+					View v = convertView;
+					if (v == null) {
+						v = SettingsNavigationActivity.this.getLayoutInflater().inflate(layout, null);
+					}
+					final ContextMenuItem item = adapter.getItem(position);
+					TextView tv = (TextView) v.findViewById(R.id.text1);
+					tv.setText(item.getTitle());
+					tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
+
+					return v;
+				}
+			};
+
+			final int[] selectedPosition = {selectedIndex};
+			builder.setSingleChoiceItems(listAdapter, selectedIndex, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int position) {
+					selectedPosition[0] = position;
+				}
+			});
+			builder.setTitle(SettingsBaseActivity.getRoutingStringPropertyName(this, reliefFactorParameters.get(0).getGroup(),
+					Algorithms.capitalizeFirstLetterAndLowercase(reliefFactorParameters.get(0).getGroup().replace('_', ' '))))
+					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+
+							int position = selectedPosition[0];
+							if (position >= 0 && position < reliefFactorParameters.size()) {
+								for (int i = 0; i < reliefFactorParameters.size(); i++) {
+									setRoutingParameterSelected(settings, am, reliefFactorParameters.get(i), i == position);
+								}
+								//mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
+								//updateParameters();
+							}
+						}
+					})
+					.setNegativeButton(R.string.shared_string_cancel, null);
+
+			builder.create().show();
+			return true;
 		} else if (preference == showAlarms) {
 			showBooleanSettings(new String[] { getString(R.string.show_traffic_warnings), getString(R.string.show_pedestrian_warnings),
-					getString(R.string.show_cameras), getString(R.string.show_lanes) }, new OsmandPreference[] { settings.SHOW_TRAFFIC_WARNINGS,
-					settings.SHOW_PEDESTRIAN, settings.SHOW_CAMERAS, settings.SHOW_LANES }, preference.getTitle());
+					getString(R.string.show_cameras), getString(R.string.show_lanes), getString(R.string.show_tunnels) }, new OsmandPreference[] { settings.SHOW_TRAFFIC_WARNINGS,
+					settings.SHOW_PEDESTRIAN, settings.SHOW_CAMERAS, settings.SHOW_LANES, settings.SHOW_TUNNELS }, preference.getTitle());
 			return true;
 		} else if (preference == speakAlarms) {
 			AlertDialog dlg = showBooleanSettings(new String[] { getString(R.string.speak_street_names),
 					getString(R.string.speak_traffic_warnings), getString(R.string.speak_pedestrian),
-					getString(R.string.speak_speed_limit), getString(R.string.speak_cameras),
+					getString(R.string.speak_speed_limit), getString(R.string.speak_cameras), getString(R.string.show_tunnels),
 					getString(R.string.announce_gpx_waypoints), getString(R.string.speak_favorites),
 					getString(R.string.speak_poi) }, new OsmandPreference[] { settings.SPEAK_STREET_NAMES,
 					settings.SPEAK_TRAFFIC_WARNINGS, settings.SPEAK_PEDESTRIAN, settings.SPEAK_SPEED_LIMIT,
-					settings.SPEAK_SPEED_CAMERA, settings.ANNOUNCE_WPT, settings.ANNOUNCE_NEARBY_FAVORITES,
+					settings.SPEAK_SPEED_CAMERA, settings.SPEAK_TUNNELS,
+					settings.ANNOUNCE_WPT, settings.ANNOUNCE_NEARBY_FAVORITES,
 					settings.ANNOUNCE_NEARBY_POI }, preference.getTitle());
 			final boolean initialSpeedCam = settings.SPEAK_SPEED_CAMERA.get();
 			final boolean initialFavorites = settings.ANNOUNCE_NEARBY_FAVORITES.get();

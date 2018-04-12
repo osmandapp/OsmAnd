@@ -10,9 +10,13 @@ import java.util.List;
 import java.util.TreeMap;
 
 import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.R;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -47,6 +51,12 @@ public class RouteLayer extends OsmandMapLayer {
 
 	private Paint paintIcon;
 	private Paint paintIconAction;
+	private Paint paintGridOuterCircle;
+	private Paint paintGridCircle;
+
+	private Paint paintIconSelected;
+	private Bitmap selectedPoint;
+	private TrackChartPoints trackChartPoints;
 
 	private RenderingLineAttributes attrs;
 
@@ -54,7 +64,10 @@ public class RouteLayer extends OsmandMapLayer {
 	public RouteLayer(RoutingHelper helper){
 		this.helper = helper;
 	}
-	
+
+	public void setTrackChartPoints(TrackDetailsMenu.TrackChartPoints trackChartPoints) {
+		this.trackChartPoints = trackChartPoints;
+	}
 
 	private void initUI() {
 		actionArrow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_action_arrow, null);
@@ -65,11 +78,11 @@ public class RouteLayer extends OsmandMapLayer {
 		paintIcon.setAntiAlias(true);
 		paintIcon.setColor(Color.BLACK);
 		paintIcon.setStrokeWidth(3);
-		
+
 		paintIconAction = new Paint();
 		paintIconAction.setFilterBitmap(true);
 		paintIconAction.setAntiAlias(true);
-		
+
 		attrs = new RenderingLineAttributes("route");
 		attrs.defaultWidth = (int) (12 * view.getDensity());
 		attrs.defaultWidth3 = (int) (7 * view.getDensity());
@@ -79,6 +92,20 @@ public class RouteLayer extends OsmandMapLayer {
 		
 		attrs.paint2.setStrokeCap(Cap.BUTT);
 		attrs.paint2.setColor(Color.BLACK);
+
+		paintIconSelected = new Paint();
+		selectedPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_default_location);
+
+		paintGridCircle = new Paint();
+		paintGridCircle.setStyle(Paint.Style.FILL_AND_STROKE);
+		paintGridCircle.setAntiAlias(true);
+		paintGridCircle.setColor(attrs.defaultColor);
+		paintGridCircle.setAlpha(255);
+		paintGridOuterCircle = new Paint();
+		paintGridOuterCircle.setStyle(Paint.Style.FILL_AND_STROKE);
+		paintGridOuterCircle.setAntiAlias(true);
+		paintGridOuterCircle.setColor(Color.WHITE);
+		paintGridOuterCircle.setAlpha(204);
 	}
 	
 	@Override
@@ -87,10 +114,6 @@ public class RouteLayer extends OsmandMapLayer {
 		initUI();
 	}
 
-	public void updateLayerStyle() {
-		attrs.cachedHash = -1;
-	}
-	
 	
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
@@ -133,8 +156,40 @@ public class RouteLayer extends OsmandMapLayer {
 			double lat = topLatitude - bottomLatitude + 0.1;  
 			double lon = rightLongitude - leftLongitude + 0.1;
 			drawLocations(tileBox, canvas, topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon);
+
+			if (trackChartPoints != null) {
+				drawXAxisPoints(canvas, tileBox);
+				LatLon highlightedPoint = trackChartPoints.getHighlightedPoint();
+				if (highlightedPoint != null
+						&& highlightedPoint.getLatitude() >= latlonRect.bottom
+						&& highlightedPoint.getLatitude() <= latlonRect.top
+						&& highlightedPoint.getLongitude() >= latlonRect.left
+						&& highlightedPoint.getLongitude() <= latlonRect.right) {
+					float x = tileBox.getPixXFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
+					float y = tileBox.getPixYFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
+					canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIconSelected);
+				}
+			}
 		}
 	
+	}
+
+	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
+		QuadRect latLonBounds = tileBox.getLatLonBounds();
+		List<WptPt> xAxisPoints = trackChartPoints.getXAxisPoints();
+		float r = 3 * tileBox.getDensity();
+		for (int i = 0; i < xAxisPoints.size(); i++) {
+			WptPt axisPoint = xAxisPoints.get(i);
+			if (axisPoint.getLatitude() >= latLonBounds.bottom
+					&& axisPoint.getLatitude() <= latLonBounds.top
+					&& axisPoint.getLongitude() >= latLonBounds.left
+					&& axisPoint.getLongitude() <= latLonBounds.right) {
+				float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
+				float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
+				canvas.drawCircle(x, y, r + 2 * (float) Math.ceil(tileBox.getDensity()), paintGridOuterCircle);
+				canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintGridCircle);
+			}
+		}
 	}
 	
 	@Override

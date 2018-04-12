@@ -100,7 +100,7 @@
       "longitude": 35.49527125060558
     },
     "expectedResults": {
-      "26717": "C:+C,TSLL|C|C",
+      "26717": "C:C,TSLL|+C|C",
       "26821": "TSLL:+TSLL,C|C|C",
       "29088": "C|C|C|C|+C"
     }
@@ -494,6 +494,7 @@
       "longitude": 35.5013644695282
     },
     "expectedResults": {
+      "61820398":"C|+C|+C|+C|TSLR|TSLR",
       "4400154": "C|C|+TSLR,C|+TSLR|+TSLR"
     }
   },
@@ -593,7 +594,7 @@
       "longitude": 35.66181853413579
     },
     "expectedResults": {
-      "222244": "TL|TL|+C",
+      "222244": "TL|TL|+C,TR",
       "222243": "TL|TL|+C|C|TSLR",
       "222164": "TL|TL|+C|C"
     }
@@ -610,6 +611,66 @@
     },
     "expectedResults": {
       "320168795": "C,TL|+TR"
+    }
+  },
+  {
+    "testName": "34.Semmering-Schnellstraße TL Wiener Straße",
+    "startPoint": {
+      "latitude": 45.60877412952071,
+      "longitude": 35.41727355122569
+    },
+    "endPoint": {
+      "latitude": 45.60809863951456,
+      "longitude": 35.43970754742625
+    },
+    "expectedResults": {
+      "32486314": "C|C|+TSLR"
+    }
+  },
+  {
+    "testName": "35.B 22 TR NEW 41",
+    "params": {
+      "vehicle": "car",
+      "short_way": "true"
+    },
+    "startPoint": {
+      "latitude": 45.61344391190965,
+      "longitude": 35.47873288392847
+    },
+    "endPoint": {
+      "latitude": 45.60452753118045,
+      "longitude": 35.47435551881617
+    },
+    "expectedResults": {
+      "84975049": "TL|+TR,C"
+    }
+  },
+  {
+    "testName": "36.Bierweg TR Äußere Bayreuther Straße (B 2) ",
+    "startPoint": {
+      "latitude": 45.61486172708771,
+      "longitude": 35.50859335064885
+    },
+    "endPoint": {
+      "latitude": 45.61364315690609,
+      "longitude": 35.51007661223409
+    },
+    "expectedResults": {
+      "35361252": "TL|+TR,C"
+    }
+  },
+  {
+    "testName": "37.Lingener Straße TR Osttangente",
+    "startPoint": {
+      "latitude": 45.61665251148337,
+      "longitude": 35.534761190414315
+    },
+    "endPoint": {
+      "latitude": 45.6152041541823,
+      "longitude": 35.53729453682888
+    },
+    "expectedResults": {
+      "75576478": "TL|C|C|+TR"
     }
   }
 

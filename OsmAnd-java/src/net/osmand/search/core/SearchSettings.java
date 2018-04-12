@@ -1,22 +1,25 @@
 package net.osmand.search.core;
 
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.LatLon;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.LatLon;
-
 // immutable object
 public class SearchSettings {
-	
+
 	private LatLon originalLocation;
 	private List<BinaryMapIndexReader> offlineIndexes = new ArrayList<>();
 	private int radiusLevel = 1;
 	private int totalLimit = -1;
 	private String lang;
 	private boolean transliterateIfMissing;
-	
+	private ObjectType[] searchTypes;
+	private boolean emptyQueryAllowed;
+	private boolean sortByName;
+
 	public SearchSettings(SearchSettings s) {
 		if(s != null) {
 			this.radiusLevel = s.radiusLevel;
@@ -24,6 +27,9 @@ public class SearchSettings {
 			this.totalLimit = s.totalLimit;
 			this.offlineIndexes = s.offlineIndexes;
 			this.originalLocation = s.originalLocation;
+			this.searchTypes = s.searchTypes;
+			this.emptyQueryAllowed = s.emptyQueryAllowed;
+			this.sortByName = s.sortByName;
 		}
 	}
 	
@@ -85,5 +91,54 @@ public class SearchSettings {
 		return transliterateIfMissing;
 	}
 
+	public ObjectType[] getSearchTypes() {
+		return searchTypes;
+	}
 
+	public boolean isCustomSearch() {
+		return searchTypes != null;
+	}
+
+	public SearchSettings setSearchTypes(ObjectType... searchTypes) {
+		SearchSettings s = new SearchSettings(this);
+		s.searchTypes = searchTypes;
+		return s;
+	}
+
+	public SearchSettings resetSearchTypes() {
+		SearchSettings s = new SearchSettings(this);
+		s.searchTypes = null;
+		return s;
+	}
+
+	public boolean isEmptyQueryAllowed() {
+		return emptyQueryAllowed;
+	}
+
+	public SearchSettings setEmptyQueryAllowed(boolean emptyQueryAllowed) {
+		SearchSettings s = new SearchSettings(this);
+		s.emptyQueryAllowed = emptyQueryAllowed;
+		return s;
+	}
+
+	public boolean isSortByName() {
+		return sortByName;
+	}
+
+	public SearchSettings setSortByName(boolean sortByName) {
+		SearchSettings s = new SearchSettings(this);
+		s.sortByName = sortByName;
+		return s;
+	}
+
+	public boolean hasCustomSearchType(ObjectType type) {
+		if (searchTypes != null) {
+			for (ObjectType t : searchTypes) {
+				if (t == type) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

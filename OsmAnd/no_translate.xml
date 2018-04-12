@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="app_name">OsmAnd~</string>
-    <string name="app_name_free">OsmAndF~</string>
-    <string name="app_version">2.6.0</string>
-    <!--
-    Note: For our dev build apk's, the above "app_version" is provided (via osmand/build.xml) as the base version prefix to our build number in the format:
-             X.X.X#YYYYZ , where
-             X.X.X         is the above base (released) "app_version",
-                   YYYY    is the build number of build branch Z
-                       Z : M=-master, D=-main-default, B=-Blackberry, Des=-design, MQA=-main-qt-arm, MQDA=-main-qt-default-arm, S=-sherpafy
-    -->
+    <string name="app_name_free">OsmAnd Nightly</string>
+    <!-- string name="app_version_suffix"></string -->
 
     <!-- Not translatable -->
-    <string name="full_version_price">€5,99</string>
-    <string name="osm_live">OSM Live (Beta)</string>
+    <string name="full_version_price">€7,99</string>
+    <string name="osm_live">OsmAnd Live</string>
     <string name="ga_api_key">UA-28342846-2</string>
     <string name="ga_dispatchPeriod">10</string>
     <string name="ga_debug">true</string>
     <string name="versionFeatures">+play_market -amazon -blackberry</string>
-    <string name="openstreetmap_copyright"><a href="http://www.openstreetmap.org/copyright">&#169; OpenStreetMap</a></string>
+    <string name="openstreetmap_copyright"><a href="https://www.openstreetmap.org/copyright">&#169; OpenStreetMap</a></string>
     <string name="app_edition"></string>
     <string name="support_email">support@osmand.net</string>
     <string name="preferred_locale_no_translate">Display language</string>
@@ -33,5 +26,11 @@
     <string name="twitter_address">https://twitter.com/osmandapp</string>
     <string name="facebook_address">https://www.facebook.com/osmandapp</string>
     <string name="vk_address">https://vk.com/osmandapp</string>
-
+    <string name="default_changeset_add">Add</string>
+    <string name="default_changeset_edit">Edit</string>
+    <string name="default_changeset_delete">Delete</string>
+    <string name="default_changeset_reopen">Reopen</string>
+    <string name="items_modified">items modified</string>
+    <string name="osmand_unlimited">OsmAnd Unlimited</string>
+    <string name="markers">Markers</string>
 </resources>

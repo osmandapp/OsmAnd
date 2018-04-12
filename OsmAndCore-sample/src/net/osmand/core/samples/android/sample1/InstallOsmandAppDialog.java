@@ -39,7 +39,7 @@ public class InstallOsmandAppDialog extends AppCompatDialogFragment {
 		view.findViewById(R.id.install_osmand_btn).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				boolean success = execOsmAndInstall("market://search?q=pname:");
+				boolean success = execOsmAndInstall("market://details?id=");
 				if (!success) {
 					success = execOsmAndInstall("https://play.google.com/store/apps/details?id=");
 				}

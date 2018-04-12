@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:installLocation="auto"
-	android:versionName="@string/app_version"
-	android:versionCode="240"
 	package="net.osmand.plus">
 
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -41,8 +39,9 @@
 	<uses-feature android:name="android.hardware.bluetooth" android:required="false" />
 	<uses-feature android:name="com.sec.feature.spen_usp" android:required="false"/>
 
-	<uses-sdk android:targetSdkVersion="21" android:minSdkVersion="9"
-		tools:overrideLibrary="com.getkeepsafe.taptargetview"/>
+<!-- com.getkeepsafe.taptargetview, studio.carbonylgroup.textfieldboxes, android.support.customtabs -->
+	<uses-sdk android:targetSdkVersion="23" android:minSdkVersion="15"
+		tools:overrideLibrary=""/>
 
 	<supports-screens android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true"
 		android:xlargeScreens="true" android:anyDensity="true" />
@@ -50,7 +49,7 @@
 
 	<!-- android:theme="@style/OsmandLightDarkActionBarTheme" -->
 	<application android:allowBackup="true" android:backupAgent="net.osmand.plus.OsmandBackupAgent"
-		android:icon="@drawable/icon" android:label="@string/app_name"
+		android:icon="@mipmap/icon" android:label="@string/app_name"
 		android:name="net.osmand.plus.OsmandApplication" android:configChanges="locale"
 		android:theme="@style/OsmandDarkTheme" android:restoreAnyVersion="true" android:largeHeap="true">
 
@@ -60,8 +59,8 @@
 		<meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H" android:resource="@dimen/app_defaultsize_h" android:value="" />
 		<meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W" android:resource="@dimen/app_minimumsize_w" android:value="" />
 		<meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H" android:resource="@dimen/app_minimumsize_h" android:value="" />
-		<meta-data android:name="com.sec.minimode.icon.portrait.normal" android:resource="@drawable/icon" android:value="" />
-		<meta-data android:name="com.sec.minimode.icon.landscape.normal" android:resource="@drawable/icon" android:value="" />
+		<meta-data android:name="com.sec.minimode.icon.portrait.normal" android:resource="@mipmap/icon" android:value="" />
+		<meta-data android:name="com.sec.minimode.icon.landscape.normal" android:resource="@mipmap/icon" android:value="" />
         <activity android:name="net.osmand.plus.activities.HelpActivity" />
         <activity android:name="net.osmand.plus.activities.ExitActivity" />
         
@@ -75,8 +74,9 @@
                 android:resource="@xml/paths" />
         </provider>
 
-		<activity android:name="net.osmand.plus.activities.MapActivity" android:label="@string/app_name"
+		<activity android:name="net.osmand.plus.activities.MapActivity" android:label="@string/app_name" android:theme="@style/FirstSplashScreenPlus"
 			android:screenOrientation="unspecified" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize">
+
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
 				<action android:name="android.intent.action.SEND" />
@@ -103,7 +103,7 @@
 				<category android:name="android.intent.category.CAR_DOCK" />
 				<category android:name="android.intent.category.DESK_DOCK" />
 			</intent-filter>
-			
+
 			<intent-filter>
 				<data android:scheme="https" />
 				<data android:host="osmand.net" />
@@ -116,7 +116,7 @@
 				<category android:name="android.intent.category.CAR_DOCK" />
 				<category android:name="android.intent.category.DESK_DOCK" />
 			</intent-filter>
-			
+
 
 			<!-- android matches non-greedy : http://stackoverflow.com/questions/3400072/pathpattern-to-match-file-extension-does-not-work-if-a-period-exists-elsewhere-i-->
 			<!-- mimeType&host are both needed or you will either have unwanted matching or no match when needed -->
@@ -133,6 +133,16 @@
 				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\.kml" />
 				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\.kml" />
 				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\..*\\.kml" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\.kmz" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\.kmz" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\.kmz" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\.kmz" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\..*\\.kmz" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\.obf" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\.obf" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\.obf" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\.obf" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\..*\\.obf" />
 			</intent-filter>
 
 			<!--trying to handle emails-->
@@ -171,7 +181,6 @@
 		<activity android:name="net.osmand.plus.activities.SettingsNavigationActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.monitoring.SettingsMonitoringActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.rastermaps.SettingsRasterMapsActivity" android:configChanges="keyboardHidden|orientation" />
-		<activity android:name="net.osmand.plus.routepointsnavigation.RoutePointsActivity" />
 
 		<activity android:name="net.osmand.plus.osmedit.SettingsOsmEditingActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.development.SettingsDevelopmentActivity" android:configChanges="keyboardHidden|orientation" />
@@ -225,8 +234,14 @@
 				<data android:scheme="https" />
 				<data android:host="maps.yandex.ru" />
 				<data android:host="maps.yandex.com" />
-				<data android:host="www.openstreetmap.org" />
-				<data android:host="openstreetmap.org" />
+				<data android:host="www.openstreetmap.org" android:path="/"/> <!-- catches /#map=... -->
+				<data android:host="www.openstreetmap.org" android:pathPrefix="/query"/>
+				<data android:host="www.openstreetmap.org" android:pathPrefix="/go"/>
+				<data android:host="www.openstreetmap.org" android:pathPrefix="/search"/>
+				<data android:host="openstreetmap.org" android:path="/"/> <!-- catches /#map=... -->
+				<data android:host="openstreetmap.org" android:pathPrefix="/query"/>
+				<data android:host="openstreetmap.org" android:pathPrefix="/go"/>
+				<data android:host="openstreetmap.org" android:pathPrefix="/search"/>
 				<data android:host="osm.org" />
 				<data android:host="map.baidu.cn" />
 				<data android:host="map.baidu.com" />
@@ -711,6 +726,13 @@
 			android:stopWithTask="false">
 			<intent-filter>
 				<action android:name="net.osmand.plus.NavigationService" />
+			</intent-filter>
+		</service>
+
+		<service android:name="net.osmand.aidl.OsmandAidlService" android:exported="true" >
+			<intent-filter>
+				<action android:name="net.osmand.aidl.OsmandAidlService"/>
+				<category android:name="android.intent.category.DEFAULT"/>
 			</intent-filter>
 		</service>
 

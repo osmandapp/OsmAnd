@@ -171,6 +171,14 @@ public class GeoPointParserUtil {
 		assertGeoPoint(actual, new GeoParsedPoint(qstr));
 		assertUrlEquals(url, actual.getGeoUriString());
 
+		// geo:?q=Paris
+		qstr = "Paris";
+		url = "geo:?q=" + URLEncoder.encode(qstr);
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qstr));
+		assertUrlEquals("geo:0,0?q=" + URLEncoder.encode(qstr), actual.getGeoUriString());
+
 		// geo:0,0?q=760 West Genesee Street Syracuse NY 13204
 		qstr = "760 West Genesee Street Syracuse NY 13204";
 		url = "geo:0,0?q=" + qstr;
@@ -220,6 +228,16 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
+		url = "http://www.openstreetmap.org/search?query=" + qlat + "%2C" + qlon;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qlat, qlon));
+
+		url = "http://www.openstreetmap.org/search?query=" + qlat + "%20" + qlon;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qlat, qlon));
+
 		// http://download.osmand.net/go?lat=34.99393&lon=-106.61568&z=11
 		url = "http://download.osmand.net/go?lat=" + dlat + "&lon=" + dlon + "&z=" + z;
 		System.out.println("url: " + url);
@@ -233,6 +251,11 @@ public class GeoPointParserUtil {
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, -Math.abs(dlon)));
 
 		url = "http://maps.google.com/maps?f=d&saddr=" + dlat +"," +dlon +"&daddr=" +dlat +"," +dlon+"&hl=en"; 
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
+		
+		url = "http://maps.google.com/maps?f=d&saddr=My+Location&daddr=" +dlat +"," +dlon+"&hl=en"; 
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
@@ -261,21 +284,21 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// http://openstreetmap.org/#map=11/34/-106
+		// https://openstreetmap.org/#map=11/34/-106
 		z = 11;
-		url = "http://openstreetmap.org/#map=" + z + "/" + ilat + "/" + ilon;
+		url = "https://openstreetmap.org/#map=" + z + "/" + ilat + "/" + ilon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
-		// http://openstreetmap.org/#map=11/34.99393/-106.61568
-		url = "http://openstreetmap.org/#map=" + z + "/" + dlat + "/" + dlon;
+		// https://openstreetmap.org/#map=11/34.99393/-106.61568
+		url = "https://openstreetmap.org/#map=" + z + "/" + dlat + "/" + dlon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// http://openstreetmap.org/#11/34.99393/-106.61568
-		url = "http://openstreetmap.org/#" + z + "/" + dlat + "/" + dlon;
+		// https://openstreetmap.org/#11/34.99393/-106.61568
+		url = "https://openstreetmap.org/#" + z + "/" + dlat + "/" + dlon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
@@ -295,53 +318,53 @@ public class GeoPointParserUtil {
 
 		// https://wiki.openstreetmap.org/wiki/Shortlink
 
-		// http://osm.org/go/TyFSutZ-?m=
+		// https://osm.org/go/TyFSutZ-?m=
 		// https://www.openstreetmap.org/?mlat=34.993933029174805&mlon=-106.61568069458008#map=15/34.99393/-106.61568
 		z = 15;
-		url = "http://osm.org/go/TyFYuF6P--?m=";
+		url = "https://osm.org/go/TyFYuF6P--?m=";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertApproximateGeoPoint(actual, new GeoParsedPoint(longLat, longLon, z));
 
-		// http://osm.org/go/TyFS--
-		// http://www.openstreetmap.org/#map=3/34.99/-106.70
+		// https://osm.org/go/TyFS--
+		// https://www.openstreetmap.org/#map=3/34.99/-106.70
 		z = 3;
-		url = "http://osm.org/go/TyFS--";
+		url = "https://osm.org/go/TyFS--";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertApproximateGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// http://osm.org/go/TyFYuF6P~~-?m // current shortlink format with "~"
+		// https://osm.org/go/TyFYuF6P~~-?m // current shortlink format with "~"
 		// https://www.openstreetmap.org/?mlat=34.993933029174805&mlon=-106.61568069458008#map=15/34.99393/-106.61568
 		z = 20;
-		url = "http://osm.org/go/TyFYuF6P~~-?m";
+		url = "https://osm.org/go/TyFYuF6P~~-?m";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertApproximateGeoPoint(actual, new GeoParsedPoint(longLat, longLon, z));
 
-		// http://osm.org/go/TyFYuF6P@@--?m= // old, deprecated shortlink format with "@"
+		// https://osm.org/go/TyFYuF6P@@--?m= // old, deprecated shortlink format with "@"
 		// https://www.openstreetmap.org/?mlat=34.993933029174805&mlon=-106.61568069458008#map=15/34.99393/-106.61568
 		z = 21;
-		url = "http://osm.org/go/TyFYuF6P@@--?m=";
+		url = "https://osm.org/go/TyFYuF6P@@--?m=";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertApproximateGeoPoint(actual, new GeoParsedPoint(longLat, longLon, z));
 
-		// http://openstreetmap.de/zoom=11&lat=34&lon=-106
+		// https://openstreetmap.de/zoom=11&lat=34&lon=-106
 		z = 11;
-		url = "http://openstreetmap.de/zoom=" + z + "&lat=" + ilat + "&lon=" + ilon;
+		url = "https://openstreetmap.de/zoom=" + z + "&lat=" + ilat + "&lon=" + ilon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
-		// http://openstreetmap.de/zoom=11&lat=34.99393&lon=-106.61568
-		url = "http://openstreetmap.de/zoom=" + z + "&lat=" + dlat + "&lon=" + dlon;
+		// https://openstreetmap.de/zoom=11&lat=34.99393&lon=-106.61568
+		url = "https://openstreetmap.de/zoom=" + z + "&lat=" + dlat + "&lon=" + dlon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// http://openstreetmap.de/lat=34.99393&lon=-106.61568&zoom=11
-		url = "http://openstreetmap.de/lat=" + dlat + "&lon=" + dlon + "&zoom=" + z;
+		// https://openstreetmap.de/lat=34.99393&lon=-106.61568&zoom=11
+		url = "https://openstreetmap.de/lat=" + dlat + "&lon=" + dlon + "&zoom=" + z;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
@@ -363,6 +386,12 @@ public class GeoPointParserUtil {
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
+		
+		// https://maps.google.com/maps?q=loc:-21.8835112,-47.7838932 (Name)
+		url = "https://maps.google.com/maps?q=loc:" + dlat + "," + dlon + " (Name)" ;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
 
 		// http://maps.google.com/maps/ll=34.99393,-106.61568,z=11
 		url = "http://maps.google.com/maps/ll=" + dlat + "," + dlon + ",z=" + z;
@@ -548,6 +577,20 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(qstr));
 
+		// http://www.openstreetmap.org/search?query=Amsterdam
+		qstr = "Amsterdam";
+		url = "http://www.openstreetmap.org/search?query=" + URLEncoder.encode(qstr);
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qstr));
+
+		// http://www.openstreetmap.org/search?query=Bloemstraat+51A,+Amsterdam
+		qstr = "Bloemstraat 51A, Amsterdam";
+		url = "http://www.openstreetmap.org/search?query=" + URLEncoder.encode(qstr);
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qstr.replace(',',' ')));
+
 		// http://maps.google.com/maps?daddr=760+West+Genesee+Street+Syracuse+NY+13204
 		qstr = "760 West Genesee Street Syracuse NY 13204";
 		url = "http://www.google.com/maps?daddr=" + URLEncoder.encode(qstr);
@@ -645,13 +688,13 @@ public class GeoPointParserUtil {
 
 		String urls[] = {
 				"https://openstreetmap.org/go/0LQ127-?m",
-				"http://osm.org/go/0LQ127-?m",
-				"http://osm.org/go/0EEQjE==",
-				"http://osm.org/go/0EEQjEEb",
-				"http://osm.org/go/0EE~jEEb",
-				"http://osm.org/go/0EE@jEEb",
-				"http://osm.org/go/~~~~",
-				"http://osm.org/go/@@@@",
+				"https://osm.org/go/0LQ127-?m",
+				"https://osm.org/go/0EEQjE==",
+				"https://osm.org/go/0EEQjEEb",
+				"https://osm.org/go/0EE~jEEb",
+				"https://osm.org/go/0EE@jEEb",
+				"https://osm.org/go/~~~~",
+				"https://osm.org/go/@@@@",
 				"https://www.openstreetmap.org/#map=0/0/0",
 				"https://www.openstreetmap.org/#map=0/180/180",
 				"https://www.openstreetmap.org/#map=0/-180/-180",
@@ -907,6 +950,7 @@ public class GeoPointParserUtil {
 						double lat = 0;
 						double lon = 0;
 						int zoom = GeoParsedPoint.NO_ZOOM;
+						Map<String, String> queryMap = getQueryParameters(uri);
 						if (fragment != null) {
 							if (fragment.startsWith("map=")) {
 								fragment = fragment.substring("map=".length());
@@ -916,6 +960,19 @@ public class GeoPointParserUtil {
 								zoom = parseZoom(vls[0]);
 								lat = parseSilentDouble(vls[1]);
 								lon = parseSilentDouble(vls[2]);
+							}
+						} else if (queryMap != null) {
+							String queryStr = queryMap.get("query");
+							if (queryStr != null) {
+								queryStr = queryStr.replace("+", " ").replace(",", " ");
+								String[] vls = queryStr.split(" ");
+								if (vls.length == 2) {
+									lat = parseSilentDouble(vls[0]);
+									lon = parseSilentDouble(vls[1]);
+								}
+								if (lat == 0 || lon == 0) {
+									return new GeoParsedPoint(queryStr);
+								}
 							}
 						}
 						// the query string sometimes has higher resolution values
@@ -1198,11 +1255,12 @@ public class GeoPointParserUtil {
 			final Pattern positionPattern = Pattern.compile(
 					"([+-]?\\d+(?:\\.\\d+)?),\\s?([+-]?\\d+(?:\\.\\d+)?)");
 			final Matcher positionMatcher = positionPattern.matcher(positionPart);
-			if (!positionMatcher.find()) {
-				return null;
+			double lat = 0.0;
+			double lon = 0.0;
+			if (positionMatcher.find()) {
+				lat = Double.valueOf(positionMatcher.group(1));
+				lon = Double.valueOf(positionMatcher.group(2));
 			}
-			double lat = Double.valueOf(positionMatcher.group(1));
-			double lon = Double.valueOf(positionMatcher.group(2));
 
 			int zoom = GeoParsedPoint.NO_ZOOM;
 			String searchRequest = null;
@@ -1331,7 +1389,7 @@ public class GeoPointParserUtil {
 	}
 
 	public static class GeoParsedPoint {
-		private static final int NO_ZOOM = -1;
+		public static final int NO_ZOOM = -1;
 
 		private double lat = 0;
 		private double lon = 0;

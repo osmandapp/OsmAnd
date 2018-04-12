@@ -1,20 +1,7 @@
 package net.osmand.plus.osmedit;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.text.MessageFormat;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import android.util.Xml;
+import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -37,8 +24,23 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
-import android.util.Xml;
-import android.widget.Toast;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
@@ -222,7 +224,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 		for (String k : n.getTagKeySet()) {
 			String val = n.getTag(k);
-			if (val.length() == 0 || k.length() == 0 || "poi_type_tag".equals(k))
+			if (val.length() == 0 || k.length() == 0 || EditPoiData.POI_TYPE_TAG.equals(k) ||
+					k.startsWith(EditPoiData.REMOVE_TAG_PREFIX) || k.contains(EditPoiData.REMOVE_TAG_PREFIX))
 				continue;
 			ser.startTag(null, "tag"); //$NON-NLS-1$
 			ser.attribute(null, "k", k); //$NON-NLS-1$
@@ -249,7 +252,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	@Override
 	public Node commitNodeImpl(OsmPoint.Action action, final Node n, EntityInfo info, String comment,
-			boolean closeChangeSet) {
+							   boolean closeChangeSet, Set<String> changedTags) {
 		if (isNewChangesetRequired()) {
 			changeSetId = openChangeSet(comment);
 			changeSetTimeStamp = System.currentTimeMillis();
@@ -323,15 +326,25 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 					getSiteApi() + "api/0.6/node/" + nodeId, "GET", null, ctx.getString(R.string.loading_poi_obj) + nodeId, false); //$NON-NLS-1$ //$NON-NLS-2$
 			if (res != null) {
 				OsmBaseStorage st = new OsmBaseStorage();
+				st.setConvertTagsToLC(false);
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
 				EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
 				Node entity = (Node) st.getRegisteredEntities().get(id);
 				// merge non existing tags
-				for (String rtag : entity.getTagKeySet()) {
-					if (!n.getTagKeySet().contains(rtag)) {
-						n.putTag(rtag, entity.getTag(rtag));
+				Map<String, String> updatedTags = new HashMap<>();
+				for (String tagKey : entity.getTagKeySet()) {
+					if (tagKey != null && !deletedTag(n, tagKey)) {
+						addIfNotNull(tagKey, entity.getTag(tagKey), updatedTags);
 					}
 				}
+				if (n.getChangedTags() != null) {
+					for (String tagKey : n.getChangedTags()) {
+						if (tagKey != null) {
+							addIfNotNull(tagKey, n.getTag(tagKey), updatedTags);
+						}
+					}
+				}
+				n.replaceTags(updatedTags);
 				if(MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) < 10) {
 					// avoid shifting due to round error
 					n.setLatitude(entity.getLatitude());
@@ -350,6 +363,16 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return null;
 	}
 
+	private void addIfNotNull(String key, String value, Map<String, String> tags) {
+		if (value != null) {
+			tags.put(key, value);
+		}
+	}
+
+	private boolean deletedTag(Node node, String tag) {
+		return node.getTagKeySet().contains(EditPoiData.REMOVE_TAG_PREFIX + tag);
+	}
+
 	@Override
 	public Node loadNode(Amenity n) {
 		if (n.getId() % 2 == 1) {
@@ -362,6 +385,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 					getSiteApi() + "api/0.6/node/" + nodeId, "GET", null, ctx.getString(R.string.loading_poi_obj) + nodeId, false); //$NON-NLS-1$ //$NON-NLS-2$
 			if (res != null) {
 				OsmBaseStorage st = new OsmBaseStorage();
+				st.setConvertTagsToLC(false);
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
 				EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
 				Node entity = (Node) st.getRegisteredEntities().get(id);
@@ -372,7 +396,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 					PoiType poiType = n.getType().getPoiTypeByKeyName(n.getSubType());
 					if(poiType.getOsmValue().equals(entity.getTag(poiType.getOsmTag()))) {
 						entity.removeTag(poiType.getOsmTag());
-						entity.putTag(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
+						entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
 					} else {
 						// later we could try to determine tags
 					}

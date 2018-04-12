@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:background="@color/keyboard_item_dark_bg">
+
+    <View
+        android:id="@+id/keyboard_item_top_spacing"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.25"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/keyboard_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:textAllCaps="true"
+        tools:text="3"/>
+
+    <View
+        android:id="@+id/keyboard_item_bottom_spacing"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.25"/>
+
+    <ImageView
+        android:id="@+id/keyboard_item_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:scaleType="center"
+        tools:src="@drawable/ic_action_backspace_fill"/>
+
+</LinearLayout>

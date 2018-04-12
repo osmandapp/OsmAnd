@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
@@ -29,6 +30,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.PoiUploaderType;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -68,16 +70,11 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			OsmPoint point = loadErrorsMap.keySet().iterator().next();
 			String message = loadErrorsMap.get(point);
 			if (message.equals(activity.getString(R.string.auth_failed))) {
-				SendPoiDialogFragment dialogFragment =
-						SendPoiDialogFragment.createInstance(new OsmPoint[]{point});
+				SendPoiDialogFragment dialogFragment;
 				if (activity instanceof MapActivity) {
-					dialogFragment.setPoiUploader(new SendPoiDialogFragment.SimpleProgressDialogPoiUploader() {
-						@NonNull
-						@Override
-						protected MapActivity getMapActivity() {
-							return (MapActivity) activity;
-						}
-					});
+					dialogFragment = SendPoiDialogFragment.createInstance(new OsmPoint[]{point}, PoiUploaderType.SIMPLE);
+				} else {
+					dialogFragment = SendPoiDialogFragment.createInstance(new OsmPoint[]{point}, PoiUploaderType.FRAGMENT);
 				}
 				dialogFragment.show(activity.getSupportFragmentManager(), "error_loading");
 			} else {
@@ -106,7 +103,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 		dialog.show(activity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
 				dialog, helper, plugin, toUpload.length, false, false);
-		uploadTask.execute(toUpload);
+		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toUpload);
 	}
 
 	public static final class UploadingErrorDialogFragment extends DialogFragment {

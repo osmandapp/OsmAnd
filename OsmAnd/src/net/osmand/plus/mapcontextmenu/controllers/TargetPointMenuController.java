@@ -9,6 +9,7 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.Algorithms;
 
@@ -78,7 +79,7 @@ public class TargetPointMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		if (targetPoint.start) {
 			return getIconOrig(R.drawable.list_startpoint);
 		} else if (!targetPoint.intermediate) {

@@ -31,6 +31,23 @@ public class PlatformUtil {
 			this.fullName = name;
 			this.name = fullName.substring(fullName.lastIndexOf('.') + 1);
 		}
+		
+		@Override
+		public void trace(Object message) {
+			if(isTraceEnabled()){
+				android.util.Log.d(TAG, name + " " + message); //$NON-NLS-1$
+			}
+		}
+		
+		@Override
+		public void trace(Object message, Throwable t) {
+			if(isTraceEnabled()){
+				android.util.Log.d(TAG, name + " " + message, t); //$NON-NLS-1$
+			}
+		}
+
+		
+		
 		@Override
 		public void debug(Object message) {
 			if(isDebugEnabled()){
@@ -87,11 +104,18 @@ public class PlatformUtil {
 				android.util.Log.i(TAG, name + " " + message, t); //$NON-NLS-1$
 			}
 		}
+		
+		@Override
+		public boolean isTraceEnabled() {
+			return android.util.Log.isLoggable(TAG, android.util.Log.VERBOSE);
+		}
+
+
 
 		@Override
 		public boolean isDebugEnabled() {
-			// For debur purposes always true
-//			return android.util.Log.isLoggable(NATIVE_TAG, android.util.Log.DEBUG);
+			// For debug purposes always true
+			// return android.util.Log.isLoggable(TAG, android.util.Log.DEBUG);
 			return true;
 		}
 

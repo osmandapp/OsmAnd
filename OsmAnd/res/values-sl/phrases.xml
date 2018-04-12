@@ -22,8 +22,8 @@
 	<string name="poi_deli">Delikatesa</string>
 	<string name="poi_transportation">Prevozi</string>
 		<string name="poi_road_obstacle">Ovire na cesti</string>
-		<string name="poi_filling_station">Bencinski servisi</string>
-		<string name="poi_shop_food">Trgovine z živili</string>
+		<string name="poi_filling_station">Bencinski servis</string>
+		<string name="poi_shop_food">Trgovina z živili</string>
 	<string name="poi_personal_transport">Zasebni prevozi</string>
 		<string name="poi_public_transport">Javni prevozi</string>
 		<string name="poi_air_transport">Letališča</string>
@@ -104,7 +104,7 @@
 	<string name="poi_telephone">Telefonska govorilnica</string>
 	<string name="poi_vineyard">Vinograd</string>
 	<string name="poi_observatory">Observatorij</string>
-	<string name="poi_astronomical_observatory">Astronomski observatorij</string>
+	<string name="poi_astronomical_observatory">Astronomski</string>
 	<string name="poi_tower">Stolp</string>
 	<string name="poi_radar">Radar</string>
 	<string name="poi_windmill">Mlin na veter</string>
@@ -380,7 +380,7 @@
 	<string name="poi_internet_access_service">Internetni dostop: storitev</string>
 	
 	<string name="poi_monastery">Samostan</string>
-	<string name="poi_information">Turistične informacije</string>
+	<string name="poi_information">Informacije</string>
 	<string name="poi_clock">Ura</string>
 	<string name="poi_travel_agent">Potovalna agencija</string>
 	<string name="poi_viewpoint">Razgledna točka</string>
@@ -410,12 +410,12 @@
 	<string name="poi_fashion">Modna trgovina</string>
 	<string name="poi_entrance_exit">Izhod</string>
 
-	<string name="poi_barrier_entrance">Vhod</string>
+	<string name="poi_barrier_entrance">Prehod v zidu ali ograji</string>
 	<string name="poi_entrance_main">Glavni vhod</string>
 	<string name="poi_entrance">Vhod</string>
 	<string name="poi_hiking_routes">Pohodniške poti</string>
-		<string name="poi_fuel_type">Vrsta</string>
-	<string name="poi_fuel_avia_type">Vrsta</string>
+		<string name="poi_fuel_type">Vrsta goriva</string>
+	<string name="poi_fuel_avia_type">Vrsta goriva (avia)</string>
 	<string name="poi_payment_type">Način plačila</string>
 	<string name="poi_internet_access_type">Vrsta dostopa do interneta</string>
 	<string name="poi_bicycle_service">Servis koles</string>
@@ -426,4 +426,12 @@
 	<string name="poi_payment_toll_type">Vrsta plačila</string>
 	<string name="poi_traffic_signals_sound">Zvok</string>
 	<string name="poi_highway_crossing_type">Vrsta</string>
+	<string name="poi_payment_fuel_type">Kartice za gorivo</string>
+	<string name="poi_additional_type">Dodatno</string>
+	<string name="poi_vending_type">Vrsta avtomata</string>
+	<string name="poi_fire_hydrant_position">Položaj</string>
+	<string name="poi_parking_type">Vrsta</string>
+	<string name="poi_electricity_combined_charging">Polnilna postaja</string>
+	<string name="poi_charging_station_filter">Polnilna postaja</string>
+
 	</resources>

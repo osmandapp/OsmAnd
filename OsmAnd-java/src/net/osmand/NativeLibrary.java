@@ -20,6 +20,7 @@ import java.util.Map;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -115,8 +116,8 @@ public class NativeLibrary {
 		return getRouteDataObjects(rs.region.routeReg, rs.nativeHandler, x31, y31);
 	}
 
-	public boolean initMapFile(String filePath) {
-        return initBinaryMapFile(filePath);
+	public boolean initMapFile(String filePath, boolean useLive) {
+        return initBinaryMapFile(filePath, useLive);
 	}
 
 	public boolean initCacheMapFile(String filePath) {
@@ -159,7 +160,7 @@ public class NativeLibrary {
 
 	protected static native void deleteSearchResult(long searchResultHandle);
 
-	protected static native boolean initBinaryMapFile(String filePath);
+	protected static native boolean initBinaryMapFile(String filePath, boolean useLive);
 
 	protected static native boolean initCacheMapFiles(String filePath);
 
@@ -333,7 +334,7 @@ public class NativeLibrary {
 		});
 		for(File f : lst) {
 			final String name = f.getName();
-			if(!name.endsWith(".ttf")) {
+			if(!name.endsWith(".ttf") && !name.endsWith(".otf")) {
 				continue;
 			}
 			try {
@@ -360,6 +361,7 @@ public class NativeLibrary {
 		private String iconRes;
 		private int order;
 		private boolean visible;
+		private LatLon labelLatLon;
 		
 		public Map<String, String> getTags() {
 			return tags;
@@ -371,6 +373,14 @@ public class NativeLibrary {
 		
 		public int getOrder() {
 			return order;
+		}
+		
+		public void setLabelLatLon(LatLon labelLatLon) {
+			this.labelLatLon = labelLatLon;
+		}
+		
+		public LatLon getLabelLatLon() {
+			return labelLatLon;
 		}
 		
 		public void setOrder(int order) {

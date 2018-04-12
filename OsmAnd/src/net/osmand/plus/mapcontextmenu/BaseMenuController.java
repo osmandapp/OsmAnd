@@ -51,7 +51,7 @@ public abstract class BaseMenuController {
 	}
 
 	public float getHalfScreenMaxHeightKoef() {
-		return .7f;
+		return .75f;
 	}
 
 	public int getSlideInAnimation() {

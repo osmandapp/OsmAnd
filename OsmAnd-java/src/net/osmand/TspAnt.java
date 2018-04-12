@@ -1,11 +1,11 @@
 package net.osmand;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
 import net.osmand.data.LatLon;
 import net.osmand.util.MapUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 /*
  *  === Implementation of ant swarm TSP solver. ===
  *  
@@ -106,10 +106,13 @@ public class TspAnt {
     // Allocates all memory.
     // Adds 1 to edge lengths to ensure no zero length edges.
     public TspAnt readGraph(List<LatLon> intermediates, LatLon start, LatLon end) {
+        boolean keepEndPoint = end != null;
     	List<LatLon> l = new ArrayList<LatLon>();
     	l.add(start);
     	l.addAll(intermediates);
-    	l.add(end);
+        if (keepEndPoint) {
+            l.add(end);
+        }
         n = l.size() ;
 //        System.out.println("Cost");
         graph = new double[n][n];
@@ -125,7 +128,7 @@ public class TspAnt {
 		}
 		maxSum = Math.rint(maxSum) + 1;
 		for (int i = 0; i < n; i++) {
-			if (i == n - 1) {
+			if (keepEndPoint && i == n - 1) {
 				graph[i][0] = 0.1;
 			} else {
 				graph[i][0] = maxSum;

@@ -10,6 +10,7 @@ import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.GridLayout;
 import android.util.AttributeSet;
@@ -25,6 +26,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.quickaction.actions.NewAction;
 
 import java.util.List;
 
@@ -62,7 +64,7 @@ public class QuickActionsWidget extends LinearLayout {
     public void setActions(List<QuickAction> actions){
 
         this.actions = actions;
-        this.actions.add(new QuickActionFactory.NewAction());
+        this.actions.add(new NewAction());
 
         removeAllViews();
         setupLayout(getContext(), countPage());
@@ -242,6 +244,20 @@ public class QuickActionsWidget extends LinearLayout {
                         if (selectionListener != null) selectionListener.onActionSelected(action);
                     }
                 });
+				if (action.isActionEditable()) {
+					view.setOnLongClickListener(new OnLongClickListener() {
+						@Override
+						public boolean onLongClick(View v) {
+							CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.id);
+							dialog.show(((AppCompatActivity) getContext()).getSupportFragmentManager(), AddQuickActionDialog.TAG);
+							return true;
+						}
+					});
+				}
+                if (!action.isActionEnable(application)) {
+                    view.setEnabled(false);
+                    view.setAlpha(0.5f);
+                }
             }
 
             if (land) {

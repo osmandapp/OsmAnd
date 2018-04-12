@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_menu_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/bg_color"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/navigation_types_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/bottom_sheet_content_padding_small">
+
+            <TextView
+                android:id="@+id/choose_navigation_title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_sheet_title_height"
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/content_padding"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:paddingStart="@dimen/content_padding"
+                android:text="@string/choose_navigation_type"
+                android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_sheet_descr_height"
+                android:paddingEnd="@dimen/content_padding"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:paddingStart="@dimen/content_padding"
+                android:text="@string/measurement_tool_snap_to_road_descr"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/default_desc_text_size"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/dashboard_divider"/>
+
+        <FrameLayout
+            android:id="@+id/cancel_row"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_sheet_cancel_button_height"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/shared_string_cancel"
+                android:textAllCaps="true"
+                android:textColor="?attr/color_dialog_buttons"
+                android:textSize="@dimen/default_desc_text_size"
+                android:textStyle="bold"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

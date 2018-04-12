@@ -1,12 +1,6 @@
 package net.osmand.plus.views;
 
-import java.util.Map;
-
-import net.osmand.plus.R;
-import net.osmand.router.TurnType;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -18,6 +12,12 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+
+import net.osmand.plus.R;
+import net.osmand.router.TurnType;
+
+import java.util.Map;
 
 public class TurnPathHelper {
 
@@ -134,8 +134,9 @@ public class TurnPathHelper {
 	}
 
 	// 72x72
-	public static void calcTurnPath(Path pathForTurn, Path outlay, TurnType turnType, 
-			Matrix transform, PointF center, boolean mini) {
+	public static void calcTurnPath(Path pathForTurn, Path outlay, TurnType turnType,
+									Matrix transform, PointF center, boolean mini,
+									boolean shortArrow, boolean noOverlap, boolean smallArrow) {
 		if(turnType == null){
 			return;
 		}
@@ -146,13 +147,16 @@ public class TurnPathHelper {
 		int ha = 72;
 		int wa = 72;
 		int lowMargin = 6;
-		if (TurnType.C == turnType.getValue()) {
-			TurnVariables tv = new TurnVariables(false, 0, 0, wa, ha, 1.5f);
+		float scaleTriangle = smallArrow ? 1.f : 1.5f;
+		int turnTypeId = turnType.getValue();
+
+		if (TurnType.C == turnTypeId) {
+			TurnVariables tv = new TurnVariables(false, 0, 0, wa, ha, scaleTriangle);
 			pathForTurn.moveTo(wa / 2 + tv.widthStepIn / 2, ha - lowMargin);
 			tv.drawTriangle(pathForTurn);
 			pathForTurn.lineTo(wa / 2 - tv.widthStepIn / 2, ha - lowMargin);
-		} else if (TurnType.OFFR == turnType.getValue()){
-			TurnVariables tv = new TurnVariables(false, 0, 0, wa, ha, 1.5f);
+		} else if (TurnType.OFFR == turnTypeId){
+			TurnVariables tv = new TurnVariables(false, 0, 0, wa, ha, scaleTriangle);
 			float rightX = wa / 2 + tv.widthStepIn / 2;
 			float leftX = wa / 2 - tv.widthStepIn / 2;
 			int step = 7;
@@ -178,14 +182,15 @@ public class TurnPathHelper {
 			pathForTurn.moveTo(rightX, ha - 4 * lowMargin - 3 * step);
 			tv.drawTriangle(pathForTurn);
 			pathForTurn.lineTo(leftX, ha - 4 * lowMargin - 3 * step);
-		} else if (TurnType.TR == turnType.getValue()|| TurnType.TL == turnType.getValue()) {
-			int b = TurnType.TR == turnType.getValue()? 1 : -1;
-			TurnVariables tv = new TurnVariables(b != 1, b == 1 ? 90 : -90, 0, wa, ha / 2, 1.5f);
-			float centerCurveX = wa / 2 + b * 4;
-			float centerCurveY = ha / 2;
+		} else if (TurnType.TR == turnTypeId|| TurnType.TL == turnTypeId) {
+			int b = TurnType.TR == turnTypeId? 1 : -1;
+			TurnVariables tv = new TurnVariables(b != 1, b == 1 ? 90 : -90, 0, wa, (shortArrow ? ha : ha / 2), scaleTriangle);
 			// calculated
-			float h = centerCurveY - lowMargin;
-			float r = tv.cy - tv.widthStepIn / 2;
+			float rDiv =  (shortArrow ? 4 : noOverlap ? 1 : 2);
+			float r = (tv.cy - tv.widthStepIn / 2) / rDiv;
+			float centerCurveX = wa / 2 + b * (noOverlap ? 4 : r + tv.widthStepIn / 2);
+			float centerCurveY = ha / 2 + (shortArrow ? r + tv.widthStepIn / 2 : !noOverlap ? -r : 0);
+			float h = ha - centerCurveY - lowMargin;
 			float centerLineX = centerCurveX - b * (r + tv.widthStepIn / 2);
 			RectF innerOval = new RectF(centerCurveX - r, centerCurveY - r, centerCurveX + r, centerCurveY + r);
 			RectF outerOval = new RectF(innerOval);
@@ -197,13 +202,15 @@ public class TurnPathHelper {
 			tv.drawTriangle(pathForTurn);
 			pathForTurn.arcTo(outerOval, -90, - b *90);
 			pathForTurn.rLineTo(0, h);			
-		} else if (TurnType.TSLR == turnType.getValue() || TurnType.TSLL == turnType.getValue()) {
-			int b = TurnType.TSLR == turnType.getValue() ? 1 : -1;
-			TurnVariables tv = new TurnVariables(b != 1, b == 1 ? 45 : -45, 0, wa, ha, 1.5f);
-			tv.cx -= b * 7;
-			float centerBottomX = wa / 2 - b * 6; 
-			float centerCurveY = ha / 2 + 8;
-			float centerCurveX = centerBottomX + b * (wa / 2);
+		} else if (TurnType.TSLR == turnTypeId || TurnType.TSLL == turnTypeId) {
+			int b = TurnType.TSLR == turnTypeId ? 1 : -1;
+			float angle = shortArrow ? 65 : 45;
+			TurnVariables tv = new TurnVariables(b != 1, b == 1 ? angle : -angle, 0, wa, ha, scaleTriangle);
+			tv.cx -= b * (shortArrow ? 0 : 7);
+			tv.cy += shortArrow ? 12 : 0;
+			float centerBottomX = wa / 2 - (noOverlap ? b * 6 : 0);
+			float centerCurveY = shortArrow ? ha - 6 : ha / 2 + 8;
+			float centerCurveX = centerBottomX + b * (wa / 2 - (shortArrow && noOverlap ? 6 : 0));
 			// calculated
 			float rx1 =  Math.abs(centerCurveX - centerBottomX) - tv.widthStepIn / 2;
 			float rx2 =  Math.abs(centerCurveX - centerBottomX) + tv.widthStepIn / 2;
@@ -222,16 +229,20 @@ public class TurnPathHelper {
 			tv.drawTriangle(pathForTurn);
 			pathForTurn.arcTo(outerOval, -90 - b * (90 - (ellipseAngle2)), -b * (ellipseAngle2));
 			pathForTurn.lineTo(centerBottomX - b * tv.widthStepIn / 2, ha - lowMargin);
-		} else if (TurnType.TSHR == turnType.getValue() || TurnType.TSHL == turnType.getValue()) {
-			int b = TurnType.TSHR == turnType.getValue() ? 1 : -1;
-			float centerCircleY = ha / 4;
-			float centerCircleX = wa / 2 - b * (wa / 5);
-			TurnVariables tv = new TurnVariables(b != 1, b == 1 ? 135 : -135, 0, wa, ha, 1.5f);
+		} else if (TurnType.TSHR == turnTypeId || TurnType.TSHL == turnTypeId) {
+			int b = TurnType.TSHR == turnTypeId ? 1 : -1;
+			float centerCircleY = shortArrow ? ha / 2 : ha / 4;
+			float centerCircleX = wa / 2 - (noOverlap ? b * (wa / 5) : 0);
+			TurnVariables tv = new TurnVariables(b != 1, b == 1 ? 135 : -135, 0, wa, ha, scaleTriangle);
 			// calculated
 			float angle = 45;
-			float r = tv.widthStepIn / 2; 
+			float r = tv.widthStepIn / 2;
 			tv.cx = centerCircleX;
 			tv.cy = centerCircleY;
+			if (shortArrow) {
+				tv.cx -= b * 2;
+				tv.cy -= 2;
+			}
 			RectF innerOval = new RectF(centerCircleX - r, centerCircleY - r, centerCircleX + r, centerCircleY + r);
 			pathForTurn.moveTo(centerCircleX + b * tv.widthStepIn / 2, ha - lowMargin);
 			pathForTurn.lineTo(centerCircleX + b * tv.widthStepIn / 2, (float) (centerCircleY +
@@ -241,16 +252,16 @@ public class TurnPathHelper {
 //			pathForTurn.lineTo(centerCircleX - b * tv.widthStepIn / 2, (float) (centerCircleY - 2 *r));
 			pathForTurn.arcTo(innerOval, -90  + b * angle,  - b * (90 + angle));
 			pathForTurn.lineTo(centerCircleX - b * tv.widthStepIn / 2, ha - lowMargin);
-		} else if(TurnType.TU == turnType.getValue() || TurnType.TRU == turnType.getValue()) {
-			int b = TurnType.TU == turnType.getValue() ? -1 : 1;
-			float radius = 16;
-			float centerRadiusY = ha / 2 - 10;
-			float extraMarginBottom = 5;
-			TurnVariables tv = new TurnVariables(b != 1, 180, 0, wa, ha, 1.5f);
+		} else if(TurnType.TU == turnTypeId || TurnType.TRU == turnTypeId) {
+			int b = TurnType.TU == turnTypeId ? -1 : 1;
+			float radius = shortArrow ? 10 : 16;
+			float centerRadiusY = ha / 2 + (shortArrow ? 10 : -10);
+			float extraMarginBottom = shortArrow ? 0 : 5;
+			TurnVariables tv = new TurnVariables(b != 1, 180, 0, wa, ha, scaleTriangle);
 			// calculated
-			float centerRadiusX = wa / 2;
+			float centerRadiusX = wa / 2 + (shortArrow ? b * radius : 0);
 			tv.cx = centerRadiusX + b * radius;
-			tv.cy = centerRadiusY  - extraMarginBottom;
+			tv.cy = shortArrow ? ha - centerRadiusY : centerRadiusY - extraMarginBottom;
 			lowMargin += extraMarginBottom;
 			tv.rot = 0;
 			
@@ -265,29 +276,31 @@ public class TurnPathHelper {
 			tv.drawTriangle(pathForTurn);
 			pathForTurn.arcTo(outerOval, -90 + b * 90, -b * 180);
 			pathForTurn.lineTo(centerRadiusX - b * (radius + tv.widthStepIn / 2), ha - lowMargin);
-		} else if (TurnType.KL == turnType.getValue() || TurnType.KR == turnType.getValue()) {
-			int b = TurnType.KR == turnType.getValue()? 1 : -1;
-			float shiftX = 8;
+		} else if (TurnType.KL == turnTypeId || TurnType.KR == turnTypeId) {
+			int b = TurnType.KR == turnTypeId ? 1 : -1;
+			float shiftX = shortArrow ? 12 : 8;
 			float firstH = 18;
 			float secondH = 20;
-			TurnVariables tv = new TurnVariables(false, 0, 0, wa, ha, 1.5f);
+			TurnVariables tv = new TurnVariables(false, 0, 0, wa, ha, scaleTriangle);
 			// calculated
-			tv.cx += b * shiftX;
-			pathForTurn.moveTo(wa / 2 + tv.widthStepIn / 2 - b * shiftX, ha - lowMargin);
-			pathForTurn.lineTo(wa / 2 + tv.widthStepIn / 2 - b * shiftX, ha - lowMargin - firstH);
-			// pathForTurn.lineTo(wa / 2 + tv.widthStepIn / 2 + b * shiftX, ha - lowMargin - firstH - secondH);
+			tv.cx += b * shiftX * (noOverlap ? 1 : 2);
+			float dx = b * shiftX * (noOverlap ? 1 : 2);
+			float mdx = -b * shiftX * (noOverlap ? 1 : 0);
+			pathForTurn.moveTo(wa / 2 + tv.widthStepIn / 2 + mdx, ha - lowMargin);
+			pathForTurn.lineTo(wa / 2 + tv.widthStepIn / 2 + mdx, ha - lowMargin - firstH);
+			// pathForTurn.lineTo(wa / 2 + tv.widthStepIn / 2 + dx, ha - lowMargin - firstH - secondH);
 			pathForTurn.cubicTo(
-					wa / 2 + tv.widthStepIn / 2 - b * shiftX, ha - lowMargin - firstH - secondH / 2 + b * 3,
-					wa / 2 + tv.widthStepIn / 2 + b * shiftX, ha - lowMargin - firstH - secondH / 2 + b * 3,
-					wa / 2 + tv.widthStepIn / 2 + b * shiftX, ha - lowMargin - firstH - secondH);
+					wa / 2 + tv.widthStepIn / 2 + mdx, ha - lowMargin - firstH - secondH / 2 + b * 3,
+					wa / 2 + tv.widthStepIn / 2 + dx, ha - lowMargin - firstH - secondH / 2 + b * 3,
+					wa / 2 + tv.widthStepIn / 2 + dx, ha - lowMargin - firstH - secondH);
 			tv.drawTriangle(pathForTurn);
-			pathForTurn.lineTo(wa / 2 - tv.widthStepIn / 2 + b * shiftX, ha - lowMargin - firstH - secondH);
+			pathForTurn.lineTo(wa / 2 - tv.widthStepIn / 2 + dx, ha - lowMargin - firstH - secondH);
 			pathForTurn.cubicTo(
-					wa / 2 - tv.widthStepIn / 2 + b * shiftX, ha - lowMargin - firstH - secondH / 2 - b * 2,
-					wa / 2 - tv.widthStepIn / 2 - b * shiftX, ha - lowMargin - firstH - secondH / 2 - b * 2,
-					wa / 2 - tv.widthStepIn / 2 - b * shiftX, ha - lowMargin - firstH );
-//			pathForTurn.lineTo(wa / 2 - tv.widthStepIn / 2 - b * shiftX, ha - lowMargin - firstH);
-			pathForTurn.lineTo(wa / 2 - tv.widthStepIn / 2 - b * shiftX, ha - lowMargin);
+					wa / 2 - tv.widthStepIn / 2 + dx, ha - lowMargin - firstH - secondH / 2 - b * 2,
+					wa / 2 - tv.widthStepIn / 2 + mdx, ha - lowMargin - firstH - secondH / 2 - b * 2,
+					wa / 2 - tv.widthStepIn / 2 + mdx, ha - lowMargin - firstH );
+//			pathForTurn.lineTo(wa / 2 - tv.widthStepIn / 2 + mdx, ha - lowMargin - firstH);
+			pathForTurn.lineTo(wa / 2 - tv.widthStepIn / 2 + mdx, ha - lowMargin);
 		} else if(turnType != null && turnType.isRoundAbout() ) {
 			int out = turnType.getExitOut();
 			boolean leftSide = turnType.isLeftSide();
@@ -477,7 +490,8 @@ public class TurnPathHelper {
 			paintRouteDirectionOutlay.setStyle(Style.STROKE);
 			paintRouteDirectionOutlay.setColor(Color.BLACK);
 			paintRouteDirectionOutlay.setAntiAlias(true);
-			TurnPathHelper.calcTurnPath(dp, dpOutlay, TurnType.straight(), null, null, mini);
+			TurnPathHelper.calcTurnPath(dp, dpOutlay, TurnType.straight(), null, null, mini,
+					false, true, false);
 		}
 
 		@Override
@@ -489,12 +503,13 @@ public class TurnPathHelper {
 		}
 		
 		public void setRouteType(TurnType t){
-			TurnPathHelper.calcTurnPath(p, pOutlay, t, null, null, mini);
+			TurnPathHelper.calcTurnPath(p, pOutlay, t, null, null, mini,
+					false, true, false);
 			onBoundsChange(getBounds());
 		}
 
 		@Override
-		public void draw(Canvas canvas) {
+		public void draw(@NonNull Canvas canvas) {
 			canvas.drawPath(dpOutlay, paintRouteDirectionOutlay);
 			canvas.drawPath(dp, paintRouteDirection);
 		}
@@ -519,113 +534,42 @@ public class TurnPathHelper {
 
 
 	public static class TurnResource {
-		boolean flip;
-		int resourceId;
 
-		public TurnResource(){}
+		int turnType;
+		boolean shortArrow;
+		boolean noOverlap;
+		boolean leftSide;
 
-		public TurnResource(int resourceId, boolean value) {
-			this.resourceId = resourceId;
-			this.flip = value;
+		TurnResource() {}
+
+		TurnResource(int turnType, boolean shortArrow, boolean noOverlap, boolean leftSide) {
+			this.turnType = turnType == 0 ? 1 : turnType;
+			this.shortArrow = shortArrow;
+			this.noOverlap = noOverlap;
+			this.leftSide = leftSide;
 		}
 
 		@Override
-		public boolean equals(Object o) {
-			return super.equals(o);
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			}
+			if (obj == null || getClass() != obj.getClass()) {
+				return false;
+			}
+			TurnResource other = (TurnResource) obj;
+			return other.turnType == turnType && other.shortArrow == shortArrow
+					&& other.noOverlap == noOverlap && other.leftSide == leftSide;
 		}
 
 		@Override
 		public int hashCode() {
-			return resourceId * (flip ? -1 : 1);
+			return (turnType + (noOverlap ? 100 : 1) + (shortArrow ? 1000 : 1)) * (leftSide ? -1 : 1);
 		}
 	}
 
-	private static TurnResource getTallArrow(int tt, boolean nooverlap){
-
-		TurnResource result = new TurnResource();
-
-		switch (tt){
-			case TurnType.C:
-				result.resourceId = R.drawable.map_turn_forward_small;
-				break;
-			case TurnType.TR:
-			case TurnType.TL:
-				result.resourceId = nooverlap ? R.drawable.map_turn_right_small : R.drawable.map_turn_right2_small;
-				break;
-			case TurnType.KR:
-			case TurnType.KL:
-				result.resourceId = R.drawable.map_turn_keep_right_small;
-				break;
-			case TurnType.TSLR:
-			case TurnType.TSLL:
-				result.resourceId = R.drawable.map_turn_slight_right_small;
-				break;
-			case TurnType.TSHR:
-			case TurnType.TSHL:
-				result.resourceId = R.drawable.map_turn_sharp_right_small;
-				break;
-			case TurnType.TRU:
-			case TurnType.TU:
-				result.resourceId = R.drawable.map_turn_uturn_right_small;
-				break;
-			default:
-				result.resourceId = R.drawable.map_turn_forward_small;
-				break;
-		}
-
-		if(tt == TurnType.TL || tt == TurnType.KL || tt == TurnType.TSLL
-				|| tt == TurnType.TSHL || tt == TurnType.TU){
-			result.flip = true;
-		}
-
-		return result;
-
-	}
-
-	private static TurnResource getShortArrow(int tt){
-
-		TurnResource result = new TurnResource();
-
-		switch (tt) {
-			case TurnType.C:
-				result.resourceId = R.drawable.map_turn_forward_small;
-				break;
-			case TurnType.TR:
-			case TurnType.TL:
-				result.resourceId = R.drawable.map_turn_forward_right_turn_small;
-				break;
-			case TurnType.KR:
-			case TurnType.KL:
-				result.resourceId = R.drawable.map_turn_forward_keep_right_small;
-				break;
-			case TurnType.TSLR:
-			case TurnType.TSLL:
-				result.resourceId = R.drawable.map_turn_forward_slight_right_turn_small;
-				break;
-			case TurnType.TSHR:
-			case TurnType.TSHL:
-				result.resourceId = R.drawable.map_turn_forward_turn_sharp_small;
-				break;
-			case TurnType.TRU:
-			case TurnType.TU:
-				result.resourceId = R.drawable.map_turn_forward_uturn_right_small;
-				break;
-			default:
-				result.resourceId = R.drawable.map_turn_forward_small;
-				break;
-		}
-
-		if(tt == TurnType.TL || tt == TurnType.KL || tt == TurnType.TSLL
-				|| tt == TurnType.TSHL || tt == TurnType.TU){
-			result.flip = true;
-		}
-
-		return result;
-
-	}
-
-	public static Bitmap getBitmapFromTurnType(Resources res, Map<TurnResource, Bitmap> cache, int firstTurn,
-			int secondTurn, int thirdTurn, int turnIndex, float coef, boolean leftSide) {
+	public static Path getPathFromTurnType(Resources res, Map<TurnResource, Path> cache, int firstTurn,
+			int secondTurn, int thirdTurn, int turnIndex, float coef, boolean leftSide, boolean smallArrow) {
 
 		int firstTurnType = TurnType.valueOf(firstTurn, leftSide).getValue();
 		int secondTurnType = TurnType.valueOf(secondTurn, leftSide).getValue();
@@ -635,14 +579,14 @@ public class TurnPathHelper {
 
 		if (turnIndex == FIRST_TURN) {
 			if (secondTurnType == 0) {
-				turnResource = getTallArrow(firstTurnType, true);
+				turnResource = new TurnResource(firstTurnType, false, false, leftSide);
 			} else if (secondTurnType == TurnType.C || thirdTurnType == TurnType.C) {
-				turnResource = getShortArrow(firstTurnType);
+				turnResource = new TurnResource(firstTurnType, true, false, leftSide);
 			} else {
 				if (firstTurnType == TurnType.TU || firstTurnType == TurnType.TRU) {
-					turnResource = getShortArrow(firstTurnType);
+					turnResource = new TurnResource(firstTurnType, true, false, leftSide);
 				} else {
-					turnResource = getTallArrow(firstTurnType, false);
+					turnResource = new TurnResource(firstTurnType, false, false, leftSide);
 				}
 			}
 		} else if (turnIndex == SECOND_TURN) {
@@ -652,9 +596,9 @@ public class TurnPathHelper {
 				turnResource = null;
 			} else if (firstTurnType == TurnType.C || thirdTurnType == TurnType.C) {
 				// get the small one
-				turnResource = getShortArrow(secondTurnType);
+				turnResource = new TurnResource(secondTurnType, true, false, leftSide);
 			} else {
-				turnResource = getTallArrow(secondTurnType, false);
+				turnResource = new TurnResource(secondTurnType, false, false, leftSide);
 			}
 		} else if (turnIndex == THIRD_TURN) {
 			if ((TurnType.isLeftTurn(firstTurnType) || TurnType.isLeftTurn(secondTurnType)) && TurnType.isLeftTurn(thirdTurnType)) {
@@ -662,18 +606,18 @@ public class TurnPathHelper {
 			} else if ((TurnType.isRightTurn(firstTurnType) || TurnType.isRightTurn(secondTurnType)) && TurnType.isRightTurn(thirdTurnType)) {
 				turnResource = null;
 			} else {
-				turnResource = getShortArrow(thirdTurnType);
+				turnResource = new TurnResource(thirdTurnType, true, false, leftSide);
 			}
 		}
 		if (turnResource == null) {
 			return null;
 		}
 
-		Bitmap b = cache.get(turnResource);
-		if (b == null) {
-			b = turnResource.flip ? getFlippedBitmap(res, turnResource.resourceId) : BitmapFactory.decodeResource(res,
-					turnResource.resourceId);
-			cache.put(turnResource, b);
+		Path p = cache.get(turnResource);
+		if (p == null) {
+			int size = res.getDimensionPixelSize(R.dimen.widget_turn_lane_size);
+			p = getPathFromTurnResource(turnResource, size, smallArrow);
+			cache.put(turnResource, p);
 		}
 
 		// Maybe redundant scaling
@@ -682,27 +626,17 @@ public class TurnPathHelper {
 		 * bRatio); int hq = Math.round(s); b = Bitmap.createScaledBitmap(b, wq, hq, false);
 		 */
 
-		return b;
+		return p;
 	}
 
-	public static Bitmap getFlippedBitmap(Resources res, int resId){
-
-		BitmapFactory.Options opt = new BitmapFactory.Options();
-		opt.inJustDecodeBounds = true;
-		//Below line is necessary to fill in opt.outWidth, opt.outHeight
-		Bitmap b = BitmapFactory.decodeResource(res, resId, opt);
-
-		b = Bitmap.createBitmap(opt.outWidth, opt.outHeight, Bitmap.Config.ARGB_8888);
-		Canvas canvas = new Canvas(b);
-
-		Matrix flipHorizontalMatrix = new Matrix();
-		flipHorizontalMatrix.setScale(-1, 1);
-		flipHorizontalMatrix.postTranslate(b.getWidth(), 0);
-
-		Bitmap bb = BitmapFactory.decodeResource(res, resId);
-		canvas.drawBitmap(bb, flipHorizontalMatrix, null);
-
-		return b;
+	private static Path getPathFromTurnResource(TurnResource turnResource, int size, boolean smallArrow) {
+		float coef = size / 72.f;
+		Path p = new Path();
+		Matrix matrix = new Matrix();
+		matrix.postScale(coef, coef);
+		calcTurnPath(p, null, TurnType.valueOf(turnResource.turnType, turnResource.leftSide),
+				matrix, null, false, turnResource.shortArrow, turnResource.noOverlap, smallArrow);
+		return p;
 	}
 
 

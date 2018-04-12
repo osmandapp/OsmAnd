@@ -62,7 +62,7 @@
         - Open-SVG-Map-Icons - Public Domain
 
     * Non-patched source libraries:
-        - SherlockBar - Apache Lisense - https://github.com/osmandapp/Osmand/tree/master/SherlockBar (https://github.com/JakeWharton/ActionBarSherlock/blob/master/LICENSE.txt)
+        - SherlockBar - Apache License - https://github.com/osmandapp/Osmand/tree/master/SherlockBar (https://github.com/JakeWharton/ActionBarSherlock/blob/master/LICENSE.txt)
 
     * Patched libraries:
         - Protobuf - New BSD License (patches - https://github.com/osmandapp/Osmand/tree/master/OsmAnd-java/protobuf-src, https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/protobuf)
@@ -151,3 +151,20 @@
 	- Lyon: "Métro-M-Lyon" by Otourly - Own work. Licensed under CC BY-SA 3.0 via Wikimedia Commons - https://commons.wikimedia.org/wiki/File:M%C3%A9tro-M-Lyon.svg#/media/File:M%C3%A9tro-M-Lyon.svg
 	- Washington: "WMATA Metro Logo" by Noclip - Own work. Licensed under Public Domain via Commons - https://commons.wikimedia.org/wiki/File:WMATA_Metro_Logo.svg#/media/File:WMATA_Metro_Logo.svg
 	- Los Angeles: "Lametro" by Los Angeles County Metropolitan Transportation Authority. Original uploader was Cheeselouise at en.wikipedia - Metro materials at http://www.metro.net/riding_metro/pocket_guide_cambodian_printers.pdf. Licensed under Public Domain via Commons - https://commons.wikimedia.org/wiki/File:Lametro.svg#/media/File:Lametro.svg
+
+    * Depth maps
+	- The GEBCO_2014 Grid, version 20150318, www.gebco.net
+	- U.S. Bureau of Ocean Energy Management (24 may 2017,12m per pixel)
+	- South_Padre_Island_DEM_4133: Grothe, P.G., L.A. Taylor, B.W. Eakins, K.S. Carignan, D.Z. Friday, and M. Love, 2012. Digital Elevation Models of South Padre Island, Texas: Procedures, Data Sources and Analysis, NOAA National Geophysical Data Center technical report, Boulder, CO, 15 pp. 
+	- Corpus_Christi_DEM_1035: Taylor, L.A., B.W. Eakins, K.S. Carignan, R.R. Warnken, T. Sazonova, and D.C. Schoolcraft, 2008. Digital Elevation Model of Corpus Christi, Texas: Procedures, Data Sources and Analysis, NOAA Technical Memorandum NESDIS NGDC-11, National Geophysical Data Center, Boulder, CO, 19 pp. 
+	- western_gom_crm_v1: National Geophysical Data Center, 2001. U.S. Coastal Relief Model - Western Gulf of Mexico. National Geophysical Data Center, NOAA. doi:10.7289/V5QJ7F79 [access date].
+	- central_gom_crm_v1: National Geophysical Data Center, 2001. U.S. Coastal Relief Model - Central Gulf of Mexico. National Geophysical Data Center, NOAA. doi:10.7289/V54Q7RW0 [access date].
+	- Galveston_DEM_1072: Taylor, L.A., B.W. Eakins, K.S. Carignan, R.R. Warnken, T. Sazonova, and D.C. Schoolcraft, 2008. Digital Elevation Model of Galveston, Texas: Procedures, Data Sources and Analysis, NOAA Technical Memorandum NESDIS NGDC-12, National Geophysical Data Center, Boulder, CO, 20 pp. 
+	- Southern_Louisiana_DEM_3722 1/3 arc-second: Love, M.R., R.J. Caldwell, K.S. Carignan, B.W. Eakins, and L.A. Taylor, 2010. Digital Elevation Models of Southern Louisiana: Procedures, Data Sources and Analysis, NOAA National Geophysical Data Center technical report, Boulder, CO, 40 pp. 
+	- New_Orleans_DEM_1264: Love, M.R., C.J. Amante, L.A. Taylor, and B.W. Eakins, 2011. Digital Elevation Models of New Orleans, Louisiana: Procedures, Data Sources and Analysis, NOAA Technical Memorandum NESDIS NGDC-49, U.S. Dept. of Commerce, Boulder, CO, 46 pp.
+	- Southern_Louisiana_DEM_4350: Love, M.R., R.J. Caldwell, K.S. Carignan, B.W. Eakins, and L.A. Taylor, 2010. Digital Elevation Models of Southern Louisiana: Procedures, Data Sources and Analysis, NOAA National Geophysical Data Center technical report, Boulder, CO, 40 pp.
+	- Biloxi_DEM_1009: Taylor, L.A., B.W. Eakins, K.S. Carignan, R.R. Warnken, T. Sazonova, and D.C. Schoolcraft, 2008. Digital Elevation Model of Biloxi, Mississippi: Procedures, Data Sources and Analysis, NOAA Technical Memorandum NESDIS NGDC-9, National Geophysical Data Center, Boulder, CO, 32 pp. 
+	- Mobile_DEM_1255: Amante, C.J., M.R. Love, L.A. Taylor, and B.W. Eakins, 2011. Digital Elevation Models of Mobile, Alabama: Procedures, Data Sources and Analysis, NOAA Technical Memorandum NESDIS NGDC-44, Dept. of Commerce, Boulder, CO, 43 pp. 
+	- Panama_City_DEM_1276: Amante, C.J., M.R. Love, L.A. Taylor, and B.W. Eakins, 2011. Digital Elevation Models of Panama City, Florida: Procedures, Data Sources and Analysis, NOAA Technical Memorandum NESDIS NGDC-50, U.S. Dept. of Commerce, Boulder, CO, 46 pp. 
+	- Great Lakes: National Centers for Environmental Information (NCEI)
+	

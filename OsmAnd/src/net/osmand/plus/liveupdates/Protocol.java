@@ -23,6 +23,9 @@ public final class Protocol {
 		public int regionCount;
 		public float regionPercentage;
 		public float btc;
+		public float eur;
+		public float eurRate;
+		public Recipient[] rows;
 	}
 	
 	public static class UserRankingByMonth {
@@ -48,5 +51,13 @@ public final class Protocol {
 		public int users;
 		public int changes;
 	}
-	
+
+	public static class Recipient {
+		String osmid;
+		int changes;
+		String btcaddress;
+		int rank;
+		int weight;
+		float btc;
+	}
 }

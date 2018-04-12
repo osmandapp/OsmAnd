@@ -9,11 +9,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
@@ -28,6 +32,7 @@ import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
+import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -42,10 +47,11 @@ import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
+import net.osmand.plus.wikivoyage.data.WikivoyageDbHelper;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RoutingConfiguration;
-import net.osmand.search.SearchUICore;
 import net.osmand.util.Algorithms;
+import net.osmand.util.OpeningHoursParser;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -56,6 +62,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import btools.routingapp.BRouterServiceConnection;
@@ -85,7 +92,7 @@ public class AppInitializer implements IProgress {
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
-	public static final String LATEST_CHANGES_URL = "http://osmand.net/blog?id=osmand-2-5-released";
+	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog?id=osmand-2-8-released";
 //	public static final String LATEST_CHANGES_URL = null; // not enough to read
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
@@ -286,8 +293,8 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void indexRegionsBoundaries(List<String> warnings) {
+		File file = app.getAppPath("regions.ocbf");
 		try {
-			File file = app.getAppPath("regions.ocbf");
 			if (file != null) {
 				if (!file.exists()) {
 					Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"),
@@ -298,10 +305,22 @@ public class AppInitializer implements IProgress {
 			}
 		} catch (Exception e) {
 			warnings.add(e.getMessage());
+			file.delete(); // recreate file
 			LOG.error(e.getMessage(), e);
 		}
 	}
 
+	Resources getLocalizedResources(String loc) {
+		if(Build.VERSION.SDK_INT < 17) {
+			return null;
+		}
+		Locale desiredLocale = new Locale(loc);
+		Configuration conf = app.getResources().getConfiguration();
+		conf = new Configuration(conf);
+		conf.setLocale(desiredLocale);
+		Context localizedContext = app.createConfigurationContext(conf);
+		return localizedContext.getResources();
+	}
 
 	private void initPoiTypes() {
 		if(app.getAppPath("poi_types.xml").exists()) {
@@ -309,13 +328,16 @@ public class AppInitializer implements IProgress {
 		} else {
 			app.poiTypes.init();
 		}
-		app.poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
 
+		final Resources en = getLocalizedResources("en");
+
+		app.poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
 
 			@Override
 			public String getTranslation(AbstractPoiType type) {
-				if(type.getBaseLangType() != null) {
-					return getTranslation(type.getBaseLangType()) +  " (" + app.getLangTranslation(type.getLang()).toLowerCase() +")";
+				AbstractPoiType baseLangType = type.getBaseLangType();
+				if (baseLangType != null) {
+					return getTranslation(baseLangType) + " (" + app.getLangTranslation(type.getLang()).toLowerCase() + ")";
 				}
 				return getTranslation(type.getIconKeyName());
 			}
@@ -329,7 +351,55 @@ public class AppInitializer implements IProgress {
 						return app.getString(in);
 					}
 				} catch (Exception e) {
-					System.err.println("No translation for "+ keyName + " " + e.getMessage());
+				}
+				return null;
+			}
+
+			@Override
+			public String getSynonyms(AbstractPoiType type) {
+				AbstractPoiType baseLangType = type.getBaseLangType();
+				if (baseLangType != null) {
+					return getSynonyms(baseLangType);
+				}
+				return getSynonyms(type.getIconKeyName());
+			}
+
+
+			@Override
+			public String getSynonyms(String keyName) {
+				try {
+					Field f = R.string.class.getField("synonyms_poi_" + keyName);
+					if (f != null) {
+						Integer in = (Integer) f.get(null);
+						return app.getString(in);
+					}
+				} catch (Exception e) {
+				}
+				return "";
+			}
+
+			@Override
+			public String getEnTranslation(AbstractPoiType type) {
+				AbstractPoiType baseLangType = type.getBaseLangType();
+				if (baseLangType != null) {
+					return getEnTranslation(baseLangType) + " (" + app.getLangTranslation(type.getLang()).toLowerCase() + ")";
+				}
+				return getEnTranslation(type.getIconKeyName());
+			}
+
+			@Override
+			public String getEnTranslation(String keyName) {
+				if (en == null) {
+					return Algorithms.capitalizeFirstLetter(
+							keyName.replace('_', ' '));
+				}
+				try {
+					Field f = R.string.class.getField("poi_" + keyName);
+					if (f != null) {
+						Integer in = (Integer) f.get(null);
+						return en.getString(in);
+					}
+				} catch (Exception e) {
 				}
 				return null;
 			}
@@ -363,6 +433,7 @@ public class AppInitializer implements IProgress {
 		app.gpxDatabase = startupInit(new GPXDatabase(app), GPXDatabase.class);
 		app.favorites = startupInit(new FavouritesDbHelper(app), FavouritesDbHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
+		app.aidlApi = startupInit(new OsmandAidlApi(app), OsmandAidlApi.class);
 
 		app.regions = startupInit(new OsmandRegions(), OsmandRegions.class);
 		updateRegionVars();
@@ -371,10 +442,25 @@ public class AppInitializer implements IProgress {
 		app.rendererRegistry = startupInit(new RendererRegistry(app), RendererRegistry.class);
 		app.geocodingLookupService = startupInit(new GeocodingLookupService(app), GeocodingLookupService.class);
 		app.targetPointsHelper = startupInit(new TargetPointsHelper(app), TargetPointsHelper.class);
+		app.mapMarkersDbHelper = startupInit(new MapMarkersDbHelper(app), MapMarkersDbHelper.class);
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
+		app.wikivoyageDbHelper = startupInit(new WikivoyageDbHelper(app), WikivoyageDbHelper.class);
+
+		initOpeningHoursParser();
 	}
 
+	private void initOpeningHoursParser() {
+		OpeningHoursParser.setAdditionalString("off", app.getString(R.string.day_off_label));
+		OpeningHoursParser.setAdditionalString("is_open", app.getString(R.string.poi_dialog_opening_hours));
+		OpeningHoursParser.setAdditionalString("is_open_24_7", app.getString(R.string.shared_string_is_open_24_7));
+		OpeningHoursParser.setAdditionalString("will_open_at", app.getString(R.string.will_open_at));
+		OpeningHoursParser.setAdditionalString("open_from", app.getString(R.string.open_from));
+		OpeningHoursParser.setAdditionalString("will_close_at", app.getString(R.string.will_close_at));
+		OpeningHoursParser.setAdditionalString("open_till", app.getString(R.string.open_till));
+		OpeningHoursParser.setAdditionalString("will_open_tomorrow_at", app.getString(R.string.will_open_tomorrow_at));
+		OpeningHoursParser.setAdditionalString("will_open_on", app.getString(R.string.will_open_on));
+	}
 
 	private void updateRegionVars() {
 		app.regions.setTranslator(new RegionTranslation() {
@@ -439,12 +525,18 @@ public class AppInitializer implements IProgress {
 
 
 
-	public synchronized void initVoiceDataInDifferentThread(final Activity uiContext, final String voiceProvider, final Runnable run, boolean showDialog) {
+	public synchronized void initVoiceDataInDifferentThread(final Activity uiContext,
+															final ApplicationMode applicationMode,
+															final String voiceProvider,
+															final Runnable run,
+															boolean showDialog) {
+
 		final ProgressDialog dlg = showDialog ? ProgressDialog.show(uiContext, app.getString(R.string.loading_data),
 				app.getString(R.string.voice_data_initializing)) : null;
 		new Thread(new Runnable() {
 
-			public CommandPlayer createCommandPlayer(String voiceProvider, OsmandApplication osmandApplication, Activity ctx)
+			public CommandPlayer createCommandPlayer(String voiceProvider, ApplicationMode applicationMode,
+													 OsmandApplication osmandApplication, Activity ctx)
 					throws CommandPlayerException {
 				if (voiceProvider != null) {
 					File parent = osmandApplication.getAppPath(IndexConstants.VOICE_INDEX_DIR);
@@ -454,9 +546,9 @@ public class AppInitializer implements IProgress {
 					}
 
 					if (MediaCommandPlayerImpl.isMyData(voiceDir)) {
-						return new MediaCommandPlayerImpl(osmandApplication, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
+						return new MediaCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
 					} else if (TTSCommandPlayerImpl.isMyData(voiceDir)) {
-						return new TTSCommandPlayerImpl(ctx, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
+						return new TTSCommandPlayerImpl(ctx, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
 					}
 					throw new CommandPlayerException(ctx.getString(R.string.voice_data_not_supported));
 				}
@@ -468,7 +560,7 @@ public class AppInitializer implements IProgress {
 					if (app.player != null) {
 						app.player.clear();
 					}
-					app.player = createCommandPlayer(voiceProvider, app, uiContext);
+					app.player = createCommandPlayer(voiceProvider, applicationMode, app, uiContext);
 					app.getRoutingHelper().getVoiceRouter().setPlayer(app.player);
 					if(dlg != null) {
 						dlg.dismiss();
@@ -514,7 +606,9 @@ public class AppInitializer implements IProgress {
 			// restore backuped favorites to normal file
 			restoreBackupForFavoritesFiles();
 			notifyEvent(InitEvents.RESTORE_BACKUPS);
+			app.mapMarkersHelper.syncAllGroupsAsync();
 			app.searchUICore.initSearchUICore();
+			
 			checkLiveUpdatesAlerts();
 			
 		} catch (RuntimeException e) {

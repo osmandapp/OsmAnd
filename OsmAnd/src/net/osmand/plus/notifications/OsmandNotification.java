@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.app.NotificationManagerCompat;
-import android.support.v7.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
@@ -15,14 +15,10 @@ public abstract class OsmandNotification {
 
 	public final static int NAVIGATION_NOTIFICATION_SERVICE_ID = 5;
 	public final static int GPX_NOTIFICATION_SERVICE_ID = 6;
-	public final static int OSMO_NOTIFICATION_SERVICE_ID = 7;
-	public final static int GPS_WAKE_UP_NOTIFICATION_SERVICE_ID = 8;
 	public final static int TOP_NOTIFICATION_SERVICE_ID = 100;
 
 	public final static int WEAR_NAVIGATION_NOTIFICATION_SERVICE_ID = 1005;
 	public final static int WEAR_GPX_NOTIFICATION_SERVICE_ID = 1006;
-	public final static int WEAR_OSMO_NOTIFICATION_SERVICE_ID = 1007;
-	public final static int WEAR_GPS_WAKE_UP_NOTIFICATION_SERVICE_ID = 1008;
 
 	protected OsmandApplication app;
 	protected boolean ongoing = true;
@@ -35,7 +31,6 @@ public abstract class OsmandNotification {
 	public enum NotificationType {
 		NAVIGATION,
 		GPX,
-		OSMO,
 		GPS
 	}
 
@@ -72,10 +67,8 @@ public abstract class OsmandNotification {
 				.setPriority(top ? NotificationCompat.PRIORITY_HIGH : getPriority())
 				.setOngoing(ongoing && !wearable)
 				.setContentIntent(contentPendingIntent)
-				.setDeleteIntent(NotificationDismissReceiver.createIntent(app, getType()));
-		if (top) {
-			builder.setGroup(groupName).setGroupSummary(!wearable);
-		}
+				.setDeleteIntent(NotificationDismissReceiver.createIntent(app, getType()))
+				.setGroup(groupName).setGroupSummary(!wearable);
 
 		if (color != 0) {
 			builder.setColor(color);
@@ -105,6 +98,14 @@ public abstract class OsmandNotification {
 	public void onNotificationDismissed() {
 	}
 
+	private void notifyWearable(NotificationManagerCompat notificationManager) {
+		Builder wearNotificationBuilder = buildNotification(true);
+		if (wearNotificationBuilder != null) {
+			Notification wearNotification = wearNotificationBuilder.build();
+			notificationManager.notify(getOsmandWearableNotificationId(), wearNotification);
+		}
+	}
+
 	public boolean showNotification() {
 		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		if (isEnabled()) {
@@ -113,13 +114,7 @@ public abstract class OsmandNotification {
 				Notification notification = notificationBuilder.build();
 				setupNotification(notification);
 				notificationManager.notify(top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId(), notification);
-				if (top) {
-					Builder wearNotificationBuilder = buildNotification(true);
-					if (wearNotificationBuilder != null) {
-						Notification wearNotification = wearNotificationBuilder.build();
-						notificationManager.notify(getOsmandWearableNotificationId(), wearNotification);
-					}
-				}
+				notifyWearable(notificationManager);
 				return true;
 			}
 		}
@@ -136,16 +131,10 @@ public abstract class OsmandNotification {
 				if (top) {
 					notificationManager.cancel(getOsmandNotificationId());
 					notificationManager.notify(TOP_NOTIFICATION_SERVICE_ID, notification);
-
-					Builder wearNotificationBuilder = buildNotification(true);
-					if (wearNotificationBuilder != null) {
-						Notification wearNotification = wearNotificationBuilder.build();
-						notificationManager.notify(getOsmandWearableNotificationId(), wearNotification);
-					}
-
 				} else {
 					notificationManager.notify(getOsmandNotificationId(), notification);
 				}
+				notifyWearable(notificationManager);
 				return true;
 			} else {
 				notificationManager.cancel(getOsmandNotificationId());

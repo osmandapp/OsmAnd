@@ -2,6 +2,7 @@ package net.osmand.data;
 
 import net.osmand.Location;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.edit.Node;
 import net.osmand.util.Algorithms;
 
 import java.io.BufferedReader;
@@ -17,15 +18,21 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 
+import gnu.trove.list.array.TIntArrayList;
+
 
 public class Amenity extends MapObject {
 
 	public static final String WEBSITE = "website";
 	public static final String PHONE = "phone";
 	public static final String DESCRIPTION = "description";
+	public static final String ROUTE = "route";
 	public static final String OPENING_HOURS = "opening_hours";
 	public static final String CONTENT = "content";
 	public static final String CUISINE = "cuisine";
+	public static final String DISH = "dish";
+	public static final String OSM_DELETE_VALUE = "delete";
+	public static final String OSM_DELETE_TAG = "osmand_change";
 
 	private String subType;
 	private PoiCategory type;
@@ -33,6 +40,9 @@ public class Amenity extends MapObject {
 	private String openingHours;
 	private Map<String, String> additionalInfo;
 	private AmenityRoutePoint routePoint; // for search on path
+	// context menu geometry;
+	private TIntArrayList y;
+	private TIntArrayList x;
 
 	public Amenity() {
 	}
@@ -147,12 +157,12 @@ public class Amenity extends MapObject {
 
 	@Override
 	public String toStringEn() {
-		return super.toStringEn() + ":" + type.getKeyName() + ":" + subType;
+		return super.toStringEn() + ": " + type.getKeyName() + ":" + subType;
 	}
 
 	@Override
 	public String toString() {
-		return type.getKeyName() + " : " + subType + " " + getName();
+		return type.getKeyName() + ": " + subType + " " + getName();
 	}
 
 	public String getSite() {
@@ -252,6 +262,19 @@ public class Amenity extends MapObject {
 		setAdditionalInfo(OPENING_HOURS, openingHours);
 	}
 	
+
+	public boolean comparePoi(Amenity thatObj) {
+		if (this.id.longValue() == thatObj.id.longValue() &&
+				Algorithms.objectEquals(this.type.getKeyName(), thatObj.type.getKeyName()) && 
+				Algorithms.objectEquals(getLocation(), thatObj.getLocation()) &&
+				Algorithms.objectEquals(this.subType, thatObj.subType) &&
+				Algorithms.objectEquals(this.additionalInfo, thatObj.additionalInfo) &&
+				Algorithms.objectEquals(this.getNamesMap(true), thatObj.getNamesMap(true))) {
+			return true;
+		}
+		return false;
+	}
+	
 	@Override
 	public int compareTo(MapObject o) {
 		int cmp = super.compareTo(o);
@@ -273,5 +296,23 @@ public class Amenity extends MapObject {
 					&& Algorithms.stringsEqual(((Amenity) o).getSubType(), getSubType());
 		}
 		return res;
+	}
+
+	public TIntArrayList getY() {
+		if(y == null) {
+			y = new TIntArrayList();
+		}
+		return y;
+	}
+	
+	public TIntArrayList getX() {
+		if (x == null) {
+			x = new TIntArrayList();
+		}
+		return x;
+	}
+
+	public boolean isClosed() {
+		return OSM_DELETE_VALUE.equals(getAdditionalInfo(OSM_DELETE_TAG));
 	}
 }

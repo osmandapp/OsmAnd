@@ -5,13 +5,17 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-
 import net.osmand.IndexConstants;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.render.RendererRegistry;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class NauticalMapsPlugin extends OsmandPlugin {
 
@@ -53,10 +57,11 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	@Override
 	public boolean init(final OsmandApplication app, final Activity activity) {
 		if(activity != null) {
+			addBoatProfile(true);
 			// called from UI 
 			previousRenderer = app.getSettings().RENDERER.get(); 
 			app.getSettings().RENDERER.set(RendererRegistry.NAUTICAL_RENDER);
-			if(!app.getResourceManager().getIndexFileNames().containsKey("World_seamarks"+
+			if(!app.getResourceManager().getIndexFileNames().containsKey(DownloadResources.WORLD_SEAMARKS_NAME+
 					 IndexConstants.BINARY_MAP_INDEX_EXT)){
 				AlertDialog.Builder dlg = new AlertDialog.Builder(activity);
 				dlg.setMessage(net.osmand.plus.R.string.nautical_maps_missing);
@@ -82,6 +87,17 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 		}
 		return true;
 	}
+
+	public void addBoatProfile(boolean flag) {
+		Set<ApplicationMode> selectedProfiles = new LinkedHashSet<>(ApplicationMode.values(app.getSettings()));
+		boolean isBoatEnabled = selectedProfiles.contains(ApplicationMode.BOAT);
+		if((!isBoatEnabled && flag) || (isBoatEnabled && !flag)) {
+			String s = app.getSettings().AVAILABLE_APP_MODES.get();
+			String currModes = flag ? s + ApplicationMode.BOAT.getStringKey() + ","
+					: s.replace(ApplicationMode.BOAT.getStringKey() + ",", "");
+			app.getSettings().AVAILABLE_APP_MODES.set(currModes);
+		}
+	}
 	
 	@Override
 	public void disable(OsmandApplication app) {
@@ -89,6 +105,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 		if(app.getSettings().RENDERER.get().equals(RendererRegistry.NAUTICAL_RENDER)) {
 			app.getSettings().RENDERER.set(previousRenderer);
 		}
+		addBoatProfile(false);
 	}
 
 	@Override

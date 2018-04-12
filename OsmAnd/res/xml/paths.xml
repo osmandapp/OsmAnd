@@ -3,6 +3,9 @@
 
     <cache-path
         name="share"
-        path="share" />
+        path="share"/>
 
+    <external-files-path
+        name="files"
+        path="/"/>
 </paths>

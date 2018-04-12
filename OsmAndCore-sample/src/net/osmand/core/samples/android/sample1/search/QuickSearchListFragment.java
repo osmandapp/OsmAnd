@@ -179,8 +179,8 @@ public abstract class QuickSearchListFragment extends ListFragment {
 					pointDescription.setIconName("ic_action_building");
 					break;
 				case LOCATION:
-					LatLon latLon = (LatLon) object;
-					pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
+					pointDescription = new PointDescription(
+							searchResult.location.getLatitude(), searchResult.location.getLongitude());
 					pointDescription.setIconName("ic_action_world_globe");
 					break;
 				case STREET_INTERSECTION:

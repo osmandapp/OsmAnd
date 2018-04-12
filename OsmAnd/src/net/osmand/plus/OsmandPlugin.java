@@ -3,11 +3,14 @@ package net.osmand.plus;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import net.osmand.IProgress;
 import net.osmand.Location;
@@ -18,12 +21,13 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.plus.osmo.OsMoPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
@@ -81,6 +85,10 @@ public abstract class OsmandPlugin {
 		return active;
 	}
 
+	public boolean isVisible() {
+		return true;
+	}
+
 	public boolean needsInstallation() {
 		return installURL != null;
 	}
@@ -100,23 +108,43 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
+	/*
+	 * Return true in case if plugin should fill the map context menu with buildContextMenuRows method.
+	 */
+	public boolean isMenuControllerSupported(Class<? extends MenuController> menuControllerClass) {
+		return false;
+	}
+
+	/*
+	 * Add menu rows to the map context menu.
+	 */
+	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view) {
+	}
+
+	/*
+	 * Clear resources after menu was closed
+	 */
+	public void clearContextMenuRows() {
+	}
+
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
+
+		allPlugins.add(new MapillaryPlugin(app));
+		enabledPlugins.add(MapillaryPlugin.ID);
+
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
-		allPlugins.add(new OsMoPlugin(app));
 		checkMarketPlugin(app, new SRTMPlugin(app), true, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT);
 
-		// ? questionable - definitely not market plugin 
+		// ? questionable - definitely not market plugin
 //		checkMarketPlugin(app, new TouringViewPlugin(app), false, TouringViewPlugin.COMPONENT, null);
 		checkMarketPlugin(app, new NauticalMapsPlugin(app), false, NauticalMapsPlugin.COMPONENT, null);
 		checkMarketPlugin(app, new SkiMapsPlugin(app), false, SkiMapsPlugin.COMPONENT, null);
 
-//		checkMarketPlugin(app, new RoutePointsPlugin(app), false /*FIXME*/, RoutePointsPlugin.ROUTE_POINTS_PLUGIN_COMPONENT, null);
 		allPlugins.add(new AudioVideoNotesPlugin(app));
 		checkMarketPlugin(app, new ParkingPositionPlugin(app), false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
-		allPlugins.add(new DistanceCalculatorPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
@@ -153,7 +181,7 @@ public abstract class OsmandPlugin {
 			allPlugins.add(srtm);
 		} else {
 			if (marketEnabled) {
-				srtm.setInstallURL(Version.marketPrefix(app) + id);
+				srtm.setInstallURL(Version.getUrlWithUtmRef(app, id));
 				allPlugins.add(srtm);
 			}
 		}
@@ -278,6 +306,16 @@ public abstract class OsmandPlugin {
 		return allPlugins;
 	}
 
+	public static List<OsmandPlugin> getVisiblePlugins() {
+		List<OsmandPlugin> list = new ArrayList<>(allPlugins.size());
+		for (OsmandPlugin p : allPlugins) {
+			if (p.isVisible()) {
+				list.add(p);
+			}
+		}
+		return list;
+	}
+
 	public static List<OsmandPlugin> getEnabledPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
@@ -288,10 +326,30 @@ public abstract class OsmandPlugin {
 		return lst;
 	}
 
+	public static List<OsmandPlugin> getEnabledVisiblePlugins() {
+		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		for (OsmandPlugin p : allPlugins) {
+			if (p.isActive() && p.isVisible()) {
+				lst.add(p);
+			}
+		}
+		return lst;
+	}
+
 	public static List<OsmandPlugin> getNotEnabledPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
 			if (!p.isActive()) {
+				lst.add(p);
+			}
+		}
+		return lst;
+	}
+
+	public static List<OsmandPlugin> getNotEnabledVisiblePlugins() {
+		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		for (OsmandPlugin p : allPlugins) {
+			if (!p.isActive() && p.isVisible()) {
 				lst.add(p);
 			}
 		}
@@ -385,23 +443,7 @@ public abstract class OsmandPlugin {
 
 	public static void registerMapContextMenu(MapActivity map, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			if (plugin instanceof ParkingPositionPlugin) {
-				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
-			} else if (plugin instanceof OsmandMonitoringPlugin) {
-				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
-			}
-		}
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			if (!(plugin instanceof ParkingPositionPlugin) && !(plugin instanceof OsmandMonitoringPlugin)) {
-				int itemsCount = adapter.length();
-				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
-				if (adapter.length() > itemsCount) {
-					adapter.addItem(new ContextMenuItem.ItemBuilder()
-							.setPosition(itemsCount)
-							.setLayout(R.layout.context_menu_list_divider)
-							.createItem());
-				}
-			}
+			plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
 		}
 	}
 
@@ -439,14 +481,13 @@ public abstract class OsmandPlugin {
 		return collection;
 	}
 
-	private static boolean isPackageInstalled(String packageInfo,
-											  OsmandApplication app) {
+	public static boolean isPackageInstalled(String packageInfo, Context ctx) {
 		if (packageInfo == null) {
 			return false;
 		}
 		boolean installed = false;
 		try {
-			installed = app.getPackageManager().getPackageInfo(packageInfo, 0) != null;
+			installed = ctx.getPackageManager().getPackageInfo(packageInfo, 0) != null;
 		} catch (NameNotFoundException e) {
 		}
 		return installed;

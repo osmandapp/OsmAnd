@@ -5,16 +5,13 @@
 	<ListPreference android:key="map_screen_orientation" android:title="@string/map_screen_orientation" android:summary="@string/map_screen_orientation_descr"></ListPreference>
 	<PreferenceCategory android:title="@string/localization_pref_title" android:key="localization">
 		<ListPreference android:key="preferred_locale" android:title="@string/preferred_locale" android:summary="@string/preferred_locale_descr"></ListPreference>
-		<ListPreference android:key="default_driving_region" android:title="@string/driving_region" android:summary="@string/driving_region_descr"></ListPreference>
+		<Preference android:key="default_driving_region" android:title="@string/driving_region" android:summary="@string/driving_region_descr"></Preference>
 		<!-- ListPreference android:key="map_preferred_locale" android:title="@string/map_preferred_locale" android:summary="@string/map_preferred_locale_descr"></ListPreference -->
 		<ListPreference android:key="default_metric_system" android:title="@string/unit_of_length" android:summary="@string/unit_of_length_descr"></ListPreference>
 		<ListPreference android:key="coordinates_format" android:title="@string/coords_format" android:summary="@string/coords_format_descr"></ListPreference>
 
 	</PreferenceCategory>
-	<PreferenceCategory android:title="@string/voice_pref_title" android:key="voice">
-	    <ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
-	</PreferenceCategory>
-	
+
 	<PreferenceCategory android:title="@string/misc_pref_title" android:key="misc">
 		<ListPreference android:key="osmand_theme" android:title="@string/choose_osmand_theme" android:summary="@string/choose_osmand_theme_descr"></ListPreference>
 	</PreferenceCategory>

@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.view.View;
 
 import net.osmand.data.LatLon;
@@ -15,31 +16,50 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 
 public class WptPtEditorFragment extends PointEditorFragment {
-	private WptPtEditor editor;
-	private WptPt wpt;
+
+	protected WptPtEditor editor;
+	protected WptPt wpt;
 	private SavingTrackHelper savingTrackHelper;
 	private GpxSelectionHelper selectedGpxHelper;
 
 	private boolean saved;
 	private int color;
-	private boolean skipDialog;
+	private int defaultColor;
+	protected boolean skipDialog;
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		savingTrackHelper = getMapActivity().getMyApplication().getSavingTrackHelper();
 		selectedGpxHelper = getMapActivity().getMyApplication().getSelectedGpxHelper();
+		assignEditor();
+		defaultColor = getResources().getColor(R.color.gpx_color_point);
+	}
+
+	@Override
+	protected DialogFragment createSelectCategoryDialog() {
+		SelectCategoryDialogFragment selectCategoryDialogFragment = SelectCategoryDialogFragment.createInstance(getEditor().getFragmentTag());
+		GPXFile gpx = editor.getGpxFile();
+		if (gpx != null) {
+			selectCategoryDialogFragment.setGpxFile(gpx);
+		}
+		return selectCategoryDialogFragment;
+	}
+
+	protected void assignEditor() {
 		editor = getMapActivity().getContextMenu().getWptPtPointEditor();
 	}
 
@@ -52,18 +72,30 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		FavoriteGroup group = getMyApplication().getFavorites().getGroup(wpt.category);
 
 		if (group == null) {
-
-			int defaultColor = getResources().getColor(R.color.gpx_color_point);
-			color = wpt.getColor(defaultColor);
-
-		} else color = group.color;
+			color = wpt.getColor(0);
+		} else {
+			color = group.color;
+		}
 	}
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		if (skipDialog) save(true);
+		if (skipDialog) {
+			save(true);
+		}
+	}
+
+	@Override
+	public void dismiss(boolean includingMenu) {
+		super.dismiss(includingMenu);
+		OnDismissListener listener = editor.getOnDismissListener();
+		if (listener != null) {
+			listener.onDismiss();
+		}
+		editor.setNewGpxPointProcessing(false);
+		editor.setOnDismissListener(null);
 	}
 
 	@Override
@@ -73,10 +105,14 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	@Override
 	public String getToolbarTitle() {
-		if (editor.isNew()) {
-			return getMapActivity().getResources().getString(R.string.context_menu_item_add_waypoint);
+		if (editor.isNewGpxPointProcessing()) {
+			return getMapActivity().getResources().getString(R.string.save_gpx_waypoint);
 		} else {
-			return getMapActivity().getResources().getString(R.string.shared_string_edit);
+			if (editor.isNew()) {
+				return getMapActivity().getResources().getString(R.string.context_menu_item_add_waypoint);
+			} else {
+				return getMapActivity().getResources().getString(R.string.shared_string_edit);
+			}
 		}
 	}
 
@@ -140,6 +176,14 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		saved = true;
 	}
 
+	private void syncGpx(GPXFile gpxFile) {
+		File gpx = new File(gpxFile.path);
+		if (gpx.exists()) {
+			MapMarkersHelper helper = getMyApplication().getMapMarkersHelper();
+			helper.runSynchronization(helper.getOrCreateGroup(gpx));
+		}
+	}
+
 	private void doAddWpt(String name, String category, String description) {
 		wpt.name = name;
 		wpt.category = category;
@@ -157,11 +201,17 @@ public class WptPtEditorFragment extends PointEditorFragment {
 					selectedGpxHelper.setGpxFileToDisplay(gpx);
 				}
 			} else {
-				wpt = gpx.addWptPt(wpt.getLatitude(), wpt.getLongitude(),
-						System.currentTimeMillis(), description, name, category, color);
-				new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
+				addWpt(gpx, description, name, category, color);
+				new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
+			syncGpx(gpx);
 		}
+	}
+
+	protected void addWpt(GPXFile gpx, String description, String name, String category, int color) {
+		wpt = gpx.addWptPt(wpt.getLatitude(), wpt.getLongitude(),
+				System.currentTimeMillis(), description, name, category, color);
+		syncGpx(gpx);
 	}
 
 	private void doUpdateWpt(String name, String category, String description) {
@@ -176,8 +226,9 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			} else {
 				gpx.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(),
 						System.currentTimeMillis(), description, name, category, color);
-				new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
+				new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
+			syncGpx(gpx);
 		}
 	}
 
@@ -196,8 +247,9 @@ public class WptPtEditorFragment extends PointEditorFragment {
 						savingTrackHelper.deletePointData(wpt);
 					} else {
 						gpx.deleteWptPt(wpt);
-						new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
+						new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 					}
+					syncGpx(gpx);
 				}
 				saved = true;
 
@@ -247,12 +299,12 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	@Override
 	public Drawable getNameIcon() {
-		return FavoriteImageDrawable.getOrCreate(getMapActivity(), color, false);
+		return FavoriteImageDrawable.getOrCreate(getMapActivity(), color == 0 ? defaultColor : color, false);
 	}
 
 	@Override
 	public Drawable getCategoryIcon() {
-		return getPaintedIcon(R.drawable.ic_action_folder_stroke, color);
+		return getPaintedIcon(R.drawable.ic_action_folder_stroke, color == 0 ? defaultColor : color);
 	}
 
 	private static class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {

@@ -62,7 +62,7 @@ public class ContextMenuHelper {
 
 		final Toolbar topBar = new Toolbar(ctx);
 		topBar.setClickable(true);
-		Drawable back = app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		Drawable back = app.getIconsCache().getIcon(R.drawable.ic_arrow_back);
 		topBar.setNavigationIcon(back);
 		topBar.setNavigationContentDescription(app.getString("access_shared_string_navigate_up"));
 		topBar.setTitle(title);
@@ -220,7 +220,7 @@ public class ContextMenuHelper {
 
 		final Toolbar topBar = new Toolbar(ctx);
 		topBar.setClickable(true);
-		Drawable back = app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		Drawable back = app.getIconsCache().getIcon(R.drawable.ic_arrow_back);
 		topBar.setNavigationIcon(back);
 		topBar.setNavigationContentDescription(app.getString("access_shared_string_navigate_up"));
 		topBar.setTitle(title);

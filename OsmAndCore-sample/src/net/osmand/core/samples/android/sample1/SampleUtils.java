@@ -10,6 +10,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Surface;
@@ -189,7 +191,8 @@ public class SampleUtils {
 		return files;
 	}
 
-	public static byte[] getDrawableAsByteArray(Drawable drawable) {
+	@Nullable
+	public static byte[] getDrawableAsByteArray(@NonNull Drawable drawable) {
 		if (drawable instanceof BitmapDrawable) {
 			Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 			return getBitmapAsByteArray(bitmap);
@@ -197,7 +200,8 @@ public class SampleUtils {
 		return null;
 	}
 
-	public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+	@NonNull
+	public static byte[] getBitmapAsByteArray(@NonNull Bitmap bitmap) {
 		int size = bitmap.getRowBytes() * bitmap.getHeight();
 		ByteBuffer byteBuffer = ByteBuffer.allocate(size);
 		bitmap.copyPixelsToBuffer(byteBuffer);

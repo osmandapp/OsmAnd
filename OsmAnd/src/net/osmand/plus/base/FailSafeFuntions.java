@@ -149,7 +149,7 @@ public class FailSafeFuntions {
 
 						
 					};
-					task.execute(gpxPath);
+					task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxPath);
 
 				}
 			};
@@ -173,7 +173,7 @@ public class FailSafeFuntions {
 		app.getSettings().FOLLOW_THE_ROUTE.set(true);
 		routingHelper.setFollowingMode(true);
 		app.getTargetPointsHelper().updateRouteAndRefresh(true);
-		app.initVoiceCommandPlayer(ma, true, null, false, false);
+		app.initVoiceCommandPlayer(ma, routingHelper.getAppMode(), true, null, false, false);
 		if(ma.getDashboard().isVisible()) {
 			ma.getDashboard().hideDashboard();
 		}
@@ -182,9 +182,7 @@ public class FailSafeFuntions {
 	private static void notRestoreRoutingMode(MapActivity ma, OsmandApplication app){
 		ma.updateApplicationModeSettings();
 		app.getRoutingHelper().clearCurrentRoute(null, new ArrayList<LatLon>());
-		if (app.getSettings().USE_MAP_MARKERS.get()) {
-			app.getTargetPointsHelper().removeAllWayPoints(false, false);
-		}
+		app.getTargetPointsHelper().removeAllWayPoints(false, false);
 		ma.refreshMap();
 	}
 

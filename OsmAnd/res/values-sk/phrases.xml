@@ -127,7 +127,7 @@
 	<string name="poi_gate">Brána</string>
 	<string name="poi_city_wall">Mestské hradby</string>
 	<string name="poi_lift_gate">Závora</string>
-	<string name="poi_toll_booth">Mýtna búdka</string>
+	<string name="poi_toll_booth">Mýtna stanica</string>
 	<string name="poi_border_control">Hraničná kontrola</string>
 	<string name="poi_traffic_calming_bump">Malý spomaľovač</string>
 	<string name="poi_traffic_calming_table">Veľký spomaľovač</string>
@@ -138,7 +138,7 @@
 	<string name="poi_vehicle_inspection">Kontrola vozidla (technická/emisná)</string>
 	<string name="poi_car_wash">Autoumyváreň</string>
 	<string name="poi_fuel">Benzínová pumpa</string>
-	<string name="poi_charging_station">Nabíjacia stanica</string>
+	<string name="poi_electricity_combined_charging">Nabíjacia stanica</string>
 	<string name="poi_vehicle_ramp">Servisná rampa na auto</string>
 	<string name="poi_compressed_air">Stlačený vzduch</string>
 	<string name="poi_parking">Parkovisko</string>
@@ -990,11 +990,11 @@
 	<string name="poi_monitoring_station">Meracia stanica</string>
 	<string name="poi_capital">Hlavné mesto</string>
 	<string name="poi_shower">Sprcha</string>
-	<string name="poi_animal_shelter_bird">Typ prístrešku: vtáky</string>
+	<string name="poi_animal_shelter_bird">Vtáky</string>
 
-<string name="poi_animal_shelter_dog">Typ prístrešku: psy</string>
-	<string name="poi_animal_shelter_cat">Typ prístrešku: mačky</string>
-	<string name="poi_animal_shelter_dog_cat">Typ prístrešku: psy a mačky</string>
+<string name="poi_animal_shelter_dog">Psy</string>
+	<string name="poi_animal_shelter_cat">Mačky</string>
+	<string name="poi_animal_shelter_dog_cat">Psy a mačky</string>
 	<string name="poi_fee_no">Nie</string>
 	<string name="poi_drinking_water_yes">Áno</string>
 	<string name="poi_drinking_water_no">Nie</string>
@@ -1056,7 +1056,7 @@
 	<string name="poi_denomination_methodist">Metodistické</string>
 	<string name="poi_denomination_anglican">Anglikánske</string>
 	<string name="poi_denomination_presbyterian">Presbyteriánske</string>
-	<string name="poi_denomination_evangelical">Evanjelické</string>
+	<string name="poi_denomination_evangelical">Evanjelikálne</string>
 	<string name="poi_denomination_russian_orthodox">Ruské ortodoxné</string>
 	<string name="poi_denomination_mormon">Mormónske</string>
 	<string name="poi_denomination_jehovahs_witness">Svedkovia Jehovovi</string>
@@ -1853,7 +1853,7 @@
 	<string name="poi_cargo_container">Kontajnery</string>
 	<string name="poi_cargo_hgv">Nákladné autá</string>
 
-	<string name="poi_craft_electronics">Oprava elektroniky</string>
+	<string name="poi_craft_electronics_repair">Oprava elektroniky</string>
 	<string name="poi_fireworks">Predaj zábavnej pyrotechniky</string>
 
 	<string name="poi_aerialway_length">Dĺžka</string>
@@ -1883,9 +1883,9 @@
 	<string name="poi_compressed_air_yes">Áno</string>
 	<string name="poi_button_operated_yes">Dopytové tlačidlo: áno</string>
 	<string name="poi_free_flying_paragliding_yes">Paragliding</string>
-	<string name="poi_organic_yes">Biopotraviny: áno</string>
-	<string name="poi_organic_no">Biopotraviny: nie</string>
-	<string name="poi_organic_only">Len biopotraviny</string>
+	<string name="poi_organic_yes">Áno</string>
+	<string name="poi_organic_no">Nie</string>
+	<string name="poi_organic_only">Výhradne</string>
 
 	<string name="poi_wiki_link">Wikipédia</string>
 
@@ -1912,21 +1912,21 @@
 	<string name="poi_aquaculture_mussels">Akvakultúra: mušle</string>
 
 	<string name="poi_telescope">Teleskop/Ďalekohľad</string>
-	<string name="poi_telescope_type_optical">Teleskop: optický</string>
-	<string name="poi_telescope_type_radio">Teleskop: rádiový</string>
-	<string name="poi_telescope_type_gamma">Teleskop: gamma-žiarenie</string>
+	<string name="poi_telescope_type_optical">Optický</string>
+	<string name="poi_telescope_type_radio">Rádiový</string>
+	<string name="poi_telescope_type_gamma">Gamma-žiarenie</string>
 	<string name="poi_nuclear_explosion_crater_diameter">Výbuch: priemer krátera</string>
 	<string name="poi_fire_hydrant_diameter">Priemer hydrantu</string>
 	<string name="poi_telescope_diameter">Priemer</string>
 	<string name="poi_fire_hydrant_pressure">Tlak v hydrante</string>
 	<string name="poi_fire_hydrant_count">Počet hydrantov</string>
 	<string name="poi_fire_hydrant_flow_capacity">Prietok v hydrante</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Umiestnenie hydrantu: na chodníku</string>
-	<string name="poi_fire_hydrant_position_green">Umiestnenie hydrantu: na trávniku</string>
-	<string name="poi_fire_hydrant_position_lane">Umiestnenie hydrantu: v jazdnom pruhu</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Umiestnenie hydrantu: na parkovisku</string>
-	<string name="poi_fire_hydrant_position_street">Umiestnenie hydrantu: na ulici</string>
-	<string name="poi_fire_hydrant_position_underground">Umiestnenie hydrantu: pod zemou</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Na chodníku</string>
+	<string name="poi_fire_hydrant_position_green">Na trávniku</string>
+	<string name="poi_fire_hydrant_position_lane">V jazdnom pruhu</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Na parkovisku</string>
+	<string name="poi_fire_hydrant_position_street">Na ulici</string>
+	<string name="poi_fire_hydrant_position_underground">Pod zemou</string>
 	<string name="poi_fire_hydrant_style_wsh">Vzhľad hydrantu: wsh</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Vodovod</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Rybník</string>
@@ -1989,7 +1989,7 @@
 	<string name="poi_memorial_plaque">Pamätná doska</string>
 	<string name="poi_memorial_stone">Pamätný kameň</string>
 	<string name="poi_memorial_stele">Stéla</string>
-	<string name="poi_fuel_type">Typ</string>
+	<string name="poi_fuel_type">Typ paliva</string>
 	<string name="poi_payment_type">Spôsob platby</string>
 	<string name="poi_additional_type">Doplňujúce</string>
 <string name="poi_denomination_pentecostal">Letničné</string>
@@ -2100,7 +2100,7 @@
 	<string name="poi_home_visit_no">Návštevy doma: nie</string>
 
 	<string name="poi_ford_stepping_stones">Rad kameňov pre chodcov</string>
-	<string name="poi_fuel_avia_type">Typ</string>
+	<string name="poi_fuel_avia_type">Typ paliva (letecké)</string>
 	<string name="poi_payment_fuel_type">Palivové karty</string>
 	<string name="poi_internet_access_type">Spôsob prístupu na Internet</string>
 	<string name="poi_bicycle_service">Oprava bicyklov</string>
@@ -2113,7 +2113,7 @@
 	<string name="poi_traffic_signals_sound">Zvuk</string>
 	<string name="poi_highway_crossing_type">Typ</string>
 	<string name="poi_tactile_paving">Dlažba pre nevidiacich</string>
-	<string name="poi_service_car">Servis</string>
+	<string name="poi_service_general">Servis</string>
 	<string name="poi_brushless">Bez kefy</string>
 	<string name="poi_self_service">Samoobsluha</string>
 	<string name="poi_automated">Automatické</string>
@@ -2325,7 +2325,7 @@
 	<string name="poi_memorial_cross">V tvare kríža</string>
 	<string name="poi_memorial_vehicle">Vozidlo</string>
 	<string name="poi_memorial_stolperstein">Značka na chodníku</string>
-	<string name="poi_memorial_obelisk">Obelist</string>
+	<string name="poi_memorial_obelisk">Obelisk</string>
 	<string name="poi_memorial_column">Stĺp</string>
 	<string name="poi_memorial_stupa">Stupa</string>
 	<string name="poi_memorial_fassade_decoration">Ozdoba fasády</string>
@@ -2451,7 +2451,7 @@
 	<string name="poi_tents_no">Stany nepovolené</string>
 	<string name="poi_openfire_yes">Otvorený oheň polovený</string>
 	<string name="poi_openfire_no">Otvorený oheň nepolovený</string>
-	<string name="poi_scout_yes">Skautský tábor: áno</string>
+	<string name="poi_scout_yes">Áno</string>
 	<string name="poi_scout_no">Skautský tábor: nie</string>
 	<string name="poi_group_only_yes">Len skupiny: áno</string>
 	<string name="poi_group_only_no">Len skupiny: nie</string>
@@ -2494,8 +2494,8 @@
 
 	<string name="poi_technical_monument">Technický monument</string>
 
-	<string name="poi_service_bicycle_charging_yes">Nabíjanie bicyklov: áno</string>
-	<string name="poi_service_bicycle_charging_no">Nabíjanie bicyklov: nie</string>
+	<string name="poi_service_bicycle_charging_yes">Nabíjanie: áno</string>
+	<string name="poi_service_bicycle_charging_no">Nabíjanie: nie</string>
 	<string name="poi_bicycle_repair_station">Stanica na vlastnú opravu bicyklov</string>
 
 	<string name="poi_military_checkpoint">Vojenský kontrolný bod</string>
@@ -2787,7 +2787,7 @@
 	<string name="poi_historic_period_old_kingdom">Historické obdobie: staré kráľovstvo (2686 – 2181 p. n. l.)</string>
 	<string name="poi_historic_period_first_intermediate_period">Historické obdobie: prvé prechodné obdobie (2181 – 2055 p. n. l.)</string>
 	<string name="poi_historic_period_second_intermediate_period">Historické obdobie: druhé prechodné obdobie (1650 – 1550 p. n. l.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Historické obdobie: tretie prechodné obdobie (1069 – 664 p. n. l.) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Historické obdobie: tretie prechodné obdobie (1069 – 664 p. n. l.)</string>
 	<string name="poi_historic_period_first_persian_period">Historické obdobie: prvé perzské obdobie</string>
 	<string name="poi_historic_period_late_period">Historické obdobie: neskoré obdobie (664 – 332 p. n. l.)</string>
 	<string name="poi_historic_period_second_persian_period">Historické obdobie: druhé perzské obdobie</string>
@@ -2958,4 +2958,300 @@
 	<string name="poi_medical_system_sidda_yes">Tradičný indický</string>
 	<string name="poi_medical_system_unani_yes">Tradičný islamský</string>
 
+	<string name="poi_cafeteria">Jedáleň</string>
+
+<string name="poi_energy_supplier">Dodávateľ energie</string>
+
+	<string name="poi_electronics_repair_computer">Oprava elektroniky: počítače</string>
+	<string name="poi_electronics_repair_appliance">Oprava elektroniky: spotrebiče</string>
+	<string name="poi_electronics_repair_phone">Oprava elektroniky: telefóny</string>
+	<string name="poi_electronics_repair_tv">Oprava elektroniky: televízory</string>
+
+<string name="poi_cuisine_wine">Víno</string>
+	<string name="poi_drink_wine_yes">Víno: áno</string>
+	<string name="poi_drink_wine_retail">Víno: predaj</string>
+	<string name="poi_drink_wine_served">Víno: podávané</string>
+
+	<string name="poi_resort_kids_camp">Detský tábor</string>
+	<string name="poi_music_school">Hudobná škola</string>
+	<string name="poi_language_school">Jazyková škola</string>
+
+<string name="poi_fast_food_cafeteria">Áno</string>
+
+	<string name="poi_in_service_yes">V prevádzke: áno</string>
+
+	<string name="poi_street_cabinet_power">Typ skrine: elektrina</string>
+	<string name="poi_street_cabinet_telecom">Typ skrine: telekomunikácie</string>
+	<string name="poi_street_cabinet_cable_tv">Typ skrine: káblová televízia</string>
+	<string name="poi_street_cabinet_gas">Typ skrine: plyn</string>
+	<string name="poi_street_cabinet_postal_service">Typ skrine: poštové služby</string>
+	<string name="poi_street_cabinet_waste">Typ skrine: odpad</string>
+	<string name="poi_street_cabinet_water_management">Typ skrine: distribúcia vody</string>
+	<string name="poi_street_cabinet_street_lighting">Typ skrine: verejné osvetlenie</string>
+
+	<string name="poi_public_bookcase_type_wooden_cabinet">Typ: drevená skriňa</string>
+	<string name="poi_public_bookcase_type_metal_cabinet">Typ: kovová skriňa</string>
+	<string name="poi_public_bookcase_type_phone_box">Typ: telefónna búdka</string>
+	<string name="poi_public_bookcase_type_reading_box">Typ: malá skrinka</string>
+	<string name="poi_public_bookcase_type_shelf">Typ: polica</string>
+
+	<string name="poi_animal_keeping_type_paddock">Typ: výbeh</string>
+	<string name="poi_animal_keeping_type_open_stable">Typ: otvorená stajňa</string>
+
+	<string name="poi_social_facility_day_care">Denná starostlivosť</string>
+
+	<string name="poi_social_facility_group_home">Spoločné bývanie</string>
+	<string name="poi_social_facility_assisted_living">Asistované bývanie</string>
+	<string name="poi_social_facility_outreach">Nebytové zariadenie</string>
+	<string name="poi_social_facility_food_bank">Potravinová banka</string>
+	<string name="poi_social_facility_shelter">Útulok</string>
+	<string name="poi_social_facility_ambulatory_care">Ambulantná starostlivosť</string>
+	<string name="poi_cuisine_pizza">Pizza</string>
+	<string name="poi_cuisine_burger">Burger</string>
+	<string name="poi_cuisine_coffee">Káva</string>
+	<string name="poi_cuisine_sandwich">Sendvič</string>
+	<string name="poi_cuisine_kebab">Kebab</string>
+	<string name="poi_cuisine_doner">Doner kebab</string>
+	<string name="poi_cuisine_chicken">Kura</string>
+	<string name="poi_cuisine_ice_cream">Zmrzlina</string>
+	<string name="poi_cuisine_sushi">Sushi</string>
+	<string name="poi_cuisine_fish_and_chips">Ryba a hranolky</string>
+	<string name="poi_cuisine_seafood">Morské plody</string>
+	<string name="poi_cuisine_barbecue">Grilované jedlá</string>
+	<string name="poi_cuisine_noodle">Rezance</string>
+	<string name="poi_cuisine_donut">Šisky</string>
+	<string name="poi_cuisine_ramen">Ramen</string>
+	<string name="poi_cuisine_crepe">Palacinky</string>
+	<string name="poi_cuisine_breakfast">Raňajky</string>
+	<string name="poi_cuisine_beef_bowl">Gyudon</string>
+	<string name="poi_cuisine_steak">Steak</string>
+	<string name="poi_cuisine_tapas">Tapas</string>
+	<string name="poi_cuisine_gastropub">Gastrokrčma</string>
+	<string name="poi_cuisine_heuriger">Heuriger</string>
+	<string name="poi_cuisine_curry">Kari</string>
+	<string name="poi_cuisine_buschenschank">Buschenschank</string>
+	<string name="poi_cuisine_grill">Gril</string>
+	<string name="poi_cuisine_bagel">Bagel</string>
+	<string name="poi_cuisine_diner">Večera</string>
+	<string name="poi_cuisine_sausage">Klobásy</string>
+	<string name="poi_cuisine_cake">Koláče</string>
+	<string name="poi_cuisine_pancake">Palacinky</string>
+	<string name="poi_cuisine_pasta">Cestoviny</string>
+	<string name="poi_cuisine_fast_food">Rýchle občerstvenie</string>
+	<string name="poi_cuisine_juice">Džús</string>
+	<string name="poi_cuisine_soba">Soba</string>
+	<string name="poi_cuisine_fine_dining">Zážitková gastronómia</string>
+	<string name="poi_cuisine_tea">Čaj</string>
+	<string name="poi_cuisine_tea_shop">Čajovňa</string>
+	<string name="poi_cuisine_soup">Polievky</string>
+	<string name="poi_cuisine_pie">Koláče</string>
+	<string name="poi_cuisine_hotdog">Hotdog</string>
+	<string name="poi_cuisine_deli">Delikatesy</string>
+	<string name="poi_cuisine_salad">Šaláty</string>
+	<string name="poi_cuisine_frozen_yogurt">Mrazený jogurt</string>
+	<string name="poi_cuisine_fried_food">Vyprážané jedlo</string>
+	<string name="poi_cuisine_savory_pancakes">Slané palacinky</string>
+	<string name="poi_cuisine_bistro">Bistro</string>
+	<string name="poi_cuisine_bakery">Pekáreň</string>
+	<string name="poi_cuisine_couscous">Kuskus</string>
+	<string name="poi_cuisine_fried_chicken">Vyprážané kura</string>
+	<string name="poi_cuisine_dessert">Dezerty</string>
+	<string name="poi_cuisine_canteen">Jedáleň</string>
+	<string name="poi_cuisine_tacos">Tacos</string>
+	<string name="poi_cuisine_piadina">Piadina</string>
+	<string name="poi_cuisine_falafel">Falafel</string>
+	<string name="poi_cuisine_smoothie">Smoothie</string>
+	<string name="poi_cuisine_souvlaki">Souvlaki</string>
+	<string name="poi_cuisine_snack">Drobné jedlo</string>
+	<string name="poi_cuisine_yogurt">Jogurt</string>
+	<string name="poi_cuisine_gyros">Gyros</string>
+	<string name="poi_cuisine_meat">Mäso</string>
+	<string name="poi_cuisine_wings">Krídelká</string>
+	<string name="poi_cuisine_waffle">Vafle</string>
+	<string name="poi_cuisine_chocolate">Čokoláda</string>
+	<string name="poi_cuisine_potato">Zemiaky</string>
+	<string name="poi_cuisine_brunch">Desiata</string>
+	<string name="poi_cuisine_pita">Pita</string>
+	<string name="poi_cuisine_fondue">Fondue</string>
+	<string name="poi_cuisine_baguette">Bageta</string>
+	<string name="poi_cuisine_burrito">Burrito</string>
+	<string name="poi_cuisine_teriyaki">Teriyaki</string>
+	<string name="poi_cuisine_regional">Domáca/Regionálna</string>
+	<string name="poi_cuisine_italian">Talianska</string>
+	<string name="poi_cuisine_chinese">Čínska</string>
+	<string name="poi_cuisine_mexican">Mexická</string>
+	<string name="poi_cuisine_japanese">Japonská</string>
+	<string name="poi_cuisine_german">Nemecká</string>
+	<string name="poi_cuisine_indian">Indická</string>
+	<string name="poi_cuisine_american">Americká</string>
+	<string name="poi_cuisine_asian">Ázijská</string>
+	<string name="poi_cuisine_french">Francúzska</string>
+	<string name="poi_cuisine_greek">Grécka</string>
+	<string name="poi_cuisine_thai">Thajská</string>
+	<string name="poi_cuisine_international">Medzinárodná</string>
+	<string name="poi_cuisine_turkish">Turecká</string>
+	<string name="poi_cuisine_spanish">Španielska</string>
+	<string name="poi_cuisine_vietnamese">Vietnamská</string>
+	<string name="poi_cuisine_korean">Kórejská</string>
+	<string name="poi_cuisine_mediterranean">Stredomorská</string>
+	<string name="poi_cuisine_bavarian">Bavorská</string>
+	<string name="poi_cuisine_lebanese">Libanonská</string>
+	<string name="poi_cuisine_russian">Ruská</string>
+	<string name="poi_cuisine_filipino">Filipínska</string>
+	<string name="poi_cuisine_portuguese">Portugalská</string>
+	<string name="poi_cuisine_georgian">Gruzínska</string>
+	<string name="poi_cuisine_polish">Poľská</string>
+	<string name="poi_cuisine_brazilian">Brazílska</string>
+	<string name="poi_cuisine_arab">Arabská</string>
+	<string name="poi_cuisine_danish">Dánska</string>
+	<string name="poi_cuisine_indonesian">Indonézska</string>
+	<string name="poi_cuisine_african">Africká</string>
+	<string name="poi_cuisine_caribbean">Karibská</string>
+	<string name="poi_cuisine_argentinian">Argentínska</string>
+	<string name="poi_cuisine_balkan">Balkánska</string>
+	<string name="poi_cuisine_peruvian">Peruánska</string>
+	<string name="poi_cuisine_croatian">Chorvátska</string>
+	<string name="poi_cuisine_bolivian">Bolívijská</string>
+	<string name="poi_cuisine_malagasy">Madagaskarská</string>
+	<string name="poi_cuisine_persian">Perzská</string>
+	<string name="poi_cuisine_moroccan">Marocká</string>
+	<string name="poi_cuisine_austrian">Rakúska</string>
+	<string name="poi_cuisine_malaysian">Malajzijská</string>
+	<string name="poi_cuisine_irish">Írska</string>
+	<string name="poi_cuisine_ethiopian">Etiópska</string>
+	<string name="poi_cuisine_hungarian">Maďarská</string>
+	<string name="poi_cuisine_lao">Laoská</string>
+	<string name="poi_cuisine_european">Európska</string>
+	<string name="poi_cuisine_uzbek">Uzbecká</string>
+	<string name="poi_cuisine_czech">Česká</string>
+	<string name="poi_cuisine_cuban">Kubánska</string>
+	<string name="poi_cuisine_british">Britská</string>
+	<string name="poi_cuisine_latin_american">Latinskoamerická</string>
+	<string name="poi_cuisine_nepalese">Nepálska</string>
+	<string name="poi_cuisine_mongolian">Mongolská</string>
+	<string name="poi_cuisine_middle_eastern">Blízkovýchodná</string>
+	<string name="poi_cuisine_ukrainian">Ukrajinská</string>
+	<string name="poi_cuisine_afghan">Afganská</string>
+	<string name="poi_cuisine_belgian">Belgická</string>
+	<string name="poi_cuisine_basque">Baskická</string>
+	<string name="poi_cuisine_swiss">Švajčiarska</string>
+	<string name="poi_cuisine_cantonese">Kantonská</string>
+	<string name="poi_cuisine_swedish">Švédska</string>
+	<string name="poi_cuisine_jamaican">Jamajská</string>
+	<string name="poi_cuisine_armenian">Arménska</string>
+	<string name="poi_cuisine_hawaiian">Havajská</string>
+	<string name="poi_cuisine_english">Anglická</string>
+	<string name="poi_cuisine_pakistani">Pakistanská</string>
+	<string name="poi_cuisine_taiwanese">Tajwanská</string>
+	<string name="poi_cuisine_tex_mex">Tex-mex (Texas/Mexiko)</string>
+	<string name="poi_cuisine_dutch">Holandská</string>
+	<string name="poi_cuisine_syrian">Sýrska</string>
+	<string name="poi_cuisine_australian">Austrálska</string>
+	<string name="poi_cuisine_cajun">Cajunská</string>
+	<string name="poi_cuisine_egyptian">Egyptská</string>
+	<string name="poi_cuisine_senegalese">Senegalská</string>
+	<string name="poi_cuisine_jewish">Židovská</string>
+	<string name="poi_cuisine_bulgarian">Bulharská</string>
+	<string name="poi_cuisine_tibetan">Tibetská</string>
+
+	<string name="poi_zoo_type">Typ</string>
+	<string name="poi_motorcycle_services">Služby</string>
+	<string name="poi_motorcycle_type">Typ motocykla</string>
+	<string name="poi_animal_shelter_type">Povolené zvieratá</string>
+	<string name="poi_animal_shelter_purpose">Účel</string>
+	<string name="poi_boat_rental_type">Prenajímané lode</string>
+	<string name="poi_operational_status">Prevádzkový stav</string>
+	<string name="poi_water_supply_type">Typ dodávky vody</string>
+	<string name="poi_water_purification">Čistenie vody</string>
+	<string name="poi_water_place_access">Prístup k zdroju vody</string>
+
+<string name="poi_car_yes">Auto: áno</string>
+	<string name="poi_car_no">Auto: nie</string>
+	<string name="poi_bicycle_yes">Bicykel: áno</string>
+	<string name="poi_bicycle_no">Bicykel: nie</string>
+	<string name="poi_scooter_yes">Skúter: áno</string>
+	<string name="poi_scooter_no">Skúter: nie</string>
+	<string name="poi_truck_yes">Nákladné auto: áno</string>
+	<string name="poi_truck_no">Nákladné auto: nie</string>
+
+	<string name="poi_parking_fee_yes">Poplatok za parkovanie: áno</string>
+	<string name="poi_parking_fee_no">Poplatok za parkovanie: nie</string>
+	<string name="poi_parking_fee">Poplatok za parkovanie</string>
+
+	<string name="poi_amperage">Napätie</string>
+	<string name="poi_charging_station_output">Výstup nabíjacej stanice</string>
+
+	<string name="poi_map_type_topo">Typ mapy: topografická</string>
+	<string name="poi_map_type_street">Typ mapy: ulice</string>
+	<string name="poi_map_type_scheme">Typ mapy: schematická</string>
+	<string name="poi_map_type_toposcope">Typ mapy: smerová ružica</string>
+	<string name="poi_map_size_site">Veľkosť mapy: areál</string>
+	<string name="poi_map_size_city">Veľkosť mapy: mesto</string>
+	<string name="poi_map_size_region">Veľkosť mapy: región</string>
+
+<string name="poi_climbing_style">Lezecký štýl</string>
+	<string name="poi_socket">Zásuvka</string>
+	<string name="poi_socket_chademo_output_filter">CHAdeMO</string>
+	<string name="poi_socket_type2_output_filter">Typ 2</string>
+	<string name="poi_socket_type2_combo_output_filter">Typ 2 kombinácia</string>
+	<string name="poi_socket_type3_output_filter">Typ 3</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE blue</string>
+	<string name="poi_socket_schuko_output_filter">Schuko</string>
+
+<string name="poi_lock_basin">Plavebná komora</string>
+	<string name="poi_animal_shelter_wildlife">Divé zvieratá</string>
+	<string name="poi_animal_shelter_horse">Kone</string>
+	<string name="poi_animal_shelter_mammal">Cicavce</string>
+	<string name="poi_animal_shelter_fish">Ryby</string>
+
+	<string name="poi_information_route_marker">Značenie trasy</string>
+	<string name="poi_bridge_movable_swing">Typ pohyblivého mostu: otočný</string>
+	<string name="poi_bridge_movable_lift">Typ pohyblivého mostu: zdvíhací</string>
+	<string name="poi_bridge_movable_drawbridge">Typ pohyblivého mostu: padací</string>
+	<string name="poi_bridge_movable_submersible">Typ pohyblivého mostu: ponorný</string>
+	<string name="poi_bridge_movable_transporter">Typ pohyblivého mostu: gondolový</string>
+	<string name="poi_bridge_movable_retractable">Typ pohyblivého mostu: vysúvací</string>
+
+	<string name="poi_route_subway_ref">Metro</string>
+
+	<string name="poi_health_specialty_general_yes">Praktický lekár</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Oftalmológia</string>
+	<string name="poi_health_specialty_gynaecology_yes">Gynekológia</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Interná medicína</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ortopédia</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Otolaryngológia</string>
+	<string name="poi_health_specialty_paediatrics_yes">Pediatria</string>
+	<string name="poi_health_specialty_paediatrics_no">Zdravotná špecializácia: pediatria: nie</string>
+	<string name="poi_health_specialty_dermatology_yes">Dermatológia</string>
+	<string name="poi_health_specialty_urology_yes">Urológia</string>
+	<string name="poi_health_specialty_surgery_yes">Všeobecná chirurgia</string>
+	<string name="poi_health_specialty_radiology_yes">Rádiológia</string>
+	<string name="poi_health_specialty_psychiatry_yes">Psychiatria</string>
+	<string name="poi_health_specialty_neurology_yes">Neurológia</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Dermatovenerológia</string>
+	<string name="poi_health_specialty_cardiology_yes">Kardiológia</string>
+	<string name="poi_health_specialty_trauma_yes">Traumatológia</string>
+	<string name="poi_health_specialty_biology_yes">Klinická biológia</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Anesteziológia</string>
+	<string name="poi_health_specialty_pulmonology_yes">Respiračná medicína</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Zubná, ústna a tvárová chirurgia</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Traumatológia a urgentná medicína</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Zdravotná špecializácia: traumatológia a urgentná medicína: nie</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Plastická chirurgia</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Fyzioterapia</string>
+	<string name="poi_health_specialty_biochemistry_yes">Biochémia</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Detská psychiatria</string>
+	<string name="poi_health_specialty_physiatry_yes">Fyziatria a rehabilitácia</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Tvárová chirurgia</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Rádiológia</string>
+	<string name="poi_health_specialty_gastroenterology_yes">Gastroenterológia</string>
+	<string name="poi_health_specialty_dentistry_yes">Stomatológia</string>
+	<string name="poi_health_specialty_nephrology_yes">Nefrológia</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Neurologická chirurgia</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropsychiatria</string>
+	<string name="poi_health_specialty_endocrinology_yes">Endokrinológia</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Nukleárna medicína</string>
+	<string name="poi_health_specialty_pathology_yes">Patologická anatómia</string>
+	<string name="poi_health_specialty_oncology_yes">Onkológia</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">Tropická medicína</string>
 	</resources>

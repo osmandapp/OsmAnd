@@ -4,11 +4,9 @@ package net.osmand.plus.activities;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,10 +18,17 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatCheckedTextView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.IProgress;
@@ -37,30 +42,32 @@ import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment.ChooseAppDirFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment.MoveFilesToDifferentDirectory;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 
 public class SettingsGeneralActivity extends SettingsBaseActivity implements OnRequestPermissionsResultCallback {
 
-	public static final String MORE_VALUE = "MORE_VALUE";
+	private static final String IP_ADDRESS_PATTERN =
+			"^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+
 	private Preference applicationDir;
 	private ListPreference applicationModePreference;
-	private ListPreference drivingRegionPreference;
+	private Preference drivingRegionPreference;
 	private ChooseAppDirFragment chooseAppDirFragment;
 	private boolean permissionRequested;
 	private boolean permissionGranted;
@@ -93,56 +100,93 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				new String[]{getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)},
 				new Integer[]{ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 
+		drivingRegionPreference = screen.findPreference(settings.DRIVING_REGION.getId());
+
 		addLocalPrefs((PreferenceGroup) screen.findPreference("localization"));
-		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));
 		addProxyPrefs((PreferenceGroup) screen.findPreference("proxy"));
 		addMiscPreferences((PreferenceGroup) screen.findPreference("misc"));
 
-
 		applicationModePreference = (ListPreference) screen.findPreference(settings.APPLICATION_MODE.getId());
 		applicationModePreference.setOnPreferenceChangeListener(this);
-		drivingRegionPreference = (ListPreference) screen.findPreference(settings.DRIVING_REGION.getId());
 	}
-
-
-	private void addVoicePrefs(PreferenceGroup cat) {
-		if (!Version.isBlackberry((OsmandApplication) getApplication())) {
-			ListPreference lp = createListPreference(
-					settings.AUDIO_STREAM_GUIDANCE,
-					new String[]{getString(R.string.voice_stream_music), getString(R.string.voice_stream_notification),
-							getString(R.string.voice_stream_voice_call)}, new Integer[]{AudioManager.STREAM_MUSIC,
-							AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL}, R.string.choose_audio_stream,
-					R.string.choose_audio_stream_descr);
-			final OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
-			lp.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-				@Override
-				public boolean onPreferenceChange(Preference preference, Object newValue) {
-					prev.onPreferenceChange(preference, newValue);
-					CommandPlayer player = getMyApplication().getPlayer();
-					if (player != null) {
-						player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
-					}
-					return true;
-				}
-			});
-			cat.addPreference(lp);
-			cat.addPreference(createCheckBoxPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music,
-					R.string.interrupt_music_descr));
-		}
-	}
-
 
 	private void addLocalPrefs(PreferenceGroup screen) {
+		drivingRegionPreference.setTitle(R.string.driving_region);
+		drivingRegionPreference.setSummary(R.string.driving_region_descr);
+		drivingRegionPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				final AlertDialog.Builder b = new AlertDialog.Builder(SettingsGeneralActivity.this);
+
+				b.setTitle(getString(R.string.driving_region));
+
+				final List<DrivingRegion> drs = new ArrayList<>();
+				drs.add(null);
+				drs.addAll(Arrays.asList(DrivingRegion.values()));
+				int sel = -1;
+				DrivingRegion selectedDrivingRegion = settings.DRIVING_REGION.get();
+				if (settings.DRIVING_REGION_AUTOMATIC.get()) {
+					sel = 0;
+				}
+				for (int i = 1; i < drs.size(); i++) {
+					if (sel == -1 && drs.get(i) == selectedDrivingRegion) {
+						sel = i;
+						break;
+					}
+				}
+
+				final int selected = sel;
+				final ArrayAdapter<DrivingRegion> singleChoiceAdapter =
+						new ArrayAdapter<DrivingRegion>(SettingsGeneralActivity.this, R.layout.single_choice_description_item, R.id.text1, drs) {
+					@NonNull
+					@Override
+					public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+						View v = convertView;
+						if (v == null) {
+							LayoutInflater inflater = SettingsGeneralActivity.this.getLayoutInflater();
+							v = inflater.inflate(R.layout.single_choice_description_item, parent, false);
+						}
+						DrivingRegion item = getItem(position);
+						AppCompatCheckedTextView title = (AppCompatCheckedTextView) v.findViewById(R.id.text1);
+						TextView desc = (TextView) v.findViewById(R.id.description);
+						if (item != null) {
+							title.setText(getString(item.name));
+							desc.setVisibility(View.VISIBLE);
+							desc.setText(item.getDescription(v.getContext()));
+						} else {
+							title.setText(getString(R.string.driving_region_automatic));
+							desc.setVisibility(View.GONE);
+						}
+						title.setChecked(position == selected);
+						return v;
+					}
+				};
+
+				b.setAdapter(singleChoiceAdapter, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if (drs.get(which) == null) {
+							settings.DRIVING_REGION_AUTOMATIC.set(true);
+							MapViewTrackingUtilities mapViewTrackingUtilities = MapActivity.getSingleMapViewTrackingUtilities();
+							if (mapViewTrackingUtilities != null) {
+								mapViewTrackingUtilities.resetDrivingRegionUpdate();
+							}
+						} else {
+							settings.DRIVING_REGION_AUTOMATIC.set(false);
+							settings.DRIVING_REGION.set(drs.get(which));
+						}
+						updateAllSettings();
+					}
+				});
+
+				b.setNegativeButton(R.string.shared_string_cancel, null);
+				b.show();
+				return true;
+			}
+		});
+
 		String[] entries;
 		String[] entrieValues;
-
-		DrivingRegion[] drs = DrivingRegion.values();
-		entries = new String[drs.length];
-		for (int i = 0; i < entries.length; i++) {
-			entries[i] = getString(drs[i].name); // + " (" + drs[i].defMetrics.toHumanString(this) +")" ;
-		}
-		registerListPreference(settings.DRIVING_REGION, screen, entries, drs);
 
 		MetricsConstants[] mvls = MetricsConstants.values();
 		entries = new String[mvls.length];
@@ -180,6 +224,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				"af",
 				"ar",
 				"ast",
+				"az",
 				"be",
 				"be_BY",
 				"bg",
@@ -203,6 +248,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				"hr",
 				"hsb",
 				"hu",
+				"hy",
 				"is",
 				"it",
 				"ja",
@@ -238,6 +284,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				getString(R.string.lang_af) + incompleteSuffix,
 				getString(R.string.lang_ar),
 				getString(R.string.lang_ast) + incompleteSuffix,
+				getString(R.string.lang_az),
 				getString(R.string.lang_be),
 				getString(R.string.lang_be_by),
 				getString(R.string.lang_bg),
@@ -252,15 +299,16 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				getString(R.string.lang_es),
 				getString(R.string.lang_es_ar),
 				getString(R.string.lang_es_us),
-				getString(R.string.lang_eu),
+				getString(R.string.lang_eu) + incompleteSuffix,
 				getString(R.string.lang_fa),
 				getString(R.string.lang_fi) + incompleteSuffix,
 				getString(R.string.lang_fr),
-				getString(R.string.lang_gl),
+				getString(R.string.lang_gl) + incompleteSuffix,
 				getString(R.string.lang_he) + incompleteSuffix,
 				getString(R.string.lang_hr) + incompleteSuffix,
 				getString(R.string.lang_hsb) + incompleteSuffix,
 				getString(R.string.lang_hu),
+				getString(R.string.lang_hy),
 				getString(R.string.lang_is) + incompleteSuffix,
 				getString(R.string.lang_it),
 				getString(R.string.lang_ja),
@@ -308,6 +356,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 
 
 	protected void enableProxy(boolean enable) {
+		settings.ENABLE_PROXY.set(enable);
 		if (enable) {
 			NetworkUtils.setProxy(settings.PROXY_HOST.get(), settings.PROXY_PORT.get());
 		} else {
@@ -316,7 +365,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	}
 
 	private void addProxyPrefs(PreferenceGroup proxy) {
-		CheckBoxPreference enableProxyPref = (CheckBoxPreference) proxy.findPreference("enable_proxy");
+		CheckBoxPreference enableProxyPref = (CheckBoxPreference) proxy.findPreference(settings.ENABLE_PROXY.getId());
 		enableProxyPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -329,9 +378,15 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		hostPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				settings.PROXY_HOST.set((String) newValue);
-				enableProxy(NetworkUtils.getProxy() != null);
-				return true;
+				String ipAddress = (String) newValue;
+				if (ipAddress.matches(IP_ADDRESS_PATTERN)) {
+					settings.PROXY_HOST.set(ipAddress);
+					enableProxy(NetworkUtils.getProxy() != null);
+					return true;
+				} else {
+					Toast.makeText(SettingsGeneralActivity.this, getString(R.string.wrong_format), Toast.LENGTH_SHORT).show();
+					return false;
+				}
 			}
 		});
 
@@ -436,7 +491,14 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 						OsmandSettings.OSMAND_LIGHT_THEME});
 
 		misc.addPreference(createCheckBoxPreference(settings.USE_KALMAN_FILTER_FOR_COMPASS, R.string.use_kalman_filter_compass, R.string.use_kalman_filter_compass_descr));
-
+		misc.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS, R.string.use_magnetic_sensor, R.string.use_magnetic_sensor_descr));
+		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_USE_ANIMATIONS, R.string.do_not_use_animations, R.string.do_not_use_animations_descr));
+		misc.addPreference(createCheckBoxPreference(settings.MAP_EMPTY_STATE_ALLOWED, R.string.tap_on_map_to_hide_interface, R.string.tap_on_map_to_hide_interface_descr));
+		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES, R.string.do_not_show_startup_messages, R.string.do_not_show_startup_messages_desc));
+		if (Version.isGooglePlayEnabled(getMyApplication()) && Version.isFreeVersion(getMyApplication())
+				&& !settings.FULL_VERSION_PURCHASED.get() && !settings.LIVE_UPDATES_PURCHASED.get()) {
+			misc.addPreference(createCheckBoxPreference(settings.DO_NOT_SEND_ANONYMOUS_APP_USAGE, R.string.do_not_send_anonymous_app_usage, R.string.do_not_send_anonymous_app_usage_desc));
+		}
 	}
 
 
@@ -448,31 +510,17 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	}
 
 	public void updateAllSettings() {
-		reloadVoiceListPreference(getPreferenceScreen());
 		super.updateAllSettings();
 		updateApplicationDirTextAndSummary();
 		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  ["
 				+ settings.APPLICATION_MODE.get().toHumanString(getMyApplication()) + "]");
 		drivingRegionPreference.setTitle(getString(R.string.driving_region) + "  ["
-				+ getString(settings.DRIVING_REGION.get().name) + "]");
+				+ getString(settings.DRIVING_REGION_AUTOMATIC.get() ? R.string.driving_region_automatic : settings.DRIVING_REGION.get().name) + "]");
 	}
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String id = preference.getKey();
-		if (id.equals(settings.VOICE_PROVIDER.getId())) {
-			if (MORE_VALUE.equals(newValue)) {
-				// listPref.set(oldValue); // revert the change..
-				final Intent intent = new Intent(this, DownloadActivity.class);
-				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
-				intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
-				startActivity(intent);
-			} else {
-				super.onPreferenceChange(preference, newValue);
-				getMyApplication().initVoiceCommandPlayer(this, false, null, true, false);
-			}
-			return true;
-		}
 		super.onPreferenceChange(preference, newValue);
 		if (id.equals(settings.SAFE_MODE.getId())) {
 			if ((Boolean) newValue) {
@@ -488,6 +536,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 			getMyApplication().checkPreferredLocale();
 			restartApp();
 		} else if (id.equals(settings.OSMAND_THEME.getId())) {
+			restartApp();
+		} else if (id.equals(settings.METRIC_SYSTEM.getId())) {
+			settings.METRIC_SYSTEM_CHANGED_MANUALLY.set(true);
+		} else if (id.equals(settings.DO_NOT_USE_ANIMATIONS.getId())) {
 			restartApp();
 		} else {
 			updateAllSettings();
@@ -539,7 +591,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 						updateSettingsToNewDir(path.getParentFile().getAbsolutePath());
 					}
 				});
-				task.execute();
+				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
 		});
 		builder.setNeutralButton(R.string.shared_string_no, new OnClickListener() {
@@ -581,7 +633,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				setProgressVisibility(false);
 			}
 
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void loadNativeLibrary() {
@@ -607,7 +659,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 						Toast.makeText(SettingsGeneralActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
 					}
 				}
-			}.execute();
+			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 
@@ -632,43 +684,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				}
 			});
 		}
-	}
-
-
-	private void reloadVoiceListPreference(PreferenceScreen screen) {
-		String[] entries;
-		String[] entrieValues;
-		Set<String> voiceFiles = getVoiceFiles();
-		entries = new String[voiceFiles.size() + 2];
-		entrieValues = new String[voiceFiles.size() + 2];
-		int k = 0;
-		// entries[k++] = getString(R.string.shared_string_none);
-		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
-		entries[k++] = getString(R.string.shared_string_do_not_use);
-		for (String s : voiceFiles) {
-			entries[k] = (s.contains("tts") ? getString(R.string.ttsvoice) + " " : "") +
-					FileNameTranslationHelper.getVoiceName(this, s);
-			entrieValues[k] = s;
-			k++;
-		}
-		entrieValues[k] = MORE_VALUE;
-		entries[k] = getString(R.string.install_more);
-		registerListPreference(settings.VOICE_PROVIDER, screen, entries, entrieValues);
-	}
-
-
-	private Set<String> getVoiceFiles() {
-		// read available voice data
-		File extStorage = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
-		Set<String> setFiles = new LinkedHashSet<String>();
-		if (extStorage.exists()) {
-			for (File f : extStorage.listFiles()) {
-				if (f.isDirectory()) {
-					setFiles.add(f.getName());
-				}
-			}
-		}
-		return setFiles;
 	}
 
 	@Override

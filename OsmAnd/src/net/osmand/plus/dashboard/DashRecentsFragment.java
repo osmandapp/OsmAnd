@@ -1,6 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -53,15 +52,9 @@ public class DashRecentsFragment extends DashLocationFragment {
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Activity activity = getActivity();
-				OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
-
-				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-				// search.putExtra(SearchActivity.SHOW_ONLY_ONE_TAB, true);
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.HISTORY_TAB_INDEX);
-				activity.startActivity(search);
 				closeDashboard();
+				MapActivity activity = (MapActivity) getActivity();
+				activity.showQuickSearch(MapActivity.ShowQuickSearchMode.NEW, false);
 			}
 		});
 		return view;

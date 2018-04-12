@@ -153,56 +153,54 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		}
 		listView.setAdapter(adapter);
 
-		if(Build.VERSION.SDK_INT >= 11) {
-			loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		} else {
-			loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).execute();
-		}
+		loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		return view;
 	}
 
 	public void updateSubscriptionHeader() {
-		View subscriptionBanner = subscriptionHeader.findViewById(R.id.subscription_banner);
-		View subscriptionInfo = subscriptionHeader.findViewById(R.id.subscription_info);
-		if (getSettings().LIVE_UPDATES_PURCHASED.get()) {
-			ImageView statusIcon = (ImageView) subscriptionHeader.findViewById(R.id.statusIcon);
-			TextView statusTextView = (TextView) subscriptionHeader.findViewById(R.id.statusTextView);
-			TextView regionNameTextView = (TextView) subscriptionHeader.findViewById(R.id.regionTextView);
-			statusTextView.setText(getString(R.string.osm_live_active));
-			statusIcon.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_done));
+		if (getActivity() instanceof OsmLiveActivity) {
+			View subscriptionBanner = subscriptionHeader.findViewById(R.id.subscription_banner);
+			View subscriptionInfo = subscriptionHeader.findViewById(R.id.subscription_info);
+			if (getSettings().LIVE_UPDATES_PURCHASED.get()) {
+				ImageView statusIcon = (ImageView) subscriptionHeader.findViewById(R.id.statusIcon);
+				TextView statusTextView = (TextView) subscriptionHeader.findViewById(R.id.statusTextView);
+				TextView regionNameTextView = (TextView) subscriptionHeader.findViewById(R.id.regionTextView);
+				statusTextView.setText(getString(R.string.osm_live_active));
+				statusIcon.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_done));
 
-			String countryName = getSettings().BILLING_USER_COUNTRY.get();
-			if (Algorithms.isEmpty(countryName)) {
-				WorldRegion world = getMyApplication().getRegions().getWorldRegion();
-				countryName = world.getLocaleName();
+				String countryName = getSettings().BILLING_USER_COUNTRY.get();
+				if (Algorithms.isEmpty(countryName)) {
+					WorldRegion world = getMyApplication().getRegions().getWorldRegion();
+					countryName = world.getLocaleName();
+				}
+				regionNameTextView.setText(countryName);
+
+				subscriptionBanner.setVisibility(View.GONE);
+				subscriptionInfo.setVisibility(View.VISIBLE);
+			} else {
+				Button readMoreBtn = (Button) subscriptionHeader.findViewById(R.id.read_more_button);
+				readMoreBtn.setEnabled(!processing);
+				readMoreBtn.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Uri uri = Uri.parse("https://osmand.net/osm_live.php");
+						Intent goToOsmLive = new Intent(Intent.ACTION_VIEW, uri);
+						startActivity(goToOsmLive);
+					}
+				});
+				Button subscriptionButton = (Button) subscriptionHeader.findViewById(R.id.subscription_button);
+				subscriptionButton.setEnabled(!processing);
+				subscriptionButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
+						subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+					}
+				});
+
+				subscriptionBanner.setVisibility(View.VISIBLE);
+				subscriptionInfo.setVisibility(View.GONE);
 			}
-			regionNameTextView.setText(countryName);
-
-			subscriptionBanner.setVisibility(View.GONE);
-			subscriptionInfo.setVisibility(View.VISIBLE);
-		} else {
-			Button readMoreBtn = (Button) subscriptionHeader.findViewById(R.id.read_more_button);
-			readMoreBtn.setEnabled(!processing);
-			readMoreBtn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Uri uri = Uri.parse("http://osmand.net/osm_live.php");
-					Intent goToOsmLive = new Intent(Intent.ACTION_VIEW, uri);
-					startActivity(goToOsmLive);
-				}
-			});
-			Button subscriptionButton = (Button) subscriptionHeader.findViewById(R.id.subscription_button);
-			subscriptionButton.setEnabled(!processing);
-			subscriptionButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-					subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
-				}
-			});
-
-			subscriptionBanner.setVisibility(View.VISIBLE);
-			subscriptionInfo.setVisibility(View.GONE);
 		}
 	}
 
@@ -238,8 +236,10 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 	}
 
 	public void notifyLiveUpdatesChanged() {
-		if (adapter != null) {
-			adapter.notifyLiveUpdatesChanged();
+		if (getActivity() != null) {
+			if (adapter != null && getMyApplication() != null) {
+				adapter.notifyLiveUpdatesChanged();
+			}
 		}
 	}
 
@@ -633,9 +633,11 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 
 		@Override
 		protected void onProgressUpdate(LocalIndexInfo... values) {
+			String fileNameL;
 			for (LocalIndexInfo localIndexInfo : values) {
+				fileNameL = localIndexInfo.getFileName().toLowerCase();
 				if (localIndexInfo.getType() == LocalIndexHelper.LocalIndexType.MAP_DATA
-						&& !(localIndexInfo.getFileName().toLowerCase().contains("world"))) {
+						&& !fileNameL.contains("world") && !fileNameL.startsWith("depth_")) {
 					adapter.add(localIndexInfo);
 				}
 			}

@@ -10,12 +10,14 @@ import android.view.View;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivity.FreeVersionDialog;
 
-import static net.osmand.plus.OsmandApplication.SHOW_PLUS_VERSION_PARAM;
+import static net.osmand.plus.OsmandApplication.SHOW_PLUS_VERSION_INAPP_PARAM;
 
 public class FreeVersionDialogFragment extends DialogFragment {
+	public static final String TAG = "FreeVersionDialogFragment";
 	private FreeVersionDialog dialog;
 
 	@NonNull
@@ -27,10 +29,6 @@ public class FreeVersionDialogFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.OsmandDarkTheme));
 		builder.setNegativeButton(R.string.later, null);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.free_version_banner, null);
-
-		boolean hidePlus = !app.getRemoteBoolean(SHOW_PLUS_VERSION_PARAM, false);
-		view.findViewById(R.id.osmLiveLayoutTopDivider).setVisibility(hidePlus ? View.GONE : View.VISIBLE);
-		view.findViewById(R.id.fullVersionLayout).setVisibility(hidePlus ? View.GONE : View.VISIBLE);
 		builder.setView(view);
 
 		dialog = new DownloadActivity.FreeVersionDialog(view, getDownloadActivity(), true);

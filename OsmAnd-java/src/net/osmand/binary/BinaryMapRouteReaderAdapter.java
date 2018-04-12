@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -205,14 +207,16 @@ public class BinaryMapRouteReaderAdapter {
 
 	public static class RouteRegion extends BinaryIndexPart {
 		public int regionsRead;
+		public List<RouteTypeRule> routeEncodingRules = new ArrayList<BinaryMapRouteReaderAdapter.RouteTypeRule>();
+		public Map<String, Integer> decodingRules = null;
 		List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
 		List<RouteSubregion> basesubregions = new ArrayList<RouteSubregion>();
-		List<RouteTypeRule> routeEncodingRules = new ArrayList<BinaryMapRouteReaderAdapter.RouteTypeRule>();
 		
 		int nameTypeRule = -1;
 		int refTypeRule = -1;
 		int destinationTypeRule = -1;
 		int destinationRefTypeRule = -1;
+		private RouteRegion referenceRouteRegion;
 		
 		public String getPartName() {
 			return "Routing";
@@ -223,11 +227,28 @@ public class BinaryMapRouteReaderAdapter {
 			return OsmandOdb.OsmAndStructure.ROUTINGINDEX_FIELD_NUMBER;
 		}
 		
+		public int searchRouteEncodingRule(String tag, String value) {
+			if(decodingRules == null) {
+				decodingRules = new LinkedHashMap<String, Integer>();
+				for(int i = 1; i < routeEncodingRules.size(); i++) {
+					RouteTypeRule rt = routeEncodingRules.get(i);
+					String ks = rt.getTag() +"#" + (rt.getValue() == null ? "" : rt.getValue());
+					decodingRules.put(ks, i);
+				}
+			}
+			String k = tag +"#" + (value == null ? "" : value);
+			if(decodingRules.containsKey(k)) {
+				return decodingRules.get(k).intValue();
+			}
+			return -1;
+		}
+		
 		public RouteTypeRule quickGetEncodingRule(int id) {
 			return routeEncodingRules.get(id);
 		}
 
-		private void initRouteEncodingRule(int id, String tags, String val) {
+		public void initRouteEncodingRule(int id, String tags, String val) {
+			decodingRules = null;
 			while (routeEncodingRules.size() <= id) {
 				routeEncodingRules.add(null);
 			}
@@ -291,6 +312,101 @@ public class BinaryMapRouteReaderAdapter {
 			}
 			return false;
 		}
+
+
+		public RouteDataObject adopt(RouteDataObject o) {
+			if(o.region == this || o.region == referenceRouteRegion) {
+				return o;
+			}
+			
+			if(routeEncodingRules.isEmpty()) {
+				routeEncodingRules.addAll(o.region.routeEncodingRules);
+				referenceRouteRegion= o.region;
+				return o;
+			}
+			RouteDataObject rdo = new RouteDataObject(this);
+			rdo.pointsX = o.pointsX;
+			rdo.pointsY = o.pointsY;
+			rdo.id = o.id;
+			rdo.restrictions = o.restrictions;
+
+			if (o.types != null) {
+				rdo.types = new int[o.types.length];
+				for (int i = 0; i < o.types.length; i++) {
+					RouteTypeRule tp = o.region.routeEncodingRules.get(o.types[i]);
+					int ruleId = searchRouteEncodingRule(tp.getTag(), tp.getValue());
+					if(ruleId != -1) {
+						rdo.types[i] = ruleId;
+					} else {
+						ruleId = routeEncodingRules.size() ;
+						initRouteEncodingRule(ruleId, tp.getTag(), tp.getValue());
+						rdo.types[i] = ruleId;
+					}
+				}
+			}
+			if (o.pointTypes != null) {
+				rdo.pointTypes = new int[o.pointTypes.length][];
+				for (int i = 0; i < o.pointTypes.length; i++) {
+					if (o.pointTypes[i] != null) {
+						rdo.pointTypes[i] = new int[o.pointTypes[i].length];
+						for (int j = 0; j < o.pointTypes[i].length; j++) {
+							RouteTypeRule tp = o.region.routeEncodingRules.get(o.pointTypes[i][j]);
+							int ruleId = searchRouteEncodingRule(tp.getTag(), tp.getValue());
+							if(ruleId != -1) {
+								rdo.pointTypes[i][j] = ruleId;
+							} else {
+								ruleId = routeEncodingRules.size() ;
+								initRouteEncodingRule(ruleId, tp.getTag(), tp.getValue());
+								rdo.pointTypes[i][j] = ruleId;
+							}
+						}
+					}
+				}
+			}
+			if (o.nameIds != null) {
+				rdo.nameIds = new int[o.nameIds.length];
+				rdo.names = new TIntObjectHashMap<>();
+				for (int i = 0; i < o.nameIds.length; i++) {
+					RouteTypeRule tp = o.region.routeEncodingRules.get(o.nameIds[i]);
+					int ruleId = searchRouteEncodingRule(tp.getTag(), null);
+					if(ruleId != -1) {
+						rdo.nameIds[i] = ruleId;
+					} else {
+						ruleId = routeEncodingRules.size() ;
+						initRouteEncodingRule(ruleId, tp.getTag(), null);
+						rdo.nameIds[i] = ruleId;
+					}
+					rdo.names.put(ruleId, o.names.get(o.nameIds[i]));
+				}
+			}
+			rdo.pointNames = o.pointNames;
+			if (o.pointNameTypes != null) {
+				rdo.pointNameTypes = new int[o.pointNameTypes.length][];
+				// rdo.pointNames = new String[o.pointNameTypes.length][];
+				for (int i = 0; i < o.pointNameTypes.length; i++) {
+					if (o.pointNameTypes[i] != null) {
+						rdo.pointNameTypes[i] = new int[o.pointNameTypes[i].length];
+						// rdo.pointNames[i] = new String[o.pointNameTypes[i].length];
+						for (int j = 0; j < o.pointNameTypes[i].length; j++) {
+							RouteTypeRule tp = o.region.routeEncodingRules.get(o.pointNameTypes[i][j]);
+							int ruleId = searchRouteEncodingRule(tp.getTag(), null);
+							if(ruleId != -1) {
+								rdo.pointNameTypes[i][j] = ruleId;
+							} else {
+								ruleId = routeEncodingRules.size() ;
+								initRouteEncodingRule(ruleId, tp.getTag(), tp.getValue());
+								rdo.pointNameTypes[i][j] = ruleId;
+							}
+							// rdo.pointNames[i][j] = o.pointNames[i][j];
+						}
+					}
+				}
+			}
+			return rdo;
+		}
+
+
+		
 	}
 	
 	// Used in C++
@@ -360,7 +476,7 @@ public class BinaryMapRouteReaderAdapter {
 	
 	
 	protected void readRouteIndex(RouteRegion region) throws IOException {
-		int routeEncodingRule =1;
+		int routeEncodingRule = 1;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);

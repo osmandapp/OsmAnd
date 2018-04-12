@@ -28,6 +28,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -51,6 +52,7 @@ import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.views.PointLocationLayer;
 import net.osmand.plus.views.PointNavigationLayer;
 import net.osmand.plus.views.RouteLayer;
+import net.osmand.plus.views.RulerControlLayer;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 
@@ -75,6 +77,7 @@ public class MapActivityLayers {
 	private FavouritesLayer mFavouritesLayer;
 	private TransportStopsLayer transportStopsLayer;
 	private PointLocationLayer locationLayer;
+	private RulerControlLayer rulerControlLayer;
 	private PointNavigationLayer navigationLayer;
 	private MapMarkersLayer mapMarkersLayer;
 	private ImpassableRoadsLayer impassableRoadsLayer;
@@ -86,6 +89,7 @@ public class MapActivityLayers {
 	private DownloadedRegionsLayer downloadedRegionsLayer;
 	private MapWidgetRegistry mapWidgetRegistry;
 	private QuickActionRegistry quickActionRegistry;
+	private MeasurementToolLayer measurementToolLayer;
 
 	private StateChangedListener<Integer> transparencyListener;
 
@@ -146,6 +150,9 @@ public class MapActivityLayers {
 		// 4. favorites layer
 		mFavouritesLayer = new FavouritesLayer();
 		mapView.addLayer(mFavouritesLayer, 4);
+		// 4.6 measurement tool layer
+		measurementToolLayer = new MeasurementToolLayer();
+		mapView.addLayer(measurementToolLayer, 4.6f);
 		// 5. transport layer
 		transportStopsLayer = new TransportStopsLayer(activity);
 		mapView.addLayer(transportStopsLayer, 5);
@@ -162,6 +169,9 @@ public class MapActivityLayers {
 		// 7.5 Impassible roads
 		impassableRoadsLayer = new ImpassableRoadsLayer(activity);
 		mapView.addLayer(impassableRoadsLayer, 7.5f);
+		// 7.8 ruler control layer
+		rulerControlLayer = new RulerControlLayer(activity);
+		mapView.addLayer(rulerControlLayer, 7.8f);
 		// 8. context menu layer 
 		// 9. map info layer
 		mapInfoLayer = new MapInfoLayer(activity, routeLayer);
@@ -187,6 +197,7 @@ public class MapActivityLayers {
 
 		OsmandPlugin.createLayers(mapView, activity);
 		app.getAppCustomization().createLayers(mapView, activity);
+		app.getAidlApi().registerMapLayers(activity);
 	}
 
 
@@ -238,8 +249,6 @@ public class MapActivityLayers {
 								settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
 							Toast.makeText(activity,
 									R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_LONG).show();
-						} else {
-							g.path = getString(R.string.show_current_gpx_title);
 						}
 						break;
 					} else {
@@ -284,7 +293,7 @@ public class MapActivityLayers {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				ContextMenuItem item = listAdapter.getItem(position);
 				item.setSelected(!item.getSelected());
-				item.getItemClickListener().onContextMenuClick(listAdapter, position, position, item.getSelected());
+				item.getItemClickListener().onContextMenuClick(listAdapter, position, position, item.getSelected(), null);
 				listAdapter.notifyDataSetChanged();
 			}
 		});
@@ -407,7 +416,7 @@ public class MapActivityLayers {
 			builder.setListener(new ContextMenuAdapter.ItemClickListener() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
-												  int itemId, int position, boolean isChecked) {
+												  int itemId, int position, boolean isChecked, int[] viewCoordinates) {
 					ContextMenuItem item = adapter.getItem(position);
 					item.setSelected(isChecked);
 					return false;
@@ -579,12 +588,20 @@ public class MapActivityLayers {
 		return mFavouritesLayer;
 	}
 
+	public MeasurementToolLayer getMeasurementToolLayer() {
+		return measurementToolLayer;
+	}
+
 	public MapTextLayer getMapTextLayer() {
 		return mapTextLayer;
 	}
 
 	public PointLocationLayer getLocationLayer() {
 		return locationLayer;
+	}
+
+	public RulerControlLayer getRulerControlLayer() {
+		return rulerControlLayer;
 	}
 
 	public MapInfoLayer getMapInfoLayer() {

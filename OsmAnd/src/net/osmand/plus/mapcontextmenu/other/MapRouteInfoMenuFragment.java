@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -12,13 +11,16 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
-public class MapRouteInfoMenuFragment extends Fragment {
+public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	public static final String TAG = "MapRouteInfoMenuFragment";
 
 	private MapRouteInfoMenu menu;
 	private View mainView;
+
+	private boolean portrait;
 
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
@@ -31,6 +33,10 @@ public class MapRouteInfoMenuFragment extends Fragment {
 
 		menu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
 		View view = inflater.inflate(R.layout.plan_route_info, container, false);
+		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		if (!portrait) {
+			AndroidUtils.addStatusBarPadding21v(getActivity(), view);
+		}
 		if (menu == null) {
 			return view;
 		}
@@ -54,6 +60,7 @@ public class MapRouteInfoMenuFragment extends Fragment {
 		if (menu == null) {
 			dismiss();
 		}
+		getMapActivity().getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 	}
 
 	@Override
@@ -62,6 +69,11 @@ public class MapRouteInfoMenuFragment extends Fragment {
 		if (menu != null) {
 			menu.onDismiss();
 		}
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		return portrait ? -1 : R.color.status_bar_transparent_gradient;
 	}
 
 	public int getHeight() {
@@ -81,19 +93,28 @@ public class MapRouteInfoMenuFragment extends Fragment {
 	}
 
 	public void updateInfo() {
-		menu.updateInfo(mainView);
-		applyDayNightMode();
+		if (menu != null) {
+			menu.updateInfo(mainView);
+			applyDayNightMode();
+		}
 	}
 
 	public void updateFromIcon() {
-		menu.updateFromIcon(mainView);
+		if (menu != null) {
+			menu.updateFromIcon(mainView);
+		}
 	}
 
 	public void show(MapActivity mapActivity) {
-		int slideInAnim = R.anim.slide_in_bottom;
-		int slideOutAnim = R.anim.slide_out_bottom;
+		int slideInAnim = 0;
+		int slideOutAnim = 0;
+		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			slideInAnim = R.anim.slide_in_bottom;
+			slideOutAnim = R.anim.slide_out_bottom;
+		}
 
-		mapActivity.getSupportFragmentManager().beginTransaction()
+		mapActivity.getSupportFragmentManager()
+				.beginTransaction()
 				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.routeMenuContainer, this, TAG)
 				.addToBackStack(TAG)
@@ -118,41 +139,34 @@ public class MapRouteInfoMenuFragment extends Fragment {
 		boolean landscapeLayout = !portraitMode;
 		boolean nightMode = ctx.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		if (!landscapeLayout) {
-			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.route_info_menu_bg_light, R.drawable.route_info_menu_bg_dark);
 		} else {
-			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
+			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.route_info_menu_bg_left_light, R.drawable.route_info_menu_bg_left_dark);
 		}
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.map_route_prepare_bottom_view), nightMode,
+				R.color.route_info_bottom_view_bg_light, R.color.route_info_bottom_view_bg_dark);
+
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerModesLayout), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.viaLayoutDivider), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerToDropDown), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn1), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn2), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn3), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				R.color.route_info_divider_light, R.color.route_info_divider_dark);
 
 		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.ViaView), nightMode);
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.ViaSubView), nightMode);
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.toTitle), nightMode);
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.fromTitle), nightMode);
 		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.InfoTextView), nightMode);
-
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.FromLayout), nightMode);
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.ViaLayout), nightMode);
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.ToLayout), nightMode);
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.Info), nightMode);
-
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.Next), nightMode);
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.Prev), nightMode);
 
 		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.DistanceText), nightMode);
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.DistanceTitle), nightMode);
@@ -161,10 +175,10 @@ public class MapRouteInfoMenuFragment extends Fragment {
 	}
 
 	public static boolean showInstance(final MapActivity mapActivity) {
-		try {
-			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			int slideInAnim;
-			int slideOutAnim;
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		int slideInAnim = 0;
+		int slideOutAnim = 0;
+		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 			if (portrait) {
 				slideInAnim = R.anim.slide_in_bottom;
 				slideOutAnim = R.anim.slide_out_bottom;
@@ -172,12 +186,18 @@ public class MapRouteInfoMenuFragment extends Fragment {
 				slideInAnim = R.anim.slide_in_left;
 				slideOutAnim = R.anim.slide_out_left;
 			}
+		}
+
+		try {
+			mapActivity.getContextMenu().hideMenues();
 
 			MapRouteInfoMenuFragment fragment = new MapRouteInfoMenuFragment();
-			mapActivity.getSupportFragmentManager().beginTransaction()
+			mapActivity.getSupportFragmentManager()
+					.beginTransaction()
 					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 					.add(R.id.routeMenuContainer, fragment, TAG)
-					.addToBackStack(TAG).commitAllowingStateLoss();
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 
 			return true;
 

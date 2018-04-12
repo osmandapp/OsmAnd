@@ -83,11 +83,15 @@ public class LocalIndexHelper {
 			info.setDescription(app.getString(R.string.download_srtm_maps));
 		} else if (info.getType() == LocalIndexType.WIKI_DATA) {
 			info.setDescription(getInstalledDate(f));
+		} else if (info.getType() == LocalIndexType.TRAVEL_DATA) {
+			info.setDescription(getInstalledDate(f));
 		} else if (info.getType() == LocalIndexType.TTS_VOICE_DATA) {
 			info.setDescription(getInstalledDate(f));
 		} else if (info.getType() == LocalIndexType.DEACTIVATED) {
 			info.setDescription(getInstalledDate(f));
 		} else if (info.getType() == LocalIndexType.VOICE_DATA) {
+			info.setDescription(getInstalledDate(f));
+		} else if (info.getType() == LocalIndexType.FONT_DATA) {
 			info.setDescription(getInstalledDate(f));
 		}
 	}
@@ -115,6 +119,10 @@ public class LocalIndexHelper {
 			fileDir = app.getAppPath(IndexConstants.WIKI_INDEX_DIR);
 			fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 					+ IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
+		} else if (type == LocalIndexType.TRAVEL_DATA) {
+			fileDir = app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
+			fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
+					+ IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT;
 		}
 
 		if (backuped) {
@@ -133,33 +141,7 @@ public class LocalIndexHelper {
 		return null;
 	}
 
-	public LocalIndexInfo getLocalIndexInfo(String downloadName) {
-		LocalIndexInfo info = getLocalIndexInfo(LocalIndexType.MAP_DATA, downloadName, false, false);
-		if (info == null) {
-			info = getLocalIndexInfo(LocalIndexType.MAP_DATA, downloadName, true, false);
-		}
-		if (info == null) {
-			info = getLocalIndexInfo(LocalIndexType.SRTM_DATA, downloadName, false, false);
-		}
-		if (info == null) {
-			info = getLocalIndexInfo(LocalIndexType.WIKI_DATA, downloadName, false, false);
-		}
-
-		if (info == null) {
-			info = getLocalIndexInfo(LocalIndexType.MAP_DATA, downloadName, false, true);
-		}
-		if (info == null) {
-			info = getLocalIndexInfo(LocalIndexType.MAP_DATA, downloadName, true, true);
-		}
-		if (info == null) {
-			info = getLocalIndexInfo(LocalIndexType.SRTM_DATA, downloadName, false, true);
-		}
-		if (info == null) {
-			info = getLocalIndexInfo(LocalIndexType.WIKI_DATA, downloadName, false, true);
-		}
-
-		return info;
-	}
+	
 
 	public List<LocalIndexInfo> getLocalIndexInfos(String downloadName) {
 		List<LocalIndexInfo> list = new ArrayList<>();
@@ -208,8 +190,10 @@ public class LocalIndexHelper {
 		loadTilesData(app.getAppPath(IndexConstants.TILES_INDEX_DIR), result, false, loadTask);
 		loadSrtmData(app.getAppPath(IndexConstants.SRTM_INDEX_DIR), result, loadTask);
 		loadWikiData(app.getAppPath(IndexConstants.WIKI_INDEX_DIR), result, loadTask);
+		loadTravelData(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), result, loadTask);
 		//loadVoiceData(app.getAppPath(IndexConstants.TTSVOICE_INDEX_EXT_ZIP), result, true, loadTask);
 		loadVoiceData(app.getAppPath(IndexConstants.VOICE_INDEX_DIR), result, false, loadTask);
+		loadFontData(app.getAppPath(IndexConstants.FONT_INDEX_DIR), result, false, loadTask);
 		loadObfData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, true, loadTask, loadedMaps);
 
 		return result;
@@ -250,6 +234,20 @@ public class LocalIndexHelper {
 						result.add(info);
 						loadTask.loadFile(info);
 					}
+				}
+			}
+		}
+	}
+
+	private void loadFontData(File fontDir, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask) {
+		if (fontDir.canRead()) {
+			for (File fontFile : listFilesSorted(fontDir)) {
+				if (fontFile.isFile() && fontFile.getName().endsWith(IndexConstants.FONT_INDEX_EXT)) {
+					LocalIndexType lt = LocalIndexType.FONT_DATA;
+					LocalIndexInfo info = new LocalIndexInfo(lt, fontFile, backup, app);
+					updateDescription(info);
+					result.add(info);
+					loadTask.loadFile(info);
 				}
 			}
 		}
@@ -312,6 +310,19 @@ public class LocalIndexHelper {
 			}
 		}
 	}
+	
+	private void loadTravelData(File mapPath, List<LocalIndexInfo> result, AbstractLoadLocalIndexTask loadTask) {
+		if (mapPath.canRead()) {
+			for (File mapFile : listFilesSorted(mapPath)) {
+				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TRAVEL_DATA, mapFile, false, app);
+					updateDescription(info);
+					result.add(info);
+					loadTask.loadFile(info);
+				}
+			}
+		}
+	}
 
 	private void loadObfData(File mapPath, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask, Map<String, String> loadedMaps) {
 		if (mapPath.canRead()) {
@@ -340,10 +351,12 @@ public class LocalIndexHelper {
 		TILES_DATA(R.string.local_indexes_cat_tile, R.drawable.ic_map, 60),
 		SRTM_DATA(R.string.local_indexes_cat_srtm, R.drawable.ic_plugin_srtm, 40),
 		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia, 50),
+		TRAVEL_DATA(R.string.download_maps_travel, R.drawable.ic_plugin_wikipedia, 60),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up, 20),
 		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up, 30),
+		FONT_DATA(R.string.fonts_header, R.drawable.ic_action_map_language, 35),
 		DEACTIVATED(R.string.local_indexes_cat_backup, R.drawable.ic_type_archive, 1000);
-//		AV_DATA(R.string.local_indexes_cat_av);;
+//		AV_DATA(R.string.local_indexes_cat_av);
 
 		@StringRes
 		private final int resId;
@@ -385,12 +398,23 @@ public class LocalIndexHelper {
 			if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 				return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length());
 			}
+			if (localIndexInfo.getType() == TRAVEL_DATA && 
+					fileName.endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
+				return fileName.substring(0, fileName.length() - IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT.length());
+			}
 			if (this == VOICE_DATA) {
 				int l = fileName.lastIndexOf('_');
 				if (l == -1) {
 					l = fileName.length();
 				}
 				return fileName.substring(0, l);
+			}
+			if (this == FONT_DATA) {
+				int l = fileName.indexOf('.');
+				if (l == -1) {
+					l = fileName.length();
+				}
+				return fileName.substring(0, l).replace('_', ' ').replace('-', ' ');
 			}
 			int ls = fileName.lastIndexOf('_');
 			if (ls >= 0) {

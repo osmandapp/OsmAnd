@@ -37,8 +37,8 @@ public class GeocodingUtilities {
 
 	private static final Log log = PlatformUtil.getLog(GeocodingUtilities.class);
 
-	// Location to test parameters http://www.openstreetmap.org/#map=18/53.896473/27.540071 (hno 44)
-	// BUG http://www.openstreetmap.org/#map=19/50.9356/13.35348 (hno 26) street is 
+	// Location to test parameters https://www.openstreetmap.org/#map=18/53.896473/27.540071 (hno 44)
+	// BUG https://www.openstreetmap.org/#map=19/50.9356/13.35348 (hno 26) street is 
 	public static final float THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER = 5;
 	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 250;
 	public static final float STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS = 400;
@@ -49,28 +49,6 @@ public class GeocodingUtilities {
 	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;
 	public static final float DISTANCE_BUILDING_PROXIMITY = 100;
 
-	public static final String[] SUFFIXES = new String[]{
-			"av.", "avenue", "просп.", "пер.", "пр.", "заул.", "проспект", "переул.", "бул.", "бульвар", "тракт"};
-	public static final String[] DEFAULT_SUFFIXES = new String[]{
-			"str.", "street", "улица", "ул.", "вулица", "вул.", "вулиця"};
-	private static Set<String> SET_DEF_SUFFIXES = null;
-	private static Set<String> SET_SUFFIXES = null;
-
-	public static Set<String> getDefSuffixesSet() {
-		if (SET_DEF_SUFFIXES == null) {
-			SET_DEF_SUFFIXES = new TreeSet<String>();
-			SET_DEF_SUFFIXES.addAll(Arrays.asList(DEFAULT_SUFFIXES));
-		}
-		return SET_DEF_SUFFIXES;
-	}
-
-	public static Set<String> getSuffixesSet() {
-		if (SET_SUFFIXES == null) {
-			SET_SUFFIXES = new TreeSet<String>();
-			SET_SUFFIXES.addAll(Arrays.asList(SUFFIXES));
-		}
-		return SET_SUFFIXES;
-	}
 
 	public static final Comparator<GeocodingResult> DISTANCE_COMPARATOR = new Comparator<GeocodingResult>() {
 
@@ -141,7 +119,11 @@ public class GeocodingUtilities {
 		public String toString() {
 			StringBuilder bld = new StringBuilder();
 			if (building != null) {
-				bld.append(building.getName());
+				if(buildingInterpolation != null) {
+					bld.append(buildingInterpolation);
+				} else {
+					bld.append(building.getName());
+				}
 			}
 			if (street != null) {
 				bld.append(" str. ").append(street.getName()).append(" city ").append(city.getName());
@@ -159,7 +141,7 @@ public class GeocodingUtilities {
 	}
 
 
-	public List<GeocodingResult> reverseGeocodingSearch(RoutingContext ctx, double lat, double lon) throws IOException {
+	public List<GeocodingResult> reverseGeocodingSearch(RoutingContext ctx, double lat, double lon, boolean allowEmptyNames) throws IOException {
 		RoutePlannerFrontEnd rp = new RoutePlannerFrontEnd(false);
 		List<GeocodingResult> lst = new ArrayList<GeocodingUtilities.GeocodingResult>();
 		List<RouteSegmentPoint> listR = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
@@ -173,14 +155,14 @@ public class GeocodingUtilities {
 				continue;
 			}
 //			System.out.println(road.toString() +  " " + Math.sqrt(p.distSquare));
-			boolean emptyName = Algorithms.isEmpty(road.getName()) && Algorithms.isEmpty(road.getRef("", false, true));
-			if (!emptyName) {
+			String name = Algorithms.isEmpty(road.getName()) ? road.getRef("", false, true) : road.getName();
+			if (allowEmptyNames || !Algorithms.isEmpty(name)) {
 				if (distSquare == 0 || distSquare > p.distSquare) {
 					distSquare = p.distSquare;
 				}
 				GeocodingResult sr = new GeocodingResult();
 				sr.searchPoint = new LatLon(lat, lon);
-				sr.streetName = Algorithms.isEmpty(road.getName()) ? road.getRef("", false, true) : road.getName();
+				sr.streetName = name == null ? "" : name;
 				sr.point = p;
 				sr.connectionPoint = new LatLon(MapUtils.get31LatitudeY(p.preciseY), MapUtils.get31LongitudeX(p.preciseX));
 				sr.regionFP = road.region.getFilePointer();
@@ -201,15 +183,15 @@ public class GeocodingUtilities {
 		return lst;
 	}
 
-	public List<String> prepareStreetName(String s) {
+	public List<String> prepareStreetName(String s, boolean addCommonWords) {
 		List<String> ls = new ArrayList<String>();
 		int beginning = 0;
 		for (int i = 1; i < s.length(); i++) {
 			if (s.charAt(i) == ' ') {
-				addWord(ls, s.substring(beginning, i));
+				addWord(ls, s.substring(beginning, i), addCommonWords);
 				beginning = i;
 			} else if (s.charAt(i) == '(') {
-				addWord(ls, s.substring(beginning, i));
+				addWord(ls, s.substring(beginning, i), addCommonWords);
 				while (i < s.length()) {
 					char c = s.charAt(i);
 					i++;
@@ -222,15 +204,18 @@ public class GeocodingUtilities {
 		}
 		if (beginning < s.length()) {
 			String lastWord = s.substring(beginning, s.length());
-			addWord(ls, lastWord);
+			addWord(ls, lastWord, addCommonWords);
 		}
 		Collections.sort(ls, Collator.getInstance());
 		return ls;
 	}
 
-	private void addWord(List<String> ls, String word) {
+	private void addWord(List<String> ls, String word, boolean addCommonWords) {
 		String w = word.trim().toLowerCase();
-		if (!Algorithms.isEmpty(w) && !getDefSuffixesSet().contains(w)) {
+		if (!Algorithms.isEmpty(w)) {
+			if(!addCommonWords && CommonWords.getCommonGeocoding(word) != -1) {
+				return;
+			}
 			ls.add(w);
 		}
 	}
@@ -239,25 +224,24 @@ public class GeocodingUtilities {
 			double knownMinBuildingDistance, final ResultMatcher<GeocodingResult> result) throws IOException {
 		// test address index search
 		final List<GeocodingResult> streetsList = new ArrayList<GeocodingResult>();
-		final List<String> streetNamePacked = prepareStreetName(road.streetName);
-		if (streetNamePacked.size() > 0) {
-			log.info("Search street by name " + road.streetName + " " + streetNamePacked);
+		final List<String> streetNamesUsed = prepareStreetName(road.streetName, true);
+		final List<String> streetNamesPacked = streetNamesUsed.size() == 0 ? 
+				prepareStreetName(road.streetName, false) : streetNamesUsed;
+		if (streetNamesPacked.size() > 0) {
+			log.info("Search street by name " + road.streetName + " " + streetNamesPacked);
 			String mainWord = "";
-			for (int i = 0; i < streetNamePacked.size(); i++) {
-				String s = streetNamePacked.get(i);
-				if (!getSuffixesSet().contains(s) && s.length() > mainWord.length()) {
+			for (int i = 0; i < streetNamesPacked.size(); i++) {
+				String s = streetNamesPacked.get(i);
+				if (s.length() > mainWord.length()) {
 					mainWord = s;
 				}
-			}
-			if (Algorithms.isEmpty(mainWord)) {
-				mainWord = streetNamePacked.get(0);
 			}
 			SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(
 					new ResultMatcher<MapObject>() {
 						@Override
 						public boolean publish(MapObject object) {
 							if (object instanceof Street
-									&& prepareStreetName(object.getName()).equals(streetNamePacked)) {
+									&& prepareStreetName(object.getName(), true).equals(streetNamesUsed)) {
 								double d = MapUtils.getDistance(object.getLocation(), road.searchPoint.getLatitude(),
 										road.searchPoint.getLongitude());
 								// double check to suport old format
@@ -340,26 +324,12 @@ public class GeocodingUtilities {
 				if (MapUtils.getDistance(road.searchPoint, plat, plon) < DISTANCE_BUILDING_PROXIMITY) {
 					GeocodingResult bld = new GeocodingResult(street);
 					bld.building = b;
-					bld.connectionPoint = b.getLocation();
+					//bld.connectionPoint = b.getLocation();
+					bld.connectionPoint = new LatLon(plat, plon);
 					streetBuildings.add(bld);
-					if (!Algorithms.isEmpty(b.getName2())) {
-						int fi = Algorithms.extractFirstIntegerNumber(b.getName());
-						int si = Algorithms.extractFirstIntegerNumber(b.getName2());
-						if (si != 0 && fi != 0) {
-							int num = (int) (fi + (si - fi) * coeff);
-							BuildingInterpolation type = b.getInterpolationType();
-							if (type == BuildingInterpolation.EVEN || type == BuildingInterpolation.ODD) {
-								if (num % 2 == (type == BuildingInterpolation.EVEN ? 1 : 0)) {
-									num--;
-								}
-							} else if (b.getInterpolationInterval() > 0) {
-								int intv = b.getInterpolationInterval();
-								if ((num - fi) % intv != 0) {
-									num = ((num - fi) / intv) * intv + fi;
-								}
-							}
-							bld.buildingInterpolation = num + "";
-						}
+					String nm = b.getInterpolationName(coeff);
+					if(!Algorithms.isEmpty(nm)) {
+						bld.buildingInterpolation = nm;
 					}
 				}
 

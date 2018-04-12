@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/list_content_padding"
                     android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <android.support.v7.widget.AppCompatImageView
                         android:layout_width="54dp"
@@ -118,7 +118,7 @@
                             android:id="@+id/fullVersionTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="OsmAnd+"
+                            android:text="@string/osmand_unlimited"
                             android:textSize="@dimen/default_list_text_size_large"
                             android:textStyle="bold"/>
 
@@ -149,7 +149,7 @@
                             android:paddingTop="4dp"
                             android:textColor="@color/color_white"
                             android:visibility="visible"
-                            tools:text="GET FOR E5"/>
+                            tools:text="GET FOR 5 EUR"/>
 
                     </LinearLayout>
 
@@ -162,7 +162,7 @@
                     android:layout_marginLeft="54dp"
                     android:layout_marginTop="@dimen/list_content_padding"
                     android:background="@color/dashboard_divider_dark"
-                    android:visibility="gone"/>
+                    android:visibility="visible"/>
 
                 <LinearLayout
                     android:id="@+id/osmLiveLayout"
@@ -219,7 +219,7 @@
                             android:paddingRight="14dp"
                             android:paddingTop="4dp"
                             android:textColor="@color/color_white"
-                            tools:text="GET FOR 1,5E PER MONTH"/>
+                            tools:text="GET FOR 1,5 EUR PER MONTH"/>
 
                     </LinearLayout>
 

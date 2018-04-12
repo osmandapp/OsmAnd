@@ -18,7 +18,7 @@
         android:layout_gravity="left"
         android:background="@drawable/dashboard_button_light"
         android:scaleType="center"
-        android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"
+        android:src="@drawable/ic_arrow_back"
         tools:visibility="visible"/>
 
     <ImageView

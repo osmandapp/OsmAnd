@@ -1,10 +1,15 @@
 package net.osmand.plus.download;
 
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -12,10 +17,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.logging.Log;
 
 public class DownloadResources extends DownloadResourceGroup {
 	public boolean isDownloadedFromInternet = false;
@@ -27,7 +35,12 @@ public class DownloadResources extends DownloadResourceGroup {
 	private List<IndexItem> rawResources;
 	private Map<WorldRegion, List<IndexItem> > groupByRegion;
 	private List<IndexItem> itemsToUpdate = new ArrayList<>();
-	public static final String WORLD_SEAMARKS_KEY = "world_seamarks_basemap";
+	public static final String WORLD_SEAMARKS_KEY = "world_seamarks";
+	public static final String WORLD_SEAMARKS_NAME = "World_seamarks";
+	public static final String WORLD_SEAMARKS_OLD_KEY = "world_seamarks_basemap";
+	public static final String WORLD_SEAMARKS_OLD_NAME = "World_seamarks_basemap";
+	private static final Log LOG = PlatformUtil.getLog(DownloadResources.class);
+
 	
 	
 	public DownloadResources(OsmandApplication app) {
@@ -90,9 +103,13 @@ public class DownloadResources extends DownloadResourceGroup {
 		java.text.DateFormat dateFormat = app.getResourceManager().getDateFormat();
 		Map<String, String> indexActivatedFileNames = app.getResourceManager().getIndexFileNames();
 		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexActivatedFileNames);
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT, 
+				indexActivatedFileNames);
 		Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
 		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.TILES_INDEX_DIR), IndexConstants.SQLITE_EXT,
+				indexFileNames);
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT, 
 				indexFileNames);
 		app.getResourceManager().getBackupIndexes(indexFileNames);
 		this.indexFileNames = indexFileNames;
@@ -132,6 +149,8 @@ public class DownloadResources extends DownloadResourceGroup {
 			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra)
 					|| item.getType() == DownloadActivityType.ROADS_FILE
 					|| item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+					|| item.getType() == DownloadActivityType.WIKIVOYAGE_FILE
+					|| item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
 					|| item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				outdated = true;
 			} else {
@@ -155,6 +174,8 @@ public class DownloadResources extends DownloadResourceGroup {
 							}
 						}
 					}
+				} else if (item.getType() == DownloadActivityType.FONT_FILE) {
+					oldItemSize = new File(app.getAppPath(IndexConstants.FONT_INDEX_DIR), item.getTargetFileName()).length();
 				} else {
 					oldItemSize = app.getAppPath(item.getTargetFileName()).length();
 				}
@@ -170,7 +191,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	
 
 	protected void updateFilesToUpdate() {
-		initAlreadyLoadedFiles();;
+		initAlreadyLoadedFiles();
 		recalculateFilesToUpdate();
 	}
 
@@ -244,13 +265,24 @@ public class DownloadResources extends DownloadResourceGroup {
 		otherMapsScreen.addGroup(otherMaps);
 		otherMapsGroup.addGroup(otherMapsScreen);
 
-		DownloadResourceGroup voiceGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_GROUP);
-		DownloadResourceGroup voiceScreenTTS = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_TTS);
-		DownloadResourceGroup voiceScreenRec = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_REC);
-		DownloadResourceGroup voiceTTS = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_HEADER_TTS);
-		DownloadResourceGroup voiceRec = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_HEADER_REC);
+		DownloadResourceGroup otherGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.OTHER_GROUP);
+		DownloadResourceGroup voiceScreenTTS = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.VOICE_TTS);
+		DownloadResourceGroup voiceScreenRec = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.VOICE_REC);
+		DownloadResourceGroup fontScreen = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.FONTS);
+		DownloadResourceGroup voiceTTS = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.VOICE_HEADER_TTS);
+		DownloadResourceGroup voiceRec = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.VOICE_HEADER_REC);
+		DownloadResourceGroup fonts = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.FONTS_HEADER);
 
 		DownloadResourceGroup worldMaps = new DownloadResourceGroup(this, DownloadResourceGroupType.WORLD_MAPS);
+
+		DownloadResourceGroup nauticalMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.NAUTICAL_MAPS_GROUP);
+		DownloadResourceGroup nauticalMapsScreen = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_MAPS);
+		DownloadResourceGroup nauticalMaps = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_MAPS_HEADER);
+		
+		DownloadResourceGroup wikivoyageMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.TRAVEL_GROUP);
+		DownloadResourceGroup wikivoyageMapsScreen = new DownloadResourceGroup(wikivoyageMapsGroup, DownloadResourceGroupType.WIKIVOYAGE_MAPS);
+		DownloadResourceGroup wikivoyageMaps = new DownloadResourceGroup(wikivoyageMapsGroup, DownloadResourceGroupType.WIKIVOYAGE_HEADER);
+
 		Map<WorldRegion, List<IndexItem> > groupByRegion = new LinkedHashMap<WorldRegion, List<IndexItem>>();
 		OsmandRegions regs = app.getRegions();
 		for (IndexItem ii : resources) {
@@ -262,6 +294,20 @@ public class DownloadResources extends DownloadResourceGroup {
 				}
 				continue;
 			}
+			if (ii.getType() == DownloadActivityType.FONT_FILE) {
+				fonts.addItem(ii);
+				continue;
+			}
+			if (ii.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE) {
+				if (app.getSettings().DEPTH_CONTOURS_PURCHASED.get() || nauticalMaps.size() == 0) {
+					nauticalMaps.addItem(ii);
+				}
+				continue;
+			}
+			if(ii.getType() == DownloadActivityType.WIKIVOYAGE_FILE) {
+				wikivoyageMaps.addItem(ii);
+				continue;
+			}
 			String basename = ii.getBasename().toLowerCase();
 			WorldRegion wg = regs.getRegionDataByDownloadName(basename);
 			if (wg != null) {
@@ -271,7 +317,12 @@ public class DownloadResources extends DownloadResourceGroup {
 				groupByRegion.get(wg).add(ii);
 			} else {
 				if (ii.getFileName().startsWith("World_")) {
-					worldMaps.addItem(ii);
+					if (ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_KEY) || 
+							ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_OLD_KEY)) {
+						nauticalMaps.addItem(ii);
+					} else {
+						worldMaps.addItem(ii);
+					}
 				} else {
 					otherMaps.addItem(ii);
 				}
@@ -316,15 +367,32 @@ public class DownloadResources extends DownloadResourceGroup {
 		// 2. if there is no subregions and there only 1 index item it could be merged to the level up - objection there is no such maps
 		// 3. if hillshade/srtm is disabled, all maps from inner level could be combined into 1 
 		addGroup(worldMaps);
+
+		nauticalMapsScreen.addGroup(nauticalMaps);
+		nauticalMapsGroup.addGroup(nauticalMapsScreen);
+		addGroup(nauticalMapsGroup);
+
+		wikivoyageMapsScreen.addGroup(wikivoyageMaps);
+		wikivoyageMapsGroup.addGroup(wikivoyageMapsScreen);
+		addGroup(wikivoyageMapsGroup);
+
 		if (otherMaps.size() > 0) {
 			addGroup(otherMapsGroup);
 		}
 
 		voiceScreenTTS.addGroup(voiceTTS);
 		voiceScreenRec.addGroup(voiceRec);
-		voiceGroup.addGroup(voiceScreenTTS);
-		voiceGroup.addGroup(voiceScreenRec);
-		addGroup(voiceGroup);
+		if (fonts.getIndividualResources() != null) {
+			fontScreen.addGroup(fonts);
+		}
+		otherGroup.addGroup(voiceScreenTTS);
+		otherGroup.addGroup(voiceScreenRec);
+		
+		
+		if (fonts.getIndividualResources() != null) {
+			otherGroup.addGroup(fontScreen);
+		}
+		addGroup(otherGroup);
 
 		createHillshadeSRTMGroups();
 		trimEmptyGroups();
@@ -332,5 +400,67 @@ public class DownloadResources extends DownloadResourceGroup {
 		return true;
 	}
 
+	public static List<IndexItem> findIndexItemsAt(OsmandApplication app, LatLon latLon, DownloadActivityType type) throws IOException {
 
+		List<IndexItem> res = new ArrayList<>();
+		OsmandRegions regions = app.getRegions();
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+
+		int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
+		int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
+
+		List<BinaryMapDataObject> mapDataObjects;
+		try {
+			mapDataObjects = regions.queryBbox(point31x, point31x, point31y, point31y);
+		} catch (IOException e) {
+			throw new IOException("Error while calling queryBbox");
+		}
+		if (mapDataObjects != null) {
+			Iterator<BinaryMapDataObject> it = mapDataObjects.iterator();
+			while (it.hasNext()) {
+				BinaryMapDataObject o = it.next();
+				if (o.getTypes() != null) {
+					boolean isRegion = true;
+					for (int i = 0; i < o.getTypes().length; i++) {
+						BinaryMapIndexReader.TagValuePair tp = o.getMapIndex().decodeType(o.getTypes()[i]);
+						if ("boundary".equals(tp.value)) {
+							isRegion = false;
+							break;
+						}
+					}
+					WorldRegion downloadRegion = regions.getRegionData(regions.getFullName(o));
+					if (downloadRegion != null && isRegion && regions.contain(o, point31x, point31y)) {
+						if (!isIndexItemDownloaded(downloadThread, type, downloadRegion, res)) {
+							addIndexItem(downloadThread, type, downloadRegion, res);
+						}
+					}
+				}
+			}
+		}
+		return res;
+	}
+
+	private static boolean isIndexItemDownloaded(DownloadIndexesThread downloadThread, DownloadActivityType type, WorldRegion downloadRegion, List<IndexItem> res) {
+		List<IndexItem> otherIndexItems = new ArrayList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
+		for (IndexItem indexItem : otherIndexItems) {
+			if (indexItem.getType() == type && indexItem.isDownloaded()) {
+				return true;
+			}
+		}
+		return downloadRegion.getSuperregion() != null
+				&& isIndexItemDownloaded(downloadThread, type, downloadRegion.getSuperregion(), res);
+	}
+
+	private static boolean addIndexItem(DownloadIndexesThread downloadThread, DownloadActivityType type, WorldRegion downloadRegion, List<IndexItem> res) {
+		List<IndexItem> otherIndexItems = new ArrayList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
+		for (IndexItem indexItem : otherIndexItems) {
+			if (indexItem.getType() == type
+					&& !res.contains(indexItem)) {
+				res.add(indexItem);
+				return true;
+			}
+		}
+		return downloadRegion.getSuperregion() != null
+				&& addIndexItem(downloadThread, type, downloadRegion.getSuperregion(), res);
+	}
 }
