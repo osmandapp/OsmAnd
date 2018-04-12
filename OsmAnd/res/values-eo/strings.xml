@@ -139,7 +139,7 @@
     <string name="osm_edit_reopened_note">Remalfermis OSM-rimarkon</string>
     <string name="osm_edit_commented_note">Komentis OSM-rimarkon</string>
     <string name="osm_edit_removed_note">Forigis OSM-rimarkon</string>
-    <string name="osm_edit_created_note">Kreis OSM-rimarkon</string>
+    <string name="osm_edit_created_note">Kreita OSM-rimarko</string>
     <string name="osn_bug_name">OSM-rimarko</string>
     <string name="osn_add_dialog_title">Krei rimarkon</string>
     <string name="osn_comment_dialog_title">Aldoni komenton</string>
@@ -168,7 +168,7 @@
     <string name="whats_new">Kio estas nova en</string>
     <string name="shared_string_update">Ĝisdatigi</string>
     <string name="shared_string_upload">Alŝuti</string>
-    <string name="osm_edit_created_poi">Kreis OSM-an interesejon</string>
+    <string name="osm_edit_created_poi">Kreita OSM-interesejo</string>
 
     <string name="shared_string_qr_code">QR-kodo</string>
     <string name="rendering_attr_hideProposed_name">Proponitaj objektoj</string>
@@ -2937,4 +2937,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="saved_articles">Konservitaj artikoloj</string>
     <string name="shared_string_explore">Esplori</string>
     <string name="shared_string_contents">Enhavo</string>
+    <string name="article_removed">Forigis artikolon</string>
     </resources>
