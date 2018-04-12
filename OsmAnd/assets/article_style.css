@@ -126,3 +126,8 @@ pre {
     font-style: italic;
     text-align: center;
 }
+
+.content {
+  display: none;
+  overflow: hidden;
+}
