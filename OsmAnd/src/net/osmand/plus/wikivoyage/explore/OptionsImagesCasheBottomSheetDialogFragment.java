@@ -2,6 +2,7 @@ package net.osmand.plus.wikivoyage.explore;
 
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -48,7 +49,7 @@ public class OptionsImagesCasheBottomSheetDialogFragment extends MenuBottomSheet
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-
+						new WebView(getContext()).clearCache(true);
 						dismiss();
 					}
 				})
