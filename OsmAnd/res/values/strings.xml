@@ -12,6 +12,9 @@
     <string name="download_maps_travel">Travel maps</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Article removed</string>
+    <string name="wikivoyage_images_cache">Images cache</string>
+    <string name="shared_string_delete_search_history">Delete search history</string>
+    <string name="wikivoyage_show_images">Show images</string>
     <string name="wikivoyage_search_hint">Search: Country, City, Province</string>
     <string name="shared_string_read">Read</string>
     <string name="saved_articles">Saved articles</string>
@@ -311,7 +314,7 @@
     <string name="depth_contour_descr">Sea depth contour lines and nautical point maps.</string>
     <string name="sea_depth_thanks">Thank you for purchasing nautical depth contours</string>
     <string name="index_item_depth_contours_osmand_ext">Nautical depth contours</string>
-    
+
     <string name="index_item_world_wikivoyage">Worldwide Wikivoyage articles</string>
     <string name="index_item_depth_points_southern_hemisphere">Southern hemisphere nautical depth points </string>
     <string name="index_item_depth_points_northern_hemisphere">Northern hemisphere nautical depth points</string>

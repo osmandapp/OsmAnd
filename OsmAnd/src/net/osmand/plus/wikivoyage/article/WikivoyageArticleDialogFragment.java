@@ -119,7 +119,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
 		contentWebView.getSettings().setJavaScriptEnabled(true);
-
+		contentWebView.getSettings().setLoadsImagesAutomatically(getSettings().SHOW_WEBVIEW_IMAGES.get());
 		return mainView;
 	}
 
@@ -230,7 +230,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		StringBuilder sb = new StringBuilder(HEADER_INNER);
 
 		String articleTitle = article.getImageTitle();
-		if (!TextUtils.isEmpty(articleTitle)) {
+		if (!TextUtils.isEmpty(articleTitle)&&!getSettings().SHOW_WEBVIEW_IMAGES.get()) {
 			String url = WikivoyageArticle.getImageUrl(articleTitle, false);
 			sb.append("<div class=\"title-image\" style=\"background-image: url(").append(url).append(")\"></div>");
 		}
