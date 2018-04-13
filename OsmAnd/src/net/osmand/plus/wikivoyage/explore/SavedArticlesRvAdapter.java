@@ -76,21 +76,24 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			final ItemVH holder = (ItemVH) viewHolder;
 			WikivoyageArticle article = (WikivoyageArticle) getItem(position);
 			boolean lastItem = position == getItemCount() - 1;
+			if (app.getSettings().WIKIVOYAGE_SHOW_IMAGES.get()) {
+				Picasso.get()
+						.load(WikivoyageArticle.getImageUrl(article.getImageTitle(), false))
+						.transform(USE_ALTERNATIVE_CARD ? new CropRectTransformation() : new CropCircleTransformation())
+						.into(holder.icon, new Callback() {
+							@Override
+							public void onSuccess() {
+								holder.icon.setVisibility(View.VISIBLE);
+							}
 
-			Picasso.get()
-					.load(WikivoyageArticle.getImageUrl(article.getImageTitle(), false))
-					.transform(USE_ALTERNATIVE_CARD ? new CropRectTransformation() : new CropCircleTransformation())
-					.into(holder.icon, new Callback() {
-						@Override
-						public void onSuccess() {
-							holder.icon.setVisibility(View.VISIBLE);
-						}
-
-						@Override
-						public void onError(Exception e) {
-							holder.icon.setVisibility(View.GONE);
-						}
-					});
+							@Override
+							public void onError(Exception e) {
+								holder.icon.setVisibility(View.GONE);
+							}
+						});
+			} else {
+				holder.icon.setVisibility(View.GONE);
+			}
 			holder.title.setText(article.getTitle());
 			holder.content.setText(article.getContent());
 			holder.partOf.setText(article.getGeoDescription());
