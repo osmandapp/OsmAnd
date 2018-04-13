@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage.explore;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PicassoUtils;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
@@ -33,6 +35,15 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 
 	private static final int EXPLORE_POSITION = 0;
 	private static final int SAVED_ARTICLES_POSITION = 1;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Context context = getContext();
+		if (context != null) {
+			PicassoUtils.setupPicasso(context);
+		}
+	}
 
 	@Nullable
 	@Override

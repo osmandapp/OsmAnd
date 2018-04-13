@@ -2,8 +2,9 @@ package net.osmand.plus.wikivoyage.explore;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
+import android.webkit.WebView;
 
+import net.osmand.PicassoUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -49,8 +50,9 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						// TODO : implement clearing of cache
-						Toast.makeText(getContext(), "Currently in development", Toast.LENGTH_SHORT).show();
+						new WebView(getContext()).clearCache(true);
+						PicassoUtils.clearAllPicassoCache();
+						dismiss();
 					}
 				})
 				.create();
