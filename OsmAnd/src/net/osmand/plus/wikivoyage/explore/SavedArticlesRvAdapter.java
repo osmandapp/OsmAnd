@@ -76,7 +76,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			final ItemVH holder = (ItemVH) viewHolder;
 			WikivoyageArticle article = (WikivoyageArticle) getItem(position);
 			boolean lastItem = position == getItemCount() - 1;
-			if (app.getSettings().SHOW_IMAGES.get()) {
+			if (app.getSettings().WIKIVOYAGE_SHOW_IMAGES.get()) {
 				Picasso.get()
 						.load(WikivoyageArticle.getImageUrl(article.getImageTitle(), false))
 						.transform(USE_ALTERNATIVE_CARD ? new CropRectTransformation() : new CropCircleTransformation())
