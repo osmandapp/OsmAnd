@@ -3042,4 +3042,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_result">Wyniki</string>
     <string name="article_removed">Artykuł usunięty</string>
     <string name="shared_string_contents">Spis treści</string>
+    <string name="download_maps_travel">Mapy podróżnicze</string>
+    <string name="shared_string_wikivoyage">Wikipodróże</string>
     </resources>
