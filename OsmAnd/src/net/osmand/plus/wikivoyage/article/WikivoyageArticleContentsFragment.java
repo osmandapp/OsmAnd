@@ -19,8 +19,7 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.wikivoyage.data.ContentsJsonParser;
-import net.osmand.plus.wikivoyage.data.ContentsJsonParser.ContentsContainer;
+import net.osmand.plus.wikivoyage.data.WikivoyageJsonParser;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -52,20 +51,31 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			return;
 		}
 
-		ContentsContainer contentsContainer = ContentsJsonParser.parseJsonContents(contentsJson);
+		WikivoyageJsonParser.ContentsContainer contentsContainer = WikivoyageJsonParser.parseJsonContents(contentsJson);
 		if (contentsContainer == null) {
 			return;
 		}
 
-		ContentsJsonParser.Container contentsContainer2 = ContentsJsonParser.parseJsonContents2(contentsJson);
-		if (contentsContainer2 == null) {
-			return;
+		final ArrayList<String> listDataHeader = new ArrayList<String>();
+		final LinkedHashMap<String, List<String>> listDataChild = new LinkedHashMap<String, List<String>>();
+		map = new LinkedHashMap<>();
+
+		for (int i = 0; i < contentsContainer.getChilds().size(); i++) {
+			WikivoyageJsonParser.ContentsContainer Header = contentsContainer.getChilds().get(i);
+			listDataHeader.add(Header.getName());
+			map.put(Header.getName(), Header.getLink());
+
+			if (Header.getChilds() != null && !Header.getChilds().isEmpty()) {
+				ArrayList<String> subHeaders = new ArrayList<>();
+
+				for (int j = 0; j < Header.getChilds().size(); j++) {
+					WikivoyageJsonParser.ContentsContainer subHeader = Header.getChilds().get(j);
+					subHeaders.add(subHeader.getName());
+					map.put(subHeader.getName(), subHeader.getLink());
+				}
+				listDataChild.put(Header.getName(), subHeaders);
+			}
 		}
-
-		final ArrayList<String> listDataHeader = contentsContainer.listDataHeader;
-		final LinkedHashMap<String, List<String>> listDataChild = contentsContainer.listDataChild;
-
-		map = contentsContainer.map;
 
 		items.add(new TitleItem(getString(R.string.shared_string_contents)));
 
