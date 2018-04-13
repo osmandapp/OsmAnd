@@ -368,7 +368,7 @@
 	<string name="local_index_transport_data">اطلاعات حمل‌ونقل عمومی</string>
 	<string name="local_index_map_data">اطلاعات نقشه</string>
 	<string name="local_indexes_cat_backup">غیرفعال</string>
-	<string name="local_indexes_cat_tts">پیام‌های صوتی (ماشینی؛ TTS)</string>
+	<string name="local_indexes_cat_tts">پیام‌های صوتی (ماشینی، TTS)</string>
 	<string name="local_indexes_cat_voice">پیام‌های صوتی (ضبطی)</string>
 	
 	<string name="local_indexes_cat_poi">اطلاعات POI</string>
@@ -454,7 +454,7 @@
 	<string name="index_name_oceania">استرالیا و اقیانوسیه</string>
 	<string name="index_name_other">نقشه‌های جهانی و بالادستی</string>
 	<string name="index_name_voice">پیام‌های صوتی (ضبطی، قابلیت محدود)</string>
-	<string name="index_name_tts_voice">پیام‌های صوتی (ماشینی؛ TTS - ارجح)</string>
+	<string name="index_name_tts_voice">پیام‌های صوتی (ماشینی، TTS - بهتر)</string>
 	<string name="amenity_type_osmwiki">ویکی‌پدیا (آفلاین)</string>
 	<string name="routing_settings">راهبری</string>
 	<string name="routing_settings_descr">گزینه‌های راهبری را تعریف کنید.</string>
@@ -3067,4 +3067,8 @@
     <string name="shared_string_read">مطالعه</string>
     <string name="shared_string_explore">کاوش</string>
     <string name="shared_string_contents">محتوا</string>
+    <string name="download_maps_travel">نقشه‌های سفر</string>
+    <string name="shared_string_wikivoyage">ویکی‌سفر</string>
+    <string name="article_removed">مقاله حذف شد</string>
+    <string name="index_item_world_wikivoyage">مقاله‌های جهانی ویکی‌سفر</string>
     </resources>

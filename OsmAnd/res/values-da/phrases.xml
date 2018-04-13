@@ -3895,4 +3895,8 @@
 
 	<string name="poi_climbing_adventure">Klatre eventyr</string>
 
+<string name="poi_via_ferrata">Via ferrata</string>
+	<string name="poi_cable_number">Kabelnummer</string>
+	<string name="poi_via_ferrata_scale">Sværhedsgrad</string>
+
 </resources>

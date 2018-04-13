@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -1756,11 +1757,7 @@
     <string name="additional_actions">Πρόσθετες ενέργειες</string>
     <string name="av_locations_selected_desc">Αρχείο GPX με συντεταγμένες και δεδομένα από τις επιλεγμένες σημειώσεις.</string>
     <string name="av_locations_all_desc">Αρχείο GPX με συντεταγμένες και δεδομένα από όλες τις σημειώσεις.</string>
-    <string name="release_3_0">\\022 Η ανίχνευση των πινακίδων \"stop\" τώρα λαμβάνει υπόψη την κατεύθυνση οδήγησης
-\n
-\n• Νέος αλγόριθμος που παρέχει ουσιαστικές τιμές ανάβασης/κατάβασης για τα ίχνη GPX
-\n
-\n• Χρόνος πεζοπορίας με επίγνωση του εδάφους (ανάβαση) (κανόνας του Naismith)
+    <string name="release_3_0">\\022 
 \n
 \n</string>
     <string name="modify_the_search_query">Τροποποίηση ερωτήματος αναζήτησης.</string>
@@ -1777,4 +1774,85 @@
     <string name="empty_state_av_notes">Κρατήστε σημειώσεις!</string>
     <string name="empty_state_av_notes_desc">Προσθήκη ήχου, βίντεο ή σημείωση φωτογραφίας για κάθε σημείο στο χάρτη, χρησιμοποιώντας το widget ή το συναφές μενού.</string>
     <string name="notes_by_date">Σημειώσεις κατά ημερομηνία</string>
+    <string name="download_maps_travel">Ταξιδιωτικοί χάρτες</string>
+    <string name="article_removed">Το άρθρο αφαιρέθηκε</string>
+    <string name="wikivoyage_search_hint">Αναζήτηση: Χώρα, Πόλη, Επαρχία</string>
+    <string name="shared_string_read">Ανάγνωση</string>
+    <string name="saved_articles">Αποθηκευμένα άρθρα</string>
+    <string name="shared_string_explore">Εξερεύνηση</string>
+    <string name="shared_string_contents">Περιεχόμενα</string>
+    <string name="shared_string_result">Αποτέλεσμα</string>
+    <string name="use_two_digits_longitude">Χρήση γεωγραφικού μήκους με δύο αριθμούς</string>
+    <string name="shared_string_travel">Ταξίδι</string>
+    <string name="waypoints_removed_from_map_markers">Τα σημεία διαδρομής αφαιρέθηκαν από τους δείκτες χάρτη</string>
+    <string name="nothing_found_in_radius">Τίποτα δεν βρέθηκε μέσα στην ακτίνα:</string>
+    <string name="select_waypoints_category_description">Μπορείτε να προσθέσετε όλα τα σημεία διαδρομής του ίχνους, ή να επιλέξετε ξεχωριστές κατηγορίες.</string>
+    <string name="shared_string_total">Σύνολο</string>
+    <string name="clear_all_intermediates">Καθαρισμός όλων των ενδιάμεσων σημείων</string>
+    <string name="group_deleted">Η ομάδα καταργήθηκε</string>
+    <string name="rendering_attr_whiteWaterSports_name">Αθλήματα ορμητικών νερών</string>
+    <string name="distance_farthest">Απόσταση: Πρώτα η πιο μακρινή</string>
+    <string name="distance_nearest">Απόσταση: Πρώτα η πιο κοντινή</string>
+    <string name="enter_lon">Εισάγετε το γεωγραφικό μήκος</string>
+    <string name="enter_lat">Εισάγετε το γεωγραφικό πλάτος</string>
+    <string name="enter_lat_and_lon">Εισάγετε γεωγραφικό πλάτος και μήκος</string>
+	<string name="dd_mm_ss_format">ΜΜ°ΠΠ′ΔΔ″</string>
+	<string name="dd_dddddd_format">ΜΜ.ΜΜΜΜΜΜ°</string>
+	<string name="dd_ddddd_format">ΜΜ.ΜΜΜΜΜ°</string>
+	<string name="dd_mm_mmmm_format">ΜΜ°ΠΠ.ΠΠΠΠ′</string>
+	<string name="dd_mm_mmm_format">ΜΜ°ΠΠ.ΠΠΠ′</string>
+	<string name="east_abbreviation">Α</string>
+	<string name="west_abbreviation">Δ</string>
+	<string name="south_abbreviation">Ν</string>
+	<string name="north_abbreviation">Β</string>
+	<string name="optional_point_name">Προαιρετικό όνομα σημείου</string>
+    <string name="transport_nearby_routes_within">Κοντινές διαδρομές</string>
+    <string name="transport_nearby_routes">ΚΟΝΤΙΝΕΣ</string>
+    <string name="enter_the_file_name">Εισάγετε το όνομα του αρχείου.</string>
+    <string name="map_import_error">Σφάλμα εισαγωγής χάρτη</string>
+    <string name="map_imported_successfully">Ο χάρτης εισήχθη</string>
+    <string name="make_as_start_point">Κάντε αυτό το σημείο εκκίνησης</string>
+    <string name="shared_string_current">Τρέχον</string>
+    <string name="last_intermediate_dest_description">Προσθέτει την τελευταία στάση κατά μήκος της διαδρομής</string>
+    <string name="first_intermediate_dest_description">Προσθέτει την πρώτη στάση στη διαδρομή</string>
+    <string name="subsequent_dest_description">Προαγωγή προορισμού και δημιουργία προορισμού</string>
+    <string name="show_closed_notes">Εμφάνιση κλειστών σημειώσεων</string>
+    <string name="switch_osm_notes_visibility_desc">Εμφάνιση/Απόκρυψη σημειώσεων OSM στον χάρτη.</string>
+    <string name="gpx_file_desc">GPX - κατάλληλο για εξαγωγή σε JOSM ή σε άλλους επεξεργαστές OSM.</string>
+    <string name="osc_file_desc">OSC - κατάλληλο για εξαγωγή σε OpenStreetMap.</string>
+    <string name="gpx_file">Αρχείο GPX</string>
+    <string name="osc_file">Αρχείο OSC</string>
+    <string name="choose_file_type">Επιλέξτε τύπο αρχείου</string>
+    <string name="osm_edits_export_desc">Επιλέξτε τον τύπο εξαγωγής: σημειώσεις OSM, ΣΕ ή και τα δύο.</string>
+    <string name="all_data">Όλα τα δεδομένα</string>
+    <string name="osm_notes">Σημειώσεις OSM</string>
+    <string name="will_open_tomorrow_at">Θα ανοίξει αύριο στις</string>
+    <string name="by_date">Κατά ημερομηνία</string>
+    <string name="by_type">Κατά τύπο</string>
+    <string name="looking_for_tracks_with_waypoints">Αναζήτηση για ίχνη με σημεία διαδρομής</string>
+    <string name="shared_string_more_without_dots">Περισσότερα</string>
+    <string name="appearance_on_the_map">Εμφάνιση στον χάρτη</string>
+    <string name="add_track_to_markers_descr">Τα σημεία διαδρομής μπορούν να προστεθούν σε δείκτες επιλέγοντας ένα από αυτά τα ίχνη που τα έχει.</string>
+    <string name="add_favourites_group_to_markers_descr">Επιλέξτε μια αγαπημένη κατηγορία για να προσθέσετε στους δείκτες.</string>
+    <string name="track_waypoints">Σημεία διαδρομής ίχνους</string>
+    <string name="favourites_group">Κατηγορία αγαπημένων</string>
+    <string name="add_group">Προσθήκη ομάδας</string>
+    <string name="add_group_descr">Μπορείτε να εισάγετε ομάδες από αγαπημένα ή σημεία διαδρομής ίχνους.</string>
+    <string name="empty_state_markers_active">Δημιουργήστε δείκτες χάρτη!</string>
+    <string name="empty_state_markers_active_desc">Πατήστε παρατεταμένα ή σύντομα \'Μέρη\', έπειτα πατήστε το πλήκτρο σημαίας δείκτη.</string>
+    <string name="empty_state_markers_groups">Εισαγωγή ομάδων</string>
+    <string name="empty_state_markers_groups_desc">Μπορείτε να εισάγετε ομάδες αγαπημένων ή σημεία διαδρομής ίχνους ως δείκτες.</string>
+    <string name="empty_state_markers_history">\@string/shared_string_history</string>
+    <string name="empty_state_markers_history_desc">Οι δείκτες που σημειώθηκαν ως περασμένοι, θα εμφανιστούν στην οθόνη.</string>
+    <string name="shared_string_two">Δύο</string>
+    <string name="shared_string_one">Ένα</string>
+    <string name="show_guide_line_descr">Εμφάνιση γραμμών οδηγού από τη θέση σας προς τις ενεργές τοποθεσίες δείκτη.</string>
+    <string name="show_arrows_descr">Εμφάνιση ενός ή δύο τόξων που δείχνουν την κατεύθυνση προς τους ενεργούς δείκτες.</string>
+    <string name="distance_indication_descr">Επιλέξτε πώς θα εμφανίζεται η απόσταση προς τους ενεργούς δείκτες.</string>
+    <string name="active_markers_descr">Επιλέξτε τον αριθμό των δεικτών κατεύθυνσης που θα εμφανιστούν.</string>
+    <string name="digits_quantity">Αριθμός δεκαδικών ψηφίων</string>
+    <string name="shared_string_right">Δεξιά</string>
+    <string name="shared_string_left">Αριστερά</string>
+    <string name="show_number_pad">Εμφάνιση αριθμητικού πληκτρολογίου</string>
+    <string name="shared_string_paste">Επικόλληση</string>
     </resources>

@@ -408,5 +408,7 @@
 	<color name="wikivoyage_bottom_bar_bg_dark">#222526</color>
 	<color name="wikivoyage_bottom_bar_divider_light">#e3e3e3</color>
 	<color name="wikivoyage_bottom_bar_divider_dark">#2d3133</color>
+	<color name="wikivoyage_secondary_btn_bg_light">#f0f0f0</color>
+	<color name="wikivoyage_secondary_btn_bg_dark">#2d3133</color>
 
 </resources>

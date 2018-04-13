@@ -3069,4 +3069,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_explore">Udforsk</string>
     <string name="shared_string_contents">Indhold</string>
     <string name="article_removed">Artikel fjernet</string>
+    <string name="download_maps_travel">Rejsebøger</string>
+    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="index_item_world_wikivoyage">Verdensomspændende Wikivoyage artikler</string>
     </resources>

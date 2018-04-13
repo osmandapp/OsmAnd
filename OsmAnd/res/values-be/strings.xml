@@ -3073,4 +3073,9 @@
     <string name="shared_string_explore">Даследаваць</string>
     <string name="wikivoyage_search_hint">Пошук: краіна, горад, рэгіён</string>
     <string name="shared_string_read">Чытаць</string>
+    <string name="download_maps_travel">Мапы падарожнікаў</string>
+    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="article_removed">Артыкул выдалены</string>
+    <string name="shared_string_contents">Змест</string>
+    <string name="index_item_world_wikivoyage">Сусветныя артыкулы Wikivoyage</string>
     </resources>
