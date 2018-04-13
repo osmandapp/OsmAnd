@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -15,36 +16,35 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 
-public class OptionsImagesCacheHistoryBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "OptionsImagesCasheBottomSheetDialogFragment";
+	public final static String TAG = "WikivoyageOptionsBottomSheetDialogFragment";
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
+		final OsmandApplication app = getMyApplication();
+		final OsmandSettings.CommonPreference<Boolean> showImagesPref = app.getSettings().WIKIVOYAGE_SHOW_IMAGES;
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 
-		boolean showImages = getMyApplication().getSettings().WIKIVOYAGE_SHOW_IMAGES.get();
-
-		BaseBottomSheetItem showWebviewImagesItem = new BottomSheetItemWithCompoundButton.Builder()
-				.setChecked(showImages)
+		BaseBottomSheetItem showImagesItem = new BottomSheetItemWithCompoundButton.Builder()
+				.setChecked(showImagesPref.get())
 				.setIcon(getContentIcon(R.drawable.ic_type_img))
 				.setTitle(getString(R.string.show_images))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						OsmandSettings settings = getMyApplication().getSettings();
-						settings.WIKIVOYAGE_SHOW_IMAGES.set(!settings.WIKIVOYAGE_SHOW_IMAGES.get());
+						showImagesPref.set(!showImagesPref.get());
 						dismiss();
 					}
 				})
 				.create();
-		items.add(showWebviewImagesItem);
+		items.add(showImagesItem);
 
 		BaseBottomSheetItem clearCacheItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.shared_string_clear))
-				.setTitle(getString(R.string.images_cache)+":")
+				.setTitle(getString(R.string.images_cache) + ":")
 				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -65,7 +65,7 @@ public class OptionsImagesCacheHistoryBottomSheetDialogFragment extends MenuBott
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						WikivoyageLocalDataHelper.getInstance(getMyApplication()).clearHistory();
+						WikivoyageLocalDataHelper.getInstance(app).clearHistory();
 						dismiss();
 					}
 				})

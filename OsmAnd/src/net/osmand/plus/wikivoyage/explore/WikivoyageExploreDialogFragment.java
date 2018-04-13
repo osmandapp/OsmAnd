@@ -41,6 +41,15 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
 
+		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				WikivoyageOptionsBottomSheetDialogFragment fragment = new WikivoyageOptionsBottomSheetDialogFragment();
+				fragment.setUsedOnMap(false);
+				fragment.show(getChildFragmentManager(), WikivoyageOptionsBottomSheetDialogFragment.TAG);
+			}
+		});
+
 		int searchColorId = nightMode ? R.color.icon_color : R.color.ctx_menu_title_color_dark;
 		((TextView) mainView.findViewById(R.id.search_hint)).setTextColor(getResolvedColor(searchColorId));
 		((ImageView) mainView.findViewById(R.id.search_icon))
@@ -50,15 +59,6 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 			@Override
 			public void onClick(View v) {
 				WikivoyageSearchDialogFragment.showInstance(getFragmentManager());
-			}
-		});
-
-		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				OptionsImagesCacheHistoryBottomSheetDialogFragment fragment = new OptionsImagesCacheHistoryBottomSheetDialogFragment();
-				fragment.setUsedOnMap(false);
-				fragment.show(getChildFragmentManager(), OptionsImagesCacheHistoryBottomSheetDialogFragment.TAG);
 			}
 		});
 

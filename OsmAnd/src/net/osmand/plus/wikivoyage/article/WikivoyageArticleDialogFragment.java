@@ -230,9 +230,9 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private String createHtmlContent(@NonNull WikivoyageArticle article) {
 		StringBuilder sb = new StringBuilder(HEADER_INNER);
 
-		String articleImageTitle = article.getImageTitle();
-		if (!TextUtils.isEmpty(articleImageTitle)&&getSettings().WIKIVOYAGE_SHOW_IMAGES.get()) {
-			String url = WikivoyageArticle.getImageUrl(articleImageTitle, false);
+		String imageTitle = article.getImageTitle();
+		if (!TextUtils.isEmpty(imageTitle) && getSettings().WIKIVOYAGE_SHOW_IMAGES.get()) {
+			String url = WikivoyageArticle.getImageUrl(imageTitle, false);
 			sb.append("<div class=\"title-image\" style=\"background-image: url(").append(url).append(")\"></div>");
 		}
 		sb.append("<div class=\"main\">\n");
