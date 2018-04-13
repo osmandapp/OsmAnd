@@ -16,7 +16,7 @@ public class WikivoyageJsonParser {
 	private static final String LINK = "link";
 
 	@Nullable
-	public static ContentsContainer parseJsonContents(String contentsJson) {
+	public static ContentsItem parseJsonContents(String contentsJson) {
 
 		JSONObject jArray;
 		JSONObject reader;
@@ -29,15 +29,15 @@ public class WikivoyageJsonParser {
 			return null;
 		}
 
-		ContentsContainer topContentsContainer = new ContentsContainer(HEADERS, null);
+		ContentsItem topContentsItem = new ContentsItem(HEADERS, null);
 		for (int i = 0; i < jArray.length(); i++) {
 			try {
 				String link = "";
 				JSONObject jsonHeader = jArray.getJSONObject(jArray.names().getString(i));
 				link = jsonHeader.getString(LINK);
-				ContentsContainer contentsHeaderContainer = new ContentsContainer(jArray.names().getString(i), link);
-				topContentsContainer.childItems.add(contentsHeaderContainer);
-				contentsHeaderContainer.setParent(topContentsContainer);
+				ContentsItem contentsHeaderItem = new ContentsItem(jArray.names().getString(i), link);
+				topContentsItem.childItems.add(contentsHeaderItem);
+				contentsHeaderItem.setParent(topContentsItem);
 
 				JSONArray jsonSubheaders = jsonHeader.getJSONArray(SUBHEADERS);
 				List<String> subheaderNames = null;
@@ -50,35 +50,35 @@ public class WikivoyageJsonParser {
 					subheaderNames.add(jsonSubheader.names().getString(0));
 					link = jsonSubheaderLink.getString(LINK);
 
-					ContentsContainer contentsSubHeaderContainer = new ContentsContainer(jsonSubheader.names().getString(0), link);
-					contentsHeaderContainer.childItems.add(contentsSubHeaderContainer);
-					contentsSubHeaderContainer.setParent(topContentsContainer);
+					ContentsItem contentsSubHeaderContainer = new ContentsItem(jsonSubheader.names().getString(0), link);
+					contentsHeaderItem.childItems.add(contentsSubHeaderContainer);
+					contentsSubHeaderContainer.setParent(topContentsItem);
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
-		return topContentsContainer;
+		return topContentsItem;
 	}
 
-	public static class ContentsContainer {
+	public static class ContentsItem {
 
-		ArrayList<ContentsContainer> childItems = new ArrayList<>();
-		ContentsContainer parent;
+		private ArrayList<ContentsItem> childItems = new ArrayList<>();
+		private ContentsItem parent;
 
-		String name;
-		String link;
+		private String name;
+		private String link;
 
-		public ContentsContainer(String name, String link) {
+		public ContentsItem(String name, String link) {
 			this.name = name;
 			this.link = link;
 		}
 
-		public ArrayList<ContentsContainer> getChildItems() {
+		public ArrayList<ContentsItem> getChildItems() {
 			return childItems;
 		}
 
-		public void setChildItems(ArrayList<ContentsContainer> childItems) {
+		public void setChildItems(ArrayList<ContentsItem> childItems) {
 			this.childItems = childItems;
 		}
 
@@ -99,11 +99,11 @@ public class WikivoyageJsonParser {
 			this.link = link;
 		}
 
-		public ContentsContainer getParent() {
+		public ContentsItem getParent() {
 			return parent;
 		}
 
-		public void setParent(ContentsContainer parent) {
+		public void setParent(ContentsItem parent) {
 			this.parent = parent;
 		}
 	}

@@ -51,8 +51,8 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			return;
 		}
 
-		WikivoyageJsonParser.ContentsContainer contentsContainer = WikivoyageJsonParser.parseJsonContents(contentsJson);
-		if (contentsContainer == null) {
+		WikivoyageJsonParser.ContentsItem contentsItem = WikivoyageJsonParser.parseJsonContents(contentsJson);
+		if (contentsItem == null) {
 			return;
 		}
 
@@ -60,8 +60,8 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		final LinkedHashMap<String, List<String>> listDataChild = new LinkedHashMap<String, List<String>>();
 		map = new LinkedHashMap<>();
 
-		for (int i = 0; i < contentsContainer.getChildItems().size(); i++) {
-			WikivoyageJsonParser.ContentsContainer Header = contentsContainer.getChildItems().get(i);
+		for (int i = 0; i < contentsItem.getChildItems().size(); i++) {
+			WikivoyageJsonParser.ContentsItem Header = contentsItem.getChildItems().get(i);
 			listDataHeader.add(Header.getName());
 			map.put(Header.getName(), Header.getLink());
 
@@ -69,9 +69,9 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 				ArrayList<String> subHeaders = new ArrayList<>();
 
 				for (int j = 0; j < Header.getChildItems().size(); j++) {
-					WikivoyageJsonParser.ContentsContainer subHeader = Header.getChildItems().get(j);
-					subHeaders.add(subHeader.getName());
-					map.put(subHeader.getName(), subHeader.getLink());
+					WikivoyageJsonParser.ContentsItem subHeaderItem = Header.getChildItems().get(j);
+					subHeaders.add(subHeaderItem.getName());
+					map.put(subHeaderItem.getName(), subHeaderItem.getLink());
 				}
 				listDataChild.put(Header.getName(), subHeaders);
 			}
