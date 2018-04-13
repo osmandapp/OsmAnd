@@ -3797,4 +3797,10 @@
 	<string name="poi_service_vehicle_insurance_yes">Ubezpieczenia</string>
 	<string name="poi_service_vehicle_tyres_yes">Opony</string>
 
+<string name="poi_aerialway_zip_line">Tyrolka</string>
+
+	<string name="poi_via_ferrata">Żelazna perć (via ferrata)</string>
+	<string name="poi_cable_number">Numer przewodu</string>
+	<string name="poi_via_ferrata_scale">Trudność</string>
+
 </resources>
