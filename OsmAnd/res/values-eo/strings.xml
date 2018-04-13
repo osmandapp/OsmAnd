@@ -2938,4 +2938,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_explore">Esplori</string>
     <string name="shared_string_contents">Enhavo</string>
     <string name="article_removed">Forigis artikolon</string>
+    <string name="download_maps_travel">Vojaĝaj mapoj</string>
+    <string name="shared_string_wikivoyage">Vikivojaĝo</string>
+    <string name="index_item_world_wikivoyage">Tutmondaj artikoloj de Vikivojaĝo</string>
     </resources>
