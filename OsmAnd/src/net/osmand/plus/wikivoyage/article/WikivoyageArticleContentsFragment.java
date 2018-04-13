@@ -57,6 +57,11 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			return;
 		}
 
+		ContentsJsonParser.Container contentsContainer2 = ContentsJsonParser.parseJsonContents2(contentsJson);
+		if (contentsContainer2 == null) {
+			return;
+		}
+
 		final ArrayList<String> listDataHeader = contentsContainer.listDataHeader;
 		final LinkedHashMap<String, List<String>> listDataChild = contentsContainer.listDataChild;
 

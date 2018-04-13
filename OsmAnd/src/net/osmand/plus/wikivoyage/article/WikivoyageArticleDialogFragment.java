@@ -50,6 +50,21 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			"window.location.hash = id;}</script>";
 	private static final String FOOTER_INNER = "</div></body></html>";
 
+	private static final String collapsibleJS = "<script>\n" +
+			"var coll = document.getElementsByTagName(\"H2\");\n" +
+			"var i;\n" +
+			"for (i = 0; i < coll.length; i++) {\n" +
+			"  coll[i].addEventListener(\"click\", function() {\n" +
+			"    this.classList.toggle(\"active\");\n" +
+			"    var content = this.nextElementSibling;\n" +
+			"    if (content.style.display === \"block\") {\n" +
+			"      content.style.display = \"none\";\n" +
+			"    } else {\n" +
+			"      content.style.display = \"block\";\n" +
+			"    }\n" +
+			"  });\n" +
+			"}</script>";
+
 	private long cityId = NO_VALUE;
 	private ArrayList<String> langs;
 	private String selectedLang;
