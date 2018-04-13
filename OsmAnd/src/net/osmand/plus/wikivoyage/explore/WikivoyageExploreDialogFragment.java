@@ -20,7 +20,6 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.R;
-import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
 
@@ -57,9 +56,9 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OptionsImagesCasheBottomSheetDialogFragment fragment = new OptionsImagesCasheBottomSheetDialogFragment();
+				OptionsImagesCacheHistoryBottomSheetDialogFragment fragment = new OptionsImagesCacheHistoryBottomSheetDialogFragment();
 				fragment.setUsedOnMap(false);
-				fragment.show(getChildFragmentManager(), OptionsImagesCasheBottomSheetDialogFragment.TAG);
+				fragment.show(getChildFragmentManager(), OptionsImagesCacheHistoryBottomSheetDialogFragment.TAG);
 			}
 		});
 
