@@ -60,16 +60,16 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		final LinkedHashMap<String, List<String>> listDataChild = new LinkedHashMap<String, List<String>>();
 		map = new LinkedHashMap<>();
 
-		for (int i = 0; i < contentsContainer.getChilds().size(); i++) {
-			WikivoyageJsonParser.ContentsContainer Header = contentsContainer.getChilds().get(i);
+		for (int i = 0; i < contentsContainer.getChildItems().size(); i++) {
+			WikivoyageJsonParser.ContentsContainer Header = contentsContainer.getChildItems().get(i);
 			listDataHeader.add(Header.getName());
 			map.put(Header.getName(), Header.getLink());
 
-			if (Header.getChilds() != null && !Header.getChilds().isEmpty()) {
+			if (Header.getChildItems() != null && !Header.getChildItems().isEmpty()) {
 				ArrayList<String> subHeaders = new ArrayList<>();
 
-				for (int j = 0; j < Header.getChilds().size(); j++) {
-					WikivoyageJsonParser.ContentsContainer subHeader = Header.getChilds().get(j);
+				for (int j = 0; j < Header.getChildItems().size(); j++) {
+					WikivoyageJsonParser.ContentsContainer subHeader = Header.getChildItems().get(j);
 					subHeaders.add(subHeader.getName());
 					map.put(subHeader.getName(), subHeader.getLink());
 				}

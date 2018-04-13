@@ -36,7 +36,7 @@ public class WikivoyageJsonParser {
 				JSONObject jsonHeader = jArray.getJSONObject(jArray.names().getString(i));
 				link = jsonHeader.getString(LINK);
 				ContentsContainer contentsHeaderContainer = new ContentsContainer(jArray.names().getString(i), link);
-				topContentsContainer.childs.add(contentsHeaderContainer);
+				topContentsContainer.childItems.add(contentsHeaderContainer);
 				contentsHeaderContainer.setParent(topContentsContainer);
 
 				JSONArray jsonSubheaders = jsonHeader.getJSONArray(SUBHEADERS);
@@ -51,7 +51,7 @@ public class WikivoyageJsonParser {
 					link = jsonSubheaderLink.getString(LINK);
 
 					ContentsContainer contentsSubHeaderContainer = new ContentsContainer(jsonSubheader.names().getString(0), link);
-					contentsHeaderContainer.childs.add(contentsSubHeaderContainer);
+					contentsHeaderContainer.childItems.add(contentsSubHeaderContainer);
 					contentsSubHeaderContainer.setParent(topContentsContainer);
 				}
 			} catch (JSONException e) {
@@ -63,18 +63,23 @@ public class WikivoyageJsonParser {
 
 	public static class ContentsContainer {
 
-		ArrayList<ContentsContainer> childs = new ArrayList<>();
+		ArrayList<ContentsContainer> childItems = new ArrayList<>();
 		ContentsContainer parent;
 
 		String name;
 		String link;
 
-		public ArrayList<ContentsContainer> getChilds() {
-			return childs;
+		public ContentsContainer(String name, String link) {
+			this.name = name;
+			this.link = link;
 		}
 
-		public void setChilds(ArrayList<ContentsContainer> childs) {
-			this.childs = childs;
+		public ArrayList<ContentsContainer> getChildItems() {
+			return childItems;
+		}
+
+		public void setChildItems(ArrayList<ContentsContainer> childItems) {
+			this.childItems = childItems;
 		}
 
 
@@ -100,11 +105,6 @@ public class WikivoyageJsonParser {
 
 		public void setParent(ContentsContainer parent) {
 			this.parent = parent;
-		}
-
-		public ContentsContainer(String name, String link) {
-			this.name = name;
-			this.link = link;
 		}
 	}
 }
