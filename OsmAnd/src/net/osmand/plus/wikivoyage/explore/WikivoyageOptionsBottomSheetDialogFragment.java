@@ -45,6 +45,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 
 		BaseBottomSheetItem clearCacheItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.shared_string_clear))
+				.setDescriptionColorId(nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light)
 				.setTitle(getString(R.string.images_cache) + ": ???") // TODO : show images cache size
 				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
 				.setOnClickListener(new View.OnClickListener() {
