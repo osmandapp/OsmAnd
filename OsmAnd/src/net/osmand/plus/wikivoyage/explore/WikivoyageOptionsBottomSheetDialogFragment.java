@@ -2,7 +2,7 @@ package net.osmand.plus.wikivoyage.explore;
 
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebView;
+import android.widget.Toast;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -44,13 +44,13 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 
 		BaseBottomSheetItem clearCacheItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.shared_string_clear))
-				.setTitle(getString(R.string.images_cache) + ":")
+				.setTitle(getString(R.string.images_cache) + ": ???") // TODO : show images cache size
 				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						new WebView(getContext()).clearCache(true);
-						dismiss();
+						// TODO : implement clearing of cache
+						Toast.makeText(getContext(), "Currently in development", Toast.LENGTH_SHORT).show();
 					}
 				})
 				.create();
