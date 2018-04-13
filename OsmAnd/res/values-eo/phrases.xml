@@ -3831,4 +3831,8 @@
 
 	<string name="poi_climbing_adventure">Grimpada parko</string>
 
+<string name="poi_via_ferrata">Via ferrata (fera grimp-vojo)</string>
+	<string name="poi_cable_number">Nombro da ŝnuregoj</string>
+	<string name="poi_via_ferrata_scale">Malfacileco</string>
+
 </resources>
