@@ -2837,11 +2837,14 @@
 \n
 \n</string>
     <string name="share_geo">geo:</string>
-    <string name="nm">sm</string>
-    <string name="nm_h">sm/t</string>
-    <string name="min_mile">min/engelsk mil</string>
+    <string name="nm">nmi</string>
+    <string name="nm_h">nmi/t</string>
+    <string name="min_mile">min/m</string>
     <string name="poi_filter_nominatim">Nettbasert Nominatim</string>
     <string name="osmand_routing_experimental">Frakoblet OsmAnd-navigasjon er en eksperimentell funksjon, og fungerer ikke for distanser lenger enn omtrent 20 km.
 \n
 \nNavigasjon midlertidig byttet til nettbasert CloudMade-tjeneste.</string>
+    <string name="download_maps_travel">Reisekart</string>
+    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="article_removed">Artikkel fjernet</string>
     </resources>
