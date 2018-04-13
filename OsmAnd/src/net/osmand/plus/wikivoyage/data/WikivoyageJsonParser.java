@@ -16,7 +16,7 @@ public class WikivoyageJsonParser {
 	private static final String LINK = "link";
 
 	@Nullable
-	public static ContentsItem parseJsonContents(String contentsJson) {
+	public static WikivoyageContentItem parseJsonContents(String contentsJson) {
 
 		JSONObject jArray;
 		JSONObject reader;
@@ -29,82 +29,69 @@ public class WikivoyageJsonParser {
 			return null;
 		}
 
-		ContentsItem topContentsItem = new ContentsItem(HEADERS, null);
+		WikivoyageContentItem topWikivoyageContentItem = new WikivoyageContentItem(HEADERS, null);
 		for (int i = 0; i < jArray.length(); i++) {
 			try {
 				String link = "";
 				JSONObject jsonHeader = jArray.getJSONObject(jArray.names().getString(i));
 				link = jsonHeader.getString(LINK);
-				ContentsItem contentsHeaderItem = new ContentsItem(jArray.names().getString(i), link);
-				topContentsItem.childItems.add(contentsHeaderItem);
-				contentsHeaderItem.setParent(topContentsItem);
+				WikivoyageContentItem contentHeaderItem = new WikivoyageContentItem(jArray.names().getString(i), link, topWikivoyageContentItem);
+				topWikivoyageContentItem.subItems.add(contentHeaderItem);
 
 				JSONArray jsonSubheaders = jsonHeader.getJSONArray(SUBHEADERS);
 				List<String> subheaderNames = null;
 				for (int j = 0; j < jsonSubheaders.length(); j++) {
 					JSONObject jsonSubheader = jsonSubheaders.getJSONObject(j);
-					JSONObject jsonSubheaderLink = jsonSubheader.getJSONObject(jsonSubheader.names().getString(0));
+					JSONObject jsonSubheaderLink = jsonSubheader.getJSONObject(jsonSubheader.keys().next());
 					if (subheaderNames == null) {
 						subheaderNames = new ArrayList<>();
 					}
-					subheaderNames.add(jsonSubheader.names().getString(0));
+					subheaderNames.add(jsonSubheader.keys().next());
 					link = jsonSubheaderLink.getString(LINK);
 
-					ContentsItem contentsSubHeaderContainer = new ContentsItem(jsonSubheader.names().getString(0), link);
-					contentsHeaderItem.childItems.add(contentsSubHeaderContainer);
-					contentsSubHeaderContainer.setParent(topContentsItem);
+					WikivoyageContentItem contentsSubHeaderContainer = new WikivoyageContentItem(jsonSubheader.names().getString(0), link, contentHeaderItem);
+					contentHeaderItem.subItems.add(contentsSubHeaderContainer);
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
-		return topContentsItem;
+		return topWikivoyageContentItem;
 	}
 
-	public static class ContentsItem {
+	public static class WikivoyageContentItem {
 
-		private ArrayList<ContentsItem> childItems = new ArrayList<>();
-		private ContentsItem parent;
-
-		private String name;
 		private String link;
+		private String name;
+		private ArrayList<WikivoyageContentItem> subItems = new ArrayList<>();
+		private WikivoyageContentItem parent;
 
-		public ContentsItem(String name, String link) {
+		private WikivoyageContentItem(String name, String link) {
 			this.name = name;
 			this.link = link;
 		}
 
-		public ArrayList<ContentsItem> getChildItems() {
-			return childItems;
+		private WikivoyageContentItem(String name, String link, WikivoyageContentItem parent) {
+			this.parent = parent;
+			this.name = name;
+			this.link = link;
 		}
-
-		public void setChildItems(ArrayList<ContentsItem> childItems) {
-			this.childItems = childItems;
-		}
-
 
 		public String getName() {
 			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
 		}
 
 		public String getLink() {
 			return link;
 		}
 
-		public void setLink(String link) {
-			this.link = link;
-		}
-
-		public ContentsItem getParent() {
+		public WikivoyageContentItem getParent() {
 			return parent;
 		}
 
-		public void setParent(ContentsItem parent) {
-			this.parent = parent;
+		public ArrayList<WikivoyageContentItem> getSubItems() {
+			return subItems;
 		}
+
 	}
 }

@@ -21,9 +21,6 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.wikivoyage.data.WikivoyageJsonParser;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFragment {
 
@@ -35,9 +32,6 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 	public static final int REQUEST_LINK_CODE = 0;
 
 	private ExpandableListView expListView;
-
-	private LinkedHashMap<String, String> map;
-	private String link;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -51,36 +45,15 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			return;
 		}
 
-		WikivoyageJsonParser.ContentsItem contentsItem = WikivoyageJsonParser.parseJsonContents(contentsJson);
-		if (contentsItem == null) {
+		final WikivoyageJsonParser.WikivoyageContentItem wikivoyageContentItem = WikivoyageJsonParser.parseJsonContents(contentsJson);
+		if (wikivoyageContentItem == null) {
 			return;
-		}
-
-		final ArrayList<String> listDataHeader = new ArrayList<String>();
-		final LinkedHashMap<String, List<String>> listDataChild = new LinkedHashMap<String, List<String>>();
-		map = new LinkedHashMap<>();
-
-		for (int i = 0; i < contentsItem.getChildItems().size(); i++) {
-			WikivoyageJsonParser.ContentsItem Header = contentsItem.getChildItems().get(i);
-			listDataHeader.add(Header.getName());
-			map.put(Header.getName(), Header.getLink());
-
-			if (Header.getChildItems() != null && !Header.getChildItems().isEmpty()) {
-				ArrayList<String> subHeaders = new ArrayList<>();
-
-				for (int j = 0; j < Header.getChildItems().size(); j++) {
-					WikivoyageJsonParser.ContentsItem subHeaderItem = Header.getChildItems().get(j);
-					subHeaders.add(subHeaderItem.getName());
-					map.put(subHeaderItem.getName(), subHeaderItem.getLink());
-				}
-				listDataChild.put(Header.getName(), subHeaders);
-			}
 		}
 
 		items.add(new TitleItem(getString(R.string.shared_string_contents)));
 
 		expListView = new ExpandableListView(getContext());
-		ExpandableListAdapter listAdapter = new ExpandableListAdapter(getContext(), listDataHeader, listDataChild);
+		ExpandableListAdapter listAdapter = new ExpandableListAdapter(getContext(), wikivoyageContentItem);
 
 		expListView.setAdapter(listAdapter);
 		Drawable transparent = ContextCompat.getDrawable(getContext(), R.color.color_transparent);
@@ -95,9 +68,9 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
-										int groupPosition, int childPosition, long id) {
-				link = map.get(listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition));
-				sendResult();
+			                            int groupPosition, int childPosition, long id) {
+				String link = wikivoyageContentItem.getSubItems().get(groupPosition).getSubItems().get(childPosition).getLink();
+				sendResult(link);
 				dismiss();
 				return false;
 			}
@@ -105,8 +78,8 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-				link = map.get(listDataHeader.get(groupPosition));
-				sendResult();
+				String link = wikivoyageContentItem.getSubItems().get(groupPosition).getLink();
+				sendResult(link);
 				dismiss();
 				return false;
 			}
@@ -117,7 +90,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		items.add(new SimpleBottomSheetItem.Builder().setCustomView(container).create());
 	}
 
-	private void sendResult() {
+	private void sendResult(String link) {
 		Intent intent = new Intent();
 		intent.putExtra(CONTENTS_LINK_KEY, link);
 		Fragment fragment = getTargetFragment();
@@ -145,17 +118,14 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 		private Context context;
 
-		private List<String> listDataHeader;
-		private LinkedHashMap<String, List<String>> listDataChild;
+		private WikivoyageJsonParser.WikivoyageContentItem wikivoyageContentItem;
 
 		private Drawable itemGroupIcon;
 		private Drawable itemChildIcon;
 
-		ExpandableListAdapter(Context context, List<String> listDataHeader,
-							  LinkedHashMap<String, List<String>> listChildData) {
+		ExpandableListAdapter(Context context, WikivoyageJsonParser.WikivoyageContentItem wikivoyageContentItem) {
 			this.context = context;
-			this.listDataHeader = listDataHeader;
-			this.listDataChild = listChildData;
+			this.wikivoyageContentItem = wikivoyageContentItem;
 
 			itemGroupIcon = getIcon(R.drawable.ic_action_list_header, nightMode
 					? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light);
@@ -166,7 +136,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 		@Override
 		public Object getChild(int groupPosition, int childPosititon) {
-			return listDataChild.get(listDataHeader.get(groupPosition)).get(childPosititon);
+			return wikivoyageContentItem.getSubItems().get(groupPosition).getSubItems().get(childPosititon).getName();
 		}
 
 		@Override
@@ -191,7 +161,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 			convertView.findViewById(R.id.upper_row_divider).setVisibility(View.GONE);
 			txtListChild.setTypeface(null);
-			if (childPosition == listDataChild.get(listDataHeader.get(groupPosition)).size() - 1) {
+			if (childPosition == wikivoyageContentItem.getSubItems().get(groupPosition).getSubItems().size() - 1) {
 				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.VISIBLE);
 			} else {
 				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
@@ -202,18 +172,18 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
-			List<String> list = listDataChild.get(listDataHeader.get(groupPosition));
-			return list == null ? 0 : list.size();
+			return wikivoyageContentItem.getSubItems().get(groupPosition).getSubItems().size();
 		}
 
 		@Override
 		public Object getGroup(int groupPosition) {
-			return this.listDataHeader.get(groupPosition);
+			return wikivoyageContentItem.getSubItems().get(groupPosition).getName();
+
 		}
 
 		@Override
 		public int getGroupCount() {
-			return this.listDataHeader.size();
+			return wikivoyageContentItem.getSubItems().size();
 		}
 
 		@Override
