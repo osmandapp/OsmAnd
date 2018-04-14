@@ -40,7 +40,7 @@ public class CustomWebViewClient extends WebViewClient {
 	@Override
 	public boolean shouldOverrideUrlLoading(WebView view, String url) {
 		if (url.contains(WEB_DOMAIN)) {
-			String lang = url.substring(url.indexOf(PAGE_PREFIX) + PAGE_PREFIX.length(), url.indexOf("."));
+			String lang = url.substring(url.startsWith(PAGE_PREFIX) ? PAGE_PREFIX.length() : 0, url.indexOf("."));
 			String articleName = url.replace(PAGE_PREFIX + lang + WEB_DOMAIN, "")
 					.replaceAll("_", " ");
 			try {
