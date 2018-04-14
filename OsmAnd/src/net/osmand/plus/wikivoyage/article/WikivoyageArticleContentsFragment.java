@@ -200,13 +200,12 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 				convertView = LayoutInflater.from(context)
 						.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
-			boolean light = getMyApplication().getSettings().isLightContent();
 			TextView lblListHeader = (TextView) convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(headerTitle);
 			lblListHeader.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 
-			adjustIndicator(getMyApplication(), groupPosition, isExpanded, convertView, light);
+			adjustIndicator(getMyApplication(), groupPosition, isExpanded, convertView, !nightMode);
 			ImageView indicator = (ImageView) convertView.findViewById(R.id.explist_indicator);
 			indicator.setOnClickListener(new View.OnClickListener() {
 				@Override
