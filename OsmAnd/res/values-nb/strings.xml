@@ -2847,4 +2847,5 @@
     <string name="download_maps_travel">Reisekart</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artikkel fjernet</string>
+    <string name="images_cache">Bilde-hurtigbuffer</string>
     </resources>
