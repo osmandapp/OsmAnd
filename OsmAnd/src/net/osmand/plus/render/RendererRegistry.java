@@ -179,16 +179,18 @@ public class RendererRegistry {
 		} 
 		if(externalRenderers.containsKey(name)){
 			is = new FileInputStream(externalRenderers.get(name));
-		} else if(internalRenderers.containsKey(name)){
+		} else {
+			if (!internalRenderers.containsKey(name)) {
+				log.error("Rendering style not found: " + name);
+				name = DEFAULT_RENDER;
+			}
 			File fl = getFileForInternalStyle(name);
-			if(fl.exists()) {
+			if (fl.exists()) {
 				is = new FileInputStream(fl);
 			} else {
 				copyFileForInternalStyle(name);
 				is = RenderingRulesStorage.class.getResourceAsStream(internalRenderers.get(name));
 			}
-		} else {
-			throw new IllegalArgumentException("Not found " + name); //$NON-NLS-1$
 		}
 		return is;
 	}
