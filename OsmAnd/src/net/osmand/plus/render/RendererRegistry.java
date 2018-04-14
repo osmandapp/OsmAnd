@@ -3,7 +3,6 @@ package net.osmand.plus.render;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -25,9 +24,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 
 
 public class RendererRegistry {
@@ -101,7 +102,23 @@ public class RendererRegistry {
 	}
 
 	private boolean hasRender(String name) {
-		return externalRenderers.containsKey(name) || internalRenderers.containsKey(name);
+		return externalRenderers.containsKey(name) || getInternalRender(name) != null;
+	}
+	
+	private String getInternalRender(String name) {
+		// check by key and by value
+		Iterator<Entry<String, String>> mapIt = internalRenderers.entrySet().iterator();
+		while(mapIt.hasNext()) {
+			Entry<String, String> e = mapIt.next();
+			if(e.getKey().equalsIgnoreCase(name)) {
+				return e.getValue();
+			}
+			String simpleFileName = e.getValue().substring(0, e.getValue().indexOf('.'));
+			if(simpleFileName.equalsIgnoreCase(name)) {
+				return e.getValue();
+			}
+		}
+		return null;
 	}
 	
 //	private static boolean USE_PRECOMPILED_STYLE = false;
@@ -180,7 +197,7 @@ public class RendererRegistry {
 		if(externalRenderers.containsKey(name)){
 			is = new FileInputStream(externalRenderers.get(name));
 		} else {
-			if (!internalRenderers.containsKey(name)) {
+			if (getInternalRender(name) == null) {
 				log.error("Rendering style not found: " + name);
 				name = DEFAULT_RENDER;
 			}
@@ -189,7 +206,7 @@ public class RendererRegistry {
 				is = new FileInputStream(fl);
 			} else {
 				copyFileForInternalStyle(name);
-				is = RenderingRulesStorage.class.getResourceAsStream(internalRenderers.get(name));
+				is = RenderingRulesStorage.class.getResourceAsStream(getInternalRender(name));
 			}
 		}
 		return is;
@@ -198,7 +215,7 @@ public class RendererRegistry {
 	public void copyFileForInternalStyle(String name) {
 		try {
 			FileOutputStream fout = new FileOutputStream(getFileForInternalStyle(name));
-			Algorithms.streamCopy(RenderingRulesStorage.class.getResourceAsStream(internalRenderers.get(name)),
+			Algorithms.streamCopy(RenderingRulesStorage.class.getResourceAsStream(getInternalRender(name)),
 					fout);
 			fout.close();
 		} catch (IOException e) {
@@ -211,10 +228,11 @@ public class RendererRegistry {
 	}
 
 	public File getFileForInternalStyle(String name) {
-		if(!internalRenderers.containsKey(name)) {
-			return new File(app.getAppPath(IndexConstants.RENDERERS_DIR), "style.render.xml");
+		String file = getInternalRender(name);
+		if(file == null) {
+			return new File(app.getAppPath(IndexConstants.RENDERERS_DIR), "default.render.xml");
 		}
-		File fl = new File(app.getAppPath(IndexConstants.RENDERERS_DIR), internalRenderers.get(name));
+		File fl = new File(app.getAppPath(IndexConstants.RENDERERS_DIR), file);
 		return fl;
 	}
 	
