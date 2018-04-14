@@ -3812,7 +3812,7 @@
 	<string name="poi_service_vehicle_wheels_yes">Räder</string>
 	<string name="poi_service_vehicle_glass_yes">Glas</string>
 	<string name="poi_service_vehicle_truck_repair_yes">LKW-Reparatur</string>
-	<string name="poi_service_vehicle_alignment_yes">Ausrichtung</string>
+	<string name="poi_service_vehicle_alignment_yes">Fahrwerkseinstellung</string>
 	<string name="poi_service_vehicle_transmission_repair_yes">Getriebe-Reparatur</string>
 	<string name="poi_service_vehicle_motor_yes">Motor</string>
 	<string name="poi_service_vehicle_insurance_yes">Versicherung</string>
