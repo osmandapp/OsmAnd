@@ -17,7 +17,6 @@ public class WikivoyageJsonParser {
 	private static final String HEADERS = "headers";
 	private static final String SUBHEADERS = "subheaders";
 	private static final String LINK = "link";
-	public static final int TITLE_INDEX = 0;
 
 	@Nullable
 	public static WikivoyageContentItem parseJsonContents(String contentsJson) {
