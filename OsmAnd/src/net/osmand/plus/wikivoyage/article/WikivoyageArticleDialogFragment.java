@@ -49,8 +49,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
 			"<link href=\"article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
 			"</head><body>\n" + "<script>" + "function scrollAnchor(id) {" +
-			"window.location.hash = id;}" +
-			"var coll = document.getElementsByTagName(\"H2\");" +
+			"window.location.hash = id;}</script>";
+	private static final String FOOTER_INNER = "<script>var coll = document.getElementsByTagName(\"H2\");" +
 			"var i;" +
 			"for (i = 0; i < coll.length; i++) {" +
 			"  coll[i].addEventListener(\"click\", function() {" +
@@ -62,8 +62,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			"      content.style.display = \"block\";" +
 			"    }" +
 			"  });" +
-			"}</script>";
-	private static final String FOOTER_INNER = "</div></body></html>";
+			"}</script>"
+			+ "</div></body></html>";
 
 	private long cityId = NO_VALUE;
 	private ArrayList<String> langs;
