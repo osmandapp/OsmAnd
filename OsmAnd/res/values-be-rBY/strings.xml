@@ -3021,4 +3021,17 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="select_waypoints_category_description">Vy možacie dadać usie punkty šlachu ci abrać asobnyja katehoryi.</string>
     <string name="shared_string_total">Usiaho</string>
     <string name="nothing_found_in_radius">My nie znajšli ničoha ŭ radyusie:</string>
+    <string name="download_maps_travel">Mapy padarožžaŭ</string>
+    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="article_removed">Artykuł vydaleny</string>
+    <string name="wikivoyage_search_hint">Pošuk: kraina, horad, rehijon</string>
+    <string name="shared_string_read">Čytać</string>
+    <string name="saved_articles">Zachavanyja artykuły</string>
+    <string name="shared_string_explore">Daśledvać</string>
+    <string name="shared_string_contents">Źmiest</string>
+    <string name="shared_string_result">Vynik</string>
+    <string name="use_two_digits_longitude">Vykarysoŭvać dźvie ličby daŭhaty</string>
+    <string name="shared_string_travel">Padarožža</string>
+    <string name="waypoints_removed_from_map_markers">Šlachavyja kropki vydalenyaja ź markieraŭ mapy</string>
+    <string name="index_item_world_wikivoyage">Suśvietnyja artykuły Wikivoyage</string>
     </resources>

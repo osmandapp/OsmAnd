@@ -2925,4 +2925,8 @@
     <string name="enter_lat">إدخال دائرة العرض</string>
     <string name="transport_nearby_routes">بالقُرب مِن</string>
     <string name="shared_string_current">الحالي</string>
+    <string name="delete_search_history">حذف تأريخ البحث</string>
+    <string name="show_images">إظهار الصور</string>
+    <string name="download_maps_travel">خرائط السفر</string>
+    <string name="shared_string_wikivoyage">ويكي سفر</string>
     </resources>
