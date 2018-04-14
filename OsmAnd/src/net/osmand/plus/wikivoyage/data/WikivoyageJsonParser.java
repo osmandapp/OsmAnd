@@ -29,34 +29,33 @@ public class WikivoyageJsonParser {
 			return null;
 		}
 
-		WikivoyageContentItem topWikivoyageContentItem = new WikivoyageContentItem(HEADERS, null);
+		WikivoyageContentItem topContentItem = new WikivoyageContentItem(HEADERS, null);
 		for (int i = 0; i < jArray.length(); i++) {
 			try {
-				String link = "";
-				JSONObject jsonHeader = jArray.getJSONObject(jArray.names().getString(i));
-				link = jsonHeader.getString(LINK);
-				WikivoyageContentItem contentHeaderItem = new WikivoyageContentItem(jArray.names().getString(i), link, topWikivoyageContentItem);
-				topWikivoyageContentItem.subItems.add(contentHeaderItem);
+				JSONObject header = jArray.getJSONObject(jArray.names().getString(i));
+				String link = header.getString(LINK);
+				WikivoyageContentItem headerItem = new WikivoyageContentItem(jArray.names().getString(i), link, topContentItem);
+				topContentItem.subItems.add(headerItem);
 
-				JSONArray jsonSubheaders = jsonHeader.getJSONArray(SUBHEADERS);
+				JSONArray subheaders = header.getJSONArray(SUBHEADERS);
 				List<String> subheaderNames = null;
-				for (int j = 0; j < jsonSubheaders.length(); j++) {
-					JSONObject jsonSubheader = jsonSubheaders.getJSONObject(j);
-					JSONObject jsonSubheaderLink = jsonSubheader.getJSONObject(jsonSubheader.keys().next());
+				for (int j = 0; j < subheaders.length(); j++) {
+					JSONObject subheader = subheaders.getJSONObject(j);
+					JSONObject subheaderLink = subheader.getJSONObject(subheader.keys().next());
 					if (subheaderNames == null) {
 						subheaderNames = new ArrayList<>();
 					}
-					subheaderNames.add(jsonSubheader.keys().next());
-					link = jsonSubheaderLink.getString(LINK);
+					subheaderNames.add(subheader.keys().next());
+					link = subheaderLink.getString(LINK);
 
-					WikivoyageContentItem contentsSubHeaderContainer = new WikivoyageContentItem(jsonSubheader.names().getString(0), link, contentHeaderItem);
-					contentHeaderItem.subItems.add(contentsSubHeaderContainer);
+					WikivoyageContentItem subheaderItem = new WikivoyageContentItem(subheader.names().getString(0), link, headerItem);
+					headerItem.subItems.add(subheaderItem);
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
-		return topWikivoyageContentItem;
+		return topContentItem;
 	}
 
 	public static class WikivoyageContentItem {
