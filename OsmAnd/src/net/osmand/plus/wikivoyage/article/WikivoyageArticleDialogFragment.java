@@ -26,6 +26,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
+import net.osmand.plus.wikivoyage.data.CustomWebViewClient;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.util.Algorithms;
@@ -122,6 +123,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
 		contentWebView.getSettings().setJavaScriptEnabled(true);
 		contentWebView.getSettings().setCacheMode(showImages ? WebSettings.LOAD_DEFAULT : WebSettings.LOAD_CACHE_ONLY);
+		contentWebView.setWebViewClient(new CustomWebViewClient(getActivity(), getFragmentManager()));
 
 		return mainView;
 	}
