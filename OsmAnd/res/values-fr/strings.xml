@@ -3124,4 +3124,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="images_cache">Cache d\'images</string>
     <string name="delete_search_history">Supprimer l\'historique de recherche</string>
     <string name="show_images">Afficher les images</string>
+    <string name="online_webpage_warning">Cette page est uniquement accessible en ligne, souhaitez-vous l’ouvrir dans un navigateur web ?</string>
     </resources>
