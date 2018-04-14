@@ -19,12 +19,9 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.wikivoyage.data.ContentsJsonParser;
-import net.osmand.plus.wikivoyage.data.ContentsJsonParser.ContentsContainer;
+import net.osmand.plus.wikivoyage.data.WikivoyageJsonParser;
+import net.osmand.plus.wikivoyage.data.WikivoyageJsonParser.WikivoyageContentItem;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFragment {
 
@@ -36,9 +33,6 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 	public static final int REQUEST_LINK_CODE = 0;
 
 	private ExpandableListView expListView;
-
-	private LinkedHashMap<String, String> map;
-	private String link;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -52,20 +46,15 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			return;
 		}
 
-		ContentsContainer contentsContainer = ContentsJsonParser.parseJsonContents(contentsJson);
-		if (contentsContainer == null) {
+		final WikivoyageContentItem contentItem = WikivoyageJsonParser.parseJsonContents(contentsJson);
+		if (contentItem == null) {
 			return;
 		}
-
-		final ArrayList<String> listDataHeader = contentsContainer.listDataHeader;
-		final LinkedHashMap<String, List<String>> listDataChild = contentsContainer.listDataChild;
-
-		map = contentsContainer.map;
 
 		items.add(new TitleItem(getString(R.string.shared_string_contents)));
 
 		expListView = new ExpandableListView(getContext());
-		ExpandableListAdapter listAdapter = new ExpandableListAdapter(getContext(), listDataHeader, listDataChild);
+		ExpandableListAdapter listAdapter = new ExpandableListAdapter(getContext(), contentItem);
 
 		expListView.setAdapter(listAdapter);
 		Drawable transparent = ContextCompat.getDrawable(getContext(), R.color.color_transparent);
@@ -80,9 +69,9 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
-										int groupPosition, int childPosition, long id) {
-				link = map.get(listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition));
-				sendResult();
+			                            int groupPosition, int childPosition, long id) {
+				String link = contentItem.getSubItems().get(groupPosition).getSubItems().get(childPosition).getLink();
+				sendResult(link);
 				dismiss();
 				return false;
 			}
@@ -90,8 +79,8 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-				link = map.get(listDataHeader.get(groupPosition));
-				sendResult();
+				String link = contentItem.getSubItems().get(groupPosition).getLink();
+				sendResult(link);
 				dismiss();
 				return false;
 			}
@@ -102,7 +91,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		items.add(new SimpleBottomSheetItem.Builder().setCustomView(container).create());
 	}
 
-	private void sendResult() {
+	private void sendResult(String link) {
 		Intent intent = new Intent();
 		intent.putExtra(CONTENTS_LINK_KEY, link);
 		Fragment fragment = getTargetFragment();
@@ -130,17 +119,14 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 		private Context context;
 
-		private List<String> listDataHeader;
-		private LinkedHashMap<String, List<String>> listDataChild;
+		private WikivoyageContentItem contentItem;
 
 		private Drawable itemGroupIcon;
 		private Drawable itemChildIcon;
 
-		ExpandableListAdapter(Context context, List<String> listDataHeader,
-							  LinkedHashMap<String, List<String>> listChildData) {
+		ExpandableListAdapter(Context context, WikivoyageContentItem contentItem) {
 			this.context = context;
-			this.listDataHeader = listDataHeader;
-			this.listDataChild = listChildData;
+			this.contentItem = contentItem;
 
 			itemGroupIcon = getIcon(R.drawable.ic_action_list_header, nightMode
 					? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light);
@@ -151,7 +137,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 		@Override
 		public Object getChild(int groupPosition, int childPosititon) {
-			return listDataChild.get(listDataHeader.get(groupPosition)).get(childPosititon);
+			return contentItem.getSubItems().get(groupPosition).getSubItems().get(childPosititon).getName();
 		}
 
 		@Override
@@ -176,7 +162,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 			convertView.findViewById(R.id.upper_row_divider).setVisibility(View.GONE);
 			txtListChild.setTypeface(null);
-			if (childPosition == listDataChild.get(listDataHeader.get(groupPosition)).size() - 1) {
+			if (childPosition == contentItem.getSubItems().get(groupPosition).getSubItems().size() - 1) {
 				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.VISIBLE);
 			} else {
 				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
@@ -187,18 +173,18 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
-			List<String> list = listDataChild.get(listDataHeader.get(groupPosition));
-			return list == null ? 0 : list.size();
+			return contentItem.getSubItems().get(groupPosition).getSubItems().size();
 		}
 
 		@Override
 		public Object getGroup(int groupPosition) {
-			return this.listDataHeader.get(groupPosition);
+			return contentItem.getSubItems().get(groupPosition).getName();
+
 		}
 
 		@Override
 		public int getGroupCount() {
-			return this.listDataHeader.size();
+			return contentItem.getSubItems().size();
 		}
 
 		@Override
