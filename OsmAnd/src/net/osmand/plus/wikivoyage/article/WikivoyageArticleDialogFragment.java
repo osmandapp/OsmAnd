@@ -49,7 +49,20 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
 			"<link href=\"article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
 			"</head><body>\n" + "<script>" + "function scrollAnchor(id) {" +
-			"window.location.hash = id;}</script>";
+			"window.location.hash = id;}" +
+			"var coll = document.getElementsByTagName(\"H2\");" +
+			"var i;" +
+			"for (i = 0; i < coll.length; i++) {" +
+			"  coll[i].addEventListener(\"click\", function() {" +
+			"    this.classList.toggle(\"active\");" +
+			"    var content = this.nextElementSibling;" +
+			"    if (content.style.display === \"block\") {" +
+			"      content.style.display = \"none\";" +
+			"    } else {" +
+			"      content.style.display = \"block\";" +
+			"    }" +
+			"  });" +
+			"}</script>";
 	private static final String FOOTER_INNER = "</div></body></html>";
 
 	private long cityId = NO_VALUE;
