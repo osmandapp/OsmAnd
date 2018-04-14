@@ -2150,4 +2150,5 @@
     <string name="trip_rec_notification_settings_desc">Εμφάνιση ειδοποίησης συστήματος που επιτρέπει την έναρξη καταγραφής ταξιδιού.</string>
     <string name="shared_string_notifications">Ειδοποιήσεις</string>
     <string name="shared_string_continue">Συνέχεια</string>
+    <string name="shared_string_pause">Παύση</string>
     </resources>
