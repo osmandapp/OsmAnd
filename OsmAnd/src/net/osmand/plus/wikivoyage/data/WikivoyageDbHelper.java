@@ -223,6 +223,21 @@ public class WikivoyageDbHelper {
 		return res;
 	}
 
+	public long getArticleId(String title, String lang) {
+		long res = 0;
+		SQLiteConnection conn = openConnection();
+		if (conn != null) {
+			SQLiteCursor cursor = conn.rawQuery("SELECT " + ARTICLES_COL_CITY_ID + " FROM "
+					+ ARTICLES_TABLE_NAME + " WHERE " + ARTICLES_COL_TITLE + " = ? AND "
+					+ ARTICLES_COL_LANG + " = ?", new String[]{title, lang});
+			if (cursor.moveToFirst()) {
+				res = cursor.getLong(0);
+			}
+			cursor.close();
+		}
+		return res;
+	}
+
 	@NonNull
 	public ArrayList<String> getArticleLangs(long cityId) {
 		ArrayList<String> res = new ArrayList<>();
