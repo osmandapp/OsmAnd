@@ -717,6 +717,8 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_LINES_TO_FIRST_MARKERS = new BooleanPreference("show_lines_to_first_markers", false).makeProfile();
 	public final CommonPreference<Boolean> SHOW_ARROWS_TO_FIRST_MARKERS = new BooleanPreference("show_arrows_to_first_markers", false).makeProfile();
 
+	public final CommonPreference<Boolean> WIKIVOYAGE_SHOW_IMAGES = new BooleanPreference("wikivoyage_show_images", false);
+
 	public final CommonPreference<Boolean> SELECT_MARKER_ON_SINGLE_TAP = new BooleanPreference("select_marker_on_single_tap", false).makeProfile();
 
 	public final CommonPreference<Boolean> COORDS_INPUT_USE_RIGHT_SIDE = new BooleanPreference("coords_input_use_right_side", true).makeGlobal();

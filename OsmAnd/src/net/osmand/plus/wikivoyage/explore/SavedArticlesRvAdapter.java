@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.IconsCache;
@@ -76,10 +78,12 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			final ItemVH holder = (ItemVH) viewHolder;
 			WikivoyageArticle article = (WikivoyageArticle) getItem(position);
 			boolean lastItem = position == getItemCount() - 1;
-
-			Picasso.get()
-					.load(WikivoyageArticle.getImageUrl(article.getImageTitle(), false))
-					.transform(USE_ALTERNATIVE_CARD ? new CropRectTransformation() : new CropCircleTransformation())
+			RequestCreator rc = Picasso.get()
+					.load(WikivoyageArticle.getImageUrl(article.getImageTitle(), false));
+			if (!app.getSettings().WIKIVOYAGE_SHOW_IMAGES.get()) {
+				rc.networkPolicy(NetworkPolicy.OFFLINE);
+			}
+			rc.transform(USE_ALTERNATIVE_CARD ? new CropRectTransformation() : new CropCircleTransformation())
 					.into(holder.icon, new Callback() {
 						@Override
 						public void onSuccess() {

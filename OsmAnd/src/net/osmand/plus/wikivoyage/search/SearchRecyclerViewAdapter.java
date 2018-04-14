@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -73,9 +75,12 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 			Object item = getItem(pos);
 			if (item instanceof WikivoyageSearchResult) {
 				WikivoyageSearchResult searchRes = (WikivoyageSearchResult) item;
-				Picasso.get()
-						.load(WikivoyageArticle.getImageUrl(searchRes.getImageTitle(), true))
-						.transform(new CropCircleTransformation())
+				RequestCreator rc = Picasso.get()
+						.load(WikivoyageArticle.getImageUrl(searchRes.getImageTitle(), true));
+				if (!app.getSettings().WIKIVOYAGE_SHOW_IMAGES.get()) {
+					rc.networkPolicy(NetworkPolicy.OFFLINE);
+				}
+				rc.transform(new CropCircleTransformation())
 						.placeholder(placeholder)
 						.into(holder.icon);
 				holder.title.setText(searchRes.getArticleTitles().get(0));

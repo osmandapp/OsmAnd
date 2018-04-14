@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -117,8 +118,10 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 		saveBtn = (TextView) mainView.findViewById(R.id.save_button);
 
+		boolean showImages = getSettings().WIKIVOYAGE_SHOW_IMAGES.get();
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
 		contentWebView.getSettings().setJavaScriptEnabled(true);
+		contentWebView.getSettings().setCacheMode(showImages ? WebSettings.LOAD_DEFAULT : WebSettings.LOAD_CACHE_ONLY);
 
 		return mainView;
 	}
@@ -229,9 +232,9 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private String createHtmlContent(@NonNull WikivoyageArticle article) {
 		StringBuilder sb = new StringBuilder(HEADER_INNER);
 
-		String articleTitle = article.getImageTitle();
-		if (!TextUtils.isEmpty(articleTitle)) {
-			String url = WikivoyageArticle.getImageUrl(articleTitle, false);
+		String imageTitle = article.getImageTitle();
+		if (!TextUtils.isEmpty(imageTitle)) {
+			String url = WikivoyageArticle.getImageUrl(imageTitle, false);
 			sb.append("<div class=\"title-image\" style=\"background-image: url(").append(url).append(")\"></div>");
 		}
 		sb.append("<div class=\"main\">\n");

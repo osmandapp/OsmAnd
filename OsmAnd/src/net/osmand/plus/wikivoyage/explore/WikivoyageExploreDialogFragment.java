@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage.explore;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PicassoUtils;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
@@ -34,12 +36,30 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 	private static final int EXPLORE_POSITION = 0;
 	private static final int SAVED_ARTICLES_POSITION = 1;
 
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Context context = getContext();
+		if (context != null) {
+			PicassoUtils.setupPicasso(context);
+		}
+	}
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final View mainView = inflate(R.layout.fragment_wikivoyage_explore_dialog, container);
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
+
+		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				WikivoyageOptionsBottomSheetDialogFragment fragment = new WikivoyageOptionsBottomSheetDialogFragment();
+				fragment.setUsedOnMap(false);
+				fragment.show(getChildFragmentManager(), WikivoyageOptionsBottomSheetDialogFragment.TAG);
+			}
+		});
 
 		int searchColorId = nightMode ? R.color.icon_color : R.color.ctx_menu_title_color_dark;
 		((TextView) mainView.findViewById(R.id.search_hint)).setTextColor(getResolvedColor(searchColorId));
