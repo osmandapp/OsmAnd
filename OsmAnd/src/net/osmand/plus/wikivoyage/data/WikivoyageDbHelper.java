@@ -2,13 +2,13 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
@@ -71,12 +71,12 @@ public class WikivoyageDbHelper {
 	public WikivoyageDbHelper(OsmandApplication application) {
 		this.application = application;
 		collator = OsmAndCollator.primaryCollator();
-		initTravelBooks();
 	}
 
 	public void initTravelBooks() {
 		File[] possibleFiles = application.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
 		String travelBook = application.getSettings().SELECTED_TRAVEL_BOOK.get();
+		existingTravelBooks.clear();
 		if (possibleFiles != null) {
 			for (File f : possibleFiles) {
 				if (f.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
@@ -291,5 +291,13 @@ public class WikivoyageDbHelper {
 		res.aggregatedPartOf = cursor.getString(12);
 
 		return res;
+	}
+
+	public String formatTravelBookName(File tb) {
+		if(tb == null) {
+			return application.getString(R.string.shared_string_none);
+		}
+		String nm = tb.getName();
+		return nm.substring(0, nm.indexOf('.')).replace('_', ' ');
 	}
 }
