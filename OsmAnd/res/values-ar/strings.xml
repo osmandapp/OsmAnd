@@ -2929,4 +2929,6 @@
     <string name="show_images">إظهار الصور</string>
     <string name="download_maps_travel">خرائط السفر</string>
     <string name="shared_string_wikivoyage">ويكي سفر</string>
+    <string name="select_travel_book">إختيار كتاب للسفر</string>
+    <string name="shared_string_travel_book">كتاب السفر</string>
     </resources>

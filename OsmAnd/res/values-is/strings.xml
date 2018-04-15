@@ -2806,4 +2806,15 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Grein fjarlægð</string>
     <string name="index_item_world_wikivoyage">Greinar um víða veröld af Wikivoyage</string>
+    <string name="shared_string_dont">Ekki</string>
+    <string name="shared_string_do">Gera</string>
+    <string name="shared_string_only_with_wifi">Aðeins með Wi-Fi</string>
+    <string name="wikivoyage_download_pics">Sækja myndir</string>
+    <string name="shared_string_wifi_only">Einungis WiFi</string>
+    <string name="select_travel_book">Veldu ferðabók</string>
+    <string name="shared_string_travel_book">Ferðabók</string>
+    <string name="online_webpage_warning">Þessi síða er einungis tiltæk á netinu. Viltu opna hana í vafra?</string>
+    <string name="images_cache">Biðminni mynda</string>
+    <string name="delete_search_history">Eyða leitarferli</string>
+    <string name="download_images">Sækja myndir</string>
     </resources>

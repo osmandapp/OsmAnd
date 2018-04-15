@@ -2737,4 +2737,18 @@
     <string name="delete_search_history">מחיקת היסטוריית חיפוש</string>
     <string name="show_images">הצגת תמונות</string>
     <string name="osmand_extended_description_part3">מפה • הצגת נקודות עניין מסביבך • התאמת המפה לכיוון התנועה שלך (או המצפן) • הצגת המיקום שלך והמיקום המבוקש • שיתוף המיקום שלך כדי שחברים יוכלו למצוא אותך • שמירה על המקומות החשובים ביותר ב‚מועדפים’ • מאפשר לך לבחור איך להציג שמות במפה: באנגלית, השם המקומי או איות פונטי • הצגת אריחים מקוונים מיוחדים, תצוגת לוויין (מ־Bing), שכבות על נוספות כגון מסלולי GPX לסיור/ניווט ושכבות נוספות עם שקיפות מתכווננת</string>
-    </resources>
+    <string name="shared_string_dont">לא לעשות</string>
+    <string name="shared_string_do">לעשות</string>
+    <string name="shared_string_only_with_wifi">רק עם רשת אלחוטית</string>
+    <string name="wikivoyage_download_pics">הורדת תמונות</string>
+    <string name="wikivoyage_download_pics_descr">יש לנו אפשרות להוריד ולהציג תמונות מהערכים ולאחסן אותן בהתקן, כך תהיה לך גישה אליהן ללא חיבור לאינטרנט. תמיד ניתן לשנות את ההגדרות בעיון &gt; אפשרויות.</string>
+    <string name="shared_string_wifi_only">רשת אלחוטית בלבד</string>
+    <string name="select_travel_book">בחירת ספר מסע</string>
+    <string name="shared_string_travel_book">ספר מסע</string>
+    <string name="download_images">הורדת תמונות</string>
+    <string name="dd_mm_ss_format">DD°MM′SS″</string>
+	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_ddddd_format">DD.DDDDD°</string>
+	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+	</resources>
