@@ -63,6 +63,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 
 	private void warnAboutExternalLoad(final String url) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+		builder.setTitle(url);
 		builder.setMessage(R.string.online_webpage_warning);
 		builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override
