@@ -544,7 +544,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="auto_zoom_map">Zoom automatique de la carte</string>
     <string name="additional_settings">Paramètres supplémentaires</string>
     <string name="shared_string_settings">Paramètres</string>
-    <string name="save_current_track_descr">Enregistrer la trace courante sur la carte SD</string>
+    <string name="save_current_track_descr">Enregistrer la trace courante sur la carte mémoire.</string>
     <string name="save_current_track">Enregistrer la trace GPX</string>
     <string name="save_track_interval_descr">Sélectionnez l\'intervalle d\'enregistrement de la trace pendant l\'itinéraire</string>
     <string name="save_track_interval">Intervalle d\'enregistrement pendant la navigation</string>
@@ -963,7 +963,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="close_changeset">Clôturer les modifications</string>
     <string name="background_service_is_enabled_question">Le service OsmAnd s\'exécute toujours en tâche de fond. Voulez-vous également l\'arrêter ?</string>
 
-    <string name="safe_mode_description">Exécuter l\'application en mode sûr (utiliser le code Android plus lent plutôt que le code natif)</string>
+    <string name="safe_mode_description">Exécuter l\'application en mode sûr (utiliser le code Android plus lent plutôt que le code natif).</string>
     <string name="safe_mode">Mode sûr</string>
     <string name="native_library_not_running">L\'application s\'exécute en mode sûr (peut être désactivé dans Paramètres).</string>
     <string name="rendering_attr_showRoadMaps_description">Sélectionnez quand afficher les cartes routières :</string>
@@ -1097,7 +1097,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="clear_destination">Suppression</string>
     <string name="other_location">Autre</string>
     <string name="files_limit">Encore %1$d téléchargements possibles</string>
-    <string name="available_downloads_left">Vous pouvez encore télécharger %1$d fichier(s).</string>
+    <string name="available_downloads_left">Vous pouvez télécharger encore %1$d fichier(s)</string>
     <string name="install_paid">Version complète</string>
     <string name="use_magnetic_sensor_descr">Utiliser le capteur magnétique pour déterminer l\'orientation de la boussole plutôt que le capteur d\'orientation.</string>
     <string name="use_magnetic_sensor">Utiliser le magnétomètre (boussole)</string>
@@ -1114,7 +1114,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="plugin_distance_point_speed">vitesse</string>
     <string name="plugin_distance_point_ele">altitude</string>
     <string name="gpx_file_name">Nom du fichier GPX</string>
-    <string name="gpx_saved_sucessfully">L\`enregistrement du fichier GPX {0} a réussi</string>
+    <string name="gpx_saved_sucessfully">Fichier GPX {0} enregistré</string>
     <string name="osmand_distance_planning_plugin_description">Ce greffon permet, depuis la carte, de créer un itinéraire soit un cliquant sur la carte, soit en ouvrant ou en modifiant un fichier GPX existant; ainsi que de mesurer la distance entre des points. L\'itinéraire peut être enregistré dans un fichier GPX qui peut lui-même être utilisé plus tard pour une navigation.</string>
     <string name="osmand_distance_planning_plugin_name">Mesure de distance et Outil de planification</string>
     <string name="shared_string_do_not_show_again">Ne plus afficher</string>
@@ -1131,7 +1131,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="distance_measurement_clear_route">Supprimer la mesure</string>
     <string name="shared_string_downloading">Téléchargement en cours</string>
 
-    <string name="search_street_in_neighborhood_cities">Recherche des rues dans les villes avoisinantes</string>
+    <string name="search_street_in_neighborhood_cities">Recherche des rues dans les villes à proximité</string>
     <string name="intermediate_items_sort_return">Ordonne automatiquement les étapes pour l\'itinéraire le plus court.</string>
     <string name="intermediate_items_sort_by_distance">Optimiser</string>
     <string name="please_select_address">Sélectionnez d\'abord une ville ou une rue</string>
@@ -1164,7 +1164,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="speak_title">Annonce…</string>
     <string name="speak_cameras">Radars</string>
     <string name="speak_traffic_warnings">Alertes de trafic</string>
-    <string name="osb_author_or_password_not_specified">Merci de spécifier votre nom d\'utilisateur et mot de passe OSM dans les paramètres</string>
+    <string name="osb_author_or_password_not_specified">Merci d\'indiquer votre nom d\'utilisateur et mot de passe OSM dans les paramètres</string>
     <string name="clear_intermediate_points">Supprimer les étapes intermédiaires</string>
     <string name="keep_intermediate_points">Conserver les étapes intermédiaires</string>
     <string name="local_index_tile_data_name">Données de tuile : %1$s</string>
@@ -1633,7 +1633,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (peut ne pas fonctionner sur certains appareils).</string>
     <string name="everything_up_to_date">Tous les fichiers sont à jour</string>
     <string name="shared_string_dismiss">Ignorer</string>
-    <string name="no_internet_connection">Téléchargement impossible. Veuillez-vous connecter à Internet (Wifi ou données mobiles) pour poursuivre.</string>
+    <string name="no_internet_connection">Téléchargement impossible, veuillez vérifier votre connexion Internet.</string>
     <string name="download_tab_downloads">Tous les téléchargements</string>
     <string name="download_tab_updates">Mises à jour</string>
     <string name="navigate_point_zone">Zone</string>
@@ -1670,7 +1670,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="proxy_host_descr">Configurez le serveur mandataire (Proxy). Par exemple : 127.0.0.1</string>
     <string name="proxy_port_title">Port du mandataire (Proxy)</string>
     <string name="proxy_port_descr">Configurez le numéro de port de votre mandataire (Proxy). Par exemple : 8118</string>
-    <string name="proxy_pref_descr">Définir un proxy pour les communications Internet</string>
+    <string name="proxy_pref_descr">Indiquer un serveur proxy.</string>
     <string name="settings_privacy">Confidentialité</string>
     <string name="rendering_attr_streetLighting_name">Éclairage public</string>
     <string name="enable_proxy_title">Activer le mandataire HTTP (Proxy)</string>
