@@ -259,11 +259,14 @@ public class TravelLocalDataHelper {
 		@NonNull
 		TLongObjectHashMap<WikivoyageSearchHistoryItem> getAllHistoryMap() {
 			TLongObjectHashMap<WikivoyageSearchHistoryItem> res = new TLongObjectHashMap<>();
+			String travelBook = getSelectedTravelBookName();
+			if (travelBook == null) {
+				return res;
+			}
 			SQLiteConnection conn = openConnection(true);
 			if (conn != null) {
 				try {
 					String query = HISTORY_TABLE_SELECT + " WHERE " + HISTORY_COL_TRAVEL_BOOK + " = ?";
-					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					SQLiteCursor cursor = conn.rawQuery(query, new String[]{travelBook});
 					if (cursor.moveToFirst()) {
 						do {
@@ -279,10 +282,13 @@ public class TravelLocalDataHelper {
 		}
 
 		void addHistoryItem(WikivoyageSearchHistoryItem item) {
+			String travelBook = getSelectedTravelBookName();
+			if (travelBook == null) {
+				return;
+			}
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					conn.execSQL("INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)",
 							new Object[]{item.cityId, item.articleTitle, item.lang,
 									item.isPartOf, item.lastAccessed, travelBook});
@@ -293,10 +299,13 @@ public class TravelLocalDataHelper {
 		}
 
 		void updateHistoryItem(WikivoyageSearchHistoryItem item) {
+			String travelBook = getSelectedTravelBookName();
+			if (travelBook == null) {
+				return;
+			}
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " +
 									HISTORY_COL_ARTICLE_TITLE + " = ?, " +
 									HISTORY_COL_LANG + " = ?, " +
@@ -313,10 +322,13 @@ public class TravelLocalDataHelper {
 		}
 
 		void removeHistoryItem(WikivoyageSearchHistoryItem item) {
+			String travelBook = getSelectedTravelBookName();
+			if (travelBook == null) {
+				return;
+			}
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					conn.execSQL("DELETE FROM " + HISTORY_TABLE_NAME +
 									" WHERE " + HISTORY_COL_CITY_ID + " = ?" +
 									" AND " + HISTORY_COL_TRAVEL_BOOK + " = ?",
@@ -328,10 +340,13 @@ public class TravelLocalDataHelper {
 		}
 
 		void clearAllHistory() {
+			String travelBook = getSelectedTravelBookName();
+			if (travelBook == null) {
+				return;
+			}
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					conn.execSQL("DELETE FROM " + HISTORY_TABLE_NAME +
 									" WHERE " + HISTORY_COL_TRAVEL_BOOK + " = ?",
 							new Object[]{travelBook});
@@ -344,11 +359,14 @@ public class TravelLocalDataHelper {
 		@NonNull
 		List<TravelArticle> getSavedArticles() {
 			List<TravelArticle> res = new ArrayList<>();
+			String travelBook = getSelectedTravelBookName();
+			if (travelBook == null) {
+				return res;
+			}
 			SQLiteConnection conn = openConnection(true);
 			if (conn != null) {
 				try {
 					String query = BOOKMARKS_TABLE_SELECT + " WHERE " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
-					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					SQLiteCursor cursor = conn.rawQuery(query, new String[]{travelBook});
 					if (cursor.moveToFirst()) {
 						do {
@@ -364,10 +382,13 @@ public class TravelLocalDataHelper {
 		}
 
 		void addSavedArticle(TravelArticle article) {
+			String travelBook = getSelectedTravelBookName();
+			if (travelBook == null) {
+				return;
+			}
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					conn.execSQL("INSERT INTO " + BOOKMARKS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)",
 							new Object[]{article.cityId, article.title, article.lang,
 									article.aggregatedPartOf, article.imageTitle, article.content, travelBook});
@@ -378,10 +399,13 @@ public class TravelLocalDataHelper {
 		}
 
 		void removeSavedArticle(TravelArticle article) {
+			String travelBook = getSelectedTravelBookName();
+			if (travelBook == null) {
+				return;
+			}
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					conn.execSQL("DELETE FROM " + BOOKMARKS_TABLE_NAME +
 									" WHERE " + BOOKMARKS_COL_CITY_ID + " = ?" +
 									" AND " + BOOKMARKS_COL_LANG + " = ?" +
@@ -391,6 +415,15 @@ public class TravelLocalDataHelper {
 					conn.close();
 				}
 			}
+		}
+
+		@Nullable
+		private String getSelectedTravelBookName() {
+			File selectedTravelBook = context.getTravelDbHelper().getSelectedTravelBook();
+			if (selectedTravelBook != null) {
+				return selectedTravelBook.getName();
+			}
+			return null;
 		}
 
 		private WikivoyageSearchHistoryItem readHistoryItem(SQLiteCursor cursor) {
