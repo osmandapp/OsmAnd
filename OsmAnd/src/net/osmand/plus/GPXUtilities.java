@@ -1402,10 +1402,10 @@ public class GPXUtilities {
 			} catch (IOException e) {
 			}
 			return file;
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			GPXFile res = new GPXFile();
 			res.path = f.getAbsolutePath();
-			log.error("Error reading gpx", e); //$NON-NLS-1$
+			log.error("Error reading gpx " + res.path, e); //$NON-NLS-1$
 			res.warning = ctx.getString(R.string.error_reading_gpx);
 			return res;
 		} finally {
