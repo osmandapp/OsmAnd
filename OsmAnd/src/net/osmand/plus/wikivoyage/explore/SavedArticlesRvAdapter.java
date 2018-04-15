@@ -23,8 +23,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.widgets.tools.CropRectTransformation;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
-import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
-import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
+import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,10 +80,10 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			holder.description.setText(String.valueOf(items.size() - 1));
 		} else {
 			final ItemVH holder = (ItemVH) viewHolder;
-			WikivoyageArticle article = (WikivoyageArticle) getItem(position);
+			TravelArticle article = (TravelArticle) getItem(position);
 			boolean lastItem = position == getItemCount() - 1;
 			RequestCreator rc = Picasso.get()
-					.load(WikivoyageArticle.getImageUrl(article.getImageTitle(), false));
+					.load(TravelArticle.getImageUrl(article.getImageTitle(), false));
 			WikivoyageUtils.setupNetworkPolicy(settings, rc);
 			rc.transform(USE_ALTERNATIVE_CARD ? new CropRectTransformation() : new CropCircleTransformation())
 					.into(holder.icon, new Callback() {
@@ -174,9 +174,9 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 				@Override
 				public void onClick(View view) {
 					Object item = getItemByPosition();
-					if (item != null && item instanceof WikivoyageArticle) {
+					if (item != null && item instanceof TravelArticle) {
 						if (listener != null) {
-							listener.openArticle((WikivoyageArticle) item);
+							listener.openArticle((TravelArticle) item);
 						}
 					}
 				}
@@ -189,9 +189,9 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 				@Override
 				public void onClick(View view) {
 					Object item = getItemByPosition();
-					if (item != null && item instanceof WikivoyageArticle) {
-						final WikivoyageArticle article = (WikivoyageArticle) item;
-						final WikivoyageLocalDataHelper ldh = app.getTravelDbHelper().getLocalDataHelper();;
+					if (item != null && item instanceof TravelArticle) {
+						final TravelArticle article = (TravelArticle) item;
+						final TravelLocalDataHelper ldh = app.getTravelDbHelper().getLocalDataHelper();;
 						ldh.removeArticleFromSaved(article);
 						Snackbar snackbar = Snackbar.make(itemView, R.string.article_removed, Snackbar.LENGTH_LONG)
 								.setAction(R.string.shared_string_undo, new View.OnClickListener() {
@@ -218,6 +218,6 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	}
 
 	interface Listener {
-		void openArticle(WikivoyageArticle article);
+		void openArticle(TravelArticle article);
 	}
 }

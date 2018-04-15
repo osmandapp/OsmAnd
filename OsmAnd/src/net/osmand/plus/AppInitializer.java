@@ -445,7 +445,7 @@ public class AppInitializer implements IProgress {
 		app.mapMarkersDbHelper = startupInit(new MapMarkersDbHelper(app), MapMarkersDbHelper.class);
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
-		app.wikivoyageDbHelper = startupInit(new TravelDbHelper(app), TravelDbHelper.class);
+		app.travelDbHelper = startupInit(new TravelDbHelper(app), TravelDbHelper.class);
 
 		initOpeningHoursParser();
 	}

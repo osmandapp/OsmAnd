@@ -22,7 +22,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
-import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
+import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
 import java.io.File;
 import java.util.List;
@@ -110,7 +110,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						WikivoyageLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();
+						TravelLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();
 						ldh.clearHistory();
 						dismiss();
 					}

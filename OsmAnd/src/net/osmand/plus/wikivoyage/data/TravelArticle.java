@@ -11,7 +11,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class WikivoyageArticle {
+public class TravelArticle {
 
 	private static final String IMAGE_ROOT_URL = "https://upload.wikimedia.org/wikipedia/commons/";
 	private static final String THUMB_PREFIX = "320px-";

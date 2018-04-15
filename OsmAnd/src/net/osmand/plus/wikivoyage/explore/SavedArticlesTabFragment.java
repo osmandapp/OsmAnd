@@ -16,8 +16,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
-import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
-import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
+import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -25,11 +25,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SavedArticlesTabFragment extends BaseOsmAndFragment implements WikivoyageLocalDataHelper.Listener {
+public class SavedArticlesTabFragment extends BaseOsmAndFragment implements TravelLocalDataHelper.Listener {
 
 	protected static final Log LOG = PlatformUtil.getLog(SavedArticlesTabFragment.class);
 
-	private WikivoyageLocalDataHelper dataHelper;
+	private TravelLocalDataHelper dataHelper;
 
 	private SavedArticlesRvAdapter adapter;
 
@@ -44,7 +44,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Wiki
 		adapter = new SavedArticlesRvAdapter(app);
 		adapter.setListener(new SavedArticlesRvAdapter.Listener() {
 			@Override
-			public void openArticle(WikivoyageArticle article) {
+			public void openArticle(TravelArticle article) {
 				FragmentManager fm = getFragmentManager();
 				if (fm != null) {
 					WikivoyageArticleDialogFragment.showInstance(app, fm, article.getCityId(), article.getLang());
@@ -84,7 +84,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Wiki
 
 	private List<Object> getItems() {
 		List<Object> items = new ArrayList<>();
-		List<WikivoyageArticle> savedArticles = dataHelper.getSavedArticles();
+		List<TravelArticle> savedArticles = dataHelper.getSavedArticles();
 		if (!savedArticles.isEmpty()) {
 			Collections.reverse(savedArticles);
 			items.add(getString(R.string.saved_articles));
@@ -126,12 +126,12 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Wiki
 			Object newItem = newItems.get(newItemPosition);
 			if (oldItem instanceof String && newItem instanceof String) {
 				return false;
-			} else if (oldItem instanceof WikivoyageArticle && newItem instanceof WikivoyageArticle) {
+			} else if (oldItem instanceof TravelArticle && newItem instanceof TravelArticle) {
 				if (newItemPosition == newItems.size() - 1 && lastItemChanged()) {
 					return false;
 				}
-				WikivoyageArticle oldArticle = (WikivoyageArticle) oldItem;
-				WikivoyageArticle newArticle = (WikivoyageArticle) newItem;
+				TravelArticle oldArticle = (TravelArticle) oldItem;
+				TravelArticle newArticle = (TravelArticle) newItem;
 				return oldArticle.getCityId() == newArticle.getCityId()
 						&& oldArticle.getLang().equals(newArticle.getLang());
 			}

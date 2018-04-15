@@ -75,7 +75,7 @@ public class TravelDbHelper {
 	private File selectedTravelBook = null;
 	private List<File> existingTravelBooks = new ArrayList<>();
 	private Collator collator;
-	private WikivoyageLocalDataHelper localDataHelper;
+	private TravelLocalDataHelper localDataHelper;
 	private boolean initialized = false;
 
 
@@ -87,7 +87,7 @@ public class TravelDbHelper {
 		}
 	}
 
-	public WikivoyageLocalDataHelper getLocalDataHelper() {
+	public TravelLocalDataHelper getLocalDataHelper() {
 		initTravelBooks();
 		return localDataHelper;
 	}
@@ -100,7 +100,7 @@ public class TravelDbHelper {
 		File[] possibleFiles = application.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
 		String travelBook = application.getSettings().SELECTED_TRAVEL_BOOK.get();
 		existingTravelBooks.clear();
-		localDataHelper = new WikivoyageLocalDataHelper(application);
+		localDataHelper = new TravelLocalDataHelper(application);
 		if (possibleFiles != null) {
 			for (File f : possibleFiles) {
 				if (f.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
@@ -243,8 +243,8 @@ public class TravelDbHelper {
 	}
 
 	@Nullable
-	public WikivoyageArticle getArticle(long cityId, String lang) {
-		WikivoyageArticle res = null;
+	public TravelArticle getArticle(long cityId, String lang) {
+		TravelArticle res = null;
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			SQLiteCursor cursor = conn.rawQuery(ARTICLES_TABLE_SELECT + " WHERE " + ARTICLES_COL_CITY_ID + " = ? AND "
@@ -302,8 +302,8 @@ public class TravelDbHelper {
 	}
 
 	@NonNull
-	private WikivoyageArticle readArticle(SQLiteCursor cursor) {
-		WikivoyageArticle res = new WikivoyageArticle();
+	private TravelArticle readArticle(SQLiteCursor cursor) {
+		TravelArticle res = new TravelArticle();
 
 		res.id = cursor.getString(0);
 		res.title = cursor.getString(1);
@@ -339,7 +339,7 @@ public class TravelDbHelper {
 		return nm.substring(0, nm.indexOf('.')).replace('_', ' ');
 	}
 
-	public String getGPXName(WikivoyageArticle article) {
+	public String getGPXName(TravelArticle article) {
 		return article.getTitle().replace('/', '_').replace('\'', '_').replace('\"', '_') + ".gpx";
 	}
 }

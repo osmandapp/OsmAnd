@@ -22,7 +22,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
-import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
+import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchHistoryItem;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
@@ -147,7 +147,7 @@ public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment
 
 	private void setAdapterItems(@Nullable List<WikivoyageSearchResult> items) {
 		if (items == null || items.isEmpty()) {
-			WikivoyageLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();
+			TravelLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();
 			adapter.setHistoryItems(ldh.getAllHistory());
 		} else {
 			adapter.setItems(items);

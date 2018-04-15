@@ -20,7 +20,7 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
-import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
+import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -504,8 +504,8 @@ public class MapMarkersHelper {
 		List<MapMarkersGroup> res = new ArrayList<>();
 		TravelDbHelper travelDbHelper = ctx.getTravelDbHelper();
 		if(travelDbHelper.getSelectedTravelBook() != null) {
-			List<WikivoyageArticle> savedArticles = travelDbHelper.getLocalDataHelper().getSavedArticles();
-			for (WikivoyageArticle art : savedArticles) {
+			List<TravelArticle> savedArticles = travelDbHelper.getLocalDataHelper().getSavedArticles();
+			for (TravelArticle art : savedArticles) {
 				String gpxName = travelDbHelper.getGPXName(art);
 				File path = ctx.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
 				MapMarkersGroup group = getOrCreateGroup(new File(path.getAbsolutePath()));

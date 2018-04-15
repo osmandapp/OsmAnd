@@ -34,9 +34,9 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
-import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
+import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
-import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
+import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -98,7 +98,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private long cityId = NO_VALUE;
 	private ArrayList<String> langs;
 	private String selectedLang;
-	private WikivoyageArticle article;
+	private TravelArticle article;
 
 	private TextView trackButton;
 	private TextView selectedLangTv;
@@ -267,7 +267,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 	private void updateSaveButton() {
 		if (article != null) {
-			final WikivoyageLocalDataHelper helper = getMyApplication().getTravelDbHelper().getLocalDataHelper();
+			final TravelLocalDataHelper helper = getMyApplication().getTravelDbHelper().getLocalDataHelper();
 			final boolean saved = helper.isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			saveBtn.setText(getString(saved ? R.string.shared_string_delete : R.string.shared_string_save));
@@ -335,7 +335,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			trackButton.setText(getString(R.string.points) + " (" + article.getGpxFile().getPointsSize() +")");
 		}
 
-		WikivoyageLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();
+		TravelLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();
 		ldh.addToHistory(article);
 
 		updateSaveButton();
@@ -348,12 +348,12 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	}
 
 	@NonNull
-	private String createHtmlContent(@NonNull WikivoyageArticle article) {
+	private String createHtmlContent(@NonNull TravelArticle article) {
 		StringBuilder sb = new StringBuilder(HEADER_INNER);
 
 		String imageTitle = article.getImageTitle();
 		if (!TextUtils.isEmpty(imageTitle)) {
-			String url = WikivoyageArticle.getImageUrl(imageTitle, false);
+			String url = TravelArticle.getImageUrl(imageTitle, false);
 			sb.append("<div class=\"title-image\" style=\"background-image: url(").append(url).append(")\"></div>");
 		}
 		sb.append("<div class=\"main\">\n");
