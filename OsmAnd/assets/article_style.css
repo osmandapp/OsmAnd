@@ -62,7 +62,7 @@ h2:after {
     content: "";
     border: solid black;
     border-width: 0 3px 3px 0;
-    margin-top: 10px;
+    margin-top: 13px;
     display: inline-block;
     padding: 3px;
     transform: rotate(45deg);
