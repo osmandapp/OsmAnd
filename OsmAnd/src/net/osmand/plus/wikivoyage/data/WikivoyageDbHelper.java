@@ -7,6 +7,7 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
@@ -24,10 +25,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class WikivoyageDbHelper {
 
+	private static final Log LOG = PlatformUtil.getLog(WikivoyageDbHelper.class);
+	
 	private static final String ARTICLES_TABLE_NAME = "wikivoyage_articles";
 	private static final String ARTICLES_COL_ID = "article_id";
 	private static final String ARTICLES_COL_TITLE = "title";
@@ -295,7 +300,7 @@ public class WikivoyageDbHelper {
 		try {
 			res.content = Algorithms.gzipToString(cursor.getBlob(2));
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage(), e);
 		}
 		res.isPartOf = cursor.getString(3);
 		res.lat = cursor.getDouble(4);
@@ -307,7 +312,13 @@ public class WikivoyageDbHelper {
 		res.lang = cursor.getString(10);
 		res.contentsJson = cursor.getString(11);
 		res.aggregatedPartOf = cursor.getString(12);
-		res.gpxFile = GPXUtilities.loadGPXFile(application, new ByteArrayInputStream(gpxFileBlob)); 
+		try {
+			String gpxContent = Algorithms.gzipToString(cursor.getBlob(7));
+			res.gpxFile = GPXUtilities.loadGPXFile(application, new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
+		} catch (IOException e) {
+			LOG.error(e.getMessage(), e);
+		}
+		 
 		return res;
 	}
 
@@ -317,5 +328,9 @@ public class WikivoyageDbHelper {
 		}
 		String nm = tb.getName();
 		return nm.substring(0, nm.indexOf('.')).replace('_', ' ');
+	}
+
+	public String getGPXName(WikivoyageArticle article) {
+		return article.getTitle().replace('/', '_').replace('\'', '_').replace('\"', '_') + ".gpx";
 	}
 }

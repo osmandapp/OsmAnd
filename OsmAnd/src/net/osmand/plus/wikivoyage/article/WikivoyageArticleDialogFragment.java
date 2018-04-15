@@ -32,6 +32,7 @@ import net.osmand.plus.myplaces.TrackPointFragment;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
+import net.osmand.plus.wikivoyage.data.WikivoyageDbHelper;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.util.Algorithms;
 
@@ -168,7 +169,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				if (article == null || fm == null) {
 					return;
 				}
-				File file = getMyApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR + article.getTitle() + ".gpx");
+				WikivoyageDbHelper dbHelper = getMyApplication().getWikivoyageDbHelper();
+				File file = getMyApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR + dbHelper.getGPXName(article));
 				GPXFile gpx = article.getGpxFile();
 				GPXUtilities.writeGpxFile(file, gpx, getMyApplication());
 				Bundle args = new Bundle();
