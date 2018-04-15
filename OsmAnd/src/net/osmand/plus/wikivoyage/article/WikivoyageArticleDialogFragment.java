@@ -21,16 +21,16 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.WikivoyageShowImages;
 import net.osmand.plus.R;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.myplaces.TrackPointFragment;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
@@ -230,10 +230,11 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		OsmandSettings settings = getMyApplication().getSettings();
 		if (!settings.WIKIVOYAGE_SHOW_IMAGES_ASKED.get()) {
 			FragmentActivity activity = getActivity();
-			if (activity != null) {
+			FragmentManager fm = getFragmentManager();
+			if (activity != null && fm != null) {
 				WikivoyageShowPicturesDialogFragment fragment = new WikivoyageShowPicturesDialogFragment();
 				fragment.setTargetFragment(this, WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED);
-				fragment.show(activity.getSupportFragmentManager(), WikivoyageShowPicturesDialogFragment.TAG);
+				fragment.show(fm, WikivoyageShowPicturesDialogFragment.TAG);
 				settings.WIKIVOYAGE_SHOW_IMAGES_ASKED.set(true);
 			}
 		}
