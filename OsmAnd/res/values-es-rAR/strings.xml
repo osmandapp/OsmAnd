@@ -3008,4 +3008,13 @@ Proporciona un código completo</string>
     <string name="images_cache">Caché de imágenes</string>
     <string name="delete_search_history">Borrar historial de búsquedas</string>
     <string name="show_images">Mostrar imágenes</string>
+    <string name="shared_string_dont">No hacer</string>
+    <string name="shared_string_do">Hacer</string>
+    <string name="shared_string_only_with_wifi">Sólo con WiFi</string>
+    <string name="wikivoyage_download_pics">Descargar imágenes</string>
+    <string name="wikivoyage_download_pics_descr">Podemos descargar y mostrar imágenes en los artículos y almacenarlas en el dispositivo, por lo que tendrá acceso a ellas mientras esté desconectado. Siempre puedes cambiar la configuración en «Explorar &gt; Opciones».</string>
+    <string name="shared_string_wifi_only">Sólo WiFi</string>
+    <string name="select_travel_book">Marcar libro de viajes</string>
+    <string name="shared_string_travel_book">Libro de viajes</string>
+    <string name="download_images">Descargar imágenes</string>
     </resources>
