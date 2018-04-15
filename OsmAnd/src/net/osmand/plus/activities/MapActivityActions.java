@@ -770,6 +770,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+						getMyApplication().getTravelDbHelper().initTravelBooks();
 						MapActivity.clearPrevActivityIntent();
 						WikivoyageExploreDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 						return true;
