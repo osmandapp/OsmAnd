@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
@@ -25,9 +26,11 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.WikivoyageShowImages;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 
+import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
@@ -150,29 +153,17 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				WikivoyageArticleContentsFragment fragment = new WikivoyageArticleContentsFragment();
 				fragment.setUsedOnMap(false);
 				fragment.setArguments(args);
-				fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, 0);
+				fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, WikivoyageArticleContentsFragment.REQUEST_LINK_CODE);
 				fragment.show(fm, WikivoyageArticleContentsFragment.TAG);
 			}
 		});
 
 		saveBtn = (TextView) mainView.findViewById(R.id.save_button);
 
-		OsmandSettings.WikivoyageShowImages showImages = getSettings().WIKIVOYAGE_SHOW_IMAGES.get();
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
 		WebSettings webSettings = contentWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
-		switch (showImages) {
-			case ON:
-				webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-				break;
-			case OFF:
-				webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
-				break;
-			case WIFI:
-				webSettings.setCacheMode(getMyApplication().getSettings().isWifiConnected() ?
-						WebSettings.LOAD_DEFAULT : WebSettings.LOAD_CACHE_ONLY);
-				break;
-		}
+		updateWebSettings();
 		contentWebView.setWebViewClient(new WikivoyageWebViewClient(getActivity(), getFragmentManager()));
 
 		return mainView;
@@ -196,12 +187,47 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			String link = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENTS_LINK_KEY);
 			String title = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENTS_TITLE_KEY);
 			moveToAnchor(link, title);
+		} else if (requestCode ==  WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED) {
+			updateWebSettings();
+			populateArticle();
+		}
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		OsmandSettings settings = getMyApplication().getSettings();
+		if (!settings.WIKIVOYAGE_SHOW_IMAGES_ASKED.get()) {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				WikivoyageShowPicturesDialogFragment fragment = new WikivoyageShowPicturesDialogFragment();
+				fragment.setTargetFragment(this, WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED);
+				fragment.show(activity.getSupportFragmentManager(), WikivoyageShowPicturesDialogFragment.TAG);
+				settings.WIKIVOYAGE_SHOW_IMAGES_ASKED.set(true);
+			}
 		}
 	}
 
 	@Override
 	protected int getStatusBarColor() {
 		return nightMode ? R.color.status_bar_wikivoyage_article_dark : R.color.status_bar_wikivoyage_article_light;
+	}
+
+	private void updateWebSettings() {
+		WikivoyageShowImages showImages = getSettings().WIKIVOYAGE_SHOW_IMAGES.get();
+		WebSettings webSettings = contentWebView.getSettings();
+		switch (showImages) {
+			case ON:
+				webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+				break;
+			case OFF:
+				webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+				break;
+			case WIFI:
+				webSettings.setCacheMode(getMyApplication().getSettings().isWifiConnected() ?
+						WebSettings.LOAD_DEFAULT : WebSettings.LOAD_CACHE_ONLY);
+				break;
+		}
 	}
 
 	private void updateSaveButton() {

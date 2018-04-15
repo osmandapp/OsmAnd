@@ -76,7 +76,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 				String name = wikivoyageContentItem.getLink().substring(1);
 				sendResults(link, name);
 				dismiss();
-				return false;
+				return true;
 			}
 		});
 		expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -87,7 +87,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 				String name = wikivoyageContentItem.getLink().substring(1);
 				sendResults(link, name);
 				dismiss();
-				return false;
+				return true;
 			}
 		});
 		LinearLayout container = new LinearLayout(getContext());
@@ -161,7 +161,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			}
 			TextView txtListChild = (TextView) convertView.findViewById(R.id.item_label);
 			txtListChild.setText(childText);
-			txtListChild.setTextColor(getResolvedColor(nightMode
+			txtListChild.setTextColor(ContextCompat.getColor(context, nightMode
 					? R.color.wikivoyage_contents_parent_icon_dark
 					: R.color.wikivoyage_contents_parent_icon_light));
 			txtListChild.setCompoundDrawablesWithIntrinsicBounds(itemChildIcon, null, null, null);
@@ -208,7 +208,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			}
 			TextView lblListHeader = (TextView) convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(headerTitle);
-			lblListHeader.setTextColor(getResolvedColor(nightMode ? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
+			lblListHeader.setTextColor(ContextCompat.getColor(context, nightMode ? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 
 			adjustIndicator(getMyApplication(), groupPosition, isExpanded, convertView, !nightMode);
