@@ -1,4 +1,4 @@
-package net.osmand.plus.wikivoyage.data;
+package net.osmand.plus.wikivoyage;
 
 
 import android.content.Context;

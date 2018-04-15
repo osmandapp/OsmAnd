@@ -27,7 +27,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
-import net.osmand.plus.wikivoyage.data.CustomWebViewClient;
+import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.util.Algorithms;
@@ -156,7 +156,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 						WebSettings.LOAD_DEFAULT : WebSettings.LOAD_CACHE_ONLY);
 				break;
 		}
-		contentWebView.setWebViewClient(new CustomWebViewClient(getActivity(), getFragmentManager()));
+		contentWebView.setWebViewClient(new WikivoyageWebViewClient(getActivity(), getFragmentManager()));
 
 		return mainView;
 	}
