@@ -24,6 +24,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.data.CustomWebViewClient;
@@ -139,10 +140,22 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 		saveBtn = (TextView) mainView.findViewById(R.id.save_button);
 
-		boolean showImages = getSettings().WIKIVOYAGE_SHOW_IMAGES.get();
+		OsmandSettings.WikivoyageShowImages showImages = getSettings().WIKIVOYAGE_SHOW_IMAGES.get();
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
-		contentWebView.getSettings().setJavaScriptEnabled(true);
-		contentWebView.getSettings().setCacheMode(showImages ? WebSettings.LOAD_DEFAULT : WebSettings.LOAD_CACHE_ONLY);
+		WebSettings webSettings = contentWebView.getSettings();
+		webSettings.setJavaScriptEnabled(true);
+		switch (showImages) {
+			case ON:
+				webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+				break;
+			case OFF:
+				webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+				break;
+			case WIFI:
+				webSettings.setCacheMode(getMyApplication().getSettings().isWifiConnected() ?
+						WebSettings.LOAD_DEFAULT : WebSettings.LOAD_CACHE_ONLY);
+				break;
+		}
 		contentWebView.setWebViewClient(new CustomWebViewClient(getActivity(), getFragmentManager()));
 
 		return mainView;
