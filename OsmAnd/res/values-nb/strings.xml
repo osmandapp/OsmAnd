@@ -2850,4 +2850,88 @@
     <string name="images_cache">Bilde-hurtigbuffer</string>
     <string name="delete_search_history">Slett søkehistorikk</string>
     <string name="show_images">Vis bilder</string>
+    <string name="online_webpage_warning">Denne siden er kun tilgjengelig på nett. Ønsker du å åpne den i en nettleser?</string>
+    <string name="index_item_world_wikivoyage">Verdensomspennende Wikivoyage-artikler</string>
+    <string name="release_2_9">\\022 Oppdatert kontekstmeny: Viser når POI åpnes / lukkes
+\n • Transportmeny: Alle tilgjengelige ruter er nå på toppen
+\n
+\n • Wikpiedia: Knapp for åpning av originalartikkel, oppdatert visning av artikler
+\n
+\n • Rute: Mulighet for å bytte start og sluttpunkt med ett trykk lagt til
+\n
+\n • Notater: Lagt til sortering etter type og dato
+\n
+\n • OSM-redigeringer: Vis et ikon og navn for POI-kategorier, vis fullførte handlinger
+\n
+\n • Ny raskt koordinatinntastingssøk i egen skjerm for raskt markøropprettese
+\n
+\n • Oppdaging av stoppskilt tar nå hensikt til kjøreretning
+\n
+\n • Ny algoritme som gir meningsfylte ned/stigningsverdier for GPX-spor
+\n
+\n • Terreng (stignings-) oppmerksom gåtid (Nasimiths regel)
+\n
+\n</string>
+    <string name="release_2_3">\\022 Sanntids-OSM. Støtte for kartbidragsytere og utviklere, timevise oppdateringer.
+\n
+\n • Marktmarkører. En ny måte å velge steder på kartet raskt.
+\n
+\n • Mer detaljerte OSM-kart med landspesifikke veiskilt og mange ny kartfunksjoner.
+\n
+\n • Forbedret utseende og oppførsel for ruteforberedelse.
+\n
+\n • Mange forbedringer i kartkontekstmenyen, som kontekstuelt adresseoppslag.
+\n
+\n og mer…</string>
+    <string name="release_2_2">\\022 Ny kontekstavhegig brukergrenseflate når det velges plasseringer på kartet og på andre skjermer 
+\n 
+\n • Kartskjermen vises nå direkte, med mindre \"Vis betjeningspanel ved programstart\" er valgt 
+\n 
+\n • Sett opp hvilket innhold, og hvordan det vises på betjeningspanelet
+\n 
+\n • Forbigå betjeningspanel hvis det er ønskelig med meny-basert programkontroll
+\n 
+\n • Henting av kart kan gjøres ved å trykke direkte på verdenskartet 
+\n 
+\n• POI-søk støtter nå mer spesifikke spørringer 
+\n 
+\n • Forbedret POI- og OSM- redigeringsfunksjonalitet 
+\n 
+\n • Strukturen over nedlastinger og grensesnittet for den har blitt fornyet 
+\n 
+\n med mer…</string>
+    <string name="osmand_rastermaps_plugin_description">"Programtillegget gir tilgang til mange typer av nettbaserte kart (flis eller rasterbaserte), fra forhåndsdefinerte OpenStreetMap-kartflis (som Mapnik) til satellittbilder og spesialfunksjonslag, som vær-  klima-, geologi, relieffskyggelag, osv. 
+\n 
+\nAlle disse kartene kan enten brukes som det hovedkart (primær), som skal vises på skjermen, eller som under- eller overlag for annet primærkart (slik som OsmAnds frakoblede standardkart). For at gjøre underlagskartet mer synlig, kan visse elementer av OsmAnds vektorkort skjules via \'Sett opp kart\'-menyen som ønsket. 
+\n 
+\nFliskart kan hentes direkte fra nettbaserte kilder, eller fremstilles til frakoblet bruk (og manuelt kopieres til OsmAnd-datamappen) som en SQLite-database som kan fremstilles ved hjelp av en rekke tredjeparts 
+\n-forberedelsesvertøy."</string>
+    <string name="record_plugin_description">Dette programtillegget aktiverer funksjonalitet for å ta opp og lagre sporene dine ved å manuelt trykke på GPX-loggingsminiprogrammet på kartskjermen, eller også for å automatisk logge alle dine navigasjonsspor til en GPX-fil.
+\n
+\nSporinger kan deles med dine venner eller brukes som OSM-bidrag. Idrettsutdøvere kan bruke innspilte sporinger til å holde oversikt over trening. Noe grunnleggende sporingsanalyse kan utføres direkte i OsmAnd, som rundetider, gjennomsnittshastighet, osv, og spor kan selvfølgelig analyseres senere i dertil egnede spesialverktøy.</string>
+    <string name="osmand_development_plugin_description">Dette programtillegget viser innstillinger for utvikling og feilrettingsfunksjoner, for testing eller simulering av veivisning, skjermtegningsytelse, eller stemmeanvisning. Disse innstillingene er ment for utviklere, og trengs ikke for vanlige brukere.</string>
+    <string name="osmand_extended_description_part2">GPS-navigasjon
+\n• Du kan velge mellom frakoblet modus (ingen roaming-kostnader når du er utenlands) eller nettbasert modus (raskere)
+\n• Sving-for-sving -veivisning leder deg langs veien (opptak og robotstemmer)
+\n• Ruten blir korrigert når du dreier av den
+\n• Filanvisning, veinavn, og estimert ankomsttid hjelper deg på veien
+\n• For å gjøre turen din tryggere, byttes natt/dag -visning automatisk
+\n• Du kan velge å vise fartsgrenser, og få påminnelser når du bryter dem
+\n• Kartforstørring tar hensyn til farten din
+\n• Du kan søke etter mål ved adresse, type (f.eks. parkering, restaurant, hotell, bensinstasjon, museum), eller ved geografiske koordinater
+\n• Støtter mellompunkter på din rute
+\n• Du kan ta opp din egen, eller laste opp et GPX-spor og følge det</string>
+    <string name="osmand_plus_extended_description_part5">Sikkerhetsfunksjoner
+\n• Valgfri automatisert bytte av dag/natt -visning
+\n• Valgfri visning av fartsgrenser, med påminnelse hvis du bryter dem
+\n• Valgfri fartsavhengig forstørrelse
+\n• Del din plassering slik at dine venner finner deg</string>
+    <string name="osmand_plus_extended_description_part6">Sykkel og fotgjengerfunksjoner
+\n• Visning av gang- vandring og sykkelstier, supert for utendørsaktiviteter
+\n• Spesiell veivisning og visningsmodus for sykkel og gange
+\n• Valgfri offentlige transportstopp (buss, trikk, tog) inkludert linjenavn
+\n• Valgfri sporopptak til lokal GPX-fil eller nettbasert tjeneste
+\n• Valgfri hastighet og høydevisning
+\n• Visning av koter og relieffskyggelag (via eget programtillegg)</string>
+    <string name="live_monitoring_url_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, tidsstempel={2}, hdop={3}, høyde={4}, hastighet={5}, kurs={6}.</string>
     </resources>
