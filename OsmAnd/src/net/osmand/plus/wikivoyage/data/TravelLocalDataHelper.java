@@ -32,7 +32,6 @@ public class TravelLocalDataHelper {
 
 	TravelLocalDataHelper(OsmandApplication app) {
 		dbHelper = new WikivoyageLocalDataDbHelper(app);
-		refreshCachedData();
 	}
 
 	public void refreshCachedData() {
