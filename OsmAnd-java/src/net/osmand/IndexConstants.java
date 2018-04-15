@@ -52,6 +52,7 @@ public class IndexConstants {
 	public static final String GPX_INDEX_DIR = "tracks/";
 	public static final String GPX_RECORDED_INDEX_DIR = GPX_INDEX_DIR + "rec/";
 	public static final String GPX_IMPORT_DIR = GPX_INDEX_DIR + "import/";
+	
 	public static final String TILES_INDEX_DIR= "tiles/";
 	public static final String LIVE_INDEX_DIR= "live/";
 	public static final String TOURS_INDEX_DIR= "tours/";
@@ -59,6 +60,7 @@ public class IndexConstants {
 	public static final String ROADS_INDEX_DIR = "roads/"; //$NON-NLS-1$
 	public static final String WIKI_INDEX_DIR = "wiki/"; //$NON-NLS-1$
 	public static final String WIKIVOYAGE_INDEX_DIR = "travel/";
+	public static final String GPX_TRAVEL_DIR = GPX_INDEX_DIR + WIKIVOYAGE_INDEX_DIR;
 	public static final String AV_INDEX_DIR = "avnotes/"; //$NON-NLS-1$
 	public static final String FONT_INDEX_DIR = "fonts/"; //$NON-NLS-1$
 	public static final String VOICE_INDEX_DIR = "voice/"; //$NON-NLS-1$
