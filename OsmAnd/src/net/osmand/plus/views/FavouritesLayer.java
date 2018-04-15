@@ -143,7 +143,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 				}
 				for (FavouritePoint o : fullObjects) {
 					if (o != contextMenuLayer.getMoveableObject()) {
-						MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
+						MapMarker mapMarker = mapMarkersHelper.getMapMarker(o);
 						drawPoint(canvas, tileBox, latLonBounds, o, mapMarker);
 					}
 				}
