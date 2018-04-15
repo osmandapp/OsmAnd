@@ -9,12 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.GroupHeader;
@@ -26,6 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -174,7 +175,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	public int getGroupHeaderPosition(String groupId) {
 		int pos = -1;
-		MapMarkersGroup group = app.getMapMarkersHelper().getMapMarkerGroupById(groupId);
+		MapMarkersGroup group = app.getMapMarkersHelper().getMapMarkerGroupById(groupId, MapMarkersGroup.ANY_TYPE); 
 		if (group != null) {
 			pos = items.indexOf(group.getGroupHeader());
 		}
@@ -398,30 +399,27 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						final MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 						final GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
-						boolean synced = false;
 
 						mapMarkersHelper.updateGroupDisabled(group, disabled);
 						if (group.getType() == MapMarkersGroup.GPX_TYPE) {
 							group.setVisibleUntilRestart(disabled);
-							String gpxPath = group.getId();
+							String gpxPath = group.getGpxPath();
+							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
 							if (disabled) {
-								SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
 								if (selectedGpxFile != null) {
 									gpxFile[0] = selectedGpxFile.getGpxFile();
 									switchGpxVisibility(gpxFile[0], false);
-								}
-							} else if (mapMarkersHelper.isGroupSynced(group.getId())) {
-								mapMarkersHelper.runSynchronization(group, true);
-								synced = true;
-							}
-						}
-						if (!synced) {
-							if (mapMarkersHelper.isGroupSynced(group.getId())) {
-								mapMarkersHelper.runSynchronization(group);
+								}	
 							} else {
-								mapMarkersHelper.addOrEnableGroup(group);
+								if (selectedGpxFile == null) {
+									// TODO IO load in another thread ?
+									gpxFile[0] = GPXUtilities.loadGPXFile(app, new File(gpxPath));
+									switchGpxVisibility(gpxFile[0], true);
+								}
 							}
 						}
+						mapMarkersHelper.runSynchronization(group);
+
 
 						if (disabled) {
 							snackbar = Snackbar.make(holder.itemView, app.getString(R.string.group_will_be_removed_after_restart), Snackbar.LENGTH_LONG)
@@ -431,7 +429,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 											if (group.getType() == MapMarkersGroup.GPX_TYPE && gpxFile[0] != null) {
 												switchGpxVisibility(gpxFile[0], true);
 											}
-											mapMarkersHelper.addOrEnableGroup(group);
+											mapMarkersHelper.enableGroup(group);
 										}
 									});
 							AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);

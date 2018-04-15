@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
-
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
@@ -17,6 +16,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -177,10 +177,10 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
-		File gpx = new File(gpxFile.path);
-		if (gpx.exists()) {
-			MapMarkersHelper helper = getMyApplication().getMapMarkersHelper();
-			helper.runSynchronization(helper.getOrCreateGroup(gpx));
+		MapMarkersHelper helper = getMyApplication().getMapMarkersHelper();
+		MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
+		if (group != null) {
+			helper.runSynchronization(group);
 		}
 	}
 

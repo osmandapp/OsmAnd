@@ -121,11 +121,11 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		if (selectedGpxFile == null) {
 			gpxSelectionHelper.selectGpxFile(gpxFile, true, false);
 		}
-
-		MapMarkersGroup markersGr = mapMarkersHelper.getOrCreateGroup(new File(gpxFile.path));
-		mapMarkersHelper.updateGroupWptCategories(markersGr, selectedCategories);
-
-		mapMarkersHelper.addOrEnableGroup(markersGr);
+		MapMarkersGroup group = mapMarkersHelper.getMarkersGroup(gpxFile);
+		if(group == null) {
+			group = mapMarkersHelper.addOrEnableGroup(gpxFile);
+		}
+		mapMarkersHelper.updateGroupWptCategories(group, selectedCategories);
 
 		dismiss();
 	}

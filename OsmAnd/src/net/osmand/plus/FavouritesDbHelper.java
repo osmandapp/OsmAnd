@@ -4,12 +4,12 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
@@ -111,17 +111,23 @@ public class FavouritesDbHelper {
 
 	private void runSyncWithMarkers(FavoriteGroup favGroup) {
 		MapMarkersHelper helper = context.getMapMarkersHelper();
-		helper.runSynchronization(helper.getOrCreateGroup(favGroup));
+		MapMarkersGroup group = helper.getMarkersGroup(favGroup);
+		if(group != null) {
+			helper.runSynchronization(group);
+		}
 	}
 
 	private void removeFromMarkers(FavoriteGroup favGroup) {
 		MapMarkersHelper helper = context.getMapMarkersHelper();
-		helper.removeMarkersGroup(helper.getOrCreateGroup(favGroup));
+		MapMarkersGroup group = helper.getMarkersGroup(favGroup);
+		if(group != null) {
+			helper.removeMarkersGroup(group);
+		}
 	}
 
 	private void addToMarkers(FavoriteGroup favGroup) {
 		MapMarkersHelper helper = context.getMapMarkersHelper();
-		helper.addOrEnableGroup(helper.getOrCreateGroup(favGroup));
+		helper.addOrEnableGroup(favGroup);
 	}
 
 	private File getInternalFile() {

@@ -19,7 +19,6 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -35,6 +34,7 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
@@ -532,7 +532,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private boolean isSyncedWithMarkers(SelectedGpxFile g) {
-		return mapMarkersHelper.getMarkersGroup(g) != null;
+		return mapMarkersHelper.getMarkersGroup(g.getGpxFile()) != null;
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
@@ -662,9 +662,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
-		File gpx = new File(gpxFile.path);
-		if (gpx.exists()) {
-			mapMarkersHelper.runSynchronization(view.getApplication().getMapMarkersHelper().getOrCreateGroup(gpx));
+		MapMarkersGroup group = view.getApplication().getMapMarkersHelper().getMarkersGroup(gpxFile);
+		if (group != null) {
+			mapMarkersHelper.runSynchronization(group);	
 		}
 	}
 

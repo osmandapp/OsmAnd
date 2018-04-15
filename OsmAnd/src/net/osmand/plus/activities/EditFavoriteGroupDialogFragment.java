@@ -158,8 +158,9 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 			items.add(new DividerHalfItem(getContext()));
 
 			final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-			final MapMarkersGroup markersGr = markersHelper.getOrCreateGroup(this.group);
-			final boolean synced = markersHelper.isGroupSynced(markersGr.getId());
+			final FavoriteGroup favGroup = this.group;
+			final MapMarkersGroup markersGr = markersHelper.getMarkersGroup(this.group);
+			final boolean synced = markersGr != null;
 
 			BaseBottomSheetItem markersGroupItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(synced ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_flag_dark))
@@ -171,7 +172,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 							if (synced) {
 								markersHelper.removeMarkersGroup(markersGr);
 							} else {
-								markersHelper.addOrEnableGroup(markersGr);
+								markersHelper.addOrEnableGroup(favGroup);
 							}
 							dismiss();
 							MapActivity.launchMapActivityMoveToTop(getActivity());
