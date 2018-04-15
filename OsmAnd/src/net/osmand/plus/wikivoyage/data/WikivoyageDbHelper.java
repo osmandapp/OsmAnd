@@ -306,7 +306,6 @@ public class WikivoyageDbHelper {
 		res.lat = cursor.getDouble(4);
 		res.lon = cursor.getDouble(5);
 		res.imageTitle = cursor.getString(6);
-		byte[] gpxFileBlob = cursor.getBlob(7);
 		res.cityId = cursor.getLong(8);
 		res.originalId = cursor.getLong(9);
 		res.lang = cursor.getString(10);
