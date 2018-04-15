@@ -76,17 +76,27 @@ public class WikivoyageDbHelper {
 	private List<File> existingTravelBooks = new ArrayList<>();
 	private Collator collator;
 	private WikivoyageLocalDataHelper localDataHelper;
+	private boolean initialized = false;
+
 
 	public WikivoyageDbHelper(OsmandApplication application) {
 		this.application = application;
 		collator = OsmAndCollator.primaryCollator();
+		if(application.getSettings().SELECTED_TRAVEL_BOOK.get() != null) {
+			initTravelBooks();
+		}
 	}
 
 	public WikivoyageLocalDataHelper getLocalDataHelper() {
+		initTravelBooks();
 		return localDataHelper;
 	}
 
 	public void initTravelBooks() {
+		if(initialized) {
+			return;
+		}
+		initialized = true;
 		File[] possibleFiles = application.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
 		String travelBook = application.getSettings().SELECTED_TRAVEL_BOOK.get();
 		existingTravelBooks.clear();
