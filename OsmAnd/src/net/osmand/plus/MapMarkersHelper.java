@@ -302,19 +302,13 @@ public class MapMarkersHelper {
 		});
 	}
 
-	public boolean isSynced(SelectedGpxFile gpxFile) {
-		List<WptPt> gpxPoints = gpxFile.getGpxFile().getPoints();
-		for (WptPt wptPt : gpxPoints) {
-			if (getMapMarker(wptPt) != null) {
-				return true;
-			}
+	public MapMarkersGroup getMarkersGroup(SelectedGpxFile gpxFile) {
+		if(gpxFile.getGpxFile() == null) {
+			return null;
 		}
-		return false;
+		return getMapMarkerGroupById(getMarkerGroupId(new File(gpxFile.getGpxFile().path)));
 	}
 
-	public boolean isSynced(FavouritePoint favouritePoint) {
-		return getMapMarker(favouritePoint) != null;
-	}
 
 	public void addOrEnableGroup(@NonNull MapMarkersGroup group) {
 		if (!isGroupSynced(group.getId())) {
@@ -479,17 +473,21 @@ public class MapMarkersHelper {
 		}
 		return group;
 	}
-
+	
 	public MapMarkersGroup getOrCreateGroup(@NonNull File gpx) {
-		MapMarkersGroup group = getMapMarkerGroupById(gpx.getAbsolutePath());
+		MapMarkersGroup group = getMapMarkerGroupById(getMarkerGroupId(gpx));
 		if (group == null) {
-			group = new MapMarkersGroup(gpx.getAbsolutePath(),
+			group = new MapMarkersGroup(getMarkerGroupId(gpx),
 					AndroidUtils.trimExtension(gpx.getName()),
 					MapMarkersGroup.GPX_TYPE);
 		}
 		return group;
 	}
 
+	private String getMarkerGroupId(File gpx) {
+		return gpx.getAbsolutePath();
+	}
+	
 	@NonNull
 	public List<MapMarkersGroup> getGroupsForDisplayedGpx() {
 		List<MapMarkersGroup> res = new ArrayList<>();
@@ -514,7 +512,7 @@ public class MapMarkersHelper {
 			for (TravelArticle art : savedArticles) {
 				String gpxName = travelDbHelper.getGPXName(art);
 				File path = ctx.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
-				LOG.debug("Article group " + path.getAbsolutePath()  + " " + path.exists()) ;
+				LOG.debug("Article group " + getMarkerGroupId(path)  + " " + path.exists()) ;
 				MapMarkersGroup group = getOrCreateGroup(path);
 				if (!isGroupSynced(group.getId())) {
 					group.disabled = true;
@@ -973,7 +971,7 @@ public class MapMarkersHelper {
 			file.addPoint(wpt);
 		}
 		GPXUtilities.writeGpxFile(fout, file, ctx);
-		return fout.getAbsolutePath();
+		return getMarkerGroupId(fout);
 	}
 
 	// ---------------------------------------------------------------------------------------------

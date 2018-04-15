@@ -12,7 +12,6 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -21,6 +20,7 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -97,7 +97,8 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		if (contextMenuLayer.getMoveableObject() instanceof FavouritePoint) {
 			FavouritePoint objectInMotion = (FavouritePoint) contextMenuLayer.getMoveableObject();
 			FavoriteImageDrawable fid;
-			if (mapMarkersHelper.isSynced(objectInMotion)) {
+			MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
+			if (mapMarker != null) {
 				fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), objectInMotion.getColor());
 			} else {
 				fid = FavoriteImageDrawable.getOrCreate(view.getContext(),
@@ -142,8 +143,8 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 				}
 				for (FavouritePoint o : fullObjects) {
 					if (o != contextMenuLayer.getMoveableObject()) {
-						boolean syncedPoint = mapMarkersHelper.isSynced(o);
-						drawPoint(canvas, tileBox, latLonBounds, o, syncedPoint);
+						MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
+						drawPoint(canvas, tileBox, latLonBounds, o, mapMarker);
 					}
 				}
 				this.fullObjectsLatLon = fullObjectsLatLon;
@@ -156,14 +157,14 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 
 	}
 
-	private void drawPoint(Canvas canvas, RotatedTileBox tileBox, final QuadRect latLonBounds, FavouritePoint o, boolean synced) {
+	private void drawPoint(Canvas canvas, RotatedTileBox tileBox, final QuadRect latLonBounds, FavouritePoint o, MapMarker mapMarker) {
 		if (o.isVisible() && o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left
 				&& o.getLongitude() <= latLonBounds.right ) {
 			cache.add(o);
 			int x = (int) tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 			int y = (int) tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 			FavoriteImageDrawable fid;
-			if (synced) {
+			if (mapMarker != null) {
 				fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), o.getColor());
 			} else {
 				fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor(), true);
