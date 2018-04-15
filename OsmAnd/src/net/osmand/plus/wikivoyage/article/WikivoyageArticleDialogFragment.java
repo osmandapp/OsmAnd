@@ -231,7 +231,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	public void onResume() {
 		super.onResume();
 		OsmandSettings settings = getMyApplication().getSettings();
-		if (true || !settings.WIKIVOYAGE_SHOW_IMAGES_ASKED.get()) {
+		if (!settings.WIKIVOYAGE_SHOW_IMAGES_ASKED.get()) {
 			FragmentActivity activity = getActivity();
 			FragmentManager fm = getFragmentManager();
 			if (activity != null && fm != null) {
