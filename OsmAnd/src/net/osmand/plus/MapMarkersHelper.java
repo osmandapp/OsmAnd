@@ -285,41 +285,76 @@ public class MapMarkersHelper {
 		});
 	}
 
-	public boolean isGroupSynced(String id) {
-		return getMapMarkerGroupById(id) != null;
-	}
 
-	public void runSynchronization(@NonNull MapMarkersGroup group) {
-		runSynchronization(group, false);
-	}
-
-	public void runSynchronization(@NonNull final MapMarkersGroup group, final boolean loadGpx) {
+	public void runSynchronization(final @NonNull MapMarkersGroup group) {
 		ctx.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
-				new SyncGroupTask(group, loadGpx).executeOnExecutor(executorService);
+				new SyncGroupTask(group).executeOnExecutor(executorService);
 			}
 		});
 	}
 
-	public MapMarkersGroup getMarkersGroup(SelectedGpxFile gpxFile) {
-		if(gpxFile.getGpxFile() == null) {
+	
+	public MapMarkersGroup getMarkersGroup(GPXFile gpx) {
+		if(gpx == null || gpx.path == null) {
 			return null;
 		}
-		return getMapMarkerGroupById(getMarkerGroupId(new File(gpxFile.getGpxFile().path)));
+		return getMapMarkerGroupById(getMarkerGroupId(new File(gpx.path)), MapMarkersGroup.GPX_TYPE);
+	}
+	
+	public MapMarkersGroup getMarkersGroup(FavoriteGroup favGroup) {
+		return getMapMarkerGroupById(getMarkerGroupId(favGroup), MapMarkersGroup.FAVORITES_TYPE);
 	}
 
-
-	public void addOrEnableGroup(@NonNull MapMarkersGroup group) {
-		if (!isGroupSynced(group.getId())) {
-			markersDbHelper.addGroup(group);
-			addHistoryMarkersToGroup(group);
-			addToGroupsList(group);
-		} else if (group.isDisabled()) {
-			updateGroupDisabled(group, false);
+	
+	public MapMarkersGroup addOrEnableGpxGroup(@NonNull File file) {
+		MapMarkersGroup gr = getMapMarkerGroupById(getMarkerGroupId(file), MapMarkersGroup.GPX_TYPE);
+		if (gr == null) {
+			gr = createGPXMarkerGroup(file);
+			addGroupInternally(gr);
 		}
-		runSynchronization(group, true);
+		enableGroup(gr);
+		return gr;
 	}
+	
+	public MapMarkersGroup addOrEnableGroup(@NonNull GPXFile file) {
+		MapMarkersGroup gr = getMarkersGroup(file);
+		if (gr == null) {
+			gr = createGPXMarkerGroup(new File(file.path));
+			addGroupInternally(gr);
+		}
+		enableGroup(gr);
+		return gr;
+	}
+
+	
+	public MapMarkersGroup addOrEnableGroup(@NonNull FavoriteGroup group) {
+		MapMarkersGroup gr = getMarkersGroup(group);
+		if (gr == null) {
+			gr = createFavMarkerGroup(group);
+			addGroupInternally(gr);
+		}
+		enableGroup(gr);
+		return gr;
+	}
+	
+
+	
+	
+	public void enableGroup(@NonNull MapMarkersGroup gr) {
+		if (gr.isDisabled()) {
+			updateGroupDisabled(gr, false);
+		}
+		runSynchronization(gr);
+	}
+	
+	private void addGroupInternally(MapMarkersGroup gr) {
+		markersDbHelper.addGroup(gr);
+		addHistoryMarkersToGroup(gr);
+		addToGroupsList(gr);
+	}
+	
 
 	private void addHistoryMarkersToGroup(@NonNull MapMarkersGroup group) {
 		List<MapMarker> historyMarkers = new ArrayList<>(mapMarkersHistory);
@@ -350,7 +385,7 @@ public class MapMarkersHelper {
 		String id = group.getId();
 		if (id != null) {
 			group.wptCategories = wptCategories;
-			if (wptCategories != null && isGroupSynced(id)) {
+			if (wptCategories != null) {
 				markersDbHelper.updateGroupCategories(id, group.getWptCategoriesString());
 			}
 		}
@@ -401,7 +436,7 @@ public class MapMarkersHelper {
 
 	private void addMarkerToGroup(MapMarker marker) {
 		if (marker != null) {
-			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupById(marker.groupKey);
+			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupById(marker.groupKey, marker.getType());
 			if (mapMarkersGroup != null) {
 				mapMarkersGroup.getMarkers().add(marker);
 				updateGroup(mapMarkersGroup);
@@ -434,7 +469,7 @@ public class MapMarkersHelper {
 
 	private void removeMarkerFromGroup(MapMarker marker) {
 		if (marker != null) {
-			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupById(marker.groupKey);
+			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupById(marker.groupKey, marker.getType());
 			if (mapMarkersGroup != null) {
 				mapMarkersGroup.getMarkers().remove(marker);
 				updateGroup(mapMarkersGroup);
@@ -456,36 +491,34 @@ public class MapMarkersHelper {
 	}
 
 	@Nullable
-	public MapMarkersGroup getMapMarkerGroupById(String id) {
+	public MapMarkersGroup getMapMarkerGroupById(String id, int type) {
 		for (MapMarkersGroup group : mapMarkersGroups) {
 			if ((id == null && group.getId() == null)
 					|| (group.getId() != null && group.getId().equals(id))) {
-				return group;
+				if(type == MapMarkersGroup.ANY_TYPE || type == group.type) {
+					return group;
+				}
 			}
 		}
 		return null;
 	}
 
-	public MapMarkersGroup getOrCreateGroup(@NonNull FavoriteGroup favGroup) {
-		MapMarkersGroup group = getMapMarkerGroupById(favGroup.name);
-		if (group == null) {
-			group = new MapMarkersGroup(favGroup.name, favGroup.name, MapMarkersGroup.FAVORITES_TYPE);
-		}
-		return group;
+	private MapMarkersGroup createGPXMarkerGroup(File fl) {
+		return new MapMarkersGroup(getMarkerGroupId(fl),
+				AndroidUtils.trimExtension(fl.getName()),
+				MapMarkersGroup.GPX_TYPE);
 	}
 	
-	public MapMarkersGroup getOrCreateGroup(@NonNull File gpx) {
-		MapMarkersGroup group = getMapMarkerGroupById(getMarkerGroupId(gpx));
-		if (group == null) {
-			group = new MapMarkersGroup(getMarkerGroupId(gpx),
-					AndroidUtils.trimExtension(gpx.getName()),
-					MapMarkersGroup.GPX_TYPE);
-		}
-		return group;
+	private MapMarkersGroup createFavMarkerGroup(FavoriteGroup favGroup) {
+		return new MapMarkersGroup(favGroup.name, favGroup.name, MapMarkersGroup.FAVORITES_TYPE);
 	}
 
 	private String getMarkerGroupId(File gpx) {
 		return gpx.getAbsolutePath();
+	}
+	
+	private String getMarkerGroupId(FavoriteGroup group) {
+		return group.name;
 	}
 	
 	@NonNull
@@ -493,8 +526,9 @@ public class MapMarkersHelper {
 		List<MapMarkersGroup> res = new ArrayList<>();
 		List<SelectedGpxFile> selectedGpxFiles = ctx.getSelectedGpxHelper().getSelectedGPXFiles();
 		for (SelectedGpxFile selected : selectedGpxFiles) {
-			MapMarkersGroup group = getOrCreateGroup(new File(selected.getGpxFile().path));
-			if (!isGroupSynced(group.getId())) {
+			MapMarkersGroup search = getMarkersGroup(selected.getGpxFile());
+			if (search == null && selected.getGpxFile() != null && selected.getGpxFile().path != null) {
+				MapMarkersGroup group = createGPXMarkerGroup(new File(selected.getGpxFile().path));
 				group.disabled = true;
 				createHeaderInGroup(group);
 				res.add(group);
@@ -512,9 +546,10 @@ public class MapMarkersHelper {
 			for (TravelArticle art : savedArticles) {
 				String gpxName = travelDbHelper.getGPXName(art);
 				File path = ctx.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
-				LOG.debug("Article group " + getMarkerGroupId(path)  + " " + path.exists()) ;
-				MapMarkersGroup group = getOrCreateGroup(path);
-				if (!isGroupSynced(group.getId())) {
+				LOG.debug("Article group " + path.getAbsolutePath()  + " " + path.exists()) ;
+				MapMarkersGroup search = getMapMarkerGroupById(getMarkerGroupId(path), MapMarkersGroup.GPX_TYPE);
+				if (search == null) {
+					MapMarkersGroup group = createGPXMarkerGroup(path);
 					group.disabled = true;
 					createHeaderInGroup(group);
 					res.add(group);
@@ -971,7 +1006,7 @@ public class MapMarkersHelper {
 			file.addPoint(wpt);
 		}
 		GPXUtilities.writeGpxFile(fout, file, ctx);
-		return getMarkerGroupId(fout);
+		return fout.getAbsolutePath();
 	}
 
 	// ---------------------------------------------------------------------------------------------
@@ -1070,11 +1105,9 @@ public class MapMarkersHelper {
 	private class SyncGroupTask extends AsyncTask<Void, Void, Void> {
 
 		private MapMarkersGroup group;
-		private boolean loadGpx;
 
-		SyncGroupTask(MapMarkersGroup group, boolean loadGpx) {
+		SyncGroupTask(MapMarkersGroup group) {
 			this.group = group;
-			this.loadGpx = loadGpx;
 		}
 
 		@Override
@@ -1099,12 +1132,7 @@ public class MapMarkersHelper {
 
 		// TODO extract method from Asynctask to Helper directly
 		private void runGroupSynchronization() {
-			if (!isGroupSynced(group.getId())) {
-				return;
-			}
-
 			List<MapMarker> groupMarkers = new ArrayList<>(group.getMarkers());
-
 			if (group.getType() == MapMarkersGroup.FAVORITES_TYPE) {
 				FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.getName());
 				if (favGroup == null) {
@@ -1131,10 +1159,6 @@ public class MapMarkersHelper {
 				String gpxPath = group.getId();
 				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(gpxPath);
 				GPXFile gpx = selectedGpxFile == null ? null : selectedGpxFile.getGpxFile();
-				if (gpx == null && loadGpx) {
-					gpx = GPXUtilities.loadGPXFile(ctx, new File(gpxPath));
-					gpxHelper.selectGpxFile(gpx, true, false, false);
-				}
 				group.visible = gpx != null || group.visibleUntilRestart;
 				if (gpx == null || group.isDisabled()) {
 					removeGroupActiveMarkers(group, true);
@@ -1171,6 +1195,7 @@ public class MapMarkersHelper {
 
 	public static class MapMarkersGroup {
 
+		public static final int ANY_TYPE = -1;
 		public static final int FAVORITES_TYPE = 0;
 		public static final int GPX_TYPE = 1;
 
@@ -1200,6 +1225,10 @@ public class MapMarkersHelper {
 		}
 
 		public String getId() {
+			return id;
+		}
+		
+		public String getGpxPath() {
 			return id;
 		}
 
@@ -1318,6 +1347,12 @@ public class MapMarkersHelper {
 			this.index = index;
 		}
 
+		public int getType() {
+			return favouritePoint == null ? 
+					(wptPt == null ? MapMarkersGroup.ANY_TYPE : MapMarkersGroup.GPX_TYPE) : 
+						MapMarkersGroup.FAVORITES_TYPE;
+		}
+
 		public PointDescription getPointDescription(Context ctx) {
 			return new PointDescription(POINT_TYPE_MAP_MARKER, ctx.getString(R.string.map_marker), getOnlyName());
 		}
@@ -1405,4 +1440,7 @@ public class MapMarkersHelper {
 			return (colorIndex >= 0 && colorIndex < colorsIds.length) ? colorsIds[colorIndex] : colorsIds[0];
 		}
 	}
+
+
+
 }

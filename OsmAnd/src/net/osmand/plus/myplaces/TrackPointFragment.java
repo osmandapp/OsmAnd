@@ -455,8 +455,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 					R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_NEVER);
 			if (getGpx().path != null) {
 				final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-				final MapMarkersGroup markersGr = markersHelper.getOrCreateGroup(new File(getGpx().path));
-				final boolean synced = markersHelper.isGroupSynced(markersGr.getId());
+				final boolean synced = markersHelper.getMarkersGroup(getGpx()) != null;
 				createMenuItem(menu, SELECT_MAP_MARKERS_ID, synced ? R.string.remove_from_map_markers
 						: R.string.shared_string_add_to_map_markers, R.drawable.ic_action_flag_dark,
 						R.drawable.ic_action_flag_dark, MenuItemCompat.SHOW_AS_ACTION_NEVER);
@@ -594,22 +593,25 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
-		File gpx = new File(gpxFile.path);
-		if (gpx.exists()) {
-			MapMarkersHelper helper = app.getMapMarkersHelper();
-			helper.runSynchronization(helper.getOrCreateGroup(gpx));
+		MapMarkersHelper helper = app.getMapMarkersHelper();
+		MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
+		if (group != null) {
+			helper.runSynchronization(group);
 		}
 	}
 
 	private void addOrRemoveMapMarkersSyncGroup() {
 		final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-		final MapMarkersGroup markersGr = markersHelper.getOrCreateGroup(getGpxDataItem().getFile());
-		final boolean synced = markersHelper.isGroupSynced(markersGr.getId());
-		if (synced) {
+		
+		MapMarkersGroup markersSearch = markersHelper.getMarkersGroup(getGpx());
+		final MapMarkersGroup markersGr; 
+		if (markersSearch != null) {
+			markersGr = markersSearch;
 			markersHelper.removeMarkersGroup(markersGr);
 		} else {
-			markersHelper.addOrEnableGroup(markersGr);
+			markersGr = markersHelper.addOrEnableGroup(getGpx());
 		}
+		final boolean synced = markersGr != null;
 		getActionBarActivity().invalidateOptionsMenu();
 		GPXFile gpxFile = getTrackActivity().getGpx();
 		if (gpxFile != null) {
@@ -624,7 +626,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 					@Override
 					public void onClick(View v) {
 						if (synced) {
-							markersHelper.addOrEnableGroup(markersGr);
+							markersHelper.removeMarkersGroup(markersGr);
 							getActionBarActivity().invalidateOptionsMenu();
 						} else {
 							Bundle args = new Bundle();

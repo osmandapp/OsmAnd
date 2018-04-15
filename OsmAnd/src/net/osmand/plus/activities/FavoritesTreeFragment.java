@@ -421,15 +421,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			List<PointDescription> names = new ArrayList<>();
 			for (Map.Entry<String, Set<FavouritePoint>> entry : favoritesSelected.entrySet()) {
 				FavoriteGroup favGr = helper.getGroup(entry.getKey());
-				MapMarkersGroup markersGr = markersHelper.getOrCreateGroup(favGr);
 				if (entry.getValue().size() == favGr.points.size()) {
-					markersHelper.addOrEnableGroup(markersGr);
+					markersHelper.addOrEnableGroup(favGr);
 				} else {
 					for (FavouritePoint fp : entry.getValue()) {
 						points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
 						names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, fp.getName()));
 					}
-					markersHelper.addMapMarkers(points, names, markersGr);
+					markersHelper.addMapMarkers(points, names, null);
 					points.clear();
 					names.clear();
 				}

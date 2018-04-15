@@ -69,21 +69,13 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 			fragment.setUsedOnMap(false);
 			fragment.show(getParentFragment().getChildFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
 			dismiss();
-		} else {
-			addAndSyncGroup(createMapMarkersSyncGroup(getMyApplication(), dataItem));
+		} else if(dataItem.getFile() != null) {
+			getMyApplication().getMapMarkersHelper().addOrEnableGpxGroup(dataItem.getFile());
+			dismiss();
 		}
 	}
 
-	private MapMarkersGroup createMapMarkersSyncGroup(OsmandApplication app, GpxDataItem gpxDataItem) {
-		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
-		File gpx = gpxDataItem.getFile();
-		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpx.getAbsolutePath());
-		if (selectedGpxFile == null) {
-			GPXFile res = GPXUtilities.loadGPXFile(app, gpx);
-			gpxSelectionHelper.selectGpxFile(res, true, false);
-		}
-		return getMyApplication().getMapMarkersHelper().getOrCreateGroup(gpx);
-	}
+	
 
 	@SuppressLint("StaticFieldLeak")
 	public class ProcessGpxTask extends AsyncTask<Void, GpxDataItem, Void> {

@@ -5,7 +5,6 @@ import android.graphics.Matrix;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-
 import net.osmand.IProgress;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
@@ -15,6 +14,7 @@ import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -499,7 +499,7 @@ public class GpxSelectionHelper {
 			}
 		}
 		if (syncGroup) {
-			syncGpx(gpx);
+			syncGpxWithMarkers(gpx);
 		}
 		return sf;
 	}
@@ -516,30 +516,31 @@ public class GpxSelectionHelper {
 
 	public void clearPoints(GPXFile gpxFile) {
 		gpxFile.clearPoints();
-		syncGpx(gpxFile);
+		syncGpxWithMarkers(gpxFile);
 	}
 
 	public void addPoint(WptPt point, GPXFile gpxFile) {
 		gpxFile.addPoint(point);
-		syncGpx(gpxFile);
+		syncGpxWithMarkers(gpxFile);
 	}
 
 	public void addPoints(Collection<? extends WptPt> collection, GPXFile gpxFile) {
 		gpxFile.addPoints(collection);
-		syncGpx(gpxFile);
+		syncGpxWithMarkers(gpxFile);
 	}
 
 	public boolean removePoint(WptPt point, GPXFile gpxFile) {
 		boolean res = gpxFile.deleteWptPt(point);
-		syncGpx(gpxFile);
+		syncGpxWithMarkers(gpxFile);
 		return res;
 	}
 
-	private void syncGpx(GPXFile gpxFile) {
+	private void syncGpxWithMarkers(GPXFile gpxFile) {
 		File gpx = new File(gpxFile.path);
-		if (gpx.exists()) {
-			MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
-			mapMarkersHelper.runSynchronization(mapMarkersHelper.getOrCreateGroup(gpx));
+		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
+		MapMarkersGroup group = mapMarkersHelper.getMarkersGroup(gpxFile);
+		if (group != null) {
+			mapMarkersHelper.runSynchronization(group);
 		}
 	}
 
