@@ -158,7 +158,9 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		});
 		
 		
+		final GPXFile gpx = article.getGpxFile();
 		TextView trackButton = (TextView) mainView.findViewById(R.id.gpx_button);
+		trackButton.setText(trackButton.getText() + " (" + gpx.getPoints().size() +")");
 		trackButton.setCompoundDrawablesWithIntrinsicBounds(
 				getActiveIcon(R.drawable.ic_action_track_16), null, null, null
 		);
@@ -171,7 +173,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				}
 				WikivoyageDbHelper dbHelper = getMyApplication().getWikivoyageDbHelper();
 				File file = getMyApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR + dbHelper.getGPXName(article));
-				GPXFile gpx = article.getGpxFile();
+				
 				GPXUtilities.writeGpxFile(file, gpx, getMyApplication());
 				Bundle args = new Bundle();
 				args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, article.getContentsJson());

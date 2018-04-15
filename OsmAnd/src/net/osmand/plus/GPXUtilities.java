@@ -1290,8 +1290,10 @@ public class GPXUtilities {
 			}
 
 			serializer.endTag(null, "gpx"); //$NON-NLS-1$
-			serializer.flush();
 			serializer.endDocument();
+			serializer.flush();
+			
+			
 		} catch (RuntimeException e) {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
 			return ctx.getString(R.string.error_occurred_saving_gpx);
