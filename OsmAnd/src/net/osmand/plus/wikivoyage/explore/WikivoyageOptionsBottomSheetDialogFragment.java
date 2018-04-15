@@ -1,21 +1,19 @@
 package net.osmand.plus.wikivoyage.explore;
 
-import java.io.File;
-import java.util.List;
-
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AlertDialogLayout;
+import android.support.v7.widget.PopupMenu;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.Toast;
+
 import net.osmand.PicassoUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.WikivoyageShowImages;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -26,6 +24,9 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.wikivoyage.data.WikivoyageDbHelper;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
+
+import java.io.File;
+import java.util.List;
 
 public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -55,7 +56,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
-		final OsmandSettings.CommonPreference<Boolean> showImagesPref = app.getSettings().WIKIVOYAGE_SHOW_IMAGES;
+		final OsmandSettings.CommonPreference<WikivoyageShowImages> showImagesPref = app.getSettings().WIKIVOYAGE_SHOW_IMAGES;
 		final WikivoyageDbHelper dbHelper = app.getWikivoyageDbHelper();
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 		
@@ -77,16 +78,30 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 			
 		}
 
-		BaseBottomSheetItem showImagesItem = new BottomSheetItemWithCompoundButton.Builder()
-				.setChecked(showImagesPref.get())
+		BaseBottomSheetItem showImagesItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getString(showImagesPref.get().name))
+				.setDescriptionColorId(nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light)
 				.setIcon(getContentIcon(R.drawable.ic_type_img))
 				.setTitle(getString(R.string.download_images))
-				.setLayoutId(R.layout.bottom_sheet_item_with_switch)
+				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						showImagesPref.set(!showImagesPref.get());
-						dismiss();
+
+						final PopupMenu popup = new PopupMenu(v.getContext(), v, Gravity.END);
+						for (final WikivoyageShowImages showImages : WikivoyageShowImages.values()) {
+							MenuItem item = popup.getMenu().add(getString(showImages.name));
+							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+								@Override
+								public boolean onMenuItemClick(MenuItem item) {
+									showImagesPref.set(showImages);
+									dismiss();
+									return true;
+								}
+							});
+						}
+
+						popup.show();
 					}
 				})
 				.create();

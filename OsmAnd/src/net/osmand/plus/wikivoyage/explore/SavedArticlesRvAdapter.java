@@ -12,16 +12,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Callback;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.widgets.tools.CropRectTransformation;
+import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 
@@ -36,6 +37,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	private static final boolean USE_ALTERNATIVE_CARD = false;
 
 	private final OsmandApplication app;
+	private final OsmandSettings settings;
 
 	private final List<Object> items = new ArrayList<>();
 
@@ -50,7 +52,9 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 	SavedArticlesRvAdapter(OsmandApplication app) {
 		this.app = app;
-		int colorId = app.getSettings().isLightContent()
+		this.settings = app.getSettings();
+
+		int colorId = settings.isLightContent()
 				? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
 		IconsCache ic = app.getIconsCache();
 		readIcon = ic.getIcon(R.drawable.ic_action_read_article, colorId);
@@ -80,9 +84,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			boolean lastItem = position == getItemCount() - 1;
 			RequestCreator rc = Picasso.get()
 					.load(WikivoyageArticle.getImageUrl(article.getImageTitle(), false));
-			if (!app.getSettings().WIKIVOYAGE_SHOW_IMAGES.get()) {
-				rc.networkPolicy(NetworkPolicy.OFFLINE);
-			}
+			WikivoyageUtils.setupNetworkPolicy(settings, rc);
 			rc.transform(USE_ALTERNATIVE_CARD ? new CropRectTransformation() : new CropCircleTransformation())
 					.into(holder.icon, new Callback() {
 						@Override
