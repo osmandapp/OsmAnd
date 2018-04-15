@@ -263,7 +263,7 @@ public class TravelLocalDataHelper {
 			if (conn != null) {
 				try {
 					String query = HISTORY_TABLE_SELECT + " WHERE " + HISTORY_COL_TRAVEL_BOOK + " = ?";
-					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
+					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					SQLiteCursor cursor = conn.rawQuery(query, new String[]{travelBook});
 					if (cursor.moveToFirst()) {
 						do {
@@ -282,7 +282,7 @@ public class TravelLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
+					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					conn.execSQL("INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)",
 							new Object[]{item.cityId, item.articleTitle, item.lang,
 									item.isPartOf, item.lastAccessed, travelBook});
@@ -296,7 +296,7 @@ public class TravelLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
+					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " +
 									HISTORY_COL_ARTICLE_TITLE + " = ?, " +
 									HISTORY_COL_LANG + " = ?, " +
@@ -316,7 +316,7 @@ public class TravelLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
+					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					conn.execSQL("DELETE FROM " + HISTORY_TABLE_NAME +
 									" WHERE " + HISTORY_COL_CITY_ID + " = ?" +
 									" AND " + HISTORY_COL_TRAVEL_BOOK + " = ?",
@@ -331,7 +331,7 @@ public class TravelLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
+					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					conn.execSQL("DELETE FROM " + HISTORY_TABLE_NAME +
 									" WHERE " + HISTORY_COL_TRAVEL_BOOK + " = ?",
 							new Object[]{travelBook});
@@ -348,7 +348,7 @@ public class TravelLocalDataHelper {
 			if (conn != null) {
 				try {
 					String query = BOOKMARKS_TABLE_SELECT + " WHERE " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
-					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
+					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					SQLiteCursor cursor = conn.rawQuery(query, new String[]{travelBook});
 					if (cursor.moveToFirst()) {
 						do {
@@ -367,7 +367,7 @@ public class TravelLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
+					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					conn.execSQL("INSERT INTO " + BOOKMARKS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)",
 							new Object[]{article.cityId, article.title, article.lang,
 									article.aggregatedPartOf, article.imageTitle, article.content, travelBook});
@@ -381,7 +381,7 @@ public class TravelLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					String travelBook = context.getSettings().SELECTED_TRAVEL_BOOK.get();
+					String travelBook = context.getTravelDbHelper().getSelectedTravelBook().getName();
 					conn.execSQL("DELETE FROM " + BOOKMARKS_TABLE_NAME +
 									" WHERE " + BOOKMARKS_COL_CITY_ID + " = ?" +
 									" AND " + BOOKMARKS_COL_LANG + " = ?" +
