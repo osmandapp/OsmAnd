@@ -50,6 +50,27 @@ h2 {
     margin-bottom: 3%;
 }
 
+h2.active:after {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    position: absolute;
+    right: 1em;
+}
+
+h2:after {
+    vertical-align: middle;
+    content: "";
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    margin-top: 20px;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    position: absolute;
+    right: 1em;
+}
+
 h3 {
     color: #212121;
     font-size: 1.5em;

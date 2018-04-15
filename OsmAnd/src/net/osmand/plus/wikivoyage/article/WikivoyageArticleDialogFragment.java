@@ -24,9 +24,12 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
-import net.osmand.plus.wikivoyage.data.CustomWebViewClient;
+
+import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
+
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.util.Algorithms;
@@ -48,9 +51,44 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
 			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
 			"<link href=\"article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
-			"</head><body>\n" + "<script>" + "function scrollAnchor(id) {" +
-			"window.location.hash = id;}</script>";
-	private static final String FOOTER_INNER = "</div></body></html>";
+			"</head><body>\n";
+	private static final String FOOTER_INNER = "<script>var coll = document.getElementsByTagName(\"H2\");" +
+			"var i;" +
+			"for (i = 0; i < coll.length; i++) {" +
+			"  coll[i].addEventListener(\"click\", function() {" +
+			"    this.classList.toggle(\"active\");" +
+			"    var content = this.nextElementSibling;" +
+			"    if (content.style.display === \"block\") {" +
+			"      content.style.display = \"none\";" +
+			"    } else {" +
+			"      content.style.display = \"block\";" +
+			"    }" +
+			"  });" +
+			"}" + "function scrollAnchor(id, title) {" +
+			"openContent(title);" +
+			"window.location.hash = id;}\n" +
+			"function openContent(id) {\n" +
+			"    var doc = document.getElementById(id).parentElement;\n" +
+			"    doc.classList.toggle(\"active\");\n" +
+			"    var content = doc.nextElementSibling;\n" +
+			"    content.style.display = \"block\";\n" +
+			"    collapseActive(doc);" +
+			"}" +
+			"function collapseActive(doc) {" +
+			"    var coll = document.getElementsByTagName(\"H2\");" +
+			"    var i;" +
+			"    for (i = 0; i < coll.length; i++) {" +
+			"        var item = coll[i];" +
+			"        if (item != doc && item.classList.contains(\"active\")) {" +
+			"            item.classList.toggle(\"active\");" +
+			"            var content = item.nextElementSibling;" +
+			"            if (content.style.display === \"block\") {" +
+			"                content.style.display = \"none\";" +
+			"            }" +
+			"        }" +
+			"    }" +
+			"}</script>"
+			+ "</body></html>";
 
 	private long cityId = NO_VALUE;
 	private ArrayList<String> langs;
@@ -119,11 +157,23 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 		saveBtn = (TextView) mainView.findViewById(R.id.save_button);
 
-		boolean showImages = getSettings().WIKIVOYAGE_SHOW_IMAGES.get();
+		OsmandSettings.WikivoyageShowImages showImages = getSettings().WIKIVOYAGE_SHOW_IMAGES.get();
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
-		contentWebView.getSettings().setJavaScriptEnabled(true);
-		contentWebView.getSettings().setCacheMode(showImages ? WebSettings.LOAD_DEFAULT : WebSettings.LOAD_CACHE_ONLY);
-		contentWebView.setWebViewClient(new CustomWebViewClient(getActivity(), getFragmentManager()));
+		WebSettings webSettings = contentWebView.getSettings();
+		webSettings.setJavaScriptEnabled(true);
+		switch (showImages) {
+			case ON:
+				webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+				break;
+			case OFF:
+				webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+				break;
+			case WIFI:
+				webSettings.setCacheMode(getMyApplication().getSettings().isWifiConnected() ?
+						WebSettings.LOAD_DEFAULT : WebSettings.LOAD_CACHE_ONLY);
+				break;
+		}
+		contentWebView.setWebViewClient(new WikivoyageWebViewClient(getActivity(), getFragmentManager()));
 
 		return mainView;
 	}
@@ -144,7 +194,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == WikivoyageArticleContentsFragment.REQUEST_LINK_CODE) {
 			String link = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENTS_LINK_KEY);
-			moveToAnchor(link);
+			String title = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENTS_TITLE_KEY);
+			moveToAnchor(link, title);
 		}
 	}
 
@@ -227,8 +278,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(article), "text/html", "UTF-8", null);
 	}
 
-	private void moveToAnchor(String id) {
-		contentWebView.loadUrl("javascript:scrollAnchor(\"" + id + "\")");
+	private void moveToAnchor(String id, String title) {
+		contentWebView.loadUrl("javascript:scrollAnchor(\"" + id + "\", \"" + title.trim() + "\")");
 	}
 
 	@NonNull

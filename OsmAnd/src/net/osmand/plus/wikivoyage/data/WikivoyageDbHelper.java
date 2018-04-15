@@ -2,6 +2,7 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -73,7 +74,7 @@ public class WikivoyageDbHelper {
 		this.application = application;
 		collator = OsmAndCollator.primaryCollator();
 	}
-	
+
 	public WikivoyageLocalDataHelper getLocalDataHelper() {
 		return localDataHelper;
 	}
@@ -113,18 +114,18 @@ public class WikivoyageDbHelper {
 		}
 		return connection;
 	}
-	
+
 	public void selectTravelBook(File f) {
 		closeConnection();
 		if (f.exists()) {
 			connection = application.getSQLiteAPI().openByAbsolutePath(f.getAbsolutePath(), true);
 			selectedTravelBook = f;
 			application.getSettings().SELECTED_TRAVEL_BOOK.set(selectedTravelBook.getName());
-			localDataHelper.refreshHistoryArticles();
+			localDataHelper.refreshCachedData();
 		}
 	}
 
-	public void closeConnection() {
+	private void closeConnection() {
 		if (connection != null) {
 			connection.close();
 			connection = null;
@@ -279,7 +280,6 @@ public class WikivoyageDbHelper {
 				} while (cursor.moveToNext());
 			}
 			cursor.close();
-
 		}
 		return res;
 	}
@@ -310,7 +310,7 @@ public class WikivoyageDbHelper {
 	}
 
 	public String formatTravelBookName(File tb) {
-		if(tb == null) {
+		if (tb == null) {
 			return application.getString(R.string.shared_string_none);
 		}
 		String nm = tb.getName();
