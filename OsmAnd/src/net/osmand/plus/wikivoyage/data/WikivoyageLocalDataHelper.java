@@ -29,16 +29,15 @@ public class WikivoyageLocalDataHelper {
 		this.listener = listener;
 	}
 
-	protected WikivoyageLocalDataHelper(OsmandApplication app) {
+	WikivoyageLocalDataHelper(OsmandApplication app) {
 		dbHelper = new WikivoyageLocalDataDbHelper(app);
-		refreshHistoryArticles();
+		refreshCachedData();
 	}
 
-	public void refreshHistoryArticles() {
+	public void refreshCachedData() {
 		historyMap = dbHelper.getAllHistoryMap();
 		savedArticles = dbHelper.getSavedArticles();
 	}
-
 
 	public List<WikivoyageSearchHistoryItem> getAllHistory() {
 		List<WikivoyageSearchHistoryItem> res = new ArrayList<>(historyMap.valueCollection());
