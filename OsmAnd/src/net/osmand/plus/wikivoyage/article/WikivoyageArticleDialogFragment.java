@@ -27,7 +27,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
-import net.osmand.plus.wikivoyage.data.WikivoyageWebViewClient;
+
+import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
+
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.util.Algorithms;
