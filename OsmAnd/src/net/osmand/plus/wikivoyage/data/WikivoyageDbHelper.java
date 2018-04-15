@@ -67,16 +67,22 @@ public class WikivoyageDbHelper {
 	private File selectedTravelBook = null;
 	private List<File> existingTravelBooks = new ArrayList<>();
 	private Collator collator;
+	private WikivoyageLocalDataHelper localDataHelper;
 
 	public WikivoyageDbHelper(OsmandApplication application) {
 		this.application = application;
 		collator = OsmAndCollator.primaryCollator();
+	}
+	
+	public WikivoyageLocalDataHelper getLocalDataHelper() {
+		return localDataHelper;
 	}
 
 	public void initTravelBooks() {
 		File[] possibleFiles = application.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
 		String travelBook = application.getSettings().SELECTED_TRAVEL_BOOK.get();
 		existingTravelBooks.clear();
+		localDataHelper = new WikivoyageLocalDataHelper(application);
 		if (possibleFiles != null) {
 			for (File f : possibleFiles) {
 				if (f.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
@@ -106,6 +112,16 @@ public class WikivoyageDbHelper {
 			connection = application.getSQLiteAPI().openByAbsolutePath(selectedTravelBook.getAbsolutePath(), true);
 		}
 		return connection;
+	}
+	
+	public void selectTravelBook(File f) {
+		closeConnection();
+		if (f.exists()) {
+			connection = application.getSQLiteAPI().openByAbsolutePath(f.getAbsolutePath(), true);
+			selectedTravelBook = f;
+			application.getSettings().SELECTED_TRAVEL_BOOK.set(selectedTravelBook.getName());
+			localDataHelper.refreshHistoryArticles();
+		}
 	}
 
 	public void closeConnection() {

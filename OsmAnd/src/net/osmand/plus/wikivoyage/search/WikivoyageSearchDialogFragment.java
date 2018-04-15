@@ -147,8 +147,8 @@ public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment
 
 	private void setAdapterItems(@Nullable List<WikivoyageSearchResult> items) {
 		if (items == null || items.isEmpty()) {
-			adapter.setHistoryItems(WikivoyageLocalDataHelper
-					.getInstance(getMyApplication()).getAllHistory());
+			WikivoyageLocalDataHelper ldh = getMyApplication().getWikivoyageDbHelper().getLocalDataHelper();
+			adapter.setHistoryItems(ldh.getAllHistory());
 		} else {
 			adapter.setItems(items);
 		}

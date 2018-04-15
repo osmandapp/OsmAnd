@@ -32,20 +32,19 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 	public final static String TAG = "WikivoyageOptionsBottomSheetDialogFragment";
 
 	protected void selectTravelBookDialog() {
-		WikivoyageDbHelper dbHelper = getMyApplication().getWikivoyageDbHelper();
+		final WikivoyageDbHelper dbHelper = getMyApplication().getWikivoyageDbHelper();
 		final List<File> list = dbHelper.getExistingTravelBooks();
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		String[] ls = new String[list.size()];
 		for (int i = 0; i < ls.length; i++) {
 			ls[i] = dbHelper.formatTravelBookName(list.get(i));
 		}
-		builder.setTitle("Select travel book"); // TODO externalize
+		builder.setTitle(R.string.select_travel_book);
 		builder.setItems(ls, new OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Toast.makeText(getMyApplication(), list.get(which).getName(), Toast.LENGTH_LONG).show();
-
+				dbHelper.selectTravelBook(list.get(which));
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_dismiss, null);
@@ -64,7 +63,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 			BaseBottomSheetItem selectTravelBook = new BottomSheetItemWithDescription.Builder()
 			.setDescription(dbHelper.formatTravelBookName(dbHelper.getSelectedTravelBook()))
 			.setDescriptionColorId(nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light)
-			.setTitle("Travel book")  // TODO think & externalize
+			.setTitle(getString(R.string.shared_string_travel_book))  
 			.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
 			.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -81,7 +80,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 		BaseBottomSheetItem showImagesItem = new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(showImagesPref.get())
 				.setIcon(getContentIcon(R.drawable.ic_type_img))
-				.setTitle(getString(R.string.show_images))
+				.setTitle(getString(R.string.download_images))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -118,7 +117,8 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						WikivoyageLocalDataHelper.getInstance(app).clearHistory();
+						WikivoyageLocalDataHelper ldh = getMyApplication().getWikivoyageDbHelper().getLocalDataHelper();
+						ldh.clearHistory();
 						dismiss();
 					}
 				})

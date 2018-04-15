@@ -1,6 +1,7 @@
 package net.osmand.plus.wikivoyage.explore;
 
 import android.os.Bundle;
+import org.apache.commons.logging.Log;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -25,6 +26,7 @@ import java.util.List;
 public class SavedArticlesTabFragment extends BaseOsmAndFragment implements WikivoyageLocalDataHelper.Listener {
 
 	private WikivoyageLocalDataHelper dataHelper;
+	private final static Log LOG = PlatformUtil.getLog(SavedArticlesTabFragment.class);
 
 	private SavedArticlesRvAdapter adapter;
 
@@ -32,8 +34,8 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Wiki
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
-		dataHelper = WikivoyageLocalDataHelper.getInstance(app);
-
+		dataHelper = app.getWikivoyageDbHelper().getLocalDataHelper();
+		LOG.debug("Data helper null:"+(dataHelper!= null));
 		final View mainView = inflater.inflate(R.layout.fragment_saved_articles_tab, container, false);
 
 		adapter = new SavedArticlesRvAdapter(app);

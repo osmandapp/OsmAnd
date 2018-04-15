@@ -155,7 +155,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 	private void updateSaveButton() {
 		if (article != null) {
-			final WikivoyageLocalDataHelper helper = WikivoyageLocalDataHelper.getInstance(getMyApplication());
+			final WikivoyageLocalDataHelper helper = getMyApplication().getWikivoyageDbHelper().getLocalDataHelper();
 			final boolean saved = helper.isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			saveBtn.setText(getString(saved ? R.string.shared_string_delete : R.string.shared_string_save));
@@ -219,7 +219,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			return;
 		}
 
-		WikivoyageLocalDataHelper.getInstance(getMyApplication()).addToHistory(article);
+		WikivoyageLocalDataHelper ldh = getMyApplication().getWikivoyageDbHelper().getLocalDataHelper();
+		ldh.addToHistory(article);
 
 		updateSaveButton();
 		selectedLangTv.setText(Algorithms.capitalizeFirstLetter(selectedLang));
