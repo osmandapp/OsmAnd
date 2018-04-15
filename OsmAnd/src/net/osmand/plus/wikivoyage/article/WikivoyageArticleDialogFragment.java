@@ -105,6 +105,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private TextView saveBtn;
 	private WebView contentWebView;
 
+	private TextView articleToolbarText;
+
 
 	@SuppressLint("SetJavaScriptEnabled")
 	@Nullable
@@ -122,7 +124,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		final View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container);
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
-
+		
+		articleToolbarText = (TextView) mainView.findViewById(R.id.article_toolbar_text);
 		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
 				R.color.icon_color, R.color.wikivoyage_active_light,
@@ -233,7 +236,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			if (activity != null) {
 				WikivoyageShowPicturesDialogFragment fragment = new WikivoyageShowPicturesDialogFragment();
 				fragment.setTargetFragment(this, WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED);
-				fragment.show(activity.getSupportFragmentManager(), WikivoyageShowPicturesDialogFragment.TAG);
+				fragment.show(getFragmentManager(), WikivoyageShowPicturesDialogFragment.TAG);
 				settings.WIKIVOYAGE_SHOW_IMAGES_ASKED.set(true);
 			}
 		}
@@ -321,11 +324,12 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		if (selectedLang == null) {
 			selectedLang = langs.get(0);
 		}
-
+		articleToolbarText.setText("");
 		article = getMyApplication().getWikivoyageDbHelper().getArticle(cityId, selectedLang);
 		if (article == null) {
 			return;
 		}
+		articleToolbarText.setText(article.getTitle());
 		if(article.getGpxFile() != null) {
 			trackButton.setText(getString(R.string.points) + " (" + article.getGpxFile().getPointsSize() +")");
 		}
