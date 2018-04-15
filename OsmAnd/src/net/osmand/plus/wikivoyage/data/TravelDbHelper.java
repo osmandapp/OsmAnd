@@ -109,6 +109,7 @@ public class TravelDbHelper {
 				}
 			}
 		}
+		localDataHelper.refreshCachedData();
 	}
 
 	public File getSelectedTravelBook() {
