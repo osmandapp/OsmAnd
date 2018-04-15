@@ -2991,4 +2991,12 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="clear_all_intermediates">Zmazať všetky prechodné body</string>
     <string name="shared_string_travel">Jazda</string>
     <string name="use_two_digits_longitude">Použiť 2 číslice pre dĺžku</string>
+    <string name="online_webpage_warning">Táto stránka je dostupná len online. Chcete ju otvoriť vo webovom prehliadači?</string>
+    <string name="images_cache">Vyrovnávacia pamäť obrázkov</string>
+    <string name="delete_search_history">Vymazať históriu vyhľadávania</string>
+    <string name="show_images">Zobraziť obrázky</string>
+    <string name="download_maps_travel">Cestovné mapy</string>
+    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="article_removed">Článok odstránený</string>
+    <string name="wikivoyage_search_hint">Hľadanie: krajina, mesto, kraj</string>
     </resources>

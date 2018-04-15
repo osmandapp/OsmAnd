@@ -2566,7 +2566,7 @@
 <string name="poi_water_heater_yes">Aquecedor de água: sim</string>
 	<string name="poi_water_heater_no">Aquecedor de água: não</string>
 
-	<string name="poi_parking_surface">Tipo: superfície</string>
+	<string name="poi_parking_surface">Tipo: superficial</string>
 	<string name="poi_microwave_oven_yes">Forno microondas: sim</string>
 	<string name="poi_microwave_oven_no">Forno microondas: não</string>
 	<string name="poi_badminton">Badminton</string>
@@ -3819,4 +3819,29 @@
 	<string name="poi_service_vehicle_oil_change_yes">Troca de óleo</string>
 	<string name="poi_service_vehicle_used_car_sales_yes">Venda de carros usados</string>
 	<string name="poi_service_vehicle_brakes_yes">Freios</string>
-	</resources>
+	<string name="poi_service_vehicle_new_car_sales_yes">Venda de carros novos</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnósticos</string>
+	<string name="poi_service_vehicle_car_parts_yes">Peças automotivas</string>
+	<string name="poi_service_vehicle_batteries_yes">Baterias</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Ar condicionado</string>
+	<string name="poi_service_vehicle_body_repair_yes">Funilaria</string>
+	<string name="poi_service_vehicle_electrical_yes">Autoelétrico</string>
+	<string name="poi_service_vehicle_wheels_yes">Rodas</string>
+	<string name="poi_service_vehicle_glass_yes">Vidros</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Reparo de caminhões</string>
+	<string name="poi_service_vehicle_muffler_yes">Silenciador</string>
+	<string name="poi_service_vehicle_alignment_yes">Alinhamento</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Reparo de transmissão</string>
+	<string name="poi_service_vehicle_motor_yes">Motor</string>
+	<string name="poi_service_vehicle_insurance_yes">Seguro</string>
+	<string name="poi_service_vehicle_tyres_yes">Pneus</string>
+
+	<string name="poi_aerialway_zip_line">Tirolesa</string>
+
+	<string name="poi_climbing_adventure">Aventura com escalada</string>
+
+	<string name="poi_via_ferrata">Via ferrata</string>
+	<string name="poi_cable_number">Número do cabo</string>
+	<string name="poi_via_ferrata_scale">Dificuldade</string>
+
+</resources>
