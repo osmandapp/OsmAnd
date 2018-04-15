@@ -1719,9 +1719,9 @@
     <string name="access_hint_enter_category">Εισαγωγή κατηγορίας</string>
     <string name="access_hint_enter_description">Εισαγωγή περιγραφής.</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX αρχεία επιλέχτηκαν</string>
-    <string name="rendering_value_thin_name">Λεπτό</string>
-    <string name="rendering_value_medium_name">Μέτριο</string>
-    <string name="rendering_value_bold_name">Παχύ</string>
+    <string name="rendering_value_thin_name">Λεπτή</string>
+    <string name="rendering_value_medium_name">Μέτρια</string>
+    <string name="rendering_value_bold_name">Παχιά</string>
     <string name="report">Αναφορά</string>
     <string name="keep_showing_on_map">Διατήρηση εμφάνισης στο χάρτη</string>
     <string name="exit_without_saving">Έξοδος χωρίς αποθήκευση;</string>
@@ -2292,4 +2292,43 @@
     <string name="access_direction_audio_feedback">Κατευθύνσεις ήχου</string>
     <string name="access_direction_audio_feedback_descr">Ένδειξη κατεύθυνσης σημείου προορισμού με ήχο.</string>
     <string name="access_direction_haptic_feedback">Απτικές κατευθύνσεις</string>
+    <string name="shared_string_dont">Μην</string>
+    <string name="shared_string_do">Κάντε</string>
+    <string name="shared_string_only_with_wifi">Μόνο με ασύρματη σύνδεση</string>
+    <string name="wikivoyage_download_pics">Μεταφόρτωση εικόνων</string>
+    <string name="wikivoyage_download_pics_descr">Μπορούμε να μεταφορτώσουμε και να εμφανίσουμε εικόνες στα άρθρα και να τις αποθηκεύσουμε στη συσκευή, έτσι θα τις προσπελάσετε χωρίς σύνδεση. Μπορείτε πάντα να αλλάξετε τη ρύθμιση στο Εξερεύνηση &gt; Επιλογές.</string>
+    <string name="shared_string_wifi_only">Μόνο ασύρματα</string>
+    <string name="select_travel_book">Επιλογή ταξιδιωτικού βιβλίου</string>
+    <string name="shared_string_travel_book">Ταξιδιωτικό βιβλίο</string>
+    <string name="download_images">Μεταφόρτωση εικόνων</string>
+    <string name="access_direction_haptic_feedback_descr">Υπόδειξη κατεύθυνσης σημείου προορισμού με δόνηση.</string>
+    <string name="use_osm_live_routing_description">Ενεργοποίηση πλοήγησης για αλλαγές του OsmAnd Live.</string>
+    <string name="use_osm_live_routing">Πλοήγηση OsmAnd Live</string>
+    <string name="map_widget_bearing">Σχετική κατεύθυνση</string>
+    <string name="access_disable_offroute_recalc">Χωρίς νέο υπολογισμό διαδρομής μετά την αποχώρηση από αυτή</string>
+    <string name="access_disable_offroute_recalc_descr">Χωρίς νέο υπολογισμό μετά την αποχώρηση από τη διαδρομή.</string>
+    <string name="access_disable_wrong_direction_recalc">Χωρίς νέο υπολογισμό διαδρομής για την αντίθετη κατεύθυνση</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Χωρίς νέο υπολογισμό διαδρομής κατά τη μετακίνηση στην αντίθετη κατεύθυνση.</string>
+    <string name="access_smart_autoannounce">Έξυπνη αυτόματη ανακοίνωση</string>
+    <string name="access_smart_autoannounce_descr">Ειδοποίηση μόνο όταν η κατεύθυνση προς το σημείο προορισμού αλλάζει.</string>
+    <string name="access_autoannounce_period">Περίοδος αυτόματης ειδοποίησης</string>
+    <string name="access_autoannounce_period_descr">Ελάχιστο χρονικό διάστημα μεταξύ ανακοινώσεων.</string>
+    <string name="access_map_linked_to_location">Συνδεμένος χάρτης με την τοποθεσία</string>
+    <string name="access_collapsed_list">Συμπτυγμένος κατάλογος</string>
+    <string name="access_expanded_list">Εκτεταμένος κατάλογος</string>
+    <string name="access_empty_list">Άδειασμα καταλόγου</string>
+    <string name="access_tree_list">Δενδροειδής κατάλογος</string>
+    <string name="access_shared_string_not_installed">Μη εγκατεστημένος</string>
+    <string name="access_widget_expand">Ανάπτυξη</string>
+    <string name="access_shared_string_navigate_up">Πλοήγηση προς τα πάνω</string>
+    <string name="access_sort">Ταξινόμηση</string>
+    <string name="map_mode">Κατάσταση χάρτη</string>
+    <string name="rendering_value_fine_name">Πολύ λεπτή</string>
+    <string name="no_map_markers_found">Παρακαλούμε, προσθέστε δείκτες χάρτη μέσω του χάρτη</string>
+    <string name="no_waypoints_found">Δεν βρέθηκαν σημεία διαδρομής</string>
+    <string name="anonymous_user_hint">Ένας ανώνυμος χρήστης δεν μπορεί:
+\n- Να δημιουργήσει ομάδες,
+\n- Να συγχρονίσει ομάδες και συσκευές με τον διακομιστή,
+\n- Να διαχειριστεί ομάδες και συσκευές σε προσωπικό πίνακα στον ιστότοπο.</string>
+    <string name="storage_permission_restart_is_required">Επιτρέπεται από την εφαρμογή τώρα να γράψει σε εξωτερικό αποθηκευτικό χώρο, αλλά χρειάζεται να ξαναξεκινήσει για να γίνει αυτό.</string>
     </resources>

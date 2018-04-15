@@ -2,6 +2,7 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -9,12 +10,13 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -25,14 +27,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class TravelDbHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelDbHelper.class);
-	
+
 	private static final String ARTICLES_TABLE_NAME = "wikivoyage_articles";
 	private static final String ARTICLES_COL_ID = "article_id";
 	private static final String ARTICLES_COL_TITLE = "title";
@@ -82,7 +82,7 @@ public class TravelDbHelper {
 	public TravelDbHelper(OsmandApplication application) {
 		this.application = application;
 		collator = OsmAndCollator.primaryCollator();
-		if(application.getSettings().SELECTED_TRAVEL_BOOK.get() != null) {
+		if (application.getSettings().SELECTED_TRAVEL_BOOK.get() != null) {
 			initTravelBooks();
 		}
 	}
@@ -93,7 +93,7 @@ public class TravelDbHelper {
 	}
 
 	public void initTravelBooks() {
-		if(initialized) {
+		if (initialized) {
 			return;
 		}
 		initialized = true;
@@ -327,7 +327,7 @@ public class TravelDbHelper {
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
 		}
-		 
+
 		return res;
 	}
 
