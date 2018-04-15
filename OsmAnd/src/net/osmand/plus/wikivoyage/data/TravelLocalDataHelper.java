@@ -7,6 +7,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -37,6 +38,7 @@ public class TravelLocalDataHelper {
 	public void refreshCachedData() {
 		historyMap = dbHelper.getAllHistoryMap();
 		savedArticles = dbHelper.getSavedArticles();
+		notifySavedUpdated();
 	}
 
 	public List<WikivoyageSearchHistoryItem> getAllHistory() {
@@ -246,10 +248,11 @@ public class TravelLocalDataHelper {
 			if (oldVersion < 3) {
 				conn.execSQL("ALTER TABLE " + HISTORY_TABLE_NAME + " ADD " + HISTORY_COL_TRAVEL_BOOK + " TEXT");
 				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_TRAVEL_BOOK + " TEXT");
-				if(context.getTravelDbHelper().getSelectedTravelBook() != null) {
-					Object[] args = new Object[]{context.getTravelDbHelper().getSelectedTravelBook().getName()};
+				File selectedTravelBook = context.getTravelDbHelper().getSelectedTravelBook();
+				if (selectedTravelBook != null) {
+					Object[] args = new Object[]{selectedTravelBook.getName()};
 					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TRAVEL_BOOK + " = ?", args);
-					conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME + " SET " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?", args);	
+					conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME + " SET " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?", args);
 				}
 			}
 		}
