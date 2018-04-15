@@ -1131,7 +1131,7 @@
 	<string name="poi_denomination_shaktism">Shaktismo</string>
 	<string name="poi_denomination_shingon_shu">Shingon shu</string>
 	<string name="poi_denomination_maronite">Maronita</string>
-	<string name="poi_denomination_mahayana">Mahayana</string>
+	<string name="poi_denomination_mahayana">Maaiana</string>
 
 	<string name="poi_denomination_united">Unida</string>
 	<string name="poi_landfill_waste_nuclear">Resíduos nucleares</string>
@@ -1928,7 +1928,7 @@
 	<string name="poi_surface_grass">Superfície: grama</string>
 	<string name="poi_surface_grass_paver">Superfície: piso grama</string>
 	<string name="poi_surface_ground">Superfície: chão</string>
-	<string name="poi_surface_dirt">Superfície: solo</string>
+	<string name="poi_surface_dirt">Superfície: terra</string>
 	<string name="poi_surface_mud">Superfície: lama</string>
 	<string name="poi_surface_ice">Superfície: gelo</string>
 	<string name="poi_surface_salt">Superfície: sal</string>
@@ -3568,7 +3568,7 @@
 
 	<string name="poi_location_underground">Localização: subterrâneo</string>
 	<string name="poi_location_underwater">Localização: submerso</string>
-	<string name="poi_location_overground">Localização: superfície</string>
+	<string name="poi_location_overground">Localização: superficial</string>
 	<string name="poi_location_overhead">Localização: suspenso</string>
 	<string name="poi_location_roof">Localização: teto</string>
 	<string name="poi_location_rooftop">Localização: telhado</string>
