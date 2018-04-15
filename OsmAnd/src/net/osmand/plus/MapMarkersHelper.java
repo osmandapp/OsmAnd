@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
@@ -38,6 +39,8 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.apache.commons.logging.Log;
+
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 
 public class MapMarkersHelper {
@@ -48,7 +51,10 @@ public class MapMarkersHelper {
 	public static final int BY_DISTANCE_DESC = 1;
 	public static final int BY_DISTANCE_ASC = 2;
 	public static final int BY_DATE_ADDED_DESC = 3;
+	
 	public static final int BY_DATE_ADDED_ASC = 4;
+	
+	private static final Log LOG = PlatformUtil.getLog(MapMarkersHelper.class);
 
 	@Retention(RetentionPolicy.SOURCE)
 	@IntDef({BY_NAME, BY_DISTANCE_DESC, BY_DISTANCE_ASC, BY_DATE_ADDED_DESC, BY_DATE_ADDED_ASC})
@@ -296,19 +302,13 @@ public class MapMarkersHelper {
 		});
 	}
 
-	public boolean isSynced(SelectedGpxFile gpxFile) {
-		List<WptPt> gpxPoints = gpxFile.getGpxFile().getPoints();
-		for (WptPt wptPt : gpxPoints) {
-			if (getMapMarker(wptPt) != null) {
-				return true;
-			}
+	public MapMarkersGroup getMarkersGroup(SelectedGpxFile gpxFile) {
+		if(gpxFile.getGpxFile() == null) {
+			return null;
 		}
-		return false;
+		return getMapMarkerGroupById(getMarkerGroupId(new File(gpxFile.getGpxFile().path)));
 	}
 
-	public boolean isSynced(FavouritePoint favouritePoint) {
-		return getMapMarker(favouritePoint) != null;
-	}
 
 	public void addOrEnableGroup(@NonNull MapMarkersGroup group) {
 		if (!isGroupSynced(group.getId())) {
@@ -318,7 +318,7 @@ public class MapMarkersHelper {
 		} else if (group.isDisabled()) {
 			updateGroupDisabled(group, false);
 		}
-		runSynchronization(group);
+		runSynchronization(group, true);
 	}
 
 	private void addHistoryMarkersToGroup(@NonNull MapMarkersGroup group) {
@@ -473,17 +473,21 @@ public class MapMarkersHelper {
 		}
 		return group;
 	}
-
+	
 	public MapMarkersGroup getOrCreateGroup(@NonNull File gpx) {
-		MapMarkersGroup group = getMapMarkerGroupById(gpx.getAbsolutePath());
+		MapMarkersGroup group = getMapMarkerGroupById(getMarkerGroupId(gpx));
 		if (group == null) {
-			group = new MapMarkersGroup(gpx.getAbsolutePath(),
+			group = new MapMarkersGroup(getMarkerGroupId(gpx),
 					AndroidUtils.trimExtension(gpx.getName()),
 					MapMarkersGroup.GPX_TYPE);
 		}
 		return group;
 	}
 
+	private String getMarkerGroupId(File gpx) {
+		return gpx.getAbsolutePath();
+	}
+	
 	@NonNull
 	public List<MapMarkersGroup> getGroupsForDisplayedGpx() {
 		List<MapMarkersGroup> res = new ArrayList<>();
@@ -508,7 +512,8 @@ public class MapMarkersHelper {
 			for (TravelArticle art : savedArticles) {
 				String gpxName = travelDbHelper.getGPXName(art);
 				File path = ctx.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
-				MapMarkersGroup group = getOrCreateGroup(new File(path.getAbsolutePath()));
+				LOG.debug("Article group " + getMarkerGroupId(path)  + " " + path.exists()) ;
+				MapMarkersGroup group = getOrCreateGroup(path);
 				if (!isGroupSynced(group.getId())) {
 					group.disabled = true;
 					createHeaderInGroup(group);
@@ -966,7 +971,7 @@ public class MapMarkersHelper {
 			file.addPoint(wpt);
 		}
 		GPXUtilities.writeGpxFile(fout, file, ctx);
-		return fout.getAbsolutePath();
+		return getMarkerGroupId(fout);
 	}
 
 	// ---------------------------------------------------------------------------------------------

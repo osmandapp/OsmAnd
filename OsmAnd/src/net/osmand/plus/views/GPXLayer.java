@@ -180,7 +180,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			SelectedGpxFile gpxFile = pointFileMap.get(objectInMotion);
 			if (gpxFile != null) {
-				drawBigPoint(canvas, objectInMotion, getFileColor(gpxFile), pf.x, pf.y, isSynced(gpxFile));
+				drawBigPoint(canvas, objectInMotion, getFileColor(gpxFile), pf.x, pf.y, isSyncedWithMarkers(gpxFile));
 			}
 		}
 	}
@@ -362,7 +362,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				List<WptPt> fullObjects = new ArrayList<>();
 				@ColorInt
 				int fileColor = getFileColor(g);
-				boolean synced = isSynced(g);
+				boolean synced = isSyncedWithMarkers(g);
 				for (WptPt o : pts) {
 					if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
 							&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right
@@ -531,8 +531,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		return g.getGpxFile().getPoints();
 	}
 
-	private boolean isSynced(SelectedGpxFile g) {
-		return mapMarkersHelper.isSynced(g);
+	private boolean isSyncedWithMarkers(SelectedGpxFile g) {
+		return mapMarkersHelper.getMarkersGroup(g) != null;
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
