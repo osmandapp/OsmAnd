@@ -27,7 +27,7 @@ import java.util.List;
 
 public class SavedArticlesTabFragment extends BaseOsmAndFragment implements WikivoyageLocalDataHelper.Listener {
 
-	private static final Log LOG = PlatformUtil.getLog(SavedArticlesTabFragment.class);
+	protected static final Log LOG = PlatformUtil.getLog(SavedArticlesTabFragment.class);
 
 	private WikivoyageLocalDataHelper dataHelper;
 
@@ -38,7 +38,6 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Wiki
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
 		dataHelper = app.getWikivoyageDbHelper().getLocalDataHelper();
-		LOG.debug("Data helper null:" + (dataHelper != null));
 
 		final View mainView = inflater.inflate(R.layout.fragment_saved_articles_tab, container, false);
 

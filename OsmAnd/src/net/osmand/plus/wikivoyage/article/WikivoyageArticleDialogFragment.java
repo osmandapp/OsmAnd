@@ -97,9 +97,11 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private String selectedLang;
 	private WikivoyageArticle article;
 
+	private TextView trackButton;
 	private TextView selectedLangTv;
 	private TextView saveBtn;
 	private WebView contentWebView;
+
 
 	@SuppressLint("SetJavaScriptEnabled")
 	@Nullable
@@ -158,9 +160,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		});
 		
 		
-		final GPXFile gpx = article.getGpxFile();
-		TextView trackButton = (TextView) mainView.findViewById(R.id.gpx_button);
-		trackButton.setText(trackButton.getText() + " (" + gpx.getPoints().size() +")");
+		trackButton = (TextView) mainView.findViewById(R.id.gpx_button);
 		trackButton.setCompoundDrawablesWithIntrinsicBounds(
 				getActiveIcon(R.drawable.ic_action_track_16), null, null, null
 		);
@@ -171,6 +171,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				if (article == null || fm == null) {
 					return;
 				}
+				final GPXFile gpx = article.getGpxFile();
 				WikivoyageDbHelper dbHelper = getMyApplication().getWikivoyageDbHelper();
 				File file = getMyApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR + dbHelper.getGPXName(article));
 				
@@ -179,7 +180,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, article.getContentsJson());
 				Intent newIntent = new Intent(getActivity(), getMyApplication().getAppCustomization().getTrackActivity());
 				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpx.path);
-				newIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
+				// newIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(newIntent);
 			}
@@ -298,6 +299,9 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		article = getMyApplication().getWikivoyageDbHelper().getArticle(cityId, selectedLang);
 		if (article == null) {
 			return;
+		}
+		if(article.getGpxFile() != null) {
+			trackButton.setText(trackButton.getText() + " (" + article.getGpxFile().getPointsSize() +")");
 		}
 
 		WikivoyageLocalDataHelper ldh = getMyApplication().getWikivoyageDbHelper().getLocalDataHelper();

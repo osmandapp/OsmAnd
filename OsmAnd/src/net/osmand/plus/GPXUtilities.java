@@ -811,7 +811,7 @@ public class GPXUtilities {
 			return points.isEmpty();
 		}
 
-		int getPointsSize() {
+		public int getPointsSize() {
 			return points.size();
 		}
 
