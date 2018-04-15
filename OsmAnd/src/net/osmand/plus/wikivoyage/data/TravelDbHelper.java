@@ -82,13 +82,10 @@ public class TravelDbHelper {
 	public TravelDbHelper(OsmandApplication application) {
 		this.application = application;
 		collator = OsmAndCollator.primaryCollator();
-		if (application.getSettings().SELECTED_TRAVEL_BOOK.get() != null) {
-			initTravelBooks();
-		}
+		localDataHelper = new TravelLocalDataHelper(application);
 	}
 
 	public TravelLocalDataHelper getLocalDataHelper() {
-		initTravelBooks();
 		return localDataHelper;
 	}
 
@@ -100,7 +97,6 @@ public class TravelDbHelper {
 		File[] possibleFiles = application.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
 		String travelBook = application.getSettings().SELECTED_TRAVEL_BOOK.get();
 		existingTravelBooks.clear();
-		localDataHelper = new TravelLocalDataHelper(application);
 		if (possibleFiles != null) {
 			for (File f : possibleFiles) {
 				if (f.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
