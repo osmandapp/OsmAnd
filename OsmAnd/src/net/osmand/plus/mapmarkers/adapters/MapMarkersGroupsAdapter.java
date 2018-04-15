@@ -418,7 +418,11 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 								}
 							}
 						}
-						mapMarkersHelper.runSynchronization(group);
+						if(!disabled) {
+							mapMarkersHelper.enableGroup(group);
+						} else {
+							mapMarkersHelper.runSynchronization(group);
+						}
 
 
 						if (disabled) {
