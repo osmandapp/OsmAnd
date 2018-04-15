@@ -250,7 +250,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return nightMode ? R.drawable.bg_bottom_sheet_sides_landscape_dark : R.drawable.bg_bottom_sheet_sides_landscape_light;
 	}
 
-	protected boolean isNightMode() {
+	private boolean isNightMode() {
 		if (usedOnMap) {
 			return getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		}
