@@ -1682,196 +1682,196 @@
     <string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Navigation</string>
     <string name="osmand_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
     <string name="osmand_long_description_1000_chars">
-		OsmAnd (OSM Automated Navigation Directions)
+		OsmAnd (OSM Automated Navigation Directions)\n\n
 
-		OsmAnd is an open source software navigation app with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.
+		OsmAnd is an open source software navigation app with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.\n\n
 
-		Some of the core features:
-		- Complete offline functionality (store downloaded vector or tile maps in the device storage)
-		- Compact offline vector maps for the whole world available
-		- Download of country or region maps directly from the app
-		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transport stops, additional maps with customizable transparency
-		- Offline search for addresses and places (POIs)
-		- Offline routing for medium-range distances 
-		- Car, bicycle, and pedestrian modes with optional:
-		-  Automated day/night view switching
-		-  Speed-dependent map zooming
-		-  Map alignment according to compass or direction of motion
-		-  Lane guidance, speed limit display, recorded and TTS voices
+		Some of the core features:\n
+		- Complete offline functionality (store downloaded vector or tile maps in the device storage)\n
+		- Compact offline vector maps for the whole world available\n
+		- Download of country or region maps directly from the app\n
+		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transport stops, additional maps with customizable transparency\n
+		- Offline search for addresses and places (POIs)\n
+		- Offline routing for medium-range distances\n
+		- Car, bicycle, and pedestrian modes with optional:\n
+		-  Automated day/night view switching\n
+		-  Speed-dependent map zooming\n
+		-  Map alignment according to compass or direction of motion\n
+		-  Lane guidance, speed limit display, recorded and TTS voices\n\n
 
-		Limitations of this free version of OsmAnd:
-		- Number of map downloads limited
-		- No offline access to Wikipedia POIs
+		Limitations of this free version of OsmAnd:\n
+		- Number of map downloads limited\n
+		- No offline access to Wikipedia POIs\n\n
 
 		OsmAnd is actively being developed and our project and its continued progress relies on financial contributions for development and testing of new functionality. Please consider buying OsmAnd+, or funding specific new features or making a general donation on https://osmand.net.
 	</string>
     <string name="osmand_extended_description_part1">
-    OsmAnd (OSM Automated Navigation Directions) is a map and navigation app with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data.
+    OsmAnd (OSM Automated Navigation Directions) is a map and navigation app with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data.\n\n
 
     Enjoy voice and optical navigator, viewing POIs (points of interest), creating and managing GPX tracks, using contour lines visualization and altitude info (through plugin), a choice between driving, cycling, pedestrian modes, OSM editing and much more.
     </string>
     <string name="osmand_extended_description_part2">
-        GPS navigation
-        • You can choose between offline (no roaming charges when you are abroad) or online (faster) mode
-        • Turn-by-turn voice guidance leads you along the way (recorded and synthesized voices)
-        • The route gets rebuilt whenever you deviate from it
-        • Lane guidance, street names, and estimated time of arrival will help along the way
-        • To make your trip safer, day/night mode switches automatically
-        • You can choose to show speed limits, and get reminders if you exceed it
-        • Map zoom adjusts to your speed
-        • You can searches destinations by address, by type (e.g: parking, restaurant, hotel, gas station, museum), or by geographical coordinates
-        • Supports intermediate points on your itinerary
-        • You can record your own or upload a GPX track and follow it
+        GPS navigation\n
+        • You can choose between offline (no roaming charges when you are abroad) or online (faster) mode\n
+        • Turn-by-turn voice guidance leads you along the way (recorded and synthesized voices)\n
+        • The route gets rebuilt whenever you deviate from it\n
+        • Lane guidance, street names, and estimated time of arrival will help along the way\n
+        • To make your trip safer, day/night mode switches automatically\n
+        • You can choose to show speed limits, and get reminders if you exceed it\n
+        • Map zoom adjusts to your speed\n
+        • You can search for destinations by address, type (e.g: parking, restaurant, hotel, gas station, museum), or geographical coordinates\n
+        • Supports intermediate points on your itinerary\n
+        • You can record your own or upload a GPX track and follow it\n
     </string>
     <string name="osmand_extended_description_part3">
-        Map
-        • Displays POIs (point of interests) around you
-        • Adjusts the map to your direction of motion (or compass)
-        • Shows where you are and where you are looking at
-        • Share your location so that your friends can find you
-        • Keeps your most important places in \'Favorites\'
-        • Allows you to choose how to display names on the map: In English, local, or phonetic spelling
-        • Displays specialized online tiles, satellite view (from Bing), different overlays like touring/navigation GPX tracks and additional layers with customizable transparency
+        Map\n
+        • Displays POIs (point of interests) around you\n
+        • Adjusts the map to your direction of motion (or compass)\n
+        • Shows where you are and where you are looking at\n
+        • Share your location so that your friends can find you\n
+        • Keeps your most important places in \'Favorites\'\n
+        • Allows you to choose how to display names on the map: In English, local, or phonetic spelling\n
+        • Displays specialized online tiles, satellite view (from Bing), different overlays like touring/navigation GPX tracks and additional layers with customizable transparency\n
     </string>
     <string name="osmand_extended_description_part4">
-        Skiing
+        Skiing\n
         OsmAnd ski maps plugin enables you to see ski tracks with level of complexity and some additional information, like location of lifts and other facilities.
     </string>
     <string name="osmand_extended_description_part5">
-        Cycling
-        • You can find cycling paths on the map
-        • GPS navigation in cycling mode builds your route using cycling paths
-        • You can see your speed and altitude
-        • GPX recording option enables you to record your trip and share it
+        Cycling\n
+        • You can find cycling paths on the map\n
+        • GPS navigation in cycling mode builds your route using cycling paths\n
+        • You can see your speed and altitude\n
+        • GPX recording option enables you to record your trip and share it\n
         • Via an additional plugin you can enable contour lines and hillshading
     </string>
     <string name="osmand_extended_description_part6">
-        Walking, hiking, city tour
-        • The map shows you walking and hiking paths
-        • Wikipedia in your preferred language can tell you a lot during a city tour
-        • Public transport stops (bus, tram, train),  including line names, help to navigate in a new city
-        • GPS navigation in pedestrian mode builds your route using walking paths
-        • You can upload and follow a GPX route or record and share your own
+        Walking, hiking, city tour\n
+        • The map shows you walking and hiking paths\n
+        • Wikipedia in your preferred language can tell you a lot during a city tour\n
+        • Public transport stops (bus, tram, train),  including line names, help to navigate in a new city\n
+        • GPS navigation in pedestrian mode builds your route using walking paths\n
+        • You can upload and follow a GPX route or record and share your own\n
     </string>
     <string name="osmand_extended_description_part7">
-        Contribute to OSM
-        • Report data bugs
-        • Upload GPX tracks to OSM directly from the app
-        • Add POIs and directly upload them to OSM (or later if offline)
+        Contribute to OSM\n
+        • Report data bugs\n
+        • Upload GPX tracks to OSM directly from the app\n
+        • Add POIs and directly upload them to OSM (or later if offline)\n
     </string>
     <string name="osmand_extended_description_part8">
-        OsmAnd is open-source and actively being developed. Everyone can contribute to the app by reporting bugs, improving translations or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund coding and testing of new functionalities.
-        Approximate map coverage and quality:
-        • Western Europe: ****
-        • Eastern Europe: ***
-        • Russia: ***
-        • North America: ***
-        • South America: **
-        • Asia: **
-        • Japan &amp; Korea: ***
-        • Middle East: **
-        • Africa: **
-        • Antarctica: *
-        Most countries around the globe are available for download!
+        OsmAnd is open-source and actively being developed. Everyone can contribute to the app by reporting bugs, improving translations or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund coding and testing of new functionalities.\n
+        Approximate map coverage and quality:\n
+        • Western Europe: ****\n
+        • Eastern Europe: ***\n
+        • Russia: ***\n
+        • North America: ***\n
+        • South America: **\n
+        • Asia: **\n
+        • Japan &amp; Korea: ***\n
+        • Middle East: **\n
+        • Africa: **\n
+        • Antarctica: *\n
+        Most countries around the globe are available for download!\n
         Get a reliable navigator in your country - be it France, Germany, Mexico, UK, Spain, Netherlands, USA, Russia, Brazil or any other.
     </string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Maps &amp; Navigation</string>
     <string name="osmand_plus_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
     <string name="osmand_plus_long_description_1000_chars">
-		OsmAnd+ (OSM Automated Navigation Directions)
+		OsmAnd+ (OSM Automated Navigation Directions)\n\n
 
-		OsmAnd+ is an open source software navigation app with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline use. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.
+		OsmAnd+ is an open source software navigation app with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline use. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.\n\n
 
-		OsmAnd+ is the paid app version, by buying it you support the project, fund the development of new features, and receive the latest updates.
+		OsmAnd+ is the paid app version, by buying it you support the project, fund the development of new features, and receive the latest updates.\n\n
 
-		Some of the core features:
-		- Complete offline functionality (store downloaded vector or tile maps in the device storage)
-		- Compact offline vector maps for the whole world available
-		- Unlimited downloading of country or region maps directly from the app
-		- Offline Wikipedia feature (download Wikipedia POIs), great for sightseeing
-		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transport stops, additional maps with customizable transparency
-		- Offline search for addresses and places (POIs)
-		- Offline routing for medium-range distances
-		- Car, bicycle, and pedestrian modes with optional:
-		-  Automated day/night view switching
-		-  Speed-dependent map zooming
-		-  Map alignment according to compass or direction of motion
-		-  Lane guidance, speed limit display, recorded and TTS voices
+		Some of the core features:\n
+		- Complete offline functionality (store downloaded vector or tile maps in the device storage)\n
+		- Compact offline vector maps for the whole world available\n
+		- Unlimited downloading of country or region maps directly from the app\n
+		- Offline Wikipedia feature (download Wikipedia POIs), great for sightseeing\n
+		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transport stops, additional maps with customizable transparency\n\n
+		- Offline search for addresses and places (POIs)\n
+		- Offline routing for medium-range distances\n
+		- Car, bicycle, and pedestrian modes with optional:\n
+		-  Automated day/night view switching\n
+		-  Speed-dependent map zooming\n
+		-  Map alignment according to compass or direction of motion\n
+		-  Lane guidance, speed limit display, recorded and TTS voices\n
 	</string>
     <string name="osmand_plus_extended_description_part1">
-        OsmAnd+ (OSM Automated Navigation Directions) is a map and navigation app with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data.
-        Enjoy voice and optical navigation, viewing POIs (points of interest), creating and managing GPX tracks, using contour lines visualization and altitude info, a choice between driving, cycling, pedestrian modes, OSM editing and much more.
+        OsmAnd+ (OSM Automated Navigation Directions) is a map and navigation app with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data.\n
+        Enjoy voice and optical navigation, viewing POIs (points of interest), creating and managing GPX tracks, using contour lines visualization and altitude info, a choice between driving, cycling, pedestrian modes, OSM editing and much more.\n\n
 
-        OsmAnd+ is the paid app version. By buying it, you support the project, fund the development of new features, and receive the latest updates.
+        OsmAnd+ is the paid app version. By buying it, you support the project, fund the development of new features, and receive the latest updates.\n\n
 
         Some of the main features:
     </string>
     <string name="osmand_plus_extended_description_part2">
-        Navigation
-        • Works online (fast) or offline (no roaming charges when you are abroad)
-        • Turn-by-turn voice guidance (recorded and synthesized voices)
-        • Optional lane guidance, street name display, and estimated time of arrival
-        • Supports intermediate points on your itinerary
-        • Automatic re-routing whenever you deviate from the route
-        • Search for places by address, by type (e.g: restaurant, hotel, gas station, museum), or by geographical coordinates
+        Navigation\n
+        • Works online (fast) or offline (no roaming charges when you are abroad)\n
+        • Turn-by-turn voice guidance (recorded and synthesized voices)\n
+        • Optional lane guidance, street name display, and estimated time of arrival\n
+        • Supports intermediate points on your itinerary\n
+        • Automatic re-routing whenever you deviate from the route\n
+        • Search for places by address, by type (e.g: restaurant, hotel, gas station, museum), or by geographical coordinates\n
     </string>
     <string name="osmand_plus_extended_description_part3">
-        Map Viewing
-        • Display your position and orientation
-        • Optionally align the picture according to compass or your direction of motion
-        • Save your most important places as Favorites
-        • Display POIs (point of interests) around you
-        • Display specialized online tiles, satellite view (from Bing), different overlays like touring/navigation GPX tracks and additional layers with customizable transparency
-        • Optionally display place names in English, local, or phonetic spelling
+        Map Viewing\n
+        • Display your position and orientation\n
+        • Optionally align the picture according to compass or your direction of motion\n
+        • Save your most important places as favorites\n
+        • Display POIs (point of interests) around you\n
+        • Display specialized online tiles, satellite view (from Bing), different overlays like touring/navigation GPX tracks and additional layers with customizable transparency\n
+        • Optionally display place names in English, local, or phonetic spelling\n
     </string>
     <string name="osmand_plus_extended_description_part4">
-        Use OSM and Wikipedia Data
-        • High-quality information from the best collaborative projects of the world
-        • OSM data available per country or region
-        • Wikipedia POIs, great for sightseeing
-        • Unlimited free downloads, directly from the app
-        • Compact offline vector maps updated at least once a month
+        Use OSM and Wikipedia Data\n
+        • High-quality information from the best collaborative projects of the world\n
+        • OSM data available per country or region\n
+        • Wikipedia POIs, great for sightseeing\n
+        • Unlimited free downloads, directly from the app\n
+        • Compact offline vector maps updated at least once a month\n\n
 
         • Selection between complete region data and just road network (Example: All of Japan is 700 MB or 200 MB for the road network part thereof)
     </string>
     <string name="osmand_plus_extended_description_part5">
-        Safety Features
-        • Optional automated day/night view switching
-        • Optional speed limit display, with reminder if you exceed it
-        • Optional speed-dependent zooming
-        • Share your location so that your friends can find you
+        Safety Features\n
+        • Optional automated day/night view switching\n
+        • Optional speed limit display, with reminder if you exceed it\n
+        • Optional speed-dependent zooming\n
+        • Share your location so that your friends can find you\n
     </string>
     <string name="osmand_plus_extended_description_part6">
-        Bicycle and Pedestrian Features
-        • Viewing foot, hiking, and bike paths, great for outdoor activities
-        • Special routing and display modes for bike and pedestrian
-        • Optional public transport stops (bus, tram, train) including line names
-        • Optional trip recording to local GPX file or online service
-        • Optional speed and altitude display
+        Bicycle and Pedestrian Features\n
+        • Viewing foot, hiking, and bike paths, great for outdoor activities\n
+        • Special routing and display modes for bike and pedestrian\n
+        • Optional public transport stops (bus, tram, train) including line names\n
+        • Optional trip recording to local GPX file or online service\n
+        • Optional speed and altitude display\n
         • Display of contour lines and hillshading (via additional plugin)
     </string>
     <string name="osmand_plus_extended_description_part7">
-        Directly Contribute to OSM
-        • Report data bugs
-        • Upload GPX tracks to OSM directly from the app
-        • Add POIs and directly upload them to OSM (or later if offline)
-        • Optional trip recording also in background mode (while device is in sleep mode)
+        Directly Contribute to OSM\n
+        • Report data bugs\n
+        • Upload GPX tracks to OSM directly from the app\n
+        • Add POIs and directly upload them to OSM (or later if offline)\n
+        • Optional trip recording also in background mode (while device is in sleep mode)\n
         OsmAnd is open-source software in active development. Everyone can contribute to the app by reporting bugs, improving translations or coding new features or user interaction. The project progress also relies on financial contributions for coding and testing new functionality.
     </string>
     <string name="osmand_plus_extended_description_part8">
-        Approximate map coverage and quality:
-        • Western Europe: ****
-        • Eastern Europe: ***
-        • Russia: ***
-        • North America: ***
-        • South America: **
-        • Asia: **
-        • Japan &amp; Korea: ***
-        • Middle East: **
-        • Africa: **
-        • Antarctica: *
-        Most countries around the globe available as downloads!
-        From Afghanistan to Zimbabwe, from Australia to the USA. Argentina, Brazil, Canada, France, Germany, Mexico, UK, Spain, …
+        Approximate map coverage and quality:\n
+        • Western Europe: ****\n
+        • Eastern Europe: ***\n
+        • Russia: ***\n
+        • North America: ***\n
+        • South America: **\n
+        • Asia: **\n
+        • Japan &amp; Korea: ***\n
+        • Middle East: **\n
+        • Africa: **\n
+        • Antarctica: *\n
+        Most countries around the globe available as downloads\n
+        From Afghanistan to Zimbabwe, from Australia to the USA. Argentina, Brazil, Canada, France, Germany, Mexico, UK, Spain, …\n
     </string>
     <string name="filterpoi_activity">Create POI filter</string>
     <string name="recalculate_route_to_your_location">Transport mode:</string>
