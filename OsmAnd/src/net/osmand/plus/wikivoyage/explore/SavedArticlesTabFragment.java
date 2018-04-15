@@ -37,7 +37,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Wiki
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
-		dataHelper = app.getWikivoyageDbHelper().getLocalDataHelper();
+		dataHelper = app.getTravelDbHelper().getLocalDataHelper();
 
 		final View mainView = inflater.inflate(R.layout.fragment_saved_articles_tab, container, false);
 

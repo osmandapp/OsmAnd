@@ -191,7 +191,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 					Object item = getItemByPosition();
 					if (item != null && item instanceof WikivoyageArticle) {
 						final WikivoyageArticle article = (WikivoyageArticle) item;
-						final WikivoyageLocalDataHelper ldh = app.getWikivoyageDbHelper().getLocalDataHelper();;
+						final WikivoyageLocalDataHelper ldh = app.getTravelDbHelper().getLocalDataHelper();;
 						ldh.removeArticleFromSaved(article);
 						Snackbar snackbar = Snackbar.make(itemView, R.string.article_removed, Snackbar.LENGTH_LONG)
 								.setAction(R.string.shared_string_undo, new View.OnClickListener() {

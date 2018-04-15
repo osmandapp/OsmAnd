@@ -29,9 +29,9 @@ import org.apache.commons.logging.Log;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
-public class WikivoyageDbHelper {
+public class TravelDbHelper {
 
-	private static final Log LOG = PlatformUtil.getLog(WikivoyageDbHelper.class);
+	private static final Log LOG = PlatformUtil.getLog(TravelDbHelper.class);
 	
 	private static final String ARTICLES_TABLE_NAME = "wikivoyage_articles";
 	private static final String ARTICLES_COL_ID = "article_id";
@@ -79,7 +79,7 @@ public class WikivoyageDbHelper {
 	private boolean initialized = false;
 
 
-	public WikivoyageDbHelper(OsmandApplication application) {
+	public TravelDbHelper(OsmandApplication application) {
 		this.application = application;
 		collator = OsmAndCollator.primaryCollator();
 		if(application.getSettings().SELECTED_TRAVEL_BOOK.get() != null) {

@@ -246,8 +246,8 @@ public class WikivoyageLocalDataHelper {
 			if (oldVersion < 3) {
 				conn.execSQL("ALTER TABLE " + HISTORY_TABLE_NAME + " ADD " + HISTORY_COL_TRAVEL_BOOK + " TEXT");
 				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_TRAVEL_BOOK + " TEXT");
-				if(context.getWikivoyageDbHelper().getSelectedTravelBook() != null) {
-					Object[] args = new Object[]{context.getWikivoyageDbHelper().getSelectedTravelBook().getName()};
+				if(context.getTravelDbHelper().getSelectedTravelBook() != null) {
+					Object[] args = new Object[]{context.getTravelDbHelper().getSelectedTravelBook().getName()};
 					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TRAVEL_BOOK + " = ?", args);
 					conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME + " SET " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?", args);	
 				}

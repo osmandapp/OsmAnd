@@ -21,7 +21,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.wikivoyage.data.WikivoyageDbHelper;
+import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 
 import java.io.File;
@@ -35,7 +35,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 	public void createMenuItems(Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
 		final OsmandSettings.CommonPreference<WikivoyageShowImages> showImagesPref = app.getSettings().WIKIVOYAGE_SHOW_IMAGES;
-		final WikivoyageDbHelper dbHelper = app.getWikivoyageDbHelper();
+		final TravelDbHelper dbHelper = app.getTravelDbHelper();
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 
@@ -110,7 +110,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						WikivoyageLocalDataHelper ldh = getMyApplication().getWikivoyageDbHelper().getLocalDataHelper();
+						WikivoyageLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();
 						ldh.clearHistory();
 						dismiss();
 					}
@@ -120,7 +120,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 	}
 
 	protected void selectTravelBookDialog() {
-		final WikivoyageDbHelper dbHelper = getMyApplication().getWikivoyageDbHelper();
+		final TravelDbHelper dbHelper = getMyApplication().getTravelDbHelper();
 		final List<File> list = dbHelper.getExistingTravelBooks();
 		String[] ls = new String[list.size()];
 		for (int i = 0; i < ls.length; i++) {

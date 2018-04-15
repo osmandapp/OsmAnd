@@ -35,7 +35,7 @@ import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
-import net.osmand.plus.wikivoyage.data.WikivoyageDbHelper;
+import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.util.Algorithms;
 
@@ -178,7 +178,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 					return;
 				}
 				final GPXFile gpx = article.getGpxFile();
-				WikivoyageDbHelper dbHelper = getMyApplication().getWikivoyageDbHelper();
+				TravelDbHelper dbHelper = getMyApplication().getTravelDbHelper();
 				File file = getMyApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR + dbHelper.getGPXName(article));
 				
 				GPXUtilities.writeGpxFile(file, gpx, getMyApplication());
@@ -267,7 +267,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 	private void updateSaveButton() {
 		if (article != null) {
-			final WikivoyageLocalDataHelper helper = getMyApplication().getWikivoyageDbHelper().getLocalDataHelper();
+			final WikivoyageLocalDataHelper helper = getMyApplication().getTravelDbHelper().getLocalDataHelper();
 			final boolean saved = helper.isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			saveBtn.setText(getString(saved ? R.string.shared_string_delete : R.string.shared_string_save));
@@ -326,7 +326,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			selectedLang = langs.get(0);
 		}
 		articleToolbarText.setText("");
-		article = getMyApplication().getWikivoyageDbHelper().getArticle(cityId, selectedLang);
+		article = getMyApplication().getTravelDbHelper().getArticle(cityId, selectedLang);
 		if (article == null) {
 			return;
 		}
@@ -335,7 +335,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			trackButton.setText(getString(R.string.points) + " (" + article.getGpxFile().getPointsSize() +")");
 		}
 
-		WikivoyageLocalDataHelper ldh = getMyApplication().getWikivoyageDbHelper().getLocalDataHelper();
+		WikivoyageLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();
 		ldh.addToHistory(article);
 
 		updateSaveButton();
@@ -387,7 +387,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 									   @NonNull FragmentManager fm,
 									   long cityId,
 									   @Nullable String selectedLang) {
-		ArrayList<String> langs = app.getWikivoyageDbHelper().getArticleLangs(cityId);
+		ArrayList<String> langs = app.getTravelDbHelper().getArticleLangs(cityId);
 		return showInstance(fm, cityId, langs, selectedLang);
 	}
 

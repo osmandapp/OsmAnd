@@ -48,7 +48,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-			long articleId = app.getWikivoyageDbHelper().getArticleId(articleName, lang);
+			long articleId = app.getTravelDbHelper().getArticleId(articleName, lang);
 			if (articleId != 0) {
 				WikivoyageArticleDialogFragment.showInstance(app, mFragmentManager,
 						articleId, lang);
