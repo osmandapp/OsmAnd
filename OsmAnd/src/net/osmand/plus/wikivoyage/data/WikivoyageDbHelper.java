@@ -2,18 +2,20 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -305,7 +307,7 @@ public class WikivoyageDbHelper {
 		res.lang = cursor.getString(10);
 		res.contentsJson = cursor.getString(11);
 		res.aggregatedPartOf = cursor.getString(12);
-
+		res.gpxFile = GPXUtilities.loadGPXFile(application, new ByteArrayInputStream(gpxFileBlob)); 
 		return res;
 	}
 

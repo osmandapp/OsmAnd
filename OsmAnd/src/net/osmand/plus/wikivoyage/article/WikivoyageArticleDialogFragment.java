@@ -20,16 +20,17 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.activities.TrackActivity;
+import net.osmand.plus.myplaces.TrackPointFragment;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
-
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
-
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.util.Algorithms;
@@ -152,6 +153,31 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				fragment.setArguments(args);
 				fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, 0);
 				fragment.show(fm, WikivoyageArticleContentsFragment.TAG);
+			}
+		});
+		
+		
+		TextView trackButton = (TextView) mainView.findViewById(R.id.gpx_button);
+		trackButton.setCompoundDrawablesWithIntrinsicBounds(
+				getActiveIcon(R.drawable.ic_action_track_16), null, null, null
+		);
+		trackButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentManager fm = getFragmentManager();
+				if (article == null || fm == null) {
+					return;
+				}
+				File file = getMyApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR + article.getTitle() + ".gpx");
+				GPXFile gpx = article.getGpxFile();
+				GPXUtilities.writeGpxFile(file, gpx, getMyApplication());
+				Bundle args = new Bundle();
+				args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, article.getContentsJson());
+				Intent newIntent = new Intent(getActivity(), getMyApplication().getAppCustomization().getTrackActivity());
+				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpx.path);
+				newIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
+				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(newIntent);
 			}
 		});
 
