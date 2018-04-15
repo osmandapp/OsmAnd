@@ -29,6 +29,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 	public static final String CONTENTS_JSON_KEY = "contents_json";
 	public static final String CONTENTS_LINK_KEY = "contents_link";
+	public static final String CONTENTS_TITLE_KEY = "title";
 
 	public static final int REQUEST_LINK_CODE = 0;
 
@@ -70,19 +71,23 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
 			                            int groupPosition, int childPosition, long id) {
-				String link = contentItem.getSubItems().get(groupPosition).getSubItems().get(childPosition).getLink();
-				sendResult(link);
+				WikivoyageContentItem wikivoyageContentItem = contentItem.getSubItems().get(groupPosition);
+				String link = wikivoyageContentItem.getSubItems().get(childPosition).getLink();
+				String name = wikivoyageContentItem.getLink().substring(1);
+				sendResults(link, name);
 				dismiss();
-				return false;
+				return true;
 			}
 		});
 		expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-				String link = contentItem.getSubItems().get(groupPosition).getLink();
-				sendResult(link);
+				WikivoyageContentItem wikivoyageContentItem = contentItem.getSubItems().get(groupPosition);
+				String link = wikivoyageContentItem.getLink();
+				String name = wikivoyageContentItem.getLink().substring(1);
+				sendResults(link, name);
 				dismiss();
-				return false;
+				return true;
 			}
 		});
 		LinearLayout container = new LinearLayout(getContext());
@@ -91,9 +96,10 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		items.add(new SimpleBottomSheetItem.Builder().setCustomView(container).create());
 	}
 
-	private void sendResult(String link) {
+	private void sendResults(String link, String name) {
 		Intent intent = new Intent();
 		intent.putExtra(CONTENTS_LINK_KEY, link);
+		intent.putExtra(CONTENTS_TITLE_KEY, name);
 		Fragment fragment = getTargetFragment();
 		if (fragment != null) {
 			fragment.onActivityResult(getTargetRequestCode(), REQUEST_LINK_CODE, intent);
@@ -155,7 +161,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			}
 			TextView txtListChild = (TextView) convertView.findViewById(R.id.item_label);
 			txtListChild.setText(childText);
-			txtListChild.setTextColor(getResolvedColor(nightMode
+			txtListChild.setTextColor(ContextCompat.getColor(context, nightMode
 					? R.color.wikivoyage_contents_parent_icon_dark
 					: R.color.wikivoyage_contents_parent_icon_light));
 			txtListChild.setCompoundDrawablesWithIntrinsicBounds(itemChildIcon, null, null, null);
@@ -202,7 +208,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			}
 			TextView lblListHeader = (TextView) convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(headerTitle);
-			lblListHeader.setTextColor(getResolvedColor(isNightMode() ? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
+			lblListHeader.setTextColor(ContextCompat.getColor(context, nightMode ? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 
 			adjustIndicator(getMyApplication(), groupPosition, isExpanded, convertView, !nightMode);

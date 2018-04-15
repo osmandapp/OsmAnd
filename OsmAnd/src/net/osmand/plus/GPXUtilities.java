@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.ColorInt;
 import android.text.TextUtils;
-
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
@@ -812,7 +811,7 @@ public class GPXUtilities {
 			return points.isEmpty();
 		}
 
-		int getPointsSize() {
+		public int getPointsSize() {
 			return points.size();
 		}
 
@@ -1210,8 +1209,13 @@ public class GPXUtilities {
 	public static String writeGpxFile(File fout, GPXFile file, OsmandApplication ctx) {
 		Writer output = null;
 		try {
+			fout.getParentFile().mkdirs();
 			output = new OutputStreamWriter(new FileOutputStream(fout), "UTF-8"); //$NON-NLS-1$
-			return writeGpx(output, file, ctx);
+			String msg = writeGpx(output, file, ctx);
+			if(Algorithms.isEmpty(file.path)) {
+				file.path = fout.getAbsolutePath();
+			}
+			return msg;
 		} catch (IOException e) {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
 			return ctx.getString(R.string.error_occurred_saving_gpx);
@@ -1286,8 +1290,10 @@ public class GPXUtilities {
 			}
 
 			serializer.endTag(null, "gpx"); //$NON-NLS-1$
-			serializer.flush();
 			serializer.endDocument();
+			serializer.flush();
+			
+			
 		} catch (RuntimeException e) {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
 			return ctx.getString(R.string.error_occurred_saving_gpx);
@@ -1396,10 +1402,10 @@ public class GPXUtilities {
 			} catch (IOException e) {
 			}
 			return file;
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			GPXFile res = new GPXFile();
 			res.path = f.getAbsolutePath();
-			log.error("Error reading gpx", e); //$NON-NLS-1$
+			log.error("Error reading gpx " + res.path, e); //$NON-NLS-1$
 			res.warning = ctx.getString(R.string.error_reading_gpx);
 			return res;
 		} finally {

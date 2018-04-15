@@ -12,18 +12,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Callback;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.widgets.tools.CropRectTransformation;
-import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
-import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
+import net.osmand.plus.wikivoyage.WikivoyageUtils;
+import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	private static final boolean USE_ALTERNATIVE_CARD = false;
 
 	private final OsmandApplication app;
+	private final OsmandSettings settings;
 
 	private final List<Object> items = new ArrayList<>();
 
@@ -50,7 +52,9 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 	SavedArticlesRvAdapter(OsmandApplication app) {
 		this.app = app;
-		int colorId = app.getSettings().isLightContent()
+		this.settings = app.getSettings();
+
+		int colorId = settings.isLightContent()
 				? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
 		IconsCache ic = app.getIconsCache();
 		readIcon = ic.getIcon(R.drawable.ic_action_read_article, colorId);
@@ -76,13 +80,11 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			holder.description.setText(String.valueOf(items.size() - 1));
 		} else {
 			final ItemVH holder = (ItemVH) viewHolder;
-			WikivoyageArticle article = (WikivoyageArticle) getItem(position);
+			TravelArticle article = (TravelArticle) getItem(position);
 			boolean lastItem = position == getItemCount() - 1;
 			RequestCreator rc = Picasso.get()
-					.load(WikivoyageArticle.getImageUrl(article.getImageTitle(), false));
-			if (!app.getSettings().WIKIVOYAGE_SHOW_IMAGES.get()) {
-				rc.networkPolicy(NetworkPolicy.OFFLINE);
-			}
+					.load(TravelArticle.getImageUrl(article.getImageTitle(), false));
+			WikivoyageUtils.setupNetworkPolicy(settings, rc);
 			rc.transform(USE_ALTERNATIVE_CARD ? new CropRectTransformation() : new CropCircleTransformation())
 					.into(holder.icon, new Callback() {
 						@Override
@@ -172,9 +174,9 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 				@Override
 				public void onClick(View view) {
 					Object item = getItemByPosition();
-					if (item != null && item instanceof WikivoyageArticle) {
+					if (item != null && item instanceof TravelArticle) {
 						if (listener != null) {
-							listener.openArticle((WikivoyageArticle) item);
+							listener.openArticle((TravelArticle) item);
 						}
 					}
 				}
@@ -187,14 +189,15 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 				@Override
 				public void onClick(View view) {
 					Object item = getItemByPosition();
-					if (item != null && item instanceof WikivoyageArticle) {
-						final WikivoyageArticle article = (WikivoyageArticle) item;
-						WikivoyageLocalDataHelper.getInstance(app).removeArticleFromSaved(article);
+					if (item != null && item instanceof TravelArticle) {
+						final TravelArticle article = (TravelArticle) item;
+						final TravelLocalDataHelper ldh = app.getTravelDbHelper().getLocalDataHelper();;
+						ldh.removeArticleFromSaved(article);
 						Snackbar snackbar = Snackbar.make(itemView, R.string.article_removed, Snackbar.LENGTH_LONG)
 								.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 									@Override
 									public void onClick(View view) {
-										WikivoyageLocalDataHelper.getInstance(app).restoreSavedArticle(article);
+										ldh.restoreSavedArticle(article);
 									}
 								});
 						AndroidUtils.setSnackbarTextColor(snackbar, R.color.wikivoyage_active_dark);
@@ -215,6 +218,6 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	}
 
 	interface Listener {
-		void openArticle(WikivoyageArticle article);
+		void openArticle(TravelArticle article);
 	}
 }

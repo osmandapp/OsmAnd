@@ -19,7 +19,8 @@ import com.squareup.picasso.RequestCreator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
-import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
+import net.osmand.plus.wikivoyage.WikivoyageUtils;
+import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchHistoryItem;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 import net.osmand.util.Algorithms;
@@ -76,10 +77,8 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 			if (item instanceof WikivoyageSearchResult) {
 				WikivoyageSearchResult searchRes = (WikivoyageSearchResult) item;
 				RequestCreator rc = Picasso.get()
-						.load(WikivoyageArticle.getImageUrl(searchRes.getImageTitle(), true));
-				if (!app.getSettings().WIKIVOYAGE_SHOW_IMAGES.get()) {
-					rc.networkPolicy(NetworkPolicy.OFFLINE);
-				}
+						.load(TravelArticle.getImageUrl(searchRes.getImageTitle(), true));
+				WikivoyageUtils.setupNetworkPolicy(app.getSettings(), rc);
 				rc.transform(new CropCircleTransformation())
 						.placeholder(placeholder)
 						.into(holder.icon);

@@ -17,6 +17,7 @@ import android.view.View;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
@@ -70,10 +71,13 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				getMyApplication().getAppInitializer().resetFirstTimeRun();
-				getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.set(false);
-				getMyApplication().getSettings().MAPILLARY_FIRST_DIALOG_SHOWN.set(false);
-				getMyApplication().getSettings().WEBGL_SUPPORTED.set(true);
-				getMyApplication().getSettings().METRIC_SYSTEM_CHANGED_MANUALLY.set(false);
+				OsmandSettings settings = getMyApplication().getSettings();
+				settings.FIRST_MAP_IS_DOWNLOADED.set(false);
+				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(false);
+				settings.WEBGL_SUPPORTED.set(true);
+				settings.METRIC_SYSTEM_CHANGED_MANUALLY.set(false);
+				settings.WIKIVOYAGE_SHOW_IMAGES_ASKED.set(false);
+
 				getMyApplication().showToastMessage(R.string.shared_string_ok);
 				return true;
 			}

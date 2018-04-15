@@ -1,4 +1,4 @@
-package net.osmand.plus.wikivoyage.data;
+package net.osmand.plus.wikivoyage;
 
 
 import android.content.Context;
@@ -22,7 +22,7 @@ import java.net.URLDecoder;
  * Custom WebView client to handle the internal links.
  */
 
-public class CustomWebViewClient extends WebViewClient {
+public class WikivoyageWebViewClient extends WebViewClient {
 
 	private OsmandApplication app;
 	private FragmentManager mFragmentManager;
@@ -31,7 +31,7 @@ public class CustomWebViewClient extends WebViewClient {
 	private static final String PAGE_PREFIX = "https://";
 	private static final String WEB_DOMAIN = ".wikivoyage.com/wiki/";
 
-	public CustomWebViewClient(FragmentActivity context, FragmentManager fm) {
+	public WikivoyageWebViewClient(FragmentActivity context, FragmentManager fm) {
 		app = (OsmandApplication) context.getApplication();
 		mFragmentManager = fm;
 		mContext = context;
@@ -48,7 +48,7 @@ public class CustomWebViewClient extends WebViewClient {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-			long articleId = app.getWikivoyageDbHelper().getArticleId(articleName, lang);
+			long articleId = app.getTravelDbHelper().getArticleId(articleName, lang);
 			if (articleId != 0) {
 				WikivoyageArticleDialogFragment.showInstance(app, mFragmentManager,
 						articleId, lang);
@@ -63,6 +63,7 @@ public class CustomWebViewClient extends WebViewClient {
 
 	private void warnAboutExternalLoad(final String url) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+		builder.setTitle(url);
 		builder.setMessage(R.string.online_webpage_warning);
 		builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override

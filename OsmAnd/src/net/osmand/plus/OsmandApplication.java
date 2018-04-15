@@ -56,7 +56,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.voice.CommandPlayer;
-import net.osmand.plus.wikivoyage.data.WikivoyageDbHelper;
+import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.search.SearchUICore;
 import net.osmand.util.Algorithms;
@@ -119,7 +119,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OsmandRegions regions;
 	GeocodingLookupService geocodingLookupService;
 	QuickSearchHelper searchUICore;
-	WikivoyageDbHelper wikivoyageDbHelper;
+	TravelDbHelper travelDbHelper;
 
 	RoutingConfiguration.Builder defaultRoutingConfig;
 	private Locale preferredLocale = null;
@@ -392,8 +392,8 @@ public class OsmandApplication extends MultiDexApplication {
 		return searchUICore;
 	}
 
-	public WikivoyageDbHelper getWikivoyageDbHelper() {
-		return wikivoyageDbHelper;
+	public TravelDbHelper getTravelDbHelper() {
+		return travelDbHelper;
 	}
 
 	public CommandPlayer getPlayer() {

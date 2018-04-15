@@ -6,7 +6,6 @@ import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.FavouritePoint;
@@ -20,6 +19,8 @@ import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
+import net.osmand.plus.wikivoyage.data.TravelDbHelper;
+import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -493,6 +494,26 @@ public class MapMarkersHelper {
 				group.disabled = true;
 				createHeaderInGroup(group);
 				res.add(group);
+			}
+		}
+		return res;
+	}
+	
+	@NonNull
+	public List<MapMarkersGroup> getGroupsForSavedArticlesTravelBook() {
+		List<MapMarkersGroup> res = new ArrayList<>();
+		TravelDbHelper travelDbHelper = ctx.getTravelDbHelper();
+		if(travelDbHelper.getSelectedTravelBook() != null) {
+			List<TravelArticle> savedArticles = travelDbHelper.getLocalDataHelper().getSavedArticles();
+			for (TravelArticle art : savedArticles) {
+				String gpxName = travelDbHelper.getGPXName(art);
+				File path = ctx.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
+				MapMarkersGroup group = getOrCreateGroup(new File(path.getAbsolutePath()));
+				if (!isGroupSynced(group.getId())) {
+					group.disabled = true;
+					createHeaderInGroup(group);
+					res.add(group);
+				}
 			}
 		}
 		return res;

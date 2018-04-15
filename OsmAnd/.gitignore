@@ -10,6 +10,8 @@ libs/org.*.jar
 libs/commons-logging-commons-logging-api-1.1.jar
 libs/fr.univ-valenciennes-bzip2-1.0.jar
 libs/it.unibo.alice.tuprolog-tuprolog-3.2.1.jar
+libs/commons-codec-commons-codec-1.11.jar
+libs/OsmAndCore_android-0.1-SNAPSHOT.jar
 
 valgrind/
 bin/

@@ -14,16 +14,14 @@ import java.util.List;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
-public class WikivoyageLocalDataHelper {
+public class TravelLocalDataHelper {
 
 	private static final int HISTORY_ITEMS_LIMIT = 300;
-
-	private static WikivoyageLocalDataHelper instance;
 
 	private WikivoyageLocalDataDbHelper dbHelper;
 
 	private TLongObjectHashMap<WikivoyageSearchHistoryItem> historyMap;
-	private List<WikivoyageArticle> savedArticles;
+	private List<TravelArticle> savedArticles;
 
 	private Listener listener;
 
@@ -31,17 +29,14 @@ public class WikivoyageLocalDataHelper {
 		this.listener = listener;
 	}
 
-	private WikivoyageLocalDataHelper(OsmandApplication app) {
+	TravelLocalDataHelper(OsmandApplication app) {
 		dbHelper = new WikivoyageLocalDataDbHelper(app);
-		historyMap = dbHelper.getAllHistoryMap();
-		savedArticles = dbHelper.getSavedArticles();
+		refreshCachedData();
 	}
 
-	public static WikivoyageLocalDataHelper getInstance(OsmandApplication app) {
-		if (instance == null) {
-			instance = new WikivoyageLocalDataHelper(app);
-		}
-		return instance;
+	public void refreshCachedData() {
+		historyMap = dbHelper.getAllHistoryMap();
+		savedArticles = dbHelper.getSavedArticles();
 	}
 
 	public List<WikivoyageSearchHistoryItem> getAllHistory() {
@@ -65,7 +60,7 @@ public class WikivoyageLocalDataHelper {
 		dbHelper.clearAllHistory();
 	}
 
-	public void addToHistory(@NonNull WikivoyageArticle article) {
+	public void addToHistory(@NonNull TravelArticle article) {
 		addToHistory(article.getCityId(), article.getTitle(), article.getLang(), article.getIsPartOf());
 	}
 
@@ -95,13 +90,13 @@ public class WikivoyageLocalDataHelper {
 	}
 
 	@NonNull
-	public List<WikivoyageArticle> getSavedArticles() {
+	public List<TravelArticle> getSavedArticles() {
 		return new ArrayList<>(savedArticles);
 	}
 
-	public void addArticleToSaved(@NonNull WikivoyageArticle article) {
+	public void addArticleToSaved(@NonNull TravelArticle article) {
 		if (!isArticleSaved(article)) {
-			WikivoyageArticle saved = new WikivoyageArticle();
+			TravelArticle saved = new TravelArticle();
 			saved.cityId = article.cityId;
 			saved.title = article.title;
 			saved.lang = article.lang;
@@ -114,7 +109,7 @@ public class WikivoyageLocalDataHelper {
 		}
 	}
 
-	public void restoreSavedArticle(@NonNull WikivoyageArticle article) {
+	public void restoreSavedArticle(@NonNull TravelArticle article) {
 		if (!isArticleSaved(article)) {
 			savedArticles.add(article);
 			dbHelper.addSavedArticle(article);
@@ -122,8 +117,8 @@ public class WikivoyageLocalDataHelper {
 		}
 	}
 
-	public void removeArticleFromSaved(@NonNull WikivoyageArticle article) {
-		WikivoyageArticle savedArticle = getArticle(article.cityId, article.lang);
+	public void removeArticleFromSaved(@NonNull TravelArticle article) {
+		TravelArticle savedArticle = getArticle(article.cityId, article.lang);
 		if (savedArticle != null) {
 			savedArticles.remove(savedArticle);
 			dbHelper.removeSavedArticle(savedArticle);
@@ -131,7 +126,7 @@ public class WikivoyageLocalDataHelper {
 		}
 	}
 
-	public boolean isArticleSaved(@NonNull WikivoyageArticle article) {
+	public boolean isArticleSaved(@NonNull TravelArticle article) {
 		return getArticle(article.cityId, article.lang) != null;
 	}
 
@@ -142,8 +137,8 @@ public class WikivoyageLocalDataHelper {
 	}
 
 	@Nullable
-	private WikivoyageArticle getArticle(long cityId, String lang) {
-		for (WikivoyageArticle article : savedArticles) {
+	private TravelArticle getArticle(long cityId, String lang) {
+		for (TravelArticle article : savedArticles) {
 			if (article.cityId == cityId && article.lang != null && article.lang.equals(lang)) {
 				return article;
 			}
@@ -244,7 +239,6 @@ public class WikivoyageLocalDataHelper {
 			conn.execSQL(BOOKMARKS_TABLE_CREATE);
 		}
 
-		@SuppressWarnings("unused")
 		private void onUpgrade(SQLiteConnection conn, int oldVersion, int newVersion) {
 			if (oldVersion < 2) {
 				conn.execSQL(BOOKMARKS_TABLE_CREATE);
@@ -252,9 +246,11 @@ public class WikivoyageLocalDataHelper {
 			if (oldVersion < 3) {
 				conn.execSQL("ALTER TABLE " + HISTORY_TABLE_NAME + " ADD " + HISTORY_COL_TRAVEL_BOOK + " TEXT");
 				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_TRAVEL_BOOK + " TEXT");
-				Object[] args = new Object[]{context.getWikivoyageDbHelper().getSelectedTravelBook().getName()};
-				conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TRAVEL_BOOK + " = ?", args);
-				conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME + " SET " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?", args);
+				if(context.getTravelDbHelper().getSelectedTravelBook() != null) {
+					Object[] args = new Object[]{context.getTravelDbHelper().getSelectedTravelBook().getName()};
+					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TRAVEL_BOOK + " = ?", args);
+					conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME + " SET " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?", args);	
+				}
 			}
 		}
 
@@ -344,8 +340,8 @@ public class WikivoyageLocalDataHelper {
 		}
 
 		@NonNull
-		List<WikivoyageArticle> getSavedArticles() {
-			List<WikivoyageArticle> res = new ArrayList<>();
+		List<TravelArticle> getSavedArticles() {
+			List<TravelArticle> res = new ArrayList<>();
 			SQLiteConnection conn = openConnection(true);
 			if (conn != null) {
 				try {
@@ -357,6 +353,7 @@ public class WikivoyageLocalDataHelper {
 							res.add(readSavedArticle(cursor));
 						} while (cursor.moveToNext());
 					}
+					cursor.close();
 				} finally {
 					conn.close();
 				}
@@ -364,7 +361,7 @@ public class WikivoyageLocalDataHelper {
 			return res;
 		}
 
-		void addSavedArticle(WikivoyageArticle article) {
+		void addSavedArticle(TravelArticle article) {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
@@ -378,7 +375,7 @@ public class WikivoyageLocalDataHelper {
 			}
 		}
 
-		void removeSavedArticle(WikivoyageArticle article) {
+		void removeSavedArticle(TravelArticle article) {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
@@ -406,8 +403,8 @@ public class WikivoyageLocalDataHelper {
 			return res;
 		}
 
-		private WikivoyageArticle readSavedArticle(SQLiteCursor cursor) {
-			WikivoyageArticle res = new WikivoyageArticle();
+		private TravelArticle readSavedArticle(SQLiteCursor cursor) {
+			TravelArticle res = new TravelArticle();
 
 			res.cityId = cursor.getLong(0);
 			res.title = cursor.getString(1);
