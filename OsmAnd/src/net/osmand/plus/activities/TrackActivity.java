@@ -72,11 +72,13 @@ public class TrackActivity extends TabActivity {
 			finish();
 			return;
 		}
-		file = null;
+		if (intent.hasExtra(TRACK_FILE_NAME)) {
+			file = new File(intent.getStringExtra(TRACK_FILE_NAME));
+		}
+			
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
-			if (intent.hasExtra(TRACK_FILE_NAME)) {
-				file = new File(intent.getStringExtra(TRACK_FILE_NAME));
+			if(file != null) {
 				String fn = file.getName().replace(".gpx", "").replace("/", " ").replace("_", " ");
 				actionBar.setTitle(fn);
 			} else {

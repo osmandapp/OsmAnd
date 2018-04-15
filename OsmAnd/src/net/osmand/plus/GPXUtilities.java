@@ -1212,7 +1212,7 @@ public class GPXUtilities {
 			fout.getParentFile().mkdirs();
 			output = new OutputStreamWriter(new FileOutputStream(fout), "UTF-8"); //$NON-NLS-1$
 			String msg = writeGpx(output, file, ctx);
-			if(file.path == null) {
+			if(Algorithms.isEmpty(file.path)) {
 				file.path = fout.getAbsolutePath();
 			}
 			return msg;

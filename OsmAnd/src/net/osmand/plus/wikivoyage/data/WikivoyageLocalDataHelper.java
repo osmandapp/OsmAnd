@@ -239,7 +239,6 @@ public class WikivoyageLocalDataHelper {
 			conn.execSQL(BOOKMARKS_TABLE_CREATE);
 		}
 
-		@SuppressWarnings("unused")
 		private void onUpgrade(SQLiteConnection conn, int oldVersion, int newVersion) {
 			if (oldVersion < 2) {
 				conn.execSQL(BOOKMARKS_TABLE_CREATE);
