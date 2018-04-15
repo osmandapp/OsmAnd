@@ -27,7 +27,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
-import net.osmand.plus.wikivoyage.data.CustomWebViewClient;
+import net.osmand.plus.wikivoyage.data.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.WikivoyageArticle;
 import net.osmand.plus.wikivoyage.data.WikivoyageLocalDataHelper;
 import net.osmand.util.Algorithms;
@@ -66,10 +66,25 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			"openContent(title);" +
 			"window.location.hash = id;}\n" +
 			"function openContent(id) {\n" +
-			"var doc = document.getElementById(id).parentElement;\n" +
+			"    var doc = document.getElementById(id).parentElement;\n" +
 			"    doc.classList.toggle(\"active\");\n" +
 			"    var content = doc.nextElementSibling;\n" +
-			"content.style.display = \"block\";\n" +
+			"    content.style.display = \"block\";\n" +
+			"    collapseActive(doc);" +
+			"}" +
+			"function collapseActive(doc) {" +
+			"    var coll = document.getElementsByTagName(\"H2\");" +
+			"    var i;" +
+			"    for (i = 0; i < coll.length; i++) {" +
+			"        var item = coll[i];" +
+			"        if (item != doc && item.classList.contains(\"active\")) {" +
+			"            item.classList.toggle(\"active\");" +
+			"            var content = item.nextElementSibling;" +
+			"            if (content.style.display === \"block\") {" +
+			"                content.style.display = \"none\";" +
+			"            }" +
+			"        }" +
+			"    }" +
 			"}</script>"
 			+ "</body></html>";
 
@@ -156,7 +171,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 						WebSettings.LOAD_DEFAULT : WebSettings.LOAD_CACHE_ONLY);
 				break;
 		}
-		contentWebView.setWebViewClient(new CustomWebViewClient(getActivity(), getFragmentManager()));
+		contentWebView.setWebViewClient(new WikivoyageWebViewClient(getActivity(), getFragmentManager()));
 
 		return mainView;
 	}
