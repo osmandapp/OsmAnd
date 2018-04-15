@@ -2220,4 +2220,76 @@
     <string name="delete_filter">Διαγραφή φίλτρου</string>
     <string name="new_filter">Νέο φίλτρο</string>
     <string name="new_filter_desc">Παρακαλούμε, εισάγετε όνομα για το νέο φίλτρο, αυτό θα προστεθεί στην καρτέλα κατηγοριών σας.</string>
+    <string name="osm_live_payment_desc">Τα τέλη εγγραφής θα επιβαρύνουν κάθε μήνα. Μπορείτε να ακυρώσετε την εγγραφή σας στο Google Play οποτεδήποτε.</string>
+    <string name="donation_to_osm">Δωρεές στην κοινότητα OpenStreetMap</string>
+    <string name="donation_to_osm_desc">Μέρος της δωρεάς σας θα σταλεί στους χρήστες OSM που υποβάλλουν αλλαγές στο OpenStreetMap. Το κόστος της εγγραφής παραμένει το ίδιο.</string>
+    <string name="osm_live_subscription_desc">Η εγγραφή ενεργοποιεί ωριαίες, ημερήσιες και εβδομαδιαίες ενημερώσεις και απεριόριστες μεταφορτώσεις για όλους τους χάρτες παγκοσμίως.</string>
+    <string name="get_it">Εγγραφείτε</string>
+    <string name="get_for">Εγγραφείτε για %1$s</string>
+    <string name="get_for_month">Εγγραφείτε για %1$s μήνα</string>
+    <string name="osm_live_banner_desc">Κάντε απεριόριστες μεταφορτώσεις χαρτών και ενημερώσεις χαρτών περισσότερο από μια φορά τον μήνα: εβδομαδιαία, ημερήσια, ή ωριαία.</string>
+    <string name="osmand_plus_banner_desc">Απεριόριστες μεταφορτώσεις χαρτών, ενημερώσεις και πρόσθετο βικιπαίδεια.</string>
+    <string name="si_mi_meters">Μίλια/μέτρα</string>
+    <string name="skip_map_downloading">Παράλειψη μεταφόρτωσης χαρτών</string>
+    <string name="skip_map_downloading_desc">Δεν έχετε εγκαταστήσει κανέναν χάρτη χωρίς σύνδεση. Μπορείτε να επιλέξετε έναν χάρτη από τον κατάλογο ή να μεταφορτώσετε χάρτες αργότερα μέσω του \'Μενού - %1$s\'.</string>
+    <string name="search_another_country">Επιλέξτε μια άλλη περιοχή</string>
+    <string name="search_map">Αναζήτηση χαρτών…</string>
+    <string name="first_usage_wizard_desc">Αφήστε το OsmAnd να προσδιορίσει την τοποθεσία σας και να προτείνει χάρτες για μεταφόρτωση για αυτήν την περιοχή.</string>
+    <string name="location_not_found">Η τοποθεσία δεν βρέθηκε</string>
+    <string name="no_inet_connection">Δεν υπάρχει διαδικτυακή σύνδεση</string>
+    <string name="no_inet_connection_desc_map">Απαιτείται για μεταφόρτωση χαρτών.</string>
+    <string name="search_location">Αναζήτηση της τοποθεσίας…</string>
+    <string name="storage_free_space">Ελεύθερος χώρος</string>
+    <string name="storage_place_description">Χώρος δεδομένων του OsmAnd (για χάρτες, ίχνη, κλπ.): %1$s.</string>
+    <string name="give_permission">Παραχώρηση άδειας</string>
+    <string name="allow_access_location">Να επιτραπεί πρόσβαση της τοποθεσίας</string>
+    <string name="first_usage_greeting">Πάρτε οδηγίες και ανακαλύψτε νέες τοποθεσίες χωρίς διαδικτυακή σύνδεση</string>
+    <string name="search_my_location">Εύρεση της θέσης μου</string>
+    <string name="no_update_info_desc">Να μην ελέγχετε για νέες εκδόσεις ή τις εκπτώσεις του OsmAnd.</string>
+    <string name="no_update_info">Μα μην εμφανίζονται νέες εκδόσεις</string>
+    <string name="update_all_maps_now">Θέλετε να ενημερώσετε όλους τους χάρτες τώρα;</string>
+    <string name="clear_tile_data">Καθαρισμός όλων των πλακιδίων</string>
+    <string name="routing_attr_short_way_name">Οικονομία στην κατανάλωση καυσίμου</string>
+    <string name="routing_attr_short_way_description">Χρησιμοποιήστε την οικονομία στην κατανάλωση καυσίμου (συνήθως πιο σύντομο).</string>
+    <string name="replace_favorite_confirmation">Είσαστε σίγουρος ότι θέλετε να αντικαταστήσετε το αγαπημένο %1$s;</string>
+    <string name="rendering_attr_hideOverground_name">Υπέργεια αντικείμενα</string>
+    <string name="shared_string_change">Αλλαγή</string>
+    <string name="get_started">Εκκίνηση</string>
+    <string name="route_stops_before">%1$s στάσεις πριν</string>
+    <string name="coords_search">Αναζήτηση συντεταγμένων</string>
+    <string name="advanced_coords_search">Προχωρημένη αναζήτηση συντεταγμένων</string>
+    <string name="back_to_search">Πίσω στην αναζήτηση</string>
+    <string name="confirmation_to_delete_history_items">Θέλετε να αφαιρέσετε τα επιλεγμένα στοιχεία από το \'Ιστορικό\';</string>
+    <string name="show_something_on_map">Εμφάνιση του %1$s στον χάρτη</string>
+    <string name="release_2_4">\\022 Νέα πολύ ισχυρή ελεύθερη αναζήτηση κειμένου
+\n
+\n • Ενσωμάτωση μέσω Bluetooth συστήματος ήχου αυτοκινήτου/ηχείου τηλεφώνου 
+\n
+\n • Βελτιωμένη καθοδήγηση διαδρομής, προτροπή φωνής και ένδειξη αλλαγής λουρίδας
+\n
+\n • Βελτιωμένη στρώση μεταφοράς με απόδοση δρομολογίου
+\n
+\n • Προστέθηκαν περισσότερες τοπικές ρυθμίσεις και τώρα υποστηρίζονται ρυθμίσεις περιοχών
+\n
+\n • Πολλές άλλες βελτιώσεις και διορθώσεις σφαλμάτων
+\n
+\n και περισσότερα…</string>
+    <string name="dist_away_from_my_location">"Αναζήτηση %1$s μακριά "</string>
+    <string name="share_history_subject">κοινόχρηστο μέσω του OsmAnd</string>
+    <string name="search_categories">Κατηγορίες</string>
+    <string name="postcode">Ταχυδρομικός κώδικας</string>
+    <string name="shared_string_from">από</string>
+    <string name="city_type_district">Περιοχή</string>
+    <string name="city_type_neighbourhood">Γειτονιά</string>
+    <string name="map_widget_search">Αναζήτηση</string>
+    <string name="shared_string_is_open_24_7">Ανοιχτά 24/7</string>
+    <string name="storage_directory_card">Κάρτα μνήμης</string>
+    <string name="coords_format">Μορφή συντεταγμένων</string>
+    <string name="coords_format_descr">Μορφή για γεωγραφικές συντεταγμένες.</string>
+    <string name="current_track">Τρέχον ίχνος</string>
+    <string name="change_markers_position">Αλλαγή θέσης δείκτη</string>
+    <string name="move_marker_bottom_sheet_title">Μετακινήστε τον χάρτη για να αλλάξει η θέση του δείκτη</string>
+    <string name="access_direction_audio_feedback">Κατευθύνσεις ήχου</string>
+    <string name="access_direction_audio_feedback_descr">Ένδειξη κατεύθυνσης σημείου προορισμού με ήχο.</string>
+    <string name="access_direction_haptic_feedback">Απτικές κατευθύνσεις</string>
     </resources>
