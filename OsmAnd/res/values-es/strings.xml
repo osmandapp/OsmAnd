@@ -1506,7 +1506,7 @@
     <string name="navigate_point_zone">Zona</string>
     <string name="voices">Avisos de voz</string>
     <string name="dash_download_msg_none">¿Quieres descargar los mapas sin conexión?</string>
-    <string name="rendering_attr_roadStyle_name">Estilo vial</string>
+    <string name="rendering_attr_roadStyle_name">Estilo del camino</string>
     <string name="rendering_value_default_name">Predefinido</string>
     <string name="rendering_value_orange_name">Anaranjado</string>
     <string name="routing_attr_no_new_routing_name">Sin reglas de navegación v1.9</string>
@@ -2964,4 +2964,13 @@
     <string name="shared_string_explore">Explorar</string>
     <string name="shared_string_contents">Contenido</string>
     <string name="index_item_world_wikivoyage">Artículos de Wikiviajes en todo el mundo</string>
+    <string name="shared_string_dont">No hacer</string>
+    <string name="shared_string_do">Hacer</string>
+    <string name="shared_string_only_with_wifi">Sólo con WiFi</string>
+    <string name="wikivoyage_download_pics">Descargar imágenes</string>
+    <string name="wikivoyage_download_pics_descr">Podemos descargar y mostrar imágenes en los artículos y almacenarlas en el dispositivo, por lo que tendrá acceso a ellas mientras esté desconectado. Siempre puede cambiar la configuración en «Explorar &gt; Opciones».</string>
+    <string name="shared_string_wifi_only">Sólo WiFi</string>
+    <string name="select_travel_book">Seleccionar libro de viajes</string>
+    <string name="shared_string_travel_book">Libro de viajes</string>
+    <string name="download_images">Descargar imágenes</string>
     </resources>
