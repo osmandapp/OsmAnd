@@ -2096,7 +2096,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 \n 
 \n • Konfigurer hvordan og hvilket indhold der vises på betjeningspanelet 
 \n 
-\n • Forbigå betjeningspanel hvis der ønskes menuebaserede kontrol 
+\n • Forbigå betjeningspanel hvis der ønskes menubaserede kontrol 
 \n 
 \n • Hent kort, områder ved at trykke direkte på verdenskortet 
 \n 
@@ -2104,7 +2104,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 \n 
 \n • Forbedret IP og OSM redigeringsfunktionalitet 
 \n 
-\n • Administration af kortfiler struktur og grænseflade er omarbejdet 
+\n • Administration af kortfilers nedlastningsstruktur og grænseflade er omarbejdet 
 \n 
 \n og mere…</string>
     <string name="osm_save_offline">Gem offline</string>
