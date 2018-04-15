@@ -18,8 +18,6 @@ public class WikivoyageLocalDataHelper {
 
 	private static final int HISTORY_ITEMS_LIMIT = 300;
 
-	private static WikivoyageLocalDataHelper instance;
-
 	private WikivoyageLocalDataDbHelper dbHelper;
 
 	private TLongObjectHashMap<WikivoyageSearchHistoryItem> historyMap;
@@ -31,18 +29,16 @@ public class WikivoyageLocalDataHelper {
 		this.listener = listener;
 	}
 
-	private WikivoyageLocalDataHelper(OsmandApplication app) {
+	protected WikivoyageLocalDataHelper(OsmandApplication app) {
 		dbHelper = new WikivoyageLocalDataDbHelper(app);
+		refreshHistoryArticles();
+	}
+
+	public void refreshHistoryArticles() {
 		historyMap = dbHelper.getAllHistoryMap();
 		savedArticles = dbHelper.getSavedArticles();
 	}
 
-	public static WikivoyageLocalDataHelper getInstance(OsmandApplication app) {
-		if (instance == null) {
-			instance = new WikivoyageLocalDataHelper(app);
-		}
-		return instance;
-	}
 
 	public List<WikivoyageSearchHistoryItem> getAllHistory() {
 		List<WikivoyageSearchHistoryItem> res = new ArrayList<>(historyMap.valueCollection());
@@ -357,6 +353,7 @@ public class WikivoyageLocalDataHelper {
 							res.add(readSavedArticle(cursor));
 						} while (cursor.moveToNext());
 					}
+					cursor.close();
 				} finally {
 					conn.close();
 				}

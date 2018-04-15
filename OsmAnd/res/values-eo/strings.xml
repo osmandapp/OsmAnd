@@ -2941,4 +2941,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="download_maps_travel">Vojaĝaj mapoj</string>
     <string name="shared_string_wikivoyage">Vikivojaĝo</string>
     <string name="index_item_world_wikivoyage">Tutmondaj artikoloj de Vikivojaĝo</string>
+    <string name="images_cache">Bilda kaŝmemorejo</string>
+    <string name="delete_search_history">Forviŝi serĉan historion</string>
+    <string name="show_images">Montri bildojn</string>
+    <string name="online_webpage_warning">Tiu ĉi paĝo estas legebla nur enrete. Ĉu vi volas malfermi ĝin en foliumilo?</string>
     </resources>

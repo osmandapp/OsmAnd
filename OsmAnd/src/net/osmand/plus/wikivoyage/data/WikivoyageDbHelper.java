@@ -2,13 +2,13 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
@@ -67,16 +67,22 @@ public class WikivoyageDbHelper {
 	private File selectedTravelBook = null;
 	private List<File> existingTravelBooks = new ArrayList<>();
 	private Collator collator;
+	private WikivoyageLocalDataHelper localDataHelper;
 
 	public WikivoyageDbHelper(OsmandApplication application) {
 		this.application = application;
 		collator = OsmAndCollator.primaryCollator();
-		initTravelBooks();
+	}
+	
+	public WikivoyageLocalDataHelper getLocalDataHelper() {
+		return localDataHelper;
 	}
 
 	public void initTravelBooks() {
 		File[] possibleFiles = application.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
 		String travelBook = application.getSettings().SELECTED_TRAVEL_BOOK.get();
+		existingTravelBooks.clear();
+		localDataHelper = new WikivoyageLocalDataHelper(application);
 		if (possibleFiles != null) {
 			for (File f : possibleFiles) {
 				if (f.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
@@ -106,6 +112,16 @@ public class WikivoyageDbHelper {
 			connection = application.getSQLiteAPI().openByAbsolutePath(selectedTravelBook.getAbsolutePath(), true);
 		}
 		return connection;
+	}
+	
+	public void selectTravelBook(File f) {
+		closeConnection();
+		if (f.exists()) {
+			connection = application.getSQLiteAPI().openByAbsolutePath(f.getAbsolutePath(), true);
+			selectedTravelBook = f;
+			application.getSettings().SELECTED_TRAVEL_BOOK.set(selectedTravelBook.getName());
+			localDataHelper.refreshHistoryArticles();
+		}
 	}
 
 	public void closeConnection() {
@@ -291,5 +307,13 @@ public class WikivoyageDbHelper {
 		res.aggregatedPartOf = cursor.getString(12);
 
 		return res;
+	}
+
+	public String formatTravelBookName(File tb) {
+		if(tb == null) {
+			return application.getString(R.string.shared_string_none);
+		}
+		String nm = tb.getName();
+		return nm.substring(0, nm.indexOf('.')).replace('_', ' ');
 	}
 }

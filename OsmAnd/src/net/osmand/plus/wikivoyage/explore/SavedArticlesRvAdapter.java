@@ -189,12 +189,13 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 					Object item = getItemByPosition();
 					if (item != null && item instanceof WikivoyageArticle) {
 						final WikivoyageArticle article = (WikivoyageArticle) item;
-						WikivoyageLocalDataHelper.getInstance(app).removeArticleFromSaved(article);
+						final WikivoyageLocalDataHelper ldh = app.getWikivoyageDbHelper().getLocalDataHelper();;
+						ldh.removeArticleFromSaved(article);
 						Snackbar snackbar = Snackbar.make(itemView, R.string.article_removed, Snackbar.LENGTH_LONG)
 								.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 									@Override
 									public void onClick(View view) {
-										WikivoyageLocalDataHelper.getInstance(app).restoreSavedArticle(article);
+										ldh.restoreSavedArticle(article);
 									}
 								});
 						AndroidUtils.setSnackbarTextColor(snackbar, R.color.wikivoyage_active_dark);

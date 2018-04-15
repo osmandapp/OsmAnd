@@ -118,18 +118,18 @@ repositories {
 }
 
 dependencies {
-    compile project(path: ':OsmAnd-java', configuration: 'android')
+    implementation project(path: ':OsmAnd-java', configuration: 'android')
 
-    compile 'com.android.support:multidex:1.0.1'
-    compile 'com.android.support:appcompat-v7:27.1.0'
-    compile 'com.android.support:design:27.1.0'
-    compile 'commons-logging:commons-logging-api:1.1'
-    compile 'com.moparisthebest:junidecode:0.1.1'
+    implementation 'com.android.support:multidex:1.0.1'
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:design:27.1.0'
+    implementation 'commons-logging:commons-logging-api:1.1'
+    implementation 'com.moparisthebest:junidecode:0.1.1'
 
-    compile fileTree(include:  ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
+    implementation fileTree(include:  ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
 
-    compile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
-    debugCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
-    nativeDebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
-    releaseCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
+    implementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+    debugImplementation "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
+    nativeDebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
+    releaseImplementation "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 }

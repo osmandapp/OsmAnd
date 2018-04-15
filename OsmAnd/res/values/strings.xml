@@ -9,10 +9,12 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="select_travel_book">Select travel book</string>
+    <string name="shared_string_travel_book">Travel book</string>
     <string name="online_webpage_warning">This page is only available online. Do you wish to open it in a web browser?</string>
     <string name="images_cache">Images cache</string>
     <string name="delete_search_history">Delete search history</string>
-    <string name="show_images">Show images</string>
+    <string name="download_images">Download images</string>
     <string name="download_maps_travel">Travel maps</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Article removed</string>

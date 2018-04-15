@@ -2878,4 +2878,7 @@
     <string name="article_removed">Статья удалена</string>
     <string name="shared_string_explore">Исследование</string>
     <string name="index_item_world_wikivoyage">Статьи путеводителя Викигида</string>
+    <string name="images_cache">"Кэш изображений "</string>
+    <string name="delete_search_history">"Удалить историю поиска "</string>
+    <string name="show_images">Показать изображения</string>
     </resources>

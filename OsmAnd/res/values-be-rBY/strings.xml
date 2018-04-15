@@ -3034,4 +3034,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="shared_string_travel">Padarožža</string>
     <string name="waypoints_removed_from_map_markers">Šlachavyja kropki vydalenyaja ź markieraŭ mapy</string>
     <string name="index_item_world_wikivoyage">Suśvietnyja artykuły Wikivoyage</string>
+    <string name="online_webpage_warning">Hetaja staronka dastupnaja toĺki anlajn. Vy žadajecie adkryć jaje ŭ braŭziery?</string>
+    <string name="images_cache">Keš vyjaŭ</string>
+    <string name="delete_search_history">Vydalić historyju pošukaŭ</string>
+    <string name="show_images">Pakazać vyjavy</string>
     </resources>

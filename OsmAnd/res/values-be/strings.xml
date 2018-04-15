@@ -3078,4 +3078,8 @@
     <string name="article_removed">Артыкул выдалены</string>
     <string name="shared_string_contents">Зьмест</string>
     <string name="index_item_world_wikivoyage">Сусьветныя артыкулы Wikivoyage</string>
+    <string name="online_webpage_warning">Гэтая старонка даступная толькі анлайн. Вы жадаеце адкрыць яе ў браўзеры?</string>
+    <string name="images_cache">Кэш выяў</string>
+    <string name="delete_search_history">Выдаліць гісторыю пошукаў</string>
+    <string name="show_images">Паказаць выявы</string>
     </resources>
