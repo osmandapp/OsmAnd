@@ -405,17 +405,17 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							group.setVisibleUntilRestart(disabled);
 							String gpxPath = group.getGpxPath();
 							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
-							gpxFile[0] = selectedGpxFile.getGpxFile();
 							if (disabled) {
 								if (selectedGpxFile != null) {
+									gpxFile[0] = selectedGpxFile.getGpxFile();
 									switchGpxVisibility(gpxFile[0], false);
 								}	
 							} else {
 								if (selectedGpxFile == null) {
 									// TODO IO load in another thread ?
 									gpxFile[0] = GPXUtilities.loadGPXFile(app, new File(gpxPath));
+									switchGpxVisibility(gpxFile[0], true);
 								}
-								switchGpxVisibility(gpxFile[0], true);
 							}
 						}
 						mapMarkersHelper.runSynchronization(group);
