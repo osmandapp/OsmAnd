@@ -12,7 +12,7 @@ public class WikivoyageUtils {
 			case ON:
 				break;
 			case OFF:
-				rc.networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.OFFLINE);
+				rc.networkPolicy(NetworkPolicy.OFFLINE);
 				break;
 			case WIFI:
 				if (!settings.isWifiConnected()) {
