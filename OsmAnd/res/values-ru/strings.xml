@@ -232,7 +232,7 @@
     <string name="current_track">Текущий путь</string>
     <string name="use_osm_live_routing">Навигация OsmAnd Live</string>
     <string name="map_widget_battery">Уровень заряда батареи</string>
-    <string name="move_marker_bottom_sheet_title">Переместите карту чтобы изменить положение маркера</string>
+    <string name="move_marker_bottom_sheet_title">Переместите карту, чтобы изменить положение маркера</string>
     <!-- string name="lat_lon_pattern">Широта: %1$.5f Долгота: %2$.5f</string -->
     <string name="map_widget_magnetic_bearing">Магнитный пеленг</string>
     <string name="map_widget_bearing">Курсовой угол</string>
@@ -2272,7 +2272,7 @@
     <string name="access_autoannounce_period">Период автооповещений</string>
     <string name="access_autoannounce_period_descr">Минимальное время между оповещениями.</string>
     <string name="access_disable_offroute_recalc">Не пересчитывать маршрут при сходе с него</string>
-    <string name="access_disable_offroute_recalc_descr">Предотвращает автоматический пересчет маршрута после того, как вы из него вышли.</string>
+    <string name="access_disable_offroute_recalc_descr">Предотвращает пересчет маршрута после того, как вы из него вышли.</string>
     <string name="access_disable_wrong_direction_recalc">Не пересчитывать маршрут при обратном направлении движения</string>
     <string name="access_disable_wrong_direction_recalc_descr">Предотвращает автоматический пересчет маршрута при обратном направлении движения.</string>
     <string name="access_no_destination">Пункт назначения не задан</string>
@@ -2318,7 +2318,7 @@
     <string name="rendering_attr_hideOverground_name">Надземные объекты</string>
 
     <string name="no_update_info_desc">Не проверять информацию о новых версиях и скидках от OsmAnd.</string>
-    <string name="no_update_info">Не показывать обновления</string>
+    <string name="no_update_info">Не показывать новые версии</string>
     <string name="update_all_maps_now">Вы хотите обновить все карты сейчас?</string>
     <string name="clear_tile_data">Очистить всю плитку</string>
     <string name="routing_attr_short_way_name">Экономичный путь</string>
@@ -2624,7 +2624,7 @@
     <string name="add_group">Добавить группу</string>
     <string name="add_group_descr">Вы можете импортировать группу из избранных или путевых точек.</string>
     <string name="empty_state_markers_active">Создайте маркеры карт!</string>
-    <string name="empty_state_markers_active_desc">Длинное или короткое нажатие на место, а затем на флажок маркера.</string>
+    <string name="empty_state_markers_active_desc">Длинное или короткое нажатие на \"Места\", а затем на флажок маркера.</string>
     <string name="empty_state_markers_groups">Импорт групп</string>
     <string name="empty_state_markers_groups_desc">Вы можете импортировать группы избранных или путевых точек как маркеры.</string>
     <string name="empty_state_markers_history_desc">На этом экране появятся маркеры, отмеченные как пройденные.</string>
@@ -2859,7 +2859,7 @@
 	<string name="optional_point_name">Необязательное имя точки</string>
     <string name="rendering_attr_whiteWaterSports_name">Спортивные сплавы</string>
     <string name="distance_farthest">Расстояние: сначала дальняя</string>
-    <string name="distance_nearest">Расстояние: сначала ближайшая</string>
+    <string name="distance_nearest">Расстояние: сначала ближняя</string>
     <string name="group_deleted">Группа удалена</string>
     <string name="clear_all_intermediates">Очистить все промежуточные точки</string>
     <string name="use_two_digits_longitude">Использовать две цифры долготы</string>
