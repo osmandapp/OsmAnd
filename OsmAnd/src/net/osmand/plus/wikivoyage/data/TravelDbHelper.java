@@ -2,6 +2,7 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -25,7 +26,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -237,6 +241,81 @@ public class TravelDbHelper {
 			}
 		}
 		return wikivoyage.valueCollection();
+	}
+
+	@NonNull
+	public LinkedHashMap<String, List<WikivoyageSearchResult>> getNavigationMap(final TravelArticle article) {
+		String lang = article.getLang();
+		String title = article.getTitle();
+		if (TextUtils.isEmpty(lang) || TextUtils.isEmpty(title)) {
+			return new LinkedHashMap<>();
+		}
+		String[] parts = null;
+		if (!TextUtils.isEmpty(article.getAggregatedPartOf())) {
+			String[] originalParts = article.getAggregatedPartOf().split(",");
+			if (originalParts.length > 1) {
+				parts = new String[originalParts.length];
+				for (int i = 0; i < originalParts.length; i++) {
+					parts[i] = originalParts[originalParts.length - i - 1];
+				}
+			} else {
+				parts = originalParts;
+			}
+		}
+		Map<String, List<WikivoyageSearchResult>> navMap = new HashMap<>();
+		SQLiteConnection conn = openConnection();
+		if (conn != null) {
+			List<String> params = new ArrayList<>();
+			StringBuilder query = new StringBuilder("SELECT a.city_id, a.title, a.lang, a.is_part_of " +
+					"FROM wikivoyage_articles a WHERE is_part_of = ? and lang = ? ");
+			params.add(title);
+			params.add(lang);
+			if (parts != null && parts.length > 0) {
+				for (String part : parts) {
+					query.append("UNION SELECT a.city_id, a.title, a.lang, a.is_part_of " +
+							"FROM wikivoyage_articles a WHERE is_part_of = ? and lang = ? ");
+					params.add(part);
+					params.add(lang);
+				}
+			}
+
+			SQLiteCursor cursor = conn.rawQuery(query.toString(), params.toArray(new String[params.size()]));
+			if (cursor.moveToFirst()) {
+				do {
+					WikivoyageSearchResult rs = new WikivoyageSearchResult();
+					rs.cityId = cursor.getLong(0);
+					rs.articleTitles.add(cursor.getString(1));
+					rs.langs.add(cursor.getString(2));
+					rs.isPartOf = cursor.getString(3);
+					List<WikivoyageSearchResult> l = navMap.get(rs.isPartOf);
+					if (l == null) {
+						l = new ArrayList<>();
+						navMap.put(rs.isPartOf, l);
+					}
+					l.add(rs);
+				} while (cursor.moveToNext());
+			}
+			cursor.close();
+		}
+		LinkedHashMap<String, List<WikivoyageSearchResult>> res = new LinkedHashMap<>();
+		if (navMap.keySet().size() > 1 && parts != null && parts.length > 0) {
+			for (String part : parts) {
+				List<WikivoyageSearchResult> partsList = navMap.get(part);
+				if (partsList != null) {
+					Collections.sort(partsList, new Comparator<WikivoyageSearchResult>() {
+						@Override
+						public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
+							return collator.compare(o1.articleTitles.get(0), o2.articleTitles.get(0));
+						}
+					});
+					res.put(part, partsList);
+				}
+			}
+		} else {
+			res.putAll(navMap);
+		}
+
+		return res;
 	}
 
 	@Nullable

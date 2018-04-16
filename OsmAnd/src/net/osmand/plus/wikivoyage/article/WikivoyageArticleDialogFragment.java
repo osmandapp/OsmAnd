@@ -18,9 +18,11 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -56,6 +58,11 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
 			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
 			"<link href=\"article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
+			"<script type=\"text/javascript\">" +
+			"function showNavigation() {" +
+			"	Android.showNavigation();" +
+			"}" +
+			"</script>" +
 			"</head><body>\n";
 	private static final String FOOTER_INNER = "<script>var coll = document.getElementsByTagName(\"H2\");" +
 			"var i;" +
@@ -108,7 +115,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private TextView articleToolbarText;
 
 
-	@SuppressLint("SetJavaScriptEnabled")
+	@SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -160,7 +167,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				WikivoyageArticleContentsFragment fragment = new WikivoyageArticleContentsFragment();
 				fragment.setUsedOnMap(false);
 				fragment.setArguments(args);
-				fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, WikivoyageArticleContentsFragment.REQUEST_LINK_CODE);
+				fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, WikivoyageArticleContentsFragment.SHOW_CONTENT_ITEM_REQUEST_CODE);
 				fragment.show(fm, WikivoyageArticleContentsFragment.TAG);
 			}
 		});
@@ -198,6 +205,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		WebSettings webSettings = contentWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 		updateWebSettings();
+		contentWebView.addJavascriptInterface(new WikivoyageArticleWebAppInterface(), "Android");
 		contentWebView.setWebViewClient(new WikivoyageWebViewClient(getActivity(), getFragmentManager()));
 
 		return mainView;
@@ -217,11 +225,11 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == WikivoyageArticleContentsFragment.REQUEST_LINK_CODE) {
-			String link = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENTS_LINK_KEY);
-			String title = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENTS_TITLE_KEY);
+		if (requestCode == WikivoyageArticleContentsFragment.SHOW_CONTENT_ITEM_REQUEST_CODE) {
+			String link = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENT_ITEM_LINK_KEY);
+			String title = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENT_ITEM_TITLE_KEY);
 			moveToAnchor(link, title);
-		} else if (requestCode ==  WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED) {
+		} else if (requestCode ==  WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED_REQUEST_CODE) {
 			updateWebSettings();
 			populateArticle();
 		}
@@ -236,7 +244,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			FragmentManager fm = getFragmentManager();
 			if (activity != null && fm != null) {
 				WikivoyageShowPicturesDialogFragment fragment = new WikivoyageShowPicturesDialogFragment();
-				fragment.setTargetFragment(this, WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED);
+				fragment.setTargetFragment(this, WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED_REQUEST_CODE);
 				fragment.show(fm, WikivoyageShowPicturesDialogFragment.TAG);
 				settings.WIKIVOYAGE_SHOW_IMAGES_ASKED.set(true);
 			}
@@ -352,6 +360,25 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		StringBuilder sb = new StringBuilder(HEADER_INNER);
 
 		String imageTitle = article.getImageTitle();
+		if (!TextUtils.isEmpty(article.getAggregatedPartOf())) {
+			String[] aggregatedPartOfArrayOrig = article.getAggregatedPartOf().split(",");
+			if (aggregatedPartOfArrayOrig.length > 0) {
+				String current = aggregatedPartOfArrayOrig[0];
+				sb.append("<div class=\"nav-bar\" onClick=\"showNavigation()\">");
+				if (aggregatedPartOfArrayOrig.length > 1) {
+					String[] aggregatedPartOfArray = new String[aggregatedPartOfArrayOrig.length - 1];
+					for (int i = 0; i < aggregatedPartOfArrayOrig.length - 1; i++) {
+						aggregatedPartOfArray[i] = aggregatedPartOfArrayOrig[aggregatedPartOfArrayOrig.length - i - 1];
+					}
+					String navBarString = TextUtils.join(" • ", aggregatedPartOfArray);
+					sb.append(navBarString);
+				}
+				if (!TextUtils.isEmpty(current)) {
+					sb.append(" • <span class=\"nav-bar-current\">").append(current).append("</span>");
+				}
+				sb.append("</div>");
+			}
+		}
 		if (!TextUtils.isEmpty(imageTitle)) {
 			String url = TravelArticle.getImageUrl(imageTitle, false);
 			sb.append("<div class=\"title-image\" style=\"background-image: url(").append(url).append(")\"></div>");
@@ -414,6 +441,18 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			return true;
 		} catch (RuntimeException e) {
 			return false;
+		}
+	}
+
+	private class WikivoyageArticleWebAppInterface {
+
+		@JavascriptInterface
+		public void showNavigation() {
+			FragmentManager fm = getFragmentManager();
+			if (article == null || fm == null) {
+				return;
+			}
+			WikivoyageArticleNavigationFragment.showInstance(fm, cityId, selectedLang);
 		}
 	}
 }
