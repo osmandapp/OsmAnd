@@ -2958,4 +2958,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="article_removed">Artikel entfernt</string>
     <string name="index_item_world_wikivoyage">Weltweite Wikivoyage Artikel</string>
     <string name="shared_string_contents">Inhalte</string>
+    <string name="wikivoyage_download_pics">Bilder herunterladen</string>
+    <string name="wikivoyage_download_pics_descr">Wir können die Bilder in den Artikeln herunterladen, anzeigen und auf dem Gerät speichern, damit du auch offline Zugriff darauf hast. Sie können diese Einstellung jederzeit in Durchsuchen &gt; Optionen ändern.</string>
+    <string name="online_webpage_warning">Diese Seite ist nur online verfügbar. Möchten Sie sie einen Webbrowser öffen?</string>
+    <string name="delete_search_history">Suchverlauf löschen</string>
     </resources>
