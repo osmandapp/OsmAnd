@@ -168,7 +168,7 @@
     <string name="upload_poi">Выгрузить POI</string>
     <string name="route_calculation">Построение маршрута</string>
 
-    <string name="gpx_no_tracks_title">У вас пока ещё нет треков</string>
+    <string name="gpx_no_tracks_title">У вас пока нет треков</string>
     <string name="gpx_no_tracks_title_folder">Вы также можете добавить треки в папку</string>
     <string name="gpx_add_track">Добавить</string>
     <string name="gpx_appearance">Вид</string>
