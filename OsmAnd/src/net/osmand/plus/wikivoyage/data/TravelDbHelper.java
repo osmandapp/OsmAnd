@@ -2,6 +2,7 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -9,9 +10,9 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
@@ -71,12 +72,14 @@ public class TravelDbHelper {
 	private static final String SEARCH_COL_LANG = "lang";
 
 	private final OsmandApplication application;
+
+	private TravelLocalDataHelper localDataHelper;
+	private Collator collator;
+
 	private SQLiteConnection connection = null;
+
 	private File selectedTravelBook = null;
 	private List<File> existingTravelBooks = new ArrayList<>();
-	private Collator collator;
-	private TravelLocalDataHelper localDataHelper;
-
 
 	public TravelDbHelper(OsmandApplication application) {
 		this.application = application;

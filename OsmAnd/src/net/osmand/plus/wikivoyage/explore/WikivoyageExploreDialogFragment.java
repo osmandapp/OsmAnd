@@ -101,11 +101,10 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 			}
 		});
 
-		ViewPagerAdapter adapter = new ViewPagerAdapter(childFm);
 		final LockableViewPager viewPager = (LockableViewPager) mainView.findViewById(R.id.view_pager);
 		viewPager.setOffscreenPageLimit(2);
 		viewPager.setSwipeLocked(true);
-		viewPager.setAdapter(adapter);
+		viewPager.setAdapter(new ViewPagerAdapter(childFm));
 
 		final ColorStateList navColorStateList = createBottomNavColorStateList();
 		final BottomNavigationView bottomNav = (BottomNavigationView) mainView.findViewById(R.id.bottom_navigation);

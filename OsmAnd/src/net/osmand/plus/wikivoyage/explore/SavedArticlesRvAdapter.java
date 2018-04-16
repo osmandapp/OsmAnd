@@ -191,7 +191,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 					Object item = getItemByPosition();
 					if (item != null && item instanceof TravelArticle) {
 						final TravelArticle article = (TravelArticle) item;
-						final TravelLocalDataHelper ldh = app.getTravelDbHelper().getLocalDataHelper();;
+						final TravelLocalDataHelper ldh = app.getTravelDbHelper().getLocalDataHelper();
 						ldh.removeArticleFromSaved(article);
 						Snackbar snackbar = Snackbar.make(itemView, R.string.article_removed, Snackbar.LENGTH_LONG)
 								.setAction(R.string.shared_string_undo, new View.OnClickListener() {

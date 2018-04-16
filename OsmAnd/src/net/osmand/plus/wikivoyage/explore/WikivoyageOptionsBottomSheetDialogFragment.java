@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage.explore;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
@@ -132,6 +133,11 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 	}
 
 	private void selectTravelBookDialog() {
+		Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
+
 		final TravelDbHelper dbHelper = getMyApplication().getTravelDbHelper();
 		final List<File> list = dbHelper.getExistingTravelBooks();
 		String[] ls = new String[list.size()];
@@ -139,7 +145,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 			ls[i] = dbHelper.formatTravelBookName(list.get(i));
 		}
 
-		new AlertDialog.Builder(getContext())
+		new AlertDialog.Builder(ctx)
 				.setTitle(R.string.select_travel_book)
 				.setItems(ls, new OnClickListener() {
 					@Override

@@ -24,8 +24,6 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.WikivoyageShowImages;
@@ -107,7 +105,6 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 	private TextView articleToolbarText;
 
-
 	@SuppressLint("SetJavaScriptEnabled")
 	@Nullable
 	@Override
@@ -124,7 +121,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		final View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container);
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
-		
+
 		articleToolbarText = (TextView) mainView.findViewById(R.id.article_toolbar_text);
 		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
@@ -164,8 +161,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				fragment.show(fm, WikivoyageArticleContentsFragment.TAG);
 			}
 		});
-		
-		
+
 		trackButton = (TextView) mainView.findViewById(R.id.gpx_button);
 		trackButton.setCompoundDrawablesWithIntrinsicBounds(
 				getActiveIcon(R.drawable.ic_action_track_16), null, null, null
@@ -216,7 +212,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			String link = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENTS_LINK_KEY);
 			String title = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENTS_TITLE_KEY);
 			moveToAnchor(link, title);
-		} else if (requestCode ==  WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED) {
+		} else if (requestCode == WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED) {
 			updateWebSettings();
 			populateArticle();
 		}
@@ -327,8 +323,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			return;
 		}
 		articleToolbarText.setText(article.getTitle());
-		if(article.getGpxFile() != null) {
-			trackButton.setText(getString(R.string.points) + " (" + article.getGpxFile().getPointsSize() +")");
+		if (article.getGpxFile() != null) {
+			trackButton.setText(getString(R.string.points) + " (" + article.getGpxFile().getPointsSize() + ")");
 		}
 
 		TravelLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();
