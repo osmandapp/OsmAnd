@@ -177,15 +177,10 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				if (article == null || fm == null) {
 					return;
 				}
-				final GPXFile gpx = article.getGpxFile();
 				TravelDbHelper dbHelper = getMyApplication().getTravelDbHelper();
-				File file = getMyApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR + dbHelper.getGPXName(article));
-				
-				GPXUtilities.writeGpxFile(file, gpx, getMyApplication());
-				Bundle args = new Bundle();
-				args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, article.getContentsJson());
+				File path = dbHelper.createGpxFile(article);
 				Intent newIntent = new Intent(getActivity(), getMyApplication().getAppCustomization().getTrackActivity());
-				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpx.path);
+				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, path.getAbsolutePath());
 				// newIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(newIntent);
@@ -279,6 +274,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 						if (saved) {
 							helper.removeArticleFromSaved(article);
 						} else {
+							getMyApplication().getTravelDbHelper().createGpxFile(article);
 							helper.addArticleToSaved(article);
 						}
 						updateSaveButton();

@@ -343,6 +343,10 @@ public class MapMarkersHelper {
 	
 	
 	public void enableGroup(@NonNull MapMarkersGroup gr) {
+		// check if group doesn't exist internally
+		if(!mapMarkersGroups.contains(gr)) {
+			addGroupInternally(gr);
+		}
 		if (gr.isDisabled()) {
 			updateGroupDisabled(gr, false);
 		}
