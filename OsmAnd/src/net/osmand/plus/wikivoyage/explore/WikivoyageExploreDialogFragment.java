@@ -40,8 +40,6 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 	private ExploreTabFragment exploreTabFragment;
 	private SavedArticlesTabFragment savedArticlesTabFragment;
 
-	private ViewPagerAdapter adapter;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -103,7 +101,7 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 			}
 		});
 
-		adapter = new ViewPagerAdapter(childFm);
+		ViewPagerAdapter adapter = new ViewPagerAdapter(childFm);
 		final LockableViewPager viewPager = (LockableViewPager) mainView.findViewById(R.id.view_pager);
 		viewPager.setOffscreenPageLimit(2);
 		viewPager.setSwipeLocked(true);
