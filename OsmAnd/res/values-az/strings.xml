@@ -2113,4 +2113,10 @@
     <string name="wikivoyage_search_hint">Axtar: ölkə, şəhər, əyalət</string>
     <string name="shared_string_read">Oxu</string>
     <string name="saved_articles">Saxlanan məqalələr</string>
+    <string name="shared_string_only_with_wifi">Yalnız Wi-Fi ilə</string>
+    <string name="wikivoyage_download_pics">Şəkilləri endir</string>
+    <string name="shared_string_wifi_only">Yalnız Wi-Fi</string>
+    <string name="delete_search_history">Axtarış tarixçəsini sil</string>
+    <string name="download_images">Şəkilləri endir</string>
+    <string name="article_removed">Məqalə silindi</string>
     </resources>
