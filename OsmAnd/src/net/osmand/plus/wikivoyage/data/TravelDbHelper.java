@@ -95,7 +95,7 @@ public class TravelDbHelper {
 		File[] possibleFiles = application.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
 		String travelBook = application.getSettings().SELECTED_TRAVEL_BOOK.get();
 		existingTravelBooks.clear();
-		if (possibleFiles != null) {
+		if (possibleFiles != null && possibleFiles.length > 0) {
 			for (File f : possibleFiles) {
 				if (f.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
 					existingTravelBooks.add(f);
@@ -106,6 +106,8 @@ public class TravelDbHelper {
 					}
 				}
 			}
+		} else {
+			selectedTravelBook = null;
 		}
 		localDataHelper.refreshCachedData();
 	}
