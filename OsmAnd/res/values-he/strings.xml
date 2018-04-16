@@ -186,7 +186,7 @@
 	<string name="rendering_attr_hmRendered_name">הצגת יותר פרטים במפה</string>
 	<string name="local_index_routing_data">נתוני המסלול</string>
 	<string name="navigate_point_format">עיצוב</string>
-	<string name="first_time_msg">תודה לך על השימוש ב־OsmAnd. עבור תכונות רבות של יישום זה יש צורך בנתונים אזוריים בלתי מקוונים אותם ניתן להוריד דרך \'הגדרות\' -&gt; \'נתונים בלתי מקוונים\'. לאחר מכן יתאפשר לך לצפות במקום, לאתר כתובות, לחפש נקודות עניין ולמצוא תחבורה ציבורית.</string>    
+	<string name="first_time_msg">תודה לך על השימוש ב־OsmAnd. ניתן להוריד נתונים אזוריים לשימוש בלתי מקוון דרך ‚הגדרות’ ← ‚ניהול קובצי מפות’ לצפייה במפות, איתור כתובות, חיפוש נקודות עניין, מציאת תחבורה ציבורית ועוד.</string>    
 	<string name="basemap_was_selected_to_download">מפת הבסיס נבחרה להורדה לטובת הפעולה התקינה של היישומון.</string>
 	<string name="select_index_file_to_download">לא נמצא כלום. אם האזור שלך לא נמצא, ניתן ליצור אותו בעצמך (לפרטים https://osmand.net).</string>
 	<string name="local_indexes_cat_tile">אריחי מפה מקוונים ושמורים</string>
@@ -287,7 +287,7 @@
 	<string name="offline_edition">עריכה בלתי מקוונת</string>
 	<string name="offline_edition_descr">תמיד להשתמש בעריכה בלתי מקוונת.</string>
 	
-	<string name="update_poi_does_not_change_indexes">שינויי הנ״ע בתוך היישום אינם משפיעים על קובצי המפה שהתקבלו, השינויים נשמרים לקבצים מקומיים במקום זאת.</string>
+	<string name="update_poi_does_not_change_indexes">שינויי הנ״ע בתוך היישום אינם משפיעים על קובצי המפה שהתקבלו, השינויים נשמרים לקובץ על ההתקן שלך במקום.</string>
 	<string name="local_openstreetmap_uploading">מתבצעת שליחה…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} נ״ע/הערות נשלחו</string>
 	<string name="local_openstreetmap_uploadall">לשלוח הכול</string>
@@ -422,7 +422,7 @@
 	<string name="shared_string_name">שם</string>
 	<string name="favourites_edit_dialog_category">קטגוריה</string>
 	<string name="shared_string_no_thanks">לא, תודה</string>
-	<string name="basemap_missing">מפת העולם הבסיסית (המכסה את כל העולם ברמות תקריב נמוכות) חסרה. כדאי לשקול להוריד את World_basemap_x.obf לקבלת סקירה גלובלית.</string>
+	<string name="basemap_missing">ניתן להוריד את מפת העולם הבסיסית כדי לקבל סקירה כללית של כל העולם ברמות תקריב נמוכות.</string>
 	<string name="vector_data_missing">הורדת נתונים (‚בלתי מקוונים’) כדי להשתמש במפות באופן בלתי מקוון.</string>
 	<string name="local_index_gpx_info_show">"
 \n
@@ -494,7 +494,7 @@
 	<string name="select_tile_source_to_install">יש לבחור ב(אריחי) מפה להתקנה או עדכון.</string>
 	<string name="internet_not_available">לא ניתן לבצע את הפעולה ללא חיבור לאינטרנט.</string>
 	<string name="install_more">התקנת עוד…</string>
-	<string name="level_to_switch_vector_raster_descr">רמת התקריב המזערית לשימוש במפות וקטוריות.</string>
+	<string name="level_to_switch_vector_raster_descr">שימוש במפות מעובדות לכל מה שמעבר לרמה הזאת.</string>
 	<string name="level_to_switch_vector_raster">תקריב מזערי לווקטורים</string>
 	
 	
@@ -584,7 +584,7 @@
 	<string name="specified_dir_doesnt_exist">לא ניתן למצוא את התיקייה שצוינה.</string>
 	<string name="application_dir">תיקיית אחסון הנתונים</string>
 	
-	<string name="osmand_net_previously_installed">מותקנת גרסה קודמת של OsmAnd. כל הנתונים הבלתי מקוונים יתמכו על ידי היישום החדש. אך את הנקודות המועדפות יש לייצא ביישום הישן ולייבא לאחר מכן ליישום החדש.</string>
+	<string name="osmand_net_previously_installed">כל הנתונים הבלתי מקוונים מהיישומון הישן יתמכו על ידי היישומון החדש. אך את הנקודות המועדפות יש לייצא ביישומון הישן ולייבא לאחר מכן לחדש.</string>
 	<string name="build_installed">הבנייה {0} הותקנה ({1}).</string>
 	
 	<string name="downloading_build">הבנייה מתקבלת…</string>
@@ -1929,8 +1929,8 @@
     <string name="show_on_map_after_saving">הצגה על המפה לאחר השמירה</string>
     <string name="measurement_tool_action_bar">עיון במפה והוספת נקודות</string>
     <string name="measurement_tool">מדידת מרחק</string>
-    <string name="hillshade_menu_download_descr">כדי לצפות בהצללת תבליט של המפה, עליך להוריד את שכבת ההצללה של האזור הזה.</string>
-    <string name="hillshade_purchase_header">כדי לצפות בהצללת תבליט של המפה, עליך לרכוש ולהתקין את תוסף קווי המתאר (Contour Lines)</string>
+    <string name="hillshade_menu_download_descr">עליך להוריד את ‚שכבת ההצללה’ של האזור הזה כדי לצפות בהצללה של אזור זה.</string>
+    <string name="hillshade_purchase_header">עליך להתקין את תוסף ‚קווי המתאר’ (Contour Lines) כדי להציג אותם על המפה</string>
     <string name="hide_from_zoom_level">הסתרה החל מרמת תקריב</string>
     <string name="srtm_menu_download_descr">נא להוריד את מפת ‚קווי המתאר’ של האזור הזה.</string>
     <string name="shared_string_plugin">תוסף</string>
@@ -2751,4 +2751,16 @@
 	<string name="dd_ddddd_format">DD.DDDDD°</string>
 	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
 	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
-	</resources>
+	<string name="empty_state_osm_edits_descr">ניתן ליצור או לערוך נקודות עניין ב־OSM, לפתוח או להגיב על הערות OSM ולתרום קובצי GPX שהוקלטו.</string>
+    <string name="empty_state_markers_history_desc">סמנים שסומנו כיוון שעברת אותם יופיעו במסך הזה.</string>
+    <string name="mark_passed">סמן שעברת</string>
+    <string name="is_saved">נשמר</string>
+    <string name="show_passed">הצגת כאלו שעברת</string>
+    <string name="hide_passed">הסתרת אלו שעברת</string>
+    <string name="index_item_world_wikivoyage">מאמרי ויקימסע מכל רחבי העולם</string>
+    <string name="rendering_attr_depthContours_description">הצגת מתאר עומק ונקודות.</string>
+    <string name="auto_split_recording_descr">התחלת מקטע חדש לאחר הפסקה של 6 דקות, מסלול חדש לאחר שעתיים או קובץ חדש לאחר הפסקה ארוכה יותר ומעבר התאריך.</string>
+    <string name="christmas_desc">כדי לספק את ציפייתך לחג המולד וחגי השנה החדשה, ניתן לבחור להציג נקודות עניין שקשורות בחג המולד: עצי חג המולד, שווקים ועוד.</string>
+    <string name="quick_action_interim_dialog">הצגת חלון זמני</string>
+    <string name="favorite_autofill_toast_text">" נשמר אל "</string>
+    </resources>
