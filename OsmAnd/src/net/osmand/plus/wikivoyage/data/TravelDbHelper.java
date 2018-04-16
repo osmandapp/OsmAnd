@@ -2,7 +2,6 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -12,6 +11,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
@@ -338,5 +338,12 @@ public class TravelDbHelper {
 
 	public String getGPXName(TravelArticle article) {
 		return article.getTitle().replace('/', '_').replace('\'', '_').replace('\"', '_') + ".gpx";
+	}
+
+	public File createGpxFile(TravelArticle article) {
+		final GPXFile gpx = article.getGpxFile();
+		File file = application.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
+		GPXUtilities.writeGpxFile(file, gpx, application);
+		return file;
 	}
 }
