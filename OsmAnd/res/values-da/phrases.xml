@@ -3899,4 +3899,15 @@
 	<string name="poi_cable_number">Kabelnummer</string>
 	<string name="poi_via_ferrata_scale">Sværhedsgrad</string>
 
-</resources>
+<string name="poi_service_vehicle_car_repair_yes">Reparation af biler</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Salg af brugte biler</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Salg af nye biler</string>
+	<string name="poi_service_vehicle_car_parts_yes">Bildele</string>
+	<string name="poi_service_vehicle_batteries_yes">Akkumulatorer</string>
+	<string name="poi_service_vehicle_body_repair_yes">Pladearbejde</string>
+	<string name="poi_service_vehicle_electrical_yes">Elektrisk</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Reparation af lastbiler</string>
+	<string name="poi_service_vehicle_muffler_yes">Lyddæmper</string>
+	<string name="poi_service_vehicle_alignment_yes">Justering</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Reparation af transmission</string>
+	</resources>
