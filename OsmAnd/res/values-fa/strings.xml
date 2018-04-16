@@ -685,7 +685,7 @@
 	<string name="osm_settings_descr">تنظیمات لازم برای ارتباط با (OpenStreetMap.org (OSM را مشخص کنید.</string>
 	<string name="data_settings_descr">زبان را مشخص و داده‌ها را دانلود/بارگیری مجدد کنید.</string>
 	<string name="av_photo_play_sound">پخش صدا هنگام عکس‌برداری</string>
-	<string name="intermediate_items_sort_by_distance">مرتب‌کردن از اول به آخر</string>
+	<string name="intermediate_items_sort_by_distance">مرتب‌کردن پشت سر هم</string>
     <string name="local_osm_changes_backup_successful">فایل تغییرات OSM ایجاد شد %1$s</string>
     <string name="safe_mode">حالت ایمن</string>
     <string name="show_lanes">خطوط عبوری</string>
@@ -3082,4 +3082,6 @@
     <string name="online_webpage_warning">این صفحه فقط به‌صورت آنلاین در دسترس است. با مرورگر اینترنت باز شود؟</string>
     <string name="images_cache">حافظهٔ نهان تصاویر</string>
     <string name="download_images">دانلود تصاویر</string>
+    <string name="select_travel_book">انتخاب کتاب سفر</string>
+    <string name="shared_string_travel_book">کتاب سفر</string>
     </resources>
