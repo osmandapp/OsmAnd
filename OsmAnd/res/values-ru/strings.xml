@@ -149,7 +149,7 @@
     <string name="rendering_attr_depthContours_description">Показывать контуры и точки глубины.</string>
     <string name="rendering_attr_depthContours_name">Контуры морских глубин</string>
     <string name="rendering_attr_contourDensity_description">Частота горизонталей</string>
-    <string name="rendering_attr_contourDensity_name">Плотность контурных линий</string>
+    <string name="rendering_attr_contourDensity_name">Частота горизонталей</string>
     <string name="rendering_value_high_name">Высокая</string>
     <string name="rendering_value_medium_w_name">Средняя</string>
     <string name="rendering_value_low_name">Низкая</string>
