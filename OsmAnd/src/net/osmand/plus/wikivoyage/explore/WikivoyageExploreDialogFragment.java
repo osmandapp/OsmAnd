@@ -1,6 +1,7 @@
 package net.osmand.plus.wikivoyage.explore;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,10 +23,10 @@ import net.osmand.AndroidUtils;
 import net.osmand.PicassoUtils;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,6 +36,9 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 
 	private static final int EXPLORE_POSITION = 0;
 	private static final int SAVED_ARTICLES_POSITION = 1;
+
+	private ExploreTabFragment exploreTabFragment;
+	private SavedArticlesTabFragment savedArticlesTabFragment;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,24 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		FragmentManager childFm = getChildFragmentManager();
+		List<Fragment> fragments = childFm.getFragments();
+		if (fragments != null) {
+			for (Fragment fragment : fragments) {
+				if (fragment instanceof ExploreTabFragment) {
+					exploreTabFragment = (ExploreTabFragment) fragment;
+				} else if (fragment instanceof SavedArticlesTabFragment) {
+					savedArticlesTabFragment = (SavedArticlesTabFragment) fragment;
+				}
+			}
+		}
+		if (exploreTabFragment == null) {
+			exploreTabFragment = new ExploreTabFragment();
+		}
+		if (savedArticlesTabFragment == null) {
+			savedArticlesTabFragment = new SavedArticlesTabFragment();
+		}
+
 		final View mainView = inflate(R.layout.fragment_wikivoyage_explore_dialog, container);
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
@@ -55,9 +77,15 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				FragmentManager fm = getFragmentManager();
+				if (fm == null) {
+					return;
+				}
 				WikivoyageOptionsBottomSheetDialogFragment fragment = new WikivoyageOptionsBottomSheetDialogFragment();
 				fragment.setUsedOnMap(false);
-				fragment.show(getChildFragmentManager(), WikivoyageOptionsBottomSheetDialogFragment.TAG);
+				fragment.setTargetFragment(WikivoyageExploreDialogFragment.this,
+						WikivoyageOptionsBottomSheetDialogFragment.REQUEST_CODE);
+				fragment.show(fm, WikivoyageOptionsBottomSheetDialogFragment.TAG);
 			}
 		});
 
@@ -76,7 +104,7 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 		final LockableViewPager viewPager = (LockableViewPager) mainView.findViewById(R.id.view_pager);
 		viewPager.setOffscreenPageLimit(2);
 		viewPager.setSwipeLocked(true);
-		viewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager()));
+		viewPager.setAdapter(new ViewPagerAdapter(childFm));
 
 		final ColorStateList navColorStateList = createBottomNavColorStateList();
 		final BottomNavigationView bottomNav = (BottomNavigationView) mainView.findViewById(R.id.bottom_navigation);
@@ -105,6 +133,19 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 		return mainView;
 	}
 
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == WikivoyageOptionsBottomSheetDialogFragment.REQUEST_CODE) {
+			if (resultCode == WikivoyageOptionsBottomSheetDialogFragment.DOWNLOAD_IMAGES_CHANGED
+					|| resultCode == WikivoyageOptionsBottomSheetDialogFragment.CACHE_CLEARED) {
+				if (savedArticlesTabFragment != null) {
+					savedArticlesTabFragment.updateAdapter();
+				}
+			}
+		}
+	}
+
 	private ColorStateList createBottomNavColorStateList() {
 		return AndroidUtils.createCheckedColorStateList(getContext(), nightMode,
 				R.color.icon_color, R.color.wikivoyage_active_light,
@@ -121,13 +162,12 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 		}
 	}
 
-	private static class ViewPagerAdapter extends FragmentPagerAdapter {
+	private class ViewPagerAdapter extends FragmentPagerAdapter {
 
-		private final List<Fragment> fragments = new ArrayList<>();
+		private final List<BaseOsmAndFragment> fragments = Arrays.asList(exploreTabFragment, savedArticlesTabFragment);
 
 		ViewPagerAdapter(FragmentManager fm) {
 			super(fm);
-			fragments.addAll(Arrays.asList(new ExploreTabFragment(), new SavedArticlesTabFragment()));
 		}
 
 		@Override
