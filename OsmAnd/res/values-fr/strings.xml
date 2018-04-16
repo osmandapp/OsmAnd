@@ -4,7 +4,7 @@
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne.</string>
 
     <string name="update_poi_does_not_change_indexes">Les modifications de points d\'intérêt dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
-    <string name="local_openstreetmap_uploading">Transfert…</string>
+    <string name="local_openstreetmap_uploading">Envoi…</string>
     <string name="local_openstreetmap_were_uploaded">{0} Points d\'intérêt / Notes ont été envoyés</string>
     <string name="local_openstreetmap_uploadall">Tout envoyer</string>
 
@@ -12,8 +12,8 @@
     <string name="local_openstreetmap_upload">Envoyer les modifications vers OSM</string>
     <string name="local_openstreetmap_delete">Supprimer la modification</string>
     <string name="local_openstreetmap_descr_title">Modification asynchrone d\'OSM :</string>
-    <string name="local_openstreetmap_settings">Points d\'intérêt / notes OSM enregistrés en local</string>
-    <string name="local_openstreetmap_settings_descr">Afficher et gérer les points d\'intérêt / notes OSM enregistrés dans la base de données locale.</string>
+    <string name="local_openstreetmap_settings">Points d\'intérêt / notes OSM enregistrés sur l\'appareil</string>
+    <string name="local_openstreetmap_settings_descr">Afficher et gérer les points d\'intérêt / notes OSM enregistrés dans l\'appareil.</string>
 
 
     <string name="live_monitoring_interval_descr">Préciser l\'intervalle pour le suivi en ligne.</string>
@@ -43,7 +43,7 @@
     <string name="index_name_tts_voice">Voix de synthèse (TTS, recommandée)</string>
     <string name="amenity_type_osmwiki">Wikipédia (hors-ligne)</string>
     <string name="amenity_type_user_defined">Défini par l\'utilisateur</string>
-    <string name="fav_export_confirmation">Un fichier de favoris précédemment exporté existe déjà. Voulez-vous le remplacer ?</string>
+    <string name="fav_export_confirmation">Un fichier de favoris existe déjà. Voulez-vous l\'écraser ?</string>
     <string name="profile_settings">Paramètres pour le profil</string>
     <string name="settings_preset">Profil par défaut</string>
     <string name="settings_preset_descr">Les paramètres d’affichage et de navigation sont mémorisés dans un profil. Définissez votre profil par défaut ici.</string>
@@ -73,7 +73,7 @@
 
 
     <string name="use_transparent_map_theme">Thème de transparence</string>
-    <string name="native_library_not_supported">Rendu natif non supporté sur cet appareil.</string>
+    <string name="native_library_not_supported">Code natif non supporté sur cet appareil.</string>
     <string name="init_native_library">Chargement …</string>
     <string name="choose_auto_follow_route">Centrer automatiquement la carte</string>
     <string name="choose_auto_follow_route_descr">Délai avant de centrer la carte sur la position actuelle.</string>
@@ -117,21 +117,21 @@
     
     <string name="search_position_map_view">Centre de la carte</string>
     <string name="select_search_position">Autour de :</string>
-    <string name="context_menu_item_search">Rechercher autour de ce point</string>
+    <string name="context_menu_item_search">Rechercher à proximité</string>
 
     <string name="shared_string_save_as_gpx">Enregistrer comme nouvelle trace GPX</string>
-    <string name="route_successfully_saved_at">Itinéraire enregistré avec succès sous \'%1$s\'.</string>
+    <string name="route_successfully_saved_at">Itinéraire enregistré sous \'%1$s\'.</string>
     <string name="filename_input">Nom du fichier : </string>
     <string name="file_with_name_already_exist">Le même nom existe déjà.</string>
     <string name="shared_string_save">Enregistrer</string>
 
     <string name="local_index_upload_gpx_description">Envoyer les fichiers GPX à la communauté OSM. Ils seront utilisés pour améliorer les cartes.</string>
-    <string name="local_index_items_uploaded">%1$d sur %2$d élément(s) envoyé(s) avec succès.</string>
+    <string name="local_index_items_uploaded">%1$d sur %2$d élément(s) envoyé(s).</string>
     <string name="local_index_mi_upload_gpx">Envoyer à OSM</string>
     <string name="show_more_map_detail">Afficher plus de détails</string>
     <string name="show_more_map_detail_descr">Afficher certains détails des cartes vectorielles (routes, etc.) y compris aux niveaux de zooms inférieurs.</string>
-    <string name="favourites_delete_multiple_succesful">Favori(s) supprimé(s) avec succès.</string>
-    <string name="favorite_delete_multiple">Vous allez supprimer %1$d favoris et %2$d groupes de favoris. Êtes-vous sûr ?</string>
+    <string name="favourites_delete_multiple_succesful">Favori(s) supprimé(s).</string>
+    <string name="favorite_delete_multiple">Vous allez supprimer %1$d favoris et %2$d groupes de favoris. Êtes-vous certain ?</string>
     <string name="favorite_home_category">Domicile</string>
     <string name="favorite_friends_category">Amis</string>
     <string name="favorite_places_category">Lieux</string>
@@ -142,16 +142,16 @@
 
 
     <string name="local_index_installed">Version locale</string>
-    <string name="local_index_items_backuped">%1$d sur %2$d élément(s) désactivé(s) avec succès.</string>
-    <string name="local_index_items_deleted">%1$d sur %2$d éléments supprimés.</string>
-    <string name="local_index_items_restored">%1$d sur %2$d éléments restaurés.</string>
+    <string name="local_index_items_backuped">%1$d sur %2$d élément(s) désactivé(s).</string>
+    <string name="local_index_items_deleted">Élément(s) %1$d sur %2$d supprimé(s).</string>
+    <string name="local_index_items_restored">Élément(s) %1$d sur %2$d restauré(s).</string>
     <string name="local_index_no_items_to_do">Aucun élément à %1$s</string>
     <string name="local_index_action_do">Vous allez %1$s %2$s éléments. Continuer ?</string>
     <string name="local_index_descr_title">Gérer les cartes hors-ligne.</string>
     <string name="local_index_mi_restore">Restaurer</string>
     <string name="local_index_mi_backup">Désactiver</string>
 
-    <string name="local_index_mi_reload">Recharger depuis la carte SD</string>
+    <string name="local_index_mi_reload">Recharger depuis la carte mémoire</string>
     <string name="shared_string_download">Télécharger</string>
 
     <string name="local_index_poi_data">Points d\'intérêt</string>
@@ -179,7 +179,7 @@
     <string name="tts_language_not_supported_title">Langue non disponible</string>
     <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Voulez-vous allez sur Google Play et chercher d\'autres moteurs de synthèse vocale ? Sinon la langue par défaut sera utilisée.</string>
     <string name="tts_missing_language_data_title">Données manquantes</string>
-    <string name="tts_missing_language_data">Les données pour la langue sélectionnée ne sont pas installées. Voulez-vous les obtenir sur Google Play ?</string>
+    <string name="tts_missing_language_data">La langue sélectionnée n\'est pas installée. Souhaitez-vous l\'installer depuis Google Play ?</string>
     <string name="gpx_option_reverse_route">Inverser l\'itinéraire GPX</string>
     <string name="gpx_option_destination_point">Utiliser la destination en cours</string>
     <string name="gpx_option_from_start_point">Suivre l\'ensemble de la trace</string>
@@ -198,14 +198,14 @@
     <string name="modify_transparency">Modifier la transparence</string>
     <string name="layer_underlay">Fond de carte…</string>
     <string name="map_underlay">Fond de carte</string>
-    <string name="map_underlay_descr">Choisir un fond de carte.</string>
+    <string name="map_underlay_descr">Sélectionnez le fond de carte.</string>
     <string name="layer_overlay">Sur-couche de carte…</string>
     <string name="shared_string_none">Aucun</string>
     <string name="map_overlay">Sur-couche de la carte</string>
     <string name="map_overlay_descr">Sélectionnez la sur-couche de carte.</string>
-    <string name="tile_source_already_installed">La Carte est déjà installée, les paramètres seront mis à jour.</string>
+    <string name="tile_source_already_installed">Carte déjà installée, les paramètres seront mis à jour.</string>
     <string name="select_tile_source_to_install">Sélectionnez les cartes à installer ou à mettre à jour.</string>
-    <string name="internet_not_available">Une connexion Internet est nécessaire pour cette opération. Celle-ci n\'est pas disponible actuellement.</string>
+    <string name="internet_not_available">Une connexion Internet est nécessaire pour cette opération.</string>
     <string name="install_more">Installer plus…</string>
 
 
@@ -214,7 +214,7 @@
 
 
     <string name="create_poi_link_to_osm_doc"><u>OSM en ligne</u> classification des cartes en images</string>
-    <string name="error_doing_search">Une erreur est survenue lors de la recherche hors-ligne</string>
+    <string name="error_doing_search">Une erreur est survenue lors de la recherche hors-ligne.</string>
     <string name="search_offline_geo_error">Impossible d\'interpréter le geo intent:\'%s\'.</string>
     <string name="search_osm_offline">Recherche d\'adresses dans les cartes hors-ligne</string>
     <string name="system_locale">Système</string>
@@ -270,7 +270,7 @@
     <string name="km">km</string>
     <string name="km_h">km/h</string>
     <string name="m">m</string>
-    <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'\'est pas supporté</string>
+    <string name="old_map_index_is_not_supported">Le format de la carte \'\'{0}\'\' n\'est pas supporté</string>
     <string name="poi_filter_car_aid">Pour conducteurs</string>
     <string name="poi_filter_closest_poi">Points d\'intérêt à proximité</string>
     <string name="poi_filter_custom_filter">Filtre personnalisé</string>
@@ -674,11 +674,11 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
 
     <string name="unknown_from_location">Point de départ inconnu</string>
     <string name="confirm_interrupt_download">Souhaitez-vous annuler le téléchargement ?</string>
-    <string name="basemap_was_selected_to_download">Carte mondiale de base requise pour le bon fonctionnement, sélectionnée pour téléchargement.</string>
+    <string name="basemap_was_selected_to_download">La carte mondiale de base, requise pour le bon fonctionnement de l\'application, est sélectionnée pour téléchargement.</string>
 
     <string name="map_online_plugin_is_not_installed">Activez le greffon \"Cartes en ligne\" pour sélectionner différentes sources de cartes</string>
     <string name="map_online_data">Carte en ligne (tuiles)</string>
-    <string name="map_online_data_descr">Utiliser les cartes en ligne (télécharge et conserve en cache les tuiles sur la carte SD).</string>
+    <string name="map_online_data_descr">Utiliser les cartes en ligne (télécharge et conserve en cache les tuiles sur la carte mémoire).</string>
     <string name="shared_string_online_maps">Cartes en ligne</string>
     <string name="online_map_settings_descr">Configurer la source de la carte en ligne ou en cache.</string>
 
@@ -724,7 +724,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="accessibility_mode_descr">Activer les fonctionnalités d\'accessibilité.</string>
     <string name="shared_string_on">Oui</string>
     <string name="shared_string_off">Non</string>
-    <string name="accessibility_default">Selon les paramètres globaux</string>
+    <string name="accessibility_default">Selon les paramètres Android</string>
     <string name="backToMenu">Retour au menu</string>
     <string name="zoomOut">Zoom -</string>
     <string name="zoomIn">Zoom +</string>
@@ -804,7 +804,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="gpxup_private">Privé</string>
     <string name="osmand_parking_event">Récupérer le véhicule au parking</string>
     <string name="osmand_parking_warning">Avertissement</string>
-    <string name="osmand_parking_warning_text">Un rappel pour récupérer votre véhicule a été ajouté dans votre agenda. Il y restera jusqu\'à ce que vous le supprimiez manuellement.</string>
+    <string name="osmand_parking_warning_text">Un rappel pour récupérer votre véhicule a été ajouté à votre agenda. Il y restera jusqu\'à ce que vous le supprimiez manuellement.</string>
     <string name="osmand_parking_time_limit_title">Indiquez la durée de stationnement autorisée</string>
     <string name="osmand_parking_delete_confirm">Voulez-vous supprimer l\'emplacement de stationnement du véhicule ?</string>
     <string name="osmand_parking_delete">Supprimer l\'emplacement de stationnement</string>
@@ -823,7 +823,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
 
 Ces informations sont visibles sur le Tableau de bord comme sur la carte. Un rappel peut même être ajouté à votre calendrier.</string>
     <string name="osmand_parking_plugin_name">Emplacement de stationnement</string>
-    <string name="context_menu_item_add_parking_point">Marquer comme lieu de stationnement</string>
+    <string name="context_menu_item_add_parking_point">Marquer comme emplacement de stationnement</string>
     <string name="context_menu_item_delete_parking_point">Supprimer un emplacement de stationnement</string>
     <string name="starting_point_too_far">Point de départ trop éloigné de la route la plus proche.</string>
     <string name="shared_location">Lieu partagé</string>
@@ -839,7 +839,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="osmand_parking_position_description_add_time">Le véhicule a été garé à</string>
     <string name="use_compass_navigation_descr">Utiliser la boussole quand l\'orientation n\'est pas détectée.</string>
     <string name="use_compass_navigation">Utiliser la boussole</string>
-    <string name="route_updated_loc_found">L\'itinéraire sera calculé dès votre position connue</string>
+    <string name="route_updated_loc_found">En attente de la position pour calculer l\'itinéraire</string>
     <string name="continue_follow_previous_route_auto">La navigation a été interrompue. Souhaitez-vous la reprendre ? (%1$s secondes)</string>
 
 
@@ -1053,7 +1053,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="precise_routing_mode_descr">Activer pour calculer des itinéraires précis et sans surprises. Actuellement fonctionne sur des distances limitées et reste lent.</string>
     <string name="local_indexes_cat_av">Données audio/vidéo</string>
 
-    <string name="support_new_features_descr">Effectuer un don pour encourager la création de nouvelles fonctionnalités dans l\'application.</string>
+    <string name="support_new_features_descr">Effectuer un don pour encourager l\'ajout de nouvelles fonctionnalités à l\'application.</string>
 
     <string name="download_hillshade_maps">Ombrage du relief</string>
 
@@ -2065,7 +2065,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
 	<string name="osn_add_dialog_success">Note créée</string>
 	<string name="osn_add_dialog_error">Une erreur s\'est produite : la note n\'a pas pu être créée</string>
 	<string name="osn_close_dialog_success">La note a été fermée</string>
-	<string name="osn_close_dialog_error">Une erreur s\'est produite : la note ne peut pas être fermée</string>
+	<string name="osn_close_dialog_error">Une erreur s\'est produite : la note n\'est pas fermée</string>
 	<string name="shared_string_commit">Soumettre</string>
 	
     <string name="poi_dialog_reopen">Ré-ouvrir</string>
