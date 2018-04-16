@@ -1059,7 +1059,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
     <string name="local_openstreetmap_act_title">OSM-modifikationer</string>
 
-    <string name="download_using_mobile_internet">WiFi er i øjeblikket ikke tilsluttet. Skal der fortsættets med den nuværende forbindelse til internettet?</string>
+    <string name="download_using_mobile_internet">Wi-Fi er i øjeblikket ikke tilsluttet. Skal der fortsættets med den nuværende forbindelse til internettet?</string>
     <string name="cancel_navigation">Stop navigation</string>
     <string name="cancel_route">Annuller rute</string>
     <string name="clear_destination">Slet destinationen</string>
@@ -2140,7 +2140,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 	<string name="looking_up_address">Søger efter adressen</string>
     <string name="rendering_attr_horseRoutes_name">Rideruter</string>
     <string name="update">Opdateringsinterval</string>
-    <string name="only_download_over_wifi">Hent kun med WiFi</string>
+    <string name="only_download_over_wifi">Hent kun med Wi-Fi</string>
     <string name="live_update">Realtidsopdatering</string>
 <string name="update_now">Opdater nu</string>
 <string name="route_distance">Afstand:</string>
@@ -2300,9 +2300,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="access_shared_string_navigate_up">Navigere op</string>
     <string name="access_sort">Sorter</string>
     <string name="access_disable_offroute_recalc">Ingen rutegenberegning ved afvigelse fra ruten</string>
-    <string name="access_disable_offroute_recalc_descr">Ingen automatisk rutegenberegning ved afvigelse fra ruten.</string>
+    <string name="access_disable_offroute_recalc_descr">Ingen rutegenberegning ved afvigelse fra ruten.</string>
     <string name="access_disable_wrong_direction_recalc">Ingen rutegenberegning ved modsat retning</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Forhindrer automatisk genberegning af ruten, bare ved bevægelse i den modsatte retning.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Ingen genberegning af ruten, bare ved bevægelse i den modsatte retning.</string>
     <string name="access_smart_autoannounce_descr">Underret kun når retning til målpunktet ændres.</string>
     <string name="access_autoannounce_period">Autoannonceringsperiode</string>
     <string name="access_autoannounce_period_descr">Mindste tidsinterval mellem meddelelser.</string>
@@ -3074,10 +3074,10 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="index_item_world_wikivoyage">Verdensomspændende Wikivoyage artikler</string>
     <string name="shared_string_dont">Gør det ikke</string>
     <string name="shared_string_do">Gør det</string>
-    <string name="shared_string_only_with_wifi">Kun med WiFi</string>
+    <string name="shared_string_only_with_wifi">Kun med Wi-Fi</string>
     <string name="wikivoyage_download_pics">Hent billeder</string>
     <string name="wikivoyage_download_pics_descr">Hent og vis billeder i artikler og gem dem på enheden, så der er adgang til dem, mens offline. Kan altid ændres i Udforsk &gt; Indstillinger.</string>
-    <string name="shared_string_wifi_only">Kun WiFi</string>
+    <string name="shared_string_wifi_only">Kun Wi-Fi</string>
     <string name="select_travel_book">Vælg rejseguide</string>
     <string name="shared_string_travel_book">Rejseguide</string>
     <string name="online_webpage_warning">Siden er kun tilgængelig online. Åben den i en webbrowser?</string>
