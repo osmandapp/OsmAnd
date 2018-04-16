@@ -15,7 +15,7 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 
 	public static final String TAG = WikivoyageShowPicturesDialogFragment.class.getSimpleName();
 
-	public static final int SHOW_PICTURES_CHANGED = 1;
+	public static final int SHOW_PICTURES_CHANGED_REQUEST_CODE = 1;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 	private void sendResult() {
 		Fragment fragment = getTargetFragment();
 		if (fragment != null) {
-			fragment.onActivityResult(getTargetRequestCode(), SHOW_PICTURES_CHANGED, null);
+			fragment.onActivityResult(getTargetRequestCode(), SHOW_PICTURES_CHANGED_REQUEST_CODE, null);
 		}
 	}
 }

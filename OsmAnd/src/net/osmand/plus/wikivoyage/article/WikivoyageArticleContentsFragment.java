@@ -28,10 +28,10 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 	public static final String TAG = "WikivoyageArticleContentsFragment";
 
 	public static final String CONTENTS_JSON_KEY = "contents_json";
-	public static final String CONTENTS_LINK_KEY = "contents_link";
-	public static final String CONTENTS_TITLE_KEY = "title";
+	public static final String CONTENT_ITEM_LINK_KEY = "content_item_link";
+	public static final String CONTENT_ITEM_TITLE_KEY = "content_item_title";
 
-	public static final int REQUEST_LINK_CODE = 0;
+	public static final int SHOW_CONTENT_ITEM_REQUEST_CODE = 0;
 
 	private ExpandableListView expListView;
 
@@ -100,9 +100,9 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		Fragment fragment = getTargetFragment();
 		if (fragment != null) {
 			Intent intent = new Intent();
-			intent.putExtra(CONTENTS_LINK_KEY, link);
-			intent.putExtra(CONTENTS_TITLE_KEY, name);
-			fragment.onActivityResult(getTargetRequestCode(), REQUEST_LINK_CODE, intent);
+			intent.putExtra(CONTENT_ITEM_LINK_KEY, link);
+			intent.putExtra(CONTENT_ITEM_TITLE_KEY, name);
+			fragment.onActivityResult(getTargetRequestCode(), SHOW_CONTENT_ITEM_REQUEST_CODE, intent);
 		}
 	}
 
@@ -168,11 +168,6 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 			convertView.findViewById(R.id.upper_row_divider).setVisibility(View.GONE);
 			txtListChild.setTypeface(null);
-			if (childPosition == contentItem.getSubItems().get(groupPosition).getSubItems().size() - 1) {
-				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.VISIBLE);
-			} else {
-				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
-			}
 
 			return convertView;
 		}
@@ -223,11 +218,6 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 					}
 				}
 			});
-			if (isExpanded) {
-				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
-			} else {
-				convertView.findViewById(R.id.bottom_row_divider).setVisibility(View.VISIBLE);
-			}
 			return convertView;
 		}
 
