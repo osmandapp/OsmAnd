@@ -769,9 +769,9 @@ Lon %2$s</string>
     <string name="recording_context_menu_arecord">Grabar audio</string>
     <string name="recording_context_menu_vrecord">Grabar video</string>
     <string name="layer_recordings">Capa de grabaciones</string>
-    <string name="recording_can_not_be_played">La grabación no se puede reproducir</string>
+    <string name="recording_can_not_be_played">La grabación no puede reproducirse</string>
     <string name="recording_context_menu_delete">Borrar grabación</string>
-    <string name="recording_context_menu_play">Reproducir</string>
+    <string name="recording_context_menu_play">Escuchar</string>
     <string name="recording_description">Grabado %1$s %3$s %2$s</string>
     <string name="recording_default_name">Grabación</string>
     <string name="map_widget_av_notes">Notas multimedia</string>
@@ -2988,8 +2988,8 @@ Lon %2$s</string>
     <string name="images_cache">Caché de imágenes</string>
     <string name="delete_search_history">Borrar historial de búsquedas</string>
     <string name="show_images">Mostrar imágenes</string>
-    <string name="shared_string_dont">No hacer</string>
-    <string name="shared_string_do">Hacer</string>
+    <string name="shared_string_dont">No</string>
+    <string name="shared_string_do">Sí</string>
     <string name="shared_string_only_with_wifi">Sólo con WiFi</string>
     <string name="wikivoyage_download_pics">Descargar imágenes</string>
     <string name="wikivoyage_download_pics_descr">Podemos descargar y mostrar imágenes en los artículos y almacenarlas en el dispositivo, por lo que tendrá acceso a ellas mientras esté desconectado. Siempre puedes cambiar los ajustes en «Explorar &gt; Opciones».</string>
