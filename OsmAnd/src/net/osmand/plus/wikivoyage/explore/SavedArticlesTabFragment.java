@@ -82,6 +82,12 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 		diffRes.dispatchUpdatesTo(adapter);
 	}
 
+	public void updateAdapter() {
+		if (adapter != null) {
+			adapter.notifyDataSetChanged();
+		}
+	}
+
 	private List<Object> getItems() {
 		List<Object> items = new ArrayList<>();
 		List<TravelArticle> savedArticles = dataHelper.getSavedArticles();

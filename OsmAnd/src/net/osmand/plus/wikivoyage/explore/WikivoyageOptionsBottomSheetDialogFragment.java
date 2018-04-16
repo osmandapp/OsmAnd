@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.explore;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.view.Gravity;
@@ -30,6 +31,10 @@ import java.util.List;
 public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public final static String TAG = "WikivoyageOptionsBottomSheetDialogFragment";
+
+	public static final int REQUEST_CODE = 0;
+	public static final int DOWNLOAD_IMAGES_CHANGED = 1;
+	public static final int CACHE_CLEARED = 2;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -65,7 +70,6 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-
 						final PopupMenu popup = new PopupMenu(v.getContext(), v, Gravity.END);
 						for (final WikivoyageShowImages showImages : WikivoyageShowImages.values()) {
 							MenuItem item = popup.getMenu().add(getString(showImages.name));
@@ -73,12 +77,12 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 								@Override
 								public boolean onMenuItemClick(MenuItem item) {
 									showImagesPref.set(showImages);
+									sendResult(DOWNLOAD_IMAGES_CHANGED);
 									dismiss();
 									return true;
 								}
 							});
 						}
-
 						popup.show();
 					}
 				})
@@ -95,6 +99,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 					public void onClick(View v) {
 						new WebView(getContext()).clearCache(true);
 						PicassoUtils.clearAllPicassoCache();
+						sendResult(CACHE_CLEARED);
 						dismiss();
 					}
 				})
@@ -119,7 +124,14 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 		items.add(clearHistoryItem);
 	}
 
-	protected void selectTravelBookDialog() {
+	private void sendResult(int resultCode) {
+		Fragment fragment = getTargetFragment();
+		if (fragment != null) {
+			fragment.onActivityResult(getTargetRequestCode(), resultCode, null);
+		}
+	}
+
+	private void selectTravelBookDialog() {
 		final TravelDbHelper dbHelper = getMyApplication().getTravelDbHelper();
 		final List<File> list = dbHelper.getExistingTravelBooks();
 		String[] ls = new String[list.size()];
