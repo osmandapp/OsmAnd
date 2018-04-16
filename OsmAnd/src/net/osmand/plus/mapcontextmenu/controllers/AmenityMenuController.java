@@ -143,7 +143,7 @@ public class AmenityMenuController extends MenuController {
 		Map<String, String> additionalInfo = amenity.getAdditionalInfo();
 		if (additionalInfo != null) {
 			String ref = additionalInfo.get("ref");
-			if (!TextUtils.isEmpty(ref)) {
+			if (!TextUtils.isEmpty(ref) && !ref.equals(name)) {
 				return name + " (" + ref + ")";
 			}
 		}

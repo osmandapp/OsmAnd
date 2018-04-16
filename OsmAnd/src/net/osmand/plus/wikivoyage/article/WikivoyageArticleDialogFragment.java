@@ -22,12 +22,9 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.WikivoyageShowImages;
@@ -114,7 +111,6 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 	private TextView articleToolbarText;
 
-
 	@SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
 	@Nullable
 	@Override
@@ -131,7 +127,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		final View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container);
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
-		
+
 		articleToolbarText = (TextView) mainView.findViewById(R.id.article_toolbar_text);
 		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
@@ -171,8 +167,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				fragment.show(fm, WikivoyageArticleContentsFragment.TAG);
 			}
 		});
-		
-		
+
 		trackButton = (TextView) mainView.findViewById(R.id.gpx_button);
 		trackButton.setCompoundDrawablesWithIntrinsicBounds(
 				getActiveIcon(R.drawable.ic_action_track_16), null, null, null
@@ -184,15 +179,10 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				if (article == null || fm == null) {
 					return;
 				}
-				final GPXFile gpx = article.getGpxFile();
 				TravelDbHelper dbHelper = getMyApplication().getTravelDbHelper();
-				File file = getMyApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR + dbHelper.getGPXName(article));
-				
-				GPXUtilities.writeGpxFile(file, gpx, getMyApplication());
-				Bundle args = new Bundle();
-				args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, article.getContentsJson());
+				File path = dbHelper.createGpxFile(article);
 				Intent newIntent = new Intent(getActivity(), getMyApplication().getAppCustomization().getTrackActivity());
-				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpx.path);
+				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, path.getAbsolutePath());
 				// newIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(newIntent);
@@ -287,6 +277,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 						if (saved) {
 							helper.removeArticleFromSaved(article);
 						} else {
+							getMyApplication().getTravelDbHelper().createGpxFile(article);
 							helper.addArticleToSaved(article);
 						}
 						updateSaveButton();
@@ -339,8 +330,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			return;
 		}
 		articleToolbarText.setText(article.getTitle());
-		if(article.getGpxFile() != null) {
-			trackButton.setText(getString(R.string.points) + " (" + article.getGpxFile().getPointsSize() +")");
+		if (article.getGpxFile() != null) {
+			trackButton.setText(getString(R.string.points) + " (" + article.getGpxFile().getPointsSize() + ")");
 		}
 
 		TravelLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();

@@ -11,6 +11,7 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
@@ -75,13 +76,14 @@ public class TravelDbHelper {
 	private static final String SEARCH_COL_LANG = "lang";
 
 	private final OsmandApplication application;
+
+	private TravelLocalDataHelper localDataHelper;
+	private Collator collator;
+
 	private SQLiteConnection connection = null;
+
 	private File selectedTravelBook = null;
 	private List<File> existingTravelBooks = new ArrayList<>();
-	private Collator collator;
-	private TravelLocalDataHelper localDataHelper;
-	private boolean initialized = false;
-
 
 	public TravelDbHelper(OsmandApplication application) {
 		this.application = application;
@@ -94,14 +96,10 @@ public class TravelDbHelper {
 	}
 
 	public void initTravelBooks() {
-		if (initialized) {
-			return;
-		}
-		initialized = true;
 		File[] possibleFiles = application.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
 		String travelBook = application.getSettings().SELECTED_TRAVEL_BOOK.get();
 		existingTravelBooks.clear();
-		if (possibleFiles != null) {
+		if (possibleFiles != null && possibleFiles.length > 0) {
 			for (File f : possibleFiles) {
 				if (f.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
 					existingTravelBooks.add(f);
@@ -112,6 +110,8 @@ public class TravelDbHelper {
 					}
 				}
 			}
+		} else {
+			selectedTravelBook = null;
 		}
 		localDataHelper.refreshCachedData();
 	}
@@ -417,5 +417,12 @@ public class TravelDbHelper {
 
 	public String getGPXName(TravelArticle article) {
 		return article.getTitle().replace('/', '_').replace('\'', '_').replace('\"', '_') + ".gpx";
+	}
+
+	public File createGpxFile(TravelArticle article) {
+		final GPXFile gpx = article.getGpxFile();
+		File file = application.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
+		GPXUtilities.writeGpxFile(file, gpx, application);
+		return file;
 	}
 }

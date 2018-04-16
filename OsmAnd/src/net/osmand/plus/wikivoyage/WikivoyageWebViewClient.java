@@ -25,16 +25,16 @@ import java.net.URLDecoder;
 public class WikivoyageWebViewClient extends WebViewClient {
 
 	private OsmandApplication app;
-	private FragmentManager mFragmentManager;
-	private Context mContext;
+	private FragmentManager fragmentManager;
+	private Context context;
 
 	private static final String PAGE_PREFIX = "https://";
 	private static final String WEB_DOMAIN = ".wikivoyage.com/wiki/";
 
 	public WikivoyageWebViewClient(FragmentActivity context, FragmentManager fm) {
 		app = (OsmandApplication) context.getApplication();
-		mFragmentManager = fm;
-		mContext = context;
+		fragmentManager = fm;
+		this.context = context;
 	}
 
 	@Override
@@ -50,8 +50,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 			}
 			long articleId = app.getTravelDbHelper().getArticleId(articleName, lang);
 			if (articleId != 0) {
-				WikivoyageArticleDialogFragment.showInstance(app, mFragmentManager,
-						articleId, lang);
+				WikivoyageArticleDialogFragment.showInstance(app, fragmentManager, articleId, lang);
 			} else {
 				warnAboutExternalLoad(url);
 			}
@@ -62,17 +61,17 @@ public class WikivoyageWebViewClient extends WebViewClient {
 	}
 
 	private void warnAboutExternalLoad(final String url) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-		builder.setTitle(url);
-		builder.setMessage(R.string.online_webpage_warning);
-		builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-				mContext.startActivity(i);
-			}
-		});
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.show();
+		new AlertDialog.Builder(context)
+				.setTitle(url)
+				.setMessage(R.string.online_webpage_warning)
+				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+						context.startActivity(i);
+					}
+				})
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.show();
 	}
 }

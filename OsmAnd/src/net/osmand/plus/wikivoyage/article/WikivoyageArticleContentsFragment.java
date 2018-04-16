@@ -37,8 +37,9 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
+		Context ctx = getContext();
 		Bundle args = getArguments();
-		if (args == null) {
+		if (ctx == null || args == null) {
 			return;
 		}
 
@@ -54,11 +55,9 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 		items.add(new TitleItem(getString(R.string.shared_string_contents)));
 
-		expListView = new ExpandableListView(getContext());
-		ExpandableListAdapter listAdapter = new ExpandableListAdapter(getContext(), contentItem);
-
-		expListView.setAdapter(listAdapter);
-		Drawable transparent = ContextCompat.getDrawable(getContext(), R.color.color_transparent);
+		Drawable transparent = ContextCompat.getDrawable(ctx, R.color.color_transparent);
+		expListView = new ExpandableListView(ctx);
+		expListView.setAdapter(new ExpandableListAdapter(ctx, contentItem));
 		expListView.setDivider(transparent);
 		expListView.setGroupIndicator(transparent);
 		expListView.setSelector(transparent);
@@ -70,7 +69,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
-			                            int groupPosition, int childPosition, long id) {
+										int groupPosition, int childPosition, long id) {
 				WikivoyageContentItem wikivoyageContentItem = contentItem.getSubItems().get(groupPosition);
 				String link = wikivoyageContentItem.getSubItems().get(childPosition).getLink();
 				String name = wikivoyageContentItem.getLink().substring(1);
@@ -90,18 +89,19 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 				return true;
 			}
 		});
-		LinearLayout container = new LinearLayout(getContext());
+
+		LinearLayout container = new LinearLayout(ctx);
 		container.addView(expListView);
 
 		items.add(new SimpleBottomSheetItem.Builder().setCustomView(container).create());
 	}
 
 	private void sendResults(String link, String name) {
-		Intent intent = new Intent();
-		intent.putExtra(CONTENT_ITEM_LINK_KEY, link);
-		intent.putExtra(CONTENT_ITEM_TITLE_KEY, name);
 		Fragment fragment = getTargetFragment();
 		if (fragment != null) {
+			Intent intent = new Intent();
+			intent.putExtra(CONTENT_ITEM_LINK_KEY, link);
+			intent.putExtra(CONTENT_ITEM_TITLE_KEY, name);
 			fragment.onActivityResult(getTargetRequestCode(), SHOW_CONTENT_ITEM_REQUEST_CODE, intent);
 		}
 	}
@@ -195,7 +195,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 		@Override
 		public View getGroupView(final int groupPosition, final boolean isExpanded,
-		                         View convertView, ViewGroup parent) {
+								 View convertView, ViewGroup parent) {
 			String headerTitle = (String) getGroup(groupPosition);
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context)
@@ -211,7 +211,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			indicator.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if(isExpanded){
+					if (isExpanded) {
 						expListView.collapseGroup(groupPosition);
 					} else {
 						expListView.expandGroup(groupPosition);
