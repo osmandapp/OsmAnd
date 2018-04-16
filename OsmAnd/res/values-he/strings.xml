@@ -2755,7 +2755,7 @@
     <string name="empty_state_markers_history_desc">סמנים שסומנו כיוון שעברת אותם יופיעו במסך הזה.</string>
     <string name="mark_passed">סמן שעברת</string>
     <string name="is_saved">נשמר</string>
-    <string name="show_passed">הצגת כאלו שעברת</string>
+    <string name="show_passed">הצגת אלו שעברת</string>
     <string name="hide_passed">הסתרת אלו שעברת</string>
     <string name="index_item_world_wikivoyage">מאמרי ויקימסע מכל רחבי העולם</string>
     <string name="rendering_attr_depthContours_description">הצגת מתאר עומק ונקודות.</string>
