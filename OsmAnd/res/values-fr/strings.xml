@@ -965,7 +965,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
 
     <string name="safe_mode_description">Exécuter l\'application en mode sûr (utiliser le code Android plus lent plutôt que le code natif).</string>
     <string name="safe_mode">Mode sûr</string>
-    <string name="native_library_not_running">L\'application s\'exécute en mode sûr (peut être désactivé dans Paramètres).</string>
+    <string name="native_library_not_running">L\'application s\'exécute en mode sûr (pour désactiver, allez dans Paramètres).</string>
     <string name="rendering_attr_showRoadMaps_description">Sélectionnez quand afficher les cartes routières :</string>
     <string name="rendering_attr_showRoadMaps_name">Cartes routières uniquement</string>
     <string name="download_roads_only_item">Routes uniquement</string>
