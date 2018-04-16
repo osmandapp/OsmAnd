@@ -149,12 +149,12 @@
     <string name="rendering_attr_depthContours_description">Показывать контуры и точки глубины.</string>
     <string name="rendering_attr_depthContours_name">Контуры морских глубин</string>
     <string name="rendering_attr_contourDensity_description">Частота горизонталей</string>
-    <string name="rendering_attr_contourDensity_name">Частота горизонталей</string>
+    <string name="rendering_attr_contourDensity_name">Плотность контурных линий</string>
     <string name="rendering_value_high_name">Высокая</string>
     <string name="rendering_value_medium_w_name">Средняя</string>
     <string name="rendering_value_low_name">Низкая</string>
     <string name="rendering_attr_contourWidth_description">Толщина горизонталей</string>
-    <string name="rendering_attr_contourWidth_name">Толщина горизонталей</string>
+    <string name="rendering_attr_contourWidth_name">Толщина контурных линий</string>
     <string name="rendering_attr_hideWaterPolygons_description">Воду</string>
     <string name="rendering_attr_hideWaterPolygons_name">Скрыть воду</string>
     <string name="legacy_search">Старый поиск</string>
@@ -168,7 +168,7 @@
     <string name="upload_poi">Выгрузить POI</string>
     <string name="route_calculation">Построение маршрута</string>
 
-    <string name="gpx_no_tracks_title">У вас пока ещё нет треков</string>
+    <string name="gpx_no_tracks_title">У вас пока нет треков</string>
     <string name="gpx_no_tracks_title_folder">Вы также можете добавить треки в папку</string>
     <string name="gpx_add_track">Добавить</string>
     <string name="gpx_appearance">Вид</string>
@@ -2216,7 +2216,7 @@
     <string name="osm_live_not_active">Неактивные</string>
     <string name="osm_live_region_desc">Часть вашего пожертвования будет направляться пользователям OSM внесшим изменения в карту этого региона.</string>
     <string name="download_files_error_not_enough_space">Недостаточно места! Необходимо {3} Мб временно и {1} Мб на постоянной основе. Свободного места - {2} Мб.</string>
-    <string name="upload_osm_note_description">Вы можете загружать свою заметку OSM анонимно или используя свой профиль OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Вы можете загрузить свою заметку OSM анонимно или используя свой профиль OpenStreetMap.org.</string>
     <string name="upload_osm_note">Загрузить OSM заметку</string>
     <string name="use_drawer_btn">Использовать меню</string>
     <string name="use_dashboard_btn">Использовать домашнюю страницу</string>
@@ -2870,9 +2870,9 @@
     <string name="shared_string_total">Всего</string>
     <string name="shared_string_result">Результат</string>
     <string name="wikivoyage_search_hint">Поиск: страна, город, провинция</string>
-    <string name="shared_string_read">Читать</string>
+    <string name="shared_string_read">Чтение</string>
     <string name="saved_articles">Сохраненные статьи</string>
-    <string name="shared_string_contents">Содержание</string>
+    <string name="shared_string_contents">Содержимое</string>
     <string name="download_maps_travel">Карты путешествий</string>
     <string name="shared_string_wikivoyage">Викигид</string>
     <string name="article_removed">Статья удалена</string>
