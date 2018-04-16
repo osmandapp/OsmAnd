@@ -2624,7 +2624,7 @@
     <string name="add_group">Добавить группу</string>
     <string name="add_group_descr">Вы можете импортировать группу из избранных или путевых точек.</string>
     <string name="empty_state_markers_active">Создайте маркеры карт!</string>
-    <string name="empty_state_markers_active_desc">Длинное или короткое нажатие на \"Места\", а затем на флажок маркера.</string>
+    <string name="empty_state_markers_active_desc">Длинное или короткое нажатие на нужное место, а затем на флажок маркера.</string>
     <string name="empty_state_markers_groups">Импорт групп</string>
     <string name="empty_state_markers_groups_desc">Вы можете импортировать группы избранных или путевых точек как маркеры.</string>
     <string name="empty_state_markers_history_desc">На этом экране появятся маркеры, отмеченные как пройденные.</string>
