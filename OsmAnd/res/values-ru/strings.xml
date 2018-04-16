@@ -2883,11 +2883,12 @@
     <string name="show_images">Показать изображения</string>
     <string name="shared_string_only_with_wifi">Только по WiFi</string>
     <string name="wikivoyage_download_pics">Скачать изображения</string>
-    <string name="wikivoyage_download_pics_descr">Мы можем загружать и показывать изображения в статьях и хранить их на устройстве, таким образом они будут доступны вам в автономном режиме. Вы всегда можете изменить настройку в «Исследование»&gt; «Параметры».</string>
+    <string name="wikivoyage_download_pics_descr">Мы можем загружать и показывать изображения в статьях и хранить их на устройстве, таким образом они будут доступны вам в автономном режиме. Вы всегда можете изменить настройку в Исследование &gt; Параметры.</string>
     <string name="shared_string_wifi_only">Только WiFi</string>
-    <string name="select_travel_book">Выберите путеводитель</string>
-    <string name="shared_string_travel_book">Путеводитель</string>
-    <string name="online_webpage_warning">Эта страница доступна только онлайн. Вы хотите открыть её в веб-браузере?</string>
+    <string name="select_travel_book">Выберите дневник путешествий</string>
+    <string name="shared_string_travel_book">Дневник путешествий</string>
+    <string name="online_webpage_warning">Эта страница доступна только онлайн. Вы хотите открыть ее в браузере?</string>
     <string name="download_images">Скачать изображения</string>
     <string name="shared_string_dont">Нет</string>
+    <string name="shared_string_do">Выполнить</string>
     </resources>
