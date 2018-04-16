@@ -2964,8 +2964,8 @@
     <string name="shared_string_explore">Explorar</string>
     <string name="shared_string_contents">Contenido</string>
     <string name="index_item_world_wikivoyage">Artículos de Wikiviajes en todo el mundo</string>
-    <string name="shared_string_dont">No hacer</string>
-    <string name="shared_string_do">Hacer</string>
+    <string name="shared_string_dont">No</string>
+    <string name="shared_string_do">Sí</string>
     <string name="shared_string_only_with_wifi">Sólo con WiFi</string>
     <string name="wikivoyage_download_pics">Descargar imágenes</string>
     <string name="wikivoyage_download_pics_descr">Podemos descargar y mostrar imágenes en los artículos y almacenarlas en el dispositivo, por lo que tendrá acceso a ellas mientras esté desconectado. Siempre puede cambiar la configuración en «Explorar &gt; Opciones».</string>
