@@ -117,9 +117,9 @@
     <string name="routing_attr_height_obstacles_name">Использовать данные о высотах</string>
     <string name="routing_attr_height_obstacles_description">Использовать данные о высоте местности, предоставленные SRTM, ASTER и EU-DEM.</string>
 
-    <string name="quick_action_duplicates">Указанное имя для быстрого действия уже используется. Действие будет сохранено как %1$s чтобы избежать дублирования.</string>
+    <string name="quick_action_duplicates">Указанное имя для быстрого действия уже используется. Действие будет сохранено как %1$s, чтобы избежать дублирования.</string>
     <string name="quick_action_duplicate">Обнаружен дубликат имени</string>
-    <string name="quick_action_showhide_favorites_descr">Нажатие на кнопку действия приведёт к отображению/скрытию избранных точек с карты.</string>
+    <string name="quick_action_showhide_favorites_descr">Нажатие на кнопку действия отобразит или скроет избранные точки с карты.</string>
     <string name="quick_action_showhide_poi_descr">Нажатие этой кнопки действия отобразит или скроет POI на карте.</string>
     <string name="quick_action_showhide_favorites_title">Показать/скрыть избранные</string>
     <string name="quick_action_add_category">Добавить категорию</string>
@@ -2609,10 +2609,10 @@
     <string name="quick_action_take_audio_note_descr">Нажатие на кнопку действия добавит аудио заметку по центру экрана.</string>
     <string name="quick_action_take_video_note_descr">Нажатие на кнопку действия добавит видео заметку по центру экрана.</string>
     <string name="quick_action_take_photo_note_descr">Нажатие на кнопку действия добавит фото заметку по центру экрана.</string>
-    <string name="quick_action_add_osm_bug_descr">Нажатие на кнопку действия добавит заметку OSM по центру экрана.</string>
-    <string name="quick_action_add_poi_descr">Нажатие на кнопку действия добавит POI по центру экрана.</string>
+    <string name="quick_action_add_osm_bug_descr">Нажатие на кнопку действия добавит заметку OSM в центре экрана.</string>
+    <string name="quick_action_add_poi_descr">Нажатие на кнопку действия добавит POI в центре экрана.</string>
     <string name="quick_action_navigation_voice_descr">Нажатие на кнопку действия выключит или включит голосовые подсказки во время навигации.</string>
-    <string name="quick_action_add_parking_descr">Нажатие на кнопку действия добавит место парковки по центру экрана.</string>
+    <string name="quick_action_add_parking_descr">Нажатие на кнопку действия добавит место парковки в центре экрана.</string>
     <string name="quick_action_interim_dialog">Показывать промежуточный диалог</string>
     <string name="mappilary_no_internet_desc">Вам необходимо подключиться к Интернету для просмотра фотографий из Mapillary.</string>
     <string name="wrong_format">Неправильный формат</string>
