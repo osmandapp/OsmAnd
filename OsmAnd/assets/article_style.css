@@ -155,6 +155,11 @@ pre {
     word-wrap: break-word;
 }
 
+td {
+  display: inline-block;
+  word-wrap: break-word;
+}
+
 .thumb-tright, .thumbinner {
     width: 100% !important;
 }
