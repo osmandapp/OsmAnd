@@ -962,8 +962,8 @@
     <string name="edit_filter_create_message">Фильтр {0} создан</string>
     <string name="accessibility_mode">Режим специальных возможностей</string>
     <string name="accessibility_mode_descr">Включает дополнительные возможности для невизуального доступа.</string>
-    <string name="shared_string_on">Включено</string>
-    <string name="shared_string_off">Выключено</string>
+    <string name="shared_string_on">Вкл.</string>
+    <string name="shared_string_off">Выкл.</string>
     <string name="accessibility_default">Использовать системную настройку</string>
     <string name="backToMenu">Назад к меню</string>
     <string name="zoomOut">Уменьшить</string>
