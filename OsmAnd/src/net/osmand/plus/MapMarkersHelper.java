@@ -418,7 +418,7 @@ public class MapMarkersHelper {
 		if (mapMarkersGroup.getId() == null || mapMarkersGroup.getName() == null) {
 			return;
 		}
-		createHeaderInGroup(mapMarkersGroup);
+		createHeadersInGroup(mapMarkersGroup);
 		int historyMarkersCount = mapMarkersGroup.getHistoryMarkers().size();
 		ShowHideHistoryButton showHideHistoryButton = mapMarkersGroup.getShowHideHistoryButton();
 		if (showHideHistoryButton != null) {
@@ -460,15 +460,22 @@ public class MapMarkersHelper {
 		}
 	}
 
-	private void createHeaderInGroup(@NonNull MapMarkersGroup group) {
+	private void createHeadersInGroup(@NonNull MapMarkersGroup group) {
 		GroupHeader header = new GroupHeader();
+		CategoriesSubHeader categoriesSubHeader = new CategoriesSubHeader();
+		WikivoyageArticleSubHeader wikivoyageArticleSubHeader = new WikivoyageArticleSubHeader();
 		int type = group.getType();
 		if (type != -1) {
 			header.iconRes = type == MapMarkersGroup.FAVORITES_TYPE
 					? R.drawable.ic_action_fav_dark : R.drawable.ic_action_polygom_dark;
+			categoriesSubHeader.iconRes = R.drawable.ic_action_filter;
 		}
 		header.group = group;
+		categoriesSubHeader.group = group;
+		wikivoyageArticleSubHeader.group = group;
 		group.header = header;
+		group.categoriesSubHeader = categoriesSubHeader;
+		group.wikivoyageArticleSubHeader = wikivoyageArticleSubHeader;
 	}
 
 	private void removeMarkerFromGroup(MapMarker marker) {
@@ -534,7 +541,7 @@ public class MapMarkersHelper {
 			if (search == null && selected.getGpxFile() != null && selected.getGpxFile().path != null) {
 				MapMarkersGroup group = createGPXMarkerGroup(new File(selected.getGpxFile().path));
 				group.disabled = true;
-				createHeaderInGroup(group);
+				createHeadersInGroup(group);
 				res.add(group);
 			}
 		}
@@ -555,7 +562,7 @@ public class MapMarkersHelper {
 				if (search == null) {
 					MapMarkersGroup group = createGPXMarkerGroup(path);
 					group.disabled = true;
-					createHeaderInGroup(group);
+					createHeadersInGroup(group);
 					res.add(group);
 				}
 			}
@@ -1212,10 +1219,14 @@ public class MapMarkersHelper {
 		private long creationDate;
 		private boolean disabled;
 		private boolean visible = true;
+		private boolean wasShown = false;
 		private boolean visibleUntilRestart;
 		private List<MapMarker> markers = new ArrayList<>();
+		private TravelArticle wikivoyageArticle;
 		// TODO should be removed from this class:
 		private GroupHeader header;
+		private CategoriesSubHeader categoriesSubHeader;
+		private WikivoyageArticleSubHeader wikivoyageArticleSubHeader;
 		private ShowHideHistoryButton showHideHistoryButton;
 
 		public MapMarkersGroup() {
@@ -1236,6 +1247,14 @@ public class MapMarkersHelper {
 			return id;
 		}
 
+		public TravelArticle getWikivoyageArticle() {
+			return wikivoyageArticle;
+		}
+
+		public void setWikivoyageArticle(TravelArticle wikivoyageArticle) {
+			this.wikivoyageArticle = wikivoyageArticle;
+		}
+
 		public String getName() {
 			return name;
 		}
@@ -1246,6 +1265,10 @@ public class MapMarkersHelper {
 
 		public void setWptCategories(Set<String> wptCategories) {
 			this.wptCategories = wptCategories;
+		}
+
+		public Set<String> getWptCategories() {
+			return wptCategories;
 		}
 
 		public boolean isDisabled() {
@@ -1260,6 +1283,14 @@ public class MapMarkersHelper {
 			return visible;
 		}
 
+		public boolean wasShown() {
+			return wasShown;
+		}
+
+		public void setWasShown(boolean wasShown) {
+			this.wasShown = wasShown;
+		}
+
 		public void setVisibleUntilRestart(boolean visibleUntilRestart) {
 			this.visibleUntilRestart = visibleUntilRestart;
 		}
@@ -1270,6 +1301,14 @@ public class MapMarkersHelper {
 
 		public GroupHeader getGroupHeader() {
 			return header;
+		}
+
+		public CategoriesSubHeader getCategoriesSubHeader() {
+			return categoriesSubHeader;
+		}
+
+		public WikivoyageArticleSubHeader getWikivoyageArticleSubHeader() {
+			return wikivoyageArticleSubHeader;
 		}
 
 		public ShowHideHistoryButton getShowHideHistoryButton() {
@@ -1311,6 +1350,32 @@ public class MapMarkersHelper {
 	}
 
 	public static class GroupHeader {
+		private int iconRes;
+		private MapMarkersGroup group;
+
+		public int getIconRes() {
+			return iconRes;
+		}
+
+		public MapMarkersGroup getGroup() {
+			return group;
+		}
+	}
+
+	public static class CategoriesSubHeader {
+		private int iconRes;
+		private MapMarkersGroup group;
+
+		public int getIconRes() {
+			return iconRes;
+		}
+
+		public MapMarkersGroup getGroup() {
+			return group;
+		}
+	}
+
+	public static class WikivoyageArticleSubHeader {
 		private int iconRes;
 		private MapMarkersGroup group;
 

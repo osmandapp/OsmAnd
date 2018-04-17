@@ -32,11 +32,14 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 	public static final String TAG = "SelectWptCategoriesBottomSheetDialogFragment";
 	public static final String GPX_FILE_PATH_KEY = "gpx_file_path";
+	public static final String UPDATE_CATEGORIES_KEY = "update_categories";
 
 	private GPXFile gpxFile;
 
 	private Set<String> selectedCategories = new HashSet<>();
 	private List<BottomSheetItemWithCompoundButton> categoryItems = new ArrayList<>();
+
+	private boolean isUpdateMode =false;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		if (gpxFile == null) {
 			return;
 		}
-
+		isUpdateMode = getArguments().getBoolean(UPDATE_CATEGORIES_KEY);
 		items.add(new TitleItem(getGpxName(gpxFile)));
 
 		items.add(new DescriptionItem(getString(R.string.select_waypoints_category_description)));
@@ -108,11 +111,35 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 	@Override
 	protected int getRightBottomButtonTextId() {
-		return R.string.shared_string_import;
+		if (isUpdateMode) {
+			return super.getRightBottomButtonTextId();
+		} else {
+			return R.string.shared_string_add;
+		}
+	}
+
+	@Override
+	protected int getDismissButtonTextId() {
+		if (isUpdateMode) {
+			return R.string.shared_string_update;
+		} else {
+			return super.getDismissButtonTextId();
+		}
+	}
+
+	protected void onDismissButtonClickAction() {
+		if (isUpdateMode) {
+			updateAddOrEnableGroupWptCategories();
+		}
 	}
 
 	@Override
 	protected void onRightBottomButtonClick() {
+		updateAddOrEnableGroupWptCategories();
+		dismiss();
+	}
+
+	private void updateAddOrEnableGroupWptCategories() {
 		OsmandApplication app = getMyApplication();
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
@@ -122,12 +149,11 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 			gpxSelectionHelper.selectGpxFile(gpxFile, true, false);
 		}
 		MapMarkersGroup group = mapMarkersHelper.getMarkersGroup(gpxFile);
-		if(group == null) {
+		if (group == null) {
 			group = mapMarkersHelper.addOrEnableGroup(gpxFile);
 		}
 		mapMarkersHelper.updateGroupWptCategories(group, selectedCategories);
-
-		dismiss();
+		mapMarkersHelper.runSynchronization(group);
 	}
 
 	private boolean isAllChecked() {

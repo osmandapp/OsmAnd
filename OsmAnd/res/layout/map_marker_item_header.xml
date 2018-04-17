@@ -46,6 +46,14 @@
 
     </LinearLayout>
 
+    <View
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/map_button_shadow_width"
+        android:layout_marginStart="@dimen/map_button_shadow_width"
+        tools:background="?attr/dashboard_divider"/>
+
     <include
         android:id="@+id/bottom_shadow"
         layout="@layout/card_bottom_divider"
