@@ -3769,14 +3769,14 @@
 	<string name="poi_climbing_length">Klatrelængde</string>
 	<string name="poi_climbing_length_min">Klatrelængde min</string>
 	<string name="poi_climbing_length_max">Klatrelængde max</string>
-	<string name="poi_climbing_rock_limestone">Klatresten: kalksten</string>
-	<string name="poi_climbing_rock_granite">Klatresten: granit</string>
-	<string name="poi_climbing_rock_sandstone">Klatresten: sandsten</string>
-	<string name="poi_climbing_rock_quartzite">Klatresten: kvartsit</string>
-	<string name="poi_climbing_rock_gneiss">Klatresten: gnejs</string>
-	<string name="poi_climbing_rock_porphyry">Klatresten: porfyr</string>
-	<string name="poi_climbing_quality_solid">Klatringskvalitet: solid</string>
-	<string name="poi_climbing_quality_fragile">Klatringskvalitet: skrøbelig</string>
+	<string name="poi_climbing_rock_limestone">Klatretype: kalksten</string>
+	<string name="poi_climbing_rock_granite">Klatretype: granit</string>
+	<string name="poi_climbing_rock_sandstone">Klatretype: sandsten</string>
+	<string name="poi_climbing_rock_quartzite">Klatretype: kvartsit</string>
+	<string name="poi_climbing_rock_gneiss">Klatretype: gnejs</string>
+	<string name="poi_climbing_rock_porphyry">Klatretype: porfyr</string>
+	<string name="poi_climbing_quality_solid">Klatrekvalitet: solid</string>
+	<string name="poi_climbing_quality_fragile">Klatrekvalitet: skrøbelig</string>
 	<string name="poi_climbing_bolted_yes">Faste ankre: ja</string>
 	<string name="poi_climbing_bolted_no">Faste ankre: nej</string>
 	<string name="poi_climbing_orientation_n">Orientering af væg: N</string>
@@ -3893,7 +3893,7 @@
 
 <string name="poi_aerialway_zip_line">Zipline</string>
 
-	<string name="poi_climbing_adventure">Klatre eventyr</string>
+	<string name="poi_climbing_adventure">Klatreeventyr</string>
 
 <string name="poi_via_ferrata">Via ferrata</string>
 	<string name="poi_cable_number">Kabelnummer</string>
