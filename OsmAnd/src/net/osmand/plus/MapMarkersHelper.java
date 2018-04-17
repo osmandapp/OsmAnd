@@ -1222,6 +1222,7 @@ public class MapMarkersHelper {
 		private boolean wasShown = false;
 		private boolean visibleUntilRestart;
 		private List<MapMarker> markers = new ArrayList<>();
+		private TravelArticle wikivoyageArticle;
 		// TODO should be removed from this class:
 		private GroupHeader header;
 		private CategoriesHeader categoriesHeader;
@@ -1246,6 +1247,14 @@ public class MapMarkersHelper {
 			return id;
 		}
 
+		public TravelArticle getWikivoyageArticle() {
+			return wikivoyageArticle;
+		}
+
+		public void setWikivoyageArticle(TravelArticle wikivoyageArticle) {
+			this.wikivoyageArticle = wikivoyageArticle;
+		}
+
 		public String getName() {
 			return name;
 		}
@@ -1256,6 +1265,10 @@ public class MapMarkersHelper {
 
 		public void setWptCategories(Set<String> wptCategories) {
 			this.wptCategories = wptCategories;
+		}
+
+		public Set<String> getWptCategories() {
+			return wptCategories;
 		}
 
 		public boolean isDisabled() {

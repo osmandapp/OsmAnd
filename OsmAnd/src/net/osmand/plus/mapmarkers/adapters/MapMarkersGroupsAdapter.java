@@ -168,13 +168,29 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							if (path.getAbsolutePath().equals(group.getGpxPath())) {
 								MapMarkersHelper.WikivoyageArticleHeader wikivoyageArticleHeader = group.getWikivoyageArticleHeader();
 								items.add(wikivoyageArticleHeader);
+								group.setWikivoyageArticle(art);
 							}
 						}
 					}
 				}
+				if (group.getWptCategories() == null || group.getWptCategories().isEmpty()) {
+					helper.updateGroupWptCategories(group, getGpxFile(group.getGpxPath()).getPointsByCategories().keySet());
+				}
 				populateAdapterWithGroupMarkers(group, getItemCount());
 			}
 		}
+	}
+
+	private GPXFile getGpxFile(String filePath) {
+		if (filePath != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			SelectedGpxFile selectedGpx = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
+			if (selectedGpx != null && selectedGpx.getGpxFile() != null) {
+				return selectedGpx.getGpxFile();
+			}
+			return GPXUtilities.loadGPXFile(app, new File(filePath));
+		}
+		return null;
 	}
 
 	private void populateAdapterWithGroupMarkers(MapMarkersGroup group, int position) {
@@ -432,7 +448,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						final MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 						final GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
-						if (groupIsDisabled && !group.wasShown() && group.getWptCategoriesString() != null) {
+						if (groupIsDisabled && !group.wasShown() && group.getWptCategories().size() > 1) {
 							group.setWasShown(true);
 							Bundle args = new Bundle();
 							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath());
@@ -521,14 +537,17 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				categoriesViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						Bundle args = new Bundle();
-						args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath());
-						args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
-
-						SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
-						fragment.setArguments(args);
-						fragment.setUsedOnMap(false);
-						fragment.show(mapActivity.getSupportFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
+						if (group.getWptCategories().size() > 1) {
+							Bundle args = new Bundle();
+							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath());
+							args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
+							SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
+							fragment.setArguments(args);
+							fragment.setUsedOnMap(false);
+							fragment.show(mapActivity.getSupportFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
+						} else {
+							mapActivity.getMyApplication().getMapMarkersHelper().addOrEnableGpxGroup(new File(group.getGpxPath()));
+						}
 					}
 				});
 			}
@@ -542,22 +561,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			wikivoyageArticleViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					TravelArticle test = null;
-					TravelDbHelper travelDbHelper = mapActivity.getMyApplication().getTravelDbHelper();
-					if (travelDbHelper.getSelectedTravelBook() != null) {
-						List<TravelArticle> savedArticles = travelDbHelper.getLocalDataHelper().getSavedArticles();
-						for (TravelArticle art : savedArticles) {
-							String gpxName = travelDbHelper.getGPXName(art);
-							File path = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
-							if (path.getAbsolutePath().equals(group.getGpxPath())) {
-								MapMarkersHelper.WikivoyageArticleHeader wikivoyageArticleHeader = group.getWikivoyageArticleHeader();
-								items.add(wikivoyageArticleHeader);
-								test = art;
-							}
-						}
-					}
-					if (mapActivity.getSupportFragmentManager() != null && test != null) {
-						WikivoyageArticleDialogFragment.showInstance(app, mapActivity.getSupportFragmentManager(), test.getCityId(), test.getLang());
+					TravelArticle article = group.getWikivoyageArticle();
+					if (mapActivity.getSupportFragmentManager() != null && article != null) {
+						WikivoyageArticleDialogFragment.showInstance(app, mapActivity.getSupportFragmentManager(), article.getCityId(), article.getLang());
 					}
 				}
 			});
