@@ -155,7 +155,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				GroupHeader header = group.getGroupHeader();
 				items.add(header);
 				if (!group.isDisabled()) {
-					if (group.getWptCategoriesString() != null) {
+					if (!group.getWptCategories().isEmpty()) {
 						MapMarkersHelper.CategoriesHeader categoriesHeader = group.getCategoriesHeader();
 						items.add(categoriesHeader);
 					}
@@ -561,15 +561,15 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			wikivoyageArticleViewHolder.title.setText(R.string.context_menu_read_article);
 			wikivoyageArticleViewHolder.icon.setVisibility(View.INVISIBLE);
 			wikivoyageArticleViewHolder.divider.setVisibility(View.VISIBLE);
-			wikivoyageArticleViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					TravelArticle article = group.getWikivoyageArticle();
-					if (mapActivity.getSupportFragmentManager() != null && article != null) {
-						WikivoyageArticleDialogFragment.showInstance(app, mapActivity.getSupportFragmentManager(), article.getCityId(), article.getLang());
-					}
-				}
-			});
+//			wikivoyageArticleViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+//				@Override
+//				public void onClick(View view) {
+//					TravelArticle article = group.getWikivoyageArticle();
+//					if (mapActivity.getSupportFragmentManager() != null && article != null) {
+//						WikivoyageArticleDialogFragment.showInstance(app, mapActivity.getSupportFragmentManager(), article.getCityId(), article.getLang());
+//					}
+//				}
+//			});
 		}
 	}
 
