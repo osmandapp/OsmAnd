@@ -269,7 +269,7 @@
   
   <string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Nabigazioa</string>
   <string name="osmand_short_description_80_chars">Lineaz Kanpoko eta Sare Bidezko Mapa Ikusle eta Nabigatzaile Mugikor Globala OSM Mapetarako</string>
-  <string name="osmand_long_description_1000_chars">⏎ ⇥⇥OsmAnd (OSM Automated Navigation Directions)⏎ ⏎ ⇥⇥OsmAnd kode irekiko nabigaziorako aplikazioa da, OpenStreetMapeko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAndek ere lineaz kanpoko eta sareko ibilbideak eskaintzen ditu, txandakako ahots gidaritzarekin.⏎ ⏎ ⇥⇥Ezaugarri nagusi batzuk:⏎ ⇥⇥- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)⏎ ⇥⇥- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri⏎ ⇥⇥- Herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean⏎ ⇥⇥- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak.⏎ ⇥⇥- Lineaz kanpoko helbide eta lekuen bilatzailea (POIak)⏎ ⇥⇥- Lineaz kanpoko ibilbide motzetarako nabigazioa⏎ ⇥⇥- Kotxea, bizikleta eta oinezkoentzat modua:⏎ ⇥⇥- aukerazko egun/gau ikuspegi automatizatua⏎ ⇥⇥- aukerazko abiaduraren araberako maparen zooma⏎ ⇥⇥- aukerazko maparen lerrokatzea, iparrorratzaren edo norabidearen araberakoa⏎ ⇥⇥- aukerazko errei gidaritza, abiadura muga bistaratzea, grabatutako edo TTS ahotsekin⏎ ⏎ ⇥⇥OsmAndeko dohaineko bertsioaren mugak:⏎ ⇥⇥- Mapa kopuruak deskargatzeko muga⏎ ⇥⇥- Wikipediako POIetara lineaz kanpoko sarbiderik ez⏎ ⏎ ⇥⇥OsmAnd aktiboki garatua izaten ari da eta proiektuaren prozesuak dituen garatze, programatze eta funtzionalitate berrien probak egiteko behar den finantziazio laguntzetan ere oinarritzen da. OsmAnd+ erosiz gero, aplikazioa are zirraragarria izatea laguntzen duzu! Ezaugarri berriak finantzatzea edo dohaintza orokor bat egitea posible da osman.net-en.</string>
+  <string name="osmand_long_description_1000_chars">⏎ ⇥⇥OsmAnd (OSM Automated Navigation Directions)⏎ ⏎ ⇥⇥OsmAnd kode irekiko software bidezko nabigaziorako aplikazioa da, OpenStreetMapeko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAndek ere lineaz kanpoko eta sareko ibilbideak eskaintzen ditu, txandakako ahots gidaritzarekin.⏎ ⏎ ⇥⇥Ezaugarri nagusi batzuk:⏎ ⇥⇥- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)⏎ ⇥⇥- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri⏎ ⇥⇥- Herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean⏎ ⇥⇥- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak.⏎ ⇥⇥- Lineaz kanpoko helbide eta lekuen bilatzailea (POIak)⏎ ⇥⇥- Lineaz kanpoko ibilbide motzetarako nabigazioa⏎ ⇥⇥- Kotxea, bizikleta eta oinezkoentzat modua:⏎ ⇥⇥- Egun/gau ikuspegi automatizatua⏎ ⇥⇥- Abiaduraren araberako maparen zooma⏎ ⇥⇥- Maparen lerrokatzea, iparrorratzaren edo norabidearen araberakoa⏎ ⇥⇥- errei gidaritza, abiadura muga bistaratzea, grabatutako edo TTS ahotsekin⏎ ⏎ ⇥⇥OsmAndeko dohaineko bertsioaren mugak:⏎ ⇥⇥- Mapa kopuruak deskargatzeko muga⏎ ⇥⇥- Wikipediako POIetara lineaz kanpoko sarbiderik ez⏎ ⏎ ⇥⇥OsmAnd aktiboki garatua izaten ari da eta proiektuaren prozesuak dituen garatze, programatze eta funtzionalitate berrien probak egiteko behar den finantziazio laguntzetan ere oinarritzen da. OsmAnd+ erosiz gero, aplikazioa are zirraragarria izatea laguntzen duzu! Ezaugarri berriak finantzatzea edo dohaintza orokor bat egitea posible da osman.net-en.</string>
   
   <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapak &amp; Nabigazioa</string>
   <string name="osmand_plus_short_description_80_chars">Lineaz Kanpoko eta Sare Bidezko OSM Mapetarako Mapa Ikusle eta Nabigatzaile Mugikor Globala</string>
@@ -402,7 +402,7 @@
   <string name="unknown_location">Kokapen ezezaguna oraindik</string>
   <string name="modify_transparency">Gardentasuna aldatu (0 - gardena, 255 - opakua)</string>
   <string name="confirm_interrupt_download">Deskarga bertan behera utzi nahi duzu?</string>
-  <string name="first_time_msg">Eskerrik asko OsmAnd erabiltzeagatik. Aplikazioaren ezaugarri nagusiak erabiltzeko herrialdeen lineaz kanpoko datuak behar dituzu, deskarga ditzakezu \'Ezarpenak\' → \'Kudeatu mapa-fitxategiak\'. Ondoren, mapak ikusi, helbideak, Interes-Puntuak eta garraio publikoak bilatu ahal izango dituzu.</string>
+  <string name="first_time_msg">"Eskerrik asko OsmAnd erabiltzeagatik. Deskargatu herrialdeen lineaz kanpoko datuak  \'Ezarpenak\' → \'Kudeatu mapa-fitxategiak\' atalean, mapak ikusi, helbideak, interes-ountuak eta garraio publikoak eta gehiago bilatu ahal izateko."</string>
   <string name="basemap_was_selected_to_download">Mapa basea deskargatzeko hautatu da beharrezkoa baita aplikazioaren funtzionamendurako.</string>
   <string name="select_index_file_to_download">Ez da ezer aurkitu. Zure herrialdea ezin baduzu aurkitu, zuk prestatu dezakezu (begiratu https://osmand.net).</string>
   <string name="local_indexes_cat_tile">Sareko eta cacheatutako tesela mapak</string>
@@ -802,7 +802,7 @@ Biltegiratzean {1} MB erabiliko dira.
   <string name="specified_dir_doesnt_exist">Ezin izan da zehaztutako karpeta aurkitu.</string>
   <string name="application_dir">Datuak gordetzeko direktorioa</string>
   
-  <string name="osmand_net_previously_installed">Aplikazio zaharraren lineaz kanpoko datu guztiak aplikazio berrian erabiliko dira, baina gogoko puntuak aplikazio zaharrean esportatu eta gero berrian inportatu beharko lirateke.</string>
+  <string name="osmand_net_previously_installed">Aplikazio zaharraren lineaz kanpoko datu guztiak aplikazio berrian erabiliko dira, baina gogoko puntuak aplikazio zaharrean esportatu eta gero berrian inportatu behar dira.</string>
   <string name="build_installed">{0} konpilazioa ongi instalatuta ({1}).</string>
   <string name="downloading_build">Eraikitzeko deskargatzen…</string>
   <string name="install_selected_build">OsmAnd instalatu nahi al duzu - {0} {1}tik {2} MB ?</string>
@@ -1466,9 +1466,9 @@ Lorratza %2$s</string>
     <string name="shared_string_video">Bideoa</string>
     <string name="access_no_destination">Ez da helburua zehaztu</string>
     <string name="access_disable_offroute_recalc">Ez birkalkulatu ibilbidea honetatik atera eta gero</string>
-    <string name="access_disable_offroute_recalc_descr">Ez birkalkulatu ibilbidea automatikoki honetatik irten eta gero.</string>
+    <string name="access_disable_offroute_recalc_descr">Ez birkalkulatu ibilbidea honetatik irten eta gero.</string>
     <string name="access_disable_wrong_direction_recalc">Ez birkalkulatu ibilbidea kontrako noranzkoan</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Eragotzi ibilbidearen birkalkulatze automatikoa kontrako noranzkoak mugitzen zaudenean.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Ez birkalkulatu ibilbidea besterik gabe kontrako noranzkoak mugitzen zaudenean.</string>
     <string name="access_default_color">Lehenetsitako kolorea</string>
     <string name="access_category_choice">Hautatu kategoria</string>
     <string name="access_hint_enter_name">Sartu izena</string>
@@ -2452,15 +2452,15 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_actions_delete_text">"Ziur  \"%s\" ekintza ezabatu nahi duzula?"</string>
     <string name="quick_favorites_show_favorites_dialog">Erakutsi gogokoen elkarrizketa koadroa</string>
     <string name="quick_favorites_name_preset">Izenaren aurre-ezarpena</string>
-    <string name="quick_action_add_marker_descr">Ekintza botoia sakatzean mapa markatzaile bat gehituko da pantailaren zentroko kokalekuan.</string>
-    <string name="quick_action_add_gpx_descr">Ekintza botoia sakatzean GPX bide-puntu bat gehituko da pantailaren erdian.</string>
-    <string name="quick_action_take_audio_note_descr">Ekintza botoia sakatzean audio-ohar bat gehituko da pantailaren erdian.</string>
-    <string name="quick_action_take_video_note_descr">Ekintza botoia sakatzean bideo-ohar bat gehituko da pantailaren erdian.</string>
-    <string name="quick_action_take_photo_note_descr">Ekintza botoia sakatzean argazki-ohar bat gehituko da pantailaren erdian.</string>
-    <string name="quick_action_add_osm_bug_descr">Ekintza botoia sakatzean OSM ohar bat gehituko da pantailaren erdian.</string>
-    <string name="quick_action_add_poi_descr">Ekintza botoia sakatzean POI bat gehituko da pantailaren erdian.</string>
-    <string name="quick_action_navigation_voice_descr">Ekintza botoia sakatzean ahots bidezko jarraibideak gaitu edo desgaituko dira nabigazioan.</string>
-    <string name="quick_action_add_parking_descr">Ekintza botoia sakatzean aparkaleku bat gehituko da pantailaren erdian.</string>
+    <string name="quick_action_add_marker_descr">Ekintza-botoi hau sakatzean mapa markatzaile bat gehituko da pantailaren zentroko kokalekuan.</string>
+    <string name="quick_action_add_gpx_descr">Ekintza-botoi hau sakatzean GPX bide-puntu bat gehituko da pantailaren erdian.</string>
+    <string name="quick_action_take_audio_note_descr">Ekintza-botoi hau sakatzean audio-ohar bat gehituko da pantailaren erdian.</string>
+    <string name="quick_action_take_video_note_descr">Ekintza-botoi hau sakatzean bideo-ohar bat gehituko da pantailaren erdian.</string>
+    <string name="quick_action_take_photo_note_descr">Ekintza-botoi hau sakatzean argazki-ohar bat gehituko da pantailaren erdian.</string>
+    <string name="quick_action_add_osm_bug_descr">Ekintza-botoi hau sakatzean OSM ohar bat gehituko da pantailaren erdian.</string>
+    <string name="quick_action_add_poi_descr">Ekintza-botoi hau sakatzean POI bat gehituko da pantailaren erdian.</string>
+    <string name="quick_action_navigation_voice_descr">Ekintza-botoi hau sakatzean ahots bidezko jarraibideak gaitu edo desgaituko dira nabigazioan.</string>
+    <string name="quick_action_add_parking_descr">Ekintza-botoi hau sakatzean aparkaleku bat gehituko da pantailaren erdian.</string>
     <string name="favorite_autofill_toast_text">" hona gorde da: "</string>
     <string name="favorite_empty_place_name">Tokia</string>
     <string name="quick_action_showhide_favorites_title">Erakutsi/ezkutatu gogokoak</string>
@@ -2479,7 +2479,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_gpx_category_descr">Aukeratu hautazko kategoria.</string>
     <string name="quick_action_poi_list">POI zerrenda</string>
     <string name="quick_action_sh_poi_descr">POI kategoria bat edo gehiago gehitu ditzakezu mapak erakusteko.</string>
-    <string name="quick_action_page_list_descr">Ekintza botoia sakatzean zerrendako hurrengo orria erakutsiko da.</string>
+    <string name="quick_action_page_list_descr">Ekintza-botoi hau sakatzean zerrendako hurrengo orria erakutsiko da.</string>
     <string name="quick_action_map_style_action">Gehitu mapa estilo bat</string>
     <string name="quick_action_empty_param_error">Parametroak ez lukete hutsik egon behar</string>
     <string name="quick_action_map_styles">Mapa-estiloak</string>
@@ -2501,8 +2501,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_btn_tutorial_descr">Sakatze luze eta arrastatu botoia bere pantailako posizioa aldatzeko.</string>
 	<string name="shared_string_action_name">Ekintzaren izena</string>
 <string name="quick_action_duplicates">Zehaztutako ekintza-izena erabilita dago aurretik, bikoizketa ekiditeko %1$s izatera aldatu da.</string>
-    <string name="quick_action_showhide_favorites_descr">Ekintza botoia sakatzean mapan gogoko puntuak erakutsi edo ezkutatu egingo dira.</string>
-    <string name="quick_action_showhide_poi_descr">Ekintza botoia sakatzean mapan POI puntuak erakutsi edo ezkutatu egingo dira.</string>
+    <string name="quick_action_showhide_favorites_descr">Ekintza-botoi hau sakatzean mapan gogoko puntuak erakutsi edo ezkutatu egingo dira.</string>
+    <string name="quick_action_showhide_poi_descr">Ekintza-botoi hau sakatzean mapan POI puntuak erakutsi edo ezkutatu egingo dira.</string>
     <string name="quick_action_fav_name_descr">Laga hutsik helbidea edo lekuaren izena erabiltzeko automatikoki.</string>
     <string name="auto_split_recording_title">Automatikoki zatitu grabaketa hutsunea eta gero</string>
 	<string name="auto_split_recording_descr">Hasi segmentu berria 6 minututako hutsune bat eta gero, lorratz berria bi ordu eta gero, edo fitxategi berria hutsune luzeago bat eta gero data aldatzean.</string>
@@ -2595,15 +2595,15 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="select_city">Aukeratu hiria</string>
     <string name="select_postcode">Aukeratu posta-kodea</string>
     <string name="quick_action_auto_zoom">Maparen zoom automatikoa bai/ez</string>
-    <string name="quick_action_auto_zoom_desc">Ekintza botoia sakatzean abiaduraren araberako maparen zoom automatikoa gaitu edo desgaituko da.</string>
+    <string name="quick_action_auto_zoom_desc">Ekintza-botoi hau sakatzean abiaduraren araberako maparen zoom automatikoa gaitu edo desgaituko da.</string>
     <string name="quick_action_auto_zoom_on">Gaitu maparen zoom automatikoa</string>
     <string name="quick_action_auto_zoom_off">Desgaitu maparen zoom automatikoa</string>
     <string name="quick_action_add_destination">Gehitu helburua</string>
     <string name="quick_action_replace_destination">Ordeztu helburua</string>
     <string name="quick_action_add_first_intermediate">Gehitu lehen tartekoa</string>
-    <string name="quick_action_add_destination_desc">Sakatu ekintza botoia pantailaren erdian helburu bat kokatzeko. Aurreko helburua tarteko helburu bihurtzen da.</string>
-    <string name="quick_action_replace_destination_desc">Sakatu ekintza botoia helburua pantailaren erdiko puntuarekin ordezteko.</string>
-    <string name="quick_action_add_first_intermediate_desc">Sakatu ekintza botoia pantailaren erdiko puntua tarteko puntu gisa gehitzeko.</string>
+    <string name="quick_action_add_destination_desc">"Ekintza-botoi hau sakatzean pantailaren erdiko puntua bihurtuko da bidaiaren helburua. Aurretik beste helburu bat balego balego,  hura tarteko helburu bihurtuko da."</string>
+    <string name="quick_action_replace_destination_desc">Ekintza-botoi hau sakatzean pantailaren erdiko puntua ibilbide berriaren helburu gisa markatuko da, aurretik helbururik balego ordeztu egingo da.</string>
+    <string name="quick_action_add_first_intermediate_desc">Ekintza-botoi hau sakatzean pantailaren erdiko puntua tarteko lehen helburua bihurtuko da.</string>
     <string name="no_overlay">Gain-azalik ez</string>
     <string name="no_underlay">Azpi-azalik ez</string>
     <string name="subscribe_email_error">Errorea</string>
@@ -2633,7 +2633,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_showhide_osmbugs_title">Txandakatu OSM oharrak</string>
     <string name="quick_action_osmbugs_show">Erakutsi OSM oharrak</string>
     <string name="quick_action_osmbugs_hide">Ezkutatu OSM oharrak</string>
-    <string name="quick_action_showhide_osmbugs_descr">Ekintza botoia sakatzean OSM oharrak erakutsi edo ezkutatuko dira mapan.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Ekintza-botoi hau sakatzean OSM oharrak erakutsi edo ezkutatuko dira mapan.</string>
     <string name="sorted_by_distance">Distantziaren arabera ordenatuta</string>
     <string name="search_favorites">Bilatu gogokoak</string>
     <string name="hide_from_zoom_level">Ezkutatu zoom mailatik</string>
@@ -2721,7 +2721,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part4">Erabili OSM eta Wikipediako datuak • Kalitate handiko informazioa elkarlanean sortutako munduko proiektu onenen eskutik • OSM datua herrialdeko edo eskualdeko daude eskuragarri • Wikipedia POIak, ezinhonbeak bistak ikusteko • Mugarik gabeko deskargak aplikaziotik bertatik • Tamainaz txikitu deskargatutako bektore-mapak hilean behin gutxienez • Eskualdeko datu guztiak edo errepide sarearen datuak besterik ez deskargatzeko aukera (Adibidea: Japoinia osoa 700 MB dira eta errepide sarea bakarrik 200 MB)</string>
     <string name="osmand_plus_extended_description_part5">Segurtasun-funtzioak • Aukerazko egun/gau ikuspegien arteko aldaketa • Aukeran abiadura muga bistaratu, eta gainditzekotan ohartarazi • Abiaduraren araberako zoom maila aukeran • Partekatu zure kokalekua lagunek aurkitu zaitzaten</string>
     <string name="osmand_plus_extended_description_part7">Egin ekarpenak zuzenean OSMen• Jakinarazi datuen erroreak • Igo GPX lorratzak zuzenean OSMra aplikaziotik • Gehitu POIak eta igo zuzenean OSMra (edo geroago, konektatzen zarenean) • Aukeran, grabatu bidaia bigarren planoan (gailua lo dagoela) 
-\nOsmAnd librea da eta garapen aktiboan dago. Edonork egin ditzake ekarpenak, arazoen berri emanez, itzulpenak hobetuz, edo ezaugarri berriak programatuz. Proiektua hobekuntza jarraituan dago garatzaile eta erabiltzaileen arteko hartu-eman hauei esker. Funtzio berriak programatu eta frogatzeko, proiektuak diru-laguntzak behar ditu.</string>
+\nOsmAnd librea da eta garapen aktiboan dago. Edonork egin ditzake ekarpenak, arazoen berri emanez, itzulpenak hobetuz, edo ezaugarri berriak programatuz. Proiektuak dohaintza behar ditu funtzio berriak programatu eta probatzeko.</string>
     <string name="quick_action_resume_pause_navigation">Pausatu/jarraitu nabigazioa</string>
     <string name="quick_action_resume_pause_navigation_descr">Sakatu botoi hau nabigazioa pausatzeko edo jarraitzeko.</string>
     <string name="quick_action_show_navigation_finish_dialog">Erakutsi nabigazioa amaituta elkarrizketa-koadroa</string>
@@ -2993,4 +2993,29 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="select_waypoints_category_description">Lorratzaren bide-puntu guztiak gehitu ditzakezu, edo hainbat kategoriak hautatu.</string>
     <string name="shared_string_total">Guztira</string>
     <string name="nothing_found_in_radius">Ez da ezer aurkitu erradioan:</string>
+    <string name="shared_string_dont">Ez</string>
+    <string name="shared_string_do">Bai</string>
+    <string name="shared_string_only_with_wifi">Soilik Wi-Fi bidez</string>
+    <string name="wikivoyage_download_pics">Deskargatu irudiak</string>
+    <string name="wikivoyage_download_pics_descr">Artikuluetako irudiak deskargatu eta erakutsi ditzakegu eta gailuan gorde, lineaz kanpo ikus ditzazun. Ezarpen hau aldatzeko zoaz Arakatu &gt; Aukerak atalera.</string>
+    <string name="shared_string_wifi_only">Soilik Wi-Fi</string>
+    <string name="select_travel_book">Hautatu bidai liburua</string>
+    <string name="shared_string_travel_book">Bidai liburua</string>
+    <string name="online_webpage_warning">Orri hau sarean besterik ez dago eskuragarri. Web nabigatzaile batean ireki nahi duzu?</string>
+    <string name="images_cache">Irudien cache-a</string>
+    <string name="delete_search_history">Ezabatu bilaketa historiala</string>
+    <string name="download_images">Deskargatu irudiak</string>
+    <string name="download_maps_travel">Bidai mapak</string>
+    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="article_removed">Artikulua kenduta</string>
+    <string name="wikivoyage_search_hint">Bilatu: Herrialdea, Hiria, Probintzia</string>
+    <string name="shared_string_read">Irakurri</string>
+    <string name="saved_articles">Gordetako artikuluak</string>
+    <string name="shared_string_explore">Arakatu</string>
+    <string name="shared_string_contents">Edukiak</string>
+    <string name="shared_string_result">Emaitza</string>
+    <string name="use_two_digits_longitude">Erabili bi digituko longitudea</string>
+    <string name="shared_string_travel">Bidaia</string>
+    <string name="waypoints_removed_from_map_markers">Bide-puntuak mapa markatzaileetatik kendu dira</string>
+    <string name="index_item_world_wikivoyage">Mundu osoko Wikivoyage artikuluak</string>
     </resources>
