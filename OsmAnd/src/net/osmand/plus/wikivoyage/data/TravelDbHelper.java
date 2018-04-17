@@ -24,6 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -298,23 +299,23 @@ public class TravelDbHelper {
 			cursor.close();
 		}
 		LinkedHashMap<String, List<WikivoyageSearchResult>> res = new LinkedHashMap<>();
-		if (navMap.keySet().size() > 1 && parts != null && parts.length > 0) {
-			for (String part : parts) {
-				List<WikivoyageSearchResult> partsList = navMap.get(part);
-				if (partsList != null) {
-					Collections.sort(partsList, new Comparator<WikivoyageSearchResult>() {
-						@Override
-						public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
-							return collator.compare(o1.articleTitles.get(0), o2.articleTitles.get(0));
-						}
-					});
-					res.put(part, partsList);
-				}
-			}
-		} else {
-			res.putAll(navMap);
+		List<String> partsList = new ArrayList<>();
+		if (parts != null) {
+			partsList.addAll(Arrays.asList(parts));
 		}
-
+		partsList.add(title);
+		for (String part : partsList) {
+			List<WikivoyageSearchResult> results = navMap.get(part);
+			if (results != null) {
+				Collections.sort(results, new Comparator<WikivoyageSearchResult>() {
+					@Override
+					public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
+						return collator.compare(o1.articleTitles.get(0), o2.articleTitles.get(0));
+					}
+				});
+				res.put(part, results);
+			}
+		}
 		return res;
 	}
 
