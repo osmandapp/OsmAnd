@@ -265,11 +265,11 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_show_hide_history, viewGroup, false);
 			return new MapMarkersShowHideHistoryViewHolder(view);
 		} else if (viewType == CATEGORIES_TYPE) {
-			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_categories, viewGroup, false);
+			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_subheader, viewGroup, false);
 			return new MapMarkerCategoriesViewHolder(view);
 		}else if (viewType == WIKIVOYAGE_ARTICLE_TYPE) {
-			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_categories, viewGroup, false);
-			return new MapMarkerWikivoyageArticleViewHolder(view);
+			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_subheader, viewGroup, false);
+			return new MapMarkerOpenWikivoyageArticleViewHolder(view);
 		} else {
 			throw new IllegalArgumentException("Unsupported view type");
 		}
@@ -442,12 +442,14 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				headerViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), R.color.divider_color));
 				final boolean groupIsDisabled = group.isDisabled();
 				headerViewHolder.disableGroupSwitch.setVisibility(View.VISIBLE);
+				headerViewHolder.divider.setVisibility(group.getWptCategories().isEmpty() ? View.GONE : View.VISIBLE);
 				CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
 						final MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 						final GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
+
 						if (groupIsDisabled && !group.wasShown() && !group.getWptCategories().isEmpty()) {
 							group.setWasShown(true);
 							Bundle args = new Bundle();
@@ -503,7 +505,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(null);
 				headerViewHolder.disableGroupSwitch.setChecked(!groupIsDisabled);
 				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(checkedChangeListener);
-				headerViewHolder.divider.setVisibility(group.getWptCategories().isEmpty() ? View.GONE : View.VISIBLE);
 			} else {
 				throw new IllegalArgumentException("Unsupported header");
 			}
@@ -531,9 +532,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			final MapMarkerCategoriesViewHolder categoriesViewHolder = (MapMarkerCategoriesViewHolder) holder;
 			final Object header = getItem(position);
 			if (header instanceof MapMarkersHelper.CategoriesHeader) {
-				final MapMarkersHelper.CategoriesHeader groupHeader = (MapMarkersHelper.CategoriesHeader) header;
-				final MapMarkersGroup group = groupHeader.getGroup();
-				categoriesViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), R.color.divider_color));
+				final MapMarkersHelper.CategoriesHeader categoriesHeader = (MapMarkersHelper.CategoriesHeader) header;
+				final MapMarkersGroup group = categoriesHeader.getGroup();
+				categoriesViewHolder.icon.setImageDrawable(iconsCache.getIcon(categoriesHeader.getIconRes(), R.color.divider_color));
 				categoriesViewHolder.title.setText(group.getWptCategoriesString());
 				categoriesViewHolder.divider.setVisibility(View.VISIBLE);
 				categoriesViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -553,23 +554,23 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					}
 				});
 			}
-		} else if (holder instanceof MapMarkerWikivoyageArticleViewHolder) {
-			final MapMarkerWikivoyageArticleViewHolder wikivoyageArticleViewHolder = (MapMarkerWikivoyageArticleViewHolder) holder;
+		} else if (holder instanceof MapMarkerOpenWikivoyageArticleViewHolder) {
+			final MapMarkerOpenWikivoyageArticleViewHolder wikivoyageArticleViewHolder = (MapMarkerOpenWikivoyageArticleViewHolder) holder;
 			final Object header = getItem(position);
-			final MapMarkersHelper.WikivoyageArticleHeader groupHeader = (MapMarkersHelper.WikivoyageArticleHeader) header;
-			final MapMarkersGroup group = groupHeader.getGroup();
+			final MapMarkersHelper.WikivoyageArticleHeader wikivoyageArticleHeader = (MapMarkersHelper.WikivoyageArticleHeader) header;
+			final MapMarkersGroup group = wikivoyageArticleHeader.getGroup();
 			wikivoyageArticleViewHolder.title.setText(R.string.context_menu_read_article);
 			wikivoyageArticleViewHolder.icon.setVisibility(View.INVISIBLE);
 			wikivoyageArticleViewHolder.divider.setVisibility(View.VISIBLE);
-//			wikivoyageArticleViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-//				@Override
-//				public void onClick(View view) {
-//					TravelArticle article = group.getWikivoyageArticle();
-//					if (mapActivity.getSupportFragmentManager() != null && article != null) {
-//						WikivoyageArticleDialogFragment.showInstance(app, mapActivity.getSupportFragmentManager(), article.getCityId(), article.getLang());
-//					}
-//				}
-//			});
+			wikivoyageArticleViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					TravelArticle article = group.getWikivoyageArticle();
+					if (mapActivity.getSupportFragmentManager() != null && article != null) {
+						WikivoyageArticleDialogFragment.showInstance(app, mapActivity.getSupportFragmentManager(), article.getCityId(), article.getLang());
+					}
+				}
+			});
 		}
 	}
 

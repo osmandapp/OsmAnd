@@ -129,17 +129,17 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 	protected void onDismissButtonClickAction() {
 		if (isUpdateMode) {
-			updateGroupWptCategories();
+			updateAddOrEnableGroupWptCategories();
 		}
 	}
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		updateGroupWptCategories();
+		updateAddOrEnableGroupWptCategories();
 		dismiss();
 	}
 
-	private void updateGroupWptCategories() {
+	private void updateAddOrEnableGroupWptCategories() {
 		OsmandApplication app = getMyApplication();
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
