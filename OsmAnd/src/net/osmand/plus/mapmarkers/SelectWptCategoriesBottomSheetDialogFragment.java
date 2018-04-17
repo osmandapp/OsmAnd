@@ -121,7 +121,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 	@Override
 	protected int getDismissButtonTextId() {
 		if (isUpdateMode) {
-			return R.string.update;
+			return R.string.shared_string_update;
 		} else {
 			return super.getDismissButtonTextId();
 		}
