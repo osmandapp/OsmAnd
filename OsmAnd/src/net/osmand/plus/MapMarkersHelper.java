@@ -1219,6 +1219,7 @@ public class MapMarkersHelper {
 		private long creationDate;
 		private boolean disabled;
 		private boolean visible = true;
+		private boolean wasShown = false;
 		private boolean visibleUntilRestart;
 		private List<MapMarker> markers = new ArrayList<>();
 		// TODO should be removed from this class:
@@ -1267,6 +1268,14 @@ public class MapMarkersHelper {
 
 		public boolean isVisible() {
 			return visible;
+		}
+
+		public boolean wasShown() {
+			return wasShown;
+		}
+
+		public void setWasShown(boolean wasShown) {
+			this.wasShown = wasShown;
 		}
 
 		public void setVisibleUntilRestart(boolean visibleUntilRestart) {

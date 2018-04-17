@@ -439,10 +439,11 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						final MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 						final GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
-						if (groupIsDisabled) {
-							String m = group.getGpxPath();
+						if (groupIsDisabled&&!group.wasShown()) {
+							group.setWasShown(true);
+
 							Bundle args = new Bundle();
-							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, m);
+							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath());
 							args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
 
 							SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
@@ -523,8 +524,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			if (header instanceof MapMarkersHelper.CategoriesHeader) {
 				final MapMarkersHelper.CategoriesHeader groupHeader = (MapMarkersHelper.CategoriesHeader) header;
 				final MapMarkersGroup group = groupHeader.getGroup();
-
-				categoriesViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes()));
+				categoriesViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), R.color.divider_color));
 				categoriesViewHolder.title.setText(group.getWptCategoriesString());
 				categoriesViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 					@Override
