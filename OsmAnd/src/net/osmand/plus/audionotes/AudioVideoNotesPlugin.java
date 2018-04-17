@@ -467,24 +467,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public String getExtendedDescription(Context ctx) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(ctx);
 			String date = dateFormat.format(file.lastModified());
-			int size = (int) ((file.length() + 512) >> 10);
-			String sz = "";
-			if (size > 0) {
-				if (size > 1 << 20) {
-					sz = DownloadActivity.formatGb.format(new Object[]{(float) size / (1 << 20)});
-				} else {
-					if (file.length() > (100 * (1 << 10))) {
-						sz = DownloadActivity.formatMb.format(new Object[]{(float) file.length() / (1 << 20)});
-					} else {
-						sz = DownloadActivity.formatKb.format(new Object[]{(float) file.length() / (1 << 10)});
-					}
-				}
-			}
+			String size = AndroidUtils.formatSize(file.length());
 			if (isPhoto()) {
-				return date + " • " + sz;
+				return date + " • " + size;
 			}
 			updateInternalDescription();
-			return date + " • " + sz + " • " + getDuration(ctx, false);
+			return date + " • " + size + " • " + getDuration(ctx, false);
 		}
 
 		public String getTypeWithDuration(Context ctx) {

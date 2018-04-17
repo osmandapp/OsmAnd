@@ -59,6 +59,10 @@ public class PicassoUtils {
 		}
 	}
 
+	public static long getDiskCacheSizeBytes() throws IOException {
+		return diskCache.size();
+	}
+
 	private static File createDefaultCacheDir(Context context) {
 		File cache = new File(context.getApplicationContext().getCacheDir(), PICASSO_CACHE);
 		if (!cache.exists()) {

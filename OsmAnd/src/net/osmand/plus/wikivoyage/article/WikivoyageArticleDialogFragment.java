@@ -222,6 +222,14 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		} else if (requestCode ==  WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED_REQUEST_CODE) {
 			updateWebSettings();
 			populateArticle();
+		} else if (requestCode ==  WikivoyageArticleNavigationFragment.OPEN_ARTICLE_REQUEST_CODE) {
+			long cityId = data.getLongExtra(WikivoyageArticleNavigationFragment.CITY_ID_KEY, -1);
+			String selectedLang = data.getStringExtra(WikivoyageArticleNavigationFragment.SELECTED_LANG_KEY);
+			if (cityId != -1 && !TextUtils.isEmpty(selectedLang)) {
+				this.cityId = cityId;
+				this.selectedLang = selectedLang;
+				populateArticle();
+			}
 		}
 	}
 
@@ -365,7 +373,10 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 					sb.append(navBarString);
 				}
 				if (!TextUtils.isEmpty(current)) {
-					sb.append(" • <span class=\"nav-bar-current\">").append(current).append("</span>");
+					if (aggregatedPartOfArrayOrig.length > 1) {
+						sb.append(" • ");
+					}
+					sb.append("<span class=\"nav-bar-current\">").append(current).append("</span>");
 				}
 				sb.append("</div>");
 			}
@@ -440,10 +451,11 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		@JavascriptInterface
 		public void showNavigation() {
 			FragmentManager fm = getFragmentManager();
-			if (article == null || fm == null) {
+			if (article == null || fm == null || selectedLang == null) {
 				return;
 			}
-			WikivoyageArticleNavigationFragment.showInstance(fm, cityId, selectedLang);
+			WikivoyageArticleNavigationFragment.showInstance(fm,
+					WikivoyageArticleDialogFragment.this, cityId, selectedLang);
 		}
 	}
 }
