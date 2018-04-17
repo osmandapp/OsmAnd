@@ -156,8 +156,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				items.add(header);
 				if (!group.isDisabled()) {
 					if (!group.getWptCategories().isEmpty()) {
-						MapMarkersHelper.CategoriesHeader categoriesHeader = group.getCategoriesHeader();
-						items.add(categoriesHeader);
+						MapMarkersHelper.CategoriesSubHeader categoriesSubHeader = group.getCategoriesSubHeader();
+						items.add(categoriesSubHeader);
 					}
 					TravelDbHelper travelDbHelper = mapActivity.getMyApplication().getTravelDbHelper();
 					if (travelDbHelper.getSelectedTravelBook() != null) {
@@ -166,8 +166,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							String gpxName = travelDbHelper.getGPXName(art);
 							File path = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
 							if (path.getAbsolutePath().equals(group.getGpxPath())) {
-								MapMarkersHelper.WikivoyageArticleHeader wikivoyageArticleHeader = group.getWikivoyageArticleHeader();
-								items.add(wikivoyageArticleHeader);
+								MapMarkersHelper.WikivoyageArticleSubHeader wikivoyageArticleSubHeader = group.getWikivoyageArticleSubHeader();
+								items.add(wikivoyageArticleSubHeader);
 								group.setWikivoyageArticle(art);
 							}
 						}
@@ -531,10 +531,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		} else if (holder instanceof MapMarkerCategoriesViewHolder) {
 			final MapMarkerCategoriesViewHolder categoriesViewHolder = (MapMarkerCategoriesViewHolder) holder;
 			final Object header = getItem(position);
-			if (header instanceof MapMarkersHelper.CategoriesHeader) {
-				final MapMarkersHelper.CategoriesHeader categoriesHeader = (MapMarkersHelper.CategoriesHeader) header;
-				final MapMarkersGroup group = categoriesHeader.getGroup();
-				categoriesViewHolder.icon.setImageDrawable(iconsCache.getIcon(categoriesHeader.getIconRes(), R.color.divider_color));
+			if (header instanceof MapMarkersHelper.CategoriesSubHeader) {
+				final MapMarkersHelper.CategoriesSubHeader categoriesSubHeader = (MapMarkersHelper.CategoriesSubHeader) header;
+				final MapMarkersGroup group = categoriesSubHeader.getGroup();
+				categoriesViewHolder.icon.setImageDrawable(iconsCache.getIcon(categoriesSubHeader.getIconRes(), R.color.divider_color));
 				categoriesViewHolder.title.setText(group.getWptCategoriesString());
 				categoriesViewHolder.divider.setVisibility(View.VISIBLE);
 				categoriesViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -557,8 +557,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		} else if (holder instanceof MapMarkerOpenWikivoyageArticleViewHolder) {
 			final MapMarkerOpenWikivoyageArticleViewHolder wikivoyageArticleViewHolder = (MapMarkerOpenWikivoyageArticleViewHolder) holder;
 			final Object header = getItem(position);
-			final MapMarkersHelper.WikivoyageArticleHeader wikivoyageArticleHeader = (MapMarkersHelper.WikivoyageArticleHeader) header;
-			final MapMarkersGroup group = wikivoyageArticleHeader.getGroup();
+			final MapMarkersHelper.WikivoyageArticleSubHeader wikivoyageArticleSubHeader = (MapMarkersHelper.WikivoyageArticleSubHeader) header;
+			final MapMarkersGroup group = wikivoyageArticleSubHeader.getGroup();
 			wikivoyageArticleViewHolder.title.setText(R.string.context_menu_read_article);
 			wikivoyageArticleViewHolder.icon.setVisibility(View.INVISIBLE);
 			wikivoyageArticleViewHolder.divider.setVisibility(View.VISIBLE);
@@ -594,9 +594,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			return HEADER_TYPE;
 		} else if (item instanceof ShowHideHistoryButton) {
 			return SHOW_HIDE_HISTORY_TYPE;
-		}else if (item instanceof MapMarkersHelper.CategoriesHeader) {
+		}else if (item instanceof MapMarkersHelper.CategoriesSubHeader) {
 			return CATEGORIES_TYPE;
-		}else if (item instanceof MapMarkersHelper.WikivoyageArticleHeader) {
+		}else if (item instanceof MapMarkersHelper.WikivoyageArticleSubHeader) {
 			return WIKIVOYAGE_ARTICLE_TYPE;
 		} else {
 			throw new IllegalArgumentException("Unsupported view type");
