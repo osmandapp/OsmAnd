@@ -1773,8 +1773,8 @@
     <string name="back_to_map">Вернуться на карту</string>
     <string name="location_on_map">Координаты:\n Широта %1$s\n Долгота %2$s</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_enabled">Включено</string>
-    <string name="shared_string_disabled">Выключено</string>
+    <string name="shared_string_enabled">Включён</string>
+    <string name="shared_string_disabled">Выключен</string>
     <string name="shared_string_never">Никогда</string>
     <string name="shared_string_and">и</string>
     <string name="shared_string_or">или</string>
@@ -1911,7 +1911,7 @@
     <string name="use_fast_recalculation">Умный перерасчет маршрута</string>
     <string name="use_fast_recalculation_desc">Перерасчет только начальной части маршрута для длительных поездок.</string>
     <string name="osm_edit_context_menu_delete">Удалить правки OSM</string>
-    <string name="rendering_value_disabled_name">Выключено</string>
+    <string name="rendering_value_disabled_name">Выключен</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Раскраска по сетевой принадлежности</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Раскраска туристических меток по OSMC</string>
     
