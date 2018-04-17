@@ -29,6 +29,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
+import net.osmand.plus.download.DownloadActivity;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -126,6 +127,20 @@ public class AndroidUtils {
 	
 	public static String formatTime(Context ctx, long time) {
 		return DateFormat.getTimeFormat(ctx).format(new Date(time));
+	}
+
+	public static String formatSize(long sizeBytes) {
+		int sizeKb = (int) ((sizeBytes + 512) >> 10);
+		if (sizeKb > 0) {
+			if (sizeKb > 1 << 20) {
+				return DownloadActivity.formatGb.format(new Object[]{(float) sizeKb / (1 << 20)});
+			} else if (sizeBytes > (100 * (1 << 10))) {
+				return DownloadActivity.formatMb.format(new Object[]{(float) sizeBytes / (1 << 20)});
+			} else {
+				return DownloadActivity.formatKb.format(new Object[]{(float) sizeBytes / (1 << 10)});
+			}
+		}
+		return "";
 	}
 
 	public static View findParentViewById(View view, int id) {
