@@ -432,9 +432,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						final MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 						final GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
-						if(group.isVisible()){
-							group.setWasShown(true);
-						}
 						if (groupIsDisabled && !group.wasShown() && group.getWptCategoriesString() != null) {
 							group.setWasShown(true);
 							Bundle args = new Bundle();
