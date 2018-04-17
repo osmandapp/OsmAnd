@@ -155,7 +155,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				GroupHeader header = group.getGroupHeader();
 				items.add(header);
 				if (!group.isDisabled()) {
-					if (!group.getWptCategories().isEmpty()) {
+					if (group.getWptCategories() != null && !group.getWptCategories().isEmpty()) {
 						MapMarkersHelper.CategoriesSubHeader categoriesSubHeader = group.getCategoriesSubHeader();
 						items.add(categoriesSubHeader);
 					}
