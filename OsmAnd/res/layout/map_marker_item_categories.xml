@@ -23,9 +23,9 @@
 		android:orientation="vertical">
 
 		<LinearLayout
-			android:background="?attr/selectableItemBackground"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/map_button_shadow_width">
+			android:layout_height="@dimen/map_button_shadow_width"
+			android:background="?attr/selectableItemBackground">
 
 			<ImageButton
 				android:id="@+id/icon_left"
@@ -57,12 +57,15 @@
 
 			</LinearLayout>
 
-			<ImageButton
+			<ImageView
 				android:id="@+id/icon_right"
-				android:layout_width="@dimen/map_button_shadow_width"
+				android:layout_width="wrap_content"
 				android:layout_height="@dimen/map_button_shadow_width"
-				tools:background="@drawable/marker_circle_background_dark_with_inset"
-				tools:src="@drawable/ic_action_marker_passed" />
+				android:paddingEnd="@dimen/list_content_padding"
+				android:paddingLeft="@dimen/list_content_padding"
+				android:paddingRight="@dimen/list_content_padding"
+				android:paddingStart="@dimen/list_content_padding"
+				tools:src="@drawable/ic_action_filter" />
 
 		</LinearLayout>
 
@@ -70,7 +73,7 @@
 			android:id="@+id/divider"
 			android:layout_width="wrap_content"
 			android:layout_height="1dp"
-			tools:background="?attr/dashboard_divider" />
+			android:background="?attr/dashboard_divider" />
 
 	</LinearLayout>
 

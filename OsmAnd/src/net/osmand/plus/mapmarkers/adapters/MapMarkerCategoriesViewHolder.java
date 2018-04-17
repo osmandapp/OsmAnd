@@ -14,10 +14,12 @@ public class MapMarkerCategoriesViewHolder extends RecyclerView.ViewHolder {
 
 	final ImageView icon;
 	final TextView title;
+	final View divider;
 
 	public MapMarkerCategoriesViewHolder(View itemView) {
 		super(itemView);
 		icon = (ImageView) itemView.findViewById(R.id.icon_right);
 		title = (TextView) itemView.findViewById(R.id.title);
+		divider = itemView.findViewById(R.id.divider);
 	}
 }

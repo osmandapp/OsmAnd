@@ -448,7 +448,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						final MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 						final GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
-						if (groupIsDisabled && !group.wasShown() && group.getWptCategories().size() > 1) {
+						if (groupIsDisabled && !group.wasShown() && !group.getWptCategories().isEmpty()) {
 							group.setWasShown(true);
 							Bundle args = new Bundle();
 							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath());
@@ -503,6 +503,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(null);
 				headerViewHolder.disableGroupSwitch.setChecked(!groupIsDisabled);
 				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(checkedChangeListener);
+				headerViewHolder.divider.setVisibility(group.getWptCategories().isEmpty() ? View.GONE : View.VISIBLE);
 			} else {
 				throw new IllegalArgumentException("Unsupported header");
 			}
@@ -534,10 +535,11 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				final MapMarkersGroup group = groupHeader.getGroup();
 				categoriesViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), R.color.divider_color));
 				categoriesViewHolder.title.setText(group.getWptCategoriesString());
+				categoriesViewHolder.divider.setVisibility(View.VISIBLE);
 				categoriesViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						if (group.getWptCategories().size() > 1) {
+						if (!group.getWptCategories().isEmpty()) {
 							Bundle args = new Bundle();
 							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath());
 							args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
@@ -558,6 +560,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			final MapMarkersGroup group = groupHeader.getGroup();
 			wikivoyageArticleViewHolder.title.setText(R.string.context_menu_read_article);
 			wikivoyageArticleViewHolder.icon.setVisibility(View.INVISIBLE);
+			wikivoyageArticleViewHolder.divider.setVisibility(View.VISIBLE);
 			wikivoyageArticleViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
