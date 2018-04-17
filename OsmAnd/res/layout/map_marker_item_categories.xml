@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:descendantFocusability="blocksDescendants"
+	android:orientation="vertical">
+
+	<ImageView
+		android:id="@+id/top_divider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:scaleType="fitXY"
+		android:src="@drawable/bg_shadow_list_top"
+		android:visibility="gone"
+		tools:visibility="visible" />
+
+	<LinearLayout
+		android:id="@+id/main_layout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/bg_color"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/map_button_shadow_width"
+			android:background="?attr/selectableItemBackground">
+
+			<ImageButton
+				android:id="@+id/icon_left"
+				android:layout_width="@dimen/map_button_shadow_width"
+				android:layout_height="@dimen/map_button_shadow_width"
+				android:focusableInTouchMode="true"
+				android:visibility="invisible"
+				tools:background="@drawable/marker_circle_background_dark_with_inset"
+				tools:src="@drawable/ic_action_marker_passed" />
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<android.support.v7.widget.AppCompatTextView
+					android:id="@+id/title"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_gravity="center_vertical"
+					android:ellipsize="end"
+					android:gravity="center_vertical"
+					android:maxLines="1"
+					android:textColor="@color/dashboard_blue"
+					android:textSize="@dimen/default_list_text_size"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:text="Van Gogh Museum" />
+
+			</LinearLayout>
+
+			<ImageButton
+				android:id="@+id/icon_right"
+				android:layout_width="@dimen/map_button_shadow_width"
+				android:layout_height="@dimen/map_button_shadow_width"
+				tools:background="@drawable/marker_circle_background_dark_with_inset"
+				tools:src="@drawable/ic_action_marker_passed" />
+
+		</LinearLayout>
+
+		<View
+			android:id="@+id/divider"
+			android:layout_width="wrap_content"
+			android:layout_height="1dp"
+			tools:background="?attr/dashboard_divider" />
+
+	</LinearLayout>
+
+</LinearLayout>
