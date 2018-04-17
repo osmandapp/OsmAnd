@@ -3072,11 +3072,11 @@
     <string name="article_removed">مقاله حذف شد</string>
     <string name="index_item_world_wikivoyage">مقاله‌های جهانی ویکی‌سفر</string>
     <string name="delete_search_history">پاک‌سازی تاریخچهٔ جست‌وجو</string>
-    <string name="shared_string_dont">خیر</string>
-    <string name="shared_string_do">بله</string>
+    <string name="shared_string_dont">دانلود نکن</string>
+    <string name="shared_string_do">دانلود کن</string>
     <string name="shared_string_only_with_wifi">فقط با وای‌فای</string>
     <string name="wikivoyage_download_pics">دانلود تصاویر</string>
-    <string name="wikivoyage_download_pics_descr">می‌توانید تصاویر موجود در مقاله‌ها را دانلود و روی حافظه ذخیره کنید تا هنگامی که آفلاین هستید نیز آن‌ها را ببینید.
+    <string name="wikivoyage_download_pics_descr">می‌توانیم تصاویر موجود در مقاله‌ها را دانلود و روی حافظه ذخیره کنیم تا هنگامی که آفلاین هستید نیز آن‌ها را ببینید.
 \nهمواره می‌توانید این گزینه را در «کاوش &gt; گزینه‌ها» تغییر دهید.</string>
     <string name="shared_string_wifi_only">فقط وای‌فای</string>
     <string name="online_webpage_warning">این صفحه فقط به‌صورت آنلاین در دسترس است. با مرورگر اینترنت باز شود؟</string>
