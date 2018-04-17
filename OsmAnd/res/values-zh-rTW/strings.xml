@@ -2988,4 +2988,19 @@
     <string name="shared_string_read">讀取</string>
     <string name="shared_string_contents">內容</string>
     <string name="article_removed">已移除文章</string>
+    <string name="shared_string_dont">不要</string>
+    <string name="shared_string_do">做</string>
+    <string name="shared_string_only_with_wifi">只有對 WiFi</string>
+    <string name="wikivoyage_download_pics">下載照片</string>
+    <string name="wikivoyage_download_pics_descr">我們可以在文章中下載和顯示圖像，並將它們存儲在裝置上，所以當您在離線時會存取它們。您隨時可以在「探索」&gt;「選項」中更改設定。</string>
+    <string name="shared_string_wifi_only">只有 WiFi</string>
+    <string name="select_travel_book">選擇旅遊書籍</string>
+    <string name="shared_string_travel_book">旅遊書籍</string>
+    <string name="online_webpage_warning">此頁面僅在線上狀態提供。您想在網頁瀏覽器中開啟它嗎？</string>
+    <string name="images_cache">圖像快取</string>
+    <string name="delete_search_history">刪除搜尋歷史記錄</string>
+    <string name="download_images">下載圖像</string>
+    <string name="download_maps_travel">旅遊地圖</string>
+    <string name="shared_string_wikivoyage">維基導遊</string>
+    <string name="index_item_world_wikivoyage">全球維基導遊文章</string>
     </resources>
