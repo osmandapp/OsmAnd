@@ -112,9 +112,9 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 	@Override
 	protected int getRightBottomButtonTextId() {
 		if (isUpdateMode) {
-			return -1;
-		} else {
 			return super.getRightBottomButtonTextId();
+		} else {
+			return R.string.shared_string_add;
 		}
 	}
 

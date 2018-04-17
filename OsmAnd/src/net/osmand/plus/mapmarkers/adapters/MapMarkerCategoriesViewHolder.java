@@ -21,4 +21,3 @@ public class MapMarkerCategoriesViewHolder extends RecyclerView.ViewHolder {
 		title = (TextView) itemView.findViewById(R.id.title);
 	}
 }
-
