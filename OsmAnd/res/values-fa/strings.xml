@@ -3066,12 +3066,12 @@
     <string name="wikivoyage_search_hint">جست‌وجو: کشور، استان، شهرستان</string>
     <string name="shared_string_read">مطالعه</string>
     <string name="shared_string_explore">کاوش</string>
-    <string name="shared_string_contents">محتوا</string>
+    <string name="shared_string_contents">فهرست</string>
     <string name="download_maps_travel">نقشه‌های سفر</string>
     <string name="shared_string_wikivoyage">ویکی‌سفر</string>
     <string name="article_removed">مقاله حذف شد</string>
     <string name="index_item_world_wikivoyage">مقاله‌های جهانی ویکی‌سفر</string>
-    <string name="delete_search_history">پاک‌سازی تاریخچهٔ جست‌وجو</string>
+    <string name="delete_search_history">پاک‌سازی سابقهٔ جست‌وجو</string>
     <string name="shared_string_dont">دانلود نکن</string>
     <string name="shared_string_do">دانلود کن</string>
     <string name="shared_string_only_with_wifi">فقط با وای‌فای</string>
