@@ -12,8 +12,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:scaleType="fitXY"
-		android:src="@drawable/bg_shadow_list_top"
-		android:visibility="gone"
+		android:visibility="visible"
 		tools:visibility="visible" />
 
 	<LinearLayout

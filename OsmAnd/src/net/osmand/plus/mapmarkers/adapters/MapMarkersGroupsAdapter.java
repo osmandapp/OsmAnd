@@ -439,9 +439,11 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						final MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 						final GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
+						if(group.isVisible()){
+							group.setWasShown(true);
+						}
 						if (groupIsDisabled && !group.wasShown() && group.getWptCategoriesString() != null) {
 							group.setWasShown(true);
-
 							Bundle args = new Bundle();
 							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath());
 							args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
@@ -546,6 +548,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			final MapMarkersHelper.WikivoyageArticleHeader groupHeader = (MapMarkersHelper.WikivoyageArticleHeader) header;
 			final MapMarkersGroup group = groupHeader.getGroup();
 			wikivoyageArticleViewHolder.title.setText(R.string.context_menu_read_article);
+			wikivoyageArticleViewHolder.icon.setVisibility(View.INVISIBLE);
 			wikivoyageArticleViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
