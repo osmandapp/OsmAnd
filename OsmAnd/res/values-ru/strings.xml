@@ -2858,8 +2858,8 @@
 	<string name="north_abbreviation">С</string>
 	<string name="optional_point_name">Необязательное имя точки</string>
     <string name="rendering_attr_whiteWaterSports_name">Спортивные сплавы</string>
-    <string name="distance_farthest">Расстояние: сначала дальняя</string>
-    <string name="distance_nearest">Расстояние: сначала ближняя</string>
+    <string name="distance_farthest">Расстояние: сначала дальний</string>
+    <string name="distance_nearest">Расстояние: сначала ближний</string>
     <string name="group_deleted">Группа удалена</string>
     <string name="clear_all_intermediates">Очистить все промежуточные точки</string>
     <string name="use_two_digits_longitude">Использовать две цифры долготы</string>
