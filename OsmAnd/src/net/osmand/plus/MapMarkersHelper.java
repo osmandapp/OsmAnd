@@ -418,7 +418,7 @@ public class MapMarkersHelper {
 		if (mapMarkersGroup.getId() == null || mapMarkersGroup.getName() == null) {
 			return;
 		}
-		createHeaderInGroup(mapMarkersGroup);
+		createHeadersInGroup(mapMarkersGroup);
 		int historyMarkersCount = mapMarkersGroup.getHistoryMarkers().size();
 		ShowHideHistoryButton showHideHistoryButton = mapMarkersGroup.getShowHideHistoryButton();
 		if (showHideHistoryButton != null) {
@@ -460,7 +460,7 @@ public class MapMarkersHelper {
 		}
 	}
 
-	private void createHeaderInGroup(@NonNull MapMarkersGroup group) {
+	private void createHeadersInGroup(@NonNull MapMarkersGroup group) {
 		GroupHeader header = new GroupHeader();
 		CategoriesHeader categoriesHeader = new CategoriesHeader();
 		WikivoyageArticleHeader wikivoyageArticleHeader = new WikivoyageArticleHeader();
@@ -541,7 +541,7 @@ public class MapMarkersHelper {
 			if (search == null && selected.getGpxFile() != null && selected.getGpxFile().path != null) {
 				MapMarkersGroup group = createGPXMarkerGroup(new File(selected.getGpxFile().path));
 				group.disabled = true;
-				createHeaderInGroup(group);
+				createHeadersInGroup(group);
 				res.add(group);
 			}
 		}
@@ -562,7 +562,7 @@ public class MapMarkersHelper {
 				if (search == null) {
 					MapMarkersGroup group = createGPXMarkerGroup(path);
 					group.disabled = true;
-					createHeaderInGroup(group);
+					createHeadersInGroup(group);
 					res.add(group);
 				}
 			}
