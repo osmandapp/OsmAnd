@@ -3796,4 +3796,45 @@
 
 	<string name="poi_whitewater_rapid_name">Sellő neve</string>
 
+<string name="poi_service_car">Autós szolgáltatás</string>
+
+<string name="synonyms_poi_fuel">Benzinkút;Töltőállomás;Gázolajtöltő-állomás</string>
+
+	<string name="synonyms_poi_nightclub">Diszkó;Disco;Night club</string>
+	<string name="poi_barbecue_grill">Barbecue, grill</string>
+
+	<string name="poi_water_utility">Vízmű irodája</string>
+
+	<string name="poi_amusement_arcade">Játékterem (kiskorúaknak is)</string>
+	<string name="poi_adult_gaming_centre">Játékterem (csak felnőtteknek)</string>
+
+	<string name="poi_service_vehicle_car_repair_yes">Autószerelés</string>
+	<string name="poi_service_vehicle_oil_change_yes">Olajcsere</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Használtautó-eladás</string>
+	<string name="poi_service_vehicle_brakes_yes">Fékszerelés</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Újautó-eladás</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnosztika</string>
+	<string name="poi_service_vehicle_car_parts_yes">Autóalkatrész-eladás</string>
+	<string name="poi_service_vehicle_batteries_yes">Akkumulátor</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Légkondicionáló-szerelés</string>
+	<string name="poi_service_vehicle_body_repair_yes">Karosszérialakatolás</string>
+	<string name="poi_service_vehicle_electrical_yes">Villanyautó-szerelés</string>
+	<string name="poi_service_vehicle_wheels_yes">Kerék</string>
+	<string name="poi_service_vehicle_glass_yes">Üveg</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Tehergk.-szerelés</string>
+	<string name="poi_service_vehicle_muffler_yes">Hangtompító</string>
+	<string name="poi_service_vehicle_alignment_yes">Futómű-beállítás</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Sebességváltó-szerelés</string>
+	<string name="poi_service_vehicle_motor_yes">Motorszerelés</string>
+	<string name="poi_service_vehicle_insurance_yes">Biztosítás</string>
+	<string name="poi_service_vehicle_tyres_yes">Gumiszerelés</string>
+
+	<string name="poi_aerialway_zip_line">Kötélpálya</string>
+
+	<string name="poi_climbing_adventure">Kalandpark</string>
+
+	<string name="poi_via_ferrata">Via ferrata (vasalt út)</string>
+	<string name="poi_cable_number">Sodronyok száma</string>
+	<string name="poi_via_ferrata_scale">Nehézségi fok</string>
+
 </resources>
