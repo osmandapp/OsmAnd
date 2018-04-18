@@ -190,7 +190,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	};
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		mainView = inflater.inflate(R.layout.track_points_tree, container, false);
 		ExpandableListView listView = (ExpandableListView) mainView.findViewById(android.R.id.list);
 		setHasOptionsMenu(true);

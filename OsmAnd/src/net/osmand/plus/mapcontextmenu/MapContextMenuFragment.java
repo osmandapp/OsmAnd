@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -93,6 +94,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private MapContextMenu menu;
 	private OnLayoutChangeListener containerLayoutListener;
+	private boolean forceUpdateLayout;
 
 	private int menuTopViewHeight;
 	private int menuTopShadowAllHeight;
@@ -133,7 +135,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private boolean created;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
 		processScreenHeight(container);
@@ -628,7 +630,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			@Override
 			public void onLayoutChange(View view, int left, int top, int right, int bottom,
 									   int oldLeft, int oldTop, int oldRight, int oldBottom) {
-				if (bottom != oldBottom) {
+				if (forceUpdateLayout || bottom != oldBottom) {
+					forceUpdateLayout = false;
 					processScreenHeight(view.getParent());
 					runLayoutListener();
 				}
@@ -1748,6 +1751,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void setFragmentVisibility(boolean visible) {
 		if (view != null) {
 			if (visible) {
+				forceUpdateLayout = true;
 				view.setVisibility(View.VISIBLE);
 				if (mapCenter != null) {
 					map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());

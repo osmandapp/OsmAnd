@@ -4,6 +4,7 @@ import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +25,7 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 	protected ExpandableListAdapter adapter;
 	
 	@Override
-	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
 		View v = createView(inflater, container);
 		listView = (ExpandableListView) v.findViewById(android.R.id.list);
 		listView.setOnChildClickListener(this);

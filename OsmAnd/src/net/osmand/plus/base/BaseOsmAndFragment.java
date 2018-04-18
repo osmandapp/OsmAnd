@@ -1,5 +1,6 @@
 package net.osmand.plus.base;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -10,6 +11,7 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 
@@ -40,6 +42,24 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 				}
 			}
 			if (!isFullScreenAllowed() && activity instanceof MapActivity) {
+				View view = getView();
+				if (view != null) {
+					ViewTreeObserver vto = view.getViewTreeObserver();
+					vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+						@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+						@Override
+						public void onGlobalLayout() {
+
+							View view = getView();
+							if (view != null) {
+								ViewTreeObserver obs = view.getViewTreeObserver();
+								obs.removeOnGlobalLayoutListener(this);
+								view.requestLayout();
+							}
+						}
+					});
+				}
 				((MapActivity) activity).exitFromFullScreen();
 			}
 		}
@@ -115,15 +135,15 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 		return iconsCache;
 	}
 
-	protected Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color){
+	protected Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color) {
 		return getIconsCache().getPaintedIcon(id, color);
 	}
 
-	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId){
+	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
 		return getIconsCache().getIcon(id, colorId);
 	}
 
-	protected Drawable getContentIcon(@DrawableRes int id){
+	protected Drawable getContentIcon(@DrawableRes int id) {
 		return getIconsCache().getThemedIcon(id);
 	}
 

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-    android:id="@+id/point_edit_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/point_edit_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@android:color/transparent">
 
     <LinearLayout
@@ -31,7 +32,8 @@
         <ScrollView
             android:id="@+id/editor_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:fillViewport="true">
 
             <LinearLayout
@@ -43,7 +45,6 @@
                     android:id="@+id/main_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -171,7 +172,6 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="48dp"
                         android:foreground="@drawable/bg_contextmenu_shadow"
                         android:foregroundGravity="top|fill_horizontal">
 
@@ -231,76 +231,75 @@
 
         </ScrollView>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/buttons_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="bottom">
-
-        <View
-            android:id="@+id/buttons_top_border"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/divider_color"/>
-
         <LinearLayout
-            android:id="@+id/buttons_layout"
+            android:id="@+id/buttons_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/ctx_menu_info_view_bg"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/delete_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/shared_string_delete"
-                android:textColor="?attr/contextMenuButtonColor"/>
-
-            <Button
-                android:id="@+id/replace_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/update_existing"
-                android:textColor="?attr/contextMenuButtonColor"
-                android:visibility="gone"/>
+            android:orientation="vertical">
 
             <View
-                android:layout_width="0dp"
+                android:id="@+id/buttons_top_border"
+                android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_weight="1"/>
+                android:background="@color/divider_color"/>
 
-            <Button
-                android:id="@+id/cancel_button"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/buttons_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/shared_string_cancel"
-                android:textColor="?attr/contextMenuButtonColor"/>
+                android:background="?attr/ctx_menu_info_view_bg"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/save_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/shared_string_save"
-                android:textColor="?attr/contextMenuButtonColor"/>
+                <Button
+                    android:id="@+id/delete_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/shared_string_delete"
+                    android:textColor="?attr/contextMenuButtonColor"/>
+
+                <Button
+                    android:id="@+id/replace_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/update_existing"
+                    android:textColor="?attr/contextMenuButtonColor"
+                    android:visibility="gone"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/cancel_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/shared_string_cancel"
+                    android:textColor="?attr/contextMenuButtonColor"/>
+
+                <Button
+                    android:id="@+id/save_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/shared_string_save"
+                    android:textColor="?attr/contextMenuButtonColor"/>
+
+            </LinearLayout>
 
         </LinearLayout>
-
     </LinearLayout>
+
 
 </FrameLayout>
