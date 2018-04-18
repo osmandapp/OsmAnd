@@ -3853,8 +3853,8 @@
 
 	<string name="poi_climbing_adventure">攀爬冒險</string>
 
-	<string name="poi_via_ferrata">透過 ferrata</string>
-	<string name="poi_cable_number">電纜編號</string>
+	<string name="poi_via_ferrata">透過鐵索</string>
+	<string name="poi_cable_number">纜線編號</string>
 	<string name="poi_via_ferrata_scale">困難</string>
 
 </resources>
