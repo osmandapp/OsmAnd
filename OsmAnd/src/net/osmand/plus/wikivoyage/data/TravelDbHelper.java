@@ -423,7 +423,9 @@ public class TravelDbHelper {
 	public File createGpxFile(TravelArticle article) {
 		final GPXFile gpx = article.getGpxFile();
 		File file = application.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
-		GPXUtilities.writeGpxFile(file, gpx, application);
+		if (!file.exists()) {
+			GPXUtilities.writeGpxFile(file, gpx, application);
+		}
 		return file;
 	}
 }
