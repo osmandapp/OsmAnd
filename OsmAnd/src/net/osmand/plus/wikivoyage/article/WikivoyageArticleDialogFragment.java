@@ -342,7 +342,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		articleToolbarText.setText(article.getTitle());
 		if (article.getGpxFile() != null) {
 			trackButton.setText(getString(R.string.points) + " (" + article.getGpxFile().getPointsSize() + ")");
-			webViewClient.setGpxFile(article.getGpxFile());
+			webViewClient.setArticle(article);
 		}
 
 		TravelLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();

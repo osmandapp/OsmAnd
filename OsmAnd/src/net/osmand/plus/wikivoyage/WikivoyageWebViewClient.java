@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
@@ -13,7 +12,6 @@ import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
@@ -21,8 +19,10 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
+import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
@@ -40,7 +40,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 	private OsmandApplication app;
 	private FragmentManager fragmentManager;
 	private Context context;
-	private GPXUtilities.GPXFile gpxFile;
+	private TravelArticle article;
 
 	private static final String PREFIX_GEO = "geo:";
 	private static final String PAGE_PREFIX_HTTP = "http://";
@@ -62,7 +62,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 			try {
 				articleName = URLDecoder.decode(articleName, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
+				Log.w(TAG, e.getMessage(), e);
 			}
 			long articleId = app.getTravelDbHelper().getArticleId(articleName, lang);
 			if (articleId != 0) {
@@ -74,8 +74,8 @@ public class WikivoyageWebViewClient extends WebViewClient {
 		} else if (url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS)) {
 			warnAboutExternalLoad(url);
 		} else if (url.startsWith(PREFIX_GEO)) {
-			if (gpxFile != null) {
-				List<GPXUtilities.WptPt> points = gpxFile.getPoints();
+			if (article != null) {
+				List<GPXUtilities.WptPt> points = article.getGpxFile().getPoints();
 				GPXUtilities.WptPt gpxPoint = null;
 				String coordinates = url.replace(PREFIX_GEO, "");
 				double lat;
@@ -102,6 +102,11 @@ public class WikivoyageWebViewClient extends WebViewClient {
 							gpxPoint);
 					fragmentManager.popBackStackImmediate(WikivoyageExploreDialogFragment.TAG,
 							POP_BACK_STACK_INCLUSIVE);
+
+					File path = app.getTravelDbHelper().createGpxFile(article);
+					GPXUtilities.GPXFile gpxFile = article.getGpxFile();
+					gpxFile.path = path.getAbsolutePath();
+					app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
 					MapActivity.launchMapActivityMoveToTop(context);
 				}
 			}
@@ -127,7 +132,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 				.show();
 	}
 
-	public void setGpxFile(GPXUtilities.GPXFile gpxFile) {
-		this.gpxFile = gpxFile;
+	public void setArticle(TravelArticle article) {
+		this.article = article;
 	}
 }
