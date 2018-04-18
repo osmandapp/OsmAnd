@@ -3,6 +3,7 @@ package net.osmand.plus.osmedit;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -45,7 +46,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_edit_poi_normal, container, false);
 
 		TypedValue typedValue = new TypedValue();

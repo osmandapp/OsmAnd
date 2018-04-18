@@ -3,11 +3,11 @@ package net.osmand.plus.mapcontextmenu.editors;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -15,12 +15,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -28,7 +26,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
 
@@ -40,11 +37,10 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
 		view = inflater.inflate(R.layout.point_editor_fragment, container, false);
-		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
 
 		getEditor().updateLandscapePortrait();
 		getEditor().updateNightMode();
@@ -135,36 +131,6 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 			descriptionEdit.setText(getDescriptionInitValue());
 		}
 
-		if (Build.VERSION.SDK_INT >= 11) {
-			view.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-				@Override
-				public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-					if (descriptionEdit.isFocused()) {
-						ScrollView scrollView = (ScrollView) view.findViewById(R.id.editor_scroll_view);
-						scrollView.scrollTo(0, bottom);
-					}
-					if (Build.VERSION.SDK_INT >= 21 && AndroidUiHelper.isOrientationPortrait(getActivity())) {
-						Rect rect = new Rect();
-						getActivity().getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
-						int heightDiff = getResources().getDisplayMetrics().heightPixels - rect.bottom;
-						view.findViewById(R.id.buttons_container).setPadding(0, 0, 0, heightDiff);
-					}
-				}
-			});
-		} else {
-			ViewTreeObserver vto = view.getViewTreeObserver();
-			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-
-				@Override
-				public void onGlobalLayout() {
-					if (descriptionEdit.isFocused()) {
-						ScrollView scrollView = (ScrollView) view.findViewById(R.id.editor_scroll_view);
-						scrollView.scrollTo(0, view.getBottom());
-					}
-				}
-			});
-		}
-
 		ImageView nameImage = (ImageView) view.findViewById(R.id.name_image);
 		nameImage.setImageDrawable(getNameIcon());
 		ImageView categoryImage = (ImageView) view.findViewById(R.id.category_image);
@@ -228,6 +194,11 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		return R.color.status_bar_light;
 	}
 
+	@Override
+	protected boolean isFullScreenAllowed() {
+		return false;
+	}
+
 	private void hideKeyboard() {
 		InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
 		if (inputMethodManager != null) {
@@ -250,7 +221,9 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	}
 
 	protected abstract boolean wasSaved();
+
 	protected abstract void save(boolean needDismiss);
+
 	protected abstract void delete(boolean needDismiss);
 
 	static int getResIdFromAttribute(final Context ctx, final int attr) {
@@ -262,6 +235,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	}
 
 	public abstract PointEditor getEditor();
+
 	public abstract String getToolbarTitle();
 
 	public void setCategory(String name) {
@@ -279,7 +253,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	}
 
 	protected MapActivity getMapActivity() {
-		return (MapActivity)getActivity();
+		return (MapActivity) getActivity();
 	}
 
 	protected OsmandApplication getMyApplication() {
@@ -307,15 +281,19 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	public String getNameCaption() {
 		return getMapActivity().getResources().getString(R.string.shared_string_name);
 	}
+
 	public String getCategoryCaption() {
 		return getMapActivity().getResources().getString(R.string.favourites_edit_dialog_category);
 	}
 
 	public abstract String getNameInitValue();
+
 	public abstract String getCategoryInitValue();
+
 	public abstract String getDescriptionInitValue();
 
 	public abstract Drawable getNameIcon();
+
 	public abstract Drawable getCategoryIcon();
 
 	public String getNameTextValue() {

@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.other;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -27,7 +28,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		MapActivity mapActivity = getMapActivity();
 

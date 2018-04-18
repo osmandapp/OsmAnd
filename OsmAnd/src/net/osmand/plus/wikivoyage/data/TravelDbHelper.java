@@ -184,7 +184,7 @@ public class TravelDbHelper {
 						rs.cityId = cursor.getLong(0);
 						rs.articleTitles.add(cursor.getString(1));
 						rs.langs.add(cursor.getString(2));
-						rs.isPartOf = cursor.getString(3);
+						rs.isPartOf.add(cursor.getString(3));
 						rs.imageTitle = cursor.getString(4);
 						res.add(rs);
 					} while (cursor.moveToNext());
@@ -237,6 +237,7 @@ public class TravelDbHelper {
 				}
 				prev.articleTitles.add(insInd, rs.articleTitles.get(0));
 				prev.langs.add(insInd, rs.langs.get(0));
+				prev.isPartOf.add(insInd, rs.isPartOf.get(0));
 			} else {
 				wikivoyage.put(rs.cityId, rs);
 			}
@@ -287,11 +288,11 @@ public class TravelDbHelper {
 					rs.cityId = cursor.getLong(0);
 					rs.articleTitles.add(cursor.getString(1));
 					rs.langs.add(cursor.getString(2));
-					rs.isPartOf = cursor.getString(3);
-					List<WikivoyageSearchResult> l = navMap.get(rs.isPartOf);
+					rs.isPartOf.add(cursor.getString(3));
+					List<WikivoyageSearchResult> l = navMap.get(rs.isPartOf.get(0));
 					if (l == null) {
 						l = new ArrayList<>();
-						navMap.put(rs.isPartOf, l);
+						navMap.put(rs.isPartOf.get(0), l);
 					}
 					l.add(rs);
 				} while (cursor.moveToNext());
@@ -423,7 +424,9 @@ public class TravelDbHelper {
 	public File createGpxFile(TravelArticle article) {
 		final GPXFile gpx = article.getGpxFile();
 		File file = application.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
-		GPXUtilities.writeGpxFile(file, gpx, application);
+		if (!file.exists()) {
+			GPXUtilities.writeGpxFile(file, gpx, application);
+		}
 		return file;
 	}
 }

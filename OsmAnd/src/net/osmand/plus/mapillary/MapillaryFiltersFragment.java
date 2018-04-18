@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -48,7 +49,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final MapActivity mapActivity = (MapActivity) getActivity();
         final OsmandSettings settings = getSettings();
         final MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);

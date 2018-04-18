@@ -110,6 +110,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private WebView contentWebView;
 
 	private TextView articleToolbarText;
+	private WikivoyageWebViewClient webViewClient;
 
 	@SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
 	@Nullable
@@ -196,7 +197,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		webSettings.setJavaScriptEnabled(true);
 		updateWebSettings();
 		contentWebView.addJavascriptInterface(new WikivoyageArticleWebAppInterface(), "Android");
-		contentWebView.setWebViewClient(new WikivoyageWebViewClient(getActivity(), getFragmentManager()));
+		webViewClient = new WikivoyageWebViewClient(getActivity(), getFragmentManager());
+		contentWebView.setWebViewClient(webViewClient);
 
 		return mainView;
 	}
@@ -340,6 +342,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		articleToolbarText.setText(article.getTitle());
 		if (article.getGpxFile() != null) {
 			trackButton.setText(getString(R.string.points) + " (" + article.getGpxFile().getPointsSize() + ")");
+			webViewClient.setArticle(article);
 		}
 
 		TravelLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();

@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.view.MenuItemCompat;
@@ -139,7 +140,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.favorites_tree, container, false);
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		favouritesAdapter.synchronizeGroups();

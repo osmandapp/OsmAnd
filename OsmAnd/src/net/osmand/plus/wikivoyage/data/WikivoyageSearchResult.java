@@ -12,7 +12,7 @@ public class WikivoyageSearchResult {
 	long cityId;
 	List<String> articleTitles = new ArrayList<>();
 	List<String> langs = new ArrayList<>();
-	String isPartOf;
+	List<String> isPartOf = new ArrayList<>();
 	String imageTitle;
 
 	public long getCityId() {
@@ -27,7 +27,7 @@ public class WikivoyageSearchResult {
 		return langs;
 	}
 
-	public String getIsPartOf() {
+	public List<String> getIsPartOf() {
 		return isPartOf;
 	}
 

@@ -10,6 +10,8 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextThemeWrapper;
@@ -46,6 +48,14 @@ public class WikivoyageBaseDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		}
 		return dialog;
+	}
+
+	@Override
+	public void show(FragmentManager manager, String tag) {
+		FragmentTransaction ft = manager.beginTransaction();
+		ft.add(this, tag);
+		ft.addToBackStack(tag);
+		ft.commit();
 	}
 
 	@Override
