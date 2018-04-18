@@ -2834,4 +2834,9 @@ Pôr do Sol: %2$s</string>
 \n
 \n • Terreno (subida) leva em conta tempo de caminhada (Regra de Naismith)
 \n</string>
+    <string name="wikivoyage_download_pics">Baixar fotos</string>
+    <string name="shared_string_wifi_only">Somente WiFi</string>
+    <string name="select_travel_book">Selecione livro de viagens</string>
+    <string name="shared_string_travel_book">Livro de viagens</string>
+    <string name="download_images">Baixar imagens</string>
     </resources>
