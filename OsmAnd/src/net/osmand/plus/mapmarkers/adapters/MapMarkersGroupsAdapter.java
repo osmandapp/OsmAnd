@@ -552,24 +552,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			if (header instanceof MapMarkersHelper.CategoriesSubHeader) {
 				final MapMarkersHelper.CategoriesSubHeader categoriesSubHeader = (MapMarkersHelper.CategoriesSubHeader) header;
 				final MapMarkersGroup group = categoriesSubHeader.getGroup();
-				String cat = "";
-				Set<String> categories = group.getWptCategories();
-				if (categories != null && !categories.isEmpty()) {
-					StringBuilder sb = new StringBuilder();
-					Iterator<String> it = categories.iterator();
-					while (it.hasNext()) {
-						String category = it.next();
-						if (category.equals("")) {
-							category = app.getResources().getString(R.string.waypoints);
-						}
-						sb.append(category);
-						if (it.hasNext()) {
-							sb.append(", ");
-						}
-					}
-					cat = sb.toString();
-				}
-				categoriesViewHolder.title.setText(cat);
+
+				categoriesViewHolder.title.setText(getGroupWptCategoriesString(group));
 				categoriesViewHolder.divider.setVisibility(View.VISIBLE);
 				categoriesViewHolder.button.setCompoundDrawablesWithIntrinsicBounds(
 						null, null, app.getIconsCache().getIcon(R.drawable.ic_action_filter,
@@ -604,6 +588,25 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		if (snackbar != null && snackbar.isShown()) {
 			snackbar.dismiss();
 		}
+	}
+
+	private String getGroupWptCategoriesString(MapMarkersGroup group) {
+		StringBuilder sb = new StringBuilder();
+		Set<String> categories = group.getWptCategories();
+		if (categories != null && !categories.isEmpty()) {
+			Iterator<String> it = categories.iterator();
+			while (it.hasNext()) {
+				String category = it.next();
+				if (category.equals("")) {
+					category = app.getResources().getString(R.string.waypoints);
+				}
+				sb.append(category);
+				if (it.hasNext()) {
+					sb.append(", ");
+				}
+			}
+		}
+		return sb.toString();
 	}
 
 	@Override
