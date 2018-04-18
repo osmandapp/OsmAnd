@@ -3849,4 +3849,12 @@
 	<string name="poi_service_vehicle_insurance_yes">保險</string>
 	<string name="poi_service_vehicle_tyres_yes">輪胎</string>
 
+<string name="poi_aerialway_zip_line">溜索</string>
+
+	<string name="poi_climbing_adventure">攀爬冒險</string>
+
+	<string name="poi_via_ferrata">透過 ferrata</string>
+	<string name="poi_cable_number">電纜編號</string>
+	<string name="poi_via_ferrata_scale">困難</string>
+
 </resources>
