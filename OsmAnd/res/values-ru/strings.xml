@@ -202,7 +202,7 @@
     <string name="save_track_min_speed_descr">Фильтр: не записывать точки ниже этой скорости.</string>
     <string name="save_track_min_distance">Минимальное перемещение для записи</string>
     <string name="save_track_min_distance_descr">Фильтр: задайте минимальное расстояние для записи точки.</string>
-    <string name="save_track_precision">Минимально точность для записи</string>
+    <string name="save_track_precision">Минимальная точность для записи</string>
     <string name="save_track_precision_descr">Фильтр: не записывать, если эта точность не достигнута.</string>
     <string name="christmas_poi">Рождественские POI</string>
     <string name="christmas_desc">В преддверии рождественских и новогодних праздников, вы можете выбрать для отображения POI, связанные с Рождеством: елки, ярмарки и т. п.</string>
