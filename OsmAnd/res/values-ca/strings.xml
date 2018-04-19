@@ -2825,4 +2825,15 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_explore">Explora</string>
     <string name="shared_string_contents">Continguts</string>
     <string name="shared_string_result">Resultat</string>
+    <string name="shared_string_dont">No</string>
+    <string name="shared_string_do">Fes</string>
+    <string name="shared_string_only_with_wifi">Només amb wi-fi</string>
+    <string name="wikivoyage_download_pics">Baixa les imatges</string>
+    <string name="wikivoyage_download_pics_descr">Es poden baixar i mostrar imatges dels articles i desar-les al dispositiu, així seran accessibles encara que no hi hagi connexió. Sempre podeu canviar la configuració a Exploració &gt; Opcions.</string>
+    <string name="shared_string_wifi_only">Només wi-fi</string>
+    <string name="select_travel_book">Seleccioneu una guia de viatges</string>
+    <string name="shared_string_travel_book">Guia de viatges</string>
+    <string name="online_webpage_warning">"Aquesta pàgina només es pot consultar en línia.  Voleu obrir-la en un navegador?"</string>
+    <string name="images_cache">Memòria cau d\'imatges</string>
+    <string name="delete_search_history">Esborra l\'historial de cerca</string>
     </resources>
