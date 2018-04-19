@@ -117,24 +117,9 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 	@Override
 	protected int getRightBottomButtonTextId() {
 		if (isUpdateMode) {
-			return super.getRightBottomButtonTextId();
-		} else {
-			return R.string.shared_string_add;
-		}
-	}
-
-	@Override
-	protected int getDismissButtonTextId() {
-		if (isUpdateMode) {
 			return R.string.shared_string_update;
 		} else {
-			return super.getDismissButtonTextId();
-		}
-	}
-
-	protected void onDismissButtonClickAction() {
-		if (isUpdateMode) {
-			updateAddOrEnableGroupWptCategories();
+			return R.string.shared_string_add;
 		}
 	}
 

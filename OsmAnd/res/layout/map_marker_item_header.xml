@@ -64,6 +64,7 @@
 			android:layout_marginStart="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			android:layout_marginEnd="@dimen/content_padding"
+			android:background="?attr/selectableItemBackground"
 			android:ellipsize="end"
 			android:maxLines="3"
 			android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
