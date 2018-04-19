@@ -2936,9 +2936,9 @@
     <string name="wikivoyage_download_pics_descr">Bilder i artiklene kan lastes ned og vises og lagres på enheten, så det er tilgang til dem mens du er nettfrakoblet. Innstillingen kan endres i Utforsk &gt; Alternativer.</string>
     <string name="shared_string_dont">Ikke gjør</string>
     <string name="shared_string_do">Gjør</string>
-    <string name="shared_string_only_with_wifi">Bare med WiFi</string>
+    <string name="shared_string_only_with_wifi">Bare på Wi-Fi</string>
     <string name="wikivoyage_download_pics">Last ned bilder</string>
-    <string name="shared_string_wifi_only">Bare WiFi</string>
+    <string name="shared_string_wifi_only">Kun Wi-Fi</string>
     <string name="select_travel_book">Velg reisebok</string>
     <string name="shared_string_travel_book">Reisebok</string>
     <string name="download_images">Last ned bilder</string>
