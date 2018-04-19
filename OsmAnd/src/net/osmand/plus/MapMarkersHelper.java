@@ -463,7 +463,6 @@ public class MapMarkersHelper {
 	private void createHeadersInGroup(@NonNull MapMarkersGroup group) {
 		GroupHeader header = new GroupHeader();
 		CategoriesSubHeader categoriesSubHeader = new CategoriesSubHeader();
-		WikivoyageArticleSubHeader wikivoyageArticleSubHeader = new WikivoyageArticleSubHeader();
 		int type = group.getType();
 		if (type != -1) {
 			header.iconRes = type == MapMarkersGroup.FAVORITES_TYPE
@@ -472,10 +471,8 @@ public class MapMarkersHelper {
 		}
 		header.group = group;
 		categoriesSubHeader.group = group;
-		wikivoyageArticleSubHeader.group = group;
 		group.header = header;
 		group.categoriesSubHeader = categoriesSubHeader;
-		group.wikivoyageArticleSubHeader = wikivoyageArticleSubHeader;
 	}
 
 	private void removeMarkerFromGroup(MapMarker marker) {
@@ -1226,7 +1223,6 @@ public class MapMarkersHelper {
 		// TODO should be removed from this class:
 		private GroupHeader header;
 		private CategoriesSubHeader categoriesSubHeader;
-		private WikivoyageArticleSubHeader wikivoyageArticleSubHeader;
 		private ShowHideHistoryButton showHideHistoryButton;
 
 		public MapMarkersGroup() {
@@ -1307,10 +1303,6 @@ public class MapMarkersHelper {
 			return categoriesSubHeader;
 		}
 
-		public WikivoyageArticleSubHeader getWikivoyageArticleSubHeader() {
-			return wikivoyageArticleSubHeader;
-		}
-
 		public ShowHideHistoryButton getShowHideHistoryButton() {
 			return showHideHistoryButton;
 		}
@@ -1363,19 +1355,6 @@ public class MapMarkersHelper {
 	}
 
 	public static class CategoriesSubHeader {
-		private int iconRes;
-		private MapMarkersGroup group;
-
-		public int getIconRes() {
-			return iconRes;
-		}
-
-		public MapMarkersGroup getGroup() {
-			return group;
-		}
-	}
-
-	public static class WikivoyageArticleSubHeader {
 		private int iconRes;
 		private MapMarkersGroup group;
 

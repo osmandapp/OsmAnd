@@ -12,14 +12,14 @@ import net.osmand.plus.R;
 
 public class MapMarkerCategoriesViewHolder extends RecyclerView.ViewHolder {
 
-	final ImageView icon;
 	final TextView title;
+	final TextView button;
 	final View divider;
 
 	public MapMarkerCategoriesViewHolder(View itemView) {
 		super(itemView);
-		icon = (ImageView) itemView.findViewById(R.id.icon_right);
 		title = (TextView) itemView.findViewById(R.id.title);
+		button = (TextView) itemView.findViewById(R.id.categories_button);
 		divider = itemView.findViewById(R.id.divider);
 	}
 }
