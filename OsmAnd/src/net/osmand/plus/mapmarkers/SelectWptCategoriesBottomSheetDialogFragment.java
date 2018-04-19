@@ -33,6 +33,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 	public static final String TAG = "SelectWptCategoriesBottomSheetDialogFragment";
 	public static final String GPX_FILE_PATH_KEY = "gpx_file_path";
 	public static final String UPDATE_CATEGORIES_KEY = "update_categories";
+	public static final String ACTIVE_CATEGORIES_KEY = "active_categories";
 
 	private GPXFile gpxFile;
 
@@ -48,13 +49,15 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 			return;
 		}
 		isUpdateMode = getArguments().getBoolean(UPDATE_CATEGORIES_KEY);
+		List<String> categories = getArguments().getStringArrayList(ACTIVE_CATEGORIES_KEY);
+
 		items.add(new TitleItem(getGpxName(gpxFile)));
 
 		items.add(new DescriptionItem(getString(R.string.select_waypoints_category_description)));
 
 		final BottomSheetItemWithCompoundButton[] selectAllItem = new BottomSheetItemWithCompoundButton[1];
 		selectAllItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setChecked(true)
+				.setChecked(!isUpdateMode || categories!=null&&categories.size() == gpxFile.getPointsByCategories().size())
 				.setDescription(getString(R.string.shared_string_total) + ": " + gpxFile.getPoints().size())
 				.setIcon(getContentIcon(R.drawable.ic_action_group_select_all))
 				.setTitle(getString(R.string.shared_string_select_all))
@@ -79,7 +82,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		for (String category : pointsByCategories.keySet()) {
 			final BottomSheetItemWithCompoundButton[] categoryItem = new BottomSheetItemWithCompoundButton[1];
 			categoryItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-					.setChecked(true)
+					.setChecked(!isUpdateMode || (categories != null && categories.contains(category)))
 					.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -105,7 +108,9 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 					.create();
 			items.add(categoryItem[0]);
 			categoryItems.add(categoryItem[0]);
-			selectedCategories.add(category);
+			if (!isUpdateMode || categories != null && categories.contains(category)) {
+				selectedCategories.add(category);
+			}
 		}
 	}
 

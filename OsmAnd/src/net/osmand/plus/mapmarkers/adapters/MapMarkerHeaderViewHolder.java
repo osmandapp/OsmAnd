@@ -14,9 +14,11 @@ public class MapMarkerHeaderViewHolder extends RecyclerView.ViewHolder {
 	final ImageView icon;
 	final View iconSpace;
 	final TextView title;
+	final TextView content;
+	final TextView button;
 	final SwitchCompat disableGroupSwitch;
 	final View bottomShadow;
-	final View divider;
+	final View articleDescription;
 
 	public MapMarkerHeaderViewHolder(View itemView) {
 		super(itemView);
@@ -25,6 +27,8 @@ public class MapMarkerHeaderViewHolder extends RecyclerView.ViewHolder {
 		title = (TextView) itemView.findViewById(R.id.title);
 		disableGroupSwitch = (SwitchCompat) itemView.findViewById(R.id.disable_group_switch);
 		bottomShadow = itemView.findViewById(R.id.bottom_shadow);
-		divider = itemView.findViewById(R.id.divider);
+		content = itemView.findViewById(R.id.content);
+		button = itemView.findViewById(R.id.text_button);
+		articleDescription = itemView.findViewById(R.id.article_description);
 	}
 }
