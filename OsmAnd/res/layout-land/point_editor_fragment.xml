@@ -202,7 +202,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="16dp"
                                 android:layout_marginLeft="8dp"
-                                android:maxLines="8"
+                                android:maxLines="1000"
                                 android:layout_gravity="center_vertical"
                                 android:textColor="?android:textColorPrimary"
                                 android:textColorHint="?android:textColorSecondary"

@@ -214,7 +214,7 @@
                                     android:layout_marginLeft="8dp"
                                     android:layout_marginRight="16dp"
                                     android:inputType="textMultiLine"
-                                    android:maxLines="8"
+                                    android:maxLines="1000"
                                     android:textColor="?android:textColorPrimary"
                                     android:textColorHint="?android:textColorSecondary"/>
 
