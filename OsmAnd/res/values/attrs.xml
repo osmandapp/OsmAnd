@@ -65,6 +65,10 @@
         <attr name="primary_icon_color" format="color"/>
         <attr name="light_icon_color" format="color"/>
 
+        <attr name="dialog_title_color" format="reference"/>
+        <attr name="dialog_description_color" format="reference"/>
+        <attr name="card_description_text_color" format="reference"/>
+
 		<attr name="wikivoyage_bg_color" format="reference"/>
 		<attr name="wikivoyage_card_bg_color" format="reference"/>
 		<attr name="wikivoyage_card_divider_color" format="reference"/>

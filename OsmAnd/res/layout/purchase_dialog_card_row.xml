@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/card_row_min_height"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/list_content_padding"
+            android:layout_marginRight="@dimen/dialog_content_margin"
+            android:scaleType="center"
+            android:src="@drawable/ic_action_plus"
+            android:tint="?attr/wikivoyage_active_color"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/list_content_padding"
+            android:layout_marginRight="@dimen/list_content_padding"
+            android:paddingBottom="@dimen/list_header_padding"
+            android:paddingTop="@dimen/list_header_padding"
+            android:text="@string/shared_string_wikivoyage"
+            android:textColor="?attr/dialog_title_color"
+            android:textSize="@dimen/default_list_text_size"
+            osmand:typeface="@string/font_roboto_regular"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/div"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/card_title_row_min_height"
+        android:layout_marginStart="@dimen/card_title_row_min_height"
+        android:background="?attr/wikivoyage_card_divider_color"/>
+
+</LinearLayout>
