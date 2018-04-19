@@ -449,7 +449,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/context_menu_main_actions_icon_margin"
-                        android:contentDescription="@string/shared_string_add_to_favorites"
                         android:scaleType="center"
                         android:src="@drawable/map_action_fav_dark"/>
 
@@ -516,7 +515,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/context_menu_main_actions_icon_margin"
-                        android:contentDescription="@string/context_menu_item_share_location"
                         android:scaleType="center"
                         android:src="@drawable/map_action_gshare_dark"/>
 
@@ -550,7 +548,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/context_menu_main_actions_icon_margin"
-                        android:contentDescription="@string/shared_string_more"
                         android:scaleType="center"
                         android:src="@drawable/map_overflow_menu_white"/>
 
