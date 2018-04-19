@@ -490,7 +490,7 @@
 <string name="poi_pub">میخانه</string>
 <string name="poi_food_court">مرکز غذایی</string>
 <string name="poi_drinking_water">آب آشامیدنی</string>
-<string name="poi_barbecue">کبابی</string>
+<string name="poi_barbecue">اجاق کباب پزی</string>
 
 <string name="poi_craft_agricultural_engines">ادوات کشاورزی</string>
 <string name="poi_craft_basket_maker">سبد خرید</string>
@@ -915,4 +915,5 @@
 	<string name="poi_recycling_printer_cartridges">کارتریج چاپگر</string>
 	<string name="poi_recycling_foil">ورق آلومینیومی (فویل)</string>
 	<string name="poi_recycling_paint">رنگ</string>
+	<string name="poi_pyrotechnics">لوازم آتش بازی</string>
 	</resources>
