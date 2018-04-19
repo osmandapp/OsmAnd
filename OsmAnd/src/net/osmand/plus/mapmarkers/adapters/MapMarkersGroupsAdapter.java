@@ -443,20 +443,23 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				final TravelArticle article = group.getWikivoyageArticle();
 				if (article != null && !groupIsDisabled) {
 					headerViewHolder.articleDescription.setVisibility(View.VISIBLE);
-					if (article.getContent().isEmpty()) {
-						headerViewHolder.content.setVisibility(View.GONE);
-					} else {
-						headerViewHolder.content.setText(article.getContent());
-					}
-					headerViewHolder.button.setText(R.string.shared_string_read);
-					headerViewHolder.button.setOnClickListener(new View.OnClickListener() {
+					View.OnClickListener openWikiwoyageArticle = new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							if (mapActivity.getSupportFragmentManager() != null) {
 								WikivoyageArticleDialogFragment.showInstance(app, mapActivity.getSupportFragmentManager(), article.getCityId(), article.getLang());
 							}
 						}
-					});
+					};
+					if (article.getContent().isEmpty()) {
+						headerViewHolder.content.setVisibility(View.GONE);
+					} else {
+						headerViewHolder.content.setText(article.getContent());
+						headerViewHolder.content.setOnClickListener(openWikiwoyageArticle);
+					}
+
+					headerViewHolder.button.setText(R.string.shared_string_read);
+					headerViewHolder.button.setOnClickListener(openWikiwoyageArticle);
 				} else {
 					headerViewHolder.articleDescription.setVisibility(View.GONE);
 				}
@@ -552,13 +555,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			if (header instanceof MapMarkersHelper.CategoriesSubHeader) {
 				final MapMarkersHelper.CategoriesSubHeader categoriesSubHeader = (MapMarkersHelper.CategoriesSubHeader) header;
 				final MapMarkersGroup group = categoriesSubHeader.getGroup();
-
-				categoriesViewHolder.title.setText(getGroupWptCategoriesString(group));
-				categoriesViewHolder.divider.setVisibility(View.VISIBLE);
-				categoriesViewHolder.button.setCompoundDrawablesWithIntrinsicBounds(
-						null, null, app.getIconsCache().getIcon(R.drawable.ic_action_filter,
-								night ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light), null);
-				categoriesViewHolder.button.setOnClickListener(new View.OnClickListener() {
+				View.OnClickListener openChooseCategoriesDialog = new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						if (!group.getWptCategories().isEmpty()) {
@@ -574,7 +571,14 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							mapActivity.getMyApplication().getMapMarkersHelper().addOrEnableGpxGroup(new File(group.getGpxPath()));
 						}
 					}
-				});
+				};
+				categoriesViewHolder.title.setText(getGroupWptCategoriesString(group));
+				categoriesViewHolder.divider.setVisibility(View.VISIBLE);
+				categoriesViewHolder.button.setCompoundDrawablesWithIntrinsicBounds(
+						null, null, app.getIconsCache().getIcon(R.drawable.ic_action_filter,
+								night ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light), null);
+				categoriesViewHolder.button.setOnClickListener(openChooseCategoriesDialog);
+				categoriesViewHolder.title.setOnClickListener(openChooseCategoriesDialog);
 			}
 		}
 	}
