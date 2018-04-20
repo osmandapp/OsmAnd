@@ -3017,4 +3017,7 @@ Lon %2$s</string>
     <string name="select_travel_book">Marcar libro de viajes</string>
     <string name="shared_string_travel_book">Libro de viajes</string>
     <string name="download_images">Descargar imágenes</string>
+    <string name="purchase_dialog_title">Elegir plan</string>
+    <string name="purchase_dialog_travel_description">Para leer artículos de viajes sin conexión, necesita comprar uno de los siguientes elementos.</string>
+    <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
     </resources>
