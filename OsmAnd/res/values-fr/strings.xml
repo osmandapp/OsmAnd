@@ -2667,7 +2667,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="quick_action_add_destination">Ajouter une destination</string>
     <string name="quick_action_replace_destination">Remplacer la destination</string>
     <string name="quick_action_add_first_intermediate">Ajouter une première étape</string>
-    <string name="quick_action_add_first_intermediate_desc">Appuyez sur le bouton d\'action pour ajouter le centre de la carte comme première étape.</string>
+    <string name="quick_action_add_first_intermediate_desc">Appuyez sur ce bouton pour ajouter le centre de la carte comme première étape.</string>
     <string name="quick_action_add_destination_desc">Appuyez sur ce bouton pour définir le centre de la carte comme nouvelle destination. L\'ancienne destination devient le dernier point intermédiaire.</string>
     <string name="quick_action_replace_destination_desc">Appuyez sur ce bouton pour remplacer la destination précédemment sélectionnée par le centre de la carte.</string>
     <string name="quick_action_auto_zoom">Zoom automatique de la carte Actif / Inactif</string>
