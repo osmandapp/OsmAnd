@@ -7,7 +7,7 @@
 	<string name="rendering_attr_roadColors_description">בחירת ערכת צבעי דרך:</string>
 	<string name="rendering_attr_roadColors_name">ערכת צבעי דרך</string>
     <string name="map_widget_show_destination_arrow">הצגת הכיוון ליעד</string>
-    <string name="enable_plugin_monitoring_services">יש להפעיל את תוסף המעקב כדי להשתמש בשירותי רישום מיקום (מעקב חי, רישום)</string>
+    <string name="enable_plugin_monitoring_services">יש להפעיל את תוסף מעקב הטיול כדי להשתמש בשירותי רישום מיקום (מעקב חי, רישום GPX)</string>
     <string name="non_optimal_route_calculation">יש לחשב מסלול בלתי יעיל למרחקים ארוכים</string>
     
 	<string name="gps_not_available">נא להפעיל את רכיב האיכון (GPS) בהגדרות</string>
@@ -132,7 +132,7 @@
 	<string name="show_traffic_warnings">אזהרות תנועה</string>
 	<string name="avoid_toll_roads">הימנעות מכבישי אגרה</string>
 	<string name="continue_follow_previous_route_auto">להמשיך לעקוב אחר ניווט קודם שלא הושלם? (%1$s שניות)</string>
-	<string name="route_updated_loc_found">המסלול יחושב מחדש כאשר המיקום יימצא</string>
+	<string name="route_updated_loc_found">בהמתנה למיקום לצורך חישוב הנתיב</string>
 	<string name="osmand_parking_hours">שעות</string>
 	<string name="osmand_parking_minutes">דקות</string>
 	<string name="osmand_parking_position_description_add_time">הרכב חונה במיקום:</string>
@@ -201,7 +201,7 @@
 	
 	
 	<string name="osmand_rastermaps_plugin_description">הצגת תצורה להגדרת מגוון של אריחים מפה מקוונים או שמורים כמפת בסיס או כשכבת על / תחת. ניתן להכין מפות אלה באופן בלתי מקוון ואז להעתיק אותן לתיקייה של OsmAnd.</string>
-	<string name="osmand_background_plugin_description">הצגת הגדרות להפעלת מעקב וניווט במצב רקע (מסך כבוי) על ידי השכמת רכיב האיכון מדי פעם בפעם.</string>
+	<string name="osmand_background_plugin_description">הצגת הגדרות להפעלת מעקב וניווט במצב רקע על ידי השכמת התקן ה־GPS מדי פעם בפעם (בזמן שהמסך כבוי).</string>
 	<string name="osmand_accessibility_description">הצגת הגדרות לתכונות נגישות מיוחדות.</string>
 	
 	
@@ -1131,7 +1131,7 @@
     <string name="local_osm_changes_backup_failed">גיבוי השינויים ב־OSM נכשל</string>
     <string name="local_osm_changes_backup">גיבוי כשינוי ב־OSM</string>
     <string name="search_street_in_neighborhood_cities">חיפוש אחר הרחוב בערים סמוכות</string>
-    <string name="intermediate_items_sort_return">יעדי הביניים שבדרך סודרו מחדש באופן המיטבי בדרך אל היעד.</string>
+    <string name="intermediate_items_sort_return">סדר מיטבי של יעדי הביניים על הנתיב אל היעד.</string>
     <string name="intermediate_items_sort_by_distance">סידור דלת לדלת</string>
     
     <string name="please_select_address">נא לבחור בעיר או ברחוב תחילה</string>
@@ -1415,7 +1415,7 @@
     <string name="index_name_canada">צפון אמריקה - קנדה</string>
     <string name="index_name_italy">אירופה - איטליה</string>
     <string name="index_name_gb">אירופה - הממלכה המאוחדת</string>
-    <string name="calculate_osmand_route_without_internet">חישוב הנתיב של OsmAnd בלי אינטרנט</string>
+    <string name="calculate_osmand_route_without_internet">חישוב בלתי מקוון של מקטע מהנתיב של OsmAnd</string>
     <string name="gpx_option_calculate_first_last_segment">חישוב הנתיב של OsmAnd עבור המקטע הראשון והאחרון של הנתיב</string>
     <string name="use_displayed_track_for_navigation">להשתמש במסלול המוצג לניווט?</string>
     <string name="keep_and_add_destination_point">הוספת יעד ביניים</string>
@@ -2144,7 +2144,7 @@
     <string name="shared_string_show_description">הצגת תיאור.</string>
     <string name="shared_string_message">הודעה</string>
     <string name="agps_data_last_downloaded">הפעם האחרונה שהתקבלו נתוני A-GPS:‏ %1$s</string>
-    <string name="confirm_usage_speed_cameras">בארצות רבות (גרמניה, צרפת, איטליה ואחרות) השימוש באזהרה מפני מצלמות אסורה על פי חוק. צוות OsmAnd אינו אחראי במקרה של הפרת החוק. נא ללחוץ על כן אם מותר לך להשתמש בתכונה זו באופן חוקי.</string>
+    <string name="confirm_usage_speed_cameras">בארצות רבות (גרמניה, צרפת, איטליה ואחרות) השימוש באזהרה מפני מצלמות אסור על פי חוק. צוות OsmAnd אינו אחראי במקרה של הפרת החוק מצדך. נא ללחוץ על ‚כן’ רק אם מותר לך להשתמש בתכונה זו באופן חוקי.</string>
     <string name="welmode_download_maps">הורדת מפות</string>
     <string name="welcome_select_region">כדי לשקף את חוקי התנועה והתמרורים, נא לבחור את אזור הנהיגה:</string>
     <string name="welcome_text">ב־OsmAnd יש אפשרות לגלישה גלובלית במפות ללא אינטרנט וניווט ללא אינטרנט.</string>
@@ -2763,4 +2763,13 @@
     <string name="christmas_desc">כדי לספק את ציפייתך לחג המולד וחגי השנה החדשה, ניתן לבחור להציג נקודות עניין שקשורות בחג המולד: עצי חג המולד, שווקים ועוד.</string>
     <string name="quick_action_interim_dialog">הצגת חלון זמני</string>
     <string name="favorite_autofill_toast_text">" נשמר אל "</string>
+    <string name="purchase_dialog_title">נא לבחור בתכנית</string>
+    <string name="purchase_dialog_travel_description">כדי לקרוא מאמרי מסע באופן בלתי מקוון, עליך לרכוש את אחד מהפריטים הבאים.</string>
+    <string name="purchase_dialog_subtitle">נא לבחור את הפריט המתאים:</string>
+    <string name="rendering_attr_depthContours_name">קווי עומק ימיים</string>
+    <string name="download_files_question_space_with_temp">להוריד {0} קבצים? המקום שינוצל באחסון הוא {3} מ״ב באופן זמני, {1} מ״ב באופן קבוע. ({2} מ״ב פנויים.)</string>
+    <string name="world_map_download_descr">מפת הבסיס העולמית (המכסה את כל העולם ברמות תקריב נמוכות) חסרה או שאינה עדכנית. נא לשקול להוריד אותה כדי לקבל סקירה גלובלית.</string>
+    <string name="hillshade_layer_disabled">מפת ההצללה מושבתת</string>
+    <string name="app_mode_hiking">טיול רגלי</string>
+    <string name="quick_action_duplicates">שם הפעולה המהירה כבר נמצא בשימוש, הוא הוחלף בשם %1$s כדי להמנע מכפילות.</string>
     </resources>
