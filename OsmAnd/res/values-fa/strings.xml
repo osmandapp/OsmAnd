@@ -3084,4 +3084,7 @@
     <string name="download_images">دانلود تصاویر</string>
     <string name="select_travel_book">انتخاب کتاب سفر</string>
     <string name="shared_string_travel_book">کتاب سفر</string>
+    <string name="purchase_dialog_title">انتخاب طرح</string>
+    <string name="purchase_dialog_travel_description">برای مطالعهٔ آفلاین مقاله‌های سفر، باید یکی از موارد زیر را بخرید.</string>
+    <string name="purchase_dialog_subtitle">مورد مناسبی را انتخاب کنید:</string>
     </resources>
