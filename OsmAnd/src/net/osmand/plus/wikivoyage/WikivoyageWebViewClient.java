@@ -18,6 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
@@ -41,16 +42,18 @@ public class WikivoyageWebViewClient extends WebViewClient {
 	private FragmentManager fragmentManager;
 	private Context context;
 	private TravelArticle article;
+	private boolean nightMode;
 
 	private static final String PREFIX_GEO = "geo:";
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
 	private static final String WEB_DOMAIN = ".wikivoyage.com/wiki/";
 
-	public WikivoyageWebViewClient(FragmentActivity context, FragmentManager fm) {
+	public WikivoyageWebViewClient(FragmentActivity context, FragmentManager fm, boolean nightMode) {
 		app = (OsmandApplication) context.getApplication();
 		fragmentManager = fm;
 		this.context = context;
+		this.nightMode = nightMode;
 	}
 
 	@Override
@@ -124,8 +127,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-						context.startActivity(i);
+						WikipediaDialogFragment.showFullArticle(context, Uri.parse(url), nightMode);
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)

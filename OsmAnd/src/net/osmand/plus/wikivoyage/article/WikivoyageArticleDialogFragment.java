@@ -197,7 +197,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		webSettings.setJavaScriptEnabled(true);
 		updateWebSettings();
 		contentWebView.addJavascriptInterface(new WikivoyageArticleWebAppInterface(), "Android");
-		webViewClient = new WikivoyageWebViewClient(getActivity(), getFragmentManager());
+		webViewClient = new WikivoyageWebViewClient(getActivity(), getFragmentManager(), nightMode);
 		contentWebView.setWebViewClient(webViewClient);
 
 		return mainView;
