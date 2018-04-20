@@ -3134,5 +3134,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="download_images">Téléchargez les images</string>
     <string name="purchase_dialog_title">Sélectionnez un plan</string>
     <string name="purchase_dialog_subtitle">Sélectionnez l\'élément adapté :</string>
-    <string name="purchase_dialog_travel_description">Pour lire des articles de voyage hors ligne, vous devez acheter l\'un des articles suivants.</string>
+    <string name="purchase_dialog_travel_description">Pour lire des articles de voyage hors ligne, vous devez acheter l\'un des éléments suivants.</string>
     </resources>
