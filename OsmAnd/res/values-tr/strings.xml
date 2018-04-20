@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="close_changeset">Değişiklik listesini kapat</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
 	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
@@ -2579,4 +2580,33 @@
 \n ve fazlası…</string>
     <string name="lang_es_us">İspanyolca (Amerikan)</string>
     <string name="moving_time">Hareket Zamanı</string>
+    <string name="purchase_dialog_title">Plan seçin</string>
+    <string name="purchase_dialog_travel_description">Seyahat makalelerini çevrimdışı okumak için, aşağıda bulunan nesnelerden bir tanesini satın almalısınız.</string>
+    <string name="purchase_dialog_subtitle">Uygun nesneyi seçin:</string>
+    <string name="shared_string_dont">Yapma</string>
+    <string name="shared_string_do">Yap</string>
+    <string name="shared_string_only_with_wifi">Sadece Kablosuz\'la</string>
+    <string name="wikivoyage_download_pics">Resimleri İndir</string>
+    <string name="wikivoyage_download_pics_descr">"Makalelerdeki resimleri indirebilir, gösterebilir ve cihazda depolayabiliriz, bu sayede onlara çevrimdışıyken erişebilirsiniz. Bu ayarı her zaman  Gezinti &gt; Seçenekler sekmesinden değiştirebilirsiniz."</string>
+    <string name="shared_string_wifi_only">Sadece Kablosuz</string>
+    <string name="select_travel_book">Seyahat kitabı seçin</string>
+    <string name="shared_string_travel_book">Seyahat kitabı</string>
+    <string name="online_webpage_warning">Bu sayfa sadece çevrimdışı kullanılabilir. Tarayıcıda açmak ister misiniz?</string>
+    <string name="images_cache">Resimler önbelleği</string>
+    <string name="delete_search_history">Arama geçmisini sil</string>
+    <string name="download_images">Resimleri indir</string>
+    <string name="download_maps_travel">Seyahat haritaları</string>
+    <string name="article_removed">Makale kaldırıldı</string>
+    <string name="wikivoyage_search_hint">Arayın: Ülke, Şehir, Eyalet</string>
+    <string name="shared_string_read">Oku</string>
+    <string name="saved_articles">Kaydedilmiş makaleler</string>
+    <string name="shared_string_explore">Gezin</string>
+    <string name="shared_string_contents">İçerikler</string>
+    <string name="shared_string_result">Sonuç</string>
+    <string name="shared_string_travel">Seyehat</string>
+    <string name="shared_string_total">Toplam</string>
+    <string name="clear_all_intermediates">Tüm başlangıç noktalarını temizle</string>
+    <string name="group_deleted">Grup silindi</string>
+    <string name="distance_farthest">Uzaklık: En uzak önce</string>
+    <string name="distance_nearest">Uzaklık: En yakın önce</string>
     </resources>
