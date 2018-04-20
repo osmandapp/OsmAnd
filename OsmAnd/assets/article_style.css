@@ -59,13 +59,16 @@ h1 {
 
 h2 {
     font-size: 1.5em;
-    color: #454545;
-    font-family: serif;
+    color: #575757;
+    font-family: RobotoSlab-Regular;
     word-wrap: break-word;
     margin-top: 3%;
-    margin-bottom: 3%;
-    font-weight: normal;
+    padding-bottom: 3%;
+    /* font-weight: bold; */
     line-height: 1.6em;
+    letter-spacing: 0.01em;
+    border-bottom: 1px solid #eaecf0;
+    width: 100%;
 }
 
 h2.active:after {
@@ -76,10 +79,11 @@ h2.active:after {
 }
 
 h2:after {
+    /* Headline arrow */
     vertical-align: middle;
     content: "";
-    border: solid black;
-    border-width: 0 3px 3px 0;
+    border: solid #727272;
+    border-width: 0 2px 2px 0;
     margin-top: 13px;
     display: inline-block;
     padding: 3px;
@@ -159,13 +163,18 @@ pre {
     background-color: #fafafa;
     border: 1px solid #e6e6e6;
     border-radius: 5px;
-    padding: 2%;
+    padding: 3% 3% 3% 3%;
     color: #237bff;
     font-size: 0.9em;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
     display: inline-block;
+}
+
+@font-face {
+    font-family: RobotoSlab-Regular;
+    src: url("file:///assets/fonts/RobotoSlab-Regular.ttf")
 }
 
 td {
