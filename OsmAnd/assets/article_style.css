@@ -155,6 +155,19 @@ pre {
     word-wrap: break-word;
 }
 
+.geo {
+    background-color: #fafafa;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    padding: 2%;
+    color: #237bff;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
 td {
   display: inline-block;
   word-wrap: break-word;
