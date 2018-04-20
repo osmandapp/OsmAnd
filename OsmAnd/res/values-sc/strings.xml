@@ -1437,7 +1437,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     
     <string name="context_menu_item_create_poi">Crea PDI</string>
     <string name="shared_string_cancel">Iscantzella</string>
-    <string name="shared_string_apply">Aplica</string>
+    <string name="shared_string_apply">Àplica</string>
     <string name="shared_string_add">Annanghe</string>
     <string name="add_favorite_dialog_top_text">Inserta su nùmene de su preferidu</string>
     <string name="add_favorite_dialog_default_favourite_name">Preferidu</string>
@@ -2105,7 +2105,7 @@ Lon %2$s</string>
     <string name="starting_point">Puntu de incumintzu</string>
     <string name="item_removed">Elementu bogadu</string>
     <string name="n_items_removed">elementos iscantzellados</string>
-    <string name="shared_string_undo_all">ANNUDDA TOTU</string>
+    <string name="shared_string_undo_all">Annulla totu</string>
     <string name="rec_split">Intervallu de registratzione</string>
     <string name="rec_split_title">Imprea un’intervallu de registratzione</string>
     <string name="switch_start_finish">Furria puntos de incumintzu e destinatzione</string>
@@ -2114,7 +2114,7 @@ Lon %2$s</string>
     <string name="number_of_edits">Nùmeru de modìficas</string>
     <string name="reports_for">Sinnala pro</string>
 <string name="shared_string_remove">Boga</string>
-    <string name="data_is_not_available">Su datu no est disponìbile</string>
+    <string name="data_is_not_available">Datos non disponìbiles</string>
     <string name="clear_updates_proposition_message">Podes iscantzellare sos agiornamentos iscarrigados e torrare a s’editzione originale de sa mapa</string>
     <string name="add_time_span">Annanghe intervallu de tempus</string>
     <string name="road_blocked">Àndala blocada</string>
@@ -2153,18 +2153,16 @@ Lon %2$s</string>
     <string name="osm_live_not_active">Inativu</string>
     <string name="osm_live_enter_email">Pro praghere inserta un’indirìtzu de posta eletrònica vàlidu</string>
     <string name="osm_live_enter_user_name">Pro praghere inserta su Nùmene Pùblicu</string>
-    <string name="osm_live_thanks">Gràtzias pro s\'abbonamentu tuo a sos agiornamentos in tempus reale!</string>
+    <string name="osm_live_thanks">Gràtzias pro s\'abbonamentu tuo a sos agiornamentos in tempus reale</string>
     <string name="osm_live_region_desc">Parte de sa donatzione tua at a èssere imbiada a impitadores chi faghent modìficas in cussa regione.</string>
     <string name="osm_live_subscription_settings">Impostatziones de s’abbonamentu</string>
-    <string name="osm_live_ask_for_purchase">Pro praghere in antis còmpora s’abbonamentu OsmAnd Live</string>
+    <string name="osm_live_ask_for_purchase">Pro praghere in antis còmpora un’abbonamentu a OsmAnd Live</string>
 
     <string name="osm_editors_ranking">Classìfica Editores OSM</string>
     <string name="osm_live_subscription">Abbonamentu OsmAnd LIve</string>
     <string name="osm_live_email_desc">Pro sas informatziones tuas a pitzu de sas contributziones.</string>
     <string name="osm_live_support_region">Regione de suportu</string>
-    <string name="osm_live_header">Custu abbonamentu abilitat agiornamentos ora pro ora pro totu sas mapas de su mundu.
-Parte de su balàngiu suportat sa comunidade OSM e est pagadu pro cada contributu OSM.
-Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro lu fàghere.</string>
+    <string name="osm_live_header">Custu abbonamentu abilitat agiornamentos ora pro ora pro totu sas mapas de su mundu. Parte de su balàngiu suportat sa comunidade OSM e est pagadu pro cada contributu OSM. Si istimas OsmAnd e OSM e los boles suportare e èssere suportadu dae issos, custa est una manera perfeta pro lu fàghere.</string>
     
     <string name="select_map_marker">Ischerta marcadore mapa</string>
     <string name="map_markers_other">Àteros marcadores</string>
@@ -2202,7 +2200,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
 \n • Medas megioramentos in su menù de sa mapa, comente sa chirca cuntestuale de sos indiritzos.
 \n
 \n e àteru…</string>
-    <string name="storage_directory_readonly_desc">Sa cartella de memorizatzione ischertada est in letura ebbia. Sa cartella de memorizatzione est istada mudada pro impreare sa mamòria interna. Pro praghere issèbera una cartella de destinatzione vàlida.</string>
+    <string name="storage_directory_readonly_desc">Coladu a sa memòria interna ca sa cartella de memorizatzione ischertada est in letura ebbia. Pro praghere issèbera una cartella de destinatzione vàlida.</string>
     <string name="no_map_markers_found">Annanghe sos marcadores mapa dae sa mapa</string>
     <string name="no_waypoints_found">Perunu puntu de coladòrgiu agatadu</string>
     <string name="report">Raportu</string>
@@ -2721,7 +2719,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="quick_action_start_stop_navigation_descr">Incarca custu butone pro fàghere incumintzare o acabare su nàvigu.</string>
     <string name="live_monitoring_max_interval_to_send">Intervallu de tempus pro s\'arrastamentu in lìnia</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Dislinda un\'intervallu de tempus pro mantènnere sas positziones de imbiare cando non b\'est connessione</string>
-    <string name="mappilary_no_internet_desc">Tenes bisòngiu de ìnternet pro bìdere sas fotografias de Mapillary.</string>
+    <string name="mappilary_no_internet_desc">Tenes bisòngiu de èssere connessu a ìnternet pro bìdere sas fotografias de Mapillary.</string>
     <string name="retry">Torra a proare</string>
 <string name="measurement_tool_action_bar">Esplora sa mapa e annanghe puntos</string>
     <string name="measurement_tool">Medi una distàntzia</string>
@@ -2989,4 +2987,27 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_result">Risultadu</string>
     <string name="shared_string_travel">Biàgiu</string>
     <string name="waypoints_removed_from_map_markers">Puntos de coladòrgiu bogados dae sos marcadores de sa mapa</string>
+    <string name="purchase_dialog_title">Issèbera unu pianu</string>
+    <string name="purchase_dialog_travel_description">Pro lèghere artìculos de biàgiu chene lìnia, as a dèpere comporare unu de sos elementos imbenientes.</string>
+    <string name="purchase_dialog_subtitle">Issèbera s\'elementu adatu:</string>
+    <string name="shared_string_dont">No lu fàghere</string>
+    <string name="shared_string_do">Faghe·lu</string>
+    <string name="shared_string_only_with_wifi">Petzi cun su WiFi</string>
+    <string name="wikivoyage_download_pics">Iscàrriga sas immàgines</string>
+    <string name="wikivoyage_download_pics_descr">Como podes iscarrigare e ammustrare sas immàgines in s\'artìculu e las podes sarvare in su dispositivu, pro nde pòdere tènnere atzessu fintzas chene lìnia. As a pòdere mudare sas impostatziones dae Esplora &gt; Optziones.</string>
+    <string name="shared_string_wifi_only">WiFi ebbia</string>
+    <string name="select_travel_book">Issèbera unu libru de biàgiu</string>
+    <string name="shared_string_travel_book">Libru de biàgiu</string>
+    <string name="online_webpage_warning">Custa pàgina est disponìbile petzi in lìnia. La cheres abèrrere in un\'eploradore (unu browser) ìnternet?</string>
+    <string name="images_cache">Cache de sas immàgines</string>
+    <string name="delete_search_history">Iscantzella sa cronologia de sas chircas</string>
+    <string name="download_images">Iscàrriga sas immàgines</string>
+    <string name="download_maps_travel">Mapas de biàgiu</string>
+    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="article_removed">Artìculu iscantzelladu</string>
+    <string name="wikivoyage_search_hint">Chirca: Istadu, Tzitade, Provìntzia</string>
+    <string name="shared_string_read">Leghe</string>
+    <string name="shared_string_contents">Cuntenutu</string>
+    <string name="use_two_digits_longitude">Imprea una longitùdine a duas tzìfras</string>
+    <string name="index_item_world_wikivoyage">Artìculos mondiales de Wikivoyage</string>
     </resources>
