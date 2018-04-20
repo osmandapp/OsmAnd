@@ -21,7 +21,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		OsmandApplication app = getMyApplication();
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode();
 
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
 
