@@ -113,6 +113,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 			titleTextView.setText(trackActivityActionBar.getTitle());
 		}
 		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
+		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

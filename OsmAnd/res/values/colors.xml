@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="dialog_title_color_light">#212121</color>
+	<color name="dialog_title_color_dark">#cccccc</color>
+	<color name="dialog_description_color_light">#212121</color>
+	<color name="dialog_description_color_dark">#727272</color>
+	<color name="dialog_divider_light">#e6e6e6</color>
+	<color name="dialog_divider_dark">#2d3133</color>
+	<color name="dialog_text_description_color">#727272</color>
+	<color name="card_description_text_color_light">#b3b3b3</color>
+	<color name="card_description_text_color_dark">#4d4d4d</color>
+
+
 	<color name="ctx_menu_nearby_routes_text_color_dark">#bfbfbf</color>
 	<color name="map_toolbar_switch_track_color">#c5d2e6</color>
 	<color name="mapillary_color">#3db878</color>

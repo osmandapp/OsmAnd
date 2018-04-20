@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="purchase_dialog_title">Choose plan</string>
+    <string name="purchase_dialog_travel_description">To read Travel articles offline, you need to purchase one of the following items.</string>
+    <string name="purchase_dialog_subtitle">Choose suitable item:</string>
     <string name="shared_string_dont">Don\'t</string>
     <string name="shared_string_do">Do</string>
     <string name="shared_string_only_with_wifi">Only with WiFi</string>

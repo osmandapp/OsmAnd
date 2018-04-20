@@ -65,6 +65,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(getIconsCache().getIcon(R.drawable.ic_arrow_back));
+		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

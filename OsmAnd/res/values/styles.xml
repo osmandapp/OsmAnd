@@ -197,6 +197,10 @@
 
         <item name="coordinate_input_edit_text_normal">@color/coordinate_input_edit_text_normal_light</item>
 
+        <item name="dialog_title_color">@color/dialog_title_color_light</item>
+        <item name="dialog_description_color">@color/dialog_description_color_light</item>
+        <item name="card_description_text_color">@color/card_description_text_color_light</item>
+
         <item name="wikivoyage_bg_color">@color/wikivoyage_bg_light</item>
         <item name="wikivoyage_card_bg_color">@color/wikivoyage_card_bg_light</item>
         <item name="wikivoyage_card_divider_color">@color/wikivoyage_card_divider_light</item>
@@ -390,6 +394,10 @@
         <item name="keyboard_controls_divider">@color/keyboard_item_add_button_divider_dark</item>
 
         <item name="coordinate_input_edit_text_normal">@color/coordinate_input_edit_text_normal_dark</item>
+
+        <item name="dialog_title_color">@color/dialog_title_color_dark</item>
+        <item name="dialog_description_color">@color/dialog_description_color_dark</item>
+        <item name="card_description_text_color">@color/card_description_text_color_dark</item>
 
         <item name="wikivoyage_bg_color">@color/wikivoyage_bg_dark</item>
         <item name="wikivoyage_card_bg_color">@color/wikivoyage_card_bg_dark</item>

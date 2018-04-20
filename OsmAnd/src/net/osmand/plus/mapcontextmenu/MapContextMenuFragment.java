@@ -541,7 +541,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		final ImageView imageFavorite = (ImageView) view.findViewById(R.id.context_menu_fav_image_view);
 		imageFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(),
 				R.color.ctx_menu_buttons_icon_color));
-		imageFavorite.setContentDescription(getString(menu.getFavActionStringId()));
 		((TextView) view.findViewById(R.id.context_menu_fav_text_view)).setText(menu.getFavActionStringId());
 		View favView = view.findViewById(R.id.context_menu_fav_view);
 		favView.setOnClickListener(new View.OnClickListener() {
@@ -554,7 +553,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		final ImageView imageWaypoint = (ImageView) view.findViewById(R.id.context_menu_route_image_view);
 		imageWaypoint.setImageDrawable(getIcon(menu.getWaypointActionIconId(),
 				R.color.ctx_menu_buttons_icon_color));
-		imageWaypoint.setContentDescription(getString(menu.getWaypointActionStringId()));
 		View waypointView = view.findViewById(R.id.context_menu_route_view);
 		if (menu.isButtonWaypointEnabled()) {
 			waypointView.setOnClickListener(new View.OnClickListener() {
@@ -1226,7 +1224,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final ImageView buttonFavorite = (ImageView) view.findViewById(R.id.context_menu_fav_image_view);
 			buttonFavorite.setImageDrawable(getIcon(menu.getFavActionIconId(), R.color.ctx_menu_buttons_icon_color));
 			String favActionString = getString(menu.getFavActionStringId());
-			buttonFavorite.setContentDescription(favActionString);
 			((TextView) view.findViewById(R.id.context_menu_fav_text_view)).setText(favActionString);
 
 			buildHeader();

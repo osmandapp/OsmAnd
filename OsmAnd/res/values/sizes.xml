@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	<dimen name="action_bar_height">64dp</dimen>
+	<dimen name="list_content_padding_large">32dp</dimen>
+	<dimen name="title_padding">20dp</dimen>
+    <dimen name="title_text_size">28sp</dimen>
+    <dimen name="card_title_row_min_height">64dp</dimen>
+    <dimen name="card_row_min_height">48dp</dimen>
+	<dimen name="card_button_min_size">52dp</dimen>
+
 	<dimen name="widget_turn_lane_size">36dp</dimen>
 	<dimen name="widget_turn_lane_border">6dp</dimen>
 	<dimen name="widget_turn_lane_margin">2dp</dimen>

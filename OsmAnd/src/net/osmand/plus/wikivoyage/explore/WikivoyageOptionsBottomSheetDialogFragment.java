@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PicassoUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -28,7 +27,6 @@ import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -95,7 +93,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 		BaseBottomSheetItem clearCacheItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.shared_string_clear))
 				.setDescriptionColorId(nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light)
-				.setTitle(getString(R.string.images_cache) + getCacheSize())
+				.setTitle(getString(R.string.images_cache))
 				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -157,15 +155,5 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 				})
 				.setNegativeButton(R.string.shared_string_dismiss, null)
 				.show();
-	}
-
-	private String getCacheSize() {
-		long cacheBytes = 0;
-		try {
-			cacheBytes += PicassoUtils.getDiskCacheSizeBytes();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return ": " + AndroidUtils.formatSize(cacheBytes);
 	}
 }
