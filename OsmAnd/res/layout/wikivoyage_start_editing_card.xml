@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_gravity="center_horizontal"
+	android:layout_marginBottom="@dimen/list_content_padding"
+	android:layout_marginTop="@dimen/list_content_padding">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:orientation="vertical">
+
+		<FrameLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+
+			<ImageView
+				android:id="@+id/background_image"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/wikivoyage_explore_card_image_height"
+				android:contentDescription="@string/welcome_to_open_beta"
+				android:src="@drawable/img_help_wikivoyage_contribute" />
+
+			<TextView
+				android:id="@+id/title"
+				android:layout_width="150dp"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/list_content_padding"
+				android:layout_marginEnd="@dimen/list_content_padding"
+				android:layout_marginLeft="@dimen/list_content_padding"
+				android:layout_marginRight="@dimen/list_content_padding"
+				android:layout_marginStart="@dimen/list_content_padding"
+				android:layout_marginTop="42dp"
+				android:text="@string/start_editing_card_image_text"
+				android:textColor="@color/primary_text_dark" />
+
+		</FrameLayout>
+
+
+		<TextView
+			android:id="@+id/description"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/list_content_padding"
+			android:layout_marginEnd="@dimen/list_content_padding"
+			android:layout_marginLeft="@dimen/list_content_padding"
+			android:layout_marginRight="@dimen/list_content_padding"
+			android:layout_marginStart="@dimen/list_content_padding"
+			android:layout_marginTop="@dimen/list_content_padding"
+			android:text="@string/start_editing_card_description" />
+
+		<View
+			android:id="@+id/bottom_divider"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/dashboard_divider" />
+
+		<include layout="@layout/bottom_buttons" />
+
+	</LinearLayout>
+
+</android.support.v7.widget.CardView>
