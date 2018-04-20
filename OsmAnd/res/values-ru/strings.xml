@@ -2891,4 +2891,7 @@
     <string name="download_images">Скачать изображения</string>
     <string name="shared_string_dont">Нет</string>
     <string name="shared_string_do">Выполнить</string>
+    <string name="purchase_dialog_title">Выберите план</string>
+    <string name="purchase_dialog_travel_description">Чтобы читать статьи о путешествиях в автономном режиме, вам необходимо приобрести один из следующих пунктов.</string>
+    <string name="purchase_dialog_subtitle">Выберите подходящий пункт:</string>
     </resources>
