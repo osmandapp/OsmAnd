@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="poi_fuel_type">Τύπος καυσίμου</string>
+	<string name="poi_fuel_avia_type">Τύπος καυσίμου (αεροπορία)</string>
+	<string name="poi_payment_type">Τύπος πληρωμής</string>
+	<string name="poi_payment_fuel_type">Κάρτες καυσίμου</string>
+	<string name="poi_additional_type">Επιπρόσθετα</string>
+	<string name="poi_internet_access_type">Τύπος πρόσβασης διαδικτύου</string>
+	<string name="poi_vending_type">Τύπος πώλησης</string>
+	<string name="poi_bicycle_service">Υπηρεσία δικύκλων</string>
+	<string name="poi_clothes_type">Τύπος</string>
+	<string name="poi_shoes_type">Τύπος</string>
+	</resources>
