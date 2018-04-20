@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="travel_guide_description">Browse the Wikivoyage guides to the most interesting places on the planet inside OsmAnd without an internet connection.</string>
+    <string name="travel_guide">Travel Guide</string>
     <string name="purchase_dialog_title">Choose plan</string>
     <string name="purchase_dialog_travel_description">To read Travel articles offline, you need to purchase one of the following items.</string>
     <string name="purchase_dialog_subtitle">Choose suitable item:</string>
