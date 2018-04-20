@@ -2937,4 +2937,7 @@
     <string name="toast_empty_name_error">Η τοποθεσία δεν έχει όνομα</string>
     <string name="tunnel_warning">Προσέγγιση σήραγγας</string>
     <string name="show_tunnels">Σήραγγες</string>
-</resources>
+<string name="purchase_dialog_title">Επιλογή σχεδίου</string>
+    <string name="purchase_dialog_travel_description">Για να διαβάσετε ταξιδιωτικά άρθρα χωρίς σύνδεση, χρειάζεται να αγοράσετε ένα από τα παρακάτω στοιχεία.</string>
+    <string name="purchase_dialog_subtitle">Επιλέξτε κατάλληλο στοιχείο:</string>
+    </resources>
