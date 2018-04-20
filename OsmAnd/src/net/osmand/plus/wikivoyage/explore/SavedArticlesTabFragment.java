@@ -45,7 +45,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 		adapter.setListener(new SavedArticlesRvAdapter.Listener() {
 			@Override
 			public void openArticle(TravelArticle article) {
-				FragmentManager fm = getFragmentManager();
+				FragmentManager fm = getActivity().getSupportFragmentManager();
 				if (fm != null) {
 					WikivoyageArticleDialogFragment.showInstance(app, fm, article.getCityId(), article.getLang());
 				}
