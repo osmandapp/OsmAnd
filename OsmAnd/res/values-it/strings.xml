@@ -3072,4 +3072,13 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="use_two_digits_longitude">"Usa  due cifre per la longitudine"</string>
     <string name="shared_string_travel">Viaggio</string>
     <string name="select_waypoints_category_description">Puoi aggiungere tutti i punti intermedi delle tracce o per categorie separate.</string>
+    <string name="shared_string_dont">Non fare</string>
+    <string name="shared_string_do">Fai</string>
+    <string name="shared_string_only_with_wifi">Solo da WiFi</string>
+    <string name="wikivoyage_download_pics">Scarica le foto</string>
+    <string name="shared_string_wifi_only">Solo WiFi</string>
+    <string name="select_travel_book">Scegli il libro di viaggio</string>
+    <string name="shared_string_travel_book">Libro di viaggio</string>
+    <string name="online_webpage_warning">Questa pagina è disponibile solo online. Vuoi aprirla in un browser?</string>
+    <string name="images_cache">Cache delle immagini</string>
     </resources>
