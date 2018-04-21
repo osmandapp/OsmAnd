@@ -3018,4 +3018,9 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_travel">Bidaia</string>
     <string name="waypoints_removed_from_map_markers">Bide-puntuak mapa markatzaileetatik kendu dira</string>
     <string name="index_item_world_wikivoyage">Mundu osoko Wikivoyage artikuluak</string>
+    <string name="travel_guide_description">Arakatu Wikivoyage gidak planetako leku interesgarrienetara OsmAnd-en bertan eta Internet konexiorik gabe.</string>
+    <string name="travel_guide">Bidai gida</string>
+    <string name="purchase_dialog_title">Hautatu plana</string>
+    <string name="purchase_dialog_travel_description">Bidai-artikuluak konexiorik gabe irakurtzeko, honako hauetako bat eroi behar duzu.</string>
+    <string name="purchase_dialog_subtitle">Hautatu elementu egokia:</string>
     </resources>
