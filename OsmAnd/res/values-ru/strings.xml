@@ -2445,9 +2445,9 @@
     <string name="store_tracks_in_monthly_directories_descrp">Сохранять записанные треки в подпапках с записью месяца (например, 2018-01).</string>
     <string name="mapillary_menu_title_tile_cache">Кэш тайлов</string>
     <string name="wrong_user_name">Неверное имя пользователя</string>
-    <string name="mapillary_menu_descr_dates">Просмотр только добавленных фотографий</string>
+    <string name="mapillary_menu_descr_dates">Просмотр фотографий по дате</string>
     <string name="mapillary_menu_title_dates">Дата</string>
-    <string name="mapillary_menu_descr_username">Просмотр только фотографий, добавленных</string>
+    <string name="mapillary_menu_descr_username">Просмотр фотографий пользователя</string>
     <string name="mapillary_menu_title_username">Имя пользователя</string>
     <string name="map_widget_ruler_control">Радиус-линейка</string>
     <string name="open_mapillary">Открыть Mapillary</string>
@@ -2894,4 +2894,16 @@
     <string name="purchase_dialog_title">Выберите план</string>
     <string name="purchase_dialog_travel_description">Чтобы читать статьи о путешествиях в автономном режиме, вам необходимо приобрести один из следующих пунктов.</string>
     <string name="purchase_dialog_subtitle">Выберите подходящий пункт:</string>
+    <string name="in_app_purchase">Покупка в приложении</string>
+    <string name="in_app_purchase_desc">"Разовый платеж "</string>
+    <string name="purchase_unlim_title">Купить - %1$s</string>
+    <string name="purchase_subscription_title">Подписаться - %1$s</string>
+
+    <string name="wikivoyage_offline">Викигид в автономном режиме</string>
+    <string name="dayly_map_updates">Обновления карты: ежедневные</string>
+    <string name="unlimited_downloads">Неограниченные загрузки</string>
+    <string name="wikipedia_offline">Википедия в автономном режиме</string>
+    <string name="contour_lines_sea_depth">Контурные линии + Морские глубины</string>
+    <string name="unlock_all_features">Разблокировать все функции OsmAnd</string>
+
     </resources>
