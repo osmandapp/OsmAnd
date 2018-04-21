@@ -33,7 +33,7 @@
 	<string name="poi_animal_training_type">Τύπος</string>
 	<string name="poi_embassy_type">Τύπος</string>
 	<string name="poi_city_capital">Πρωτεύουσα</string>
-	<string name="poi_pharmacy_dispensing">Διάθεση</string>
+	<string name="poi_pharmacy_dispensing">Φαρμακείο</string>
 	<string name="poi_healthcare_alternative_types">Ειδικότητα</string>
 	<string name="poi_free_flying_characteristics">Χαρακτηριστικά</string>
 	<string name="poi_archaeological_site_type">Τύπος</string>
@@ -50,9 +50,9 @@
 	<string name="poi_theatre_genre">Είδος</string>
 	<string name="poi_outdoor_seating">Εξωτερικές θέσεις</string>
 	<string name="poi_fee">Εισιτήριο</string>
-	<string name="poi_smoking">Καπνιστές</string>
+	<string name="poi_smoking">Κάπνισμα</string>
 	<string name="poi_delivery">Διανομή</string>
-	<string name="poi_drive_in">Με αυτοκίνητο</string>
+	<string name="poi_drive_in">Υπηρεσίες από το αυτοκίνητο</string>
 	<string name="poi_star_rating">Αξιολόγηση με αστέρια</string>
 	<string name="poi_takeaway">Φαγητό για έξω</string>
 	<string name="poi_cocktails">Κοκτέιλς</string>
@@ -63,7 +63,7 @@
 	<string name="poi_shelter_type">Τύπος</string>
 	<string name="poi_fireplace">Τζάκι</string>
 	<string name="poi_seasonal">Εποχιακός</string>
-	<string name="poi_water_characteristic">Χαρακτηριστικά νερού</string>
+	<string name="poi_water_characteristic">Χαρακτηριστικό νερού</string>
 	<string name="poi_beach_surface_type">Επιφάνεια</string>
 	<string name="poi_nudism">Γυμνισμός</string>
 	<string name="poi_diet">Διατροφή</string>
@@ -81,7 +81,7 @@
 	<string name="poi_social_facility_for">Ομάδα στόχος</string>
 	<string name="poi_compressed_air_filter">Πεπιεσμένος αέρας</string>
 	<string name="poi_vacuum_cleaner_filter">Ηλεκτρική σκούπα</string>
-	<string name="poi_free_flying_characteristic">Χαρακτηριστικά</string>
+	<string name="poi_free_flying_characteristic">Χαρακτηριστικό</string>
 	<string name="poi_cafeteria">Καφετέρια</string>
 	<string name="poi_zoo_type">Τύπος</string>
 	<string name="poi_motorcycle_services">Υπηρεσίες</string>
@@ -118,4 +118,46 @@
 	<string name="poi_aerialway_transport">Εναέριες μετακινήσεις</string>
 	<string name="poi_node_networks">Κόμβοι δικτύου πεζοπορίας/ποδηλασίας</string>
 	<string name="poi_hiking_routes">Διαδρομές πεζοπορίας</string>
+	<string name="poi_drive_through">Υπηρεσίες από το αυτοκίνητο</string>
+	<string name="poi_traffic_enforcement">Κυκλοφοριακός έλεγχος</string>
+	<string name="poi_man_made">Τεχνητός</string>
+	<string name="poi_water_supply">Παροχή νερού</string>
+	<string name="poi_power">Ενέργεια</string>
+	<string name="poi_communication">Επικοινωνία</string>
+	<string name="poi_trash_disposal">Διάθεση απορριμάτων</string>
+	<string name="poi_landuse">Χρήση γης</string>
+	<string name="poi_education">Εκπαίδευση</string>
+	<string name="poi_administrative">Διοίκηση</string>
+	<string name="poi_healthcare">Ιατροφαρμακευτική περίθαλψη</string>
+	<string name="poi_office">Γραφείο</string>
+	<string name="poi_sport">Αθλητισμός</string>
+	<string name="poi_tourism">Τουρισμός</string>
+	<string name="poi_sightseeing">Αξιοθέατο</string>
+	<string name="poi_accomodation">Στέγαση</string>
+	<string name="poi_internet_access">Πρόσβαση διαδικτύου</string>
+	<string name="poi_entertainment">Ελεύθερος χρόνος</string>
+	<string name="poi_club">Λέσχη</string>
+	<string name="poi_sustenance">Τροφή</string>
+	<string name="poi_cafe_and_restaurant">Καφεστιατόριο</string>
+	<string name="poi_service">Υπηρεσία</string>
+	<string name="poi_craft">Χειροτεχνία</string>
+	<string name="poi_finance">Χρηματοοικονομικά</string>
+	<string name="poi_natural">Φύση</string>
+	<string name="poi_seamark">Ναυτιλία</string>
+	<string name="poi_military">Στρατός</string>
+	<string name="poi_osmwiki">Βικιπαίδεια</string>
+	<string name="poi_user_defined_other">Από τον χρήστη</string>
+
+	<string name="poi_palaeontological_site">Παλαιοντολογική τοποθεσία</string>
+
+	<string name="poi_bakery">Αρτοποιείο</string>
+	<string name="poi_alcohol">Κατάστημα αλκοολούχων ποτών</string>
+	<string name="poi_cheese">Κατάστημα τυριών</string>
+	<string name="poi_chocolate">Κατάστημα σοκολάτας</string>
+	<string name="poi_coffee">Καφενείο</string>
+	<string name="poi_convenience">Παντοπωλείο</string>
+	<string name="poi_mall">Εμπορικό κέντρο</string>
+	<string name="poi_beverages">Κατάστημα ποτών</string>
+	<string name="poi_butcher">Κρεοπωλείο</string>
+	<string name="poi_deli">Κατάστημα με λιχουδιές</string>
 	</resources>
