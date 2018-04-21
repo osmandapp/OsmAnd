@@ -506,7 +506,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 					collapseBanner();
 				} else {
 					ctx.getMyApplication().logEvent(ctx, "click_free_dialog");
-					ChoosePlanDialogFragment.showInstance(ctx.getSupportFragmentManager(), PlanType.FREE_VERSION_BANNER);
+					ChoosePlanDialogFragment.showFreeVersionInstance(ctx.getSupportFragmentManager());
 				}
 			}
 		};

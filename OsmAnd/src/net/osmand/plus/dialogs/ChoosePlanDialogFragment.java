@@ -2,8 +2,10 @@ package net.osmand.plus.dialogs;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -19,15 +21,25 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.inapp.InAppHelper;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.widgets.TextViewEx;
 
+import org.apache.commons.logging.Log;
+
+import static net.osmand.plus.OsmandApplication.SHOW_PLUS_VERSION_INAPP_PARAM;
+
 public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = ChoosePlanDialogFragment.class.getSimpleName();
+	private static final Log LOG = PlatformUtil.getLog(ChoosePlanDialogFragment.class);
 
 	private static final String PLAN_TYPE_KEY = "plan_type";
 
@@ -136,15 +148,32 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment {
 			return null;
 		}
 		View view = inflate(R.layout.purchase_dialog_fragment, container);
+
+		view.findViewById(R.id.button_back).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
+		view.findViewById(R.id.button_later).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
+
 		ViewGroup infoContainer = (ViewGroup) view.findViewById(R.id.info_container);
 		TextViewEx infoDescription = (TextViewEx) view.findViewById(R.id.info_description);
 		ViewGroup cardsContainer = (ViewGroup) view.findViewById(R.id.cards_container);
-		switch (planType) {
 
+		switch (planType) {
 			case FREE_VERSION_BANNER: {
-				infoDescription.setVisibility(View.GONE);
-				View freeVersionInfoView = inflate(R.layout.purchase_dialog_info_free_version, infoContainer);
-				infoContainer.addView(freeVersionInfoView);
+				infoDescription.setText(ctx.getString(R.string.free_version_message,
+						DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS));
+				//infoDescription.setVisibility(View.GONE);
+				//View freeVersionInfoView = inflate(R.layout.purchase_dialog_info_free_version, infoContainer);
+				//initFreeVersionInfoView(ctx, freeVersionInfoView);
+				//infoContainer.addView(freeVersionInfoView);
 
 				break;
 			}
@@ -153,6 +182,46 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment {
 		cardsContainer.addView(buildOsmAndUnlimitedCard(ctx, cardsContainer));
 		return view;
 	}
+
+	/*
+	private void initFreeVersionInfoView(Context ctx, View freeVersionInfoView) {
+		TextView downloadsLeftTextView = (TextView) freeVersionInfoView.findViewById(R.id.downloadsLeftTextView);
+		ProgressBar downloadsLeftProgressBar = (ProgressBar) freeVersionInfoView.findViewById(R.id.downloadsLeftProgressBar);
+		TextView freeVersionDescriptionTextView = (TextView) freeVersionInfoView
+				.findViewById(R.id.freeVersionDescriptionTextView);
+
+		OsmandSettings settings = getMyApplication().getSettings();
+		final Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
+		downloadsLeftProgressBar.setProgress(mapsDownloaded);
+		int downloadsLeft = DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
+		downloadsLeft = Math.max(downloadsLeft, 0);
+		downloadsLeftTextView.setText(ctx.getString(R.string.downloads_left_template, downloadsLeft));
+		downloadsLeftProgressBar.setMax(DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS);
+		freeVersionDescriptionTextView.setText(ctx.getString(R.string.free_version_message,
+				DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS));
+
+		LinearLayout marksLinearLayout = (LinearLayout) freeVersionInfoView.findViewById(R.id.marksLinearLayout);
+		Space spaceView = new Space(ctx);
+		LinearLayout.LayoutParams layoutParams =
+				new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+		spaceView.setLayoutParams(layoutParams);
+		marksLinearLayout.addView(spaceView);
+		int markWidth = (int) (1 * ctx.getResources().getDisplayMetrics().density);
+		int colorBlack = ctx.getResources().getColor(nightMode ? R.color.wikivoyage_bg_dark : R.color.wikivoyage_bg_light);
+		for (int i = 1; i < DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS; i++) {
+			View markView = new View(ctx);
+			layoutParams = new LinearLayout.LayoutParams(markWidth, ViewGroup.LayoutParams.MATCH_PARENT);
+			markView.setLayoutParams(layoutParams);
+			markView.setBackgroundColor(colorBlack);
+			marksLinearLayout.addView(markView);
+			spaceView = new Space(ctx);
+			layoutParams = new LinearLayout.LayoutParams(0,
+					ViewGroup.LayoutParams.MATCH_PARENT, 1);
+			spaceView.setLayoutParams(layoutParams);
+			marksLinearLayout.addView(spaceView);
+		}
+	}
+	*/
 
 	private View inflate(@LayoutRes int layoutId, @Nullable ViewGroup container) {
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -320,7 +389,12 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fm, PlanType planType) {
+	public static void showFreeVersionInstance(@NonNull FragmentManager fm) {
+		PlanType planType = PlanType.FREE_VERSION_BANNER;
+		showInstance(fm, planType);
+	}
+
+	private static void showInstance(@NonNull FragmentManager fm, PlanType planType) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(PLAN_TYPE_KEY, planType.name());
@@ -328,10 +402,9 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment {
 			ChoosePlanDialogFragment fragment = new ChoosePlanDialogFragment();
 			fragment.setArguments(args);
 			fragment.show(fm, TAG);
-			return true;
 
 		} catch (RuntimeException e) {
-			return false;
+			LOG.error("showInstance", e);
 		}
 	}
 }
