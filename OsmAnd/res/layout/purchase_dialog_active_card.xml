@@ -34,7 +34,6 @@
         android:layout_marginRight="@dimen/list_content_padding_large"
         android:layout_marginTop="@dimen/list_header_padding"
         android:gravity="center"
-        android:text="@string/osm_live_payment_desc"
         android:textColor="?attr/card_description_text_color"
         android:textSize="@dimen/default_desc_text_size"
         osmand:typeface="@string/font_roboto_regular"/>

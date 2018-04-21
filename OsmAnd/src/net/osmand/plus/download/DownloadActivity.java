@@ -53,6 +53,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.dialogs.ChoosePlanDialogFragment;
+import net.osmand.plus.dialogs.ChoosePlanDialogFragment.PlanType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
 import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
@@ -504,7 +506,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 					collapseBanner();
 				} else {
 					ctx.getMyApplication().logEvent(ctx, "click_free_dialog");
-					new FreeVersionDialogFragment().show(ctx.getSupportFragmentManager(), FreeVersionDialogFragment.TAG);
+					ChoosePlanDialogFragment.showInstance(ctx.getSupportFragmentManager(), PlanType.FREE_VERSION_BANNER);
 				}
 			}
 		};
