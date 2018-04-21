@@ -9,8 +9,19 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="travel_guide_description">Browse the Wikivoyage guides to the most interesting places on the planet inside OsmAnd without an internet connection.</string>
-    <string name="travel_guide">Travel Guide</string>
+    <string name="in_app_purchase">In-App purchase</string>
+    <string name="in_app_purchase_desc">One time payment</string>
+    <string name="in_app_purchase_desc_ex">Once purchased, it will be permanently available to you.</string>
+    <string name="purchase_unlim_title">Buy - %1$s</string>
+    <string name="purchase_subscription_title">Subscript - %1$s</string>
+
+    <string name="wikivoyage_offline">Wikivoyage offline</string>
+    <string name="dayly_map_updates">Map updates: every day</string>
+    <string name="unlimited_downloads">Unlimited downloads</string>
+    <string name="wikipedia_offline">Wikipedia offline</string>
+    <string name="contour_lines_sea_depth">Contour lines + Sea depth</string>
+    <string name="unlock_all_features">Unlock all OsmAnd features</string>
+
     <string name="purchase_dialog_title">Choose plan</string>
     <string name="purchase_dialog_travel_description">To read Travel articles offline, you need to purchase one of the following items.</string>
     <string name="purchase_dialog_subtitle">Choose suitable item:</string>
