@@ -3020,4 +3020,6 @@ Lon %2$s</string>
     <string name="purchase_dialog_title">Elegir plan</string>
     <string name="purchase_dialog_travel_description">Para leer artículos de viajes sin conexión, necesita comprar uno de los siguientes elementos.</string>
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
+    <string name="travel_guide_description">Explora las guías de Wikiviajes de los lugares más interesantes del planeta dentro de OsmAnd sin una conexión a internet.</string>
+    <string name="travel_guide">Guía de viajes</string>
     </resources>
