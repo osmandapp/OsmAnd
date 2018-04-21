@@ -3087,4 +3087,6 @@
     <string name="purchase_dialog_title">انتخاب طرح</string>
     <string name="purchase_dialog_travel_description">برای مطالعهٔ آفلاین مقاله‌های سفر، باید یکی از موارد زیر را بخرید.</string>
     <string name="purchase_dialog_subtitle">مورد مناسبی را انتخاب کنید:</string>
+    <string name="travel_guide_description">با استفاده از OsmAnd و بدون نیاز به اینترنت در مقالات ویکی‌سفر بگردید و راهنمای سفر به جذاب‌ترین نقاط جهان را مطالعه کنید.</string>
+    <string name="travel_guide">راهنمای سفر</string>
     </resources>
