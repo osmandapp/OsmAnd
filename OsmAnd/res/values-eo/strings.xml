@@ -2957,4 +2957,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="purchase_dialog_title">Elekti planon</string>
     <string name="purchase_dialog_travel_description">Por legi vojaĝajn artikolojn senkonekte, vi devas aĉeti unu el la jenaj.</string>
     <string name="purchase_dialog_subtitle">Elektu elementon:</string>
+    <string name="travel_guide_description">Foliumi gvidlibrojn de Vikivojaĝo pri la plej interesaj lokoj de la mondo en OsmAnd seninterrete.</string>
+    <string name="travel_guide">Vojaĝa gvidilo</string>
     </resources>
