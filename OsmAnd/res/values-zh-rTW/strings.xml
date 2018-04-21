@@ -3003,4 +3003,9 @@
     <string name="download_maps_travel">旅遊地圖</string>
     <string name="shared_string_wikivoyage">維基導遊</string>
     <string name="index_item_world_wikivoyage">全球維基導遊文章</string>
+    <string name="travel_guide_description">在沒有網路連線的狀況下，瀏覽維基導遊來找到全世界你最感興趣的地點。</string>
+    <string name="travel_guide">旅遊指南</string>
+    <string name="purchase_dialog_title">選擇計畫</string>
+    <string name="purchase_dialog_travel_description">要離線閱讀旅由文章，您必須購買以下的其中一樣物品。</string>
+    <string name="purchase_dialog_subtitle">選擇適合的物品：</string>
     </resources>
