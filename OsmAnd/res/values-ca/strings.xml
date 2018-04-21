@@ -149,7 +149,7 @@
     <string name="osmand_parking_add_event">Afegeix un avís a l\'aplicació Calendari</string>
     <string name="rendering_attr_noPolygons_description">Fes transparents totes les característiques d\'àrees de sòl al mapa.</string>
     <string name="edit_filter_create_message">S\'ha creat el filtre {0}</string>
-    <string name="email">correu electrònic</string>
+    <string name="email">e-mail</string>
     <string name="index_settings_descr">Baixeu i gestioneu mapes fora de línia emmagatzemats al vostre dispositiu.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">És probable que es mostrin els mapes de vectors més de pressa. Això pot no funcionar en alguns dispositius.</string>
     <string name="debugging_and_development">Desenvolupament de l\'OsmAnd</string>
@@ -486,7 +486,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="loading_data">S\'estan carregant les dades…</string>
     <string name="finished_task">Finalitzat</string>
     <string name="update_tile">Actualitza el mapa</string>
-    <string name="app_settings">Preferències d\'aplicació</string>
+    <string name="app_settings">Configuració de l\'aplicació</string>
     <string name="map_view_3d_descr">Activeu la visualització en 3D del mapa.</string>
     <string name="show_gps_coordinates_text">Mostra les coordenades de GPS al mapa</string>
     <string name="position_on_map_center">Centre</string>
@@ -509,16 +509,16 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="vector_data">Mapes de vectors fora de línia</string>
     <string name="poi_context_menu_modify">Modifica el PDI</string>
     <string name="poi_context_menu_delete">Elimina el PDI</string>
-    <string name="rotate_map_compass_opt">Segons la brúixola</string>
-    <string name="rotate_map_bearing_opt">Segons la direcció del moviment</string>
-    <string name="rotate_map_none_opt">No giris el mapa (el nord és dalt)</string>
+    <string name="rotate_map_compass_opt">Orientació de la brúixola</string>
+    <string name="rotate_map_bearing_opt">Direcció del moviment</string>
+    <string name="rotate_map_none_opt">Sense rotació (el nord sempre a dalt)</string>
     <string name="show_route">Detalls de la ruta</string>
-    <string name="fav_imported_sucessfully">Els preferits s\'han importat correctament</string>
+    <string name="fav_imported_sucessfully">Els preferits s\'han importat</string>
     <string name="fav_file_to_load_not_found">El fitxer GPX que conté els preferits no s\'ha trobat a {0}</string>
-    <string name="fav_saved_sucessfully">Els preferits s\'han desat correctament a {0}</string>
+    <string name="fav_saved_sucessfully">Els preferits s\'han desat a {0}</string>
     <string name="error_occurred_loading_gpx">S\'ha produït un error en carregar el GPX</string>
     <string name="send_report">Envia un informe</string>
-    <string name="none_region_found">No s\'ha trobat dades de les regions a la targeta SD. Cal que us baixeu les regions des d\'Internet.</string>
+    <string name="none_region_found">No s\'ha trobat dades de les regions a la targeta de memòria. Cal que us baixeu les regions des d\'Internet.</string>
     <string name="layer_yandex_traffic">Trànsit Yandex</string>
     <string name="layer_route">Ruta</string>
     <string name="shared_string_favorites">Preferits</string>
@@ -546,7 +546,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="km">km</string>
     <string name="poi_filter_food_shop">Alimentació</string>
     
-    <string name="osmand_net_previously_installed">Ja hi ha una versió prèvia d\'OsmAnd instal·lada. Totes les dades locals es mantindran en la nova aplicació excepte els punts preferits, que s\'han d\'exportar des la versió vella i després importar-los a la nova.</string>
+    <string name="osmand_net_previously_installed">Totes les dades locals de l\'antiga aplicació instal·lada seran compatibles amb la nova, però els llocs preferits s\'han d\'exportar primer des de l\'antiga aplicació i després importar-se a la nova.</string>
     <string name="install_selected_build">Voleu instal·lar OsmAnd - {0} de {1} {2} MB ?</string>
     <string name="gps_status_app_not_found">L\'aplicació d\'estatus GPS no està instal·lada. Voleu cercar-la al Market?</string>
     <string name="filter_existing_indexes">Filtre baixat</string>
@@ -559,7 +559,8 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="background_router_service_descr">Executa OsmAnd en segon pla per seguir la teva posició mentre la pantalla està inactiva.</string>
     <string name="voice_data_not_supported">Versió no suportada de les dades de veu</string>
     <string name="voice_data_corrupted">Les dades se veu especificades estan corruptes</string>
-    <string name="sd_unmounted">La targeta SD no és accessible.\nNo podreu veure mapes o cercar coses.</string>
+    <string name="sd_unmounted">No es pot accedir a la targeta de memòria.
+\nNo podreu veure-hi mapes ni trobar-hi res.</string>
     <string name="first_time_continue">Mes tard</string>
     <string name="search_nearby">Cerca a prop</string>
     <string name="map_orientation_landscape">Apaisat</string>
@@ -576,7 +577,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="error_calculating_route">S\'ha produït un error en calcular la ruta</string>
     <string name="loading_postcodes">S\'estan carregant els codis postals…</string>
     <string name="arrived_at_destination">Heu arribat a la vostra destinació</string>
-    <string name="invalid_locations">Les coordenades no són vàlides!</string>
+    <string name="invalid_locations">Coordenades no vàlides</string>
     <string name="saving_gpx_tracks">S\'estan desant els seguiments GPX a la SD…</string>
     <string name="osm_settings">Edició d\'OSM</string>
     <string name="save_track_interval">Interval d\'enregistrament durant la navegació</string>
@@ -595,7 +596,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="search_POI_level_btn">Cerca\'n més</string>
     <string name="map_source">Font del mapa</string>
     <string name="show_poi_over_map_description">Mostra la darrera superposició de PDI seleccionada en el mapa.</string>
-    <string name="use_internet">Usa Internet</string>
+    <string name="use_internet">Utilitza Internet</string>
     <string name="search_address_top_text">Selecció de l\'adreça</string>
     <string name="favourites_context_menu_edit">Edita el preferit</string>
     <string name="favourites_context_menu_delete">Elimina el preferit</string>
@@ -615,7 +616,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="continuous_rendering_descr">Mostra la renderització contínua en lloc d\'una imatge de cop.</string>
     <string name="uploading_data">Penjant les dades…</string>
     <string name="search_nothing_found">No s\'ha trobat res</string>
-    <string name="list_index_files_was_not_loaded">No s\'ha recuperat la llista de les regions des d\'osmand.net.</string>
+    <string name="list_index_files_was_not_loaded">No s\'ha recuperat la llista de les regions des de https://osmand.net.</string>
     <string name="failed_op">fallada</string>
     <string name="error_occurred_saving_gpx">S\'ha produït un error en desar el GPX</string>
     <string name="osm_settings_descr">Especifiqueu els paràmetres d\'Openstreetmap.org (OSM) que calen per les trameses a OSM.</string>
@@ -653,11 +654,11 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="select_build_to_install">Seleccioneu un dels paquets de l\'OsmAnd per instal·lar-lo</string>
     <string name="voice_is_not_available_msg">El guiatge per veu no està disponible. Aneu a «Configuració» → «Paràmetres generals» → «Guiatge per veu» i seleccioneu o baixeu un paquet d\'indicadors de veu.</string>
     <string name="voice_is_not_available_title">Cap guiatge de veu seleccionat</string>
-    <string name="daynight_descr">Trieu la regla de commutació del mode dia/nit.</string>
+    <string name="daynight_descr">Indiqueu el criteri de commutació entre el mode nocturn i el diürn.</string>
     <string name="maps_could_not_be_downloaded">Aquest mapa podria no haver-se baixat</string>
     <string name="rendering_exception">Ha ocorregut un error mentres s\'estava renderitzant l\'àrea seleccionada</string>
-    <string name="show_point_options">Opcions de localització …</string>
-    <string name="renderer_load_sucess">El renderitzador s\'ha carregat correctament</string>
+    <string name="show_point_options">Utilitza la ubicació…</string>
+    <string name="renderer_load_sucess">El renderitzador s\'ha carregat</string>
     <string name="fav_points_not_exist">No hi ha punts preferits</string>
     <string name="gpxup_trackable">Seguible</string>
     <string name="search_offline_geo_error">No s\'ha pogut analitzar la geo intenció «%s».</string>
@@ -712,7 +713,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="poi_filter_car_aid">Assistència a vehicles</string>
     <string name="create_poi_link_to_osm_doc">Llegenda del mapa <u>OSM en línia</u> amb imatges.</string>
     <string name="osmand_routing_experimental">La navegació fora de línia de l\'OsmAnd és una característica experimental i no funciona per distàncies superiors als 20Km.\n\nEl servei de navegació s\'ha desviat temporalment cap a CloudMade en línia.</string>
-    <string name="renderer_load_exception">S\'ha produït una excepció: el renderitzador no s\'ha carregat</string>
+    <string name="renderer_load_exception">S\'ha produït una excepció: Renderitzador no carregat</string>
     <string name="context_menu_item_search_transport">Cerca de transports públics</string>
     <string name="transport_search_again">Reinicia la cerca de transport</string>
     <string name="no_vector_map_loaded">Els mapes de vectors no s\'han carregat</string>
@@ -741,11 +742,11 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="uploading">Enviant…</string>
     <string name="search_osm_nominatim">Cerca una adreça utilitzant OSM Nominatim</string>
     <string name="hint_search_online">Cerca en línia: Núm. de la casa, carrer, ciutat</string>
-    <string name="max_level_download_tile_descr">Seleccioneu el nivell màxim de zoom per baixar tessel·les de mapes en línia.</string>
+    <string name="max_level_download_tile_descr">No mostris tessel·les de mapes en línia per un nivell de zoom més enllà d\'aquest.</string>
     <string name="route_general_information">"Distància total %1$s,  temps de viatge %2$d h %3$d min."</string>
     <string name="router_service_descr">Escolliu un servei de navegació en línia o fora de línia.</string>
     <string name="download_question">Voleu baixar {0} - {1} ?</string>
-    <string name="download_question_exist">Ja existeixen dades fora de línia per {0} ({1}). Voleu actualitzar-les ({2}) ?</string>
+    <string name="download_question_exist">Ja existeixen dades locals ({1}) per {0}. Voleu actualitzar-les ({2}) ?</string>
     <string name="fav_points_edited">S\'ha editat un punt preferit</string>
     <string name="only_show">Mostra la ruta</string>
     <string name="mark_final_location_first">Primer de tot cal que seleccioneu una destinació</string>
@@ -761,26 +762,26 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="reload_tile">Torna a carregar la tessel·la</string>
     <string name="mark_point">Objectiu</string>
     <string name="edit_filter_delete_message">El filtre {0} s\'ha eliminat</string>
-    <string name="update_poi_success">Les dades dels PDI s\'han actualitzat correctament (se n\'han carregat {0})</string>
+    <string name="update_poi_success">Les dades dels PDI s\'han actualitzat (se n\'han carregat {0})</string>
     <string name="update_poi_error_loading">S\'ha produït un error quan s\'estava carregant les dades des del servidor</string>
     <string name="update_poi_is_not_available_for_zoom">L\'actualització dels PDI no està disponible pels nivells de zoom més petits</string>
-    <string name="context_menu_item_update_map_confirm">Voleu actualitzar les dades locals a través d\'Internet?</string>
+    <string name="context_menu_item_update_map_confirm">Voleu actualitzar les dades locals des d\'Internet?</string>
     <string name="search_history_building">Edificis: {0}, {1}, {2}</string>
     <string name="choose_building">Trieu l\'edifici</string>
     <string name="show_view_angle">Mostra la direcció de visió</string>
     <string name="map_view_3d">Visualització del mapa en 3D</string>
     <string name="map_tile_source">Font del mapa de tessel·les</string>
-    <string name="use_internet_to_download_tile">Utilitza Internet per baixar les tessel·les que faltin</string>
+    <string name="use_internet_to_download_tile">Baixa les tessel·les que faltin</string>
     <string name="app_description">Aplicació de navegació</string>
     <string name="shared_string_show_on_map">Mostra al mapa</string>
     <string name="search_address_street_option">Intersecció de carrers</string>
     
     <string name="add_favorite_dialog_top_text">Introducció del nom del preferit</string>
     <string name="add_favorite_dialog_default_favourite_name">Preferit</string>
-    <string name="add_favorite_dialog_favourite_added_template">El punt preferit «{0}» s\'ha afegit correctament.</string>
+    <string name="add_favorite_dialog_favourite_added_template">S\'ha afegit el punt preferit «{0}».</string>
     
     <string name="osb_comment_dialog_success">S\'ha afegit el comentari</string>
-    <string name="poi_remove_success">El PDI s\'ha eliminat correctament</string>
+    <string name="poi_remove_success">PDI eliminat</string>
     <string name="shared_string_clear">Neteja</string>
     <string name="edit_filter_delete_dialog_title">Voleu eliminar el filtre seleccionat?</string>
     <string name="no_route">Sense ruta</string>
@@ -858,7 +859,8 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="download_srtm_maps">Dades de corbes de nivell</string>
     <string name="incomplete_locale">incomplet</string>
     <string name="use_high_res_maps_descr">No ampliïs (ni difuminis) les tessel·les del mapa en pantalles d\'alta densitat.</string>
-    <string name="sd_mounted_ro">La targeta SD és només de lectura.\nNomés podeu visualitzar el mapa precarregat i no podeu baixar-ne des d\'Internet.</string>
+    <string name="sd_mounted_ro">La targeta de memòria només és de lectura.
+\nPodeu visualitzar el mapa precarregat i però no podeu baixar-ne des d\'Internet.</string>
     <string name="map_orientation_portrait">Vertical</string>
     <string name="map_screen_orientation_descr">Vertical, apaïsat, o segons el dispositiu.</string>
     <string name="opening_changeset">S\'estan obrint les modificacions…</string>
@@ -868,13 +870,13 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="navigate_point_format_DM">GGG MM.MM</string>
     <string name="navigate_point_format_DMS">GGG MM SS.SS</string>
     <string name="favourites_remove_dialog_msg">Voleu eliminar el punt preferit \'%s\'?</string>
-    <string name="favourites_remove_dialog_success">El punt preferit {0} ha estat eliminat correctament.</string>
-    <string name="poi_action_succeded_template">L\'acció {0} s\'ha completat correctament.</string>
+    <string name="favourites_remove_dialog_success">El punt preferit {0} eliminat.</string>
+    <string name="poi_action_succeded_template">Acció {0} completada.</string>
     <string name="poi_error_info_not_loaded">No s\'ha carregat la informació del node</string>
     <string name="poi_dialog_other_tags_message">S\'han preservat totes les altres etiquetes</string>
     <string name="auto_announce_off">Atura els anuncis automàtics</string>
     <string name="shared_string_io_error">S\'ha produït un error d\'E/S</string>
-    <string name="poi_namefinder_query_empty">Introduïu una consulta de cerca per trobar el PDI</string>
+    <string name="poi_namefinder_query_empty">Teclegeu per trobar el PDI</string>
     <string name="show_transport_over_map">Mostra les parades del transport</string>
     <string name="save_track_to_gpx">Enregistrament automàtic del trajecte durant la navegació</string>
     <string name="use_english_names_descr">Escolliu entre els noms nadius i els anglesos.</string>
@@ -903,7 +905,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="support_new_features_descr">Feu un donatiu per veure noves funcionalitats implementades a l\'aplicació.</string>
     <string name="direction_style_sidewise">Lateral (8 sectors)</string>
     <string name="direction_style_clockwise">Sentit horari (12 sectors)</string>
-    <string name="sd_dir_not_accessible">La carpeta d\'emmagatzematge a la targeta SD no és accessible!</string>
+    <string name="sd_dir_not_accessible">La carpeta d\'emmagatzematge a la targeta de memòria no és accessible!</string>
     <string name="please_select_address">Seleccioneu primer un municipi o carrer</string>
     <string name="search_street_in_neighborhood_cities">Cerca el carrer en els municipis propers</string>
     <string name="intermediate_items_sort_by_distance">Ordenació porta a porta</string>
@@ -1240,7 +1242,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     
     
     
-    <string name="import_file_favourites">Voleu desar les dades com un fitxer GPX o voleu importar les fites als Preferits?</string>
+    <string name="import_file_favourites">Voleu desar les dades com un fitxer GPX o voleu importar les fites a \'Preferits\'?</string>
     
     
     
@@ -1510,7 +1512,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="shared_string_enabled">Activat</string>
     <string name="plugin_description_title">Descripció</string>
     <string name="edit_group">Edició del grup</string>
-    <string name="plugin_install_needs_network">Us cal una connexió a internet per instal·lar aquest connector.</string>
+    <string name="plugin_install_needs_network">Per instal·lar aquest connector us cal una connexió a internet.</string>
     <string name="plugin_ski_name">Vista mapa d\'esquí</string>
     <string name="plugin_nautical_name">Vista cartes marines</string>
     <string name="world_ski_missing">Per veure les pistes d\'esquí cal que baixeu un mapa específic</string>
