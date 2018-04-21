@@ -189,4 +189,22 @@
 	<string name="poi_computer">Κατάστημα υπολογιστών</string>
 	<string name="poi_copyshop">Φωτοτυπάδικο</string>
 	<string name="poi_curtain">Κατάστημα κουρτινών</string>
+	<string name="poi_farm">Είδη αγροκτήματος</string>
+	<string name="poi_dairy">Γαλακτοκομικά</string>
+	<string name="poi_anime">Κατάστημα κινούμενων σχεδίων</string>
+	<string name="poi_fabric">Κατάστημα υφασμάτων</string>
+<string name="poi_dive">Καταδυτικός εξοπλισμός</string>
+	<string name="poi_doityourself">Ανακαίνιση</string>
+	<string name="poi_doors">Θύρες</string>
+	<string name="poi_fashion">Κατάστημα μόδας</string>
+	<string name="poi_fishing">Εξοπλισμός ψαρέματος</string>
+	<string name="poi_florist">Ανθοπωλείο</string>
+	<string name="poi_frame">Κατάστημα κορνιζών</string>
+	<string name="poi_free_flying">Κατάστημα ειδών ελεύθερης πτώσης</string>
+<string name="poi_furniture">Κατάστημα επίπλων</string>
+	<string name="poi_garden_centre">Κέντρο κήπου</string>
+	<string name="poi_gas">Υγραέριο</string>
+	<string name="poi_shop_yes">Γενικό εμπόριο</string>
+	<string name="poi_gift">Κατάστημα δώρων</string>
+	<string name="poi_glaziery">Τζάμια</string>
 	</resources>
