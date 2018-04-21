@@ -62,6 +62,7 @@ import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
 import net.osmand.router.GeneralRouter;
 
@@ -770,9 +771,13 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-						getMyApplication().getTravelDbHelper().initTravelBooks();
 						MapActivity.clearPrevActivityIntent();
-						WikivoyageExploreDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
+						if (settings.WIKIVOYAGE_FIRST_ACCESS.get()) {
+							WikivoyageWelcomeDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
+						} else {
+							getMyApplication().getTravelDbHelper().initTravelBooks();
+							WikivoyageExploreDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
+						}
 						return true;
 					}
 				}).createItem());

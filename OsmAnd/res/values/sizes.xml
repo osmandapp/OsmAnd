@@ -281,6 +281,11 @@
 	<dimen name="wikivoyage_search_list_header_height">36dp</dimen>
 	<dimen name="wikivoyage_article_card_icon_size">80dp</dimen>
 	<dimen name="wikivoyage_article_card_alternative_icon_height">40dp</dimen>
+	<dimen name="wikivoyage_welcome_image_top_margin">28dp</dimen>
+	<dimen name="wikivoyage_welcome_title_top_margin">20dp</dimen>
+	<dimen name="wikivoyage_welcome_title_bottom_margin">15dp</dimen>
+	<dimen name="wikivoyage_welcome_content_margin">32dp</dimen>
+	<dimen name="wikivoyage_card_button_height">36dp</dimen>
 	
 	<dimen name="text_button_letter_spacing" format="float">0.01</dimen>
 </resources>

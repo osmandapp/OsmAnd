@@ -78,6 +78,8 @@
 		<attr name="wikivoyage_bottom_bar_bg_color" format="reference"/>
 		<attr name="wikivoyage_bottom_bar_divider_color" format="reference"/>
 		<attr name="wikivoyage_secondary_btn_bg_color" format="reference"/>
+		<attr name="wikivoyage_welcome_bg_color" format="reference"/>
+		<attr name="wikivoyage_primary_text_color" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
