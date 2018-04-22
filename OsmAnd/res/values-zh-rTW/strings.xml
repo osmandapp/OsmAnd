@@ -3008,4 +3008,17 @@
     <string name="purchase_dialog_title">選擇計畫</string>
     <string name="purchase_dialog_travel_description">要離線閱讀旅由文章，您必須購買以下的其中一樣物品。</string>
     <string name="purchase_dialog_subtitle">選擇適合的物品：</string>
+    <string name="in_app_purchase">應用程式內購買</string>
+    <string name="in_app_purchase_desc">一次性付款</string>
+    <string name="in_app_purchase_desc_ex">購買之後，它對您來說就是永久可用了。</string>
+    <string name="purchase_unlim_title">購買 - %1$s</string>
+    <string name="purchase_subscription_title">下標 - %1$s</string>
+
+    <string name="wikivoyage_offline">離線維基導遊</string>
+    <string name="dayly_map_updates">地圖更新：每天</string>
+    <string name="unlimited_downloads">無限制的下載</string>
+    <string name="wikipedia_offline">離線維基百科</string>
+    <string name="contour_lines_sea_depth">等高線 + 海洋深度</string>
+    <string name="unlock_all_features">解鎖所有 OsmAnd 功能</string>
+
     </resources>
