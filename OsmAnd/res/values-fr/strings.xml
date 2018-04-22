@@ -2200,7 +2200,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="osm_live_active">Actif</string>
     <string name="osm_live_not_active">Inactif</string>
     <string name="osm_live_enter_email">Merci de saisir un courriel valide</string>
-    <string name="osm_live_thanks">Merci de vous être abonné aux mises à jour temps réel !</string>
+    <string name="osm_live_thanks">Merci de vous être abonné aux mises à jour en temps réel</string>
     <string name="osm_live_subscription_settings">Paramétrage de l\'abonnement</string>
     <string name="show_transparency_seekbar">Afficher la barre de recherche transparente</string>
     <string name="recalculate_route">Recalculer l\'itinéraire</string>
@@ -2211,13 +2211,13 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="osm_live_region_desc">Une partie de vos dons seront distribués aux utilisateurs OSM ayant soumis des mises à jour dans cette région.</string>
     <string name="avoid_road">Éviter la route</string>
     <string name="osm_editors_ranking">Classement des éditeurs OSM</string>
-    <string name="osm_live_email_desc">Ces informations sont requises pour afficher les contributions</string>
+    <string name="osm_live_email_desc">Ces informations sont requises pour les contributions.</string>
     <string name="osm_live_user_public_name">Nom affiché</string>
     <string name="osm_live_hide_user_name">Ne pas afficher mon nom dans les signalements</string>
     <string name="osm_live_support_region">Région supportée</string>
     <string name="osm_live_enter_user_name">Merci de saisir le nom sous lequel vous souhaitez apparaître</string>
-    <string name="shared_string_move_up">Monter</string>
-    <string name="shared_string_move_down">Descendre</string>
+    <string name="shared_string_move_up">Déplacer ↑</string>
+    <string name="shared_string_move_down">Déplacer ↓</string>
     <string name="finish_navigation">Terminer la navigation</string>
     <string name="storage_permission_restart_is_required">L\'application est maintenant autorisée à écrire sur le stockage externe. Redémarrez l\'application pour prendre en compte cette modification.</string>
     <string name="full_report">Rapport complet</string>
@@ -2275,7 +2275,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="access_widget_expand">Déplier</string>
     <string name="access_sort">Trier</string>
     <string name="access_smart_autoannounce">Annonces intelligentes</string>
-    <string name="access_smart_autoannounce_descr">Annoncer uniquement lorsque la direction de la destination est modifiée</string>
+    <string name="access_smart_autoannounce_descr">Annoncer uniquement lorsque la direction de la destination est modifiée.</string>
     <string name="access_autoannounce_period">Fréquence des annonces</string>
     <string name="access_autoannounce_period_descr">Durée minimum entre deux annonces</string>
     <string name="access_no_destination">Aucune destination définie</string>
@@ -2304,7 +2304,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="lang_ast">Asturien</string>
     <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Train</string>
-    <string name="access_map_linked_to_location">La carte est liée à l’emplacement</string>
+    <string name="access_map_linked_to_location">Carte associée à l’emplacement</string>
     <string name="lang_kn">Kannada</string>
     <string name="access_shared_string_navigate_up">Monter</string>
     <string name="coords_format">Format des coordonnées</string>
@@ -2363,7 +2363,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="allow_access_location">Autoriser l\'accès à la position</string>
     <string name="search_my_location">Rechercher ma position</string>
     <string name="storage_place_description">Espace utilisé par OsmAnd (pour les cartes, les traces, etc.) : %1$s.</string>
-    <string name="first_usage_greeting">Visualisez les cartes hors ligne, laissez-vous guider sur vos itinéraires sans connexion Internet et découvrez de nouveaux lieux.</string>
+    <string name="first_usage_greeting">Visualisez les cartes hors ligne, laissez-vous guider sur vos itinéraires sans connexion Internet et découvrez de nouveaux lieux</string>
     <string name="get_for">Obtenir pour %1$s</string>
     <string name="get_for_month">Obtenir pour %1$s mois</string>
     <string name="si_mi_meters">Miles / Mètres</string>
@@ -2400,11 +2400,11 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="christmas_desc_q">Afficher les points d\'intérêt de Noël ?</string>
     <string name="rendering_attr_contourColorScheme_description">Couleurs des courbes de niveau</string>
     <string name="save_track_min_speed">Vitesse minimale pour enregistrer</string>
-    <string name="save_track_min_speed_descr">Filtre : Indiquez une vitesse minimale à partir de laquelle déclencher l\'enregistrement d\'un point.</string>
+    <string name="save_track_min_speed_descr">Filtre : Aucun enregistrement de points en-dessous de cette vitesse.</string>
     <string name="save_track_min_distance">Déplacement minimal pour enregistrer</string>
-    <string name="save_track_min_distance_descr">Filtre : Indiquez une distance minimale à partir de laquelle déclencher l\'enregistrement</string>
+    <string name="save_track_min_distance_descr">Filtre : Définir une distance minimale entre points pour déclencher l\'enregistrement.</string>
     <string name="save_track_precision">Précision minimale pour l\'enregistrement</string>
-    <string name="save_track_precision_descr">Filtre : Définissez la précision minimale d\'un point pour son enregistrement.</string>
+    <string name="save_track_precision_descr">Filtre : Aucun enregistrement avant qu\'une précision ne soit atteinte.</string>
     <string name="shared_string_continue">Continuer</string>
     <string name="shared_string_pause">Pause</string>
     <string name="shared_string_trip">Itinéraire</string>
@@ -3147,6 +3147,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="unlimited_downloads">Téléchargements illimités</string>
     <string name="wikipedia_offline">Wikipedia hors-ligne</string>
     <string name="contour_lines_sea_depth">Courbes de niveaux + Lignes de sonde marines</string>
-    <string name="unlock_all_features">Activer toutes les fonctionnalités d\'OsmAnd</string>
+    <string name="unlock_all_features">Activez toutes les fonctionnalités d\'OsmAnd</string>
 
+    <string name="monthly_map_updates">Mises à jour des cartes : <b>tous les mois</b></string>
+    <string name="daily_map_updates">Mises à jour des cartes : <b>tous les jours, toutes les heures</b></string>
+    <string name="in_app_purchase_desc_ex">La validité de votre achat sera permanente.</string>
     </resources>
