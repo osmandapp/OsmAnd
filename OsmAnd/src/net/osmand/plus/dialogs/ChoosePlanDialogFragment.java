@@ -47,20 +47,20 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment {
 	private PlanType planType;
 
 	private OsmAndFeature[] osmandLiveFeatures = {
-			OsmAndFeature.WIKIVOYAGE_OFFLINE,
-			OsmAndFeature.DAYLY_MAP_UPDATES,
 			OsmAndFeature.UNLIMITED_DOWNLOADS,
+			OsmAndFeature.DAILY_MAP_UPDATES,
 			OsmAndFeature.WIKIPEDIA_OFFLINE,
+			OsmAndFeature.WIKIVOYAGE_OFFLINE,
 			OsmAndFeature.CONTOUR_LINES_SEA_DEPTH,
-			OsmAndFeature.UNLOCK_ALL_FEATURES,
-			OsmAndFeature.DONATION_TO_OSM
+			OsmAndFeature.DONATION_TO_OSM,
+//			OsmAndFeature.UNLOCK_ALL_FEATURES,
 	};
 
 	private OsmAndFeature[] osmandUnlimitedFeatures = {
-			OsmAndFeature.WIKIVOYAGE_OFFLINE,
-			OsmAndFeature.DAYLY_MAP_UPDATES,
 			OsmAndFeature.UNLIMITED_DOWNLOADS,
-			OsmAndFeature.WIKIPEDIA_OFFLINE
+			OsmAndFeature.MONTHLY_MAP_UPDATES,
+			OsmAndFeature.WIKIPEDIA_OFFLINE,
+			OsmAndFeature.WIKIVOYAGE_OFFLINE,
 	};
 
 	public enum PlanType {
@@ -85,7 +85,8 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment {
 
 	public enum OsmAndFeature {
 		WIKIVOYAGE_OFFLINE(R.string.wikivoyage_offline),
-		DAYLY_MAP_UPDATES(R.string.dayly_map_updates),
+		DAILY_MAP_UPDATES(R.string.daily_map_updates),
+		MONTHLY_MAP_UPDATES(R.string.monthly_map_updates),
 		UNLIMITED_DOWNLOADS(R.string.unlimited_downloads),
 		WIKIPEDIA_OFFLINE(R.string.wikipedia_offline),
 		CONTOUR_LINES_SEA_DEPTH(R.string.contour_lines_sea_depth),
@@ -103,7 +104,7 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment {
 		}
 
 		public static OsmAndFeature[] possibleValues() {
-			return new OsmAndFeature[]{WIKIVOYAGE_OFFLINE, DAYLY_MAP_UPDATES, UNLIMITED_DOWNLOADS,
+			return new OsmAndFeature[]{WIKIVOYAGE_OFFLINE, DAILY_MAP_UPDATES, MONTHLY_MAP_UPDATES, UNLIMITED_DOWNLOADS,
 					WIKIPEDIA_OFFLINE, CONTOUR_LINES_SEA_DEPTH, UNLOCK_ALL_FEATURES, DONATION_TO_OSM};
 		}
 	}
@@ -239,8 +240,9 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment {
 		View featureRowDiv = null;
 		for (OsmAndFeature feature : osmandLiveFeatures) {
 			String featureName = feature.toHumanString(ctx);
-			View featureRow = inflate(planType.osmandLiveFeature == feature
-					? R.layout.purchase_dialog_card_selected_row : R.layout.purchase_dialog_card_row, cardView);
+//			View featureRow = inflate(planType.osmandLiveFeature == feature
+//					? R.layout.purchase_dialog_card_selected_row : R.layout.purchase_dialog_card_row, cardView);
+			View featureRow = inflate(R.layout.purchase_dialog_card_row, cardView);
 			TextViewEx titleView = (TextViewEx) featureRow.findViewById(R.id.title);
 			titleView.setText(featureName);
 			featureRowDiv = featureRow.findViewById(R.id.div);
