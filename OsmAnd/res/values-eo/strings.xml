@@ -2972,4 +2972,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="contour_lines_sea_depth">Nivelkurboj teraj kaj maraj</string>
     <string name="unlock_all_features">Malŝlosi ĉiujn eblojn de OsmAnd</string>
 
+    <string name="monthly_map_updates">Map-ĝisdatigoj: <b>ĉiumonate</b></string>
+    <string name="daily_map_updates">Map-ĝisdatigoj: <b>ĉiutage, ĉiuhore</b></string>
     </resources>
