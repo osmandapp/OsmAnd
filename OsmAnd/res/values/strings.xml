@@ -9,14 +9,16 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="monthly_map_updates">Map updates: <b>every month</b></string>
+    <string name="daily_map_updates">Map updates: <b>every day, every hour</b></string>
     <string name="in_app_purchase">In-App purchase</string>
     <string name="in_app_purchase_desc">One time payment</string>
     <string name="in_app_purchase_desc_ex">Once purchased, it will be permanently available to you.</string>
     <string name="purchase_unlim_title">Buy - %1$s</string>
-    <string name="purchase_subscription_title">Subscript - %1$s</string>
+    <string name="purchase_subscription_title">Subscribe - %1$s</string>
 
     <string name="wikivoyage_offline">Wikivoyage offline</string>
-    <string name="dayly_map_updates">Map updates: every day</string>
+    
     <string name="unlimited_downloads">Unlimited downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
     <string name="contour_lines_sea_depth">Contour lines + Sea depth</string>
