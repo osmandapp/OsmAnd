@@ -2942,4 +2942,5 @@
     <string name="select_travel_book">Velg reisebok</string>
     <string name="shared_string_travel_book">Reisebok</string>
     <string name="download_images">Last ned bilder</string>
+    <string name="wikipedia_offline">Wikipedia nettfrakoblet</string>
     </resources>
