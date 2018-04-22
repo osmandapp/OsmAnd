@@ -2943,4 +2943,5 @@
     <string name="shared_string_travel_book">Reisebok</string>
     <string name="download_images">Last ned bilder</string>
     <string name="wikipedia_offline">Wikipedia er nede</string>
+    <string name="contour_lines_sea_depth">Koter + Havdybde</string>
     </resources>
