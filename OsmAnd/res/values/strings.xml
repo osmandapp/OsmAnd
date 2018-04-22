@@ -71,7 +71,7 @@
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Optional point name</string>
-    <string name="transport_nearby_routes_within">Nearby routes in </string>
+    <string name="transport_nearby_routes_within">Nearby routes in</string>
     <string name="transport_nearby_routes">Near</string>
     <string name="enter_the_file_name">Enter filename.</string>
     <string name="map_import_error">Map import error</string>
@@ -1558,7 +1558,7 @@
     <string name="cancel_route">Dismiss route</string>
     <string name="cancel_navigation">Stop navigation</string>
     <string name="clear_destination">Clear destination</string>
-    <string name="download_using_mobile_internet">Wi-Fi is currently not connected. Do you want to use the current connection to the Internet for downloading?</string>
+    <string name="download_using_mobile_internet">Not connected to Wi-Fi. Do you want to use the current connection to the Internet to download?</string>
     <string name="street_name">Street name</string>
     <string name="hno">House number</string>
     <string name="website">Web site</string>
