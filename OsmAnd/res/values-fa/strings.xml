@@ -3102,4 +3102,6 @@
     <string name="contour_lines_sea_depth">منحنی تراز + عمق دریا</string>
     <string name="unlock_all_features">بازکردن همهٔ قابلیت‌های OsmAnd</string>
 
+    <string name="monthly_map_updates">نقشه <b>هر ماه</b> به‌روز می‌شود</string>
+    <string name="daily_map_updates">نقشه <b>هر روز و هر ساعت</b> به‌روز می‌شود</string>
     </resources>
