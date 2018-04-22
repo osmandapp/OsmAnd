@@ -3035,4 +3035,6 @@ Lon %2$s</string>
     <string name="contour_lines_sea_depth">Curvas de nivel + Profundidad náutica</string>
     <string name="unlock_all_features">Desbloquear todas las características de OsmAnd</string>
 
+    <string name="monthly_map_updates">Actualizaciones del mapa: <b>cada mes</b></string>
+    <string name="daily_map_updates">Actualizaciones del mapa: <b>cada día, cada hora</b></string>
     </resources>
