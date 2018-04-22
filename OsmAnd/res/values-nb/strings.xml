@@ -2951,4 +2951,5 @@
 
     <string name="purchase_dialog_title">Velg plan</string>
     <string name="dayly_map_updates">Kartoppdateringer: Hver dag</string>
+    <string name="wikivoyage_offline">Wikivoyage nettfrakoblet</string>
     </resources>
