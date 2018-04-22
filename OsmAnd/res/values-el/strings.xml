@@ -2940,4 +2940,19 @@
 <string name="purchase_dialog_title">Επιλογή σχεδίου</string>
     <string name="purchase_dialog_travel_description">Για να διαβάσετε ταξιδιωτικά άρθρα χωρίς σύνδεση, χρειάζεται να αγοράσετε ένα από τα παρακάτω στοιχεία.</string>
     <string name="purchase_dialog_subtitle">Επιλέξτε κατάλληλο στοιχείο:</string>
+    <string name="monthly_map_updates">Ενημερώσεις χαρτών: <b>κάθε μήνα</b></string>
+    <string name="daily_map_updates">Ενημερώσεις χαρτών: <b>κάθε ημέρα, κάθε ώρα</b></string>
+    <string name="in_app_purchase">Αγορά μέσω της εφαρμογής</string>
+    <string name="in_app_purchase_desc">Εφάπαξ πληρωμή</string>
+    <string name="in_app_purchase_desc_ex">Μόλις αγοραστεί, θα είναι μονίμως διαθέσιμη για σας.</string>
+    <string name="purchase_unlim_title">Αγορά - %1$s</string>
+    <string name="purchase_subscription_title">Εγγραφή - %1$s</string>
+
+    <string name="wikivoyage_offline">Βικιταξίδια χωρίς σύνδεση</string>
+    
+    <string name="unlimited_downloads">Απεριόριστες λήψεις</string>
+    <string name="wikipedia_offline">Βικιπαίδεια χωρίς σύνδεση</string>
+    <string name="contour_lines_sea_depth">"Ισοϋψείς γραμμές + Βάθη θάλασσας "</string>
+    <string name="unlock_all_features">Ξεκλείδωμα όλων των χαρακτηριστικών του OsmAnd</string>
+
     </resources>
