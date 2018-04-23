@@ -2821,4 +2821,19 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="purchase_dialog_travel_description">Til að lesa ferðagreinar án nettengingar, þarftu að kaupa eitt af eftirfarandi atriðum.</string>
     <string name="purchase_dialog_subtitle">Veldu hentugt atriði:</string>
     <string name="wikivoyage_download_pics_descr">Við getum sótt og birt myndir í greinunum og geymt þær á tækinu þínu, þannig að þú hafir aðgang að þeim þegar þú nærð ekki tengingu við netið. Þú getur alltaf breytt þessum stillingum í \'Uppgötva &gt; Valkostir\'.</string>
+    <string name="travel_guide_description">Flettu í Wikivoyage ferðagreinunum upp á áhugaverðustu stöðum jarðarinnar innan úr OsmAnd án tengingar við internetið.</string>
+    <string name="travel_guide">Ferðagreinar</string>
+    <string name="in_app_purchase">Kaup í forritinu</string>
+    <string name="in_app_purchase_desc">Eins-skiptis greiðsla</string>
+    <string name="in_app_purchase_desc_ex">Eftir að það hefur verið keypt, verður það þér alltaf tiltækt.</string>
+    <string name="purchase_unlim_title">Keypt - %1$s</string>
+    <string name="purchase_subscription_title">Í áskrift - %1$s</string>
+
+    <string name="wikivoyage_offline">Wikivoyage ónettengt</string>
+    <string name="dayly_map_updates">Uppfærslur á kortum: daglega</string>
+    <string name="unlimited_downloads">Ótakmörkuð niðurhöl</string>
+    <string name="wikipedia_offline">Wikipedia ónettengt</string>
+    <string name="contour_lines_sea_depth">Hæðarlínur + Dýptarlínur</string>
+    <string name="unlock_all_features">Aflæsa öllum eiginleikum OsmAnd</string>
+
     </resources>

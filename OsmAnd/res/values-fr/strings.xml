@@ -3135,4 +3135,18 @@ représentant la zone : %1$s x %2$s</string>
     <string name="purchase_dialog_title">Sélectionnez un plan</string>
     <string name="purchase_dialog_subtitle">Sélectionnez l\'élément adapté :</string>
     <string name="purchase_dialog_travel_description">Pour lire des articles de voyage hors ligne, vous devez acheter l\'un des éléments suivants.</string>
+    <string name="travel_guide_description">Consultez les guides Wikivoyage des lieux les plus intéressants au monde depuis OsmAnd et sans connexion Internet.</string>
+    <string name="travel_guide">Guide de voyage</string>
+    <string name="in_app_purchase">Achat via l\'application</string>
+    <string name="in_app_purchase_desc">Paiement unique</string>
+    <string name="purchase_unlim_title">Acheter - %1$s</string>
+    <string name="purchase_subscription_title">Souscrire - %1$s</string>
+
+    <string name="wikivoyage_offline">Wikivoyage hors-line</string>
+    <string name="dayly_map_updates">Mise à jour des cartes : quotidien</string>
+    <string name="unlimited_downloads">Téléchargements illimités</string>
+    <string name="wikipedia_offline">Wikipedia hors-ligne</string>
+    <string name="contour_lines_sea_depth">Courbes de niveaux + Lignes de sonde marines</string>
+    <string name="unlock_all_features">Activer toutes les fonctionnalités d\'OsmAnd</string>
+
     </resources>

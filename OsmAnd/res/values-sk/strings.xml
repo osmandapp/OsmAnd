@@ -2999,4 +2999,24 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Článok odstránený</string>
     <string name="wikivoyage_search_hint">Hľadanie: krajina, mesto, kraj</string>
+    <string name="travel_guide_description">Prehliadajte sprievodcov Wikivoyage k najzaujímavejľím miestam na planéte priamo v OsmAnd bez pripojenia na internet.</string>
+    <string name="travel_guide">Turistický sprievodca</string>
+    <string name="purchase_dialog_title">Vyberte si predplatné</string>
+    <string name="purchase_dialog_travel_description">Na čítanie cestovných článkov offline si musíte zakúpiť jednu z nasledujúcich položiek.</string>
+    <string name="purchase_dialog_subtitle">Zvoľte vhodnú položku:</string>
+    <string name="shared_string_dont">Neurobiť</string>
+    <string name="shared_string_do">Urobiť</string>
+    <string name="shared_string_only_with_wifi">Iba s WiFi</string>
+    <string name="wikivoyage_download_pics">Stiahnuť obrázky</string>
+    <string name="wikivoyage_download_pics_descr">Môžeme stiahnuť a zobraziť obrázky v článkoch a uložiť ich v zariadení, aby ste ich mohli zobraziť bez internetu. Toto nastavenie môžete zmeniť v Preskúmať &gt; Nastavenia.</string>
+    <string name="shared_string_wifi_only">Len WiFi</string>
+    <string name="select_travel_book">Zvoľte cestovnú knihu</string>
+    <string name="shared_string_travel_book">Cestovná kniha</string>
+    <string name="download_images">Stiahnuť obrázky</string>
+    <string name="shared_string_read">Čítať</string>
+    <string name="saved_articles">Uložené články</string>
+    <string name="shared_string_explore">Preskúmať</string>
+    <string name="shared_string_contents">Obsah</string>
+    <string name="shared_string_result">Výsledok</string>
+    <string name="index_item_world_wikivoyage">Celosvetové články Wikivoyage</string>
     </resources>
