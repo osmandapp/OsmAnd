@@ -6,7 +6,6 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
-import android.view.View;
 import android.view.ViewGroup;
 
 import net.osmand.plus.OsmandApplication;
@@ -16,7 +15,6 @@ public abstract class BaseTravelCard {
 	protected static final int INVALID_POSITION = -1;
 	protected static final int DEFAULT_VALUE = -1;
 
-	protected View view;
 	protected OsmandApplication app;
 
 	protected int position = INVALID_POSITION;

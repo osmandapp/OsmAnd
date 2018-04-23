@@ -31,7 +31,7 @@ public class StartEditingTravelCard extends BaseTravelCard {
 	@Override
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		view = LayoutInflater.from(new ContextThemeWrapper(app, themeRes))
+		View view = LayoutInflater.from(new ContextThemeWrapper(app, themeRes))
 				.inflate(R.layout.wikivoyage_start_editing_card, container, false);
 		ImageView imageView = (ImageView) view.findViewById(R.id.background_image);
 		imageView.setImageDrawable(getIcon(R.drawable.img_help_wikivoyage_contribute));
