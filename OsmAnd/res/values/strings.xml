@@ -2856,4 +2856,7 @@
     <string name="download_wikipedia_label">Download Wikipedia data</string>
     <string name="open_in_browser_wiki">Open article online</string>
     <string name="open_in_browser_wiki_description">View this article in a browser.</string>
+    <string name="download_wiki_region_placeholder">this region</string>
+    <string name="wiki_article_search_text">Searching for the necessary wiki article</string>
+    <string name="wiki_article_not_found">Article not found</string>
 </resources>

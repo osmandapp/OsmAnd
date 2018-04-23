@@ -1,12 +1,15 @@
 package net.osmand.plus.wikivoyage;
 
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
@@ -14,21 +17,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
 import net.osmand.map.OsmandRegions;
-import net.osmand.osm.PoiCategory;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.mapcontextmenu.WikipediaDialogFragment;
-import net.osmand.plus.resources.AmenityIndexRepository;
+import net.osmand.plus.quickaction.actions.FavoriteAction;
 import net.osmand.plus.resources.AmenityIndexRepositoryBinary;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleWikiLinkFragment;
@@ -39,10 +41,9 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.ref.WeakReference;
 import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import static android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
@@ -54,7 +55,6 @@ import static android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 public class WikivoyageWebViewClient extends WebViewClient {
 
 	private static final String TAG = WikivoyageWebViewClient.class.getSimpleName();
-	private static final String REGIONS_OCBF = "regions.ocbf";
 
 	private OsmandApplication app;
 	private FragmentManager fragmentManager;
@@ -172,7 +172,6 @@ public class WikivoyageWebViewClient extends WebViewClient {
 	}
 
 	protected void getWikiArticle(String name, String url) {
-		List<Amenity> found = new ArrayList<>();
 		List<AmenityIndexRepositoryBinary> indexes = app.getResourceManager()
 				.getWikiAmenityRepository(article.getLat(), article.getLon());
 		if (indexes.isEmpty()) {
@@ -184,27 +183,77 @@ public class WikivoyageWebViewClient extends WebViewClient {
 			}
 			WikivoyageArticleWikiLinkFragment.showInstance(fragmentManager, reg, url);
 		} else {
-			for (AmenityIndexRepositoryBinary repo : indexes) {
-				found.addAll(repo.searchAmenitiesByName(0, 0, 0, 0,
-						Integer.MAX_VALUE, Integer.MAX_VALUE, name, null));
-			}
-			WikipediaDialogFragment.showInstance((AppCompatActivity) context, found.get(0));
+			new WikiArticleSearchTask(name, indexes, (MapActivity) context).execute();
 		}
 
 	}
 
 	private String getRegion(double lat, double lon) throws IOException {
-		OsmandRegions regions = new OsmandRegions();
-		regions.prepareFile(app.getAppPath(REGIONS_OCBF).getAbsolutePath());
-		regions.cacheAllCountries();
-		int x31 = MapUtils.get31TileNumberX(lon);
-		int y31 = MapUtils.get31TileNumberY(lat);
-		List<BinaryMapDataObject> cs = regions.query(x31, y31);
-		for (BinaryMapDataObject b : cs) {
-			if(regions.contain(b, x31, y31)) {
-				return regions.getFullName(b);
+		OsmandRegions osmandRegions = app.getRegions();
+		if (osmandRegions != null) {
+			int x31 = MapUtils.get31TileNumberX(lon);
+			int y31 = MapUtils.get31TileNumberY(lat);
+			List<BinaryMapDataObject> cs = osmandRegions.query(x31, y31);
+			for (BinaryMapDataObject b : cs) {
+				if(osmandRegions.contain(b, x31, y31)) {
+					return osmandRegions.getLocaleName(osmandRegions.getDownloadName(b), false);
+				}
 			}
 		}
 		return "";
+	}
+
+	private static class WikiArticleSearchTask extends AsyncTask<Void, Void, List<Amenity>> {
+		private ProgressDialog dialog;
+		private String name;
+		private List<AmenityIndexRepositoryBinary> indexes;
+		private WeakReference<MapActivity> weakContext;
+
+		WikiArticleSearchTask(String articleName, List<AmenityIndexRepositoryBinary> indexes, MapActivity context) {
+			name = articleName;
+			this.indexes = indexes;
+			weakContext = new WeakReference<>(context);
+			dialog = createProgressDialog();
+		}
+
+		@Override
+		protected void onPreExecute() {
+			if (dialog != null) {
+				dialog.show();
+			}
+		}
+
+		@Override
+		protected List<Amenity> doInBackground(Void... voids) {
+			List<Amenity> found = new ArrayList<>();
+			for (AmenityIndexRepositoryBinary repo : indexes) {
+				found.addAll(repo.searchAmenitiesByName(0, 0, 0, 0,
+						Integer.MAX_VALUE, Integer.MAX_VALUE, name, null));
+			}
+			return found;
+		}
+
+		@Override
+		protected void onPostExecute(List<Amenity> found) {
+			if (!weakContext.get().isActivityDestroyed()) {
+				dialog.dismiss();
+				if (!found.isEmpty()) {
+					WikipediaDialogFragment.showInstance((AppCompatActivity) weakContext.get(), found.get(0));
+				} else {
+					Toast.makeText(weakContext.get(), R.string.wiki_article_not_found, Toast.LENGTH_LONG).show();
+				}
+			}
+		}
+
+		private ProgressDialog createProgressDialog() {
+			MapActivity activity = weakContext.get();
+			if (!activity.isActivityDestroyed()) {
+				ProgressDialog dialog = new ProgressDialog(activity);
+				dialog.setCancelable(false);
+				dialog.setMessage(activity.getString(R.string.wiki_article_search_text));
+				return dialog;
+			}
+			return null;
+		}
 	}
 }
