@@ -49,6 +49,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 			BaseBottomSheetItem selectTravelBook = new BottomSheetItemWithDescription.Builder()
 					.setDescription(dbHelper.formatTravelBookName(dbHelper.getSelectedTravelBook()))
 					.setDescriptionColorId(nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light)
+					.setIcon(getContentIcon(R.drawable.ic_action_travel))
 					.setTitle(getString(R.string.shared_string_travel_book))
 					.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
 					.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +61,8 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 					})
 					.create();
 			items.add(selectTravelBook);
+
+			items.add(new DividerHalfItem(getContext()));
 		}
 
 		BaseBottomSheetItem showImagesItem = new BottomSheetItemWithDescription.Builder()
