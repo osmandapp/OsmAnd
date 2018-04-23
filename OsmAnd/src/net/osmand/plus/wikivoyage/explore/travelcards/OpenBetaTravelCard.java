@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.dialogs.ChoosePlanDialogFragment;
 
 public class OpenBetaTravelCard extends BaseTravelCard {
+
 	private FragmentManager fm;
 
 	public OpenBetaTravelCard(OsmandApplication app, FragmentManager fm, boolean nightMode) {

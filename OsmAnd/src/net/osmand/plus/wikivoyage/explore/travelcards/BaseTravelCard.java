@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
@@ -58,19 +57,5 @@ public abstract class BaseTravelCard {
 
 	protected void onRightButtonClickAction() {
 
-	}
-
-	@ColorRes
-	protected int getBottomDividerColorId() {
-		return DEFAULT_VALUE;
-	}
-
-	@LayoutRes
-	protected int getLayoutId() {
-		return DEFAULT_VALUE;
-	}
-
-	protected boolean isNightMode() {
-		return !app.getSettings().isLightContent();
 	}
 }

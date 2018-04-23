@@ -32,7 +32,7 @@ public class StartEditingTravelCard extends BaseTravelCard {
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		view = LayoutInflater.from(new ContextThemeWrapper(app, themeRes))
-				.inflate(getLayoutId(), container, false);
+				.inflate(R.layout.wikivoyage_start_editing_card, container, false);
 		ImageView imageView = (ImageView) view.findViewById(R.id.background_image);
 		imageView.setImageDrawable(getIcon(R.drawable.img_help_wikivoyage_contribute));
 		((TextView) view.findViewById(R.id.title)).setText(R.string.start_editing_card_image_text);
@@ -61,11 +61,6 @@ public class StartEditingTravelCard extends BaseTravelCard {
 	}
 
 	@Override
-	protected int getLayoutId() {
-		return R.layout.wikivoyage_start_editing_card;
-	}
-
-	@Override
 	protected int getLeftButtonTextId() {
 		return R.string.start_editing;
 	}
@@ -73,7 +68,7 @@ public class StartEditingTravelCard extends BaseTravelCard {
 	@Override
 	protected void onLeftButtonClickAction() {
 		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-				.setToolbarColor(ContextCompat.getColor(app, isNightMode() ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
+				.setToolbarColor(ContextCompat.getColor(app, nightMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
 				.build();
 		String text = "https://" + app.getLanguage().toLowerCase() + ".m.wikivoyage.org";
 		customTabsIntent.launchUrl(app, Uri.parse(text));
