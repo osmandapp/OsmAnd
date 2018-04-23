@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="travel_guide">Travel Guide</string>
+    <string name="travel_guide_description">Browse the Wikivoyage guides to the most interesting places on the planet inside OsmAnd without an internet connection.</string>
     <string name="monthly_map_updates">Map updates: <b>every month</b></string>
     <string name="daily_map_updates">Map updates: <b>every day, every hour</b></string>
     <string name="in_app_purchase">In-App purchase</string>
