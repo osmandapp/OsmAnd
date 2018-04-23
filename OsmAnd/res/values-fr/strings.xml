@@ -138,7 +138,7 @@
     <string name="shared_string_others">Autres</string>
     <string name="shared_string_no_thanks">Pas nécessaire</string>
     <string name="basemap_missing">La carte mondiale de base est absente (couvrant le monde entier avec un niveau large). Téléchargez World_basemap_x.obf pour avoir une couverture complète.</string>
-    <string name="vector_data_missing">Il n\'y a aucune carte hors-ligne sur la carte SD. Pensez à en télécharger pour utiliser les cartes sans connexion.</string>
+    <string name="vector_data_missing">Téléchargez des données hors-ligne pour utiliser les cartes sans connexion.</string>
 
 
     <string name="local_index_installed">Version locale</string>
@@ -283,9 +283,9 @@
     <string name="version_index_is_not_supported">La version de l\'\'index \'\'{0}\'\' n\'\'est pas supporté</string>
     
     
-    <string name="osmand_routing_experimental">La navigation hors-ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance de plus de 20 km.
-
-Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade.</string>
+    <string name="osmand_routing_experimental">La navigation hors-ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance supérieure à 20 km.
+\n
+\nAu-delà la navigation bascule automatiquement sur le service en ligne CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Le dossier spécifié est introuvable.</string>
     <string name="application_dir">Dossier de stockage</string>
 
@@ -540,7 +540,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="data_settings">Données</string>
 
     <string name="osm_settings">Contribuer à OSM</string>
-    <string name="auto_zoom_map_descr">Zoom de la carte adapté à la vitesse (lorsque que votre position figure sur la carte).</string>
+    <string name="auto_zoom_map_descr">Zoom de la carte adapté à votre vitesse (lorsque que votre position est affichée sur la carte).</string>
     <string name="auto_zoom_map">Zoom automatique de la carte</string>
     <string name="additional_settings">Paramètres supplémentaires</string>
     <string name="shared_string_settings">Paramètres</string>
@@ -721,7 +721,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="shared_string_help">Aide</string>
 
     <string name="accessibility_mode">Mode accessibilité</string>
-    <string name="accessibility_mode_descr">Activer les fonctionnalités d\'accessibilité.</string>
+    <string name="accessibility_mode_descr">Active les fonctionnalités d\'accessibilité.</string>
     <string name="shared_string_on">Oui</string>
     <string name="shared_string_off">Non</string>
     <string name="accessibility_default">Selon les paramètres Android</string>
@@ -1168,7 +1168,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="clear_intermediate_points">Supprimer les étapes intermédiaires</string>
     <string name="keep_intermediate_points">Conserver les étapes intermédiaires</string>
     <string name="local_index_tile_data_name">Données de tuile : %1$s</string>
-    <string name="edit_tilesource_successfully">Le fournisseur de tuiles %1$s a été enregistré avec succès.</string>
+    <string name="edit_tilesource_successfully">Le fournisseur de tuiles %1$s a été enregistré avec succès</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elliptique</string>
     <string name="edit_tilesource_choose_existing">Sélectionner existant…</string>
     <string name="maps_define_edit">Définir/Éditer…</string>
@@ -1489,7 +1489,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="enable_sleep_mode">Démarrer l’exécution de la tâche de fond GPS ?</string>
     <string name="gps_wake_up_timer">Intervalle de réveil du GPS</string>
     <string name="sleep_mode_stop_dialog">Arrêter l’exécution de la tâche de fond GPS ?</string>
-    <string name="map_preferred_locale_descr">Langue préférée des libellés sur la carte (en cas d\'indisponibilité affiche les noms anglais ou locaux)</string>
+    <string name="map_preferred_locale_descr">Langue préférée des libellés sur la carte (en cas d\'indisponibilité affiche les noms anglais ou locaux).</string>
     <string name="map_preferred_locale">Langue préférée pour la carte</string>
     <string name="local_map_names">Noms locaux</string>
     <string name="lang_sw">swahili</string>
@@ -1630,7 +1630,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="map_update">Mise à jour disponible pour %1$s carte(s)</string>
     <string name="error_avoid_specific_road">Aucun itinéraire de contournement</string>
     <string name="use_opengl_render">Utiliser le rendu OpenGL</string>
-    <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (peut ne pas fonctionner sur certains appareils).</string>
+    <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (peut consommer plus de batterie et ne pas fonctionner sur les anciens appareils).</string>
     <string name="everything_up_to_date">Tous les fichiers sont à jour</string>
     <string name="shared_string_dismiss">Ignorer</string>
     <string name="no_internet_connection">Téléchargement impossible, veuillez vérifier votre connexion Internet.</string>
@@ -2617,7 +2617,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="right_side_navigation">Conduite à droite</string>
     <string name="driving_region_automatic">Automatique</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collecte des informations sur les écrans affichés lors de l\'utilisation de l\'application. Votre position n\'est jamais collectée, ni aucune des données saisies par l\'utilisateur dans l\'application comme les zones affichées, les recherches ou les téléchargements réalisés.</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM). Profitez d\'un guidage vocal comme visuel; Découvrez des points d\'intérêt; Créez et gérez des traces GPX; Installez des greffons pour visualiser l\'altitude et les courbes de niveaux; Utilisez les modes Conduite, Piéton, Cycliste; Contribuez à l\'amélioration des cartes OSM et bien plus encore !</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM). Profitez d\'un guidage vocal comme visuel; Découvrez des points d\'intérêt; Créez et gérez des traces GPX; Installez des greffons pour visualiser l\'altitude et les courbes de niveaux; Utilisez les modes Conduite, Piéton, Cycliste; Contribuez à l\'amélioration des cartes OSM et bien plus encore.</string>
     <string name="osmand_extended_description_part4">Le greffon OsmAnd ski maps permet de visualiser les pistes de ski avec leur niveau de difficulté et d\'autres informations utiles comme l\'emplacement et le type des remontées mécaniques.</string>
     <string name="osmand_extended_description_part7">Contribuez à OpenStreetMap (OSM)
 \n • Signalez des anomalies
@@ -2650,9 +2650,9 @@ représentant la zone : %1$s x %2$s</string>
 \n • Enregistrez vos itinéraires en arrière-plan (pendant que votre appareil est en veille).
 \nOsmAnd est une application open source très active. Toutes les contributions sont bienvenues que ce soit en signalant des bugs, en participant à la traduction ou en développant de nouvelles fonctionnalités. Grâce aux interactions entre les utilisateurs et les développeurs l\'application est en évolution permanente. Le projet est bien sûr ouvert à toute contribution financière pour accélérer encore son développement.</string>
     <string name="analyze_on_map">Analyser sur la carte</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap. Bénéficiez d\'un guidage vocal comme visuel; découvrez des points d\'intérêt; créez et gérez des traces GPX; installez des greffons pour visualiser l\'altitude et les courbes de niveaux; utilisez les modes Automobile, Piéton, Cycliste; contribuez à l\'amélioration des cartes et bien plus encore !
-\n
-\nOsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour.</string>
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap. Bénéficiez d\'un guidage vocal comme visuel; découvrez des points d\'intérêt; créez et gérez des traces GPX; installez des greffons pour visualiser l\'altitude et les courbes de niveaux; utilisez les modes Automobile, Piéton, Cycliste; contribuez à l\'amélioration des cartes et bien plus encore ! 
+\n 
+\nOsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour :</string>
     <string name="sea_depth_thanks">Merci d\'avoir acheté le greffon Lignes de sonde marines</string>
     <string name="index_item_depth_contours_osmand_ext">Lignes de sonde marines</string>
     <string name="index_item_depth_points_southern_hemisphere">Lignes de sonde marines pour l\'hémisphère sud</string>
@@ -2855,28 +2855,28 @@ représentant la zone : %1$s x %2$s</string>
     <string name="show_direction">Indication de distance</string>
     <string name="sort_by">Trier par</string>
     
-    <string name="osmand_extended_description_part8">OsmAnd est un projet open source très actif. Tout le monde peut contribuer à l\'application en signalant des bugs, en améliorant les traductions ou en développant de nouvelles fonctionnalités. Les nombreux échanges entre développeurs et utilisateurs permettent d\'améliorer régulièrement OsmAnd et les contributions financières permettent de développer de nouvelles fonctionnalités.
-\n
-\nCouverture et qualité approximative des cartes :
-\n• Europe de l\'Ouest : **** (4)
-\n• Europe de l\'Est : *** (3)
-\n• Russie : *** (3)
-\n• Amérique du Nord : *** (3)
-\n• Amérique du Sud : ** (2)
-\n• Asie : ** (2)
-\n• Japon et Corée : *** (3)
-\n• Moyen-Orient : ** (2)
-\n• Afrique : ** (2)
-\n• Antarctique : * (1).
-\n
-\nDes cartes sont disponibles en téléchargement pour la majorité des pays du monde autorisant une navigation fiable dans la plupart des pays dont le vôtre !</string>
-    <string name="osmand_plus_extended_description_part2">Navigation :
-\n• Fonctionnement en ligne ou hors ligne (sans aucun frais de communication)
-\n• Guidage vocal pas à pas (voix enregistrées ou synthèse vocale)
-\n• En option : indication des voies, affichage du nom des rues et de l\'heure estimée d\'arrivée
-\n• Ajout d\'étapes sur votre itinéraire
-\n• Recalcule automatique de la route si vous vous écartez de l\'itinéraire
-\n• Recherchez des lieux par adresse, par type (par exemple : restaurant, hôtel, station-service, musée) ou par coordonnées géographiques.</string>
+    <string name="osmand_extended_description_part8">OsmAnd est un projet open source très actif. Tout le monde peut contribuer à l\'application en signalant des bugs, en améliorant les traductions ou en développant de nouvelles fonctionnalités. Les nombreux échanges entre développeurs et utilisateurs permettent d\'améliorer régulièrement OsmAnd et les contributions financières permettent de développer de nouvelles fonctionnalités. 
+\n 
+\nCouverture et qualité approximative des cartes : 
+\n• Europe de l\'Ouest : **** (4) 
+\n• Europe de l\'Est : *** (3) 
+\n• Russie : *** (3) 
+\n• Amérique du Nord : *** (3) 
+\n• Amérique du Sud : ** (2) 
+\n• Asie : ** (2) 
+\n• Japon et Corée : *** (3) 
+\n• Moyen-Orient : ** (2) 
+\n• Afrique : ** (2) 
+\n• Antarctique : * (1). 
+\n 
+\nDes cartes sont disponibles en téléchargement pour la majorité des pays du monde autorisant une navigation fiable dans la plupart des pays.</string>
+    <string name="osmand_plus_extended_description_part2">Navigation : 
+\n• Fonctionnement en ligne ou hors ligne (sans aucun frais de communication) 
+\n• Guidage vocal pas à pas (voix enregistrées ou synthèse vocale) 
+\n• En option : indication des voies, affichage du nom des rues et de l\'heure estimée d\'arrivée 
+\n• Ajout d\'étapes sur votre itinéraire 
+\n• Recalcule automatique de la route si vous vous écartez de l\'itinéraire 
+\n• Recherchez des lieux par adresse, par type (par exemple : restaurant, hôtel, station-service, musée) ou par coordonnées géographiques</string>
     <string name="osmand_plus_extended_description_part3">Affichage de la carte :
 \n• Affichez votre position et votre orientation
 \n• Orientez la carte au choix selon la boussole ou selon la direction de votre déplacement
