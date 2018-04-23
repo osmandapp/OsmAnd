@@ -57,6 +57,7 @@
 			android:layout_height="0dp"
 			android:layout_weight="1"
 			android:ellipsize="end"
+			android:lineSpacingMultiplier="1.2"
 			android:text="@string/travel_guide_description"
 			android:textColor="@color/wikivoyage_secondary_text"
 			android:textSize="@dimen/default_list_text_size"/>
