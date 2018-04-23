@@ -1,8 +1,7 @@
 package net.osmand.plus.wikivoyage;
 
 
-import android.app.Activity;
-import android.app.Dialog;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -28,9 +26,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.mapcontextmenu.WikipediaDialogFragment;
-import net.osmand.plus.quickaction.actions.FavoriteAction;
 import net.osmand.plus.resources.AmenityIndexRepositoryBinary;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleWikiLinkFragment;
@@ -48,11 +44,15 @@ import java.util.List;
 
 import static android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 
+
+interface RegionCallback {
+	void onRegionFound(String s);
+}
 /**
  * Custom WebView client to handle the internal links.
  */
 
-public class WikivoyageWebViewClient extends WebViewClient {
+public class WikivoyageWebViewClient extends WebViewClient implements RegionCallback {
 
 	private static final String TAG = WikivoyageWebViewClient.class.getSimpleName();
 
@@ -61,12 +61,16 @@ public class WikivoyageWebViewClient extends WebViewClient {
 	private Context context;
 	private TravelArticle article;
 	private boolean nightMode;
+	private String regionName;
 
 	private static final String PREFIX_GEO = "geo:";
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
 	private static final String WIKIVOAYAGE_DOMAIN = ".wikivoyage.com/wiki/";
 	private static final String WIKI_DOMAIN = ".wikipedia.org/wiki/";
+	private FetchWikiRegion fetchRegionTask;
+	private WikiArticleSearchTask articleSearchTask;
+
 
 	public WikivoyageWebViewClient(FragmentActivity context, FragmentManager fm, boolean nightMode) {
 		app = (OsmandApplication) context.getApplication();
@@ -169,38 +173,92 @@ public class WikivoyageWebViewClient extends WebViewClient {
 
 	public void setArticle(TravelArticle article) {
 		this.article = article;
+		if (this.article != null && app != null) {
+			fetchRegionTask = new FetchWikiRegion(this, app.getRegions(), article.getLat(), article.getLon());
+			fetchRegionTask.execute();
+		}
 	}
 
-	protected void getWikiArticle(String name, String url) {
+	private void getWikiArticle(String name, String url) {
 		List<AmenityIndexRepositoryBinary> indexes = app.getResourceManager()
 				.getWikiAmenityRepository(article.getLat(), article.getLon());
 		if (indexes.isEmpty()) {
-			String reg = "";
-			try {
-				reg = getRegion(article.getLat(), article.getLon());
-			} catch (IOException e) {
-				Log.e(TAG, e.getMessage(), e);
-			}
-			WikivoyageArticleWikiLinkFragment.showInstance(fragmentManager, reg, url);
+			WikivoyageArticleWikiLinkFragment.showInstance(fragmentManager, regionName == null ?
+					"" : regionName, url);
 		} else {
-			new WikiArticleSearchTask(name, indexes, (MapActivity) context).execute();
+			articleSearchTask = new WikiArticleSearchTask(name, indexes, (MapActivity) context);
+			articleSearchTask.execute();
 		}
 
 	}
 
-	private String getRegion(double lat, double lon) throws IOException {
-		OsmandRegions osmandRegions = app.getRegions();
-		if (osmandRegions != null) {
-			int x31 = MapUtils.get31TileNumberX(lon);
-			int y31 = MapUtils.get31TileNumberY(lat);
-			List<BinaryMapDataObject> cs = osmandRegions.query(x31, y31);
-			for (BinaryMapDataObject b : cs) {
-				if(osmandRegions.contain(b, x31, y31)) {
-					return osmandRegions.getLocaleName(osmandRegions.getDownloadName(b), false);
+	@Override
+	public void onRegionFound(String s) {
+		regionName = s;
+	}
+
+	public void stopRunningAsyncTasks() {
+		if (articleSearchTask != null && articleSearchTask.getStatus() == AsyncTask.Status.RUNNING) {
+			articleSearchTask.cancel(true);
+		}
+		if (fetchRegionTask != null && fetchRegionTask.getStatus() == AsyncTask.Status.RUNNING) {
+			fetchRegionTask.cancel(true);
+		}
+	}
+
+	private static class FetchWikiRegion extends AsyncTask<Void, Void, String> {
+
+		private RegionCallback callback;
+		private OsmandRegions osmandRegions;
+		private double lat;
+		private double lon;
+
+		FetchWikiRegion(RegionCallback callback, OsmandRegions osmandRegions, double lat, double lon) {
+			this.callback = callback;
+			this.osmandRegions = osmandRegions;
+			this.lat = lat;
+			this.lon = lon;
+		}
+
+		@Override
+		protected String doInBackground(Void... voids) {
+			if (osmandRegions != null) {
+				int x31 = MapUtils.get31TileNumberX(lon);
+				int y31 = MapUtils.get31TileNumberY(lat);
+				List<BinaryMapDataObject> dataObjects = null;
+				try {
+					if (isCancelled()) {
+						return null;
+					}
+					dataObjects = osmandRegions.query(x31, y31);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				if (dataObjects != null) {
+					for (BinaryMapDataObject b : dataObjects) {
+						if (isCancelled()) {
+							break;
+						}
+						if(osmandRegions.contain(b, x31, y31)) {
+							return osmandRegions.getLocaleName(osmandRegions.getDownloadName(b), false);
+						}
+					}
 				}
 			}
+			return "";
 		}
-		return "";
+
+		@Override
+		protected void onCancelled(){
+			callback = null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			if (callback != null) {
+				callback.onRegionFound(result);
+			}
+		}
 	}
 
 	private static class WikiArticleSearchTask extends AsyncTask<Void, Void, List<Amenity>> {
@@ -227,6 +285,9 @@ public class WikivoyageWebViewClient extends WebViewClient {
 		protected List<Amenity> doInBackground(Void... voids) {
 			List<Amenity> found = new ArrayList<>();
 			for (AmenityIndexRepositoryBinary repo : indexes) {
+				if (isCancelled()) {
+					break;
+				}
 				found.addAll(repo.searchAmenitiesByName(0, 0, 0, 0,
 						Integer.MAX_VALUE, Integer.MAX_VALUE, name, null));
 			}
@@ -234,13 +295,21 @@ public class WikivoyageWebViewClient extends WebViewClient {
 		}
 
 		@Override
+		protected void onCancelled(){
+			dialog = null;
+			indexes.clear();
+			weakContext.clear();
+		}
+
+		@Override
 		protected void onPostExecute(List<Amenity> found) {
-			if (!weakContext.get().isActivityDestroyed()) {
+			MapActivity activity = weakContext.get();
+			if (!activity.isActivityDestroyed() && dialog != null) {
 				dialog.dismiss();
 				if (!found.isEmpty()) {
-					WikipediaDialogFragment.showInstance((AppCompatActivity) weakContext.get(), found.get(0));
+					WikipediaDialogFragment.showInstance(activity, found.get(0));
 				} else {
-					Toast.makeText(weakContext.get(), R.string.wiki_article_not_found, Toast.LENGTH_LONG).show();
+					Toast.makeText(activity, R.string.wiki_article_not_found, Toast.LENGTH_LONG).show();
 				}
 			}
 		}
