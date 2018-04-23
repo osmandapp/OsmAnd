@@ -38,13 +38,10 @@ public abstract class BaseTravelCard {
 		return app.getIconsCache().getIcon(drawableRes);
 	}
 
-	protected Drawable getPaintedIcon(int iconId, int color) {
-		return app.getIconsCache().getPaintedIcon(iconId, color);
-	}
-
 	protected Drawable getIcon(int iconId, int colorLightId, int colorDarkId) {
 		return app.getIconsCache().getIcon(iconId, nightMode ? colorLightId : colorDarkId);
 	}
+
 	@StringRes
 	protected int getLeftButtonTextId() {
 		return DEFAULT_VALUE;
