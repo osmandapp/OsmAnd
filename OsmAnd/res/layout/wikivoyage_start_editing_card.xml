@@ -4,9 +4,9 @@
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
 	android:layout_gravity="center_horizontal"
-	android:background="@drawable/wikivoyage_card_bg"
 	android:layout_marginBottom="@dimen/list_content_padding"
-	android:layout_marginTop="@dimen/list_content_padding">
+	android:layout_marginTop="@dimen/list_content_padding"
+	android:background="@drawable/wikivoyage_card_bg">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -39,7 +39,6 @@
 				tools:text="@string/start_editing_card_image_text" />
 
 		</FrameLayout>
-
 
 		<TextView
 			android:id="@+id/description"
