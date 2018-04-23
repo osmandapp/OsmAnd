@@ -49,6 +49,11 @@ public class WikivoyageWelcomeDialogFragment extends WikivoyageBaseDialogFragmen
 		return mainView;
 	}
 
+	@Override
+	protected int getStatusBarColor() {
+		return nightMode ? R.color.wikivoyage_welcome_bg_dark : R.color.wikivoyage_welcome_bg_light;
+	}
+
 	public static boolean showInstance(FragmentManager fm) {
 		try {
 			new WikivoyageWelcomeDialogFragment().show(fm, TAG);

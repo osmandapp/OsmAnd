@@ -18,6 +18,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_horizontal"
 			android:layout_marginTop="@dimen/wikivoyage_welcome_image_top_margin"
+			android:scaleType="centerCrop"
 			tools:ignore="ContentDescription"
 			tools:src="@drawable/img_start_screen_travel_night"/>
 
@@ -49,7 +50,7 @@
 			android:maxLines="1"
 			android:text="@string/travel_guide"
 			android:textColor="?attr/wikivoyage_primary_text_color"
-			android:textSize="@dimen/welcome_header_text_size"/>
+			android:textSize="@dimen/title_text_size"/>
 
 		<TextView
 			android:layout_width="match_parent"
