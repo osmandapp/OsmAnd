@@ -56,11 +56,6 @@ public class StartEditingTravelCard extends BaseTravelCard {
 	}
 
 	@Override
-	protected Drawable getIcon(int drawableRes) {
-		return super.getIcon(drawableRes);
-	}
-
-	@Override
 	protected int getLeftButtonTextId() {
 		return R.string.start_editing;
 	}

@@ -58,11 +58,6 @@ public class OpenBetaTravelCard extends BaseTravelCard {
 	}
 
 	@Override
-	protected Drawable getIcon(int drawableRes) {
-		return super.getIcon(drawableRes);
-	}
-
-	@Override
 	protected int getLeftButtonTextId() {
 		return R.string.get_unlimited_access;
 	}
