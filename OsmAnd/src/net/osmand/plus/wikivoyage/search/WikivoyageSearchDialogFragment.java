@@ -55,6 +55,9 @@ public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
 		setupToolbar(toolbar);
+		toolbar.setContentInsetStartWithNavigation(
+				getResources().getDimensionPixelOffset(R.dimen.wikivoyage_search_divider_margin_start)
+		);
 
 		searchEt = (EditText) toolbar.findViewById(R.id.searchEditText);
 		searchEt.setHint(R.string.shared_string_search);

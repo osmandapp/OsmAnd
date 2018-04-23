@@ -203,4 +203,7 @@
 	<dimen name="wikivoyage_welcome_title_bottom_margin">23dp</dimen>
 	<dimen name="wikivoyage_welcome_content_margin">48dp</dimen>
 	<dimen name="wikivoyage_card_button_height">54dp</dimen>
+	<dimen name="wikivoyage_search_icon_margin_left">21dp</dimen>
+	<dimen name="wikivoyage_search_icon_margin_right">33dp</dimen>
+	<dimen name="wikivoyage_search_divider_margin_start">82dp</dimen>
 </resources>
