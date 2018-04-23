@@ -35,8 +35,8 @@
 				android:layout_marginRight="@dimen/list_content_padding"
 				android:layout_marginStart="@dimen/list_content_padding"
 				android:layout_marginTop="42dp"
-				android:text="@string/start_editing_card_image_text"
-				android:textColor="@color/primary_text_dark" />
+				android:textColor="@color/primary_text_dark"
+				tools:text="@string/start_editing_card_image_text" />
 
 		</FrameLayout>
 
@@ -51,7 +51,7 @@
 			android:layout_marginRight="@dimen/list_content_padding"
 			android:layout_marginStart="@dimen/list_content_padding"
 			android:layout_marginTop="@dimen/list_content_padding"
-			android:text="@string/start_editing_card_description" />
+			tools:text="@string/start_editing_card_description" />
 
 		<View
 			android:id="@+id/bottom_divider"

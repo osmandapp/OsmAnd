@@ -12,6 +12,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.wikivoyage.explore.travelcards.BaseTravelCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 
 import java.util.ArrayList;
 
@@ -28,22 +30,10 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		LinearLayout linearLayout = (LinearLayout) mainView.findViewById(R.id.cards_list);
 		ArrayList<BaseTravelCard> items = new ArrayList<>();
 
-		BaseTravelCard openBeta = new BaseTravelCard.Builder()
-				.setLayoutId(R.layout.wikivoyage_base_card)
-				.setBackgroundImage(getIconsCache().getIcon(R.drawable.img_help_wikivoyage_articles))
-				.setLeftButtonText(getString(R.string.get_unlimited_access))
-				.setDescription(getString(R.string.welcome_to_open_beta_description))
-				.setTitle(getString(R.string.welcome_to_open_beta))
-				.create();
-		items.add(openBeta);
-
-		BaseTravelCard startEditing = new BaseTravelCard.Builder()
-				.setLayoutId(R.layout.wikivoyage_start_editing_card)
-				.setBackgroundImage(getIconsCache().getIcon(R.drawable.img_help_wikivoyage_contribute))
-				.setLeftButtonText(getString(R.string.start_editing))
-				.setDescription(getString(R.string.start_editing_card_description))
-				.create();
-		items.add(startEditing);
+		BaseTravelCard openBetaTravelCard = new OpenBetaTravelCard(getMyActivity());
+		BaseTravelCard startEditingTravelCard = new StartEditingTravelCard(getMyActivity());
+		items.add(openBetaTravelCard);
+		items.add(startEditingTravelCard);
 
 		for (BaseTravelCard item : items) {
 			item.inflate(app, linearLayout, nightMode);
