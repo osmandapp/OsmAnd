@@ -7,7 +7,6 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -22,9 +21,9 @@ public abstract class BaseTravelCard {
 		this.nightMode = nightMode;
 	}
 
-	public abstract RecyclerView.ViewHolder createViewHolder(@NonNull ViewGroup parent);
-
 	public abstract void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder);
+
+	public abstract int getCardType();
 
 	@ColorInt
 	protected int getResolvedColor(@ColorRes int colorId) {
