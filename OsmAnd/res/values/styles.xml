@@ -210,6 +210,7 @@
         <item name="wikivoyage_bottom_bar_bg_color">@color/wikivoyage_bottom_bar_bg_light</item>
         <item name="wikivoyage_bottom_bar_divider_color">@color/wikivoyage_bottom_bar_divider_light</item>
         <item name="wikivoyage_secondary_btn_bg_color">@color/wikivoyage_secondary_btn_bg_light</item>
+        <item name="wikivoyage_primary_btn_text_color">@color/wikivoyage_primary_btn_text_light</item>
         <item name="wikivoyage_welcome_bg_color">@color/wikivoyage_welcome_bg_light</item>
         <item name="wikivoyage_primary_text_color">@color/wikivoyage_primary_text_light</item>
     </style>
@@ -410,6 +411,7 @@
         <item name="wikivoyage_bottom_bar_bg_color">@color/wikivoyage_bottom_bar_bg_dark</item>
         <item name="wikivoyage_bottom_bar_divider_color">@color/wikivoyage_bottom_bar_divider_dark</item>
         <item name="wikivoyage_secondary_btn_bg_color">@color/wikivoyage_secondary_btn_bg_dark</item>
+        <item name="wikivoyage_primary_btn_text_color">@color/wikivoyage_primary_btn_text_dark</item>
         <item name="wikivoyage_welcome_bg_color">@color/wikivoyage_welcome_bg_dark</item>
         <item name="wikivoyage_primary_text_color">@color/wikivoyage_primary_text_dark</item>
     </style>
