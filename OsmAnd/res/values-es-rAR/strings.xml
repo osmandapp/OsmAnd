@@ -3017,4 +3017,24 @@ Lon %2$s</string>
     <string name="select_travel_book">Marcar libro de viajes</string>
     <string name="shared_string_travel_book">Libro de viajes</string>
     <string name="download_images">Descargar imágenes</string>
+    <string name="purchase_dialog_title">Elegir plan</string>
+    <string name="purchase_dialog_travel_description">Para leer artículos de viajes sin conexión, necesita comprar uno de los siguientes elementos.</string>
+    <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
+    <string name="travel_guide_description">Explora las guías de Wikiviajes de los lugares más interesantes del planeta dentro de OsmAnd sin una conexión a internet.</string>
+    <string name="travel_guide">Guía de viajes</string>
+    <string name="in_app_purchase">Compra en la aplicación</string>
+    <string name="in_app_purchase_desc">Único pago</string>
+    <string name="in_app_purchase_desc_ex">Una vez comprado, estará permanentemente disponible para ti.</string>
+    <string name="purchase_unlim_title">Comprar - %1$s</string>
+    <string name="purchase_subscription_title">Suscripción - %1$s</string>
+
+    <string name="wikivoyage_offline">Wikiviajes sin conexión</string>
+    <string name="dayly_map_updates">Actualizaciones del mapa: cada día</string>
+    <string name="unlimited_downloads">Descargas ilimitadas</string>
+    <string name="wikipedia_offline">Wikipedia sin conexión</string>
+    <string name="contour_lines_sea_depth">Curvas de nivel + Profundidad náutica</string>
+    <string name="unlock_all_features">Desbloquear todas las características de OsmAnd</string>
+
+    <string name="monthly_map_updates">Actualizaciones del mapa: <b>cada mes</b></string>
+    <string name="daily_map_updates">Actualizaciones del mapa: <b>cada día, cada hora</b></string>
     </resources>

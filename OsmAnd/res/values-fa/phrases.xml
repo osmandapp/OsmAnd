@@ -916,4 +916,10 @@
 	<string name="poi_recycling_foil">ورق آلومینیومی (فویل)</string>
 	<string name="poi_recycling_paint">رنگ</string>
 	<string name="poi_pyrotechnics">لوازم آتش بازی</string>
+	<string name="poi_tomb">آرامگاه</string>
+	<string name="poi_tomb_war_grave">نوع: کشتهٔ جنگ</string>
+	<string name="poi_tomb_rock_cut">نوع: صخره‌ای</string>
+	<string name="poi_tomb_mausoleum">نوع: مقبره</string>
+	<string name="poi_tomb_pyramid">نوع: هرم</string>
+
 	</resources>

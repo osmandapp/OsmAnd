@@ -138,6 +138,11 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		return false;
 	}
 
+	@Override
+	protected int getBgColorId() {
+		return nightMode ? R.color.wikivoyage_bottom_bar_bg_dark : R.color.bg_color_light;
+	}
+
 	private void sendResults(long cityId) {
 		Fragment fragment = getTargetFragment();
 		if (fragment != null) {

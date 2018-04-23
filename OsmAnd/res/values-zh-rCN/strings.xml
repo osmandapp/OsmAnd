@@ -2760,4 +2760,14 @@
     <string name="map_imported_successfully">地图成功导入</string>
     <string name="shared_string_current">当前</string>
     <string name="clear_all_intermediates">清空所有中间点</string>
+    <string name="in_app_purchase">应用内购买</string>
+    <string name="in_app_purchase_desc">一次性付款</string>
+    <string name="in_app_purchase_desc_ex">购买后将对您永久可用。</string>
+    <string name="purchase_unlim_title">购买 - %1$s</string>
+    <string name="purchase_subscription_title">订阅 - %1$s</string>
+
+    <string name="wikivoyage_offline">Wikivoyage 离线</string>
+    <string name="dayly_map_updates">地图更新：每日</string>
+    <string name="unlimited_downloads">无限下载</string>
+    <string name="wikipedia_offline">离线维基百科</string>
     </resources>

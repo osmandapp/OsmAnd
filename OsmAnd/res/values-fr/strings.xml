@@ -2653,7 +2653,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap. Bénéficiez d\'un guidage vocal comme visuel; découvrez des points d\'intérêt; créez et gérez des traces GPX; installez des greffons pour visualiser l\'altitude et les courbes de niveaux; utilisez les modes Automobile, Piéton, Cycliste; contribuez à l\'amélioration des cartes et bien plus encore !
 \n
 \nOsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour.</string>
-    <string name="sea_depth_thanks">Merci d\'avoir acheté le greffon Lignes de sonde marines !</string>
+    <string name="sea_depth_thanks">Merci d\'avoir acheté le greffon Lignes de sonde marines</string>
     <string name="index_item_depth_contours_osmand_ext">Lignes de sonde marines</string>
     <string name="index_item_depth_points_southern_hemisphere">Lignes de sonde marines pour l\'hémisphère sud</string>
     <string name="index_item_depth_points_northern_hemisphere">Lignes de sonde marines pour l\'hémisphère nord</string>
@@ -2661,17 +2661,17 @@ représentant la zone : %1$s x %2$s</string>
     <string name="nautical_maps">Cartes marines</string>
     <string name="depth_contour_descr">Cartes contenant des lignes et des points de sonde indiquant la profondeur d\'eau.</string>
     <string name="subscribe_email_error">Erreur</string>
-    <string name="subscribe_email_desc">Inscrivez-vous à notre lettre d\'informations sur les applications et téléchargez 3 cartes supplémentaires gratuitement !</string>
+    <string name="subscribe_email_desc">Inscrivez-vous à notre lettre d\'information et téléchargez 3 cartes supplémentaires gratuitement !</string>
     <string name="no_overlay">Sans sur-couche</string>
     <string name="no_underlay">Sans sous-couche</string>
     <string name="quick_action_add_destination">Ajouter une destination</string>
     <string name="quick_action_replace_destination">Remplacer la destination</string>
     <string name="quick_action_add_first_intermediate">Ajouter une première étape</string>
-    <string name="quick_action_add_first_intermediate_desc">Appuyez sur le bouton d\'action pour ajouter le centre de la carte comme première étape.</string>
-    <string name="quick_action_add_destination_desc">Appuyez sur le bouton d\'action pour définir le centre de la carte comme Nouvelle destination. L\'ancienne destination devient le Dernier point intermédiaire.</string>
-    <string name="quick_action_replace_destination_desc">Appuyez sur le bouton d\'action pour remplacer la destination par le centre de la carte.</string>
+    <string name="quick_action_add_first_intermediate_desc">Appuyez sur ce bouton pour ajouter le centre de la carte comme première étape.</string>
+    <string name="quick_action_add_destination_desc">Appuyez sur ce bouton pour définir le centre de la carte comme nouvelle destination. L\'ancienne destination deviendra la dernière étape.</string>
+    <string name="quick_action_replace_destination_desc">Appuyez sur ce bouton pour utiliser le centre de la carte comme destination en remplaçant la destination précédente.</string>
     <string name="quick_action_auto_zoom">Zoom automatique de la carte Actif / Inactif</string>
-    <string name="quick_action_auto_zoom_desc">Appuyez sur le bouton pour activer ou désactiver le zoom automatique de la carte en fonction de votre vitesse.</string>
+    <string name="quick_action_auto_zoom_desc">Appuyez sur ce bouton pour activer ou désactiver le zoom automatique de la carte en fonction de votre vitesse.</string>
     <string name="quick_action_auto_zoom_on">Activer le zoom automatique</string>
     <string name="quick_action_auto_zoom_off">Désactiver le zoom automatique</string>
     <string name="shared_string_paused">Mis en pause</string>
@@ -2703,12 +2703,12 @@ représentant la zone : %1$s x %2$s</string>
     <string name="srtm_color_scheme">Couleur du thème</string>
     <string name="show_from_zoom_level">Afficher à partir du niveau de zoom</string>
     <string name="route_is_too_long_v2">Cet itinéraire risque d\'être très long à calculer. Merci d\'ajouter des points de passage intermédiaires.</string>
-    <string name="srtm_menu_download_descr">Pour afficher les courbes de niveaux sur la carte, vous devez télécharger la carte courbes de niveaux de la région.</string>
+    <string name="srtm_menu_download_descr">Téléchargez les \"courbes de niveaux\" de cette région.</string>
     <string name="shared_string_plugin">Greffon</string>
-    <string name="srtm_purchase_header">Pour afficher les courbes de niveaux sur une carte, vous devez acheter puis installer le greffon Courbes de niveaux</string>
-    <string name="hillshade_purchase_header">Pour afficher les ombrages du relief sur la carte, vous devez acheter et installer le greffon Courbes de niveaux</string>
+    <string name="srtm_purchase_header">Pour afficher les courbes de niveaux sur une carte, vous devez acheter puis installer le greffon \"Courbes de niveaux\"</string>
+    <string name="hillshade_purchase_header">Installez le greffon \"Courbes de niveaux\" pour afficher ces dernières sur la carte</string>
     <string name="hide_from_zoom_level">Masquer depuis le niveau de zoom</string>
-    <string name="hillshade_menu_download_descr">Pour afficher les ombrages du relief sur la carte, vous devez télécharger une sur-couche supplémentaire pour la carte de cette région.</string>
+    <string name="hillshade_menu_download_descr">Pour afficher les ombrages du relief sur la carte, vous devez télécharger une sur-couche supplémentaire pour cette région.</string>
     <string name="quick_action_showhide_osmbugs_title">Afficher / Masquer les notes OSM</string>
     <string name="quick_action_osmbugs_show">Afficher les notes OSM</string>
     <string name="quick_action_osmbugs_hide">Masquer les notes OSM</string>
@@ -2752,9 +2752,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="mapillary">Mapillary</string>
     <string name="open_mapillary">Ouvrir Mapillary</string>
     <string name="improve_coverage_mapillary">Améliorez la couverture photo avec Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Vous pouvez prendre des photos et les ajouter à la carte.
-\n
-\nPour cela, installez l\'application Mapillary depuis Google Play.</string>
+    <string name="improve_coverage_install_mapillary_desc">Installez Mapillary pour ajouter une ou plusieurs photos à cet emplacement de la carte.</string>
     <string name="mapillary_action_descr">Participez en ajoutant vos photos détaillées sur Mapillary.</string>
     <string name="mapillary_widget">Gadget Mapillary</string>
     <string name="mapillary_widget_descr">Permet de contribuer facilement à Mapillary.</string>
@@ -2910,7 +2908,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="date_added">Date ajoutée</string>
     <string name="order_by">Trier par :</string>
     <string name="marker_show_distance_descr">Sélectionnez comment indiquer sur la carte la distance et la direction des marques :</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Indiquez ci-dessous à quelle vitesse l\'orientation de la carte doit basculer de \'Sens du déplacement\' à \'Boussole\'.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Indiquez ci-dessous à quelle vitesse l\'orientation doit basculer de \'Sens du déplacement\' à \'Boussole\'.</string>
     <string name="passed">Dernière utilisation : %1$s</string>
     <string name="show_guide_line">Afficher les lignes de guidage</string>
     <string name="show_arrows_on_the_map">Afficher les flèches sur la carte</string>
@@ -3136,4 +3134,19 @@ représentant la zone : %1$s x %2$s</string>
     <string name="download_images">Téléchargez les images</string>
     <string name="purchase_dialog_title">Sélectionnez un plan</string>
     <string name="purchase_dialog_subtitle">Sélectionnez l\'élément adapté :</string>
+    <string name="purchase_dialog_travel_description">Pour lire des articles de voyage hors ligne, vous devez acheter l\'un des éléments suivants.</string>
+    <string name="travel_guide_description">Consultez les guides Wikivoyage des lieux les plus intéressants au monde depuis OsmAnd et sans connexion Internet.</string>
+    <string name="travel_guide">Guide de voyage</string>
+    <string name="in_app_purchase">Achat via l\'application</string>
+    <string name="in_app_purchase_desc">Paiement unique</string>
+    <string name="purchase_unlim_title">Acheter - %1$s</string>
+    <string name="purchase_subscription_title">Souscrire - %1$s</string>
+
+    <string name="wikivoyage_offline">Wikivoyage hors-line</string>
+    <string name="dayly_map_updates">Mise à jour des cartes : quotidien</string>
+    <string name="unlimited_downloads">Téléchargements illimités</string>
+    <string name="wikipedia_offline">Wikipedia hors-ligne</string>
+    <string name="contour_lines_sea_depth">Courbes de niveaux + Lignes de sonde marines</string>
+    <string name="unlock_all_features">Activer toutes les fonctionnalités d\'OsmAnd</string>
+
     </resources>

@@ -73,7 +73,19 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			"      content.style.display = \"block\";" +
 			"    }" +
 			"  });" +
-			"}" + "function scrollAnchor(id, title) {" +
+			"}" +
+			"document.addEventListener(\"DOMContentLoaded\", function(event) {\n" +
+			"    document.querySelectorAll('img').forEach(function(img) {\n" +
+			"        img.onerror = function() {\n" +
+			"            this.style.display = 'none';\n" +
+			"            var caption = img.parentElement.nextElementSibling;\n" +
+			"            if (caption.className == \"thumbnailcaption\") {\n" +
+			"                caption.style.display = 'none';\n" +
+			"            }\n" +
+			"        };\n" +
+			"    })\n" +
+			"});" +
+			"function scrollAnchor(id, title) {" +
 			"openContent(title);" +
 			"window.location.hash = id;}\n" +
 			"function openContent(id) {\n" +

@@ -2934,12 +2934,22 @@
 \n• Visning av koter og relieffskygger (via programtillegg)"</string>
     <string name="live_monitoring_url_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="wikivoyage_download_pics_descr">Bilder i artiklene kan lastes ned og vises og lagres på enheten, så det er tilgang til dem mens du er nettfrakoblet. Innstillingen kan endres i Utforsk &gt; Alternativer.</string>
-    <string name="shared_string_dont">Ikke gjør</string>
+    <string name="shared_string_dont">Ikke</string>
     <string name="shared_string_do">Gjør</string>
-    <string name="shared_string_only_with_wifi">Bare på Wi-Fi</string>
+    <string name="shared_string_only_with_wifi">Kun på Wi-Fi</string>
     <string name="wikivoyage_download_pics">Last ned bilder</string>
     <string name="shared_string_wifi_only">Kun Wi-Fi</string>
     <string name="select_travel_book">Velg reisebok</string>
     <string name="shared_string_travel_book">Reisebok</string>
     <string name="download_images">Last ned bilder</string>
+    <string name="wikipedia_offline">Wikipedia nettfrakoblet</string>
+    <string name="contour_lines_sea_depth">Koter + havdybde</string>
+    <string name="in_app_purchase_desc">Engangsbetaling</string>
+    <string name="purchase_unlim_title">Kjøp - %1$s</string>
+    <string name="unlimited_downloads">Ubegrensede nedlastinger</string>
+    <string name="unlock_all_features">Lås opp alle OsmAnd-funksjoner</string>
+
+    <string name="purchase_dialog_title">Velg plan</string>
+    <string name="dayly_map_updates">Kartoppdateringer: Hver dag</string>
+    <string name="wikivoyage_offline">Wikivoyage nettfrakoblet</string>
     </resources>

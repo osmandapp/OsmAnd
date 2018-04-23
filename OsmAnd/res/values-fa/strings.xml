@@ -3084,4 +3084,24 @@
     <string name="download_images">دانلود تصاویر</string>
     <string name="select_travel_book">انتخاب کتاب سفر</string>
     <string name="shared_string_travel_book">کتاب سفر</string>
+    <string name="purchase_dialog_title">انتخاب طرح</string>
+    <string name="purchase_dialog_travel_description">برای مطالعهٔ آفلاین مقاله‌های سفر، باید یکی از موارد زیر را بخرید.</string>
+    <string name="purchase_dialog_subtitle">مورد مناسبی را انتخاب کنید:</string>
+    <string name="travel_guide_description">با استفاده از OsmAnd و بدون نیاز به اینترنت در مقالات ویکی‌سفر بگردید و راهنمای سفر به جذاب‌ترین نقاط جهان را مطالعه کنید.</string>
+    <string name="travel_guide">راهنمای سفر</string>
+    <string name="in_app_purchase">خرید درون‌برنامه‌ای</string>
+    <string name="in_app_purchase_desc">یک بار پرداخت</string>
+    <string name="in_app_purchase_desc_ex">با یک بار خرید، همیشه در اختیارتان خواهد بود.</string>
+    <string name="purchase_unlim_title">خرید - %1$s</string>
+    <string name="purchase_subscription_title">اشتراک - %1$s</string>
+
+    <string name="wikivoyage_offline">ویکی‌سفر آفلاین</string>
+    <string name="dayly_map_updates">به‌روزرسانی نقشه: روزانه</string>
+    <string name="unlimited_downloads">دانلود نامحدود</string>
+    <string name="wikipedia_offline">ویکی‌پدیای آفلاین</string>
+    <string name="contour_lines_sea_depth">منحنی تراز + عمق دریا</string>
+    <string name="unlock_all_features">بازکردن همهٔ قابلیت‌های OsmAnd</string>
+
+    <string name="monthly_map_updates">نقشه <b>هر ماه</b> به‌روز می‌شود</string>
+    <string name="daily_map_updates">نقشه <b>هر روز و هر ساعت</b> به‌روز می‌شود</string>
     </resources>

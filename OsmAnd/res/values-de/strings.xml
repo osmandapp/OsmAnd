@@ -2962,4 +2962,14 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="wikivoyage_download_pics_descr">Wir können die Bilder in den Artikeln herunterladen, anzeigen und auf dem Gerät speichern, damit du auch offline Zugriff darauf hast. Sie können diese Einstellung jederzeit in Durchsuchen &gt; Optionen ändern.</string>
     <string name="online_webpage_warning">Diese Seite ist nur online verfügbar. Möchten Sie sie einen Webbrowser öffen?</string>
     <string name="delete_search_history">Suchverlauf löschen</string>
+    <string name="purchase_dialog_travel_description">Um Reiseartikel offline lesen zu können, müssen Sie einen der folgenden Artikel kaufen.</string>
+    <string name="purchase_dialog_subtitle">Wählen Sie den passenden Artikel aus:</string>
+    <string name="shared_string_dont">Nicht</string>
+    <string name="shared_string_do">Tun</string>
+    <string name="shared_string_only_with_wifi">Nur mit WLAN</string>
+    <string name="shared_string_wifi_only">Nur WLAN</string>
+    <string name="select_travel_book">Reisebuch auswählen</string>
+    <string name="shared_string_travel_book">Reisebuch</string>
+    <string name="images_cache">Bilder-Cache</string>
+    <string name="download_images">Bilder herunterladen</string>
     </resources>
