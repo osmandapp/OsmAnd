@@ -1,7 +1,5 @@
 package net.osmand.plus.wikivoyage.explore.travelcards;
 
-
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
@@ -44,20 +42,12 @@ public class StartEditingTravelCard extends BaseTravelCard {
 				onLeftButtonClickAction();
 			}
 		});
-		if (getRightButtonTextId() == DEFAULT_VALUE) {
-			view.findViewById(R.id.right_bottom_button).setVisibility(View.GONE);
-			view.findViewById(R.id.bottom_buttons_divider).setVisibility(View.GONE);
-		}
+
 		if (position != INVALID_POSITION) {
 			container.addView(view, position);
 		} else {
 			container.addView(view);
 		}
-	}
-
-	@Override
-	protected int getLeftButtonTextId() {
-		return R.string.start_editing;
 	}
 
 	@Override

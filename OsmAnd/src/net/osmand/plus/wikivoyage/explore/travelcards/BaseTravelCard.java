@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.view.ViewGroup;
 
@@ -13,7 +12,6 @@ import net.osmand.plus.OsmandApplication;
 public abstract class BaseTravelCard {
 
 	protected static final int INVALID_POSITION = -1;
-	protected static final int DEFAULT_VALUE = -1;
 
 	protected OsmandApplication app;
 
@@ -39,18 +37,8 @@ public abstract class BaseTravelCard {
 		return app.getIconsCache().getIcon(iconId, nightMode ? colorLightId : colorDarkId);
 	}
 
-	@StringRes
-	protected int getLeftButtonTextId() {
-		return DEFAULT_VALUE;
-	}
-
 	protected void onLeftButtonClickAction() {
 
-	}
-
-	@StringRes
-	protected int getRightButtonTextId() {
-		return DEFAULT_VALUE;
 	}
 
 	protected void onRightButtonClickAction() {
