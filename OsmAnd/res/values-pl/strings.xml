@@ -3035,7 +3035,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_travel">Podróż</string>
     <string name="waypoints_removed_from_map_markers">Punkty trasy usunięte z znaczników mapy</string>
     <string name="use_two_digits_longitude">Używaj dwóch cyfr długości geograficznej</string>
-    <string name="wikivoyage_search_hint">Wyszukiwanie: Kraj, Miasto, Prowincja</string>
+    <string name="wikivoyage_search_hint">Wyszukiwanie: kraj, miasto, prowincja</string>
     <string name="shared_string_read">Czytaj</string>
     <string name="saved_articles">Zapisane artykuły</string>
     <string name="shared_string_explore">Przeglądaj</string>
@@ -3050,9 +3050,15 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="wikivoyage_download_pics">Pobierz zdjęcia</string>
     <string name="wikivoyage_download_pics_descr">Możemy pobierać i pokazywać obrazy w artykułach i przechowywać je na urządzeniu, żebyś miał do nich dostęp w trybie offline. Możesz zawsze zmienić ustawienia w Przeglądaj &gt; Opcje.</string>
     <string name="shared_string_wifi_only">Tylko WiFi</string>
-    <string name="select_travel_book">Wybierz książkę podróży</string>
-    <string name="shared_string_travel_book">Książka podróży</string>
+    <string name="select_travel_book">Wybierz podręcznik podróży</string>
+    <string name="shared_string_travel_book">Podręcznik podróży</string>
     <string name="online_webpage_warning">Ta strona jest dostępna tylko w trybie online. Czy chcesz ją otworzyć w przeglądarce internetowej?</string>
     <string name="delete_search_history">Usuń historię wyszukiwania</string>
-    <string name="download_images">Pobierz obrazy</string>
+    <string name="download_images">Pobieranie obrazów</string>
+    <string name="monthly_map_updates">Uaktualnienia map: <b>każdego miesiąca</b></string>
+    <string name="daily_map_updates">Uaktualnienia map: <b>każdego dnia, o każdej godzinie</b></string>
+    <string name="wikivoyage_offline">Wikipodróże offline</string>
+    
+    <string name="unlimited_downloads">Nieograniczone pobrania</string>
+    <string name="images_cache">Pamięć podręczna obrazów</string>
     </resources>
