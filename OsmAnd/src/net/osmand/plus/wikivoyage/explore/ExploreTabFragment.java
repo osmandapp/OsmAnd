@@ -23,15 +23,15 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		OsmandApplication app = getMyApplication();
-		boolean nightMode = app.getDaynightHelper().isNightMode();
+		boolean nightMode = !getSettings().isLightContent();
 
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
 
 		LinearLayout linearLayout = (LinearLayout) mainView.findViewById(R.id.cards_list);
 		ArrayList<BaseTravelCard> items = new ArrayList<>();
 
-		BaseTravelCard openBetaTravelCard = new OpenBetaTravelCard(getMyActivity());
-		BaseTravelCard startEditingTravelCard = new StartEditingTravelCard(getMyActivity());
+		BaseTravelCard openBetaTravelCard = new OpenBetaTravelCard(app, getFragmentManager(), nightMode);
+		BaseTravelCard startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
 		items.add(openBetaTravelCard);
 		items.add(startEditingTravelCard);
 

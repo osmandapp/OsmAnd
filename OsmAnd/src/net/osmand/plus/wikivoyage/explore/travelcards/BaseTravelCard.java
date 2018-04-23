@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.OsmandActionBarActivity;
 
 public abstract class BaseTravelCard {
 
@@ -19,37 +18,33 @@ public abstract class BaseTravelCard {
 	protected static final int DEFAULT_VALUE = -1;
 
 	protected View view;
-	protected OsmandActionBarActivity activity;
+	protected OsmandApplication app;
 
 	protected int position = INVALID_POSITION;
+	protected boolean nightMode;
 
 	public abstract void inflate(OsmandApplication app, ViewGroup container, boolean nightMode);
 
-	protected abstract View getView(OsmandApplication app, ViewGroup parent, boolean nightMode);
-
 	@ColorInt
 	protected int getResolvedColor(@ColorRes int colorId) {
-		return ContextCompat.getColor(activity, colorId);
+		return ContextCompat.getColor(app, colorId);
 	}
 
 	protected Drawable getIcon(@DrawableRes int drawableRes, @ColorRes int color) {
-		return activity.getMyApplication().getIconsCache().getIcon(drawableRes, color);
+		return app.getIconsCache().getIcon(drawableRes, color);
 	}
 
-	protected Drawable getBackgroundIcon(@DrawableRes int drawableRes) {
-		return activity.getMyApplication().getIconsCache().getIcon(drawableRes);
+	protected Drawable getIcon(@DrawableRes int drawableRes) {
+		return app.getIconsCache().getIcon(drawableRes);
 	}
 
-	@StringRes
-	protected int getTitleId() {
-		return DEFAULT_VALUE;
+	protected Drawable getPaintedIcon(int iconId, int color) {
+		return app.getIconsCache().getPaintedIcon(iconId, color);
 	}
 
-	@StringRes
-	protected int getDescriptionId() {
-		return DEFAULT_VALUE;
+	protected Drawable getIcon(int iconId, int colorLightId, int colorDarkId) {
+		return app.getIconsCache().getIcon(iconId, nightMode ? colorLightId : colorDarkId);
 	}
-
 	@StringRes
 	protected int getLeftButtonTextId() {
 		return DEFAULT_VALUE;
@@ -79,6 +74,6 @@ public abstract class BaseTravelCard {
 	}
 
 	protected boolean isNightMode() {
-		return !activity.getMyApplication().getSettings().isLightContent();
+		return !app.getSettings().isLightContent();
 	}
 }
