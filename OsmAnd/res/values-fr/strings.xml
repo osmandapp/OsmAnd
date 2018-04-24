@@ -3167,4 +3167,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="download_wiki_region_placeholder">cette région</string>
     <string name="wiki_article_not_found">Article introuvable</string>
     <string name="how_to_open_wiki_title">Comment ouvrir les articles Wikipedia ?</string>
-</resources>
+<string name="paid_app">Application payante</string>
+    <string name="paid_plugin">Greffon payant</string>
+    </resources>
