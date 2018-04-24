@@ -250,7 +250,9 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	@Override
 	public void onPause() {
 		super.onPause();
-		webViewClient.stopRunningAsyncTasks();
+		if (webViewClient != null) {
+			webViewClient.stopRunningAsyncTasks();
+		}
 	}
 
 	@Override
