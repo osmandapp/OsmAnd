@@ -91,14 +91,27 @@ public class TravelArticle {
 			return null;
 		}
 
-		int firstParagraphStart = content.indexOf("<p>");
-		int firstParagraphEnd = content.indexOf("</p>");
+		String pOpened = "<p>";
+		String pClosed = "</p>";
+
+		int firstParagraphStart = content.indexOf(pOpened);
+		int firstParagraphEnd = content.indexOf(pClosed);
 		if (firstParagraphStart == -1 || firstParagraphEnd == -1) {
 			return null;
 		}
+		int pClosedLength = pClosed.length();
+		String firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + pClosedLength);
+		while (firstParagraphHtml.length() == (pOpened.length() + pClosedLength)
+				&& (firstParagraphEnd + pClosedLength) < content.length()) {
+			firstParagraphStart = content.indexOf(pOpened, firstParagraphEnd);
+			firstParagraphEnd = firstParagraphStart == -1 ? -1 : content.indexOf(pClosed, firstParagraphStart);
+			if (firstParagraphStart != -1 && firstParagraphEnd != -1) {
+				firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + pClosedLength);
+			} else {
+				break;
+			}
+		}
 
-		// 4 is the length of </p> tag
-		String firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + 4);
 		String firstParagraphText = Html.fromHtml(firstParagraphHtml).toString().trim();
 		String[] phrases = firstParagraphText.split("\\. ");
 
