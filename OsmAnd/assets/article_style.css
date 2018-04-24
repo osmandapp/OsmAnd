@@ -50,8 +50,8 @@ body {
 h1 {
   font-size: 2em;
   color: #212121;
-  font-family: serif;
-  letter-spacing: 0.03em;
+  font-family: RobotoSlab-Regular;
+  letter-spacing: 0.02em;
   word-wrap: break-word;
   padding-top: 5%;
   font-weight: normal;
@@ -59,14 +59,14 @@ h1 {
 
 h2 {
     font-size: 1.5em;
-    color: #575757;
+    color: #454545;
     font-family: RobotoSlab-Regular;
+    font-weight:100;
     word-wrap: break-word;
-    margin-top: 3%;
-    padding-bottom: 3%;
-    /* font-weight: bold; */
+    padding-top: 2%;
+    padding-bottom: 4%;
     line-height: 1.6em;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.015em;
     border-bottom: 1px solid #eaecf0;
     width: 100%;
 }
@@ -105,7 +105,7 @@ h3 {
     font-family: sans-serif;
     word-wrap: break-word;
     font-weight: bold;
-    margin-top: 3%;
+    margin-top: 5%;
     margin-bottom: 3%;
     line-height: 1.6em;
 }
@@ -113,7 +113,7 @@ h3 {
 p {
     font-family: sans-serif;
     font-size: 1.1em;
-    line-height: 1.5em;
+    line-height: 1.6em;
 }
 
 ul {
@@ -162,8 +162,8 @@ pre {
 .geo {
     background-color: #fafafa;
     border: 1px solid #e6e6e6;
-    border-radius: 5px;
-    padding: 3% 3% 3% 3%;
+    border-radius: 4px;
+    padding: 10px 10px 10px 10px;
     color: #237bff;
     font-size: 0.9em;
     font-weight: bold;
@@ -178,8 +178,8 @@ pre {
 }
 
 td {
-  display: inline-block;
-  word-wrap: break-word;
+    display: inline-block;
+    word-wrap: break-word;
 }
 
 .thumb-tright, .thumbinner {
@@ -196,6 +196,6 @@ td {
 }
 
 .content {
-  display: none;
-  overflow: hidden;
+    display: none;
+    overflow: hidden;
 }
