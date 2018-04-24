@@ -20,8 +20,8 @@ public class StartEditingTravelCard extends BaseTravelCard {
 
 	@Override
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
-		if (viewHolder instanceof OpenBetaTravelVH) {
-			final OpenBetaTravelVH holder = (OpenBetaTravelVH) viewHolder;
+		if (viewHolder instanceof StartEditingTravelVH) {
+			final StartEditingTravelVH holder = (StartEditingTravelVH) viewHolder;
 			holder.title.setText(R.string.start_editing_card_image_text);
 			holder.description.setText(R.string.start_editing_card_description);
 			holder.backgroundImage.setImageResource(R.drawable.img_help_wikivoyage_contribute);
@@ -39,14 +39,14 @@ public class StartEditingTravelCard extends BaseTravelCard {
 		}
 	}
 
-	class OpenBetaTravelVH extends RecyclerView.ViewHolder {
+	class StartEditingTravelVH extends RecyclerView.ViewHolder {
 
 		final TextView title;
 		final TextView description;
 		final TextView button;
 		final ImageView backgroundImage;
 
-		OpenBetaTravelVH(final View itemView) {
+		StartEditingTravelVH(final View itemView) {
 			super(itemView);
 			title = (TextView) itemView.findViewById(R.id.title);
 			description = (TextView) itemView.findViewById(R.id.description);
